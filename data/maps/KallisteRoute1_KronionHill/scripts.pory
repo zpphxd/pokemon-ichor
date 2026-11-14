@@ -8,6 +8,11 @@
 // dig in the pit behind the step, facing the broken altar. Each climbs out
 // onto the step to fight, and the grunts flee down the stair. The tablet
 // object waits hidden at (10,8), on the step where Amathos stood.
+//
+// The dark stair (design/SYSTEMS.md, relic gates; decision D10): once the
+// grunts are gone, the pit's lower row shows cut steps going down into the
+// dark, Hecate's Torch's second gate. It leads to the Kronion crypt, which is
+// not built yet; for now the steps only answer with a line.
 
 mapscripts KallisteRoute1_KronionHill_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
@@ -19,6 +24,17 @@ mapscripts KallisteRoute1_KronionHill_MapScripts {
             setvar(VAR_TEMP_1, 0)
         }
     }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_RUINS_CLEARED)) {
+            call(KallisteRoute1_KronionHill_EventScript_SetDarkStair)
+        }
+    }
+}
+
+// The pit's lower row (9,7)-(10,7) becomes the mouth of the dark stair.
+script KallisteRoute1_KronionHill_EventScript_SetDarkStair {
+    setmetatile(9, 7, METATILE_Agros_PitStair_Left, TRUE)
+    setmetatile(10, 7, METATILE_Agros_PitStair_Right, TRUE)
 }
 
 text KallisteRoute1_KronionHill_Text_SpeakerAlethea { "ALETHEA" }
@@ -129,7 +145,12 @@ script KallisteRoute1_KronionHill_EventScript_SummitScene {
     waitmovement(0)
     setspeaker(KallisteRoute1_KronionHill_Text_SpeakerAlethea)
     msgbox(format("They dropped this. A clay tablet. Sickle stamped on top.\pIt's a list of places. “Kalliste” is scratched out.\pThen: “The fragment of the Harpe lies…\p…where the grain goes underground.”"))
-    msgbox(format("A riddle. I hate riddles. They're just lies wearing hats.\pThe Harpe… that's Kronos's sickle. From the old stories.\pThe one he used to overthrow his own father.\pWhy would anyone dig for a story?"))
+    msgbox(format("A riddle. I hate riddles. They're just lies wearing hats."))
+    // The tablet's last legible line (design/LABYRINTH.md §14 item 11): Knossa,
+    // the house of the labrys, seeded here for the late game.
+    msgbox(format("…And at the bottom: “Last, the house of the double axe.”"))
+    msgbox(format("That's not a riddle. That's just rude."))
+    msgbox(format("The Harpe… that's Kronos's sickle. From the old stories.\pThe one he used to overthrow his own father.\pWhy would anyone dig for a story?"))
     closemessage
     delay(30)
     setspeaker(KallisteRoute1_KronionHill_Text_SpeakerAlethea)
@@ -163,6 +184,9 @@ script KallisteRoute1_KronionHill_EventScript_SummitScene {
     removeobject(LOCALID_KRONION_ALETHEA)
     setflag(FLAG_ICHOR_HIDE_ALETHEA_RUINS)
     setflag(FLAG_ICHOR_RUINS_CLEARED)
+    // With the grunts gone, the pit shows where they had got to.
+    call(KallisteRoute1_KronionHill_EventScript_SetDarkStair)
+    special(DrawWholeMapView)
     setflag(FLAG_ICHOR_HIDE_ROUTE1_FLOCK)
     setvar(VAR_TEMP_1, 1)
     releaseall
@@ -272,8 +296,10 @@ script KallisteRoute1_KronionHill_EventScript_Altar {
     msgbox(format("A cracked altar. The stone is warm, like a sleeping animal."), MSGBOX_SIGN)
 }
 
+// Before the scene the grunts stand in the pit; after it, the pit is the
+// mouth of the dark stair (Hecate's Torch opens it later).
 script KallisteRoute1_KronionHill_EventScript_Pit {
     if (flag(FLAG_ICHOR_RUINS_CLEARED)) {
-        msgbox(format("A fresh hole, dug in a hurry. There's nothing in it.\p…It still feels like something's looking up."), MSGBOX_SIGN)
+        msgbox(format("Stone steps go down into the dark. You can't see a thing.\p…It still feels like something's looking up."), MSGBOX_SIGN)
     }
 }
