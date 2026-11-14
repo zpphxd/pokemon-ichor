@@ -432,6 +432,11 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyt
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatL;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatR;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEggs;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestHatching;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEmpty;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeBow;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeStern;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -857,6 +862,11 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatL,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatR,
+    [OBJ_EVENT_GFX_ICHOR_NEST_EGGS] = &gObjectEventGraphicsInfo_IchorNestEggs,
+    [OBJ_EVENT_GFX_ICHOR_NEST_HATCHING] = &gObjectEventGraphicsInfo_IchorNestHatching,
+    [OBJ_EVENT_GFX_ICHOR_NEST_EMPTY] = &gObjectEventGraphicsInfo_IchorNestEmpty,
+    [OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_BOW] = &gObjectEventGraphicsInfo_IchorDarkTriremeBow,
+    [OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_STERN] = &gObjectEventGraphicsInfo_IchorDarkTriremeStern,
     // End of Ichor object events
 };
 

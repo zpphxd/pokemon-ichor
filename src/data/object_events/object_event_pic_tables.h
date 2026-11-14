@@ -2626,6 +2626,26 @@ static const struct SpriteFrameImage sPicTable_IchorUpturnedBoatL[] = {
 static const struct SpriteFrameImage sPicTable_IchorUpturnedBoatR[] = {
     obj_frame_tiles(gObjectEventPic_IchorUpturnedBoatR),
 };
+static const struct SpriteFrameImage sPicTable_IchorNestEggs[] = {
+    obj_frame_tiles(gObjectEventPic_IchorNestEggs),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorNestHatching[] = {
+    obj_frame_tiles(gObjectEventPic_IchorNestHatching),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorNestEmpty[] = {
+    obj_frame_tiles(gObjectEventPic_IchorNestEmpty),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorDarkTriremeBow[] = {
+    obj_frame_tiles(gObjectEventPic_IchorDarkTriremeBow),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorDarkTriremeStern[] = {
+    obj_frame_tiles(gObjectEventPic_IchorDarkTriremeStern),
+};
+
 // End of Ichor object events
 
 // Ichor: the ground item jar

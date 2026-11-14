@@ -449,6 +449,12 @@ enum
     // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
+    // The Euploia's scene objects (tools/ichor/art/trireme_objects.py)
+    OBJ_EVENT_GFX_ICHOR_NEST_EGGS,
+    OBJ_EVENT_GFX_ICHOR_NEST_HATCHING,
+    OBJ_EVENT_GFX_ICHOR_NEST_EMPTY,
+    OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_BOW,
+    OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_STERN,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,

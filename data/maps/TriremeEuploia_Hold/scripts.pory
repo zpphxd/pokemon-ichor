@@ -1,1 +1,73 @@
-mapscripts TriremeEuploia_Hold_MapScripts {}
+// The Euploia's hold: the rowers' benches under the deck. SCRIPT.md Part 2's
+// trireme roster (the Lakonian rower, the rowers, Pronomos after the set piece)
+// and Part 6 (the Potion under the bottom bench). Drawn by
+// tools/ichor/art/trireme_hold.py.
+
+mapscripts TriremeEuploia_Hold_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // Pronomos is on deck at the hatch until the halcyon nest is saved
+        if (!flag(FLAG_ICHOR_SAVED_HALCYON_NEST)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text TriremeHold_Text_NameLakonianRower { "LAKONIAN ROWER" }
+text TriremeHold_Text_NameRower { "ROWER" }
+text TriremeHold_Text_NamePronomos { "PRONOMOS" }
+
+script TriremeHold_EventScript_LakonianRower {
+    lock
+    faceplayer
+    setspeaker(TriremeHold_Text_NameLakonianRower)
+    msgbox(format("Wind.\p…Yes.\pThat was a happy Lakonian weather report."))
+    closemessage
+    applymovement(LOCALID_HOLD_LAKONIAN, TriremeHold_Movement_FaceAft)
+    waitmovement(0)
+    release
+}
+
+script TriremeHold_EventScript_Rower1 {
+    lock
+    faceplayer
+    setspeaker(TriremeHold_Text_NameRower)
+    msgbox(format("Row, rest, row, rest. Then Emporion. Then row back. It's a good life."))
+    closemessage
+    applymovement(LOCALID_HOLD_ROWER_1, TriremeHold_Movement_FaceAft)
+    waitmovement(0)
+    release
+}
+
+script TriremeHold_EventScript_Rower2 {
+    lock
+    faceplayer
+    setspeaker(TriremeHold_Text_NameRower)
+    msgbox(format("My oar's called Iris. Don't laugh. She's never let me down."))
+    closemessage
+    applymovement(LOCALID_HOLD_ROWER_2, TriremeHold_Movement_FaceAft)
+    waitmovement(0)
+    release
+}
+
+script TriremeHold_EventScript_Rower3 {
+    lock
+    faceplayer
+    setspeaker(TriremeHold_Text_NameRower)
+    msgbox(format("Top bench gets the breeze. Bottom bench gets the top bench's feet."))
+    closemessage
+    applymovement(LOCALID_HOLD_ROWER_3, TriremeHold_Movement_FaceAft)
+    waitmovement(0)
+    release
+}
+
+script TriremeHold_EventScript_Pronomos {
+    lock
+    faceplayer
+    setspeaker(TriremeHold_Text_NamePronomos)
+    msgbox(format("A Lakonian kept the stroke with his voice. A whole crossing.\p"
+                  "I'm a little in love with him. Professionally."))
+    release
+}
+
+// rowers sit facing the stern
+movement TriremeHold_Movement_FaceAft { face_right }
