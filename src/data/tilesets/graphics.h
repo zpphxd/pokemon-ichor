@@ -3278,3 +3278,141 @@ const u16 gTilesetPalettes_TempleDemeterGlow[][16] =
     INCBIN_U16("data/tilesets/secondary/temple_demeter/porytiles_bin/glow/11.gbapal"),
     INCBIN_U16("data/tilesets/secondary/temple_demeter/porytiles_bin/glow/12.gbapal")
 };
+
+// Ichor: kythera (the Foam Road and the Spring of Kallirhoe), written by tools/ichor/art/kythera_build.py
+const u32 gTilesetTiles_PorytilesManaged_Kythera[] = INCBIN_U32("data/tilesets/secondary/kythera/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Kythera[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kythera/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: skandeia (Skandeia, Kythera's harbor town), written by tools/ichor/art/kythera_build.py
+const u32 gTilesetTiles_PorytilesManaged_Skandeia[] = INCBIN_U32("data/tilesets/secondary/skandeia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Skandeia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/skandeia/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: paphia (Paphia, the temple town), written by tools/ichor/art/kythera_build.py
+const u32 gTilesetTiles_PorytilesManaged_Paphia[] = INCBIN_U32("data/tilesets/secondary/paphia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Paphia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/paphia/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: neraida (the Neraida falls), written by tools/ichor/art/kythera_build.py
+const u32 gTilesetTiles_PorytilesManaged_Neraida[] = INCBIN_U32("data/tilesets/secondary/neraida/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Neraida[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/neraida/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: melos (Melos, the sea of Routes 22 and 23, and Echo's sea caves), written by tools/ichor/art/kythera_build.py
+const u32 gTilesetTiles_PorytilesManaged_Melos[] = INCBIN_U32("data/tilesets/secondary/melos/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Melos[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/melos/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: temple_aphrodite (the Temple of Aphrodite, Galatea's Gallery), written by tools/ichor/art/kythera_build.py
+const u32 gTilesetTiles_PorytilesManaged_TempleAphrodite[] = INCBIN_U32("data/tilesets/secondary/temple_aphrodite/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_TempleAphrodite[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/15.gbapal")
+};
