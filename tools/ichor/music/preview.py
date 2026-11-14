@@ -99,7 +99,8 @@ def main():
         a, wav = render(name, ids[name], ids['MUS_TITLE'], table, rom, intro + 2 * loop + 2)
         rms = 20 * math.log10(math.sqrt(sum(map(lambda v: v * v, a)) / len(a)) / 32768 + 1e-9)
         peak = 20 * math.log10(max(max(a), -min(a)) / 32768 + 1e-9)
-        line = f'{name:24s} rms {rms:6.1f} dBFS  peak {peak:5.1f} dBFS'
+        clipped = sum(1 for v in a if v >= 32767 or v <= -32768)
+        line = f'{name:24s} rms {rms:6.1f} dBFS  peak {peak:5.1f} dBFS  clip {clipped}'
         if s:
             # Compare loop pass 2 with pass 1, aligning by cross-correlation of envelopes.
             e = envelope(a)
@@ -109,7 +110,14 @@ def main():
             cands = [j for j in range(nominal - 10, nominal + 10) if j + n <= len(e)]
             best = max(cands, key=lambda j: correlation(p1, e[j:j + n]))
             match = correlation(p1, e[best:best + n])
-            line += f'  loop {(best - i1) / ENV_HZ:.2f}s (nominal {loop:.2f})  pass match {match:.3f}'
+            # The correlation reads low on flat, sustained textures, so also give the
+            # largest level difference between the passes over any 1 s window. A hung or
+            # dropped note shows up here as several dB; a clean loop stays near 1 dB.
+            p2 = e[best:best + n]
+            db = [abs(20 * math.log10((sum(p2[k:k + ENV_HZ]) + 1) / (sum(p1[k:k + ENV_HZ]) + 1)))
+                  for k in range(0, n - ENV_HZ, ENV_HZ // 2)]
+            line += (f'  loop {(best - i1) / ENV_HZ:.2f}s (nominal {loop:.2f})  pass match {match:.3f}'
+                     f'  worst 1s {max(db):.1f} dB')
         print(line, '->', os.path.relpath(wav, ROOT))
 
 

@@ -4162,7 +4162,14 @@ static void DebugAction_DestroyFollowerNPC(u8 taskId)
     X(MUS_RG_TEACHY_TV_MENU)        \
     X(MUS_ICHOR_ELAIA)              \
     X(MUS_ICHOR_ROUTE1)             \
-    X(MUS_ICHOR_BATTLE_RIVAL)
+    X(MUS_ICHOR_BATTLE_RIVAL)       \
+    X(MUS_ICHOR_AKTI)               \
+    X(MUS_ICHOR_TEMPLE)             \
+    X(MUS_ICHOR_ASCLEPEION)         \
+    X(MUS_ICHOR_TITAN)              \
+    X(MUS_ICHOR_BATTLE_TRAINER)     \
+    X(MUS_ICHOR_BATTLE_WILD)        \
+    X(MUS_ICHOR_VICTORY_TRAINER)
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
