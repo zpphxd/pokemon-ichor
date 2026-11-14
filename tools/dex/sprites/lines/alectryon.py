@@ -307,12 +307,12 @@ HOPLEKTOR_SHINY = {
 h_bronze = Mat(["bronze0", "bronze1", "bronze2", "bronze3"], line="bronze0", cuts=[0.2, 0.46, 0.72])
 h_crest = Mat(["terra0", "terra1", "terra2"], line="terra0", cuts=[0.3, 0.64])
 h_tail = Mat(["cyp0", "cyp1", "aegean1", "aegean2"], line="cyp0", cuts=[0.12, 0.28, 0.66])
-h_feather = Mat(["cyp0", "cyp1", "aegean1"], line="cyp0", cuts=[0.4, 0.75])
+h_feather = Mat(["cyp0", "cyp1", "aegean1"], line="cyp0", cuts=[0.18, 0.6])
 h_field = Mat(["terra1", "terra2"], line="terra0", cuts=[0.55])
 h_spur = Mat(["marble1", "white"], line="bronze0", cuts=[0.5])
 
 
-h_hackle = Mat(["marble0", "marble1", "white"], line="marble0", cuts=[0.4, 0.72])
+h_hackle = Mat(["marble0", "marble1", "white"], line="marble0", cuts=[0.58, 0.84])
 
 
 def hoplektor(p, view, phase):
@@ -336,41 +336,45 @@ def hoplektor(p, view, phase):
     if view in ("front", "side"):
         L = 1 if (phase == 1 and view == "front") else 0
 
-        # the sickle tail: long feathers arching high over the back and
-        # falling to the ground behind like a cloak
+        # the sickle tail streaming back like a cloak in the wind of the charge
         for i, (pts, w) in enumerate((
-                (((38, 21), (47, 3 + L), (61, 9 + L), (60.5, 34)), 7.6),
-                (((39, 24), (50, 11 + L), (61.5, 22), (58.5, 47)), 7.6),
-                (((39, 27), (50, 21), (59, 36), (54.5, 58.5)), 7.2),
-                (((38, 30), (45.5, 31), (51, 47), (47.5, 60.5)), 6.6))):
+                (((33, 18), (43, 3 + L), (55, 0.5 + L), (61.5, 8 + L)), 7.6),
+                (((34, 21), (47, 11 + L), (59, 12 + L), (62, 22)), 7.6),
+                (((34, 24), (47, 22), (58, 26 - L), (61, 37)), 7.2),
+                (((33, 28), (44, 31), (54, 39), (56, 50 - L)), 6.8))):
             p.taper(bez3(*pts), w, h_tail, group=20 + i)
-        # far leg braced back: feathered thigh, bronze greave, marble spur
-        p.limb([(37, 39), (41.5, 47)], 9, 6, h_feather, bias=0.25, group=11)
-        p.limb([(41.5, 47), (43.5, 58.5)], 4.6, 3.8, h_bronze, bias=0.25, group=12)
-        p.taper([(43.5, 53), (48.5, 51.5)], 2.6, h_spur, group=12)
+        # far leg thrust back in the lunge: thigh, bronze greave, marble spur
+        p.limb([(36, 37), (43, 43)], 9.4, 6.6, h_feather, bias=0.25, group=11)
+        p.limb([(43, 43), (47.5, 50), (49.5, 58.5)], 4.8, 3.8, h_bronze, bias=0.25, group=12)
+        p.taper([(47, 51), (52.5, 49.5)], 2.8, h_spur, group=12)
         for dx, dy in ((-6, 1.4), (-4.5, 2.4), (3.6, 1.2)):
-            p.limb([(43.5, 58.8), (43.5 + dx, 58.8 + dy)], 2.2, 1.7, h_bronze, bias=0.25, group=12)
-        # body: upright, the chest out behind the shield
-        p.blob(33, 30, 10.4, 13.4, h_feather, group=1)
-        # near leg planted forward
-        p.limb([(29, 40), (25.5, 47.5)], 9.6, 6.6, h_feather, group=13)
-        p.limb([(25.5, 47.5), (22.5, 58.5)], 5, 4.2, h_bronze, group=14)
-        p.taper([(24.5, 53), (29.5, 51.5)], 2.8, h_spur, group=14)
+            p.limb([(49.5, 58.8), (49.5 + dx, 58.8 + dy)], 2.2, 1.7, h_bronze, bias=0.25, group=12)
+        # body: leaning forward into the shield, chest thrust out
+        p.blob(31, 29, 12.4, 10, h_feather, ang=24, group=1)
+        p.blob(23, 26, 7.6, 8.6, h_feather, group=1)
+        # near leg bent forward, the spur set to strike
+        p.limb([(28, 37), (23.5, 45.5)], 10.4, 7.4, h_feather, group=13)
+        p.limb([(23.5, 45.5), (19, 51.5), (16.5, 58.5)], 5.2, 4.2, h_bronze, group=14)
+        p.taper([(20, 50), (25.5, 50.5)], 3, h_spur, group=14)
         for dx, dy in ((-7, 1.4), (-5.5, 2.4), (3.8, 1.2)):
-            p.limb([(22.5, 58.8), (22.5 + dx, 58.8 + dy)], 2.4, 1.8, h_bronze, group=14)
-        # the shield wing folded across the chest
-        p.circle(23, 33.5, 13, h_bronze, group=5)
-        p.circle(23, 33.5, 9.8, h_field, group=6)
+            p.limb([(16.5, 58.8), (16.5 + dx, 58.8 + dy)], 2.4, 1.8, h_bronze, group=14)
+        # hackles: white and gold feathers cascading from the helmet's rim
+        for i, (a, b, w) in enumerate((((25, 13 - L), (36, 27), 6.4), ((23, 15 - L), (31, 29), 6.6),
+                                       ((21, 17 - L), (25, 30), 6.4), ((27, 12 - L), (39, 22), 5.6))):
+            p.lens(a, b, w, h_hackle, bend=-0.8, group=30 + i)
+        # the shield wing held forward and low
+        p.circle(16, 35.5, 12.8, h_bronze, group=5)
+        p.circle(16, 35.5, 9.6, h_field, group=6)
         # helmet and crest (the hand-finished art replaces these details)
-        p.blob(25.5, 11.5 - L, 7.6, 7, h_bronze, group=7)
-        p.blob(20.5, 16 - L, 4, 5.6, h_bronze, group=7)
-        p.poly([(17, 12 - L), (9, 14.5 - L), (17, 17 - L)], h_spur, group=9)
-        p.limb(bez3((17, 7 - L), (17, 0 - L), (36, 0 - L), (44.5, 6 - L)), 4.6, 6, h_crest, group=15)
+        p.blob(17, 12 - L, 7.4, 6.8, h_bronze, group=7)
+        p.blob(13, 17 - L, 3.8, 5, h_bronze, group=7)
+        p.poly([(10, 13 - L), (4, 16 - L), (10, 17 - L)], h_spur, group=9)
+        p.limb(bez3((11, 6 - L), (12, 0 - L), (30, -1 - L), (36, 8 - L)), 4.4, 5.6, h_crest, group=15)
 
         if p.big:
-            p.eye(18, 10 - L, 3, 3, iris="terra2", shine="white", shine_at=(0, 0))
+            p.eye(11, 10 - L, 3, 3, iris="terra2", shine="white", shine_at=(0, 0))
         else:
-            p.px(19, 11 - L, "ink")
+            p.px(12, 11 - L, "ink")
         return
 
     if view == "back":
