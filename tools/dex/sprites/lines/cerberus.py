@@ -45,15 +45,15 @@ def _head(p, cx, cy, face, mat, pale_mat, s=1.0, ears=True, eye=True, shine="whi
             p.lens((cx + ex * s, cy - 3.5 * s), (cx + tx * s, cy + ty * s), 5 * s, mat,
                    bend=-0.6 * face * s, fat=0.28, bias=bias + 0.1)
     p.blob(cx, cy, 6.6 * s, 6 * s, mat, group=group, bias=bias)
-    p.blob(cx + face * 7.4 * s, cy + 2.4 * s, 4.6 * s, 2.4 * s, pale_mat, ang=8 * face, group=group)
+    p.blob(cx + face * 8 * s, cy + 2.6 * s, 5.4 * s, 2.8 * s, pale_mat, ang=6 * face, group=group)
     if mouth:
-        p.blob(cx + face * 6.6 * s, cy + 5.4 * s, 3.6 * s, 1.4 * s, pale_mat, group=group)
+        p.blob(cx + face * 7 * s, cy + 5.8 * s, 4.2 * s, 1.5 * s, pale_mat, group=group)
     if not p.big:
         if eye:
             p.px(cx + face * 2.5 * s, cy - 1 * s, "ink")
         return
-    nx = cx + face * 11.6 * s
-    p.pxs([(nx, cy + 1.2 * s), (nx - face, cy + 1.2 * s)], "ink")
+    nx = cx + face * 12.6 * s
+    p.pxs([(nx, cy + 1.2 * s), (nx - face, cy + 1.2 * s), (nx, cy + 2.2 * s)], "ink")
     if asleep:
         ex = cx + face * 2 * s
         p.stroke([(ex - 1.5, cy), (ex - 0.5, cy + 1), (ex + 0.5, cy + 1), (ex + 1.5, cy)], "ink")
@@ -87,75 +87,31 @@ ruff = Mat(["fire1", "fire2", "fire3"], line="fire1", cuts=[0.4, 0.66])
 
 def kynder(p, view, phase):
     if view in ("front", "side"):
+        # matches the hand-finished front: a sitting pup, its head up and
+        # panting, a gold ruff with a sleeping head on each shoulder
         pant = 1 if (phase == 1 and view == "front") else 0
         step = phase if view == "side" else 0
-
-        # far ear
-        p.lens((32.5, 22.5), (36, 15), 7.4, coat, bend=-0.9, fat=0.32, bias=0.22)
-
-        # corona of flames rising off the back of the ruff
-        for a, b, w in (((37.5, 34), (39.5, 19.5), 5.6), ((41, 33), (44.5, 21.5), 5.4),
-                        ((44, 34), (48.5, 24.5), 5), ((46, 36), (51.5, 28.5), 4.4)):
-            _flame(p, a, b, w, bend=-0.8, hot=3)
-
-        # tail with an ember at the tip
-        _flame(p, (52, 44.5), (54, 33.5 - pant), 6, bend=-0.8, hot=3)
-        p.limb([(47.5, 48.5), (50.5, 46.5), (52, 44.5)], 4.2, 3.6, coat, group=9)
-
-        # far foreleg and hind paw
-        far = [(31, 48), (31, 53), (31, 56)]
-        if step:
-            far = [(31, 48), (33, 53), (34, 56)]
-        p.limb(far, 4.8, 4.4, coat, bias=0.3, group=10)
-        p.blob(far[-1][0], 58, 3.8, 2, coat, bias=0.3, group=10)
-
-        # body: torso and the sitting haunch, hind paw forward
-        p.blob(32, 48.5, 9, 6, coat, group=1)
-        p.blob(42.5, 51.5, 8, 7, coat, group=1)
-        p.blob(43, 58.3, 6, 2.4, coat, group=11, bias=0.1)
-
-        # the ruff: a thick collar of cream fur
-        p.blob(29.5, 41, 13, 6.6, ruff, group=5)
-        for a, b in (((20, 46), (21.5, 49)), ((25, 47), (26, 50)), ((30, 47), (31, 50)),
-                     ((35, 46.5), (36, 49.5)), ((40, 45.5), (41.5, 48.5))):
-            p.lens(a, b, 3.6, ruff, fat=0.3, group=5)
-
-        # far sleeping head, chin in the ruff, facing out
-        p.lens((41.5, 36), (41, 32.5), 3.4, coat, bias=0.2)
-        p.blob(43, 39, 5, 4.4, head, group=7, bias=0.06)
-        p.blob(47.6, 41.2, 2.4, 1.6, pale, group=8)
-
-        # the awake head
-        p.blob(28, 28.8, 7.8, 7.3, head, group=3)
-        p.blob(19.8, 31.4, 4.6, 2.8, pale, ang=4, group=4)
-        p.blob(20.4, 34 + pant * 0.6, 3.2, 1.4, pale, group=4)
-
-        # near ear
-        p.lens((23, 22.5), (20.5, 15), 7.6, coat, bend=0.9, fat=0.32)
-
-        # near sleeping head
-        p.lens((19.5, 38.5), (20, 36.5), 3.2, coat, bias=0.1)
-        p.blob(18.2, 42.6, 5, 4.4, head, group=6)
-        p.blob(13, 44.8, 2.4, 1.6, pale, group=6)
-
-        # near foreleg with an oversized paw
-        near = [(22.5, 47), (22, 53), (21.5, 56)]
-        if step:
-            near = [(22.5, 47), (20, 52), (18.5, 55.5)]
-        p.limb(near, 6.4, 6, coat, group=12)
-        p.blob(near[-1][0] - 0.5, near[-1][1] + 1.8, 5.8, 2.8, coat, group=12)
-
-        # faces
-        p.eye(23, 25, 4, 6, iris="fire2")
-        if p.big:
-            p.pxs([(14, 29), (15, 29), (14, 30), (15, 30)], "ink")   # nose
-            p.stroke([(16, 32), (22, 32)], "ink")           # mouth line
-            p.pxs([(10, 44), (11, 44), (10, 45), (11, 45)], "ink")    # sleeping nose
-            p.stroke([(15, 43), (16, 44), (17, 44), (18, 43)], "ink")  # shut eye
-            p.pxs([(50, 40), (50, 41)], "ink")
-            p.stroke([(42, 39), (43, 40), (44, 40), (45, 39)], "ink")  # far shut eye
-        else:
-            p.px(14, 29, "ink")
+        for a, b, w in (((36, 34), (38, 12), 7), ((41, 35), (45, 17), 6.5), ((45, 36), (51, 22), 6),
+                        ((48, 38), (56, 29), 5)):
+            _flame(p, a, b, w, bend=-1.0, hot=3)
+        _flame(p, (55, 50), (58, 38 - pant), 6, bend=-0.8, hot=3)
+        p.limb([(50, 55), (53.5, 53), (55, 50)], 4.6, 3.8, coat, group=9)
+        far = [(34, 44), (34, 52), (34, 56)] if not step else [(34, 44), (36, 52), (37, 56)]
+        p.limb(far, 5.4, 5, coat, bias=0.25, group=10)
+        p.blob(far[-1][0], 57.8, 4.2, 2, coat, bias=0.25, group=10)
+        p.blob(44, 52, 8, 7.5, coat, group=1)
+        p.blob(44, 58, 6, 2.4, coat, group=11, bias=0.1)
+        p.blob(30, 47, 8, 6, pale, group=2)
+        p.blob(30, 39.5, 17, 5.5, ruff, group=5)
+        for a, b in (((18, 42), (17, 46)), ((24, 43), (24, 47)), ((30, 43), (31, 47)),
+                     ((36, 43), (37, 47)), ((42, 42), (44, 46))):
+            p.lens(a, b, 4, ruff, fat=0.3, group=5)
+        _head(p, 48, 37, 1, head, pale, s=0.75, asleep=True, ears=False, group=7)
+        near = [(22, 44), (22, 52), (21.5, 56)] if not step else [(22, 44), (20, 51), (18.5, 55.5)]
+        p.limb(near, 7, 6.6, coat, group=12)
+        p.blob(near[-1][0] - 0.5, near[-1][1] + 2, 6.4, 2.8, coat, group=12)
+        _head(p, 26, 22 - pant, -1, head, pale, s=1.3, iris="fire2", mouth="tongue")
+        _head(p, 12, 40, -1, head, pale, s=0.75, asleep=True, ears=False, group=6)
         return
 
     if view == "back":
@@ -229,12 +185,13 @@ def kynder(p, view, phase):
             p.lens((27, 27), (24.5, 18 + step), 2.4, Mat(["pink"]), fat=0.3, noline=True, nooutline=True)
             p.lens((37, 27), (39.5, 18 + step), 2.4, Mat(["pink"]), fat=0.3, noline=True, nooutline=True)
         p.blob(32, 33, 7.5, 6.6, head, group=3)
-        p.blob(32, 37, 3.8, 2.4, pale, group=4)
-        p.eye(28, 31, 2, 3, iris="fire2", shine_at=(1, 0))
-        p.eye(34, 31, 2, 3, iris="fire2", shine_at=(0, 0))
-        p.px(32, 36, "ink")
+        p.blob(32, 38, 5, 3.4, pale, group=4)
+        p.eye(27.5, 30, 2, 3, iris="fire2", shine_at=(1, 0))
+        p.eye(34.5, 30, 2, 3, iris="fire2", shine_at=(0, 0))
+        p.pxs([(31.5, 35.5), (32.5, 35.5), (32, 36.5)], "ink")
         if p.big:
-            p.pxs([(31, 39), (32, 39), (33, 39)], "tongue")
+            p.stroke([(30, 39), (32, 38), (34, 39)], "ink")
+            p.pxs([(31.5, 40), (32.5, 40), (32, 41)], "tongue")
         return
 
     if view == "up":
@@ -315,8 +272,8 @@ def dikyon(p, view, phase):
         # the third head, asleep in the mane
         _head(p, 34, 31, -1, dhead, dpale, s=0.62, asleep=True, bias=0.1)
         # one head barks back over the shoulder, one snaps ahead
-        _head(p, 40, 15 - snap, 1, dhead, dpale, s=1.0, mouth="tongue", iris="fire2")
-        _head(p, 19, 22, -1, dhead, dpale, s=1.0, mouth="tongue", iris="fire2")
+        _head(p, 38, 14 - snap, 1, dhead, dpale, s=1.0, mouth="tongue", iris="fire2")
+        _head(p, 20, 25, -1, dhead, dpale, s=1.0, mouth="tongue", iris="fire2")
         return
 
     if view == "icon":
@@ -366,10 +323,10 @@ def dikyon(p, view, phase):
             p.lens((cx + 2.4, 25), (cx + 5, 14 + step), 5.4, dcoat, bend=-0.4, fat=0.3)
             p.blob(cx, 28.5, 6.2, 5.6, dhead, group=3 if face < 0 else 4)
             if not back:
-                p.blob(cx, 33, 3.6, 2.4, dpale, group=3 if face < 0 else 4)
-                p.eye(cx - 3, 26, 2, 3, iris="fire1", shine_at=(0, 0))
-                p.eye(cx + 1.5, 26, 2, 3, iris="fire1", shine_at=(0, 0))
-                p.pxs([(cx - 0.5, 31.5), (cx + 0.5, 31.5)], "ink")
+                p.blob(cx, 33.5, 4, 3.6, dpale, group=3 if face < 0 else 4)
+                p.eye(cx - 3.5, 26, 2, 3, iris="fire1", shine_at=(0, 0))
+                p.eye(cx + 2, 26, 2, 3, iris="fire1", shine_at=(0, 0))
+                p.pxs([(cx - 0.5, 31), (cx + 0.5, 31), (cx, 32)], "ink")
                 if p.big:
                     p.pxs([(cx - 1, 35), (cx, 35), (cx + 1, 35)], "tongue")
         return
@@ -436,20 +393,23 @@ def pylakyon(p, view, phase):
                               ((41, 38), (48, 20), 8, -2.2), ((46, 39), (54, 26), 7, -1.8),
                               ((50, 40), (58, 33), 6, -1.4), ((24, 39), (15, 29), 6, 1.4)):
             _ghostflame(p, a, b, w, bend=bend)
-        # right head snarls outward, left head snarls outward, the middle stares ahead
-        _head(p, 46, 16, 1, phead, ppale, s=1.0, mouth="fire0", shine="blue2", iris="blue2")
-        _head(p, 15, 29 - turn, -1, phead, ppale, s=1.05, mouth="fire0", shine="blue2", iris="blue2")
-        p.lens((22, 9 + turn), (20.5, 1.5 + turn), 5.6, phead, fat=0.3)
-        p.lens((33, 9 + turn), (35, 1.5 + turn), 5.6, phead, fat=0.3)
-        p.blob(27.5, 13 + turn, 9, 8.5, phead, group=3)
-        p.blob(26.5, 17 + turn, 5, 3.6, ppale, group=3)
+        # a corona of ghost-fire behind the heads
+        for a, b, w in (((24, 20), (18, 6), 6), ((30, 18), (29, 3), 7), ((37, 18), (39, 3), 7), ((44, 20), (50, 6), 6)):
+            _ghostflame(p, a, b, w, bend=-0.6)
+        # far head snarls outward, near head snarls outward, the middle stares ahead
+        _head(p, 49, 20, 1, phead, ppale, s=0.95, mouth="fire0", shine="blue2", iris="blue2", bias=0.1)
+        _head(p, 17, 29 - turn, -1, phead, ppale, s=1.15, mouth="fire0", shine="blue2", iris="blue2")
+        p.lens((22, 9 + turn), (19, 4 + turn), 5.6, phead, fat=0.3)
+        p.lens((40, 9 + turn), (43, 4 + turn), 5.6, phead, fat=0.3)
+        p.blob(31, 14 + turn, 11, 9, phead, group=3)
+        p.blob(31, 19 + turn, 6, 4.2, ppale, group=3)
         if p.big:
-            for ex in (22, 30):
+            for ex in (24, 36):
                 p.pxs([(ex, 12 + turn), (ex + 1, 12 + turn)], "blue2")
-            p.pxs([(25, 15 + turn), (26, 15 + turn), (27, 15 + turn)], "ink")
-            p.stroke([(23, 19 + turn), (30, 19 + turn)], "ink")
+            p.pxs([(30, 16 + turn), (31, 16 + turn), (32, 16 + turn), (31, 17 + turn)], "ink")
+            p.stroke([(27, 21 + turn), (35, 21 + turn)], "ink")
         else:
-            p.px(26, 15 + turn, "ink")
+            p.px(31, 16 + turn, "ink")
         return
 
     if view == "icon":
@@ -505,9 +465,9 @@ def pylakyon(p, view, phase):
             p.lens((cx + 2.6, cy - 3), (cx + 5.2, cy - 13 + step), 5.4, pcoat, bend=-0.4, fat=0.3)
             p.blob(cx, cy, 6.2, 5.8, phead, group=3)
             if not back:
-                p.blob(cx, cy + 4, 3.6, 2.4, ppale, group=3)
-                p.pxs([(cx - 2.5, cy - 1), (cx - 1.5, cy - 1), (cx + 1.5, cy - 1), (cx + 2.5, cy - 1)], "blue2")
-                p.pxs([(cx - 0.5, cy + 2.5), (cx + 0.5, cy + 2.5)], "ink")
+                p.blob(cx, cy + 3.8, 4.6, 3.4, ppale, group=3)
+                p.pxs([(cx - 3, cy - 1), (cx - 2, cy - 1), (cx + 2, cy - 1), (cx + 3, cy - 1)], "blue2")
+                p.pxs([(cx - 1, cy + 2), (cx, cy + 2), (cx + 1, cy + 2), (cx, cy + 3)], "ink")
         return
 
 
