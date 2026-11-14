@@ -170,14 +170,14 @@ class Grid:
         self.protect = set()
 
     # --- composition passes ------------------------------------------------
-    SEAM_SWAP = {",": ".", "h": ".", "y": ".", "b": "B", "n": "B", "r": "B", "q": "~"}
+    SEAM_SWAP = {"h": ".", "y": ".", "b": "B", "n": "B", "r": "B", "q": "~"}
 
     def seam_prep(self):
         """In the seam rows, swap what only Agros can draw for aethos's own:
-        tall grass and herbs become grass, shrubs and rocks become boulders, the
-        rocky shore becomes open sea. Woods there fill with olives, stone pines,
-        cypresses and boulders only, and the road takes aethos's square-edged
-        path patch (soft_ground)."""
+        herbs become grass, shrubs and rocks become boulders, the rocky shore
+        becomes open sea. Woods there fill with olives, stone pines, cypresses
+        and boulders only; tall grass takes aethos's plain barley and the road
+        aethos's square-edged path patch (soft_ground)."""
         for y in self.seam_rows:
             for x in range(self.w):
                 c = self.chars[y][x]
@@ -436,6 +436,8 @@ class Grid:
         self.find_halves()
         out = {"tall": set(), "path": set(), "track": set()}
         for y in range(self.h):
+            if y in self.seam_rows:
+                continue                    # aethos's own pieces there (soft_ground)
             for x in range(self.w):
                 c, h = self.chars[y][x], self.half.get((x, y))
                 if c == "," or (h and h[0] == "tall"):
@@ -576,7 +578,7 @@ class Grid:
                 if not kind:
                     continue
                 if y in self.seam_rows:
-                    self.put(x, y, walk(self.aethos_path(x, y)))
+                    self.put(x, y, walk(TALL if kind == "tall" else self.aethos_path(x, y)))
                     continue
                 if kind == "track":
                     key = self.track_key(x, y)
@@ -740,9 +742,9 @@ class Grid:
 #   the fork: a herm, the spur east to Kronion Hill past Polyeidos
 #   the flock in the wall gap, Agis just past it
 #   shore grass across the cove (band 3, 3 deep); a jar on the beach
-#   the climb: steps up to the headland, a shrine, the north herm; a goat
-#     path of two lips behind the hedge makes the trip back quick
-# Rows 0-4 and 59-63 are seen from Akti and Elaia, which draw them with their
+#   the climb: steps up to the headland and the north herm; a goat path of
+#     two lips behind the hedge, past a wayside shrine, makes the trip back quick
+# Rows 0-5 and 58-63 are seen from Akti and Elaia, which draw them with their
 # own secondary tileset, so they hold aethos pieces only (Grid.seam_prep).
 # ---------------------------------------------------------------------------
 ROUTE1 = [
@@ -753,14 +755,14 @@ ROUTE1 = [
     "%%%%%%....====.....%%%%%%%%%%%",  # 2  Akti's outskirts on the headland
     "%%%%%.*...====..H...%%%%%%%%%%",  # 3  north herm
     "~ddd...*..====......%%%%%%%%%%",  # 4
-    "~~ddd.....====......#.%%%%%%%%",  # 5  a roadside shrine between cypresses
-    "~~~dd.....====......#.%%%%%%%%",  # 6
+    "~~ddd.....====........%%%%%%%%",  # 5  cypresses on the headland
+    "~~~dd.....====........%%%%%%%%",  # 6
     "~~~~TTTTTTssssTT___TTT%%%%%%%%",  # 7  the climb: steps up to the headland; a lip down the goat path
-    "~~~~dd....====.%...%%%%%%%%%%%",  # 8  the goat path runs down behind the hedge
-    "~~~~,,,,,,,,,,,%...%%%%%%%%%%%",  # 9  shore grass, from the sea to the hedge (band 3)
-    "~~~~~,,,,,,,,,,%...%%%%%%%%%%%",  # 10
+    "~~~~dd,,..====.%...%%%%%%%%%%%",  # 8  the goat path runs down behind the hedge
+    "~~~~,,,,,,,,,,,%..#%%%%%%%%%%%",  # 9  shore grass, from the sea to the hedge (band 3);
+    "~~~~~,,,,,,,,,,%..#%%%%%%%%%%%",  # 10 a wayside shrine on the goat path
     "~~~~,,,,,,,,,,,%.y.%%%%%%%%%%%",  # 11
-    "~~~~dd....====.%___%%%%%%%%%%%",  # 12 the goat path's last lip
+    "~~~~dd.,,,====.%___%%%%%%%%%%%",  # 12 the goat path's last lip
     "~~~ddd.....===.....%%%%%%%%%%%",  # 13 Agis watches the gap; a jar on the cove beach
     "%%WWBWWWWWW===WWWWWWWB%%%%%%%%",  # 14 the flock's wall gap
     "%%.,,,.....===.....###%%%%%%%%",  # 15 Amaryllis; the fallen column
@@ -790,14 +792,14 @@ ROUTE1 = [
     "%%......%,,,,,,%%%%%%%%%%%%%%%",  # 39
     "%%..,...%%,,,,,%%%%%%%%%%%%%%%",  # 40
     "%%______%%===..............%%%",  # 41 the west walk's lip down to the meadow
-    "%%..,,,...===....,,,.........%",  # 42 the shepherd's meadow
+    "%%..,,,...===....,,,..h......%",  # 42 the shepherd's meadow
     "%%.,,,,...===...,,,,.....,...%",  # 43
-    "%%..,,,..===......####.......%",  # 44 the threshing floor
+    "%%..,,,..===......####..*....%",  # 44 the threshing floor
     "%%.,,,...===..----####.......%",  # 45
     "%%..,....===---...####.....*.%",  # 46
-    "%%.......===......####.......%",  # 47
+    "%%.......===......####B......%",  # 47
     "%%..*....===..h............,.%",  # 48
-    "%%.......===........,,,......%",  # 49 Tityros at the wall gap
+    "%%.......===.*......,,,....h.%",  # 49 Tityros at the wall gap
     "%%WWWWWWW===WWWWWWWW_______W%%",  # 50 the meadow wall; a lip back down
     "%%.,,,,..===.................%",  # 51
     "%%WWWWW..===...........B.....%",  # 52 youth on the wall
@@ -827,9 +829,10 @@ ROUTE1_OLIVES = [
 # An olive's crown needs grass, another olive or a cypress foot above it (see
 # settle_crowns), so none sits right under the road, a wall, a lip or a pine.
 ROUTE1_CYPRESSES = [(7, 2), (19, 5), (21, 5), (21, 20), (10, 36), (15, 42), (7, 54)]
-# Rows seen from Akti (0-4: five rows below a player on Akti's edge) and from
-# Elaia (59-63: four above a player on Elaia's edge, plus one for a camera pan).
-ROUTE1_SEAM_ROWS = list(range(0, 5)) + list(range(59, 64))
+# Rows a player still in Akti or Elaia can see: the screen shows four and a
+# half rows either side of the player's tile, and a step scrolls one more in
+# before the map switches. So six rows each side stay aethos-only.
+ROUTE1_SEAM_ROWS = list(range(0, 6)) + list(range(58, 64))
 # The forced bands' rows, kept out of roughen() so each keeps its full depth.
 ROUTE1_BAND_ROWS = [9, 10, 11, 38, 39, 40, 57, 58]
 ROUTE1_PINES = [(21, 55), (26, 55)]
@@ -879,7 +882,7 @@ def build_route1_pieces(g, cat):
     g.place(cat, "big_olive", 3, 22)                  # the ancient olive
     g.place(cat, "bee_wall", 22, 24)                  # Komatas's hives
     g.place(cat, "spring", 2, 32)                     # the spring in the grove
-    g.place(cat, "shrine", 20, 5)                     # the shrine on the headland, by the goat path
+    g.place(cat, "shrine", 18, 9)                     # the wayside shrine on the goat path
     g.place(cat, "alonia", 18, 44)                    # the threshing floor
     g.place(cat, "cart", 18, 53)                      # the carter's cart
 
@@ -1282,7 +1285,8 @@ def render(g, name, events, border, views, rows=None):
             d.text((2, i * cell + cell // 2 - 6), str(i), fill=(255, 255, 255, 255), font=font, stroke_width=2, stroke_fill=(0, 0, 0, 255))
     Image.alpha_composite(rev, over).convert("RGB").save(RENDER / f"{name}_review.png")
 
-    # Screens: the GBA shows 15x10 tiles with the player at column 7, row 4.
+    # Screens: the GBA shows 15x10 tiles, the player's tile at column 7 and
+    # half a row down from row 4 (pixels 72-87), as in-game shots show.
     pad = 8
     H = blocks.shape[0]
     W, HH = g.w + 2 * pad, H + 2 * pad
@@ -1294,7 +1298,7 @@ def render(g, name, events, border, views, rows=None):
     full = rm.render_blocks(r, big.ravel(), W)
     shots = []
     for (px, py) in views:
-        x0, y0 = (px - 7 + pad) * 16, (py - 4 + pad) * 16
+        x0, y0 = (px - 7 + pad) * 16, (py - 5 + pad) * 16 + 8
         shots.append(full.crop((x0, y0, x0 + 240, y0 + 160)).resize((480, 320), Image.NEAREST))
     cols = 3
     nrows = (len(shots) + cols - 1) // cols

@@ -111,7 +111,7 @@ palette:
 
 **Scripted swaps.** `agros_build.py` writes the ids scripts swap in to the `gTileset_Agros` block at the end of `include/constants/metatile_labels.h` (today `METATILE_Agros_PitStair_Left` and `_Right`, Kronion Hill's dark stair), so they never go stale.
 
-**Seams.** A map connected to another is drawn with the tilesets of the map the player stands on. So the rows of Route 1 a player in Akti or Elaia can see (0–4 and 59–63) use aethos pieces only; `route1.py` swaps in aethos's own and fails the build on any Agros piece there. A future map on Agros should do the same at its seams.
+**Seams.** A map connected to another is drawn with the tilesets of the map the player stands on. So the rows of Route 1 a player in Akti or Elaia can see (0–5 and 58–63) use aethos pieces only; `route1.py` swaps in aethos's own and fails the build on any Agros piece there. A future map on Agros should do the same at its seams.
 """
 
 

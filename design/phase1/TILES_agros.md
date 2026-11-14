@@ -81,7 +81,7 @@ palette:
 
 **Scripted swaps.** `agros_build.py` writes the ids scripts swap in to the `gTileset_Agros` block at the end of `include/constants/metatile_labels.h` (today `METATILE_Agros_PitStair_Left` and `_Right`, Kronion Hill's dark stair), so they never go stale.
 
-**Seams.** A map connected to another is drawn with the tilesets of the map the player stands on. So the rows of Route 1 a player in Akti or Elaia can see (0–4 and 59–63) use aethos pieces only; `route1.py` swaps in aethos's own and fails the build on any Agros piece there. A future map on Agros should do the same at its seams.
+**Seams.** A map connected to another is drawn with the tilesets of the map the player stands on. So the rows of Route 1 a player in Akti or Elaia can see (0–5 and 58–63) use aethos pieces only; `route1.py` swaps in aethos's own and fails the build on any Agros piece there. A future map on Agros should do the same at its seams.
 
 ## Soft ground
 
@@ -89,7 +89,7 @@ Tall grass, the road and goat tracks, with edges that follow the land instead of
 
 ### Tall grass with soft edges
 
-`tall`, 8 wide by 8 tall. Barley meadow edges. Each piece is named by its shape key (see agros_ground.py) and keeps MB_TALL_GRASS, so encounters follow the cells while the outline stays soft.
+`tall`, 8 wide by 9 tall. Barley meadow edges. Each piece is named by its shape key (see agros_ground.py) and keeps MB_TALL_GRASS, so encounters follow the cells while the outline stays soft.
 
 | Shape key | Id | Walk |
 |---|---|---|
@@ -121,41 +121,46 @@ Tall grass, the road and goat tracks, with edges that follow the land instead of
 | `1|11100010` | 0x219 | G |
 | `1|11100011` | 0x21A | G |
 | `1|111000a1` | 0x21B | G |
-| `1|11111000` | 0x21C | G |
-| `1|11111011` | 0x21D | G |
-| `1|111110a1` | 0x21E | G |
-| `1|11111110` | 0x21F | G |
-| `1|1111111b` | 0x220 | G |
-| `1|111111b0` | 0x221 | G |
-| `1|11111a11` | 0x222 | G |
-| `1|1111a000` | 0x223 | G |
-| `1|1111a011` | 0x224 | G |
-| `1|111d10a1` | 0x225 | G |
-| `1|111d1111` | 0x226 | G |
-| `1|111d1a1b` | 0x227 | G |
-| `1|11d00000` | 0x228 | G |
-| `1|11d00011` | 0x229 | G |
-| `1|11d01000` | 0x22A | G |
-| `1|11d010a1` | 0x22B | G |
-| `1|11d01111` | 0x22C | G |
-| `1|11d0d111` | 0x22D | G |
-| `1|1c10001b` | 0x22E | G |
-| `1|1c101000` | 0x22F | G |
-| `1|1c101111` | 0x230 | G |
-| `1|1c111111` | 0x231 | G |
-| `1|1c1d1000` | 0x232 | G |
-| `1|1c1d1111` | 0x233 | G |
-| `1|b1100000` | 0x234 | G |
-| `1|b1111000` | 0x235 | G |
-| `1|b111a000` | 0x236 | G |
-| `1|c0000011` | 0x237 | G |
-| `1|c0001111` | 0x238 | G |
-| `1|c000d111` | 0x239 | G |
-| `1|c0c11111` | 0x23A | G |
-| `a|11100000` | 0x23B | G |
-| `b|00111000` | 0x23C | G |
-| `c|00001110` | 0x23D | G |
-| `d|10000011` | 0x23E | G |
+| `1|1110d111` | 0x21C | G |
+| `1|11111000` | 0x21D | G |
+| `1|11111011` | 0x21E | G |
+| `1|111110a1` | 0x21F | G |
+| `1|11111110` | 0x220 | G |
+| `1|1111111b` | 0x221 | G |
+| `1|111111b0` | 0x222 | G |
+| `1|11111a11` | 0x223 | G |
+| `1|1111a000` | 0x224 | G |
+| `1|1111a011` | 0x225 | G |
+| `1|111d10a1` | 0x226 | G |
+| `1|111d1111` | 0x227 | G |
+| `1|111d1a11` | 0x228 | G |
+| `1|111d1a1b` | 0x229 | G |
+| `1|11d00000` | 0x22A | G |
+| `1|11d00011` | 0x22B | G |
+| `1|11d000a1` | 0x22C | G |
+| `1|11d01000` | 0x22D | G |
+| `1|11d010a1` | 0x22E | G |
+| `1|11d01111` | 0x22F | G |
+| `1|11d0d111` | 0x230 | G |
+| `1|1c10001b` | 0x231 | G |
+| `1|1c101000` | 0x232 | G |
+| `1|1c101111` | 0x233 | G |
+| `1|1c111110` | 0x234 | G |
+| `1|1c111111` | 0x235 | G |
+| `1|1c1d1000` | 0x236 | G |
+| `1|1c1d1111` | 0x237 | G |
+| `1|b1100000` | 0x238 | G |
+| `1|b1111000` | 0x239 | G |
+| `1|b111a000` | 0x23A | G |
+| `1|c0000011` | 0x23B | G |
+| `1|c0001111` | 0x23C | G |
+| `1|c000d111` | 0x23D | G |
+| `1|c0111111` | 0x23E | G |
+| `1|c0c11111` | 0x23F | G |
+| `a|11100000` | 0x240 | G |
+| `b|00111000` | 0x241 | G |
+| `c|00001110` | 0x242 | G |
+| `d|10000011` | 0x243 | G |
 
 ### The limestone road, curving
 
@@ -163,42 +168,42 @@ Tall grass, the road and goat tracks, with edges that follow the land instead of
 
 | Shape key | Id | Walk |
 |---|---|---|
-| `1|00000010` | 0x240 | . |
-| `1|00001110` | 0x241 | . |
-| `1|00100000` | 0x242 | . |
-| `1|00100010` | 0x243 | . |
-| `1|00101110` | 0x244 | . |
-| `1|00111000` | 0x245 | . |
-| `1|00111110` | 0x246 | . |
-| `1|00111a10` | 0x247 | . |
-| `1|0011a000` | 0x248 | . |
-| `1|0011a010` | 0x249 | . |
-| `1|00c11110` | 0x24A | . |
-| `1|10000011` | 0x24B | . |
-| `1|10001111` | 0x24C | . |
-| `1|1000d111` | 0x24D | . |
-| `1|10c11111` | 0x24E | . |
-| `1|11100000` | 0x24F | . |
-| `1|11100010` | 0x250 | . |
-| `1|11100011` | 0x251 | . |
-| `1|111000a1` | 0x252 | . |
-| `1|11101111` | 0x253 | . |
-| `1|11111000` | 0x254 | . |
-| `1|111110a1` | 0x255 | . |
-| `1|1111111b` | 0x256 | . |
-| `1|111111b0` | 0x257 | . |
-| `1|11111a11` | 0x258 | . |
-| `1|1111a000` | 0x259 | . |
-| `1|111d1111` | 0x25A | . |
-| `1|11d01111` | 0x25B | . |
-| `1|1c111111` | 0x25C | . |
-| `1|b1111000` | 0x25D | . |
-| `1|c0001111` | 0x25E | . |
-| `1|c0111111` | 0x25F | . |
-| `a|11100000` | 0x260 | . |
-| `b|00111000` | 0x261 | . |
-| `c|00001110` | 0x262 | . |
-| `d|10000011` | 0x263 | . |
+| `1|00000010` | 0x248 | . |
+| `1|00001110` | 0x249 | . |
+| `1|00100000` | 0x24A | . |
+| `1|00100010` | 0x24B | . |
+| `1|00101110` | 0x24C | . |
+| `1|00111000` | 0x24D | . |
+| `1|00111110` | 0x24E | . |
+| `1|00111a10` | 0x24F | . |
+| `1|0011a000` | 0x250 | . |
+| `1|0011a010` | 0x251 | . |
+| `1|00c11110` | 0x252 | . |
+| `1|10000011` | 0x253 | . |
+| `1|10001111` | 0x254 | . |
+| `1|1000d111` | 0x255 | . |
+| `1|10c11111` | 0x256 | . |
+| `1|11100000` | 0x257 | . |
+| `1|11100010` | 0x258 | . |
+| `1|11100011` | 0x259 | . |
+| `1|111000a1` | 0x25A | . |
+| `1|11101111` | 0x25B | . |
+| `1|11111000` | 0x25C | . |
+| `1|111110a1` | 0x25D | . |
+| `1|1111111b` | 0x25E | . |
+| `1|111111b0` | 0x25F | . |
+| `1|11111a11` | 0x260 | . |
+| `1|1111a000` | 0x261 | . |
+| `1|111d1111` | 0x262 | . |
+| `1|11d01111` | 0x263 | . |
+| `1|1c111111` | 0x264 | . |
+| `1|b1111000` | 0x265 | . |
+| `1|c0001111` | 0x266 | . |
+| `1|c0111111` | 0x267 | . |
+| `a|11100000` | 0x268 | . |
+| `b|00111000` | 0x269 | . |
+| `c|00001110` | 0x26A | . |
+| `d|10000011` | 0x26B | . |
 
 ### Goat track
 
@@ -206,13 +211,13 @@ Tall grass, the road and goat tracks, with edges that follow the land instead of
 
 | Shape key | Id | Walk |
 |---|---|---|
-| `1|00000010` | 0x268 | . |
-| `1|00001010` | 0x269 | . |
-| `1|00100000` | 0x26A | . |
-| `1|00100010` | 0x26B | . |
-| `1|00101000` | 0x26C | . |
-| `1|10000010` | 0x26D | . |
-| `1|10100000` | 0x26E | . |
+| `1|00000010` | 0x270 | . |
+| `1|00001010` | 0x271 | . |
+| `1|00100000` | 0x272 | . |
+| `1|00100010` | 0x273 | . |
+| `1|00101000` | 0x274 | . |
+| `1|10000010` | 0x275 | . |
+| `1|10100000` | 0x276 | . |
 
 ## Trees, shrubs and herbs
 

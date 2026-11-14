@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/agros/porytiles_bin/metatile_attributes.bin": "206fbdfacf658273c5142b55a4294321",
-  "data/tilesets/secondary/agros/porytiles_bin/metatiles.bin": "4d277bbec384b3c2ee1c86b92b85819e",
+  "data/tilesets/secondary/agros/porytiles_bin/metatile_attributes.bin": "4d6b49bf5a54d458bf706c8a206c7b57",
+  "data/tilesets/secondary/agros/porytiles_bin/metatiles.bin": "19d81b16311ba04604086f447fb2492a",
   "data/tilesets/secondary/agros/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/agros/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/agros/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -18,8 +18,8 @@
   "data/tilesets/secondary/agros/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/agros/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/agros/porytiles_bin/tiles.png": "107acfee379b313ab97a4b2f2aaef42f",
-  "data/tilesets/secondary/agros/porytiles_src/attributes.csv": "37194dbc51576f28a496afe39f1833aa",
-  "data/tilesets/secondary/agros/porytiles_src/bottom.png": "3866e30240d4addf86f973d169412f5e",
+  "data/tilesets/secondary/agros/porytiles_src/attributes.csv": "bf64c3bb59e0a5365da61feb5dc923bb",
+  "data/tilesets/secondary/agros/porytiles_src/bottom.png": "ebe63208a7bae12d67b3d334fdb87e0c",
   "data/tilesets/secondary/agros/porytiles_src/middle.png": "01c4f432d660c9e9cbed88accc66795f",
   "data/tilesets/secondary/agros/porytiles_src/top.png": "dfdc8ac82788f4f4d3a9f8d4b8191793"
 }
