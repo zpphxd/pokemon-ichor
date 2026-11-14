@@ -240,41 +240,41 @@ def _back(p, layers=LAYERS):
 
 
 def _icon(p, ph):
-    """Party icon: Kairazor boiled down for 32 px. A big head under its gold
-    forelock, one wing of three broad sickle-feathers, the balance below."""
-    W = -3 if ph else 0
-    p.limb(bez3((44, 46), (50, 56), (55, 54), (55, 45)), 8, 4, marb, group=8)
-    p.blob(39, 42, 13, 11, marb, group=1)
-    p.poly([(28, 40), (32, 34), (36, 40), (32, 46)], gem, group=21)
-    for (r, c, t, w) in (((44, 17), (42, 7), (48, 1.6), 9), ((47, 17), (53, 6), (61.4, 6), 10),
-                         ((48, 22), (57, 18), (61, 29), 9)):
-        _feather(p, r, c, t, w, beat=W)
-    p.poly([(34, 40), (36, 30), (40, 21), (44, 14), (48, 12.6), (51, 17), (50, 25), (46, 32), (41, 38)], marb, group=30)
-    p.poly([(35, 38), (37, 30), (40.6, 22), (44.6, 15), (47, 14.4), (44, 21), (41, 29), (38.6, 38)], aeg, group=40)
-    p.limb(bez3((35, 39), (33, 28), (28, 24), (23, 28)), 10, 9, marb, group=50)
-    # the balance: the tail rises into a plate, the gold beam grows from it
-    p.limb([(46.6, 40), (62, 40)], 3.4, 3.4, gold, group=70)
-    p.poly([(55, 34.6), (59.4, 40), (55, 45.6), (50.6, 40)], aeg, group=71)
-    for cx in (48.6, 60):
-        p.limb([(cx, 41), (cx, 45)], 1.6, 1.6, gold, group=72)
-        p.poly([(cx - 3.6, 45), (cx + 2.6 if cx > 55 else cx + 3.6, 45), (cx + 2.2, 49.6), (cx - 2.6, 49.6)], aeg,
-               group=73)
-    # the head, big; the bare crown sweeping back; the mask round a narrow eye
-    p.poly([(2, 31), (5, 27), (10, 23.4), (16, 21.4), (22, 21.6), (27.4, 24.4), (29.4, 28), (25, 30), (20, 33.6),
-            (14, 35.6), (7, 35.6), (2, 33.6)], marb, group=60)
-    p.poly([(8.6, 27), (14, 25.6), (21, 27), (15, 29.6), (10, 29.6)], aeg, group=61)
+    """Party icon, drawn for 32 px: a big head under a big gold forelock, the
+    near wing as one mass, the balance as a simple gold T."""
+    W = -2 if ph else 0
+    # the balance: a gold T rising from behind the body
+    p.limb([(44, 43), (44, 33)], 2.6, 2.6, gold, group=70)
+    p.limb([(38, 33), (50, 33)], 3.0, 3.0, gold, group=71)
+    for cx in (38.6, 49.4):
+        p.poly([(cx - 2.6, 36), (cx + 2.6, 36), (cx + 1.8, 39), (cx - 1.8, 39)], aeg, group=72)
+    # body
+    p.blob(31, 33, 12, 9.4, marb, group=1)
+    # the near wing, one swept mass: Aegean along its leading edge, two
+    # notches between its sickle tips, a gold trailing edge
+    p.poly([(24, 30), (27, 20), (32, 11), (37, 5 + W), (41, 2.4 + W), (43, 7 + W), (47, 6 + W), (48.4, 12 + W),
+            (46, 16), (49, 19), (46, 25), (40, 29), (33, 32)], marb, group=30)
+    p.poly([(24.6, 29), (27.6, 20), (32.4, 11.6), (37, 6 + W), (39, 7.4 + W), (34.6, 13.6), (30.4, 21.6),
+            (27.4, 30)], aeg, group=40)
+    p.limb([(46, 24), (40, 29), (33, 31.6)], 1.6, 1.6, gold, group=41)
+    # neck and the big head
+    p.limb([(26, 31), (21, 24)], 9, 8.4, marb, group=50)
+    p.blob(14, 22, 11, 8.4, marb, group=60)
+    p.poly([(2, 23), (6, 18.4), (10, 20), (9, 28), (3, 27.4)], marb, group=60)
+    p.poly([(7, 20), (13, 18.4), (21, 20.4), (14, 23.4), (8, 23.4)], aeg, group=61)
+    p.rect(9, 20, 12, 21, gem, group=62)
+    # the forelock, thick and curling forward over the brow
     pts_o, pts_i = [], []
     for i in range(31):
         t = i / 30
-        th = math.radians(25 - 250 * t)
-        r = 6.4 if t < 0.62 else 6.4 - 2.4 * (t - 0.62) / 0.38
-        w = 6.0 * (1 - t) ** 0.55 + 1.8
-        x, y = 10.6 + r * math.cos(th), 17.6 + r * math.sin(th)
+        th = math.radians(20 - 245 * t)
+        r = 5.6 if t < 0.62 else 5.6 - 2.0 * (t - 0.62) / 0.38
+        w = 5.6 * (1 - t) ** 0.5 + 2.0
+        x, y = 12 + r * math.cos(th), 11 + r * math.sin(th)
         pts_o.append((x + math.cos(th) * w / 2, y + math.sin(th) * w / 2))
         pts_i.append((x - math.cos(th) * w / 2, y - math.sin(th) * w / 2))
-    p.poly(pts_o + pts_i[::-1], gold, group=62)
-    p.poly([(13.6, 22.6), (15.4, 20.4), (17.2, 22.6), (15.4, 25)], pink, group=63)
-    p.rect(11, 27, 14, 28, gem, group=64)
+    p.poly(pts_o + pts_i[::-1], gold, group=63)
+    p.poly([(15.4, 14.6), (17, 12.6), (18.6, 14.6), (17, 16.6)], pink, group=64)
 
 
 def _wings_v(p, beat, far_side=False):
