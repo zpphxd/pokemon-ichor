@@ -125,27 +125,29 @@ E_D = {
 
 ELAIA = Song(
     name='mus_ichor_elaia', title='Elaia Village', meter=(6, 8), grouping=(3, 3), tempo=100,
-    voicegroup='rg_credits', volume=100, reverb=50, priority=0,
+    voicegroup='rg_credits', volume=127, reverb=50, priority=0,
     sections=[('intro', 2), ('A', 8), ('A2', 8), ('B', 8), ('C', 4), ('A3', 8)], loop_from='A',
     modes={'*': pcs('D', DORIAN)}, target=(60, 90), chords=E_CH,
     tracks=[
-        Track('lyre', 46, 110, pan=-12, velocity=100, lo='G3', hi='C6', parts={
+        Track('lyre', 46, 127, pan=-12, velocity=108, lo='G3', hi='C6', parts={
             'A': E_LYRE_A, 'A2': E_LYRE_A2_HEAD + ' | D5:5 r:1',
             'C': 'D5:1 E5:1 F5:1 A5:2 F5:1 | r:6 | D5:1 B4:1 G4:1 B4:1 D5:1 G5:1 | r:6',
             'A3': E_LYRE_A2_HEAD + ' | D5:3 C5:2 B4:1'}),
-        Track('aulos', 68, 92, pan=14, velocity=96, lo='D4', hi='A5', vibrato=(4, 40, 14), parts={
+        Track('aulos', 68, 106, pan=14, velocity=104, lo='D4', hi='A5', vibrato=(4, 40, 14), parts={
             'A2': E_AULOS_A2_HEAD + ' | F4:6',
             'B': 'A4:3 C5:3 | E5:4 D5:1 C5:1 | B4:3 G4:3 | A4:2 F4:1 D4:3 | '
                  'F4:2 A4:1 C5:3 | E5:3 G5:2 E5:1 | D5:2 C5:1 B4:2 G4:1 | A4:6',
             'C': 'r:6 | G5:1 F5:1 E5:1 C5:2 E5:1 | r:6 | E5:2 D5:1 C5:1 B4:1 G4:1',
             'A3': E_AULOS_A2_HEAD + ' | F4:3 G4:3'}),
-        Track('kithara', 46, 80, pan=22, velocity=84, lo='C3', hi='C5',
+        Track('kithara', 46, 92, pan=22, velocity=90, lo='C3', hi='C5',
               parts={s: gen(c, e_kithara) for s, c in E_CH.items()}),
-        Track('bass', 92, 76, velocity=100, lo='C2', hi='C4',
+        # The GB wave channel has four output levels (gCgb3Vol). Volume 62 at -V127 keeps
+        # this sine bass on the 25% step; one more and it jumps 6 dB and swamps the lyre.
+        Track('bass', 92, 62, velocity=100, lo='C2', hi='C4',
               parts={s: gen(c, e_bass) for s, c in E_CH.items() if s != 'intro'}),
-        Track('pad', 48, 52, pan=-24, velocity=72, lo='G3', hi='C5',
+        Track('pad', 48, 60, pan=-24, velocity=76, lo='G3', hi='C5',
               parts={s: gen(E_CH[s], e_pad) for s in ('B', 'C', 'A3')}),
-        Track('frame drum', 0, 84, velocity=92, kit=E_DRUM, parts=E_D),
+        Track('frame drum', 0, 97, velocity=100, kit=E_DRUM, parts=E_D),
     ])
 
 # ============================================================ Route 1
@@ -196,7 +198,7 @@ R_SHAKER = ' | '.join(['C6:1_ C6:1_ C6:1 C6:1_ C6:1 C6:1_ C6:1'] * 8)
 
 ROUTE1 = Song(
     name='mus_ichor_route1', title='Route 1', meter=(7, 8), grouping=(3, 2, 2), tempo=150,
-    voicegroup='rg_sevii_route', volume=98, reverb=50, priority=0,
+    voicegroup='rg_sevii_route', volume=107, reverb=50, priority=0,
     sections=[('intro', 2), ('A', 8), ('A2', 8), ('B', 8), ('C', 8), ('A3', 8)], loop_from='A',
     modes={'*': G_MIX}, target=(45, 75), chords=R_CH,
     tracks=[

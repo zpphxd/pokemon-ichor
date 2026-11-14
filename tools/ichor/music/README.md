@@ -20,6 +20,12 @@ python3 tools/ichor/music/preview.py            # after make: GBA-accurate WAVs 
 
 `preview.py` patches a copy of the ROM so the title screen plays the song, then records the mGBA mix. It prints loudness next to three Emerald reference songs. It also scores how closely the second pass of the loop matches the first.
 
+When you balance volumes, keep the PSG in mind:
+- PSG levels are coarse. The wave channel has only four output levels (`gCgb3Vol`: 25, 50, 75 and 100%).
+- A small change to `-V` or to a wave track's volume can therefore jump the bass by 6 dB and swamp the tune.
+- Re-run `preview.py` after any volume change and compare the result with the reference songs.
+- Current levels are within about 1 dB of Littleroot, Route 101 and the Emerald rival battle.
+
 ## Auditioning in-game
 
 The songs are in the debug menu's sound test. This needs a non-release build, which is the default.

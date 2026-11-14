@@ -282,6 +282,16 @@ def check(song):
     secs = song.seconds(end - loop)
     if not song.target[0] <= secs <= song.target[1]:
         errs.append(f'loop is {secs:.1f}s, target {song.target}')
+    # midi.cfg must carry the voicegroup, volume, reverb and priority recorded in songs.py.
+    cfg = {}
+    for line in open(os.path.join(ROOT, 'sound', 'songs', 'midi', 'midi.cfg')):
+        mid, _, opts = line.partition(':')
+        cfg[mid.strip()] = ' '.join(opts.split())
+    want = f'-E -R{song.reverb} -G_{song.voicegroup} -V{song.volume:03d}'
+    if song.priority:
+        want += f' -P{song.priority}'
+    if cfg.get(song.name + '.mid') != want:
+        errs.append(f'midi.cfg has {cfg.get(song.name + ".mid")!r}; songs.py wants {want!r}')
     return errs, warns, peak
 
 

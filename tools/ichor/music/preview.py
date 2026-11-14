@@ -7,20 +7,22 @@ A copy of pokeemerald.gba gets gSongTable[MUS_TITLE] pointed at the song, so the
 title screen plays it (and never times out, since the song loops). WAVs land in
 build/ichor_music/. Prints loudness, and how closely the second pass of the loop
 matches the first (a hung note or a broken loop shows up as a low match).
+Needs only the Python standard library, plus Homebrew mgba for the renderer.
 """
+import math
 import os
 import re
 import subprocess
 import sys
 import wave
-
-import numpy as np
+from array import array
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
 OUT = os.path.join(ROOT, 'build', 'ichor_music')
 RUNNER = os.path.join(ROOT, 'build', 'tools', 'ichor-render-audio')
 SRC = os.path.join(ROOT, 'tools', 'ichor', 'music', 'render_audio.c')
 PRESS, RATE = 500, 32768
+ENV_HZ = 20
 REFS = ['MUS_LITTLEROOT', 'MUS_ROUTE101', 'MUS_VS_RIVAL']
 
 
@@ -42,18 +44,38 @@ def build_runner():
 
 
 def render(name, sid, title_id, table, rom, seconds):
+    """-> interleaved stereo int16 samples from the song's first note, and the WAV path."""
     data = bytearray(rom)
     data[table + 8 * title_id: table + 8 * title_id + 8] = rom[table + 8 * sid: table + 8 * sid + 8]
     path = os.path.join(OUT, name.lower() + '.gba')
     open(path, 'wb').write(data)
     wav = os.path.join(OUT, name.lower() + '.wav')
-    subprocess.check_call([RUNNER, path, wav, str(int(PRESS + 300 + seconds * 60)), str(PRESS)])
+    subprocess.check_call([RUNNER, path, wav, str(int(PRESS + 300 + seconds * 60)), str(PRESS)],
+                          stdout=subprocess.DEVNULL)
     os.remove(path)
     w = wave.open(wav)
-    a = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).reshape(-1, 2).astype(float) / 32768
-    a = a[int((PRESS + 60) / 59.73 * RATE):]
-    on = np.argmax(np.abs(a).max(axis=1) > 0.003)  # the song's first note
+    a = array('h')
+    a.frombytes(w.readframes(w.getnframes()))
+    if sys.byteorder == 'big':
+        a.byteswap()
+    skip = 2 * int((PRESS + 60) / 59.73 * RATE)
+    threshold = int(0.003 * 32768)
+    on = next(i for i in range(skip, len(a)) if abs(a[i]) > threshold) & ~1  # the song's first note
     return a[on:], wav
+
+
+def envelope(a):
+    hop = 2 * (RATE // ENV_HZ)
+    return [sum(map(abs, a[i:i + hop])) / hop for i in range(0, len(a) - hop + 1, hop)]
+
+
+def correlation(x, y):
+    n = len(x)
+    mx, my = sum(x) / n, sum(y) / n
+    sxy = sum((p - mx) * (q - my) for p, q in zip(x, y))
+    sxx = sum((p - mx) ** 2 for p in x)
+    syy = sum((q - my) ** 2 for q in y)
+    return sxy / math.sqrt(sxx * syy) if sxx and syy else 0.0
 
 
 def main():
@@ -75,21 +97,19 @@ def main():
         else:
             intro, loop = 0, 30
         a, wav = render(name, ids[name], ids['MUS_TITLE'], table, rom, intro + 2 * loop + 2)
-        rms = 20 * np.log10(np.sqrt((a ** 2).mean()) + 1e-9)
-        peak = 20 * np.log10(np.abs(a).max() + 1e-9)
+        rms = 20 * math.log10(math.sqrt(sum(map(lambda v: v * v, a)) / len(a)) / 32768 + 1e-9)
+        peak = 20 * math.log10(max(max(a), -min(a)) / 32768 + 1e-9)
         line = f'{name:24s} rms {rms:6.1f} dBFS  peak {peak:5.1f} dBFS'
         if s:
             # Compare loop pass 2 with pass 1, aligning by cross-correlation of envelopes.
-            env = np.abs(a).mean(axis=1)
-            hop = RATE // 20
-            e = env[:len(env) // hop * hop].reshape(-1, hop).mean(axis=1)
-            i1, n = int(intro * 20), int((loop - 1) * 20)
+            e = envelope(a)
+            i1, n = int(intro * ENV_HZ), int((loop - 1) * ENV_HZ)
             p1 = e[i1:i1 + n]
-            best = max(range(int((intro + loop) * 20) - 10, int((intro + loop) * 20) + 10),
-                       key=lambda j: np.dot(p1, e[j:j + n]) if j + n <= len(e) else -1)
-            p2 = e[best:best + n]
-            match = np.corrcoef(p1, p2)[0, 1]
-            line += f'  loop {(best - i1) / 20:.2f}s (nominal {loop:.2f})  pass match {match:.3f}'
+            nominal = int((intro + loop) * ENV_HZ)
+            cands = [j for j in range(nominal - 10, nominal + 10) if j + n <= len(e)]
+            best = max(cands, key=lambda j: correlation(p1, e[j:j + n]))
+            match = correlation(p1, e[best:best + n])
+            line += f'  loop {(best - i1) / ENV_HZ:.2f}s (nominal {loop:.2f})  pass match {match:.3f}'
         print(line, '->', os.path.relpath(wav, ROOT))
 
 
