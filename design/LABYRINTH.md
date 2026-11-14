@@ -5,15 +5,12 @@
 - **Companion:** `design/SYSTEMS.md` defines the relics, fire and light, the rites, excavation, the festival calendar and the save block this dungeon uses.
 - **Bible:** `design/PITCH.md` Act III step 2: "You infiltrate Team Titan's headquarters inside the Labyrinth, where a Minotaur waits at the center. Kronos removes his mask: he is Phaedon. He completes the Harpe."
 - **Species are placeholders** from PITCH §4, pending the Aethos dex. Where a species matters, the role is the spec.
-<<<<<<< HEAD
 - **Asterion is Asterlorn** (Aethos dex #98, Fighting/Dark, BST 500): only one exists, chained at the Labyrinth's heart and catchable after the raid. This was settled with the dex team on 2026-11-14.
-=======
 - **Maps follow `design/MAP_DESIGN.md`.**
   - Knossa Isle's route and town follow its §1 and §2.
   - The Labyrinth follows §3: teach, test and combine; branches that pay; a midpoint rest; a payoff; a shortcut out.
   - §4 explains how each ring maps to the rulebook.
 - **The post-game.** This file owns the Endless Labyrinth (§10). The other post-game arcs belong to `LABORS.md`, `UNDERWORLD.md`, `ODYSSEY.md` and `POSTGAME.md`, by another designer. §10 lists the hooks this file hands them.
->>>>>>> worktree-agent-a3087b5f1ae9acfd5
 
 ---
 
