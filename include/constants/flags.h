@@ -1299,11 +1299,11 @@
 #define FLAG_UNUSED_0x4DD                                           0x4DD // Unused Flag
 #define FLAG_UNUSED_0x4DE                                           0x4DE // Unused Flag
 #define FLAG_UNUSED_0x4DF                                           0x4DF // Unused Flag
-#define FLAG_UNUSED_0x4E0                                           0x4E0 // Unused Flag
-#define FLAG_UNUSED_0x4E1                                           0x4E1 // Unused Flag
-#define FLAG_UNUSED_0x4E2                                           0x4E2 // Unused Flag
-#define FLAG_UNUSED_0x4E3                                           0x4E3 // Unused Flag
-#define FLAG_UNUSED_0x4E4                                           0x4E4 // Unused Flag
+#define FLAG_ICHOR_ITEM_AKTI_POTION                                 0x4E0 // Ichor: Akti item ball: Potion among the quay crates
+#define FLAG_ICHOR_ITEM_AKTI_PARALYZE_HEAL                          0x4E1 // Ichor: Akti item ball: Paralyze Heal by the fish stall
+#define FLAG_ICHOR_HIDDEN_ITEM_AKTI_SUPER_POTION                    0x4E2 // Ichor: Akti hidden item: Super Potion behind Diktys's nets
+#define FLAG_ICHOR_HIDDEN_ITEM_AKTI_PEARL                           0x4E3 // Ichor: Akti hidden item: Pearl on the tide rocks
+#define FLAG_ICHOR_HIDDEN_ITEM_AKTI_HEART_SCALE                     0x4E4 // Ichor: Akti hidden item: Heart Scale on the beach
 #define FLAG_UNUSED_0x4E5                                           0x4E5 // Unused Flag
 #define FLAG_UNUSED_0x4E6                                           0x4E6 // Unused Flag
 #define FLAG_UNUSED_0x4E7                                           0x4E7 // Unused Flag
