@@ -41,7 +41,8 @@ species:
     - nearest, worthy or not.
   habitat: >-
     Common in Eleusa Village's fields by day, and in the granaries of the
-    Mystery sanctum below.
+    Mystery sanctum below. Alethea's first partner is a stray she dug up on
+    Kronion Hill, Kalliste; none live wild there.
   learnset:
     level_up:
       - [1, Scratch]

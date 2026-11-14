@@ -39,6 +39,8 @@ species:
     - line follows, all of them in step.
   habitat: >-
     In the grass around ant mounds on Route 1 and Kronion Hill, by day; common.
+    Also around the ant hills of Aegina, the Myrmidons' own island, levels
+    12–16.
   learnset:
     level_up:
       - [1, Tackle]

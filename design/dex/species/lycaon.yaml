@@ -42,7 +42,9 @@ species:
     - as guests for a feast.
   habitat: >-
     Arkadia's cypress forests at night, common in the grass after dark. It is
-    never seen by day.
+    never seen by day. One also sits with Hecate's three black hounds at her
+    pillar in Hecate's Hollow after dark, and stays when the others fade
+    (static, level 20, one only).
   learnset:
     level_up:
       - [1, Tackle]

@@ -153,3 +153,15 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
       - New omen entries for SYSTEMS.md §6: Sporadon (swarm), Hymnet (rare visitor), Kryopuff (weather).
       - New small map spots: the paupers' graves (Astyra), the warm hollow (Kaldera), the cradle shrine (Knossa), the reed-bed nests (Lakonia), the oldest altar (Delphoi), the ice-cave side grotto (the Ascent), the Sirens' cliff nests (post-game).
       - Aetarch, the Archon's ace, is now uncommon wild on the Ascent.
+- 2026-11-14: **Phase 2's departures from the dex habitats, reviewed** (`design/phase2/SCRIPT.md` open question 16, on main). The dex adopts these and the habitats now say so:
+  - Lykopup: Hecate's hound, a static at level 20.
+  - Raknit: the web chamber's static, level 20.
+  - Obolorn: 1% at night among Route 2's tombs, levels 15–20.
+  - Pebblith: the Halai Shore's cliffs.
+  - Ergant: Aegina's ant hills.
+  - Spalunk: Alethea's partner, a stray dug up on Kalliste.
+
+  Kapnub and Kaminoo on Hyperion's team need no change.
+
+  **Not adopted:** random wild Pokémon that are already evolved below their evolution level (open question 22). These are Hoplomex at 16 on Aegina, and Korantha, Stachypter and Plouteras at 22 around Eleusa, 6–10 levels early. They undercut each line's evolution payoff. The recommendation is to drop them and keep only the one-off augury statics (Harpelle 17, Korantha 22, the Persenyx flag) as story rewards. Hoplomex can stay on Aegina as a trainer's Pokémon.
+

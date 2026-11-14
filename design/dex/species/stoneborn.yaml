@@ -42,7 +42,8 @@ species:
   habitat: >-
     Kronion Hill's ruins and the sea caves of Kalliste Isle, day and night.
     Very common in caves, and it often tumbles out of rocks broken with the
-    Bronze Hammer. Team Titan grunts digging on Kronion Hill carry them.
+    Bronze Hammer. Team Titan grunts digging on Kronion Hill carry them. Also
+    on the sea cliffs of the Halai Shore, levels 10–16.
   learnset:
     level_up:
       - [1, Tackle]

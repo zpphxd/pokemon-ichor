@@ -43,7 +43,9 @@ species:
     - important behaving badly.
   habitat: >-
     Webs between Arkadia's cypresses, day and night; common. Also found in
-    the eaves of Astyra's weaving quarter.
+    the eaves of Astyra's weaving quarter. A lone one hangs in the web chamber
+    of Hecate's Hollow once the Arachne amphora is complete (static, level 20,
+    one only).
   learnset:
     level_up:
       - [1, String Shot]

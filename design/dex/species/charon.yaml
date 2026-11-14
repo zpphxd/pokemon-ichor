@@ -43,7 +43,9 @@ species:
   habitat: >-
     Rare in Astyra's Kerameikos cemetery at night, at level 28, among the
     paupers' graves outside the wall. None are seen there by day. It drifts
-    toward trainers who carry money.
+    toward trainers who carry money. A very few (1%) wander the Sacred Way's
+    roadside tombs on Route 2 at night, levels 15–20, where the road leaves
+    the Kerameikos.
   learnset:
     level_up:
       - [1, Astonish]
