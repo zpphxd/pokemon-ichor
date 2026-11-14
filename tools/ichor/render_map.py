@@ -110,7 +110,7 @@ def resolve_tileset(name, symbols):
     p = Path(name)
     if not p.is_absolute():
         p = ROOT / p
-    if (p / "metatiles.bin").exists():
+    if (p / "metatiles.bin").exists() or (p / "porytiles_bin" / "metatiles.bin").exists():
         return tileset_from_dir(p)
     # A bare directory name: prefer the registered symbol that points at it.
     for info in symbols.values():

@@ -1647,3 +1647,79 @@ const struct Tileset gTileset_Agros =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Agros,
     .callback = NULL,
 };
+
+// Ichor: eleusa, Eleusa Village (Eleusis): wheat fields, farms and the
+// sanctuary of the Mysteries. Porytiles-managed, built by
+// tools/ichor/art/eleusa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path and animated sea, so rebuild it whenever aethos
+// changes.
+const struct Tileset gTileset_Eleusa =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Eleusa,
+    .palettes = gTilesetPalettes_PorytilesManaged_Eleusa,
+    .metatiles = gMetatiles_PorytilesManaged_Eleusa,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Eleusa,
+    .callback = NULL,
+};
+
+// Ichor: temple_demeter, the Temple of Demeter's underground megaron (the
+// Lesser Mysteries). Porytiles-managed, built by
+// tools/ichor/art/temple_demeter_build.py; it uses only its own tiles and
+// palettes 6-12, so it works on any interior primary (oikos). Its doused
+// palette set is gTilesetPalettes_TempleDemeterGlow (graphics.h).
+const struct Tileset gTileset_TempleDemeter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleDemeter,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleDemeter,
+    .metatiles = gMetatiles_PorytilesManaged_TempleDemeter,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleDemeter,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary built by tools/ichor/art/emporion_build.py: Emporion
+// City (streets, the house kit, the Agora, the Temple of Hermes and the monuments,
+// Acrocorinth, the workshops). It uses only its own tiles and palettes 6-12; cells
+// on grass borrow aethos's, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Emporion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Emporion,
+    .palettes = gTilesetPalettes_PorytilesManaged_Emporion,
+    .metatiles = gMetatiles_PorytilesManaged_Emporion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Emporion,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary built by tools/ichor/art/emporion_build.py: Emporion's
+// harbor and the Isthmus (the port of Lechaion, the Diolkos, Isthmia), with the
+// city's paving and house kit. Its cells on grass, sand, sea and path borrow
+// aethos's, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Isthmos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Isthmos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Isthmos,
+    .metatiles = gMetatiles_PorytilesManaged_Isthmos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Isthmos,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary built by tools/ichor/art/emporion_build.py: the Temple
+// of Hermes's interior and the Herald's Run. It uses only its own tiles and palettes
+// 6-12, with opaque floors, so it works on any primary (drawn for oikos).
+const struct Tileset gTileset_TempleHermes =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleHermes,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleHermes,
+    .metatiles = gMetatiles_PorytilesManaged_TempleHermes,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
+    .callback = NULL,
+};

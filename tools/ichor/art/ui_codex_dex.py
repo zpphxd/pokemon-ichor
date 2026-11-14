@@ -616,9 +616,181 @@ def write_search():
     write_jasc(OUT / "search_menu.pal", sel + idle + off_sel + off)
 
 
+# The area glow's 48 tiles, in the order of src/data/pokedex_area_glow.h. Each
+# names the neighbours that glow: an EDGE_L tile sits left of a glowing cell, so
+# its glow is on its right; a CORNER_TL tile sits up-left of one, so its glow is
+# in its bottom-right corner.
+GLOW_TILES = [
+    "", "R", "L", "L R", "B", "B R", "B L", "B L R", "T", "T R", "T L", "T L R",
+    "T B", "T B R", "T B L", "T B L R", "FULL",
+    "TL", "BL", "BL TL", "TR", "TR TL", "TR BL", "TR BL TL", "BR", "BR TL", "BR BL", "BR BL TL",
+    "BR TR", "BR TR TL", "BR TR BL", "BR TR BL TL",
+    "R TL", "R BL", "R BL TL", "L TR", "L BR", "L BR TR", "B TR", "B TL", "B TL TR",
+    "T BR", "T BL", "T BL BR", "B L TR", "B R TL", "T R BL", "T L BR",
+]
+# Which neighbour (dx, dy) of the tile glows, for each flag.
+GLOW_NEIGHBOUR = {
+    "R": (-1, 0), "L": (1, 0), "B": (0, -1), "T": (0, 1),
+    "TL": (1, 1), "TR": (-1, 1), "BL": (1, -1), "BR": (-1, -1),
+}
+
+
+def write_area_glow():
+    """The glow over the places a Pokemon lives, as black-figure gilding.
+
+    Emerald's glow was a solid wash with a two-pixel rim. Here a glowing cell is
+    hatched with gold incisions at 45 degrees, so the map's glyphs read through
+    it, inside a pale gold edge; one pixel out runs a gold rule, and beyond it a
+    dotted gold line like the map's roads. The engine pulses the layer's alpha.
+    The hatching repeats every 4 px, so it joins across tiles. Colors keep the
+    indices the old recolor used: 1 gold, 2 deep gold, 3 pale gold, 4 dark gold.
+    """
+    a = np.zeros((96, 32), np.uint8)
+    for i, spec in enumerate(GLOW_TILES):
+        # A 3x3 block of cells with this tile in the middle.
+        full = np.zeros((24, 24), bool)
+        if spec == "FULL":
+            full[8:16, 8:16] = True
+        else:
+            for flag in spec.split():
+                dx, dy = GLOW_NEIGHBOUR[flag]
+                full[8 + dy * 8:16 + dy * 8, 8 + dx * 8:16 + dx * 8] = True
+        ys, xs = np.nonzero(full)
+        tile = np.zeros((8, 8), np.uint8)
+        for y in range(8):
+            for x in range(8):
+                px, py = x + 8, y + 8
+                if full[py, px]:
+                    # Inside: a pale edge, then gold hatching.
+                    edge = any(not full[py + oy, px + ox]
+                               for ox, oy in ((-1, 0), (1, 0), (0, -1), (0, 1))
+                               if 0 <= px + ox < 24 and 0 <= py + oy < 24)
+                    if spec != "FULL" and edge:
+                        tile[y, x] = 3
+                    elif (x + y) % 4 == 0:
+                        tile[y, x] = 1
+                    elif (x + y) % 4 == 1:
+                        tile[y, x] = 4
+                    continue
+                if len(xs) == 0:
+                    continue
+                d = np.sqrt(((xs - px) ** 2 + (ys - py) ** 2).min())
+                if d <= 1.0:
+                    tile[y, x] = 1          # the gold rule round the region
+                elif d <= 2.3 and (px + py) % 2 == 0:
+                    tile[y, x] = 2          # the dotted road beyond it
+        a[(i // 4) * 8:(i // 4) * 8 + 8, (i % 4) * 8:(i % 4) * 8 + 8] = tile
+    pal = [TRANSPARENT, GOLD, (232, 152, 48), GOLD_PALE, GOLD_DARK] + [(0, 0, 0)] * 11
+    write_indexed_png(OUT / "area_glow.png", a, [pal])
+
+
+def write_unknown_mon():
+    """The unknown Pokemon: a clay roundel with a black-figure question mark.
+
+    graphics/pokemon/question_mark/circled/ is the front and back pic of
+    SPECIES_NONE: the codex list shows it for every unseen neighbour. Emerald's
+    was a black-and-white "?" ring. Here it is a terracotta tondo, ringed in
+    ink and dotted like the trainer card's cup, with the "?" painted in glaze
+    and an incised highlight. The shiny palette gilds it."""
+    S = 64
+    cx, cy = 31.5, 33.5
+    c = np.zeros((S, S), np.uint8)
+    yy, xx = np.mgrid[0:S, 0:S]
+    r = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2)
+    ang = np.arctan2(yy - cy, xx - cx)
+    # 1 ink, 2 clay dark, 3 clay, 4 clay light, 5 clay pale, 6 glaze, 7 parchment
+    c[r <= 23.5] = 1
+    c[r <= 22.5] = 3
+    # Light from the top left: a lit crescent and a shaded one, cut by offset discs.
+    r_lit = np.sqrt((xx - cx - 4) ** 2 + (yy - cy - 4) ** 2)
+    r_shade = np.sqrt((xx - cx + 3) ** 2 + (yy - cy + 3) ** 2)
+    c[(r <= 22.5) & (r_lit > 22.5)] = 4
+    c[(r <= 22.5) & (r_lit > 24.5) & (r > 20.0)] = 5
+    c[(r <= 22.5) & (r_shade > 22.5)] = 2
+    # A band of parchment dots inside an ink ring, as on the kylix's tondo.
+    c[(r > 17.5) & (r <= 18.5)] = 1
+    step = np.round((ang + np.pi) / (2 * np.pi) * 28).astype(int) % 2 == 0
+    c[step & (np.abs(r - 20.2) <= 0.75)] = 7
+    QM = [
+        ".....######.....",
+        "...##########...",
+        "..####....####..",
+        ".####......####.",
+        ".####......####.",
+        "...........####.",
+        "..........#####.",
+        ".........#####..",
+        "........#####...",
+        ".......####.....",
+        "......####......",
+        "......####......",
+        "................",
+        "......####......",
+        "......####......",
+        "......####......",
+    ]
+    ox, oy = 24, 26
+    for j, row in enumerate(QM):
+        for i, ch in enumerate(row):
+            if ch == "#":
+                c[oy + j, ox + i] = 6
+    # An incised highlight along the hook and the dot, like a scratch through the glaze.
+    for j, i in [(1, 5), (1, 6), (1, 7), (2, 3), (3, 2), (4, 2), (13, 7)]:
+        c[oy + j, ox + i] = 4
+    pal = [TRANSPARENT, INK, CLAY_DARK, CLAY, CLAY_LIGHT, (240, 176, 128), INK, PARCHMENT] + [(0, 0, 0)] * 8
+    pal[6] = (48, 32, 24)  # black glaze, a touch warmer than the ink ring
+    shiny = list(pal)
+    shiny[2], shiny[3], shiny[4], shiny[5] = GOLD_DARK, GOLD, GOLD_PALE, (248, 240, 200)
+    qdir = ROOT / "graphics/pokemon/question_mark/circled"
+    write_indexed_png(qdir / "anim_front.png", np.vstack([c, c]), [pal])
+    write_indexed_png(qdir / "back.png", c, [pal])
+    write_jasc(qdir / "normal.pal", pal)
+    write_jasc(qdir / "shiny.pal", shiny)
+    write_unknown_icon()
+
+
+def write_unknown_icon():
+    """The unknown Pokemon's icon (graphics/pokemon/question_mark/icon.png): the
+    same clay roundel at icon size, which the Augur's Eye shows for a Pokemon
+    not yet seen. Icons share six palettes, and this one is icon palette 0, so
+    it is drawn in that palette's clay (6), orange (7), pink (11) and greys."""
+    QM = [
+        ".####.",
+        "##..##",
+        "....##",
+        "...##.",
+        "..##..",
+        "......",
+        "..##..",
+    ]
+    frames = []
+    for lift in (0, 1):
+        a = np.zeros((32, 32), np.uint8)
+        cx, cy = 15.5, 20.5 - lift
+        for y in range(32):
+            for x in range(32):
+                r = ((x + 0.5 - cx - 0.5) ** 2 + (y + 0.5 - cy - 0.5) ** 2) ** 0.5
+                if r <= 10.5:
+                    a[y, x] = 15
+                if r <= 9.5:
+                    a[y, x] = 6
+                    if (x - cx) + (y - cy) < -6:
+                        a[y, x] = 7
+                    if (x - cx) + (y - cy) < -11:
+                        a[y, x] = 11
+        ox, oy = 13, int(cy) - 3
+        for j, row in enumerate(QM):
+            for i, ch in enumerate(row):
+                if ch == "#":
+                    a[oy + j, ox + i] = 15
+        frames.append(a)
+    icon_pal = [tuple(v) for v in read_jasc(ROOT / "graphics/pokemon/icon_palettes/pal0.pal")]
+    write_indexed_png(ROOT / "graphics/pokemon/question_mark/icon.png", np.vstack(frames), [[gba(c) for c in icon_pal]])
+
+
 def write_area_assets():
-    # The glow over the places a Pokemon lives: gold, pulsing over the map.
-    recolor_png("area_glow.png", {1: GOLD, 2: (232, 152, 48), 3: GOLD_PALE, 4: GOLD_DARK})
+    # The glow over the places a Pokemon lives: gold hatching, pulsing over the map.
+    write_area_glow()
     # Special-area markers: a gold seal ringed in ink.
     recolor_png("area_marker.png", {2: INK, 3: CLAY_DARK, 4: GOLD, 5: GOLD_PALE, 6: GOLD_PALE, 7: PARCH_LIGHT})
     # Size silhouettes: black-figure ink.
@@ -675,6 +847,7 @@ def write_all():
     write_caught_ball()
     write_cry_assets()
     write_area_assets()
+    write_unknown_mon()
     write_search()
     preview(ts, maps, pals, IMG / "ui_codex_dex_bg.png")
     return ts, maps, pals
