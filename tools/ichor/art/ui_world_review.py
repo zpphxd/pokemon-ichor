@@ -3,7 +3,8 @@
 screenshots: the "before" from main before this batch, the "after" from this
 branch, both captured with the temporary harness described in UI_world.md.
 
-Usage: python3 tools/ichor/art/ui_world_review.py BEFORE_DIR AFTER_DIR
+Usage: python3 tools/ichor/art/ui_world_review.py BEFORE_DIR AFTER_DIR [SHEET]
+(SHEET, such as aethos_map_revision.png, builds just that one.)
 """
 import sys
 from pathlib import Path
@@ -22,6 +23,17 @@ SHEETS = {
         ("Pokedex area: Smoliv on Route 1, morning", None, "dex_dex_area_b.png"),
         ("Fly map before the game is cleared: Olympia unnamed", None, "fly_fly_olympia.png"),
         ("... and after: OLYMPIA", None, "flyclear_fly_olympia.png"),
+    ],
+    # The map revision (design/AETHOS_MAP.md): before is the first Aethos map
+    "aethos_map_revision.png": [
+        ("Fly map, from Elaia", "fly_fly.png", "fly_fly.png"),
+        ("Astyra", "fly_fly_astyra.png", "fly_fly_astyra.png"),
+        ("Delphoi", "fly_fly_delphoi.png", "fly_fly_delphoi.png"),
+        ("Knossa: the island, then Amnisos on it", "fly_fly_knossa.png", "fly_fly_amnisos.png"),
+        ("A waypoint: Hecate's Hollow", None, "fly_fly_hollow.png"),
+        ("An island: Lesbos", None, "fly_fly_lesbos.png"),
+        ("Wall map", "wallmap_wallmap.png", "wallmap_wallmap.png"),
+        ("Pokedex area: Smoliv on Route 1, morning", "dex_dex_area_b.png", "dex_dex_area_b.png"),
     ],
     "ui_world_compare_card.png": [
         ("Front, Theo, no stars", "card_theo_0_front.png", "card_theo_0_front.png"),
@@ -82,5 +94,7 @@ def sheet(name, rows, before, after):
 
 if __name__ == "__main__":
     before, after = Path(sys.argv[1]), Path(sys.argv[2])
+    only = sys.argv[3] if len(sys.argv) > 3 else None
     for name, rows in SHEETS.items():
-        sheet(name, rows, before, after)
+        if only is None or name == only:
+            sheet(name, rows, before, after)
