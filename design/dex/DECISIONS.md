@@ -21,8 +21,8 @@ Plan: `design/dex/PLAN.md` (generated from `plan.yaml`). Review page: https://cl
 |---|---|---|---|
 | — | Approve the 150-slot plan | — | Approved: "these will replace the starters and the be the regions pokemon" |
 | D1 | Regional starters replace Snivy, Cyndaquil and Piplup | Yes, once the species exist in the ROM | Yes |
-| D2 | Kronos and the Moirai replace Dialga and the lake trio in the story | Yes | Open |
-| D3 | Add Kairos as a post-game legendary at Olympia | Yes | Open |
+| D2 | Kronos and the Moirai replace Dialga and the lake trio in the story | Yes | **Yes**, confirmed by the user-approved master story, `design/STORY.md` S19 on main: the Lord of Time (Kronolith) and the three Fates replace Dialga and the lake trio. In scenes, the name boxes call the Fates SPINNER, MEASURER and CUTTER (S10). |
+| D3 | Add Kairos as a post-game legendary at Olympia | Yes | **Yes**, per `design/STORY.md` S11: the Moment (Kairazor) restarts time on the Stair of Hours, where you seize it as it runs down the falling sickle. It can only be caught in the post-game, at Olympia. |
 | D4 | Two mythicals, Hope and Ichor | Yes | Changed: "mythicals should be like a zeus pokemon, a posiden pokemon, and a hades pokemon. as like regis giant types ... with good names." Three Regi-style colossi, the cult statues of the brothers who drew lots for the world, replace Hope: Olympanax (Zeus, Electric), Pontanax (Poseidon, Water) and Nekranax (Hades, Ghost). Ichorin, the title Pokémon, stays as a fourth mythical at #152: "Keep it as #152". The dex is 152. |
 | D5 | How the regional dex mixes with the existing 1,025 species | (a) Aethos-only through the League | (b) mixed: "while we add in the other pokemon into the region too". Then changed to (a): "(a). It makes Aethos feel like a real new region and keeps the bible's post-game promise. lets switch it to this". Only Aethos's own species appear until the League is beaten; existing species arrive in the post-game. |
 | D6 | Post-game Labors use regional species where one exists | Yes | Open |
@@ -43,7 +43,12 @@ Plan: `design/dex/PLAN.md` (generated from `plan.yaml`). Review page: https://cl
 
 **Asterion is Asterlorn (#98, Fighting/Dark).** The Labyrinth's Minotaur gets this dex's own species, not the placeholder Paldean Tauros. The entry already makes him the one-of-a-kind Minotaur chained at the Labyrinth's heart, catchable after the raid, which fits `design/LABYRINTH.md`'s idea of him joining the player.
 
-D2, D3 and D6 don't block Gate 2. The entries for those species are written either way, and the open questions are about where they go in the story.
+**Story traits the time pair's design must keep** (`design/STORY.md` S20):
+- The Lord of Time carries the Harpe and a stopped hourglass, and is big enough to fill the sky.
+- The Moment has a razor's edge, and a forelock with nothing behind it.
+- Both have to be built in as anatomy, not props (the cohesion rule).
+
+D6 doesn't block Gate 2. The entries for those species are written either way, and the open questions are about where they go in the story.
 
 ## Gate 2: the full entries
 
