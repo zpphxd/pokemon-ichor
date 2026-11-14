@@ -75,7 +75,7 @@ Aethos is a sun-bleached archipelago and mainland in the age of heroes. It has n
 - **The Labyrinth's cast** (`design/LABYRINTH.md`, approved 2026-11-14):
   - **Daedalus**: the maker beneath Knossa, haunted by Icarus and by his apprentice. Out of sympathy for a grieving father he timed the Harpe's forging for Kronos, and now repents.
   - **Ariadne**: priestess of the Mistress of the Labyrinth and Asterion's half-sister. She is later the Endless Labyrinth's Brain.
-  - **Asterion**: the Minotaur, a Pokémon goaded into a monster, whom you free.
+  - **Asterion**: the Minotaur, a Pokémon goaded into a monster, whom you free. He is **Asterlorn** (Aethos dex #98, Fighting/Dark): only one exists, chained at the Labyrinth's heart.
   - **Minos**: Knossa's dead king, a tomb in the main story and a judge of the dead after it.
 
 ### Act I — The Unwoven (Laurels 1–3)
@@ -144,7 +144,7 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
     - **Core tier:** Demeter gives Snivy after Laurel 5, Hephaestus gives Cyndaquil (which evolves into Hisuian Typhlosion) after Laurel 6, and Poseidon gives Piplup after Laurel 7.
     - **Extended tier:** 13 more visits through the late game and post-game give the other starter lines. It ends with Zeus and Hermes at Mom's door in a storm.
     - Lazarus's nine starters are offered nowhere.
-    - These gift species stay in the ROM even though the regional dex is Aethos-only, at about 670 KiB for both tiers.
+    - No vanilla species is cut from the ROM. The user wants every Pokémon obtainable eventually, so the gift species are there anyway.
 - **Aethos Dex:** about 400 species from Gen 1–9, placed by theme. All **1,025** species can be caught by the end of the post-game. Glazed stops at Gen 6.
 - **Ancient era, ancient forms.** Hisuian forms live in Aethos naturally, because the setting is ancient. Ancient Paradox Pokémon (Great Tusk, Flutter Mane, Roaring Moon and the rest) appear in post-climax **Time Fractures**, where the Golden Age leaks through.
 
@@ -171,7 +171,7 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
 | The Lernaean Hydra | Hydreigon |
 | Ladon and the golden apples | Hydrapple |
 | Cerberus | Mega Houndoom |
-| Asterion, the Minotaur | species to come with the dex (placeholder: Paldean Tauros) |
+| Asterion, the Minotaur | Asterlorn (Aethos dex #98, Fighting/Dark) |
 | The Stymphalian birds | Skarmory and Corviknight |
 | Polyphemus the Cyclops | Dusclops and Dusknoir |
 | Circe's swine | Lechonk and Oinkologne |

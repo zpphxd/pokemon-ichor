@@ -5,6 +5,7 @@
 - **Companion:** `design/SYSTEMS.md` defines the relics, fire and light, the rites, excavation, the festival calendar and the save block this dungeon uses.
 - **Bible:** `design/PITCH.md` Act III step 2: "You infiltrate Team Titan's headquarters inside the Labyrinth, where a Minotaur waits at the center. Kronos removes his mask: he is Phaedon. He completes the Harpe."
 - **Species are placeholders** from PITCH §4, pending the Aethos dex. Where a species matters, the role is the spec.
+- **Asterion is Asterlorn** (Aethos dex #98, Fighting/Dark, BST 500): only one exists, chained at the Labyrinth's heart and catchable after the raid. This was settled with the dex team on 2026-11-14.
 
 ---
 
