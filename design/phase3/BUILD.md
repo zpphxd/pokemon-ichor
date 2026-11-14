@@ -69,10 +69,11 @@ This session has registered every batch 1 map with `tools/ichor/new_map.py`, so 
 
 | Seam | Columns or rows | Agreed with |
 |---|---|---|
-| Eleusa's north edge → Route 6's south edge | world-act1 keeps Eleusa's north road open to the seam, at least 2 columns wide, aethos-only, and sends the exact columns when its layout lands. Until then Route 6's road meets the seam at columns 26–29, and the connection is left out of `map.json`. The vines are on Route 6, just past the seam. | world-act1 |
+| Eleusa's north edge → Route 6's south edge | `MAP_ELEUSA_VILLAGE` (50×40, aethos + eleusa, world-act1's commit 0284b88d32) is open at y = 0 in columns 44–47: the road is 45–46, grass verges at 44 and 47. Eleusa's six rows nearest the seam are aethos-only and have no vines; the vines are on Route 6, just past the seam. Route 6's road meets its south edge in the kithairon agent's choice of four columns *r*…*r*+3 (verge, road, road, verge), with Route 6's own seam rows aethos-only. Offsets follow from *r*: Eleusa `up` to Route 6 with offset 44 − *r*; Route 6 `down` to Eleusa with offset *r* − 44. This session adds both connections at integration, once Eleusa and Route 6 are on one branch. | world-act1 (columns), kithairon (*r*) |
 | Route 6 ↔ Eleutherai ↔ Mt. Kithairon ↔ Route 7 | the kithairon agent's choice, recorded here | — |
 | Route 7's north edge → Thyrsa's Elektran Gate | Route 7's road leaves its north edge at columns 20–23; Thyrsa's Elektran Gate opens on its south edge at columns 26–29. The connection is `up` from Route 7 with offset −6 (Thyrsa's `down` with offset +6). Both rows at the seam are aethos-only. The kithairon and thyrsa agents may move it together, and record the change here. | kithairon, thyrsa |
 | Thyrsa's west edge (the Neistan Gate) → Route 8 | batch 2. Draw the gate and the road's first columns; record them here | — |
+| Eleusa's east edge → Route 15 | batch 4. Eleusa is open at x = 49 in rows 24–27; a wall runs down x = 48 with its gap at (48,25), where a hoplite stands in Act I. This session claimed his hide flag, `FLAG_ICHOR_HIDE_ELEUSA_EAST_HOPLITE` (bank 0x10C), and puts it on his object in batch 4, once Eleusa is on main | world-act1 |
 | Thyrsa's east edge (the Proitid Gate) → Euboia | batch 7. Draw the gate shut, with its guard | — |
 
 Record arrival tiles for scripted warps here as you choose them.

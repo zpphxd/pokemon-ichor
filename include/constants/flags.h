@@ -1701,6 +1701,7 @@
 #ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
+#define FLAG_ICHOR_HIDE_ELEUSA_EAST_HOPLITE     (FLAG_ICHOR_GENERAL_START + 0x10C) // Ichor: the hoplite in Eleusa's east wall gap (48,25), hidden when Route 15 opens in Act II (batch 4)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
