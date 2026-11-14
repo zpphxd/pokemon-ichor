@@ -491,7 +491,9 @@
 #define MUS_RG_SLOW_PALLET          557 // MUS_RG_SLOWMASARA
 #define MUS_RG_TEACHY_TV_MENU       558 // MUS_RG_TVNOIZE
 
-#define END_MUS                     558
+// Ichor: our songs are appended after the phonemes (see below), so END_MUS covers
+// them; overworld.c sizes its night-music table from it.
+#define END_MUS                     MUS_ICHOR_BATTLE_RIVAL
 
 // These PH_* constants are phoneme sounds used by the "bard" NPC (see src/bard_music.c and src/mauville_old_man.c).
 // Each comes in a triplet of PH_*_BLEND, PH_*_HELD, and PH_*_SOLO, and the name of each triplet incorporates the English phonetic sound it represents.
@@ -546,6 +548,12 @@
 #define PH_NURSE_BLEND              607
 #define PH_NURSE_HELD               608
 #define PH_NURSE_SOLO               609
+
+// Pokémon Ichor songs (tools/ichor/music). Map themes first: index END_MUS is past
+// the end of overworld.c's sNightMusicTable, so keep a battle theme last.
+#define MUS_ICHOR_ELAIA             610
+#define MUS_ICHOR_ROUTE1            611
+#define MUS_ICHOR_BATTLE_RIVAL      612
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 
