@@ -42,9 +42,16 @@ repainted.** The build checks every borrowed entry against aethos's current
 metatiles.
 
 A borrowed cell keeps one layer of its own above the ground. Shadows (under the
-fig, the upturned boat, the shrubs and the rocks) are drawn in that layer, so a
+fig, the shrubs and the rocks) are drawn in that layer, so a
 cell on borrowed ground can't also have a part drawn over the player: the build
 rejects any that tries. (The laundry draws its posts and washing in the top layer.)
+
+**Not near a seam.** The engine draws a connected map with the tilesets of the map
+the player stands on, so from Route 1 any Akti metatile in Akti's bottom rows turns
+to garbage. Keep Akti pieces out of the six rows nearest an up/down seam (eight
+columns for left/right) unless both maps share this secondary (MAP_DESIGN.md §5);
+`akti.py` fails on any. Diktys's upturned boat by the south gate is two object
+events instead (`tools/ichor/art/akti_objects.py`).
 
 **Animated sea.** The sea's animation comes with the borrowed tiles: aethos swaps
 the frames of tiles 454 and 455 in VRAM, and every borrowed sea cell points at them.
@@ -61,12 +68,12 @@ palette (`akti_lib.GROUPS`):
 | Cycladic | Whitewash, Aegean blue, terracotta pots, basil; the laundry |
 | Marble | The temple, the altar and the krene, with bronze, fire and roof terracotta |
 | Stone | The quay, walls and terraces, and every crag, with its foam and weed |
-| Wood | The trireme, the kaikia, the upturned boat, nets and rope |
+| Wood | The trireme, the kaikia, nets and rope |
 | Market | Amphorae, baskets, the catch, octopus and the stall's awning |
 | Plaza | The plaza's warm limestone and marble, and the krene's water |
 | Grove | Aethos's meadow greens and olives, the fig and the shrubs |
 
-**Tile budget.** 490 of 504 tiles are used. A secondary has 512, but the door
+**Tile budget.** 475 of 504 tiles are used. A secondary has 512, but the door
 animations copy their frames into tiles 504-511 (`DOOR_TILE_START_SIZE1` in
 `src/field_door.c`), so the build fails past 504. It also redraws any tile within
 two pixels of another as that tile, so near-duplicates are stored once.
@@ -104,16 +111,18 @@ ids                       walk
 
 Door metatile: 0x241.
 
-### Small Cycladic house, shuttered front
+### Small Cycladic house, door on the right
 
-`house_shuttered`, 4 wide by 3 tall. The small house with its door bricked up as a shuttered window over a whitewashed bench, so a scenery house needs no barred door. All solid.
+`house_small_r`, 4 wide by 3 tall. house_small mirrored: the door is in the bottom row, third column (put the warp there). Its tiles are house_small's, flipped.
 
 ```text
 ids                       walk
 0x234 0x235 0x236 0x237   X X X X
 0x23C 0x23D 0x23E 0x23F   X X X X
-0x244 0x245 0x246 0x247   X X X X
+0x244 0x245 0x246 0x247   X X D X
 ```
+
+Door metatile: 0x246.
 
 ### Harbor shrine to Poseidon
 
@@ -225,7 +234,7 @@ Ground: all on aethos sea.
 
 ```text
 ids     walk
-0x2D0   X
+0x2CE   X
 ```
 
 ### A coil of rope on the quay
@@ -234,7 +243,7 @@ ids     walk
 
 ```text
 ids     walk
-0x2CF   X
+0x2CD   X
 ```
 
 ### Amphorae stacked in a rack
@@ -243,7 +252,7 @@ ids     walk
 
 ```text
 ids           walk
-0x2D1 0x2D2   X X
+0x2D0 0x2D1   X X
 ```
 
 ### Octopus drying on a line
@@ -252,7 +261,7 @@ ids           walk
 
 ```text
 ids           walk
-0x2CD 0x2CE   X X
+0x2CB 0x2CC   X X
 ```
 
 ### Fish stall with a striped awning
@@ -275,8 +284,8 @@ Limestone crags in the sea and on the shore, the west headland, the grotto on th
 
 ```text
 ids           walk
-0x2D3 0x2D4   X X
-0x2DB 0x2DC   X X
+0x2D2 0x2D3   X X
+0x2DA 0x2DB   X X
 ```
 
 Ground: all on aethos sea.
@@ -287,7 +296,7 @@ Ground: all on aethos sea.
 
 ```text
 ids     walk
-0x2D5   X
+0x2D4   X
 ```
 
 Ground: all on aethos sea.
@@ -298,10 +307,10 @@ Ground: all on aethos sea.
 
 ```text
 ids           walk
-0x2D6 0x2D7   X X
-0x2DE 0x2DF   X X
-0x2E6 0x2E7   X X
-0x2EE 0x2EF   X X
+0x2D5 0x2D6   X X
+0x2DD 0x2DE   X X
+0x2E5 0x2E6   X X
+0x2ED 0x2EE   X X
 ```
 
 Ground: grass at (0,3), (1,3); sea at (0,0), (0,1), (0,2), (1,0), (1,1), (1,2).
@@ -407,18 +416,7 @@ ids                             walk
 
 ```text
 ids                 walk
-0x2CA 0x2CB 0x2CC   X T X
-```
-
-Ground: all on aethos grass.
-
-### Upturned boat on trestles
-
-`boat_upturned`, 2 wide by 1 tall. A rowing boat turned keel-up on trestles, on aethos grass. Diktys's seat by the south road.
-
-```text
-ids           walk
-0x2C8 0x2C9   X X
+0x2C8 0x2C9 0x2CA   X T X
 ```
 
 Ground: all on aethos grass.

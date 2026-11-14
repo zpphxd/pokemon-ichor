@@ -174,4 +174,53 @@ Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table;
 | 5 | bg | (6,1) | (6,2) facing north | model ship (optional) |
 | 6 | bg | (7,1) | (7,2) facing north | model ship, right half |
 
+### The divers' house, Akti
+
+- Map: `MAP_AKTI_TOWN_DIVERS_HOUSE`. Layout: `design/phase1/rooms/divers_house.bin`, **9x7** blocks, secondary `gTileset_Oikia`.
+- Floor: flags. Wall: blue dado. Render: `design/phase1/img/rooms_divers_house.png` (3x).
+
+Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table; a bg event is marked on its furniture tile.
+
+```
+    012345678
+  0 #########
+  1 #########
+  2 ###..#3##
+  3 #.2....##
+  4 ...##..##
+  5 #....#..#
+  6 #..11...#
+```
+
+| # | Kind | Tile | Read from | What |
+|---|---|---|---|---|
+| 1 | warp | (3,6), (4,6) |  | door to Akti Town (south-arrow mat) |
+| 2 | npc | (2,3) | faces south | Doris, Hydna's grandmother, by her sponge baskets |
+| 3 | bg | (6,2) | (6,3) facing north | Hydna's water clock: she times her dives by it |
+
+### The goatherd's farmhouse, Akti
+
+- Map: `MAP_AKTI_TOWN_GOATHERDS_HOUSE`. Layout: `design/phase1/rooms/goatherds_house.bin`, **11x7** blocks, secondary `gTileset_Oikia`.
+- Floor: terracotta. Wall: red dado. Render: `design/phase1/img/rooms_goatherds_house.png` (3x).
+
+Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table; a bg event is marked on its furniture tile.
+
+```
+    01234567890
+  0 ###########
+  1 ###########
+  2 ####.....##
+  3 #42.....##.
+  4 #...######.
+  5 #.....3.###
+  6 ...11...###
+```
+
+| # | Kind | Tile | Read from | What |
+|---|---|---|---|---|
+| 1 | warp | (3,6), (4,6) |  | door to Akti Town (south-arrow mat) |
+| 2 | npc | (2,3) | faces west | Aigon the goatherd, at his hearth |
+| 3 | npc | (6,5) | faces south | a Skiddo kid, wandering (keep its range inside x 5-7, y 5-6) |
+| 4 | bg | (1,3) | (1,4) facing north | hearth: "Goat's milk warms by the fire." (optional) |
+
 <!-- oikia_build: end generated -->

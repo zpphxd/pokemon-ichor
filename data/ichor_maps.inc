@@ -12,3 +12,5 @@
 	.include "data/maps/AktiTown_FishersHouse/scripts.inc"
 	.include "data/maps/AktiTown_TempleOfHestia/scripts.inc"
 	.include "data/maps/KallisteRoute1_KronionHill/scripts.inc"
+	.include "data/maps/AktiTown_DiversHouse/scripts.inc"
+	.include "data/maps/AktiTown_GoatherdsHouse/scripts.inc"

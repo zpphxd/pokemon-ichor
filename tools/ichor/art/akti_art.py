@@ -93,40 +93,17 @@ def house():
     return retitle(KE.house_small(), "house_small", "Small Cycladic house")
 
 
-def house_shuttered():
-    """The small house with no door on its front: a blue-shuttered window and a
-    whitewashed bench take the door's place, so it can stand anywhere."""
-    s = KE.house_small()
-    s = retitle(s, "house_shuttered", "Small Cycladic house, shuttered front",
-                walk=["XXXX", "XXXX", "XXXX"],
-                notes="The small house with its door bricked up as a shuttered window over a "
-                      "whitewashed bench, so a scenery house needs no barred door. All solid.")
-    s.behaviors = {}
-    L = s.B
-    # whitewash over the door and its step
-    L.rect(16, 25, 15, 23, "w1")
-    L.hline(1, 62, 45, "w2")
-    L.hline(1, 62, 46, "w3")
-    L.hline(0, 63, 47, "w4")
-    # shuttered window, closed: two blue leaves with louvres
-    win = [
-        "kkkkkkkkkk",
-        "kHMMMkHMMk",
-        "kMDDDkMDDk",
-        "kHMMMkHMMk",
-        "kMDDDkMDDk",
-        "kHMMMkHMMk",
-        "kMDDDkMDDk",
-        "kkkkkkkkkk",
-        "w33333333w",
-    ]
-    L.blit(win, {"k": "ink", "H": "b2", "M": "b1", "D": "b0", "w": "w0", "3": "w3"}, 18, 23)
-    # a whitewashed bench below it, with its shadow
-    L.rect(15, 38, 18, 3, "w0")
-    L.hline(15, 32, 41, "w2")
-    L.vline(16, 41, 43, "w3")
-    L.vline(31, 41, 43, "w3")
-    L.hline(15, 32, 37, "dk")
+def house_mirrored():
+    """The small house mirrored, door on the right and chimney on the left, so two
+    homes on one street aren't twins. Porytiles matches flipped tiles: it costs
+    no tiles of its own."""
+    s = retitle(KE.house_small(), "house_small_r", "Small Cycladic house, door on the right",
+                notes="house_small mirrored: the door is in the bottom row, third column (put "
+                      "the warp there). Its tiles are house_small's, flipped.")
+    for layer in s.layers.values():
+        layer.a[:] = layer.a[:, ::-1].copy()
+    s.walk = [row[::-1] for row in s.walk]
+    s.behaviors = {(s.w - 1 - x, y): mb for (x, y), mb in s.behaviors.items()}
     return s
 
 
@@ -471,7 +448,7 @@ def build():
     import akti_harbor
     import akti_town
     # new structures go at the end, so existing ids keep their places
-    return ([temple(), house(), house_shuttered(), shrine(), altar(), paving(), quay(),
+    return ([temple(), house(), house_mirrored(), shrine(), altar(), paving(), quay(),
              quay_gangplank(), kaiki(), kaiki(left=True), trireme(), terraces()]
             + akti_harbor.build() + akti_coast.build() + akti_town.build()
             + [akti_coast.grotto()])

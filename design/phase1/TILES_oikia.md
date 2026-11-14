@@ -87,7 +87,7 @@ The builder rewrites everything below this line.
 
 <!-- oikia_build: begin generated -->
 
-Built: **318** metatiles (`0x200`-`0x33d`) of 512, **371** tiles of 512, palettes 6-12.
+Built: **334** metatiles (`0x200`-`0x34d`) of 512, **371** tiles of 512, palettes 6-12.
 
 | Piece | Metatile |
 |---|---|
@@ -131,46 +131,46 @@ Built: **318** metatiles (`0x200`-`0x33d`) of 512, **371** tiles of 512, palette
 | Stamp | Cells | Palette | Terracotta, red wall | Boards, blue wall | Flags, red wall | What it is |
 |---|---|---|---|---|---|---|
 | `window` | 1x2 | wall | 227 / 231 | 227 / 296 | 227 / 231 | shuttered window, Aegean-blue shutters open |
-| `niche` | 1x2 | wall | 22A / 234 | 22A / 2DA | 22A / 234 | wall niche with a terracotta goddess and an aryballos |
-| `niche_horse` | 1x2 | wall | 258 / 25F | 258 / 2DB | 258 / 25F | wall niche with a clay horse and an oil flask |
-| `klepsydra` | 1x2 | bronze | 257 / 25C | 257 / 2DC | 257 / 25C | klepsydra: a bronze bowl drips into a basin past a marble hour scale |
-| `trident` | 1x2 | bronze | 290 / 2AF | 290 / 297 | 290 / 2AF | a trident hung on two pegs |
-| `herbs` | 1x2 | nature | 273 / 276 | 273 / 2DD | 273 / 276 | bundles of drying herbs hung from pegs in the beam |
-| `nets` | 2x2 | nature | 28D 28E / 2B2 2B3 | 28D 28E / 293 294 | 28D 28E / 2B2 2B3 | a fishing net drying on two pegs: cork floats, lead sinkers, a starfish caught in it |
-| `boat` | 2x2 | bronze | 291 292 / 2B0 2B1 | 291 292 / 298 299 | 291 292 / 2B0 2B1 | a model pentekonter on a wall shelf: black hull, painted eye, square sail |
-| `honey_shelf` | 2x2 | wood | 225 226 / 22E 22F | 225 226 / 2DE 2DF | 225 226 / 22E 22F | wall shelf of honey jars sealed with wax |
-| `jar_shelf` | 2x2 | wood | 274 275 / 2AD 2AE | 274 275 / 2E0 2E1 | 274 275 / 2AD 2AE | wall shelf of remedy jars and flasks |
-| `stairs_down` | 1x2 | wall | 259 / 260 | 259 / 2E2 | 259 / 260 | stairs down: whitewashed steps dropping into the back wall; the warp is the lower cell |
-| `stairs_up` | 2x3 | wall | 2AC --- / 2B6 2B7 / 2BF 2C0 | 2AC --- / 2ED 2EE / 2F9 2FA | 2AC --- / 2B6 2B7 / 31C 31D | whitewashed stairs climbing to a hatch in the ceiling; the warp is the bottom-right cell |
-| `stairs_up_r` | 2x3 | wall | --- 22B / 235 236 / 23F 240 | --- 22B / 2EF 2F0 / 2FB 2FC | --- 22B / 235 236 / 31E 31F | the same stairs climbing east; the warp is the bottom-left cell |
-| `stairs_up_wood` | 2x3 | wall | 2AC --- / 2B8 2B7 / 2C1 2C2 | 2AC --- / 2F1 2EE / 2FD 2FE | 2AC --- / 2B8 2B7 / 320 321 | timber stairs climbing west to the ceiling hatch; the warp is the bottom-right cell |
-| `stairs_up_wood_r` | 2x3 | wall | --- 22B / 235 2B9 / 2C3 2C4 | --- 22B / 2EF 2F2 / 2FF 300 | --- 22B / 235 2B9 / 322 323 | timber stairs climbing east; the warp is the bottom-left cell |
-| `stairs_down_wood` | 1x2 | wall | 2AB / 2B4 | 2AB / 2E3 | 2AB / 2B4 | timber stairs dropping into the back wall; the warp is the lower cell |
+| `niche` | 1x2 | wall | 22A / 234 | 22A / 2EF | 22A / 234 | wall niche with a terracotta goddess and an aryballos |
+| `niche_horse` | 1x2 | wall | 258 / 25F | 258 / 2F0 | 258 / 25F | wall niche with a clay horse and an oil flask |
+| `klepsydra` | 1x2 | bronze | 257 / 25C | 257 / 2B0 | 257 / 25C | klepsydra: a bronze bowl drips into a basin past a marble hour scale |
+| `trident` | 1x2 | bronze | 290 / 2C4 | 290 / 297 | 290 / 2C4 | a trident hung on two pegs |
+| `herbs` | 1x2 | nature | 273 / 276 | 273 / 2AF | 273 / 276 | bundles of drying herbs hung from pegs in the beam |
+| `nets` | 2x2 | nature | 28D 28E / 2C7 2C8 | 28D 28E / 293 294 | 28D 28E / 2C7 2C8 | a fishing net drying on two pegs: cork floats, lead sinkers, a starfish caught in it |
+| `boat` | 2x2 | bronze | 291 292 / 2C5 2C6 | 291 292 / 298 299 | 291 292 / 2C5 2C6 | a model pentekonter on a wall shelf: black hull, painted eye, square sail |
+| `honey_shelf` | 2x2 | wood | 225 226 / 22E 22F | 225 226 / 2F1 2F2 | 225 226 / 22E 22F | wall shelf of honey jars sealed with wax |
+| `jar_shelf` | 2x2 | wood | 274 275 / 2B7 2B8 | 274 275 / 2AB 2AC | 274 275 / 2B7 2B8 | wall shelf of remedy jars and flasks |
+| `stairs_down` | 1x2 | wall | 259 / 260 | 259 / 2F3 | 259 / 260 | stairs down: whitewashed steps dropping into the back wall; the warp is the lower cell |
+| `stairs_up` | 2x3 | wall | 2C3 --- / 2CB 2CC / 2D4 2D5 | 2C3 --- / 2FE 2FF / 30A 30B | 2C3 --- / 2CB 2CC / 32D 32E | whitewashed stairs climbing to a hatch in the ceiling; the warp is the bottom-right cell |
+| `stairs_up_r` | 2x3 | wall | --- 22B / 235 236 / 23F 240 | --- 22B / 300 301 / 30C 30D | --- 22B / 235 236 / 32F 330 | the same stairs climbing east; the warp is the bottom-left cell |
+| `stairs_up_wood` | 2x3 | wall | 2C3 --- / 2CD 2CC / 2D6 2D7 | 2C3 --- / 302 2FF / 30E 30F | 2C3 --- / 2CD 2CC / 331 332 | timber stairs climbing west to the ceiling hatch; the warp is the bottom-right cell |
+| `stairs_up_wood_r` | 2x3 | wall | --- 22B / 235 2CE / 2D8 2D9 | --- 22B / 300 303 / 310 311 | --- 22B / 235 2CE / 333 334 | timber stairs climbing east; the warp is the bottom-left cell |
+| `stairs_down_wood` | 1x2 | wall | 2C2 / 2C9 | 2C2 / 2F4 | 2C2 / 2C9 | timber stairs dropping into the back wall; the warp is the lower cell |
 | `kline` | 2x2 | wood | 249 24A / 24D 24E | 26A 26B / 26E 26F | 283 284 / 287 288 | kline (couch-bed): a scrolled headrest with a bronze boss, linen pillow, woven blue coverlet |
-| `klismos_r` | 1x1 | wood | 2C5 | 303 | 326 | klismos chair, facing right |
-| `klismos_l` | 1x1 | wood | 2C6 | 269 | 327 | klismos chair, facing left |
-| `stool` | 1x1 | wood | 2C7 | 2A3 | 328 | diphros: a folding stool with crossed legs and a fleece seat |
-| `table` | 2x1 | wood | 2C8 2C9 | 2A4 2A5 | 329 32A | trapeza: a low table with bread, a red jug, olives and a cup |
-| `table_round` | 1x1 | wood | 2CA | 304 | 32B | a small three-legged table with a jug and bread |
-| `desk` | 2x1 | wood | 2CB 2CC | 305 268 | 32C 32D | writing table: a wax tablet with its stylus, a rolled scroll |
-| `oars` | 1x3 | wood | 28F / 2B5 / 2BE | 28F / 295 / 29D | 28F / 2B5 / 31B | a pair of oars with blue-painted blades, leaning on the wall |
-| `scrolls` | 2x2 | wood | 25A 25B / 2BC 2BD | 2EA 2EB / 2F7 262 | 25A 25B / 318 319 | a cabinet of scrolls in pigeonholes, parchment tags hanging |
-| `chest` | 2x2 | wood | 25D 25E / 2BA 2BB | 2E8 2E9 / 263 264 | 25D 25E / 27B 27C | kibotos: a wooden chest with bronze straps and painted panels |
-| `loom` | 2x3 | wood | 228 229 / 232 233 / 23C 23D | 228 229 / 2E6 2E7 / 2F5 2F6 | 228 229 / 232 233 / 316 317 | warp-weighted loom: a half-woven cloth, the warp, clay loom weights |
-| `altar` | 1x2 | bronze | 230 / 23B | 2EC / 2F8 | 230 / 31A | household altar of Hestia: horned marble altar, red fillets, a flame in a bronze bowl |
-| `lampstand` | 1x2 | bronze | 24B / 24F | 310 / 266 | 285 / 289 | lychnouchos: a bronze lampstand on lion-paw feet, lamp lit |
-| `amphora` | 1x2 | clay | 2CD / 2D4 | 306 / 30D | 32E / 336 | amphora with a black-figure band |
-| `amphora_plain` | 1x2 | clay | 2CE / 2D5 | 270 / 272 | 32F / 337 | a plain oil amphora |
-| `pithos` | 1x2 | clay | 2CF / 2D6 | 307 / 2A0 | 330 / 338 | pithos: a big storage jar with rope-pattern bands and a stone lid |
-| `pots` | 1x1 | clay | 2D0 | 308 | 331 | cooking pots: a sooty chytra, a jug and a stack of bowls |
-| `mortar` | 1x1 | clay | 251 | 30F | 33A | a stone mortar of barley with its pestle |
-| `hearth` | 2x2 | clay | 238 239 / 242 243 | 2F3 2F4 / 301 302 | 314 315 / 324 325 | kitchen hearth: Hestia's fire in a stone curb, a bronze cauldron on its tripod |
-| `soot` | 2x2 | clay | 223 224 / 22C 22D | 223 224 / 2E4 2E5 | 223 224 / 22C 22D | smoke-blackened plaster above the hearth |
-| `myrtle` | 1x2 | nature | 252 / 256 | 309 / 30E | 332 / 339 | potted myrtle, Aphrodite's shrub, in flower |
-| `kalathos` | 1x1 | nature | 2D1 | 30A | 333 | kalathos: the wool basket, heaped with carded fleece |
-| `fish_basket` | 1x1 | nature | 2D2 | 30B | 334 | a wicker basket of the morning's catch |
-| `knucklebones` | 1x1 | nature | 2D3 | 30C | 335 | astragaloi: five knucklebones on a leather gaming cloth |
+| `klismos_r` | 1x1 | wood | 2DA | 314 | 337 | klismos chair, facing right |
+| `klismos_l` | 1x1 | wood | 2DB | 269 | 338 | klismos chair, facing left |
+| `stool` | 1x1 | wood | 2DC | 2A3 | 339 | diphros: a folding stool with crossed legs and a fleece seat |
+| `table` | 2x1 | wood | 2DD 2DE | 2A4 2A5 | 33A 33B | trapeza: a low table with bread, a red jug, olives and a cup |
+| `table_round` | 1x1 | wood | 2DF | 315 | 33C | a small three-legged table with a jug and bread |
+| `desk` | 2x1 | wood | 2E0 2E1 | 316 268 | 33D 33E | writing table: a wax tablet with its stylus, a rolled scroll |
+| `oars` | 1x3 | wood | 28F / 2CA / 2D3 | 28F / 295 / 29D | 28F / 2CA / 32C | a pair of oars with blue-painted blades, leaning on the wall |
+| `scrolls` | 2x2 | wood | 25A 25B / 2D1 2D2 | 2FB 2FC / 308 262 | 25A 25B / 329 32A | a cabinet of scrolls in pigeonholes, parchment tags hanging |
+| `chest` | 2x2 | wood | 25D 25E / 2CF 2D0 | 2F9 2FA / 263 264 | 25D 25E / 27B 27C | kibotos: a wooden chest with bronze straps and painted panels |
+| `loom` | 2x3 | wood | 228 229 / 232 233 / 23C 23D | 228 229 / 2F7 2F8 / 306 307 | 228 229 / 232 233 / 327 328 | warp-weighted loom: a half-woven cloth, the warp, clay loom weights |
+| `altar` | 1x2 | bronze | 230 / 23B | 2FD / 309 | 230 / 32B | household altar of Hestia: horned marble altar, red fillets, a flame in a bronze bowl |
+| `lampstand` | 1x2 | bronze | 24B / 24F | 321 / 266 | 285 / 289 | lychnouchos: a bronze lampstand on lion-paw feet, lamp lit |
+| `amphora` | 1x2 | clay | 2E2 / 2E9 | 317 / 31E | 33F / 346 | amphora with a black-figure band |
+| `amphora_plain` | 1x2 | clay | 2E3 / 2EA | 270 / 272 | 340 / 347 | a plain oil amphora |
+| `pithos` | 1x2 | clay | 2E4 / 2EB | 318 / 2A0 | 341 / 348 | pithos: a big storage jar with rope-pattern bands and a stone lid |
+| `pots` | 1x1 | clay | 2E5 | 319 | 342 | cooking pots: a sooty chytra, a jug and a stack of bowls |
+| `mortar` | 1x1 | clay | 251 | 320 | 34A | a stone mortar of barley with its pestle |
+| `hearth` | 2x2 | clay | 238 239 / 242 243 | 304 305 / 312 313 | 325 326 / 335 336 | kitchen hearth: Hestia's fire in a stone curb, a bronze cauldron on its tripod |
+| `soot` | 2x2 | clay | 223 224 / 22C 22D | 223 224 / 2F5 2F6 | 223 224 / 22C 22D | smoke-blackened plaster above the hearth |
+| `myrtle` | 1x2 | nature | 252 / 256 | 31A / 31F | 343 / 349 | potted myrtle, Aphrodite's shrub, in flower |
+| `kalathos` | 1x1 | nature | 2E6 | 31B | 344 | kalathos: the wool basket, heaped with carded fleece |
+| `fish_basket` | 1x1 | nature | 2E7 | 31C | 345 | a wicker basket of the morning's catch |
+| `knucklebones` | 1x1 | nature | 2E8 | 31D | 2B6 | astragaloi: five knucklebones on a leather gaming cloth |
 | `mat` | 2x1 | nature | 254 255 | 2A9 2AA | 28B 28C | woven reed mat at the door; both cells are south-arrow warps |
-| `column` | 1x3 | bronze | 2D7 / 2D8 / 2D9 | 311 / 312 / 313 | 33B / 33C / 33D | a Doric post of whitewashed stone, holding up the beam |
+| `column` | 1x3 | bronze | 2EC / 2ED / 2EE | 322 / 323 / 324 | 34B / 34C / 34D | a Doric post of whitewashed stone, holding up the beam |
 
 <!-- oikia_build: end generated -->

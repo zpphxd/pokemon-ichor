@@ -13,6 +13,12 @@
 mapscripts AktiTown_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setflag(FLAG_ICHOR_VISITED_AKTI)
+        // Kapra the goat is loose until the player sends her home.
+        if (flag(FLAG_ICHOR_AKTI_GOAT_HOME)) {
+            setflag(FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT)
+        }
         if (flag(FLAG_ICHOR_ARRIVED_AKTI)) {
             setvar(VAR_TEMP_1, 1)
         }
@@ -412,17 +418,31 @@ script AktiTown_EventScript_FishersHouseSign {
     msgbox(format("GLAUKOS. Gone fishing.\n(Not really. Knock.)"), MSGBOX_SIGN)
 }
 
-// Not in SCRIPT.md: a shut house and the goats in the pen need a line each.
-script AktiTown_EventScript_ShutHouse {
-    msgbox(format("The shutters are closed. Everyone's down at the harbor."), MSGBOX_SIGN)
-}
-
+// The goats in Aigon's pen.
 script AktiTown_EventScript_Goat {
     lock
     faceplayer
     playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
     msgbox(format("Mehhh! It's chewing a clothes peg."))
     waitmoncry
+    release
+}
+
+// Kapra, Aigon's escape artist, eating the Fisher's washing. Talking to her sends
+// her home to the pen (Aigon then gives her old bell in his farmhouse).
+script AktiTown_EventScript_LooseGoat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    msgbox(format("Mehhh! It has a wet sock in its mouth.\p"
+                  "It looks at you. It looks at the goat pen.\p"
+                  "It trots off home, sock and all."))
+    waitmoncry
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_AKTI_KAPRA)
+    setflag(FLAG_ICHOR_AKTI_GOAT_HOME)
+    fadescreen(FADE_FROM_BLACK)
     release
 }
 
@@ -443,7 +463,7 @@ script AktiTown_EventScript_GrottoRubble {
 
 script AktiTown_EventScript_IsletFisher {
     msgbox(format("That white shrine out on the islet is Poseidon's.\p"
-                  "No one's set foot on it since the storm. Row for it and the current "
-                  "turns you right round.\p"
+                  "No one's set foot on it since the storm.\p"
+                  "Row for it, and the current turns you right round.\p"
                   "The gulls get all his offerings now."), MSGBOX_NPC)
 }

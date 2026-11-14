@@ -9455,6 +9455,28 @@
       "border_filepath": "data/layouts/ElaiaVillage_Akademia/border.bin",
       "blockdata_filepath": "data/layouts/ElaiaVillage_Akademia/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AKTI_TOWN_DIVERS_HOUSE",
+      "name": "AktiTown_DiversHouse_Layout",
+      "width": 9,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/AktiTown_DiversHouse/border.bin",
+      "blockdata_filepath": "data/layouts/AktiTown_DiversHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AKTI_TOWN_GOATHERDS_HOUSE",
+      "name": "AktiTown_GoatherdsHouse_Layout",
+      "width": 11,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/AktiTown_GoatherdsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/AktiTown_GoatherdsHouse/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

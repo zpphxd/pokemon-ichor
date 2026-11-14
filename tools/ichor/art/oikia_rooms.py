@@ -208,6 +208,95 @@ ROOMS = {
             ("bg", "model ship, right half", (7, 1), (7, 2, "north")),
         ],
     },
+    # ------------------------------------------------------------------
+    # Akti's sponge divers: Doris, Hydna's grandmother. A low cottage above the
+    # beach, its back wall stepping in where the rock behind it does: nets and
+    # sponge jars in the deep half, Hydna's water clock (she times her dives by
+    # it) and the bed in the shallow half.
+    "divers_house": {
+        "title": "The divers' house, Akti",
+        "map": "MAP_AKTI_TOWN_DIVERS_HOUSE",
+        "floor": "flags",
+        "wall": "blue",
+        "grid": [
+            "WWWWW####",
+            "WWWWWWWWW",
+            ".....WWWW",
+            ".........",
+            ".........",
+            ".........",
+            ".........",
+        ],
+        "rugs": [("blue", 2, 4, 3, 2)],
+        "stamps": [
+            ("nets", 0, 0),
+            ("window", 2, 0),
+            ("jar_shelf", 3, 0),
+            ("herbs", 5, 1),
+            ("klepsydra", 6, 1),
+            ("window", 7, 1),
+            ("pithos", 0, 2),
+            ("fish_basket", 1, 2),
+            ("fish_basket", 2, 2),
+            ("kline", 7, 3),
+            ("table_round", 3, 4),
+            ("stool", 4, 4),
+            ("knucklebones", 5, 5),
+            ("amphora", 0, 5),
+            ("lampstand", 8, 5),
+            ("mat", 3, 6),
+        ],
+        "spots": [
+            ("warp", "door to Akti Town (south-arrow mat)", [(3, 6), (4, 6)]),
+            ("npc", "Doris, Hydna's grandmother, by her sponge baskets", (2, 3), "south"),
+            ("bg", "Hydna's water clock: she times her dives by it", (6, 2), (6, 3, "north")),
+        ],
+    },
+    # ------------------------------------------------------------------
+    # Akti's goatherd: Aigon, whose goats keep the pen by the south gate. A
+    # farmhouse kitchen round the hearth, wool and cheese pots, the milk pithos,
+    # and a store cut off the corner; a kid wanders the floor.
+    "goatherds_house": {
+        "title": "The goatherd's farmhouse, Akti",
+        "map": "MAP_AKTI_TOWN_GOATHERDS_HOUSE",
+        "floor": "terracotta",
+        "wall": "red",
+        "grid": [
+            "WWWWWWWWWWW",
+            "WWWWWWWWWWW",
+            "...........",
+            "...........",
+            "...........",
+            "........###",
+            "........###",
+        ],
+        "rugs": [("red", 4, 3, 4, 3)],
+        "stamps": [
+            ("soot", 0, 0),
+            ("hearth", 0, 2),
+            ("herbs", 2, 0),
+            ("window", 3, 0),
+            ("jar_shelf", 4, 0),
+            ("window", 7, 0),
+            ("niche", 8, 0),
+            ("amphora_plain", 9, 1),
+            ("pithos", 10, 1),
+            ("kalathos", 2, 2),
+            ("mortar", 3, 2),
+            ("kline", 8, 3),
+            ("table", 5, 4),
+            ("klismos_r", 4, 4),
+            ("stool", 7, 4),
+            ("myrtle", 0, 4),
+            ("mat", 3, 6),
+        ],
+        "spots": [
+            ("warp", "door to Akti Town (south-arrow mat)", [(3, 6), (4, 6)]),
+            ("npc", "Aigon the goatherd, at his hearth", (2, 3), "west"),
+            ("npc", "a Skiddo kid, wandering (keep its range inside x 5-7, y 5-6)", (6, 5), "south"),
+            ("bg", "hearth: \"Goat's milk warms by the fire.\" (optional)", (1, 3), (1, 4, "north")),
+        ],
+    },
 }
 
 # ----------------------------------------------------------------------

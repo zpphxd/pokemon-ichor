@@ -1,0 +1,51 @@
+// The goatherd's farmhouse by Akti's south gate: Aigon, whose goats keep the pen
+// next door. Kapra, his escape artist, is loose in town eating laundry until the
+// player sends her home (AktiTown_EventScript_LooseGoat); then he gives her old
+// bell, a Soothe Bell. A kid goat wanders the kitchen.
+
+mapscripts AktiTown_GoatherdsHouse_MapScripts {}
+
+text AktiTown_GoatherdsHouse_Text_NameAigon { "AIGON" }
+
+script AktiTown_GoatherdsHouse_EventScript_Aigon {
+    lock
+    faceplayer
+    setspeaker(AktiTown_GoatherdsHouse_Text_NameAigon)
+    if (flag(FLAG_ICHOR_GOT_SOOTHE_BELL)) {
+        msgbox(format("Kapra's sulking in the pen. She liked that sock."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_AKTI_GOAT_HOME)) {
+        msgbox(format("Come in, come in. Mind the kid, she bites.\p"
+                      "If you see a goat that isn't in my pen, that's Kapra. She eats laundry.\p"
+                      "Shoo her home for me? She won't come for me. Only for strangers."))
+        release
+        end
+    }
+    msgbox(format("Kapra's home! Chewing a sock. Whose sock?\p"
+                  "Never mind. Here, take her old bell. It calms anything that wears it.\p"
+                  "Not Kapra, though. Nothing calms Kapra."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_SOOTHE_BELL)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_SOOTHE_BELL)
+    release
+}
+
+script AktiTown_GoatherdsHouse_EventScript_Kid {
+    lock
+    faceplayer
+    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    msgbox(format("Meh! It nibbles your sandal strap."))
+    waitmoncry
+    release
+}
+
+script AktiTown_GoatherdsHouse_EventScript_Hearth {
+    msgbox(format("A pot of goat's milk warms by the fire."), MSGBOX_SIGN)
+}

@@ -95,10 +95,10 @@
 #define FLAG_ICHOR_ITEM_KRONION_ESCAPE_ROPE 0x49 // Ichor: item ball: Kronion Hill Escape Rope
 #define FLAG_ICHOR_GOT_ELAIA_RELIC_COPPER 0x4A // Ichor: found the Relic Copper in Elaia's well
 #define FLAG_ICHOR_ITEM_ELAIA_POTION 0x4B // Ichor: item ball: Potion by Elaia's olive press
-#define FLAG_UNUSED_0x04C    0x4C // Unused Flag
-#define FLAG_UNUSED_0x04D    0x4D // Unused Flag
-#define FLAG_UNUSED_0x04E    0x4E // Unused Flag
-#define FLAG_UNUSED_0x04F    0x4F // Unused Flag
+#define FLAG_ICHOR_AKTI_GOAT_HOME 0x4C // Ichor: Akti: Kapra, Aigon's loose goat, was sent home
+#define FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT 0x4D // Ichor: Akti: object flag that hides Kapra, the loose goat
+#define FLAG_ICHOR_GOT_SOOTHE_BELL 0x4E // Ichor: Akti: Aigon gave his goat's old bell (Soothe Bell)
+#define FLAG_ICHOR_GOT_SHELL_BELL 0x4F // Ichor: Akti: Doris traded her shell bell for a Heart Scale
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
