@@ -131,6 +131,17 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
 - 2026-11-14: **Mega Evolutions reuse their base form's cry**, which frees about 1 MB. The user: "Give each Mega Evolution the same cry as its base form, which frees about 1 MB." It's an engine config change for the main session to make (the dex branch doesn't edit `include/`). In `include/config/pokemon.h`:
   - `#define P_MODIFIED_MEGA_CRIES FALSE` drops the separate Mega cry samples.
   - `#define P_MODIFIED_MEGA_CRY_MODE CRY_MODE_NORMAL` plays the base cry unchanged, which is what the user asked for. The default, `CRY_MODE_HIGH_PITCH`, plays it pitched up instead, also at no cost.
+- 2026-11-14: **The world branches script against species stubs.** The main session asked for this. The world sessions write parties, encounters and gifts against stand-in constants until the dex is in the ROM.
+  - The stub headers are:
+    - `include/constants/ichor_species_stubs.h` (world-act1)
+    - `include/constants/ichor_species_stubs_act3.h` (world-act3)
+    - one from world-act2, likely, still to come
+  - Each header is included at the end of `include/constants/species.h`. Its defines sit inside `#ifndef ICHOR_AETHOS_DEX`, and each maps the dex name, uppercased, to a vanilla species: `SPECIES_KYNDER` → `SPECIES_CYNDAQUIL`, for example.
+  - **When the species constants land:**
+    1. Define `ICHOR_AETHOS_DEX`.
+    2. Delete the stub headers and their `#include` lines.
+    3. Name every real constant `SPECIES_` plus the dex name uppercased, so no script needs editing.
+  - Checked on 2026-11-14: all 44 names in act 1's stub match dex species. Act 3's stub doesn't exist yet. Check it, and act 2's, when they do.
 - 2026-11-14: **Checked against the whole-game level curve** (`design/BALANCE.md` on main).
   - **Fits:** everything through Arkadia. The starters evolve at 16 and then 34–36, and the other main finals at 30–36, inside the curve's Laurels 4–6 window (levels 30–43).
   - **Static encounters raised to fit:** the Fates to level 60, matching the Lord of Time they're freed after, and Ichorin to 70, with the other post-game legendaries.
