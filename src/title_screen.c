@@ -492,8 +492,11 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
                     sprite->sBgColor--;
             }
 
-            // Ichor: a warm lamp-light flash instead of a gray one.
-            backgroundColor = _RGB(sprite->sBgColor, sprite->sBgColor * 3 / 4, sprite->sBgColor / 2);
+            // Ichor: the flash ramps from the black gloss (32,24,24) up to
+            // terracotta clay (184,88,48), instead of from black up to white.
+            backgroundColor = _RGB(4 + sprite->sBgColor * 19 / 31,
+                                   3 + sprite->sBgColor * 8 / 31,
+                                   3 + sprite->sBgColor * 3 / 31);
 
             // Flash the background green for 4 frames of movement.
             // Otherwise use the updating color.
@@ -501,7 +504,7 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
              || sprite->x == DISPLAY_WIDTH / 2 + (4 * SHINE_SPEED)
              || sprite->x == DISPLAY_WIDTH / 2 + (5 * SHINE_SPEED)
              || sprite->x == DISPLAY_WIDTH / 2 + (6 * SHINE_SPEED))
-                gPlttBufferFaded[0] = RGB(30, 24, 8); // Ichor: ichor gold (was green)
+                gPlttBufferFaded[0] = RGB(31, 28, 18); // Ichor: white gold (was green)
             else
                 gPlttBufferFaded[0] = backgroundColor;
         }

@@ -22,9 +22,13 @@ pokemon_logo.bin (the identity tilemap) and logo_shine.png are kept as they
 are. The figures live in title_fates.py, the letters in title_lettering.py.
 See design/phase1/TITLE.md for the layers and effects.
 
-Usage: python3 tools/ichor/art/title_screen.py [--preview]
-  --preview  also writes build/title_preview/*.png, composited like the GBA
-             (blending, the BG1 wave and drift, sprites), for review at 3x.
+Usage: python3 tools/ichor/art/title_screen.py [--preview] [--capture | --capture-all]
+  --preview      also writes build/title_preview/*.png, composited like the GBA
+                 (BG1 blend and wave, sprites), for review at 3x.
+  --capture      boots the built ROM headlessly and saves the SHOTS frames to
+                 design/phase1/img/title_*.png (run make first, and
+                 tools/ichor/smoke_test.sh once to build the runner).
+  --capture-all  saves every 2nd title frame to build/title_capture/.
 """
 import math
 import sys
@@ -116,6 +120,12 @@ FIGURES = [
     ("lachesis", FATES.LACHESIS, 96),
     ("atropos", FATES.ATROPOS, 158),
 ]
+# Name labels painted in the field above them: (text, left x, top y).
+LABELS = [
+    ("ΚΛΩΘΩ", 14, 68),
+    ("ΛΑΧΕΣΙΣ", 92, 68),
+    ("ΑΤΡΟΠΟΣ", 168, 68),
+]
 
 # Banner sprite pair (title_screen.c VERSION_BANNER_*): left half centered on
 # BANNER_LEFT_X, 64 px apart; BANNER_Y_GOAL is the sprite center at rest.
@@ -141,8 +151,9 @@ BAYER = np.array([[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]])
 def clay_level(x):
     """Clay level across the panel (1 shade, 2 clay, 3 light): the belly's
     curve lit from the top left. Flat fields, with stippled ramps between."""
-    keys = [(8, 1.0), (14, 1.0), (30, 2.0), (44, 2.0), (60, 3.0), (84, 3.0),
-            (108, 2.0), (184, 2.0), (208, 1.0), (231, 1.0)]
+    # Ramps fall in open field, never right behind a figure's contour.
+    keys = [(8, 1.0), (10, 1.0), (24, 2.0), (52, 2.0), (64, 3.0), (82, 3.0),
+            (98, 2.0), (198, 2.0), (214, 1.0), (231, 1.0)]
     for (xa, a), (xb, b) in zip(keys, keys[1:]):
         if xa <= x <= xb:
             return a + (b - a) * (x - xa) / (xb - xa)
@@ -206,6 +217,7 @@ FIG_KEY = {"#": P_INK, "w": P_WHITE, "r": P_RED}
 
 
 def paint_figure(img, grid, x0):
+    check_glyph(grid, "figure")
     h = len(grid)
     y0 = GROUND_Y - h + 1
     for dy, row in enumerate(grid):
@@ -252,6 +264,11 @@ def build_painting():
     rod1 = grid_point(*fig["lachesis"], (lx1, ly))
     jaws = grid_point(*fig["atropos"], FATES.ATROPOS_JAWS)
     paint_thread(img, [hand, rod0, rod1, jaws])
+    for text, x, y in LABELS:
+        for gy, row in enumerate(set_word(LET.GREEK, text, 1, 5)):
+            for gx, ch in enumerate(row):
+                if ch == "#":
+                    img[y + gy, x + gx] = P_INK
     return img
 
 
@@ -263,22 +280,21 @@ def thread_y(x):
 
 
 def build_thread():
-    """A bright 1 px core with a darker underside. Where the curve crosses a
-    row boundary the neighbouring row takes the body color, so the line reads
-    smooth instead of stepped. Every 16 px a short run uses color 15, which
-    title_screen.c pulses, so glints travel along the thread as it drifts."""
+    """A 2 px cord: a bright core over a gold body, with a dark gold lip where
+    the curve steps so the line reads smooth instead of stair-stepped. A few
+    core pixels use color 15, which title_screen.c pulses, so glints travel
+    along the thread as it drifts."""
     img = np.zeros((256, 256), int)
     for x in range(256):
         y = thread_y(x)
         yc = int(round(y))
         img[yc, x] = 15 if (x % 32) in (5, 6, 21) else 3
+        img[yc + 1, x] = 2
         frac = y - yc
         if abs(frac) > 0.3:
-            ny = yc + (1 if frac > 0 else -1)
+            ny = yc - 1 if frac < 0 else yc + 2
             if img[ny, x] == 0:
-                img[ny, x] = 2
-        if img[yc + 1, x] == 0:
-            img[yc + 1, x] = 1
+                img[ny, x] = 1
     return img
 
 
@@ -538,8 +554,66 @@ def preview(painting, thread, logo):
     Image.fromarray(rgb).save(PREVIEW / "painting_1x.png")
 
 
+# --------------------------------------------------------------------------
+# In-game capture: boot the built ROM headlessly and screenshot the title
+# --------------------------------------------------------------------------
+CAPTURE = ROOT / "build/title_capture"
+RUNNER = ROOT / "build/tools/ichor-mgba-headless"  # built by tools/ichor/smoke_test.sh
+# Review shots for design/phase1/img, by frame (START at 500 skips the intro;
+# timing is stable for a given ROM, re-pick if the intro or title changes).
+SHOTS = {
+    "title_1_glint": 568,   # the first shine crosses ICHOR on black gloss
+    "title_2_flash": 640,   # the double shine; the backdrop warms to clay
+    "title_3_rise": 862,    # POKEMON slides in as ICHOR rises
+    "title_4_final": 1000,  # the amphora: PRESS START blinking
+    "title_5_drift": 1500,  # later: the golden thread has drifted on
+}
+CAPTURE_LUA = """-- Written by tools/ichor/art/title_screen.py --capture
+local K = C.GBA_KEY
+local OAM_BUF = 0x03006700  -- gMain.oamBuffer (pokeemerald.map: gMain + 0x38)
+local FRAMES = {%s}
+local want, held, releaseAt, last = {}, nil, 0, 0
+for _, f in ipairs(FRAMES) do want[f] = true; if f > last then last = f end end
+callbacks:add("frame", function()
+  local f = emu:currentFrame()
+  if held and f >= releaseAt then emu:clearKey(held); held = nil end
+  if f == 500 then emu:addKey(K.START); held = K.START; releaseAt = f + 6 end
+  -- Hide the dev-only Quickstart HUD (top right) so shots show the art alone.
+  for i = 0, 127 do
+    local a0 = emu:read16(OAM_BUF + i * 8)
+    local a1 = emu:read16(OAM_BUF + i * 8 + 2)
+    local y, x = a0 & 0xFF, a1 & 0x1FF
+    if x >= 168 and x < 240 and y < 24 then emu:write16(OAM_BUF + i * 8, (a0 & 0xFF00) | 160) end
+  end
+  if want[f] then emu:screenshot(string.format("%s/f%%04d.png", f)) end
+  if f == last + 1 then console:log("TITLE done") end
+end)
+"""
+
+
+def capture(frames, shots=None):
+    import shutil
+    import subprocess
+    assert RUNNER.exists(), "run tools/ichor/smoke_test.sh once to build the headless runner"
+    CAPTURE.mkdir(parents=True, exist_ok=True)
+    for old in CAPTURE.glob("f*.png"):
+        old.unlink()
+    lua = CAPTURE / "capture.lua"
+    lua.write_text(CAPTURE_LUA % (", ".join(map(str, frames)), CAPTURE))
+    subprocess.run([str(RUNNER), "--script", str(lua), "--frames", str(max(frames) + 100),
+                    "--until", "TITLE done", str(ROOT / "pokeemerald.gba")],
+                   check=True, capture_output=True, cwd=ROOT)
+    for name, f in (shots or {}).items():
+        shutil.copy(CAPTURE / f"f{f:04d}.png", ROOT / "design/phase1/img" / f"{name}.png")
+    print(f"captured {len(frames)} frames in {CAPTURE}")
+
+
 if __name__ == "__main__":
     layers = write_all()
     if "--preview" in sys.argv:
         preview(*layers)
         print(f"preview in {PREVIEW}")
+    if "--capture-all" in sys.argv:   # every 2nd frame of the title, for picking SHOTS
+        capture(list(range(520, 1100, 2)) + list(range(1100, 1700, 20)))
+    elif "--capture" in sys.argv:     # the review shots, into design/phase1/img
+        capture(sorted(SHOTS.values()), SHOTS)
