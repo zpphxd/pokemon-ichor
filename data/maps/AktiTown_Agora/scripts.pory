@@ -1,1 +1,54 @@
+// The Akti Agora: Demeas's stall (the Mart re-skin) and two customers.
+
 mapscripts AktiTown_Agora_MapScripts {}
+
+text AktiTown_Agora_Text_NameDemeas { "DEMEAS" }
+
+script AktiTown_Agora_EventScript_Demeas {
+    lock
+    faceplayer
+    setspeaker(AktiTown_Agora_Text_NameDemeas)
+    msgbox(format("Welcome to the Agora! Buying? Selling? Haggling?"))
+    // SCRIPT.md leaves this box unlabelled: the stall's own notice, read as you browse.
+    setspeaker(SP_NAME_NONE)
+    message(format("Please don't haggle."))
+    waitmessage
+    if (flag(FLAG_BADGE01_GET)) {
+        pokemart(AktiTown_Agora_Mart_AfterLaurel)
+    } else {
+        pokemart(AktiTown_Agora_Mart_BeforeLaurel)
+    }
+    setspeaker(AktiTown_Agora_Text_NameDemeas)
+    msgbox(format("Come again! Bring Lakonians, they pay double. In iron."))
+    release
+}
+
+mart AktiTown_Agora_Mart_BeforeLaurel {
+    ITEM_POKE_BALL
+    ITEM_POTION
+    ITEM_ANTIDOTE
+    ITEM_PARALYZE_HEAL
+    ITEM_AWAKENING
+}
+
+mart AktiTown_Agora_Mart_AfterLaurel {
+    ITEM_POKE_BALL
+    ITEM_POTION
+    ITEM_SUPER_POTION
+    ITEM_ANTIDOTE
+    ITEM_PARALYZE_HEAL
+    ITEM_AWAKENING
+    ITEM_REPEL
+    ITEM_ESCAPE_ROPE
+}
+
+script AktiTown_Agora_EventScript_CustomerMan {
+    msgbox(format("Prices go up when the Lakonians are in town.\p"
+                  "They pay in iron bars. Iron bars! What am I supposed to do, build a gate?"),
+           MSGBOX_NPC)
+}
+
+script AktiTown_Agora_EventScript_CustomerGirl {
+    msgbox(format("What are Poké Balls made of? Nobody knows. My dad says “trade secrets.”\p"
+                  "I think he doesn't know either."), MSGBOX_NPC)
+}
