@@ -489,6 +489,9 @@ const u16 gTrainerPalette_Shepherd[] = INCGFX_U16("graphics/trainers/front_pics/
 const u32 gTrainerFrontPic_Harvester[] = INCGFX_U32("graphics/trainers/front_pics/harvester.png", ".4bpp.smol");
 const u16 gTrainerPalette_Harvester[] = INCGFX_U16("graphics/trainers/front_pics/harvester.png", ".gbapal");
 
+const u32 gTrainerFrontPic_Goatherd[] = INCGFX_U32("graphics/trainers/front_pics/goatherd.png", ".4bpp.smol");
+const u16 gTrainerPalette_Goatherd[] = INCGFX_U16("graphics/trainers/front_pics/goatherd.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1269,5 +1272,9 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_HARVESTER] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Harvester, gTrainerPalette_Harvester),
+    },
+    [TRAINER_PIC_GOATHERD] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Goatherd, gTrainerPalette_Goatherd),
     },
 };

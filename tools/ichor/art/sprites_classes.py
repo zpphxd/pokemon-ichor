@@ -329,9 +329,127 @@ def harvester():
     return f, pal
 
 
+# --------------------------------------------------------------------------
+# Goatherd (male): rough goat-hair cloak, syrinx at his lips, a goat-bell.
+# Komatas, the goatherd the bees fed in Theocritus, so one bee follows him.
+# --------------------------------------------------------------------------
+
+def goatherd():
+    pal = Palette([
+        ("ink", INK),
+        *SKIN_SUN,
+        ("hair", (64, 40, 32)),
+        ("gh_l", (152, 128, 104)), ("gh_m", (104, 88, 72)), ("gh_d", (64, 56, 48)),
+        ("oat_l", (232, 216, 176)), ("oat_m", (208, 184, 136)), ("oat_d", (160, 128, 88)),
+        ("gold_l", (240, 192, 64)), ("gold_d", (184, 120, 40)),
+        ("brown", (96, 56, 40)),
+        ("cord", (184, 88, 48)),
+    ])
+    skin = skin_mat("brown")
+    goat = Mat(["gh_d", "gh_m", "gh_l"], outline="ink", wx=0.75, wy=0.35, cuts=[0.4, 0.75])
+    tunic = Mat(["oat_d", "oat_m", "oat_l"], outline="brown", wx=0.85, wy=0.25, cuts=[0.3, 0.72])
+    lea = Mat(["brown"])
+    f = Fig(pal)
+
+    # shaggy goat-hair cloak down his back, ragged hem
+    back = f.poly([(33, 22), (42, 22), (47, 27), (49, 36), (50, 46), (49, 50), (47, 48), (45, 51), (43, 48),
+                   (41, 51), (39, 47), (37, 49)], goat, group=60)
+    # legs planted wide, wrapped in leather thongs
+    f.poly([(26, 44), (31, 44), (30, 50), (28, 57), (24, 57), (25, 50)], skin, group=100)
+    f.poly([(35, 44), (39, 44), (41, 50), (43, 57), (39, 57), (37, 50)], skin, group=101)
+    f.poly([(22, 57), (29, 57), (29, 61), (21, 61)], lea)
+    f.poly([(38, 57), (44, 57), (46, 61), (38, 61)], lea)
+    f.rect(29, 20, 35, 25, skin, group=400)
+    # coarse undyed tunic, rope belt, ragged hem
+    body = f.poly([(26, 24), (39, 24), (41, 33), (43, 46), (36, 47), (24, 46), (25, 33)], tunic)
+    f.rect(23, 34, 44, 35, lea, clip=body, noline=True)
+    f.shade_poly([(31, 37), (32, 37), (32, 46), (31, 46)], 0.45)
+    f.shade_poly([(37, 37), (38, 37), (40, 46), (39, 46)], 0.45)
+    f.shade_poly([(25, 36), (28, 36), (27, 46), (24, 46)], -0.3)
+    # the cloak thrown over his far shoulder
+    front = f.poly([(35, 23), (41, 22), (45, 26), (45, 32), (42, 37), (40, 34), (38, 35), (37, 30)], goat, group=70)
+    # near arm raised, holding the pipes to his lips
+    f.thick_line([(27, 25), (21, 31)], 5, skin, group=200)
+    f.thick_line([(21, 31), (25, 25)], 4, skin, group=201)
+
+    # goat-hair: long strands
+    f.textures = [((back, front), ["gh_d", "gh_m", "gh_l"], stagger(33, 23, 50, 50, 3, 4), [(0, 0), (0, 1), (1, 2)])]
+    # ragged tunic hem and leg thongs
+    f.erase_px([(27, 46), (33, 47), (40, 46)])
+    f.pxs([(27, 45), (33, 46), (40, 45)], "brown")
+    for y in (49, 52, 55):
+        f.line([(25, y), (30, y + 1)], "brown")
+        f.line([(38, y), (42, y + 1)], "brown")
+    # bronze goat-bell hanging from his rope belt
+    f.patch(29, 35, [
+        "...k...",
+        "..kkk..",
+        ".kGGgk.",
+        ".kGggk.",
+        "kGGggdk",
+        "kGgggdk",
+        "kkkkkkk",
+        "...g...",
+    ], {"k": "ink", "G": "gold_l", "g": "gold_d", "d": "brown"})
+    # one bee, for the goatherd the bees fed
+    f.patch(47, 9, [
+        "..WW.",
+        ".kGkG",
+        "..kk.",
+    ], {"k": "ink", "G": "gold_l", "W": "oat_l"})
+    # head: wild dark curls going gray, a full beard
+    f.patch(24, 3, [
+        "....kk.kkk.kk......",
+        "..kkhhkhhHkkhhk....",
+        ".khHHhkHgHHkhHHk...",
+        ".kHhhHHhhHhhHhHHk..",
+        "khHHHhHHHHhHHHhHk..",
+        "kHgHHHhhHHHhhHHHHk.",
+        "khHHHhHHHhHHHhHHHk.",
+        "kHHhLLLLLLHhhHHhHHk",
+        "khHLLLLLLLLMHHhHHHk",
+        ".kHLHHHLLHHHMbhHHHk",
+        ".kLLWkLLLkWMMDbHhHk",
+        ".bLLWkLLLkWMDDbhHk.",
+        "bLLLLLLLLLMMDbHhHk.",
+        "bLLLDLLLLMMMbhHHk..",
+        ".bhHDHHhHHhHHhHHk..",
+        ".khHhHHhHHHhHHHk...",
+        ".kHHhHhHHhHHhHHk...",
+        "..khHHHhHHhHHk.....",
+        "...kHhHHhHHHk......",
+        "....kkHhHHkk.......",
+        "......kkkk.........",
+    ], {"k": "ink", "H": "hair", "h": "brown", "g": "gh_l", "b": "brown", "L": "skin_l", "M": "skin_m",
+        "D": "skin_d", "W": "oat_l"})
+    # the syrinx: reeds bound with a red cord, longest on the left
+    f.patch(17, 18, [
+        "kkkkkkkkkkkkk",
+        "kWkWkWkWkWkWk",
+        "kcccccccccccc",
+        "kWkWkWkWkWkWk",
+        "kWkWkWkWkWkk.",
+        "kWkWkWkWkk...",
+        "kWkWkWkk.....",
+        "kWkWkk.......",
+        "kmkk.........",
+        "kk...........",
+    ], {"k": "ink", "W": "oat_l", "m": "oat_m", "c": "cord"})
+    # fingers on the reeds
+    f.patch(23, 22, [
+        ".bbbb.",
+        "bLLLLb",
+        "bLbLMb",
+        "bLLMMb",
+        ".bbbb.",
+    ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
+    return f, pal
+
+
 CLASSES = {
     "shepherd": shepherd,
     "harvester": harvester,
+    "goatherd": goatherd,
 }
 
 

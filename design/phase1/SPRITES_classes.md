@@ -12,6 +12,7 @@ Sources live in `tools/ichor/art/sprites_classes.py`:
 |---|---|---|---|
 | `TRAINER_PIC_SHEPHERD` | `Pic: Shepherd` | Felt pilos cap, sheepskin mantle knotted at the chest over a blue tunic, crook; waving | `graphics/trainers/front_pics/shepherd.png` |
 | `TRAINER_PIC_HARVESTER` | `Pic: Harvester` | Sun-browned olive-picker: terracotta headscarf, linen apron over an olive-green dress, a wicker basket of black and green olives on her hip, an olive sprig held up | `graphics/trainers/front_pics/harvester.png` |
+| `TRAINER_PIC_GOATHERD` | `Pic: Goatherd` | Wild graying curls and beard, a shaggy goat-hair cloak over a coarse undyed tunic, a syrinx at his lips, a bronze goat-bell on his rope belt, leg thongs. One bee buzzes nearby: Komatas is the goatherd the bees fed (Theocritus) | `graphics/trainers/front_pics/goatherd.png` |
 
 The pics are front-only (no back pic). Trainer parties and class definitions are not changed here: to use a pic, set its `Pic:` line in `src/data/trainers.party`.
 
