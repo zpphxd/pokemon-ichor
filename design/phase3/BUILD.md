@@ -129,7 +129,7 @@ The sprites agent makes these, under these names, so everyone else can use them 
 
 Story flags this session has already claimed, for everyone to use: `FLAG_ICHOR_ACT2_BEGUN`, `_VISITED_ELEUTHERAI`, `_KRONIA_SEEN`, `_ARRIVED_THYRSA`, `_VISITED_THYRSA`, `_THREE_ACT_PLAY_DONE`, `_DIONYSIA_BEGUN`, `_DIONYSIA_DONE`, `_SAW_PROGRAM_HOOK`, `_KLEON_BATTLE_3_DONE` (all `FLAG_ICHOR_…`).
 
-Daily flags (this session claims them): `FLAG_DAILY_ICHOR_KRONIST_BREAD`, `_SKENE_MASK`, `_TREADING`, from 0x4C. **Hidden items** need vanilla flags, which arrive with the Hoenn cut's batch 2: until then, list each hidden item in your map's section of this file and don't place it.
+Daily flags (this session claims them): `FLAG_DAILY_ICHOR_KRONIST_BREAD`, `_SKENE_MASK`, `_TREADING`, from 0x4C. **Hidden items** need vanilla flags (0x1F4 or above). Act II's range is vanilla flags 0x300–0x37F, 110 of them free, from the Hoenn cut's batch 2 (commit aae327b35e on `claude/hoenn-cut-db6209`, not yet on main). Until it is on main, list each hidden item in your map's section of this file and don't place it; this session claims the flags (`claim.py --range 300-37F flag …`) and places them once the cut lands. Story state stays in the Ichor bank flags. Vars beyond the bank vars above need the director's OK. The cut removes every Hoenn and FRLG map: never use a Hoenn or FRLG `MAP_`, `LAYOUT_` or `HEAL_LOCATION_` name (warps, heal points, copied layouts), since after the cut they compile only as stubs.
 
 Batch 1 alone wants about 80 bank flags, and Act II about 430 before item balls; the 256 in 0x100–0x1FF won't hold the act. The director has the ask.
 
