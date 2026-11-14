@@ -464,3 +464,7 @@ const u16 gMetatileAttributes_PorytilesManaged_TempleHermes[] = INCBIN_U16("data
 // Ichor: aegina
 const u16 gMetatiles_PorytilesManaged_Aegina[] = INCBIN_U16("data/tilesets/secondary/aegina/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Aegina[] = INCBIN_U16("data/tilesets/secondary/aegina/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: skiron
+const u16 gMetatiles_PorytilesManaged_Skiron[] = INCBIN_U16("data/tilesets/secondary/skiron/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Skiron[] = INCBIN_U16("data/tilesets/secondary/skiron/porytiles_bin/metatile_attributes.bin");
