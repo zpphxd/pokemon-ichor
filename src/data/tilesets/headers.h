@@ -833,6 +833,19 @@ const struct Tileset gTileset_UnionRoom =
     .callback = NULL,
 };
 
+// Ichor: Aethos, the Greek primary. It keeps General's metatile ids, so Hoenn
+// layouts render against it. Managed by Porytiles (tools/ichor/art/).
+const struct Tileset gTileset_Aethos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PorytilesManaged_Aethos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Aethos,
+    .metatiles = gMetatiles_PorytilesManaged_Aethos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Aethos,
+    .callback = InitTilesetAnim_PorytilesManaged_Aethos,
+};
+
 #else
 
 // FRLG tilesets
@@ -1541,3 +1554,25 @@ const struct Tileset gTileset_HallOfFame =
 };
 
 #endif // IS_FRLG
+
+const struct Tileset gTileset_Kalliste =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kalliste,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kalliste,
+    .metatiles = gMetatiles_PorytilesManaged_Kalliste,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kalliste,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_TempleHestia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleHestia,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleHestia,
+    .metatiles = gMetatiles_PorytilesManaged_TempleHestia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHestia,
+    .callback = NULL,
+};

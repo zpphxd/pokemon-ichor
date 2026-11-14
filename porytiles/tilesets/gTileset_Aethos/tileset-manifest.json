@@ -1,0 +1,9 @@
+{
+  ".callback": "InitTilesetAnim_Aethos",
+  ".metatileAttributes": "gMetatileAttributes_Aethos",
+  ".metatiles": "gMetatiles_Aethos",
+  ".palettes": "gTilesetPalettes_Aethos",
+  ".tiles": "gTilesetTiles_Aethos",
+  "imported": true,
+  "version": 1
+}
