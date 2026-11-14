@@ -44,12 +44,18 @@ local steps = L.seq(
   { { wait = 110 },
     { shot = "03_after_arrival.png" },
     { expect_flag = FLAG_ICHOR_ARRIVED_AKTI, why = "the arrival scene did not set FLAG_ICHOR_ARRIVED_AKTI" },
-    { expect_flag = FLAG_ICHOR_VISITED_AKTI, why = "Akti's ON_TRANSITION did not set FLAG_ICHOR_VISITED_AKTI" } },
+    { expect_flag = FLAG_ICHOR_VISITED_AKTI, why = "Akti's ON_TRANSITION did not set FLAG_ICHOR_VISITED_AKTI" },
+    -- SCRIPT.md beat 6: only the Asclepeion's first heal makes Akti the respawn point
+    { check = function()
+        local g, n = L.last_heal()
+        return not (g == AKTI and n == MAP_AKTI),
+               "the arrival scene made Akti the respawn point; only the Asclepeion should"
+      end } },
 
   -- 2. the town, a screen at a time
   view("plaza", 12, 20), view("temple", 19, 19), view("harbor_street", 12, 14),
   view("quay", 8, 10), view("pier", 14, 6), view("beach", 23, 8),
-  view("asclepeion_garden", 4, 24), view("mole", 5, 5),
+  view("asclepeion_garden", 4, 24), view("mole", 5, 5), view("lower_town", 21, 24),
 
   -- 3. the Asclepeion: talk across the counter at (7,4)
   { { warp = { INDOOR, MAP_ASCLEPEION, -1, 7, 4 }, wait = 100 },

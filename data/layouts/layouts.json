@@ -9352,7 +9352,7 @@
       "width": 28,
       "height": 28,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Akti",
       "border_filepath": "data/layouts/AktiTown/border.bin",
       "blockdata_filepath": "data/layouts/AktiTown/map.bin",
       "layout_version": "emerald"

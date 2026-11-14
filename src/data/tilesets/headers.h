@@ -1619,3 +1619,17 @@ const struct Tileset gTileset_Civic =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Civic,
     .callback = NULL,
 };
+
+// Ichor: akti, Akti Town's harbor. A Porytiles-managed secondary built by
+// tools/ichor/art/akti_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, sand and animated sea, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Akti =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Akti,
+    .palettes = gTilesetPalettes_PorytilesManaged_Akti,
+    .metatiles = gMetatiles_PorytilesManaged_Akti,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Akti,
+    .callback = NULL,
+};
