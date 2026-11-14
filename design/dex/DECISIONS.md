@@ -59,6 +59,7 @@ Waiting on the user:
 |---|---|---|
 | 2026-11-14 | The 150 entries are approved. Sprites start. | The user: "Approve, start sprites" |
 | 2026-11-14 | Every sprite must be as detailed and well designed as an official Pokémon's: hand-finished battle sprites, not just code-drawn ones. | The user: "make sure they are as detailed and designed well as any normal pokemon. spend time" |
+| 2026-11-14 | The user likes the starters' look. Final evolutions must feel grand and powerful: large in the frame, commanding poses, richer detail and effects. See "Evolutions must feel grand" in `design/dex/SPRITES.md`. | The user: "i like them. we just want to make sure these look amazing. and evolutions are truly grand and powerful etc" |
 
 ## Next, after the sprites: the Astral type
 

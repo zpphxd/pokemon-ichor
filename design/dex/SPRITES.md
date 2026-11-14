@@ -60,6 +60,19 @@ Put the review card next to official sprites of a similar creature (`graphics/po
   - Draw every color you declare.
   - The shiny follows the entry's `shiny` line and changes colors only.
 
+## Evolutions must feel grand
+
+The user's words: "we just want to make sure these look amazing. and evolutions are truly grand and powerful etc".
+
+- **Final stages are the payoff.**
+  - Use the full size class the brief gives: a large final fills about 56–64 px of the frame.
+  - Strike a commanding pose: rearing, wings spread, roaring, weight thrown forward, or towering.
+  - Scale up the signature feature so it dominates the silhouette.
+  - Render more than the earlier stages: extra highlight tones, metal or gem glints, and effects such as flame, lightning, spray or aura where the type allows.
+  - The back view conveys bulk and power, not just a shoulder.
+- **Middle stages show the growth.** Each feature from stage one gets bigger, sharper and more elaborate, so the line reads as one creature maturing toward that final form.
+- **Compare finals at 3x** with blaziken, sceptile, swampert, salamence, metagross, garchomp, gyarados and staraptor. Ours should hold the frame the way they do.
+
 ## Each view
 
 - **Front** (`front`, phases 0 and 1).
