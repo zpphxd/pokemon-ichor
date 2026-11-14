@@ -8,6 +8,7 @@
 The notes live in songs.py as plain text; see the notation notes there.
 Output is deterministic: the same data always gives byte-identical .mid files.
 """
+import math
 import os
 import re
 import struct
@@ -106,12 +107,23 @@ class Track:
 
 
 class Song:
+    """loop_from=None makes a one-shot (a fanfare, the title, the intro); `target` is then
+    its total length in seconds rather than the loop's. song_id is the songs.h constant
+    whose gSongTable slot plays this song, when that differs from the name (a vanilla
+    slot repointed at an Ichor song). fanfare=True checks the song against its
+    duration in src/sound.c's sFanfares. ref is (vanilla song, its RMS in dBFS):
+    what this replaces and the level to match, measured before the slot was repointed."""
     def __init__(self, name, title, meter, grouping, tempo, voicegroup, volume, reverb, priority,
-                 sections, loop_from, modes, tracks, target, chords):
+                 sections, loop_from, modes, tracks, target, chords, song_id=None, fanfare=False, ref=None):
         assert tempo % 2 == 0, 'm4a stores tempo/2, so use an even BPM'
         self.__dict__.update(locals())
         del self.__dict__['self']
+        self.song_id = song_id or name.upper()
         self.bar_ticks = meter[0] * (TPQ * 4 // meter[1])
+
+    def frames(self, ticks):
+        """m4a advances tempo/150 ticks per frame."""
+        return ticks * 150 / self.tempo
 
     def section_starts(self):
         starts, t = {}, 0
@@ -173,15 +185,15 @@ def meta(kind, payload):
 def to_midi(song):
     built = song.build()
     starts, end = song.section_starts()
-    loop = starts[song.loop_from]
     num, den = song.meter
     cond = [(0, 0, meta(0x03, song.title.encode())),
             (0, 1, meta(0x58, bytes([num, den.bit_length() - 1, 24, 8]))),
             (0, 2, meta(0x51, struct.pack('>I', 60000000 // song.tempo)[1:]))]
     for sec, _ in song.sections:  # long marker names are ignored by mid2agb
         cond.append((starts[sec], 3, meta(0x06, f'Section {sec}'.encode())))
-    cond.append((loop, 4, meta(0x06, b'[')))
-    cond.append((end, 4, meta(0x06, b']')))
+    if song.loop_from:
+        cond.append((starts[song.loop_from], 4, meta(0x06, b'[')))
+        cond.append((end, 4, meta(0x06, b']')))
     chunks = [track_chunk(cond)]
     chan = 0
     for tr in song.tracks:
@@ -213,11 +225,27 @@ def voicegroup_entries(name, base=0):
     return {off + i: l for i, l in enumerate(lines[1:]) if not l.startswith('voice_group')}
 
 
+def song_slots():
+    """{songs.h constant: label its gSongTable slot plays}."""
+    ids = {}
+    for line in open(os.path.join(ROOT, 'include', 'constants', 'songs.h')):
+        m = re.match(r'#define\s+(\w+)\s+(\d+)\b', line)
+        if m:
+            ids[m.group(1)] = int(m.group(2))
+    labels = re.findall(r'^\s*song\s+(\w+),', open(os.path.join(ROOT, 'sound', 'song_table.inc')).read(), re.M)
+    return {k: labels[v] for k, v in ids.items() if v < len(labels)}
+
+
+def fanfare_durations():
+    src = open(os.path.join(ROOT, 'src', 'sound.c')).read()
+    return {m.group(1): int(m.group(2)) for m in re.finditer(r'\{\s*(MUS_\w+),\s*(\d+)\s*\}', src)}
+
+
 def check(song):
     errs, warns = [], []
     built = song.build()
     starts, end = song.section_starts()
-    loop = starts[song.loop_from]
+    loop = starts[song.loop_from] if song.loop_from else None
     vg = voicegroup_entries(song.voicegroup)
     kit_entries = None
     if 0 in vg:
@@ -237,7 +265,7 @@ def check(song):
             errs.append(f'{tr.name}: no notes (mid2agb would drop the track)')
         for start, dur, key, vel, sec in evs:
             at = f'{tr.name} {sec} bar {(start - starts[sec]) // song.bar_ticks + 1}'
-            if start < loop < start + dur:
+            if loop is not None and start < loop < start + dur:
                 errs.append(f'{at}: note crosses the loop start')
             if start + dur > end:
                 errs.append(f'{at}: note hangs past the loop end')
@@ -265,10 +293,11 @@ def check(song):
             if b[0] < a[1] and a[2] != b[2]:
                 errs.append(f'{kind}: {a[2]} and {b[2]} overlap at tick {b[0]}')
                 break
-    # Loop seam: something sounds in the last and first loop bars.
-    for edge, (lo, hi) in (('last', (end - song.bar_ticks, end)), ('first', (loop, loop + song.bar_ticks))):
+    # Loop seam: something sounds in the last and first loop bars (or the song's, for a one-shot).
+    first = loop if loop is not None else 0
+    for edge, (lo, hi) in (('last', (end - song.bar_ticks, end)), ('first', (first, first + song.bar_ticks))):
         if not any(lo <= s < hi for evs in built.values() for s, *_ in evs):
-            errs.append(f'nothing plays in the {edge} bar of the loop')
+            errs.append(f'nothing plays in the {edge} bar of the {"loop" if loop is not None else "song"}')
     # DirectSound polyphony (5 mixer channels), counting gated notes only.
     ds = [(s, d) for tr, evs in built.items() if not any(
         k in vg.get(tr.program, '') for k in ('square', 'programmable_wave', 'noise')) for s, d, *_ in evs]
@@ -279,15 +308,28 @@ def check(song):
         peak = max(peak, cur)
     if peak > 6:
         warns.append(f'up to {peak} DirectSound notes at once (mixer has 5)')
-    secs = song.seconds(end - loop)
+    secs = song.seconds(end - first)
     if not song.target[0] <= secs <= song.target[1]:
-        errs.append(f'loop is {secs:.1f}s, target {song.target}')
+        errs.append(f'{"loop" if loop is not None else "song"} is {secs:.1f}s, target {song.target}')
     # m4a advances tempo/150 ticks a frame. If the loop isn't a whole number of frames,
     # each pass starts at a different sub-frame phase, so passes drift (onsets and
     # DirectSound channel steals land differently). Pick a tempo that divides evenly.
-    frames = (end - loop) * 150 / song.tempo
-    if frames != int(frames):
+    frames = song.frames(end - first)
+    if loop is not None and frames != int(frames):
         warns.append(f'loop is {frames:.2f} frames, not a whole number; passes will not repeat exactly')
+    # A fanfare pauses the BGM for its sFanfares duration (frames), then resumes it. Too
+    # short cuts the fanfare off; much longer leaves dead air before the BGM returns.
+    if song.fanfare:
+        dur = fanfare_durations().get(song.song_id)
+        if dur is None:
+            errs.append(f'{song.song_id} has no entry in sFanfares (src/sound.c)')
+        elif not frames <= dur <= frames + 30:
+            errs.append(f'sFanfares gives {song.song_id} {dur} frames; the song is {frames:.0f}, so use '
+                        f'{math.ceil(frames) + 12} or so')
+    # The song's gSongTable slot must actually play it.
+    slot = song_slots().get(song.song_id)
+    if slot != song.name:
+        errs.append(f'gSongTable slot {song.song_id} plays {slot}, not {song.name}')
     # midi.cfg must carry the voicegroup, volume, reverb and priority recorded in songs.py.
     cfg = {}
     for line in open(os.path.join(ROOT, 'sound', 'songs', 'midi', 'midi.cfg')):
@@ -307,11 +349,14 @@ def mid_path(song):
 
 def summary(song):
     starts, end = song.section_starts()
-    loop = starts[song.loop_from]
     form = ' '.join(f'{n}({b})' for n, b in song.sections)
     print(f'{song.name}: {song.meter[0]}/{song.meter[1]} {"+".join(map(str, song.grouping))} '
-          f'q={song.tempo} vg={song.voicegroup}  form {form}')
-    print(f'  intro {song.seconds(loop):.1f}s, loop {song.seconds(end - loop):.1f}s')
+          f'q={song.tempo} vg={song.voicegroup}  form {form}  slot {song.song_id}')
+    if song.loop_from:
+        loop = starts[song.loop_from]
+        print(f'  intro {song.seconds(loop):.1f}s, loop {song.seconds(end - loop):.1f}s')
+    else:
+        print(f'  one-shot {song.seconds(end):.2f}s ({song.frames(end):.1f} frames)')
     for tr, evs in song.build().items():
         keys = [k for _, _, k, *_ in evs]
         print(f'  {tr.name:10s} prog {tr.program:3d} vol {tr.volume:3d} pan {tr.pan:+3d} '
