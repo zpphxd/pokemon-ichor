@@ -421,6 +421,29 @@ enum
     OBJ_EVENT_GFX_ICHOR_ALETHEA,
     OBJ_EVENT_GFX_ICHOR_HIEROPHANT_IONE,
     OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT,
+    // The slice's townsfolk and trainer-class walkers (design/phase1/SPRITES_folk.md)
+    OBJ_EVENT_GFX_ICHOR_MOM,
+    OBJ_EVENT_GFX_ICHOR_PRIESTESS,
+    OBJ_EVENT_GFX_ICHOR_YOUTH_M,
+    OBJ_EVENT_GFX_ICHOR_YOUTH_F,
+    OBJ_EVENT_GFX_ICHOR_MAN,
+    OBJ_EVENT_GFX_ICHOR_WOMAN,
+    OBJ_EVENT_GFX_ICHOR_ELDER_M,
+    OBJ_EVENT_GFX_ICHOR_ELDER_F,
+    OBJ_EVENT_GFX_ICHOR_KID_M,
+    OBJ_EVENT_GFX_ICHOR_KID_F,
+    OBJ_EVENT_GFX_ICHOR_FISHER,
+    OBJ_EVENT_GFX_ICHOR_SAILOR,
+    OBJ_EVENT_GFX_ICHOR_DIVER,
+    OBJ_EVENT_GFX_ICHOR_HEALER,
+    OBJ_EVENT_GFX_ICHOR_MERCHANT,
+    OBJ_EVENT_GFX_ICHOR_SHEPHERD,
+    OBJ_EVENT_GFX_ICHOR_HARVESTER,
+    OBJ_EVENT_GFX_ICHOR_GOATHERD,
+    OBJ_EVENT_GFX_ICHOR_HOPLITE,
+    OBJ_EVENT_GFX_ICHOR_AUGUR,
+    OBJ_EVENT_GFX_ICHOR_ACOLYTE_M,
+    OBJ_EVENT_GFX_ICHOR_ACOLYTE_F,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
@@ -438,32 +461,6 @@ enum
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
 // More info about them in include/constants/vars.h
-// Ichor: the slice's townsfolk and trainer-class walkers. Each is an alias of a
-// vanilla placeholder until its Greek sheet is drawn; the folk sprite batch
-// replaces each alias with a real ID in the Ichor enum block above.
-#define OBJ_EVENT_GFX_ICHOR_MOM            OBJ_EVENT_GFX_MOM
-#define OBJ_EVENT_GFX_ICHOR_PRIESTESS      OBJ_EVENT_GFX_WOMAN_2
-#define OBJ_EVENT_GFX_ICHOR_YOUTH_M        OBJ_EVENT_GFX_YOUNGSTER
-#define OBJ_EVENT_GFX_ICHOR_YOUTH_F        OBJ_EVENT_GFX_LASS
-#define OBJ_EVENT_GFX_ICHOR_MAN            OBJ_EVENT_GFX_MAN_1
-#define OBJ_EVENT_GFX_ICHOR_WOMAN          OBJ_EVENT_GFX_WOMAN_1
-#define OBJ_EVENT_GFX_ICHOR_ELDER_M        OBJ_EVENT_GFX_OLD_MAN
-#define OBJ_EVENT_GFX_ICHOR_ELDER_F        OBJ_EVENT_GFX_OLD_WOMAN
-#define OBJ_EVENT_GFX_ICHOR_KID_M          OBJ_EVENT_GFX_LITTLE_BOY
-#define OBJ_EVENT_GFX_ICHOR_KID_F          OBJ_EVENT_GFX_LITTLE_GIRL
-#define OBJ_EVENT_GFX_ICHOR_FISHER         OBJ_EVENT_GFX_FISHERMAN
-#define OBJ_EVENT_GFX_ICHOR_SAILOR         OBJ_EVENT_GFX_SAILOR
-#define OBJ_EVENT_GFX_ICHOR_DIVER          OBJ_EVENT_GFX_WOMAN_3
-#define OBJ_EVENT_GFX_ICHOR_HEALER         OBJ_EVENT_GFX_NURSE
-#define OBJ_EVENT_GFX_ICHOR_MERCHANT       OBJ_EVENT_GFX_MART_EMPLOYEE
-#define OBJ_EVENT_GFX_ICHOR_SHEPHERD       OBJ_EVENT_GFX_CAMPER
-#define OBJ_EVENT_GFX_ICHOR_HARVESTER      OBJ_EVENT_GFX_PICNICKER
-#define OBJ_EVENT_GFX_ICHOR_GOATHERD       OBJ_EVENT_GFX_HIKER
-#define OBJ_EVENT_GFX_ICHOR_HOPLITE        OBJ_EVENT_GFX_BLACK_BELT
-#define OBJ_EVENT_GFX_ICHOR_AUGUR          OBJ_EVENT_GFX_EXPERT_M
-#define OBJ_EVENT_GFX_ICHOR_ACOLYTE_M      OBJ_EVENT_GFX_PSYCHIC_M
-#define OBJ_EVENT_GFX_ICHOR_ACOLYTE_F      OBJ_EVENT_GFX_LASS
-
 #define OBJ_EVENT_GFX_VARS   (NUM_OBJ_EVENT_GFX + 1)
 #define OBJ_EVENT_GFX_VAR_0  (OBJ_EVENT_GFX_VARS + 0x0)
 #define OBJ_EVENT_GFX_VAR_1  (OBJ_EVENT_GFX_VARS + 0x1)
@@ -607,7 +604,8 @@ enum
 
 // Ichor object events: palette tags 0x1134-0x114F are Ichor's.
 // Claim the next free one at the end of this block.
-#define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // Kleon, Daphne, Alethea, Ione, Titan grunt
+#define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // the cast, plus the Shepherd, Hoplite, Augur and Acolyte walkers
+#define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS
