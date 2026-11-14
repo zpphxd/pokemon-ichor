@@ -102,6 +102,10 @@ Reviews of the starters kept finding the same gaps. Check for each one before yo
   - Model the back: spine, shoulder blades, muscle.
   - Keep the head in a readable right-facing profile at a sensible size: no giraffe necks.
 - **Stamped detail.** Repeated identical leaves, feathers or scales look mechanical. Vary size and angle, overlap them with depth, and make the back layers darker.
+- **Boxy shapes.** Heads and bodies built from straight-edged polygons look like carved wooden toys, however well they're shaded.
+  - Build creatures from curves: a round skull, a muzzle that tapers along a curved top line, round chests, haunches and paws.
+  - No straight edge longer than 2–3 px on a face.
+  - The parts renderer's blobs, lenses, limbs and drops along bezier paths give organic forms. Nebrel is the example.
 - **Shapes that read as something else.** A cape of stacked ovals reads as wings. A symmetric frontal pose reads stiff. Use 3/4 view and asymmetric, weighted poses.
 - **Lazy frame 2.** A 1 px lift alone is too little. Move something with character too: a mane or fin flick, ears perking, a mouth opening, flames flickering, leaves swaying. `paint.shift(..., mask=...)` moves a shaped region.
 - **Weak follower views.** The `up` view must be a creature seen from behind, not a totem or a cocoon. The `down` view must read as the creature's face and body, not a helmet.
