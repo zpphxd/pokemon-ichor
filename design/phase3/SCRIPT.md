@@ -513,7 +513,7 @@ KRONIST: That's how it was, under Kronos. Every day. Not just one.
 
 KRONIST: It'll be that way again. Soon. Sit anywhere.
 ```
-After the first visit he hands out one Barley Cake a day (`FLAG_DAILY_ICHOR_KRONIA_BREAD`): "KRONIST: Bread! Take it. The golden age pays."
+After the first visit he hands out one Barley Cake a day (`FLAG_DAILY_ICHOR_KRONIST_BREAD`, shared by every Kronist: one loaf a day, wherever you take it): "KRONIST: Bread! Take it. The golden age pays."
 
 **Kleon at the tables.** A coord trigger at the long tables, once. Kleon sits on a bench with a loaf in each hand and his greaves under the table. A laurel of ivy and laurel leaves is tucked into his belt. Alethea sits opposite him, not eating.
 ```text
@@ -2434,7 +2434,7 @@ OLD WOMAN: …That's not a joke, child. That's a harvest.
 
 OLD WOMAN: Never mind. Never mind. Come back another day.
 ```
-[THE HARVEST ends the visit kindly. She stays on the bench and the visit can be tried again on the next day (`FLAG_DAILY_ICHOR_DEMETER_TRIED`), with the same test, per SYSTEMS.md. THE GOAT and THE FIG-SELLER both land: the reveal follows.]
+[THE HARVEST ends the visit kindly. She stays on the bench and the visit can be tried again once you have left the well-yard and come back (a temp flag, `FLAG_TEMP_1`, cleared on the map change), with the same test, per SYSTEMS.md's "no permanent failure". THE GOAT and THE FIG-SELLER both land: the reveal follows.]
 
 **The reveal** (SYSTEMS.md §10, word for word).
 
@@ -8455,7 +8455,7 @@ KRONIST: Free bread! Take it. Take two. Kronos fed everyone, once.
 
 KRONIST: And a reading, if you like. A true one. No charge.
 ```
-[Give `ITEM_BARLEY_CAKE` ×1, once a day (`FLAG_DAILY_ICHOR_KRONIST_BREAD_ASTYRA`).]
+[Give `ITEM_BARLEY_CAKE` ×1, once a day (`FLAG_DAILY_ICHOR_KRONIST_BREAD`, shared with the Kronia's).]
 ```text
 KRONIST: Where are you from? …Kalliste.
 
@@ -9912,7 +9912,7 @@ A cold spring under a fig tree. Your Pokémon drink and drink.
 |---|---|---|
 | Boatman at Schinias | the harbor | the Conch gate to Route 20 |
 | Pilgrim at the mound | the stele | lore |
-| Kallikrates, Kolymbas | the mound's path, the beach | trainers (Part 3) |
+| Kallikrates, Pelagon | the mound's path, the beach | trainers (Part 3) |
 
 **The mound's stele**
 ```text
@@ -11415,22 +11415,22 @@ OLD FISHER: Islands all the way to the sunrise.
 
 | Where | What | Role |
 |---|---|---|
-| Off Cape Kaphereus | SAILOR Nausithoos, on an anchored boat | trainer; the false beacon |
+| Off Cape Kaphereus | SAILOR Naubates, on an anchored boat | trainer; the false beacon |
 | Open water | DIVER Kalymnios, on a cork float | trainer |
 | The supply islet | GRUNTS Iaspis and Achates | trainers (Part 3) |
 | An islet off Skyros | a rock with a lone fig | a visible item |
 | The Lemnos channel | three islets | items; one dig spot |
 | South of Samothrake | SAILOR Eurylochos, bailing a fishing boat | trainer |
 
-**Nausithoos, before the battle** (see Part 3), then after:
+**Naubates, before the battle** (see Part 3), then after:
 ```text
-NAUSITHOOS: That fire on the cape? Don't steer by it. Never steer by it.
+NAUBATES: That fire on the cape? Don't steer by it. Never steer by it.
 
-NAUSITHOOS: An old king lit fires there once to drown a fleet. His son had died.
+NAUBATES: An old king lit fires there once to drown a fleet. His son had died.
 
-NAUSITHOOS: He wanted company.
+NAUBATES: He wanted company.
 
-NAUSITHOOS: Somebody keeps it lit still. Nobody knows who. Nobody goes to ask.
+NAUBATES: Somebody keeps it lit still. Nobody knows who. Nobody goes to ask.
 ```
 **The beacon,** checked from the water by the cape's rocks:
 ```text
@@ -12144,7 +12144,7 @@ Part 5 has its plan and play.
 
 **Layout.** About 38×34. Terraced hills of vines in the north and mastic trees in the south, with little white tears of resin on their bark. The harbor town between. Above the town on a hill, a big flat rock with a seat cut in it: **the bard's stone**, where the blind singer of the old stories is said to have taught. In the vineyard terraces, a wine-press and the house of the island's old wine family.
 
-**Rhythm.** The harbor; the town (two households); VINTNER Ampelos in the vineyard terraces, his sight line across the terrace stair (mandatory); the vines, with a forced band of grass between the rows (4 deep); the bard's stone (the thing to do, Part 5, "The bard's three stories"); the mastic groves (optional grass, a dig spot). **Ledges** drop from the terraces to the harbor.
+**Rhythm.** The harbor; the town (two households); VINTNER Maron in the vineyard terraces, his sight line across the terrace stair (mandatory); the vines, with a forced band of grass between the rows (4 deep); the bard's stone (the thing to do, Part 5, "The bard's three stories"); the mastic groves (optional grass, a dig spot). **Ledges** drop from the terraces to the harbor.
 
 **Identity:** the island of the bards. Everyone here can tell you a story, and most of them do.
 
@@ -12155,7 +12155,7 @@ Part 5 has its plan and play.
 
 | NPC | Where | Role |
 |---|---|---|
-| Ampelos | the terraces | trainer (Part 3) |
+| Maron | the terraces | trainer (Part 3) |
 | A mastic gatherer | the groves | lore and a gift |
 | A boy | the harbor | lore |
 
@@ -15893,15 +15893,15 @@ Level: 36
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 ```
 
-**16. DIVER Kolymbas.** Marathon's Schinias beach, in the shallows facing out to sea. Optional.
+**16. DIVER Pelagon.** Marathon's Schinias beach, in the shallows facing out to sea. Optional.
 ```text
-Before: KOLYMBAS: The invaders' ships stuck in these shallows. I swim them for fun. Battle!
-Defeat: KOLYMBAS: Sunk in the shallows, like them.
-After:  KOLYMBAS: North of here it's deep. Islands all the way, if you've a way on water.
+Before: PELAGON: The invaders' ships stuck in these shallows. I swim them for fun. Battle!
+Defeat: PELAGON: Sunk in the shallows, like them.
+After:  PELAGON: North of here it's deep. Islands all the way, if you've a way on water.
 ```
 ```
-=== TRAINER_ICHOR_KOLYMBAS ===
-Name: KOLYMBAS
+=== TRAINER_ICHOR_PELAGON ===
+Name: PELAGON
 Class: Diver
 Pic: Diver
 Gender: Male
@@ -16972,15 +16972,15 @@ Eighteen trainers across two sea routes and seven islands, all optional, all tun
 
 ### Route 20, the north Aegean
 
-**1. SAILOR Nausithoos.** On an anchored boat off Cape Kaphereus, facing the lane (sight 4). He is the first trainer on Route 20 and stands in plain view.
+**1. SAILOR Naubates.** On an anchored boat off Cape Kaphereus, facing the lane (sight 4). He is the first trainer on Route 20 and stands in plain view.
 ```text
-Before: NAUSITHOOS: Out this far on a dolphin? You're braver than my crew. Battle!
-Defeat: NAUSITHOOS: Sunk in sight of the cape. Typical.
+Before: NAUBATES: Out this far on a dolphin? You're braver than my crew. Battle!
+Defeat: NAUBATES: Sunk in sight of the cape. Typical.
 After:  [his lines about the false beacon, Part 2]
 ```
 ```
-=== TRAINER_ICHOR_NAUSITHOOS ===
-Name: NAUSITHOOS
+=== TRAINER_ICHOR_NAUBATES ===
+Name: NAUBATES
 Class: Sailor
 Pic: Sailor
 Gender: Male
@@ -17381,15 +17381,15 @@ Plouteras is the blind god of wealth. Sardion keeps one, and it has never made h
 
 ### Chios
 
-**17. VINTNER Ampelos.** On the vineyard terraces, his sight across the terrace stair (sight 4, mandatory on the way up to the bard's stone).
+**17. VINTNER Maron.** On the vineyard terraces, his sight across the terrace stair (sight 4, mandatory on the way up to the bard's stone).
 ```text
-Before: AMPELOS: Walk through the god's vines, battle the god's vintner. House rule.
-Defeat: AMPELOS: A rough vintage. I'll let it breathe.
-After:  AMPELOS: Up the hill an old man tells a story about a giant. Let him. It's good.
+Before: MARON: Walk through the god's vines, battle the god's vintner. House rule.
+Defeat: MARON: A rough vintage. I'll let it breathe.
+After:  MARON: Up the hill an old man tells a story about a giant. Let him. It's good.
 ```
 ```
-=== TRAINER_ICHOR_AMPELOS ===
-Name: AMPELOS
+=== TRAINER_ICHOR_MARON ===
+Name: MARON
 Class: Vintner
 Pic: Vintner
 Gender: Male
@@ -21076,7 +21076,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Epizelos | the mound's keeper, Marathon | the Athenian who went blind at Marathon after seeing a giant phantom (Herodotus 6.117) |
 | Echetlos | farmer, Marathon | Echetlaeus, the "plough-man" hero who fought at Marathon with a plough |
 | Kallikrates | Hoplite, Marathon | a classical Spartan name |
-| Kolymbas | Diver, Marathon | "diver" |
+| Pelagon | Diver, Marathon | "of the open sea" |
 | Makaria | the spring at Marathon | Herakles's daughter; the real spring |
 | Kerinthos | Beekeeper, Route 18 | "bee-bread" |
 | Battos | Goatherd, Route 18 | the herdsman Hermes turned to stone for lying |
@@ -21129,7 +21129,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | the Telchines' forge | the sea-cave forge in the caldera wall | the Telchines, the first smiths, sea-daemons of the islands, said to have made Kronos's sickle |
 | Nea Kameni | the black islet in the lagoon | the real volcanic islet, "new burnt island" |
 | the warm hollow | the Caldera Road's sheltered spot | the dex's name for Kaminoo's home |
-| Nausithoos | Sailor, Route 20 | the Phaeacians' helmsman-king in the Odyssey |
+| Naubates | Sailor, Route 20 | "ship-walker", a sailor's name |
 | Kalymnios | Diver, Route 20 | "of Kalymnos", the sponge divers' island |
 | Iaspis, Achates | Titanborn grunts | jasper, agate |
 | Eurylochos | Sailor, Route 20 | Odysseus's second-in-command |
@@ -21163,7 +21163,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Mount Latmos | the mountain across the strait | where Endymion sleeps |
 | Kynaithos | bard, Chios | a Chian singer of the Homerid guild |
 | Merope | vintner, Chios | Oinopion's daughter, whom Orion loved |
-| Ampelos | Vintner, Chios | "vine", Dionysus's beloved |
+| Maron | Vintner, Chios | the wine-priest whose wine Odysseus carried (Odyssey 9) |
 | Terpandros | lyre-maker, Lesbos | the Lesbian lyre-player |
 | Pittakos | keeper of the head's shrine, Lesbos | the sage of Mytilene |
 | Kleis | Harvester, Lesbos | a Lesbian name |
@@ -21222,7 +21222,7 @@ Written by name, not claimed (the front matter's rule). Almost all of these belo
 - In-game trade: `FLAG_ICHOR_TRADED_PROSOMIME` (a new entry in `src/data/trade.h`)
 
 **Daily flags** (IchorSave's daily bank)
-- `FLAG_DAILY_ICHOR_KRONIA_BREAD` (the free Barley Cake)
+- `FLAG_DAILY_ICHOR_KRONIST_BREAD` (the free Barley Cake; shared with every Kronist in Aethos)
 - `FLAG_DAILY_ICHOR_TREADING` (Staphylos's Wine)
 - `FLAG_DAILY_ICHOR_SKENE_MASK` (the Prosomime static)
 - `FLAG_DAILY_ICHOR_PRAYED_DIONYSUS` (SYSTEMS.md §3, the range's god index)
@@ -21402,7 +21402,7 @@ Region C1 needs **no new permanent vars**. Scene state is in `VAR_TEMP_*`; every
 **Daily flags** (`FLAG_DAILY_ICHOR_GENERAL_START` range)
 - `FLAG_DAILY_ICHOR_MAIDENS_WELL` (a Fresh Water a day)
 - `FLAG_DAILY_ICHOR_WELL_FIG` (a Figy Berry a day, after beat 46B)
-- `FLAG_DAILY_ICHOR_DEMETER_TRIED` (after a failed joke, she's back tomorrow)
+- `FLAG_TEMP_1` (after a failed joke, she's back once you leave the well-yard and return)
 
 **Object hide flags**
 - `FLAG_ICHOR_HIDE_KERYKOS_EMPORION_ACT2` (beat 46), `FLAG_ICHOR_HIDE_KERYKOS_ELEUSA_GATE` (beat 47A)
@@ -21456,7 +21456,7 @@ Region C2 needs **no new permanent vars**: puzzle state is flags, and the Lyceum
 - The Panathenaia: `FLAG_DAILY_ICHOR_PANATHENAIA`
 - Theoxenia decoys: `FLAG_ICHOR_DECOY_ASTYRA_1`, `_2` (in `FLAG_ICHOR_THEOXENIA_START`'s range)
 - Statics: `FLAG_ICHOR_STATIC_KRITIOS_GLYPHLET`; daily `FLAG_DAILY_ICHOR_ASTYRA_JAR`, `FLAG_DAILY_ICHOR_ASTYRA_CHIPS`
-- The Kronists' bread: `FLAG_DAILY_ICHOR_KRONIST_BREAD_ASTYRA`
+- The Kronists' bread: `FLAG_DAILY_ICHOR_KRONIST_BREAD` (shared with region A's)
 - Braziers: two bits in `FLAG_ICHOR_BRAZIERS_START`'s range (the salt well's B1F shelf)
 - Dig spots: seven daily (`FLAG_DAILY_ICHOR_DIG_START` + n) and one fixed (`FLAG_ICHOR_DIG_FIXED_START` + n, the old spring house)
 
@@ -21536,7 +21536,7 @@ Named, not claimed (the front matter's rule). All from IchorSave's bank once the
 **Temp vars**
 - `VAR_TEMP_1`: the runner's race, steps left.
 
-**Trainers** (ids 160–319, the front matter's range): `TRAINER_ICHOR_MELANIPPOS`, `_AMPELOS`, `_KEPHALIS`, `_PROTESILAOS`, `_THESTOR`, `_PHAINIAS`, `_ABAS`, `_STYRA`, `_ELEPHENOR`, `_LEUKIPPE`, `_SOSIAS`, `_SOSTRATE`, `_GRUNT_OCHROS`, `_THERSIPPOS`, `_KALLIKRATES`, `_KOLYMBAS`, `_KERINTHOS`, `_BATTOS`, `_ASPHALION`, `_KRISON`, `_KYMON`, `_GRUNT_CHOUS`, `_NAUBOLOS`, `_NAUSITHOOS`, `_PHRONTIS`: 25. Phase 2's four Halai Shore trainers keep their names and take ids from this range; world-act1 drops them from Act I's.
+**Trainers** (ids 160–319, the front matter's range): `TRAINER_ICHOR_MELANIPPOS`, `_AMPELOS`, `_KEPHALIS`, `_PROTESILAOS`, `_THESTOR`, `_PHAINIAS`, `_ABAS`, `_STYRA`, `_ELEPHENOR`, `_LEUKIPPE`, `_SOSIAS`, `_SOSTRATE`, `_GRUNT_OCHROS`, `_THERSIPPOS`, `_KALLIKRATES`, `_PELAGON`, `_KERINTHOS`, `_BATTOS`, `_ASPHALION`, `_KRISON`, `_KYMON`, `_GRUNT_CHOUS`, `_NAUBOLOS`, `_NAUSITHOOS`, `_PHRONTIS`: 25. Phase 2's four Halai Shore trainers keep their names and take ids from this range; world-act1 drops them from Act I's.
 
 ## The voyage and Kaldera
 
@@ -22274,6 +22274,8 @@ Every Act II beat in STORY.md §3, and where it plays here.
 15. **Optional content, for scope.** Euboia, Routes 17–18 with Marathon and Sounion, Trophonios's cave, Paros, and the open Aegean (Routes 20–21 and seven islands) are all optional, and the story trireme covers the sea. They can be built in a later batch, or cut, without touching the main path. AETHOS_MAP's own note stands: if ten islands at once is too much, hold Route 21 until after Laurel 7.
 16. **Aigina's interior** is tuned to the Astyra row because its gate opens at beat 46. Its ants are Hoplomex, under the late-area rule; Ergant comes from a daily ant-hill static at Lv 20, the dex's kind of small lower-level spot, which also gives Act I's Aiakides his Ergant on a return trip.
 17. **Epidauros** was in this script's first plan as the healers' sanctuary on the way back to the Isthmus; the revised map has no section for it, so its one story job, a healer who remembers Phaedon, moved to a traveling healer at Nemea (beat 45).
+
+18. **The ranges are tight.** Act II's trainer range is ids 160–319 (160 ids). The main path needs 136 (131 trainer blocks, Kleon's four other starter variants, and Alethea as a partner), which fits. The optional lands need 46 more (Euboia, Marathon, Halai and Sounion 25, the open Aegean 18, Aigina 3), for 182 in all. **Ask:** a second range of about 50 for the optional lands, or build them in a later batch with its own range. The 12 general daily flags (0x4C–0x57) are used exactly: the Kronists share one bread flag, and Demeter's retry uses a temp flag. Bank flags: the script names 432, before the item balls' flags; hidden items take vanilla flags from the Hoenn cut's batch 2.
 
 **From the regions.**
 
