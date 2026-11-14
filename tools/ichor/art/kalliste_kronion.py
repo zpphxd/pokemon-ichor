@@ -126,12 +126,13 @@ def column(L, x, y, h, broken_at=None):
 
 def columns():
     s = Struct("ruin_columns", "Kronion Hill: standing and broken Doric columns", 4, 3, SEC,
-               walk=["TT..", "TTT.", "XXXX"],
+               walk=["T...", "TT..", "XXXX"],
                notes="Weathered poros columns on stylobate slabs. Column 0: a standing "
-                     "column (3 cells). Column 1: a column snapped at mid height (top cell "
-                     "is mostly slab). Column 2: a stump (bottom cell). Column 3: a stump of "
-                     "two drums with rubble. Upper cells draw over the player (walk behind); "
-                     "bottom cells are impassable.")
+                     "column (3 cells). Column 1: a column snapped at mid height (its top "
+                     "cell is plain slab). Columns 2 and 3: a stump, and a stump of two "
+                     "drums with rubble (bottom cells; the cells above are plain slab). "
+                     "T cells draw over the player (walk behind); bottom cells are "
+                     "impassable.")
     B, M, T = s.B, s.M, s.T
     slabs(B, 0, 0, 64, 48)
     # standing column: capital and upper shaft on the top layer, foot on middle

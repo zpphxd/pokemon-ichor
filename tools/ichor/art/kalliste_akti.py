@@ -529,7 +529,7 @@ def nets():
             if y > 12 + sag:
                 continue
             if (x + y) % 4 == 0 or (x - y) % 4 == 0:
-                M.px(x, y, "rp")
+                M.px(x, y, "wd2" if (x + y) % 8 else "wd1")
         x = 5
     for fx in range(7, 26, 5):
         M.blit(["kk", "gk"], {"k": "ink", "g": "g1"}, fx, 2)
@@ -543,7 +543,7 @@ def nets():
         "rrrrwrrgrrwr",
         " 11111111111",
     ]
-    M.blit(heap, {"r": "rp", "w": "wd3", "g": "g1", "1": "wd1"}, 34, 8)
+    M.blit(heap, {"r": "wd2", "w": "wd3", "g": "g1", "1": "wd1"}, 34, 8)
     # amphorae leaning in a row
     amph = [
         " kk ",

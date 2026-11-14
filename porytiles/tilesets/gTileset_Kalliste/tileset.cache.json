@@ -1,6 +1,6 @@
 {
   "data/tilesets/secondary/kalliste/porytiles_bin/metatile_attributes.bin": "ee04e7de9e109ed31de5f66472a19f64",
-  "data/tilesets/secondary/kalliste/porytiles_bin/metatiles.bin": "19a61b1f70faef89032c8e4ef634a4b6",
+  "data/tilesets/secondary/kalliste/porytiles_bin/metatiles.bin": "8dc5db63ce99a9ad6f58421e2ffd83a3",
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -10,16 +10,16 @@
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/06.pal": "e5f6cc140593424fed58ba0c96198271",
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/07.pal": "f8a14cda4f84bacbe67cb5067bdf4e98",
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/08.pal": "bc5e4693d46badc02ba851765423ee46",
-  "data/tilesets/secondary/kalliste/porytiles_bin/palettes/09.pal": "49d41177e0009dcf36dca095c4a4bb69",
+  "data/tilesets/secondary/kalliste/porytiles_bin/palettes/09.pal": "2ddecc2ca1fb77fe6bcf311b8523fb5d",
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/10.pal": "f6fb7aab2e16e48ce956e86fe8670139",
-  "data/tilesets/secondary/kalliste/porytiles_bin/palettes/11.pal": "dde8527b482b2e4fbdb3004d78a5b178",
-  "data/tilesets/secondary/kalliste/porytiles_bin/palettes/12.pal": "51d3accf2988e5ca81b6f3f525f92fd7",
+  "data/tilesets/secondary/kalliste/porytiles_bin/palettes/11.pal": "71959df99f57452f78d5f1316ab5b411",
+  "data/tilesets/secondary/kalliste/porytiles_bin/palettes/12.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/kalliste/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/kalliste/porytiles_bin/tiles.png": "fefe7b0b81f58b500520be0cb3837a41",
+  "data/tilesets/secondary/kalliste/porytiles_bin/tiles.png": "4ad3cd0a1cadf93192632e38ca5427f8",
   "data/tilesets/secondary/kalliste/porytiles_src/attributes.csv": "2327595a52d07d117d106c02557e12fd",
   "data/tilesets/secondary/kalliste/porytiles_src/bottom.png": "35eedfd5de69d8f6c76815fc1f841567",
-  "data/tilesets/secondary/kalliste/porytiles_src/middle.png": "0799c76f0b880ca528c25434cd5ca01b",
-  "data/tilesets/secondary/kalliste/porytiles_src/top.png": "9c8ce8a8e529c957b54f0f21de894632"
+  "data/tilesets/secondary/kalliste/porytiles_src/middle.png": "960bec5d068c9a0658d9d5d5987476c6",
+  "data/tilesets/secondary/kalliste/porytiles_src/top.png": "2141e424aecb0c3a77eccbda13743cfa"
 }

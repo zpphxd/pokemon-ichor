@@ -276,12 +276,12 @@ ids                       walk
 
 ### Kronion Hill: standing and broken Doric columns
 
-`ruin_columns`, 4 wide by 3 tall. Weathered poros columns on stylobate slabs. Column 0: a standing column (3 cells). Column 1: a column snapped at mid height (top cell is mostly slab). Column 2: a stump (bottom cell). Column 3: a stump of two drums with rubble. Upper cells draw over the player (walk behind); bottom cells are impassable.
+`ruin_columns`, 4 wide by 3 tall. Weathered poros columns on stylobate slabs. Column 0: a standing column (3 cells). Column 1: a column snapped at mid height (its top cell is plain slab). Columns 2 and 3: a stump, and a stump of two drums with rubble (bottom cells; the cells above are plain slab). T cells draw over the player (walk behind); bottom cells are impassable.
 
 ```text
 ids                       walk
-0x384 0x385 0x386 0x387   T T . .
-0x38C 0x38D 0x38E 0x38F   T T T .
+0x384 0x385 0x386 0x387   T . . .
+0x38C 0x38D 0x38E 0x38F   T T . .
 0x394 0x395 0x396 0x397   X X X X
 ```
 
