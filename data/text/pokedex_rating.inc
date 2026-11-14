@@ -221,14 +221,6 @@ PokedexRating_Text_YouveCompletedDex::
 	.string "It's magnificent!\n"
 	.string "Truly, this is a fantastic feat!$"
 
-PokedexRating_Text_Wroooaaarrr::
-	.string "Wroooooooaaaaaarrrr!$"
-
-PokedexRating_Text_ThankYouMadeDreamReality::
-	.string "Thank you, {PLAYER}!\n"
-	.string "Sincerely, thank you!\l"
-	.string "You've made my dream a reality!$"
-
 PokedexRating_Text_LoveSeeingYourPokedex::
 	.string "OAK: Ah, welcome!\p"
 	.string "Tell me, how is your POKéDEX\n"

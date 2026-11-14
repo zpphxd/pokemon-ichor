@@ -205,4 +205,16 @@ function M.seq(...)
   return out
 end
 
+-- A map's group and number, read from include/constants/map_groups.h (generated
+-- by mapjson), so tests never hardcode them: e.g. M.map("MAP_AKTI_TOWN").
+function M.map(const)
+  local f = assert(io.open("include/constants/map_groups.h", "r"))
+  for line in f:lines() do
+    local num, group = line:match("^%s+" .. const .. "%s+= %((%d+) | %((%d+) << 8%)%),")
+    if num then f:close(); return tonumber(group), tonumber(num) end
+  end
+  f:close()
+  error("no " .. const .. " in include/constants/map_groups.h")
+end
+
 return M

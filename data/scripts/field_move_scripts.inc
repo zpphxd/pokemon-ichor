@@ -387,7 +387,6 @@ EventScript_UseDig::
 	lockall
 	goto EventScript_DigCommon
 
-
 EventScript_CutGrassCommon:
 	isfollowerfieldmoveuser VAR_0x8004
 	setfieldeffectargument 3, VAR_0x8004 @ skip pose if true

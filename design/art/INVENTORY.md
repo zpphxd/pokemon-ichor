@@ -25,10 +25,10 @@ The checklist that makes the total conversion true: every player-facing asset gr
 
 | Status | Rows |
 |---|---|
-| Greek | 20 |
+| Greek | 21 |
 | In progress (batch) | 15 |
-| Hoenn | 94 |
-| Cut | 46 |
+| Hoenn | 91 |
+| Cut | 48 |
 | Keep | 31 |
 | New | 18 |
 
@@ -42,7 +42,7 @@ The checklist that makes the total conversion true: every player-facing asset gr
 | 6. Items | 0 | 0 | 8 | 5 | 1 | 3 | 17 |
 | 7. Text | 0 | 3 | 15 | 1 | 1 | 0 | 20 |
 | 8. Audio | 1 | 1 | 11 | 4 | 3 | 0 | 20 |
-| 9. Data | 0 | 1 | 6 | 3 | 2 | 0 | 12 |
+| 9. Data | 1 | 1 | 3 | 5 | 2 | 0 | 12 |
 | 10. Cuts | 0 | 0 | 1 | 18 | 1 | 0 | 20 |
 | 11. Overlooked | 2 | 0 | 10 | 1 | 8 | 0 | 21 |
 
@@ -294,15 +294,15 @@ Songs by use. Counts are from `include/constants/songs.h` and sizes are from the
 
 | Item | Where | Status | Phase | Notes |
 |---|---|---|---|---|
-| Hoenn maps | `data/maps/` (947 folders in `map_groups.json`), `data/layouts/` (790 layouts) | Hoenn | 2–5 | 947 = 417 FRLG + 518 Hoenn + 12 Ichor. Replaced by Aethos maps, not repainted (ART_PLAN). About 1.07 MB of scripts, layouts and events (not counting the cut systems' maps, which are in §10), plus about 428 KiB of tilesets. |
+| Hoenn maps | `data/maps/`, `data/layouts/` | Cut | 2–5 | Removed by hoenn-cut batch 2 with their layouts, scripts, encounter tables, heal locations and the tilesets only they used. What's left is the Ichor maps and, until batch 3, the Battle Frontier and Trainer Hill maps. `include/constants/maps_removed_stub.h` keeps the removed names compiling for upstream code. |
 | Ichor maps | `data/maps/{ElaiaVillage*,KallisteRoute1*,AktiTown*}`, `data/ichor_maps.inc` | In progress (batch) | Batch | 12 maps: Elaia, Route 1, Kronion Hill, Akti, and eight interiors. The layouts and scripts are stubs on Hoenn tilesets. |
-| FRLG maps, tilesets and scripts | 417 `*_Frlg` map folders (9.6 MB on disk), 62 `*_frlg` secondary tilesets and 2 primaries (5.3 MB), 9 FRLG script files, 4 `*_frlg.c` files, about 210 graphics files in `*_frlg` dirs | Cut | 6 | Not built into the Emerald ROM at all (`.if IS_FRLG`), so 0 bytes of ROM. They clutter the repo and every search. Delete after merging, with a note in the commit. |
+| FRLG maps, tilesets and scripts | `*_Frlg` maps, `*_frlg` tilesets and scripts | Cut | 6 | Removed by hoenn-cut batch 2. They were never in the Emerald ROM. A few FRLG tileset animation frames stay, because `src/tileset_anims.c` names them. On upstream merges, resolve modify/delete conflicts on these paths with `git rm`. |
 | Hoenn trainers | `src/data/trainers.party`, `include/constants/opponents.h`, `src/data/battle_partners.party` (2) | Cut | 2–5 | Removed by hoenn-cut batch 1: 847 Hoenn trainers gone, Ichor's 14 renumbered 1–14, and the seven Frontier Brains kept at 15–21 for the Frontier engine. `gTrainers` fell from 132 KiB to 3.4 KiB and now grows only with real trainers. Id ranges per session are in `tools/ichor/claim_ranges.md`. `PARTNER_STEVEN` is still there. FRLG's 624 trainers in `trainers_frlg.party` are not built. |
 | Trainer-slide tables | `src/trainer_slide.c` | Keep | 6 | 355 KiB of mostly empty pointers: `sTrainerSlides` (264 KiB, three difficulties × (`MAX_TRAINERS_COUNT` + partners) × 26 slides) and `sFrontierTrainerSlides` (91 KiB). They are sized by the id limits, not by how many trainers exist, so the trainer cut barely shrank them. Keeping only the Normal difficulty's slides would free about 237 KiB, an engine edit for the director. |
-| Hoenn wild encounter tables | `src/data/wild_encounters.json` (384 Hoenn map headers), `src/wild_encounter.c` | Hoenn | 2–5 | About 20 KiB. The Kalliste tables (Route 1, Kronion Hill, Akti fishing and surf) are written in `SCRIPT.md` Part 4 but not in the JSON yet. |
-| Heal locations | `src/data/heal_locations.json` (42) | Hoenn | 1 | `HEAL_LOCATION_AKTI_TOWN` is not there yet. |
-| Fly destinations and region sections | `src/data/region_map/` (212 sections) | Hoenn | 1 | See §5 and §7. |
-| Flags and vars | `include/constants/flags.h`, `vars.h` | Keep | — | Hoenn story flags can be recycled by renaming (`tools/ichor/claim.py`). 38 flags and 3 vars are claimed so far. |
+| Hoenn wild encounter tables | `src/data/wild_encounters.json` | Cut | 2–5 | Removed by hoenn-cut batch 2: 388 Hoenn and FRLG headers. |
+| Heal locations | `src/data/heal_locations.json` | Greek | 1 | Elaia and Akti, plus the Battle Frontier's until batch 3. |
+| Fly destinations and region sections | `src/data/region_map/` | Hoenn | 1 | Hoenn's sections 0–85 are now free `MAPSEC_OIKOUMENE_*` slots (hoenn-cut batch 2; see `tools/ichor/claim_ranges.md`). See §5 and §7. |
+| Flags and vars | `include/constants/flags.h`, `vars.h` | Keep | — | Hoenn-cut batch 2 freed 700 flags and 95 vars. The per-session ranges are in `tools/ichor/claim_ranges.md`. |
 | Mart stock, tutors, in-game trades, apprentices, lottery | `data/scripts/`, map scripts | Hoenn | 2–5 | Rebuilt per Aethos location. |
 | Move tutors and Frontier rewards | `data/text/move_tutors.inc`, `data/scripts/move_tutors.inc` | Hoenn | 3 | Needs Aethos tutors and, in Phase 5, Olympiad prizes. |
 | Hoenn contest and Frontier data tables | `src/data/contest_*.h`, `src/data/battle_frontier/`, `data/contest_ai_scripts.s` | Cut | 5 | Counted in §10. The Frontier engine is kept; its tables are replaced by Olympiad data. |

@@ -269,10 +269,6 @@ MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales:
 	.string "are even remotely legendary?$"
 
 @ Unused
-MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale:
-	.string "Incidentally… Would you care to hear\n"
-	.string "another legendary tale?$"
-
 MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend:
 	.string "Hmm…\n"
 	.string "I'm not satisfied…\p"
@@ -785,7 +781,6 @@ MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory::
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a TRAINER with\n"
 	.string "baby-smooth skin!$"
-
 
 MauvilleCity_PokemonCenter_1F_EventScript_Storyteller::
 	lock

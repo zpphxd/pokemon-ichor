@@ -16,8 +16,8 @@ local L = dofile("tools/ichor/tests/ichor_lib.lua")
 local K = L.K
 local OUT = os.getenv("SEAM_OUT") or "build/akti_seam/"
 
-local TOWNS = 0                      -- map group (include/constants/map_groups.h)
-local MAP_ROUTE1, MAP_AKTI = 58, 59
+local TOWNS, MAP_ROUTE1 = L.map("MAP_KALLISTE_ROUTE1")
+local _, MAP_AKTI = L.map("MAP_AKTI_TOWN")
 
 local function spot(name, x, y)
   return { { warp = { TOWNS, MAP_ROUTE1, -1, x, y }, wait = 240 },

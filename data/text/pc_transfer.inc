@@ -24,10 +24,6 @@ gText_PkmnSentToPCAfterCatch::
 	.string "It was placed in the jar\n"
 	.string "“{STR_VAR_1}.”$"
 
-gText_PlayerObtainedTheMon::
-	.string "{PLAYER} obtained\n"
-	.string "the {STR_VAR_1}!$"
-
 gText_NoMoreRoomForPokemon::
 	.string "There's no more room for Pokémon!\p"
 	.string "Every jar in the Pithos is full.\n"
