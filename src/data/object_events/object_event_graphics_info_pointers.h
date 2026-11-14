@@ -432,6 +432,13 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyt
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatL;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatR;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPilgrim;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPronomos;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorEndeis;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPheidon;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAiakides;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonSeasick;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonTablet;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -857,6 +864,13 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatL,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatR,
+    [OBJ_EVENT_GFX_ICHOR_PILGRIM] =            &gObjectEventGraphicsInfo_IchorPilgrim,
+    [OBJ_EVENT_GFX_ICHOR_PRONOMOS] =           &gObjectEventGraphicsInfo_IchorPronomos,
+    [OBJ_EVENT_GFX_ICHOR_ENDEIS] =             &gObjectEventGraphicsInfo_IchorEndeis,
+    [OBJ_EVENT_GFX_ICHOR_PHEIDON] =            &gObjectEventGraphicsInfo_IchorPheidon,
+    [OBJ_EVENT_GFX_ICHOR_AIAKIDES] =           &gObjectEventGraphicsInfo_IchorAiakides,
+    [OBJ_EVENT_GFX_ICHOR_KLEON_SEASICK] =      &gObjectEventGraphicsInfo_IchorKleonSeasick,
+    [OBJ_EVENT_GFX_ICHOR_KLEON_TABLET] =       &gObjectEventGraphicsInfo_IchorKleonTablet,
     // End of Ichor object events
 };
 
