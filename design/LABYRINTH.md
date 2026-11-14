@@ -5,7 +5,15 @@
 - **Companion:** `design/SYSTEMS.md` defines the relics, fire and light, the rites, excavation, the festival calendar and the save block this dungeon uses.
 - **Bible:** `design/PITCH.md` Act III step 2: "You infiltrate Team Titan's headquarters inside the Labyrinth, where a Minotaur waits at the center. Kronos removes his mask: he is Phaedon. He completes the Harpe."
 - **Species are placeholders** from PITCH §4, pending the Aethos dex. Where a species matters, the role is the spec.
+<<<<<<< HEAD
 - **Asterion is Asterlorn** (Aethos dex #98, Fighting/Dark, BST 500): only one exists, chained at the Labyrinth's heart and catchable after the raid. This was settled with the dex team on 2026-11-14.
+=======
+- **Maps follow `design/MAP_DESIGN.md`.**
+  - Knossa Isle's route and town follow its §1 and §2.
+  - The Labyrinth follows §3: teach, test and combine; branches that pay; a midpoint rest; a payoff; a shortcut out.
+  - §4 explains how each ring maps to the rulebook.
+- **The post-game.** This file owns the Endless Labyrinth (§10). The other post-game arcs belong to `LABORS.md`, `UNDERWORLD.md`, `ODYSSEY.md` and `POSTGAME.md`, by another designer. §10 lists the hooks this file hands them.
+>>>>>>> worktree-agent-a3087b5f1ae9acfd5
 
 ---
 
@@ -20,6 +28,7 @@ Next morning, an old man who lost his son asks you to fly up the shaft his boy f
 ### Pillars
 
 1. **Seven rings, seven lessons.** Ring I tests the Hestia trial's verb, Ring II Hermes's, and so on to Ring VII and Aphrodite's. The Starry Chamber previews Apollo's beams, the one laurel still to come. The Labyrinth is the final exam of every temple so far.
+   - **Inside each ring,** the rulebook's rhythm still holds: a safe room teaches the ring's new piece, the ring tests it, and the ring's last stretch combines it with a verb from an earlier ring (§4).
 2. **The thread is the dungeon.**
    - You lay it, and you wind it back in when you retrace your steps.
    - You tie it off at bronze rings to save your place.
@@ -117,14 +126,59 @@ When Icarus fell, he was carrying his father's book, and the pages blew across t
 
 | Map | Size | Role |
 |---|---|---|
-| Amnisos | 40×30 | Harbor town: Asclepeion, Agora (Knossan honey, labrys charms), Kydon's honey house, the tavern (a knucklebones champion, SYSTEMS §9), a xenia host, the Pithos. Knossos's real harbor was Amnisos. |
-| Amnisos interiors (×5) | small | As above |
-| Cave of Eileithyia | 20×16 | Optional. The birth goddess's cave, Hera's daughter. An Ichor Stone, Hera Favor +5, a rare egg. |
-| The Bull Road | 30×80 | The route south: terraces, bull-leaper and beekeeper trainers (6, Lv 44–47), the palace herd of Tauros grazing (overworld Pokémon) |
-| The Bronze Heel | 30×20 | Shore spur. Talos the giant's ruined foot (seed 16), tide pools, a Daedalus-era dig site. |
+| Amnisos | 40×30 | Harbor town (below). Knossos's real harbor was Amnisos. |
+| Amnisos interiors (×5) | small | Every door has a reason (below) |
+| Cave of Eileithyia | 20×16 | Optional. The cave of the birth goddess, Hera's daughter: an Ichor Stone, Hera Favor +5 and a rare egg. |
+| The Bull Road | 30×50 | The route south, five screens long (below) |
+| The Bronze Heel | 30×20 | A shore spur off the Bull Road's fork: Talos the giant's ruined foot (seed 16), tide pools and a dig site |
 | Palace of Minos | 60×50 | The ruins above ground (§3) |
 | Palace interiors (×4) | — | Throne Room, West Magazines (the Titan camp), Queen's Megaron, Grand Staircase |
-| Mount Ida path and Idaean Cave | 40×40, 30×30 | Optional. Where Rhea hid the infant Zeus from Kronos: the Kouretes' bronze shields and Amalthea's goat-horn. It holds the Capricornus constellation and a Labrys vault. |
+| Mount Ida path and Idaean Cave | 40×40, 30×30 | Optional. Its gate is a labrys seal, so it opens on a return after Ring III. This is where Rhea hid the infant Zeus from Kronos: the Kouretes' bronze shields and Amalthea's goat-horn. It holds the Capricornus constellation and a Minoan vault. |
+
+### Amnisos (MAP_DESIGN §2)
+
+- **First things first.** The Asclepeion and the Agora face the quay where the trireme lands, so both are in view the moment you step off.
+- **The crown.** Amnisos has no temple. Its landmark is the view from the quay: the palace on its hill to the south, roofs lined with beehives, and the Cave of Eileithyia's carved mouth in the cliff behind town.
+- **Signature:** bees. Every roof keeps hives, a nod to the Minoan bee and to the player's beekeeper mother.
+- **Five houses, each with a reason:**
+  | House | Reason |
+  |---|---|
+  | Kydon's honey house | A gift of Honey (seed 3 pays off) |
+  | The tavern | The knucklebones champion (SYSTEMS §9) |
+  | The xenia host | Rest until a chosen hour (SYSTEMS §10) |
+  | The old leaper's house | Sarpedon's wife, with a hint about bull-leap timing |
+  | A fisher's hut | A trade, and a Pyanopsia story about beans (seed 14) |
+- **Exits:** the quay north, and the Bull Road south through a gap in the town wall with a sign. Both are plain to read.
+- **Hidden items:** a Pearl at the end of the jetty, and a Bronze Obol behind the harbor shrine.
+- **Seams:** agree the columns of Amnisos's south exit and the Bull Road's north edge before building either map (MAP_DESIGN §5).
+
+### The Bull Road (MAP_DESIGN §1)
+
+The road runs 30×50, five screens, from Amnisos down to the palace. These are the beats, north to south, walking away from town:
+
+1. **A calm stretch** of terraces, and a sign: "THE BULL ROAD. The palace, south. Mind the herd."
+2. **Forced grass band 1,** 3 deep, between terrace walls. Act III bands are longer than Act I's.
+3. **The first trainer,** easy and in plain view: a beekeeper (Lv 44, two Pokémon).
+4. **The fork.**
+   - The great herm stands here (SYSTEMS §4), doubling as the sign: "East: the Bronze Heel. South: the palace."
+   - The Bronze Heel spur is the route's landmark and reward. Its peninsula tip holds a hidden item, and its tide pools hold a dig spot.
+5. **A bull-leaper,** mandatory, whose sight line crosses a narrow cutting, with **forced grass band 2** (4 deep) right behind him, so there is no chance to heal between the two.
+6. **The set piece.** The palace herd crosses the road; overworld Tauros wander across it. A herder lets you practice one leap for a small prize.
+7. **The rest point:** a beekeeper's hut with a spring that heals, and a Honey gift.
+8. **Forced grass band 3,** 3 deep, in an olive grove.
+9. **A Minoan priestess,** mandatory, at the narrow approach to the palace (Lv 47).
+10. **The palace in view.** Two Titanborn hold the south end (story).
+
+**Other parts of the route.**
+- **Ledges** step down northward along the terraces, so the trip back to Amnisos is quick (MAP_DESIGN §1).
+- **Optional grass:** vineyard terraces to the west, with a rarer table (Hisuian Lilligant) and a sealed jar on an upper terrace that you reach by walking around through that grass.
+- **A relic gate that invites a return.**
+  - A door in the east cliff has no handle, only a hollow shaped like a double axe.
+  - It is visible from the road, and opens with the Labrys after Ring III: the Bull Road vault, with an Ichor Stone.
+  - The player's first Minoan vault is a short walk from where they get the Labrys.
+- **Hidden items:** behind the great herm, and in the vineyard's walled corner.
+- **Encounters match the ground.** The terraces have Tauros, a bee Pokémon and Mudbray, plus Noctowl at night. The vineyard grass has its own table.
+- **Width varies:** a narrow cutting at band 2, and an open meadow at the herd crossing.
 
 **Arrival.**
 1. The trireme lands at dawn. Alethea is on the quay, sent ahead by Daphne with a satchel of tracings: "Daphne thinks the Titans' last stop is here. So do I. Truthfully, so does everyone."
@@ -219,7 +273,7 @@ When Icarus fell, he was carrying his father's book, and the pages blew across t
   |  |  |  +------------------------------------------+  |  |  |    (heal, hub, Icarus Shaft)
   |  |  |  | RING IV   THE MASKS  Dionysus  48x40      |  |  |  |
   |  |  |  |  +------------------------------------+  |  |  |  |
-  |  |  |  |  | RING V  THE HUNT  Artemis  64x56    |--+--+--+--+--> MINOS'S TOMB (Helm)
+  |  |  |  |  | RING V  THE HUNT  Artemis  56x48    |--+--+--+--+--> MINOS'S TOMB (Helm)
   |  |  |  |  |  +------------------------------+  |  |  |  |  |
   |  |  |  |  |  | RING VI  THE FORGE  48x48     |--+--+--+--+--+--> archive, vault, forge
   |  |  |  |  |  |  +------------------------+  |  |  |  |  |  |    MISTRESS'S SHRINE (heal)
@@ -237,7 +291,7 @@ When Icarus fell, he was carrying his father's book, and the pages blew across t
 | Ring III, the Mysteries | 56×48 | Pitch dark, webs, glow-paint |
 | Daedalus's workshop | 24×18 | Lit. The hub. |
 | Ring IV, the Masks | 48×40 | Lit (the Titans' lamps) |
-| Ring V, the Hunt | 64×56 | Dark, with 4 skylight pools |
+| Ring V, the Hunt | 56×48 | Dark, with 4 skylight pools |
 | Minos's tomb | 16×12 | Dark |
 | Ring VI, the Forge | 48×48 | Firelit |
 | The archive | 14×10 | Lit |
@@ -250,6 +304,48 @@ When Icarus fell, he was carrying his father's book, and the pages blew across t
 - From any tied anchor, the Thread can carry you back to the workshop or to the Grand Staircase (§5.1).
 - Saving works anywhere.
 - So the dungeon is long without being punishing.
+
+### How the Labyrinth follows the map rulebook
+
+This applies MAP_DESIGN §3 (caves, ruins and dungeons), with §1 and §6 where they bear on it.
+
+**Teach, test, combine, across the whole dungeon.** Each ring brings in one new piece, safely, then tests it, then combines it with an earlier ring's piece:
+
+| Ring | Teaches, safely | Tests | Combines with |
+|---|---|---|---|
+| I | The thread: a 10-tile dead-end side passage right after the entrance, where you watch it lay and wind. The relay: the first hop is an easy 14 steps. | Routing the relay between braziers | Relay with reveal (the fresco door) and wind (the ribbon draughts) |
+| II | Asterion, seen behind a lattice where he can't reach you, breaking a cracked wall | Racing the herald gates | Gate timing with darkness: the third gate's run is in a dark stretch, so you must remember the route |
+| III | One web with a Max Ether visible behind it. One glow-mark under the first brazier you light. | The web maze, or the glow trail | Glow trail with thread: your own thread shows faintly when doused, so you can see where you've been |
+| IV | One sentry with a short sight band and an obvious blind spot behind a pithos, before you find the disguise | Passing the posts disguised | Disguise with the running rule and the password questions |
+| V | Asterion's loop, watched from a grated gallery above the ring before you step down into it | Luring his charge into the cracked tomb wall | The Helm with darkness and patrol timing, through the south half |
+| VI | One dial opening one wall, with one Bronzong sentry on a short visible loop | The three dials' combinations | Dials with sentry loops: wall W2 also reroutes a sentry. Then Hyperion. |
+| VII | One mirror turning one beam onto one tile | Three mirrors | The lit floor with the crane dance and the double battle |
+| The heart, and the escape | — | The bull-leap, taught in the palace court | Every verb at once, as the thread holds the turning house open |
+
+**Shape.**
+- Each ring's main line has branches and at least one loop. **Every branch ends in an item, a trainer, a fresco clue or a dig spot.** A dead end with nothing in it is a bug (MAP_DESIGN §1). Each ring's "Branches" line in §6 lists them.
+- **Floors connect by stairs and by one hole.** The **sunken floor** behind Ring II's Moon Room drops one way into a sealed web pocket of Ring III. It holds an item, and you burn your way out from inside.
+
+**The midpoint rest, and shortcuts back out.**
+- **Daedalus's workshop** (the end of Ring III) is the midpoint rest: heal, the Pithos and a safe save.
+- **Daedalus's lift** opens after scene D. A counterweighted platform runs from the workshop up to the Grand Staircase landing, so a player can go up to Amnisos to restock and come straight back down to the midpoint.
+- **Once the dungeon is cleared,** the lift and the Icarus Shaft (§7) are the shortcuts out. The Thread's RETURN option works too.
+
+**Trainers are checkpoints** (MAP_DESIGN §1).
+- The dungeon's first trainer, priestess Akakallis in Ring I, is easy and in plain view, so the player learns where the Labyrinth's trainers wait.
+- Mandatory trainers' sight lines cross the only path at a narrow point.
+- Rings I–IV and VI each have at least one optional trainer.
+- Ring V has no trainers at all; Asterion is its checkpoint.
+- Ring VII's pair is a single double battle, the dungeon's last gate before the heart.
+- In dark rings, a lamp marks every mandatory trainer (SYSTEMS §2, readable darkness rule 5).
+
+**Readability** (MAP_DESIGN §6, SYSTEMS §2).
+- Every 15×10 view shows where to go, what's blocked, and something worth looking at: a fresco, a brazier, a skylight pool, glow-paint, a pithos or a fallen statue.
+- No pitch-dark corridor runs more than 2 screens without a landmark.
+- Dark rings use rim-lit walls.
+- Ring V was cut from 64×56 to 56×48 so its loop never has an empty screen.
+
+**Before handover,** each ring map gets at least three render-and-critique passes (MAP_DESIGN §7), with the tools in `tools/ichor/`.
 
 ---
 
@@ -507,8 +603,16 @@ The ring is dark. At the entrance, the **threshold hearth** burns with the house
 
 **Thread tutorial.** A0 ties itself at the entrance. A1 by B3 and A2 by the gate are the first anchors you tie yourself. Ariadne's text appears the first time you stand on a ring: "TIE IT HERE."
 
-- **Trainers:** the priestesses **Akakallis** and **Xenodike**, Lv 46–47, named for daughters of Minos. They "test anyone Ariadne sends" and are avoidable.
-- **Items:** TM Rock Slide, Hyper Potion ×2, Bronze Obol. The hidden anchor (Page I) gives +30 spool for this run.
+- **Trainers:** two priestesses, named for daughters of Minos, who "test anyone Ariadne sends".
+  - **Akakallis** is mandatory, easy (Lv 46, two Pokémon) and in plain view, lamp-lit at the first narrow point past the threshold hearth.
+  - **Xenodike** is optional (Lv 47). She faces away in the far corner, guarding the TM.
+- **Branches, and what each pays:**
+  - the thread-teaching side passage: a Hyper Potion;
+  - the alcove behind B2: a Bronze Obol;
+  - the hidden anchor alcove behind B3 (Page I): +30 spool for this run, and a Hyper Potion;
+  - Xenodike's corner: TM Rock Slide;
+  - the east draught passage: a fresco clue (it shows the ribbons blowing out a torch).
+- **Items:** TM Rock Slide, Hyper Potion ×2, Bronze Obol.
 - **Wild:** a cave bat (Woobat), a rock Pokémon (Roggenrola and Boldore), Dunsparce (whose Pokédex entry says it builds mazes underground), and Bronzor and Bronzong (Minoan bronze).
 
 ### Ring II: the Runner's Ring (Hermes, race and route)
@@ -542,11 +646,15 @@ The ring splits at a fork of two carved gates, the **sun gate** and the **moon g
 
 The lesson is shown, not told. His charge breaks cracked walls, and he wasn't quite aiming at you.
 
-- **Trainers:** two Titanborn scouts at the end, Lv 46. "Turn back! The bull's loose down here!"
-- **Items:**
-  - In the sun corridor's room: TM Wild Charge.
-  - In the Moon Room: a Moon Stone, plus a wild moon-dancer (Clefairy, rare, at night).
-  - Along the way: a Full Heal and a Silver Owl.
+- **Trainers:** two Titanborn scouts, Lv 46. "Turn back! The bull's loose down here!"
+  - One is mandatory, lamp-lit, with sight across the stair down.
+  - One is optional, in a side gallery.
+- **Branches, and what each pays:**
+  - the sun corridor's room: TM Wild Charge;
+  - the Moon Room: a Moon Stone, a moon-dancer at night (Clefairy, rare) and the sunken floor down to Ring III's web pocket;
+  - the alcove opened by Asterion's charge in scene C: a Full Heal;
+  - the optional scout's gallery: a Silver Owl.
+- **The loop:** the Long Hall circles back to the gate fork, so a missed herald gate costs a short walk, not a backtrack.
 - **Wild:** Woobat, Dunsparce, Golbat, and a rare Kantonian Tauros strayed from the palace herd.
 
 ### Ring III: the Mysteries (Demeter, dark and light)
@@ -564,11 +672,18 @@ The ring is **pitch dark**, so the torch radius matters, and web curtains (Ariad
 - **Scene D** plays here: the Wings, the confession and the **Labrys**.
 - **Number Nine** is here if you untied it in Emporion (seed 4).
 
-- **Trainers:** **Automaton No. 3** and **Automaton No. 7**, Lv 47, with Bronzong and Golett. Daedalus wound them up and forgot them.
+- **Trainers:** two automata, Lv 47, with Bronzong and Golett. Daedalus wound them up and forgot them.
+  - **Automaton No. 3** is mandatory on the front way, at the web maze's one narrow neck, lit by its own glowing eyes.
+  - **Automaton No. 7** is optional, in a side room.
   ```text
   AUTOMATON 7: CLICK. WHIRR. CHALLENGE. CHALLENGE. CHALLENGE.
   ```
-- **Items:** TM Poltergeist, Max Ether, Rare Bone, Star Piece.
+- **Branches, and what each pays:**
+  - the first web pocket: a Max Ether;
+  - web pockets in the maze: a Rare Bone, and the exit of the sunken-floor pocket from Ring II;
+  - Automaton No. 7's room: TM Poltergeist;
+  - the glow trail's one side spur: a Star Piece by a glowing labrys sign.
+- **The midpoint:** the workshop is the rest stop, and the lift opens here (§4).
 - **Wild:** Spinarak and Ariados (the thread spiders), Sableye, Litwick and Lampent (candles), Noibat, and Golett (rare).
 
 ### Ring IV: the Masks (Dionysus, masks and roles)
@@ -593,7 +708,16 @@ This is the first Titan territory: barracks, a mess hall and four sentry posts, 
 6. **The servants' passage** (Page IV) skips the mess hall and two posts. The passwords are still overheard at its far end.
 
 - **Grunt names**, all earth-born words: **Lithos** (stone), **Koniortos** (dust), **Sideros** (iron), **Chalkos** (bronze) and **Pelos** (mud). They join the slice's Petros (rock) and Amathos (sand).
-- **Items:** Max Revive, Hyper Potion. A fresco shows dancing steps 1–3 (axe, wave, lily).
+- **Trainers:**
+  - The four sentries are mandatory only if they see you undisguised.
+  - Enkelados is mandatory only after a wrong answer.
+  - The armory guard is optional.
+- **Branches, and what each pays:**
+  - the barracks: the disguise and a Max Revive;
+  - the mess hall: the passwords;
+  - the armory dead end: a Hyper Potion, behind the optional guard;
+  - the servants' passage (Page IV);
+  - the fresco alcove: the dance's steps 1–3 (axe, wave, lily).
 - **Wild:** few, only in the side tunnels: Roggenrola and Boldore.
 
 ### Ring V: the Hunt (Artemis, stealth)
@@ -625,7 +749,9 @@ The map is a rectangular corridor loop around solid rock:
    S   A1   [stair down to Ring VI]
 ```
 
-1. **Arrival.** Far off, hooves and a low bellow. The music drops to a drone and a heartbeat.
+1. **Arrival, and the lesson.** The stair from Ring IV comes out on a grated gallery above the ring.
+   - From up there you can watch Asterion walk one full loop below, safely out of reach. Far off, hooves and a low bellow. The music drops to a drone and a heartbeat.
+   - Then a stair takes you down into the loop.
 2. **Kleon's humiliation** at pool 1 (scene E). It shows you exactly what not to do.
 3. **The tomb.** Wall %1 is cracked and sits on the east side. You can't break it, but Asterion can.
    - Stand in pool 2, where the light lets him see you from 7 tiles away, with %1 behind you.
@@ -641,8 +767,15 @@ The map is a rectangular corridor loop around solid rock:
 - **By day** the skylight pools are sunlit, and he sees 7 tiles in them.
 - **By night** they are moonlit, and he sees 5. But he walks his loop a quarter faster, and the rare Paldean Tauros (his kin) appear in the grass.
 
-- **Trainers:** none, apart from Kleon's scene.
-- **Items:** in the niches, a Revive, a Max Elixir and a Silver Owl. In the tomb, a Gold Stater. Behind %3, TM Megahorn and a Star Piece. A fresco shows steps 4–6 (rosette, wave, lily).
+- **Trainers:** none, apart from Kleon's scene. Even the Titans keep out.
+- **Niches** are not dead ends. They are refuges off Asterion's line, and their pay is safety. Three of the eight also hold items.
+- **Branches, and what each pays:**
+  - three niches: a Revive, a Max Elixir and a Silver Owl;
+  - Minos's tomb: the Helm and a Gold Stater;
+  - behind %3: TM Megahorn and a Star Piece;
+  - the bell alcove: the bell itself (Page V);
+  - the fresco niche: the dance's steps 4–6 (rosette, wave, lily).
+- **A landmark on every screen** of the loop: a skylight pool, a niche shrine, a fallen statue or a fresco.
 - **Wild:** Noibat, Lampent, Dunsparce, Hisuian Sneasel, and at night a rare Paldean Tauros.
 
 ### Ring VI: the Forge (Hephaestus, automata and gears)
@@ -667,10 +800,21 @@ This is the heart of Team Titan's headquarters.
 
 1. **The archive** (scene H). Shelves of revised prophecies, and **Iapetos's draft of Kleon's**. You take the wax tablet.
 2. **The vault:** Gold Stater ×3, a Comet Shard, an Ichor Stone and a Max Revive.
-3. **The forge** (scene G). Gigas **Mimas** and **Alkyoneus** guard the door (Lv 49–50, avoidable by dial order). Then **Hyperion**.
+3. **The forge** (scene G). The Gigas guard it:
+   - **Mimas** is mandatory, at the forge door (Lv 49).
+   - **Alkyoneus** is optional, on the vault route (Lv 50).
+
+   Then **Hyperion.**
 4. **The Mistress's shrine** on the landing below. It is the second heal. If you offer Honey, the priestess adds Ariadne's line: "Honey. Always honey. The old tablets say so."
 
-- **Items:** TM Iron Head, Hyper Potion ×2. A fresco shows steps 7–9 (rosette, wave, star).
+**The teaching room.** Before the Hall of Dials, a small antechamber holds one dial, one wall and one Bronzong on a short loop you can watch in full. Turning that dial opens the hall (§4).
+
+- **Branches, and what each pays:**
+  - the archive: the wax tablet;
+  - the vault: its treasure;
+  - the slag heap's dead end: a Hyper Potion;
+  - the bellows room: TM Iron Head and a Hyper Potion;
+  - the fresco corridor: the dance's steps 7–9 (rosette, wave, star).
 - **Wild:** Rolycoly and Carkol (forge coal), Honedge (swords), Bronzong, Klefki (keys), Magcargo.
 
 ### Ring VII: the Choros (Aphrodite, marble and mirrors)
@@ -682,6 +826,10 @@ This is the heart of Team Titan's headquarters.
    - Until lit, the floor's symbols are blank. Light reveals them.
    - It is the same beam engine as Apollo's trial: a smaller preview of Laurel 8.
 3. **The crane dance** (§5.7). The floor opens, and a stair spirals down into the dark.
+
+- **Teach:** the antechamber's first mirror sits alone, turning one beam onto one tile, before the three-mirror puzzle.
+- **Trainers:** the Gigas pair is mandatory, and it is the double battle with Ariadne. Ring VII has no optional trainer; it is the dungeon's last stretch before the heart.
+- **Branches, and what each pays:** two side alcoves, one holding a Star Piece and one holding a fresco of the whole dance in silhouette, too faded to read until the floor is lit.
 
 - **Wild:** moon-dancers (Clefairy, at night), Minior (fallen stars), Lunatone and Solrock (meteorite idols), Sigilyph (guardian of ancient sites).
 
@@ -1247,7 +1395,8 @@ The levels are targets for Balance. The species are placeholders.
 
 | Who | Where | Levels | Team sketch |
 |---|---|---|---|
-| 6 route trainers | The Bull Road | 44–47 | Bull-leapers, beekeepers, a Minoan priestess |
+| 3 checkpoint trainers, mandatory | The Bull Road | 44–47 | A beekeeper (easy, first), a bull-leaper, a Minoan priestess |
+| 3 optional trainers | The Bull Road's vineyard and the Bronze Heel | 45–47 | Bull-leapers and a beekeeper |
 | Titanborn ×2 | North Entrance | 45 | Rock and Ground |
 | Akakallis, Xenodike | Ring I | 46–47 | Minoan priestesses: a snake, a bee, a lily |
 | Titanborn scouts ×2 | Ring II | 46 | Rock and Ground |
@@ -1335,6 +1484,22 @@ After the story, the house keeps turning. "Daedalus says it's healthier." Ariadn
 1. **After the Labyrinth,** he lives in the palace court. Bull-leaping with him widens the window by 2 frames ("he's helping") and doubles the prizes.
 2. **Labor 7, the Cretan Bull** (PITCH §6.1). Asterion's sire is the white bull from the sea. Asterion leads you to him, and calms him when you can't.
 3. **After Ariadne's gold symbol,** Asterion follows you to the Throne Room door and won't leave. Ariadne laughs: "Take him. He's decided." He joins you at Lv 60 with his signature set, OT Ariadne (decision L4).
+
+### Hooks for the post-game docs
+
+This file owns the Endless Labyrinth, Asterion's return, the Minoan vaults and the Hall of Failures. The rest of the post-game belongs to `LABORS.md`, `UNDERWORLD.md`, `ODYSSEY.md` and `POSTGAME.md`.
+- The Labyrinth hands them the hooks below.
+- The relic powers involved are defined in SYSTEMS.md §1 and stay authoritative there.
+
+| Hook | Set up in | The owning doc builds |
+|---|---|---|
+| **The Cretan Bull is Asterion's sire.** Asterion leads you to him and calms him. | Asterion's arc (§8) | `LABORS.md`, Labor 7 |
+| **The Helm of Darkness goes home.** Minos, as a judge of the dead, recognises his cap; Hades asks for it back, then gives it back as the Helm of Hades. The upgrade's power is defined in SYSTEMS §1. | Scene F (Minos's tomb) | `UNDERWORLD.md` |
+| **Charon's obol** is the Bronze Obol from Elaia's well (SYSTEMS §5), and Hades's theoxenia (SYSTEMS §10, E11) asks for it first | The slice; SYSTEMS §5 and §10 | `UNDERWORLD.md` |
+| **Talos visits Daedalus.** The apprentice and the master make peace in the workshop. | Seeds 10, 11 and 18; scene L | `POSTGAME.md` |
+| **Rhea's turn** after her mercy at the heart | Scene J | Act III and the Frozen Hour (main story), then `POSTGAME.md` if it carries on |
+| **The Odyssey's homecoming night** can host the theoxenia finale at Mom's table (SYSTEMS §10) | SYSTEMS §10 | `ODYSSEY.md` |
+| **The Minoan vaults** (§9): five Labrys-sealed vaults, some on post-game islands | §9 | Listed by `POSTGAME.md`; designed here |
 
 ---
 
@@ -1454,6 +1619,8 @@ The 14 cues in §9, about 10 new tracks.
 | Mirrors and beam | A beam-trace special shared with Apollo's trial | `src/ichor_beam.c` | Medium | Low | Fixed beam, 2 levers |
 | Dancing floor | Coord events, a var, notes | Scripts | Low | Low | — |
 | Bull-leap | A timing task modeled on the fishing minigame | `src/ichor_bull_leap.c` | Low–Medium | Low | A yes/no with an animation |
+| Daedalus's lift | Two warps (workshop and Grand Staircase landing) behind a flag, with a short rising-platform animation | Scripts | Low | Low | A plain warp |
+| The sunken floor | A one-way hole warp (Gen 3 cave holes) from Ring II into a sealed Ring III pocket | Map events | Low | Low | — |
 | Bronze sentries and alarms | Non-battle sight objects; a battle pool | Scripts, `src/trainer_see.c` path | Low | Low | — |
 | Endless Labyrinth | The Battle Pyramid re-skinned | `src/battle_pyramid.c`, data, 16 chunk layouts | Medium | Medium (Frontier save struct, Brain logic) | Phase 5 |
 
@@ -1477,6 +1644,7 @@ The 14 cues in §9, about 10 new tracks.
 | Group | Flags |
 |---|---|
 | Relics | `GOT_THREAD`, `GOT_LABRYS`, `GOT_HELM` |
+| Shortcuts and gates | `DAEDALUS_LIFT`, `SUNKEN_FLOOR_POCKET`, `BULL_ROAD_VAULT`, `IDA_GATE` |
 | Pages and rewards | `DAEDALUS_PAGE_1` … `_7`, `MASTER_PLAN`, `GOT_COMPASS` |
 | Story | `ARRIVED_KNOSSA`, `MET_ARIADNE`, `FIRST_LEAP`, `MET_DAEDALUS`, `NUMBER_NINE_UNTIED`, `NUMBER_NINE_FOUND`, `KLEON_HUMBLED`, `ARCHIVE_TABLET`, `SHOWED_KLEON_TABLET`, `ARIADNE_JOINED`, `DANCE_DONE`, `ASTERION_FREED`, `PHAEDON_UNMASKED`, `RHEA_MERCY`, `TURNING_DONE`, `ICARUS_FLIGHT` |
 | Disguise and bell | `TITAN_DISGUISE`, `DISGUISE_ON`, `ENKELADOS_PASSED`, `BELL_KNOWN` |
