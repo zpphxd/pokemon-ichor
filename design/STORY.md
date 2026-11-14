@@ -1388,7 +1388,7 @@ One melody carries the story's heart, and the score withholds its resolution unt
 |---|---|---|---|
 | **The lullaby** | Dorian, a simple eight-bar tune Elpis hums | Elpis's hum (Astyra); **Phaedon's theme**, in minor at the unmasking [LABYRINTH]; **the music box** (Elpis's shelf, Daedalus's workshop, the whole Frozen Hour); **Kronos's theme** (the Stair, enormous); the twelve chimes | **It never resolves.** Every version stops on the half cadence (Elpis always falls asleep first) until she finishes it at the resolution. |
 | **The Labyrinth motif** | D E F G E F G E A, the crane dance [LABYRINTH] | Knossa | As approved |
-| **Elaia, home** | Lydian, lyre | Elaia, Mom's scenes | The countermelody is withheld until the Kastalian spring. Afterward the town theme always has it. |
+| **Elaia, home** | Dorian, lyre (see MUSIC.md) | Elaia, Mom's scenes | The countermelody is withheld until the Kastalian spring. Afterward the town theme always has it. |
 | **The Fates** | Three voices: lyre (Nemira), aulos (Lotira), frame drum (Thanira) | The intro's loom (already scored); the Loom; one voice per sanctuary in the Frozen Hour | All three play together only at the Loom, and on the Stair once all three are roused. |
 | **Team Titan** | 9/8 zeibekiko, heavy (`mus_ichor_titan` exists) | Grunts, bases | Slowed into a processional for Iapetos's play |
 | **The admins** | A shared battle theme, each with its own top layer | Hyperion (forge hammers), Iapetos (a chorus of aulos), Rhea (a slow 7/8 Lakonian frame drum) | Needed (INVENTORY §8) |
@@ -1396,7 +1396,7 @@ One melody carries the story's heart, and the score withholds its resolution unt
 | **The Lord of Time** | Meter changes every phrase | The Stair, the post-game rematch | — |
 | **The Moment** | Silence: the tick stops | The instant you seize it on the Stair; at Olympia in the post-game, a fast bright phrase that's over before it starts | Never more than two bars |
 | **The Archon** | Mixolydian, kithara and drum | Olympus | Stops on "Gods help you" |
-| **The main Ichor theme** | Lydian, rising | The title, the Icarus Shaft [LABYRINTH], the end of the Stair, the credits | — |
+| **The main Ichor theme** | Dorian, turning Lydian at the end (see MUSIC.md) | The title, the Icarus Shaft [LABYRINTH], the end of the Stair, the credits | — |
 
 ---
 

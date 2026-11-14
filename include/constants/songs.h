@@ -493,7 +493,7 @@
 
 // Ichor: our songs are appended after the phonemes (see below), so END_MUS covers
 // them; overworld.c sizes its night-music table from it.
-#define END_MUS                     MUS_ICHOR_AKADEMIA
+#define END_MUS                     MUS_ICHOR_HOLLOW
 
 // These PH_* constants are phoneme sounds used by the "bard" NPC (see src/bard_music.c and src/mauville_old_man.c).
 // Each comes in a triplet of PH_*_BLEND, PH_*_HELD, and PH_*_SOLO, and the name of each triplet incorporates the English phonetic sound it represents.
@@ -568,6 +568,18 @@
 #define MUS_ICHOR_NEW_GAME          624
 #define MUS_ICHOR_AGORA             625
 #define MUS_ICHOR_AKADEMIA          626
+#define MUS_ICHOR_ELPIS_LULLABY     627 // the hum: Elpis's room (Act II)
+#define MUS_ICHOR_ELPIS_LULLABY_BOX 628 // the music box: Daedalus's workshop, the Frozen Hour
+#define MUS_ICHOR_TRIREME           629
+#define MUS_ICHOR_ROAD              630 // Act I's mainland routes
+#define MUS_ICHOR_ROAD_NIGHT        631 // overworld.c's sNightMusicTable plays it for MUS_ICHOR_ROAD at night
+#define MUS_ICHOR_EMPORION          632
+#define MUS_ICHOR_TEMPLE_HERMES     633
+#define MUS_ICHOR_ELEUSA            634
+#define MUS_ICHOR_TEMPLE_DEMETER    635 // the Telesterion and the Mysteries
+#define MUS_ICHOR_BATTLE_ADMIN      636 // Titan admins: Hyperion, Iapetos, Rhea
+#define MUS_ICHOR_REVELATION        637 // Daphne's revelation, the end of Act I
+#define MUS_ICHOR_HOLLOW            638 // caves and woods, from Hecate's Hollow on
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 
