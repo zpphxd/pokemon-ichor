@@ -252,9 +252,9 @@ void PanFadeAndZoomScreen(u16 screenX, u16 screenY, u16 zoom, u16 alpha)
 #define T_FRIEZE_LOAD     372
 // Scene 2: the frieze
 #define T_CLOTHO          410   // fade in on Clotho at her spindle (bar 5)
-#define T_THREAD_GROW     470   // her thread runs out to the right
-#define T_THREAD_DONE     640
-#define T_PAN             820   // the pot begins to turn (bar 9, the timpani roll)
+#define T_THREAD_GROW     466   // her thread runs out to the right
+#define T_THREAD_DONE     700
+#define T_PAN             717   // the pot begins to turn (bar 8), gathering speed into the timpani roll
 #define T_GOLD           1024   // the golden thread rises in Elaia's grove (section B)
 #define T_GOLD_DONE      1084
 #define T_PAN_END        1990   // Olympus
@@ -685,7 +685,7 @@ static void StreamFrieze(s32 cam)
 
 // The pan: at rest on Clotho, then the pot turns, easing in over PAN_ACCEL
 // frames and out over PAN_DECEL, to stop with Olympus in frame.
-#define PAN_ACCEL 90
+#define PAN_ACCEL 150
 #define PAN_DECEL 110
 static s32 FriezeCamera(s32 t)
 {
@@ -811,8 +811,8 @@ static void Frieze_Update(s32 t)
     {
         s32 dt = t - sBoltTimes[i];
         ShowSprite(SPR_BOLT_1 + i, sBolts[i][0] + 8 - cam, sBolts[i][1] + 16, (t >> 1) & 1, 8, dt >= 0 && dt < 10);
-        if (dt >= 0 && dt < 10)
-            BlendRange(BG_PLTT_ID(PAL_CLAY), 16, 10 - dt, RGB(31, 30, 26));
+        if (dt >= 0 && dt < 7)
+            BlendRange(BG_PLTT_ID(PAL_CLAY), 16, 7 - dt, RGB(31, 27, 20));
     }
 
     // In from black on Clotho; out to white for the loom.

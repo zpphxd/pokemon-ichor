@@ -194,7 +194,8 @@ def olive_tree(seed, w=64, h=78, lean=0.0, with_boughs=False):
         my = (top_y + ey) / 2 + rnd.uniform(-2, 2)
         L.polyline(a, [(top_x, top_y), (mx, my), (ex, ey)], K, 3)
         boughs.append((ex, ey))
-    # leafy masses
+    # the crown: a mass over the fork, then a leafy mass at each bough's end
+    L.ellipse(a, top_x, top_y - 7, 11, 7, K)
     for ex, ey in boughs:
         rx, ry = rnd.uniform(9, 12), rnd.uniform(6, 8)
         L.ellipse(a, ex, ey, rx, ry, K)
@@ -282,6 +283,28 @@ WAVE = [
     ".#.......##.....",
     "################",
 ]
+
+
+def rocks(w=30, h=17, seed=9):
+    """A rocky shore: a mound of stones, black, with incised joints."""
+    rnd = random.Random(seed)
+    a = np.zeros((h, w), int)
+    pts = [(0, h)]
+    for i in range(7):
+        x = (i + 0.5) * w / 7
+        top = h * (0.25 + 0.6 * (1 - math.sin(math.pi * (i + 0.5) / 7))) + rnd.uniform(-1.5, 1.5)
+        pts.append((x, top))
+    pts.append((w, h))
+    L.polygon(a, pts, K)
+    # joints between stones: short incised arcs
+    for k in range(5):
+        cx = rnd.uniform(4, w - 4)
+        cy = rnd.uniform(h * 0.45, h - 3)
+        for t in np.linspace(-1.2, 1.2, 7):
+            x, y = int(round(cx + 3 * math.sin(t))), int(round(cy - 2 * math.cos(t)))
+            if 0 < x < w - 1 and 0 < y < h - 1 and a[y, x] == K and a[y - 1, x] == K:
+                a[y, x] = -1
+    return a
 
 
 def sea_band(w, depth=12, seed=7):
@@ -811,7 +834,7 @@ def shears_frames():
             for sg in (1, -1):        # upper half, then lower
                 arm = [(1, -1.8 * sg), (-14, -2.8 * sg), (-14, 0.8 * sg), (1, 1.6 * sg)]
                 L.polygon(c, [P(x, y, sg) for x, y in arm], K)
-                blade = [(-13, -4.4 * sg), (-36, -1.6 * sg), (-44, 0.4 * sg), (-13, 1.2 * sg)]
+                blade = [(-13, -5.4 * sg), (-34, -2.6 * sg), (-45, 0.5 * sg), (-13, 1.6 * sg)]
                 L.polygon(c, [P(x, y, sg) for x, y in blade], K)
             # the spring bow
             for t in np.linspace(-1.7, 1.7, 50):
@@ -893,6 +916,6 @@ def rod_hand():
 def knot():
     """8x8: the red knot Lachesis ties where a thread will be cut."""
     f = np.zeros((8, 8), int)
-    g = grid_arr(["..r..", ".rrr.", ".rwr.", "..r.."])
-    f[2:6, 1:6] = g
+    g = grid_arr([".rr.", "rwwr", "rwwr", ".rr."])
+    f[2:6, 2:6] = g
     return f

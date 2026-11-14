@@ -43,7 +43,7 @@ KEYS = [
 ]
 BOOT_STILLS = {"1_copyright": 90, "2_powered_by": 330}
 SHEET_STEP = 30
-LAST_FRAME = 3200        # the title is up by then
+LAST_FRAME = 3420        # the amphora title is up by then
 
 
 def map_address(symbol):
@@ -152,21 +152,24 @@ def capture():
 
 
 def skip_check():
-    """Press START at several points and check the title follows each time:
-    in the powered-by card, the studio card, the frieze and the loom."""
+    """Press START at several points and screenshot 300 frames later: in the
+    powered-by card (which, as upstream's, skips to the studio card), the
+    studio card, the frieze and the loom (which skip to the title)."""
     results = []
-    for press in (300, 520, 1700, 2600):
-        log = run_lua(press=(press,), last=press + 420, keys=[])
-        shot = OUT / f"boot_{(press + 420) - (press + 420) % SHEET_STEP:05d}.png"
-        results.append((press, log, shot))
+    for press in (300, 520, 1700, 2560):
+        log = run_lua(press=(press,), last=press + 300, keys=[])
+        f = press + 300
+        shot = ROOT / f"build/intro_skip_{press}.png"
+        Image.open(OUT / f"boot_{f - f % SHEET_STEP:05d}.png").save(shot)
+        results.append((press, [l for l in log if "press" in l], shot))
+    contact([r[2] for r in results], IMG / "intro_skip.png", cols=4,
+            labels=[f"START at boot {p}, shot 300 frames later" for p, _, _ in results])
     return results
 
 
 if __name__ == "__main__":
     if "--skip" in sys.argv:
         for press, log, shot in skip_check():
-            dst = ROOT / f"build/intro_capture_skip_{press}.png"
-            Image.open(shot).save(dst)
-            print(press, [l for l in log if "press" in l], dst)
+            print(press, log, shot)
     else:
         capture()

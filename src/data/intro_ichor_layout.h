@@ -10,13 +10,13 @@
 #define FRIEZE_HAND_Y         102
 #define FRIEZE_SPINDLE_X      52
 #define FRIEZE_SPINDLE_Y      112
-#define FRIEZE_GOLD_X         266
+#define FRIEZE_GOLD_X         384
 #define FRIEZE_GOLD_Y         129
 #define FRIEZE_FLAME_X        1091
 #define FRIEZE_FLAME_Y        105
 // Finizen leaps: x0, waterline y, x1, height
-#define FRIEZE_FINIZEN_A      {430, 112, 470, 30}
-#define FRIEZE_FINIZEN_B      {612, 112, 662, 26}
+#define FRIEZE_FINIZEN_A      {606, 114, 648, 28}
+#define FRIEZE_FINIZEN_B      {798, 114, 838, 24}
 // lightning around Zapdos: top-left of each 16x32 bolt
 #define FRIEZE_BOLTS          {{1312, 59}, {1266, 67}, {1326, 41}}
 #define FRIEZE_GOLD_GLINT     15

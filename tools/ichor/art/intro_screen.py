@@ -164,21 +164,21 @@ class Frieze:
         owl = F.grid_arr(F.NOCTOWL)
         put(img, owl, int(tb + bx) - owl.shape[1] // 2, int(tb_y + by) - owl.shape[0] - 4)
         put_label(img, "ΕΛΑΙΑ", 190, PANEL_Y0 + 4)
-        self.pos["GOLD_ORIGIN"] = (tb + 32 + 6, GROUND_Y - 1)
+        # the hero's thread rises from the roots of the third olive
+        self.pos["GOLD_ORIGIN"] = (tc + 40, GROUND_Y - 1)
 
         # --- the sea: a rocky shore, the trireme, the ketos and the waves
         sea_x0, sea_x1 = 420, 852
-        rocks = [(sea_x0 - 6, 6), (sea_x0 + 4, 9), (sea_x1 - 10, 8), (sea_x1 - 1, 5)]
         ship = F.trireme()
         put(img, ship, 470, 118 - 60)
         ket = F.ketos()
         put(img, ket, 690, 118 - (ket.shape[0] - 8))
         sea = F.sea_band(sea_x1 - sea_x0)
         put(img, sea, sea_x0, GROUND_Y - sea.shape[0] + 1)
-        for x, r in rocks:
-            L.ellipse(img, x, GROUND_Y - 1, r, r * 0.8, F.K)
-        self.pos["FINIZEN_A"] = (430, 112, 470, 30)   # leap from x0 to x1 at the waterline, height
-        self.pos["FINIZEN_B"] = (612, 112, 662, 26)
+        for x, seed in ((sea_x0 - 16, 9), (sea_x1 - 12, 4)):
+            on_ground(F.rocks(30, 17, seed), x, img)
+        self.pos["FINIZEN_A"] = (606, 114, 648, 28)   # leap from x0 to x1 at the waterline, height
+        self.pos["FINIZEN_B"] = (798, 114, 838, 24)
         put_label(img, "ΘΑΛΑΣΣΑ", 560, PANEL_Y0 + 4)
 
         # --- the temple of the Twelve, its altar fire, and Xatu on the roof
