@@ -1069,8 +1069,9 @@ EventScript_AfterWhiteOutHeal::
 	lockall
 	msgbox gText_FirstShouldRestoreMonsHealth
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
-	call_if_unset FLAG_DEFEATED_RUSTBORO_GYM, EventScript_AfterWhiteOutHealMsgPreFirstBoss
-	call_if_set FLAG_DEFEATED_RUSTBORO_GYM, EventScript_AfterWhiteOutHealMsg
+	@ Ichor: the advice stops after the first Laurel, not Rustboro's badge.
+	call_if_unset FLAG_BADGE01_GET, EventScript_AfterWhiteOutHealMsgPreFirstBoss
+	call_if_set FLAG_BADGE01_GET, EventScript_AfterWhiteOutHealMsg
 	applymovement VAR_LAST_TALKED, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
 	fadedefaultbgm
@@ -1090,9 +1091,12 @@ EventScript_AfterWhiteOutMomHeal::
 	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
+	setspeaker SP_NAME_MOM
 	msgbox gText_HadQuiteAnExperienceTakeRest
 	call Common_EventScript_OutOfCenterPartyHeal
+	setspeaker SP_NAME_MOM
 	msgbox gText_MomExplainHPGetPotions
+	setspeaker SP_NAME_NONE
 	fadedefaultbgm
 	releaseall
 	end
@@ -1361,12 +1365,12 @@ Common_EventScript_PlayerHandedOverTheItem::
 
 @ The below and surf.inc could be split into some text/notices.inc
 gText_PokemartSign::
-	.string "“Selected items for your convenience!”\n"
-	.string "POKéMON MART$"
+	.string "“Everything a traveler needs!”\n"
+	.string "AGORA$"
 
 gText_PokemonCenterSign::
-	.string "“Rejuvenate your tired partners!”\n"
-	.string "POKéMON CENTER$"
+	.string "“Rest here, by the sacred spring.”\n"
+	.string "ASCLEPEION$"
 
 gText_MomOrDadMightLikeThisProgram::
 	.string "{STR_VAR_1} might like this program.\n"
@@ -1395,7 +1399,7 @@ gText_PokemonTrainerSchoolEmail::
 	.string "… … … … … …$"
 
 gText_PlayerHouseBootPC::
-	.string "{PLAYER} booted up the PC.$"
+	.string "{PLAYER} lifted the lid of the chest.$"
 
 gText_PokeblockLinkCanceled::
 	.string "The link was canceled.$"
@@ -1409,44 +1413,36 @@ gText_PlayerWhitedOut::
 	.string "POKéMON!\p{PLAYER} whited out!$"
 
 gText_FirstShouldRestoreMonsHealth::
-	.string "First, you should restore your\n"
-	.string "POKéMON to full health.$"
+	.string "Easy, now. Let's tend your\n"
+	.string "Pokémon first.$"
 
 gText_MonsHealedShouldBuyPotions::
-	.string "Your POKéMON have been healed\n"
-	.string "to perfect health.\p"
-	.string "If your POKéMON's energy, HP,\n"
-	.string "is down, please come see us.\p"
-	.string "If you're planning to go far in the\n"
-	.string "field, you should buy some POTIONS\l"
-	.string "at the POKéMON MART.\p"
-	.string "We hope you excel!$"
+	.string "There. Whole and well again.\p"
+	.string "If their HP runs low, come back\n"
+	.string "to us.\p"
+	.string "If you're going far, buy Potions at\n"
+	.string "the Agora before you go.\p"
+	.string "Go in health.$"
 
 gText_MonsHealed::
-	.string "Your POKéMON have been healed\n"
-	.string "to perfect health.\p"
-	.string "We hope you excel!$"
+	.string "There. Whole and well again.\p"
+	.string "Go in health.$"
 
 gText_HadQuiteAnExperienceTakeRest::
-	.string "MOM: {PLAYER}!\n"
-	.string "Welcome home.\p"
-	.string "It sounds like you had quite\n"
-	.string "an experience.\p"
-	.string "Maybe you should take a quick\n"
-	.string "rest.$"
+	.string "{PLAYER}! Welcome home.\p"
+	.string "You look like you've been through\n"
+	.string "something. Sit a moment. Rest.$"
 
 gText_MomExplainHPGetPotions::
-	.string "MOM: Oh, good! You and your\n"
-	.string "POKéMON are looking great.\p"
+	.string "There. You and your Pokémon look\n"
+	.string "much better.\p"
 	.string "I just heard from {STR_VAR_1}.\p"
-	.string "He said that POKéMON's energy is\n"
+	.string "She says a Pokémon's strength is\n"
 	.string "measured in HP.\p"
-	.string "If your POKéMON lose their HP,\n"
-	.string "you can restore them at any\l"
-	.string "POKéMON CENTER.\p"
-	.string "If you're going to travel far away,\n"
-	.string "the smart TRAINER stocks up on\l"
-	.string "POTIONS at the POKéMON MART.\p"
+	.string "If their HP runs low, any Asclepeion\n"
+	.string "will tend them.\p"
+	.string "And if you're going far, buy Potions\n"
+	.string "at the Agora first.\p"
 	.string "Make me proud, honey!\p"
 	.string "Take care!$"
 
@@ -1464,13 +1460,11 @@ gText_ComeBackWithSecretPower::
 	.string "you good stuff in secrecy.$"
 
 gText_PokerusExplanation::
-	.string "Your POKéMON may be infected with\n"
-	.string "POKéRUS.\p"
-	.string "Little is known about the POKéRUS\n"
-	.string "except that they are microscopic life-\l"
-	.string "forms that attach to POKéMON.\p"
-	.string "While infected, POKéMON are said to\n"
-	.string "grow exceptionally well.$"
+	.string "Oh! Your Pokémon carry Pokérus.\p"
+	.string "It's a living thing, too small to see,\n"
+	.string "that clings to Pokémon.\p"
+	.string "It does them no harm. The old scrolls\n"
+	.string "say it even helps them grow strong.$"
 
 	.include "data/text/surf.inc"
 

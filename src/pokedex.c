@@ -686,7 +686,7 @@ static const u8 sText_UnkHeight[] = _("{CLEAR_TO 12}??'??”");
 static const u8 sText_UnkHeightMetric[] = _("???.? m");
 static const u8 sText_UnkWeight[] = _("????.? lbs.");
 static const u8 sText_UnkWeightMetric[] = _("???.? kg.");
-static const u8 sText_PokedexRegistration[] = _("POKéDEX registration completed.");
+static const u8 sText_PokedexRegistration[] = _("Pokédex registration completed.");
 static const u8 sText_HTHeight[] = _("HT");
 static const u8 sText_WTWeight[] = _("WT");
 static const u8 sText_SearchingPleaseWait[] = _("Searching…\nPlease wait.");
@@ -1181,7 +1181,7 @@ static const u8 sSearchMovementMap_ShiftHoennDex[SEARCH_COUNT][4] =
 
 static const struct SearchOptionText sDexModeOptions[] =
 {
-    [DEX_MODE_HOENN]    = {COMPOUND_STRING("HOENN region's POKéDEX"),   COMPOUND_STRING("HOENN DEX")},
+    [DEX_MODE_HOENN]    = {COMPOUND_STRING("AETHOS region's POKéDEX"),  COMPOUND_STRING("AETHOS DEX")},
     [DEX_MODE_NATIONAL] = {COMPOUND_STRING("National edition POKéDEX"), COMPOUND_STRING("NATIONAL DEX")},
     {},
 };
