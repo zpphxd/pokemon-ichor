@@ -9,7 +9,13 @@ Each room is a grid plus a list of placements:
   wall    wall style: red (red ochre dado) or blue (Aegean dado)
   rugs    (design, x, y, w, h) woven rugs; walkable, drawn under furniture
   stamps  (stamp name, x, y): the stamp's top-left cell
-  spots   named tiles the script needs (NPC spots, bg events, warps)
+  spots   what the script needs, checked by oikia_build.py:
+            ("warp", label, [(x, y), ...])           warp tiles
+            ("npc", label, (x, y), facing)           an object event's tile
+            ("bg", label, (x, y), (fx, fy, facing))  a bg event, and the tile
+                                                     the player reads it from
+            ("coord", label, (x, y))                 a coord event's tile
+          The first warp is where the walk check starts.
 
 oikia_build.py composes these into metatiles and writes the layouts to
 design/phase1/rooms/<name>.bin. Coordinates are (x, y) in metatiles.
@@ -18,7 +24,8 @@ design/phase1/rooms/<name>.bin. Coordinates are (x, y) in metatiles.
 ROOMS = {
     # ------------------------------------------------------------------
     "players_house_1f": {
-        "title": "Player's house, 1F (Melitta's hall and kitchen)",
+        "title": "Player's house, 1F: Melitta's hall and kitchen",
+        "map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F",
         "floor": "terracotta",
         "wall": "red",
         "grid": [
@@ -56,19 +63,23 @@ ROOMS = {
             ("myrtle", 11, 7),
             ("mat", 5, 8),
         ],
-        "spots": {
-            "door (south-arrow warps)": [(5, 8), (6, 8)],
-            "stairs up (warp)": [(10, 2)],
-            "Mom, at the hearth": [(3, 3)],
-            "hearth (bg, face north from (1,4)/(2,4) or west from (3,2)... see notes)": [(1, 3), (2, 3)],
-            "Mom's loom (bg, face north)": [(7, 2), (8, 2)],
-            "honey shelf (bg, face north)": [(3, 1), (4, 1)],
-            "altar of Hestia (bg, face north)": [(5, 2)],
-        },
+        "spots": [
+            ("warp", "door to Elaia Village (south-arrow mat)", [(5, 8), (6, 8)]),
+            ("warp", "stairs up to 2F; the player arrives here from 2F", [(10, 2)]),
+            ("npc", "Melitta (Mom), at the hearth", (3, 3), "west"),
+            ("bg", "hearth: \"The family hearth, banked low.\"", (1, 3), (1, 4, "north")),
+            ("bg", "hearth, right half", (2, 3), (2, 4, "north")),
+            ("bg", "Mom's loom (TV re-skin): the traveling cloak", (7, 2), (7, 3, "north")),
+            ("bg", "Mom's loom, right half", (8, 2), (8, 3, "north")),
+            ("bg", "honey shelf: \"NOT FOR {PLAYER}\"", (4, 1), (4, 2, "north")),
+            ("bg", "altar of Hestia (optional)", (5, 2), (5, 3, "north")),
+            ("bg", "window (optional)", (6, 1), (6, 2, "north")),
+        ],
     },
     # ------------------------------------------------------------------
     "players_house_2f": {
-        "title": "Player's house, 2F (the player's room)",
+        "title": "Player's house, 2F: the player's room",
+        "map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_2F",
         "floor": "boards",
         "wall": "red",
         "grid": [
@@ -97,15 +108,23 @@ ROOMS = {
             ("myrtle", 0, 6),
             ("amphora_plain", 9, 6),
         ],
-        "spots": {
-            "stairs down (warp)": [(8, 1)],
-            "stair gate (coord event)": [(8, 2)],
-            "new-game start, by the kline": [(5, 5)],
-        },
+        "spots": [
+            ("warp", "stairs down to 1F; the player arrives here from 1F", [(8, 1)]),
+            ("coord", "stair gate (\"Did you fill your water clock?\")", (8, 2)),
+            ("npc", "new-game start, by the kline (src/new_game.c)", (5, 5), "south"),
+            ("bg", "klepsydra (wall clock, special StartWallClock)", (4, 1), (4, 2, "north")),
+            ("bg", "kibotos chest (PC re-skin, item storage)", (5, 2), (5, 3, "north")),
+            ("bg", "kibotos chest, right half", (6, 2), (6, 3, "north")),
+            ("bg", "knucklebones (GameCube re-skin)", (6, 5), (5, 5, "east")),
+            ("bg", "window: bees and a lyre", (2, 1), (2, 2, "north")),
+            ("bg", "scroll cabinet (bookshelf): heroes with mustaches", (0, 2), (0, 3, "north")),
+            ("bg", "scroll cabinet, right half", (1, 2), (1, 3, "north")),
+        ],
     },
     # ------------------------------------------------------------------
     "kydippe_house": {
-        "title": "Kydippe's house (Elaia)",
+        "title": "Kydippe's house, Elaia",
+        "map": "MAP_ELAIA_VILLAGE_NEIGHBORS_HOUSE",
         "floor": "flags",
         "wall": "red",
         "grid": [
@@ -137,11 +156,17 @@ ROOMS = {
             ("myrtle", 0, 6),
             ("mat", 4, 7),
         ],
-        "spots": {},
+        "spots": [
+            ("warp", "door to Elaia Village (south-arrow mat)", [(4, 7), (5, 7)]),
+            ("npc", "Kydippe, by her chair under the window", (2, 2), "south"),
+            ("npc", "Chansey, wandering (keep its range inside x 2-8, y 3-6)", (6, 3), "south"),
+            ("bg", "niche: a clay Eileithyia, goddess of births (optional)", (7, 1), (7, 2, "north")),
+        ],
     },
     # ------------------------------------------------------------------
     "fishers_house": {
-        "title": "The Fisher's house (Akti)",
+        "title": "The Fisher's house, Akti",
+        "map": "MAP_AKTI_TOWN_FISHERS_HOUSE",
         "floor": "boards",
         "wall": "blue",
         "grid": [
@@ -174,7 +199,14 @@ ROOMS = {
             ("pithos", 9, 2),
             ("mat", 4, 7),
         ],
-        "spots": {},
+        "spots": [
+            ("warp", "door to Akti Town (south-arrow mat)", [(4, 7), (5, 7)]),
+            ("npc", "Glaukos, by the window", (3, 2), "south"),
+            ("npc", "Glaukos's grandson", (6, 6), "west"),
+            ("bg", "trident on the wall (optional)", (5, 1), (5, 2, "north")),
+            ("bg", "model ship (optional)", (6, 1), (6, 2, "north")),
+            ("bg", "model ship, right half", (7, 1), (7, 2, "north")),
+        ],
     },
 }
 
@@ -185,8 +217,9 @@ ROOMS = {
 # ----------------------------------------------------------------------
 
 WALL_HUNG = ["window", "niche", "niche_horse", "klepsydra", "herbs", "honey_shelf",
-             "jar_shelf", "trident", "boat", "nets", "stairs_down"]
-BACK = ["loom", "chest", "scrolls", "altar", "oars", "stairs_up", "stairs_up_r"]
+             "jar_shelf", "trident", "boat", "nets", "stairs_down", "stairs_down_wood"]
+BACK = ["loom", "chest", "scrolls", "altar", "oars", "stairs_up", "stairs_up_r",
+        "stairs_up_wood", "stairs_up_wood_r"]
 FREE = ["kline", "klismos_r", "klismos_l", "stool", "table", "table_round", "desk",
         "amphora", "amphora_plain", "pithos", "pots", "myrtle", "kalathos",
         "fish_basket", "knucklebones", "mortar", "lampstand", "column", "mat"]
@@ -206,7 +239,7 @@ def _row_pack(names, stamps, width, y0, x0=1, gap=1):
 
 
 def catalog(stamps):
-    """Catalog layouts, one per floor material, plus the blue-wall strip."""
+    """Catalog layouts, one per floor material (boards with the blue wall)."""
     cats = {}
     width = 24
     for floor, wall in (("terracotta", "red"), ("boards", "blue"), ("flags", "red")):
@@ -237,6 +270,6 @@ def catalog(stamps):
             "grid": grid,
             "rugs": [("red", 1, rug_y, 3, 3), ("blue", 5, rug_y, 3, 3)],
             "stamps": placed,
-            "spots": {},
+            "spots": [],
         }
     return cats

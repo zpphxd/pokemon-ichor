@@ -945,6 +945,18 @@ STAMPS["stairs_up_r"] = dict(STAMPS["stairs_up"], img=hflip(STAMPS["stairs_up"][
                              walk={(0, 2)}, behavior={(0, 2): "MB_NON_ANIMATED_DOOR"},
                              note="the same stairs climbing east; the warp is the bottom-left cell")
 
+# Timber versions: the same stairs built of the ceiling's beam wood.
+_TIMBER_UP = {"w": "3", "p": "2", "s": "1", "S": "1"}
+_TIMBER_DOWN = {"2": "1", "3": "2", "S": "2", "s": "3", "w": "3", "p": "2"}
+STAMPS["stairs_up_wood"] = dict(STAMPS["stairs_up"],
+                                img=recolor(STAMPS["stairs_up"]["img"], "wall", _TIMBER_UP),
+                                note="timber stairs climbing west to the ceiling hatch; the warp is the bottom-right cell")
+STAMPS["stairs_up_wood_r"] = dict(STAMPS["stairs_up_r"], img=hflip(STAMPS["stairs_up_wood"]["img"]),
+                                  note="timber stairs climbing east; the warp is the bottom-left cell")
+STAMPS["stairs_down_wood"] = dict(STAMPS["stairs_down"],
+                                  img=recolor(STAMPS["stairs_down"]["img"], "wall", _TIMBER_DOWN),
+                                  note="timber stairs dropping into the back wall; the warp is the lower cell")
+
 # ---- floor furniture -------------------------------------------------------
 
 stamp("kline", "wood", """
@@ -1140,8 +1152,8 @@ stamp("scrolls", "wood", """
 .kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
 .klkddddddddddddkkddddddddddddk.
 .klkdccddccddccdkkddccddddccdkk.
-.klkcCCccCCccCCckkdcCCcddcCCcdk.
-.klkcCCccCCccCCckkdcCCcddcCCcdk.
+.klkcCmccCmccCmckkdcCmcddcCmcdk.
+.klkcmmccmmccmmckkdcmmcddcmmcdk.
 .klkdccddccddccdkkddccddddccdkk.
 .klkdrddddrddddkdkdddrdddddddkk.
 .kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
@@ -1149,11 +1161,11 @@ stamp("scrolls", "wood", """
 .kmmmmmmmmmmmmmmmmmmmmmmmmmmmdk.
 .klkdddddddddddkkddddddddddddkk.
 .klkddccddddccdkkdccddccddccdkk.
-.klkdcCCcddcCCckkcCCccCCccCCcdk.
-.klkdcCCccccCCckkcCCccCCccCCcdk.
-.klkddcccCCccccdkdccddccddccddk.
-.klkddddcCCcdrdkkdddrddddrddddk.
-.klkddddcCCcdddkkddddddddddddkk.
+.klkdcCmcddcCmckkcCmccCmccCmcdk.
+.klkdcmmccccmmckkcmmccmmccmmcdk.
+.klkddcccCmccccdkdccddccddccddk.
+.klkddddcmmcdrdkkdddrddddrddddk.
+.klkdddddccddddkkddddddddddddkk.
 .kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
 .khhhhhhhhhhhhhhhhhhhhhhhhhhhhk.
 .kmmmmmmmmmmmmmmmmmmmmmmmmmmmdk.

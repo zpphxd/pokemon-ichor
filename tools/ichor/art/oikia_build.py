@@ -415,6 +415,144 @@ def check_compiled():
 # Rooms
 # --------------------------------------------------------------------------
 
+DIRS = {"north": (0, -1), "south": (0, 1), "east": (1, 0), "west": (-1, 0)}
+
+
+def check_spots(name, spec, cells):
+    """Every warp, NPC, coord and bg-reading tile is walkable and reachable
+    from the room's first warp, and each bg is read from the tile in front."""
+    H, W = len(cells), len(cells[0])
+
+    def open_(x, y):
+        return 0 <= x < W and 0 <= y < H and cells[y][x].block != SOLID
+
+    warps = [s for s in spec["spots"] if s[0] == "warp"]
+    if not warps:
+        return
+    start = warps[0][2][0]
+    seen, todo = {start}, [start]
+    while todo:
+        x, y = todo.pop()
+        for dx, dy in DIRS.values():
+            n = (x + dx, y + dy)
+            if n not in seen and open_(*n):
+                seen.add(n)
+                todo.append(n)
+    for spot in spec["spots"]:
+        kind, label = spot[0], spot[1]
+        if kind == "warp":
+            for t in spot[2]:
+                assert t in seen, f"{name}: warp '{label}' at {t} is unreachable"
+                assert cells[t[1]][t[0]].behavior != "MB_NORMAL", f"{name}: {t} is not a warp tile"
+        elif kind in ("npc", "coord"):
+            assert spot[2] in seen, f"{name}: {kind} '{label}' at {spot[2]} is unreachable"
+        elif kind == "bg":
+            at, (fx, fy, facing) = spot[2], spot[3]
+            assert (fx, fy) in seen, f"{name}: bg '{label}' is read from {(fx, fy)}, which is unreachable"
+            dx, dy = DIRS[facing]
+            assert (fx + dx, fy + dy) == at, f"{name}: bg '{label}': {(fx, fy)} facing {facing} misses {at}"
+
+
+def room_doc(name, spec, cells):
+    """Markdown for one room: size, files, an ASCII walk map and its spots."""
+    H, W = len(cells), len(cells[0])
+    marks = {}
+    for i, spot in enumerate(spec["spots"], 1):
+        tiles = spot[2] if spot[0] == "warp" else [spot[2]]
+        for t in tiles:
+            marks.setdefault(t, str(i) if i < 10 else chr(ord("a") + i - 10))
+    lines = [f"### {spec['title']}", ""]
+    lines.append(f"- Map: `{spec['map']}`. Layout: `design/phase1/rooms/{name}.bin`, "
+                 f"**{W}x{H}** blocks, secondary `gTileset_Oikia`.")
+    lines.append(f"- Floor: {spec['floor']}. Wall: {spec['wall']} dado. "
+                 f"Render: `design/phase1/img/rooms_{name}.png` (3x).")
+    lines.append("")
+    lines.append("Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table; "
+                 "a bg event is marked on its furniture tile.")
+    lines.append("")
+    lines.append("```")
+    lines.append("    " + "".join(f"{x % 10}" for x in range(W)))
+    for y in range(H):
+        row = ""
+        for x in range(W):
+            row += marks.get((x, y), "." if cells[y][x].block != SOLID else "#")
+        lines.append(f"{y:3d} {row}")
+    lines.append("```")
+    lines.append("")
+    lines.append("| # | Kind | Tile | Read from | What |")
+    lines.append("|---|---|---|---|---|")
+    for i, spot in enumerate(spec["spots"], 1):
+        kind, label = spot[0], spot[1]
+        key = str(i) if i < 10 else chr(ord("a") + i - 10)
+        if kind == "warp":
+            tile = ", ".join(f"({x},{y})" for x, y in spot[2])
+            frm = ""
+        elif kind == "npc":
+            tile, frm = f"({spot[2][0]},{spot[2][1]})", f"faces {spot[3]}"
+        elif kind == "coord":
+            tile, frm = f"({spot[2][0]},{spot[2][1]})", ""
+        else:
+            tile = f"({spot[2][0]},{spot[2][1]})"
+            fx, fy, facing = spot[3]
+            frm = f"({fx},{fy}) facing {facing}"
+        lines.append(f"| {key} | {kind} | {tile} | {frm} | {label} |")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def stamp_doc(composed, ids):
+    """Markdown table: every stamp with its metatile ids on each catalog."""
+    where = {}
+    for cat in ("catalog_terracotta", "catalog_boards", "catalog_flags"):
+        spec = R.catalog(A.STAMPS)[cat]
+        for (n, sx, sy) in spec["stamps"]:
+            st = A.STAMPS[n]
+            rows = []
+            for cy in range(st["h"]):
+                row = []
+                for cx in range(st["w"]):
+                    sub = cut(st["img"], cx, cy)
+                    row.append(f"{ids[cat][sy + cy][sx + cx]:03X}" if not empty(sub) else "---")
+                rows.append(" ".join(row))
+            where.setdefault(n, {})[cat.split("_")[1]] = " / ".join(rows)
+    lines = ["| Stamp | Cells | Palette | Terracotta, red wall | Boards, blue wall | Flags, red wall | What it is |",
+             "|---|---|---|---|---|---|---|"]
+    for n, st in A.STAMPS.items():
+        w = where.get(n, {})
+        lines.append(f"| `{n}` | {st['w']}x{st['h']} | {st['pal']} | {w.get('terracotta', '')} | "
+                     f"{w.get('boards', '')} | {w.get('flags', '')} | {st['note']} |")
+    return "\n".join(lines)
+
+
+def base_doc(order):
+    """Markdown table of the bare floors, walls, void and rug pieces."""
+    index = {c.key(): FIRST_METATILE + i for i, c in enumerate(order)}
+    b = basics()
+    names = []
+    for mat, vs in A.FLOORS.items():
+        for v in ("plain", "alt", "top", "left", "corner"):
+            if v in vs:
+                names.append(f"floor {mat}, {v}")
+    for style in A.WALLS:
+        names += [f"wall {style}, upper", f"wall {style}, lower"]
+    names.append("void (outside the room)")
+    for design in A.RUGS:
+        for part in ("top-left", "top", "top-right", "left", "middle", "right",
+                     "bottom-left", "bottom", "bottom-right"):
+            names.append(f"rug {design}, {part}")
+    lines = ["| Piece | Metatile |", "|---|---|"]
+    for name, c in zip(names, b):
+        lines.append(f"| {name} | `{index[c.key()]:03X}` |")
+    return "\n".join(lines)
+
+
+def splice(path, text):
+    """Replace the generated section of a hand-written doc."""
+    begin, end = "<!-- oikia_build: begin generated -->", "<!-- oikia_build: end generated -->"
+    doc = path.read_text()
+    a, b = doc.index(begin) + len(begin), doc.index(end)
+    path.write_text(doc[:a] + "\n\n" + text.strip() + "\n\n" + doc[b:])
+
 def blockdata(cells, ids):
     H, W = len(cells), len(cells[0])
     out = np.zeros(H * W, "<u2")
@@ -452,6 +590,8 @@ def main():
     rooms = dict(R.ROOMS)
     cats = R.catalog(A.STAMPS)
     composed = {n: compose(s) for n, s in list(rooms.items()) + list(cats.items())}
+    for n, spec in rooms.items():
+        check_spots(n, spec, composed[n])
     order, ids = collect(composed)
     print(f"oikia: {len(order)} unique metatiles")
 
@@ -497,6 +637,16 @@ def main():
     if sheet.returncode != 0:
         sys.stderr.write(sheet.stderr)
         raise SystemExit("oikia: sheet render failed")
+    ROOMS_DOC = ROOT / "design/phase1/ROOMS_oikia.md"
+    TILES_DOC = ROOT / "design/phase1/TILES_oikia.md"
+    if ROOMS_DOC.exists():
+        splice(ROOMS_DOC, "\n".join(room_doc(n, s, composed[n]) for n, s in rooms.items()))
+    if TILES_DOC.exists():
+        used = len({int(e) & 0x3FF for e in np.fromfile(BIN / "metatiles.bin", "<u2")
+                    if int(e) & 0x3FF >= FIRST_TILE})
+        stats = (f"Built: **{len(order)}** metatiles (`0x200`-`{FIRST_METATILE + len(order) - 1:#05x}`) "
+                 f"of 512, **{used}** tiles of 512, palettes {pals[0]}-{pals[-1]}.\n\n")
+        splice(TILES_DOC, stats + base_doc(order) + "\n\n" + stamp_doc(composed, ids))
     print(f"oikia: rooms {json.dumps(summary)}")
     print(f"oikia: identical on aethos and building; {nmeta} metatiles, {ntiles} tiles, palettes {pals}")
 
