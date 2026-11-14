@@ -77,3 +77,10 @@ Map and encounter notes for whoever builds the areas:
 - Relic Copper must be obtainable somewhere for Charonaut to evolve.
 - Victory Road's wild levels should stay under 40, or the wild eagle, north-wind and ice lines will evolve on their first level-up.
 - The Hydra's line is named from Lerna, though it lives at Lake Stymphalia as the plan says.
+
+ROM budget notes for whoever implements the dex. These come from the main session's inventory (`design/art/INVENTORY.md` on main), measured from `pokeemerald.map` on 2026-11-14:
+- Pokémon cries take 9.4 MB (35% of the ROM), and species art and data take 5.9 MB (22%). The ROM is about 80% full, with about 6.3 MB free. Cutting Hoenn-only systems frees only about 2.2 MB more.
+- Under D5 (a), removing the vanilla species Aethos doesn't use is the single biggest space lever, worth several times all the other cuts combined. Plan the implementation around two questions:
+  - Which vanilla species stay, if any. The post-game national dex is the main reason to keep some.
+  - How the new species' cries are made. Full-length cries are the expensive part, so the choice is between new short cries and reused, pitch-shifted vanilla cries.
+- The dex's own sprites, at about 152 species, should come to roughly 1.2–1.5 MB.
