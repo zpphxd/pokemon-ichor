@@ -525,8 +525,9 @@ script AktiTown_EventScript_WindsTurn {
     delay(20)
     playmoncry(SPECIES_HALCYLING, CRY_MODE_NORMAL)
     waitmoncry
+    // No waitse: SE_M_GUST never reports finished, so waiting on it softlocks.
     playse(SE_M_GUST)
-    waitse
+    delay(30)
     setspeaker(AktiTown_Text_NameNausikles)
     msgbox(format("WIND! Wind from the south!\p"
                   "Everyone aboard who's coming aboard!"))
