@@ -34,7 +34,7 @@ The bag, party menu, summary screen, Agora (shop) and map-name popups are redraw
 
   ![Satchels](img/ui_bag_satchel.png)
 - **Badges.** The HM badge is gold on an ink tablet. The SELECT tag is ink on gold.
-- **Berry tag** (Bag > Berries > CHECK TAG) is recolored only, by `write_berry_tag_palettes()`. It now has a parchment card, a clay title band and a terracotta backdrop for both players, but it keeps Emerald's card shapes.
+- **Berry tag** (Bag > Berries > CHECK TAG) is redrawn as a clay label by `ui_berry_tag.py` (`UI_remnants.md`).
 - **Limits.**
   - `graphics.c` loads `-num_tiles 53`, so the screen uses at most 53 tiles. It uses 40 today.
   - The code draws some tiles by number: `0x11` is the plain list fill (`DrawItemListBgRow`), and `0x17` and `0x2B` are the pocket dots in BG palette 1 (`DrawPocketIndicatorSquare`).
@@ -164,7 +164,7 @@ All are small and commented `// Ichor:`.
 
 ## Not done, or left on purpose
 
-- **Berry tag screen.** Bag > Berries > CHECK TAG (`check_berry*`, `berry_tag*`) is recolored into the family, but its tiles are still Emerald's rounded tag on stripes. Redrawing it, for example as a clay label tied with string, is a whole screen of its own and belongs in the next batch.
+- **Berry tag screen.** Done since: a clay label tied with twine (`ui_berry_tag.py`, `UI_remnants.md`).
 - **Battle Pyramid bag.** `bag_pyramid.png` and `menu_pyramid.*` are untouched. The Battle Frontier is Hoenn-only content to be cut.
 - **Gen 5 popups.** The assets in `graphics/map_popup/bw/` are untouched. `OW_POPUP_GENERATION` is `GEN_3`, so they are never shown.
 - **Assets from other screens that appear on these ones.** None of these files are mine, so they are listed for their owners:

@@ -340,7 +340,25 @@ static void FindMapsWithMon(enum Species species)
         if (GetRegionMapType(headerSectionId) != currentRegionMapType)
             continue;
 
-        if (MapHasSpecies(&gWildMonHeaders[i].encounterTypes[gAreaTimeOfDay], headerSectionId, species))
+        // Ichor: where this time of day has no table, read the fallback time's,
+        // as the field does (GetTimeOfDayForEncounters). Kalliste's maps define
+        // only morning and night, and the field meets their morning Pokemon by day.
+        struct WildEncounterTypes types = gWildMonHeaders[i].encounterTypes[gAreaTimeOfDay];
+        if (OW_TIME_OF_DAY_ENCOUNTERS && !OW_TIME_OF_DAY_DISABLE_FALLBACK)
+        {
+            const struct WildEncounterTypes *fallback = &gWildMonHeaders[i].encounterTypes[OW_TIME_OF_DAY_FALLBACK];
+            if (types.landMonsInfo == NULL)
+                types.landMonsInfo = fallback->landMonsInfo;
+            if (types.waterMonsInfo == NULL)
+                types.waterMonsInfo = fallback->waterMonsInfo;
+            if (types.rockSmashMonsInfo == NULL)
+                types.rockSmashMonsInfo = fallback->rockSmashMonsInfo;
+            if (types.fishingMonsInfo == NULL)
+                types.fishingMonsInfo = fallback->fishingMonsInfo;
+            if (types.hiddenMonsInfo == NULL)
+                types.hiddenMonsInfo = fallback->hiddenMonsInfo;
+        }
+        if (MapHasSpecies(&types, headerSectionId, species))
         {
             switch (gWildMonHeaders[i].mapGroup)
             {
