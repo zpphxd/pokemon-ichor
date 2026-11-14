@@ -228,10 +228,10 @@ PLAN = [
     "gggggggggggpppgggggggggggggg",  # 12
     "gggggggggggpppgggggggggggggg",  # 13
     "gggggggggggpppgggggggggggggg",  # 14
-    "ggpppggggggpppgggggggggggggg",  # 15
-    "ggpppggggggpppgggggggggggggg",  # 16
-    "ggpppggggggpppgggggggggggggg",  # 17
-    "ggpppffffffffffggggggggggggg",  # 18
+    "gggppggggggpppgggggggggggggg",  # 15
+    "gggppggggggpppgggggggggggggg",  # 16
+    "gggppggggggpppgggggggggggggg",  # 17
+    "gggppffffffffffggggggggggggg",  # 18
     "ggggggffffffffffffffffgggggg",  # 19
     "ggggggffffffffffffffffgggggg",  # 20
     "ggggggggggffffffgggggggggggg",  # 21
@@ -409,7 +409,7 @@ def compose():
                    (27, 21), (27, 26), (22, 24)):
         if not g.solid[y, x] and not g.solid[y + 1, x]:
             g.cypress(x, y)
-    for (x, y) in ((4, 15), (4, 16), (5, 15), (8, 22), (14, 21), (15, 21), (20, 19), (21, 19),
+    for (x, y) in ((2, 16), (2, 17), (5, 15), (8, 22), (14, 21), (15, 21), (20, 19), (21, 19),
                    (10, 13), (10, 14), (1, 19), (13, 20), (25, 18), (26, 18), (12, 25)):
         if g.mid[y, x] == GRASS:
             g.set(x, y, FLOWERS)
