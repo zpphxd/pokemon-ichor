@@ -1723,3 +1723,18 @@ const struct Tileset gTileset_TempleHermes =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary built by tools/ichor/art/skiron_build.py: Act I's
+// mainland road, Route 4's kilns, tombs, rockslide and camp and Route 5's Skironian
+// cliffs. Its cells on grass, path and sea borrow aethos's, so rebuild it whenever
+// aethos's ground changes.
+const struct Tileset gTileset_Skiron =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Skiron,
+    .palettes = gTilesetPalettes_PorytilesManaged_Skiron,
+    .metatiles = gMetatiles_PorytilesManaged_Skiron,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Skiron,
+    .callback = NULL,
+};

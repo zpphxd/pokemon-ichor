@@ -1165,4 +1165,17 @@
 #define METATILE_TempleDemeter_DraughtDoor_B            0x274
 // end gTileset_TempleDemeter
 
+// gTileset_Skiron (Ichor: Routes 4 and 5), written by tools/ichor/art/skiron_build.py
+#define METATILE_Skiron_Rubble_TopLeft             0x362
+#define METATILE_Skiron_Rubble_TopRight            0x363
+#define METATILE_Skiron_Rubble_BottomLeft          0x36A
+#define METATILE_Skiron_Rubble_BottomRight         0x36B
+#define METATILE_Skiron_RubbleCleared_TopLeft      0x364
+#define METATILE_Skiron_RubbleCleared_TopRight     0x365
+#define METATILE_Skiron_RubbleCleared_BottomLeft   0x36C
+#define METATILE_Skiron_RubbleCleared_BottomRight  0x36D
+#define METATILE_Skiron_RubbleSmall                0x366
+#define METATILE_Skiron_RubbleSmallCleared         0x367
+// end gTileset_Skiron
+
 #endif // GUARD_METATILE_LABELS_H
