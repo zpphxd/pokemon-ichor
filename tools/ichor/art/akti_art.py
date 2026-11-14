@@ -31,17 +31,6 @@ def retitle(s, key, title, notes=None, walk=None):
     return s
 
 
-def aethos_ground_pixels(L, cx, cy, mid=0x001):
-    """Copy an aethos ground metatile's pixels into a layer cell, by color name,
-    so a drawn bottom (with shadows) meets aethos's own ground seamlessly."""
-    from akti_lib import aethos_metatile
-    import kalliste_lib as K
-    t = aethos_metatile(mid)
-    for y in range(16):
-        for x in range(16):
-            L.px(cx * 16 + x, cy * 16 + y, K.RGB2NAME[tuple(int(v) for v in t[y, x])])
-
-
 def shade(L, pts, c):
     for (x, y) in pts:
         L.px(x, y, c)

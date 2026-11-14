@@ -41,9 +41,13 @@ These cells reference aethos's tiles by index. **Rebuild Akti whenever aethos is
 repainted.** The build checks every borrowed entry against aethos's current
 metatiles.
 
-Objects that need a shadow on the grass (the fig, the upturned boat, the shrubs,
-the rocks in the grass) draw aethos's grass themselves, copied pixel
-for pixel, so they still match.
+A borrowed cell keeps one layer of its own above the ground. Shadows (under the
+fig, the upturned boat, the shrubs and the rocks) are drawn in that layer, so a
+cell on borrowed ground can't also have a part drawn over the player: the build
+rejects any that tries. (The laundry draws its posts and washing in the top layer.)
+
+**Animated sea.** The sea's animation comes with the borrowed tiles: aethos swaps
+the frames of tiles 454 and 455 in VRAM, and every borrowed sea cell points at them.
 
 **Self-contained art.** Apart from the borrowed ground, Akti is compiled against an
 empty stand-in primary in a scratch Porytiles project under `build/`. Its metatiles use
