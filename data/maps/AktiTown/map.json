@@ -80,7 +80,7 @@
     {
       "local_id": "LOCALID_AKTI_HYDNA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_DIVER",
-      "x": 23,
+      "x": 25,
       "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -211,6 +211,45 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AktiTown_EventScript_Goat",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 15,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AktiTown_EventScript_IsletFisher",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WINGULL)",
+      "x": 23,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WINGULL)",
+      "x": 17,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
       "flag": "0"
     }
   ],
@@ -384,22 +423,6 @@
       "script": "AktiTown_EventScript_ShutHouse"
     },
     {
-      "type": "sign",
-      "x": 26,
-      "y": 6,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "AktiTown_EventScript_PoseidonShrine"
-    },
-    {
-      "type": "sign",
-      "x": 27,
-      "y": 6,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "AktiTown_EventScript_PoseidonShrine"
-    },
-    {
       "type": "hidden_item",
       "x": 7,
       "y": 24,
@@ -409,8 +432,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 25,
-      "y": 6,
+      "x": 24,
+      "y": 7,
       "elevation": 3,
       "item": "ITEM_PEARL",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_AKTI_PEARL"
@@ -422,6 +445,22 @@
       "elevation": 3,
       "item": "ITEM_HEART_SCALE",
       "flag": "FLAG_ICHOR_HIDDEN_ITEM_AKTI_HEART_SCALE"
+    },
+    {
+      "type": "sign",
+      "x": 26,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "AktiTown_EventScript_GrottoRubble"
+    },
+    {
+      "type": "sign",
+      "x": 27,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "AktiTown_EventScript_GrottoRubble"
     }
   ]
 }

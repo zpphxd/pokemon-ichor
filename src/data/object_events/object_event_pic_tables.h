@@ -2614,4 +2614,13 @@ static const struct SpriteFrameImage sPicTable_IchorAcolyteM[] = {
 static const struct SpriteFrameImage sPicTable_IchorAcolyteF[] = {
     overworld_ascending_frames(gObjectEventPic_IchorAcolyteF, 2, 4),
 };
+
+static const struct SpriteFrameImage sPicTable_IchorTablet[] = {
+    obj_frame_tiles(gObjectEventPic_IchorTablet),
+};
 // End of Ichor object events
+
+// Ichor: the ground item jar
+static const struct SpriteFrameImage sPicTable_IchorItemJar[] = {
+    overworld_frame(gObjectEventPic_IchorItemJar, 2, 2, 0),
+};

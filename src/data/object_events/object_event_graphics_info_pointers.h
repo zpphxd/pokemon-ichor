@@ -429,7 +429,9 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHoplit
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAugur;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteM;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteF;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
 // End of Ichor object events
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
     [OBJ_EVENT_GFX_BRENDAN_NORMAL] =           &gObjectEventGraphicsInfo_BrendanNormal,
@@ -491,7 +493,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M] =     &gObjectEventGraphicsInfo_CyclingTriathleteM,
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F] =     &gObjectEventGraphicsInfo_CyclingTriathleteF,
     [OBJ_EVENT_GFX_NURSE] =                    &gObjectEventGraphicsInfo_Nurse,
-    [OBJ_EVENT_GFX_ITEM_BALL] =                &gObjectEventGraphicsInfo_PokeBall,
+    [OBJ_EVENT_GFX_ITEM_BALL] =                &gObjectEventGraphicsInfo_IchorItemJar, // Ichor: a sealed clay jar, not a Poke Ball
     [OBJ_EVENT_GFX_BERRY_TREE] =               &gObjectEventGraphicsInfo_BerryTree,
     [OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES] =  &gObjectEventGraphicsInfo_BerryTreeEarlyStages,
     [OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES] =   &gObjectEventGraphicsInfo_BerryTreeLateStages,
@@ -850,6 +852,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_AUGUR] =              &gObjectEventGraphicsInfo_IchorAugur,
     [OBJ_EVENT_GFX_ICHOR_ACOLYTE_M] =          &gObjectEventGraphicsInfo_IchorAcolyteM,
     [OBJ_EVENT_GFX_ICHOR_ACOLYTE_F] =          &gObjectEventGraphicsInfo_IchorAcolyteF,
+    [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
     // End of Ichor object events
 };
 

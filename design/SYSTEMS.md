@@ -3,7 +3,11 @@
 - **Owner:** Systems and level design.
 - **Status:** a proposal for the user's approval. Nothing here is built yet.
 - **Companion:** `design/LABYRINTH.md` covers the Knossa dungeon and its storyline, which is where most of these systems pay off.
-- **Sources:** `design/PITCH.md` (the bible), `design/research/RESEARCH.md`, `design/research/LAZARUS.md`, `design/phase1/SCRIPT.md` Part 5 (the Hearth Trial), `design/art/INVENTORY.md`, and the engine source as cited.
+- **Sources:** `design/PITCH.md` (the bible), `design/MAP_DESIGN.md` (the map rulebook), `design/research/RESEARCH.md`, `design/research/LAZARUS.md`, `design/phase1/SCRIPT.md` Part 5 (the Hearth Trial), `design/art/INVENTORY.md`, and the engine source as cited.
+- **Authority.** This file is the source of truth for the relics' powers and upgrades (§1), fire and light (§2), the rites (§3: Favor, blessings and gifts), and the theoxenia gifts (§10).
+  - The post-game docs, `LABORS.md`, `UNDERWORLD.md`, `ODYSSEY.md` and `POSTGAME.md`, are by another designer and reference these definitions.
+  - Where this file places something in the post-game, such as the Nereid Pearl, Aeolus's Bag, Triton's Conch, the Helm of Hades, Hades's rite or the post-game theoxenia visits, it is a **hook**. Those docs own the arcs; this file owns the rules.
+- **Maps.** Every map named here follows `design/MAP_DESIGN.md`. Where a feature adds rules for maps, they are written as additions to that rulebook, never exceptions.
 
 Where this file disagrees with the bible, the change is listed in §16 and waits for approval. The user's open decisions are at the very end.
 
@@ -42,6 +46,10 @@ Three conventions hold throughout.
 5. **Myth as rule, not lecture.** Hestia takes a share of every offering, because she took the first and last of every feast. Demeter refuses pomegranates. Nobody explains either.
 6. **One blessing at a time, counted in steps,** like a Repel.
 7. **Small engine edits, heavy data.** Most features are scripts and tables on top of systems the expansion already has.
+8. **The map rulebook governs.**
+   - Every relic opens something in a place the player has already been (§1, "Relic gates").
+   - Every temple trial teaches its puzzle in the first room, tests it in the middle and masters it at the end (§12).
+   - Every dungeon here teaches, tests and combines its mechanics, and every dead end pays (MAP_DESIGN §1, §3 and §4).
 
 ### The features at a glance
 
@@ -101,6 +109,38 @@ Two **tools** sit beside the relics. They are key items, not relics.
   - The Conch opens the sea. Thera is also reachable by the story trireme, so Surf never blocks the story.
   - The Wings arrive at Laurel 6, the same badge count at which Emerald gives Fly.
 - **Act III.** The Horn opens Delphoi. The three Knossa relics are found inside their dungeon, Zelda-style.
+
+### Relic gates: shown early, opened later
+
+MAP_DESIGN §1 says every relic must open something in an area the player has already visited, with what lies behind it visible or hinted. Each relic does, besides its main-path gate.
+- Several of these gates are **additions to maps already built or scripted** (Kalliste, Akti). Those are proposals for the map team, marked "slice map".
+- Every gate below is optional. The main path never waits on a return trip.
+
+| Relic | The gate the player sees first | Where, and when they first pass it | What's visible behind it | The return pays |
+|---|---|---|---|---|
+| Bronze Hammer | Marble rubble choking a sea-grotto mouth on Akti's tide rocks | Akti, the slice (slice map) | A glint of a sealed jar in the grotto's dark | The grotto: a Kalliste amphora sherd spot, a Pearl, and a rare shore Pokémon |
+| Hecate's Torch | A black cistern mouth under Emporion's Agora steps, with a sign: "No light, no entry" | Emporion, Act I before the Torch | Dripping water; something's eyes catch light | Emporion's cistern: a small dark cave that teaches lit zones, with a TM, a sealed jar and a Ghost-type |
+| Hecate's Torch, second gate | The dig pit on Kronion Hill now drops into a dark stair (the Titanborn dug deeper after the slice) | Kronion Hill, on any return to Kalliste | "It still feels like something's looking up" (the slice's own line) | The Kronion crypt: the Kronos-and-the-stone amphora's sherds, and an old altar to Kronos with Rhea carved weeping beside it (a seed for Delphoi's Omphalos) |
+| Demeter's Sickle | A thorn thicket closing a terrace path above the Emporion road | The Emporion–Eleusa road, Act I | A sealed jar on the terrace above | A terrace orchard: a berry grove (first fruits for the rites) and a hidden item |
+| Girdle of Herakles | Column drums blocking the Hephaisteion's back stair | Emporion, Act I | The stair rising to the roof | Kedalion's roof forge: a TM and Hephaestus Favor +5 |
+| Poseidon's Conch | An islet with a white shrine off Akti's quay, seen from the slice's harbor | Akti, the slice (already on the slice's battle background and harbor views) | The shrine, and gulls circling | The islet: a Poseidon altar, a Water-type rare, and a hidden Big Pearl |
+| Daedalus's Wings | Every herm anointed since Act I (§4) | Every route | — | Fast travel |
+| Horn of Achelous | A waterfall beside Arkadia's temple with a cave mouth halfway up | Arkadia, Act II | The cave mouth, and a glint | The upper pool: the Orpheus amphora's sherds and the Meloetta lead (§5) |
+| Ariadne's Thread | **The Wandering Halls,** a side tunnel in Hecate's Hollow. A sign: "Whoever goes in comes out where they went in." | Hecate's Hollow, Act I | A tunnel that loops you back to its mouth, whichever way you turn | With the thread laid, the loop breaks: its warps let a threaded walker through. The Hollow's deep shrine: Hecate Favor +10 and a Max Revive. |
+| Labrys | A door in Kaldera's ash cliff with no handle, only a hollow shaped like a double axe | Kaldera, Act II | Painted plaster round the door: Minoan, under the ash | The first Minoan vault: Kaldera's buried town (LABYRINTH.md §9) |
+| Helm of Darkness | Stone sentinels in the Mystery sanctum's crypt. They turn back anyone they see: "The uninitiated may not pass." | Eleusa, Act I | A dark stair past them | The crypt of the Mysteries: the last secret (lore), Demeter Favor +10 and an item |
+| Alethea's Trowel | Turned earth appears on Kalliste after the slice | Kalliste, Route 1 and Kronion Hill | — | Kalliste's dig spots |
+| Winged Talaria (upgrade) | One-tile gaps: a broken bridge, a split terrace | Routes in Acts I–II | An item ball across the gap | Shortcuts and items |
+| Hephaestus's Hammer (upgrade) | Great 2×2 boulders | Caves in Acts I–II | A tunnel past them | Side caves |
+| Three-Flamed Torch (upgrade) | Thornwebs, too thick for the plain torch | Hecate's Hollow, Ring III | The far side, dimly | Item pockets |
+
+**Map notes for the relic-quest maps.** Each follows MAP_DESIGN §3.
+
+| Map | Teach | Test | Combine | Every dead end pays | Payoff, then the way out |
+|---|---|---|---|---|---|
+| **Hecate's Hollow** (Act I) | The first fork. The bark comes clearly from one side. Both wrong branches are short and end in visible items: a Potion and a Barley Cake. | The second fork, darker and longer. One wrong branch has an optional trainer, a torch-less Augur. | The third fork. The bark echoes, so you must listen twice. A draught from one branch is a second clue, and it previews the wind verb. | Yes: items or a trainer at every branch end | The Hekataion and the Torch. Then the lit shrine passage is a short exit back to the road. |
+| **The salt well** (Act II, 2 floors) | Tide pools by the stair: a shallow pool you can wade, with an item | A floor where the tide line has stranded a trainer on a rock (mandatory, easy) and a fork | The lower floor: wading plus a dark grotto, so the Torch and the tide work together | Each side grotto holds a sea gift or a trainer | The dolphin and the Conch. Then a sea-door opens to the harbor, and you ride out on the dolphin. |
+| **The Neraida falls** (Act III) | Route rules (MAP_DESIGN §1): forced grass below the falls | — | — | The pool above the falls holds Daedalus's page VII | The Horn. Then climb out to the Kythera road. |
 
 ### Changes from the bible, and why
 
@@ -334,6 +374,17 @@ The slice already taught the grammar's first and third verbs.
 - The Labyrinth (Act III).
 - Tartarus (post-game).
 - Carried-flame puzzles: the Hearth Trial (done), the Demeter trial, the Panathenaia torch race, and Labyrinth Rings I and III.
+
+### Readable darkness: map rules
+
+These add to MAP_DESIGN §3 ("dark areas should still be readable; lit braziers become landmarks") and §6 (the 15×10 test).
+
+1. **Teach light first.** Every dark map has a lit brazier, a skylight or a glow-mark within its first screen, so the player sees what light does before they need it.
+2. **Rim-lit walls.** Dark tilesets give walls a lighter top edge, so the wall line reads clearly inside a 3.5-tile torch radius.
+3. **A landmark every screen, even in the dark.** A brazier, glow-paint, a skylight, a fresco catching the torch: no screen of pitch dark is empty. A pitch-dark corridor runs at most 2 screens (30 tiles) before the next landmark.
+4. **Lit zones repay the lighting.** Every brazier you light reveals something worth seeing: a fresco, an item, a shortcut or a hidden door.
+5. **Checkpoints stay readable.** Never put a mandatory trainer's sight line in pitch dark. A lamp or brazier marks every mandatory trainer, so the checkpoint is visible before it is crossed.
+6. **Ordinary caves** (not the Labyrinth) get a lit exit passage once their payoff is reached, the "shortcut back out" MAP_DESIGN §3 asks for.
 
 ### Engine
 
@@ -605,6 +656,10 @@ From Act I you can anoint herms, and Kerykos tells you why: travelers swear Herm
 - With the Wings, you land on the tile south of the herm.
 - Anointing all of them gives Hermes +10 Favor, and Kerykos adds a herald's-staff stamp to your trainer card (the kylix).
 - The Scroll of Deeds counts them: "Herms anointed: 7 of 22."
+- **Placement** follows MAP_DESIGN §1 and §7.
+  - The great herm stands at the route's main fork or beside its set piece, never in a dead end.
+  - It doubles as the fork's sign ("East: Kronion Hill. North: Akti Town.") and as one of the route's "myth in the land" landmarks.
+  - Its landing tile must be on the main path, with a clear way on in both directions.
 
 ### Myth and story
 
@@ -661,6 +716,10 @@ ALETHEA: Truthfully, I bring three.
 **Spots.**
 - There are about 45 **daily spots**. Each can be dug once a day and looks flattened until the next day.
 - About 25 **fixed finds**, plus 7 pages and 8 prophecy fragments, can each be dug once.
+- **Placement** follows MAP_DESIGN §1, "every dead end pays".
+  - Dig spots go where curiosity takes people: the end of a side path, the tip of a peninsula, behind a statue, inside optional grass, beside a ruin.
+  - **Never on the main path.** A dig spot is a reason to leave the road.
+  - Daily spots favor dead ends that otherwise hold a one-time item, so those dead ends keep paying after the first visit.
 
 **Digging.** Press A. The field-move pose plays, with a dust puff, for one second, then the item.
 
@@ -1142,7 +1201,7 @@ About 12 chain flags. Resting stores nothing.
 | God | Disguise | The test | When and where | Gift |
 |---|---|---|---|---|
 | **Demeter** | **An old woman by the Maiden's Well.** In the Homeric *Hymn to Demeter*, the grieving goddess sat by the Maiden's Well at Eleusis as an old woman, until the king's daughters took her in. | **Share food and comfort her.** Offer her a drink from the bag. She refuses Wine (she did in the *Hymn*). Water is accepted. Water plus a Barley Cake is her *kykeon*, barley water with mint, and is loved. Then she asks for a joke: three choices, two that land. Old Iambe made the goddess laugh with a crude joke, the first laugh of her grief. | **After Laurel 5.** Eleusa's well, on any return visit. An omen points there. | **Snivy** (Grass), whose line ends in Serperior. Demeter's chariot was drawn by serpents. |
-| **Hephaestus** | **A lame tinker,** his cart broken on the caldera switchbacks, with a toolbag too heavy for him. | **Walk at his pace.** You carry the bag, and can't run while you do. Halfway up, a ledge offers a shortcut he can't take with his leg. Jump it and you arrive alone; he sits down: "Go on. Everyone does." Go back down and walk the long way with him. Reach the rim forge together. | **After Laurel 6.** Kaldera's caldera road. | **Cyndaquil** (Fire), evolving to **Hisuian Typhlosion** (Fire/Ghost). In myth Typhon is buried under the volcano, his breath feeding Hephaestus's forge. PITCH §4 ties Typhlosion to Typhon and puts Hisuian forms in Aethos. |
+| **Hephaestus** | **A lame tinker,** his cart broken on the caldera switchbacks, with a toolbag too heavy for him. | **Walk at his pace.** You carry the bag, and can't run while you do. Halfway up, a goat-path scramble cuts the corner, and he can't take it with his leg. Take it and you arrive alone; he sits down: "Go on. Everyone does." Climb back down to him and walk the long way together. The scramble is two-way, so no ledge strands anyone (MAP_DESIGN §1). Reach the rim forge together. | **After Laurel 6.** Kaldera's caldera road. | **Cyndaquil** (Fire), evolving to **Hisuian Typhlosion** (Fire/Ghost). In myth Typhon is buried under the volcano, his breath feeding Hephaestus's forge. PITCH §4 ties Typhlosion to Typhon and puts Hisuian forms in Aethos. |
 | **Poseidon** | **An old fisherman** on a sea-rock below a cape shrine, dry in the spray. | **Answer truthfully,** after Aesop's honest woodcutter. Your Old Rod slips into the sea. The old man dives, then holds up a gold rod, a silver rod, and your salt-cracked one: "This one yours?" Choose your own. Claiming gold or silver gets your old rod back with a sigh: "Come back when the tide's honest." | **After Laurel 7,** before Knossa. A cape near Astyra, reached with the Conch. | **Piplup** (Water), whose line ends in Empoleon with its trident crest |
 
 | Gift | Lv | Held | Nature | Ability | God-taught move | Perfect IVs |
@@ -1184,7 +1243,7 @@ DEMETER: …Actually. Tell everyone.
 
 [The tinker sets down the bag and wipes his face. The soot comes away, and under it his skin shines like bronze in a fire.]
 ```text
-TINKER: Everyone takes the ledge. Every single one.
+TINKER: Everyone takes the goat path. Every single one.
 
 TINKER: My mother threw me off a mountain for limping. Did you know?
 
@@ -1471,21 +1530,86 @@ PYTHIA: Ask me who you want to be. That one I can help with.
 
 ## 12. Temple trials as a design language
 
-Each Olympian's temple teaches **one puzzle verb**. The Labyrinth's seven rings test them again, combined (LABYRINTH.md). Every trial has:
-- a safety valve (an acolyte who will show you, or a reset with no penalty);
-- avoidable trainers;
+Each Olympian's temple teaches **one puzzle verb**. The Labyrinth's seven rings test them again, combined (LABYRINTH.md).
+
+Every trial follows MAP_DESIGN §4. The Hearth Trial is the model.
+- **Taught in the first room, tested in the middle, mastered at the end.**
+- **Acolytes are checkpoints** between the stages. At least one is optional.
+- **The Hierophant waits at the climax of the architecture.**
+- **After the laurel,** the room stays solved and the acolytes stay beaten.
+
+Every trial also has:
+- a safety valve: an acolyte who will show you, or a reset with no penalty;
 - no time-of-day requirement.
 
 | # | Temple | Verb | The trial | Engine | Tested again in |
 |---|---|---|---|---|---|
-| 1 | Hestia (Akti) | **Carry the flame**: order and return | Built: SCRIPT.md Part 5 | Script | Ring I |
-| 2 | Hermes (Emporion) | **Race and route** | **The Herald's Run.** Kerykos hands you three sealed scrolls for three herald-herms inside a switchback stoa, all inside one step-glass of 120 steps on Hero, 150 on Mortal, 100 on Spartan. Herm heads swivel to point the right way only once anointed (a second use of oil). Hermes's turnstiles are one-way, and the wrong one loops you back. Steps don't count during battles. A failure returns the scrolls to Kerykos. | Step hook, `VAR_TEMP` · Low | Ring II |
-| 3 | Demeter (Eleusa) | **Dark and light**: the torch, braziers, dousing | **The Lesser Mysteries.** The Telesterion is pitch dark. Douse the torch to see four glowing pomegranate seeds (Persephone's trail). Relight to find walls and reach each one. At each seed, light a season's brazier. The fourth reveals Chloe, holding one reaped ear of grain. | Glow palette · Low–Medium | Ring III |
-| 4 | Dionysus (Thyrsa) | **Masks and roles** | **The Three-Act Play.** The stage has three doors (comedy, tragedy, satyr) and a rack of masks. The program scroll says who enters by which door in each act. Acolytes in your mask let you pass; the rest battle you. The last act needs the mask "the play forgot": the satyr play that always followed a tragedy. | Mask var · Low | Ring IV |
-| 5 | Artemis (Arkadia) | **Stealth** | **The Hunt for the Hind.** A temple grove under endless night. Kallisto's hounds walk patrols with sight lines, and a hound that sees you sends you back to the start. Sight range doubles in moonlit clearings. Touch the golden hind's antler three times; she bolts to another clearing each time. | Non-battle sight objects · Low–Medium | Ring V |
-| 6 | Hephaestus (Kaldera) | **Automata and gears** | **The Bronze Servants.** Bronze automata walk fixed loops. Turn gear dials to change which loop each one walks, until three stand on three plates at once and the forge gate opens. | Movement swaps, an "object on tile" special · Medium | Ring VI |
-| 7 | Aphrodite (Kythera) | **Marble and mirrors** | **Galatea's Gallery.** Marble statues step toward you only while you face away from them. A statue you can see in a bronze mirror can't move. Reach Galatea's dais untouched; a touch sends you back to the start. Pygmalion's statue was the original marble that came alive. | A custom "watched" movement type · Medium | Ring VII |
-| 8 | Apollo (Delphoi) | **Beams** | **The Pythian Light.** Rotate bronze mirrors to carry the sunbeam from the oculus to the Omphalos's tripod through four chambers. By night it is a moonbeam on the same path. | A beam-trace special shared with Ring VII · Medium | — (the Labyrinth's Starry Chamber previews it) |
+| 1 | Hestia (Akti) | **Carry the flame**: order and return | The Hearth Trial. Built: SCRIPT.md Part 5. | Script | Ring I |
+| 2 | Hermes (Emporion) | **Race and route** | The Herald's Run | Step hook, `VAR_TEMP` · Low | Ring II |
+| 3 | Demeter (Eleusa) | **Dark and light**: torch, braziers, dousing | The Lesser Mysteries | Glow palette · Low–Medium | Ring III |
+| 4 | Dionysus (Thyrsa) | **Masks and roles** | The Three-Act Play | Mask var · Low | Ring IV |
+| 5 | Artemis (Arkadia) | **Stealth** | The Hunt for the Hind | Non-battle sight objects · Low–Medium | Ring V |
+| 6 | Hephaestus (Kaldera) | **Automata and gears** | The Bronze Servants | Movement swaps, an "object on tile" special · Medium | Ring VI |
+| 7 | Aphrodite (Kythera) | **Marble and mirrors** | Galatea's Gallery | A custom "watched" movement type · Medium | Ring VII |
+| 8 | Apollo (Delphoi) | **Beams** | The Pythian Light | A beam-trace special shared with Ring VII · Medium | — (the Labyrinth's Starry Chamber previews it) |
+
+**2. Hermes: the Herald's Run.**
+- **The task:** Kerykos hands you sealed scrolls to deliver to herald-herms inside a switchback stoa, within a step-glass. Steps don't count during battles, and a failure simply returns the scrolls to Kerykos.
+- **Teach** (the entry porch): one scroll, one herm 20 steps away, a glass of 40 steps. One herm head swivels to point the way once you anoint it (a second use of oil).
+- **Test** (the main stoa): three scrolls and three herms inside one glass of 120 steps on Hero (150 Mortal, 100 Spartan). Hermes's turnstiles are one-way, and the wrong one loops you back.
+- **Master** (the upper colonnade): the herms point the way only when anointed, and each turnstile reverses after you pass a herm.
+- **Acolytes:**
+  - one mandatory, easy and in plain view at the porch's narrow exit;
+  - one **optional**, facing away in a side colonnade, guarding a shortcut turnstile;
+  - one mandatory before the rostrum.
+- **Kerykos** waits on the herald's rostrum at the head of the stoa's steps.
+
+**3. Demeter: the Lesser Mysteries.**
+- **Teach** (the vestibule): one brazier is already lit. Douse the torch, and a single glowing pomegranate seed shows by your feet. Relight.
+- **Test** (the Telesterion's hall): four seeds across a pitch-dark hall, Persephone's trail.
+  - Each seed is seen doused and reached lit.
+  - Each seed is beside a season's brazier, and lighting it brightens a quarter of the hall for good.
+- **Master** (the anaktoron, the inner shrine): the seeds show only when doused, the walls only when lit, and the path between them crosses a draught that blows out a carried flame. This combines dousing with Hestia's wind verb, so you must relight from the season braziers on the way.
+- **Acolytes:** three *mystai*; one **optional**, beside a side seed.
+- **Chloe** waits in the anaktoron. Her reveal is a single reaped ear of grain.
+
+**4. Dionysus: the Three-Act Play.**
+- **The stage** has three doors (comedy, tragedy, satyr) and a rack of masks. A program scroll says who enters by which door in each act. Acolytes in your mask let you pass, and the rest battle you.
+- **Teach** (Act I): one door, one mask. The program says plainly: "Enter the Comic, by the left door."
+- **Test** (Act II): three doors and cues instead of names ("Enter the one who weeps").
+- **Master** (Act III): the program leaves out the last entrance. The answer is the mask "the play forgot", the satyr play that always followed a tragedy.
+- **Acolytes:** one actor per act; Act II's is **optional**.
+- **Thespis** waits on the stage-building's roof, where the god-machine sets gods down.
+
+**5. Artemis: the Hunt for the Hind.**
+- **The grove** is a temple garden under endless night. A hound that sees you sends you back to the start of the current stage, not the whole trial.
+- **Teach:** one hound walks a short line across a glade, with an obvious bush to wait behind.
+- **Test:** three hounds and two moonlit clearings, where sight range doubles.
+- **Master:** the golden hind bolts to another clearing each time you touch her antler, three times, while the hounds patrol.
+- **Acolytes:** huntresses, one per stage; one **optional**.
+- **Kallisto** waits on a moonlit rock above the last clearing.
+
+**6. Hephaestus: the Bronze Servants.**
+- **Teach:** one automaton walking a loop, one plate and one dial.
+- **Test:** two automata, two plates, two dials.
+- **Master:** three automata on three plates at once. One loop can only be cut with a column drum pushed by the Girdle, which combines this verb with Strength.
+- **Acolytes:** smiths; one **optional**.
+- **Talos** waits at the great anvil on the forge's raised floor.
+
+**7. Aphrodite: Galatea's Gallery.**
+- **The rule:** marble statues step toward you only while you face away from them. A statue you can see in a bronze mirror can't move. A touch sends you back to the stage's start. Pygmalion's statue was the original marble that came alive.
+- **Teach:** one statue in a short corridor, and one mirror.
+- **Test:** three statues and two fixed mirrors.
+- **Master:** statues and mirrors you can turn. It is the first rotating mirror in the game, and it previews Apollo's beams.
+- **Acolytes:** two; one **optional**.
+- **Galatea** waits on her dais.
+
+**8. Apollo: the Pythian Light.**
+- **Teach:** one mirror, one sunbeam, one target, in the pronaos.
+- **Test:** carry the beam from the oculus through four chambers. By night it is a moonbeam on the same path.
+- **Master:** focus the beam onto a brazier to light it, then carry that firelight on to the Omphalos's tripod. This combines beams with Hestia's flame.
+- **Acolytes:** three; one **optional**.
+- **Phemonoe** waits on the tripod in the adyton, the temple's innermost room.
 
 **Engine notes.**
 
@@ -1609,10 +1733,18 @@ struct IchorSave              // in SaveBlock3; ~760 bytes of 1,624
      - The extended tier, if chosen, adds the 15 other starter lines that are not among Lazarus's nine.
    - **Lazarus's nine starters are offered nowhere** (D9).
 10. **§4, ROM.** Record that the gift species stay in the ROM despite the Aethos-only dex: about 110 KiB for the core tier and about 670 KiB for both (§10).
+11. **The slice's maps (not PITCH).** Add three relic gates to Kalliste for the map team, so Act III has old places to reopen (§1, "Relic gates"; MAP_DESIGN §1 and §5):
+    - marble rubble at a grotto on Akti's tide rocks (the Bronze Hammer);
+    - a dark stair at the bottom of Kronion Hill's dig pit (the Torch);
+    - a shrine on the islet off Akti's quay (the Conch).
+
+    None changes the slice's path or script (D10).
 
 ---
 
 ## Decisions for the user
+
+> **Approved by the user, 2026-11-14:** D1 (the relic re-mapping), D3 (all 15 gods), D8 (core plus extended theoxenia) and L10 (seven rings). Every other decision here and in the other doc follows the designer's recommendation. PITCH.md has been updated to match. D10 (the three Kalliste relic gates) was approved by the director under the user's map rules.
 
 These are the ones this file raises. LABYRINTH.md adds its own.
 
@@ -1633,3 +1765,4 @@ These are the ones this file raises. LABYRINTH.md adds its own.
   - **Core plus extended:** 18 gifts, the chain of strangers and the finale at home; about 670 KiB of ROM.
   - I recommend core plus extended. It is the post-game's best recurring thread, and it ends at Mom's table.
 - **D9. Lazarus's nine starters.** Never offered (recommended), or offered elsewhere despite the avoid-list.
+- **D10. Three relic gates added to the slice's maps** (Akti's rubble grotto, the stair under Kronion Hill's pit, Akti's islet shrine), so the rulebook's "every relic opens something already visited" holds from Kalliste on.

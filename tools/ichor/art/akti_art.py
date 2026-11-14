@@ -172,15 +172,6 @@ def _row(src, key, title, cy, notes, walk):
     return s
 
 
-def quay_steps():
-    """Kalliste's steps cut down into the water, on the quay's north edge."""
-    s = Struct("quay_steps", "Harbor steps down to the water", 1, 1, SEC, walk=["."],
-               notes="Steps cut down into the water from the quay's north edge (water to the "
-                     "north). Put the surf start beside them.")
-    s.B.a[:] = KA.harbor_steps().B.a[:, 0:16]
-    return s
-
-
 # ==========================================================================
 # The plaza's warm paving
 # ==========================================================================
@@ -479,7 +470,8 @@ def build():
     import akti_coast
     import akti_harbor
     import akti_town
+    # new structures go at the end, so existing ids keep their places
     return ([temple(), house(), house_shuttered(), shrine(), altar(), paving(), quay(),
-             quay_steps(), quay_gangplank(), kaiki(), kaiki(left=True), trireme(),
-             terraces()]
-            + akti_harbor.build() + akti_coast.build() + akti_town.build())
+             quay_gangplank(), kaiki(), kaiki(left=True), trireme(), terraces()]
+            + akti_harbor.build() + akti_coast.build() + akti_town.build()
+            + [akti_coast.grotto()])

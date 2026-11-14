@@ -1105,4 +1105,9 @@
 #define METATILE_TempleHestia_BrazierLight_Below     0x281
 #define METATILE_TempleHestia_BrazierLight_BelowRight 0x282
 
+// gTileset_Agros (Ichor: Route 1 and Kronion Hill), written by tools/ichor/art/agros_build.py
+#define METATILE_Agros_PitStair_Left              0x388
+#define METATILE_Agros_PitStair_Right             0x389
+// end gTileset_Agros
+
 #endif // GUARD_METATILE_LABELS_H

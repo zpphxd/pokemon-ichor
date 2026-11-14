@@ -31,7 +31,7 @@ W, H = 240, 160
 KEYS = [
     (40, "3_studio_bead"),
     (100, "4_studio_fall"),
-    (200, "5_studio_mark"),
+    (330, "5_studio_credit"),
     (560, "6_clotho"),
     (1060, "7_grove"),
     (1360, "8_sea"),

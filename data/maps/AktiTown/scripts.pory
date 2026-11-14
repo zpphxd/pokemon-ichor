@@ -409,8 +409,7 @@ script AktiTown_EventScript_FishersHouseSign {
     msgbox(format("GLAUKOS. Gone fishing.\n(Not really. Knock.)"), MSGBOX_SIGN)
 }
 
-// Not in SCRIPT.md: a shut house, Poseidon's harbor shrine and the goats in the
-// pen need a line each.
+// Not in SCRIPT.md: a shut house and the goats in the pen need a line each.
 script AktiTown_EventScript_ShutHouse {
     msgbox(format("The shutters are closed. Everyone's down at the harbor."), MSGBOX_SIGN)
 }
@@ -424,6 +423,24 @@ script AktiTown_EventScript_Goat {
     release
 }
 
-script AktiTown_EventScript_PoseidonShrine {
-    msgbox(format("A little shrine to Poseidon. Someone has left him a conch."), MSGBOX_SIGN)
+// ---------------------------------------------------------------------------
+// Relic gates (SYSTEMS.md §1, D10): seen in the slice, opened later. Only the
+// locked side exists yet.
+// - The rubble grotto on the tide rocks opens with the Bronze Hammer (Act I).
+//   Inside: a Kalliste amphora sherd spot, a Pearl and a rare shore Pokémon.
+// - The islet shrine opens with Poseidon's Conch (Act II, Surf). On it: a
+//   Poseidon altar, a Water-type rare and a hidden Big Pearl.
+// ---------------------------------------------------------------------------
+
+script AktiTown_EventScript_GrottoRubble {
+    msgbox(format("Broken marble chokes the mouth of a sea grotto.\p"
+                  "Something glints in the dark behind it.\p"
+                  "The blocks won't shift by hand. A good hammer would break them."), MSGBOX_SIGN)
+}
+
+script AktiTown_EventScript_IsletFisher {
+    msgbox(format("That white shrine out on the islet is Poseidon's.\p"
+                  "No one's set foot on it since the storm. Row for it and the current "
+                  "turns you right round.\p"
+                  "The gulls get all his offerings now."), MSGBOX_NPC)
 }

@@ -444,6 +444,8 @@ enum
     OBJ_EVENT_GFX_ICHOR_AUGUR,
     OBJ_EVENT_GFX_ICHOR_ACOLYTE_M,
     OBJ_EVENT_GFX_ICHOR_ACOLYTE_F,
+    // Field objects (16x16, tools/ichor/art/sprites_objects.py)
+    OBJ_EVENT_GFX_ICHOR_TABLET,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,

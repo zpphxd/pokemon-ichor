@@ -322,6 +322,85 @@ def boat_beached():
     return s
 
 
+def grotto():
+    """The tide rocks' sea grotto (SYSTEMS.md §1, the Bronze Hammer's gate in Akti).
+
+    Rows 0-2 are the headland mirrored, so the spur runs off the map's east edge;
+    Porytiles matches flipped tiles, so they cost nothing. Row 3 is new: the spur's
+    south face drops onto the beach and opens into a grotto mouth choked with
+    broken marble, a sealed jar glinting in the dark behind it."""
+    h = headland()
+    s = Struct("grotto", "Sea grotto on the tide rocks, choked with marble rubble", 2, 4, SEC,
+               walk=["XX", "XX", "XX", "XX"],
+               notes="The headland's spur, mirrored to run off the map's east edge, with a "
+                     "grotto in its south face (row 3): marble rubble fills the mouth and a "
+                     "sealed jar glints in the dark behind it. Put the rubble's bg events on "
+                     "row 3; the beach below must be walkable. Rows 0-2 reuse the headland's "
+                     "tiles, flipped.")
+    ground(s, "sea", [(0, 0), (1, 0), (0, 1), (1, 1), (0, 2), (1, 2)])
+    ground(s, "sand", [(0, 3), (1, 3)])
+    M = s.M
+    M.a[:48] = h.M.a[:48, ::-1]
+    # the top surface runs on into row 3, and the face below keeps the headland's
+    # texture, run down four rows further so the grotto fits under it
+    M.a[48:57] = h.M.a[48:57, ::-1]
+    M.a[57:61] = h.M.a[53:57, ::-1]
+    for x in range(32):
+        M.px(x, 61, "sk")
+        for y in range(48, 61):
+            if M.get(x, y) == "ol1":
+                M.px(x, y, "s1")
+    M.vline(31, 52, 61, "s3")              # the spur runs on past the map edge
+    # the grotto mouth: an arch, dark inside, the west jamb lit and the east in shade
+    cx = 15.5
+    for y in range(53, 62):
+        half = 7.6 * math.sqrt(max(0.0, 1 - ((61.5 - y) / 9.2) ** 2))
+        x0, x1 = int(round(cx - half)), int(round(cx + half))
+        for x in range(x0, x1 + 1):
+            M.px(x, y, "sk")
+        M.px(x0 - 1, y, "s4")
+        M.px(x1 + 1, y, "s0")
+    M.hline(14, 17, 52, "s0")
+    # the sealed jar behind the rubble, its shoulder catching the light
+    M.blit([" ee ", "e11e", "1111", "1111"], {"e": "e2", "1": "e1"}, 14, 55)
+    for (x, y) in ((15, 54), (14, 55), (15, 55), (16, 55), (15, 56)):
+        M.px(x, y, "w0")
+
+    def block(bx, by, bw, bh, drum=False):
+        """A broken marble block: lit top, pale west face, shaded east edge."""
+        for y in range(by, min(64, by + bh)):
+            for x in range(bx, bx + bw):
+                if y == by:
+                    c = "w0"
+                elif x == bx + bw - 1:
+                    c = "s3"
+                elif x == bx:
+                    c = "s5"
+                else:
+                    c = "s4"
+                if drum and y > by and (x - bx) % 2 == 1 and x < bx + bw - 1:
+                    c = "s3"               # a column drum's fluting
+                M.px(x, y, c)
+        for x in range(bx, bx + bw):
+            if by + bh < 64:
+                M.px(x, by + bh, "sk")
+        for y in range(by, min(64, by + bh)):
+            if bx > 0 and M.get(bx - 1, y) not in ("w0", "s5", "s4", "s3"):
+                M.px(bx - 1, y, "sk")
+    # the rubble choking the mouth, back to front, a few blocks spilled onto the sand
+    block(17, 57, 6, 4)
+    block(9, 58, 5, 3)
+    block(13, 59, 5, 3, drum=True)
+    block(6, 61, 5, 2)
+    block(21, 61, 5, 2)
+    block(16, 62, 3, 1)
+    # the face's shadow on the sand
+    for x in range(1, 31):
+        if x % 2 == 0 and M.get(x, 62) is None:
+            M.px(x, 62, "s2")
+    return s
+
+
 def build():
     return [sea_stack(), sea_rocks(), headland(), rocks_sand(), rock_grass(), shells(),
             net_poles(), boat_beached()]

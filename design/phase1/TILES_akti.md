@@ -66,7 +66,10 @@ palette (`akti_lib.GROUPS`):
 | Plaza | The plaza's warm limestone and marble, and the krene's water |
 | Grove | Aethos's meadow greens and olives, the fig and the shrubs |
 
-**Tile budget.** 507 of the 512 secondary tiles are used.
+**Tile budget.** 490 of 504 tiles are used. A secondary has 512, but the door
+animations copy their frames into tiles 504-511 (`DOOR_TILE_START_SIZE1` in
+`src/field_door.c`), so the build fails past 504. It also redraws any tile within
+two pixels of another as that tile, so near-duplicates are stored once.
 
 ## Buildings and monuments
 
@@ -159,22 +162,13 @@ ids                             walk
 0x288 0x289 0x28A 0x28B 0x28C   X X . X X
 ```
 
-### Harbor steps down to the water
-
-`quay_steps`, 1 wide by 1 tall. Steps cut down into the water from the quay's north edge (water to the north). Put the surf start beside them.
-
-```text
-ids     walk
-0x27D   .
-```
-
 ### Quay edge with the gangplank's foot
 
 `quay_gangplank`, 1 wide by 1 tall. The quay's north edge with the trireme's gangplank resting on it. Place it directly below the trireme's bottom row, column 3.
 
 ```text
 ids     walk
-0x27E   .
+0x27D   .
 ```
 
 ### Quay paving running out onto grass and sand
@@ -273,7 +267,7 @@ ids                 walk
 
 ## The coast
 
-Limestone crags in the sea and on the shore, the west headland, and the beach.
+Limestone crags in the sea and on the shore, the west headland, the grotto on the tide rocks, and the beach.
 
 ### Limestone sea stack
 
@@ -311,6 +305,20 @@ ids           walk
 ```
 
 Ground: grass at (0,3), (1,3); sea at (0,0), (0,1), (0,2), (1,0), (1,1), (1,2).
+
+### Sea grotto on the tide rocks, choked with marble rubble
+
+`grotto`, 2 wide by 4 tall. The headland's spur, mirrored to run off the map's east edge, with a grotto in its south face (row 3): marble rubble fills the mouth and a sealed jar glints in the dark behind it. Put the rubble's bg events on row 3; the beach below must be walkable. Rows 0-2 reuse the headland's tiles, flipped.
+
+```text
+ids           walk
+0x31C 0x31D   X X
+0x324 0x325   X X
+0x32C 0x32D   X X
+0x334 0x335   X X
+```
+
+Ground: sand at (0,3), (1,3); sea at (0,0), (0,1), (0,2), (1,0), (1,1), (1,2).
 
 ### Limestone rocks on the sand
 

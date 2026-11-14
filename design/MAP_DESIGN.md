@@ -46,7 +46,11 @@ Every Ichor map follows these rules. They come from how Game Freak builds Gen 3 
 
 - **First things first.** The Asclepeion and the Agora should be visible from the main entrance, or very close to it. A tired player shouldn't have to search for healing.
 - **The temple is the crown.** It is the town's landmark: elevated, at the far end, or framed by the main street. If the story needs it closed, it stays shut until the right beat.
-- **The houses.** Have 3–6 houses with something inside: a gift, a trade, a hint, lore or a joke. Not every house needs a door, but every door needs a reason.
+- **Every house is a home** (user, 2026-11-14). Every house in a town has a door, an interior and someone living there, and something happens inside. That means a gift, a trade (an in-game Pokémon trade or an item swap), a small quest, a minigame, a rematch, or lore that leads to a reward. Flavour text alone isn't enough. There are no scenery-only houses with barred or shuttered doors.
+  - Give each household a story in a line or two: who lives there, and what they want or offer.
+  - Spread the rewards across a town: not five gifts of the same item, and not all of them available on the first visit. Some open after a Laurel or a story beat, so returning to a town pays.
+  - **Every interior is unique** (user, 2026-11-14). No layout is reused or copied between buildings. Each room has its own shape, size and furniture, chosen for whoever lives or works there: a potter's wheel and kiln, a weaver's loom, a fisher's nets and drying racks, a philosopher's scroll niches, a shepherd's fold. Rooms follow the room catalogs (`ROOMS_oikia.md`, `ROOMS_civic.md`). When a catalog lacks a piece a room needs, ask for it to be drawn.
+  - Public buildings of the same kind (each town's Asclepeion or Agora) share their function and service counter, but each town's version differs in layout, size and local character: a harbor Asclepeion with a sea window, a mountain one with a cave spring.
 - **Exits.** Make every exit easy to read: a road, a sign and a gap in the edge. No hidden exits on the main path.
 - **Identity.** Each town has one signature feature or mechanic the player remembers. Akti has its harbor and trireme. Elaia has its festival square and the old olive.
 - **Hidden items.** Towns have them too, a couple per town.
@@ -72,6 +76,11 @@ Every Ichor map follows these rules. They come from how Game Freak builds Gen 3 
 - **Act II opens into hubs:** a capital with spokes, side regions and optional areas.
 - **Act III and the post-game** reward backtracking. New relics open old places, old routes gain post-game encounters, and rematches appear.
 - **Connections.** Neighbouring maps connect on matching seams. Agree the seam columns before building either side.
+- **Seam strips use only the primary tileset.** The game draws a connected neighbour using the tilesets of the map the player is standing on. A neighbour's secondary-tileset pieces (kalliste, akti, agros) near the seam therefore draw as garbage from across it.
+  - On an up or down connection, the 6 rows nearest the seam may use only aethos metatiles.
+  - On a left or right connection, the 8 columns nearest the seam may use only aethos metatiles.
+  - Every map builder enforces this in code.
+  - Two neighbours that share the same secondary tileset are exempt.
 
 ## 6. Readability on a GBA screen
 

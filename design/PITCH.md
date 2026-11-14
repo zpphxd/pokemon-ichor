@@ -69,9 +69,14 @@ Aethos is a sun-bleached archipelago and mainland in the age of heroes. It has n
 - **Team Titan.** The Titanborn wear bronze Corinthian helmets under a sickle emblem.
   - **Hyperion** (Fire/Rock): brash.
   - **Iapetos** (Dark/Psychic): a manipulator.
-  - **Rhea** (Ground): a mother who lost her children to prophecy.
+  - **Rhea** (Ground): a mother who lost her children to prophecy. At Knossa she disobeys Kronos and leaves the threshold open: the first crack in Team Titan.
 - **Kronos.** The masked leader. He is really **Phaedon**, a gentle healer at the capital's Asclepeion. His daughter **Elpis** (*Hope*, the last thing left in Pandora's jar) is fated to die young. He wants to seize the Loom and awaken Kronos, Lord of Time, to freeze the world in a golden age where no thread is ever cut.
 - **Archon Aristeides the Just.** The Champion. He believes fixed fate keeps the peace.
+- **The Labyrinth's cast** (`design/LABYRINTH.md`, approved 2026-11-14):
+  - **Daedalus**: the maker beneath Knossa, haunted by Icarus and by his apprentice. Out of sympathy for a grieving father he timed the Harpe's forging for Kronos, and now repents.
+  - **Ariadne**: priestess of the Mistress of the Labyrinth and Asterion's half-sister. She is later the Endless Labyrinth's Brain.
+  - **Asterion**: the Minotaur, a Pokémon goaded into a monster, whom you free. He is **Asterlorn** (Aethos dex #98, Fighting/Dark): only one exists, chained at the Labyrinth's heart.
+  - **Minos**: Knossa's dead king, a tomb in the main story and a judge of the dead after it.
 
 ### Act I — The Unwoven (Laurels 1–3)
 
@@ -84,15 +89,15 @@ Aethos is a sun-bleached archipelago and mainland in the age of heroes. It has n
 ### Act II — Hubris (Laurels 4–6)
 
 1. At the Dionysia festival in Thyrsa, Iapetos stages a tragedy that entrances the whole amphitheater.
-2. In Arkadia, Kleon loses badly to the Huntress Kallisto. Iapetos, a forger of prophecies, offers to rewrite Kleon's fate into one of victory. Kleon accepts and joins the Titans. His hubris is wanting to own his fate.
-3. **Astyra:** you meet a kind healer, Phaedon, and his sick daughter Elpis.
+2. In Arkadia, Kleon loses badly to the Huntress Kallisto. Iapetos, a forger of prophecies, offers to rewrite Kleon's fate into one of victory. Kleon accepts and joins the Titans. His hubris is wanting to own his fate. The forged prophecy reads: "Kleon of Lakonia shall slay the starry bull beneath the house of the double axe, and his glory shall never die."
+3. **Astyra:** you meet a kind healer, Phaedon, who tends your Pokémon at the Asclepeion, and his sick daughter Elpis. She owns a clay bull she calls Starry, and Phaedon's theme is the lullaby she hums.
 4. Then Team Titan storms the Akropolis for the second fragment. You fight up the Akropolis beside Alethea in a double battle, then face Kleon, now a Titan agent.
 5. At Kaldera's forge you learn the Harpe can cut what the Fates have woven. Only someone with no thread can hold it without being unmade, which means you.
 
 ### Act III — The Loom (Laurels 7–8, climax, League)
 
 1. **Kythera.** You win the seventh laurel.
-2. **Knossa.** You infiltrate Team Titan's headquarters inside the Labyrinth, where a Minotaur waits at the center. Kronos removes his mask: he is Phaedon. He completes the Harpe.
+2. **Knossa.** Ariadne gives you her thread. You descend Daedalus's seven-ringed Labyrinth, where Team Titan has its headquarters, and meet Daedalus, who gives you the Labrys. You win the Helm of Darkness from King Minos's tomb, beat Hyperion at the forge, and find Iapetos's draft of Kleon's prophecy. At the heart, under Daedalus's stars, Kronos completes the Harpe. You free the Minotaur, Asterion, instead of fighting him, and stop Kleon from killing him. Kronos removes his mask by choice: he is Phaedon, and he asks you to carry the Harpe at the Loom. Rhea turns the house to trap you but leaves the threshold open, and you escape along your own thread. The full design is in `design/LABYRINTH.md`.
 3. **Lakonia.** Kleon learns two things: Iapetos forged his new prophecy, and his old one was misread, because *kleos* never meant death.
 4. **Delphoi.** You win the eighth laurel from the Pythia. Kronos opens the Omphalos.
 5. **The Loom.** The three Fates are chained there, and have been since the first Archon bound them to make destiny unchangeable. You cut them free because it is right. Kronos seizes their power, and **Dialga, Lord of Time, awakens**.
@@ -114,7 +119,7 @@ The 8 temples and 4 Pantheon seats are the **Twelve Olympians**. Hestia is count
 | 3 | Demeter | Grass | Chloe, the Mystagogue | Eleusa Village |
 | 4 | Dionysus | Poison | Thespis, the Masked Player | Thyrsa City |
 | 5 | Artemis | Dark | Kallisto, the Moonlit Huntress | Arkadia |
-| 6 | Hephaestus | Steel | Talos, the Bronzesmith | Kaldera |
+| 6 | Hephaestus | Steel | Talos, the Bronzesmith (Daedalus's apprentice Perdix as a boy; he gives you Daedalus's Wings) | Kaldera |
 | 7 | Aphrodite | Fairy | Galatea, the Living Marble | Kythera Isle |
 | 8 | Apollo | Fire | Phemonoe, the Pythia | Delphoi |
 | P | Ares | Fighting | Brasidas, the Polemarch | Olympus |
@@ -135,7 +140,11 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
   - **Snivy** (Gen 5): Serperior is the great serpent of Delphoi that Apollo slew.
   - **Cyndaquil** (Gen 2): Typhlosion is named for Typhon, father of monsters. Its ancient Hisuian form (Fire/Ghost) suits the era.
   - **Piplup** (Gen 4): Empoleon carries Poseidon's trident on its crest.
-  - A post-game **Sanctuary of Firsts** offers every other starter.
+  - **Theoxenia: gods in disguise** (user, 2026-11-14; replaces the earlier "Sanctuary of Firsts"). Later in the game, gods walk Aethos disguised as strangers. They test your kindness, then reveal themselves and give you a starter as a guest-gift. Details are in `design/SYSTEMS.md` §10.
+    - **Core tier:** Demeter gives Snivy after Laurel 5, Hephaestus gives Cyndaquil (which evolves into Hisuian Typhlosion) after Laurel 6, and Poseidon gives Piplup after Laurel 7.
+    - **Extended tier:** 13 more visits through the late game and post-game give the other starter lines. It ends with Zeus and Hermes at Mom's door in a storm.
+    - Lazarus's nine starters are offered nowhere.
+    - No vanilla species is cut from the ROM. The user wants every Pokémon obtainable eventually, so the gift species are there anyway.
 - **Aethos Dex:** about 400 species from Gen 1–9, placed by theme. All **1,025** species can be caught by the end of the post-game. Glazed stops at Gen 6.
 - **Ancient era, ancient forms.** Hisuian forms live in Aethos naturally, because the setting is ancient. Ancient Paradox Pokémon (Great Tusk, Flutter Mane, Roaring Moon and the rest) appear in post-climax **Time Fractures**, where the Golden Age leaks through.
 
@@ -162,7 +171,7 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
 | The Lernaean Hydra | Hydreigon |
 | Ladon and the golden apples | Hydrapple |
 | Cerberus | Mega Houndoom |
-| The Minotaur | Paldean Tauros |
+| Asterion, the Minotaur | Asterlorn (Aethos dex #98, Fighting/Dark) |
 | The Stymphalian birds | Skarmory and Corviknight |
 | Polyphemus the Cyclops | Dusclops and Dusknoir |
 | Circe's swine | Lechonk and Oinkologne |
@@ -183,18 +192,37 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
   - **Hero**: standard.
   - **Spartan**: level caps, set mode, no items in battle, smart AI, and competitive boss teams.
   - **Oath of the Styx**: an optional Nuzlocke ruleset you swear to at the start.
-- **No HM slaves.** Field powers come from relics:
+- **No HM slaves.** Field powers come from relics. Relics are key items you use straight from the field; no Pokémon ever learns a field move. The user approved this mapping on 2026-11-14. Each relic's myth-quest and upgrades are in `design/SYSTEMS.md` §1–3.
 
-  | Field power | Relic |
-  |---|---|
-  | Running shoes | Talaria (winged sandals) |
-  | Fly | Daedalus's Wings |
-  | Surf | Poseidon's Conch |
-  | Rock Smash | Bronze Hammer |
-  | Cut | Labrys |
-  | Strength | Girdle of Herakles |
-  | Flash | Hecate's Torch |
-  | Dive | Nereid Pearl |
+  | Field power | Relic | Arrives |
+  |---|---|---|
+  | Running shoes | Talaria (winged sandals) | Act I |
+  | Rock Smash | Bronze Hammer | Act I |
+  | Flash, plus light, braziers and burning brambles | Hecate's Torch | Act I |
+  | Cut | Demeter's Sickle | Act I, Eleusa |
+  | Strength | Girdle of Herakles | Act II, Laurel 4 |
+  | Surf | Poseidon's Conch | Act II, Astyra |
+  | Fly | Daedalus's Wings, from Talos | Act II, Laurel 6 |
+  | Waterfall | Horn of Achelous | Act III |
+  | Escape and path-marking (the Labyrinth) | Ariadne's Thread | Act III, Knossa |
+  | Dials, seals and chains (the Labyrinth's tool) | Labrys | Act III, Knossa |
+  | Stealth past sight lines | Helm of Darkness | Act III, Knossa |
+  | Dive | Nereid Pearl | Post-game |
+  | Sailing and fog | Aeolus's Bag of Winds | Post-game |
+
+  Two tools also come into play: **Alethea's Trowel**, for digging, and the **Star Chart**.
+- **Rites.** Altars and roadside shrines to all 15 gods, about 60 in all. Praying is free. Offerings earn a god's **Favor** (0–100) and a blessing that lasts a set number of steps. Each god gives gifts at Favor 30, 60 and 100. Specified in `design/SYSTEMS.md`.
+- **The living world** (`design/SYSTEMS.md`):
+  - **Herm waystones:** you anoint them in Act I, and they become fast-travel points in Act II.
+  - **Excavation** with Alethea's Trowel: amphorae that tell myths, ostraka, and evidence of Iapetos's forgeries.
+  - **A daily augury**, built on the mass-outbreak engine.
+  - **Festivals** on a 36-day Aethos year.
+  - **The Katasterismoi:** a star chart of 24 constellations.
+  - **Knucklebones** in the tavern.
+  - **Xenia** (hospitality to strangers) and theoxenia (gods in disguise; see §4).
+  - **"Know thyself"**: the Oracle's judge of your Pokémon.
+- **Berries** stay, redrawn as Aegean fruits, and double as first-fruits offerings at the altars.
+- **Design principle:** the main path never needs a time of day, a date, luck or a grind.
 
 - **Modern features.**
   - Followers.
@@ -217,9 +245,9 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
    - the Erymanthian Boar (Mamoswine)
    - the Augean Stables (Garbodor)
    - the Stymphalian Birds (Corviknight)
-   - the Cretan Bull (Tauros)
+   - the Cretan Bull (Tauros), Asterion's sire. Asterion helps.
    - the Mares of Diomedes (Mudsdale)
-   - the Girdle of Hippolyta
+   - Hippolyta's War-Belt (renamed so it doesn't clash with the Girdle of Herakles relic)
    - the Cattle of Geryon
    - the Apples of the Hesperides (Hydrapple)
    - Cerberus (Mega Houndoom)
@@ -231,6 +259,7 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
    - Face Hades and Persephone, then Giratina.
 3. **The Olympiad.** The Battle Frontier, held at Olympia.
    - Its Frontier Brains are heroes: Achilles, Atalanta, Odysseus and Hippolyta.
+   - **The Endless Labyrinth** at Knossa runs on the Battle Pyramid engine. Ariadne is its Brain, with Asterion as her ace. Asterion may join you after her gold symbol.
    - The Arena of Champions hosts rematches with every Hierophant.
 4. **The Odyssey.** A voyage across the wine-dark sea:
    - Polyphemus's island

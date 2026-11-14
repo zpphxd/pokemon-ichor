@@ -1,0 +1,8 @@
+# Per-tileset Porytiles config for gTileset_Agros, the countryside secondary.
+# Sources are drawn by tools/ichor/art/agros_build.py, which compiles Agros against
+# an empty stand-in primary and checks its metatiles use only its own tiles and
+# palettes 6-12. Pair it with aethos when compiling it directly.
+tileset:
+  primary_pairing:
+    mode: manual
+    partners: [gTileset_Aethos]

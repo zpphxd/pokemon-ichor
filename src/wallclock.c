@@ -246,6 +246,66 @@ static const struct SpriteTemplate sSpriteTemplate_AM =
     .callback = SpriteCB_AMIndicator
 };
 
+// Ichor: the klepsydra (tools/ichor/art/ui_klepsydra.py). The hands and the
+// AM/PM tablets turn on a bronze dial to the right; the hour hand's frame is
+// blank, because the water in the vessel's sight window tells the hour. The
+// water is two 32x64 sprites behind the background, seen through the window,
+// rising from empty at 0:00 and 12:00 to full twelve hours later.
+#define ICHOR_DIAL_X        172
+#define ICHOR_DIAL_Y        70
+#define ICHOR_WATER_X       64
+#define ICHOR_WATER_EMPTY_Y 119     // the window's floor: the level at 0:00
+#define ICHOR_WATER_SPAN    72      // the window's height: twelve hours of water
+
+static const struct OamData sOam_Water =
+{
+    .y = DISPLAY_HEIGHT,
+    .shape = SPRITE_SHAPE(32x64),
+    .size = SPRITE_SIZE(32x64),
+    .priority = 3,
+};
+
+static const union AnimCmd sAnim_WaterSurface[] =
+{
+    ANIMCMD_FRAME(136, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_WaterBody[] =
+{
+    ANIMCMD_FRAME(168, 30),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sAnims_Water[] =
+{
+    sAnim_WaterSurface,
+    sAnim_WaterBody,
+};
+
+static void SpriteCB_Water(struct Sprite *sprite);
+
+static const struct SpriteTemplate sSpriteTemplate_Water =
+{
+    .tileTag = GFXTAG_WALL_CLOCK_HAND,
+    .paletteTag = PALTAG_WALL_CLOCK_MALE,
+    .oam = &sOam_Water,
+    .anims = sAnims_Water,
+    .callback = SpriteCB_Water,
+};
+
+static void CreateKlepsydraWater(u8 taskId)
+{
+    u32 i;
+    for (i = 0; i < 2; i++)
+    {
+        u8 spriteId = CreateSprite(&sSpriteTemplate_Water, ICHOR_WATER_X, ICHOR_WATER_EMPTY_Y + 32, 3);
+        gSprites[spriteId].sTaskId = taskId;
+        gSprites[spriteId].data[1] = 32 + 64 * i;   // the surface, then the body under it
+        StartSpriteAnim(&gSprites[spriteId], i);
+    }
+}
+
 static const s8 sClockHandCoords[][2] =
 {
     { 0x00, -0x18},
@@ -692,24 +752,25 @@ void CB2_StartWallClock(void)
     gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;
     gTasks[taskId].tHourHandAngle = (gTasks[taskId].tHours % 12) * 30 + (gTasks[taskId].tMinutes / 10) * 5;
 
-    spriteId = CreateSprite(&sSpriteTemplate_MinuteHand, 120, 80, 1);
+    spriteId = CreateSprite(&sSpriteTemplate_MinuteHand, ICHOR_DIAL_X, ICHOR_DIAL_Y, 1);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
 
-    spriteId = CreateSprite(&sSpriteTemplate_HourHand, 120, 80, 0);
+    spriteId = CreateSprite(&sSpriteTemplate_HourHand, ICHOR_DIAL_X, ICHOR_DIAL_Y, 0);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
 
-    spriteId = CreateSprite(&sSpriteTemplate_PM, 120, 80, 2);
+    spriteId = CreateSprite(&sSpriteTemplate_PM, ICHOR_DIAL_X, ICHOR_DIAL_Y, 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = 45;
 
-    spriteId = CreateSprite(&sSpriteTemplate_AM, 120, 80, 2);
+    spriteId = CreateSprite(&sSpriteTemplate_AM, ICHOR_DIAL_X, ICHOR_DIAL_Y, 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = 90;
 
+    CreateKlepsydraWater(taskId);
     WallClockInit();
 
     AddTextPrinterParameterized(WIN_BUTTON_LABEL, FONT_NORMAL, gText_Confirm3, 0, 1, 0, NULL);
@@ -740,24 +801,25 @@ void CB2_ViewWallClock(void)
         angle2 = 135;
     }
 
-    spriteId = CreateSprite(&sSpriteTemplate_MinuteHand, 120, 80, 1);
+    spriteId = CreateSprite(&sSpriteTemplate_MinuteHand, ICHOR_DIAL_X, ICHOR_DIAL_Y, 1);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
 
-    spriteId = CreateSprite(&sSpriteTemplate_HourHand, 120, 80, 0);
+    spriteId = CreateSprite(&sSpriteTemplate_HourHand, ICHOR_DIAL_X, ICHOR_DIAL_Y, 0);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
 
-    spriteId = CreateSprite(&sSpriteTemplate_PM, 120, 80, 2);
+    spriteId = CreateSprite(&sSpriteTemplate_PM, ICHOR_DIAL_X, ICHOR_DIAL_Y, 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = angle1;
 
-    spriteId = CreateSprite(&sSpriteTemplate_AM, 120, 80, 2);
+    spriteId = CreateSprite(&sSpriteTemplate_AM, ICHOR_DIAL_X, ICHOR_DIAL_Y, 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].data[1] = angle2;
 
+    CreateKlepsydraWater(taskId);
     WallClockInit();
 
     AddTextPrinterParameterized(WIN_BUTTON_LABEL, FONT_NORMAL, gText_Cancel4, 0, 1, 0, NULL);
@@ -1048,6 +1110,14 @@ static void SpriteCB_HourHand(struct Sprite *sprite)
 
     sprite->x2 = x;
     sprite->y2 = y;
+}
+
+// Ichor: the water's surface follows the time: data[1] is the sprite's offset
+// below the surface (32 for the surface sprite's centre, 96 for the body's).
+static void SpriteCB_Water(struct Sprite *sprite)
+{
+    u32 minutes = (gTasks[sprite->sTaskId].tHours % 12) * 60 + gTasks[sprite->sTaskId].tMinutes;
+    sprite->y = ICHOR_WATER_EMPTY_Y - (minutes * ICHOR_WATER_SPAN) / (12 * 60) + sprite->data[1];
 }
 
 #define sAngle data[1]

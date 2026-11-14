@@ -56,6 +56,7 @@ mgba pokeemerald.gba                   # play it
 - **Graphics.**
   - 4bpp, 16-color palettes, color 0 transparent.
   - Tilesets: draw `bottom/middle/top.png` at 128 px wide and compile with Porytiles. Plan palettes first: 6 primary and 7 secondary.
+  - A secondary tileset may use at most 504 tiles. Door animations copy their frames over tiles 504–511 (`DOOR_TILE_START_SIZE1` in `src/field_door.c`), so anything there glitches while a door opens. Leave 496–511 free if a map uses wide doors.
   - Overworld NPCs share palette families.
 - **Upstream.**
   - `upstream` is rh-hideout/pokeemerald-expansion.

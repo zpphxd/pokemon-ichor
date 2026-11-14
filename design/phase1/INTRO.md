@@ -6,7 +6,7 @@ The sequence:
 
 1. An honest **copyright card**.
 2. The upstream **"powered by" card**, restyled.
-3. The **studio mark**: a drop of ichor falls through the dark and blooms into ΙΧΩΡ.
+3. The **studio mark**: a drop of ichor falls through the dark and blooms into ΙΧΩΡ, and the credit "A GAME BY ZACH POWERS" gilds in beneath it.
 4. The **cinematic**. Clotho spins, and her thread runs along a black-figure frieze of Aethos as the pot turns under the light. The camera follows it to the Fates' loom. Lachesis measures the warp and Atropos cuts it, until the shears reach the golden thread and stop.
 5. A white cut to the **amphora title**, where the three Fates stand painted.
 
@@ -26,7 +26,7 @@ At the loom, Lachesis ties a red knot on every thread to mark where it will be c
 |---|---|---|---|
 | 1 | Copyright | `intro_1_copyright.png` | Black gloss between two meander rules. The first line reads "POKÉMON © NINTENDO / CREATURES / GAME FREAK". A small gold drop sits under it, then "ICHOR IS A FAN-MADE GAME, NOT AFFILIATED WITH THEM." It fades in from the BIOS white, as Emerald's card did. |
 | 2 | Powered by | `intro_2_powered_by.png` | "POWERED BY" over a gilded V-cut **PRET × RHH**, captioned POKEEMERALD and EXPANSION, between meander rules. The upstream egg and Porygon sprites are left out of the pottery look. |
-| 3 | Studio mark | `intro_3_studio_bead.png` to `intro_5_studio_mark.png` | A bead of ichor gathers at the top of the dark, swells, lets go and falls. On landing, the mark's drop flares white and cools to gold. A ripple spreads to a ring of **twelve gold dots** (the Twelve), and **ΙΧΩΡ** (*ichor* in Greek capitals) gilds in below. |
+| 3 | Studio mark | `intro_3_studio_bead.png` to `intro_5_studio_credit.png` | A bead of ichor gathers at the top of the dark, swells, lets go and falls. On landing, the mark's drop flares white and cools to gold. A ripple spreads to a ring of **twelve gold dots** (the Twelve), and **ΙΧΩΡ** (*ichor* in Greek capitals) gilds in below. Then the credit fades in under it: small gold "A GAME BY" over **ZACH POWERS** in 11 px two-stem gilded capitals. The pairing is the title's own, a serifed mark over smaller sans gold capitals, as ICHOR sits over POKÉMON. |
 | 4 | Clotho | `intro_6_clotho.png` | The frieze fades in on Clotho, the title's own figure, beside her wool basket and labeled ΚΛΩΘΩ. Her drop spindle turns, and the white thread runs from her hand to the edge of the frame. |
 | 5 | The grove of Elaia | `intro_7_grove.png` | The pot begins to turn. Three gnarled olives stand here, with Athena's owl (**Noctowl**) on a bough and two grazing **Mareep** (the Golden Fleece's flock). The golden thread rises from the third olive's roots, a spark running ahead of it. |
 | 6 | The sea | `intro_8_sea.png` | A trireme sails under a white sail, with its painted eye and its ram. **Finizen** leap around it, as the dolphins do on Exekias's cup, and they dive behind the painted waves. **Gyarados** rears from the waves as the *ketos*, the sea serpent of Greek vases. Labeled ΘΑΛΑΣΣΑ. |
@@ -58,13 +58,14 @@ The **intro clock** `t` counts frames from the studio card. It is `gIntroFrameCo
 
 | t | Seconds | Bar.beat | Length | Cue |
 |---|---|---|---|---|
-| 0 | 0.00 | 1.1 | 410 | **Studio card.** `MUS_INTRO` starts. Darkness. |
+| 0 | 0.00 | 1.1 | 396 | **Studio card.** `MUS_INTRO` starts. Darkness. |
 | 24 | 0.40 | 1.1 | 62 | A bead of ichor forms at the top and swells. |
 | 86 | 1.44 | 1.4 | 26 | The drop lets go and falls. |
 | 112 | 1.88 | 2.1 | 24 | It lands. The mark's drop flares and the ripple spreads. |
 | 124 | 2.08 | | 12 | The ring of the Twelve kindles. |
 | 140 | 2.34 | | 40 | ΙΧΩΡ gilds in, then glints and holds. |
-| 300 | 5.02 | | 32 | Fade to black. Black until 410. |
+| 184 | 3.08 | 2.4 | 36 | "A GAME BY ZACH POWERS" fades in beneath it. It is at full gold from 220 to 364 (2.4 s), on screen about 3.5 s in all. |
+| 364 | 6.09 | 4.3 | 32 | Fade to black. Black from 396 to 410 (the frieze loads at 398). |
 | **410** | 6.86 | **5.1** | 307 | **Clotho.** Fade in from black over 32 frames. The spindle turns. |
 | 466 | 7.80 | | 234 | Her white thread runs from her hand to the frame's edge, finishing at 700. |
 | **717** | 12.00 | **8.1** | 1273 | **The pot turns.** The pan eases in over 150 frames and reaches full speed (1.07 px a frame) at 867, under the timpani roll from bar 9 (819). |
@@ -90,6 +91,7 @@ The **intro clock** `t` counts frames from the studio card. It is `gIntroFrameCo
 The current `mus_ichor_intro` (A 10 bars, B 10, C 3; 39.4 s, ends near t = 2355) fits this sheet as cut: section B starts the golden thread and section C starts the loom. **For a recut**, the moments a score can hit are:
 
 - the drop landing at 112
+- the credit at 184
 - Clotho at 410
 - the turn at 717
 - the golden thread at 1024
@@ -108,7 +110,7 @@ The frieze is a pot turning under a fixed light. The clay band and its lighting 
 
 | Scene | Layer | Holds | VRAM |
 |---|---|---|---|
-| Studio | BG0 | `studio_mark.png`: the drop, the ring of twelve, ΙΧΩΡ. 54 tiles, one palette whose three groups `intro.c` lights separately. | char 0, map 31 |
+| Studio | BG0 | `studio_mark.png`: the drop, the ring of twelve, ΙΧΩΡ and the credit. 95 tiles, one palette whose four groups (drop 1-5, ring 6-7, ΙΧΩΡ 8-12, credit 13-15) `intro.c` lights separately. | char 0, map 31 |
 | | OBJ | `studio_drop.png` (6 frames, 16x32), `studio_ripple.png` (6 frames, 64x64) | |
 | Frieze | BG2 | `frieze.png` (633 tiles): the 1464 px painting, streamed into a 64-column map a column at a time as the camera moves | char 0-1, map 24-25 |
 | | BG3 | The lit clay band and the band rules, still (`clay.bin`) | char 2, map 26 |
@@ -167,8 +169,8 @@ tools/ichor/smoke_test.sh
 - **Budgets.** The generator asserts each one:
   - the frieze must fit 1024 BG tiles (it uses 633)
   - each scene's still layers must fit 512 tiles in char block 2 (112 and 75)
-- **Skipping.** Any key during the studio card, the frieze or the loom goes straight to the title. Checked at t 61, 1238 and 2096; the title then plays through to the amphora. A key during the powered-by card skips to the studio card, as upstream does. The smoke test's START at boot frame 500 lands in the studio card (t 41), and its title shot at frame 1000 is unchanged.
-- **ROM.** 26,904,024 B against 26,907,384 B for main at 218ac09a8a, so 3,360 B smaller (80.18% of 32 MB). Emerald's intro art left more room than Ichor's took.
+- **Skipping.** Any key during the studio card, the frieze or the loom goes straight to the title. Checked at t 61, 1238 and 2096; the title then plays through to the amphora. A key during the powered-by card skips to the studio card, as upstream does. The smoke test taps START about 500 frames after power-on, in the studio card (t ≈ 41), so the studio card's longer hold doesn't touch it.
+- **ROM.** The boot sequence came in 3,360 B smaller than Emerald's intro (26,904,024 B against 26,907,384 B at 218ac09a8a). The credit added 512 B (26,935,980 B against 26,935,468 B at f4e4087157, 80.28% of 32 MB).
 
 ## Not done
 
