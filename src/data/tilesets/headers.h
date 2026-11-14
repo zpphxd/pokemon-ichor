@@ -1576,3 +1576,17 @@ const struct Tileset gTileset_TempleHestia =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHestia,
     .callback = NULL,
 };
+
+// Ichor: oikia, furnishings of a Greek house. A secondary that uses only its
+// own tiles and palettes 6-12, so it works on any primary. Built by
+// tools/ichor/art/oikia_build.py.
+const struct Tileset gTileset_Oikia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Oikia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Oikia,
+    .metatiles = gMetatiles_PorytilesManaged_Oikia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Oikia,
+    .callback = NULL,
+};
