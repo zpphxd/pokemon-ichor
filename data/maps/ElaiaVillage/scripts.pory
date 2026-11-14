@@ -531,10 +531,6 @@ script ElaiaVillage_EventScript_ShrineDoor {
     msgbox(format("A little blue-domed shrine. Its door is shut for the festival."), MSGBOX_SIGN)
 }
 
-script ElaiaVillage_EventScript_NeighboursDoor {
-    msgbox(format("Nobody's home. Everyone's at the festival."), MSGBOX_SIGN)
-}
-
 script ElaiaVillage_EventScript_Beehives {
     msgbox(format("Mom's beehives. They hum like a plucked lyre string."), MSGBOX_SIGN)
 }
@@ -552,7 +548,7 @@ script ElaiaVillage_EventScript_Altar {
 }
 
 script ElaiaVillage_EventScript_Stall {
-    msgbox(format("Honey cakes, still warm. The stall-keeper has gone to watch the readings."), MSGBOX_SIGN)
+    msgbox(format("Glykera's honey cakes, still warm. She's run home to bake another batch."), MSGBOX_SIGN)
 }
 
 // A coin someone once wished on (Part 6's hidden Relic Copper).

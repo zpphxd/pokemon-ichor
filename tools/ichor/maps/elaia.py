@@ -37,6 +37,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "tools/ichor/art"))
+sys.path.insert(0, str(ROOT / "tools/ichor/maps"))
 
 W, H = 30, 38
 # The village is composed on a 34-row canvas, then lowered DY rows under an
@@ -460,8 +461,8 @@ def square(g):
 
 
 def west(g):
-    """A neighbour's house, shut for the festival, and its walled garden."""
-    g.struct("house_small", 2, 12)                            # door (3,14) shut
+    """Glykera's house (the honey-cake baker, Korinna's mother) and its walled garden."""
+    g.struct("house_small", 2, 12, door_solid=False)          # door (3,14) on the canvas
     g.rect(3, 15, 6, 16, "path")                              # its doorstep, out to the square
     garden(g, 2, 17, 3, 2)
     low_wall_ew(g, 2, 5, 19)
@@ -649,6 +650,7 @@ WARPS = [   # order is the warp id; the interiors point back at these
     (17, 10, "MAP_ELAIA_VILLAGE_NEIGHBORS_HOUSE", 0),
     (5, 12, "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F", 1),
     (5, 33, "MAP_ELAIA_VILLAGE_AKADEMIA", 0),
+    (3, 18, "MAP_ELAIA_VILLAGE_BAKERS_HOUSE", 0),
 ]
 LINE_SPOT = (14, 22)                                   # the player's place in Halia's line
 LINE_CORE = {(x, y) for x in range(13, 16) for y in range(19, 23)}
@@ -665,7 +667,6 @@ SIGNS = [   # x, y, facing, script
     (16, 18, "NORTH", "FestivalBanner"),
     (9, 8, "ANY", "Herm"),
     (24, 10, "NORTH", "ShrineDoor"),
-    (3, 18, "NORTH", "NeighboursDoor"),
     (23, 18, "ANY", "Well"),
     (3, 6, "ANY", "Beehives"),
     (7, 6, "ANY", "Beehives"),
@@ -765,7 +766,10 @@ ROOMS = {
 
 def write_rooms():
     """The rooms are finished blockdata (design/phase1/ROOMS_*.md). Their border
-    is four of the room set's near-black void metatile."""
+    is four of the room set's near-black void metatile. Elaia's other homes are
+    composed from the same catalog by elaia_homes.py."""
+    import elaia_homes
+    elaia_homes.build()
     for name, room in ROOMS.items():
         d = ROOT / "data/layouts" / name
         d.mkdir(parents=True, exist_ok=True)

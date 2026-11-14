@@ -9455,6 +9455,17 @@
       "border_filepath": "data/layouts/ElaiaVillage_Akademia/border.bin",
       "blockdata_filepath": "data/layouts/ElaiaVillage_Akademia/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ELAIA_VILLAGE_BAKERS_HOUSE",
+      "name": "ElaiaVillage_BakersHouse_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/ElaiaVillage_BakersHouse/border.bin",
+      "blockdata_filepath": "data/layouts/ElaiaVillage_BakersHouse/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
