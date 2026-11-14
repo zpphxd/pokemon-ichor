@@ -2,19 +2,20 @@
 
 The interior of Akti's Temple of Hestia, home of the Hearth Trial (`SCRIPT.md`, beat 7 and Part 5). It is Doric, warm and lit by fire. A honey-marble hall runs under a black-figure frieze. A red wool runner leads past the great round hearth to the Hierophant's dais. Bronze tripod braziers stand around the hall, cold until the trial lights them.
 
-![The proposed room, braziers cold](img/temple_room.png)
+![The Hearth Trial room, braziers cold](img/temple_room.png)
 
 | Image | Shows |
 |---|---|
-| `img/temple_room.png` | The proposed Hearth Trial room at 3×, before the trial |
-| `img/temple_room_lit.png` | The same room after the trial: every brazier lit, the cord gone |
+| `img/temple_room.png` | The Hearth Trial room as built (`MAP_AKTI_TOWN_TEMPLE_OF_HESTIA`) at 3×, before the trial |
+| `img/temple_room_lit.png` | The same room after the trial: every brazier lit in its pool of light, the cord gone |
 | `img/temple_sheet.png` | Every metatile with its id, rendered from the compiled tileset |
 | `img/temple_identity.png` | The room on `building` and on `aethos`, side by side, with the diff |
 
 ## How it is made
 
 - **`tools/ichor/art/temple_hestia.py`** holds every pixel, drawn as character grids with one legend. It writes `porytiles_src/` (bottom, middle and top PNGs, plus `attributes.csv`) and the per-tileset Porytiles config.
-- **`tools/ichor/art/temple_room.py`** runs that script and compiles with Porytiles. It checks the result, lays out the proposed room and renders the four images. `--layout-out map.bin` also writes the room as a layout, with collision and elevation, for the map builder.
+- **`tools/ichor/art/temple_room.py`** runs that script and compiles with Porytiles. It checks the result and renders the four images from the map's room.
+- **`tools/ichor/maps/temple.py`** owns the room itself: its design, the layout with collision and elevation, the brazier scripts and the map checks. See *The Hearth Trial room* below.
 
 ```bash
 /usr/bin/python3 tools/ichor/art/temple_room.py
@@ -40,15 +41,15 @@ Porytiles' own palette search did not finish for this many colors: the default r
 
 | Slot | Name | For |
 |---|---|---|
-| 6 | cloth | Loom, bed niche, side door, the cord |
+| 6 | cloth | Loom, bed niche, side door, the cord, the kline |
 | 7 | fire | The great and inner hearths, braziers, bronze lamps |
 | 8 | floor | Floor, firelight, runner, key inlay, doormat |
 | 9 | marble | Dais, steps, riser, columns, stele |
 | 10 | clay | Amphorae, laurel, wreath, the table |
 | 11 | wall | Wall top, frieze, lower wall |
-| 12 | free | |
+| 12 | water | The door basin's lustral water, the hall's one cool note |
 
-All colors are multiples of 8, in the master palette's families shifted warm. Object shadows are painted into the floor beneath, so objects never need floor colors. The tileset uses 352 of 512 tiles.
+All colors are multiples of 8, in the master palette's families shifted warm. Object shadows are painted into the floor beneath, so objects never need floor colors. The tileset uses 432 of 512 tiles.
 
 ## Catalog
 
@@ -61,6 +62,8 @@ Ids are global metatile ids. "Blocks" is the collision to paint in Porymap: 1 is
 | `0x200` | `void` | Near-black, for the layout's border. Blocks |
 | `0x201` | `floor` | Honey-marble slab, 16 px |
 | `0x202`, `0x203` | `floor_vein_a`, `floor_vein_b` | Veined variants; scatter them |
+| `0x287` | `floor_worn` | An old slab with a forked hairline crack, for the walked lines |
+| `0x288` | `floor_rosette` | A small inlaid rosette, where the temple's people stand to pray |
 | `0x204` | `runner` | Red wool runner, one tile wide, gold lozenge per tile |
 | `0x205` | `runner_end_s` | South end: gold hem and fringe |
 | `0x23B` | `runner_end_n` | North end on the floor |
@@ -172,6 +175,13 @@ A brazier is a bowl tile over a leg tile. The leg tile carries the plinth and a 
 
 - To put a brazier out, use the cold ids.
 - Put bg events on both tiles, so the player can use a brazier from any side.
+- **A lit brazier stands in its own pool of light.** The lit bowl and legs carry warmed floor, and seven ring tiles warm the plain floor around them. Swap in each ring tile that sits on plain `floor` when the brazier lights, and swap `floor` back when it goes out. `tools/ichor/maps/temple.py` generates those calls.
+
+  | Id | Name | Place, from the bowl |
+  |---|---|---|
+  | `0x27C`, `0x27D` | `bglow_l0`, `bglow_r0` | left and right of the bowl |
+  | `0x27E`, `0x27F` | `bglow_l1`, `bglow_r1` | left and right of the legs |
+  | `0x280`–`0x282` | `bglow_bl`, `bglow_b`, `bglow_br` | the row below the legs |
 
 ### The inner hearth and the dais gate
 
@@ -180,7 +190,7 @@ A brazier is a bowl tile over a leg tile. The leg tile carries the plinth and a 
 | `0x24C` | `inner_hearth_l` | 1 | |
 | `0x24D` | `inner_hearth_c` | 1 | **`MB_COUNTER`** |
 | `0x24E` | `inner_hearth_r` | 1 | |
-| `0x207` | `runner_cord` | 1 | |
+| `0x207` | `runner_cord` | 1 | Mostly white wool, so it reads against the red runner |
 
 - The inner hearth is a long marble altar-hearth burning Hestia's sacred flame, 3 × 1 on the dais.
 - Its center is a counter: the player standing south of it talks across the flame to Ione behind it, like the nurse in a Pokémon Center.
@@ -188,6 +198,15 @@ A brazier is a bowl tile over a leg tile. The leg tile carries the plinth and a 
 - When the trial completes, the flare burns it away:
   - swap the dais braziers to lit;
   - then `setmetatile(cord_x, cord_y, 0x204, FALSE)` turns the cord tile back into a plain, walkable runner.
+
+### Added for the trial room
+
+| Ids | Name | Footprint | Notes |
+|---|---|---|---|
+| `0x278` `0x279` / `0x27A` `0x27B` | `kline_tl`, `_tr` / `_bl`, `_br` | 2 × 2, block | A free-standing kline with a red striped blanket, for the Bed station |
+| `0x283` / `0x284` | `basin_top` / `basin_bottom` | 1 × 2, block | The perirrhanterion: a marble basin of lustral water on a fluted stand, at the door |
+| `0x285` / `0x286` | `lampstand_top` / `lampstand_bottom` | 1 × 2, block | A tall bronze lampstand on the dais; a pair frames the Hierophant |
+| `0x289` | `dais_band` | 1 × 1, walkable | The dais's front row with a gold Greek key along its lip |
 
 ### Spare slots
 
@@ -199,47 +218,37 @@ These are plain floor that keeps the hearth block aligned in Porymap's 8-wide se
 - `0x26D`–`0x26F`
 - `0x275`–`0x277`
 
-## The proposed room for the Hearth Trial
+## The Hearth Trial room
 
-- **Size.** The room is **15 × 22**.
-  - The current placeholder layout is 11 × 20, on `building` + `RustboroGym`.
-  - 15 wide fills the GBA screen and leaves room for a nave and two aisles.
-- **Tilesets.** Use primary `gTileset_Building`, or the new Greek interior primary when it lands, with secondary `gTileset_TempleHestia`.
-- **Getting the layout.** `temple_room.py --layout-out <path>` writes the room as a `map.bin`:
-  - elevation 3 everywhere;
-  - collision 1 on every blocking tile listed above.
+The room is designed and built in **`tools/ichor/maps/temple.py`** (`ROOM`), which writes the layout, generates the brazier scripts in `scripts.pory`, checks the events and renders review sheets. `--review NAME` draws them straight from this file's source grids, no Porytiles compile needed.
 
-The braziers follow Part 5's suggested scramble, so their order in space does not match the hymn.
+- **Size.** 17 × 24 on `gTileset_Oikos` + `gTileset_TempleHestia`. A 7-wide nave runs between two colonnades (x = 4 and 12, a column every four rows) with a 3-wide aisle on each side. At the centre the GBA screen shows the nave, both colonnades and the aisles.
+- **The climb.** Door mat, then the stele and the lustral basin flanking the runner, the great hearth in its key-inlay frame, the gate (the dais braziers and the cord), the dais steps, and Ione between two lampstands under Hestia on the frieze.
+- **The stations are the household.** Each brazier stands at an aisle's inner edge, by the colonnade, with its piece of the house behind it: the table back left, the side door back right (with Kanthos), the loom front left, the kline front right. The spatial order still isn't the hymn's (Part 5's placement), so the player has to read the stele.
+- **The light rises with the trial.** Each brazier the player lights warms the floor around it; the last flame lights the dais pair and burns the cord away.
 
-| What | Where (x, y) | Notes |
-|---|---|---|
-| Door warp mat | (6–8, 21) | `mat_l m r`. Each mat tile warps out. Put the "torch sputters out" coord events on the same three tiles |
-| Stele with the hymn | (5, 19–20) | Just inside the entrance. bg events on both tiles |
-| Euboulos | (8, 20) | Just inside the door |
-| Runner | x = 7, from y = 20 up to the steps | |
-| Great hearth | (6–8, 12–14) | Inside the 5 × 5 light block at (5–9, 11–15) and a 7 × 7 key-inlay frame at (4–10, 10–16) |
-| Lampon | (7, 15), facing south | On the runner in the firelight. The hearth checks his trainer flag |
-| **Table** brazier | (1, 9–10) | Back left |
-| **Door** brazier | (13, 9–10) | Back right |
-| **Loom** brazier | (1, 15–16) | Front left |
-| **Bed** brazier | (13, 15–16) | Front right |
-| Pyrrha | (2, 12), facing east, sight 3 | Left aisle, between the Table and Loom braziers. Seen tiles: (3–5, 12). Walking x = 1 behind her avoids her |
-| Aithra | (12, 15), facing west, sight 2 | Beside the Bed brazier. Seen tiles: (10–11, 15) |
-| Dais braziers | (6, 7–8) and (8, 7–8) | Hearth plaques, flanking the approach to the steps |
-| The cord (gate) | (7, 7) | Between the dais braziers' bowls |
-| Steps | (7, 6) | The dais's front riser runs (4–10, 6) |
-| Dais | (4–10, 3–5) | Edges at x = 4 and x = 10 block |
-| Inner hearth | (6–8, 4) | Counter at (7, 4) |
-| Ione | (7, 3), facing south | On `dais_sun`. Talk to her from (7, 5) across the counter |
-| Colonnades | x = 3 and x = 11; columns at y = 8–9, 13–14, 18–19 | They end in pilasters in the north wall at (3, 1–2) and (11, 1–2) |
-| Side door and Kanthos | Door (13, 1–2); Kanthos at (13, 3) | The loom stands in the right aisle at (12–13, 4–5) |
-| Bed niche, table | Niche (1–2, 1–2); table (1–2, 4–5) | Left aisle |
+| What | Where (x, y) |
+|---|---|
+| Door mat, warps 0–2 and the torch-out triggers | (7–9, 23); warp 0 is (8, 23) |
+| Stele, lustral basin | (6, 20–21), (10, 20–21) |
+| Euboulos | (9, 22) |
+| Great hearth | (7–9, 12–14), in its light at (6–10, 11–15) and key frame at (5–11, 10–16) |
+| Lampon | (8, 15), facing south, sight 3 |
+| **Table** brazier, table | (3, 3–4); table (1–2, 3–4) |
+| **Door** brazier, side door, Kanthos | (13, 3–4); door (14, 1–2); Kanthos (15, 3) |
+| **Loom** brazier, loom | (3, 16–17); loom (1–2, 16–17) |
+| **Bed** brazier, kline | (13, 16–17); kline (14–15, 16–17) |
+| Pyrrha | (3, 12), facing east, sight 3, guarding the colonnade gap |
+| Aithra | (12, 17), facing west, sight 2, beside the Bed brazier in the colonnade gap |
+| Dais braziers, cord | (7, 7–8) and (9, 7–8); cord (8, 7) |
+| Dais, steps, inner hearth | dais (5–11, 3–5), riser and steps row 6, steps (8, 6); inner hearth (7–9, 4), counter (8, 4) |
+| Ione, lampstands | (8, 3) on `dais_sun`; lampstands (6, 3–4) and (10, 3–4) |
 
 ### State drawing
 
-- `ON_LOAD` draws each brazier from `VAR_ICHOR_HEARTH_TRIAL`: Door is lit at var ≥ 2, Table at ≥ 3, Loom at ≥ 4 and Bed at ≥ 5.
+- `ON_LOAD` calls `DrawBraziers`, which draws each brazier and its light from `VAR_ICHOR_HEARTH_TRIAL`: Door lit at var ≥ 2, Table at ≥ 3, Loom at ≥ 4 and Bed at ≥ 5.
 - Once the trial is done (`FLAG_ICHOR_HEARTH_TRIAL_DONE`), every brazier and the dais pair are drawn lit, and the cord tile becomes `runner`, passable.
-- A wrong brazier, or leaving the room, resets the four hall braziers to their cold ids.
+- A wrong brazier, or leaving the room, puts the four hall braziers out.
 
 ## Notes and limits
 
@@ -252,5 +261,5 @@ The braziers follow Part 5's suggested scramble, so their order in space does no
 - **What could be better.**
   - The great hearth is 3 × 3. It reads well as the hall's center, but a 5 × 4 hearth would feel grander.
   - The plaque glyphs are tiny (6 × 4), so the plaque text has to name the station.
-  - The white dais is cooler than the warm hall around it.
-  - The lit braziers don't warm the floor around them the way the great hearth does.
+  - The white dais is cooler than the warm hall around it; its gold key band and the lampstands warm it only a little.
+  - A brazier's light stops at the edge of any object beside it (the table, the loom, the kline), since only plain floor has a warmed variant.

@@ -1080,4 +1080,29 @@
 #define METATILE_RSMossdeepGym_Switch_Down           0x239
 #define METATILE_RSMossdeepGym_Switch_Up             0x238
 
+// gTileset_TempleHestia (Ichor: the Temple of Hestia's Hearth Trial). Each lit brazier is its cold id + 1;
+// BrazierLight_* is the warmed floor around a lit brazier, by its place relative to the bowl.
+#define METATILE_TempleHestia_Floor                  0x201
+#define METATILE_TempleHestia_Runner                 0x204
+#define METATILE_TempleHestia_RunnerCord             0x207
+#define METATILE_TempleHestia_BrazierTop_Cold        0x240
+#define METATILE_TempleHestia_BrazierTop_Lit         0x241
+#define METATILE_TempleHestia_BrazierDoor_Cold       0x242
+#define METATILE_TempleHestia_BrazierDoor_Lit        0x243
+#define METATILE_TempleHestia_BrazierTable_Cold      0x244
+#define METATILE_TempleHestia_BrazierTable_Lit       0x245
+#define METATILE_TempleHestia_BrazierLoom_Cold       0x246
+#define METATILE_TempleHestia_BrazierLoom_Lit        0x247
+#define METATILE_TempleHestia_BrazierBed_Cold        0x248
+#define METATILE_TempleHestia_BrazierBed_Lit         0x249
+#define METATILE_TempleHestia_BrazierHearth_Cold     0x24A
+#define METATILE_TempleHestia_BrazierHearth_Lit      0x24B
+#define METATILE_TempleHestia_BrazierLight_Left0     0x27C
+#define METATILE_TempleHestia_BrazierLight_Right0    0x27D
+#define METATILE_TempleHestia_BrazierLight_Left1     0x27E
+#define METATILE_TempleHestia_BrazierLight_Right1    0x27F
+#define METATILE_TempleHestia_BrazierLight_BelowLeft 0x280
+#define METATILE_TempleHestia_BrazierLight_Below     0x281
+#define METATILE_TempleHestia_BrazierLight_BelowRight 0x282
+
 #endif // GUARD_METATILE_LABELS_H

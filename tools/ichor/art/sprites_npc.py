@@ -46,6 +46,8 @@ PAL_PATH = os.path.join(ROOT, "graphics/object_events/palettes/ichor_cast.pal")
 # The shared "Ichor cast" palette. Ramps are merged across the five cast
 # members, so each color is used by several of them. Colors are drawn from
 # the trainer portraits (sprites_trainers.py) and the master palette.
+# sprites_folk.py draws five trainer-class walkers in this palette too, so a
+# change here means re-running sprites_folk.py --write as well.
 # --------------------------------------------------------------------------
 
 CAST_COLORS = [

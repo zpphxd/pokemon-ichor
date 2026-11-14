@@ -2515,4 +2515,92 @@ static const struct SpriteFrameImage sPicTable_IchorHierophantIone[] = {
 static const struct SpriteFrameImage sPicTable_IchorTitanGrunt[] = {
     overworld_ascending_frames(gObjectEventPic_IchorTitanGrunt, 2, 4),
 };
+
+static const struct SpriteFrameImage sPicTable_IchorMom[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMom, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPriestess[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPriestess, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorYouthM[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorYouthM, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorYouthF[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorYouthF, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorMan[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMan, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorWoman[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorWoman, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorElderM[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorElderM, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorElderF[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorElderF, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorKidM[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKidM, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorKidF[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKidF, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorFisher[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorFisher, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorSailor[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorSailor, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorDiver[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorDiver, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorHealer[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHealer, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorMerchant[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMerchant, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorShepherd[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorShepherd, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorHarvester[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHarvester, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorGoatherd[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorGoatherd, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorHoplite[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHoplite, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAugur[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAugur, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAcolyteM[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAcolyteM, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAcolyteF[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAcolyteF, 2, 4),
+};
 // End of Ichor object events

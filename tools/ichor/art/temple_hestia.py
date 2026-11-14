@@ -74,6 +74,8 @@ COLORS = {
     "W": (96, 56, 32), "X": (144, 96, 56), "Y": (192, 144, 88),
     # laurel leaves
     "P": (56, 96, 48), "Q": (104, 144, 64), "R": (160, 184, 96),
+    # lustral water in the door basin: the hall's one cool note
+    "6": (40, 96, 160), "7": (72, 136, 200), "8": (136, 184, 224), "9": (208, 232, 248),
 }
 CLEAR = "."
 
@@ -88,6 +90,7 @@ PALETTES = {
     "fire": "K234BCDEFGHIJNA",     # hearths, braziers, bronze lamps
     "clay": "KwxyzPQRWXY2rs",      # amphorae, laurel, wreath, the table
     "cloth": "K1234uvWXYrstog",    # loom, bed niche, side door, cord
+    "water": "K123456789",         # the door basin
 }
 
 # A shadow darkens whatever it falls on by one step.
@@ -824,25 +827,176 @@ def brazier(lit, glyph):
 # The cord across the dais approach: a red-and-white woolen fillet, the sign
 # of a closed sacred place. It burns away when the dais braziers flare.
 def cord():
-    """A twisted red-and-white rope sagging between the two bowls, with a
-    wool tassel at its lowest point."""
+    """A thick twisted rope of white wool bound with red, sagging between the
+    two bowls over its own shadow, with a white tassel at the lowest point. It
+    is mostly white so it reads against the red runner beneath it."""
     t = blank()
     for x in range(16):
         u = (x + 0.5 - 8) / 8
-        y = int(round(6 + 4 * (1 - u * u)))
+        y = int(round(5 + 4 * (1 - u * u)))
         t[y - 1, x] = "K"
-        t[y, x] = "r" if (x + y) % 3 else "2"
-        t[y + 1, x] = "s" if (x + y + 1) % 3 else "2"
-        t[y + 2, x] = "K"
+        twist = (x + y) % 4
+        t[y, x] = "1" if twist < 2 else ("r" if twist == 2 else "2")
+        t[y + 1, x] = "2" if twist != 1 else "s"
+        t[y + 2, x] = "3" if twist else "s"
+        t[y + 3, x] = "K"
+        t[y + 4, x] = SHADOW
     tassel = g(
-        ".K.",
-        "KrK",
-        "KrK",
-        "rsr",
-        "K.K",
+        ".KK.",
+        "KssK",
+        "K12K",
+        "K12K",
+        "K23K",
+        "1K23",
+        "K..K",
     )
-    over(t, tassel, 7, 11)
+    over(t, tassel, 6, 9)
     return t
+
+
+def brazier_light():
+    """48 x 48 of floor around a lit brazier, warmed by its fire: the brazier
+    stands in the middle column (bowl at row 0, legs at row 1) and the light
+    pools around its base. The middle column's two tiles become the lit
+    brazier's own ground; the other seven are the ring the trial swaps in."""
+    region = np.empty((48, 48), dtype="<U1")
+    for j in range(3):
+        for i in range(3):
+            region[j * 16:(j + 1) * 16, i * 16:(i + 1) * 16] = floor()
+    # Stronger and wider than the great hearth's falloff, so each brazier the
+    # trial lights leaves a pool the player notices from across the hall.
+    out = region.copy()
+    cx, cy, rx, ry = 24, 23, 27, 25
+    for y in range(48):
+        for x in range(48):
+            d = np.hypot((x + 0.5 - cx) / rx, (y + 0.5 - cy) / ry)
+            level = int(np.floor((1.0 - d) * 4.0 + (0.25 if (x + y) % 2 else -0.25)))
+            ch = region[y, x]
+            if level >= 2:
+                out[y, x] = HOT.get(ch, ch)
+            elif level >= 1:
+                out[y, x] = WARM.get(ch, ch)
+    return out
+
+
+def floor_worn():
+    """An old slab: a hairline crack runs across it and forks, its lower lip
+    catching the light. Scattered along the walked lines, it ages the floor
+    without blotching it."""
+    t = floor()
+    crack = [(2, 4), (3, 4), (4, 5), (5, 5), (6, 6), (7, 6), (8, 7), (9, 7), (10, 8),
+             (11, 9), (12, 9), (13, 10), (8, 8), (8, 9), (7, 10), (7, 11)]
+    for x, y in crack:
+        t[y, x] = "d"
+        if t[y + 1, x] == "b":
+            t[y + 1, x] = "a"
+    return t
+
+
+def floor_rosette():
+    """A slab with a small eight-petalled rosette inlaid in darker marble, the
+    temple's mark on the stones where its people stand to pray."""
+    t = floor()
+    rose = g(
+        "....d....",
+        ".d..c..d.",
+        "..dcccd..",
+        "..cbbbc..",
+        "dccbabccd",
+        "..cbbbc..",
+        "..dcccd..",
+        ".d..c..d.",
+        "....d....",
+    )
+    over(t, rose, 3, 3)
+    return t
+
+
+def dais_band():
+    """The dais's front row: white marble with a gold Greek key along its lip,
+    the same key as the floor inlay and the pottery frames."""
+    t = dais_slab()
+    t[9, :] = "h"
+    t[15, :] = "h"
+    for y, row in enumerate(MEANDER):
+        for x in range(16):
+            t[10 + y, x] = "g" if row[x % 8] == "#" else "2"
+    return t
+
+
+# A perirrhanterion: the marble basin of lustral water at a temple's door,
+# on a slender fluted stand. Every guest dips a hand before going in.
+BASIN = g(
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    ".KKKKKKKKKKKKKK.",
+    "K11111111111112K",
+    "K1K9888777766K3K",
+    "K1K8877776666K3K",
+    "K2KKKKKKKKKKKK4K",
+    ".K222222222334K.",
+    "..K2222223344K..",
+    "...KK22233KK....",
+    ".....K2234K.....",
+    ".....K1234K.....",
+    ".....K1234K.....",
+    ".....K1234K.....",
+    ".....K1234K.....",
+    ".....K1234K.....",
+    ".....K1234K.....",
+    ".....K1234K.....",
+    ".....K1234K.....",
+    ".....K1234K.....",
+    ".....K1234K.....",
+    "....KK1234KK....",
+    "...K11222334K...",
+    "..KKKKKKKKKKKK..",
+    "..K1111112233K..",
+    "..K3333334444Kc.",
+    "..KKKKKKKKKKKKcc",
+    "...ccccccccccccc",
+    "................",
+)
+
+# A tall bronze lampstand for the dais: a dish of fire on a slender reeded
+# shaft, three lion feet. A pair of them frames the Hierophant.
+LAMPSTAND = g(
+    "......J.........",
+    ".....JI.........",
+    ".....IHJ........",
+    "....HHIH........",
+    "...GHIIHG.......",
+    "..KFGHHGFK......",
+    ".KEDDDDDDCK.....",
+    "..KKKKKKKK......",
+    "....KDCK........",
+    ".....KK.........",
+    "....KEDK........",
+    "....KDCK........",
+    ".....KK.........",
+    "....KDCK........",
+    "....KDCK........",
+    "....KDCK........",
+    "....KDCK........",
+    "....KDCK........",
+    "....KDCK........",
+    "....KDCK........",
+    "....KDCK........",
+    "....KDCK........",
+    "....KEDK........",
+    "...KDCCBK.......",
+    "....KDCK........",
+    "....KDCK........",
+    "...KDKKCK.......",
+    "..KDK..KCK......",
+    ".KEK....KCK.....",
+    ".KK......KK.....",
+    "..cccccccccc....",
+    "................",
+)
 
 AMPHORA = g(
     "......KKKK......",
@@ -1273,6 +1427,84 @@ KLINE = g(
 )
 
 
+def kline():
+    """32 x 32: a free-standing kline for the Bed station, long side to the
+    hall: a tall scrolled headrest, a white pillow, a deep linen mattress under
+    a red striped blanket that drapes over the front, turned olive-wood legs
+    and a shadow on the floor."""
+    t = blank(32, 32)
+    top = 8
+    # The headrest: a tall olive-wood scroll at the left end.
+    head = g(
+        ".KK.",
+        "KYYK",
+        "KYXK",
+        "KKYK",
+        ".KYK",
+        ".KXK",
+        ".KXK",
+        ".KXK",
+        ".KXK",
+        ".KXK",
+        ".KXK",
+        ".KXK",
+        ".KXK",
+        ".KWK",
+    )
+    over(t, head, 0, top)
+    # The mattress: a linen top lit from above and a shaded front face.
+    for x in range(4, 31):
+        t[top + 5, x] = "K"
+        t[top + 6, x] = "1"
+        t[top + 7, x] = "2"
+        t[top + 8, x] = "2"
+        t[top + 9, x] = "3"
+        t[top + 10, x] = "3"
+        t[top + 11, x] = "K"
+    t[top + 5:top + 12, 31] = "K"
+    # The pillow, against the headrest.
+    pillow = g(
+        ".KKKKKK.",
+        "K112222K",
+        "K122223K",
+        "K222233K",
+        ".KKKKKK.",
+    )
+    over(t, pillow, 4, top + 2)
+    # The blanket: red with gold and dark stripes, folded over the foot end
+    # and hanging down the front with a fringe.
+    for x in range(13, 31):
+        stripe = (x - 13) % 6
+        wool = "g" if stripe == 2 else ("s" if stripe == 4 else "r")
+        t[top + 5, x] = "K"
+        for y in range(top + 6, top + 14):
+            shade = wool if y < top + 11 else ("s" if wool == "r" else ("Y" if wool == "g" else "t"))
+            t[y, x] = shade
+        t[top + 14, x] = "t" if x % 2 else "s"
+    t[top + 5:top + 15, 12] = "K"
+    t[top + 15, 13:31:2] = "s"
+    # The frame rail and the legs.
+    for x in range(1, 31):
+        t[top + 12, x] = t[top + 12, x] if t[top + 12, x] != CLEAR else "K"
+    rail = "K" + "Y" * 10 + "." * 18 + "XW" + "K"
+    for x, ch in enumerate(rail):
+        if ch != "." and t[top + 13, x] == CLEAR:
+            t[top + 13, x] = ch
+    legs = g(
+        "KYXK",
+        "KXWK",
+        ".KK.",
+        "KYXK",
+        "KXWK",
+        "KKKK",
+    )
+    over(t, legs, 2, top + 14)
+    over(t, legs, 25, top + 15)
+    t[top + 20, 3:30] = SHADOW
+    t[top + 21, 5:28] = SHADOW
+    return t
+
+
 def bed_niche():
     """32 x 32: an arched alcove in the wall with a kline made up for the
     night watch."""
@@ -1408,13 +1640,15 @@ def build():
     add("table_bl", F, tab[1][0])
     add("table_br", F, tab[1][1])
     # Rows 8-9: braziers. Each lit metatile is its cold one + 1.
+    # A lit brazier stands in its own pool of light (brazier_light's middle column).
+    light = tiles(brazier_light())
     cold_top = tiles(brazier(False, "door"))[0][0]
     lit_top = tiles(brazier(True, "door"))[0][0]
     add("brazier_top_cold", F, cold_top)
-    add("brazier_top_lit", F, lit_top)
+    add("brazier_top_lit", light[0][1], lit_top)
     for glyph in ("door", "table", "loom", "bed", "hearth"):
         add(f"brazier_{glyph}_cold", F, tiles(brazier(False, glyph))[1][0])
-        add(f"brazier_{glyph}_lit", F, tiles(brazier(True, glyph))[1][0])
+        add(f"brazier_{glyph}_lit", light[1][1], tiles(brazier(True, glyph))[1][0])
     ih = tiles(inner_hearth())
     add("inner_hearth_l", D, ih[0][0])
     add("inner_hearth_c", D, ih[0][1], behavior="MB_COUNTER")
@@ -1444,6 +1678,34 @@ def build():
                 add(*side[(10 + j, i)])
             else:
                 add(f"spare_{10 + j}_{i}", F)
+    # Row 15 on (added for the Hearth Trial map): the household's free-standing
+    # bed for the Bed station.
+    kl = tiles(kline())
+    add("kline_tl", F, kl[0][0])
+    add("kline_tr", F, kl[0][1])
+    add("kline_bl", F, kl[1][0])
+    add("kline_br", F, kl[1][1])
+    # The ring of floor a lit brazier warms: left and right of the bowl (0) and
+    # the legs (1), and the row below (bl, b, br). The trial swaps these in.
+    add("bglow_l0", light[0][0])
+    add("bglow_r0", light[0][2])
+    add("bglow_l1", light[1][0])
+    add("bglow_r1", light[1][2])
+    # Row 16: the rest of the ring, the door basin and the dais lampstands.
+    add("bglow_bl", light[2][0])
+    add("bglow_b", light[2][1])
+    add("bglow_br", light[2][2])
+    basin = tiles(BASIN)
+    add("basin_top", F, basin[0][0])
+    add("basin_bottom", F, basin[1][0])
+    lamp = blank(32, 16)
+    over(lamp, LAMPSTAND, 2, 0)
+    lamp = tiles(lamp)
+    add("lampstand_top", D, lamp[0][0])
+    add("lampstand_bottom", D, lamp[1][0])
+    add("floor_worn", floor_worn())
+    add("floor_rosette", floor_rosette())
+    add("dais_band", dais_band())
     return M
 
 

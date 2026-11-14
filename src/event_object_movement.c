@@ -585,6 +585,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPaletteNeonLight,          OBJ_EVENT_PAL_TAG_NEON_LIGHT},
     // Ichor object events
     {gObjectEventPal_IchorCast,             OBJ_EVENT_PAL_TAG_ICHOR_CAST},
+    {gObjectEventPal_IchorFolk,             OBJ_EVENT_PAL_TAG_ICHOR_FOLK},
     // End of Ichor object events
 #ifdef BUGFIX
     {NULL,                                  OBJ_EVENT_PAL_TAG_NONE},
