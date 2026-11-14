@@ -1,14 +1,17 @@
 """Player battle pics: Theo and Ianthe, "the Unwoven" (they replace Brendan and May).
 
-Usage: python3 tools/ichor/art/sprites_player.py [--write] [--preview DIR]
+Usage: python3 tools/ichor/art/sprites_player.py [--write] [--preview DIR] [--grids DIR]
 
 --write   writes the front pics (64x64), the back pics (64x256, four frames)
           and the shared palettes:
             graphics/trainers/front_pics/{brendan,may}.png
             graphics/trainers/back_pics/{brendan,may}.png
             graphics/trainers/palettes/{brendan,may}.pal
---preview writes the review sheets to DIR: the fronts beside Kleon and Ione
-          on a battle backdrop, the four back frames in order, and pixel grids.
+--preview writes the 3x review sheets to DIR (design/phase1/img for the
+          committed ones): sprites_player_battle.png, the fronts beside Kleon
+          and Ione on a battle backdrop, and sprites_player_battle_back.png,
+          the four back frames in order.
+--grids   writes upscaled pixel grids with coordinates to DIR.
 
 The spec, shared with the overworld sprites:
   * a wide-brimmed petasos in sun-gold straw
@@ -31,7 +34,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
 from sprites_lib import (ROOT, Palette, Mat, Fig, save_indexed, to_rgba, battle_bg,  # noqa: E402
                          upscale, palette_report, grid_preview)
-from PIL import Image, ImageDraw  # noqa: E402
+from PIL import Image  # noqa: E402
 
 INK = (32, 24, 24)
 
@@ -219,6 +222,11 @@ ARM = {
     1: [(16, 45), (7, 36), (9, 26)],
     2: [(23, 47), (38, 43), (50, 38)],
 }
+SHOULDER_FLAP = {
+    0: [(10, 43), (19, 39), (22, 45), (18, 51), (12, 52), (8, 49)],
+    1: [(11, 43), (20, 39), (23, 45), (19, 50), (13, 50), (9, 47)],
+    2: [(16, 42), (24, 40), (30, 43), (29, 50), (22, 52), (17, 49)],
+}
 
 # the hand from behind, fingers curled around the ball
 HAND_BALL = [
@@ -296,8 +304,9 @@ def back(key, frame):
     ], KEY)
     # neck
     f.rect(30 + dx, 31, 39 + dx, 40, m["skin"], group=30)
-    # fibula on the right shoulder
-    f.patch(46 + dx, 38, [".kkkk.", "kGGGMk", "kGMMDk", ".kkkk."], KEY)
+    # fibula on the right shoulder (behind the arm on the release)
+    if frame != 2:
+        f.patch(46, 38, [".kkkk.", "kGGGMk", "kGMMDk", ".kkkk."], KEY)
 
     if frame in (0, 2):
         arm(f, m, frame)
@@ -328,13 +337,8 @@ def arm(f, m, frame):
     sh, el, wr = ARM[frame]
     f.thick_line([sh, el], 8, m["skin"], group=40)
     f.thick_line([el, wr], 7, m["skin"], group=40)
-    if frame in (0, 1):
-        # the chiton's short sleeve over the shoulder
-        sx, sy = sh[0] + (el[0] - sh[0]) * 0.35, sh[1] + (el[1] - sh[1]) * 0.35
-        f.thick_line([(sh[0] + 1, sh[1] - 2), (round(sx), round(sy))], 9, m["cream"], group=41)
-    else:
-        # swung across the body, the arm comes out from under the cloak
-        f.poly([(16, 42), (24, 40), (30, 43), (29, 50), (22, 52), (17, 49)], m["cloak"], group=41)
+    # the arm comes out from under the chlamys, draped over the left shoulder
+    f.poly(SHOULDER_FLAP[frame], m["cloak"], group=41)
     if frame in (0, 1):
         f.patch(wr[0] - 5, wr[1] - 11, HAND_BALL, dict(KEY, R="terra", r="brown", w="cream_d"))
     else:
@@ -359,21 +363,21 @@ HEAD_BACK = {
     "brendan": [
         "...kkkkkkkkkkkkkkkkkkkkk....",
         "..kkkkkkkkkkkkkkkkkkkkkkk...",
-        ".kkkkhkkkkkkkkkkkkkkkkkdSk..",
-        ".kkkhhkkkkkkkkkkkkkkkkdSSSk.",
-        "kkkhhkkkkkkkkkkkkkkkkdSSSSk.",
-        "kkkhkkkkkkkkkkkkkkkkkSLLLSSk",
-        "kkkkkkkkkkkkkkkSSkkkSLLLLLkk",
-        "kkhkkkkkkkkkkkSddSkkLLLLLLWk",
-        "kkhkkkkkkkkkkkSdSSkSLLLLLLSk",
-        "kkkkkkkkkkkkkkSddSkSSLLLLSk.",
-        ".kkkkkkkkkkkkkkSSkSSSLLLSSk.",
+        ".kkkhhkkkkkkkkkkkkkkkkkdSk..",
+        ".kkhhkkkhhkkkkkkkkkkkkdSSSk.",
+        "kkhhkkkhhkkkkhkkkkkkkdSSSSk.",
+        "kkhkkkhhkkkkhhkkkkkkkSLLLSSk",
+        "kkhkkkhkkkkhhkkSSkkkSLLLLLkk",
+        "kkkkkkkkkkkhkkSddSkkLLLLLLWk",
+        "kkhkkkkhkkkkkkSdSSkSLLLLLLSk",
+        "kkkkkkhkkkkkhkSddSkSSLLLLSk.",
+        ".kkkkkkkkkkhkkkSSkSSSLLLSSk.",
         ".kkkkkkkkkkkkkkkkkSSSLLSSSk.",
         "..kkkkkkkkkkkkkkkdSSSSSSdk..",
         "...kkkkkkkkkkkkkkdSSSSSdk...",
         "....kkkkkkkkkkkkddSSSddk....",
-        ".....kkkkkkkkkkddSSddkk.....",
-        "......kkkkkkkkdddSSSk.......",
+        ".....kkkkkkkSkkddSSddkk.....",
+        "......kkkkkSSkSdddSSSk......",
         ".........kkkkddSSSSk........",
     ],
     "may": [
@@ -415,27 +419,19 @@ def battle_tile(im):
 
 
 def preview(built, pv):
+    """sprites_player_battle.png: Kleon, Theo, Ianthe and Ione on the battle
+    backdrop. sprites_player_battle_back.png: back frames 0-3 in order."""
     os.makedirs(pv, exist_ok=True)
-    tiles = []
-    refs = [("kleon", "graphics/trainers/front_pics/kleon.png"),
-            ("hierophant_ione", "graphics/trainers/front_pics/hierophant_ione.png")]
-    tiles.append(battle_tile(Image.open(os.path.join(ROOT, refs[0][1])).convert("RGBA")))
+    tiles = [battle_tile(Image.open(os.path.join(ROOT, "graphics/trainers/front_pics/kleon.png")).convert("RGBA"))]
     for key in ("brendan", "may"):
         pal, fr, _ = built[key]
         tiles.append(battle_tile(to_rgba(fr, pal)))
-    tiles.append(battle_tile(Image.open(os.path.join(ROOT, refs[1][1])).convert("RGBA")))
+    tiles.append(battle_tile(Image.open(
+        os.path.join(ROOT, "graphics/trainers/front_pics/hierophant_ione.png")).convert("RGBA")))
     sheet = Image.new("RGBA", (96 * len(tiles), 72))
     for i, t in enumerate(tiles):
         sheet.alpha_composite(t, (96 * i, 0))
-    upscale(sheet, 3).save(os.path.join(pv, "front.png"))
-    for key in ("brendan", "may"):
-        pal, fr, bk = built[key]
-        grid_preview(to_rgba(fr, pal), 12, 4, 0, 60, 64).save(os.path.join(pv, key + "_front_grid.png"))
-        grid_preview(to_rgba(fr, pal), 20, 12, 0, 46, 28).save(os.path.join(pv, key + "_head_grid.png"))
-        for i in range(4):
-            grid_preview(to_rgba(bk[64 * i:64 * i + 64], pal), 10, 0, 0, 64, 64).save(
-                os.path.join(pv, "%s_back%d_grid.png" % (key, i)))
-    # back frames in sequence, on the battle backdrop
+    upscale(sheet, 3).save(os.path.join(pv, "sprites_player_battle.png"))
     rows = []
     for key in ("brendan", "may"):
         pal, fr, bk = built[key]
@@ -446,12 +442,24 @@ def preview(built, pv):
     sheet = Image.new("RGBA", (rows[0].width, 72 * len(rows)))
     for j, r in enumerate(rows):
         sheet.alpha_composite(r, (0, 72 * j))
-    upscale(sheet, 3).save(os.path.join(pv, "back.png"))
+    upscale(sheet, 3).save(os.path.join(pv, "sprites_player_battle_back.png"))
+
+
+def grids(built, out):
+    """Upscaled pixel grids with coordinates, for placing details."""
+    os.makedirs(out, exist_ok=True)
+    for key in ("brendan", "may"):
+        pal, fr, bk = built[key]
+        grid_preview(to_rgba(fr, pal), 12, 4, 0, 60, 64).save(os.path.join(out, key + "_front_grid.png"))
+        for i in range(4):
+            grid_preview(to_rgba(bk[64 * i:64 * i + 64], pal), 10, 0, 0, 64, 64).save(
+                os.path.join(out, "%s_back%d_grid.png" % (key, i)))
 
 
 def main():
     args = sys.argv[1:]
     pv = args[args.index("--preview") + 1] if "--preview" in args else None
+    gd = args[args.index("--grids") + 1] if "--grids" in args else None
     built = {}
     for key in ("brendan", "may"):
         pal, fr, bk = build(key)
@@ -463,6 +471,8 @@ def main():
             pal.write_jasc(os.path.join(ROOT, "graphics/trainers/palettes", key + ".pal"))
     if pv:
         preview(built, pv)
+    if gd:
+        grids(built, gd)
 
 
 if __name__ == "__main__":
