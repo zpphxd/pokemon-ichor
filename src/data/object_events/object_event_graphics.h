@@ -314,6 +314,9 @@ const u32 gFieldEffectObjectPic_Unknown17[] = INCGFX_U32("graphics/field_effects
 const u32 gFieldEffectObjectPic_UnusedGrass2[] = INCGFX_U32("graphics/field_effects/pics/unused_grass_2.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gFieldEffectObjectPic_LongGrass[] = INCGFX_U32("graphics/field_effects/pics/long_grass.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gFieldEffectObjectPic_TallGrass[] = INCGFX_U32("graphics/field_effects/pics/tall_grass.png", ".4bpp", "-mwidth 2 -mheight 2");
+// Ichor: the tall-grass rustle in Eleusa's wheat (tools/ichor/art/field_effects_wheat.py)
+const u32 gFieldEffectObjectPic_TallGrassWheat[] = INCGFX_U32("graphics/field_effects/pics/tall_grass_wheat.png", ".4bpp", "-mwidth 2 -mheight 2");
+const u16 gFieldEffectObjectPaletteWheat[] = INCGFX_U16("graphics/field_effects/palettes/wheat.pal", ".gbapal");
 const u32 gFieldEffectObjectPic_ShortGrass[] = INCGFX_U32("graphics/field_effects/pics/short_grass.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gFieldEffectObjectPic_SandFootprints[] = INCGFX_U32("graphics/field_effects/pics/sand_footprints.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gFieldEffectObjectPic_DeepSandFootprints[] = INCGFX_U32("graphics/field_effects/pics/deep_sand_footprints.png", ".4bpp", "-mwidth 2 -mheight 2");

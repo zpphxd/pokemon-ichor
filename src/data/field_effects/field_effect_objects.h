@@ -137,6 +137,23 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass = {
     .callback = UpdateTallGrassFieldEffect,
 };
 
+// Ichor: Eleusa's wheat is MB_TALL_GRASS too. It rustles with the same animation,
+// in gold, from its own palette (FldEff_TallGrass picks it by the map's tileset).
+const struct SpritePalette gSpritePalette_WheatFieldEffect = {gFieldEffectObjectPaletteWheat, FLDEFF_PAL_TAG_WHEAT};
+
+static const struct SpriteFrameImage sPicTable_TallGrassWheat[] = {
+    overworld_ascending_frames(gFieldEffectObjectPic_TallGrassWheat, 2, 2),
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrassWheat = {
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_WHEAT,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_TallGrass,
+    .images = sPicTable_TallGrassWheat,
+    .callback = UpdateTallGrassFieldEffect,
+};
+
 static const struct SpriteFrameImage sPicTable_Ripple[] = {
     overworld_ascending_frames(gFieldEffectObjectPic_Ripple, 2, 2),
 };

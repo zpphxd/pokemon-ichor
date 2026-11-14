@@ -431,13 +431,26 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
 #define sCurrentMap  data[5]
 #define sObjectMoved data[7]
 
+// Ichor: Eleusa's wheat (gTileset_Eleusa) is MB_TALL_GRASS and rustles in gold. The
+// palette is loaded here rather than by gFieldEffectScript_TallGrass, so the wheat
+// doesn't pull in general_1 as well; as before, the grass isn't fog-blended.
+extern const struct Tileset gTileset_Eleusa;
+extern const struct SpritePalette gSpritePalette_WheatFieldEffect;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrassWheat;
+
 u32 FldEff_TallGrass(void)
 {
     u8 spriteId;
+    u32 paletteSlot;
     s16 x = gFieldEffectArguments[0];
     s16 y = gFieldEffectArguments[1];
+    bool32 wheat = (gMapHeader.mapLayout->secondaryTileset == &gTileset_Eleusa);
+    paletteSlot = LoadSpritePalette(wheat ? &gSpritePalette_WheatFieldEffect : &gSpritePalette_GeneralFieldEffect1);
+    SetPaletteColorMapType(paletteSlot + 16, COLOR_MAP_DARK_CONTRAST);
+    UpdateSpritePaletteWithWeather(paletteSlot, FALSE);
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
-    spriteId = CreateSpriteAtEndUnchecked(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);
+    spriteId = CreateSpriteAtEndUnchecked(wheat ? &gFieldEffectObjectTemplate_TallGrassWheat
+                                                : gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);
     if (spriteId != MAX_SPRITES)
     {
         struct Sprite *sprite = &gSprites[spriteId];

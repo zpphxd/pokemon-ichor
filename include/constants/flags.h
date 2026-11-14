@@ -724,9 +724,9 @@
 #define FLAG_UNUSED_0x29D  0x29D // Unused Flag
 #define FLAG_UNUSED_0x29E  0x29E // Unused Flag
 #define FLAG_UNUSED_0x29F  0x29F // Unused Flag
-#define FLAG_UNUSED_0x2A0  0x2A0 // Unused Flag
-#define FLAG_UNUSED_0x2A1  0x2A1 // Unused Flag
-#define FLAG_UNUSED_0x2A2  0x2A2 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ELEUSA_HONEY 0x2A0 // Ichor: Eleusa: hidden Honey by the beehives
+#define FLAG_ICHOR_HIDDEN_ELEUSA_POMEG_BERRY 0x2A1 // Ichor: Eleusa: hidden Pomeg Berry under the well's tree
+#define FLAG_ICHOR_HIDDEN_ELEUSA_BRONZE_OBOL 0x2A2 // Ichor: Eleusa: hidden Bronze Obol in the Maiden's Well
 #define FLAG_UNUSED_0x2A3  0x2A3 // Unused Flag
 #define FLAG_UNUSED_0x2A4  0x2A4 // Unused Flag
 #define FLAG_UNUSED_0x2A5  0x2A5 // Unused Flag
@@ -1682,6 +1682,12 @@
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
+#define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
+#define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)
+#define FLAG_ICHOR_LESSER_MYSTERIES_DONE        (FLAG_ICHOR_GENERAL_START + 0x083) // Ichor: the Telesterion: the fourth brazier lit, Chloe revealed
+#define FLAG_ICHOR_MET_DOSO                     (FLAG_ICHOR_GENERAL_START + 0x084) // Ichor: the Telesterion: Doso's welcome heard
+#define FLAG_ICHOR_HIDE_CHLOE_TELESTERION       (FLAG_ICHOR_GENERAL_START + 0x085) // Ichor: the Telesterion: Chloe unseen in the Anaktoron's doorway until the fourth brazier
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

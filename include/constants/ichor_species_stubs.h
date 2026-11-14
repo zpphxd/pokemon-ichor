@@ -60,6 +60,12 @@
 #define SPECIES_NARKERAY    SPECIES_CHINCHOU     // Water/Electric, the torpedo ray
 #define SPECIES_SPALUNK     SPECIES_DIGLETT      // Ground, Ploutos's mole
 #define SPECIES_PLOUTERAS   SPECIES_DUGTRIO      // Ground
+// Eleusa's fields (batch 4)
+#define SPECIES_KAPLET      SPECIES_PHANPY       // Ground, Eubouleus's piglet
+#define SPECIES_STACHYSS    SPECIES_SUNKERN      // Grass, the wheat serpent
+#define SPECIES_MELIBEE     SPECIES_COMBEE       // Bug, Demeter's bee
+#define SPECIES_ELALEAF     SPECIES_SEEDOT       // Grass, the olive sprout
+#define SPECIES_RHOARIL     SPECIES_BOUNSWEET    // Grass, Persephone's pomegranate
 
 #endif // ICHOR_AETHOS_DEX
 

@@ -106,7 +106,8 @@ gFieldEffectScript_Shadow::
 	field_eff_end
 
 gFieldEffectScript_TallGrass::
-	field_eff_loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_TallGrass
+	@ Ichor: FldEff_TallGrass loads its own palette (general_1, or Eleusa's wheat)
+	field_eff_callnative FldEff_TallGrass
 	field_eff_end
 
 gFieldEffectScript_Ripple::

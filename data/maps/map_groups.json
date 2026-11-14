@@ -77,7 +77,8 @@
     "gMapGroup_IndoorSevenIslandRoute_Frlg",
     "gMapGroup_IndoorKalliste",
     "gMapGroup_IndoorAegina",
-    "gMapGroup_IndoorEmporion"
+    "gMapGroup_IndoorEmporion",
+    "gMapGroup_IndoorEleusa"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -147,7 +148,8 @@
     "AeginaTempleOfAphaia",
     "AeginaMountOros",
     "EmporionCity",
-    "EmporionHarbor"
+    "EmporionHarbor",
+    "EleusaVillage"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -1205,5 +1207,17 @@
     "EmporionCity_PottersWorkshop",
     "EmporionCity_HiringHall",
     "EmporionCity_TempleOfHermes"
+  ],
+  "gMapGroup_IndoorEleusa": [
+    "EleusaVillage_TempleOfDemeter",
+    "EleusaVillage_Asclepeion",
+    "EleusaVillage_Agora",
+    "EleusaVillage_HouseOfKeleos",
+    "EleusaVillage_Farmhouse",
+    "EleusaVillage_GranaryHouse",
+    "EleusaVillage_PoetsHouse",
+    "EleusaSanctum_B1F",
+    "EleusaSanctum_B2F",
+    "EleusaSanctum_B3F"
   ]
 }
