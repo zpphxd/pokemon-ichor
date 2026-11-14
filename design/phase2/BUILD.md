@@ -6,13 +6,17 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 
 ## Batches
 
+The route chain follows the revised `design/AETHOS_MAP.md`; SCRIPT.md's route plan has the reconciliation note.
+
 | # | Batch | Status |
 |---|---|---|
-| 1 | The voyage and Aegina: beats 9A–10C, the *Euploia*, Aegina Town and its three homes, the Aegina detour | in progress |
+| 1 | The voyage (Routes 2–3) and Aigina: beats 9A–10C, the *Euploia*, Aigina Town and its three homes; Aigina's three interior maps built for world-act2 (Act II) | in progress |
 | 2 | Emporion and the Temple of Hermes: beats 11–16 | waits for gTileset_Emporion (director) |
-| 3 | The Sacred Way and Hecate's Hollow: beats 17–19, Routes 2–4, Thria | |
+| 3 | Route 4 (the Isthmus), Hecate's Hollow, Route 5 (the Skironian cliffs): beats 17–19 | tilesets started: `isthmos`, `cave_dark` |
 | 4 | Eleusa and the Temple of Demeter: beats 20–22 | waits for gTileset_Eleusa (director) |
 | 5 | The revelation: beats 23–25, the sanctum, Return to Kalliste | |
+
+**Moved out of Act I** (to world-act2): Thria, the Rheitoi and the jesters' bridge (Route 15); the Halai Shore's homes and trainers (Route 18); the scripting of Aigina's interior.
 
 ## Batch 1 maps
 
@@ -26,7 +30,7 @@ All are registered (`tools/ichor/new_map.py`) with placeholder layouts copied fr
 | `MAP_AEGINA_TOWN_INN` | room | oikos + **ergasteria** (new) | indoor | interiors agent |
 | `MAP_AEGINA_TOWN_MINT` | room | oikos + **ergasteria** | indoor | interiors agent |
 | `MAP_AEGINA_TOWN_AIAKIDES_HOUSE` | room | oikos + **ergasteria** (or oikia if it fits) | indoor | interiors agent |
-| `MAP_AEGINA_APHAIA_ROAD` | 40×24 | aethos + **aegina** | route | detour agent (after the Aegina tileset) |
+| `MAP_AEGINA_APHAIA_ROAD` | 40×24 | aethos + **aegina** | route | detour agent (after the Aegina tileset); Act II, scripted by world-act2 |
 | `MAP_AEGINA_TEMPLE_OF_APHAIA` | 24×20 | aethos + **aegina** | route | detour agent |
 | `MAP_AEGINA_MOUNT_OROS` | 16×16 | aethos + **aegina** | route | detour agent |
 
