@@ -1654,6 +1654,49 @@
 #define SPECIAL_FLAGS_END                       (SPECIAL_FLAGS_START + 0x7F)
 #define NUM_SPECIAL_FLAGS                       (SPECIAL_FLAGS_END - SPECIAL_FLAGS_START + 1)
 
+// Ichor flag bank. These flags are saved in IchorSave (SaveBlock3), not in
+// SaveBlock1: GetFlagPointer (src/event_data.c) sends ids 0x2000-0x28FF there.
+// Scripts use them like any flag. Each range below is a run of bits the engine
+// also counts (Ichor_CountFlags); the general ranges are claimed by name with
+//   python3 tools/ichor/claim.py bankflag FLAG_ICHOR_<NAME> "comment"
+//   python3 tools/ichor/claim.py dailyflag FLAG_DAILY_ICHOR_<NAME> "comment"
+// See design/ENGINE_API.md. Both starts must stay multiples of 8.
+#define ICHOR_FLAGS_START                       0x2000
+#define ICHOR_FLAGS_COUNT                       2048
+#define ICHOR_FLAGS_END                         (ICHOR_FLAGS_START + ICHOR_FLAGS_COUNT - 1)
+
+#define FLAG_ICHOR_RELICS_START                 (ICHOR_FLAGS_START + 0x000) // 64: relics, upgrades, relic state (SYSTEMS §1)
+#define FLAG_ICHOR_HERMS_START                  (ICHOR_FLAGS_START + 0x040) // 32 great herms (§4)
+#define FLAG_ICHOR_CONSTELLATIONS_START         (ICHOR_FLAGS_START + 0x060) // 32: the 24 constellations (§8)
+#define FLAG_ICHOR_SHERDS_START                 (ICHOR_FLAGS_START + 0x080) // 48 potsherds, 4 per amphora (§5)
+#define FLAG_ICHOR_AMPHORAE_START               (ICHOR_FLAGS_START + 0x0B0) // 16: amphorae finished at the Akademia
+#define FLAG_ICHOR_OSTRAKA_START                (ICHOR_FLAGS_START + 0x0C0) // 32: the 30 ostraka
+#define FLAG_ICHOR_PROPHECY_START               (ICHOR_FLAGS_START + 0x0E0) // 16: the 8 prophecy tablets
+#define FLAG_ICHOR_PAGES_START                  (ICHOR_FLAGS_START + 0x0F0) // 16: Daedalus's 7 pages (LABYRINTH.md)
+#define FLAG_ICHOR_BRAZIERS_START               (ICHOR_FLAGS_START + 0x100) // 256 lit braziers and lit zones (§2)
+#define FLAG_ICHOR_GIFTS_START                  (ICHOR_FLAGS_START + 0x200) // 64: 4 per god slot, gifts I, II, III and the Hierophant's offering (§3)
+#define FLAG_ICHOR_ALTARS_START                 (ICHOR_FLAGS_START + 0x240) // 32 cleansed desecrated altars (§3)
+#define FLAG_ICHOR_DIG_FIXED_START              (ICHOR_FLAGS_START + 0x260) // 64 one-time dig finds (§5)
+#define FLAG_ICHOR_THEOXENIA_START              (ICHOR_FLAGS_START + 0x2A0) // 64: visits, hides and decoys (§10)
+#define FLAG_ICHOR_XENIA_START                  (ICHOR_FLAGS_START + 0x2E0) // 32: hosts and token-chain links (§10)
+#define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
+#define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
+// Ichor bank flags: claim.py bankflag adds lines here, in order.
+// Ichor bank flags: end
+
+// Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
+#define ICHOR_DAILY_FLAGS_START                 0x2800
+#define ICHOR_DAILY_FLAGS_COUNT                 256
+#define ICHOR_DAILY_FLAGS_END                   (ICHOR_DAILY_FLAGS_START + ICHOR_DAILY_FLAGS_COUNT - 1)
+
+#define FLAG_DAILY_ICHOR_PRAYED_START           (ICHOR_DAILY_FLAGS_START + 0x00) // 16: prayed to each god today (§3)
+#define FLAG_DAILY_ICHOR_DIG_START              (ICHOR_DAILY_FLAGS_START + 0x10) // 96 daily dig spots (§5)
+#define FLAG_DAILY_ICHOR_LAUREL_START           (ICHOR_DAILY_FLAGS_START + 0x70) // 32 laurel trees, one sprig a day (§3)
+#define FLAG_DAILY_ICHOR_GENERAL_START          (ICHOR_DAILY_FLAGS_START + 0x90) // 112 claimed by name, below
+#define FLAG_DAILY_ICHOR_GENERAL_COUNT          (ICHOR_DAILY_FLAGS_COUNT - 0x90)
+// Ichor daily bank flags: claim.py dailyflag adds lines here, in order.
+// Ichor daily bank flags: end
+
 // Temp flag aliases
 #define FLAG_TEMP_SKIP_GABBY_INTERVIEW          FLAG_TEMP_1
 #define FLAG_TEMP_REGICE_PUZZLE_STARTED         FLAG_TEMP_2

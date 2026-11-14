@@ -71,4 +71,4 @@ Colors come from the master palette families in `PLAN.md`, all multiples of 8.
 | Plains | `img/battle_bg_plain.png` | `img/battle_bg_plain_ingame.png` |
 | Frontier | `img/battle_bg_frontier.png` | none (link battles only) |
 
-The battle text box and HP boxes in these shots are still vanilla; they belong to the battle-UI work.
+These shots were taken before the battle interface pass, so their text box and HP boxes are still vanilla. The game's are pottery now (`UI_battle.md`, `img/ui_battle_compare.png`).

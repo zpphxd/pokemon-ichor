@@ -9,6 +9,24 @@ The first pass was on 2026-11-14 against main at `4108e52c12`. The second pass, 
 
 Everything here was found by playing the slice with key presses in the headless runner, or by the static map audit. Every issue has a screenshot in `img/qa/` and a way to reproduce it with the tools below.
 
+## Status after the remnants pass
+
+Re-checked on the remnants branch (`UI_remnants.md`), which is main at `25526ae5dc` plus its own fixes. The playthrough and the side checks both pass, with 269 messages and no Hoenn word.
+
+| Item | Status | Owner |
+|---|---|---|
+| M2 | Fixed (`94808347d3`). The playthrough and the `ending_after_leaving_akti` side check pass. | Akti |
+| m7 | Open. The real fix is the Aethos regional order, which the dex team is building. | Dex team (engine) |
+| m8 | Fixed on this branch. | Engine |
+| P3 | Fixed on this branch: sentence case, and "Do what with this one?" fits the 16-tile window. | Text |
+| P5 | Fixed on this branch: the Augur's Eye is an augur's tablet. | UI |
+| P6 | In progress: another agent is repainting the main menu's backdrop. | UI |
+| P11 | Fixed (`ac4b850f42`). | Akti |
+| P12 | Fixed (`5719e87479`): the codex reads HT 0.6 m and WT 6.0 kg. | Engine |
+| P9, P13 | Fixed (`41ae6958f1`). | Elaia |
+| m1, P1, P7, P8 | Open, and owned by a map: m1 Akti, P1 Elaia, P7 and P8 Route 1. Left alone here. | Maps |
+| P2 | Open. It needs the director's call on role names in the name box. | Text (director) |
+
 ## Status on main at `726eb794d6`
 
 | Severity | Open | Fixed since the first pass |
@@ -133,8 +151,8 @@ Frames are picked by the names the playthrough gives them, so a rerun after an a
   +        giveitem(ITEM_RELIC_COPPER)
   ```
 
-### M2. A trip indoors in the middle of the ending breaks it, and part 1 replays (OPEN)
-- **Status:** still open on `726eb794d6`. The playthrough logs it right after part 1 (the flag is still set), and the `ending_after_leaving_akti` side check reproduces it.
+### M2. A trip indoors in the middle of the ending breaks it, and part 1 replays (FIXED)
+- **Status:** fixed by `94808347d3`. Still open on `726eb794d6`. The playthrough logs it right after part 1 (the flag is still set), and the `ending_after_leaving_akti` side check reproduces it.
 - **Area:** Akti
 - **Repro:**
   1. Win the Hearth Laurel and step out of the Temple. Part 1 plays: Alethea runs in and heads for the quay.
@@ -229,7 +247,8 @@ Frames are picked by the names the playthrough gives them, so a rerun after an a
 - **Cause:** `GetHoennPokedexCount` (`src/pokedex.c:4546`) walks `HOENN_DEX_COUNT` through `HoennToNationalOrder`. The label became AETHOS (`DEX_MODE_HOENN` = "AETHOS DEX"), but the list behind it is still Hoenn's.
 - **Suggested fix:** an Aethos regional order, as M3 suggested. Until then, hide the AETHOS row so the panel doesn't contradict the party.
 
-### m8. By day, the codex's AREA map says AREA UNKNOWN for every slice Pokémon (NEW, OPEN)
+### m8. By day, the codex's AREA map says AREA UNKNOWN for every slice Pokémon (FIXED)
+- **Status:** fixed on the remnants branch, as suggested below.
 - **Area:** engine (Pokédex area screen)
 - **Repro:**
   - In daytime, open POKéDEX, then Ekans (seen on Route 1), then AREA. The new Aethos map reads "AREA UNKNOWN DAY".
@@ -259,8 +278,8 @@ Frames are picked by the names the playthrough gives them, so a rerun after an a
 - **Screenshot:** `img/qa/p2_no_name_box.png`
 - **Suggested fix:** a `setspeaker` with the role (OLD SHEPHERD, FISHWIFE, ...). This is a director call.
 
-### P3. The party menu's prompts still use the old capitals (OPEN)
-- **Status:** still open on `726eb794d6`.
+### P3. The party menu's prompts still use the old capitals (FIXED)
+- **Status:** fixed on the remnants branch: "Choose a Pokémon or cancel." and "Do what with this one?".
 - **Area:** text and UI
 - **Repro:** POKéMON shows "Choose POKéMON or CANCEL.", and Snivy's menu shows "Do what with this PKMN?" TERMS.md says prose is sentence case.
 - **Screenshot:** `img/qa/p3_party_caps.png`
@@ -271,14 +290,14 @@ Frames are picked by the names the playthrough gives them, so a rerun after an a
 - **Repro:** Daphne's speech, then the name.
 - **Screenshot:** `img/qa/p4_naming_screen.png`
 
-### P5. The Augur's Eye opens the stock DexNav screen (OPEN)
-- **Status:** still open on `726eb794d6`.
+### P5. The Augur's Eye opens the stock DexNav screen (FIXED)
+- **Status:** fixed on the remnants branch: an augur's tablet (`UI_remnants.md`).
 - **Area:** UI
 - **Repro:** START, then AUGURY. The screen is red and blue, with "R TO REGISTER!".
 - **Screenshot:** `img/qa/p5_augury_ui.png`
 
-### P6. The main menu's backdrop is the stock lavender (OPEN)
-- **Status:** still open on `726eb794d6`.
+### P6. The main menu's backdrop is the stock lavender (IN PROGRESS)
+- **Status:** another agent is repainting it.
 - **Area:** UI
 - **Repro:** at the title, press A. This applies to the NEW GAME and CONTINUE panels.
 - **Screenshot:** `img/qa/p6_main_menu.png`
@@ -311,7 +330,8 @@ Frames are picked by the names the playthrough gives them, so a rerun after an a
 - **Repro:** START, then POKéDEX. The list and the entry screens are stock. See M3 for the dex contents.
 - **Screenshot:** `img/qa/M3_pokedex_hoenn.png`
 
-### P11. Akti's goats have lines no one can hear (NEW, OPEN)
+### P11. Akti's goats have lines no one can hear (FIXED)
+- **Status:** fixed by `ac4b850f42`, a gate in the pen.
 - **Area:** Akti
 - **Repro:**
   - The two Skiddo at (23,24) and (25,25) run `AktiTown_EventScript_Goat`, but they stand in a pen walled on every side, and its fence isn't a counter.
@@ -319,7 +339,8 @@ Frames are picked by the names the playthrough gives them, so a rerun after an a
 - **Screenshot:** `img/qa/p11_goat_pen.png`
 - **Suggested fix:** make one fence cell a counter-type tile so they can be talked to over it, or drop the script.
 
-### P12. The codex entry weighs Pokémon in pounds (NEW, OPEN)
+### P12. The codex entry weighs Pokémon in pounds (FIXED)
+- **Status:** fixed by `5719e87479`: metres and kilograms.
 - **Area:** UI and text
 - **Repro:** POKéDEX, then any entry. It reads "WT ????.? lbs", the stock imperial unit.
 - **Screenshot:** `img/qa/p12_lbs.png`

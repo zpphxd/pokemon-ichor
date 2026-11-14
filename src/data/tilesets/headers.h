@@ -1647,3 +1647,35 @@ const struct Tileset gTileset_Agros =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Agros,
     .callback = NULL,
 };
+
+// Ichor: eleusa, Eleusa Village (Eleusis): wheat fields, farms and the
+// sanctuary of the Mysteries. Porytiles-managed, built by
+// tools/ichor/art/eleusa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path and animated sea, so rebuild it whenever aethos
+// changes.
+const struct Tileset gTileset_Eleusa =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Eleusa,
+    .palettes = gTilesetPalettes_PorytilesManaged_Eleusa,
+    .metatiles = gMetatiles_PorytilesManaged_Eleusa,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Eleusa,
+    .callback = NULL,
+};
+
+// Ichor: temple_demeter, the Temple of Demeter's underground megaron (the
+// Lesser Mysteries). Porytiles-managed, built by
+// tools/ichor/art/temple_demeter_build.py; it uses only its own tiles and
+// palettes 6-12, so it works on any interior primary (oikos). Its doused
+// palette set is gTilesetPalettes_TempleDemeterGlow (graphics.h).
+const struct Tileset gTileset_TempleDemeter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleDemeter,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleDemeter,
+    .metatiles = gMetatiles_PorytilesManaged_TempleDemeter,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleDemeter,
+    .callback = NULL,
+};
