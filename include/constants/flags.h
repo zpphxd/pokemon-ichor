@@ -1682,6 +1682,22 @@
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_SAW_BAD_GUESTS               (FLAG_ICHOR_GENERAL_START + 0x200) // Ichor: Skandeia: saw the Titan guests at Axylos's table (beat III-1C2)
+#define FLAG_ICHOR_BAD_GUESTS_GONE              (FLAG_ICHOR_GENERAL_START + 0x201) // Ichor: Skandeia: drove the bad guests from Axylos's table; also hides them and Alethea there
+#define FLAG_ICHOR_TRADED_TELKANVIL             (FLAG_ICHOR_GENERAL_START + 0x202) // Ichor: Skandeia: traded Bathykleia a Glyphlet for Ankyra the Telkanvil
+#define FLAG_ICHOR_GOT_SOOTHE_BELL_EUODIA       (FLAG_ICHOR_GENERAL_START + 0x203) // Ichor: Skandeia: Euodia the perfumer's Soothe Bell (SCRIPT.md's GOT_SOOTHE_BELL is Akti's)
+#define FLAG_ICHOR_LITHOS_HOME                  (FLAG_ICHOR_GENERAL_START + 0x204) // Ichor: Skandeia: Lithos, home after the climax, gave the Ability Capsule
+#define FLAG_ICHOR_KNUCKLEBONES_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x205) // Ichor: Skandeia: first knucklebones win against Phereklos (Big Pearl)
+#define FLAG_ICHOR_GOT_SHINY_STONE_PYGMALION    (FLAG_ICHOR_GENERAL_START + 0x206) // Ichor: Paphia: Pygmalion's Shiny Stone, after the climax
+#define FLAG_ICHOR_GOT_EROSIE_EGG               (FLAG_ICHOR_GENERAL_START + 0x207) // Ichor: Paphia: Peristera's Egg (Erosie)
+#define FLAG_ICHOR_GOT_MIRROR_HERB              (FLAG_ICHOR_GENERAL_START + 0x208) // Ichor: Paphia: Leukippe's Mirror Herb, after the Foam Laurel
+#define FLAG_ICHOR_TRADED_HIMEROW               (FLAG_ICHOR_GENERAL_START + 0x209) // Ichor: Paphia: traded Lysis a Galenyon for Pothos the Himerow
+#define FLAG_ICHOR_GOT_METRONOME                (FLAG_ICHOR_GENERAL_START + 0x20A) // Ichor: Neraida falls: Myles the miller's Metronome
+#define FLAG_ICHOR_GOT_ROSE_INCENSE             (FLAG_ICHOR_GENERAL_START + 0x20B) // Ichor: Melos: Kentrios's Rose Incense, after the statue's rite
+#define FLAG_ICHOR_GOT_DAMP_ROCK                (FLAG_ICHOR_GENERAL_START + 0x20C) // Ichor: Melos: Kalchedon's Damp Rock, in the boathouse
+#define FLAG_ICHOR_SAW_GEAR_BOX                 (FLAG_ICHOR_GENERAL_START + 0x20D) // Ichor: Route 23: saw Skyllias's box of gears off Antikythera (set there; read in the divers' house)
+#define FLAG_ICHOR_MELOS_RITE                   (FLAG_ICHOR_GENERAL_START + 0x20E) // Ichor: Melos: made the armless goddess an offering (set on MAP_MELOS; read by Kentrios)
+#define FLAG_ICHOR_MELOS_OBSIDIAN_LUMP          (FLAG_ICHOR_GENERAL_START + 0x20F) // Ichor: Melos: dug the lump of black glass at the slope's seam (set on MAP_MELOS; read by Melanippos)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

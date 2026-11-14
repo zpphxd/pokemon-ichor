@@ -349,4 +349,6 @@
 #define TESTING_VAR_UNUSED_7                (TESTING_VARS_START + 0x7)
 #endif // TESTING
 
+#include "constants/ichor_vars_stubs_kythera_tmp.h" // TEMPORARY: see the file
+
 #endif // GUARD_CONSTANTS_VARS_H

@@ -1,0 +1,80 @@
+// The Asclepeion, Skandeia (design/phase4/SCRIPT.md, Part 2): a harbor one, long
+// and low, with a stone bath fed by sea water where sailors soak their hands.
+// The healer's Panacoil is curled on the counter; the Pithos is the tall jar at
+// the window end.
+// Room: tools/ichor/maps/kythera_homes.py. The healer stands at (5,2) with the
+// spring basin at (3..4,1..2), as the Akti Asclepeion has it for the heal
+// animation; the player talks from (5,4). The mat is (9,7).
+//
+// TODO(act3): exit to MAP_KYTHERA_SKANDEIA.
+// TODO(act3): setrespawn(HEAL_LOCATION_KYTHERA_SKANDEIA) in ON_TRANSITION, once
+// the outdoor builder adds the heal location (respawn_map this map,
+// respawn_npc LOCALID_SKANDEIA_HEALER) to src/data/heal_locations.json.
+
+mapscripts KytheraSkandeia_Asclepeion_MapScripts {}
+
+text KytheraSkandeia_Asclepeion_Name_Healer { "HEALER" }
+
+script KytheraSkandeia_Asclepeion_EventScript_Healer {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Asclepeion_Name_Healer)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("Everyone came in this morning with the same bad dream.\p"
+                      "Gray, they said. And still. I told them to soak their hands."))
+    } else {
+        msgbox(format("Sea water and quiet. Best cure there is. We'll do the rest."))
+    }
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x800B, LOCALID_SKANDEIA_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script KytheraSkandeia_Asclepeion_EventScript_Panacoil {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PANACOIL, CRY_MODE_NORMAL)
+    waitmoncry
+    release
+}
+
+script KytheraSkandeia_Asclepeion_EventScript_Bath {
+    msgbox(format("A stone bath fed by sea water through a channel. Sailors soak their hands in it."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// The Pithos. Ichor_EventScript_Pithos (AktiTown_Asclepeion) names Akti when it
+// opens, so this town has its own copy of the menu.
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_Asclepeion_EventScript_Pithos {
+    lockall
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(Ichor_Text_PithosLook)
+    msgbox(Ichor_Text_PithosLift)
+    goto(KytheraSkandeia_Asclepeion_EventScript_PithosMenu)
+}
+
+script KytheraSkandeia_Asclepeion_EventScript_PithosMenu {
+    message(Ichor_Text_PithosReach)
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Ichor_Text_PithosOptionPokemon,
+                   Ichor_Text_PithosOptionThings, Ichor_Text_PithosOptionClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("The Pithos of Skandeia opened."))
+            msgbox(Ichor_Text_PithosPokemonRest)
+            special(ShowPokemonStorageSystemPC)
+            goto(KytheraSkandeia_Asclepeion_EventScript_PithosMenu)
+        case 1:
+            msgbox(Ichor_Text_PithosThings)
+            special(PlayerPC)
+            goto(KytheraSkandeia_Asclepeion_EventScript_PithosMenu)
+    }
+    msgbox(Ichor_Text_PithosClose)
+    releaseall
+    end
+}

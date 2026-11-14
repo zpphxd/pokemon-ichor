@@ -1,0 +1,75 @@
+// The perfumer's house, Skandeia (design/phase4/SCRIPT.md, Part 2): Euodia, who
+// presses rose and myrtle oil for the goddess's altars.
+// Room: tools/ichor/maps/kythera_homes.py. The mat is (2..3,9). Euodia stands by
+// her still (the hearth) at (3,3).
+//
+// The room smells strongly enough to make the screen's first box say so: until
+// she has given you her Soothe Bell, entering says it. The bell's hint matters:
+// Glyphlet and Erosie evolve through friendship.
+//
+// TODO(act3): exit to MAP_KYTHERA_SKANDEIA.
+
+mapscripts KytheraSkandeia_PerfumersHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_GOT_SOOTHE_BELL_EUODIA)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: KytheraSkandeia_PerfumersHouse_EventScript_Roses
+    ]
+}
+
+text KytheraSkandeia_PerfumersHouse_Name_Euodia { "EUODIA" }
+
+script KytheraSkandeia_PerfumersHouse_EventScript_Roses {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    msgbox(format("This room smells overwhelmingly of roses."))
+    releaseall
+}
+
+script KytheraSkandeia_PerfumersHouse_EventScript_Euodia {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_PerfumersHouse_Name_Euodia)
+    if (flag(FLAG_ICHOR_GOT_SOOTHE_BELL_EUODIA)) {
+        msgbox(format("If you smell roses in the temple, that's me. I do the altars on Fridays.\p"
+                      "Well. On the day after the day after the feast. We don't have Fridays."))
+        release
+        end
+    }
+    msgbox(format("Don't open the window. The smell gets out and the bees come.\p"
+                  "Rose oil for the goddess. Myrtle for the dead. Both for weddings.\p"
+                  "This island runs on love, you know. Badly, mostly. But it runs.\p"
+                  "Here. A little bell. I hang it over the still. It keeps me calm."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_SOOTHE_BELL)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_SOOTHE_BELL_EUODIA)
+    setspeaker(KytheraSkandeia_PerfumersHouse_Name_Euodia)
+    msgbox(format("Give it to a Pokémon you haven't got through to yet.\p"
+                  "The marble ones on the hill take a long time to love anybody."))
+    release
+}
+
+script KytheraSkandeia_PerfumersHouse_EventScript_Still {
+    msgbox(format("A copper still bubbles on the hearth. Rose oil drips from its spout."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_PerfumersHouse_EventScript_Bottles {
+    msgbox(format("Shelves of little alabaster bottles."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_PerfumersHouse_EventScript_Window {
+    msgbox(format("The one window, shut, so the smell doesn't escape and get ideas."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_PerfumersHouse_EventScript_Press {
+    msgbox(format("A stone press with a long beam.\p"
+                  "Rose petals are drying on every flat surface."), MSGBOX_SIGN)
+}

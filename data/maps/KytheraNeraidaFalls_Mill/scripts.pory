@@ -1,0 +1,73 @@
+// Myles's mill, the Neraida falls (design/phase4/SCRIPT.md, Part 2): the rest
+// point on the falls road. Myles, an old miller, claims the Myles of Lakonian
+// legend who made the first millstone. "Every miller does."
+// Room: tools/ichor/maps/kythera_homes.py. A round room round the millstone on
+// its shaft (6,4..6); the bread oven (2..3,2..3); the ladder to his loft bed at
+// (8,2) (blocked: the loft isn't a map); a cat white with flour. Myles stands by
+// the oven at (4,3). The mat is (5..6,9).
+//
+// He heals the party with bread and a sit-down, and on the first visit gives a
+// Metronome. Before the Horn of Achelous (VAR_ICHOR_ACT3 < 4) the wheel turns
+// but the room is silent: he's been pushing it.
+//
+// TODO(act3): exit to MAP_KYTHERA_NERAIDA_FALLS.
+// TODO(audio): the wheel's rumble as the room's ambient sound once the Horn is
+// won (before it, silence).
+
+mapscripts KytheraNeraidaFalls_Mill_MapScripts {}
+
+text KytheraNeraidaFalls_Mill_Name_Myles { "MYLES" }
+
+script KytheraNeraidaFalls_Mill_EventScript_Myles {
+    lock
+    faceplayer
+    setspeaker(KytheraNeraidaFalls_Mill_Name_Myles)
+    if (var(VAR_ICHOR_ACT3) >= 4) {
+        msgbox(format("Hear that? That's the river doing the pushing. My back thanks you."))
+    } else {
+        msgbox(format("Sit. Have bread. My mill's the only one still turning.\p"
+                      "It turns because I push it. With my back. Don't tell anyone."))
+    }
+    call(Kythera_EventScript_HostHeals)
+    if (!flag(FLAG_ICHOR_GOT_METRONOME)) {
+        setspeaker(KytheraNeraidaFalls_Mill_Name_Myles)
+        msgbox(format("My family say we're from Myles, the first miller.\p"
+                      "The man who made the millstone.\p"
+                      "Every miller says that. Every one I've met is called Myles.\p"
+                      "Here. It ticks. Keeps time with the stone.\p"
+                      "It helps when you do a thing over and over."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_METRONOME)
+        if (var(VAR_RESULT) == FALSE) {
+            call(Common_EventScript_ShowBagIsFull)
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_METRONOME)
+    }
+    release
+}
+
+script KytheraNeraidaFalls_Mill_EventScript_Cat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_MEOWTH, CRY_MODE_NORMAL)
+    waitmoncry
+    release
+}
+
+script KytheraNeraidaFalls_Mill_EventScript_Millstone {
+    if (var(VAR_ICHOR_ACT3) >= 4) {
+        msgbox(format("The great millstone turns on its shaft. Flour on every surface."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("The great millstone turns on its shaft, and makes no sound at all."), MSGBOX_SIGN)
+    }
+}
+
+script KytheraNeraidaFalls_Mill_EventScript_Ladder {
+    msgbox(format("A ladder up to the loft, where Myles sleeps."), MSGBOX_SIGN)
+}
+
+script KytheraNeraidaFalls_Mill_EventScript_Oven {
+    msgbox(format("A bread oven in the wall. It smells of warm barley."), MSGBOX_SIGN)
+}

@@ -1,0 +1,58 @@
+// The mirror-house, Paphia (design/phase4/SCRIPT.md, Part 2): Leukippe, who
+// polishes the temple's bronze mirrors and makes new ones. The walls are lined
+// with them; a turning mirror stands on its post like the ones in the rose court.
+// Room: tools/ichor/maps/kythera_homes.py. Leukippe stands at (6,4) by her
+// polishing bench; the mirrors hang at (1..2,0..1), (4..5,0..1), (8..9,0..1), and
+// the turning mirror is at (8,4..5). The mat is (5,7).
+//
+// On the first visit she gives the rite's hint (how the gallery's statues can't
+// move while a mirror watches them); after the Foam Laurel, a Mirror Herb.
+//
+// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
+
+mapscripts KytheraPaphia_MirrorHouse_MapScripts {}
+
+text KytheraPaphia_MirrorHouse_Name_Leukippe { "LEUKIPPE" }
+
+script KytheraPaphia_MirrorHouse_EventScript_Leukippe {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_MirrorHouse_Name_Leukippe)
+    if (flag(FLAG_ICHOR_GOT_MIRROR_HERB)) {
+        msgbox(format("Give it to a Pokémon. It'll copy a stat boost, if it sees one."))
+        release
+        end
+    }
+    if (flag(FLAG_BADGE07_GET)) {
+        msgbox(format("You did it! Did you turn my mirrors? Of course you did.\p"
+                      "I keep a sprig of this by the casting pit. It copies what it sees."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_MIRROR_HERB)
+        if (var(VAR_RESULT) == FALSE) {
+            call(Common_EventScript_ShowBagIsFull)
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_MIRROR_HERB)
+        setspeaker(KytheraPaphia_MirrorHouse_Name_Leukippe)
+        msgbox(format("Give it to a Pokémon. It'll copy a stat boost, if it sees one."))
+        release
+        end
+    }
+    msgbox(format("Going up to the temple? Then listen. Free advice.\p"
+                  "The statues can't move while somebody's looking at them.\p"
+                  "Somebody. Not you. A mirror counts. A mirror is somebody's eyes.\p"
+                  "The flat ones on the walls show what's behind you.\p"
+                  "The ones on stands, up in the rose court, I made those. They turn.\p"
+                  "Turn one to look down your path, and walk it. That's the whole trick.\p"
+                  "Don't tell Galatea I told you. She thinks it's more fun if you suffer."))
+    release
+}
+
+script KytheraPaphia_MirrorHouse_EventScript_Mirror {
+    msgbox(format("A face looks back at you, smiling. It's yours."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_MirrorHouse_EventScript_Stand {
+    msgbox(format("A bronze mirror on a stand. It turns."), MSGBOX_SIGN)
+}

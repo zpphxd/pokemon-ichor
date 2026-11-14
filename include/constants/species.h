@@ -1700,4 +1700,6 @@ enum __attribute__((packed)) Species
 
 #define SPECIES_SHINY_TAG 5000
 
+#include "constants/ichor_species_stubs_kythera_tmp.h" // TEMPORARY: see the file
+
 #endif  // GUARD_CONSTANTS_SPECIES_H

@@ -75,7 +75,9 @@
     "gMapGroup_IndoorTwoIslandRoute_Frlg",
     "gMapGroup_IndoorSixIslandRoute_Frlg",
     "gMapGroup_IndoorSevenIslandRoute_Frlg",
-    "gMapGroup_IndoorKalliste"
+    "gMapGroup_IndoorKalliste",
+    "gMapGroup_IndoorKythera",
+    "gMapGroup_IndoorMelos"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -1178,5 +1180,28 @@
     "ElaiaVillage_BakersHouse",
     "AktiTown_DiversHouse",
     "AktiTown_GoatherdsHouse"
+  ],
+  "gMapGroup_IndoorKythera": [
+    "KytheraSkandeia_AxylosHouse",
+    "KytheraSkandeia_DiversHouse",
+    "KytheraSkandeia_PerfumersHouse",
+    "KytheraSkandeia_NikareteHouse",
+    "KytheraSkandeia_ShipwrightsHouse",
+    "KytheraSkandeia_Asclepeion",
+    "KytheraSkandeia_Agora",
+    "KytheraPaphia_Dovecote",
+    "KytheraPaphia_PottersHouse",
+    "KytheraPaphia_Asclepeion",
+    "KytheraPaphia_Agora",
+    "KytheraPaphia_PygmalionsWorkshop",
+    "KytheraPaphia_MirrorHouse",
+    "KytheraPaphia_OrchardHouse",
+    "KytheraNeraidaFalls_Mill"
+  ],
+  "gMapGroup_IndoorMelos": [
+    "Melos_Farmhouse",
+    "Melos_KnappersHouse",
+    "Melos_Boathouse",
+    "Melos_BoathouseLoft"
   ]
 }
