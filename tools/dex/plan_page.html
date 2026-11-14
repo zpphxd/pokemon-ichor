@@ -74,7 +74,8 @@ section { padding-block: 40px; display: grid; gap: 22px; }
 /* Decisions */
 .decisions { display: grid; gap: 0; border-top: 2px solid var(--rule); }
 .decision { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 4px 16px; padding-block: 16px; border-bottom: 1px solid var(--rule); }
-.decision .id { font-family: var(--font-display); font-size: var(--s3); line-height: 1; grid-row: span 3; }
+.decision .id { font-family: var(--font-display); font-size: var(--s3); line-height: 1; grid-row: span 4; }
+.decision .ans::before { content: "Answer: "; font-family: var(--font-label); font-size: var(--s-1); letter-spacing: .06em; text-transform: uppercase; }
 .decision h3 { font-size: var(--s1); font-weight: 700; }
 .decision .rec { font-weight: 700; }
 .decision .rec::before { content: "Recommended: "; font-family: var(--font-label); font-weight: 400; font-size: var(--s-1); letter-spacing: .06em; text-transform: uppercase; }
@@ -296,7 +297,8 @@ function renderDecisions() {
       el("span", { class: "id" }, d.id),
       el("h3", {}, d.title),
       el("p", {}, d.detail),
-      el("p", { class: "rec" }, d.recommend))));
+      el("p", { class: "rec" }, d.recommend),
+      el("p", { class: "ans" }, d.answer || "Open"))));
 }
 
 function renderShape() {

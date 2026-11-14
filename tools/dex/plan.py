@@ -229,6 +229,8 @@ def markdown(data, species, st):
         w("")
         w(f"*Recommendation:* {d['recommend']}")
         w("")
+        w(f"*Answer:* {d.get('answer', 'open')}")
+        w("")
     w("## Type spread")
     w("")
     w("A species counts once for each of its types.")

@@ -1222,6 +1222,7 @@ lines:
 
 decisions:
 - id: D1
+  answer: "Yes (2026-11-14): the regional starters replace Snivy, Cyndaquil and Piplup."
   title: Regional starters replace Snivy, Cyndaquil and Piplup
   detail: >-
     The plan gives Aethos its own three: the Laurel fawn (Grass, ends
@@ -1257,6 +1258,7 @@ decisions:
     Mew, found at the Pool of Mnemosyne.
   recommend: Yes to both. Whether Elpis gets the Hope beat is the main session's call.
 - id: D5
+  answer: "(b) mixed (2026-11-14): the 150 are Aethos's own Pokémon, and existing species live in the region alongside them."
   title: How the 150 mix with the existing 1,025 species
   detail: >-
     The bible leaves this open. Options. (a) Aethos-only through the League,

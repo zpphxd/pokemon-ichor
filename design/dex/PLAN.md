@@ -20,25 +20,37 @@ The labels below are working concepts, not names. Names, stats, abilities, moves
 
 *Recommendation:* Yes. Keep the existing three in the slice until the new species are implemented, then swap.
 
+*Answer:* Yes (2026-11-14): the regional starters replace Snivy, Cyndaquil and Piplup.
+
 **D2. New story legendaries replace Dialga and the lake trio.** Kronos, Lord of Time, would replace Dialga at the climax, and the three Moirai (Spinner, Allotter, Cutter) would replace Uxie, Mesprit and Azelf. The beats stay the same: the Fates chained at the Loom, the Frozen Hour, the Stair of Hours. Only the species change. This touches the bible's §2 and §4, which the main session owns.
 
 *Recommendation:* Yes. Without this, the region's own legendaries would sit outside its story.
+
+*Answer:* open
 
 **D3. Add Kairos as a post-game legendary at Olympia.** Kairos is the counterpart to Kronos: the chosen moment against endless time. A real altar of Kairos stood at the stadium entrance at Olympia, so he would wait there in the post-game Olympiad. This adds one encounter to the bible's post-game.
 
 *Recommendation:* Yes.
 
+*Answer:* open
+
 **D4. Two mythicals, Hope and Ichor.** Hope is the light left in Pandora's jar. A natural beat is Elpis opening the last sealed pithos after the League, which would be a small bible addition. Ichor, the gods' golden blood, is the title Pokémon and Aethos's Mew, found at the Pool of Mnemosyne.
 
 *Recommendation:* Yes to both. Whether Elpis gets the Hope beat is the main session's call.
+
+*Answer:* open
 
 **D5. How the 150 mix with the existing 1,025 species.** The bible leaves this open. Options. (a) Aethos-only through the League, with the national dex opening in the post-game (Time Fractures, the Odyssey, Atlantis, Katabasis), so "all 1,025 catchable" still holds. (b) Mixed throughout. (c) Aethos-only, full stop. The Phase 1 Route 1 table uses existing species today.
 
 *Recommendation:* (a). It makes Aethos feel like a real new region and keeps the bible's post-game promise.
 
+*Answer:* (b) mixed (2026-11-14): the 150 are Aethos's own Pokémon, and existing species live in the region alongside them.
+
 **D6. Let the post-game Labors use regional species.** The bible casts the Twelve Labors with existing species. Where the dex has its own, they could take over: Nemean lion (1), Hydra (2), Calydonian boar (4), Stymphalian birds (6), the two-headed hound for Geryon's cattle (10), Ladon (11), and the starter line's three-headed hound for Cerberus (12). The Hind, the Augean Stables, the Cretan Bull, Diomedes's mares and Hippolyta's girdle keep their current casting.
 
 *Recommendation:* Yes, where a regional species exists.
+
+*Answer:* open
 
 ## Type spread
 
