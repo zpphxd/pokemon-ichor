@@ -1,0 +1,80 @@
+// The boathouse, Melos, the room over the boat (design/phase4/SCRIPT.md, Part 2):
+// Myrtis and her husband Kalchedon, fishers, and their baby. A bed, the cradle,
+// nets, a hearth on a stone slab, and a window right over the water.
+// Room: tools/ichor/maps/kythera_homes.py. The stair down to the boat is (1,1).
+// Myrtis stands by the hearth at (6,3); Kalchedon at (4,5).
+//
+// The rest point: Myrtis heals the party with fish soup. On the first visit
+// Kalchedon gives a Damp Rock.
+
+mapscripts Melos_BoathouseLoft_MapScripts {}
+
+text Melos_BoathouseLoft_Name_Myrtis { "MYRTIS" }
+text Melos_BoathouseLoft_Name_Kalchedon { "KALCHEDON" }
+
+script Melos_BoathouseLoft_EventScript_Myrtis {
+    lock
+    faceplayer
+    setspeaker(Melos_BoathouseLoft_Name_Myrtis)
+    if (flag(FLAG_ICHOR_GOT_DAMP_ROCK)) {
+        msgbox(format("Athens came here once, my grandmother said. Long ago. With ships.\p"
+                      "They said the strong do what they can.\p"
+                      "And the weak suffer what they must."))
+        setspeaker(Melos_BoathouseLoft_Name_Myrtis)
+        msgbox(format("Then they did what they could. Melos remembers. Soup?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            call(Kythera_EventScript_HostHeals)
+        }
+        release
+        end
+    }
+    msgbox(format("Up the ladder, mind the baby. Sit. Soup. It's fish. It's always fish."))
+    call(Kythera_EventScript_HostHeals)
+    setspeaker(Melos_BoathouseLoft_Name_Myrtis)
+    msgbox(format("The sea comes in under the door when it's rough. We sleep over it.\p"
+                  "My husband says the boat keeps us dry. The boat says nothing."))
+    closemessage
+    applymovement(LOCALID_MELOS_KALCHEDON, Common_Movement_FacePlayer)
+    waitmovement(0)
+    call(Melos_BoathouseLoft_EventScript_DampRock)
+    release
+}
+
+script Melos_BoathouseLoft_EventScript_Kalchedon {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_GOT_DAMP_ROCK)) {
+        setspeaker(Melos_BoathouseLoft_Name_Kalchedon)
+        msgbox(format("Old sailor's trick."))
+        release
+        end
+    }
+    call(Melos_BoathouseLoft_EventScript_DampRock)
+    release
+}
+
+script Melos_BoathouseLoft_EventScript_DampRock {
+    setspeaker(Melos_BoathouseLoft_Name_Kalchedon)
+    msgbox(format("Here. For the road. It keeps the rain in longer.\p"
+                  "Old sailor's trick."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_DAMP_ROCK)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        return
+    }
+    setflag(FLAG_ICHOR_GOT_DAMP_ROCK)
+    return
+}
+
+script Melos_BoathouseLoft_EventScript_Cradle {
+    msgbox(format("A cradle hung from a beam. The baby is asleep in it."), MSGBOX_SIGN)
+}
+
+script Melos_BoathouseLoft_EventScript_Window {
+    msgbox(format("The window is right over the water."), MSGBOX_SIGN)
+}
+
+script Melos_BoathouseLoft_EventScript_Hearth {
+    msgbox(format("A hearth on a stone slab. A pot of fish soup simmers on it."), MSGBOX_SIGN)
+}

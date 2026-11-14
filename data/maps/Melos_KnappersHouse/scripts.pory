@@ -1,0 +1,77 @@
+// Melanippos's house, Melos (design/phase4/SCRIPT.md, Part 2): an old obsidian
+// knapper who still makes blades the way his family always has, and polishes
+// black mirrors.
+// Room: tools/ichor/maps/kythera_homes.py. A workshop with a stone floor deep in
+// black flakes: the knee-high anvil stone at (5,4) with Melanippos beside it at
+// (4,4), cores of glass on the shelf (5..6,0..1), the round black mirror at
+// (8,0..1). The front of the house is older and its wall comes forward. The mat
+// is (3..4,7).
+//
+// A small quest: bring him a lump of good glass from the slope's seam, past
+// Theion (FLAG_ICHOR_MELOS_OBSIDIAN_LUMP, the slope's fixed dig on MAP_MELOS),
+// for a TM.
+//
+// TODO(act3): exit to MAP_MELOS.
+// TODO(balance): TM Stone Edge isn't in the TM list yet. When it is, give it
+// where marked and set FLAG_ICHOR_GOT_TM_STONE_EDGE (claim it then); until then
+// he knaps the blade every time you bring the lump.
+
+mapscripts Melos_KnappersHouse_MapScripts {}
+
+text Melos_KnappersHouse_Name_Melanippos { "MELANIPPOS" }
+
+script Melos_KnappersHouse_EventScript_Melanippos {
+    lock
+    faceplayer
+    setspeaker(Melos_KnappersHouse_Name_Melanippos)
+    if (!flag(FLAG_ICHOR_MELOS_OBSIDIAN_LUMP)) {
+        msgbox(format("Glass. Black glass. My family's knapped it since before bronze.\p"
+                      "Then bronze came, and everyone laughed at us.\p"
+                      "Now the Titans want it.\p"
+                      "A big man's crews dug half my slope last night. For edges, they said.\p"
+                      "Bring me a good lump. Not chips. There's a seam at the top.\p"
+                      "The young one in the helmet's sitting on it, I expect."))
+        release
+        end
+    }
+    msgbox(format("Ahh. That's the seam. Look at that. Not a flaw in it.\p"
+                  "Watch."))
+    closemessage
+    // Three knocks, a crack, and a long black blade comes away. Hold 30 frames.
+    applymovement(LOCALID_MELOS_MELANIPPOS, Common_Movement_WalkInPlaceFasterRight)
+    waitmovement(0)
+    playse(SE_M_ROCK_THROW)
+    delay(16)
+    playse(SE_M_ROCK_THROW)
+    delay(16)
+    playse(SE_M_ROCK_THROW)
+    delay(20)
+    playse(SE_M_CUT)
+    waitse
+    delay(30)
+    applymovement(LOCALID_MELOS_MELANIPPOS, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(Melos_KnappersHouse_Name_Melanippos)
+    msgbox(format("The oldest edge in the world. Teach it to your Pokémon."))
+    // TODO(balance): {PLAYER} received TM Stone Edge! (see the header)
+    setspeaker(Melos_KnappersHouse_Name_Melanippos)
+    msgbox(format("Bronze bends. Glass doesn't. It breaks, but it doesn't bend."))
+    release
+}
+
+script Melos_KnappersHouse_EventScript_Mirror {
+    lockall
+    msgbox(format("A round mirror of polished black glass. Your face in it is dark and calm."))
+    setspeaker(Melos_KnappersHouse_Name_Melanippos)
+    msgbox(format("A black mirror shows you as you'll be when you're old. So they say.\p"
+                  "Mostly it shows you as you are, but darker. Same thing."))
+    releaseall
+}
+
+script Melos_KnappersHouse_EventScript_Cores {
+    msgbox(format("Cores of black glass on a shelf, flaked down to the size of a fist."), MSGBOX_SIGN)
+}
+
+script Melos_KnappersHouse_EventScript_Anvil {
+    msgbox(format("A knee-high anvil stone with a leather pad on it. Antler hammers lie in a row."), MSGBOX_SIGN)
+}

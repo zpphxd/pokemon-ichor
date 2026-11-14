@@ -288,6 +288,9 @@
 #define ICHOR_VARS_COUNT                                 32
 #define ICHOR_VARS_END                                   (ICHOR_VARS_START + ICHOR_VARS_COUNT - 1)
 // Ichor bank vars: claim.py bankvar adds lines here, in order.
+#define VAR_ICHOR_ACT3                          (ICHOR_VARS_START + 0x00C) // Ichor: world-act3: Act III story state, 0-26 (design/phase4/SCRIPT.md, Flags, vars and save state)
+#define VAR_ICHOR_KNOSSA                        (ICHOR_VARS_START + 0x00D) // Ichor: world-act3: Knossa story state, 0-20 (LABYRINTH.md §13)
+#define VAR_ICHOR_LABYRINTH                     (ICHOR_VARS_START + 0x00E) // Ichor: world-act3: Labyrinth puzzle bits (LABYRINTH.md §13)
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000
@@ -348,5 +351,6 @@
 #define TESTING_VAR_UNUSED_6                (TESTING_VARS_START + 0x6)
 #define TESTING_VAR_UNUSED_7                (TESTING_VARS_START + 0x7)
 #endif // TESTING
+
 
 #endif // GUARD_CONSTANTS_VARS_H

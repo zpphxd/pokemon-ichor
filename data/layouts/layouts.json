@@ -9488,6 +9488,215 @@
       "border_filepath": "data/layouts/AktiTown_GoatherdsHouse/border.bin",
       "blockdata_filepath": "data/layouts/AktiTown_GoatherdsHouse/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_SKANDEIA_AXYLOS_HOUSE",
+      "name": "KytheraSkandeia_AxylosHouse_Layout",
+      "width": 14,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/KytheraSkandeia_AxylosHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraSkandeia_AxylosHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_SKANDEIA_DIVERS_HOUSE",
+      "name": "KytheraSkandeia_DiversHouse_Layout",
+      "width": 12,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/KytheraSkandeia_DiversHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraSkandeia_DiversHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_SKANDEIA_PERFUMERS_HOUSE",
+      "name": "KytheraSkandeia_PerfumersHouse_Layout",
+      "width": 7,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/KytheraSkandeia_PerfumersHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraSkandeia_PerfumersHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_SKANDEIA_NIKARETE_HOUSE",
+      "name": "KytheraSkandeia_NikareteHouse_Layout",
+      "width": 10,
+      "height": 12,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/KytheraSkandeia_NikareteHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraSkandeia_NikareteHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_SKANDEIA_SHIPWRIGHTS_HOUSE",
+      "name": "KytheraSkandeia_ShipwrightsHouse_Layout",
+      "width": 15,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/KytheraSkandeia_ShipwrightsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraSkandeia_ShipwrightsHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_SKANDEIA_ASCLEPEION",
+      "name": "KytheraSkandeia_Asclepeion_Layout",
+      "width": 19,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/KytheraSkandeia_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraSkandeia_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_SKANDEIA_AGORA",
+      "name": "KytheraSkandeia_Agora_Layout",
+      "width": 11,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/KytheraSkandeia_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraSkandeia_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_PAPHIA_DOVECOTE",
+      "name": "KytheraPaphia_Dovecote_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/KytheraPaphia_Dovecote/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraPaphia_Dovecote/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_PAPHIA_POTTERS_HOUSE",
+      "name": "KytheraPaphia_PottersHouse_Layout",
+      "width": 12,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/KytheraPaphia_PottersHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraPaphia_PottersHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_PAPHIA_ASCLEPEION",
+      "name": "KytheraPaphia_Asclepeion_Layout",
+      "width": 15,
+      "height": 11,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/KytheraPaphia_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraPaphia_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_PAPHIA_AGORA",
+      "name": "KytheraPaphia_Agora_Layout",
+      "width": 13,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/KytheraPaphia_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraPaphia_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_PAPHIA_PYGMALIONS_WORKSHOP",
+      "name": "KytheraPaphia_PygmalionsWorkshop_Layout",
+      "width": 13,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/KytheraPaphia_PygmalionsWorkshop/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraPaphia_PygmalionsWorkshop/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_PAPHIA_MIRROR_HOUSE",
+      "name": "KytheraPaphia_MirrorHouse_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/KytheraPaphia_MirrorHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraPaphia_MirrorHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_PAPHIA_ORCHARD_HOUSE",
+      "name": "KytheraPaphia_OrchardHouse_Layout",
+      "width": 13,
+      "height": 11,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/KytheraPaphia_OrchardHouse/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraPaphia_OrchardHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_NERAIDA_FALLS_MILL",
+      "name": "KytheraNeraidaFalls_Mill_Layout",
+      "width": 12,
+      "height": 10,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/KytheraNeraidaFalls_Mill/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraNeraidaFalls_Mill/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MELOS_FARMHOUSE",
+      "name": "Melos_Farmhouse_Layout",
+      "width": 13,
+      "height": 6,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Melos_Farmhouse/border.bin",
+      "blockdata_filepath": "data/layouts/Melos_Farmhouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MELOS_KNAPPERS_HOUSE",
+      "name": "Melos_KnappersHouse_Layout",
+      "width": 9,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Melos_KnappersHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Melos_KnappersHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MELOS_BOATHOUSE",
+      "name": "Melos_Boathouse_Layout",
+      "width": 12,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Melos_Boathouse/border.bin",
+      "blockdata_filepath": "data/layouts/Melos_Boathouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MELOS_BOATHOUSE_LOFT",
+      "name": "Melos_BoathouseLoft_Layout",
+      "width": 10,
+      "height": 7,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Melos_BoathouseLoft/border.bin",
+      "blockdata_filepath": "data/layouts/Melos_BoathouseLoft/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

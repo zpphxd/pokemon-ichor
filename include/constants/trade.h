@@ -23,6 +23,8 @@ enum InGameTradeID
     INGAME_TRADE_SEEL,
     // Ichor
     INGAME_TRADE_ICHOR_ARION, // Kimon's Finizen, for a Wooloo (Elaia, Glykera's house)
+    INGAME_TRADE_ICHOR_ANKYRA, // Bathykleia's Telkanvil, for a Glyphlet (Skandeia, the divers' house)
+    INGAME_TRADE_ICHOR_POTHOS, // Lysis's Himerow, for a Galenyon (Paphia, the potter's house)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

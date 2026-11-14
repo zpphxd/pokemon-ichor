@@ -1,0 +1,88 @@
+// The potter's house, Paphia (design/phase4/SCRIPT.md, Part 2): Lysis, a shy
+// young potter, and his sister, who helps at the Agora. He goes down to Skandeia
+// every week to buy fish he doesn't like (Philinna's stall). He and Philinna are
+// the two shy villagers of SYSTEMS §10's post-game E7.
+// Room: tools/ichor/maps/kythera_homes.py. The workshop: the wheel by the door,
+// the kiln (8..9,2..3) with Pothos the Himerow on it at (9,2), the shelves of
+// perfume flasks (4..7,0..1), and the ladder up to the beds at (1..2,2..4)
+// (blocked: the loft isn't a map). Lysis stands at (4,4). The mat is (2..3,7).
+//
+// Lysis trades Pothos for a Galenyon (INGAME_TRADE_ICHOR_POTHOS).
+//
+// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
+
+mapscripts KytheraPaphia_PottersHouse_MapScripts {}
+
+text KytheraPaphia_PottersHouse_Name_Lysis { "LYSIS" }
+
+script KytheraPaphia_PottersHouse_EventScript_Lysis {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_PottersHouse_Name_Lysis)
+    if (flag(FLAG_ICHOR_TRADED_HIMEROW)) {
+        msgbox(format("Do you know the girl at the fish stall in Skandeia? Philinna?\p"
+                      "No reason. I'm just. No reason."))
+        release
+        end
+    }
+    msgbox(format("Oh. Hello. Sorry. Hello.\p"
+                  "That's my Himerow on the kiln. Pothos. It keeps diving at me.\p"
+                  "My sister says it's in love with me. It's a bird. It's very confusing.\p"
+                  "I'd like something that just… flies about. And doesn't look at me.\p"
+                  "A Galenyon? They fish. They don't look at anybody."))
+    // The in-game trade, written out as Kimon's is (ElaiaVillage_BakersHouse).
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_POTHOS)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(KytheraPaphia_PottersHouse_Name_Lysis)
+    msgbox(format("Would you trade me one for Pothos?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(KytheraPaphia_PottersHouse_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(KytheraPaphia_PottersHouse_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        goto(KytheraPaphia_PottersHouse_EventScript_NoTrade)
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_HIMEROW)
+    removeobject(LOCALID_PAPHIA_POTHOS)
+    setspeaker(KytheraPaphia_PottersHouse_Name_Lysis)
+    msgbox(format("It's fishing. It isn't looking at me. That's… that's lovely, thank you.\p"
+                  "Pothos already likes you. It likes everyone. That was the problem."))
+    release
+}
+
+script KytheraPaphia_PottersHouse_EventScript_NoTrade {
+    setspeaker(KytheraPaphia_PottersHouse_Name_Lysis)
+    msgbox(format("That's all right. Sorry. Sorry for asking."))
+    release
+    end
+}
+
+script KytheraPaphia_PottersHouse_EventScript_Pothos {
+    lock
+    faceplayer
+    playmoncry(SPECIES_HIMEROW, CRY_MODE_NORMAL)
+    waitmoncry
+    release
+}
+
+script KytheraPaphia_PottersHouse_EventScript_FishFlasks {
+    msgbox(format("Little perfume flasks, all drying. Every one has the same painted fish.\p"
+                  "The fish is smiling. Fish don't smile. This one does."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_PottersHouse_EventScript_Ladder {
+    msgbox(format("A ladder up to the loft and its two beds.\p"
+                  "Up there, a pile of fish bones nobody has thrown away."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_PottersHouse_EventScript_Kiln {
+    msgbox(format("The kiln, still warm. Pots crowd every bit of floor around it."), MSGBOX_SIGN)
+}

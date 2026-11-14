@@ -1,0 +1,61 @@
+// Pygmalion's workshop, Paphia (design/phase4/SCRIPT.md, Part 2): the old
+// sculptor who carved Galatea out of one block of marble and talked to her every
+// night until she answered. Her husband now, for forty years.
+// Room: tools/ichor/maps/kythera_homes.py. The roofed half on the left, with his
+// marble-paved corner (the statue under its dust sheet at (1,0..2), his narrow
+// bed); the open yard and its blocks on the right. Pygmalion stands at (5,3),
+// by the table set for two. The mat is (3,9).
+//
+// After the climax (VAR_ICHOR_ACT3 >= 19) he gives a Shiny Stone (Aphrell
+// evolves into Aphrogene with it).
+//
+// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
+
+mapscripts KytheraPaphia_PygmalionsWorkshop_MapScripts {}
+
+text KytheraPaphia_PygmalionsWorkshop_Name_Pygmalion { "PYGMALION" }
+
+script KytheraPaphia_PygmalionsWorkshop_EventScript_Pygmalion {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_PygmalionsWorkshop_Name_Pygmalion)
+    if (var(VAR_ICHOR_ACT3) >= 19 && !flag(FLAG_ICHOR_GOT_SHINY_STONE_PYGMALION)) {
+        msgbox(format("Everyone stood still for an hour, they say. Like my statues.\p"
+                      "I was in the middle of a sentence. To her. About supper.\p"
+                      "When it started again, she finished the sentence for me.\p"
+                      "I didn't like the stillness. I used to want it. Funny.\p"
+                      "Here. I've had this since before I met her.\p"
+                      "It makes a thing lovelier.\p"
+                      "It was going to go in the eyes of the statue. I'd rather it went to you."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_SHINY_STONE)
+        if (var(VAR_RESULT) == FALSE) {
+            call(Common_EventScript_ShowBagIsFull)
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_SHINY_STONE_PYGMALION)
+        release
+        end
+    }
+    msgbox(format("I carved her, you know. Galatea.\p"
+                  "Out of one block. Not a vein in it.\p"
+                  "She was perfect. She didn't move. I talked to her every night anyway.\p"
+                  "Then one night she was warm. And then she was arguing with me.\p"
+                  "Forty years. She still argues. She says she's cracked all over now.\p"
+                  "Laugh lines. That's what she means. I tell her so. She argues."))
+    release
+}
+
+script KytheraPaphia_PygmalionsWorkshop_EventScript_DustSheet {
+    lockall
+    msgbox(format("A statue under a dust sheet. You can see the shape of a woman's shoulder."))
+    setspeaker(KytheraPaphia_PygmalionsWorkshop_Name_Pygmalion)
+    msgbox(format("Don't. That's the one I started before her. I never finished it.\p"
+                  "I was frightened it'd wake up too. I only had the one heart."))
+    releaseall
+}
+
+script KytheraPaphia_PygmalionsWorkshop_EventScript_Table {
+    msgbox(format("A small table, set for two."), MSGBOX_SIGN)
+}
