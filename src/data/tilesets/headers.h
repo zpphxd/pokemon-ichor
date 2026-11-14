@@ -1647,3 +1647,18 @@ const struct Tileset gTileset_Agros =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Agros,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary built by tools/ichor/art/cave_dark_build.py: the
+// dark places (Hecate's Hollow, the Salt Grotto, Akti's Sea Grotto, the Kronion
+// Crypt). It uses only its own tiles and palettes 6-12, so it works on any
+// primary; the maps pair it with aethos.
+const struct Tileset gTileset_CaveDark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_CaveDark,
+    .palettes = gTilesetPalettes_PorytilesManaged_CaveDark,
+    .metatiles = gMetatiles_PorytilesManaged_CaveDark,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_CaveDark,
+    .callback = InitTilesetAnim_PorytilesManaged_CaveDark,
+};

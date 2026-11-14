@@ -3218,3 +3218,48 @@ const u16 gTilesetPalettes_PorytilesManaged_Agros[][16] =
     INCBIN_U16("data/tilesets/secondary/agros/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/agros/porytiles_bin/palettes/15.gbapal")
 };
+
+// Ichor: cave_dark
+const u32 gTilesetTiles_PorytilesManaged_CaveDark[] = INCBIN_U32("data/tilesets/secondary/cave_dark/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_CaveDark[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: cave_dark's glow copy (design/SYSTEMS.md §2, dousing): every color
+// black but Hecate's chalk. Written by tools/ichor/art/cave_dark_build.py.
+const u16 gTilesetPalettes_PorytilesManaged_CaveDark_Glow[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/cave_dark/glow/15.gbapal")
+};

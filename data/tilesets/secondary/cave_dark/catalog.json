@@ -1,0 +1,1742 @@
+{
+ "tileset": "gTileset_CaveDark",
+ "primary": "gTileset_Aethos",
+ "tiles_used": 480,
+ "pieces": [
+  {
+   "key": "bones",
+   "title": "Old bones",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     704
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "A dog's bones and skull, walkable. Near Hecate's niche.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "stele",
+   "title": "Name stone",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     705
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "A small stele with the place's name cut in it: the sign at a mouth.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "dish_covered",
+   "title": "A covered dish",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     706
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "The old woman's dish (beat 18), at her feet by the east mouth.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "lit_warp_n",
+   "title": "Daylit floor, exit n",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     707
+    ]
+   ],
+   "walk": [
+    "^"
+   ],
+   "notes": "Lit floor at a map edge, an arrow warp to the outside.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "lit_warp_s",
+   "title": "Daylit floor, exit s",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     708
+    ]
+   ],
+   "walk": [
+    "v"
+   ],
+   "notes": "Lit floor at a map edge, an arrow warp to the outside.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_SOUTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "lit_warp_w",
+   "title": "Daylit floor, exit w",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     709
+    ]
+   ],
+   "walk": [
+    "["
+   ],
+   "notes": "Lit floor at a map edge, an arrow warp to the outside.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_WEST_ARROW_WARP"
+   }
+  },
+  {
+   "key": "lit_warp_e",
+   "title": "Daylit floor, exit e",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     710
+    ]
+   ],
+   "walk": [
+    "]"
+   ],
+   "notes": "Lit floor at a map edge, an arrow warp to the outside.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_EAST_ARROW_WARP"
+   }
+  },
+  {
+   "key": "stalagmite",
+   "title": "Stalagmite",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     711
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "A single stalagmite. Impassable.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "stalagmites",
+   "title": "Two stalagmites",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     712
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "A pair, one tall, one short. Impassable.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "stalagmite_tall",
+   "title": "Tall stalagmite",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     713
+    ],
+    [
+     721
+    ]
+   ],
+   "walk": [
+    "T",
+    "X"
+   ],
+   "notes": "Its tip is drawn over the player, who can walk behind it.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "column",
+   "title": "Column",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     714
+    ],
+    [
+     722
+    ]
+   ],
+   "walk": [
+    "T",
+    "X"
+   ],
+   "notes": "A stalactite and stalagmite grown together. Walk behind its top.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "boulder",
+   "title": "Boulder",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     715
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "Impassable.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "rock_pile",
+   "title": "Rubble heap",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     716
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "Broken limestone fallen from the roof. Impassable.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "pebbles",
+   "title": "Pebbles",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     717
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "Scatter on open floor; walkable.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "slab",
+   "title": "Fallen slab",
+   "section": "cave",
+   "w": 2,
+   "h": 1,
+   "ids": [
+    [
+     718,
+     719
+    ]
+   ],
+   "walk": [
+    "XX"
+   ],
+   "notes": "A slab fallen from the roof.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "ledge_w",
+   "title": "Ledge (w)",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     728
+    ]
+   ],
+   "walk": [
+    "J"
+   ],
+   "notes": "A low rock step: jump south. West end, two middles, east end.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_JUMP_SOUTH"
+   }
+  },
+  {
+   "key": "ledge_a",
+   "title": "Ledge (a)",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     729
+    ]
+   ],
+   "walk": [
+    "J"
+   ],
+   "notes": "A low rock step: jump south. West end, two middles, east end.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_JUMP_SOUTH"
+   }
+  },
+  {
+   "key": "ledge_b",
+   "title": "Ledge (b)",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     730
+    ]
+   ],
+   "walk": [
+    "J"
+   ],
+   "notes": "A low rock step: jump south. West end, two middles, east end.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_JUMP_SOUTH"
+   }
+  },
+  {
+   "key": "ledge_e",
+   "title": "Ledge (e)",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     731
+    ]
+   ],
+   "walk": [
+    "J"
+   ],
+   "notes": "A low rock step: jump south. West end, two middles, east end.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_JUMP_SOUTH"
+   }
+  },
+  {
+   "key": "ledge_east",
+   "title": "Ledge, jump east",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     732
+    ]
+   ],
+   "walk": [
+    ">"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_JUMP_EAST"
+   }
+  },
+  {
+   "key": "ledge_west",
+   "title": "Ledge, jump west",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     733
+    ]
+   ],
+   "walk": [
+    "<"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_JUMP_WEST"
+   }
+  },
+  {
+   "key": "mouth",
+   "title": "Cave mouth to daylight",
+   "section": "cave",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     734,
+     735
+    ],
+    [
+     742,
+     743
+    ]
+   ],
+   "walk": [
+    "XX",
+    "^^"
+   ],
+   "notes": "Set into a north face over its ft/fb cells. The bottom row is the exit: MB_NORTH_ARROW_WARP. Lead up to it with lit floor.",
+   "names": {},
+   "behaviors": {
+    "0,1": "MB_NORTH_ARROW_WARP",
+    "1,1": "MB_NORTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "hole_down",
+   "title": "Hole with steps down",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     744
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "A pit with rough steps into the dark: MB_NON_ANIMATED_DOOR, warp on it.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NON_ANIMATED_DOOR"
+   }
+  },
+  {
+   "key": "daylight_e",
+   "title": "Daylight at a mouth, e",
+   "section": "cave",
+   "w": 2,
+   "h": 1,
+   "ids": [
+    [
+     745,
+     746
+    ]
+   ],
+   "walk": [
+    ".]"
+   ],
+   "notes": "Daylight pouring in where a passage leaves the map; the edge cell is the arrow warp out. Lead into it with lit floor.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL",
+    "1,0": "MB_EAST_ARROW_WARP"
+   }
+  },
+  {
+   "key": "daylight_w",
+   "title": "Daylight at a mouth, w",
+   "section": "cave",
+   "w": 2,
+   "h": 1,
+   "ids": [
+    [
+     747,
+     748
+    ]
+   ],
+   "walk": [
+    "[."
+   ],
+   "notes": "Daylight pouring in where a passage leaves the map; the edge cell is the arrow warp out. Lead into it with lit floor.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_WEST_ARROW_WARP",
+    "1,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "daylight_s",
+   "title": "Daylight at a mouth, s",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     749
+    ],
+    [
+     757
+    ]
+   ],
+   "walk": [
+    ".",
+    "v"
+   ],
+   "notes": "Daylight pouring in where a passage leaves the map; the edge cell is the arrow warp out. Lead into it with lit floor.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL",
+    "0,1": "MB_SOUTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "daylight_n",
+   "title": "Daylight at a mouth, n",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     750
+    ],
+    [
+     758
+    ]
+   ],
+   "walk": [
+    "^",
+    "."
+   ],
+   "notes": "Daylight pouring in where a passage leaves the map; the edge cell is the arrow warp out. Lead into it with lit floor.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORTH_ARROW_WARP",
+    "0,1": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "brazier_cold",
+   "title": "Bronze brazier, cold",
+   "section": "cave",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     760,
+     761
+    ],
+    [
+     768,
+     769
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "notes": "2x2, all impassable. Swap all four tiles: lit = cold + its offset (see the labels).",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "brazier_lit",
+   "title": "Bronze brazier, lit",
+   "section": "cave",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     762,
+     763
+    ],
+    [
+     770,
+     771
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "notes": "2x2, all impassable. Swap all four tiles: lit = cold + its offset (see the labels).",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "web_1",
+   "title": "Cobweb across a 1-wide passage",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     764
+    ],
+    [
+     772
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "Hung across a passage two cells deep. Intact it blocks; Hecate's Torch burns it (swap in the burnt piece, which is walkable).",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "web_2",
+   "title": "Cobweb across a 2-wide passage",
+   "section": "cave",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     765,
+     766
+    ],
+    [
+     773,
+     774
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "notes": "Hung across a passage two cells deep. Intact it blocks; Hecate's Torch burns it (swap in the burnt piece, which is walkable).",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "torn_1",
+   "title": "Cobweb across a 1-wide passage (burnt)",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     767
+    ],
+    [
+     775
+    ]
+   ],
+   "walk": [
+    ".",
+    "."
+   ],
+   "notes": "What the torch leaves: shreds at the walls and roof, ash on the floor. Walkable.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE",
+    "0,1": "MB_CAVE"
+   }
+  },
+  {
+   "key": "torn_2",
+   "title": "Cobweb across a 2-wide passage (burnt)",
+   "section": "cave",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     776,
+     777
+    ],
+    [
+     784,
+     785
+    ]
+   ],
+   "walk": [
+    "..",
+    ".."
+   ],
+   "notes": "What the torch leaves: shreds at the walls and roof, ash on the floor. Walkable.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE",
+    "1,0": "MB_CAVE",
+    "0,1": "MB_CAVE",
+    "1,1": "MB_CAVE"
+   }
+  },
+  {
+   "key": "web_corner_w",
+   "title": "Old webbing, west corner",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     778
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "On the floor row under a face, against a west wall.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "web_corner_e",
+   "title": "Old webbing, east corner",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     779
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "niche_supper",
+   "title": "Hecate's niche, her supper laid",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     780
+    ],
+    [
+     788
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "1x2, set into a face over its ft and fb cells. A dog's bowl on the sill.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "niche_empty",
+   "title": "Hecate's niche, the bowl empty",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     781
+    ],
+    [
+     789
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "1x2, set into a face over its ft and fb cells. A dog's bowl on the sill.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "seep",
+   "title": "A seep: the spring weeping from the rock",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     782
+    ],
+    [
+     790
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "1x2 in a face, over a pool: the underground spring's source. Its tiles are the wet grottos' seep, so it costs nothing.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "chalk_wheel",
+   "title": "Hecate's wheel in chalk, on a face",
+   "section": "cave",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     783
+    ],
+    [
+     791
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "The strophalos, drawn in Hecate's chalk: faint in light, glowing when doused.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "chalk_arrow_n",
+   "title": "Chalk arrow, n",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     792
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "Glow-paint on the floor.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "chalk_arrow_e",
+   "title": "Chalk arrow, e",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     793
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "Glow-paint on the floor.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "chalk_arrow_s",
+   "title": "Chalk arrow, s",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     794
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "Glow-paint on the floor.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "chalk_arrow_w",
+   "title": "Chalk arrow, w",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     795
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "Glow-paint on the floor.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "chalk_triangle",
+   "title": "The Three Roads, in chalk",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     796
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "Hecate's sign for a crossroads: three roads, three points.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "chalk_triangle_lit",
+   "title": "chalk triangle, on lit floor",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     797
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "chalk_arrow_n_lit",
+   "title": "chalk arrow n, on lit floor",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     798
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "chalk_arrow_s_lit",
+   "title": "chalk arrow s, on lit floor",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     799
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "bones_lit",
+   "title": "bones, on lit floor",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     800
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "pebbles_lit",
+   "title": "pebbles, on lit floor",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     801
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "hekataion",
+   "title": "The Hekataion: three faces, three torches",
+   "section": "cave",
+   "w": 3,
+   "h": 4,
+   "ids": [
+    [
+     802,
+     803,
+     804
+    ],
+    [
+     810,
+     811,
+     812
+    ],
+    [
+     818,
+     819,
+     820
+    ],
+    [
+     826,
+     827,
+     828
+    ]
+   ],
+   "walk": [
+    "TTT",
+    "XXX",
+    "XXX",
+    "XXX"
+   ],
+   "notes": "Three women back to back, one looking down each road, each holding a cold bronze torch. Stand it in lit floor. Row 0 (heads and torches) is drawn over the player; the 3x3 below blocks.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL",
+    "1,0": "MB_NORMAL",
+    "2,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "hekataion_torch_w_lit",
+   "title": "Hekataion, the w torch lit",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     805
+    ]
+   ],
+   "walk": [
+    "T"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "hekataion_torch_s_lit",
+   "title": "Hekataion, the s torch lit",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     806
+    ]
+   ],
+   "walk": [
+    "T"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "hekataion_torch_e_lit",
+   "title": "Hekataion, the e torch lit",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     807
+    ]
+   ],
+   "walk": [
+    "T"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "hekataion_torch_s_gone",
+   "title": "Hekataion, the middle torch taken",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     832
+    ]
+   ],
+   "walk": [
+    "T"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_NORMAL"
+   }
+  },
+  {
+   "key": "hekataion_no_cake",
+   "title": "Hekataion, the ledge bare",
+   "section": "cave",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     833
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "crypt_stair",
+   "title": "The crypt's stair up to Kronion Hill",
+   "section": "places",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     944,
+     945
+    ],
+    [
+     952,
+     953
+    ]
+   ],
+   "walk": [
+    "XX",
+    "^^"
+   ],
+   "notes": "2x2 in the crypt's north face. The bottom row is the way out: MB_NORTH_ARROW_WARP, to the dig pit on Kronion Hill.",
+   "names": {},
+   "behaviors": {
+    "0,1": "MB_NORTH_ARROW_WARP",
+    "1,1": "MB_NORTH_ARROW_WARP"
+   }
+  },
+  {
+   "key": "crypt_relief",
+   "title": "The relief: Rhea's stone for Kronos",
+   "section": "places",
+   "w": 2,
+   "h": 2,
+   "ids": [
+    [
+     946,
+     947
+    ],
+    [
+     954,
+     955
+    ]
+   ],
+   "walk": [
+    "XX",
+    "XX"
+   ],
+   "notes": "2x2 in a crypt face. Give it a bg event with the relief's text (SCRIPT.md).",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "sarcophagus",
+   "title": "Sarcophagus",
+   "section": "places",
+   "w": 3,
+   "h": 2,
+   "ids": [
+    [
+     948,
+     949,
+     950
+    ],
+    [
+     956,
+     957,
+     958
+    ]
+   ],
+   "walk": [
+    "XXX",
+    "XXX"
+   ],
+   "notes": "Old poros, the lid a little askew.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "altar_stone",
+   "title": "Altar stone",
+   "section": "places",
+   "w": 2,
+   "h": 1,
+   "ids": [
+    [
+     960,
+     961
+    ]
+   ],
+   "walk": [
+    "XX"
+   ],
+   "notes": "A rough block with a libation hollow.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "dig_crypt",
+   "title": "Dig spot, on the slabs",
+   "section": "places",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     962
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "The crypt's fixed dig (a Kronos sherd).",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "dig",
+   "title": "Dig spot",
+   "section": "places",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     963
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "A fixed dig in a cave or grotto floor.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "boat",
+   "title": "A fisher's boat, moored",
+   "section": "places",
+   "w": 3,
+   "h": 2,
+   "ids": [
+    [
+     964,
+     965,
+     966
+    ],
+    [
+     972,
+     973,
+     974
+    ]
+   ],
+   "walk": [
+    "XXX",
+    "XXX"
+   ],
+   "notes": "On still water, bow west, rope to a mooring post. Impassable.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "mooring_post",
+   "title": "Mooring post",
+   "section": "places",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     967
+    ]
+   ],
+   "walk": [
+    "X"
+   ],
+   "notes": "The boat's rope is tied here; set it on the shore west of the bow.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "tide_pool",
+   "title": "Tide pool",
+   "section": "places",
+   "w": 3,
+   "h": 2,
+   "ids": [
+    [
+     976,
+     977,
+     978
+    ],
+    [
+     984,
+     985,
+     986
+    ]
+   ],
+   "walk": [
+    "XXX",
+    "XXX"
+   ],
+   "notes": "A rock pool with anemones, a starfish and weed. Impassable.",
+   "names": {},
+   "behaviors": {}
+  },
+  {
+   "key": "salt",
+   "title": "Salt crust",
+   "section": "places",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     979
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "The Salt Grotto's floor, crusted white. Walkable.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "shingle",
+   "title": "Shingle",
+   "section": "places",
+   "w": 1,
+   "h": 1,
+   "ids": [
+    [
+     980
+    ]
+   ],
+   "walk": [
+    "."
+   ],
+   "notes": "Sea-worn pebbles at a grotto's shore. Walkable.",
+   "names": {},
+   "behaviors": {
+    "0,0": "MB_CAVE"
+   }
+  },
+  {
+   "key": "shell_shrine",
+   "title": "Glaukos's shrine of shells",
+   "section": "places",
+   "w": 1,
+   "h": 2,
+   "ids": [
+    [
+     981
+    ],
+    [
+     989
+    ]
+   ],
+   "walk": [
+    "X",
+    "X"
+   ],
+   "notes": "1x2 in a wet face. A tiny shrine of shells; someone scratched a name: GLAUKOS.",
+   "names": {},
+   "behaviors": {}
+  }
+ ],
+ "kit": {
+  "T|...": 512,
+  "T|...|ne": 513,
+  "T|...|ne,nw": 514,
+  "T|...|ne,se": 515,
+  "T|...|ne,sw": 516,
+  "T|...|nw": 517,
+  "T|...|nw,se": 518,
+  "T|...|nw,sw": 519,
+  "T|...|se": 520,
+  "T|...|se,sw": 521,
+  "T|...|sw": 522,
+  "T|..E": 523,
+  "T|..E|nw": 524,
+  "T|..E|nw,sw": 525,
+  "T|..E|sw": 526,
+  "T|.W.": 527,
+  "T|.W.|ne": 528,
+  "T|.W.|ne,se": 529,
+  "T|.W.|se": 530,
+  "T|.WE": 531,
+  "T|N..": 532,
+  "T|N..|se": 533,
+  "T|N..|se,sw": 534,
+  "T|N..|sw": 535,
+  "T|N.E": 536,
+  "T|N.E|sw": 537,
+  "T|NW.": 538,
+  "T|NW.|se": 539,
+  "T|NWE": 540,
+  "ft|A|A": 541,
+  "ft|A|B": 542,
+  "ft|A|C": 543,
+  "ft|A|D": 544,
+  "ft|A|end": 545,
+  "ft|A|inner": 546,
+  "ft|B|A": 547,
+  "ft|B|B": 548,
+  "ft|B|C": 549,
+  "ft|B|D": 550,
+  "ft|B|end": 551,
+  "ft|B|inner": 552,
+  "ft|C|A": 553,
+  "ft|C|B": 554,
+  "ft|C|C": 555,
+  "ft|C|D": 556,
+  "ft|C|end": 557,
+  "ft|C|inner": 558,
+  "ft|D|A": 559,
+  "ft|D|B": 560,
+  "ft|D|C": 561,
+  "ft|D|D": 562,
+  "ft|D|end": 563,
+  "ft|D|inner": 564,
+  "ft|end|A": 565,
+  "ft|end|B": 566,
+  "ft|end|C": 567,
+  "ft|end|D": 568,
+  "ft|end|end": 569,
+  "ft|end|inner": 570,
+  "ft|inner|A": 571,
+  "ft|inner|B": 572,
+  "ft|inner|C": 573,
+  "ft|inner|D": 574,
+  "ft|inner|end": 575,
+  "ft|inner|inner": 576,
+  "fb|A|A": 577,
+  "fb|A|B": 578,
+  "fb|A|C": 579,
+  "fb|A|D": 580,
+  "fb|A|end": 581,
+  "fb|A|inner": 582,
+  "fb|B|A": 583,
+  "fb|B|B": 584,
+  "fb|B|C": 585,
+  "fb|B|D": 586,
+  "fb|B|end": 587,
+  "fb|B|inner": 588,
+  "fb|C|A": 589,
+  "fb|C|B": 590,
+  "fb|C|C": 591,
+  "fb|C|D": 592,
+  "fb|C|end": 593,
+  "fb|C|inner": 594,
+  "fb|D|A": 595,
+  "fb|D|B": 596,
+  "fb|D|C": 597,
+  "fb|D|D": 598,
+  "fb|D|end": 599,
+  "fb|D|inner": 600,
+  "fb|end|A": 601,
+  "fb|end|B": 602,
+  "fb|end|C": 603,
+  "fb|end|D": 604,
+  "fb|end|end": 605,
+  "fb|end|inner": 606,
+  "fb|inner|A": 607,
+  "fb|inner|B": 608,
+  "fb|inner|C": 609,
+  "fb|inner|D": 610,
+  "fb|inner|end": 611,
+  "fb|inner|inner": 612,
+  "floor|..": 613,
+  "floor|..|nw": 614,
+  "floor|..|v2": 615,
+  "floor|.W": 616,
+  "floor|N.": 617,
+  "floor|NW": 618,
+  "lit|....": 619,
+  "lit|....|ne": 620,
+  "lit|....|ne,nw": 621,
+  "lit|....|ne,se": 622,
+  "lit|....|ne,sw": 623,
+  "lit|....|nw": 624,
+  "lit|....|nw,se": 625,
+  "lit|....|nw,sw": 626,
+  "lit|....|se": 627,
+  "lit|....|se,sw": 628,
+  "lit|....|sw": 629,
+  "lit|...E": 630,
+  "lit|...E|nw": 631,
+  "lit|...E|nw,sw": 632,
+  "lit|...E|sw": 633,
+  "lit|..W.": 634,
+  "lit|..W.|ne": 635,
+  "lit|..W.|ne,se": 636,
+  "lit|..W.|se": 637,
+  "lit|..WE": 638,
+  "lit|.S..": 639,
+  "lit|.S..|ne": 640,
+  "lit|.S..|ne,nw": 641,
+  "lit|.S..|nw": 642,
+  "lit|.S.E": 643,
+  "lit|.S.E|nw": 644,
+  "lit|.SW.": 645,
+  "lit|.SW.|ne": 646,
+  "lit|.SWE": 647,
+  "lit|N...": 648,
+  "lit|N...|se": 649,
+  "lit|N...|se,sw": 650,
+  "lit|N...|sw": 651,
+  "lit|N..E": 652,
+  "lit|N..E|sw": 653,
+  "lit|N.W.": 654,
+  "lit|N.W.|se": 655,
+  "lit|N.WE": 656,
+  "lit|NS..": 657,
+  "lit|NS.E": 658,
+  "lit|NSW.": 659,
+  "lit|NSWE": 660,
+  "water|....": 661,
+  "water|....|ne": 662,
+  "water|....|ne,nw": 663,
+  "water|....|ne,se": 664,
+  "water|....|ne,sw": 665,
+  "water|....|nw": 666,
+  "water|....|nw,se": 667,
+  "water|....|nw,sw": 668,
+  "water|....|se": 669,
+  "water|....|se,sw": 670,
+  "water|....|sw": 671,
+  "water|...E": 672,
+  "water|...E|nw": 673,
+  "water|...E|nw,sw": 674,
+  "water|...E|sw": 675,
+  "water|..W.": 676,
+  "water|..W.|ne": 677,
+  "water|..W.|ne,se": 678,
+  "water|..W.|se": 679,
+  "water|..WE": 680,
+  "water|.S..": 681,
+  "water|.S..|ne": 682,
+  "water|.S..|ne,nw": 683,
+  "water|.S..|nw": 684,
+  "water|.S.E": 685,
+  "water|.S.E|nw": 686,
+  "water|.SW.": 687,
+  "water|.SW.|ne": 688,
+  "water|.SWE": 689,
+  "water|N...": 690,
+  "water|N...|se": 691,
+  "water|N...|se,sw": 692,
+  "water|N...|sw": 693,
+  "water|N..E": 694,
+  "water|N..E|sw": 695,
+  "water|N.W.": 696,
+  "water|N.W.|se": 697,
+  "water|N.WE": 698,
+  "water|NS..": 699,
+  "water|NS.E": 700,
+  "water|NSW.": 701,
+  "water|NSWE": 702
+ },
+ "styles": {
+  "crypt": {
+   "T|...": 848,
+   "T|...|nw": 849,
+   "T|...|ne": 850,
+   "T|...|sw": 851,
+   "T|...|se": 852,
+   "T|..E": 853,
+   "T|..E|nw": 854,
+   "T|..E|sw": 855,
+   "T|.W.": 856,
+   "T|.W.|ne": 857,
+   "T|.W.|se": 858,
+   "T|.WE": 859,
+   "T|N..": 860,
+   "T|N..|sw": 861,
+   "T|N..|se": 862,
+   "T|N.E": 863,
+   "T|N.E|sw": 864,
+   "T|NW.": 865,
+   "T|NW.|se": 866,
+   "T|NWE": 867,
+   "ft|A|B": 868,
+   "ft|A|end": 869,
+   "ft|A|inner": 870,
+   "ft|end|B": 871,
+   "ft|end|end": 872,
+   "ft|end|inner": 873,
+   "ft|inner|B": 874,
+   "ft|inner|end": 875,
+   "ft|inner|inner": 876,
+   "fb|A|B": 877,
+   "fb|A|end": 878,
+   "fb|A|inner": 879,
+   "fb|end|B": 880,
+   "fb|end|end": 881,
+   "fb|end|inner": 882,
+   "fb|inner|B": 883,
+   "fb|inner|end": 884,
+   "fb|inner|inner": 885,
+   "floor|..": 886,
+   "floor|N.": 887,
+   "floor|.W": 888,
+   "floor|NW": 889,
+   "floor|..|nw": 890,
+   "floor|..|v2": 891
+  },
+  "wet": {
+   "T|...": 892,
+   "T|...|nw": 893,
+   "T|...|ne": 894,
+   "T|...|sw": 895,
+   "T|...|se": 896,
+   "T|..E": 897,
+   "T|..E|nw": 898,
+   "T|..E|sw": 899,
+   "T|.W.": 900,
+   "T|.W.|ne": 901,
+   "T|.W.|se": 902,
+   "T|.WE": 903,
+   "T|N..": 904,
+   "T|N..|sw": 905,
+   "T|N..|se": 906,
+   "T|N.E": 907,
+   "T|N.E|sw": 908,
+   "T|NW.": 909,
+   "T|NW.|se": 910,
+   "T|NWE": 911,
+   "ft|A|C": 912,
+   "ft|A|weed": 913,
+   "ft|A|end": 914,
+   "ft|A|inner": 915,
+   "ft|wet|C": 916,
+   "ft|wet|weed": 917,
+   "ft|wet|end": 918,
+   "ft|wet|inner": 919,
+   "ft|end|C": 920,
+   "ft|end|weed": 921,
+   "ft|end|end": 922,
+   "ft|end|inner": 923,
+   "ft|inner|C": 924,
+   "ft|inner|weed": 925,
+   "ft|inner|end": 926,
+   "ft|inner|inner": 927,
+   "fb|A|C": 928,
+   "fb|A|weed": 929,
+   "fb|A|end": 930,
+   "fb|A|inner": 931,
+   "fb|wet|C": 932,
+   "fb|wet|weed": 933,
+   "fb|wet|end": 934,
+   "fb|wet|inner": 935,
+   "fb|end|C": 936,
+   "fb|end|weed": 937,
+   "fb|end|end": 938,
+   "fb|end|inner": 939,
+   "fb|inner|C": 940,
+   "fb|inner|weed": 941,
+   "fb|inner|end": 942,
+   "fb|inner|inner": 943
+  }
+ }
+}
