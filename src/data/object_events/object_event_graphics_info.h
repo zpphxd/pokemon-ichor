@@ -7225,3 +7225,96 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSAnne = {
 };
 
 #endif // IS_FRLG
+
+// Ichor object events. Standard 16x32 walkers share OBJ_EVENT_PAL_TAG_ICHOR_CAST;
+// paletteSlot is not read by the engine (palettes load by tag).
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleon = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_IchorKleon,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorProfessorDaphne = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_IchorProfessorDaphne,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAlethea = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_IchorAlethea,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHierophantIone = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_IchorHierophantIone,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTitanGrunt = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_IchorTitanGrunt,
+};
+// End of Ichor object events

@@ -2494,3 +2494,25 @@ static const struct SpriteFrameImage sPicTable_MomFrlg[] = {
 };
 
 #endif // IS_FRLG
+
+// Ichor object events
+static const struct SpriteFrameImage sPicTable_IchorKleon[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKleon, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorProfessorDaphne[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorProfessorDaphne, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAlethea[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAlethea, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorHierophantIone[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHierophantIone, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorTitanGrunt[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorTitanGrunt, 2, 4),
+};
+// End of Ichor object events
