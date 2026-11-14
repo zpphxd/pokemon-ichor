@@ -2977,6 +2977,8 @@ Nothing here touches the avoid-list.
 
 ## 8.6 Decisions for the user
 
+> **Approved by the user, 2026-11-14:** S1 (Mom begged the Fates), S3 (Elpis's forged oracle), S2/S4/S5 (Rhea as Kleon's mother, Iapetos as the Keeper, the Archon's secret and Medon's Knot), and every other decision as recommended. PITCH.md §2 and §4 have been updated to match.
+
 Each decision has a recommendation. The ones marked **★** carry the most weight in the story.
 
 | # | Decision | Recommendation | Alternative |
