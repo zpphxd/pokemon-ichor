@@ -1,1 +1,419 @@
-mapscripts AktiTown_MapScripts {}
+// Akti Town: the harbor of Kalliste. SCRIPT.md beats 6 and 8, and the Akti roster.
+//
+// Scene state lives in flags, and the coord triggers are gated by temp vars that
+// ON_TRANSITION sets from them:
+//   VAR_TEMP_1 == 0  the arrival scene (beat 6) waits on the south road
+//   VAR_TEMP_2 == 1  beat 8 part 1 plays as soon as the player steps out of the temple
+//   VAR_TEMP_2 == 2  ...or, if they came in another way, on the temple doorstep (19,17)
+//   VAR_TEMP_3 == 1  beat 8 part 2 waits on the quay, on the line x = 10 (rows 9-11),
+//                    the only way into the trireme's end of the quay
+// FLAG_ICHOR_HIDE_ALETHEA_AKTI doubles as "part 1 has not played yet": it is set
+// until the Hearth Laurel, cleared by part 1 and set again when the slice ends.
+
+mapscripts AktiTown_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_VISITED_AKTI)
+        if (flag(FLAG_ICHOR_ARRIVED_AKTI)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+        if (flag(FLAG_ICHOR_SLICE_COMPLETE)) {
+            setflag(FLAG_ICHOR_HIDE_KLEON_AKTI)
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
+        } elif (!flag(FLAG_BADGE01_GET)) {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
+        } elif (flag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)) {
+            setvar(VAR_TEMP_2, 1)
+        } else {
+            setvar(VAR_TEMP_3, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_2, 1: AktiTown_EventScript_HarborPart1Check
+    ]
+}
+
+// ---------------------------------------------------------------------------
+// Speakers
+// ---------------------------------------------------------------------------
+
+text AktiTown_Text_NameDiktys { "DIKTYS" }
+text AktiTown_Text_NameNausikles { "NAUSIKLES" }
+text AktiTown_Text_NameKleon { "KLEON" }
+text AktiTown_Text_NameAlethea { "ALETHEA" }
+text AktiTown_Text_NameHydna { "HYDNA" }
+
+// ---------------------------------------------------------------------------
+// Beat 6: arriving in Akti. Diktys gets up from his nets and meets the player
+// on the south road. One trigger per seam column, so he walks to the right spot.
+// ---------------------------------------------------------------------------
+
+script AktiTown_EventScript_ArrivalX10 {
+    setvar(VAR_0x8008, 10)
+    goto(AktiTown_EventScript_Arrival)
+}
+
+script AktiTown_EventScript_ArrivalX11 {
+    setvar(VAR_0x8008, 11)
+    goto(AktiTown_EventScript_Arrival)
+}
+
+script AktiTown_EventScript_ArrivalX12 {
+    setvar(VAR_0x8008, 12)
+    goto(AktiTown_EventScript_Arrival)
+}
+
+script AktiTown_EventScript_ArrivalX13 {
+    setvar(VAR_0x8008, 13)
+    goto(AktiTown_EventScript_Arrival)
+}
+
+script AktiTown_EventScript_Arrival {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    setflag(FLAG_ICHOR_ARRIVED_AKTI)
+    // Director's brief: once the player has been to Akti, a whiteout brings them here.
+    setrespawn(HEAL_LOCATION_AKTI_TOWN)
+    playse(SE_PIN)
+    applymovement(LOCALID_AKTI_DIKTYS, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    switch (var(VAR_0x8008)) {
+        case 10: applymovement(LOCALID_AKTI_DIKTYS, AktiTown_Movement_DiktysToX10)
+        case 11: applymovement(LOCALID_AKTI_DIKTYS, AktiTown_Movement_DiktysToX11)
+        case 12: applymovement(LOCALID_AKTI_DIKTYS, AktiTown_Movement_DiktysToX12)
+        default: applymovement(LOCALID_AKTI_DIKTYS, AktiTown_Movement_DiktysToX13)
+    }
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(AktiTown_Text_NameDiktys)
+    msgbox(format("A traveler! From the festival, by the look of those sandals.\p"
+                  "Welcome to Akti. Here's the whole town in one breath:\p"
+                  "Asclepeion on your left, for tired Pokémon.\p"
+                  "Temple of Hestia on your right, for tired challengers.\p"
+                  "Agora up the hill. And the sea straight ahead. Can't miss it.\p"
+                  "I tried once. Fell right in."))
+    closemessage
+    switch (var(VAR_0x8008)) {
+        case 10: applymovement(LOCALID_AKTI_DIKTYS, AktiTown_Movement_DiktysFromX10)
+        case 11: applymovement(LOCALID_AKTI_DIKTYS, AktiTown_Movement_DiktysFromX11)
+        case 12: applymovement(LOCALID_AKTI_DIKTYS, AktiTown_Movement_DiktysFromX12)
+        default: applymovement(LOCALID_AKTI_DIKTYS, AktiTown_Movement_DiktysFromX13)
+    }
+    waitmovement(0)
+    releaseall
+}
+
+// Diktys sits at (9,23); he stops just north of the player on the road.
+movement AktiTown_Movement_DiktysToX10 { walk_right walk_down }
+movement AktiTown_Movement_DiktysToX11 { walk_right * 2 walk_down }
+movement AktiTown_Movement_DiktysToX12 { walk_right * 3 walk_down }
+movement AktiTown_Movement_DiktysToX13 { walk_right * 4 walk_down }
+movement AktiTown_Movement_DiktysFromX10 { walk_up walk_left face_right }
+movement AktiTown_Movement_DiktysFromX11 { walk_up walk_left * 2 face_right }
+movement AktiTown_Movement_DiktysFromX12 { walk_up walk_left * 3 face_right }
+movement AktiTown_Movement_DiktysFromX13 { walk_up walk_left * 4 face_right }
+movement AktiTown_Movement_FaceUp { face_up }
+movement AktiTown_Movement_FaceDown { face_down }
+movement AktiTown_Movement_FaceLeft { face_left }
+movement AktiTown_Movement_FaceRight { face_right }
+
+// ---------------------------------------------------------------------------
+// Beat 8, part 1: Alethea finds the player on the temple doorstep.
+// ---------------------------------------------------------------------------
+
+script AktiTown_EventScript_HarborPart1Check {
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) == 19 && var(VAR_0x8005) == 17) {
+        goto(AktiTown_EventScript_HarborPart1)
+    }
+    // Not fresh out of the temple (a whiteout, say): wait on the doorstep instead.
+    setvar(VAR_TEMP_2, 2)
+    end
+}
+
+script AktiTown_EventScript_HarborPart1 {
+    lockall
+    setvar(VAR_TEMP_2, 0)
+    clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
+    setobjectxyperm(LOCALID_AKTI_ALETHEA, 12, 27)
+    addobject(LOCALID_AKTI_ALETHEA)
+    applymovement(LOCALID_AKTI_ALETHEA, AktiTown_Movement_AletheaRunsToTemple)
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(AktiTown_Text_NameAlethea)
+    msgbox(format("{PLAYER}! You did it! Let me see the laurel.\p"
+                  "…It smells like woodsmoke. And soup?\p"
+                  "I showed Daphne the tablet. She went very quiet.\p"
+                  "She thinks “where the grain goes underground” means Eleusa.\p"
+                  "On the mainland. Where they keep the Mysteries.\p"
+                  "So, truthfully? We need a ship. Come on, the quay!"))
+    closemessage
+    applymovement(LOCALID_AKTI_ALETHEA, AktiTown_Movement_AletheaHeadsForQuay)
+    waitmovement(0)
+    // She is off screen now: put her by the trireme, where part 2 finds her.
+    removeobject(LOCALID_AKTI_ALETHEA)
+    setobjectxyperm(LOCALID_AKTI_ALETHEA, 7, 10)
+    addobject(LOCALID_AKTI_ALETHEA)
+    setvar(VAR_TEMP_3, 1)
+    releaseall
+}
+
+// From the south road (12,27), just off screen, across the plaza and up to the
+// foot of the temple stairs (19,18), below the player.
+movement AktiTown_Movement_AletheaRunsToTemple {
+    walk_fast_up * 8
+    walk_fast_right * 7
+    walk_fast_up
+    face_up
+}
+
+// Back across the plaza and up the harbor street, out of sight of the temple.
+movement AktiTown_Movement_AletheaHeadsForQuay {
+    walk_down
+    walk_left * 6
+    walk_up * 7
+}
+
+// ---------------------------------------------------------------------------
+// Beat 8, part 2: the trireme that sails when the winds turn.
+// The player crosses x = 10 on the quay and walks up to the group: Nausikles on
+// the trireme's steps at (7,9) with the rower beside him at (8,9), Alethea at
+// (7,10) and Kleon at (5,10). The player ends at (8,10), beside Alethea.
+// ---------------------------------------------------------------------------
+
+script AktiTown_EventScript_HarborPart2Row9 {
+    setvar(VAR_0x8008, 9)
+    goto(AktiTown_EventScript_HarborPart2)
+}
+
+script AktiTown_EventScript_HarborPart2Row10 {
+    setvar(VAR_0x8008, 10)
+    goto(AktiTown_EventScript_HarborPart2)
+}
+
+script AktiTown_EventScript_HarborPart2Row11 {
+    setvar(VAR_0x8008, 11)
+    goto(AktiTown_EventScript_HarborPart2)
+}
+
+// Talking to the group first (the player is already beside them).
+script AktiTown_EventScript_HarborPart2Talk {
+    setvar(VAR_0x8008, 0)
+    goto(AktiTown_EventScript_HarborPart2)
+}
+
+script AktiTown_EventScript_HarborPart2 {
+    lockall
+    setvar(VAR_TEMP_3, 0)
+    switch (var(VAR_0x8008)) {
+        case 9: applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_PlayerToQuayFrom9)
+        case 10: applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_PlayerToQuayFrom10)
+        case 11: applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_PlayerToQuayFrom11)
+    }
+    waitmovement(0)
+    applymovement(LOCALID_AKTI_ALETHEA, AktiTown_Movement_FaceUp)
+    applymovement(LOCALID_AKTI_NAUSIKLES, AktiTown_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(AktiTown_Text_NameAlethea)
+    msgbox(format("Captain! Two for the mainland. Emporion, please."))
+    setspeaker(AktiTown_Text_NameNausikles)
+    msgbox(format("Gladly. The Euploia sails the moment the winds turn."))
+    setspeaker(AktiTown_Text_NameAlethea)
+    msgbox(format("And when will that be?"))
+    setspeaker(AktiTown_Text_NameNausikles)
+    msgbox(format("Ha! It's halcyon days, girl. The kingfishers are nesting.\p"
+                  "Aeolus keeps the sea flat as a plate until they're done.\p"
+                  "A few days. A week. Ask the birds, not me.\p"
+                  "Strange year, though. They nested early.\p"
+                  "And the tide's been running backward at night. Never seen it."))
+    applymovement(LOCALID_AKTI_KLEON, AktiTown_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(AktiTown_Text_NameKleon)
+    msgbox(format("A week?! I'll have beaten Ione three times by then.\p"
+                  "…You've got the laurel. Already.\p"
+                  "Of course you do.\p"
+                  "Fine. I'll win mine tomorrow. Then we race to the mainland.\p"
+                  "First to the next laurel wins. Deal?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Ha! Deal. Try to keep up, shipmate."))
+    } else {
+        msgbox(format("Too bad. It's a deal anyway. Lakonians don't take “no.”"))
+    }
+    closemessage
+    applymovement(LOCALID_AKTI_KLEON, AktiTown_Movement_KleonLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_AKTI_KLEON)
+    setflag(FLAG_ICHOR_HIDE_KLEON_AKTI)
+    applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_FaceUp)
+    waitmovement(0)
+    delay(60)
+    msgbox(format("The ribbon on the trireme's mast hangs perfectly still.\p"
+                  "Across the flat water, the mainland waits."))
+    closemessage
+    setflag(FLAG_ICHOR_SLICE_COMPLETE)
+    // Playtest ending: a word on a black screen, then back to the harbor to fish.
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_AKTI_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
+    delay(30)
+    msgbox(format("Thank you for playing the Kalliste preview of Pokémon Ichor."))
+    closemessage
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    releaseall
+}
+
+movement AktiTown_Movement_PlayerToQuayFrom9 { walk_down walk_left * 2 face_left }
+movement AktiTown_Movement_PlayerToQuayFrom10 { walk_left * 2 face_left }
+movement AktiTown_Movement_PlayerToQuayFrom11 { walk_up walk_left * 2 face_left }
+
+// Off toward the Asclepeion: along the back of the quay and down the harbor street.
+movement AktiTown_Movement_KleonLeaves {
+    walk_down
+    walk_right * 6
+    walk_down * 5
+}
+
+// ---------------------------------------------------------------------------
+// The people of Akti
+// ---------------------------------------------------------------------------
+
+script AktiTown_EventScript_Diktys {
+    lock
+    faceplayer
+    setspeaker(AktiTown_Text_NameDiktys)
+    msgbox(format("Mending nets. Mending boats. Mostly mending my pride.\p"
+                  "My grandfather pulled a whole chest out of the sea once.\p"
+                  "Had a woman and a baby in it. Or so he said. He drank."))
+    release
+}
+
+script AktiTown_EventScript_Nausikles {
+    if (flag(FLAG_BADGE01_GET) && !flag(FLAG_ICHOR_SLICE_COMPLETE) && !flag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)) {
+        goto(AktiTown_EventScript_HarborPart2Talk)
+    }
+    lock
+    faceplayer
+    setspeaker(AktiTown_Text_NameNausikles)
+    if (flag(FLAG_ICHOR_SLICE_COMPLETE)) {
+        msgbox(format("Still flat. Still waiting. Go catch something, I'll shout."))
+    } elif (flag(FLAG_BADGE01_GET)) {
+        msgbox(format("We sail when the winds turn, and they haven't."))
+    } else {
+        msgbox(format("The mainland? Not without a laurel, young one.\p"
+                      "Emporion won't let you off the dock without one.\p"
+                      "Besides. We sail when the winds turn, and they haven't."))
+    }
+    release
+}
+
+script AktiTown_EventScript_Kleon {
+    if (flag(FLAG_BADGE01_GET) && !flag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)) {
+        goto(AktiTown_EventScript_HarborPart2Talk)
+    }
+    lock
+    faceplayer
+    setspeaker(AktiTown_Text_NameKleon)
+    msgbox(format("Don't ask how it went with Ione.\p"
+                  "…Fine. She beat me. Then she fed me soup.\p"
+                  "Soup! I've never been so insulted in my life.\p"
+                  "Tomorrow I'll beat her. Then I'll eat the soup. Out of respect."))
+    release
+}
+
+script AktiTown_EventScript_Alethea {
+    if (!flag(FLAG_ICHOR_SLICE_COMPLETE)) {
+        goto(AktiTown_EventScript_HarborPart2Talk)
+    }
+    end
+}
+
+script AktiTown_EventScript_Rower {
+    msgbox(format("Wind.\p"
+                  "…None.\p"
+                  "That was a whole Lakonian weather report."), MSGBOX_NPC)
+}
+
+script AktiTown_EventScript_Hydna {
+    lock
+    faceplayer
+    setspeaker(AktiTown_Text_NameHydna)
+    if (flag(FLAG_ICHOR_GOT_MYSTIC_WATER)) {
+        msgbox(format("The water's been strange at night. Too still. Even for halcyon days."))
+        release
+        end
+    }
+    msgbox(format("I dive for sponges. Holding my breath is the easy part.\p"
+                  "Found this on the seabed yesterday. Bad luck to keep sea-gifts."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_MYSTIC_WATER)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_MYSTIC_WATER)
+    setspeaker(AktiTown_Text_NameHydna)
+    msgbox(format("Give it to your Water Pokémon. The sea likes to be shared."))
+    release
+}
+
+script AktiTown_EventScript_Fishwife {
+    msgbox(format("Octopus! Fresh octopus! Still arguing!"), MSGBOX_NPC)
+}
+
+script AktiTown_EventScript_OldWoman {
+    msgbox(format("Ione keeps the fire. Her mother kept it. Her mother's mother.\p"
+                  "It hasn't gone out in three hundred years.\p"
+                  "Well. Once. But we don't talk about that."), MSGBOX_NPC)
+}
+
+script AktiTown_EventScript_Pilgrim {
+    msgbox(format("I'm just back from Delphoi. Long way to go for so little.\p"
+                  "The Pythia used to give whole verses. Riddles, rhymes.\p"
+                  "Now it's one word. Sometimes only “soon.”"), MSGBOX_NPC)
+}
+
+script AktiTown_EventScript_Kid {
+    msgbox(format("When I grow up I'm going to be a Hierophant. Of fish.\p"
+                  "There's no temple for fish. That's why it's a good idea."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// Signs and scenery
+// ---------------------------------------------------------------------------
+
+script AktiTown_EventScript_TownSign {
+    msgbox(format("AKTI TOWN\nHarbor of Kalliste. Mind the nets."), MSGBOX_SIGN)
+}
+
+script AktiTown_EventScript_TempleSign {
+    msgbox(format("TEMPLE OF HESTIA\nHierophant: Ione, the Hearthkeeper.\p"
+                  "All guests welcome. All guests fed."), MSGBOX_SIGN)
+}
+
+script AktiTown_EventScript_AsclepeionSign {
+    msgbox(format("ASCLEPEION\nRest for Pokémon and the weary, by the grace of Asclepius."), MSGBOX_SIGN)
+}
+
+script AktiTown_EventScript_AgoraSign {
+    msgbox(format("AGORA\nFair goods at fair prices. Mostly fair."), MSGBOX_SIGN)
+}
+
+script AktiTown_EventScript_QuaySign {
+    msgbox(format("THE QUAY\nTrireme to the mainland sails when the winds turn."), MSGBOX_SIGN)
+}
+
+script AktiTown_EventScript_FishersHouseSign {
+    msgbox(format("GLAUKOS. Gone fishing.\n(Not really. Knock.)"), MSGBOX_SIGN)
+}
+
+// Not in SCRIPT.md: a shut house and Poseidon's harbor shrine need a line each.
+script AktiTown_EventScript_ShutHouse {
+    msgbox(format("The door is barred. Everyone's down at the harbor."), MSGBOX_SIGN)
+}
+
+script AktiTown_EventScript_PoseidonShrine {
+    msgbox(format("A little shrine to Poseidon. Someone has left him a conch."), MSGBOX_SIGN)
+}

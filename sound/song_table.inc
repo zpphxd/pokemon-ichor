@@ -358,9 +358,9 @@ gSongTable::
 	song dummy_song_header, MUSIC_PLAYER_BGM, 0
 	song mus_littleroot_test, MUSIC_PLAYER_BGM, 0
 	song mus_gsc_route38, MUSIC_PLAYER_BGM, 0
-	song mus_caught, MUSIC_PLAYER_BGM, 0
-	song mus_victory_wild, MUSIC_PLAYER_BGM, 0
-	song mus_victory_gym_leader, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_caught, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_caught
+	song mus_ichor_victory_wild, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_victory_wild
+	song mus_ichor_victory_laurel, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_victory_gym_leader
 	song mus_victory_league, MUSIC_PLAYER_BGM, 0
 	song mus_c_comm_center, MUSIC_PLAYER_BGM, 0
 	song mus_gsc_pewter, MUSIC_PLAYER_BGM, 0
@@ -373,20 +373,20 @@ gSongTable::
 	song mus_gym, MUSIC_PLAYER_BGM, 0
 	song mus_surf, MUSIC_PLAYER_BGM, 0
 	song mus_petalburg_woods, MUSIC_PLAYER_BGM, 0
-	song mus_level_up, MUSIC_PLAYER_SE2, 2
-	song mus_heal, MUSIC_PLAYER_SE2, 2
-	song mus_obtain_badge, MUSIC_PLAYER_SE2, 2
-	song mus_obtain_item, MUSIC_PLAYER_SE2, 2
-	song mus_evolved, MUSIC_PLAYER_SE2, 2
-	song mus_obtain_tmhm, MUSIC_PLAYER_SE2, 2
+	song mus_ichor_level_up, MUSIC_PLAYER_SE2, 2 @ Ichor: was mus_level_up
+	song mus_ichor_heal, MUSIC_PLAYER_SE2, 2 @ Ichor: was mus_heal
+	song mus_ichor_obtain_badge, MUSIC_PLAYER_SE2, 2 @ Ichor: was mus_obtain_badge
+	song mus_ichor_obtain_item, MUSIC_PLAYER_SE2, 2 @ Ichor: was mus_obtain_item
+	song mus_ichor_evolved, MUSIC_PLAYER_SE2, 2 @ Ichor: was mus_evolved
+	song mus_ichor_obtain_tmhm, MUSIC_PLAYER_SE2, 2 @ Ichor: was mus_obtain_tmhm
 	song mus_lilycove_museum, MUSIC_PLAYER_BGM, 0
 	song mus_route122, MUSIC_PLAYER_BGM, 0
 	song mus_oceanic_museum, MUSIC_PLAYER_BGM, 0
-	song mus_evolution_intro, MUSIC_PLAYER_SE2, 2
-	song mus_evolution, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_evolution_intro, MUSIC_PLAYER_SE2, 2 @ Ichor: was mus_evolution_intro
+	song mus_ichor_evolution, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_evolution
 	song mus_move_deleted, MUSIC_PLAYER_SE2, 2
 	song mus_encounter_girl, MUSIC_PLAYER_BGM, 0
-	song mus_encounter_male, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_encounter_male, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_encounter_male
 	song mus_abandoned_ship, MUSIC_PLAYER_BGM, 0
 	song mus_fortree, MUSIC_PLAYER_BGM, 0
 	song mus_birch_lab, MUSIC_PLAYER_BGM, 0
@@ -413,24 +413,24 @@ gSongTable::
 	song mus_poke_mart, MUSIC_PLAYER_BGM, 0
 	song mus_littleroot, MUSIC_PLAYER_BGM, 0
 	song mus_mt_chimney, MUSIC_PLAYER_BGM, 0
-	song mus_encounter_female, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_encounter_female, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_encounter_female
 	song mus_lilycove, MUSIC_PLAYER_BGM, 0
 	song mus_route111, MUSIC_PLAYER_BGM, 0
 	song mus_help, MUSIC_PLAYER_BGM, 0
 	song mus_underwater, MUSIC_PLAYER_BGM, 0
-	song mus_victory_trainer, MUSIC_PLAYER_BGM, 0
-	song mus_title, MUSIC_PLAYER_BGM, 0
-	song mus_intro, MUSIC_PLAYER_BGM, 0
-	song mus_encounter_may, MUSIC_PLAYER_BGM, 0
-	song mus_encounter_intense, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_victory_trainer, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_victory_trainer
+	song mus_ichor_title, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_title
+	song mus_ichor_intro, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_intro
+	song mus_ichor_encounter_rival, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_encounter_may
+	song mus_ichor_encounter_intense, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_encounter_intense
 	song mus_encounter_cool, MUSIC_PLAYER_BGM, 0
 	song mus_route113, MUSIC_PLAYER_BGM, 0
 	song mus_encounter_aqua, MUSIC_PLAYER_BGM, 0
 	song mus_follow_me, MUSIC_PLAYER_BGM, 0
-	song mus_encounter_brendan, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_encounter_rival, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_encounter_brendan
 	song mus_ever_grande, MUSIC_PLAYER_BGM, 0
-	song mus_encounter_suspicious, MUSIC_PLAYER_BGM, 0
-	song mus_victory_aqua_magma, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_encounter_suspicious, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_encounter_suspicious
+	song mus_ichor_victory_titan, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_victory_aqua_magma
 	song mus_cable_car, MUSIC_PLAYER_BGM, 0
 	song mus_game_corner, MUSIC_PLAYER_BGM, 0
 	song mus_dewford, MUSIC_PLAYER_BGM, 0
@@ -447,7 +447,7 @@ gSongTable::
 	song mus_sealed_chamber, MUSIC_PLAYER_BGM, 0
 	song mus_contest_winner, MUSIC_PLAYER_BGM, 0
 	song mus_contest, MUSIC_PLAYER_BGM, 0
-	song mus_encounter_magma, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_encounter_titan, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_encounter_magma
 	song mus_intro_battle, MUSIC_PLAYER_BGM, 0
 	song mus_abnormal_weather, MUSIC_PLAYER_BGM, 0
 	song mus_weather_groudon, MUSIC_PLAYER_BGM, 0
@@ -457,7 +457,7 @@ gSongTable::
 	song mus_trick_house, MUSIC_PLAYER_BGM, 0
 	song mus_encounter_twins, MUSIC_PLAYER_BGM, 0
 	song mus_encounter_elite_four, MUSIC_PLAYER_BGM, 0
-	song mus_encounter_hiker, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_encounter_hiker, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_encounter_hiker
 	song mus_contest_lobby, MUSIC_PLAYER_BGM, 0
 	song mus_encounter_interviewer, MUSIC_PLAYER_BGM, 0
 	song mus_encounter_champion, MUSIC_PLAYER_BGM, 0
@@ -480,14 +480,14 @@ gSongTable::
 	song mus_vs_frontier_brain, MUSIC_PLAYER_BGM, 0
 	song mus_vs_mew, MUSIC_PLAYER_BGM, 0
 	song mus_b_dome_lobby, MUSIC_PLAYER_BGM, 0
-	song mus_vs_wild, MUSIC_PLAYER_BGM, 0
-	song mus_vs_aqua_magma, MUSIC_PLAYER_BGM, 0
-	song mus_vs_trainer, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_battle_wild, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_vs_wild
+	song mus_ichor_titan, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_vs_aqua_magma
+	song mus_ichor_battle_trainer, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_vs_trainer
 	song mus_vs_gym_leader, MUSIC_PLAYER_BGM, 0
 	song mus_vs_champion, MUSIC_PLAYER_BGM, 0
 	song mus_vs_regi, MUSIC_PLAYER_BGM, 0
 	song mus_vs_kyogre_groudon, MUSIC_PLAYER_BGM, 0
-	song mus_vs_rival, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_battle_rival, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_vs_rival
 	song mus_vs_elite_four, MUSIC_PLAYER_BGM, 0
 	song mus_vs_aqua_magma_leader, MUSIC_PLAYER_BGM, 0
 	song mus_rg_follow_me, MUSIC_PLAYER_BGM, 0
@@ -626,6 +626,13 @@ gSongTable::
 	song mus_ichor_battle_trainer, MUSIC_PLAYER_BGM, 0
 	song mus_ichor_battle_wild, MUSIC_PLAYER_BGM, 0
 	song mus_ichor_victory_trainer, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_encounter_rival, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_encounter_titan, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_obtain_key_item, MUSIC_PLAYER_SE2, 2
+	song mus_ichor_obtain_mon, MUSIC_PLAYER_SE2, 2
+	song mus_ichor_new_game, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_agora, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_akademia, MUSIC_PLAYER_BGM, 0
 
 	.align 2
 dummy_song_header:

@@ -2,7 +2,7 @@
   "id": "MAP_ELAIA_VILLAGE_AKADEMIA",
   "name": "ElaiaVillage_Akademia",
   "layout": "LAYOUT_ELAIA_VILLAGE_AKADEMIA",
-  "music": "MUS_ICHOR_ELAIA",
+  "music": "MUS_ICHOR_AKADEMIA",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ELAIA_VILLAGE",
   "requires_flash": false,

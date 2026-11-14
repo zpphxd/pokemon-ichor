@@ -89,12 +89,12 @@
 #define FLAG_ICHOR_HIDE_KLEON_AKTI 0x43 // Ichor: hide Kleon in Akti
 #define FLAG_ICHOR_HIDE_ALETHEA_AKTI 0x44 // Ichor: hide Alethea in Akti
 #define FLAG_ICHOR_NO_WHITEOUT 0x45 // Ichor: set to make a battle loss continue the story
-#define FLAG_ICHOR_GOT_ELAIA_RELIC_COPPER 0x46 // Ichor: found the Relic Copper in Elaia's well
-#define FLAG_ICHOR_ITEM_ELAIA_POTION 0x47 // Ichor: item ball: Potion by Elaia's olive press
-#define FLAG_UNUSED_0x048    0x48 // Unused Flag
-#define FLAG_UNUSED_0x049    0x49 // Unused Flag
-#define FLAG_UNUSED_0x04A    0x4A // Unused Flag
-#define FLAG_UNUSED_0x04B    0x4B // Unused Flag
+#define FLAG_ICHOR_ITEM_ROUTE1_POKE_BALL 0x46 // Ichor: item ball: Route 1 Poke Ball
+#define FLAG_ICHOR_ITEM_ROUTE1_MIRACLE_SEED 0x47 // Ichor: item ball: Route 1 Miracle Seed
+#define FLAG_ICHOR_ITEM_ROUTE1_POTION 0x48 // Ichor: item ball: Route 1 Potion
+#define FLAG_ICHOR_ITEM_KRONION_ESCAPE_ROPE 0x49 // Ichor: item ball: Kronion Hill Escape Rope
+#define FLAG_ICHOR_GOT_ELAIA_RELIC_COPPER 0x4A // Ichor: found the Relic Copper in Elaia's well
+#define FLAG_ICHOR_ITEM_ELAIA_POTION 0x4B // Ichor: item ball: Potion by Elaia's olive press
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag
 #define FLAG_UNUSED_0x04D    0x4D // Unused Flag
 #define FLAG_UNUSED_0x04E    0x4E // Unused Flag
@@ -664,11 +664,11 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-#define FLAG_UNUSED_0x264  0x264 // Unused Flag
-#define FLAG_UNUSED_0x265  0x265 // Unused Flag
-#define FLAG_UNUSED_0x266  0x266 // Unused Flag
-#define FLAG_UNUSED_0x267  0x267 // Unused Flag
-#define FLAG_UNUSED_0x268  0x268 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE1_ORAN_BERRY 0x264 // Ichor: hidden item: Route 1 Oran Berry
+#define FLAG_ICHOR_HIDDEN_ROUTE1_REPEL 0x265 // Ichor: hidden item: Route 1 Repel
+#define FLAG_ICHOR_HIDDEN_ROUTE1_ANTIDOTE 0x266 // Ichor: hidden item: Route 1 Antidote
+#define FLAG_ICHOR_HIDDEN_KRONION_HARD_STONE 0x267 // Ichor: hidden item: Kronion Hill Hard Stone
+#define FLAG_ICHOR_HIDDEN_KRONION_STARDUST 0x268 // Ichor: hidden item: Kronion Hill Stardust
 #define FLAG_UNUSED_0x269  0x269 // Unused Flag
 #define FLAG_UNUSED_0x26A  0x26A // Unused Flag
 #define FLAG_UNUSED_0x26B  0x26B // Unused Flag
@@ -1299,11 +1299,11 @@
 #define FLAG_UNUSED_0x4DD                                           0x4DD // Unused Flag
 #define FLAG_UNUSED_0x4DE                                           0x4DE // Unused Flag
 #define FLAG_UNUSED_0x4DF                                           0x4DF // Unused Flag
-#define FLAG_UNUSED_0x4E0                                           0x4E0 // Unused Flag
-#define FLAG_UNUSED_0x4E1                                           0x4E1 // Unused Flag
-#define FLAG_UNUSED_0x4E2                                           0x4E2 // Unused Flag
-#define FLAG_UNUSED_0x4E3                                           0x4E3 // Unused Flag
-#define FLAG_UNUSED_0x4E4                                           0x4E4 // Unused Flag
+#define FLAG_ICHOR_ITEM_AKTI_POTION                                 0x4E0 // Ichor: Akti item ball: Potion among the quay crates
+#define FLAG_ICHOR_ITEM_AKTI_PARALYZE_HEAL                          0x4E1 // Ichor: Akti item ball: Paralyze Heal by the fish stall
+#define FLAG_ICHOR_HIDDEN_ITEM_AKTI_SUPER_POTION                    0x4E2 // Ichor: Akti hidden item: Super Potion behind Diktys's nets
+#define FLAG_ICHOR_HIDDEN_ITEM_AKTI_PEARL                           0x4E3 // Ichor: Akti hidden item: Pearl on the tide rocks
+#define FLAG_ICHOR_HIDDEN_ITEM_AKTI_HEART_SCALE                     0x4E4 // Ichor: Akti hidden item: Heart Scale on the beach
 #define FLAG_UNUSED_0x4E5                                           0x4E5 // Unused Flag
 #define FLAG_UNUSED_0x4E6                                           0x4E6 // Unused Flag
 #define FLAG_UNUSED_0x4E7                                           0x4E7 // Unused Flag
