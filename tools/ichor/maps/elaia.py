@@ -292,8 +292,9 @@ def edge_forest(g):
         else:
             kind = "pine" if n < 16 else "cypress" if n < 40 else "olive"
         kinds[(bx, by)] = kind
-    for (bx, by), kind in list(kinds.items()):    # an olive's crown can't tip into a pine
-        if kind == "pine" and kinds.get((bx, by + 1)) == "olive":
+    for (bx, by), kind in sorted(kinds.items(), key=lambda kv: (kv[0][1], kv[0][0])):
+        # an olive's crown can't tip into a pine, and two pines stacked look planted
+        if kind == "pine" and (kinds.get((bx, by + 1)) == "olive" or kinds.get((bx, by - 1)) == "pine"):
             kinds[(bx, by)] = "cypress"
     for (bx, by) in sorted(blocks, key=lambda b: (b[1], b[0])):
         x, y = 2 * bx, 2 * by
@@ -328,7 +329,7 @@ def north(g):
     g.set(9, 4, HERM, SOLID, "herm")          # road-pillar of Hermes at the gate
     g.cypress(9, 1)
     g.cypress(13, 3)
-    flowers(g, [(15, 3), (15, 4), (15, 2)])
+    flowers(g, [(15, 2), (14, 4), (15, 5)])
 
 
 def upper_village(g):
@@ -338,18 +339,23 @@ def upper_village(g):
         g.set(x, y, SKEP, SOLID, "skep")
     g.set(2, 6, SKEP, SOLID, "skep")                         # and one more round the side
     flowers(g, [(2, 2), (4, 2), (6, 2), (8, 2), (2, 3), (4, 3), (6, 3), (3, 4), (2, 5), (3, 7), (2, 8)])
-    g.rect(5, 9, 9, 10, "path")                               # from the door to the road
-    garden(g, 2, 9, 3, 2)                                     # Melitta's kitchen garden
+    # a whitewashed, flagged dooryard, as Cycladic houses have; the road is earth
+    g.rect(4, 9, 8, 10, "pave")
+    g.rect(9, 9, 9, 10, "path")
+    garden(g, 2, 9, 2, 2)                                     # Melitta's kitchen garden
     low_wall_ew(g, 2, 7, 11)                                  # the yard's wall above the square
     g.set(8, 11, TROUGH, SOLID, "trough")
-    g.set(9, 8, TROUGH, SOLID, "trough")
+    g.set(8, 9, TROUGH, SOLID, "trough")
     # --- Kydippe's house and herb garden ---
     g.struct("house_small", 16, 4, door_solid=False)          # door (17,6)
-    g.rect(13, 7, 18, 8, "path")                              # from her door to the road
-    garden(g, 19, 8, 3, 2)                                    # her herb garden
-    g.set(20, 6, TROUGH, SOLID, "trough")
+    g.rect(16, 7, 19, 8, "pave")                              # her dooryard
+    g.rect(13, 7, 15, 8, "path")                              # out to the road
+    garden(g, 20, 4, 2, 3)                                    # her herb garden, against the house
+    g.set(20, 7, TROUGH, SOLID, "trough")
     g.set(14, 5, SIGN, SOLID, "sign")                         # ELAIA VILLAGE
-    flowers(g, [(20, 4), (21, 5), (20, 7), (15, 5), (15, 6)])
+    flowers(g, [(15, 6), (21, 7), (20, 8), (13, 9), (16, 9), (19, 9)])
+    low_wall_ew(g, 15, 21, 10)                                # her yard's wall above the square
+    g.set(22, 10, TROUGH, SOLID, "trough")
     # --- the shrine on its terrace ---
     g.struct("shrine_dome", 22, 2)                            # door (24,6), shut today
     g.cypress(27, 3)
@@ -383,8 +389,8 @@ def square(g):
     g.struct("altar_square", 7, 16)                           # the festival altar
     g.block(STALL3, 19, 16, kind="stall")                     # a honey-cake stall
     g.set(23, 14, WELLHEAD, SOLID, "well")
-    g.olive(7, 19)                                            # shade trees in the square's corners
-    g.olive(20, 19)
+    g.olive(7, 19)                                            # shade trees at the square's corners
+    g.olive(22, 18)
     g.set(7, 13, TROUGH, SOLID, "trough")
     g.set(21, 13, TROUGH, SOLID, "trough")
 
@@ -407,15 +413,15 @@ def east(g):
     g.struct("olive_press", 25, 9)                            # front row y=11
     g.rect(24, 12, 27, 13, "pave")                            # the threshing floor
     g.olive(25, 15)
-    g.olive(24, 18)
+    g.olive(24, 20)
     g.cypress(27, 17)
-    g.olive(22, 20)
     flowers(g, [(24, 11), (26, 14), (27, 15), (23, 17), (26, 20)])
 
 
 def lower_terrace(g):
     # the square's retaining wall: steps to the Akademia (west) and the groves (east)
-    terrace_wall(g, 4, 25, 22, steps=(9, 10, 18, 19))
+    terrace_wall(g, 5, 21, 22, steps=(9, 10, 18, 19))
+    ledge_row(g, 22, 27, 22)                                  # the orchard drops away over a rougher lip
     finish_arch(g, 17, 20)
     # --- the Akademia in its grove ---
     g.rect(9, 23, 10, 29, "path")                             # the allee
@@ -564,7 +570,7 @@ OBJECTS = [
     ("KORINNA", GFX + "YOUTH_F", 14, 16, "UP", "Korinna", "0"),
     ("PHILON", GFX + "YOUTH_M", 14, 17, "UP", "Philon", "0"),
     ("GYLIPPOS", GFX + "ELDER_M", 7, 15, "RIGHT", "Gylippos", "0"),
-    ("WOMAN", GFX + "WOMAN", 9, 13, "UP", "FestivalWoman", "0"),
+    ("WOMAN", GFX + "WOMAN", 8, 13, "UP", "FestivalWoman", "0"),
     ("MAN", GFX + "MAN", 16, 20, "RIGHT", "FestivalMan", "0"),
     ("FARMER", GFX + "HARVESTER", 26, 12, "UP", "OliveFarmer", "0"),
     ("KID", GFX + "KID_M", 23, 15, "UP", "Kid", "0"),
@@ -846,6 +852,8 @@ def check(g, m):
             nx, ny = x + dx, y + dy
             if not (0 <= nx < W and 0 <= ny < H) or (nx, ny) in seen or solid[ny, nx]:
                 continue
+            if g.kind[ny, nx] == "ledge" and dy != 1:      # a ledge is one-way: jump south only
+                continue
             seen.add((nx, ny))
             q.append((nx, ny))
     problems = []
@@ -903,7 +911,7 @@ def reachable(g, start, goal, blocked):
         for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
             nx, ny = x + dx, y + dy
             if (0 <= nx < W and 0 <= ny < H and (nx, ny) not in seen and not g.solid[ny, nx]
-                    and (nx, ny) not in blocked):
+                    and (nx, ny) not in blocked and (g.kind[ny, nx] != "ledge" or dy == 1)):
                 seen.add((nx, ny))
                 q.append((nx, ny))
     return False

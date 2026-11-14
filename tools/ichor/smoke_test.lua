@@ -36,6 +36,7 @@ local function mapId()
   return emu:read8(loc) * 256 + emu:read8(loc + 1)
 end
 local function taskRunning(name)
+  if not S[name] then return false end -- the linker dropped it: nothing can run it
   for i = 0, S.NUM_TASKS - 1 do
     local t = S.gTasks + i * S.TASK_SIZE
     if emu:read8(t + S.OFF_TASK_ACTIVE) ~= 0 and emu:read32(t + S.OFF_TASK_FUNC) == (S[name] | 1) then
@@ -58,11 +59,40 @@ local function expect(cond, what)
   log("ok " .. what)
 end
 
+-- The live 2F grid matches its layout file cell for cell: nothing (like Hoenn's
+-- truck intro, which wrote its door into cells (4,1)-(4,3)) has stamped over it.
+local function bedroomIntact()
+  local f = io.open("data/layouts/ElaiaVillage_PlayersHouse_2F/map.bin", "rb")
+  if not f then fail("can't read the 2F layout") end
+  local data = f:read("a")
+  f:close()
+  local width = emu:read32(S.gBackupMapLayout + S.OFF_BACKUP_MAP_WIDTH)
+  local map = emu:read32(S.gBackupMapLayout + S.OFF_BACKUP_MAP_MAP)
+  local w = width - (2 * S.MAP_OFFSET + 1)  -- MAP_OFFSET_W
+  for i = 0, #data // 2 - 1 do
+    local want = string.unpack("<I2", data, 2 * i + 1) & 0x3FF
+    local x, y = i % w, i // w
+    local got = emu:read16(map + 2 * ((x + S.MAP_OFFSET) + (y + S.MAP_OFFSET) * width)) & 0x3FF
+    if got ~= want then return false, x, y end
+  end
+  return true
+end
+
 local function wokeAtHome(how)
-  waitFor(idle, 3000, "the field after " .. how)
-  wait(30)
+  -- the truck intro shook the camera from its own task for ~10 seconds
+  local shook = false
+  for _ = 1, 3000 do
+    if taskRunning("Task_HandleTruckSequence") then shook = true end
+    if idle() then break end
+    frame()
+  end
+  expect(idle(), how .. ": the player has control")
+  expect(not shook, how .. ": no truck intro (no camera shake)")
   expect(mapId() == S.MAP_HOUSE_2F, how .. ": woke on 2F")
-  expect(emu:read16(S.sCurrentMapMusic) == S.MUS_ELAIA, how .. ": Elaia's theme is playing")
+  expect(emu:read16(S.sCurrentMapMusic) == S.MUS_ELAIA, how .. ": Elaia's theme from the first frame")
+  wait(30)
+  local ok, x, y = bedroomIntact()
+  expect(ok, how .. ": the bedroom is as built" .. (ok and "" or string.format(" (cell %d,%d differs)", x, y)))
 end
 
 local function main()

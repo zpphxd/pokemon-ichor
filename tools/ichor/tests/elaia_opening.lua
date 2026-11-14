@@ -192,7 +192,7 @@ local function blockedMap()
     end
   end
   return function(x, y)
-    if x < 0 or y < 0 or x >= width - 2 * S.MAP_OFFSET then return true end
+    if x < 0 or y < 0 or x >= width - (2 * S.MAP_OFFSET + 1) then return true end
     local block = emu:read16(map + 2 * ((x + S.MAP_OFFSET) + (y + S.MAP_OFFSET) * width))
     return block & S.MAPGRID_COLLISION_MASK ~= 0 or LEDGES[block & 0x3FF] or people[x .. "," .. y]
   end
@@ -200,7 +200,7 @@ end
 
 local DIRS = { { 0, -1, K.UP }, { 0, 1, K.DOWN }, { -1, 0, K.LEFT }, { 1, 0, K.RIGHT } }
 -- The first key on a shortest path from the player to (tx, ty), or nil.
-local function firstStep(tx, ty, maxY)
+local function firstStep(tx, ty, avoid)
   local blocked = blockedMap()
   local sx, sy = pos()
   local key = function(x, y) return x .. "," .. y end
@@ -218,7 +218,8 @@ local function firstStep(tx, ty, maxY)
     for _, d in ipairs(DIRS) do
       local nx, ny = x + d[1], y + d[2]
       local k = key(nx, ny)
-      if not seen[k] and ny <= (maxY or 200) and ((nx == tx and ny == ty) or not blocked(nx, ny)) then
+      local avoided = avoid and nx >= avoid[1] and ny >= avoid[2] and nx <= avoid[3] and ny <= avoid[4]
+      if not seen[k] and not avoided and ((nx == tx and ny == ty) or not blocked(nx, ny)) then
         seen[k] = { x, y, d[3] }
         queue[#queue + 1] = { nx, ny }
       end
@@ -227,19 +228,20 @@ local function firstStep(tx, ty, maxY)
   return nil
 end
 
--- Walk to (tx, ty). Returns false if a script took over on the way.
-local function go(tx, ty)
+-- Walk to (tx, ty), keeping out of the `avoid` rectangle {x0, y0, x1, y1} if
+-- given. Returns false if a script took over on the way.
+local function go(tx, ty, avoid)
   for _ = 1, 200 do
     local x, y = pos()
     if x == tx and y == ty then return true end
-    local k = firstStep(tx, ty)
+    local k = firstStep(tx, ty, avoid)
     if not k then fail(string.format("no path from (%d,%d) to (%d,%d)", x, y, tx, ty)) end
     if not step(k) then return false end
   end
   fail("never arrived")
 end
-local function goTo(tx, ty)
-  if not go(tx, ty) then
+local function goTo(tx, ty, avoid)
+  if not go(tx, ty, avoid) then
     local x, y = pos()
     fail(string.format("walk to (%d,%d) interrupted at (%d,%d)", tx, ty, x, y))
   end
@@ -367,8 +369,27 @@ local function main()
   expect(mapMusic() == S.MUS_ELAIA, "Elaia's theme in the village")
   shot("front_door")
 
+  -- Kydippe next door, and her Oran Berries.
+  goTo(17, 7)
+  enter(K.UP, S.MAP_KYDIPPE, "Kydippe's door")
+  goTo(2, 3); face(K.UP); tap(K.A); wait(60)
+  shot("kydippe")
+  settle({ [3] = "kydippe_oran" })
+  expect(getFlag(S.FLAG_GOT_KYDIPPE_ORAN), "Kydippe's Oran Berries")
+  goTo(4, 7)
+  enter(K.DOWN, S.MAP_ELAIA, "Kydippe's door out")
+  expectAt(17, 7, "out of Kydippe's house")
+
+  -- The Akademia's door is shut until the thread is read (round Halia's line).
+  local HALIA_RING = { 10, 14, 18, 20 }
+  expect(not go(5, 30, HALIA_RING), "the note on the Akademia door")
+  wait(40); shot("akademia_note"); settle()
+  local nx, ny = pos()
+  expect(not (nx == 5 and ny == 30) and mapId() == S.MAP_ELAIA, "stepped back from the door")
+  expect(not getFlag(S.FLAG_THREAD_READ), "the thread is still unread")
+
   -- The north gate turns the player back without a partner.
-  goTo(11, 3)
+  goTo(11, 3, HALIA_RING)
   expect(not step(K.UP), "the old shepherd stops the player")
   wait(30); shot("shepherd_gate"); settle()
   expectAt(11, 3, "turned back from the road")

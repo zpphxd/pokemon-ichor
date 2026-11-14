@@ -22,7 +22,7 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
   awk '/^k_[A-Za-z0-9_]+:/ { n = substr($1, 3, length($1) - 3); next }
        n && /\.word/  { print "  " n " = " $2 ","; n = "" }
        n && /\.space/ { print "  " n " = 0,"; n = "" }' "$ASM"
-  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gMain|gSaveBlock1Ptr|gSaveBlock2Ptr|gObjectEvents|gPlayerAvatar|gBackupMapLayout|gBattleOutcome|gBattleMons|gParties|gTasks|CB2_Overworld|BattleMainCB2|CB2_MainMenu|CB2_NamingScreen|CB2_StarterChoose|CB2_WallClock|Task_NewGameBirchSpeech_ChooseGender|sGlobalScriptContextStatus|sLockFieldControls|sCurrentMapMusic)$/ \
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gMain|gSaveBlock1Ptr|gSaveBlock2Ptr|gObjectEvents|gPlayerAvatar|gBackupMapLayout|gBattleOutcome|gBattleMons|gParties|gTasks|CB2_Overworld|BattleMainCB2|CB2_MainMenu|CB2_NamingScreen|CB2_StarterChoose|CB2_WallClock|Task_NewGameBirchSpeech_ChooseGender|Task_HandleTruckSequence|sGlobalScriptContextStatus|sLockFieldControls|sCurrentMapMusic)$/ \
     { print "  " $3 " = 0x" $1 "," }'
   echo "}"
 } > "$LUA"
