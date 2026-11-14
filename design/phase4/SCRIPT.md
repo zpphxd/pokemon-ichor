@@ -310,8 +310,8 @@ Every cue Act III needs, so the regions name the same ones. `design/MUSIC.md` is
 | `MUS_ICHOR_TEMPLE_APHRODITE` | Galatea's gallery | Mixolydian: a high, dry, plucked kithara that drops out for one beat whenever a statue moves, so silence means danger. |
 | `MUS_ICHOR_HELD_NOTE` | the Neraida falls before the Horn; Medon's memory | One aulos D, held under nothing. |
 | `MUS_ICHOR_BATTLE_HIEROPHANT` (owed) | Galatea, Phemonoe | The Hierophants' battle theme, in 9/8. |
-| `MUS_ICHOR_HEARTH_NIGHT` (owed) | Axylos's table, Hestia's farmhouse, Eschara, Peirithoos | A solo lyre by a fire. |
-| `MUS_ICHOR_THEOXENIA` (owed) | every god's reveal | A two-bar sting: drums out of nowhere. |
+| `MUS_ICHOR_HEARTH_NIGHT` | Axylos's table, Hestia's farmhouse, Eschara, Peirithoos | A solo lyre by a fire: Hestia's hymn slowed and unharmonised, never Mom's F-G-A motto. |
+| `MUS_ICHOR_THEOXENIA` | every god's reveal | One shared two-bar sting, drums out of nowhere. It never loops. |
 | `MUS_ICHOR_AMNISOS` | Amnisos | LABYRINTH §9: Lydian, a lyre over a slow sea-drum. |
 | `MUS_ICHOR_BULL_ROAD` | the Bull Road, the vineyard, the Heel, the Ida path | LABYRINTH §9: Mixolydian, a 7/8 kalamatianos. |
 | `MUS_ICHOR_PALACE` | the palace above ground | LABYRINTH §9: Dorian and stately, with a frame-drum heartbeat. |
@@ -329,7 +329,7 @@ Every cue Act III needs, so the regions name the same ones. `design/MUSIC.md` is
 | `MUS_ICHOR_TURNING` | the escape | The crane dance at double speed, 7/8. |
 | `MUS_ICHOR_MAIN_THEME_LYDIAN` | the Icarus Shaft | The main theme in D Lydian, rising: the gold thread. |
 | `MUS_ICHOR_BATTLE_ADMIN` (636, exists) | the source of the admins' copies | `MUS_ICHOR_BATTLE_ADMIN_HYPERION` (owed) for Knossa's forge, with forge hammers; `_IAPETOS` (owed) for Lakonia's gate, with a chorus of aulos; `_RHEA` (owed) for the Omphalos, with a slow 7/8 frame drum. Each is 636 plus one track. |
-| `MUS_ICHOR_ENCOUNTER_ADMIN` (owed) | Iapetos's entrance | The admins' Sickle, E-B♭-A, in 7/8. |
+| `MUS_ICHOR_ENCOUNTER_ADMIN` | Iapetos's entrance | The admins' Sickle, E-B♭-A, in 7/8: a short loop that hands off to his battle. |
 | `MUS_ICHOR_LAKONIA` | Route 25, Lakonia, Routes 26 and 27, Thermopylai | The Lakonian march: a slow 7/8 frame drum in Kleon's rhythm and a pipe, in his E Phrygian (Greek Dorian, Sparta's). Spare: few notes, like the people. |
 | `MUS_ICHOR_LAKONIA_GYTHEION`, `_STYMPHALIA` | Gytheion; Lake Stymphalia | Optional: the march with a sea-drum; the march with its drum out and the bronze feathers' clink. |
 | `MUS_ICHOR_HEARTH_ONLY` | Rhea's kitchen (§6.9) | No notes: the hearth's crackle on the noise channel. |
@@ -344,9 +344,8 @@ Every cue Act III needs, so the regions name the same ones. `design/MUSIC.md` is
 | `MUS_ICHOR_FATES` | the Loom | The Fates' three voices: Nemira a lyre, Lotira an aulos, Thanira a frame drum. Together for the first time, with the Ring of Hours entering under them. |
 | `MUS_ICHOR_ELPIS_LULLABY_BOX_DRUM`, `_AULOS`, `_LYRE` | Kaldera's forge, the Pool of Mnemosyne, Elaia, once each Fate is roused | The box with one Fate's voice: Thanira's drum, Lotira's aulos, Nemira's lyre. |
 | `MUS_ICHOR_ELPIS_LULLABY_BOX_KLEOS` | Delphoi, after Kleon wakes | The box with Kleon's motif on a single aulos, in time. |
-| `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES` | the Stair of Hours | The box with all three Fates' voices, and the Ring under it after the Lord of Time falls. |
+| `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES` | the Stair of Hours | The box with all three Fates' voices. Kleon's motif in C major joins it on the crumble and fades; the Ring turns under it after the Lord of Time falls. |
 | `MUS_ICHOR_KRONOS` | the multi battle on the Stair | The lullaby slowed and made enormous, Phrygian, full ensemble, over the Sickle's grind. It still stops on A. |
-| `MUS_ICHOR_KLEOS_MAJOR` | the crumble | Kleon's motif in major, with no words and no drums. |
 | `MUS_ICHOR_LORD_OF_TIME` | the Lord of Time | The Ring of Hours through 7/8, 9/8, 5/8 and back, as if time can't settle. |
 | `MUS_ICHOR_FATES_FREE` | the end of the Stair | The Fates with their hands free, the shears put down, the spindle turning forwards into the main theme in D Lydian. |
 | `MUS_ICHOR_ELPIS_LULLABY_RESOLVED` | Elpis's line | Her hum, all the way through. It resolves to the tonic, for the first time in the game. |
@@ -2061,7 +2060,7 @@ Per STORY III-5 and §6.9. NEW. The second unmasking, mirrored: Phaedon unmasked
 
 **Setup.** Entering `MAP_LAKONIA_LAMPITOS_HOUSE` with `FLAG_ICHOR_LAKONIA_ARRIVED` set and `VAR_ICHOR_ACT3` = 7. Alethea follows the player in (her object is shown inside from this point). The room: a kitchen with a cold hearth, a loom against the wall with a small red cloak on it, a plain table and two stools, a chest under the loom, and two grave-stelai painted on the plaster. Kleon sits at the table without his helmet.
 
-**Music.** None. When Rhea lights the hearth, the hearth-crackle loop starts (`MUS_ICHOR_HEARTH_ONLY`). When Kleon speaks after the long hold, a frame drum alone in a slow 7/8 comes in under it.
+**Music.** None. When Rhea lights the hearth, the hearth-crackle loop starts (`MUS_ICHOR_HEARTH_ONLY`). When Kleon speaks after the long hold, a frame drum alone in a slow 7/8 comes in under it (`MUS_ICHOR_HEARTH_DRUM`).
 ```text
 KLEON: Oh. It's you.
 
@@ -2260,7 +2259,7 @@ IAPETOS: [offscreen] Lampito? May I tell you something true?
 ```
 [Rhea sets the lead tablet down on the table. She looks at the helmet beside it, and leaves it there. She goes out bare-headed. Kleon goes after her. Warp the player and Alethea to the yard: `MAP_LAKONIA`, in front of the house.]
 
-[The lane outside Lampito's yard. Two Gigas in big helmets and bronze-scaled cuirasses, Gration and Pallas. Titanborn Kachlex and Plinthos at the gate. Between them, a thin man in a white tragic mask, a wax tablet on a cord at his neck. His right hand is dark with ink to the wrist. Music: `MUS_ICHOR_ENCOUNTER_ADMIN`, Iapetos's layer, a chorus of aulos.]
+[The lane outside Lampito's yard. Two Gigas in big helmets and bronze-scaled cuirasses, Gration and Pallas. Titanborn Kachlex and Plinthos at the gate. Between them, a thin man in a white tragic mask, a wax tablet on a cord at his neck. His right hand is dark with ink to the wrist. Music: `MUS_ICHOR_ENCOUNTER_ADMIN`, the admins' shared entrance, handing off to his battle.]
 ```text
 IAPETOS: There you are. And without your face on. How brave.
 
@@ -2326,7 +2325,7 @@ ALETHEA: Hold still. Truthfully, this is every Hyper Potion I own.
 ```text
 IAPETOS: Well. If nobody else will, I suppose I'll take a turn.
 ```
-[Battle `TRAINER_ICHOR_IAPETOS_LAKONIA`, with `MUS_ICHOR_BATTLE_ADMIN` and its aulos-chorus layer. His defeat line:]
+[Battle `TRAINER_ICHOR_IAPETOS_LAKONIA`, with `MUS_ICHOR_BATTLE_ADMIN_IAPETOS`: 636 with his aulos-chorus layer. His defeat line:]
 ```text
 IAPETOS: Hm. That isn't how I'd have written it.
 ```
@@ -2522,7 +2521,7 @@ KLEON: If I lose, I lose. If I win, I win. That's all it is.
 
 KLEON: …That's terrifying. Come on.
 ```
-[Battle `TRAINER_ICHOR_KLEON_LAKONIA_<STARTER>`, chosen by `VAR_STARTER_MON`, with `MUS_ICHOR_BATTLE_RIVAL` in its clean arrangement: the Titan 9/8 layer taken out. `FLAG_ICHOR_NO_WHITEOUT` is set for this battle; the story goes on either way.]
+[Battle `TRAINER_ICHOR_KLEON_LAKONIA_<STARTER>`, chosen by `VAR_STARTER_MON`, with `MUS_ICHOR_BATTLE_RIVAL` (612) as built: the clean tune, without the Titan-agent tritone of Knossa. `FLAG_ICHOR_NO_WHITEOUT` is set for this battle; the story goes on either way.]
 ```text
 Defeat: KLEON: …Huh. I lost. And nothing happened. The sky's still there.
 Victory: KLEON: I won! I won. And it doesn't mean anything. Isn't that great?
@@ -3359,7 +3358,7 @@ HYPERION: Huh. Good for you. Stand back, the pair of you.
 ```text
 HYPERION: Old wool. Goes up like a dry year.
 ```
-[A crack like thunder. `special ShakeCamera`, large. The Omphalos splits along a seam, like an egg, and the two halves fall open. Below them a stair of pale stone goes down into the dark. From far below, louder now, a music box is ticking.]
+[A crack like thunder. `special ShakeCamera`, large. The Omphalos splits along a seam, like an egg, and the two halves fall open. Below them a stair of pale stone goes down into the dark. From far below, louder now, a music box is ticking. `MUS_ICHOR_OMPHALOS_NIGHT` stops on the crack; from here to the stairhead the only sound under the scene is the box's tick SE, every 60 frames (P9).]
 ```text
 HYPERION: There. Told you I'd get it open, my lord.
 ```
@@ -3608,7 +3607,7 @@ PHAEDON: Lord of Time. Your sickle's here.
 ```text
 HYPERION: It's coming up! Back from the edge, Unwoven!
 ```
-[The Lord of Time rises out of the chasm: the 64×64 object (engine E10), the Harpe in its grip, rising one tile every 8 frames from below the last row. `special ShakeCamera`, the whole screen, for as long as it rises. Its eyes find the Loom.]
+[The Lord of Time rises out of the chasm: the 64×64 object (engine E10), the Harpe in its grip, rising one tile every 8 frames from below the last row. `special ShakeCamera`, the whole screen, for as long as it rises. Its eyes find the Loom. Music: unmute the Ring of Hours' track of `MUS_ICHOR_FATES` (P9): the ring, low on the tuba, under the Fates.]
 ```text
 PHAEDON: Stop the cutting. Stop all of it. Let nothing end.
 ```
@@ -3973,7 +3972,7 @@ SPINNER: Give me your hand. That's all twelve hours. We'll all come.
 
 [If the conditions aren't met, Kleon's interact text is the table's "Kleon's mouth is open on a shout."]
 
-[A crack, like ice. Color runs into Kleon from his fist, then everywhere: `special Ichor_UnfreezeObject`, the 16-frame blend. It is the first sound effect in the world that isn't your footsteps.]
+[A crack, like ice. Color runs into Kleon from his fist, then everywhere: `special Ichor_UnfreezeObject`, the 16-frame blend. It is the first sound effect in the world that isn't your footsteps. Then `MUS_ICHOR_ELPIS_LULLABY_BOX_KLEOS`: Kleos joins the box on a single aulos, and Delphoi plays it from here on (P9).]
 ```text
 KLEON: -ow. OW. What-
 
@@ -4112,7 +4111,7 @@ KLEON: Nobody's going to sing about this.
 
 KLEON: …Good. Go on. I've got him.
 ```
-[Kleon hauls Hyperion's arm over his shoulders and starts down the crumbling stair. The two objects walk down together, Kleon a tile ahead and Hyperion following, one row per 16 frames. Kleon's follower NPC state is cleared.]
+[Kleon hauls Hyperion's arm over his shoulders and starts down the crumbling stair. The two objects walk down together, Kleon a tile ahead and Hyperion following, one row per 16 frames. Kleon's follower NPC state is cleared. Music: unmute the Kleos track of `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES`: Kleos in C major on a single aulos, over the box, which keeps ticking. Step it down as the camera watches them get smaller, to silence when they pass out of view (P9).]
 ```text
 HYPERION: Who's that? Who's got me?
 
@@ -4149,7 +4148,7 @@ The Lord of Time hasn't moved. It doesn't need to.
 ```
 [The shadow trigger can be stepped on again.]
 
-**Caught or beaten.** [Clear both battle flags. If caught, set `FLAG_ICHOR_CAUGHT_LORD_OF_TIME`; the great shape is gone from the sky, and the Harpe hangs in the air where its hand was. If beaten, set `FLAG_ICHOR_LORD_OF_TIME_FAINTED`; the great shape stays above the landing, its eyes shut and its grip open.]
+**Caught or beaten.** [Clear both battle flags. If caught, set `FLAG_ICHOR_CAUGHT_LORD_OF_TIME`; the great shape is gone from the sky, and the Harpe hangs in the air where its hand was. If beaten, set `FLAG_ICHOR_LORD_OF_TIME_FAINTED`; the great shape stays above the landing, its eyes shut and its grip open. No victory theme and no caught fanfare. The Stair's cue comes back; unmute its ring track, so the Ring of Hours turns low under the box until the Moment (P9).]
 
 [After it is caught or beaten:]
 ```text
@@ -6091,7 +6090,7 @@ ARISTEIDES: Go home, Archon. Your mother will want to look at you.
 
 ### The credits
 
-[E14, `special Ichor_CreditsFrieze`. Music `MUS_ICHOR_CREDITS`: the main Ichor theme, Lydian, rising. In the second half, under it, Elaia's home theme with the countermelody first heard at the Kastalian spring.]
+[E14, `special Ichor_CreditsFrieze`. Music `MUS_ICHOR_CREDITS`: the main Ichor theme, Lydian, rising. In the second half, after it, Elaia's home theme with the countermelody first heard at the Kastalian spring. The two play in sequence and never layer.]
 
 **The frieze** (`design/phase1/INTRO.md`'s boot-intro frieze, scrolled the other way). The intro's black-figure pot turns again, and a golden thread runs across it: past Olympus with its cloud bank, past the temple fronts, over the wine-dark sea and its dolphins, down to Kalliste and the third olive in Elaia's grove. There it sinks into the olive's roots, where it first came up in the intro. The olive's leaves stir once.
 
@@ -6130,7 +6129,7 @@ THE END
 
 Per STORY §7.11 (master text) and decision S14. Elaia, the morning after the credits: a year on, the next Klotheia. Gives the post-game.
 
-**Setup.** On the first load after the credits (`VAR_ICHOR_ACT3` 25), the slice's festival-day dressing is back on Elaia (garlands, the canopy, the honey-cake stall, the footrace ribbon), behind `FLAG_ICHOR_EPILOGUE_FESTIVAL`. The festival NPCs stand where the slice put them on its own festival morning, with the epilogue lines in P2. The music is the slice's festival theme; Elaia's home theme, wherever it plays, keeps the countermelody from now on.
+**Setup.** On the first load after the credits (`VAR_ICHOR_ACT3` 25), the slice's festival-day dressing is back on Elaia (garlands, the canopy, the honey-cake stall, the footrace ribbon), behind `FLAG_ICHOR_EPILOGUE_FESTIVAL`. The festival NPCs stand where the slice put them on its own festival morning, with the epilogue lines in P2. The music is Elaia's theme, as on the slice's festival morning, but now `MUS_ICHOR_ELAIA_COUNTER`: it keeps the countermelody from now on.
 
 **Who's where.**
 - Player's house 1F: Mom at the hearth; Phaedon by the hearth holding a jar; Elpis on a stool (shown by `FLAG_ICHOR_EPILOGUE_KITCHEN_GUESTS`).
@@ -6200,7 +6199,7 @@ HALIA: Every thread has knots, child. You'll pull through. Next!
 
 [The footrace finish line. Kleon, out of breath.]
 
-[A coord trigger at the finish line. The kid's Wooloo stands past the line with the winner's ribbon round its neck, chewing.]
+[A coord trigger at the finish line. The kid's Wooloo stands past the line with the winner's ribbon round its neck, chewing. Music: `MUS_ICHOR_FOOTRACE` until the scene ends, then Elaia's cue again (P9).]
 ```text
 KLEON: Second! I came SECOND. To a Wooloo.
 
@@ -6251,7 +6250,9 @@ ALETHEA: Truthfully. Every word. It's going to be very long.
 ALETHEA: Kleon asked me to leave him out of it. I said no.
 
 DAPHNE: {PLAYER}. Before anything else, a question. Humor me.
-
+```
+[Music: `MUS_ICHOR_EPILOGUE_QUESTION`, from the next box through the fade (P9).]
+```text
 DAPHNE: Which came first? The Pokémon, or the story?
 ```
 ?? Multichoice: THE POKéMON / THE STORY / WE'LL SEE
@@ -17986,7 +17987,7 @@ This is Act III's cue sheet. `design/MUSIC.md` is the score bible: it names the 
 - Transformations use MUSIC.md's words: *fragment*, *augmentation* (slower), *diminution* (faster), *mode change* and *instrumentation*.
 - *New* marks a transformation MUSIC.md doesn't list yet. MUSIC.md asks for each one to be added there before the cue is composed.
 - "(owed)" marks a cue an earlier act was to build that isn't on main. They are listed under "Themes to write".
-- "Director" points to "Open for the director", below.
+- The director's rulings of 2026-11-14 are in MUSIC.md and STORY.md, and this sheet follows them.
 - Modes take their church names first, as MUSIC.md does, with the Greek name in brackets where it differs.
 
 **Throughout the act.**
@@ -18001,6 +18002,7 @@ This is Act III's cue sheet. `design/MUSIC.md` is the score bible: it names the 
    - the hum alone at the spring;
    - the Temple of Apollo's beams;
    - the Ring of Hours under the Loom and under the Stair;
+   - Kleos in C major over the Stair's box on the crumble, stepped down to silence as the camera watches;
    - the closer box in Elpis's room.
    The song keeps time while a track is muted, so the track comes back on the beat.
 2. **Stop on the next beat**, for the gray at the Loom. A plain cut is the fallback. The Moment's stop is a plain cut on purpose.
@@ -18032,9 +18034,9 @@ This is Act III's cue sheet. `design/MUSIC.md` is the score bible: it names the 
 | III-1B3, Cape Malea, on deck | `MUS_ICHOR_TRIREME` (629) | Kleos at ease, as built (629 B) | — |
 | III-1C, Skandeia; III-1F, Paphia; their houses | `MUS_ICHOR_KYTHERA` | — | **The Kronist** speaks over it and it doesn't change. The menace is that nobody stops him. |
 | III-1C, Molybdos; III-1C2, the bad guests | the Titan battle (616) | the Sickle, as built | — |
-| III-1C2, Axylos's table after the guests have gone | `MUS_ICHOR_HEARTH_NIGHT` (owed) | — | — |
+| III-1C2, Axylos's table after the guests have gone | `MUS_ICHOR_HEARTH_NIGHT` | — | — |
 | III-1D, the Foam Road; Routes 22 and 23 at sea; Antikythera | `MUS_ICHOR_FOAM_ROAD` | Kythera's tune with its seventh flattened (mode change to Mixolydian, the road's mode) | — |
-| III-1D2, Hermes's reveal at Paphia's gate | `MUS_ICHOR_THEOXENIA` (owed) | — | — |
+| III-1D2, Hermes's reveal at Paphia's gate | `MUS_ICHOR_THEOXENIA` | — | A sting that never loops; the scene's music comes back for the god's own line (MUSIC.md). |
 | III-1E, the Spring of Kallirhoe; Echo's caves | `MUS_ICHOR_KALLIRHOE` | — | One phrase and its echo, nothing else |
 | III-1G, the Temple of Aphrodite | `MUS_ICHOR_TEMPLE_APHRODITE` | — | **Rule 2.** "Music-box-like" means the kithara plucked high and dry, never the glockenspiel or the tick. **The silent beat:** whenever a statue moves, the script mutes every track for one beat (engine 1). The song keeps time underneath, so the tune comes back on the right beat. Silence means a statue is coming. |
 | III-1G, Galatea | `MUS_ICHOR_BATTLE_HIEROPHANT` (owed), then the Laurel victory and the badge fanfare | — | Cygnus is the Star Chart's chime |
@@ -18100,14 +18102,14 @@ SCRIPT's "Dorian" for the march is read as the Greek Dorian, which is the church
 | III-5E, Lampito's kitchen, before the fire | no music | — | — |
 | III-5E, from the fire | `MUS_ICHOR_HEARTH_ONLY` | — | No note sounds: the hearth's crackle on the noise channel, the embers (slot 126) of Hestia's temple. |
 | III-5E, from Kleon's first line after the 120-frame hold | `MUS_ICHOR_HEARTH_DRUM` | **Kleos's rhythm, 2+2+3**, on a frame drum alone in a slow 7/8, with no notes (MUSIC.md's Lakonia form). It is the same Lakonian drum as Rhea's layer on 636, now playing her son's rhythm. | — |
-| III-5F, Iapetos at the gate | `MUS_ICHOR_ENCOUNTER_ADMIN` (owed) | the Sickle in the admins' form, E-B♭-A, 7/8 | — |
+| III-5F, Iapetos at the gate | `MUS_ICHOR_ENCOUNTER_ADMIN` | the Sickle in the admins' form, E-B♭-A, 7/8 | The admins' shared entrance, with no layer: his comes with the battle. |
 | III-5F, Gration; Iapetos | Gration: 616. Iapetos: `MUS_ICHOR_BATTLE_ADMIN_IAPETOS` (owed: 636 with his layer) | The Sickle. His layer is a chorus of aulos doubling the strings (MUSIC.md), in close, sour thirds, like a play's chorus that knows the ending. | — |
 | III-5G, Alethea reads the tablet | `MUS_ICHOR_HEARTH_ONLY` | — | The crackle only; the drum doesn't come back. |
 | III-5H, the yard; III-5J, the goat paths; the widow's fragment | `MUS_ICHOR_LAKONIA` | as above | — |
 | III-5I, the ring | `MUS_ICHOR_ENCOUNTER_RIVAL` (620), then `MUS_ICHOR_BATTLE_RIVAL` (612) as built | **Kleos**, driving, in 9/8 | SCRIPT's "clean arrangement" is 612 itself. The tritone was Act II's Titan-agent arrangement, and 612 never had it, so no new track is needed. |
 | The agoge's gauntlet, Archidamos | the trainer battle (617) | — | A house boss, not one of the Twelve. The Hierophant theme stays theirs. |
-| Hestia's roofless farmhouse (E2), after the fire catches | `MUS_ICHOR_HEARTH_NIGHT` (owed) | — | — |
-| Hestia's and Ares's reveals (E2, E4) | `MUS_ICHOR_THEOXENIA` (owed) | — | — |
+| Hestia's roofless farmhouse (E2), after the fire catches | `MUS_ICHOR_HEARTH_NIGHT` | — | — |
+| Hestia's and Ares's reveals (E2, E4) | `MUS_ICHOR_THEOXENIA` | — | — |
 
 **Silences.** III-5E has no music until Kleon's "…Mother." III-5G plays under the hearth loop only. The Titan columns on Routes 26 and 27 carry a far-off chant (an ambient SE) under the route's theme.
 
@@ -18143,29 +18145,30 @@ Only the box plays in the Frozen Hour. MUSIC.md makes these exceptions:
 - one roused Fate's voice;
 - Kleon's motif once he wakes, and again, in major, on the crumble;
 - all three Fates on the Stair, and their resolution at its end;
-- the battles.
+- the battles;
+- Medon's memory, where the box stops for the sepia (MUSIC.md §2).
 
-SCRIPT adds Medon's memory. E1 forces the box's family, not 628 alone (engine 5).
+E1 forces the box's family, not 628 alone (engine 5).
 
 | Scene or map | Cue | Leitmotifs, and how | Rule or note |
 |---|---|---|---|
 | III-10A to 10F, every map | `MUS_ICHOR_ELPIS_LULLABY_BOX` (628) | the lullaby, ticked slowly on a comb; bar 8 is the tick alone | **Rules 1 and 2.** It never stops between maps that play it. |
 | III-10B, Delphoi; Mom at the top of the stair | 628 | — | MUSIC.md: "The music box only, by rule". No countersong, though she's there. |
 | III-10C, Kaldera's forge, once the Cutter is roused | `MUS_ICHOR_ELPIS_LULLABY_BOX_DRUM` | Thanira's shears join the box: one stroke a bar, and in bar 8 a trembling roll | **Rule 4**: one voice. It becomes the forge's Frozen Hour music. |
-| III-10D, the Pool of Mnemosyne, Medon's memory | `MUS_ICHOR_HELD_NOTE` | — | The box falls silent for the sepia, and one low aulos D holds: Lotira's instrument, down to one note. Gray is the frozen present and sepia is memory; they never mix, and nor do their sounds. 628 comes back when the sepia ends. Director. |
+| III-10D, the Pool of Mnemosyne, Medon's memory | `MUS_ICHOR_HELD_NOTE` | — | **The box stops** (MUSIC.md §2): memory is never frozen. Gray is the present and sepia is memory, and the two never mix. One held aulos D, Lotira's instrument, is the scene's only sound. The box comes back with the gray, as 628, and takes Lotira's voice once she's roused (next row). |
 | III-10D, once the Measurer is roused | `MUS_ICHOR_ELPIS_LULLABY_BOX_AULOS` | Lotira's rod joins the box: A4 G4 F4 E4 F4 G4 A4, one note a bar, then a rest in bar 8 | **Rule 4**: one voice |
 | III-10E, Astyra and the Stoa | 628 | — | — |
 | III-10E, Elpis's room | 628, closer | — | The same track, louder, and with the reverb off for the room, as if it's playing from the shelf (engine 1, and `m4aSoundMode` for the reverb). No new song. |
 | III-10F, Elaia, once the Spinner is roused | `MUS_ICHOR_ELPIS_LULLABY_BOX_LYRE` | Nemira's spindle joins the box: the Thread spun every bar, backwards in bar 8 | **Rule 4**: one voice |
-| III-10G, Kleon wakes, and Delphoi after | `MUS_ICHOR_ELPIS_LULLABY_BOX_KLEOS`, from the crack | **Kleos** on a single aulos, in time, over the box (MUSIC.md). It stays in its own E Phrygian, which is D Dorian's pitch set, so no note clashes. Its 9/8 is folded into two bars of the box's 3/4, `E5:1 F5:1 E5:1 D5:1 E5:2 \| B4:6`, once a loop over bars 1–2, where B4 is the G chord's third. | MUSIC.md: "the first sound after the music box". The crack SE comes first. Director. |
+| III-10G, Kleon wakes, and Delphoi after | `MUS_ICHOR_ELPIS_LULLABY_BOX_KLEOS`, from the crack | **Kleos** on a single aulos, in time, over the box (MUSIC.md). It stays in its own E Phrygian, which is D Dorian's pitch set, so no note clashes. Its 9/8 is folded into two bars of the box's 3/4, `E5:1 F5:1 E5:1 D5:1 E5:2 \| B4:6`, once a loop over bars 1–2, where B4 is the G chord's third. | MUSIC.md: "the first sound after the music box"; E Phrygian uses the box's own seven notes. The crack SE comes first. |
 | III-11A, the climb | `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES` | all three Fates' voices with the box | **Rule 4**, the second and last time. In bar 8 the comb is silent: only the tick, the spindle turning backwards, the rod at rest and the shears trembling. |
 | III-11B, the multi battle | `MUS_ICHOR_KRONOS` | **Kronos's theme**: the lullaby made Phrygian and enormous, with E♭ for E and B♭ for B, at ♩=56. A full ensemble plays it with chorus and horns, over the Sickle's grind, D-E♭, in the bass (MUSIC.md). | **Rule 1**: every phrase still stops on A. **Rule 2.** The music is Phaedon's for the whole battle (Part 3). After the win comes the Titan victory, whose call turns major: MUSIC.md's "doctrine undone". |
-| III-11C, the crumble, from "…Good. Go on. I've got him." until the two pass out of view | `MUS_ICHOR_KLEOS_MAJOR` | **Kleos in major**, E-F♯-E-D♯-E-B, with no words and no drums (MUSIC.md). No one will sing about it. | Its E major can't sound over the box's D Dorian, so it replaces the box for the walk down. `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES` returns when the crumble stops. Director. |
+| III-11C, the crumble, from "…Good. Go on. I've got him." until the two pass out of view | `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES`, with its Kleos track unmuted (engine 1) | **Kleos in C major**, C-D-C-B-C-G: the semitone opened to a whole step, as on the trireme, and set on the box's own notes (MUSIC.md). A single aulos, no words and no drums: no one will sing about it. | Layered, never replacing the box, which keeps ticking until the Moment. The track is stepped down as the camera watches them get smaller, and is silent once they pass out of view. |
 | III-11D, the Lord of Time | `MUS_ICHOR_LORD_OF_TIME` | **The Ring of Hours** runs through the changing meters. The brass play the Sickle on D, D-A♭-G, grinding against it, and the chorus holds the lullaby's A, which never resolves (MUSIC.md). | **Rule 5.** No victory theme and no caught fanfare (engine 3). |
 | III-11D and 11E, after the battle, until the Moment | `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES`, with its ring track unmuted (engine 1) | The box and the three Fates, with **the Ring** low on the tuba: beaten time, still turning in place | "Nothing moves. Far below, the music box ticks on." MUSIC.md's Moment needs the ring to be there to stop. III-11D needs one script line to unmute it. |
 | III-11E, the Moment, clean | silence: the BGM cuts on that frame | — | MUSIC.md: "the ring stops mid-turn, and the tick stops with it", the first silence of the Frozen Hour. The Moment has no theme. |
 | III-11E, the twelve chimes | twelve SEs on the tubular bell (slot 14): F E D A, B D E D, F E D A | the lullaby's first twelve notes (MUSIC.md) | **Rule 1** holds: the chimes stop before the cadence. |
-| III-11E, after the twelfth chime | wind, birds and the sea far below, as SEs 30 frames apart; then `MUS_ICHOR_FATES_FREE` | **The Fates come down with their hands free** (MUSIC.md): their three voices once more, under their own lines. In bar 8 the shears are put down for good, with no roll and no stroke, and the spindle turns forwards. It rises D A D E F♯, its last note the first Lydian F♯ (*new*). From there, **the main theme in D Lydian, rising**, as at the Icarus Shaft. | **Rule 4**: still the Stair, and the last time the three sound together. Director. |
+| III-11E, after the twelfth chime | wind, birds and the sea far below, as SEs 30 frames apart; then `MUS_ICHOR_FATES_FREE` | **The Fates come down with their hands free** (MUSIC.md): their three voices once more, under their own lines. In bar 8 the shears are put down for good, with no roll and no stroke, and the spindle turns forwards into **the main theme in D Lydian, rising**, as at the Icarus Shaft. | **Rule 4**: still the Stair, and the last time the three sound together. **Rule 1:** bar 8's D is the spindle's own, the Fates' line. The lullaby's A-to-D stays Elpis's alone: no lullaby tune over the Fates, and no voice carries an A up to a held D. |
 | III-12A, Delphoi at dawn | no music | — | Wind, birds, voices and the falls until Mom's lines are done. Then Delphoi's own theme on the next map load. |
 | III-12B, Elpis's line | `MUS_ICHOR_ELPIS_LULLABY_RESOLVED`, played once | **The lullaby, all eight bars**, hummed alone. Bar 8, `D5:6`, sounds for the first time: A rises to D, the Thread's first step (MUSIC.md). | **Rule 1's one exception.** This is the composer's most important brief (STORY §6.14). After it there's no music for the rest of the scene, including the 120-frame hold on her line: only the city's noise. From her line on, her room doesn't play the hum (627) again: the song is finished. |
 
@@ -18189,13 +18192,13 @@ SCRIPT adds Medon's memory. E1 forces the box's family, not 628 alone (engine 5)
 | L-2, the trial and the vote | Act II's ostracism cue | — | STORY §6.5's dry frame-drum pulse, reused. It quickens as the urn fills and cuts dead before the decree. After the decree, silence for Alethea's 90 frames. |
 | L-2, after "They believed me." | `MUS_ICHOR_ALETHEA_BELIEVED`, once | **Alethea's theme** (Act II's) on a lyre, as in §6.5, but now with the second voice §6.5 left out. A second lyre answers her first phrase, so the tune no longer repeats itself to be heard. | — |
 | L-3, the sentences | no music | — | Ambient crowd only. Phaedon's heal plays the heal jingle. |
-| L-5A, the Gulf ferry: Dionysus | the ferry's cue (Act II's); `MUS_ICHOR_THEOXENIA` (owed) at the reveal | — | The drum from nowhere is an SE. |
+| L-5A, the Gulf ferry: Dionysus | the ferry's cue (Act II's); `MUS_ICHOR_THEOXENIA` at the reveal | — | The drum that starts from nowhere is the sting's. |
 | L-5B and 5C, Delphoi, the Pythia, Mom's note; L-5D, Route 29's lower half | `MUS_ICHOR_DELPHOI` | as before | Her laugh plays over it. |
 | L-6A to 6E, Route 29's upper half, Route 30, the Foothills, the Weeping Cliff, the Snowfields, the Crags | `MUS_ICHOR_ASCENT` | the main theme in Mixolydian, slow and climbing, with wind (mode change, *new*) | — |
 | L-6B, Thermopylai | `MUS_ICHOR_LAKONIA` | Kleos's rhythm, as in Lakonia | The veterans brought the march with them. |
 | L-6D, the Vale of Tempe | `MUS_ICHOR_AKADEMIA` (626) | Daphne's Question in G Lydian, as built | Daphne's grove theme, for the tree she was named for. Under her scene it plays as written. |
 | L-6E, the Ice Caves and the grotto | `MUS_ICHOR_HOLLOW` (638) | — | A drone and drips. The icicle chime SE adds the glass ring; the song is unchanged. |
-| Eschara's chamber; Peirithoos's farmhouse | `MUS_ICHOR_HEARTH_NIGHT` (owed) | — | The solo lyre by a fire |
+| Eschara's chamber; Peirithoos's farmhouse | `MUS_ICHOR_HEARTH_NIGHT` | — | The solo lyre by a fire |
 | L-6F, the Gate of the Horai | `MUS_ICHOR_OLYMPUS_GATE` | — | — |
 
 **Sound effects.** A herald's bell; a crowd cheering and groaning at once; a cabbage's thud; a clay shard dropped in an urn (Act II's clink); a crowd's laugh; a rope falling off a mast; wine welling through planks; vines growing (a creak and rustle); a drum from nowhere; a lion's roar; three splashes; a dolphin's whistle; a palisade gate dragged open; steam hissing from the springs; a goat's bleat with a crackle in it (Aix, a Kerazap); a river's roar (Tempe, an ambient loop); leaves without wind; ice sliding; an icicle chime; a boulder sliding on ice; a chain cleaved (the Labrys's ring); a soft wind for the snowfields; an eagle's cry; a rope bridge creaking; the gate of cloud rolling aside (a long soft rumble, like far thunder that doesn't stop).
@@ -18211,7 +18214,7 @@ SCRIPT adds Medon's memory. E1 forces the box's family, not 628 alone (engine 5)
 | L-8, "Gods help you." | `MUS_ICHOR_ARCHON` stops dead on the box | — | After that, rope and wind until the Hall |
 | L-8, the untying | no music | — | Rope and wind only |
 | L-9, the Hall of Heroes | `MUS_ICHOR_HALL_OF_HEROES` | the Thread's call in major opens it, as it opens every Ichor fanfare (MUSIC.md) | It begins quietly, then settles into a held chord under the record and the seal. The record is the vanilla Hall of Fame, so `MUS_HALL_OF_FAME` is repointed to the same song. |
-| L-9, the credits | `MUS_ICHOR_CREDITS` | **The main theme in D Lydian**, then **Elaia's theme**, with Mom's countersong under its tune (MUSIC.md) | **Rule 3.** The two follow each other; they can't sound at once. Director. |
+| L-9, the credits | `MUS_ICHOR_CREDITS` | **The main theme in D Lydian**, then **Elaia's theme**, with Mom's countersong under its tune (MUSIC.md) | **Rule 3.** The two follow each other and never layer: the main theme ends in D Lydian, Elaia's is D Dorian (MUSIC.md). |
 | L-10, the epilogue: the house and the square | `MUS_ICHOR_ELAIA_COUNTER` | Elaia's theme with the countersong | **Rule 3.** The slice's festival morning played 610, since there's no separate festival song, so the epilogue plays its countersong form. The spindle chime and its stop at each reading are SEs. |
 | L-10, the finish line | `MUS_ICHOR_FOOTRACE`, from the coord trigger to the end of the scene | **Kleos** back in 9/8, light and quick (MUSIC.md): second place, to a Wooloo | Then Elaia's cue again |
 | L-10, the Akademia, from "Which came first?" | `MUS_ICHOR_EPILOGUE_QUESTION` | **Daphne's Question** in its D Lydian form rises to its G♯ and, for the first time, goes on to A (MUSIC.md) | The question gets no answer; it keeps going. It never comes home to D. |
@@ -18224,23 +18227,6 @@ SCRIPT adds Medon's memory. E1 forces the box's family, not 628 alone (engine 5)
 - The Hall: a chisel strike per recorded Pokémon; the seal pressed into wax.
 - The Star Chart's chime (exists) for Aquila and the Unwoven.
 - The epilogue: the slice's spindle chime and its stop, at each reading; a Wooloo's bleat at the finish line.
-
-## Open for the director
-
-Each point below is scored as written above until the director rules. Part 1's stage notes need a music line wherever this sheet calls for something they don't mention yet:
-- III-8: the cue stops at the crack;
-- III-9: the ring unmuted as the Lord of Time rises;
-- III-10G: Kleon's motif;
-- III-11C: the crumble;
-- III-11D: the ring unmuted after the battle;
-- L-10: the finish line, and "Which came first?".
-
-1. **Kleon wakes (III-10G).** STORY §6.12 and the stage note have only the crack, and the Frozen Hour "the music box only". MUSIC.md adds Kleos on an aulos over the box. The sheet follows MUSIC.md.
-2. **The crumble (III-11C).** MUSIC.md's Kleos in E major can't sound over the box, so it displaces the box mid-Frozen Hour. The other way is to transpose it to C major, whose notes are the box's own, and lay it over `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES`.
-3. **Medon's memory (III-10D).** SCRIPT silences the box under the sepia and holds one aulos note. MUSIC.md has the box throughout the Frozen Hour. The sheet keeps SCRIPT's exception.
-4. **The credits (L-9).** SCRIPT and STORY put Elaia's theme "under" the main theme. MUSIC.md has it "then", and the modes agree with MUSIC.md: D Lydian's F♯ and G♯ can't sound against Dorian's F and G. The sheet scores them in sequence.
-5. **The Fates' resolution.** MUSIC.md's last Fates row, the hands-free voices with the shears put down, names no scene. Rule 4 keeps all three voices to the Loom and the Stair, so the sheet plays it at the end of the Stair. There it's `MUS_ICHOR_FATES_FREE`'s eight-bar opening into the main theme in D Lydian. That's why the end of the Stair is its own cue, apart from the Icarus Shaft's. III-11E's "Then the main theme" now names it.
-6. **The cues owed by earlier acts aren't in MUSIC.md yet.** These are `MUS_ICHOR_HEARTH_NIGHT`, `MUS_ICHOR_ENCOUNTER_ADMIN` and `MUS_ICHOR_THEOXENIA` (Open questions 98). MUSIC.md should adopt or drop each before it's composed.
 
 ## Themes to write for Act III
 
@@ -18271,7 +18257,7 @@ One row per new track, for the music batch, which composes them in `tools/ichor/
 - The Lord of Time's turning meter fits in one 30/8 bar.
 - `MUS_ICHOR_FATES_FREE` and `MUS_ICHOR_CREDITS` change meter and tempo between sections. Either `compose.py` learns to do that per section (MIDI and m4a both allow it), or the script and E14 play the parts as separate songs.
 
-Of the 56 rows, 24 are new songs and 32 are arrangements. Two of the arrangements are optional.
+Of the 58 rows, 25 are new songs and 33 are arrangements. Two of the arrangements are optional. Three rows are the cues MUSIC.md adopted from the act scripts (its "Cues adopted from the act scripts"); Act I's Aegina inn and Eleusa use two of them too.
 
 | Cue | Kind | Title | Plays | Leitmotifs | Mode, meter, tempo | Voices | Form and loop | Must keep |
 |---|---|---|---|---|---|---|---|---|
@@ -18281,6 +18267,8 @@ Of the 56 rows, 24 are new songs and 32 are arrangements. Two of the arrangement
 | `MUS_ICHOR_TEMPLE_APHRODITE` | new | The Gallery | the Temple of Aphrodite | — | Mixolydian, tonic free; 4/4, ♩≈92 | kithara plucked high and dry, pizzicato, syrinx in B, triangle; no bass | intro 1; A 8, B 8; ~42 s | rule 2: the kithara, never the glockenspiel or the tick. Short plucked notes, so a one-beat mute leaves nothing hanging. |
 | `MUS_ICHOR_HELD_NOTE` | new | One Note | the Neraida falls before the Horn; Medon's memory | — | one D4; 4/4, ♩=60 | the aulos alone, swelling and falling | loop 4 bars, ~16 s: the note for 15 beats, then a breath | near-silence, the same gesture as the revelation's opening D (637) |
 | `MUS_ICHOR_TRIREME_NIGHT` | arrangement of 629 | The *Euploia* by Night | the night crossings of Routes 22–24; the deck's night music | 629's tune with E♭ for E (mode change) | G Aeolian; 6/8, ♩≈80 | the syrinx alone on the tune, the rowers' chorus low, sine bass, frame drum on the stroke, sea wind | intro 1; A 8, A2 8; ~36 s | 629's B (Kleos) is left out: Kleon isn't aboard |
+| `MUS_ICHOR_HEARTH_NIGHT` | arrangement of 614 (Hestia's hymn) | Hearth by Night | Axylos's table, Hestia's farmhouse, Eschara's chamber, Peirithoos's farmhouse; Act I's Aegina inn; any night-before scene | Hestia's hymn, slowed and unharmonised; its call is the Thread in Greek Dorian, A-D-E♭-F | D Phrygian (Greek Dorian), its own mode; 5/4 3+2, ♩≈60 | the lyre alone | loop 8 bars, ~40 s; short and quiet | never Mom's motto, F-G-A (rule 3): the call stops on F and never climbs on to G and A |
+| `MUS_ICHOR_THEOXENIA` | new | The God Revealed | every god's reveal from disguise: Hermes, Hestia, Ares and Dionysus in Act III | — | unpitched; 4/4, ♩≈120 | drums out of nowhere: frame drum, taiko, tambourine, kymbala, building to one crash | 2 bars, ~4 s; a one-shot | a sting, not a BGM: it never loops, and the scene's music comes back for the god's own line. As a fanfare it needs an `sFanfares` entry (README). |
 | `MUS_ICHOR_AMNISOS` | new | Amnisos | Amnisos and its houses | — | Lydian (LABYRINTH), tonic free; 4/4, ♩≈96 | lyre over a slow sea-drum (the low frame drum), kithara, syrinx, sine bass, sea wind | intro 2; A 8, A2 8, B 8; ~60 s | — |
 | `MUS_ICHOR_BULL_ROAD` | new | The Bull Road | the Bull Road, the vineyard, the Bronze Heel, the Ida path, the vault | — | Mixolydian; 7/8 kalamatianos 3+2+2 (LABYRINTH), ♩≈150 | aulos lead, second aulos in thirds, kithara strumming the laouto pattern, sine bass, frame drum, shaker | intro 2; A 8, A2 8, B 8, C 8; ~45 s | Route 1 is also Mixolydian in 3+2+2, so take a tonic other than G and give the tune to the aulos, not the syrinx |
 | `MUS_ICHOR_PALACE` | new | The Palace of Minos | the palace above ground, the North Entrance, the court at night | — | Dorian, tonic free but not D; 4/4, ♩≈80, stately | horns, strings, lyre, kithara, soft timpani, a frame-drum heartbeat | intro 2; A 8, B 8, A2 8; ~72 s | — |
@@ -18300,6 +18288,7 @@ Of the 56 rows, 24 are new songs and 32 are arrangements. Two of the arrangement
 | `MUS_ICHOR_LAKONIA_STYMPHALIA` | arrangement of `MUS_ICHOR_LAKONIA` (optional) | Lake Stymphalia | the lake | the march, drum out (instrumentation) | as the march | the pipe; kymbala clinks, the bronze feathers, carry the 2+2+3 | the march's | cut it first if the ROM is tight |
 | `MUS_ICHOR_HEARTH_ONLY` | new | The Hearth | Lampito's kitchen from the fire; III-5G | — | unpitched | the embers (noise 126) alone: a crackle that never quite repeats | loop ~8 s | no note sounds |
 | `MUS_ICHOR_HEARTH_DRUM` | arrangement of `MUS_ICHOR_HEARTH_ONLY` | The Hearth, and the Drum | III-5E, from Kleon's first line after the hold | Kleos's rhythm, 2+2+3, with no notes (MUSIC.md) | the march's slow 7/8 and tempo | the embers and a frame drum (dum, tek) | loop 4 bars, ~8 s | the same drum as Rhea's 636 layer |
+| `MUS_ICHOR_ENCOUNTER_ADMIN` | new | The Admins | each admin's entrance: Iapetos at Lakonia; Hyperion at Eleusa (Act I); Rhea | the Sickle in the admins' form, E-B♭-A (MUSIC.md) | E Locrian (Greek Mixolydian); 7/8 2+2+3, 636's ♩=168 | salpinx with a square, strings, the tuba and wave-bass grind, taiko | intro 1; loop 8 bars, ~10 s | the Sickle's tritone never rests. A short loop that hands off to the admin's copy of 636, shared by all three with no layer. |
 | `MUS_ICHOR_DELPHOI` | new | Delphoi | the Sacred Olives, the gorge's upper half, Delphoi and its houses, the Korykian path, Route 29's lower half | the Thread's call in Dorian opens the nome, in the cue's key | Dorian, high, tonic free but not D; 4/4, ♩≈104 | kithara (the nome), lyre, syrinx, strings, sine bass, soft frame drum; the bee-hum drone as a square with fast vibrato, not the hum, which stays the spring's | intro 2; A 8, A2 8, B 8, C 8; ~74 s | — |
 | `MUS_ICHOR_TITAN_MUSTER` | arrangement of 616 | The Last Muster | the gorge's camp | the Sickle at half tempo (augmentation, *new*) | B Locrian; 9/8 3+2+2+2, ♩=82: 616's 162, halved and made even | 616's, with the chorus as a crowd chanting the downbeats, thinning on the second pass | A 8, C 8 from 616; ~53 s | — |
 | `MUS_ICHOR_TEMPLE_APOLLO` | new | The Pythian Light | the Temple of Apollo, through the rite | Daphne's Question as one chord, G D A B C♯ (*new*) | G Lydian; one held chord, 4/4, ♩=60 | strings, chorus, horns, lyre, salpinx: one voice for each beam | loop 4 bars, ~16 s | each beam unmutes one voice (engine 1), with the raised fourth, C♯, last |
@@ -18311,12 +18300,11 @@ Of the 56 rows, 24 are new songs and 32 are arrangements. Two of the arrangement
 | `MUS_ICHOR_ELPIS_LULLABY_BOX_AULOS` | arrangement of 628 | The Box, and the Rod | the Pool of Mnemosyne, once the Measurer is roused | 628, with Lotira's rod: A4 G4 F4 E4 F4 G4 A4, a rest in bar 8 | 628's | 628's, plus the aulos | 628's | rules 1, 2 and 4 |
 | `MUS_ICHOR_ELPIS_LULLABY_BOX_LYRE` | arrangement of 628 | The Box, and the Spindle | Elaia, once the Spinner is roused | 628, with Nemira's spindle every bar, backwards in bar 8 | 628's | 628's, plus the lyre | 628's | rules 1, 2 and 4. The spindle is six harp notes a bar, so keep the box's lower teeth thin under it. |
 | `MUS_ICHOR_ELPIS_LULLABY_BOX_KLEOS` | arrangement of 628 | The Box, and Kleon | Delphoi, from Kleon's waking until the Stair | 628, with Kleos on one aulos: `E5:1 F5:1 E5:1 D5:1 E5:2 \| B4:6` over bars 1–2 | 628's | 628's, plus the aulos | 628's | rules 1 and 2. Kleos keeps his own notes, which are D Dorian's set. |
-| `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES` | arrangement of 628 | The Box, and the Three | the Stair of Hours | 628, with all three Fates' voices; the Ring on the tuba, muted until the Lord of Time is beaten | 628's | 628's, plus the lyre, aulos, frame drum and tuba | 628's | rule 4, the last time all three play. In bar 8 the comb is silent, the tick goes on and the three falter. |
+| `MUS_ICHOR_ELPIS_LULLABY_BOX_FATES` | arrangement of 628 | The Box, and the Three | the Stair of Hours | 628, with all three Fates' voices; Kleos in C major, C-D-C-B-C-G, on a muted track for the crumble; the Ring on the tuba, muted until the Lord of Time is beaten (MUSIC.md) | 628's | 628's, plus the lyre, aulos, frame drum and tuba, and a second aulos for Kleos | 628's | rule 4, the last time all three play together. In bar 8 the comb is silent, the tick goes on and the three falter. Kleos and the ring never sound at once, so only one extra voice is ever unmuted. |
 | `MUS_ICHOR_KRONOS` | arrangement of 627 | Kronos | the multi battle on the Stair | the lullaby, Phrygian and enormous; the Sickle's grind, D-E♭, in the bass (MUSIC.md) | D Phrygian; 3/4, ♩=56 | chorus and horns on the tune, salpinx, strings, tuba on the grind with the wave bass an octave under, timpani, taiko | intro 2; A 8, A2 8; ~51 s. Bar 8 of each verse is the grind alone. | rule 1: every phrase stops on A; rule 2 |
-| `MUS_ICHOR_KLEOS_MAJOR` | new | Kleos, in Major | the crumble | Kleos in major, E-F♯-E-D♯-E-B (MUSIC.md) | E Ionian; 9/8 2+2+2+3, slow, ♩≈96 | the aulos alone over strings; no chorus, since it has no words, and no drums | loop 4 bars, ~11 s | Director: E major, or C major over the box |
 | `MUS_ICHOR_LORD_OF_TIME` | new | The Lord of Time | its battle on the Stair; the post-game rematch, unchanged | the Ring, `D3:1 Eb3:1 F3:1 Eb3:1 D3:1 C#3:1 D3:1`, on the tuba; the Sickle on D, D-A♭-G, in the brass; the chorus holding the lullaby's A | D Phrygian with C♯; 7/8 \| 9/8 \| 5/8 \| 9/8, written as one 30/8 bar grouped 7+9+5+9; ♩≈168 | tuba (the ring) with the wave bass an octave under, horns and salpinx (the Sickle), chorus (the A), strings ostinato, timpani, taiko | intro 2; loop 28 bars, seven turns of the 30-eighth cycle, until the ring comes round to its first beat; ~38 s | rule 5; rule 2 |
 | `MUS_ICHOR_ELPIS_LULLABY_RESOLVED` | arrangement of 627 | Elpis's Lullaby, Finished | Elpis's line, once | the lullaby, all eight bars, with bar 8 `D5:6`: A rises to D | D Dorian; 3/4, ♩=72 (627's) | the hum alone | one-shot, 8 bars, 20 s; no loop | Rule 1's one exception, so it must never loop: a second pass would bring back the gap. |
-| `MUS_ICHOR_FATES_FREE` | arrangement of `MUS_ICHOR_FATES` and the title | The Fates, Free | the end of the Stair, after the twelfth chime | the Fates' three voices hands-free; in bar 8 no shears and the spindle forwards, D A D E F♯ (*new*: the F♯); then the main theme in D Lydian (MUSIC.md) | D Dorian, 3/4, ♩=60, into D Lydian, 4/4, ♩=112 | lyre, aulos and frame drum; then the title's ensemble | intro: the Fates' 8 bars, 24 s; loop: `MUS_ICHOR_MAIN_THEME_LYDIAN`'s A and B | rule 4: the last time the three sound together. Bar 8 has no roll and no stroke. |
+| `MUS_ICHOR_FATES_FREE` | arrangement of `MUS_ICHOR_FATES` and the title | The Fates, Free | the end of the Stair, after the twelfth chime | the Fates' three voices hands-free; in bar 8 no shears, and the spindle turning forwards into the main theme in D Lydian (MUSIC.md) | D Dorian, 3/4, ♩=60, into D Lydian, 4/4, ♩=112 | lyre, aulos and frame drum; then the title's ensemble | intro: the Fates' 8 bars, 24 s; loop: `MUS_ICHOR_MAIN_THEME_LYDIAN`'s A and B | rule 4: the last time the three sound together. Bar 8 has no roll and no stroke. Rule 1: bar 8's D is the spindle's root, struck as the Fates' line. Nothing carries the lullaby's A up to D, which stays Elpis's alone. |
 | `MUS_ICHOR_ALETHEA_BELIEVED` | arrangement of Act II's Alethea theme | They Believed Me | L-2, after "They believed me.", once | Alethea's theme, its first phrase answered by a second voice instead of repeated | the Act II theme's | two lyres | one-shot | It needs Act II's theme first (MUSIC.md, "Themes still to write"). |
 | `MUS_ICHOR_ASCENT` | arrangement of the title | The Ascent | Route 29's upper half, Route 30, the Foothills, the Weeping Cliff, the Snowfields, the Crags | the main theme in Mixolydian (mode change, *new*: MUSIC.md has the Thread in Mixolydian on the road's salpinx, but not the main theme) | D Mixolydian; 4/4, ♩≈84 | syrinx and aulos on the theme, horns, strings, kithara, sine bass, frame drum; sea wind as the mountain's | intro 2; A 8, B 8, C 8, each a step higher; ~70 s | slow and climbing |
 | `MUS_ICHOR_OLYMPUS_GATE` | new | The Gate of the Horai | the Gate | — | Lydian, high; 4/4, ♩≈60 | high strings and flute harmonics, a square, a soft timpani pulse | loop 8 bars, ~32 s | quiet: a lobby before the storm |
@@ -18328,7 +18316,7 @@ Of the 56 rows, 24 are new songs and 32 are arrangements. Two of the arrangement
 | `MUS_ICHOR_ARCHON` | new | The Archon | the Summit, from the first step to "Gods help you." | — | Mixolydian; 4/4, ♩≈84, stately | kithara and frame drum (STORY), low strings, horns | intro 2; A 8, B 8; ~45 s | it stops dead on "Gods help you" (a script stop) |
 | `MUS_ICHOR_BATTLE_ARCHON` | arrangement of `MUS_ICHOR_ARCHON` | The Archon's Battle | his battle | the Archon's tune, driven | Mixolydian; 4/4, ♩≈168 | the Archon's, plus salpinx, strings ostinato, taiko | intro 2; A 8, A2 8, B 8, C 8; ~45 s | no victory theme after it (engine 3) |
 | `MUS_ICHOR_HALL_OF_HEROES` | new | The Hall of Heroes | the Hall; the Hall of Fame record (`MUS_HALL_OF_FAME` repointed) | the Thread's call in major opens it (MUSIC.md's fanfares) | D Ionian; 4/4, ♩≈84 | salpinx and horns, chorus, timpani; then strings and the lyre on a held chord | 4 bars of fanfare, then a loop on the held chord, ~20 s | it begins quietly |
-| `MUS_ICHOR_CREDITS` | arrangement of the title and 610 | Credits | the credits (E14) | the main theme in D Lydian, then Elaia's theme with Mom's countersong (MUSIC.md) | D Lydian (4/4), then D Dorian (6/8) | the title's ensemble; then Elaia's roles, with the hum on the countersong | one-shot timed to E14's scroll; it ends on D, A rising to D as the lullaby's last bar did | rule 3. The two parts follow each other, never at once. |
+| `MUS_ICHOR_CREDITS` | arrangement of the title and 610 | Credits | the credits (E14) | the main theme in D Lydian, then Elaia's theme with Mom's countersong (MUSIC.md) | D Lydian (4/4), then D Dorian (6/8) | the title's ensemble; then Elaia's roles, with the hum on the countersong | one-shot timed to E14's scroll, ending on D | rule 3. The two parts follow each other, never at once. |
 | `MUS_ICHOR_FOOTRACE` | arrangement of 612 | Second Place, to a Wooloo | the epilogue's finish line | Kleos back in 9/8, light and quick (MUSIC.md) | E Phrygian; 9/8 2+2+2+3, ♩≈180 | syrinx and aulos, pizzicato, kithara, frame drum and krotala; no salpinx | intro 1; loop 8 bars, ~12 s | — |
 | `MUS_ICHOR_EPILOGUE_QUESTION` | arrangement of 637's B | We'll See | the Akademia, from "Which came first?" | Daphne's Question in D Lydian, `A4:2 D5:1 E5:1 F#5:4 \| G#5:6`, going on to A for the first time (MUSIC.md) | D Lydian; 4/4, ♩=72 (637's) | syrinx (the Question), lyre in tenths, strings, triangle | intro 1; loop 8 bars, ~27 s | it never comes home to D |
 
@@ -18339,11 +18327,8 @@ None of these is on main. Whichever act ships first builds each one.
 | Cue | Owed by | Act III needs it for | Brief |
 |---|---|---|---|
 | `MUS_ICHOR_BATTLE_HIEROPHANT` | Phase 2 (Kerykos, Chloe) | Galatea, Phemonoe | MUSIC.md: "Not yet scored". Phase 2's brief: heavier than the trainer theme, in 9/8 (zeibekiko). |
-| `MUS_ICHOR_ENCOUNTER_ADMIN` | Phase 2 (Hyperion at Eleusa) | Iapetos at Lakonia | The admins' Sickle, E-B♭-A in 7/8, as 621 is the grunts'. |
 | `MUS_ICHOR_BATTLE_ADMIN_HYPERION`, `_IAPETOS`, `_RHEA` | Act II: Hyperion's from Kaldera, Iapetos's and Rhea's from their first battles | Knossa's forge; Lakonia's gate; the Omphalos partner battle | Copies of 636, each with its tenth track (MUSIC.md): forge hammers; a chorus of aulos doubling the strings; a slow 7/8 Lakonian frame drum, half time against the 2+2+3. |
 | `MUS_ICHOR_BATTLE_RIVAL_TITAN` | Act II (the Akropolis) | Kleon at the heart (Scene J) | 612 with the Sickle's tritone: E-F-E-D-E-B♭ (MUSIC.md). |
-| `MUS_ICHOR_HEARTH_NIGHT` | Phase 2 (Aegina's inn) | Axylos's table, Hestia's farmhouse, Eschara, Peirithoos | A solo lyre by a fire. Not in MUSIC.md yet. |
-| `MUS_ICHOR_THEOXENIA` | the core theoxenia (Acts I–II) | Hermes, Hestia, Ares, Dionysus | One shared two-bar reveal sting, drums out of nowhere (Open questions 98). Not in MUSIC.md yet. |
 | Act II's town and scene cues | Act II | Kaldera's harbor (III-1A), Astyra (L-1), the ostracism pulse (L-2), Alethea's theme (the source of L-2's arrangement), the Gulf ferry (L-5A) | Not named yet. |
 
 ### Already on main
