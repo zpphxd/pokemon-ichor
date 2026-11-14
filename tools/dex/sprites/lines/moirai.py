@@ -226,8 +226,8 @@ GEO = {
                               (17.5, 37.5), (23, 39.5)], swirl=10, cov=0.44, arm_r=24, sign=-1),
         far=_wing((44, 36.5), [(54.5, 1.5), (59, 3.5), (62, 8), (62.5, 14), (61.5, 20), (59, 25.5), (55.5, 30),
                                (51.5, 33.5)], swirl=-8, cov=0.42, arm_r=23, sign=1),
-        body=[(40.5, 42, 10.5, 8.6, 14), (33.5, 39.5, 8.8, 8.8, 0)],
-        neck=[(33.5, 37), (24, 30.5), (41, 23), (31, 14)], neck_w=(9.8, 7.0),
+        body=[(41, 42.5, 12, 9.4, 14), (33.5, 39.5, 10, 9.6, 0)],
+        neck=[(33.5, 37), (24, 30.5), (41, 23), (31, 14)], neck_w=(12.0, 7.2),
         head=(29.5, 9.8), head_r=(7.6, 6.6), whorl=(31.5, 38.5),
         spine=[(34.5, 39), (39, 40.5), (43.5, 43.5), (46.5, 46)],
         tailfan=[((45.5, 42.5), (54, 37.5), 4.0), ((46.5, 43.5), (56.5, 41.5), 4.4), ((47, 45), (57, 46.5), 4.2)],
@@ -237,8 +237,8 @@ GEO = {
                               (18, 39)], swirl=8, cov=0.44, arm_r=26, sign=-1),
         far=_wing((45, 38), [(51, 1.5), (56, 2.5), (60, 5.5), (62, 10.5), (62.5, 16.5), (61.5, 22.5), (59, 28),
                              (55.5, 32.5), (51.5, 36)], swirl=-6, cov=0.42, arm_r=25, sign=1),
-        body=[(40.5, 46, 9.8, 7.0, 48), (35.5, 41.5, 7.4, 7.4, 0)],
-        neck=[(35.5, 38), (35.5, 29), (34, 20), (33.5, 12)], neck_w=(8.2, 6.0),
+        body=[(41, 46, 11, 8.2, 48), (35.5, 41.5, 8.8, 8.8, 0)],
+        neck=[(35.5, 38), (35.5, 29), (34, 20), (33.5, 12)], neck_w=(10.6, 6.2),
         head=(31.5, 7.8), head_r=(7.0, 6.0), whorl=(34, 41),
         spine=[(36.5, 42), (39.5, 45), (42.5, 48), (45, 51)],
         tailfan=[((43.5, 47), (51, 43), 4.0), ((44.5, 48.5), (54, 47.5), 4.4), ((45, 50), (53.5, 53), 4.2)],
@@ -248,8 +248,8 @@ GEO = {
                               (15, 22.5), (20.5, 24)], swirl=10, cov=0.4, arm_r=24, sign=-1),
         far=_wing((44, 34), [(50, 1.5), (55, 3), (58.5, 6.5), (60.5, 11), (61, 16), (59.5, 21), (56, 25),
                              (51.5, 28)], swirl=-10, cov=0.4, arm_r=22, sign=1),
-        body=[(41.5, 40.5, 11, 6.4, 8), (34, 38.5, 6.8, 6.8, 0)],
-        neck=[(33, 36.5), (38, 26), (32.5, 15), (26.5, 23)], neck_w=(7.2, 5.4),
+        body=[(42, 41, 12, 7.4, 8), (34, 39, 8.2, 8.2, 0)],
+        neck=[(33, 36.5), (38, 26), (32.5, 15), (26.5, 23)], neck_w=(9.4, 5.6),
         head=(22.5, 26.8), head_r=(6.8, 6.0), whorl=(31, 39),
         spine=[(35.5, 38.5), (40, 38.5), (45, 40), (49, 42)],
         tailfan=[((48, 39), (56, 35.5), 3.6), ((48.5, 40.5), (58, 39.5), 4.0), ((48.5, 42), (57, 44), 3.8)],
@@ -261,6 +261,206 @@ GEO["lotira"]["near"]["rows"] = [dict(rc=29, taper=0.5, n=6, bump=2.2), dict(rc=
 GEO["lotira"]["far"]["rows"] = [dict(rc=25, taper=0.5, n=5, bump=2.0), dict(rc=16, taper=0.45, n=3, bump=1.6)]
 GEO["thanira"]["near"]["rows"] = [dict(rc=19, taper=0.45, n=5, bump=2.0), dict(rc=12, taper=0.4, n=3, bump=1.6)]
 GEO["thanira"]["far"]["rows"] = [dict(rc=17, taper=0.5, n=5, bump=1.8), dict(rc=11, taper=0.45, n=3, bump=1.4)]
+
+
+# --------------------------------------------------------------------------
+# Wings, pass 3: real wings rather than fans. Each has a curved leading edge
+# from the shoulder S (bowed through C) to the wrist Wr, and the hand on to
+# Hd. The primaries fan out of the hand to separate points of their own
+# lengths; the secondaries hang from the forearm and curve back into the
+# body; two rows of coverts and the arm's marginal band lie over the roots.
+# Each sister's feathers have her own shape:
+#   Nemira   broad and rounded, each tip curling under like wool off a spindle
+#   Lotira   long narrow crane primaries splayed like fingers, cut square
+#   Thanira  ragged blades with gaps between them, like shears
+# --------------------------------------------------------------------------
+
+def fwing(S, C, Wr, Hd, prim, sec, pw, sw, cov=(6.0, 4.2), ncov=(6, 4)):
+    return dict(S=S, C=C, Wr=Wr, Hd=Hd, prim=prim, sec=sec, pw=pw, sw=sw, cov=cov, ncov=ncov)
+
+
+def _qb(p0, p1, p2, t):
+    a, b, c = (1 - t) ** 2, 2 * (1 - t) * t, t * t
+    return (a * p0[0] + b * p1[0] + c * p2[0], a * p0[1] + b * p1[1] + c * p2[1])
+
+
+def _arm(W, t):
+    """A point on the arm: t 0 at the shoulder, 1 at the wrist, up to 1.6
+    out along the hand."""
+    if t <= 1:
+        return _qb(W["S"], W["C"], W["Wr"], t)
+    return lerp(W["Wr"], W["Hd"], (t - 1) / 0.6)
+
+
+def curl_feather(a, b, w, curl=1.6, n=12):
+    """Nemira's feather: broad, round-ended, its tip curling under."""
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    d = math.hypot(dx, dy) or 1.0
+    nx, ny = -dy / d, dx / d
+    ux, uy = dx / d, dy / d
+    left, right = [], []
+    for i in range(n + 1):
+        t = i / n
+        off = curl * t ** 3
+        cx, cy = a[0] + dx * t + nx * off, a[1] + dy * t + ny * off
+        h = w / 2 * (0.5 + 0.5 * min(1.0, t / 0.45))
+        left.append((cx + nx * h, cy + ny * h))
+        right.append((cx - nx * h, cy - ny * h))
+    tip = (a[0] + dx + nx * curl, a[1] + dy + ny * curl)
+    cap = []
+    for i in range(1, 8):
+        ang = math.pi * i / 8
+        c, s_ = math.cos(ang), math.sin(ang)
+        cap.append((tip[0] + nx * (w / 2) * c + ux * (w / 2) * s_, tip[1] + ny * (w / 2) * c + uy * (w / 2) * s_))
+    return left + cap + right[::-1]
+
+
+def finger_feather(a, b, w, bend=0.0):
+    """Lotira's crane primary: long, even, the end cut square."""
+    dx, dy = b[0] - a[0], b[1] - a[1]
+    d = math.hypot(dx, dy) or 1.0
+    nx, ny = -dy / d * w / 2, dx / d * w / 2
+    m = lerp(a, b, 0.25)
+    return [(a[0] + nx * 0.6, a[1] + ny * 0.6), (m[0] + nx, m[1] + ny), (b[0] + nx, b[1] + ny),
+            (b[0] - nx, b[1] - ny), (m[0] - nx, m[1] - ny), (a[0] - nx * 0.6, a[1] - ny * 0.6)]
+
+
+def blade_feather(a, b, w, bend=0.0):
+    """Thanira's primary: a blade, widest a third out, to a sharp point."""
+    return lens_pts(a, b, w, bend, n=12, fat=0.33)
+
+
+FEATHER = {"soft": lambda a, b, w, sg: curl_feather(a, b, w, 1.5 * sg),
+           "rule": lambda a, b, w, sg: finger_feather(a, b, w),
+           "knife": lambda a, b, w, sg: blade_feather(a, b, w, 0.6 * sg)}
+
+
+def _trail(W, t):
+    """Unit vector from the arm toward the trailing edge at t."""
+    p0, p1 = _arm(W, max(0, t - 0.03)), _arm(W, min(1.6, t + 0.03))
+    tx, ty = p1[0] - p0[0], p1[1] - p0[1]
+    d = math.hypot(tx, ty) or 1
+    nx, ny = -ty / d, tx / d
+    cx = sum(q[0] for q in W["sec"]) / len(W["sec"])
+    cy = sum(q[1] for q in W["sec"]) / len(W["sec"])
+    q = _arm(W, t)
+    if (cx - q[0]) * nx + (cy - q[1]) * ny < 0:
+        nx, ny = -nx, -ny
+    return nx, ny
+
+
+def wing2(p, kind, W, beat, g0, side="near", bias=0.0, back=False):
+    """Draw a wing; tags every feather for the finisher."""
+    style = STYLE[kind]
+    shape = FEATHER[style]
+    sg = 1 if side == "near" else -1
+    rot = (-beat if side == "near" else beat)
+    c = W["S"]
+
+    def R(pt, k=1.0):
+        return _rot(pt, c, rot * k)
+    g = g0
+    n = len(W["prim"])
+    if not p.big:
+        # icons and followers: a few broad feathers, one covert mass, the arm,
+        # so the wing still reads at 32 px
+        for i, tip in enumerate(W["prim"]):
+            if i % 2:
+                continue
+            base = R(lerp(W["Hd"], W["Wr"], i / max(n - 1, 1)))
+            w = W["pw"][i] if isinstance(W["pw"], (list, tuple)) else W["pw"]
+            p.poly(lens_pts(base, R(tip, 1.3), w * 1.9, 0, fat=0.45), night_m, group=g, bias=bias)
+            g += 1
+        for i, tip in enumerate(W["sec"]):
+            if i % 2:
+                continue
+            t = 0.9 - 0.68 * i / max(len(W["sec"]) - 1, 1)
+            p.poly(lens_pts(R(_arm(W, t)), R(tip), W["sw"] * 1.8, 0, fat=0.45), night_m, group=g, bias=bias)
+            g += 1
+        q0, q1 = _arm(W, 0.25), _arm(W, 1.05)
+        tx, ty = _trail(W, 0.65)
+        p.poly(lens_pts(R(q0), R((q1[0] + tx * 3, q1[1] + ty * 3)), 9, 0, fat=0.5), cov_m, group=g, bias=bias)
+        path = [R(_arm(W, k / 12 * 1.4)) for k in range(13)]
+        p.limb(path, 4.4, 2.6, body_m, group=g + 1, bias=bias - 0.05)
+        return g + 2
+    for i, tip in enumerate(W["prim"]):
+        base = R(lerp(W["Hd"], W["Wr"], i / max(n - 1, 1)))
+        b = R(tip, 1.3)
+        w = W["pw"][i] if isinstance(W["pw"], (list, tuple)) else W["pw"]
+        pid = p.poly(shape(base, b, w, sg), night_m, group=g, bias=bias)
+        _tag(p, side + "_prim", pid, a=base, b=b, w=w, i=i, n=n)
+        g += 1
+    m = len(W["sec"])
+    for i, tip in enumerate(W["sec"]):
+        t = 0.9 - 0.68 * i / max(m - 1, 1)
+        base = R(_arm(W, t))
+        b = R(tip)
+        w = W["sw"]
+        pid = p.poly(shape(base, b, w, sg) if style != "soft" else curl_feather(base, b, w, 1.0 * sg),
+                     night_m, group=g, bias=bias)
+        _tag(p, side + "_sec", pid, a=base, b=b, w=w, i=i, n=m)
+        g += 1
+    # coverts: greater then lesser, each a row of rounded tongues along the arm
+    for row, (ln, cnt) in enumerate(zip(W["cov"], W["ncov"])):
+        for j in range(cnt):
+            t = 0.12 + (1.2 - 0.12) * (j + 0.5) / cnt
+            q = _arm(W, t)
+            tx, ty = _trail(W, t)
+            off = 1.2 if row == 0 else 0.4
+            a = (q[0] + tx * off, q[1] + ty * off)
+            L = ln * (0.75 + 0.25 * (1 - abs(t - 0.8) / 0.8))
+            b = (a[0] + tx * L, a[1] + ty * L)
+            w = 4.6 if row == 0 else 3.8
+            pid = p.poly(round_feather(R(a), R(b), w, 0.3 * sg, root=0.7), cov_m, group=g, bias=bias)
+            _tag(p, side + ("_gcov" if row == 0 else "_lcov"), pid, a=R(a), b=R(b), w=w, j=j)
+            g += 1
+    # the arm: the marginal coverts along the leading edge, root to hand
+    path = [R(_arm(W, k / 20 * 1.6)) for k in range(21)]
+    pid = p.limb(path, 4.2, 2.4, body_m, group=g, bias=bias - 0.05)
+    _tag(p, side + "_arm", pid, path=path)
+    return g + 1
+
+
+WINGS = {
+    "nemira": dict(
+        near=fwing((31, 33), (28.5, 18), (19, 15), (13, 10),
+                   [(4.5, 1.5), (1.5, 7), (1.5, 13.5), (2.5, 20), (5, 26), (9, 30.5), (14, 34)],
+                   [(18.5, 37.5), (22.5, 40), (26, 41.5), (29, 42)], pw=[5.0, 5.4, 5.6, 5.6, 5.6, 5.4, 5.2], sw=5.0),
+        far=fwing((44, 36), (42.5, 23), (48.5, 15), (52.5, 9),
+                  [(56, 1.5), (60.5, 4.5), (62.4, 10), (62.4, 16), (61, 22), (58, 27.5), (54.5, 31.5)],
+                  [(51.5, 35), (48.5, 38), (46, 39.5)], pw=[4.6, 5.0, 5.2, 5.2, 5.0, 4.8, 4.6], sw=4.6,
+                  cov=(5.0, 3.6), ncov=(5, 3))),
+    "lotira": dict(
+        near=fwing((33, 33), (32.5, 18.5), (22, 13), (16.5, 7.5),
+                   [(9.5, 1.2), (3.5, 3.5), (1.4, 9.5), (1.6, 16), (3.5, 22.5), (7.5, 28)],
+                   [(12, 33), (16.5, 36.5), (21.5, 39), (26.5, 40.5), (30.5, 40.5)], pw=3.8, sw=4.2,
+                   cov=(7.0, 4.6), ncov=(6, 4)),
+        far=fwing((45, 37), (43.5, 22.5), (50, 14), (53, 7.5),
+                  [(55, 1.2), (59.5, 3), (62.4, 7.5), (62.4, 13.5), (61.5, 19.5), (59, 25.5)],
+                  [(56.5, 30.5), (53.5, 34.5), (50, 37.5)], pw=3.6, sw=4.0, cov=(4.4, 3.0), ncov=(5, 3))),
+    "thanira": dict(
+        near=fwing((35, 30), (34, 16.5), (25, 12), (19.5, 6),
+                   [(13, 1.2), (8, 2.5), (4.5, 6), (3, 11), (4, 16.5), (7, 21)],
+                   [(11, 24.5), (15.5, 27), (20.5, 29), (26, 30)], pw=4.2, sw=4.2, cov=(5.0, 3.6), ncov=(5, 3)),
+        far=fwing((44, 34), (42.5, 21.5), (49, 14), (52, 7),
+                  [(54, 1.2), (58, 3), (61, 7), (62.4, 12), (61.5, 17.5), (59.5, 22.5)],
+                  [(56.5, 26.5), (53, 29.5), (49.5, 31.5)], pw=4.0, sw=4.0, cov=(4.6, 3.2), ncov=(4, 3))),
+}
+# the back view: the near wing sweeps out to the left and toward us, its
+# secondaries curving down in groups; the far wing rises behind the head
+BK_WINGS = {
+    k: dict(
+        near=fwing((21, 46), (17, 34), (10, 21), (8, 12),
+                   [(16, 1.5), (10, 1.4), (4.5, 3.5), (1.6, 8.5), (1.4, 15)] if k != "lotira" else
+                   [(17, 1.2), (11, 1.2), (5, 2.8), (1.6, 7.5), (1.4, 13.5)],
+                   [(1.4, 23), (1.8, 30), (3.5, 36.5), (7, 42), (12, 46.5)],
+                   pw=5.4 if k == "nemira" else (4.0 if k == "lotira" else 4.6), sw=5.6, cov=(6.0, 4.0), ncov=(5, 3)),
+        far=fwing((42, 45), (46, 33), (51, 22), (52.5, 13),
+                  [(47, 1.5), (52.5, 1.5), (57.5, 4), (61, 8.5), (62.4, 14)],
+                  [(62.4, 22), (61, 29), (58, 35), (54, 40)],
+                  pw=5.0 if k == "nemira" else (3.8 if k == "lotira" else 4.4), sw=5.0, cov=(5.0, 3.6), ncov=(4, 3)))
+    for k in ("nemira", "lotira", "thanira")
+}
 
 
 def tip_r(style, R, u, k):
@@ -497,13 +697,13 @@ def fate_front(p, kind, phase):
         _tag(p, "tailfan", p.poly(SHAPES[STYLE[kind]](a, b, w, 0.4), night_m, group=50 + i, bias=0.1),
              a=a, b=b, w=w)
 
-    wing(p, kind, G["far"], beat, 10, bias=0.12, side="far")
+    wing2(p, kind, WINGS[kind]["far"], beat, 10, side="far", bias=0.12)
 
     # ---- body: breast and back as one form ------------------------------------
     for cx, cy, rx, ry, ang in G["body"]:
         _tag(p, "body", p.blob(cx, cy, rx, ry, body_m, ang=ang, group=1))
 
-    wing(p, kind, G["near"], beat, 100, side="near")
+    wing2(p, kind, WINGS[kind]["near"], beat, 100, side="near")
 
     # ---- the swan's neck and head ------------------------------------------------
     neck = bez3(*G["neck"], n=24)
@@ -513,7 +713,7 @@ def fate_front(p, kind, phase):
     _moved(p, hd, _head, p, kind, L)
     # the bronze whorl in the breast
     wx, wy = G["whorl"]
-    _tag(p, "whorl", p.circle(wx, wy, 3.2, bronze_m, group=6))
+    _tag(p, "whorl", p.circle(wx, wy, 4.4, bronze_m, group=6))
     if not big:
         return
 
@@ -580,11 +780,11 @@ BK_HEAD_R = {k: (g["head_r"][0] * 1.2, g["head_r"][1] * 1.2) for k, g in GEO.ite
 
 def fate_back(p, kind):
     {"nemira": _bk_spindle, "lotira": _bk_plume, "thanira": _bk_shears}[kind](p)
-    wing(p, kind, BK_FAR, 0, 10, bias=0.12, side="far")
+    wing2(p, kind, BK_WINGS[kind]["far"], 0, 10, side="far", bias=0.12, back=True)
     # the back, cropped by the frame, with the shoulders the wings rise from
     _tag(p, "body", p.blob(31, 61, 22, 12.5, body_m, group=1))
     _tag(p, "body", p.blob(41, 50, 7.5, 6.5, body_m, group=1))
-    wing(p, kind, BK_NEAR, 0, 100, side="near")
+    wing2(p, kind, BK_WINGS[kind]["near"], 0, 100, side="near", back=True)
     _tag(p, "body", p.blob(19.5, 52, 9, 7.5, body_m, group=4))
     neck = bez3(*BK_NECK, n=24)
     nw0, nw1 = BK_NECK_W[kind]
@@ -716,7 +916,7 @@ def make(kind):
 
 
 MONS = [
-    Mon("Nemira", NEMIRA_COLORS, NEMIRA_SHINY, make("nemira"), foot="bird", icon_pal=0),
-    Mon("Lotira", LOTIRA_COLORS, LOTIRA_SHINY, make("lotira"), foot="bird", icon_pal=4),
-    Mon("Thanira", THANIRA_COLORS, THANIRA_SHINY, make("thanira"), foot="bird", icon_pal=2),
+    Mon("Nemira", NEMIRA_COLORS, NEMIRA_SHINY, make("nemira"), foot="bird", icon_pal=0, follow=27),
+    Mon("Lotira", LOTIRA_COLORS, LOTIRA_SHINY, make("lotira"), foot="bird", icon_pal=4, follow=27),
+    Mon("Thanira", THANIRA_COLORS, THANIRA_SHINY, make("thanira"), foot="bird", icon_pal=2, follow=27),
 ]
