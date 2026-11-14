@@ -10,6 +10,8 @@ Writes, in graphics/text_window/:
   message_box.png  field dialogue box (14 tiles) and BG palette 15 for text
   1.png            menu frame style 1, the default (optionsWindowFrameType 0)
   name_box.png     speaker name plaque that sits on the dialogue box
+  signpost.png     marble stele frame for signs (text_pal1.pal, slots 10-15)
+  2.png - 5.png    selectable variants: red-figure, white-ground, Aegean, bronze
 
 Usage: python3 tools/ichor/art/ui_frames.py
 """
@@ -161,6 +163,81 @@ def frame_1():
     write_png(OUT / "1.png", 3, t, FRAME_PAL, FRAME_KEY, True)
 
 
+def name_box():
+    # 3x2 tiles (src/field_name_box.c): left cap, middle (tiled under the
+    # name), right cap. The bottom row covers the dialogue box's top band, so
+    # outside the plaque it repeats that band. Text is parchment (index 1) on an
+    # ink plaque with a light-clay rim.
+    body = [" ", "o", "l"] + ["#"] * 10 + ["l", "o", "p"]
+    band = [" "] * 8 + TOP
+    mid = ["".join(body[y] for _ in range(8)) for y in range(16)]
+    cap = []
+    for y in range(16):
+        row = ""
+        for x in range(8):
+            if x < 4 or (x == 4 and y < 3) or (x == 5 and y < 2):
+                row += band[y][x] if y >= 8 else " "
+            elif x == 4 or (x == 5 and y < 3) or y in (1, 14):
+                row += "o" if 1 <= y <= 14 else band[y][x]
+            elif x == 5 or y in (2, 13):
+                row += "l" if y < 15 else "p"
+            else:
+                row += body[y]
+        cap.append(row)
+    left, right = cap, [r[::-1] for r in cap]
+    t = [left[:8], mid[:8], right[:8], left[8:], mid[8:], right[8:]]
+    write_png(OUT / "name_box.png", 3, t, MSG_PAL, MSG_KEY, False)
+
+
+# Sign frame: a marble stele. Layers run outside-in; the frame is drawn from a
+# corner tile, a top edge, outer and inner side tiles, all flipped by the code.
+SIGN_PROFILE = "oLLMkMLp"
+SIGN_PAL_FRAME = {10: (248, 248, 240), 11: (216, 208, 192), 12: (168, 160, 152),
+                  13: (120, 48, 24), 14: (32, 24, 24), 15: (32, 24, 24)}
+SIGN_KEY = {" ": 0, "p": 1, "L": 10, "M": 11, "D": 12, "k": 13, "o": 15}
+
+
+def signpost():
+    pal_path = OUT / "text_pal1.pal"
+    text = pal_path.read_bytes().decode()
+    nl = "\r\n" if "\r\n" in text else "\n"
+    lines = text.split(nl)
+    for i, c in SIGN_PAL_FRAME.items():
+        lines[3 + i] = "%d %d %d" % c
+    pal_path.write_bytes(nl.join(lines).encode())
+    pal = [tuple(map(int, l.split())) for l in lines[3:19]]
+    P = SIGN_PROFILE
+    corner = ["".join(" " if x == y == 0 else P[min(x, y)] for x in range(8)) for y in range(8)]
+    top = [P[y] * 8 for y in range(8)]
+    side = ["".join(P[x] for x in range(8))] * 8
+    field = ["pppppppp"] * 8
+    # slots: 0 corner, 1 top beside corner, 2 outer side, 3 inner side, 4 top
+    im_tiles = [corner, top, side, field, top]
+    pal16 = [tuple(v - v % 8 for v in c) for c in pal]
+    write_png(OUT / "signpost.png", 5, im_tiles, pal16, SIGN_KEY, True)
+
+
+# Variants of frame 1: the same tiles, other pottery wares.
+VARIANTS = {
+    2: (INK, CLAY_DARK, CLAY, (32, 24, 24)),                 # red-figure: clay key on ink
+    3: ((248, 248, 240), (168, 160, 152), INK, INK),         # white-ground
+    4: ((176, 216, 240), (48, 104, 176), (24, 56, 120), (24, 56, 120)),  # Aegean
+    5: ((240, 192, 64), (200, 144, 40), INK, INK),           # bronze
+}
+
+
+def variants():
+    t = [CORNER, TOP, hflip(CORNER), LEFT, FIELD, hflip(LEFT),
+         vflip(CORNER), vflip(TOP), vflip(hflip(CORNER))]
+    for n, (ground, line, key, outline) in VARIANTS.items():
+        pal = list(FRAME_PAL)
+        pal[1], pal[2], pal[3], pal[4], pal[15] = key, line, ground, ground, outline
+        write_png(OUT / f"{n}.png", 3, t, pal, FRAME_KEY, True)
+
+
 if __name__ == "__main__":
     message_box()
     frame_1()
+    name_box()
+    signpost()
+    variants()
