@@ -19,6 +19,7 @@
 #include "field_poison.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
+#include "ichor_statue.h" // Ichor
 #include "fldeff_misc.h"
 #include "follower_npc.h"
 #include "item_menu.h"
@@ -185,6 +186,8 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
         DespawnAllOverworldWildEncounters(OWE_GENERATED, WILD_CHECK_REPEL);
+        if (Ichor_StatuesOnPlayerStep() == TRUE) // Ichor: marble statues move, or touch (src/ichor_statue.c)
+            return TRUE;
         if (FindTaskIdByFunc(Task_FollowerNPCOutOfDoor) == TASK_NONE && TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }

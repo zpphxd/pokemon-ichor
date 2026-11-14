@@ -638,3 +638,6 @@ gSpecials::
 	def_special UpdateTrainerCardPhotoIcons
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
+	@ Ichor: Act III engine specials (design/phase4/ENGINE_ACT3.md)
+	def_special Ichor_BullLeap, waitstate=1
+	def_special Ichor_TraceBeam
