@@ -2,7 +2,7 @@
   "id": "MAP_AKTI_TOWN_TEMPLE_OF_HESTIA",
   "name": "AktiTown_TempleOfHestia",
   "layout": "LAYOUT_AKTI_TOWN_TEMPLE_OF_HESTIA",
-  "music": "MUS_GYM",
+  "music": "MUS_ICHOR_TEMPLE",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_AKTI_TOWN",
   "requires_flash": false,
@@ -14,23 +14,428 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
+  "object_events": [
+    {
+      "local_id": "LOCALID_TEMPLE_EUBOULOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 9,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AktiTown_TempleOfHestia_EventScript_Euboulos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TEMPLE_LAMPON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
+      "x": 8,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "AktiTown_TempleOfHestia_EventScript_Lampon",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TEMPLE_PYRRHA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 3,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "AktiTown_TempleOfHestia_EventScript_Pyrrha",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TEMPLE_AITHRA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 12,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "AktiTown_TempleOfHestia_EventScript_Aithra",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TEMPLE_IONE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HIEROPHANT_IONE",
+      "x": 8,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AktiTown_TempleOfHestia_EventScript_Ione",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TEMPLE_KANTHOS",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(MUDBRAY)",
+      "x": 15,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AktiTown_TempleOfHestia_EventScript_Kanthos",
+      "flag": "0"
+    }
+  ],
   "warp_events": [
     {
-      "x": 5,
-      "y": 19,
+      "x": 8,
+      "y": 23,
       "elevation": 0,
       "dest_map": "MAP_AKTI_TOWN",
       "dest_warp_id": "3"
     },
     {
-      "x": 6,
-      "y": 19,
+      "x": 7,
+      "y": 23,
+      "elevation": 0,
+      "dest_map": "MAP_AKTI_TOWN",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 9,
+      "y": 23,
       "elevation": 0,
       "dest_map": "MAP_AKTI_TOWN",
       "dest_warp_id": "3"
     }
   ],
-  "coord_events": [],
-  "bg_events": []
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "1",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "2",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "3",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "4",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "5",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "1",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "2",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "3",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "4",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "5",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "1",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "2",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "3",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "4",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 23,
+      "elevation": 3,
+      "var": "VAR_ICHOR_HEARTH_TRIAL",
+      "var_value": "5",
+      "script": "AktiTown_TempleOfHestia_EventScript_TorchSputters"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_Stele"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 21,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_Stele"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_GreatHearth"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_GreatHearth"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_GreatHearth"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_GreatHearth"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_GreatHearth"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_GreatHearth"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_GreatHearth"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_GreatHearth"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierDoor"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierDoor"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierTable"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierTable"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierLoom"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 17,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierLoom"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 16,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierBed"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 17,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierBed"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierDais"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierDais"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierDais"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "AktiTown_TempleOfHestia_EventScript_BrazierDais"
+    }
+  ]
 }
