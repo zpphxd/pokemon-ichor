@@ -362,7 +362,7 @@
       "id": "HEAL_LOCATION_ELAIA_VILLAGE",
       "map": "MAP_ELAIA_VILLAGE",
       "x": 5,
-      "y": 9,
+      "y": 13,
       "respawn_map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F",
       "respawn_npc": "LOCALID_PLAYERS_HOUSE_1F_MOM",
       "respawn_x": 3,

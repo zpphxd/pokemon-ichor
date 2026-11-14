@@ -754,6 +754,7 @@ Layout reference, from the scaffold: the player's house door is at (5,8), upper 
 | Kid with Wooloo | near the well | comic |
 | Old shepherd | north exit | gate |
 | Kleon, Alethea | beat 4 only | — |
+| Glykera, Kimon | at home, in the house west of the square | see "Glykera's house" below |
 
 **Halia**
 ```text
@@ -872,6 +873,9 @@ Today Kalliste's youths come of age. Threads read under the old olive.
 [Herm at the north exit, a road-pillar of Hermes]
 A herm stands by the road.
 North: Route 1, Akti Town.
+
+[The honey-cake stall in the square]
+Glykera's honey cakes, still warm. She's run home to bake another batch.
 ```
 
 **Hidden items and objects.** See Part 5.
@@ -942,6 +946,115 @@ KYDIPPE: Every child I've delivered walks that road one day. Go well.
 ```text
 CHANSEY: Chaaan! [It pats your head. Professionally.]
 ```
+
+## Glykera's house (`MAP_ELAIA_VILLAGE_BAKERS_HOUSE`)
+
+Every house is a home (`design/MAP_DESIGN.md` §2). This is the house west of the square. **Glykera** bakes the Klotheia's honey cakes, and the stall in the square is hers; she is Korinna's mother. Her father **Kimon** pulled an oar on the war triremes for forty years and keeps the corner by the window. His Finizen, **Arion**, swam beside his ship the whole way.
+
+What happens:
+- **A swap.** Glykera has run out of honey. The comb hidden in Melitta's hives (Part 6) buys two of her honey cakes (Old Gateau ×2).
+- **A trade, after beat 4.** Once the player has Poké Balls, Kimon trades Arion for a Wooloo from Route 1.
+- **A return gift, after the Hearth Laurel.** Kimon gives the pearls he dived for as a boy (Pearl String).
+- **Lore.** Kimon's halcyon days ("the sea goes flat as oil… no sail moves a ship then") set up beat 8.
+
+The room is L-shaped: the bakery runs deep on the left, with the honey shelf, the oven (the kitchen hearth), the flour basket, the grain pithos, the kneading table and the mortar. Kimon's nook is a shallower bay on the right, with the model trireme, his oars and a blue rug.
+
+**Glykera**, at her oven
+```text
+> FLAG_ICHOR_GOT_GLYKERA_CAKES unset, no Honey in the bag:
+GLYKERA: Mind the tray! …Oh, it's you. Melitta's child. The whole island wants honey cakes today.
+
+GLYKERA: And I've run out of honey. On festival day! Your mother promised me a jar.
+
+GLYKERA: Her hives are behind your house. Bring me a comb and I'll make it worth your while.
+
+> unset, with Honey:
+GLYKERA: Is that honey? Melitta's honey? Oh, you darling. Give it here.
+```
+[Take one `ITEM_HONEY`.]
+```text
+GLYKERA: There. The last tray is saved, and so is the festival.
+
+GLYKERA: Take two from the first batch. They're still warm.
+```
+[Give `ITEM_OLD_GATEAU` ×2. Set `FLAG_ICHOR_GOT_GLYKERA_CAKES`.]
+```text
+GLYKERA: Honey and barley. They mend whatever ails you, or your Pokémon.
+
+> after the cakes, before FLAG_ICHOR_THREAD_READ:
+GLYKERA: Korinna's been at the square since dawn. She says she isn't nervous.
+
+GLYKERA: She's been sick twice.
+
+> after FLAG_ICHOR_THREAD_READ:
+GLYKERA: Right about half the time, Halia told my Korinna.
+
+GLYKERA: She's choosing to hear it as a compliment. She gets that from her grandfather.
+
+> after FLAG_ICHOR_KLEON_BATTLE_1_DONE:
+GLYKERA: That Lakonian boy bought eleven cakes and ate twelve. I'm still working out how.
+```
+
+**Kimon**, by his chair under the window
+```text
+> before FLAG_ICHOR_GOT_POKEBALLS:
+KIMON: Forty years on the rowing benches. Top bench, the thranites. Best view of the sky.
+
+KIMON: Up there you learn the sea. When the halcyons nest, it goes flat as oil.
+
+KIMON: Days with no wind at all. No sail moves a ship then. Only oars.
+
+KIMON: My knees are done with oars. Arion isn't done with the sea. He sulks in his ball all day.
+
+KIMON: Come back when you've some Poké Balls of your own. I've a thought about Arion.
+
+> after FLAG_ICHOR_GOT_POKEBALLS:
+KIMON: Arion's my Finizen. He swam beside my ship from Kalliste to Athens and back, twenty years.
+
+KIMON: He's wasted on an old man by a fire. Bring me a Wooloo, something warm for my feet,
+
+KIMON: and Arion goes to sea with you. Deal?
+```
+?? YES/NO, then choose a Pokémon (the expansion's party-and-storage picker)
+```text
+> NO, or nothing chosen:
+KIMON: Think on it. Wooloo graze all along the road north.
+
+> not a Wooloo:
+KIMON: That's no Wooloo. My feet know the difference.
+
+> a Wooloo: [the in-game trade `INGAME_TRADE_ICHOR_ARION`: Finizen "ARION", OT KIMON, holding an Oran Berry. Set FLAG_ICHOR_DID_KIMON_TRADE.]
+KIMON: Mind this one, Arion. Stubborn chin. Runs in the family.
+
+> after the trade:
+KIMON: The Wooloo's asleep on my feet already.
+
+KIMON: Best trade I ever made, and I once swapped a helmet for a goat.
+
+> FLAG_BADGE01_GET set, FLAG_ICHOR_GOT_KIMON_PEARLS unset (comes first):
+KIMON: A laurel! From the Hearthkeeper herself?
+
+KIMON: In my day the winner got a cup of wine and a slap on the back.
+
+KIMON: Here. I brought these up off the sea floor when I was your age.
+
+KIMON: Sell them for your passage, or keep them for luck. I never decided.
+```
+[Give `ITEM_PEARL_STRING`. Set `FLAG_ICHOR_GOT_KIMON_PEARLS`.]
+```text
+> after the trade and the Hearth Laurel:
+KIMON: Halcyon days down at Akti, they tell me. Sea like oil, and no wind.
+
+KIMON: Told you. Only oars move a ship then.
+```
+
+| Object | Text |
+|---|---|
+| The oven | "Glykera's oven. The tray inside smells of honey and toasted barley." |
+| Honey shelf | Before the cakes: "Jars of honey, every one of them scraped clean. On festival day." After: "Jars of honey. One is full again, sealed with Melitta's wax." |
+| Grain pithos | "A pithos of barley flour, half empty. Someone has written “FESTIVAL” on the lid." |
+| Model trireme | "A model trireme with three banks of tiny oars." / "Someone has painted KIMON on the top bench." |
+| Kimon's window | "Between the olive trees, a sliver of sea. It hardly moves." |
 
 ## Akademia (`MAP_ELAIA_VILLAGE_AKADEMIA`)
 
@@ -1887,9 +2000,12 @@ Flag naming: visible item balls use `FLAG_ITEM_ICHOR_<MAP>_<ITEM>`, hidden items
 | Player's house 2F | Potion | chest (item storage) | starts inside, as in vanilla |
 | Player's house 1F | Talaria | gift, Mom (beat 1) | — |
 | Elaia | Potion | visible | beside the olive press |
-| Elaia | Honey | hidden | at Mom's beehives behind the house |
+| Elaia | Honey | hidden | at Mom's beehives behind the house; Glykera swaps her honey cakes for it |
 | Elaia | Relic Copper | hidden | in the well ("a coin someone wished on") |
 | Elaia, Kydippe's house | Oran Berry ×2 | gift | — |
+| Elaia, Glykera's house | Old Gateau ×2 (honey cakes) | swap, for the Honey from Melitta's hives | — |
+| Elaia, Glykera's house | Finizen "Arion" | in-game trade with Kimon, for a Wooloo; after beat 4 | — |
+| Elaia, Glykera's house | Pearl String | gift, Kimon; after the Hearth Laurel | — |
 | Akademia | starter, Pokédex | gift, Daphne | — |
 | Elaia | Poké Ball ×5 | gift, Alethea (beat 4) | — |
 | Route 1 | Poké Ball | visible | on the grove's west walk, above the lip down to the meadow |
@@ -1929,6 +2045,9 @@ All names are Greek-rooted and clear of the Lazarus avoid-list.
 | the Klotheia | the coming-of-age festival | Klotho, the Spinner |
 | Korinna, Philon | youths at the reading | classical names |
 | Kydippe | the midwife next door | classical name |
+| Glykera | the honey-cake baker, Korinna's mother | "sweet one" |
+| Kimon | her father, a retired trireme oarsman | the Athenian admiral Cimon |
+| Arion | Kimon's Finizen | the poet a dolphin carried ashore |
 | Gylippos | Lakonian elder | Spartan name |
 | Amaryllis | the shepherdess with the flock | Theocritus |
 | Tityros | Shepherd | Theocritus |
@@ -1974,6 +2093,9 @@ Engine: claim these as `FLAG_ICHOR_*` and `VAR_ICHOR_*`.
 
 **Gifts**
 - `FLAG_ICHOR_GOT_KYDIPPE_ORAN`
+- `FLAG_ICHOR_GOT_GLYKERA_CAKES`
+- `FLAG_ICHOR_DID_KIMON_TRADE`
+- `FLAG_ICHOR_GOT_KIMON_PEARLS`
 - `FLAG_ICHOR_GOT_ROUTE1_SITRUS`
 - `FLAG_ICHOR_GOT_MOOMOO_MILK`
 - `FLAG_ICHOR_GOT_MYSTIC_WATER`
