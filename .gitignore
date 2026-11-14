@@ -88,3 +88,13 @@ data/maps/KallisteRoute1_KronionHill/scripts.inc
 data/maps/ElaiaVillage_BakersHouse/scripts.inc
 data/maps/AktiTown_DiversHouse/scripts.inc
 data/maps/AktiTown_GoatherdsHouse/scripts.inc
+data/maps/TriremeEuploia_Deck/scripts.inc
+data/maps/AeginaTown/scripts.inc
+data/maps/AeginaAphaiaRoad/scripts.inc
+data/maps/AeginaTempleOfAphaia/scripts.inc
+data/maps/AeginaMountOros/scripts.inc
+data/maps/TriremeEuploia_Hold/scripts.inc
+data/maps/AeginaTown_Inn/scripts.inc
+data/maps/AeginaTown_Mint/scripts.inc
+data/maps/AeginaTown_AiakidesHouse/scripts.inc
+data/scripts/ichor_act1.inc

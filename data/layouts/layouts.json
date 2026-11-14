@@ -9488,6 +9488,105 @@
       "border_filepath": "data/layouts/AktiTown_GoatherdsHouse/border.bin",
       "blockdata_filepath": "data/layouts/AktiTown_GoatherdsHouse/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_TRIREME_EUPLOIA_DECK",
+      "name": "TriremeEuploia_Deck_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Akti",
+      "border_filepath": "data/layouts/TriremeEuploia_Deck/border.bin",
+      "blockdata_filepath": "data/layouts/TriremeEuploia_Deck/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AEGINA_TOWN",
+      "name": "AeginaTown_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Akti",
+      "border_filepath": "data/layouts/AeginaTown/border.bin",
+      "blockdata_filepath": "data/layouts/AeginaTown/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AEGINA_APHAIA_ROAD",
+      "name": "AeginaAphaiaRoad_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Akti",
+      "border_filepath": "data/layouts/AeginaAphaiaRoad/border.bin",
+      "blockdata_filepath": "data/layouts/AeginaAphaiaRoad/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AEGINA_TEMPLE_OF_APHAIA",
+      "name": "AeginaTempleOfAphaia_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Akti",
+      "border_filepath": "data/layouts/AeginaTempleOfAphaia/border.bin",
+      "blockdata_filepath": "data/layouts/AeginaTempleOfAphaia/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AEGINA_MOUNT_OROS",
+      "name": "AeginaMountOros_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Akti",
+      "border_filepath": "data/layouts/AeginaMountOros/border.bin",
+      "blockdata_filepath": "data/layouts/AeginaMountOros/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_TRIREME_EUPLOIA_HOLD",
+      "name": "TriremeEuploia_Hold_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/TriremeEuploia_Hold/border.bin",
+      "blockdata_filepath": "data/layouts/TriremeEuploia_Hold/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AEGINA_TOWN_INN",
+      "name": "AeginaTown_Inn_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/AeginaTown_Inn/border.bin",
+      "blockdata_filepath": "data/layouts/AeginaTown_Inn/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AEGINA_TOWN_MINT",
+      "name": "AeginaTown_Mint_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/AeginaTown_Mint/border.bin",
+      "blockdata_filepath": "data/layouts/AeginaTown_Mint/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AEGINA_TOWN_AIAKIDES_HOUSE",
+      "name": "AeginaTown_AiakidesHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/AeginaTown_AiakidesHouse/border.bin",
+      "blockdata_filepath": "data/layouts/AeginaTown_AiakidesHouse/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

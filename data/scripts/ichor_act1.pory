@@ -1,0 +1,89 @@
+// Phase 2, Act I on the mainland: scripts shared between maps.
+// design/phase2/BUILD.md lists them; design/phase2/SCRIPT.md has the words.
+
+text Ichor_Text_NameNausikles { "NAUSIKLES" }
+
+// ---------------------------------------------------------------------------
+// The Euploia's ferry (SCRIPT.md Part 2, "Nausikles as the ferry").
+// Once the first voyage is done, Nausikles runs Akti, Aegina and Emporion.
+// On a quay, he asks where to and puts the player on deck; on deck, "Ready to
+// make port?" sails to the chosen quay. The destination rides in two flags
+// (both clear: Akti), because temp vars don't survive the warp to the deck.
+// ---------------------------------------------------------------------------
+
+// Called from Nausikles on a quay. VAR_0x8004: the quay he stands on
+// (0 Akti, 1 Aegina, 2 Emporion).
+script Ichor_EventScript_FerryQuay {
+    lock
+    faceplayer
+    setspeaker(Ichor_Text_NameNausikles)
+    msgbox(format("Where to? Wind's fair, more or less."))
+    // ICHOR_STUB_EMPORION: Emporion joins the list when its quay exists.
+    if (var(VAR_0x8004) == 0) {
+        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AEGINA", "STAY")
+        if (var(VAR_RESULT) == 0) {
+            setflag(FLAG_ICHOR_FERRY_TO_AEGINA)
+            clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
+            goto(Ichor_EventScript_FerryBoard)
+        }
+    } else {
+        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AKTI", "STAY")
+        if (var(VAR_RESULT) == 0) {
+            clearflag(FLAG_ICHOR_FERRY_TO_AEGINA)
+            clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
+            goto(Ichor_EventScript_FerryBoard)
+        }
+    }
+    msgbox(format("Suit yourself. I'll be here. The boat'll be here. Probably."))
+    release
+}
+
+script Ichor_EventScript_FerryBoard {
+    msgbox(format("Good. Mind the oars. They don't mind you."))
+    closemessage
+    playse(SE_EXIT)
+    fadescreen(FADE_TO_BLACK)
+    // The deck's boarding tile (BUILD.md's arrival table).
+    warp(MAP_TRIREME_EUPLOIA_DECK, 0)
+    waitstate
+    release
+}
+
+// Called from Nausikles on deck once FLAG_ICHOR_CROSSING_DONE is set.
+script Ichor_EventScript_FerryDeck {
+    lock
+    faceplayer
+    setspeaker(Ichor_Text_NameNausikles)
+    msgbox(format("Ready to make port?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("No rush. The sea's not going anywhere. That's its whole trick."))
+        release
+        end
+    }
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    if (flag(FLAG_ICHOR_FERRY_TO_AEGINA)) {
+        warp(MAP_AEGINA_TOWN, 0)
+    } else {
+        warpsilent(MAP_AKTI_TOWN, 9, 10)
+    }
+    waitstate
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The end of beat 10C. ICHOR_STUB_EMPORION: until Emporion's quay exists, a
+// card says what's next and leaves the player on deck with the ferry running.
+// Batch 2 replaces the body with the warp to Emporion's quay.
+// ---------------------------------------------------------------------------
+script Ichor_EventScript_EuploiaMakesEmporion {
+    setflag(FLAG_ICHOR_CROSSING_DONE)
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    msgbox(format("Emporion, the harbor of the world, is next.\p"
+                  "Its streets are still being laid.\p"
+                  "Until they are, the Euploia sails Akti and Aegina."))
+    closemessage
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+}

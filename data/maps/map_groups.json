@@ -75,7 +75,8 @@
     "gMapGroup_IndoorTwoIslandRoute_Frlg",
     "gMapGroup_IndoorSixIslandRoute_Frlg",
     "gMapGroup_IndoorSevenIslandRoute_Frlg",
-    "gMapGroup_IndoorKalliste"
+    "gMapGroup_IndoorKalliste",
+    "gMapGroup_IndoorAegina"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -138,7 +139,12 @@
     "ElaiaVillage",
     "KallisteRoute1",
     "AktiTown",
-    "KallisteRoute1_KronionHill"
+    "KallisteRoute1_KronionHill",
+    "TriremeEuploia_Deck",
+    "AeginaTown",
+    "AeginaAphaiaRoad",
+    "AeginaTempleOfAphaia",
+    "AeginaMountOros"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -1178,5 +1184,11 @@
     "ElaiaVillage_BakersHouse",
     "AktiTown_DiversHouse",
     "AktiTown_GoatherdsHouse"
+  ],
+  "gMapGroup_IndoorAegina": [
+    "TriremeEuploia_Hold",
+    "AeginaTown_Inn",
+    "AeginaTown_Mint",
+    "AeginaTown_AiakidesHouse"
   ]
 }

@@ -892,4 +892,7 @@
 #endif
 #define TRAINER_PARTNER(partner)           (MAX_TRAINERS_COUNT + partner)
 
+// Ichor: Phase 2 trainer names until their ids are registered (see the header).
+#include "constants/ichor_trainer_stubs.h"
+
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

@@ -669,39 +669,39 @@
 #define FLAG_ICHOR_HIDDEN_ROUTE1_ANTIDOTE 0x266 // Ichor: hidden item: Route 1 Antidote
 #define FLAG_ICHOR_HIDDEN_KRONION_HARD_STONE 0x267 // Ichor: hidden item: Kronion Hill Hard Stone
 #define FLAG_ICHOR_HIDDEN_KRONION_STARDUST 0x268 // Ichor: hidden item: Kronion Hill Stardust
-#define FLAG_UNUSED_0x269  0x269 // Unused Flag
-#define FLAG_UNUSED_0x26A  0x26A // Unused Flag
-#define FLAG_UNUSED_0x26B  0x26B // Unused Flag
-#define FLAG_UNUSED_0x26C  0x26C // Unused Flag
-#define FLAG_UNUSED_0x26D  0x26D // Unused Flag
-#define FLAG_UNUSED_0x26E  0x26E // Unused Flag
-#define FLAG_UNUSED_0x26F  0x26F // Unused Flag
-#define FLAG_UNUSED_0x270  0x270 // Unused Flag
-#define FLAG_UNUSED_0x271  0x271 // Unused Flag
-#define FLAG_UNUSED_0x272  0x272 // Unused Flag
+#define FLAG_ICHOR_HALIA_SECOND_LOOK 0x269 // Ichor: Phase 2 beat 9A: Halia's second look under the canopy
+#define FLAG_ICHOR_HIDE_MOM_HOME 0x26A // Ichor: hide Mom at home (she has gone down to Akti's quay)
+#define FLAG_ICHOR_HIDE_MOM_AKTI 0x26B // Ichor: hide Mom on Akti's quay (set at new game; shown from beat 9A to the sailing)
+#define FLAG_ICHOR_HIDE_KLEON_AKTI_DOOR 0x26C // Ichor: hide beat 9B's Kleon by the Temple of Hestia (set at new game)
+#define FLAG_ICHOR_WINDS_TURNED 0x26D // Ichor: beat 9B: the halcyon days are over and the wind is back
+#define FLAG_ICHOR_MOM_HARBOR 0x26E // Ichor: beat 9B: Mom gave the bread and honey on the quay
+#define FLAG_ICHOR_BOARDED_EUPLOIA 0x26F // Ichor: beat 9B: boarded the Euploia for the crossing
+#define FLAG_ICHOR_BATTLED_ALETHEA_DECK 0x270 // Ichor: beat 10: Alethea's practice battle on deck offered and fought
+#define FLAG_ICHOR_SAVED_HALCYON_NEST 0x271 // Ichor: beat 10: kept the snatchers off the last halcyon nest
+#define FLAG_ICHOR_GOT_HALCYLING 0x272 // Ichor: beat 10: took the halcyon chick (Halcyling)
 #define FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY 0x273 // Ichor: hidden Honey at Melitta's beehives (hidden-item range)
-#define FLAG_UNUSED_0x274  0x274 // Unused Flag
-#define FLAG_UNUSED_0x275  0x275 // Unused Flag
-#define FLAG_UNUSED_0x276  0x276 // Unused Flag
-#define FLAG_UNUSED_0x277  0x277 // Unused Flag
-#define FLAG_UNUSED_0x278  0x278 // Unused Flag
-#define FLAG_UNUSED_0x279  0x279 // Unused Flag
-#define FLAG_UNUSED_0x27A  0x27A // Unused Flag
-#define FLAG_UNUSED_0x27B  0x27B // Unused Flag
-#define FLAG_UNUSED_0x27C  0x27C // Unused Flag
-#define FLAG_UNUSED_0x27D  0x27D // Unused Flag
-#define FLAG_UNUSED_0x27E  0x27E // Unused Flag
-#define FLAG_UNUSED_0x27F  0x27F // Unused Flag
-#define FLAG_UNUSED_0x280  0x280 // Unused Flag
-#define FLAG_UNUSED_0x281  0x281 // Unused Flag
-#define FLAG_UNUSED_0x282  0x282 // Unused Flag
-#define FLAG_UNUSED_0x283  0x283 // Unused Flag
-#define FLAG_UNUSED_0x284  0x284 // Unused Flag
-#define FLAG_UNUSED_0x285  0x285 // Unused Flag
-#define FLAG_UNUSED_0x286  0x286 // Unused Flag
-#define FLAG_UNUSED_0x287  0x287 // Unused Flag
-#define FLAG_UNUSED_0x288  0x288 // Unused Flag
-#define FLAG_UNUSED_0x289  0x289 // Unused Flag
+#define FLAG_ICHOR_HIDE_HALCYON_NEST 0x274 // Ichor: hide the floating halcyon nest at the Euploia's bow
+#define FLAG_ICHOR_HIDE_DECK_HARPECK 0x275 // Ichor: hide the snatchers diving at the halcyon nest
+#define FLAG_ICHOR_ARRIVED_AEGINA 0x276 // Ichor: beat 10B: stepped onto Aegina's quay on the voyage night
+#define FLAG_ICHOR_VISITED_AEGINA 0x277 // Ichor: Aegina Town visited (fly target)
+#define FLAG_ICHOR_AEGINA_NIGHT 0x278 // Ichor: beat 10B: the night at Endeis's inn
+#define FLAG_ICHOR_CROSSING_DONE 0x279 // Ichor: beat 10C: the Euploia made Emporion; the ferry runs
+#define FLAG_ICHOR_FERRY_TO_AEGINA 0x27A // Ichor: the Euploia ferry is bound for Aegina (with TO_EMPORION clear: Akti)
+#define FLAG_ICHOR_FERRY_TO_EMPORION 0x27B // Ichor: the Euploia ferry is bound for Emporion
+#define FLAG_ICHOR_TRADED_CHELONET 0x27C // Ichor: Aegina: traded Pheidon a Karkipool for his Chelonet, Stater
+#define FLAG_ICHOR_GOT_BLACK_BELT 0x27D // Ichor: Aegina: Aiakides gave his Black Belt for a look at an Ergant
+#define FLAG_ICHOR_ITEM_DECK_SUPER_POTION 0x27E // Ichor: item ball: Super Potion among the Euploia's bow cargo
+#define FLAG_ICHOR_HIDDEN_DECK_HEART_SCALE 0x27F // Ichor: hidden item: Heart Scale in a coil of rope at the Euploia's stern
+#define FLAG_ICHOR_ITEM_HOLD_POTION 0x280 // Ichor: item ball: Potion under the Euploia's bottom bench
+#define FLAG_ICHOR_HIDDEN_AEGINA_BIG_PEARL 0x281 // Ichor: hidden item: Big Pearl at the end of Aegina's mole
+#define FLAG_ICHOR_HIDDEN_AEGINA_STARDUST 0x282 // Ichor: hidden item: Stardust at the foot of Kolona's column
+#define FLAG_ICHOR_HERM_AEGINA 0x283 // Ichor: anointed the great herm on the Aphaia Road (until the engine's herm range)
+#define FLAG_ICHOR_ITEM_APHAIA_SILVER_POWDER 0x284 // Ichor: item ball: Silver Powder on the Aphaia Road's ant hills
+#define FLAG_ICHOR_ITEM_APHAIA_SUPER_POTION 0x285 // Ichor: item ball: Super Potion at the Aphaia Road's Oros fork
+#define FLAG_ICHOR_ITEM_APHAIA_PRETTY_FEATHER 0x286 // Ichor: item ball: two Pretty Feathers on the Temple of Aphaia's steps
+#define FLAG_ICHOR_ITEM_OROS_WINE 0x287 // Ichor: item ball: Wine by Zeus's altar on Mount Oros
+#define FLAG_ICHOR_HIDE_AEGINA_CAST 0x288 // Ichor: hide Kleon and Alethea on Aegina's quay once the voyage party has split up
+#define FLAG_ICHOR_NO_RUNNING 0x289 // Ichor: set to make a scripted wild battle unescapable (WE_FLAG_NO_RUNNING)
 #define FLAG_UNUSED_0x28A  0x28A // Unused Flag
 #define FLAG_UNUSED_0x28B  0x28B // Unused Flag
 #define FLAG_UNUSED_0x28C  0x28C // Unused Flag
