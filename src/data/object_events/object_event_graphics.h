@@ -634,11 +634,34 @@ const u16 gObjectEventPic_ClefairyOld[] = INCGFX_U16("graphics/object_events/pic
 
 #endif // IS_FRLG
 
-// Ichor object events. Sources: tools/ichor/art/sprites_npc*.py
+// Ichor object events. Sources: tools/ichor/art/sprites_npc.py and sprites_folk.py
 const u16 gObjectEventPal_IchorCast[] = INCGFX_U16("graphics/object_events/palettes/ichor_cast.pal", ".gbapal");
 const u32 gObjectEventPic_IchorKleon[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorProfessorDaphne[] = INCGFX_U32("graphics/object_events/pics/people/ichor/professor_daphne.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorAlethea[] = INCGFX_U32("graphics/object_events/pics/people/ichor/alethea.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorHierophantIone[] = INCGFX_U32("graphics/object_events/pics/people/ichor/hierophant_ione.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorTitanGrunt[] = INCGFX_U32("graphics/object_events/pics/people/ichor/titan_grunt.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u16 gObjectEventPal_IchorFolk[] = INCGFX_U16("graphics/object_events/palettes/ichor_folk.pal", ".gbapal");
+const u32 gObjectEventPic_IchorMom[] = INCGFX_U32("graphics/object_events/pics/people/ichor/mom.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPriestess[] = INCGFX_U32("graphics/object_events/pics/people/ichor/priestess.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorYouthM[] = INCGFX_U32("graphics/object_events/pics/people/ichor/youth_m.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorYouthF[] = INCGFX_U32("graphics/object_events/pics/people/ichor/youth_f.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorMan[] = INCGFX_U32("graphics/object_events/pics/people/ichor/man.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorWoman[] = INCGFX_U32("graphics/object_events/pics/people/ichor/woman.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorElderM[] = INCGFX_U32("graphics/object_events/pics/people/ichor/elder_m.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorElderF[] = INCGFX_U32("graphics/object_events/pics/people/ichor/elder_f.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKidM[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kid_m.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKidF[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kid_f.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorFisher[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fisher.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorSailor[] = INCGFX_U32("graphics/object_events/pics/people/ichor/sailor.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorDiver[] = INCGFX_U32("graphics/object_events/pics/people/ichor/diver.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorHealer[] = INCGFX_U32("graphics/object_events/pics/people/ichor/healer.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorMerchant[] = INCGFX_U32("graphics/object_events/pics/people/ichor/merchant.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorShepherd[] = INCGFX_U32("graphics/object_events/pics/people/ichor/shepherd.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorHarvester[] = INCGFX_U32("graphics/object_events/pics/people/ichor/harvester.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorGoatherd[] = INCGFX_U32("graphics/object_events/pics/people/ichor/goatherd.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorHoplite[] = INCGFX_U32("graphics/object_events/pics/people/ichor/hoplite.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAugur[] = INCGFX_U32("graphics/object_events/pics/people/ichor/augur.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAcolyteM[] = INCGFX_U32("graphics/object_events/pics/people/ichor/acolyte_m.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAcolyteF[] = INCGFX_U32("graphics/object_events/pics/people/ichor/acolyte_f.png", ".4bpp", "-mwidth 2 -mheight 4");
 // End of Ichor object events
