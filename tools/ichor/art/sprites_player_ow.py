@@ -377,19 +377,146 @@ kbbbk.....kbbk..
 .kdbk....kSdkw..
 kbbbk.....kbbk..
 """,
+    # Fishing: both hands on the rod.
+    'fish_left': """
+....kSdkcCDk....
+...kwwwkcCCDk...
+.ksSSSkcCCCDDk..
+.kdkkkwkCDCDDDk.
+...kbbkCtTkDDDDk
+...kwwWWTTkDDDk.
+....kWWWkkDDk...
+....kSdk........
+....kSdk........
+...kbbbk........
+""",
+    'fish_left_cast': """
+....kSdkcCDk....
+...kwwwkcCCDk...
+kssSSkwkcCCDDk..
+kdkkkwwkCDCDDDk.
+...kbbkCtTkDDDDk
+...kwwWWTTkDDDk.
+....kWWWkkDDk...
+....kSdk........
+....kSdk........
+...kbbbk........
+""",
+    'fish_up': """
+...kcCCCCCCDk...
+..kcCCCCCCCDDk..
+.kcCCCCDCCCCDDk.
+.kcCCCCDCCCCDDk.
+.kcCCCCDCCCDDDk.
+..ktDDDDDDDDDk..
+...kTkWwwwWWk...
+....kSdkkSdk....
+....kSdkkSdk....
+....kbbkkbbk....
+""",
+    'fish_up_side': """
+...kcCCCCCCDk...
+..kcCCCCCCCDDk..
+.kcCCCCDCCCCDDk.
+.kcCCCCDCCCCDDk.
+.kcCCCCDCCCDDsk.
+..ktDDDDDDDDDdk.
+...kTkWwwwWWk...
+....kSdkkSdk....
+....kSdkkSdk....
+....kbbkkbbk....
+""",
+    'fish_down_side': """
+...kcCkddkCDk...
+..kcCCkwwkCCDk..
+.ksdCyCwwCCCDDk.
+.kdkCkwwwwkCDDk.
+..kkkbbbbbbkksk.
+..kkwwwwwWtTkk..
+...kWwwwwWTTk...
+....kSdkkSdk....
+....kSdkkSdk....
+....kbbkkbbk....
+""",
+    'fish_down_front': """
+...kcCkddkCDk...
+..kcCCkwwkCCDk..
+.kccCyCwwCCCDDk.
+.kCCCksSSdkCDDk.
+..kCkbbbbbbkDk..
+..kkwwwwwWtTkk..
+...kWwwwwWTTk...
+....kSdkkSdk....
+....kSdkkSdk....
+....kbbkkbbk....
+""",
+    # Field move: reach into the satchel, bring out the relic, raise it.
+    'fm_reach': """
+...kcCkddkCDk...
+..kcCCkwwkCCDk..
+.kccCyCwwCCCDDk.
+.kCCCkwwwwkCDDk.
+.kskkbbbbbbkCDk.
+..kkwwwwwWsdkk..
+...kWwwwwWTTk...
+....kSdkkSdk....
+....kSdkkSdk....
+....kbbkkbbk....
+""",
+    'fm_reach_in': """
+...kcCkddkCDk...
+..kcCCkwwkCCDk..
+.kccCyCwwCCCDDk.
+.kCCCkwwwwkCDDk.
+.kskkbbbbbbkCDk.
+..kkwwwwwWtkDk..
+...kWwwwwWskk...
+....kSdkkSdk....
+....kSdkkSdk....
+....kbbkkbbk....
+""",
+    'fm_hold': """
+...kcCkddkCDk...
+..kcCCkwwkCCDk..
+.kccCykkkkCCDDk.
+.kCCksywYkkCDDk.
+.kCCksYYbkbkksk.
+..kkwkkkkWtTkk..
+...kWwwwwWTTk...
+....kSdkkSdk....
+....kSdkkSdk....
+....kbbkkbbk....
+""",
+    'fm_raise': """
+...kcCkddkCDk...
+..kwwCkwwkCCDk..
+..kwCyCwwCCCDDk.
+..kkCkwwwwkCDDk.
+...kkbbbbbbkksk.
+..kkwwwwwWtTkk..
+...kWwwwwWTTk...
+....kSdkkSdk....
+....kSdkkSdk....
+....kbbkkbbk....
+""",
 }
 
 
-def parse(s):
+def parse(s, width=16):
     rows = s.strip('\n').split('\n')
     for r in rows:
-        assert len(r) == 16, (len(r), r)
+        assert width is None or len(r) == width, (len(r), r)
     return rows
 
 
 def compose(parts, w=16, h=32):
+    """Layers in drawing order: (rows, x, y) blocks or callables on the grid."""
     a = [['.'] * w for _ in range(h)]
-    for rows, x0, y0 in parts:
+    for part in parts:
+        if callable(part):
+            part(a)
+            continue
+        rows, x0, y0 = part
         for j, row in enumerate(rows):
             for i, ch in enumerate(row):
                 if ch != '.':
@@ -397,6 +524,25 @@ def compose(parts, w=16, h=32):
                     assert 0 <= y < h and 0 <= x < w, (x, y)
                     a[y][x] = ch
     return a
+
+
+def rod(p0, p1, over=False):
+    """The Old Rod: a cane line from the grip p0 to the tip p1, brown with a
+    straw-gold highlight on its lit side and a terracotta float at the tip.
+    The highlight fills only empty pixels unless `over` (a rod crossing the
+    body needs both pixels to read)."""
+    def draw(a):
+        pts = bresenham(*p0, *p1)
+        steep = abs(p1[1] - p0[1]) >= abs(p1[0] - p0[0])
+        for x, y in pts:
+            a[y][x] = 'b'
+        for x, y in pts[:-1]:
+            hx, hy = (x - 1, y) if steep else (x, y - 1)
+            if 0 <= hx < len(a[0]) and 0 <= hy < len(a) and (a[hy][hx] == '.' or over and (hx, hy) not in pts):
+                a[hy][hx] = 'Y'
+        x, y = pts[-1]
+        a[y][x] = 't'
+    return draw
 
 
 def figure(who, facing, body, dy=0, hx=0, hy=0, bx=0, x0=0, w=16):
@@ -424,6 +570,81 @@ def running(who):
         f('down', 'run_down_a', dy=2), f('down', 'run_down_b', dy=2),
         f('up', 'run_up_a', dy=2), f('up', 'run_up_b', dy=2),
         f('left', 'run_left_a', dy=2), f('left', 'run_left_b', dy=2),
+    ]
+
+
+# Fishing and the field move use 32x32 frames with the figure centered (x+8).
+# Fishing: 0-3 west (rod over the shoulder, raised, cast, out), 4-7 north,
+# 8-11 south. A bite alternates frames 2/3, 6/7 or 10/11.
+
+def fishing(who):
+    def f(facing, body, before=(), after=(), **k):
+        return compose(list(before) + figure(who, facing, body, x0=8, **k) + list(after), w=32)
+    return [
+        f('left', 'fish_left', before=[rod((10, 22), (31, 4))]),
+        f('left', 'fish_left', before=[rod((10, 22), (22, 0))]),
+        f('left', 'fish_left_cast', hx=-1, hy=1, after=[rod((8, 23), (1, 9))]),
+        f('left', 'fish_left_cast', hx=-1, hy=1, after=[rod((8, 23), (0, 19))]),
+        f('up', 'fish_up_side', after=[rod((22, 21), (22, 31))]),
+        f('up', 'fish_up_side', after=[rod((22, 21), (25, 31))]),
+        f('up', 'fish_up_side', after=[rod((22, 22), (26, 5))]),
+        f('up', 'fish_up', before=[rod((15, 22), (15, 1))]),
+        f('down', 'fish_down_side', before=[rod((10, 27), (10, 1))]),
+        f('down', 'fish_down_side', after=[rod((9, 22), (3, 6))]),
+        f('down', 'fish_down_front', after=[rod((14, 25), (6, 31), over=True)]),
+        f('down', 'fish_down_front', after=[rod((15, 25), (15, 31), over=True)]),
+    ]
+
+
+# Field move: Aethos has no HM Pokemon; field powers come from relics (the
+# Labrys, the Bronze Hammer, Hecate's Torch...). The player reaches into the
+# satchel, brings out the relic and raises it, glinting.
+ARM_MID = """
+.kkk.....
+kwyYk....
+kyYYk....
+kYYbk....
+.ksdk....
+.kSdk....
+.kSdk....
+.kSdk....
+.kSSkkkk.
+..kSSwwWk
+...kkkwWk
+"""
+ARM_HIGH = """
+....y.......
+.w..w..w....
+..y...y.....
+....kkk.....
+wy.kwyYk.yw.
+...kyYYk....
+...kYYbk....
+..y.kkk.y...
+.w..ksk..w..
+....kSdk....
+....kSdk....
+.....kSdk...
+.....kSdk...
+......kSdk..
+......kwWk..
+.......kwWk.
+.......kwWk.
+........kwWk
+........kwWk
+.........kwk
+"""
+
+
+def field_move(who):
+    def f(body, after=()):
+        return compose(figure(who, 'down', body, x0=8) + list(after), w=32)
+    return [
+        f('fm_reach'),
+        f('fm_reach_in'),
+        f('fm_hold'),
+        f('fm_raise', after=[(parse(ARM_MID, None), 2, 10)]),
+        f('fm_raise', after=[(parse(ARM_HIGH, None), 0, 1)]),
     ]
 
 
@@ -474,7 +695,7 @@ CHARS = {
     'theo': ('brendan', THEO_RGB, ROLE_THEO),
     'ianthe': ('may', IANTHE_RGB, ROLE_IANTHE),
 }
-SHEETS = {'walking': walking, 'running': running}
+SHEETS = {'walking': walking, 'running': running, 'fishing': fishing, 'field_move': field_move}
 
 
 def build(who):
