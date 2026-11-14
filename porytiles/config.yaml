@@ -1,0 +1,24 @@
+# Porytiles project config for Pokemon Ichor's Greek tilesets.
+# Run tools/ichor/art/build_tilesets.sh rather than porytiles directly.
+fieldmap:
+  # pokeemerald-expansion declares both the Emerald (2-byte) and FRLG (4-byte)
+  # attribute layouts; Ichor builds Emerald.
+  metatile_attribute_size: 2
+tileset:
+  animations:
+    # Some of General's water-edge key frames repeat ordinary tiles; let
+    # Porytiles nudge them so each animated tile stays unique.
+    key_frame_resolution_strategy: mangle
+    # Some animated tiles are only used by secondary tilesets, so pin each
+    # animation to the palette its metatiles use.
+    per_animation_overrides:
+      flower:
+        palette_resolution_strategy: palette_02
+      water:
+        palette_resolution_strategy: palette_04
+      waterfall:
+        palette_resolution_strategy: palette_04
+      sand_water_edge:
+        palette_resolution_strategy: palette_05
+      land_water_edge:  # used by Lilycove and Mossdeep
+        palette_resolution_strategy: palette_03
