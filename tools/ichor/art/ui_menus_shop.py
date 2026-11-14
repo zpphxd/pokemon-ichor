@@ -45,7 +45,7 @@ PAL = pal16([
     GOLD_DARK,     # 12
     ROW_ALT,       # 13 alternate list rows
     (96, 64, 40),  # 14 shade under the awning
-    (0, 0, 0),     # 15
+    GOLD_PALE,     # 15 MONEY label, lit
 ])
 K_INK, K_LINE, K_CLAY, K_HI, K_P, K_PS, K_PD, K_W0, K_W1, K_W2, K_G, K_GD, K_ALT, K_SH = range(1, 15)
 
@@ -149,15 +149,31 @@ def write():
     preview(c)
 
 
+# The MONEY label beside the amount, a 32x16 sprite. The engine colors it
+# with this menu's palette (sSpritePalette_MoneyLabel in src/money.c uses
+# gShopMenu_Pal), so it is drawn in those indices: gold letters, lit on top,
+# outlined in ink, like the HM badge. The letterforms are Emerald's.
+MONEY = [
+    "                                ",
+    "                                ",
+    "                                ",
+    "   111 11111111111111111111 111 ",
+    "   1e111e11ee11e11d1eeed1e1 1d1 ",
+    "   1ee1ee1e11d1ee1e1d1111e111e1 ",
+    "   1c1e1d1c11c1c1cc1ccc111c1c11 ",
+    "   1c111c1c11c1c11c1c111111c111 ",
+    "   1d111d11dd11d11d1dddd111d11  ",
+    "   111 111111111111111111 111   ",
+]
+
+
 def write_money_label():
-    # The MONEY label beside the amount: the Hoenn lettering kept, recolored
-    # gold on ink (indices 2/6 outline, 12-14 gold), like the HM badge.
-    from PIL import Image
-    im = Image.open(OUT / "money.png")
-    a = np.array(im)
-    pal = pal16([TRANSPARENT, (0, 0, 0), INK, (0, 0, 0), (0, 0, 0), (0, 0, 0), INK, (0, 0, 0), (0, 0, 0),
-                 (0, 0, 0), (0, 0, 0), (0, 0, 0), GOLD, GOLD_DARK, GOLD_PALE])
-    write_indexed_png(OUT / "money.png", a, [pal])
+    key = {" ": 0, "1": K_INK, "e": 15, "c": K_G, "d": K_GD}
+    a = np.zeros((16, 32), np.uint8)
+    for y, row in enumerate(MONEY):
+        for x, ch in enumerate(row):
+            a[y, x] = key[ch]
+    write_indexed_png(OUT / "money.png", a, [PAL])
 
 
 def preview(c):
