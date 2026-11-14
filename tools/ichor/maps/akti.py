@@ -233,11 +233,11 @@ PLAN = [
     #         1111111111222222222
     # 234567890123456789012345678
     "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",  # 0
-    "~~~~~~~~~~~~~~~~~~ssss~~~~~~",  # 1
-    "~~~~~~~~~~~~~~~~~~ssss~~~~~~",  # 2
-    "~~qqqqqqqqqq~~~~~~ssss~~~~~~",  # 3
-    "~~qqqqqqqqqq~~~~~~ssss~~~~ss",  # 4
-    "BBqqqqqqqqqq~~qq~~ssss~~~sss",  # 5
+    "~~~~~~~~~~~~~~~~~~sssss~~~~~",  # 1
+    "~~~~~~~~~~~~~~~~~~sssss~~~~~",  # 2
+    "~~qqqqqqqqqq~~~~~~sssss~~~~~",  # 3
+    "~~qqqqqqqqqq~~~~~~sssss~~~ss",  # 4
+    "BBqqqqqqqqqq~~qq~~sssss~~sss",  # 5
     "BBqq~~~~~~~~~~qq~~~~~~~sssss",  # 6
     "BBqq~~~~~~~~~~qq~~~~~~ssssss",  # 7
     "ggqq~~~~~~~~~~qq~~~~~sssssss",  # 8
@@ -361,7 +361,8 @@ def compose():
     # ---- the relic gates (SYSTEMS.md §1, D10): seen now, opened later ----------
     # The Bronze Hammer: the tide rocks' spur, its grotto choked with marble rubble
     # (bg events on row 4). Poseidon's Conch: the islet and its white shrine, out
-    # of reach across the water; gulls circle it (object events).
+    # of reach across the water; gulls circle it (object events). The sand east of
+    # the shrine, x = 21, rows 2-4, is left for the landing when Surf arrives.
     g.put("grotto", 26, 1)
     g.put("shrine_poseidon", 19, 2)
 
