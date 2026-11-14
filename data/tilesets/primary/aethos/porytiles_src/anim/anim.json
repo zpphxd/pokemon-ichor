@@ -11,7 +11,7 @@
       "0",
       "2"
     ],
-    "tile_offset": 508
+    "tile_offset": 1
   },
   "land_water_edge": {
     "frame_offset": 4,
@@ -27,7 +27,7 @@
       "2",
       "3"
     ],
-    "tile_offset": 480
+    "tile_offset": 5
   },
   "sand_water_edge": {
     "frame_offset": 2,
@@ -50,7 +50,7 @@
       "6",
       "0"
     ],
-    "tile_offset": 464
+    "tile_offset": 15
   },
   "water": {
     "frame_offset": 1,
@@ -74,7 +74,7 @@
       "6",
       "7"
     ],
-    "tile_offset": 432
+    "tile_offset": 25
   },
   "waterfall": {
     "frame_offset": 3,
@@ -90,6 +90,6 @@
       "2",
       "3"
     ],
-    "tile_offset": 496
+    "tile_offset": 55
   }
 }
