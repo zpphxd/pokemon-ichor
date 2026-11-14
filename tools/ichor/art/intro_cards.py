@@ -172,15 +172,52 @@ STUDIO_PAL = [
     L.GOLD_MID,     # 10 letters: m
     L.GOLD_LIT,     # 11 letters: l
     L.GOLD_GLINT,   # 12 letters: g
+    L.GOLD_SHADOW,  # 13 credit: shadow wall
+    L.GOLD_LIT,     # 14 credit: lit wall
+    L.GOLD_MID,     # 15 credit: "A GAME BY"
 ]
 STUDIO_DROP = (1, 6)      # palette ranges [a, b) intro.c fades separately
 STUDIO_RING = (6, 8)
 STUDIO_LETTERS = (8, 13)
+STUDIO_CREDIT = (13, 16)
 
-MARK_CX, MARK_CY = 120, 62   # ring center (screen)
+MARK_CX, MARK_CY = 120, 54   # ring center (screen)
 RING_R = 31
-DROP_TOP = 44                # the big drop: tip row
-LETTERS_Y = 104
+DROP_TOP = 36                # the big drop: tip row
+LETTERS_Y = 94
+CREDIT_BY_Y = 123            # "A GAME BY", 7 px plain capitals
+CREDIT_NAME_Y = 133          # "ZACH POWERS", 11 px gilded capitals
+
+# The credit's name, 11 px capitals with 2 px stems: the title's POKEMON
+# banner style (title_lettering.POKEMON) a size up, cut with the same
+# shadow-left, lit-right V (shade2) so it pairs with ΙΧΩΡ as POKEMON does with
+# ICHOR on the title.
+CREDIT11 = {
+    "Z": ["########", "......##", ".....##.", ".....##.", "....##..", "...##...", "..##....",
+          ".##.....", ".##.....", "##......", "########"],
+    "A": ["....#....", "...###...", "...###...", "..##.##..", "..##.##..", ".##...##.", ".#######.",
+          ".##...##.", "##.....##", "##.....##", "##.....##"],
+    "C": ["..#####.", ".##...##", "##......", "##......", "##......", "##......", "##......",
+          "##......", "##......", ".##...##", "..#####."],
+    "H": ["##....##"] * 5 + ["########"] + ["##....##"] * 5,
+    "P": ["######..", "##...##.", "##....##", "##....##", "##...##.", "######..", "##......",
+          "##......", "##......", "##......", "##......"],
+    "O": ["..#####..", ".##...##.", "##.....##", "##.....##", "##.....##", "##.....##", "##.....##",
+          "##.....##", "##.....##", ".##...##.", "..#####.."],
+    "W": ["##........##", "##........##", "##........##", "##...##...##", "##...##...##",
+          "##..####..##", "##..#..#..##", "##.##..##.##", "####....####", "###......###",
+          "##........##"],
+    "E": ["#######", "##.....", "##.....", "##.....", "##.....", "######.", "##.....", "##.....",
+          "##.....", "##.....", "#######"],
+    "R": ["######..", "##...##.", "##....##", "##....##", "##...##.", "######..", "##.##...",
+          "##..##..", "##...##.", "##....##", "##....##"],
+    "S": [".######.", "##....##", "##......", "##......", ".##.....", "..####..", ".....##.",
+          "......##", "......##", "##....##", ".######."],
+    " ": ["....."] * 11,
+}
+CREDIT_KEY = {".": 0, "s": 13, "l": 14}
+CREDIT_NAME = "ZACH POWERS"
+CREDIT_BY = "A GAME BY"
 
 # Greek capitals for ΙΧΩΡ, 20 px, 3 px strokes, with wedge apices.
 GREEK20 = {
@@ -347,6 +384,14 @@ def build_studio():
         for dx, ch in enumerate(row):
             if ch != ".":
                 img[LETTERS_Y + dy, x0 + dx] = LETTER_KEY[ch]
+    # the credit: "A GAME BY" over the name, in the gold of the mark
+    center_text(img, L.set_text7(CREDIT_BY, gap=2), CREDIT_BY_Y - 2, 15)
+    name = L.shade2(L.set_rows(CREDIT11, CREDIT_NAME, 2, 11))
+    x0 = W // 2 - len(name[0]) // 2
+    for dy, row in enumerate(name):
+        for dx, ch in enumerate(row):
+            if ch != ".":
+                img[CREDIT_NAME_Y + dy, x0 + dx] = CREDIT_KEY[ch]
     return img
 
 
