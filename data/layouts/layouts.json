@@ -9367,6 +9367,17 @@
       "border_filepath": "data/layouts/AktiTown_TempleOfHestia/border.bin",
       "blockdata_filepath": "data/layouts/AktiTown_TempleOfHestia/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALLISTE_ROUTE1_KRONION_HILL",
+      "name": "KallisteRoute1_KronionHill_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/KallisteRoute1_KronionHill/border.bin",
+      "blockdata_filepath": "data/layouts/KallisteRoute1_KronionHill/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
