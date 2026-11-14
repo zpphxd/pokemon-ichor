@@ -25,9 +25,9 @@
       "local_id": "LOCALID_KRONION_ALETHEA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
       "x": 9,
-      "y": 8,
+      "y": 9,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -38,8 +38,8 @@
     {
       "local_id": "LOCALID_KRONION_PETROS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
-      "x": 10,
-      "y": 8,
+      "x": 9,
+      "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -52,8 +52,8 @@
     {
       "local_id": "LOCALID_KRONION_AMATHOS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
-      "x": 11,
-      "y": 8,
+      "x": 10,
+      "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -65,9 +65,9 @@
     },
     {
       "local_id": "LOCALID_KRONION_TABLET",
-      "graphics_id": "OBJ_EVENT_GFX_CLIPBOARD",
-      "x": 8,
-      "y": 11,
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TABLET",
+      "x": 10,
+      "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -79,8 +79,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 12,
-      "y": 8,
+      "x": 16,
+      "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -95,8 +95,8 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 5,
-      "y": 11,
+      "x": 13,
+      "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": "0",
@@ -106,24 +106,16 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 4,
-      "y": 11,
+      "x": 14,
+      "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KallisteRoute1_KronionHill_EventScript_Stele"
     },
     {
       "type": "sign",
-      "x": 10,
-      "y": 6,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "KallisteRoute1_KronionHill_EventScript_Altar"
-    },
-    {
-      "type": "sign",
-      "x": 11,
-      "y": 6,
+      "x": 9,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KallisteRoute1_KronionHill_EventScript_Altar"
@@ -131,14 +123,30 @@
     {
       "type": "sign",
       "x": 10,
-      "y": 7,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KallisteRoute1_KronionHill_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KallisteRoute1_KronionHill_EventScript_Pit"
     },
     {
       "type": "sign",
-      "x": 11,
+      "x": 10,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KallisteRoute1_KronionHill_EventScript_Pit"
+    },
+    {
+      "type": "sign",
+      "x": 9,
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -147,31 +155,23 @@
     {
       "type": "sign",
       "x": 10,
-      "y": 8,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "KallisteRoute1_KronionHill_EventScript_Pit"
-    },
-    {
-      "type": "sign",
-      "x": 11,
-      "y": 8,
+      "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KallisteRoute1_KronionHill_EventScript_Pit"
     },
     {
       "type": "hidden_item",
-      "x": 15,
-      "y": 8,
+      "x": 13,
+      "y": 7,
       "elevation": 3,
       "item": "ITEM_HARD_STONE",
       "flag": "FLAG_ICHOR_HIDDEN_KRONION_HARD_STONE"
     },
     {
       "type": "hidden_item",
-      "x": 11,
-      "y": 5,
+      "x": 10,
+      "y": 4,
       "elevation": 3,
       "item": "ITEM_STARDUST",
       "flag": "FLAG_ICHOR_HIDDEN_KRONION_STARDUST"

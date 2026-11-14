@@ -9341,7 +9341,7 @@
       "width": 30,
       "height": 64,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Agros",
       "border_filepath": "data/layouts/KallisteRoute1/border.bin",
       "blockdata_filepath": "data/layouts/KallisteRoute1/map.bin",
       "layout_version": "emerald"
@@ -9374,7 +9374,7 @@
       "width": 24,
       "height": 62,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kalliste",
+      "secondary_tileset": "gTileset_Agros",
       "border_filepath": "data/layouts/KallisteRoute1_KronionHill/border.bin",
       "blockdata_filepath": "data/layouts/KallisteRoute1_KronionHill/map.bin",
       "layout_version": "emerald"

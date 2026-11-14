@@ -476,7 +476,7 @@ ALETHEA: The road to Akti runs right past it. Come find me?
 ```text
 WOOLOO: Baaa. [It plants its hooves and does not move.]
 ```
-Amaryllis's lines are in the roster. The spur to the hill is open. Polyeidos the Augur stands at the foot of the stair (trainer, roster below).
+Amaryllis's lines are in the roster. The spur to the hill is open. Polyeidos the Augur watches it from a rise, and his line covers the whole spur (trainer, roster below).
 
 ### The summit cutscene
 
@@ -524,6 +524,10 @@ ALETHEA: Then: “The fragment of the Harpe lies…
 
 ALETHEA: A riddle. I hate riddles. They're just lies wearing hats.
 
+ALETHEA: …And at the bottom: “Last, the house of the double axe.”
+
+ALETHEA: That's not a riddle. That's just rude.
+
 ALETHEA: The Harpe… that's Kronos's sickle. From the old stories.
 
 ALETHEA: The one he used to overthrow his own father.
@@ -561,7 +565,7 @@ ALETHEA: The Hearthkeeper's waiting. I'll catch up. I'm fast.
 
 ALETHEA: That's a lie, actually. I'm slow. But I'll catch up.
 ```
-[Alethea walks down the stair and off the map. Set `FLAG_ICHOR_RUINS_CLEARED` and `FLAG_ICHOR_HIDE_ALETHEA_RUINS`. Hide the grunts. On Route 1, the flock's hide flag `FLAG_ICHOR_HIDE_ROUTE1_FLOCK` is set on the map transition, so the road is open.]
+[Alethea walks down the stair and off the map. Set `FLAG_ICHOR_RUINS_CLEARED` and `FLAG_ICHOR_HIDE_ALETHEA_RUINS`. Hide the grunts. With them gone, the pit's floor shows cut steps going down into the dark (the dark stair, a relic gate for Hecate's Torch; no text). On Route 1, the flock's hide flag `FLAG_ICHOR_HIDE_ROUTE1_FLOCK` is set on the map transition, so the road is open.]
 
 ---
 
@@ -968,7 +972,7 @@ ALETHEA: Don't touch that scroll. Or that one. Actually, don't touch scrolls.
 
 ## Route 1 (`MAP_KALLISTE_ROUTE1`)
 
-The road runs north from Elaia through olive groves and terraced hillside to Akti. The Kronion Hill spur branches off to the east about two-thirds of the way up. Trainer placement, south to north: Tityros, Phyllis, Komatas, Agis (at the spur fork), Polyeidos (at the foot of the hill stair).
+The road runs north from Elaia through olive groves and terraced hillside to Akti. The Kronion Hill spur branches off to the east about two-thirds of the way up. Trainer placement, south to north: Tityros (at the meadow wall's only gap, the first and easy one), Phyllis (optional, on her grove lane), Komatas (optional, on the bee terraces), Polyeidos (on the spur, guarding the way to the hill), Agis (holding the pass just north of the flock's wall gap). Three bands of tall grass cross the road and can't be walked around: just out of Elaia, in the grove narrows, and on the cove shore before the climb to Akti (tools/ichor/maps/route1.py proves it).
 
 | NPC | Where | Role |
 |---|---|---|
@@ -1040,7 +1044,7 @@ A hilltop sanctuary of tumbled Doric drums around a broken altar. The dig pit si
 |---|---|
 | Stele at the top of the stair | "KRONION HILL. An old shrine, older than the olives." / "Someone has scratched a sickle into the stone. Recently." |
 | Broken altar | "A cracked altar. The stone is warm, like a sleeping animal." |
-| Dig pit, after it is cleared | "A fresh hole, dug in a hurry. There's nothing in it." / "…It still feels like something's looking up." |
+| Dig pit, after it is cleared | The pit's floor now shows cut stone steps going down into the dark: Hecate's Torch's second gate, to the Kronion crypt (SYSTEMS.md, relic gates; D10). "Stone steps go down into the dark. You can't see a thing." / "…It still feels like something's looking up." |
 
 Post-scene NPCs: none. The grunts and Alethea are hidden.
 
@@ -1377,7 +1381,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 ```
 
-**4. HOPLITE Agis.** A Lakonian youth of the delegation, drilling at the Kronion Hill fork.
+**4. HOPLITE Agis.** A Lakonian youth of the delegation, drilling in the pass just north of the flock's wall gap. He can only be met once the flock has moved.
 ```text
 Before: AGIS: A Lakonian brings one spear to a fight. One is enough.
 Defeat: AGIS: …Two spears next time.
@@ -1398,7 +1402,7 @@ Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 ```
 
-**5. AUGUR Polyeidos.** At the foot of the Kronion Hill stair, staring at the sky.
+**5. AUGUR Polyeidos.** On a rise above the spur to Kronion Hill, staring at the sky. His line covers the whole spur.
 ```text
 Before: POLYEIDOS: The birds are wrong today. Let me see if you're wrong too.
 Defeat: POLYEIDOS: You're not wrong. The birds still are.
@@ -1888,11 +1892,11 @@ Flag naming: visible item balls use `FLAG_ITEM_ICHOR_<MAP>_<ITEM>`, hidden items
 | Elaia, Kydippe's house | Oran Berry ×2 | gift | — |
 | Akademia | starter, Pokédex | gift, Daphne | — |
 | Elaia | Poké Ball ×5 | gift, Alethea (beat 4) | — |
-| Route 1 | Poké Ball | visible | on a terrace ledge past Tityros |
-| Route 1 | Miracle Seed | visible | deep in Phyllis's olive grove |
-| Route 1 | Potion | visible | at the foot of the fork herm |
+| Route 1 | Poké Ball | visible | on the grove's west walk, above the lip down to the meadow |
+| Route 1 | Miracle Seed | visible | deep in Phyllis's olive grove, past her lane |
+| Route 1 | Potion | visible | on the cove beach, past the shore grass |
 | Route 1 | Oran Berry | hidden | under the big olive |
-| Route 1 | Repel | hidden | in the dry-stone wall near the flock |
+| Route 1 | Repel | hidden | in the corner of the walled patch by the carter |
 | Route 1 | Antidote | hidden | in the grass near the Ekans patch |
 | Route 1 | Sitrus Berry | gift, olive farmer | — |
 | Route 1 | Moomoo Milk | gift, carter | — |
