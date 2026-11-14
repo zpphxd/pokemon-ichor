@@ -14,7 +14,7 @@
 # by the names the playthrough gives its screenshots:
 #   01_opening  02_elaia_morning  03_halia  04_akademia  05_kleon  06_route1
 #   07_kronion_hill  08_akti  09_temple  10_ending  11_battles  12_menus  13_maps
-# (a section with more than 12 frames is split: 08_akti_01.png, 08_akti_02.png, ...).
+# (a section with more than 15 frames is split evenly: 08_akti_01.png, 08_akti_02.png, ...).
 set -u
 cd "$(dirname "$0")/../../.."
 ROM="${1:-pokeemerald.gba}"
