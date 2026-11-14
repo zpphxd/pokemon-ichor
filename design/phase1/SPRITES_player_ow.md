@@ -21,7 +21,7 @@ python3 tools/ichor/art/sprites_player_ow.py --preview DIR      # 3x and 8x prev
 | Sheet | Size | Frames | Status |
 |---|---|---|---|
 | `walking.png` | 144×32 | 9 of 16×32: down, up, left standing, then 2 steps each for down, up, left. Walk steps bob down 1 px. Right is the left frames mirrored. | Done |
-| `running.png` | 144×32 | Same order as walking | Not yet |
+| `running.png` | 144×32 | Same order as walking. Crouched 1 px, strides 2 px; fists pumping, the chlamys flaring, and a little cream wing at each heel for the Talaria (the bible's running-shoes relic). | Done |
 | `fishing.png` | 384×32 | 12 of 32×32 | Not yet |
 | `field_move.png` | 160×32 | 5 of 32×32 | Not yet |
 
