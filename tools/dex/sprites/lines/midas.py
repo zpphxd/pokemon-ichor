@@ -334,14 +334,19 @@ def midonos(p, view, phase):
         walk = view == "side"
         L = 1 if (phase == 1 and not walk) else 0
         up = 1 if (phase == 1 and not walk) else 0
+        if walk and phase:
+            up = -3                     # the side walk: the raised hoof comes down
 
         # far legs, planted
         ff = p.limb([(32, 44), (32.5, 50.5), (32, 56.5)], 7, 5.4, m_coat, bias=0.36, group=10)
         _gild(p, [ff], 49, 60, 27, 37, far=True, group=10)
         _gold_hoof(p, 32, 56, 6.4, far=True, group=110)
-        fh = p.limb([(44, 43), (45.5, 50), (45, 56.5)], 7, 5.4, m_coat, bias=0.36, group=11)
-        _gild(p, [fh], 50, 60, 40, 50, far=True, group=11, teeth=(0, 2.2, 0.6, 1.4, 0.2, 2.0, 0))
-        _gold_hoof(p, 45, 56, 6.4, far=True, group=111)
+        # far hind reaching forward under the belly, mid-step
+        fhx = 3 if (walk and phase) else 0
+        fh = p.limb([(44.5, 41), (45.6, 49.4), (42.8 + fhx, 54.8)], 7.2, 4.6, m_coat, bias=0.36, group=11)
+        p.blob(46, 49.6, 2.6, 2.2, m_coat, bias=0.36, group=11)
+        _gild(p, [fh], 47, 60, 38, 50, far=True, group=11, teeth=(0, 2.2, 0.6, 1.4, 0.2, 2.0, 0))
+        _gold_hoof(p, 41.6 + fhx, 56, 6.4, far=True, group=111)
 
         # tail, its switch dipped in gold
         p.limb(bez((54, 31), (57.5, 33.5), (57, 40)), 2.4, 1.8, m_coat)
@@ -356,7 +361,6 @@ def midonos(p, view, phase):
                       bez3((18.5, 34.5), (19.8, 31), (22.5, 29.5), (23.5, 25)) +
                       [(25, 18), (29, 14.5)] +
                       bez3((29, 14.5), (32, 17), (32.4, 24), (34, 29.5)), m_coat, group=1)
-        p.blob(36, 46, 9.5, 2.4, m_pale, clip=[body], group=2)
         # gold leaf flaking across the back and haunch
         if p.big:
             _leaf_patch(p, 43.5, 30, 7.4, 3.4, [body], 1, seed=1, ang=-8)
@@ -366,13 +370,12 @@ def midonos(p, view, phase):
             _leaf_patch(p, 46, 32, 7, 4.5, [body], 1, seed=1, ang=-8)
 
         # near hind leg over the body: a heavy round haunch
-        nh = p.poly(bez3((46, 35), (50, 30.5), (56.5, 32), (56.5, 39)) +
-                    bez3((56.5, 39), (56.6, 44), (55, 47), (54.8, 50)) +
-                    [(54.6, 56.8), (49.4, 56.8), (49.6, 51)] +
-                    bez3((49.6, 51), (49.4, 48), (45.5, 46), (45, 42)) +
-                    bez((45, 42), (44.5, 38), (46, 35)), m_coat, group=12)
-        _gild(p, [nh], 49.5, 60, 47, 58, group=12, teeth=(0, 1.6, 0.4, 2.6, 0.6, 1.8, 0.2))
-        _gold_hoof(p, 52, 56, 6.6, group=112)
+        hau = p.blob(50.6, 37.4, 7.0, 9.0, m_coat, ang=8, group=12)
+        nh = p.limb([(52, 42), (55.2, 49.8)], 7.8, 5.6, m_coat, group=12)
+        p.blob(55.6, 50, 2.8, 2.4, m_coat, group=12)
+        nc = p.limb([(55, 50.4), (54, 55.4)], 5.0, 4.6, m_coat, group=12)
+        _gild(p, [hau, nh, nc], 47, 60, 46, 61, group=12, teeth=(0, 1.6, 0.4, 2.6, 0.6, 1.8, 0.2))
+        _gold_hoof(p, 53.6, 56, 6.6, group=112)
 
         # neck crest mane
         _bristles(p, [(28.5, 14.5 - L), (30.5, 19 - L), (32, 24), (33.4, 29)], m_mane, h=1.6, w=2.4, group=61)
@@ -386,10 +389,11 @@ def midonos(p, view, phase):
 
         # near foreleg raised: the forearm thrust forward, the gilded hoof
         # lifted and turned up to show off
-        nf = p.limb([(23.5, 42), (17.5, 47.5 - up)], 8.2, 6.6, m_coat, group=13)
-        nc = p.limb([(17.5, 47.5 - up), (17, 53.5 - up)], 6.4, 5.4, m_coat, group=13)
-        _gild(p, [nf, nc], 46 - up, 60, 13, 24, group=13, teeth=(0, 2.0, 0.4, 1.4, 0.2, 2.2, 0.4))
-        _gold_hoof(p, 17, 53.5 - up, 6.4, tilt=-0.6, group=113)
+        nf = p.limb([(24.5, 42.5), (17, 46.6 - up)], 8.0, 6.2, m_coat, group=13)
+        p.blob(16.6, 47 - up, 3.2, 2.8, m_coat, group=13)
+        nc = p.limb([(16.8, 47.4 - up), (16.2, 51.8 - up)], 5.0, 4.6, m_coat, group=13)
+        _gild(p, [nf, nc], 41, 64, 8, 21, group=13, teeth=(0, 2.0, 0.4, 1.4, 0.2, 2.2, 0.4))
+        _gold_hoof(p, 16.2, 52.4 - up, 6.4, tilt=-0.6, group=113)
 
         # face: a heavy-lidded, smug eye under the brim
         if p.big:

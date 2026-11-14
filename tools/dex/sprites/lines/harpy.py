@@ -244,13 +244,12 @@ def _feather_lines(p, roots, tips, color="f0", frac=0.72):
 
 def harpelle(p, view, phase):
     if view in ("front", "side", "icon"):
-        F = 1 if (phase == 1 and view == "front") else 0   # wings lift, crest flicks
+        F = 1 if (phase == 1 and view in ("front", "side")) else 0   # wings lift, crest flicks
 
         # far wing, arched up and back behind the body, its fingered
         # primaries trailing storm cloud
         if p.big:
-            _cloud(p, 58.5, 16.5 - F, 2.2, bez((58.5, 16.5 - F), (61.5, 20.5), (60, 25)))
-            _cloud(p, 56.5, 30.5 - F, 2.0, bez((56.5, 30.5 - F), (60, 33.5), (58, 38)))
+            _cloud(p, 58.5, 4 - F, 2.2, None)
         ftips = [(58.5, 10 - F), (60, 17.5 - F), (58.5, 25 - F), (55.5, 31.5 - F), (50.5, 37)]
         fnot = [(55, 14 - F), (55.5, 21 - F), (53.5, 27 - F), (50, 32)]
         _wing(p, [(36, 31), (37, 21), (43, 12 - F), (50, 7.5 - F), (54, 8.5 - F)], ftips, fnot,
@@ -277,11 +276,10 @@ def harpelle(p, view, phase):
         # the arm arched from the shoulder to the wrist, the primaries
         # hanging in splayed fingers, storm streaming off their tips
         if p.big:
-            _cloud(p, 5, 50.5, 2.2, bez((5, 50.5), (2, 54.5), (4.5, 58.5)))
-            _cloud(p, 13.5, 56.5, 1.9, bez((13.5, 56.5), (10.5, 59.5), (14.5, 61)))
+            _cloud(p, 4.5, 57.5, 2.2, None)
         ntips = [(4, 48 + F), (8, 53 + F), (13, 55 + F), (18.5, 53), (23.5, 50.5), (28.5, 48.5)]
         nnot = [(7, 44 + F), (11, 48 + F), (16, 49), (21, 47), (25.5, 46)]
-        _wing(p, [(35, 31), (28, 27), (17, 26), (10, 28.5 + F), (6.5, 33 + F)], ntips, nnot,
+        _wing(p, [(35, 31), (28, 27), (17, 26), (9, 26 - F), (5, 27.5 - F), (3, 33)], ntips, nnot,
               [(33, 42)], h_feat, group=20)
         if p.big:
             _feather_lines(p, [(8, 37), (11, 40), (15, 42), (19, 42), (23, 42), (27, 42)], ntips, "f0", 0.8)
@@ -293,18 +291,18 @@ def harpelle(p, view, phase):
         for a_, b_, w in (((23, 16), (39, 4 - 2 * F), 4.0), ((25, 17), (46, 9 - 2 * F), 4.4),
                           ((26, 19.5), (48, 16 - F), 4.0), ((26, 22), (43, 23 - F), 3.4)):
             p.lens(a_, b_, w, h_hood, bend=-0.9, fat=0.28, group=50)
-        head = p.blob(21, 22, 8, 7.4, h_hood, group=3)
-        # a pale facial disc framed by the dark hood
-        p.blob(18.5, 24.5, 4.6, 4.4, h_feat, clip=[head], group=4)
-        # the hooked beak, a gold cere at its base
-        p.poly(bez((16, 21), (10, 20.5), (9.5, 27.5)) + [(11, 26.5), (12.5, 25.5), (15.5, 26)], h_hood,
-               group=5)
-        p.blob(15.5, 21.6, 1.8, 1.5, h_gold, group=6)
-
+        head = p.blob(20, 22, 8.4, 8, h_hood, group=3)
+        # turned to glare at us: a pale facial disc framed by the dark hood,
+        # two gold eyes and the hooked beak between them
+        p.blob(19.5, 24.5, 6.2, 5.8, h_feat, clip=[head], group=4)
+        p.poly([(18, 21), (21, 21), (21.5, 26), (20, 29.5), (18.6, 27)], h_hood, group=5)
+        p.blob(19.5, 20.6, 1.8, 1.2, h_gold, group=6)
         if p.big:
-            p.eye(15, 20, 4, 4, iris="gold1", shine="f3", shine_at=(1, 1))
+            p.eye(13, 20, 4, 3, iris="gold1", shine="f3", shine_at=(1, 0))
+            p.eye(23, 20, 3, 3, iris="gold1", shine="f3", shine_at=(0, 0))
         else:
-            p.px(16, 21, "gold1")
+            p.px(15, 21, "gold1")
+            p.px(23.5, 21, "gold1")
         return
 
     if view == "back":
