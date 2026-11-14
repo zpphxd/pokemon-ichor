@@ -1,6 +1,6 @@
 {
   "data/tilesets/secondary/temple_hestia/porytiles_bin/metatile_attributes.bin": "6daa7855f60da43929d2f9f2361db3f4",
-  "data/tilesets/secondary/temple_hestia/porytiles_bin/metatiles.bin": "aa60f34461996ab87c02ddfa943ca013",
+  "data/tilesets/secondary/temple_hestia/porytiles_bin/metatiles.bin": "a1726ff748a25fb890c25bc933e5a904",
   "data/tilesets/secondary/temple_hestia/porytiles_bin/palettes/00.pal": "04a134317a94ce9205182943e2dde614",
   "data/tilesets/secondary/temple_hestia/porytiles_bin/palettes/01.pal": "06ab62c4565a3af8eeff1393bacc3bf5",
   "data/tilesets/secondary/temple_hestia/porytiles_bin/palettes/02.pal": "c1aca2a211fb92c586d7c21577382145",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/temple_hestia/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/temple_hestia/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/temple_hestia/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/temple_hestia/porytiles_bin/tiles.png": "61194191071ac9487d0795555f3fdcf8",
+  "data/tilesets/secondary/temple_hestia/porytiles_bin/tiles.png": "48817ee7b1c108d99701ab4ea24e4184",
   "data/tilesets/secondary/temple_hestia/porytiles_src/attributes.csv": "9da334dd2be5809dfb841834ec19b537",
-  "data/tilesets/secondary/temple_hestia/porytiles_src/bottom.png": "a4aba35da84229a68f60dac6c49b603f",
-  "data/tilesets/secondary/temple_hestia/porytiles_src/middle.png": "7a8a976edd5d6268dcfed6a83ce51909",
+  "data/tilesets/secondary/temple_hestia/porytiles_src/bottom.png": "ecf618ffc638a7df91e0548ef0547401",
+  "data/tilesets/secondary/temple_hestia/porytiles_src/middle.png": "6b0f674bbdbb68645403b8647e6df0c7",
   "data/tilesets/secondary/temple_hestia/porytiles_src/top.png": "dc07cd3c38f39803187bde7cd3db8e77"
 }

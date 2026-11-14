@@ -203,7 +203,16 @@ def floor(variant=0):
 
 
 def dais_slab():
-    return slab(field="2", hi="1", lo="3", corner="4")
+    """Polished white marble: a lit top edge and a fine joint, with a faint
+    vein, so the dais reads as one stone floor rather than a grid."""
+    t = blank(fill="2")
+    t[0, :15] = "1"
+    t[15, :] = "3"
+    t[:, 15] = "3"
+    for x, y in ((4, 5), (5, 5), (11, 10)):
+        t[y, x] = "3"
+    t[4, 4] = "1"
+    return t
 
 
 # The red wool runner, one tile wide: gold borders and a gold lozenge per tile.
@@ -319,19 +328,20 @@ def inlay(kind):
 
 # --- The hearth's light on the floor ----------------------------------------
 
-BAYER4 = np.array([[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]]) / 16.0
 WARM = {"a": "l", "b": "a", "c": "b", "d": "c", "s": "r", "t": "s", "h": "g"}
 HOT = {"a": "l", "b": "l", "c": "m", "d": "c", "s": "r", "t": "s", "h": "g"}
 
 
 def firelight(canvas, cx, cy, rx, ry):
-    """Warm the floor around a fire in two dithered steps of light."""
+    """Warm the floor around a fire: two rings of light, each eased in with a
+    narrow checkerboard instead of a noisy dither."""
     out = canvas.copy()
     h, w = canvas.shape
     for y in range(h):
         for x in range(w):
             d = np.hypot((x + 0.5 - cx) / rx, (y + 0.5 - cy) / ry)
-            level = (1.0 - d) * 3.2 + BAYER4[y % 4, x % 4] - 0.3
+            v = (1.0 - d) * 3.0
+            level = int(np.floor(v + (0.25 if (x + y) % 2 else -0.25)))
             ch = canvas[y, x]
             if level >= 2:
                 out[y, x] = HOT.get(ch, ch)
@@ -391,14 +401,14 @@ for _y, _row in enumerate(MEANDER):
 
 F_PALMETTE = g(
     "................",
-    ".......KK.......",
-    "...K..KKKK..K...",
+    "......K..K......",
+    "...K..K..K..K...",
     "...KK.KKKK.KK...",
     "....KKKKKKKK....",
-    ".....KKwwKK.....",
-    "..KKK.KKKK.KKK..",
-    ".K..K..KK..K..K.",
-    "..KK...KK...KK..",
+    "..KK.KKwwKK.KK..",
+    "...KKKKKKKKKK...",
+    ".......KK.......",
+    ".....KKKKKK.....",
     "................",
 )
 F_FLAME = g(
@@ -429,15 +439,15 @@ F_AMPHORA = g(
 # white for her face and arm as the Attic painters did for women.
 F_HESTIA_L = g(
     "................",
-    "..........KK....",
-    ".........KK2K...",
-    "........KKKK....",
-    "........KKK222K.",
-    "....K...KKKK....",
-    "....K..KKKKKK...",
-    "....KKKKKKKKK...",
-    "....K....KK.K...",
-    "...KKK...KKKKK..",
+    ".......KKK......",
+    "......KKK22.....",
+    "...K..KKKK2.....",
+    "...K.KKKKK222K..",
+    "...K.KKKKK..KK..",
+    "...KKKKKKKKKK...",
+    "...K.KKKKK.KK...",
+    "...K.......KK...",
+    "..KK.......KKK..",
 )
 F_HESTIA_R = g(
     "................",
@@ -510,15 +520,15 @@ def dais_edge(right=False):
 def riser(end=None):
     """The dais front: the marble lip, a face of blocks, its shadow."""
     t = floor()
-    for y, ch in enumerate("21K23333" "4Kdc"):
+    for y, ch in enumerate("21K2333333" "4Kdc"):
         t[y, :] = ch
-    t[4:8, 7] = "4"
-    t[4:8, 15] = "4"
+    t[4:10, 7] = "4"
+    t[4:10, 15] = "4"
     if end == "l":
-        t[0:10, 0] = "K"
+        t[0:12, 0] = "K"
         t[0:3, 1] = "1"
     elif end == "r":
-        t[0:10, 15] = "K"
+        t[0:12, 15] = "K"
         t[0:3, 14] = "3"
     return t
 
@@ -688,9 +698,10 @@ STELE = g(
     "................",
 )
 
-# A bronze tripod: a deep bowl on three lion-footed legs, a plaque hung
-# between the front legs, all on a low marble step. Rows 0-15 are the bowl
-# tile and rows 16-31 the leg tile; the plaque's glyph is added per brazier.
+# A bronze tripod: a deep bowl on three splayed legs with lion feet, on a low
+# marble plinth whose bronze plaque names the station. Rows 0-15 are the bowl
+# tile and rows 16-31 the leg tile; legs and the plaque's glyph are added in
+# brazier().
 BRAZIER = g(
     "................",
     "................",
@@ -698,33 +709,56 @@ BRAZIER = g(
     "................",
     "................",
     "................",
-    "..KKKKKKKKKKKK..",
-    ".KDNNANNNANNNDK.",
-    ".KEEDDDDDDDDCBK.",
+    "...KKKKKKKKKK...",
+    "..KDNNANNANNDK..",
+    ".KEEDDDDDDDDDCK.",
     ".KKKKKKKKKKKKKK.",
-    "..KDEDDDDCCCBK..",
+    "..KEDDDDDDCCBK..",
+    "..KDDDDDCCCBBK..",
     "...KDDDCCCBBK...",
     "....KKDCCBKK....",
-    "....KDKKBKBK....",
-    "...KDK.KC.KBK...",
-    "...KDK.KC.KBK...",
-    "..KDK..KC..KBK..",
-    "..KDK..KC..KBK..",
-    "..KDKKKKKKKKBK..",
-    ".KDKDDDDDDDDKBK.",
-    ".KDKDDDDDDDDKBK.",
-    ".KDKDDDDDDDDKBK.",
-    ".KDKDDDDDDDDKBK.",
-    ".KDKKKKKKKKKKBK.",
-    ".KDK...KC...KBK.",
-    ".KDK...KC...KBK.",
-    "KEDDK.KCCK.KDCBK",
+    "......KDBK......",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
     "KKKKKKKKKKKKKKKK",
     "K22222222222223K",
-    "K33333333333334K",
     "KKKKKKKKKKKKKKKK",
-    "..cccccccccccc..",
+    "K333DDDDDDDD333K",
+    "K333DDDDDDDD333K",
+    "K333DDDDDDDD333K",
+    "K444DDDDDDDD444K",
+    "KKKKKKKKKKKKKKKK",
 )
+# Where each of the outer legs crosses rows 15-23: the left leg's x (the
+# right leg mirrors it), from the bowl's knob out to the feet.
+TRIPOD_LEFT = [6, 6, 5, 5, 4, 4, 3, 3, 2]
+
+
+def tripod():
+    """Rows 15-23 of the brazier: two splayed legs and the back leg."""
+    t = blank(9, 16)
+    for j, xl in enumerate(TRIPOD_LEFT):
+        t[j, xl] = "D"
+        t[j, 15 - xl] = "C"
+        t[j, 7] = "C"
+        t[j, 8] = "B"
+    out = t.copy()
+    for j in range(9):
+        for x in range(16):
+            if t[j, x] != CLEAR:
+                for dx in (-1, 1):
+                    if 0 <= x + dx < 16 and t[j, x + dx] == CLEAR:
+                        out[j, x + dx] = "K"
+    # Lion feet on the plinth.
+    out[8] = list(".KEDK.KCBK.KCBK.")
+    return out
 
 BRAZIER_FLAME = g(
     "......F.........",
@@ -773,39 +807,42 @@ GLYPHS = {
 }
 def brazier(lit, glyph):
     b = BRAZIER.copy()
+    over(b, tripod(), 0, 15)
+    over(b, GLYPHS[glyph], 5, 27)
     if lit:
         # Coals in the bowl, firelight on the bronze, flames above.
-        b[7] = list(".KDGHIHHGHIGHDK.")
+        b[7] = list("..KGHIHHGHIGHK..")
         b[8] = list(".KEEEDDDDDDDDCK.")
         b[10] = list("..KEEDDDDDCCBK..")
-        b[11] = list("...KEDDDCCCBK...")
+        b[11] = list("..KEDDDDCCCBBK..")
         over(b, BRAZIER_FLAME, 0, 0)
-        b[12:27] = recolor(b[12:27], {"B": "C", "D": "E"})
-        b[28] = list("K2222IIIIII2223K")
-    over(b, GLYPHS[glyph], 5, 19)
+        b[12:31] = recolor(b[12:31], {"B": "C", "D": "E"})
+        b[25] = list("K2222IIIIII2223K")
     return b
 
 
 # The cord across the dais approach: a red-and-white woolen fillet, the sign
 # of a closed sacred place. It burns away when the dais braziers flare.
-CORD = g(
-    "................",
-    "................",
-    "................",
-    "................",
-    "KK............KK",
-    "2rK..........Kr2",
-    "Kr2rK......Kr2rK",
-    "..KK2rKKKKr2KK..",
-    "....KKr2r2rKK...",
-    "......KrKrK.....",
-    "......K2K2K.....",
-    "......KrKrK.....",
-    ".......K.K......",
-    "................",
-    "................",
-    "................",
-)
+def cord():
+    """A twisted red-and-white rope sagging between the two bowls, with a
+    wool tassel at its lowest point."""
+    t = blank()
+    for x in range(16):
+        u = (x + 0.5 - 8) / 8
+        y = int(round(6 + 4 * (1 - u * u)))
+        t[y - 1, x] = "K"
+        t[y, x] = "r" if (x + y) % 3 else "2"
+        t[y + 1, x] = "s" if (x + y + 1) % 3 else "2"
+        t[y + 2, x] = "K"
+    tassel = g(
+        ".K.",
+        "KrK",
+        "KrK",
+        "rsr",
+        "K.K",
+    )
+    over(t, tassel, 7, 11)
+    return t
 
 AMPHORA = g(
     "......KKKK......",
@@ -1302,7 +1339,7 @@ def build():
     add("runner", runner())
     add("runner_end_s", runner_end())
     add("runner_end_n_dais", runner_end_north(D))
-    add("runner_cord", runner(), CORD)
+    add("runner_cord", runner(), cord())
     # Row 1: the key inlay and the doormat.
     add("inlay_h", inlay("h"))
     add("inlay_v", inlay("v"))

@@ -76,8 +76,8 @@ ROOM = """
 WL WT WT WT WT WT WT WT WT WT WT WT WT WT WR
 SL N1 N2 Pt Fk Fp Hl Hr Ff Fp Fk Pt Ff Dt SR
 SL N3 N4 Pb Ll Lw Lw Lr Lw Lw Ll Pb Lw Db SR
-SL .. .. Ct dl dd dd dS dd dd dr Ct .. .. SR
-SL T1 T2 Cb dl dd i1 i2 i3 dd dr Cb L1 L2 SR
+SL .. .. .. dl dd dd dS dd dd dr .. .. .. SR
+SL T1 T2 .. dl dd i1 i2 i3 dd dr .. L1 L2 SR
 SL T3 T4 f1 dl dd dd RN dd dd dr .. L3 L4 SR
 SL .. .. .. rl rr rr ST rr rr rR .. .. .. SR
 SL .. f2 .. .. .. Bt RC Bt .. .. .. f1 .. SR
