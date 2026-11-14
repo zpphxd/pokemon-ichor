@@ -82,31 +82,144 @@ def pave(sc, x, y, w, h, key="paving"):
             sc.g[y + j, x + i] = m
 
 
+TREE = [[0x1D4, 0x1D5], [0x1DC, 0x1DD]]
+FLOWERS = 0x004
+
+
+def tree(sc, x, y):
+    for j in range(2):
+        for i in range(2):
+            sc.g[y + j, x + i] = TREE[j][i]
+
+
+def slab_field(sc, x, y, w, h, variants=()):
+    """Kronion's stylobate: edges, corners and a few worn variants."""
+    I = lambda cx, cy: sc.id("stylobate", cx, cy)
+    for j in range(h):
+        for i in range(w):
+            top, bot, lef, rig = j == 0, j == h - 1, i == 0, i == w - 1
+            cx = 0 if lef else 2 if rig else 1
+            cy = 0 if top else 2 if bot else 1
+            sc.g[y + j, x + i] = I(cx, cy)
+    for (i, j, v) in variants:
+        sc.g[y + j, x + i] = I(3, v)
+
+
+def quay_field(sc, x, y, w, h):
+    for j in range(h):
+        for i in range(w):
+            sc.g[y + j, x + i] = sc.id("quay", 1, 1)
+
+
 def compose():
-    sc = Scene(40, 30)
-    # ---- Elaia (west half) ----
+    sc = Scene(46, 36)
+    q = lambda cx, cy: sc.id("quay", cx, cy)
+
+    # ---------------- Elaia ----------------
     sc.put("house_small", 1, 1)
     sc.put("house_large", 6, 0)
     sc.put("shrine_dome", 12, 0)
-    pave(sc, 1, 6, 17, 9)
-    sc.put("altar_square", 8, 9)
-    # garland posts along the square's north side
-    for i, x in enumerate(range(3, 16, 2)):
-        sc.g[7, x] = sc.id("klotheia_posts", 0, 0)
-        sc.g[8, x] = sc.id("klotheia_posts", 0, 1)
-        if x + 1 < 16:
-            sc.g[7, x + 1] = sc.id("klotheia_posts", 1, 0)
-    sc.put("olive_press", 1, 16)
-    # dry-stone wall run and a terrace
-    sc.put("wall_drystone", 5, 18, 0, 0, 1, 1)
-    for x in range(6, 11):
-        sc.put("wall_drystone", x, 18, 1 + (x % 2), 0, 1, 1)
-    sc.put("wall_drystone", 11, 18, 3, 0, 1, 1)
-    sc.put("terrace", 5, 22, 0, 0, 1, 1)
-    for x in range(6, 12):
-        sc.put("terrace", x, 22, 1 + (x % 2), 0, 1, 1)
-    sc.put("terrace", 12, 22, 3, 0, 1, 1)
-    sc.put("terrace", 13, 22, 4, 0, 1, 1)
+    tree(sc, 18, 0)
+    tree(sc, 18, 3)
+    pave(sc, 1, 5, 19, 9)
+    # Klotheia posts strung across the square's north side
+    posts = list(range(3, 18, 2))
+    for x in posts:
+        top = (3, 0) if x == posts[0] else (2, 0) if x == posts[-1] else (0, 0)
+        sc.g[6, x] = sc.id("klotheia_posts", *top)
+        sc.g[7, x] = sc.id("klotheia_posts", 0, 1)
+        if x != posts[-1]:
+            sc.g[6, x + 1] = sc.id("klotheia_posts", 1, 0)
+    sc.put("altar_square", 9, 9)
+    sc.put("olive_press", 1, 15)
+    tree(sc, 5, 15)
+    sc.g[17, 7] = FLOWERS
+    sc.g[17, 8] = FLOWERS
+    # a field wall with a corner, then the terraces below the village
+    sc.put("wall_drystone", 10, 15, 2, 1, 1, 1)   # NW corner
+    sc.put("wall_drystone", 10, 16, 0, 1, 1, 1)   # north-south run
+    sc.put("wall_drystone", 10, 17, 0, 0, 1, 1)   # its foot: west end of the east-west run
+    for x in range(11, 19):
+        sc.put("wall_drystone", x, 17, 1 + (x % 2), 0, 1, 1)
+    sc.put("wall_drystone", 19, 17, 3, 0, 1, 1)
+    for x in range(11, 19, 3):
+        tree(sc, x, 15) if x + 1 < 19 else None
+    sc.put("terrace", 0, 20, 1, 0, 1, 1)
+    for x in range(1, 21):
+        sc.put("terrace", x, 20, 1 + (x % 2), 1 if 4 <= x <= 7 else 0, 1, 1)
+    sc.put("terrace", 9, 20, 3, 0, 1, 1)
+    sc.put("terrace", 21, 20, 4, 0, 1, 1)
+    for (x, y) in ((1, 22), (5, 23), (9, 22), (13, 24), (17, 22), (3, 27), (11, 28), (16, 27)):
+        tree(sc, x, y)
+    sc.put("terrace", 0, 26, 1, 0, 1, 1)
+    for x in range(1, 21):
+        sc.put("terrace", x, 26, 1 + (x % 2), 0, 1, 1)
+    sc.put("terrace", 7, 26, 3, 0, 1, 1)
+    sc.put("terrace", 21, 26, 4, 0, 1, 1)
+    for x in range(0, 21):
+        for y in (30, 31):
+            sc.g[y, x] = TALL_GRASS if (x * 5 + y) % 3 else GRASS
+
+    # ---------------- Kronion Hill ----------------
+    slab_field(sc, 25, 1, 16, 8, variants=((5, 3, 0), (12, 5, 1), (3, 5, 2), (14, 2, 1)))
+    for x in (26, 29, 35):
+        sc.put("ruin_columns", x, 1, 0, 0, 1, 3)
+    sc.put("ruin_columns", 32, 1, 1, 0, 1, 3)       # snapped at mid height
+    sc.put("ruin_columns", 38, 3, 2, 2, 1, 1)       # stump
+    sc.put("ruin_columns", 39, 6, 3, 2, 1, 1)       # two-drum stump
+    sc.put("ruin_drums", 26, 6, 0, 0, 2, 1)
+    sc.put("ruin_drums", 28, 7, 2, 0, 1, 1)
+    sc.put("ruin_drums", 37, 6, 3, 0, 1, 1)
+    sc.put("altar_broken", 32, 3)
+    sc.put("dig_site", 32, 5, 0, 0, 2, 2)
+    sc.put("dig_site", 34, 5, 2, 0, 1, 1)
+    sc.put("dig_site", 34, 6, 2, 1, 1, 1)
+    sc.put("dig_site", 31, 5, 3, 0, 1, 1)
+    sc.put("dig_site", 30, 6, 3, 1, 1, 1)
+    tree(sc, 23, 0)
+    tree(sc, 42, 1)
+    tree(sc, 43, 5)
+    sc.put("terrace", 23, 10, 0, 0, 1, 1)
+    for x in range(24, 45):
+        sc.put("terrace", x, 10, 1 + (x % 2), 0, 1, 1)
+    sc.put("terrace", 32, 10, 3, 0, 1, 1)
+    sc.put("terrace", 45, 10, 4, 0, 1, 1)
+
+    # ---------------- Akti ----------------
+    sc.put("temple_hestia", 23, 12)
+    sc.put("shrine_poseidon", 31, 15)
+    tree(sc, 34, 13)
+    tree(sc, 41, 12)
+    tree(sc, 37, 15)
+    pave(sc, 22, 18, 24, 3)           # the temple forecourt and harbor street
+    quay_field(sc, 22, 21, 24, 4)
+    quay_field(sc, 22, 25, 8, 11)
+    # north side of the basin: the quay's south face, with steps cut into it
+    for x in range(30, 46):
+        sc.g[25, x] = q(1, 2)
+    sc.g[25, 29] = q(4, 1)
+    sc.g[25, 36] = sc.id("quay_steps", 1, 0)
+    # west side of the basin
+    for y in range(26, 34):
+        sc.g[y, 29] = q(2, 1)
+    # breakwater on the south side: north-facing coping, bollards and steps
+    for x in range(30, 46):
+        sc.g[34, x] = q(1, 0)
+        sc.g[35, x] = q(1, 1)
+    sc.g[34, 29] = q(4, 0)
+    for x in (33, 39, 44):
+        sc.g[34, x] = sc.id("quay_steps", 2, 0)
+    sc.g[34, 41] = sc.id("quay_steps", 0, 0)
+    sc.fill(30, 26, 16, 8, WATER)
+    sc.put("boat_kaiki", 31, 26)
+    sc.put("boat_kaiki_left", 39, 26)
+    sc.put("boat_kaiki", 33, 31)
+    # goods on the quay
+    sc.put("quay_nets", 33, 22, 0, 0, 3, 1)
+    sc.put("quay_nets", 38, 22, 0, 1, 2, 1)
+    sc.put("quay_nets", 40, 22, 2, 1, 2, 1)
+    sc.put("quay_nets", 24, 27, 0, 1, 3, 1)
+    sc.put("quay_nets", 25, 31, 0, 0, 2, 1)
     return sc
 
 

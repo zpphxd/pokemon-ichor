@@ -641,24 +641,30 @@ def olive_press():
     L.vline(25, 29, 40, "ink")
     L.vline(23, 29, 40, "w1")
     L.hline(22, 25, 29, "w0")
+    # a big upright millstone with its axle hole, standing in the basin
     stone = [
-        "  kkkk  ",
-        " k0011k ",
-        "k001122k",
-        "k011223k",
-        "k012233k",
-        "k112233k",
-        "k122334k",
-        " k2334k ",
-        "  kkkk  ",
+        "    kkkkkk    ",
+        "  kk001111kk  ",
+        " k0001111122k ",
+        " k0011111222k ",
+        "k001111122223k",
+        "k011111kk2223k",
+        "k01111kkkk223k",
+        "k01111kkkk233k",
+        "k011112kk2233k",
+        "k111122222333k",
+        " k1122222333k ",
+        " k1222223334k ",
+        "  kk222334kk  ",
+        "    kkkkkk    ",
     ]
     sk = {"k": "ink", "0": "w0", "1": "w1", "2": "w2", "3": "w3", "4": "w4"}
     # the axle runs from the pier out past the rim, where the donkey is yoked
-    L.rect(24, 33, 17, 2, "tc1")
-    L.hline(24, 40, 33, "tc2")
+    L.rect(25, 33, 16, 2, "tc1")
+    L.hline(25, 40, 33, "tc2")
     L.px(41, 33, "ink")
     L.px(41, 34, "ink")
-    L.blit(stone, sk, 14, 33)
+    L.blit(stone, sk, 9, 28)
     # a basket of olives at the door
     basket = [
         " gGgGg ",

@@ -135,9 +135,11 @@ def verify(rows):
     if bad:
         sys.exit(f"kalliste_build: entries outside kalliste's tiles/palettes 6-12: {bad[:10]}")
     from PIL import Image
-    tiles = Image.open(BIN / "tiles.png")
-    n = (tiles.width // 8) * (tiles.height // 8)
-    print(f"verified {len(raw)} metatiles; tiles.png holds {n} tiles (limit 512)")
+    a = np.array(Image.open(BIN / "tiles.png"))
+    tiles = [a[y:y + 8, x:x + 8] for y in range(0, a.shape[0], 8) for x in range(0, a.shape[1], 8)]
+    used = max(i for i, tl in enumerate(tiles) if tl.any()) + 1   # the rest is padding
+    print(f"verified {len(raw)} metatiles; {used} of 512 tiles used")
+    return used
 
 
 def catalog(secs):
@@ -179,7 +181,9 @@ def main():
     catalog(secs)
     if not args.no_compile:
         compile_tileset()
-        verify(rows)
+        used = verify(rows)
+        import kalliste_catalog
+        kalliste_catalog.main(used)
 
 
 if __name__ == "__main__":
