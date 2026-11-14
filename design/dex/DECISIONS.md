@@ -31,6 +31,18 @@ Plan: `design/dex/PLAN.md` (generated from `plan.yaml`). Review page: https://cl
 - The Snivy, Cyndaquil and Piplup lines don't leave the game when the Aethos starters replace them. They return mid-to-late game as gifts from gods in disguise (theoxenia, in the spirit of Baucis and Philemon).
 - The main session's systems designer is specifying it, with an optional extended tier in which other generations' starters also come as gifts.
 
+**Theoxenia tier (2026-11-14): core plus extended.** The user picked both tiers, relayed by the main session. The spec is `design/SYSTEMS.md` §10 on main. There are 18 gift lines; Lazarus's nine starters are offered nowhere.
+- **Core:** Snivy from Demeter, Cyndaquil from Hephaestus (evolving into Hisuian Typhlosion), Piplup from Poseidon.
+- **Extended:**
+  - Squirtle (Hermes), Charmander (Hestia), Turtwig (Athena), Torchic (Ares)
+  - Grookey (Dionysus), Tepig (Artemis), Oshawott (Aphrodite), Chimchar (Apollo)
+  - Chikorita (Hera), Mudkip (Hecate), Totodile (Hades), Bulbasaur (Persephone)
+  - Sobble (Proteus)
+  - The finale: Treecko and Scorbunny from Zeus and Hermes
+- **The Pokédex's "Visitors" page.** The gift species get their own page after the Aethos dex's #1–152. It's unnumbered, grouped by the god who gave each one, and each entry notes the guest-gift. It's to be specified here before implementation.
+
+**Asterion is Asterlorn (#98, Fighting/Dark).** The Labyrinth's Minotaur gets this dex's own species, not the placeholder Paldean Tauros. The entry already makes him the one-of-a-kind Minotaur chained at the Labyrinth's heart, catchable after the raid, which fits `design/LABYRINTH.md`'s idea of him joining the player.
+
 D2, D3 and D6 don't block Gate 2. The entries for those species are written either way, and the open questions are about where they go in the story.
 
 ## Gate 2: the full entries
