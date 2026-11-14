@@ -1647,3 +1647,18 @@ const struct Tileset gTileset_Agros =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Agros,
     .callback = NULL,
 };
+
+// Ichor: ergasteria, Phase 2's working interiors (Aegina's inn, mint and homes;
+// Emporion's workshops next). A secondary that uses only its own tiles and
+// palettes 6-12, so it works on any primary. Built by
+// tools/ichor/art/ergasteria_build.py.
+const struct Tileset gTileset_Ergasteria =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Ergasteria,
+    .palettes = gTilesetPalettes_PorytilesManaged_Ergasteria,
+    .metatiles = gMetatiles_PorytilesManaged_Ergasteria,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Ergasteria,
+    .callback = NULL,
+};

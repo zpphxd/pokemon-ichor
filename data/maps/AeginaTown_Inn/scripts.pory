@@ -1,1 +1,211 @@
-mapscripts AeginaTown_Inn_MapScripts {}
+// The inn on Aigina's waterfront (design/phase2/SCRIPT.md, beat 10B and Part 2).
+// Room: tools/ichor/maps/aegina_homes.py ("inn"). The street door is the mat at
+// (11..12, 11), warp 0. Endeis (5,6) keeps the inn; Kleon (3,2) and Alethea
+// (4,4) sit by the common room's hearth on the voyage night only (their objects
+// hide on FLAG_ICHOR_AEGINA_NIGHT).
+//
+// The voyage night (FLAG_ICHOR_ARRIVED_AEGINA set, FLAG_ICHOR_AEGINA_NIGHT
+// clear): Endeis asks "Ready for bed?", and YES plays the night by the fire,
+// heals, ends the night and warps to the deck for beat 10C. Every later visit,
+// Endeis heals the party.
+//
+// Placeholders the world-act1 session fixes at merge:
+//   - the mat's warps point at MAP_AEGINA_TOWN warp 0 (map.json), until the
+//     Aegina agent's door warp ids are known;
+//   - the deck tile in AeginaTown_Inn_EventScript_Night (the trireme agent's).
+
+mapscripts AeginaTown_Inn_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // The voyage night's tint (BUILD.md): the override isn't saved, so
+        // re-apply it here too, for the step back outside. Indoor maps take no
+        // tint themselves.
+        if (flag(FLAG_ICHOR_ARRIVED_AEGINA) && !flag(FLAG_ICHOR_AEGINA_NIGHT)) {
+            setvar(VAR_0x8004, 22)
+            special(Ichor_SetHoursOverride)
+        }
+    }
+}
+
+text AeginaTown_Inn_Text_NameEndeis { "ENDEIS" }
+text AeginaTown_Inn_Text_NameKleon { "KLEON" }
+text AeginaTown_Inn_Text_NameAlethea { "ALETHEA" }
+text AeginaTown_Inn_Text_SheSaidNothing { "SHE SAID NOTHING" }
+text AeginaTown_Inn_Text_OwnBusiness { "IT'S MY OWN BUSINESS" }
+
+script AeginaTown_Inn_EventScript_Endeis {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_ARRIVED_AEGINA) && !flag(FLAG_ICHOR_AEGINA_NIGHT)) {
+        setspeaker(AeginaTown_Inn_Text_NameEndeis)
+        msgbox(format("Off the Euploia? Nausikles always runs late. Kingfishers, was it?\p"
+                      "Sit. Bread and fish. The fish is fresh. The bread is honest."))
+        setspeaker(AeginaTown_Inn_Text_NameEndeis)
+        msgbox(format("Ready for bed? Your friends are by the fire."), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            setspeaker(AeginaTown_Inn_Text_NameEndeis)
+            msgbox(format("Suit yourself. The fire'll keep."))
+            release
+            end
+        }
+        goto(AeginaTown_Inn_EventScript_Night)
+    }
+    setspeaker(AeginaTown_Inn_Text_NameEndeis)
+    msgbox(format("Back again? Everyone comes back to Aigina. They just don't stay."))
+    closemessage
+    call(Common_EventScript_OutOfCenterPartyHeal)
+    release
+}
+
+// Beat 10B: the common room at night, a fire in the hearth. Kleon sits with his
+// back to the wall, eating bread like it owes him money. Alethea has a scroll
+// open. The player sits.
+script AeginaTown_Inn_EventScript_Night {
+    closemessage
+    hidefollower
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    fadescreen(FADE_TO_BLACK)
+    // ICHOR_STUB_MUSIC: MUS_ICHOR_HEARTH_NIGHT (a solo lyre by a fire) when it exists.
+    playbgm(MUS_ICHOR_ASCLEPEION, FALSE)
+    // To the seat by the fire, (2,5), in the dark, so the camera follows. Endeis
+    // can be talked to from the south (5,7) or the west (4,6) only.
+    if (var(VAR_0x8004) == 4) {
+        applymovement(LOCALID_PLAYER, AeginaTown_Inn_Movement_PlayerToFireFromWest)
+    } else {
+        applymovement(LOCALID_PLAYER, AeginaTown_Inn_Movement_PlayerToFireFromSouth)
+    }
+    waitmovement(0)
+    turnobject(LOCALID_AEGINA_INN_ENDEIS, DIR_SOUTH)
+    turnobject(LOCALID_AEGINA_INN_KLEON, DIR_SOUTH)
+    turnobject(LOCALID_AEGINA_INN_ALETHEA, DIR_WEST)
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    delay(20)
+
+    setspeaker(AeginaTown_Inn_Text_NameAlethea)
+    msgbox(format("The mint stamps every coin with a sea turtle. Nobody knows why.\p"
+                  "Truthfully, I think somebody just liked turtles."))
+    setspeaker(AeginaTown_Inn_Text_NameKleon)
+    msgbox(format("I went to the anthills. They're just ants."))
+    setspeaker(AeginaTown_Inn_Text_NameAlethea)
+    msgbox(format("What did you expect?"))
+    setspeaker(AeginaTown_Inn_Text_NameKleon)
+    msgbox(format("I don't know. A salute."))
+    closemessage
+
+    // Pause. Kleon puts the bread down.
+    delay(40)
+    applymovement(LOCALID_AEGINA_INN_KLEON, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    delay(20)
+    setspeaker(AeginaTown_Inn_Text_NameKleon)
+    msgbox(format("{PLAYER}. Can I ask you something?"))
+    setspeaker(AeginaTown_Inn_Text_NameKleon)
+    message(format("At the festival. What did Halia say about yours? Your thread."))
+    waitmessage
+    dynmultichoice(18, 6, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE, AeginaTown_Inn_Text_SheSaidNothing, AeginaTown_Inn_Text_OwnBusiness)
+    if (var(VAR_RESULT) == 0) {
+        setspeaker(AeginaTown_Inn_Text_NameKleon)
+        msgbox(format("Nothing? Lucky."))
+    } else {
+        setspeaker(AeginaTown_Inn_Text_NameKleon)
+        msgbox(format("Ha! That's what she told you, isn't it? I heard.\p"
+                      "I'd give anything for an oracle to say that to me."))
+    }
+    setspeaker(AeginaTown_Inn_Text_NameKleon)
+    msgbox(format("Mine, they never stopped talking about. Young and glorious.\p"
+                  "My teachers know it. The other boys know it. The cook knows it.\p"
+                  "When I win, they say, “Glorious.”\p"
+                  "When I lose, they look at me like I'm already gone."))
+    setspeaker(AeginaTown_Inn_Text_NameAlethea)
+    msgbox(format("…That's awful, Kleon."))
+    setspeaker(AeginaTown_Inn_Text_NameKleon)
+    msgbox(format("It's fine! It's a good prophecy. Glorious is the good part.\p"
+                  "I'm going to bed. Lakonians sleep sitting up. In case of attack."))
+    closemessage
+
+    // Kleon leaves for the loft, up the gallery's ladder.
+    applymovement(LOCALID_AEGINA_INN_KLEON, AeginaTown_Inn_Movement_KleonToLoft)
+    waitmovement(0)
+    removeobject(LOCALID_AEGINA_INN_KLEON)
+    delay(30)
+
+    setspeaker(AeginaTown_Inn_Text_NameAlethea)
+    msgbox(format("He doesn't sleep sitting up. He snores. I checked.\p"
+                  "Daphne says a prophecy is a story somebody told too early.\p"
+                  "I'd like to find out what the real story is. Before it happens to him."))
+    setspeaker(AeginaTown_Inn_Text_NameAlethea)
+    msgbox(format("Goodnight, {PLAYER}."))
+    closemessage
+
+    // Fade to black. Heal the party, end the night, and sail at first light.
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    special(HealPlayerParty)
+    setflag(FLAG_ICHOR_AEGINA_NIGHT)
+    setvar(VAR_0x8004, 0)
+    special(Ichor_SetHoursOverride)
+    // Beat 10C plays on deck. Placeholder tile until the trireme agent records
+    // the deck's arrival tile in BUILD.md.
+    warp(MAP_TRIREME_EUPLOIA_DECK, 255, 12, 8)
+    waitstate
+}
+
+movement AeginaTown_Inn_Movement_PlayerToFireFromSouth {
+    walk_faster_left * 3
+    walk_faster_up * 2
+    face_up
+}
+
+movement AeginaTown_Inn_Movement_PlayerToFireFromWest {
+    walk_faster_left * 2
+    walk_faster_up
+    face_up
+}
+
+movement AeginaTown_Inn_Movement_KleonToLoft {
+    walk_right * 4
+    walk_down
+    walk_right
+    walk_slow_up * 2
+}
+
+// The voyage night only, before bed.
+script AeginaTown_Inn_EventScript_Kleon {
+    lock
+    faceplayer
+    setspeaker(AeginaTown_Inn_Text_NameKleon)
+    msgbox(format("Solid bread. Solid floor. I'm never getting on a boat again.\p"
+                  "Until tomorrow."))
+    release
+}
+
+script AeginaTown_Inn_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(AeginaTown_Inn_Text_NameAlethea)
+    msgbox(format("Endeis has beds for us up in the gallery. Ask her when you're ready."))
+    release
+}
+
+script AeginaTown_Inn_EventScript_Hearth {
+    msgbox(format("Bread warms on the hearth's curb. A fish spits on the coals."), MSGBOX_SIGN)
+}
+
+script AeginaTown_Inn_EventScript_Cistern {
+    msgbox(format("The cistern. Every drop of rain that hits the roof ends up down here.\p"
+                  "The water tastes faintly of roof tiles."), MSGBOX_SIGN)
+}
+
+script AeginaTown_Inn_EventScript_Mosaic {
+    msgbox(format("A sea turtle in pebbles, worn smooth by sailors' feet.\p"
+                  "It's the same turtle that's on every coin from the mint."), MSGBOX_SIGN)
+}
+
+script AeginaTown_Inn_EventScript_Ladder {
+    if (flag(FLAG_ICHOR_ARRIVED_AEGINA) && !flag(FLAG_ICHOR_AEGINA_NIGHT)) {
+        msgbox(format("The ladder up to the guest rooms. Endeis has your bed made up."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("The ladder up to the guest rooms. Somebody up there is snoring."), MSGBOX_SIGN)
+    }
+}

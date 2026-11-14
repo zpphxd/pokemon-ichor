@@ -9558,10 +9558,10 @@
     {
       "id": "LAYOUT_AEGINA_TOWN_INN",
       "name": "AeginaTown_Inn_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 16,
+      "height": 12,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Ergasteria",
       "border_filepath": "data/layouts/AeginaTown_Inn/border.bin",
       "blockdata_filepath": "data/layouts/AeginaTown_Inn/map.bin",
       "layout_version": "emerald"
@@ -9569,10 +9569,10 @@
     {
       "id": "LAYOUT_AEGINA_TOWN_MINT",
       "name": "AeginaTown_Mint_Layout",
-      "width": 10,
+      "width": 9,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Ergasteria",
       "border_filepath": "data/layouts/AeginaTown_Mint/border.bin",
       "blockdata_filepath": "data/layouts/AeginaTown_Mint/map.bin",
       "layout_version": "emerald"
@@ -9580,10 +9580,10 @@
     {
       "id": "LAYOUT_AEGINA_TOWN_AIAKIDES_HOUSE",
       "name": "AeginaTown_AiakidesHouse_Layout",
-      "width": 10,
+      "width": 8,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Ergasteria",
       "border_filepath": "data/layouts/AeginaTown_AiakidesHouse/border.bin",
       "blockdata_filepath": "data/layouts/AeginaTown_AiakidesHouse/map.bin",
       "layout_version": "emerald"

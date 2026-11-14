@@ -436,3 +436,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Akti[] = INCBIN_U16("data/tileset
 // Ichor: agros
 const u16 gMetatiles_PorytilesManaged_Agros[] = INCBIN_U16("data/tilesets/secondary/agros/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Agros[] = INCBIN_U16("data/tilesets/secondary/agros/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: ergasteria
+const u16 gMetatiles_PorytilesManaged_Ergasteria[] = INCBIN_U16("data/tilesets/secondary/ergasteria/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Ergasteria[] = INCBIN_U16("data/tilesets/secondary/ergasteria/porytiles_bin/metatile_attributes.bin");
