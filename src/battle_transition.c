@@ -4898,6 +4898,7 @@ static const u16 sIchorTrainer_Tilemap[] = INCBIN_U16("graphics/battle_transitio
 #define tTargetB    data[7]
 #define tTargetP    data[8]
 #define tTargetQ    data[9]
+#define tFadeStep   data[10] // BLDY added per frame when fading to black
 
 static bool8 IchorWild_Init(struct Task *);
 static bool8 IchorWild_Sweep(struct Task *);
@@ -4978,14 +4979,16 @@ static u16 IchorPottery_LineFrom(s32 width, bool32 fromRight)
 }
 
 // Wild: ten 16 px bands sweep in from alternate sides, each two frames
-// after the one above, 20 px a frame.
+// after the one above, 24 px a frame; about 36 frames in all, close to
+// the Slice transition it replaces.
 #define ICHOR_WILD_BAND_DELAY 2
-#define ICHOR_WILD_SPEED      20
+#define ICHOR_WILD_SPEED      24
 
 static bool8 IchorWild_Init(struct Task *task)
 {
     IchorPottery_Setup(sIchorWild_Tilemap);
     task->tTimer = 0;
+    task->tFadeStep = 2;
     task->tState++;
     return FALSE;
 }
@@ -5007,7 +5010,7 @@ static bool8 IchorWild_Sweep(struct Task *task)
     sTransitionData->BG0HOFS_Upper++;
     if (lastWidth >= DISPLAY_WIDTH)
     {
-        task->tTimer = 6;  // frames to hold the finished vase
+        task->tTimer = 2;  // frames to hold the finished vase
         task->tState++;
     }
     sTransitionData->VBlank_DMA = TRUE;
@@ -5057,6 +5060,7 @@ static bool8 IchorTrainer_Init(struct Task *task)
     bool32 partner = (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) && gPartnerTrainerId != TRAINER_PARTNER(PARTNER_NONE);
 
     IchorPottery_Setup(sIchorTrainer_Tilemap);
+    task->tFadeStep = 1;
 
     // Opponents enter from the right and face left; the player (and a
     // partner) enter from the left, flipped to face them.
@@ -5165,7 +5169,7 @@ static bool8 IchorPottery_FadeToBlack(struct Task *task)
 {
     sTransitionData->BG0HOFS_Upper++;
     if (sTransitionData->BLDY < 16)
-        sTransitionData->BLDY++;
+        sTransitionData->BLDY = min(16, sTransitionData->BLDY + task->tFadeStep);
     else
         task->tState++;
     return FALSE;
@@ -5192,7 +5196,9 @@ static void VBlankCB_IchorPottery(void)
     REG_WIN0V = sTransitionData->WIN0V;
     REG_BLDCNT = sTransitionData->BLDCNT;
     REG_BLDY = sTransitionData->BLDY;
-    DmaSet(0, gScanlineEffectRegBuffers[1], &REG_WIN0H, B_TRANS_DMA_FLAGS);
+    // Line 0 is set here; each HBlank then writes the next line's value.
+    REG_WIN0H = gScanlineEffectRegBuffers[1][0];
+    DmaSet(0, &gScanlineEffectRegBuffers[1][1], &REG_WIN0H, B_TRANS_DMA_FLAGS);
 }
 
 #undef tTimer
@@ -5204,3 +5210,4 @@ static void VBlankCB_IchorPottery(void)
 #undef tTargetB
 #undef tTargetP
 #undef tTargetQ
+#undef tFadeStep
