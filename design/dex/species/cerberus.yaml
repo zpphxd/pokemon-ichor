@@ -1,0 +1,227 @@
+line: cerberus
+species:
+
+- dex: 4
+  concept: Hearth pup
+  name: Kynder
+  etymology: kyon (Greek, dog; stem kyn-) + cinder
+  category: Hearth Pup
+  types: [Fire]
+  abilities: [Blaze]
+  hidden_ability: Strong Jaw
+  base_stats: {hp: 46, atk: 60, def: 44, spa: 50, spd: 44, spe: 66}
+  ev_yield: {atk: 1}
+  exp_yield: 62
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.5
+  weight_kg: 11.0
+  myth: >-
+    Hesiod calls Kerberos the bronze-voiced hound of Hades, a child of Typhon
+    and Echidna, and names the two-headed hound Orthros as the first of that
+    litter (Theogony 306–312).
+  expression: >-
+    A hearth-warm pup with only one head awake. The other two sleep tucked into
+    its ruff, waiting for their turn to guard.
+  art: >-
+    Small: it fills about 32×36 px. A stocky pup sitting in three-quarter view
+    facing left, its one awake head up and panting. Two smaller heads with eyes
+    shut are tucked into a thick, flame-tipped ruff, one on each shoulder, above
+    oversized paws and a stubby tail with an ember at the tip. Terracotta coat
+    with a limestone muzzle and belly, sun-gold flames on the ruff and tail,
+    black-figure ink outline. The follower trots with the sleeping heads
+    bobbing.
+  shiny: The coat turns ash-gray marble and the flames burn Aegean blue.
+  dex_entry:
+    - Only one of its three heads is awake.
+    - The other two doze in its warm ruff. It
+    - is said they dream of a gate they have
+    - not yet been asked to guard.
+  habitat: >-
+    Given by Professor Daphne at the Akademia grove, Elaia. It isn't found in
+    the wild until the post-game Sanctuary of Firsts.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Leer]
+      - [4, Ember]
+      - [7, Yawn]
+      - [10, Bite]
+      - [13, Fire Fang]
+      - [16, Howl]
+      - [19, Flame Charge]
+      - [22, Roar]
+      - [25, Crunch]
+      - [28, Will-O-Wisp]
+      - [31, Temper Flare]
+      - [34, Take Down]
+      - [37, Flare Blitz]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Roar, Flame Charge,
+      Fire Fang, Flamethrower, Fire Blast, Overheat, Heat Wave, Will-O-Wisp, Fire Spin, Fire Pledge,
+      Temper Flare, Burning Jealousy, Crunch, Snarl, Lash Out, Scary Face, Dig, Iron Tail, Body Slam,
+      Take Down, Double-Edge, Helping Hand, Covet, Agility, Reversal, Thief, Play Rough, Wild Charge,
+      Endeavor, Mud-Slap, Rock Smash, Strength, Work Up, Retaliate]
+    egg: [Thrash, Curse, Baby-Doll Eyes, Odor Sleuth, Destiny Bond, Close Combat]
+  signature: >-
+    Its one waking head learns Fire Fang, the first of the line's three fangs.
+    Yawn comes early, from the heads still dozing in its ruff.
+  new_move: null
+
+- dex: 5
+  concept: Two-headed hound
+  name: Dikyon
+  etymology: di- (Greek, two) + kyon (Greek, dog)
+  category: Twin Hound
+  types: [Fire]
+  abilities: [Blaze]
+  hidden_ability: Strong Jaw
+  base_stats: {hp: 60, atk: 78, def: 58, spa: 62, spd: 57, spe: 90}
+  ev_yield: {atk: 1, spe: 1}
+  exp_yield: 142
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.1
+  weight_kg: 38.0
+  myth: >-
+    Orthros, the two-headed hound, guarded Geryon's red cattle on Erytheia
+    until Herakles killed him with his club (Hesiod, Theogony 287–294;
+    Apollodorus, Library 2.5.10).
+  expression: >-
+    The second head has woken, and the two argue over every scent. This is the
+    Orthros stage: lean, quick and quarrelsome, with the third head still asleep
+    in the ruff.
+  art: >-
+    Medium: it fills about 46×44 px. A lean, long-legged hound in three-quarter
+    view facing left, mid-stride, with two heads on a forked neck snapping in
+    different directions. The third head is a small sleeping lump half-hidden in
+    a flaming mane at the shoulders, and a long tail ends in a flickering ember.
+    Terracotta coat darkening at the legs, limestone muzzles, sun-gold flame
+    mane, black-figure ink outline. The back sprite shows the sleeping third
+    head between the shoulders.
+  shiny: An ash-gray marble coat with Aegean-blue flames.
+  dex_entry:
+    - Its two heads never agree on where to
+    - go. One follows the trail while the other
+    - barks at its own shadow. Both take care
+    - not to wake the third.
+  habitat: Evolves from Kynder at level 16.
+  learnset:
+    level_up:
+      - [0, Thunder Fang]
+      - [1, Tackle]
+      - [1, Leer]
+      - [1, Ember]
+      - [1, Yawn]
+      - [10, Bite]
+      - [13, Fire Fang]
+      - [16, Howl]
+      - [19, Flame Charge]
+      - [22, Double Hit]
+      - [26, Roar]
+      - [30, Crunch]
+      - [34, Will-O-Wisp]
+      - [38, Temper Flare]
+      - [42, Take Down]
+      - [46, Flare Blitz]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Roar, Flame Charge,
+      Fire Fang, Flamethrower, Fire Blast, Overheat, Heat Wave, Will-O-Wisp, Fire Spin, Fire Pledge,
+      Temper Flare, Burning Jealousy, Crunch, Snarl, Lash Out, Scary Face, Dig, Iron Tail, Body Slam,
+      Take Down, Double-Edge, Helping Hand, Covet, Agility, Reversal, Thief, Play Rough, Wild Charge,
+      Endeavor, Mud-Slap, Rock Smash, Strength, Work Up, Retaliate, Thunder Fang, Flare Blitz, Taunt,
+      Rock Tomb, Stomping Tantrum]
+    egg: []
+  signature: >-
+    The second head wakes with Thunder Fang on evolving, and Double Hit puts
+    both heads to work at once.
+  new_move: null
+
+- dex: 6
+  concept: Three-headed gatehound
+  name: Pylakyon
+  etymology: pyle (Greek, gate) + kyon (Greek, dog)
+  category: Gatehound
+  types: [Fire, Ghost]
+  abilities: [Blaze]
+  hidden_ability: Strong Jaw
+  base_stats: {hp: 85, atk: 118, def: 85, spa: 75, spd: 80, spe: 87}
+  ev_yield: {atk: 3}
+  exp_yield: 265
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.7
+  weight_kg: 120.0
+  myth: >-
+    Kerberos guards the gate of Hades by the fiery Pyriphlegethon (Homer,
+    Odyssey 10.513). He fawns on the dead who enter but eats any who try to
+    leave (Hesiod, Theogony 769–774). Herakles dragged him up at Cape Tainaron
+    for his twelfth Labor (Apollodorus, Library 2.5.12).
+  expression: >-
+    All three heads are awake at last. Its mane burns with the underworld's
+    river of fire, its tail is a serpent, and nothing it lets through the gate
+    comes back out.
+  art: >-
+    Large: it fills about 58×56 px. A massive hound standing four-square in
+    three-quarter view facing left, with three heads on thick necks: the middle
+    one stares ahead and the outer two snarl outward. A mane of rolling fire runs
+    from the heads down the spine, and a serpent tail curls up behind with its
+    own small hissing head. Terracotta coat fading to black-figure ink at the
+    paws, sun-gold flames that cool to ghostly Aegean blue at the tips, limestone
+    fangs and pale ghost-light eyes, black-figure ink outline. The follower walks
+    slowly, its three heads taking turns to look back.
+  shiny: The fire burns wholly Aegean blue over an ash-gray marble coat, like a hound made of smoke.
+  dex_entry:
+    - It wags its serpent tail at every soul
+    - that passes it going in. It has never let
+    - one walk back out, and its three heads
+    - have never all slept at once.
+  habitat: Evolves from Dikyon at level 36.
+  learnset:
+    level_up:
+      - [0, Ice Fang]
+      - [1, Thunder Fang]
+      - [1, Tackle]
+      - [1, Leer]
+      - [1, Ember]
+      - [1, Yawn]
+      - [10, Bite]
+      - [13, Fire Fang]
+      - [16, Howl]
+      - [19, Flame Charge]
+      - [22, Double Hit]
+      - [26, Roar]
+      - [30, Crunch]
+      - [34, Will-O-Wisp]
+      - [38, Shadow Claw]
+      - [41, Temper Flare]
+      - [44, Tri Attack]
+      - [47, Mean Look]
+      - [50, Take Down]
+      - [53, Phantom Force]
+      - [56, Flare Blitz]
+      - [60, Poltergeist]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Roar, Flame Charge,
+      Fire Fang, Flamethrower, Fire Blast, Overheat, Heat Wave, Will-O-Wisp, Fire Spin, Fire Pledge,
+      Temper Flare, Burning Jealousy, Crunch, Snarl, Lash Out, Scary Face, Dig, Iron Tail, Body Slam,
+      Take Down, Double-Edge, Helping Hand, Covet, Agility, Reversal, Thief, Play Rough, Wild Charge,
+      Endeavor, Mud-Slap, Rock Smash, Strength, Work Up, Retaliate, Thunder Fang, Flare Blitz, Taunt,
+      Rock Tomb, Stomping Tantrum, Ice Fang, Blast Burn, Hyper Beam, Giga Impact, Shadow Ball,
+      Shadow Claw, Phantom Force, Poltergeist, Hex, Curse, Spite, Night Shade, Pain Split, Dark Pulse,
+      Rock Slide]
+    egg: []
+  signature: >-
+    The third head wakes with Ice Fang, completing Fire, Thunder and Ice Fang,
+    and Strong Jaw powers all three; Tri Attack fires all three heads at once.
+    Mean Look is the gate itself: nothing gets past it on the way out.
+  new_move: null

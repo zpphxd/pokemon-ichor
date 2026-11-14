@@ -1,0 +1,82 @@
+line: argos
+species:
+
+- dex: 138
+  concept: Faithful hound
+  name: Nostail
+  etymology: nostos (Greek, homecoming) + tail
+  category: Faithful
+  types: [Normal]
+  abilities: [Stakeout, Keen Eye]
+  hidden_ability: Mind's Eye
+  base_stats: {hp: 100, atk: 95, def: 70, spa: 45, spd: 85, spe: 80}
+  ev_yield: {hp: 2}
+  exp_yield: 170
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 15
+  growth_rate: Medium Slow
+  base_friendship: 140
+  height_m: 0.9
+  weight_kg: 30.5
+  myth: >-
+    Odysseus raised the hound Argos before he sailed for Troy. Twenty years
+    later Argos lay old and neglected by the palace gate, yet he knew his master
+    through the beggar's disguise, wagged his tail and dropped his ears; and
+    having seen him again, he died (Odyssey 17.290–327).
+  expression: >-
+    The dog who waited. It isn't strong for a post-game Pokémon, but it never
+    leaves and never forgets, and it is fiercest against whoever walks through
+    the door. Its Greek name meant swift, and the shiny remembers its other
+    meaning, shining white.
+  art: >-
+    Medium: it fills about 46×36 px. An old, lean hound lying on a doorstep in
+    three-quarter view facing left, its head lifted toward the viewer, ears
+    dropped back and the tip of its tail caught mid-wag. A gray muzzle, ribs
+    just showing under a rough coat, and calm, cloudy eyes. Limestone-tan coat
+    with a marble-gray muzzle and brows, a worn terracotta collar, a sun-gold
+    glint in the eyes, black-figure ink outline. The follower walks slowly at
+    your heel and lies down whenever you stop.
+  shiny: The coat turns shining silver-white and the eyes turn sun-gold.
+  dex_entry:
+    - It will wait twenty years at a door for
+    - one who sailed away. It knows them in
+    - any disguise. When they come home, it
+    - wags its tail once, and at last it rests.
+  habitat: >-
+    Elaia, at the homecoming that ends the post-game Odyssey. An old hound is
+    lying at your own front door when you get back; it lifts its head, knows
+    you, and joins you (a gift, one only). It isn't found in the wild.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Tail Whip]
+      - [1, Odor Sleuth]
+      - [5, Quick Attack]
+      - [9, Bite]
+      - [13, Howl]
+      - [17, Helping Hand]
+      - [21, Headbutt]
+      - [25, Follow Me]
+      - [29, Retaliate]
+      - [33, Crunch]
+      - [37, Body Slam]
+      - [41, Endure]
+      - [45, Return]
+      - [49, Double-Edge]
+      - [53, Extreme Speed]
+      - [60, Healing Wish]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Body Slam, Double-Edge,
+      Take Down, Headbutt, Crunch, Fire Fang, Ice Fang, Thunder Fang, Psychic Fangs, Play Rough,
+      Iron Tail, Dig, Roar, Snarl, Work Up, Retaliate, Covet, Helping Hand, Charm, Thief, Swift,
+      Agility, Bulk Up, Rock Smash, Strength, Trailblaze, Baton Pass, Super Fang, Last Resort,
+      Stomping Tantrum, Sunny Day, Rain Dance, Hyper Beam, Giga Impact]
+    egg: [Wish, Yawn, Baby-Doll Eyes, Counter, Pursuit, Sand Attack]
+  signature: >-
+    Return, the homecoming, is its signature: it starts at the highest base
+    friendship in the dex, so Return hits full power almost at once. Stakeout
+    punishes whoever comes through the door, Mind's Eye sees through disguises
+    and Ghosts alike, and Healing Wish is its last gift.
+  new_move: null

@@ -1,0 +1,142 @@
+line: swan
+species:
+
+- dex: 118
+  concept: Sun cygnet
+  name: Hymnet
+  etymology: hymnos (Greek, hymn) + cygnet
+  category: Sun Cygnet
+  types: [Fire]
+  abilities: [Flash Fire, Punk Rock]
+  hidden_ability: Flame Body
+  base_stats: {hp: 50, atk: 45, def: 45, spa: 70, spd: 55, spe: 60}
+  ev_yield: {spa: 1}
+  exp_yield: 64
+  catch_rate: 120
+  gender: {female_pct: 50}
+  egg_groups: [Flying, Water 1]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.5
+  weight_kg: 4.5
+  myth: >-
+    Swans drew Apollo's chariot north to the land of the Hyperboreans each
+    winter, and brought him back to Delphi singing at midsummer (Alcaeus, as
+    retold by Himerius, Orations 48).
+  expression: >-
+    A plain gray cygnet that paddles after the sun. It can't sing yet, only
+    peep, but its downy wingtips already glow when the sun comes up.
+  art: >-
+    Small: it fills about 30×32 px. A round, fluffy cygnet in three-quarter
+    view facing left, floating with its neck tucked and one stubby wing raised.
+    Gray down, a short dark beak, and wingtips that glow like embers. Marble-gray
+    down, sun-gold and terracotta ember tips, black-figure ink for the beak and
+    outline. The follower paddles and leaves a trail of steam on water.
+  shiny: Limestone-tan down with Aegean-blue ember tips.
+  dex_entry:
+    - It paddles toward the sunrise every
+    - morning. Its wingtips glow like coals,
+    - and the spring water steams wherever
+    - it has been swimming.
+  habitat: >-
+    The pools of the Kastalian spring, Delphoi, at dawn and by day; uncommon.
+    Surfing the pools turns up more.
+  learnset:
+    level_up:
+      - [1, Peck]
+      - [1, Growl]
+      - [4, Ember]
+      - [8, Gust]
+      - [12, Echoed Voice]
+      - [16, Incinerate]
+      - [20, Wing Attack]
+      - [24, Sing]
+      - [28, Flame Burst]
+      - [32, Air Cutter]
+      - [36, Flamethrower]
+      - [40, Hyper Voice]
+      - [44, Heat Wave]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Sunny Day, Will-O-Wisp,
+      Flamethrower, Fire Blast, Heat Wave, Overheat, Flame Charge, Mystical Fire, Incinerate, Fire Spin,
+      Aerial Ace, Air Cutter, Air Slash, Pluck, Roost, Tailwind, Defog, Hyper Voice, Echoed Voice,
+      Uproar, Disarming Voice, Charm, Helping Hand, Weather Ball, Swift, Covet]
+    egg: [Aqua Ring, Mist, Feather Dance, Haze, Brave Bird, Healing Wish]
+  signature: >-
+    The line is about sound before it is about fire: Punk Rock from the start,
+    Echoed Voice at 12 and Sing at 24.
+  new_move: null
+
+- dex: 119
+  concept: Swan of Apollo
+  name: Hymnaria
+  etymology: hymnos (Greek, hymn) + aria
+  category: Swan Song
+  types: [Fire, Flying]
+  abilities: [Flash Fire, Punk Rock]
+  hidden_ability: Flame Body
+  base_stats: {hp: 80, atk: 60, def: 70, spa: 115, spd: 85, spe: 85}
+  ev_yield: {spa: 2}
+  exp_yield: 190
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Flying, Water 1]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.5
+  weight_kg: 21.0
+  myth: >-
+    Swans were Apollo's birds. Socrates says they sing their finest song just
+    before they die, not from grief but from joy at going to the god they
+    serve (Plato, Phaedo 84e–85b).
+  expression: >-
+    A white swan of Apollo whose sun-gold wingtips burn as it sings. Every
+    song is sung as if it were its last.
+  art: >-
+    Large: it fills about 56×54 px. An elegant white swan in three-quarter view
+    facing left, gliding with its neck in a high S-curve, beak open in song and
+    wings half raised. The sun-gold primary feathers burn at the tips and trail
+    small flames, and a faint sun-disc halo rises behind its head. Marble-white
+    body, sun-gold and terracotta burning wingtips, a black-figure ink beak knob
+    and outline. The back sprite shows both wings spread and burning.
+  shiny: Black plumage with Aegean-blue flames, like a black swan at night.
+  dex_entry:
+    - When it sings, its sun-gold wingtips
+    - burn. It is said it sings most
+    - beautifully of all just before it
+    - faints, so no Trainer wants to hear it.
+  habitat: >-
+    Evolves from Hymnet at level 35. A few glide on the Kastalian pools at
+    dawn; rare.
+  learnset:
+    level_up:
+      - [0, Air Slash]
+      - [1, Peck]
+      - [1, Growl]
+      - [1, Ember]
+      - [1, Gust]
+      - [12, Echoed Voice]
+      - [16, Incinerate]
+      - [20, Wing Attack]
+      - [24, Sing]
+      - [28, Flame Burst]
+      - [32, Air Cutter]
+      - [38, Flamethrower]
+      - [42, Hyper Voice]
+      - [46, Mystical Fire]
+      - [50, Heat Wave]
+      - [53, Roost]
+      - [56, Hurricane]
+      - [60, Perish Song]
+      - [64, Burn Up]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Sunny Day, Will-O-Wisp,
+      Flamethrower, Fire Blast, Heat Wave, Overheat, Flame Charge, Mystical Fire, Incinerate, Fire Spin,
+      Aerial Ace, Air Cutter, Air Slash, Pluck, Roost, Tailwind, Defog, Hyper Voice, Echoed Voice,
+      Uproar, Disarming Voice, Charm, Helping Hand, Weather Ball, Swift, Covet, Fly, Hurricane,
+      Brave Bird, Hyper Beam, Solar Beam]
+    egg: []
+  signature: >-
+    Mystical Fire at 46 burns and dulls a foe's Special Attack, and Punk Rock
+    makes every song hit harder. Perish Song at 60 is the swan song itself.
+  new_move: null

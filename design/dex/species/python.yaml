@@ -1,0 +1,150 @@
+line: python
+species:
+
+- dex: 114
+  concept: Mud hatchling
+  name: Pelython
+  etymology: pēlos (Greek, mud, clay) + Python
+  category: Mudborn
+  types: [Dragon]
+  abilities: [Shed Skin, Intimidate]
+  hidden_ability: Sand Force
+  base_stats: {hp: 58, atk: 72, def: 60, spa: 50, spd: 50, spe: 40}
+  ev_yield: {atk: 1}
+  exp_yield: 64
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Dragon, Field]
+  egg_cycles: 30
+  growth_rate: Slow
+  height_m: 1.2
+  weight_kg: 9.5
+  myth: >-
+    When the great flood drew back, the sun-warmed mud bred new creatures, and
+    among them was Python, a serpent so vast it terrified the first people. It
+    guarded Gaia's oracle on Parnassus (Ovid, Metamorphoses 1).
+  expression: >-
+    Fresh from the mud: a hatchling still coiled in the laurel root it hatched
+    under, with eyes far older than it is. The knotted net carved on Delphoi's
+    Omphalos is already patterned on its back.
+  art: >-
+    Small: it fills about 36×30 px. A fat little serpent hatchling in
+    three-quarter view facing left, coiled through a loop of laurel root with
+    its head raised and tongue flicking. Smooth mud-brown scales that still look
+    wet, a pale belly, and a knotted net pattern down its back like the one
+    carved on the Omphalos. Heavy-lidded sun-gold eyes. Terracotta and limestone
+    scales, an olive laurel root, black-figure ink outline. The follower
+    slithers and leaves a short smear of mud behind it.
+  shiny: Olive-green scales with a marble belly.
+  dex_entry:
+    - It hatches in warm mud after heavy
+    - rain. Its eyes seem far older than it,
+    - and some at Delphoi whisper that it
+    - remembers the world before the flood.
+  habitat: >-
+    The muddy slopes of Parnassus above Delphoi, in the morning after rain;
+    uncommon. Rare in the Korykian cave at any time.
+  learnset:
+    level_up:
+      - [1, Wrap]
+      - [1, Leer]
+      - [4, Mud-Slap]
+      - [8, Twister]
+      - [12, Bite]
+      - [16, Glare]
+      - [20, Mud Shot]
+      - [24, Dragon Tail]
+      - [28, Bulldoze]
+      - [32, Slam]
+      - [36, Dig]
+      - [40, Dragon Rush]
+      - [44, Outrage]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Mud Shot,
+      Bulldoze, Dig, Sandstorm, Rain Dance, Sunny Day, Rock Tomb, Rock Slide, Iron Tail, Aqua Tail,
+      Dragon Tail, Dragon Pulse, Dragon Breath, Twister, Outrage, Scale Shot, Breaking Swipe,
+      Body Slam, Take Down, Bind, Scary Face, Thief, Payback, Taunt]
+    egg: [Dragon Dance, Sucker Punch, Stealth Rock, Haze, Mean Look, Ingrain]
+  signature: >-
+    Glare at 16, the serpent's stare that froze the pilgrims on the road to
+    Delphoi. Intimidate or Shed Skin from the start make it a patient,
+    hard-to-wear-down line.
+  new_move: null
+
+- dex: 115
+  concept: Python
+  name: Pythoros
+  etymology: Pytho (Greek, the old name of Delphi, from pythein, to rot) + oros (Greek, mountain)
+  category: Earthborn
+  types: [Dragon, Ground]
+  abilities: [Shed Skin, Intimidate]
+  hidden_ability: Sand Force
+  base_stats: {hp: 100, atk: 115, def: 95, spa: 65, spd: 80, spe: 45}
+  ev_yield: {hp: 1, atk: 1}
+  exp_yield: 250
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Dragon, Field]
+  egg_cycles: 30
+  growth_rate: Slow
+  height_m: 10.2
+  weight_kg: 290.0
+  myth: >-
+    Apollo shot Python with a thousand arrows, nearly emptying his quiver, and
+    took its oracle for his own. He founded the Pythian Games to mark the kill,
+    and the place was called Pytho because the serpent rotted there (Ovid,
+    Metamorphoses 1; Homeric Hymn to Apollo).
+  expression: >-
+    The hatchling grown vast, coiled around a crag of Parnassus, with a broken
+    golden arrow still lodged in an old scar. The god thought he had killed
+    it.
+  art: >-
+    Very large: it fills the whole 64×64 box. A vast earth-serpent in
+    three-quarter view facing left, its thick coils stacked like terraced
+    hillside and its head reared high above them under a heavy brow ridge. A
+    broken golden arrow juts from a pale scar on its side. The Omphalos's
+    knotted net pattern runs down its back, and moss and laurel sprigs grow in
+    the folds of its coils. Terracotta and limestone scales, olive moss, a
+    sun-gold arrow, black-figure ink outline. The follower shows only the
+    reared head and the first coil.
+  shiny: Olive and cypress-green scales, with a silver arrow instead of gold.
+  dex_entry:
+    - It coils around the slopes of Parnassus
+    - with an old golden arrow in its scar.
+    - It is said a god shot it long ago, and
+    - it has never forgiven him.
+  habitat: >-
+    Evolves from Pelython at level 36. Wild ones lie deep in the Korykian
+    cave, rarely. Pantheon member Olympias fields one at the Dragon seat.
+  learnset:
+    level_up:
+      - [0, Coil]
+      - [1, Wrap]
+      - [1, Leer]
+      - [1, Mud-Slap]
+      - [1, Twister]
+      - [12, Bite]
+      - [16, Glare]
+      - [20, Mud Shot]
+      - [24, Dragon Tail]
+      - [28, Bulldoze]
+      - [32, Slam]
+      - [38, Dig]
+      - [42, Dragon Rush]
+      - [46, Crunch]
+      - [50, Earthquake]
+      - [56, Outrage]
+      - [62, High Horsepower]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Mud Shot,
+      Bulldoze, Dig, Sandstorm, Rain Dance, Sunny Day, Rock Tomb, Rock Slide, Iron Tail, Aqua Tail,
+      Dragon Tail, Dragon Pulse, Dragon Breath, Twister, Outrage, Scale Shot, Breaking Swipe,
+      Body Slam, Take Down, Bind, Scary Face, Thief, Payback, Taunt, Hyper Beam, Giga Impact,
+      Earthquake, Earth Power, Stone Edge, Smack Down, Stealth Rock, Crunch, Iron Head, Heavy Slam,
+      Body Press, Stomping Tantrum, Scorching Sands, Draco Meteor]
+    egg: []
+  signature: >-
+    It learns Coil on evolving, and High Horsepower at 62: the earth it was
+    born from, heaving. Intimidate and
+    Glare make it a slow, punishing wall for the Dragon seat.
+  new_move: null

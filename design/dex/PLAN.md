@@ -139,7 +139,7 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 | 037 | Rooster chick | Fighting | → Cockerel: Lv 18 | alectryon (1 of 3) | regional Fighting |
 | 038 | Cockerel | Fighting | → War-cock: Lv 36 | alectryon (2 of 3) | regional Fighting |
 | 039 | War-cock | Fighting / Flying |  | alectryon (3 of 3) | regional Fighting |
-| 040 | Big-eared foal | Normal | → Golden donkey: Level up holding Nugget | midas (1 of 2) | regional |
+| 040 | Big-eared foal | Normal | → Golden donkey: Level up holding Nugget (Lv 25+) | midas (1 of 2) | regional |
 | 041 | Golden donkey | Normal / Steel |  | midas (2 of 2) | regional |
 | 042 | Snatcher fledgling | Dark / Flying | → Harpy: Lv 26 | harpy (1 of 2) | regional |
 | 043 | Harpy | Dark / Flying |  | harpy (2 of 2) | regional |
@@ -220,8 +220,8 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 | 118 | Sun cygnet | Fire | → Swan of Apollo: Lv 35 | swan (1 of 2) | regional |
 | 119 | Swan of Apollo | Fire / Flying |  | swan (2 of 2) | regional |
 | 120 | Amber poplar | Electric / Grass |  | heliad (single) | oddity |
-| 121 | Eaglet | Flying | → Eagle of Zeus: Lv 40 | aetos (1 of 2) | regional |
-| 122 | Eagle of Zeus | Electric / Flying |  | aetos (2 of 2) | regional |
+| 121 | Eaglet | Flying | → Eagle of Zeus: Lv 40 | aetos (1 of 2) | regional, champion ace |
+| 122 | Eagle of Zeus | Electric / Flying |  | aetos (2 of 2) | regional, champion ace |
 | 123 | Snowflake sprite | Ice | → Snow nymph: Ice Stone | chione (1 of 2) | regional |
 | 124 | Snow nymph | Ice / Fairy |  | chione (2 of 2) | regional |
 | 125 | Cold gust | Ice | → North Wind: Lv 40 | boreas (1 of 2) | regional |
@@ -281,7 +281,7 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 #### #010–012 Hoopoe chick (Normal/Flying) → Hoopoe (Normal/Flying) → King of birds (Normal/Flying)
 
 - **Role:** route bird
-- **Myth:** In Aristophanes's Birds, Tereus the hoopoe (Epops) talks the birds into building Cloudcuckooland, a city in the clouds that cuts the gods off from mortals' offerings.
+- **Myth:** In Aristophanes's Birds, Tereus the hoopoe (Epops) gathers the birds for the schemer Peisetaerus, who has them build Cloudcuckooland, a city in the clouds that cuts the gods off from mortals' offerings.
 - **Design:** The hoopoe's fan crest grows into a crown. The final stage is the self-made king of birds, and its nests are woven from cloud.
 - **Lives in:** Route 1 and Elaia's olive groves (chick); mainland roads (hoopoe); the Ascent's cliffs (king).
 
@@ -730,7 +730,7 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 
 #### #121–122 Eaglet (Flying) → Eagle of Zeus (Electric/Flying)
 
-- **Role:** regional
+- **Role:** regional, champion ace
 - **Myth:** Zeus's eagle carried his thunderbolts and bore Ganymede up to Olympus. Zeus also sent it to eat Prometheus's liver.
 - **Design:** A fierce eaglet, then a golden eagle with a thunderbolt clutched in its talons.
 - **Lives in:** The crags of the Ascent and Olympus.

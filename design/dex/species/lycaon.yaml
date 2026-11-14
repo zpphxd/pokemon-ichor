@@ -1,0 +1,149 @@
+line: lycaon
+species:
+
+- dex: 64
+  concept: Wolf pup
+  name: Lykopup
+  etymology: lykos (Greek, wolf) + pup
+  category: Wolf Pup
+  types: [Dark]
+  abilities: [Intimidate, Strong Jaw]
+  hidden_ability: Unnerve
+  base_stats: {hp: 50, atk: 65, def: 45, spa: 35, spd: 40, spe: 65}
+  ev_yield: {atk: 1}
+  exp_yield: 61
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.5
+  weight_kg: 11.0
+  myth: >-
+    King Lycaon of Arcadia served Zeus a dish of human flesh to test whether
+    his guest was truly a god. Zeus burned his house with lightning and turned
+    him into a wolf, the oldest werewolf story (Ovid, Metamorphoses 1).
+  expression: >-
+    The wolf before the king: a gray pup with a ruff that is already too big
+    for it, and a hunger it doesn't understand yet.
+  art: >-
+    Small: it fills about 34×30 px. A gray wolf pup in three-quarter view
+    facing left, crouched low with its hackles up and its tail tucked, staring
+    out from under its brow. An oversized ruff of fur around its neck sits up
+    in five points, a hint of the crown to come. Pale yellow eyes. Marble-gray
+    and black-figure ink fur, limestone belly, cypress-dark shading, one
+    moon-yellow eye glint, black-figure ink outline. The follower slinks
+    behind the player and stops whenever the player turns around.
+  shiny: Its fur turns pale marble-white, like moonlight on the snow.
+  dex_entry:
+    - It sleeps all day in hollow cypresses.
+    - At night it trails lone travelers, and
+    - old shepherds say it is counting them
+    - as guests for a feast.
+  habitat: >-
+    Arkadia's cypress forests at night, common in the grass after dark. It is
+    never seen by day.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Howl]
+      - [4, Bite]
+      - [7, Leer]
+      - [10, Assurance]
+      - [13, Pursuit]
+      - [16, Scary Face]
+      - [19, Taunt]
+      - [22, Crunch]
+      - [25, Roar]
+      - [28, Sucker Punch]
+      - [31, Hone Claws]
+      - [34, Jaw Lock]
+      - [38, Double-Edge]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Roar, Crunch, Snarl,
+      Taunt, Torment, Thief, Payback, Dig, Shadow Claw, Iron Tail, Fire Fang, Thunder Fang, Ice Fang,
+      Psychic Fangs, Play Rough, Body Slam, Take Down, Double-Edge, Rock Smash, Strength, Retaliate,
+      Scary Face, Work Up, Endeavor, Super Fang, Sucker Punch, Knock Off, Foul Play, Dark Pulse,
+      Trailblaze, Agility, Hone Claws, Lash Out, Throat Chop]
+    egg: [Play Rough, Covet, Yawn, Me First, Psychic Fangs, Fire Fang]
+  signature: >-
+    Unnerve, its hidden ability, keeps foes from eating their Berries: no one
+    eats at Lycaon's table. Me First as an egg move lets it serve itself
+    first.
+  new_move: null
+
+- dex: 65
+  concept: Wolf-king
+  name: Lykanax
+  etymology: lykos (Greek, wolf) + anax (Greek, king)
+  category: Wolf Tyrant
+  types: [Dark]
+  abilities: [Intimidate, Strong Jaw]
+  hidden_ability: Unnerve
+  base_stats: {hp: 90, atk: 115, def: 75, spa: 50, spd: 70, spe: 90}
+  ev_yield: {atk: 2}
+  exp_yield: 179
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 1.9
+  weight_kg: 88.0
+  myth: >-
+    On Mount Lykaion the king became a wolf but kept his gray hair, his
+    savage face and his glaring eyes (Ovid, Metamorphoses 1). Pausanias says
+    that men who ate at the mountain's sacrifice turned wolf for nine years
+    (Pausanias 8.2.6).
+  expression: >-
+    The king and the wolf at once. Under the moon it rises onto two legs, and
+    its ruff stands up like the crown it lost.
+  art: >-
+    Large: it fills about 50×62 px. A huge gray wolf in three-quarter view
+    facing left, rearing up onto its hind legs with its forepaws hanging like
+    a man's hands, its head thrown back mid-howl. The neck ruff stands up in
+    five stiff points like a crown, and a torn royal cloak of terracotta red
+    hangs from its shoulders. Marble-gray and black-figure ink fur, cypress
+    shading, terracotta cloak, moon-yellow eyes, black-figure ink outline.
+    The back sprite shows the cloak and the crown-ruff, and the follower
+    walks on two legs at night and four by day.
+  shiny: Moon-white fur, with a sun-gold cloak in place of the terracotta.
+  dex_entry:
+    - Under the moon it rises onto two legs
+    - and wears its ruff like a crown. It is
+    - said it was a king who tried to trick
+    - the sky, and was made a wolf for it.
+  habitat: Evolves from Lykopup at level 30 or higher, but only at night.
+  learnset:
+    level_up:
+      - [0, Noble Roar]
+      - [1, Tackle]
+      - [1, Howl]
+      - [1, Bite]
+      - [1, Leer]
+      - [10, Assurance]
+      - [13, Pursuit]
+      - [16, Scary Face]
+      - [19, Taunt]
+      - [22, Crunch]
+      - [25, Roar]
+      - [28, Sucker Punch]
+      - [32, Hone Claws]
+      - [36, Jaw Lock]
+      - [40, Bulk Up]
+      - [44, Double-Edge]
+      - [48, Throat Chop]
+      - [52, Foul Play]
+      - [57, Close Combat]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Roar, Crunch, Snarl,
+      Taunt, Torment, Thief, Payback, Dig, Shadow Claw, Iron Tail, Fire Fang, Thunder Fang, Ice Fang,
+      Psychic Fangs, Play Rough, Body Slam, Take Down, Double-Edge, Rock Smash, Strength, Retaliate,
+      Scary Face, Work Up, Endeavor, Super Fang, Sucker Punch, Knock Off, Foul Play, Dark Pulse,
+      Trailblaze, Agility, Hone Claws, Lash Out, Throat Chop, Hyper Beam, Giga Impact, Bulk Up,
+      Brick Break, Low Kick, Close Combat, Fling, Rock Slide, Stomping Tantrum, Focus Punch]
+    egg: []
+  signature: >-
+    It learns Noble Roar on evolving, a king's howl. Jaw Lock and Bulk Up make
+    it a physical bruiser that pins its prey and won't let go.
+  new_move: null

@@ -1,0 +1,150 @@
+line: talos
+species:
+
+- dex: 101
+  concept: Bronze figurine
+  name: Kolossette
+  etymology: kolossos (Greek, giant statue) + statuette
+  category: Figurine
+  types: [Steel]
+  abilities: [Clear Body, Heavy Metal]
+  hidden_ability: Sand Force
+  base_stats: {hp: 50, atk: 70, def: 85, spa: 30, spd: 45, spe: 30}
+  ev_yield: {def: 1}
+  exp_yield: 62
+  catch_rate: 120
+  gender: {genderless: true}
+  egg_groups: [Mineral]
+  egg_cycles: 25
+  growth_rate: Medium Slow
+  height_m: 0.4
+  weight_kg: 36.0
+  myth: >-
+    Hephaestus forged Talos, a man of bronze, and gave him to King Minos to
+    guard Crete. He ran around the island three times a day and stoned any
+    ship that came near (Apollodorus, Library 1.9; Apollonius, Argonautica 4).
+  expression: >-
+    A votive bronze figure from the forge, small enough to stand on a shelf,
+    that has taken the guard's job to heart. A thin gold line already runs
+    from its neck to one ankle.
+  art: >-
+    Small: it fills about 30×38 px. A stiff little bronze warrior figurine in
+    three-quarter view facing left, standing on a square base with one arm
+    raised as if to throw a pebble. A blocky archaic body, a simple helmeted
+    head with two round glowing eyes, and a thin gold line from its neck down
+    to one ankle. Sun-gold and terracotta bronze with ink-brown shading, a
+    bright sun-gold vein, black-figure ink outline. The follower marches in a
+    tight circle whenever the player stands still.
+  shiny: Its bronze turns to a cypress-green patina, with a marble-white vein.
+  dex_entry:
+    - Cast as an offering at the forge, it took
+    - its job to heart. It walks laps around
+    - anything it is told to guard, three
+    - times a day.
+  habitat: >-
+    Kaldera's forge on Thera Isle, among the cooling molds and scrap heaps, by
+    day and night. Uncommon.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Harden]
+      - [4, Metal Claw]
+      - [8, Rock Throw]
+      - [12, Mud-Slap]
+      - [16, Iron Defense]
+      - [20, Rock Tomb]
+      - [24, Headbutt]
+      - [28, Iron Head]
+      - [32, Stealth Rock]
+      - [36, Heavy Slam]
+      - [40, Rock Slide]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sandstorm, Sunny Day,
+      Rock Tomb, Rock Slide, Rock Blast, Smack Down, Stealth Rock, Stone Edge, Iron Head, Iron Defense,
+      Heavy Slam, Gyro Ball, Flash Cannon, Steel Beam, Metal Claw, Bulldoze, Mud-Slap, Dig, Rollout,
+      Self-Destruct, Explosion, Body Press, Block, Headbutt, Strength, Rock Smash, Fling]
+    egg: [Rapid Spin, Curse, Counter, Wide Guard, Bide, Magnitude]
+  signature: >-
+    Heavy Metal doubles its weight, so Heavy Slam hits hard even at this size.
+    Clear Body means nothing can lower its guard.
+  new_move: null
+
+- dex: 102
+  concept: Bronze sentinel
+  name: Kolossard
+  etymology: kolossos (Greek, giant statue) + guard
+  category: Bronze Giant
+  types: [Steel, Ground]
+  abilities: [Clear Body, Heavy Metal]
+  hidden_ability: Sand Force
+  base_stats: {hp: 85, atk: 120, def: 120, spa: 45, spd: 75, spe: 60}
+  ev_yield: {atk: 1, def: 1}
+  exp_yield: 178
+  catch_rate: 45
+  gender: {genderless: true}
+  egg_groups: [Mineral]
+  egg_cycles: 25
+  growth_rate: Medium Slow
+  height_m: 3.2
+  weight_kg: 520.0
+  myth: >-
+    Talos had a single vein of ichor running from his neck to his ankle,
+    sealed with a bronze nail. Medea undid him, and the ichor ran out of him
+    like molten lead (Apollonius, Argonautica 4; Apollodorus, Library 1.9).
+  expression: >-
+    The full-size guardian, with one vein of golden ichor glowing down its
+    side and the bronze nail at its ankle. That nail is its only weakness, and
+    it knows it.
+  art: >-
+    Large: it fills the box, about 58×64 px. A towering bronze giant in
+    three-quarter view facing left, mid-stride, one arm cocked back with a
+    boulder. An archaic smiling face under a crested helmet, blocky muscles,
+    and a glowing vein that runs from the neck down one leg to a big nail head
+    at the ankle. Sun-gold and terracotta bronze with ink-brown shading, a
+    bright sun-gold ichor vein, a limestone boulder, black-figure ink outline.
+    The back sprite shows the vein running down its spine.
+  shiny: A cypress-green patina all over, with a marble-white vein.
+  dex_entry:
+    - It circles its island three times a day
+    - and throws boulders at strange ships. One
+    - vein of gold ichor runs through it, held
+    - in by a single bronze nail.
+  habitat: >-
+    Knossa Isle's coastal cliffs, by day. Rare; it walks a set circuit along
+    the cliff tops and can be met where its path crosses the road. Evolves
+    from Kolossette when traded holding a Metal Coat. Hierophant Talos's
+    partner at Kaldera.
+  learnset:
+    level_up:
+      - [0, Bulldoze]
+      - [1, Tackle]
+      - [1, Harden]
+      - [4, Metal Claw]
+      - [8, Rock Throw]
+      - [12, Mud-Slap]
+      - [16, Iron Defense]
+      - [20, Rock Tomb]
+      - [24, Headbutt]
+      - [28, Iron Head]
+      - [32, Stealth Rock]
+      - [36, Heavy Slam]
+      - [40, Rock Slide]
+      - [44, Body Press]
+      - [48, High Horsepower]
+      - [52, Heat Crash]
+      - [56, Earthquake]
+      - [60, Stone Edge]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sandstorm, Sunny Day,
+      Rock Tomb, Rock Slide, Rock Blast, Smack Down, Stealth Rock, Stone Edge, Iron Head, Iron Defense,
+      Heavy Slam, Gyro Ball, Flash Cannon, Steel Beam, Metal Claw, Bulldoze, Mud-Slap, Dig, Rollout,
+      Self-Destruct, Explosion, Body Press, Block, Headbutt, Strength, Rock Smash, Fling, Earthquake,
+      High Horsepower, Stomping Tantrum, Earth Power, Sand Tomb, Scorching Sands, Heat Crash,
+      Superpower, Brick Break, Hammer Arm, Fire Punch, Thunder Punch, Ice Punch, Hyper Beam,
+      Giga Impact]
+    egg: []
+  signature: >-
+    Heavy Metal doubles its huge weight, so Heavy Slam and Heat Crash hit as
+    hard as they can. Heat Crash is for the old tale that Talos heated himself
+    red-hot and crushed intruders in his arms.
+  new_move: null

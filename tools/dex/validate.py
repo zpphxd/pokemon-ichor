@@ -62,6 +62,7 @@ BANDS = {
     "box legendary": [(670, 690)],
     "legendary": [(570, 590)],
     "mythical": [(600, 600)],
+    "champion ace": [(320, 345), (520, 540)],
 }
 
 
@@ -111,7 +112,7 @@ def band_key(line, index):
     roles = set(line["roles"])
     n = len(line["members"])
     for r in ("pseudo", "legendary trio", "box legendary", "mythical", "legendary", "starter",
-              "route bird", "common mammal", "fossil"):
+              "route bird", "common mammal", "fossil", "champion ace"):
         if r in roles:
             return r
     if "mascot" in roles:
@@ -142,6 +143,11 @@ def main():
         return 1
     lines = {l["id"]: l for l in data["lines"]}
     by_dex = {s["dex"]: s for s in plan_species}
+    # The real pre-evolution of each species, so branches compare with their seed.
+    pre_of = {}
+    for s in plan_species:
+        for t in s["targets"]:
+            pre_of[s["first"] + t] = s["dex"]
     moves, abilities, existing = engine_tables()
     move_lc = {k.lower(): k for k in moves}
     abil_lc = {k.lower(): k for k in abilities}
@@ -187,7 +193,7 @@ def main():
             err(where, f"plan has no #{d} in line {lid}")
             continue
         idx = p["index"]
-        prev = by_dex.get(d - 1) if idx > 0 and not line.get("group") else None
+        prev = by_dex.get(pre_of[d]) if d in pre_of else None
 
         # identity
         if sp.get("concept") != p["concept"]:
@@ -217,6 +223,10 @@ def main():
         for fan in FAN_NAMES:
             if distance(fan, name) <= 2:
                 warn(where, f"{name} is close to the fan-made {fan}")
+        for od, (_, osp) in entries.items():
+            other = osp.get("name") or ""
+            if od != d and other and other.lower() != lname and len(name) >= 5 and distance(other, name) <= 2:
+                warn(where, f"{name} is close to #{od:03d} {other} in this dex")
         for root in FORBIDDEN_ROOTS:
             if root in lname:
                 err(where, f"{name} uses the avoided root {root!r}")
@@ -348,16 +358,18 @@ def main():
             if dupes and kind != "level_up":
                 err(where, f"{kind} repeats {', '.join(dupes)}")
         first_stage = idx == 0 or line.get("group") or p["baby"]
+        limited = "Magikarp role" in roles and idx == 0      # the fry is meant to know almost nothing
+        breeds = eg != ["Undiscovered"]
         want_lv = (10, 26) if first_stage and len(line["members"]) > 1 else (14, 26)
-        if not want_lv[0] <= len(lvl) <= want_lv[1]:
+        if not limited and not want_lv[0] <= len(lvl) <= want_lv[1]:
             warn(where, f"{len(lvl)} level-up moves; aim for {want_lv[0]}-{want_lv[1]}")
         if not lvl or lvl[0][0] > 1:
             err(where, "level_up must start with a level 0 or level 1 move")
         if idx > 0 and not line.get("group") and not any(e[0] == 0 for e in lvl if isinstance(e, list)):
             warn(where, "no evolution move (level 0)")
-        if len(teach) < 20:
+        if len(teach) < 20 and not limited:
             warn(where, f"only {len(teach)} teachable moves")
-        if first_stage and not p["baby"] and len(line["members"]) > 1 and not 4 <= len(egg) <= 10:
+        if first_stage and breeds and not (4 <= len(egg) <= 10) and (len(line["members"]) > 1 or egg):
             warn(where, f"{len(egg)} egg moves; aim for 4-10 on a first stage")
         if not first_stage and egg:
             err(where, "egg moves belong on the first stage only")

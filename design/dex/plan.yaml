@@ -70,9 +70,9 @@ lines:
   section: Kalliste Isle
   roles: [route bird]
   myth: >-
-    In Aristophanes's Birds, Tereus the hoopoe (Epops) talks the birds into
-    building Cloudcuckooland, a city in the clouds that cuts the gods off from
-    mortals' offerings.
+    In Aristophanes's Birds, Tereus the hoopoe (Epops) gathers the birds for
+    the schemer Peisetaerus, who has them build Cloudcuckooland, a city in the
+    clouds that cuts the gods off from mortals' offerings.
   design: >-
     The hoopoe's fan crest grows into a crown. The final stage is the self-made
     king of birds, and its nests are woven from cloud.
@@ -261,7 +261,7 @@ lines:
     hide, its ears hidden under a Phrygian cap.
   habitat: Emporion's outskirts and Thyrsa's vineyards.
   members:
-    - {concept: Big-eared foal, types: [Normal], evo: {method: held_item, item: Nugget}}
+    - {concept: Big-eared foal, types: [Normal], evo: {method: held_item, item: Nugget, level: 25}}
     - {concept: Golden donkey, types: [Normal, Steel]}
 
 - id: harpy
@@ -931,7 +931,7 @@ lines:
 
 - id: aetos
   section: The Ascent and Olympus
-  roles: [regional]
+  roles: [regional, champion ace]
   myth: >-
     Zeus's eagle carried his thunderbolts and bore Ganymede up to Olympus. Zeus
     also sent it to eat Prometheus's liver.

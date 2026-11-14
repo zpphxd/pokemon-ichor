@@ -1,0 +1,149 @@
+line: arachne
+species:
+
+- dex: 70
+  concept: Spiderling
+  name: Raknit
+  etymology: arachne (Greek, spider) + knit
+  category: Spiderling
+  types: [Bug]
+  abilities: [Swarm, Frisk]
+  hidden_ability: Defiant
+  base_stats: {hp: 45, atk: 55, def: 45, spa: 45, spd: 40, spe: 55}
+  ev_yield: {atk: 1}
+  exp_yield: 56
+  catch_rate: 255
+  gender: {female_pct: 75}
+  egg_groups: [Bug]
+  egg_cycles: 15
+  growth_rate: Fast
+  height_m: 0.2
+  weight_kg: 2.4
+  myth: >-
+    Arachne of Lydia boasted that she wove better than Athena and challenged
+    her to a contest. Athena tore up her flawless tapestry and struck her,
+    and when Arachne hanged herself, the goddess changed her into a spider
+    that weaves forever (Ovid, Metamorphoses 6).
+  expression: >-
+    A newly made spider still learning its craft. Even its first small webs
+    already hold pictures.
+  art: >-
+    Small: it fills about 30×26 px. A round little spider in three-quarter
+    view facing left, crouched on six of its eight legs with the front two
+    raised and holding a single strand of silk, as if mid-stitch. Its round
+    abdomen bears a tiny woven pattern like a tapestry border. Big dark eyes
+    in a row. Terracotta-red body, limestone-tan pattern, marble-white silk,
+    black-figure ink legs and outline. The follower dangles from a thread
+    beside the player.
+  shiny: Its body turns Aegean blue with a sun-gold border pattern.
+  dex_entry:
+    - It knits webs between cypress trunks.
+    - Each web shows a picture, and travelers
+    - say the pictures are always of someone
+    - important behaving badly.
+  habitat: >-
+    Webs between Arkadia's cypresses, day and night; common. Also found in
+    the eaves of Astyra's weaving quarter.
+  learnset:
+    level_up:
+      - [1, String Shot]
+      - [1, Fury Cutter]
+      - [5, Infestation]
+      - [8, Scary Face]
+      - [12, Bug Bite]
+      - [15, Spider Web]
+      - [19, Taunt]
+      - [22, Silk Trap]
+      - [26, Lunge]
+      - [29, Sticky Web]
+      - [33, Sucker Punch]
+      - [37, Torment]
+      - [41, First Impression]
+      - [44, Agility]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Bug Bite, Lunge,
+      Leech Life, X-Scissor, U-turn, Bug Buzz, Signal Beam, Struggle Bug, Pin Missile, Electroweb,
+      Poison Jab, Infestation, Skitter Smack, Pounce, Sucker Punch, Knock Off, Thief, Taunt, Torment,
+      Snarl, Payback, Agility, Swords Dance, Screech, Spite, Dig, Shadow Claw, Embargo, Snatch,
+      Trailblaze, Toxic Spikes]
+    egg: [Disable, Pursuit, Toxic Thread, Electroweb, Rage Powder, Feint]
+  signature: >-
+    Defiant, its hidden ability, is Arachne refusing to back down: lower its
+    stats and its Attack rises. Spider Web and Sticky Web come early.
+  new_move: null
+
+- dex: 71
+  concept: Arachne
+  name: Hyphantis
+  etymology: hyphantes (Greek, weaver) + -is
+  category: Tapestry
+  types: [Bug, Dark]
+  abilities: [Swarm, Frisk]
+  hidden_ability: Defiant
+  base_stats: {hp: 75, atk: 105, def: 75, spa: 75, spd: 70, spe: 80}
+  ev_yield: {atk: 2}
+  exp_yield: 172
+  catch_rate: 60
+  gender: {female_pct: 75}
+  egg_groups: [Bug]
+  egg_cycles: 15
+  growth_rate: Fast
+  height_m: 1.0
+  weight_kg: 31.0
+  myth: >-
+    Arachne's tapestry showed the gods' crimes: Zeus as the bull that stole
+    Europa, as the swan, as the golden shower, and more. Neither Athena nor
+    Envy itself could find a flaw in it (Ovid, Metamorphoses 6).
+  expression: >-
+    Arachne herself, still weaving. Its webs are tapestries of the gods at
+    their worst, and it is proud of every one.
+  art: >-
+    Medium: it fills about 52×46 px. A large, elegant spider in three-quarter
+    view facing left, its front legs raised at a small upright loom of web
+    strung between them. Its abdomen is patterned like a woven tapestry,
+    showing a tiny black-figure bull and swan, and a tuft of hair on its head
+    suggests the weaver she was. Narrow, proud eyes. Terracotta-red body,
+    limestone and black-figure ink tapestry pattern, marble-white silk,
+    sun-gold thread highlights, black-figure ink outline. The back sprite
+    shows the full tapestry on its abdomen.
+  shiny: Aegean-blue body with a sun-gold tapestry, like Athena's own colors.
+  dex_entry:
+    - Its tapestries show the gods at their
+    - worst, woven so well that no one can
+    - find a flaw. It once dared a goddess to
+    - do better. She could not.
+  habitat: >-
+    Evolves from Raknit at level 29. Rarely found weaving in the lofts of
+    Astyra's weaving quarter at night.
+  learnset:
+    level_up:
+      - [0, Knock Off]
+      - [1, String Shot]
+      - [1, Fury Cutter]
+      - [1, Infestation]
+      - [1, Scary Face]
+      - [12, Bug Bite]
+      - [15, Spider Web]
+      - [19, Taunt]
+      - [22, Silk Trap]
+      - [26, Lunge]
+      - [29, Sticky Web]
+      - [34, Sucker Punch]
+      - [38, Torment]
+      - [42, First Impression]
+      - [46, Agility]
+      - [50, Throat Chop]
+      - [55, Swords Dance]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Bug Bite, Lunge,
+      Leech Life, X-Scissor, U-turn, Bug Buzz, Signal Beam, Struggle Bug, Pin Missile, Electroweb,
+      Poison Jab, Infestation, Skitter Smack, Pounce, Sucker Punch, Knock Off, Thief, Taunt, Torment,
+      Snarl, Payback, Agility, Swords Dance, Screech, Spite, Dig, Shadow Claw, Embargo, Snatch,
+      Trailblaze, Toxic Spikes, Hyper Beam, Giga Impact, Foul Play, Dark Pulse, Throat Chop, Lash Out,
+      Nasty Plot]
+    egg: []
+  signature: >-
+    It learns Knock Off on evolving: it strips the finery off its subjects.
+    Frisk reveals a foe's held item, as the tapestry revealed the gods'
+    secrets.
+  new_move: null

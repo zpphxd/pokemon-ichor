@@ -1,0 +1,152 @@
+line: siren
+species:
+
+- dex: 132
+  concept: Mourning fledgling
+  name: Elegull
+  etymology: elegos (Greek, a lament) + gull
+  category: Lament
+  types: [Ghost]
+  abilities: [Punk Rock, Cursed Body]
+  hidden_ability: Cute Charm
+  base_stats: {hp: 50, atk: 35, def: 45, spa: 70, spd: 65, spe: 65}
+  ev_yield: {spa: 1}
+  exp_yield: 66
+  catch_rate: 120
+  gender: {female_pct: 87.5}
+  egg_groups: [Flying, Amorphous]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.5
+  weight_kg: 3.5
+  myth: >-
+    The Sirens, birds with women's voices, sang sailors onto the rocks, and
+    Odysseus had himself tied to the mast to hear them (Odyssey 12.39–54,
+    158–200). Ovid makes them Persephone's companions, given wings to search
+    for her (Metamorphoses 5.551–563), and Greek tombs carved them as mourners.
+  expression: >-
+    The siren as a grave-mourner, before the song turns dangerous. It still
+    grieves for the girl who was taken below, and its voice hasn't learned to
+    lure yet, only to weep.
+  art: >-
+    Small: it fills about 30×34 px. A round, downy, gull-like fledgling in
+    three-quarter view facing left, perched on the broken top of a grave stele, with a pale
+    girl's face set in its feathers, eyes downcast and wet. Stubby wings folded
+    like a shawl and a short tail with the first curl of a lyre shape. Marble
+    and limestone-gray down, an Aegean-blue tear mark under each eye, a pale
+    violet ghost accent at the wing tips, black-figure ink outline. The follower
+    hops after you, cheeping a thin note now and then.
+  shiny: The down turns soft sun-gold and the tear marks turn terracotta.
+  dex_entry:
+    - It perches on old gravestones and keens
+    - a thin song all night. It is said to be
+    - mourning a girl who was carried down into
+    - the earth, long ago.
+  habitat: >-
+    The Sirens' rocks on the post-game Odyssey, at dusk and at night
+    (uncommon). It sits among the bones on the rocks and flies off if you run.
+  learnset:
+    level_up:
+      - [1, Astonish]
+      - [1, Growl]
+      - [4, Gust]
+      - [8, Sing]
+      - [12, Night Shade]
+      - [16, Ominous Wind]
+      - [20, Echoed Voice]
+      - [24, Hex]
+      - [28, Mean Look]
+      - [32, Air Cutter]
+      - [36, Shadow Ball]
+      - [40, Hyper Voice]
+      - [44, Perish Song]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Shadow Ball, Hex,
+      Will-O-Wisp, Confuse Ray, Night Shade, Pain Split, Spite, Phantom Force, Uproar, Hyper Voice,
+      Disarming Voice, Alluring Voice, Psychic Noise, Echoed Voice, Air Cutter, Aerial Ace, Roost,
+      Tailwind, Steel Wing, Psych Up, Calm Mind, Torment, Taunt, Snarl, Fake Tears, Charm, Captivate,
+      Dream Eater, Icy Wind, Rain Dance, Weather Ball, Helping Hand, Covet]
+    egg: [Destiny Bond, Curse, Feather Dance, Grass Whistle, Supersonic, Memento]
+  signature: >-
+    Punk Rock from the start, so its sound moves (Echoed Voice, Hyper Voice)
+    hit hard and sound hits it softly. Sing comes early, because grief and
+    lullabies use the same voice.
+  new_move: null
+
+- dex: 133
+  concept: Siren
+  name: Seirenade
+  etymology: seiren (Greek, siren) + serenade
+  category: Siren Song
+  types: [Ghost, Flying]
+  abilities: [Punk Rock, Cursed Body]
+  hidden_ability: Cute Charm
+  base_stats: {hp: 80, atk: 55, def: 65, spa: 115, spd: 90, spe: 100}
+  ev_yield: {spa: 2}
+  exp_yield: 185
+  catch_rate: 45
+  gender: {female_pct: 87.5}
+  egg_groups: [Flying, Amorphous]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.3
+  weight_kg: 24.0
+  myth: >-
+    The Sirens sat in a meadow heaped with the bones of men and sang of
+    everything that happens on the earth. Odysseus stopped his crew's ears with
+    wax and had them bind him to the mast so he could hear the song and live
+    (Odyssey 12.39–54, 158–200).
+  expression: >-
+    The grief has turned into a song that drowns sailors. Its tail has grown
+    into a lyre, and its voice promises to tell you everything you've ever
+    wanted to know.
+  art: >-
+    Medium: it fills about 46×54 px. A siren bird with a woman's serene face and
+    long hair, perched in three-quarter view facing left on a sea rock, wings
+    half spread as if mid-song, mouth open. Its long tail feathers curve up into
+    the two arms of a lyre with three glowing strings between them. Marble and
+    gray plumage shading to Aegean blue at the wing edges, sun-gold lyre arms,
+    a pale violet ghost accent in the strings and eyes, black-figure ink outline.
+    The back sprite shows the lyre tail; the follower hums and its strings
+    shimmer.
+  shiny: The plumage turns deep cypress green and the lyre turns silver.
+  dex_entry:
+    - Sailors who hear its song steer for the
+    - rocks with smiles on their faces. Wise
+    - captains stop their crews' ears with wax
+    - and have themselves tied to the mast.
+  habitat: >-
+    Evolves from Elegull at level 42. A few sing in the open on the highest of
+    the Sirens' rocks on clear nights (rare).
+  learnset:
+    level_up:
+      - [0, Alluring Voice]
+      - [1, Astonish]
+      - [1, Growl]
+      - [4, Gust]
+      - [8, Sing]
+      - [12, Night Shade]
+      - [16, Ominous Wind]
+      - [20, Echoed Voice]
+      - [24, Hex]
+      - [28, Mean Look]
+      - [32, Air Cutter]
+      - [36, Shadow Ball]
+      - [40, Hyper Voice]
+      - [44, Perish Song]
+      - [48, Air Slash]
+      - [56, Hurricane]
+      - [62, Boomburst]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Shadow Ball, Hex,
+      Will-O-Wisp, Confuse Ray, Night Shade, Pain Split, Spite, Phantom Force, Uproar, Hyper Voice,
+      Disarming Voice, Alluring Voice, Psychic Noise, Echoed Voice, Air Cutter, Aerial Ace, Roost,
+      Tailwind, Steel Wing, Psych Up, Calm Mind, Torment, Taunt, Snarl, Fake Tears, Charm, Captivate,
+      Dream Eater, Icy Wind, Rain Dance, Weather Ball, Helping Hand, Covet, Fly, Air Slash, Hurricane,
+      Dual Wingbeat, Acrobatics, U-turn, Defog, Heat Wave, Nasty Plot, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    It learns Alluring Voice on evolving: the song finally carries a lure. Mean Look
+    and Perish Song are the Sirens' whole story, since once you've heard it you
+    can't leave, and in three turns you're on the rocks.
+  new_move: null

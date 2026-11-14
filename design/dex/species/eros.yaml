@@ -1,0 +1,156 @@
+line: eros
+species:
+
+- dex: 94
+  concept: Erote
+  name: Erosie
+  etymology: eros (Greek, love) + rosy
+  category: Little Love
+  types: [Fairy]
+  abilities: [Cute Charm, Super Luck]
+  hidden_ability: Sniper
+  base_stats: {hp: 40, atk: 40, def: 30, spa: 40, spd: 35, spe: 45}
+  ev_yield: {spe: 1}
+  exp_yield: 52
+  catch_rate: 150
+  gender: {female_pct: 25}
+  egg_groups: [Undiscovered]
+  egg_cycles: 10
+  growth_rate: Fast
+  base_friendship: 100
+  height_m: 0.3
+  weight_kg: 2.4
+  myth: >-
+    Hellenistic poets made Eros a plump winged child, and painters multiplied
+    him into a swarm of Erotes. In one idyll he steals honey, is stung by a
+    bee, and runs crying to Aphrodite, who laughs that his own small stings
+    wound far worse (Theocritus, Idyll 19).
+  expression: >-
+    A dimpled infant whose stubby wings can barely lift it, with a toy bow of
+    bent twig. Its blunt arrows only tickle, but whoever it hits feels fond of
+    it at once.
+  art: >-
+    Small: it fills about 30×34 px. A chubby winged infant hovering in
+    three-quarter view facing left, legs tucked up, holding a twig bow over its
+    head. Two stubby wings, a curl of hair, round cheeks, and a tiny quiver
+    with one blunt arrow. Marble-white wings, limestone skin, sun-gold curls
+    and bowstring, one Fairy-pink accent on the cheeks, black-figure ink
+    outline. The follower bobs as if its wings are working too hard.
+  shiny: Its curls and bow turn lead-gray instead of gold.
+  dex_entry:
+    - It shoots blunt arrows at anyone it
+    - likes. The arrows don't hurt, but those
+    - it hits can't stay cross with it, even
+    - when it steals their honey.
+  habitat: >-
+    Hatches from Eggs laid by Himerow, which nest on Kythera Isle. It is never
+    found in the wild.
+  learnset:
+    level_up:
+      - [1, Pound]
+      - [1, Charm]
+      - [4, Fairy Wind]
+      - [8, Sweet Kiss]
+      - [12, Gust]
+      - [16, Disarming Voice]
+      - [20, Attract]
+      - [24, Draining Kiss]
+      - [28, Air Cutter]
+      - [32, Captivate]
+      - [36, Dazzling Gleam]
+      - [40, Wish]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Charm, Captivate, Sunny Day,
+      Rain Dance, Light Screen, Reflect, Safeguard, Misty Terrain, Dazzling Gleam, Draining Kiss,
+      Disarming Voice, Fake Tears, Helping Hand, Covet, Thief, Encore, Metronome, Swift, Uproar,
+      Aerial Ace, Air Cutter, Psych Up, Trick, Mud-Slap]
+    egg: [Heart Stamp, Lovely Kiss, Fake Out, Lucky Chant, Tickle, Sweet Scent]
+  signature: >-
+    Cute Charm and Attract from the start: it makes friends whether they want
+    it or not. It carries the line's egg moves, Lovely Kiss and Heart Stamp
+    among them.
+  new_move: null
+
+- dex: 95
+  concept: Eros
+  name: Himerow
+  etymology: himeros (Greek, desire) + arrow
+  category: Love Archer
+  types: [Fairy, Flying]
+  abilities: [Cute Charm, Super Luck]
+  hidden_ability: Sniper
+  base_stats: {hp: 68, atk: 102, def: 62, spa: 85, spd: 68, spe: 105}
+  ev_yield: {atk: 1, spe: 1}
+  exp_yield: 172
+  catch_rate: 60
+  gender: {female_pct: 25}
+  egg_groups: [Fairy, Flying]
+  egg_cycles: 10
+  growth_rate: Fast
+  base_friendship: 100
+  height_m: 1.2
+  weight_kg: 21.5
+  myth: >-
+    Eros carried two arrows: a sharp gold one that kindles love and a blunt
+    lead one that drives it off. To punish Apollo's boasting he shot him with
+    gold and Daphne with lead, and so began the chase that ended in the laurel
+    (Ovid, Metamorphoses 1).
+  expression: >-
+    The infant grown into a slim archer with real wings and a real bow. Its
+    quiver holds gold arrows on one side and dull lead ones on the other, the
+    pair that started Daphne's story.
+  art: >-
+    Medium: it fills about 46×52 px. A slim winged archer in three-quarter view
+    facing left, hovering with its bow drawn and an arrow nocked. Two large
+    swan wings, the left tipped sun-gold and the right lead-gray, a curl of
+    gold hair, and a quiver of mixed gold and gray arrows at the hip.
+    Marble-white feathers, limestone skin, sun-gold bow and arrowheads, one
+    Fairy-pink accent on the fletching, black-figure ink outline. The back
+    sprite shows the quiver; the follower circles the player.
+  shiny: Every gold arrow turns lead-gray, and its feathers blush rose-pink.
+  dex_entry:
+    - It carries two kinds of arrow. Gold ones
+    - kindle love, and lead ones make the
+    - target flee. It is said its aim started
+    - the oldest chase in Aethos.
+  habitat: >-
+    Kythera Isle's hills above the sea-foam beaches, by day. Uncommon; it hunts
+    in pairs and dives at anything that moves. Evolves from Erosie through
+    friendship during the day.
+  learnset:
+    level_up:
+      - [0, Aerial Ace]
+      - [1, Whirlwind]
+      - [1, Pound]
+      - [1, Charm]
+      - [4, Fairy Wind]
+      - [8, Sweet Kiss]
+      - [12, Gust]
+      - [16, Disarming Voice]
+      - [20, Attract]
+      - [24, Draining Kiss]
+      - [28, Air Cutter]
+      - [32, Captivate]
+      - [34, Acrobatics]
+      - [36, Dazzling Gleam]
+      - [38, Focus Energy]
+      - [41, Play Rough]
+      - [44, Tailwind]
+      - [47, Wish]
+      - [50, Dual Wingbeat]
+      - [54, Moonblast]
+      - [58, Brave Bird]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Charm, Captivate, Sunny Day,
+      Rain Dance, Light Screen, Reflect, Safeguard, Misty Terrain, Dazzling Gleam, Draining Kiss,
+      Disarming Voice, Fake Tears, Helping Hand, Covet, Thief, Encore, Metronome, Swift, Uproar,
+      Aerial Ace, Air Cutter, Psych Up, Trick, Mud-Slap, Fly, Acrobatics, Dual Wingbeat, Air Slash,
+      Hurricane, Brave Bird, Sky Attack, Steel Wing, Pluck, Roost, Tailwind, U-turn, Play Rough,
+      Alluring Voice, Heat Wave, Mystical Fire, Psychic, Psyshock, Calm Mind, Nasty Plot, Taunt,
+      Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Super Luck and Focus Energy make its arrows land critical hits, and
+    Whirlwind is the lead arrow that sends a foe fleeing. Cute Charm
+    infatuates anyone who touches it.
+  new_move: null

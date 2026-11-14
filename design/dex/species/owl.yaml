@@ -1,0 +1,148 @@
+line: owl
+species:
+
+- dex: 73
+  concept: Owlet
+  name: Glaukoin
+  etymology: glaux (Greek, little owl) + coin
+  category: Coin Owl
+  types: [Psychic, Flying]
+  abilities: [Insomnia, Forewarn]
+  hidden_ability: Unaware
+  base_stats: {hp: 50, atk: 35, def: 45, spa: 70, spd: 55, spe: 50}
+  ev_yield: {spa: 1}
+  exp_yield: 60
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Flying]
+  egg_cycles: 15
+  growth_rate: Medium Fast
+  height_m: 0.3
+  weight_kg: 1.8
+  myth: >-
+    Athena's little owl, the glaux, was stamped on Athens's silver coins, and
+    the coins themselves were called owls. To bring owls to Athens was to
+    bring something where it was already plentiful (Aristophanes, Birds 301
+    and 1106).
+  expression: >-
+    The owl on the coin, come to life: a round little owlet with a face as
+    flat and bright as a silver piece.
+  art: >-
+    Small: it fills about 28×32 px. A round little owl in three-quarter view
+    facing left, perched on a tiny olive twig, its body nearly a sphere. Its
+    flat face is a perfect silver disk with a raised rim like a coin's edge,
+    and its huge eyes stare straight out. Two small ear tufts. Marble-white
+    and limestone feathers, a marble-silver face disk, olive twig, sun-gold
+    eyes, Psychic-pink glints in the pupils, black-figure ink outline. The
+    follower turns its head all the way around to watch the player.
+  shiny: Its face disk turns sun-gold, like a gold stater instead of a silver owl.
+  dex_entry:
+    - Its face is as round as a silver coin.
+    - In Astyra people still call their coins
+    - owls, and say a purse of them keeps
+    - watch over you while you sleep.
+  habitat: >-
+    Astyra's Akropolis by day and night, common among the columns; uncommon
+    in the Library, where it roosts on the high shelves.
+  learnset:
+    level_up:
+      - [1, Peck]
+      - [1, Growl]
+      - [4, Confusion]
+      - [8, Gust]
+      - [11, Pay Day]
+      - [15, Mind Reader]
+      - [18, Air Cutter]
+      - [22, Psybeam]
+      - [26, Reflect]
+      - [29, Air Slash]
+      - [33, Psyshock]
+      - [37, Calm Mind]
+      - [41, Psychic]
+      - [45, Roost]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Fly, Air Slash,
+      Air Cutter, Aerial Ace, Hurricane, Roost, Tailwind, Defog, Uproar, Psychic, Psyshock, Calm Mind,
+      Light Screen, Reflect, Safeguard, Dream Eater, Psych Up, Future Sight, Expanding Force,
+      Shadow Ball, Night Shade, Steel Wing, Sky Attack, Pluck, U-turn, Magic Coat, Skill Swap,
+      Imprison, Pay Day, Hyper Voice, Swift, Psychic Terrain, Gravity, Ally Switch, Stored Power,
+      Trick, Agility]
+    egg: [Feather Dance, Supersonic, Night Shade, Haze, Whirlwind, Sky Attack]
+  signature: >-
+    Pay Day at level 11, because it is a coin. Mind Reader and Forewarn show
+    the owl's stare: it knows what you'll do before you do it.
+  new_move: null
+
+- dex: 74
+  concept: Owl of Athena
+  name: Sophowl
+  etymology: sophia (Greek, wisdom) + owl
+  category: Wisdom
+  types: [Psychic, Flying]
+  abilities: [Insomnia, Forewarn]
+  hidden_ability: Unaware
+  base_stats: {hp: 85, atk: 55, def: 75, spa: 115, spd: 100, spe: 75}
+  ev_yield: {spa: 2}
+  exp_yield: 182
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Flying]
+  egg_cycles: 15
+  growth_rate: Medium Fast
+  height_m: 0.9
+  weight_kg: 16.0
+  myth: >-
+    The owl was Athena's bird and the emblem of her city. Homer calls her
+    glaukopis, "bright-eyed" or "owl-eyed" (Iliad 1.206), and her owl came to
+    stand for wisdom itself.
+  expression: >-
+    Athena's owl, full grown, with her olive sprig and her unblinking gray
+    gaze, the stare that reads your thoughts.
+  art: >-
+    Medium: it fills about 42×52 px. A tall, upright owl in three-quarter
+    view facing left, wings folded like a philosopher's cloak, one foot
+    holding an olive sprig. Its face disk is still coin-round but now framed
+    by a ruff of gray feathers, and its huge eyes are calm and unblinking. A
+    small helmet-like crest crowns its head. Marble and limestone plumage
+    with Aegean-blue wingtips, a marble-silver face, olive sprig, sun-gold
+    eyes, Psychic-pink glints, black-figure ink outline. The back sprite
+    shows the wings folded like a cloak.
+  shiny: Sun-gold face and wingtips, like a gold coin and a gold-leaf wreath.
+  dex_entry:
+    - It carries an olive sprig and never
+    - blinks. Philosophers say it can read a
+    - thought before the thinker has finished
+    - thinking it.
+  habitat: Evolves from Glaukoin at level 33.
+  learnset:
+    level_up:
+      - [0, Extrasensory]
+      - [1, Peck]
+      - [1, Growl]
+      - [1, Confusion]
+      - [1, Gust]
+      - [11, Pay Day]
+      - [15, Mind Reader]
+      - [18, Air Cutter]
+      - [22, Psybeam]
+      - [26, Reflect]
+      - [29, Air Slash]
+      - [33, Psyshock]
+      - [38, Calm Mind]
+      - [43, Psychic]
+      - [48, Roost]
+      - [53, Hurricane]
+      - [58, Expanding Force]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Fly, Air Slash,
+      Air Cutter, Aerial Ace, Hurricane, Roost, Tailwind, Defog, Uproar, Psychic, Psyshock, Calm Mind,
+      Light Screen, Reflect, Safeguard, Dream Eater, Psych Up, Future Sight, Expanding Force,
+      Shadow Ball, Night Shade, Steel Wing, Sky Attack, Pluck, U-turn, Magic Coat, Skill Swap,
+      Imprison, Pay Day, Hyper Voice, Swift, Psychic Terrain, Gravity, Ally Switch, Stored Power,
+      Trick, Agility, Hyper Beam, Giga Impact, Brave Bird, Trick Room]
+    egg: []
+  signature: >-
+    Unaware, its hidden ability: wisdom can't be bluffed, so it ignores a
+    foe's stat boosts. With Calm Mind and Roost it is Philosopher Hypatia's
+    patient, unshakable ace.
+  new_move: null

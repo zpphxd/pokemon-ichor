@@ -1,0 +1,80 @@
+line: hope
+species:
+
+- dex: 149
+  concept: Hope in the jar
+  name: Elpimoth
+  etymology: elpis (Greek, hope) + moth
+  category: Hope
+  types: [Fairy]
+  abilities: [Magic Bounce]
+  hidden_ability: null
+  base_stats: {hp: 100, atk: 50, def: 100, spa: 110, spd: 140, spe: 100}
+  ev_yield: {spd: 3}
+  exp_yield: 300
+  catch_rate: 45
+  gender: {genderless: true}
+  egg_groups: [Undiscovered]
+  egg_cycles: 120
+  growth_rate: Slow
+  base_friendship: 35
+  height_m: 0.2
+  weight_kg: 0.3
+  myth: >-
+    Pandora lifted the lid of the great jar, the pithos, and scattered every
+    sorrow among mortals. Only Elpis, Hope, stayed inside under the lip, because
+    the lid came down before she could fly out (Hesiod, Works and Days 90–105).
+  expression: >-
+    The last light left in the jar. Ichor's storage is the Pithos, so this is
+    the light that keeps stored Pokémon company. Its name shares a root with
+    Elpis, the girl whose thread was meant to be short.
+  art: >-
+    Small: it fills about 32×36 px. A tiny moth curled in the open mouth of a
+    small terracotta pithos with black-figure bands, in three-quarter view
+    facing left, its soft wings just spread over the jar's lip like a lantern's
+    paper panes. Its plump body glows from within, and two feathery antennae
+    curl up like smoke. A terracotta jar with ink bands, marble-white wings
+    with a sun-gold inner glow, a soft Fairy-pink accent at the wing edges,
+    black-figure ink outline. The follower flutters at your shoulder in a small
+    circle of light.
+  shiny: The glow turns pale Aegean blue and the jar turns marble white.
+  dex_entry:
+    - When every evil flew out of the great
+    - jar, it alone stayed, curled under the
+    - lip. Pokémon resting in a pithos are
+    - never alone. Its soft light is with them.
+  habitat: >-
+    The last sealed pithos, after the League (post-game). Suggested: Elpis
+    finds the jar and lifts the lid, and it rises out to you (static, level 50,
+    one only).
+  learnset:
+    level_up:
+      - [1, Fairy Wind]
+      - [1, Wish]
+      - [1, Lucky Chant]
+      - [7, Draining Kiss]
+      - [14, Safeguard]
+      - [21, Silver Wind]
+      - [28, Moonlight]
+      - [35, Life Dew]
+      - [42, Dazzling Gleam]
+      - [49, Quiver Dance]
+      - [56, Moonblast]
+      - [63, Heal Bell]
+      - [70, Tail Glow]
+      - [77, Healing Wish]
+      - [84, Revival Blessing]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Round, Snore, Dazzling Gleam, Draining Kiss,
+      Misty Terrain, Charm, Disarming Voice, Alluring Voice, Light Screen, Reflect, Safeguard,
+      Calm Mind, Psychic, Psyshock, Psych Up, Energy Ball, Giga Drain, Grass Knot, Solar Beam,
+      Sunny Day, Rain Dance, Bug Buzz, Pollen Puff, Signal Beam, Struggle Bug, U-turn, Air Slash,
+      Tailwind, Helping Hand, Heal Bell, Aromatherapy, Baton Pass, Swift, Ally Switch, Thunder Wave,
+      Magic Coat, Mystical Fire, Flash, Icy Wind, Stored Power, Covet, Encore, Hyper Beam]
+    egg: []
+  signature: >-
+    Magic Bounce sends sorrows back where they came from: status moves aimed at
+    it rebound. Quiver Dance and Tail Glow make the small light grow, and
+    Revival Blessing at 84 brings a fainted ally back, because hope is the
+    thing that stays.
+  new_move: null

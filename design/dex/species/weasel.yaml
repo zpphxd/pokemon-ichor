@@ -1,0 +1,148 @@
+line: weasel
+species:
+
+- dex: 13
+  concept: Weasel kit
+  name: Galekit
+  etymology: gale (Greek, weasel) + kit
+  category: Weasel
+  types: [Normal]
+  abilities: [Pickup, Run Away]
+  hidden_ability: Prankster
+  base_stats: {hp: 35, atk: 52, def: 35, spa: 25, spd: 35, spe: 70}
+  ev_yield: {spe: 1}
+  exp_yield: 51
+  catch_rate: 255
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 15
+  growth_rate: Medium Fast
+  height_m: 0.3
+  weight_kg: 2.5
+  myth: >-
+    Galanthis, Alkmene's servant, saw the birth goddess sitting with knees and
+    fingers locked to hold back Herakles's birth. She cried out that the child
+    was born, the startled goddess jumped up, and Herakles came (Ovid,
+    Metamorphoses 9.306–315).
+  expression: >-
+    A quick, nosy kit whose face markings make a grin it can't take off.
+    Whatever it finds, it carries in its mouth.
+  art: >-
+    Small: it fills about 34×24 px. A long, low weasel kit mid-scamper in
+    three-quarter view facing left, with a stolen olive clamped in its grinning
+    mouth. Its dark mask markings curve up at the corners into a permanent grin,
+    with round ears and a short bushy tail. Limestone-tan back, marble-white
+    throat and belly, terracotta-brown mask and tail tip, black-figure ink
+    outline. The follower darts ahead and drops things at the player's feet.
+  shiny: A marble-white winter coat with a sun-gold mask.
+  dex_entry:
+    - It carries everything in its mouth,
+    - even its young. Its markings make it
+    - look as if it is laughing at you, and
+    - it usually is.
+  habitat: >-
+    Everywhere on Kalliste Isle: Route 1, Kronion Hill and the fields around
+    Elaia and Akti Town. Very common, most of all at night.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Tail Whip]
+      - [4, Quick Attack]
+      - [7, Focus Energy]
+      - [10, Bite]
+      - [13, Covet]
+      - [16, Feint]
+      - [19, Headbutt]
+      - [22, Sucker Punch]
+      - [25, Crunch]
+      - [28, Super Fang]
+      - [31, Double-Edge]
+      - [34, Endeavor]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Rain Dance, Dig,
+      Thief, Fling, Covet, Super Fang, Sucker Punch, Knock Off, Taunt, Snarl, Fake Tears, Charm,
+      Iron Tail, Body Slam, Take Down, Double-Edge, Helping Hand, Endeavor, Last Resort, Mud-Slap,
+      Swift, Play Rough, Trailblaze, Uproar, Agility, U-turn, Retaliate, Work Up, Shadow Claw,
+      Crunch]
+    egg: [Fake Out, Tickle, Baton Pass, Revenge, Reversal, Me First]
+  signature: >-
+    Covet at level 13 and the Pickup ability make it a thief of small things.
+    Fake Out and Tickle come only from breeding.
+  new_move: null
+
+- dex: 14
+  concept: Laughing weasel
+  name: Gelasable
+  etymology: gelos (Greek, laughter) + sable (a dark weasel; also heraldic black)
+  category: Laughing
+  types: [Normal]
+  abilities: [Pickup, Frisk]
+  hidden_ability: Prankster
+  base_stats: {hp: 60, atk: 82, def: 60, spa: 45, spd: 60, spe: 108}
+  ev_yield: {spe: 2}
+  exp_yield: 145
+  catch_rate: 120
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 15
+  growth_rate: Medium Fast
+  height_m: 0.9
+  weight_kg: 12.0
+  myth: >-
+    The goddess punished Galanthis for laughing: she became a weasel, and since
+    her lie came out of her mouth, she bears her young through it (Ovid,
+    Metamorphoses 9.316–323). Hecate took her in as a sacred attendant
+    (Antoninus Liberalis, Metamorphoses 29).
+  expression: >-
+    The grin has become a laugh, and it wears Hecate's dark collar. It slips
+    between the farms at night like a servant on an errand for someone you
+    can't see.
+  art: >-
+    Medium: it fills about 50×34 px. A long, sinuous weasel stretched out in
+    three-quarter view facing left, its head turned back over its shoulder and
+    its mouth open in a wide laugh. A ring of dark fur makes Hecate's collar
+    around its neck, marked with three pale spots like little torches, and its
+    long black-tipped tail curls into the air. Limestone-tan back, marble
+    throat, black-figure ink collar and tail tip with sun-gold torch spots,
+    black-figure ink outline. The follower slinks low and stops every few steps
+    to snicker.
+  shiny: A marble-white coat with an Aegean-blue collar.
+  dex_entry:
+    - It trails travelers along dark farm
+    - lanes, laughing softly. Farmers leave
+    - it scraps at the crossroads, for it runs
+    - errands for the goddess of the night.
+  habitat: >-
+    Farms across the mainland, most of all the wheat fields around Eleusa
+    Village; common at night, rare by day. Evolves from Galekit at level 20.
+  learnset:
+    level_up:
+      - [0, Taunt]
+      - [1, Tackle]
+      - [1, Tail Whip]
+      - [1, Quick Attack]
+      - [1, Focus Energy]
+      - [10, Bite]
+      - [13, Covet]
+      - [16, Feint]
+      - [19, Headbutt]
+      - [24, Sucker Punch]
+      - [28, Crunch]
+      - [32, Super Fang]
+      - [36, Knock Off]
+      - [40, Double-Edge]
+      - [44, Endeavor]
+      - [48, Last Resort]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Rain Dance, Dig,
+      Thief, Fling, Covet, Super Fang, Sucker Punch, Knock Off, Taunt, Snarl, Fake Tears, Charm,
+      Iron Tail, Body Slam, Take Down, Double-Edge, Helping Hand, Endeavor, Last Resort, Mud-Slap,
+      Swift, Play Rough, Trailblaze, Uproar, Agility, U-turn, Retaliate, Work Up, Shadow Claw,
+      Crunch, Trick, Foul Play, Shadow Ball, Lash Out, Throat Chop, Torment, Hyper Beam,
+      Giga Impact]
+    egg: []
+  signature: >-
+    Taunt on evolving is the laugh that got Galanthis changed, and Prankster
+    makes it go first. Knock Off and Fling turn its habit of carrying things
+    into a weapon.
+  new_move: null

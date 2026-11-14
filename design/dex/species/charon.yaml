@@ -1,0 +1,221 @@
+line: charon
+species:
+
+- dex: 77
+  concept: Unburied shade
+  name: Obolorn
+  etymology: obolos (Greek, the coin for the ferryman) + forlorn
+  category: Shade
+  types: [Ghost]
+  abilities: [Cursed Body, Pickup]
+  hidden_ability: Infiltrator
+  base_stats: {hp: 40, atk: 40, def: 40, spa: 70, spd: 50, spe: 60}
+  ev_yield: {spa: 1}
+  exp_yield: 58
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Amorphous]
+  egg_cycles: 25
+  growth_rate: Medium Slow
+  height_m: 0.6
+  weight_kg: 2.5
+  myth: >-
+    The unburied dead may not cross the Styx. They wander its near bank for a
+    hundred years (Virgil, Aeneid 6). The Greeks laid an obol in the mouth of
+    the dead to pay the ferryman.
+  expression: >-
+    A shade with no coin, so its whole body has become a held-out hand. The
+    empty palm is the missing obol.
+  art: >-
+    Small: it fills about 30×36 px. A wisp of a shade in three-quarter view
+    facing left, its lower half trailing into smoke, one thin arm held out with
+    the palm open and empty. A round pale face with two hollow eyes and a
+    downturned mouth, and a faint coin-shaped glint in the palm where the obol
+    should be. Marble-gray body fading to transparent at the tail, Aegean-blue
+    shadows, a sun-gold glint in the palm, black-figure ink outline. The
+    follower drifts toward the player with its palm out.
+  shiny: Its body turns a cold green-gray and the glint in its palm turns silver.
+  dex_entry:
+    - It holds out an empty palm to everyone it
+    - meets, hoping for a coin. Those who give
+    - one are said to hear a faint thank-you on
+    - the night wind.
+  habitat: >-
+    Astyra's Kerameikos cemetery at night, common among the grave stelai. None
+    are seen there by day. It drifts toward trainers who carry money.
+  learnset:
+    level_up:
+      - [1, Astonish]
+      - [1, Spite]
+      - [4, Disable]
+      - [8, Shadow Sneak]
+      - [12, Covet]
+      - [16, Night Shade]
+      - [20, Hex]
+      - [24, Mean Look]
+      - [28, Will-O-Wisp]
+      - [32, Shadow Ball]
+      - [36, Grudge]
+      - [40, Memento]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Thief, Shadow Ball,
+      Will-O-Wisp, Hex, Confuse Ray, Night Shade, Pain Split, Spite, Curse, Snarl, Dark Pulse,
+      Payback, Torment, Embargo, Taunt, Trick, Icy Wind, Rain Dance, Psych Up, Sucker Punch,
+      Ominous Wind, Fling, Helping Hand, Fake Tears]
+    egg: [Destiny Bond, Imprison, Haze, Nightmare, Bestow, Shadow Punch]
+  signature: >-
+    Pickup and Covet: the open palm takes whatever it's offered. Grudge and
+    Memento come late, from a shade with nothing left to lose.
+  new_move: null
+
+- dex: 78
+  concept: Hooded wraith
+  name: Kalyptor
+  etymology: kalypto (Greek, to cover or veil) + -tor
+  category: Hooded Shade
+  types: [Ghost]
+  abilities: [Cursed Body, Frisk]
+  hidden_ability: Infiltrator
+  base_stats: {hp: 55, atk: 55, def: 55, spa: 90, spd: 70, spe: 80}
+  ev_yield: {spa: 2}
+  exp_yield: 142
+  catch_rate: 90
+  gender: {female_pct: 50}
+  egg_groups: [Amorphous]
+  egg_cycles: 25
+  growth_rate: Medium Slow
+  height_m: 1.4
+  weight_kg: 11.0
+  myth: >-
+    On the bank the shades crowd forward, stretching out their hands in longing
+    for the far shore, while the ferryman takes some aboard and drives the rest
+    back (Virgil, Aeneid 6).
+  expression: >-
+    Decades on the bank have drawn its hood down and stretched both arms toward
+    a crossing it still can't make.
+  art: >-
+    Medium: it fills about 44×54 px. A hooded wraith in three-quarter view
+    facing left, leaning into the wind with both long arms reaching out ahead.
+    A deep cowl hides everything but two pale eyes, and the robe frays into
+    tatters at the hem. Cypress-dark robe with Aegean-blue folds, marble-gray
+    hands, a thin sun-gold rim on the hood, black-figure ink outline. The back
+    sprite shows the hood and tatters streaming toward the player.
+  shiny: The robe turns from cypress to a deep terracotta red.
+  dex_entry:
+    - It waits on the shore with its hood drawn
+    - low and both hands reaching for the far
+    - bank. It has waited so long that it no
+    - longer remembers why.
+  habitat: >-
+    Evolves from Obolorn at level 30. In the post-game, uncommon in the grass
+    by the cave mouth at Cape Tainaron, at dusk and at night.
+  learnset:
+    level_up:
+      - [0, Ominous Wind]
+      - [1, Astonish]
+      - [1, Spite]
+      - [1, Disable]
+      - [1, Shadow Sneak]
+      - [12, Covet]
+      - [16, Night Shade]
+      - [20, Hex]
+      - [24, Mean Look]
+      - [28, Will-O-Wisp]
+      - [33, Shadow Ball]
+      - [37, Curse]
+      - [41, Grudge]
+      - [45, Pain Split]
+      - [49, Phantom Force]
+      - [53, Memento]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Thief, Shadow Ball,
+      Will-O-Wisp, Hex, Confuse Ray, Night Shade, Pain Split, Spite, Curse, Snarl, Dark Pulse,
+      Payback, Torment, Embargo, Taunt, Trick, Icy Wind, Rain Dance, Psych Up, Sucker Punch,
+      Ominous Wind, Fling, Helping Hand, Fake Tears, Phantom Force, Poltergeist, Nasty Plot,
+      Calm Mind, Foul Play, Knock Off, Dream Eater, Shadow Claw, Scary Face, Skill Swap]
+    egg: []
+  signature: >-
+    It learns Ominous Wind on evolving, the cold wind off the far bank. Frisk
+    and Mean Look make it a watcher that won't let you leave.
+  new_move: null
+
+- dex: 79
+  concept: Ferryman
+  name: Charonaut
+  etymology: Charon (the ferryman of the dead) + nautes (Greek, sailor)
+  category: Ferryman
+  types: [Ghost, Water]
+  abilities: [Cursed Body, Pressure]
+  hidden_ability: Perish Body
+  base_stats: {hp: 90, atk: 75, def: 85, spa: 110, spd: 100, spe: 60}
+  ev_yield: {spa: 2, spd: 1}
+  exp_yield: 245
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Amorphous]
+  egg_cycles: 25
+  growth_rate: Medium Slow
+  height_m: 2.4
+  weight_kg: 190.0
+  myth: >-
+    Charon, the grim old ferryman of the dead, poles his skiff across the
+    underworld's rivers and will carry no one who cannot pay the obol (Virgil,
+    Aeneid 6; Aristophanes, Frogs).
+  expression: >-
+    The shade that waited longest became the ferryman. It's fused to its reed
+    boat, and the obol it was never given now hangs at its neck.
+  art: >-
+    Large: it fills about 60×58 px. A gaunt, bearded ferryman in three-quarter
+    view facing left, his body growing out of the stern of a reed boat so that
+    man and boat are one. One bony hand grips a long pole that crosses the
+    frame, and the other holds up a lantern. Hollow eyes under a ragged hood,
+    and an obol on a cord at his neck. Cypress-dark hood, limestone reeds, the
+    darkest Aegean blue for the water at the hull, sun-gold lantern and coin,
+    black-figure ink outline. The follower glides with ripples under the hull.
+  shiny: The reeds turn black and the lantern burns pale blue instead of gold.
+  dex_entry:
+    - It poles its reed boat across black water
+    - and never speaks. It carries only those
+    - who bring an old coin. The rest it leaves
+    - on the bank for a hundred years.
+  habitat: >-
+    Evolves from Kalyptor when it levels up holding a Relic Copper, the old
+    obol. In the post-game a rare few pole along the Styx beyond Cape Tainaron,
+    found by surfing at any hour.
+  learnset:
+    level_up:
+      - [0, Whirlpool]
+      - [1, Ominous Wind]
+      - [1, Astonish]
+      - [1, Spite]
+      - [1, Disable]
+      - [1, Shadow Sneak]
+      - [12, Covet]
+      - [16, Night Shade]
+      - [20, Hex]
+      - [24, Mean Look]
+      - [28, Will-O-Wisp]
+      - [33, Shadow Ball]
+      - [37, Curse]
+      - [41, Grudge]
+      - [44, Brine]
+      - [47, Pain Split]
+      - [50, Phantom Force]
+      - [54, Hydro Pump]
+      - [58, Perish Song]
+      - [63, Memento]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Thief, Shadow Ball,
+      Will-O-Wisp, Hex, Confuse Ray, Night Shade, Pain Split, Spite, Curse, Snarl, Dark Pulse,
+      Payback, Torment, Embargo, Taunt, Trick, Icy Wind, Rain Dance, Psych Up, Sucker Punch,
+      Ominous Wind, Fling, Helping Hand, Fake Tears, Phantom Force, Poltergeist, Nasty Plot,
+      Calm Mind, Foul Play, Knock Off, Dream Eater, Shadow Claw, Scary Face, Skill Swap, Surf,
+      Scald, Hydro Pump, Dive, Whirlpool, Brine, Water Pulse, Chilling Water, Muddy Water,
+      Ice Beam, Blizzard, Hail, Snowscape, Weather Ball, Flip Turn, Trick Room, Psychic, Haze,
+      Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Whirlpool on evolving and Perish Body as its hidden ability: whoever
+    strikes it makes the crossing too. A slow, bulky special tank that traps
+    foes and ends with Perish Song.
+  new_move: null

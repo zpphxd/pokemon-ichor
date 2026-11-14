@@ -1,0 +1,220 @@
+line: alectryon
+species:
+
+- dex: 37
+  concept: Rooster chick
+  name: Eopeep
+  etymology: eos (Greek, dawn) + peep
+  category: Dawn Chick
+  types: [Fighting]
+  abilities: [Early Bird, Guts]
+  hidden_ability: Defiant
+  base_stats: {hp: 48, atk: 68, def: 42, spa: 32, spd: 42, spe: 68}
+  ev_yield: {atk: 1}
+  exp_yield: 58
+  catch_rate: 190
+  gender: {female_pct: 25}
+  egg_groups: [Flying, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.3
+  weight_kg: 2.5
+  myth: >-
+    Ares set the youth Alectryon to keep watch while he was with Aphrodite.
+    Alectryon fell asleep, the sun god Helios saw them, and Ares turned the
+    boy into a rooster (Lucian, The Dream, or the Cock 3).
+  expression: >-
+    A chick that wakes before anyone else and peeps at the dark, already
+    practicing the warning it was born to give.
+  art: >-
+    Small: it fills about 30×30 px. A round, fluffy chick standing up on its
+    toes in three-quarter view facing left, chest puffed, stubby wings held
+    out like little fists, a tiny comb nub on its head and two spur bumps on
+    its legs. Its eyes are wide awake. Sun-gold and limestone down, terracotta
+    comb, beak and feet, black-figure ink outline. The follower hops and pecks
+    at the ground.
+  shiny: Its down turns marble white and its comb Aegean blue.
+  dex_entry:
+    - It wakes long before dawn and peeps at
+    - the dark sky, as if afraid it will miss
+    - the sun. It cannot bear to be late.
+  habitat: >-
+    Elaia's farmyards on Kalliste Isle, early mornings only; common around
+    the olive presses and threshing floors.
+  learnset:
+    level_up:
+      - [1, Peck]
+      - [1, Growl]
+      - [4, Focus Energy]
+      - [7, Double Kick]
+      - [10, Fury Attack]
+      - [13, Wake-Up Slap]
+      - [16, Bulk Up]
+      - [19, Low Sweep]
+      - [22, Aerial Ace]
+      - [25, Brick Break]
+      - [28, Counter]
+      - [31, Reversal]
+      - [35, High Jump Kick]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Bulk Up, Brick Break, Low Kick,
+      Low Sweep, Rock Smash, Aerial Ace, Pluck, Sunny Day, Uproar, Endeavor, Reversal, Counter,
+      Detect, Helping Hand, Taunt, Thief, Agility, Mud-Slap, Work Up, Echoed Voice, Coaching,
+      Steel Wing, Double-Edge, Blaze Kick]
+    egg: [Quick Guard, Mirror Move, Feint, Vacuum Wave, Triple Kick, Revenge, Feather Dance]
+  signature: >-
+    Wake-Up Slap at 13 and Early Bird from the start. It shakes off sleep
+    faster than anything, and it punishes anything that dozes.
+  new_move: null
+
+- dex: 38
+  concept: Cockerel
+  name: Alekrow
+  etymology: alektor (Greek, rooster) + crow
+  category: Cockerel
+  types: [Fighting]
+  abilities: [Early Bird, Guts]
+  hidden_ability: Defiant
+  base_stats: {hp: 62, atk: 92, def: 60, spa: 42, spd: 57, spe: 92}
+  ev_yield: {atk: 2}
+  exp_yield: 142
+  catch_rate: 90
+  gender: {female_pct: 25}
+  egg_groups: [Flying, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.8
+  weight_kg: 14.0
+  myth: >-
+    Ever since Ares changed him, the rooster has crowed before every sunrise
+    to warn that the sun is coming, so he will never be caught asleep again
+    (Lucian, The Dream, or the Cock 3).
+  expression: >-
+    A cocky young rooster that struts and picks fights. Its comb is starting
+    to stand up stiff, like the crest of a helmet.
+  art: >-
+    Medium: it fills about 42×50 px. A lanky young rooster mid-strut in
+    three-quarter view facing left, chest thrown out, one foot raised and its
+    beak open in a crow. Its comb now stands tall and stiff, sharp spurs jut
+    from its legs, and a sickle-feathered tail is coming in. Terracotta and
+    sun-gold body feathers, marble-white neck hackles, a cypress-dark tail with
+    an Aegean-blue sheen, black-figure ink outline. The follower struts with
+    its chest out.
+  shiny: Its feathers turn marble white and its comb and tail Aegean blue.
+  dex_entry:
+    - It crows at every sunrise to warn that
+    - the sun is watching. It fights anything
+    - that steps into its yard, even its own
+    - reflection.
+  habitat: >-
+    Evolves from Eopeep at level 18. Wild ones drill in the yard of the
+    Lakonian battle school (uncommon, mornings).
+  learnset:
+    level_up:
+      - [0, Uproar]
+      - [1, Peck]
+      - [1, Growl]
+      - [1, Focus Energy]
+      - [1, Double Kick]
+      - [10, Fury Attack]
+      - [13, Wake-Up Slap]
+      - [16, Bulk Up]
+      - [20, Low Sweep]
+      - [23, Aerial Ace]
+      - [26, Brick Break]
+      - [29, Swagger]
+      - [32, Counter]
+      - [35, Reversal]
+      - [39, High Jump Kick]
+      - [43, Close Combat]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Bulk Up, Brick Break, Low Kick,
+      Low Sweep, Rock Smash, Aerial Ace, Pluck, Sunny Day, Uproar, Endeavor, Reversal, Counter,
+      Detect, Helping Hand, Taunt, Thief, Agility, Mud-Slap, Work Up, Echoed Voice, Coaching,
+      Steel Wing, Double-Edge, Blaze Kick, Close Combat, Focus Blast, Retaliate, Bounce]
+    egg: []
+  signature: >-
+    It learns Uproar on evolving, its first crow, and nobody on the field can
+    sleep through it. Swagger is pure strut.
+  new_move: null
+
+- dex: 39
+  concept: War-cock
+  name: Hoplektor
+  etymology: hoplites (Greek, armored soldier) + alektor (Greek, rooster)
+  category: Dawn Sentry
+  types: [Fighting, Flying]
+  abilities: [Early Bird, Guts]
+  hidden_ability: Defiant
+  base_stats: {hp: 80, atk: 125, def: 90, spa: 50, spd: 75, spe: 95}
+  ev_yield: {atk: 3}
+  exp_yield: 239
+  catch_rate: 45
+  gender: {female_pct: 25}
+  egg_groups: [Flying, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.5
+  weight_kg: 46.0
+  myth: >-
+    Before he was a rooster, Alectryon was a young soldier and a companion of
+    Ares, trusted to stand guard (Lucian, The Dream, or the Cock 3).
+  expression: >-
+    The rooster as hoplite. Its comb has become the horsehair crest of a
+    bronze helmet and its wings close like a shield wall, and it will never
+    sleep on watch again.
+  art: >-
+    Large: it fills about 52×60 px. An upright war-cock standing like a
+    hoplite in three-quarter view facing left. A bronze helmet-shaped plate
+    with cheek guards covers its head, topped by a tall horsehair crest that
+    grew from its comb. One wing is folded across its chest like a round
+    hoplon shield, painted with a rooster in black-figure style, and long
+    sickle tail feathers fall behind it like a cloak. Sun-gold bronze helmet
+    and shield, terracotta crest and wattles, cypress-dark tail with an
+    Aegean-blue sheen, marble highlights, black-figure ink outline. The back
+    sprite shows the shield wing and the crest from behind.
+  shiny: Its bronze turns silver-marble and its crest Aegean blue.
+  dex_entry:
+    - Its crest is as stiff as a helmet plume.
+    - It is said its ancestor once slept on
+    - watch and was punished for it. It has
+    - not closed its eyes on duty since.
+  habitat: >-
+    Evolves from Alekrow at level 36. A few drill with the cadets of the
+    Lakonian battle school (rare). Polemarch Brasidas of the Pantheon fields
+    one as his ace.
+  learnset:
+    level_up:
+      - [0, Wide Guard]
+      - [1, Uproar]
+      - [1, Peck]
+      - [1, Growl]
+      - [1, Focus Energy]
+      - [1, Double Kick]
+      - [1, Wing Attack]
+      - [10, Fury Attack]
+      - [13, Wake-Up Slap]
+      - [16, Bulk Up]
+      - [20, Low Sweep]
+      - [23, Aerial Ace]
+      - [26, Brick Break]
+      - [29, Swagger]
+      - [32, Counter]
+      - [35, Reversal]
+      - [40, Drill Peck]
+      - [44, High Jump Kick]
+      - [48, Close Combat]
+      - [53, Brave Bird]
+      - [58, No Retreat]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Bulk Up, Brick Break, Low Kick,
+      Low Sweep, Rock Smash, Aerial Ace, Pluck, Sunny Day, Uproar, Endeavor, Reversal, Counter,
+      Detect, Helping Hand, Taunt, Thief, Agility, Mud-Slap, Work Up, Echoed Voice, Coaching,
+      Steel Wing, Double-Edge, Blaze Kick, Close Combat, Focus Blast, Retaliate, Bounce, Fly,
+      Brave Bird, Acrobatics, Dual Wingbeat, Roost, Tailwind, Defog, U-turn, Sky Attack, Iron Head,
+      Iron Defense, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    It learns Wide Guard on evolving: the shield wall. No Retreat at 58 is the
+    Lakonian oath, to come home with your shield or on it.
+  new_move: null

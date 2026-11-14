@@ -1,0 +1,82 @@
+line: styx
+species:
+
+- dex: 134
+  concept: Oath-keeper
+  name: Stygiad
+  etymology: stygios (Greek, of the Styx; hateful, chilling) + naiad
+  category: Oath
+  types: [Ice, Ghost]
+  abilities: [Cursed Body, Ice Body]
+  hidden_ability: Pressure
+  base_stats: {hp: 80, atk: 55, def: 80, spa: 100, spd: 110, spe: 65}
+  ev_yield: {spd: 2}
+  exp_yield: 180
+  catch_rate: 60
+  gender: {female_pct: 100}
+  egg_groups: [Water 1, Amorphous]
+  egg_cycles: 25
+  growth_rate: Medium Fast
+  height_m: 1.6
+  weight_kg: 32.0
+  myth: >-
+    The Styx is the ice-cold river of the underworld. When the gods swore a
+    great oath, Iris fetched its water in a golden jug, and a god who broke that
+    oath lay breathless for a year and was barred from the gods' councils for
+    nine more (Hesiod, Theogony 775–806).
+  expression: >-
+    The river given a keeper. Its jug holds the oath-water, and anything that
+    breaks faith with it is struck still. It's the emblem of the Oath of the
+    Styx ruleset, the vow a player swears at the start of a run.
+  art: >-
+    Medium: it fills about 40×56 px. A tall, slender river-maiden in
+    three-quarter view facing left, her lower body a frozen waterfall that
+    fades into mist instead of feet. She holds a golden jug against her hip,
+    tilted so a thread of black water hangs from its lip without falling. Long
+    hair like frozen ripples and closed, frost-rimmed eyes. Aegean-blue and
+    pale-blue ice shading to marble white, a sun-gold jug, black-figure ink for
+    the water, a pale violet ghost accent in the mist, ink outline. The follower
+    drifts without a sound and leaves frost on the ground.
+  shiny: The ice turns smoky marble gray and the black water turns silver.
+  dex_entry:
+    - Its jug holds water from the river of the
+    - dead. An oath sworn on that water can
+    - never be broken. Those who break it lie
+    - cold and breathless for a whole year.
+  habitat: >-
+    The misty banks of the Styx in the post-game Katabasis, upstream of
+    Charon's crossing (uncommon). It surfaces from the black water only when
+    you stand still at the bank.
+  learnset:
+    level_up:
+      - [1, Powder Snow]
+      - [1, Astonish]
+      - [1, Mist]
+      - [5, Disable]
+      - [9, Icy Wind]
+      - [13, Confuse Ray]
+      - [17, Hex]
+      - [21, Haze]
+      - [25, Frost Breath]
+      - [29, Imprison]
+      - [33, Spite]
+      - [37, Chilling Water]
+      - [41, Freeze-Dry]
+      - [45, Grudge]
+      - [49, Ice Beam]
+      - [53, Shadow Ball]
+      - [57, Destiny Bond]
+      - [62, Blizzard]
+      - [67, Sheer Cold]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Ice Beam, Blizzard,
+      Icy Wind, Frost Breath, Hail, Snowscape, Aurora Veil, Shadow Ball, Hex, Will-O-Wisp,
+      Confuse Ray, Night Shade, Pain Split, Spite, Trick, Rain Dance, Surf, Water Pulse,
+      Chilling Water, Weather Ball, Calm Mind, Psych Up, Dream Eater, Taunt, Torment, Reflect,
+      Light Screen, Safeguard, Helping Hand]
+    egg: [Perish Song, Memento, Curse, Aurora Beam, Ice Shard, Lucky Chant]
+  signature: >-
+    The oath in battle. Imprison and Disable forbid moves, Cursed Body may seal
+    a move that strikes it, and Grudge makes a foe that knocks it out lose all
+    of that move's PP: the oath outlasts the oath-keeper.
+  new_move: null

@@ -1,0 +1,79 @@
+line: torpedo
+species:
+
+- dex: 49
+  concept: Torpedo ray
+  name: Narkeray
+  etymology: narke (Greek, numbness, and the torpedo ray) + ray
+  category: Numbfish
+  types: [Water, Electric]
+  abilities: [Static, Volt Absorb]
+  hidden_ability: Analytic
+  base_stats: {hp: 95, atk: 50, def: 80, spa: 95, spd: 95, spe: 55}
+  ev_yield: {hp: 1, spa: 1}
+  exp_yield: 168
+  catch_rate: 75
+  gender: {female_pct: 50}
+  egg_groups: [Water 1]
+  egg_cycles: 20
+  growth_rate: Slow
+  height_m: 1.1
+  weight_kg: 34.0
+  myth: >-
+    In Plato's Meno, Meno tells Socrates he is like the flat torpedo fish, the
+    narke, which numbs anyone who touches it, because his questions leave
+    people unable to answer. Socrates replies that he numbs others only
+    because he is numb himself (Plato, Meno 80a-c).
+  expression: >-
+    The ray of Meno's simile, wearing the face it was compared to. A bald,
+    bearded face on its back seems about to ask you something, and touching it
+    leaves you numb and unsure of everything.
+  art: >-
+    Medium: it fills about 52×36 px, wide and flat. A round-winged torpedo ray
+    in three-quarter view facing left, gliding with its fin tips curled up and
+    a short, thick tail. The markings on its back form a bald, bearded,
+    snub-nosed face with a furrowed brow, like a philosopher's bust. Two
+    kidney-shaped electric organs glow under the skin on either side.
+    Limestone-sand back, marble belly edge, Aegean-blue fin rims, a sun-gold
+    glow, black-figure ink outline. The follower floats a hand's breadth off
+    the ground and settles flat when it stops.
+  shiny: Its sandy back turns Aegean blue and its glow white.
+  dex_entry:
+    - A bearded face on its back seems about
+    - to ask a question. Touch it and you go
+    - numb, unable to answer anything at all.
+  habitat: >-
+    Uncommon. Hooked with a Good Rod in Astyra's harbor and on the trireme
+    crossings, day or night.
+  learnset:
+    level_up:
+      - [1, Water Gun]
+      - [1, Thunder Shock]
+      - [1, Mud-Slap]
+      - [5, Thunder Wave]
+      - [9, Water Pulse]
+      - [13, Nuzzle]
+      - [17, Yawn]
+      - [21, Shock Wave]
+      - [25, Aqua Ring]
+      - [29, Discharge]
+      - [33, Soak]
+      - [37, Volt Switch]
+      - [41, Surf]
+      - [45, Thunderbolt]
+      - [49, Amnesia]
+      - [53, Zap Cannon]
+      - [57, Hydro Pump]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Rain Dance, Surf, Dive,
+      Waterfall, Scald, Muddy Water, Brine, Water Pulse, Whirlpool, Hydro Pump, Chilling Water,
+      Ice Beam, Blizzard, Icy Wind, Thunderbolt, Thunder, Thunder Wave, Charge Beam, Volt Switch,
+      Electroweb, Shock Wave, Eerie Impulse, Electric Terrain, Rising Voltage, Discharge, Charge,
+      Magnet Rise, Signal Beam, Mud-Slap, Mud Shot, Calm Mind, Amnesia, Psych Up, Bounce, Endeavor,
+      Hyper Beam]
+    egg: [Mirror Coat, Haze, Mud Sport, Flail, Confuse Ray, Wide Guard]
+  signature: >-
+    Everything it does numbs: Static, Nuzzle, Yawn, Discharge and finally Zap
+    Cannon. It is slow, so Analytic makes it hit harder by moving last, and it
+    learns Amnesia because it claims to know nothing.
+  new_move: null

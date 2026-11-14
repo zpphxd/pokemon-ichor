@@ -1,0 +1,78 @@
+line: sphinx
+species:
+
+- dex: 80
+  concept: Riddling sphinx
+  name: Enigmaw
+  etymology: ainigma (Greek, riddle, as in enigma) + maw
+  category: Riddle
+  types: [Psychic, Fighting]
+  abilities: [Forewarn, Inner Focus]
+  hidden_ability: Analytic
+  base_stats: {hp: 80, atk: 100, def: 75, spa: 95, spd: 90, spe: 60}
+  ev_yield: {atk: 2}
+  exp_yield: 172
+  catch_rate: 60
+  gender: {female_pct: 100}
+  egg_groups: [Field, Human-Like]
+  egg_cycles: 25
+  growth_rate: Medium Slow
+  height_m: 1.5
+  weight_kg: 98.0
+  myth: >-
+    The Sphinx sat on a rock outside Thebes and asked every traveler a riddle,
+    strangling those who failed. When Oedipus answered it, she threw herself
+    from the rock (Apollodorus, Library 3.5.8). Her name comes from sphingo,
+    "to squeeze".
+  expression: >-
+    A calm, knowing lioness on a roadside rock. Her coiled tail is both the
+    question and the squeeze.
+  art: >-
+    Large: it fills about 56×52 px. A winged lioness crouched on a rock in
+    three-quarter view facing left, forepaws together and head high. A calm
+    woman's face with heavy-lidded, knowing eyes and braided hair, eagle wings
+    folded along her back, and a long tail curled into a question-mark hook.
+    Limestone-tan coat with sun-gold highlights, a marble face, terracotta bars
+    on the wings, a pale limestone rock beneath her, black-figure ink outline.
+    The follower pads after the player with its tail still curled.
+  shiny: Her coat turns marble-white and her wings turn black-figure dark.
+  dex_entry:
+    - It sits beside the mountain road and asks
+    - each traveler a riddle. Its tail tightens
+    - on those who fail. If one ever answers, it
+    - leaps from its rock and is gone.
+  habitat: >-
+    Rare, by day only, in the rocky grass along the mountain road from Astyra
+    to Delphoi. It sits on high rocks above the switchbacks and comes down to
+    meet anyone who walks past.
+  learnset:
+    level_up:
+      - [1, Bind]
+      - [1, Confusion]
+      - [1, Leer]
+      - [5, Miracle Eye]
+      - [9, Double Kick]
+      - [13, Psybeam]
+      - [17, Imprison]
+      - [21, Force Palm]
+      - [25, Mind Reader]
+      - [29, Air Slash]
+      - [33, Calm Mind]
+      - [37, Brick Break]
+      - [41, Psychic]
+      - [45, Future Sight]
+      - [49, Close Combat]
+      - [53, Final Gambit]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sunny Day, Calm Mind,
+      Bulk Up, Psychic, Psyshock, Zen Headbutt, Psycho Cut, Future Sight, Expanding Force,
+      Stored Power, Trick Room, Light Screen, Reflect, Safeguard, Skill Swap, Trick, Imprison,
+      Brick Break, Close Combat, Focus Blast, Aura Sphere, Low Kick, Low Sweep, Reversal,
+      Superpower, Coaching, Rock Slide, Rock Tomb, Stone Edge, Bulldoze, Shadow Claw, Crunch,
+      Aerial Ace, Dual Wingbeat, Roar, Snarl, Taunt, Torment, Shadow Ball, Body Slam, Take Down,
+      Iron Tail, Helping Hand, Hyper Beam, Giga Impact]
+    egg: [Mean Look, Feint, Power Swap, Guard Swap, Amnesia, Wrap]
+  signature: >-
+    Forewarn reads the foe's strongest move, and Mind Reader and Imprison set
+    the riddle. Its last level-up move is Final Gambit: the leap from the rock.
+  new_move: null

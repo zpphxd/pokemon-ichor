@@ -1,0 +1,143 @@
+line: narcissus
+species:
+
+- dex: 91
+  concept: Spring bulb
+  name: Narcibulb
+  etymology: narkissos (Greek, the narcissus flower) + bulb
+  category: Spring Bulb
+  types: [Grass]
+  abilities: [Oblivious]
+  hidden_ability: Mirror Armor
+  base_stats: {hp: 50, atk: 38, def: 55, spa: 60, spd: 62, spe: 40}
+  ev_yield: {spd: 1}
+  exp_yield: 60
+  catch_rate: 190
+  gender: {female_pct: 12.5}
+  egg_groups: [Grass, Water 1]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.3
+  weight_kg: 2.5
+  myth: >-
+    Narcissus scorned everyone who loved him, the nymph Echo among them, so
+    Nemesis made him fall in love with his own reflection in a spring (Ovid,
+    Metamorphoses 3).
+  expression: >-
+    A bulb already turned toward the water. Its sleepy eyes never meet anyone
+    else's.
+  art: >-
+    Small: it fills about 24×30 px. A plump white bulb in three-quarter view
+    facing left, with a tuft of papery skin on top and one green shoot. Two
+    sleepy, half-shut eyes look down and away, never at the viewer. Marble-white
+    bulb, limestone papery skin, olive shoot, black-figure ink outline. The
+    follower walks with its eyes on the ground.
+  shiny: The bulb turns a pale sun-gold.
+  dex_entry:
+    - It buries itself at the edge of a spring.
+    - Even as a bulb it turns to face the
+    - water, never the soft voice in the caves
+    - that keeps calling back to it.
+  habitat: >-
+    Common by day in the grass around the Spring of Kallirhoe, Kythera. Echolali
+    can often be heard from the sea caves below.
+  learnset:
+    level_up:
+      - [1, Absorb]
+      - [1, Sweet Scent]
+      - [4, Growth]
+      - [8, Stun Spore]
+      - [12, Mega Drain]
+      - [16, Magical Leaf]
+      - [20, Ingrain]
+      - [24, Reflect]
+      - [28, Giga Drain]
+      - [32, Amnesia]
+      - [36, Petal Dance]
+      - [40, Mirror Coat]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sunny Day, Rain Dance,
+      Solar Beam, Energy Ball, Giga Drain, Bullet Seed, Seed Bomb, Magical Leaf, Grass Knot,
+      Grassy Terrain, Grass Pledge, Leaf Storm, Worry Seed, Reflect, Light Screen, Safeguard,
+      Natural Gift, Captivate, Charm, Weather Ball, Trailblaze, Water Pulse]
+    egg: [Leech Seed, Synthesis, Aromatherapy, Yawn, Grass Whistle, Water Sport]
+  signature: >-
+    Oblivious: Attract, Captivate and Taunt don't reach it, because it isn't
+    listening. It learns Reflect and Mirror Coat by level-up.
+  new_move: null
+
+- dex: 92
+  concept: Narcissus
+  name: Narcisheen
+  etymology: narkissos (Greek, the narcissus flower) + sheen
+  category: Reflection
+  types: [Grass, Water]
+  abilities: [Oblivious]
+  hidden_ability: Mirror Armor
+  base_stats: {hp: 75, atk: 50, def: 75, spa: 100, spd: 115, spe: 75}
+  ev_yield: {spd: 2}
+  exp_yield: 172
+  catch_rate: 60
+  gender: {female_pct: 12.5}
+  egg_groups: [Grass, Water 1]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.1
+  weight_kg: 16.0
+  myth: >-
+    Narcissus lay by the spring gazing at his own reflection until he wasted
+    away. Where he had lain, a white flower with a yellow heart grew (Ovid,
+    Metamorphoses 3).
+  expression: >-
+    The flower forever bent over the pool, with its own face drawn in the water
+    at its feet.
+  art: >-
+    Medium: it fills about 40×52 px. A white narcissus flower-being in
+    three-quarter view facing left, its long stem bent so its head hangs over a
+    small pool at its base, where a mirrored copy of its face shows in the
+    water. Six white petals ruff a sun-gold trumpet face with closed, contented
+    eyes, and its roots are little feet standing in the pool. Marble petals,
+    sun-gold trumpet, olive stem and leaves, Aegean-blue water, black-figure ink
+    outline. The back sprite shows the bowed neck, and the follower never looks
+    up at the player.
+  shiny: Its petals turn sun-gold like a wild daffodil's, with a white trumpet.
+  dex_entry:
+    - It bends over the spring all day, gazing
+    - at its own face. A voice in the caves
+    - repeats every word it murmurs. It has
+    - never once turned around to look.
+  habitat: >-
+    Evolves from Narcibulb when it levels up at the Spring of Kallirhoe, Kythera,
+    and nowhere else. A rare wild one bends over the spring's pool by day, and
+    Echolali is never far off.
+  learnset:
+    level_up:
+      - [0, Water Pulse]
+      - [1, Absorb]
+      - [1, Sweet Scent]
+      - [1, Growth]
+      - [1, Stun Spore]
+      - [12, Mega Drain]
+      - [16, Magical Leaf]
+      - [20, Ingrain]
+      - [24, Reflect]
+      - [28, Giga Drain]
+      - [32, Amnesia]
+      - [36, Aqua Ring]
+      - [40, Mirror Coat]
+      - [44, Surf]
+      - [48, Energy Ball]
+      - [52, Calm Mind]
+      - [56, Petal Dance]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sunny Day, Rain Dance,
+      Solar Beam, Energy Ball, Giga Drain, Bullet Seed, Seed Bomb, Magical Leaf, Grass Knot,
+      Grassy Terrain, Grass Pledge, Leaf Storm, Worry Seed, Reflect, Light Screen, Safeguard,
+      Natural Gift, Captivate, Charm, Weather Ball, Trailblaze, Water Pulse, Surf, Scald,
+      Hydro Pump, Brine, Whirlpool, Muddy Water, Chilling Water, Ice Beam, Icy Wind, Calm Mind,
+      Dazzling Gleam, Pollen Puff, Petal Blizzard, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Mirror Armor turns stat drops back on the foe, and Mirror Coat sends special
+    hits back. Oblivious keeps it deaf to Attract and Taunt, and to Echolali.
+  new_move: null

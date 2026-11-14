@@ -1,0 +1,105 @@
+line: kronos
+species:
+
+- dex: 146
+  concept: Lord of Time
+  name: Kronolith
+  etymology: khronos (Greek, time) + lithos (Greek, stone)
+  category: Endless Time
+  types: [Ground, Psychic]
+  abilities: [Pressure]
+  hidden_ability: Sharpness
+  base_stats: {hp: 120, atk: 150, def: 130, spa: 110, spd: 120, spe: 50}
+  ev_yield: {atk: 3}
+  exp_yield: 340
+  catch_rate: 3
+  gender: {genderless: true}
+  egg_groups: [Undiscovered]
+  egg_cycles: 120
+  growth_rate: Slow
+  base_friendship: 0
+  height_m: 8.2
+  weight_kg: 950.0
+  myth: >-
+    Kronos, youngest of the Titans, cut his father the Sky from the Earth with
+    a sickle of adamant, ruled in the Golden Age, and swallowed his children for
+    fear of a prophecy until Zeus overthrew him; the stone he swallowed in
+    Zeus's place was shown at Delphi (Hesiod, Theogony 154–182, 453–506;
+    Pausanias 10.24.6). Later Greeks read him as Chronos, Time (Plutarch, On Isis
+    and Osiris 32).
+  expression: >-
+    Time as a Titan: patient, enormous, and certain to win. Its torso is an
+    hourglass whose sand has stopped, its face echoes the Corinthian helmets of
+    the Titanborn, and it carries the Harpe the whole story has been
+    reassembling. The world goes gray under its shadow, which is the Frozen
+    Hour.
+  art: >-
+    Largest: it fills the whole 64×64 box and pushes against its edges. A
+    colossal Titan in three-quarter view facing left, legs like stone columns,
+    arms and shoulders of cracked earth bound with bronze bands. Its torso is a
+    bronze-framed hourglass of sun-gold sand frozen mid-fall, and its head is a
+    bearded bronze face shaped like a Corinthian helmet with two calm, pale
+    eyes. It holds the Harpe, a great curved adamant sickle, low across its body
+    in its right hand. Terracotta and limestone earth, sun-gold bronze and sand,
+    marble highlights on the blade, a pale psychic-violet glow in the eyes, a
+    gray pool of shadow at its feet, black-figure ink outline. The back sprite
+    shows the hourglass from behind; the follower leaves gray tiles where it
+    steps.
+  shiny: The bronze turns blackened iron and the sand turns marble silver.
+  dex_entry:
+    - It carries the sickle that cut the sky
+    - from the earth. Where its shadow falls,
+    - the world grays and stops. It need not
+    - hurry. Everything comes to it in time.
+  habitat: >-
+    The Stair of Hours, at the climax. Kronos wakes it at the Loom with the
+    power he takes from the Fates, and the Frozen Hour spreads from it. After
+    you and Kleon beat Kronos and Hyperion, it waits at the top of the Stair to
+    be caught (static, level 60, one only).
+  learnset:
+    level_up:
+      - [1, Confusion]
+      - [1, Scary Face]
+      - [1, Mud-Slap]
+      - [1, Ancient Power]
+      - [8, Bulldoze]
+      - [16, Slash]
+      - [24, Psycho Cut]
+      - [32, Earth Power]
+      - [40, Gravity]
+      - [48, Future Sight]
+      - [54, Trick Room]
+      - [58, High Horsepower]
+      - [60, Roar of Time]
+      - [66, Earthquake]
+      - [72, Psychic]
+      - [80, Mighty Cleave]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Earthquake, Earth Power,
+      Bulldoze, Stomping Tantrum, High Horsepower, Dig, Sandstorm, Sand Tomb, Stealth Rock,
+      Rock Slide, Stone Edge, Rock Tomb, Rock Blast, Smack Down, Meteor Beam, Power Gem, Psychic,
+      Psyshock, Psycho Cut, Zen Headbutt, Future Sight, Calm Mind, Trick Room, Gravity,
+      Expanding Force, Psychic Terrain, Reflect, Light Screen, Iron Head, Iron Defense, Heavy Slam,
+      Flash Cannon, Body Press, Swords Dance, Bulk Up, Knock Off, Brutal Swing, Dark Pulse,
+      Shadow Ball, Focus Blast, Fire Blast, Sunny Day, Scary Face, Roar, Strength, Rock Smash, Cut,
+      Fury Cutter, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    The Frozen Hour in battle. At its encounter level it knows Future Sight,
+    Trick Room, High Horsepower and Roar of Time: the blow that is already on
+    its way, time turned so the slowest moves first, and the roar that stopped
+    the world. Pressure wears every move down, and Sharpness hones the Harpe's
+    cuts (Slash, Psycho Cut, Mighty Cleave).
+  new_move:
+    name: Harpe
+    type: Ground
+    effect: >-
+      Physical, 100 power, 100% accuracy, 10 PP, makes contact, and counts as a
+      slicing move for Sharpness. It hits through Protect, Detect and
+      Substitute. It's Mighty Cleave's behavior with the Ground type, so the
+      engine cost is a new move entry and an animation.
+    why: >-
+      Kronolith has no Ground signature of its own; High Horsepower stands in at level 58. The Harpe is the relic the story
+      spends two acts reassembling, the blade that "can cut what the Fates have
+      woven", so its owner striking through every defense with it is the payoff.
+      If approved, Harpe replaces High Horsepower at level 58.

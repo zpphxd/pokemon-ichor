@@ -1,0 +1,155 @@
+line: asclepian
+species:
+
+- dex: 75
+  concept: Temple snakelet
+  name: Ophidrop
+  etymology: ophis (Greek, snake) + drop, a drop of medicine
+  category: Temple Snake
+  types: [Poison]
+  abilities: [Shed Skin, Poison Heal]
+  hidden_ability: Healer
+  base_stats: {hp: 70, atk: 40, def: 50, spa: 45, spd: 60, spe: 35}
+  ev_yield: {hp: 1}
+  exp_yield: 63
+  catch_rate: 120
+  gender: {female_pct: 75}
+  egg_groups: [Field, Fairy]
+  egg_cycles: 20
+  growth_rate: Fast
+  base_friendship: 100
+  height_m: 0.6
+  weight_kg: 2.5
+  myth: >-
+    Athena gave Asclepius the Gorgon's blood. What he drew from her left side
+    was a deadly poison, and what he drew from her right side healed and even
+    raised the dead (Apollodorus 3.10.3). The Greek word pharmakon meant both
+    poison and cure.
+  expression: >-
+    One of the sacred snakes kept in every healing temple, small and gentle.
+    A single drop of its venom is either harm or help, depending on the dose.
+  art: >-
+    Small: it fills about 30×28 px. A slim young snake in three-quarter view
+    facing left, coiled in a loose spiral with its head raised and tilted
+    kindly. A single drop of venom glistens at the tip of one fang, and a
+    tiny sprig of herb is tucked in its coil. Pale olive scales with a
+    marble-white belly, a cypress-dark zigzag down its back, wine-violet
+    venom drop as the Poison accent, black-figure ink outline. The follower
+    rides on the player's shoulder.
+  shiny: Its scales turn sun-gold with a terracotta zigzag.
+  dex_entry:
+    - A drop of its venom can kill or cure.
+    - Healers at the Asclepeion say only the
+    - dose decides, and they keep it in their
+    - gardens to watch over the herbs.
+  habitat: >-
+    The gardens of Astyra's Asclepeion by day; uncommon. Rarely, one is found
+    in the garden of any other Asclepeion.
+  learnset:
+    level_up:
+      - [1, Wrap]
+      - [1, Poison Sting]
+      - [4, Leer]
+      - [7, Acid]
+      - [11, Life Dew]
+      - [15, Clear Smog]
+      - [19, Aromatherapy]
+      - [23, Venoshock]
+      - [26, Coil]
+      - [30, Heal Pulse]
+      - [34, Sludge Bomb]
+      - [38, Toxic]
+      - [42, Wish]
+      - [46, Sludge Wave]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sludge Bomb,
+      Sludge Wave, Venoshock, Toxic Spikes, Acid Spray, Poison Tail, Dazzling Gleam, Draining Kiss,
+      Misty Terrain, Charm, Heal Bell, Helping Hand, Light Screen, Reflect, Safeguard, Calm Mind,
+      Pollen Puff, Iron Tail, Aqua Tail, Thunder Wave, Magic Coat, Pain Split, Psych Up,
+      Alluring Voice, Giga Drain]
+    egg: [Glare, Haze, Refresh, Sweet Kiss, Lucky Chant, Heal Bell]
+  signature: >-
+    It learns Heal Pulse at level 30 and evolves on its next level-up. Poison
+    Heal is the pharmakon itself: poison restores it instead of hurting it.
+  new_move: null
+
+- dex: 76
+  concept: Healer serpent
+  name: Panacoil
+  etymology: panakeia (Greek, cure-all) + coil
+  category: Remedy
+  types: [Poison, Fairy]
+  abilities: [Regenerator, Poison Heal]
+  hidden_ability: Hospitality
+  base_stats: {hp: 135, atk: 45, def: 70, spa: 85, spd: 120, spe: 45}
+  ev_yield: {hp: 2}
+  exp_yield: 190
+  catch_rate: 60
+  gender: {female_pct: 75}
+  egg_groups: [Field, Fairy]
+  egg_cycles: 20
+  growth_rate: Fast
+  base_friendship: 140
+  height_m: 1.8
+  weight_kg: 26.0
+  myth: >-
+    Asclepius's staff has a single serpent coiled around it, and his temples
+    kept sacred snakes. When he raised the dead, Zeus struck him down with a
+    thunderbolt for it (Apollodorus 3.10.3–4).
+  expression: >-
+    The serpent on the staff, grown and coiled for good. It is the nurse of
+    every Asclepeion, poison turned wholly to cure.
+  art: >-
+    Medium: it fills about 40×60 px, tall and narrow. A long serpent in
+    three-quarter view facing left, coiled three times up a knotted wooden
+    staff and resting its head on the top, gazing down with calm, kind eyes.
+    A soft halo of pink light rings the staff's head, and a small hood of
+    pale scales frames its face like a nurse's veil. Pale olive and
+    marble-white scales, limestone staff, wine-violet belly bands as the
+    Poison accent and Fairy-pink halo, black-figure ink outline. The back
+    sprite shows the staff from behind with the tail wrapped at its foot,
+    and the follower carries the staff in its coils.
+  shiny: Sun-gold scales on a marble staff, like a gilded temple offering.
+  dex_entry:
+    - It coils around a staff and tends the
+    - sick all through the night. It is said
+    - its kind once raised the dead, and that
+    - the sky punished it for that kindness.
+  habitat: >-
+    Evolves from Ophidrop once it knows Heal Pulse, which Ophidrop learns at
+    level 30. Every Asclepeion's healer keeps one, and it greets the player
+    at the counter.
+  learnset:
+    level_up:
+      - [0, Draining Kiss]
+      - [1, Wrap]
+      - [1, Poison Sting]
+      - [1, Leer]
+      - [1, Heal Pulse]
+      - [7, Acid]
+      - [11, Life Dew]
+      - [15, Clear Smog]
+      - [19, Aromatherapy]
+      - [23, Venoshock]
+      - [26, Coil]
+      - [32, Misty Terrain]
+      - [35, Sludge Bomb]
+      - [38, Toxic]
+      - [42, Dazzling Gleam]
+      - [46, Wish]
+      - [50, Sludge Wave]
+      - [55, Moonblast]
+      - [60, Healing Wish]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sludge Bomb,
+      Sludge Wave, Venoshock, Toxic Spikes, Acid Spray, Poison Tail, Dazzling Gleam, Draining Kiss,
+      Misty Terrain, Charm, Heal Bell, Helping Hand, Light Screen, Reflect, Safeguard, Calm Mind,
+      Pollen Puff, Iron Tail, Aqua Tail, Thunder Wave, Magic Coat, Pain Split, Psych Up,
+      Alluring Voice, Giga Drain, Hyper Beam, Giga Impact, Psychic, Psyshock, Ally Switch,
+      Skill Swap, Stored Power]
+    egg: []
+  signature: >-
+    The Chansey role: Regenerator, huge HP and Special Defense, and a kit of
+    Wish, Life Dew, Heal Pulse and Aromatherapy. Healing Wish at level 60 is
+    Asclepius's fate, giving its own life to restore another's.
+  new_move: null

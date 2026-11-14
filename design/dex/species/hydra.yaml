@@ -1,0 +1,226 @@
+line: hydra
+species:
+
+- dex: 140
+  concept: Marsh hatchling
+  name: Lernip
+  etymology: Lerna (Greek, the Hydra's marsh) + nip
+  category: Marsh Hatch
+  types: [Dragon, Poison]
+  abilities: [Poison Touch, Shed Skin]
+  hidden_ability: Regenerator
+  base_stats: {hp: 55, atk: 65, def: 45, spa: 50, spd: 40, spe: 45}
+  ev_yield: {atk: 1}
+  exp_yield: 60
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Water 1, Dragon]
+  egg_cycles: 40
+  growth_rate: Slow
+  height_m: 0.6
+  weight_kg: 9.5
+  myth: >-
+    Hera raised the Hydra in the marsh of Lerna, out of hatred for Herakles, to
+    be the death of him (Hesiod, Theogony 313–318).
+  expression: >-
+    The Hydra before it is a hydra: one head, and two lumps on its neck where
+    the next ones are waiting. It hatches only in rain because Lerna's marsh
+    was fed by springs that never ran dry.
+  art: >-
+    Small: it fills about 32×30 px. A stubby marsh serpent hatchling in
+    three-quarter view facing left, crouched low on four short legs with a
+    curl of tail behind and a scrap of eggshell stuck to it. One big head with a
+    wide mouth and two small knobs on its neck where more heads will grow.
+    Cypress-green and olive scales with a limestone belly, a poison-violet
+    accent in its spots and drool, a sun-gold eye, black-figure ink outline. The
+    follower waddles and snaps at flies.
+  shiny: The scales turn Aegean blue and the spots turn sun-gold.
+  dex_entry:
+    - It hatches only after heavy rain, in the
+    - reeds of a still lake. Its one head bites
+    - anything that moves. Two lumps on its
+    - neck are heads that have not woken yet.
+  habitat: >-
+    The reed marshes of Lake Stymphalia, Lakonia, only while it's raining
+    (rare, any time of day). Look in the deepest reeds with the Augur's Eye.
+  learnset:
+    level_up:
+      - [1, Bite]
+      - [1, Poison Gas]
+      - [4, Twister]
+      - [8, Acid]
+      - [12, Poison Fang]
+      - [16, Dragon Breath]
+      - [20, Scary Face]
+      - [24, Scale Shot]
+      - [28, Toxic]
+      - [32, Poison Jab]
+      - [36, Crunch]
+      - [40, Dragon Rush]
+      - [44, Coil]
+      - [48, Gunk Shot]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Venoshock, Sludge Bomb,
+      Poison Jab, Toxic Spikes, Acid Spray, Dragon Pulse, Dragon Tail, Breaking Swipe, Scale Shot,
+      Dragon Claw, Crunch, Snarl, Taunt, Thief, Bulldoze, Dig, Mud Shot, Mud-Slap, Surf, Rain Dance,
+      Aqua Tail, Ice Fang, Fire Fang, Thunder Fang, Iron Tail, Body Slam, Scary Face, Roar]
+    egg: [Venom Drench, Haze, Poison Tail, Mud Bomb, Glare, Double Hit]
+  signature: >-
+    Regenerator from the egg, as a hidden ability: the line is about heads
+    growing back. Scale Shot at 24 gives it a multi-hit Dragon move early.
+  new_move: null
+
+- dex: 141
+  concept: Three-headed hydra
+  name: Trilerna
+  etymology: tri (Greek, three) + Lerna (Greek, the Hydra's marsh)
+  category: Three-Head
+  types: [Dragon, Poison]
+  abilities: [Poison Touch, Shed Skin]
+  hidden_ability: Regenerator
+  base_stats: {hp: 75, atk: 85, def: 65, spa: 70, spd: 60, spe: 65}
+  ev_yield: {atk: 2}
+  exp_yield: 147
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Water 1, Dragon]
+  egg_cycles: 40
+  growth_rate: Slow
+  height_m: 1.9
+  weight_kg: 72.0
+  myth: >-
+    For every head Herakles struck off, two grew back, until his nephew Iolaos
+    burned each stump with a torch before it could sprout (Apollodorus 2.5.2).
+  expression: >-
+    The doubling has started. It has three heads now, and the middle one is
+    larger, with a bud of gold on its brow that hints at the head that can't
+    die.
+  art: >-
+    Medium: it fills about 50×50 px. A heavier marsh serpent in three-quarter
+    view facing left, standing on four clawed legs, with three heads on
+    S-curved necks; the middle head is largest and carries a small sun-gold
+    crest. A fresh stump on one shoulder shows two tiny heads budding from it.
+    Cypress-green and olive scales, a limestone belly, poison-violet spines and
+    venom, sun-gold crest and eyes, black-figure ink outline. The back sprite
+    shows the necks splitting from one trunk.
+  shiny: The scales turn Aegean blue and the crest turns marble white.
+  dex_entry:
+    - Cut off one of its heads and two grow
+    - back from the stump within the hour. Its
+    - breath alone wilts the reeds, so marsh
+    - birds will not nest anywhere near it.
+  habitat: Evolves from Lernip at level 30.
+  learnset:
+    level_up:
+      - [0, Dual Chop]
+      - [1, Bite]
+      - [1, Poison Gas]
+      - [4, Twister]
+      - [8, Acid]
+      - [12, Poison Fang]
+      - [16, Dragon Breath]
+      - [20, Scary Face]
+      - [24, Scale Shot]
+      - [28, Toxic]
+      - [34, Poison Jab]
+      - [38, Crunch]
+      - [42, Dragon Rush]
+      - [46, Coil]
+      - [50, Gunk Shot]
+      - [55, Outrage]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Venoshock, Sludge Bomb,
+      Poison Jab, Toxic Spikes, Acid Spray, Dragon Pulse, Dragon Tail, Breaking Swipe, Scale Shot,
+      Dragon Claw, Crunch, Snarl, Taunt, Thief, Bulldoze, Dig, Mud Shot, Mud-Slap, Surf, Rain Dance,
+      Aqua Tail, Ice Fang, Fire Fang, Thunder Fang, Iron Tail, Body Slam, Scary Face, Roar,
+      Sludge Wave, Gunk Shot, Outrage, Dragon Dance, Dark Pulse, Knock Off, Earthquake,
+      Stomping Tantrum, Waterfall, Flamethrower, Iron Head, Hyper Voice]
+    egg: []
+  signature: >-
+    It learns Dual Chop on evolving, two new heads striking together. Coil at
+    46 is the setup a slow, bulky serpent wants before it reaches its final
+    form.
+  new_move: null
+
+- dex: 142
+  concept: Lernaean Hydra
+  name: Lernathan
+  etymology: Lerna (Greek, the Hydra's marsh) + athanatos (Greek, immortal)
+  category: Hydra
+  types: [Dragon, Poison]
+  abilities: [Poison Touch, Shed Skin]
+  hidden_ability: Regenerator
+  base_stats: {hp: 105, atk: 115, def: 95, spa: 100, spd: 90, spe: 95}
+  ev_yield: {atk: 3}
+  exp_yield: 270
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Water 1, Dragon]
+  egg_cycles: 40
+  growth_rate: Slow
+  height_m: 3.6
+  weight_kg: 230.0
+  myth: >-
+    The Lernaean Hydra had nine heads, and the middle one was immortal.
+    Herakles cut it off, buried it still hissing under a great rock, and dipped
+    his arrows in the Hydra's venom; this was his second Labor (Apollodorus
+    2.5.2).
+  expression: >-
+    The full monster, with the golden head that can't die at its center. It's
+    the second Labor of the post-game and the ace of Olympias, the Serpent Queen,
+    who holds Hera's Dragon seat because Hera raised it.
+  art: >-
+    Largest: it fills the whole 64×64 box. A massive marsh hydra in
+    three-quarter view facing left, crouched in mud on four thick legs with a
+    heavy tail, seven heads rising on long necks in a fan. Six are
+    cypress-green with violet-spined crests, and the seventh, in the middle and
+    raised highest, is solid sun-gold with calm marble eyes. Cypress and olive
+    scales, a limestone belly, poison-violet venom dripping from the jaws,
+    sun-gold center head, black-figure ink outline. The back sprite shows the
+    necks rising from a broad, spined back; the follower's heads look in every
+    direction at once.
+  shiny: The scales turn deep Aegean blue and the golden head turns marble white.
+  dex_entry:
+    - Of all its heads, the golden one in the
+    - middle can never die. An arrow dipped in
+    - its venom never fails. Even the mud of
+    - its tracks is poison for a year.
+  habitat: >-
+    Evolves from Trilerna at level 55. In the post-game Labors, the second
+    Labor sends you to a wild one in the Lake Stymphalia marshes.
+  learnset:
+    level_up:
+      - [0, Recover]
+      - [1, Dual Chop]
+      - [1, Bite]
+      - [1, Poison Gas]
+      - [1, Twister]
+      - [1, Acid]
+      - [12, Poison Fang]
+      - [16, Dragon Breath]
+      - [20, Scary Face]
+      - [24, Scale Shot]
+      - [28, Toxic]
+      - [34, Poison Jab]
+      - [38, Crunch]
+      - [42, Dragon Rush]
+      - [46, Coil]
+      - [50, Gunk Shot]
+      - [54, Sludge Bomb]
+      - [58, Outrage]
+      - [64, Draco Meteor]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Venoshock, Sludge Bomb,
+      Poison Jab, Toxic Spikes, Acid Spray, Dragon Pulse, Dragon Tail, Breaking Swipe, Scale Shot,
+      Dragon Claw, Crunch, Snarl, Taunt, Thief, Bulldoze, Dig, Mud Shot, Mud-Slap, Surf, Rain Dance,
+      Aqua Tail, Ice Fang, Fire Fang, Thunder Fang, Iron Tail, Body Slam, Scary Face, Roar,
+      Sludge Wave, Gunk Shot, Outrage, Dragon Dance, Dark Pulse, Knock Off, Earthquake,
+      Stomping Tantrum, Waterfall, Flamethrower, Iron Head, Hyper Voice, Draco Meteor, Fire Blast,
+      Hydro Pump, Earth Power, Psychic Fangs, Heavy Slam, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    The head that can't die: it learns Recover on evolving and has Regenerator
+    as its hidden ability, so it heals whether it stays in or switches out.
+    Poison Touch on Dual Chop's two contact hits gives each head a chance to
+    poison. A mixed attacker with Coil, Gunk Shot, Outrage and Draco Meteor.
+  new_move: null

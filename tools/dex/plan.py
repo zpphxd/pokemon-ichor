@@ -65,7 +65,8 @@ def describe(evo):
     if m == "friendship_day":
         return "Friendship (day)"
     if m == "held_item":
-        return f"Level up holding {evo['item']}"
+        gate = f" (Lv {evo['level']}+)" if evo.get("level") else ""
+        return f"Level up holding {evo['item']}{gate}"
     if m == "location":
         return f"Level up at {evo['place']}"
     if m == "move":

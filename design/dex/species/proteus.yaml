@@ -1,0 +1,83 @@
+line: proteus
+species:
+
+- dex: 137
+  concept: Old Man of the Sea
+  name: Haligeron
+  etymology: halios geron (Greek, old man of the sea, Homer's name for Proteus)
+  category: Sea Elder
+  types: [Water]
+  abilities: [Protean]
+  hidden_ability: Forewarn
+  base_stats: {hp: 85, atk: 100, def: 85, spa: 70, spd: 90, spe: 65}
+  ev_yield: {atk: 1, spd: 1}
+  exp_yield: 180
+  catch_rate: 30
+  gender: {female_pct: 0}
+  egg_groups: [Water 1, Field]
+  egg_cycles: 30
+  growth_rate: Slow
+  height_m: 1.5
+  weight_kg: 118.0
+  myth: >-
+    Proteus, the Old Man of the Sea, herds Poseidon's seals and naps among them
+    at noon. Menelaus seized him there, and Proteus became a lion, a serpent, a
+    leopard, a boar, running water and a tall tree; but Menelaus held on, and
+    the old god had to tell him the truth (Odyssey 4.351–570).
+  expression: >-
+    The shape-shifter behind the word protean. Protean turns it into the type
+    of the move it uses, and the moves it learns are the shapes it took in
+    Menelaus's grip: lion, serpent, leopard, boar, water and tree.
+  art: >-
+    Medium: it fills about 46×44 px. A stout old sea-elder in three-quarter view
+    facing left, half seal and half old man, propped on its flippers with a long
+    beard of curling sea-foam that becomes a breaking wave at its tip. A heavy
+    brow, one sly half-open eye, and faint outlines of a lion's mane, a scaly
+    coil and a leaf pattern rippling across its hide as if it can't hold one
+    shape. Aegean-blue and pale-blue hide, marble beard and foam, a
+    limestone-tan belly, a sun-gold eye, black-figure ink outline. The follower
+    naps whenever you stand still.
+  shiny: The hide turns marble gray like an old seal's, and the beard sun-gold.
+  dex_entry:
+    - At noon it naps among the seals it herds.
+    - Seize it and it turns to lion, serpent,
+    - boar and water in turn. Hold on until it
+    - tires, and it must tell you your future.
+  habitat: >-
+    The shallows of Atlantis and the islets of the Odyssey, only around noon,
+    asleep among herds of seals (rare). It wakes and dives if you come at it
+    from the front, so approach from behind.
+  learnset:
+    level_up:
+      - [1, Water Gun]
+      - [1, Yawn]
+      - [1, Leer]
+      - [5, Aqua Jet]
+      - [9, Aqua Ring]
+      - [13, Brine]
+      - [17, Camouflage]
+      - [21, Fire Fang]
+      - [25, Dragon Tail]
+      - [29, Sucker Punch]
+      - [33, Stomping Tantrum]
+      - [37, Seed Bomb]
+      - [41, Waterfall]
+      - [45, Future Sight]
+      - [49, Rest]
+      - [53, Liquidation]
+      - [57, Wave Crash]
+      - [61, Wood Hammer]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Surf, Waterfall, Dive,
+      Liquidation, Aqua Tail, Whirlpool, Rain Dance, Scald, Water Pulse, Ice Beam, Icy Wind,
+      Ice Fang, Fire Fang, Thunder Fang, Crunch, Dragon Tail, Seed Bomb, Bullet Seed, Trailblaze,
+      Stomping Tantrum, Earthquake, Bulldoze, High Horsepower, Iron Tail, Zen Headbutt,
+      Psychic Fangs, Future Sight, Psych Up, Calm Mind, Bulk Up, Swords Dance, Knock Off,
+      Sucker Punch, Throat Chop, Taunt, Trick, Body Slam, Iron Head, Haze, Encore, Helping Hand, Snarl]
+    egg: [Slack Off, Belly Drum, Aurora Beam, Hypnosis, Foresight, Mirror Coat]
+  signature: >-
+    Protean turns each of its shapes into a same-type hit: Fire Fang for the
+    lion, Dragon Tail for the serpent, Sucker Punch for the leopard, Stomping
+    Tantrum for the boar, Wood Hammer for the tree. Future Sight is the prophecy
+    it owes whoever holds on.
+  new_move: null

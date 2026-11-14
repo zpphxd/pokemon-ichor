@@ -1,0 +1,152 @@
+line: midas
+species:
+
+- dex: 40
+  concept: Big-eared foal
+  name: Onotis
+  etymology: onos (Greek, donkey) + otis, from ous (Greek, ear)
+  category: Long Ear
+  types: [Normal]
+  abilities: [Own Tempo, Frisk]
+  hidden_ability: Soundproof
+  base_stats: {hp: 60, atk: 60, def: 55, spa: 35, spd: 45, spe: 45}
+  ev_yield: {hp: 1}
+  exp_yield: 60
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.8
+  weight_kg: 32.0
+  myth: >-
+    Apollo gave King Midas a donkey's ears for preferring Pan's pipes to his
+    lyre. Midas hid them under a cap, but his barber whispered the secret into
+    a hole in the ground, and the reeds that grew there whispered it to every
+    wind (Ovid, Metamorphoses 11).
+  expression: >-
+    The ears come first: it is all ears and gangly legs. It hears everything,
+    and like the barber, it can't keep any of it to itself.
+  art: >-
+    Small: it fills about 34×40 px of the box. A gangly foal in three-quarter
+    view facing left, standing splay-legged with its head cocked as if
+    listening. Two enormous upright donkey ears, each nearly as long as its
+    body, with pale insides. A shaggy gray coat with a marble muzzle and belly,
+    a short bristly mane and a tufted tail. Limestone-gray and marble body,
+    terracotta ear insides, dark hooves, black-figure ink outline. The follower
+    swivels its ears toward whoever is talking.
+  shiny: Its coat turns a pale sun-gold, as if Midas had patted it.
+  dex_entry:
+    - It hears a whisper from across a valley,
+    - and it cannot keep one. Old herders say
+    - the reeds by its pasture learned to talk
+    - from listening to it.
+  habitat: >-
+    Common in the grass on Emporion City's outskirts and between the rows of
+    Thyrsa City's vineyards, day and night.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Growl]
+      - [4, Confide]
+      - [7, Double Kick]
+      - [10, Pay Day]
+      - [13, Stomp]
+      - [16, Uproar]
+      - [20, Headbutt]
+      - [24, Covet]
+      - [28, Take Down]
+      - [32, Hyper Voice]
+      - [36, Double-Edge]
+      - [40, Endeavor]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Body Slam, Double-Edge,
+      Take Down, Headbutt, Uproar, Hyper Voice, Echoed Voice, Endeavor, Last Resort, Helping Hand,
+      Work Up, Retaliate, Covet, Thief, Pay Day, Double Kick, Low Kick, Bulldoze, Dig,
+      Stomping Tantrum, Mud-Slap, Iron Tail, Zen Headbutt, Charm, Sunny Day, Rain Dance, Trailblaze,
+      Rock Smash, Strength]
+    egg: [Yawn, Counter, Heal Bell, Rototiller, Lucky Chant, Bide]
+  signature: >-
+    Confide and Uproar come early, because it can't keep a secret. It learns
+    Pay Day for the gold to come, and it evolves when it levels up holding a
+    Nugget at level 25 or above.
+  new_move: null
+
+- dex: 41
+  concept: Golden donkey
+  name: Midonos
+  etymology: Midas (Greek myth, the king with the golden touch) + onos (Greek, donkey)
+  category: Golden Touch
+  types: [Normal, Steel]
+  abilities: [Own Tempo, Heavy Metal]
+  hidden_ability: Good as Gold
+  base_stats: {hp: 90, atk: 100, def: 110, spa: 50, spd: 85, spe: 45}
+  ev_yield: {def: 2}
+  exp_yield: 172
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 1.4
+  weight_kg: 260.0
+  myth: >-
+    Dionysus granted Midas one wish, and he asked that whatever he touched
+    turn to gold, until his bread and wine turned to metal in his mouth.
+    Later Apollo gave him a donkey's ears, which he hid under a Phrygian cap
+    (Ovid, Metamorphoses 11).
+  expression: >-
+    Gold has crept over its hooves and hide, so it is heavy, slow and very
+    pleased with itself. It hides its ears under a Phrygian cap that never
+    quite fits.
+  art: >-
+    Medium: it fills about 50×52 px. A stocky donkey in three-quarter view
+    facing left, chin high and one gilded forehoof raised, smug. Its hooves are
+    solid gold, and gold leaf spreads up its legs and across its back in
+    flaking patches over the gray coat. A floppy Phrygian cap crushes its huge
+    ears flat, with one ear tip poking out of a split seam. Sun-gold leaf with
+    a marble highlight, limestone-gray coat, terracotta cap, black-figure ink
+    outline. The back sprite shows the split seam and the escaping ear.
+  shiny: The gold turns pale silver and the cap Aegean blue.
+  dex_entry:
+    - Everything it nuzzles turns to gold, so
+    - it is always hungry. It hides its huge
+    - ears under a cap and kicks anyone who
+    - stares at them.
+  habitat: >-
+    Evolves from Onotis when it levels up holding a Nugget, at level 25 or above. A few graze
+    Thyrsa City's vineyards at dusk, rarely.
+  learnset:
+    level_up:
+      - [0, Iron Defense]
+      - [1, Tackle]
+      - [1, Growl]
+      - [1, Confide]
+      - [1, Metal Sound]
+      - [7, Double Kick]
+      - [10, Pay Day]
+      - [13, Stomp]
+      - [16, Uproar]
+      - [20, Headbutt]
+      - [22, Gyro Ball]
+      - [24, Covet]
+      - [28, Take Down]
+      - [32, Iron Head]
+      - [34, Hyper Voice]
+      - [38, Heavy Slam]
+      - [42, Double-Edge]
+      - [46, Endeavor]
+      - [52, Body Press]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Body Slam, Double-Edge,
+      Take Down, Headbutt, Uproar, Hyper Voice, Echoed Voice, Endeavor, Last Resort, Helping Hand,
+      Work Up, Retaliate, Covet, Thief, Pay Day, Double Kick, Low Kick, Bulldoze, Dig,
+      Stomping Tantrum, Mud-Slap, Iron Tail, Zen Headbutt, Charm, Sunny Day, Rain Dance, Trailblaze,
+      Rock Smash, Strength, Iron Head, Heavy Slam, Gyro Ball, Iron Defense, Steel Roller, Body Press,
+      Earthquake, High Horsepower, Rock Slide, Rock Tomb, Payback, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Heavy Metal doubles its golden weight for Heavy Slam, and Gyro Ball rewards
+    how slow it is. Its hidden ability, Good as Gold, shrugs off every status
+    move, because gold never tarnishes.
+  new_move: null

@@ -1,0 +1,147 @@
+line: ploutos
+species:
+
+- dex: 57
+  concept: Blind mole
+  name: Spalunk
+  etymology: spalax (Greek, mole) + spelunk
+  category: Blind Mole
+  types: [Ground]
+  abilities: [Pickup, Sand Veil]
+  hidden_ability: Super Luck
+  base_stats: {hp: 50, atk: 58, def: 50, spa: 30, spd: 40, spe: 57}
+  ev_yield: {atk: 1}
+  exp_yield: 56
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.3
+  weight_kg: 4.0
+  myth: >-
+    Ploutos, wealth, was the son of Demeter, born in a thrice-plowed field on
+    Crete (Hesiod, Theogony 969). In Aristophanes's comedy, Zeus has blinded
+    him so he can't tell the good from the wicked, and riches fall on whoever
+    he stumbles into (Aristophanes, Plutus).
+  expression: >-
+    A blind mole that digs at random and turns up whatever it bumps into. It
+    has no idea what any of it is worth.
+  art: >-
+    Small: it fills about 30×26 px. A plump little mole in three-quarter view
+    facing left, half out of its burrow with broad digging paws raised. Its
+    eyes are two closed seams in soft fur, and its long snout twitches. A
+    single coin glints in one paw. Velvety cypress-dark fur with a limestone
+    belly, terracotta paws and snout, a sun-gold coin, black-figure ink
+    outline. The follower bumps into things and digs up items.
+  shiny: Its fur turns pale sun-gold.
+  dex_entry:
+    - It cannot see, so it digs at random and
+    - gives away what it finds to whoever is
+    - nearest, worthy or not.
+  habitat: >-
+    Common in Eleusa Village's fields by day, and in the granaries of the
+    Mystery sanctum below.
+  learnset:
+    level_up:
+      - [1, Scratch]
+      - [1, Sand Attack]
+      - [4, Mud-Slap]
+      - [7, Fury Swipes]
+      - [10, Covet]
+      - [13, Bulldoze]
+      - [16, Stockpile]
+      - [16, Swallow]
+      - [20, Dig]
+      - [24, Fling]
+      - [28, Drill Run]
+      - [32, Recycle]
+      - [36, Earthquake]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Mud Shot, Dig,
+      Bulldoze, Earthquake, Stomping Tantrum, Drill Run, Sandstorm, Sand Tomb, Rock Tomb, Rock Slide,
+      Stealth Rock, Fling, Covet, Thief, Recycle, Body Slam, Take Down, Helping Hand, Endeavor,
+      Fury Cutter, Metal Claw, Shadow Claw, Hone Claws, Rock Smash, Strength, Sunny Day, Charm]
+    egg: [Teeter Dance, Memento, Reversal, Astonish, Sucker Punch, Feint]
+  signature: >-
+    Pickup turns up random items after battle, and its hidden Super Luck makes
+    it lucky in a fight. Stockpile and Swallow let it hoard like a granary.
+  new_move: null
+
+- dex: 58
+  concept: Ploutos
+  name: Plouteras
+  etymology: ploutos (Greek, wealth) + keras (Greek, horn), for the horn of plenty
+  category: Wealth
+  types: [Ground]
+  abilities: [Pickup, Thick Fat]
+  hidden_ability: Super Luck
+  base_stats: {hp: 110, atk: 90, def: 85, spa: 50, spd: 80, spe: 55}
+  ev_yield: {hp: 2}
+  exp_yield: 170
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 1.1
+  weight_kg: 96.0
+  myth: >-
+    The god Ploutos was shown as a child carrying the horn of plenty. In
+    Aristophanes's comedy his sight is healed overnight in a temple of
+    Asclepius, and at last riches go to the honest instead of the wicked
+    (Aristophanes, Plutus).
+  expression: >-
+    The mole grown fat on a full granary, hauling a horn of grain bigger than
+    itself. It is still blind, and it still hands its riches to whoever it
+    meets.
+  art: >-
+    Medium: it fills about 50×48 px. A round, heavy mole in three-quarter view
+    facing left, sitting back on its haunches and hugging an overflowing horn
+    of plenty to its belly. Wheat, figs and a few coins spill from the horn's
+    mouth. Its eyes are still closed seams, with a contented smile under a
+    long snout. Cypress-dark fur with a limestone belly, terracotta paws and
+    snout, a limestone-and-sun-gold horn spilling olive figs and wheat,
+    black-figure ink outline. The follower drops a grain behind it now and
+    then.
+  shiny: Its fur turns sun-gold and its horn marble white.
+  dex_entry:
+    - It hugs a horn full of grain and hands
+    - out the harvest to anyone it bumps into.
+    - It never asks who deserves it.
+  habitat: >-
+    Evolves from Spalunk at level 32. Rare in the granaries of the Mystery
+    sanctum under Eleusa Village.
+  learnset:
+    level_up:
+      - [0, Present]
+      - [1, Scratch]
+      - [1, Sand Attack]
+      - [1, Mud-Slap]
+      - [1, Fury Swipes]
+      - [1, Bestow]
+      - [10, Covet]
+      - [13, Bulldoze]
+      - [16, Stockpile]
+      - [16, Swallow]
+      - [16, Spit Up]
+      - [20, Dig]
+      - [24, Fling]
+      - [28, Drill Run]
+      - [32, Recycle]
+      - [36, Body Slam]
+      - [40, Earthquake]
+      - [44, Wish]
+      - [48, High Horsepower]
+      - [54, Fissure]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Mud Shot, Dig,
+      Bulldoze, Earthquake, Stomping Tantrum, Drill Run, Sandstorm, Sand Tomb, Rock Tomb, Rock Slide,
+      Stealth Rock, Fling, Covet, Thief, Recycle, Body Slam, Take Down, Helping Hand, Endeavor,
+      Fury Cutter, Metal Claw, Shadow Claw, Hone Claws, Rock Smash, Strength, Sunny Day, Charm,
+      High Horsepower, Bullet Seed, Heavy Slam, Body Press, Superpower, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Present on evolving: a gift that heals or hurts, at random. Bestow and
+    Fling hand out its items blindly, and Pickup keeps the horn full.
+  new_move: null

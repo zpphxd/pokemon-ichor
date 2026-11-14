@@ -1,0 +1,248 @@
+line: moirai
+species:
+
+- dex: 143
+  concept: The Spinner
+  name: Nemira
+  etymology: nema (Greek, thread) + Moira (Greek, Fate)
+  category: Birth
+  types: [Psychic, Fairy]
+  abilities: [Levitate]
+  hidden_ability: Triage
+  base_stats: {hp: 90, atk: 60, def: 115, spa: 80, spd: 130, spe: 105}
+  ev_yield: {def: 1, spd: 2}
+  exp_yield: 300
+  catch_rate: 3
+  gender: {female_pct: 100}
+  egg_groups: [Undiscovered]
+  egg_cycles: 80
+  growth_rate: Slow
+  base_friendship: 35
+  height_m: 0.9
+  weight_kg: 11.0
+  myth: >-
+    The three Moirai, the Fates, allot every mortal a share of good and ill at
+    birth (Hesiod, Theogony 217–222, 904–906). Klotho, the Spinner, spins each
+    life's thread from her distaff, and in Plato she sings of the things that
+    are (Republic 10.617b–c).
+  expression: >-
+    The first of the three sisters: the moment a thread begins. It is the
+    gentlest of the trio and the hardest to wear down, because whatever is
+    spun can be spun again.
+  art: >-
+    Medium: it fills about 40×52 px. A small floating maiden in three-quarter
+    view facing left, drawn like a figure on a black-figure vase, in a long
+    pleated chiton with her hair bound up by a band of thread. She holds a
+    distaff wound with fleece in one hand and lets a spindle twirl below the
+    other. A single glowing thread runs from her breast off the right edge of
+    the sprite, toward the Loom, and a broken bronze shackle with two links
+    hangs from her left wrist. The trio's shared look: marble skin, black-figure
+    ink outline, a pale psychic-pink glow at the brow; hers is a marble-white
+    chiton with a sun-gold thread and a soft Fairy-pink hem. The follower
+    floats, and its thread trails behind.
+  shiny: The chiton turns pale Aegean blue and the thread turns silver.
+  dex_entry:
+    - It spins a new thread the moment a life
+    - begins. It is said that a baby who laughs
+    - in its sleep has felt that thread tug.
+    - For ages its hands were chained.
+  habitat: >-
+    Chained at the Loom of Fate under Delphoi until you cut the Fates free.
+    In the Frozen Hour it waits at Elaia's festival shrine, where the island
+    priestess reads each youth's thread. You rouse it there, and once time
+    flows again it stays to be caught (static, level 50, one only).
+  learnset:
+    level_up:
+      - [1, Confusion]
+      - [1, Rest]
+      - [1, String Shot]
+      - [1, Fairy Wind]
+      - [7, Imprison]
+      - [14, Draining Kiss]
+      - [21, Wish]
+      - [28, Extrasensory]
+      - [35, Future Sight]
+      - [42, Sticky Web]
+      - [49, Dazzling Gleam]
+      - [56, Psychic]
+      - [63, Calm Mind]
+      - [70, Moonblast]
+      - [77, Healing Wish]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Psychic, Psyshock,
+      Psych Up, Calm Mind, Future Sight, Zen Headbutt, Expanding Force, Psychic Terrain, Trick,
+      Skill Swap, Ally Switch, Light Screen, Reflect, Safeguard, Magic Room, Wonder Room, Gravity,
+      Thunder Wave, Dream Eater, Swift, Helping Hand, Magic Coat, Shadow Ball, Energy Ball,
+      Grass Knot, Charge Beam, Signal Beam, Rain Dance, Sunny Day, Recycle, Stored Power, Hyper Beam,
+      Giga Impact, Dazzling Gleam, Draining Kiss, Misty Terrain, Charm, Disarming Voice,
+      Alluring Voice, Baton Pass, Heal Bell, Mystical Fire, Psychic Noise, Pollen Puff, Bug Buzz,
+      Icy Wind, Giga Drain, Nasty Plot]
+    egg: []
+  signature: >-
+    The defensive one of the trio. It spins: String Shot at level 1 and Sticky
+    Web at 42 lay its thread across the field. Wish, Draining Kiss and Healing
+    Wish are new life, and Triage puts its healing first.
+  new_move: null
+
+- dex: 144
+  concept: The Allotter
+  name: Lotira
+  etymology: lot + Moira (Greek, Fate; literally a share or portion)
+  category: Lifespan
+  types: [Psychic, Normal]
+  abilities: [Levitate]
+  hidden_ability: Unaware
+  base_stats: {hp: 97, atk: 97, def: 97, spa: 97, spd: 97, spe: 97}
+  ev_yield: {hp: 1, atk: 1, spa: 1}
+  exp_yield: 300
+  catch_rate: 3
+  gender: {female_pct: 100}
+  egg_groups: [Undiscovered]
+  egg_cycles: 80
+  growth_rate: Slow
+  base_friendship: 35
+  height_m: 1.0
+  weight_kg: 13.0
+  myth: >-
+    Lachesis, the Allotter, measures out each thread and assigns every life its
+    lot. In Plato's vision of the Spindle of Necessity she casts the lots for
+    souls about to be born and sings of the things that were (Republic
+    10.617b–618b).
+  expression: >-
+    The middle of the thread: a life, measured. Every one of its stats is the
+    same, because the Allotter gives no part of itself more than its share.
+  art: >-
+    Medium: it fills about 42×54 px, a little taller than its sisters. The same
+    floating vase-painting maiden in three-quarter view facing left, in a
+    pleated chiton with her hair bound by thread, holding a long measuring rod
+    marked with notches upright like a staff, a loop of thread pulled taut
+    along it. Her glowing thread runs off the right edge toward the Loom, and a
+    broken bronze shackle hangs from her left wrist. Marble skin, black-figure
+    ink outline and the trio's pale psychic-pink brow glow; hers is a
+    limestone chiton with an olive border and a marble-silver thread. The
+    follower holds its rod out level, as if measuring the path.
+  shiny: The chiton turns sun-gold and the thread turns terracotta red.
+  dex_entry:
+    - It measures each thread with its rod and
+    - sets how long that life will run. It has
+    - never given anyone more than their share,
+    - and never one breath less.
+  habitat: >-
+    Chained at the Loom of Fate under Delphoi until you cut the Fates free.
+    In the Frozen Hour it waits at the Pool of Mnemosyne, Arkadia, where the
+    memory of every life is kept. You rouse it there, and once time flows again
+    it stays to be caught (static, level 50, one only).
+  learnset:
+    level_up:
+      - [1, Confusion]
+      - [1, Rest]
+      - [1, Bind]
+      - [1, Swift]
+      - [7, Imprison]
+      - [14, Psybeam]
+      - [21, Pain Split]
+      - [28, Extrasensory]
+      - [35, Future Sight]
+      - [42, Guard Split]
+      - [42, Power Split]
+      - [56, Psychic]
+      - [63, Tri Attack]
+      - [70, Hyper Voice]
+      - [77, Endeavor]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Psychic, Psyshock,
+      Psych Up, Calm Mind, Future Sight, Zen Headbutt, Expanding Force, Psychic Terrain, Trick,
+      Skill Swap, Ally Switch, Light Screen, Reflect, Safeguard, Magic Room, Wonder Room, Gravity,
+      Thunder Wave, Dream Eater, Swift, Helping Hand, Magic Coat, Shadow Ball, Energy Ball,
+      Grass Knot, Charge Beam, Signal Beam, Rain Dance, Sunny Day, Recycle, Stored Power, Hyper Beam,
+      Giga Impact, Hyper Voice, Body Slam, Double-Edge, Tri Attack, Last Resort, Work Up,
+      Echoed Voice, Uproar, Pain Split, Thunderbolt, Ice Beam, Flamethrower, Focus Blast,
+      Stomping Tantrum, Iron Tail, Endeavor, Super Fang, Encore, Role Play]
+    egg: []
+  signature: >-
+    The balanced one: 97 in every stat. Pain Split, Guard Split, Power Split and
+    Endeavor all divide shares evenly, and Unaware means a foe's boosts never
+    change the lot it was given.
+  new_move: null
+
+- dex: 145
+  concept: The Cutter
+  name: Thanira
+  etymology: thanatos (Greek, death) + Moira (Greek, Fate)
+  category: Death
+  types: [Psychic, Ghost]
+  abilities: [Levitate]
+  hidden_ability: Sharpness
+  base_stats: {hp: 75, atk: 130, def: 65, spa: 120, spd: 65, spe: 125}
+  ev_yield: {atk: 2, spe: 1}
+  exp_yield: 300
+  catch_rate: 3
+  gender: {female_pct: 100}
+  egg_groups: [Undiscovered]
+  egg_cycles: 80
+  growth_rate: Slow
+  base_friendship: 35
+  height_m: 0.9
+  weight_kg: 10.5
+  myth: >-
+    Atropos, "the unturnable", cuts each thread when its measure is reached,
+    and no god can undo her cut. In Plato she sings of the things that are to
+    be, and makes the threads that are spun irreversible (Republic
+    10.617c–620e).
+  expression: >-
+    The end of the thread. It is the fastest and most dangerous of the three,
+    but not cruel: it only finishes what its sisters began.
+  art: >-
+    Medium: it fills about 40×52 px. The same floating vase-painting maiden in
+    three-quarter view facing left, hair bound by thread, but her chiton is
+    solid black-figure ink with a terracotta key-pattern border, as if she were
+    painted in silhouette. She holds a pair of long bronze shears half open,
+    and her glowing thread ends in a clean cut just past the blades. A broken
+    bronze shackle hangs from her left wrist. Marble skin, black-figure ink
+    outline and the trio's pale psychic-pink brow glow, with a pale violet
+    Ghost accent on the cut end of the thread. The follower snips the air now
+    and then.
+  shiny: The chiton turns marble white and the shears turn silver.
+  dex_entry:
+    - Its shears cut the thread at the end of
+    - every life, and nothing can turn them
+    - aside. It does not hate the living. It
+    - only keeps the promise its sisters made.
+  habitat: >-
+    Chained at the Loom of Fate under Delphoi until you cut the Fates free.
+    In the Frozen Hour it waits at Kaldera's forge, where you learned the Harpe
+    can cut what the Fates have woven. You rouse it there, and once time flows
+    again it stays to be caught (static, level 50, one only).
+  learnset:
+    level_up:
+      - [1, Confusion]
+      - [1, Rest]
+      - [1, Fury Cutter]
+      - [1, Astonish]
+      - [7, Imprison]
+      - [14, Shadow Sneak]
+      - [21, Psycho Cut]
+      - [28, Extrasensory]
+      - [35, Future Sight]
+      - [42, Night Slash]
+      - [49, X-Scissor]
+      - [56, Destiny Bond]
+      - [63, Phantom Force]
+      - [70, Perish Song]
+      - [77, Guillotine]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Psychic, Psyshock,
+      Psych Up, Calm Mind, Future Sight, Zen Headbutt, Expanding Force, Psychic Terrain, Trick,
+      Skill Swap, Ally Switch, Light Screen, Reflect, Safeguard, Magic Room, Wonder Room, Gravity,
+      Thunder Wave, Dream Eater, Swift, Helping Hand, Magic Coat, Shadow Ball, Energy Ball,
+      Grass Knot, Charge Beam, Signal Beam, Rain Dance, Sunny Day, Recycle, Stored Power, Hyper Beam,
+      Giga Impact, Shadow Claw, Phantom Force, Poltergeist, Hex, Will-O-Wisp, X-Scissor, Psycho Cut,
+      Swords Dance, Knock Off, Sucker Punch, Throat Chop, Spite, Curse, Pain Split, Dark Pulse,
+      Taunt, Torment, Night Shade, Aerial Ace, Air Slash, False Swipe, Cut, Leaf Blade, Foul Play,
+      Payback, Nasty Plot]
+    egg: []
+  signature: >-
+    The offensive one. Sharpness boosts its cutting moves (Fury Cutter, Psycho
+    Cut, Night Slash, X-Scissor), and the shears close with Destiny Bond, Perish
+    Song and finally Guillotine.
+  new_move: null

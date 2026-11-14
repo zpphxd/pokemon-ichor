@@ -1,0 +1,81 @@
+line: laelaps
+species:
+
+- dex: 68
+  concept: Storm-hound
+  name: Skylaps
+  etymology: skylax (Greek, hound) + lailaps (Greek, storm-wind)
+  category: Storm Hound
+  types: [Electric]
+  abilities: [No Guard]
+  hidden_ability: Stakeout
+  base_stats: {hp: 70, atk: 100, def: 60, spa: 90, spd: 60, spe: 110}
+  ev_yield: {atk: 1, spe: 1}
+  exp_yield: 175
+  catch_rate: 45
+  gender: {female_pct: 0}
+  egg_groups: [Field]
+  egg_cycles: 30
+  growth_rate: Slow
+  base_friendship: 70
+  height_m: 1.1
+  weight_kg: 30.0
+  myth: >-
+    Laelaps, whose name means storm-wind, was a hound fated to catch whatever
+    it chased. It was set on the Teumessian vixen, fated never to be caught,
+    and Zeus ended the paradox by turning both to stone and setting them among
+    the stars (Apollodorus 2.4.7; Ovid, Metamorphoses 7).
+  expression: >-
+    The half of the paradox that always catches. It is built as the vixen's
+    mirror image: the same lean frame in the same stride, light where she is
+    dark, its nose always on her trail.
+  art: >-
+    Medium: it fills about 54×44 px, the same frame as Kerdovix. A lean,
+    long-legged hound in three-quarter view facing left, stretched mid-stride
+    with its head low and its nose pointing forward along the trail. Its ears
+    are two swept-back tufts of thundercloud, and a jagged bolt runs down its
+    spine to the tip of its tail. Its hind paws are turning to gray stone.
+    Marble and pale Aegean-blue storm-gray coat, deep Aegean-blue cloud ears,
+    sun-gold lightning as the Electric accent, black-figure ink outline. The
+    follower always walks one step ahead of the player.
+  shiny: The coat darkens to black-figure ink with marble-white lightning, so it matches the vixen's normal colors.
+  dex_entry:
+    - It was fated to catch anything it
+    - chases, and its bolts never miss. Yet
+    - one Kerdovix has fled it for an age,
+    - and it has never once drawn closer.
+  habitat: >-
+    Roams Arkadia's routes by day and night once the player holds the fifth
+    laurel. Unlike other roamers it never flees: when it appears, it gives
+    chase.
+  learnset:
+    level_up:
+      - [1, Thunder Shock]
+      - [1, Leer]
+      - [1, Lock-On]
+      - [5, Quick Attack]
+      - [9, Odor Sleuth]
+      - [13, Spark]
+      - [17, Pursuit]
+      - [21, Thunder Fang]
+      - [25, Mean Look]
+      - [29, Shock Wave]
+      - [33, Crunch]
+      - [37, Wild Charge]
+      - [41, Thunder]
+      - [45, Supercell Slam]
+      - [50, Zap Cannon]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Thunderbolt, Thunder,
+      Thunder Wave, Charge Beam, Charge, Wild Charge, Thunder Fang, Fire Fang, Ice Fang,
+      Psychic Fangs, Crunch, Rain Dance, Electric Terrain, Eerie Impulse, Electroweb, Shock Wave,
+      Rising Voltage, Zap Cannon, Supercell Slam, Agility, Roar, Iron Tail, Dig, Swift, Aerial Ace,
+      Take Down, Double-Edge, Body Slam, Hyper Voice, Snarl, Work Up, Endeavor, Super Fang,
+      Retaliate, Trailblaze, Hyper Beam, Giga Impact]
+    egg: [Howl, Fire Fang, Ice Fang, Charge]
+  signature: >-
+    No Guard: nothing it uses ever misses, so Zap Cannon and Thunder always
+    land. Lock-On, Odor Sleuth, Mean Look and Pursuit make sure prey can't
+    hide or run. It learns no evasion or retreating moves at all: no Double
+    Team, no Volt Switch. Its Speed equals the vixen's exactly.
+  new_move: null

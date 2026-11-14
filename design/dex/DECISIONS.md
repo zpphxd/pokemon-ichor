@@ -28,3 +28,34 @@ Plan: `design/dex/PLAN.md` (generated from `plan.yaml`). Review page: https://cl
 | D6 | Post-game Labors use regional species where one exists | Yes | Open |
 
 D2, D3, D4 and D6 don't block Gate 2. The entries for those species are written either way, and the open questions are about where they go in the story.
+
+## Gate 2: the full entries
+
+All 150 entries are in `design/dex/species/*.yaml`, and `tools/dex/validate.py --complete` passes them with no errors or warnings. Review page: https://claude.ai/artifact/D4PXiuRijZf2Sdubr9QADh
+
+Choices made in review, which the user can overrule:
+- **Borrowed signature moves.** Existing species also live in Aethos, so other Pokémon's signature moves were swapped for generic ones. Six were kept because the myth depends on them:
+  - Kronolith: Roar of Time, and Mighty Cleave as a stand-in until Harpe exists.
+  - Elpimoth: Revival Blessing.
+  - Kairazor: Esper Wing.
+  - Hoplektor: No Retreat.
+  - Geogrip: Shore Up.
+- **Stat and ability changes.**
+  - The Archon's ace, Aetarch, got its own stat band and went up to 530 BST.
+  - The Midas donkey's Nugget evolution needs level 25 or above.
+  - The theater mask's hidden ability went from Moody to Cursed Body.
+
+Waiting on the user:
+
+| # | Question | Recommendation | Answer |
+|---|---|---|---|
+| — | Approve the 150 entries, or name the ones to change | — | pending |
+| D7 | New move **Harpe** for Kronolith: Ground, physical, 100 power, hits through Protect and Substitute. It costs one new move and an animation. | Yes: the story spends two acts rebuilding the Harpe | pending |
+| D8 | New move **Shield Clash** for the Kouretes line: Steel, special sound move, 80 power, stops the target using sound moves for two turns. It costs one new move and an animation. | Optional: Steel moves already cover the role | pending |
+| D9 | Call the title mythical **Ichorin** (coined) or plain **Ichor** | Ichorin, matching the other coined names | pending |
+
+Map and encounter notes for whoever builds the areas:
+- The Spring of Kallirhoe drains into Echo's sea caves.
+- Relic Copper must be obtainable somewhere for Charonaut to evolve.
+- Victory Road's wild levels should stay under 40, or the wild eagle, north-wind and ice lines will evolve on their first level-up.
+- The Hydra's line is named from Lerna, though it lives at Lake Stymphalia as the plan says.

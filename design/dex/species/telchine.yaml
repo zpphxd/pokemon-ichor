@@ -1,0 +1,147 @@
+line: telchine
+species:
+
+- dex: 85
+  concept: Smith pup
+  name: Telpup
+  etymology: Telchis (Greek, one of the Telchines) + pup
+  category: Smith Pup
+  types: [Water]
+  abilities: [Thick Fat, Steelworker]
+  hidden_ability: Sharpness
+  base_stats: {hp: 55, atk: 64, def: 58, spa: 42, spd: 48, spe: 43}
+  ev_yield: {atk: 1}
+  exp_yield: 62
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Water 1, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.5
+  weight_kg: 14.0
+  myth: >-
+    The Telchines were flippered sea-spirits of Rhodes and the first workers of
+    bronze and iron. They forged Poseidon's trident and the adamant sickle that
+    Kronos used on Ouranos (Strabo 14.2.7).
+  expression: >-
+    A seal pup with the first smith's hammer. It beats out the same curved shape
+    again and again without knowing why.
+  art: >-
+    Small: it fills about 34×30 px. A round seal pup in three-quarter view
+    facing left, sitting up on its front flippers. One flipper grips a tiny
+    stone hammer and the other holds a pebble. Big wet eyes, whiskers and a
+    smudge of soot on its nose. Aegean-blue back, marble belly, limestone
+    hammer, black-figure ink outline. The follower taps the ground with its
+    hammer whenever it stops.
+  shiny: Its coat turns silver-gray and its hammer turns sun-gold.
+  dex_entry:
+    - It taps pebbles on the black sand with a
+    - tiny hammer. Its kind were the first
+    - smiths, and even the youngest beat out
+    - the same curved shape, over and over.
+  habitat: >-
+    Common by day on Kaldera's black-sand shores, tapping at pebbles along the
+    tide line. More turn up in the shallows when fishing.
+  learnset:
+    level_up:
+      - [1, Water Gun]
+      - [1, Growl]
+      - [4, Metal Claw]
+      - [8, Aqua Jet]
+      - [12, Rock Smash]
+      - [17, Razor Shell]
+      - [21, Iron Defense]
+      - [25, Metal Sound]
+      - [29, Aqua Tail]
+      - [33, Hone Claws]
+      - [37, Iron Head]
+      - [41, Liquidation]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Rain Dance, Hail,
+      Snowscape, Surf, Waterfall, Dive, Whirlpool, Brine, Water Pulse, Liquidation,
+      Chilling Water, Ice Beam, Icy Wind, Ice Fang, Iron Defense, Iron Head, Metal Claw,
+      Flash Cannon, Gyro Ball, Rock Smash, Rock Tomb, Brick Break, Body Slam, Take Down,
+      Helping Hand, Fling, Knock Off, Hone Claws, Thief, Endeavor, Swords Dance, Bulk Up,
+      Aerial Ace, Fury Cutter, Mud-Slap]
+    egg: [Belly Drum, Fake Out, Ice Shard, Curse, Slack Off, Night Slash]
+  signature: >-
+    Steelworker powers up Metal Claw from level 4, though it isn't Steel type
+    yet. Hone Claws teaches it to put an edge on things.
+  new_move: null
+
+- dex: 86
+  concept: Telchine smith
+  name: Telkanvil
+  etymology: Telchis (Greek, one of the Telchines) + anvil
+  category: Sea Smith
+  types: [Water, Steel]
+  abilities: [Thick Fat, Steelworker]
+  hidden_ability: Sharpness
+  base_stats: {hp: 80, atk: 110, def: 100, spa: 70, spd: 85, spe: 55}
+  ev_yield: {atk: 2}
+  exp_yield: 180
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Water 1, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.6
+  weight_kg: 172.0
+  myth: >-
+    The Telchines forged the adamant sickle, the Harpe, that Kronos used to
+    overthrow Ouranos. They were also feared as jealous sorcerers who hoarded
+    their craft (Strabo 14.2.7).
+  expression: >-
+    A master smith whose back is the anvil. The curved blank glowing in its tongs
+    is the shape of the Harpe.
+  art: >-
+    Large: it fills about 54×52 px. A broad, upright seal-smith in three-quarter
+    view facing left. Its back shell is shaped like a black anvil, one flipper
+    holds tongs gripping a glowing, sickle-curved blank, and the other holds a
+    hammer. A heavy brow, long whiskers like a smith's beard and a leather
+    apron. Aegean-blue and marble body, terracotta apron, anvil in ink and
+    marble-gray, sun-gold glowing blank, black-figure ink outline. The back
+    sprite shows the anvil shell.
+  shiny: Its coat turns silver-gray and its anvil shell turns bronze.
+  dex_entry:
+    - Its shell is an anvil. Long ago its kind
+    - forged a sea god's trident and a sickle
+    - of adamant for a Titan. It will not say
+    - where the sickle went.
+  habitat: >-
+    Evolves from Telpup at level 34. Uncommon in Kaldera's sea caves, reached by
+    surfing. The oldest keep their forges in the deepest cave and won't show
+    their work to anyone.
+  learnset:
+    level_up:
+      - [0, Smart Strike]
+      - [1, Water Gun]
+      - [1, Growl]
+      - [1, Metal Claw]
+      - [1, Aqua Jet]
+      - [12, Rock Smash]
+      - [17, Razor Shell]
+      - [21, Iron Defense]
+      - [25, Metal Sound]
+      - [29, Aqua Tail]
+      - [33, Hone Claws]
+      - [39, Iron Head]
+      - [44, Liquidation]
+      - [49, Crabhammer]
+      - [54, Hammer Arm]
+      - [59, Heavy Slam]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Rain Dance, Hail,
+      Snowscape, Surf, Waterfall, Dive, Whirlpool, Brine, Water Pulse, Liquidation,
+      Chilling Water, Ice Beam, Icy Wind, Ice Fang, Iron Defense, Iron Head, Metal Claw,
+      Flash Cannon, Gyro Ball, Rock Smash, Rock Tomb, Brick Break, Body Slam, Take Down,
+      Helping Hand, Fling, Knock Off, Hone Claws, Thief, Endeavor, Swords Dance, Bulk Up,
+      Aerial Ace, Fury Cutter, Mud-Slap, Hyper Beam, Giga Impact, Hydro Pump, Steel Beam,
+      Heavy Slam, Smart Strike, Superpower, Rock Slide, Earthquake, Iron Tail, Body Press,
+      Stealth Rock, Flip Turn, Avalanche]
+    egg: []
+  signature: >-
+    Sharpness, its hidden ability, boosts Razor Shell, Night Slash and Fury
+    Cutter: the edge its kind once put on the Harpe. Crabhammer is the smith's
+    blow.
+  new_move: null

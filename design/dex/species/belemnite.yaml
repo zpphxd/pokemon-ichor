@@ -1,0 +1,150 @@
+line: belemnite
+species:
+
+- dex: 107
+  concept: Dart fossil revived
+  name: Sepidart
+  etymology: sepia (Greek, cuttlefish) + dart, which is what belemnon means
+  category: Thunderstone
+  types: [Rock, Electric]
+  abilities: [Lightning Rod, Battle Armor]
+  hidden_ability: Electromorphosis
+  base_stats: {hp: 55, atk: 45, def: 85, spa: 85, spd: 55, spe: 40}
+  ev_yield: {spa: 1}
+  exp_yield: 70
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Water 1, Water 3]
+  egg_cycles: 30
+  growth_rate: Slow
+  height_m: 0.5
+  weight_kg: 11.0
+  myth: >-
+    Belemnites, extinct relatives of the squid, left bullet-shaped fossils
+    named from belemnon, the Greek for dart. Pliny wrote of ceraunia,
+    thunderstones found where lightning struck (Natural History 37), and for
+    centuries people took belemnites for such fallen thunderbolts.
+  expression: >-
+    A small squid revived from its fossil guard, with the bullet-shaped stone
+    still on its back like a sheath. The guard soaks up lightning and holds
+    it, as the old thunderstones were said to.
+  art: >-
+    Small: it fills about 36×32 px. A small squid in three-quarter view facing
+    left, hovering with its short arms curled under it. A long bullet-shaped
+    stone guard runs back from its head like a dart, tipped with a bright
+    spark. Big round eyes and ten stubby arms with tiny hooks. Limestone and
+    marble stone guard, an Aegean-blue body, sun-gold sparks, black-figure ink
+    outline. The follower floats along with little crackles.
+  shiny: The stone guard turns cypress-dark and its body terracotta red.
+  dex_entry:
+    - The stone dart on its back soaks up
+    - lightning. Farmers once kept its fossils
+    - in their roofs, believing that no bolt
+    - would strike the same stone twice.
+  habitat: >-
+    Revived from the Dart Fossil dug at Knossa Isle, in Daedalus's workshop.
+    You choose one of the two fossils; the other turns up in post-game
+    Atlantis. It isn't found in the wild.
+  learnset:
+    level_up:
+      - [1, Wrap]
+      - [1, Thunder Shock]
+      - [1, Harden]
+      - [5, Charge]
+      - [9, Rock Throw]
+      - [13, Shock Wave]
+      - [17, Spike Cannon]
+      - [21, Ancient Power]
+      - [25, Charge Beam]
+      - [29, Iron Defense]
+      - [33, Discharge]
+      - [37, Power Gem]
+      - [41, Thunderbolt]
+      - [45, Rock Polish]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Rain Dance, Sandstorm,
+      Electric Terrain, Thunder Wave, Thunderbolt, Thunder, Volt Switch, Charge Beam, Shock Wave,
+      Electroweb, Eerie Impulse, Magnet Rise, Rising Voltage, Rock Tomb, Rock Slide, Rock Blast,
+      Smack Down, Stealth Rock, Power Gem, Meteor Beam, Iron Defense, Flash Cannon, Surf, Water Pulse,
+      Ice Beam, Blizzard, Dive, Whirlpool, Swift]
+    egg: [Aqua Jet, Smokescreen, Haze, Flail, Supersonic, Brine]
+  signature: >-
+    Lightning Rod draws Electric moves into its stone guard and raises its Sp.
+    Atk. Charge and Charge Beam start it storing power early.
+  new_move: null
+
+- dex: 108
+  concept: Thunderbolt squid
+  name: Sepivolt
+  etymology: sepia (Greek, cuttlefish) + volt
+  category: Thunderbolt
+  types: [Rock, Electric]
+  abilities: [Lightning Rod, Battle Armor]
+  hidden_ability: Electromorphosis
+  base_stats: {hp: 80, atk: 60, def: 95, spa: 125, spd: 80, spe: 75}
+  ev_yield: {spa: 2}
+  exp_yield: 180
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Water 1, Water 3]
+  egg_cycles: 30
+  growth_rate: Slow
+  height_m: 1.9
+  weight_kg: 86.0
+  myth: >-
+    Belemnite darts were long taken for thunderbolts fallen from the sky. The
+    Greeks' thunderbolt, Zeus's keraunos, was forged for him by the Cyclopes
+    Brontes, Steropes and Arges (Hesiod, Theogony 139–146).
+  expression: >-
+    The revived belemnite grown into a long, fast thunder-squid. Its stone
+    guard is now a spear-like point, and it fires spare dart-tips as charged
+    bolts.
+  art: >-
+    Large: it fills about 58×44 px. A long, streamlined squid in three-quarter
+    view facing left, angled upward as if launching, with a spear-like stone
+    guard behind it and its fins spread. Ten hooked arms trail beneath, the
+    two longest crackling with sparks, and a row of spare stone darts sits
+    along its back like a quiver. Limestone and marble stone, an Aegean-blue
+    body with a paler belly, sun-gold lightning arcs, black-figure ink outline.
+    The back sprite shows the dart quiver; the follower leaves small sparks as
+    it swims through the air.
+  shiny: A cypress-dark stone guard and a terracotta-red body, like Sepidart's.
+  dex_entry:
+    - It fires stone darts charged with
+    - lightning from the tip of its tail. The
+    - spent darts lie where they land, and
+    - people call them thunderstones.
+  habitat: Evolves from Sepidart at level 39. It isn't found in the wild.
+  learnset:
+    level_up:
+      - [0, Lock-On]
+      - [1, Wrap]
+      - [1, Thunder Shock]
+      - [1, Harden]
+      - [5, Charge]
+      - [9, Rock Throw]
+      - [13, Shock Wave]
+      - [17, Spike Cannon]
+      - [21, Ancient Power]
+      - [25, Charge Beam]
+      - [29, Iron Defense]
+      - [33, Discharge]
+      - [37, Power Gem]
+      - [42, Thunderbolt]
+      - [46, Rock Polish]
+      - [50, Meteor Beam]
+      - [54, Thunder]
+      - [58, Zap Cannon]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Rain Dance, Sandstorm,
+      Electric Terrain, Thunder Wave, Thunderbolt, Thunder, Volt Switch, Charge Beam, Shock Wave,
+      Electroweb, Eerie Impulse, Magnet Rise, Rising Voltage, Rock Tomb, Rock Slide, Rock Blast,
+      Smack Down, Stealth Rock, Power Gem, Meteor Beam, Iron Defense, Flash Cannon, Surf, Water Pulse,
+      Ice Beam, Blizzard, Dive, Whirlpool, Swift, Zap Cannon, Stone Edge, Wild Charge, Hyper Beam,
+      Giga Impact]
+    egg: []
+  signature: >-
+    It learns Lock-On on evolving and Zap Cannon last, so its slowest,
+    strongest shot never misses. Lightning Rod and Electromorphosis both turn
+    incoming lightning into power.
+  new_move: null
