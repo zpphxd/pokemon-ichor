@@ -34,10 +34,10 @@
     {
       "local_id": "LOCALID_ROUTE1_CARTER",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
-      "x": 16,
-      "y": 56,
+      "x": 17,
+      "y": 57,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -47,8 +47,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(MUDBRAY)",
-      "x": 18,
-      "y": 57,
+      "x": 17,
+      "y": 56,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -86,7 +86,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
-      "x": 6,
+      "x": 4,
       "y": 46,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
@@ -152,7 +152,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
       "x": 7,
-      "y": 24,
+      "y": 25,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -302,7 +302,7 @@
     },
     {
       "type": "sign",
-      "x": 10,
+      "x": 11,
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -310,8 +310,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 6,
-      "y": 24,
+      "x": 4,
+      "y": 25,
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
       "flag": "FLAG_ICHOR_HIDDEN_ROUTE1_ORAN_BERRY"

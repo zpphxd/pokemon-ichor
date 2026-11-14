@@ -245,10 +245,11 @@ local function main()
   local kx, ky = pos()
   expect(kx == 0 and ky == 17, string.format("the spur meets the hill foot (at %d,%d)", kx, ky))
   shot("16_hill_foot.png")
-  r = walkTo({ { 3, 17 }, { 3, 14 }, { 5, 14 }, { 5, 13 } })
+  -- Up the lower stair (6,15), east along the shelf, up the upper stair (13,11).
+  r = walkTo({ { 6, 17 }, { 6, 13 }, { 13, 13 }, { 13, 11 } })
   expect(r == "moved", "the stairs climb to the summit")
   shot("17_summit_before.png")
-  r = walkTo({ { 5, 12 }, { 5, 11 } })
+  r = walkTo({ { 13, 10 } })
   expect(r == "taken", "the summit scene starts at the top of the stair")
 
   -- The scene: screenshots along the way; battles are fought as they come.
