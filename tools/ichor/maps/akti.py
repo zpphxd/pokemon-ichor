@@ -499,9 +499,10 @@ ROOMS = {
     "AktiTown_Asclepeion": ("akti_asclepeion", 15, 0x200),
     "AktiTown_Agora": ("akti_agora", 13, 0x200),
     "AktiTown_FishersHouse": ("fishers_house", 10, 0x210),
-    "AktiTown_DiversHouse": ("divers_house", 9, 0x210),
-    "AktiTown_GoatherdsHouse": ("goatherds_house", 11, 0x210),
 }
+# The divers' house and the goatherd's farmhouse are composed from the oikia
+# catalog by akti_homes.py, which writes their layouts itself.
+HOMES = ("AktiTown_DiversHouse", "AktiTown_GoatherdsHouse")
 
 SOLID = 1 << 10
 GROUND = 3 << 12
@@ -531,6 +532,9 @@ def write_layouts():
             blocks = asclepeion_without_stairs(blocks)
         blocks.astype("<u2").tofile(d / "map.bin")
         np.full(4, void, np.uint16).astype("<u2").tofile(d / "border.bin")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import akti_homes
+    akti_homes.build()
 
 
 # ---------------------------------------------------------------------------
@@ -546,7 +550,7 @@ def render(out_dir):
                    stdout=subprocess.DEVNULL)
     overlay(png, ROOT / "data/layouts/AktiTown/map.bin", W, out_dir / "akti_town_walk.png", 2)
     screens(out_dir)
-    for name in ROOMS:
+    for name in list(ROOMS) + list(HOMES):
         lid = "LAYOUT_" + re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", name).upper()
         subprocess.run(rm + [lid, "--scale", "3", "-o", str(out_dir / f"{name.lower()}.png")], check=True,
                        stdout=subprocess.DEVNULL)

@@ -525,14 +525,14 @@ beat("06_homes", function()
   go(18, 26)
   L.enter(K.UP, S.MAP_GOATHERDS, "the goatherd's farmhouse")
   shot("goatherds_house")
-  collect(2, 3, "FLAG_GOT_SOOTHE_BELL", "ITEM_SOOTHE_BELL", "Aigon's Soothe Bell",
-          { from = { { 2, 4, "up" } }, shotBefore = "aigon" })
+  collect(3, 3, "FLAG_GOT_SOOTHE_BELL", "ITEM_SOOTHE_BELL", "Aigon's Soothe Bell",
+          { from = { { 4, 3, "left" } }, shotBefore = "aigon" })
   go(3, 6)
   L.enter(K.DOWN, S.MAP_AKTI, "out of the goatherd's farmhouse")
   go(26, 15)
   L.enter(K.UP, S.MAP_DIVERS, "the divers' house")
   shot("divers_house")
-  talk(2, 3, { from = { { 2, 4, "up" } }, shotBefore = "doris" })
+  talk(4, 3, { from = { { 4, 4, "up" } }, shotBefore = "doris" })
   talk(6, 2, { from = { { 6, 3, "up" } }, shotBefore = "water_clock" })
   go(3, 6)
   L.enter(K.DOWN, S.MAP_AKTI, "out of the divers' house")
@@ -612,8 +612,8 @@ beat("08_after", function()
   -- with the laurel, Doris trades her shell bell for the beach's Heart Scale
   go(26, 15)
   L.enter(K.UP, S.MAP_DIVERS, "the divers' house after the laurel")
-  collect(2, 3, "FLAG_GOT_SHELL_BELL", "ITEM_SHELL_BELL", "Doris's shell bell, for the Heart Scale",
-          { from = { { 2, 4, "up" } }, answers = { "yes" }, shotBefore = "doris_trade" })
+  collect(4, 3, "FLAG_GOT_SHELL_BELL", "ITEM_SHELL_BELL", "Doris's shell bell, for the Heart Scale",
+          { from = { { 4, 4, "up" } }, answers = { "yes" }, shotBefore = "doris_trade" })
   go(3, 6)
   L.enter(K.DOWN, S.MAP_AKTI, "out of the divers' house")
   -- re-entering Akti after the end replays nothing

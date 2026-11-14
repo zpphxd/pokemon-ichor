@@ -128,9 +128,9 @@ local steps = L.seq(
 
   -- 7. the goatherd's farmhouse: Aigon asks after Kapra, the loose goat; she is
   --    eating the Fisher's washing; sent home, she earns his Soothe Bell
-  { { warp = { INDOOR, MAP_GOATHERDS, -1, 2, 4 }, wait = 100 },
+  { { warp = { INDOOR, MAP_GOATHERDS, -1, 4, 3 }, wait = 100 },
     { shot = "50_goatherds_house.png" },
-    { hold = K.UP, frames = 4, wait = 30 } },
+    { hold = K.LEFT, frames = 4, wait = 30 } },
   L.talk("51_aigon_quest", 4, 30),
   { { warp = { AKTI, MAP_AKTI, -1, 3, 15 }, wait = 240 },
     { shot = "52_kapra.png" },
@@ -138,8 +138,8 @@ local steps = L.seq(
   L.talk("53_kapra", 4, 30),
   { { wait = 90 }, { shot = "53_kapra_gone.png" },
     { expect_flag = FLAG_ICHOR_AKTI_GOAT_HOME, why = "Kapra did not go home" } },
-  { { warp = { INDOOR, MAP_GOATHERDS, -1, 2, 4 }, wait = 100 },
-    { hold = K.UP, frames = 4, wait = 30 } },
+  { { warp = { INDOOR, MAP_GOATHERDS, -1, 4, 3 }, wait = 100 },
+    { hold = K.LEFT, frames = 4, wait = 30 } },
   L.talk("54_aigon_bell", 4, 30),
   { { wait = 10 }, { shot = "55_soothe_bell.png" }, { press = K.A, wait = 160 },
     { shot = "55_soothe_bell_pocket.png" }, { press = K.A, wait = 40 },
@@ -147,7 +147,7 @@ local steps = L.seq(
 
   -- 8. the divers' house: Doris's grotto lore before the laurel; after it, her
   --    shell bell for the Heart Scale off the beach
-  { { warp = { INDOOR, MAP_DIVERS, -1, 2, 4 }, wait = 100 },
+  { { warp = { INDOOR, MAP_DIVERS, -1, 4, 4 }, wait = 100 },
     { shot = "60_divers_house.png" },
     { hold = K.UP, frames = 4, wait = 30 } },
   L.talk("61_doris_lore", 6, 30),
@@ -156,7 +156,7 @@ local steps = L.seq(
   L.talk("62_heart_scale", 1, 160),
   { { press = K.A, wait = 40 }, { press = K.A, wait = 40 },
     { flag = FLAG_BADGE01_GET },
-    { warp = { INDOOR, MAP_DIVERS, -1, 2, 4 }, wait = 100 },
+    { warp = { INDOOR, MAP_DIVERS, -1, 4, 4 }, wait = 100 },
     { hold = K.UP, frames = 4, wait = 30 } },
   L.talk("63_doris_trade", 5, 30),             -- three lines, then YES to the trade
   { { wait = 10 }, { shot = "64_shell_bell.png" }, { press = K.A, wait = 160 },
