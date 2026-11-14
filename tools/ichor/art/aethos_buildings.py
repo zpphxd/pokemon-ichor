@@ -113,8 +113,9 @@ def cella(c, y0, y1):
     c.rect(0, y0, 63, y1, "D")
     c.hline(0, 63, y0, "K")
     c.hline(0, 63, y0 + 1, "K")
-    for y in range(y0 + 5, y1 + 1, 5):   # ashlar courses catching a little light
-        c.hline(0, 63, y, "M")
+    for y in range(y0 + 2, y1 + 1):      # ashlar courses on the 8 px grid,
+        if y % 4 == 0:                   # so the wall's tiles repeat
+            c.hline(0, 63, y, "M")
 
 
 # --------------------------------------------------------------------------
@@ -377,5 +378,214 @@ def paint(sheet, base):
                 place(m, B, t)
             else:
                 place(m, M, t, ground=B)
-    # 02A: General's unused roof slot, kept as a plain roof bay
+    # 02A: General's unused roof slot, left empty as in General
     sheet.clear(0x02A)
+
+    # farmhouse (General's route house, 3x4)
+    place_building(sheet, farmhouse(), [[0x008, 0x009, 0x00A], [0x010, 0x011, 0x012],
+                                         [0x018, 0x019, 0x01A], [0x020, 0x021, 0x022]])
+    # palaestra (General's gym, 6x5); 1AB and 1B3 repeat, as in General
+    place_building(sheet, palaestra(), [
+        [0x1AA, 0x1AB, None, None, None, 0x1AC],
+        [0x1B2, 0x1B3, None, None, None, 0x1B4],
+        [0x1B8, 0x1B9, 0x1BA, None, 0x1BB, 0x1BC],
+        [0x1C0, 0x1C1, 0x1C2, 0x1C5, 0x1C3, 0x1C4],
+        [0x1C8, 0x1C9, 0x1CA, 0x1CD, 0x1CB, 0x1CC]])
+    # the contest hall's door and cornice become the theater's
+    sheet.clear(0x1DB)
+    sheet.set(0x1DB, M, THEATER_DOOR)
+    sheet.clear(0x1D3)
+    sheet.set(0x1D3, M, cut(palaestra(), 2, 1))
+    # the white-walled secret-base walls (00B/00C/013/014) become whitewash
+    wall = farmhouse()
+    for m, (r, col) in ((0x00B, (2, 2)), (0x013, (2, 2)), (0x00C, (2, 0)), (0x014, (2, 0))):
+        sheet.clear(m)
+        sheet.set(m, M, cut(wall, r, col))
+
+
+def place_building(sheet, img, ids):
+    """Cut a building into metatiles: the top row on the top layer over
+    grass (as General's roofs were), the rest on the middle layer."""
+    grass = TEX["grass"]
+    for r, row in enumerate(ids):
+        for col, m in enumerate(row):
+            if m is None:
+                continue
+            t = cut(img, r, col)
+            sheet.clear(m)
+            if r == 0:
+                sheet.set(m, M, grass)
+                sheet.set(m, T, t)
+            else:
+                sheet.set(m, M, over(grass.copy(), t) if not t[..., 3].all() else t)
+
+
+ROOF_TILES = {0: "t", 1: "T", 2: "T", 3: "R"}
+
+
+def roof(c, x0, x1, y0, y1, slope_l=0, slope_r=0):
+    """Terracotta tile courses: cover-tile ridges every 4 px, a course line
+    every 4 rows. slope_l/r cut the ends back by that many px per row."""
+    for y in range(y0, y1 + 1):
+        a = x0 + max(0, (slope_l - (y - y0)) if slope_l else 0)
+        b = x1 - max(0, (slope_r - (y - y0)) if slope_r else 0)
+        for x in range(a, b + 1):
+            col = ROOF_TILES[x % 4]
+            if (y - y0) % 4 == 3:
+                col = "R"
+            c.px(x, y, col)
+        c.px(a, y, "R")
+        c.px(b, y, "R")
+
+
+def whitewash(c, x0, x1, y0, y1):
+    for y in range(y0, y1 + 1):
+        for x in range(x0, x1 + 1):
+            c.px(x, y, "L" if (x % 8, y % 8) in ((3, 5), (6, 1)) else "H")
+
+
+# A Cycladic farmhouse: whitewash, a tiled roof, an Aegean door and shutters,
+# an amphora by the door.
+SHUTTER_WINDOW = art("""
+    KKKKKKKKKK
+    KEeKKKKeEK
+    KEeKAAKeEK
+    KEeKAAKeEK
+    KEeKKKKeEK
+    KKKKKKKKKK
+    .MMMMMMMM.
+""", LEG)
+FARM_DOOR = art("""
+    KKKKKKKKKK
+    KDDDDDDDDK
+    KEeEEEEeEK
+    KEeEEEEeEK
+    KEeEEEEeEK
+    KEeEEgEeEK
+    KEeEEEEeEK
+    KEeEEEEeEK
+    KEeEEEEeEK
+    KEeEEEEeEK
+    KEeEEEEeEK
+    KEeEEEEeEK
+    KAAAAAAAAK
+""", LEG)
+
+
+def farmhouse():
+    c = Canvas(48, 64)
+    roof(c, 0, 47, 6, 25, slope_l=6, slope_r=6)
+    c.hline(6, 41, 5, "R")
+    c.hline(0, 47, 26, "K")
+    c.hline(0, 47, 27, "D")
+    whitewash(c, 0, 47, 28, 63)
+    c.hline(0, 47, 28, "M")
+    c.vline(0, 28, 63, "K")
+    c.vline(47, 28, 63, "K")
+    c.vline(46, 29, 63, "M")
+    c.blit(SHUTTER_WINDOW, 34, 35)
+    c.blit(FARM_DOOR, 19, 50)
+    c.blit(AMPHORA, 5, 55)
+    c.hline(1, 46, 63, "C")
+    return c.a
+
+
+# The palaestra: a long tiled roof, marble walls, a black-figure frieze of
+# runners with a gold laurel wreath where the Gym sign was, and a pediment
+# porch over the door.
+RUNNERS = art("""
+    TTTTTTTTTTTTTTTTTTTTTTTT
+    TTKTTTTTTTKTTTTTTTTKTTTT
+    TKKKTTTTTKKKTTTTTTKKKTTT
+    TTKKKTTTTTKKKTTTTTTKKKTT
+    TKTKTKTTTKTKTKTTTTKTKTKT
+    TTKTTTTTTTKTTTTTTTTKTTTT
+    TKTKTTTTTKTKTTTTTTKTKTTT
+    KTTTKTTTKTTTKTTTTKTTTKTT
+    TTTTTTTTTTTTTTTTTTTTTTTT
+""", LEG)
+WREATH = art("""
+    ..gG.Gg..
+    .gG...Gg.
+    gG.....Gg
+    G.......G
+    gG.....Gg
+    .gG...Gg.
+    ..gGRGg..
+    ....R....
+""", LEG)
+PORCH = art("""
+    .......KK.......
+    .....KKttKK.....
+    ...KKtTLLTtKK...
+    .KKtTLLLLLLTtKK.
+    KtTTTTTTTTTTTTtK
+    KHHHHHHHHHHHHHHK
+    KDDDDDDDDDDDDDDK
+""", LEG)
+THEATER_MASK = art("""
+    .KKKKK.
+    KGGGGGK
+    KGKGKGK
+    KGGGGGK
+    KGKKKGK
+    .KGGGK.
+    ..KKK..
+""", LEG)
+
+
+def palaestra():
+    c = Canvas(96, 80)
+    roof(c, 0, 95, 4, 41, slope_l=8, slope_r=8)
+    c.hline(8, 87, 3, "R")
+    roof(c, 48, 63, 42, 47)                      # the porch roof runs on
+    c.hline(0, 47, 42, "K")
+    c.hline(64, 95, 42, "K")
+    for x in list(range(0, 48)) + list(range(64, 96)):  # eaves and antefixes
+        c.px(x, 43, "H" if x % 4 else "G")
+        c.px(x, 44, "M")
+        c.px(x, 45, "D")
+        c.px(x, 46, "D")
+        c.px(x, 47, "K")
+    # walls, y 48-79
+    for x0, x1 in ((0, 47), (64, 95)):
+        for y in range(48, 76):
+            for x in range(x0, x1 + 1):
+                joint = (x + 4 * (y // 4 % 2)) % 8 == 0
+                c.px(x, y, "M" if y % 4 == 0 or joint else "L")
+    c.blit(RUNNERS, 4, 52)
+    c.blit(RUNNERS, 20, 52)
+    c.blit(WREATH, 19, 62)
+    c.blit(RUNNERS, 68, 52)
+    c.blit(SHUTTER_WINDOW, 80, 63)
+    for x in (0, 95):
+        c.vline(x, 48, 79, "K")
+    # porch: pediment and columns over the door
+    c.blit(PORCH, 48, 48)
+    c.rect(49, 55, 62, 79, "D")
+    c.blit(DOOR, 51, 63)
+    for cx in (50, 61):
+        for y in range(55, 76):
+            for i, col in enumerate(["K", "H", "L", "M", "K"]):
+                c.px(cx - 2 + i, y, col)
+    # steps
+    for y, col in ((76, "H"), (77, "M"), (78, "L"), (79, "D")):
+        c.hline(0, 95, y, col)
+    return c.a
+
+
+THEATER_DOOR = None
+
+
+def _theater_door():
+    c = Canvas(16, 16)
+    c.rect(0, 0, 15, 15, "L")
+    c.blit(THEATER_MASK, 4, 0)
+    c.rect(2, 7, 13, 15, "K")
+    c.rect(3, 8, 12, 15, "E")
+    c.vline(7, 8, 15, "A")
+    c.vline(8, 8, 15, "e")
+    return c.a
+
+
+THEATER_DOOR = _theater_door()
