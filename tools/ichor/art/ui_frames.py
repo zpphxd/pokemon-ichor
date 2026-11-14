@@ -12,6 +12,7 @@ Writes, in graphics/text_window/:
   name_box.png     speaker name plaque that sits on the dialogue box
   signpost.png     marble stele frame for signs (text_pal1.pal, slots 10-15)
   2.png - 5.png    selectable variants: red-figure, white-ground, Aegean, bronze
+  6.png - 20.png   vanilla frames, inner margin retinted to parchment
 
 Usage: python3 tools/ichor/art/ui_frames.py
 """
@@ -189,12 +190,17 @@ def name_box():
     write_png(OUT / "name_box.png", 3, t, MSG_PAL, MSG_KEY, False)
 
 
-# Sign frame: a marble stele. Layers run outside-in; the frame is drawn from a
-# corner tile, a top edge, outer and inner side tiles, all flipped by the code.
-SIGN_PROFILE = "oLLMkMLp"
-SIGN_PAL_FRAME = {10: (248, 248, 240), 11: (216, 208, 192), 12: (168, 160, 152),
-                  13: (120, 48, 24), 14: (32, 24, 24), 15: (32, 24, 24)}
-SIGN_KEY = {" ": 0, "p": 1, "L": 10, "M": 11, "D": 12, "k": 13, "o": 15}
+# Sign frame: a marble stele with its key painted in Aegean blue, so signs read
+# as stone beside the clay dialogue box. Same tiles as the dialogue box. Signs
+# load std text palette 1 (text_pal1.pal); only its slots 10-15 are rewritten,
+# so the white field and gray text it gives other screens are untouched.
+SIGN_PAL_FRAME = {10: (248, 248, 240),   # marble, light (spare)
+                  11: (216, 208, 192),   # marble: the band
+                  12: (168, 160, 152),   # marble, dark: incised line
+                  13: (48, 104, 176),    # Aegean blue: the key
+                  14: (24, 56, 120),     # Aegean, dark (spare)
+                  15: (168, 160, 152)}   # outer edge
+SIGN_KEY = {" ": 0, "p": 1, ".": 11, "d": 12, "#": 13, "o": 15}
 
 
 def signpost():
@@ -206,33 +212,45 @@ def signpost():
         lines[3 + i] = "%d %d %d" % c
     pal_path.write_bytes(nl.join(lines).encode())
     pal = [tuple(map(int, l.split())) for l in lines[3:19]]
-    P = SIGN_PROFILE
-    corner = ["".join(" " if x == y == 0 else P[min(x, y)] for x in range(8)) for y in range(8)]
-    top = [P[y] * 8 for y in range(8)]
-    side = ["".join(P[x] for x in range(8))] * 8
-    field = ["pppppppp"] * 8
-    # slots: 0 corner, 1 top beside corner, 2 outer side, 3 inner side, 4 top
-    im_tiles = [corner, top, side, field, top]
+    # Slots used by WindowFunc_DrawSignFrame (src/menu.c): 0 corner, 1 top
+    # beside it, 2 outer side, 3 inner side (the field column), 4 top edge.
+    im_tiles = [CORNER, TOP, LEFT, FIELD, TOP]
     pal16 = [tuple(v - v % 8 for v in c) for c in pal]
     write_png(OUT / "signpost.png", 5, im_tiles, pal16, SIGN_KEY, True)
 
 
-# Variants of frame 1: the same tiles, other pottery wares.
+# Variants of frame 1: the same tiles, other pottery wares, as
+# (ground, incised line, key). The outer edge takes the ground color: an edge
+# in the key's color would fuse with the meander's outer stroke.
 VARIANTS = {
-    2: (INK, CLAY_DARK, CLAY, (32, 24, 24)),                 # red-figure: clay key on ink
-    3: ((248, 248, 240), (168, 160, 152), INK, INK),         # white-ground
-    4: ((176, 216, 240), (48, 104, 176), (24, 56, 120), (24, 56, 120)),  # Aegean
-    5: ((240, 192, 64), (200, 144, 40), INK, INK),           # bronze
+    2: (INK, CLAY_DARK, CLAY),                               # red-figure: clay key on ink
+    3: ((248, 248, 240), (168, 160, 152), INK),              # white-ground
+    4: ((176, 216, 240), (48, 104, 176), (24, 56, 120)),     # Aegean
+    5: ((240, 192, 64), (200, 144, 40), INK),                # bronze
 }
 
 
 def variants():
     t = [CORNER, TOP, hflip(CORNER), LEFT, FIELD, hflip(LEFT),
          vflip(CORNER), vflip(TOP), vflip(hflip(CORNER))]
-    for n, (ground, line, key, outline) in VARIANTS.items():
+    for n, (ground, line, key) in VARIANTS.items():
         pal = list(FRAME_PAL)
-        pal[1], pal[2], pal[3], pal[4], pal[15] = key, line, ground, ground, outline
+        pal[1], pal[2], pal[3], pal[4], pal[15] = key, line, ground, ground, ground
         write_png(OUT / f"{n}.png", 3, t, pal, FRAME_KEY, True)
+
+
+def retint_vanilla_frames():
+    # Frames 6-20 keep their Hoenn art for now, but their inner margin (index
+    # 14, white in vanilla) is retinted to parchment so it meets the overworld
+    # text field without a white ring.
+    for n in range(6, 21):
+        path = OUT / f"{n}.png"
+        im = Image.open(path)
+        pal = im.getpalette()[:48]
+        pal[42:45] = PARCHMENT
+        im.putpalette(pal)
+        im.save(path, bits=4)
+        print(f"wrote {path.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
@@ -241,3 +259,4 @@ if __name__ == "__main__":
     name_box()
     signpost()
     variants()
+    retint_vanilla_frames()
