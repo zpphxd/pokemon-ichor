@@ -755,6 +755,7 @@ Layout reference, from the scaffold: the player's house door is at (5,8), upper 
 | Old shepherd | north exit | gate |
 | Kleon, Alethea | beat 4 only | — |
 | Glykera, Kimon | at home, in the house west of the square | see "Glykera's house" below |
+| Traveling scribe | at the square's west edge by the altar, at his stool; from the morning through beat 4 | a visitor who collects fortunes (secretly Iapetos, `design/STORY.md` §8.2) |
 
 **Halia**
 ```text
@@ -830,6 +831,20 @@ GYLIPPOS: That was the conversation.
 
 > after:
 GYLIPPOS: The boy talks enough for all of Lakonia. Someone must.
+```
+
+**Traveling scribe.** He is Iapetos, unrecognizable: the first sighting of his hook (`design/STORY.md` §8.2). He stands at his stool by the altar from the morning until the end of beat 4, then slips away with the festival crowd: set `FLAG_ICHOR_HIDE_SCRIBE`, and the stool goes too. Name box: SCRIBE.
+```text
+> before FLAG_ICHOR_THREAD_READ:
+SCRIBE: Don't mind me. I collect fortunes. For a book.
+
+> after FLAG_ICHOR_THREAD_READ:
+SCRIBE: Yours stopped her spindle. In forty years, she says. Never once.
+
+SCRIBE: May I tell you something true? You're going to be in my book.
+
+[Object: the scribe's stool, while he is there]
+A wax tablet on a stool. Neat writing. Every line ends in a little hook.
 ```
 
 **Kid with Wooloo** (with a Wooloo object event beside them)
@@ -2106,6 +2121,7 @@ Engine: claim these as `FLAG_ICHOR_*` and `VAR_ICHOR_*`.
 - `FLAG_ICHOR_HIDE_KLEON_ELAIA`
 - `FLAG_ICHOR_HIDE_ALETHEA_AKADEMIA`
 - `FLAG_ICHOR_HIDE_ALETHEA_ELAIA`
+- `FLAG_ICHOR_HIDE_SCRIBE` (set at the end of beat 4)
 - `FLAG_ICHOR_HIDE_ALETHEA_RUINS`
 - `FLAG_ICHOR_HIDE_RUINS_GRUNTS`
 - `FLAG_ICHOR_HIDE_TITAN_TABLET`

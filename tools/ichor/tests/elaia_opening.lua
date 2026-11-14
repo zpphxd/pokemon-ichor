@@ -50,6 +50,11 @@ local function mapId()
   return emu:read8(loc) * 256 + emu:read8(loc + 1)
 end
 local function mapMusic() return emu:read16(S.sCurrentMapMusic) end
+local function metatile(x, y)
+  local width = emu:read32(S.gBackupMapLayout + S.OFF_BACKUP_MAP_WIDTH)
+  local map = emu:read32(S.gBackupMapLayout + S.OFF_BACKUP_MAP_MAP)
+  return emu:read16(map + 2 * ((x + S.MAP_OFFSET) + (y + S.MAP_OFFSET) * width)) & 0x3FF
+end
 local function playerObject()
   return S.gObjectEvents + emu:read8(S.gPlayerAvatar + S.OFF_AVATAR_OBJECT_EVENT_ID) * S.OBJECT_EVENT_SIZE
 end
@@ -483,6 +488,12 @@ local function main()
   enter(K.DOWN, S.MAP_ELAIA, "Glykera's door out")
   expectAt(3, 19, "out of Glykera's house")
 
+  -- The traveling scribe by the well, and his stool.
+  goTo(7, 22, HALIA_RING); face(K.LEFT); tap(K.A); wait(50)
+  shot("scribe_before_the_reading"); settle()
+  goTo(6, 20, HALIA_RING); face(K.DOWN); tap(K.A); wait(50)
+  shot("scribe_stool"); settle()
+
   -- The Akademia's door is shut until the thread is read (round Halia's line).
   expect(not go(5, 34, HALIA_RING), "the note on the Akademia door")
   wait(40); shot("akademia_note"); settle()
@@ -504,6 +515,8 @@ local function main()
   expect(getFlag(S.FLAG_THREAD_READ), "the thread is read")
   expectAt(14, 20, "at the head of the line")
   shot("after_the_reading")
+  goTo(7, 22); face(K.LEFT); tap(K.A); wait(50)
+  shot("scribe_after_the_reading"); settle({ [2] = "scribe_your_book" })
 
   -- Beat 3: the Akademia.
   goTo(5, 34)
@@ -561,6 +574,7 @@ local function main()
   expect(hp == maxHp and hp > 0, string.format("Alethea healed the partner (%d/%d)", hp, maxHp))
   expect(getFlag(S.FLAG_HIDE_KLEON_ELAIA) and getFlag(S.FLAG_HIDE_ALETHEA_ELAIA), "Kleon and Alethea have gone north")
   expect(mapMusic() == S.MUS_ELAIA, "Elaia's theme again")
+  expect(getFlag(S.FLAG_HIDE_SCRIBE) and metatile(6, 21) == 0x001, "the scribe has gone, and his stool with him")
   shot("square_after")
 
   -- Kimon trades his Finizen for a Wooloo now the player has Poke Balls.
