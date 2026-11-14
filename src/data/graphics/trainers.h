@@ -482,6 +482,28 @@ const u16 gTrainerPalette_TitanGrunt[] = INCGFX_U16("graphics/trainers/front_pic
 const u32 gTrainerFrontPic_ProfessorDaphne[] = INCGFX_U32("graphics/trainers/front_pics/professor_daphne.png", ".4bpp.smol");
 const u16 gTrainerPalette_ProfessorDaphne[] = INCGFX_U16("graphics/trainers/front_pics/professor_daphne.png", ".gbapal");
 
+// Pokemon Ichor trainer classes
+const u32 gTrainerFrontPic_Shepherd[] = INCGFX_U32("graphics/trainers/front_pics/shepherd.png", ".4bpp.smol");
+const u16 gTrainerPalette_Shepherd[] = INCGFX_U16("graphics/trainers/front_pics/shepherd.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Harvester[] = INCGFX_U32("graphics/trainers/front_pics/harvester.png", ".4bpp.smol");
+const u16 gTrainerPalette_Harvester[] = INCGFX_U16("graphics/trainers/front_pics/harvester.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Goatherd[] = INCGFX_U32("graphics/trainers/front_pics/goatherd.png", ".4bpp.smol");
+const u16 gTrainerPalette_Goatherd[] = INCGFX_U16("graphics/trainers/front_pics/goatherd.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Hoplite[] = INCGFX_U32("graphics/trainers/front_pics/hoplite.png", ".4bpp.smol");
+const u16 gTrainerPalette_Hoplite[] = INCGFX_U16("graphics/trainers/front_pics/hoplite.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Augur[] = INCGFX_U32("graphics/trainers/front_pics/augur.png", ".4bpp.smol");
+const u16 gTrainerPalette_Augur[] = INCGFX_U16("graphics/trainers/front_pics/augur.png", ".gbapal");
+
+const u32 gTrainerFrontPic_AcolyteM[] = INCGFX_U32("graphics/trainers/front_pics/acolyte_m.png", ".4bpp.smol");
+const u16 gTrainerPalette_AcolyteM[] = INCGFX_U16("graphics/trainers/front_pics/acolyte_m.png", ".gbapal");
+
+const u32 gTrainerFrontPic_AcolyteF[] = INCGFX_U32("graphics/trainers/front_pics/acolyte_f.png", ".4bpp.smol");
+const u16 gTrainerPalette_AcolyteF[] = INCGFX_U16("graphics/trainers/front_pics/acolyte_f.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1254,5 +1276,33 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_PROFESSOR_DAPHNE] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_ProfessorDaphne, gTrainerPalette_ProfessorDaphne),
+    },
+    [TRAINER_PIC_SHEPHERD] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Shepherd, gTrainerPalette_Shepherd),
+    },
+    [TRAINER_PIC_HARVESTER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Harvester, gTrainerPalette_Harvester),
+    },
+    [TRAINER_PIC_GOATHERD] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Goatherd, gTrainerPalette_Goatherd),
+    },
+    [TRAINER_PIC_HOPLITE] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Hoplite, gTrainerPalette_Hoplite),
+    },
+    [TRAINER_PIC_AUGUR] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Augur, gTrainerPalette_Augur),
+    },
+    [TRAINER_PIC_ACOLYTE_M] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteM, gTrainerPalette_AcolyteM),
+    },
+    [TRAINER_PIC_ACOLYTE_F] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
     },
 };
