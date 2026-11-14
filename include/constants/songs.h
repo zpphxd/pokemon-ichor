@@ -493,7 +493,7 @@
 
 // Ichor: our songs are appended after the phonemes (see below), so END_MUS covers
 // them; overworld.c sizes its night-music table from it.
-#define END_MUS                     MUS_ICHOR_BATTLE_RIVAL
+#define END_MUS                     MUS_ICHOR_VICTORY_TRAINER
 
 // These PH_* constants are phoneme sounds used by the "bard" NPC (see src/bard_music.c and src/mauville_old_man.c).
 // Each comes in a triplet of PH_*_BLEND, PH_*_HELD, and PH_*_SOLO, and the name of each triplet incorporates the English phonetic sound it represents.
@@ -549,11 +549,18 @@
 #define PH_NURSE_HELD               608
 #define PH_NURSE_SOLO               609
 
-// Pokémon Ichor songs (tools/ichor/music). Map themes first: index END_MUS is past
-// the end of overworld.c's sNightMusicTable, so keep a battle theme last.
+// Pokémon Ichor songs (tools/ichor/music). Append new ones at the end and move
+// END_MUS to the last, so overworld.c's sNightMusicTable (sized END_MUS + 1) covers them.
 #define MUS_ICHOR_ELAIA             610
 #define MUS_ICHOR_ROUTE1            611
 #define MUS_ICHOR_BATTLE_RIVAL      612
+#define MUS_ICHOR_AKTI              613
+#define MUS_ICHOR_TEMPLE            614
+#define MUS_ICHOR_ASCLEPEION        615
+#define MUS_ICHOR_TITAN             616
+#define MUS_ICHOR_BATTLE_TRAINER    617
+#define MUS_ICHOR_BATTLE_WILD       618
+#define MUS_ICHOR_VICTORY_TRAINER   619
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

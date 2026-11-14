@@ -619,6 +619,13 @@ gSongTable::
 	song mus_ichor_elaia, MUSIC_PLAYER_BGM, 0
 	song mus_ichor_route1, MUSIC_PLAYER_BGM, 0
 	song mus_ichor_battle_rival, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_akti, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_temple, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_asclepeion, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_titan, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_battle_trainer, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_battle_wild, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_victory_trainer, MUSIC_PLAYER_BGM, 0
 
 	.align 2
 dummy_song_header:
