@@ -31,12 +31,19 @@ enum {
     TAG_LOGO_SHINE,
 };
 
+// Ichor: the title is a black-figure amphora (tools/ichor/art/title_screen.py,
+// design/phase1/TITLE.md). The layers are Emerald's: BG0 is the painted panel
+// (rayquaza.*), BG1 the golden thread (clouds.*), BG2 the ICHOR inscription
+// (pokemon_logo.*), and the "version" sprites spell POKEMON above it.
 #define VERSION_BANNER_RIGHT_TILEOFFSET 64
-#define VERSION_BANNER_LEFT_X 98
-#define VERSION_BANNER_RIGHT_X 162
-#define VERSION_BANNER_Y 2
-#define VERSION_BANNER_Y_GOAL 66
-#define START_BANNER_X 128
+#define VERSION_BANNER_LEFT_X 88   // Ichor: centered (was 98)
+#define VERSION_BANNER_RIGHT_X 152 // Ichor: centered (was 162)
+#define VERSION_BANNER_Y (VERSION_BANNER_Y_GOAL - 64) // Ichor: same 64 px slide (was 2)
+#define VERSION_BANNER_Y_GOAL 16   // Ichor: POKEMON rests over ICHOR (was 66)
+#define START_BANNER_X 120         // Ichor: centered (was 128)
+#define PRESS_START_Y 147          // Ichor: on the black foot (was 108)
+#define COPYRIGHT_Y 155            // Ichor: the fan-work line (was 148)
+#define ICHOR_BACKDROP RGB(4, 3, 3) // Ichor: the black gloss, (32,24,24)
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
 #define RESET_RTC_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_LEFT)
@@ -485,7 +492,11 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
                     sprite->sBgColor--;
             }
 
-            backgroundColor = _RGB(sprite->sBgColor, sprite->sBgColor, sprite->sBgColor);
+            // Ichor: the flash ramps from the black gloss (32,24,24) up to
+            // terracotta clay (184,88,48), instead of from black up to white.
+            backgroundColor = _RGB(4 + sprite->sBgColor * 19 / 31,
+                                   3 + sprite->sBgColor * 8 / 31,
+                                   3 + sprite->sBgColor * 3 / 31);
 
             // Flash the background green for 4 frames of movement.
             // Otherwise use the updating color.
@@ -493,7 +504,7 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
              || sprite->x == DISPLAY_WIDTH / 2 + (4 * SHINE_SPEED)
              || sprite->x == DISPLAY_WIDTH / 2 + (5 * SHINE_SPEED)
              || sprite->x == DISPLAY_WIDTH / 2 + (6 * SHINE_SPEED))
-                gPlttBufferFaded[0] = RGB(24, 31, 12);
+                gPlttBufferFaded[0] = RGB(31, 28, 18); // Ichor: white gold (was green)
             else
                 gPlttBufferFaded[0] = backgroundColor;
         }
@@ -503,7 +514,7 @@ static void SpriteCB_PokemonLogoShine(struct Sprite *sprite)
     else
     {
         // Sprite has moved fully offscreen
-        gPlttBufferFaded[0] = RGB_BLACK;
+        gPlttBufferFaded[0] = ICHOR_BACKDROP; // Ichor: was RGB_BLACK
         DestroySprite(sprite);
     }
 }
@@ -747,7 +758,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BD);
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(6, 15));
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 8)); // Ichor: the thread glows (was 6, 15)
         SetGpuReg(REG_OFFSET_BLDY, 0);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1
                                     | DISPCNT_OBJ_1D_MAP
@@ -755,8 +766,8 @@ static void Task_TitleScreenPhase2(u8 taskId)
                                     | DISPCNT_BG1_ON
                                     | DISPCNT_BG2_ON
                                     | DISPCNT_OBJ_ON);
-        CreatePressStartBanner(START_BANNER_X, 108);
-        CreateCopyrightBanner(START_BANNER_X, 148);
+        CreatePressStartBanner(START_BANNER_X, PRESS_START_Y);
+        CreateCopyrightBanner(START_BANNER_X, COPYRIGHT_Y);
         if (QUICKSTART && QUICKSTART_HUD)
             CreateQuickstartHud();
         gTasks[taskId].tBg1Y = 0;
@@ -812,9 +823,11 @@ static void Task_TitleScreenPhase3(u8 taskId)
         SetGpuReg(REG_OFFSET_BG2Y_H, 0);
         if (++gTasks[taskId].tCounter & 1)
         {
+            // Ichor: the golden thread drifts right, past the Fates, instead
+            // of the clouds scrolling up. The scanline wave still ripples it.
             gTasks[taskId].tBg1Y++;
-            gBattle_BG1_Y = gTasks[taskId].tBg1Y / 2;
-            gBattle_BG1_X = 0;
+            gBattle_BG1_Y = 0;
+            gBattle_BG1_X = -(gTasks[taskId].tBg1Y / 4);
         }
         UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
         if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
@@ -862,10 +875,12 @@ static void UpdateLegendaryMarkingColor(u8 frameNum)
 {
     if ((frameNum % 4) == 0) // Change color every 4th frame
     {
+        // Ichor: BG palette 14 color 15 is the golden thread's glint. It
+        // breathes between ichor gold and white gold.
         s32 intensity = Cos(frameNum, Q_8_8(0.5)) + Q_8_8(0.5);
-        u32 r = 31 - Q_8_8_TO_INT(intensity * 31);
-        u32 g = 31 - Q_8_8_TO_INT(intensity * 22);
-        u32 b = 12;
+        u32 r = 31;
+        u32 g = 23 + Q_8_8_TO_INT(intensity * 8);
+        u32 b = 6 + Q_8_8_TO_INT(intensity * 18);
 
         u16 color = RGB(r, g, b);
         LoadPalette(&color, BG_PLTT_ID(14) + 15, sizeof(color));
