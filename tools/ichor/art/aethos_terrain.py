@@ -60,7 +60,7 @@ MAP = {
     ("sea", "h"): "ae_h", ("sea", "l"): "ae_l", ("sea", "n"): "ae_n", ("sea", "m"): "@sea",
     ("sea", "m2"): "ae_m", ("sea", "d"): "ae_d", ("sea", "k"): "ae_k", ("sea", "floor"): "@shallow",
     ("white", "h"): "mb_h", ("white", "l"): "mb_l", ("white", "m"): "mb_l", ("white", "n"): "mb_m",
-    ("metal", "m"): "mb_m", ("metal", "d"): "mb_d", ("metal", "k"): "rk_k", ("metal", "x"): "ink",
+    ("metal", "m"): "mb_m", ("metal", "d"): "mb_d", ("metal", "k"): "ink", ("metal", "x"): "ink",
     ("gray", "l"): "mb_l", ("gray", "m"): "mb_m", ("gray", "d"): "mb_d",
     ("red", "l"): "tc_l", ("red", "m"): "tc_m",
     ("roof", "m"): "tc_l", ("roof", "l"): "sg_l", ("roof", "h"): "lp_h",
@@ -144,6 +144,7 @@ def paint(sheet, base):
     tiles, uses = tile_index(base.get)
     wet = marine_metatiles(base) | MARINE_IDS
     marine = {ci for m, l, q, ci, hf, vf in uses if m in wet}
-    rendered = [render_tile(t, ci in marine) for ci, t in enumerate(tiles)]
+    from aethos_bin import fit_tile
+    rendered = [fit_tile(render_tile(t, ci in marine)) for ci, t in enumerate(tiles)]
     for m, l, q, ci, hf, vf in uses:
         quad(sheet.view(m, l), q)[:] = flip(rendered[ci], hf, vf)

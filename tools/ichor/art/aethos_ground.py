@@ -221,7 +221,7 @@ def paint(sheet, base):
     sets = {
         "path": patch_set(PATH_A, PATH_B, "lp_m"),
         "soil": patch_set(SOIL_A, SOIL_A[:, ::-1], "dt_k", shadow="gr_s"),
-        "ash": patch_set(ASH_A, ASH_A[:, ::-1], "rk_m"),
+        "ash": patch_set(ASH_A, ASH_A[:, ::-1], "mb_m"),
     }
     for kind, ids in PATCH_IDS.items():
         for k, m in ids.items():

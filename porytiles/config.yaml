@@ -1,5 +1,7 @@
 # Porytiles project config for Pokemon Ichor's Greek tilesets.
-# Run tools/ichor/art/build_tilesets.sh rather than porytiles directly.
+# Per-tileset overrides live in porytiles/tilesets/<tileset>/config.yaml.
+# aethos is generated: run tools/ichor/art/paint_aethos.py, not porytiles.
+# The animation settings below only matter when decompiling a tileset.
 fieldmap:
   # pokeemerald-expansion declares both the Emerald (2-byte) and FRLG (4-byte)
   # attribute layouts; Ichor builds Emerald.

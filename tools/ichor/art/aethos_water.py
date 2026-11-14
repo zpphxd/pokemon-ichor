@@ -231,9 +231,9 @@ def land_water_edge_frames():
     from aethos_lib import solid
     rock = np.zeros((h, w, 4), np.uint8)
     yy, xx = np.mgrid[0:h, 0:w]
-    rock[:] = rgba("rk_m")
-    rock[(yy % 4) == 3] = rgba("rk_d")
-    rock[((yy % 4) == 0) & ((xx % 6) == 1)] = rgba("rk_l")
+    rock[:] = rgba("mb_m")
+    rock[(yy % 4) == 3] = rgba("mb_d")
+    rock[((yy % 4) == 0) & ((xx % 6) == 1)] = rgba("mb_l")
     frames = []
     for t in range(4):
         f = np.zeros_like(base_key)

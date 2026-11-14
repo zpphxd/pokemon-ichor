@@ -27,7 +27,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from aethos_lib import (Base, Sheet, scan_anim_uses, place_anim_keys,  # noqa: E402
-                        split_tiles, write, compile_tileset)
+                        split_tiles, write)
+import aethos_bin  # noqa: E402
 
 PAINTERS = ["aethos_terrain", "aethos_ground", "aethos_trees", "aethos_coast",
             "aethos_props", "aethos_buildings"]
@@ -56,16 +57,20 @@ def build():
     }
     keys = {name: split_tiles(f[0]) for name, f in frames.items()}
     place_anim_keys(sheet, scan_anim_uses(base), keys)
-    return sheet, frames
+    return sheet, frames, base
 
 
 def main():
-    sheet, frames = build()
+    sheet, frames, base = build()
+    bad = aethos_bin.check_fit(sheet, frames)
+    if bad:
+        raise SystemExit("aethos: tiles that fit no palette:\n  " + "\n  ".join(bad[:60]))
     write(sheet, frames)
     print("wrote data/tilesets/primary/aethos/porytiles_src")
     if "--no-compile" not in sys.argv:
-        compile_tileset()
-        print("compiled gTileset_Aethos")
+        pinned = aethos_bin.build(sheet, base, frames)
+        print(f"compiled gTileset_Aethos: {len(pinned)} tiles pinned for "
+              f"{', '.join(aethos_bin.COMPAT)}; a verified recompile changes nothing")
 
 
 if __name__ == "__main__":
