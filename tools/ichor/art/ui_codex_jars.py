@@ -437,7 +437,7 @@ THEMES = {
                                                OLIVE_DARK, OLIVE, SILVER_LEAF, INK, CLAY, INK],
                    top="meander", foot="rays", paint=motif_painter(OLIVE_SPRIG)),
     "city": dict(name="Akropolis", colors=[MARBLE, MARBLE_LIGHT, MARBLE_DARK, (128, 120, 112),
-                                          (176, 168, 160), (200, 192, 176), MARBLE_LIGHT, GOLD, MARBLE_DARK, INK],
+                                          (152, 144, 128), (192, 184, 168), MARBLE_LIGHT, GOLD, MARBLE_DARK, INK],
                  top="triglyph", foot="dots", paint=paint_columns),
     "desert": dict(name="wheatfield", colors=[(232, 200, 128), (248, 224, 160), (208, 168, 96), (168, 128, 64),
                                              BRONZE, GOLD_DARK, GOLD_PALE, GOLD, BRONZE, INK],
@@ -480,7 +480,7 @@ THEMES = {
                                                 INK, INK, INK, PARCHMENT, CLAY, INK],
                     top="tongues", foot="rays", paint=motif_painter(HORSE)),
     "plain": dict(name="laurel", colors=[CLAY, CLAY_LIGHT, (160, 72, 40), CLAY_DARK,
-                                        OLIVE_DARK, OLIVE, OLIVE_LIGHT, GOLD, CLAY, INK],
+                                        BRONZE, GOLD, GOLD_PALE, GOLD_PALE, CLAY, INK],
                   top="meander", foot="laurel", paint=motif_painter(WREATH)),
 }
 ORDER = ["forest", "city", "desert", "savanna", "crag", "volcano", "snow", "cave",
@@ -512,6 +512,39 @@ def write(slot):
     return c, pals
 
 
+# The seventeenth wallpaper, WALLPAPER_FRIENDS, is Walda's gift in Emerald:
+# sixteen patterns the player tints with two colors of their own. Nothing in
+# Aethos gives it yet, but the engine still loads it, so its art is fired in
+# the same clay: every color moves to the nearest step of a clay-and-parchment
+# ramp by brightness. Nearest-step mapping leaves ramp colors where they are,
+# so running this twice changes nothing.
+FRIENDS = ["zigzagoon", "screen", "horizontal", "diagonal", "block", "ribbon", "pokecenter2",
+           "frame", "blank", "circles", "azumarill", "pikachu", "legendary", "dusclops",
+           "ludicolo", "whiscash"]
+RAMP = sorted([INK, GLAZE, CLAY_DARK, RING, CLAY, PARCH_DARK, CLAY_LIGHT, PARCH_SHADE, PARCHMENT,
+               PARCH_LIGHT], key=lambda c: 0.3 * c[0] + 0.59 * c[1] + 0.11 * c[2])
+
+
+def fire(c):
+    lum = 0.3 * c[0] + 0.59 * c[1] + 0.11 * c[2]
+    return min(RAMP, key=lambda r: abs(0.3 * r[0] + 0.59 * r[1] + 0.11 * r[2] - lum))
+
+
+def write_friends():
+    paths = [OUT / "friends_frame1.png", OUT / "friends_frame2.png"]
+    paths += [OUT / s / "bg.png" for s in FRIENDS if (OUT / s / "bg.png").exists()]
+    for p in paths:
+        im = Image.open(p)
+        a = np.array(im)
+        pal = png_palette(p)[:16]
+        new = [gba(pal[0])] + [fire(c) for c in pal[1:16]]
+        write_indexed_png(p, a, [new])
+    ribbon = OUT / "ribbon" / "frame.pal"
+    if ribbon.exists():
+        cols = read_jasc(ribbon)
+        write_jasc(ribbon, [gba(cols[0])] + [fire(c) for c in cols[1:]])
+
+
 def preview(results, out):
     sheet = np.zeros((2 * (H + 16) + 0, 8 * (W + 8), 3), np.uint8)
     sheet[:] = (40, 40, 40)
@@ -525,3 +558,4 @@ def preview(results, out):
 if __name__ == "__main__":
     results = [(s, write(s)) for s in ORDER]
     preview(results, IMG / "ui_codex_jars.png")
+    write_friends()
