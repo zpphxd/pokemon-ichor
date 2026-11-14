@@ -23,7 +23,7 @@ python3 tools/ichor/art/sprites_player_ow.py --preview DIR      # 3x and 8x prev
 | `walking.png` | 144×32 | 9 of 16×32: down, up, left standing, then 2 steps each for down, up, left. Walk steps bob down 1 px. Right is the left frames mirrored. | Done |
 | `running.png` | 144×32 | Same order as walking. Crouched 1 px, strides 2 px; fists pumping, the chlamys flaring, and a little cream wing at each heel for the Talaria (the bible's running-shoes relic). | Done |
 | `fishing.png` | 384×32 | 12 of 32×32, figure centered: 0–3 west (Old Rod over the shoulder, raised, cast, out), 4–7 north, 8–11 south. A bite alternates 2/3, 6/7 or 10/11; east mirrors west. The rod is cane-brown with a straw highlight and a terracotta float. | Done |
-| `field_move.png` | 160×32 | 5 of 32×32 | Not yet |
+| `field_move.png` | 160×32 | 5 of 32×32, facing south: reach into the satchel (0–1), hold the relic at the chest (2), lift it (3), raise it overhead, glinting (4). Aethos has no HM Pokémon; field powers come from relics (bible §8), so the player raises a golden relic instead of a ball. | Done |
 
 Both folders are `graphics/object_events/pics/people/brendan/` (Theo) and `.../may/` (Ianthe). The bike, watering, decorating, underwater and surfing sheets are untouched; Aethos has no bikes or watering cans, and surfing (on a dolphin) is a later batch.
 
