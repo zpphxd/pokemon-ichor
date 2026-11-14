@@ -9,7 +9,7 @@
 | | |
 |---|---|
 | Base | pokeemerald-expansion 1.17.2 (the Emerald decompilation) |
-| Pokémon | All 9 generations; no new species |
+| Pokémon | A new **Aethos regional dex** of about 150 species drawn from Greek myth (decided 2026-11-14, being designed in `design/dex/`). How it mixes with the existing 9 generations is open. |
 | Format | Distributed only as a `.bps` patch |
 | Benchmark | Pokémon Glazed |
 
@@ -128,6 +128,8 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
 ---
 
 ## 4. Pokémon: every generation, chosen for the myths
+
+> **Superseded in part (2026-11-14).** The user chose to design a ~150-species Aethos regional dex of new Pokémon. The mappings below stand until `design/dex/` replaces them; see `design/dex/DECISIONS.md`.
 
 - **Starters: the Python, the Typhon and the Trident.** The three come from three different generations, and none is among Lazarus's nine starters.
   - **Snivy** (Gen 5): Serperior is the great serpent of Delphoi that Apollo slew.
@@ -332,10 +334,7 @@ Sources: `research/RESEARCH.md` and `research/LAZARUS.md`.
 1. **Lazarus.** A Greek-themed Emerald hack already shipped. We differentiate through the ancient-era setting, a story built on fate, Olympian temples, the full National Dex, the pottery art direction and the post-game.
    - We avoid what it already uses: Muse gym leaders, a Chimera team, Mega-as-weapon plots, its nine starters, and Greek-prefixed custom forms.
    - See `research/LAZARUS.md`.
-2. **AI-content bans.**
-   - PokéCommunity's 2026 rules (and reportedly Eevee Expo's) ban AI-generated art and writing.
-   - An AI-built hack may need its own release channels, or human artists and editors for the final assets.
-   - **Decide before the public release.**
+2. **AI-content bans.** Resolved 2026-11-14: Ichor is a private project for the user and won't be released, so PokéCommunity's and Eevee Expo's bans on AI-made art and writing don't apply.
 3. **Art quality is the bottleneck.** Mitigations:
    - Plan palettes first.
    - Use the Porytiles pipeline.
