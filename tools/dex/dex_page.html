@@ -5,7 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&family=Pixelify+Sans:wght@500;700&family=Silkscreen&display=swap">
 <style>
-/* Layout: the Ichor vessel (clay and black-figure ink; red-figure in dark mode) as a working Pokédex. A grid of all 150 opens into one species at a time, each with its sprite slot, Gen 3 text box, stats and full learnset. */
+/* Layout: the Ichor vessel (clay and black-figure ink; red-figure in dark mode) as a working Pokédex. A grid of the whole dex opens into one species at a time, each with its sprites, Gen 3 text box, stats and full learnset. */
 :root {
   --bg: #D2703A;          /* fired clay */
   --panel: #DC8550;       /* lighter slip */
@@ -79,6 +79,9 @@ input[type="search"] { width: min(20em, 100%); }
 .card { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 4px 10px; align-content: start; text-decoration: none; background: var(--panel); border: 2px solid var(--rule); padding: 10px; min-width: 0; }
 .card:hover { background: var(--box); color: var(--box-ink); }
 .card .mini { grid-row: span 3; width: 48px; height: 48px; border: 1.5px dashed var(--rule); display: grid; place-items: center; font-family: var(--font-label); font-size: var(--s-2); }
+.card .mini.drawn { border: 0; }
+.card .mini img { width: 48px; height: 48px; }
+img.px { image-rendering: pixelated; image-rendering: crisp-edges; }
 .card .num { font-family: var(--font-label); font-size: var(--s-2); }
 .card b { font-family: var(--font-display); font-size: var(--s1); font-weight: 700; line-height: 1.05; overflow-wrap: anywhere; }
 .card .types { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
@@ -103,6 +106,21 @@ input[type="search"] { width: min(20em, 100%); }
 .block > h3 { padding-bottom: 6px; border-bottom: 2px solid var(--rule); }
 .spriteslot { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; }
 .frame { width: 128px; height: 128px; border: 2px dashed var(--rule); display: grid; place-items: center; text-align: center; font-family: var(--font-label); font-size: var(--s-2); padding: 8px; background: var(--panel); }
+.spriteslot.drawn { grid-template-columns: minmax(0, 1fr); }
+.viewer { display: grid; gap: 12px; justify-items: start; }
+.stage { width: 192px; height: 192px; max-width: 100%; aspect-ratio: 1; background: var(--panel); border: 2px solid var(--rule); display: grid; place-items: center; }
+.stage img { width: 100%; height: 100%; }
+.toggles { display: flex; flex-wrap: wrap; gap: 6px; }
+.toggles .seg { display: inline-flex; border: 2px solid var(--rule); }
+.toggles button { font: inherit; font-family: var(--font-label); font-size: var(--s-2); letter-spacing: .05em; text-transform: uppercase; background: none; color: inherit; border: 0; padding: 6px 10px; min-height: 32px; cursor: pointer; }
+.toggles button + button { border-left: 2px solid var(--rule); }
+.toggles button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.smalls { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+.smalls figure { margin: 0; display: grid; gap: 4px; justify-items: center; }
+.smalls figcaption { font-family: var(--font-label); font-size: var(--s-2); text-transform: uppercase; letter-spacing: .05em; }
+.smalls .box { width: 64px; height: 64px; background: var(--panel); border: 1.5px solid var(--rule); display: grid; place-items: center; }
+.smalls .box img { width: 64px; height: 64px; }
+.smalls .box.foot img { width: 32px; height: 32px; }
 .artbrief { font-size: 15px; display: grid; gap: 8px; }
 
 /* The in-game text box: slip ground, black-figure ink, a meander strip, Gen 3 line breaks kept */
@@ -169,9 +187,9 @@ code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; 
 
 <div class="wrap">
   <header>
-    <p class="label">Pokémon Ichor · Aethos regional dex · Gate 2 of 4</p>
+    <p class="label">Pokémon Ichor · Aethos regional dex · Gate 3 of 4: sprites</p>
     <h1>The Aethos Pokédex</h1>
-    <p class="intro">Every species in full: name, stats, abilities, Pokédex text, the myth it remembers, and every move it learns. The sprite slots fill in when the pixel art is drawn.</p>
+    <p class="intro">Every species in full: name, stats, abilities, Pokédex text, the myth it remembers, and every move it learns. Sprites appear as each species is finished: battle front and back, shiny, party icon, follower and footprint.</p>
     <div class="facts" id="facts"></div>
   </header>
 </div>
@@ -246,9 +264,51 @@ const slug = s => s.written ? s.name.toLowerCase() : "n" + pad(s.dex);
 const bySlug = new Map(SP.map(s => [slug(s), s]));
 const label = s => s.written ? s.name : s.concept;
 
+/* ---------- sprites: two-frame animation, like the Gen 3 party menu ---------- */
+const STILL = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function anim(frames, alt, cls = "") {
+  const img = el("img", { class: "px " + cls, src: frames[0], alt, width: "64", height: "64" });
+  img._frames = frames; img._f = 0;
+  return img;
+}
+if (!STILL) setInterval(() => document.querySelectorAll("img.px").forEach(img => {
+  if (!img._frames || img._frames.length < 2 || !img.isConnected) return;
+  img._f = (img._f + 1) % img._frames.length; img.src = img._frames[img._f];
+}), 520);
+function viewer(s) {
+  const v = { face: "front", shiny: false };
+  const stage = el("div", { class: "stage" });
+  const smalls = el("div", { class: "smalls" });
+  const draw = () => {
+    const set = s.sprite[v.shiny ? "shiny" : "normal"];
+    const frames = v.face === "front" ? set.front : [set.back];
+    stage.replaceChildren(anim(frames, `${label(s)}, ${v.shiny ? "shiny " : ""}${v.face} sprite`));
+    const f = set.follow;
+    smalls.replaceChildren(
+      el("figure", {}, el("div", { class: "box" }, anim(s.sprite.icon, `${label(s)} party icon`)), el("figcaption", {}, "Icon")),
+      ...[["Walking down", 0], ["Walking up", 2], ["Walking left", 4]].map(([cap, i]) =>
+        el("figure", {}, el("div", { class: "box" }, anim([f[i], f[i + 1]], `${label(s)} follower, ${cap.toLowerCase()}`)), el("figcaption", {}, cap.replace("Walking ", "")))),
+      el("figure", {}, el("div", { class: "box foot" }, el("img", { class: "px", src: s.sprite.foot, alt: `${label(s)} footprint`, width: "32", height: "32" })), el("figcaption", {}, "Print")));
+  };
+  const seg = (opts, key) => {
+    const g = el("div", { class: "seg", role: "group" });
+    opts.forEach(([val, text]) => {
+      const b = el("button", { type: "button", "aria-pressed": String(v[key] === val) }, text);
+      b.addEventListener("click", () => { v[key] = val; g.querySelectorAll("button").forEach((x, i) => x.setAttribute("aria-pressed", String(opts[i][0] === val))); draw(); });
+      g.append(b);
+    });
+    return g;
+  };
+  draw();
+  return el("div", { class: "spriteslot drawn" },
+    el("div", { class: "viewer" }, stage, el("div", { class: "toggles" }, seg([["front", "Front"], ["back", "Back"]], "face"), seg([[false, "Normal"], [true, "Shiny"]], "shiny")), smalls),
+    el("div", { class: "artbrief" }, el("p", {}, s.art), el("p", {}, el("strong", {}, "Shiny: "), s.shiny)));
+}
+
 function renderFacts() {
   const written = SP.filter(s => s.written).length;
-  const facts = [[SP.length, "species"], [written, "entries written"], [new Set(SP.flatMap(s => s.types)).size, "types"], [new Set(SP.map(s => s.section)).size, "regions and groups"]];
+  const drawn = SP.filter(s => s.sprite).length;
+  const facts = [[SP.length, "species"], [written, "entries written"], [drawn, "drawn"], [new Set(SP.flatMap(s => s.types)).size, "types"]];
   document.getElementById("facts").append(...facts.map(([n, l]) => el("div", {}, el("strong", {}, String(n)), el("span", { class: "label" }, l))));
 }
 
@@ -289,7 +349,7 @@ function renderGrid() {
   for (const s of shown) {
     if (s.section !== sec) { sec = s.section; grid.append(el("h3", { class: "region-h" }, sec)); cards = el("div", { class: "cards" }); grid.append(cards); }
     cards.append(el("a", { class: "card" + (s.written ? "" : " pending"), href: "#" + slug(s) },
-      el("span", { class: "mini", "aria-hidden": "true" }, pad(s.dex)),
+      s.sprite ? el("span", { class: "mini drawn", "aria-hidden": "true" }, anim(s.sprite.icon, "")) : el("span", { class: "mini", "aria-hidden": "true" }, pad(s.dex)),
       el("span", { class: "num" }, "#" + pad(s.dex) + (s.baby ? " · baby" : "")),
       el("b", {}, label(s)),
       el("span", { class: "types" }, s.types.map(chip), s.written ? el("span", { class: "bst" }, "BST " + s.bst) : el("span", { class: "bst" }, "in progress"))));
@@ -338,7 +398,7 @@ function detail(s) {
   view.replaceChildren();
   const i = SP.indexOf(s), prev = SP[(i - 1 + SP.length) % SP.length], next = SP[(i + 1) % SP.length];
   view.append(el("div", { class: "navrow" },
-    el("a", { class: "navbtn", href: "#dex" }, "← All 150"),
+    el("a", { class: "navbtn", href: "#dex" }, `← All ${SP.length}`),
     el("div", { class: "step" }, el("a", { class: "navbtn", href: "#" + slug(prev) }, `#${pad(prev.dex)} ${label(prev)}`), el("a", { class: "navbtn", href: "#" + slug(next) }, `#${pad(next.dex)} ${label(next)}`))));
   view.append(el("div", { class: "title" },
     el("span", { class: "num" }, "#" + pad(s.dex)),
@@ -354,7 +414,7 @@ function detail(s) {
   const ls = s.learnset || {};
   const left = el("div", { class: "col" },
     el("div", { class: "block" }, el("h3", {}, "Sprite"),
-      el("div", { class: "spriteslot" }, el("div", { class: "frame" }, "64 × 64 front sprite, to be drawn"),
+      s.sprite ? viewer(s) : el("div", { class: "spriteslot" }, el("div", { class: "frame" }, "64 × 64 front sprite, to be drawn"),
         el("div", { class: "artbrief" }, el("p", {}, s.art), el("p", {}, el("strong", {}, "Shiny: "), s.shiny)))),
     el("div", { class: "block" }, el("h3", {}, "Pokédex entry"),
       el("div", { class: "dexbox" }, el("span", { class: "strip", "aria-hidden": "true" }), el("pre", {}, (s.dex_entry || []).join("\n")))),
