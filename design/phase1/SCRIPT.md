@@ -362,7 +362,9 @@ KLEON: I'm asking.
 KLEON: A Snivy? Then I want the fire one. Fire eats grass for breakfast.
 
 > == 1:
-KLEON: Fire, huh? Then the little sea-bird's mine. Water puts out fire.
+KLEON: Fire, huh? Then the little sea-bird's mine.
+
+Water puts out fire.
 
 > == 2:
 KLEON: The bird? Then I'll take the snake. Roots drink the sea dry.
@@ -516,7 +518,9 @@ ALETHEA: They dropped this. A clay tablet. Sickle stamped on top.
 
 ALETHEA: It's a list of places. “Kalliste” is scratched out.
 
-ALETHEA: Then: “The fragment of the Harpe lies where the grain goes underground.”
+ALETHEA: Then: “The fragment of the Harpe lies…
+
+…where the grain goes underground.”
 
 ALETHEA: A riddle. I hate riddles. They're just lies wearing hats.
 
@@ -1201,7 +1205,9 @@ A great clay pithos, taller than you. Its wax seal glows faintly.
 
 **Demeas,** at the stall.
 ```text
-DEMEAS: Welcome to the Agora! Buying? Selling? Haggling? Please don't haggle.
+DEMEAS: Welcome to the Agora! Buying? Selling? Haggling?
+
+Please don't haggle.
 ```
 [Mart UI. Then:]
 ```text
@@ -1244,7 +1250,9 @@ GLAUKOS: Then I didn't. Don't eat strange seaweed.
 ```
 **Glaukos's grandson**
 ```text
-GRANDSON: Grandpa says he used to be a sea-god. Grandpa says a lot of things.
+GRANDSON: Grandpa says he used to be a sea-god.
+
+Grandpa says a lot of things.
 ```
 
 ## Temple of Hestia (`MAP_AKTI_TOWN_TEMPLE_OF_HESTIA`)
@@ -1348,7 +1356,8 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 ```text
 Before: KOMATAS: My goats climb anything. Let's see you climb this battle!
 Defeat: KOMATAS: Ha! Good. The bees liked you. That's rare.
-After:  KOMATAS: Got locked in a cedar chest once, as a boy. Bees fed me honey till I got out.
+After:  KOMATAS: Got locked in a cedar chest once, as a boy.
+After:  KOMATAS: Bees fed me honey till I got out.
 ```
 ```
 === TRAINER_ICHOR_KOMATAS ===
@@ -1528,7 +1537,8 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```text
 Before: AITHRA: I keep the night watch. I haven't slept since spring. Battle?
 Defeat: AITHRA: Counting Wooloo doesn't help. I've tried. Thousands.
-After:  AITHRA: Old Kronos swallowed Hestia first and coughed her up last. Patient lady.
+After:  AITHRA: Old Kronos swallowed Hestia first and coughed her up last.
+After:  AITHRA: Patient lady.
 After:  AITHRA: The bed's always last before home. Everyone ends up in bed. Eventually.
 ```
 ```
@@ -1622,7 +1632,7 @@ Her dialogue is in beat 7. Defeat text: "There. Warm all the way through."
 | Ponyta (1) | Route 1 (rare) | The sun-horses of Helios's chariot |
 | Hoothoot (2) | Route 1 night, Aithra | Athena's owl, the night watch |
 | Spinarak (2) | Route 1 night, hill | Arachne the weaver, turned spider; thread motif |
-| Murkrow (4) | Route 1 night, Polyeidos | Apollo's white crow, turned black for bad news |
+| Murkrow (2) | Route 1 night, Polyeidos | Apollo's white crow, turned black for bad news |
 | Cleffa (2) | Route 1 night (rare) | Selene's moon-child |
 | Nickit (8) | Route 1 night (rare) | The Teumessian fox, fated never to be caught |
 | Roggenrola (5) | hill | The stones Deucalion and Pyrrha threw, which became people |
@@ -2018,7 +2028,7 @@ Engine: claim these as `FLAG_ICHOR_*` and `VAR_ICHOR_*`.
 5. The currency stays unnamed for now.
 6. The Asclepeion and Pithos get Ichor-only copies of their text. Hoenn's text stays as it is.
 7. The Augur's Eye can arrive in the slice.
-8. Kleon is ahead of you by a laurel, as written.
+8. Kleon leaves Kalliste a laurel behind you: he loses to Ione and vows to win "tomorrow", as written.
 9. The third starter stays with Daphne. Its fate is decided in Phase 2.
 10. Facade stays as TM42.
 11. Keep the vanilla starter select screen for the slice.
