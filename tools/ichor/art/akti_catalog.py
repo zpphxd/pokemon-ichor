@@ -21,13 +21,13 @@ SECTIONS = [
      ["temple_hestia", "house_small", "house_shuttered", "shrine_poseidon", "altar", "krene"]),
     ("The harbor", "The quay and its edges, the trireme Euploia and the kaikia, and the "
      "harbor's goods.",
-     ["quay", "quay_steps", "quay_gangplank", "quay_edges", "trireme", "boat_kaiki",
+     ["quay", "quay_gangplank", "quay_edges", "trireme", "boat_kaiki",
       "boat_kaiki_left", "bollard_line", "rope_coil", "amphora_stack",
       "octopus_line", "fish_stall"]),
-    ("The coast", "Limestone crags in the sea and on the shore, the west headland, and the "
-     "beach.",
-     ["sea_stack", "sea_rocks", "headland", "rocks_sand", "rock_grass", "beach_shells",
-      "net_poles", "boat_beached"]),
+    ("The coast", "Limestone crags in the sea and on the shore, the west headland, the "
+     "grotto on the tide rocks, and the beach.",
+     ["sea_stack", "sea_rocks", "headland", "grotto", "rocks_sand", "rock_grass",
+      "beach_shells", "net_poles", "boat_beached"]),
     ("The town", "The plaza's paving, walls and terraces, and the gardens and yards of the "
      "lower town.",
      ["plaza", "terrace", "laundry", "boat_upturned", "fig_tree",
@@ -103,7 +103,10 @@ palette (`akti_lib.GROUPS`):
 | Plaza | The plaza's warm limestone and marble, and the krene's water |
 | Grove | Aethos's meadow greens and olives, the fig and the shrubs |
 
-**Tile budget.** {tiles} of the 512 secondary tiles are used.
+**Tile budget.** {tiles} of 504 tiles are used. A secondary has 512, but the door
+animations copy their frames into tiles 504-511 (`DOOR_TILE_START_SIZE1` in
+`src/field_door.c`), so the build fails past 504. It also redraws any tile within
+two pixels of another as that tile, so near-duplicates are stored once.
 """
 
 

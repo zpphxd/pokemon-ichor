@@ -3,7 +3,8 @@
 
 1. Draws every structure (akti_art.build(): kalliste copies, the harbor, the
    coast, the town) and checks each 8x8 tile draws from one of Akti's seven
-   palette groups (akti_lib.GROUPS).
+   palette groups (akti_lib.GROUPS). Tiles within NEAR_DUPLICATE_PX pixels of
+   another are then redrawn as that one, so they're stored once.
 2. Packs them into the 8-wide metatile sheet from 0x200, in build order.
 3. Writes data/tilesets/secondary/akti/porytiles_src (bottom/middle/top.png,
    attributes.csv).
@@ -13,7 +14,8 @@
 5. Borrows aethos's ground: every cell drawn on grass, sand or sea gets its
    bottom-layer tiles pointed at aethos's grass (0x001), sand (0x124) or animated
    sea (0x170). Rebuild Akti whenever aethos is repainted.
-6. Verifies every metatile entry, writes build/akti/catalog.json (read by
+6. Verifies every metatile entry and fails if Akti uses more than TILE_LIMIT
+   (504) tiles: the door animations own tiles 504-511. Writes build/akti/catalog.json (read by
    tools/ichor/maps/akti.py), the sheet and preview images, and
    design/phase1/TILES_akti.md.
 
@@ -103,6 +105,77 @@ def compile_tileset():
                  CFG / "tileset.cache.json")
 
 
+# Door animations copy their frames into the last 8 tiles of VRAM, which are a
+# secondary tileset's tiles 504-511 (DOOR_TILE_START_SIZE1 in src/field_door.c).
+# Akti must leave them free, or the Asclepeion's and Agora's doors scribble over
+# whatever on screen uses them.
+TILE_LIMIT = 504
+# Tiles that differ from another by at most this many pixels are drawn as that
+# one, so Porytiles stores them once.
+NEAR_DUPLICATE_PX = 2
+
+
+def _flips(t):
+    return (t, t[:, ::-1], t[::-1, :], t[::-1, ::-1])
+
+
+def _tiles(structs):
+    """Every 8x8 tile Porytiles will store, keyed by its form up to flips, with
+    where each one is drawn. Borrowed ground and empty tiles don't count."""
+    occ = {}
+    for s in structs:
+        gr = getattr(s, "ground", {})
+        for ln, layer in s.layers.items():
+            for ty in range(s.h * 2):
+                for tx in range(s.w * 2):
+                    if ln == "bottom" and (tx // 2, ty // 2) in gr:
+                        continue
+                    t = layer.a[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8].copy()
+                    if not (t[..., 3] > 0).any():
+                        continue
+                    t[t[..., 3] == 0] = 0
+                    occ.setdefault(min(v.tobytes() for v in _flips(t)), []).append((layer, tx, ty))
+    return occ
+
+
+def merge_near_duplicates(structs, limit=NEAR_DUPLICATE_PX):
+    """Redraw each tile that is within `limit` pixels of another as that other tile.
+    A tile is merged at most once, into one that is never merged itself, so no
+    tile drifts more than `limit` pixels from its drawing. Returns the merges."""
+    occ = _tiles(structs)
+    keys = list(occ)
+    arr = {k: np.frombuffer(k, np.uint8).reshape(8, 8, 4) for k in keys}
+    flat = np.stack([arr[k].reshape(64, 4) for k in keys])
+    pairs = []
+    for i, k in enumerate(keys):
+        best = None
+        for v in _flips(arr[k]):
+            d = (flat != v.reshape(1, 64, 4)).any(-1).sum(-1)
+            best = d if best is None else np.minimum(best, d)
+        for j in np.nonzero(best <= limit)[0]:
+            if j > i:
+                pairs.append((int(best[j]), i, int(j)))
+    pairs.sort()
+    dropped, kept, merges = set(), set(), []
+    for d, i, j in pairs:
+        a, b = keys[i], keys[j]
+        if a in dropped or b in dropped:
+            continue
+        keep, drop = (a, b) if len(occ[a]) >= len(occ[b]) else (b, a)
+        if drop in kept:
+            keep, drop = drop, keep
+            if drop in kept:
+                continue
+        for (layer, tx, ty) in occ[drop]:
+            cur = layer.a[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8]
+            layer.a[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8] = min(
+                _flips(arr[keep]), key=lambda v: int((cur != v).any(-1).sum()))
+        dropped.add(drop)
+        kept.add(keep)
+        merges.append(d)
+    return merges
+
+
 NORMAL, COVERED, SPLIT = 0, 1, 2   # metatile layer types (attribute bits 12-15)
 
 
@@ -160,8 +233,11 @@ def verify(rows, patched):
     a = np.array(Image.open(BIN / "tiles.png"))
     tiles = [a[y:y + 8, x:x + 8] for y in range(0, a.shape[0], 8) for x in range(0, a.shape[1], 8)]
     used = max(i for i, tl in enumerate(tiles) if tl.any()) + 1
-    print(f"verified {len(raw)} metatiles; {used} of 512 tiles used; "
+    print(f"verified {len(raw)} metatiles; {used} of {TILE_LIMIT} tiles used; "
           f"{len(patched)} cells on aethos ground")
+    if used > TILE_LIMIT:
+        sys.exit(f"akti_build: {used} tiles; the door animations overwrite tiles {TILE_LIMIT}-511, "
+                 f"so Akti may use at most {TILE_LIMIT}")
     return used
 
 
@@ -197,6 +273,13 @@ def main():
     keys = [s.key for s in structs]
     assert len(keys) == len(set(keys)), "duplicate structure keys"
     probs = validate(structs)
+    if not probs:
+        before = len(_tiles(structs))
+        merges = merge_near_duplicates(structs)
+        print(f"merged {len(merges)} near-duplicate tiles "
+              f"({merges.count(1)} differed by 1 px, {merges.count(2)} by 2): "
+              f"{before} -> {len(_tiles(structs))} tiles")
+        probs = validate(structs)
     for p in probs:
         print("PROBLEM:", p)
     if args.preview:
