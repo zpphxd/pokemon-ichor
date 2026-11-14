@@ -418,7 +418,7 @@ gSongTable::
 	song mus_route111, MUSIC_PLAYER_BGM, 0
 	song mus_help, MUSIC_PLAYER_BGM, 0
 	song mus_underwater, MUSIC_PLAYER_BGM, 0
-	song mus_victory_trainer, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_victory_trainer, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_victory_trainer
 	song mus_ichor_title, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_title
 	song mus_ichor_intro, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_intro
 	song mus_ichor_encounter_rival, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_encounter_may
@@ -480,14 +480,14 @@ gSongTable::
 	song mus_vs_frontier_brain, MUSIC_PLAYER_BGM, 0
 	song mus_vs_mew, MUSIC_PLAYER_BGM, 0
 	song mus_b_dome_lobby, MUSIC_PLAYER_BGM, 0
-	song mus_vs_wild, MUSIC_PLAYER_BGM, 0
-	song mus_vs_aqua_magma, MUSIC_PLAYER_BGM, 0
-	song mus_vs_trainer, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_battle_wild, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_vs_wild
+	song mus_ichor_titan, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_vs_aqua_magma
+	song mus_ichor_battle_trainer, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_vs_trainer
 	song mus_vs_gym_leader, MUSIC_PLAYER_BGM, 0
 	song mus_vs_champion, MUSIC_PLAYER_BGM, 0
 	song mus_vs_regi, MUSIC_PLAYER_BGM, 0
 	song mus_vs_kyogre_groudon, MUSIC_PLAYER_BGM, 0
-	song mus_vs_rival, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_battle_rival, MUSIC_PLAYER_BGM, 0 @ Ichor: was mus_vs_rival
 	song mus_vs_elite_four, MUSIC_PLAYER_BGM, 0
 	song mus_vs_aqua_magma_leader, MUSIC_PLAYER_BGM, 0
 	song mus_rg_follow_me, MUSIC_PLAYER_BGM, 0
