@@ -8,6 +8,13 @@ Arguments come in NAME COMMENT pairs. Each claim renames the lowest free
 FLAG_UNUSED_0x… / VAR_UNUSED_0x… line in include/constants/{flags,vars}.h,
 keeping its value and column alignment. Flags are only taken from 0x20–0x4FF,
 the ordinary saved event flags (below the trainer flags, above the temp flags).
+
+Parallel build sessions each claim from their own range, so their claims
+never collide when the director merges them. Pass --range LO-HI (hex) first:
+
+  python3 tools/ichor/claim.py --range 0x200-0x2FF flag FLAG_ICHOR_... "..."
+
+Ranges are assigned in tools/ichor/claim_ranges.md.
 """
 import re
 import sys
@@ -21,10 +28,18 @@ KINDS = {
 
 
 def main():
-    if len(sys.argv) < 4 or sys.argv[1] not in KINDS or len(sys.argv[2:]) % 2:
+    args = sys.argv[1:]
+    lo, hi = None, None
+    if args[:1] == ["--range"]:
+        if len(args) < 2:
+            raise SystemExit(__doc__)
+        lo, hi = (int(x, 16) for x in args[1].split("-"))
+        args = args[2:]
+    if len(args) < 3 or args[0] not in KINDS or len(args[1:]) % 2:
         raise SystemExit(__doc__)
-    path, prefix, allowed = KINDS[sys.argv[1]]
-    claims = list(zip(sys.argv[2::2], sys.argv[3::2]))
+    path, prefix, base_allowed = KINDS[args[0]]
+    allowed = base_allowed if lo is None else (lambda v: base_allowed(v) and lo <= v <= hi)
+    claims = list(zip(args[1::2], args[2::2]))
     text = path.read_text()
     for name, _ in claims:
         if not name.startswith(f"{prefix}_ICHOR_"):
