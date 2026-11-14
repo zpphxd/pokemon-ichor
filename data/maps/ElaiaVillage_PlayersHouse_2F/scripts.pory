@@ -25,6 +25,9 @@ script ElaiaVillage_PlayersHouse_2F_EventScript_WaterClock {
         closemessage
         fadescreen(FADE_TO_BLACK)
         special(StartWallClock)
+        // The clock takes over the screen at the end of this frame; the delay
+        // parks the script until the field comes back (as vanilla's clock does).
+        delay(30)
         setflag(FLAG_ICHOR_SET_WATER_CLOCK)
         msgbox(format("Drip… drip… drip. Good as new."))
     } else {

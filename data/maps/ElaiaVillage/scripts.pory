@@ -1,10 +1,13 @@
 // Elaia Village: the festival square (beat 2) and Kleon's challenge (beat 4).
-// Coordinates follow tools/ichor/maps/elaia.py, which writes this map's events:
-//   Halia (14,17) under the canopy; the line below her is Korinna (14,18),
-//   Philon (14,19), then the player's place (14,20).
-//   Kleon waits at (14,19) and you face him from (14,21). He and Alethea leave
-//   north up column x=11, which the watchers keep clear.
-//   The Akademia door is (5,29); its steps up into the square are (9..10,24).
+// Coordinates follow tools/ichor/maps/elaia.py, which writes this map's events
+// and checks the walks below against the layout:
+//   Halia (14,15) under the canopy at the old olive's foot. The line below her is
+//   Korinna (14,16), Philon (14,17), then the player's place (14,18).
+//   Kleon waits at (14,17) for beat 4 and you face him from (14,19). He and
+//   Alethea leave north up column x=11, which the watchers keep clear.
+//   The Akademia door is (5,29). Both flights of steps up from the lower
+//   terrace, (9..10,22) and (18..19,22), carry Kleon's trigger.
+//   The old shepherd stands on the road at (12,1) until beat 4, then at (14,2).
 
 mapscripts ElaiaVillage_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
@@ -18,45 +21,42 @@ text ElaiaVillage_Name_Philon { "PHILON" }
 text ElaiaVillage_Name_Kleon { "KLEON" }
 text ElaiaVillage_Name_Alethea { "ALETHEA" }
 text ElaiaVillage_Name_Gylippos { "GYLIPPOS" }
-text ElaiaVillage_Name_FestivalGoer { "FESTIVAL-GOER" }
-text ElaiaVillage_Name_Farmer { "OLIVE FARMER" }
-text ElaiaVillage_Name_Kid { "KID" }
 text ElaiaVillage_Name_Wooloo { "WOOLOO" }
-text ElaiaVillage_Name_Shepherd { "OLD SHEPHERD" }
 
 // Who stands where depends on how far the story has got.
 script ElaiaVillage_EventScript_SetUpVillage {
     setflag(FLAG_ICHOR_HIDE_ALETHEA_ELAIA)
     if (flag(FLAG_ICHOR_THREAD_READ)) {
-        setobjectxyperm(LOCALID_ELAIA_KORINNA, 11, 18)
+        // after the reading, Korinna and Philon step out of the line
+        setobjectxyperm(LOCALID_ELAIA_KORINNA, 11, 16)
         setobjectmovementtype(LOCALID_ELAIA_KORINNA, MOVEMENT_TYPE_FACE_LEFT)
-        setobjectxyperm(LOCALID_ELAIA_PHILON, 17, 18)
+        setobjectxyperm(LOCALID_ELAIA_PHILON, 17, 16)
         setobjectmovementtype(LOCALID_ELAIA_PHILON, MOVEMENT_TYPE_FACE_LEFT)
     }
     if (flag(FLAG_ICHOR_KLEON_TOOK_STARTER) && !flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
         // Kleon holds court in the square, and the village gathers round
         clearflag(FLAG_ICHOR_HIDE_KLEON_ELAIA)
-        setobjectxyperm(LOCALID_ELAIA_KORINNA, 12, 18)
+        setobjectxyperm(LOCALID_ELAIA_KORINNA, 12, 16)
         setobjectmovementtype(LOCALID_ELAIA_KORINNA, MOVEMENT_TYPE_FACE_RIGHT)
-        setobjectxyperm(LOCALID_ELAIA_PHILON, 16, 18)
+        setobjectxyperm(LOCALID_ELAIA_PHILON, 16, 16)
         setobjectmovementtype(LOCALID_ELAIA_PHILON, MOVEMENT_TYPE_FACE_LEFT)
         setobjectxyperm(LOCALID_ELAIA_WOMAN, 12, 20)
-        setobjectmovementtype(LOCALID_ELAIA_WOMAN, MOVEMENT_TYPE_FACE_RIGHT)
+        setobjectmovementtype(LOCALID_ELAIA_WOMAN, MOVEMENT_TYPE_FACE_UP)
         setobjectxyperm(LOCALID_ELAIA_MAN, 16, 20)
-        setobjectmovementtype(LOCALID_ELAIA_MAN, MOVEMENT_TYPE_FACE_LEFT)
-        setobjectxyperm(LOCALID_ELAIA_GYLIPPOS, 17, 19)
+        setobjectmovementtype(LOCALID_ELAIA_MAN, MOVEMENT_TYPE_FACE_UP)
+        setobjectxyperm(LOCALID_ELAIA_GYLIPPOS, 17, 18)
         setobjectmovementtype(LOCALID_ELAIA_GYLIPPOS, MOVEMENT_TYPE_FACE_LEFT)
     } else {
         setflag(FLAG_ICHOR_HIDE_KLEON_ELAIA)
     }
     if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
-        setobjectxyperm(LOCALID_ELAIA_SHEPHERD, 14, 3)
+        setobjectxyperm(LOCALID_ELAIA_SHEPHERD, 14, 2)
         setobjectmovementtype(LOCALID_ELAIA_SHEPHERD, MOVEMENT_TYPE_FACE_LEFT)
     }
 }
 
 // Walk the player to (VAR_0x8008, VAR_0x8009): down or up first, then across.
-// Every trigger that calls this has a clear path that way.
+// Every trigger that calls this has a clear path that way (elaia.py checks it).
 script ElaiaVillage_EventScript_WalkPlayer {
     getplayerxy(VAR_0x8004, VAR_0x8005)
     while (var(VAR_0x8005) < VAR_0x8009) {
@@ -117,7 +117,7 @@ script ElaiaVillage_EventScript_ThreadReading {
     msgbox(format("You! Melitta's child. Don't dawdle, get in line."))
     closemessage
     setvar(VAR_0x8008, 14)
-    setvar(VAR_0x8009, 20)
+    setvar(VAR_0x8009, 18)
     call(ElaiaVillage_EventScript_WalkPlayer)
     applymovement(LOCALID_PLAYER, Common_Movement_FaceUp)
     waitmovement(0)
@@ -182,11 +182,13 @@ script ElaiaVillage_EventScript_ThreadReading {
     setflag(FLAG_ICHOR_THREAD_READ)
 }
 
+// From (14,16) out to (11,16), toward the west garlands
 movement ElaiaVillage_Movement_KorinnaLeavesLine {
     walk_left * 3
     face_left
 }
 
+// From (14,16) out to (17,16), by the honey-cake stall
 movement ElaiaVillage_Movement_PhilonLeavesLine {
     walk_right * 3
     face_left
@@ -235,7 +237,6 @@ script ElaiaVillage_EventScript_ShepherdGate {
     lockall
     applymovement(LOCALID_ELAIA_SHEPHERD, Common_Movement_WalkInPlaceFasterDown)
     waitmovement(0)
-    setspeaker(ElaiaVillage_Name_Shepherd)
     msgbox(format("Whoa there. The grass is thick with Pokémon today.\pNobody walks that road without a partner. Go see Daphne."))
     closemessage
     applymovement(LOCALID_PLAYER, Common_Movement_WalkDown)
@@ -257,19 +258,20 @@ script ElaiaVillage_EventScript_KleonTrigger {
     }
     lockall
     hidefollower
-    playbgm(MUS_ENCOUNTER_BRENDAN, FALSE)
+    playbgm(MUS_ICHOR_ENCOUNTER_RIVAL, FALSE)
     setspeaker(ElaiaVillage_Name_Kleon)
     msgbox(format("There you are! Everyone, watch this."))
     closemessage
     setvar(VAR_0x8008, 14)
-    setvar(VAR_0x8009, 21)
+    setvar(VAR_0x8009, 19)
     call(ElaiaVillage_EventScript_WalkPlayer)
     applymovement(LOCALID_PLAYER, Common_Movement_FaceUp)
+    applymovement(LOCALID_ELAIA_KLEON, Common_Movement_FaceDown)
     applymovement(LOCALID_ELAIA_KORINNA, Common_Movement_FaceDown)
     applymovement(LOCALID_ELAIA_PHILON, Common_Movement_FaceDown)
     applymovement(LOCALID_ELAIA_WOMAN, Common_Movement_FaceRight)
     applymovement(LOCALID_ELAIA_MAN, Common_Movement_FaceLeft)
-    applymovement(LOCALID_ELAIA_GYLIPPOS, Common_Movement_FaceDown)
+    applymovement(LOCALID_ELAIA_GYLIPPOS, Common_Movement_FaceLeft)
     waitmovement(0)
     setspeaker(ElaiaVillage_Name_Kleon)
     msgbox(format("I'm Kleon. Lakonian. Raised in the battle school.\pWhen I was born, the Oracle told my mother something.\pThat I'd die young. And glorious.\pSo I'm in a hurry. Glory first. The dying part can wait.\pBattle me?"), MSGBOX_YESNO)
@@ -316,14 +318,18 @@ script ElaiaVillage_EventScript_KleonTrigger {
     applymovement(LOCALID_ELAIA_KLEON, ElaiaVillage_Movement_KleonRunsNorth)
     waitmovement(0)
     removeobject(LOCALID_ELAIA_KLEON)
+    setflag(FLAG_ICHOR_HIDE_KLEON_ELAIA)
+    fadedefaultbgm
+    // the watchers go back to watching the square
+    applymovement(LOCALID_ELAIA_KORINNA, Common_Movement_FaceRight)
+    applymovement(LOCALID_ELAIA_PHILON, Common_Movement_FaceLeft)
     applymovement(LOCALID_ELAIA_WOMAN, Common_Movement_FaceUp)
     applymovement(LOCALID_ELAIA_MAN, Common_Movement_FaceUp)
     applymovement(LOCALID_ELAIA_GYLIPPOS, Common_Movement_FaceUp)
     waitmovement(0)
     delay(30)
 
-    // Alethea comes out of the Akademia
-    hidefollower
+    // Alethea comes out of the Akademia, round the forecourt and up the allee
     opendoor(5, 29)
     waitdooranim
     clearflag(FLAG_ICHOR_HIDE_ALETHEA_ELAIA)
@@ -355,37 +361,47 @@ script ElaiaVillage_EventScript_KleonTrigger {
     removeobject(LOCALID_ELAIA_ALETHEA)
     setflag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)
     setflag(FLAG_ICHOR_HIDE_ALETHEA_ELAIA)
-    // the old shepherd steps aside from the road
-    setobjectxyperm(LOCALID_ELAIA_SHEPHERD, 14, 3)
-    setobjectxy(LOCALID_ELAIA_SHEPHERD, 14, 3)
-    turnobject(LOCALID_ELAIA_SHEPHERD, DIR_WEST)
-    fadedefaultbgm
+    // the old shepherd steps off the road
+    applymovement(LOCALID_ELAIA_SHEPHERD, ElaiaVillage_Movement_ShepherdStepsAside)
+    waitmovement(0)
+    setobjectxyperm(LOCALID_ELAIA_SHEPHERD, 14, 2)
+    setobjectmovementtype(LOCALID_ELAIA_SHEPHERD, MOVEMENT_TYPE_FACE_LEFT)
     releaseall
 }
 
-// From (14,19): west to the clear column x=11, then up the road and away.
+// From (14,17): west to the clear column x=11, then up the road and away
 movement ElaiaVillage_Movement_KleonRunsNorth {
     walk_fast_left * 3
-    walk_fast_up * 18
+    walk_fast_up * 17
 }
 
 movement ElaiaVillage_Movement_AletheaStepsOut {
     walk_down
 }
 
-// From the door (5,30): round the forecourt, up the lane and the steps, to the
-// player's left at (13,21).
+// From the step below the door (5,30): down to the forecourt's lower row,
+// east to the allee, up it and the west steps, then across to the player's
+// left at (13,19)
 movement ElaiaVillage_Movement_AletheaToSquare {
     walk_fast_down
-    walk_fast_right * 5
-    walk_fast_up * 10
-    walk_fast_right * 3
+    walk_fast_right * 4
+    walk_fast_up * 12
+    walk_fast_right * 4
     face_right
 }
 
+// From (13,19): west to the clear column x=11, then north out of the village
 movement ElaiaVillage_Movement_AletheaLeaves {
     walk_fast_left * 2
     walk_fast_up * 20
+}
+
+// From the road at (12,1) to the verge at (14,2)
+movement ElaiaVillage_Movement_ShepherdStepsAside {
+    walk_right
+    walk_down
+    walk_right
+    face_left
 }
 
 script ElaiaVillage_EventScript_Kleon {
@@ -394,7 +410,7 @@ script ElaiaVillage_EventScript_Kleon {
 }
 
 // ---------------------------------------------------------------------------
-// The villagers
+// The villagers. Named people speak in the name box; townsfolk don't.
 // ---------------------------------------------------------------------------
 
 script ElaiaVillage_EventScript_Korinna {
@@ -424,19 +440,16 @@ script ElaiaVillage_EventScript_Philon {
 }
 
 script ElaiaVillage_EventScript_OliveFarmer {
-    setspeaker(ElaiaVillage_Name_Farmer)
     msgbox(format("Best harvest in years. Every tree came in silver.\pMy father used to say silver olives mean something's watching.\pHe also said that about clouds. And goats."), MSGBOX_NPC)
 }
 
 script ElaiaVillage_EventScript_FestivalWoman {
-    setspeaker(ElaiaVillage_Name_FestivalGoer)
     msgbox(format("My sister sailed all the way to Delphoi to ask the Oracle.\p“Will my baby be a boy?” The Oracle said, “Yes and no.”\pTwins. One of each. The Oracle's never wrong. Just rude."), MSGBOX_NPC)
 }
 
 script ElaiaVillage_EventScript_FestivalMan {
     lock
     faceplayer
-    setspeaker(ElaiaVillage_Name_FestivalGoer)
     if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
         msgbox(format("Best match of the festival! Better than the footrace."))
     } else {
@@ -462,7 +475,6 @@ script ElaiaVillage_EventScript_Gylippos {
 }
 
 script ElaiaVillage_EventScript_Kid {
-    setspeaker(ElaiaVillage_Name_Kid)
     msgbox(format("My Wooloo ate the festival garland. Don't tell Halia."), MSGBOX_NPC)
 }
 
@@ -479,7 +491,6 @@ script ElaiaVillage_EventScript_KidsWooloo {
 script ElaiaVillage_EventScript_OldShepherd {
     lock
     faceplayer
-    setspeaker(ElaiaVillage_Name_Shepherd)
     if (flag(FLAG_ICHOR_GOT_STARTER)) {
         msgbox(format("Off you go, then. Mind the tall grass. And the goats."))
     } else {

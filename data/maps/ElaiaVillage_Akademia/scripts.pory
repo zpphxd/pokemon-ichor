@@ -9,8 +9,9 @@ const AKADEMIA_BARE_TABLE = 0x2AA   // aka_table_m: the table with its krater go
 
 mapscripts ElaiaVillage_Akademia_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        // Kleon only appears during the scene; Alethea is here until beat 4 ends
-        setflag(FLAG_ICHOR_HIDE_KLEON_ELAIA)
+        // Kleon only appears during the scene (his object hides behind a temp
+        // flag, cleared on every load); Alethea is here until beat 4 ends
+        setflag(FLAG_TEMP_1)
         if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
             setflag(FLAG_ICHOR_HIDE_ALETHEA_AKADEMIA)
         } else {
@@ -116,7 +117,7 @@ script ElaiaVillage_Akademia_EventScript_Welcome {
         default:
             msgbox(format("Piplup. One day it'll wear a trident on its brow, like the sea-god.\pFor now it mostly falls over. With great dignity."))
     }
-    playfanfare(MUS_OBTAIN_ITEM)
+    playfanfare(MUS_ICHOR_OBTAIN_MON)
     message(format("{PLAYER} received {STR_VAR_1}!"))
     waitmessage
     waitfanfare
@@ -130,7 +131,7 @@ script ElaiaVillage_Akademia_EventScript_Welcome {
 
     setspeaker(ElaiaVillage_Akademia_Name_Daphne)
     msgbox(format("And take this. It's a Pokédex.\pEvery Pokémon you meet, it remembers. Better than I do."))
-    playfanfare(MUS_OBTAIN_ITEM)
+    playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
     message(format("{PLAYER} received the Pokédex!"))
     waitmessage
     waitfanfare
@@ -145,9 +146,9 @@ script ElaiaVillage_Akademia_EventScript_Welcome {
     // Kleon barges in
     hidefollower
     playse(SE_DOOR)
-    clearflag(FLAG_ICHOR_HIDE_KLEON_ELAIA)
+    clearflag(FLAG_TEMP_1)
     addobject(LOCALID_AKADEMIA_KLEON)
-    playbgm(MUS_ENCOUNTER_BRENDAN, FALSE)
+    playbgm(MUS_ICHOR_ENCOUNTER_RIVAL, FALSE)
     applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonWalksIn)
     waitmovement(0)
     setspeaker(ElaiaVillage_Akademia_Name_Kleon)
@@ -213,7 +214,19 @@ script ElaiaVillage_Akademia_EventScript_Welcome {
     setspeaker(ElaiaVillage_Akademia_Name_Daphne)
     msgbox(format("Go on, {PLAYER}. A battle is only a question, louder.\pThe last krater stays with me. Someone always comes late."))
     closemessage
+    // she comes round the end of the table, where she can be talked to
+    applymovement(LOCALID_AKADEMIA_DAPHNE, ElaiaVillage_Akademia_Movement_DaphneRoundTheTable)
+    waitmovement(0)
+    setobjectxyperm(LOCALID_AKADEMIA_DAPHNE, 7, 3)
+    setobjectmovementtype(LOCALID_AKADEMIA_DAPHNE, MOVEMENT_TYPE_FACE_DOWN)
     releaseall
+}
+
+// From behind the table (10,2) to its west end (7,3)
+movement ElaiaVillage_Akademia_Movement_DaphneRoundTheTable {
+    walk_left * 3
+    walk_down
+    face_down
 }
 
 movement ElaiaVillage_Akademia_Movement_AletheaComesOver {
