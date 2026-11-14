@@ -6,7 +6,7 @@
 // Please note that this simple check is not 100% foolproof, but should be able to catch most unintended shifts.
 #define T_SAVEBLOCK1_SIZE 15572 // Ichor: trainer flag space grew by 16 for the slice trainers
 #define T_SAVEBLOCK2_SIZE 3884
-#define T_SAVEBLOCK3_SIZE 4
+#define T_SAVEBLOCK3_SIZE 1284 // Ichor: IchorSave (1,280 bytes, include/ichor_save.h) plus dexNavChain
 #define T_POKEMONSTORAGE_SIZE 34144
 
 TEST("SaveBlock1 is backwards compatible")

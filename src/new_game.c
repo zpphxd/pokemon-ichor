@@ -241,6 +241,7 @@ void NewGameInitData(void)
     ResetItemFlags();
     ResetDexNav();
     ClearFollowerNPCData();
+    Ichor_InitSave(); // Ichor
 }
 
 static void ResetMiniGamesRecords(void)
