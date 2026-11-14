@@ -16883,7 +16883,7 @@ Name: KLEON
 Class: Lakonian
 Pic: Kleon
 Gender: Male
-Music: Male
+Music: Rival
 Double Battle: No
 AI: Basic Trainer
 
@@ -16896,7 +16896,7 @@ Name: KLEON
 Class: Lakonian
 Pic: Kleon
 Gender: Male
-Music: Male
+Music: Rival
 Double Battle: No
 AI: Basic Trainer
 
@@ -16909,7 +16909,7 @@ Name: KLEON
 Class: Lakonian
 Pic: Kleon
 Gender: Male
-Music: Male
+Music: Rival
 Double Battle: No
 AI: Basic Trainer
 
@@ -16998,7 +16998,7 @@ Name: GRUNT
 Class: Titanborn
 Pic: Titan Grunt
 Gender: Male
-Music: Magma
+Music: Titan
 AI: Check Bad Move
 
 Geodude
@@ -17017,7 +17017,7 @@ Name: GRUNT
 Class: Titanborn
 Pic: Titan Grunt
 Gender: Female
-Music: Magma
+Music: Titan
 AI: Check Bad Move
 
 Nosepass
