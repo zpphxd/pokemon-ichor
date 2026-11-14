@@ -89,10 +89,10 @@
 #define FLAG_ICHOR_HIDE_KLEON_AKTI 0x43 // Ichor: hide Kleon in Akti
 #define FLAG_ICHOR_HIDE_ALETHEA_AKTI 0x44 // Ichor: hide Alethea in Akti
 #define FLAG_ICHOR_NO_WHITEOUT 0x45 // Ichor: set to make a battle loss continue the story
-#define FLAG_UNUSED_0x046    0x46 // Unused Flag
-#define FLAG_UNUSED_0x047    0x47 // Unused Flag
-#define FLAG_UNUSED_0x048    0x48 // Unused Flag
-#define FLAG_UNUSED_0x049    0x49 // Unused Flag
+#define FLAG_ICHOR_ITEM_ROUTE1_POKE_BALL 0x46 // Ichor: item ball: Route 1 Poke Ball
+#define FLAG_ICHOR_ITEM_ROUTE1_MIRACLE_SEED 0x47 // Ichor: item ball: Route 1 Miracle Seed
+#define FLAG_ICHOR_ITEM_ROUTE1_POTION 0x48 // Ichor: item ball: Route 1 Potion
+#define FLAG_ICHOR_ITEM_KRONION_ESCAPE_ROPE 0x49 // Ichor: item ball: Kronion Hill Escape Rope
 #define FLAG_UNUSED_0x04A    0x4A // Unused Flag
 #define FLAG_UNUSED_0x04B    0x4B // Unused Flag
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag
@@ -664,11 +664,11 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-#define FLAG_UNUSED_0x264  0x264 // Unused Flag
-#define FLAG_UNUSED_0x265  0x265 // Unused Flag
-#define FLAG_UNUSED_0x266  0x266 // Unused Flag
-#define FLAG_UNUSED_0x267  0x267 // Unused Flag
-#define FLAG_UNUSED_0x268  0x268 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE1_ORAN_BERRY 0x264 // Ichor: hidden item: Route 1 Oran Berry
+#define FLAG_ICHOR_HIDDEN_ROUTE1_REPEL 0x265 // Ichor: hidden item: Route 1 Repel
+#define FLAG_ICHOR_HIDDEN_ROUTE1_ANTIDOTE 0x266 // Ichor: hidden item: Route 1 Antidote
+#define FLAG_ICHOR_HIDDEN_KRONION_HARD_STONE 0x267 // Ichor: hidden item: Kronion Hill Hard Stone
+#define FLAG_ICHOR_HIDDEN_KRONION_STARDUST 0x268 // Ichor: hidden item: Kronion Hill Stardust
 #define FLAG_UNUSED_0x269  0x269 // Unused Flag
 #define FLAG_UNUSED_0x26A  0x26A // Unused Flag
 #define FLAG_UNUSED_0x26B  0x26B // Unused Flag
