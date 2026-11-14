@@ -7713,4 +7713,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteF = {
     .anims = sAnimTable_Standard,
     .images = sPicTable_IchorAcolyteF,
 };
+
+// A 16x16 field object, set up like the vanilla Fossil.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = sOamTables_16x16,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorTablet,
+};
 // End of Ichor object events

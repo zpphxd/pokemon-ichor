@@ -429,6 +429,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHoplit
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAugur;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteM;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteF;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
 // End of Ichor object events
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
@@ -850,6 +851,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_AUGUR] =              &gObjectEventGraphicsInfo_IchorAugur,
     [OBJ_EVENT_GFX_ICHOR_ACOLYTE_M] =          &gObjectEventGraphicsInfo_IchorAcolyteM,
     [OBJ_EVENT_GFX_ICHOR_ACOLYTE_F] =          &gObjectEventGraphicsInfo_IchorAcolyteF,
+    [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
     // End of Ichor object events
 };
 

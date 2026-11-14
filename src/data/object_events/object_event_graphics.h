@@ -664,4 +664,5 @@ const u32 gObjectEventPic_IchorHoplite[] = INCGFX_U32("graphics/object_events/pi
 const u32 gObjectEventPic_IchorAugur[] = INCGFX_U32("graphics/object_events/pics/people/ichor/augur.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorAcolyteM[] = INCGFX_U32("graphics/object_events/pics/people/ichor/acolyte_m.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorAcolyteF[] = INCGFX_U32("graphics/object_events/pics/people/ichor/acolyte_f.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorTablet[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/tablet.png", ".4bpp");
 // End of Ichor object events

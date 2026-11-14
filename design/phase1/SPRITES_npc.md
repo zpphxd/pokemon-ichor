@@ -157,6 +157,18 @@ Add one entry to each of these five files, always inside its Ichor block:
 5. **Revert the map:** `git checkout -- data/maps/ElaiaVillage_PlayersHouse_2F/map.json`.
 6. **Rebuild, then run `tools/ichor/smoke_test.sh`.**
 
+## Field objects
+
+Small props that scripts show and hide, drawn 16×16 in the cast palette so they cost no extra OBJ palette slot.
+
+- **Source:** `tools/ichor/art/sprites_objects.py`. Rebuild with `--write`; `--preview DIR` shows each object on grass and on a pale slab at 4×.
+- **Sheets:** `graphics/object_events/pics/misc/ichor/<name>.png`, one 16×16 frame.
+- **Registration:** the same five files as a walker, but set up like the vanilla Fossil: `INCGFX_U32(..., ".4bpp")` with no `-mwidth`/`-mheight`, `obj_frame_tiles` in the pic table, and a 16×16, `.inanimate = TRUE`, `sAnimTable_Inanimate` graphics info.
+
+| Constant | Sheet | Look | Used |
+|---|---|---|---|
+| `OBJ_EVENT_GFX_ICHOR_TABLET` | `misc/ichor/tablet.png` | An unfired clay tablet lying face up, a sickle pressed into one corner and a scratched list of places, one line struck through. The bottom right corner is chipped. | Kronion Hill, beat 5: the Titanborn drop it fleeing the summit |
+
 ## Still open
 
 - **Shading:** the sheets use two tones per material plus the outline. Vanilla NPCs often use three, so a polish pass could add mid-tones. That would need a freed palette slot or a second cast palette.
