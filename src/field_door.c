@@ -8,6 +8,7 @@
 #include "tilesets.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
+#include "constants/region_map_sections.h" // Ichor: IsIchorDoorMap
 
 #define DOOR_SOUND_NORMAL  0
 #define DOOR_SOUND_SLIDING 1
@@ -1044,6 +1045,82 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
     {},
 };
 
+// Ichor: Greek door animations for the aethos tileset's five animated doors,
+// which keep General's metatile ids (design/phase1/TILES_aethos.md). Drawn by
+// tools/ichor/art/doors.py on each door's own tiles, all in aethos palette 0;
+// see design/phase1/ITEMS.md. kalliste's, oikia's and civic's doors are
+// non-animated by design.
+#define METATILE_Aethos_Door_Farmhouse  0x021
+#define METATILE_Aethos_Door_Agora      0x041
+#define METATILE_Aethos_Door_Asclepeion 0x061
+#define METATILE_Aethos_Door_Palaestra  0x1CD
+#define METATILE_Aethos_Door_Theater    0x1DB
+
+extern const struct Tileset gTileset_Aethos;
+
+static const u8 sDoorAnimTiles_IchorFarmhouse[] = INCGFX_U8("graphics/door_anims/ichor_farmhouse.png", ".4bpp");
+static const u8 sDoorAnimTiles_IchorAgora[] = INCGFX_U8("graphics/door_anims/ichor_agora.png", ".4bpp");
+static const u8 sDoorAnimTiles_IchorAsclepeion[] = INCGFX_U8("graphics/door_anims/ichor_asclepeion.png", ".4bpp");
+static const u8 sDoorAnimTiles_IchorPalaestra[] = INCGFX_U8("graphics/door_anims/ichor_palaestra.png", ".4bpp");
+static const u8 sDoorAnimTiles_IchorTheater[] = INCGFX_U8("graphics/door_anims/ichor_theater.png", ".4bpp");
+
+// Read 8 at a time per metatile (4 tiles, then 4 upper-layer slots), so a
+// 1x2 door reads 12.
+static const u8 sDoorAnimPalettes_IchorAethos[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+static const struct DoorGraphics sIchorDoorAnimGraphicsTable[] =
+{
+    {
+        .metatileNum = METATILE_Aethos_Door_Farmhouse,
+        .tileset = &gTileset_Aethos,
+        .sound = DOOR_SOUND_NORMAL,
+        .size = DOOR_SIZE_1x1,
+        .tiles = sDoorAnimTiles_IchorFarmhouse,
+        .palettes = sDoorAnimPalettes_IchorAethos
+    },
+    {
+        .metatileNum = METATILE_Aethos_Door_Agora,
+        .tileset = &gTileset_Aethos,
+        .sound = DOOR_SOUND_SLIDING, // a curtain drawn aside
+        .size = DOOR_SIZE_1x2,
+        .tiles = sDoorAnimTiles_IchorAgora,
+        .palettes = sDoorAnimPalettes_IchorAethos
+    },
+    {
+        .metatileNum = METATILE_Aethos_Door_Asclepeion,
+        .tileset = &gTileset_Aethos,
+        .sound = DOOR_SOUND_NORMAL,
+        .size = DOOR_SIZE_1x2,
+        .tiles = sDoorAnimTiles_IchorAsclepeion,
+        .palettes = sDoorAnimPalettes_IchorAethos
+    },
+    {
+        .metatileNum = METATILE_Aethos_Door_Palaestra,
+        .tileset = &gTileset_Aethos,
+        .sound = DOOR_SOUND_NORMAL,
+        .size = DOOR_SIZE_1x1,
+        .tiles = sDoorAnimTiles_IchorPalaestra,
+        .palettes = sDoorAnimPalettes_IchorAethos
+    },
+    {
+        .metatileNum = METATILE_Aethos_Door_Theater,
+        .tileset = &gTileset_Aethos,
+        .sound = DOOR_SOUND_NORMAL,
+        .size = DOOR_SIZE_1x1,
+        .tiles = sDoorAnimTiles_IchorTheater,
+        .palettes = sDoorAnimPalettes_IchorAethos
+    },
+    {},
+};
+
+// Ichor: Ichor's own maps. Its map sections are appended after Emerald's,
+// from MAPSEC_ELAIA_VILLAGE on.
+static bool32 IsIchorDoorMap(void)
+{
+    return gMapHeader.regionMapSectionId >= MAPSEC_ELAIA_VILLAGE
+        && gMapHeader.regionMapSectionId < MAPSEC_NONE;
+}
+
 // NOTE: The tiles of a door's animation must be copied to VRAM because they are not already part of any given tileset.
 //       This means that if there are any pre-existing tiles in this copied region that are visible when the door
 //       animation is played they will be overwritten.
@@ -1227,6 +1304,16 @@ static const struct DoorAnimFrame *GetLastDoorFrame(const struct DoorAnimFrame *
 
 static const struct DoorGraphics *GetDoorGraphics(const struct DoorGraphics *gfx, u16 metatileNum)
 {
+    // Ichor: Greek doors are looked up first. An Ichor map looks nowhere
+    // else, so no Hoenn door animation can play there (a Hoenn door tile
+    // just opens without one).
+    if (gfx == sDoorAnimGraphicsTable)
+    {
+        const struct DoorGraphics *ichor = GetDoorGraphics(sIchorDoorAnimGraphicsTable, metatileNum);
+        if (ichor != NULL || IsIchorDoorMap())
+            return ichor;
+    }
+
     while (gfx->tiles != NULL)
     {
         if (gfx->metatileNum == metatileNum && (gfx->tileset == gMapHeader.mapLayout->primaryTileset || gfx->tileset == gMapHeader.mapLayout->secondaryTileset))
