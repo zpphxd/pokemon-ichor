@@ -13,15 +13,15 @@ from mon_lib import Mat, Mon, bez, bez3
 
 COLORS = [
     ("ink", (16, 8, 24)),
-    # the black war-shell: bronze gone dark as basalt
-    ("k0", (32, 24, 48)), ("k1", (56, 48, 80)), ("k2", (96, 88, 128)), ("k3", (160, 152, 192)),
-    # shadow
-    ("s0", (40, 24, 64)), ("s1", (72, 48, 112)), ("s2", (120, 88, 168)),
+    # the black war-shell: bronze gone dark as basalt, polished to a sheen
+    ("k0", (32, 24, 48)), ("k1", (64, 56, 96)), ("k2", (112, 104, 152)), ("k3", (184, 176, 216)),
+    # shadow, lit violet from within
+    ("s0", (48, 32, 80)), ("s1", (88, 64, 136)), ("s2", (144, 112, 200)),
     # ghost-light, the signature glow
-    ("v0", (152, 88, 232)), ("v1", (200, 160, 248)), ("v2", (240, 224, 248)),
+    ("v0", (168, 104, 248)), ("v1", (208, 168, 248)), ("v2", (248, 232, 248)),
     # the wealth under the earth, and red-figure trim
-    ("g0", (144, 88, 32)), ("g1", (224, 168, 64)), ("g2", (248, 232, 152)),
-    ("t0", (176, 72, 48)),
+    ("g0", (168, 104, 40)), ("g1", (240, 184, 72)), ("g2", (248, 240, 176)),
+    ("t0", (192, 80, 56)),
 ]
 # The shell turns marble-white like a grave stele and the ghost-light turns
 # sun-gold; the gold talons darken to old bronze so they still stand apart.
@@ -75,10 +75,10 @@ HELM = [
 # Hades's lot: a bident, two prongs over a crossbar and a shaft
 BIDENT = [
     "", "", "", "", "", "",
-    "..hc.....hc",
-    "..hc.....hc",
-    "...cccccccc",
-    "....hhchh",
+    "...hc...ch",
+    "...hc...ch",
+    "....hccch",
+    "......c",
     ".....hc",
     ".....hc",
     ".....hc",
@@ -327,14 +327,21 @@ def _follow_body(p, bob, back=False):
     p.blob(49, 28 + bob, 7.6, 6, shell_hi, group=63)
     for side, gx in ((-1, 11), (1, 53)):
         p.limb([(gx - side * 2, 32 + bob), (gx, 44 + bob)], 6, 5.4, shade, group=64 + side)
-        talon(p, (gx - 2, 47 + bob), (gx - 3, 57), 3.0, 70 + side)
-        talon(p, (gx + 2, 47 + bob), (gx + 3, 57), 3.0, 72 + side)
+        talon(p, (gx - 2, 47 + bob), (gx - 3, 57), 3.8, 70 + side)
+        talon(p, (gx + 2, 47 + bob), (gx + 3, 57), 3.8, 72 + side)
         p.blob(gx, 46 + bob, 4.4, 3.8, shell_hi, group=74 + side)
+    # ghost-light under the pauldrons and the hem
+    p.stroke([(9, 33 + bob), (20, 33 + bob)], "v0")
+    p.stroke([(44, 33 + bob), (55, 33 + bob)], "v0")
+    p.stroke([(22, 46 + bob), (41, 46 + bob)], "v1")
+    p.stroke([(30, 49 + bob), (32, 55)], "v0")
 
 
 def _down(p, phase):
     bob = phase
-    p.poly([(29, 18 + bob), (24, 6), (30, 10), (32, 3), (34, 10), (40, 6), (35, 18 + bob)], smoke, group=5)
+    for k, (a, b, w, bend) in enumerate((((30, 17 + bob), (25, 5 + bob), 6.0, 1.2), ((32, 16 + bob), (36, 3 + bob), 7.0, -1.6),
+                                         ((34, 17 + bob), (44, 8 + bob), 6.0, -1.6))):
+        tongue(p, a, b, w, smoke, group=5 + k, fat=0.34, bend=bend)
     _follow_body(p, bob)
     p.poly([(23, 18 + bob), (26, 12 + bob), (32, 10 + bob), (38, 12 + bob), (41, 18 + bob), (41, 27 + bob),
             (35, 30 + bob), (29, 30 + bob), (23, 27 + bob)], shell_hi, group=71)
@@ -347,7 +354,9 @@ def _down(p, phase):
 
 def _up(p, phase):
     bob = phase
-    p.poly([(29, 18 + bob), (24, 6), (30, 10), (32, 3), (34, 10), (40, 6), (35, 18 + bob)], smoke, group=5)
+    for k, (a, b, w, bend) in enumerate((((30, 17 + bob), (25, 5 + bob), 6.0, 1.2), ((32, 16 + bob), (36, 3 + bob), 7.0, -1.6),
+                                         ((34, 17 + bob), (44, 8 + bob), 6.0, -1.6))):
+        tongue(p, a, b, w, smoke, group=5 + k, fat=0.34, bend=bend)
     _follow_body(p, bob, back=True)
     p.poly([(23, 18 + bob), (26, 12 + bob), (32, 10 + bob), (38, 12 + bob), (41, 18 + bob), (43, 28 + bob),
             (37, 29 + bob), (27, 29 + bob), (21, 28 + bob)], shell_hi, group=71)
@@ -377,7 +386,30 @@ def _icon(p, phase):
     helm(p, ox + 6, oy + 6 - up)
 
 
+# At follower size the black shell turns to a silhouette, so the follower and
+# side views draw it a step lighter, the smoke lit violet from within.
+LIGHT = {
+    "shell_hi": Mat(["k1", "k2", "k3"], line="ink", cuts=[0.34, 0.68]),
+    "shell": Mat(["k1", "k2"], line="ink", cuts=[0.5]),
+    "smoke": Mat(["s1", "s2", "v0"], line="s0", outline="ink", cuts=[0.4, 0.8]),
+    "shade": Mat(["s1", "s2"], line="s0", outline="ink", cuts=[0.5]),
+}
+
+
 def nekranax(p, view, phase):
+    if not p.big and view != "icon":
+        g = globals()
+        saved = {k: g[k] for k in LIGHT}
+        g.update(LIGHT)
+        try:
+            _draw(p, view, phase)
+        finally:
+            g.update(saved)
+        return
+    _draw(p, view, phase)
+
+
+def _draw(p, view, phase):
     if view == "icon":
         _icon(p, phase)
     elif view in ("front", "side"):

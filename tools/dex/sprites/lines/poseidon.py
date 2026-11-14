@@ -20,16 +20,18 @@ COLORS = [
     ("w3", (136, 200, 240)), ("foam", (240, 248, 248)),
     # verdigris: the bronze gone green
     ("v0", (24, 64, 72)), ("v1", (40, 112, 104)), ("v2", (88, 168, 136)), ("v3", (160, 216, 176)),
-    # bare bronze where the patina wears, coral growing on it
-    ("b0", (128, 72, 32)), ("b1", (216, 160, 72)), ("coral", (232, 104, 88)),
+    # bare bronze where the patina wears
+    ("b0", (128, 72, 32)), ("b1", (216, 160, 72)),
+    # the glassy green of thin water at the top of the wave
+    ("glass", (80, 184, 200)),
     # the signature glow
     ("glow", (104, 240, 224)),
 ]
-# The patina is scoured off: bright new bronze in sun-gold, the coral bleached
-# to marble-white barnacles, the glow gone to white-gold.
+# The patina is scoured off: bright new bronze in sun-gold, the glow gone to
+# white-gold.
 SHINY = {
     "v0": (112, 64, 24), "v1": (184, 120, 40), "v2": (232, 176, 64), "v3": (248, 224, 136),
-    "b0": (88, 48, 24), "b1": (152, 96, 40), "coral": (232, 224, 208), "glow": (248, 240, 168),
+    "b0": (88, 48, 24), "b1": (152, 96, 40), "glow": (248, 240, 168),
 }
 
 water = Mat(["w0", "w1", "w2", "w3"], line="w0", cuts=[0.24, 0.5, 0.76])
@@ -38,7 +40,6 @@ foam_m = Mat(["w3", "foam"], line="w2", cuts=[0.5])
 verd = Mat(["v0", "v1", "v2", "v3"], line="v0", cuts=[0.2, 0.44, 0.7])
 verd_hi = Mat(["v0", "v1", "v2", "v3", "foam"], line="v0", cuts=[0.16, 0.38, 0.6, 0.86])
 bronze = Mat(["b0", "b1"], line="b0", cuts=[0.5])
-coral_m = Mat(["b0", "coral"], line="b0", cuts=[0.4])
 tine_m = Mat(["w2", "w3", "foam"], line="w1", cuts=[0.4, 0.7])
 
 
@@ -78,13 +79,13 @@ HELM = [
 # Poseidon's lot: a trident, three tines over a crossbar and a shaft
 TRIDENT = [
     "", "", "", "", "", "",
-    "..hc..hch.hc",
-    "..hc...c..hc",
-    "...cccccccc",
-    "....hhchh",
+    "..hc..c..ch",
+    "...c..c..c",
+    "....c.c.c",
+    ".....ccc",
+    "......c",
     ".....hc",
-    ".....hc",
-    ".....hc",
+    "......c",
     ".....hc",
     "......c",
 ]
@@ -228,9 +229,6 @@ def _front_body(p, phase):
     p.blob(40.2, 31.8, 5.6, 3.8, verd_hi, ang=20, group=132)
     p.blob(14.8, 34.8, 3.8, 2.2, verd, ang=-32, group=133, bias=0.06)
     p.blob(16.6, 31.8, 4.6, 3.4, verd_hi, ang=-20, group=134, bias=0.04)
-    if big:
-        p.lens((43, 29.5), (45.5, 25.5), 2.2, coral_m, bend=0.8, group=135)
-        p.lens((44.6, 30), (48, 27.6), 1.8, coral_m, bend=-0.6, group=136)
     # ---- the crest: a fin of water swept back over the helm
     crest = path(bez3((19.5, 16), (19, 10), (24, 8.4), (30, 8.4)), bez3((30, 8.4), (38, 8.6), (45, 13), (48, 23)),
                  [(45.5, 24)], bez3((45.5, 24), (42, 18), (37, 14.5), (30, 13.5)), [(23, 15.5)])
