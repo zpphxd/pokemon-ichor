@@ -381,6 +381,31 @@ script EventScript_IchorSurface {
     releaseall
 }
 
+// Ivy walls: Dionysus's thyrsus (his gift II) climbs them with the
+// expansion's Rock Climb. Always asks, like water.
+script EventScript_IchorIvyClimb {
+    lockall
+    if (!flag(FLAG_ICHOR_THYRSUS)) {
+        msgbox(format("Thick ivy covers the wall. It would hold a climber who had the god's own staff."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (flag(FLAG_ICHOR_NO_RELICS)) {
+        goto(EventScript_IchorForbidden)
+    }
+    msgbox(format("Thick ivy covers the wall.\pClimb it with the thyrsus?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    closemessage
+    setfieldeffectargument(0, ICHOR_FIELD_EFFECT_RELIC)
+    dofieldeffect(FLDEFF_USE_ROCK_CLIMB)
+    waitstate
+    releaseall
+}
+
 // ---------------------------------------------------------------------------
 // Light: braziers, lit zones, and the torch from the bag or the Relic Ring
 // ---------------------------------------------------------------------------

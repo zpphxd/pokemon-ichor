@@ -20,6 +20,8 @@ u8 Ichor_GetTorchFlashLevel(void);              // overworld.c, SetDefaultFlashL
 bool32 Ichor_IsRelicShowArg(u32 arg);           // field_effect.c, FldEff_FieldMoveShowMonInit
 void Ichor_StartRelicShow(u16 itemId);
 u16 Ichor_GetFlyEffectArg(void);                // field_effect.c, Task_UseFly
+struct ObjectEvent;
+bool32 Ichor_CanLeapGap(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 direction); // field_player_avatar.c
 MainCallback Ichor_GetFlyMapCancelCallback(void); // region_map.c, CB_ExitFlyMap
 bool32 Ichor_TryOpenRelicRing(void);            // item_menu.c, UseRegisteredKeyItemOnField
 

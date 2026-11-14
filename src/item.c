@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "ichor_relics.h"
 #include "item.h"
 #include "berry.h"
@@ -962,7 +963,7 @@ u32 GetItemStatus1Mask(enum Item itemId)
 
 u32 GetItemSellPrice(enum Item itemId)
 {
-    return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
+    return Ichor_ModifySellPrice(itemId, GetItemPrice(itemId) / ITEM_SELL_FACTOR); // Ichor: Hermes, Hades
 }
 
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect)

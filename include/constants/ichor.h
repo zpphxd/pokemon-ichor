@@ -22,6 +22,15 @@
 #define ICHOR_GOD_HADES       15
 #define ICHOR_GOD_COUNT       16  // including NONE
 
+// Favor for story deeds (SYSTEMS §3): special Ichor_AddFavor with VAR_0x8005 = one of these
+#define ICHOR_FAVOR_LAUREL      15  // win that god's laurel or Pantheon seat
+#define ICHOR_FAVOR_MYTH_QUEST  10  // finish that god's myth-quest
+#define ICHOR_FAVOR_FESTIVAL    5   // take part in that god's festival
+#define ICHOR_FAVOR_CLEANSE     3   // cleanse a desecrated altar
+
+// The Relic Ring's entry for Hestia's Hearthfire (not an item)
+#define ICHOR_RING_HEARTHFIRE   0xFFF0
+
 // --- Herm waystones (SYSTEMS §4): one great herm per route ----------------
 #define HERM_KALLISTE_ROUTE_1  0
 #define HERM_ROUTE_2           1

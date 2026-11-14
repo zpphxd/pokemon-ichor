@@ -242,6 +242,7 @@ enum {
     MB_DOWN_RIGHT_STAIR_WARP,
     MB_DOWN_LEFT_STAIR_WARP,
     MB_ROCK_CLIMB,
+    MB_ICHOR_GAP, // Ichor: a one-tile gap the Winged Talaria leap while running (SYSTEMS §1)
     NUM_METATILE_BEHAVIORS
 };
 

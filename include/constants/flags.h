@@ -1708,6 +1708,21 @@
 #define FLAG_ICHOR_TORCH_DOUSED                 (FLAG_ICHOR_RELICS_START + 0x30) // the torch is out (Relic Ring)
 #define FLAG_ICHOR_HELM_ON                      (FLAG_ICHOR_RELICS_START + 0x31) // the Helm of Darkness is worn
 #define FLAG_ICHOR_NO_RELICS                    (FLAG_ICHOR_RELICS_START + 0x32) // set in ON_TRANSITION: no relics here; cleared on every map change
+// gift II upgrades that aren't relics (SYSTEMS §3)
+#define FLAG_ICHOR_EVER_EMBER                   (FLAG_ICHOR_RELICS_START + 0x25) // Hestia: Hearthfire never counts down; hearths heal
+#define FLAG_ICHOR_HARVEST_BASKET               (FLAG_ICHOR_RELICS_START + 0x26) // Demeter: berry trees always give one more
+#define FLAG_ICHOR_THYRSUS                      (FLAG_ICHOR_RELICS_START + 0x27) // Dionysus: climb marked ivy walls (Rock Climb)
+#define FLAG_ICHOR_HUNTERS_MOON                 (FLAG_ICHOR_RELICS_START + 0x28) // Artemis: the Augur's Eye lists rare slots (hook)
+#define FLAG_ICHOR_ATHENAS_STYLUS               (FLAG_ICHOR_RELICS_START + 0x29) // Athena: Scroll of Deeds hints (hook)
+#define FLAG_ICHOR_EYES_OF_ARGUS                (FLAG_ICHOR_RELICS_START + 0x2A) // Hera: the Augur's Eye detector always on (hook)
+
+// The rites' gifts: god g's gift I, II, III and the Hierophant's offering
+#define FLAG_ICHOR_GIFT(god, n)                 (FLAG_ICHOR_GIFTS_START + 4 * (god) + (n))
+#define ICHOR_GIFT_I                            0
+#define ICHOR_GIFT_II                           1
+#define ICHOR_GIFT_III                          2
+#define ICHOR_GIFT_HIEROPHANT                   3
+#define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
 // Ichor bank flags: end
 
@@ -1716,7 +1731,8 @@
 #define ICHOR_DAILY_FLAGS_COUNT                 256
 #define ICHOR_DAILY_FLAGS_END                   (ICHOR_DAILY_FLAGS_START + ICHOR_DAILY_FLAGS_COUNT - 1)
 
-#define FLAG_DAILY_ICHOR_PRAYED_START           (ICHOR_DAILY_FLAGS_START + 0x00) // 16: prayed to each god today (§3)
+#define FLAG_DAILY_ICHOR_PRAYED_START           (ICHOR_DAILY_FLAGS_START + 0x00) // 16: prayed to each god today (§3); slot 0 (no god) is Ares's bout
+#define FLAG_DAILY_ICHOR_ARES_BOUT              (ICHOR_DAILY_FLAGS_START + 0x00) // fought Ares's war-acolyte today
 #define FLAG_DAILY_ICHOR_DIG_START              (ICHOR_DAILY_FLAGS_START + 0x10) // 96 daily dig spots (§5)
 #define FLAG_DAILY_ICHOR_LAUREL_START           (ICHOR_DAILY_FLAGS_START + 0x70) // 32 laurel trees, one sprig a day (§3)
 #define FLAG_DAILY_ICHOR_GENERAL_START          (ICHOR_DAILY_FLAGS_START + 0x90) // 112 claimed by name, below

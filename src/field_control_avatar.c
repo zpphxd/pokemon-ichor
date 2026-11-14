@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "ichor_relics.h"
 #include "battle_setup.h"
 #include "bike.h"
@@ -598,7 +599,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         SetMsgSignPostAndVarFacing(direction);
         return Common_EventScript_ShowPokemonCenterSign;
     }
-    if (IsFieldMoveUnlocked(FIELD_MOVE_ROCK_CLIMB) && MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive())
+    if (MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive()) // Ichor: ivy walls; the script checks the thyrsus
         return EventScript_UseRockClimb;
 
     elevation = position->elevation;
@@ -695,6 +696,8 @@ bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileBehavior
     if (TryStartStepCountScript(metatileBehavior) == TRUE)
         return TRUE;
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior) && UpdateRepelCounter() == TRUE)
+        return TRUE;
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && Ichor_OnStep()) // Ichor: a rite's blessing counts down
         return TRUE;
     if (OnStep_DexNavSearch())
         return TRUE;

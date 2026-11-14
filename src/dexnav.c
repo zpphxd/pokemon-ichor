@@ -1,4 +1,7 @@
 #include "global.h"
+#include "ichor_rites.h"
+// Ichor: Artemis's blessing lets you creep closer (SYSTEMS §3)
+#define ICHOR_SNEAKING_PROXIMITY (SNEAKING_PROXIMITY + Ichor_DexNavSneakBonus())
 #include "battle_main.h"
 #include "battle_setup.h"
 #include "bg.h"
@@ -471,7 +474,7 @@ static void AddSearchWindowText(enum Species species, u8 proximity, u8 searchLev
     StringExpandPlaceholders(gStringVar4, sText_MonLevel);
     AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, FONT_SMALL, WINDOW_COL_1, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar4);
 
-    if (proximity <= SNEAKING_PROXIMITY)
+    if (proximity <= ICHOR_SNEAKING_PROXIMITY)
     {
         PlaySE(SE_POKENAV_ON);
         // move
@@ -600,9 +603,9 @@ static bool8 DexNavPickTile(enum EncounterType environment, u8 areaX, u8 areaY, 
             //Check for objects
             nextIter = FALSE;
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
-                tileBuffer = SNEAKING_PROXIMITY + 3;
+                tileBuffer = ICHOR_SNEAKING_PROXIMITY + 3;
             else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
-                tileBuffer = SNEAKING_PROXIMITY + 1;
+                tileBuffer = ICHOR_SNEAKING_PROXIMITY + 1;
 
             if (GetPlayerDistance(topX, topY) <= tileBuffer)
             {
@@ -1071,7 +1074,7 @@ bool32 OnStep_DexNavSearch(void)
         }
     }
 
-    if (sDexNavSearchDataPtr->proximity <= SNEAKING_PROXIMITY && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_BIKE))
+    if (sDexNavSearchDataPtr->proximity <= ICHOR_SNEAKING_PROXIMITY && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_BIKE))
     { // running/biking too close
         //always do event script, even if player hasn't revealed a hidden mon. It's assumed they would be creeping towards it
         EndDexNavSearchSetupScript(EventScript_MovedTooFast);
@@ -1151,7 +1154,7 @@ static void DexNavUpdateSearchWindow(u8 proximity, u8 searchLevel)
     if (sDexNavSearchDataPtr->starSpriteIds[2] != MAX_SPRITES)
         gSprites[sDexNavSearchDataPtr->starSpriteIds[2]].invisible = TRUE;
 
-    if (proximity <= SNEAKING_PROXIMITY)
+    if (proximity <= ICHOR_SNEAKING_PROXIMITY)
     {
         if (searchLevel > 2 && sDexNavSearchDataPtr->heldItem)
         {
@@ -2483,7 +2486,7 @@ bool32 TryFindHiddenPokemon(void)
 
     (*stepPtr)++;
     (*stepPtr) %= HIDDEN_MON_STEP_COUNT;
-    if ((*stepPtr) == 0 && (Random() % 100 < HIDDEN_MON_SEARCH_RATE))
+    if ((*stepPtr) == 0 && (Random() % 100 < Ichor_DexNavHiddenRate(HIDDEN_MON_SEARCH_RATE)))
     {
         // hidden Pokémon
         u32 headerId = GetCurrentMapWildMonHeaderId();

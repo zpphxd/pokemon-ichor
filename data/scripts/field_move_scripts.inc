@@ -450,6 +450,7 @@ EventScript_UseDefog::
 	end
 
 EventScript_UseRockClimb::
+	goto EventScript_IchorIvyClimb @ Ichor: Dionysus's thyrsus climbs ivy walls (data/scripts/ichor_relics.pory)
 	lockall
 	checkfieldmove FIELD_MOVE_ROCK_CLIMB
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantRockClimb

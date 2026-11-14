@@ -94,13 +94,13 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 ## Status of the rest of this file
 
-§1 and §2 are built. **§3–§5 are the planned API, published early so the world sessions can write their scripts against it now.** The names in them are fixed: build against them, and stub what isn't there yet. The behavior lands batch by batch:
+§1–§3 are built. **§4–§5 are the planned API, published early so the world sessions can write their scripts against it now.** The names in them are fixed: build against them, and stub what isn't there yet. The behavior lands batch by batch:
 
 | § | System | Batch | State |
 |---|---|---|---|
 | 1 | Save state and banks | 1 | **Built** |
 | 2 | Relics, darkness and braziers | 2 | **Built** |
-| 3 | Rites: altars, Favor, blessings, gifts | 3 | Planned, names fixed |
+| 3 | Rites: altars, Favor, blessings, gifts | 3 | **Built** |
 | 4 | Herm waystones and the Wings | 4 | Planned, names fixed |
 | 5 | Labyrinth mechanics, then the Frozen Hour | 5 | Hooks only |
 
@@ -218,36 +218,86 @@ Running already works without it.
 
 ## 3. Rites (SYSTEMS §3)
 
-**God ids** (`include/constants/ichor.h`): `ICHOR_GOD_HESTIA` (1), `_HERMES`, `_DEMETER`, `_DIONYSUS`, `_ARTEMIS`, `_HEPHAESTUS`, `_APHRODITE`, `_APOLLO`, `_ARES`, `_POSEIDON`, `_ATHENA`, `_HERA`, `_ZEUS`, `_HECATE`, `_HADES` (15). 0 is none.
+The code is `src/ichor_rites.c` and `data/scripts/ichor_rites.pory`. **God ids** are in `include/constants/ichor.h`: `ICHOR_GOD_HESTIA` (1), `_HERMES`, `_DEMETER`, `_DIONYSUS`, `_ARTEMIS`, `_HEPHAESTUS`, `_APHRODITE`, `_APOLLO`, `_ARES`, `_POSEIDON`, `_ATHENA`, `_HERA`, `_ZEUS`, `_HECATE`, `_HADES` (15). 0 is none.
 
 ### Altars
 
-Use these directly as an altar's bg event or object script. Each runs the whole rite: PRAY, MAKE AN OFFERING, FAVOR or LEAVE, then any gift that is due.
+Use these directly as an altar's bg event or object script. Each runs the whole rite: the altar's line, then a menu of PRAY, MAKE AN OFFERING, FAVOR and LEAVE, then any gift that is due. LESSON joins the menu once the god has taught its move, and REST joins it at a hearth once Hestia's Ever-Ember is owned.
 
 | Script | Where |
 |---|---|
 | `EventScript_IchorAltar_<God>` | A roadside or town altar, e.g. `EventScript_IchorAltar_Apollo` |
-| `EventScript_IchorTempleAltar_<God>` | The god's great altar in their temple: offerings count double |
-| `EventScript_IchorHearth` | A household hearth (Hestia) |
-| `EventScript_IchorAresTrophy` | Ares's trophy: "Offer a battle", once a day |
-| `EventScript_IchorDesecratedAltar` | Set `VAR_0x8004` to the god and `VAR_0x8005` to the altar's index (0–31), then `goto` it. Beat the Titanborn guard in your own script first. Its flag is `FLAG_ICHOR_ALTARS_START + index`. |
+| `EventScript_IchorTempleAltar_<God>` | The god's great altar in their temple. Offerings count double. |
+| `EventScript_IchorHearth` | A household hearth: Hestia's altar |
+| `EventScript_IchorAltar_Ares` | Ares's trophy. The menu says OFFER A BATTLE instead of MAKE AN OFFERING. |
+| `EventScript_IchorDesecratedAltar` | Set `VAR_0x8004` to the god and `VAR_0x8005` to the altar's index (0–31), then `goto` it. Beat the Titanborn guard in your own script first. Cleansing sets `FLAG_ICHOR_ALTARS_START + index` and gives the god +3 Favor; after that it's an ordinary altar. |
+
+The altar scripts use `VAR_0x8004`–`0x8007` and `VAR_0x800A`–`0x800B`.
+
+### The rules, as built
+
+- **Prayer:** the god's minor blessing for 100 steps (150 once Known, Favor 10), and +1 Favor the first time each day (`FLAG_DAILY_ICHOR_PRAYED_START + god`).
+- **Offerings:** the list shows every offering in the bag with its count and icon: the six new items, Honey, any berry (first fruits), the seven feathers, the sea gifts, and the Bronze Obol (Relic Copper, for Hades).
+  - A loved offering gives +5 Favor and the major blessing for 500 steps. A liked one gives +3 and 300 steps, and any other offering is accepted for +1 and 150 steps.
+  - Favor doubles at the god's temple altar. Hestia takes +1 of every offering made to another god.
+  - Demeter refuses the pomegranate (Pomeg): no Favor, and the player keeps it.
+- **Blessing length:** ×1.5 once Beloved (Favor 60), capped at 4,095 steps. A prayer or offering to another god asks first ("Apollo's blessing is still on you. Go on anyway?").
+- **Dionysus:** passes on a random other god's blessing (never Zeus's or Hades's) at ×1.5 length. One major offering in eight gives Frenzy instead: encounters ×2, wild levels +3, EXP ×1.5.
+- **The countdown:** one step at a time, like a Repel. When it ends, the god's line plays ("Apollo's light fades from you."). The start menu shows a BLESSING panel ("Apollo (412)").
+- **The minor blessing** has the same effect as the major one, only shorter. The exception is Hestia: a prayer's Hearthfire heals HP only, while an offering's heals everything.
+
+| God | Blessing, as built | Hook |
+|---|---|---|
+| Hestia | Hearthfire: HEARTHFIRE in the Relic Ring heals the party, then the blessing ends | `Ichor_UseHearthfire` |
+| Hermes | Agora prices −20%, selling +20%, prize money +20% | `shop.c`, `item.c`, `Cmd_getmoneyreward` |
+| Demeter | Wild held items as with Compound Eyes; berry trees +1 | `SetWildMonHeldItem`, `CalcBerryYield` |
+| Dionysus | Revel or Frenzy, above | `Bless` |
+| Artemis | Encounters −25%; at night the three rarest land slots ×3; Augur's Eye sneaking range +2 | `WildEncounterCheck`, `ChooseWildMonIndex_Land`, `dexnav.c` |
+| Hephaestus | **Hook:** hidden-item glints and rock-smash drops wait for those systems | — |
+| Aphrodite | Friendship gains ×2; 2 wild Pokémon in 3 are the lead's opposite gender | `AdjustFriendship`, `CreateWildMon` |
+| Apollo | EXP +20% | `ApplyExperienceMultipliers` |
+| Ares | Wild Pokémon 5+ levels below the lead don't appear; wild levels +2; EXP +10% | `TryGenerateWildMon` |
+| Poseidon | Every cast bites at once; the rods' rare slots favored (as a Lure does); surfing encounters −50% | `fishing.c`, `ChooseWildMonIndex_Fishing` |
+| Athena | Always escape wild battles; the Augur's Eye finds hidden Pokémon ×2 | `TryRunFromBattle`, `dexnav.c` |
+| Hera | Eggs hatch ×2 faster; the day care finds eggs ×2 | `daycare.c` |
+| Zeus | +1 shiny roll; Electric and Flying types about ×2 | `pokemon.c`, `TryGenerateWildMon` |
+| Hecate | Torch radius one level larger (§2); at night Ghost, Dark and Psychic about ×2 | `Ichor_GetTorchFlashLevel`, `TryGenerateWildMon` |
+| Hades | The coins sell for +50%. **Hook:** double dig and rock-smash finds wait for excavation | `item.c` |
+
+### Gifts
+
+- **Gift I (Favor 30)** is a lesson: the god's move, taught through the move-tutor party menu (`ChooseMonForMoveTutor`). Most of the gift moves aren't TMs in this build, and a lesson works for any move. If the player cancels, the lesson waits at the altar. Once taught, the altar's LESSON entry teaches it again as often as asked, like a TM.
+- **Gift II (Favor 60)** is a tool or an upgrade:
+  - Ever-Ember: Hearthfire never fades, and hearths offer REST.
+  - The Winged Talaria: running into an `MB_ICHOR_GAP` tile leaps it like a ledge.
+  - The Harvest Basket.
+  - The thyrsus: climbs `MB_ROCK_CLIMB` ivy walls with the expansion's Rock Climb.
+  - The Myrtle Wreath: a held item; its holder's friendship never drops.
+  - The Lyre of Apollo (the Poké Flute, renamed).
+  - The War Horn (the VS Seeker, renamed).
+  - The Acorn of Dodona (the Shiny Charm, renamed).
+  - Hephaestus's Hammer, the Three-Flamed Torch, Triton's Conch and the Helm of Hades: flags the relics read (§2).
+  - The Hunter's Moon, Athena's Stylus and the Eyes of Argus are **flags only, hooks** for the Augur's Eye and the Scroll of Deeds.
+- **Gift III (Favor 100)** sets its flag and shows the sacred animal. **Hook:** the static encounter waits for the dex's species.
 
 ### Calls for story scripts
 
 | Call | In | Out |
 |---|---|---|
-| `special(Ichor_AddFavor)` | `VAR_0x8004` god, `VAR_0x8005` amount | Favor never drops and caps at 100. |
-| `specialvar(VAR_RESULT, Ichor_GetFavor)` | `VAR_0x8004` god | 0–100 |
-| `specialvar(VAR_RESULT, Ichor_GetBlessingGod)` | | The god whose blessing is on you, or 0 |
-| `special(Ichor_GrantBlessing)` | `VAR_0x8004` god, `VAR_0x8005` steps | For the augur's free minor blessing and the like |
-| `EventScript_IchorHierophantGift` | `VAR_0x8004` god | The Hierophant hands over gift I if it is due. `VAR_RESULT` is TRUE if they did. |
-| `EventScript_IchorHierophantRite` | `VAR_0x8004` god | On your first visit, the Hierophant teaches the rite and gives one loved offering |
+| `special(Ichor_AddFavor)` | `VAR_0x8004` god, `VAR_0x8005` amount | Favor caps at 100 and never drops. Amounts: `ICHOR_FAVOR_LAUREL` (15), `_MYTH_QUEST` (10), `_FESTIVAL` (5), `_CLEANSE` (3). |
+| `specialvar(VAR_RESULT, Ichor_GetFavorOf)` | `VAR_0x8004` god | 0–100 |
+| `specialvar(VAR_RESULT, Ichor_GetBlessingGod)` | | The god whose blessing is on the player, or 0 |
+| `special(Ichor_GrantBlessing)` | `VAR_0x8004` god, `VAR_0x8005` steps | A minor blessing, e.g. the augur's good omen |
+| `call(EventScript_IchorHierophantGift)` | `VAR_0x8004` god | The Hierophant teaches gift I if it's due. `VAR_RESULT` is TRUE if they did. |
+| `call(EventScript_IchorHierophantRite)` | `VAR_0x8004` god | First visit only: a line about the rite, and one loved offering |
+| `goto(EventScript_IchorAresVictory)` | | After a won war-acolyte bout: Ares +5 Favor and War-lust. **The bout's trainer doesn't exist yet**: `EventScript_IchorAresBout` is the stub to replace. |
 
-**Favor amounts,** as constants: `ICHOR_FAVOR_LAUREL` (15), `ICHOR_FAVOR_MYTH_QUEST` (10), `ICHOR_FAVOR_FESTIVAL` (5) and `ICHOR_FAVOR_CLEANSE` (3).
+**Gift flags:** `FLAG_ICHOR_GIFT(god, n)` (`include/constants/flags.h`), where n is `ICHOR_GIFT_I`, `_II`, `_III` or `_HIEROPHANT`.
 
-**Gift flags:** `FLAG_ICHOR_GIFTS_START + 4 * god + n`, where n is 0 for gift I, 1 for gift II, 2 for gift III and 3 for the Hierophant's offering.
+**The offerings** are `ITEM_OLIVE_OIL` (200), `ITEM_BARLEY_CAKE` (150), `ITEM_WINE` (300), `ITEM_FRANKINCENSE` (500), `ITEM_LAUREL_SPRIG` (100) and `ITEM_BRONZE_VOTIVE` (400). Honey now costs 300.
+- **Their icons are stand-ins** borrowed from existing items (the oil flask, a cookie, juice, the incense cone, a seedling, the Metal Coat), as is the Myrtle Wreath's. Drawing the real ones is for the art team.
 
-**The offerings** are Agora items: `ITEM_OLIVE_OIL`, `ITEM_BARLEY_CAKE`, `ITEM_WINE`, `ITEM_FRANKINCENSE`, `ITEM_LAUREL_SPRIG` and `ITEM_BRONZE_VOTIVE` (new); Honey, any berry (first fruits), the seven feathers and the sea gifts (existing). Prices are in SYSTEMS §3.
+**Checks:** `tools/ichor/tests/ichor_rites.sh` (in game) and `test/ichor_rites.c` (the rules, in `make check`).
 
 ## 4. Herm waystones (SYSTEMS §4)
 

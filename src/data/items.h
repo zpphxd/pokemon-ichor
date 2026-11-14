@@ -2976,7 +2976,7 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Honey"),
         .pluralName = ITEM_PLURAL_NAME("Honey"),
     #if I_PRICE >= GEN_8
-        .price = 900,
+        .price = 300, // Ichor: an everyday offering (SYSTEMS §3)
     #elif I_PRICE == GEN_7
         .price = 300,
     #else
@@ -7503,6 +7503,116 @@ const struct ItemInfo gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_IchorAeolusBag,
         .iconPic = gItemIcon_AeolusBag,
         .iconPalette = gItemIconPalette_AeolusBag,
+    },
+
+    // Ichor: the offerings (design/SYSTEMS.md §3). The icons are stand-ins
+    // from existing items until the art team draws the offerings.
+    [ITEM_OLIVE_OIL] =
+    {
+        .name = ITEM_NAME("Olive Oil"),
+        .price = 200,
+        .description = COMPOUND_STRING(
+            "Oil pressed from\n"
+            "Kalliste olives. An\n"
+            "offering; anoints herms."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_Potion,
+        .iconPalette = gItemIconPalette_Potion,
+    },
+    [ITEM_BARLEY_CAKE] =
+    {
+        .name = ITEM_NAME("Barley Cake"),
+        .price = 150,
+        .description = COMPOUND_STRING(
+            "A flat cake of\n"
+            "barley and honey.\n"
+            "An offering."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_LavaCookie,
+        .iconPalette = gItemIconPalette_LavaCookieAndLetter,
+    },
+    [ITEM_WINE] =
+    {
+        .name = ITEM_NAME("Wine"),
+        .price = 300,
+        .description = COMPOUND_STRING(
+            "Dark wine in a\n"
+            "small jug. The first\n"
+            "libation of a feast."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_BerryJuice,
+        .iconPalette = gItemIconPalette_BerryJuice,
+    },
+    [ITEM_FRANKINCENSE] =
+    {
+        .name = ITEM_NAME("Frankincense"),
+        .price = 500,
+        .description = COMPOUND_STRING(
+            "Tears of resin\n"
+            "from the far east.\n"
+            "Burned for the gods."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_Repel,
+        .iconPalette = gItemIconPalette_Repel,
+    },
+    [ITEM_LAUREL_SPRIG] =
+    {
+        .name = ITEM_NAME("Laurel Sprig"),
+        .price = 100,
+        .description = COMPOUND_STRING(
+            "A sprig of bay\n"
+            "laurel, Apollo's\n"
+            "own tree."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_MiracleSeed,
+        .iconPalette = gItemIconPalette_MiracleSeed,
+    },
+    [ITEM_BRONZE_VOTIVE] =
+    {
+        .name = ITEM_NAME("Bronze Votive"),
+        .price = 400,
+        .description = COMPOUND_STRING(
+            "A little bronze\n"
+            "figure cast to be\n"
+            "left at an altar."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_SELLABLE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_MetalCoat,
+        .iconPalette = gItemIconPalette_MetalCoat,
+    },
+    [ITEM_MYRTLE_WREATH] =
+    {
+        .name = ITEM_NAME("Myrtle Wreath"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_FRIENDSHIP_UP,
+        .description = COMPOUND_STRING(
+            "Aphrodite's myrtle.\n"
+            "Its holder grows\n"
+            "fond, never cold."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_HELD_ITEM,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 10,
+        .iconPic = gItemIcon_SootheBell,
+        .iconPalette = gItemIconPalette_SootheBell,
     },
 
 // Gems
@@ -13941,13 +14051,13 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_SHINY_CHARM] =
     {
-        .name = ITEM_NAME("Shiny Charm"),
+        .name = ITEM_NAME("Acorn of Dodona"),
         .price = 0,
         .importance = 1,
         .description = COMPOUND_STRING(
-            "Increases the\n"
-            "chance of finding\n"
-            "Shiny Pokémon."),
+            "From Zeus's oak.\n"
+            "Shining Pokémon\n"
+            "come more often."), // Ichor: a god's gift (SYSTEMS §3)
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -14323,12 +14433,12 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_VS_SEEKER] =
     {
-        .name = ITEM_NAME("Vs. Seeker"),
+        .name = ITEM_NAME("War Horn"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "A rechargeable unit\n"
-            "that flags battle-\n"
-            "ready Trainers."),
+            "Ares's horn. Blow\n"
+            "it to rouse beaten\n"
+            "Trainers to fight."), // Ichor: a god's gift (SYSTEMS §3)
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
@@ -14487,12 +14597,12 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_POKE_FLUTE] =
     {
-        .name = ITEM_NAME("Poké Flute"),
+        .name = ITEM_NAME("Lyre of Apollo"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "A sweet-sounding\n"
-            "flute that awakens\n"
-            "Pokémon."),
+            "Apollo's lyre.\n"
+            "Its song wakes\n"
+            "whatever sleeps."), // Ichor: a god's gift (SYSTEMS §3)
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,

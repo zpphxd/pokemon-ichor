@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "malloc.h"
 #include "apprentice.h"
 #include "battle.h"
@@ -887,6 +888,7 @@ bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
 
     if (LURE_STEP_COUNT != 0)
         totalRerolls += 1;
+    totalRerolls += Ichor_ExtraShinyRolls(); // Ichor: Zeus
 
     totalRerolls += CalculateChainFishingShinyRolls();
 
@@ -4875,7 +4877,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         }
 
         mod = sFriendshipEventModifiers[event][friendshipLevel];
-        friendship += CalculateFriendshipBonuses(mon,mod,holdEffect);
+        friendship += Ichor_ModifyFriendshipDelta(mon, CalculateFriendshipBonuses(mon,mod,holdEffect)); // Ichor: Aphrodite, the Myrtle Wreath
 
         if (friendship < 0)
             friendship = 0;
@@ -5409,7 +5411,7 @@ void SetWildMonHeldItem(void)
     enum Species species;
     u16 count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
     u16 i;
-    bool32 itemHeldBoost = CanFirstMonBoostHeldItemRarity();
+    bool32 itemHeldBoost = CanFirstMonBoostHeldItemRarity() || Ichor_BoostsWildHeldItems(); // Ichor: Demeter
     u16 chanceNoItem = itemHeldBoost ? 20 : 45;
     u16 chanceNotRare = itemHeldBoost ? 80 : 95;
 

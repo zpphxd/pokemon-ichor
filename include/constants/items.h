@@ -1069,6 +1069,17 @@ enum __attribute__((packed)) Item
     ITEM_NEREID_PEARL = 885,
     ITEM_AEOLUS_BAG = 886,
 
+    // Ichor: the offerings (design/SYSTEMS.md §3). Honey, berries, feathers and
+    // sea gifts are offerings too; src/ichor_rites.c lists them all.
+    ITEM_OLIVE_OIL = 887,
+    ITEM_BARLEY_CAKE = 888,
+    ITEM_WINE = 889,
+    ITEM_FRANKINCENSE = 890,
+    ITEM_LAUREL_SPRIG = 891,
+    ITEM_BRONZE_VOTIVE = 892,
+    // Ichor: Aphrodite's gift II, a held item
+    ITEM_MYRTLE_WREATH = 893,
+
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,
 };

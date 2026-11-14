@@ -651,3 +651,25 @@ gSpecials::
 	def_special Ichor_ClearFog
 	def_special Ichor_BuildRelicRing
 	def_special Ichor_UseRingChoice
+	@ Ichor: rites (src/ichor_rites.c)
+	def_special Ichor_AddFavor
+	def_special Ichor_GetFavorOf
+	def_special Ichor_GetBlessingGod
+	def_special Ichor_GrantBlessing
+	def_special Ichor_BuildOfferingMenu
+	def_special Ichor_BufferAltar
+	def_special Ichor_BuildAltarMenu
+	def_special Ichor_CheckBlessingConflict
+	def_special Ichor_Pray
+	def_special Ichor_MakeOffering
+	def_special Ichor_BufferFavor
+	def_special Ichor_NextGiftDue
+	def_special Ichor_TakeGift
+	def_special Ichor_BufferLesson
+	def_special Ichor_GetLovedOffering
+	def_special Ichor_UseHearthfire
+	def_special Ichor_HasHearthfire
+	def_special Ichor_CheckGiftTaken
+	def_special Ichor_CheckAltarCleansed
+	def_special Ichor_CleanseAltar
+	def_special Ichor_AresVictory

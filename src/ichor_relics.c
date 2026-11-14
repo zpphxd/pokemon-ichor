@@ -38,6 +38,7 @@
 #include "task.h"
 #include "text.h"
 #include "constants/field_effects.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/ichor.h"
 #include "constants/items.h"
 #include "constants/songs.h"
@@ -58,6 +59,7 @@ extern const u8 EventScript_IchorRelicRing[];
 extern const u8 EventScript_IchorTorchDoused[];
 extern const u8 EventScript_IchorTorchRelit[];
 extern const u8 EventScript_IchorAeolusBag[];
+extern const u8 EventScript_IchorHearthfire[];
 
 // The free relics the Relic Ring offers, in its fixed order.
 static const u16 sRingRelics[] = {
@@ -163,11 +165,12 @@ bool8 Ichor_IsInDarkMap(void)
 #define ICHOR_RELIC_ICON_TAG 0x7A10
 #define RELIC_SHOW_FRAMES    44
 
+// ICHOR_FIELD_EFFECT_RELIC | item: any item's icon, or none for ITEM_NONE (the
+// thyrsus, a gift with no item, just raises a hand).
 bool32 Ichor_IsRelicShowArg(u32 arg)
 {
     u32 value = arg & 0xFFFF;
-    return (value & ICHOR_FIELD_EFFECT_RELIC) && (value & ~ICHOR_FIELD_EFFECT_RELIC) >= ICHOR_RELIC_FIRST
-        && (value & ~ICHOR_FIELD_EFFECT_RELIC) <= ICHOR_RELIC_LAST;
+    return (value & ICHOR_FIELD_EFFECT_RELIC) && (value & ~ICHOR_FIELD_EFFECT_RELIC) < ITEMS_COUNT;
 }
 
 #define tSpriteId data[1]
@@ -198,7 +201,7 @@ void Ichor_StartRelicShow(u16 itemId)
 
     FieldEffectActiveListAdd(FLDEFF_FIELD_MOVE_SHOW_MON);
     PlaySE(SE_M_HEAL_BELL);
-    spriteId = AddItemIconSprite(ICHOR_RELIC_ICON_TAG, ICHOR_RELIC_ICON_TAG, itemId);
+    spriteId = itemId == ITEM_NONE ? MAX_SPRITES : AddItemIconSprite(ICHOR_RELIC_ICON_TAG, ICHOR_RELIC_ICON_TAG, itemId);
     taskId = CreateTask(Task_RelicShow, 80);
     if (spriteId == MAX_SPRITES)
     {
@@ -238,6 +241,22 @@ void Ichor_FollowerHop(void)
     struct ObjectEvent *follower = GetFollowerObject();
     if (follower != NULL && !follower->invisible)
         ObjectEventSetHeldMovement(follower, GetJumpInPlaceMovementAction(follower->facingDirection));
+}
+
+// The Winged Talaria (Hermes's gift II): running into a one-tile gap
+// (MB_ICHOR_GAP) leaps it, as a ledge jump does, if the far side is open.
+bool32 Ichor_CanLeapGap(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 direction)
+{
+    s16 landX = x, landY = y;
+
+    if (objectEvent != &gObjectEvents[gPlayerAvatar.objectEventId])
+        return FALSE;
+    if (!FlagGet(FLAG_ICHOR_WINGED_TALARIA) || FlagGet(FLAG_ICHOR_NO_RELICS) || !JOY_HELD(B_BUTTON))
+        return FALSE;
+    if (MapGridGetMetatileBehaviorAt(x, y) != MB_ICHOR_GAP)
+        return FALSE;
+    MoveCoords(direction, &landX, &landY);
+    return GetCollisionAtCoords(objectEvent, landX, landY, direction) == COLLISION_NONE;
 }
 
 u16 Ichor_GetFlyEffectArg(void)
@@ -465,8 +484,10 @@ void ItemUseOutOfBattle_IchorAeolusBag(u8 taskId)
 
 // --- The Relic Ring ---------------------------------------------------------------
 
-// IchorSave.relicRingCursor: 0 = the registered item, else a relic's index + 1.
-#define RING_REGISTERED 0
+// IchorSave.relicRingCursor: 0 = the registered item, else a relic's index + 1,
+// or RING_HEARTHFIRE.
+#define RING_REGISTERED  0
+#define RING_HEARTHFIRE  0xFF
 
 static bool32 HasRingRelic(void)
 {
@@ -481,7 +502,7 @@ static bool32 HasRingRelic(void)
 
 bool32 Ichor_TryOpenRelicRing(void)
 {
-    if (!HasRingRelic())
+    if (!HasRingRelic() && !Ichor_IsBlessed(ICHOR_GOD_HESTIA))
         return FALSE;
     ScriptContext_SetupScript(EventScript_IchorRelicRing);
     return TRUE;
@@ -520,6 +541,7 @@ void Ichor_BuildRelicRing(void)
     static const u8 sLabelHelmOn[] = _("WEAR HELM");
     static const u8 sLabelHelmOff[] = _("REMOVE HELM");
     static const u8 sLabelThread[] = _("THREAD");
+    static const u8 sLabelHearthfire[] = _("HEARTHFIRE");
     u32 i, cursor = gIchorSave.relicRingCursor;
     u16 registered = gSaveBlock1Ptr->registeredItem;
     u8 name[ITEM_NAME_LENGTH + 1];
@@ -548,6 +570,12 @@ void Ichor_BuildRelicRing(void)
         if (gSpecialVar_0x8000 == ITEM_NONE || cursor == relic - ICHOR_RELIC_FIRST + 1)
             gSpecialVar_0x8000 = relic;
     }
+    if (Ichor_IsBlessed(ICHOR_GOD_HESTIA)) // her stored heal (SYSTEMS §3)
+    {
+        PushRingEntry(sLabelHearthfire, ICHOR_RING_HEARTHFIRE);
+        if (gSpecialVar_0x8000 == ITEM_NONE || cursor == RING_HEARTHFIRE)
+            gSpecialVar_0x8000 = ICHOR_RING_HEARTHFIRE;
+    }
     if (cursor == RING_REGISTERED && registered != ITEM_NONE && CheckBagHasItem(registered, 1))
         gSpecialVar_0x8000 = registered;
     // the menu snaps a box this far right against the screen's right edge
@@ -562,6 +590,12 @@ void Ichor_UseRingChoice(void)
     u16 itemId = gSpecialVar_Result;
     u8 taskId;
 
+    if (itemId == ICHOR_RING_HEARTHFIRE)
+    {
+        gIchorSave.relicRingCursor = RING_HEARTHFIRE;
+        ScriptContext_SetupScript(EventScript_IchorHearthfire);
+        return;
+    }
     if (itemId >= ICHOR_RELIC_FIRST && itemId <= ICHOR_RELIC_LAST)
         gIchorSave.relicRingCursor = itemId - ICHOR_RELIC_FIRST + 1;
     else
