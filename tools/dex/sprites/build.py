@@ -212,7 +212,7 @@ def build_mon(mon: Mon, errors, warnings):
     iw, ih = ib[2] - ib[0] + 1, ib[3] - ib[1] + 1
     s_i = min(1.0, ICON_W / iw, ICON_H / ih)
     b.icon_rgb = [fit(mon, iv, 0, 32, 32, s_i, 16, 30), fit(mon, iv, 1, 32, 32, s_i, 16, 29)]
-    b.icon_pal, b.icon = quantize_icon(b.icon_rgb, b.pal)
+    b.icon_pal, b.icon = quantize_icon(b.icon_rgb, b.pal, mon.icon_pal)
 
     # footprint
     rows = FOOTPRINTS[mon.foot] if isinstance(mon.foot, str) else mon.foot
@@ -269,7 +269,7 @@ def _dist(a, b):
     return dl * dl + 1.6 * dc * dc + 1.6 * dh2
 
 
-def quantize_icon(frames, pal: Palette):
+def quantize_icon(frames, pal: Palette, force=None):
     pals = [read_jasc(os.path.join(ICON_PALS, f"pal{i}.pal")) for i in range(6)]
     counts = np.zeros(16)
     for f in frames:
@@ -277,6 +277,8 @@ def quantize_icon(frames, pal: Palette):
             counts[i] += n
     best = None
     for pi, ip in enumerate(pals):
+        if force is not None and pi != force:
+            continue
         maps, err = [0], 0.0
         for ci in range(1, 16):
             c = pal.colors[ci]

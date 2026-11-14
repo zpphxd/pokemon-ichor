@@ -20,6 +20,10 @@ retone: repaints the pixels of one ramp (dark to light, e.g. "2345") inside a
     the row's run, v down the region, top is True right under an outline.
 shift: copies a file and moves a rectangle (x0, y0, x1, y1) by dx, dy; rows
     left behind are filled from below (good for raising a head for frame 2).
+    Pass mask=lambda x, y: ... to move only some pixels of the box (a head
+    without the cape behind it), or only="45ab" to move only those colors.
+paint_under: like paint, but only writes into clear pixels, for adding
+    parts behind what is already drawn.
 """
 from __future__ import annotations
 
@@ -85,20 +89,36 @@ def retone(path, ramp, ys, xmin, xmax, fn, skip=lambda x, y: False):
     _write(path, lines, rows, grid)
 
 
-def shift(src, dst, box, dx=0, dy=-1):
-    """Copy src to dst, moving the rectangle box=(x0, y0, x1, y1) by (dx, dy)."""
+def paint_under(path, edits):
+    """paint, but only into clear pixels."""
+    lines, rows, grid = _read(path)
+    for y, runs in edits.items():
+        for x, chars in runs:
+            for k, ch in enumerate(chars):
+                if ch != " " and grid[y][x + k] == ".":
+                    grid[y][x + k] = ch
+    _write(path, lines, rows, grid)
+
+
+def shift(src, dst, box, dx=0, dy=-1, mask=None, only=None):
+    """Copy src to dst, moving the rectangle box=(x0, y0, x1, y1) by (dx, dy).
+    mask(x, y) or only (a string of colors) limits which pixels move; the
+    pixels they leave behind become clear unless something lands there."""
     lines, rows, grid = _read(src)
     x0, y0, x1, y1 = box
     old = {y: r[:] for y, r in grid.items()}
-    for y in range(y0, y1 + 1):
-        for x in range(x0, x1 + 1):
-            grid[y][x] = "."
-    for y in range(y0, y1 + 1):
-        for x in range(x0, x1 + 1):
-            if old[y][x] != "." and 0 <= y + dy < 64 and 0 <= x + dx < 64:
-                grid[y + dy][x + dx] = old[y][x]
+
+    def moves(x, y):
+        ch = old[y][x]
+        return ch != "." and (mask is None or mask(x, y)) and (only is None or ch in only)
+    moving = [(x, y) for y in range(y0, y1 + 1) for x in range(x0, x1 + 1) if moves(x, y)]
+    for x, y in moving:
+        grid[y][x] = "."
+    for x, y in moving:
+        if 0 <= y + dy < 64 and 0 <= x + dx < 64:
+            grid[y + dy][x + dx] = old[y][x]
     # fill the strip the move uncovered from the row just outside the box
-    if dy < 0:
+    if dy < 0 and mask is None and only is None:
         for y in range(y1 + dy + 1, y1 + 1):
             for x in range(x0, x1 + 1):
                 if grid[y][x] == "." and old[y1 + 1][x] != ".":

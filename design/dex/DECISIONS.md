@@ -85,3 +85,6 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
   - How the new species' cries are made. Full-length cries are the expensive part, so the choice is between new short cries and reused, pitch-shifted vanilla cries.
 - The dex's own sprites, at about 152 species, should come to roughly 1.2–1.5 MB.
 - 2026-11-14: The user said: "we dont have a specific ROM MB cap because this is just playing on the laptop". There's no physical cartridge to fit. The 32 MB ceiling still applies, though, because it's the GBA's address space for game data (0x08000000–0x09FFFFFF), and emulators such as mGBA reproduce it, so a larger ROM won't load. The notes above stand, with 32 MB as the hard limit.
+- 2026-11-14: **Cries are reused.** The user: "just reuse criess then". Each Aethos species gets an existing vanilla cry, and the engine's cry modes can pitch it up or down. No new cries are recorded.
+  - Implementation catch: `sound/cry_tables.inc` and the cry data wrap every cry in its family's `P_FAMILY_*` switch, so switching a vanilla family off also removes its cry. Donor cries must stay compiled in, for example behind their own switch, even when their species are disabled.
+  - Picking a donor for each species (a fitting size and temper, and not the same donor twice within a line) is a small job for when the species are implemented.

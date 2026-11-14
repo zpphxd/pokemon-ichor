@@ -488,15 +488,18 @@ class Mon:
     shiny:  {name: rgb} for the colors the shiny palette changes.
     draw:   function(p: Pen, view: str, phase: int).
     foot:   a FOOTPRINTS key or a list of 16 strings ('#' marks the print).
+    icon_pal: force a shared icon palette (0-5) when the automatic pick
+            turns a color the wrong way (a green going gray).
     """
 
-    def __init__(self, name, colors, shiny, draw, foot="blank", follow=None):
+    def __init__(self, name, colors, shiny, draw, foot="blank", follow=None, icon_pal=None):
         self.name = name
         self.colors = list(colors)
         self.shiny = dict(shiny)
         self.draw = draw
         self.foot = foot
         self.follow = follow  # optional follower height in px (default by size)
+        self.icon_pal = icon_pal  # force one of the six shared icon palettes (0-5)
         unknown = set(self.shiny) - {n for n, _ in self.colors}
         if unknown:
             raise ValueError(f"{name}: shiny names not in palette: {sorted(unknown)}")
