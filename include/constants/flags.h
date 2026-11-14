@@ -55,40 +55,40 @@
 #define FLAG_ICHOR_DEXNAV_GET              0x21 // Ichor: Augur's Eye obtained, shows in start menu
 #define FLAG_ICHOR_DEXNAV_DETECTOR         0x22 // Ichor: Augur's Eye detector mode
 #define FLAG_ICHOR_FOLLOWERS_DISABLED      0x23 // Ichor: set during cutscenes to hide the follower
-#define FLAG_UNUSED_0x024    0x24 // Unused Flag
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
-#define FLAG_UNUSED_0x026    0x26 // Unused Flag
-#define FLAG_UNUSED_0x027    0x27 // Unused Flag
-#define FLAG_UNUSED_0x028    0x28 // Unused Flag
-#define FLAG_UNUSED_0x029    0x29 // Unused Flag
-#define FLAG_UNUSED_0x02A    0x2A // Unused Flag
-#define FLAG_UNUSED_0x02B    0x2B // Unused Flag
-#define FLAG_UNUSED_0x02C    0x2C // Unused Flag
-#define FLAG_UNUSED_0x02D    0x2D // Unused Flag
-#define FLAG_UNUSED_0x02E    0x2E // Unused Flag
-#define FLAG_UNUSED_0x02F    0x2F // Unused Flag
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
-#define FLAG_UNUSED_0x031    0x31 // Unused Flag
-#define FLAG_UNUSED_0x032    0x32 // Unused Flag
-#define FLAG_UNUSED_0x033    0x33 // Unused Flag
-#define FLAG_UNUSED_0x034    0x34 // Unused Flag
-#define FLAG_UNUSED_0x035    0x35 // Unused Flag
-#define FLAG_UNUSED_0x036    0x36 // Unused Flag
-#define FLAG_UNUSED_0x037    0x37 // Unused Flag
-#define FLAG_UNUSED_0x038    0x38 // Unused Flag
-#define FLAG_UNUSED_0x039    0x39 // Unused Flag
-#define FLAG_UNUSED_0x03A    0x3A // Unused Flag
-#define FLAG_UNUSED_0x03B    0x3B // Unused Flag
-#define FLAG_UNUSED_0x03C    0x3C // Unused Flag
-#define FLAG_UNUSED_0x03D    0x3D // Unused Flag
-#define FLAG_UNUSED_0x03E    0x3E // Unused Flag
-#define FLAG_UNUSED_0x03F    0x3F // Unused Flag
-#define FLAG_UNUSED_0x040    0x40 // Unused Flag
-#define FLAG_UNUSED_0x041    0x41 // Unused Flag
-#define FLAG_UNUSED_0x042    0x42 // Unused Flag
-#define FLAG_UNUSED_0x043    0x43 // Unused Flag
-#define FLAG_UNUSED_0x044    0x44 // Unused Flag
-#define FLAG_UNUSED_0x045    0x45 // Unused Flag
+#define FLAG_ICHOR_SET_WATER_CLOCK 0x24 // Ichor: set the water clock in your room
+#define FLAG_ICHOR_TALKED_TO_MOM 0x25 // Ichor: Melitta sent you to the Klotheia
+#define FLAG_ICHOR_THREAD_READ 0x26 // Ichor: Halia tried to read your thread
+#define FLAG_ICHOR_GOT_STARTER 0x27 // Ichor: chose a starter at the Akademia
+#define FLAG_ICHOR_KLEON_TOOK_STARTER 0x28 // Ichor: Kleon took his starter
+#define FLAG_ICHOR_KLEON_BATTLE_1_DONE 0x29 // Ichor: first Kleon battle fought
+#define FLAG_ICHOR_WON_KLEON_1 0x2A // Ichor: won the first Kleon battle
+#define FLAG_ICHOR_GOT_POKEBALLS 0x2B // Ichor: Daphne gave the starting Poke Balls
+#define FLAG_ICHOR_RUINS_CLEARED 0x2C // Ichor: drove the Titanborn off Kronion Hill
+#define FLAG_ICHOR_FOUND_TITAN_TABLET 0x2D // Ichor: picked up the Titanborn tablet
+#define FLAG_ICHOR_ARRIVED_AKTI 0x2E // Ichor: first arrival in Akti
+#define FLAG_ICHOR_VISITED_AKTI 0x2F // Ichor: Akti visited (fly target)
+#define FLAG_ICHOR_HEARTH_TRIAL_DONE 0x30 // Ichor: relit Hestia's hearth
+#define FLAG_ICHOR_GOT_CHARCOAL 0x31 // Ichor: trial reward: Charcoal
+#define FLAG_ICHOR_GOT_TM_FACADE 0x32 // Ichor: Ione gave TM42 Facade
+#define FLAG_ICHOR_SLICE_COMPLETE 0x33 // Ichor: Phase 1 slice finished at the harbor
+#define FLAG_ICHOR_GOT_KYDIPPE_ORAN 0x34 // Ichor: gift: Kydippe's Oran Berry
+#define FLAG_ICHOR_GOT_ROUTE1_SITRUS 0x35 // Ichor: gift: Route 1 Sitrus Berry
+#define FLAG_ICHOR_GOT_MOOMOO_MILK 0x36 // Ichor: gift: Moomoo Milk
+#define FLAG_ICHOR_GOT_MYSTIC_WATER 0x37 // Ichor: gift: Mystic Water
+#define FLAG_ICHOR_GOT_OLD_ROD 0x38 // Ichor: gift: Old Rod
+#define FLAG_ICHOR_HIDE_KRATER_SNIVY 0x39 // Ichor: hide Snivy's krater
+#define FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL 0x3A // Ichor: hide Cyndaquil's krater
+#define FLAG_ICHOR_HIDE_KRATER_PIPLUP 0x3B // Ichor: hide Piplup's krater
+#define FLAG_ICHOR_HIDE_KLEON_ELAIA 0x3C // Ichor: hide Kleon in Elaia
+#define FLAG_ICHOR_HIDE_ALETHEA_AKADEMIA 0x3D // Ichor: hide Alethea in the Akademia
+#define FLAG_ICHOR_HIDE_ALETHEA_ELAIA 0x3E // Ichor: hide Alethea in Elaia
+#define FLAG_ICHOR_HIDE_ALETHEA_RUINS 0x3F // Ichor: hide Alethea on Kronion Hill
+#define FLAG_ICHOR_HIDE_RUINS_GRUNTS 0x40 // Ichor: hide the Titanborn on Kronion Hill
+#define FLAG_ICHOR_HIDE_TITAN_TABLET 0x41 // Ichor: hide the dropped tablet
+#define FLAG_ICHOR_HIDE_ROUTE1_FLOCK 0x42 // Ichor: hide the Wooloo flock on Route 1
+#define FLAG_ICHOR_HIDE_KLEON_AKTI 0x43 // Ichor: hide Kleon in Akti
+#define FLAG_ICHOR_HIDE_ALETHEA_AKTI 0x44 // Ichor: hide Alethea in Akti
+#define FLAG_ICHOR_NO_WHITEOUT 0x45 // Ichor: set to make a battle loss continue the story
 #define FLAG_UNUSED_0x046    0x46 // Unused Flag
 #define FLAG_UNUSED_0x047    0x47 // Unused Flag
 #define FLAG_UNUSED_0x048    0x48 // Unused Flag
