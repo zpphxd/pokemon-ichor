@@ -1,0 +1,9 @@
+{
+  ".callback": "NULL",
+  ".metatileAttributes": "gMetatileAttributes_Oikos",
+  ".metatiles": "gMetatiles_Oikos",
+  ".palettes": "gTilesetPalettes_Oikos",
+  ".tiles": "gTilesetTiles_Oikos",
+  "imported": true,
+  "version": 1
+}

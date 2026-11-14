@@ -1576,3 +1576,18 @@ const struct Tileset gTileset_TempleHestia =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHestia,
     .callback = NULL,
 };
+
+// Ichor: Oikos ("household"), the Greek interior primary. It keeps Building's
+// metatile ids and every tile the Hoenn interior secondaries point at, so they
+// still render on it. Managed by Porytiles (tools/ichor/art/oikos_paint.py).
+// No tile animation: Building's TV-on frames would paint Hoenn art over it.
+const struct Tileset gTileset_Oikos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PorytilesManaged_Oikos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Oikos,
+    .metatiles = gMetatiles_PorytilesManaged_Oikos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Oikos,
+    .callback = NULL,
+};
