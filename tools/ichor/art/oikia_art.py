@@ -276,41 +276,43 @@ def floor_boards():
 
 
 def floor_flags():
-    # Long limestone flags in running bond (16x8 stones, offset by 8).
+    """Irregular limestone flags. The stones are the cells of a Voronoi
+    diagram on a 16x16 torus, so the pattern tiles without a seam; each stone
+    gets a lit top-left edge and a low bottom-right edge."""
+    seeds = [(3, 3, "l"), (11, 4, "y"), (6, 11, "y"), (14, 12, "l")]
+
+    def owner(x, y):
+        best, bi = None, 0
+        for i, (sx, sy, _) in enumerate(seeds):
+            dx = min(abs(x - sx), 16 - abs(x - sx))
+            dy = min(abs(y - sy), 16 - abs(y - sy))
+            d = dx * dx * 1.0 + dy * dy * 1.3
+            if best is None or d < best:
+                best, bi = d, i
+        return bi
+
+    own = [[owner(x, y) for x in range(16)] for y in range(16)]
+    seam = [[own[y][x] != own[y][(x + 1) % 16] or own[y][x] != own[(y + 1) % 16][x]
+             for x in range(16)] for y in range(16)]
     rows = []
     for y in range(16):
         row = ""
         for x in range(16):
-            band = y // 8
-            yy = y % 8
-            # seam positions: band 0 seam at x=15, band 1 seam at x=7
-            sx = 15 if band == 0 else 7
-            xx = (x - sx - 1) % 16  # distance from the seam on its left
-            if yy == 7 or x == sx:
-                row += "Q"
-            elif yy == 6 or xx == 15 - 1 + 0 and False:
-                row += "q"
-            elif yy == 0 or xx == 0:
+            if seam[y][x]:
+                # joints read darker where three stones meet
+                n = len({own[y][x], own[y][(x + 1) % 16], own[(y + 1) % 16][x],
+                         own[(y + 1) % 16][(x + 1) % 16]})
+                row += "Q" if n > 2 else "q"
+            elif seam[(y - 1) % 16][x] or seam[y][(x - 1) % 16]:
                 row += "L"
             else:
-                # second tone on the right-hand stone of band 1
-                if band == 1 and x > 7:
-                    row += "y"
-                else:
-                    row += "l"
+                row += seeds[own[y][x]][2]
         rows.append(row)
-    # low edge on each stone's right side
     rows = [list(r) for r in rows]
-    for y in range(16):
-        sx = 15 if y // 8 == 0 else 7
-        x = (sx - 1) % 16
-        if y % 8 != 7:
-            rows[y][x] = "q"
-    for (x, y) in [(4, 3), (5, 3), (11, 2), (2, 11), (12, 12), (13, 12), (9, 10)]:
+    for (x, y) in [(4, 5), (9, 2), (12, 9), (2, 13), (7, 8)]:
         if rows[y][x] in "ly":
             rows[y][x] = "q"
-    rows = ["".join(r) for r in rows]
-    return grid("floor", "\n".join(rows))
+    return grid("floor", "\n".join("".join(r) for r in rows))
 
 
 FLOOR_SHADE = {
@@ -413,42 +415,46 @@ VOID = grid("wall", "\n".join(["k" * 16] * 16))
 
 
 def rug_red():
-    # Madder field with a saffron Greek-key border and small rosettes.
+    # Madder field with a border of saffron lozenges between ochre lines, and
+    # a small rosette at the middle of every cell.
+    LOZ = [  # 8-wide, 5-tall lozenge chain
+        "...o....",
+        "..oyo...",
+        ".oyRyo..",
+        "..oyo...",
+        "...o....",
+    ]
     g = [["r"] * 48 for _ in range(48)]
+
     def put(x, y, c):
         if 0 <= x < 48 and 0 <= y < 48:
             g[y][x] = c
-    for i in range(48):
-        for d in (0, 47):
-            put(i, d, "R"); put(d, i, "R")
-        for d in (1, 46):
-            put(i, d, "o"); put(d, i, "o")
-    # border band rows/cols 2..9 dark ground with key in ochre
-    for y in range(2, 46):
-        for x in range(2, 46):
-            inner = 10 <= x < 38 and 10 <= y < 38
-            if not (10 <= x <= 37 and 10 <= y <= 37):
+    for y in range(48):
+        for x in range(48):
+            d = min(x, y, 47 - x, 47 - y)
+            if d == 0:
+                g[y][x] = "n"
+            elif d in (2, 8):
+                g[y][x] = "o"
+            elif d < 9:
                 g[y][x] = "R"
-    # key on top/bottom bands (horizontal), period 8 aligned to 16
-    for x in range(2, 46):
-        for yy in range(8):
-            if KEY8[yy][(x - 2) % 8] == "#":
-                put(x, 2 + yy, "o")
-                put(x, 45 - yy, "o")
-    for y in range(10, 38):
-        for xx in range(8):
-            if KEY8[xx][(y - 10) % 8] == "#":
-                put(2 + xx, y, "o")
-                put(45 - xx, y, "o")
-    # inner line
-    for i in range(10, 38):
-        put(i, 10, "y"); put(i, 37, "y"); put(10, i, "y"); put(37, i, "y")
-    # field rosettes at the 16px centers
-    for cy in (16, 32):
-        for cx in (16, 32):
-            for (dx, dy, c) in [(0, -1, "y"), (-1, 0, "y"), (1, 0, "y"), (0, 1, "y"), (0, 0, "o"),
-                                (-1, -1, "R"), (1, -1, "R"), (-1, 1, "R"), (1, 1, "R")]:
-                put(cx + dx - 8 + 8, cy + dy, c)
+    for i in range(3, 45):
+        for k in range(5):
+            c = LOZ[k][(i - 3) % 8]
+            if c == ".":
+                continue
+            if 8 <= i <= 39:
+                put(i, 3 + k, c)
+                put(i, 44 - k, c)
+                put(3 + k, i, c)
+                put(44 - k, i, c)
+    for cy in (8, 24, 40):
+        for cx in (8, 24, 40):
+            if 12 <= cx <= 36 and 12 <= cy <= 36:
+                for (dx, dy, c) in [(0, -2, "y"), (-2, 0, "y"), (2, 0, "y"), (0, 2, "y"),
+                                    (0, -1, "o"), (-1, 0, "o"), (1, 0, "o"), (0, 1, "o"), (0, 0, "y"),
+                                    (-1, -1, "R"), (1, -1, "R"), (-1, 1, "R"), (1, 1, "R")]:
+                    put(cx + dx, cy + dy, c)
     return grid("cloth", "\n".join("".join(r) for r in g))
 
 
@@ -678,20 +684,21 @@ stamp("herbs", "nature", """
 ................
 ................
 ................
-................
 ...k.......k....
-...n.......n....
-...n.......n....
-..kKk.....kKk...
-.kGvGk...kgVgk..
-.kgVwgk.kGvwvk..
-kGvgvGk.kgvgGk..
-kgwGvgk.kGgwgk..
-.kGvgk...kvGk...
-.kgGvk...kGgk...
+...K.......K....
+...K.......K....
+...K.......K....
+..kjk.....kjk...
 ..kgk.....kvk...
-..kGk.....kgk...
-...k.......k....
+.kGvgk...kgVgk..
+.kgVgk...kvgGk..
+kGvgVgk.kgVvgk..
+kgVwgGk.kGvgwvk.
+kGgvwgk.kgwgGgk.
+.kwGvwk.kGvwgk..
+.kgwgGk..kwGgk..
+..kwgk...kgwk...
+...kk.....kk....
 ................
 ................
 ................
@@ -704,8 +711,7 @@ kgwGvgk.kGgwgk..
 ................
 ................
 ................
-................
-""", 1, 2, note="bundles of drying herbs hung from the beam")
+""", 1, 2, note="bundles of drying herbs hung from pegs in the beam")
 
 def _nets_art():
     """A fishing net hung from two pegs: head rope with cork floats, a
@@ -1074,6 +1080,57 @@ stamp("desk", "wood", """
 ..kkkk....................kkkk..
 """, 2, 1, note="writing table: a wax tablet with its stylus, a rolled scroll")
 
+stamp("oars", "wood", """
+................
+................
+................
+...kk......kk...
+..khlk....khlk..
+..kldk....kldk..
+...kk......kk...
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..kddk....kddk..
+..kddk....kddk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+..klmk....klmk..
+.klhmdk..klhmdk.
+.klhmdk..klhmdk.
+.klhmdk..klhmdk.
+.klhmdk..klhmdk.
+.klhmdk..klhmdk.
+.klhmdk..klhmdk.
+.klhmdk..klhmdk.
+.klhmdk..klhmdk.
+.klhmdk..klhmdk.
+.kUUuuk..kUUuuk.
+.kUUuuk..kUUuuk.
+.kuUuuk..kuUuuk.
+.kuuuuk..kuuuuk.
+..kuuk....kuuk..
+...kk......kk...
+................
+................
+................
+................
+................
+................
+""", 1, 3, note="a pair of oars with blue-painted blades, leaning on the wall")
+
 stamp("scrolls", "wood", """
 ................................
 ................................
@@ -1198,26 +1255,25 @@ kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 stamp("altar", "bronze", """
 ................
 ................
-................
-.......e........
-......eFe.......
-......FfF.......
-......kfk.......
-....kkkzkkk.....
-...kyYYYYYzk....
-....kzzzzzk.....
-..kkkkkkkkkkkk..
-.kMkMMMMMMMMkMk.
-.kmMkMMMMMMkMmk.
+.......ee.......
+......eFFe......
+......FffF......
+.......ff.......
+.....kyYYyk.....
+......kzzk......
+.kk..........kk.
+kMnk........kMnk
+kMMkkkkkkkkkkMnk
+kMMMMMMMMMMMMMnk
+.knnnnnnnnnnnnk.
 ..kkkkkkkkkkkk..
 ..kMMMMMMMMMMk..
-..kMmrmrmrmrmk..
-..kMrmrmrmrmnk..
+..kMrMMMMMMrnk..
+..kMmrMMMMrmnk..
+..kMmmrrrrmmnk..
 ..kMmmmmmmmmnk..
 ..kMmmmmmmmmnk..
-..kMmmmrrmmmnk..
-..kMmmrmmrmmnk..
-..kMmmmrrmmmnk..
+..kMmmmmmmmmnk..
 ..kMmmmmmmmmnk..
 ..kMmmmmmmmmnk..
 ..kMnnnnnnnnnk..
@@ -1228,7 +1284,8 @@ stamp("altar", "bronze", """
 ................
 ................
 ................
-""", 1, 2, note="household altar of Hestia: a marble altar with horns and a burning lamp")
+................
+""", 1, 2, note="household altar of Hestia: horned marble altar, red fillets, a flame in a bronze bowl")
 
 stamp("lampstand", "bronze", """
 ................
@@ -1389,6 +1446,25 @@ kmllmmdk.kddk...
 ..kkkk..........
 """, 1, 1, note="cooking pots: a sooty chytra, a jug and a stack of bowls")
 
+stamp("mortar", "clay", """
+................
+................
+................
+..........kk....
+.........kmlk...
+.........kmdk...
+........kmdk....
+...kkkkkkmdkkk..
+..kttttkmdkttsk.
+.ktacacakkacasSk
+.kttaaaaaaaaatsk
+.ktttttttttttssk
+.kStttttttttSssk
+..kSSSSSSSSSssk.
+...kSSSSSSSsk...
+....kkkkkkkk....
+""", 1, 1, note="a stone mortar of barley with its pestle")
+
 stamp("hearth", "clay", """
 ................................
 ................................
@@ -1411,53 +1487,47 @@ stamp("hearth", "clay", """
 ..kttafFfFYFfFFYFfFYFfFfaaattk..
 ..ktaFfYFfFYFfFYFFfYFfFYFfatSk..
 ..ktttttttttttttttttttttttttSk..
-..ksSSSSkSSSSSSkSSSSSSkSSSSSsk..
-..kSStSSkSStSSSkSSStSSkSStSSsk..
-..kSSSSSkSSSSSSkSSSSSSkSSSSSsk..
-..kkkkkkkkkkkkkkkkkkkkkkkkkkkk..
-..kSSSkSSStSSSkSSSSSkSSStSSkSsk.
-..kStSkSSSSSSSkStSSSkSSSSSSkSsk.
-..ksssssssssssssssssssssssssssk.
-...kkkkkkkkkkkkkkkkkkkkkkkkkkk..
+..ktSSSSSstSSSSSstSSSSSstSSSSk..
+..kSSSSSSsSSSSSSsSSSSSSsSSSSSk..
+..kSSSSSSsSSSSSSsSSSSSSsSSSSSk..
+..kssssssssssssssssssssssssssk..
+..ktSSstSSSSSstSSSSSstSSSSSstk..
+..kSSSsSSSSSSsSSSSSSsSSSSSSsSk..
+..kssssssssssssssssssssssssssk..
+...kkkkkkkkkkkkkkkkkkkkkkkkkk...
 ................................
 ................................
 ................................
 """, 2, 2, note="kitchen hearth: Hestia's fire in a stone curb, a bronze cauldron on its tripod")
 
-stamp("soot", "clay", """
-................................
-................................
-................................
-................................
-................................
-................................
-................................
-................................
-................................
-..............a.................
-............a...a.a.............
-..........a..a.a...a............
-.........a.a.aa.a.a..a..........
-........a.a.a.aa.aa.a.a.........
-.......a.a.aa.aaaa.a.a.a........
-......a.a.a.aaaaaaaa.a.a.a......
-.....a.a.aa.aaaaaaaa.aa.a.a.....
-....a.a.a.aaaaaaaaaaaa.a.a.a....
-....a.aa.aaaaaaaaaaaaaa.aa.a....
-...a.a.aaaaaaaaaaaaaaaaaa.a.a...
-...a.aa.aaaaaaaaaaaaaaaa.aa.a...
-..a.a.aaaaaaaaaaaaaaaaaaaa.a.a..
-..a.aa.aaaaaaaaaaaaaaaaaa.aa.a..
-..a.a.aaaaaaaaaaaaaaaaaaaa.a.a..
-..a.aa.aaaaaaaaaaaaaaaaaa.aa.a..
-..a.a.aaaaaaaaaaaaaaaaaaaa.a.a..
-..a.aa.aaaaaaaaaaaaaaaaaa.aa.a..
-..a.a.aaaaaaaaaaaaaaaaaaaa.a.a..
-..a.aa.aaaaaaaaaaaaaaaaaa.aa.a..
-..a.a.aaaaaaaaaaaaaaaaaaaa.a.a..
-..a.aa.aaaaaaaaaaaaaaaaaa.aa.a..
-..a.a.aaaaaaaaaaaaaaaaaaaa.a.a..
-""", 2, 2, note="smoke-blackened plaster above the hearth")
+def _soot_art():
+    """Smoke-blackened plaster over the hearth: a plume that is dense just
+    above the fire and fades as it climbs, ordered-dithered in four tones."""
+    BAYER = [[0, 8, 2, 10], [12, 4, 14, 6], [3, 11, 1, 9], [15, 7, 13, 5]]
+    TONES = [".", "t", "S", "s", "a"]
+    W, H = 32, 32
+    rows = []
+    for y in range(H):
+        row = ""
+        for x in range(W):
+            if y < 5:
+                row += "."
+                continue
+            hw = 5 + (y - 5) * 0.42
+            ragged = ((x * 37 + y * 23) % 7) / 14.0
+            across = max(0.0, 1.0 - abs(x - 15.5) / (hw + ragged))
+            up = (y - 5) / (H - 6)
+            d = across ** 0.7 * (0.15 + 0.85 * up) * 4.0
+            level = int(d)
+            frac = d - level
+            if frac * 16 > BAYER[y % 4][x % 4]:
+                level += 1
+            row += TONES[max(0, min(level, 4))]
+        rows.append(row)
+    return "\n".join(rows)
+
+
+stamp("soot", "clay", _soot_art(), 2, 2, note="smoke-blackened plaster above the hearth")
 
 stamp("myrtle", "nature", """
 ................
@@ -1537,19 +1607,19 @@ stamp("knucklebones", "nature", """
 ................
 ................
 ................
-....kkkkkkkk....
-...kJJJJJJJJk...
-..kJjjjjjjjjjk..
-..kJjkwkjjjjjk..
-..kJjjjjkwkjjk..
-..kJjkwkjjjjjk..
-..kJjjjjjkwkjk..
-..kJjjkwkjjjjk..
-..kjjjjjjjjjKk..
-...kKKKKKKKKk...
-....kkkkkkkk....
 ................
-""", 1, 1, note="astragaloi: a set of knucklebones on a wicker tray")
+..kkkkkkkkkkkk..
+.kjJJJJJJJJJJjk.
+.kJKKKKKKKKKKjk.
+.kJKwwKKKKwwKjk.
+.kJKwsKwwKswKjk.
+.kJKKKKwsKKKKjk.
+.kJKKwwKKKwwKjk.
+.kJKKswKKKwsKjk.
+.kjjjjjjjjjjjjk.
+..kkkkkkkkkkkk..
+................
+""", 1, 1, note="astragaloi: five knucklebones on a leather gaming cloth")
 
 stamp("mat", "nature", """
 ................................

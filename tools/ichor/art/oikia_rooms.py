@@ -51,6 +51,8 @@ ROOMS = {
             ("kline", 9, 5),
             ("lampstand", 11, 5),
             ("amphora", 0, 5),
+            ("amphora_plain", 0, 7),
+            ("mortar", 1, 7),
             ("myrtle", 11, 7),
             ("mat", 5, 8),
         ],
@@ -122,6 +124,7 @@ ROOMS = {
             ("window", 2, 0),
             ("herbs", 3, 0),
             ("jar_shelf", 5, 0),
+            ("chest", 5, 1),
             ("niche", 7, 0),
             ("pithos", 9, 1),
             ("klismos_r", 1, 2),
@@ -154,6 +157,7 @@ ROOMS = {
         "rugs": [],
         "stamps": [
             ("nets", 0, 0),
+            ("oars", 2, 0),
             ("window", 3, 0),
             ("trident", 5, 0),
             ("boat", 6, 0),
@@ -182,10 +186,10 @@ ROOMS = {
 
 WALL_HUNG = ["window", "niche", "niche_horse", "klepsydra", "herbs", "honey_shelf",
              "jar_shelf", "trident", "boat", "nets", "stairs_down"]
-BACK = ["loom", "chest", "scrolls", "altar", "stairs_up", "stairs_up_r"]
+BACK = ["loom", "chest", "scrolls", "altar", "oars", "stairs_up", "stairs_up_r"]
 FREE = ["kline", "klismos_r", "klismos_l", "stool", "table", "table_round", "desk",
         "amphora", "amphora_plain", "pithos", "pots", "myrtle", "kalathos",
-        "fish_basket", "knucklebones", "lampstand", "column", "mat"]
+        "fish_basket", "knucklebones", "mortar", "lampstand", "column", "mat"]
 
 
 def _row_pack(names, stamps, width, y0, x0=1, gap=1):
