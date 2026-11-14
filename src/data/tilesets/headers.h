@@ -1605,3 +1605,17 @@ const struct Tileset gTileset_Oikia =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Oikia,
     .callback = NULL,
 };
+
+// Ichor: civic, the Greek public halls (Asclepeion, Agora, Akademia). A
+// Porytiles-managed secondary built by tools/ichor/art/civic_tiles.py; it uses
+// only its own tiles and palettes 6-12, so it works on any primary.
+const struct Tileset gTileset_Civic =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Civic,
+    .palettes = gTilesetPalettes_PorytilesManaged_Civic,
+    .metatiles = gMetatiles_PorytilesManaged_Civic,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Civic,
+    .callback = NULL,
+};

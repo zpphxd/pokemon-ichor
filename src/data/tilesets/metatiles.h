@@ -424,3 +424,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Oikos[] = INCBIN_U16("data/tilese
 // Ichor: oikia
 const u16 gMetatiles_PorytilesManaged_Oikia[] = INCBIN_U16("data/tilesets/secondary/oikia/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Oikia[] = INCBIN_U16("data/tilesets/secondary/oikia/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: civic
+const u16 gMetatiles_PorytilesManaged_Civic[] = INCBIN_U16("data/tilesets/secondary/civic/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Civic[] = INCBIN_U16("data/tilesets/secondary/civic/porytiles_bin/metatile_attributes.bin");
