@@ -469,6 +469,19 @@ const u16 gTrainerPalette_LadyFrlg[] = INCGFX_U16("graphics/trainers/palettes/la
 const u32 gTrainerFrontPic_PainterFrlg[] = INCGFX_U32("graphics/trainers/front_pics/painter_frlg.png", ".4bpp.smol");
 const u16 gTrainerPalette_PainterFrlg[] = INCGFX_U16("graphics/trainers/palettes/painter_frlg.pal", ".gbapal");
 
+// Pokemon Ichor cast
+const u32 gTrainerFrontPic_Kleon[] = INCGFX_U32("graphics/trainers/front_pics/kleon.png", ".4bpp.smol");
+const u16 gTrainerPalette_Kleon[] = INCGFX_U16("graphics/trainers/front_pics/kleon.png", ".gbapal");
+
+const u32 gTrainerFrontPic_HierophantIone[] = INCGFX_U32("graphics/trainers/front_pics/hierophant_ione.png", ".4bpp.smol");
+const u16 gTrainerPalette_HierophantIone[] = INCGFX_U16("graphics/trainers/front_pics/hierophant_ione.png", ".gbapal");
+
+const u32 gTrainerFrontPic_TitanGrunt[] = INCGFX_U32("graphics/trainers/front_pics/titan_grunt.png", ".4bpp.smol");
+const u16 gTrainerPalette_TitanGrunt[] = INCGFX_U16("graphics/trainers/front_pics/titan_grunt.png", ".gbapal");
+
+const u32 gTrainerFrontPic_ProfessorDaphne[] = INCGFX_U32("graphics/trainers/front_pics/professor_daphne.png", ".4bpp.smol");
+const u16 gTrainerPalette_ProfessorDaphne[] = INCGFX_U16("graphics/trainers/front_pics/professor_daphne.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1225,5 +1238,21 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_PAINTER_FRLG] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PainterFrlg, gTrainerPalette_PainterFrlg),
+    },
+    [TRAINER_PIC_KLEON] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Kleon, gTrainerPalette_Kleon),
+    },
+    [TRAINER_PIC_HIEROPHANT_IONE] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_HierophantIone, gTrainerPalette_HierophantIone),
+    },
+    [TRAINER_PIC_TITAN_GRUNT] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_TitanGrunt, gTrainerPalette_TitanGrunt),
+    },
+    [TRAINER_PIC_PROFESSOR_DAPHNE] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_ProfessorDaphne, gTrainerPalette_ProfessorDaphne),
     },
 };
