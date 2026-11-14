@@ -1514,6 +1514,8 @@ Trainer-defeated flags are automatic.
 
 ## Decisions for the user
 
+> **Approved by the user, 2026-11-14:** D1 (the relic re-mapping), D3 (all 15 gods), D8 (core plus extended theoxenia) and L10 (seven rings). Every other decision here and in the other doc follows the designer's recommendation. PITCH.md has been updated to match.
+
 These are the Labyrinth's. SYSTEMS.md has D1–D7.
 
 - **L1. Daedalus's complicity.** Daedalus made the Harpe's collar and timed its hour for Kronos, out of sympathy for a grieving father, then repents. The alternative is that Daedalus is purely a victim.
