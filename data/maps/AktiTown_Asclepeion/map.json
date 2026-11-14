@@ -2,7 +2,7 @@
   "id": "MAP_AKTI_TOWN_ASCLEPEION",
   "name": "AktiTown_Asclepeion",
   "layout": "LAYOUT_AKTI_TOWN_ASCLEPEION",
-  "music": "MUS_ICHOR_ELAIA",
+  "music": "MUS_ICHOR_ASCLEPEION",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_AKTI_TOWN",
   "requires_flash": false,

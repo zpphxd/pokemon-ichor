@@ -2,7 +2,7 @@
   "id": "MAP_AKTI_TOWN_FISHERS_HOUSE",
   "name": "AktiTown_FishersHouse",
   "layout": "LAYOUT_AKTI_TOWN_FISHERS_HOUSE",
-  "music": "MUS_ICHOR_ELAIA",
+  "music": "MUS_ICHOR_AKTI",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_AKTI_TOWN",
   "requires_flash": false,
