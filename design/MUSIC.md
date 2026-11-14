@@ -252,6 +252,7 @@ grind: B1:3 B1:2 C2:2 B1:2
 |---|---|
 | Prologue (grunts) | 9/8, salpinx and war drums. |
 | Act I, the admins | A fourth higher and in 7/8, a gait the grunts can't march to. |
+| Act II, the Kronia grounds (STORY II-1) | The feast: the call with its tritone softened to a fifth, as a major-key round dance in 7/8 on lyre and aulos with a tambourine. The Titans' public face, and the most welcoming music in Act II (`MUS_ICHOR_KRONIA`, `design/phase3/SCRIPT.md` Part 9). |
 | Act II, Iapetos's tragedy (§6.3) | "Slowed into a Phrygian processional": the call on a chorus of aulos at ♩=60, with the tritone softened to a fifth. The lie sounds reasonable. |
 | Act II, the Akropolis climb | The grunts' 9/8. |
 | Act III, the Titan wing of the Labyrinth | The grunts' theme with the drums cut to a heartbeat (LABYRINTH §9). |
