@@ -98,7 +98,7 @@
 #define FLAG_ICHOR_GOT_GLYKERA_CAKES 0x4C // Ichor: Glykera traded honey cakes for Melitta's honey
 #define FLAG_ICHOR_DID_KIMON_TRADE 0x4D // Ichor: traded Kimon a Wooloo for his Finizen, Arion
 #define FLAG_ICHOR_GOT_KIMON_PEARLS 0x4E // Ichor: Kimon's pearls, for the Hearth Laurel
-#define FLAG_ICHOR_AKTI_GOAT_HOME 0x4F // Ichor: Akti: Kapra, Aigon's loose goat, was sent home
+#define FLAG_ICHOR_HIDE_SCRIBE 0x4F // Ichor: hide the traveling scribe in Elaia's square after beat 4
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
@@ -263,7 +263,7 @@
 #define FLAG_RECEIVED_TM_ROAR                0xE7
 #define FLAG_RECEIVED_TM_GIGA_DRAIN          0xE8
 
-#define FLAG_UNUSED_0x0E9                    0xE9 // Unused Flag
+#define FLAG_ICHOR_AKTI_GOAT_HOME            0xE9 // Ichor: Akti: Kapra, Aigon's loose goat, was sent home
 
 #define FLAG_RECEIVED_TM_REST                0xEA
 #define FLAG_RECEIVED_TM_ATTRACT             0xEB
