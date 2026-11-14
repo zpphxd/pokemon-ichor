@@ -73,6 +73,27 @@ The user's words: "we just want to make sure these look amazing. and evolutions 
 - **Middle stages show the growth.** Each feature from stage one gets bigger, sharper and more elaborate, so the line reads as one creature maturing toward that final form.
 - **Compare finals at 3x** with blaziken, sceptile, swampert, salamence, metagross, garchomp, gyarados and staraptor. Ours should hold the frame the way they do.
 
+## The legendary tier
+
+The user's words: "all legendaries and mythical olympians constilations etc need to be fucking awesome. powerful. mysterical. the best pokemon ever designed".
+
+**Who is in it:**
+- The legendaries and mythicals: the Moirai (Nemira, Lotira, Thanira), Kronolith, Kairazor, Pegaunos, the colossi (Olympanax, Pontanax, Nekranax) and Ichorin.
+- The Astral constellation Pokémon, when they come.
+- The same standard applies to the pseudo-legendary's final stage (Lernathan) and the post-game myth monsters (Hexylla, Trybdis, Melodrakon, Haligeron, Nostail, Stygiad, Seirenade, Bouldyphus).
+
+**How they're made:**
+1. **Concepts first.** Each species gets three distinct design concepts: different silhouettes, poses and readings of the myth, not three colorways. The user picks one.
+2. **One artist per species.** The chosen concept is rendered as its own job, with as many passes as it takes.
+
+**The bar:**
+- **Size:** fill the frame, about 60–64 px. The silhouette must be unmistakable at 1x.
+- **Presence:** a sense of power and mystery. Use otherworldly effects that belong to the myth: auras, glowing runes or meanders, celestial motifs, threads of fate, ichor-gold light, sea spray, storm, shadow.
+- **Palette:** all 15 colors used deliberately, with a signature glow color.
+- **Iconography:** Greek in every case (black-figure patterns, bronze, marble, laurel, the god's attributes), made into something new rather than a costume.
+- **Back view:** imposing, never just a shoulder.
+- **Comparison:** check at 3x against the most iconic legendaries: lugia, ho_oh, rayquaza, dialga, palkia, giratina, arceus, groudon, kyogre, regigigas, zacian, solgaleo, lunala, necrozma and eternatus. Ours must hold their own.
+
 ## Each view
 
 - **Front** (`front`, phases 0 and 1).
