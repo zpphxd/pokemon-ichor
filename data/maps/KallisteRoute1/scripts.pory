@@ -11,13 +11,8 @@ mapscripts KallisteRoute1_MapScripts {
     }
 }
 
-// --- speakers (shown in the expansion's name box) ---------------------------
+// --- named speakers (name box); unnamed townsfolk and animals have none -----
 text KallisteRoute1_Text_SpeakerAmaryllis { "AMARYLLIS" }
-text KallisteRoute1_Text_SpeakerFarmer { "OLIVE FARMER" }
-text KallisteRoute1_Text_SpeakerCarter { "CARTER" }
-text KallisteRoute1_Text_SpeakerMudbray { "MUDBRAY" }
-text KallisteRoute1_Text_SpeakerYouth { "YOUTH" }
-text KallisteRoute1_Text_SpeakerWooloo { "WOOLOO" }
 text KallisteRoute1_Text_SpeakerTityros { "TITYROS" }
 text KallisteRoute1_Text_SpeakerPhyllis { "PHYLLIS" }
 text KallisteRoute1_Text_SpeakerKomatas { "KOMATAS" }
@@ -29,16 +24,13 @@ script KallisteRoute1_EventScript_Carter {
     lock
     faceplayer
     if (!flag(FLAG_ICHOR_GOT_MOOMOO_MILK)) {
-        setspeaker(KallisteRoute1_Text_SpeakerCarter)
         msgbox(format("Thirsty? Here, my last bottle. Fresh this morning."))
-        setspeaker(SP_NAME_NONE)
         giveitem(ITEM_MOOMOO_MILK)
         if (var(VAR_RESULT) == FALSE) {
             goto(Common_EventScript_ShowBagIsFull)
         }
         setflag(FLAG_ICHOR_GOT_MOOMOO_MILK)
     }
-    setspeaker(KallisteRoute1_Text_SpeakerCarter)
     msgbox(format("It's goat's milk. The bottle says Moomoo. Don't ask me why."))
     closemessage
     call(KallisteRoute1_EventScript_MudbrayBrays)
@@ -52,7 +44,6 @@ script KallisteRoute1_EventScript_Mudbray {
 }
 
 script KallisteRoute1_EventScript_MudbrayBrays {
-    setspeaker(KallisteRoute1_Text_SpeakerMudbray)
     playmoncry(SPECIES_MUDBRAY, CRY_MODE_NORMAL)
     msgbox(format("Hrrrnk!"))
     waitmoncry
@@ -61,7 +52,6 @@ script KallisteRoute1_EventScript_MudbrayBrays {
 
 // --- the youth sitting on the field wall ------------------------------------
 script KallisteRoute1_EventScript_WallYouth {
-    setspeaker(KallisteRoute1_Text_SpeakerYouth)
     msgbox(format("No partner for me. Daphne said “next year.”\pShe said that last year too. I'm starting to see a pattern."), MSGBOX_NPC)
 }
 
@@ -69,7 +59,6 @@ script KallisteRoute1_EventScript_WallYouth {
 script KallisteRoute1_EventScript_GrazingWooloo {
     lock
     faceplayer
-    setspeaker(KallisteRoute1_Text_SpeakerWooloo)
     playmoncry(SPECIES_WOOLOO, CRY_MODE_NORMAL)
     msgbox(format("Baa?"))
     waitmoncry
@@ -79,7 +68,6 @@ script KallisteRoute1_EventScript_GrazingWooloo {
 // Amaryllis's flock, planted across the road until the ruins are cleared.
 script KallisteRoute1_EventScript_FlockWooloo {
     lock
-    setspeaker(KallisteRoute1_Text_SpeakerWooloo)
     playmoncry(SPECIES_WOOLOO, CRY_MODE_NORMAL)
     msgbox(format("Baaa."))
     waitmoncry
@@ -100,16 +88,13 @@ script KallisteRoute1_EventScript_OliveFarmer {
     lock
     faceplayer
     if (!flag(FLAG_ICHOR_GOT_ROUTE1_SITRUS)) {
-        setspeaker(KallisteRoute1_Text_SpeakerFarmer)
         msgbox(format("I'd give you oil, but you can't carry oil. Take a berry."))
-        setspeaker(SP_NAME_NONE)
         giveitem(ITEM_SITRUS_BERRY)
         if (var(VAR_RESULT) == FALSE) {
             goto(Common_EventScript_ShowBagIsFull)
         }
         setflag(FLAG_ICHOR_GOT_ROUTE1_SITRUS)
     }
-    setspeaker(KallisteRoute1_Text_SpeakerFarmer)
     msgbox(format("Pick the olives, rest in the shade. That's the whole secret."))
     release
 }
