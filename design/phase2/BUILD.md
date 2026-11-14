@@ -13,7 +13,7 @@ The route chain follows the revised `design/AETHOS_MAP.md`; SCRIPT.md's route pl
 | 1 | The voyage (Routes 2–3) and Aigina: beats 9A–10C, the *Euploia*, Aigina Town and its three homes; Aigina's three interior maps built for world-act2 (Act II) | in progress |
 | 2 | Emporion and the Temple of Hermes: beats 11–16 | waits for gTileset_Emporion (director) |
 | 3 | Route 4 (the Isthmus), Hecate's Hollow, Route 5 (the Skironian cliffs): beats 17–19 | tilesets started: `isthmos`, `cave_dark` |
-| 4 | Eleusa and the Temple of Demeter: beats 20–22 | waits for gTileset_Eleusa (director) |
+| 4 | Eleusa and the Temple of Demeter: beats 20–22 | the maps and ambient events started (tilesets on main) |
 | 5 | The revelation: beats 23–25, the sanctum, Return to Kalliste | |
 
 **Moved out of Act I** (to world-act2): Thria, the Rheitoi and the jesters' bridge (Route 15); the Halai Shore's homes and trainers (Route 18); the scripting of Aigina's interior.
@@ -78,7 +78,13 @@ Claimed from this session's range (0x200–0x2FF) in `include/constants/flags.h`
 | `FLAG_ICHOR_HIDDEN_AEGINA_BIG_PEARL`, `FLAG_ICHOR_HIDDEN_AEGINA_STARDUST` | Aegina Town's hidden items |
 | `FLAG_ICHOR_HERM_AEGINA`, `FLAG_ICHOR_ITEM_APHAIA_SILVER_POWDER`, `FLAG_ICHOR_ITEM_APHAIA_SUPER_POTION`, `FLAG_ICHOR_ITEM_APHAIA_PRETTY_FEATHER`, `FLAG_ICHOR_ITEM_OROS_WINE` | the detour |
 
-The engine session is adding a 2,048-flag bank in IchorSave (`design/ENGINE_API.md` on its branch). Later batches will claim there; batch 1's vanilla flags can move once it lands.
+IchorSave's flag bank is on main. From batch 2 on, new flags are bank flags in this session's offsets (`tools/ichor/claim_ranges.md`: bankflag 0x000–0x0FF, dailyflag 0x40–0x4B, bankvar 0–5), claimed with `python3 tools/ichor/claim.py --range LO-HI bankflag FLAG_ICHOR_... "comment"`. Hidden items still need vanilla flags at or above `FLAG_HIDDEN_ITEMS_START`, from 0x200–0x2FF. Sub-ranges handed to agents:
+
+| Who | bankflag | vanilla (hidden items) |
+|---|---|---|
+| this session | 0x000–0x07F | 0x28A–0x29F |
+| Eleusa agent | 0x080–0x0BF | 0x2A0–0x2BB |
+| next agents | 0x0C0–0x0FF | ask |
 
 ## Stubs until other sessions land
 
