@@ -88,7 +88,7 @@ A new fanfare needs an `sFanfares` entry (`src/sound.c`, with a `FANFARE_*` cons
 | `MUS_ICHOR_AKADEMIA` (626) | G Hypolydian (Lydian), 4/4, ♩=100 | intro 1, then a loop of A 8, B 8. Loop 38.4 s. | lyre tune, syrinx in B, kithara in open fifths, pizzicato bass, triangle |
 | `MUS_ICHOR_ENCOUNTER_RIVAL` (620) | E Greek Dorian (Phrygian), 9/8 2+2+2+3, ♩=160 | intro 1, loop 8. Loop 13.5 s. | aulos with a square (Kleon's battle motif), kithara, wave bass, frame drum |
 | `MUS_ICHOR_ENCOUNTER_TITAN` (621) | B Greek Mixolydian (Locrian), 9/8 3+2+2+2, ♩=144 | intro 1, loop 8. Loop 15.0 s. | the Titan battle's tritone call, tuba and wave-bass riff, strings, war drums |
-| `MUS_ICHOR_OBTAIN_KEY_ITEM` (622) | C Greek Lydian, 4/4, ♩=128 | 2 bars, 3.75 s (225 frames; sFanfares 237) | salpinx call, horns, lyre, timpani |
+| `MUS_ICHOR_OBTAIN_KEY_ITEM` (622) | C Greek Lydian, 3/4, ♩=150 | 2 bars, 2.40 s (144 frames; sFanfares 160, the item fanfare's pacing) | salpinx call, horns, lyre, timpani |
 | `MUS_ICHOR_OBTAIN_MON` (623) | F Greek Lydian, 4/4, ♩=132 | 2 bars, 3.64 s (218 frames; sFanfares 230) | syrinx call with the aulos a third under, lyre, frame drum |
 | `MUS_ICHOR_NEW_GAME` (624) | B♭ Greek Lydian, 4/4, ♩=96 | intro 1, then a loop of A 8, B 8. Loop 40.0 s. | syrinx, lyre, kithara, strings, sine bass, triangle |
 | `mus_ichor_title` (in `MUS_TITLE`) | D Greek Phrygian (Dorian, Elaia's home mode), 4/4, ♩=112 | one-shot: intro 4, A 8, B 8, C 8, coda 4 (68.6 s); the title then returns to the intro, as in Emerald | chorus and aulos theme, salpinx and horns, lyre thread, kithara, strings, timpani, drums |

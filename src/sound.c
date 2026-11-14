@@ -58,7 +58,7 @@ static const struct Fanfare sFanfares[] = {
     [FANFARE_OBTAIN_SYMBOL]       = { MUS_OBTAIN_SYMBOL,       318 },
     [FANFARE_REGISTER_MATCH_CALL] = { MUS_REGISTER_MATCH_CALL, 135 },
     // Ichor. Durations are the song's frames plus a short tail; compose.py --check keeps them honest.
-    [FANFARE_ICHOR_OBTAIN_KEY_ITEM] = { MUS_ICHOR_OBTAIN_KEY_ITEM, 237 },
+    [FANFARE_ICHOR_OBTAIN_KEY_ITEM] = { MUS_ICHOR_OBTAIN_KEY_ITEM, 160 }, // the item fanfare's pacing
     [FANFARE_ICHOR_OBTAIN_MON]      = { MUS_ICHOR_OBTAIN_MON,      230 },
 };
 

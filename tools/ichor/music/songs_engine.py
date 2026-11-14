@@ -80,21 +80,23 @@ OBTAIN_ITEM = one_shot(
         Track('kymbala', 0, 66, velocity=90, kit=FRAME_KIT, parts={'A': 'tri:6 | r:3 tri:3'}),
     ])
 
-# Obtain key item (new slot): weightier, C Greek Lydian, horns and timpani under the call.
+# Obtain key item (new slot): weightier than the item call, C Greek Lydian, horns and
+# timpani under the salpinx. It keeps the item fanfare's 160-frame slot, so scripts and
+# tests paced for Std_ObtainItem don't change.
 OBTAIN_KEY_ITEM = one_shot(
-    'mus_ichor_obtain_key_item', 'Obtain Key Item', (4, 4), 128, [('A', 2)], {'*': pcs('C', IONIAN)},
-    {'A': ['C', 'F']}, target=(3.4, 4.0), song_id='MUS_ICHOR_OBTAIN_KEY_ITEM',
+    'mus_ichor_obtain_key_item', 'Obtain Key Item', (3, 4), 150, [('A', 2)], {'*': pcs('C', IONIAN)},
+    {'A': ['C', 'F']}, target=(2.2, 2.6), song_id='MUS_ICHOR_OBTAIN_KEY_ITEM',
     ref=('MUS_RG_OBTAIN_KEY_ITEM', -26.9), tracks=[
         Track('salpinx', 56, 96, pan=-8, velocity=104, gate=0.9, lo='G4', hi='G5',
-              parts={'A': 'G4:2 C5:1 D5:1 E5:3 G5:1 | F5:2 D5:1 B4:1 C5:4'}),
+              parts={'A': 'G4:1 C5:1 D5:1 E5:2 G5:1 | F5:1 D5:0.5 B4:0.5 C5:4'}),
         Track('horn', 60, 84, pan=16, velocity=96, gate=0.9, lo='C4', hi='A4',
-              parts={'A': 'C4:2 E4:2 G4:4 | A4:2 G4:2 E4:4'}),
+              parts={'A': 'C4:2 E4:2 G4:2 | A4:1 G4:1 E4:4'}),
         Track('lyre', 46, 84, pan=-22, velocity=92, lo='C4', hi='G5',
-              parts={'A': 'C4:1 G4:1 C5:1 E5:1 G5:1 E5:1 C5:1 G4:1 | F4:1 A4:1 C5:1 G4:1 E4:0.5 G4:0.5 C5:3'}),
+              parts={'A': 'C4:1 G4:1 C5:1 E5:1 G5:1 E5:1 | F4:1 A4:0.5 G4:0.5 E4:0.5 G4:0.5 C5:3'}),
         Track('timpani', 47, 86, pan=8, velocity=100, gate=0.6, lo='G2', hi='C3',
-              parts={'A': 'C3:2 r:2 C3:1 C3:1 G2:2 | C3:2 G2:2 C3:4'}),
-        Track('bass', 92, 60, velocity=100, lo='C2', hi='G2', parts={'A': 'C2:8 | F2:2 G2:2 C2:4'}),
-        Track('kymbala', 0, 66, velocity=90, kit=FRAME_KIT, parts={'A': 'cym:8 | r:4 tri:4'}),
+              parts={'A': 'C3:2 r:1 C3:0.5 C3:0.5 G2:2 | C3:1 G2:1 C3:4'}),
+        Track('bass', 92, 60, velocity=100, lo='C2', hi='G2', parts={'A': 'C2:6 | F2:1 G2:1 C2:4'}),
+        Track('kymbala', 0, 66, velocity=90, kit=FRAME_KIT, parts={'A': 'cym:6 | r:3 tri:3'}),
     ])
 
 # Obtain TM: a technique learned, A Greek Phrygian (Dorian F#), aulos over a kithara roll.
