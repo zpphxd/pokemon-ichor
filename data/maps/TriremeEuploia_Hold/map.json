@@ -2,7 +2,7 @@
   "id": "MAP_TRIREME_EUPLOIA_HOLD",
   "name": "TriremeEuploia_Hold",
   "layout": "LAYOUT_TRIREME_EUPLOIA_HOLD",
-  "music": "MUS_ICHOR_AKTI",
+  "music": "MUS_ICHOR_TRIREME",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_AETHOS_ROUTE_2",
   "requires_flash": false,

@@ -2,7 +2,7 @@
   "id": "MAP_AEGINA_APHAIA_ROAD",
   "name": "AeginaAphaiaRoad",
   "layout": "LAYOUT_AEGINA_APHAIA_ROAD",
-  "music": "MUS_ICHOR_ROUTE1",
+  "music": "MUS_ICHOR_ROAD",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_AIGINA",
   "requires_flash": false,
