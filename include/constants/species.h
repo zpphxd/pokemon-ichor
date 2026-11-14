@@ -1700,4 +1700,8 @@ enum __attribute__((packed)) Species
 
 #define SPECIES_SHINY_TAG 5000
 
+// Ichor (world-act2): Act II's Aethos stand-ins. Keep this include after world-act1's
+// ichor_species_stubs.h, so the species both acts use take world-act1's stand-in.
+#include "constants/ichor_species_stubs_act2.h"
+
 #endif  // GUARD_CONSTANTS_SPECIES_H

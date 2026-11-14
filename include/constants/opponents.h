@@ -48,7 +48,35 @@
 #define TRAINERS_END_ACT1                     0
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
-#define TRAINERS_END_ACT2                     0
+#define TRAINER_ICHOR_IKARIOS                 160
+#define TRAINER_ICHOR_PYTHODOROS              161
+#define TRAINER_ICHOR_BOTRYS                  162
+#define TRAINER_ICHOR_ASTYLOS             163
+#define TRAINER_ICHOR_TIMOLAOS                164
+#define TRAINER_ICHOR_LYKIDAS                 165
+#define TRAINER_ICHOR_EUIA                    166
+#define TRAINER_ICHOR_BROMIA                  167
+#define TRAINER_ICHOR_ARIMNESTOS              168
+#define TRAINER_ICHOR_GRUNT_ILYS              169
+#define TRAINER_ICHOR_KOMOS                   170
+#define TRAINER_ICHOR_HAGNON                  171
+#define TRAINER_ICHOR_GRUNT_ARGILLOS          172
+#define TRAINER_ICHOR_GRUNT_KERAMOS           173
+#define TRAINER_ICHOR_GRUNT_PLINTHOS          174
+#define TRAINER_ICHOR_GRUNT_GYPSOS            175
+#define TRAINER_ICHOR_OINOPION                176
+#define TRAINER_ICHOR_LENAIA                  177
+#define TRAINER_ICHOR_HEGELOCHOS              178
+#define TRAINER_ICHOR_MYNNISKOS             179
+#define TRAINER_ICHOR_THETTALOS             180
+#define TRAINER_ICHOR_THEODOROS               181
+#define TRAINER_ICHOR_THESPIS_1               182
+#define TRAINER_ICHOR_GRUNT_BORBOROS          183
+#define TRAINER_ICHOR_KLEON_3_KYNDER          184
+#define TRAINER_ICHOR_KLEON_3_HIPLING         185
+#define TRAINER_ICHOR_KLEON_3_NEBREL          186
+#define TRAINER_ICHOR_SILENOS                 187
+#define TRAINERS_END_ACT2                     188
 
 // world-act3, ids 320-499: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0

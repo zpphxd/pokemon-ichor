@@ -1,0 +1,270 @@
+/* Staged by world-act2 from design/phase3/SCRIPT.md Part 3 (region A). The kithairon agent owns these. */
+
+=== TRAINER_ICHOR_IKARIOS ===
+Name: IKARIOS
+Class: Vintner
+Pic: Vintner
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Onotis
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Ampelix
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_PYTHODOROS ===
+Name: PYTHODOROS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Melibee
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lophops
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_BOTRYS ===
+Name: BOTRYS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Stachyss
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Spalunk
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Dig
+- Bulldoze
+- Fury Swipes
+- Covet
+
+Kaplet
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_ASTYLOS ===
+Name: ASTYLOS
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Lophops
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_TIMOLAOS ===
+Name: TIMOLAOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Hoplomex
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Pebblith
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LYKIDAS ===
+Name: LYKIDAS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelonet
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_EUIA ===
+Name: EUIA
+Class: Maenad
+Pic: Maenad
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Botrykit
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Ampelix
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_BROMIA ===
+Name: BROMIA
+Class: Maenad
+Pic: Maenad
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Botrykit
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Gelasable
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_ARIMNESTOS ===
+Name: ARIMNESTOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_ILYS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Galekit
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_KOMOS ===
+Name: KOMOS
+Class: Satyr
+Pic: Satyr
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Onotis
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Gelasable
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_HAGNON ===
+Name: HAGNON
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Melibee
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelonet
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_ARGILLOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Kaplet
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Onotis
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_KERAMOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Check Bad Move
+
+Gelasable
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Spalunk
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_PLINTHOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_GYPSOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Kerazap
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Hoplomex
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+

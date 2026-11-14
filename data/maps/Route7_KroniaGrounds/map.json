@@ -1,0 +1,21 @@
+{
+  "id": "MAP_ROUTE7_KRONIA_GROUNDS",
+  "name": "Route7_KroniaGrounds",
+  "layout": "LAYOUT_ROUTE7_KRONIA_GROUNDS",
+  "music": "MUS_ICHOR_ROAD",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_AETHOS_ROUTE_7",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

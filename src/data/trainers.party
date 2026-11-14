@@ -424,6 +424,607 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 /* Ichor: world-act2 (ids 160-319) */
 
+=== TRAINER_ICHOR_IKARIOS ===
+Name: IKARIOS
+Class: Harvester
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Onotis
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Ampelix
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_PYTHODOROS ===
+Name: PYTHODOROS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Melibee
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lophops
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_BOTRYS ===
+Name: BOTRYS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Stachyss
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Spalunk
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Dig
+- Bulldoze
+- Fury Swipes
+- Covet
+
+Kaplet
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_ASTYLOS ===
+Name: ASTYLOS
+Class: Hoplite
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Lophops
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_TIMOLAOS ===
+Name: TIMOLAOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Hoplomex
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Pebblith
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LYKIDAS ===
+Name: LYKIDAS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelonet
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_EUIA ===
+Name: EUIA
+Class: Harvester
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Botrykit
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Ampelix
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_BROMIA ===
+Name: BROMIA
+Class: Harvester
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Botrykit
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Gelasable
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_ARIMNESTOS ===
+Name: ARIMNESTOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_ILYS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Galekit
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_KOMOS ===
+Name: KOMOS
+Class: Goatherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Onotis
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Gelasable
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_HAGNON ===
+Name: HAGNON
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Melibee
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelonet
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_ARGILLOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Kaplet
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Onotis
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_KERAMOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Check Bad Move
+
+Gelasable
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Spalunk
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_PLINTHOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_GYPSOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Kerazap
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Hoplomex
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_OINOPION ===
+Name: OINOPION
+Class: Harvester
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Ampelix
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Onotis
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Botrykit
+Level: 28
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LENAIA ===
+Name: LENAIA
+Class: Harvester
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Botrykit
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Ampelix
+Level: 28
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_HEGELOCHOS ===
+Name: HEGELOCHOS
+Class: Acolyte
+Pic: Shepherd
+Gender: Male
+Music: Rich
+AI: Check Bad Move
+
+Gelasable
+Level: 28
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Sucker Punch
+- Crunch
+- Feint
+- Covet
+
+=== TRAINER_ICHOR_MYNNISKOS ===
+Name: MYNNISKOS
+Class: Acolyte
+Pic: Shepherd
+Gender: Male
+Music: Rich
+AI: Basic Trainer
+
+Gelasable
+Level: 27
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+Onotis
+Level: 27
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+=== TRAINER_ICHOR_THETTALOS ===
+Name: THETTALOS
+Class: Acolyte
+Pic: Shepherd
+Gender: Male
+Music: Rich
+AI: Basic Trainer
+
+Botrykit
+Level: 28
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+Ampelix
+Level: 28
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+=== TRAINER_ICHOR_THEODOROS ===
+Name: THEODOROS
+Class: Acolyte
+Pic: Shepherd
+Gender: Male
+Music: Rich
+AI: Basic Trainer
+
+Midonos
+Level: 28
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+Gelasable
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+=== TRAINER_ICHOR_THESPIS_1 ===
+Name: THESPIS
+Class: Hierophant
+Pic: Hierophant Ione
+Gender: Male
+Music: Male
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Botrykit
+Level: 30
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Poison Jab
+- Slash
+- Hone Claws
+- Bite
+
+Karkitox
+Level: 30
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Crabhammer
+- Cross Poison
+- Razor Shell
+- Protect
+
+Prosomime
+Level: 31
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Psybeam
+- Clear Smog
+- Hypnosis
+- Encore
+
+Thyrsivy @ Black Sludge
+Level: 32
+IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
+- Petal Dance
+- Giga Drain
+- Venoshock
+- Toxic
+
+=== TRAINER_ICHOR_GRUNT_BORBOROS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Lophops
+Level: 28
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 29
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_KLEON_3_KYNDER ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+AI: Basic Trainer
+
+Lophops
+Level: 28
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Air Cutter
+- Taunt
+- Pluck
+- Quick Attack
+
+Alekrow
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Brick Break
+- Aerial Ace
+- Bulk Up
+- Swagger
+
+Hoplomex
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Lunge
+- Iron Defense
+- Brick Break
+- Dig
+
+Nemecub
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Take Down
+- Crunch
+- Slash
+- Roar
+
+Thalamare
+Level: 31
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Take Down
+- Aqua Tail
+- Bulldoze
+- Flip Turn
+
+=== TRAINER_ICHOR_KLEON_3_HIPLING ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+AI: Basic Trainer
+
+Lophops
+Level: 28
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Air Cutter
+- Taunt
+- Pluck
+- Quick Attack
+
+Alekrow
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Brick Break
+- Aerial Ace
+- Bulk Up
+- Swagger
+
+Hoplomex
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Lunge
+- Iron Defense
+- Brick Break
+- Dig
+
+Nemecub
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Take Down
+- Crunch
+- Slash
+- Roar
+
+Kladoe
+Level: 31
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Leaf Tornado
+- Magical Leaf
+- Charm
+- Synthesis
+
+=== TRAINER_ICHOR_KLEON_3_NEBREL ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+AI: Basic Trainer
+
+Lophops
+Level: 28
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Air Cutter
+- Taunt
+- Pluck
+- Quick Attack
+
+Alekrow
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Brick Break
+- Aerial Ace
+- Bulk Up
+- Swagger
+
+Hoplomex
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Lunge
+- Iron Defense
+- Brick Break
+- Dig
+
+Nemecub
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Take Down
+- Crunch
+- Slash
+- Roar
+
+Dikyon
+Level: 31
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Crunch
+- Fire Fang
+- Double Hit
+- Thunder Fang
+
+=== TRAINER_ICHOR_SILENOS ===
+Name: SILENOS
+Class: Goatherd
+Pic: Shepherd
+Gender: Male
+Music: Rich
+AI: Basic Trainer
+
+Midonos
+Level: 33
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Iron Head
+- Take Down
+- Gyro Ball
+- Iron Defense
+
+Gelasable
+Level: 34
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Taunt
+- Super Fang
+- Sucker Punch
+- Crunch
+
+Oinopard
+Level: 35
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Night Slash
+- Crunch
+- Poison Jab
+- Toxic
+
 
 /* Ichor: world-act3 (ids 320-499) */
 

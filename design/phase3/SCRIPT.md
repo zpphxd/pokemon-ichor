@@ -4655,7 +4655,7 @@ Lines are listed by condition, earliest first; a later condition replaces earlie
 
 **Layout.** About 56×28 tiles. The road leaves Eleusa's north edge through the cut vines, then climbs the terraced foothills of Kithairon in long zigzags: east along a terrace of vine rows, up a stair of terraces, west again, then north into scrub oak to the north edge near the east side. Every terrace is walled with dry stone. Vines on trellises, a few old olives, a stone wine press with its treading floor, a wine-cart with a broken wheel. Up on the north skyline, the towers of Eleutherai on their rock. Halfway, a spur runs east along the hillside to the mouth of Antiope's cave.
 
-**Rhythm:** the vines and the herald (beat 26); Ikarios among the vine rows (first trainer, in plain view); a forced band of grass between two terrace walls, 3 deep; the terrace stair with ledges; Pythodoros at the gap in the wall where the road turns west; the great herm at the spur fork; a second forced band, 4 deep, right after Pythodoros's gap (he faces it, so there's no healing between him and the grass); the wine-cart; Thersandros at the cutting below the fort; the fort in view.
+**Rhythm:** the vines and the herald (beat 26); Ikarios among the vine rows (first trainer, in plain view); a forced band of grass between two terrace walls, 3 deep; the terrace stair with ledges; Pythodoros at the gap in the wall where the road turns west; the great herm at the spur fork; a second forced band, 4 deep, right after Pythodoros's gap (he faces it, so there's no healing between him and the grass); the wine-cart; Astylos at the cutting below the fort; the fort in view.
 
 **Ledges.** The terraces drop south, back toward Eleusa: three one-way ledges along the zigzag let a player hop home in a few steps, and they make a loop round Botrys's vine rows.
 
@@ -4672,7 +4672,7 @@ Lines are listed by condition, earliest first; a later condition replaces earlie
 | Vine-dresser | the first terrace | flavor |
 | Wine-cart driver | by the broken cart | lore |
 | Pilgrims (2) | on the road, walking north | flavor; the Dionysia |
-| Ikarios, Pythodoros, Botrys, Thersandros | along the road | trainers (Part 3) |
+| Ikarios, Pythodoros, Botrys, Astylos | along the road | trainers (Part 3) |
 
 **Vine-dresser**
 ```text
@@ -12448,15 +12448,15 @@ Level: 25
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 ```
 
-**4. RUNNER Thersandros.** In the cutting below the fort, facing across it. Sight 3: mandatory.
+**4. RUNNER Astylos.** In the cutting below the fort, facing across it. Sight 3: mandatory.
 ```text
-Before: THERSANDROS: Message for Thyrsa! Can't stop! …Well. I can stop for this.
-Defeat: THERSANDROS: Late! The message will keep. It's about lateness.
-After:  THERSANDROS: I carry the Archon's notices, up the mountain and down. / Mostly bad news, lately.
+Before: ASTYLOS: Message for Thyrsa! Can't stop! …Well. I can stop for this.
+Defeat: ASTYLOS: Late! The message will keep. It's about lateness.
+After:  ASTYLOS: I carry the Archon's notices, up the mountain and down. / Mostly bad news, lately.
 ```
 ```
-=== TRAINER_ICHOR_THERSANDROS ===
-Name: THERSANDROS
+=== TRAINER_ICHOR_ASTYLOS ===
+Name: ASTYLOS
 Class: Runner
 Pic: Runner
 Gender: Male
@@ -12858,15 +12858,15 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 Each act's actor stands backstage between the mask rack and the three doors, wearing a mask (Part 5). An actor in the same mask as the player lets them pass ("Same face, same side."); in a different one, he battles them, once. Act I's actor wears the tragic mask and Act III's the comic, so the correct path always meets them. Act II's stands in a side alcove, facing away. All are ACTOR / Pic: Actor / Music: Rich / AI: Basic Trainer / IVs 12.
 
-**ACTOR Kallippides**, Act I, in the tragic mask. Mandatory.
+**ACTOR Mynniskos**, Act I, in the tragic mask. Mandatory.
 ```text
-Before: KALLIPPIDES: Wrong face for my scene! I'm waiting for the tragedy. / Off with you! …Or fight me for the stage.
-Defeat: KALLIPPIDES: Exit, pursued by a weasel.
-After:  KALLIPPIDES: A face for every scene. That's all acting is. Pick the right one.
+Before: MYNNISKOS: Wrong face for my scene! I'm waiting for the tragedy. / Off with you! …Or fight me for the stage.
+Defeat: MYNNISKOS: Exit, pursued by a weasel.
+After:  MYNNISKOS: A face for every scene. That's all acting is. Pick the right one.
 ```
 ```
-=== TRAINER_ICHOR_KALLIPPIDES ===
-Name: KALLIPPIDES
+=== TRAINER_ICHOR_MYNNISKOS ===
+Name: MYNNISKOS
 Class: Actor
 Pic: Actor
 Gender: Male
@@ -12882,15 +12882,15 @@ Level: 27
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 ```
 
-**ACTOR Nikostratos**, Act II, in the satyr mask, in the side alcove. Optional.
+**ACTOR Thettalos**, Act II, in the satyr mask, in the side alcove. Optional.
 ```text
-Before: NIKOSTRATOS: Nobody comes to the satyrs' corner unless they're lost. Are you lost? Good!
-Defeat: NIKOSTRATOS: Tragic. Actually tragic.
-After:  NIKOSTRATOS: The cues tell you who: weeping, laughing, a tail. / The doors tell you where. Read both.
+Before: THETTALOS: Nobody comes to the satyrs' corner unless they're lost. Are you lost? Good!
+Defeat: THETTALOS: Tragic. Actually tragic.
+After:  THETTALOS: The cues tell you who: weeping, laughing, a tail. / The doors tell you where. Read both.
 ```
 ```
-=== TRAINER_ICHOR_NIKOSTRATOS ===
-Name: NIKOSTRATOS
+=== TRAINER_ICHOR_THETTALOS ===
+Name: THETTALOS
 Class: Actor
 Pic: Actor
 Gender: Male
@@ -18968,12 +18968,12 @@ Act III's stage has the **god-machine**: a wooden crane with a hook on a rope, w
   |  ACT II   [audience . . . . . . . . . . . . . . . . . . . . . . . audience]  |
   |  stage    . . . . . . . . . . . . . . . . . . . . . . . . . . curtain >     |
   |  --------[ivy]------------------[crown]------------------[goat]------------  |
-  |  wings    (rack) . [program] . . . . . . . . . . . [alcove: Nikostratos]     |
+  |  wings    (rack) . [program] . . . . . . . . . . . [alcove: Thettalos]     |
   +--+--------------------------------------------------------------------------+
   |  ACT I    [audience . . . . . . . . . . . . . . . . . . . . . . . audience]  |
   |  stage    . . . . . . . . . . . . . . . . . . . . . . . . . . curtain >     |
   |  --------[ivy]-------------(crown, painted)--------(goat, painted)---------  |
-  |  wings    (rack: comic only) . [program] . [Kallippides, tragic mask]        |
+  |  wings    (rack: comic only) . [program] . [Mynniskos, tragic mask]        |
   +------------------------------------[ door: Lasos, the god's image ]---------+
 ```
 
@@ -18991,7 +18991,7 @@ Act III's stage has the **god-machine**: a wooden crane with a hook on a rope, w
    {PLAYER} put on the comic mask.
    ```
    The mask sets `VAR_TEMP_1` (0 none, 1 comic, 2 tragic, 3 satyr) and shows in the start-menu info panel ("Mask: COMIC"), per SYSTEMS.md §2's display rule. A masked walker frame set for the player is a stretch.
-3. **Pass the actor.** Each act's actor stands between the rack and the doors, wearing his own mask. If the player's mask matches his, he steps aside: "KALLIPPIDES: Same face, same side. Go on." If it doesn't, he battles them, once (Part 3); after that he steps aside whatever they wear.
+3. **Pass the actor.** Each act's actor stands between the rack and the doors, wearing his own mask. If the player's mask matches his, he steps aside: "MYNNISKOS: Same face, same side. Go on." If it doesn't, he battles them, once (Part 3); after that he steps aside whatever they wear.
 4. **Make an entrance.** Walking into a door from the wings is an entrance: the script compares the door and the mask with the act's next expected entrance (`VAR_TEMP_2` counts the entrances made in this act).
    - **Right:** a short movement script carries the player out onto the stage. The clay audience "reacts" (a laugh SE for a comic or satyr entrance, a gasp SE for a tragic one), and the next part of the act opens: the next entrance is expected, or the curtain to the next act's stair draws back.
      ```text
@@ -19022,8 +19022,8 @@ Act III's stage has the **god-machine**: a wooden crane with a hook on a rope, w
 
 | Act | Teaches | What's in it |
 |---|---|---|
-| I (teach) | A program names a mask and a door; wear the one, use the other | The rack holds only the comic mask, and only the ivy door is a real door: the crown and the goat are painted on the wall. Kallippides, in the tragic mask, stands between the rack and the door, so a player in the right mask must battle him. One entrance, then the curtain opens. |
-| II (test) | Cues instead of names; two entrances in order | All three masks, all three doors. The program gives cues: the one who weeps, the king's house; the one who laughs, the vines. The goat door is real now and never cued. Nikostratos, in the satyr mask, waits in a side alcove facing the wall: optional, and he hints at the cues. |
+| I (teach) | A program names a mask and a door; wear the one, use the other | The rack holds only the comic mask, and only the ivy door is a real door: the crown and the goat are painted on the wall. Mynniskos, in the tragic mask, stands between the rack and the door, so a player in the right mask must battle him. One entrance, then the curtain opens. |
+| II (test) | Cues instead of names; two entrances in order | All three masks, all three doors. The program gives cues: the one who weeps, the king's house; the one who laughs, the vines. The goat door is real now and never cued. Thettalos, in the satyr mask, waits in a side alcove facing the wall: optional, and he hints at the cues. |
 | III (master) | The missing entrance | The program names two entrances and is torn off before the third. Theodoros, in the comic mask, stands between the rack and the doors: the first entrance (comic) passes him, and the second (tragic) must battle him. The third is the satyr, by the goat door: the satyr play that always followed a tragedy, the part the program "forgot". |
 
 **The safety valve.** Lasos at the door repeats the rule on request. After two wrong entrances in Act III, a voice comes from the painted audience as the player returns to the wings:
@@ -19034,8 +19034,8 @@ After four, Theodoros (if beaten) adds: "THEODOROS: You've used the ivy and the 
 
 ### Placement and gates
 
-- **Kallippides:** Act I's wings, between the rack and the ivy door, facing the rack. Sight 3. Mandatory on the right path.
-- **Nikostratos:** Act II's wings, in a side alcove off the corridor's east end, facing the wall. Optional.
+- **Mynniskos:** Act I's wings, between the rack and the ivy door, facing the rack. Sight 3. Mandatory on the right path.
+- **Thettalos:** Act II's wings, in a side alcove off the corridor's east end, facing the wall. Optional.
 - **Theodoros:** Act III's wings, between the rack and the doors, facing the rack. Sight 3. Mandatory on the right path.
 - **Thespis:** the skene roof, reached only by the god-machine.
 - **The curtains** are metatile gates, drawn back when an act's last entrance is made.
@@ -20883,7 +20883,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Ikarios | VINTNER, Route 6 | the Athenian who received the first vine from Dionysus |
 | Pythodoros | PILGRIM, Route 6 | classical name |
 | Botrys | HARVESTER, Route 6 | "a bunch of grapes" |
-| Thersandros | RUNNER, Route 6 | a Theban hero, son of Polyneikes |
+| Astylos | RUNNER, Route 6 | a famous sprinter of the old games, from Kroton |
 | Lykidas | GOATHERD, Mt. Kithairon | Theocritus's goatherd |
 | Euia, Bromia | MAENADS, Mt. Kithairon | the bacchants' cry, *euoi*; Bromios, the god's "roaring" name |
 | Arimnestos | HOPLITE, Mt. Kithairon | the Plataean commander at Marathon |
@@ -20892,7 +20892,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Oinopion | VINTNER, Thyrsa | "wine-face", a son of Dionysus |
 | Lenaia | MAENAD, Thyrsa | the Lenaia, the winter festival of Dionysus; *lenai*, maenads |
 | Hegelochos | ACTOR, Thyrsa | the actor Aristophanes mocked for one mispronounced word |
-| Kallippides, Nikostratos, Theodoros | the temple's ACTORS | famous tragic actors of the classical stage |
+| Mynniskos, Thettalos, Theodoros | the temple's ACTORS | famous tragic actors of the classical stage |
 | Lasos | the temple's chorus master | Lasos of Hermione, who brought the god's song into contests |
 | Silenos | the theater's prop master | Silenus, Dionysus's old tutor, whom Midas caught |
 | Manto | the blind seer, Thyrsa's augur | Teiresias's daughter, a seer herself |

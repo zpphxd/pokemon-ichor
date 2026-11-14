@@ -454,6 +454,9 @@ enum
     NUM_OBJ_EVENT_GFX,
 };
 
+// Ichor (world-act2): Act II's not-yet-drawn walkers, aliased to stand-ins (see the file).
+#include "constants/ichor_gfx_stubs_act2.h"
+
 // FRLG equivalents
 // #define OBJ_EVENT_GFX_MEW OBJ_EVENT_GFX_NINJA_BOY
 // #define OBJ_EVENT_GFX_LUGIA OBJ_EVENT_GFX_NINJA_BOY

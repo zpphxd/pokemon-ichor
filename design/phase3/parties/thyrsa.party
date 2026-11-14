@@ -1,0 +1,54 @@
+/* Staged by world-act2 from design/phase3/SCRIPT.md Part 3 (region A). The thyrsa agent owns these. */
+
+=== TRAINER_ICHOR_OINOPION ===
+Name: OINOPION
+Class: Vintner
+Pic: Vintner
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Ampelix
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Onotis
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Botrykit
+Level: 28
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LENAIA ===
+Name: LENAIA
+Class: Maenad
+Pic: Maenad
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Botrykit
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Ampelix
+Level: 28
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_HEGELOCHOS ===
+Name: HEGELOCHOS
+Class: Actor
+Pic: Actor
+Gender: Male
+Music: Rich
+AI: Check Bad Move
+
+Gelasable
+Level: 28
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Sucker Punch
+- Crunch
+- Feint
+- Covet
+

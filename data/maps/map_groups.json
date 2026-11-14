@@ -75,7 +75,9 @@
     "gMapGroup_IndoorTwoIslandRoute_Frlg",
     "gMapGroup_IndoorSixIslandRoute_Frlg",
     "gMapGroup_IndoorSevenIslandRoute_Frlg",
-    "gMapGroup_IndoorKalliste"
+    "gMapGroup_IndoorKalliste",
+    "gMapGroup_IndoorKithairon",
+    "gMapGroup_IndoorThyrsa"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -138,7 +140,13 @@
     "ElaiaVillage",
     "KallisteRoute1",
     "AktiTown",
-    "KallisteRoute1_KronionHill"
+    "KallisteRoute1_KronionHill",
+    "Route6_EleutheraiRoad",
+    "Eleutherai",
+    "MtKithairon",
+    "Route7_KroniaGrounds",
+    "ThyrsaCity",
+    "ThyrsaTheater"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -1178,5 +1186,25 @@
     "ElaiaVillage_BakersHouse",
     "AktiTown_DiversHouse",
     "AktiTown_GoatherdsHouse"
+  ],
+  "gMapGroup_IndoorKithairon": [
+    "Route6_AntiopesCave",
+    "Eleutherai_WatchHouse",
+    "Eleutherai_LysidikeHouse",
+    "Eleutherai_OinoeHouse"
+  ],
+  "gMapGroup_IndoorThyrsa": [
+    "ThyrsaCity_Asclepeion",
+    "ThyrsaCity_Agora",
+    "ThyrsaCity_TempleOfDionysus",
+    "ThyrsaCity_Tavern",
+    "ThyrsaCity_MaskWorkshop",
+    "ThyrsaCity_ActorHouse",
+    "ThyrsaCity_EudoraHouse",
+    "ThyrsaCity_MantoHouse",
+    "ThyrsaCity_PindarosHouse",
+    "ThyrsaCity_SownHouse",
+    "ThyrsaCity_VintnerHouse",
+    "ThyrsaTheater_Skene"
   ]
 }

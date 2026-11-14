@@ -1,0 +1,197 @@
+/* Staged by world-act2 from design/phase3/SCRIPT.md Part 3 (region A). The scenes agent owns these. */
+
+=== TRAINER_ICHOR_GRUNT_BORBOROS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Lophops
+Level: 28
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 29
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_KLEON_3_KYNDER ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+AI: Basic Trainer
+
+Lophops
+Level: 28
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Air Cutter
+- Taunt
+- Pluck
+- Quick Attack
+
+Alekrow
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Brick Break
+- Aerial Ace
+- Bulk Up
+- Swagger
+
+Hoplomex
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Lunge
+- Iron Defense
+- Brick Break
+- Dig
+
+Nemecub
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Take Down
+- Crunch
+- Slash
+- Roar
+
+Thalamare
+Level: 31
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Take Down
+- Aqua Tail
+- Bulldoze
+- Flip Turn
+
+=== TRAINER_ICHOR_KLEON_3_HIPLING ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+AI: Basic Trainer
+
+Lophops
+Level: 28
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Air Cutter
+- Taunt
+- Pluck
+- Quick Attack
+
+Alekrow
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Brick Break
+- Aerial Ace
+- Bulk Up
+- Swagger
+
+Hoplomex
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Lunge
+- Iron Defense
+- Brick Break
+- Dig
+
+Nemecub
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Take Down
+- Crunch
+- Slash
+- Roar
+
+Kladoe
+Level: 31
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Leaf Tornado
+- Magical Leaf
+- Charm
+- Synthesis
+
+=== TRAINER_ICHOR_KLEON_3_NEBREL ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+AI: Basic Trainer
+
+Lophops
+Level: 28
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Air Cutter
+- Taunt
+- Pluck
+- Quick Attack
+
+Alekrow
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Brick Break
+- Aerial Ace
+- Bulk Up
+- Swagger
+
+Hoplomex
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Lunge
+- Iron Defense
+- Brick Break
+- Dig
+
+Nemecub
+Level: 29
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Take Down
+- Crunch
+- Slash
+- Roar
+
+Dikyon
+Level: 31
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Crunch
+- Fire Fang
+- Double Hit
+- Thunder Fang
+
+=== TRAINER_ICHOR_SILENOS ===
+Name: SILENOS
+Class: Satyr
+Pic: Silenos
+Gender: Male
+Music: Rich
+AI: Basic Trainer
+
+Midonos
+Level: 33
+Ability: Own Tempo
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Iron Head
+- Take Down
+- Gyro Ball
+- Iron Defense
+
+Gelasable
+Level: 34
+Ability: Prankster
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Taunt
+- Super Fang
+- Sucker Punch
+- Crunch
+
+Oinopard
+Level: 35
+Ability: Moxie
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Night Slash
+- Crunch
+- Poison Jab
+- Toxic
+

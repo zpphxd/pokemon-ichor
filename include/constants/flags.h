@@ -1682,6 +1682,25 @@
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_ACT2_BEGUN                   (FLAG_ICHOR_GENERAL_START + 0x100) // Ichor: Act II: the vines are cut and Route 6 opens (beat 26)
+#define FLAG_ICHOR_VISITED_ELEUTHERAI           (FLAG_ICHOR_GENERAL_START + 0x101) // Ichor: Act II: reached Eleutherai on Mt. Kithairon (beat 27)
+#define FLAG_ICHOR_KRONIA_SEEN                  (FLAG_ICHOR_GENERAL_START + 0x102) // Ichor: Act II: walked through the Kronia grounds (beat 29)
+#define FLAG_ICHOR_ARRIVED_THYRSA               (FLAG_ICHOR_GENERAL_START + 0x103) // Ichor: Act II: first steps into Thyrsa City (beat 30)
+#define FLAG_ICHOR_VISITED_THYRSA               (FLAG_ICHOR_GENERAL_START + 0x104) // Ichor: Act II: Thyrsa City is a fly target
+#define FLAG_ICHOR_THREE_ACT_PLAY_DONE          (FLAG_ICHOR_GENERAL_START + 0x105) // Ichor: Act II: the Temple of Dionysus's trial is solved (beat 31)
+#define FLAG_ICHOR_DIONYSIA_BEGUN               (FLAG_ICHOR_GENERAL_START + 0x106) // Ichor: Act II: the Dionysia has started (beat 32)
+#define FLAG_ICHOR_DIONYSIA_DONE                (FLAG_ICHOR_GENERAL_START + 0x107) // Ichor: Act II: the trance is broken (beat 32)
+#define FLAG_ICHOR_SAW_PROGRAM_HOOK             (FLAG_ICHOR_GENERAL_START + 0x108) // Ichor: Act II: Alethea showed you the hooked program (beat 32)
+#define FLAG_ICHOR_KLEON_BATTLE_3_DONE          (FLAG_ICHOR_GENERAL_START + 0x109) // Ichor: Act II: Kleon's third battle, in the empty theater (beat 33)
+#define FLAG_ICHOR_ACT2_STUB_GIRDLE             (FLAG_ICHOR_GENERAL_START + 0x10A) // Ichor: ICHOR_STUB_RELICS: you hold the Girdle (until FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES exists)
+#define FLAG_ICHOR_ACT2_STUB_SICKLE             (FLAG_ICHOR_GENERAL_START + 0x10B) // Ichor: ICHOR_STUB_RELICS: you hold Demeter's Sickle (until FLAG_ICHOR_GOT_DEMETERS_SICKLE exists)
+// ICHOR_STUB_RELICS (world-act2): the engine's relic flags (ENGINE_API.md §2) until engine batch 2 defines them.
+#ifndef FLAG_ICHOR_GOT_DEMETERS_SICKLE
+#define FLAG_ICHOR_GOT_DEMETERS_SICKLE FLAG_ICHOR_ACT2_STUB_SICKLE
+#endif
+#ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
+#define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
+#endif
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
@@ -1695,6 +1714,9 @@
 #define FLAG_DAILY_ICHOR_GENERAL_START          (ICHOR_DAILY_FLAGS_START + 0x90) // 112 claimed by name, below
 #define FLAG_DAILY_ICHOR_GENERAL_COUNT          (ICHOR_DAILY_FLAGS_COUNT - 0x90)
 // Ichor daily bank flags: claim.py dailyflag adds lines here, in order.
+#define FLAG_DAILY_ICHOR_KRONIST_BREAD          (FLAG_DAILY_ICHOR_GENERAL_START + 0x04C) // Ichor: Act II: one free Barley Cake a day from any Kronist
+#define FLAG_DAILY_ICHOR_SKENE_MASK             (FLAG_DAILY_ICHOR_GENERAL_START + 0x04D) // Ichor: Act II: the skene's mask rack hides a Prosomime once a day
+#define FLAG_DAILY_ICHOR_TREADING               (FLAG_DAILY_ICHOR_GENERAL_START + 0x04E) // Ichor: Act II: the vintner's grape-treading, once a day
 // Ichor daily bank flags: end
 
 // Temp flag aliases
