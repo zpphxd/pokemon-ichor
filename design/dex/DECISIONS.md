@@ -129,3 +129,16 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
 - 2026-11-14: **Mega Evolutions reuse their base form's cry**, which frees about 1 MB. The user: "Give each Mega Evolution the same cry as its base form, which frees about 1 MB." It's an engine config change for the main session to make (the dex branch doesn't edit `include/`). In `include/config/pokemon.h`:
   - `#define P_MODIFIED_MEGA_CRIES FALSE` drops the separate Mega cry samples.
   - `#define P_MODIFIED_MEGA_CRY_MODE CRY_MODE_NORMAL` plays the base cry unchanged, which is what the user asked for. The default, `CRY_MODE_HIGH_PITCH`, plays it pitched up instead, also at no cost.
+- 2026-11-14: **Checked against the whole-game level curve** (`design/BALANCE.md` on main).
+  - **Fits:** everything through Arkadia. The starters evolve at 16 and then 34–36, and the other main finals at 30–36, inside the curve's Laurels 4–6 window (levels 30–43).
+  - **Static encounters raised to fit:** the Fates to level 60, matching the Lord of Time they're freed after, and Ichorin to 70, with the other post-game legendaries.
+  - **Conflicts reported to the main session.** From Astyra on, lines first met in an area evolve below that area's wild band:
+    - Obolorn (30) in Astyra (30–36)
+    - Kaminoo (33) in Kaldera (34–40)
+    - Kymbash (35), Monophant (39) and Sepidart (39) in Knossa (42–48)
+    - Chalkip (35) and Sporadon (40) in Lakonia (46–50)
+    - Pelython (36), Pyrapod (34) and Hymnet (35) in Delphoi (48–52)
+    - Aetling (40), Kryopuff (40) and Pagoshard (42) on the Ascent (52–58)
+    - Elegull (42) in the post-game (55–70)
+  - **Recommended fix:** late areas' wild tables carry the evolved forms at the area's levels, and the first stages turn up only in rare lower-level spots, swarms or eggs, the way Victory Road works. The alternative is raising those evolution levels to just above each area's band.
+  - **Superseded:** the earlier "keep Victory Road under 40" note above.

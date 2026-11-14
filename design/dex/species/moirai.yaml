@@ -50,7 +50,7 @@ species:
     Chained at the Loom of Fate under Delphoi until you cut the Fates free.
     In the Frozen Hour it waits at Elaia's festival shrine, where the island
     priestess reads each youth's thread. You rouse it there, and once time
-    flows again it stays to be caught (static, level 50, one only).
+    flows again it stays to be caught (static, level 60, one only).
   learnset:
     level_up:
       - [1, Confusion]
@@ -131,7 +131,7 @@ species:
     Chained at the Loom of Fate under Delphoi until you cut the Fates free.
     In the Frozen Hour it waits at the Pool of Mnemosyne, Arkadia, where the
     memory of every life is kept. You rouse it there, and once time flows again
-    it stays to be caught (static, level 50, one only).
+    it stays to be caught (static, level 60, one only).
   learnset:
     level_up:
       - [1, Confusion]
@@ -212,7 +212,7 @@ species:
     Chained at the Loom of Fate under Delphoi until you cut the Fates free.
     In the Frozen Hour it waits at Kaldera's forge, where you learned the Harpe
     can cut what the Fates have woven. You rouse it there, and once time flows
-    again it stays to be caught (static, level 50, one only).
+    again it stays to be caught (static, level 60, one only).
   learnset:
     level_up:
       - [1, Confusion]

@@ -46,8 +46,8 @@ species:
     - It can take the shape of any Pokémon.
   habitat: >-
     The Pool of Mnemosyne, Arkadia (post-game). Suggested: it surfaces from the
-    pool as a golden drop once you have seen all 149 other Aethos species
-    (static, level 50, one only).
+    pool as a golden drop once you have seen all 151 other Aethos species
+    (static, level 70, one only).
   learnset:
     level_up:
       - [1, Pound]
