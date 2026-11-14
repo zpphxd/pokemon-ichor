@@ -7566,7 +7566,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHealer = {
     .tracks = TRACKS_FOOT,
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
-    .anims = sAnimTable_Standard,
+    .anims = sAnimTable_Nurse, // the heal scripts play Movement_PkmnCenterNurse_Bow
     .images = sPicTable_IchorHealer,
 };
 
