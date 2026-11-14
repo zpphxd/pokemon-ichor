@@ -88,7 +88,67 @@ def kalliste_parts():
     import kalliste_elaia
     import kalliste_kronion
     found = {s.key: s for s in kalliste_kronion.build() + kalliste_elaia.build()}
-    return [adopt(found[k], "ruins") for k in KALLISTE_PARTS]
+    parts = [adopt(found[k], "ruins") for k in KALLISTE_PARTS]
+    dig = next(s for s in parts if s.key == "dig_site")
+    return parts + [pit_stair(dig)]
+
+
+def pit_stair(dig):
+    """The dig pit's lower half after the slice: the Titanborn dug deeper and
+    struck cut stone steps going down into the dark (design/SYSTEMS.md, relic
+    gates: Hecate's Torch's second gate, down to the Kronion crypt). Kronion
+    Hill's script swaps it in for the pit's lower row once the ruins are clear."""
+    s = Struct("pit_stair", "Kronion Hill: the dark stair in the pit", 2, 1, "ruins", walk=["XX"],
+               names={"left": (0, 0), "right": (1, 0)},
+               notes="The pit's lower row once the steps are uncovered: three worn treads "
+                     "dropping into black. Set over the pit's (0,1)-(1,1) cells in game "
+                     "(METATILE_Agros_PitStair_Left/Right).")
+    L = s.B
+    L.a[:] = dig.B.a[16:32, 0:32]
+    L.vline(6, 0, 12, "s0")                       # the cut walls of the stairwell
+    L.vline(25, 0, 12, "s1")
+    L.hline(6, 25, 0, "s1")                       # the lip where the floor gives way
+    L.hline(7, 24, 1, "s4")                       # first tread, lit
+    L.hline(7, 24, 2, "s3")
+    L.hline(7, 24, 3, "s0")                       # its riser
+    L.rect(7, 4, 18, 2, "s2")                     # second tread
+    L.hline(8, 23, 6, "sk")
+    L.hline(8, 23, 7, "s1")                       # third, barely lit
+    L.rect(7, 8, 18, 5, "ink")                    # then nothing
+    L.vline(7, 4, 12, "sk")
+    L.vline(24, 4, 12, "s0")
+    for x, y in ((10, 2), (19, 1), (14, 5), (21, 4)):
+        L.px(x, y, "s2" if y < 3 else "s1")       # wear on the treads
+    return s
+
+
+TILE_LIMIT = 504          # CLAUDE.md: tiles 504-511 of a secondary are the door animations'
+
+LABELS = ROOT / "include/constants/metatile_labels.h"
+LABEL_START = "// gTileset_Agros (Ichor: Route 1 and Kronion Hill), written by tools/ichor/art/agros_build.py"
+LABEL_END = "// end gTileset_Agros"
+
+
+def write_labels(secs):
+    """The metatiles scripts swap in, as METATILE_Agros_* in metatile_labels.h,
+    rewritten in place on every build so the ids never go stale."""
+    want = {"pit_stair": ("PitStair_Left", "PitStair_Right")}
+    lines = [LABEL_START]
+    for _, structs in secs:
+        for s in structs:
+            for i, label in enumerate(want.get(s.key, ())):
+                lines.append(f"#define METATILE_Agros_{label:<26} 0x{s.ids[0][i]:03X}")
+    lines.append(LABEL_END)
+    block = "\n".join(lines) + "\n"
+    text = LABELS.read_text()
+    if LABEL_START in text:
+        a = text.index(LABEL_START)
+        b = text.index(LABEL_END, a) + len(LABEL_END) + 1
+        text = text[:a] + block + text[b:]
+    else:
+        end = text.rindex("#endif")
+        text = text[:end] + block + "\n" + text[end:]
+    LABELS.write_text(text)
 
 
 def sections():
@@ -179,7 +239,15 @@ def verify(rows):
     a = np.array(Image.open(BIN / "tiles.png"))
     tiles = [a[y:y + 8, x:x + 8] for y in range(0, a.shape[0], 8) for x in range(0, a.shape[1], 8)]
     used = max(i for i, tl in enumerate(tiles) if tl.any()) + 1
-    print(f"verified {len(raw)} metatiles; {used} of 512 tiles used")
+    # A door animation copies its frames into a secondary's tiles 504-511
+    # (DOOR_TILE_START_SIZE1, src/field_door.c), so Agros keeps out of them:
+    # it will serve rural maps with doors.
+    late = sorted({(int(e) & 0x3FF) - 512 for entries in raw for e in entries
+                   if (int(e) & 0x3FF) - 512 >= TILE_LIMIT})
+    if used > TILE_LIMIT or late:
+        sys.exit(f"agros_build: {used} tiles used and tiles {late[:8]} referenced; a secondary "
+                 f"may use at most {TILE_LIMIT} (504-511 belong to door animations)")
+    print(f"verified {len(raw)} metatiles; {used} of {TILE_LIMIT} tiles used")
     return used
 
 
@@ -238,6 +306,7 @@ def main():
     write_sources(allst, rows, SRC)
     catalog(secs)
     sheet(secs, rows)
+    write_labels(secs)
     if not args.no_compile:
         compile_tileset()
         used = verify(rows)

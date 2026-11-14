@@ -210,25 +210,26 @@ local function main()
   warpTo("Route1Test_SetupHeader", S.MAP_ROUTE1, 10, 52)
   shot("01_route1_meadow.png")
 
-  -- Tityros sees the player on the road at (10,48).
+  -- Tityros, at the meadow wall's only gap, sees the player step through it.
   local r = walkTo({ { 10, 47 } })
-  expect(r == "taken", "Tityros stops the player on the road")
+  expect(r == "taken", "Tityros stops the player at the wall gap")
   battle("02_battle_tityros", S.TRAINER_TITYROS)
   settle()
   wait(60)
   shot("03_after_tityros.png")
 
   -- The route, south to north.
+  -- The route, south to north (each stop is outside every trainer's line).
   tour("04_south_entrance.png", 11, 60)
-  tour("05_carter.png", 14, 57)
-  tour("06_terrace_lip.png", 9, 44)
-  tour("07_grove.png", 13, 37)
-  tour("08_grove_lane.png", 17, 37)
+  tour("05_carter.png", 13, 55)
+  tour("06_meadow.png", 13, 47)
+  tour("07_grove_narrows.png", 12, 37)
+  tour("08_grove_lane.png", 21, 33)
   tour("09_big_olive.png", 9, 25)
   tour("10_bee_terraces.png", 13, 25)
   tour("11_fork.png", 13, 20)
   tour("12_spur.png", 23, 19)
-  tour("13_cove.png", 8, 7)
+  tour("13_cove.png", 7, 12)
   tour("14_north_road.png", 11, 3)
 
   -- The flock blocks the road north of the fork.
@@ -281,11 +282,15 @@ local function main()
   expect(getFlag(S.FLAG_HIDE_FLOCK), "the flock is told to move")
   shot("22_summit_after.png")
 
-  -- Back on Route 1 the road north is open.
+  -- Back on Route 1 the road north is open, and Agis holds the pass past the gap.
   tour("23_flock_after.png", 12, 16)
+  r = walkTo({ { 12, 13 } })
+  expect(r == "taken", "Agis stops the player in the pass")
+  battle("24_battle_agis", S.TRAINER_AGIS)
+  settle()
   r = walkTo({ { 12, 12 } })
   expect(r == "moved", "the road north is open")
-  shot("24_road_open.png")
+  shot("25_road_open.png")
 end
 
 local co = coroutine.create(main)

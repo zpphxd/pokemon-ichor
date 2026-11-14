@@ -349,17 +349,20 @@ class Grid:
                 return
         sys.exit(f"{self.name}: settle_crowns did not settle")
 
-    def roughen(self, protect, seed=7):
+    def roughen(self, protect, seed=7, keep_rows=()):
         """Break the straight edges of the drawn tall-grass patches with smooth
-        noise. Never on event cells, so trainers, items and signs keep their ground."""
+        noise. Never on event cells, so trainers, items and signs keep their
+        ground; never in the forced bands' rows (keep_rows), so a band keeps its
+        full depth; never in the seam rows, which take no Agros grass."""
         self.protect = set(protect)
+        skip = set(keep_rows) | self.seam_rows
         src = [r[:] for r in self.chars]
         def near(x, y):
             return any(0 <= x + dx < self.w and 0 <= y + dy < self.h and src[y + dy][x + dx] == ","
                        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
         for y in range(self.h):
             for x in range(self.w):
-                if (x, y) in protect:
+                if (x, y) in protect or y in skip:
                     continue
                 n = noise(x, y, seed)
                 c = src[y][x]
@@ -722,38 +725,47 @@ class Grid:
 # ---------------------------------------------------------------------------
 # Route 1: Elaia (south) to Akti (north), along Kalliste's west shore. 30 x 64.
 # Road seams at x=10-13 on the top and bottom rows; the Kronion Hill spur
-# leaves the east edge at y=18-19. The border is open sea.
+# leaves the east edge at y=18-19. The border is open sea. Built to
+# design/MAP_DESIGN.md: check_route() proves the rules below hold.
 #
-# The walk north, screen by screen:
-#   leaving Elaia between olive groves; the carter resting by her cart
-#   the shepherd's meadow running down to a rocky shore; the threshing floor
-#   up a goat track; a terrace lip above
-#   Phyllis's grove: the road narrows between the trees; a spring and a fig
-#   the ancient olive; the bee terraces climbing east
-#   the fork: a herm, a Lakonian drilling, a fallen column by the spur
-#   the flock in the wall gap; the cove, the first sight of the sea; a shrine
+# The walk north, beat by beat:
+#   out of Elaia between olive groves, straight into grass (band 1, 2 deep)
+#   the carter resting by her cart; a walled patch with a hidden Repel
+#   Tityros at the meadow wall's only gap: the first trainer, in plain view
+#   the shepherd's meadow and the threshing floor; a lip back down for the return
+#   the grove narrows (band 2, 3 deep); a west walk with a Poke Ball, and a lip
+#     back into the meadow
+#   Phyllis's grove: a spring under a fig, Phyllis on the lane by her seed
+#   the ancient olive; the bee terraces climbing east (Komatas, optional)
+#   the fork: a herm, the spur east to Kronion Hill past Polyeidos
+#   the flock in the wall gap, Agis just past it
+#   shore grass across the cove (band 3, 3 deep); a jar on the beach
+#   the climb: steps up to the headland, a shrine, the north herm; a goat
+#     path of two lips behind the hedge makes the trip back quick
+# Rows 0-4 and 59-63 are seen from Akti and Elaia, which draw them with their
+# own secondary tileset, so they hold aethos pieces only (Grid.seam_prep).
 # ---------------------------------------------------------------------------
 ROUTE1 = [
     # 0         1         2
     # 012345678901234567890123456789
-    "q%%%%%%%%%====%%%%%%%%%%%%%%%%",  # 0  north seam to Akti
-    "q%%%%%%%%%====%%%%%%%%%%%%%%%%",  # 1
-    "q%%%......===.C#.,%%%%%%%%%%%%",  # 2  a roadside shrine between cypresses
-    "q%%%dd,...===.C#,,%%%%%%%%%%%%",  # 3
-    "dddddd,,..===...,,,,..%%%%%%%%",  # 4  the cove: first sight of the sea
-    "~~~ddd,,.===..,,,,,,..%%%%%%%%",  # 5
-    "~~~~dd,..===..,,,,*.,,%%%%%%%%",  # 6
-    "~R~~~dd.===...,,,..,,,%%%%%%%%",  # 7
-    "~~~~~dd.===H..,,,.....,,%%%%%%",  # 8  north herm
-    "~~~~dd,.===...,,.h*.....%%%%%%",  # 9
-    "~~~dd,,..===...,,,....%%%%%%%%",  # 10
-    "~~ddd,,,.===...,,.....%%%%%%%%",  # 11
-    "dddd.,,,..===...*..y.,%%%%%%%%",  # 12
-    "dddd..,,,..===...C..,.%%%%%%%%",  # 13
-    "%%WWBWWWWWW===WWWCWWWB%%%%%%%%",  # 14 the flock's wall gap
+    "%%%%%%%%%%====%%%%%%%%%%%%%%%%",  # 0  north seam to Akti (rows 0-4: aethos only)
+    "%%%%%%%%%%====%%%%%%%%%%%%%%%%",  # 1
+    "%%%%%%....====.....%%%%%%%%%%%",  # 2  Akti's outskirts on the headland
+    "%%%%%.*...====..H...%%%%%%%%%%",  # 3  north herm
+    "~ddd...*..====......%%%%%%%%%%",  # 4
+    "~~ddd.....====......#.%%%%%%%%",  # 5  a roadside shrine between cypresses
+    "~~~dd.....====......#.%%%%%%%%",  # 6
+    "~~~~TTTTTTssssTT___TTT%%%%%%%%",  # 7  the climb: steps up to the headland; a lip down the goat path
+    "~~~~dd....====.%...%%%%%%%%%%%",  # 8  the goat path runs down behind the hedge
+    "~~~~,,,,,,,,,,,%...%%%%%%%%%%%",  # 9  shore grass, from the sea to the hedge (band 3)
+    "~~~~~,,,,,,,,,,%...%%%%%%%%%%%",  # 10
+    "~~~~,,,,,,,,,,,%.y.%%%%%%%%%%%",  # 11
+    "~~~~dd....====.%___%%%%%%%%%%%",  # 12 the goat path's last lip
+    "~~~ddd.....===.....%%%%%%%%%%%",  # 13 Agis watches the gap; a jar on the cove beach
+    "%%WWBWWWWWW===WWWWWWWB%%%%%%%%",  # 14 the flock's wall gap
     "%%.,,,.....===.....###%%%%%%%%",  # 15 Amaryllis; the fallen column
-    "%%..,,,....===..h..###C.%%%%%%",  # 16 Agis
-    "%%.,,,,....=====...###C.%%%%%%",  # 17
+    "%%..,,,....===..h..###C.%%%%%%",  # 16
+    "%%.,,,,....=====...###C..%%%%%",  # 17 Polyeidos above the spur
     "%%..,,.....===================",  # 18 the spur east to Kronion Hill
     "%%...,.....===================",  # 19
     "%%.........===H.*.y.,,..%%%%%%",  # 20 fork herm
@@ -770,57 +782,57 @@ ROUTE1 = [
     "%%...,,,,..===...,.......*%%%%",  # 31 Phyllis's grove
     "%%###.FF,..===.....,,.......%%",  # 32 a spring under a fig
     "%%###nFF.,.===......,,......%%",  # 33
-    "%%.----.....===..,,.........%%",  # 34 the spring's track jogs down to the road
+    "%%.----.....===..,,.........%%",  # 34 the spring's track; Phyllis on the lane
     "%%.,,,------===...,...,.....%%",  # 35
     "%%..,,......===.......,.....%%",  # 36
-    "%%..........===.............%%",  # 37 the grove lane
-    "%%.....,,...===..,....*.....%%",  # 38
-    "%%....,,,...===...........,,%%",  # 39
-    "%%...,,,,..===...,,.........%%",  # 40
-    "%%..,,,,...===...,,,........%%",  # 41
-    "%%........====....,,,....,..%%",  # 42 Poke Ball above the terrace lip
-    "%%________===..,,,,.........%%",  # 43
-    "%%.,,,,...===...,,,...,,....%%",  # 44 the shepherd's meadow
-    "%%..,,,..===...,,,,,..,,,...%%",  # 45
-    "q....,,..===......####.....*%%",  # 46 the threshing floor
-    "q.......,===..----####......%%",  # 47
-    "q.,,....*===---...####......%%",  # 48 Tityros; the track steps up to the floor
-    "q,,,......===...h.####......%%",  # 49
-    "q......,,.===..*...,,,......%%",  # 50
-    "q......,,,===......,,,,,....%%",  # 51
-    "q...,,,,...===.,,......B....%%",  # 52
-    "%%...,,....===...,..........%%",  # 53
-    "%%.......,.===......,,,.....%%",  # 54
-    "%%WWWWW....===....###..,....%%",  # 55 youth on the wall; the cart
-    "%%,,,,,,..=======.###..,....%%",  # 56 the cart rut
-    "%%,,,,,,..=======..dd.......%%",  # 57
-    "%%,,,,,,.H===......dd,,,....%%",  # 58 south herm
-    "%%.,,,,...===..,,...........%%",  # 59
-    "%%%%%%%%..===...%%%%%%%%%%%%%%",  # 60
-    "%%%%%%%%..===...%%%%%%%%%%%%%%",  # 61
+    "%%..........===.............%%",  # 37
+    "%%......%,,,,,,,%%%%%%%%%%%%%%",  # 38 the grove narrows (band 2); the west walk
+    "%%......%,,,,,,%%%%%%%%%%%%%%%",  # 39
+    "%%..,...%%,,,,,%%%%%%%%%%%%%%%",  # 40
+    "%%______%%===..............%%%",  # 41 the west walk's lip down to the meadow
+    "%%..,,,...===....,,,.........%",  # 42 the shepherd's meadow
+    "%%.,,,,...===...,,,,.....,...%",  # 43
+    "%%..,,,..===......####.......%",  # 44 the threshing floor
+    "%%.,,,...===..----####.......%",  # 45
+    "%%..,....===---...####.....*.%",  # 46
+    "%%.......===......####.......%",  # 47
+    "%%..*....===..h............,.%",  # 48
+    "%%.......===........,,,......%",  # 49 Tityros at the wall gap
+    "%%WWWWWWW===WWWWWWWW_______W%%",  # 50 the meadow wall; a lip back down
+    "%%.,,,,..===.................%",  # 51
+    "%%WWWWW..===...........B.....%",  # 52 youth on the wall
+    "%%,,,,,,..===.....###........%",  # 53 the cart
+    "%%,,,,,,..===.....###..*.....%",  # 54
+    "%%.,,,,...===......dd........%",  # 55 the carter
+    "%%..,,...H===................%",  # 56 south herm
+    "%%%%%%%,,,,,,,,,%%%%%%%%%%%%%%",  # 57 the first grass out of Elaia (band 1)
+    "%%%%%%%%,,,,,,,%%%%%%%%%%%%%%%",  # 58
+    "%%%%%%%%%.====.%%%%%%%%%%%%%%%",  # 59 rows 59-63: aethos only
+    "%%%%%%%%%%====.%%%%%%%%%%%%%%%",  # 60
+    "%%%%%%%%%%====%%%%%%%%%%%%%%%%",  # 61
     "%%%%%%%%%%====%%%%%%%%%%%%%%%%",  # 62
     "%%%%%%%%%%====%%%%%%%%%%%%%%%%",  # 63 south seam to Elaia
 ]
 
 ROUTE1_OLIVES = [
-    # north: the ragged edge of the hill woods
-    (20, 4), (19, 9), (16, 11),
-    # fork and the terraces
+    # the fork
     (2, 16), (19, 29),
-    # Phyllis's grove, west of the road ...
-    (4, 36), (8, 37), (2, 39), (6, 40),
-    # ... and east of it, planted in loose rows around the lane (y=37)
-    (15, 32), (22, 32), (18, 33), (25, 33), (16, 35), (20, 35), (23, 35),
-    (17, 38), (21, 38), (25, 38), (15, 40), (19, 40), (23, 40),
-    # the meadow: the shepherd's lone olive, scrub east of the road
-    (3, 50), (2, 45), (20, 43), (25, 46), (14, 50), (19, 52), (25, 50), (26, 41),
-    # the south: the carter's shade tree and the grove edges
-    (21, 53), (24, 56), (24, 58), (26, 54), (2, 57), (4, 58), (14, 59), (26, 58),
+    # Phyllis's grove, in loose rows either side of her lane (y=34)
+    (15, 31), (19, 31), (23, 31), (16, 35), (20, 35), (24, 36),
+    # the meadow: the shepherd's lone olive, scrub to the east
+    (6, 47), (24, 42), (25, 47),
+    # the carter's shade trees
+    (15, 54), (25, 53),
 ]
 # An olive's crown needs grass, another olive or a cypress foot above it (see
-# settle_crowns), so none sits right under the road, a lip or a pine.
-ROUTE1_CYPRESSES = [(7, 2), (13, 4), (21, 20), (10, 36), (15, 42), (7, 54)]
-ROUTE1_PINES = [(24, 52), (21, 56)]
+# settle_crowns), so none sits right under the road, a wall, a lip or a pine.
+ROUTE1_CYPRESSES = [(7, 2), (19, 5), (21, 5), (21, 20), (10, 36), (15, 42), (7, 54)]
+# Rows seen from Akti (0-4: five rows below a player on Akti's edge) and from
+# Elaia (59-63: four above a player on Elaia's edge, plus one for a camera pan).
+ROUTE1_SEAM_ROWS = list(range(0, 5)) + list(range(59, 64))
+# The forced bands' rows, kept out of roughen() so each keeps its full depth.
+ROUTE1_BAND_ROWS = [9, 10, 11, 38, 39, 40, 57, 58]
+ROUTE1_PINES = [(21, 55), (26, 55)]
 
 # ---------------------------------------------------------------------------
 # Kronion Hill: the summit, east of Route 1 (connection offset 2: this map's
@@ -845,16 +857,17 @@ KRONION = [
     "%%%C....======....q~~~~~",  # 9  the worn path forks to the two gaps in the step
     "%%,C........==S...q~~~~~",  # 10 the scene starts at the stair's top (13,10)
     "%%ZZZZZZZZZZZzZZZZq~~~~~",  # 11 upper rock band, stair at x=13
-    "%%QQ,.r..=====,,.Bq~~~~~",  # 12 the shelf: the path climbs it on the diagonal
-    "%%QQ,,=====.y..b..q~~~~~",  # 13
+    "%%QQ,.r..,,,==,,.Bq~~~~~",  # 12 the shelf: the path climbs it on the diagonal,
+    "%%QQ,,===,,,y..b..q~~~~~",  # 13 through grass across the whole shelf (x=9-11)
     "%%.,,===rZZZZZZZZZ%qqqqq",  # 14 lower band, east half
     "%%ZZZZzZZZZ%%%%%%%%%%%%%",  # 15 lower band, west half, stair at x=6
-    "=======.%%%%%%%%%%%%%%%%",  # 16 hill foot, from Route 1: the path runs to the stair
-    "=====,,B%%%%%%%%%%%%%%%%",  # 17
+    "===,,==.%%%%%%%%%%%%%%%%",  # 16 hill foot, from Route 1: grass across the path, then
+    "===,,,,B%%%%%%%%%%%%%%%%",  # 17 the path runs on to the stair
     "%%%%%%%%%%%%%%%%%%%%%%%%",  # 18
     "%%%%%%%%%%%%%%%%%%%%%%%%",  # 19
 ] + ["%" * 24] * 42  # 20-61: the hill's woods, seen past Route 1's east edge
 KRONION_OFFSET = 2
+KRONION_BAND_ROWS = [12, 13, 16, 17]
 KRONION_OLIVES = []
 KRONION_CYPRESSES = []
 
@@ -866,9 +879,9 @@ def build_route1_pieces(g, cat):
     g.place(cat, "big_olive", 3, 22)                  # the ancient olive
     g.place(cat, "bee_wall", 22, 24)                  # Komatas's hives
     g.place(cat, "spring", 2, 32)                     # the spring in the grove
-    g.place(cat, "shrine", 15, 2)                     # the shrine on the way into Akti
-    g.place(cat, "alonia", 18, 46)                    # the threshing floor
-    g.place(cat, "cart", 18, 55)                      # the carter's cart
+    g.place(cat, "shrine", 20, 5)                     # the shrine on the headland, by the goat path
+    g.place(cat, "alonia", 18, 44)                    # the threshing floor
+    g.place(cat, "cart", 18, 53)                      # the carter's cart
 
 
 def build_kronion_ruins(g, cat):
@@ -938,36 +951,49 @@ ROUTE1_EVENTS = {
     ],
     "object_events": [
         # south to north
-        obj(P + "WOMAN", 17, 57, R1 + "Carter", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_ROUTE1_CARTER"),
-        obj("OBJ_EVENT_GFX_SPECIES(MUDBRAY)", 17, 56, R1 + "Mudbray", "MOVEMENT_TYPE_FACE_LEFT"),
-        obj(P + "YOUTH_M", 5, 55, R1 + "WallYouth", "MOVEMENT_TYPE_FACE_DOWN"),
-        obj(P + "SHEPHERD", 7, 48, R1 + "Tityros", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=3),
-        obj(WOOLOO, 4, 46, R1 + "GrazingWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
-        obj(WOOLOO, 2, 52, R1 + "GrazingWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
-        item_ball(3, 42, "ITEM_POKE_BALL", "FLAG_ICHOR_ITEM_ROUTE1_POKE_BALL"),
-        obj(P + "HARVESTER", 25, 37, R1 + "Phyllis", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=6),
+        obj(P + "WOMAN", 17, 55, R1 + "Carter", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_ROUTE1_CARTER"),
+        obj("OBJ_EVENT_GFX_SPECIES(MUDBRAY)", 17, 54, R1 + "Mudbray", "MOVEMENT_TYPE_FACE_LEFT"),
+        obj(P + "YOUTH_M", 5, 52, R1 + "WallYouth", "MOVEMENT_TYPE_FACE_DOWN"),
+        # the first trainer: at the meadow wall's only gap, in plain view
+        obj(P + "SHEPHERD", 12, 49, R1 + "Tityros", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3),
+        obj(WOOLOO, 4, 44, R1 + "GrazingWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        obj(WOOLOO, 3, 47, R1 + "GrazingWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        item_ball(3, 39, "ITEM_POKE_BALL", "FLAG_ICHOR_ITEM_ROUTE1_POKE_BALL"),
+        # optional: she watches her lane, off the road
+        obj(P + "HARVESTER", 25, 34, R1 + "Phyllis", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=5),
         item_ball(27, 35, "ITEM_MIRACLE_SEED", "FLAG_ICHOR_ITEM_ROUTE1_MIRACLE_SEED"),
         obj(P + "MAN", 7, 25, R1 + "OliveFarmer", "MOVEMENT_TYPE_FACE_LEFT"),
+        # optional: up on the bee terraces
         obj(P + "GOATHERD", 18, 25, R1 + "Komatas", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=1),
-        item_ball(15, 20, "ITEM_POTION", "FLAG_ICHOR_ITEM_ROUTE1_POTION"),
-        obj(P + "HOPLITE", 15, 16, R1 + "Agis", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=4),
-        obj(P + "AUGUR", 27, 18, R1 + "Polyeidos", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=4),
+        # mandatory for Kronion Hill: his line covers both rows of the spur
+        obj(P + "AUGUR", 24, 17, R1 + "Polyeidos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2),
         obj(P + "YOUTH_F", 10, 15, R1 + "Amaryllis", "MOVEMENT_TYPE_FACE_RIGHT", local_id="LOCALID_ROUTE1_AMARYLLIS"),
         obj(WOOLOO, 11, 14, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
         obj(WOOLOO, 12, 14, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
         obj(WOOLOO, 13, 14, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
         obj(WOOLOO, 12, 12, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_LEFT", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
+        # the hoplite holding the pass, just north of the flock's gap
+        obj(P + "HOPLITE", 14, 13, R1 + "Agis", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3),
+        item_ball(4, 13, "ITEM_POTION", "FLAG_ICHOR_ITEM_ROUTE1_POTION"),
     ],
     "warp_events": [],
     "coord_events": [],
     "bg_events": [
-        sign(9, 58, R1 + "HermSouth"),
+        sign(9, 56, R1 + "HermSouth"),
         sign(14, 20, R1 + "HermFork"),
-        sign(11, 8, R1 + "HermNorth"),
+        sign(16, 3, R1 + "HermNorth"),
         hidden(4, 25, "ITEM_ORAN_BERRY", "FLAG_ICHOR_HIDDEN_ROUTE1_ORAN_BERRY"),
-        hidden(15, 14, "ITEM_REPEL", "FLAG_ICHOR_HIDDEN_ROUTE1_REPEL"),
+        hidden(2, 54, "ITEM_REPEL", "FLAG_ICHOR_HIDDEN_ROUTE1_REPEL"),
         hidden(4, 29, "ITEM_ANTIDOTE", "FLAG_ICHOR_HIDDEN_ROUTE1_ANTIDOTE"),
     ],
+}
+
+# The trainers MAP_DESIGN calls checkpoints: (x, y, facing, sight, the walk their
+# line must cut). check_route() proves no path skirts them.
+ROUTE1_MANDATORY = {
+    "Tityros": (12, 49, "W", 3, "north"),
+    "Agis": (14, 13, "W", 3, "north"),
+    "Polyeidos": (24, 17, "S", 2, "kronion"),
 }
 
 KRONION_EVENTS = {
@@ -1004,8 +1030,8 @@ KRONION_EVENTS = {
 }
 
 # Player positions along the route for the screen-sized review crops.
-ROUTE1_VIEWS = [(11, 58), (12, 52), (9, 46), (9, 41), (13, 36), (21, 37), (9, 28), (12, 23),
-                (19, 25), (13, 19), (22, 18), (12, 15), (8, 8), (11, 3)]
+ROUTE1_VIEWS = [(11, 61), (11, 56), (10, 51), (10, 46), (12, 41), (13, 37), (21, 35), (12, 31),
+                (12, 25), (19, 25), (12, 20), (23, 19), (12, 16), (12, 13), (9, 8), (11, 3)]
 KRONION_VIEWS = [(2, 16), (6, 13), (12, 12), (11, 10), (14, 9), (16, 5)]
 
 
@@ -1018,14 +1044,15 @@ def make_route1():
     # Akti's last row and Elaia's first, as built, so crowns meet across the seams.
     akti, elaia = neighbor("LAYOUT_AKTI_TOWN")[0], neighbor("LAYOUT_ELAIA_VILLAGE")[0]
     g = Grid(ROUTE1, "Route 1", ROUTE1_OLIVES, ROUTE1_CYPRESSES, ROUTE1_PINES, sea_edges="W",
-             above=[int(m) & 0x3FF for m in akti[-1]], below=[int(m) & 0x3FF for m in elaia[0]])
-    g.roughen(event_cells(ROUTE1_EVENTS))
+             above=[int(m) & 0x3FF for m in akti[-1]], below=[int(m) & 0x3FF for m in elaia[0]],
+             seam_rows=ROUTE1_SEAM_ROWS)
+    g.roughen(event_cells(ROUTE1_EVENTS), keep_rows=ROUTE1_BAND_ROWS)
     return g
 
 
 def make_kronion():
     g = Grid(KRONION, "Kronion Hill", KRONION_OLIVES, KRONION_CYPRESSES, sea_edges="NE")
-    g.roughen(event_cells(KRONION_EVENTS), seed=11)
+    g.roughen(event_cells(KRONION_EVENTS), seed=11, keep_rows=KRONION_BAND_ROWS)
     return g
 
 
@@ -1086,6 +1113,12 @@ def check_seams(r1, kh):
     for x in range(kh.w):
         if not kh.solid(x, 0) or not kh.solid(x, kh.h - 1):
             errs.append(f"Kronion Hill: top or bottom edge open at x={x}")
+    # The rows Akti and Elaia show (drawn with their own secondary): aethos only.
+    b1 = r1.blocks() & 0x3FF
+    for y in sorted(r1.seam_rows):
+        for x in range(r1.w):
+            if b1[y, x] >= 0x200:
+                errs.append(f"Route 1: seam row {y} holds Agros metatile {b1[y, x]:#x} at x={x}")
     # Olive crowns: the cell above every olive top half draws its tip, inside
     # each map and across the Akti (north) and Elaia (south) seams, both ways.
     tops = OLIVE_TOP_L | OLIVE_TOP_R
@@ -1249,7 +1282,7 @@ def render(g, name, events, border, views, rows=None):
             d.text((2, i * cell + cell // 2 - 6), str(i), fill=(255, 255, 255, 255), font=font, stroke_width=2, stroke_fill=(0, 0, 0, 255))
     Image.alpha_composite(rev, over).convert("RGB").save(RENDER / f"{name}_review.png")
 
-    # Screens: the GBA shows 15x10 tiles with the player at column 7, row 5.
+    # Screens: the GBA shows 15x10 tiles with the player at column 7, row 4.
     pad = 8
     H = blocks.shape[0]
     W, HH = g.w + 2 * pad, H + 2 * pad
@@ -1261,7 +1294,7 @@ def render(g, name, events, border, views, rows=None):
     full = rm.render_blocks(r, big.ravel(), W)
     shots = []
     for (px, py) in views:
-        x0, y0 = (px - 7 + pad) * 16, (py - 5 + pad) * 16
+        x0, y0 = (px - 7 + pad) * 16, (py - 4 + pad) * 16
         shots.append(full.crop((x0, y0, x0 + 240, y0 + 160)).resize((480, 320), Image.NEAREST))
     cols = 3
     nrows = (len(shots) + cols - 1) // cols
@@ -1276,18 +1309,273 @@ ROUTE1_BORDER = [SEA, SEA, SEA, SEA]
 KRONION_BORDER = [SEA, SEA, SEA, SEA]
 
 
+# ---------------------------------------------------------------------------
+# Walkability: design/MAP_DESIGN.md's route rules, proved on the built maps
+# from their metatile behaviors and collision, the way the game reads them.
+# ---------------------------------------------------------------------------
+STEPS = ((0, -1), (1, 0), (0, 1), (-1, 0))
+FACING = {"N": (0, -1), "E": (1, 0), "S": (0, 1), "W": (-1, 0),
+          "MOVEMENT_TYPE_FACE_UP": (0, -1), "MOVEMENT_TYPE_FACE_RIGHT": (1, 0),
+          "MOVEMENT_TYPE_FACE_DOWN": (0, 1), "MOVEMENT_TYPE_FACE_LEFT": (-1, 0)}
+
+
+def behavior_ids():
+    import re
+    text = (ROOT / "include/constants/metatile_behaviors.h").read_text()
+    body = text[text.index("enum {") + len("enum {"):]
+    return {n: i for i, n in enumerate(re.findall(r"^\s*(MB_\w+)", body, re.M))}
+
+
+class Walk:
+    """Each cell of a built map: 'solid', 'grass' (tall grass), 'ledge' (jump
+    south) or 'open'."""
+
+    def __init__(self, blocks, primary, secondary):
+        sys.path.insert(0, str(ROOT / "tools/ichor"))
+        import render_map as rm
+        rm.read_fieldmap_constants()
+        syms = rm.scan_tileset_symbols()
+        attrs = [np.fromfile(Path(rm.resolve_tileset(n, syms)["metatiles"]).with_name("metatile_attributes.bin"), "<u2")
+                 for n in (primary, secondary)]
+        mb = behavior_ids()
+        self.blocks, (self.h, self.w) = blocks, blocks.shape
+        self.kind = {}
+        for y in range(self.h):
+            for x in range(self.w):
+                v = int(blocks[y, x])
+                mid = v & 0x3FF
+                a = attrs[0][mid] if mid < 512 else attrs[1][mid - 512] if mid - 512 < len(attrs[1]) else 0
+                beh = int(a) & 0xFF
+                if beh == mb["MB_JUMP_SOUTH"]:
+                    k = "ledge"
+                elif v >> 10 & 3 or v >> 12 != 3:
+                    k = "solid"
+                elif beh == mb["MB_TALL_GRASS"]:
+                    k = "grass"
+                else:
+                    k = "open"
+                self.kind[(x, y)] = k
+
+    def cost(self, starts, goals, avoid=frozenset(), weight=None):
+        """0-1 BFS: the least total weight of the cells entered on a walk from a
+        start to a goal (None if there is none). By default a tall-grass cell
+        weighs 1, so this counts grass steps. Ledges only work going south: the
+        player hops over the ledge cell and lands on the one past it."""
+        from collections import deque
+        weight = weight or (lambda c: 1 if self.kind[c] == "grass" else 0)
+        ok = lambda c: c in self.kind and self.kind[c] in ("open", "grass") and c not in avoid
+        dist, dq = {}, deque()
+        for s in starts:
+            if ok(s):
+                dist[s] = weight(s)
+                dq.append(s)
+        dq = deque(sorted(dq, key=lambda c: dist[c]))
+        while dq:
+            c = dq.popleft()
+            for dx, dy in STEPS:
+                n = (c[0] + dx, c[1] + dy)
+                if self.kind.get(n) == "ledge" and (dx, dy) == (0, 1):
+                    n = (n[0], n[1] + 1)
+                if not ok(n):
+                    continue
+                w = weight(n)
+                if n not in dist or dist[c] + w < dist[n]:
+                    dist[n] = dist[c] + w
+                    (dq.appendleft if w == 0 else dq.append)(n)
+        best = [dist[g] for g in goals if g in dist]
+        self.dist = dist
+        return min(best) if best else None
+
+    def grass_parts(self):
+        seen, parts = set(), []
+        for c, k in self.kind.items():
+            if k != "grass" or c in seen:
+                continue
+            part, todo = set(), [c]
+            seen.add(c)
+            while todo:
+                x, y = todo.pop()
+                part.add((x, y))
+                for dx, dy in STEPS:
+                    n = (x + dx, y + dy)
+                    if self.kind.get(n) == "grass" and n not in seen:
+                        seen.add(n)
+                        todo.append(n)
+            parts.append(part)
+        return parts
+
+    def forced_bands(self, starts, goals):
+        """Grass patches every walk from the starts to the goals must cross, with
+        the fewest of each band's cells such a walk can get away with (its depth)."""
+        bands = []
+        for part in self.grass_parts():
+            if self.cost(starts, goals, avoid=part) is None:
+                depth = self.cost(starts, goals, weight=lambda c, p=part: 1 if c in p else 0)
+                bands.append((part, depth))
+        return sorted(bands, key=lambda b: -max(y for _, y in b[0]))
+
+    def sight(self, x, y, facing, reach):
+        dx, dy = FACING[facing]
+        cells = []
+        for i in range(1, reach + 1):
+            c = (x + dx * i, y + dy * i)
+            if self.kind.get(c) not in ("open", "grass"):
+                break
+            cells.append(c)
+        return cells
+
+
+def trainers_of(events):
+    out = {}
+    for e in events["object_events"]:
+        if e.get("trainer_type") == "TRAINER_TYPE_NORMAL":
+            name = e["script"].split("_")[-1]
+            out[name] = (e["x"], e["y"], e["movement_type"], int(e["trainer_sight_or_berry_tree_id"]))
+    return out
+
+
+R1_SOUTH = [(x, 63) for x in range(10, 14)]
+R1_NORTH = [(x, 0) for x in range(10, 14)]
+R1_SPUR = [(29, 18), (29, 19)]
+KH_FOOT, KH_TOP = [(0, 16), (0, 17)], [(13, 10)]
+
+
+def check_route(r1, kh):
+    """MAP_DESIGN's route rules, proved: no grass-free walk from Elaia to Akti,
+    at least three forced bands (the first exactly 2 deep), the mandatory
+    trainers' lines cut every walk they guard, and Kronion Hill's climb crosses
+    grass. Prints the proof; exits on a broken rule."""
+    errs = []
+    w = Walk(r1.blocks(), PRIMARY, SECONDARY)
+    if w.cost(R1_SOUTH, R1_NORTH) is None:
+        errs.append("Route 1: no walk at all from Elaia to Akti")
+    bands = w.forced_bands(R1_SOUTH, R1_NORTH)
+    for part, depth in bands:
+        ys = sorted({y for _, y in part})
+        print(f"  Route 1 forced band: rows {ys[0]}-{ys[-1]}, {len(part)} cells, crossed in no fewer than {depth} steps")
+    if len(bands) < 3:
+        errs.append(f"Route 1: {len(bands)} forced grass bands between Elaia and Akti, want 3")
+    if any(d < 2 for _, d in bands):
+        errs.append("Route 1: a forced band can be crossed in under 2 steps")
+    if bands and bands[0][1] != 2:
+        errs.append(f"Route 1: the first band out of Elaia is {bands[0][1]} deep, MAP_DESIGN says 2")
+    trainers = {n: (x, y, f, s) for n, (x, y, f, s, _) in ROUTE1_MANDATORY.items()}
+    built = trainers_of(ROUTE1_EVENTS)
+    for name, (x, y, facing, reach, walk) in ROUTE1_MANDATORY.items():
+        bx, by, bf, bs = built[name]
+        if (bx, by, FACING[bf], bs) != (x, y, FACING[facing], reach):
+            errs.append(f"Route 1: {name}'s event does not match ROUTE1_MANDATORY")
+        line = w.sight(x, y, facing, reach)
+        starts, goals = (R1_SOUTH, R1_NORTH) if walk == "north" else (R1_SOUTH + R1_NORTH, R1_SPUR)
+        skirt = w.cost(starts, goals, avoid=set(line) | {(x, y)})
+        print(f"  {name} at ({x},{y}) sees {line}: " + ("cannot be skirted" if skirt is None else "CAN be skirted"))
+        if skirt is None and w.cost(starts, goals) is None:
+            errs.append(f"Route 1: no walk at all past {name}")
+        elif skirt is not None:
+            errs.append(f"Route 1: {name}'s line can be skirted")
+    for name in sorted(set(built) - set(trainers)):
+        print(f"  {name} is optional")
+    k = Walk(kh.blocks(), PRIMARY, SECONDARY)
+    if k.cost(KH_FOOT, KH_TOP) is None:
+        errs.append("Kronion Hill: no walk from the hill foot to the summit")
+    kb = k.forced_bands(KH_FOOT, KH_TOP)
+    for part, depth in kb:
+        ys = sorted({y for _, y in part})
+        print(f"  Kronion Hill forced band: rows {ys[0]}-{ys[-1]}, crossed in no fewer than {depth} steps")
+    if not kb or any(d < 2 for _, d in kb):
+        errs.append("Kronion Hill: the climb needs a band of grass at least 2 deep")
+    if errs:
+        sys.exit("route rules broken:\n  " + "\n  ".join(errs))
+    return w, k
+
+
+def walk_render(name, blocks, primary, secondary, events, starts, goals, title):
+    """The map with what the player can do on it: blocked cells hatched dark,
+    open ground tinted by how many grass steps it takes at least to get there
+    from the start (each forced band crossed shifts the color), tall grass
+    green, forced bands outlined in yellow, ledges marked with a south arrow,
+    trainers in magenta with their sight lines."""
+    from PIL import Image, ImageDraw, ImageFont
+    rm, r = renderer(primary, secondary)
+    base = rm.render_blocks(r, (blocks & 0x3FF).ravel(), blocks.shape[1])
+    s = 2
+    img = base.resize((base.width * s, base.height * s), Image.NEAREST).convert("RGBA")
+    w = Walk(blocks, primary, secondary)
+    w.cost(starts, goals)
+    dist = dict(w.dist)
+    bands = w.forced_bands(starts, goals)
+    band_cells = set().union(*[p for p, _ in bands]) if bands else set()
+    over = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(over)
+    cell = 16 * s
+    zone = [(80, 160, 255), (255, 150, 60), (190, 90, 255), (60, 220, 220), (255, 90, 140), (160, 255, 90)]
+    levels = sorted({v for c, v in dist.items() if w.kind[c] == "open"})
+    for (x, y), k in w.kind.items():
+        box = [x * cell, y * cell, x * cell + cell - 1, y * cell + cell - 1]
+        if k == "solid":
+            d.rectangle(box, fill=(20, 0, 0, 120))
+        elif k == "ledge":
+            d.rectangle(box, fill=(40, 90, 255, 110))
+            d.polygon([(x * cell + 8, y * cell + 10), (x * cell + cell - 8, y * cell + 10),
+                       (x * cell + cell // 2, y * cell + cell - 6)], fill=(255, 255, 255, 230))
+        elif k == "grass":
+            d.rectangle(box, fill=(0, 255, 0, 70))
+        elif (x, y) in dist:
+            band = levels.index(dist[(x, y)]) if dist[(x, y)] in levels else 0
+            d.rectangle(box, fill=zone[band % len(zone)] + (70,))
+        else:
+            d.rectangle(box, fill=(0, 0, 0, 90))             # open, but out of reach
+    for (x, y) in band_cells:
+        d.rectangle([x * cell + 1, y * cell + 1, x * cell + cell - 2, y * cell + cell - 2], outline=(255, 235, 0, 255), width=3)
+    for name_, (x, y, f, reach) in trainers_of(events).items():
+        for (cx, cy) in w.sight(x, y, f, reach):
+            d.rectangle([cx * cell + 6, cy * cell + 6, cx * cell + cell - 7, cy * cell + cell - 7], fill=(255, 0, 255, 150))
+        d.rectangle([x * cell + 2, y * cell + 2, x * cell + cell - 3, y * cell + cell - 3], outline=(255, 0, 255, 255), width=4)
+    for (x, y) in starts + goals:
+        d.rectangle([x * cell + 10, y * cell + 10, x * cell + cell - 11, y * cell + cell - 11], fill=(255, 255, 255, 255))
+    out = Image.alpha_composite(img, over)
+    font = ImageFont.load_default(size=14)
+    cap = Image.new("RGBA", (out.width, 64), (24, 24, 32, 255))
+    cd = ImageDraw.Draw(cap)
+    lines = [title, f"least grass steps start to goal: {w.cost(starts, goals)}; forced bands: "
+             + (", ".join(f"rows {min(y for _, y in p)}-{max(y for _, y in p)} ({dp} deep)" for p, dp in bands) or "none")]
+    for i, t in enumerate(lines):
+        cd.text((8, 8 + i * 20), t, fill=(255, 255, 255, 255), font=font)
+    sheet = Image.new("RGBA", (out.width, out.height + cap.height))
+    sheet.paste(cap, (0, 0))
+    sheet.paste(out, (0, cap.height))
+    path = RENDER / f"{name}.png"
+    sheet.convert("RGB").save(path)
+    return path
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--no-render", action="store_true")
     ap.add_argument("--shapes", action="store_true", help="update tools/ichor/art/agros_shapes.json and stop")
+    ap.add_argument("--walk-of", nargs=4, metavar=("R1_BIN", "R1_JSON", "KH_BIN", "KH_JSON"),
+                    help="render the walkability of another build of both maps (say, main's) as "
+                         "kalliste_route1_walk_before.png and its Kronion Hill twin, then stop")
+    ap.add_argument("--walk-tileset", default="gTileset_Kalliste", help="secondary tileset for --walk-of")
     args = ap.parse_args()
     if args.shapes:
         write_shapes()
+        return
+    if args.walk_of:
+        rb, rj, kb, kj = args.walk_of
+        r1b = np.fromfile(rb, "<u2").reshape(64, 30)
+        khb = np.fromfile(kb, "<u2").reshape(-1, 24)
+        print(walk_render("kalliste_route1_walk_before", r1b, PRIMARY, args.walk_tileset,
+                          json.loads(Path(rj).read_text()), R1_SOUTH, R1_NORTH, "Route 1 before: Elaia (bottom) to Akti (top)"))
+        print(walk_render("kalliste_route1_kronion_hill_walk_before", khb[:20], PRIMARY, args.walk_tileset,
+                          json.loads(Path(kj).read_text()), [(0, 16), (0, 17)], [(5, 11)],
+                          "Kronion Hill before: hill foot (left) to the summit"))
         return
     cat = load_catalog()
     r1 = build_route1(cat)
     kh = build_kronion(cat)
     check_seams(r1, kh)
+    check_route(r1, kh)
     write_layout("LAYOUT_KALLISTE_ROUTE1", "KallisteRoute1", r1, ROUTE1_BORDER)
     write_layout("LAYOUT_KALLISTE_ROUTE1_KRONION_HILL", "KallisteRoute1_KronionHill", kh, KRONION_BORDER)
     write_events("KallisteRoute1", ROUTE1_EVENTS, "MUS_ICHOR_ROUTE1")
@@ -1301,6 +1589,10 @@ def main():
         for p in render(kh, "kalliste_route1_kronion_hill", KRONION_EVENTS, KRONION_BORDER, KRONION_VIEWS, rows=20):
             print(p)
         print(render_seams(r1, kh))
+        print(walk_render("kalliste_route1_walk", r1.blocks(), PRIMARY, SECONDARY, ROUTE1_EVENTS,
+                          R1_SOUTH, R1_NORTH, "Route 1: Elaia (bottom) to Akti (top)"))
+        print(walk_render("kalliste_route1_kronion_hill_walk", kh.blocks()[:20], PRIMARY, SECONDARY, KRONION_EVENTS,
+                          KH_FOOT, KH_TOP, "Kronion Hill: hill foot (left) to the summit"))
 
 
 if __name__ == "__main__":
