@@ -77,6 +77,12 @@ OLIVE_BOTTOM = (0x1E4, 0x1E5)
 OLIVE_BOTTOM_TIP = (0x1DC, 0x1DD)
 OLIVE_TIP = {"grass": (0x1CE, 0x1CF), "tall": (0x1C6, 0x1C7)}
 CYPRESS_TOP, CYPRESS_TOP_TALL, CYPRESS_BOTTOM = 0x00E, 0x025, 0x016
+CYPRESS_BOTTOM_TIP = (0x1F4, 0x1F5)    # a cypress foot over an olive crown's left / right half
+# An olive's crown pokes 3 px into the cell above it, so that cell must draw the
+# tip. Olive top halves, and the cells that draw a left / right tip, in aethos:
+OLIVE_TOP_L, OLIVE_TOP_R = {0x1D4, 0x1D6, 0x1FC}, {0x1D5, 0x1D7, 0x1FD}
+TIP_L = {0x1DC, 0x1DE, 0x1F2, 0x1CE, 0x1C6, 0x1E8, 0x1EA, 0x1EE, 0x1F0, 0x1F6, 0x1FE, 0x1F4}
+TIP_R = {0x1DD, 0x1DF, 0x1F3, 0x1CF, 0x1C7, 0x1E9, 0x1EB, 0x1EF, 0x1F1, 0x1F7, 0x1FF, 0x1F5}
 PINE = (0x01E, 0x01F, 0x026, 0x027)
 DIRS = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]  # N NE E SE S SW W NW
 
@@ -123,15 +129,25 @@ def load_catalog():
     return {s["key"]: s for s in json.loads(CATALOG.read_text())}
 
 
-BLOCKING = "OCPFQ#WTsjHS=~dRB_Zzqbnr"
+BLOCKING = "OCPFQ#WTsjHS=~dRB_Zzqbnr^"
 HALF_LETTERS = {"a": ((0, -1), (1, 0), (1, -1)), "b": ((0, 1), (1, 0), (1, 1)),
                 "c": ((0, 1), (-1, 0), (-1, 1)), "d": ((0, -1), (-1, 0), (-1, -1))}
 
 
 class Grid:
-    def __init__(self, rows, name, olives=(), cypresses=(), pines=(), sea_edges=""):
+    def __init__(self, rows, name, olives=(), cypresses=(), pines=(), sea_edges="", above=None, below=None,
+                 seam_rows=()):
         self.name = name
         self.sea_edges = sea_edges        # map edges the sea lies beyond: some of "NESW"
+        # The neighbor's metatiles just past the top / bottom edge (seams), or None.
+        self.above, self.below = above, below
+        # Rows a player in a neighboring map can see. The game draws a connected
+        # map with the tilesets of the map the player stands on, so these rows use
+        # aethos (primary) metatiles only: Agros pieces would show as the
+        # neighbor's secondary tiles. See seam_prep.
+        self.seam_rows = set(seam_rows)
+        self.filled = {}                  # woods cells fill_woods chose: (x, y) -> (kind, top-left)
+        self.cut_ok = set()               # olives whose crown is knowingly left flat
         self.chars = [list(r) for r in rows]
         self.h = len(rows)
         self.w = len(rows[0])
@@ -145,35 +161,193 @@ class Grid:
                         if self.chars[cy][cx] in BLOCKING:
                             sys.exit(f"{name}: '{kind}' anchor ({x},{y}) lands on '{self.chars[cy][cx]}' at ({cx},{cy})")
                         self.chars[cy][cx] = kind
+        self.seam_prep()
         self.fill_woods()
+        self.settle_crowns()
         self.cells = np.zeros((self.h, self.w), np.uint32)
         self.done = np.zeros((self.h, self.w), bool)
         self.half = {}            # (x, y) -> ("path" | "tall", letter)
         self.protect = set()
 
     # --- composition passes ------------------------------------------------
+    SEAM_SWAP = {",": ".", "h": ".", "y": ".", "b": "B", "n": "B", "r": "B", "q": "~"}
+
+    def seam_prep(self):
+        """In the seam rows, swap what only Agros can draw for aethos's own:
+        tall grass and herbs become grass, shrubs and rocks become boulders, the
+        rocky shore becomes open sea. Woods there fill with olives, stone pines,
+        cypresses and boulders only, and the road takes aethos's square-edged
+        path patch (soft_ground)."""
+        for y in self.seam_rows:
+            for x in range(self.w):
+                c = self.chars[y][x]
+                if c in self.SEAM_SWAP:
+                    self.chars[y][x] = self.SEAM_SWAP[c]
+                elif c in "FQ-W_TsZz":
+                    sys.exit(f"{self.name}: '{c}' at ({x},{y}) is in a seam row, where only aethos pieces may go")
+
     def fill_woods(self):
         """Fill '%' with a staggered mix: olives, stone pines, figs and rock
         outcrops in 2x2 blocks, cypresses in pairs, broom, oleander and rocks
-        in the gaps, so wood edges never read as a column of one tree."""
+        in the gaps, so wood edges never read as a column of one tree.
+
+        It fills bottom up, so it always knows which cells must draw the crown
+        tip of an olive below (an olive's crown pokes 3 px into the cell above).
+        Over an olive it stacks another olive exactly, or puts cypresses, whose
+        feet draw the tip; when the olive below sits one column over, it fills a
+        single column first so the next block lines up. An olive only goes
+        where the cells over its own crown can draw the tip later."""
         free = lambda x, y: self.ch(x, y) == "%"
-        for y in range(self.h):
+        tops, _ = self.olive_blocks()
+        need = {}                         # cell -> 0 / 1: must draw an olive tip's left / right half
+        for x, y in tops + self.seam_olives():
+            for i in (0, 1):
+                need[(x + i, y - 1)] = i
+
+        def crown_clear(x, cy):
+            """Can (x, cy) and (x + 1, cy) draw the tip of an olive below them?"""
+            if cy < 0:
+                if self.above is None:
+                    return True
+                return all(x + i < len(self.above) and self.above[x + i] in (TIP_L, TIP_R)[i] for i in (0, 1))
+            return all(self.ch(x + i, cy) in "%.," for i in (0, 1))
+
+        def mark(cells, kind, tag, top_left):
+            for cx, cy in cells:
+                self.chars[cy][cx] = kind
+                self.filled[(cx, cy)] = (tag, top_left)
+
+        def column(x, y):
+            """A one-wide filling at (x, y): a cypress if there is room, else a shrub
+            or, under a crown, a gap the crown's tip fills."""
+            if free(x, y - 1) and (need.get((x, y)) is not None or hashpct(x, y, 1) < 40):
+                mark([(x, y - 1), (x, y)], "C", "C", (x, y - 1))
+            elif need.get((x, y)) is not None:
+                mark([(x, y)], "^", "1", (x, y))
+            elif y in self.seam_rows:
+                mark([(x, y)], "B", "1", (x, y))          # aethos's boulder
+            else:
+                k = hashpct(x, y, 3)
+                mark([(x, y)], "b" if k < 35 else "n" if k < 60 else "r", "1", (x, y))
+
+        for y in range(self.h - 1, -1, -1):
             for x in range(self.w):
                 if not free(x, y):
                     continue
-                square = free(x + 1, y) and free(x, y + 1) and free(x + 1, y + 1)
-                pair = free(x, y + 1)
-                r = hashpct(x, y, 1)
-                if square and not (pair and r < 16):
+                nl, nr = need.get((x, y)), need.get((x + 1, y))
+                square = y >= 1 and free(x + 1, y) and free(x, y - 1) and free(x + 1, y - 1)
+                block = [(x, y - 1), (x + 1, y - 1), (x, y), (x + 1, y)]
+                if nl == 1 or (nl == 0 and nr != 1) or (nl is None and nr == 0):
+                    column(x, y)          # line up with the olive below, or tip its right half
+                elif nl == 0:             # an olive exactly below: stack one, or two cypresses
+                    if square and crown_clear(x, y - 2) and hashpct(x, y, 5) < 80:
+                        mark(block, "O", "2x2", (x, y - 1))
+                        need[(x, y - 2)], need[(x + 1, y - 2)] = 0, 1
+                    else:
+                        column(x, y)
+                        if free(x + 1, y):
+                            column(x + 1, y)
+                elif square and hashpct(x, y, 1) >= 16:
                     k = hashpct(x, y, 2)
                     kind = "P" if k < 15 else "F" if k < 25 else "Q" if k < 33 else "O"
-                    for cx, cy in ((x, y), (x + 1, y), (x, y + 1), (x + 1, y + 1)):
-                        self.chars[cy][cx] = kind
-                elif pair:
-                    self.chars[y][x] = self.chars[y + 1][x] = "C"
+                    if kind == "O" and not crown_clear(x, y - 2):
+                        kind = "PFQ"[k % 3]
+                    if kind in "FQ" and (y in self.seam_rows or y - 1 in self.seam_rows):
+                        kind = "P"                            # figs and outcrops are Agros pieces
+                    mark(block, kind, "2x2", (x, y - 1))
+                    if kind == "O":
+                        need[(x, y - 2)], need[(x + 1, y - 2)] = 0, 1
                 else:
-                    k = hashpct(x, y, 3)
-                    self.chars[y][x] = "b" if k < 35 else "n" if k < 60 else "r"
+                    column(x, y)
+
+    # --- olive crowns -----------------------------------------------------------
+    def olive_blocks(self):
+        """Top-left cells of the 2x2 olives, and each olive cell's top-left."""
+        owner, tops = {}, []
+        for y in range(self.h):
+            for x in range(self.w):
+                if self.chars[y][x] != "O" or (x, y) in owner:
+                    continue
+                cells = [(x, y), (x + 1, y), (x, y + 1), (x + 1, y + 1)]
+                if any(self.ch(cx, cy) != "O" or (cx, cy) in owner for cx, cy in cells):
+                    sys.exit(f"{self.name}: olive at ({x},{y}) is not a free 2x2 block\n{self.ascii()}")
+                for c in cells:
+                    owner[c] = (x, y)
+                tops.append((x, y))
+        return tops, owner
+
+    def seam_olives(self):
+        """The neighbor's olives that start on its first row past the bottom edge."""
+        b = self.below
+        if b is None:
+            return []
+        return [(x, self.h) for x in range(min(self.w, len(b)) - 1) if b[x] in OLIVE_TOP_L and b[x + 1] in OLIVE_TOP_R]
+
+    def cypress_foot(self, x, y):
+        """Is (x, y) the lower half of a cypress? Cypresses stack in pairs."""
+        if self.ch(x, y) != "C":
+            return False
+        k = 0
+        while self.ch(x, y - k - 1) == "C":
+            k += 1
+        return k % 2 == 1
+
+    def crown_ok(self, cx, cy, x, y, owner):
+        """Can the cell above an olive's crown half draw the crown's tip?"""
+        if cy < 0:
+            if self.above is None:
+                return True
+            m = self.above[cx] if cx < len(self.above) else None
+            return m in (TIP_L if cx == x else TIP_R)
+        c = self.ch(cx, cy)
+        if c in ".,^":
+            return True                                 # a tip over grass or tall grass
+        if c == "O":
+            return owner.get((cx, cy)) == (x, y - 2)    # an olive stacked exactly above
+        return self.cypress_foot(cx, cy)
+
+    def settle_crowns(self):
+        """Every olive needs a cell above its crown that can draw the crown's tip:
+        grass, an olive stacked exactly above, or a cypress foot. The woods
+        fill_woods chose give way, bottom up: a 2x2 over an olive becomes an olive
+        stacked on it or two cypresses, and an olive under something fixed (the
+        road, a wall, a seam without tips) becomes two cypresses itself. The
+        neighbor's olives just past the bottom seam count as fixed olives."""
+        def to_cypresses(bx, by):
+            for cx, cy in ((bx, by), (bx + 1, by), (bx, by + 1), (bx + 1, by + 1)):
+                self.chars[cy][cx] = "C"
+                self.filled[(cx, cy)] = ("C", (cx, by))
+        for _ in range(10000):
+            tops, owner = self.olive_blocks()
+            work = self.seam_olives() + sorted(tops, key=lambda t: -t[1])
+            for (x, y) in work:
+                if (x, y) in self.cut_ok:
+                    continue
+                bad = [(x + i, y - 1) for i in (0, 1) if not self.crown_ok(x + i, y - 1, x, y, owner)]
+                if not bad:
+                    continue
+                cx, cy = bad[0]
+                src = self.filled.get((cx, cy))
+                mine = self.filled.get((x, y))
+                if src and src[0] == "2x2":
+                    bx, by = src[1]
+                    if (bx, by) == (x, y - 2) and hashpct(bx, by, 5) < 60:
+                        for c2x, c2y in ((bx, by), (bx + 1, by), (bx, by + 1), (bx + 1, by + 1)):
+                            self.chars[c2y][c2x] = "O"
+                    else:
+                        to_cypresses(bx, by)
+                elif mine and mine[0] == "2x2":
+                    to_cypresses(x, y)
+                elif src and src[0] == "1":
+                    self.chars[cy][cx] = "^"        # the shrub gives way to a gap the crown fills
+                else:
+                    print(f"{self.name}: olive ({x},{y}) keeps a flat crown under "
+                          f"'{self.ch(cx, cy, '^')}' at ({cx},{cy})")
+                    self.cut_ok.add((x, y))
+                break
+            else:
+                return
+        sys.exit(f"{self.name}: settle_crowns did not settle")
 
     def roughen(self, protect, seed=7):
         """Break the straight edges of the drawn tall-grass patches with smooth
@@ -199,10 +373,13 @@ class Grid:
     def find_halves(self):
         """Grass cells in a stair-step corner of the road or a meadow become half
         cells, cutting the corner on the diagonal. The road wins ties."""
+        tops, _ = self.olive_blocks()
+        crowns = {(x + i, y - 1) for x, y in tops for i in (0, 1)}   # these draw a crown tip instead
         for kind, ch in (("path", "="), ("tall", ",")):
             for y in range(self.h):
                 for x in range(self.w):
-                    if self.chars[y][x] != "." or (x, y) in self.half or (x, y) in self.protect:
+                    if self.chars[y][x] != "." or (x, y) in self.half or (x, y) in self.protect or (x, y) in crowns \
+                            or y in self.seam_rows:
                         continue
                     for letter, (a, b, d) in HALF_LETTERS.items():
                         others = [o for o in ((0, -1), (1, 0), (0, 1), (-1, 0)) if o not in (a, b)]
@@ -311,32 +488,26 @@ class Grid:
                 self.place(cat, "stylobate", x, y, cx, cy, 1, 1)
 
     def trees(self):
-        claimed = np.zeros((self.h, self.w), bool)
-        tops = []
-        for y in range(self.h):
-            for x in range(self.w):
-                if self.chars[y][x] != "O" or claimed[y, x]:
-                    continue
-                cells = [(x, y), (x + 1, y), (x, y + 1), (x + 1, y + 1)]
-                if any(self.ch(cx, cy) != "O" or claimed[cy, cx] for cx, cy in cells):
-                    sys.exit(f"{self.name}: olive at ({x},{y}) is not a free 2x2 block\n{self.ascii()}")
-                for cx, cy in cells:
-                    claimed[cy, cx] = True
-                tops.append((x, y))
-        top_set = set(tops)
+        tops, _ = self.olive_blocks()
+        top_set = set(tops) | set(self.seam_olives())
+        self.crown_feet = {}              # cell above an olive crown -> 0 (left half) or 1 (right)
+        for x, y in top_set:
+            for i in (0, 1):
+                self.crown_feet[(x + i, y - 1)] = i
         for x, y in tops:
             self.put(x, y, block(OLIVE_TOP[0]))
             self.put(x + 1, y, block(OLIVE_TOP[1]))
             pair = OLIVE_BOTTOM_TIP if (x, y + 2) in top_set else OLIVE_BOTTOM
             self.put(x, y + 1, block(pair[0]))
             self.put(x + 1, y + 1, block(pair[1]))
-        for x, y in tops:
+        for x, y in top_set:
             for i in (0, 1):
                 ax, ay = x + i, y - 1
-                if ay < 0 or self.ch(ax, ay) not in (".", ",") or self.done[ay, ax] or (ax, ay) in self.half:
+                if ay < 0 or self.ch(ax, ay) not in (".", ",", "^") or self.done[ay, ax] or (ax, ay) in self.half:
                     continue
                 tip = OLIVE_TIP["tall" if self.ch(ax, ay) == "," else "grass"][i]
-                self.put(ax, ay, walk(tip))
+                # '^' is a gap in the woods: the tip over grass, but as solid as the trees
+                self.put(ax, ay, block(tip) if self.ch(ax, ay) == "^" else walk(tip))
         return tops
 
     def shades(self, cat, tops):
@@ -344,7 +515,7 @@ class Grid:
         for x, y in tops:
             cells = [(x, y + 2), (x + 1, y + 2)]
             if all(self.ch(cx, cy) == "." and not self.done[cy, cx] and (cx, cy) not in self.half
-                   and (cx, cy) not in self.protect for cx, cy in cells):
+                   and (cx, cy) not in self.protect and cy not in self.seam_rows for cx, cy in cells):
                 s = cat["tree_shade"]
                 for i, (cx, cy) in enumerate(cells):
                     self.put_piece(cx, cy, s["ids"][0][i], s["walk"][0][i])
@@ -371,10 +542,28 @@ class Grid:
                     sys.exit(f"{self.name}: cypress at ({x},{y}) has no lower half")
                 top = CYPRESS_TOP_TALL if self.ch(x, y - 1) == "," else CYPRESS_TOP
                 self.put(x, y, block(top))
-                self.put(x, y + 1, block(CYPRESS_BOTTOM))
+                half = self.crown_feet.get((x, y + 1))
+                self.put(x, y + 1, block(CYPRESS_BOTTOM if half is None else CYPRESS_BOTTOM_TIP[half]))
+
+    AETHOS_PATH = {"TL": 0x1D0, "T": 0x1D1, "TR": 0x1D2, "L": 0x1D8, "C": 0x1D9, "R": 0x1DA,
+                   "BL": 0x1E0, "B": 0x1E1, "BR": 0x1E2}
+
+    def aethos_path(self, x, y):
+        """A seam-row road cell from aethos's square path patch. Past the map's
+        edge the road carries on as at the edge (it continues into the neighbor)."""
+        road = lambda dx, dy: self.clamp_ch(x + dx, y + dy) == "="
+        v = "" if road(0, -1) else "T"
+        v = v if road(0, 1) else "B"  if not v else v
+        if not road(0, -1) and not road(0, 1):
+            v = "T"
+        h = "" if road(-1, 0) else "L"
+        h = h if road(1, 0) else "R"
+        key = (v + h) or "C"
+        return self.AETHOS_PATH.get(key, self.AETHOS_PATH["C"])
 
     def soft_ground(self, cat):
-        """Tall grass, road and track, from Agros's shape pieces."""
+        """Tall grass, road and track, from Agros's shape pieces (aethos's own
+        path patch in the seam rows)."""
         for y in range(self.h):
             for x in range(self.w):
                 if self.done[y, x]:
@@ -382,6 +571,9 @@ class Grid:
                 c, h = self.chars[y][x], self.half.get((x, y))
                 kind = h[0] if h else {",": "tall", "=": "path", "-": "track"}.get(c)
                 if not kind:
+                    continue
+                if y in self.seam_rows:
+                    self.put(x, y, walk(self.aethos_path(x, y)))
                     continue
                 if kind == "track":
                     key = self.track_key(x, y)
@@ -578,8 +770,8 @@ ROUTE1 = [
     "%%...,,,,..===...,.......*%%%%",  # 31 Phyllis's grove
     "%%###.FF,..===.....,,.......%%",  # 32 a spring under a fig
     "%%###nFF.,.===......,,......%%",  # 33
-    "%%.---------===..,,.........%%",  # 34 the spring's track
-    "%%.,,,,.....===...,...,.....%%",  # 35
+    "%%.----.....===..,,.........%%",  # 34 the spring's track jogs down to the road
+    "%%.,,,------===...,...,.....%%",  # 35
     "%%..,,......===.......,.....%%",  # 36
     "%%..........===.............%%",  # 37 the grove lane
     "%%.....,,...===..,....*.....%%",  # 38
@@ -591,9 +783,9 @@ ROUTE1 = [
     "%%.,,,,...===...,,,...,,....%%",  # 44 the shepherd's meadow
     "%%..,,,..===...,,,,,..,,,...%%",  # 45
     "q....,,..===......####.....*%%",  # 46 the threshing floor
-    "q.......,===....h.####......%%",  # 47
-    "q.,,....*===------####......%%",  # 48 Tityros; the track to the floor
-    "q,,,......===..h..####......%%",  # 49
+    "q.......,===..----####......%%",  # 47
+    "q.,,....*===---...####......%%",  # 48 Tityros; the track steps up to the floor
+    "q,,,......===...h.####......%%",  # 49
     "q......,,.===..*...,,,......%%",  # 50
     "q......,,,===......,,,,,....%%",  # 51
     "q...,,,,...===.,,......B....%%",  # 52
@@ -614,18 +806,20 @@ ROUTE1_OLIVES = [
     # north: the ragged edge of the hill woods
     (20, 4), (19, 9), (16, 11),
     # fork and the terraces
-    (2, 16), (20, 20), (19, 29),
+    (2, 16), (19, 29),
     # Phyllis's grove, west of the road ...
     (4, 36), (8, 37), (2, 39), (6, 40),
     # ... and east of it, planted in loose rows around the lane (y=37)
     (15, 32), (22, 32), (18, 33), (25, 33), (16, 35), (20, 35), (23, 35),
     (17, 38), (21, 38), (25, 38), (15, 40), (19, 40), (23, 40),
     # the meadow: the shepherd's lone olive, scrub east of the road
-    (3, 50), (2, 44), (20, 43), (25, 46), (14, 50), (19, 52), (25, 50), (26, 41),
+    (3, 50), (2, 45), (20, 43), (25, 46), (14, 50), (19, 52), (25, 50), (26, 41),
     # the south: the carter's shade tree and the grove edges
-    (21, 53), (24, 56), (22, 58), (26, 54), (2, 57), (4, 58), (14, 58), (26, 58),
+    (21, 53), (24, 56), (24, 58), (26, 54), (2, 57), (4, 58), (14, 59), (26, 58),
 ]
-ROUTE1_CYPRESSES = [(7, 2), (13, 4), (10, 36), (15, 42), (7, 54)]
+# An olive's crown needs grass, another olive or a cypress foot above it (see
+# settle_crowns), so none sits right under the road, a lip or a pine.
+ROUTE1_CYPRESSES = [(7, 2), (13, 4), (21, 20), (10, 36), (15, 42), (7, 54)]
 ROUTE1_PINES = [(24, 52), (21, 56)]
 
 # ---------------------------------------------------------------------------
@@ -648,15 +842,15 @@ KRONION = [
     "%%%..###########,.q~~~~~",  # 6
     "%%%,.###########..q~~~~~",  # 7
     "%%%..###########.,q~~~~~",  # 8  its south face
-    "%%%C..............q~~~~~",  # 9
-    "%%,C..........S...q~~~~~",  # 10 the scene starts at the stair's top (13,10)
+    "%%%C....======....q~~~~~",  # 9  the worn path forks to the two gaps in the step
+    "%%,C........==S...q~~~~~",  # 10 the scene starts at the stair's top (13,10)
     "%%ZZZZZZZZZZZzZZZZq~~~~~",  # 11 upper rock band, stair at x=13
-    "%%.,,...rb..,,,...q~~~~~",  # 12 the shelf
-    "%%..,,......y.....q~~~~~",  # 13
-    "%%.,,....ZZZZZZZZZ%qqqqq",  # 14 lower band, east half
+    "%%QQ,.r..=====,,.Bq~~~~~",  # 12 the shelf: the path climbs it on the diagonal
+    "%%QQ,,=====.y..b..q~~~~~",  # 13
+    "%%.,,===rZZZZZZZZZ%qqqqq",  # 14 lower band, east half
     "%%ZZZZzZZZZ%%%%%%%%%%%%%",  # 15 lower band, west half, stair at x=6
-    "====,,..%%%%%%%%%%%%%%%%",  # 16 hill foot, from Route 1
-    "====..,,%%%%%%%%%%%%%%%%",  # 17
+    "=======.%%%%%%%%%%%%%%%%",  # 16 hill foot, from Route 1: the path runs to the stair
+    "=====,,B%%%%%%%%%%%%%%%%",  # 17
     "%%%%%%%%%%%%%%%%%%%%%%%%",  # 18
     "%%%%%%%%%%%%%%%%%%%%%%%%",  # 19
 ] + ["%" * 24] * 42  # 20-61: the hill's woods, seen past Route 1's east edge
@@ -821,7 +1015,10 @@ def event_cells(events):
 
 
 def make_route1():
-    g = Grid(ROUTE1, "Route 1", ROUTE1_OLIVES, ROUTE1_CYPRESSES, ROUTE1_PINES, sea_edges="W")
+    # Akti's last row and Elaia's first, as built, so crowns meet across the seams.
+    akti, elaia = neighbor("LAYOUT_AKTI_TOWN")[0], neighbor("LAYOUT_ELAIA_VILLAGE")[0]
+    g = Grid(ROUTE1, "Route 1", ROUTE1_OLIVES, ROUTE1_CYPRESSES, ROUTE1_PINES, sea_edges="W",
+             above=[int(m) & 0x3FF for m in akti[-1]], below=[int(m) & 0x3FF for m in elaia[0]])
     g.roughen(event_cells(ROUTE1_EVENTS))
     return g
 
@@ -850,8 +1047,7 @@ def build_kronion(cat):
 
 def write_shapes():
     """Merge the ground shapes both maps need into agros_shapes.json."""
-    old = json.loads(SHAPES.read_text()) if SHAPES.exists() else {}
-    merged = {k: set(old.get(k, [])) for k in ("tall", "path", "track")}
+    merged = {k: set() for k in ("tall", "path", "track")}    # exactly what the maps use, so Agros stays lean
     r1, kh = make_route1(), make_kronion()
     build_route1_pieces(r1, None)
     build_kronion_ruins(kh, None)
@@ -890,6 +1086,23 @@ def check_seams(r1, kh):
     for x in range(kh.w):
         if not kh.solid(x, 0) or not kh.solid(x, kh.h - 1):
             errs.append(f"Kronion Hill: top or bottom edge open at x={x}")
+    # Olive crowns: the cell above every olive top half draws its tip, inside
+    # each map and across the Akti (north) and Elaia (south) seams, both ways.
+    tops = OLIVE_TOP_L | OLIVE_TOP_R
+    tip = lambda m, top: m in (TIP_L if top in OLIVE_TOP_L else TIP_R)
+    for g in (r1, kh):
+        b = g.blocks() & 0x3FF
+        for y in range(1, g.h):
+            for x in range(g.w):
+                if b[y, x] in tops and not tip(b[y - 1, x], b[y, x]):
+                    errs.append(f"{g.name}: olive crown cut flat at ({x},{y})")
+        for x in range(g.w):
+            if g.above is not None and b[0, x] in tops:
+                m = g.above[x] if x < len(g.above) else None
+                if not tip(m, b[0, x]):
+                    errs.append(f"{g.name}: olive crown at ({x},0) cut by the north seam")
+            if g.below is not None and x < len(g.below) and g.below[x] in tops and not tip(b[-1, x], g.below[x]):
+                errs.append(f"{g.name}: the southern neighbor's olive at x={x} is cut by the seam")
     if errs:
         sys.exit("seam errors:\n  " + "\n  ".join(errs))
 
@@ -916,13 +1129,88 @@ def write_events(folder, events, music):
     path.write_text(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
 
 
-def renderer():
+def renderer(primary=PRIMARY, secondary=SECONDARY):
     sys.path.insert(0, str(ROOT / "tools/ichor"))
     import render_map as rm
     rm.read_fieldmap_constants()
     syms = rm.scan_tileset_symbols()
-    return rm, rm.Renderer(rm.Tileset(rm.resolve_tileset(PRIMARY, syms)),
-                           rm.Tileset(rm.resolve_tileset(SECONDARY, syms)))
+    return rm, rm.Renderer(rm.Tileset(rm.resolve_tileset(primary, syms)),
+                           rm.Tileset(rm.resolve_tileset(secondary, syms)))
+
+
+def neighbor(layout_id):
+    """A neighbor's real layout: (blocks h x w, primary, secondary, border)."""
+    for lay in json.loads(LAYOUTS.read_text())["layouts"]:
+        if lay.get("id") == layout_id:
+            w, h = lay["width"], lay["height"]
+            blocks = np.fromfile(ROOT / lay["blockdata_filepath"], "<u2").reshape(h, w)
+            border = np.fromfile(ROOT / lay["border_filepath"], "<u2")
+            return blocks, lay["primary_tileset"], lay["secondary_tileset"], border
+    sys.exit(f"no layout {layout_id}")
+
+
+def render_seams(r1, kh, rows=6):
+    """Each seam as the game draws it, every map in its own tilesets: Akti's last
+    rows over Route 1's first, Route 1's last over Elaia's first, and Route 1's
+    east edge beside Kronion Hill's west edge. Cells no map covers show the
+    border of the map the player stands on (both sides are drawn)."""
+    from PIL import Image
+    rm, r_own = renderer()
+    out = []
+
+    def strip(blocks, pair):
+        rr = r_own if pair == (PRIMARY, SECONDARY) else renderer(*pair)[1]
+        return rm.render_blocks(rr, blocks.ravel(), blocks.shape[1])
+
+    def border_fill(h, w, border, x0=0, y0=0):
+        return np.array([[border[((x0 + x) & 1) + ((y0 + y) & 1) * 2] for x in range(w)] for y in range(h)], np.uint16)
+
+    own = r1.blocks() & 0x3FF
+    for lid, side in (("LAYOUT_AKTI_TOWN", "N"), ("LAYOUT_ELAIA_VILLAGE", "S")):
+        nb, p, s, nborder = neighbor(lid)
+        nb = nb & 0x3FF
+        w = max(nb.shape[1], r1.w)
+        img = Image.new("RGB", (w * 16 + 8, rows * 2 * 16), (24, 24, 32))
+        far = nb[-rows:] if side == "N" else nb[:rows]
+        near = own[:rows] if side == "N" else own[-rows:]
+        # Seen from Route 1: the neighbor where it reaches, Route 1's border past it.
+        if far.shape[1] < w:
+            pad = border_fill(rows, w - far.shape[1], ROUTE1_BORDER, far.shape[1])
+            far_img = Image.new("RGB", (w * 16, rows * 16))
+            far_img.paste(strip(far, (p, s)), (0, 0))
+            far_img.paste(strip(pad, (PRIMARY, SECONDARY)), (far.shape[1] * 16, 0))
+        else:
+            far_img = strip(far, (p, s))
+        near_img = strip(near, (PRIMARY, SECONDARY))
+        top, bottom = (far_img, near_img) if side == "N" else (near_img, far_img)
+        img.paste(top, (4, 0))
+        img.paste(bottom, (4, rows * 16))
+        for x in (0, w * 16 + 4):                      # ticks mark the seam
+            img.paste((255, 0, 255), (x, rows * 16 - 2, x + 4, rows * 16 + 2))
+        out.append(img)
+    # Kronion Hill beside Route 1's east edge, offset 2.
+    kb = kh.blocks() & 0x3FF
+    ys = range(0, 22)
+    left = own[ys.start:ys.stop, -rows:]
+    right = np.array([[kb[y - KRONION_OFFSET, x] if 0 <= y - KRONION_OFFSET < kh.h else ROUTE1_BORDER[0]
+                       for x in range(rows)] for y in ys], np.uint16)
+    img = Image.new("RGB", (rows * 2 * 16, len(ys) * 16 + 8), (24, 24, 32))
+    img.paste(strip(left, (PRIMARY, SECONDARY)), (0, 4))
+    img.paste(strip(right, (PRIMARY, SECONDARY)), (rows * 16, 4))
+    for y in (0, len(ys) * 16 + 4):
+        img.paste((255, 0, 255), (rows * 16 - 2, y, rows * 16 + 2, y + 4))
+    out.append(img)
+    W = sum(i.width for i in out) + 8 * (len(out) + 1)
+    H = max(i.height for i in out) + 16
+    sheet = Image.new("RGB", (W, H), (24, 24, 32))
+    x = 8
+    for i in out:
+        sheet.paste(i, (x, 8))
+        x += i.width + 8
+    sheet = sheet.resize((sheet.width * 2, sheet.height * 2), Image.NEAREST)
+    path = RENDER / "kalliste_route1_seams.png"
+    sheet.save(path)
+    return path
 
 
 def render(g, name, events, border, views, rows=None):
@@ -1012,6 +1300,7 @@ def main():
             print(p)
         for p in render(kh, "kalliste_route1_kronion_hill", KRONION_EVENTS, KRONION_BORDER, KRONION_VIEWS, rows=20):
             print(p)
+        print(render_seams(r1, kh))
 
 
 if __name__ == "__main__":

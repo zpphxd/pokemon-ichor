@@ -245,8 +245,9 @@ local function main()
   local kx, ky = pos()
   expect(kx == 0 and ky == 17, string.format("the spur meets the hill foot (at %d,%d)", kx, ky))
   shot("16_hill_foot.png")
-  -- Up the lower stair (6,15), east along the shelf, up the upper stair (13,11).
-  r = walkTo({ { 6, 17 }, { 6, 13 }, { 13, 13 }, { 13, 11 } })
+  -- Along the path to the lower stair (6,15), east along the shelf, up the
+  -- upper stair (13,11). The path keeps out of the tall grass.
+  r = walkTo({ { 0, 16 }, { 6, 16 }, { 6, 13 }, { 13, 13 }, { 13, 11 } })
   expect(r == "moved", "the stairs climb to the summit")
   shot("17_summit_before.png")
   r = walkTo({ { 13, 10 } })
