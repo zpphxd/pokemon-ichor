@@ -633,6 +633,18 @@ gSongTable::
 	song mus_ichor_new_game, MUSIC_PLAYER_BGM, 0
 	song mus_ichor_agora, MUSIC_PLAYER_BGM, 0
 	song mus_ichor_akademia, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_elpis_lullaby, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_elpis_lullaby_box, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_trireme, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_road, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_road_night, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_emporion, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_temple_hermes, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_eleusa, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_temple_demeter, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_battle_admin, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_revelation, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_hollow, MUSIC_PLAYER_BGM, 0
 
 	.align 2
 dummy_song_header:
