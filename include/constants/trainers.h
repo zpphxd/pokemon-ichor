@@ -186,6 +186,7 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_SHEPHERD,
     TRAINER_PIC_HARVESTER,
     TRAINER_PIC_GOATHERD,
+    TRAINER_PIC_HOPLITE,
     TRAINER_PIC_COUNT,
 };
 

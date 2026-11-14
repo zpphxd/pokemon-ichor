@@ -70,6 +70,16 @@ def render(f):
     return arr
 
 
+def pole(f, top, bottom, mat, **kw):
+    """A 3 px pole (outline, wood, outline) from top to bottom, any slope."""
+    (x0, y0), (x1, y1) = top, bottom
+    spans = []
+    for y in range(y0, y1 + 1):
+        xc = int(round(x0 + (x1 - x0) * (y - y0) / max(y1 - y0, 1)))
+        spans.append((xc - 1, xc + 1))
+    return f.spans(y0, spans, mat, **kw)
+
+
 def stagger(x0, y0, x1, y1, sx, sy):
     pts = []
     for j, y in enumerate(range(y0, y1 + 1, sy)):
@@ -446,10 +456,134 @@ def goatherd():
     return f, pal
 
 
+# --------------------------------------------------------------------------
+# Hoplite (male): bronze crested helmet pushed up, hoplon with a painted
+# Lakonian lambda, spear. Agis is a Lakonian youth, so he shares Kleon's crimson.
+# --------------------------------------------------------------------------
+
+def hoplite():
+    pal = Palette([
+        ("ink", INK),
+        *SKIN_TAN,
+        ("brown", (104, 56, 40)),
+        ("hair", (48, 32, 32)),
+        ("cr_l", (216, 72, 64)), ("cr_m", (168, 40, 48)), ("cr_d", (104, 24, 40)),
+        ("br_l", (248, 216, 120)), ("br_m", (216, 160, 64)), ("br_d", (144, 88, 40)),
+        ("lin_l", (248, 240, 216)), ("lin_d", (200, 176, 144)),
+        ("wood", (176, 120, 72)),
+    ])
+    skin = skin_mat("brown")
+    bronze = Mat(["br_d", "br_m", "br_l"], cuts=[0.35, 0.72])
+    crimson = Mat(["cr_d", "cr_m", "cr_l"], wx=0.85, wy=0.2, cuts=[0.25, 0.65])
+    linen = Mat(["lin_d", "lin_l"], outline="brown", wx=0.8, wy=0.3, cuts=[0.6])
+    wood = Mat(["br_d", "wood"], cuts=[0.75])
+    lea = Mat(["brown"])
+    f = Fig(pal)
+
+    # crimson cloak behind his shoulders
+    f.poly([(23, 24), (40, 23), (44, 30), (46, 44), (40, 47), (24, 47), (19, 42), (21, 30)], crimson, bias=0.3)
+    # spear held low and forward, butt behind his near leg
+    pole(f, (8, 7), (29, 56), wood, group=50)
+    # legs: a wide, ready stance, bronze greaves on the shins
+    f.poly([(25, 45), (30, 45), (29, 51), (27, 57), (23, 57), (24, 51)], skin, group=100)
+    f.poly([(35, 45), (39, 45), (41, 51), (43, 57), (39, 57), (37, 51)], skin, group=101)
+    f.poly([(23, 50), (29, 50), (28, 57), (23, 57)], bronze, group=110)
+    f.poly([(37, 50), (41, 50), (43, 57), (39, 57)], bronze, group=111)
+    f.poly([(21, 57), (28, 57), (28, 61), (20, 61)], lea)
+    f.poly([(38, 57), (44, 57), (46, 61), (38, 61)], lea)
+    # crimson chiton skirt under white linen strips (pteruges)
+    f.poly([(24, 39), (41, 39), (43, 47), (22, 47)], crimson)
+    # linen corselet with shoulder flaps
+    f.poly([(25, 23), (39, 23), (41, 33), (41, 41), (25, 41), (24, 33)], linen)
+    f.rect(23, 38, 42, 39, bronze, noline=True)
+    f.rect(29, 19, 34, 24, skin, group=400)
+    # near arm (his right) grips the spear at his chest
+    f.poly([(23, 23), (28, 23), (28, 28), (24, 29)], linen, group=210)
+    f.thick_line([(25, 27), (22, 34)], 5, skin, group=200)
+    f.thick_line([(22, 34), (19, 31)], 4, skin, group=200)
+    # the hoplon on his far arm: bronze rim, crimson face, painted lambda
+    rim = f.ellipse((29, 25, 54, 50), bronze, group=600)
+    f.ellipse((31, 27, 52, 48), crimson, group=610, clip=rim, noline=True)
+    f.shade_poly([(31, 27), (40, 27), (33, 36), (31, 40)], -0.35)
+
+    # pteruges strips
+    for x in (25, 28, 31):
+        f.line([(x, 40), (x - 1, 46)], "lin_l")
+        f.line([(x + 1, 40), (x, 46)], "lin_d")
+    # greave ridges and sandal straps
+    f.line([(25, 51), (25, 56)], "br_l")
+    f.line([(39, 51), (40, 56)], "br_l")
+    # shield rim: a hot highlight at the top left, the dark edge low right
+    f.line([(33, 27), (37, 26)], "br_l")
+    f.line([(30, 33), (31, 30)], "br_l")
+    # the lambda, Lakonia's mark
+    f.patch(35, 30, [
+        "......kk.......",
+        ".....kGGk......",
+        ".....kGYk......",
+        "....kGYkYk.....",
+        "....kGYkYk.....",
+        "...kGYk.kYk....",
+        "...kGYk.kYk....",
+        "..kGYk...kYk...",
+        "..kGYk...kYk...",
+        ".kGYk.....kYk..",
+        ".kGYk.....kYk..",
+        "kGYk.......kYk.",
+        "kkk.........kk.",
+    ], {"k": "cr_d", "G": "br_l", "Y": "br_m"})
+    # spearhead, a bronze leaf blade, and the hand around the shaft
+    f.patch(5, 0, [
+        "..k...",
+        ".kGk..",
+        ".kGYk.",
+        ".kGYk.",
+        "..kGYk",
+        "..kGYk",
+        "...kYk",
+        "...kkk",
+    ], {"k": "ink", "G": "br_l", "Y": "br_m"})
+    f.patch(16, 28, [
+        ".bbbb.",
+        "bLLLLb",
+        "bLbLMb",
+        "bLLMMb",
+        ".bbbb.",
+    ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
+    # head: Corinthian helmet pushed up on his crown, crimson crest streaming back
+    f.patch(22, 0, [
+        ".....kkkkkkk............",
+        "...kkRRRRRRrkkk.........",
+        "..kRRRRRrrrrrrrkk.......",
+        "..kRRrrrrrrrrrrrrkk.....",
+        "...kkkkkkkkkkkrrrrrk....",
+        ".....kGGGYYYYYkkrrrrk...",
+        "....kGGYYYYYYYYYkrrrrk..",
+        "...kGGYYYYYYYYYyyrrrrk..",
+        ".kkGYYYYYYYYYYYyyykrrrk.",
+        "kGkkkYYYYYYYYYYyyykrrk..",
+        "kYYYkYYYYYYYYYyyyyykrk..",
+        ".kkkkkkkkkkkkkkkkkkkHk..",
+        "...bLLLLLLLLMHHHHHk.....",
+        "...bLHHHLLHHHMbHHk......",
+        "...bLWkLLLkWMDMbHk......",
+        "..bLLWkLLLkWMDMbHk......",
+        "..bLLLLLLLLMMMbHk.......",
+        ".bLLLLDLLLMMMbHk........",
+        "..bLLDDLLMMMbk..........",
+        "..bLLLbbbMMbk...........",
+        "...bLLLLMMbk............",
+        "....bbbbbbk.............",
+    ], {"k": "ink", "R": "cr_l", "r": "cr_m", "G": "br_l", "Y": "br_m", "y": "br_d", "H": "hair",
+        "b": "brown", "L": "skin_l", "M": "skin_m", "D": "skin_d", "W": "lin_l"})
+    return f, pal
+
+
 CLASSES = {
     "shepherd": shepherd,
     "harvester": harvester,
     "goatherd": goatherd,
+    "hoplite": hoplite,
 }
 
 
