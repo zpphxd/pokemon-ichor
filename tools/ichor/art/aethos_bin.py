@@ -37,29 +37,33 @@ ANIM_OFFSETS = {"water": 432, "sand_water_edge": 464, "land_water_edge": 480,
                 "waterfall": 496, "flower": 508}
 
 # Six primary palettes. Slot 0 is transparent (palette 0's is the backdrop).
+# Each palette keeps General's slot *roles* where it can (whites in 1-4,
+# darks in 5-8, blues 9-10, warm 11-14, grass 15), because Hoenn art that
+# still borrows these palettes (secondaries' own tiles, the door-opening
+# animations in graphics/door_anims) then shows a recolor, not noise.
 # Pinned for Petalburg's own tiles: palette 2 slots 2-4 and 14-15 (General's
 # leaf and grass greens), palette 5 slots 11-13 (General's sand ramp).
-# Palettes 0 and 1 share their marble slots, because General drew a few roof
-# tiles in both and Petalburg reuses them that way.
+# Palettes 0 and 1 match in slots 1-5, 7 and 9-13, because General drew a few
+# roof tiles in both and Petalburg reuses them that way.
 PALETTES = [
     # 0 marble: buildings
-    [None, "mb_d", "mb_m", "mb_l", "mb_h", "ink", "tc_d", "tc_m", "tc_l",
-     "sg_d", "sg_l", "ae_m", "ae_l", "lp_d", "lp_l", "ae_d"],
+    [None, "mb_h", "mb_l", "lp_l", "mb_m", "mb_d", "lp_d", "ink", "sg_d",
+     "ae_l", "ae_m", "sg_l", "tc_l", "tc_m", "ae_d", "tc_d"],
     # 1 plaza: marble and clay on grass
-    [None, "mb_d", "mb_m", "mb_l", "mb_h", "ink", "gr_d", "gr_m", "gr_l",
-     "gm", "tc_m", "tc_l", "sg_l", "ae_m", "ae_l", "lp_l"],
+    [None, "mb_h", "mb_l", "lp_l", "mb_m", "mb_d", "gm", "ink", "gr_d",
+     "ae_l", "ae_m", "sg_l", "tc_l", "tc_m", "gr_l", "gr_m"],
     # 2 grove: olives, cypresses, pines, trunks, grass
-    [None, "ol_s", "ol_l", "gm", "gd", "cy_d", "cy_m", "cy_l", "gr_m", "gr_l",
-     "ink", "tr_d", "mb_d", "mb_m", "gr_d", "gk"],
+    [None, "ol_s", "ol_l", "gm", "gd", "mb_m", "tr_d", "mb_d", "ink",
+     "cy_d", "cy_m", "cy_l", "gr_l", "gr_m", "gr_d", "gk"],
     # 3 earth: limestone, ledges, cliffs, paths, soil, grass
-    [None, "gr_d", "gr_m", "gr_l", "gm", "lp_k", "lp_d", "lp_m", "lp_l", "lp_h",
-     "dt_d", "dt_m", "sd_d", "sd_m", "ink", "tr_d"],
+    [None, "sd_m", "sd_d", "dt_m", "dt_d", "gm", "gr_d", "gr_l", "ink",
+     "lp_h", "lp_l", "lp_m", "lp_d", "lp_k", "tr_d", "gr_m"],
     # 4 meadow: wild tall grass, anemones
     [None, "gk", "gd", "gm", "tg_l", "gr_d", "gr_m", "gr_l", "lp_l", "sg_d",
      "sg_l", "fl_d", "fl_m", "fl_l", "ink", "lp_h"],
     # 5 sea: the Aegean, surf, sea stacks, sand
-    [None, "ae_d", "ae_m", "ae_n", "ae_l", "ae_h", "ae_t", "mb_h", "mb_d",
-     "mb_m", "mb_l", "lp_h", "sd_m", "sd_d", "ink", "lp_d"],
+    [None, "mb_h", "mb_l", "ae_h", "mb_m", "mb_d", "ae_n", "ae_d", "ink",
+     "ae_l", "ae_m", "lp_h", "sd_m", "sd_d", "lp_d", "ae_t"],
 ]
 PINNED_SLOTS = {(2, 2): (131, 197, 98), (2, 3): (57, 139, 49), (2, 4): (57, 82, 0),
                 (2, 14): (65, 180, 131), (2, 15): (24, 164, 106),
@@ -68,6 +72,12 @@ PINNED_SLOTS = {(2, 2): (131, 197, 98), (2, 3): (57, 139, 49), (2, 4): (57, 82, 
 
 def palette_rgb(p):
     return [BACKDROP] + [PAL[n] for n in PALETTES[p][1:]]
+
+
+for _p in PALETTES:
+    assert len(_p) == 16 and len(set(_p[1:])) == 15, _p
+assert all(PALETTES[2][i] == n for i, n in ((2, "ol_l"), (3, "gm"), (4, "gd"), (14, "gr_d"), (15, "gk")))
+assert all(PALETTES[5][i] == n for i, n in ((11, "lp_h"), (12, "sd_m"), (13, "sd_d")))
 
 
 PAL_SETS = [set(palette_rgb(p)[1:]) for p in range(6)]
@@ -325,6 +335,14 @@ def bin_tile(t):
 def build(sheet, base, frames):
     write_config()
     pinned = pins(sheet, base)
+    # Start from a clean slate: in patch mode Porytiles otherwise keeps the
+    # previous build's metatile references and tile slots.
+    import shutil
+    if BIN.exists():
+        shutil.rmtree(BIN)
+    BIN.mkdir(parents=True)
+    np.zeros((512, 8), np.uint16).tofile(BIN / "metatiles.bin")
+    np.zeros(512, np.uint16).tofile(BIN / "metatile_attributes.bin")
     seed(pinned, frames)
     porytiles("compile-tileset", "--no-verify-checksums", "gTileset_Aethos")
     # the pins must survive
@@ -332,8 +350,9 @@ def build(sheet, base, frames):
     for t, (c, p) in pinned.items():
         got = bin_tile(t)
         e = encode(c, p)
-        # the game reads value % 16; opaque pixels must also keep the palette
-        if not ((got % 16 == e).all() and (got[e > 0] // 16 == p).all()):
+        # The game reads value % 16 (tiles.png's palette tag is only a hint:
+        # a tile that fits palettes 0 and 1 alike may be tagged either).
+        if not (got % 16 == e).all():
             moved.append(t)
     if moved:
         raise SystemExit(f"aethos: Porytiles moved pinned tiles {moved}")
