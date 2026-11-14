@@ -482,6 +482,10 @@ const u16 gTrainerPalette_TitanGrunt[] = INCGFX_U16("graphics/trainers/front_pic
 const u32 gTrainerFrontPic_ProfessorDaphne[] = INCGFX_U32("graphics/trainers/front_pics/professor_daphne.png", ".4bpp.smol");
 const u16 gTrainerPalette_ProfessorDaphne[] = INCGFX_U16("graphics/trainers/front_pics/professor_daphne.png", ".gbapal");
 
+// Pokemon Ichor trainer classes
+const u32 gTrainerFrontPic_Shepherd[] = INCGFX_U32("graphics/trainers/front_pics/shepherd.png", ".4bpp.smol");
+const u16 gTrainerPalette_Shepherd[] = INCGFX_U16("graphics/trainers/front_pics/shepherd.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1254,5 +1258,9 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_PROFESSOR_DAPHNE] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_ProfessorDaphne, gTrainerPalette_ProfessorDaphne),
+    },
+    [TRAINER_PIC_SHEPHERD] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Shepherd, gTrainerPalette_Shepherd),
     },
 };
