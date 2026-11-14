@@ -1,0 +1,87 @@
+line: poseidon
+species:
+
+- dex: 150
+  concept: Sea colossus
+  name: Pontanax
+  etymology: pontos (Greek, the open sea) + anax (Greek, lord, king)
+  category: Sea Lord
+  types: [Water]
+  abilities: [Clear Body]
+  hidden_ability: Swift Swim
+  base_stats: {hp: 100, atk: 200, def: 110, spa: 50, spd: 90, spe: 50}
+  ev_yield: {atk: 3}
+  exp_yield: 300
+  catch_rate: 3
+  gender: {genderless: true}
+  egg_groups: [Undiscovered]
+  egg_cycles: 120
+  growth_rate: Slow
+  base_friendship: 35
+  height_m: 3.8
+  weight_kg: 780.0
+  myth: >-
+    In the drawing of lots Poseidon won the gray sea to live in forever (Iliad
+    15.187–193). Homer calls him the Earth-shaker, and when he takes up his
+    trident the clouds pile up and every wind blows at once (Odyssey
+    5.291–296). The bronze god hauled from a wreck off Cape Artemision, arm
+    drawn back to throw, is often read as him.
+  expression: >-
+    The bronze god from the wreck, still in its throwing pose, walking up out
+    of the sea with its trident drawn back. Barnacles and coral crust it, and
+    like its brothers it has only its lot's emblem, a glowing trident, for a
+    face.
+  art: >-
+    Largest: it fills about 62×62 px. A striding bronze colossus in
+    three-quarter view facing left, in the Artemision pose: left arm stretched
+    straight ahead, right arm drawn far back holding a trident ready to throw,
+    legs braced wide. Where its face should be is a flat bronze plate with a
+    trident picked out in glowing points, and a beard of green weed hangs below
+    it. Barnacles and knots of coral crust its shoulders, shins and the
+    trident's shaft. Aegean blue and cypress for the green patina, sun-gold
+    where bare bronze shows through, limestone barnacles, terracotta coral, a
+    sea-foam green glow on the face points, black-figure ink outline; the
+    follower leaves wet footprints.
+  shiny: The patina is scoured off, leaving bright new bronze in sun-gold and marble-white barnacles.
+  dex_entry:
+    - Sponge divers found it in a wreck, its arm
+    - drawn back to throw. When it strikes the
+    - seabed with its spear, islands shake and
+    - the sea climbs over the harbor walls.
+  habitat: >-
+    Atlantis, in the drowned temple at the heart of the sunken city (post-game;
+    suggested). Its doors stay sealed until you hold the trident lot, which
+    Kronolith gives back at the Omphalos in Delphoi; then you Dive to it, day or
+    night (static, level 70, one only).
+  learnset:
+    level_up:
+      - [1, Water Gun]
+      - [1, Stomp]
+      - [1, Harden]
+      - [6, Bulldoze]
+      - [12, Ancient Power]
+      - [18, Razor Shell]
+      - [24, Iron Defense]
+      - [30, Waterfall]
+      - [36, Hammer Arm]
+      - [42, Lock-On]
+      - [48, Earthquake]
+      - [54, Fissure]
+      - [60, Wave Crash]
+      - [66, Superpower]
+      - [72, Giga Impact]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Surf, Waterfall, Dive,
+      Liquidation, Aqua Tail, Razor Shell, Hydro Pump, Water Pulse, Brine, Scald, Muddy Water,
+      Whirlpool, Chilling Water, Rain Dance, Ice Beam, Icy Wind, Blizzard, Avalanche, Earthquake,
+      Bulldoze, High Horsepower, Stomping Tantrum, Fissure, Rock Slide, Stone Edge, Rock Tomb,
+      Stealth Rock, Iron Head, Iron Defense, Heavy Slam, Body Press, Smart Strike, Swords Dance,
+      Bulk Up, Brick Break, Superpower, Knock Off, Strength, Rock Smash, Hyper Beam, Giga Impact,
+      Ancient Power, Tera Blast]
+    egg: []
+  signature: >-
+    The Earth-shaker. Lock-On at 42 and Fissure at 54 split the ground for a
+    sure knockout, its answer to the Regis' Lock-On and Zap Cannon, and its huge
+    Attack drives Wave Crash and Earthquake. Swift Swim lets the slow colossus
+    move like a storm tide when it rains.
+  new_move: null

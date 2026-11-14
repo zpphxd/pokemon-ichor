@@ -1,0 +1,90 @@
+line: zeus
+species:
+
+- dex: 149
+  concept: Sky colossus
+  name: Olympanax
+  etymology: Olympos (Greek, the mountain of the gods) + anax (Greek, lord, king)
+  category: Sky Lord
+  types: [Electric]
+  abilities: [Clear Body]
+  hidden_ability: Lightning Rod
+  base_stats: {hp: 90, atk: 70, def: 100, spa: 200, spd: 90, spe: 50}
+  ev_yield: {spa: 3}
+  exp_yield: 300
+  catch_rate: 3
+  gender: {genderless: true}
+  egg_groups: [Undiscovered]
+  egg_cycles: 120
+  growth_rate: Slow
+  base_friendship: 35
+  height_m: 4.5
+  weight_kg: 520.0
+  myth: >-
+    When Kronos fell, his three sons drew lots for the world: Zeus won the
+    broad sky, Poseidon the gray sea and Hades the murky dark (Iliad
+    15.187–193). Phidias's Zeus at Olympia sat enthroned in gold and ivory,
+    an olive wreath on its head and an eagle on its scepter (Pausanias 5.11.1),
+    so tall that if it stood up it would lift the temple roof (Strabo 8.3.30).
+  expression: >-
+    The statue that stood up. It has risen from Phidias's throne with a
+    thunderbolt where the Victory used to sit in its hand, and like its two
+    brothers it has no face, only its lot's emblem glowing where one should be.
+  art: >-
+    Largest: it fills the whole 64×64 box, its wreathed head pressing the top
+    edge as if it could lift a roof. A colossal statue in three-quarter view
+    facing left, half risen from the throne behind it, with ivory limbs and
+    chest and a sun-gold robe falling from one shoulder to its feet. Its right
+    hand raises a jagged gold thunderbolt and its left grips a tall scepter
+    topped by a gold eagle with spread wings. Where its face should be is a
+    smooth ivory oval with a thunderbolt picked out in seven glowing points,
+    under an olive wreath. Marble-white ivory shaded with limestone, sun-gold
+    robe and fittings, olive wreath, an electric-yellow glow on the bolt and the
+    face points, black-figure ink outline; the back sprite shows the robe and
+    the empty throne, and the follower trails a few sparks.
+  shiny: The ivory darkens to storm-gray and the gold turns pale silver, with an Aegean-blue glow on the bolt.
+  dex_entry:
+    - It sat on a throne of gold and ivory.
+    - Guides swore it would lift the temple roof
+    - if it ever stood. The throne is empty now,
+    - and thunder rolls wherever it walks.
+  habitat: >-
+    Olympus, on a storm-struck terrace below the true summit (post-game;
+    suggested). Its empty throne in the Temple of Zeus at Olympia is the first
+    clue. The terrace stays sealed until you hold the thunderbolt lot, which
+    Kronolith gives back at the Omphalos in Delphoi; then the colossus waits
+    there, day or night (static, level 70, one only).
+  learnset:
+    level_up:
+      - [1, Thunder Shock]
+      - [1, Stomp]
+      - [1, Charge]
+      - [6, Bulldoze]
+      - [12, Ancient Power]
+      - [18, Shock Wave]
+      - [24, Thunder Wave]
+      - [30, Discharge]
+      - [36, Thunderbolt]
+      - [42, Lock-On]
+      - [48, Zap Cannon]
+      - [54, Rain Dance]
+      - [60, Thunder]
+      - [66, Calm Mind]
+      - [72, Hyper Beam]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Thunderbolt, Thunder,
+      Thunder Wave, Charge Beam, Shock Wave, Volt Switch, Wild Charge, Thunder Punch,
+      Electric Terrain, Eerie Impulse, Electroweb, Electro Ball, Rising Voltage, Supercell Slam,
+      Zap Cannon, Magnet Rise, Rain Dance, Hurricane, Air Slash, Weather Ball, Tailwind,
+      Flash Cannon, Iron Defense, Iron Head, Heavy Slam, Body Press, Rock Slide, Rock Tomb,
+      Power Gem, Meteor Beam, Ancient Power, Focus Blast, Calm Mind, Reflect, Light Screen,
+      Gravity, Earthquake, Bulldoze, Superpower, Strength, Rock Smash, Hyper Beam, Giga Impact,
+      Tera Blast]
+    egg: []
+  signature: >-
+    The bolt that never misses. Lock-On at 42 sets up Zap Cannon at 48, the
+    way the old Regis do it, and Rain Dance at 54 makes Thunder sure too.
+    Lightning Rod pulls every Electric move to it and feeds its huge Special
+    Attack, and Clear Body, shared by all three colossi, means nothing can
+    lower its stats.
+  new_move: null

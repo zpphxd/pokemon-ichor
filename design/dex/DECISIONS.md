@@ -23,20 +23,19 @@ Plan: `design/dex/PLAN.md` (generated from `plan.yaml`). Review page: https://cl
 | D1 | Regional starters replace Snivy, Cyndaquil and Piplup | Yes, once the species exist in the ROM | Yes |
 | D2 | Kronos and the Moirai replace Dialga and the lake trio in the story | Yes | Open |
 | D3 | Add Kairos as a post-game legendary at Olympia | Yes | Open |
-| D4 | Two mythicals, Hope and Ichor | Yes | Open |
-| D5 | How the 150 mix with the existing 1,025 species | (a) Aethos-only through the League | (b) Mixed: "while we add in the other pokemon into the region too". The 150 are Aethos's own Pokémon, and existing species live in the region alongside them. |
+| D4 | Two mythicals, Hope and Ichor | Yes | Changed: "mythicals should be like a zeus pokemon, a posiden pokemon, and a hades pokemon. as like regis giant types ... with good names." Three Regi-style colossi, the cult statues of the brothers who drew lots for the world, replace Hope and Ichor: Olympanax (Zeus, Electric), Pontanax (Poseidon, Water) and Nekranax (Hades, Ghost). The dex grows to 151. |
+| D5 | How the regional dex mixes with the existing 1,025 species | (a) Aethos-only through the League | (b) mixed: "while we add in the other pokemon into the region too". Then changed to (a): "(a). It makes Aethos feel like a real new region and keeps the bible's post-game promise. lets switch it to this". Only Aethos's own species appear until the League is beaten; existing species arrive in the post-game. |
 | D6 | Post-game Labors use regional species where one exists | Yes | Open |
 
-D2, D3, D4 and D6 don't block Gate 2. The entries for those species are written either way, and the open questions are about where they go in the story.
+D2, D3 and D6 don't block Gate 2. The entries for those species are written either way, and the open questions are about where they go in the story.
 
 ## Gate 2: the full entries
 
-All 150 entries are in `design/dex/species/*.yaml`, and `tools/dex/validate.py --complete` passes them with no errors or warnings. Review page: https://claude.ai/artifact/D4PXiuRijZf2Sdubr9QADh
+All 151 entries are in `design/dex/species/*.yaml`, and `tools/dex/validate.py --complete` passes them with no errors or warnings. Gate 2 reviewed 150; the three colossi replaced the two mythicals afterwards (D4). Review page: https://claude.ai/artifact/D4PXiuRijZf2Sdubr9QADh
 
 Choices made in review, which the user can overrule:
-- **Borrowed signature moves.** Existing species also live in Aethos, so other Pokémon's signature moves were swapped for generic ones. Six were kept because the myth depends on them:
+- **Borrowed signature moves.** Existing species arrive in Aethos in the post-game, so other Pokémon's signature moves were swapped for generic ones to avoid clashes there. Five were kept because the myth depends on them:
   - Kronolith: Roar of Time, and Mighty Cleave as a stand-in until Harpe exists.
-  - Elpimoth: Revival Blessing.
   - Kairazor: Esper Wing.
   - Hoplektor: No Retreat.
   - Geogrip: Shore Up.
@@ -52,7 +51,26 @@ Waiting on the user:
 | — | Approve the 150 entries, or name the ones to change | — | pending |
 | D7 | New move **Harpe** for Kronolith: Ground, physical, 100 power, hits through Protect and Substitute. It costs one new move and an animation. | Yes: the story spends two acts rebuilding the Harpe | pending |
 | D8 | New move **Shield Clash** for the Kouretes line: Steel, special sound move, 80 power, stops the target using sound moves for two turns. It costs one new move and an animation. | Optional: Steel moves already cover the role | pending |
-| D9 | Call the title mythical **Ichorin** (coined) or plain **Ichor** | Ichorin, matching the other coined names | pending |
+| D9 | Call the title mythical **Ichorin** (coined) or plain **Ichor** | Ichorin, matching the other coined names | Withdrawn (2026-11-14): the Ichor mythical is gone, replaced by the three colossi (D4). |
+
+## Gate 3: sprites
+
+| Date | Decision | Source |
+|---|---|---|
+| 2026-11-14 | The 150 entries are approved. Sprites start. | The user: "Approve, start sprites" |
+| 2026-11-14 | Every sprite must be as detailed and well designed as an official Pokémon's: hand-finished battle sprites, not just code-drawn ones. | The user: "make sure they are as detailed and designed well as any normal pokemon. spend time" |
+
+## Next, after the sprites: the Astral type
+
+| Date | Decision | Source |
+|---|---|---|
+| 2026-11-14 | Add a new 19th type, **Astral**, a star type. Its Pokémon are the constellations: one for each major constellation, none of them evolving. They are a new category to be mixed into Aethos. | The user: "i also want a new type made once this is done called Astral, which is like a star type. that will be constellations. each maojr constillation will have a pokemon. no evolutions. this will be a new catagory we will want to mix in somehow." |
+
+Questions for when this starts:
+- **Which constellations count as major?** The 12 zodiac signs, Ptolemy's 48 (most are Greek myths), or a shortlist of about 20 of the best-known Greek ones.
+- **Type matchups.** How Astral fits the type chart.
+- **How they appear.** For example only at night, at observatories or high peaks, or as a star-chart side quest.
+- **The engine cost.** A new type touches the type chart, type icons, move data and the Pokédex, so it is an engine change for the main session.
 
 Map and encounter notes for whoever builds the areas:
 - The Spring of Kallirhoe drains into Echo's sea caves.

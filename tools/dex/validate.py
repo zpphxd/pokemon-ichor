@@ -7,7 +7,7 @@ tables of species, moves and abilities.
 
   python3 tools/dex/validate.py                 check every entry written so far
   python3 tools/dex/validate.py --lines a,b     check only these lines
-  python3 tools/dex/validate.py --complete      also require all 150 entries
+  python3 tools/dex/validate.py --complete      also require all 151 entries
 
 Exit status is 1 if any error is found. Warnings don't fail the run.
 """
@@ -133,7 +133,7 @@ def band_key(line, index):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--lines", help="comma-separated line ids to check")
-    ap.add_argument("--complete", action="store_true", help="require all 150 entries")
+    ap.add_argument("--complete", action="store_true", help="require every entry in the plan")
     args = ap.parse_args()
 
     data = planlib.load()

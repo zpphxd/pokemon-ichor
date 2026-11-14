@@ -1192,30 +1192,59 @@ lines:
   members:
     - {concept: Thunder-bearer, types: [Electric, Flying]}
 
-- id: hope
+- id: zeus
   roles: [mythical]
   myth: >-
-    Pandora opened the jar, the pithos, and every evil flew out into the world.
-    Only Elpis, Hope, stayed inside under the lip (Hesiod, Works and Days 90–105).
+    When Kronos fell, his three sons drew lots for the world: Zeus won the
+    broad sky, Poseidon the gray sea and Hades the murky dark (Iliad
+    15.187–193). Phidias's gold-and-ivory Zeus at Olympia sat enthroned with an
+    eagle on its scepter (Pausanias 5.11.1), so tall that if it stood up it
+    would lift the temple roof (Strabo 8.3.30).
   design: >-
-    A tiny lantern-moth of soft light curled in the bottom of a jar.
-  habitat: "The last sealed pithos (post-game; suggested: Elpis opens it)."
-  notes: Ties to Elpis and to the Pithos storage system (decision D4).
+    The first of three Regi-style colossi, the cult statues of the three
+    brothers. Phidias's Zeus has risen from its throne with a thunderbolt and an
+    eagle-topped scepter. Where its face should be, its lot's emblem glows: a
+    thunderbolt. Slow, with a huge Special Attack.
+  habitat: "Olympus, on a storm terrace below the true summit (post-game; suggested). Its throne at Olympia stands empty."
+  notes: >-
+    Decision D4. Suggested unlock, shared by the three colossi: Kronolith gives
+    back what it swallowed. Bring it to the Omphalos at Delphoi, the stone it
+    swallowed in Zeus's place, and it yields three bronze lots, stamped with a
+    thunderbolt, a trident and a bident. Each lot unseals one colossus.
   members:
-    - {concept: Hope in the jar, types: [Fairy]}
+    - {concept: Sky colossus, types: [Electric]}
 
-- id: ichor
+- id: poseidon
   roles: [mythical]
   myth: >-
-    Ichor is the golden blood of the gods, the thing that makes them immortal
-    (Iliad 5.340). Talos's single vein held it.
+    In the drawing of lots Poseidon won the gray sea (Iliad 15.187–193). Homer
+    calls him the Earth-shaker, and when he takes up his trident every wind
+    blows at once (Odyssey 5.291–296). The bronze god hauled from a wreck off
+    Cape Artemision, arm drawn back to throw, is often read as him.
   design: >-
-    A small golden being shaped like a falling drop. Like Mew, it can learn
-    every TM and Transform.
-  habitat: The Pool of Mnemosyne, Arkadia (post-game). It is the memory of the first myth.
-  notes: The title Pokémon (decision D4).
+    A sea-green patinated bronze colossus in the Artemision pose, striding out
+    of the sea with its trident drawn back, crusted with barnacles and coral.
+    Its face is a glowing trident, its lot's emblem. Slow, with a huge Attack.
+  habitat: "The drowned temple at the heart of Atlantis (post-game; suggested)."
+  notes: Decision D4. Unsealed by the trident lot (see the sky colossus).
   members:
-    - {concept: Ichor, types: [Psychic]}
+    - {concept: Sea colossus, types: [Water]}
+
+- id: hades
+  roles: [mythical]
+  myth: >-
+    In the drawing of lots Hades won the murky dark (Iliad 15.187–193), and his
+    name was heard as Aides, the Unseen (Plato, Cratylus 403a). His cap, the
+    Helm of Hades, hides whoever wears it: Athena put it on so Ares could not
+    see her (Iliad 5.844–845).
+  design: >-
+    A black basalt colossus that keeps its throne, wearing the Helm of Darkness
+    that makes it vanish, a bident across its knees. Under the helm its face is
+    a glowing bident, its lot's emblem. Slow, with a huge Defense.
+  habitat: "The Underworld, in a vault beneath Hades's hall at the end of the Katabasis (post-game; suggested)."
+  notes: Decision D4. Unsealed by the bident lot (see the sky colossus).
+  members:
+    - {concept: Dark colossus, types: [Ghost]}
 
 # ── Decisions the user needs to make at Gate 1 ────────────────────────────
 # Each has a recommendation. Record the answers in design/dex/DECISIONS.md.
@@ -1250,22 +1279,38 @@ decisions:
     the bible's post-game.
   recommend: Yes.
 - id: D4
-  title: Two mythicals, Hope and Ichor
+  answer: >-
+    Changed (2026-11-14): three Regi-style colossi for Zeus, Poseidon and Hades
+    replace Hope and Ichor, and the dex grows to 151. The user: "mythicals
+    should be like a zeus pokemon, a posiden pokemon, and a hades pokemon. as
+    like regis giant types ... with good names."
+  title: Three mythicals, the colossi of Zeus, Poseidon and Hades
   detail: >-
-    Hope is the light left in Pandora's jar. A natural beat is Elpis opening
-    the last sealed pithos after the League, which would be a small bible
-    addition. Ichor, the gods' golden blood, is the title Pokémon and Aethos's
-    Mew, found at the Pool of Mnemosyne.
-  recommend: Yes to both. Whether Elpis gets the Hope beat is the main session's call.
+    The three sons of Kronos drew lots for the world: Zeus the sky, Poseidon
+    the sea, Hades the dark (Iliad 15.187–193). Their cult statues are a
+    Regi-style trio of living colossi, each slow, single-typed and lopsided,
+    with its lot's emblem glowing where a face would be: Olympanax (Electric),
+    Pontanax (Water) and Nekranax (Ghost). Suggested unlock: Kronolith, who
+    swallowed them, gives back three bronze lots at the Omphalos in Delphoi,
+    and each lot unseals one colossus on Olympus, in Atlantis or in the
+    Underworld. This replaces the earlier pair, Hope (Elpimoth) and Ichor
+    (Ichorin).
+  recommend: Yes. Where the lots and the sealed chambers go in the post-game is the main session's call.
 - id: D5
-  answer: "(b) mixed (2026-11-14): the 150 are Aethos's own Pokémon, and existing species live in the region alongside them."
-  title: How the 150 mix with the existing 1,025 species
+  answer: >-
+    (a) Aethos-only through the League (2026-11-14), replacing the earlier (b)
+    mixed answer from the same day. The user: "(a). It makes Aethos feel like a
+    real new region and keeps the bible's post-game promise. lets switch it to
+    this". Only the 151 appear until the League is beaten; existing species
+    arrive in the post-game.
+  title: How the regional dex mixes with the existing 1,025 species
   detail: >-
-    The bible leaves this open. Options. (a) Aethos-only through the League,
+    The bible left this open. Options. (a) Aethos-only through the League,
     with the national dex opening in the post-game (Time Fractures, the
     Odyssey, Atlantis, Katabasis), so "all 1,025 catchable" still holds.
     (b) Mixed throughout. (c) Aethos-only, full stop. The Phase 1 Route 1 table
-    uses existing species today.
+    still uses existing species; under (a) it switches to Aethos species once
+    they are in the ROM.
   recommend: (a). It makes Aethos feel like a real new region and keeps the bible's post-game promise.
 - id: D6
   title: Let the post-game Labors use regional species

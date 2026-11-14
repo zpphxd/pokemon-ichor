@@ -25,7 +25,7 @@ TEMPLATE = ROOT / "tools/dex/plan_page.html"
 TYPES = ["Normal", "Fire", "Water", "Grass", "Electric", "Ice", "Fighting",
          "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost",
          "Dragon", "Dark", "Steel", "Fairy"]
-TARGET_TOTAL = 150
+TARGET_TOTAL = 151
 
 # method -> (table label, required keys)
 METHODS = {
@@ -219,7 +219,7 @@ def markdown(data, species, st):
     w("- **Targets for Gate 2:** starters about 310 / 405 / 530 BST; the pseudo-legendary 300 / 420 / 600; "
       "Kronos and Kairos about 680; the Moirai about 580 each; Pegasus about 580; the mythicals 600.")
     w("- **Names:** the engine allows 12 characters (`POKEMON_NAME_LENGTH`); we aim for Gen 3's 10. Categories fit in 12.")
-    w("- **ROM:** front, back, shiny, icon, footprint and follower sprites for 150 species come to roughly 1.2–1.5 MB "
+    w(f"- **ROM:** front, back, shiny, icon, footprint and follower sprites for {len(species)} species come to roughly 1.2–1.5 MB "
       "if they reuse existing cries, about a quarter of today's headroom.")
     w("- **Moves:** the plan needs no new moves. Any signature move proposed at Gate 2 is flagged as a cost.")
     w("")
@@ -253,7 +253,7 @@ def markdown(data, species, st):
         if who:
             w(f"| {METHODS[m][0]} | {len(who)} | {', '.join(who)} |")
     w("")
-    w("## All 150 slots")
+    w(f"## All {len(species)} slots")
     w("")
     w("| # | Concept | Types | Evolves | Line | Role |")
     w("|---:|---|---|---|---|---|")

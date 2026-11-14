@@ -1,0 +1,88 @@
+line: hades
+species:
+
+- dex: 151
+  concept: Dark colossus
+  name: Nekranax
+  etymology: nekros (Greek, the dead) + anax (Greek, lord, king); Homer calls Hades the lord of those below (Iliad 20.61)
+  category: Shade Lord
+  types: [Ghost]
+  abilities: [Clear Body]
+  hidden_ability: Perish Body
+  base_stats: {hp: 100, atk: 100, def: 200, spa: 60, spd: 90, spe: 50}
+  ev_yield: {def: 3}
+  exp_yield: 300
+  catch_rate: 3
+  gender: {genderless: true}
+  egg_groups: [Undiscovered]
+  egg_cycles: 120
+  growth_rate: Slow
+  base_friendship: 35
+  height_m: 4.1
+  weight_kg: 905.0
+  myth: >-
+    In the drawing of lots Hades won the murky dark (Iliad 15.187–193), and his
+    name was heard as Aides, the Unseen (Plato, Cratylus 403a). His cap, the
+    Helm of Hades, hides whoever wears it: Athena put it on so Ares could not
+    see her (Iliad 5.844–845), and Perseus wore it to escape the Gorgons
+    (Apollodorus, Library 2.4.2–3).
+  expression: >-
+    The one brother who kept his throne: a basalt colossus seated in the dark,
+    with the Helm of Hades on its head and the bident later artists gave him
+    across its knees. When it puts the helm on it is simply gone, and under the
+    helm, where a face should be, its lot's bident glows.
+  art: >-
+    Largest: it fills the whole 64×64 box. A colossal seated statue in
+    three-quarter view facing left on a heavy black throne, broad shoulders
+    hunched forward and a two-pronged bident laid across its knees. It wears a
+    tall crestless helm with deep cheek guards, and in the shadow where its
+    face should be a bident glows in pale points; smoke pours from the helm's
+    rim, and its lower legs fade into the smoke as if it is already vanishing.
+    Black-figure ink and deep cypress for the basalt, limestone on the polished
+    highlights, terracotta red-figure trim on the throne, a few sun-gold gems
+    for the wealth under the earth, a pale ghost-violet glow, black-figure ink
+    outline. The back sprite shows the throne's tall back, and the follower
+    flickers out to a faint outline every few steps.
+  shiny: The basalt turns marble-white like a grave stele, and the violet glow turns sun-gold.
+  dex_entry:
+    - No one living has seen its face. It puts
+    - on its helm and is gone, but the cold
+    - stays, and the lamps go out one by one.
+    - In the dark below, it waits for us all.
+  habitat: >-
+    The Underworld, in a vault beneath Hades's hall at the end of the Katabasis
+    (post-game; suggested). The vault stays sealed until you hold the bident
+    lot, which Kronolith gives back at the Omphalos in Delphoi. It shows itself
+    only once every lamp in the vault has gone out (static, level 70, one only).
+  learnset:
+    level_up:
+      - [1, Shadow Sneak]
+      - [1, Stomp]
+      - [1, Mean Look]
+      - [6, Bulldoze]
+      - [12, Ancient Power]
+      - [18, Shadow Punch]
+      - [24, Iron Defense]
+      - [30, Shadow Claw]
+      - [36, Hammer Arm]
+      - [42, Curse]
+      - [48, Phantom Force]
+      - [54, Body Press]
+      - [60, Poltergeist]
+      - [66, Superpower]
+      - [72, Giga Impact]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Shadow Ball,
+      Shadow Claw, Phantom Force, Poltergeist, Hex, Night Shade, Confuse Ray, Will-O-Wisp,
+      Pain Split, Spite, Curse, Block, Dark Pulse, Knock Off, Foul Play, Payback, Snarl, Torment,
+      Taunt, Embargo, Scary Face, Trick Room, Earthquake, Bulldoze, Stomping Tantrum, Dig,
+      Rock Slide, Stone Edge, Rock Tomb, Stealth Rock, Iron Head, Iron Defense, Heavy Slam,
+      Body Press, Smart Strike, Brick Break, Drain Punch, Superpower, Strength, Rock Smash,
+      Hyper Beam, Giga Impact, Ancient Power, Tera Blast]
+    egg: []
+  signature: >-
+    The Unseen. Phantom Force at 48 is the helm: it vanishes for a turn and
+    strikes through Protect. Mean Look keeps foes from leaving, Iron Defense and
+    Body Press turn its huge Defense into damage, and Perish Body dooms anything
+    that lays a hand on it.
+  new_move: null

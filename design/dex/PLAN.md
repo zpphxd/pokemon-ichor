@@ -6,12 +6,12 @@ The labels below are working concepts, not names. Names, stats, abilities, moves
 
 ## At a glance
 
-- **150 species**: 11 three-stage lines, 42 two-stage lines, 1 branching line and 30 single-stage species.
-- **87 dual-type** and **63 single-type** species.
+- **151 species**: 11 three-stage lines, 42 two-stage lines, 1 branching line and 31 single-stage species.
+- **87 dual-type** and **64 single-type** species.
 - **Babies:** Storm kid, Erote.
 - **Targets for Gate 2:** starters about 310 / 405 / 530 BST; the pseudo-legendary 300 / 420 / 600; Kronos and Kairos about 680; the Moirai about 580 each; Pegasus about 580; the mythicals 600.
 - **Names:** the engine allows 12 characters (`POKEMON_NAME_LENGTH`); we aim for Gen 3's 10. Categories fit in 12.
-- **ROM:** front, back, shiny, icon, footprint and follower sprites for 150 species come to roughly 1.2–1.5 MB if they reuse existing cries, about a quarter of today's headroom.
+- **ROM:** front, back, shiny, icon, footprint and follower sprites for 151 species come to roughly 1.2–1.5 MB if they reuse existing cries, about a quarter of today's headroom.
 - **Moves:** the plan needs no new moves. Any signature move proposed at Gate 2 is flagged as a cost.
 
 ## Decisions for you
@@ -34,17 +34,17 @@ The labels below are working concepts, not names. Names, stats, abilities, moves
 
 *Answer:* open
 
-**D4. Two mythicals, Hope and Ichor.** Hope is the light left in Pandora's jar. A natural beat is Elpis opening the last sealed pithos after the League, which would be a small bible addition. Ichor, the gods' golden blood, is the title Pokémon and Aethos's Mew, found at the Pool of Mnemosyne.
+**D4. Three mythicals, the colossi of Zeus, Poseidon and Hades.** The three sons of Kronos drew lots for the world: Zeus the sky, Poseidon the sea, Hades the dark (Iliad 15.187–193). Their cult statues are a Regi-style trio of living colossi, each slow, single-typed and lopsided, with its lot's emblem glowing where a face would be: Olympanax (Electric), Pontanax (Water) and Nekranax (Ghost). Suggested unlock: Kronolith, who swallowed them, gives back three bronze lots at the Omphalos in Delphoi, and each lot unseals one colossus on Olympus, in Atlantis or in the Underworld. This replaces the earlier pair, Hope (Elpimoth) and Ichor (Ichorin).
 
-*Recommendation:* Yes to both. Whether Elpis gets the Hope beat is the main session's call.
+*Recommendation:* Yes. Where the lots and the sealed chambers go in the post-game is the main session's call.
 
-*Answer:* open
+*Answer:* Changed (2026-11-14): three Regi-style colossi for Zeus, Poseidon and Hades replace Hope and Ichor, and the dex grows to 151. The user: "mythicals should be like a zeus pokemon, a posiden pokemon, and a hades pokemon. as like regis giant types ... with good names."
 
-**D5. How the 150 mix with the existing 1,025 species.** The bible leaves this open. Options. (a) Aethos-only through the League, with the national dex opening in the post-game (Time Fractures, the Odyssey, Atlantis, Katabasis), so "all 1,025 catchable" still holds. (b) Mixed throughout. (c) Aethos-only, full stop. The Phase 1 Route 1 table uses existing species today.
+**D5. How the regional dex mixes with the existing 1,025 species.** The bible left this open. Options. (a) Aethos-only through the League, with the national dex opening in the post-game (Time Fractures, the Odyssey, Atlantis, Katabasis), so "all 1,025 catchable" still holds. (b) Mixed throughout. (c) Aethos-only, full stop. The Phase 1 Route 1 table still uses existing species; under (a) it switches to Aethos species once they are in the ROM.
 
 *Recommendation:* (a). It makes Aethos feel like a real new region and keeps the bible's post-game promise.
 
-*Answer:* (b) mixed (2026-11-14): the 150 are Aethos's own Pokémon, and existing species live in the region alongside them.
+*Answer:* (a) Aethos-only through the League (2026-11-14), replacing the earlier (b) mixed answer from the same day. The user: "(a). It makes Aethos feel like a real new region and keeps the bible's post-game promise. lets switch it to this". Only the 151 appear until the League is beaten; existing species arrive in the post-game.
 
 **D6. Let the post-game Labors use regional species.** The bible casts the Twelve Labors with existing species. Where the dex has its own, they could take over: Nemean lion (1), Hydra (2), Calydonian boar (4), Stymphalian birds (6), the two-headed hound for Geryon's cattle (10), Ladon (11), and the starter line's three-headed hound for Cerberus (12). The Hind, the Augean Stables, the Cretan Bull, Diomedes's mares and Hippolyta's girdle keep their current casting.
 
@@ -60,22 +60,22 @@ A species counts once for each of its types.
 |---|---:|---:|---:|
 | Normal | 16 | 8 | 8 |
 | Fire | 12 | 6 | 6 |
-| Water | 20 | 7 | 13 |
+| Water | 21 | 8 | 13 |
 | Grass | 18 | 8 | 10 |
-| Electric | 11 | 3 | 8 |
+| Electric | 12 | 4 | 8 |
 | Ice | 7 | 3 | 4 |
 | Fighting | 11 | 2 | 9 |
 | Poison | 11 | 2 | 9 |
 | Ground | 14 | 4 | 10 |
 | Flying | 21 | 1 | 20 |
-| Psychic | 14 | 1 | 13 |
+| Psychic | 13 | 0 | 13 |
 | Bug | 10 | 5 | 5 |
 | Rock | 13 | 1 | 12 |
-| Ghost | 10 | 3 | 7 |
+| Ghost | 11 | 4 | 7 |
 | Dragon | 10 | 2 | 8 |
 | Dark | 13 | 3 | 10 |
 | Steel | 10 | 2 | 8 |
-| Fairy | 16 | 2 | 14 |
+| Fairy | 15 | 1 | 14 |
 
 Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison ×3, Electric/Flying ×2, Grass/Fairy ×2, Grass/Poison ×2, Normal/Flying ×3, Psychic/Flying ×2, Rock/Electric ×2, Rock/Ground ×2, Rock/Normal ×2, Steel/Flying ×2, Water/Flying ×2, Water/Ground ×2.
 
@@ -96,7 +96,7 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 | Level up at a place | 2 | #55 Rooting piglet, #91 Spring bulb |
 | Level up knowing a move | 2 | #44 Tortoise hatchling, #75 Temple snakelet |
 
-## All 150 slots
+## All 151 slots
 
 | # | Concept | Types | Evolves | Line | Role |
 |---:|---|---|---|---|---|
@@ -248,8 +248,9 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 | 146 | Lord of Time | Ground / Psychic |  | kronos (single) | box legendary, story |
 | 147 | The Moment | Flying / Psychic |  | kairos (single) | box legendary |
 | 148 | Thunder-bearer | Electric / Flying |  | pegasus (single) | legendary |
-| 149 | Hope in the jar | Fairy |  | hope (single) | mythical |
-| 150 | Ichor | Psychic |  | ichor (single) | mythical |
+| 149 | Sky colossus | Electric |  | zeus (single) | mythical |
+| 150 | Sea colossus | Water |  | poseidon (single) | mythical |
+| 151 | Dark colossus | Ghost |  | hades (single) | mythical |
 
 ## The lines: myth, design and habitat
 
@@ -874,19 +875,27 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 - **Design:** A white winged stallion with storm-gold feathers and lightning in its mane.
 - **Lives in:** The cloud meadows of Olympus (post-game).
 
-#### #149 Hope in the jar (Fairy)
+#### #149 Sky colossus (Electric)
 
 - **Role:** mythical
-- **Myth:** Pandora opened the jar, the pithos, and every evil flew out into the world. Only Elpis, Hope, stayed inside under the lip (Hesiod, Works and Days 90–105).
-- **Design:** A tiny lantern-moth of soft light curled in the bottom of a jar.
-- **Lives in:** The last sealed pithos (post-game; suggested: Elpis opens it).
-- **Notes:** Ties to Elpis and to the Pithos storage system (decision D4).
+- **Myth:** When Kronos fell, his three sons drew lots for the world: Zeus won the broad sky, Poseidon the gray sea and Hades the murky dark (Iliad 15.187–193). Phidias's gold-and-ivory Zeus at Olympia sat enthroned with an eagle on its scepter (Pausanias 5.11.1), so tall that if it stood up it would lift the temple roof (Strabo 8.3.30).
+- **Design:** The first of three Regi-style colossi, the cult statues of the three brothers. Phidias's Zeus has risen from its throne with a thunderbolt and an eagle-topped scepter. Where its face should be, its lot's emblem glows: a thunderbolt. Slow, with a huge Special Attack.
+- **Lives in:** Olympus, on a storm terrace below the true summit (post-game; suggested). Its throne at Olympia stands empty.
+- **Notes:** Decision D4. Suggested unlock, shared by the three colossi: Kronolith gives back what it swallowed. Bring it to the Omphalos at Delphoi, the stone it swallowed in Zeus's place, and it yields three bronze lots, stamped with a thunderbolt, a trident and a bident. Each lot unseals one colossus.
 
-#### #150 Ichor (Psychic)
+#### #150 Sea colossus (Water)
 
 - **Role:** mythical
-- **Myth:** Ichor is the golden blood of the gods, the thing that makes them immortal (Iliad 5.340). Talos's single vein held it.
-- **Design:** A small golden being shaped like a falling drop. Like Mew, it can learn every TM and Transform.
-- **Lives in:** The Pool of Mnemosyne, Arkadia (post-game). It is the memory of the first myth.
-- **Notes:** The title Pokémon (decision D4).
+- **Myth:** In the drawing of lots Poseidon won the gray sea (Iliad 15.187–193). Homer calls him the Earth-shaker, and when he takes up his trident every wind blows at once (Odyssey 5.291–296). The bronze god hauled from a wreck off Cape Artemision, arm drawn back to throw, is often read as him.
+- **Design:** A sea-green patinated bronze colossus in the Artemision pose, striding out of the sea with its trident drawn back, crusted with barnacles and coral. Its face is a glowing trident, its lot's emblem. Slow, with a huge Attack.
+- **Lives in:** The drowned temple at the heart of Atlantis (post-game; suggested).
+- **Notes:** Decision D4. Unsealed by the trident lot (see the sky colossus).
+
+#### #151 Dark colossus (Ghost)
+
+- **Role:** mythical
+- **Myth:** In the drawing of lots Hades won the murky dark (Iliad 15.187–193), and his name was heard as Aides, the Unseen (Plato, Cratylus 403a). His cap, the Helm of Hades, hides whoever wears it: Athena put it on so Ares could not see her (Iliad 5.844–845).
+- **Design:** A black basalt colossus that keeps its throne, wearing the Helm of Darkness that makes it vanish, a bident across its knees. Under the helm its face is a glowing bident, its lot's emblem. Slow, with a huge Defense.
+- **Lives in:** The Underworld, in a vault beneath Hades's hall at the end of the Katabasis (post-game; suggested).
+- **Notes:** Decision D4. Unsealed by the bident lot (see the sky colossus).
 
