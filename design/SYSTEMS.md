@@ -506,6 +506,8 @@ Each god has Favor from 0 to 100. It **never decreases.**
   - On Spartan, EXP boosts still respect level caps.
   - Under the Oath of the Styx, Hestia's stored heal never revives a fainted Pokémon.
 
+**Gift III species.** Under dex decision D5 (a), only Aethos species appear before the League. So each god's sacred animal is cast from the Aethos dex. The bible's old vanilla picks (Magearna, Zapdos) stay in the post-game national dex, not here.
+
 ### The gods
 
 There are 15 gods: the Twelve, plus Zeus, Hecate and, in the post-game, Hades. Under "Gifts", **I** is Favor 30 (a TM, named by its move; Balance assigns the numbers), **II** is Favor 60 (a tool or relic upgrade), and **III** is Favor 100 (the god's sacred animal as a unique static encounter, with a strong nature, 3 perfect IVs and a rare move; species pending the dex).
@@ -517,14 +519,14 @@ There are 15 gods: the Twelve, plus Zeus, Hecate and, in the post-game, Hades. U
 | **Demeter** | Barley Cake / First Fruits (any berry except Pomeg) | **Harvest.** Wild Pokémon carry held items twice as often; berry trees give +1; each dig rolls twice and keeps the rarer result. | **I** Leech Seed<br>**II** **Harvest Basket**: berry trees always give +1<br>**III** her chariot-serpent |
 | **Dionysus** | Wine / Figy and Grepa Berries (fig and grape) | **Revel.** Gives a random other god's major blessing at 1.5× duration (never Zeus or Hades). One time in eight it is **Frenzy** instead: wild encounters ×2, wild levels +3, EXP ×1.5. | **I** Swagger<br>**II** **Thyrsus**: climb marked ivy walls (the expansion's Rock Climb), opening optional ledges<br>**III** the panther |
 | **Artemis** | Any feather (the first of the hunt) / Barley Cake (her moon-cakes) | **Moonlit Hunt.** At night, a route's three rarest land slots are 3× as likely; wild encounter rate −25% at all times; the Augur's Eye sneaking range +2 tiles. | **I** Night Slash<br>**II** **Hunter's Moon**: the Augur's Eye lists each map's rare-slot species<br>**III** the golden-horned deer |
-| **Hephaestus** | Bronze Votive / Wine (he came home to Olympus drunk) | **Forge-sight.** Hidden items within 6 tiles glint every 2 seconds; smashed rocks drop items 3× as often. | **I** Flash Cannon<br>**II** **Hephaestus's Hammer**: great boulders<br>**III** the golden automaton (Magearna, PITCH §4) |
+| **Hephaestus** | Bronze Votive / Wine (he came home to Olympus drunk) | **Forge-sight.** Hidden items within 6 tiles glint every 2 seconds; smashed rocks drop items 3× as often. | **I** Flash Cannon<br>**II** **Hephaestus's Hammer**: great boulders<br>**III** the golden automaton |
 | **Aphrodite** | Frankincense / Pretty Feather (her doves), sea gifts | **Charm.** Friendship gains ×2; wild Pokémon are the opposite gender of your lead two times in three. | **I** Draining Kiss<br>**II** **Myrtle Wreath**: a held item; friendship can't drop<br>**III** the swan |
 | **Apollo** | Laurel Sprig / Frankincense, Honey | **Daylight.** EXP +20%. | **I** Solar Beam<br>**II** **Lyre of Apollo**: plays a tune that wakes sleeping blockers (Emerald's Poké Flute)<br>**III** the raven |
 | **Ares** | No item: a fight. "Offer a battle" at his trophy and a daily war-acolyte, levelled to your party, battles you. | **War-lust.** Wild Pokémon 5+ levels below your lead don't appear; wild levels +2; EXP +10%. | **I** Bulk Up<br>**II** **War Horn**: the expansion's VS Seeker, to rematch beaten trainers<br>**III** the war-dogs |
 | **Poseidon** | Sea gifts (Pearl, Big Pearl, Shoal Salt, Shoal Shell, Heart Scale) / Wine, Barley Cake (sailors' barley) | **Calm Seas.** Every cast gets a bite at once; surfing encounters −50%; the rods' rare slots ×2. | **I** Scald<br>**II** **Triton's Conch**: calms whirlpools<br>**III** the hippocampus |
 | **Athena** | Olive Oil / Frankincense, Honey | **Owl's Eye.** The Augur's Eye finds hidden Pokémon twice as often (+10% hidden-ability chance); escape from wild battles always succeeds. | **I** Calm Mind<br>**II** **Athena's Stylus**: the Scroll of Deeds shows a hint for every open quest<br>**III** the owl |
 | **Hera** | Pomeg Berry (the pomegranate) / Pretty Feather (the peacock), Honey | **Queen's Care.** Eggs hatch twice as fast; the day care finds eggs twice as often. | **I** Protect<br>**II** **Eyes of Argus**: the Augur's Eye detector runs constantly and shows shiny sparkles from 8 tiles<br>**III** the white cow of Argos |
-| **Zeus** | Wine (the first libation of every feast) / Frankincense, Honey; also +3 Favor per completed xenia link (§10) | **Thunderhead.** +1 shiny reroll, as a Lure gives; Electric and Flying types ×2. | **I** Thunderbolt<br>**II** **Acorn of Dodona**: the Shiny Charm<br>**III** the thunder-eagle (Zapdos, PITCH §4) |
+| **Zeus** | Wine (the first libation of every feast) / Frankincense, Honey; also +3 Favor per completed xenia link (§10) | **Thunderhead.** +1 shiny reroll, as a Lure gives; Electric and Flying types ×2. | **I** Thunderbolt<br>**II** **Acorn of Dodona**: the Shiny Charm<br>**III** the oak-dove of Dodona, whose doves gave Zeus's oracles. The thunder-eagle is now the Archon's ace (STORY §2). |
 | **Hecate** | Barley Cake (her crossroads supper) / Honey, sea gifts | **Crossroads.** Torch radius one level larger; at night, Ghost, Dark and Psychic types ×2. | **I** Hex<br>**II** **Three-Flamed Torch**<br>**III** her polecat |
 | **Hades** (post-game) | A Bronze Obol / Pomeg Berry (Persephone's fruit) | **Wealth Below.** Dig spots and smashed rocks give two items; coins sell for +50%. | **I** Shadow Ball<br>**II** **Helm of Hades**<br>**III** the black horse |
 
@@ -805,8 +807,24 @@ LYSIMACHOS: I keep those on top.
 There are 8 lead tablets, the kind pilgrims scratched questions on at Dodona. They are fixed finds in Acts II–III.
 
 - Alethea "reads" each one. Under the visible prophecy lies an older one, scraped away and written over in a neat hand with a little hook on every sign-off. That is Iapetos.
-- They are **optional** evidence. The main proof is the draft in the Labyrinth's archive (LABYRINTH.md).
-- With all 8, Alethea shows Kleon the pattern at Lakonia, and gets one extra scene line.
+- Each tablet is a small story of one person Iapetos used.
+- **They are optional.** The main-path proof is the Knossa archive: Kleon's draft and Elpis's sealed tablet (LABYRINTH.md scene H).
+
+The eight are STORY §4's table:
+
+| # | Whose | The forgery | The original, as Alethea reads it | Where it lands |
+|---|---|---|---|---|
+| 1 | A quarryman of Emporion | "The quarry closes. You'll starve." | "The quarry closes. You'll find other work." | Petros's father. The first grunts were hired off this lie. |
+| 2 | The harbor-master of Emporion | "Close the port to the Archon's ships." | "Keep the port open." | The archive's "Revised." line (LABYRINTH scene H) |
+| 3 | A soldier of Thyrsa | "You'll die in the next war." | "You'll come home from the next war." | A Titanborn grunt type (STORY §5) |
+| 4 | A bride of Eleusa | "Your husband will leave you." | "Your husband will be late." | A comic one |
+| 5 | Kallisto of Arkadia | "Show no mercy at the new moon." | "Show mercy at the new moon." | Kleon's loss |
+| 6 | A farmer of Kalliste | "Your olives will fail." | "Your olives will come in silver." | The slice's silver olives |
+| 7 | **Hyperion** | "You'll end your days in the dark." | "You'll end your days in the dark, and be glad of it." | His epilogue. With this one found, Alethea reads it to him at Talos's forge. |
+| 8 | **A widow of Lakonia** | "Your last child will die young." | "Your last child will be glorious young." | Rhea's. **Not a forgery** but her own misreading: the lead is unchanged, and only her fear changed the words. Alethea: "Nobody scraped this one. She just read it wrong." |
+
+- **With all 8,** Alethea gets an extra line at Lakonia and reads the full pattern at the trial (STORY L-2), and the vote becomes unanimous.
+- **Placement** follows the dig-spot rules above. Each tablet lies near the person it concerns: tablet 6 on Kalliste, tablet 8 in Lakonia, and so on.
 
 ### Engine
 
@@ -983,7 +1001,7 @@ DAPHNE: You're not in the sky yet. Neither am I.
 | 13 | Cancer | Hera's crab | Hera Favor 30 |
 | 14 | Aries | The Golden Fleece | The Mega Ampharos quest (PITCH §4) |
 | 15 | Gemini | The Dioskouroi | The Latias and Latios quest (PITCH §4) |
-| 16 | Aquila | Zeus's eagle | Zeus gift III |
+| 16 | Aquila | Zeus's eagle | You beat the Archon, whose ace is the thunder-eagle (STORY §2) |
 | 17 | Ophiuchus | Asclepius, the healer Zeus struck down for cheating death | The climax's resolution (Phaedon and Elpis) |
 | 18 | Leo | The Nemean Lion | Labor 1 |
 | 19 | Hydra | The Hydra | Labor 2 |
@@ -1057,7 +1075,8 @@ The player's room has a knucklebones set: "Record against Mom: 0 wins, 212 losse
 | Cautious | Rethrows only 1s |
 | Bold | Chases Aphrodite whenever it holds three different sides |
 | Silenos | His bones are loaded (6 comes up 30% of the time). Call "Loaded!" after two straight throws with two 6s each, and you win the match. |
-| **Mom** | House rules: she gets **two** rethrows. A simulation of 40,000 best-of-5 matches, with sensible play on both sides, gives you about a **36%** chance per match (50% between equals). |
+| **Mom, until Delphoi** | House rules: she gets **two** rethrows. And her throws lean lucky, because her bee, Melisseer, hums the throws before they land (STORY §2). Her faces come up 5/30/30/35 instead of 10/40/40/10. In a simulation of 40,000 best-of-5 matches with sensible play on both sides, you win about **5.5%** of matches. That is why she is 212–0. |
+| **Mom, after Delphoi** | Fair bones and one rethrow, like anyone, so about **50%**. At her first game after Delphoi: "I gave the bee the day off." |
 
 **Taverns and prizes.**
 - There are 6 taverns: Emporion, Thyrsa, Astyra, Kaldera, Amnisos and Lakonia. Each has two regulars and a champion.
@@ -1065,8 +1084,10 @@ The player's room has a knucklebones set: "Record against Mom: 0 wins, 212 losse
 - **No money wagers.** It stays a friendly game.
 
 **Mom.**
-- She plays at home any time after the slice. The 2F text shows the live record: "Record against Mom: {wins} wins, {losses} losses."
-- Your first win:
+- She plays at home after the slice, except while she is gone. She leaves the night before the helmets come, at Act II's low point in Kaldera (STORY II-14), and doesn't come back until Delphoi (STORY III-7).
+- The 2F text shows the live record: "Record against Mom: {wins} wins, {losses} losses."
+- **The confession.** At the Kastalian spring she admits it: "The knucklebones. I cheated. The bee hums the throws. All two hundred and twelve." (STORY §7.5). From then on she plays fair.
+- **Your first win,** whenever it comes:
   ```text
   MOM: …Well.
 
@@ -1077,10 +1098,15 @@ The player's room has a knucklebones set: "Record against Mom: 0 wins, 212 losse
   MOM: She never told me how. I suspect cheating.
   ```
 - She gives the **Aphrodite Bone**, a key item that grants one extra rethrow per match.
+- A win before Delphoi is rare but possible: a 1-in-18 match against a bee. It plays the same lines. The bee sulks.
 
 ### Engine
 
-- **1.0 is a script version.** `random` weighted 10/40/40/10, a `dynmultichoice` with four bone toggles plus THROW, and a small text window that draws the faces. **Low.**
+- **1.0 is a script version.**
+  - `random` weighted 10/40/40/10, or 5/30/30/35 for Mom before `FLAG_ICHOR_MOM_CONFESSED`.
+  - A `dynmultichoice` with four bone toggles plus THROW.
+  - A small text window that draws the faces.
+  - **Low.**
 - **Stretch:** a little C screen with four bone sprites that tumble. **Medium.**
 
 ### Cost
@@ -1092,6 +1118,7 @@ The player's room has a knucklebones set: "Record against Mom: 0 wins, 212 losse
 
 - `IchorSave.momWins` and `.momLosses`. `momLosses` starts at **212** in a new game.
 - 6 champion flags.
+- `FLAG_ICHOR_MOM_CONFESSED`, set at the Kastalian spring (STORY III-7). It ends the bee's help.
 
 ---
 
@@ -1410,8 +1437,10 @@ MOM: In, in, before you drown. {PLAYER}, the stools.
 
 MOM: There's bread. There's… hm. There's honey.
 ```
-[She takes down the jar labelled NOT FOR {PLAYER}.]
+[She takes down the new jar, labelled NOT FOR {PLAYER} again. She gave the old one away at Delphoi (STORY §7.5).]
 ```text
+MOM: Habit.
+
 MOM: Don't look at me like that. They're guests.
 ```
 [The player pours wine for the guests. The jug stays full.]
@@ -1444,7 +1473,9 @@ ZEUS: And this one runs like my games did.
 
 {PLAYER} received a Scorbunny from Zeus!
 ```
-From then on, Mom's honey jar never empties. She gives you one Honey a day.
+From then on, Mom's new honey jar never empties. She gives you one Honey a day.
+
+STORY §4 reads Zeus's line in hindsight: feeding strangers before asking their names is Mom's habit, and the reason the hero is alive.
 
 #### Engine
 

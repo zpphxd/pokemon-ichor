@@ -73,7 +73,7 @@ The Labyrinth is set up from the first hour. Every seed below is one or two line
 | 14 | Act III | The festival calendar | The Pyanopsia, if the player meets it (SYSTEMS §7) | SAILOR: "When the crew came home from Knossa they'd only beans left."<br>SAILOR: "Boiled 'em all in one pot. So now we do too." | Flavor. The festival remembered Theseus's return from Crete. |
 | 15 | Anywhere | Dig spots | The Theseus amphora's sherds, found on Knossa (SYSTEMS §5) | ARIADNE, reading it: "That's not how it went." | Endless Labyrinth |
 | 16 | Act III | Knossa, the Bronze Heel | A colossal bronze foot on the beach | ALETHEA: "One vein, neck to heel, stoppered with a bronze nail."<br>ALETHEA: "They said ichor ran in it. The gods' blood."<br>ALETHEA: "Or a very good grease. Truthfully, nobody checked." | Talos the bronze giant guarded Crete, and his one vein ran with ichor: the game's own title. Lore only. |
-| 17 | Act II–III | Daedalus's workshop (seed) | The workshop's music box plays a ticking tune | — | The Frozen Hour's "ticking music box" (PITCH §7) is the same tune. Daedalus built it. |
+| 17 | Act II–III | Daedalus's workshop, and Elpis's room in Astyra | The workshop's bronze music box ticks out a lullaby. It is Daedalus's prototype of the box he built for Elpis, which sits on her shelf labelled "From Papa's friend under the island" (STORY §2). | Object text in the workshop: "A little bronze music box. Its tune never quite reaches the end."<br>DAEDALUS, if asked: "The first one I made. I made a better one for a friend's little girl." | **One melody, Elpis's lullaby,** is the workshop box, Phaedon's theme and the Frozen Hour's tick (§9 music; STORY §8.3). In the Frozen Hour, Elpis's box is the one spring still running. |
 | 18 | Post-Labyrinth | The workshop | All 7 pages returned: the confession | See scene L | Talos and Daedalus reconcile in the post-game |
 
 ### Daedalus's seven pages
@@ -251,6 +251,7 @@ The road runs 30×50, five screens, from Amnisos down to the palace. These are t
 - It moves the bull object one tile at a time with fast walk actions, measures the A press against the bull's tile, and returns `VAR_RESULT` (0 early, 1 clean, 2 late).
 - The vault is the two-tile ledge jump (`jump_2`) with the player turning through four facings mid-air, a cheap somersault.
 - **Low–Medium.**
+- **The same special is reused on the Stair of Hours,** where the player seizes **the Moment** by its forelock as it crosses a painted line, and time starts again (STORY §2 and III-11). The bull-leap is where the player learns that timing. Build it generic: a moving object, a line and a window.
 
 ---
 
@@ -665,7 +666,7 @@ The ring is **pitch dark**, so the torch radius matters, and web curtains (Ariad
    - Page III shows the trail outright. This is the Demeter trial's verb, used for real.
 
 **Daedalus's workshop** is the hub: lit, quiet, and full of automata.
-- **It holds:** a heal bed, the Pithos, the Icarus Shaft (grated shut) and a music box that ticks (seed 17).
+- **It holds:** a heal bed, the Pithos, the Icarus Shaft (grated shut), and the ticking bronze music box that is the prototype of Elpis's (seed 17).
 - **Scene D** plays here: the Wings, the confession and the **Labrys**.
 - **Number Nine** is here if you untied it in Emporion (seed 4).
 
@@ -762,7 +763,7 @@ The map is a rectangular corridor loop around solid rock:
 
 **Day and night.**
 - **By day** the skylight pools are sunlit, and he sees 7 tiles in them.
-- **By night** they are moonlit, and he sees 5. But he walks his loop a quarter faster, and the rare Paldean Tauros (his kin) appear in the grass.
+- **By night** they are moonlit, and he sees 5. But he walks his loop a quarter faster.
 
 - **Trainers:** none, apart from Kleon's scene. Even the Titans keep out.
 - **Niches** are not dead ends. They are refuges off Asterion's line, and their pay is safety. Three of the eight also hold items.
@@ -773,7 +774,7 @@ The map is a rectangular corridor loop around solid rock:
   - the bell alcove: the bell itself (Page V);
   - the fresco niche: the dance's steps 4–6 (rosette, wave, lily).
 - **A landmark on every screen** of the loop: a skylight pool, a niche shrine, a fallen statue or a fresco.
-- **Wild:** Noibat, Lampent, Dunsparce, Hisuian Sneasel, and at night a rare Paldean Tauros.
+- **Wild:** Noibat, Lampent, Dunsparce and Hisuian Sneasel. Asterion is Asterlorn, and only one exists, so the ring has no wild bulls.
 
 ### Ring VI: the Forge (Hephaestus, automata and gears)
 
@@ -795,7 +796,9 @@ This is the heart of Team Titan's headquarters.
 - If one sees you, it rings an alarm, and a Titanborn from the barracks pool runs in and battles you.
 - The pool has 4 grunts. After that, the alarms just ring: "Nobody's left to answer the bell."
 
-1. **The archive** (scene H). Shelves of revised prophecies, and **Iapetos's draft of Kleon's**. You take the wax tablet.
+1. **The archive** (scene H). Shelves of revised prophecies.
+   - You take **Iapetos's draft of Kleon's** prophecy.
+   - You also take **Elpis's sealed tablet**, "ELPIS, DAUGHTER OF PHAEDON. Revised." Lakonia and the Frozen Hour depend on it (STORY III-3, III-5, III-10).
 2. **The vault:** Gold Stater ×3, a Comet Shard, an Ichor Stone and a Max Revive.
 3. **The forge** (scene G). The Gigas guard it:
    - **Mimas** is mandatory, at the forge door (Lv 49).
@@ -890,25 +893,32 @@ These are draft lines in the CLAUDE.md voice: short, so they fit the Gen 3 box (
   - **His fall:** he helped Kronos. He made the collar that binds the Harpe, and timed the hour to finish it by the stars, because a grieving father told him no father would ever bury a child again.
   - **His turn:** watching the Titans drive Asterion through his halls with fire. He gives you the Labrys.
   - **Payoff:** watching you fly the Icarus Shaft and land. With all seven pages, he confesses about Perdix. In the post-game, Talos visits.
+  - **Elpis's music box.** He also built it. His workshop's box is the prototype, so its tune is hers (STORY §2; seed 17).
   - **Voice:** precise, wry, then suddenly unguarded.
-- **Asterion** is a Pokémon. He never speaks.
+- **Asterion** is a Pokémon, **Asterlorn** (Aethos dex #98, Fighting/Dark). Only one exists. He never speaks.
   - **His arc is behavior:** a terror in Ring II, a tool in Ring V, freed at the heart, an ally in the escape.
   - **Myth:** Pausanias says the Minotaur's name was Asterion. His mother named him before everyone decided what he was. That is the theme: nobody is fated to be what they're made into.
-  - **Post-game:** Ariadne's ace, then possibly your partner (§10).
+  - **After the raid,** he is catchable (the dex team's ruling); §10 says how.
+  - **The resolution:** Elpis asks you "Is he still sad?" (STORY III-12).
 - **Phaedon / Kronos** is the healer at Astyra's Asclepeion.
-  - **His daughter Elpis** is fated to die young. He has heard it from the Oracle and from every healer, and read it in her himself.
+  - **His daughter Elpis** is fated, he believes, to die young. He has heard it from the Oracle and from every healer, and read it in her himself.
+    - **What he doesn't know:** her oracle was forged by Iapetos. The true one says her thread ends "the day the hours stop" (STORY §2).
+    - At Knossa he refuses to read the sealed tablet. He reads it only in the Frozen Hour.
   - **His motive:** he means to stop the Loom so that no thread is cut.
   - **His tell:** he calls the bull "Starry", after Elpis's toy.
   - **His reveal is a choice.** He takes off the mask himself, because he wants your help at the Loom and would rather ask with his own face.
+  - **Daphne's book** on the Harpe was his map. She sent it to him herself, to help a friend with a sick child.
   - **Voice:** gentle, tired, utterly reasonable. That is why it's frightening.
 - **Kleon** is the rival.
   - **His fall:** Iapetos's forged prophecy (Act II) says he'll slay the starry bull, so he hunts Asterion loudly and gets flattened.
   - **At the heart,** he tries to kill the freed bull, and you stop him.
   - **The tablet** in Iapetos's hand sends him storming off to Lakonia (PITCH Act III step 3).
 - **Hyperion** is the Titan of light, brash, and the forge's boss. "Roast" is his word (the slice's grunts fear it).
-- **Rhea** is the mother "who lost her children to prophecy" (PITCH).
-  - She holds Asterion's chain. When ordered to seal the house with you inside, she leaves the threshold open.
-  - In myth, Rhea saved her last child from Kronos in a Cretan cave. Here, on Crete, she makes the same choice again.
+- **Rhea** (really Lampito, a Lakonian woman) is **Kleon's mother.** He doesn't know until Lakonia (STORY §2).
+  - She buried two children to prophecy. Her son is the third, and Iapetos pointed him at the monster she holds on a chain.
+  - She holds Asterion's chain. When her son bursts in to kill the bull, and she is ordered to seal the house with everyone inside, she looks at Kleon for a long time, then leaves the threshold open.
+  - "Someone else's" is as close as she can come to saying *mine*.
+  - In myth, Rhea saved her last child from Kronos in a Cretan cave. Here, on Crete, she does it again.
   - It is the first crack in Team Titan (decision L5).
 - **Alethea** stays above ground. She reads the Bronze Heel, the frescoes and the prophecy fragments, and meets you after the escape. Her tic is "Truthfully, …".
 
@@ -1133,7 +1143,16 @@ Then, in fresh wax: “Kleon of Lakonia shall slay the starry bull…
 In the margin: “Better. He'll run straight at it.” A little hook for a signature.
 
 {PLAYER} took the wax tablet.
+
+On the bottom shelf, one tablet is sealed shut with a blob of wax.
+
+“ELPIS, DAUGHTER OF PHAEDON. Revised.”
+
+The seal is pressed with a little hook.
+
+{PLAYER} took the sealed tablet.
 ```
+[Main path: taking the sealed tablet is automatic, so Lakonia and the Frozen Hour can count on it (STORY §7.4).]
 
 ### Scene I. Ring VII: Ariadne joins
 
@@ -1256,6 +1275,10 @@ PHAEDON: So I'll stop the Loom. No more cutting. Not hers. Not anyone's.
 
 PHAEDON: Daedalus understood. He buried a son.
 
+PHAEDON: Daphne's book told me where the pieces lay. She sent it to me herself.
+
+PHAEDON: She thought she was helping a friend with a sick child. She was.
+
 PHAEDON: You have no thread. You're the only one who can carry this.
 
 PHAEDON: At the Loom I'll ask you to. You'll say no.
@@ -1274,10 +1297,24 @@ PHAEDON: …No. You don't mean it yet. Your thread's your own, remember?
 > NO:
 PHAEDON: Of course not. I said no too, the first time I asked myself.
 ```
+?? Show Phaedon the sealed tablet? YES/NO
+```text
+> YES:
+PHAEDON: Iapetos said you'd bring me something. A tablet.
+
+PHAEDON: He said Daphne's girl would forge one. To stop me.
+
+PHAEDON: I'm not going to read it. I'm sorry. I can't afford to.
+
+> NO:
+PHAEDON: Whatever's in your bag, keep it. I've made up my mind.
+```
 ```text
 PHAEDON: Rhea. Turn the house.
 ```
-[Phaedon goes up a hidden stair with the case. The stair seals behind him. Rhea stands at the great lever, looking at Ariadne with her brother's head in her lap.]
+[Phaedon goes up a hidden stair with the case. The stair seals behind him.]
+
+[Rhea stands at the great lever. She looks at Kleon for a long time. Then at Ariadne, with her brother's head in her lap.]
 ```text
 RHEA: I'm ordered to seal the threshold. Every door. Everyone inside.
 
@@ -1373,7 +1410,9 @@ DAEDALUS: Take this to him. Tell him it was always his.
 
 ### Wild Pokémon
 
-The levels are targets for Balance. The species are placeholders.
+The levels are targets for Balance.
+- **The species are placeholders.** Under dex decision D5 (a), only Aethos species appear before the League, so the dex team recasts every species named in this section, as STORY §2 has already done for Kleon and Hyperion (below).
+- **Asterion is the only Asterlorn,** so no table has wild bulls of his kind.
 
 | Map | Levels | Day | Night only |
 |---|---|---|---|
@@ -1382,7 +1421,7 @@ The levels are targets for Balance. The species are placeholders.
 | Ring II | 44–46 | Woobat, Dunsparce, Golbat, Tauros (rare) | Clefairy (Moon Room) |
 | Ring III | 45–47 | Spinarak and Ariados, Sableye, Litwick and Lampent, Noibat, Golett (rare) | — |
 | Ring IV | 45–47 | Roggenrola and Boldore (side tunnels only) | — |
-| Ring V | 46–48 | Noibat, Lampent, Dunsparce, Hisuian Sneasel | Paldean Tauros (rare) |
+| Ring V | 46–48 | Noibat, Lampent, Dunsparce, Hisuian Sneasel | — |
 | Ring VI | 46–48 | Rolycoly and Carkol, Honedge, Bronzong, Klefki, Magcargo | — |
 | Ring VII | 47–49 | Minior, Lunatone and Solrock, Sigilyph | Clefairy |
 
@@ -1401,10 +1440,10 @@ The levels are targets for Balance. The species are placeholders.
 | Lithos, Koniortos, Sideros, Chalkos, Pelos | Ring IV, Ring VI alarms | 46–48 | Rock, Ground and Steel. Team Titan is earth-born (PITCH §3). |
 | Gigas Enkelados | Ring IV checkpoint, or Ring VII | 49 | Golurk, Rhyperior |
 | Gigas Mimas, Alkyoneus | Ring VI forge door | 49–50 | Gigalith, Steelix |
-| **Hyperion** | Ring VI forge | 50–53 | Fire/Rock, the Titan of light: Solrock 50, Magcargo 50, Coalossal 51, Rhyperior 51, Camerupt 53. On Spartan, add Torkoal 52. **No Apotheosis:** a Titan admin doesn't get the player's gimmick. |
+| **Hyperion** | Ring VI forge | 50–53 | Light and fire around a buried giant: his ace is the thing he fears (STORY §2). Taurivet 50, Laolith 50, Pyrapod 51, Hymnaria 51, **Gigantomb 53** (ace: the giant buried under an island, breathing smoke). **No Apotheosis:** a Titan admin doesn't get the player's gimmick. |
 | Gigas Porphyrion (with Enkelados) | Ring VII, a double battle | 49–50 | As above |
 | Ariadne (your partner) | Ring VII | 49–50 | Vespiquen (the Mistress of bees), Hisuian Lilligant (lilies), Arbok (the snake goddess) |
-| **Kleon** | The Starry Chamber | 51–54 | His starter's final stage (the one that beats yours) 54, Kingambit 51, Lucario 52, Staraptor 51, Gallade 52 |
+| **Kleon** | The Starry Chamber | 51–54 | As STORY §2 casts him: his starter's final stage (the one that beats yours) 54, Hoplektor 52, Dorydrake 52, Nemeleon 51, Laolith 51 |
 
 ### Rewards
 
@@ -1416,7 +1455,7 @@ The levels are targets for Balance. The species are placeholders.
 | Ring III | TM Poltergeist, Max Ether, Rare Bone, Star Piece. **The Labrys.** |
 | Ring IV | Max Revive, Hyper Potion |
 | Ring V | Revive, Max Elixir, Silver Owl, Gold Stater, TM Megahorn, Star Piece. **The Helm of Darkness.** |
-| Ring VI | TM Iron Head, Hyper Potion ×2. The vault: Gold Stater ×3, Comet Shard, Ichor Stone, Max Revive. |
+| Ring VI | TM Iron Head, Hyper Potion ×2. The vault: Gold Stater ×3, Comet Shard, Ichor Stone, Max Revive. The archive: Kleon's draft and **Elpis's sealed tablet** (story items). |
 | Hyperion | Prize money and TM Flare Blitz |
 | The heart | Taurus and Corona Borealis (SYSTEMS §8); Artemis, Aphrodite and Hestia Favor +5 each |
 | All 7 pages | **Daedalus's Compass**, a key item: the region map marks every uncollected item, dig spot and page on maps you've visited. The **Hall of Failures** opens in the workshop: Daedalus's prototypes, with cosmetic trainer-card stamps and a rematch with the automata. |
@@ -1434,14 +1473,23 @@ The levels are targets for Balance. The species are placeholders.
 | Asterion near | Rings II and V | The same tune with the drums removed: a low aulos drone and a heartbeat drum. In 1.0, switch tracks when he's within 6 tiles. A tempo that tracks distance is a stretch goal. |
 | Charge | Sting | Two bars |
 | Titan wing | Rings IV and VI | A variant of the existing `mus_ichor_titan` |
-| Daedalus's workshop | Hub | **A ticking music box.** The same tune returns, slowed, in the Frozen Hour. |
+| Daedalus's workshop | Hub | **Elpis's lullaby**, played by the ticking prototype music box (see the note below the table) |
 | Minos's tomb | Room | Near-silence; one low string |
 | Hyperion | Battle | The Titan admin theme (INVENTORY §8 lists it as needed) |
 | The dancing floor | Puzzle | Each step plays its note. Solved, the full motif plays with harmony. |
 | The Starry Chamber | Scene | High harmonics and the star-clock's tick |
-| **Phaedon's theme** | The unmasking | A Dorian lullaby, **the one Elpis hums in Astyra** (a new seed), now in minor |
+| **Phaedon's theme** | The unmasking | **Elpis's lullaby,** in minor |
 | The Turning | Escape | The Labyrinth motif, doubled in speed, 7/8 |
 | The Icarus Shaft | Dawn | The main Ichor theme in Lydian, rising |
+
+**One melody: Elpis's lullaby** (STORY §8.3). The workshop's ticking music box, Phaedon's theme and the Frozen Hour's music box are the same tune, a Dorian lullaby that never quite reaches its last bar.
+- **Daedalus built Elpis's box,** and the workshop's box is his prototype.
+- **The music team writes it once,** with three arrangements:
+  - the workshop: a bare music box with its tick;
+  - the unmasking: in minor, under Phaedon's speech;
+  - the Frozen Hour: the box alone, still running when nothing else moves.
+- **The last bar sounds for the first time** when Elpis finishes her song at the resolution (STORY III-12).
+- **The player hears it first** in Elpis's room in Astyra (Act II), then in the workshop, so the unmasking's theme lands as something already known.
 
 ---
 
@@ -1469,8 +1517,8 @@ After the story, the house keeps turning. "Daedalus says it's healthier." Ariadn
 | Change | Detail |
 |---|---|
 | The 16 chunks | Redrawn as Labyrinth corridors, with the frescoes, braziers and pools as décor. The new tileset must keep the Pyramid's exit and floor metatile constants, because the layout code swaps exits for floor by id. |
-| **The Brain** | **Ariadne,** "the Mistress of the Labyrinth", at the top of round 3 (the silver **Thread Symbol**) and round 10 (the gold). Her ace is **Asterion**, with a unique set: Raging Bull, Close Combat, Head Smash and Bulk Up; Intimidate, or Anger Point at gold. |
-| Asterion as the Brain? | The brief suggested making Asterion himself the Brain. A Pokémon can't run a facility or talk to you, so this proposal makes Ariadne the Brain and Asterion her partner, which keeps the pair together (decision L3). |
+| **The Brain** | **Ariadne,** "the Mistress of the Labyrinth", at the top of round 3 (the silver **Thread Symbol**) and round 10 (the gold). Her team is her own, cast by the dex team: the snake goddess's serpent, the Mistress's bee, the lily. |
+| Asterion's place | A Pokémon can't run a facility or talk to you, so Ariadne is the Brain (decision L3). Asterion, the only Asterlorn, is the player's to catch after the raid (below), so he isn't her ace. If he's in your party at the gold battle: ARIADNE: "You brought him. Good. He gets bored down here." |
 | **Bull floors** (stretch) | Every 7th floor has no trainers, but a young bull of the herd patrols, using §5.3's rules. Reach the exit unseen for a bonus prize. It needs the full Asterion AI. |
 | Rewards | Olympiad points; at gold, the "Thread" stamp on the trainer card |
 
@@ -1478,9 +1526,17 @@ After the story, the house keeps turning. "Daedalus says it's healthier." Ariadn
 
 ### Asterion's return
 
-1. **After the Labyrinth,** he lives in the palace court. Bull-leaping with him widens the window by 2 frames ("he's helping") and doubles the prizes.
-2. **Labor 7, the Cretan Bull** (PITCH §6.1). Asterion's sire is the white bull from the sea. Asterion leads you to him, and calms him when you can't.
-3. **After Ariadne's gold symbol,** Asterion follows you to the Throne Room door and won't leave. Ariadne laughs: "Take him. He's decided." He joins you at Lv 60 with his signature set, OT Ariadne (decision L4).
+The dex team settled this on 2026-11-14: Asterion is **Asterlorn** (Aethos dex #98, Fighting/Dark), only one exists, and he is catchable after the raid. That supersedes L4.
+
+1. **The morning after the raid,** after the Icarus Shaft, he waits in the palace court beside Ariadne.
+   - Talk to him and he lowers his head to you. Offer a ball and he steps into it.
+   - This is a catch that can't fail, at Lv 50, with the moves the dex gives him. The Taurus constellation is already placed.
+   ```text
+   ARIADNE: He's decided. Don't look at me. He's never once asked me first.
+   ```
+2. **If you don't take him,** he stays in the court. Bull-leaping with him widens the window by 2 frames ("he's helping") and doubles the prizes. You can still catch him whenever you come back.
+3. **Labor 7, the Cretan Bull.** Asterion's sire is the white bull from the sea, and Asterion leads you to him and calms him. `LABORS.md` builds this.
+4. **Elpis meets him** in the post-game: Phaedon can't travel, so you bring her to Knossa (STORY §2). That is the answer to her "Is he still sad?"
 
 ### Hooks for the post-game docs
 
@@ -1643,7 +1699,7 @@ The 14 cues in §9, about 10 new tracks.
 | Relics | `GOT_THREAD`, `GOT_LABRYS`, `GOT_HELM` |
 | Shortcuts and gates | `DAEDALUS_LIFT`, `SUNKEN_FLOOR_POCKET`, `BULL_ROAD_VAULT`, `IDA_GATE` |
 | Pages and rewards | `DAEDALUS_PAGE_1` … `_7`, `MASTER_PLAN`, `GOT_COMPASS` |
-| Story | `ARRIVED_KNOSSA`, `MET_ARIADNE`, `FIRST_LEAP`, `MET_DAEDALUS`, `NUMBER_NINE_UNTIED`, `NUMBER_NINE_FOUND`, `KLEON_HUMBLED`, `ARCHIVE_TABLET`, `SHOWED_KLEON_TABLET`, `ARIADNE_JOINED`, `DANCE_DONE`, `ASTERION_FREED`, `PHAEDON_UNMASKED`, `RHEA_MERCY`, `TURNING_DONE`, `ICARUS_FLIGHT` |
+| Story | `ARRIVED_KNOSSA`, `MET_ARIADNE`, `FIRST_LEAP`, `MET_DAEDALUS`, `NUMBER_NINE_UNTIED`, `NUMBER_NINE_FOUND`, `KLEON_HUMBLED`, `ARCHIVE_TABLET`, `GOT_ELPIS_TABLET`, `SHOWED_PHAEDON_TABLET`, `SHOWED_KLEON_TABLET`, `ARIADNE_JOINED`, `DANCE_DONE`, `ASTERION_FREED`, `PHAEDON_UNMASKED`, `RHEA_MERCY`, `TURNING_DONE`, `ICARUS_FLIGHT`, `CAUGHT_ASTERION` |
 | Disguise and bell | `TITAN_DISGUISE`, `DISGUISE_ON`, `ENKELADOS_PASSED`, `BELL_KNOWN` |
 | Ring gates | `RING1_GATE` … `RING7_FLOOR` (7) |
 | Vaults | `VAULT_RING6`, and `MINOAN_VAULT_1` … `_5` (stretch) |
@@ -1657,12 +1713,14 @@ Trainer-defeated flags are automatic.
 ## 14. Proposed changes to PITCH.md, and to SCRIPT.md
 
 1. **§2 Act III step 2.** Expand it:
-   > **Knossa.** Ariadne gives you her thread. You descend Daedalus's seven-ringed Labyrinth, where Team Titan has its headquarters, and meet Daedalus, who helped Kronos time the Harpe's forging and now gives you the Labrys. You win the Helm of Darkness from King Minos's tomb, beat Hyperion at the forge and find Iapetos's draft of Kleon's prophecy. At the heart, Kronos completes the Harpe under Daedalus's stars. You free the Minotaur, Asterion, instead of fighting him, and stop Kleon from killing him. Kronos removes his mask: he is Phaedon, and he asks you to carry the Harpe at the Loom. Rhea turns the house to trap you, but leaves the threshold open. You escape along your own thread.
+   > **Knossa.** Ariadne gives you her thread. You descend Daedalus's seven-ringed Labyrinth, where Team Titan has its headquarters, and meet Daedalus, who helped Kronos time the Harpe's forging and now gives you the Labrys. You win the Helm of Darkness from King Minos's tomb, beat Hyperion at the forge, and find Iapetos's draft of Kleon's prophecy and Elpis's sealed, "revised" tablet. At the heart, Kronos completes the Harpe under Daedalus's stars. You free the Minotaur, Asterion, instead of fighting him, and stop Kleon from killing him. Kronos removes his mask: he is Phaedon, and he asks you to carry the Harpe at the Loom. He will not read Elpis's tablet. Rhea, Kleon's mother, turns the house to trap you, but after a long look at her son she leaves the threshold open. You escape along your own thread.
+
+   PITCH has since been updated to the approved STORY.md; this wording is offered for its Knossa step.
 2. **§2 Act II step 2.** Iapetos's forged prophecy for Kleon reads: "Kleon of Lakonia shall slay the starry bull beneath the house of the double axe, and his glory shall never die."
 3. **§2 Act II step 3.**
    - Phaedon is the nurse of Astyra's Asclepeion, who heals your Pokémon.
    - Elpis owns a clay bull she calls Starry.
-   - Phaedon's theme is the lullaby Elpis hums.
+   - One melody, Elpis's lullaby, is her music box (built by Daedalus), the workshop's prototype box, Phaedon's theme and the Frozen Hour's tick (STORY §8.3).
 4. **§2, the cast.**
    - Add **Daedalus**: the maker beneath Knossa, haunted by Icarus and by his apprentice.
    - Add **Ariadne**: priestess of the Mistress of the Labyrinth, Asterion's half-sister, and later the Endless Labyrinth's Brain.
@@ -1670,9 +1728,9 @@ Trainer-defeated flags are automatic.
    - Note **Minos**, Knossa's dead king and judge of the dead, as a tomb now and a post-game judge.
 5. **§2, Rhea.** At Knossa she disobeys Kronos and leaves the threshold open: the first crack in Team Titan (L5).
 6. **§3, Talos.** Talos the Bronzesmith was Daedalus's apprentice, called Perdix as a boy. He keeps Daedalus's Wings and gives them to you at Laurel 6 (L2).
-7. **§4, the myth table.** The Minotaur row becomes "Asterion (the Minotaur); species with the dex (placeholder: Paldean Tauros)".
-8. **§6.1, Labor 7, the Cretan Bull.** He is Asterion's sire, and Asterion helps. Asterion may join you after the Endless Labyrinth's gold symbol (L4).
-9. **§6.3, the Olympiad.** Add **the Endless Labyrinth** at Knossa, built on the Battle Pyramid engine, with **Ariadne** as its Brain and Asterion as her ace (L3).
+7. **§4, the myth table.** The Minotaur row becomes "Asterion (the Minotaur): Asterlorn, dex #98, the only one, catchable after the raid". This was settled with the dex team.
+8. **§6.1, Labor 7, the Cretan Bull.** He is Asterion's sire, and Asterion helps (`LABORS.md`).
+9. **§6.3, the Olympiad.** Add **the Endless Labyrinth** at Knossa, built on the Battle Pyramid engine, with **Ariadne** as its Brain (L3).
 10. **§7, biomes.** The Labyrinth gets the Minoan look list from §3 and §11.
 11. **SCRIPT.md beat 5** (the slice, which the Narrative team owns). The Titan tablet gains a last legible line, "Last, the house of the double axe," and Alethea answers: "That's not a riddle. That's just rude." It is two boxes, and optional (L8).
 
@@ -1686,8 +1744,8 @@ These are the Labyrinth's. SYSTEMS.md has D1–D7.
 
 - **L1. Daedalus's complicity.** Daedalus made the Harpe's collar and timed its hour for Kronos, out of sympathy for a grieving father, then repents. The alternative is that Daedalus is purely a victim.
 - **L2. Talos was Perdix.** Talos is Daedalus's estranged apprentice, called Perdix as a boy, and the Wings come from him at Laurel 6 (Fly at badge 6, as in Emerald).
-- **L3. Ariadne is the Endless Labyrinth's Brain,** with Asterion as her ace, rather than Asterion as the Brain.
-- **L4. Asterion joins you** in the post-game, after Ariadne's gold symbol, or stays on Knossa as a friend only.
+- **L3. Ariadne is the Endless Labyrinth's Brain,** rather than Asterion. Her team is her own, since Asterion is the player's to catch.
+- **L4. Settled by the dex team:** Asterion, the only Asterlorn, is catchable after the raid (§10).
 - **L5. Rhea's mercy** at the heart, as the first crack in Team Titan.
 - **L6. Kleon at Knossa.** He hunts Asterion because of the forged prophecy, gets flattened in Ring V, and is your rival battle at the heart.
 - **L7. The unmasking is Phaedon's choice.** He unmasks to ask for your help, after the "Starry" tell, rather than being exposed.

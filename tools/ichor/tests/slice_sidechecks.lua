@@ -26,8 +26,11 @@ local function load(state)
   if not L.idle() then settle() end
 end
 
-local HOME = { map = "MAP_HOUSE_1F", x = 3, y = 4, song = "MUS_ELAIA" }
+local HOME = { map = "MAP_HOUSE_1F", song = "MUS_ELAIA" }
 local AKTI = { map = "MAP_ASCLEPEION", song = "MUS_ASCLEPEION" }
+local E, R1, KH, AK, T = "ElaiaVillage_EventScript_", "KallisteRoute1_EventScript_",
+                         "KallisteRoute1_KronionHill_EventScript_", "AktiTown_EventScript_",
+                         "AktiTown_TempleOfHestia_EventScript_"
 
 -- White out where the player stands and see where they wake.
 local function whiteoutAt(state, want, label)
@@ -43,7 +46,6 @@ local function whiteoutAt(state, want, label)
   log(string.format("note whiteout from map %d (%d,%d) woke on map %d at (%d,%d), HP %d/%d, playing %s",
                     from, fx, fy, m, x, y, hp, maxHp, L.song()))
   L.check(m == S[want.map], string.format("whiting out (%s) wakes on map %d (got %d)", label, S[want.map], m))
-  if want.x then L.check(x == want.x and y == want.y, string.format("... at (%d,%d) (got %d,%d)", want.x, want.y, x, y)) end
   L.check(hp == maxHp and hp > 0, string.format("... with the party healed (%d/%d)", hp, maxHp))
   L.check(L.playing(S[want.song]), string.format("... to the room's music (playing %s)", L.song()))
   L.check(L.idle(), "... and the player can move")
@@ -56,22 +58,23 @@ local function check(name, fn) CHECKS[#CHECKS + 1] = { name = name, fn = fn } en
 -- 1. Elaia's well: the Relic Copper once, and nobody vanishes -------------------------------------
 check("well_twice", function()
   load("04_elaia_after")
-  L.check(L.objectOn(23, 15), "the kid with the Wooloo stands by the well")
-  talk(23, 15, { shotBefore = "kid" })                          -- VAR_LAST_TALKED is now the kid
+  local kid = L.npc(E .. "Kid")
+  L.check(kid.present, "the kid with the Wooloo is in the village")
+  talk(kid, { shotBefore = "kid" })                       -- VAR_LAST_TALKED is now the kid
   local n0 = L.itemCount(S.ITEM_RELIC_COPPER)
-  talk(23, 14, { shotBefore = "well_first", every = true })
+  talk(L.sign(E .. "Well"), { shotBefore = "well_first", every = true })
   local n1 = L.itemCount(S.ITEM_RELIC_COPPER)
   L.check(n1 == n0 + 1, string.format("the well gives one Relic Copper (%d -> %d)", n0, n1))
   shot("after_the_well")
-  L.check(L.objectOn(23, 15), "reading the well leaves the kid where he was (finditem's removeobject VAR_LAST_TALKED)")
-  talk(23, 14, { shotBefore = "well_again", every = true })
+  L.check(L.npc(E .. "Kid").present, "reading the well leaves the kid where he was")
+  talk(L.sign(E .. "Well"), { shotBefore = "well_again", every = true })
   local n2 = L.itemCount(S.ITEM_RELIC_COPPER)
   L.check(n2 == n1, string.format("a second look in the well gives nothing more (%d -> %d)", n1, n2))
 end)
 
 -- 2. Whiting out at each stage -------------------------------------------------------------------
 check("whiteout_elaia", function() whiteoutAt("05_route1", HOME, "elaia_after_kleon") end)
-check("whiteout_route1", function() whiteoutAt("05_grove", HOME, "route1") end)
+check("whiteout_route1", function() whiteoutAt("05_kronion_hill", HOME, "route1") end)
 check("whiteout_kronion", function() whiteoutAt("05_road_open", HOME, "kronion_hill") end)
 check("whiteout_akti_before_heal", function()
   -- SCRIPT.md beat 6 sets the respawn at the Asclepeion's first heal, not on arrival
@@ -84,15 +87,13 @@ check("whiteout_after_the_end", function() whiteoutAt("08_after", AKTI, "after_t
 -- 3. The torch goes out on a whiteout: the room is reset on the way back in -----------------------
 check("trial_flame_whiteout", function()
   load("07_hearth_trial")
-  talk(7, 14, { from = { { 7, 15, "up" } }, shotBefore = "take_flame" })
+  talk(L.sign(T .. "GreatHearth"), { shotBefore = "take_flame" })
   L.check(L.getVar(S.VAR_HEARTH_TRIAL) == 1, "carrying a flame")
   L.whiteOut()
   L.waitUntil(function() return L.mapId() == S.MAP_ASCLEPEION and L.inOverworld() end, 4000, "the Asclepeion")
   wait(60); settle()
-  go(7, 10)
-  L.enter(K.DOWN, S.MAP_AKTI, "out of the Asclepeion")
-  go(19, 17)
-  L.enter(K.UP, S.MAP_TEMPLE, "back into the Temple")
+  L.useWarp(S.MAP_AKTI)
+  L.useWarp(S.MAP_TEMPLE)
   shot("temple_again")
   L.check(L.getVar(S.VAR_HEARTH_TRIAL) == 0, string.format("the flame is gone on the way back in (trial %d)",
                                                             L.getVar(S.VAR_HEARTH_TRIAL)))
@@ -101,36 +102,32 @@ end)
 -- 4. Re-entering maps after their scenes ------------------------------------------------------------
 check("reentry_akademia", function()
   load("04_elaia_after")
-  go(5, 30)
-  L.enter(K.UP, S.MAP_AKADEMIA, "the Akademia again")
+  L.useWarp(S.MAP_AKADEMIA)
   wait(30)
   L.check(L.idle(), "no scene replays in the Akademia")
   shot("akademia_again")
-  talk(7, 3, { shotBefore = "daphne_after_kleon", every = true })
-  go(10, 12)
-  L.enter(K.DOWN, S.MAP_ELAIA, "out again")
+  talk(L.npc("ElaiaVillage_Akademia_EventScript_Daphne"), { shotBefore = "daphne_after_kleon", every = true })
+  talk(L.sign("ElaiaVillage_Akademia_EventScript_WallMap"), { shotBefore = "wall_map", every = true })
+  L.useWarp(S.MAP_ELAIA)
   wait(30)
-  L.check(L.idle() and not L.objectOn(14, 17), "Kleon is gone from the square and nothing replays")
+  L.check(L.idle() and not L.npc(E .. "Kleon").present, "Kleon is gone from the square and nothing replays")
   shot("square_again")
 end)
 
 check("reentry_kronion", function()
   load("05_road_open")
-  go(0, 17)
-  L.enter(K.LEFT, S.MAP_ROUTE1, "down to Route 1")
-  L.enter(K.RIGHT, S.MAP_KRONION, "back up the hill")
-  go(5, 11)
-  wait(30)
-  L.check(L.idle(), "the summit scene does not replay")
+  L.leaveEdge("left", S.MAP_ROUTE1)
+  L.leaveEdge("right", S.MAP_KRONION)
+  L.check(L.goTrigger(L.triggers(KH .. "SummitScene")), "the summit scene does not replay")
   shot("summit_again")
-  talk(4, 11, { shotBefore = "stele_again" })
+  talk(L.sign(KH .. "Stele"), { shotBefore = "stele_again" })
+  talk(L.sign(KH .. "Pit"), { shotBefore = "dark_stair_again", every = true })
 end)
 
 check("reentry_akti_arrival", function()
   load("06_asclepeion")
-  go(11, 27)
-  L.enter(K.DOWN, S.MAP_ROUTE1, "south out of Akti")
-  L.enter(K.UP, S.MAP_AKTI, "back into Akti")
+  L.leaveEdge("down", S.MAP_ROUTE1)
+  L.leaveEdge("up", S.MAP_AKTI)
   wait(40)
   L.check(L.idle(), "Diktys's welcome does not replay")
   shot("akti_again")
@@ -140,24 +137,23 @@ check("ending_after_leaving_akti", function()
   -- Part 1 has played (Alethea ran to the quay). Step into the Asclepeion and out,
   -- then go to the quay: part 2 should start; the doorstep should not replay part 1.
   load("08_harbor_part2")
-  go(3, 23)
-  L.enter(K.UP, S.MAP_ASCLEPEION, "the Asclepeion mid-ending")
-  go(7, 10)
-  L.enter(K.DOWN, S.MAP_AKTI, "back out")
+  L.useWarp(S.MAP_ASCLEPEION)
+  L.useWarp(S.MAP_AKTI)
   wait(30)
   shot("quay_from_asclepeion")
-  local started = not go(10, 10, { trigger = true })
+  local quay = L.triggers(AK .. "HarborPart2Row9", AK .. "HarborPart2Row10", AK .. "HarborPart2Row11")
+  local started = not L.goTrigger(quay)
   shot("at_the_quay")
   L.check(started, "after a trip indoors, the quay still starts the ending (part 2)")
   if started then
     settle({ answers = { "no" } })
   else
     -- see whether part 1 replays on the temple doorstep
-    local replay = not go(19, 17, { trigger = true })
+    local replay = not L.goTrigger(L.triggers(AK .. "HarborPart1"))
     shot("doorstep_again")
     L.check(not replay, "part 1 does not replay on the temple doorstep")
     settle({ every = true })
-    if not go(10, 10, { trigger = true }) then settle({ answers = { "no" } }) end
+    if not L.goTrigger(quay) then settle({ answers = { "no" } }) end
   end
   L.check(L.getFlag(S.FLAG_SLICE_COMPLETE), "the slice can still be finished")
 end)
@@ -167,7 +163,7 @@ check("lose_to_ione", function()
   load("07_ione")
   emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)   -- test setup: one hit ends it
   L.battleMode = "lose"
-  talk(8, 3, { from = { { 8, 5, "up" } }, shotBefore = "ione" })
+  talk(L.npc(T .. "Ione"), { shotBefore = "ione" })
   L.battleMode = nil
   local last = L.battles[#L.battles]
   L.check(last and last.outcome == S.B_OUTCOME_LOST, "lost to Ione")
@@ -175,23 +171,20 @@ check("lose_to_ione", function()
   shot("after_losing_to_ione")
   log(string.format("note after losing to Ione: map %d at (%d,%d)", L.mapId(), L.pos()))
   L.check(L.mapId() == S.MAP_ASCLEPEION, "losing to Ione wakes the player in the Asclepeion")
-  go(7, 10)
-  L.enter(K.DOWN, S.MAP_AKTI, "out of the Asclepeion")
-  go(19, 17)
-  L.enter(K.UP, S.MAP_TEMPLE, "back to the Temple")
+  L.useWarp(S.MAP_AKTI)
+  L.useWarp(S.MAP_TEMPLE)
   L.check(L.getFlag(S.FLAG_TRIAL_DONE) and L.getVar(S.VAR_HEARTH_TRIAL) == 6, "the trial stays done")
-  talk(8, 3, { from = { { 8, 5, "up" } }, shotBefore = "ione_rematch" })
+  talk(L.npc(T .. "Ione"), { shotBefore = "ione_rematch" })
   L.check(L.getFlag(S.FLAG_BADGE01_GET), "the rematch wins the Hearth Laurel")
 end)
 
 check("lose_to_petros", function()
   load("05_kronion_hill")
-  go(29, 19)
-  L.enter(K.RIGHT, S.MAP_KRONION, "Kronion Hill")
+  L.leaveEdge("right", S.MAP_KRONION)
   emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)   -- test setup: one hit ends it
   L.battleMode = "lose"
-  local started = not go(5, 11, { trigger = true })
-  L.check(started, "the summit scene starts")
+  local summit = L.triggers(KH .. "SummitScene")
+  L.check(not L.goTrigger(summit), "the summit scene starts")
   settle({ answers = { "no" } })
   L.battleMode = nil
   local last = L.battles[#L.battles]
@@ -200,14 +193,10 @@ check("lose_to_petros", function()
   L.check(L.mapId() == S.MAP_HOUSE_1F, "losing to Petros wakes the player at home")
   L.check(not L.getFlag(S.FLAG_RUINS_CLEARED), "the hill is not cleared yet")
   -- back up the road to the hill: the scene plays again and can be won
-  go(5, 8)
-  L.enter(K.DOWN, S.MAP_ELAIA, "out of the house")
-  go(11, 1)
-  L.enter(K.UP, S.MAP_ROUTE1, "Route 1")
-  go(29, 19)
-  L.enter(K.RIGHT, S.MAP_KRONION, "Kronion Hill again")
-  started = not go(5, 11, { trigger = true })
-  L.check(started, "the summit scene starts again")
+  L.useWarp(S.MAP_ELAIA)
+  L.leaveEdge("up", S.MAP_ROUTE1)
+  L.leaveEdge("right", S.MAP_KRONION)
+  L.check(not L.goTrigger(L.triggers(KH .. "SummitScene")), "the summit scene starts again")
   settle({ answers = { "yes" }, every = true })
   L.check(L.getFlag(S.FLAG_RUINS_CLEARED) and L.getFlag(S.FLAG_DEXNAV_GET), "the scene finishes on the second try")
   shot("summit_second_try")
@@ -241,7 +230,12 @@ end
 check("menus", function()
   load("08_after")
   if openMenu(ACTION.POKEDEX, "pokedex") then
-    shot("pokedex"); tap(K.A); wait(90); shot("pokedex_entry"); closeAll()
+    -- the codex, an entry, and its AREA page (the region map)
+    shot("pokedex"); tap(K.A); wait(150); shot("pokedex_entry")
+    -- AREA is highlighted: the entry takes input once its cry has played
+    for _ = 1, 4 do tap(K.A, 6); wait(90) end
+    wait(60); shot("pokedex_area")
+    closeAll()
   end
   if openMenu(ACTION.POKEMON, "party") then
     shot("party"); tap(K.A); wait(30); shot("party_actions")

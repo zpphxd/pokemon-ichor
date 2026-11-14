@@ -13,6 +13,20 @@ mapscripts ElaiaVillage_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(ElaiaVillage_EventScript_SetUpVillage)
     }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_HIDE_SCRIBE)) {
+            call(ElaiaVillage_EventScript_ClearScribesStool)
+        }
+    }
+}
+
+// The traveling scribe's stool by the altar, (6,21); grass once he has gone.
+const ELAIA_SCRIBES_STOOL_X = 6
+const ELAIA_SCRIBES_STOOL_Y = 21
+const ELAIA_GRASS = 0x001
+
+script ElaiaVillage_EventScript_ClearScribesStool {
+    setmetatile(ELAIA_SCRIBES_STOOL_X, ELAIA_SCRIBES_STOOL_Y, ELAIA_GRASS, FALSE)
 }
 
 text ElaiaVillage_Name_Halia { "HALIA" }
@@ -22,6 +36,7 @@ text ElaiaVillage_Name_Kleon { "KLEON" }
 text ElaiaVillage_Name_Alethea { "ALETHEA" }
 text ElaiaVillage_Name_Gylippos { "GYLIPPOS" }
 text ElaiaVillage_Name_Wooloo { "WOOLOO" }
+text ElaiaVillage_Name_Scribe { "SCRIBE" }
 
 // Who stands where depends on how far the story has got.
 script ElaiaVillage_EventScript_SetUpVillage {
@@ -52,6 +67,7 @@ script ElaiaVillage_EventScript_SetUpVillage {
     if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
         setobjectxyperm(LOCALID_ELAIA_SHEPHERD, 14, 2)
         setobjectmovementtype(LOCALID_ELAIA_SHEPHERD, MOVEMENT_TYPE_FACE_LEFT)
+        setflag(FLAG_ICHOR_HIDE_SCRIBE)          // gone with the festival crowd
     }
 }
 
@@ -366,6 +382,11 @@ script ElaiaVillage_EventScript_KleonTrigger {
     waitmovement(0)
     setobjectxyperm(LOCALID_ELAIA_SHEPHERD, 14, 2)
     setobjectmovementtype(LOCALID_ELAIA_SHEPHERD, MOVEMENT_TYPE_FACE_LEFT)
+    // and the traveling scribe has slipped away with his stool, unseen
+    removeobject(LOCALID_ELAIA_SCRIBE)
+    setflag(FLAG_ICHOR_HIDE_SCRIBE)
+    call(ElaiaVillage_EventScript_ClearScribesStool)
+    special(DrawWholeMapView)
     releaseall
 }
 
@@ -499,6 +520,20 @@ script ElaiaVillage_EventScript_OldShepherd {
     release
 }
 
+// The traveling scribe (design/STORY.md section 8.2): Iapetos, unrecognized.
+// He is here from the morning through beat 4.
+script ElaiaVillage_EventScript_Scribe {
+    lock
+    faceplayer
+    setspeaker(ElaiaVillage_Name_Scribe)
+    if (flag(FLAG_ICHOR_THREAD_READ)) {
+        msgbox(format("Yours stopped her spindle. In forty years, she says. Never once.\pMay I tell you something true? You're going to be in my book."))
+    } else {
+        msgbox(format("Don't mind me. I collect fortunes. For a book."))
+    }
+    release
+}
+
 // ---------------------------------------------------------------------------
 // Signs and things
 // ---------------------------------------------------------------------------
@@ -545,6 +580,13 @@ script ElaiaVillage_EventScript_RaceStart {
 
 script ElaiaVillage_EventScript_Altar {
     msgbox(format("The festival altar. A twist of spun thread smoulders in the fire-bowl."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_EventScript_ScribesStool {
+    if (flag(FLAG_ICHOR_HIDE_SCRIBE)) {
+        end
+    }
+    msgbox(format("A wax tablet on a stool. Neat writing. Every line ends in a little hook."), MSGBOX_SIGN)
 }
 
 script ElaiaVillage_EventScript_Stall {

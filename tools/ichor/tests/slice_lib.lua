@@ -66,6 +66,14 @@ function L.check(cond, what)
   log("BUG " .. what)
   return false
 end
+-- A design-level finding (a judgment call, tracked in QA.md): logged, never fails the run.
+L.findings = 0
+function L.finding(cond, what)
+  if cond then log("ok " .. what) return true end
+  L.findings = L.findings + 1
+  log("FINDING " .. what)
+  return false
+end
 
 function L.waitUntil(cond, limit, what)
   local t0 = now()
@@ -392,7 +400,8 @@ function L.settle(opts)
         L.acceptName("naming")
       elseif L.on("CB2_WallClock") then
         -- CONFIRM, then "Is this the correct time?" offers NO first
-        wait(30); tap(K.A); wait(40); tap(K.UP); wait(10); tap(K.A)
+        wait(30); L.shot("wall_clock"); tap(K.A); wait(40); L.shot("wall_clock_confirm")
+        tap(K.UP); wait(10); tap(K.A)
         waitUntil(function() return not L.on("CB2_WallClock") end, 600, "the water clock to close")
       elseif L.inBattle() then
         fought[#fought + 1] = L.battle()
@@ -493,6 +502,16 @@ local function grid()
       g.people[(emu:read16(c) - S.MAP_OFFSET) .. "," .. (emu:read16(c + 2) - S.MAP_OFFSET)] = true
     end
   end
+  -- People off screen aren't spawned, so the map's own templates stand in for
+  -- them: everyone whose hide flag is clear and who isn't on screen right now.
+  local live = {}
+  for i = 0, S.OBJECT_EVENTS_COUNT - 1 do
+    local o = S.gObjectEvents + i * S.OBJECT_EVENT_SIZE
+    if emu:read8(o) & 1 == 1 then live[emu:read8(o + S.OFF_OBJ_LOCAL_ID)] = true end
+  end
+  for _, t in ipairs(L.mapEvents().objects) do
+    if not live[t.localId] and (t.flag == 0 or not L.getFlag(t.flag)) then g.people[t.x .. "," .. t.y] = true end
+  end
   local events = emu:read32(S.gMapHeader + S.OFF_MAPHEADER_EVENTS)
   local nw, warps = emu:read8(events + S.OFF_EVENTS_WARP_COUNT), emu:read32(events + S.OFF_EVENTS_WARPS)
   for i = 0, nw - 1 do
@@ -504,8 +523,11 @@ local function grid()
     local c = coords + i * S.COORD_EVENT_SIZE
     g.coords[emu:read16(c) .. "," .. emu:read16(c + 2)] = true
   end
-  function g.tile(x, y)
-    if x < 0 or y < 0 or x >= g.w or y >= g.h then return nil end
+  -- The backup layout also holds MAP_OFFSET cells of each connected map around
+  -- the edges: tile(x, y, true) reads them.
+  function g.tile(x, y, margin)
+    local m = margin and S.MAP_OFFSET or 0
+    if x < -m or y < -m or x >= g.w + m or y >= g.h + m then return nil end
     local block = emu:read16(map + 2 * ((x + S.MAP_OFFSET) + (y + S.MAP_OFFSET) * width))
     local mid = block & S.MAPGRID_METATILE_ID_MASK
     return mid, block & S.MAPGRID_COLLISION_MASK ~= 0, behaviorOf(mid), block >> 12
@@ -519,6 +541,15 @@ L.grid = grid
 -- crossed when nothing else gets there (strict = false on the second pass).
 -- Elevation follows the game's rule (IsElevationMismatchAt): a step onto a tile
 -- whose elevation is neither 0, 15 nor the player's own is refused.
+-- `avoid` is a rectangle { x0, y0, x1, y1 }, a set { ["x,y"] = true } or a
+-- function (x, y) -> bool. Returns the key and the path's length.
+local function avoided(avoid, x, y)
+  if not avoid then return false end
+  if type(avoid) == "function" then return avoid(x, y) end
+  if avoid[1] then return x >= avoid[1] and y >= avoid[2] and x <= avoid[3] and y <= avoid[4] end
+  return avoid[x .. "," .. y] == true
+end
+L.avoided = avoided
 local function firstStep(goal, avoid, strict)
   local g = grid()
   local known = learned[L.mapId()] or {}
@@ -528,7 +559,7 @@ local function firstStep(goal, avoid, strict)
   local function enterable(x, y, e)
     local mid, solid, b, te = g.tile(x, y)
     if mid == nil or solid or isWater(b) or g.people[x .. "," .. y] then return nil end
-    if avoid and x >= avoid[1] and y >= avoid[2] and x <= avoid[3] and y <= avoid[4] then return nil end
+    if avoided(avoid, x, y) then return nil end
     if strict and not goal(x, y) and (g.warps[x .. "," .. y] or g.coords[x .. "," .. y]) then return nil end
     for _, d in ipairs(DIRS) do if b == S[d[4]] then return nil end end   -- a ledge is only jumped
     if e ~= 0 and te ~= 0 and te ~= 15 and te ~= e then return nil end
@@ -539,9 +570,11 @@ local function firstStep(goal, avoid, strict)
     local x, y, e = queue[head][1], queue[head][2], queue[head][3]
     head = head + 1
     if goal(x, y) and not (x == sx and y == sy) then
+      local length = 0
       while true do
         local from = seen[key(x, y, e)]
-        if from[1] == sx and from[2] == sy and from[4] == se then return from[3] end
+        length = length + 1
+        if from[1] == sx and from[2] == sy and from[4] == se then return from[3], length end
         x, y, e = from[1], from[2], from[4]
       end
     end
@@ -568,11 +601,162 @@ local function firstStep(goal, avoid, strict)
   return nil
 end
 
+-- --- The current map's events, read from the ROM's event tables ----------------------
+-- Tests name what they want by the script it runs (S.SCRIPTS, from the ELF) or
+-- the flag it sets, and find where it is on the map as built. A moved NPC or
+-- item never breaks a test; a missing one fails with its name.
+
+local function s16(v) if v >= 0x8000 then return v - 0x10000 end return v end
+local eventsCache = {}
+function L.mapEvents()
+  local ev = emu:read32(S.gMapHeader + S.OFF_MAPHEADER_EVENTS)
+  if eventsCache[ev] then return eventsCache[ev] end
+  local out = { objects = {}, warps = {}, coords = {}, bgs = {} }
+  local n, base = emu:read8(ev + S.OFF_EVENTS_OBJECT_COUNT), emu:read32(ev + S.OFF_EVENTS_OBJECTS)
+  for i = 0, n - 1 do
+    local t = base + i * S.OBJECT_TEMPLATE_SIZE
+    out.objects[#out.objects + 1] = {
+      localId = emu:read8(t + S.OFF_TEMPLATE_LOCAL_ID), x = s16(emu:read16(t + S.OFF_TEMPLATE_X)),
+      y = s16(emu:read16(t + S.OFF_TEMPLATE_Y)), range = emu:read16(t + S.OFF_TEMPLATE_RANGE),
+      script = emu:read32(t + S.OFF_TEMPLATE_SCRIPT), flag = emu:read16(t + S.OFF_TEMPLATE_FLAG) }
+  end
+  n, base = emu:read8(ev + S.OFF_EVENTS_WARP_COUNT), emu:read32(ev + S.OFF_EVENTS_WARPS)
+  for i = 0, n - 1 do
+    local w = base + i * S.WARP_EVENT_SIZE
+    out.warps[#out.warps + 1] = { x = s16(emu:read16(w)), y = s16(emu:read16(w + 2)),
+      map = emu:read8(w + S.OFF_WARP_MAP_GROUP) * 256 + emu:read8(w + S.OFF_WARP_MAP_NUM) }
+  end
+  n, base = emu:read8(ev + S.OFF_EVENTS_COORD_COUNT), emu:read32(ev + S.OFF_EVENTS_COORDS)
+  for i = 0, n - 1 do
+    local c = base + i * S.COORD_EVENT_SIZE
+    out.coords[#out.coords + 1] = { x = s16(emu:read16(c)), y = s16(emu:read16(c + 2)),
+                                    script = emu:read32(c + S.OFF_COORD_SCRIPT) }
+  end
+  n, base = emu:read8(ev + S.OFF_EVENTS_BG_COUNT), emu:read32(ev + S.OFF_EVENTS_BGS)
+  for i = 0, n - 1 do
+    local b = base + i * S.BG_EVENT_SIZE
+    out.bgs[#out.bgs + 1] = { x = emu:read16(b), y = emu:read16(b + 2), kind = emu:read8(b + S.OFF_BG_KIND),
+                              union = emu:read32(b + S.OFF_BG_UNION) }
+  end
+  eventsCache[ev] = out
+  return out
+end
+
+local function scriptAddr(name)
+  local a = S.SCRIPTS[name]
+  if not a then fail("the ROM has no script named " .. name) end
+  return a
+end
+
+-- A person or object, by the script it runs (the nth one, for a flock): where it
+-- stands now (or its template's place, if it isn't on the map), its local id and
+-- its sight range.
+function L.npc(script, nth)
+  local addr, found = scriptAddr(script), 0
+  for _, o in ipairs(L.mapEvents().objects) do
+    if o.script == addr then
+      found = found + 1
+      if found == (nth or 1) then
+        local x, y = L.objectAt(o.localId)
+        return { x = x or o.x, y = y or o.y, localId = o.localId, range = o.range, present = x ~= nil,
+                 tiles = { { x = x or o.x, y = y or o.y } }, what = script }
+      end
+    end
+  end
+  fail(string.format("map %d has no one running %s (the map changed?)", L.mapId(), script))
+end
+-- An item ball, by the flag that hides it once taken.
+function L.ball(flag)
+  for _, o in ipairs(L.mapEvents().objects) do
+    if o.flag == flag and o.script == scriptAddr("Common_EventScript_FindItem") then
+      return { x = o.x, y = o.y, localId = o.localId, tiles = { { x = o.x, y = o.y } }, what = "item ball" }
+    end
+  end
+  fail(string.format("map %d has no item ball with flag %d", L.mapId(), flag))
+end
+-- A sign or other background event, by script: every tile it covers, each with
+-- the way the player must face it (BG_EVENT_PLAYER_FACING_*: 1 north, 2 south,
+-- 3 east, 4 west, else any).
+function L.sign(script)
+  local addr, tiles = scriptAddr(script), {}
+  for _, b in ipairs(L.mapEvents().bgs) do
+    if b.kind ~= S.BG_EVENT_HIDDEN_ITEM and b.union == addr then
+      tiles[#tiles + 1] = { x = b.x, y = b.y, facing = ({ "up", "down", "right", "left" })[b.kind] }
+    end
+  end
+  if #tiles == 0 then fail(string.format("map %d has no sign running %s", L.mapId(), script)) end
+  return { tiles = tiles, x = tiles[1].x, y = tiles[1].y, what = script }
+end
+-- A hidden item, by its flag.
+function L.hidden(flag)
+  for _, b in ipairs(L.mapEvents().bgs) do
+    if b.kind == S.BG_EVENT_HIDDEN_ITEM and ((b.union >> 11) & 0x1FFF) + S.FLAG_HIDDEN_ITEMS_START == flag then
+      return { tiles = { { x = b.x, y = b.y } }, x = b.x, y = b.y, what = "hidden item" }
+    end
+  end
+  fail(string.format("map %d has no hidden item with flag %d", L.mapId(), flag))
+end
+-- The tiles of the story triggers that run any of these scripts, as a set.
+function L.triggers(...)
+  local want, set, n = {}, {}, 0
+  for _, name in ipairs({ ... }) do want[scriptAddr(name)] = true end
+  for _, c in ipairs(L.mapEvents().coords) do
+    if want[c.script] then set[c.x .. "," .. c.y] = true; n = n + 1 end
+  end
+  if n == 0 then fail(string.format("map %d has no trigger running %s", L.mapId(), table.concat({ ... }, ", "))) end
+  return set
+end
+function L.onTile(set) local x, y = L.pos() return set[x .. "," .. y] == true end
+-- The tiles a trainer watches: from where they stand, the way they face, out to
+-- their sight range.
+function L.sight(script)
+  local t = L.npc(script)
+  local set = {}
+  if not t.present then return set end
+  local facing
+  for i = 0, S.OBJECT_EVENTS_COUNT - 1 do
+    local o = S.gObjectEvents + i * S.OBJECT_EVENT_SIZE
+    if emu:read8(o) & 1 == 1 and emu:read8(o + S.OFF_OBJ_LOCAL_ID) == t.localId then facing = emu:read8(o + 0x18) & 0xF end
+  end
+  local d = ({ { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } })[facing or 1]
+  for k = 1, t.range do set[(t.x + d[1] * k) .. "," .. (t.y + d[2] * k)] = true end
+  return set
+end
+
+-- Where to stand to talk to a target, and which way to face: next to any of its
+-- tiles (or on the side a sign insists on), or across a counter.
+local FACE_KEY = { up = K.UP, down = K.DOWN, left = K.LEFT, right = K.RIGHT }
+local function standSpots(target)
+  local spots, g = {}, grid()
+  local function add(x, y, face) spots[x .. "," .. y] = face end
+  for _, t in ipairs(target.tiles) do
+    for _, d in ipairs({ { 0, 1, "up" }, { 0, -1, "down" }, { 1, 0, "left" }, { -1, 0, "right" } }) do
+      -- (d is where the player stands relative to the tile; d[3] the way they face)
+      if not t.facing or t.facing == d[3] then
+        add(t.x + d[1], t.y + d[2], d[3])
+        local _, _, b = g.tile(t.x + d[1], t.y + d[2])
+        if b == S.MB_COUNTER then add(t.x + 2 * d[1], t.y + 2 * d[2], d[3]) end
+      end
+    end
+  end
+  for _, t in ipairs(target.tiles) do spots[t.x .. "," .. t.y] = nil end
+  return spots
+end
+L.standSpots = standSpots
+
+-- How many steps the player is from talking to a target, or nil if they can't
+-- get there.
+function L.distanceTo(target, avoid)
+  local spots = standSpots(target)
+  local x, y = L.pos()
+  if spots[x .. "," .. y] then return 0 end
+  local _, d = firstStep(function(a, b) return spots[a .. "," .. b] ~= nil end, avoid, false)
+  return d
+end
+
 -- Whether the player could walk next to (tx, ty) from where they stand now.
 function L.canReachNextTo(tx, ty)
-  local goal = function(x, y) return math.abs(x - tx) + math.abs(y - ty) == 1 end
-  local x, y = L.pos()
-  return goal(x, y) or firstStep(goal, nil, false) ~= nil
+  return L.distanceTo({ tiles = { { x = tx, y = ty } } }) ~= nil
 end
 
 -- One step. Returns "moved", "blocked" or "taken" (the game took control: a
@@ -645,33 +829,110 @@ end
 
 -- Walk next to (tx, ty) (or onto one of opts.from's tiles), face it, press A
 -- and play the result out with settle(opts).
-function L.talk(tx, ty, opts)
+-- `target` is what L.npc, L.ball, L.sign or L.hidden return (or x, y).
+function L.talk(target, ty, opts)
+  if type(target) == "number" then target = { tiles = { { x = target, y = ty } }, what = target .. "," .. ty }
+  else opts = ty end
   opts = opts or {}
-  local goal
-  if opts.from then
-    goal = function(x, y)
-      for _, f in ipairs(opts.from) do if x == f[1] and y == f[2] then return true end end
-      return false
-    end
-  else
-    goal = function(x, y) return math.abs(x - tx) + math.abs(y - ty) == 1 end
-  end
+  local what = target.what or "a target"
   for _ = 1, 60 do
-    if walk(goal, string.format("next to (%d,%d)", tx, ty), opts.avoid) then break end
+    local spots = standSpots(target)
+    if walk(function(x, y) return spots[x .. "," .. y] ~= nil end, "a place to talk to " .. what, opts.avoid) then
+      break
+    end
     wait(2)
     L.settle()
   end
   local x, y = L.pos()
-  local key = (tx > x and K.RIGHT) or (tx < x and K.LEFT) or (ty > y and K.DOWN) or K.UP
-  -- a `from` tile may name the way to face: { x, y, "up" } (across a counter, along a hearth)
-  for _, f in ipairs(opts.from or {}) do
-    if f[1] == x and f[2] == y and f[3] then key = K[string.upper(f[3])] end
-  end
-  L.face(key)
+  local face = standSpots(target)[x .. "," .. y]
+  if not face then fail("lost the place to talk to " .. what) end
+  L.face(FACE_KEY[face])
   if opts.shotBefore then L.shot(opts.shotBefore) end
   tap(K.A); wait(10)
   if opts.noSettle then return end
   return L.settle(opts)
+end
+
+-- Walk onto one of a set of story-trigger tiles (L.triggers). Returns false when
+-- a script takes over (the trigger fired), true if the player stood on it and
+-- nothing happened.
+function L.goTrigger(set, opts)
+  opts = opts or {}
+  for _ = 1, 60 do
+    if walk(function(x, y) return set[x .. "," .. y] == true end, "a trigger", opts.avoid) then
+      wait(4)
+      local t0 = now()
+      while now() - t0 < 30 do
+        if not L.idle() then return false end
+        frame()
+      end
+      return true
+    end
+    wait(2)
+    if L.scriptRunning() then return false end
+    L.settle()
+  end
+  fail("kept being interrupted on the way to a trigger")
+end
+
+-- Take the warp that leads to `map`: a door from the tile below it, or an exit
+-- mat by standing on it and pressing its arrow. With `scene`, a scene starts on
+-- arrival: don't wait for control.
+function L.useWarp(map, scene)
+  local g = grid()
+  local spots = {}
+  for _, w in ipairs(L.mapEvents().warps) do
+    if w.map == map then
+      local _, _, b = g.tile(w.x, w.y)
+      if b == S.MB_SOUTH_ARROW_WARP then spots[w.x .. "," .. w.y] = K.DOWN
+      elseif b == S.MB_NORTH_ARROW_WARP then spots[w.x .. "," .. w.y] = K.UP
+      elseif b == S.MB_EAST_ARROW_WARP then spots[w.x .. "," .. w.y] = K.RIGHT
+      elseif b == S.MB_WEST_ARROW_WARP then spots[w.x .. "," .. w.y] = K.LEFT
+      else spots[w.x .. "," .. (w.y + 1)] = K.UP end                       -- a door or a stair
+    end
+  end
+  if next(spots) == nil then fail(string.format("map %d has no warp to map %d", L.mapId(), map)) end
+  for _ = 1, 60 do
+    if walk(function(x, y) return spots[x .. "," .. y] ~= nil end, "the warp to map " .. map) then break end
+    wait(2)
+    L.settle()
+  end
+  local x, y = L.pos()
+  L.enter(spots[x .. "," .. y], map, "the warp to map " .. map, scene)
+end
+
+-- Walk off the map's edge ("up", "down", "left", "right") into the connected
+-- map: to an open edge tile whose neighbour across the seam is open too.
+function L.leaveEdge(dir, map, scene)
+  local d = ({ up = { 0, -1, K.UP }, down = { 0, 1, K.DOWN }, left = { -1, 0, K.LEFT }, right = { 1, 0, K.RIGHT } })[dir]
+  local g = grid()
+  local edge = {}
+  local function try(x, y)
+    local mid, solid, b = g.tile(x + d[1], y + d[2], true)
+    if mid ~= nil and not solid and not isWater(b) then edge[x .. "," .. y] = true end
+  end
+  if dir == "up" or dir == "down" then
+    for x = 0, g.w - 1 do try(x, dir == "up" and 0 or g.h - 1) end
+  else
+    for y = 0, g.h - 1 do try(dir == "left" and 0 or g.w - 1, y) end
+  end
+  for _ = 1, 60 do
+    if walk(function(x, y) return edge[x .. "," .. y] == true end, "the " .. dir .. " edge") then break end
+    wait(2)
+    L.settle()
+  end
+  L.enter(d[3], map, "the " .. dir .. " edge to map " .. map, scene)
+end
+
+-- Of a list of targets ({ target = function() return L.npc(...) end, ... }), the
+-- index of the nearest one the player can walk to, or nil.
+function L.nearest(list, avoid)
+  local best, bestD
+  for i, item in ipairs(list) do
+    local d = L.distanceTo(item.target(), avoid)
+    if d and (not bestD or d < bestD) then best, bestD = i, d end
+  end
+  return best, bestD
 end
 
 -- Walk into a warp (a door, the stairs, an exit mat) or off a map edge, and wait
