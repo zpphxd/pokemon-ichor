@@ -96,3 +96,10 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
 - 2026-11-14: **Protected from the vanilla-species cut** (see the D1 follow-up above):
   - **Must stay:** the Snivy, Cyndaquil and Piplup lines, with art, cries and data.
   - **May stay:** every generation's starter lines (27 lines), until the user picks a tier for the gods' gifts.
+- 2026-11-14: **Eventually every Pokémon can be obtained.** The user: "eventualy you should be able to get every pokemon". This fits D5 (a): the national dex opens in the post-game. It also **supersedes the vanilla-species cut above**: all 1,025 vanilla species stay in the ROM, and the protected-starters list is moot. The budget without that lever:
+  - The ROM is about 80% full today (about 6.3 MB free). Cutting Hoenn-only systems adds about 2.2 MB, so all of Ichor's new content shares about 8.5 MB.
+  - The Aethos dex is about 1.2–1.5 MB of sprites and data. Its cries are reused, so they cost almost nothing. That leaves roughly 7 MB for maps, tilesets, music, trainer art and the Astral constellations.
+  - Levers that keep every species, if space gets tight:
+    - Share one cry across each Mega Evolution (`P_MODIFIED_MEGA_CRIES`, about 3% of the ROM, roughly 1 MB).
+    - Trim alternate forms that aren't separate species.
+    - Watch the build's memory line after each asset batch.
