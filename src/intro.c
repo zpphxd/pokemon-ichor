@@ -601,12 +601,12 @@ static void Studio_Update(s32 t)
     // The drop: a bead swells at the top edge, lets go and falls (frames 0-3
     // hanging, 4 falling), and is gone the moment it lands.
     if (t >= T_DROP_FORM && t < T_DROP_FALL)
-        ShowSprite(SPR_DROP, MARK_CX, 14, (t - T_DROP_FORM) * 4 / (T_DROP_FALL - T_DROP_FORM), 8, TRUE);
+        ShowSprite(SPR_DROP, MARK_CX, 18, (t - T_DROP_FORM) * 4 / (T_DROP_FALL - T_DROP_FORM), 8, TRUE);
     else if (t >= T_DROP_FALL && t < T_DROP_IMPACT)
     {
         s32 dt = t - T_DROP_FALL;
-        // 0.078 px/frame^2 brings it from the top edge to the mark in 26 frames
-        y = 14 + (dt * dt * 20) / 256;
+        // 0.07 px/frame^2 brings it from the top to the mark in 26 frames
+        y = 18 + (dt * dt * 18) / 256;
         ShowSprite(SPR_DROP, MARK_CX, y, 4, 8, TRUE);
     }
     else
