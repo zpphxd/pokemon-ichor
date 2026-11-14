@@ -72,6 +72,11 @@ Every Ichor map follows these rules. They come from how Game Freak builds Gen 3 
 - **Act II opens into hubs:** a capital with spokes, side regions and optional areas.
 - **Act III and the post-game** reward backtracking. New relics open old places, old routes gain post-game encounters, and rematches appear.
 - **Connections.** Neighbouring maps connect on matching seams. Agree the seam columns before building either side.
+- **Seam strips use only the primary tileset.** The game draws a connected neighbour using the tilesets of the map the player is standing on. A neighbour's secondary-tileset pieces (kalliste, akti, agros) near the seam therefore draw as garbage from across it.
+  - On an up or down connection, the 6 rows nearest the seam may use only aethos metatiles.
+  - On a left or right connection, the 8 columns nearest the seam may use only aethos metatiles.
+  - Every map builder enforces this in code.
+  - Two neighbours that share the same secondary tileset are exempt.
 
 ## 6. Readability on a GBA screen
 
