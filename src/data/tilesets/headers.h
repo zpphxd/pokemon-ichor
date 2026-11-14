@@ -1647,3 +1647,18 @@ const struct Tileset gTileset_Agros =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Agros,
     .callback = NULL,
 };
+
+// Ichor: aegina, the island secondary for Aegina Town and the Aegina detour. A
+// Porytiles-managed secondary built by tools/ichor/art/aegina_build.py for the
+// aethos primary: its ground cells borrow aethos's grass, sand, sea and path, so
+// rebuild it whenever aethos changes.
+const struct Tileset gTileset_Aegina =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Aegina,
+    .palettes = gTilesetPalettes_PorytilesManaged_Aegina,
+    .metatiles = gMetatiles_PorytilesManaged_Aegina,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Aegina,
+    .callback = NULL,
+};
