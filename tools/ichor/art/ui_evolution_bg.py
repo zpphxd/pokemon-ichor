@@ -110,5 +110,30 @@ def preview(ia, oa):
     save_rgb(IMG / "ui_evolution_bg.png", np.hstack(frames), 2)
 
 
+# The sparks that ring and rain on the evolving Pokemon (graphics/misc/evo_sparkle.png,
+# src/evolution_graphics.c). Emerald's were plain white dots. Here each is a
+# four-pointed gold spark, white-hot at the heart, with ink at its tips so it
+# still reads once the light behind it turns gold. The engine shrinks it with
+# affine matrices, so the heart stays at the tile's centre.
+SPARK = [
+    "...k....",
+    "...o....",
+    "..kgk...",
+    "kogWgok.",
+    "..kgk...",
+    "...o....",
+    "...k....",
+    "........",
+]
+SPARK_PAL = [(0, 0, 0), (32, 24, 24), (200, 144, 40), (240, 192, 64), (248, 248, 216)] + [(0, 0, 0)] * 11
+
+
+def write_sparkle():
+    key = {".": 0, "k": 1, "o": 2, "g": 3, "W": 4}
+    a = np.array([[key[ch] for ch in row] for row in SPARK], np.uint8)
+    write_tiles_png(ROOT / "graphics/misc/evo_sparkle.png", [a], [SPARK_PAL], tiles_wide=1)
+
+
 if __name__ == "__main__":
     write()
+    write_sparkle()
