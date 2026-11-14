@@ -27,6 +27,10 @@ Plan: `design/dex/PLAN.md` (generated from `plan.yaml`). Review page: https://cl
 | D5 | How the regional dex mixes with the existing 1,025 species | (a) Aethos-only through the League | (b) mixed: "while we add in the other pokemon into the region too". Then changed to (a): "(a). It makes Aethos feel like a real new region and keeps the bible's post-game promise. lets switch it to this". Only Aethos's own species appear until the League is beaten; existing species arrive in the post-game. |
 | D6 | Post-game Labors use regional species where one exists | Yes | Open |
 
+**D1 follow-up (2026-11-14): the old starters return as gifts from the gods.** The user, relayed by the main session: "we need to make it later game to be able to receive the old starters as blessings from gods in disguise."
+- The Snivy, Cyndaquil and Piplup lines don't leave the game when the Aethos starters replace them. They return mid-to-late game as gifts from gods in disguise (theoxenia, in the spirit of Baucis and Philemon).
+- The main session's systems designer is specifying it, with an optional extended tier in which other generations' starters also come as gifts.
+
 D2, D3 and D6 don't block Gate 2. The entries for those species are written either way, and the open questions are about where they go in the story.
 
 ## Gate 2: the full entries
@@ -89,3 +93,6 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
 - 2026-11-14: **Cries are reused.** The user: "just reuse criess then". Each Aethos species gets an existing vanilla cry, and the engine's cry modes can pitch it up or down. No new cries are recorded.
   - Implementation catch: `sound/cry_tables.inc` and the cry data wrap every cry in its family's `P_FAMILY_*` switch, so switching a vanilla family off also removes its cry. Donor cries must stay compiled in, for example behind their own switch, even when their species are disabled.
   - Picking a donor for each species (a fitting size and temper, and not the same donor twice within a line) is a small job for when the species are implemented.
+- 2026-11-14: **Protected from the vanilla-species cut** (see the D1 follow-up above):
+  - **Must stay:** the Snivy, Cyndaquil and Piplup lines, with art, cries and data.
+  - **May stay:** every generation's starter lines (27 lines), until the user picks a tier for the gods' gifts.
