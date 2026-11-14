@@ -17,26 +17,26 @@ All sheets are in `graphics/object_events/pics/people/ichor/`. The names match t
 | Constant | Sheet | Palette | Look | Suggested for (SCRIPT.md Part 2) |
 |---|---|---|---|---|
 | `OBJ_EVENT_GFX_ICHOR_MOM` | `mom.png` | folk | Dark hair up in a bun tied with a honey-gold ribbon, a terracotta peplos, a linen apron | Melitta |
-| `OBJ_EVENT_GFX_ICHOR_PRIESTESS` | `priestess.png` | folk | A saffron veil with a terracotta border over gray hair, a white peplos with a saffron girdle, a drop spindle hanging from her left hand | Halia |
-| `OBJ_EVENT_GFX_ICHOR_YOUTH_M` | `youth_m.png` | folk | Brown hair under the festival's olive wreath, a short linen chiton | Philon, the youth on the wall |
+| `OBJ_EVENT_GFX_ICHOR_PRIESTESS` | `priestess.png` | folk | A saffron veil with a terracotta border over gray hair, falling in folds to a terracotta hem behind; a white peplos with a saffron girdle; a drop spindle hanging from her left hand, seen from front and back | Halia |
+| `OBJ_EVENT_GFX_ICHOR_YOUTH_M` | `youth_m.png` | folk | The festival's olive wreath, its leaves sprigging out past his brown hair and tied behind with terracotta ribbons; a short linen chiton | Philon, the youth on the wall |
 | `OBJ_EVENT_GFX_ICHOR_YOUTH_F` | `youth_f.png` | folk | A sky-blue chiton to mid-calf with a linen girdle, a long braid tied with a terracotta ribbon | Korinna |
 | `OBJ_EVENT_GFX_ICHOR_MAN` | `man.png` | folk | Short dark hair and a full beard, an ochre exomis off the right shoulder, sandals | festival-goer, pilgrim, customer |
 | `OBJ_EVENT_GFX_ICHOR_WOMAN` | `woman.png` | folk | A linen kerchief over brown hair, a blue peplos, an ochre himation over her left shoulder | festival-goer, fishwife, carter, woman by the Pithos |
 | `OBJ_EVENT_GFX_ICHOR_ELDER_M` | `elder_m.png` | folk | Bald with a white fringe and a long white beard, an olive-wool himation to mid-calf, a walking staff in his right hand | olive farmers, old shepherd, Gylippos, old man by the statue |
-| `OBJ_EVENT_GFX_ICHOR_ELDER_F` | `elder_f.png` | folk | A dark wool himation drawn over gray hair and wrapped round her, hands folded, a linen chiton below | Kydippe, the old woman on the temple steps |
+| `OBJ_EVENT_GFX_ICHOR_ELDER_F` | `elder_f.png` | folk | A dark wool himation pushed back off parted gray hair, a kind face with smiling eyes and rosy cheeks, the himation wrapped round her with her hands folded. From behind: a gray bun under the hood's edge, the himation as a shawl, a linen chiton below | Kydippe, the old woman on the temple steps |
 | `OBJ_EVENT_GFX_ICHOR_KID_M` | `kid_m.png` | folk | A mop of dark hair, a short terracotta tunic, barefoot. Child-sized: 16 rows tall. | kids, Glaukos's grandson |
 | `OBJ_EVENT_GFX_ICHOR_KID_F` | `kid_f.png` | folk | Two short pigtails tied with terracotta, a short saffron tunic, barefoot. Child-sized. | kids, the customer girl |
 | `OBJ_EVENT_GFX_ICHOR_FISHER` | `fisher.png` | folk | A brown felt pilos, a gray beard, a faded sea-blue tunic with a rope belt, a net over the shoulder | Diktys, Glaukos, the fisher with the bandaged hand |
-| `OBJ_EVENT_GFX_ICHOR_SAILOR` | `sailor.png` | folk | A terracotta headband, bare arms, a short linen chiton with a blue sash | the Lakonian rower, Nausikles |
+| `OBJ_EVENT_GFX_ICHOR_SAILOR` | `sailor.png` | folk | Tousled hair under a terracotta headband with tails, a short jaw beard, bare-chested above an undyed linen kilt with a blue sash | the Lakonian rower, Nausikles |
 | `OBJ_EVENT_GFX_ICHOR_DIVER` | `diver.png` | folk | Wet black hair to the shoulders with a blue sheen, a short sea-blue wrap tied with linen, barefoot, a net bag of sponges at her hip | Hydna |
-| `OBJ_EVENT_GFX_ICHOR_HEALER` | `healer.png` | folk | Brown hair in a low bun under an olive-green fillet, a white chiton to the floor with a green sash, a gold serpent armlet | the Asclepeion healer |
+| `OBJ_EVENT_GFX_ICHOR_HEALER` | `healer.png` | folk | Long brown hair to her shoulders under an olive-green fillet, a white chiton to the floor with a green sash, a gold serpent armlet, and the rod of Asclepius (a green serpent coiled on a staff) in her right hand | the Asclepeion healer |
 | `OBJ_EVENT_GFX_ICHOR_MERCHANT` | `merchant.png` | folk | Balding, with a brown beard, a blue chiton with a leather belt, a linen apron, a coin purse | Demeas |
 | `OBJ_EVENT_GFX_ICHOR_SHEPHERD` | `shepherd.png` | cast | A bronze felt pilos, a sheepskin mantle over a blue tunic, a crook in his right hand | Tityros |
 | `OBJ_EVENT_GFX_ICHOR_HARVESTER` | `harvester.png` | folk | A terracotta headscarf knotted at the side, an olive-green dress, a linen apron, a wicker basket of olives on her left hip | Phyllis |
 | `OBJ_EVENT_GFX_ICHOR_GOATHERD` | `goatherd.png` | folk | Wild graying curls and beard, a syrinx at his lips, a shaggy goat-hair cloak over an undyed tunic, a bronze bell on a rope belt, leg thongs | Komatas |
 | `OBJ_EVENT_GFX_ICHOR_HOPLITE` | `hoplite.png` | cast | A Corinthian helmet pushed up with a crimson crest, a linen corselet over a crimson chiton, bronze greaves, a spear, a crimson hoplon with a bronze rim and the Lakonian lambda | Agis |
 | `OBJ_EVENT_GFX_ICHOR_AUGUR` | `augur.png` | cast | White hair and beard, a gold fillet with a black crow feather, an indigo robe under a slate himation, a hem frieze of black birds on terracotta, a staff | Polyeidos |
-| `OBJ_EVENT_GFX_ICHOR_ACOLYTE_M` | `acolyte_m.png` | cast | Short dark hair with ash on his cheek, a white chiton, a saffron himation and hem, bronze tongs holding a glowing coal | Lampon, Euboulos |
+| `OBJ_EVENT_GFX_ICHOR_ACOLYTE_M` | `acolyte_m.png` | cast | Close-cropped black hair, a smear of hearth soot across his cheek, a white chiton under a broad saffron himation that wraps his waist, a saffron hem, and bronze tongs holding a glowing coal at his side | Lampon, Euboulos |
 | `OBJ_EVENT_GFX_ICHOR_ACOLYTE_F` | `acolyte_f.png` | cast | Auburn hair in a bun tied with saffron, a white peplos with a saffron girdle and hem, a clay oil lamp held up beside her head | Pyrrha, Aithra |
 
 The class walkers take their clothes, colours and props from their portraits. Where the 16×32 frame forced a cut, the prop stayed and the pose went. The Shepherd doesn't wave, the Augur doesn't point at the sky, and Acolyte F's fist-on-hip is dropped.
@@ -126,14 +126,14 @@ The registration follows `SPRITES_npc.md` step 3, inside the Ichor blocks of the
 - **Mirrored props.** Right-facing frames are mirrored, so props held in one hand swap sides facing right. This affects the staffs, the crook, the spear, the shield, the basket, Halia's spindle and the lamp. Facing down or left shows them as drawn.
 - **Halia** reads best facing **down**: the face, gray hair, veil border and spindle all show. From behind she is a plain saffron veil.
 - **The Healer and the Merchant** are drawn for counters and stalls: face them **down**. The apron, purse, armlet and sash all show from the front.
-- **Kydippe** reads best facing **down or left**. From behind she is a dark hooded shape, which suits a figure seen leaving.
+- **Kydippe** reads best facing **down or left**, where her smile shows.
 - **The Hoplite** is at his most Lakonian facing **left or right**: the side view is all shield, crimson with the lambda. Facing down, the shield is on his left arm and the spear in his right.
 - **The Goatherd's syrinx** shows only facing down and sideways. From behind, his shaggy cloak is the read.
 - **The Fisher's net** reads best from behind or the side, as a bundle on his back. From the front it is a mesh sash across the chest.
 - **Hydna's sponge bag** hangs at her left hip and shows in every direction.
 - **Children** are shorter by design, about the vanilla little boy's height. Face them down and they read as kids at a glance.
 - **Shepherdess.** The Shepherd walker is male, after Tityros's portrait. For Amaryllis the shepherdess, `WOMAN` or `YOUTH_F` is the closer fit.
-- **Wandering.** Every walker wanders and walks normally. The staff carriers (Elder M, the Shepherd, the Augur) look best with `MOVEMENT_TYPE_FACE_*` or a short wander, since their staff hand doesn't swing.
+- **Wandering.** Every walker wanders and walks normally. The staff carriers (Elder M, the Healer, the Shepherd, the Augur) look best with `MOVEMENT_TYPE_FACE_*` or a short wander, since their staff hand doesn't swing.
 
 ## In-game check
 
@@ -155,5 +155,4 @@ The check runs in the Quickstart bedroom. Twelve walkers stand facing down, a Lu
 ## Still open
 
 - **Two tones per material.** As with the cast, materials have two tones plus the outline. The folk palette is full, so mid-tones would need a third family.
-- **Kydippe.** She is drawn to the brief, a dark himation over her head. Her hooded silhouette is close to a monk's; the hood could open further, to show more gray hair, if she should read more grandmotherly.
 - **Not opened in Porymap yet.** The entries follow the vanilla format and the cast entries, so they should display.
