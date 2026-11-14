@@ -382,8 +382,36 @@ def preview(c, entries, ts):
     save_rgb(IMG / "ui_bag_bg.png", rgb, 2)
 
 
+def write_berry_tag_palettes():
+    """The berry tag (Bag > Berries > CHECK TAG) keeps Emerald's card shapes
+    for now, recolored into the family: a parchment card, a clay title band,
+    and the striped backdrop as terracotta with throwing rings for both
+    genders. Palette 0 is the card, 4 the title and Theo's backdrop (colors
+    12-13 of tile 0x42), 5 Ianthe's backdrop; 1-3 hold flavor colors."""
+    z = (0, 0, 0)
+    card = [z, (248, 240, 216), (240, 232, 208), (232, 224, 200), PARCHMENT, (224, 208, 168), (216, 200, 160),
+            PARCH_SHADE, (200, 176, 128), PARCH_DARK, (120, 96, 72), INK_TEXT, CLAY_DARK, CLAY, CLAY_LIGHT, PARCH_SHADE]
+    flavors = [z, (248, 248, 248), (208, 240, 200), (168, 240, 152), (136, 240, 104), (104, 208, 72), (72, 176, 40),
+               (40, 144, 8), (240, 224, 8), (216, 192, 8), (200, 160, 8), (184, 128, 8), (168, 96, 8), (88, 80, 104),
+               (168, 96, 8), (0, 0, 168)]
+    purples = [z, (240, 240, 216), (224, 208, 216), (216, 176, 216), (200, 144, 216), (192, 120, 216), (176, 88, 216),
+               (168, 56, 216), (152, 24, 216), (144, 0, 216), z, z, z, z, z, z]
+    blues = [z, (240, 240, 248), (224, 232, 240), (208, 224, 240), (192, 216, 232), (176, 208, 232), (160, 200, 224),
+             (144, 192, 224), (128, 184, 224), z, z, z, GOLD, GOLD_DARK, (200, 160, 8), (184, 128, 8)]
+    title = [z, CLAY, CLAY_LIGHT, (232, 176, 128), CLAY_DARK, z, z, (176, 120, 120), PARCHMENT, CLAY, INK,
+             (248, 0, 0), CLAY, (160, 72, 40), OLIVE_LIGHT, (240, 240, 240)]
+    female = [z] * 12 + [CLAY, (160, 72, 40), z, z]
+    write_jasc(OUT / "check_berry.pal", card + flavors + purples + blues + title + female)
+    # Window text (palette 15): ink on the card; the title in parchment over
+    # an ink shadow.
+    write_jasc(OUT / "berry_tag_screen.pal", [
+        (248, 240, 216), (248, 240, 216), INK_TEXT, PARCH_SHADE, (192, 48, 32), (224, 160, 120), (56, 120, 32),
+        (176, 200, 120), (40, 88, 176), (168, 184, 208), z, z, z, PARCHMENT, INK, CLAY])
+
+
 if __name__ == "__main__":
     c, ts, entries = write_bag_bg()
     write_coin_sprite()
     write_badges()
+    write_berry_tag_palettes()
     preview(c, entries, ts)
