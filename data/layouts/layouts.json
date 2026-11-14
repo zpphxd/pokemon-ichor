@@ -9323,6 +9323,50 @@
       "border_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa_Frlg/border.bin",
       "blockdata_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa_Frlg/map.bin",
       "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_ELAIA_VILLAGE",
+      "name": "ElaiaVillage_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/ElaiaVillage/border.bin",
+      "blockdata_filepath": "data/layouts/ElaiaVillage/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KALLISTE_ROUTE1",
+      "name": "KallisteRoute1_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/KallisteRoute1/border.bin",
+      "blockdata_filepath": "data/layouts/KallisteRoute1/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AKTI_TOWN",
+      "name": "AktiTown_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/AktiTown/border.bin",
+      "blockdata_filepath": "data/layouts/AktiTown/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AKTI_TOWN_TEMPLE_OF_HESTIA",
+      "name": "AktiTown_TempleOfHestia_Layout",
+      "width": 11,
+      "height": 20,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_RustboroGym",
+      "border_filepath": "data/layouts/AktiTown_TempleOfHestia/border.bin",
+      "blockdata_filepath": "data/layouts/AktiTown_TempleOfHestia/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

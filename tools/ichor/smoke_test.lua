@@ -7,13 +7,13 @@ local OUT = "build/smoke/"
 local K = C.GBA_KEY
 
 -- frame -> action. Presses last 6 frames. Frame timing is stable for a given ROM
--- (re-probe if the intro or truck changes); RNG is not, because it follows the
--- real-time clock, so Quickstart's player gender varies between runs.
+-- (re-probe if the intro or the opening scene changes); RNG is not, because it
+-- follows the real-time clock, so Quickstart's player gender varies between runs.
 local schedule = {
   [500]  = { press = K.START },              -- skip the intro; title is up by ~900
   [1000] = { shot = "01_title.png" },
   [1020] = { press = K.SELECT },             -- Quickstart: new game from title
-  [2500] = { shot = "02_new_game.png" },     -- in the truck, door open (~1900)
+  [2500] = { shot = "02_new_game.png" },     -- at home in Elaia Village
   [2600] = { press = K.START },              -- open the start menu
   [2700] = { shot = "03_start_menu.png" },
   [2720] = { press = K.B },

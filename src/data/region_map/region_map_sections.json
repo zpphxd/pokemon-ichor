@@ -1630,6 +1630,30 @@
       "y": 4,
       "width": 1,
       "height": 1
+    },
+    {
+      "id": "MAPSEC_ELAIA_VILLAGE",
+      "name": "ELAIA VILLAGE",
+      "x": 4,
+      "y": 11,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_KALLISTE_ROUTE_1",
+      "name": "ROUTE 1",
+      "x": 4,
+      "y": 10,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AKTI_TOWN",
+      "name": "AKTI TOWN",
+      "x": 4,
+      "y": 9,
+      "width": 1,
+      "height": 1
     }
   ]
 }

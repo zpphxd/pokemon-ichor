@@ -72,3 +72,15 @@ __pycache__
 *.ips
 *.ups
 .claude/settings.local.json
+data/maps/ElaiaVillage/scripts.inc
+.claude/worktrees/
+data/maps/KallisteRoute1/scripts.inc
+data/maps/AktiTown/scripts.inc
+data/maps/ElaiaVillage_PlayersHouse_1F/scripts.inc
+data/maps/ElaiaVillage_PlayersHouse_2F/scripts.inc
+data/maps/ElaiaVillage_NeighborsHouse/scripts.inc
+data/maps/ElaiaVillage_Akademia/scripts.inc
+data/maps/AktiTown_Asclepeion/scripts.inc
+data/maps/AktiTown_Agora/scripts.inc
+data/maps/AktiTown_FishersHouse/scripts.inc
+data/maps/AktiTown_TempleOfHestia/scripts.inc

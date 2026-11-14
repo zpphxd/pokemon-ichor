@@ -74,7 +74,8 @@
     "gMapGroup_IndoorFiveIslandRoute_Frlg",
     "gMapGroup_IndoorTwoIslandRoute_Frlg",
     "gMapGroup_IndoorSixIslandRoute_Frlg",
-    "gMapGroup_IndoorSevenIslandRoute_Frlg"
+    "gMapGroup_IndoorSevenIslandRoute_Frlg",
+    "gMapGroup_IndoorKalliste"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -133,7 +134,10 @@
     "Underwater_Route128",
     "Underwater_Route129",
     "Underwater_Route105",
-    "Underwater_Route125"
+    "Underwater_Route125",
+    "ElaiaVillage",
+    "KallisteRoute1",
+    "AktiTown"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -1160,5 +1164,15 @@
   ],
   "gMapGroup_IndoorSevenIslandRoute_Frlg": [
     "SevenIsland_SevaultCanyon_House_Frlg"
+  ],
+  "gMapGroup_IndoorKalliste": [
+    "ElaiaVillage_PlayersHouse_1F",
+    "ElaiaVillage_PlayersHouse_2F",
+    "ElaiaVillage_NeighborsHouse",
+    "ElaiaVillage_Akademia",
+    "AktiTown_Asclepeion",
+    "AktiTown_Agora",
+    "AktiTown_FishersHouse",
+    "AktiTown_TempleOfHestia"
   ]
 }
