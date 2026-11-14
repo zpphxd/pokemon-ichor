@@ -331,6 +331,22 @@ local function runRamScript(script)
   emu:write32(S.gMapHeader + S.OFF_MAPHEADER_MAPSCRIPTS, tableAddr)
 end
 
+-- Faint the party and white out where the player stands: they must wake by the
+-- hearth on 1F, where Mom feeds everyone, with Elaia's theme playing.
+local function whiteOut(where)
+  for slot = 0, S.PARTY_SIZE - 1 do emu:write16(partyMon(slot) + S.OFF_MON_HP, 0) end
+  runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
+                 S.SCR_OP_CALLNATIVE, { S.SetCB2WhiteOut | 1, 4 }, S.SCR_OP_WAITSTATE, S.SCR_OP_END })
+  waitUntil(function() return mapId() == S.MAP_HOUSE_1F and inOverworld() end, 3000,
+            "home after whiting out (" .. where .. ")")
+  wait(90); shot("whiteout_" .. where)
+  settle({ [1] = "whiteout_mom_" .. where })
+  expectAt(3, 4, "whited out (" .. where .. ") and woke by the hearth")
+  local hp, maxHp = partyHp(0)
+  expect(hp == maxHp and hp > 0, string.format("Mom healed the party (%d/%d)", hp, maxHp))
+  expect(mapMusic() == S.MUS_ELAIA, "Elaia's theme at home")
+end
+
 -- --- The opening ----------------------------------------------------------------------------
 
 local SPECIES = { [0] = "Snivy", [1] = "Cyndaquil", [2] = "Piplup" }
@@ -499,23 +515,18 @@ local function main()
   expect(mapMusic() == S.MUS_ELAIA, "Elaia's theme again")
   shot("square_after")
 
+  -- Whiting out in the square, right after the battle, sends the player home.
+  whiteOut("square")
+  goTo(5, 8)
+  enter(K.DOWN, S.MAP_ELAIA, "the front door, after whiting out")
+
   -- The road north is open.
   goTo(11, 1)
   shot("north_gate_open")
   enter(K.UP, S.MAP_ROUTE1, "Route 1")
   shot("route1")
-
-  -- Whiting out sends the player home, where Mom feeds everyone.
-  for slot = 0, S.PARTY_SIZE - 1 do emu:write16(partyMon(slot) + S.OFF_MON_HP, 0) end
-  runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
-                 S.SCR_OP_CALLNATIVE, { S.SetCB2WhiteOut | 1, 4 }, S.SCR_OP_WAITSTATE, S.SCR_OP_END })
-  waitUntil(function() return mapId() == S.MAP_HOUSE_1F and inOverworld() end, 3000, "home after whiting out")
-  wait(90); shot("whiteout_home")
-  settle({ [1] = "whiteout_mom" })
-  expectAt(3, 4, "woke by the hearth")
-  hp, maxHp = partyHp(0)
-  expect(hp == maxHp and hp > 0, string.format("Mom healed the party (%d/%d)", hp, maxHp))
-  expect(mapMusic() == S.MUS_ELAIA, "Elaia's theme at home")
+  -- And from Route 1, home again: never to Hoenn.
+  whiteOut("route1")
 end
 
 local co = coroutine.create(main)
