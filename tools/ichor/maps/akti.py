@@ -446,8 +446,10 @@ def compose():
     g.set(18, 25, FARMHOUSE[3][1], False)          # its door
     g.put("fig_tree", 24, 20)
     g.put("laundry", 0, 16)                        # washing by the Fisher's house
-    # the goat pen, its south side the field wall
-    wall_run(g, 22, 26, 23)
+    # the goat pen, its south side the field wall; a gap in its north wall at
+    # (24,23) lets the player in to talk to the goats (QA P11)
+    wall_run(g, 22, 23, 23)
+    wall_run(g, 25, 26, 23)
     for y in range(24, 27):
         g.set(22, y, WALL["w"], True)
         g.set(26, y, WALL["e"], True)
@@ -724,6 +726,14 @@ def check():
                 for (x, y) in cells:
                     if not walkable(blocks, x, y):
                         errors.append(f"AktiTown: {who}'s scripted path crosses solid ({x},{y})")
+            # QA P11: the pen's goats must be reachable to talk to, and QA m1: the
+            # quay's west end (its Potion at (2,10)) must be reachable past Kleon at (5,10)
+            if (24, 24) not in reach:
+                errors.append("AktiTown: the goat pen's gate at (24,23) is shut; nobody can talk to the goats")
+            past_kleon = blocks.copy()
+            past_kleon[10, 5] |= SOLID
+            if (3, 10) not in reachable(past_kleon, (11, H - 1)):
+                errors.append("AktiTown: Kleon at (5,10) cuts off the quay's west end and its Potion")
     return errors
 
 
