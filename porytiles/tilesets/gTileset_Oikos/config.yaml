@@ -1,0 +1,11 @@
+# Oikos is the primary under every Hoenn interior secondary, and those
+# secondaries point at its tiles by index. A default (optimize) compile rebuilds
+# tiles.png from oikos's own metatiles only and would drop or move the tiles the
+# secondaries use. So: never re-pack tiles (patch only fills empty slots) and
+# never touch the palettes. tools/ichor/art/oikos_paint.py writes the Porymap
+# assets directly and decompiles; see design/phase1/TILES_oikos.md.
+tileset:
+  palettes:
+    edit_mode: locked
+  tiles:
+    edit_mode: patch
