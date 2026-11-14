@@ -304,6 +304,24 @@
     },
     {
       "type": "trigger",
+      "x": 12,
+      "y": 18,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 18,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
       "x": 18,
       "y": 18,
       "elevation": 0,

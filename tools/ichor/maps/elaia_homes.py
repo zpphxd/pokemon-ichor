@@ -80,7 +80,7 @@ HOMES = {
         ],
         "spots": [
             ("warp", "door to Elaia Village (south-arrow mat)", [(6, 7), (7, 7)]),
-            ("npc", "Glykera, at her oven", (2, 4), "north"),
+            ("npc", "Glykera, beside her oven", (1, 3), "south"),
             ("npc", "Kimon, by his chair under the window", (9, 5), "south"),
             ("bg", "the oven (the hearth), right half", (3, 3), (3, 4, "north")),
             ("bg", "honey shelf", (0, 1), (0, 2, "north")),
