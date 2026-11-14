@@ -204,8 +204,9 @@ art("mat_single", [
 
 # Marble stairs climbing into a doorway in the back wall (2 wide x 3 tall).
 # The bottom row holds the lowest steps, on the floor: the warp tiles.
-_STEPS = ["#", "#", "2", "1", "1", "3", "2", "2", "4", "4", "3", "3", "5", "5",
-          "4", "4", "6", "6", "4", "4", "7", "7", "5", "5", "8", "6"]
+# Each step, far to near: a lit nosing, the tread, a dark riser.
+_STEPS = ["#", "#", "#", "3", "2", "1", "1", "4", "3", "2", "2", "5", "4", "3", "3",
+          "6", "5", "4", "4", "7", "6", "4", "4", "8", "7", "5"]
 art("stairs_up", [
     "1" * 32,
     "1" + "8" * 30 + "1",

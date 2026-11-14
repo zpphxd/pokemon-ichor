@@ -50,6 +50,15 @@ class Room:
             for i in range(w):
                 self.set(x + i, y + j, f"{prefix}_{i}_{j}")
 
+    def put_checkered(self, prefix, x, y, w=1, h=1, single=False):
+        """Places an object on the Asclepeion's checker: cells on cream slabs
+        take the prefix_b variant."""
+        for j in range(h):
+            for i in range(w):
+                b = (x + i + y + j) % 2 == 1
+                p = prefix + ("_b" if b else "")
+                self.set(x + i, y + j, p if single else f"{p}_{i}_{j}")
+
     def blocks(self):
         out = np.zeros(self.w * self.h, np.uint16)
         for y in range(self.h):
@@ -90,18 +99,20 @@ def asclepeion():
     r.put("asc_pithos", 12, 0, 2, 3)
     r.put("asc_jar", 14, 1, 1, 2)
     # Colonnade and the couches' alcove.
+    # Row 3 stays clear so nothing draws over a player using the statue or
+    # the Pithos.
     for x in (2, 12):
-        r.put("asc_column", x, 3, 1, 3)
-        r.put("asc_column", x, 7, 1, 3)
-    r.put("asc_kline", 0, 4, 2, 2)
-    r.put("asc_kline", 0, 7, 2, 2)
-    r.set(1, 9, "asc_snake_0_0")
+        r.put_checkered("asc_column", x, 4, 1, 3)
+        r.put_checkered("asc_column", x, 8, 1, 3)
+    r.put_checkered("asc_kline", 0, 4, 2, 2)
+    r.put_checkered("asc_kline", 0, 7, 2, 2)
+    r.put_checkered("asc_snake", 1, 9)
     # The floor mosaic between two braziers, a bench by the door, the threshold.
     r.put("asc_mosaic", 6, 5, 3, 3)
-    r.put("asc_brazier", 4, 5, 1, 2)
-    r.put("asc_brazier", 10, 5, 1, 2)
-    r.put("asc_bench", 13, 9, 2, 1)
-    r.set(7, 10, "asc_mat")
+    r.put_checkered("asc_brazier", 4, 5, 1, 2)
+    r.put_checkered("asc_brazier", 10, 5, 1, 2)
+    r.put_checkered("asc_bench", 13, 10, 2, 1)
+    r.put_checkered("asc_mat", 7, 10, single=True)
     return r
 
 
@@ -157,7 +168,8 @@ def akademia():
     for x, y in ((0, 8), (3, 5), (2, 11), (1, 3), (3, 12)):
         r.set(x, y, "aka_grass_flowers")
     r.put("aka_laurel", 1, 3, 2, 3)
-    r.put("aka_bench", 1, 9, 2, 1)
+    r.put("aka_bench", 1, 7, 2, 1)
+    r.put("aka_laurel", 0, 9, 2, 3)
     r.set(4, 2, "aka_stylobate_sh")
     for y in (2, 6, 10):
         r.put("aka_column", 4, y, 1, 3)

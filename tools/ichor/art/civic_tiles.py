@@ -241,12 +241,16 @@ def define():
     obj("asc_stairs", "stairs_up", [top, body, fa_sh],
         behavior=lambda x, y: "MB_NON_ANIMATED_DOOR" if y == 2 else "MB_NORMAL",
         solid=lambda x, y: y < 2)
-    obj("asc_kline", "kline", fa)
     obj("asc_mosaic", "mosaic", fa, solid=False)
-    obj("asc_snake", "snake", fa, solid=False)
-    obj("asc_brazier", "brazier", fa, top_rows=(0,), solid=lambda x, y: y == 1)
-    obj("asc_bench", "bench", fa)
-    mt("asc_mat", fa, middle=C("mat_single"), behavior="MB_SOUTH_ARROW_WARP")
+    # Things standing on the checkered floor come over both slabs (white A,
+    # cream B); civic_rooms.py picks by the cell's place in the checker.
+    for suffix, f in (("", fa), ("_b", fb)):
+        obj(f"asc_kline{suffix}", "kline", f)
+        obj(f"asc_snake{suffix}", "snake", f, solid=False)
+        obj(f"asc_brazier{suffix}", "brazier", f, top_rows=(0,), solid=lambda x, y: y == 1)
+        obj(f"asc_bench{suffix}", "bench", f)
+        mt(f"asc_mat{suffix}", f, middle=C("mat_single"), behavior="MB_SOUTH_ARROW_WARP")
+    obj("asc_column_b", "column", fb, top_rows=(0, 1), solid=lambda x, y: y == 2)
 
     # ---- Agora --------------------------------------------------------------
     ft = C("floor_tc")
@@ -480,11 +484,25 @@ def render_sheet():
                     "--primary", "aethos", "--scale", "2", "-o", str(SHEET_OUT)], cwd=ROOT, check=True)
 
 
+def catalog():
+    """Prints the metatile table for design/phase1/TILES_civic.md."""
+    print("| Id | Name | Layers | Behavior | Solid |")
+    print("|---|---|---|---|---|")
+    for i, m in enumerate(METATILES):
+        layers = "+".join(k for k in ("bottom", "middle", "top") if m[k] is not None)
+        beh = "" if m["behavior"] == "MB_NORMAL" else f"`{m['behavior']}`"
+        print(f"| `0x{FIRST_ID + i:03X}` | `{m['name']}` | {layers} | {beh} | {'yes' if m['solid'] else ''} |")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--no-compile", action="store_true")
+    ap.add_argument("--catalog", action="store_true", help="print the metatile table and stop")
     args = ap.parse_args()
     define()
+    if args.catalog:
+        catalog()
+        return
     precheck()
     write_sources()
     write_hints()
