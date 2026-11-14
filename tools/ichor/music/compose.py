@@ -282,6 +282,12 @@ def check(song):
     secs = song.seconds(end - loop)
     if not song.target[0] <= secs <= song.target[1]:
         errs.append(f'loop is {secs:.1f}s, target {song.target}')
+    # m4a advances tempo/150 ticks a frame. If the loop isn't a whole number of frames,
+    # each pass starts at a different sub-frame phase, so passes drift (onsets and
+    # DirectSound channel steals land differently). Pick a tempo that divides evenly.
+    frames = (end - loop) * 150 / song.tempo
+    if frames != int(frames):
+        warns.append(f'loop is {frames:.2f} frames, not a whole number; passes will not repeat exactly')
     # midi.cfg must carry the voicegroup, volume, reverb and priority recorded in songs.py.
     cfg = {}
     for line in open(os.path.join(ROOT, 'sound', 'songs', 'midi', 'midi.cfg')):
