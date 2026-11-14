@@ -401,6 +401,14 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvi
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMauvilleOldMan2;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ApricornTree;
 
+// Ichor object events
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleon;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorProfessorDaphne;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAlethea;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHierophantIone;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTitanGrunt;
+// End of Ichor object events
+
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
     [OBJ_EVENT_GFX_BRENDAN_NORMAL] =           &gObjectEventGraphicsInfo_BrendanNormal,
     [OBJ_EVENT_GFX_BRENDAN_MACH_BIKE] =        &gObjectEventGraphicsInfo_BrendanMachBike,
@@ -791,6 +799,14 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_DEOXYS_N]                 = &gObjectEventGraphicsInfo_DeoxysN,
     [OBJ_EVENT_GFX_SS_ANNE]                  = &gObjectEventGraphicsInfo_SSAnne,
 #endif // IS_FRLG
+
+    // Ichor object events
+    [OBJ_EVENT_GFX_ICHOR_KLEON] =              &gObjectEventGraphicsInfo_IchorKleon,
+    [OBJ_EVENT_GFX_ICHOR_PROFESSOR_DAPHNE] =   &gObjectEventGraphicsInfo_IchorProfessorDaphne,
+    [OBJ_EVENT_GFX_ICHOR_ALETHEA] =            &gObjectEventGraphicsInfo_IchorAlethea,
+    [OBJ_EVENT_GFX_ICHOR_HIEROPHANT_IONE] =    &gObjectEventGraphicsInfo_IchorHierophantIone,
+    [OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT] =        &gObjectEventGraphicsInfo_IchorTitanGrunt,
+    // End of Ichor object events
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {
