@@ -69,8 +69,16 @@ def kairazor(p, view, phase):
 HX, HY = 1, 11
 # the near wing's four sickle-feathers and the far wing's three: (root,
 # control, tip, width), curved quadratic spines that sweep back
-FEATHERS = [((45.4, 15.4), (42.6, 5.6), (47, 1.6), 7.6), ((48, 14.6), (51.6, 3), (60.4, 1.6), 8.4),
-            ((49.6, 18), (58.6, 8.6), (62.4, 11), 8.4), ((49.4, 22.6), (59, 19), (62.4, 29.6), 8.0)]
+# the near wing is one mass: the arm and its Aegean plate along the leading
+# edge, four broad sickle-feathers fanned from the hand with only their tips
+# free, and a broad trailing edge sweeping back toward the tail
+FEATHERS = [((44, 18), (41.6, 7), (47, 1.6), 9.0), ((46.6, 17), (50.6, 4), (60.4, 1.6), 10.0),
+            ((48, 20), (57.6, 9.6), (62.4, 11.6), 10.0), ((48, 24), (58, 20.4), (62.4, 28), 9.4)]
+ARM = [(36.6, 36), (37.6, 29), (39.6, 22.6), (42.4, 16.6), (45.4, 12), (48.6, 10.4), (50.6, 13), (50, 19), (48, 25),
+       (45, 31), (42, 36.6), (39, 38)]
+ARM_PLATE = [(37.4, 34.6), (38.4, 28.6), (40.4, 22.4), (43, 16.6), (45.8, 12.4), (48, 11), (49, 12.6), (46.6, 16),
+             (44, 21.4), (42, 27.4), (40.6, 34.6)]
+TRAIL = [(46, 24), (55, 25), (62.4, 28), (60.6, 31), (56.6, 34), (51.6, 36.6), (46.6, 38.6), (42, 39.4), (40, 36)]
 FAR_FEATHERS = [((33.6, 16.4), (30.6, 8.4), (33, 2.4), 5.8), ((36, 16), (37.6, 7.4), (42, 3.4), 6.2),
                 ((38.4, 18.4), (42.6, 12.4), (46, 10), 5.4)]
 LAYERS = ("far", "tail", "body", "near", "neck", "head")
@@ -145,10 +153,9 @@ def _front(p, ph, layers=LAYERS):
         PARTS["fingers"] = []
         for i, (r, c, t, w) in reversed(list(enumerate(FEATHERS))):
             PARTS["fingers"].append(_feather(p, r, c, t, w, beat=W * (1 - i * 0.2), group=32 + i))
-        PARTS["hand"] = p.poly([(37.4, 35), (39, 27), (41.6, 19.6), (44.4, 13.6), (47.6, 11.4), (51, 13), (52.4, 18),
-                                (52, 24), (49, 30), (44.4, 35), (40.6, 37.4)], marb, group=30)
-        PARTS["wplate"] = p.poly([(38, 34), (39.6, 26.6), (42.4, 19.6), (45.4, 14.6), (48, 12.8), (49.4, 14.4),
-                                  (47, 18), (44.6, 23), (42.6, 28.6), (41.4, 35)], aeg, group=40)
+        PARTS["trail"] = p.poly(TRAIL, marb, group=31)
+        PARTS["hand"] = p.poly(ARM, marb, group=30)
+        PARTS["wplate"] = p.poly(ARM_PLATE, aeg, group=40)
         PARTS["splate"] = p.poly([(38.4, 32), (43, 29.6), (47, 31.6), (47.6, 35.6), (44.4, 38.6), (40, 37.6)], aeg,
                                  group=42)
 
@@ -236,10 +243,7 @@ def _icon(p, ph):
     """Party icon: Kairazor boiled down for 32 px. A big head under its gold
     forelock, one wing of three broad sickle-feathers, the balance below."""
     W = -3 if ph else 0
-    p.limb(bez3((44, 46), (49, 55), (55, 55), (56, 47)), 8, 4, marb, group=8)
-    p.limb([(47, 46), (62, 46)], 3, 3, gold, group=9)
-    for cx in (49.6, 58.4):
-        p.poly([(cx - 4, 50), (cx + 4, 50), (cx + 3, 55), (cx - 3, 55)], aeg, group=10)
+    p.limb(bez3((44, 46), (50, 56), (55, 54), (55, 45)), 8, 4, marb, group=8)
     p.blob(39, 42, 13, 11, marb, group=1)
     p.poly([(28, 40), (32, 34), (36, 40), (32, 46)], gem, group=21)
     for (r, c, t, w) in (((44, 17), (42, 7), (48, 1.6), 9), ((47, 17), (53, 6), (61.4, 6), 10),
@@ -248,6 +252,13 @@ def _icon(p, ph):
     p.poly([(34, 40), (36, 30), (40, 21), (44, 14), (48, 12.6), (51, 17), (50, 25), (46, 32), (41, 38)], marb, group=30)
     p.poly([(35, 38), (37, 30), (40.6, 22), (44.6, 15), (47, 14.4), (44, 21), (41, 29), (38.6, 38)], aeg, group=40)
     p.limb(bez3((35, 39), (33, 28), (28, 24), (23, 28)), 10, 9, marb, group=50)
+    # the balance: the tail rises into a plate, the gold beam grows from it
+    p.limb([(46.6, 40), (62, 40)], 3.4, 3.4, gold, group=70)
+    p.poly([(55, 34.6), (59.4, 40), (55, 45.6), (50.6, 40)], aeg, group=71)
+    for cx in (48.6, 60):
+        p.limb([(cx, 41), (cx, 45)], 1.6, 1.6, gold, group=72)
+        p.poly([(cx - 3.6, 45), (cx + 2.6 if cx > 55 else cx + 3.6, 45), (cx + 2.2, 49.6), (cx - 2.6, 49.6)], aeg,
+               group=73)
     # the head, big; the bare crown sweeping back; the mask round a narrow eye
     p.poly([(2, 31), (5, 27), (10, 23.4), (16, 21.4), (22, 21.6), (27.4, 24.4), (29.4, 28), (25, 30), (20, 33.6),
             (14, 35.6), (7, 35.6), (2, 33.6)], marb, group=60)
