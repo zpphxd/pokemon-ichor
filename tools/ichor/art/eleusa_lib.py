@@ -110,6 +110,25 @@ def ground(s: Struct, kind: str, cells=None):
         s.B.rect(cx * 16, cy * 16, 16, 16, None)
 
 
+def on_other_ground(s, key, kind, title=None, shadow=None):
+    """A copy of a structure on another borrowed ground: the same art over
+    aethos's grass, path or sea. It costs metatiles but no tiles, except where
+    `shadow` (a color name) repaints the art's grass shadows ('gd') for the new
+    ground."""
+    c = Struct(key, title or s.title, s.w, s.h, s.section, walk=list(s.walk), notes=s.notes,
+               names=dict(s.names))
+    for ln in ("bottom", "middle", "top"):
+        c.layers[ln].a[:] = s.layers[ln].a
+    c.behaviors = dict(s.behaviors)
+    c.ground = {cell: kind for cell in getattr(s, "ground", {})}
+    if shadow:
+        for L in (c.M, c.T):
+            ys, xs = np.nonzero((L.a[..., 3] > 0) & (L.a[..., :3] == C["gd"]).all(-1))
+            for y, x in zip(ys, xs):
+                L.px(int(x), int(y), shadow)
+    return c
+
+
 def struct(key, title, w, h, section, walk=None, notes="", names=None, on=None):
     """A Struct, optionally on borrowed ground everywhere ('grass', 'path')."""
     s = Struct(key, title, w, h, section, walk=walk, notes=notes, names=names)

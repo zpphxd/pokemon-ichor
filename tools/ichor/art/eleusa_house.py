@@ -493,7 +493,7 @@ def court_wall(L, ox, oy, key):
     def ns(x0, x1, y0, y1):
         for y in range(y0, y1 + 1):
             for x in range(x0, x1 + 1):
-                c = ("rf3", "rf2", "rf2", "rf1", "rf1", "rf0")[x - x0] if y % 4 else "rf0"
+                c = ("rf3", "rf2", "rf1", "rf0")[x - x0] if y % 4 else "rf0"
                 L.px(ox + x, oy + y, c)
             L.px(ox + x0 - 1, oy + y, "ink")
             L.px(ox + x1 + 1, oy + y, "ink")
@@ -513,7 +513,7 @@ def court_wall(L, ox, oy, key):
                 L.px(ox + 13, oy + y, "ink")
                 L.px(ox + 12, oy + y, "pl0" if y > 7 else "rf0")
     elif key == "NS":
-        ns(5, 10, 0, 15)
+        ns(6, 9, 0, 15)
     elif key in ("NE", "NW"):
         # a front corner: the north-south run comes down onto the east-west run
         if key == "NE":
@@ -526,7 +526,7 @@ def court_wall(L, ox, oy, key):
             for y in range(3, 16):
                 L.px(ox + 11, oy + y, "ink")
                 L.px(ox + 10, oy + y, "pl0" if y > 7 else "rf0")
-        ns(5, 10, 0, 3)
+        ns(6, 9, 0, 3)
     elif key == "gate":
         # two piers under a little tiled roof; the gate leaves stand open
         for y in range(0, 6):
@@ -620,7 +620,7 @@ def build_parts():
         extra(s.B, i * 16, 0, k)
     out.append(s)
     s = struct("porch", "Porch (pastas) on timber posts", 3, 2, SEC, walk=["XXX", "XXD"],
-               names={"W0_post": (0, 0), "W0_mid": (1, 0), "W0_beam_end": (2, 0),
+               names={"W0_post": (0, 0), "W0_mid": (1, 0), "W0_mid_b": (2, 0),
                       "W1_post": (0, 1), "W1_mid": (1, 1), "W1_door": (2, 1)},
                notes="Wall rows in the porch's shade, under a tiled roof's R1 row. A post "
                      "stands in `*_post` cells; `*_mid` repeats; `W1_door` is a plank door "

@@ -15,7 +15,7 @@ from __future__ import annotations
 import numpy as np
 
 import agros_rock
-from eleusa_lib import Layer, grass, put, struct
+from eleusa_lib import Layer, grass, on_other_ground, put, struct
 
 SEC = "farm"
 
@@ -285,4 +285,7 @@ def pergola():
 
 def build():
     a = alonia()
-    return [a, alonia_work(a), winnowing(), *pithoi(), oven()]
+    jars = pithoi()
+    return [a, alonia_work(a), winnowing(), *jars, oven(),
+            on_other_ground(jars[0], "pithos_path", "path", shadow="p1",
+                            title="A great pithos, on beaten earth or paving")]

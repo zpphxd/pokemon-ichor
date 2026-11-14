@@ -79,7 +79,7 @@ palette (`eleusa_lib.GROUPS`). They reach Porytiles as packing hints.
 | marble | Honey marble, Eleusis's grey stone, gilding, torch fire |
 | rock | The Plutonion's crag, the Kallichoron's curb, the Rheitoi's kerbs |
 
-**Tile budget.** ? of 504 tiles are used (422 metatiles). A secondary owns 512
+**Tile budget.** ? of 504 tiles are used (430 metatiles). A secondary owns 512
 tiles, but the door animations copy their frames into tiles 504-511
 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build fails past 504. It merges
 tiles within two pixels of each other, and the sacred buildings, the house kit and the
@@ -251,6 +251,17 @@ ids              walk
 
 Pieces: `scattered` 0x234, `dense` 0x235.
 
+### A sheaf standing on paving
+
+`sheaf_path`, 1 wide by 1 tall. On borrowed aethos grass: a sheaf by a door, a shrine or a gate.
+
+```text
+ids        walk
+0x236   X
+```
+
+Borrowed ground (path): cells 0,0.
+
 ## Farmyards
 
 The threshing floor (agros's own alonia) and its harvest-time middle, the winnowing, pithoi standing and sunk, and the bread oven.
@@ -324,6 +335,18 @@ ids              walk
 ```
 
 Borrowed ground (grass): cells 0,0, 0,1, 1,0, 1,1.
+
+### A great pithos, on beaten earth or paving
+
+`pithos_path`, 1 wide by 2 tall. The storage jar Pandora's box really was. Stand them in rows for a granary yard. The rim draws over the player; the body blocks.
+
+```text
+ids        walk
+0x26F   T
+0x277   X
+```
+
+Borrowed ground (path): cells 0,0, 0,1.
 
 ## The house kit
 
@@ -420,7 +443,7 @@ ids                    walk
 0x2BD 0x2BE 0x2BF   X X D
 ```
 
-Pieces: `W0_post` 0x2B5, `W0_mid` 0x2B6, `W0_beam_end` 0x2B7, `W1_post` 0x2BD, `W1_mid` 0x2BE, `W1_door` 0x2BF.
+Pieces: `W0_post` 0x2B5, `W0_mid` 0x2B6, `W0_mid_b` 0x2B7, `W1_post` 0x2BD, `W1_mid` 0x2BE, `W1_door` 0x2BF.
 
 ### Pyrgos: the farm's stone tower
 
@@ -614,7 +637,7 @@ Borrowed ground (grass): cells 0,0.
 
 ### The Plutonion: the cave mouth to the underworld
 
-`plutonion`, 4 wide by 3 tall. A crag of the sanctuary's rock, split by a black cave mouth. Hades's shrine stands just inside, two small columns barely lit. The mouth is a two-cell door (MB_NON_ANIMATED_DOOR): put a warp on both. The crag's top row stands on borrowed grass; a crag face runs on east and west by repeating the outer columns.
+`plutonion`, 4 wide by 3 tall. A crag of the sanctuary's rock, split by a black cave mouth. Hades's shrine stands just inside, two small columns barely lit. The mouth is a two-cell door (MB_NON_ANIMATED_DOOR): put a warp on both. The crag's top row stands on borrowed grass.
 
 ```text
 ids                          walk
@@ -688,6 +711,31 @@ ids              walk
 ```
 
 Borrowed ground (grass): cells 0,0, 0,1, 1,0, 1,1.
+
+### A procession torch, on paving
+
+`torch_post_path`, 3 wide by 1 tall. Stand `foot` on the ground and put `top_lit` (or `top_cold`) in the cell above it: the torch head draws over the player. Line the Sacred Way with them for the night of the Mysteries. Each lit metatile is its cold one - 1: swap top_cold for top_lit to light one (METATILE_Eleusa_TorchPost_Lit / _Cold).
+
+```text
+ids                    walk
+0x38D 0x38E 0x38F   T T X
+```
+
+Pieces: `top_lit` 0x38D, `top_cold` 0x38E, `foot` 0x38F.
+
+Borrowed ground (path): cells 0,0, 1,0, 2,0.
+
+### Demeter's field shrine, on paving
+
+`grain_shrine_path`, 1 wide by 2 tall. A little stone altar heaped with a sheaf, barley cakes and poppies: a place for the rites' offerings (SYSTEMS.md: grain shrines in fields for Demeter). The sheaf's top draws over the player.
+
+```text
+ids        walk
+0x36F   T
+0x377   X
+```
+
+Borrowed ground (path): cells 0,0, 0,1.
 
 ## Eleusa's Asclepeion and Agora
 

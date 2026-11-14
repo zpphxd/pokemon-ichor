@@ -17,7 +17,7 @@ from __future__ import annotations
 import numpy as np
 
 import agros_ground as AG
-from eleusa_lib import GRASS, Layer, Struct, grass, put, struct
+from eleusa_lib import GRASS, Layer, Struct, grass, on_other_ground, put, struct
 
 SEC = "fields"
 
@@ -274,4 +274,6 @@ def build():
                        "A reaped field: rows of cut straw over dry earth. Walkable. The same 47 "
                        "shapes as the wheat, so a field can be half reaped: put stubble cells "
                        "beside wheat cells and give each the shape it has on its own.")
-    return [wheat, wheat_centers(), stubble, *sheaves(), poppies()]
+    sh = sheaves()
+    return [wheat, wheat_centers(), stubble, *sh, poppies(),
+            on_other_ground(sh[1], "sheaf_path", "path", title="A sheaf standing on paving")]

@@ -1663,3 +1663,19 @@ const struct Tileset gTileset_Eleusa =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Eleusa,
     .callback = NULL,
 };
+
+// Ichor: temple_demeter, the Temple of Demeter's underground megaron (the
+// Lesser Mysteries). Porytiles-managed, built by
+// tools/ichor/art/temple_demeter_build.py; it uses only its own tiles and
+// palettes 6-12, so it works on any interior primary (oikos). Its doused
+// palette set is gTilesetPalettes_TempleDemeterGlow (graphics.h).
+const struct Tileset gTileset_TempleDemeter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleDemeter,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleDemeter,
+    .metatiles = gMetatiles_PorytilesManaged_TempleDemeter,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleDemeter,
+    .callback = NULL,
+};

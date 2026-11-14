@@ -25,7 +25,7 @@ from __future__ import annotations
 import numpy as np
 
 import eleusa_house as HZ
-from eleusa_lib import Layer, ground, put, struct
+from eleusa_lib import Layer, ground, on_other_ground, put, struct
 
 SEC = "sanctuary"
 SEC_CIVIC = "civic"
@@ -696,33 +696,33 @@ def seat_stone():
     return s
 
 
-def _rock_field():
-    """A 16 px periodic faceted rock face: blocks of limestone, each lit on its
-    top-left edges and dark along its bottom-right cracks (rock group)."""
-    seeds = [(2, 2), (10, 1), (6, 7), (14, 9), (1, 12), (9, 13)]
-    tone = ["p2", "p3", "l1", "p2", "l1", "p2"]
-    own = np.zeros((16, 16), int)
-    for y in range(16):
-        for x in range(16):
-            best, bi = 1e9, 0
-            for i, (sx, sy) in enumerate(seeds):
-                for ddx in (-16, 0, 16):
-                    for ddy in (-16, 0, 16):
-                        d = 0.45 * (x - sx - ddx) ** 2 + 2.2 * (y - sy - ddy) ** 2
-                        if d < best:
-                            best, bi = d, i
-            own[y, x] = bi
-    out = [[None] * 16 for _ in range(16)]
-    for y in range(16):
-        for x in range(16):
-            i = own[y, x]
-            c = tone[i]
-            if own[(y + 1) % 16, x] != i or own[y, (x + 1) % 16] != i:
-                c = "l0"                                    # crack below / right
-            elif own[(y - 1) % 16, x] != i or own[y, (x - 1) % 16] != i:
-                c = "p3"                                    # lit edge above / left
-            out[y][x] = c
-    return out
+def _mass(layer, poly, lit_rows=3, seed=0):
+    """One mass of the crag: a polygon of limestone, its top lit, its front
+    banded with strata and split by cracks, its east edge in shadow."""
+    from PIL import Image as _I, ImageDraw as _D
+    m = _I.new("1", (layer.w, layer.h), 0)
+    _D.Draw(m).polygon(poly, fill=1)
+    mask = np.array(m, bool)
+    top = np.full(layer.w, layer.h)
+    right = np.full(layer.h, -1)
+    for y, x in zip(*np.nonzero(mask)):
+        top[x] = min(top[x], y)
+        right[y] = max(right[y], x)
+    for y, x in zip(*np.nonzero(mask)):
+        d = y - top[x]
+        if d < lit_rows:
+            c = "p3" if d == 0 or (x + seed) % 5 else "p2"
+        else:
+            band = (y + seed) % 8
+            c = "p2" if band < 3 else ("p1" if band < 7 else "l1")
+            if band == 7 and (x % 16) in (3, 11):
+                c = "l0"
+            if (x % 16) == 6 and d > 4 and (y % 16) in (4, 5, 6, 7):
+                c = "l0"                                  # a crack
+        if right[y] - x < 2:
+            c = "l0" if right[y] - x == 0 else "l1"
+        layer.px(x, y, c)
+    return mask
 
 
 def plutonion():
@@ -731,36 +731,34 @@ def plutonion():
                notes="A crag of the sanctuary's rock, split by a black cave mouth. Hades's "
                      "shrine stands just inside, two small columns barely lit. The mouth is "
                      "a two-cell door (MB_NON_ANIMATED_DOOR): put a warp on both. The crag's "
-                     "top row stands on borrowed grass; a crag face runs on east and west by "
-                     "repeating the outer columns.")
-    rock = _rock_field()
+                     "top row stands on borrowed grass.")
     W, H = 64, 48
     layer = Layer(W, H)
-    top = [9, 6, 4, 3, 4, 2, 1, 2, 3, 2, 3, 5, 4, 6, 8, 10]
-
-    def height(x):
-        i = x / (W - 1) * (len(top) - 1)
-        a, b = int(i), min(int(i) + 1, len(top) - 1)
-        return top[a] + (top[b] - top[a]) * (i - a)
-    for y in range(H):
-        for x in range(W):
-            if y >= height(x):
-                layer.px(x, y, rock[y % 16][x % 16])
-    # only the crag's top skyline is outlined; its sides run on as rock face
+    # three masses: the west shoulder, the east shoulder, and the brow over the
+    # cave; drawn back to front so the nearer ones overlap
+    masks = [
+        _mass(layer, [(20, 6), (30, 1), (41, 2), (47, 7), (45, 22), (20, 22)], seed=2),
+        _mass(layer, [(0, 47), (0, 17), (5, 10), (13, 7), (21, 11), (24, 20), (17, 47)], seed=0),
+        _mass(layer, [(40, 13), (50, 6), (58, 9), (63, 15), (63, 47), (46, 47), (42, 30)], seed=0),
+    ]
+    union = masks[0] | masks[1] | masks[2]
+    # grass and a shrub on the ledges
     for x in range(W):
-        y = int(np.ceil(height(x)))
-        layer.px(x, y, "ink")
-        layer.px(x, y + 1, "p3" if x < 40 else "p2")
-        if x % 3 == 0:
-            layer.px(x, y - 1, "g1")
-    # the cave mouth: a dark arch over two cells, the shrine glimpsed inside
-    for y in range(18, 48):
+        ys = np.nonzero(union[:, x])[0]
+        if len(ys):
+            y = ys[0]
+            if x % 4 in (0, 1) and y > 2:
+                layer.px(x, y - 1, "g1" if x % 2 else "g2")
+    put(layer, 6, 7, [".gg.", "gGGg", ".gg."], {"g": "gd", "G": "g1"})
+    put(layer, 52, 4, [".gg.", "gGGg", ".gg."], {"g": "gd", "G": "g1"})
+    # the cave mouth: a black arch, its rim in shadow, the shrine glimpsed inside
+    for y in range(16, 48):
         for x in range(14, 50):
-            d = ((x - 31.5) / 17.5) ** 2 + ((y - 48) / 29) ** 2
+            d = ((x - 31.5) / 16.5) ** 2 + ((y - 48) / 28) ** 2
             if d <= 1:
                 layer.px(x, y, "cv")
-            elif d <= 1.13:
-                layer.px(x, y, "ink" if y > 22 else "l0")
+            elif d <= 1.16:
+                layer.px(x, y, "l0")
     put(layer, 24, 30, [
         "..KKKKKKKKKKKK..",
         "KKl1111111111lKK",
@@ -772,9 +770,18 @@ def plutonion():
         ".K1K........K1K.",
         ".KlK........KlK.",
     ], {"K": "ink", "l": "l1", "1": "l0", "b": "b1"})
-    for x in range(18, 46):
+    for x in range(17, 47):
         layer.px(x, 46, "l1" if x % 6 else "l0")
         layer.px(x, 47, "ink")
+    # outline the skyline only (the masses' sides run on as rock)
+    sil = np.zeros((H, W), bool)
+    for x in range(W):
+        ys = np.nonzero(layer.a[:, x, 3] > 0)[0]
+        if len(ys):
+            sil[ys[0], x] = True
+    for y, x in zip(*np.nonzero(sil)):
+        if layer.get(x, y) not in ("g1", "g2"):
+            layer.px(x, y, "ink")
     ground(s, "grass", [(i, 0) for i in range(4)])
     s.M.a[0:16] = layer.a[0:16]
     s.B.a[16:48] = layer.a[16:48]
@@ -803,7 +810,7 @@ def sacred_way():
         offs = [(0, 7), (4, 11), (2, 9)][r]
         joint = yy in rows or xx in offs
         if joint:
-            return "l1"
+            return "p1" if (xx + yy) % 3 else "l1"
         lit = yy in [v + 1 for v in rows] or xx in [o + 1 for o in offs]
         return "p3" if lit else ("p2" if (xx * 3 + yy) % 9 else "p1")
 
@@ -1000,8 +1007,13 @@ def pomegranate():
 
 
 def build():
+    tp, gs = torch_post(), grain_shrine()
     return [temple_demeter(), propylaea(), telesterion(), kallichoron(), seat_stone(),
-            plutonion(), sacred_way(), rheitoi(), torch_post(), grain_shrine(), pomegranate()]
+            plutonion(), sacred_way(), rheitoi(), tp, gs, pomegranate(),
+            on_other_ground(tp, "torch_post_path", "path",
+                            title="A procession torch, on paving"),
+            on_other_ground(gs, "grain_shrine_path", "path",
+                            title="Demeter's field shrine, on paving")]
 
 
 def build_civic():
