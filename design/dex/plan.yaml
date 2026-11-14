@@ -1246,6 +1246,19 @@ lines:
   members:
     - {concept: Dark colossus, types: [Ghost]}
 
+- id: ichor
+  roles: [mythical]
+  myth: >-
+    Ichor is the golden blood of the gods, the thing that makes them immortal
+    (Iliad 5.340). Talos's single vein held it.
+  design: >-
+    A small golden being shaped like a falling drop. Like Mew, it can learn
+    every TM and Transform.
+  habitat: The Pool of Mnemosyne, Arkadia (post-game). It is the memory of the first myth.
+  notes: The title Pokémon, kept as a fourth mythical after the three colossi (decision D4).
+  members:
+    - {concept: Ichor, types: [Psychic]}
+
 # ── Decisions the user needs to make at Gate 1 ────────────────────────────
 # Each has a recommendation. Record the answers in design/dex/DECISIONS.md.
 
@@ -1281,10 +1294,11 @@ decisions:
 - id: D4
   answer: >-
     Changed (2026-11-14): three Regi-style colossi for Zeus, Poseidon and Hades
-    replace Hope and Ichor, and the dex grows to 151. The user: "mythicals
-    should be like a zeus pokemon, a posiden pokemon, and a hades pokemon. as
-    like regis giant types ... with good names."
-  title: Three mythicals, the colossi of Zeus, Poseidon and Hades
+    replace Hope. The user: "mythicals should be like a zeus pokemon, a posiden
+    pokemon, and a hades pokemon. as like regis giant types ... with good
+    names." Ichor stays as the title Pokémon and a fourth mythical, #152. The
+    user: "Keep it as #152". The dex is 152.
+  title: Four mythicals, the colossi of Zeus, Poseidon and Hades, and Ichor
   detail: >-
     The three sons of Kronos drew lots for the world: Zeus the sky, Poseidon
     the sea, Hades the dark (Iliad 15.187–193). Their cult statues are a
@@ -1293,8 +1307,8 @@ decisions:
     Pontanax (Water) and Nekranax (Ghost). Suggested unlock: Kronolith, who
     swallowed them, gives back three bronze lots at the Omphalos in Delphoi,
     and each lot unseals one colossus on Olympus, in Atlantis or in the
-    Underworld. This replaces the earlier pair, Hope (Elpimoth) and Ichor
-    (Ichorin).
+    Underworld. They replace Hope (Elpimoth). Ichor (Ichorin) stays as the
+    title Pokémon, Aethos's Mew, at #152.
   recommend: Yes. Where the lots and the sealed chambers go in the post-game is the main session's call.
 - id: D5
   answer: >-

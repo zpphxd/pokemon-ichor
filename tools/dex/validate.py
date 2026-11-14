@@ -7,7 +7,7 @@ tables of species, moves and abilities.
 
   python3 tools/dex/validate.py                 check every entry written so far
   python3 tools/dex/validate.py --lines a,b     check only these lines
-  python3 tools/dex/validate.py --complete      also require all 151 entries
+  python3 tools/dex/validate.py --complete      also require all 152 entries
 
 Exit status is 1 if any error is found. Warnings don't fail the run.
 """

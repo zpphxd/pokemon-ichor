@@ -23,7 +23,7 @@ Plan: `design/dex/PLAN.md` (generated from `plan.yaml`). Review page: https://cl
 | D1 | Regional starters replace Snivy, Cyndaquil and Piplup | Yes, once the species exist in the ROM | Yes |
 | D2 | Kronos and the Moirai replace Dialga and the lake trio in the story | Yes | Open |
 | D3 | Add Kairos as a post-game legendary at Olympia | Yes | Open |
-| D4 | Two mythicals, Hope and Ichor | Yes | Changed: "mythicals should be like a zeus pokemon, a posiden pokemon, and a hades pokemon. as like regis giant types ... with good names." Three Regi-style colossi, the cult statues of the brothers who drew lots for the world, replace Hope and Ichor: Olympanax (Zeus, Electric), Pontanax (Poseidon, Water) and Nekranax (Hades, Ghost). The dex grows to 151. |
+| D4 | Two mythicals, Hope and Ichor | Yes | Changed: "mythicals should be like a zeus pokemon, a posiden pokemon, and a hades pokemon. as like regis giant types ... with good names." Three Regi-style colossi, the cult statues of the brothers who drew lots for the world, replace Hope: Olympanax (Zeus, Electric), Pontanax (Poseidon, Water) and Nekranax (Hades, Ghost). Ichorin, the title Pokémon, stays as a fourth mythical at #152: "Keep it as #152". The dex is 152. |
 | D5 | How the regional dex mixes with the existing 1,025 species | (a) Aethos-only through the League | (b) mixed: "while we add in the other pokemon into the region too". Then changed to (a): "(a). It makes Aethos feel like a real new region and keeps the bible's post-game promise. lets switch it to this". Only Aethos's own species appear until the League is beaten; existing species arrive in the post-game. |
 | D6 | Post-game Labors use regional species where one exists | Yes | Open |
 
@@ -31,7 +31,7 @@ D2, D3 and D6 don't block Gate 2. The entries for those species are written eith
 
 ## Gate 2: the full entries
 
-All 151 entries are in `design/dex/species/*.yaml`, and `tools/dex/validate.py --complete` passes them with no errors or warnings. Gate 2 reviewed 150; the three colossi replaced the two mythicals afterwards (D4). Review page: https://claude.ai/artifact/D4PXiuRijZf2Sdubr9QADh
+All 152 entries are in `design/dex/species/*.yaml`, and `tools/dex/validate.py --complete` passes them with no errors or warnings. Gate 2 reviewed 150; afterwards the three colossi replaced Hope and Ichorin moved to #152 (D4). Review page: https://claude.ai/artifact/D4PXiuRijZf2Sdubr9QADh
 
 Choices made in review, which the user can overrule:
 - **Borrowed signature moves.** Existing species arrive in Aethos in the post-game, so other Pokémon's signature moves were swapped for generic ones to avoid clashes there. Five were kept because the myth depends on them:
@@ -51,7 +51,7 @@ Waiting on the user:
 | — | Approve the 150 entries, or name the ones to change | — | pending |
 | D7 | New move **Harpe** for Kronolith: Ground, physical, 100 power, hits through Protect and Substitute. It costs one new move and an animation. | Yes: the story spends two acts rebuilding the Harpe | pending |
 | D8 | New move **Shield Clash** for the Kouretes line: Steel, special sound move, 80 power, stops the target using sound moves for two turns. It costs one new move and an animation. | Optional: Steel moves already cover the role | pending |
-| D9 | Call the title mythical **Ichorin** (coined) or plain **Ichor** | Ichorin, matching the other coined names | Withdrawn (2026-11-14): the Ichor mythical is gone, replaced by the three colossi (D4). |
+| D9 | Call the title mythical **Ichorin** (coined) or plain **Ichor** | Ichorin, matching the other coined names | Ichorin (2026-11-14): kept under that name as #152, from the user's "Keep it as #152" reply to a question that named it Ichorin. |
 
 ## Gate 3: sprites
 

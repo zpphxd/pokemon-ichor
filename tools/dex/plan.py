@@ -25,7 +25,7 @@ TEMPLATE = ROOT / "tools/dex/plan_page.html"
 TYPES = ["Normal", "Fire", "Water", "Grass", "Electric", "Ice", "Fighting",
          "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost",
          "Dragon", "Dark", "Steel", "Fairy"]
-TARGET_TOTAL = 151
+TARGET_TOTAL = 152
 
 # method -> (table label, required keys)
 METHODS = {

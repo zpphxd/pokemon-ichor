@@ -6,12 +6,12 @@ The labels below are working concepts, not names. Names, stats, abilities, moves
 
 ## At a glance
 
-- **151 species**: 11 three-stage lines, 42 two-stage lines, 1 branching line and 31 single-stage species.
-- **87 dual-type** and **64 single-type** species.
+- **152 species**: 11 three-stage lines, 42 two-stage lines, 1 branching line and 32 single-stage species.
+- **87 dual-type** and **65 single-type** species.
 - **Babies:** Storm kid, Erote.
 - **Targets for Gate 2:** starters about 310 / 405 / 530 BST; the pseudo-legendary 300 / 420 / 600; Kronos and Kairos about 680; the Moirai about 580 each; Pegasus about 580; the mythicals 600.
 - **Names:** the engine allows 12 characters (`POKEMON_NAME_LENGTH`); we aim for Gen 3's 10. Categories fit in 12.
-- **ROM:** front, back, shiny, icon, footprint and follower sprites for 151 species come to roughly 1.2–1.5 MB if they reuse existing cries, about a quarter of today's headroom.
+- **ROM:** front, back, shiny, icon, footprint and follower sprites for 152 species come to roughly 1.2–1.5 MB if they reuse existing cries, about a quarter of today's headroom.
 - **Moves:** the plan needs no new moves. Any signature move proposed at Gate 2 is flagged as a cost.
 
 ## Decisions for you
@@ -34,11 +34,11 @@ The labels below are working concepts, not names. Names, stats, abilities, moves
 
 *Answer:* open
 
-**D4. Three mythicals, the colossi of Zeus, Poseidon and Hades.** The three sons of Kronos drew lots for the world: Zeus the sky, Poseidon the sea, Hades the dark (Iliad 15.187–193). Their cult statues are a Regi-style trio of living colossi, each slow, single-typed and lopsided, with its lot's emblem glowing where a face would be: Olympanax (Electric), Pontanax (Water) and Nekranax (Ghost). Suggested unlock: Kronolith, who swallowed them, gives back three bronze lots at the Omphalos in Delphoi, and each lot unseals one colossus on Olympus, in Atlantis or in the Underworld. This replaces the earlier pair, Hope (Elpimoth) and Ichor (Ichorin).
+**D4. Four mythicals, the colossi of Zeus, Poseidon and Hades, and Ichor.** The three sons of Kronos drew lots for the world: Zeus the sky, Poseidon the sea, Hades the dark (Iliad 15.187–193). Their cult statues are a Regi-style trio of living colossi, each slow, single-typed and lopsided, with its lot's emblem glowing where a face would be: Olympanax (Electric), Pontanax (Water) and Nekranax (Ghost). Suggested unlock: Kronolith, who swallowed them, gives back three bronze lots at the Omphalos in Delphoi, and each lot unseals one colossus on Olympus, in Atlantis or in the Underworld. They replace Hope (Elpimoth). Ichor (Ichorin) stays as the title Pokémon, Aethos's Mew, at #152.
 
 *Recommendation:* Yes. Where the lots and the sealed chambers go in the post-game is the main session's call.
 
-*Answer:* Changed (2026-11-14): three Regi-style colossi for Zeus, Poseidon and Hades replace Hope and Ichor, and the dex grows to 151. The user: "mythicals should be like a zeus pokemon, a posiden pokemon, and a hades pokemon. as like regis giant types ... with good names."
+*Answer:* Changed (2026-11-14): three Regi-style colossi for Zeus, Poseidon and Hades replace Hope. The user: "mythicals should be like a zeus pokemon, a posiden pokemon, and a hades pokemon. as like regis giant types ... with good names." Ichor stays as the title Pokémon and a fourth mythical, #152. The user: "Keep it as #152". The dex is 152.
 
 **D5. How the regional dex mixes with the existing 1,025 species.** The bible left this open. Options. (a) Aethos-only through the League, with the national dex opening in the post-game (Time Fractures, the Odyssey, Atlantis, Katabasis), so "all 1,025 catchable" still holds. (b) Mixed throughout. (c) Aethos-only, full stop. The Phase 1 Route 1 table still uses existing species; under (a) it switches to Aethos species once they are in the ROM.
 
@@ -68,7 +68,7 @@ A species counts once for each of its types.
 | Poison | 11 | 2 | 9 |
 | Ground | 14 | 4 | 10 |
 | Flying | 21 | 1 | 20 |
-| Psychic | 13 | 0 | 13 |
+| Psychic | 14 | 1 | 13 |
 | Bug | 10 | 5 | 5 |
 | Rock | 13 | 1 | 12 |
 | Ghost | 11 | 4 | 7 |
@@ -96,7 +96,7 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 | Level up at a place | 2 | #55 Rooting piglet, #91 Spring bulb |
 | Level up knowing a move | 2 | #44 Tortoise hatchling, #75 Temple snakelet |
 
-## All 151 slots
+## All 152 slots
 
 | # | Concept | Types | Evolves | Line | Role |
 |---:|---|---|---|---|---|
@@ -251,6 +251,7 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 | 149 | Sky colossus | Electric |  | zeus (single) | mythical |
 | 150 | Sea colossus | Water |  | poseidon (single) | mythical |
 | 151 | Dark colossus | Ghost |  | hades (single) | mythical |
+| 152 | Ichor | Psychic |  | ichor (single) | mythical |
 
 ## The lines: myth, design and habitat
 
@@ -898,4 +899,12 @@ Dual types used more than once: Dark/Fairy ×2, Dark/Flying ×2, Dragon/Poison �
 - **Design:** A black basalt colossus that keeps its throne, wearing the Helm of Darkness that makes it vanish, a bident across its knees. Under the helm its face is a glowing bident, its lot's emblem. Slow, with a huge Defense.
 - **Lives in:** The Underworld, in a vault beneath Hades's hall at the end of the Katabasis (post-game; suggested).
 - **Notes:** Decision D4. Unsealed by the bident lot (see the sky colossus).
+
+#### #152 Ichor (Psychic)
+
+- **Role:** mythical
+- **Myth:** Ichor is the golden blood of the gods, the thing that makes them immortal (Iliad 5.340). Talos's single vein held it.
+- **Design:** A small golden being shaped like a falling drop. Like Mew, it can learn every TM and Transform.
+- **Lives in:** The Pool of Mnemosyne, Arkadia (post-game). It is the memory of the first myth.
+- **Notes:** The title Pokémon, kept as a fourth mythical after the three colossi (decision D4).
 
