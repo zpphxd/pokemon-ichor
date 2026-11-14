@@ -99,23 +99,27 @@ About 3 hours on a first run, the top of the 2–3 hour brief, because the road 
 
 | Stretch | Time | Wild levels | Trainer levels | Boss |
 |---|---|---|---|---|
-| The voyage, with the night on Aegina | 20 min | — | 13–14 | Two scripted snatchers, 14–15 |
-| Emporion | 25 min | — | — | — |
-| Temple of Hermes | 18 min | — | 16–18 | Kerykos 18 / 19 / 21 |
-| The Sacred Gate | 5 min | — | — | Kleon 19 / 20 / 22 |
-| Route 2 | 12 min | 17–20 | 18–21 | — |
-| Hecate's Hollow | 12 min | 19–21 | 20–21 | — |
-| Route 3 | 12 min | 20–22 | 20–22 | — |
-| Thria | 5 min | — | — | — |
-| Route 4 | 12 min | 20–22 | 21–23 | — |
-| Eleusa | 12 min | 21–23 | 22–23 | — |
-| Temple of Demeter | 18 min | — | 23–24 | Chloe 24 / 25 / 25 / 27 |
-| The night of the Mysteries and the sanctum | 20 min | 22–25 | 23–25 | Kleon beside you vs two Titanborn; Hyperion 25 / 25 / 26 |
-| The revelation | 5 min | — | — | — |
-| *Optional:* Routes 5–6 and Halai | 25 min | 14–17 | 15–17 | — |
-| *Optional:* Aegina's interior | 20 min | 18–21 | 19–21 | — |
+Levels follow `design/BALANCE.md`. Its **Emporion** row (wild 9–16, trainers 12–18, Kerykos 18–20) covers the voyage, Emporion, Aegina and the Halai Shore. Its **Eleusa** row (wild 15–22, trainers 18–24, Chloe 24–26, Kleon about 23) covers the Sacred Gate onward. No map's wild band is wider than 5, and the bands rise along the road.
 
-The curve runs Ione's ace 14 → Kerykos's 21 → Chloe's 27 → Hyperion's 26 (STORY.md targets him at about 22; Open questions 24). Emerald runs 15 → 19 → 24 → 29 over the same badges; Ichor sits a level or two higher because Phase 2 has more road between temples.
+| Stretch | Stage | Time | Wild levels | Trainer levels | Boss |
+|---|---|---|---|---|---|
+| The voyage, with the night on Aegina | Emporion | 20 min | 10–15 (fishing) | 12–13 | Two scripted snatchers, 12–13 |
+| Emporion | Emporion | 25 min | 10–15 (fishing); the jars 14–16 | 15–16 (the crew boss) | — |
+| *Optional:* Routes 5–6 and Halai | Emporion | 25 min | 11–16 | 13–16 | — |
+| *Optional:* Aegina's interior | Emporion | 20 min | 12–16 | 14–16 | — |
+| Temple of Hermes | Emporion | 18 min | — | 15–17 | Kerykos 18 / 19 / 20 |
+| The Sacred Gate | Eleusa | 5 min | — | — | Kleon 19 / 20 / 21 |
+| Route 2 | Eleusa | 12 min | 16–19 | 18–20 | — |
+| Hecate's Hollow | Eleusa | 12 min | 17–20 | 19–20 | — |
+| Route 3 | Eleusa | 12 min | 17–21 | 20–21 | — |
+| Thria | Eleusa | 5 min | — | — | — |
+| Route 4 | Eleusa | 12 min | 18–22 | 20–22 | — |
+| Eleusa | Eleusa | 12 min | 19–22 | 21–22 | — |
+| Temple of Demeter | Eleusa | 18 min | — | 22–23 | Chloe 24 / 24 / 25 / 26 |
+| The night of the Mysteries and the sanctum | Eleusa | 20 min | 19–22 | 21–24 | Kleon beside you (23) vs two Titanborn; Hyperion 23 / 23 / 24 |
+| The revelation | Eleusa | 5 min | — | — | — |
+
+The curve runs Ione's ace 14 → Kerykos's 20 → Chloe's 26 → Hyperion's 24, which matches Emerald's 15 → 19 → 24 and Maxie's 25 at Mt. Chimney. STORY.md §2 gives Hyperion 22 / 22 / 23; he sits one level higher here because he comes after Chloe (Open questions 24).
 
 ---
 
@@ -338,11 +342,11 @@ NAUSIKLES: We can't turn! We'll lose the stroke!
 
 ALETHEA: Then we keep them off it! {PLAYER}, the bow!
 ```
-[Set `FLAG_ICHOR_NO_WHITEOUT` and the no-running flag. Scripted wild battle with `SPECIES_HARPECK` at Lv 14. Then:]
+[Set `FLAG_ICHOR_NO_WHITEOUT` and the no-running flag. Scripted wild battle with `SPECIES_HARPECK` at Lv 12. Then:]
 ```text
 The other one's diving!
 ```
-[Scripted wild battle with `SPECIES_HARPECK` at Lv 15. Clear both flags. If the player lost either battle, Alethea's Spalunk drives the bird off instead and the scene continues.]
+[Scripted wild battle with `SPECIES_HARPECK` at Lv 13. Clear both flags. If the player lost either battle, Alethea's Spalunk drives the bird off instead and the scene continues.]
 ```text
 ALETHEA: There's a third! Spalunk, go! Dig! …There's no dirt. Bite it!
 ```
@@ -374,7 +378,7 @@ A halcyon chick has hopped onto your hat. It doesn't look like leaving.
 > NO:
 The chick ruffles up, offended, and flies after its family.
 ```
-[YES: `givemon SPECIES_HALCYLING, 12` with Water Gun, Wing Attack, Quick Attack and Mist, then the vanilla nickname prompt. Set `FLAG_ICHOR_GOT_HALCYLING`. NO: nothing; Halcyling is common on every coast. Set `FLAG_ICHOR_SAVED_HALCYON_NEST` either way.]
+[YES: `givemon SPECIES_HALCYLING, 11` with Water Gun, Wing Attack, Quick Attack and Mist, then the vanilla nickname prompt. Set `FLAG_ICHOR_GOT_HALCYLING`. NO: nothing; Halcyling is common on every coast. Set `FLAG_ICHOR_SAVED_HALCYON_NEST` either way.]
 ```text
 KLEON: [hoarse, from the hatch] Left… and… left… Are we there yet?
 
@@ -522,7 +526,8 @@ NAUSIKLES: Hold on to your purse. With both hands.
 
 ALETHEA: That's the mainland. It's bigger than I thought. It just keeps going.
 
-KLEON: [at the bow, not green at all] All of that. And somewhere in it, the next laurel.
+[Kleon is at the bow, not green at all.]
+KLEON: All of that. And somewhere in it, the next laurel.
 ```
 [Fade. Set `FLAG_ICHOR_CROSSING_DONE`. Warp to `MAP_EMPORION_CITY`, the quay, for beat 11.]
 
@@ -1094,7 +1099,7 @@ Light it with Hecate's Torch?
 ```text
 The brazier catches. Its light reaches every corner of the passage.
 ```
-**At night** (optional, per SYSTEMS.md): after 20:00 the Hekataion has three black hounds sitting at the pillar's feet. Two fade into the walls when the player approaches. The third stays: a static `SPECIES_LYKOPUP` at Lv 22, catchable. `FLAG_ICHOR_HECATES_HOUND`.
+**At night** (optional, per SYSTEMS.md): after 20:00 the Hekataion has three black hounds sitting at the pillar's feet. Two fade into the walls when the player approaches. The third stays: a static `SPECIES_LYKOPUP` at Lv 20, catchable. `FLAG_ICHOR_HECATES_HOUND`.
 
 ---
 
@@ -1464,7 +1469,9 @@ KLEON: I didn't ask what he meant. I didn't want to know. That's a first.
 
 ALETHEA: Kleon…
 
-KLEON: I'm going to Thyrsa. The Dionysia. All of Aethos will be in that theater.
+KLEON: I'm going to Thyrsa. The Dionysia.
+
+KLEON: All of Aethos will be in that theater.
 
 KLEON: Somebody should give them something worth watching.
 
@@ -1687,7 +1694,9 @@ ROWER: Top bench gets the breeze. Bottom bench gets the top bench's feet.
 ```
 **The captain's klepsydra** (an object at the stern)
 ```text
-The captain's water clock. Water drips from the top bowl to the bottom one.
+The captain's water clock.
+
+Water drips from the top bowl to the bottom one.
 
 > during the set piece only, if checked:
 The water in the captain's klepsydra is dripping upward.
@@ -1713,9 +1722,13 @@ The voyage night is beat 10B. The gate is shut that night and opens on any later
 
 **Kolona** (an object)
 ```text
-A single column, all that's left of an old temple. The headland's named for it.
+A single column, all that's left of an old temple.
 
-Sailors steer by it. It's been standing here longer than anyone's been counting.
+The headland's named for it.
+
+Sailors steer by it.
+
+It's been standing here longer than anyone's been counting.
 ```
 **Gatekeeper**
 ```text
@@ -1776,7 +1789,7 @@ PHEIDON: I need a guard for the strongbox. Something with claws.
 
 PHEIDON: You wouldn't trade me a Karkipool?
 ```
-?? Trade a Karkipool for his Chelonet? YES/NO. YES: in-game trade, Chelonet nicknamed **STATER**, Lv 18, with its hidden ability (Punk Rock), holding an Oran Berry. It learns Sing at 24 and then evolves into Chelyra, the lyre tortoise, as the dex specifies.
+?? Trade a Karkipool for his Chelonet? YES/NO. YES: in-game trade, Chelonet nicknamed **STATER**, Lv 14, with its hidden ability (Punk Rock), holding an Oran Berry. It learns Sing at 24 and then evolves into Chelyra, the lyre tortoise, as the dex specifies.
 ```text
 > YES, after the trade:
 PHEIDON: Stater's a good name for it. It's worth about as much.
@@ -1797,7 +1810,9 @@ AIAKIDES: There was a plague here once. Emptied the island. Every house.
 
 AIAKIDES: The old king sat under an oak and watched a line of ants climb it.
 
-AIAKIDES: He asked Zeus for as many people as there were ants. He woke up to an army.
+AIAKIDES: He asked Zeus for as many people as there were ants.
+
+AIAKIDES: He woke up to an army.
 
 AIAKIDES: We fought at Troy, you know. Well. My great-great-great-grandfather did.
 
@@ -1811,7 +1826,9 @@ AIAKIDES: Here. My old belt. I won't need it. The ants do the fighting now.
 {PLAYER} received a Black Belt!
 
 > after:
-AIAKIDES: Feed them crumbs, and they'll follow you anywhere. Ants and soldiers both.
+AIAKIDES: Feed them crumbs, and they'll follow you anywhere.
+
+AIAKIDES: Ants and soldiers both.
 ```
 
 ## Aegina's interior: an optional detour (proposal)
@@ -1830,7 +1847,7 @@ The user wants islands to be side content to explore. Aegina is the island on th
 - **The ants.** Ergant (and a rare Hoplomex) live here, on the island of the Myrmidons. Aiakides's Black Belt is waiting.
 - **Two altars before their temples.** Artemis at Aphaia (her loved offering is any feather) and Zeus on Oros (Wine), long before the player reaches Arkadia or Olympus.
 - **A Knossa seed.** Aphaia was Britomartis of Crete, who fled King Minos for nine months, leapt into the sea, and vanished on Aegina: "the one who isn't seen".
-- **Trainers** at levels 19–21 between Kerykos and the Sacred Way, and a few items (Part 6).
+- **Trainers** at levels 14–16, in BALANCE.md's Emporion band, and a few items (Part 6).
 
 **The priestess of Aphaia**
 ```text
@@ -1856,9 +1873,9 @@ And far out to sea, if you squint and lie a little, Kalliste.
 
 | Trainer | Where | Team | Lines |
 |---|---|---|---|
-| HOPLITE Myrmex | the ant hills | Ergant 19, Ergant 20 | "MYRMEX: My family were ants. I'm proud of it. Ants can lift fifty times their weight." / Defeat: "MYRMEX: I can lift about one of me." |
-| MERCHANT Sostratos | the road's fork | Onotis 20, Chelonet 20 | "SOSTRATOS: Richest trader on Aegina! Ask anyone. Ask my donkey." / Defeat: "SOSTRATOS: Still rich. Slightly less." |
-| PILGRIM Euthymia | the temple steps | Galekit 20, Kerazap 21 | "EUTHYMIA: I came to see a goddess nobody can see. It's going very well." / Defeat: "EUTHYMIA: That I saw." |
+| HOPLITE Myrmex | the ant hills | Ergant 14, Ergant 15 | "MYRMEX: My family were ants. I'm proud of it. Ants can lift fifty times their weight." / Defeat: "MYRMEX: I can lift about one of me." |
+| MERCHANT Sostratos | the road's fork | Onotis 15, Chelonet 15 | "SOSTRATOS: Richest trader on Aegina! Ask anyone. Ask my donkey." / Defeat: "SOSTRATOS: Still rich. Slightly less." |
+| PILGRIM Euthymia | the temple steps | Galekit 15, Kerazap 16 | "EUTHYMIA: I came to see a goddess nobody can see. It's going very well." / Defeat: "EUTHYMIA: That I saw." |
 
 Sostratos is the real Aeginetan merchant Herodotus called the richest trader of his day (Herodotus 4.152).
 
@@ -1918,10 +1935,10 @@ Act I omen lines, filtered by progress (SYSTEMS.md §6 holds the weights and the
 | Swarm | "The bees are restless in Eleusa's meadows." | Eleusa: Melibee swarm |
 | Swarm | "Snatchers over the Agora. Hold onto your figs." | Route 6: Harpeck swarm |
 | Swarm | "The fields at Eleusa are crawling with wheat. With serpents, I mean." | Eleusa: Stachyss swarm |
-| Visitor | "A golden cub was seen in the scrub above the tombs." | Route 2 hill spur: a static Nemecub, Lv 20 |
-| Visitor | "A great snatcher is hunting the Halai cliffs." | Route 6: a static Harpelle, Lv 22 |
-| Visitor | "Someone saw a flower-crowned girl walking in the wheat. Then she wasn't there." | Eleusa fields: a static Korantha, Lv 24 |
-| Visitor | "A jar in the Agora barked at a priest." | Emporion: one marked pithos holds a Pithound, Lv 20 |
+| Visitor | "A golden cub was seen in the scrub above the tombs." | Route 2 hill spur: a static Nemecub, Lv 18 |
+| Visitor | "A great snatcher is hunting the Halai cliffs." | Route 6: a static Harpelle, Lv 17 |
+| Visitor | "Someone saw a flower-crowned girl walking in the wheat. Then she wasn't there." | Eleusa fields: a static Korantha, Lv 22 |
+| Visitor | "A jar in the Agora barked at a priest." | Emporion: one marked pithos holds a Pithound, Lv 16 |
 | Weather | "Rain on the Halai Shore by noon. The snatchers love it." | Routes 5 and 6: rain |
 | Weather | "A cloud is sitting on Mount Oros. Aegina will have rain." | Aegina's interior (the detour): rain |
 | Swarm | "Goats on the pine slopes. The pitch-gatherers are furious." | Route 3: Kerazap swarm |
@@ -1936,7 +1953,9 @@ GLYKERA: Phew. Hot one.
 ```
 [She fans herself with an old sheet covered in drawings.]
 ```text
-That fan's an old sheet covered in drawings. Doors. Wheels. A bird with a man's legs.
+That fan's an old sheet covered in drawings.
+
+Doors. Wheels. A bird with a man's legs.
 ```
 [If the player has an Olive Oil and `FLAG_ICHOR_DAEDALUS_PAGE_1` is unset:] ?? Trade her an Olive Oil for it? YES/NO
 ```text
@@ -1980,7 +1999,9 @@ The plaque says: BY DAEDALUS. DO NOT UNTIE.
 > YES:
 You untie the rope.
 
-The statue looks down at you. Then it steps off the plinth and walks away.
+The statue looks down at you.
+
+Then it steps off the plinth and walks away.
 
 Nobody in the Agora seems surprised.
 
@@ -1996,7 +2017,7 @@ SYKEAS: Figs! Best figs in Emporion! Fewer every minute!
 
 SYKEAS: That snatcher's had six. Six! It looks at me while it eats them.
 
-> talk to the Harpeck: static battle, SPECIES_HARPECK Lv 15. Win, lose or catch, it's gone.
+> talk to the Harpeck: static battle, SPECIES_HARPECK Lv 13. Win, lose or catch, it's gone.
 
 > after:
 SYKEAS: You got it! Here. Figs. Real ones. And it dropped this.
@@ -2011,7 +2032,9 @@ SYKEAS: He never says why. He just gets a look.
 ```text
 PASION: Old coins? I buy old coins. Fair weight, fair price.
 
-PASION: A Bronze Obol! The ferryman's fare, they say. Put one in the mouth of the dead.
+PASION: A Bronze Obol! The ferryman's fare, they say.
+
+PASION: Put one in the mouth of the dead.
 
 PASION: I'll give you a good price for it. The ferryman won't.
 ```
@@ -2027,8 +2050,10 @@ MAN WITH A LAMP: You'll do for now. Don't let it go to your head.
 ```text
 An empty storage jar. It smells, faintly, of dog.
 
-> on a hit (a wild battle, SPECIES_PITHOUND, Lv 16–18):
-Something in the jar growls. A scruffy face looks up at you, deeply unimpressed.
+> on a hit (a wild battle, SPECIES_PITHOUND, Lv 14–16):
+Something in the jar growls.
+
+A scruffy face looks up at you, deeply unimpressed.
 ```
 **The Sacred Gate hoplites** are in beat 16. **The Long Walls Gate hoplites:**
 ```text
@@ -2175,7 +2200,7 @@ THALETAS: I hooked this on the crossing. Flat as a plate. Numbs my hands.
 
 THALETAS: I'd trade it for anything with legs. An Onotis, say. I like a donkey.
 ```
-?? Trade an Onotis for his Narkeray? YES/NO. YES: in-game trade, Narkeray nicknamed **SOCRATES**, Lv 18, holding a Shell Bell. `FLAG_ICHOR_TRADED_NARKERAY`.
+?? Trade an Onotis for his Narkeray? YES/NO. YES: in-game trade, Narkeray nicknamed **SOCRATES**, Lv 15, holding a Shell Bell. `FLAG_ICHOR_TRADED_NARKERAY`.
 ```text
 > after the trade:
 THALETAS: “Socrates.” A man in Astyra named it. It does what Socrates does.
@@ -2451,7 +2476,9 @@ West: Emporion City. East: Halai.
 
 **The spring.**
 ```text
-A cold spring in a stone basin, under a tamarisk. You and your Pokémon drink.
+A cold spring in a stone basin, under a tamarisk.
+
+You and your Pokémon drink.
 
 You feel rested.
 ```
@@ -2617,13 +2644,17 @@ The cape. Poseidon's shrine. Mind the cliff. The cliff won't mind you.
 ```text
 KILN WORKER: Clay from the river. Fire from the kiln. Black from the smoke.
 
-KILN WORKER: We close the vents at the end, see. Starve the fire. That's what makes the black.
+KILN WORKER: We close the vents at the end, see.
+
+KILN WORKER: Starve the fire. That's what makes the black.
 ```
 **Mourner** (by a stele of a seated woman holding a baby's hand)
 ```text
 MOURNER: My grandmother's stone. See her? Holding my mother's hand.
 
-MOURNER: The carver gave them the same face. He said families look alike, in the end.
+MOURNER: The carver gave them the same face.
+
+MOURNER: He said families look alike, in the end.
 ```
 **Procession healer** (until the rockslide clears)
 ```text
@@ -2649,7 +2680,9 @@ INITIATE: I've already practiced not telling. I'm very good at it.
 ```
 **The great herm,** desecrated (per SYSTEMS.md §3, desecrated altars, and §4). A sickle is scratched deep into Hermes's face. The Titanborn guard stands beside it (Part 3). Before the guard is beaten:
 ```text
-A great herm, hung with old garlands. Someone has scratched a sickle into its face.
+A great herm, hung with old garlands.
+
+Someone has scratched a sickle into its face.
 ```
 After the guard, the altar menu offers PRAY; the first prayer cleanses it (+3 Hermes Favor, `FLAG_ICHOR_ALTAR_CLEANSED_ROUTE2`):
 ```text
@@ -2683,7 +2716,7 @@ A thick curtain of cobweb, strung across the passage.
 
 Burn it with Hecate's Torch?
 ```
-Inside: a visible Silk Scarf. After the Arachne amphora is complete, a static `SPECIES_RAKNIT` with its hidden ability (Defiant) hangs from the ceiling at Lv 22: `FLAG_ICHOR_HOLLOW_RAKNIT`.
+Inside: a visible Silk Scarf. After the Arachne amphora is complete, a static `SPECIES_RAKNIT` with its hidden ability (Defiant) hangs from the ceiling at Lv 20: `FLAG_ICHOR_HOLLOW_RAKNIT`.
 
 **Signs**
 ```text
@@ -2781,7 +2814,7 @@ XENOKLES: My weasel keeps stealing the guests' sandals. Left foot only. Every on
 
 XENOKLES: What I need is a donkey for the stable. You wouldn't have an Onotis?
 ```
-?? Trade an Onotis for his Gelasable? YES/NO. YES: in-game trade, Gelasable nicknamed **GALANTHIS**, Lv 21, with its hidden ability (Prankster), holding a Leppa Berry.
+?? Trade an Onotis for his Gelasable? YES/NO. YES: in-game trade, Gelasable nicknamed **GALANTHIS**, Lv 19, with its hidden ability (Prankster), holding a Leppa Berry.
 ```text
 > YES, after the trade:
 XENOKLES: Galanthis, I called her. After the girl who laughed at a goddess.
@@ -2844,10 +2877,14 @@ ELDEST SISTER: We put the bowl away. Some bowls you put away.
 ```text
 TRYGAIOS: My sow's gone. Best sow on the plain. Prize-winner.
 
-TRYGAIOS: She ran up the pine slopes after a bee. She loves bees. Bees don't love her.
+TRYGAIOS: She ran up the pine slopes after a bee.
+
+TRYGAIOS: She loves bees. Bees don't love her.
 
 > on Route 3, the Kaplet in the meadow:
-KAPLET: Oink! [It has thyme stuck in its ears. It trots off downhill, toward Thria.]
+KAPLET: Oink! [It has thyme stuck in its ears.
+
+KAPLET: It trots off downhill, toward Thria.]
 
 > back at the farmhouse:
 TRYGAIOS: She's home! Covered in thyme. She smells delicious.
@@ -2902,7 +2939,9 @@ PRIEST'S BOY: The fish don't know that. I tell them. They don't listen.
 
 **The grain shrine,** desecrated. A little roofed shrine with a clay figure of Demeter holding wheat ears, a sickle scratched across her. Its guard is in Part 3. Cleansing it gives +3 Demeter Favor, `FLAG_ICHOR_ALTAR_CLEANSED_ROUTE4`.
 ```text
-A shrine of Demeter, hung with wheat. A sickle is scratched across her face.
+A shrine of Demeter, hung with wheat.
+
+A sickle is scratched across her face.
 ```
 **The great herm** stands at the field's edge: `FLAG_ICHOR_HERM_ROUTE4`.
 
@@ -3062,7 +3101,9 @@ METANEIRA: So now we feed everyone. Just in case.
 > after FLAG_BADGE03_GET, once:
 METANEIRA: Chloe gave you her laurel? Then you should have this.
 
-METANEIRA: The goddess's own drink. Barley, water, a little mint. We call it kykeon.
+METANEIRA: The goddess's own drink.
+
+METANEIRA: Barley, water, a little mint. We call it kykeon.
 
 METANEIRA: Keep the makings with you. You never know who's thirsty.
 
@@ -3075,7 +3116,9 @@ METANEIRA: Here. Take my half on to Arkadia. And this, for the road.
 ```
 [The chain continues per SYSTEMS.md §10 (Emporion → Eleusa → Arkadia → Kaldera). Give `ITEM_BIG_PEARL` here. `FLAG_ICHOR_SPLIT_COIN_2`.]
 ```text
-GIRL: My sister Kallidike's an acolyte. She practices being mysterious at dinner.
+GIRL: My sister Kallidike's an acolyte.
+
+GIRL: She practices being mysterious at dinner.
 
 GIRL: She says “I can't tell you” about the salt.
 ```
@@ -3093,7 +3136,9 @@ THEANO: Here. A Grass technique. Take it, before he teaches it to the wheat.
 {PLAYER} received TM09, Bullet Seed!
 
 > after:
-THEANO: Twenty years married. I've never seen him look at me the way he looks at that field.
+THEANO: Twenty years married.
+
+THEANO: I've never seen him look at me the way he looks at that field.
 
 THEANO: I've made my peace with it. The field's very handsome.
 ```
@@ -3145,7 +3190,7 @@ EUPHORION: My Pithound says it's too much. He growls at every line.
 
 EUPHORION: I need a gentler audience. Bees, say. Bees only sting at the end.
 ```
-?? Trade a Melibee for his Pithound? YES/NO. YES: in-game trade, Pithound nicknamed **CRITIC**, Lv 23, with its hidden ability (Prankster), holding a Twisted Spoon.
+?? Trade a Melibee for his Pithound? YES/NO. YES: in-game trade, Pithound nicknamed **CRITIC**, Lv 21, with its hidden ability (Prankster), holding a Twisted Spoon.
 ```text
 > YES, after the trade:
 EUPHORION: Take Critic. He was right about everything. That's the problem.
@@ -3205,7 +3250,9 @@ MOM: That jar's spoken for.
 {PLAYER} received 3 Honey!
 
 > after FLAG_ICHOR_ACT1_COMPLETE, without the letter:
-MOM: Daphne wrote. Three pages, and they said nothing. You didn't write at all.
+MOM: Daphne wrote. Three pages, and they said nothing.
+
+MOM: You didn't write at all.
 
 MOM: Sit. You don't have to tell me. Sit anyway.
 ```
@@ -3256,7 +3303,9 @@ GYLIPPOS: He wants an audience. He'll get one.
 
 **The Kronion Crypt's relief**
 ```text
-A relief carved into the rock. A woman hands a giant something wrapped in cloth.
+A relief carved into the rock.
+
+A woman hands a giant something wrapped in cloth.
 
 The giant is opening his mouth very wide.
 
@@ -3266,11 +3315,13 @@ The bundle is the shape of a baby. It's carved like a stone.
 ```text
 A tiny shrine of shells. Someone scratched a name: GLAUKOS.
 
-Below it, in smaller letters: “The herb tasted of the sea. I'm sorry, Mother.”
+Below it, in smaller letters: “The herb tasted of the sea.
+
+I'm sorry, Mother.”
 ```
 (In myth Glaukos the fisherman ate a herb that made him immortal and leapt into the sea. The slice's old Glaukos ate a strange seaweed once and "felt immortal for a week".)
 
-**The Kronos amphora's lead** (SYSTEMS.md §5, amphora 1). When it is complete, at night, the broken altar on Kronion Hill hums, and checking it starts a static `SPECIES_CAIRNOLITH` at Lv 24 with its hidden ability (Sand Force), holding a Hard Stone: `FLAG_ICHOR_KRONION_ALTAR_STONE`.
+**The Kronos amphora's lead** (SYSTEMS.md §5, amphora 1). When it is complete, at night, the broken altar on Kronion Hill hums, and checking it starts a static `SPECIES_CAIRNOLITH` at Lv 20 with its hidden ability (Sand Force), holding a Hard Stone: `FLAG_ICHOR_KRONION_ALTAR_STONE`.
 
 ---
 
@@ -3334,7 +3385,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 ```text
 Before: PHORMION: Sea legs? Let's see if your Pokémon have them!
 Defeat: PHORMION: Sunk! In a flat calm, too.
-After:  PHORMION: A trireme's fast because it's light. That's why there's no room for your bags.
+After:  PHORMION: A trireme's fast because it's light. So, no room for your bags.
 ```
 ```
 === TRAINER_ICHOR_PHORMION ===
@@ -3346,7 +3397,7 @@ Music: Swimmer
 AI: Check Bad Move
 
 Halcyling
-Level: 13
+Level: 12
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 - Water Gun
 - Wing Attack
@@ -3354,7 +3405,7 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 - Mist
 
 Karkipool
-Level: 14
+Level: 13
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -3374,15 +3425,15 @@ Music: Rich
 AI: Check Bad Move
 
 Onotis
-Level: 13
+Level: 12
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Galekit
-Level: 14
+Level: 13
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
-## Routes 5 and 6, the Halai Shore (optional), levels 15–17
+## Routes 5 and 6, the Halai Shore (optional), levels 13–16
 
 **1. FISHER Asphalion.** Route 5, on the beach path, in plain view. In Theocritus, the fisherman Asphalion dreams he hooked a fish of gold.
 ```text
@@ -3400,15 +3451,15 @@ Music: Swimmer
 AI: Check Bad Move
 
 Ketofry
-Level: 15
+Level: 13
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Ketofry
-Level: 15
+Level: 13
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Karkipool
-Level: 16
+Level: 14
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -3428,11 +3479,11 @@ Music: Cool
 AI: Check Bad Move
 
 Lophops
-Level: 16
+Level: 14
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Galekit
-Level: 16
+Level: 14
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -3440,7 +3491,7 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```text
 Before: KYMON: Touch my ray, your hand goes numb. Touch my Pokémon… same thing.
 Defeat: KYMON: Numb. Just numb all over.
-After:  KYMON: There's a philosopher in Astyra who does that to people. Just by talking.
+After:  KYMON: A philosopher in Astyra does that to people. Just by talking.
 ```
 ```
 === TRAINER_ICHOR_KYMON ===
@@ -3452,11 +3503,11 @@ Music: Swimmer
 AI: Check Bad Move
 
 Karkipool
-Level: 16
+Level: 15
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Narkeray
-Level: 17
+Level: 16
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -3464,7 +3515,7 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```text
 Before: NAUBOLOS: Those cliffs are full of snatchers. They took my lunch. Then my hat.
 Defeat: NAUBOLOS: Then my other lunch. And now this.
-After:  NAUBOLOS: There's a cave at the end of the cape nobody goes in. It's dark. That's the reason.
+After:  NAUBOLOS: Nobody goes in the cave at the end of the cape. It's dark. That's why.
 ```
 ```
 === TRAINER_ICHOR_NAUBOLOS ===
@@ -3476,7 +3527,7 @@ Music: Swimmer
 AI: Check Bad Move
 
 Halcyling
-Level: 16
+Level: 15
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 - Water Gun
 - Wing Attack
@@ -3484,11 +3535,35 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 - Quick Attack
 
 Harpeck
-Level: 17
+Level: 16
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
-## Temple of Hermes acolytes, levels 16–18
+## Emporion: the hiring hall's crew boss, levels 15–16
+
+**CREW BOSS** (TITANBORN), STORY.md §5's grunt archetype 7, the old veteran, signing on dockhands. Optional, in the hiring hall (Part 2). His lines are in Part 2; his defeat line:
+```text
+Defeat: CREW BOSS: Ha. You'd have made a good digger. Shame.
+```
+```
+=== TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS ===
+Name: CREW BOSS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 15
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Spalunk
+Level: 16
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+```
+
+## Temple of Hermes acolytes, levels 15–17
 
 Steps don't count while a battle runs (Part 5). Podarge and Euchidas stand at narrow points; Philonides faces away and is optional.
 
@@ -3508,19 +3583,19 @@ Music: Female
 AI: Basic Trainer
 
 Harpeck
-Level: 16
+Level: 15
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 
 Epopoi
-Level: 16
+Level: 15
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 ```
 
 **ACOLYTE Euchidas.** The middle stoa, at the colonnade's narrow point. The real Euchidas ran from Plataea to Delphi and back in one day to fetch pure fire, and dropped dead at the finish.
 ```text
-Before: EUCHIDAS: My namesake ran to Delphoi and back in one day. Then he died. I'm aiming for the first part.
+Before: EUCHIDAS: My namesake ran to Delphoi and back, then died. I want the first part.
 Defeat: EUCHIDAS: Still breathing. In my family, that's a win.
-After:  EUCHIDAS: Wrong turnstile and you're back where you started. Hermes thinks that's funny.
+After:  EUCHIDAS: Wrong turnstile, back to the start. Hermes thinks that's funny.
 ```
 ```
 === TRAINER_ICHOR_EUCHIDAS ===
@@ -3532,11 +3607,11 @@ Music: Male
 AI: Basic Trainer
 
 Lophops
-Level: 17
+Level: 16
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 
 Halcyling
-Level: 17
+Level: 16
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 - Water Pulse
 - Wing Attack
@@ -3547,7 +3622,7 @@ IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 
 **ACOLYTE Philonides.** The upper gallery, facing the wall. Optional.
 ```text
-Before: PHILONIDES: I carried letters for a king once. He never said thank you. Battle me, and say it.
+Before: PHILONIDES: I ran letters for a king once. He never said thank you. You can, after.
 Defeat: PHILONIDES: Thank you. …See? That wasn't hard.
 After:  PHILONIDES: Kerykos takes the short way. Everyone knows. Nobody knows where it is.
 ```
@@ -3561,15 +3636,15 @@ Music: Male
 AI: Basic Trainer
 
 Harpeck
-Level: 17
+Level: 16
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 
 Lophops
-Level: 18
+Level: 17
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 ```
 
-## Hierophant Kerykos, the Herald, levels 18–21 (Hero difficulty)
+## Hierophant Kerykos, the Herald, levels 18–20 (Hero difficulty)
 
 A messenger, a calm-weather bird and a thief: Hermes's three jobs. Modelled on Brawly's strength (16/16/19), a level or two up.
 
@@ -3602,7 +3677,7 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 - Mist
 
 Harpelle @ Sitrus Berry
-Level: 21
+Level: 20
 Ability: Pickpocket
 IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
 - Pluck
@@ -3612,14 +3687,14 @@ IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
 ```
 - **Lophops** leads with Feather Dance, so the player learns that a herald softens you up first.
 - **Halcyling's** Cloud Nine switches off weather. It matters little now, and teaches the ability for later.
-- **Harpelle** is evolved five levels early (Harpeck becomes Harpelle at 26), like Whitney's Miltank: the herald's real job is theft. Tailwind is Hermes's own wind. Pickpocket steals the player's held item when Harpelle is hit by contact, and Thief steals it outright; Kerykos gives stolen items back after the battle ("KERYKOS: Oh, and this is yours. Professional habit.").
+- **Harpelle** is evolved six levels early (Harpeck becomes Harpelle at 26), like Whitney's Miltank: the herald's real job is theft. Tailwind is Hermes's own wind. Pickpocket steals the player's held item when Harpelle is hit by contact, and Thief steals it outright; Kerykos gives stolen items back after the battle ("KERYKOS: Oh, and this is yours. Professional habit.").
 - **The matchups:**
   - Nebrel players are weak to Flying. Their answers are Pebblith from Kronion Hill, Kerazap from the Halai Shore (commonest on Route 6's cliffs), and Thaletas's traded Narkeray (Electric) in the Deigma.
   - Kynder is neutral. Hipling is neutral, and Bulldoze does nothing to Flying types; Hipling players lean on Water moves and the Halcyling gift.
 
 Defeat text: "Delivered! Signed, sealed, and soundly beaten!"
 
-## Kleon, second battle (the Sacred Gate), levels 19–22
+## Kleon, second battle (the Sacred Gate), levels 19–21
 
 He has caught his way across Kalliste and the mainland: a rooster from Elaia's farmyards ("It woke me up at dawn. So I caught it. Fair's fair."), a hoopoe off the Emporion road, and his starter, now in its middle stage.
 
@@ -3649,16 +3724,16 @@ IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 - Fury Attack
 
 Dikyon
-Level: 22
+Level: 21
 IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
 - Fire Fang
-- Double Hit
 - Flame Charge
+- Bite
 - Thunder Fang
 ```
 The other two entries change only the ace:
-- `TRAINER_ICHOR_KLEON_2_HIPLING`: **Thalamare** Lv 22, Aqua Jet, Flip Turn, Bulldoze, Double Kick.
-- `TRAINER_ICHOR_KLEON_2_NEBREL`: **Kladoe** Lv 22, Magical Leaf, Fairy Wind, Quick Attack, Synthesis.
+- `TRAINER_ICHOR_KLEON_2_HIPLING`: **Thalamare** Lv 21, Aqua Jet, Flip Turn, Bulldoze, Double Kick.
+- `TRAINER_ICHOR_KLEON_2_NEBREL`: **Kladoe** Lv 21, Magical Leaf, Fairy Wind, Quick Attack, Synthesis.
 
 | Your starter | Kleon's ace | Why |
 |---|---|---|
@@ -3668,7 +3743,7 @@ The other two entries change only the ace:
 
 Alekrow hits hard and fast; it is the fight's real test, and Kleon's personality in a Pokémon. His lines are in beat 16. Defeat text: "No. No, no, no. I was ahead!"
 
-## Route 2 trainers, levels 18–21
+## Route 2 trainers, levels 18–20
 
 **1. POTTER Exekias.** By the kilns outside the Sacred Gate, in plain view. Exekias was the great black-figure painter; his best-known cup shows Achilles and Ajax playing at dice.
 ```text
@@ -3697,7 +3772,7 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 **2. INITIATE Myrrhine.** Among the tombs, facing the road; mandatory. One of the pilgrims who set out early. Her last line is the Greek proverb "a donkey carrying the Mysteries": the one who does the work while others get the honor.
 ```text
-Before: MYRRHINE: I'm going to the Mysteries! I can't tell you about them. I don't know yet!
+Before: MYRRHINE: I'm going to the Mysteries! I can't tell you a thing. I don't know yet!
 Defeat: MYRRHINE: Oh! That was a mystery too.
 After:  MYRRHINE: My donkey carries all my things. He'll carry the Mysteries, too.
 After:  MYRRHINE: And never know what they were. There's a saying about that.
@@ -3736,11 +3811,11 @@ Music: Titan
 AI: Check Bad Move
 
 Pebblith
-Level: 20
+Level: 19
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Ergant
-Level: 20
+Level: 19
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -3764,7 +3839,7 @@ Level: 19
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Kerazap
-Level: 20
+Level: 19
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -3797,7 +3872,7 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```text
 Before: KAPELOS: Stuck behind a mountain with a thousand pilgrims. Battle? It's free.
 Defeat: KAPELOS: Free and losing. Story of my week.
-After:  KAPELOS: I sell myrtle crowns to initiates. They wear them one night. Wonderful business.
+After:  KAPELOS: I sell myrtle crowns. Initiates wear them one night. Wonderful business.
 ```
 ```
 === TRAINER_ICHOR_KAPELOS ===
@@ -3809,15 +3884,15 @@ Music: Rich
 AI: Check Bad Move
 
 Onotis
-Level: 20
+Level: 19
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Harpeck
-Level: 21
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
-## Hecate's Hollow trainers, levels 20–21
+## Hecate's Hollow trainers, levels 19–20
 
 Both stand in the lit western half, past the Hekataion.
 
@@ -3838,17 +3913,17 @@ Music: Suspicious
 AI: Check Bad Move
 
 Galekit
-Level: 20
+Level: 19
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Gelasable
-Level: 21
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
 **INITIATE Kallias.** Sitting in the dark of a side passage, so he sees you only once you're close. The Kallias family were the Mysteries' hereditary torch-bearers.
 ```text
-Before: KALLIAS: My family carry the Mysteries' torches! I forgot mine. Battle me so I feel better.
+Before: KALLIAS: My family carries the Mysteries' torches! I forgot mine. Cheer me up.
 Defeat: KALLIAS: I feel worse.
 After:  KALLIAS: Don't tell my father. He's the Torchbearer. Officially. He has a hat.
 ```
@@ -3862,15 +3937,15 @@ Music: Male
 AI: Check Bad Move
 
 Pebblith
-Level: 21
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Onotis
-Level: 21
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
-## Route 3 trainers, levels 20–22
+## Route 3 trainers, levels 20–21
 
 **1. HOPLITE Kynegeiros.** On the narrow ledge path below Xerxes's seat, facing down the road; mandatory. The real Kynegeiros was the brother of Aeschylus, who at Marathon grabbed a Persian ship's stern with one hand and had it cut off.
 ```text
@@ -3894,7 +3969,7 @@ Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Ergant
-Level: 21
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -3941,19 +4016,19 @@ Music: Suspicious
 AI: Check Bad Move
 
 Melibee
-Level: 21
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Melibee
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Melibee
 Level: 21
-IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
-
-Melibee
-Level: 22
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
-## Route 4 trainers, levels 21–23
+## Route 4 trainers, levels 20–22
 
 **1–2. JESTERS Iambe and Thersites,** one at each rail of the Rheitoi bridge. Both see the player at once on the only crossing, so it is a double battle (vanilla Emerald's two-trainer spotting). In the Homeric Hymn, old Iambe made the grieving Demeter laugh. Thersites is the Iliad's mocker. If the player has only one Pokémon able to fight, they battle one after the other.
 ```text
@@ -3961,7 +4036,7 @@ Before: IAMBE: Halt, pilgrim! Nobody crosses my bridge without being insulted!
 Before: THERSITES: Look at those sandals. Did a goat make them? Did a goat WEAR them?
 Defeat: IAMBE: Ha! A pilgrim with a sense of humor. Rare.
 Defeat: THERSITES: That's it. I'm insulting the next one twice.
-After:  IAMBE: We mock every pilgrim at the bridge. It reminds the goddess how to laugh.
+After:  IAMBE: We mock every pilgrim here. It reminds the goddess how to laugh.
 After:  IAMBE: She forgot, once.
 After:  THERSITES: I was voted ugliest man in three cities. Undefeated.
 ```
@@ -3975,11 +4050,11 @@ Music: Twins
 AI: Check Bad Move
 
 Galekit
-Level: 21
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Lophops
-Level: 22
+Level: 21
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_ICHOR_THERSITES ===
@@ -3991,11 +4066,11 @@ Music: Twins
 AI: Check Bad Move
 
 Harpeck
-Level: 21
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Onotis
-Level: 22
+Level: 21
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -4015,15 +4090,15 @@ Music: Swimmer
 AI: Check Bad Move
 
 Ketofry
-Level: 21
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Ketofry
-Level: 21
+Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Karkipool
-Level: 22
+Level: 21
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -4035,7 +4110,7 @@ After:  CHALIX: We will.
 ```
 [She runs off west; hide her.]
 ```
-=== TRAINER_ICHOR_GRUNT_ROUTE3_CHALIX ===
+=== TRAINER_ICHOR_GRUNT_ROUTE4_CHALIX ===
 Name: GRUNT
 Class: Titanborn
 Pic: Titan Grunt
@@ -4044,11 +4119,11 @@ Music: Titan
 AI: Check Bad Move
 
 Spalunk
-Level: 22
+Level: 21
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Pebblith
-Level: 23
+Level: 21
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -4069,15 +4144,15 @@ Music: Intense
 AI: Check Bad Move
 
 Stachyss
-Level: 22
+Level: 21
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Kaplet
-Level: 23
+Level: 22
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
-## Eleusa trainer, level 22–23
+## Eleusa trainer, levels 21–22
 
 **SWINEHERD Eubouleus.** In the fields by the threshing floor. Optional. In the myth, when the earth opened for the Kore, the swineherd Eubouleus's pigs fell in with her.
 ```text
@@ -4097,21 +4172,21 @@ Music: Hiker
 AI: Check Bad Move
 
 Kaplet
-Level: 22
+Level: 21
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Kaplet
-Level: 23
+Level: 22
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
-## Temple of Demeter acolytes, levels 23–24
+## Temple of Demeter acolytes, levels 22–23
 
 In the dark, each acolyte holds a small clay lamp, so each stands in a small pool of light: a landmark as well as a checkpoint (Part 5).
 
 **ACOLYTE Kallidike.** Beside the Autumn brazier, teaching. In the Hymn, Kallidike was the daughter of Keleos who brought the disguised Demeter home from the well.
 ```text
-Before: KALLIDIKE: Put your torch out. Yes, on purpose. The dark won't bite. I will, a little.
+Before: KALLIDIKE: Put your torch out. Yes, on purpose. The dark won't bite. I might.
 Defeat: KALLIDIKE: Ow. You bit back.
 After:  KALLIDIKE: See the seed glowing? That's her trail. Light the brazier beside it.
 ```
@@ -4125,17 +4200,17 @@ Music: Female
 AI: Basic Trainer
 
 Elaleaf
-Level: 23
+Level: 22
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 
 Melibee
-Level: 23
+Level: 22
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 ```
 
 **ACOLYTE Eumolpos.** Between two columns on the way to the Winter brazier; mandatory. The Eumolpidai, "sweet singers", were the family of the Hierophants of Eleusis.
 ```text
-Before: EUMOLPOS: My family has sung the hymns here since the first harvest. Here's one. It's a battle.
+Before: EUMOLPOS: My family's sung here since the first harvest. This hymn is a battle.
 Defeat: EUMOLPOS: The shortest hymn in history.
 After:  EUMOLPOS: The trail goes cold in winter. So does the goddess. Keep walking.
 ```
@@ -4149,19 +4224,19 @@ Music: Male
 AI: Basic Trainer
 
 Spalunk
-Level: 23
+Level: 22
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 
 Stachyss
-Level: 24
+Level: 23
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 ```
 
 **ACOLYTE Melissa.** On the tiers by the Spring brazier, facing the wall. Optional. Demeter's priestesses were called *melissai*, bees.
 ```text
-Before: MELISSA: The goddess's priestesses are called bees. Buzz. That's a joke. We don't buzz.
+Before: MELISSA: Her priestesses are called bees. Buzz. That's a joke. We don't buzz.
 Defeat: MELISSA: …Bzz.
-After:  MELISSA: Bees don't sleep through winter. They huddle and wait. Like everyone here.
+After:  MELISSA: Bees don't sleep through winter. They huddle and wait. Like us.
 ```
 ```
 === TRAINER_ICHOR_MELISSA ===
@@ -4173,15 +4248,15 @@ Music: Female
 AI: Basic Trainer
 
 Melibee
-Level: 24
+Level: 23
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 
 Rhoaril
-Level: 24
+Level: 23
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 ```
 
-## Hierophant Chloe, the Mystagogue, levels 24–27 (Hero difficulty)
+## Hierophant Chloe, the Mystagogue, levels 24–26 (Hero difficulty)
 
 Her team is the turning year: the seed in the dark, the stalk, the tree, and what the seed becomes. Her ace depends on the clock: **Kore by day, Persephone by night**, the dex's branching evolution made into a boss. Modelled on Wattson's four (20/20/22/24), a few levels up.
 
@@ -4205,7 +4280,7 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Astonish
 
 Stachyss
-Level: 25
+Level: 24
 Ability: Shed Skin
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Seed Bomb
@@ -4217,13 +4292,13 @@ Elapling @ Miracle Seed
 Level: 25
 Ability: Harvest
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-- Seed Bomb
-- Rock Smash
 - Bullet Seed
+- Rock Smash
 - Leech Seed
+- Worry Seed
 
 Korantha @ Sitrus Berry
-Level: 27
+Level: 26
 Ability: Natural Cure
 IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 - Petal Dance
@@ -4234,7 +4309,7 @@ IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 `TRAINER_ICHOR_CHLOE_1_NIGHT` is the same entry with the ace changed:
 ```
 Persenyx @ Sitrus Berry
-Level: 27
+Level: 26
 Ability: Cursed Body
 IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 - Hex
@@ -4254,17 +4329,18 @@ IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 
 Defeat text: "…Good."
 
-## The Mystery sanctum: Titanborn grunts, levels 24–25
+## The Mystery sanctum: Titanborn grunts, levels 21–24
 
 All are `GRUNT` / Titanborn / Titan Grunt / Music: Titan / Check Bad Move / IVs 6. Each carries a lamp, so each is a lit landmark in the dark (Part 5). Alethea fights a sixth, offscreen, in beat 23A.
 
-**GRUNT Pelos** (B1F, mandatory, across the granary aisle)
+**GRUNT Krokalos** (B1F, mandatory, across the granary aisle)
 ```text
-Before: PELOS: Forty lamps. Do you know what forty lamps cost? Rhea does. She made us sign for them.
-Defeat: PELOS: I'm docking this from my own lamp.
+Before: KROKALOS: Forty lamps. Do you know what forty lamps cost?
+Before: KROKALOS: The big man paid for every one. In silver. Shouting.
+Defeat: KROKALOS: I'm docking this from my own lamp.
 ```
 ```
-=== TRAINER_ICHOR_GRUNT_SANCTUM_PELOS ===
+=== TRAINER_ICHOR_GRUNT_SANCTUM_KROKALOS ===
 Name: GRUNT
 Class: Titanborn
 Pic: Titan Grunt
@@ -4273,18 +4349,19 @@ Music: Titan
 AI: Check Bad Move
 
 Spalunk
-Level: 24
+Level: 22
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Ergant
-Level: 22
+Level: 21
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
 **GRUNT Bolos** (B1F, optional, guarding a side pit with an item)
 ```text
-Before: BOLOS: Hyperion sent us to the wrong hill on Kalliste. Rhea found the right one first try.
-Defeat: BOLOS: Rhea brings snacks, too. Hyperion never brings snacks.
+Before: BOLOS: Kalliste was the wrong hill. This is the right one. The boss says so.
+Before: BOLOS: Loudly.
+Defeat: BOLOS: He brings snacks, the boss. Remember that when you're winning.
 ```
 ```
 === TRAINER_ICHOR_GRUNT_SANCTUM_BOLOS ===
@@ -4296,11 +4373,11 @@ Music: Titan
 AI: Check Bad Move
 
 Pebblith
-Level: 24
+Level: 22
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Kaplet
-Level: 25
+Level: 23
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
@@ -4319,17 +4396,17 @@ Music: Titan
 AI: Check Bad Move
 
 Spalunk
-Level: 25
+Level: 23
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Cairnolith
-Level: 25
+Level: 24
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
 **GRUNT Gaios** (B2F, optional, in a fresco alcove with an item)
 ```text
-Before: GAIOS: The frescoes down here are a girl getting dragged under the earth. Cheerful.
+Before: GAIOS: The frescoes down here show a girl dragged under the earth. Cheerful.
 Defeat: GAIOS: She comes back in the last picture. I checked. That's something.
 ```
 ```
@@ -4342,85 +4419,146 @@ Music: Titan
 AI: Check Bad Move
 
 Galekit
-Level: 24
+Level: 22
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Pebblith
-Level: 24
+Level: 23
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 Hoplomex
-Level: 25
+Level: 24
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 ```
 
-## Rhea of the Titans, first battle, levels 25–28
+## The night of the Mysteries: Kleon beside you, levels 22–23
 
-**Why Rhea, and not Hyperion or Iapetos.**
-- **Eleusa is her myth.** In the Homeric Hymn to Demeter, it is Rhea, Demeter's own mother, whom Zeus sends down to Eleusis to bring her grieving daughter home. A grieving mother sent to a grieving mother's town is the strongest first meeting any admin can have.
-- **Her motive is Act I's theme.** The Mysteries promise that the daughter comes back every spring. Rhea, "a mother who lost her children to prophecy", doesn't believe it, and says so in the place built on it.
-- **Ground is the digging type,** and the earth-born Titans dig. The slice's grunts failed on the wrong hill with a Nosepass; the competent one finds the fragment.
-- **It sets up LABYRINTH.md's Rhea.** Her mercy at Knossa (LABYRINTH L5) is the first crack in Team Titan. A player who met her first as a mother rocking a stone will believe that crack.
-- **The others are better saved.** Hyperion stays offscreen and feared ("Hyperion's going to roast us"), so his entrance can be the loud one; he already has the Ring VI forge fight and the finale. Iapetos is the bible's Act II schemer at Thyrsa, and Rhea's last line hands him to Phase 3.
+Per STORY.md §3, Act I item 5: Kleon fights beside you once, a double battle against Titanborn, the bookend to the Stair of Hours. It is a multi battle (`setmultitrainerbattle`, STORY.md §6). The player brings up to three Pokémon; Kleon brings two.
 
-**Her look.** A broad woman in her fifties: a bronze Corinthian helmet pushed back off gray-streaked hair, a heavy wool cloak dyed earth-brown, and the sickle emblem as a bronze brooch. She carries a stone swaddled like a baby in the crook of one arm, as the Titaness Rhea handed Kronos a swaddled stone instead of her last child. She never explains it. Her portrait holds the bundle; her walker carries it.
-
-**Her team.** A patient tortoise that sings lullabies, a sacrificial piglet, a goat, and a cairn. The goat is Kerazap, the Amalthea line, the goat that nursed a child hidden from Kronos. Nobody points out the irony.
-
+**Kleon as partner.** In `src/data/battle_partners.party`. He leads with the starter that beats yours, as always (STORY.md §2).
 ```
-=== TRAINER_ICHOR_RHEA_1 ===
-Name: RHEA
-Class: Titan Admin
-Pic: Admin Rhea
+=== PARTNER_ICHOR_KLEON_ELEUSA_KYNDER ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+AI: Basic Trainer
+
+Dikyon
+Level: 23
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Fire Fang
+- Double Hit
+- Flame Charge
+- Thunder Fang
+
+Alekrow
+Level: 22
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack
+```
+`PARTNER_ICHOR_KLEON_ELEUSA_HIPLING` leads with **Thalamare** Lv 23 (Aqua Jet, Flip Turn, Bulldoze, Rain Dance); `_NEBREL` with **Kladoe** Lv 23 (Magical Leaf, Fairy Wind, Synthesis, Agility). BALANCE.md puts Kleon at about 23 in the Eleusa stage; this is that battle.
+
+**GRUNT Psammis** and **GRUNT Chersos** (TITANBORN), the two who climb out of the Anaktoron. Both are STORY.md §5's grunt archetype 1, the dig-crew laborer: hired off the docks for silver.
+```text
+Before: PSAMMIS: The big man said empty! Holy night! Nobody about!
+Before: CHERSOS: Two kids against two Titanborn? Fine. Fair's fair.
+Defeat: PSAMMIS: The big man's going to shout at us. Nicely, but loud.
+Defeat: CHERSOS: I only signed on for digging!
+```
+```
+=== TRAINER_ICHOR_GRUNT_TELESTERION_PSAMMIS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
 Gender: Female
+Music: Titan
+AI: Check Bad Move
+
+Spalunk
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Pebblith
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_GRUNT_TELESTERION_CHERSOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Galekit
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kaplet
+Level: 23
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+```
+
+## Hyperion of the Titans, first battle, levels 23–24
+
+**Why Hyperion.** The brief asked for a choice of Hyperion, Iapetos or Rhea. STORY.md, approved since, makes it: Hyperion leads the theft at Eleusa, and this is the first admin battle (STORY.md §2 and §3). The reasons hold up on their own, too:
+- **He runs the dig crews,** and a theft from under the granaries is a dig. The slice's grunts are his ("Hyperion's going to roast us"), so meeting him here pays off the slice's first joke.
+- **His secret fits the place.** He is going blind and fears the dark, and the Mysteries are the darkest room in Aethos. His seed, "Who builds a temple with no windows?", lands here and pays off on the Stair of Hours.
+- **The others must wait.** Phase 2 may not name Iapetos or hint that Kleon's mother is a Titan (STORY.md §3, Act I item 7), and Rhea's arc begins at the Akropolis, where she watches her son lose (STORY.md §2).
+
+**His look** (STORY.md §2): huge and bare-armed, burn scars, a sun-disc breastplate, the Corinthian helmet pushed back like a crown, always squinting. His walker and portrait are new.
+
+**His team** (STORY.md §2: "Kapnub (22); Kaminoo (22); Pebblith (23)", light and fire around a stone). Set here one level higher, at the top of BALANCE.md's Eleusa trainer band, because he comes after Chloe's laurel (Open questions 24). Like Maxie at Mt. Chimney after Wattson in Emerald, he is the act's finale rather than a level spike.
+```
+=== TRAINER_ICHOR_HYPERION_1 ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Admin Hyperion
+Gender: Male
 Music: Titan
 Items: Super Potion / Super Potion
 AI: Basic Trainer
 
-Chelonet
-Level: 25
-Ability: Sturdy
+Kapnub
+Level: 23
+Ability: Magma Armor
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-- Sing
-- Bulldoze
-- Round
-- Withdraw
+- Clear Smog
+- Rock Tomb
+- Flame Charge
+- Smokescreen
 
-Kaplet
-Level: 25
-Ability: Thick Fat
+Kaminoo
+Level: 23
+Ability: Flame Body
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-- Dig
-- Take Down
-- Bulldoze
-- Rest
+- Fire Fang
+- Stomp
+- Flame Charge
+- Work Up
 
-Kerazap
-Level: 26
-Ability: Static
-IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
-- Electro Ball
-- Spark
-- Thunder Wave
-- Charm
-
-Cairnolith @ Sitrus Berry
-Level: 28
+Pebblith @ Sitrus Berry
+Level: 24
 Ability: Sturdy
 IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 - Rock Slide
 - Bulldoze
-- Rock Blast
+- Stealth Rock
 - Rock Polish
 ```
-- **Chelonet** leads with Sing: a lullaby, then Bulldoze.
-- **Kerazap** covers the Water and Flying answers to her Ground types.
-- **Cairnolith** is a grave cairn. Rock Polish, then Rock Slide, is the fight's spike.
+- **Kapnub** leads with Smokescreen: in the darkest room in Aethos, the man who can't see makes it darker for you.
+- **Kaminoo** is a furnace calf from his home island, Kaldera, where he takes the third fragment in Act II.
+- **Pebblith** is the stone at the center of a fire, and it brings the roof down after him.
 - **The matchups:**
-  - Hipling (Thalamare by now) and Nebrel (Kladoe) players have the edge on three of the four.
-  - Kynder players are weak to most of it. Their answers are the Halcyling gift (Water/Flying: immune to Ground, and Water hits Cairnolith four times over), Stachyss from Eleusa's fields, and Karkipool.
+  - Nebrel players (Kladoe by now) are weak to the two Fire types; their answers are Halcyling, Karkipool and Narkeray.
+  - Kynder players (Dikyon) are neutral, with Pebblith the threat.
+  - Hipling players (Thalamare) have the edge throughout.
 
-Defeat text: "Good. Someone taught you well. Go home and thank them."
+Defeat text: "HA! Good! Somebody show me who just beat me!"
 
 ## Every species in Phase 2, with its myth or setting link
 
@@ -4428,13 +4566,13 @@ All are from the Aethos dex; the myths are the dex's, in brief.
 
 | Species | Where in Phase 2 | Link |
 |---|---|---|
-| Nebrel / Kladoe, Kynder / Dikyon, Hipling / Thalamare | starters; Kleon; Alethea | Daphne the laurel; Kerberos and Orthros; Poseidon's hippocampi |
+| Nebrel / Kladoe, Kynder / Dikyon, Hipling / Thalamare | the player's starter; Kleon's (the counter) | Daphne the laurel; Kerberos and Orthros; Poseidon's hippocampi |
 | Epopoi / Lophops | routes; Kerykos; Kleon | Aristophanes's hoopoe, herald of the birds |
 | Galekit / Gelasable | everywhere at night; Hekabe | Galanthis, the laughing servant Hecate took in |
 | Elaleaf / Elapling | Eleusa's fields; Kalliste's old grove; Chloe | Athena's olive, which regrew overnight |
 | Ergant / Hoplomex | the Hollow; grunts; Aegina's ant hills | the Myrmidons, ants made men, on their own island |
-| Pebblith / Cairnolith | caves and mountain roads; Team Titan; Rhea | Deucalion's thrown stones that became people; a grave cairn |
-| Kerazap | hill pastures; Menalkas; Rhea | Amalthea, the goat who hid a child from Kronos |
+| Pebblith / Cairnolith | caves and mountain roads; Team Titan; Hyperion | Deucalion's thrown stones that became people; a grave cairn |
+| Kerazap | hill pastures; Menalkas; Myrto | Amalthea, the goat who hid a child from Kronos |
 | Halcyling / Galenyon | the crossing (gift); coasts; Kerykos | Alcyone and the halcyon days |
 | Ketofry / Kynoketos | fishing everywhere | the ketos, the sea-beast Perseus killed |
 | Karkipool | tide pools; fishing | Karkinos, Hera's crab |
@@ -4442,14 +4580,15 @@ All are from the Aethos dex; the myths are the dex's, in brief.
 | Eopeep / Alekrow | Kleon | Alectryon, the lookout turned rooster |
 | Onotis | Emporion's outskirts; merchants; initiates | Midas's ears; "a donkey carrying the Mysteries" |
 | Harpeck / Harpelle | Emporion's rooftops and cliffs; the crossing; Kerykos's ace | the Harpies, the snatchers; Hermes, god of thieves |
-| Chelonet | the hills around Emporion; Exekias; Rhea | the tortoise Hermes made the first lyre from |
+| Chelonet | the hills around Emporion; Exekias; Pheidon's trade | the tortoise Hermes made the first lyre from |
 | Pithound | Emporion's empty jars | Diogenes in his jar |
 | Melibee | Eleusa's meadows; Aristaios; acolytes | the Melissai, Demeter's bee-priestesses |
 | Narkeray | the crossings (Good Rod); Kymon; the Deigma trade | the torpedo ray Meno compared to Socrates |
 | Stachyss / Stachypter | Eleusa's wheat; Chloe | Triptolemus's serpent chariot |
 | Rhoaril / Korantha / Persenyx | the sanctum; the fields; Chloe's ace | Persephone and the pomegranate |
-| Kaplet | Eleusa's farms; Eubouleus; Rhea | Eubouleus's pigs; Demeter's piglets |
-| Spalunk / Plouteras | fields and granaries; grunts | Ploutos, the blind wealth of the harvest |
+| Kaplet | Eleusa's farms; Eubouleus; Trygaios's sow | Eubouleus's pigs; Demeter's piglets |
+| Spalunk / Plouteras | fields and granaries; grunts; Alethea's first partner | Ploutos, the blind wealth of the harvest |
+| Kapnub, Kaminoo | Hyperion | the giant buried under a smoking island; the bronze bulls of Kaldera |
 | Lykopup (static) | Hecate's Hollow at night | Hecate's black hounds |
 | Raknit (static) | the Hollow's web chamber | Arachne the weaver |
 | Obolorn (rare) | Route 2's tombs at night | the unburied dead on the near bank |
@@ -4460,45 +4599,81 @@ All are from the Aethos dex; the myths are the dex's, in brief.
 
 In `src/data/wild_encounters.json` terms, as in the slice. Land slots are 20/20/10/10/10/10/5/5/4/4/1/1. `OW_TIME_OF_DAY_ENCOUNTERS` is already TRUE, so each map defines `_Morning` (used for morning, day and evening) and, where it differs, `_Night`. Fishing and water fall back to `_Morning`.
 
+**Levels follow `design/BALANCE.md`.** The voyage, Emporion, Aegina and the Halai Shore are its **Emporion** row (wild 9–16); the Sacred Way, Thria, Eleusa and the sanctum are its **Eleusa** row (wild 15–22). Each stage starts near the previous boss's ace minus 4 (Ione's 14, then Kerykos's 20), no map's band is wider than 5, and the bands rise along the road.
+
+| Map | Stage | Land band |
+|---|---|---|
+| The *Euploia* (fishing only) | Emporion | 9–13 |
+| Route 5, the Halai Beach | Emporion | 11–15 |
+| Route 6, the Halai Cliffs | Emporion | 12–16 |
+| The Aphaia Road (Aegina detour) | Emporion | 12–16 |
+| Route 2, the Sacred Way | Eleusa | 16–19 |
+| Hecate's Hollow | Eleusa | 17–20 |
+| Route 3, the Pine Slopes | Eleusa | 17–21 |
+| Route 4, the Rheitoi | Eleusa | 18–22 |
+| Eleusa's fields | Eleusa | 19–22 |
+| The Mystery sanctum | Eleusa | 19–22 |
+
 **Deviations from the dex's habitats** are marked †, and listed in Open questions 16.
 
 ## Routes 5 and 6, the Halai Shore
 
-Land `encounter_rate: 20`. Open before Laurel 2, so their levels sit just above the voyage's. Halai itself has no grass.
+Land `encounter_rate: 20`. Open before Laurel 2. Halai itself has no grass.
 
 `MAP_ROUTE5_HALAI_BEACH`, the beach and dunes:
 
 | Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
 |---|---|---|---|---|---|
-| 0 | 20% | Halcyling | 14–16 | Galekit | 14–16 |
-| 1 | 20% | Harpeck | 14–16 | Onotis | 14–16 |
-| 2 | 10% | Onotis | 14–16 | Karkipool | 14–16 |
-| 3 | 10% | Chelonet | 14–16 | Chelonet | 14–16 |
-| 4 | 10% | Lophops | 15–17 | Gelasable | 15–17 |
-| 5 | 10% | Karkipool | 14–16 | Galekit | 15–16 |
-| 6 | 5% | Kerazap | 15–17 | Harpeck | 15–17 |
-| 7 | 5% | Epopoi | 14–16 | Karkipool | 15–16 |
-| 8 | 4% | Galekit | 15–17 | Onotis | 16–17 |
-| 9 | 4% | Karkipool | 16–17 | Galekit | 16–17 |
-| 10 | 1% | Galenyon | 17–17 | Gelasable | 17–17 |
-| 11 | 1% | Nemecub | 16–16 | Nemecub | 16–16 |
+| 0 | 20% | Halcyling | 11–13 | Galekit | 11–13 |
+| 1 | 20% | Harpeck | 11–13 | Onotis | 11–13 |
+| 2 | 10% | Onotis | 11–13 | Karkipool | 11–13 |
+| 3 | 10% | Chelonet | 11–13 | Chelonet | 11–13 |
+| 4 | 10% | Lophops | 12–14 | Gelasable | 13–14 |
+| 5 | 10% | Karkipool | 11–13 | Galekit | 12–14 |
+| 6 | 5% | Kerazap | 12–14 | Harpeck | 12–14 |
+| 7 | 5% | Epopoi | 11–13 | Karkipool | 12–14 |
+| 8 | 4% | Galekit | 12–14 | Onotis | 13–14 |
+| 9 | 4% | Karkipool | 13–14 | Galekit | 13–14 |
+| 10 | 1% | Galenyon | 15–15 | Gelasable | 15–15 |
+| 11 | 1% | Nemecub | 14–14 | Nemecub | 14–14 |
 
 `MAP_ROUTE6_HALAI_CLIFFS`, the cliffs and the pasture. The cliff-top pasture behind the rubble shares this table; its reasons to visit are a visible item and the densest grass on the route.
 
 | Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
 |---|---|---|---|---|---|
-| 0 | 20% | Harpeck | 15–17 | Galekit | 15–17 |
-| 1 | 20% | Kerazap | 15–17 | Cairnolith | 15–17 |
-| 2 | 10% | Halcyling | 15–17 | Kerazap | 15–17 |
-| 3 | 10% | Chelonet | 15–17 | Pebblith † | 15–17 |
-| 4 | 10% | Lophops | 15–17 | Chelonet | 15–17 |
-| 5 | 10% | Pebblith † | 15–17 | Gelasable | 16–17 |
-| 6 | 5% | Onotis | 15–17 | Harpeck | 16–17 |
-| 7 | 5% | Cairnolith | 16–17 | Onotis | 15–17 |
-| 8 | 4% | Galenyon | 16–17 | Galekit | 17–17 |
-| 9 | 4% | Epopoi | 15–17 | Cairnolith | 17–17 |
-| 10 | 1% | Harpelle | 18–18 | Nemecub | 17–17 |
-| 11 | 1% | Nemecub | 17–17 | Gelasable | 17–17 |
+| 0 | 20% | Harpeck | 12–14 | Galekit | 12–14 |
+| 1 | 20% | Kerazap | 12–14 | Cairnolith | 13–15 |
+| 2 | 10% | Halcyling | 12–14 | Kerazap | 12–14 |
+| 3 | 10% | Chelonet | 12–14 | Pebblith † | 12–14 |
+| 4 | 10% | Lophops | 13–15 | Chelonet | 12–14 |
+| 5 | 10% | Pebblith † | 12–14 | Gelasable | 14–15 |
+| 6 | 5% | Onotis | 13–15 | Harpeck | 13–15 |
+| 7 | 5% | Cairnolith | 14–15 | Onotis | 13–15 |
+| 8 | 4% | Galenyon | 15–16 | Galekit | 15–16 |
+| 9 | 4% | Epopoi | 13–15 | Cairnolith | 15–16 |
+| 10 | 1% | Harpelle | 16–16 | Nemecub | 15–15 |
+| 11 | 1% | Nemecub | 15–15 | Gelasable | 16–16 |
+
+## Aegina's interior (the proposed detour)
+
+`MAP_AEGINA_APHAIA_ROAD`, land `encounter_rate: 20`. The temple hilltop and Mount Oros share it.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Ergant † | 12–14 | Galekit | 12–14 |
+| 1 | 20% | Epopoi | 12–14 | Ergant † | 12–14 |
+| 2 | 10% | Chelonet | 12–14 | Gelasable | 14–15 |
+| 3 | 10% | Lophops | 13–15 | Chelonet | 12–14 |
+| 4 | 10% | Galekit | 12–14 | Onotis | 12–14 |
+| 5 | 10% | Halcyling | 12–14 | Karkipool | 12–14 |
+| 6 | 5% | Kerazap | 13–15 | Pebblith | 13–15 |
+| 7 | 5% | Ergant † | 14–15 | Ergant † | 14–15 |
+| 8 | 4% | Karkipool | 13–15 | Cairnolith | 15–16 |
+| 9 | 4% | Onotis | 13–15 | Galekit | 14–15 |
+| 10 | 1% | Hoplomex † | 16–16 | Hoplomex † | 16–16 |
+| 11 | 1% | Galenyon | 16–16 | Gelasable | 16–16 |
+
+Hoplomex at 16 is evolved six levels early: a rare reward for a side trip, and Balance may prefer it gone.
 
 ## Route 2, the Sacred Way
 
@@ -4506,18 +4681,18 @@ Land `encounter_rate: 20`. Open before Laurel 2, so their levels sit just above 
 
 | Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
 |---|---|---|---|---|---|
-| 0 | 20% | Lophops | 17–19 | Galekit | 17–19 |
-| 1 | 20% | Onotis | 17–19 | Onotis | 17–19 |
-| 2 | 10% | Chelonet | 17–19 | Gelasable | 18–20 |
-| 3 | 10% | Galekit | 17–19 | Chelonet | 17–19 |
-| 4 | 10% | Kerazap | 18–20 | Cairnolith | 18–20 |
-| 5 | 10% | Epopoi | 17–19 | Spalunk | 17–19 |
-| 6 | 5% | Ergant | 17–19 | Pebblith | 17–19 |
-| 7 | 5% | Elaleaf | 17–19 | Kerazap | 18–20 |
-| 8 | 4% | Spalunk | 18–20 | Ergant | 18–20 |
-| 9 | 4% | Harpeck | 18–20 | Galekit | 18–20 |
-| 10 | 1% | Nemecub | 19–19 | Obolorn † | 19–19 |
-| 11 | 1% | Nemecub | 20–20 | Nemecub | 19–19 |
+| 0 | 20% | Lophops | 16–18 | Galekit | 16–18 |
+| 1 | 20% | Onotis | 16–18 | Onotis | 16–18 |
+| 2 | 10% | Chelonet | 16–18 | Gelasable | 17–19 |
+| 3 | 10% | Galekit | 16–18 | Chelonet | 16–18 |
+| 4 | 10% | Kerazap | 17–19 | Cairnolith | 17–19 |
+| 5 | 10% | Epopoi | 16–18 | Spalunk | 16–18 |
+| 6 | 5% | Ergant | 16–18 | Pebblith | 16–18 |
+| 7 | 5% | Elaleaf | 16–18 | Kerazap | 17–19 |
+| 8 | 4% | Spalunk | 17–19 | Ergant | 17–19 |
+| 9 | 4% | Harpeck | 17–19 | Galekit | 18–19 |
+| 10 | 1% | Nemecub | 18–18 | Obolorn † | 18–18 |
+| 11 | 1% | Nemecub | 19–19 | Nemecub | 18–18 |
 
 ## Hecate's Hollow
 
@@ -4525,39 +4700,39 @@ Land `encounter_rate: 20`. Open before Laurel 2, so their levels sit just above 
 
 | Slot | Rate | Species | Levels |
 |---|---|---|---|
-| 0 | 20% | Pebblith | 19–21 |
-| 1 | 20% | Spalunk | 19–21 |
-| 2 | 10% | Galekit | 19–21 |
-| 3 | 10% | Ergant | 19–21 |
-| 4 | 10% | Cairnolith | 20–21 |
-| 5 | 10% | Gelasable | 20–21 |
-| 6 | 5% | Pebblith | 21–21 |
-| 7 | 5% | Galekit | 21–21 |
-| 8 | 4% | Chelonet | 20–21 |
-| 9 | 4% | Spalunk | 21–21 |
-| 10 | 1% | Cairnolith | 21–21 |
-| 11 | 1% | Gelasable | 21–21 |
+| 0 | 20% | Pebblith | 17–19 |
+| 1 | 20% | Spalunk | 17–19 |
+| 2 | 10% | Galekit | 17–19 |
+| 3 | 10% | Ergant | 17–19 |
+| 4 | 10% | Cairnolith | 18–20 |
+| 5 | 10% | Gelasable | 18–20 |
+| 6 | 5% | Pebblith | 19–20 |
+| 7 | 5% | Galekit | 19–20 |
+| 8 | 4% | Chelonet | 18–20 |
+| 9 | 4% | Spalunk | 19–20 |
+| 10 | 1% | Cairnolith | 20–20 |
+| 11 | 1% | Gelasable | 20–20 |
 
-Statics: Lykopup † Lv 22 at the Hekataion at night (beat 18); Raknit † Lv 22 with Defiant in the web chamber, after the Arachne amphora (Part 2).
+Statics: Lykopup † Lv 20 at the Hekataion at night (beat 18); Raknit † Lv 20 with Defiant in the web chamber, after the Arachne amphora (Part 2).
 
 ## Route 3, the Pine Slopes
 
-`MAP_ROUTE3_PINE_SLOPES`, land `encounter_rate: 20`. Hill and mountain-road species, as the dex places them; Melibee belong to Aristaios, not the wild.
+`MAP_ROUTE3_PINE_SLOPES`, land `encounter_rate: 20`. Hill and mountain-road species, as the dex places them; the Melibee belong to Aristaios, not the wild.
 
 | Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
 |---|---|---|---|---|---|
-| 0 | 20% | Lophops | 20–21 | Galekit | 20–21 |
-| 1 | 20% | Kerazap | 20–21 | Gelasable | 20–21 |
-| 2 | 10% | Chelonet | 20–21 | Cairnolith | 20–21 |
-| 3 | 10% | Galekit | 20–21 | Kerazap | 20–21 |
-| 4 | 10% | Onotis | 20–21 | Onotis | 20–21 |
-| 5 | 10% | Epopoi | 20–21 | Chelonet | 20–21 |
-| 6 | 5% | Elaleaf | 20–21 | Spalunk | 20–21 |
-| 7 | 5% | Ergant | 20–21 | Pebblith | 20–21 |
-| 8 | 4% | Cairnolith | 21–21 | Ergant | 21–21 |
-| 9 | 4% | Spalunk | 21–21 | Galekit | 21–21 |
-| 10 | 1% | Nemecub | 21–21 | Nemecub | 21–21 |
-| 11 | 1% | Kerazap | 22–22 | Gelasable | 22–22 |
+| 0 | 20% | Lophops | 17–19 | Galekit | 17–19 |
+| 1 | 20% | Kerazap | 17–19 | Gelasable | 18–20 |
+| 2 | 10% | Chelonet | 17–19 | Cairnolith | 18–20 |
+| 3 | 10% | Galekit | 17–19 | Kerazap | 17–19 |
+| 4 | 10% | Onotis | 18–20 | Onotis | 18–20 |
+| 5 | 10% | Epopoi | 17–19 | Chelonet | 17–19 |
+| 6 | 5% | Elaleaf | 18–20 | Spalunk | 18–20 |
+| 7 | 5% | Ergant | 18–20 | Pebblith | 18–20 |
+| 8 | 4% | Cairnolith | 19–20 | Ergant | 19–20 |
+| 9 | 4% | Spalunk | 19–20 | Galekit | 19–20 |
+| 10 | 1% | Nemecub | 20–20 | Nemecub | 20–20 |
+| 11 | 1% | Kerazap | 21–21 | Gelasable | 21–21 |
 
 Thria has no grass.
 
@@ -4567,16 +4742,16 @@ Thria has no grass.
 
 | Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
 |---|---|---|---|---|---|
-| 0 | 20% | Stachyss | 20–22 | Gelasable | 20–22 |
-| 1 | 20% | Lophops | 20–22 | Galekit | 20–22 |
-| 2 | 10% | Melibee | 20–22 | Kaplet | 20–22 |
-| 3 | 10% | Kaplet | 20–22 | Spalunk | 20–22 |
-| 4 | 10% | Spalunk | 20–22 | Stachyss | 20–22 |
-| 5 | 10% | Onotis | 20–22 | Onotis | 20–22 |
-| 6 | 5% | Elaleaf | 20–22 | Cairnolith | 21–22 |
-| 7 | 5% | Halcyling | 20–22 | Elaleaf | 20–22 |
-| 8 | 4% | Kerazap | 21–22 | Chelonet | 21–22 |
-| 9 | 4% | Epopoi | 21–22 | Galekit | 22–22 |
+| 0 | 20% | Stachyss | 18–20 | Gelasable | 18–20 |
+| 1 | 20% | Lophops | 18–20 | Galekit | 18–20 |
+| 2 | 10% | Melibee | 18–20 | Kaplet | 18–20 |
+| 3 | 10% | Kaplet | 18–20 | Spalunk | 18–20 |
+| 4 | 10% | Spalunk | 19–21 | Stachyss | 19–21 |
+| 5 | 10% | Onotis | 19–21 | Onotis | 19–21 |
+| 6 | 5% | Elaleaf | 19–21 | Cairnolith | 20–21 |
+| 7 | 5% | Halcyling | 19–21 | Elaleaf | 19–21 |
+| 8 | 4% | Kerazap | 20–21 | Chelonet | 20–21 |
+| 9 | 4% | Epopoi | 20–21 | Galekit | 21–21 |
 | 10 | 1% | Galenyon | 22–22 | Gelasable | 22–22 |
 | 11 | 1% | Stachyss | 22–22 | Kerazap | 22–22 |
 
@@ -4586,20 +4761,20 @@ Thria has no grass.
 
 | Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
 |---|---|---|---|---|---|
-| 0 | 20% | Stachyss | 21–23 | Gelasable | 21–23 |
-| 1 | 20% | Melibee | 21–23 | Galekit | 21–23 |
-| 2 | 10% | Kaplet | 21–23 | Kaplet | 21–23 |
-| 3 | 10% | Spalunk | 21–23 | Spalunk | 21–23 |
-| 4 | 10% | Elaleaf | 21–23 | Stachyss | 21–23 |
-| 5 | 10% | Lophops | 21–23 | Elaleaf | 21–23 |
-| 6 | 5% | Epopoi | 21–23 | Onotis | 21–23 |
-| 7 | 5% | Gelasable | 22–23 | Kerazap | 22–23 |
-| 8 | 4% | Kerazap | 22–23 | Spalunk | 23–23 |
-| 9 | 4% | Onotis | 22–23 | Kaplet | 23–23 |
-| 10 | 1% | Korantha | 23–23 | Gelasable | 23–23 |
-| 11 | 1% | Stachypter | 23–23 | Galekit | 23–23 |
+| 0 | 20% | Stachyss | 19–21 | Gelasable | 19–21 |
+| 1 | 20% | Melibee | 19–21 | Galekit | 19–21 |
+| 2 | 10% | Kaplet | 19–21 | Kaplet | 19–21 |
+| 3 | 10% | Spalunk | 19–21 | Spalunk | 19–21 |
+| 4 | 10% | Elaleaf | 19–21 | Stachyss | 19–21 |
+| 5 | 10% | Lophops | 20–22 | Elaleaf | 20–22 |
+| 6 | 5% | Epopoi | 20–22 | Onotis | 20–22 |
+| 7 | 5% | Gelasable | 20–22 | Kerazap | 20–22 |
+| 8 | 4% | Kerazap | 21–22 | Spalunk | 21–22 |
+| 9 | 4% | Onotis | 21–22 | Kaplet | 21–22 |
+| 10 | 1% | Korantha | 22–22 | Gelasable | 22–22 |
+| 11 | 1% | Stachypter | 22–22 | Galekit | 22–22 |
 
-Static: Persenyx Lv 26 in the fields in the evening, after the Persephone amphora (SYSTEMS.md §5, amphora 2; `FLAG_ICHOR_ELEUSA_PERSENYX`).
+Korantha and Stachypter at 22 are evolved early (at 28 and 30): the fields' two rare prizes. Static: Persenyx Lv 22 in the fields in the evening, after the Persephone amphora (SYSTEMS.md §5, amphora 2; `FLAG_ICHOR_ELEUSA_PERSENYX`).
 
 ## The Mystery sanctum
 
@@ -4609,91 +4784,74 @@ Land `encounter_rate: 10`. B1F is the granaries; B2F and B3F share the deeper ta
 
 | Slot | Rate | Species | Levels |
 |---|---|---|---|
-| 0 | 20% | Spalunk | 22–24 |
-| 1 | 20% | Rhoaril | 22–24 |
-| 2 | 10% | Kaplet | 22–24 |
-| 3 | 10% | Galekit | 22–24 |
-| 4 | 10% | Pebblith | 22–24 |
-| 5 | 10% | Spalunk | 23–25 |
-| 6 | 5% | Rhoaril | 24–25 |
-| 7 | 5% | Ergant | 22–24 |
-| 8 | 4% | Plouteras | 24–25 |
-| 9 | 4% | Gelasable | 23–25 |
-| 10 | 1% | Plouteras | 25–25 |
-| 11 | 1% | Rhoaril | 25–25 |
+| 0 | 20% | Spalunk | 19–21 |
+| 1 | 20% | Rhoaril | 19–21 |
+| 2 | 10% | Kaplet | 19–21 |
+| 3 | 10% | Galekit | 19–21 |
+| 4 | 10% | Pebblith | 19–21 |
+| 5 | 10% | Spalunk | 20–22 |
+| 6 | 5% | Rhoaril | 21–22 |
+| 7 | 5% | Ergant | 19–21 |
+| 8 | 4% | Plouteras | 22–22 |
+| 9 | 4% | Gelasable | 20–22 |
+| 10 | 1% | Plouteras | 22–22 |
+| 11 | 1% | Rhoaril | 22–22 |
 
 `MAP_ELEUSA_MYSTERY_SANCTUM_B2F` and `_B3F`
 
 | Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
 |---|---|---|---|---|---|
-| 0 | 20% | Rhoaril | 23–25 | Rhoaril | 23–25 |
-| 1 | 20% | Spalunk | 23–25 | Spalunk | 23–25 |
-| 2 | 10% | Pebblith | 23–25 | Pebblith | 23–25 |
-| 3 | 10% | Kaplet | 23–25 | Kaplet | 23–25 |
-| 4 | 10% | Rhoaril | 24–25 | Rhoaril | 24–25 |
-| 5 | 10% | Cairnolith | 24–25 | Cairnolith | 24–25 |
-| 6 | 5% | Gelasable | 24–25 | Gelasable | 24–25 |
-| 7 | 5% | Spalunk | 25–25 | Spalunk | 25–25 |
-| 8 | 4% | Plouteras | 25–25 | Plouteras | 25–25 |
-| 9 | 4% | Rhoaril | 25–25 | Rhoaril | 25–25 |
-| 10 | 1% | Plouteras | 25–25 | Persenyx | 25–25 |
-| 11 | 1% | Rhoaril | 25–25 | Persenyx | 25–25 |
+| 0 | 20% | Rhoaril | 20–22 | Rhoaril | 20–22 |
+| 1 | 20% | Spalunk | 20–22 | Spalunk | 20–22 |
+| 2 | 10% | Pebblith | 20–22 | Pebblith | 20–22 |
+| 3 | 10% | Kaplet | 20–22 | Kaplet | 20–22 |
+| 4 | 10% | Rhoaril | 21–22 | Rhoaril | 21–22 |
+| 5 | 10% | Cairnolith | 21–22 | Cairnolith | 21–22 |
+| 6 | 5% | Gelasable | 21–22 | Gelasable | 21–22 |
+| 7 | 5% | Spalunk | 22–22 | Spalunk | 22–22 |
+| 8 | 4% | Plouteras | 22–22 | Plouteras | 22–22 |
+| 9 | 4% | Rhoaril | 22–22 | Rhoaril | 22–22 |
+| 10 | 1% | Plouteras | 22–22 | Persenyx | 22–22 |
+| 11 | 1% | Rhoaril | 22–22 | Persenyx | 22–22 |
+
+Plouteras at 22 is evolved ten levels early (at 32): a rare, slow, bulky prize. Balance may prefer it gone until the post-game.
 
 ## Fishing and water
 
-Fishing `encounter_rate: 30`; water (`water_mons`) `encounter_rate: 4`, slots 60/30/5/4/1. The Good Rod comes from Aigialeus in Halai. The Super Rod and Poseidon's Conch come later; their slots are filled now so the tables are ready.
+Fishing `encounter_rate: 30`; water (`water_mons`) `encounter_rate: 4`, slots 60/30/5/4/1. The Good Rod comes from Aigialeus in Halai. The Super Rod and Poseidon's Conch come later. Their slots are filled now so the tables exist, but their levels are **placeholders** to be re-set to BALANCE.md's row for the stage where each item arrives.
 
-| Map | Old Rod (70 / 30) | Good Rod (60 / 20 / 20) | Super Rod (40 / 40 / 15 / 4 / 1) |
+| Map | Old Rod (70 / 30) | Good Rod (60 / 20 / 20) | Super Rod (40 / 40 / 15 / 4 / 1), placeholder |
 |---|---|---|---|
-| `MAP_TRIREME_EUPLOIA_DECK` | Ketofry 10–15 / Karkipool 10–15 | Narkeray 15–25 / Ketofry 15–20 / Karkipool 15–20 | Kynoketos 25–30 / Narkeray 25–30 / Karkipool 25–30 / Kynoketos 30–35 / Narkeray 35 |
-| `MAP_EMPORION_CITY` | Ketofry 5–10 / Karkipool 5–10 | Karkipool 10–20 / Ketofry 10–20 / Narkeray 15–20 | Kynoketos 25–30 / Narkeray 25–30 / Karkipool 25–30 / Kynoketos 30–35 / Narkeray 35 |
-| `MAP_AEGINA_TOWN` | Ketofry 10–15 / Karkipool 10–15 | Karkipool 15–20 / Narkeray 15–20 / Ketofry 15–20 | as Emporion |
-| `MAP_ROUTE5_HALAI_BEACH` | Ketofry 10–15 / Karkipool 10–15 | Karkipool 15–20 / Ketofry 15–20 / Narkeray 15–20 | as Emporion |
-| `MAP_ROUTE6_HALAI_CLIFFS` (the cape: "rays past the point") | Ketofry 10–15 / Karkipool 10–15 | Narkeray 15–20 / Karkipool 15–20 / Ketofry 15–20 | as Emporion |
-| `MAP_ROUTE4_RHEITOI` | Ketofry 15–20 / Karkipool 15–20 | Karkipool 20–25 / Ketofry 20–25 / Narkeray 20–25 | as Emporion |
+| `MAP_TRIREME_EUPLOIA_DECK` | Ketofry 10–13 / Karkipool 10–13 | Narkeray 12–15 / Ketofry 12–14 / Karkipool 12–14 | Kynoketos / Narkeray / Karkipool / Kynoketos / Narkeray |
+| `MAP_EMPORION_CITY` | Ketofry 10–13 / Karkipool 10–13 | Karkipool 12–15 / Ketofry 12–14 / Narkeray 13–15 | as the deck |
+| `MAP_AEGINA_TOWN` | Ketofry 10–13 / Karkipool 10–13 | Karkipool 12–15 / Narkeray 13–15 / Ketofry 12–14 | as the deck |
+| `MAP_ROUTE5_HALAI_BEACH` | Ketofry 11–13 / Karkipool 11–13 | Karkipool 12–15 / Ketofry 12–14 / Narkeray 13–15 | as the deck |
+| `MAP_ROUTE6_HALAI_CLIFFS` (the cape: "rays past the point") | Ketofry 12–14 / Karkipool 12–14 | Narkeray 13–16 / Karkipool 13–16 / Ketofry 13–15 | as the deck |
+| `MAP_ROUTE4_RHEITOI` | Ketofry 18–20 / Karkipool 18–20 | Karkipool 19–22 / Ketofry 19–21 / Narkeray 20–22 | as the deck |
 
-| Map (water) | 60% | 30% | 5% | 4% | 1% |
+| Map (water), placeholder levels | 60% | 30% | 5% | 4% | 1% |
 |---|---|---|---|---|---|
-| Emporion, Aegina, Routes 5–6 | Halcyling 20–30 | Ketofry 20–30 | Galenyon 25–30 | Narkeray 25–30 | Galenyon 30 |
-| Route 4 | Halcyling 20–30 | Ketofry 20–30 | Karkipool 25–30 | Narkeray 25–30 | Galenyon 30 |
-
-## Aegina's interior (the proposed detour)
-
-`MAP_AEGINA_APHAIA_ROAD`, land `encounter_rate: 20`. The temple hilltop and Mount Oros share it.
-
-| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
-|---|---|---|---|---|---|
-| 0 | 20% | Ergant † | 18–20 | Galekit | 18–20 |
-| 1 | 20% | Epopoi | 18–20 | Ergant † | 18–20 |
-| 2 | 10% | Chelonet | 18–20 | Gelasable | 19–20 |
-| 3 | 10% | Lophops | 18–20 | Chelonet | 18–20 |
-| 4 | 10% | Galekit | 18–20 | Onotis | 18–20 |
-| 5 | 10% | Halcyling | 18–20 | Karkipool | 18–20 |
-| 6 | 5% | Kerazap | 19–21 | Pebblith | 19–21 |
-| 7 | 5% | Ergant † | 20–21 | Ergant † | 20–21 |
-| 8 | 4% | Karkipool | 19–21 | Cairnolith | 20–21 |
-| 9 | 4% | Onotis | 19–21 | Galekit | 20–21 |
-| 10 | 1% | Hoplomex † | 21–21 | Hoplomex † | 21–21 |
-| 11 | 1% | Galenyon | 21–21 | Gelasable | 21–21 |
+| Emporion, Aegina, Routes 5–6 | Halcyling | Ketofry | Galenyon | Narkeray | Galenyon |
+| Route 4 | Halcyling | Ketofry | Karkipool | Narkeray | Galenyon |
 
 ## Kalliste, new in Phase 2
 
-These maps open with the Phase 2 relics (Part 2, Return to Kalliste). The slice's own Kalliste tables still use vanilla species and need an Aethos pass under dex decision D5 (Open questions 18).
+These maps open with the Phase 2 relics (Part 2, Return to Kalliste). Each is levelled to the stage where its relic arrives: the Hammer in the Emporion stage, the Torch in the Eleusa stage, the Sickle at the end of Act I (the Thyrsa row's start). The slice's own Kalliste tables still use vanilla species and need an Aethos pass under dex decision D5 (Open questions 18).
 
 | Slot | Rate | Kronion Crypt (rate 10) | Levels | Akti Sea Grotto (rate 10) | Levels | Route 1 old grove (rate 20) | Levels |
 |---|---|---|---|---|---|---|---|
-| 0 | 20% | Pebblith | 18–20 | Pebblith | 20–22 | Elaleaf | 24–26 |
-| 1 | 20% | Ergant | 18–20 | Karkipool | 20–22 | Epopoi | 24–26 |
-| 2 | 10% | Galekit | 18–20 | Halcyling | 20–22 | Galekit | 24–26 |
-| 3 | 10% | Pebblith | 20–22 | Galekit | 20–22 | Ergant | 24–26 |
-| 4 | 10% | Cairnolith | 20–22 | Pebblith | 22–24 | Lophops | 25–27 |
-| 5 | 10% | Ergant | 20–22 | Karkipool | 22–24 | Elaleaf | 26–27 |
-| 6 | 5% | Galekit | 20–22 | Halcyling | 22–24 | Kerazap | 25–27 |
-| 7 | 5% | Cairnolith | 22–22 | Cairnolith | 22–24 | Eopeep | 25–27 |
-| 8 | 4% | Kerazap | 20–22 | Galenyon | 24–24 | Elapling | 26–27 |
-| 9 | 4% | Pebblith | 22–22 | Cairnolith | 24–24 | Galekit | 27–27 |
-| 10 | 1% | Kerazap | 22–22 | Galenyon | 24–24 | Elapling | 27–27 |
-| 11 | 1% | Cairnolith | 22–22 | Karkipool | 24–24 | Psychora | 27–27 |
+| 0 | 20% | Pebblith | 12–14 | Pebblith | 16–18 | Elaleaf | 20–22 |
+| 1 | 20% | Ergant | 12–14 | Karkipool | 16–18 | Epopoi | 20–22 |
+| 2 | 10% | Galekit | 12–14 | Halcyling | 16–18 | Galekit | 20–22 |
+| 3 | 10% | Pebblith | 13–15 | Galekit | 16–18 | Ergant | 20–22 |
+| 4 | 10% | Cairnolith | 14–16 | Pebblith | 17–19 | Lophops | 21–23 |
+| 5 | 10% | Ergant | 13–15 | Karkipool | 17–19 | Elaleaf | 21–23 |
+| 6 | 5% | Galekit | 14–15 | Halcyling | 18–19 | Kerazap | 21–23 |
+| 7 | 5% | Cairnolith | 15–16 | Cairnolith | 18–20 | Eopeep | 21–23 |
+| 8 | 4% | Kerazap | 14–16 | Galenyon | 19–20 | Elapling | 22–24 |
+| 9 | 4% | Pebblith | 15–16 | Cairnolith | 19–20 | Galekit | 22–23 |
+| 10 | 1% | Kerazap | 16–16 | Galenyon | 20–20 | Elapling | 24–24 |
+| 11 | 1% | Cairnolith | 16–16 | Karkipool | 20–20 | Psychora | 24–24 |
 
 The old grove is its own small map, `MAP_KALLISTE_ROUTE1_OLD_GROVE`, so it can have this table. The Sea Grotto's pool fishes like Akti's.
 
@@ -4731,9 +4889,11 @@ One long hall, entered from the south: an Ionic **stoa** that folds back on itse
    ```text
    {PLAYER} took three sealed scrolls.
 
-   The first is addressed “To Hermes of the Threshold.” The second, “Of the Road.”
+   The first is addressed “To Hermes of the Threshold.”
 
-   The third, “Of the Market.” The step-glass begins to run.
+   The second, “Of the Road.” The third, “Of the Market.”
+
+   The step-glass begins to run.
    ```
 2. **Oil a junction herm** (J1 to J4). A herm's head faces south until oiled. Interacting:
    ```text
@@ -4751,13 +4911,17 @@ One long hall, entered from the south: an Ionic **stoa** that folds back on itse
    ```text
    A herm with a bronze plaque: a doorway. “Hermes of the Threshold.”
 
-   You slip the scroll into the niche at its foot. Somewhere, a bell rings once.
+   You slip the scroll into the niche at its foot.
+
+   Somewhere, a bell rings once.
    ```
    The wrong one, or the right one out of order: "The plaque shows a sandal. This scroll isn't for this herm. Not yet."
 5. **The dais.** When the third scroll is delivered, the dais gate swings open and Kerykos is already there (beat 15).
 6. **Running dry.** At 30 steps left: "The step-glass is running low." At 0:
    ```text
-   The last grain falls. The scrolls flap out of your hands and fly back to the door.
+   The last grain falls.
+
+   The scrolls flap out of your hands and fly back to the door.
 
    KERYKOS: [from somewhere] Late! A herald is never late.
 
@@ -4835,7 +4999,9 @@ The **Telesterion**: one great square hall with a **forest of columns** (a grid 
 
    The brazier catches. Its corner of the hall is suddenly, warmly gold.
 
-   The seed at its foot is gone. Somewhere else in the dark, another has begun to glow.
+   The seed at its foot is gone.
+
+   Somewhere else in the dark, another has begun to glow.
    ```
    A brazier lit out of turn: "The brazier won't take. Its plaque shows a sprout. The year isn't there yet." Nothing resets.
 4. **The fourth brazier** (Summer) lights the Anaktoron's doorway from all four corners, and Chloe is revealed (beat 21).
@@ -4898,17 +5064,21 @@ A three-floor story dungeon under the Telesterion. MAP_DESIGN §3: teach, test, 
 
 | Floor | Size | What it does |
 |---|---|---|
-| **B1F, the granaries** | 36×28 | **Teach.** A wide hall of round grain pits and great storage jars. Dark (the Torch's radius). Four braziers along the walls: each lit one makes its stretch a lit zone. The grunts' lamps are moving lights, so you can see them coming. Chloe holds the stair (and heals). Pelos stands across the main aisle; Bolos guards a side pit with a visible Hyper Potion. A fixed dig spot behind a jar: a Persephone sherd. |
-| **B2F, the Hall of the Kore** | 20×40 | **Test.** A long frescoed hall: four painted panels of the Kore's story, read one by one. A chasm runs down the middle (impassable; its floor glows faintly red). The near half is a chalk path across pits, like the Summer seed: douse to see the chalk. Kleon and the iron-tasting spring (the midpoint rest) are halfway. Konis at the far end (mandatory). Gaios in a fresco alcove (optional) with TM Dig, which the Titans left behind. |
-| **B3F, the deepest granary** | 18×18 | **Payoff.** A round vault, the Titans' tunnel, the bronze chest, Rhea (beat 23C). After the story: the collapsed tunnel, and Daedalus's page II in a fixed dig spot where the tunnel exposed the old foundations. |
+| **B1F, the granaries** | 36×28 | **Teach.** A wide hall of round grain pits and great storage jars. Dark (the Torch's radius). Four braziers along the walls: each lit one makes its stretch a lit zone. The grunts' lamps are moving lights, so you can see them coming. Chloe holds the stair (and heals). Krokalos stands across the main aisle; Bolos guards a side pit with a visible Hyper Potion. A fixed dig spot behind a jar: a Persephone sherd. |
+| **B2F, the Hall of the Kore** | 20×40 | **Test.** A long frescoed hall: four painted panels of the Kore's story, read one by one. A chasm runs down the middle (impassable; its floor glows faintly red). The near half is a chalk path across pits, like the Summer seed: douse to see the chalk. The iron-tasting spring (the midpoint rest) is halfway, and Hyperion's voice echoes up from the far stair. Konis at the far end (mandatory). Gaios in a fresco alcove (optional) with TM Dig, which the Titans left behind. |
+| **B3F, the deepest granary** | 18×18 | **Payoff.** A round vault, the Titans' tunnel, the bronze chest, Hyperion (beat 23C). After the story: the collapsed tunnel, and Daedalus's page II in a fixed dig spot where the tunnel exposed the old foundations. |
 
 **The four frescoes** (B2F, examined in order south to north):
 ```text
-A girl picking flowers in a meadow. Behind her the ground is splitting open.
+A girl picking flowers in a meadow.
+
+Behind her the ground is splitting open.
 
 A chariot of black horses, going down. The girl's arms reach back.
 
-A woman with a torch, searching. Beside her, a smaller figure with two torches.
+A woman with a torch, searching.
+
+Beside her, a smaller figure with two torches.
 
 The girl again, coming up a stair into the light. The flowers are open.
 ```
@@ -4970,6 +5140,8 @@ Phase 2 gives three relics and two tools, in SYSTEMS.md's order (the Talaria cam
 | Emporion, Philoxenos's house | Wine ×1 per new laurel | a story for a laurel | — |
 | Emporion, Philoxenos's house | Half Coin | gift (stretch: the Split Coin) | — |
 | Emporion, Euphronios's workshop | Super Potion ×2, Great Ball ×3, Star Piece | show him a Harpeck, a Chelonet, a Stachyss | — |
+| Emporion, the hiring hall | Rocky Helmet | beat the crew boss | — |
+| Akti (beat 9B) | Honey ×2 | gift, Mom, on the quay | — |
 | Temple of Hermes | Herald Laurel (badge 2), TM40 Aerial Ace | Kerykos | — |
 | Temple of Hermes | TM U-turn | Kerykos, Hermes Favor 30 | — |
 | Route 5 | Potion | visible | on the beach path |
@@ -5131,7 +5303,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Pheidippos | Runner | after the herald Pheidippides |
 | Kapelos | Merchant | "huckster" |
 | Eudemos | the procession's leader | "good for the people" |
-| Laas, Chalix, Pelos, Bolos, Konis, Gaios | Titanborn grunts | stone, gravel, clay, clod, dust, "of Gaia" |
+| Laas, Chalix, Krokalos, Bolos, Konis, Gaios, Psammis, Chersos | Titanborn grunts | stone, gravel, pebble, clod, dust, "of Gaia", sand, dry land. Clear of LABYRINTH.md's Lithos, Koniortos, Sideros, Chalkos and Pelos. |
 | Hekabe | Pilgrim | Queen Hekabe, who became Hecate's dog |
 | Kallias | Initiate | the Mysteries' torch-bearing family |
 | Iambe, Thersites | Jesters | the Hymn's joker; the Iliad's mocker |
@@ -5146,7 +5318,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Doso | temple guide, Demeter | the name Demeter gave in disguise |
 | Kallidike, Eumolpos, Melissa | Demeter's acolytes | Keleos's daughter; the Hierophants' clan; "bee" |
 | Chloe | Hierophant of Demeter | "green shoot", an epithet of Demeter |
-| Rhea | Titan Admin | the bible |
+| Hyperion | Titan Admin | the bible and STORY.md; Petros and Amathos, the slice's grunts, are his |
 | the Deigma | Emporion's exchange hall | Piraeus's sample hall |
 | the Sacred Way | Routes 2–4 | the Hiera Hodos |
 | the Rheitoi | Route 4's salt streams | the real streams |
@@ -5167,7 +5339,8 @@ Engine: claim these as `FLAG_ICHOR_*`. Phase 2 needs **no new permanent vars**: 
 - `FLAG_ICHOR_WINDS_TURNED`, `FLAG_ICHOR_BOARDED_EUPLOIA`, `FLAG_ICHOR_AEGINA_NIGHT`, `FLAG_ICHOR_CROSSING_DONE`
 - `FLAG_ICHOR_SAVED_HALCYON_NEST`, `FLAG_ICHOR_GOT_HALCYLING`, `FLAG_ICHOR_BATTLED_ALETHEA_DECK`
 - `FLAG_ICHOR_ARRIVED_EMPORION`, `FLAG_ICHOR_VISITED_EMPORION` (fly)
-- `FLAG_ICHOR_RITES_TUTORIAL`, `FLAG_ICHOR_DEIGMA_CLUE`
+- `FLAG_ICHOR_HALIA_SECOND_LOOK`, `FLAG_ICHOR_MOM_HARBOR`
+- `FLAG_ICHOR_RITES_TUTORIAL`, `FLAG_ICHOR_DEIGMA_CLUE`, `FLAG_ICHOR_HIRING_HALL`
 - `FLAG_ICHOR_FORGE_RELIT`
 - `FLAG_ICHOR_KLEON_WON_HERALD`
 - `FLAG_ICHOR_HERALDS_RUN_DONE`, `FLAG_ICHOR_HERMES_HERM_J1` … `_J4`
@@ -5177,10 +5350,9 @@ Engine: claim these as `FLAG_ICHOR_*`. Phase 2 needs **no new permanent vars**: 
 - `FLAG_ICHOR_SAFFRON_THREAD`
 - `FLAG_ICHOR_ARRIVED_ELEUSA`, `FLAG_ICHOR_VISITED_ELEUSA` (fly)
 - `FLAG_ICHOR_LESSER_MYSTERIES_DONE`, `FLAG_ICHOR_GOT_TM_GIGA_DRAIN`, `FLAG_ICHOR_CHLOE_RITE`
-- `FLAG_ICHOR_PROCESSION_ARRIVED`, `FLAG_ICHOR_MYSTERIES_NIGHT`, `FLAG_ICHOR_SANCTUM_OPEN`
-- `FLAG_ICHOR_FOUND_KLEON_SANCTUM`, `FLAG_ICHOR_HELPED_KLEON_SANCTUM`
+- `FLAG_ICHOR_PROCESSION_ARRIVED`, `FLAG_ICHOR_MYSTERIES_NIGHT`, `FLAG_ICHOR_TELESTERION_MULTI`, `FLAG_ICHOR_SANCTUM_OPEN`
 - `FLAG_ICHOR_FRAGMENT_STOLEN`
-- `FLAG_ICHOR_KLEON_LEFT_FOR_ARKADIA`
+- `FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA`
 - `FLAG_ICHOR_DAPHNE_REVELATION`, `FLAG_ICHOR_ACT1_COMPLETE`
 
 **Relics and tools** (per SYSTEMS.md §1: scripts read these, not the bag)
@@ -5203,7 +5375,8 @@ Engine: claim these as `FLAG_ICHOR_*`. Phase 2 needs **no new permanent vars**: 
 - In-game trades: `FLAG_ICHOR_TRADED_NARKERAY` (Emporion), `FLAG_ICHOR_TRADED_CHELONET` (Aegina), `FLAG_ICHOR_TRADED_GELASABLE` (Thria), `FLAG_ICHOR_TRADED_PITHOUND` (Eleusa). Four new entries in the in-game trade table (`src/data/trade.h`).
 
 **Object hide flags**
-- Kleon: `FLAG_ICHOR_HIDE_KLEON_QUAY`, `_SACRED_GATE`, `_TELESTERION`, `_ELEUSA`, `_SANCTUM`
+- Kleon: `FLAG_ICHOR_HIDE_KLEON_QUAY`, `_SACRED_GATE`, `_TELESTERION`, `_ELEUSA`
+- Mom: `FLAG_ICHOR_HIDE_MOM_HOME`, `FLAG_ICHOR_HIDE_MOM_AKTI` (beat 9A moves her to the quay; she goes home once the *Euploia* has sailed)
 - Alethea: `FLAG_ICHOR_HIDE_ALETHEA_EMPORION`, `_ROUTE2`, `_ELEUSA`, `_SANCTUM`
 - Daphne: `FLAG_ICHOR_HIDE_DAPHNE_ELEUSA`
 - Kerykos: `FLAG_ICHOR_HIDE_KERYKOS_QUAY`, `_ELEUSA`
@@ -5213,7 +5386,7 @@ Engine: claim these as `FLAG_ICHOR_*`. Phase 2 needs **no new permanent vars**: 
 - Route 3: `FLAG_ICHOR_HIDE_TRYGAIOS_SOW`
 - Route 4: `FLAG_ICHOR_HIDE_GRUNT_CHALIX`
 - Eleusa: `FLAG_ICHOR_HIDE_PROCESSION_ELEUSA` (cleared by `FLAG_ICHOR_PROCESSION_ARRIVED`), `FLAG_ICHOR_HIDE_ELEUTHERAI_VINES`
-- Sanctum: `FLAG_ICHOR_HIDE_SANCTUM_GRUNTS`, `FLAG_ICHOR_HIDE_RHEA_SANCTUM`, `FLAG_ICHOR_HIDE_FRAGMENT`, `FLAG_ICHOR_HIDE_BRONZE_SICKLE`, `FLAG_ICHOR_HIDE_CHLOE_SANCTUM`
+- Sanctum: `FLAG_ICHOR_HIDE_SANCTUM_GRUNTS`, `FLAG_ICHOR_HIDE_HYPERION_SANCTUM`, `FLAG_ICHOR_HIDE_PETROS_AMATHOS_SANCTUM`, `FLAG_ICHOR_HIDE_FRAGMENT`, `FLAG_ICHOR_HIDE_BRONZE_SICKLE`, `FLAG_ICHOR_HIDE_CHLOE_SANCTUM`
 - Kalliste: `FLAG_ICHOR_HIDE_KRONION_RUBBLE`, `FLAG_ICHOR_HIDE_ROUTE1_THICKET`
 
 **Battle**
@@ -5245,9 +5418,8 @@ Phase 1 has ten Ichor songs (`MUS_ICHOR_*`). Phase 2 needs these. Modes and mete
 | `MUS_ICHOR_DARK_CAVE` | Hecate's Hollow, the Salt Grotto, the Kalliste grottos | Near-silence: a low drone and drips. The bark is a sound effect, not music. |
 | `MUS_ICHOR_ELEUSA` | Eleusa Village | Pastoral and slow, in Hypodorian: a reaping song with a lyre. |
 | `MUS_ICHOR_MYSTERIES` | the Telesterion, the Mystery sanctum | Phrygian, dark: one long held note under faint struck bronze. In beat 22 it falls to the single held note. |
-| `MUS_ICHOR_ENCOUNTER_ADMIN` | Rhea's entrance | Her lullaby: a simple cradle song in a minor mode, sung by a solo aulos, slightly out of time. |
-| `MUS_ICHOR_BATTLE_ADMIN` | Rhea's battle, and later the other admins | The lullaby's tune turned into a battle theme in 9/8, heavy on low drums. |
-| `MUS_ICHOR_LOOM` | Daphne's revelation | The Loom motif: a three-note figure on plucked kithara over a spindle's hum. The Frozen Hour's ticking music box (PITCH §7) should quote it. |
+| `MUS_ICHOR_ENCOUNTER_ADMIN`, `MUS_ICHOR_BATTLE_ADMIN` | Hyperion's entrance and battle | STORY.md's admins' theme: one shared battle theme, each admin with his own top layer. Hyperion's layer is forge hammers. Iapetos's (a chorus of aulos) and Rhea's (a slow 7/8 Lakonian frame drum) come in Phase 3. It is not a lullaby: STORY.md keeps the lullaby for Elpis, Phaedon and the music box. |
+| Daphne's revelation | beat 25 | No new song. STORY.md §6.2: Chloe's Mysteries theme, then near-silence, one sustained aulos note under Daphne. |
 
 Sound effects needed: a dog's bark with left, right and center panning (the Hollow), a split reed, a herm's stone head turning, a turnstile, the step-glass's last grain, a peep (the chicks), a saffron thread slipping.
 
@@ -5308,9 +5480,11 @@ Every interior is unique (MAP_DESIGN §2): 23 rooms, each laid out for its owner
 |---|---|---|
 | Kerykos | portrait, walker | A round, cheerful man in middle age: winged petasos, herald's staff wound with two snakes, a traveling cloak with deep pockets. |
 | Chloe | portrait, walker | A woman of about forty in a plain dark himation, a wheat-ear crown, a small bronze sickle at her belt. Still, unreadable. |
-| Rhea | portrait, walker | See Part 3. The swaddled stone in the crook of her arm, in both. |
+| Hyperion | portrait, walker | STORY.md §2: huge, bare-armed, burn scars, sun-disc breastplate, helmet pushed back like a crown, squinting. Clear eyes for now; the clouded-eye palette is Act III's. |
 | Alethea | portrait (front) | Needed now for the practice battle; INVENTORY had it for Act II. |
-| Kleon | walker frames | Leaning over a rail (seasick); sitting against a column (beaten). |
+| Kleon | walker frames | Leaning over a rail (seasick); reading a wax tablet (his mother's letter); sitting on steps with his greaves off. |
+| Mom | walker | Exists; she stands on Akti's quay with a covered basket in beat 9B. |
+| The Kronion tablet's back | picture window | A 64×64 close-up of clay with scratches raised by raking lamplight (STORY.md §6.2). |
 | The 12 new classes | portraits, walkers | Part 3's table. |
 | Pronomos, the lookout, rowers | walkers | Reuse the sailor; Pronomos holds an aulos. |
 | Kedalion | walker | A short, broad smith in a leather apron; his apprentice reuses a townsfolk youth. |
@@ -5322,7 +5496,7 @@ Every interior is unique (MAP_DESIGN §2): 23 rooms, each laid out for its owner
 | Old woman at the Hollow, Doso, Krokis, Metaneira | walkers | Reuse the elder women; Krokis holds a basket of yellow thread. |
 | The household occupants: Dromokleia, Penelopeia, Euphronios, Endeis, Pheidon, Aiakides, Xenokles, the three sisters, Trygaios, Aigialeus, Halmyris, Sagene and Galene, Theano, Sitokles, Euphorion, the priestess of Aphaia | walkers | From the 22 townsfolk walkers by palette swap where they fit (runner, elder woman, potter, merchant, soldier, fisher, farmer, child, priestess). Euphronios needs clay-gray hands; the three sisters are one sheet in three palettes. |
 | Trygaios's sow, the inn's donkey, Pheidon's tortoise, Aiakides's ants | objects | Kaplet, Onotis and Chelonet follower sprites; a small anthill object |
-| Daphne | walker | Exists. |
+| Daphne | walker | Exists; a sandalled version from Eleusa on (STORY.md §8.4). |
 | Number Nine | object | A wooden kouros, roped (still) and walking (four directions). |
 | The herms | object | A herm with a head that faces four ways (the head turns, not the pillar), and a desecrated variant with the sickle scratched in. |
 | The halcyon nest | object | A floating seaweed nest with eggs, then hatched, then empty. |
@@ -5372,43 +5546,60 @@ Where Phase 2 introduces a SYSTEMS.md or LABYRINTH.md feature, and what the play
 
 1. **Map ids and route numbers.** I numbered the mainland routes 2 to 6, continuing Kalliste's Route 1: Routes 2–4 are the Sacred Way's three legs and Routes 5–6 the Halai Shore's two. The geography agent's `AETHOS_MAP.md` may number or prefix them differently; the chains and the connection table in "The route plan" are the parts to reconcile.
 2. **Waypoints.** Following the user's "it should feel like we are traveling farther", every stretch has one: Aegina on the voyage, Hecate's Hollow and the hamlet of Thria on the Sacred Way, and Halai on the Halai Shore. The bible fixes the towns; these are hamlets and a cave, so no new Asclepeions or temples. The procession's camp is a rest point on Route 2.
-3. **The third starter goes to Alethea** (slice ruling 9 deferred it to Phase 2). It gives her a partner for the Act II double battle and makes the three young leads a triangle: Kleon beats you, you beat Alethea, Alethea beats Kleon.
+3. **The third starter stays with Daphne** (STORY.md S9, the third krater). My first draft gave it to Alethea; STORY.md wins. Alethea's first partner is now a Spalunk she dug up on Kronion Hill, whose line ends in Plouteras, a member of her STORY.md team.
 4. **Kleon wins the race.** He takes the Herald Laurel first and wins the bet he set in the slice, then loses to you at the gate. The alternative is that he loses to Kerykos and you pull ahead. I chose the win because a hollow victory is the start of his hubris.
-5. **Kleon fails the Lesser Mysteries** and leaves Eleusa with two laurels, straight for Arkadia's fifth temple. That fits Act II step 2 (he loses badly to Kallisto) but means Phase 3 meets him there out of laurel order.
+5. **Kleon fails the Lesser Mysteries** and leaves Eleusa with two laurels, vaulting the vines toward Thyrsa (beat 24), where STORY.md II-3 puts him in the Dionysia's audience. STORY.md doesn't say whether he earns the Harvest Laurel; failing the patient trial is my reading of his flaw. Phase 3 should know he is a laurel behind.
 6. **Alethea's trainer class.** She needs one for the practice battle. I proposed a twelfth class, SCHOLAR, for her alone. She could borrow PILGRIM instead.
-7. **The Halcyling gift.** An Act I gift Pokémon from the crossing. It also covers the Kynder player's worst fight (Rhea). The alternative is a catchable static on the rail.
+7. **The Halcyling gift.** An Act I gift Pokémon from the crossing. It covers the Nebrel player's worst fight (Hyperion's two Fire types) and helps the Hipling player against Chloe. The alternative is a catchable static on the rail.
 8. **Chloe's ace depends on the clock:** Korantha by day, Persenyx by night, as two trainer entries. It's the only place the main path reads the time, and it changes a team, not progress, so it keeps SYSTEMS.md's principle.
-9. **The Titans learn about the player in Act I.** Rhea notices the shard go quiet and says "Iapetos will want to hear about you." This gives Iapetos a reason to seek you out at Thyrsa, and Daphne a reason to tell you now. If the director wants the Titans ignorant until Kaldera, cut her last three lines.
-10. **The hum motif.** I read the slice's Amaryllis line ("The humming stopped and they just… went") as the hill going quiet when the player climbed it, and made the Harpe fragment do the same. It's a retcon of intent, not of text.
+9. **How the Titans learn about you.** STORY.md has it come from the tablet's back ("Bring word of the Unwoven"), read by Daphne in beat 25. Hyperion says nothing about you; he only can't see you. My first draft had the admin notice you; that is gone.
+10. **The first admin is Hyperion.** The brief asked me to choose between Hyperion, Iapetos and Rhea; STORY.md has since decided it (Part 3, "Why Hyperion"). Rhea first appears at the Akropolis and Iapetos is not named in Phase 2's in-game text.
 11. **The saffron thread.** Krokis's thread slipping off is a new clue in the slice's style, one line each time. Cut it if the director wants Halia's spindle to stand alone.
 12. **Doso.** The Demeter temple guide shares the name Demeter used in disguise, as a seed for her theoxenia at the well after Laurel 5. It could mislead a myth-savvy player into thinking the guide is the goddess. She has a shadow, which SYSTEMS.md's tells say a god would not.
 13. **Kerykos and Chloe are cousins** of Eleusa's herald clan, the Kerykes, and Kerykos calls the holy silence at the Mysteries. This is new backstory for two Hierophants.
-14. **The Long Walls Road to Astyra** is closed by the Archon's council in Act I. Phase 3 has to decide what opens it, since Act II reaches Astyra third, after Thyrsa and Arkadia.
-15. **Daphne foreshadows the Harpe.** She says it "could cut anything, even what the Fates had spun" and that she doesn't like it sitting beside a child with no thread. Kaldera's reveal (only the unwoven can hold it) stays for Act II. A stricter director could cut those four lines.
+14. **The Long Walls Road to Astyra** is closed by the Archon's council in Act I. Phase 3 has to decide what opens it, since Act II reaches Astyra after Thyrsa and Arkadia.
+15. **The theft is staged in two places.** STORY.md §6.2 sets the theft in the Telesterion. Here the Titanborn burst up through the Anaktoron's floor during the rite (the multi battle with Kleon), and Hyperion is met below, in the sanctum, with the shard. The hall is left wrecked for beat 25, as §6.2 describes.
 16. **Deviations from the dex** (†):
     - Lykopup as Hecate's hound at the Hollow at night. The dex has it in Arkadia only; SYSTEMS.md asked for a Dark-type hound here.
     - Raknit as the web chamber's static, for SYSTEMS.md's Arachne amphora lead. The dex has it in Arkadia and Astyra.
     - Obolorn at 1% on Route 2 at night, among the Sacred Way's tombs. The dex has it in Astyra's Kerameikos; the real Sacred Way began at the Kerameikos.
     - Pebblith on the Halai Shore's cliffs. The dex has it in Kalliste's caves.
-    - Every other species is where the dex puts it. Ergant, Kerazap, Cairnolith and Gelasable use the dex's general "mainland" habitats.
+    - Ergant and Hoplomex on Aegina, for the Myrmidons' own island. The dex has them in the mainland's hills.
+    - Spalunk on Kalliste, as the mole Alethea dug up on Kronion Hill. The dex has it in fields and granaries.
+    - Kapnub and Kaminoo on Hyperion's team, as STORY.md §2 lists them. They are Kaldera's, and none are wild in Phase 2.
+    - Every other species is where the dex puts it. Kerazap, Cairnolith and Gelasable use the dex's general "mainland" habitats.
 17. **Deviations from SYSTEMS.md:**
     - The Lesser Mysteries show only the next seed, rather than all four, and add grain pits in the last quarter.
     - The story's Greater Mysteries are on story time (like the Act II Dionysia), not the calendar's Boedromion festival, which stays a stretch.
     - The temple oil jar refills Olive Oil to 3 for free, so the Herald's Run can't softlock a player who spent their oil.
     - Hecate's Hollow is on the main road (the Sacred Way runs under the pass), so the Torch quest is mandatory, as SYSTEMS.md's gating implies.
 18. **The slice's Kalliste tables and starters** still use vanilla species. Under dex decisions D1 and D5 they need an Aethos pass before Phase 2 ships, or the player arrives on the mainland with a Snivy. That pass also rewrites the slice's six starter-specific lines.
-19. **Rhea's lullaby and Phaedon's.** LABYRINTH.md makes Phaedon's theme the lullaby Elpis hums. Rhea's encounter theme is also a lullaby. They should be different songs, or the same song on purpose. If the same, it suggests the two grieving parents share something, and the music team should know.
-20. **Laurel names.** I used TERMS.md's proposals, the Herald Laurel and the Harvest Laurel.
-21. **TMs.** Aerial Ace for Kerykos and Giga Drain for Chloe follow vanilla's Flying and Grass gyms. Balance may rebuild the TM list.
-22. **Kleon's second battle uses no-whiteout,** like the first, so both outcomes continue. Rhea's battle is a normal one.
+19. **Laurel names.** I used TERMS.md's proposals, the Herald Laurel and the Harvest Laurel.
+20. **TMs.** Aerial Ace for Kerykos and Giga Drain for Chloe follow vanilla's Flying and Grass gyms. Balance may rebuild the TM list.
+21. **Kleon's second battle uses no-whiteout,** like the first, so both outcomes continue. The multi battle and Hyperion's battle are normal ones.
+22. **Early-evolved wild Pokémon.** Korantha, Stachypter and Plouteras appear at 1–4% around Eleusa at 22, Hoplomex at 1% on Aegina at 16, and a static Harpelle (17) and Korantha (22) come with the augury. Each is below its evolution level, like Emerald's rare early finds. Balance should confirm none of them breaks the Eleusa stage.
+23. **The Aegina detour and its dig.** Aegina Town is on the main path, as the voyage's night ashore (beat 10B). Its interior (the Aphaia Road, the Temple of Aphaia and Mount Oros) is a proposed optional side trip, since the user asked for islands as side content. If it is kept, the Aphaia potsherd and the Route 3 thyme-meadow dig each need one of LABYRINTH.md's amphora leads assigned. If it is cut, the town stays and the two altars before their temples go with it.
+24. **Hyperion's levels.** STORY.md §2 gives 22 / 22 / 23; I set 23 / 23 / 24, the top of BALANCE.md's Eleusa trainer band, because he comes after Chloe's laurel. His ace still sits two below Chloe's, as Maxie's does after Wattson in Emerald.
+25. **Levels against BALANCE.md.** Every party and table is set to its stage. Two notes: Chloe's lead went from 23 to 24 to meet BALANCE.md's 24–26, and the maps the Sickle opens on Kalliste use the Thyrsa row's start, since the Sickle arrives at the end of Act I.
+26. **Mom's honey.** Mom brings hive honey to the quay ("Not from that jar"). STORY.md keeps the jar marked NOT FOR {PLAYER} for Delphoi, so it is never opened here.
+27. **The one line added to STORY.md §7.1.** Daphne's "And write to your mother. Not about this. Tell her you're eating." It sets up the letter home by Kerykos's runners and echoes Kleon's mother's letter. Cut it to keep §7.1 word for word.
+
+## STORY.md alignment
+
+Changes made to my first draft when STORY.md was approved:
+- **The admin** is Hyperion, not Rhea (Open questions 10), with STORY.md's team, look and fear of the dark.
+- **The third krater** stays with Daphne; Alethea has a Spalunk (3).
+- **Kleon** goes to Thyrsa, not Arkadia (5).
+- **The Titans know about you** from the tablet's back alone (9).
+- **Cut:** the silent-shard and hum retcon, Daphne's foreshadowing of the Harpe beside a child with no thread, and every in-game mention of Iapetos.
+- **Daphne's revelation** is STORY.md §7.1 staged for the engine, with one added line (27).
+- **Music:** the admins' shared battle theme with Hyperion's forge-hammer layer; no admin lullaby, since the lullaby belongs to Elpis.
 
 ## Decisions for the user
 
-1. **Rhea as the first admin** (Part 3 gives the reasons), with Hyperion feared offscreen.
-2. **Alethea gets the third starter** (Open questions 3).
-3. **Kleon wins the Herald Laurel first, then fails the Mysteries and goes to Arkadia early** (4, 5).
-4. **The Titans learn about you in Act I** (9).
-5. **Chloe's ace changes between day and night** (8).
-6. **The halcyon chick is a gift** (7).
-7. **Two new Act I clues:** the saffron thread and the silent shard (10, 11).
-
+1. **Kleon wins the Herald Laurel first, then fails the Mysteries** and leaves for Thyrsa a laurel behind (Open questions 4, 5).
+2. **Chloe's ace changes between day and night** (8).
+3. **The halcyon chick is a gift** (7).
+4. **Keep the Aegina detour?** Three small optional maps, about 20 minutes (23).
+5. **Hyperion one level above STORY.md** (24).
+6. **One new Act I clue,** the saffron thread (11), and Doso's name as a theoxenia seed (12).
