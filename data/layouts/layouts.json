@@ -9492,10 +9492,10 @@
     {
       "id": "LAYOUT_TRIREME_EUPLOIA_DECK",
       "name": "TriremeEuploia_Deck_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 24,
+      "height": 16,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Trireme",
       "border_filepath": "data/layouts/TriremeEuploia_Deck/border.bin",
       "blockdata_filepath": "data/layouts/TriremeEuploia_Deck/map.bin",
       "layout_version": "emerald"
@@ -9547,10 +9547,10 @@
     {
       "id": "LAYOUT_TRIREME_EUPLOIA_HOLD",
       "name": "TriremeEuploia_Hold_Layout",
-      "width": 10,
-      "height": 8,
-      "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "width": 18,
+      "height": 9,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Trireme",
       "border_filepath": "data/layouts/TriremeEuploia_Hold/border.bin",
       "blockdata_filepath": "data/layouts/TriremeEuploia_Hold/map.bin",
       "layout_version": "emerald"

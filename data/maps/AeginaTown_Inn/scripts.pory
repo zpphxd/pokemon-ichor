@@ -147,7 +147,7 @@ script AeginaTown_Inn_EventScript_Night {
     special(Ichor_SetHoursOverride)
     // Beat 10C plays on deck. Placeholder tile until the trireme agent records
     // the deck's arrival tile in BUILD.md.
-    warp(MAP_TRIREME_EUPLOIA_DECK, 255, 12, 8)
+    warp(MAP_TRIREME_EUPLOIA_DECK, 0)   // the deck's boarding tile (13,4), BUILD.md
     waitstate
 }
 

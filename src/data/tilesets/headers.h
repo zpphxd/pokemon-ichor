@@ -1768,3 +1768,17 @@ const struct Tileset gTileset_Skiron =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Skiron,
     .callback = NULL,
 };
+
+// Ichor: trireme, the Euploia's deck and hold. A Porytiles-managed secondary
+// built by tools/ichor/art/trireme_build.py for the aethos primary: its sea
+// cells borrow aethos's animated sea, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Trireme =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Trireme,
+    .palettes = gTilesetPalettes_PorytilesManaged_Trireme,
+    .metatiles = gMetatiles_PorytilesManaged_Trireme,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Trireme,
+    .callback = NULL,
+};

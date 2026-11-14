@@ -7903,6 +7903,102 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonTablet =
     .anims = sAnimTable_Standard,
     .images = sPicTable_IchorKleonTablet,
 };
+
+// The halcyon nest at the Euploia's ram (beat 10): trireme_objects.py.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEggs = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorNestEggs,
+};
+
+// The halcyon nest at the Euploia's ram (beat 10): trireme_objects.py.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestHatching = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorNestHatching,
+};
+
+// The halcyon nest at the Euploia's ram (beat 10): trireme_objects.py.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEmpty = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorNestEmpty,
+};
+
+// Half of the dark trireme that slides past in the night leg (beat 10): trireme_objects.py.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeBow = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 1024,
+    .width = 64,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_64x32,
+    .subspriteTables = sOamTables_64x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorDarkTriremeBow,
+};
+
+// Half of the dark trireme that slides past in the night leg (beat 10): trireme_objects.py.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeStern = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 1024,
+    .width = 64,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_64x32,
+    .subspriteTables = sOamTables_64x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorDarkTriremeStern,
+};
+
 // End of Ichor object events
 
 // Ichor: items lying in the world are small clay jars sealed with beeswax,

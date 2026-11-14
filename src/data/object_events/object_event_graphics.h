@@ -675,6 +675,12 @@ const u32 gObjectEventPic_IchorPheidon[] = INCGFX_U32("graphics/object_events/pi
 const u32 gObjectEventPic_IchorAiakides[] = INCGFX_U32("graphics/object_events/pics/people/ichor/aiakides.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorKleonSeasick[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_seasick.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorKleonTablet[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_tablet.png", ".4bpp", "-mwidth 2 -mheight 4");
+
+const u32 gObjectEventPic_IchorNestEggs[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/nest_eggs.png", ".4bpp");
+const u32 gObjectEventPic_IchorNestHatching[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/nest_hatching.png", ".4bpp");
+const u32 gObjectEventPic_IchorNestEmpty[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/nest_empty.png", ".4bpp");
+const u32 gObjectEventPic_IchorDarkTriremeBow[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/dark_trireme_bow.png", ".4bpp");
+const u32 gObjectEventPic_IchorDarkTriremeStern[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/dark_trireme_stern.png", ".4bpp");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)
