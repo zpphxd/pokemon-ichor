@@ -123,6 +123,11 @@ Reviews of the starters kept finding the same gaps. Check for each one before yo
   - Model the back: spine, shoulder blades, muscle.
   - Keep the head in a readable right-facing profile at a sensible size: no giraffe necks.
 - **Stamped detail.** Repeated identical leaves, feathers or scales look mechanical. Vary size and angle, overlap them with depth, and make the back layers darker.
+- **Human-looking faces.** The user flagged a "messed up" face, and reviews caught the same thing twice more: a nymph with a realistic nose and lips, a lion whose face read as a man's, a laughing weasel with human eyebrows and a human grin. Faces must be Pokémon faces:
+  - **Animals:** animal anatomy. A protruding muzzle or beak, a nose pad, eyes set on the sides of the head, an animal mouth.
+  - **Humanoids:** stylized like Gardevoir. Big simple eyes with a shine, little or no nose or mouth.
+  - **Nobody:** no drawn human eyebrows, lips or rows of teeth.
+  - **Check at 1x and 2x,** not just zoomed in: that's where an uncanny face shows.
 - **Boxy shapes.** Heads and bodies built from straight-edged polygons look like carved wooden toys, however well they're shaded.
   - Build creatures from curves: a round skull, a muzzle that tapers along a curved top line, round chests, haunches and paws.
   - No straight edge longer than 2–3 px on a face.
