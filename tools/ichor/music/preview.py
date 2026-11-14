@@ -3,10 +3,12 @@
 
   python3 tools/ichor/music/preview.py [MUS_ICHOR_ELAIA ...]   (default: all Ichor songs
                                                                  plus three Emerald references)
+  python3 tools/ichor/music/preview.py MUS_VS_WILD MUS_HEAL:2.3   (references; NAME:seconds
+                                                                 measures a one-shot's span)
 A copy of pokeemerald.gba gets gSongTable[MUS_TITLE] pointed at the song, so the
-title screen plays it (and never times out, since the song loops). WAVs land in
-build/ichor_music/. Prints loudness, and how closely the second pass of the loop
-matches the first (a hung note or a broken loop shows up as a low match).
+title screen plays it. WAVs land in build/ichor_music/. Prints loudness and clipping;
+for loops, how closely the second pass matches the first (a hung note or a broken loop
+shows up as a low match) and how low the level dips at the seam.
 Needs only the Python standard library, plus Homebrew mgba for the renderer.
 """
 import math
@@ -43,14 +45,27 @@ def build_runner():
     subprocess.check_call(['cc', '-O2', f'-I{prefix}/include', SRC, f'-L{prefix}/lib', '-lmgba', '-o', RUNNER])
 
 
-def render(name, sid, title_id, table, rom, seconds):
-    """-> interleaved stereo int16 samples from the song's first note, and the WAV path."""
+def render(name, entry, ids, table, rom, seconds):
+    """-> interleaved stereo int16 samples from the song's first note, and the WAV path.
+
+    The song under test takes gSongTable[MUS_TITLE] and is forced onto the BGM player
+    (fanfares normally use SE2; the title screen watches the BGM player and leaves when
+    it stops). MUS_INTRO is silenced so nothing plays before the title, and the first
+    sound after START is the song's first note. The intro itself is recorded from boot.
+    """
     data = bytearray(rom)
-    data[table + 8 * title_id: table + 8 * title_id + 8] = rom[table + 8 * sid: table + 8 * sid + 8]
+    slot = lambda n: slice(table + 8 * ids[n], table + 8 * ids[n] + 8)
+    press = PRESS
+    if name == 'MUS_INTRO':
+        press = None
+    else:
+        data[slot('MUS_TITLE')] = entry[:4] + bytes(4)
+        data[slot('MUS_INTRO')] = rom[slot('MUS_DUMMY')]
     path = os.path.join(OUT, name.lower() + '.gba')
     open(path, 'wb').write(data)
     wav = os.path.join(OUT, name.lower() + '.wav')
-    subprocess.check_call([RUNNER, path, wav, str(int(PRESS + 300 + seconds * 60)), str(PRESS)],
+    frames = int((press or 0) + 300 + seconds * 60)
+    subprocess.check_call([RUNNER, path, wav, str(frames)] + ([str(press)] if press else []),
                           stdout=subprocess.DEVNULL)
     os.remove(path)
     w = wave.open(wav)
@@ -58,10 +73,18 @@ def render(name, sid, title_id, table, rom, seconds):
     a.frombytes(w.readframes(w.getnframes()))
     if sys.byteorder == 'big':
         a.byteswap()
-    skip = 2 * int((PRESS + 60) / 59.73 * RATE)
+    skip = 2 * int((press or 0) / 59.73 * RATE)
     threshold = int(0.003 * 32768)
     on = next(i for i in range(skip, len(a)) if abs(a[i]) > threshold) & ~1  # the song's first note
     return a[on:], wav
+
+
+def db(v):
+    return 20 * math.log10(v / 32768 + 1e-9)
+
+
+def rms(a):
+    return math.sqrt(sum(v * v for v in a) / max(1, len(a)))
 
 
 def envelope(a):
@@ -89,19 +112,33 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     build_runner()
     by_name = {s.name.upper(): s for s in songs.SONGS}
-    for name in sys.argv[1:] or [*by_name, *REFS]:
+    for arg in sys.argv[1:] or [*by_name, *REFS]:
+        name, _, secs = arg.partition(':')  # NAME:seconds measures a reference over that span
         s = by_name.get(name)
-        if s:
+        sid = s.song_id if s else name
+        entry = rom[table + 8 * ids[sid]: table + 8 * ids[sid] + 8]
+        if s and s.loop_from:
             starts, end = s.section_starts()
             intro, loop = s.seconds(starts[s.loop_from]), s.seconds(end - starts[s.loop_from])
+            length = intro + 2 * loop + 2
+        elif s:
+            intro, loop = 0, None
+            length = s.seconds(s.section_starts()[1])
         else:
-            intro, loop = 0, 30
-        a, wav = render(name, ids[name], ids['MUS_TITLE'], table, rom, intro + 2 * loop + 2)
-        rms = 20 * math.log10(math.sqrt(sum(map(lambda v: v * v, a)) / len(a)) / 32768 + 1e-9)
-        peak = 20 * math.log10(max(max(a), -min(a)) / 32768 + 1e-9)
+            intro, loop = 0, None
+            length = float(secs or 30)
+        a, wav = render(sid if sid == 'MUS_INTRO' else name, entry, ids, table, rom, length + 1)
+        if loop is None:
+            a = a[:2 * int(length * RATE)]  # a one-shot: measure its own span only
+        level = db(rms(a))
+        peak = db(max(max(a), -min(a)))
         clipped = sum(1 for v in a if v >= 32767 or v <= -32768)
-        line = f'{name:24s} rms {rms:6.1f} dBFS  peak {peak:5.1f} dBFS  clip {clipped}'
-        if s:
+        line = f'{name:26s} rms {level:6.1f} dBFS  peak {peak:5.1f} dBFS  clip {clipped}'
+        if s and s.ref:
+            line += f'  (replaces {s.ref[0]} at {s.ref[1]:.1f})'
+        if s and loop is None:
+            line += f'  one-shot {length:.2f}s'
+        if s and loop:
             # Compare loop pass 2 with pass 1, aligning by cross-correlation of envelopes.
             e = envelope(a)
             i1, n = int(intro * ENV_HZ), int((loop - 1) * ENV_HZ)
@@ -114,10 +151,14 @@ def main():
             # largest level difference between the passes over any 1 s window. A hung or
             # dropped note shows up here as several dB; a clean loop stays near 1 dB.
             p2 = e[best:best + n]
-            db = [abs(20 * math.log10((sum(p2[k:k + ENV_HZ]) + 1) / (sum(p1[k:k + ENV_HZ]) + 1)))
-                  for k in range(0, n - ENV_HZ, ENV_HZ // 2)]
+            diff = [abs(20 * math.log10((sum(p2[k:k + ENV_HZ]) + 1) / (sum(p1[k:k + ENV_HZ]) + 1)))
+                    for k in range(0, n - ENV_HZ, ENV_HZ // 2)]
+            # Seam: the quietest 100 ms within half a second of the loop point, against the song.
+            seam = 2 * int(best / ENV_HZ * RATE)
+            w = 2 * (RATE // 10)
+            gap = min(db(rms(a[k:k + w])) for k in range(seam - 5 * w, seam + 4 * w, w // 2)) - level
             line += (f'  loop {(best - i1) / ENV_HZ:.2f}s (nominal {loop:.2f})  pass match {match:.3f}'
-                     f'  worst 1s {max(db):.1f} dB')
+                     f'  worst 1s {max(diff):.1f} dB  seam low {gap:+.1f} dB')
         print(line, '->', os.path.relpath(wav, ROOT))
 
 
