@@ -254,8 +254,11 @@ struct NPCFollower
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
+#include "ichor_save.h" // Ichor: struct IchorSave
+
 struct SaveBlock3
 {
+    struct IchorSave ichor; // Ichor: first, so upstream's config switches below never move it
 #if OW_USE_FAKE_RTC
     struct SiiRtcInfo fakeRTC;
 #endif

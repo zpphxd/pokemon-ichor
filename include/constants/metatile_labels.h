@@ -1110,4 +1110,59 @@
 #define METATILE_Agros_PitStair_Right             0x389
 // end gTileset_Agros
 
+// gTileset_Eleusa (Ichor: Eleusa Village), written by tools/ichor/art/eleusa_build.py
+#define METATILE_Eleusa_TorchPost_Lit            0x385
+#define METATILE_Eleusa_TorchPost_Cold           0x386
+#define METATILE_Eleusa_TorchPost_Foot           0x387
+// end gTileset_Eleusa
+
+// gTileset_TempleDemeter (Ichor: the Lesser Mysteries), written by tools/ichor/art/temple_demeter_build.py
+#define METATILE_TempleDemeter_BrazierTop_Cold          0x260
+#define METATILE_TempleDemeter_BrazierTop_Lit           0x261
+#define METATILE_TempleDemeter_BrazierVestibule_Cold    0x262
+#define METATILE_TempleDemeter_BrazierVestibule_Lit     0x263
+#define METATILE_TempleDemeter_BrazierSpring_Cold       0x264
+#define METATILE_TempleDemeter_BrazierSpring_Lit        0x265
+#define METATILE_TempleDemeter_BrazierSummer_Cold       0x268
+#define METATILE_TempleDemeter_BrazierSummer_Lit        0x269
+#define METATILE_TempleDemeter_BrazierAutumn_Cold       0x26A
+#define METATILE_TempleDemeter_BrazierAutumn_Lit        0x26B
+#define METATILE_TempleDemeter_BrazierWinter_Cold       0x26C
+#define METATILE_TempleDemeter_BrazierWinter_Lit        0x26D
+#define METATILE_TempleDemeter_Glow_L0                  0x210
+#define METATILE_TempleDemeter_Glow_R0                  0x211
+#define METATILE_TempleDemeter_Glow_L1                  0x212
+#define METATILE_TempleDemeter_Glow_R1                  0x213
+#define METATILE_TempleDemeter_Glow_BL                  0x218
+#define METATILE_TempleDemeter_Glow_B                   0x219
+#define METATILE_TempleDemeter_Glow_BR                  0x21A
+#define METATILE_TempleDemeter_Glow_Pool                0x21B
+#define METATILE_TempleDemeter_Floor                    0x200
+#define METATILE_TempleDemeter_Floor_Seed               0x206
+#define METATILE_TempleDemeter_Floor_Seeds              0x208
+#define METATILE_TempleDemeter_Sconce_Cold              0x238
+#define METATILE_TempleDemeter_Sconce_Lit               0x239
+#define METATILE_TempleDemeter_Niche_Cold               0x23A
+#define METATILE_TempleDemeter_Niche_Lit                0x23B
+#define METATILE_TempleDemeter_Floor_UnderSconce        0x23C
+#define METATILE_TempleDemeter_WallLower_Lit            0x23F
+#define METATILE_TempleDemeter_Frieze_Lit               0x240
+#define METATILE_TempleDemeter_PaintedDoorTop           0x23D
+#define METATILE_TempleDemeter_PaintedDoorTop_Open      0x23E
+#define METATILE_TempleDemeter_PaintedDoorBottom        0x246
+#define METATILE_TempleDemeter_PaintedDoorBottom_Open   0x247
+#define METATILE_TempleDemeter_WallLower                0x225
+#define METATILE_TempleDemeter_Frieze_Key               0x234
+#define METATILE_TempleDemeter_ColumnTorch_Cold         0x24C
+#define METATILE_TempleDemeter_ColumnTorch_Lit          0x24D
+#define METATILE_TempleDemeter_ColumnBottom             0x253
+#define METATILE_TempleDemeter_ColumnBottom_Lit         0x255
+#define METATILE_TempleDemeter_Lamp_Cold                0x2AA
+#define METATILE_TempleDemeter_Lamp_Lit                 0x2AB
+#define METATILE_TempleDemeter_Altar_Ear                0x2AC
+#define METATILE_TempleDemeter_Altar_Empty              0x293
+#define METATILE_TempleDemeter_DraughtDoor_A            0x273
+#define METATILE_TempleDemeter_DraughtDoor_B            0x274
+// end gTileset_TempleDemeter
+
 #endif // GUARD_METATILE_LABELS_H

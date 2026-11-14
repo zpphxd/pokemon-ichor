@@ -3,6 +3,8 @@
 @ 46 harp = lyre, 24 nylon guitar = kithara, 68 oboe and 21 accordion = aulos,
 @ 73 flute = syrinx, 56 trumpet = salpinx, 52 choir = chorus, 0 = Emerald drumset 1
 @ (indian drum and congas = frame drum, hyoushigi = krotala, atarigane = kymbala).
+@ Act I adds 10 music box (glockenspiel, kept for Elpis's box alone), 53 hum (a single
+@ voice), 115 the box's tick and 122 sea wind (both on the noise channel).
 voice_group ichor
 	voice_keysplit_all voicegroup_emerald_drumset_1
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -14,7 +16,7 @@ voice_group ichor
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_sc88pro_glockenspiel, 255, 246, 0, 235
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
@@ -57,7 +59,7 @@ voice_group ichor
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_classical_choir_voice_ahhs, 48, 0, 255, 216
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_directsound 60, 0, DirectSoundWaveData_unknown_female_voice, 20, 250, 190, 220
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup_trumpet_keysplit, keysplit_trumpet
@@ -119,14 +121,14 @@ voice_group ichor
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_noise_alt 60, 0, 1, 0, 1, 0, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
-	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
+	voice_noise_alt 60, 0, 0, 7, 0, 15, 7
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0

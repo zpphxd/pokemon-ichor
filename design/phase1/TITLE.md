@@ -9,7 +9,7 @@ The bible's title screen is "a painted amphora". The screen is the belly of a bl
 - One **golden thread** drifts free past all three, never spun and never cut. That thread is the player.
 - **ICHOR** is a gilded V-cut inscription in Greek lapidary capitals. POKÉMON, PRESS · START and "A FAN WORK · 2026" match it.
 
-Screenshots: `img/title_1_glint.png` through `img/title_5_drift.png`. They are in-game captures; the dev-only Quickstart HUD is hidden in them.
+Screenshots: `img/title_1_glint.png` through `img/title_5_drift.png`. They are in-game captures. The expansion's dev-only Quickstart badge is now hidden in the game too (`QUICKSTART_HUD`, `UI_remnants.md`).
 
 ## Layers
 
@@ -60,4 +60,4 @@ python3 tools/ichor/art/title_screen.py --capture   # in-game shots into design/
 
 ## Not done
 
-- The boot copyright screen and the intro (Game Freak logo, Latios and Latias) are still Emerald's. They belong to the intro task.
+- Nothing left here. The boot copyright screen and the intro are Ichor's since (`INTRO.md`).
