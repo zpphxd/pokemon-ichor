@@ -10,6 +10,9 @@
   graphics/interface/option_menu_text.pal The options screen's text: labels
       in incised clay, choices in ink, the chosen one in the dialogue box's
       red, all on parchment. The code darkens every row but the current one.
+  graphics/interface/main_menu_bg.pal, main_menu_text.pal   The title's
+      main menu: a terracotta backdrop and sun-gold plates lettered in ink
+      (main_menu.c reads these colors instead of hardcoding Emerald's).
 """
 from ui_codex_lib import *  # noqa: F401,F403
 
@@ -40,6 +43,25 @@ def write_option_text():
     ]))
 
 
+def write_main_menu():
+    """The title's main menu (NEW GAME, CONTINUE, OPTION) on terracotta.
+    main_menu_bg.pal's color 0 is the backdrop. main_menu.c reads its window
+    colors from main_menu_text.pal: fill 10, headers 11 with shadow 12, the
+    Continue panel's details in 1 (Theo) or 13 (Ianthe), 14 spare. The fill is
+    sun-gold: the selected plate shows it as it is, and the code lightens the
+    others towards parchment."""
+    write_jasc(OUT / "main_menu_bg.pal", pal16([CLAY, CLAY_DARK, CLAY_LIGHT, RING]))
+    pal = [gba(c) for c in MESSAGE_BOX[:16]]
+    pal[1] = AEGEAN_DARK            # Theo's details
+    pal[10] = GOLD_PALE             # the plate
+    pal[11] = INK_TEXT              # NEW GAME, CONTINUE, OPTION
+    pal[12] = GOLD                  # their shadow
+    pal[13] = (168, 32, 64)         # Ianthe's details
+    pal[14] = INK
+    write_jasc(OUT / "main_menu_text.pal", pal)
+
+
 if __name__ == "__main__":
     write_std_menu()
     write_option_text()
+    write_main_menu()
