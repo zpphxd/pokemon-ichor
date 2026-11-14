@@ -9372,7 +9372,7 @@
       "id": "LAYOUT_KALLISTE_ROUTE1_KRONION_HILL",
       "name": "KallisteRoute1_KronionHill_Layout",
       "width": 24,
-      "height": 20,
+      "height": 62,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Kalliste",
       "border_filepath": "data/layouts/KallisteRoute1_KronionHill/border.bin",

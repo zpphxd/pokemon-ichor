@@ -158,8 +158,8 @@ class Grid:
                 square = free(x + 1, y) and free(x, y + 1) and free(x + 1, y + 1)
                 pair = free(x, y + 1)
                 r = pct(x, y, 1)
-                if square and not (pair and r < 14):
-                    kind = "P" if pct(x, y, 2) < 16 else "O"
+                if square and not (pair and r < 18):
+                    kind = "P" if pct(x, y, 2) < 20 else "O"
                     for cx, cy in ((x, y), (x + 1, y), (x, y + 1), (x + 1, y + 1)):
                         self.chars[cy][cx] = kind
                 elif pair:
@@ -524,8 +524,10 @@ ROUTE1_PINES = [(24, 52), (21, 56)]
 
 # ---------------------------------------------------------------------------
 # Kronion Hill: the summit, east of Route 1 (connection offset 2: this map's
-# row 0 is Route 1's row 2). 24 x 20. Hill foot at y=16-17 (Route 1's 18-19),
-# stair up through two terrace walls, the shrine's stylobate on top.
+# row 0 is Route 1's row 2). 24 x 62. Hill foot at y=16-17 (Route 1's 18-19),
+# stair up through two terrace walls, the shrine's stylobate on top. Rows 20-61
+# are only woods: Route 1 shows this map past its east edge, so it must cover
+# every row a player on Route 1's east side can see (the border there is sea).
 # ---------------------------------------------------------------------------
 KRONION = [
     # 0         1         2
@@ -550,7 +552,8 @@ KRONION = [
     "====,,......,,,,......%%",  # 17
     "%%%%%%%%%%%%%%%%%%%%%%%%",  # 18
     "%%%%%%%%%%%%%%%%%%%%%%%%",  # 19
-]
+] + ["%" * 24] * 42  # 20-61: the hill's woods, seen past Route 1's east edge down to its last row
+
 KRONION_OFFSET = 2
 KRONION_OLIVES = []
 KRONION_CYPRESSES = []
@@ -866,6 +869,12 @@ def main():
                 (kh, "kalliste_route1_kronion_hill", KRONION_EVENTS, KRONION_BORDER, KRONION_VIEWS)):
             for p in render(g, name, ev, border, views):
                 print(p)
+        # The summit itself: Kronion's top 20 rows (the rest is woods for Route 1's view).
+        from PIL import Image
+        summit = RENDER / "kalliste_route1_kronion_hill_summit.png"
+        with Image.open(RENDER / "kalliste_route1_kronion_hill.png") as im:
+            im.crop((0, 0, im.width, 20 * 32)).save(summit)
+        print(summit)
 
 
 if __name__ == "__main__":
