@@ -215,8 +215,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
-      "x": 22,
-      "y": 8,
+      "x": 15,
+      "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,

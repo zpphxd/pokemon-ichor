@@ -57,6 +57,17 @@ local steps = L.seq(
   view("quay", 8, 10), view("pier", 14, 6), view("beach", 23, 8),
   view("asclepeion_garden", 4, 24), view("mole", 5, 5), view("lower_town", 21, 24),
 
+  -- the relic gates (SYSTEMS.md §1, D10), locked side only: the rubble in the
+  -- grotto on the tide rocks, and the islet shrine, which the old fisher at the
+  -- end of the pier explains
+  view("grotto_from_beach", 25, 8),
+  view("grotto", 26, 5),
+  { { hold = K.UP, frames = 4, wait = 20 } },
+  L.talk("40_grotto_rubble", 4, 30),
+  view("islet_from_pier", 15, 6),
+  { { hold = K.UP, frames = 4, wait = 20 } },
+  L.talk("41_islet_fisher", 4, 30),
+
   -- 3. the Asclepeion: talk across the counter at (7,4)
   { { warp = { INDOOR, MAP_ASCLEPEION, -1, 7, 4 }, wait = 100 },
     { shot = "10_asclepeion.png" },
