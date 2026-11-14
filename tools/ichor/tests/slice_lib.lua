@@ -284,7 +284,8 @@ end
 
 L.battles = {}
 -- Play out a battle that has started (or is starting): trainers are fought with
--- the first move, wild Pokémon are run from. Returns a record of it.
+-- the first move, wild Pokémon are run from (unless running is barred, when they
+-- are fought too). Returns a record of it.
 function L.battle()
   local before = defeatedSet()
   waitUntil(L.inBattle, 1200, "the battle to start")
@@ -301,7 +302,9 @@ function L.battle()
         shotTaken = true
       end
       turns = turns + 1
-      if trainer then
+      -- a wild battle that can't be run from (FLAG_ICHOR_NO_RUNNING, Phase 2's
+      -- deck snatchers) is fought like a trainer's
+      if trainer or (S.FLAG_NO_RUNNING and L.getFlag(S.FLAG_NO_RUNNING)) then
         tap(K.UP); tap(K.LEFT); tap(K.A)     -- FIGHT
       else
         tap(K.DOWN); tap(K.RIGHT); tap(K.A)  -- RUN
