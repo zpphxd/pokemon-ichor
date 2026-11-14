@@ -893,6 +893,8 @@ u8 LoadGameSave(u8 saveType)
     default:
         status = TryLoadSaveSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
         CopyPartyAndObjectsFromSave();
+        if (status == SAVE_STATUS_OK)
+            Ichor_OnSaveLoaded(); // Ichor: migrate IchorSave
         gSaveFileStatus = status;
         gGameContinueCallback = NULL;
         break;

@@ -1,6 +1,6 @@
 # The reading screens: codex, Pithos, tablet
 
-The Pokédex, the Pithos (storage), the naming screen and the options screen are redrawn in the pottery family of `UI_menus.md`. Every asset comes from a script in `tools/ichor/art/`, so edit the script and rerun it rather than touching the PNGs, `.pal` or `.bin` files. The scripts are idempotent: a second run changes nothing.
+The Pokédex, the Pithos (storage), the naming screen, the options screen and the title's main menu are redrawn in the pottery family of `UI_menus.md`. Every asset comes from a script in `tools/ichor/art/`, so edit the script and rerun it rather than touching the PNGs, `.pal` or `.bin` files. The scripts are idempotent: a second run changes nothing.
 
 ![Before and after](img/ui_codex_compare.png)
 
@@ -11,7 +11,7 @@ The Pokédex, the Pithos (storage), the naming screen and the options screen are
 | `ui_codex_pithos.py` | The Pithos around the jars: the PKMN DATA panel, the party tray, the lid button, the scrolling clay, the hand, the lamps, the menus' palette |
 | `ui_codex_jars.py` | The sixteen jars (box wallpapers), and Walda's patterns fired in clay |
 | `ui_codex_naming.py` | The naming screen: the writing strip, the wax tablets, the keys and the jar icon |
-| `ui_codex_misc.py` | `std_menu.pal` and the options screen's text palette |
+| `ui_codex_misc.py` | `std_menu.pal`, the options screen's text palette, and the main menu's palettes |
 
 ## The family look, carried over
 
@@ -107,6 +107,16 @@ The Pokédex, the Pithos (storage), the naming screen and the options screen are
 
 **Limits.** The engine copies 48 tiles (`tileBuffer[0x600]`), and the screen uses 40. The three tablets share their tiles and differ only by palette (1, 2 and 3).
 
+## Main menu
+
+![Main menu before and after](img/ui_main_menu_compare.png)
+
+- **The menu after the title** (NEW GAME, CONTINUE, OPTION, and MYSTERY GIFT if it shows) sits on the terracotta backdrop of the options screen (`main_menu_bg.pal` color 0) in the pottery frames.
+- **The chosen plate is sun-gold** with crisp ink lettering and a full-strength frame.
+- **The others fade to parchment.** The engine marks the choice with a color effect on everything outside it. It used to darken the other plates to Emerald's gray; `main_menu.c` now lightens them instead, so their gold washes to parchment and their ink softens.
+- **The Continue panel** (player, time, Pokédex, Laurels) prints in Aegean for Theo and crimson for Ianthe, on the same plate.
+- **Colors come from the palette file.** `main_menu.c` hardcoded white, grays, blue and pink; it now reads them from `main_menu_text.pal`: fill 10, headers 11 with shadow 12, Theo 1, Ianthe 13.
+
 ## Options and save
 
 - **Options** (`option_menu_text.pal`): labels in incised clay, values in ink, and the chosen value in the dialogue box's red, all on parchment. The code darkens every row but the current one. The backdrop behind the frames is terracotta, not lavender (`option_menu.c`).
@@ -120,6 +130,7 @@ All are small and commented `// Ichor:`.
 |---|---|
 | `src/pokedex.c` | Loads `menu.png` whole (five calls, `0x2000` → `0`). The cry page's play arrow is gold. |
 | `src/option_menu.c` | The backdrop color is terracotta. |
+| `src/main_menu.c` | The main menu's window colors are read from `main_menu_text.pal` instead of hardcoded. The selection effect lightens the plates not chosen instead of darkening them (three `BLDCNT` lines). Daphne's speech is untouched. |
 | `src/naming_screen.c` | The controls banner uses `graphics/naming_screen/banner.pal`. |
 | `src/data/wallpapers.h` | Jar names print in ink on the parchment tag (`sBoxTitleColors`). |
 | `graphics_file_rules.mk` | The sixteen jars' `frame.png` and `bg.png` use the generic rule, without fixed tile counts. |
@@ -155,7 +166,7 @@ The art already says these words; the strings are not mine.
 
 ## Not done, or left on purpose
 
-- **The unknown Pokémon's "?" ball,** which the list shows for unseen neighbors, is a Pokémon sprite (`graphics/pokemon/question_mark/`), not codex art. It is still Emerald's black-and-white ball.
+- **The unknown Pokémon's "?",** which the list shows for unseen neighbors, is now a clay roundel (`UI_remnants.md`).
 - **The region map** under the area page belongs to the region-map agent.
 - **Walda's patterns** are fired in clay but keep their Hoenn shapes (Azumarill, Pikachu, ...). The Walda icons are untouched. Nothing in Aethos reaches them.
 - **The search page** keeps Emerald's rounded label pills; it is recolored, not redrawn.
@@ -177,6 +188,10 @@ make -j$(sysctl -n hw.ncpu) && tools/ichor/smoke_test.sh && tools/ichor/ui_check
 The scripts write previews to `design/phase1/img/ui_codex_*`.
 
 **How the in-game shots were taken.** A temporary, uncommitted patch to `src/field_control_avatar.c` set things up when START was pressed: a party, twenty Pokédex entries seen and nine caught, the National Dex, fourteen jars filled, and each jar a different wallpaper. SELECT then opened the Pithos, the player naming screen, the nickname screen, and the Pithos again with the last two wallpapers. A headless Lua script walked every page. The patch (`codex_test.patch`), the script (`codex_check.lua`), the sheet maker and the raw before and after shots are kept in the worktree's `build/codex/`, outside git.
+
+**The main menu** was checked by `build/codex/main_menu_check.lua`:
+- A fresh boot shows NEW GAME and OPTION.
+- It then plays a Quickstart game, saves it from the start menu, resets, and shows CONTINUE, NEW GAME and OPTION.
 
 **`ui_check`** now reads its boxes in the Akti Asclepeion, because the bedroom Quickstart starts in has nothing to read:
 - The old man gives the plain message.

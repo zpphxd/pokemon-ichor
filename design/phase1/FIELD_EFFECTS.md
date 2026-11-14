@@ -76,7 +76,7 @@ The check ran in the headless runner, over the real tiles, with temporary patche
 | Short grass (`short_grass.png`) | aethos has no `MB_SHORT_GRASS`. It now draws in barley and gold, and needs redrawing if a short-grass metatile is added. |
 | Ash, hot springs, cave dust, bubbles and water surfacing (Dive), rock climb, secret power, sand pillar, Deoxys rock, record mix lights, spotlight, Hall of Fame monitors, field-move streaks, ORAS dowsing, Fly's bird, Cut grass, the tree/mountain/sand disguises, Hoenn's scripted sparkles, the shiny sparkle, unused grass and sand | Not reachable in the slice. The water and sand ones take the new colors. |
 | Night lights on Center and Mart signs (`BallLight`, `PokeCenterLight`, `MartLight`) | They spawn only from light objects placed on a map, and no slice map places one. |
-| Follower Poké Ball sprites, the follower emotions and the smiley (`graphics/misc/`) | Outside `graphics/field_effects/`. |
+| The smiley (`graphics/misc/emoticons.png`) | FRLG's; no Emerald script plays it. The follower balls and emotes are done since (`follower_icons.py`, `UI_remnants.md`). |
 
 ## Found while testing: the truck intro still runs on a new game
 

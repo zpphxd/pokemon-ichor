@@ -867,6 +867,10 @@ There is one omen per day, drawn from five kinds:
 | Stranger | 10%, only after the core theoxenia (§10) | A disguised god walks somewhere today: "An eagle sat on a beggar's shoulder in Astyra and didn't fly off." |
 
 - **Entries are filtered by story progress,** so only places you can reach are named.
+- **Entries from the dex team's late-area habitats** (2026-11-14, `design/dex/DECISIONS.md`):
+  - **Swarm:** Sporadon. "A crop springs up overnight." Level 38.
+  - **Rare visitor:** Hymnet. One cygnet waits at the Kastalian spring at dawn. Level 33.
+  - **Weather:** Kryopuff. Snow falls on the lowest slopes of the Ascent. Level 38.
 - **There are about 30 entries in 1.0:** 12 swarms, 12 visitors and 6 weather spots.
 - **After the climax,** when prophecy has ended, the augurs keep working:
   ```text

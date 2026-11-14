@@ -279,6 +279,17 @@
 #define VARS_END                                         0x40FF
 #define VARS_COUNT                                       (VARS_END - VARS_START + 1)
 
+// Ichor var bank. These vars are saved in IchorSave (SaveBlock3): GetVarPointer
+// (src/event_data.c) sends ids 0x4100-0x411F there. Scripts use them like any
+// var. Claim one by name with
+//   python3 tools/ichor/claim.py bankvar VAR_ICHOR_<NAME> "comment"
+// See design/ENGINE_API.md.
+#define ICHOR_VARS_START                                 0x4100
+#define ICHOR_VARS_COUNT                                 32
+#define ICHOR_VARS_END                                   (ICHOR_VARS_START + ICHOR_VARS_COUNT - 1)
+// Ichor bank vars: claim.py bankvar adds lines here, in order.
+// Ichor bank vars: end
+
 #define SPECIAL_VARS_START            0x8000
 // special vars
 // They are commonly used as parameters to commands, or return values from commands.

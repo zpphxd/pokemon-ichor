@@ -164,6 +164,8 @@ u16 *GetVarPointer(u16 id)
 {
     if (id < VARS_START)
         return NULL;
+    else if (id >= ICHOR_VARS_START && id <= ICHOR_VARS_END) // Ichor: the var bank in IchorSave
+        return Ichor_GetVarPointer(id);
     else if (id < SPECIAL_VARS_START)
         return &gSaveBlock1Ptr->vars[id - VARS_START];
 #if TESTING
@@ -208,6 +210,8 @@ u8 *GetFlagPointer(u16 id)
 {
     if (id == 0)
         return NULL;
+    else if (id >= ICHOR_FLAGS_START && id <= ICHOR_DAILY_FLAGS_END) // Ichor: the flag banks in IchorSave
+        return Ichor_GetFlagPointer(id);
     else if (id < SPECIAL_FLAGS_START)
         return &gSaveBlock1Ptr->flags[id / 8];
 #if TESTING
