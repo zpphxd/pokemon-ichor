@@ -15,8 +15,17 @@ The source is `tools/ichor/art/sprites_player_ow.py`. Every frame is built from 
 ```
 python3 tools/ichor/art/sprites_player_ow.py --write            # all sheets and both palettes
 python3 tools/ichor/art/sprites_player_ow.py --write --sheets walking
-python3 tools/ichor/art/sprites_player_ow.py --preview DIR      # 3x and 8x previews
+python3 tools/ichor/art/sprites_player_ow.py --preview design/phase1/img/sprites_player_ow.png
 ```
+
+## Review images
+
+| Image | Shows |
+|---|---|
+| `design/phase1/img/sprites_player_ow.png` | Every sheet for both characters at 4x |
+| `design/phase1/img/sprites_player_ow_ingame_theo.png` | Theo in the bedroom at 3x: walking and running in all four directions, mid-step |
+| `design/phase1/img/sprites_player_ow_ingame_ianthe.png` | The same for Ianthe |
+| `design/phase1/img/sprites_player_ow_rom.png` | Every player frame decoded from the built ROM with the new palettes, with the mirrored east-facing frames |
 
 | Sheet | Size | Frames | Status |
 |---|---|---|---|

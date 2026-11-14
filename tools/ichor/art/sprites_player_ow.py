@@ -9,10 +9,11 @@ facing and per character, and a body per pose. The parts use role letters,
 which map to each character's palette indices, so one body serves both.
 
 Usage:
-    python3 tools/ichor/art/sprites_player_ow.py [--write] [--preview DIR]
+    python3 tools/ichor/art/sprites_player_ow.py [--write [--sheets NAME ...]] [--preview OUT.png]
 
---write    writes the four sheets for both characters and the two palettes
---preview  writes a 4x sheet preview and per-sheet review strips to DIR
+--write    writes the sheets (default: all four) for both characters, and the
+           two palettes
+--preview  writes every sheet for both characters at 4x to OUT.png
 """
 import argparse
 import os
@@ -703,23 +704,28 @@ def build(who):
     return {name: to_index(fn(who), roles) for name, fn in SHEETS.items()}
 
 
-def preview(outdir, built):
-    os.makedirs(outdir, exist_ok=True)
-    bg = (168, 200, 120, 255)
-    for who, sheets in built.items():
-        rgb = CHARS[who][1]
-        for name, arr in sheets.items():
-            im = rgba(arr, rgb)
-            base = Image.new("RGBA", im.size, bg)
-            base.alpha_composite(im)
-            for k in (3, 8):
-                big = base.resize((im.width * k, im.height * k), Image.NEAREST)
-                if k == 8:
-                    d = ImageDraw.Draw(big)
-                    fw = 16 if name in ('walking', 'running') else 32
-                    for x in range(0, im.width, fw):
-                        d.line([(x * k, 0), (x * k, big.height)], fill=(200, 60, 60, 255))
-                big.save(os.path.join(outdir, f"{who}_{name}_{k}x.png"))
+def preview(path, built, k=4):
+    """Every sheet for both characters at k x, on a pale-grass ground, with a
+    tick between frames."""
+    bg, ink = (168, 200, 120, 255), (40, 40, 48)
+    lab, pad = 16, 6
+    rows = [(f"{who.capitalize()}: {name.replace('_', ' ')}", rgba(arr, CHARS[who][1]), name)
+            for who, sheets in built.items() for name, arr in sheets.items()]
+    width = max(im.width for _, im, _ in rows) * k + 2 * pad
+    out = Image.new("RGB", (width, sum(lab + 32 * k + pad for _ in rows) + pad), (232, 228, 216))
+    d = ImageDraw.Draw(out)
+    y = pad
+    for label, im, name in rows:
+        d.text((pad, y + 2), label, fill=ink)
+        y += lab
+        base = Image.new("RGBA", im.size, bg)
+        base.alpha_composite(im)
+        out.paste(base.resize((im.width * k, im.height * k), Image.NEAREST), (pad, y))
+        fw = 16 if name in ('walking', 'running') else 32
+        for x in range(fw, im.width, fw):
+            d.line([(pad + x * k, y), (pad + x * k, y + 5)], fill=ink)
+        y += 32 * k + pad
+    out.save(path)
 
 
 def main():
