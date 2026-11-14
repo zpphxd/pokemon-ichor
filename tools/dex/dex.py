@@ -11,6 +11,7 @@ import base64
 import io
 import json
 import pathlib
+import subprocess
 import sys
 
 import numpy as np
@@ -27,9 +28,27 @@ TEMPLATE = ROOT / "tools/dex/dex_page.html"
 STATS = ["hp", "atk", "def", "spa", "spd", "spe"]
 
 
+# Sprites are read from the last commit by default, so artists' unreviewed
+# work in the working tree never reaches the review page. --worktree reads
+# the files on disk instead.
+FROM_GIT = True
+
+
+def _bytes(path):
+    if not FROM_GIT:
+        return path.read_bytes() if path.exists() else None
+    rel = path.relative_to(ROOT).as_posix()
+    r = subprocess.run(["git", "-C", str(ROOT), "show", f"HEAD:{rel}"], capture_output=True)
+    return r.stdout if r.returncode == 0 else None
+
+
 def _jasc(path):
-    rows = [ln.split() for ln in path.read_text().splitlines()[3:19]]
+    rows = [ln.split() for ln in _bytes(path).decode().splitlines()[3:19]]
     return [tuple(int(v) for v in r[:3]) for r in rows]
+
+
+def _png(path):
+    return Image.open(io.BytesIO(_bytes(path)))
 
 
 def _uri(idx, colors):
@@ -46,17 +65,17 @@ def _uri(idx, colors):
 def sprite_data(name):
     """Every finished sprite of a species, as data URIs, or None."""
     d = SPRITE_DIR / name.lower()
-    if not (d / "anim_front.png").exists():
+    if _bytes(d / "anim_front.png") is None:
         return None
     normal, shiny = _jasc(d / "normal.pal"), _jasc(d / "shiny.pal")
-    front = np.array(Image.open(d / "anim_front.png"))
-    back = np.array(Image.open(d / "back.png"))
-    ow = np.array(Image.open(d / "overworld.png"))
-    icon_im = Image.open(d / "icon.png")
+    front = np.array(_png(d / "anim_front.png"))
+    back = np.array(_png(d / "back.png"))
+    ow = np.array(_png(d / "overworld.png"))
+    icon_im = _png(d / "icon.png")
     flat = icon_im.getpalette()[:48]
     icon_pal = [tuple(flat[i:i + 3]) for i in range(0, 48, 3)]
     icon = np.array(icon_im)
-    foot = np.array(Image.open(d / "footprint.png"))
+    foot = np.array(_png(d / "footprint.png"))
     out = {}
     for key, pal in (("normal", normal), ("shiny", shiny)):
         out[key] = {
@@ -125,7 +144,10 @@ def main():
     ap.add_argument("--html", type=pathlib.Path)
     ap.add_argument("--json", type=pathlib.Path)
     ap.add_argument("--summary", action="store_true", help="print one review line per species")
+    ap.add_argument("--worktree", action="store_true", help="show sprites from the working tree, not the last commit")
     args = ap.parse_args()
+    global FROM_GIT
+    FROM_GIT = not args.worktree
     entries = collect()
     if args.summary:
         for e in entries:
