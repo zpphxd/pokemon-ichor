@@ -331,12 +331,12 @@ KERASTORM_COLORS = [
     # the thundercloud fleece: marble gray with Aegean-blue shadows
     ("cl0", (40, 56, 104)), ("cl1", (96, 112, 160)), ("cl2", (160, 168, 192)), ("cl3", (216, 216, 224)),
     ("cl4", C.white),
-    # limestone face, legs and the great horn
-    ("lm0", (104, 72, 48)), ("lm1", (168, 128, 80)), ("lm2", (216, 184, 128)),
+    # limestone face, legs and the great horn, warming to bronze in the shadows
+    ("lm0", (88, 48, 32)), ("lm1", (192, 128, 72)), ("lm2", (232, 192, 128)),
     # sun-gold lightning
     ("gold0", (216, 144, 32)), ("gold1", (248, 224, 96)),
     # the horn of plenty: olive grapes and figs, a terracotta pomegranate, one Fairy-pink accent
-    ("ol0", (72, 96, 32)), ("ol1", (144, 168, 64)), ("terra", (192, 72, 40)), ("pink", (240, 152, 168)),
+    ("ol0", (72, 96, 32)), ("ol1", (144, 168, 64)), ("terra", (152, 80, 48)), ("pink", (240, 152, 168)),
 ]
 KERASTORM_SHINY = {
     # a sunset sun-gold thundercloud with Aegean-blue lightning
@@ -347,8 +347,8 @@ KERASTORM_SHINY = {
 
 s_cloud = Mat(["cl0", "cl1", "cl2", "cl3", "cl4"], line="cl1", cuts=[0.3, 0.48, 0.64, 0.84])
 s_cloud_s = Mat(["cl2", "cl3", "cl4"], line="cl2", cuts=[0.62, 0.9])
-s_coat = Mat(["lm0", "lm1", "lm2", "cl4"], line="lm0", cuts=[0.24, 0.5, 0.86])
-s_horn = Mat(["lm0", "lm1", "lm2", "cl4"], line="lm0", cuts=[0.26, 0.5, 0.82])
+s_coat = Mat(["lm0", "terra", "lm1", "lm2"], line="lm0", cuts=[0.24, 0.44, 0.7])
+s_horn = Mat(["lm0", "lm1", "lm2"], line="lm0", cuts=[0.3, 0.6])
 s_hoof = Mat(["ink", "lm0"], line="ink", cuts=[0.5])
 s_grape = Mat(["ol0", "ol1"], line="ol0", cuts=[0.55])
 s_pom = Mat(["lm0", "terra", "pink"], line="lm0", cuts=[0.3, 0.8])
@@ -357,7 +357,7 @@ s_bolt = Mat(["gold0", "gold1"], line="gold0", cuts=[0.5])
 
 def kerastorm(p, view, phase):
     big = p.big
-    cloud = s_cloud if big or view == "side" else s_cloud_s
+    cloud = s_cloud if big and view != "side" else s_cloud_s
     if view in ("front", "side", "icon"):
         L = 1 if (phase == 1 and view == "front") else 0
         # hind legs planted, the forequarters rearing
@@ -424,28 +424,41 @@ def kerastorm(p, view, phase):
         return
 
     if view in ("down", "up"):
+        # follower: a sturdy goat under a storm-cloud fleece, the great horn
+        # sweeping out to her left, the horn of plenty on her right
         s = phase
-        for x, k in ((26.5, 0), (37.5, 1)):
+        down = view == "down"
+        hx = 1 if down else -1          # which side of the screen the great horn is on
+        for x, k in ((25.5, 0), (38.5, 1)):
             st = (s + k) % 2
-            p.limb([(x, 44), (x, 59 - 2 * st)], 4.4, 3.6, s_coat, group=12)
-            p.rect(int(x) - 2, int(59 - 2 * st), int(x) + 1, int(60 - 2 * st), s_hoof)
-        _cloud(p, [(32, 42, 10, 0.8), (23, 39, 5, 1), (41, 39, 5, 1), (32, 35, 6, 0.9)], cloud, 1)
-        if view == "up":
-            p.limb(bez((29, 20), (20, 8), (12, 14), n=8), 5.6, 2.2, s_horn, group=5)
-            p.limb([(35, 20), (38, 14)], 5, 5.4, s_horn, group=6)
-            p.blob(32, 24, 6.6, 6.4, s_coat, group=3)
-            _cloud(p, [(32, 30, 7, 0.8), (26, 32, 4, 1), (38, 32, 4, 1)], cloud, 2)
-            return
-        p.limb(bez((35, 20), (44, 8), (52, 14), n=8), 5.6, 2.2, s_horn, group=5)
-        p.limb([(29, 20), (26, 14)], 5, 5.4, s_horn, group=6)
-        for x, y in ((25, 12), (23.5, 14.5), (26, 15), (24, 17.5)):
-            p.circle(x, y, 1.5, s_grape, group=7)
-        p.blob(32, 25, 6.6, 6.4, s_coat, group=3)
-        p.blob(32, 30, 3.8, 2.8, s_coat, group=3)
-        p.lens((32, 32), (32, 38), 3.6, cloud, group=4)
-        p.eye(27, 23, 3, 4, shine="cl4")
-        p.eye(35, 23, 3, 4, shine="cl4")
-        p.pxs([(31, 30), (32, 30)], "ink")
+            p.limb([(x, 46), (x, 58 - 2 * st)], 6, 5, s_coat, bias=0.1, group=12 + k)
+            p.rect(int(x) - 2, int(58 - 2 * st), int(x) + 2, int(59 - 2 * st), s_hoof)
+        if not down:
+            p.circle(32, 50, 3.6, cloud, group=9)                     # tail puff
+        g = 1
+        for x, y, r in ((21, 38, 6), (43, 38, 6), (32, 35, 7.4), (24, 45, 6), (40, 45, 6), (32, 46, 6.4)):
+            p.circle(x, y, r, cloud, group=g)
+            g += 1
+        # the great horn: a wide ridged crescent out to one side
+        cx = 32 + hx * 4
+        p.limb(bez((cx, 22), (cx + hx * 8, 6), (cx + hx * 18, 10), n=10) + [(cx + hx * 21, 17), (cx + hx * 19, 22)],
+               6.4, 2.4, s_horn, group=20)
+        # the broken horn on the other side, grapes spilling from it
+        sx = 32 - hx * 4
+        p.limb([(sx, 22), (sx - hx * 3, 16)], 5, 6, s_horn, group=21)
+        for dx, dy in ((-1, 14.5), (-3.5, 16), (-1.5, 18), (-4, 19.5)):
+            p.circle(sx - hx * 3 + hx * dx, dy, 1.7, s_grape, group=22)
+        p.blob(32, 26, 7.6, 7.2, s_coat, group=23)
+        if down:
+            p.blob(32, 32, 4.6, 3.6, s_coat, group=23)
+            p.lens((32, 34), (32, 41), 4, cloud, group=24)            # goatee
+            if big:
+                p.eye(26, 24, 4, 4, shine="cl4", shine_at=(1, 1))
+                p.eye(34, 24, 4, 4, shine="cl4", shine_at=(2, 1))
+                p.pxs([(27, 27), (36, 27)], "gold0")
+                p.pxs([(31, 32), (32, 32)], "ink")
+            else:
+                p.pxs([(27, 25), (36, 25)], "ink")
         return
 
 

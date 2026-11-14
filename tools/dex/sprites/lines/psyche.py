@@ -245,7 +245,7 @@ PSYCHORA_COLORS = [
     ("lm0", (128, 96, 64)), ("lm1", (176, 144, 96)), ("lm2", (208, 184, 136)), ("lm3", (232, 216, 176)),
     ("aeg0", (48, 104, 176)), ("aeg1", (112, 168, 224)), ("aeg2", (176, 216, 240)),
     ("wing", (216, 216, 208)), ("white", C.white), ("silver", (176, 192, 168)),
-    ("gold0", C.sungold[0]), ("gold", C.sungold[1]), ("aegd", (24, 56, 120)),
+    ("gold0", C.sungold[0]), ("gold", C.sungold[1]), ("aegd", (24, 56, 120)), ("lmd", (88, 56, 40)),
 ]
 PSYCHORA_SHINY = {
     # soft terracotta wings with Aegean-blue eye-spots
