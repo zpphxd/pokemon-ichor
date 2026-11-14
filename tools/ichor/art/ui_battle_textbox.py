@@ -31,15 +31,18 @@ from ui_frames import CORNER, FIELD, FRAME_PAL, LEFT, TOP
 
 TEXT_INK = (56, 40, 32)   # the dialogue box's text color
 
-# BG palette 0 in battle (also the egg hatch and trade scenes, which reuse the
-# battle text box). Battle messages print with fg 1, shadow 6 on fill 15; the
-# egg hatch prints fg 5; the continue arrow is drawn with 2 (edge) and 4 (fill).
+# BG palette 0 in battle (also the evolution, egg hatch and trade scenes,
+# which reuse the battle text box). Battle messages print with fg 1, shadow 6
+# on fill 15; the egg hatch prints fg 5. Battle and evolution messages draw
+# the dark continue arrow (down_arrow_alt.png: edge 1, fill 2), so it comes
+# out ink-edged red like the field's; the plain arrow (edge 2, fill 4) is all
+# red here.
 TEXTBOX_PAL = [
     (0, 0, 0),       # 0  transparent
-    TEXT_INK,        # 1  message text
-    TEXT_INK,        # 2  arrow edge
+    TEXT_INK,        # 1  message text, dark arrow edge
+    RED,             # 2  dark arrow fill, plain arrow edge
     PARCH_SHADE,     # 3
-    RED,             # 4  arrow fill
+    RED,             # 4  plain arrow fill
     TEXT_INK,        # 5  egg hatch text
     PARCH_SHADE,     # 6  text shadow
     (0, 0, 0), (0, 0, 0), (0, 0, 0),
