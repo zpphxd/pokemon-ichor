@@ -10,6 +10,8 @@
 #include "constants/battle.h"
 #include "constants/flags.h"
 #include "constants/map_groups.h"
+#include "constants/map_scripts.h"
+#include "constants/script_commands.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
 
@@ -50,6 +52,16 @@ K(MUS_ELAIA, MUS_ICHOR_ELAIA)
 K(MUS_AKADEMIA, MUS_ICHOR_AKADEMIA)
 
 K(B_OUTCOME_WON, B_OUTCOME_WON)
+K(VAR_TEMP_0, VAR_TEMP_0)
+K(PARTY_SIZE, PARTY_SIZE)
+
+// Script bytecode for the setup script the test writes into spare EWRAM.
+K(SCR_OP_END, SCR_OP_END)
+K(SCR_OP_SETVAR, SCR_OP_SETVAR)
+K(SCR_OP_CALLNATIVE, SCR_OP_CALLNATIVE)
+K(SCR_OP_WAITSTATE, SCR_OP_WAITSTATE)
+K(MAP_SCRIPT_ON_FRAME_TABLE, MAP_SCRIPT_ON_FRAME_TABLE)
+K(OFF_MAPHEADER_MAPSCRIPTS, offsetof(struct MapHeader, mapScripts))
 K(B_OUTCOME_LOST, B_OUTCOME_LOST)
 
 // Struct offsets

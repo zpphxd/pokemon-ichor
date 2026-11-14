@@ -293,6 +293,33 @@ local function kleonBattle(at)
   return emu:read8(S.gBattleOutcome)
 end
 
+-- --- A script of our own --------------------------------------------------------------------
+
+-- Spare EWRAM: the linker's EWRAM data ends near 0x02037500.
+local SCRATCH = 0x0203F000
+local function bytes(t)
+  local out = {}
+  for _, v in ipairs(t) do
+    if type(v) == "table" then -- { value, size }
+      for i = 0, v[2] - 1 do out[#out + 1] = (v[1] >> (8 * i)) & 0xFF end
+    else
+      out[#out + 1] = v
+    end
+  end
+  return out
+end
+local function poke(addr, t)
+  for i, b in ipairs(bytes(t)) do emu:write8(addr + i - 1, b) end
+end
+-- Run `script` (a byte list) as the current map's ON_FRAME script, once.
+local function runRamScript(script)
+  local tableAddr, frameTable, code = SCRATCH, SCRATCH + 0x20, SCRATCH + 0x40
+  poke(code, script)
+  poke(frameTable, { { S.VAR_TEMP_0, 2 }, { 0, 2 }, { code, 4 }, { 0, 2 } })
+  poke(tableAddr, { S.MAP_SCRIPT_ON_FRAME_TABLE, { frameTable, 4 }, 0 })
+  emu:write32(S.gMapHeader + S.OFF_MAPHEADER_MAPSCRIPTS, tableAddr)
+end
+
 -- --- The opening ----------------------------------------------------------------------------
 
 local SPECIES = { [0] = "Snivy", [1] = "Cyndaquil", [2] = "Piplup" }
@@ -463,6 +490,18 @@ local function main()
   shot("north_gate_open")
   enter(K.UP, S.MAP_ROUTE1, "Route 1")
   shot("route1")
+
+  -- Whiting out sends the player home, where Mom feeds everyone.
+  for slot = 0, S.PARTY_SIZE - 1 do emu:write16(partyMon(slot) + S.OFF_MON_HP, 0) end
+  runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
+                 S.SCR_OP_CALLNATIVE, { S.SetCB2WhiteOut | 1, 4 }, S.SCR_OP_WAITSTATE, S.SCR_OP_END })
+  waitUntil(function() return mapId() == S.MAP_HOUSE_1F and inOverworld() end, 3000, "home after whiting out")
+  wait(90); shot("whiteout_home")
+  settle({ [3] = "whiteout_mom" })
+  expectAt(3, 4, "woke by the hearth")
+  hp, maxHp = partyHp(0)
+  expect(hp == maxHp and hp > 0, string.format("Mom healed the party (%d/%d)", hp, maxHp))
+  expect(mapMusic() == S.MUS_ELAIA, "Elaia's theme at home")
 end
 
 local co = coroutine.create(main)
