@@ -5,6 +5,7 @@ This repo is a fan ROM hack built on **pokeemerald-expansion 1.17.2**, the Emera
 ## Sources of truth
 
 - **`design/PITCH.md`** is the design bible: story, world, characters, the Twelve, Pokémon, systems and roadmap. Read the relevant section before any content work. If a change contradicts the bible, raise it with the creative director (the main session) instead of improvising.
+- **`design/MAP_DESIGN.md`** is the map design rulebook every map follows: forced grass, trainer checkpoints, ledges, rewards, relic gates, town and dungeon structure.
 - **`design/TERMS.md`** gives the Ichor word for every Pokémon-system term (Asclepeion, Pithos, Laurel and the rest) and how to case it. `tools/ichor/text_width.py` measures a line against the game font.
 - **`design/research/RESEARCH.md`** covers engine facts, tool versions and GBA constraints.
 - **`design/research/LAZARUS.md`** is the list of things we must not copy from Pokémon Lazarus, an existing Greek-themed hack.
@@ -55,6 +56,7 @@ mgba pokeemerald.gba                   # play it
 - **Graphics.**
   - 4bpp, 16-color palettes, color 0 transparent.
   - Tilesets: draw `bottom/middle/top.png` at 128 px wide and compile with Porytiles. Plan palettes first: 6 primary and 7 secondary.
+  - A secondary tileset may use at most 504 tiles. Door animations copy their frames over tiles 504–511 (`DOOR_TILE_START_SIZE1` in `src/field_door.c`), so anything there glitches while a door opens. Leave 496–511 free if a map uses wide doors.
   - Overworld NPCs share palette families.
 - **Upstream.**
   - `upstream` is rh-hideout/pokeemerald-expansion.

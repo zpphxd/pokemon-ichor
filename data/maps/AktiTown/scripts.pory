@@ -71,8 +71,8 @@ script AktiTown_EventScript_Arrival {
     lockall
     setvar(VAR_TEMP_1, 1)
     setflag(FLAG_ICHOR_ARRIVED_AKTI)
-    // Director's brief: once the player has been to Akti, a whiteout brings them here.
-    setrespawn(HEAL_LOCATION_AKTI_TOWN)
+    // No setrespawn here: per SCRIPT.md beat 6, only the Asclepeion makes Akti the
+    // respawn point.
     playse(SE_PIN)
     applymovement(LOCALID_AKTI_DIKTYS, Common_Movement_ExclamationMark)
     waitmovement(0)
@@ -103,7 +103,7 @@ script AktiTown_EventScript_Arrival {
     releaseall
 }
 
-// Diktys sits at (9,23); he stops just north of the player on the road.
+// Diktys sits by his boat at (9,25); he stops just north of the player on the road.
 movement AktiTown_Movement_DiktysToX10 { walk_right walk_down }
 movement AktiTown_Movement_DiktysToX11 { walk_right * 2 walk_down }
 movement AktiTown_Movement_DiktysToX12 { walk_right * 3 walk_down }
@@ -409,11 +409,38 @@ script AktiTown_EventScript_FishersHouseSign {
     msgbox(format("GLAUKOS. Gone fishing.\n(Not really. Knock.)"), MSGBOX_SIGN)
 }
 
-// Not in SCRIPT.md: a shut house and Poseidon's harbor shrine need a line each.
+// Not in SCRIPT.md: a shut house and the goats in the pen need a line each.
 script AktiTown_EventScript_ShutHouse {
-    msgbox(format("The door is barred. Everyone's down at the harbor."), MSGBOX_SIGN)
+    msgbox(format("The shutters are closed. Everyone's down at the harbor."), MSGBOX_SIGN)
 }
 
-script AktiTown_EventScript_PoseidonShrine {
-    msgbox(format("A little shrine to Poseidon. Someone has left him a conch."), MSGBOX_SIGN)
+script AktiTown_EventScript_Goat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    msgbox(format("Mehhh! It's chewing a clothes peg."))
+    waitmoncry
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Relic gates (SYSTEMS.md §1, D10): seen in the slice, opened later. Only the
+// locked side exists yet.
+// - The rubble grotto on the tide rocks opens with the Bronze Hammer (Act I).
+//   Inside: a Kalliste amphora sherd spot, a Pearl and a rare shore Pokémon.
+// - The islet shrine opens with Poseidon's Conch (Act II, Surf). On it: a
+//   Poseidon altar, a Water-type rare and a hidden Big Pearl.
+// ---------------------------------------------------------------------------
+
+script AktiTown_EventScript_GrottoRubble {
+    msgbox(format("Broken marble chokes the mouth of a sea grotto.\p"
+                  "Something glints in the dark behind it.\p"
+                  "The blocks won't shift by hand. A good hammer would break them."), MSGBOX_SIGN)
+}
+
+script AktiTown_EventScript_IsletFisher {
+    msgbox(format("That white shrine out on the islet is Poseidon's.\p"
+                  "No one's set foot on it since the storm. Row for it and the current "
+                  "turns you right round.\p"
+                  "The gulls get all his offerings now."), MSGBOX_NPC)
 }

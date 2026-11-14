@@ -107,6 +107,7 @@ Every slice map fits, with room for a third Ichor family later.
   |---|---|---|---|---|---|---|---|---|---|
   | Pose | face down | face up | face left | walk down A | walk down B | walk up A | walk up B | walk left A | walk left B |
 
+- **The Healer's tenth frame:** her sheet is 160×32. Frame 9 is the bow (see "Special animations" below).
 - **Feet and step bob:** feet stand on row 30. Walk frames drop 1 px, so the stepping foot lands on row 31.
 - **Right-facing frames:** these are the left frames mirrored in game.
 - **Body archetypes** (`TUNIC`, `MIDI`, `ROBE`, `KID`) draw the torso, arms and legs for all nine frames once, in role letters: `C` cloth, `Q` cloth shade, `T` belt, `F` feet, `X`/`Y` shins. A walker maps the roles to its palette. For example, the Hoplite maps the shins to bronze greaves, and the children map `F` to bare skin.
@@ -134,6 +135,34 @@ The registration follows `SPRITES_npc.md` step 3, inside the Ichor blocks of the
 - **Children** are shorter by design, about the vanilla little boy's height. Face them down and they read as kids at a glance.
 - **Shepherdess.** The Shepherd walker is male, after Tityros's portrait. For Amaryllis the shepherdess, `WOMAN` or `YOUTH_F` is the closer fit.
 - **Wandering.** Every walker wanders and walks normally. The staff carriers (Elder M, the Healer, the Shepherd, the Augur) look best with `MOVEMENT_TYPE_FACE_*` or a short wander, since their staff hand doesn't swing.
+
+## Special animations
+
+A walker's anim table has to cover every movement a script gives it. `waitmovement` waits for the animation to end, so an anim the table lacks never ends, and the player is stuck.
+
+- **The Healer bows.**
+  - Both Asclepeion heals end with `Movement_PkmnCenterNurse_Bow`: talking to her (`Ichor_EventScript_AsclepeionHealer`) and the whiteout respawn (`EventScript_AfterWhiteOutHeal`).
+  - That movement plays `ANIM_NURSE_BOW`, which only `sAnimTable_Nurse` has. It shows frame 9 for 32 ticks.
+  - So the Healer uses `sAnimTable_Nurse`, and `sPicTable_IchorHealer` lists ten frames.
+  - **The bow:**
+    - The top of her head drops 1 px and her fillet 2 px.
+    - Her eyes close and her neck is hidden.
+    - Her left hand comes up over her heart, and the rod stays planted.
+  - Behind the Asclepeion counter only the head shows, so the bow reads as the head dipping and the eyes closing.
+  - Preview: `img/healer_bow.png` shows the stand and bow frames at 6×, then the talk-heal in game: restored, bow, bow, "Go in health."
+- **Everyone else uses `sAnimTable_Standard`.** Checked against every slice script (Elaia, Akti and its interiors, Route 1, Kronion Hill) and the shared scripts they call. They use only these:
+  - walks, at normal, fast and slow speed
+  - faces, and the walk-in-place turns of the heal script
+  - `jump_in_place_down`
+  - emotes, which are field effects and not anims
+  - The Agora merchant runs the plain `pokemart` flow, which has no movements.
+  - Mom isn't placed on any map yet. The whiteout heal at home only walks her in place.
+- **Moves that need a special table:**
+  - `nurse_joy_bow` needs `sAnimTable_Nurse`.
+  - `jump_special_*` and `spin_*` read `ANIM_GET_ON_OFF_POKEMON_*` and `ANIM_SPIN_*`, which `sAnimTable_Standard` doesn't have.
+  - `rock_smash_break` and `cut_tree` play `ANIM_REMOVE_OBSTACLE`.
+  - None of them is used on an Ichor walker today. A script that adds one needs the matching table.
+- **Regression test:** `tools/ichor/tests/asclepeion_bow.lua`. It runs both heals and checks that the bow is held for 32 frames and that the player can walk away afterwards. With the healer back on `sAnimTable_Standard`, the walk-away checks fail in both paths.
 
 ## In-game check
 

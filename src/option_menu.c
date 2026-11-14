@@ -148,7 +148,7 @@ static const struct BgTemplate sOptionMenuBgTemplates[] =
     }
 };
 
-static const u16 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};
+static const u16 sOptionMenuBg_Pal[] = {RGB(23, 11, 6)}; // Ichor: terracotta behind the pottery frames, not lavender
 
 static void MainCB2(void)
 {

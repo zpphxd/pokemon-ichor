@@ -2,7 +2,7 @@
 """Build Akti Town: the harbor's outdoor layout and its three interiors.
 
 Writes:
-  data/layouts/AktiTown/map.bin, border.bin           (28x26, aethos + kalliste)
+  data/layouts/AktiTown/map.bin, border.bin           (28x28, aethos + akti)
   data/layouts/AktiTown_Asclepeion/map.bin, border.bin  (rooms/akti_asclepeion.bin)
   data/layouts/AktiTown_Agora/map.bin, border.bin       (rooms/akti_agora.bin)
   data/layouts/AktiTown_FishersHouse/map.bin, border.bin (rooms/fishers_house.bin)
@@ -11,12 +11,12 @@ Then it checks every Akti map.json against its blockdata: warps sit on doors or
 exit mats, NPCs and coord triggers on walkable ground, bg events are readable
 from a walkable tile, and the south seam is open exactly at x=10..13.
 
-Kalliste metatile ids come from build/kalliste/catalog.json. Make it with
-  /usr/bin/python3 tools/ichor/art/kalliste_build.py --no-compile
+Akti metatile ids come from build/akti/catalog.json (see TILES_akti.md). Make it with
+  /usr/bin/python3 tools/ichor/art/akti_build.py --no-compile
 
 Usage: /usr/bin/python3 tools/ichor/maps/akti.py [--render DIR]
-  --render writes akti_town.png (2x) and akti_town_walk.png (collision overlay)
-  and the interiors' renders into DIR.
+  --render writes akti_town.png (2x), akti_town_walk.png (collision overlay),
+  screen-sized crops along the slice's route, and the interiors' renders into DIR.
 """
 from __future__ import annotations
 
@@ -31,32 +31,30 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[3]
-CAT = ROOT / "build/kalliste/catalog.json"
+CAT = ROOT / "build/akti/catalog.json"
 W, H = 28, 28
 SEAM = range(10, 14)  # the walkable columns on the Route 1 seam
 
 # ---------------------------------------------------------------------------
-# aethos ids (General's numbering)
+# aethos ids (General's numbering; see TILES_aethos.md)
 # ---------------------------------------------------------------------------
 GRASS = 0x001
 GRASS_SHADE = 0x01C
-TILLED = (0x103, 0x104, 0x105, 0x10B, 0x10C, 0x10D, 0x113, 0x114, 0x115)  # TL T TR / L C R / BL B BR
-TRIPOD_TOP, TRIPOD_BASE = 0x130, 0x131  # bronze tripod on a plinth (the temple's sign)
+REEDS = 0x015
+TILLED = {"tl": 0x103, "t": 0x104, "tr": 0x105, "l": 0x10B, "c": 0x10C, "r": 0x10D,
+          "bl": 0x113, "b": 0x114, "br": 0x115}
 FLOWERS = 0x004
 SEA = 0x170
 STELE = 0x003            # town sign
 HERM = 0x01B
-BOULDER_SAND = 0x0E2
-BOULDER_GRASS = 0x0E0
-SEA_BOULDER = 0x18C                                # a rock in a foam ring, on deep water
-SEA_ROCK_2X2 = ((0x150, 0x151), (0x158, 0x159))   # a rock across four cells, as on Route 115
-SEA_STACK = ((0x175, 0x176), (0x17D, 0x17E))      # a rounded stack, 2x2
 OLIVE_TOP = (0x1D4, 0x1D5)
 OLIVE_BOT = (0x1E4, 0x1E5)
 OLIVE_BOT_TIP = (0x1DC, 0x1DD)
 OLIVE_TIP_GRASS = (0x1CE, 0x1CF)
 CYPRESS_TOP = 0x00E
 CYPRESS_BOT = 0x016
+PINE = ((0x01E, 0x01F), (0x026, 0x027))   # an umbrella pine, 2x2
+WALL = {"l": 0x148, "run": 0x149, "r": 0x14A, "w": 0x132, "e": 0x133}   # dry-stone walls
 PATH = {"tl": 0x1D0, "t": 0x1D1, "tr": 0x1D2, "l": 0x1D8, "c": 0x1D9, "r": 0x1DA,
         "bl": 0x1E0, "b": 0x1E1, "br": 0x1E2}
 # sand set into grass (General's sand pit): its rim fades the beach into the meadow
@@ -95,15 +93,22 @@ def attrs(path):
 
 AETHOS_ATTR = attrs("data/tilesets/primary/aethos/porytiles_bin/metatile_attributes.bin")
 TILESET_ATTR = {
-    "kalliste": attrs("data/tilesets/secondary/kalliste/porytiles_bin/metatile_attributes.bin"),
+    "akti": attrs("data/tilesets/secondary/akti/porytiles_bin/metatile_attributes.bin"),
     "civic": attrs("data/tilesets/secondary/civic/porytiles_bin/metatile_attributes.bin"),
     "oikia": attrs("data/tilesets/secondary/oikia/porytiles_bin/metatile_attributes.bin"),
 }
 
 
-def behavior(mid, secondary="kalliste"):
+def behavior(mid, secondary="akti"):
     a = AETHOS_ATTR[mid] if mid < 0x200 else TILESET_ATTR[secondary][mid - 0x200]
     return MB.get(int(a) & 0xFF, "?")
+
+
+def hashed(x, y, salt=0):
+    """A stable pseudo-random number in [0, 1) for a map cell."""
+    h = (x * 73856093) ^ (y * 19349663) ^ (salt * 83492791)
+    h = (h ^ (h >> 13)) * 1274126177 & 0xFFFFFFFF
+    return (h ^ (h >> 16)) % 1000 / 1000
 
 
 # ---------------------------------------------------------------------------
@@ -122,11 +127,11 @@ class Grid:
             self.mid[y, x] = mid
             self.solid[y, x] = solid
 
-    def k(self, key, cx, cy):
+    def k(self, key, cx=0, cy=0):
         return self.cat[key]["ids"][cy][cx]
 
     def put(self, key, x, y, cx=0, cy=0, w=None, h=None):
-        """Place a kalliste structure (or part of one); collision follows its walk grid."""
+        """Place an akti structure (or part of one); collision follows its walk grid."""
         s = self.cat[key]
         w = s["w"] - cx if w is None else w
         h = s["h"] - cy if h is None else h
@@ -149,12 +154,21 @@ class Grid:
             above = (int(self.mid[y - 1, x]), int(self.mid[y - 1, x + 1]))
             if above == OLIVE_BOT:
                 self.block([OLIVE_BOT_TIP], x, y - 1)
-            elif all(m in (GRASS, GRASS_SHADE) for m in above):
-                self.block([OLIVE_TIP_GRASS], x, y - 1, solid=False)
+            elif all(m in (GRASS, GRASS_SHADE, FLOWERS) for m in above):
+                self.block([OLIVE_TIP_GRASS], x, y - 1, solid=bool(self.solid[y - 1, x]))
 
     def cypress(self, x, y):
         self.set(x, y, CYPRESS_TOP, True)
         self.set(x, y + 1, CYPRESS_BOT, True)
+
+    def pine(self, x, y):
+        self.block(PINE, x, y)
+
+    def free(self, x, y, w=1, h=1):
+        """True if every cell is plain open grass."""
+        return all(0 <= x + i < self.w and 0 <= y + j < self.h
+                   and self.mid[y + j, x + i] in (GRASS, GRASS_SHADE) and not self.solid[y + j, x + i]
+                   for j in range(h) for i in range(w))
 
 
 def edge_key(n, s_, w_, e, nw, ne, sw, se):
@@ -201,49 +215,54 @@ def neighbours(plan, x, y, outside):
 # Akti Town
 # ---------------------------------------------------------------------------
 #
-# The town is laid out from this plan, then the buildings go on top.
-#   ~ open sea     R rocks standing in the sea     q quay stone (harbor, mole, pier)
-#   s sand         g grass                         p limestone path
-#   f Cycladic flagstones (the plaza)              t tilled earth (the Asclepeion's herb bed)
+# The town is laid out from this plan, then the buildings and props go on top.
+#   ~ open sea     q quay stone (harbor, mole, pier)     s sand     g grass
+#   p limestone path     f the plaza's warm paving     t tilled earth (gardens)
+#   B a building's footprint: the ground under it doesn't matter, and paving and
+#     paths run flush against it instead of drawing a kerb or a grass rim
 #
-# The eye from the south gate: the road climbs into the plaza, the Temple of Hestia
-# stands over it on its podium to the right, and the main street runs on north to
-# the quay, where the trireme lies in the basin behind the mole.
+# The road climbs from the south gate to the plaza, where the krene stands
+# against the Agora's terrace and the Temple of Hestia rises on its podium to the
+# right. The harbor street runs on north to the quay. The trireme lies in the
+# basin behind the mole, which runs out from the west headland; the beach curves
+# round to Poseidon's shrine on the point. The lower town is gardens: the
+# Asclepeion's herb beds, Diktys's boat by the gate, a shuttered house with its
+# fig, washing and goat pen, and olive terraces at the edges.
 
 PLAN = [
     #         1111111111222222222
     # 234567890123456789012345678
-    "RR~~~~~~~~~~~~~~~~~~~~~~~~RR",  # 0
-    "RR~~~~~~~~~~~~~~~~~~~~R~~~RR",  # 1
-    "R~~~~~~~~~~~~~~~~~~~~~~~~RRR",  # 2
-    "R~~~~~~~~~~~~~~~~~~~~~~~~RRR",  # 3
-    "RRqqqqqqqqqq~~~~~~~~~~~~~sss",  # 4
-    "RRqqqqqqqqqq~~qq~~~~~~~sssss",  # 5
-    "RRqqqqqqqqqq~~qq~~~~~~ssssss",  # 6
-    "RRqq~~~~~~~~~~qq~~~~~sssssss",  # 7
-    "RRqq~~~~~~~~~~qq~~~~ssssssss",  # 8
-    "Rgqqqqqqqqqqqqqqqqqqssssssss",  # 9
+    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",  # 0
+    "~~~~~~~~~~~~~~~~~~sssss~~~~~",  # 1
+    "~~~~~~~~~~~~~~~~~~sssss~~~~~",  # 2
+    "~~qqqqqqqqqq~~~~~~sssss~~~~~",  # 3
+    "~~qqqqqqqqqq~~~~~~sssss~~~ss",  # 4
+    "BBqqqqqqqqqq~~qq~~sssss~~sss",  # 5
+    "BBqq~~~~~~~~~~qq~~~~~~~sssss",  # 6
+    "BBqq~~~~~~~~~~qq~~~~~~ssssss",  # 7
+    "ggqq~~~~~~~~~~qq~~~~~sssssss",  # 8
+    "ggqqqqqqqqqqqqqqqqqqssssssss",  # 9
     "ggqqqqqqqqqqqqqqqqqqssssssss",  # 10
     "ggqqqqqqqqqqqqqqqqqqssssssss",  # 11
-    "gggggggggggpppgggggggggggggg",  # 12
-    "gggggggggggpppgggggggggggggg",  # 13
-    "gggggggggggpppgggggggggggggg",  # 14
-    "gggppggggggpppgggggggggggggg",  # 15
-    "gggppggggggpppgggggggggggggg",  # 16
-    "gggppggggggpppgggggggggggggg",  # 17
-    "gggppffffffffffggggggggggggg",  # 18
-    "ggggggffffffffffffffffgggggg",  # 19
-    "ggggggffffffffffffffffgggggg",  # 20
-    "ggggggggggffffffgggggggggggg",  # 21
-    "ggggggggggppppgggggggggggggg",  # 22
-    "ggppppppppppppgggggggggggggg",  # 23
-    "ggppppppppppppgggggggggggggg",  # 24
-    "ggggggggggppppgggggggggggggg",  # 25
-    "ggggggggggpppppppppggggggggg",  # 26
+    "ggBBBBBBBBBpppggBBBBBBBggggg",  # 12
+    "ggBBBBBBBBgpppggBBBBBBBggggg",  # 13
+    "ggBBBBBBBBgpppggBBBBBBBggggg",  # 14
+    "gggppgBBBBgpppggBBBBBBBggggg",  # 15
+    "gggppgBBBBgpppggBBBBBBBggggg",  # 16
+    "gggppBBBBBBBppggBBBBBBBggggg",  # 17
+    "gggppffffffffffBBBBBBBBBgggg",  # 18
+    "ggBBBBfffffffffffffffffggggg",  # 19
+    "ggBBBBfffffffffffffffffggggg",  # 20
+    "ggBBBBgffffffffffffggggggggg",  # 21
+    "ggBBBBggggppppgggggggggggggg",  # 22
+    "gggppppppppppppggggggggggggg",  # 23
+    "gggppppppppppppggggggggggggg",  # 24
+    "ggttttggggppppttgggggggggggg",  # 25
+    "ggttttggggppppttgggggggggggg",  # 26
     "ggggggggggppppgggggggggggggg",  # 27
 ]
-H = len(PLAN)
-WATERISH = "~R"
+assert len(PLAN) == H
+WATERISH = "~"
 
 
 def ground(g):
@@ -251,7 +270,7 @@ def ground(g):
     quay_pieces = {"tl": q(0, 0), "t": q(1, 0), "tr": q(2, 0), "l": q(0, 1), "r": q(2, 1),
                    "bl": q(0, 2), "b": q(1, 2), "br": q(2, 2),
                    "in_nw": q(3, 0), "in_ne": q(4, 0), "in_sw": q(3, 1), "in_se": q(4, 1)}
-    pv = lambda cx, cy: g.k("paving", cx, cy)
+    pv = lambda cx, cy: g.k("plaza", cx, cy)
     paving_pieces = {"tl": pv(0, 0), "t": pv(1, 0), "tr": pv(2, 0), "l": pv(0, 1), "r": pv(2, 1),
                      "bl": pv(0, 2), "b": pv(1, 2), "br": pv(2, 2)}
     for y, row in enumerate(PLAN):
@@ -262,8 +281,9 @@ def ground(g):
             elif c == "q":
                 key = edge_key(*neighbours(PLAN, x, y, WATERISH))
                 if key == "c":
-                    # plain paving, with the two alternates scattered so long runs don't tile
-                    m = [q(1, 1), q(1, 1), q(3, 2), q(1, 1), q(4, 2), q(1, 1), q(1, 1)][(x * 3 + y * 5) % 7]
+                    # plain ashlar, with the two alternates scattered so long runs don't tile
+                    r = hashed(x, y, 1)
+                    m = q(3, 2) if r < 0.18 else q(4, 2) if r < 0.34 else q(1, 1)
                 else:
                     m = quay_pieces[key]
                 g.set(x, y, m)
@@ -276,7 +296,8 @@ def ground(g):
                 else:
                     g.set(x, y, SAND[key])
             elif c == "p":
-                # paths fade into grass on every side; against paving or the map edge they run on
+                # paths fade into grass on every side; against paving, buildings or the
+                # map edge they run on
                 n, s_, w_, e, *_ = neighbours(PLAN, x, y, "gt")
                 key = "c" if (n and s_) or (w_ and e) else edge_key(n, s_, w_, e, *[False] * 4)
                 g.set(x, y, PATH.get(key, PATH["c"]))
@@ -284,134 +305,159 @@ def ground(g):
                 n, s_, w_, e, *_ = neighbours(PLAN, x, y, "gtpqs")
                 key = edge_key(n, s_, w_, e, False, False, False, False)
                 if key == "c":
-                    m = pv(1, 1) if (x * 7 + y * 3) % 5 == 0 else pv(3, (x + y) % 3)
+                    # the interior pair lays the marble flags on a two-cell repeat; a few
+                    # plain limestone cells break it up
+                    r = hashed(x, y, 2)
+                    m = pv(3 + x % 2, 2) if r < 0.12 else pv(3 + x % 2, y % 2)
                 else:
                     m = paving_pieces[key]
                 g.set(x, y, m)
+            elif c == "t":
+                n, s_, w_, e, *_ = neighbours(PLAN, x, y, "gpsB")
+                g.set(x, y, TILLED[edge_key(n, s_, w_, e, *[False] * 4)])
             else:
                 g.set(x, y, GRASS)
+
+
+def wall_run(g, x0, x1, y):
+    """A west-east dry-stone wall from x0 to x1 inclusive."""
+    for x in range(x0, x1 + 1):
+        g.set(x, y, WALL["l"] if x == x0 else WALL["r"] if x == x1 else WALL["run"], True)
+
+
+def terrace_run(g, x0, x1, y, steps=()):
+    """Akti's retaining wall from x0 to x1, lower ground to the south, with steps."""
+    t = lambda cx: g.k("terrace", cx, 0)
+    for x in range(x0, x1 + 1):
+        if x in steps:
+            g.set(x, y, t(3), False)
+        else:
+            g.set(x, y, t(0) if x == x0 else t(4) if x == x1 else t(1 + (x - x0) % 2), True)
+
+
+def headland(g, x, y0, y1):
+    """The west headland from row y0 (its tip) to row y1 (its south face on grass),
+    repeating its solid middle row for length."""
+    rows = [0, 1] + [2] * (y1 - y0 - 2) + [3]
+    for j, cy in enumerate(rows):
+        g.put("headland", x, y0 + j, cy=cy, h=1)
 
 
 def compose():
     g = Grid(W, H)
     ground(g)
-    k = lambda key, cx, cy: g.k(key, cx, cy)
-    nets = lambda cx, cy: k("quay_nets", cx, cy)
-    rock = lambda x, y: g.set(x, y, SEA_BOULDER, True)
+    k = g.k
+    rocks = lambda x, y: g.put("sea_rocks", x, y)
 
-    # ---- the sea's rocks ---------------------------------------------------------
-    # the west headland breaks up into stacks and boulders beyond the mole
-    g.block(SEA_STACK, 0, 0)
-    g.block(SEA_ROCK_2X2, 0, 2)
-    g.block(SEA_STACK, 0, 5)
-    rock(1, 4)
-    g.block(SEA_ROCK_2X2, 0, 7)
-    rock(0, 9)
-    rock(3, 2)
-    # tide rocks off the beach point
-    g.block(SEA_STACK, 26, 0)
-    g.block(SEA_STACK, 24, 1)
-    rock(22, 2)
-    rock(23, 3)
-    rock(24, 4)
-    g.block(SEA_ROCK_2X2, 26, 2)
-    rock(20, 0)
+    # ---- the sea: the west headland runs out north, a channel, then a stack;
+    # tide rocks lie off the beach
+    headland(g, 0, 3, 8)
+    g.put("sea_stack", 0, 0)
+    rocks(3, 1)
+    rocks(24, 3)
+    rocks(17, 4)
+    rocks(20, 7)
 
-    # ---- the harbor ------------------------------------------------------------------
-    # the mole, with bollards and a net drying near its head
-    for x in (4, 9):
-        g.set(x, 4, k("quay_steps", 2, 0), True)
-    g.set(6, 5, nets(0, 0), True)
-    g.set(7, 5, nets(1, 0), True)
-    g.set(10, 5, nets(2, 0), True)
-    # the trireme Euploia, alongside the quay: stern, three midships, bow
-    kai = lambda cx, cy: k("boat_kaiki", cx, cy)
-    for j in range(2):
-        g.block([[kai(0, j), kai(1, j), kai(1, j), kai(1, j), kai(2, j)]], 5, 7 + j)
-    g.set(7, 9, k("quay_steps", 0, 0))            # steps down to her side: the gangplank
-    g.put("boat_kaiki", 16, 4)                     # fishing boats off the pier
-    g.put("boat_kaiki_left", 17, 7)
-    for x in (4, 11):
-        g.set(x, 9, k("quay_steps", 2, 0), True)   # bollards on the quay's coping
-    # cargo for the trireme, stacked against the Fisher's house
-    g.set(2, 11, nets(0, 1), True)
-    g.set(3, 11, nets(1, 1), True)
-    g.set(4, 11, nets(2, 1), True)
-    # the fish stall by the pier: crates of the catch and a jar of brine. The quay
-    # runs past it to the beach on rows 9 and 11.
-    g.set(17, 10, nets(2, 1), True)
-    g.set(18, 10, nets(2, 1), True)
-    g.set(19, 10, nets(3, 1), True)
+    # ---- the relic gates (SYSTEMS.md §1, D10): seen now, opened later ----------
+    # The Bronze Hammer: the tide rocks' spur, its grotto choked with marble rubble
+    # (bg events on row 4). Poseidon's Conch: the islet and its white shrine, out
+    # of reach across the water; gulls circle it (object events). The sand east of
+    # the shrine, x = 21, rows 2-4, is left for the landing when Surf arrives.
+    g.put("grotto", 26, 1)
+    g.put("shrine_poseidon", 19, 2)
 
-    # ---- buildings -------------------------------------------------------------------
+    # ---- the mole, built out from the headland --------------------------------
+    # its seaward coping is a parapet (keeps the player off row 3, so the map's
+    # border never shows above the harbor); harbor goods stand along its middle row
+    for x in range(2, 12):
+        g.solid[3, x] = True
+    g.put("boat_kaiki", 5, 1)                      # a kaiki moored outside the mole
+    g.put("bollard_line", 6, 3)
+    g.put("amphora_stack", 3, 4)
+    g.put("rope_coil", 7, 4)
+    g.put("octopus_line", 9, 4)
+
+    # ---- the basin: the trireme Euploia, her gangplank down to the quay --------
+    g.put("trireme", 4, 6)
+    g.put("quay_gangplank", 7, 9)
+    g.put("bollard_line", 4, 9)                    # her stern and bow lines
+    g.put("bollard_line", 11, 9)
+    g.put("boat_kaiki", 12, 1)                     # fishing boats off the pier
+    g.put("boat_kaiki_left", 16, 7)
+    g.put("rope_coil", 13, 9)
+
+    # ---- the quay ---------------------------------------------------------------
+    g.put("fish_stall", 16, 9)                     # the fishwife stands at (19,10)
+    g.put("amphora_stack", 2, 11)                  # goods for the trireme by the Fisher's door
+    g.put("rope_coil", 4, 11)
+    for y in (9, 10, 11):
+        g.set(20, y, k("quay_edges", 1, 0))        # the quay's flags run out onto the sand
+    g.set(15, 12, k("quay_edges", 0, 0))
+
+    # ---- the beach: tide rocks under the grotto, the boats hauled up, nets drying
+    g.put("rocks_sand", 24, 7)                     # Hydna's tide rocks; the Pearl is hidden here
+    g.put("beach_shells", 25, 9)
+    g.put("boat_beached", 22, 10)
+    g.put("net_poles", 26, 10)
+
+    # ---- the harbor street and the Agora ------------------------------------------
     g.put("house_small", 2, 12)                    # Glaukos the fisher, by the harbor
-    # the Agora, up a flight of steps where the harbor street meets the plaza
-    g.block(AGORA, 6, 13)
+    g.block(AGORA, 6, 13)                          # up its steps where the street meets the plaza
     g.set(7, 16, AGORA[3][1], False)
-    g.set(5, 12, k("wall_drystone", 0, 0), True)   # its yard wall, on the quay side
-    for x in range(6, 10):
-        g.set(x, 12, k("wall_drystone", 1 + x % 2, 0), True)
-    g.set(10, 12, k("wall_drystone", 3, 0), True)
-    terrace = lambda cx: k("terrace", cx, 0)
-    g.set(5, 17, terrace(0), True)
-    for x in range(6, 10):
-        g.set(x, 17, terrace(1 + x % 2), True)
-    g.set(10, 17, terrace(4), True)
-    g.set(7, 17, terrace(3), False)
-    g.set(8, 17, terrace(3), False)
-    # the Temple of Hestia on its podium, crowning the plaza
+    wall_run(g, 6, 10, 12)                         # its yard wall, on the quay side
+    g.set(14, 12, HERM, True)                      # THE QUAY
+
+    # ---- the temple on its podium -------------------------------------------------
     g.put("temple_hestia", 16, 12)
-    g.set(15, 18, terrace(0), True)
-    for x in range(16, 23):
-        g.set(x, 18, terrace(1 + x % 2), True)
-    g.set(23, 18, terrace(4), True)
-    g.set(19, 18, terrace(3), False)
+
+    # ---- the terraces: the Agora's retaining wall runs on west to the edge, and the
+    # temple's podium east through the olives, so the upper town reads as one level
+    # above the plaza and the gardens
+    terrace_run(g, -1, 11, 17, steps=(3, 4, 7, 8))
+    terrace_run(g, 15, 28, 18, steps=(19, 26))
     for (x, y) in ((15, 13), (15, 16), (23, 13), (23, 16)):
         g.cypress(x, y)                            # sacred cypresses flank the temple
-    # the Asclepeion, set back in its garden off the plaza
+
+    # ---- the plaza -----------------------------------------------------------------
+    g.put("krene", 9, 18)                          # the fountain house against the terrace
+    g.put("altar", 20, 19)                         # Hestia's altar before the temple stairs
+
+    # ---- the lower town: the town wall, the gate, gardens and yards ----------------
+    wall_run(g, -1, 9, 27)                         # the field wall, open at the gate
+    wall_run(g, 14, 28, 27)
     g.block(ASCLEPEION, 2, 19)
     g.set(3, 22, ASCLEPEION[3][1], False)
-    g.block([[TILLED[0], TILLED[2]], [TILLED[6], TILLED[8]]], 6, 21, solid=False)  # its herb bed
-    # a shut two-storey house below the plaza
-    g.put("house_large", 17, 21)
-    g.solid[25, 18] = True                         # no interior: its door is barred
-    # Poseidon's shrine out on the beach point, looking over the cove
-    g.put("shrine_poseidon", 25, 5)
-
-    # ---- signs -------------------------------------------------------------------------
+    g.put("boat_upturned", 7, 25)                  # Diktys sits at (9,25)
     g.set(14, 24, STELE, True)                     # AKTI TOWN, by the gate
-    g.set(22, 19, TRIPOD_TOP, False)               # a bronze tripod beside the temple's altar
-    g.set(22, 20, TRIPOD_BASE, True)
-    g.set(14, 12, HERM, True)                      # THE QUAY
-    # the south edge: a field wall below the shut house's lane
-    for x in range(14, 20):
-        g.set(x, 27, k("wall_drystone", 1 + x % 2, 0), True)
+    g.put("house_shuttered", 16, 23)
+    g.put("fig_tree", 20, 21)
+    g.put("laundry", 19, 26)
+    # the goat pen, its south side the field wall
+    wall_run(g, 22, 26, 23)
+    for y in range(24, 27):
+        g.set(22, y, WALL["w"], True)
+        g.set(26, y, WALL["e"], True)
 
-    # ---- Diktys's net yard by the gate --------------------------------------------------
-    g.set(6, 25, nets(0, 0), True)
-    g.set(7, 25, nets(1, 0), True)
-    g.set(8, 25, nets(2, 0), True)
-
-    # ---- the beach: boulders at its back, where the dunes meet the grass ----------------
-    for (x, y) in ((21, 10), (22, 11), (27, 9), (27, 10), (22, 7), (25, 9)):
-        g.set(x, y, BOULDER_SAND, True)
-    # an altar before the temple stairs, with its fire lit (Elaia's marble altar, on paving)
-    g.put("altar_square", 20, 19)
-
-    # ---- trees: olives in staggered depth, cypress spires between ---------------------
-    olives = [(0, 10), (0, 13), (1, 15), (0, 18), (0, 21), (0, 24), (0, 26), (2, 26), (5, 26),
-              (8, 26), (24, 12), (26, 14), (24, 16), (26, 19), (24, 21), (26, 23), (23, 26),
-              (25, 26), (20, 26)]
-    for (x, y) in sorted(olives, key=lambda p: -p[1]):
+    # ---- greenery: olives in uneven depth, cypress spires, umbrella pines, rocks and
+    # scrub, so the edges never settle into a rhythm
+    # upper town, west and east of the harbor street; then the lower town
+    for (x, y) in ((0, 10), (24, 14), (26, 16), (0, 19), (24, 20), (0, 25)):
         g.olive(x, y)
-    for (x, y) in ((0, 12), (0, 16), (1, 17), (0, 20), (1, 23), (4, 26), (7, 26),
-                   (2, 24), (9, 21), (16, 22), (22, 22), (27, 12), (27, 17), (22, 26),
-                   (27, 21), (27, 26), (22, 24)):
-        if not g.solid[y, x] and not g.solid[y + 1, x]:
+    for (x, y) in ((0, 14), (26, 12), (0, 22)):
+        if g.free(x, y, 2, 2):
+            g.pine(x, y)
+    for (x, y) in ((0, 12), (2, 15), (27, 19), (27, 23), (6, 25), (23, 21)):
+        if g.free(x, y, 1, 2):
             g.cypress(x, y)
-    for (x, y) in ((2, 16), (2, 17), (5, 15), (8, 22), (14, 21), (15, 21), (20, 19), (21, 19),
-                   (10, 13), (10, 14), (1, 19), (13, 20), (25, 18), (26, 18), (12, 25)):
-        if g.mid[y, x] == GRASS:
+    for (key, x, y) in (("shrubs", 24, 12), ("shrubs", 0, 16), ("rock_grass", 24, 16),
+                        ("rock_grass", 0, 21), ("shrubs", 6, 22), ("rock_grass", 25, 22),
+                        ("rock_grass", 8, 26)):
+        if g.free(x, y, 2, 1):
+            g.put(key, x, y)
+    for (x, y) in ((10, 13), (10, 15), (14, 14), (14, 16), (5, 15), (1, 13), (2, 18),
+                   (23, 15), (25, 17), (22, 22), (19, 22), (15, 22), (26, 19), (27, 25),
+                   (2, 23), (21, 24)):
+        if g.mid[y, x] == GRASS and not g.solid[y, x]:
             g.set(x, y, FLOWERS)
     return g
 
@@ -495,13 +541,13 @@ def render(out_dir):
 SCREENS = {
     "1_gate": (11, 26), "2_plaza": (12, 20), "3_temple": (19, 17), "4_street": (12, 14),
     "5_quay": (8, 10), "6_pier": (14, 6), "7_beach": (23, 8), "8_asclepeion": (4, 23),
-    "9_mole": (5, 5),
+    "9_mole": (5, 5), "10_garden": (19, 25),
 }
 
 
 def screens(out_dir, margin=8):
     """Crop GBA-screen views (15x10 tiles, the player on the 8th column and 5th row)
-    from the map padded with its border, at 2x."""
+    from the map padded with its border, at 2x, and tile them into one sheet."""
     from PIL import Image
     blocks = np.fromfile(ROOT / "data/layouts/AktiTown/map.bin", "<u2").reshape(H, W)
     bord = np.fromfile(ROOT / "data/layouts/AktiTown/border.bin", "<u2").reshape(2, 2)
@@ -514,13 +560,22 @@ def screens(out_dir, margin=8):
     big.astype("<u2").tofile(tmp)
     png = out_dir / "padded.png"
     subprocess.run([sys.executable, str(ROOT / "tools/ichor/render_map.py"), "--blockdata", str(tmp),
-                    "--width", str(big.shape[1]), "--primary", "aethos", "--secondary", "kalliste",
+                    "--width", str(big.shape[1]), "--primary", "aethos", "--secondary", "akti",
                     "--scale", "2", "-o", str(png)], check=True, stdout=subprocess.DEVNULL)
     im = Image.open(png)
     c = 32
+    crops = []
     for name, (px, py) in SCREENS.items():
         x0, y0 = (px - 7 + margin) * c, (py - 4 + margin) * c
-        im.crop((x0, y0, x0 + 15 * c, y0 + 10 * c)).save(out_dir / f"screen_{name}.png")
+        crop = im.crop((x0, y0, x0 + 15 * c, y0 + 10 * c))
+        crop.save(out_dir / f"screen_{name}.png")
+        crops.append(crop)
+    cols = 2
+    sheet = Image.new("RGB", (cols * 15 * c + (cols - 1) * 8, -(-len(crops) // cols) * (10 * c + 8) - 8),
+                      (24, 24, 32))
+    for i, crop in enumerate(crops):
+        sheet.paste(crop, ((i % cols) * (15 * c + 8), (i // cols) * (10 * c + 8)))
+    sheet.save(out_dir / "screens_sheet.png")
     tmp.unlink()
 
 
@@ -573,10 +628,27 @@ def reachable(blocks, start, extra_open=()):
     return seen
 
 
+FLYERS = ("WINGULL",)
+
+# Cells the scenes walk people across: they must stay open.
+SCRIPTED_PATHS = {
+    # Diktys from (9,25) to meet the player on the road, and back
+    "Diktys": [(x, 25) for x in range(9, 14)] + [(x, 26) for x in range(10, 14)],
+    # Alethea: up the road from (12,27), across the plaza, up to (19,18); then back
+    # across and up the harbor street to the quay
+    "Alethea": [(12, y) for y in range(19, 28)] + [(x, 19) for x in range(12, 20)]
+               + [(19, 18)] + [(13, y) for y in range(11, 20)],
+    # Kleon from (5,10): down, east along the back of the quay, down the street
+    "Kleon": [(5, 11)] + [(x, 11) for x in range(5, 12)] + [(11, y) for y in range(11, 17)],
+    # the player drawn up to the group from the trigger at x = 10
+    "Player": [(x, y) for x in (8, 9, 10) for y in (9, 10, 11) if (x, y) != (8, 9)],
+}
+
+
 def check():
     errors = []
     maps = {
-        "AktiTown": ("kalliste", W),
+        "AktiTown": ("akti", W),
         "AktiTown_Asclepeion": ("civic", 15),
         "AktiTown_Agora": ("civic", 13),
         "AktiTown_FishersHouse": ("oikia", 10),
@@ -597,6 +669,8 @@ def check():
                 errors.append(f"{name}: warp at ({x},{y}) is unreachable")
         for o in ev["object_events"]:
             x, y = o["x"], o["y"]
+            if any(f in o["graphics_id"] for f in FLYERS):
+                continue                           # gulls may hang over the water
             if not walkable(blocks, x, y):
                 errors.append(f"{name}: object {o.get('local_id', o['graphics_id'])} at ({x},{y}) stands on a solid cell")
         for t in ev["coord_events"]:
@@ -616,6 +690,13 @@ def check():
                 ok = walkable(blocks, x, H - 1)
                 if ok != (x in SEAM):
                     errors.append(f"AktiTown: south seam column {x} is {'open' if ok else 'closed'}")
+            top = min(y for (x, y) in reach if y < H - 1)
+            if top < 4:
+                errors.append(f"AktiTown: row {top} is walkable, so the border shows above the harbor")
+            for who, cells in SCRIPTED_PATHS.items():
+                for (x, y) in cells:
+                    if not walkable(blocks, x, y):
+                        errors.append(f"AktiTown: {who}'s scripted path crosses solid ({x},{y})")
     return errors
 
 
@@ -625,7 +706,7 @@ def main():
     ap.add_argument("--no-check", action="store_true")
     args = ap.parse_args()
     if not CAT.exists():
-        sys.exit(f"{CAT} is missing; run tools/ichor/art/kalliste_build.py --no-compile first")
+        sys.exit(f"{CAT} is missing; run tools/ichor/art/akti_build.py --no-compile first")
     write_layouts()
     if args.render:
         render(args.render)

@@ -7566,7 +7566,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHealer = {
     .tracks = TRACKS_FOOT,
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
-    .anims = sAnimTable_Standard,
+    .anims = sAnimTable_Nurse, // the heal scripts play Movement_PkmnCenterNurse_Bow
     .images = sPicTable_IchorHealer,
 };
 
@@ -7714,3 +7714,24 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteF = {
     .images = sPicTable_IchorAcolyteF,
 };
 // End of Ichor object events
+
+// Ichor: items lying in the world are small clay jars sealed with beeswax,
+// not Poke Balls (OBJ_EVENT_GFX_ITEM_BALL keeps its name). The folk palette
+// is already loaded wherever townsfolk stand, so the jar costs no extra slot.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_FOLK,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_1,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = sOamTables_16x16,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorItemJar,
+};
