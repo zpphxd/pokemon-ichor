@@ -80,6 +80,16 @@ def pole(f, top, bottom, mat, **kw):
     return f.spans(y0, spans, mat, **kw)
 
 
+def bar(f, a, b, mat, **kw):
+    """A 3 px bar for shallow slopes (outline, metal, outline), column by column."""
+    (x0, y0), (x1, y1) = a, b
+    m = np.zeros((f.h, f.w), bool)
+    for x in range(min(x0, x1), max(x0, x1) + 1):
+        yc = int(round(y0 + (y1 - y0) * (x - x0) / (x1 - x0)))
+        m[yc - 1:yc + 2, x] = True
+    return f.add(m, mat, **kw)
+
+
 def stagger(x0, y0, x1, y1, sx, sy):
     pts = []
     for j, y in enumerate(range(y0, y1 + 1, sy)):
@@ -690,12 +700,183 @@ def augur():
     return f, pal
 
 
+# --------------------------------------------------------------------------
+# Acolytes of Hestia: white and saffron robes, hearth-ash smudges.
+# --------------------------------------------------------------------------
+
+ACOLYTE_ROBES = [
+    ("wh_l", (248, 248, 240)), ("wh_m", (216, 208, 192)), ("wh_d", (168, 160, 152)),
+    ("saf_l", (248, 200, 72)), ("saf_m", (224, 144, 32)), ("saf_d", (160, 88, 32)),
+    ("fire", (232, 88, 40)),
+    ("ash", (120, 112, 112)),
+]
+
+
+def acolyte_robe(f, saffron, white):
+    """Ankle-length white chiton, a saffron himation over the far shoulder, saffron hem."""
+    body = f.poly([(26, 23), (39, 23), (41, 32), (42, 44), (44, 58), (21, 58), (23, 44), (24, 32)], white)
+    for x in (28, 33, 38):
+        f.shade_poly([(x, 46), (x + 1, 46), (x + 1 + (x - 33) // 4, 57), (x + (x - 33) // 4, 57)], 0.45)
+    f.rect(19, 55, 46, 57, saffron, clip=body, noline=True)
+    return body
+
+
+def acolyte_m():
+    """Lampon, the hearth's keeper: an ember held out, carefully, in bronze tongs."""
+    pal = Palette([("ink", INK), *SKIN_TAN, ("brown", (96, 56, 40)), ("hair", (56, 40, 32)), *ACOLYTE_ROBES])
+    skin = skin_mat("brown")
+    white = Mat(["wh_d", "wh_m", "wh_l"], outline="brown", wx=0.85, wy=0.25, cuts=[0.55, 0.85])
+    saffron = Mat(["saf_d", "saf_m", "saf_l"], wx=0.85, wy=0.25, cuts=[0.3, 0.7])
+    bronze = Mat(["saf_d", "saf_m"], cuts=[0.6])
+    lea = Mat(["brown"])
+    f = Fig(pal)
+
+    acolyte_robe(f, saffron, white)
+    f.poly([(23, 58), (28, 58), (28, 61), (22, 61)], lea)
+    f.poly([(35, 58), (40, 58), (41, 61), (35, 61)], lea)
+    # saffron himation slung over the far shoulder to the near hip
+    f.poly([(33, 23), (40, 23), (42, 31), (41, 40), (31, 47), (24, 47), (23, 42), (32, 35)], saffron)
+    f.rect(29, 19, 34, 24, skin, group=400)
+    # both arms forward on the tongs
+    f.thick_line([(26, 25), (23, 31), (27, 33)], 5, skin, group=200)
+    f.thick_line([(40, 26), (42, 32), (37, 36)], 5, skin, group=300)
+    # the tongs: a bronze bar held out to his right, hinged near his hands
+    bar(f, (38, 36), (12, 26), bronze, group=500)
+
+    # hearth ash on the hem and sleeve
+    f.pxs([(22, 54), (23, 53), (25, 54), (27, 55), (42, 53)], "ash")
+    # hands on the tongs
+    f.patch(25, 29, [
+        ".bbbb.",
+        "bLLLLb",
+        "bLbLMb",
+        "bLLMMb",
+        ".bbbb.",
+    ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
+    f.patch(34, 32, [
+        ".bbbb.",
+        "bLLLMb",
+        "bLbMMb",
+        ".bbbb.",
+    ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
+    # the jaws and the glowing ember
+    f.patch(3, 20, [
+        "..F.Y.......",
+        "...Y..F.....",
+        "...kkkkkk...",
+        "..kSSSSSSkk.",
+        ".kSkkkkkkSSk",
+        "..kFYYFk.kSS",
+        "..kYWWYk.kSS",
+        "..kFYYFk.kSS",
+        ".kSkkkkkkSSk",
+        "..kSSSSSSkk.",
+        "...kkkkkk...",
+    ], {"k": "ink", "F": "fire", "Y": "saf_l", "W": "wh_l", "S": "saf_m"})
+    # head: short dark hair, a smear of ash on his cheek, alarmed
+    f.patch(24, 4, [
+        ".....kkkkkk.........",
+        "...kkHHhHHHkk.......",
+        "..kHHhHHHHhHHk......",
+        ".kHhHHHHhHHHHHk.....",
+        ".kHHHHhHHHHhHHHk....",
+        "kHhHHHHHHHHHHhHk....",
+        "kHHHLHHHLLHHHHHk....",
+        "kHLLHLLLHLLMHHHk....",
+        ".bLHLLLLLHHMbHHk....",
+        ".bLWkLLLLkWMDMbk....",
+        "bLLWkLLLLkWMDMbk....",
+        "bLLLLLLLLLMMMbHk....",
+        ".bLLDLLLLMMMbHk.....",
+        ".bLLLLLLAAMMbk......",
+        "..bLLkkkLAMbk.......",
+        "..bLLkDkLMMbk.......",
+        "...bLLLLMMbk........",
+        "....bbbbbbk.........",
+    ], {"k": "ink", "H": "hair", "h": "brown", "b": "brown", "L": "skin_l", "M": "skin_m", "D": "skin_d",
+        "W": "wh_l", "A": "ash"})
+    return f, pal
+
+
+def acolyte_f():
+    """Pyrrha and Aithra: auburn hair bound in saffron, a clay oil lamp held high."""
+    pal = Palette([("ink", INK), *SKIN_FAIR, ("hair_d", (112, 48, 32)), ("hair_l", (176, 88, 48)),
+                   *ACOLYTE_ROBES])
+    skin = skin_mat("hair_d")
+    white = Mat(["wh_d", "wh_m", "wh_l"], outline="hair_d", wx=0.85, wy=0.25, cuts=[0.55, 0.85])
+    saffron = Mat(["saf_d", "saf_m", "saf_l"], wx=0.85, wy=0.25, cuts=[0.3, 0.7])
+    lea = Mat(["hair_d"])
+    f = Fig(pal)
+
+    body = acolyte_robe(f, saffron, white)
+    f.poly([(23, 58), (28, 58), (28, 61), (22, 61)], lea)
+    f.poly([(35, 58), (40, 58), (41, 61), (35, 61)], lea)
+    # peplos overfold to the waist, cinched with a saffron girdle
+    f.poly([(24, 24), (41, 24), (43, 34), (22, 34)], white, group=150)
+    f.rect(21, 34, 44, 35, saffron, clip=body, noline=True)
+    f.shade_poly([(31, 26), (32, 26), (32, 33), (31, 33)], 0.4)
+    f.rect(29, 19, 34, 24, skin, group=400)
+    # far arm, fist on her hip
+    f.thick_line([(40, 25), (45, 30), (41, 34)], 5, skin, group=300)
+    # near arm raises the lamp
+    f.poly([(23, 23), (28, 23), (28, 28), (24, 29)], white, group=210)
+    f.thick_line([(25, 26), (20, 30)], 5, skin, group=200)
+    f.thick_line([(20, 30), (17, 23)], 4, skin, group=200)
+
+    # hearth ash on the hem
+    f.pxs([(23, 54), (24, 53), (26, 54), (40, 53), (41, 54)], "ash")
+    # clay oil lamp with its flame on the nozzle
+    f.patch(8, 6, [
+        "..k...........",
+        ".kYk..........",
+        ".kYYk.........",
+        "kYWYk.........",
+        "kFWWYk........",
+        ".kFFk.........",
+        ".kkkkkkkkkk...",
+        "kTTTTTTTTTkk..",
+        ".kkTTTTTTTTTk.",
+        "...kttttttttk.",
+        "....kkkkkkkk..",
+    ], {"k": "ink", "Y": "saf_l", "W": "wh_l", "F": "fire", "T": "hair_l", "t": "hair_d"})
+    f.patch(14, 16, [
+        ".bbbb.",
+        "bLLLLb",
+        "bLbLMb",
+        "bLLMMb",
+        ".bbbb.",
+    ], {"b": "hair_d", "L": "skin_l", "M": "skin_m"})
+    # head: auburn hair in a bun tied with saffron, ash on her nose, grinning
+    f.patch(24, 4, [
+        "...........kkkk.....",
+        "......kkkkkhHHHk....",
+        "....kkhhHHHkSSSk....",
+        "...khhHHHHHHkHHHk...",
+        "..khHHHHHHHHHkkk....",
+        ".khHHHHHHHHHHHHk....",
+        ".khHHLLLHHHHHHHk....",
+        "khHLLLLLLLLMHHHk....",
+        "kHkkkLLLLkkkMbHk....",
+        ".bLWkLLLLkWMDMbk....",
+        ".bLLLLLLLLLMMDbHk...",
+        "bLLLLDAALLMMMbHk....",
+        ".bLLDDLLLMMMbHHk....",
+        "..bLLFFFLMMbHHk.....",
+        "...bLLLLMMbkHk......",
+        "....bbbbbbk.kk......",
+    ], {"k": "ink", "H": "hair_d", "h": "hair_l", "S": "saf_l", "b": "hair_d", "L": "skin_l",
+        "M": "skin_m", "D": "skin_d", "W": "wh_l", "A": "ash", "F": "fire"})
+    return f, pal
+
+
 CLASSES = {
     "shepherd": shepherd,
     "harvester": harvester,
     "goatherd": goatherd,
     "hoplite": hoplite,
     "augur": augur,
+    "acolyte_m": acolyte_m,
+    "acolyte_f": acolyte_f,
 }
 
 
