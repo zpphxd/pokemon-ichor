@@ -233,12 +233,12 @@ PLAN = [
     #         1111111111222222222
     # 234567890123456789012345678
     "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",  # 0
-    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",  # 1
-    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",  # 2
-    "~~qqqqqqqqqq~~~~~~~~~~~~~~ss",  # 3
-    "~~qqqqqqqqqq~~~~~~~~~~~~~sss",  # 4
-    "BBqqqqqqqqqq~~qq~~~~~~~sssss",  # 5
-    "BBqq~~~~~~~~~~qq~~~~~~ssssss",  # 6
+    "~~~~~~~~~~~~~~~~~~sssss~~~~~",  # 1
+    "~~~~~~~~~~~~~~~~~~sssss~~~~~",  # 2
+    "~~qqqqqqqqqq~~~~~~sssss~~~~~",  # 3
+    "~~qqqqqqqqqq~~~~~~sssss~~~ss",  # 4
+    "BBqqqqqqqqqq~~qq~~sssss~~sss",  # 5
+    "BBqq~~~~~~~~~~qq~~~~~~~sssss",  # 6
     "BBqq~~~~~~~~~~qq~~~~~~ssssss",  # 7
     "ggqq~~~~~~~~~~qq~~~~~sssssss",  # 8
     "ggqqqqqqqqqqqqqqqqqqssssssss",  # 9
@@ -354,11 +354,17 @@ def compose():
     headland(g, 0, 3, 8)
     g.put("sea_stack", 0, 0)
     rocks(3, 1)
-    g.put("sea_stack", 24, 0)
-    rocks(27, 1)
-    rocks(21, 2)
-    rocks(22, 4)
+    rocks(24, 3)
+    rocks(17, 4)
     rocks(20, 7)
+
+    # ---- the relic gates (SYSTEMS.md §1, D10): seen now, opened later ----------
+    # The Bronze Hammer: the tide rocks' spur, its grotto choked with marble rubble
+    # (bg events on row 4). Poseidon's Conch: the islet and its white shrine, out
+    # of reach across the water; gulls circle it (object events). The sand east of
+    # the shrine, x = 21, rows 2-4, is left for the landing when Surf arrives.
+    g.put("grotto", 26, 1)
+    g.put("shrine_poseidon", 19, 2)
 
     # ---- the mole, built out from the headland --------------------------------
     # its seaward coping is a parapet (keeps the player off row 3, so the map's
@@ -376,7 +382,7 @@ def compose():
     g.put("quay_gangplank", 7, 9)
     g.put("bollard_line", 4, 9)                    # her stern and bow lines
     g.put("bollard_line", 11, 9)
-    g.put("boat_kaiki", 16, 3)                     # fishing boats off the pier
+    g.put("boat_kaiki", 12, 1)                     # fishing boats off the pier
     g.put("boat_kaiki_left", 16, 7)
     g.put("rope_coil", 13, 9)
 
@@ -388,11 +394,9 @@ def compose():
         g.set(20, y, k("quay_edges", 1, 0))        # the quay's flags run out onto the sand
     g.set(15, 12, k("quay_edges", 0, 0))
 
-    # ---- the beach: Poseidon's shrine on the point, the boats hauled up, nets drying
-    g.put("shrine_poseidon", 26, 4)
-    g.put("rocks_sand", 24, 6)                     # Hydna's tide rocks; the Pearl is hidden here
-    g.put("beach_shells", 24, 8)
-    g.put("rocks_sand", 26, 8)
+    # ---- the beach: tide rocks under the grotto, the boats hauled up, nets drying
+    g.put("rocks_sand", 24, 7)                     # Hydna's tide rocks; the Pearl is hidden here
+    g.put("beach_shells", 25, 9)
     g.put("boat_beached", 22, 10)
     g.put("net_poles", 26, 10)
 
@@ -624,6 +628,8 @@ def reachable(blocks, start, extra_open=()):
     return seen
 
 
+FLYERS = ("WINGULL",)
+
 # Cells the scenes walk people across: they must stay open.
 SCRIPTED_PATHS = {
     # Diktys from (9,25) to meet the player on the road, and back
@@ -663,6 +669,8 @@ def check():
                 errors.append(f"{name}: warp at ({x},{y}) is unreachable")
         for o in ev["object_events"]:
             x, y = o["x"], o["y"]
+            if any(f in o["graphics_id"] for f in FLYERS):
+                continue                           # gulls may hang over the water
             if not walkable(blocks, x, y):
                 errors.append(f"{name}: object {o.get('local_id', o['graphics_id'])} at ({x},{y}) stands on a solid cell")
         for t in ev["coord_events"]:
