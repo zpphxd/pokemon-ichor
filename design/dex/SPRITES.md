@@ -87,6 +87,7 @@ The user's words: "all legendaries and mythical olympians constilations etc need
 2. **One artist per species.** The chosen concept is rendered as its own job, with as many passes as it takes.
 
 **The bar:**
+- **Cohesion.** The user rejected a whole round of concepts: "they all feel disjointed". Those were props bolted onto a body: an hourglass in a chest, gears on the shoulders, a falcon whose body was a sand glass. A legendary is one creature whose motifs grow out of its anatomy, the way Dialga's time-crest, chest gem and plates are its body, or Lugia's fins and dorsal plates are. Use flowing, unified silhouettes, and give paired or trio legendaries a shared design language. The user's touchstone: "lugia meets dialga".
 - **Size:** fill the frame, about 60–64 px. The silhouette must be unmistakable at 1x.
 - **Presence:** a sense of power and mystery. Use otherworldly effects that belong to the myth: auras, glowing runes or meanders, celestial motifs, threads of fate, ichor-gold light, sea spray, storm, shadow.
 - **Palette:** all 15 colors used deliberately, with a signature glow color.
