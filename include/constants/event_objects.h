@@ -446,6 +446,9 @@ enum
     OBJ_EVENT_GFX_ICHOR_ACOLYTE_F,
     // Field objects (16x16, tools/ichor/art/sprites_objects.py)
     OBJ_EVENT_GFX_ICHOR_TABLET,
+    // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
+    OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
+    OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,

@@ -610,6 +610,24 @@ beat("06_harbor_before", function()
   })
 end)
 
+-- Akti's two newest homes (MAP_DESIGN.md §2): Kapra the loose goat and Aigon's
+-- Soothe Bell; Doris's grotto lore (her trade waits for the laurel, in 08_after)
+beat("06_homes", function()
+  talk(L.npc(AK .. "LooseGoat"), { shotBefore = "kapra" })
+  flagsSet({ "FLAG_AKTI_GOAT_HOME" }, "Kapra went home")
+  L.useWarp(S.MAP_GOATHERDS)
+  shot("goatherds_house")
+  collect(npc("AktiTown_GoatherdsHouse_EventScript_Aigon"), "FLAG_GOT_SOOTHE_BELL", "ITEM_SOOTHE_BELL",
+          "Aigon's Soothe Bell", { shotBefore = "aigon" })
+  talk(L.sign("AktiTown_GoatherdsHouse_EventScript_Hearth"), { shotBefore = "goatherds_hearth" })
+  L.useWarp(S.MAP_AKTI)
+  L.useWarp(S.MAP_DIVERS)
+  shot("divers_house")
+  talk(L.npc("AktiTown_DiversHouse_EventScript_Doris"), { shotBefore = "doris" })
+  talk(L.sign("AktiTown_DiversHouse_EventScript_WaterClock"), { shotBefore = "water_clock" })
+  L.useWarp(S.MAP_AKTI)
+end)
+
 -- Beat 7: the Temple of Hestia ----------------------------------------------------------------------
 
 local T = "AktiTown_TempleOfHestia_EventScript_"
@@ -681,6 +699,11 @@ end)
 beat("08_after", function()
   talk(L.npc(AK .. "Nausikles"), { shotBefore = "nausikles_after" })
   collect(ball("FLAG_ITEM_AKTI_POTION"), "FLAG_ITEM_AKTI_POTION", "ITEM_POTION", "the Potion among the quay crates")
+  -- with the laurel, Doris trades her shell bell for the beach's Heart Scale
+  L.useWarp(S.MAP_DIVERS)
+  collect(npc("AktiTown_DiversHouse_EventScript_Doris"), "FLAG_GOT_SHELL_BELL", "ITEM_SHELL_BELL",
+          "Doris's shell bell, for the Heart Scale", { answers = { "yes" }, shotBefore = "doris_trade" })
+  L.useWarp(S.MAP_AKTI)
   -- re-entering Akti after the end replays nothing
   L.useWarp(S.MAP_ASCLEPEION)
   L.useWarp(S.MAP_AKTI)

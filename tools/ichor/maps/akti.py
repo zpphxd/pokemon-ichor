@@ -34,6 +34,10 @@ ROOT = Path(__file__).resolve().parents[3]
 CAT = ROOT / "build/akti/catalog.json"
 W, H = 28, 28
 SEAM = range(10, 14)  # the walkable columns on the Route 1 seam
+# The engine draws a connected map with the tilesets of the map the player stands
+# on, so from Route 1 (aethos + agros) Akti's rows nearest the seam must use only
+# aethos metatiles (MAP_DESIGN.md §5). check() fails on any Akti piece there.
+SEAM_ROWS = 6
 
 # ---------------------------------------------------------------------------
 # aethos ids (General's numbering; see TILES_aethos.md)
@@ -67,6 +71,9 @@ ASCLEPEION = [[0x048, 0x049, 0x04A, 0x04B], [0x050, 0x051, 0x052, 0x053],
               [0x058, 0x059, 0x05A, 0x05B], [0x060, 0x061, 0x062, 0x063]]
 AGORA = [[0x028, 0x029, 0x029, 0x02B], [0x030, 0x031, 0x032, 0x033],
          [0x038, 0x039, 0x03A, 0x03B], [0x060, 0x041, 0x042, 0x043]]
+# the farmhouse (General's route house): tiled roof, whitewash, door 021
+FARMHOUSE = [[0x008, 0x009, 0x00A], [0x010, 0x011, 0x012],
+             [0x018, 0x019, 0x01A], [0x020, 0x021, 0x022]]
 
 SURF_BEHAVIORS = {"MB_POND_WATER", "MB_INTERIOR_DEEP_WATER", "MB_DEEP_WATER", "MB_OCEAN_WATER",
                   "MB_SOOTOPOLIS_DEEP_WATER"}
@@ -233,11 +240,11 @@ PLAN = [
     #         1111111111222222222
     # 234567890123456789012345678
     "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",  # 0
-    "~~~~~~~~~~~~~~~~~~sssss~~~~~",  # 1
-    "~~~~~~~~~~~~~~~~~~sssss~~~~~",  # 2
-    "~~qqqqqqqqqq~~~~~~sssss~~~~~",  # 3
+    "~~~~~~~~~~~~~~~~~~ssss~~~~~~",  # 1
+    "~~~~~~~~~~~~~~~~~ssssss~~~~~",  # 2
+    "~~qqqqqqqqqq~~~~~ssssss~~~~~",  # 3
     "~~qqqqqqqqqq~~~~~~sssss~~~ss",  # 4
-    "BBqqqqqqqqqq~~qq~~sssss~~sss",  # 5
+    "BBqqqqqqqqqq~~qq~~~sss~~~sss",  # 5
     "BBqq~~~~~~~~~~qq~~~~~~~sssss",  # 6
     "BBqq~~~~~~~~~~qq~~~~~~ssssss",  # 7
     "ggqq~~~~~~~~~~qq~~~~~sssssss",  # 8
@@ -388,8 +395,9 @@ def compose():
 
     # ---- the quay ---------------------------------------------------------------
     g.put("fish_stall", 16, 9)                     # the fishwife stands at (19,10)
-    g.put("amphora_stack", 2, 11)                  # goods for the trireme by the Fisher's door
-    g.put("rope_coil", 4, 11)
+    # goods for the trireme by the Fisher's door; (4,11) stays open, so the quay's
+    # west end and its Potion can be reached past Kleon before the ending
+    g.put("amphora_stack", 2, 11)
     for y in (9, 10, 11):
         g.set(20, y, k("quay_edges", 1, 0))        # the quay's flags run out onto the sand
     g.set(15, 12, k("quay_edges", 0, 0))
@@ -422,18 +430,26 @@ def compose():
     g.put("krene", 9, 18)                          # the fountain house against the terrace
     g.put("altar", 20, 19)                         # Hestia's altar before the temple stairs
 
+    # ---- the divers' house above the beach (Doris, Hydna's grandmother), its yard on
+    # the olive terrace; door at (26,14)
+    g.put("house_small_r", 24, 12)
+
     # ---- the lower town: the town wall, the gate, gardens and yards ----------------
+    # Rows 22-27 sit on the Route 1 seam: aethos metatiles only (see SEAM_ROWS).
+    # Diktys's upturned boat is two object events, so it looks right from Route 1.
     wall_run(g, -1, 9, 27)                         # the field wall, open at the gate
     wall_run(g, 14, 28, 27)
     g.block(ASCLEPEION, 2, 19)
     g.set(3, 22, ASCLEPEION[3][1], False)
-    g.put("boat_upturned", 7, 25)                  # Diktys sits at (9,25)
     g.set(14, 24, STELE, True)                     # AKTI TOWN, by the gate
-    g.put("house_shuttered", 16, 23)
-    g.put("fig_tree", 20, 21)
-    g.put("laundry", 19, 26)
-    # the goat pen, its south side the field wall
-    wall_run(g, 22, 26, 23)
+    g.block(FARMHOUSE, 17, 22)                     # Aigon the goatherd's, by his pen
+    g.set(18, 25, FARMHOUSE[3][1], False)          # its door
+    g.put("fig_tree", 24, 20)
+    g.put("laundry", 0, 16)                        # washing by the Fisher's house
+    # the goat pen, its south side the field wall; a gap in its north wall at
+    # (24,23) lets the player in to talk to the goats (QA P11)
+    wall_run(g, 22, 23, 23)
+    wall_run(g, 25, 26, 23)
     for y in range(24, 27):
         g.set(22, y, WALL["w"], True)
         g.set(26, y, WALL["e"], True)
@@ -441,22 +457,21 @@ def compose():
     # ---- greenery: olives in uneven depth, cypress spires, umbrella pines, rocks and
     # scrub, so the edges never settle into a rhythm
     # upper town, west and east of the harbor street; then the lower town
-    for (x, y) in ((0, 10), (24, 14), (26, 16), (0, 19), (24, 20), (0, 25)):
+    for (x, y) in ((0, 10), (24, 16), (0, 19), (0, 25), (20, 22)):
         g.olive(x, y)
-    for (x, y) in ((0, 14), (26, 12), (0, 22)):
+    for (x, y) in ((0, 14), (0, 22)):
         if g.free(x, y, 2, 2):
             g.pine(x, y)
-    for (x, y) in ((0, 12), (2, 15), (27, 19), (27, 23), (6, 25), (23, 21)):
+    for (x, y) in ((0, 12), (27, 16), (27, 19), (27, 23), (6, 25), (23, 21), (20, 25),
+                   (16, 23)):
         if g.free(x, y, 1, 2):
             g.cypress(x, y)
-    for (key, x, y) in (("shrubs", 24, 12), ("shrubs", 0, 16), ("rock_grass", 24, 16),
-                        ("rock_grass", 0, 21), ("shrubs", 6, 22), ("rock_grass", 25, 22),
-                        ("rock_grass", 8, 26)):
+    for (key, x, y) in (("rock_grass", 0, 21),):
         if g.free(x, y, 2, 1):
             g.put(key, x, y)
     for (x, y) in ((10, 13), (10, 15), (14, 14), (14, 16), (5, 15), (1, 13), (2, 18),
-                   (23, 15), (25, 17), (22, 22), (19, 22), (15, 22), (26, 19), (27, 25),
-                   (2, 23), (21, 24)):
+                   (23, 15), (2, 15), (26, 19), (27, 25), (2, 23), (21, 24), (6, 22),
+                   (8, 26), (22, 22), (24, 22), (19, 26), (15, 22)):
         if g.mid[y, x] == GRASS and not g.solid[y, x]:
             g.set(x, y, FLOWERS)
     return g
@@ -487,6 +502,9 @@ ROOMS = {
     "AktiTown_Agora": ("akti_agora", 13, 0x200),
     "AktiTown_FishersHouse": ("fishers_house", 10, 0x210),
 }
+# The divers' house and the goatherd's farmhouse are composed from the oikia
+# catalog by akti_homes.py, which writes their layouts itself.
+HOMES = ("AktiTown_DiversHouse", "AktiTown_GoatherdsHouse")
 
 SOLID = 1 << 10
 GROUND = 3 << 12
@@ -516,6 +534,9 @@ def write_layouts():
             blocks = asclepeion_without_stairs(blocks)
         blocks.astype("<u2").tofile(d / "map.bin")
         np.full(4, void, np.uint16).astype("<u2").tofile(d / "border.bin")
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import akti_homes
+    akti_homes.build()
 
 
 # ---------------------------------------------------------------------------
@@ -531,7 +552,7 @@ def render(out_dir):
                    stdout=subprocess.DEVNULL)
     overlay(png, ROOT / "data/layouts/AktiTown/map.bin", W, out_dir / "akti_town_walk.png", 2)
     screens(out_dir)
-    for name in ROOMS:
+    for name in list(ROOMS) + list(HOMES):
         lid = "LAYOUT_" + re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", name).upper()
         subprocess.run(rm + [lid, "--scale", "3", "-o", str(out_dir / f"{name.lower()}.png")], check=True,
                        stdout=subprocess.DEVNULL)
@@ -652,6 +673,8 @@ def check():
         "AktiTown_Asclepeion": ("civic", 15),
         "AktiTown_Agora": ("civic", 13),
         "AktiTown_FishersHouse": ("oikia", 10),
+        "AktiTown_DiversHouse": ("oikia", 9),
+        "AktiTown_GoatherdsHouse": ("oikia", 11),
     }
     for name, (sec, width) in maps.items():
         blocks = np.fromfile(ROOT / "data/layouts" / name / "map.bin", "<u2").reshape(-1, width)
@@ -685,11 +708,38 @@ def check():
                 continue
             if not any(p in reach and p not in objects for p in fronts):
                 errors.append(f"{name}: bg event at ({x},{y}) can't be read from any walkable tile")
+        if name != "AktiTown":
+            # indoors, people stand where they stand: nobody may wall off a thing to
+            # read or another person to talk to (the town's scenes move people, so it
+            # keeps the plain check above)
+            still = blocks.copy()
+            for o in ev["object_events"]:
+                if o["movement_type"] not in ("MOVEMENT_TYPE_WANDER_AROUND",):
+                    still[o["y"], o["x"]] |= SOLID
+            reach_still = reachable(still, start, extra_open=set(warps))
+            targets = [(b["x"], b["y"], "bg event") for b in ev["bg_events"]]
+            targets += [(o["x"], o["y"], "object") for o in ev["object_events"]]
+            hh, ww = blocks.shape
+            for (x, y, what) in targets:
+                fronts = []
+                for dx, dy in ((0, 1), (0, -1), (-1, 0), (1, 0)):
+                    fx, fy = x + dx, y + dy
+                    fronts.append((fx, fy))
+                    if 0 <= fx < ww and 0 <= fy < hh and behavior(int(blocks[fy, fx]) & 0x3FF, sec) == "MB_COUNTER":
+                        fronts.append((fx + dx, fy + dy))      # talked to across a counter
+                if not any(p in reach_still for p in fronts):
+                    errors.append(f"{name}: the {what} at ({x},{y}) can't be reached past the people in the room")
         if name == "AktiTown":
             for x in range(width):
                 ok = walkable(blocks, x, H - 1)
                 if ok != (x in SEAM):
                     errors.append(f"AktiTown: south seam column {x} is {'open' if ok else 'closed'}")
+            for y in range(H - SEAM_ROWS, H):
+                for x in range(width):
+                    mid = int(blocks[y, x]) & 0x3FF
+                    if mid >= 0x200:
+                        errors.append(f"AktiTown: ({x},{y}) is Akti metatile 0x{mid:03X}, within "
+                                      f"{SEAM_ROWS} rows of the Route 1 seam; use aethos there")
             top = min(y for (x, y) in reach if y < H - 1)
             if top < 4:
                 errors.append(f"AktiTown: row {top} is walkable, so the border shows above the harbor")
@@ -697,6 +747,14 @@ def check():
                 for (x, y) in cells:
                     if not walkable(blocks, x, y):
                         errors.append(f"AktiTown: {who}'s scripted path crosses solid ({x},{y})")
+            # QA P11: the pen's goats must be reachable to talk to, and QA m1: the
+            # quay's west end (its Potion at (2,10)) must be reachable past Kleon at (5,10)
+            if (24, 24) not in reach:
+                errors.append("AktiTown: the goat pen's gate at (24,23) is shut; nobody can talk to the goats")
+            past_kleon = blocks.copy()
+            past_kleon[10, 5] |= SOLID
+            if (3, 10) not in reachable(past_kleon, (11, H - 1)):
+                errors.append("AktiTown: Kleon at (5,10) cuts off the quay's west end and its Potion")
     return errors
 
 

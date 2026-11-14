@@ -251,6 +251,46 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L",
+      "x": 7,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R",
+      "x": 8,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_AKTI_KAPRA",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(SKIDDO)",
+      "x": 2,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AktiTown_EventScript_LooseGoat",
+      "flag": "FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT"
     }
   ],
   "warp_events": [
@@ -280,6 +320,20 @@
       "y": 16,
       "elevation": 0,
       "dest_map": "MAP_AKTI_TOWN_TEMPLE_OF_HESTIA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 26,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_AKTI_TOWN_DIVERS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_AKTI_TOWN_GOATHERDS_HOUSE",
       "dest_warp_id": "0"
     }
   ],
@@ -413,14 +467,6 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "AktiTown_EventScript_FishersHouseSign"
-    },
-    {
-      "type": "sign",
-      "x": 18,
-      "y": 25,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "AktiTown_EventScript_ShutHouse"
     },
     {
       "type": "hidden_item",
