@@ -95,10 +95,10 @@
 #define FLAG_ICHOR_ITEM_KRONION_ESCAPE_ROPE 0x49 // Ichor: item ball: Kronion Hill Escape Rope
 #define FLAG_ICHOR_GOT_ELAIA_RELIC_COPPER 0x4A // Ichor: found the Relic Copper in Elaia's well
 #define FLAG_ICHOR_ITEM_ELAIA_POTION 0x4B // Ichor: item ball: Potion by Elaia's olive press
-#define FLAG_ICHOR_AKTI_GOAT_HOME 0x4C // Ichor: Akti: Kapra, Aigon's loose goat, was sent home
-#define FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT 0x4D // Ichor: Akti: object flag that hides Kapra, the loose goat
-#define FLAG_ICHOR_GOT_SOOTHE_BELL 0x4E // Ichor: Akti: Aigon gave his goat's old bell (Soothe Bell)
-#define FLAG_ICHOR_GOT_SHELL_BELL 0x4F // Ichor: Akti: Doris traded her shell bell for a Heart Scale
+#define FLAG_ICHOR_GOT_GLYKERA_CAKES 0x4C // Ichor: Glykera traded honey cakes for Melitta's honey
+#define FLAG_ICHOR_DID_KIMON_TRADE 0x4D // Ichor: traded Kimon a Wooloo for his Finizen, Arion
+#define FLAG_ICHOR_GOT_KIMON_PEARLS 0x4E // Ichor: Kimon's pearls, for the Hearth Laurel
+#define FLAG_ICHOR_AKTI_GOAT_HOME 0x4F // Ichor: Akti: Kapra, Aigon's loose goat, was sent home
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
@@ -106,8 +106,8 @@
 #define FLAG_RESCUED_BIRCH                       0x52
 #define FLAG_LEGENDARIES_IN_SOOTOPOLIS           0x53
 
-#define FLAG_UNUSED_0x054                    0x54  // Unused Flag
-#define FLAG_UNUSED_0x055                    0x55  // Unused Flag
+#define FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT      0x54 // Ichor: Akti: object flag that hides Kapra, the loose goat
+#define FLAG_ICHOR_GOT_SOOTHE_BELL           0x55 // Ichor: Akti: Aigon gave his goat's old bell (Soothe Bell)
 
 #define FLAG_HIDE_CONTEST_POKE_BALL          0x56  // Always set after new game, object it hides is added directly
 #define FLAG_MET_RIVAL_MOM                   0x57
@@ -128,7 +128,7 @@
 #define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66 //
 #define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67 //
 
-#define FLAG_UNUSED_0x068                    0x68  // Unused Flag
+#define FLAG_ICHOR_GOT_SHELL_BELL            0x68 // Ichor: Akti: Doris traded her shell bell for a Heart Scale
 
 #define FLAG_OCEANIC_MUSEUM_MET_REPORTER     0x69
 #define FLAG_RECEIVED_HM_STRENGTH            0x6A

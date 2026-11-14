@@ -22,6 +22,10 @@ if [ ! -x "$RUNNER" ] || [ "$SRC" -nt "$RUNNER" ]; then
   cc -O2 -I"$MGBA_PREFIX/include" "$SRC" -L"$MGBA_PREFIX/lib" -lmgba -o "$RUNNER" || { echo "SMOKE FAIL: could not build $RUNNER"; exit 1; }
 fi
 
+# Elaia's rows nearest the Route 1 seam must stay aethos-only (design/MAP_DESIGN.md).
+/usr/bin/python3 tools/ichor/maps/elaia.py --verify >/dev/null \
+  || { echo "SMOKE FAIL: Elaia's seam rows (tools/ichor/maps/elaia.py --verify)"; exit 1; }
+
 # Addresses and constants the Lua reads the game's state with.
 tools/ichor/tests/elaia_symbols.sh "${ROM%.gba}.elf" build/smoke/symbols.lua \
   || { echo "SMOKE FAIL: could not read symbols from ${ROM%.gba}.elf"; exit 1; }

@@ -37,8 +37,15 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "tools/ichor/art"))
+sys.path.insert(0, str(ROOT / "tools/ichor/maps"))
 
-W, H = 30, 34
+W, H = 30, 38
+# The village is composed on a 34-row canvas, then lowered DY rows under an
+# approach strip through the woods (see lengthen()). The engine draws a connected
+# map with the tilesets of the map the player stands on, so from Route 1
+# (aethos + agros) Elaia's SEAM_ROWS rows nearest the seam must be aethos-only
+# (design/MAP_DESIGN.md). Kalliste starts below them.
+CANVAS_H, DY, SEAM_ROWS = 34, 4, 6
 
 # ---------------------------------------------------------------------------
 # aethos ids (General's numbering, repainted)
@@ -117,13 +124,14 @@ WALK, SOLID = 0, 1
 
 
 class Grid:
-    def __init__(self):
-        self.mt = np.full((H, W), GRASS, np.int32)
-        self.solid = np.zeros((H, W), bool)
-        self.kind = np.full((H, W), "grass", object)   # what's there, for autotiling and checks
+    def __init__(self, h=H):
+        self.h = h
+        self.mt = np.full((h, W), GRASS, np.int32)
+        self.solid = np.zeros((h, W), bool)
+        self.kind = np.full((h, W), "grass", object)   # what's there, for autotiling and checks
 
     def set(self, x, y, mid, solid, kind=None):
-        if 0 <= x < W and 0 <= y < H:
+        if 0 <= x < W and 0 <= y < self.h:
             self.mt[y, x] = mid
             self.solid[y, x] = solid
             if kind:
@@ -192,12 +200,12 @@ class Grid:
         Cells whose kind is in `also` count as the same ground but keep their
         metatile (pieces that carry their own paving, like the garland posts)."""
         def same(x, y):
-            return 0 <= x < W and 0 <= y < H and self.kind[y, x] in (kind,) + tuple(also)
-        for y in range(H):
+            return 0 <= x < W and 0 <= y < self.h and self.kind[y, x] in (kind,) + tuple(also)
+        for y in range(self.h):
             for x in range(W):
                 if self.kind[y, x] != kind:
                     continue
-                n, s, w, e = same(x, y - 1) or y == 0, same(x, y + 1) or y == H - 1, same(x - 1, y), same(x + 1, y)
+                n, s, w, e = same(x, y - 1) or y == 0, same(x, y + 1) or y == self.h - 1, same(x - 1, y), same(x + 1, y)
                 cy = 0 if not n else 2 if not s else 1
                 cx = 0 if not w else 2 if not e else 1
                 mid = pieces[cy][cx]
@@ -232,12 +240,12 @@ def noise(x, y, salt=0):
 # and out, with cypresses and single olives stood in front of it.
 # ---------------------------------------------------------------------------
 SPOTS = {
-    "door_player": (5, 8),
-    "door_kydippe": (17, 6),
-    "door_akademia": (5, 29),
-    "halia": (14, 15),
-    "line": [(14, 16), (14, 17), (14, 18)],   # Korinna, Philon, the player
-    "kleon": (14, 17),                         # beat 4; the player faces him from (14,19)
+    "door_player": (5, 12),
+    "door_kydippe": (17, 10),
+    "door_akademia": (5, 33),
+    "halia": (14, 19),
+    "line": [(14, 20), (14, 21), (14, 22)],   # Korinna, Philon, the player
+    "kleon": (14, 21),                         # beat 4; the player faces him from (14,23)
     "exit_column": 11,                         # Kleon and Alethea leave north up this column
 }
 
@@ -265,16 +273,73 @@ FOREST_BLOCKS = [
 
 
 def compose():
-    g = Grid()
-    edge_forest(g)
-    north(g)
-    upper_village(g)
-    square(g)
-    west(g)
-    east(g)
-    lower_terrace(g)
+    v = Grid(CANVAS_H)                  # the village, in canvas coordinates
+    edge_forest(v)
+    north(v)
+    upper_village(v)
+    square(v)
+    west(v)
+    east(v)
+    lower_terrace(v)
+    g = lengthen(v)
     finish(g)
     return g
+
+
+# The approach through the woods: the strip's own blocks, on the same phase as
+# the rest (block bx covers x 2bx..2bx+1, rows 2by..2by+1). O olive, C a pair of
+# cypresses, P a stone pine, . open. Set by hand: olives with cypresses stood
+# among them, and pines only where no olive grows below (its crown can't tip
+# into a pine).
+STRIP_BLOCKS = [
+    #  bx: 0123456789ABCDE
+    "OOOPO..OOOCOOPO",   # y 0-1   the road comes in from Route 1 at x 10-13
+    "OCOCO...OCOOCCO",   # y 2-3   the shepherd's verge east of the road
+    "COOO....OOCOOOO",   # y 4-5   a glade by the gate on the west, the verge on the east
+]
+
+
+def lengthen(v):
+    """Lower the village DY rows under the approach strip. The canvas's top two
+    rows (its own forest edge and road) give way to the strip, which is all
+    aethos: forest, the road, the gateposts and the shepherd's verge."""
+    g = Grid(H)
+    for y in range(2, CANVAS_H):
+        g.mt[y + DY], g.solid[y + DY], g.kind[y + DY] = v.mt[y], v.solid[y], v.kind[y]
+    for by, row in enumerate(STRIP_BLOCKS):                   # top down, so crowns tip into the bottoms above
+        for bx, kind in enumerate(row):
+            x, y = 2 * bx, 2 * by
+            if kind == "O":
+                g.olive(x, y)
+            elif kind == "P":
+                g.pine(x, y)
+            elif kind == "C":
+                g.cypress(x, y)
+                g.cypress(x + 1, y)
+    # the village's first trees reach their crowns up into the strip
+    y = 2 + DY
+    for x in range(W):
+        if g.kind[y, x] == "olive_top" and g.mt[y, x] in OLIVE_TOP:
+            half = OLIVE_TOP.index(g.mt[y, x])
+            above = g.kind[y - 1, x]
+            if above == "olive_bot":
+                g.mt[y - 1, x] = OLIVE_BOT_TIP[half]
+            elif above == "cypress_bot":
+                g.mt[y - 1, x] = CYPRESS_BOT_UNDER_TIP[half]
+            elif above == "grass":
+                g.set(x, y - 1, OLIVE_TIP_GRASS[half], g.solid[y - 1, x], "tip")
+    g.rect(10, 0, 13, DY + 2, "path")                          # the road, down to the village
+    g.cypress(9, 4)                                           # cypress gateposts
+    g.cypress(14, 4)
+    for x, y in ((8, 4), (8, 5), (15, 3), (15, 5), (14, 3)):
+        if g.kind[y, x] == "grass":
+            g.set(x, y, FLOWERS, WALK, "flowers")
+    return g
+
+
+def canvas(x, y):
+    """A village canvas cell's place on the map."""
+    return x, y + DY
 
 
 def edge_forest(g):
@@ -396,8 +461,8 @@ def square(g):
 
 
 def west(g):
-    """A neighbour's house, shut for the festival, and its walled garden."""
-    g.struct("house_small", 2, 12)                            # door (3,14) shut
+    """Glykera's house (the honey-cake baker, Korinna's mother) and its walled garden."""
+    g.struct("house_small", 2, 12, door_solid=False)          # door (3,14) on the canvas
     g.rect(3, 15, 6, 16, "path")                              # its doorstep, out to the square
     garden(g, 2, 17, 3, 2)
     low_wall_ew(g, 2, 5, 19)
@@ -464,7 +529,8 @@ def ledge_row(g, x0, x1, y):
 
 
 def finish(g):
-    face_cypresses(g, [(4, 1), (16, 3), (2, 7), (2, 15), (26, 9), (27, 21), (3, 21), (12, 29), (27, 25)])
+    face_cypresses(g, [canvas(x, y) for x, y in ((16, 3), (2, 7), (2, 15), (26, 9), (27, 21), (3, 21), (12, 29),
+                                                (27, 25))])
     g.autotile("path", PATH, also=("pave", "steps") + PAVE_LIKE)   # paths run flush into the paving
     g.autotile("pave", PAVING, PAVING_ALTS, also=PAVE_LIKE)
     for y in range(H):                                        # a few anemones in the meadows
@@ -566,62 +632,62 @@ def finish_arch(g, x, y):
 GFX = "OBJ_EVENT_GFX_ICHOR_"
 OBJECTS = [
     # local id, gfx, x, y, facing, script, hide flag
-    ("HALIA", GFX + "PRIESTESS", 14, 15, "DOWN", "Halia", "0"),
-    ("KORINNA", GFX + "YOUTH_F", 14, 16, "UP", "Korinna", "0"),
-    ("PHILON", GFX + "YOUTH_M", 14, 17, "UP", "Philon", "0"),
-    ("GYLIPPOS", GFX + "ELDER_M", 7, 15, "RIGHT", "Gylippos", "0"),
-    ("WOMAN", GFX + "WOMAN", 8, 13, "UP", "FestivalWoman", "0"),
-    ("MAN", GFX + "MAN", 16, 20, "RIGHT", "FestivalMan", "0"),
-    ("FARMER", GFX + "HARVESTER", 26, 12, "UP", "OliveFarmer", "0"),
-    ("KID", GFX + "KID_M", 23, 15, "UP", "Kid", "0"),
-    ("WOOLOO", "OBJ_EVENT_GFX_SPECIES(WOOLOO)", 22, 16, "RIGHT", "KidsWooloo", "0"),
+    ("HALIA", GFX + "PRIESTESS", 14, 19, "DOWN", "Halia", "0"),
+    ("KORINNA", GFX + "YOUTH_F", 14, 20, "UP", "Korinna", "0"),
+    ("PHILON", GFX + "YOUTH_M", 14, 21, "UP", "Philon", "0"),
+    ("GYLIPPOS", GFX + "ELDER_M", 7, 19, "RIGHT", "Gylippos", "0"),
+    ("WOMAN", GFX + "WOMAN", 8, 17, "UP", "FestivalWoman", "0"),
+    ("MAN", GFX + "MAN", 16, 24, "RIGHT", "FestivalMan", "0"),
+    ("FARMER", GFX + "HARVESTER", 26, 16, "UP", "OliveFarmer", "0"),
+    ("KID", GFX + "KID_M", 23, 19, "UP", "Kid", "0"),
+    ("WOOLOO", "OBJ_EVENT_GFX_SPECIES(WOOLOO)", 22, 20, "RIGHT", "KidsWooloo", "0"),
     ("SHEPHERD", GFX + "SHEPHERD", 12, 1, "DOWN", "OldShepherd", "0"),
-    ("KLEON", GFX + "KLEON", 14, 17, "DOWN", "Kleon", "FLAG_ICHOR_HIDE_KLEON_ELAIA"),
-    ("ALETHEA", GFX + "ALETHEA", 5, 29, "DOWN", "0", "FLAG_ICHOR_HIDE_ALETHEA_ELAIA"),
+    ("KLEON", GFX + "KLEON", 14, 21, "DOWN", "Kleon", "FLAG_ICHOR_HIDE_KLEON_ELAIA"),
+    ("ALETHEA", GFX + "ALETHEA", 5, 33, "DOWN", "0", "FLAG_ICHOR_HIDE_ALETHEA_ELAIA"),
 ]
-ITEMS = [("ITEM_POTION", 24, 11, "FLAG_ICHOR_ITEM_ELAIA_POTION")]
+ITEMS = [("ITEM_POTION", 24, 15, "FLAG_ICHOR_ITEM_ELAIA_POTION")]
 WARPS = [   # order is the warp id; the interiors point back at these
-    (17, 6, "MAP_ELAIA_VILLAGE_NEIGHBORS_HOUSE", 0),
-    (5, 8, "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F", 1),
-    (5, 29, "MAP_ELAIA_VILLAGE_AKADEMIA", 0),
+    (17, 10, "MAP_ELAIA_VILLAGE_NEIGHBORS_HOUSE", 0),
+    (5, 12, "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F", 1),
+    (5, 33, "MAP_ELAIA_VILLAGE_AKADEMIA", 0),
+    (3, 18, "MAP_ELAIA_VILLAGE_BAKERS_HOUSE", 0),
 ]
-LINE_SPOT = (14, 18)                                   # the player's place in Halia's line
-LINE_CORE = {(x, y) for x in range(13, 16) for y in range(15, 19)}
+LINE_SPOT = (14, 22)                                   # the player's place in Halia's line
+LINE_CORE = {(x, y) for x in range(13, 16) for y in range(19, 23)}
 # Where scripts.pory's SetUpVillage stands the watchers for beat 4, ringed round Kleon.
-BEAT4_RING = {"KORINNA": (12, 16), "PHILON": (16, 16), "WOMAN": (12, 20), "MAN": (16, 20), "GYLIPPOS": (17, 18)}
-KLEON_STEPS = [(9, 22), (10, 22), (18, 22), (19, 22)]  # both flights up from the lower terrace
+BEAT4_RING = {"KORINNA": (12, 20), "PHILON": (16, 20), "WOMAN": (12, 24), "MAN": (16, 24), "GYLIPPOS": (17, 22)}
+KLEON_STEPS = [(9, 26), (10, 26), (18, 26), (19, 26)]  # both flights up from the lower terrace
 SHEPHERD_ROW = [(x, 2) for x in range(10, 14)]
 SIGNS = [   # x, y, facing, script
-    (14, 5, "ANY", "VillageSign"),
-    (6, 8, "NORTH", "PlayersHouseSign"),
-    (16, 6, "NORTH", "KydippesHouseSign"),
-    (11, 29, "ANY", "AkademiaSign"),
-    (13, 14, "NORTH", "FestivalBanner"),
-    (16, 14, "NORTH", "FestivalBanner"),
-    (9, 4, "ANY", "Herm"),
-    (24, 6, "NORTH", "ShrineDoor"),
-    (3, 14, "NORTH", "NeighboursDoor"),
-    (23, 14, "ANY", "Well"),
-    (3, 2, "ANY", "Beehives"),
-    (7, 2, "ANY", "Beehives"),
-    (2, 6, "ANY", "Beehives"),
-    (25, 11, "NORTH", "OlivePress"),
-    (26, 11, "NORTH", "OlivePress"),
-    (27, 11, "NORTH", "OlivePress"),
-    (27, 28, "ANY", "RaceStart"),
-    (7, 17, "NORTH", "Altar"),
-    (8, 17, "NORTH", "Altar"),
-    (19, 17, "NORTH", "Stall"),
-    (20, 17, "NORTH", "Stall"),
-    (21, 17, "NORTH", "Stall"),
+    (14, 9, "ANY", "VillageSign"),
+    (6, 12, "NORTH", "PlayersHouseSign"),
+    (16, 10, "NORTH", "KydippesHouseSign"),
+    (11, 33, "ANY", "AkademiaSign"),
+    (13, 18, "NORTH", "FestivalBanner"),
+    (16, 18, "NORTH", "FestivalBanner"),
+    (9, 8, "ANY", "Herm"),
+    (24, 10, "NORTH", "ShrineDoor"),
+    (23, 18, "ANY", "Well"),
+    (3, 6, "ANY", "Beehives"),
+    (7, 6, "ANY", "Beehives"),
+    (2, 10, "ANY", "Beehives"),
+    (25, 15, "NORTH", "OlivePress"),
+    (26, 15, "NORTH", "OlivePress"),
+    (27, 15, "NORTH", "OlivePress"),
+    (27, 32, "ANY", "RaceStart"),
+    (7, 21, "NORTH", "Altar"),
+    (8, 21, "NORTH", "Altar"),
+    (19, 21, "NORTH", "Stall"),
+    (20, 21, "NORTH", "Stall"),
+    (21, 21, "NORTH", "Stall"),
 ]
-HIDDEN = [("ITEM_HONEY", 5, 3, "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY")]
+HIDDEN = [("ITEM_HONEY", 5, 7, "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY")]
 
 
 def halia_ring(g):
     """Coord triggers ringing the line at Halia's canopy: walk in and she calls you."""
     out = []
-    for y in range(14, 21):
+    for y in range(18, 25):
         for x in range(10, 19):
             if not g.solid[y, x] and (x, y) not in LINE_CORE:
                 out.append((x, y))
@@ -700,7 +766,10 @@ ROOMS = {
 
 def write_rooms():
     """The rooms are finished blockdata (design/phase1/ROOMS_*.md). Their border
-    is four of the room set's near-black void metatile."""
+    is four of the room set's near-black void metatile. Elaia's other homes are
+    composed from the same catalog by elaia_homes.py."""
+    import elaia_homes
+    elaia_homes.build()
     for name, room in ROOMS.items():
         d = ROOT / "data/layouts" / name
         d.mkdir(parents=True, exist_ok=True)
@@ -716,10 +785,10 @@ def render(out, scale=3):
 
 # Screen-sized views along the player's route: (name, player x, y)
 VIEWS = [
-    ("01_front_door", 5, 9), ("02_hives", 6, 3), ("03_north_gate", 11, 3),
-    ("04_kydippe", 17, 7), ("05_square_line", 14, 18), ("06_square_north", 12, 10),
-    ("07_well_press", 23, 13), ("08_west", 5, 15), ("09_akademia", 6, 30),
-    ("10_finish", 18, 22), ("11_race_start", 23, 28), ("12_shrine", 24, 7),
+    ("01_front_door", 5, 13), ("02_hives", 6, 7), ("03_north_gate", 11, 3),
+    ("04_kydippe", 17, 11), ("05_square_line", 14, 22), ("06_square_north", 12, 14),
+    ("07_well_press", 23, 17), ("08_west", 5, 19), ("09_akademia", 6, 34),
+    ("10_finish", 18, 26), ("11_race_start", 23, 32), ("12_shrine", 24, 11),
 ]
 
 
@@ -834,8 +903,8 @@ def cutscene_walks():
     kx, ky = SPOTS["kleon"]
     return {
         "Kleon runs north": ((kx, ky), ["L"] * (kx - ex) + ["U"] * (ky - 1)),
-        "Alethea comes out": ((5, 29), ["D", "D"] + ["R"] * 4 + ["U"] * 12 + ["R"] * 4),
-        "Alethea leaves": ((13, 19), ["L", "L"] + ["U"] * 19),
+        "Alethea comes out": ((5, 33), ["D", "D"] + ["R"] * 4 + ["U"] * 12 + ["R"] * 4),
+        "Alethea leaves": ((13, 23), ["L", "L"] + ["U"] * 23),
     }
 
 
@@ -860,6 +929,7 @@ def check(g, m):
     for x in range(W):
         if (10 <= x <= 13) == bool(solid[0, x]):
             problems.append(f"north seam wrong at x={x}")
+    problems += seam_problems(g.mt)
     warps = {(w["x"], w["y"]) for w in m["warp_events"]}
     people = {}
     for o in m["object_events"]:
@@ -881,7 +951,7 @@ def check(g, m):
             problems.append(f"bg event ({x},{y}) can't be read from anywhere")
     door = SPOTS["door_akademia"]
     for name, start, goal, gate in (
-            ("Kleon", (door[0], door[1] + 1), (14, 10), set(KLEON_STEPS)),
+            ("Kleon", (door[0], door[1] + 1), (14, 14), set(KLEON_STEPS)),
             ("Halia", start, LINE_SPOT, set(halia_ring(g))),
             ("shepherd", start, (11, 0), set(SHEPHERD_ROW))):
         if reachable(g, start, goal, gate):
@@ -932,11 +1002,50 @@ def walk_text(g, seen):
     return "\n".join(rows)
 
 
+def seam_problems(blocks):
+    """Route 1 draws Elaia's rows nearest the seam with its own secondary
+    tileset, so they may hold only aethos (primary) metatiles, and the road must
+    be open at exactly x 10-13."""
+    out = []
+    for y in range(SEAM_ROWS):
+        for x in range(W):
+            mid = int(blocks[y, x]) & 0x3FF
+            if mid >= 0x200:
+                out.append(f"non-aethos metatile 0x{mid:03X} at ({x},{y}), within {SEAM_ROWS} rows of the Route 1 seam")
+    return out
+
+
+def verify():
+    """Check the committed layout, without rebuilding it (the smoke test runs this)."""
+    path = ROOT / "data/layouts/ElaiaVillage/map.bin"
+    blocks = np.fromfile(path, "<u2")
+    if blocks.size != W * H:
+        print(f"PROBLEM: {path} holds {blocks.size} blocks, not {W}x{H}")
+        return 1
+    blocks = blocks.reshape(H, W)
+    problems = seam_problems(blocks)
+    for x in range(W):
+        if (10 <= x <= 13) == bool(blocks[0, x] & 0x0C00):
+            problems.append(f"north seam wrong at x={x}")
+    for p in problems:
+        print("PROBLEM:", p)
+    print(f"elaia.py --verify: {len(problems)} problems in {path.relative_to(ROOT)}")
+    return 1 if problems else 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="print the walk map")
+    ap.add_argument("--verify", action="store_true", help="only check the committed layout's seam rows")
     args = ap.parse_args()
+    if args.verify:
+        return verify()
     g = compose()
+    seam = seam_problems(g.mt)
+    if seam:                              # refuse to write a layout Route 1 would draw as garbage
+        for p in seam:
+            print("PROBLEM:", p)
+        return 1
     write_layout(g)
     write_events(g)
     write_rooms()

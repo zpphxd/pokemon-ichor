@@ -1211,6 +1211,24 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_PONYTA
+    },
+    // Ichor: Kimon rowed triremes for forty years. Arion swam beside his ship the
+    // whole way; his knees are done with the sea, and a Wooloo by the fire suits him.
+    [INGAME_TRADE_ICHOR_ARION] =
+    {
+        .nickname = _("ARION"),
+        .species = SPECIES_FINIZEN,
+        .ivs = {20, 18, 16, 24, 16, 22},
+        .abilityNum = 0,
+        .otId = 41372,
+        .conditions = {5, 5, 5, 30, 5},
+        .personality = 0x2C,
+        .heldItem = ITEM_ORAN_BERRY,
+        .mailNum = -1,
+        .otName = _("KIMON"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_WOOLOO
     }
 };
 
