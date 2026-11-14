@@ -1273,8 +1273,8 @@ static void PrintStatOnBackOfCard(u8 top, const u8 *statName, u8 *stat, const u8
         // Ichor: the Hall of Heroes on the first line under the wreath, and the
         // rest on the second, narrower one (link and contest stats are cut systems)
         u32 y = (top == 0) ? 97 : 113;
-        u32 left = (top == 0) ? 32 : 56;
-        u32 right = (top == 0) ? 192 : 168;
+        u32 left = (top == 0) ? 40 : 56;
+        u32 right = (top == 0) ? 184 : 168;
         AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, left, y, sTrainerCardStatColors, TEXT_SKIP_DRAW, statName);
         AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, stat, right), y, color == sTrainerCardStatColors ? sTrainerCardTextColors : color, TEXT_SKIP_DRAW, stat);
         return;
