@@ -10,20 +10,20 @@ INK = C.ink
 
 SPALUNK_COLORS = [
     ("ink", INK),
-    # velvety cypress-dark fur
-    ("fur0", (32, 48, 48)), ("fur1", (48, 80, 72)), ("fur2", (80, 120, 96)), ("fur3", (128, 168, 136)),
-    # limestone belly
-    ("belly0", (176, 144, 96)), ("belly1", (224, 200, 152)),
-    # terracotta paws and snout
-    ("terra0", (128, 56, 32)), ("terra1", (192, 96, 64)), ("terra2", (232, 152, 112)),
+    # velvety cypress-dark fur, warm olive midtones and a pale sheen
+    ("fur0", (32, 48, 48)), ("fur1", (56, 88, 72)), ("fur2", (96, 128, 88)), ("fur3", (152, 176, 128)),
+    # limestone underside, and the long pale claws
+    ("belly0", (176, 144, 96)), ("belly1", (232, 216, 184)),
+    # rosy terracotta snout and palms
+    ("terra0", (144, 64, 56)), ("terra1", (208, 112, 104)), ("terra2", (240, 168, 152)),
     # the sun-gold coin
     ("gold0", (200, 136, 32)), ("gold1", (248, 208, 72)), ("white", C.white),
     # turned earth
-    ("earth0", (88, 56, 32)), ("earth1", (136, 96, 56)),
+    ("earth0", (80, 56, 40)), ("earth1", (136, 96, 64)),
 ]
 SPALUNK_SHINY = {
     # pale sun-gold fur
-    "fur0": (152, 112, 40), "fur1": (200, 160, 64), "fur2": (232, 200, 104), "fur3": (248, 232, 160),
+    "fur0": (160, 112, 48), "fur1": (208, 160, 72), "fur2": (232, 200, 112), "fur3": (248, 232, 168),
 }
 
 s_fur = Mat(["fur0", "fur1", "fur2", "fur3"], line="fur0", cuts=[0.24, 0.5, 0.78])
@@ -48,101 +48,68 @@ def _paw(p, cx, cy, ang, mat, claw_mat, n=4, r=3.6, ln=2.6, **kw):
 
 
 def spalunk(p, view, phase):
-    claw = Mat(["belly0", "belly1"], line="terra0", cuts=[0.5])
+    claw = Mat(["belly0", "belly1"], line="ink", cuts=[0.5])
     if view == "down":
-        # follower shuffling toward the camera: snout first, paws paddling
+        # follower shuffling toward the camera: low and wide, the snout
+        # pointed at us, the great spade paws paddling either side
         st = phase
-        p.blob(32, 50, 10.5, 9, s_fur, group=1)
-        p.blob(32, 52, 5.4, 5, s_belly, group=2)
+        p.blob(32, 50, 13, 8, s_fur, group=1)
+        p.blob(32, 47, 8.4, 7, s_fur, group=3)
         for sx in (-1, 1):
             up = 2 * (st if sx < 0 else 1 - st)
-            _paw(p, 32 + 10 * sx, 56 - up, -90 + 30 * sx, s_terra, claw, n=4, r=3.4, ln=2.2, group=10 + (sx > 0))
-        p.blob(32, 40, 9, 8.4, s_fur, group=3)
-        p.limb([(32, 43), (32, 46.5)], 6.0, 4.4, s_terra, group=4)
-        p.blob(32, 47, 2.8, 2.2, s_terra, group=4)
+            _paw(p, 32 + 12 * sx, 56 - up, 90 - 35 * sx, s_terra, claw, n=4, r=3.8, ln=3.0, group=10 + (sx > 0))
+        p.limb([(32, 50), (32, 54.5)], 5.4, 3.6, s_terra, group=4)
+        p.blob(32, 55, 2.4, 1.9, s_terra, group=4)
         if p.big:
-            for ex in (26, 35):
-                p.pxs([(ex, 38), (ex + 1, 38), (ex + 2, 38)], "fur3")
-                p.pxs([(ex, 39), (ex + 1, 40), (ex + 2, 39)], "fur0")
-            p.pxs([(31, 47), (33, 47)], "terra0")
+            p.pxs([(27, 46), (28, 46), (36, 46), (37, 46)], "fur0")
+            p.pxs([(31, 55), (33, 55)], "terra0")
         return
 
     if view == "up":
-        # follower shuffling away: the round velvet back, the paws out to
-        # the sides, a stub of tail
+        # follower shuffling away: the hunched velvet back, the spade paws
+        # out to the sides, a stub of tail
         st = phase
         for sx in (-1, 1):
             up = 2 * (st if sx < 0 else 1 - st)
-            _paw(p, 32 + 10.5 * sx, 50 - up, -90 + 40 * sx, s_terra, claw, n=4, r=3.2, ln=2.0, group=10 + (sx > 0))
-        p.blob(32, 47, 11, 11, s_fur, group=1)
-        p.blob(32, 36.5, 7.4, 6, s_fur, group=3)
-        p.limb([(32, 55), (32, 58)], 2.4, 1.6, s_terra, group=20)
+            _paw(p, 32 + 12.5 * sx, 55 - up, 90 - 40 * sx, s_terra, claw, n=4, r=3.6, ln=2.8, group=10 + (sx > 0))
+        p.blob(32, 49, 13, 10, s_fur, group=1)
+        p.limb([(32, 57), (32, 60)], 2.4, 1.6, s_terra, group=20)
         return
 
-    if view == "side":
-        # follower trundling left: snout out, a paw reaching to dig
-        st = phase
-        p.limb([(42, 50), (46, 52)], 2.0, 1.4, s_terra, group=20)
-        _paw(p, 38 - 2 * st, 57.5, 0, s_terra, claw, n=3, r=2.6, ln=1.6, bias=0.2, group=10)
-        p.blob(33, 49, 11, 8, s_fur, group=1)
-        p.blob(29, 53, 6, 3.4, s_belly, group=2)
-        p.limb(bez((24, 48), (20, 48), (17, 46)), 5.4, 3.0, s_terra, group=4)
-        p.blob(16.6, 45.8, 1.9, 1.8, s_terra, group=4)
-        _paw(p, 24 + 2 * st, 57, -160, s_terra, claw, n=4, r=3.2, ln=2.2, group=11)
-        if p.big:
-            p.pxs([(25, 44), (26, 45), (27, 45), (28, 44)], "fur0")
-        return
-
-    if view in ("front", "icon"):
+    if view in ("front", "icon", "side"):
+        # the draft of the hand-finished battle front (icon and walking
+        # side draw from it): low, wide and hunched, crawling out of its
+        # burrow, the long pink snout out front, enormous spade paws turned
+        # out with long pale claws, a coin pinched in them
         L = 1 if (phase == 1 and view == "front") else 0
-
-        # far paw raised at the right side, palm out
-        p.limb([(37, 49), (41, 45)], 4.4, 4.0, s_fur, bias=0.25, group=10)
-        _paw(p, 43, 42.5 - L, -55, s_terra, claw, n=4, r=3.4, ln=2.4, bias=0.12, group=11)
-
-        # the burrow's back rim
-        p.blob(32, 56.5, 15.5, 4.4, s_earth, bias=0.25, group=30)
-        # body half out of the ground, under a big round velvet head
-        p.blob(31.5, 52, 10, 7, s_fur, group=1)
-        p.blob(30.5, 40.5 - L, 9.4, 9, s_fur, group=1)
-        p.blob(28, 51.5, 5, 4.6, s_belly, group=2)
-        # the long pink snout, sniffing up
-        p.limb(bez((23.5, 43 - L), (18.5, 42.5 - L), (14.5, 39.5 - 2 * L)), 6.0, 3.0, s_terra, group=4)
-        p.blob(14, 39.2 - 2 * L, 1.9, 1.8, s_terra, group=4)
-        # the burrow's front rim of turned earth, lumpy with clods
-        p.poly([(15, 61), (17, 57.5), (22, 56), (28, 57.5), (34, 56.5), (40, 57.5), (46, 56), (49.5, 58.5), (50.5, 61)],
-               s_earth, group=31)
-        for x, y, r in ((19.5, 56.5, 2.3), (25.5, 57.5, 2.2), (32, 57, 2.0), (39.5, 57.5, 2.3), (46, 56.5, 2.1)):
-            p.circle(x, y, r, s_earth, group=31)
-        # near paw raised at the chest, a coin pinched up in its claws
-        p.limb([(25, 51), (21, 48.5)], 4.4, 4.0, s_fur, group=12)
-        _paw(p, 19, 47 - L, -125, s_terra, claw, n=4, r=3.8, ln=2.6, group=13)
-        p.circle(14.6, 42 - 2 * L, 2.4, s_gold, group=14)
-
+        st = phase if view == "side" else 0
+        if view != "side":
+            p.blob(43, 55.5, 9, 5, s_earth, bias=0.15, group=30)
+        _paw(p, 30.5 - st, 57.5, 180, s_terra, claw, n=3, r=3.6, ln=3.4, bias=0.12, group=10)
+        p.blob(32, 47 - 0.5 * L, 11.5, 9, s_fur, group=1)
+        p.blob(19.5, 47.5 - L, 7.4, 6.6, s_fur, group=1)
+        p.limb(bez((14, 49 - L), (9, 49 - L), (4.5, 50 - 2 * L)), 5.6, 3.2, s_terra, group=4)
+        if view != "side":
+            p.poly([(30, 61), (33, 57.5), (40, 57), (48, 57.5), (53, 55), (54, 61)], s_earth, group=31)
+        _paw(p, 14 + st, 56, 180, s_terra, claw, n=4, r=4.6, ln=4.4, group=13)
+        if view != "side":
+            p.circle(3.5, 54 - L, 2.4, s_gold, group=14)
         if p.big:
-            # the closed eye: a seam in the fur, a lit lid above it
-            p.pxs([(25, 37 - L), (26, 38 - L), (27, 38 - L), (28, 37 - L)], "fur0")
-            p.pxs([(25, 36 - L), (26, 36 - L), (27, 36 - L)], "fur3")
-            p.px(12, 38 - 2 * L, "terra0")
-            # the coin's glint
-            p.pxs([(14, 41 - 2 * L), (13, 42 - 2 * L)], "white")
+            p.pxs([(16, 45 - L), (17, 45 - L), (18, 45 - L)], "fur0")
         else:
-            p.px(26, 38, "fur0")
+            p.px(17, 46, "fur0")
         return
 
     if view == "back":
-        # draft of the hand-finished back: the round velvet shoulders out of
-        # the hole, the head turned right, both paws raised, the coin held up
-        _paw(p, 10.5, 46, -120, s_terra, claw, n=3, r=3.4, ln=2.0, bias=0.1, group=10)
-        p.blob(28, 51, 17, 16.5, s_fur, group=1)
-        p.blob(34, 44, 9, 8, s_fur, group=1)
-        p.blob(40, 38, 9, 8.4, s_fur, group=1)
-        p.limb(bez((47, 40), (52, 40), (56, 36.5)), 5.6, 3.0, s_terra, group=4)
-        _paw(p, 51, 48.5, -60, s_terra, claw, n=3, r=3.4, ln=2.0, group=11)
-        p.circle(54, 45, 2.2, s_gold, group=12)
-        p.poly([(3, 64), (4, 59), (16, 58), (28, 59), (40, 58.5), (52, 60), (54, 64)], s_earth, group=31)
-        if p.big:
-            p.pxs([(34, 42), (35, 43), (36, 43), (37, 42)], "fur0")
+        # draft of the hand-finished back: the hunched velvet back out of
+        # the hole, the head turned right, the paws and the coin
+        _paw(p, 9.5, 55, 160, s_terra, claw, n=3, r=3.4, ln=3.0, bias=0.1, group=10)
+        p.blob(28, 55, 17.5, 15, s_fur, group=1)
+        p.blob(45, 50.5, 8, 7, s_fur, group=3)
+        p.limb(bez((51, 51.5), (56, 52.5), (60.5, 54.5)), 5.8, 3.2, s_terra, group=4)
+        _paw(p, 47.5, 58.5, 0, s_terra, claw, n=3, r=4.2, ln=3.6, group=11)
+        p.circle(58.5, 58.5, 2.4, s_gold, group=12)
+        p.poly([(1, 64), (2, 60), (14, 59.5), (28, 60.5), (44, 60), (46, 64)], s_earth, group=31)
         return
     return
 
@@ -153,21 +120,21 @@ def spalunk(p, view, phase):
 
 PLOUTERAS_COLORS = [
     ("ink", INK),
-    # cypress-dark fur
-    ("fur0", (32, 48, 48)), ("fur1", (48, 80, 72)), ("fur2", (80, 120, 96)), ("fur3", (128, 168, 136)),
-    # limestone belly and horn
-    ("lime0", (168, 136, 88)), ("lime1", (208, 184, 136)), ("lime2", (240, 224, 184)),
-    # terracotta paws and snout
-    ("terra0", (128, 56, 32)), ("terra1", (192, 96, 64)), ("terra2", (232, 152, 112)),
-    # sun-gold bands, wheat and coins
+    # velvety cypress-dark fur, warm olive midtones and a pale sheen
+    ("fur0", (32, 48, 48)), ("fur1", (56, 88, 72)), ("fur2", (96, 128, 88)), ("fur3", (152, 176, 128)),
+    # limestone horn and claws
+    ("lime0", (168, 136, 88)), ("lime1", (216, 192, 144)), ("lime2", (248, 240, 208)),
+    # rosy terracotta snout, star and palms
+    ("terra0", (144, 64, 56)), ("terra1", (208, 112, 104)), ("terra2", (240, 168, 152)),
+    # sun-gold bands, circlet, wheat and coins
     ("gold0", (192, 128, 32)), ("gold1", (248, 208, 72)),
     # olive figs
-    ("fig0", (72, 88, 32)), ("fig1", (128, 144, 64)),
+    ("fig0", (72, 88, 40)), ("fig1", (128, 144, 64)),
 ]
 PLOUTERAS_SHINY = {
     # sun-gold fur, a marble horn
     "fur0": (152, 104, 32), "fur1": (200, 152, 56), "fur2": (232, 192, 96), "fur3": (248, 224, 152),
-    "lime0": (192, 184, 176), "lime1": (224, 224, 216), "lime2": (248, 248, 240),
+    "lime0": (176, 176, 176), "lime1": (224, 224, 216), "lime2": (248, 248, 240),
 }
 
 pl_fur = Mat(["fur0", "fur1", "fur2", "fur3"], line="fur0", cuts=[0.24, 0.5, 0.78])
@@ -231,119 +198,111 @@ def _coin(p, x, y, r=1.8, **kw):
     return p.blob(x, y, r, r * 1.05, pl_gold, **kw)
 
 
+def _star(p, cx, cy, r, a0, a1, n, **kw):
+    """The fleshy star of feelers round the nose: n short pink rays fanning
+    from angle a0 to a1 (degrees) about (cx, cy)."""
+    import math
+    for k in range(n):
+        a = math.radians(a0 + (a1 - a0) * k / max(n - 1, 1))
+        p.taper([(cx, cy), (cx + math.cos(a) * r, cy + math.sin(a) * r)], 2.0, pl_terra, **kw)
+    p.circle(cx, cy, 1.8, pl_terra, **kw)
+
+
+def _circlet(p, cx, cy, w, L=0):
+    """The gold circlet half-buried in the velvet of the brow, leaves up."""
+    p.limb(bez((cx - w, cy + 1.5 - L), (cx, cy - 2.5 - L), (cx + w, cy + 1.5 - L)), 1.8, 1.8, pl_gold, group=40)
+    for dx in (-w * 0.6, -w * 0.2, w * 0.2, w * 0.6):
+        p.lens((cx + dx, cy - 1 - L), (cx + dx * 1.2, cy - 4 - L), 2.2, pl_gold, group=41)
+
+
 def plouteras(p, view, phase):
+    claw = Mat(["lime1", "lime2"], line="ink", cuts=[0.5])
     if view == "down":
-        # follower waddling toward the camera, the horn hugged up to its
-        # chest, wheat standing out of the mouth
+        # follower waddling toward the camera: the broad hump, the crowned
+        # head low, the star nose, the horn hugged across the front between
+        # great spade paws
         st = phase
+        p.blob(32, 45, 15, 12, pl_fur, group=1)
+        p.blob(32, 42, 9, 8, pl_fur, group=3)
+        _circlet(p, 32, 36, 6.5)
+        _horn(p, bez3((22, 54), (28, 57), (38, 56), (43, 51)), 9, pl_horn, bands=(0.2, 0.4, 0.6, 0.78), band_mat=pl_gold, group=20)
+        p.blob(22, 54, 2.2, 4.4, pl_gold, group=21)
         for sx in (-1, 1):
             up = 2 * (st if sx < 0 else 1 - st)
-            p.blob(32 + 7.5 * sx, 59 - up, 4.4, 2.4, pl_terra, group=12 + (sx > 0))
-        p.blob(32, 46, 13, 12.5, pl_fur, group=1)
-        p.blob(32, 30, 9.4, 8.6, pl_fur, group=3)
-        for bx, tx, ty in ((29, 18.5, 31), (35, 45.5, 31)):
-            _wheat(p, (bx, 39), (tx, ty), {"group": 18})
-        _horn(p, bez3((32, 40), (28, 48), (31, 54), (38, 54)), 11, pl_horn, bands=(0.2, 0.4, 0.6, 0.78), band_mat=pl_gold, group=20)
-        p.blob(32, 40, 5.6, 2.2, pl_gold, group=21)
-        p.blob(32, 39.8, 4.2, 1.2, Mat(["fur0"]), group=22)
-        p.blob(24, 45, 3.6, 3, pl_terra, group=23)
-        p.blob(40, 45, 3.6, 3, pl_terra, group=24)
-        p.limb([(32, 32), (32, 35)], 5.6, 4.2, pl_terra, group=4)
-        p.blob(32, 35.5, 2.6, 2, pl_terra, group=4)
+            _paw(p, 32 + 12 * sx, 55 - up, 90 - 35 * sx, pl_terra, claw, n=4, r=4.0, ln=3.2, group=10 + (sx > 0))
+        _star(p, 32, 49, 3.2, -180, 0, 7, group=4)
+        p.limb([(32, 45), (32, 48)], 4.4, 3.4, pl_terra, group=4)
         if p.big:
-            for ex in (26, 35):
-                p.pxs([(ex, 28), (ex + 1, 28), (ex + 2, 28)], "fur3")
-                p.pxs([(ex, 29), (ex + 1, 30), (ex + 2, 29)], "fur0")
+            p.pxs([(27, 41), (28, 41), (36, 41), (37, 41)], "fur0")
         return
 
     if view == "up":
-        # follower waddling away: the round back, wheat over its shoulder,
-        # the horn's curled tip at its side
+        # follower waddling away: the great hunched back, the circlet's
+        # leaves over the crown, paws out to the sides, the horn's tip
         st = phase
         for sx in (-1, 1):
             up = 2 * (st if sx < 0 else 1 - st)
-            p.blob(32 + 7.5 * sx, 59 - up, 4.4, 2.4, pl_terra, group=12 + (sx > 0))
-        for bx, tx, ty in ((40, 44, 22), (42, 48, 26)):
-            _wheat(p, (bx, 36), (tx, ty), {"group": 18})
-        p.blob(32, 46, 13.5, 13, pl_fur, group=1)
-        p.blob(32, 31, 9.4, 8.6, pl_fur, group=3)
-        _horn(p, bez3((26, 52), (19, 53), (17, 47), (20, 44)), 6, pl_horn, bands=(0.3, 0.6), band_mat=pl_gold, group=20)
+            _paw(p, 32 + 13.5 * sx, 55 - up, 90 - 40 * sx, pl_terra, claw, n=4, r=3.8, ln=3.0, group=10 + (sx > 0))
+        _circlet(p, 32, 33, 6)
+        p.blob(32, 47, 15, 13, pl_fur, group=1)
+        _horn(p, bez3((44, 58), (49, 57), (50, 52), (47, 50)), 5, pl_horn, bands=(0.35, 0.7), band_mat=pl_gold, group=20)
         return
 
-    if view == "side":
-        # follower waddling left, the horn hugged before it, a grain dropping
-        st = phase
-        p.blob(40, 58.5 - 2 * st, 4.6, 2.4, pl_terra, bias=0.2, group=10)
-        p.blob(36, 46, 13, 12.5, pl_fur, group=1)
-        p.blob(28, 33, 8.6, 8, pl_fur, group=1)
-        p.limb(bez((22, 35), (16, 35.5), (12, 32)), 5.6, 3.0, pl_terra, group=4)
-        p.blob(11.6, 31.8, 2, 1.8, pl_terra, group=4)
-        for b_, t_ in (((19, 41), (12, 33)), ((21, 40), (19, 31))):
-            _wheat(p, b_, t_, {"group": 18})
-        _horn(p, bez3((20, 43), (24, 55), (38, 57), (44, 50)), 11, pl_horn, bands=(0.15, 0.32, 0.5, 0.68, 0.84), band_mat=pl_gold, group=20)
-        p.blob(20, 43, 5.6, 2.2, pl_gold, ang=-60, group=21)
-        p.blob(30, 46, 3.8, 3, pl_terra, group=22)
-        p.blob(32, 59 - 2 * (1 - st), 4.6, 2.4, pl_terra, group=14)
-        if st:
-            _coin(p, 50, 56, 1.6, group=25)
-        if p.big:
-            p.pxs([(25, 30), (26, 31), (27, 31), (28, 30)], "fur0")
-        return
-
-    if view in ("front", "icon"):
-        # the draft of the hand-finished battle front (the icon draws from
-        # it): a great round mole sitting back, hugging a banded horn of
-        # plenty whose mouth spills wheat, figs and coins
+    if view in ("front", "icon", "side"):
+        # the draft of the hand-finished battle front (icon and walking
+        # side draw from it): a massive mole hunched over its hoard, the
+        # crowned head low, the star nose, the horn of plenty on the gold
+        # with its tip gripped in a great clawed paw
         L = 1 if (phase == 1 and view == "front") else 0
-        p.blob(49.5, 58.5, 5.2, 2.6, pl_terra, bias=0.15, group=11)
-        body = p.blob(37.5, 44.5, 16.5, 15.5, pl_fur, group=1)
-        p.blob(48.5, 52, 6.5, 6.5, pl_fur, group=1)
-        p.blob(32.5, 26 - L, 10.2, 9.6, pl_fur, group=1)
-        p.blob(27, 31 - L, 6, 5, pl_fur, group=1)
-        p.blob(35.5, 39.5, 6.5, 7.5, Mat(["lime0", "lime1"], line="fur1", cuts=[0.5]), clip=[body], group=2)
-        p.blob(29, 58.6, 6.4, 2.8, pl_terra, group=14)
-        horn = bez3((16.5, 37), (23, 47), (35, 55.5), (46, 55)) + bez3((46, 55), (52.5, 54.5), (54.5, 48), (50.5, 46))[1:]
-        _horn(p, horn, 15, pl_horn, bands=(0.1, 0.22, 0.34, 0.46, 0.57, 0.67, 0.76, 0.85), band_mat=pl_gold, group=20)
-        p.blob(17, 37, 8.2, 3.4, pl_gold, ang=-68, group=21)
-        p.blob(16.6, 36.6, 6.4, 1.9, Mat(["fur0"]), ang=-68, group=22)
-        for b_, t_ in (((15, 34), (5.5, 21 - L)), ((18, 33), (16, 18 - L)), ((13, 36), (4, 30.5 - L)), ((20.5, 33), (25, 21 - L))):
-            _wheat(p, b_, t_, {"group": 23})
+        st = phase if view == "side" else 0
+        full = view == "front"
+        if full:
+            p.blob(26, 64, 23, 9.5, pl_gold, group=50)
+        p.blob(56.5, 58.5, 5.2, 2.6, pl_terra, bias=0.1, group=11)
+        p.blob(42, 33, 19.5, 16.5, pl_fur, group=1)
+        p.blob(52, 47.5, 9.5, 9, pl_fur, group=1)
+        p.blob(29, 38.5 - 0.5 * L, 8.5, 8.5, pl_fur, group=1)
+        p.blob(18.5, 38 - L, 10.2, 9.2, pl_fur, group=3)
+        _circlet(p, 18.5, 31, 8, L)
+        _paw(p, 46 - st, 53.5, 180, pl_terra, claw, n=3, r=4.6, ln=4.6, bias=0.12, group=12)
+        _horn(p, bez3((11.5, 53), (17, 56), (26, 56), (33, 51)) + bez3((33, 51), (37.5, 47.5), (37, 43), (33.5, 44.5))[1:],
+              13, pl_horn, bands=(0.1, 0.22, 0.34, 0.46, 0.58, 0.69, 0.79), band_mat=pl_gold, group=20)
+        p.blob(11.5, 53, 2.8, 6.6, pl_gold, ang=20, group=21)
+        p.blob(11.2, 53, 1.5, 5.0, Mat(["fur0"]), ang=20, group=22)
+        if full and p.big:
+            for b_, t_ in (((10, 55), (3.5, 57.5 + L)), ((12.5, 50), (12, 43 - L))):
+                _wheat(p, b_, t_, {"group": 23})
+            _fig(p, 6, 59 - L, 2.3, ang=-30, group=24)
+            _fig(p, 17.5, 58.4, 2.2, ang=20, group=25)
+        _paw(p, 36 + st, 44.5 - 0.5 * L, 200, pl_terra, claw, n=3, r=5.0, ln=4.4, group=13)
+        p.limb(bez3((11, 42 - L), (8.5, 43 - L), (7, 45 - L), (6.5, 46.5 - 2 * L)), 6.2, 4.0, pl_terra, group=4)
+        _star(p, 6.6, 48 - 2 * L, 4.4, 90, 270, 9, group=4)
         if p.big:
-            _fig(p, 10.5, 39.5, 2.6, ang=-45, group=24)
-            _fig(p, 14.5, 43.5 + L, 2.4, ang=0, group=25)
-            _fig(p, 9.5, 47 + 2 * L, 2.5, ang=45, group=26)
-            for x, y in ((7.5, 54 + L), (12, 58.5), (17.5, 59.5), (6.5, 59.3), (13.5, 52 + 2 * L)):
-                _coin(p, x, y, group=27)
-        p.blob(27.5, 44, 5.4, 3.8, pl_terra, ang=25, group=15)
-        p.blob(45.5, 47, 4.6, 3.6, pl_terra, ang=-20, group=16)
-        p.limb(bez3((25, 29.5 - L), (19, 30 - L), (14, 28 - L), (10.5, 24 - 2 * L)), 8.0, 3.2, pl_terra, group=4)
-        if p.big:
-            p.pxs([(27, 23 - L), (28, 24 - L), (29, 24 - L), (30, 23 - L)], "fur0")
-            p.pxs([(20, 33 - L), (21, 34 - L), (22, 34 - L), (23, 33 - L)], "terra0")
+            p.pxs([(12, 37 - L), (13, 37 - L), (14, 37 - L)], "fur0")
         else:
-            p.px(28, 24, "fur0")
+            p.px(13, 37, "fur0")
         return
 
     if view == "back":
-        # draft of the hand-finished back: the round back cropped below, the
-        # head turned right, wheat standing up out of the horn beyond it, the
-        # horn's curled tip at the left
-        for b_, t_ in (((52, 40), (51, 17)), ((55, 40), (58.5, 18.5)), ((57.5, 41), (62, 27))):
-            _wheat(p, b_, t_, {"group": 18})
-        p.blob(26, 57, 21, 20, pl_fur, group=1)
-        p.blob(36, 41, 11, 9, pl_fur, group=1)
-        p.blob(41, 32, 10.4, 9.8, pl_fur, group=1)
-        _horn(p, bez3((14, 60), (6, 60), (2.5, 54), (5, 48.5)), 7, pl_horn, bands=(0.25, 0.55, 0.8), band_mat=pl_gold, group=20)
-        p.limb(bez3((47, 35), (52, 35.5), (56, 34), (59.5, 30)), 8, 3.2, pl_terra, group=4)
-        p.blob(50.5, 44, 4.6, 3.6, pl_terra, ang=-25, group=15)
-        _coin(p, 46, 41, group=16)
-        if p.big:
-            p.pxs([(43, 30), (44, 31), (45, 31), (46, 30)], "fur0")
+        # draft of the hand-finished back: the hunched velvet back, the
+        # crowned head turned right with its star nose, a great paw on the
+        # horn of plenty, the hoard glinting at the left
+        p.blob(10, 66, 13, 10, pl_gold, group=50)
+        _paw(p, 9.5, 52, 160, pl_terra, claw, n=3, r=4.0, ln=3.6, bias=0.1, group=10)
+        p.blob(26, 55, 23, 24, pl_fur, group=1)
+        p.blob(40, 45, 11, 10, pl_fur, group=1)
+        p.blob(49.5, 42, 9.6, 8.6, pl_fur, group=3)
+        _circlet(p, 49, 36, 7.5)
+        _horn(p, bez3((58, 58.5), (52, 61), (43, 61), (36, 57)), 11, pl_horn, bands=(0.15, 0.35, 0.55, 0.75), band_mat=pl_gold, group=20)
+        _paw(p, 47, 54, 0, pl_terra, claw, n=3, r=5.0, ln=4.4, group=11)
+        p.limb(bez3((55, 45), (57.5, 46), (59, 48), (59.5, 49.5)), 6, 4, pl_terra, group=4)
+        _star(p, 59.5, 51.2, 3.0, -60, 100, 7, group=4)
         return
     return
 
 
 MONS = [
-    Mon("Spalunk", SPALUNK_COLORS, SPALUNK_SHINY, spalunk, foot="claw"),
-    Mon("Plouteras", PLOUTERAS_COLORS, PLOUTERAS_SHINY, plouteras, foot="claw"),
+    # icon palette 1 keeps the velvet green and the rosy snout
+    Mon("Spalunk", SPALUNK_COLORS, SPALUNK_SHINY, spalunk, foot="claw", icon_pal=1),
+    Mon("Plouteras", PLOUTERAS_COLORS, PLOUTERAS_SHINY, plouteras, foot="claw", icon_pal=1),
 ]

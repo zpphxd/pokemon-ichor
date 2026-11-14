@@ -14,8 +14,8 @@ KAPLET_COLORS = [
     ("hide0", (128, 88, 56)), ("hide1", (176, 136, 88)), ("hide2", (208, 176, 128)), ("hide3", (232, 208, 168)),
     # terracotta mud, wet and dry
     ("mud0", (120, 48, 24)), ("mud1", (168, 80, 40)), ("mud2", (208, 120, 72)),
-    # the broad pink snout
-    ("snout0", (184, 104, 96)), ("snout1", (232, 160, 144)),
+    # the broad rosy snout
+    ("snout0", (208, 112, 120)), ("snout1", (248, 176, 176)),
     # cypress-dark bristle ridge
     ("brist0", (24, 56, 40)), ("brist1", (48, 88, 64)),
     ("marble", C.white),
