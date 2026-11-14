@@ -550,13 +550,15 @@ enum
     PAL_STATUS_BRN
 };
 
+// Ichor: badge colors for the pottery healthboxes. They match STATUS_COLORS in
+// tools/ichor/art/ui_battle.py and are dark enough for the parchment letters.
 static const u16 sStatusIconColors[] =
 {
-    [PAL_STATUS_PSN] = RGB(24, 12, 24),
-    [PAL_STATUS_PAR] = RGB(23, 23, 3),
-    [PAL_STATUS_SLP] = RGB(20, 20, 17),
-    [PAL_STATUS_FRZ] = RGB(17, 22, 28),
-    [PAL_STATUS_BRN] = RGB(28, 14, 10),
+    [PAL_STATUS_PSN] = RGB(16, 7, 18),  // nightshade purple (128, 56, 144)
+    [PAL_STATUS_PAR] = RGB(22, 15, 0),  // amber (176, 120, 0)
+    [PAL_STATUS_SLP] = RGB(13, 12, 11), // river stone (104, 96, 88)
+    [PAL_STATUS_FRZ] = RGB(6, 13, 22),  // sea ice (48, 104, 176)
+    [PAL_STATUS_BRN] = RGB(24, 6, 4),   // fire red (192, 48, 32)
 };
 
 static const struct WindowTemplate sHealthboxWindowTemplate = {
