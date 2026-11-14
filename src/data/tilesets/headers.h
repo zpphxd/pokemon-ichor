@@ -1619,3 +1619,17 @@ const struct Tileset gTileset_Civic =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Civic,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary built by tools/ichor/art/agros_build.py: the
+// countryside (Route 1, Kronion Hill). It uses only its own tiles and
+// palettes 6-12, so it works on any primary; its ground matches aethos.
+const struct Tileset gTileset_Agros =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Agros,
+    .palettes = gTilesetPalettes_PorytilesManaged_Agros,
+    .metatiles = gMetatiles_PorytilesManaged_Agros,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Agros,
+    .callback = NULL,
+};
