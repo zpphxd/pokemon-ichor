@@ -95,9 +95,9 @@
 #define FLAG_ICHOR_ITEM_KRONION_ESCAPE_ROPE 0x49 // Ichor: item ball: Kronion Hill Escape Rope
 #define FLAG_ICHOR_GOT_ELAIA_RELIC_COPPER 0x4A // Ichor: found the Relic Copper in Elaia's well
 #define FLAG_ICHOR_ITEM_ELAIA_POTION 0x4B // Ichor: item ball: Potion by Elaia's olive press
-#define FLAG_UNUSED_0x04C    0x4C // Unused Flag
-#define FLAG_UNUSED_0x04D    0x4D // Unused Flag
-#define FLAG_UNUSED_0x04E    0x4E // Unused Flag
+#define FLAG_ICHOR_GOT_GLYKERA_CAKES 0x4C // Ichor: Glykera traded honey cakes for Melitta's honey
+#define FLAG_ICHOR_DID_KIMON_TRADE 0x4D // Ichor: traded Kimon a Wooloo for his Finizen, Arion
+#define FLAG_ICHOR_GOT_KIMON_PEARLS 0x4E // Ichor: Kimon's pearls, for the Hearth Laurel
 #define FLAG_UNUSED_0x04F    0x4F // Unused Flag
 
 // Scripts

@@ -40,6 +40,11 @@ local function sb1() return emu:read32(S.gSaveBlock1Ptr) end
 local function sb2() return emu:read32(S.gSaveBlock2Ptr) end
 local function getVar(v) return emu:read16(sb1() + S.OFF_SB1_VARS + (v - S.VARS_START) * 2) end
 local function getFlag(f) return (emu:read8(sb1() + S.OFF_SB1_FLAGS + (f >> 3)) >> (f & 7)) & 1 == 1 end
+local function setFlag(f, on)
+  local a = sb1() + S.OFF_SB1_FLAGS + (f >> 3)
+  local v = emu:read8(a)
+  emu:write8(a, on and (v | (1 << (f & 7))) or (v & ~(1 << (f & 7))))
+end
 local function mapId()
   local loc = sb1() + S.OFF_SB1_LOCATION
   return emu:read8(loc) * 256 + emu:read8(loc + 1)
@@ -331,6 +336,29 @@ local function runRamScript(script)
   emu:write32(S.gMapHeader + S.OFF_MAPHEADER_MAPSCRIPTS, tableAddr)
 end
 
+-- Kimon's trade: YES to his offer, then pick the Wooloo (the last party slot)
+-- on the storage screen the expansion opens for in-game trades.
+local function kimonTrade()
+  local t0, boxes = now(), 0
+  while not on("CB2_PokeStorage") do
+    if boxUp() then
+      wait(34)
+      boxes = boxes + 1
+    end
+    tap(K.A); wait(9)
+    if now() - t0 > 3000 then shot("stuck"); fail("no storage screen for Kimon's trade") end
+  end
+  wait(90); shot("kimon_choose_mon")
+  -- The cursor starts in the jar; up past its name to YOUR PARTY, open the
+  -- party, then the Wooloo (the second Pokemon) and SELECT.
+  tap(K.UP); wait(20); tap(K.UP); wait(20); shot("kimon_your_party")
+  tap(K.A); wait(60); tap(K.DOWN); wait(20); shot("kimon_choose_wooloo")
+  tap(K.A); wait(40); shot("kimon_choose_menu")
+  tap(K.A); wait(40)
+  waitUntil(function() return not on("CB2_PokeStorage") end, 1200, "the storage screen to close")
+  settle({ [1] = "kimon_trade_done" })
+end
+
 -- Faint the party and white out where the player stands: they must wake by the
 -- hearth on 1F, where Mom feeds everyone, with Elaia's theme playing.
 local function whiteOut(where)
@@ -419,12 +447,12 @@ local function main()
   shot("downstairs")
   goTo(5, 8)
   enter(K.DOWN, S.MAP_ELAIA, "the front door")
-  expectAt(5, 9, "out of the front door")
+  expectAt(5, 13, "out of the front door")
   expect(mapMusic() == S.MUS_ELAIA, "Elaia's theme in the village")
   shot("front_door")
 
   -- Kydippe next door, and her Oran Berries.
-  goTo(17, 7)
+  goTo(17, 11)
   enter(K.UP, S.MAP_KYDIPPE, "Kydippe's door")
   goTo(2, 3); face(K.UP); tap(K.A); wait(60)
   shot("kydippe")
@@ -432,14 +460,34 @@ local function main()
   expect(getFlag(S.FLAG_GOT_KYDIPPE_ORAN), "Kydippe's Oran Berries")
   goTo(4, 7)
   enter(K.DOWN, S.MAP_ELAIA, "Kydippe's door out")
-  expectAt(17, 7, "out of Kydippe's house")
+  expectAt(17, 11, "out of Kydippe's house")
+
+  local HALIA_RING = { 10, 18, 18, 24 }
+
+  -- Glykera's house (every house is a home): the comb from Melitta's hives buys
+  -- two of her honey cakes; her father Kimon has only stories until the player
+  -- has Poke Balls.
+  goTo(4, 7, HALIA_RING); face(K.RIGHT); tap(K.A); wait(60)
+  shot("honey_in_the_hives"); settle()
+  expect(getFlag(S.FLAG_HIDDEN_HONEY), "found the comb in Melitta's hives")
+  goTo(3, 19, HALIA_RING)
+  enter(K.UP, S.MAP_BAKERS_HOUSE, "Glykera's door")
+  shot("bakers_house")
+  goTo(3, 4); face(K.LEFT); tap(K.A); wait(60)
+  shot("glykera_no_honey_yet_or_honey"); settle({ [3] = "glykera_cakes" })
+  expect(getFlag(S.FLAG_GOT_GLYKERA_CAKES), "traded the comb for Glykera's honey cakes")
+  goTo(9, 6); face(K.UP); tap(K.A); wait(60)
+  shot("kimon_halcyons"); settle()
+  expect(not getFlag(S.FLAG_DID_KIMON_TRADE), "Kimon only tells stories before the Poke Balls")
+  goTo(6, 7)
+  enter(K.DOWN, S.MAP_ELAIA, "Glykera's door out")
+  expectAt(3, 19, "out of Glykera's house")
 
   -- The Akademia's door is shut until the thread is read (round Halia's line).
-  local HALIA_RING = { 10, 14, 18, 20 }
-  expect(not go(5, 30, HALIA_RING), "the note on the Akademia door")
+  expect(not go(5, 34, HALIA_RING), "the note on the Akademia door")
   wait(40); shot("akademia_note"); settle()
   local nx, ny = pos()
-  expect(not (nx == 5 and ny == 30) and mapId() == S.MAP_ELAIA, "stepped back from the door")
+  expect(not (nx == 5 and ny == 34) and mapId() == S.MAP_ELAIA, "stepped back from the door")
   expect(not getFlag(S.FLAG_THREAD_READ), "the thread is still unread")
 
   -- The north gate turns the player back without a partner.
@@ -449,16 +497,16 @@ local function main()
   expectAt(11, 3, "turned back from the road")
 
   -- Beat 2: Halia reads the threads.
-  expect(not go(14, 18), "Halia calls the player into line")
+  expect(not go(14, 22), "Halia calls the player into line")
   wait(30); shot("halia_calls")
   settle({ [3] = "korinna_reading", [8] = "philon_reading", [12] = "your_hand_silence", [14] = "turn_around",
            [16] = "your_own_business" })
   expect(getFlag(S.FLAG_THREAD_READ), "the thread is read")
-  expectAt(14, 16, "at the head of the line")
+  expectAt(14, 20, "at the head of the line")
   shot("after_the_reading")
 
   -- Beat 3: the Akademia.
-  goTo(5, 30)
+  goTo(5, 34)
   enter(K.UP, S.MAP_AKADEMIA, "the Akademia door", true)
   expect(mapMusic() == S.MUS_AKADEMIA, "the Akademia's lyre theme")
   shot("akademia_alethea")
@@ -490,12 +538,12 @@ local function main()
   shot("last_krater")
   goTo(10, 12)
   enter(K.DOWN, S.MAP_ELAIA, "the Akademia's door out")
-  expectAt(5, 30, "out of the Akademia")
+  expectAt(5, 34, "out of the Akademia")
 
   -- Beat 4: Kleon in the square.
   expect(not getFlag(S.FLAG_HIDE_KLEON_ELAIA), "Kleon waits in the square")
   shot("kleon_waits")
-  expect(not go(14, 19), "Kleon calls the player at the steps")
+  expect(not go(14, 23), "Kleon calls the player at the steps")
   wait(40); shot("kleon_there_you_are")
   local outcome = kleonBattle({ [4] = "kleon_oracle", [6] = "kleon_battle_me" })
   if OUTCOME == "win" then expect(outcome == S.B_OUTCOME_WON, "beat Kleon")
@@ -514,6 +562,27 @@ local function main()
   expect(getFlag(S.FLAG_HIDE_KLEON_ELAIA) and getFlag(S.FLAG_HIDE_ALETHEA_ELAIA), "Kleon and Alethea have gone north")
   expect(mapMusic() == S.MUS_ELAIA, "Elaia's theme again")
   shot("square_after")
+
+  -- Kimon trades his Finizen for a Wooloo now the player has Poke Balls.
+  runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
+                 S.SCR_OP_CALLNATIVE, { S.ScrCmd_createmon | 1, 4 }, 0, S.PARTY_SIZE,
+                 { S.SPECIES_WOOLOO, 2 }, { 5, 2 }, { 0, 4 }, S.SCR_OP_END })
+  wait(30)
+  goTo(3, 19, nil)
+  enter(K.UP, S.MAP_BAKERS_HOUSE, "Glykera's door, after the battle")
+  goTo(9, 6); face(K.UP); tap(K.A); wait(60)
+  shot("kimon_offers_arion")
+  kimonTrade()
+  expect(getFlag(S.FLAG_DID_KIMON_TRADE), "traded Kimon a Wooloo for Arion")
+  -- Coming back with the Hearth Laurel pays: Kimon's pearls. (The laurel is
+  -- lent for this check and taken back, so the rest of the run is unchanged.)
+  setFlag(S.FLAG_BADGE01_GET, true)
+  face(K.UP); tap(K.A); wait(60)
+  shot("kimon_pearls"); settle()
+  expect(getFlag(S.FLAG_GOT_KIMON_PEARLS), "Kimon's pearls, for the Hearth Laurel")
+  setFlag(S.FLAG_BADGE01_GET, false)
+  goTo(6, 7)
+  enter(K.DOWN, S.MAP_ELAIA, "Glykera's door out, after the trade")
 
   -- Whiting out in the square, right after the battle, sends the player home.
   whiteOut("square")
