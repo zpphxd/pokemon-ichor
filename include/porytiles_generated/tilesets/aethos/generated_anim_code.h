@@ -100,31 +100,31 @@ const u16 *const gTilesetAnims_PorytilesManaged_Aethos_Waterfall[] = {
 static void QueueAnimTiles_PorytilesManaged_Aethos_Flower(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Aethos_Flower);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_Flower[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(508)), 4 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_Flower[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(1)), 4 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_PorytilesManaged_Aethos_LandWaterEdge(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Aethos_LandWaterEdge);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_LandWaterEdge[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(480)), 10 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_LandWaterEdge[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(5)), 10 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_PorytilesManaged_Aethos_SandWaterEdge(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Aethos_SandWaterEdge);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_SandWaterEdge[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(464)), 10 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_SandWaterEdge[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(15)), 10 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_PorytilesManaged_Aethos_Water(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Aethos_Water);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_Water[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(432)), 30 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_Water[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(25)), 30 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_PorytilesManaged_Aethos_Waterfall(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Aethos_Waterfall);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_Waterfall[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(496)), 6 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Aethos_Waterfall[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(55)), 6 * TILE_SIZE_4BPP);
 }
 
 // ============================================
