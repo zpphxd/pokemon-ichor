@@ -65,7 +65,7 @@ SLICE_OUT="$OUT" SLICE_SYMBOLS="${OUT}symbols.lua" ${TIMEOUT:+$TIMEOUT 2400} "$R
 code=$?
 secs=$(( $(date +%s) - start ))
 
-grep -o "SLICE \(ok\|FAIL\|BUG\|FINDING\|NOTE\|BEAT\|BATTLE\|note\).*"
+grep -o "SLICE \(ok\|FAIL\|BUG\|FINDING\|NOTE\|BEAT\|BATTLE\|note\).*" "${OUT}run.log"
 python3 tools/ichor/tests/slice_text_report.py "${OUT}run.log" > "${OUT}text.txt" || true
 grep -E "^(WIDE|SUMMARY)" "${OUT}text.txt"
 
