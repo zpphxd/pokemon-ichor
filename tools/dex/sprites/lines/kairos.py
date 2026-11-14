@@ -69,10 +69,10 @@ def kairazor(p, view, phase):
 HX, HY = 1, 11
 # the near wing's four sickle-feathers and the far wing's three: (root,
 # control, tip, width), curved quadratic spines that sweep back
-FEATHERS = [((46, 16), (44.4, 7.4), (50.4, 1.6), 7.0), ((48.6, 15.6), (51.6, 5), (61, 3.6), 7.6),
-            ((49.6, 19), (57.4, 11.6), (62.2, 17.4), 7.6), ((49, 23.4), (57.4, 21.6), (60.6, 31), 6.8)]
-FAR_FEATHERS = [((34.4, 16), (33.6, 9.4), (36.4, 4.6), 4.6), ((36.6, 15.6), (38.8, 9.4), (42.6, 6.4), 4.8),
-                ((38.4, 17.6), (42, 13.4), (45.6, 11.4), 4.2)]
+FEATHERS = [((45.4, 15.4), (42.6, 5.6), (47, 1.6), 7.6), ((48, 14.6), (51.6, 3), (60.4, 1.6), 8.4),
+            ((49.6, 18), (58.6, 8.6), (62.4, 11), 8.4), ((49.4, 22.6), (59, 19), (62.4, 29.6), 8.0)]
+FAR_FEATHERS = [((33.6, 16.4), (30.6, 8.4), (33, 2.4), 5.8), ((36, 16), (37.6, 7.4), (42, 3.4), 6.2),
+                ((38.4, 18.4), (42.6, 12.4), (46, 10), 5.4)]
 LAYERS = ("far", "tail", "body", "near", "neck", "head")
 
 
@@ -80,7 +80,7 @@ def feather_poly(root, ctrl, tip, w, beat=0.0):
     """Outline of a sickle-feather along a curved spine: broad near the root,
     swelling a little, then tapering to a sharp tip."""
     tip = (tip[0] + beat * 0.6, max(1.6, tip[1] + beat))
-    ctrl = (ctrl[0] + beat * 0.3, ctrl[1] + beat * 0.6)
+    ctrl = (ctrl[0] + beat * 0.3, max(3.6, ctrl[1] + beat * 0.6))
     path = bez(root, ctrl, tip, n=16)
     return ribbon(path, lambda t: w * (0.9 + 0.2 * math.sin(math.pi * min(1, t * 1.6))) * (1 - t ** 2.2) + 0.5)
 
@@ -113,27 +113,31 @@ def _front(p, ph, layers=LAYERS):
             PARTS["far"].append(_feather(p, r, c, t, w, far=True, beat=W * 0.5, group=6 + i))
 
     if "tail" in layers:
-        # ---- tail: sweeping down and back to the balance, its pans hung wide
-        PARTS["tail"] = p.limb(bez3((45, 46), (49, 54), (54.6, 54), (55.4, 47)), 8, 3.4, marb, group=8)
-        PARTS["beam"] = p.limb([(46.6, 46.6), (61.6, 46.6)], 2.4, 2.4, gold, group=9)
-        PARTS["pans"] = [p.poly([(44.6, 49.4), (53, 49.4), (52.4, 51.6), (50.6, 53.6), (47, 53.6), (45.2, 51.6)], aeg,
-                                group=10),
-                         p.poly([(55.4, 49.4), (62.4, 49.4), (62, 51.6), (60.6, 53.6), (57.2, 53.6), (55.8, 51.6)], aeg,
-                                group=10)]
-        PARTS["pivot"] = p.blob(54.6, 46.6, 1.8, 1.8, pink, group=11)
+        # ---- tail: sweeping down, back and up into a plate, the balance's
+        # pivot; the gold beam grows from the plate, its pans hung from its ends
+        PARTS["tail"] = p.limb(bez3((47, 47), (51.4, 55.4), (55.4, 53.4), (55, 46)), 8.4, 3.4, marb, group=8)
 
     if "body" in layers:
-        # ---- body: round and full, Lugia's
-        PARTS["body"] = p.blob(38.6, 41.6, 13, 10.4, marb, ang=-12, group=1)
-        p.blob(31.4, 39, 7.6, 7.6, marb, group=1)
+        # ---- body: a deep breast flowing back into a long, tapering body
+        PARTS["body"] = p.blob(40, 42.6, 14, 9.6, marb, ang=-6, group=1)
+        p.blob(30.4, 41.6, 9.4, 9.4, marb, group=1)
         # small legs tucked under, gold talons
-        PARTS["legs"] = [p.limb([(35, 48.4), (34, 52.6)], 4.4, 3.4, marb, bias=0.2, group=12),
-                         p.limb([(42.6, 48.6), (42.4, 53)], 4.6, 3.4, marb, group=13)]
-        p.taper([(34.4, 52.4), (31.6, 55)], 2.6, gold, group=14)
-        p.taper([(42.4, 52.6), (39.8, 55.2)], 2.6, gold, group=14)
-        # chest plate and the diamond gem
-        PARTS["chest"] = p.poly([(25.6, 38.4), (30, 33), (35, 34), (37, 40.4), (33, 47), (28, 44.4)], aeg, group=20)
-        PARTS["gem"] = p.poly([(28.4, 40), (31.6, 35.4), (34.8, 40), (31.6, 45)], gem, group=21)
+        PARTS["legs"] = [p.limb([(35, 49.6), (34, 53)], 4.4, 3.4, marb, bias=0.2, group=12),
+                         p.limb([(43, 49.4), (42.6, 53.4)], 4.6, 3.4, marb, group=13)]
+        p.taper([(34.4, 52.8), (31.6, 55.4)], 2.6, gold, group=14)
+        p.taper([(42.6, 53), (40, 55.6)], 2.6, gold, group=14)
+        # chest plate and the diamond gem, low on the deep breast
+        PARTS["chest"] = p.poly([(25, 41.6), (30.4, 34.6), (35.8, 41.6), (30.4, 49)], aeg, group=20)
+        PARTS["gem"] = p.poly([(27.4, 41.6), (30.4, 37.4), (33.4, 41.6), (30.4, 46.4)], gem, group=21)
+
+    if "tail" in layers:
+        # the balance in front: the tail's tip rises into a plate, the pivot,
+        # and the gold beam grows out of it with the pans hung from its ends
+        PARTS["beam"] = p.limb([(48, 41), (62, 41)], 2.4, 2.4, gold, group=9)
+        PARTS["pivot"] = p.poly([(55.4, 36.6), (59, 41), (55.4, 45.6), (51.8, 41)], aeg, group=11)
+        PARTS["pans"] = [p.poly([(46, 47), (53, 47), (52.4, 49), (51, 50.6), (48, 50.6), (46.6, 49)], aeg, group=10),
+                         p.poly([(57, 47), (62.4, 47), (62.2, 49), (61.2, 50.6), (58.6, 50.6), (57.4, 49)], aeg,
+                                group=10)]
 
     if "near" in layers:
         # ---- near wing: the arm rising from the shoulder into a hand of four
@@ -141,8 +145,8 @@ def _front(p, ph, layers=LAYERS):
         PARTS["fingers"] = []
         for i, (r, c, t, w) in reversed(list(enumerate(FEATHERS))):
             PARTS["fingers"].append(_feather(p, r, c, t, w, beat=W * (1 - i * 0.2), group=32 + i))
-        PARTS["hand"] = p.poly([(37.4, 35), (39, 27), (42, 19.6), (45, 14.4), (48, 12.4), (51, 14), (52, 18.4),
-                                (51, 24), (48, 29.6), (44, 34.6), (40.6, 37)], marb, group=30)
+        PARTS["hand"] = p.poly([(37.4, 35), (39, 27), (41.6, 19.6), (44.4, 13.6), (47.6, 11.4), (51, 13), (52.4, 18),
+                                (52, 24), (49, 30), (44.4, 35), (40.6, 37.4)], marb, group=30)
         PARTS["wplate"] = p.poly([(38, 34), (39.6, 26.6), (42.4, 19.6), (45.4, 14.6), (48, 12.8), (49.4, 14.4),
                                   (47, 18), (44.6, 23), (42.6, 28.6), (41.4, 35)], aeg, group=40)
         PARTS["splate"] = p.poly([(38.4, 32), (43, 29.6), (47, 31.6), (47.6, 35.6), (44.4, 38.6), (40, 37.6)], aeg,
