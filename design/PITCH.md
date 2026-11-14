@@ -247,6 +247,8 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
 
 ## 7. Art and music direction
 
+> **Total conversion (user, 2026-11-14).** Every asset on screen is redrawn Greek-myth inspired: houses, landscape, temples and columns, people, Pokémon, battles and every menu. Nothing stays Hoenn. The plan is in `design/ART_PLAN.md`.
+
 - **A world painted on pottery.**
   - Menus and text boxes use terracotta-and-black Greek key borders.
   - Battle intros are black-figure silhouettes.
