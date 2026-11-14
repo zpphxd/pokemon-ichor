@@ -1,6 +1,6 @@
 """Mask line: Prosomime (Psychic/Poison). The two-faced mask of the
 Dionysia, and Thespis, the first actor, who stepped out of the chorus and
-spoke as someone else."""
+spoke as someone else. A violet smoke ghost lives in the mask and wears it."""
 import math
 
 from mon_lib import C, Mat, Mon, bez3
@@ -16,7 +16,7 @@ PROSOMIME_COLORS = [
     ("white", C.white),
     # terracotta cheek paint
     ("terra0", (152, 56, 40)), ("terra1", (216, 112, 72)),
-    # wine-violet haze and the dark of the hollows
+    # wine-violet haze: the ghost's smoke body and the glow in the hollows
     ("wine0", (64, 24, 72)), ("wine1", (120, 64, 136)), ("wine2", (176, 120, 200)),
     # Psychic-pink ribbons
     ("rose0", (192, 72, 120)), ("rose1", (240, 144, 176)),
@@ -31,7 +31,8 @@ m_com = Mat(["com0", "com1", "com2", "white"], line="com0", cuts=[0.2, 0.5, 0.78
 m_tra = Mat(["tra0", "tra1", "tra2", "white"], line="tra0", cuts=[0.2, 0.5, 0.78])
 m_rib = Mat(["rose0", "rose1"], line="rose0", cuts=[0.5])
 m_haze = Mat(["wine1", "wine2"], line="wine1", outline="wine1", cuts=[0.5])
-m_hole = Mat(["wine0"])
+m_hole = Mat(["ink"])
+m_smoke = Mat(["wine0", "wine1", "wine2"], line="wine0", cuts=[0.4, 0.72])
 
 
 def _ribbon(p, path, w, group, far=False):
@@ -62,84 +63,81 @@ def mask_pts(cx, cy, rx, ry, rot=0.0):
 def prosomime(p, view, phase):
     if view in ("front", "side", "icon"):
         # the battle front is hand-finished in the art files; this draft
-        # matches it for the icon and the follower
+        # matches it for the icon and the follower: the smoke ghost behind,
+        # its tongues streaming back, the mask with its carved features
         L = 1 if (phase == 1 and view == "front") else 0
         sw = phase
-        # a soft trail of violet haze under the mask, drifting back like a tail
-        p.limb(bez3((30, 44 - L), (34, 51), (41, 52), (46, 58 - sw)), 6.4, 1.6, m_haze, group=29)
-        _ribbon(p, bez3((40, 25 - L), (53, 20), (49, 37), (59, 44 + sw)), 5.6, 30, far=True)
-        _ribbon(p, bez3((40, 29 - L), (54, 33), (44, 46), (54, 58 - sw)), 6.0, 31)
-        mask = p.poly(mask_pts(28.8, 32 - L, 15.0, 15.8, -6), m_com, group=1)
-        crest = []
-        for x, y, r in ((17.6, 20, 3.1), (21.4, 16.4, 3.3), (26.6, 14.4, 3.6), (32.8, 14.6, 3.5), (37.8, 16.6, 3.3),
-                        (41.2, 20.5, 3.0)):
-            crest.append(p.circle(x, y - L, r, m_com if x < 29 else m_tra, group=2 + len(crest)))
-        mid = bez3((29, 6 - L), (28.5, 22 - L), (27.5, 34 - L), (27, 52 - L))
-        p.poly(mid + [(50, 52 - L), (50, 6 - L)], m_tra, group=1, clip=[mask])
-        p.blob(41, 27 - L, 2.2, 2.6, m_rib, group=32)
+        for ang, r, rad in ((-118, 16.5, 6.4), (-60, 16, 6.6), (-25, 15.5, 7.0), (10, 15, 7.4), (45, 14, 7.6),
+                            (95, 13, 8.0), (135, 14.5, 6.6), (170, 15, 5.6)):
+            a = math.radians(ang)
+            p.circle(32 + r * math.cos(a), 31 + r * 0.95 * math.sin(a) - L, rad, m_smoke, group=20)
+        p.blob(33, 32 - L, 17, 17.5, m_smoke, group=20)
+        for a, b, w, bend in (((43, 19), (52, 7 + sw), 7.0, -2.4), ((47, 25), (57, 16 - sw), 6.0, -2.0),
+                              ((47.5, 33), (58, 28 + sw), 5.0, -1.4)):
+            p.lens((a[0], a[1] - L), (b[0], b[1] - L), w, m_smoke, bend=bend, fat=0.35, group=20)
+        p.limb(bez3((36, 44), (42, 54), (51, 55), (54.5, 48 + sw)), 14.0, 3.2, m_smoke, group=20)
+        _ribbon(p, bez3((45, 22 - L), (54, 16), (54, 27), (61.5, 29 + sw)), 4.6, 30)
+        _ribbon(p, bez3((45, 25 - L), (54, 26), (52, 37), (60.5, 42 - sw)), 5.0, 31)
+        mask = p.poly(mask_pts(30, 31 - L, 14.2, 16.4, -6), m_com, group=1)
+        for x, y, r in ((44.5, 21, 3.2), (16, 21.5, 3.0), (41.5, 16.5, 3.6), (19, 16.5, 3.6), (36.5, 13.2, 3.8),
+                        (24, 13.2, 3.8), (30.2, 11.8, 4.0)):
+            p.circle(x, y - L, r, m_com if x < 30 else m_tra, group=2)
+        p.poly([(29.5, 0), (28, 64), (64, 64), (64, 0)], m_tra, group=1, clip=[mask])
+        # eye holes and the open stage mouth as parts, so they scale
+        p.poly(poly_from(bez3((18, 27.5), (19.5, 21.5), (24.5, 21.5), (26, 27.5)) + [(23.5, 25.5), (20.5, 25.5)], -L),
+               m_haze, group=91)
+        p.poly(poly_from([(32, 23), (36, 24.5), (41.5, 28.5), (37, 29), (33.5, 26)], -L), m_haze, group=92)
+        p.poly(poly_from(bez3((19.5, 31.5), (21.5, 34.8), (25, 35.6), (29, 35.2))
+                         + bez3((29, 35.2), (33, 34.8), (37.5, 36), (40.5, 40.8))[1:]
+                         + bez3((40.5, 40.8), (38, 42.4), (34.5, 43.4), (29.5, 43.6))[1:]
+                         + bez3((29.5, 43.6), (24.5, 43.6), (20.5, 40), (19.5, 31.5))[1:], -L), m_hole, group=90)
+        # spectral fingers gripping the chin
+        for f in (bez3((15.5, 45.5), (17, 44), (18.5, 43.8), (19.8, 44.6)), bez3((16.5, 47.5), (18.5, 46.4), (20, 46.4), (21.2, 47.3))):
+            p.limb(poly_from(f, -sw), 2.4, 1.8, m_smoke, group=95)
         if p.big:
-            p.patch(14, 22 - L, ["...1111", "..1cddc1", ".1cd8ddc1", "1cddddddc1", "1c111111c1", "11......11"],
-                    {"1": "ink", "c": "wine1", "d": "wine2", "8": "white"})
-            p.patch(30, 22 - L, ["111", "1cc11", ".1cdd11", ".1c8ddc11", "..1ddddcc1", "...11dccc1", ".....1111"],
-                    {"1": "ink", "c": "wine1", "d": "wine2", "8": "white"})
-            mouth = poly_from(bez3((15.2, 33), (18, 37.5), (23, 38.8), (27.5, 38.4))
-                              + bez3((27.5, 38.4), (31.5, 36.6), (36, 39.5), (38.6, 45))[1:]
-                              + bez3((38.6, 45), (35.5, 43.6), (32, 41.2), (27.5, 43.4))[1:]
-                              + bez3((27.5, 43.4), (21.5, 46.4), (16.5, 41.5), (15.2, 33))[1:], -L)
-            p.poly(mouth, m_hole, group=90)
-            p.pxs([(16, 30 - L), (17, 30 - L), (18, 30 - L), (17, 29 - L)], "terra1")
-            p.pxs([(38, 29 - L), (38, 30 - L), (38, 31 - L)], "wine2")
-        else:
-            # at icon size the features are parts, so they scale
-            p.poly(poly_from(bez3((14, 27.5), (16, 21.5), (22, 21.5), (24, 27.5)) + [(21, 25.5), (17, 25.5)], -L),
-                   m_haze, group=91)
-            p.poly(poly_from([(30, 22.5), (34, 24.5), (39.5, 28.5), (35, 29), (31.5, 26)], -L), m_haze, group=92)
-            p.poly(poly_from(bez3((15.2, 33), (18, 37.5), (23, 38.8), (27.5, 38.4))
-                             + bez3((27.5, 38.4), (31.5, 36.6), (36, 39.5), (38.6, 45))[1:]
-                             + bez3((38.6, 45), (35.5, 43.6), (32, 41.2), (27.5, 43.4))[1:]
-                             + bez3((27.5, 43.4), (21.5, 46.4), (16.5, 41.5), (15.2, 33))[1:], -L), m_hole, group=90)
+            p.pxs([(22, 24 - L), (37, 26 - L)], "white")
+            p.pxs([(19, 30 - L), (20, 30 - L), (21, 30 - L), (20, 31 - L)], "terra1")
         return
 
     if view == "back":
-        # the hollow inside of the mask (the hand-finished art replaces this)
-        _ribbon(p, bez3((13, 33), (2, 36), (10, 48), (3, 58)), 5.4, 30, far=True)
-        outer = p.poly(mask_pts(32.5, 45, 18, 20, 6), m_tra, group=1)
-        p.poly([(34, 10), (34, 70), (70, 70), (70, 10)], m_com, group=1, clip=[outer])
-        inner = p.poly(mask_pts(31, 47, 14.2, 16.6, 6), m_tra, group=2, bias=0.2)
-        p.poly([(34, 10), (34, 70), (70, 70), (70, 10)], m_com, group=2, clip=[inner], bias=0.2)
-        _ribbon(p, bez3((51, 33), (61, 38), (53, 49), (60, 60)), 5.4, 31)
+        # the ghost from behind wearing the mask (the hand-finished art
+        # replaces this)
+        p.blob(26, 60, 23.5, 15, m_smoke, group=20)
+        p.blob(33, 33, 11, 13, m_smoke, group=20)
+        outer = p.poly(mask_pts(43, 34, 13.4, 19.5, 8), m_tra, group=1)
+        p.poly([(44, 0), (44, 64), (64, 64), (64, 0)], m_com, group=1, clip=[outer])
+        p.blob(35.5, 34.5, 9.6, 12.5, m_smoke, group=21)
+        _ribbon(p, bez3((30, 26), (20, 22), (18, 32), (8, 30)), 5.0, 30)
         return
 
     if view in ("down", "up"):
-        # follower: the mask bobbing toward the player, its tragic half
-        # turned toward them; walking away, the hollow inside shows
+        # follower: the ghost bobbing toward the player behind its mask, the
+        # tragic half turned toward them; walking away, its smoky back with
+        # the ribbons' bow and the mask's rim at the sides
         st = phase
-        cx, cy = 32, 32 - st
+        cx, cy = 32, 31 - st
+        p.blob(32, 33 - st, 17, 16, m_smoke, group=20)
+        for a, b in (((20, 22), (12, 10 + st)), ((44, 22), (52, 10 + (1 - st)))):
+            p.lens((a[0], a[1] - st), b, 7.0, m_smoke, bend=1.6 if a[0] < 32 else -1.6, fat=0.35, group=20)
+        p.limb(bez3((32, 44), (30, 52), (36, 56), (40, 53 - st)), 12, 3, m_smoke, group=20)
         if view == "down":
-            _ribbon(p, bez3((19, 26), (11, 32), (16, 42), (11, 52 - st)), 3.6, 30, far=True)
-            _ribbon(p, bez3((45, 26), (53, 32), (48, 42), (53, 52 - (1 - st))), 3.6, 31, far=True)
             mask = p.poly(mask_pts(cx, cy, 13.4, 15.4, 4), m_com, group=1)
             for x, y, r in ((21, 19.5, 3.0), (25.5, 16.5, 3.2), (31, 15.5, 3.4), (36.5, 16.5, 3.2), (41, 19.5, 3.0)):
                 p.circle(x, y - st, r, m_com if x < 29 else m_tra, group=2)
             p.poly([(29, 10), (29, 60), (60, 60), (60, 10)], m_tra, group=1, clip=[mask])
-            # comic eye arch and mouth corner on the left, the tragic droop
-            # and the tear on the right, turned toward the player
             p.poly(poly_from(bez3((20, 28), (21.5, 22.5), (26.5, 22.5), (28, 28)) + [(25.5, 26), (22.5, 26)], -st),
                    m_haze, group=91)
             p.poly(poly_from([(34, 23), (38.5, 25), (43, 29.5), (38.5, 30), (35, 27)], -st), m_haze, group=92)
-            p.poly(poly_from(bez3((20, 34), (23, 39.5), (28, 40), (32, 39.5)) + bez3((32, 39.5), (36, 38), (40, 41), (42, 46))[1:]
-                             + bez3((42, 46), (39, 44), (36, 42.5), (32, 44)) + bez3((32, 44), (26, 46.5), (21.5, 41.5), (20, 34))[1:],
+            p.poly(poly_from(bez3((20, 33), (23, 37.5), (28, 38), (32, 37.5)) + bez3((32, 37.5), (36, 36.5), (40, 39), (42, 44))[1:]
+                             + bez3((42, 44), (39, 44.5), (35, 45), (32, 45)) + bez3((32, 45), (26, 45.5), (21.5, 41.5), (20, 33))[1:],
                              -st), m_hole, group=90)
-            p.limb(poly_from([(42, 31), (42.5, 35)], -st), 1.6, 1.4, m_haze, group=93)
+            _ribbon(p, bez3((45, 26), (53, 30), (49, 40), (55, 48 - (1 - st))), 3.6, 31)
         else:
-            outer = p.poly(mask_pts(cx, cy, 13.4, 15.4, 0), m_tra, group=1)
-            p.poly([(32, 10), (32, 60), (60, 60), (60, 10)], m_com, group=1, clip=[outer])
-            inner = p.poly(mask_pts(cx - 0.5, cy + 1, 10.5, 12.6, 0), m_tra, group=2, bias=0.2)
-            p.poly([(32, 10), (32, 60), (60, 60), (60, 10)], m_com, group=2, clip=[inner], bias=0.2)
-            for x in (19, 45):
-                p.blob(x, 27 - st, 2.4, 2.6, m_rib, group=32)
-            _ribbon(p, bez3((20, 28), (14, 36), (22, 44), (16, 54 - st)), 3.6, 30)
-            _ribbon(p, bez3((44, 28), (50, 36), (42, 44), (48, 54 - (1 - st))), 3.6, 31)
+            for x in (18.5, 45.5):
+                p.blob(x, 30 - st, 2.6, 8, m_tra if x > 32 else m_com, group=1)
+            p.blob(32, 25 - st, 2.6, 2.6, m_rib, group=32)
+            _ribbon(p, bez3((31, 26), (26, 33), (32, 41), (27, 50 - st)), 4.0, 30)
+            _ribbon(p, bez3((33, 26), (38, 33), (32, 41), (37, 50 - (1 - st))), 4.0, 31)
         return
 
 
