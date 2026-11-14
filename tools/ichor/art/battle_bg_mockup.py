@@ -27,7 +27,7 @@ SCALE = 3
 # name -> (tiles dir, palette file, anim dir, front pic, back pic)
 VIEWS = {
     "grass":    ("tall_grass", "tall_grass/palette.pal", "pokemon/piplup", "pokemon/cyndaquil"),
-    "plain":    ("tall_grass", "plain/palette.pal", "trainers/kleon", "pokemon/snivy"),
+    "plain":    ("building", "plain/palette.pal", "trainers/kleon", "pokemon/snivy"),
     "sand":     ("sand", "sand/palette.pal", "pokemon/cyndaquil", "pokemon/piplup"),
     "water":    ("water", "water/palette.pal", "pokemon/piplup", "pokemon/snivy"),
     "building": ("building", "building/palette.pal", "trainers/hierophant_ione", "pokemon/cyndaquil"),
