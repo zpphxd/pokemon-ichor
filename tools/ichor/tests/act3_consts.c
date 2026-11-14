@@ -1,7 +1,9 @@
-// Constants for the Act III engine checks (see engine_consts.h and act3_lib.lua).
+// Constants for the Act III engine checks: ichor_statues and ichor_bull_leap
+// (see engine_consts.h and act3_lib.lua).
 #include "engine_consts.h"
 #include "task.h"
 #include "constants/event_object_movement.h"
+#include "constants/ichor_act3.h"
 #include "constants/map_groups.h"
 
 // the object templates SaveBlock1 keeps for the current map
@@ -32,3 +34,11 @@ K(DIR_SOUTH, DIR_SOUTH)
 K(DIR_NORTH, DIR_NORTH)
 K(DIR_WEST, DIR_WEST)
 K(DIR_EAST, DIR_EAST)
+
+// special Ichor_BullLeap
+K(ICHOR_LEAP_EARLY, ICHOR_LEAP_EARLY)
+K(ICHOR_LEAP_CLEAN, ICHOR_LEAP_CLEAN)
+K(ICHOR_LEAP_LATE, ICHOR_LEAP_LATE)
+K(VAR_0x8006, VAR_0x8006)
+K(VAR_0x8007, VAR_0x8007)
+K(VAR_0x8003, VAR_0x8003)
