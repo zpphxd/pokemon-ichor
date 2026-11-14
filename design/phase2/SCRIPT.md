@@ -20,15 +20,16 @@ Four more for Phase 2:
 
 ## Act I's second half in one paragraph
 
-The halcyon days end and the *Euploia* sails, with Alethea and her new partner aboard and Kleon green at the rail, his Hearth Laurel finally won. Mid-sea the calm comes back, the wake runs backward toward Kalliste, and the piper's reed splits; Kleon keeps the stroke with a Lakonian marching chant while you fight off the snatchers diving at the last halcyon nest. When the chicks hatch, the wind returns, but too late to make port: the ship puts in overnight at Aegina, and at the inn table Kleon admits what it's like when everyone already knows how your story ends. Emporion is the harbor of the world, and its herald is Kerykos, who talks your ear off, teaches you to pray at a herm and anoint it with oil, and turns out to be the Hierophant of Hermes. Alethea gives you a trowel and learns at the exchange hall that the Titans bought shovels, rope and forty lamps: they are going underground. Kleon wins the Herald Laurel first and wins the race he set, then loses to you at the Sacred Gate and admits he would like someone to tell him death isn't the end. On the Sacred Way you break the Titans' rockslide with the Bronze Hammer from Emporion's cold forge, so the procession of initiates can walk to the Mysteries. In Hecate's Hollow, in the pitch dark, you follow a dog's bark to the three-faced pillar and leave the goddess her supper; she gives you her Torch. The road goes on down Mount Aigaleos's pine slopes, past the rock where a king once watched his fleet lose, through the roadside hamlet of Thria, and across the salt streams where masked jesters insult every pilgrim. At Eleusa's gate a woman ties a saffron thread on every pilgrim's wrist, and yours keeps slipping off. Chloe, the silent Mystagogue, tests you in the dark Telesterion and shows you the secret: one ear of grain, reaped in silence. On the night of the Mysteries the floor hums. Under the granaries, Rhea of the Titans sits rocking a swaddled stone while her diggers carry off the first fragment of the Harpe. She beats Kleon, then loses to you, and notices that the fragment, which hums near every living thing, went silent when you walked in. Chloe gives you Demeter's own sickle, which the Titans tossed aside. By the Maiden's Well, Daphne tells you the truth: there is a Loom where the Fates weave every life, and yours was never spun.
+Before you sail, Halia reads your hand once more by lamplight, and is frightened by what she doesn't see. Your mother walks you down to Akti's quay and doesn't cross the water. The halcyon days end and the *Euploia* sails, with Alethea and the blind mole she dug up aboard, and Kleon green at the rail with his Hearth Laurel, won overnight. Mid-sea the calm comes back and the piper's reed splits; Kleon keeps the stroke with a Lakonian marching chant while you fight off the snatchers diving at the last halcyon nest. When the chicks hatch, the wind returns, but too late to make port. That night the tide runs the wrong way, a trireme with no lights slides past, and Kleon reads you his mother's two-line letter. The ship puts in at Aegina, and at the inn table Kleon admits what it's like when everyone already knows how your story ends. Emporion is the harbor of the world, and its herald is Kerykos, who talks your ear off, teaches you to pray at a herm and anoint it with oil, and turns out to be the Hierophant of Hermes. Alethea gives you a trowel, learns at the exchange hall that a big man who pays in silver bought shovels, rope and forty lamps, and notices a little hook under the Archon's seal on a public notice. Kleon wins the Herald Laurel first and wins the race he set, then loses to you at the Sacred Gate and admits he would like someone to tell him death isn't the end. On the Sacred Way you break the Titans' rockslide with the Bronze Hammer from Emporion's cold forge, so the procession of initiates can walk to the Mysteries. In Hecate's Hollow, in the pitch dark, you follow a dog's bark to the three-faced pillar and leave the goddess her supper; she gives you her Torch. The road goes on down Mount Aigaleos's pine slopes, past the rock where a king once watched his fleet lose, through the roadside hamlet of Thria, and across the salt streams where masked jesters insult every pilgrim. At Eleusa's gate a woman ties a saffron thread on every pilgrim's wrist, and yours keeps slipping off. Chloe, the silent Mystagogue, tests you in the dark Telesterion and shows you the secret: what's reaped grows again. On the night of the Mysteries, Titanborn burst up through the floor of the hall, and Kleon fights beside you for the first time. Under the granaries, Hyperion of the Titans squints into your torchlight while his diggers carry off the first fragment of the Harpe; he can't see a thing down there, and he loses to you anyway. Chloe gives you Demeter's own sickle, which the Titans tossed aside. Next morning, in the wrecked hall by one lamp, Daphne, seasick from her first crossing in thirteen years, tells you what you are: there is a Loom where the Fates weave every life, and you aren't on it. Why is your mother's to tell. Then she reads the back of the Titans' tablet. They have a word for you: the Unwoven.
 
 **The dread,** one line each, building on the slice's list:
-- The calm returns mid-sea, and the wake runs backward.
-- The Titans paid in coins stamped with a sickle that no one has minted in a thousand years.
-- Ships from Delphoi say the Pythia has days when she won't answer at all.
+- Halia, after forty years of reading threads, has never once seen nothing.
+- The tide runs the wrong way at night, and a Titan trireme passes with no lights.
+- A sailor: the Pythia only says "soon" now.
 - The Rharian field came up twice this year: up, then back down, then up.
 - Krokis's saffron thread will not stay on your wrist.
-- The Harpe fragment hums near everyone, and stops near you. (Kronion Hill's hum stopped the day you climbed it.)
+
+**What Phase 2 must not do** (STORY.md §3, Act I): say why the hero has no thread; reveal Phaedon or name Iapetos; hint that Kleon's mother is a Titan; give away the third krater. This script keeps to all four.
 
 ---
 
@@ -109,22 +110,64 @@ About 3 hours on a first run, the top of the 2–3 hour brief, because the road 
 | Route 4 | 12 min | 20–22 | 21–23 | — |
 | Eleusa | 12 min | 21–23 | 22–23 | — |
 | Temple of Demeter | 18 min | — | 23–24 | Chloe 24 / 25 / 25 / 27 |
-| The Mystery sanctum | 18 min | 22–25 | 24–25 | Rhea 25 / 25 / 26 / 28 |
+| The night of the Mysteries and the sanctum | 20 min | 22–25 | 23–25 | Kleon beside you vs two Titanborn; Hyperion 25 / 25 / 26 |
 | The revelation | 5 min | — | — | — |
 | *Optional:* Routes 5–6 and Halai | 25 min | 14–17 | 15–17 | — |
 | *Optional:* Aegina's interior | 20 min | 18–21 | 19–21 | — |
 
-The curve runs Ione's ace 14 → Kerykos's 21 → Chloe's 27 → Rhea's 28. Emerald runs 15 → 19 → 24 → 29 over the same badges; Ichor sits a level or two higher because Phase 2 has more road between temples.
+The curve runs Ione's ace 14 → Kerykos's 21 → Chloe's 27 → Hyperion's 26 (STORY.md targets him at about 22; Open questions 24). Emerald runs 15 → 19 → 24 → 29 over the same badges; Ichor sits a level or two higher because Phase 2 has more road between temples.
 
 ---
 
 # Part 1. Scenes, beats 9–25
 
-## Beat 9. Akti: the winds turn
+## Beat 9A. Elaia: Halia's second look
 
-**Phase 2 build change.** The slice ends with the line "Thank you for playing the Kalliste preview of Pokémon Ichor." Drop it. `FLAG_ICHOR_SLICE_COMPLETE` stays, and is now the trigger for this beat.
+Per STORY.md §3, Act I item 1.
 
-**Setup.** The next time the player enters `MAP_AKTI_TOWN` from any other map with `FLAG_ICHOR_SLICE_COMPLETE` set and `FLAG_ICHOR_WINDS_TURNED` unset, an `ON_FRAME` script runs. The slice's Kleon stays hidden (`FLAG_ICHOR_HIDE_KLEON_AKTI`); this scene uses a second Kleon object by the temple door, shown only while `FLAG_ICHOR_WINDS_TURNED` is unset. Alethea is hidden until this beat clears her flag.
+**Phase 2 build change.** The slice ends with the line "Thank you for playing the Kalliste preview of Pokémon Ichor." Drop it. `FLAG_ICHOR_SLICE_COMPLETE` stays.
+
+**The pointer.** After the slice's last scene, Alethea waits on Akti's quay:
+```text
+ALETHEA: Halia sent a gull. She wants to see you before we sail.
+
+ALETHEA: Truthfully, she wrote “NOW.” In very big letters.
+```
+**Setup.** In Elaia, a coord trigger two tiles from Halia's canopy runs with `FLAG_ICHOR_SLICE_COMPLETE` set and `FLAG_ICHOR_HALIA_SECOND_LOOK` unset. Halia sits alone under the canopy. The festival garlands are down.
+```text
+HALIA: There you are. Sit. No, closer.
+
+HALIA: I said the light was poor, at the festival. It wasn't the light.
+```
+[She lights a small clay lamp and holds it low over the player's hand. Lamp SE. Hold 60 frames. The spindle in her other hand doesn't turn.]
+```text
+HALIA: …
+
+HALIA: Forty years I've read threads under this tree.
+
+HALIA: Forty years, and I've never once seen nothing.
+
+HALIA: Don't look at me like that. I don't know what it means.
+
+HALIA: That's what frightens me.
+
+HALIA: I've sent a gull to Daphne. She'll know what to make of it.
+
+HALIA: Or she'll pretend to. She's very good at pretending to.
+
+HALIA: Go on. Your mother's gone down to the harbor. The wind's turning.
+
+HALIA: I can smell it.
+```
+[Set `FLAG_ICHOR_HALIA_SECOND_LOOK`. Hide Mom at home (`FLAG_ICHOR_HIDE_MOM_HOME`) and show her on Akti's quay (`FLAG_ICHOR_HIDE_MOM_AKTI` cleared).]
+
+**Design note.** Halia never says "no thread" (STORY.md's rule). "Nothing" is as far as she goes, and it reads two ways until Daphne explains it at Eleusa.
+
+## Beat 9B. Akti: the winds turn, and Mom
+
+Per STORY.md §3, Act I item 2.
+
+**Setup.** The next time the player enters `MAP_AKTI_TOWN` with `FLAG_ICHOR_HALIA_SECOND_LOOK` set and `FLAG_ICHOR_WINDS_TURNED` unset, an `ON_FRAME` script runs. Mom stands on the quay with a covered basket. The slice's Kleon stays hidden (`FLAG_ICHOR_HIDE_KLEON_AKTI`); this scene uses a second Kleon object by the temple door, shown only while `FLAG_ICHOR_WINDS_TURNED` is unset.
 
 [A gull cries. The ribbon on the trireme's mast lifts and snaps out. Wind SE.]
 ```text
@@ -132,7 +175,7 @@ NAUSIKLES: [offscreen] WIND! Wind from the south!
 
 NAUSIKLES: [offscreen] Everyone aboard who's coming aboard!
 ```
-[Clear `FLAG_ICHOR_HIDE_ALETHEA_AKTI`. Alethea runs in from the south road and stops in front of the player.]
+[Alethea runs up from the quay and stops in front of the player.]
 ```text
 ALETHEA: {PLAYER}! Did you hear? The kingfishers are done nesting!
 
@@ -142,19 +185,37 @@ ALETHEA: The halcyon days are over. We're sailing!
 ```text
 KLEON: WAIT! Wait for me! Look at this!
 
-KLEON: The Hearth Laurel. I beat her. Tomorrow, like I said.
+KLEON: The Hearth Laurel. I beat her. Last night. By lamplight.
 
-KLEON: Well. Four tomorrows. But I said tomorrow, and it was one.
+KLEON: Ione got up specially. In her nightdress. Then she fed me soup.
 
-KLEON: And I ate the soup. Out of respect.
+KLEON: I ate the soup. Out of respect.
 
 ALETHEA: Congratulations, Kleon. Truthfully.
 
-KLEON: So we're even. One laurel each.
-
-KLEON: The race starts now!
+KLEON: So we're even. One laurel each. The race starts now!
 ```
-[Kleon and Alethea walk up the gangplank and are hidden. Set `FLAG_ICHOR_WINDS_TURNED`. The player is free to finish up in Akti. Nausikles stands at the gangplank.]
+[Kleon and Alethea walk up the gangplank and are hidden. Mom walks over from the quay's edge.]
+```text
+MOM: There you are. I brought bread. And honey. Not from that jar.
+
+MOM: Don't look at me like that. I'm not crying. It's the wind.
+
+MOM: I'm not coming across. I don't cross water. You know that.
+
+MOM: …
+
+MOM: Wherever you end up, come back up the hill. That's all.
+```
+[Give `ITEM_HONEY` ×2. Set `FLAG_ICHOR_MOM_HARBOR`.]
+```text
+{PLAYER} received 2 Honey!
+
+MOM: Go on. That Lakonian boy's already halfway up the mast.
+```
+[Mom walks back to the quay's edge and stays there, facing the sea. Set `FLAG_ICHOR_WINDS_TURNED`. The player is free to finish up in Akti. Nausikles stands at the gangplank. Talking to Mom again: "MOM: Go. Before I change my mind for you."]
+
+**Design note.** "Come back up the hill" is the line Mom means more than the player knows (STORY.md §2). It returns at Delphoi as "Come back up. Every time."
 ```text
 NAUSIKLES: All aboard for Emporion? Once we're out, we don't turn back.
 ```
@@ -180,15 +241,17 @@ NAUSIKLES: Cast off! Oars in, lads! Let the wind do the work.
 ```
 [The player is free on deck. Kleon leans over the starboard rail. Alethea stands by the mast with a Poké Ball held in both hands.]
 
-**Alethea's partner.** Talking to Alethea the first time plays this. `{STR_VAR_1}` is the third starter: Hipling if `VAR_STARTER_MON` is 0, Nebrel if it is 1, Kynder if it is 2.
+**Alethea's partner.** Talking to Alethea the first time plays this. Her first Pokémon is a Spalunk, the blind mole (dex #057), whose line ends in Plouteras, a member of her STORY.md team. The third krater stays with Daphne until the epilogue (STORY.md decision S9).
 ```text
-ALETHEA: Look! Daphne gave me the last krater. {STR_VAR_1}!
+ALETHEA: Look! My first partner. A Spalunk.
 
-ALETHEA: She always said someone comes late. It turns out it was me.
+ALETHEA: It was asleep in the bottom of the dig pit on Kronion Hill.
 
-ALETHEA: And it's good against yours, Kleon. Truthfully, I checked.
+ALETHEA: It followed me home. It's blind. It doesn't care. It just digs.
 
-KLEON: [at the rail] …I heard that.
+ALETHEA: Daphne said I needed a partner. So I dug one up. Literally.
+
+KLEON: [at the rail] A mole? You picked a mole?
 
 KLEON: Hrk.
 
@@ -204,7 +267,7 @@ ALETHEA: Thank you! Wait. Was I supposed to bow? Never mind!
 > NO:
 ALETHEA: That's all right. Ask me later. I'll be standing here, being nervous.
 ```
-[YES: `trainerbattle_no_intro` with `TRAINER_ICHOR_ALETHEA_DECK_<HIPLING|NEBREL|KYNDER>`. Set `FLAG_ICHOR_BATTLED_ALETHEA_DECK` afterwards either way.]
+[YES: `trainerbattle_no_intro` with `TRAINER_ICHOR_ALETHEA_DECK`. Set `FLAG_ICHOR_BATTLED_ALETHEA_DECK` afterwards either way.]
 
 Defeat text:
 ```text
@@ -231,19 +294,13 @@ NAUSIKLES: One nest still out. Has to be. Aeolus won't blow while one's sitting.
 
 NAUSIKLES: OARS! Pronomos, the stroke!
 ```
-[An aulos plays a steady two-note stroke. Rowing SE. The ship lurches forward, slows, then stops.]
+[An aulos plays a steady two-note stroke. Rowing SE. The ship creeps forward over the glassy water.]
 ```text
-ALETHEA: {PLAYER}, look at the wake.
-```
-[The player turns to face the stern. Hold 30 frames.]
-```text
-Behind the ship, the foam is flowing back toward the stern.
+NAUSIKLES: Pull! We'll row her to Aegina if we have to!
 
-The wrong way.
+ALETHEA: Is that… normal?
 
-ALETHEA: The current's running backward. Like the tide at Akti.
-
-NAUSIKLES: It's pulling us back to Kalliste! Row! ROW!
+NAUSIKLES: Nothing's been normal since spring, girl. Pull!
 ```
 [A loud squawk: a split reed. The aulos stops. The oars clatter out of time.]
 ```text
@@ -271,7 +328,7 @@ ALETHEA: Don't ever tell him I said so.
 
 LOOKOUT: [from the bow] Something in the water! Dead ahead!
 ```
-[The player walks to the bow; Alethea follows. A nest of woven seaweed and feathers drifts on the backward current straight at the bronze ram. Two Harpeck circle above it, then dive.]
+[The player walks to the bow; Alethea follows. A nest of woven seaweed and feathers drifts across the glassy water straight at the bronze ram. Two Harpeck circle above it, then dive.]
 ```text
 A floating nest, woven from seaweed and feathers.
 
@@ -285,11 +342,11 @@ ALETHEA: Then we keep them off it! {PLAYER}, the bow!
 ```text
 The other one's diving!
 ```
-[Scripted wild battle with `SPECIES_HARPECK` at Lv 15. Clear both flags. If the player lost either battle, Alethea's partner drives the bird off instead and the scene continues.]
+[Scripted wild battle with `SPECIES_HARPECK` at Lv 15. Clear both flags. If the player lost either battle, Alethea's Spalunk drives the bird off instead and the scene continues.]
 ```text
-ALETHEA: There's a third! {STR_VAR_1}, go!
+ALETHEA: There's a third! Spalunk, go! Dig! …There's no dirt. Bite it!
 ```
-[Alethea's partner leaps to the rail; a hit SE; a squawk fades into the distance.]
+[The Spalunk scrambles up the rail; a hit SE; a squawk fades into the distance.]
 ```text
 ALETHEA: I did it! I mean, it did it. I mostly shouted.
 ```
@@ -301,17 +358,13 @@ The eggs are hatching. One, two, three.
 ```text
 NAUSIKLES: WIND! Ha! The last of them's hatched!
 
-NAUSIKLES: That's halcyon days. Flat sea till the chicks are out. Then Aeolus lets go.
-```
-[The wake straightens out and runs behind the ship again.]
-```text
-ALETHEA: The current's turned around, too.
+NAUSIKLES: That's halcyon days. Flat sea till the chicks are out.
 
-ALETHEA: Tides don't run backward. Truthfully, I don't think anything should.
+NAUSIKLES: Then Aeolus lets go.
 ```
 [The Galenyon lifts two chicks onto its back and flies. The third hops onto the rail, then onto the player's petasos.]
 ```text
-A halcyon chick has hopped onto your hat. It doesn't look like it's leaving.
+A halcyon chick has hopped onto your hat. It doesn't look like leaving.
 ```
 ?? Take it with you? YES/NO
 ```text
@@ -335,9 +388,46 @@ NAUSIKLES: Solid as Lakonia.
 
 KLEON: …Bless Aegina.
 ```
+
+**The night leg** (per STORY.md §3, Act I item 3). [Fade to black, then in on the deck with a scripted night tint (the DNS night palette, forced for this scene whatever the clock says). Stars. The sail full. Kleon at the rail, no longer green, holding a small wax tablet. The player is placed beside him.]
+```text
+KLEON: {PLAYER}. Can't sleep either?
+
+KLEON: Letter from my mother. Came on the gull boat before we sailed.
+
+KLEON: My mother writes every week. Two lines. Lakonian.
+
+KLEON: [reading] “Eat. Don't be stupid.”
+
+KLEON: That's a long one, for her.
+```
+[A creak. The water along the hull hisses and runs forward, toward the bow. The ship slides back a tile, then steadies.]
+```text
+NAUSIKLES: There it goes again. The tide, running the wrong way.
+
+NAUSIKLES: Third night this month. Never seen it in forty years at sea.
+```
+[A long dark shape slides past to starboard: a trireme with no lamps lit, its oars muffled in leather. For a moment the moon shows a sickle painted on its furled sail. Then it's gone.]
+```text
+SAILOR: No lights. No flag. Nobody rows at night without lights…
+
+SAILOR: …unless they're ashamed of something.
+
+SAILOR: Strange times. My cousin's just back from Delphoi.
+
+SAILOR: The Pythia only says “soon” now. To everyone. About everything.
+
+KLEON: Soon what?
+
+SAILOR: That's what everyone asks.
+```
+[Lights on the water ahead: a harbor.]
+```text
+NAUSIKLES: Aegina. Bed, the lot of you.
+```
 [Fade out. Warp to `MAP_AEGINA_TOWN`, the quay, for beat 10B.]
 
-**Design note.** Two separate things went wrong at sea and only one was fixed. The calm was the halcyons, and the player ended it. The backward current was not, and nobody explains it. Daphne doesn't either; it belongs to Kronos, and Act III.
+**Design note.** The calm was the halcyons, and the player ended it. The wrong-way tide is not, and nobody explains it: it is the cloth running out (STORY.md §1, rule 8). Kleon's mother's two-line letters are STORY.md's seed for Lakonia; they must read as nothing more than a Lakonian mother.
 
 ---
 
@@ -502,9 +592,11 @@ KERYKOS: Honey, for Hermes. He's sweet like that.
 ```text
 KERYKOS: Now. Out on the roads you'll find great herms. Old, hung with garlands.
 
-KERYKOS: Rub oil on their faces. Travelers swear Hermes carries them back…
+KERYKOS: Hermes remembers everyone who passes.
 
-KERYKOS: …to any herm he remembers.
+KERYKOS: Anoint his herms, and when you're lost, he'll point.
+
+KERYKOS: Travelers swear he carries them back to any herm he remembers.
 
 KERYKOS: Do I believe it? I'm a herald. I believe everything until it's proven.
 
@@ -568,9 +660,9 @@ LAMPIS: Bought twenty shovels, a mile of rope, and forty lamps.
 
 LAMPIS: Forty! I've never sold forty lamps to one person. Not even a priest.
 
-LAMPIS: Paid in old coins. Very old. A sickle stamped on every one.
+LAMPIS: A big man paid. In silver. Shouting the whole time. Friendly shouting.
 
-LAMPIS: Nobody's minted those in a thousand years. I had to weigh them.
+LAMPIS: He's been hiring dockhands off the quay all month. Silver a day.
 
 LAMPIS: Then they asked the road to Eleusa. I said the Sacred Way's shut.
 
@@ -585,12 +677,28 @@ ALETHEA: “Where the grain goes underground.” Under Eleusa. The Mysteries.
 ALETHEA: I was right. Daphne was right. Truthfully, I wish we weren't.
 
 ALETHEA: The Sacred Way's the fast road, and only heralds may walk it now.
+```
+[Alethea walks to the wall by the door, where a public notice is pinned: a wax-sealed sheet. The player follows.]
+
+**The hook, first sighting** (per STORY.md §3, Act I item 4). The notice is also an object anyone can read afterward.
+```text
+A public notice, sealed with the Archon's owl:
+
+“By order of the Archon. The Sacred Way is closed to all but heralds…
+
+…for the Mysteries' truce. Obey, and be safe.”
+
+ALETHEA: Odd. There's a little hook under the owl.
+
+ALETHEA: …Never mind. Probably a clerk's habit.
 
 ALETHEA: So you need Kerykos's laurel. I'll write to Daphne.
 
 ALETHEA: Kerykos's runners carry letters faster than any ship. Somehow.
 ```
 [Alethea walks out. Hide her in Emporion: `FLAG_ICHOR_HIDE_ALETHEA_EMPORION`. Set `FLAG_ICHOR_DEIGMA_CLUE`. She reappears at the rockslide on Route 2 (beat 17).]
+
+**Design note.** The hook gets one line and no explanation, as STORY.md requires. It is the first of the forger's signatures the player will learn to recognize (STORY.md §4).
 
 ---
 
@@ -1083,9 +1191,11 @@ CHLOE: You followed her down. And you brought her back up.
 ```
 [She holds up a single ear of wheat. A small bronze blade flicks; the stalk parts without a sound.]
 ```text
-CHLOE: That's all it is. One ear of grain, cut in silence.
+CHLOE: One ear of grain, cut in silence.
 
-CHLOE: Don't tell anyone. It sounds like nothing when you say it out loud.
+CHLOE: What's reaped grows again. That's the whole secret.
+
+CHLOE: Don't tell anyone.
 
 CHLOE: I'm Chloe. I lead the initiates down. And I lead them back up.
 
@@ -1162,37 +1272,55 @@ KERYKOS: Keep holy silence! Silence, all of you!
 
 KERYKOS: …That includes me. Starting now.
 ```
-[Total silence. Hold 90 frames, no text. Chloe lifts the cover from the basket. Then a low hum, felt more than heard, the same rumble SE as on Kronion Hill. Shake the screen for 30 frames. Dust sifts down from the roof beams. The four braziers lean sideways, as if a door has opened somewhere below.]
+[Total silence. Hold 90 frames, no text. Chloe lifts the cover from the basket. Then a low rumble, felt more than heard. Shake the screen for 30 frames. Dust sifts down from the roof beams.]
 ```text
-A hum comes up through the floor. You feel it in your teeth.
+A rumble comes up through the floor. You feel it in your teeth.
 
-ALETHEA: That's the sound. The hill on Kalliste. That's the same sound.
-
-CHLOE: Below us. The granaries.
+ALETHEA: The ground's humming. Like Kronion Hill.
 ```
-[Kleon is on his feet before anyone.]
+[A crack SE. The flagstones in the Anaktoron's doorway heave up, and two Titanborn climb out of the hole with lamps and shovels, into the middle of the hall. The initiates scream.]
+```text
+GRUNT: …This isn't the granary.
+
+GRUNT: It's full of people. Why is it full of people?
+
+GRUNT: The big man said it'd be empty! “Holy night, nobody about!”
+
+CHLOE: It's the Mysteries. Everybody is about.
+
+GRUNT: Right. Plan two. Everybody stay calm, and nobody follow us!
+```
+[They kick over the nearest braziers. Swap them to the overturned metatiles; their lit zones go dark. Kleon vaults down the tiers and lands beside the player.]
 ```text
 KLEON: Titans? Finally! Something I can hit!
-```
-[Kleon runs out of the hall. Hide him: `FLAG_ICHOR_HIDE_KLEON_TELESTERION`. Chloe walks down the steps to the player.]
-```text
-CHLOE: Stay seated, all of you. Kerykos. Keep them calm.
 
-KERYKOS: Calm? Me? …Right. Calmly. EVERYONE BE CALM.
+KLEON: {PLAYER}! You take the loud one. I'll take the other loud one.
+```
+**Kleon beside you** (per STORY.md §3, Act I item 5: the one double battle with Kleon, the bookend to the Stair of Hours). [Set `FLAG_ICHOR_NO_WHITEOUT`. A multi battle with `setmultitrainerbattle`: the player and Kleon as partner (`PARTNER_ICHOR_KLEON_ELEUSA_<KYNDER|HIPLING|NEBREL>`, chosen as in beat 16) against `TRAINER_ICHOR_GRUNT_TELESTERION_PSAMMIS` and `TRAINER_ICHOR_GRUNT_TELESTERION_CHERSOS`. Clear the flag afterwards. Either outcome continues; on a loss, Kleon's line is "Ha! We'll call that a draw."]
+```text
+KLEON: Ha! Did you see that? Side by side! Like the old songs!
+
+KLEON: …Don't tell anyone I said that.
+
+GRUNT: Fine! FINE! You can't follow us anyway. Down's dark!
+```
+[The grunts drop back into the hole. Another rumble, from far below.]
+```text
+CHLOE: Below us. The granaries.
+
+KERYKOS: EVERYONE STAY CALM. I AM BEING CALM. LOOK HOW CALM I AM.
+
+KLEON: The initiates. Someone has to keep them out of that hole.
+
+KLEON: Lakonians are good at narrow places. Go on. I've got the door.
 
 CHLOE: You. Bring that torch. Alethea, too.
+
+CHLOE: There's a stair under the Anaktoron. No one goes down it.
+
+CHLOE: Not even me, except once a year. Tonight I'll make an exception.
 ```
-[Fade. Warp to the sanctuary courtyard outside the Ploutonion, the cave mouth in the rock under the Telesterion's terrace. Its bronze gate stands open, its lock smashed.]
-```text
-CHLOE: Kleon. He went straight in.
-
-CHLOE: …Rude.
-
-CHLOE: No one goes down there. Not even me, except once a year.
-
-CHLOE: Tonight I'll make an exception.
-```
-[Set `FLAG_ICHOR_MYSTERIES_NIGHT` and `FLAG_ICHOR_SANCTUM_OPEN`. Chloe, Alethea and the player walk into the Ploutonion; warp to `MAP_ELEUSA_MYSTERY_SANCTUM_B1F`.]
+[Set `FLAG_ICHOR_MYSTERIES_NIGHT`, `FLAG_ICHOR_TELESTERION_MULTI` and `FLAG_ICHOR_SANCTUM_OPEN`. Chloe, Alethea and the player walk into the Anaktoron and down; warp to `MAP_ELEUSA_MYSTERY_SANCTUM_B1F`. Kleon stays at the Anaktoron's door until beat 24.]
 
 ---
 
@@ -1218,118 +1346,73 @@ CHLOE: I've held worse. I've held a harvest.
 ```text
 GRUNT: Oi! The priestess! Get her!
 
-ALETHEA: Oh no you don't. {STR_VAR_1}, go!
+ALETHEA: Oh no you don't. Spalunk, go!
 
 ALETHEA: {PLAYER}, I've got this one. Mostly. Go on!
 ```
 [Alethea and the grunt are moved behind a pillar; battle SEs play offscreen. Hide them after the player leaves the screen. The two B1F grunts in Part 3 are ahead.]
 
-### 23B. B2F, the Hall of the Kore: Kleon
+### 23B. B2F, the Hall of the Kore
 
-[A long frescoed hall. Halfway down, by a stone basin of spring water, Kleon sits against a column with his Poké Balls in a row beside him. Coord trigger.]
+[A long frescoed hall, the four panels of the Kore's story (Part 5). Halfway down, a stone basin of spring water: the midpoint rest. Coord trigger at the hall's head: a big voice echoes up from the far stair.]
 ```text
-KLEON: Don't. Don't say anything.
+VOICE: [from below] EASY! EASY. It's older than your grandmother!
 
-KLEON: She's down there. The Titan woman. With the helmet. And the… bundle.
-
-KLEON: She beat me in three moves. She didn't even stand up.
-
-KLEON: Then she said, “Go home to your mother. Brave boys die young.”
-
-KLEON: Like she was reading it off me. Everyone reads it off me.
+VOICE: [from below] Lift with your knees! Who taught you to lift?
 ```
-[If the player carries a Potion, Super Potion or Oran Berry: ?? Give Kleon a Potion? YES/NO. YES takes one Potion (or the cheapest healing item) and sets `FLAG_ICHOR_HELPED_KLEON_SANCTUM`.]
-```text
-> YES:
-KLEON: …Thanks.
+[The basin heals the party: "The water's cold and tastes of iron. You feel rested." Konis waits at the hall's far end; Gaios in an alcove (Part 3).]
 
-KLEON: Don't tell anyone. Especially Agis.
+### 23C. B3F, the deepest granary: Hyperion
 
-> NO:
-KLEON: Good. I don't need it. I need… I don't know what I need.
-```
-```text
-KLEON: Go on. Beat her.
+Per STORY.md §2 and §3: Hyperion leads the theft, and this is the first admin battle. He is going blind, and the dark is what he fears; the seed is that he squints and complains about it. Nothing he says names his blindness.
 
-KLEON: If you lose, I'll never forgive you.
-
-KLEON: If you win, I'll never forgive you either.
-```
-[Set `FLAG_ICHOR_FOUND_KLEON_SANCTUM`. Kleon stays, head down, until beat 24. The basin heals the party: "The water's cold and tastes of iron. You feel rested."]
-
-### 23C. B3F, the deepest granary: Rhea
-
-**Setup.** A round vault, the oldest granary, its walls cracked open where the Titans' tunnel broke through from the fields. A great bronze chest stands open and empty in the middle. On its lid sits a woman in a bronze Corinthian helmet pushed back from gray-streaked hair, in a heavy wool cloak, rocking a bundle wrapped in cloth. She is humming. Two grunts at the tunnel mouth hold something between them in a sling of rope: a curved black shard as long as an arm. It hums, a low sound you feel in your teeth. A bronze harvest sickle lies in the dust beside the chest. Play Rhea's lullaby (`MUS_ICHOR_ENCOUNTER_ADMIN`), quiet.
+**Setup.** A round vault, the oldest granary, its wall cracked open where the Titans' tunnel broke through from the fields. A great bronze chest stands open in the middle. Two Kapnub smolder on the floor like coals: the only light besides the player's torch. Petros and Amathos, the slice's grunts, are levering a curved black shard as long as an arm out of the chest with a sling of rope. Over them stands a huge bare-armed man with burn scars, a sun-disc breastplate, and a Corinthian helmet pushed back like a crown, squinting. A bronze harvest sickle lies in the dust beside the chest. Play the admins' shared theme with Hyperion's layer of forge hammers (`MUS_ICHOR_ENCOUNTER_ADMIN`).
 
 The sickle can be examined before the scene triggers:
 ```text
 A bronze sickle in the dust. Someone decided it wasn't worth taking.
 ```
-[Coord trigger 5 tiles from the chest. As the player steps onto it, the shard's hum stops. The music cuts to silence for 30 frames.]
+[Coord trigger 5 tiles from the chest.]
 ```text
-GRUNT: Rhea. It's stopped.
+HYPERION: Easy! It's older than your grandmother, Petros.
 
-GRUNT: It's never stopped. Not once, all the way down.
+PETROS: It's cold, boss. It's like holding a winter.
 
-RHEA: Shh. Not so loud. You'll wake him.
+HYPERION: Then hold it fast and get it up the tunnel. Both of you. Go!
+
+AMATHOS: Boss. Boss! That's the kid. From the hill!
+
+HYPERION: What? Where? Somebody bring a lamp.
 ```
-[Rhea pats the bundle. Then she looks up at the player, for the first time.]
+[Petros and Amathos haul the shard into the tunnel and are hidden. Set `FLAG_ICHOR_FRAGMENT_STOLEN`. Hyperion turns toward the torchlight, squinting hard.]
 ```text
-RHEA: …That's a joke. It's a stone. I'm not mad.
+HYPERION: Step into the light. I can't see a thing in here.
 
-RHEA: Mostly not.
+HYPERION: Who builds a temple with no windows? Underground! Who does that?
 
-RHEA: Take it up the tunnel, you two. Go on. Hyperion's waiting.
+HYPERION: …Ha! You're tiny. You ran those two off a hill?
+
+HYPERION: Petros is still sulking about it. He sulks loud.
+
+HYPERION: I'm Hyperion. I run the crews. I feed the crews. Those two are mine.
+
+HYPERION: Nobody chases my kids. Want to try me instead?
 ```
-[The grunts carry the shard into the tunnel and are hidden. Set `FLAG_ICHOR_FRAGMENT_STOLEN`. The lullaby resumes. Rhea stands.]
+[Battle `TRAINER_ICHOR_HYPERION_1`, with `MUS_ICHOR_BATTLE_ADMIN`. A normal battle: a loss whites out to Eleusa's Asclepeion. On the way back down, the trigger sees `FLAG_ICHOR_FRAGMENT_STOLEN` already set, so Petros, Amathos and the shard stay hidden and Hyperion starts at "Step into the light." Defeat text:]
 ```text
-RHEA: You must be the child from Kalliste. Petros and Amathos sent word.
-
-RHEA: They said you were small.
-
-RHEA: You're small.
-
-RHEA: You came down in the dark, through my people, for a piece of old iron.
-
-RHEA: Brave. Brave children die young. Ask any oracle.
-
-RHEA: I asked. Every time.
-
-RHEA: The priestesses upstairs promise that a mother gets her daughter back.
-
-RHEA: Every spring.
-
-RHEA: Demeter got hers back. I had children too.
-
-RHEA: An oracle named the day for each one. It was right every time.
-
-RHEA: So we're going to stop the days. That's all. Just stop them.
-
-RHEA: Come here, then. Let me see what you're made of.
-```
-[Battle `TRAINER_ICHOR_RHEA_1`, with `MUS_ICHOR_BATTLE_ADMIN`. A normal battle: a loss whites out to Eleusa's Asclepeion. On the way back down, the trigger sees `FLAG_ICHOR_FRAGMENT_STOLEN` already set, so the grunts and the shard stay hidden and Rhea starts at "You must be the child from Kalliste." Defeat text:]
-```text
-RHEA: Good. Someone taught you well. Go home and thank them.
+HYPERION: HA! Good! Somebody show me who just beat me!
 ```
 [After the battle:]
 ```text
-RHEA: Your mother taught you that. Don't argue. I can always tell.
+HYPERION: You fight like you're not scared of the dark. Lucky you.
 
-RHEA: It doesn't matter. The shard's halfway to Hyperion by now.
+HYPERION: Doesn't matter. The piece is halfway up the tunnel by now.
+
+HYPERION: Nothing personal, kid. One day there'll be no more dark. For anyone.
+
+HYPERION: You'll thank us.
 ```
-[She tucks the bundle into her cloak. She looks at the player for a long moment, the way Halia did.]
-```text
-RHEA: …It hums near people, you know. That shard. Iapetos says it's hungry.
-
-RHEA: For threads.
-
-RHEA: It went quiet when you walked in. As if there was nothing to eat.
-
-RHEA: Hm.
-
-RHEA: Iapetos will want to hear about you.
-```
-[Rhea walks into the tunnel. She stamps once. A deep rumble; shake the screen for 60 frames. The tunnel mouth caves in behind her. Hide Rhea: `FLAG_ICHOR_HIDE_RHEA_SANCTUM`. Swap the tunnel metatiles to collapsed. Footsteps: Chloe comes down the stair from B2F, with Alethea behind her.]
+[He backs into the tunnel. His Pebblith thumps the roof; a deep rumble; shake the screen for 60 frames. The tunnel caves in behind him. Hide Hyperion: `FLAG_ICHOR_HIDE_HYPERION_SANCTUM`. Swap the tunnel metatiles to collapsed. Footsteps: Chloe comes down the stair from B2F, with Alethea behind her.]
 ```text
 ALETHEA: {PLAYER}! Are you hurt? Is anyone hurt? Was that the ceiling?
 
@@ -1361,226 +1444,173 @@ CHLOE: That's all she ever wanted it to cut.
 
 CHLOE: Go up. I'll stay a while. Somebody should, down here.
 ```
-[Fade. Warp to the Ploutonion's mouth for beat 24.]
+[Fade. Warp to the Telesterion's steps, outside, for beat 24.]
 
 ---
 
-## Beat 24. Kleon goes to Arkadia
+## Beat 24. Kleon goes to Thyrsa
 
-[Outside the Ploutonion. The initiates are coming out of the Telesterion in twos and threes, whispering. Kleon stands at the cave mouth with his arms folded. Alethea comes out behind the player.]
+[Outside the Telesterion. The initiates are coming out in twos and threes, whispering. Kleon sits on the steps with his greaves off. Alethea comes out behind the player.]
 ```text
-KLEON: You beat her. Didn't you. I can tell from your face.
+KLEON: You're back. They got it anyway, didn't they. I can tell from your face.
 
-KLEON: I'm glad. I'm not glad. I'm both. Is that allowed?
+KLEON: An old man held my hand the whole time I was on the door. An initiate.
 
-ALETHEA: It's allowed.
+KLEON: Shaking. He said the Mysteries promise you come back. Like the grain.
 
-KLEON: I'm not going to Thyrsa.
+KLEON: I said, “Back from where?” He just patted my hand.
 
-KLEON: I'm going to Arkadia. The Huntress there. Kallisto.
+KLEON: I didn't ask what he meant. I didn't want to know. That's a first.
 
-KLEON: They say she's never lost. Not once. Not to anyone.
+ALETHEA: Kleon…
 
-KLEON: If I beat her, nobody can say I was only ever running…
+KLEON: I'm going to Thyrsa. The Dionysia. All of Aethos will be in that theater.
 
-KLEON: …at the end of my thread.
+KLEON: Somebody should give them something worth watching.
 
-ALETHEA: Kleon. Arkadia's the fifth temple. You've got two laurels.
-
-KLEON: Then I'll be early. Lakonians are always early.
-
-KLEON: …That came out wrong. It came out right. Bye.
+KLEON: And you were good tonight. Side by side. Don't tell anyone.
 ```
-[Kleon walks east, then breaks into a run, and is gone. Set `FLAG_ICHOR_KLEON_LEFT_FOR_ARKADIA`.]
+[Kleon stands, looks north toward the vine-choked road, and grins.]
 ```text
-ALETHEA: He'll lose.
-
-ALETHEA: Truthfully, I hope I'm wrong.
+KLEON: Vines on the road? Lakonians don't need roads.
 ```
-[If `FLAG_ICHOR_HELPED_KLEON_SANCTUM` is set, add one line before he goes, after "Is that allowed?": "KLEON: And… the potion. I'm keeping the bottle. Don't make it weird."]
+[He runs to the north edge, vaults the vines (a scripted jump over the vine metatiles) and is gone. Set `FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA`.]
+```text
+ALETHEA: He's going to break his neck.
+
+ALETHEA: Truthfully, he'll probably be fine. That's the annoying part.
+```
+[Fade to black. Text: "Morning." The Telesterion is dark at every hour, so the scene inside doesn't depend on the clock.]
 
 ---
 
-## Beat 25. The Maiden's Well: the unspun thread
+## Beat 25. The Telesterion, by one lamp: what you are
 
-**Setup.** [Fade to black. Text: "Later, by the Maiden's Well." Fade in on `MAP_ELEUSA_VILLAGE`'s well-yard: a stone well with a worn bench, under a dry fig tree. Daphne sits on the well's rim with a satchel of scrolls at her feet. Alethea stands beside her. Chloe stands a little apart, by the fig. The square is otherwise empty. Play nothing for 60 frames.]
+**The master text is STORY.md §7.1.** This is that scene, staged for the engine. Its words are §7.1's except where noted; it must deliver what STORY.md §3 lists: Daphne's first crossing in thirteen years; **what** you are, not **why**; her confession about the book; the tablet's back and the Titans' word for you; Alethea's held secret; the Star Chart.
 
-The line avoids naming the hour, because the outdoor tint follows the real clock.
+**Setup** (STORY.md §6.2). The next time the player enters the Telesterion with `FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA` set. The hall is as the theft left it: braziers kicked over (the overturned metatiles), Titan bootprints in the ash, the Anaktoron's floor broken open. The hall is dark (SYSTEMS.md §2) except one lit zone: a single clay lamp on the steps. Daphne sits beside it, a little green, in new sandals. Alethea stands below her. Play Chloe's Mysteries theme (`MUS_ICHOR_MYSTERIES`), then let it fall to one sustained aulos note under Daphne. The hall is dark at every hour, so nothing here depends on the clock.
 ```text
-DAPHNE: {PLAYER}. Come and sit. The stone's warm.
+ALETHEA: She came on the morning boat. She was sick the whole way.
 
-DAPHNE: You told Alethea, and Alethea told me. Twice. The second time with diagrams.
+DAPHNE: Thirteen years on one island. The sea and I aren't friends.
 
-ALETHEA: The diagrams were important.
+DAPHNE: New sandals, too. They pinch. Don't look at them.
 
-DAPHNE: The Titan woman said the shard went quiet when you walked in.
+DAPHNE: {PLAYER}. Sit. The steps are cold, but they're honest.
 
-DAPHNE: As if there were nothing in the room to eat.
+DAPHNE: Halia wrote to me. After the Klotheia, and again when you sailed.
 
-DAPHNE: …
+DAPHNE: She looked at your thread four times. Once by lamplight.
 
-DAPHNE: Amaryllis told me her hill stopped humming. The day you climbed it.
+DAPHNE: She didn't see a short thread. Or a long one. Or a knotted one.
 
-DAPHNE: I hoped I'd have more time. I hoped you'd be older.
-
-DAPHNE: That's what everyone hopes, and it has never once worked.
-
-DAPHNE: All right. A story. This one's true, which is the worst kind.
+DAPHNE: She didn't see one at all.
 ```
-[Play `MUS_ICHOR_LOOM`.]
+[Hold 60 frames. The lamp flickers.]
 ```text
-DAPHNE: At Delphoi, under the Oracle's temple, there is a Loom.
+DAPHNE: Here's what I know. I'll try to say it plainly. I'm out of practice.
 
-DAPHNE: Three weavers sit at it. One spins. One measures. One cuts.
+DAPHNE: Under Delphoi there's a Loom. Three old women work it.
 
-DAPHNE: Every life in Aethos is a thread on that Loom. Mine. Alethea's. Kleon's.
+DAPHNE: One spins every life. One measures it. One cuts it.
 
-DAPHNE: The Oracle reads the Loom. Halia reads a little of it, with her spindle.
+DAPHNE: Everyone in Aethos is a thread on it. Korinna. Philon. Kleon.
 
-DAPHNE: That's all a prophecy is. Somebody reading ahead.
+DAPHNE: Me. Halia. Kanthos the donkey, probably.
 
-DAPHNE: Halia came to me the night you left Elaia. She'd been crying.
-
-DAPHNE: Halia doesn't cry. She makes other people cry. It's her gift.
-
-DAPHNE: She held your hand nine times under that canopy. Nine.
-
-DAPHNE: There was nothing to read.
-
-DAPHNE: Not a short thread. Not a knotted one. No thread at all.
-
-ALETHEA: The saffron thread at the gate. It wouldn't stay on your wrist.
-
-ALETHEA: I saw. I didn't say anything.
-
-DAPHNE: Your mother's pilgrim said the Oracle went blind the night you came.
-
-DAPHNE: I don't think she went blind. I think she looked at the Loom for you…
-
-DAPHNE: …and there was nothing there to see.
-
-DAPHNE: {PLAYER}. The Fates never spun you.
+DAPHNE: Not you.
 ```
-[Hold 60 frames, no text.]
-
-?? Multichoice: WHAT AM I? / AM I GOING TO DIE? / …
+?? Multichoice: WHY? / HOW DO YOU KNOW?
 ```text
-> WHAT AM I?
-DAPHNE: You're Melitta's child. You're you. That part was never theirs to give.
+> WHY?:
+DAPHNE: That part isn't mine to tell. It's your mother's.
 
-DAPHNE: What you aren't is written down. Anywhere.
-
-> AM I GOING TO DIE?
-DAPHNE: Everyone does. It's the one thing the Fates could always promise.
-
-DAPHNE: With you, they can't even promise that.
-
-DAPHNE: I'm sorry. I mean, I'm not. I mean, I don't know.
-
-> …
-DAPHNE: Yes. That's about what I said, too.
+> HOW DO YOU KNOW?:
+DAPHNE: Someone I trust told me. Before you could walk.
 ```
 ```text
-DAPHNE: Here's what it means. As far as I can see, which isn't far.
+DAPHNE: When you see your mother, ask her. She'll tell you.
 
-DAPHNE: No oracle can tell what you'll do. Not Halia. Not the Pythia. Not me.
+DAPHNE: She's waited thirteen years to. She hoped she'd never have to.
 
-DAPHNE: Kleon was handed a sentence the day he was born.
-
-DAPHNE: He's been racing it ever since.
-
-DAPHNE: You were handed nothing. A blank tablet.
-
-DAPHNE: Every choice you make, you're the first one to know about it.
-
-ALETHEA: …I'm going to write all of this down.
-
-ALETHEA: I'm not going to show anyone. Truthfully.
-
-DAPHNE: Now the part I like less.
-
-DAPHNE: The Titans took a piece of the Harpe tonight. Kronos's sickle.
-
-DAPHNE: The old stories say it cut a god down. The very old ones say more.
-
-DAPHNE: That it could cut anything. Even what the Fates had spun.
-
-DAPHNE: A blade that cuts threads. A child without one.
-
-DAPHNE: I don't like how those two sit side by side. I don't know why yet.
-
-DAPHNE: When I do, you'll hear it first. That I can promise.
-
-DAPHNE: Promises are still mine to make.
-
-CHLOE: You said she named someone. Iapetos.
-
-DAPHNE: I know the name. A seer, once. Thrown out of Delphoi.
-
-DAPHNE: For writing the Oracle's answers himself, and selling them.
-
-DAPHNE: If he comes looking for your thread, he'll find nothing to read.
-
-DAPHNE: I don't know what a man like that does with nothing.
-
-CHLOE: Something. Men like that always do something.
-
-DAPHNE: …Thank you, Chloe. That's very comforting.
-
-CHLOE: It wasn't meant to be.
+DAPHNE: Now the part that is mine.
 ```
-[Daphne stands and stretches.]
+[Daphne takes out the clay tablet from Kronion Hill.]
 ```text
-DAPHNE: So. Which is it, do you think? Wonderful, or terrifying?
+DAPHNE: Alethea read you the front of this. The list of places.
+
+DAPHNE: That list is mine. It's my book. Chapter by chapter.
+
+ALETHEA: She wrote a book about the Harpe. Years ago. Before me.
+
+DAPHNE: Where the sickle broke. Where the pieces fell. Where they'd be joined.
+
+DAPHNE: I was wrong about Kalliste. Thank the gods. I was right about Eleusa.
+
+DAPHNE: They're digging where I told them to dig.
+
+DAPHNE: …And then there's the back.
 ```
-?? Multichoice: WONDERFUL / TERRIFYING
+[She tilts the tablet to the lamp. Show the tablet's back as a picture window, the way the expansion shows a Pokémon picture in a box: faint scratches stand up out of the clay in the raking light.]
 ```text
-> WONDERFUL:
-DAPHNE: Ha! Good. Hold on to that.
+DAPHNE: Hold a lamp low and old scratches stand up. I taught Alethea that.
 
-DAPHNE: You may need to borrow it back from yourself later.
+ALETHEA: I saw it on the hill. I wanted to tell you.
 
-> TERRIFYING:
-DAPHNE: Good. Only fools aren't scared, and fools fall off cliffs.
+ALETHEA: Truthfully, I nearly did. Twice.
 
-DAPHNE: Halia taught me that. She teaches it to everyone. Loudly.
+DAPHNE: I asked her to wait until I was sure. That was wrong of me.
+
+DAPHNE: It says: “At the Klotheia, watch the threads.”
+
+DAPHNE: “Bring word of the Unwoven.”
+
+DAPHNE: Unwoven. That's their word for you.
+
+DAPHNE: They weren't on Kalliste for the hill. They were there for you.
+```
+[Hold 60 frames.]
+```text
+DAPHNE: You could go home. Nobody would blame you. I'd row you myself.
+
+DAPHNE: Badly. But I'd row.
+```
+?? Go home? YES/NO
+```text
+> YES:
+DAPHNE: …No. You won't. You've got her chin.
+
+DAPHNE: Still. It was worth asking.
+
+> NO:
+DAPHNE: No. I didn't think so.
 ```
 ```text
-DAPHNE: Here. Take this.
+DAPHNE: Then take this.
+
+DAPHNE: When people were sure of a story, they put it in the sky.
 ```
-[Give `ITEM_STAR_CHART`. Set `FLAG_ICHOR_GOT_STAR_CHART`.]
+[Give `ITEM_STAR_CHART` with the item-get icon. Set `FLAG_ICHOR_GOT_STAR_CHART`. The chart screen is a SYSTEMS.md §8 stretch; until it exists, the item's description carries the line.]
 ```text
 {PLAYER} received the Star Chart!
 
-DAPHNE: The stars are the only map nobody wove.
+DAPHNE: You're not in the sky yet. Neither am I.
 
-DAPHNE: The old poets hung each finished story up there. Fill it in as you go.
+DAPHNE: I've been a tree on that island for thirteen years. Rooted.
+
+DAPHNE: I think it's time I walked somewhere.
+
+DAPHNE: Astyra. The Library. I'm going to try to unwrite a book.
+
+ALETHEA: And I'm coming with you, {PLAYER}. Obviously. I brought two trowels.
+
+ALETHEA: …Three.
 ```
-**Katasterismoi** (per SYSTEMS.md §8, a stretch feature). If the chart screen isn't built, the item's description carries the line and the chart stays a key item.
+[Daphne picks up the lamp and stands, wincing at the sandals. The one added line, for the runners' letter (Part 2):]
 ```text
-DAPHNE: Now. Thyrsa, north of here. The Dionysia's coming.
-
-DAPHNE: Half of Aethos will be in that theater. Win your fourth laurel there.
-
-DAPHNE: Alethea and I are going to Astyra. To the Library.
-
-DAPHNE: I want to read everything anyone ever wrote about that sickle.
-
-ALETHEA: It's a very big library. Truthfully, I can't wait.
-
-DAPHNE: And {PLAYER}? Write to your mother.
-
-DAPHNE: Don't tell her any of this. Tell her you're eating.
+DAPHNE: And write to your mother. Not about this. Tell her you're eating.
 ```
-[Daphne picks up her satchel and walks east. Alethea stays a moment.]
-```text
-ALETHEA: Don't make any choices without me.
-
-ALETHEA: …That's not how it works, is it.
-
-ALETHEA: I'll miss you. Truthfully. That one's easy.
-```
-[Alethea follows Daphne off the map. Chloe stays by the fig. Set `FLAG_ICHOR_DAPHNE_REVELATION`, `FLAG_ICHOR_ACT1_COMPLETE`, and the hide flags for Daphne and Alethea in Eleusa.]
+[Daphne walks out. Set `FLAG_ICHOR_DAPHNE_REVELATION` and `FLAG_ICHOR_ACT1_COMPLETE`; hide Daphne in Eleusa. Alethea now travels with the player: she waits by the vines on the Eleutherai road ("ALETHEA: Ready when you are. Truthfully, I've been ready since breakfast.") and is hidden once the player passes them. Restore the Telesterion's braziers on the next map load.]
 
 [Fade to black. A title card in the pottery frame:]
 ```text
@@ -1592,9 +1622,12 @@ THE UNWOVEN
 ```text
 Thank you for playing Act I of Pokémon Ichor.
 ```
-[Return to the overworld at the well. The player can cut the vines on the Eleutherai road, catch, dig and return to Kalliste. In the Phase 2 build the road beyond the vines ends at a herald's barrier: "HERALD: Thyrsa's preparing the Dionysia. The road opens when the play's ready."]
+[Return to the overworld outside the Telesterion. The player can cut the vines on the Eleutherai road, catch, dig and return to Kalliste. In the Phase 2 build the road beyond the vines ends at a herald's barrier: "HERALD: Thyrsa's preparing the Dionysia. The road opens when the play's ready."]
 
-**Design note.** Daphne never says "Unwoven"; the title card does. She foreshadows the Harpe and the thread without saying what Kaldera will say (Act II step 5: only someone with no thread can hold the Harpe without being unmade). Rhea's last line means the Titans now know about the player. That is a Phase 3 hook for Iapetos at Thyrsa (Open questions 9).
+**Design notes.**
+- Daphne says what, never why (STORY.md §3). The why is Mom's, at Delphoi in Act III.
+- The Titans' knowledge of the player comes from the tablet's back, as STORY.md has it, and from nothing Hyperion says. Nobody in Phase 2 names Iapetos.
+- The one line added to §7.1 is "And write to your mother", which sets up the runners' letter and Mom's honey on the next visit home.
 
 ---
 
@@ -1836,7 +1869,7 @@ Sostratos is the real Aeginetan merchant Herodotus called the richest trader of 
 4. **The Hephaisteion**, on the hill above the Agora's west side.
 5. **The Temple of Hermes**, Ionic with a winged frieze, at the top of the main street on a raised terrace, framed by the street from the quay. It is the crown.
 
-**Houses.** Four households, each with its own door and its own room (Emporion interiors, below): Philoxenos's house and the widow's house in the grid streets east of the Agora, the runners' house beside the Sacred Gate, and Euphronios's workshop in the potters' lane under the Hephaisteion's hill. No other house has a door, so no other house is drawn as a house: the rest of the grid is walls, courtyards, shrines and trees.
+**Houses.** Four households and the Titans' hiring hall, each with its own door and its own room (Emporion interiors, below): Philoxenos's house and the widow's house in the grid streets east of the Agora, the runners' house beside the Sacred Gate, Euphronios's workshop in the potters' lane under the Hephaisteion's hill, and the hiring hall among the warehouses by the shipsheds. No other house has a door, so no other house is drawn as a house: the rest of the grid is walls, courtyards, shrines and trees.
 
 **Exits.** The Sacred Gate in the west wall (Route 2), the Coast Gate in the east wall (Route 5), the Long Walls Gate north of the temple (closed), and the quay (the trireme). **Identity:** the market. Everything is for sale, the snatchers steal from it, and even the jars bark.
 
@@ -1853,6 +1886,7 @@ Sostratos is the real Aeginetan merchant Herodotus called the richest trader of 
 | Man with a lamp | the stoa | flavor |
 | Stallkeepers (3) | Agora | the markets |
 | Sailor | shipsheds | dread |
+| Dockhand | by the warehouses | the Titans' hiring (STORY.md §3) |
 | Metic | by the Deigma | flavor |
 | Kid with a Harpeck feather | Agora | flavor |
 | Mother and son | shipsheds | flavor |
@@ -2004,13 +2038,21 @@ HOPLITE: The Archon's council is sitting. Nobody goes up till it rises.
 
 HOPLITE: Could be a week. Could be a year. Councils, you know.
 ```
+**Dockhand** (Titans, public face 1, per STORY.md §3)
+```text
+DOCKHAND: Half the quay's gone digging. A big man came hiring.
+
+DOCKHAND: Pays in silver and shouts. Shouts nice, mind. Like a big uncle.
+
+DOCKHAND: Gives you a bronze hat and a shovel. Doesn't say what for.
+```
 **Sailor at the shipsheds** (dread)
 ```text
-SAILOR: Ship in from Delphoi this morning. Bad news on it.
+SAILOR: Ship in from Delphoi this morning. Same news as always.
 
-SAILOR: Some days now the Pythia won't answer at all. She just sits.
+SAILOR: The Pythia only says “soon” now. Pilgrims queue a week for one word.
 
-SAILOR: Pilgrims queue for a week, and she stares at the wall.
+SAILOR: Soon what, they ask. She just looks at them.
 ```
 **Metic** (a resident foreigner)
 ```text
@@ -2097,6 +2139,7 @@ Per MAP_DESIGN §2, every door in Emporion opens, someone is home, and something
 | The runners' house | the day-runners | Quick Claw; a letter home | arrival; after Act I |
 | The widow's house | Penelopeia, a sailor's widow | Sea Incense | arrival |
 | Euphronios's workshop | a vase-painter | "Show me a Pokémon": three rewards | arrival, then Eleusa |
+| The hiring hall | a Titan crew boss | an optional battle for a Rocky Helmet; empty after Act I | arrival |
 
 ### Asclepeion (`MAP_EMPORION_CITY_ASCLEPEION`)
 
@@ -2325,6 +2368,36 @@ EUPHRONIOS: My teacher said every myth started on a cup.
 EUPHRONIOS: Somebody saw something, and painted it. Then everyone argued about it.
 ```
 (The third reward line echoes Daphne's thesis from the slice, without naming her.)
+
+### The hiring hall (`MAP_EMPORION_CITY_HIRING_HALL`)
+
+- **Who:** a Titan crew boss, signing on dockhands. STORY.md §5 puts the Titans' Emporion base in the warehouses: "the hiring hall, crates of shovels and helmets".
+- **The room:** a long warehouse by the shipsheds, stacked with crates of shovels and bronze helmets, a trestle table with a ledger and a bag of silver, and a rope-and-pulley hoist. A sickle is chalked small on one crate, almost hidden.
+- **Event:** an optional battle with the crew boss for a Rocky Helmet. After Act I the hall stands empty. `FLAG_ICHOR_HIRING_HALL`.
+```text
+CREW BOSS: Strong back? Silver a day. Bring a shovel. Or don't. We've got crates.
+
+CREW BOSS: What's the work? Digging. Where? Somewhere. Who for? A big man.
+
+CREW BOSS: He shouts, but he pays. Better than the quarry ever did.
+
+CREW BOSS: Too small to dig? Then fight. Beat me, and you can have a hat.
+```
+[`trainerbattle_single` with `TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS` (Part 3).]
+```text
+> after the battle:
+CREW BOSS: Ha. Fair. Here, then. A Titan hat. Hurts anyone who hits you.
+
+{PLAYER} received a Rocky Helmet!
+
+CREW BOSS: May your thread never be cut. That's what we say. Say “Nor yours.”
+
+> after FLAG_ICHOR_ACT1_COMPLETE:
+The hall is empty. The crates are gone. Someone left the ledger open.
+
+The last page says: “ELEUSA. FORTY LAMPS. ALL PAID.”
+```
+(The blessing and its answer are STORY.md §5's Titanborn rite.)
 
 ### Temple of Hermes (`MAP_EMPORION_CITY_TEMPLE_OF_HERMES`)
 
@@ -2862,7 +2935,7 @@ The Rheitoi. Sacred to Demeter and the Kore. Priests' fishing only.
 | Kerykos's runner | the square, after the procession | carries a letter home (Part 2, Emporion's runners' house) |
 | Kleon | the square (beat 20) | rival |
 | Initiates, Eudemos, Alethea, Kerykos | the square, after `FLAG_ICHOR_PROCESSION_ARRIVED` | beat 22 |
-| Daphne, Alethea, Chloe | the well-yard (beat 25) | — |
+| Daphne, Alethea | the Telesterion (beat 25) | — |
 
 **Dysaules** (dread)
 ```text
@@ -3116,7 +3189,7 @@ The ferry runs from the first arrival in Emporion. Phase 2 adds these to the sli
 > after FLAG_ICHOR_CROSSING_DONE, before FLAG_ICHOR_ACT1_COMPLETE:
 MOM: A mainlander! Look at you. Did you eat? You didn't eat.
 
-MOM: Daphne left for the mainland in a hurry. Halia came by. She looked tired.
+MOM: Halia came by. She looked tired. She wouldn't say why.
 
 > after FLAG_ICHOR_ACT1_COMPLETE, with FLAG_ICHOR_WROTE_TO_MOM:
 MOM: You wrote! “I'm eating.” That's the whole letter. “I'm eating.”
@@ -3125,9 +3198,9 @@ MOM: …Something's happened. Daphne's letter was three pages and said nothing.
 
 MOM: Sit. You don't have to tell me. Sit anyway.
 
-MOM: And take these. From the jar marked NOT FOR {PLAYER}.
+MOM: And take these. From the hives. Not from that jar.
 
-MOM: I've changed my mind about that jar.
+MOM: That jar's spoken for.
 
 {PLAYER} received 3 Honey!
 
@@ -3136,24 +3209,25 @@ MOM: Daphne wrote. Three pages, and they said nothing. You didn't write at all.
 
 MOM: Sit. You don't have to tell me. Sit anyway.
 ```
-[The Honey is given once: `FLAG_ICHOR_GOT_MOMS_HONEY`. The jar is the slice's 1F shelf, and LABYRINTH.md's seed 2: the Mistress's shrine in Ring VI takes honey.]
+[The Honey is given once: `FLAG_ICHOR_GOT_MOMS_HONEY`. It is never from the jar labelled NOT FOR {PLAYER}: STORY.md keeps that jar for Delphoi, and LABYRINTH.md's Ring VI shrine.]
+
+**Daphne** (the Akademia), before `FLAG_ICHOR_MYSTERIES_NIGHT`; she is gone after it:
+```text
+DAPHNE: Halia's gull. Then Alethea's letter. I'm packing.
+
+DAPHNE: I hate packing. I hate boats more. I've bought sandals. Look at them.
+
+DAPHNE: …Go on. I'll find you on the mainland. Probably green.
+```
 **Halia**
 ```text
-> after FLAG_ICHOR_CROSSING_DONE, before FLAG_ICHOR_DAPHNE_REVELATION:
-HALIA: You're back. Give me your hand.
-
-HALIA: …
-
-HALIA: Hm. Daphne will want to talk to you. When she's ready.
-
-HALIA: She's slow to be ready. Clever people are.
+> after FLAG_ICHOR_HALIA_SECOND_LOOK, before FLAG_ICHOR_DAPHNE_REVELATION:
+HALIA: Back already? No. I won't look again. Four times is enough for anyone.
 
 > after FLAG_ICHOR_DAPHNE_REVELATION:
-HALIA: So she told you.
+HALIA: So Daphne told you. I'm glad it was her and not me.
 
-HALIA: Give me your hand. …Still nothing on it.
-
-HALIA: Good. Means it's still yours.
+HALIA: Your thread's your own business. I meant it more than I knew.
 ```
 **Euboulos** (Akti temple), a Charcoal for anyone who lost theirs (SYSTEMS.md §1):
 ```text
@@ -3161,19 +3235,13 @@ EUBOULOS: Lost your coal from the hearth? Take another. Hestia doesn't count.
 ```
 [Give `ITEM_CHARCOAL` if the player has none and `FLAG_ICHOR_FORGE_RELIT` is unset.]
 
-**Amaryllis** (Route 1), after `FLAG_ICHOR_DAPHNE_REVELATION`:
+**Gylippos** (Elaia), after `FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA`:
 ```text
-AMARYLLIS: Daphne asked me about the humming. When it stopped.
-
-AMARYLLIS: I told her. The moment you went up the hill. She went very quiet.
-```
-**Gylippos** (Elaia), after `FLAG_ICHOR_KLEON_LEFT_FOR_ARKADIA`:
-```text
-GYLIPPOS: The boy went to Arkadia.
+GYLIPPOS: The boy went north. To the theater.
 
 GYLIPPOS: …
 
-GYLIPPOS: Too early.
+GYLIPPOS: He wants an audience. He'll get one.
 ```
 
 **What the Phase 2 relics open on Kalliste** (MAP_DESIGN §1: every relic opens something already visited):
@@ -3215,7 +3283,7 @@ Format: the `src/data/trainers.party` syntax, as in the slice. Moves are listed 
 - Titanborn grunts: IVs 6, AI Check Bad Move.
 - Acolytes: IVs 10, AI Basic Trainer.
 - Kleon: IVs 10, his starter 16, AI Basic Trainer.
-- Hierophants and Rhea: IVs 15 (Kerykos) or 18 (Chloe, Rhea), aces 25 or 27, AI Basic Trainer, two Super Potions.
+- Hierophants and Hyperion: IVs 15 (Kerykos) or 18 (Chloe, Hyperion), aces 25 or 27, AI Basic Trainer, two Super Potions.
 - Spartan difficulty needs its own boss teams from Balance, as in the slice.
 
 ## New trainer classes
@@ -3234,20 +3302,20 @@ Class names fit `TrainerClass.name[13]`. Each class needs a front portrait and a
 | FISHER | shore and stream fishers | a fisher with a rod over one shoulder and a basket | fisher (shared with the slice's townsfolk fisher) | Fisherman |
 | BEEKEEPER | Eleusa's meadows | a veiled beekeeper with a smoking clay pot | new | Bug Catcher |
 | SWINEHERD | Eleusa's fields | a farm boy with a staff and a piglet under one arm | new; shares the harvester's palette | Camper |
-| TITAN ADMIN | Rhea (and later Hyperion and Iapetos) | see Rhea, below | per admin | Aqua Admin F |
+| TITAN ADMIN | Hyperion (and later Iapetos and Rhea) | see Hyperion, below | per admin | Magma Admin |
 
-Cast portraits and walkers needed: **Kerykos** (Hierophant), **Chloe** (Hierophant), **Rhea** (Titan Admin). Alethea's portrait, which INVENTORY marks for Act II, is needed now for her practice battle.
+Cast portraits and walkers needed: **Kerykos** (Hierophant), **Chloe** (Hierophant), **Hyperion** (Titan Admin), and Daphne's walker in new sandals (STORY.md §8.4). Alethea's portrait, which INVENTORY marks for Act II, is needed now for her practice battle.
 
 ## The crossing
 
-**Alethea, practice battle** (optional). Three entries; the species is the third starter.
+**Alethea, practice battle** (optional). Her one Pokémon is the Spalunk she dug up on Kronion Hill; the third krater stays with Daphne (STORY.md decision S9).
 ```text
 Before: [beat 10]
 Defeat: ALETHEA: I lost, but correctly! I did every step!
 After:  ALETHEA: I'm going to get better. Slowly. But I'll get there.
 ```
 ```
-=== TRAINER_ICHOR_ALETHEA_DECK_HIPLING ===
+=== TRAINER_ICHOR_ALETHEA_DECK ===
 Name: ALETHEA
 Class: Scholar
 Pic: Alethea
@@ -3255,11 +3323,12 @@ Gender: Female
 Music: Girl
 AI: Check Bad Move
 
-Hipling
+Spalunk
 Level: 12
+Ability: Pickup
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 ```
-`TRAINER_ICHOR_ALETHEA_DECK_NEBREL` (Nebrel Lv 12) and `TRAINER_ICHOR_ALETHEA_DECK_KYNDER` (Kynder Lv 12) are the same entry with the species changed. **SCHOLAR** is a twelfth class, for Alethea alone; or she can borrow PILGRIM. See Open questions 6.
+**SCHOLAR** is a twelfth class, for Alethea alone; or she can borrow PILGRIM. See Open questions 6.
 
 **SAILOR Phormion.** Amidships, in plain view.
 ```text
@@ -3960,9 +4029,9 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 **4. GRUNT Chalix** (TITANBORN), at the desecrated grain shrine. Optional, but she guards the shrine.
 ```text
-Before: CHALIX: Shrine's closed. Rhea says we leave our mark on every one.
-Defeat: CHALIX: Go on, pray at it. See if she listens.
-After:  CHALIX: She never listened to Rhea. Rhea used to ask her every spring.
+Before: CHALIX: Shrine's closed. Orders. A sickle on every one. My wrist hurts.
+Defeat: CHALIX: Go on, pray at it. The gods won't save you from your thread.
+After:  CHALIX: We will.
 ```
 [She runs off west; hide her.]
 ```
