@@ -708,6 +708,27 @@ def check():
                 continue
             if not any(p in reach and p not in objects for p in fronts):
                 errors.append(f"{name}: bg event at ({x},{y}) can't be read from any walkable tile")
+        if name != "AktiTown":
+            # indoors, people stand where they stand: nobody may wall off a thing to
+            # read or another person to talk to (the town's scenes move people, so it
+            # keeps the plain check above)
+            still = blocks.copy()
+            for o in ev["object_events"]:
+                if o["movement_type"] not in ("MOVEMENT_TYPE_WANDER_AROUND",):
+                    still[o["y"], o["x"]] |= SOLID
+            reach_still = reachable(still, start, extra_open=set(warps))
+            targets = [(b["x"], b["y"], "bg event") for b in ev["bg_events"]]
+            targets += [(o["x"], o["y"], "object") for o in ev["object_events"]]
+            hh, ww = blocks.shape
+            for (x, y, what) in targets:
+                fronts = []
+                for dx, dy in ((0, 1), (0, -1), (-1, 0), (1, 0)):
+                    fx, fy = x + dx, y + dy
+                    fronts.append((fx, fy))
+                    if 0 <= fx < ww and 0 <= fy < hh and behavior(int(blocks[fy, fx]) & 0x3FF, sec) == "MB_COUNTER":
+                        fronts.append((fx + dx, fy + dy))      # talked to across a counter
+                if not any(p in reach_still for p in fronts):
+                    errors.append(f"{name}: the {what} at ({x},{y}) can't be reached past the people in the room")
         if name == "AktiTown":
             for x in range(width):
                 ok = walkable(blocks, x, H - 1)
