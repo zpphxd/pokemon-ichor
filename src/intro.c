@@ -962,6 +962,8 @@ static void Loom_Update(s32 t)
     }
     if (t >= ROD_HOP_TIME(LOOM_GOLD) && t < ROD_HOP_TIME(LOOM_GOLD) + 16)
         ShowSprite(SPR_LOOM_SPARKLE, sLoomThreadX[LOOM_GOLD], ROD_TOP + 30, (t - ROD_HOP_TIME(LOOM_GOLD)) / 4, 4, TRUE);
+    else if (t < T_SHEARS_GOLD)
+        ShowSprite(SPR_LOOM_SPARKLE, 0, 0, 0, 0, FALSE);
 
     // Atropos cuts: in from the right, a thread per beat. The cut end falls
     // with its weight.

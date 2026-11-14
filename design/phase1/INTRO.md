@@ -168,7 +168,7 @@ tools/ichor/smoke_test.sh
   - the frieze must fit 1024 BG tiles (it uses 633)
   - each scene's still layers must fit 512 tiles in char block 2 (112 and 75)
 - **Skipping.** Any key during the studio card, the frieze or the loom goes straight to the title. Checked at t 61, 1238 and 2096; the title then plays through to the amphora. A key during the powered-by card skips to the studio card, as upstream does. The smoke test's START at boot frame 500 lands in the studio card (t 41), and its title shot at frame 1000 is unchanged.
-- **ROM.** 26,903,960 B against 26,907,384 B for main at 218ac09a8a, so 3,424 B smaller. Emerald's intro art left more room than Ichor's took.
+- **ROM.** 26,904,024 B against 26,907,384 B for main at 218ac09a8a, so 3,360 B smaller (80.18% of 32 MB). Emerald's intro art left more room than Ichor's took.
 
 ## Not done
 
