@@ -1207,7 +1207,7 @@ static bool16 IsInfiltratedSpaceCenter(struct WarpData *warp)
     return FALSE;
 }
 
-static const u16 sNightMusicTable[END_MUS - START_MUS] =
+static const u16 sNightMusicTable[END_MUS - START_MUS + 1] = // Ichor: + 1 so END_MUS itself is in bounds
 {
     // example usage: [MUS_SOOTOPOLIS - START_MUS] = MUS_LITTLEROOT,
 };
