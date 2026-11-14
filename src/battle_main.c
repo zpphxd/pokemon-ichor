@@ -414,6 +414,16 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_RUIN_MANIAC_FRLG] =     { _("RUIN MANIAC"), 12 },
     [TRAINER_CLASS_LADY_FRLG] =            { _("LADY"), 50 },
     [TRAINER_CLASS_PAINTER_FRLG] =         { _("PAINTER"), 4 },
+    // Ichor: Aethos trainer classes
+    [TRAINER_CLASS_LAKONIAN] = { _("LAKONIAN"), 16 },
+    [TRAINER_CLASS_SHEPHERD] = { _("SHEPHERD"), 4 },
+    [TRAINER_CLASS_HARVESTER] = { _("HARVESTER"), 4 },
+    [TRAINER_CLASS_GOATHERD] = { _("GOATHERD"), 4 },
+    [TRAINER_CLASS_HOPLITE] = { _("HOPLITE"), 6 },
+    [TRAINER_CLASS_AUGUR] = { _("AUGUR"), 8 },
+    [TRAINER_CLASS_TITANBORN] = { _("TITANBORN"), 5 },
+    [TRAINER_CLASS_ACOLYTE] = { _("ACOLYTE"), 5 },
+    [TRAINER_CLASS_HIEROPHANT] = { _("HIEROPHANT"), 25 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =
@@ -5097,9 +5107,11 @@ static void HandleEndTurn_BattleWon(void)
         case TRAINER_CLASS_AQUA_LEADER:
         case TRAINER_CLASS_MAGMA_ADMIN:
         case TRAINER_CLASS_MAGMA_LEADER:
+        case TRAINER_CLASS_TITANBORN: // Ichor
             PlayBGM(MUS_VICTORY_AQUA_MAGMA);
             break;
         case TRAINER_CLASS_LEADER:
+        case TRAINER_CLASS_HIEROPHANT: // Ichor
             PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
         default:

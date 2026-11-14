@@ -16877,3 +16877,242 @@ Double Battle: No
 Kyogre
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_KLEON_ELAIA_CYNDAQUIL ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Cyndaquil
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_KLEON_ELAIA_PIPLUP ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Piplup
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_KLEON_ELAIA_SNIVY ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Snivy
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_TITYROS ===
+Name: TITYROS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Wooloo
+Level: 3
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Mareep
+Level: 4
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_PHYLLIS ===
+Name: PHYLLIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Smoliv
+Level: 4
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Smoliv
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_KOMATAS ===
+Name: KOMATAS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Skiddo
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Combee
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_AGIS ===
+Name: AGIS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Check Bad Move
+
+Machop
+Level: 7
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_POLYEIDOS ===
+Name: POLYEIDOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Pidove
+Level: 6
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Murkrow
+Level: 7
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_GRUNT_RUINS_PETROS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Magma
+AI: Check Bad Move
+
+Geodude
+Level: 8
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Tackle
+- Defense Curl
+- Rock Throw
+
+Drilbur
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_GRUNT_RUINS_AMATHOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Magma
+AI: Check Bad Move
+
+Nosepass
+Level: 8
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Tackle
+- Harden
+- Rock Throw
+
+Silicobra
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Sand Attack
+- Wrap
+
+=== TRAINER_ICHOR_LAMPON ===
+Name: LAMPON
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Minccino
+Level: 10
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Fletchling
+Level: 10
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_PYRRHA ===
+Name: PYRRHA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Tandemaus
+Level: 10
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Growlithe
+Level: 11
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_AITHRA ===
+Name: AITHRA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Wooloo
+Level: 10
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Hoothoot
+Level: 11
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_IONE_1 ===
+Name: IONE
+Class: Hierophant
+Pic: Hierophant Ione
+Gender: Female
+Music: Female
+Items: Potion / Potion
+AI: Basic Trainer
+
+Lillipup
+Level: 12
+Ability: Vital Spirit
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Tackle
+- Leer
+- Work Up
+- Bite
+
+Munchlax @ Oran Berry
+Level: 13
+Ability: Thick Fat
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Tackle
+- Lick
+- Defense Curl
+- Recycle
+
+Litleo @ Sitrus Berry
+Level: 14
+Ability: Unnerve
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Ember
+- Headbutt
+- Work Up
+- Leer

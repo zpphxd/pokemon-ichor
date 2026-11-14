@@ -860,12 +860,28 @@
 #define TRAINER_BRENDAN_PLACEHOLDER         853
 #define TRAINER_MAY_PLACEHOLDER             854
 
+// Ichor: Phase 1 slice trainers (Kalliste Isle), see design/phase1/SCRIPT.md Part 3
+#define TRAINER_ICHOR_KLEON_ELAIA_SNIVY     855
+#define TRAINER_ICHOR_KLEON_ELAIA_CYNDAQUIL 856
+#define TRAINER_ICHOR_KLEON_ELAIA_PIPLUP    857
+#define TRAINER_ICHOR_TITYROS               858
+#define TRAINER_ICHOR_PHYLLIS               859
+#define TRAINER_ICHOR_KOMATAS               860
+#define TRAINER_ICHOR_AGIS                  861
+#define TRAINER_ICHOR_POLYEIDOS             862
+#define TRAINER_ICHOR_GRUNT_RUINS_PETROS    863
+#define TRAINER_ICHOR_GRUNT_RUINS_AMATHOS   864
+#define TRAINER_ICHOR_LAMPON                865
+#define TRAINER_ICHOR_PYRRHA                866
+#define TRAINER_ICHOR_AITHRA                867
+#define TRAINER_ICHOR_IONE_1                868
+
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT_EMERALD     855
-#define MAX_TRAINERS_COUNT_EMERALD 864
+#define TRAINERS_COUNT_EMERALD     869 // Ichor: +14 slice trainers
+#define MAX_TRAINERS_COUNT_EMERALD 880 // Ichor: room for the slice's trainers
 
 #if IS_FRLG
 #define TRAINERS_COUNT                      TRAINERS_COUNT_FRLG

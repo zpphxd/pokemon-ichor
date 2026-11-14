@@ -5132,7 +5132,12 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_TEAM_MAGMA:
         case TRAINER_CLASS_AQUA_ADMIN:
         case TRAINER_CLASS_MAGMA_ADMIN:
+        case TRAINER_CLASS_TITANBORN: // Ichor
             return MUS_VS_AQUA_MAGMA;
+        // Ichor: Kleon and the Hierophants share the Ichor rival theme
+        case TRAINER_CLASS_LAKONIAN:
+        case TRAINER_CLASS_HIEROPHANT:
+            return MUS_ICHOR_BATTLE_RIVAL;
         case TRAINER_CLASS_LEADER:
             return MUS_VS_GYM_LEADER;
         case TRAINER_CLASS_CHAMPION:
