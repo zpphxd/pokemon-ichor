@@ -84,3 +84,4 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
   - Which vanilla species stay, if any. The post-game national dex is the main reason to keep some.
   - How the new species' cries are made. Full-length cries are the expensive part, so the choice is between new short cries and reused, pitch-shifted vanilla cries.
 - The dex's own sprites, at about 152 species, should come to roughly 1.2–1.5 MB.
+- 2026-11-14: The user said: "we dont have a specific ROM MB cap because this is just playing on the laptop". There's no physical cartridge to fit. The 32 MB ceiling still applies, though, because it's the GBA's address space for game data (0x08000000–0x09FFFFFF), and emulators such as mGBA reproduce it, so a larger ROM won't load. The notes above stand, with 32 MB as the hard limit.
