@@ -349,6 +349,16 @@
       "y": 12,
       "respawn_map": "MAP_SIX_ISLAND_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_SIX_ISLAND_NURSE"
+    },
+    {
+      "id": "HEAL_LOCATION_ELAIA_VILLAGE",
+      "map": "MAP_ELAIA_VILLAGE",
+      "x": 3,
+      "y": 9,
+      "respawn_map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F",
+      "respawn_npc": "LOCALID_PLAYERS_HOUSE_1F_MOM",
+      "respawn_x": 3,
+      "respawn_y": 4
     }
   ]
 }

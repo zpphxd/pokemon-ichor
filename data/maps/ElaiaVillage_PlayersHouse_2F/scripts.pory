@@ -1,1 +1,53 @@
-mapscripts ElaiaVillage_PlayersHouse_2F_MapScripts {}
+// The player's house, 2F: the player's room (beat 1A). A new game starts at
+// (5,5), the rug at the foot of the kline (src/new_game.c). The stairs are
+// (8,1); the gate is the tile in front of them, (8,2).
+
+mapscripts ElaiaVillage_PlayersHouse_2F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_ELAIA_VILLAGE)
+    }
+}
+
+script ElaiaVillage_PlayersHouse_2F_EventScript_StairGate {
+    lockall
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("{PLAYER}! Did you fill your water clock?\pFestival day! You can't be late on festival day!"))
+    closemessage
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkDown)
+    waitmovement(0)
+    releaseall
+}
+
+script ElaiaVillage_PlayersHouse_2F_EventScript_WaterClock {
+    lockall
+    if (!flag(FLAG_ICHOR_SET_WATER_CLOCK)) {
+        msgbox(format("Your klepsydra. Water drips from the top bowl to the bottom one.\pIt's run dry. Better fill it and set the hour."))
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        special(StartWallClock)
+        setflag(FLAG_ICHOR_SET_WATER_CLOCK)
+        msgbox(format("Drip… drip… drip. Good as new."))
+    } else {
+        msgbox(format("Drip… drip… The water says it's still today."))
+    }
+    releaseall
+}
+
+script ElaiaVillage_PlayersHouse_2F_EventScript_Kibotos {
+    lockall
+    msgbox(format("Your kibotos. Spare gear and keepsakes go in here."))
+    special(PlayerPC)
+    releaseall
+}
+
+script ElaiaVillage_PlayersHouse_2F_EventScript_Knucklebones {
+    msgbox(format("Your knucklebones. Record against Mom: 0 wins, 212 losses."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_PlayersHouse_2F_EventScript_Window {
+    msgbox(format("Bees drift past. Down in the square, someone's tuning a lyre."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_PlayersHouse_2F_EventScript_Scrolls {
+    msgbox(format("Scrolls about heroes. You've drawn mustaches on all of them."), MSGBOX_SIGN)
+}
