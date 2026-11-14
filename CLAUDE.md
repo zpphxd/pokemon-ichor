@@ -5,6 +5,7 @@ This repo is a fan ROM hack built on **pokeemerald-expansion 1.17.2**, the Emera
 ## Sources of truth
 
 - **`design/PITCH.md`** is the design bible: story, world, characters, the Twelve, Pokémon, systems and roadmap. Read the relevant section before any content work. If a change contradicts the bible, raise it with the creative director (the main session) instead of improvising.
+- **`design/TERMS.md`** gives the Ichor word for every Pokémon-system term (Asclepeion, Pithos, Laurel and the rest) and how to case it. `tools/ichor/text_width.py` measures a line against the game font.
 - **`design/research/RESEARCH.md`** covers engine facts, tool versions and GBA constraints.
 - **`design/research/LAZARUS.md`** is the list of things we must not copy from Pokémon Lazarus, an existing Greek-themed hack.
 - Expansion docs live in `docs/` (upstream), `FEATURES.md` and `INSTALL.md`. Config switches live in `include/config/*.h`.

@@ -192,6 +192,14 @@ static const u8 sMapSectionToThemeId[MAPSEC_COUNT - KANTO_MAPSEC_COUNT - 1] =
     [MAPSEC_ALTERING_CAVE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
     [MAPSEC_NAVEL_ROCK - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_STONE,
     [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_MARBLE,
+    // Ichor: the themes keep Emerald's names, but their art is Greek (see
+    // tools/ichor/art/ui_menus_popup.py): WOOD is a marble stele for villages,
+    // towns and routes; MARBLE a gilded temple stone for cities and
+    // sanctuaries; STONE a cave's basalt; BRICK a painted clay plaque;
+    // UNDERWATER an Aegean fresco for the sea; STONE2 sunken marble.
+    [MAPSEC_ELAIA_VILLAGE - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_WOOD,
+    [MAPSEC_KALLISTE_ROUTE_1 - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_WOOD,
+    [MAPSEC_AKTI_TOWN - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_WOOD,
 };
 
 #if OW_POPUP_GENERATION == GEN_5

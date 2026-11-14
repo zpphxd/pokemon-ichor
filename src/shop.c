@@ -770,6 +770,10 @@ static void BuyMenuInitWindows(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(WIN_MONEY, 1, BG_PLTT_ID(13));
     LoadMessageBoxGfx(WIN_MONEY, 0xA, BG_PLTT_ID(14));
+    // Ichor: the list and description print in palette 15, which was only
+    // left over from the field. Load the dialogue box's parchment and ink so
+    // the description's fill matches its papyrus panel (graphics/shop/menu.png).
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     PutWindowTilemap(WIN_MONEY);
     PutWindowTilemap(WIN_ITEM_LIST);
     PutWindowTilemap(WIN_ITEM_DESCRIPTION);
