@@ -448,3 +448,15 @@ const u16 gMetatileAttributes_PorytilesManaged_TempleDemeter[] = INCBIN_U16("dat
 // Ichor: ergasteria
 const u16 gMetatiles_PorytilesManaged_Ergasteria[] = INCBIN_U16("data/tilesets/secondary/ergasteria/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Ergasteria[] = INCBIN_U16("data/tilesets/secondary/ergasteria/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: emporion
+const u16 gMetatiles_PorytilesManaged_Emporion[] = INCBIN_U16("data/tilesets/secondary/emporion/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Emporion[] = INCBIN_U16("data/tilesets/secondary/emporion/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: isthmos
+const u16 gMetatiles_PorytilesManaged_Isthmos[] = INCBIN_U16("data/tilesets/secondary/isthmos/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Isthmos[] = INCBIN_U16("data/tilesets/secondary/isthmos/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: temple_hermes
+const u16 gMetatiles_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatile_attributes.bin");

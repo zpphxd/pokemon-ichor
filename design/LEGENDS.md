@@ -5,7 +5,7 @@
 - **What this file owns:** every legendary, mythical, Ultra Beast and Paradox Pokémon that the main story and the post-game epics don't place: where it lives, its myth, its quest, its battle and what it unlocks. The master table (§2) lists all of them, the ones placed elsewhere included.
 - **Companions:** `design/OIKOUMENE.md`, the second chart, where most of these live; `design/oikoumene/COVERAGE.md`, where every other species lives.
 - **Sources:** `PITCH.md` §4 and §6, `STORY.md` (approved; §2's casting table and §3's post-game spine), `SYSTEMS.md` (approved: relics, rites, theoxenia, the star chart, festivals, omens), `LABYRINTH.md`, `BALANCE.md`, `MAP_DESIGN.md`, `research/LAZARUS.md`, the dex branch (`design/dex/`), and the engine as cited.
-- **Overlap.** `LABORS.md`, `UNDERWORLD.md`, `ODYSSEY.md` and `POSTGAME.md` belong to another designer. Where they place a legendary, this file lists it as "placed by" that doc and doesn't redesign it. Where this file suggests a casting for them, it says so.
+- **Overlap.** `LABORS.md`, `UNDERWORLD.md`, `ODYSSEY.md` and `POSTGAME.md` belong to another designer. Where they place a legendary, this file lists it as "placed by" that doc and doesn't redesign it. This revision is reconciled with `POSTGAME.md` §4: where the two disagreed, the epic won, and §8 lists every legend that moved. The decisions are consolidated with POSTGAME's P1–P11 in `OIKOUMENE.md` §13.
 
 ---
 
@@ -21,7 +21,7 @@
 7. In Aethos's post-game
 8. Placed elsewhere: notes for the other docs
 9. Engine feasibility
-10. The 100%: completing the National Dex
+10. The 100%: completing the Oikoumene Dex
 11. Scope, ROM and decisions
 
 ---
@@ -29,12 +29,12 @@
 ## 0. The rules every legendary quest follows
 
 1. **A tiny story, tasks and puzzles.** Every quest has three to six steps: someone who asks, a task or puzzle, a trigger, and a staged encounter. No legend is a sprite standing in a cave waiting.
-2. **No two quests alike.** Across the file the verbs are spread on purpose: chases, riddles, escorts, offerings, timing, festival days, moon phases, alternate days, constellations, carried flames, mirrors, moral tests, deliveries, music, reasoning. §11 tallies them.
+2. **No two quests alike.** Across the file the verbs are spread on purpose: chases, riddles, escorts, offerings, timing, festival days, an ordering puzzle, alternate days, constellations, carried flames, mirrors, moral tests, deliveries, music, reasoning. §11 tallies them.
 3. **Myth woven in, never lectured.** A character says one line about the myth, in their own voice, and the mechanic does the rest.
 4. **One only.** Every legendary is a single static or gift. If it faints, it returns the next day at the same spot until caught (an Ichor convenience, so nobody softlocks a 100%).
-5. **Levels follow `BALANCE.md`:** legendaries 70–80, the strongest 85–95. Arceus, `POSTGAME.md`'s, should stay the game's single level-100 battle.
-6. **Gates are post-game only.** No legend sits on the main path. Most need the Oikoumene (Aeolus's Bag); some live in Aethos's post-game.
-7. **Nothing requires luck.** Timed quests (moon phases, days, festivals) can be met by waiting, or by resting with a xenia host (SYSTEMS §10).
+5. **Levels follow `BALANCE.md`:** legendaries 70–80, the strongest 85–92. Arceus at Lv 95 (`POSTGAME.md` §3.3) stays the game's strongest battle, and nothing here passes it.
+6. **Gates are post-game only.** No legend sits on the main path. Most need the Oikoumene, whose near lands open with the ship from the post-game's start; the Western Sea's wait for the Odyssey, and Okeanos's for Aeolus's Bag (OIKOUMENE §2). Some live in Aethos's post-game.
+7. **Nothing requires luck.** Timed quests (hours, days, festivals) can be met by waiting, or by resting with a xenia host (SYSTEMS §10).
 8. **The cast comes back.** Most quests are carried by someone the player already loves: Alethea, Kleon, Elpis, Hyperion, Daphne, Ariadne, Thespis, Hypatia, the Fates, Mom.
 
 ---
@@ -62,72 +62,72 @@
 
 Every legendary, mythical, Ultra Beast and Paradox Pokémon in the National Dex, plus the Aethos dex's own. "Placed by" names the doc that owns the encounter; where it's this one, the quest is in the section given.
 
-**Gates:** *League* means the post-game; *Bag* means the Oikoumene is open (Aeolus's Bag, `ODYSSEY.md`). Levels are the encounter's.
+**Gates:** *League* means the post-game; *Ship* means the Oikoumene's near lands, open with the trireme from the post-game's start; *Odyssey* means after the voyage (the Western Sea's towns, and Aeolus's Bag for Okeanos). Levels are the encounter's.
 
 ### The National Dex
 
 | # | Pokémon | Cast as | Where | Quest | Placed by | Gate | Lv |
 |---:|---|---|---|---|---|---|---|
-| 144 | Articuno | The eagle of the north | The Feather Wastes, Scythia | The Eagles of the Edges (§3.1) | LEGENDS | Bag | 75 |
-| 145 | Zapdos | The eagle of the east | Gargaros Peak, the Troad | The Eagles of the Edges | LEGENDS (D-L1) | Bag | 75 |
-| 146 | Moltres | The eagle of the west | Mount Atlas, at sunset | The Eagles of the Edges | LEGENDS | Bag | 75 |
-| 150 | Mewtwo | A thing made into a monster | The Gorgons' Isle, Okeanos | Look Only in the Shield (§4.2) | LEGENDS | The Cave of the Graiai | 90 |
-| 151 | Mew | The first clay | The Caucasus | The First Clay (§3.8) | LEGENDS | After Yveltal | 75 |
-| 243 | Raikou | The wanderer of Libya | Omens across Egypt, Libya, Aithiopia | The Three Shares of the Earth (§3.2) | LEGENDS | Bag | 72 |
-| 244 | Entei | The wanderer of Asia | Omens across the Troad, Lydia, the Euxine | The Three Shares of the Earth | LEGENDS | Bag | 72 |
-| 245 | Suicune | The wanderer of Europe | Omens across Thrace, Scythia, the West | The Three Shares of the Earth | LEGENDS | Bag | 72 |
-| 249 | Lugia | — | Atlantis | — | `POSTGAME.md` | — | — |
+| 144 | Articuno | The eagle of the north | The Feather Wastes, Scythia | The Eagles of the Edges (§3.1) | LEGENDS | Ship | 75 |
+| 145 | Zapdos | The eagle of the east | Gargaros Peak, the Troad | The Eagles of the Edges | LEGENDS (PG-27) | Ship | 75 |
+| 146 | Moltres | The eagle of the west | The Atlas Range, at sunset | The Eagles of the Edges | LEGENDS | Labor 10, or the Odyssey | 75 |
+| 150 | Mewtwo | A thing made into a monster | The Gorgons' Isle, Okeanos | Look Only in the Mirror (§4.2) | LEGENDS | The Cave of the Graiai; ODYSSEY's Mirror of Truth | 90 |
+| 151 | Mew | The first clay | The Caucasus caves, below LABORS's crag | The First Clay (§3.8) | LEGENDS | `LABORS.md` Labor 11 (Prometheus freed) | 75 |
+| 243 | Raikou | The wanderer of Libya | Omens across Egypt, Libya, Aithiopia | The Three Shares of the Earth (§3.2) | LEGENDS | Ship | 72 |
+| 244 | Entei | The wanderer of Asia | Omens across the Troad, Lydia, the Euxine | The Three Shares of the Earth | LEGENDS | Ship | 72 |
+| 245 | Suicune | The wanderer of Europe | Omens across Thrace, Scythia, the West | The Three Shares of the Earth | LEGENDS | Ship | 72 |
+| 249 | Lugia | Leukothea, the white sea-goddess | Atlantis's abyss | — | `POSTGAME.md` §3.2 | Atlantis | 80 |
 | 250 | Ho-Oh | The Phoenix of Heliopolis | Heliopolis, Egypt | The Egg of Myrrh (§3.2) | LEGENDS | The three wanderers | 78 |
 | 251 | Celebi | The Hour that stopped | Akti, then the Time Fractures | The Thirteenth Hour (§7.1) | LEGENDS | Five fractures visited | 70 |
-| 377 | Regirock | — | Tartarus | — | `UNDERWORLD.md` | — | — |
-| 378 | Regice | — | Tartarus | — | `UNDERWORLD.md` | — | — |
-| 379 | Registeel | — | Tartarus | — | `UNDERWORLD.md` | — | — |
-| 380 | Latias | The Dioskouroi, the saviors of sailors | Lakonia, then the sea lanes, even days | The Twin Lights (§3.4) | LEGENDS | Bag | 72 |
-| 381 | Latios | The Dioskouroi | The sea lanes, odd days | The Twin Lights | LEGENDS | Bag | 72 |
-| 382 | Kyogre | — | Atlantis / the Primordials | — | `POSTGAME.md` | — | — |
-| 383 | Groudon | — | The Primordials | — | `POSTGAME.md` | — | — |
-| 384 | Rayquaza | — | The Primordials | — | `POSTGAME.md` | — | — |
-| 385 | Jirachi | The wish-star that slept a thousand years | The summit of Mount Atlas | The Thousand-Year Star (§4.3) | LEGENDS | All 24 constellations (SYSTEMS §8) | 75 |
-| 386 | Deoxys | The things that fell from the sky | Ilion, the temple of Athena | The Things That Fell (§4.4) | LEGENDS | Bag | 78 |
-| 480 | Uxie | Reason, the charioteer of the soul | Lake Moeris, Egypt | The Charioteer (§3.3) | LEGENDS | Bag | 70 |
-| 481 | Mesprit | Desire, the dark horse | Lake Tritonis, Libya | The Charioteer | LEGENDS | Bag | 70 |
-| 482 | Azelf | Spirit, the white horse | Lake Maeotis, Scythia | The Charioteer | LEGENDS | Bag | 70 |
-| 483 | Dialga | Chronos: time that goes on | The bronze threshold at Atlas's feet | The Threshold (§3.5) | LEGENDS | The Charioteer | 80 |
-| 484 | Palkia | Chaos: the gap | The Selvage, Okeanos | The Threshold | LEGENDS | The Charioteer | 80 |
+| 377 | Regirock | A Titan in Tartarus | Tartarus's five cells | — | `UNDERWORLD.md` §4.10 | The Katabasis | 75 |
+| 378 | Regice | A Titan in Tartarus | Tartarus's five cells | — | `UNDERWORLD.md` §4.10 | The Katabasis | 75 |
+| 379 | Registeel | A Titan in Tartarus | Tartarus's five cells | — | `UNDERWORLD.md` §4.10 | The Katabasis | 75 |
+| 380 | Latias | The Dioskouroi, the saviors of sailors | Lakonia, then the sea lanes, even days | The Twin Lights (§3.4) | LEGENDS | Ship | 72 |
+| 381 | Latios | The Dioskouroi | The sea lanes, odd days | The Twin Lights | LEGENDS | Ship | 72 |
+| 382 | Kyogre | Oceanus, the world-river | The edge of the world, below Atlantis | — | `POSTGAME.md` §3.3 | Atlantis | 88 |
+| 383 | Groudon | Gaia, the Earth | Under Delphoi | — | `POSTGAME.md` §3.3 | The Katabasis | 88 |
+| 384 | Rayquaza | Ouranos, the Sky | Above Olympus's clouds | — | `POSTGAME.md` §3.3 | The Kotinos | 88 |
+| 385 | Jirachi | The wish-star that slept a thousand years | The Atlas Range's summit | The Thousand-Year Star (§4.3) | LEGENDS | All 24 constellations (SYSTEMS §8) | 75 |
+| 386 | Deoxys | The things that fell from the sky | Ilion, the temple of Athena | The Things That Fell (§4.4) | LEGENDS | Ship | 78 |
+| 480 | Uxie | Reason, the charioteer of the soul | Lake Moeris, Egypt | The Charioteer (§3.3) | LEGENDS | Ship | 70 |
+| 481 | Mesprit | Desire, the dark horse | Lake Tritonis, Libya | The Charioteer | LEGENDS | Ship | 70 |
+| 482 | Azelf | Spirit, the white horse | Lake Maeotis, Scythia | The Charioteer | LEGENDS | Ship | 70 |
+| 483 | Dialga | Chronos: time that goes on, "a moving image of eternity" | The Gates of the Sun, Okeanos | Time and Room (§3.5) | LEGENDS | The Charioteer | 80 |
+| 484 | Palkia | Chora: the room the world sits in | The Selvage, Okeanos | Time and Room | LEGENDS | The Charioteer | 80 |
 | 485 | Heatran | The fire under the forge | Kaldera (Aethos) | The Forge Under the Forge (§7.2) | LEGENDS | League | 72 |
-| 486 | Regigigas | — | Tartarus | — | `UNDERWORLD.md` | — | — |
-| 487 | Giratina | — | The Underworld | — | `UNDERWORLD.md` | — | — |
-| 488 | Cresselia | The true dream, through the gate of horn | Full-moon nights at sea; the Land of Dreams | The Gates of Horn and Ivory (§3.6) | LEGENDS | Bag | 74 |
+| 486 | Regigigas | Briareus's charge, the Titans' keeper | Tartarus's inner gate | — | `UNDERWORLD.md` §4.10 | All five Titans | 80 |
+| 487 | Giratina | Tartaros, the primordial pit | The Chasm | — | `UNDERWORLD.md` §4.11 | The Katabasis | 80 |
+| 488 | Cresselia | The true dream | The House of Night, Tartarus's edge | — | `UNDERWORLD.md` §6 (stretch; PG-26) | The Katabasis | 78 |
 | 489 | Phione | — | Breed Manaphy with Ditto (Pharos) | — | `POSTGAME.md`, by breeding | — | — |
-| 490 | Manaphy | — | Atlantis | — | `POSTGAME.md` | — | — |
-| 491 | Darkrai | The false dream, through the gate of ivory | The Land of Dreams, at new moon | The Gates of Horn and Ivory | LEGENDS | Cresselia | 78 |
+| 490 | Manaphy | The sea's prince | Atlantis's coral nursery, an egg | — | `POSTGAME.md` §3.2 (stretch) | Atlantis | — |
+| 491 | Darkrai | The false dream | The House of Night, Tartarus's edge | — | `UNDERWORLD.md` §6 (stretch; PG-26) | The Katabasis | 78 |
 | 492 | Shaymin | *Charis*, gratitude | The Isles of the Blessed, at the Pyanopsia | Thank-Offerings (§4.5) | LEGENDS | The Isles | 70 |
-| 493 | Arceus | — | Olympus's true summit | — | `POSTGAME.md` | — | — |
-| 494 | Victini | Nike, victory | The prow of your trireme | The Figure on the Prow (§4.6) | LEGENDS | Six Periodos champions | 75 |
-| 638 | Cobalion | Eunomia, Good Order | Sardis, with Solon | The Hours of Justice (§3.7) | LEGENDS | Bag | 74 |
-| 639 | Terrakion | Dike, Justice | Ammonion, Libya | The Hours of Justice | LEGENDS | Bag | 74 |
-| 640 | Virizion | Eirene, Peace | Meroë, Aithiopia | The Hours of Justice | LEGENDS | Bag | 74 |
-| 641 | Tornadus | Aeolus's winds | Aeolus's island | — | `ODYSSEY.md` | — | — |
-| 642 | Thundurus | The storm that got out of the bag | The Great Sand Sea's storms | What Came Out of the Bag (§3.9) | LEGENDS | Bag | 76 |
-| 643 | Reshiram | *Aletheia*, truth | Memphis, Egypt | The Truth and the Glory (§3.10) | LEGENDS | Bag; Alethea | 80 |
-| 644 | Zekrom | *Kleos*, the glory that won't die | The Skaian Gate, Ilion | The Truth and the Glory | LEGENDS | Bag; Kleon | 80 |
+| 493 | Arceus | The Prime Mover | Olympus's true summit | — | `POSTGAME.md` §3.3 | The four keys, the three Primordials | 95 |
+| 494 | Victini | Nike, victory | Olympia, the Nike's pillar | — | `POSTGAME.md` §3.1 | All five Olympiad gold symbols | 80 |
+| 638 | Cobalion | Eunomia, Good Order | Sardis, with Solon | The Hours of Justice (§3.7) | LEGENDS | Ship | 74 |
+| 639 | Terrakion | Dike, Justice | Ammonion, Libya | The Hours of Justice | LEGENDS | Ship | 74 |
+| 640 | Virizion | Eirene, Peace | Meroë, Aithiopia | The Hours of Justice | LEGENDS | Ship | 74 |
+| 641 | Tornadus | The storm wind let out of Aeolus's bag | The wine-dark sea | — | `ODYSSEY.md` §6.4 | The Odyssey | 75 |
+| 642 | Thundurus | The storm that got out of the bag | The Great Sand Sea's storms | What Came Out of the Bag (§3.9) | LEGENDS | The Odyssey (Aiolia) | 76 |
+| 643 | Reshiram | *Aletheia*, truth | Memphis, Egypt | The Truth and the Glory (§3.10) | LEGENDS | Ship; Alethea | 80 |
+| 644 | Zekrom | *Kleos*, the glory that won't die | The Skaian Gate, Ilion | The Truth and the Glory | LEGENDS | Ship; Kleon | 80 |
 | 645 | Landorus | The earth's own plenty | The Table of the Sun, Aithiopia | What Came Out of the Bag | LEGENDS | Thundurus | 76 |
 | 646 | Kyurem | The hollow half | The Cave of Boreas | The Other Half (§3.10) | LEGENDS | Reshiram or Zekrom | 82 |
 | 647 | Keldeo | Astraea, the last immortal to leave the earth | The Isles of the Blessed | The Hours of Justice | LEGENDS | The three Hours | 75 |
 | 648 | Meloetta | Orpheus's song | The mouth of the Hebros, Thrace | The Singing Head (§4.7) | LEGENDS | Orpheus amphora (SYSTEMS §5); Lyre of Apollo | 72 |
-| 649 | Genesect | Tithonus, in Memnon's armor | Eos's palace, the Gate of Dawn | The Man Who Couldn't Stop (§4.8) | LEGENDS | Bag | 75 |
-| 716 | Xerneas | The Golden Hind | Arkadia | — | `LABORS.md` (Labor 3) | — | — |
-| 717 | Yveltal | The eagle of the Caucasus | Prometheus's crag | Prometheus Bound (§3.8) | LEGENDS | Bag | 80 |
-| 718 | Zygarde | Osiris, scattered and gathered | Abydos; cells across the Oikoumene | Fourteen Pieces (§4.9) | LEGENDS | Bag | 78 |
+| 649 | Genesect | Tithonus, in Memnon's armor | Eos's palace, the Gate of Dawn | The Man Who Couldn't Stop (§4.8) | LEGENDS | Ship | 75 |
+| 716 | Xerneas | The Golden Hind | The Ladon ford, Arkadia | — | `LABORS.md` Labor 3 | The Labors | 72 |
+| 717 | Yveltal | The dark bird of the Isle of Ares | The Isle of Ares, the Black Sea | The Isle of Ares (§3.8) | LEGENDS | `LABORS.md` Labors 6 and 9 | 80 |
+| 718 | Zygarde | Osiris, scattered and gathered | Abydos; cells across the Oikoumene | Fourteen Pieces (§4.9) | LEGENDS | Ship | 78 |
 | 719 | Diancie | The last stone of Ariadne's crown | Mount Nysa, Aithiopia | The Crown's Last Stone (§4.10) | LEGENDS | Corona Borealis (LABYRINTH) | 74 |
-| 720 | Hoopa | The Ring of Gyges | The Chasm of Gyges, Lydia | The Ring of Gyges (§4.11) | LEGENDS | Bag | 76 |
-| 721 | Volcanion | The Giant under the burning fields | The Phlegraean Fields | Steam and Stone (§4.12) | LEGENDS | Bag | 76 |
+| 720 | Hoopa | The Ring of Gyges | The Chasm of Gyges, Lydia | The Ring of Gyges (§4.11) | LEGENDS | Ship | 76 |
+| 721 | Volcanion | The Giant under the burning fields | The Phlegraean Fields | Steam and Stone (§4.12) | LEGENDS | Odyssey | 76 |
 | 772 | Type: Null | Daedalus's statue that runs away | Daedalus's workshop, Knossa | The Statue That Runs Away (§7.3) | LEGENDS | League | 70 (gift) |
 | 773 | Silvally | — | Evolve Type: Null (friendship) | The Statue That Runs Away | LEGENDS | — | — |
-| 785 | Tapu Koko | Aigle, "radiance," a Hesperid | The Garden of the Hesperides | The Evening's Daughters (§3.11) | LEGENDS | `LABORS.md` Labor 11 | 76 |
-| 786 | Tapu Lele | Hesperia, "evening" | The Garden | The Evening's Daughters | LEGENDS | Labor 11 | 76 |
-| 787 | Tapu Bulu | Erytheia, "the red" | The Garden | The Evening's Daughters | LEGENDS | Labor 11 | 76 |
-| 788 | Tapu Fini | Arethousa, "the spring" | The Garden | The Evening's Daughters | LEGENDS | Labor 11 | 76 |
+| 785 | Tapu Koko | Elektra, "amber-bright," an Okeanid | The Isles of the Blessed | The Keepers of the Isles (§3.11) | LEGENDS | The Isles | 76 |
+| 786 | Tapu Lele | Metis, "wise counsel," an Okeanid | The Isles of the Blessed | The Keepers of the Isles | LEGENDS | The Isles | 76 |
+| 787 | Tapu Bulu | Plouto, "plenty," an Okeanid | The Isles of the Blessed | The Keepers of the Isles | LEGENDS | The Isles | 76 |
+| 788 | Tapu Fini | Amphirho, "flowing round," an Okeanid | The Isles of the Blessed | The Keepers of the Isles | LEGENDS | The Isles | 76 |
 | 789 | Cosmog | A light only a blind man sees | Kaldera (Aethos), from Hyperion | Hyperion's Children (§3.12) | LEGENDS | League | 42 (gift) |
 | 790 | Cosmoem | — | Evolve Cosmog, Lv 43 | Hyperion's Children | LEGENDS | — | — |
 | 791 | Solgaleo | Helios, the sun | The Gate of Dawn | Hyperion's Children | LEGENDS | Cosmog | 80 |
@@ -146,20 +146,20 @@ Every legendary, mythical, Ultra Beast and Paradox Pokémon in the National Dex,
 | 804 | Naganadel | — | Evolve Poipole (knowing Dragon Pulse) | Beyond the Selvage | LEGENDS | — | — |
 | 805 | Stakataka | A stretch of Troy's god-built wall that walks | The Walls of Laomedon | Beyond the Selvage | LEGENDS | Lotira | 76 |
 | 806 | Blacephalon | The Blemmyes, the headless men | The Salt Ridge, Libya | Beyond the Selvage | LEGENDS | Lotira | 76 |
-| 807 | Zeraora | The spark in Thales's amber | Miletos, Lydia | The Amber Spark (§4.13) | LEGENDS | Bag | 75 |
-| 808 | Meltan | The first iron | The Chalybes' forges | The First Iron (§4.14) | LEGENDS | Bag | 70 |
+| 807 | Zeraora | The spark in Thales's amber | Miletos, Lydia | The Amber Spark (§4.13) | LEGENDS | Ship | 75 |
+| 808 | Meltan | The first iron | The Chalybes' forges | The First Iron (§4.14) | LEGENDS | Ship | 70 |
 | 809 | Melmetal | What the furnace pours | The Chalybes' great furnace | The First Iron | LEGENDS | 40 Meltan's iron | 80 |
-| 888 | Zacian | The sword: a short life, and glory | Leuke, the White Isle | The Shield With the World on It (§3.13) | LEGENDS | Bag; Achilles | 85 |
-| 889 | Zamazenta | The shield: a long life, and the whole world on it | Leuke | The Shield With the World on It | LEGENDS | Bag; Achilles | 85 |
-| 890 | Eternatus | The day the sun fell | The Glass Crater, Libya | The Day the Sun Fell (§4.15) | LEGENDS | Bag; Periodos 8 panels | 95 |
-| 891 | Kubfu | Milo's calf | Kroton | Milo's Calf (§4.16) | LEGENDS | Bag | 70 (gift) |
+| 888 | Zacian | The sword: a short life, and glory | Leuke, the White Isle | The Shield With the World on It (§3.13) | LEGENDS | Ship; Achilles | 85 |
+| 889 | Zamazenta | The shield: a long life, and the whole world on it | Leuke | The Shield With the World on It | LEGENDS | Ship; Achilles | 85 |
+| 890 | Eternatus | The day the sun fell | The Glass Crater, Libya | The Day the Sun Fell (§4.15) | LEGENDS | Eight Periodos panels | 92 |
+| 891 | Kubfu | Milo's calf | Kroton | Milo's Calf (§4.16) | LEGENDS | Odyssey | 70 (gift) |
 | 892 | Urshifu | — | Evolve Kubfu: the unlit tower or the strait | Milo's Calf | LEGENDS | — | — |
-| 893 | Zarude | Dionysus's foster-nurses | The Mountains of the Moon | The Foster-Father (§4.17) | LEGENDS | Bag | 76 |
-| 894 | Regieleki | Suggested: the Cyclopes' thunderbolt-forge | Tartarus | — | `UNDERWORLD.md` (proposed, D-L2) | — | — |
-| 895 | Regidrago | Suggested: Kampe, Tartarus's jailer | Tartarus | — | `UNDERWORLD.md` (proposed, D-L2) | — | — |
+| 893 | Zarude | Dionysus's foster-nurses | The Mountains of the Moon | The Foster-Father (§4.17) | LEGENDS | Ship | 76 |
+| 894 | Regieleki | A Titan in Tartarus | Tartarus's five cells | — | `UNDERWORLD.md` §4.10 | The Katabasis | 75 |
+| 895 | Regidrago | A Titan in Tartarus | Tartarus's five cells | — | `UNDERWORLD.md` §4.10 | The Katabasis | 75 |
 | 896 | Glastrier | The mares of Boreas | The Cave of Boreas | The Straw Offerings (§3.14) | LEGENDS | Calyrex's quest | 78 |
 | 897 | Spectrier | The black horses of the dead | The Cimmerian Shore | The Straw Offerings | LEGENDS | Calyrex's quest | 78 |
-| 898 | Calyrex | The forgotten king of the Hyperborean harvest | The round temple, Hyperborea | The Straw Offerings | LEGENDS | Bag | 80 |
+| 898 | Calyrex | The forgotten king of the Hyperborean harvest | The round temple, Hyperborea | The Straw Offerings | LEGENDS | Ship | 80 |
 | 905 | Enamorus | The love that changes things | The Spring of Kallirhoe, Kythera (Aethos) | What Came Out of the Bag | LEGENDS | Landorus | 76 |
 | 984 | Great Tusk | The Golden Age | Kronion Hill's fracture | Time Fractures (§5) | LEGENDS | League | 66–70 |
 | 985 | Scream Tail | The Golden Age | Eleusa's fracture | Time Fractures | LEGENDS | League | 66–70 |
@@ -167,18 +167,18 @@ Every legendary, mythical, Ultra Beast and Paradox Pokémon in the National Dex,
 | 987 | Flutter Mane | The Golden Age | Delphoi's fracture | Time Fractures | LEGENDS | League | 66–70 |
 | 988 | Slither Wing | The Golden Age | Kaldera's fracture | Time Fractures | LEGENDS | League | 66–70 |
 | 989 | Sandy Shocks | The Golden Age | Kronion Hill's fracture | Time Fractures | LEGENDS | League | 66–70 |
-| 990 | Iron Treads | The Iron Age | The Chalybes' fracture | Time Fractures | LEGENDS | Bag | 74–78 |
-| 991 | Iron Bundle | The Iron Age | The Cave of Boreas's fracture | Time Fractures | LEGENDS | Bag | 74–78 |
-| 992 | Iron Hands | The Iron Age | The Chalybes' fracture | Time Fractures | LEGENDS | Bag | 74–78 |
-| 993 | Iron Jugulis | The Iron Age | The Glass Crater's fracture | Time Fractures | LEGENDS | Bag | 74–78 |
-| 994 | Iron Moth | The Iron Age | The Glass Crater's fracture | Time Fractures | LEGENDS | Bag | 74–78 |
-| 995 | Iron Thorns | The Iron Age | The Walls of Laomedon's fracture | Time Fractures | LEGENDS | Bag | 74–78 |
-| 1001 | Wo-Chien | Limos, Famine | The Steppe Road, Scythia | What Stayed in the Jar (§3.15) | LEGENDS | Bag; Elpis | 78 |
-| 1002 | Chien-Pao | Phthonos, Envy | The treasury of Sardis | What Stayed in the Jar | LEGENDS | Bag; Elpis | 78 |
-| 1003 | Ting-Lu | Geras, Old Age | The Fountain of the Long-Lived | What Stayed in the Jar | LEGENDS | Bag; Elpis | 78 |
-| 1004 | Chi-Yu | Eris, Strife | Ilion | What Stayed in the Jar | LEGENDS | Bag; Elpis | 78 |
+| 990 | Iron Treads | The Iron Age | The Chalybes' fracture | Time Fractures | LEGENDS | Ship | 74–78 |
+| 991 | Iron Bundle | The Iron Age | The Cave of Boreas's fracture | Time Fractures | LEGENDS | Ship | 74–78 |
+| 992 | Iron Hands | The Iron Age | The Chalybes' fracture | Time Fractures | LEGENDS | Ship | 74–78 |
+| 993 | Iron Jugulis | The Iron Age | The Glass Crater's fracture | Time Fractures | LEGENDS | Ship | 74–78 |
+| 994 | Iron Moth | The Iron Age | The Glass Crater's fracture | Time Fractures | LEGENDS | Ship | 74–78 |
+| 995 | Iron Thorns | The Iron Age | The Walls of Laomedon's fracture | Time Fractures | LEGENDS | Ship | 74–78 |
+| 1001 | Wo-Chien | Limos, Famine | The Steppe Road, Scythia | What Stayed in the Jar (§3.15) | LEGENDS | Ship; Elpis | 78 |
+| 1002 | Chien-Pao | Phthonos, Envy | The treasury of Sardis | What Stayed in the Jar | LEGENDS | Ship; Elpis | 78 |
+| 1003 | Ting-Lu | Geras, Old Age | The Fountain of the Long-Lived | What Stayed in the Jar | LEGENDS | Ship; Elpis | 78 |
+| 1004 | Chi-Yu | Eris, Strife | Ilion | What Stayed in the Jar | LEGENDS | Ship; Elpis | 78 |
 | 1005 | Roaring Moon | The Golden Age | Lakonia's fracture, on Taygetos | Time Fractures | LEGENDS | League | 66–70 |
-| 1006 | Iron Valiant | The Iron Age | The Walls of Laomedon's fracture | Time Fractures | LEGENDS | Bag | 74–78 |
+| 1006 | Iron Valiant | The Iron Age | The Walls of Laomedon's fracture | Time Fractures | LEGENDS | Ship | 74–78 |
 | 1007 | Koraidon | The Golden Age's mount | The Isles of the Blessed | The Two Mounts (§5) | LEGENDS | All eleven fractures | 85 |
 | 1008 | Miraidon | The Iron Age's mount | The Chalybes' great furnace | The Two Mounts | LEGENDS | All eleven fractures | 85 |
 | 1009 | Walking Wake | Suicune in the Golden Age | Heliopolis's fracture | Time Fractures | LEGENDS | Ho-Oh | 74–78 |
@@ -191,7 +191,7 @@ Every legendary, mythical, Ultra Beast and Paradox Pokémon in the National Dex,
 | 1021 | Raging Bolt | Raikou in the Golden Age | Heliopolis's fracture | Time Fractures | LEGENDS | Ho-Oh | 74–78 |
 | 1022 | Iron Boulder | Terrakion in the Iron Age | The Selvage's fracture | Time Fractures | LEGENDS | Keldeo | 74–78 |
 | 1023 | Iron Crown | Cobalion in the Iron Age | The Selvage's fracture | Time Fractures | LEGENDS | Keldeo | 74–78 |
-| 1024 | Terapagos | Zeno's tortoise | Elea, the Western Sea | Achilles and the Tortoise (§4.18) | LEGENDS | Bag | 90 |
+| 1024 | Terapagos | Zeno's tortoise | Elea, the Western Sea | Achilles and the Tortoise (§4.18) | LEGENDS | Odyssey | 90 |
 | 1025 | Pecharunt | Methe, the poisoned vintage | Thyrsa's wine-jars, at the Anthesteria | The Satyr Play Nobody Wrote | LEGENDS | League; the Anthesteria | 78 |
 
 ### The Aethos dex's own
@@ -199,29 +199,30 @@ Every legendary, mythical, Ultra Beast and Paradox Pokémon in the National Dex,
 | # | Pokémon | Cast as | Where | Placed by | Lv |
 |---:|---|---|---|---|---|
 | 98 | Asterlorn | Asterion, the Minotaur | Knossa; joins after Ariadne's gold symbol | `LABYRINTH.md` §10 | 60 |
-| 143–145 | Nemira, Lotira, Thanira | The three Fates | Their three sanctuaries after the climax | `STORY.md` §2 and the dex | 50 (flag: BALANCE's post-game row suggests 70–80) |
+| 143–145 | Nemira, Lotira, Thanira | The three Fates | Their three sanctuaries after the climax | `STORY.md` §2 and the dex | 60 (the dex team's level) |
 | 146 | Kronolith | The Lord of Time | The Stair of Hours; rematch in the deep under the Omphalos | `STORY.md` | 60 |
-| 147 | Kairazor | The Moment | Olympia's altar of Kairos | `POSTGAME.md` (STORY §3) | — |
-| 148 | Pegaunos | Zeus's thunder-horse | Olympus's cloud meadows, in thunderstorms | The dex (habitat) and `POSTGAME.md` | 70 |
-| 149–151 | Olympanax, Pontanax, Nekranax | The three brothers' colossi | Olympus, Atlantis, below | `POSTGAME.md` (dex D4: the three lots) | — |
-| 152 | Ichorin | The first myth | The Pool of Mnemosyne | `POSTGAME.md` (dex habitat) | 50 (same flag) |
+| 147 | Kairazor | The Moment | Olympia's altar of Kairos | `POSTGAME.md` §3.1 | 78 |
+| 148 | Pegaunos | Zeus's thunder-horse | Olympus's cloud meadows, after the Kotinos | `POSTGAME.md` §3.4 | 80 |
+| 149–151 | Olympanax, Pontanax, Nekranax | The three brothers' colossi | Olympus's storm terrace, Atlantis's temple, the vault beneath Hades's hall | `POSTGAME.md` §3.4 (dex D4: the three lots) | 80 |
+| 152 | Ichorin | The first myth | The Pool of Mnemosyne, with Mnemosyne's Water from the Katabasis | `POSTGAME.md` §3.4 | 70 (the dex team's level) |
 
 ### By where they live
 
 | Home | Count |
 |---|---:|
-| **The Oikoumene**, quests in this file | **88** |
+| **The Oikoumene**, quests in this file | **85** |
 | **Aethos's post-game**, quests in this file | **20** |
 | `SYSTEMS.md` (Magearna, staged here in §7.4) | 1 |
-| `POSTGAME.md` (Lugia, Kyogre, Groudon, Rayquaza, Manaphy, Phione by breeding, Arceus) | 7 |
-| `UNDERWORLD.md` (Regirock, Regice, Registeel, Regigigas, Giratina, and proposed Regieleki and Regidrago) | 7 |
+| `POSTGAME.md` (Lugia, Kyogre, Groudon, Rayquaza, Manaphy, Phione by breeding, Arceus, Victini) | 8 |
+| `UNDERWORLD.md` (Regirock, Regice, Registeel, Regieleki, Regidrago, Regigigas, Giratina, and Cresselia and Darkrai in the House of Night) | 9 |
 | `ODYSSEY.md` (Tornadus) | 1 |
 | `LABORS.md` (Xerneas) | 1 |
 | **All National Dex legends** | **125** |
 | The Aethos dex's own, placed by STORY, LABYRINTH, POSTGAME and the dex | 11 |
 
-- **The Oikoumene's 88** are the three birds, Mewtwo and Mew, the three wanderers and Ho-Oh, Latias and Latios (caught at sea there), Jirachi, Deoxys, the soul trio, Dialga and Palkia, Cresselia and Darkrai, Shaymin, Victini, the four Hours with Keldeo, Thundurus, Landorus, Reshiram, Zekrom, Kyurem, Meloetta, Genesect, Yveltal, Zygarde, Diancie, Hoopa, Volcanion, the four Tapus, Solgaleo, Lunala, Necrozma, the eleven Ultra Beasts (Naganadel included), Zeraora, Meltan, Melmetal, Zacian, Zamazenta, Eternatus, Kubfu and Urshifu, Zarude, Calyrex and both horses, the four Treasures, the ten Iron Paradox Pokémon, the three Golden beasts at Heliopolis, Koraidon, Miraidon and Terapagos.
+- **The Oikoumene's 85** are the three birds, Mewtwo and Mew, the three wanderers and Ho-Oh, Latias and Latios (caught at sea there), Jirachi, Deoxys, the soul trio, Dialga and Palkia, Shaymin, the four Hours with Keldeo, Thundurus, Landorus, Reshiram, Zekrom, Kyurem, Meloetta, Genesect, Yveltal, Zygarde, Diancie, Hoopa, Volcanion, the four Tapus, Solgaleo, Lunala, Necrozma, the eleven Ultra Beasts (Naganadel included), Zeraora, Meltan, Melmetal, Zacian, Zamazenta, Eternatus, Kubfu and Urshifu, Zarude, Calyrex and both horses, the four Treasures, the ten Iron Paradox Pokémon, the three Golden beasts at Heliopolis, Koraidon, Miraidon and Terapagos.
 - **Aethos's 20** are Celebi, Heatran, Type: Null and Silvally, Cosmog and Cosmoem (from Hyperion), Marshadow, Enamorus, the Thyrsa five (Ogerpon, the Loyal Three, Pecharunt), and the seven Golden Paradox Pokémon in Aethos's fractures.
+- **Reconciled with POSTGAME §4.** Everything that file lists as "placed" is marked "placed by" its doc above. Its "proposed only" list (Ho-Oh, Heatran, Meloetta, Enamorus, Latias and Latios, the Treasures, Ogerpon, the Paradox Pokémon, the Ultra Beasts) is this file's, as it says. Two of this file's first-draft quests gave way: Victini is POSTGAME's Nike at Olympia, and Cresselia and Darkrai are UNDERWORLD's, in the House of Night.
 
 ---
 
@@ -233,7 +234,7 @@ Every legendary, mythical, Ultra Beast and Paradox Pokémon in the National Dex,
 
 **Ichor's telling.** There were three: one from the frozen north, one from the sunrise, one from the sunset. With prophecy over, the Omphalos is just a stone. The three eagles have gone home to the edges.
 
-**Where and gate.** The Feather Wastes (north), Gargaros Peak (east, over Troy), Mount Atlas at sunset (west). Any order, once the Bag is open.
+**Where and gate.** The Feather Wastes (north), Gargaros Peak (east, over Troy), the Atlas Range at sunset (west). Any order: the first two open with the ship, the third with Labor 10's cup or by sea after the Odyssey.
 
 **The quest.**
 1. **The empty perch.** At Delphoi, the Pythia shows you the Omphalos's two eagle sockets, and a third nobody remarked on. "There were three. Nobody counted. I counted." She gives you a gold feather that turns in your hand to point at the nearest edge.
@@ -257,7 +258,7 @@ PYTHIA: …Wherever you're standing, I suppose. Sit down. That's the navel now.
 
 **Reward.** The gold feather becomes the **Pythia's Feather**, a key item: the Pythia's "Know thyself" (SYSTEMS §11) costs one Pythian Laurel less per use.
 
-**SYSTEMS change (decision D-L1).** SYSTEMS §3 makes Zapdos Zeus's gift III. STORY §2 already moved Zeus's eagle to the dex's **Aetarch**, the Archon's ace. So Zeus's gift III should be a unique Aetarch, the true eagle of Zeus, and Zapdos joins its trio here.
+**SYSTEMS change (decision PG-27).** SYSTEMS §3 makes Zapdos Zeus's gift III. STORY §2 already moved Zeus's eagle to the dex's **Aetarch**, the Archon's ace. So Zeus's gift III should be a unique Aetarch, the true eagle of Zeus, and Zapdos joins its trio here.
 
 ### 3.2 Raikou, Entei and Suicune, then Ho-Oh: The Three Shares of the Earth and The Egg of Myrrh
 
@@ -349,18 +350,21 @@ KLEON: …I could do that. If I had a brother.
 
 **Reward.** The **Latiasite** and **Latiosite** Ichor Stones, and Gemini.
 
-### 3.5 Dialga and Palkia: The Threshold
+### 3.5 Dialga and Palkia: Time and Room
 
-**The casting.** The main story's Lord of Time is Kronolith, the Titan who devours time (STORY §2). Dialga becomes the other Greek word for it, **Chronos**: plain time that goes on. The Orphic poets made Chronos and Kronos the same god, and Ichor pulls them apart: one wanted to stop everything, the other just keeps going. Palkia becomes **Chaos**, which in Greek means the gap, the yawning space that opened first so anything could exist (Hesiod, *Theogony* 116).
+**The casting.** The main story's Lord of Time is Kronolith, the Titan who devours time (STORY §2). `POSTGAME.md` gives Hesiod's Chaos, the first Gap, to Arceus to fill (§3.3 there). So Dialga and Palkia come from the other great Greek account of the world's making, Plato's *Timaeus*, the same book Atlantis comes from (Daphne's arc, POSTGAME §3.2).
+- **Dialga is Chronos,** time as Plato defines it: "a moving image of eternity" (*Timaeus* 37d). Not the devourer: plain time that goes on. The Orphic poets made Chronos and Kronos one god, and Ichor pulls them apart: one wanted everything to stop, the other just keeps going.
+- **Palkia is Chora,** Plato's third kind: the receptacle, the room in which everything comes to be, "the nurse of becoming" (*Timaeus* 49a, 52a–b).
 
-**Where.** Hesiod puts the house of Night at the world's edge beside Atlas, with a bronze threshold where Night and Day pass each other and greet, one going in as the other comes out, never both inside (*Theogony* 744–757). Dialga waits there, at Atlas's feet. Palkia waits at the Selvage, where Okeanos pours over the edge of the world.
+**Where.** Dialga waits at **the Gates of the Sun** on Okeanos's western shore, where the sun goes in at evening (*Odyssey* 24.12). Palkia waits at **the Selvage**, where Okeanos pours over the edge of the world.
 
-**Gate.** The Charioteer (§3.3), for Hypatia's two items.
+**Gate.** The Charioteer (§3.3), for Hypatia's two items, and Aeolus's Bag for the rim.
 
 **The quest.**
-1. **Hypatia's map.** "Plato's soul is done. Now the two oldest things. Time, and room to put it in."
-2. **The threshold.** At the bronze door under Atlas, Night and Day pass twice a day, at dawn and at dusk. Stand on the threshold at either crossing and both pass through you. Dialga appears in the doorway between them, for one hour.
-3. **The gap.** At the Selvage, Okeanos falls into nothing. Walk the rim until the water stops falling: the place where there's nothing to fall into. Hold the Lustrous Globe up, and Palkia opens the space in front of you.
+1. **Hypatia's book.** "Daphne's reading the *Timaeus* for Atlantis. She skipped the good part. Plato says what time is, and what room is. Let's go and look."
+2. **The twelve doors.** At sunset the Gates of the Sun open. Inside are twelve bronze doors, one for each hour of the night, each with a sundial's shadow cut into its lintel at a different angle. Walk them in the order the hours fall, reading the shadows. A wrong door puts you back at the first hour; Hypatia: "Time goes one way. Try that."
+3. **Morning.** At the twelfth door the night turns to morning, and Dialga is standing in it.
+4. **The room.** At the Selvage, Okeanos falls into nothing. Walk the rim until the water stops falling: the place where there's nothing to fall into, because there's no room there yet. Hold the Lustrous Globe up, and Palkia makes room in front of you.
 
 ```text
 HYPATIA: Kronos wanted time to stop. This one just goes on.
@@ -370,31 +374,17 @@ HYPATIA: It doesn't eat anything. It doesn't want anything. It's very restful.
 
 **Battles.** Lv 80 each. Dialga: Roar of Time, Flash Cannon, Earth Power, Aura Sphere. Palkia: Spacial Rend, Hydro Pump, Earth Power, Aura Sphere. The Adamant Crystal and Lustrous Globe give their Origin forms.
 
-**Hook.** Sinnoh's tradition is that Dialga, Palkia and Giratina come before Arceus. `POSTGAME.md` may want both as a gate to Arceus, and `UNDERWORLD.md`'s Giratina makes the third (§8).
+**Hook.** Sinnoh's tradition is that Dialga, Palkia and Giratina come before Arceus. `POSTGAME.md`'s summit already needs four keys and the three Primordials (P4); this file doesn't add Dialga and Palkia to that gate, but the summit's priest can mention them.
 
-### 3.6 Cresselia and Darkrai: The Gates of Horn and Ivory
+### 3.6 Cresselia and Darkrai: placed by UNDERWORLD
 
-**The casting.** Penelope tells Odysseus that dreams come through two gates: true ones through the gate of horn, false ones through the gate of ivory (*Odyssey* 19.560–567). Cresselia is the true dream, crescent-winged, the moon's: Selene's, who visits the sleeping. Darkrai is the false dream, the nightmare.
+`UNDERWORLD.md` places both in **the House of Night**, Nyx's house at Tartarus's edge, where Sleep and Death live with their mother (Hesiod, *Theogony* 744–766), at Lv 78, as a stretch goal (its §6 and K8). The bible casts them as Hypnos and Nyx (PITCH §4). This file's first-draft quest for them gives way.
 
-**Where.** The Land of Dreams, on Okeanos's shore past the White Rock (*Odyssey* 24.11–14), beside the Cimmerians' mist.
+**What this file offers UNDERWORLD, if wanted.** Two beats from the first draft fit the House of Night:
+- **The lead:** a ferryman's daughter at Sestos has slept for nine days and dreams of drowning; Cresselia's feather wakes her, and her father's oar-token gets you past Night's door.
+- **The false shore:** Penelope, talking to a beggar who is really Odysseus, tells of two gates of dreams, horn for true ones and ivory for false (*Odyssey* 19.560–567). Darkrai's half of the house could be the ivory side, where the shore lies and the way that looks blocked is the true one.
 
-**The quest.**
-1. **The sailor who won't wake.** At Sestos a ferryman's daughter has slept for nine days and dreams of drowning. Her father: "She talks in her sleep. She says the gate's made of tusk."
-2. **The moon.** Cresselia comes over the sea only at the full moon. Ichor's moon follows the Aethos calendar: each 3-day month is new moon on its first day and full on its middle day, when the festivals fall (SYSTEMS §7). The Augur's Eye shows it on one Oikoumene sea lane each full moon. It flees once, to another lane; catch it on the second.
-3. **The feather.** Cresselia leaves a **Lunar Feather**. Lay it on the sleeping girl's pillow; she wakes. "I was at a door. It was white and it was lying." She gives you her father's oar-token, which the Land of Dreams' ferryman accepts.
-4. **The ivory gate.** At new moon, take the oar-token to the Land of Dreams. Two gates stand on the shore. Walk through the horn gate and you see the shore as it is. Walk through the ivory one and the shore lies: paths that aren't there, walls that are. Darkrai waits at the end of the false shore, and the trick is that the true path through it is the one that looks blocked.
-
-```text
-DARKRAI's shore. A sign, in your own handwriting:
-
-"THIS WAY IS SAFE."
-
-You never wrote it.
-```
-
-**Battles.** Cresselia, Lv 74: Lunar Blessing, Moonblast, Psychic, Moonlight. Darkrai, Lv 78: Dark Void, Dark Pulse, Nasty Plot, Sludge Bomb. Darkrai's battle starts with Bad Dreams already sounding.
-
-**Reward.** The girl's father gives the **Gate of Horn**, a key item: once a day, sleep at any xenia host and dream the location of the day's rare visitor omen.
+**The 1.0 gap.** As a stretch goal, the House of Night leaves Cresselia and Darkrai uncatchable in 1.0. Decision PG-26 (OIKOUMENE §13) recommends building it in 1.0; failing that, the two wait at this file's Land of Dreams on Okeanos (OIKOUMENE §4.10), which already has the gates.
 
 ### 3.7 Cobalion, Terrakion, Virizion and Keldeo: The Hours of Justice
 
@@ -418,44 +408,64 @@ RHADAMANTHYS: You've brought her sisters. She'll want to go back and look.
 
 **Follow-up.** A fracture opens at the Selvage: the Iron Crown, Iron Boulder and Iron Leaves (§5).
 
-### 3.8 Yveltal and Mew: Prometheus Bound and The First Clay
+### 3.8 Yveltal and Mew: The Isle of Ares and The First Clay
 
-**The casting.** Zeus chained Prometheus to the Caucasus for giving people fire, and sent an eagle every day to eat his liver, which grew back every night (Hesiod, *Theogony* 521–534). Yveltal is that eagle: destruction that comes every day, against a life that grows back. Xerneas, `LABORS.md`'s Golden Hind, is its opposite.
+**Yveltal: the dark bird of the Isle of Ares.**
 
-Prometheus also shaped the first creatures from clay (Pausanias 10.4.4). Mew is the first one, made before his brother Epimetheus handed out the claws, wings and shells (Plato, *Protagoras* 320d–321c), so it has a little of everything.
+**The casting.** Off the Black Sea's south coast lies the Isle of Ares, where the Argonauts met birds that shot their feathers like arrows. The crew roofed the ship with their shields and rowed past under them (*Argonautica* 2.1030–1089). Apollonius says these were the birds Herakles drove from Lake Stymphalia. Yveltal is the dark bird over that flock: death in war, Ares's own. Xerneas, `LABORS.md`'s Golden Hind (Labor 3), is its opposite.
 
-**Iapetos's son.** In myth Prometheus is the son of Iapetos, Ichor's forger. Prometheus means "forethought."
-
-**Gate.** The Caucasus is reachable once the Clashing Rocks open the Euxine.
+**Gate.** `LABORS.md`'s Labor 6, which drives the Stymphalian flock away to here, and Labor 9, for Hippolyta's shields.
 
 **The quest.**
-1. **The crag.** At the Caucasus's summit Prometheus hangs in Hephaestus's chains. The eagle comes every noon. He talks to you between visits.
+1. **Where they went.** After Labor 6, Lake Stymphalia's fishermen say the flock flew east. At Themiskyra, an Amazon has a bronze feather stuck in her shield: "From the island. Nobody lands there."
+2. **The shield-roof.** Hippolyta lends you six of her shield-maidens. On the Isle of Ares the feathers fall in volleys. Move only under the shields: the maidens walk in a formation you steer (a scripted escort), and stepping out from under them in a volley sends you back to the landing. Three volleys, then the shore's end.
+3. **The summit.** The flock rises off the ridge, and something above it doesn't. Yveltal comes down.
+
+```text
+SHIELD-MAIDEN: The Argonauts held their shields up and rowed. They didn't look.
+
+SHIELD-MAIDEN: Don't look either. Walk.
+```
+
+**Battle.** Lv 80: Oblivion Wing, Dark Pulse, Sucker Punch, Taunt.
+
+**Mew: The First Clay.**
+
+**The casting.** Prometheus shaped the first creatures from clay (Pausanias 10.4.4), before his brother Epimetheus handed out the claws, wings and shells and ran out before he reached people (Plato, *Protagoras* 320d–321c). Mew is the first one, made before the gifts, so it has a little of everything. In myth Prometheus is the son of Iapetos, Ichor's forger; his name means "forethought."
+
+**Gate.** `LABORS.md`'s Labor 11: you break Prometheus's chains on the Caucasus Crag with the Labrys, drive off Zeus's eagle (an Aetarch), and he gives you an ember from the fire he stole.
+
+**The quest.**
+1. **Free, and talking.** After the Labor, Prometheus stays near his crag. He can walk now, badly.
 
 ```text
 PROMETHEUS: I was chained for a secret about who'd be born. A prophecy.
 
 PROMETHEUS: Nobody can know who'll be born now. My secret's worth nothing.
 
-PROMETHEUS: So what am I chained for? I've asked the eagle. It doesn't know either.
+PROMETHEUS: So I'd like to see the first thing I ever made. It hid when they took the fire.
 ```
 
-2. **The eagle.** Yveltal stoops at noon. Stand on the ledge and it battles you; win and it circles, and catch it. Prometheus breathes out: the first day in an age without it.
-3. **The clay.** Prometheus tells you of the first creature, the one he made before his brother ran out of gifts, which hid in the mountain when Zeus took the fire back. He can't move. You can.
-4. **The fire-pit.** Deep in the Caucasus, Prometheus's old fire-pit is cold. Carry a flame up from the Field of Ares (SYSTEMS §2) through three windy caves, and light it. Mew comes to the light and plays before it battles.
-5. **The chains.** They stay. Herakles freed Prometheus in myth, and `LABORS.md` may want that for the eleventh Labor (§8). If it doesn't, Hephaestus's Hammer (SYSTEMS §3, Hephaestus gift II) breaks them here, and Prometheus gives you a **Fire Stone** ring with a chip of Caucasus rock in it, as he wore one in myth (Hyginus, *De Astronomia* 2.15).
+2. **The caves.** Below the crag, three floors of wind-cut caves lead down to his first workshop. The wind blows out ordinary flames (SYSTEMS §2), but not his ember.
+3. **The fire-pit.** Carry the ember from the crag to the cold fire-pit at the bottom, and light it. Mew comes to the light, plays round the fire, and then battles you, curious.
+4. **The ring.** Prometheus gives you a Fire Stone set in an iron ring with a chip of Caucasus rock in it, as he wore one in myth (Hyginus, *De Astronomia* 2.15).
 
-**Battles.** Yveltal, Lv 80: Oblivion Wing, Dark Pulse, Sucker Punch, Taunt. Mew, Lv 75: Psychic, Aura Sphere, Transform, Soft-Boiled.
+**Battle.** Mew, Lv 75: Psychic, Aura Sphere, Transform, Soft-Boiled.
 
 ### 3.9 Thundurus, Landorus and Enamorus: What Came Out of the Bag
 
-**The casting.** Aeolus's winds are Tornadus, and `ODYSSEY.md` owns them. When you open the Bag at the fog wall to reach the Oikoumene, every wind in the world comes out at once (OIKOUMENE §2). One of them doesn't go back. Thundurus is the storm that got loose: the Libyan thunder. Landorus is the earth's plenty, which mends what storms break. Enamorus is the spring after, the love that changes things, the Eros Hesiod put among the first powers (*Theogony* 120).
+**The casting.** Aeolus's winds are Tornadus, and `ODYSSEY.md` owns them. On the Odyssey, a deckhand opens the bag in sight of home and every wind comes out at once (ODYSSEY §6.4). Tornadus is caught and brought back. One more doesn't come back: Thundurus, the thunder, which blows south to Libya. Landorus is the earth's plenty, which mends what storms break. Enamorus is the spring after, the love that changes things, the Eros Hesiod put among the first powers (*Theogony* 120).
+
+```text
+AEOLUS: The thunder went south. Not my problem. Not my wind, strictly.
+```
 
 **The quest.**
-1. **Your fault.** In Libya the date-palms are stripped and Ammonion's priests say the storms came the week the fog lifted. A camel-driver: "Somebody opened something they shouldn't have."
+1. **Your crew's fault.** In Libya the date-palms are stripped, and Ammonion's priests say the storms came the week your ship was blown about. A camel-driver: "Somebody opened something they shouldn't have."
 2. **Thundurus.** It rides the Great Sand Sea's thunderstorms. The ravens of Ammonion find it: follow them into the storm's eye. Lv 76: Wildbolt Storm, Hurricane, Nasty Plot, Grass Knot.
 3. **Landorus.** At the Table of the Sun, the meadow that feeds the poor every night has been bare since the storms. Landorus is the earth's own generosity, and it won't come to someone empty-handed. Bring one berry from each of the Oikoumene's ten lands (the Periodos makes you walk them anyway) and lay them on the Table. Landorus comes up out of the ground. Lv 76: Sandsear Storm, Earth Power, Sludge Wave, Rock Slide.
 4. **Enamorus.** Back in Aethos, at Kythera's Spring of Kallirhoe, where Narcissus stares at himself for ever (STORY III-1). Galatea: "Love that won't let a thing change isn't love. It's a pool." Bring the two Forces to the spring, and the water ripples for the first time in a thousand years. Narcissus looks up. Enamorus is what made him. Lv 76: Springtide Storm, Moonblast, Superpower, Calm Mind.
-5. **Perseus's Shield.** For their Therian forms, the expansion's Reveal Glass becomes **Perseus's Shield**, Athena's polished bronze, which shows a thing's true shape without looking at it directly (SYSTEMS §13 deferred it for a Gorgons' quest; Mewtwo's quest, §4.2, is that quest, and gives it). Show each Force its reflection to change its form.
+5. **The Mirror of Truth.** For their Therian forms, use ODYSSEY's Mirror of Truth, the Reveal Glass that Alethea makes from Aiolia's bronze to show Tornadus's true shape (ODYSSEY §6.4). It shows each Force its own.
 
 ### 3.10 Reshiram, Zekrom and Kyurem: The Truth and the Glory, and The Other Half
 
@@ -482,22 +492,26 @@ KLEON: …Don't make it a thing.
 
 **Battles.** Reshiram, Lv 80: Blue Flare, Fusion Flare, Draco Meteor, Earth Power. Zekrom, Lv 80: Bolt Strike, Fusion Bolt, Outrage, Crunch. Kyurem, Lv 82: Glaciate, Scary Face, Dragon Pulse, Freeze-Dry.
 
-### 3.11 The four Tapus: The Evening's Daughters
+### 3.11 The four Tapus: The Keepers of the Isles
 
-**The casting.** The Hesperides, "daughters of evening," guard the golden apples at the world's western edge. Their names vary, but four are common: **Aigle** (radiance), **Erytheia** (the red), **Hesperia** (evening) and **Arethousa** (a spring) (Apollodorus 2.5.11). The Tapus are island guardians, fickle and kind by turns, and Fairy-typed. Tapu Koko is Aigle, Tapu Bulu Erytheia, Tapu Lele Hesperia, Tapu Fini Arethousa.
+**The casting.** The Tapus are island guardians, fickle and kind by turns, each with its own ground. Hesiod's Isles of the Blessed lie "beside deep-swirling Okeanos" (*Works and Days* 171), and Okeanos's daughters, the Okeanids, are the springs and waters of the world (*Theogony* 346–366). Four of them keep the four Isles:
+- **Tapu Koko is Elektra,** "shining," the same root as *elektron*, amber;
+- **Tapu Lele is Metis,** "wise counsel," whom Zeus married first;
+- **Tapu Bulu is Plouto,** "plenty";
+- **Tapu Fini is Amphirho,** "flowing round."
 
-**Gate.** `LABORS.md`'s eleventh Labor, the apples. The Labor comes first; this follows it, so the two never tread on each other.
+The first draft cast them as the Hesperides; `LABORS.md`'s eleventh Labor already gives the Garden's Hesperides as its own trainers, so the Tapus moved to the Isles.
 
-**The quest.** After the Labor, the Hesperides are offended that someone took an apple, and each tests whether you deserve the one you've got.
-1. **Aigle's race.** Aigle is all light and showing off. She races you through the garden's sunlit paths from one apple tree to the next, and lightning strikes where she's been (Koko loves a fight). Catch her and she battles.
-2. **Erytheia's herd.** She keeps the sunset-red cattle of the garden's edge, and has lost one. It's grazing on Erytheia, the island named for her (`LABORS.md`'s tenth Labor's island). Bring it back.
-3. **Hesperia's riddle.** At dusk she asks: "What comes after the evening?" Every answer fails ("night," "morning") except the one that admits you don't know. "Good. I never know either."
-4. **Arethousa's spring.** Her spring under the garden has silted up. Carry water from the Atlantic shore in a jar (carried, like a flame; spills if you run) three times to wash it out.
-5. **The apple.** Each nymph, beaten and caught, leaves one golden leaf. With four, Atalanta, waiting in the garden to see the tree whose apples beat her (OIKOUMENE §6), takes your apple and gives you back a seed. "Plant it somewhere they've never heard of us."
+**Gate.** The Isles of the Blessed: Helios's cup after Labor 10, and Rhadamanthys's question (OIKOUMENE §4.10).
+
+**The quest.** The Isles have everything. The Okeanids are bored, and each tests whether a living visitor is worth the trouble.
+1. **Elektra's race.** All light and showing off, she races you round her isle's shore from one standing stone to the next, and lightning strikes where she's been (Koko loves a fight). Catch her and she battles.
+2. **Plouto's want.** Her isle has plenty of everything except things that run out. "Bring me something that ends." Any perishable from the living world will do: a loaf from Elaia's bakery, a cut flower, Moomoo Milk. She eats it slowly. "Oh. That's what it's for."
+3. **Metis's riddle.** At dusk she asks: "What comes after this?" Every answer fails ("night," "morning," "nothing") except the one that admits you don't know. "Good. Neither do I. I've never said that before."
+4. **Amphirho's spring.** Her spring runs round her isle, and it has silted up with gold. Carry seawater from Okeanos in a jar three times (carried, like a flame; it spills if you run) to wash it clear.
+5. **The four gifts.** Each Okeanid, beaten and caught, leaves her isle's seed: the **Electric, Psychic, Grassy and Misty Seeds**, the terrains' own items (already in the expansion).
 
 **Battles.** Each Lv 76, with its own terrain. Tapu Koko: Nature's Madness, Wild Charge, U-turn, Dazzling Gleam. Tapu Lele: Psychic, Moonblast, Calm Mind, Nature's Madness. Tapu Bulu: Wood Hammer, Horn Leech, Superpower, Bulk Up. Tapu Fini: Moonblast, Surf, Nature's Madness, Calm Mind.
-
-**Reward.** The golden seed plants as a tree at home in Elaia that gives one Golden Apple-a-day berry (a renamed Lansat or Starf).
 
 ### 3.12 Cosmog, Solgaleo, Lunala and Necrozma: Hyperion's Children, and The Day Turned to Night
 
@@ -532,7 +546,7 @@ HYPERION: Petros says there's nothing. Petros has eyes. I don't trust him.
 - **Zacian is the sword:** the short life, and glory.
 - **Zamazenta is the shield:** the long life, with the whole world on it.
 
-**Who.** Achilles, the Olympiad's hero, at Leuke, his mother's White Isle in the Black Sea (OIKOUMENE §6).
+**Who.** Achilles, the Stadion's Brain at Olympia (`POSTGAME.md` §3.1), at Leuke, his mother's White Isle in the Black Sea (OIKOUMENE §6). The bards say his shade lives here after Troy; he's come while he's alive. Open once you've won his silver symbol.
 
 **The quest.**
 1. **The choice that's off.** Achilles has come to tell his mother he doesn't know which life he'll have. Prophecy's over. She's relieved, and frightened.
@@ -559,7 +573,7 @@ THETIS: Nobody does. I didn't know that was allowed.
 
 **The quest.**
 1. **The maidens' house.** In Abaris, the kin of the Hyperborean maidens who died carrying the offerings to Delos ask you to do the opposite: bring a straw bundle back up the chain, from Delos to here. "We send them south every year. We've never seen what comes back."
-2. **The relay.** Delos is in Aethos's Cyclades, near Kalliste (AETHOS_MAP leaves it unnamed; it needs only one shrine map). The priests there give you the old straw, and you carry it hand to hand: to Kalliste's Halia, to Olbia's Anacharsis, to the Wagon Camp, to the Arimaspian miners, to the Rhipaean pass. Each keeper adds something and tells you one line about why they never asked what was in it.
+2. **The relay.** Delos is the island beside Aethos's Route 2 (`AETHOS_MAP.md`, `MAPSEC_DELOS`), so the relay starts at home. The priests there give you the old straw, and you carry it hand to hand: to Kalliste's Halia, to Olbia's Anacharsis, to the Wagon Camp, to the Arimaspian miners, to the Rhipaean pass. Each keeper adds something and tells you one line about why they never asked what was in it.
 3. **The round temple.** The bundle, unwrapped at Apollo's round temple, is empty. Calyrex rises out of the straw: a king whose gift is that the bundle kept travelling. "Nobody remembers me. Everyone remembers to pass it on." It battles you, Lv 80.
 4. **Its steed.** Calyrex asks for a horse it lost. Both can come: Glastrier waits at the Cave of Boreas's windiest floor, and Spectrier on the Cimmerian Shore, where the dead come to drink. Lure each with a carrot of its land, an Iceroot from the Hyperborean meadow or a Shaderoot of asphodel from the Cimmerian mist (new key items). Each is Lv 78.
 
@@ -616,16 +630,16 @@ ELPIS: Can you find them? Somebody should say hello.
 
 These live in Aethos and are in §7.
 
-### 4.2 Mewtwo: Look Only in the Shield
+### 4.2 Mewtwo: Look Only in the Mirror
 
-**The casting.** The Gorgon was a mortal girl, Ovid says, made into a monster by a goddess's anger, so that anyone who looked at her turned to stone (*Metamorphoses* 4.790–803). Mewtwo is a creature made into the strongest monster there is, angry at whoever made it. The Gorgons live beyond Okeanos (Hesiod, *Theogony* 274–275). The Lazarus check: Ichor never uses the name Medusa, and Perseus's Shield is never called "Aegis."
+**The casting.** The Gorgon was a mortal girl, Ovid says, made into a monster by a goddess's anger, so that anyone who looked at her turned to stone (*Metamorphoses* 4.790–803). Mewtwo is a creature made into the strongest monster there is, angry at whoever made it. The Gorgons live beyond Okeanos (Hesiod, *Theogony* 274–275). The Lazarus check: Ichor never uses the name Medusa, and nothing here is called Aegis.
 
-**Gate.** The Cave of the Graiai, then Perseus's Shield.
+**Gate.** The Cave of the Graiai, and ODYSSEY's **Mirror of Truth**, the polished bronze Alethea makes from Aiolia's walls (ODYSSEY §6.4). Perseus looked at the Gorgon only in a polished shield; Alethea's mirror does the same job, and suits her: it shows a thing as it is.
 
 **The quest.**
 1. **The gray sisters.** The three Graiai share one eye and pass it hand to hand (Aeschylus, *Prometheus Bound* 794–797). Perseus stole it to make them talk. You don't: you sit and watch until you know their order, then catch the eye when it drops between the second and third sister and hand it back. Grateful, they tell you the way.
-2. **The shield.** At the Gorgons' landing a bronze shield lies on the sand, polished like a mirror: the shield Athena gave Perseus. A voice from nowhere: "Don't look at it. Look at it in that."
-3. **The mirror walk.** The Gorgons' Isle is walked looking only in the shield. Your controls are mirrored left to right for the whole map, and the screen shows the reflection. Stone statues of earlier visitors mark the wrong turns. It is the game's strangest dungeon, and it's short.
+2. **The landing.** At the Gorgons' landing Alethea, if she's with you, holds up the mirror. "Don't look at the island. Look at it in this. Truthfully, that's how I look at most things."
+3. **The mirror walk.** The Gorgons' Isle is walked looking only in the mirror. Your controls are mirrored left to right for the whole map, and the screen shows the reflection. Stone statues of earlier visitors mark the wrong turns. It is the game's strangest dungeon, and it's short.
 
 ```text
 A stone hoplite, mid-stride. His hand is over his eyes.
@@ -633,23 +647,23 @@ A stone hoplite, mid-stride. His hand is over his eyes.
 Somebody's scratched on his shield: "I LOOKED."
 ```
 
-4. **The center.** In the last chamber, Mewtwo waits with its back to you. Turn the shield and it sees itself, and that's what it can't stand. It battles you.
+4. **The center.** In the last chamber, Mewtwo waits with its back to you. Turn the mirror and it sees itself as it is, and that's what it can't stand. It battles you.
 
-**Battle.** Mewtwo, Lv 90: Psystrike, Aura Sphere, Ice Beam, Recover. It is the Oikoumene's hardest static.
+**Battle.** Mewtwo, Lv 90: Psystrike, Aura Sphere, Ice Beam, Recover. After Eternatus, it is the Oikoumene's hardest static.
 
-**Reward.** **Perseus's Shield**, the expansion's Reveal Glass renamed (§3.9), and both **Mewtwonite** stones.
+**Reward.** Both **Mewtwonite** stones.
 
 ### 4.3 Jirachi: The Thousand-Year Star
 
 **The casting.** Jirachi wakes for seven days every thousand years and grants wishes. Ichor's thousand years are Medon's: the Fates were chained a thousand years ago (STORY §1). Jirachi fell asleep the night Medon tied his first knot, because someone wished it. It wakes now because the wish is undone.
 
-**Where.** The summit of Mount Atlas, where the Titan holds up the sky and the stars sit low enough to touch. Atlas, in myth, taught people the stars.
+**Where.** The Atlas Range's highest summit. Atlas himself is alive on his ridge, holding up the sky, and is `LABORS.md`'s to write; this peak is the next one along, where the sky he holds hangs low enough that the stars almost touch the snow. Atlas, in myth, taught people the stars.
 
-**Gate.** All 24 constellations placed on the Star Chart. SYSTEMS §8 promises "a star-born mythical" for completing the chart; this is it (decision D-L3).
+**Gate.** All 24 constellations placed on the Star Chart. SYSTEMS §8 promises "a star-born mythical" for completing the chart; this is it (decision PG-28).
 
 **The quest.**
 1. **The empty patch.** With the chart complete, a 25th light blinks in a corner of it that was never a constellation. Daphne: "That's not one of ours."
-2. **The climb.** At the top of Atlas, in his cupped hands, something small is asleep in the sky.
+2. **The climb.** Up the Atlas Range past the snowline. On the way, Atlas calls across from his ridge: "Mind the low bit. That's where I keep the ones I like." At the summit, hanging just above the snow, something small is asleep in the sky.
 3. **The seven days.** It wakes when you reach it and stays awake seven Aethos days. Visit on any of them.
 4. **The wish.** On the first visit Jirachi offers a wish. The options are things you might want: a Pokémon, an item, a stronger team. Turn them all down and a last option appears.
 
@@ -703,20 +717,9 @@ Jirachi looks puzzled. Then it laughs, and climbs down off the sky.
 
 **Reward.** Menelaus gives you the **Gracidea**: "Give it to someone." Shaymin's Sky form returns to Land at night, as in the originals.
 
-### 4.6 Victini: The Figure on the Prow
+### 4.6 Victini: placed by POSTGAME
 
-**The casting.** Nike, Victory. The great statue of her from Samothrace stands on a ship's prow, wings spread, landing. Victini, the victory Pokémon, lands on yours.
-
-**Gate.** Six of the Periodos's champions beaten (OIKOUMENE §5).
-
-**The quest.**
-1. **The empty prow.** The *Euploia*'s captain complains that a good ship has a figure on its prow, and his never has. "Every ship I've sailed with a Nike on the front won its races. Ours has a knot of rope."
-2. **The wins.** With each champion beaten, a sailor sees something small and winged circling the mast.
-3. **The landing.** After the sixth, at sea between lands, Victini lands on the prow and stays. It doesn't fly away when you walk up. It battles you to see if you're the one winning all this.
-
-**Battle.** Lv 75: V-create, Bolt Strike, Zen Headbutt, U-turn.
-
-**Follow-up.** After you catch it, the captain carves a Nike for the prow anyway. "In case it gets bored."
+`POSTGAME.md` §3.1 places Victini as **Nike** on her pillar before Olympia's Temple of Zeus, where Paionios carved her: she comes down once you hold all five Olympiad gold symbols (Lv 80). This file's first-draft quest, Victini landing on your trireme's prow, gives way. One line of it survives as flavor, if POSTGAME wants it: after Nike comes down, the *Euploia*'s captain carves one for his prow anyway. "In case she gets bored."
 
 ### 4.7 Meloetta: The Singing Head
 
@@ -860,7 +863,7 @@ There are nine gold coins on it.
 3. **The chariot.** At the bottom lie the burned spokes of a chariot wheel. Hyperion, if you've done Hyperion's Children, sent you with a message for his namesake's grandson: "Tell him it was a good try."
 4. **The day.** Eternatus rises from the glass, and the screen goes red.
 
-**Battle.** Lv 95, the strongest static in this file: Dynamax Cannon, Sludge Bomb, Flamethrower, Recover. No Eternamax form: Dynamax is off (PITCH §5).
+**Battle.** Lv 92, the strongest static in this file, under only Arceus: Dynamax Cannon, Sludge Bomb, Flamethrower, Recover. No Eternamax form: Dynamax is off (PITCH §5).
 
 ### 4.16 Kubfu and Urshifu: Milo's Calf
 
@@ -917,7 +920,7 @@ ZENO: …That's how everything moves, isn't it. I'll need a new proof.
 
 ## 5. Time Fractures: the Paradox Pokémon
 
-**The explanation (§1).** When time went past the old cloth's last row, its cut ends frayed. Through the frayed ends leak the Golden Age behind and the Iron Age ahead. STORY §3 put the fractures in `POSTGAME.md`'s list; the director's brief for this file brings them here (decision D-L4).
+**The explanation (§1).** When time went past the old cloth's last row, its cut ends frayed. Through the frayed ends leak the Golden Age behind and the Iron Age ahead. STORY §3 put the fractures in `POSTGAME.md`'s list; the director's brief for this file brings them here (decision PG-29).
 
 **What a fracture is.**
 - A shimmering tear on a map, visible some days and not others (rolled daily from `dailySeed`, SYSTEMS §6). The Kronia festival doubles them (SYSTEMS §7).
@@ -959,7 +962,7 @@ THANIRA: Something big. Waiting at each end of the cloth.
 
 **The explanation (§1).** Beyond Okeanos is the cloth that was never woven. Things live there with no threads. They come through where the world's edge has frayed, and they turn up in the edge-lands, where Greek travellers always swore they'd seen marvels.
 
-**The name.** People in the Oikoumene call them the **Peratai**, the "beyond-ones," from *peran*, across. The battle text can keep "Ultra Beast" or say "beast from beyond," the director's call (D-L5).
+**The name.** People in the Oikoumene call them the **Peratai**, the "beyond-ones," from *peran*, across. The battle text can keep "Ultra Beast" or say "beast from beyond," the director's call (PG-30).
 
 **Catching them.** The expansion's Beast Ball becomes **Hephaestus's Net**, the golden net that caught Ares and Aphrodite in bed and held them for every god to see (*Odyssey* 8.266–366). Anything caught in it stays caught. Daphne makes them at Naukratis from bronze wire you bring.
 
@@ -1016,13 +1019,13 @@ ELPIS: I didn't. I got to the end. Did you like it?
 
 **The quest.**
 1. **Warm in winter.** "My forge is warm on the coldest day of the year. I don't stoke it that much."
-2. **Under the forge.** A grate in Talos's floor opens onto lava tubes below the Telchines' sea-cave. Pitch dark, and too hot for Hecate's Torch: it gutters out.
+2. **Under the forge.** On Kaldera's caldera floor, a boulder only Hephaestus's Hammer can move (`POSTGAME.md` §3.4's suggestion, kept) hides a vent that runs under Talos's forge into lava tubes below the Telchines' sea-cave. Pitch dark, and too hot for Hecate's Torch: it gutters out.
 3. **Hyperion.** Talos fetches Hyperion from the bellows. He can't see, and doesn't need to. He listens and calls the way: "Left. It breathes on the left." A walk through the dark with your torch doused (SYSTEMS §2) and a blind man's directions.
 4. **The heart.** At the bottom, on the ceiling, upside down, Heatran.
 
 **Battle.** Lv 72: Magma Storm, Earth Power, Flash Cannon, Stealth Rock.
 
-**Reward.** Talos forges you a **Magma Stone**, which doesn't exist in the expansion: a held item that powers up Fire moves for Heatran only (a small new item; or drop it and give Charcoal, decision D-L6).
+**Reward.** Talos forges you a **Magma Stone**, which doesn't exist in the expansion: a held item that powers up Fire moves for Heatran only (a small new item; or drop it and give Charcoal, decision PG-32).
 
 ### 7.3 Type: Null and Silvally: The Statue That Runs Away
 
@@ -1076,7 +1079,7 @@ MOM: …He's forgotten his shadow. Typical.
 - **Okidogi, Munkidori and Fezandipiti** are three "heroes" with a statue in Thyrsa's vineyards, honored for driving off "the monster."
 - **Pecharunt** is **Methe**, Drunkenness, Dionysus's companion: a poisoned vintage that makes whoever drinks it obey.
 
-**Gate.** The League; the end comes at the Anthesteria, the festival of opening the new wine jars (SYSTEMS §7).
+**Gate.** The League. Two festivals finish it, a month apart in SYSTEMS §7's calendar: Pecharunt at the Anthesteria in Anthesterion, when the new wine jars are opened, and Ogerpon at the City Dionysia in Elaphebolion, where `POSTGAME.md` §3.4 suggested it.
 
 **The quest.**
 1. **The statue.** In Thyrsa's vineyards, three heroes in stone: a dog, an ape and a pheasant. Every year the town toasts them for saving the harvest from a monster. Thespis is bored of it.
@@ -1090,7 +1093,7 @@ THESPIS: Every tragedy needs a satyr play after it. Somebody left this one out.
 2. **The monster.** At the vineyard's edge, a masked creature watches you, then runs. Follow it to its hollow: four masks on pegs, and the grapes it has been guarding all year.
 3. **The heroes.** Three Pokémon who match the statue live in the vineyard's fine houses. Each battles you on sight, eyes glassy: Okidogi at the press, Munkidori in the drying-loft, Fezandipiti on the trellis roof. Lv 74 each. Beaten, each sobers up for a moment and says one thing about the wine.
 4. **The jars.** At the Anthesteria, the jars are opened. One jar is opened by itself from inside. Pecharunt is the vintage. Lv 78.
-5. **The play.** Thespis writes the real story: *The Satyr Who Was the Hero*. Ogerpon comes to watch, from the back, in its tragedy mask. When the audience laughs in the right place, it comes down to the orchestra and battles you as a bow. Lv 76.
+5. **The play.** Thespis writes the real story, *The Satyr Who Was the Hero*, and stages it at the next City Dionysia. Ogerpon comes to watch, from the back, in its tragedy mask. When the audience laughs in the right place, it comes down to the orchestra and battles you as a bow. Lv 76.
 
 **Battles.** Okidogi: Bitter Malice, Drain Punch, Crunch, Bulk Up. Munkidori: Sludge Bomb, Psychic, Fake Out, U-turn. Fezandipiti: Moonblast, Beat Up, Roost, Heat Wave. Pecharunt: Malignant Chain, Shadow Ball, Parting Shot, Recover. Ogerpon: Ivy Cudgel, Horn Leech, Knock Off, Spiky Shield.
 
@@ -1098,25 +1101,31 @@ THESPIS: Every tragedy needs a satyr play after it. Somebody left this one out.
 
 ### 7.7 Quests that cross the two charts
 
-Three quests elsewhere in this file touch Aethos: Latias and Latios start at Therapne in Lakonia and end at sea in the Oikoumene (§3.4); Victini lands on your own trireme, which sails both charts (§4.6); and Enamorus, the end of the Forces arc, is caught at Kythera's spring in Aethos (§3.9).
+Three quests elsewhere in this file touch Aethos: Latias and Latios start at Therapne in Lakonia and end at sea in the Oikoumene (§3.4); Calyrex's straw relay starts at Delos beside Route 2 (§3.14); and Enamorus, the end of the Forces arc, is caught at Kythera's spring in Aethos (§3.9).
 
 ---
 
 ## 8. Placed elsewhere: notes for the other docs
 
-| Pokémon | Owner | What this file suggests or asks |
+Reconciled with `POSTGAME.md` §4's list. Everything below is the other docs'; this file only notes how it fits.
+
+| Pokémon | Owner | Notes |
 |---|---|---|
-| Lugia, Manaphy (and Phione by breeding with Ditto from Pharos) | `POSTGAME.md`, Atlantis | If Atlantis moves to the Oikoumene past the Pillars (OIKOUMENE D-O4), the Ring of Okeanos's approach is this chart's |
-| Kyogre | `POSTGAME.md` | If Kyogre is Okeanos, the Springs of Okeanos (OIKOUMENE §4.10) are reserved for it |
-| Groudon, Rayquaza, Arceus | `POSTGAME.md` | Dialga and Palkia here (§3.5) and Giratina in `UNDERWORLD.md` can be its Sinnoh-style gate to Arceus. Arceus should stay the only level-100 battle |
-| Kairazor, the colossi, Ichorin | `POSTGAME.md` | Levels: the dex gives Ichorin Lv 50 and STORY the Fates Lv 50; `BALANCE.md`'s post-game row is 70–80. Worth a check (D-L7) |
-| Regirock, Regice, Registeel, Regigigas | `UNDERWORLD.md` | — |
-| Regieleki, Regidrago | `UNDERWORLD.md`, proposed | Castings that fit Tartarus: **Regieleki** as the Cyclopes' thunderbolt-forge, which Zeus freed from Tartarus to make his lightning; **Regidrago** as **Kampe**, the she-dragon who jailed them there (Apollodorus 1.2.1). If `UNDERWORLD.md` keeps only the classic four, these two come back here, at the Selvage's lowest ledge (D-L2) |
-| Giratina | `UNDERWORLD.md` | — |
-| Tornadus | `ODYSSEY.md` | The Forces arc here begins when the Bag is opened (§3.9) |
-| Xerneas | `LABORS.md`, Labor 3 | Yveltal's quest (§3.8) is its opposite; nothing gates on it |
-| Zapdos | Moved here from SYSTEMS §3's Zeus gift III | Zeus's gift III becomes a unique Aetarch (D-L1) |
+| Lugia (Leukothea), Manaphy, and Phione by breeding with Ditto from Pharos | `POSTGAME.md` §3.2, Atlantis | Atlantis stays on the Aethos chart; the Pillars look out toward it (OIKOUMENE §4.8) |
+| Kyogre (Oceanus), Groudon (Gaia), Rayquaza (Ouranos), Arceus | `POSTGAME.md` §3.3 | Arceus at Lv 95 stays the game's strongest battle; nothing here passes 92. Chaos, the Gap, is Arceus's to fill, which is why Palkia here is Plato's Chora instead (§3.5) |
+| Kairazor, Pegaunos, the colossi, Ichorin | `POSTGAME.md` §3.1, §3.4 | The dex team set Ichorin at Lv 70 and the Fates at 60; POSTGAME §4's table still says Ichorin 80 and the Fates 50, and should follow the dex |
+| Victini (Nike) | `POSTGAME.md` §3.1 | This file's first-draft quest gave way (§4.6) |
+| Regirock, Regice, Registeel, Regieleki, Regidrago, Regigigas | `UNDERWORLD.md` §4.10 | Tartarus's five cells and Briareus's gate. Settled: the first draft's fallback for Regieleki and Regidrago is dropped |
+| Giratina (Tartaros) | `UNDERWORLD.md` §4.11 | — |
+| Cresselia, Darkrai | `UNDERWORLD.md` §6, the House of Night (stretch) | This file's first-draft quest gave way (§3.6). Decision PG-26 asks for the House of Night in 1.0; failing that, they wait at the Land of Dreams |
+| Tornadus | `ODYSSEY.md` §6.4 | The Forces arc here starts from the same opened bag (§3.9) |
+| Xerneas | `LABORS.md` Labor 3 | Yveltal's quest (§3.8) is its opposite and follows Labors 6 and 9 |
+| Zapdos | Moved here from SYSTEMS §3's Zeus gift III | Zeus's gift III becomes a unique Aetarch, the eagle LABORS's Labor 11 already uses (PG-27) |
 | Magearna | `SYSTEMS.md` §3, Hephaestus gift III | Staged in §7.4; the rule and the gate stay SYSTEMS's |
+
+**POSTGAME §3.4's proposed homes,** which §4 hands to this file: kept are Heatran at Kaldera behind the Hammer boulder (§7.2), Enamorus at Kythera (§3.9), Latias and Latios from Lakonia (§3.4) and Ogerpon at Thyrsa's City Dionysia (§7.6). Moved to the Oikoumene, as §4 allows: Ho-Oh to Heliopolis, where Herodotus's phoenix brings its father in an egg of myrrh (2.73); Meloetta to the mouth of the Hebros, where Orpheus's head came singing down the river; the Treasures of Ruin to four places across the Oikoumene (§3.15); and the Paradox Pokémon and Ultra Beasts to the Time Fractures and the Selvage (§5, §6; PG-29).
+
+**What this file now leans on from the epics,** so their authors know: LABORS's Labor 6 (where the Stymphalian flock goes), Labor 9 (Hippolyta's shield-maidens), Labor 10 (Helios's cup) and Labor 11 (Prometheus freed, his ember); ODYSSEY's Aiolia (the opened bag, the Mirror of Truth); POSTGAME's Olympia (Achilles, whose silver symbol opens Leuke, §3.13); and UNDERWORLD's House of Night, for which §3.6 offers two beats.
 
 ---
 
@@ -1127,22 +1136,23 @@ Every mechanic here uses something the expansion or an approved Ichor system alr
 | Mechanic | Used by | How | Effort |
 |---|---|---|---|
 | Statics that return until caught | All | A daily flag reset in `DoDailyEvents` (`src/clock.c`) per static | Low |
-| Omen wanderers | The beasts, Latias and Latios, Cresselia | SYSTEMS §6's rare-visitor omen with hide flags. Avoids `ROAMER_COUNT`, which is 1 (`include/constants/global.h` line 110); raising it grows SaveBlock1 | Low |
+| Omen wanderers | The beasts, Latias and Latios | SYSTEMS §6's rare-visitor omen with hide flags. Avoids `ROAMER_COUNT`, which is 1 (`include/constants/global.h` line 110); raising it grows SaveBlock1 | Low |
 | Alternate days | Latias and Latios | Parity of `gLocalTime.days` | Low |
-| Moon phases | Cresselia, Darkrai | Derived from SYSTEMS §7's calendar: new moon on a month's first day, full on its middle day | Low |
 | Time-of-day windows | Moltres, Dialga, Solgaleo, Genesect | `GetTimeOfDay()` (Gen 8+ hours, `include/constants/rtc.h`) | Low |
 | Festival days | Shaymin, Pecharunt, Herakles's rematch | `Ichor_GetFestival` (SYSTEMS §7) | Low |
-| Carried things | Mew (flame), the Tapus and Volcanion (water), Ho-Oh (the egg) | SYSTEMS §2's carried-flame grammar, reused for a water jar and an egg; the "don't run" flag from SYSTEMS §10 | Low |
-| Timing gates | The Clashing Rocks | `Ichor_BullLeap` (LABYRINTH §3) | Low |
+| Carried things | Mew (Prometheus's ember), Amphirho's spring and Volcanion (water), Ho-Oh (the egg) | SYSTEMS §2's carried-flame grammar, reused for a water jar and an egg; the "don't run" flag from SYSTEMS §10 | Low |
+| Timing gates | The Clashing Rocks side channel (OIKOUMENE §2) | `Ichor_BullLeap` (LABYRINTH §3) | Low |
+| Ordering puzzle | Dialga's twelve doors | Twelve door warps and one var that counts the hours walked in order; a wrong door warps you to the first | Low |
+| Escort under a shield-roof | Yveltal | Scripted movement for the maidens, as SYSTEMS's escorts use (not the expansion's NPC followers, which cost SaveBlock3), plus a volley timer that checks whether you stand under them | Low–Medium |
 | Follow-the-glint blizzard | Articuno | Scripted per screen; a wrong turn warps you back | Low |
-| Mirrored controls | Mewtwo's isle | A per-map flag that swaps left and right in `src/field_player_avatar.c`'s input handling, and a horizontally flipped camera view (or simply flipped map art) | Low–Medium (new) |
+| Mirrored controls | Mewtwo's isle, walked in the Mirror of Truth | A per-map flag that swaps left and right in `src/field_player_avatar.c`'s input handling, and a horizontally flipped camera view (or simply flipped map art) | Low–Medium (new) |
 | The halving chase | Terapagos | Scripted object movement that halves the gap each step | Low |
 | The shadow that copies you | Marshadow | `MOVEMENT_TYPE_COPY_PLAYER` (`include/constants/event_object_movement.h`) | Low |
 | Invisibility and an unguarded town | Hoopa | `OW_FLAG_NO_TRAINER_SEE` (the Helm, SYSTEMS §1) plus per-stall item scripts that check a flag | Low |
 | The eclipse | Necrozma | A scripted palette darken; the same tint tools as the Frozen Hour (STORY §8.4) | Low–Medium |
 | Lyre playback | Meloetta | A `dynmultichoice` sequence from the Relic Ring (SYSTEMS §1) | Low |
 | The cell count | Zygarde | 14 flags; the chest's use script sets the form. The expansion has `ITEM_ZYGARDE_CUBE`, but cell collection is new | Medium |
-| Form-change items | Deoxys, Shaymin, the Forces, Kyurem, Necrozma, Hoopa, Calyrex, Zacian and Zamazenta, Dialga and Palkia, Silvally, Ogerpon, Urshifu | All exist: `ITEM_METEORITE`, `GRACIDEA`, `REVEAL_GLASS`, `DNA_SPLICERS`, `N_SOLARIZER`, `N_LUNARIZER`, `PRISON_BOTTLE`, `REINS_OF_UNITY`, `RUSTED_SWORD`, `RUSTED_SHIELD`, `ADAMANT_CRYSTAL`, `LUSTROUS_GLOBE`, the Memories, the masks, `SCROLL_OF_DARKNESS` and its pair (`include/constants/items.h`). Renames only | Low |
+| Form-change items | Deoxys, Shaymin, the Forces, Kyurem, Necrozma, Hoopa, Calyrex, Zacian and Zamazenta, Dialga and Palkia, Silvally, Ogerpon, Urshifu | All exist: `ITEM_METEORITE`, `GRACIDEA`, `REVEAL_GLASS`, `DNA_SPLICERS`, `N_SOLARIZER`, `N_LUNARIZER`, `PRISON_BOTTLE`, `REINS_OF_UNITY`, `RUSTED_SWORD`, `RUSTED_SHIELD`, `ADAMANT_CRYSTAL`, `LUSTROUS_GLOBE`, the Memories, the masks, `SCROLL_OF_DARKNESS` and its pair (`include/constants/items.h`). Renames only; `REVEAL_GLASS` is ODYSSEY's Mirror of Truth | Low |
 | Hephaestus's Net | The Ultra Beasts | `ITEM_BEAST_BALL`, renamed | Low |
 | Cosmog's day and night | Solgaleo, Lunala | Already in the species data (`IF_NOT_TIME, TIME_NIGHT`, `gen_7_families.h` line 6353) | None |
 | Kubfu's scrolls | Urshifu | `EVO_SCRIPT_TRIGGER` with the dark and water triggers, already in the data | None |
@@ -1157,9 +1167,9 @@ Every mechanic here uses something the expansion or an approved Ichor system alr
 
 ---
 
-## 10. The 100%: completing the National Dex
+## 10. The 100%: completing the Oikoumene Dex
 
-Every one of the 1,025 National Dex species can be caught in one save, with no link cable, no event distribution and no second game. The Aethos Dex's 152 are on top.
+Every one of the 1,025 National Dex species (the **Oikoumene Dex**, if PG-13 is approved) can be caught in one save, with no link cable, no event distribution and no second game. The Aethos Dex's 152 are on top. `POSTGAME.md` §5 defines 100% as the **Kleos page's twelve laurels**; laurel 8 is the Aethos Dex and laurel 9 the Oikoumene Dex, and this section is how a player earns laurel 9. The ending itself, the Loom and Halia's spindle, is POSTGAME's.
 
 ### How the 1,025 add up
 
@@ -1168,20 +1178,21 @@ Every one of the 1,025 National Dex species can be caught in one save, with no l
 | Wild in the Oikoumene | 406 | `oikoumene/COVERAGE.md` |
 | A Nursery, or breeding | 247 | `oikoumene/COVERAGE.md` |
 | Evolving a caught Pokémon (the Xenion for trades) | 178 | `oikoumene/COVERAGE.md`, special handling |
-| Legendary, mythical, Ultra Beast or Paradox | 125 | This file, §2 |
+| Legendary, mythical, Ultra Beast or Paradox | 125 | This file, §2, and the epics it names |
 | A theoxenia guest-gift line | 54 | `SYSTEMS.md` §10 |
 | A fossil | 15 | `oikoumene/COVERAGE.md` |
 | **Total** | **1,025** | |
 
 ### The checklist a player follows
 
-1. **Finish the story,** then the Odyssey to get Aeolus's Bag.
+1. **Finish the story,** then sail: the near lands open with the ship, and the Odyssey gives Aeolus's Bag for the rim.
 2. **Walk the ten lands** for the Periodos. Most wild species come on the way.
-3. **Breed and visit the Nurseries** for first stages. The egg-ovens at Naukratis, with Hera's blessing, halve the work.
-4. **Use the Xenion** for trade evolutions, and the Oikoumene Agoras' evolution items.
-5. **Dig** for fossils and have Daphne revive them.
-6. **Accept every stranger's request** in Aethos, for the eighteen guest-gift lines.
-7. **Do the legend quests** here and in the epics. The Scroll of Deeds lists each open lead.
+3. **Do the four epics.** The Labors, the Katabasis, the Odyssey and Atlantis place 19 of the 125 legends, and LEGENDS's quests lean on several of them.
+4. **Breed and visit the Nurseries** for first stages. The egg-ovens at Naukratis, with Hera's blessing, halve the work.
+5. **Use the Xenion** for trade evolutions, and the Oikoumene Agoras' evolution items.
+6. **Dig** for fossils and have Daphne revive them.
+7. **Accept every stranger's request** in Aethos, for the eighteen guest-gift lines.
+8. **Do the legend quests.** The Scroll of Deeds lists each open lead.
 
 ### The rewards
 
@@ -1189,17 +1200,16 @@ Daphne keeps the count at Naukratis and at the Akademia. Her lines are drafts.
 
 | Milestone | Reward |
 |---|---|
-| Aethos Dex, all 152 seen | `POSTGAME.md`'s Ichorin lead (the dex's habitat note) |
-| Aethos Dex, all 152 caught | A diploma painted on a kylix (TERMS.md's trainer card art) |
-| National Dex, 250 caught | An Ability Patch |
+| Aethos Dex, all 152 caught | Kleos laurel 8, and a diploma painted on a kylix (TERMS.md's trainer card art) |
+| Oikoumene Dex, 250 caught | An Ability Patch |
 | 500 caught | The **Oval Charm**, renamed **Hera's Pomegranate**: eggs come more often (`ITEM_OVAL_CHARM`) |
 | 750 caught | Three Golden Pythian Laurels (SYSTEMS §11) |
 | 1,000 caught | The **Catching Charm**, renamed **Artemis's Arrow** (`ITEM_CATCHING_CHARM`) |
-| **All 1,025** | **The Acorn of Dodona**, the Shiny Charm (SYSTEMS §3). If Zeus already gave it at Favor 60, Daphne gives the **Exp. Charm** instead, renamed **Apollo's Laurel** (`ITEM_EXP_CHARM`) |
+| **All 1,025** | **Kleos laurel 9,** and **the Acorn of Dodona**, the Shiny Charm (SYSTEMS §3). If Zeus already gave it at Favor 60, Daphne gives the **Exp. Charm** instead, renamed **Apollo's Laurel** (`ITEM_EXP_CHARM`) |
 
-**The shiny charm two ways.** SYSTEMS makes the Acorn of Dodona Zeus's gift II, earned by faith. The 100% gives it too, earned by knowing every creature. Either road gets there, which suits a game about choosing your own.
+**The shiny charm two ways.** SYSTEMS makes the Acorn of Dodona Zeus's gift II, earned by faith. The 100% gives it too, earned by knowing every creature. Either road gets there, which suits a game about choosing your own (PG-20).
 
-**The last lecture.** With all 1,025, Daphne asks her first question one last time (STORY §2, P2).
+**Daphne's last question.** POSTGAME gives Daphne her last lecture on Atlantis's deck. This is her last question, with all 1,025 caught (STORY §2, P2).
 
 ```text
 DAPHNE: You've seen every one. All of them. In the whole world.
@@ -1225,64 +1235,66 @@ So no two quests feel alike, here is what each asks of you.
 
 | Verb | Quests |
 |---|---|
-| Chase or pursuit | Zapdos (the boy), Zeraora, Terapagos, Mesprit (by not chasing), Koraidon and Miraidon |
-| Riddle or reasoning | Uxie, Hesperia, Terrakion (the liar), Hypatia |
-| Escort or relay | Zapdos's shepherd boy, Calyrex's straw, Magearna's walk |
-| Offering or gift | Ho-Oh's egg, Landorus's ten berries, Virizion's berries, Shaymin's thank-yous, the beasts' altars |
-| Timing, hours and days | Moltres (dusk), Dialga (the crossing), Genesect (three dawns), Latias and Latios (alternate days) |
-| Moon phases | Cresselia (full), Darkrai (new) |
-| Festivals | Shaymin (Pyanopsia), Pecharunt (Anthesteria) |
+| Chase or pursuit | Zapdos (the boy), Zeraora, Terapagos, Mesprit (by not chasing), Koraidon and Miraidon, Elektra's race |
+| Riddle or reasoning | Uxie, Metis, Terrakion (the liar), Hypatia |
+| Ordering puzzle | Dialga's twelve doors |
+| Escort or relay | Zapdos's shepherd boy, Calyrex's straw, Magearna's walk, Yveltal's shield-roof |
+| Offering or gift | Ho-Oh's egg, Landorus's ten berries, Virizion's berries, Shaymin's thank-yous, Plouto's thing that ends, the beasts' altars |
+| Timing, hours and days | Moltres (dusk), Dialga (sunset), Genesect (three dawns), Latias and Latios (alternate days) |
+| Festivals | Shaymin (Pyanopsia), Pecharunt (Anthesteria), Ogerpon (City Dionysia) |
 | Constellations and the chart | Jirachi (all 24), Deoxys (four marks), Latias and Latios (Gemini), Meloetta (Lyra), Diancie (Corona Borealis) |
-| Carried things | Mew (flame), Arethousa and Volcanion (water), Ho-Oh (the egg) |
-| Navigation puzzles | Articuno's blizzard, Darkrai's false shore, Mewtwo's mirror, Heatran's dark |
+| Carried things | Mew (Prometheus's ember), Amphirho and Volcanion (water), Ho-Oh (the egg) |
+| Navigation puzzles | Articuno's blizzard, Mewtwo's mirror, Heatran's dark, Palkia's edge |
 | Moral tests | Hoopa (the ring), Jirachi (the wish), Cobalion (judgments) |
 | Music | Meloetta |
 | Endurance | Azelf's six battles |
 | Collection | Zygarde's pieces, Melmetal's iron, the Treasures' nails, the Silvally discs |
 | Theoxenia | Marshadow, Magearna |
-| A friend carries it | Alethea (Reshiram, Kyurem), Kleon (Zekrom, Latias, Kyurem), Elpis (Celebi, the Treasures), Hyperion (Cosmog, Necrozma, Heatran), Hypatia (the soul trio, Dialga, Palkia), Ariadne (Diancie), Thespis (Ogerpon), Achilles (Zacian, Zamazenta), Lotira (the Ultra Beasts), Mom (Marshadow) |
+| A friend carries it | Alethea (Reshiram, Kyurem, Mewtwo), Kleon (Zekrom, Latias, Kyurem), Elpis (Celebi, the Treasures), Hyperion (Cosmog, Necrozma, Heatran), Hypatia (the soul trio, Dialga, Palkia), Ariadne (Diancie), Thespis (Ogerpon), Achilles (Zacian, Zamazenta), Prometheus (Mew), Hippolyta's shield-maidens (Yveltal), Lotira (the Ultra Beasts), Mom (Marshadow) |
 
 ### Scope
 
 | Tier | What |
 |---|---|
 | **1.0** | Every species obtainable, through the simplest version of its quest: the master table's placements, every battle, every form item, the Time Fractures with their tables, the Ultra Beasts as statics with rumors, Poipole, and the 100% rewards. Every quest keeps at least its first and last step |
-| **Stretch** | Each quest's full step list: the blizzard, the mirror walk, the halving chase, the eclipse, the relay of straw, the invisible town, the lyre playback, the false shore, Zygarde's fourteen pieces |
+| **Stretch** | Each quest's full step list: the blizzard, the mirror walk, the halving chase, the eclipse, the relay of straw, the invisible town, the lyre playback, the twelve doors, the shield-roof, Zygarde's fourteen pieces |
 | **Later** | Rematch versions of the strongest legends; alternate dialogue when a friend is absent; a Scroll of Deeds page for every lead |
 
 ### ROM estimate
 
 | Item | Size |
 |---|---:|
-| Scripts and text for about 60 quests | ~170 KiB |
-| About 25 small new maps (sanctuaries, shrines, fracture pockets, the Gorgons' Isle) | ~70 KiB |
+| Scripts and text for about 55 quests | ~160 KiB |
+| About 25 small new maps (sanctuaries, shrines, fracture pockets, the Gorgons' Isle, the Isle of Ares, the Caucasus caves) | ~70 KiB |
 | Large overworld objects for the legends (about 40, 32×32 and up, sharing palettes) | ~60 KiB |
-| New items and icons (Iceroot, Shaderoot, Magma Stone, the Pythia's Feather, the Gate of Horn, renamed form items' icons) | ~6 KiB |
-| Code (moon phase, mirrored input, cell count, fracture rolls) | ~6 KiB |
-| **Total** | **~310 KiB** |
+| New items and icons (Iceroot, Shaderoot, Magma Stone, the Pythia's Feather, renamed form items' icons) | ~5 KiB |
+| Code (mirrored input, cell count, fracture rolls) | ~5 KiB |
+| **Total** | **~300 KiB** |
 
 All the species, their sprites and their cries are already in the ROM.
 
 ### Decisions for the user
 
-| # | Decision | Recommendation | Alternative |
+This file's decisions are folded into the post-game's consolidated list in `OIKOUMENE.md` §13, alongside POSTGAME's P1–P11. The ones that are this file's:
+
+| # | Decision | Recommendation | First draft's number |
 |---|---|---|---|
-| **D-L1** | **Zapdos joins its trio here**, and Zeus's gift III (SYSTEMS §3) becomes a unique Aetarch, the dex's eagle of Zeus | Yes: STORY already moved Zeus's eagle to Aetarch | Keep Zapdos as Zeus's gift and give the trio a third bird elsewhere |
-| D-L2 | **Regieleki and Regidrago** go to `UNDERWORLD.md` with the classic Regis, as the Cyclopes' forge and Kampe | Yes, for that doc to confirm; this file has a fallback at the Selvage | Place them here |
-| D-L3 | **Jirachi is SYSTEMS §8's star-born reward** for all 24 constellations | Yes | Let the Astral-type team design a new one |
-| **D-L4 ★** | **Time Fractures move here** from STORY §3's list for `POSTGAME.md`: Golden fractures in Aethos, Iron fractures in the Oikoumene, after Hesiod's ages | Yes | Leave all of them to `POSTGAME.md` |
-| D-L5 | **The Ultra Beasts' name:** the Peratai, "the beyond-ones," in dialogue; the battle text keeps "Ultra Beast" | Yes | Rename the battle text too |
-| D-L6 | **A Magma Stone** for Heatran, as a small new item | Optional; Charcoal is fine | — |
-| D-L7 | **Levels for the Fates and Ichorin:** STORY and the dex say Lv 50; BALANCE's post-game row says 70–80 | Raise to 70 | Keep 50 |
-| **D-L8 ★** | **The legend castings as a set:** Plato's soul for the lake trio, Chronos and Chaos for Dialga and Palkia, the Hours for the Swords, truth and glory for Unova's dragons, the Hesperides for the Tapus, Hyperion's children for the sun and moon, Pandora's evils and Elpis for the Treasures | Yes | Cast them one by one |
-| D-L9 | **The 100% reward:** the Acorn of Dodona by knowledge as well as by Zeus's Favor | Yes | Only Zeus's road |
-| D-L10 | **Jirachi joins without a battle** if you wish for nothing | Yes | Always battle |
+| PG-20 | **The 100% reward:** the Acorn of Dodona by knowledge as well as by Zeus's Favor | Yes | D-L9 |
+| **PG-26 ★** | **The House of Night in 1.0,** so Cresselia and Darkrai can be caught; else they wait at the Land of Dreams | Make it 1.0 | — |
+| PG-27 | **Zapdos joins its trio here**, and Zeus's gift III (SYSTEMS §3) becomes a unique Aetarch | Yes: STORY already moved Zeus's eagle to Aetarch, and LABORS's Labor 11 uses one | D-L1 |
+| PG-28 | **Jirachi is SYSTEMS §8's star-born reward** for all 24 constellations | Yes | D-L3 |
+| **PG-29 ★** | **Time Fractures and the Ultra Beasts are this file's:** Golden fractures in Aethos, Iron fractures in the Oikoumene, after Hesiod's ages; the Ultra Beasts at the Selvage instead of POSTGAME's Sky Fractures | Yes | D-L4 |
+| PG-30 | **The Ultra Beasts' name:** the Peratai, "the beyond-ones," in dialogue; the battle text keeps "Ultra Beast" | Yes | D-L5 |
+| **PG-31 ★** | **The legend castings as a set:** Plato's soul for the lake trio; Chronos and Chora (Plato's *Timaeus*) for Dialga and Palkia; the Hours for the Swords; truth and glory for Unova's dragons; the Isles' four Okeanids for the Tapus; Hyperion's children for the sun and moon; the dark bird of Ares's island for Yveltal; Pandora's evils and Elpis for the Treasures | Yes | D-L8 |
+| PG-32 | **Small items:** a Magma Stone for Heatran (optional; Charcoal is fine), and Jirachi joins without a battle if you wish for nothing | Optional; yes | D-L6, D-L10 |
+
+**Settled since the first draft:** D-L2 (Regieleki and Regidrago are UNDERWORLD's) and D-L7 (the dex team set the Fates at Lv 60 and Ichorin at 70).
 
 ### The Lazarus check
 
 - **No Muses.** Meloetta is Orpheus's song.
 - **No Chimera.** Type: Null is Daedalus's runaway statue, never a chimera.
 - **No Greek-named beast trio.** Raikou, Entei and Suicune keep their names and stay a side quest.
-- **No prefixed forms:** no Aegis, Gryphon, Medusa or Titan anything. The Gorgons are never named Medusa; Perseus's Shield is never Aegis; the gold-guardians are never called gryphons.
+- **No prefixed forms:** no Aegis, Gryphon, Medusa or Titan anything. The Gorgons are never named Medusa; the gold-guardians are never called gryphons.
 - **Rayquaza isn't central** and isn't here.
 - **Mega Evolution is never a weapon.** The Ichor Stones here are rewards.
