@@ -62,8 +62,8 @@ The city's west gate is the **Isthmus Gate** to Route 4 (batch 3); its seam colu
 | the deck, the hatch | the hold | warp both ways |
 | the deck | Aegina's quay | scripted warp (end of beat 10, and the ferry) |
 | Aegina's inn, after the night | the deck | scripted warp (beat 10C) |
-| Aegina Town doors | inn, mint, Aiakides's house | warps both ways |
-| Aegina Town, north gate | the Aphaia Road | map connection, up. The Aegina agent picks the gate columns and records them here; the detour agent matches them. |
+| Aegina Town doors | inn, mint, Aiakides's house | warps both ways. Aegina Town's warps: **0** the quay landing (12,12), not a door: `warp(MAP_AEGINA_TOWN, 0)` lands the ferry and the end of beat 10 there; **1** the inn door (15,16); **2** the mint door (21,16); **3** Aiakides's door (27,8). Each door's `dest_warp_id` is 0, so each room's warp 0 is its door mat; the rooms send the player back to town warps 1, 2 and 3. |
+| Aegina Town, north gate | the Aphaia Road | map connection, up. The gate's passage is **columns 24-25** of Aegina Town; row 0 is walkable there and nowhere else (pines and scrub close the rest). Aegina's row 0 is sea west of column 21, so the Aphaia Road's bottom rows over Aegina's columns 0-20 should be sea or shore. With the road at the Aphaia Road's columns c and c+1, the connection's offset is 24 − c. |
 | the Aphaia Road | the Temple of Aphaia, Mount Oros | the detour agent's choice (connections or warps), recorded here |
 
 Record the warp ids and the arrival tiles you choose in this table, so the scripted warps in other maps can use them.
@@ -71,7 +71,7 @@ Record the warp ids and the arrival tiles you choose in this table, so the scrip
 | Map | Arrival tile (x, y) | For |
 |---|---|---|
 | `MAP_TRIREME_EUPLOIA_DECK` | *(trireme agent fills in)* | boarding from a quay |
-| `MAP_AEGINA_TOWN` | *(Aegina agent fills in)* | stepping off the *Euploia* |
+| `MAP_AEGINA_TOWN` | (12,12), the quay below the gangplank; warp 0 is there | stepping off the *Euploia* (beat 10B plays on arrival while `FLAG_ICHOR_ARRIVED_AEGINA` is clear) |
 | `MAP_AKTI_TOWN` | (9, 10), the quay by the gangplank | stepping off the ferry |
 
 ## Flags claimed for batch 1

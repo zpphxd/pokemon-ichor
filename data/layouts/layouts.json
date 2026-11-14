@@ -9503,10 +9503,10 @@
     {
       "id": "LAYOUT_AEGINA_TOWN",
       "name": "AeginaTown_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 30,
+      "height": 24,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Aegina",
       "border_filepath": "data/layouts/AeginaTown/border.bin",
       "blockdata_filepath": "data/layouts/AeginaTown/map.bin",
       "layout_version": "emerald"
