@@ -152,8 +152,11 @@ script AktiTown_EventScript_HarborPart1 {
     applymovement(LOCALID_AKTI_ALETHEA, AktiTown_Movement_AletheaHeadsForQuay)
     waitmovement(0)
     // She is off screen now: put her by the trireme, where part 2 finds her.
+    // removeobject sets her hide flag, so clear it again before addobject: the
+    // flag is how ON_TRANSITION tells part 1 from part 2 after a trip indoors.
     removeobject(LOCALID_AKTI_ALETHEA)
     setobjectxyperm(LOCALID_AKTI_ALETHEA, 7, 10)
+    clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
     addobject(LOCALID_AKTI_ALETHEA)
     setvar(VAR_TEMP_3, 1)
     releaseall
