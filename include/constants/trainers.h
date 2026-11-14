@@ -182,7 +182,7 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_HIEROPHANT_IONE,
     TRAINER_PIC_TITAN_GRUNT,
     TRAINER_PIC_PROFESSOR_DAPHNE,
-    TRAINER_PIC_ALETHEA,               // back pic only, for the catch tutorial
+    TRAINER_PIC_ALETHEA,               // front pic from Phase 2; the back pic leads the catch tutorial
     // Pokemon Ichor trainer classes (see design/phase1/SPRITES_classes.md)
     TRAINER_PIC_SHEPHERD,
     TRAINER_PIC_HARVESTER,
@@ -191,6 +191,10 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_AUGUR,
     TRAINER_PIC_ACOLYTE_M,
     TRAINER_PIC_ACOLYTE_F,
+    // Pokemon Ichor, Phase 2 classes (see design/phase2/SPRITES.md)
+    TRAINER_PIC_MERCHANT,
+    TRAINER_PIC_PILGRIM,
+    TRAINER_PIC_ICHOR_SAILOR,          // the SAILOR class's Ichor portrait; Hoenn's TRAINER_PIC_SAILOR is untouched
     TRAINER_PIC_COUNT,
 };
 
@@ -545,6 +549,10 @@ enum TrainerClassID
     TRAINER_CLASS_TITANBORN,
     TRAINER_CLASS_ACOLYTE,
     TRAINER_CLASS_HIEROPHANT,
+    // Ichor: Phase 2 trainer classes (design/phase2/SPRITES.md)
+    TRAINER_CLASS_SCHOLAR,
+    TRAINER_CLASS_MERCHANT,
+    TRAINER_CLASS_PILGRIM,
 
     TRAINER_CLASS_COUNT,
 };

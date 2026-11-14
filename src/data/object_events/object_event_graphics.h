@@ -667,6 +667,14 @@ const u32 gObjectEventPic_IchorAcolyteF[] = INCGFX_U32("graphics/object_events/p
 const u32 gObjectEventPic_IchorTablet[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/tablet.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatL[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_l.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatR[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_r.png", ".4bpp");
+// Phase 2, batch 1 (tools/ichor/art/sprites_phase2_walkers.py)
+const u32 gObjectEventPic_IchorPilgrim[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pilgrim.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPronomos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pronomos.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorEndeis[] = INCGFX_U32("graphics/object_events/pics/people/ichor/endeis.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPheidon[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pheidon.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAiakides[] = INCGFX_U32("graphics/object_events/pics/people/ichor/aiakides.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKleonSeasick[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_seasick.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKleonTablet[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_tablet.png", ".4bpp", "-mwidth 2 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)
