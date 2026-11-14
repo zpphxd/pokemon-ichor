@@ -9349,10 +9349,10 @@
     {
       "id": "LAYOUT_AKTI_TOWN",
       "name": "AktiTown_Layout",
-      "width": 20,
-      "height": 20,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
       "border_filepath": "data/layouts/AktiTown/border.bin",
       "blockdata_filepath": "data/layouts/AktiTown/map.bin",
       "layout_version": "emerald"
@@ -9377,6 +9377,39 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/KallisteRoute1_KronionHill/border.bin",
       "blockdata_filepath": "data/layouts/KallisteRoute1_KronionHill/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AKTI_TOWN_ASCLEPEION",
+      "name": "AktiTown_Asclepeion_Layout",
+      "width": 15,
+      "height": 11,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/AktiTown_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/AktiTown_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AKTI_TOWN_AGORA",
+      "name": "AktiTown_Agora_Layout",
+      "width": 13,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/AktiTown_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/AktiTown_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AKTI_TOWN_FISHERS_HOUSE",
+      "name": "AktiTown_FishersHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/AktiTown_FishersHouse/border.bin",
+      "blockdata_filepath": "data/layouts/AktiTown_FishersHouse/map.bin",
       "layout_version": "emerald"
     }
   ]
