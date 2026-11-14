@@ -579,11 +579,123 @@ def hoplite():
     return f, pal
 
 
+# --------------------------------------------------------------------------
+# Augur (male): a bird-watching seer. Staff, an indigo robe with a black-figure
+# frieze of birds at the hem, a crow feather in his fillet; he points at the sky.
+# --------------------------------------------------------------------------
+
+def augur():
+    pal = Palette([
+        ("ink", INK),
+        *SKIN_FAIR,
+        ("brown", (96, 56, 40)),
+        ("gray_l", (240, 240, 232)), ("gray_d", (176, 168, 160)),
+        ("ind_l", (96, 104, 176)), ("ind_m", (56, 64, 128)), ("ind_d", (32, 32, 80)),
+        ("ter_l", (224, 136, 88)), ("ter_d", (176, 88, 48)),
+        ("wood", (160, 112, 72)),
+        ("gold", (240, 192, 64)),
+    ])
+    skin = skin_mat("brown")
+    robe = Mat(["ind_d", "ind_m", "ind_l"], wx=0.85, wy=0.25, cuts=[0.3, 0.72])
+    wood = Mat(["brown", "wood"], cuts=[0.7])
+    frieze = Mat(["ter_d", "ter_l"], wx=1.0, wy=0.0, cuts=[0.75])
+    lea = Mat(["brown"])
+    f = Fig(pal)
+
+    # staff in his far hand, planted beside him
+    pole(f, (47, 6), (46, 61), wood, group=50)
+    # long robe to the ankles
+    body = f.poly([(25, 23), (39, 23), (42, 32), (44, 44), (46, 58), (20, 58), (22, 44), (23, 32)], robe)
+    f.poly([(23, 58), (28, 58), (28, 61), (22, 61)], lea)
+    f.poly([(35, 58), (40, 58), (41, 61), (35, 61)], lea)
+    # himation folds: wrapped from the far shoulder across to the near hip
+    for x in (28, 34, 40):
+        f.shade_poly([(x, 36), (x + 1, 36), (x + 2 + (x - 33) // 4, 50), (x + 1 + (x - 33) // 4, 50)], 0.45)
+    f.shade_poly([(25, 30), (27, 30), (25, 50), (23, 50)], -0.3)
+    # himation slung from the far shoulder to the near hip
+    f.shade_poly([(36, 24), (42, 26), (26, 46), (23, 44)], 0.3)
+    # black-figure frieze of birds around the hem
+    f.rect(18, 49, 48, 56, frieze, clip=body, noline=True)
+    f.rect(29, 19, 34, 24, skin, group=400)
+    # far arm forward, hand on the staff
+    f.thick_line([(39, 25), (43, 30), (45, 31)], 5, robe, group=300)
+    # near arm raised to the sky, the wide sleeve hanging from it
+    f.poly([(24, 23), (30, 25), (27, 31), (22, 33), (18, 29), (16, 20), (19, 16), (22, 20)], robe, group=200)
+    f.thick_line([(18, 18), (16, 11)], 4, skin, group=210)
+
+    # the frieze: borders and birds in flight
+    f.line([(19, 49), (47, 49)], "ink")
+    f.line([(19, 56), (47, 56)], "ink")
+    f.patch(20, 51, [
+        "kk...kk..kk...kk..kk...kk",
+        ".kk.kk....kk.kk....kk.kk.",
+        "..kkk......kkk......kkk..",
+        "...k........k........k...",
+    ], {"k": "ink"})
+    # sleeve hem and the edge of the himation
+    f.line([(16, 28), (21, 32)], "ind_l")
+    f.line([(40, 26), (24, 45)], "ind_l")
+    # hand on the staff
+    f.patch(43, 28, [
+        ".bbbb.",
+        "bLLLLb",
+        "bLbLMb",
+        "bLLMMb",
+        ".bbbb.",
+    ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
+    # staff head: a knot of wood
+    f.patch(45, 3, [
+        ".kkk.",
+        "kWwWk",
+        "kwWwk",
+        ".kwk.",
+    ], {"k": "ink", "W": "wood", "w": "brown"})
+    # pointing hand, index finger to the birds
+    f.patch(12, 3, [
+        "..k....",
+        ".kLk...",
+        ".kLk...",
+        ".kLkk..",
+        "kLLLLk.",
+        "kLLLMk.",
+        "kLLMMk.",
+        ".kMMk..",
+        "..kk...",
+    ], {"k": "brown", "L": "skin_l", "M": "skin_m"})
+    # head tilted up to the sky: white hair and beard, gold fillet, crow feather
+    f.patch(22, 1, [
+        ".................kk.",
+        "................kIk.",
+        "...............kIik.",
+        "......kkkkk...kIik..",
+        "....kkGGGGgkk.kIik..",
+        "...kGGGGGGGggkkIk...",
+        "..kGGGGGGGGgggkIk...",
+        "..kYYYYYYYYYYYYYk...",
+        ".kLLLLLLLLLLMgggk...",
+        ".bLgggLLLggggMbgk...",
+        ".bLkkLLLLkkMMDbgk...",
+        "bLLGGLLLLGGMDMbgk...",
+        "bLLLLLLLLLMMDbggk...",
+        "bLLLDLLLLMMMbgggk...",
+        "kGGGDGGGGGGGgggk....",
+        "kGGGkkkGGGGgggk.....",
+        "kGGGGGGGGGggggk.....",
+        ".kGGGGGGGGgggk......",
+        "..kGGGGGgggk........",
+        "...kkGGgkk..........",
+        ".....kk.............",
+    ], {"k": "ink", "I": "ink", "i": "ind_m", "G": "gray_l", "g": "gray_d", "Y": "gold", "b": "brown",
+        "L": "skin_l", "M": "skin_m", "D": "skin_d"})
+    return f, pal
+
+
 CLASSES = {
     "shepherd": shepherd,
     "harvester": harvester,
     "goatherd": goatherd,
     "hoplite": hoplite,
+    "augur": augur,
 }
 
 

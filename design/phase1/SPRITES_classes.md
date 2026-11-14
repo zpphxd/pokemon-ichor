@@ -14,6 +14,7 @@ Sources live in `tools/ichor/art/sprites_classes.py`:
 | `TRAINER_PIC_HARVESTER` | `Pic: Harvester` | Sun-browned olive-picker: terracotta headscarf, linen apron over an olive-green dress, a wicker basket of black and green olives on her hip, an olive sprig held up | `graphics/trainers/front_pics/harvester.png` |
 | `TRAINER_PIC_GOATHERD` | `Pic: Goatherd` | Wild graying curls and beard, a shaggy goat-hair cloak over a coarse undyed tunic, a syrinx at his lips, a bronze goat-bell on his rope belt, leg thongs. One bee buzzes nearby: Komatas is the goatherd the bees fed (Theocritus) | `graphics/trainers/front_pics/goatherd.png` |
 | `TRAINER_PIC_HOPLITE` | `Pic: Hoplite` | Lakonian youth: Corinthian helmet pushed up with a crimson crest, a crimson hoplon with a bronze rim and a bronze lambda (Λ, Lakonia's mark), spear held low and ready, linen corselet, crimson chiton and cloak, bronze greaves. Shares Kleon's crimson and bronze | `graphics/trainers/front_pics/hoplite.png` |
+| `TRAINER_PIC_AUGUR` | `Pic: Augur` | Bird-watching seer: white hair and beard, head tilted up, pointing at the sky; a gold fillet with a black crow feather, an indigo robe and himation with a black-figure frieze of birds in flight at the hem, a staff in his other hand | `graphics/trainers/front_pics/augur.png` |
 
 The pics are front-only (no back pic). Trainer parties and class definitions are not changed here: to use a pic, set its `Pic:` line in `src/data/trainers.party`.
 

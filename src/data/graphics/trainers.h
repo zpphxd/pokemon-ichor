@@ -495,6 +495,9 @@ const u16 gTrainerPalette_Goatherd[] = INCGFX_U16("graphics/trainers/front_pics/
 const u32 gTrainerFrontPic_Hoplite[] = INCGFX_U32("graphics/trainers/front_pics/hoplite.png", ".4bpp.smol");
 const u16 gTrainerPalette_Hoplite[] = INCGFX_U16("graphics/trainers/front_pics/hoplite.png", ".gbapal");
 
+const u32 gTrainerFrontPic_Augur[] = INCGFX_U32("graphics/trainers/front_pics/augur.png", ".4bpp.smol");
+const u16 gTrainerPalette_Augur[] = INCGFX_U16("graphics/trainers/front_pics/augur.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1283,5 +1286,9 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_HOPLITE] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Hoplite, gTrainerPalette_Hoplite),
+    },
+    [TRAINER_PIC_AUGUR] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Augur, gTrainerPalette_Augur),
     },
 };
