@@ -430,6 +430,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAugur;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteM;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteF;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatL;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatR;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -853,6 +855,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_ACOLYTE_M] =          &gObjectEventGraphicsInfo_IchorAcolyteM,
     [OBJ_EVENT_GFX_ICHOR_ACOLYTE_F] =          &gObjectEventGraphicsInfo_IchorAcolyteF,
     [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
+    [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatL,
+    [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatR,
     // End of Ichor object events
 };
 

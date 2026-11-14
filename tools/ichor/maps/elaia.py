@@ -424,8 +424,8 @@ def upper_village(g):
     g.set(22, 10, TROUGH, SOLID, "trough")
     # --- the shrine on its terrace ---
     g.struct("shrine_dome", 22, 2)                            # door (24,6), shut today
-    g.cypress(27, 3)
-    g.cypress(27, 5)
+    g.cypress(27, 2)
+    g.cypress(27, 4)
     g.cypress(21, 2)
     g.rect(21, 7, 27, 7, "pave")                              # its forecourt
     terrace_wall(g, 22, 27, 8, steps=(24,))
@@ -448,8 +448,14 @@ def square(g):
     g.set(17, 13, TROUGH, SOLID, "bed")
     for i, mid in enumerate(AWNING):
         g.set(13 + i, 14, mid, SOLID, "canopy")
-    g.set(12, 14, FLOWERS, SOLID, "bed")
-    g.set(17, 14, FLOWERS, SOLID, "bed")
+    g.cypress(13, 12)                                         # a second pair, close about the trunk
+    g.cypress(16, 12)
+    for x, y in ((13, 11), (14, 11), (15, 11), (16, 11)):    # behind the crown: open, a quiet corner
+        g.solid[y, x] = False
+        if g.kind[y, x] == "bed":
+            g.kind[y, x] = "grass"
+    g.set(12, 14, FLOWERS, WALK, "flowers")                   # at the canopy's ends
+    g.set(17, 14, FLOWERS, WALK, "flowers")
     strand(g, 6, 11, 5)                                       # Klotheia garlands
     strand(g, 18, 11, 5)
     g.struct("altar_square", 7, 16)                           # the festival altar
@@ -472,6 +478,7 @@ def west(g):
     flowers(g, [(5, 18), (6, 18), (2, 16), (6, 14)])
     g.pine(2, 20)
     g.cypress(5, 20)
+    g.cypress(4, 20)
     # the traveling scribe's stool, at the square's west edge by the altar (beats
     # 2-4; scripts.pory takes it away with him). A marble plinth stands in.
     g.set(6, 17, STOOL, SOLID, "stool")
@@ -489,7 +496,7 @@ def east(g):
 
 def lower_terrace(g):
     # the square's retaining wall: steps to the Akademia (west) and the groves (east)
-    terrace_wall(g, 5, 21, 22, steps=(9, 10, 18, 19))
+    terrace_wall(g, 4, 21, 22, steps=(9, 10, 18, 19))
     ledge_row(g, 22, 27, 22)                                  # the orchard drops away over a rougher lip
     finish_arch(g, 17, 20)
     # --- the Akademia in its grove ---
@@ -503,7 +510,7 @@ def lower_terrace(g):
     g.olive(2, 23)
     g.pine(4, 23)
     g.cypress(6, 23)
-    g.cypress(7, 24)
+    g.cypress(7, 23)
     g.block([[TRIPOD[0]], [TRIPOD[1]]], 8, 29, kind="tripod")  # a bronze dedication
     g.set(11, 29, SIGN, SOLID, "sign")                         # THE AKADEMIA
     flowers(g, [(11, 30), (12, 31), (11, 31)])

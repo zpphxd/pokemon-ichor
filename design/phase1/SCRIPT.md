@@ -1191,7 +1191,15 @@ Layout reference, from the scaffold: you enter from the south road. The Asclepei
 | Old woman | on the temple steps | temple lore |
 | Pilgrim | by the Asclepeion | Oracle gossip, dread |
 | Kid on the pier | end of the pier | comic |
+| Old fisher | end of the pier, beside the kid | points out the islet shrine (relic gate) |
+| Kapra | a loose goat, eating the Fisher's washing | Aigon's quest |
 | Alethea | beat 8 | — |
+
+Two homes added after the harbor pass, under MAP_DESIGN.md §2 ("every house is a
+home"): the divers' house above the beach and the goatherd's farmhouse by the south
+gate. Their people are under their own headings below. Diktys's upturned boat is two
+object events (`OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L/_R`), because Akti's six rows on
+the Route 1 seam may use only aethos metatiles.
 
 **Diktys** (after beat 6)
 ```text
@@ -1307,6 +1315,43 @@ Trireme to the mainland sails when the winds turn.
 GLAUKOS. Gone fishing. (Not really. Knock.)
 ```
 
+**Relic gates** (SYSTEMS.md §1, D10). Both are locked in the slice; only these lines exist.
+```text
+[The grotto on the tide rocks, (26,4)/(27,4): the Bronze Hammer's gate]
+Broken marble chokes the mouth of a sea grotto.
+
+Something glints in the dark behind it.
+
+The blocks won't shift by hand. A good hammer would break them.
+```
+**Old fisher** (end of the pier, looking out at the islet: the Conch's gate)
+```text
+OLD FISHER: That white shrine out on the islet is Poseidon's.
+
+No one's set foot on it since the storm.
+
+Row for it, and the current turns you right round.
+
+The gulls get all his offerings now.
+```
+**Kapra** (Aigon's loose goat, at the Fisher's washing until sent home)
+```text
+[Skiddo cry]
+Mehhh! It has a wet sock in its mouth.
+
+It looks at you. It looks at the goat pen.
+
+It trots off home, sock and all.
+```
+[Fade out, remove her and set `FLAG_ICHOR_AKTI_GOAT_HOME`. Her object flag,
+`FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT`, is set from that flag on every map load.]
+
+**The goats in the pen** (two Skiddo)
+```text
+[Skiddo cry]
+Mehhh! It's chewing a clothes peg.
+```
+
 ## Akti Asclepeion (Pokémon Center re-skin)
 
 **Healer.** These are the nurse strings, re-skinned. Ship them as Ichor-only copies under new labels, called from an Ichor nurse script, so Hoenn's centers don't change (see Open questions).
@@ -1385,6 +1430,102 @@ GLAUKOS: Then I didn't. Don't eat strange seaweed.
 GRANDSON: Grandpa says he used to be a sea-god.
 
 Grandpa says a lot of things.
+```
+
+## Akti divers' house (`MAP_AKTI_TOWN_DIVERS_HOUSE`)
+
+Above the beach, door at (26,14). Doris, Hydna's grandmother, keeps the sponges. Her
+lore points at the grotto (the Bronze Hammer's gate); after the Hearth Laurel she
+trades her shell bell for the Heart Scale the tide leaves on the beach.
+
+**Doris**, by her sponge baskets.
+```text
+> before FLAG_BADGE01_GET:
+DORIS: Hydna's my granddaughter. I dove these waters long before her.
+
+DORIS: We kept our sponges in a grotto under the tide rocks.
+
+DORIS: Then marble from the old shrine fell across its mouth.
+
+DORIS: My mother's jar is still in there, sealed.
+
+DORIS: Come back with Hestia's laurel. I'll have a trade for you.
+
+> after FLAG_BADGE01_GET:
+DORIS: A laurel! Hestia doesn't hand those out for nothing.
+
+DORIS: Here's my trade. The tide leaves Heart Scales by the boats.
+
+DORIS: Bring me one, and my old shell bell is yours.
+
+> no Heart Scale in the bag:
+DORIS: No scale yet? Look by the boat they've hauled up.
+
+> with one:
+DORIS: Oh, you've one already! Will you trade it?
+```
+?? YES/NO
+```text
+> NO:
+DORIS: Keep it, then. The offer keeps too.
+
+> YES:
+```
+[Take one `ITEM_HEART_SCALE`, give `ITEM_SHELL_BELL` and set `FLAG_ICHOR_GOT_SHELL_BELL`.
+If the bag is full, give the scale back.]
+```text
+{PLAYER} received the Shell Bell!
+
+DORIS: Strung it myself, from shells we brought up. Let your partner hold it.
+
+DORIS: Every blow it lands, the sea gives a little back.
+
+> after the trade:
+DORIS: Hold that bell to your ear. The whole sea's in it.
+```
+```text
+[Water clock]
+A water clock. Hydna times her dives by it.
+
+The lowest mark is scratched "GRANDMOTHER'S RECORD."
+```
+
+## Akti goatherd's farmhouse (`MAP_AKTI_TOWN_GOATHERDS_HOUSE`)
+
+By the south gate, door at (18,25), beside the goat pen. Aigon the goatherd; a kid goat
+(Skiddo) wanders the kitchen. Kapra, his escape artist, is loose in town from the first
+visit; sending her home earns her old bell.
+
+**Aigon**, at his hearth.
+```text
+> before FLAG_ICHOR_AKTI_GOAT_HOME:
+AIGON: Come in, come in. Mind the kid, she bites.
+
+AIGON: If you see a goat that isn't in my pen, that's Kapra. She eats laundry.
+
+AIGON: Shoo her home for me? She won't come for me. Only for strangers.
+
+> Kapra home, bell not given:
+AIGON: Kapra's home! Chewing a sock. Whose sock?
+
+AIGON: Never mind. Here, take her old bell. It calms anything that wears it.
+
+AIGON: Not Kapra, though. Nothing calms Kapra.
+```
+[Give `ITEM_SOOTHE_BELL` once and set `FLAG_ICHOR_GOT_SOOTHE_BELL`.]
+```text
+{PLAYER} received the Soothe Bell!
+
+> after the gift:
+AIGON: Kapra's sulking in the pen. She liked that sock.
+```
+**The kid goat** (Skiddo)
+```text
+[Skiddo cry]
+Meh! It nibbles your sandal strap.
+
+[Hearth]
+A pot of goat's milk warms by the fire.
 ```
 
 ## Temple of Hestia (`MAP_AKTI_TOWN_TEMPLE_OF_HESTIA`)
@@ -2042,6 +2183,8 @@ Flag naming: visible item balls use `FLAG_ITEM_ICHOR_<MAP>_<ITEM>`, hidden items
 | Akti | Heart Scale | hidden | on the beach sand |
 | Akti | Mystic Water | gift, Hydna | — |
 | Akti, Fisher's house | Old Rod | gift, Glaukos | — |
+| Akti, goatherd's farmhouse | Soothe Bell | gift, Aigon, once Kapra is home | — |
+| Akti, divers' house | Shell Bell | trade, Doris, for a Heart Scale, after the Hearth Laurel | — |
 | Temple | Charcoal | trial reward | — |
 | Temple | Hearth Laurel (badge 1), TM42 Facade | Ione | — |
 
@@ -2115,6 +2258,9 @@ Engine: claim these as `FLAG_ICHOR_*` and `VAR_ICHOR_*`.
 - `FLAG_ICHOR_GOT_MOOMOO_MILK`
 - `FLAG_ICHOR_GOT_MYSTIC_WATER`
 - `FLAG_ICHOR_GOT_OLD_ROD`
+- `FLAG_ICHOR_GOT_SOOTHE_BELL`
+- `FLAG_ICHOR_GOT_SHELL_BELL`
+- `FLAG_ICHOR_AKTI_GOAT_HOME` (Kapra is back in the pen)
 
 **Object hide flags**
 - `FLAG_ICHOR_HIDE_KRATER_SNIVY`, `_CYNDAQUIL`, `_PIPLUP`
@@ -2128,6 +2274,7 @@ Engine: claim these as `FLAG_ICHOR_*` and `VAR_ICHOR_*`.
 - `FLAG_ICHOR_HIDE_ROUTE1_FLOCK`
 - `FLAG_ICHOR_HIDE_KLEON_AKTI`
 - `FLAG_ICHOR_HIDE_ALETHEA_AKTI`
+- `FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT`
 
 **Battle**
 - `FLAG_ICHOR_NO_WHITEOUT`, assigned to `B_FLAG_NO_WHITEOUT` in `include/config/battle.h`

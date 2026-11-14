@@ -18,7 +18,7 @@ DOC = ROOT / "design/phase1/TILES_akti.md"
 SECTIONS = [
     ("Buildings and monuments", "The Temple of Hestia, Akti's houses, Poseidon's shrine, the "
      "altar and the krene.",
-     ["temple_hestia", "house_small", "house_shuttered", "shrine_poseidon", "altar", "krene"]),
+     ["temple_hestia", "house_small", "house_small_r", "shrine_poseidon", "altar", "krene"]),
     ("The harbor", "The quay and its edges, the trireme Euploia and the kaikia, and the "
      "harbor's goods.",
      ["quay", "quay_gangplank", "quay_edges", "trireme", "boat_kaiki",
@@ -30,7 +30,7 @@ SECTIONS = [
       "beach_shells", "net_poles", "boat_beached"]),
     ("The town", "The plaza's paving, walls and terraces, and the gardens and yards of the "
      "lower town.",
-     ["plaza", "terrace", "laundry", "boat_upturned", "fig_tree",
+     ["plaza", "terrace", "laundry", "fig_tree",
       "shrubs"]),
 ]
 
@@ -79,9 +79,16 @@ repainted.** The build checks every borrowed entry against aethos's current
 metatiles.
 
 A borrowed cell keeps one layer of its own above the ground. Shadows (under the
-fig, the upturned boat, the shrubs and the rocks) are drawn in that layer, so a
+fig, the shrubs and the rocks) are drawn in that layer, so a
 cell on borrowed ground can't also have a part drawn over the player: the build
 rejects any that tries. (The laundry draws its posts and washing in the top layer.)
+
+**Not near a seam.** The engine draws a connected map with the tilesets of the map
+the player stands on, so from Route 1 any Akti metatile in Akti's bottom rows turns
+to garbage. Keep Akti pieces out of the six rows nearest an up/down seam (eight
+columns for left/right) unless both maps share this secondary (MAP_DESIGN.md §5);
+`akti.py` fails on any. Diktys's upturned boat by the south gate is two object
+events instead (`tools/ichor/art/akti_objects.py`).
 
 **Animated sea.** The sea's animation comes with the borrowed tiles: aethos swaps
 the frames of tiles 454 and 455 in VRAM, and every borrowed sea cell points at them.
@@ -98,7 +105,7 @@ palette (`akti_lib.GROUPS`):
 | Cycladic | Whitewash, Aegean blue, terracotta pots, basil; the laundry |
 | Marble | The temple, the altar and the krene, with bronze, fire and roof terracotta |
 | Stone | The quay, walls and terraces, and every crag, with its foam and weed |
-| Wood | The trireme, the kaikia, the upturned boat, nets and rope |
+| Wood | The trireme, the kaikia, nets and rope |
 | Market | Amphorae, baskets, the catch, octopus and the stall's awning |
 | Plaza | The plaza's warm limestone and marble, and the krene's water |
 | Grove | Aethos's meadow greens and olives, the fig and the shrubs |

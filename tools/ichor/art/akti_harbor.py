@@ -229,5 +229,6 @@ def amphora_stack():
 
 
 def build():
-    return [fish_stall(), upturned_boat(), laundry(), octopus_line(), rope_coil(),
+    # (the upturned boat is drawn as an object event: tools/ichor/art/akti_objects.py)
+    return [fish_stall(), laundry(), octopus_line(), rope_coil(),
             bollard_line(), amphora_stack()]
