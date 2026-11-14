@@ -1178,4 +1178,40 @@
 #define METATILE_Skiron_RubbleSmallCleared         0x367
 // end gTileset_Skiron
 
+// gTileset_CaveDark (Ichor: the dark places), written by tools/ichor/art/cave_dark_build.py
+#define METATILE_CaveDark_Brazier_Cold_00                  0x2F8
+#define METATILE_CaveDark_Brazier_Cold_10                  0x2F9
+#define METATILE_CaveDark_Brazier_Cold_01                  0x300
+#define METATILE_CaveDark_Brazier_Cold_11                  0x301
+#define METATILE_CaveDark_Brazier_Lit_00                   0x2FA
+#define METATILE_CaveDark_Brazier_Lit_10                   0x2FB
+#define METATILE_CaveDark_Brazier_Lit_01                   0x302
+#define METATILE_CaveDark_Brazier_Lit_11                   0x303
+#define METATILE_CaveDark_Hekataion_TorchW_Lit             0x325
+#define METATILE_CaveDark_Hekataion_TorchS_Lit             0x326
+#define METATILE_CaveDark_Hekataion_TorchE_Lit             0x327
+#define METATILE_CaveDark_Hekataion_TorchS_Gone            0x340
+#define METATILE_CaveDark_Hekataion_NoCake                 0x341
+#define METATILE_CaveDark_Web1_0                           0x2FC
+#define METATILE_CaveDark_Web1_1                           0x304
+#define METATILE_CaveDark_Web1_Torn_0                      0x2FF
+#define METATILE_CaveDark_Web1_Torn_1                      0x307
+#define METATILE_CaveDark_Web2_00                          0x2FD
+#define METATILE_CaveDark_Web2_10                          0x2FE
+#define METATILE_CaveDark_Web2_01                          0x305
+#define METATILE_CaveDark_Web2_11                          0x306
+#define METATILE_CaveDark_Web2_Torn_00                     0x308
+#define METATILE_CaveDark_Web2_Torn_10                     0x309
+#define METATILE_CaveDark_Web2_Torn_01                     0x310
+#define METATILE_CaveDark_Web2_Torn_11                     0x311
+#define METATILE_CaveDark_Niche_Supper_0                   0x30C
+#define METATILE_CaveDark_Niche_Supper_1                   0x314
+#define METATILE_CaveDark_Niche_Empty_0                    0x30D
+#define METATILE_CaveDark_Niche_Empty_1                    0x315
+#define METATILE_CaveDark_Hekataion_TorchW_Cold            0x322
+#define METATILE_CaveDark_Hekataion_TorchS_Cold            0x323
+#define METATILE_CaveDark_Hekataion_TorchE_Cold            0x324
+#define METATILE_CaveDark_Hekataion_Cake                   0x33B
+// end gTileset_CaveDark
+
 #endif // GUARD_METATILE_LABELS_H

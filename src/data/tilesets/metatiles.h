@@ -472,3 +472,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Skiron[] = INCBIN_U16("data/tiles
 // Ichor: trireme
 const u16 gMetatiles_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: cave_dark
+const u16 gMetatiles_PorytilesManaged_CaveDark[] = INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_CaveDark[] = INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/metatile_attributes.bin");
