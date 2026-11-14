@@ -28,11 +28,11 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_... "commen
 |---|---|---|---|
 | **world-act1** | 0x000–0x0FF | 0x40–0x4B | 0–5 |
 | **world-act2** | 0x100–0x1FF | 0x4C–0x57 | 6–11 |
-| **world-act3** | 0x200–0x2FF | 0x58–0x63 | 12–17 |
+| **world-act3** | 0x200–0x2FF, and 0x4C0–0x4FF | 0x58–0x63 | 12–17 |
 | **the post-game** | 0x300–0x3BF | 0x64–0x6F | 18–23 |
 | **the Oikoumene** | 0x3C0–0x47F | — | 24–27 |
 | **ichor-engine** | 0x480–0x4BF | 0x00–0x3F | 28–31 |
-| Reserve | 0x4C0–0x4FF | — | — |
+| Reserve | (given to world-act3) | — | — |
 
 Hidden items still need vanilla flags at or above `FLAG_HIDDEN_ITEMS_START` (see `asm/macros/map.inc`), so claim those from your vanilla flag range.
 
