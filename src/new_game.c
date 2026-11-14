@@ -188,6 +188,9 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
+    // Ichor: until the Aethos regional dex replaces Hoenn's, the slice's species
+    // only show in the full dex, so a new game starts with it on.
+    EnableNationalPokedex();
     ClearTVShowData();
     ResetGabbyAndTy();
     ClearSecretBases();
