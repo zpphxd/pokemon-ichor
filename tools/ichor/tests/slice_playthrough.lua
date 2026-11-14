@@ -1,6 +1,6 @@
 -- The slice playthrough, run by tools/ichor/tests/slice_playthrough.sh (read it first).
 --
--- One continuous run from a fresh cartridge to "Thank you for playing", with key
+-- One continuous run from a fresh cartridge through the slice and into Phase 2, with key
 -- presses only: the title, the OPTION menu, NEW GAME, Daphne's speech and the
 -- naming screen, then every beat of design/phase1/SCRIPT.md in order. Walking
 -- uses slice_lib.lua's breadth-first search over the live map grid. Every
@@ -692,7 +692,9 @@ beat("08_harbor_part2", function()
   local quay = L.triggers(AK .. "HarborPart2Row9", AK .. "HarborPart2Row10", AK .. "HarborPart2Row11")
   expect(not L.goTrigger(quay), "the quay starts the ending")
   settle({ every = true, answers = { "no" } })
-  flagsSet({ "FLAG_SLICE_COMPLETE", "FLAG_HIDE_KLEON_AKTI", "FLAG_HIDE_ALETHEA_AKTI" }, "the slice is complete")
+  flagsSet({ "FLAG_SLICE_COMPLETE", "FLAG_HIDE_KLEON_AKTI" }, "the slice is complete")
+  -- Phase 2: no farewell card; Alethea stays on the quay with Halia's message
+  flagsClear({ "FLAG_HIDE_ALETHEA_AKTI" }, "Alethea waits on the quay after the slice")
   shot("the_end")
 end)
 
@@ -710,6 +712,53 @@ beat("08_after", function()
   wait(60)
   expect(L.idle(), "Akti after the end is quiet")
   shot("akti_after_the_end")
+end)
+
+-- === Phase 2, Act I on the mainland (design/phase2/SCRIPT.md) ===================================
+
+-- Beat 9A: back down Route 1 to Elaia, where Halia looks at your hand once more.
+beat("09a_halia", function()
+  talk(L.npc(AK .. "Alethea"), { shotBefore = "alethea_pointer" })
+  L.leaveEdge("down", S.MAP_ROUTE1)
+  L.leaveEdge("down", S.MAP_ELAIA)
+  musicIs(S.MUS_ELAIA, "Elaia's theme")
+  local ring = L.triggers("ElaiaVillage_EventScript_HaliaSecondLook")
+  expect(not L.goTrigger(ring), "the square starts Halia's second look")
+  settle({ every = true })
+  flagsSet({ "FLAG_HALIA_SECOND_LOOK", "FLAG_HIDE_MOM_HOME" }, "Halia has looked again; Mom has gone to the harbor")
+  flagsClear({ "FLAG_HIDE_MOM_AKTI", "FLAG_HIDE_KLEON_AKTI_DOOR" }, "Mom and Kleon wait in Akti")
+  shot("halia_after")
+  talk(L.npc("ElaiaVillage_EventScript_Halia"), { shotBefore = "halia_go_on" })
+end)
+
+-- Beat 9B: up to Akti; the wind turns, Kleon has his laurel, Mom brings honey.
+beat("09b_winds", function()
+  L.leaveEdge("up", S.MAP_ROUTE1)
+  L.leaveEdge("up", S.MAP_AKTI, true)
+  settle({ every = true })
+  shot("wind_from_the_south")
+  local honey = L.itemCount(S.ITEM_HONEY)
+  local quay = L.triggers(AK .. "WindsQuayRow9", AK .. "WindsQuayRow10", AK .. "WindsQuayRow11")
+  expect(not L.goTrigger(quay), "the quay starts the winds-turned scene")
+  settle({ every = true })
+  flagsSet({ "FLAG_WINDS_TURNED", "FLAG_MOM_HARBOR", "FLAG_HIDE_ALETHEA_AKTI", "FLAG_HIDE_KLEON_AKTI_DOOR" },
+           "the wind has turned, Mom has been, and the others are aboard")
+  L.check(L.itemCount(S.ITEM_HONEY) == honey + 2, string.format("Mom's two Honey (%d -> %d)", honey,
+                                                                L.itemCount(S.ITEM_HONEY)))
+  talk(L.npc(AK .. "Mom"), { shotBefore = "mom_on_the_quay" })
+  -- re-entering Akti now replays nothing
+  L.useWarp(S.MAP_AGORA)
+  L.useWarp(S.MAP_AKTI)
+  wait(60)
+  expect(L.idle(), "Akti after the wind is quiet")
+end)
+
+beat("09b_board", function()
+  talk(L.npc(AK .. "Nausikles"), { shotBefore = "all_aboard", answers = { "yes" } })
+  L.waitUntil(function() return mapId() == S.MAP_DECK end, 600, "the Euploia's deck")
+  flagsSet({ "FLAG_BOARDED_EUPLOIA", "FLAG_HIDE_MOM_AKTI" }, "aboard, and Mom has gone home")
+  flagsClear({ "FLAG_HIDE_MOM_HOME" }, "Mom is home again")
+  shot("aboard")
 end)
 
 L.start(function()
