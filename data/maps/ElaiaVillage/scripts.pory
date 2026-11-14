@@ -562,7 +562,7 @@ script ElaiaVillage_EventScript_Well {
         msgbox(format("The village well. The water down there is cold and sweet."))
     } else {
         msgbox(format("The village well. Far down, a coin someone wished on catches the light."))
-        finditem(ITEM_RELIC_COPPER)
+        giveitem(ITEM_RELIC_COPPER) // Ichor QA M1: finditem leaves VAR_RESULT unset, so the coin was endless
         if (var(VAR_RESULT) == TRUE) {
             setflag(FLAG_ICHOR_GOT_ELAIA_RELIC_COPPER)
         }
