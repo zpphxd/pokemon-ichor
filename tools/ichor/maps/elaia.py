@@ -84,6 +84,7 @@ PALAESTRA = [
 ]
 STALL3 = [[0x028, 0x029, 0x02B], [0x030, 0x031, 0x033]]  # a festival stall: tile roof, awning
 TRIPOD = (0x130, 0x131)                                  # bronze tripod on a marble plinth
+STOOL = TRIPOD[1]                                        # the plinth alone: the scribe's stool
 
 # ---------------------------------------------------------------------------
 # kalliste ids, packed exactly as kalliste_build.py packs them
@@ -471,6 +472,9 @@ def west(g):
     flowers(g, [(5, 18), (6, 18), (2, 16), (6, 14)])
     g.pine(2, 20)
     g.cypress(5, 20)
+    # the traveling scribe's stool, at the square's west edge by the altar (beats
+    # 2-4; scripts.pory takes it away with him). A marble plinth stands in.
+    g.set(6, 17, STOOL, SOLID, "stool")
 
 
 def east(g):
@@ -644,6 +648,7 @@ OBJECTS = [
     ("SHEPHERD", GFX + "SHEPHERD", 12, 1, "DOWN", "OldShepherd", "0"),
     ("KLEON", GFX + "KLEON", 14, 21, "DOWN", "Kleon", "FLAG_ICHOR_HIDE_KLEON_ELAIA"),
     ("ALETHEA", GFX + "ALETHEA", 5, 33, "DOWN", "0", "FLAG_ICHOR_HIDE_ALETHEA_ELAIA"),
+    ("SCRIBE", GFX + "MAN", 6, 22, "UP", "Scribe", "FLAG_ICHOR_HIDE_SCRIBE"),
 ]
 ITEMS = [("ITEM_POTION", 24, 15, "FLAG_ICHOR_ITEM_ELAIA_POTION")]
 WARPS = [   # order is the warp id; the interiors point back at these
@@ -680,6 +685,7 @@ SIGNS = [   # x, y, facing, script
     (19, 21, "NORTH", "Stall"),
     (20, 21, "NORTH", "Stall"),
     (21, 21, "NORTH", "Stall"),
+    (6, 21, "ANY", "ScribesStool"),
 ]
 HIDDEN = [("ITEM_HONEY", 5, 7, "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY")]
 
@@ -800,7 +806,7 @@ def people(im, pad=0):
     first loads (the review renders show the square with its crowd)."""
     from PIL import Image
     for lid, gfx, x, y, facing, script, flag in OBJECTS:
-        if flag != "0":
+        if flag not in ("0", "FLAG_ICHOR_HIDE_SCRIBE"):      # the renders show the village as it first loads
             continue
         if gfx.startswith("OBJ_EVENT_GFX_SPECIES("):
             sheet = Image.open(ROOT / f"graphics/pokemon/{gfx[22:-1].lower()}/overworld.png")
