@@ -92,13 +92,14 @@ FLOWER_LEAVES = art("""
     ...k.....k......
     ................
 """, FL_LEG)
-FLOWER_SPOTS = [(2, 2), (9, 4), (4, 9)]
+# One bloom per 8x8 quarter, so every animated tile really moves.
+FLOWER_SPOTS = [(2, 2), (10, 3), (3, 9), (10, 10)]
 
 
 def flower_frame(dx):
     img = FLOWER_LEAVES.copy()
     for i, (x, y) in enumerate(FLOWER_SPOTS):
-        sway = dx if i != 1 else -dx
+        sway = dx if i % 2 == 0 else -dx
         over_at(img, FLOWER_HEAD, x + sway, y)
     return img
 
