@@ -491,10 +491,32 @@ def write(sheet, frames):
             to_png(f, d / f"{fn}.png")
 
 
+# Palette 0 color 0 is the BG backdrop the game shows wherever every layer is
+# transparent. Porytiles writes its transparency key (magenta) there, so the
+# build sets it to a deep night-sea navy, as General's was.
+BACKDROP = (24, 40, 80)
+BIN = ROOT / "data/tilesets/primary/aethos/porytiles_bin"
+CACHE = ROOT / "porytiles/tilesets/gTileset_Aethos/tileset.cache.json"
+
+
+def set_backdrop():
+    import hashlib
+    p = BIN / "palettes/00.pal"
+    lines = p.read_bytes().split(b"\r\n")   # JASC-PAL, CRLF
+    lines[3] = b"%d %d %d" % BACKDROP
+    p.write_bytes(b"\r\n".join(lines))
+    cache = json.loads(CACHE.read_text())
+    key = str(p.relative_to(ROOT))
+    if key in cache:
+        cache[key] = hashlib.md5(p.read_bytes()).hexdigest()
+        CACHE.write_text(json.dumps(cache, indent=2) + "\n")
+
+
 def compile_tileset():
     r = subprocess.run([str(PORYTILES), "compile-tileset", "--no-verify-checksums",
                         "gTileset_Aethos"], cwd=ROOT, capture_output=True, text=True)
     if r.returncode:
         print(r.stdout[-4000:], r.stderr[-4000:])
         raise SystemExit("aethos: porytiles compile failed")
+    set_backdrop()
     return r

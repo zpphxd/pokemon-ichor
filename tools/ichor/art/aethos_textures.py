@@ -14,7 +14,7 @@ GL = dict(a="gr_m", b="gr_d", c="gr_l", d="gr_h", s="gr_s")
 GRASS_A = art("""
     aaaaaaaa
     aaaaaaaa
-    aacaaaaa
+    aaaaaaaa
     abaabaaa
     aabbaaaa
     aaaaaaaa
@@ -24,10 +24,10 @@ GRASS_A = art("""
 GRASS_B = art("""
     aaaaaaaa
     aaaaaaaa
-    aaaaaaca
-    adaaabaa
-    aaaaaabb
     aaaaaaaa
+    aaaaaaaa
+    aaaaaaaa
+    aaaaacca
     aaaaaaaa
     aaaaaaaa
 """, GL)
