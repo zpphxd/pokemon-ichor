@@ -182,6 +182,7 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_HIEROPHANT_IONE,
     TRAINER_PIC_TITAN_GRUNT,
     TRAINER_PIC_PROFESSOR_DAPHNE,
+    TRAINER_PIC_ALETHEA,               // back pic only, for the catch tutorial
     // Pokemon Ichor trainer classes (see design/phase1/SPRITES_classes.md)
     TRAINER_PIC_SHEPHERD,
     TRAINER_PIC_HARVESTER,
