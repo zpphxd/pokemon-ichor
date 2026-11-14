@@ -42,9 +42,13 @@ def _hammer(p, grip, head, w=4.6, h=3.4):
     dx, dy = head[0] - grip[0], head[1] - grip[1]
     d = math.hypot(dx, dy) or 1
     nx, ny = -dy / d, dx / d
-    a = (head[0] + nx * w / 2, head[1] + ny * w / 2)
-    b = (head[0] - nx * w / 2, head[1] - ny * w / 2)
-    return p.limb([a, b], h, h * 0.9, stone)
+    # a squared block across the top of the haft, not a rounded cap
+    ux, uy = dx / d, dy / d
+    hw, hh = w / 2, h / 2
+    cx, cy = head[0] + ux * hh * 0.4, head[1] + uy * hh * 0.4
+    pts = [(cx + nx * sx * hw + ux * sy * hh, cy + ny * sx * hw + uy * sy * hh)
+           for sx, sy in ((1, 1), (1, -1), (-1, -1), (-1, 1))]
+    return p.poly(pts, stone)
 
 
 def _crescent(p, cx, cy, r=2.8, flip=False):
