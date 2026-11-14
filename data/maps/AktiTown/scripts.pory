@@ -71,8 +71,8 @@ script AktiTown_EventScript_Arrival {
     lockall
     setvar(VAR_TEMP_1, 1)
     setflag(FLAG_ICHOR_ARRIVED_AKTI)
-    // Director's brief: once the player has been to Akti, a whiteout brings them here.
-    setrespawn(HEAL_LOCATION_AKTI_TOWN)
+    // No setrespawn here: per SCRIPT.md beat 6, only the Asclepeion makes Akti the
+    // respawn point.
     playse(SE_PIN)
     applymovement(LOCALID_AKTI_DIKTYS, Common_Movement_ExclamationMark)
     waitmovement(0)
