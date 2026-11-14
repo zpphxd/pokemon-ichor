@@ -76,7 +76,8 @@
     "gMapGroup_IndoorSixIslandRoute_Frlg",
     "gMapGroup_IndoorSevenIslandRoute_Frlg",
     "gMapGroup_IndoorKalliste",
-    "gMapGroup_IndoorAegina"
+    "gMapGroup_IndoorAegina",
+    "gMapGroup_IndoorEleusa"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
@@ -144,7 +145,8 @@
     "AeginaTown",
     "AeginaAphaiaRoad",
     "AeginaTempleOfAphaia",
-    "AeginaMountOros"
+    "AeginaMountOros",
+    "EleusaVillage"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -1190,5 +1192,17 @@
     "AeginaTown_Inn",
     "AeginaTown_Mint",
     "AeginaTown_AiakidesHouse"
+  ],
+  "gMapGroup_IndoorEleusa": [
+    "EleusaVillage_TempleOfDemeter",
+    "EleusaVillage_Asclepeion",
+    "EleusaVillage_Agora",
+    "EleusaVillage_HouseOfKeleos",
+    "EleusaVillage_Farmhouse",
+    "EleusaVillage_GranaryHouse",
+    "EleusaVillage_PoetsHouse",
+    "EleusaSanctum_B1F",
+    "EleusaSanctum_B2F",
+    "EleusaSanctum_B3F"
   ]
 }

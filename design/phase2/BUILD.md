@@ -13,7 +13,7 @@ The route chain follows the revised `design/AETHOS_MAP.md`; SCRIPT.md's route pl
 | 1 | The voyage (Routes 2–3) and Aigina: beats 9A–10C, the *Euploia*, Aigina Town and its three homes; Aigina's three interior maps built for world-act2 (Act II) | in progress |
 | 2 | Emporion and the Temple of Hermes: beats 11–16 | waits for gTileset_Emporion (director) |
 | 3 | Route 4 (the Isthmus), Hecate's Hollow, Route 5 (the Skironian cliffs): beats 17–19 | tilesets started: `isthmos`, `cave_dark` |
-| 4 | Eleusa and the Temple of Demeter: beats 20–22 | the maps and ambient events started (tilesets on main) |
+| 4 | Eleusa and the Temple of Demeter: beats 20–22 | the maps, ambient events and the rite's layout built (below); the story scenes next |
 | 5 | The revelation: beats 23–25, the sanctum, Return to Kalliste | |
 
 **Moved out of Act I** (to world-act2): Thria, the Rheitoi and the jesters' bridge (Route 15); the Halai Shore's homes and trainers (Route 18); the scripting of Aigina's interior.
@@ -60,6 +60,39 @@ Record the warp ids and the arrival tiles you choose in this table, so the scrip
 | `MAP_TRIREME_EUPLOIA_DECK` | *(trireme agent fills in)* | boarding from a quay |
 | `MAP_AEGINA_TOWN` | *(Aegina agent fills in)* | stepping off the *Euploia* |
 | `MAP_AKTI_TOWN` | (9, 10), the quay by the gangplank | stepping off the ferry |
+| `MAP_ELEUSA_VILLAGE` | (25, 12), the Telesterion's steps | beats 22 and 24, outside the hall |
+| `MAP_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER` | (13, 26), the stair; (13, 14), the Anaktoron's doorway | entering; beat 22's scene and beat 25 |
+
+## Batch 4: Eleusa and the Temple of Demeter
+
+Built by the Eleusa agent: `tools/ichor/maps/eleusa.py` (the village, 50×40, aethos + eleusa) and `tools/ichor/maps/temple_demeter.py` (the Telesterion, 27×27, oikos + temple_demeter, dark). Passes and renders: `design/phase2/MAPS_eleusa.md`.
+
+**Connections and seams.** None of Eleusa's neighbours exists yet, so `map.json` has no connections; the openings are built and `eleusa.py` checks them. Eleusa's 8 columns nearest the west and east edges and its 6 rows nearest the north edge use aethos metatiles only.
+
+| Edge | Neighbour | Open on Eleusa's side | Notes |
+|---|---|---|---|
+| west (left) | Route 5, the Skironian cliffs | rows y 24–27 at x = 0 | The Sacred Way in from Hecate's Hollow; Krokis's gate is just inside, at x 7–8. |
+| north (up) | Route 6, `MAP_ROUTE6_ELEUTHERAI_ROAD` (world-act2) | columns x 44–47 at y = 0 | A two-column road (x 45–46) between grass verges (x 44, 47). The vines are on Route 6's map, past the seam; Eleusa's side is open. |
+| east (right) | Route 15, the road of the Mysteries | rows y 24–27 at x = 49 | Shut in Act I: a dry-stone wall across the road at x = 48 (rows 24, 26–27) with a hoplite standing in its gap at (48, 25). Act II hides him (a hide flag of the story's choosing). |
+
+**Doors.** Every door's warp, by Eleusa's warp id. The placeholder rooms (registered with `new_map.py`, group `gMapGroup_IndoorEleusa`, Akti's Fisher's house copied) warp back from their mat to the first id of their door.
+
+| Warp id | Where (x, y) | To |
+|---|---|---|
+| 0 | (10, 23) | `MAP_ELEUSA_VILLAGE_ASCLEPEION` |
+| 1 | (17, 23) | `MAP_ELEUSA_VILLAGE_AGORA` |
+| 2 | (38, 23) | `MAP_ELEUSA_VILLAGE_HOUSE_OF_KELEOS` |
+| 3, 4 | (15, 17), (16, 17), barn doors | `MAP_ELEUSA_VILLAGE_GRANARY_HOUSE` |
+| 5 | (24, 30) | `MAP_ELEUSA_VILLAGE_POETS_HOUSE` (Euphorion) |
+| 6, 7 | (31, 30), (32, 30), barn doors | `MAP_ELEUSA_VILLAGE_FARMHOUSE` (Dysaules) |
+| 8 | (25, 11) | `MAP_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER` (its warp 0, the stair) |
+| 9, 10 | (31, 8), (32, 8), the Ploutonion's bronze gate | `MAP_ELEUSA_SANCTUM_B1F` (shut until `FLAG_ICHOR_SANCTUM_OPEN`) |
+
+The Telesterion's warps: 0–2 the stair (13, 12, 14 on row 26) to Eleusa's warp 8; 3 the Anaktoron's door (13, 13) to `MAP_ELEUSA_SANCTUM_B1F`, shut until `FLAG_ICHOR_SANCTUM_OPEN`. `MAP_ELEUSA_SANCTUM_B1F`, `B2F` and `B3F` are registered as placeholders (SCRIPT.md calls them `MAP_ELEUSA_MYSTERY_SANCTUM_*`; the brief named them `MAP_ELEUSA_SANCTUM_*`, so these are the ids).
+
+**Flags claimed** (bank 0x080–0x085, vanilla 0x2A0–0x2A2): `FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION`, `FLAG_ICHOR_ITEM_ELEUSA_AWAKENING`, `FLAG_ICHOR_SANCTUM_OPEN`, `FLAG_ICHOR_LESSER_MYSTERIES_DONE`, `FLAG_ICHOR_MET_DOSO`, `FLAG_ICHOR_HIDE_CHLOE_TELESTERION`; `FLAG_ICHOR_HIDDEN_ELEUSA_HONEY`, `FLAG_ICHOR_HIDDEN_ELEUSA_POMEG_BERRY`, `FLAG_ICHOR_HIDDEN_ELEUSA_BRONZE_OBOL`.
+
+**Braziers.** The Telesterion's four season braziers use `FLAG_ICHOR_BRAZIERS_START + 0x10` (Autumn), `+ 0x11` (Winter), `+ 0x12` (Spring), `+ 0x13` (Summer). The block `+ 0x14`–`+ 0x1F` is left for the sanctum's four and Eleusa's procession torches. Ask before using it for anything else.
 
 ## Flags claimed for batch 1
 
@@ -93,6 +126,7 @@ Each stub is marked in the code with its tag, so it can be found and replaced wi
 - **`ICHOR_STUB_AETHOS_DEX`: species.** `include/constants/ichor_species_stubs.h` maps every Aethos name SCRIPT.md uses (`SPECIES_HARPECK`, `SPECIES_HALCYLING`, …) to a vanilla stand-in of the same type. Write the Aethos names everywhere: scripts, parties, encounter tables, `OBJ_EVENT_GFX_SPECIES(HARPECK)`. Don't write `Ability:` lines in parties while the stand-ins are in place; they are noted in comments for the dex.
 - **`ICHOR_STUB_TRAINER_IDS`: trainer ids.** Only 11 ids are free until the Hoenn cut. Parties are written now in `design/phase2/trainers_batch1.party` and registered when this session's range appears in `tools/ichor/claim_ranges.md`. Scripts use the final names (`TRAINER_ICHOR_PHORMION`); `include/constants/ichor_trainer_stubs.h` defines them until then.
 - **`ICHOR_STUB_HERM`, `ICHOR_STUB_RITES`, `ICHOR_STUB_DIG`: herms, altars, dig spots.** The engine session is building them (SYSTEMS.md §3–§5). Until its API is on main, a herm is a bg event that offers to anoint it ("Somewhere, Hermes makes a note.") and sets its flag; an altar shows its SCRIPT.md text and says nothing about prayer mechanics; a fixed dig spot is a bg event with the turned-earth text and no reward. Write each as its own small script with the tag in a comment.
+- **`ICHOR_STUB_DARKNESS`: the Torch, braziers and lit zones** (ENGINE_API.md §2). The Telesterion is a dark map (`requires_flash`). Until the engine's darkness lands, its ON_TRANSITION sets flash level 3 (the Torch's radius, SCRIPT.md Part 5); its braziers call a local `StubBrazier` (ask, light, set the flag) in place of `EventScript_IchorBrazier`, and its lit-zone triggers call `StubEnterLitZone` and `LeaveLitZone` (flash 0 inside a lit quarter, 3 outside) in place of `EventScript_IchorEnterLitZone` / `_LeaveLitZone`. Dousing, and so the glowing seeds and chalk, waits for the engine.
 - **`ICHOR_STUB_OFFERINGS`: Olive Oil, Wine, Barley Cake, Frankincense.** New items from the engine session. Until then, Wine on Mount Oros is an item ball of `ITEM_BERRY_JUICE` with the tag.
 - **`ICHOR_STUB_MUSIC`: songs.** Use these until the Phase 2 songs exist: the deck `MUS_ICHOR_AKTI` (for `MUS_ICHOR_TRIREME`), Aegina Town `MUS_ICHOR_AKTI` (final), the inn's night `MUS_ICHOR_ASCLEPEION` (for `MUS_ICHOR_HEARTH_NIGHT`), the detour `MUS_ICHOR_ROUTE1` (for `MUS_ICHOR_HALAI`).
 - **`ICHOR_STUB_EMPORION`: the end of batch 1.** Beat 10C calls `Ichor_EventScript_EuploiaMakesEmporion` (in `data/scripts/ichor_act1.pory`). Until Emporion exists it plays a short card and leaves the player on deck with the ferry running, so Akti and Aegina stay reachable.

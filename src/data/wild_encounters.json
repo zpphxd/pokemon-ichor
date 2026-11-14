@@ -37435,6 +37435,144 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ELEUSA_VILLAGE",
+          "base_label": "gEleusaVillage_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_STACHYSS"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_MELIBEE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_EPOPOI"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_STACHYSS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_VILLAGE",
+          "base_label": "gEleusaVillage_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_STACHYSS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GALEKIT"
+              }
+            ]
+          }
         }
       ]
     },
