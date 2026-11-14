@@ -41,8 +41,8 @@ species:
     - laurel leaves into its fire. It will
     - not burn for anyone it dislikes.
   habitat: >-
-    The temple precinct of Delphoi, among the altars at night; uncommon. The
-    Pythia's acolytes battle with them too.
+    Rare at night by the oldest altar, at the foot of Delphoi's temple
+    precinct, at level 32. The Pythia's acolytes battle with them too.
   learnset:
     level_up:
       - [1, Ember]
@@ -112,8 +112,9 @@ species:
     - an answer, and the answer is always
     - true, though never the way they hoped.
   habitat: >-
-    Evolves from Pyrapod at level 34. Pythia Phemonoe's ace at the Temple of
-    Apollo, Delphoi.
+    Evolves from Pyrapod at level 34. Uncommon in the temple precinct of
+    Delphoi, among the altars at night, at levels 48–52. Pythia Phemonoe's ace
+    at the Temple of Apollo, Delphoi.
   learnset:
     level_up:
       - [0, Future Sight]

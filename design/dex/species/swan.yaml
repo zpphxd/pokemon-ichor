@@ -39,8 +39,8 @@ species:
     - and the spring water steams wherever
     - it has been swimming.
   habitat: >-
-    The pools of the Kastalian spring, Delphoi, at dawn and by day; uncommon.
-    Surfing the pools turns up more.
+    Rare, and only when the day's omen sends one. A single cygnet then waits by
+    the Kastalian spring, Delphoi, at dawn, at level 33.
   learnset:
     level_up:
       - [1, Peck]
@@ -106,8 +106,9 @@ species:
     - beautifully of all just before it
     - faints, so no Trainer wants to hear it.
   habitat: >-
-    Evolves from Hymnet at level 35. A few glide on the Kastalian pools at
-    dawn; rare.
+    Evolves from Hymnet at level 35. Uncommon on the pools of the Kastalian
+    spring, Delphoi, at dawn and by day, at levels 48–52. Surfing the pools
+    turns up more.
   learnset:
     level_up:
       - [0, Air Slash]

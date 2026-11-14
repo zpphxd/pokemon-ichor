@@ -43,9 +43,9 @@ species:
     - skulls on lonely islands told tales of
     - one-eyed giants.
   habitat: >-
-    Revived from the Skull Fossil dug at Knossa Isle, in Daedalus's workshop.
-    You choose one of the two fossils; the other turns up in post-game
-    Atlantis. It isn't found in the wild.
+    Revived at level 35 from the Skull Fossil dug at Knossa Isle, in Daedalus's
+    workshop. You choose one of the two fossils; the other turns up in
+    post-game Atlantis. It isn't found in the wild.
   learnset:
     level_up:
       - [1, Tackle]

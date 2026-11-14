@@ -41,8 +41,8 @@ species:
     - the ice caves say it is ice that froze
     - so hard it forgot how to thaw.
   habitat: >-
-    The ice caves of the Ascent, at any time; uncommon. It hides among real
-    icicles on the cave walls.
+    A side grotto off the ice caves of the Ascent, at any time; rare, at level
+    40. It hides among real icicles on the grotto walls.
   learnset:
     level_up:
       - [1, Tackle]
@@ -112,8 +112,9 @@ species:
     - travelers lost in the ice caves peer
     - through its clear body for the way out.
   habitat: >-
-    Evolves from Pagoshard at level 42. Rare deep in the ice caves of the
-    Ascent.
+    Evolves from Pagoshard at level 42. Uncommon in the ice caves of the
+    Ascent, at any time, at levels 52–58. The largest keep to the deepest
+    caves.
   learnset:
     level_up:
       - [0, Icicle Crash]

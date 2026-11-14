@@ -43,8 +43,9 @@ species:
     - mourning a girl who was carried down into
     - the earth, long ago.
   habitat: >-
-    The Sirens' rocks on the post-game Odyssey, at dusk and at night
-    (uncommon). It sits among the bones on the rocks and flies off if you run.
+    The cliff nests below the Sirens' rocks on the post-game Odyssey, at dusk
+    and at night; rare, at level 40. It sits among the bones and flies off if
+    you run.
   learnset:
     level_up:
       - [1, Astonish]
@@ -116,8 +117,9 @@ species:
     - captains stop their crews' ears with wax
     - and have themselves tied to the mast.
   habitat: >-
-    Evolves from Elegull at level 42. A few sing in the open on the highest of
-    the Sirens' rocks on clear nights (rare).
+    Evolves from Elegull at level 42. Uncommon on the Sirens' rocks on the
+    post-game Odyssey, at dusk and at night, at levels 55–70. On clear nights a
+    few sing in the open on the highest rock.
   learnset:
     level_up:
       - [0, Alluring Voice]

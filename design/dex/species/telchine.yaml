@@ -40,8 +40,9 @@ species:
     - smiths, and even the youngest beat out
     - the same curved shape, over and over.
   habitat: >-
-    Common by day on Kaldera's black-sand shores, tapping at pebbles along the
-    tide line. More turn up in the shallows when fishing.
+    Common by day on Kaldera's black-sand shores at level 34, tapping at
+    pebbles along the tide line. More turn up at the same level when fishing
+    the shallows.
   learnset:
     level_up:
       - [1, Water Gun]

@@ -41,7 +41,7 @@ species:
     - to him under the ground.
   habitat: >-
     Common on the floor of Kaldera's caldera, among the smoking vents, by day
-    and by night. Team Titan grunts collect them.
+    and by night, at levels 34–35. Team Titan grunts collect them.
   learnset:
     level_up:
       - [1, Ember]

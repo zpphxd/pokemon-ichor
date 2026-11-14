@@ -143,3 +143,12 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
     - Elegull (42) in the post-game (55–70)
   - **Decided (2026-11-14, by the main session, now in `design/BALANCE.md`): keep the evolution levels.** From Astyra on, late areas' wild tables carry the evolved forms at the band's levels. First stages appear only in rare lower-level spots, in swarms or omens, or by breeding. Lernip is the exception: a rare rain-only hunt at Lake Stymphalia at about level 30. The species' habitat text follows this.
   - **Superseded:** the earlier "keep Victory Road under 40" note above.
+  - **Habitats rewritten to the ruling (2026-11-14), 18 species.**
+    - Late areas now carry the evolved forms at band levels. First stages appear rarely at lower levels, in special spots or omens. Lernip is the exception: rain-only, levels 28–30.
+    - The fossil lines (Monophant, Sepidart) stay revive-only, at level 35, so the fossil choice still means something.
+    - Lines at the edge of their band (Glaukoin, Telpup, Kapnub) are capped instead of reworked.
+    - The species YAML habitats are now the source of truth. `plan.yaml`'s one-line habitats are older summaries.
+    - For the main session:
+      - New omen entries for SYSTEMS.md §6: Sporadon (swarm), Hymnet (rare visitor), Kryopuff (weather).
+      - New small map spots: the paupers' graves (Astyra), the warm hollow (Kaldera), the cradle shrine (Knossa), the reed-bed nests (Lakonia), the oldest altar (Delphoi), the ice-cave side grotto (the Ascent), the Sirens' cliff nests (post-game).
+      - Aetarch, the Archon's ace, is now uncommon wild on the Ascent.

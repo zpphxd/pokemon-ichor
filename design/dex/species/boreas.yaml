@@ -41,8 +41,8 @@ species:
     - it runs out of breath, it shrinks to
     - the size of a sigh and drifts away.
   habitat: >-
-    The windy upper slopes of the Ascent and the peaks of Olympus, by day and
-    night; uncommon, and most common in a snowstorm.
+    Rare. When a weather omen brings snow to the Ascent, a few drift onto its
+    lowest slopes, by day and night, at level 38.
   learnset:
     level_up:
       - [1, Gust]
@@ -111,8 +111,9 @@ species:
     - honor it before winter sets in have
     - been known to lose whole fleets.
   habitat: >-
-    Evolves from Kryopuff at level 40. Wild ones haunt the peaks of Olympus in
-    snowstorms; rare.
+    Evolves from Kryopuff at level 40. Uncommon on the windy upper slopes of
+    the Ascent and the peaks of Olympus, by day and night, at levels 52–58.
+    Most common in a snowstorm.
   learnset:
     level_up:
       - [0, Tailwind]

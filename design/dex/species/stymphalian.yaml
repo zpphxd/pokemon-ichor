@@ -42,8 +42,9 @@ species:
     - metal sends a whole brood flapping and
     - shrieking, though none of them can fly.
   habitat: >-
-    The reed beds of Lake Stymphalia, Lakonia, in the morning and evening;
-    uncommon. Wading the shallows or using the Augur's Eye turns them up.
+    The reed-bed nests of Lake Stymphalia, Lakonia, in the morning and evening;
+    rare, at level 33. Wading the shallows or using the Augur's Eye turns them
+    up.
   learnset:
     level_up:
       - [1, Peck]
@@ -115,9 +116,10 @@ species:
     - the next moon. Old marsh folk still bang
     - pots together to drive a flock away.
   habitat: >-
-    Over Lake Stymphalia, Lakonia, in flocks at dusk, in the post-game only.
-    Driving the flock out is the sixth Labor; afterward single birds can be
-    caught there, rarely.
+    Lake Stymphalia, Lakonia, in the morning and evening; uncommon, at levels
+    46–50. Single birds roost in the reed beds. In the post-game the whole
+    flock gathers over the lake at dusk. Driving it out is the sixth Labor;
+    afterward a few come back, rarely.
   learnset:
     level_up:
       - [0, Spikes]

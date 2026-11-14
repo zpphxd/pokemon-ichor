@@ -42,8 +42,8 @@ species:
     - owls, and say a purse of them keeps
     - watch over you while you sleep.
   habitat: >-
-    Astyra's Akropolis by day and night, common among the columns; uncommon
-    in the Library, where it roosts on the high shelves.
+    Astyra's Akropolis by day and night, at levels 30–33: common among the
+    columns, and uncommon in the Library, where it roosts on the high shelves.
   learnset:
     level_up:
       - [1, Peck]

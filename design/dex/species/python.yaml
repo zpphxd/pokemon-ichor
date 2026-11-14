@@ -41,9 +41,7 @@ species:
     - rain. Its eyes seem far older than it,
     - and some at Delphoi whisper that it
     - remembers the world before the flood.
-  habitat: >-
-    The muddy slopes of Parnassus above Delphoi, in the morning after rain;
-    uncommon. Rare in the Korykian cave at any time.
+  habitat: Rare in the Korykian cave above Delphoi, at any time, at level 33.
   learnset:
     level_up:
       - [1, Wrap]
@@ -114,8 +112,10 @@ species:
     - It is said a god shot it long ago, and
     - it has never forgiven him.
   habitat: >-
-    Evolves from Pelython at level 36. Wild ones lie deep in the Korykian
-    cave, rarely. Pantheon member Olympias fields one at the Dragon seat.
+    Evolves from Pelython at level 36. Uncommon on the muddy slopes of
+    Parnassus above Delphoi by day, at levels 48–52, most of all in the morning
+    after rain. Rarely, others lie deep in the Korykian cave. Pantheon member
+    Olympias fields one at the Dragon seat.
   learnset:
     level_up:
       - [0, Coil]

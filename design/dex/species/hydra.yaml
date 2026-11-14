@@ -42,7 +42,8 @@ species:
     - neck are heads that have not woken yet.
   habitat: >-
     The reed marshes of Lake Stymphalia, Lakonia, only while it's raining
-    (rare, any time of day). Look in the deepest reeds with the Augur's Eye.
+    (rare, any time of day, levels 28–30). Look in the deepest reeds with the
+    Augur's Eye.
   learnset:
     level_up:
       - [1, Bite]

@@ -41,8 +41,9 @@ species:
     - one are said to hear a faint thank-you on
     - the night wind.
   habitat: >-
-    Astyra's Kerameikos cemetery at night, common among the grave stelai. None
-    are seen there by day. It drifts toward trainers who carry money.
+    Rare in Astyra's Kerameikos cemetery at night, at level 28, among the
+    paupers' graves outside the wall. None are seen there by day. It drifts
+    toward trainers who carry money.
   learnset:
     level_up:
       - [1, Astonish]
@@ -107,8 +108,10 @@ species:
     - bank. It has waited so long that it no
     - longer remembers why.
   habitat: >-
-    Evolves from Obolorn at level 30. In the post-game, uncommon in the grass
-    by the cave mouth at Cape Tainaron, at dusk and at night.
+    Evolves from Obolorn at level 30. Common in Astyra's Kerameikos cemetery at
+    night, at levels 30–36, drifting among the grave stelai. In the post-game,
+    uncommon in the grass by the cave mouth at Cape Tainaron, at dusk and at
+    night.
   learnset:
     level_up:
       - [0, Ominous Wind]

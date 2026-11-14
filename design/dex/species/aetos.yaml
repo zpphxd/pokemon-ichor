@@ -41,8 +41,8 @@ species:
     - say it is looking for a king worth
     - serving, and has not found one yet.
   habitat: >-
-    The crags of the Ascent, by day; rare. It dives at anyone who climbs too
-    near its nest.
+    The nests on the crags of the Ascent, by day; rare, at level 38. It dives
+    at anyone who climbs too near.
   learnset:
     level_up:
       - [1, Peck]
@@ -113,8 +113,8 @@ species:
     - that it once tore at a chained Titan
     - each day for an age, and never tired.
   habitat: >-
-    Evolves from Aetling at level 40. Wild ones nest on the crags below
-    Olympus's summit, very rarely. Archon Aristeides's ace.
+    Evolves from Aetling at level 40. Uncommon on the crags of the Ascent and
+    below Olympus's summit, by day, at levels 52–58. Archon Aristeides's ace.
   learnset:
     level_up:
       - [0, Thunderbolt]

@@ -42,9 +42,9 @@ species:
     - in their roofs, believing that no bolt
     - would strike the same stone twice.
   habitat: >-
-    Revived from the Dart Fossil dug at Knossa Isle, in Daedalus's workshop.
-    You choose one of the two fossils; the other turns up in post-game
-    Atlantis. It isn't found in the wild.
+    Revived at level 35 from the Dart Fossil dug at Knossa Isle, in Daedalus's
+    workshop. You choose one of the two fossils; the other turns up in
+    post-game Atlantis. It isn't found in the wild.
   learnset:
     level_up:
       - [1, Wrap]

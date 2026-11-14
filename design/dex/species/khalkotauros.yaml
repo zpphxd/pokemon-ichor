@@ -39,8 +39,9 @@ species:
     - is cross, it snorts sparks, so the herders
     - of Kaldera keep it well away from hay.
   habitat: >-
-    Common by day on the forge slopes of Kaldera, in herds grazing the warm
-    grass beside the lava vents.
+    Rare by day in a warm hollow below the forge slopes of Kaldera, at level
+    31. The calves shelter there beside the lava vents while the herd grazes
+    above.
   learnset:
     level_up:
       - [1, Tackle]
@@ -107,8 +108,9 @@ species:
     - is said the only one who ever yoked it
     - wore a balm that fire could not touch.
   habitat: >-
-    Evolves from Kaminoo at level 33. Rare on the upper forge slopes of Kaldera,
-    by day, where it stands guard over the grazing herds.
+    Evolves from Kaminoo at level 33. Common by day on the forge slopes of
+    Kaldera, at levels 34–40, in herds grazing the warm grass beside the lava
+    vents. The biggest stand guard on the upper slopes.
   learnset:
     level_up:
       - [0, Iron Head]

@@ -42,8 +42,9 @@ species:
     - sprouts into a warrior, and warriors
     - will fight anything, even each other.
   habitat: >-
-    Half-buried in the training fields of the Lakonian battle school,
-    Lakonia, at any time; uncommon. The Augur's Eye finds them in the furrows.
+    Half-buried in the training fields of the Lakonian battle school, Lakonia,
+    but only in a swarm. When the day's omen calls one, a crop springs up at
+    level 38. The Augur's Eye finds them in the furrows.
   learnset:
     level_up:
       - [1, Bite]
@@ -114,8 +115,9 @@ species:
     - rise at once they fight one another
     - until only a few are left standing.
   habitat: >-
-    Evolves from Sporadon at level 40. Pantheon member Olympias fields one at
-    the Dragon seat.
+    Evolves from Sporadon at level 40. Uncommon in the training fields of the
+    Lakonian battle school, Lakonia, at any time, at levels 46–50. Pantheon
+    member Olympias fields one at the Dragon seat.
   learnset:
     level_up:
       - [0, Wide Guard]

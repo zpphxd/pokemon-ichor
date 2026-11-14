@@ -41,9 +41,9 @@ species:
     - once hid a crying baby from a king who
     - swallowed his own children.
   habitat: >-
-    The Diktaean cave on Knossa Isle, day and night; common in the deep
-    chambers, where its clanging echoes. Students at the Lakonian battle
-    school train with it.
+    Rare in the cradle shrine at the mouth of the Diktaean cave, Knossa Isle,
+    at level 33, day and night. Its clanging echoes off the shrine walls.
+    Students at the Lakonian battle school train with it.
   learnset:
     level_up:
       - [1, Tackle]
@@ -111,9 +111,10 @@ species:
     - Some say it dances to keep an ancient
     - enemy from waking.
   habitat: >-
-    Evolves from Kymbash at level 35. Rare in the deepest chamber of the
-    Diktaean cave, Knossa Isle, at night, where it dances alone. Instructors
-    at the Lakonian battle school use it.
+    Evolves from Kymbash at level 35. Common in the deep chambers of the
+    Diktaean cave, Knossa Isle, day and night, at levels 42–48. At night the
+    oldest dance alone in the deepest chamber. Instructors at the Lakonian
+    battle school use it.
   learnset:
     level_up:
       - [0, Body Press]
