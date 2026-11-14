@@ -76,6 +76,25 @@ Put the review card next to official sprites of a similar creature (`graphics/po
 - **Icon** (`icon`, optional). Defaults to the front draft.
 - **Footprint.** A preset in `mon_lib.FOOTPRINTS` (hoof, paw, bigpaw, claw, bird, webbed, hand, fin, root, coil, blank) or 16 custom rows. Species with no feet use `blank`, as Gen 3 does.
 
+## Common misses from the first round
+
+Reviews of the starters kept finding the same gaps. Check for each one before you call a sprite done.
+
+- **Flat shading.** Two or three tones lit edge to edge read as a sticker.
+  - Use 4 tones on the main material, plus a highlight where it fits: wet sheen, metal glint or silver leaf.
+  - Model the anatomy: shoulder and chest planes, the underside of the neck in shadow, the barrel of the ribs, the haunch.
+  - Add a lit rim along the top edges and cast shadows under heads, arms and capes.
+- **Back views as one big mass.**
+  - Draw them at about 1.2× the front's scale, not larger.
+  - Model the back: spine, shoulder blades, muscle.
+  - Keep the head in a readable right-facing profile at a sensible size: no giraffe necks.
+- **Stamped detail.** Repeated identical leaves, feathers or scales look mechanical. Vary size and angle, overlap them with depth, and make the back layers darker.
+- **Shapes that read as something else.** A cape of stacked ovals reads as wings. A symmetric frontal pose reads stiff. Use 3/4 view and asymmetric, weighted poses.
+- **Lazy frame 2.** A 1 px lift alone is too little. Move something with character too: a mane or fin flick, ears perking, a mouth opening, flames flickering, leaves swaying. `paint.shift(..., mask=...)` moves a shaped region.
+- **Weak follower views.** The `up` view must be a creature seen from behind, not a totem or a cocoon. The `down` view must read as the creature's face and body, not a helmet.
+- **Icons that change color.** After the build quantizes to the shared icon palettes, look at the icon. If a green went gray, set `Mon(..., icon_pal=N)`. Simplify the draft's small-size shapes (`if not p.big`) so icons aren't noisy.
+- **Lost work.** Scratch scripts in /tmp vanish. The art `.txt` files and the line's `.py` file are the deliverables. If a generator script matters, paste the key data into the `.py` file instead.
+
 ## Checks
 
 The build fails on errors (a missing view, a palette over 15 colors, a bad footprint, a stray character in an art file). It also warns when a sprite touches the frame edge or declares a color it never draws. Clear every warning.
