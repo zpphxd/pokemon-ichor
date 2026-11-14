@@ -90,7 +90,16 @@ def material_of(px):
     return GEN.get(tuple(int(v) for v in px[:3]))
 
 
-def render_tile(src):
+# Rock standing in the sea is pale gray stone, washed clean; rock on land is
+# warm limestone.
+MARINE_ROCK = {"lp_h": "mb_h", "lp_l": "mb_l", "lp_m": "mb_m", "lp_d": "mb_d", "lp_k": "mb_d"}
+# Sea stacks and reefs: every rock metatile in this block stands in water,
+# even the all-rock interiors.
+MARINE_IDS = set(range(0x150, 0x1C0)) | {0x0BD, 0x0C5, 0x0CD, 0x02C, 0x034, 0x03C}
+MARINE_DARKER = {"mb_h": "mb_l", "mb_l": "mb_m", "mb_m": "mb_d", "mb_d": "ink", "ink": "ink"}
+
+
+def render_tile(src, marine=False):
     """Re-render one 8x8 General tile by material."""
     out = np.zeros_like(src)
     for y in range(8):
@@ -105,13 +114,36 @@ def render_tile(src):
                 out[y, x] = TEXTURES[target[1:]][y, x]
                 continue
             if mat[0] == "rock":
-                target = strata(target, x, y)
+                if marine:
+                    target = MARINE_ROCK.get(target, target)
+                    if target == "mb_m" and (x + 2 * y) % 9 == 0:
+                        target = MARINE_DARKER[target]
+                else:
+                    target = strata(target, x, y)
             out[y, x] = rgba(target)
     return out
 
 
+def marine_metatiles(base):
+    """Metatiles whose General art contains sea or pond water."""
+    wet = set()
+    for m in range(512):
+        for l in base.layers(m):
+            a = base.get(m, l)
+            for px in a[a[..., 3] > 0][:, :3]:
+                mat = GEN.get(tuple(int(v) for v in px))
+                if mat and mat[0] in ("sea", "pond"):
+                    wet.add(m)
+                    break
+            if m in wet:
+                break
+    return wet
+
+
 def paint(sheet, base):
     tiles, uses = tile_index(base.get)
-    rendered = [render_tile(t) for t in tiles]
+    wet = marine_metatiles(base) | MARINE_IDS
+    marine = {ci for m, l, q, ci, hf, vf in uses if m in wet}
+    rendered = [render_tile(t, ci in marine) for ci, t in enumerate(tiles)]
     for m, l, q, ci, hf, vf in uses:
         quad(sheet.view(m, l), q)[:] = flip(rendered[ci], hf, vf)
