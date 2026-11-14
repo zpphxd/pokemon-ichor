@@ -432,6 +432,9 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_ROUTE_132] = {MAP_GROUP(MAP_ROUTE132), MAP_NUM(MAP_ROUTE132), HEAL_LOCATION_NONE},
     [MAPSEC_ROUTE_133] = {MAP_GROUP(MAP_ROUTE133), MAP_NUM(MAP_ROUTE133), HEAL_LOCATION_NONE},
     [MAPSEC_ROUTE_134] = {MAP_GROUP(MAP_ROUTE134), MAP_NUM(MAP_ROUTE134), HEAL_LOCATION_NONE},
+// Ichor: outside an FRLG build the Kanto IDs below are Aethos's routes and
+// islands (design/AETHOS_MAP.md), so their Kanto heal locations go.
+#if IS_FRLG
     [MAPSEC_PALLET_TOWN] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_PALLET_TOWN},
     [MAPSEC_VIRIDIAN_CITY] = {MAP_GROUP(MAP_VIRIDIAN_CITY), MAP_NUM(MAP_VIRIDIAN_CITY), HEAL_LOCATION_VIRIDIAN_CITY},
     [MAPSEC_PEWTER_CITY] = {MAP_GROUP(MAP_PEWTER_CITY), MAP_NUM(MAP_PEWTER_CITY), HEAL_LOCATION_PEWTER_CITY},
@@ -536,6 +539,7 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_RIXY_CHAMBER] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
     [MAPSEC_VIAPOIS_CHAMBER] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
     [MAPSEC_EMBER_SPA] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
+#endif // IS_FRLG
     // Ichor: Kalliste. Add each Aethos town here as its maps land (design/AETHOS_MAP.md).
     [MAPSEC_ELAIA_VILLAGE] = {MAP_GROUP(MAP_ELAIA_VILLAGE), MAP_NUM(MAP_ELAIA_VILLAGE), HEAL_LOCATION_ELAIA_VILLAGE},
     [MAPSEC_KALLISTE_ROUTE_1] = {MAP_GROUP(MAP_KALLISTE_ROUTE1), MAP_NUM(MAP_KALLISTE_ROUTE1), HEAL_LOCATION_NONE},
@@ -1221,7 +1225,8 @@ static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
     }
 }
 
-// Ichor: Cape Tainaron, Olympia, Atlantis and the roads to them (design/AETHOS_MAP.md)
+// Ichor: Cape Tainaron, Olympia, Atlantis, the Odyssey's islands, Rhodos and
+// the routes to them (design/AETHOS_MAP.md)
 static bool32 IsIchorPostgameMapSec(mapsec_u16_t mapSecId)
 {
     switch (mapSecId)
@@ -1229,8 +1234,13 @@ static bool32 IsIchorPostgameMapSec(mapsec_u16_t mapSecId)
     case MAPSEC_CAPE_TAINARON:
     case MAPSEC_OLYMPIA:
     case MAPSEC_ATLANTIS:
-    case MAPSEC_AETHOS_ROUTE_9:
-    case MAPSEC_AETHOS_ROUTE_10:
+    case MAPSEC_ITHAKA:
+    case MAPSEC_KERKYRA:
+    case MAPSEC_RHODOS:
+    case MAPSEC_AETHOS_ROUTE_31:
+    case MAPSEC_AETHOS_ROUTE_32:
+    case MAPSEC_AETHOS_ROUTE_33:
+    case MAPSEC_AETHOS_ROUTE_34:
         return TRUE;
     default:
         return FALSE;
@@ -1486,6 +1496,9 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
         return FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
     case MAPSEC_SOUTHERN_ISLAND:
         return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? MAPSECTYPE_ROUTE : MAPSECTYPE_NONE;
+    // Ichor: outside an FRLG build these Kanto IDs are Aethos's routes and islands
+    // (design/AETHOS_MAP.md), so they must not read as Kanto towns.
+#if IS_FRLG
     case MAPSEC_PALLET_TOWN:
         return FlagGet(FLAG_WORLD_MAP_PALLET_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_VIRIDIAN_CITY:
@@ -1526,9 +1539,11 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
         return FlagGet(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_ROUTE_10_POKECENTER:
         return FlagGet(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+#endif // IS_FRLG
     // Ichor: Aethos. Elaia is home: it is a fly target as soon as you have a
-    // Pokemon. Each other town gets its own visited flag when its maps land;
-    // until then it shows as a town you can't fly to (design/AETHOS_MAP.md).
+    // Pokemon. Each other town, and each harbor hamlet with a healer, gets its
+    // own visited flag when its maps land; until then it shows as a town you
+    // can't fly to (design/AETHOS_MAP.md).
     case MAPSEC_ELAIA_VILLAGE:
         return FlagGet(FLAG_SYS_POKEMON_GET) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_AKTI_TOWN:
@@ -1536,13 +1551,18 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
     case MAPSEC_EMPORION_CITY:
     case MAPSEC_ELEUSA_VILLAGE:
     case MAPSEC_THYRSA_CITY:
-    case MAPSEC_DELPHOI:
+    case MAPSEC_LEBADEIA:
+    case MAPSEC_KIRRHA:
+    case MAPSEC_AIGION:
     case MAPSEC_ARKADIA:
     case MAPSEC_ASTYRA:
     case MAPSEC_KALDERA:
     case MAPSEC_KYTHERA_ISLE:
-    case MAPSEC_KNOSSA_ISLE:
+    case MAPSEC_AMNISOS:
+    case MAPSEC_GYTHEION:
     case MAPSEC_LAKONIA:
+    case MAPSEC_DELPHOI:
+    case MAPSEC_VALE_OF_TEMPE:
     case MAPSEC_MOUNT_OLYMPUS:
     case MAPSEC_CAPE_TAINARON:
     case MAPSEC_OLYMPIA:
