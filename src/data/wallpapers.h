@@ -151,25 +151,26 @@ static const u32 sWallpaperTilemap_Plain[] = INCGFX_U32("graphics/pokemon_storag
 static const u32 sWallpaperTilemap_Unused[] = INCBIN_U32("graphics/pokemon_storage/wallpapers/unused.bin");
 
 // Shadow color, text color
+// Ichor: every jar prints its name in ink on a parchment tag (ui_codex_jars.py)
 static const u16 sBoxTitleColors[WALLPAPER_COUNT][2] =
 {
-    [WALLPAPER_FOREST]     = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_CITY]       = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_DESERT]     = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_SAVANNA]    = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_CRAG]       = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_VOLCANO]    = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_SNOW]       = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_CAVE]       = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_BEACH]      = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_SEAFLOOR]   = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_RIVER]      = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_SKY]        = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_POLKADOT]   = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_POKECENTER] = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_MACHINE]    = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_PLAIN]      = {RGB(7, 7, 7), RGB_WHITE},
-    [WALLPAPER_FRIENDS]    = {RGB(7, 7, 7), RGB_WHITE}
+    [WALLPAPER_FOREST]     = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_CITY]       = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_DESERT]     = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_SAVANNA]    = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_CRAG]       = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_VOLCANO]    = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_SNOW]       = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_CAVE]       = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_BEACH]      = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_SEAFLOOR]   = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_RIVER]      = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_SKY]        = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_POLKADOT]   = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_POKECENTER] = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_MACHINE]    = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_PLAIN]      = {RGB(26, 23, 17), RGB(7, 5, 4)},
+    [WALLPAPER_FRIENDS]    = {RGB(26, 23, 17), RGB(7, 5, 4)}
 };
 
 #define WALLPAPER_ENTRY(name) {sWallpaperTiles_##name, sWallpaperTilemap_##name, sWallpaperPalettes_##name[0]}
