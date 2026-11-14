@@ -295,7 +295,7 @@ Frames are picked by the names the playthrough gives them, so a rerun after an a
 - **Repro:** the summit scene plays the route theme until the battles. `MUS_ICHOR_ENCOUNTER_TITAN` is unused, because the grunts are `trainerbattle_no_intro` and the scene never calls `playbgm`.
 - **Suggested fix:** `playbgm(MUS_ICHOR_ENCOUNTER_TITAN, FALSE)` when the grunts turn around.
 
-### P9. Invisible walls around the sacred olive's garden in Elaia (OPEN)
+### P9. Invisible walls around the sacred olive's garden in Elaia (OPEN) — FIXED (41ae6958f1)
 - **Status:** still open on `726eb794d6`.
 - **Area:** Elaia
 - **Repro:** these cells are drawn as open grass and flowers but are solid (coordinates on the new map, four rows lower than before):
@@ -325,7 +325,7 @@ Frames are picked by the names the playthrough gives them, so a rerun after an a
 - **Screenshot:** `img/qa/p12_lbs.png`
 - **Suggested fix:** a director call: the expansion's metric units, or an in-world measure.
 
-### P13. The honey shelf in Glykera's bakery can't be reached (NEW, OPEN)
+### P13. The honey shelf in Glykera's bakery can't be reached (NEW, OPEN) — FIXED (41ae6958f1)
 - **Area:** Elaia
 - **Repro:**
   - `ElaiaVillage_BakersHouse_EventScript_HoneyShelf` is a sign at (0,1), read from (0,2).
