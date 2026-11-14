@@ -103,3 +103,6 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
     - Share one cry across each Mega Evolution (`P_MODIFIED_MEGA_CRIES`, about 3% of the ROM, roughly 1 MB).
     - Trim alternate forms that aren't separate species.
     - Watch the build's memory line after each asset batch.
+- 2026-11-14: **Mega Evolutions reuse their base form's cry**, which frees about 1 MB. The user: "Give each Mega Evolution the same cry as its base form, which frees about 1 MB." It's an engine config change for the main session to make (the dex branch doesn't edit `include/`). In `include/config/pokemon.h`:
+  - `#define P_MODIFIED_MEGA_CRIES FALSE` drops the separate Mega cry samples.
+  - `#define P_MODIFIED_MEGA_CRY_MODE CRY_MODE_NORMAL` plays the base cry unchanged, which is what the user asked for. The default, `CRY_MODE_HIGH_PITCH`, plays it pitched up instead, also at no cost.
