@@ -209,6 +209,60 @@ FAR = _wing((44, 36.5), [(55, 2), (59.5, 4.5), (62, 9.5), (62.5, 15.5), (61.5, 2
 FAR["rows"] = [dict(rc=19.5, taper=0.5, n=5, bump=2.0), dict(rc=13, taper=0.45, n=3, bump=1.5)]
 
 
+# --------------------------------------------------------------------------
+# Each sister's own silhouette on the shared plan:
+#   Nemira   round and buoyant, the breast full, wings lifted high
+#   Lotira   a crane standing tall: body upright, neck straight, a tall V
+#   Thanira  hunched and gaunt: body low and lean, the neck arched over so
+#            the hooded head hangs forward, wings narrow and swept like blades
+# head: where the head's center sits (the face is drawn about (29.5, 9.8)
+# and moved there); body: (cx, cy, rx, ry, angle) blobs; spine: the seam
+# from the whorl into the tail; tail: the instrument's anchor.
+# --------------------------------------------------------------------------
+
+GEO = {
+    "nemira": dict(
+        near=_wing((32, 33), [(4.5, 2), (2, 7.5), (1.5, 13.5), (2.5, 19.5), (4.5, 25.5), (8, 30.5), (12.5, 34.5),
+                              (17.5, 37.5), (23, 39.5)], swirl=10, cov=0.44, arm_r=24, sign=-1),
+        far=_wing((44, 36.5), [(54.5, 1.5), (59, 3.5), (62, 8), (62.5, 14), (61.5, 20), (59, 25.5), (55.5, 30),
+                               (51.5, 33.5)], swirl=-8, cov=0.42, arm_r=23, sign=1),
+        body=[(40.5, 42, 10.5, 8.6, 14), (33.5, 39.5, 8.8, 8.8, 0)],
+        neck=[(33.5, 37), (24, 30.5), (41, 23), (31, 14)], neck_w=(9.8, 7.0),
+        head=(29.5, 9.8), head_r=(7.6, 6.6), whorl=(31.5, 38.5),
+        spine=[(34.5, 39), (39, 40.5), (43.5, 43.5), (46.5, 46)],
+        tailfan=[((45.5, 42.5), (54, 37.5), 4.0), ((46.5, 43.5), (56.5, 41.5), 4.4), ((47, 45), (57, 46.5), 4.2)],
+        tail=(0, 0)),
+    "lotira": dict(
+        near=_wing((34, 34), [(13, 1.5), (7.5, 3.5), (3.5, 8), (2, 14), (2, 20.5), (3.5, 27), (7, 32.5), (12, 36.5),
+                              (18, 39)], swirl=8, cov=0.44, arm_r=26, sign=-1),
+        far=_wing((45, 38), [(51, 1.5), (56, 2.5), (60, 5.5), (62, 10.5), (62.5, 16.5), (61.5, 22.5), (59, 28),
+                             (55.5, 32.5), (51.5, 36)], swirl=-6, cov=0.42, arm_r=25, sign=1),
+        body=[(40.5, 46, 9.8, 7.0, 48), (35.5, 41.5, 7.4, 7.4, 0)],
+        neck=[(35.5, 38), (35.5, 29), (34, 20), (33.5, 12)], neck_w=(8.2, 6.0),
+        head=(31.5, 7.8), head_r=(7.0, 6.0), whorl=(34, 41),
+        spine=[(36.5, 42), (39.5, 45), (42.5, 48), (45, 51)],
+        tailfan=[((43.5, 47), (51, 43), 4.0), ((44.5, 48.5), (54, 47.5), 4.4), ((45, 50), (53.5, 53), 4.2)],
+        tail=(0, 4)),
+    "thanira": dict(
+        near=_wing((35, 30), [(16, 1.5), (11, 2.5), (7, 5), (4.5, 9), (4, 13.5), (6, 17.5), (10, 20.5),
+                              (15, 22.5), (20.5, 24)], swirl=10, cov=0.4, arm_r=24, sign=-1),
+        far=_wing((44, 34), [(50, 1.5), (55, 3), (58.5, 6.5), (60.5, 11), (61, 16), (59.5, 21), (56, 25),
+                             (51.5, 28)], swirl=-10, cov=0.4, arm_r=22, sign=1),
+        body=[(41.5, 40.5, 11, 6.4, 8), (34, 38.5, 6.8, 6.8, 0)],
+        neck=[(33, 36.5), (38, 26), (32.5, 15), (26.5, 23)], neck_w=(7.2, 5.4),
+        head=(22.5, 26.8), head_r=(6.8, 6.0), whorl=(31, 39),
+        spine=[(35.5, 38.5), (40, 38.5), (45, 40), (49, 42)],
+        tailfan=[((48, 39), (56, 35.5), 3.6), ((48.5, 40.5), (58, 39.5), 4.0), ((48.5, 42), (57, 44), 3.8)],
+        tail=(3, -3)),
+}
+GEO["nemira"]["near"]["rows"] = [dict(rc=23, taper=0.5, n=6, bump=2.2), dict(rc=15, taper=0.45, n=4, bump=1.8)]
+GEO["nemira"]["far"]["rows"] = [dict(rc=19.5, taper=0.5, n=5, bump=2.0), dict(rc=13, taper=0.45, n=3, bump=1.5)]
+GEO["lotira"]["near"]["rows"] = [dict(rc=29, taper=0.5, n=6, bump=2.2), dict(rc=19, taper=0.45, n=4, bump=1.8)]
+GEO["lotira"]["far"]["rows"] = [dict(rc=25, taper=0.5, n=5, bump=2.0), dict(rc=16, taper=0.45, n=3, bump=1.6)]
+GEO["thanira"]["near"]["rows"] = [dict(rc=19, taper=0.45, n=5, bump=2.0), dict(rc=12, taper=0.4, n=3, bump=1.6)]
+GEO["thanira"]["far"]["rows"] = [dict(rc=17, taper=0.5, n=5, bump=1.8), dict(rc=11, taper=0.45, n=3, bump=1.4)]
+
+
 def tip_r(style, R, u, k):
     """The tip radius across one feather (u 0..1 from its leading side)."""
     if style == "soft":
@@ -216,7 +270,7 @@ def tip_r(style, R, u, k):
     if style == "rule":
         return R - (0.9 if (u < 0.1 or u > 0.9) else 0.0)
     # knife: a slanted blade point, every other feather cut short
-    return R * (1.0 if k % 2 == 0 else 0.9) - 4.2 * u
+    return R * (1.0 if k % 2 == 0 else 0.88) - 6.0 * u
 
 
 def wing_field(W, beat, x, y, style="soft"):
@@ -375,7 +429,7 @@ def _head(p, kind, L):
     """Head, crest, beak, face and the brow-gem."""
     big = p.big
     hx, hy = HEAD[0], HEAD[1] - L
-    rx, ry = HEAD_R[kind]
+    rx, ry = GEO[kind]["head_r"]
     _tag(p, "head", p.blob(hx, hy, rx, ry, body_m, group=3))
 
     # ---- crest ----------------------------------------------------------------
@@ -418,34 +472,48 @@ def _head(p, kind, L):
     p.px(gx, gy, "p3")
 
 
+def _moved(p, d, fn, *args):
+    """Draw with the pen shifted by d design px (a sister's head or tail
+    drawn about the shared position and moved to her own)."""
+    ox, oy = p.ox, p.oy
+    p.ox, p.oy = ox + d[0] * p.s, oy + d[1] * p.s
+    try:
+        fn(*args)
+    finally:
+        p.ox, p.oy = ox, oy
+
+
 def fate_front(p, kind, phase):
     big = p.big
     beat = 4 * phase
     L = phase
+    G = GEO[kind]
 
     # ---- tail: the instrument, behind the body ------------------------------
-    {"nemira": _spindle, "lotira": _plume, "thanira": _shears}[kind](p, phase)
+    _moved(p, G["tail"], {"nemira": _spindle, "lotira": _plume, "thanira": _shears}[kind], p, phase)
 
     # ---- a short fan of Night-dark tail coverts behind the instrument ---------
-    for i, (a, b, w) in enumerate(TAILFAN):
+    for i, (a, b, w) in enumerate(G["tailfan"]):
         _tag(p, "tailfan", p.poly(SHAPES[STYLE[kind]](a, b, w, 0.4), night_m, group=50 + i, bias=0.1),
              a=a, b=b, w=w)
 
-    wing(p, kind, FAR, beat, 10, bias=0.12, side="far")
+    wing(p, kind, G["far"], beat, 10, bias=0.12, side="far")
 
     # ---- body: breast and back as one form ------------------------------------
-    _tag(p, "body", p.blob(40.5, 41.5, 11, 7.8, body_m, ang=22, group=1))
-    _tag(p, "body", p.blob(33.5, 39.5, 7.8, 7.8, body_m, group=1))
+    for cx, cy, rx, ry, ang in G["body"]:
+        _tag(p, "body", p.blob(cx, cy, rx, ry, body_m, ang=ang, group=1))
 
-    wing(p, kind, NEAR, beat, 100, side="near")
+    wing(p, kind, G["near"], beat, 100, side="near")
 
     # ---- the swan's neck and head ------------------------------------------------
-    neck = bez3(*NECK, n=24)
-    nw0, nw1 = NECK_W[kind]
+    neck = bez3(*G["neck"], n=24)
+    nw0, nw1 = G["neck_w"]
     _tag(p, "neck", p.limb(neck, nw0, nw1, body_m, group=2), path=neck)
-    _head(p, kind, L)
+    hd = (G["head"][0] - HEAD[0], G["head"][1] - HEAD[1])
+    _moved(p, hd, _head, p, kind, L)
     # the bronze whorl in the breast
-    _tag(p, "whorl", p.circle(WHORL[0], WHORL[1], 3.2, bronze_m, group=6))
+    wx, wy = G["whorl"]
+    _tag(p, "whorl", p.circle(wx, wy, 3.2, bronze_m, group=6))
     if not big:
         return
 
@@ -455,8 +523,10 @@ def fate_front(p, kind, phase):
 def _seam(p, kind, L):
     """The golden thread as a seam: brow down the neck to the whorl, and from
     the whorl along the spine into the tail."""
-    p.stroke(bez3((32, 35), (31, 28), (35.5, 22), (32, 12 - L), n=10), "g2")
-    p.stroke([(34, 38), (38.5, 40), (43.5, 43.5), (47, 46.5)], "g2")
+    G = GEO[kind]
+    neck = bez3(*G["neck"], n=12)
+    p.stroke([(x + 1, y) for x, y in neck], "g2")
+    p.stroke(G["spine"], "g2")
 
 
 def _spindle(p, phase):
@@ -502,10 +572,10 @@ BK_NEAR["rows"] = [dict(rc=26, taper=0.5, n=7, bump=2.4), dict(rc=16, taper=0.45
 BK_FAR = _wing((41, 44), [(43, 1.5), (49, 2), (54.5, 4), (58.5, 8), (61.5, 13.5), (62.5, 19.5), (62.5, 26),
                           (61, 32), (58, 37)], swirl=8, cov=0.42, arm_r=30, sign=1)
 BK_FAR["rows"] = [dict(rc=24, taper=0.5, n=6, bump=2.2), dict(rc=15, taper=0.45, n=4, bump=1.8)]
-BK_NECK = [(32, 51), (24, 41), (48, 42), (41, 32)]
-BK_NECK_W = {k: (w0 * 1.02, w1 * 1.02) for k, (w0, w1) in NECK_W.items()}
-BK_HEAD = (45, 27)
-BK_HEAD_R = {k: (rx * 1.2, ry * 1.2) for k, (rx, ry) in HEAD_R.items()}
+BK_NECK = [(33, 51), (27, 45), (44.5, 45), (40, 37.5)]
+BK_NECK_W = {k: (g["neck_w"][0] * 1.05, g["neck_w"][1] * 1.05) for k, g in GEO.items()}
+BK_HEAD = (44.5, 31)
+BK_HEAD_R = {k: (g["head_r"][0] * 1.2, g["head_r"][1] * 1.2) for k, g in GEO.items()}
 
 
 def fate_back(p, kind):
@@ -519,16 +589,16 @@ def fate_back(p, kind):
     neck = bez3(*BK_NECK, n=24)
     nw0, nw1 = BK_NECK_W[kind]
     _tag(p, "neck", p.limb(neck, nw0, nw1, body_m, group=2), path=neck)
-    _bk_head(p, kind)
+    _moved(p, (BK_HEAD[0] - 45, BK_HEAD[1] - 27), _bk_head, p, kind)
     if p.big:
         _bk_seam(p, kind)
 
 
 def _bk_head(p, kind):
-    hx, hy = BK_HEAD
+    hx, hy = 45, 27
     rx, ry = BK_HEAD_R[kind]
     _tag(p, "head", p.blob(hx, hy, rx, ry, body_m, group=3))
-    tip = {"nemira": (60.5, 29), "lotira": (62.4, 28.5), "thanira": (60, 32)}[kind]
+    tip = {"nemira": (60.5, 29), "lotira": (62, 28.5), "thanira": (60, 32)}[kind]
     _tag(p, "beak", p.lens((hx + rx - 1.5, hy + 1), tip, 4.0, beak_m, fat=0.25, group=7))
     if kind == "nemira":
         for a, b, w in (((41, 22), (30, 19), 5.0), ((40, 25.5), (28.5, 26), 4.6), ((43, 20), (36, 13.5), 4.4)):
@@ -544,28 +614,24 @@ def _bk_head(p, kind):
 
 
 def _bk_seam(p, kind):
-    p.stroke(bez3((32, 50), (24, 41), (48, 42), (41, 32), n=12), "g2")
+    p.stroke(bez3(*BK_NECK, n=12), "g2")
     p.stroke([(31, 50), (31, 56), (31, 63)], "g2")
 
 
 def _bk_spindle(p):
-    _tag(p, "tail", p.lens((14, 47), (8, 56), 9.6, cov_m, fat=0.45, group=60))
-    _tag(p, "whorl2", p.blob(7.5, 57.5, 6.4, 2.4, bronze_m, group=62))
-    _tag(p, "shaft", p.taper([(7.5, 58), (7.5, 63.5)], 2.8, bronze_m, group=61))
+    _tag(p, "tail", p.lens((12, 39), (11, 52), 12.0, cov_m, fat=0.5, group=60))
+    _tag(p, "whorl2", p.blob(11, 53, 9.0, 2.6, bronze_m, group=62))
+    _tag(p, "shaft", p.taper([(11, 54), (11, 61)], 3.0, bronze_m, group=61))
 
 
 def _bk_plume(p):
-    _tag(p, "tail", p.limb([(16, 50), (2.5, 61.5)], 6.4, 4.8, cov_m, group=60))
+    _tag(p, "tail", p.limb([(20, 44), (2, 62)], 8.0, 7.0, cov_m, group=60))
 
 
 def _bk_shears(p):
-    _tag(p, "blade", p.lens((15, 47), (1.5, 56), 5.6, steel_m, fat=0.22, bend=0.6, group=60))
-    _tag(p, "blade", p.lens((17, 51), (5, 63), 5.6, steel_m, fat=0.22, bend=-0.6, group=61))
+    _tag(p, "blade", p.lens((22, 44), (2, 54), 6.4, steel_m, fat=0.22, bend=0.6, group=60))
+    _tag(p, "blade", p.lens((22, 48), (8, 63), 6.4, steel_m, fat=0.22, bend=-0.6, group=61))
 
-
-# --------------------------------------------------------------------------
-# Views
-# --------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------
 # Follower: facing the camera (down) and walking away (up), wings raised
