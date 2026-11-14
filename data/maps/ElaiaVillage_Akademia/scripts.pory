@@ -1,1 +1,316 @@
-mapscripts ElaiaVillage_Akademia_MapScripts {}
+// The Akademia: Daphne, Alethea and the three kraters (beat 3).
+// Room spots (design/phase1/ROOMS_civic.md): the exit mat is (10,12) and the
+// aisle x 8-10 runs clear to Daphne's table. Daphne stands behind it at (10,2);
+// the kraters sit on the table at (9,3) Snivy, (10,3) Cyndaquil, (11,3) Piplup.
+// The player comes up to (10,6), "two tiles below the table". Kleon walks in to
+// (9,6), takes his krater from row 5, and leaves the same way.
+
+const AKADEMIA_BARE_TABLE = 0x2AA   // aka_table_m: the table with its krater gone
+
+mapscripts ElaiaVillage_Akademia_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // Kleon only appears during the scene; Alethea is here until beat 4 ends
+        setflag(FLAG_ICHOR_HIDE_KLEON_ELAIA)
+        if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_AKADEMIA)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKADEMIA)
+        }
+        if (flag(FLAG_ICHOR_GOT_STARTER)) {
+            // she can't be talked to across the deep table, so she comes round its end
+            setobjectxyperm(LOCALID_AKADEMIA_DAPHNE, 7, 3)
+            setobjectmovementtype(LOCALID_AKADEMIA_DAPHNE, MOVEMENT_TYPE_FACE_DOWN)
+        } else {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(ElaiaVillage_Akademia_EventScript_HideTakenKraters)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: ElaiaVillage_Akademia_EventScript_Welcome
+    ]
+}
+
+text ElaiaVillage_Akademia_Name_Daphne { "DAPHNE" }
+text ElaiaVillage_Akademia_Name_Alethea { "ALETHEA" }
+text ElaiaVillage_Akademia_Name_Kleon { "KLEON" }
+text ElaiaVillage_Akademia_Text_ThePokemon { "THE POKéMON" }
+text ElaiaVillage_Akademia_Text_TheStory { "THE STORY" }
+
+script ElaiaVillage_Akademia_EventScript_HideTakenKraters {
+    if (flag(FLAG_ICHOR_HIDE_KRATER_SNIVY)) {
+        setmetatile(9, 3, AKADEMIA_BARE_TABLE, TRUE)
+    }
+    if (flag(FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL)) {
+        setmetatile(10, 3, AKADEMIA_BARE_TABLE, TRUE)
+    }
+    if (flag(FLAG_ICHOR_HIDE_KRATER_PIPLUP)) {
+        setmetatile(11, 3, AKADEMIA_BARE_TABLE, TRUE)
+    }
+}
+
+script ElaiaVillage_Akademia_EventScript_Welcome {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    applymovement(LOCALID_AKADEMIA_ALETHEA, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_AKADEMIA_ALETHEA, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_AKADEMIA_ALETHEA, ElaiaVillage_Akademia_Movement_AletheaComesOver)
+    waitmovement(0)
+    setspeaker(ElaiaVillage_Akademia_Name_Alethea)
+    msgbox(format("There you are! Halia took ages, didn't she?\pMine took three minutes. She said I'm “exhausting.”"))
+    closemessage
+    applymovement(LOCALID_AKADEMIA_ALETHEA, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    setspeaker(ElaiaVillage_Akademia_Name_Alethea)
+    msgbox(format("Professor! {PLAYER}'s here."))
+    closemessage
+    applymovement(LOCALID_AKADEMIA_ALETHEA, ElaiaVillage_Akademia_Movement_AletheaGoesBack)
+    applymovement(LOCALID_AKADEMIA_DAPHNE, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, ElaiaVillage_Akademia_Movement_PlayerToTable)
+    waitmovement(0)
+
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    msgbox(format("{PLAYER}! Come in. Mind the scrolls, they bite.\pBefore anything else, a question. Humor me."))
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    message(format("Which came first? The Pokémon, or the story?"))
+    waitmessage
+    dynmultichoice(18, 6, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE, ElaiaVillage_Akademia_Text_ThePokemon, ElaiaVillage_Akademia_Text_TheStory)
+    if (var(VAR_RESULT) == 0) {
+        setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+        msgbox(format("That's my answer too. I'd love to be wrong, though."))
+    } else {
+        setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+        msgbox(format("Ha! A heretic. Wonderful. Alethea, write that down."))
+        setspeaker(ElaiaVillage_Akademia_Name_Alethea)
+        msgbox(format("I am not writing that down."))
+    }
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    msgbox(format("Now. Every year a few youths go home with a partner.\pThese three came to me this spring. They chose to come.\pI think they've been waiting for someone. Have a look."))
+    closemessage
+
+    // The vanilla select screen (director's ruling 11), then straight back here
+    callnative(ChooseStarterNoBattle)
+    waitstate
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            setflag(FLAG_ICHOR_HIDE_KRATER_SNIVY)
+        case 1:
+            setflag(FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL)
+        default:
+            setflag(FLAG_ICHOR_HIDE_KRATER_PIPLUP)
+    }
+    call(ElaiaVillage_Akademia_EventScript_HideTakenKraters)
+    special(DrawWholeMapView)
+    bufferleadmonspeciesname(STR_VAR_1)
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            msgbox(format("Snivy. Grown, it's the great serpent that guarded Delphoi.\pApollo himself had to shoot it. Don't tell it. It's vain enough."))
+        case 1:
+            msgbox(format("Cyndaquil. Raise it well and it becomes Typhon's fire.\pFather of monsters, the old poets said. Raise it kindly."))
+        default:
+            msgbox(format("Piplup. One day it'll wear a trident on its brow, like the sea-god.\pFor now it mostly falls over. With great dignity."))
+    }
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received {STR_VAR_1}!"))
+    waitmessage
+    waitfanfare
+    msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        setvar(VAR_0x8004, 0)
+        call(Common_EventScript_NameReceivedPartyMon)
+    }
+    setflag(FLAG_ICHOR_GOT_STARTER)
+    setflag(FLAG_SYS_POKEMON_GET)
+
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    msgbox(format("And take this. It's a Pokédex.\pEvery Pokémon you meet, it remembers. Better than I do."))
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received the Pokédex!"))
+    waitmessage
+    waitfanfare
+    setflag(FLAG_SYS_POKEDEX_GET)
+    special(SetUnlockedPokedexFlags)
+    setspeaker(ElaiaVillage_Akademia_Name_Alethea)
+    msgbox(format("I built most of it. She argued with all of it."))
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    msgbox(format("That's called collaboration."))
+    closemessage
+
+    // Kleon barges in
+    hidefollower
+    playse(SE_DOOR)
+    clearflag(FLAG_ICHOR_HIDE_KLEON_ELAIA)
+    addobject(LOCALID_AKADEMIA_KLEON)
+    playbgm(MUS_ENCOUNTER_BRENDAN, FALSE)
+    applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonWalksIn)
+    waitmovement(0)
+    setspeaker(ElaiaVillage_Akademia_Name_Kleon)
+    msgbox(format("Professor Daphne! Kleon of Lakonia. Here for the games.\pYour herald said visitors could have a partner too."))
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    msgbox(format("My herald said visitors could ask."))
+    setspeaker(ElaiaVillage_Akademia_Name_Kleon)
+    msgbox(format("I'm asking."))
+    closemessage
+    applymovement(LOCALID_AKADEMIA_KLEON, Common_Movement_WalkInPlaceFasterRight)
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    delay(24)
+    setspeaker(ElaiaVillage_Akademia_Name_Kleon)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            msgbox(format("A Snivy? Then I want the fire one. Fire eats grass for breakfast."))
+            closemessage
+            applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonToMiddleKrater)
+            waitmovement(0)
+            setflag(FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL)
+        case 1:
+            msgbox(format("Fire, huh? Then the little sea-bird's mine.\pWater puts out fire."))
+            closemessage
+            applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonToRightKrater)
+            waitmovement(0)
+            setflag(FLAG_ICHOR_HIDE_KRATER_PIPLUP)
+        default:
+            msgbox(format("The bird? Then I'll take the snake. Roots drink the sea dry."))
+            closemessage
+            applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonToLeftKrater)
+            waitmovement(0)
+            setflag(FLAG_ICHOR_HIDE_KRATER_SNIVY)
+    }
+    playse(SE_BALL)
+    call(ElaiaVillage_Akademia_EventScript_HideTakenKraters)
+    special(DrawWholeMapView)
+    delay(16)
+    applymovement(LOCALID_AKADEMIA_KLEON, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    setspeaker(ElaiaVillage_Akademia_Name_Kleon)
+    msgbox(format("Thanks, Professor! You won't regret this. Well. You might.\pYou. {PLAYER}, right? Outside. The square.\pEveryone should see this."))
+    closemessage
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonLeavesFromMiddle)
+        case 1:
+            applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonLeavesFromRight)
+        default:
+            applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonLeavesFromLeft)
+    }
+    waitmovement(0)
+    playse(SE_EXIT)
+    removeobject(LOCALID_AKADEMIA_KLEON)
+    setflag(FLAG_ICHOR_KLEON_TOOK_STARTER)
+    fadedefaultbgm
+    applymovement(LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    msgbox(format("…Well. At least he asked."))
+    setspeaker(ElaiaVillage_Akademia_Name_Alethea)
+    msgbox(format("He did not ask."))
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    msgbox(format("Go on, {PLAYER}. A battle is only a question, louder.\pThe last krater stays with me. Someone always comes late."))
+    closemessage
+    releaseall
+}
+
+movement ElaiaVillage_Akademia_Movement_AletheaComesOver {
+    walk_down * 2
+}
+
+movement ElaiaVillage_Akademia_Movement_AletheaGoesBack {
+    walk_up * 2
+    face_up
+}
+
+movement ElaiaVillage_Akademia_Movement_PlayerToTable {
+    walk_up * 6
+}
+
+// From the mat (10,12) to (9,6), one tile left of the player
+movement ElaiaVillage_Akademia_Movement_KleonWalksIn {
+    walk_left
+    walk_up * 6
+    face_up
+}
+
+movement ElaiaVillage_Akademia_Movement_KleonToLeftKrater {
+    walk_up
+    face_up
+}
+
+movement ElaiaVillage_Akademia_Movement_KleonToMiddleKrater {
+    walk_up
+    walk_right
+    face_up
+}
+
+movement ElaiaVillage_Akademia_Movement_KleonToRightKrater {
+    walk_up
+    walk_right * 2
+    face_up
+}
+
+movement ElaiaVillage_Akademia_Movement_KleonLeavesFromLeft {
+    walk_down * 7
+    walk_right
+}
+
+movement ElaiaVillage_Akademia_Movement_KleonLeavesFromMiddle {
+    walk_left
+    walk_down * 7
+    walk_right
+}
+
+movement ElaiaVillage_Akademia_Movement_KleonLeavesFromRight {
+    walk_left * 2
+    walk_down * 7
+    walk_right
+}
+
+script ElaiaVillage_Akademia_EventScript_Daphne {
+    lock
+    faceplayer
+    setspeaker(ElaiaVillage_Akademia_Name_Daphne)
+    if (flag(FLAG_ICHOR_RUINS_CLEARED)) {
+        msgbox(format("Alethea sent me a rubbing of that tablet. Interesting.\p“Where the grain goes underground.” I have a guess.\pBut a guess is only a question that's gotten too confident."))
+    } elif (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
+        msgbox(format("Alethea went up Kronion Hill. She said “digging” and ran.\pThat girl runs toward holes. I've always admired that."))
+    } else {
+        msgbox(format("Go on, {PLAYER}. A battle is only a question, louder."))
+    }
+    release
+}
+
+script ElaiaVillage_Akademia_EventScript_Alethea {
+    setspeaker(ElaiaVillage_Akademia_Name_Alethea)
+    msgbox(format("Don't touch that scroll. Or that one. Actually, don't touch scrolls."), MSGBOX_NPC)
+}
+
+// One script for all three krater cells: is this one still on the table?
+script ElaiaVillage_Akademia_EventScript_Krater {
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    switch (var(VAR_0x8004)) {
+        case 9:
+            goto_if_set(FLAG_ICHOR_HIDE_KRATER_SNIVY, ElaiaVillage_Akademia_EventScript_EmptyKrater)
+        case 10:
+            goto_if_set(FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL, ElaiaVillage_Akademia_EventScript_EmptyKrater)
+        default:
+            goto_if_set(FLAG_ICHOR_HIDE_KRATER_PIPLUP, ElaiaVillage_Akademia_EventScript_EmptyKrater)
+    }
+    msgbox(format("The last starter peers out of its krater. It looks hopeful."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_Akademia_EventScript_EmptyKrater {
+    msgbox(format("A painted krater. Empty now, and still a little warm."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_Akademia_EventScript_WallMap {
+    msgbox(format("A painted map of Aethos. Kalliste is a tiny speck.\pSomeone has drawn an arrow at it labelled “YOU ARE HERE.”"), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_Akademia_EventScript_Scrolls {
+    msgbox(format("“Every myth is a memory of a Pokémon” is carved over the shelf."), MSGBOX_SIGN)
+}
