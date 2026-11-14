@@ -25,9 +25,10 @@ from collections import deque
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-MAPS = ["ElaiaVillage", "ElaiaVillage_PlayersHouse_1F", "ElaiaVillage_PlayersHouse_2F", "ElaiaVillage_NeighborsHouse",
-        "ElaiaVillage_Akademia", "KallisteRoute1", "KallisteRoute1_KronionHill", "AktiTown", "AktiTown_Asclepeion",
-        "AktiTown_Agora", "AktiTown_FishersHouse", "AktiTown_TempleOfHestia"]
+# Every slice map in map_groups.json, so a new house is audited without editing this list.
+SLICE_PREFIXES = ("ElaiaVillage", "KallisteRoute1", "AktiTown")
+_groups = json.loads((ROOT / "data/maps/map_groups.json").read_text())
+MAPS = [m for g in _groups["group_order"] for m in _groups[g] if m.startswith(SLICE_PREFIXES)]
 NUM_PRIMARY = 512
 
 

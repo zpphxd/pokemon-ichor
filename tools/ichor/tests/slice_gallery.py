@@ -39,6 +39,7 @@ SECTIONS = [
         (r"00_daphne_speech_speech_naming$", 1), (r"01_bedroom_bedroom$", 1)]),
     ("02_elaia_morning", "Beat 1: festival morning", [
         (r"01_bedroom_mom_calls_upstairs$", 1), (r"01_bedroom_knucklebones$", 1), (r"01_bedroom_klepsydra_text$", 1),
+        (r"01_bedroom_wall_clock$", 1), (r"01_bedroom_wall_clock_confirm$", 1),
         (r"01_bedroom_naming$", 1), (r"01_mom_mom_comes_over$", 1), (r"01_mom_mom_klotheia$", 1), (r"01_mom_talaria$", 1),
         (r"01_mom_mom_oracle$", 1), (r"01_mom_front_door$", 1), (r"01_kydippe_kydippe$", 1),
         (r"01_kydippe_kydippe_delivered_you$", 1), (r"02_gates_akademia_note$", 1), (r"02_gates_shepherd_gate$", 1)]),
@@ -54,17 +55,19 @@ SECTIONS = [
         (r"04_kleon_kleon_waits$", 1), (r"04_kleon_kleon_there_you_are$", 1), (r"04_kleon_kleon_oracle$", 1),
         (r"04_kleon_prompt_no$", 1), (r"04_kleon_battle$", 1), (r"04_kleon_square_after$", 1),
         (r"04_elaia_after_well$", 1), (r"04_elaia_after_halia_after$", 1), (r"04_elaia_after_village_sign$", 1),
-        (r"04_elaia_after_olive_farmer$", 1), (r"04_elaia_after_mom_after$", 1)]),
+        (r"04_elaia_after_olive_farmer$", 1), (r"04_elaia_after_glykera$", 1), (r"04_elaia_after_kimon$", 1),
+        (r"04_elaia_after_mom_after$", 1)]),
     ("06_route1", "Beat 5: Route 1", [
-        (r"05_route1_north_gate_open$", 1), (r"05_route1_route1_south$", 1), (r"05_route1_carter$", 1),
-        (r"05_route1_wall_youth$", 1), (r"05_route1_battle$", 1), (r"05_route1_tityros_after$", 1),
-        (r"05_grove_battle$", 2), (r"05_grove_olive_farmer$", 1), (r"05_fork_herm_fork$", 1), (r"05_fork_battle$", 1),
-        (r"05_flock_amaryllis_before$", 1), (r"05_flock_flock_wooloo$", 1), (r"05_flock_battle$", 1),
-        (r"05_route1_wild_battle$", 1)]),
+        (r"05_route1_north_gate$", 1), (r"05_route1_route1_south$", 1), (r"05_route1_carter$", 1),
+        (r"05_route1_wall_youth$", 1), (r"05_route1_herm_south$", 1), (r"05_route1_battle$", 4),
+        (r"05_route1_olive_farmer$", 1), (r"05_route1_herm_fork$", 1), (r"05_route1_amaryllis_before$", 1),
+        (r"05_route1_flock_wooloo$", 1), (r"05_route1_wild_battle$", 1), (r"05_road_open_battle$", 1),
+        (r"05_road_open_herm_north$", 1)]),
     ("07_kronion_hill", "Beat 5: Kronion Hill", [
         (r"05_kronion_hill_hill_foot$", 1), (r"05_summit_text_\d+$", 6), (r"05_summit_battle$", 2),
         (r"05_summit_prompt_no$", 1), (r"05_summit_summit_after$", 1), (r"05_summit_stele$", 1),
-        (r"05_summit_pit_after$", 1), (r"05_road_open_flock_gone$", 1), (r"05_road_open_amaryllis_after$", 1)]),
+        (r"05_summit_pit_after$", 1), (r"05_summit_text_0[1-3]$", 1), (r"05_road_open_flock_gone$", 1),
+        (r"05_road_open_amaryllis_after$", 1)]),
     ("08_akti", "Beat 6: Akti, the Asclepeion, the Agora", [
         (r"06_akti_arrival_arrival$", 1), (r"06_akti_arrival_text_0[1-6]$", 3), (r"06_akti_arrival_after_arrival$", 1),
         (r"06_akti_arrival_pilgrim$", 1), (r"06_asclepeion_asclepeion$", 1), (r"06_asclepeion_healer_welcome$", 1),
@@ -90,8 +93,9 @@ SECTIONS = [
     ("11_battles", "Every battle in the slice (the first action menu)", [
         (r"_battle$", 20), (r"_wild_battle$", 1)]),
     ("12_menus", "The start menu and its screens (after the slice)", [
-        (r"menus_start_menu_pokedex$", 1), (r"menus_pokedex$", 1), (r"menus_pokedex_entry$", 1), (r"menus_party$", 1),
-        (r"menus_party_actions$", 1), (r"menus_summary_\d$", 5), (r"menus_bag_pocket_\d$", 5), (r"menus_augury$", 1),
+        (r"menus_start_menu_pokedex$", 1), (r"menus_pokedex$", 1), (r"menus_pokedex_entry$", 1),
+        (r"menus_pokedex_area$", 1), (r"menus_pokedex_size$", 1), (r"menus_party$", 1),
+        (r"menus_party_actions$", 1), (r"menus_summary_[1-3]$", 3), (r"menus_bag_pocket_\d$", 5), (r"menus_augury$", 1),
         (r"menus_trainer_card$", 1), (r"menus_trainer_card_back$", 1), (r"menus_option$", 1)]),
 ]
 

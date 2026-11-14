@@ -84,33 +84,79 @@ end
 
 -- An item ball, a hidden item or a gift: it lands in the bag, and its flag is
 -- set so it can't be had twice.
-local function collect(x, y, flag, item, what, opts)
+-- `where` is a function returning the target (L.npc, L.ball, L.sign, L.hidden),
+-- looked up on the live map each time, so the test follows the map as built.
+local function collect(where, flag, item, what, opts)
   local before = L.itemCount(S[item])
   if getFlag(S[flag]) then L.fail(what .. ": " .. flag .. " already set before collecting") end
-  talk(x, y, opts)
+  local target = where()
+  talk(target, opts)
   local after = L.itemCount(S[item])
   L.check(after > before, string.format("%s: %s in the bag (%d -> %d)", what, item, before, after))
   L.check(getFlag(S[flag]), what .. ": " .. flag .. " set (so it can't be taken twice)")
-  -- and asking again gives nothing more
-  talk(x, y, { from = opts and opts.from, answers = opts and opts.answers })
+  -- and asking again gives nothing more (an item ball is gone: try its tile)
+  talk(target, { answers = opts and opts.answers })
   local again = L.itemCount(S[item])
   L.check(again == after, string.format("%s: a second try gives nothing (%d -> %d)", what, after, again))
 end
+local function npc(script, nth) return function() return L.npc(script, nth) end end
+local function ball(flag) return function() return L.ball(S[flag]) end end
+local function hidden(flag) return function() return L.hidden(S[flag]) end end
+local function sign(script) return function() return L.sign(script) end end
 
 -- A trainer: talk to them (walking there may get the player spotted first, and
 -- the battle is played out on the way), then talk again for the after-battle line
 -- and make sure it isn't a second battle.
-local function trainer(name, x, y, song, opts)
+local function trainer(name, script, song, opts)
   local id = S["TRAINER_" .. name]
   -- (they may already have spotted the player on the way to something else)
-  if not L.defeated(id) then talk(x, y, opts) end
+  if not L.defeated(id) then talk(L.npc(script), opts) end
   expect(L.defeated(id), name .. " is beaten")
   local rec
   for _, b in ipairs(L.battles) do if b.who == name then rec = b end end
   battleCheck(rec, name, song, name)
   local n1 = #L.battles
-  talk(x, y, { shotBefore = string.lower(name) .. "_after" })
+  talk(L.npc(script), { shotBefore = string.lower(name) .. "_after" })
   L.check(#L.battles == n1, name .. " does not battle again")
+end
+
+-- Visit a list of things in the order the map makes shortest: always the nearest
+-- one the player can reach. Returns the ones that can't be reached yet.
+-- Each item: { target = function() ... end, run = function() ... end, name = "..." }
+local function visitAll(list, avoid)
+  local left = {}
+  for _, it in ipairs(list) do left[#left + 1] = it end
+  local deferred = {}
+  while #left > 0 do
+    local i = L.nearest(left, avoid)
+    if not i then break end
+    local it = table.remove(left, i)
+    log("note visiting " .. it.name)
+    -- someone who only appears up close (a flock, a wanderer) can close the way
+    -- on arrival: put it back for later rather than fail
+    local ok, err = pcall(it.run)
+    if not ok then
+      if tostring(err):find("no path from", 1, true) then
+        log("note the way to " .. it.name .. " closed on arrival")
+        deferred[#deferred + 1] = it
+      else
+        error(err, 0)
+      end
+    end
+  end
+  for _, it in ipairs(deferred) do left[#left + 1] = it end
+  for _, it in ipairs(left) do log("note can't reach " .. it.name .. " yet") end
+  return left
+end
+local function visit(name, where, run) return { name = name, target = where, run = run } end
+local function visitTrainer(name, script)
+  return visit(name, npc(script), function() trainer(name, script, S.MUS_BATTLE_TRAINER) end)
+end
+local function visitItem(name, where, flag, item, opts)
+  return visit(name, where, function() collect(where, flag, item, name, opts) end)
+end
+local function visitTalk(name, where, opts)
+  return visit(name, where, function() talk(where(), opts or { shotBefore = name }) end)
 end
 
 -- --- Boot, options, new game -------------------------------------------------------------------
@@ -175,17 +221,22 @@ end
 -- Each beat starts with a save state (<out>states/<name>.ss). SLICE_FROM=<name>
 -- loads that state and plays on from there: handy while fixing one beat, but the
 -- director's run always starts from the title.
+--
+-- Nothing below names a coordinate. People, signs, items, triggers and warps are
+-- found on the live map by the script they run or the flag they set (slice_lib's
+-- L.npc, L.sign, L.ball, L.hidden, L.triggers, L.useWarp, L.leaveEdge), so moving
+-- them on a map never breaks the run; taking one away fails with its name.
 
 local BEATS = {}
 local function beat(name, fn) BEATS[#BEATS + 1] = { name = name, fn = fn } end
-local HALIA_RING = { 10, 14, 18, 20 }
+local E, R1, KH, AK = "ElaiaVillage_EventScript_", "KallisteRoute1_EventScript_",
+                      "KallisteRoute1_KronionHill_EventScript_", "AktiTown_EventScript_"
 
 -- Beat 1: the player's house -----------------------------------------------------------------------
 
 beat("01_bedroom", function()
   mapIs(S.MAP_HOUSE_2F, "woke on 2F")
-  local x, y = pos()
-  expect(x == 5 and y == 5, string.format("by the kline (at %d,%d)", x, y))
+  log(string.format("note woke at (%d,%d)", pos()))
   local name = {}
   for i = 0, 6 do name[#name + 1] = emu:read8(L.sb2() + S.OFF_SB2_NAME + i) end
   local want = IANTHE and { 0xC3, 0xBB, 0xC8, 0xCE, 0xC2, 0xBF, 0xFF } or { 0xCE, 0xC2, 0xBF, 0xC9, 0xFF }
@@ -195,17 +246,17 @@ beat("01_bedroom", function()
          IANTHE and "the player is Ianthe, named IANTHE" or "the player is Theo, named THEO")
   musicIs(S.MUS_ELAIA, "Elaia's theme in the bedroom")
   shot("bedroom")
-  -- the stair gate, the room's objects, then the water clock
-  expect(not go(8, 2, { trigger = true }), "the stair gate stops the player")
+  -- the stair gate, the room's things, then the water clock
+  local gate = L.triggers("ElaiaVillage_PlayersHouse_2F_EventScript_StairGate")
+  expect(not L.goTrigger(gate), "the stair gate stops the player")
   wait(30); shot("mom_calls_upstairs"); settle()
-  x, y = pos()
-  expect(y == 3, "stepped back from the stairs")
-  talk(6, 5, { shotBefore = "knucklebones" })
-  talk(1, 2, { shotBefore = "scrolls" })
-  talk(4, 1, { shotBefore = "water_clock", shots = { [1] = "klepsydra_text" } })
+  expect(not L.onTile(gate), "stepped back from the stairs")
+  talk(L.sign("ElaiaVillage_PlayersHouse_2F_EventScript_Knucklebones"), { shotBefore = "knucklebones" })
+  talk(L.sign("ElaiaVillage_PlayersHouse_2F_EventScript_Scrolls"), { shotBefore = "scrolls" })
+  talk(L.sign("ElaiaVillage_PlayersHouse_2F_EventScript_WaterClock"),
+       { shotBefore = "water_clock", shots = { [1] = "klepsydra_text" } })
   expect(getFlag(S.FLAG_SET_WATER_CLOCK), "the water clock is set")
-  go(8, 2)
-  L.enter(K.UP, S.MAP_HOUSE_1F, "the stairs down", true)
+  L.useWarp(S.MAP_HOUSE_1F, true)
 end)
 
 beat("01_mom", function()
@@ -213,38 +264,38 @@ beat("01_mom", function()
   settle({ shots = { [3] = "mom_klotheia", [7] = "talaria", [13] = "mom_oracle" } })
   flagsSet({ "FLAG_TALKED_TO_MOM", "FLAG_SYS_B_DASH", "FLAG_RECEIVED_RUNNING_SHOES" }, "Mom gave the Talaria")
   shot("downstairs")
-  talk(1, 3, { shotBefore = "hearth" })
-  go(5, 8)
-  L.enter(K.DOWN, S.MAP_ELAIA, "the front door")
+  talk(L.sign("ElaiaVillage_PlayersHouse_1F_EventScript_Hearth"), { shotBefore = "hearth" })
+  L.useWarp(S.MAP_ELAIA)
   mapIs(S.MAP_ELAIA, "out of the front door into Elaia")
   musicIs(S.MUS_ELAIA, "Elaia's theme in the village")
   shot("front_door")
 end)
 
 beat("01_kydippe", function()
-  go(17, 7)
-  L.enter(K.UP, S.MAP_KYDIPPE, "Kydippe's door")
-  collect(2, 2, "FLAG_GOT_KYDIPPE_ORAN", "ITEM_ORAN_BERRY", "Kydippe's Oran Berries",
-          { shotBefore = "kydippe", shots = { [2] = "kydippe_delivered_you" } })
-  talk(2, 2, { shotBefore = "kydippe_after" })
-  go(4, 7)
-  L.enter(K.DOWN, S.MAP_ELAIA, "Kydippe's door out")
+  L.useWarp(S.MAP_KYDIPPE)
+  collect(npc("ElaiaVillage_NeighborsHouse_EventScript_Kydippe"), "FLAG_GOT_KYDIPPE_ORAN", "ITEM_ORAN_BERRY",
+          "Kydippe's Oran Berries", { shotBefore = "kydippe", shots = { [2] = "kydippe_delivered_you" } })
+  talk(L.npc("ElaiaVillage_NeighborsHouse_EventScript_Kydippe"), { shotBefore = "kydippe_after" })
+  L.useWarp(S.MAP_ELAIA)
 end)
 
 -- Beat 2: the gates, then Halia --------------------------------------------------------------------
 
 beat("02_gates", function()
-  expect(not go(5, 30, { trigger = true, avoid = HALIA_RING }), "the note on the Akademia door")
+  local ring = L.triggers(E .. "HaliaCalls")
+  local note = L.triggers(E .. "AkademiaNote")
+  expect(not L.goTrigger(note, { avoid = ring }), "the note on the Akademia door")
   wait(40); shot("akademia_note"); settle()
   expect(not getFlag(S.FLAG_THREAD_READ), "the thread is still unread")
-  expect(not go(11, 2, { trigger = true, avoid = HALIA_RING }), "the old shepherd stops the player")
+  expect(mapId() == S.MAP_ELAIA and not L.onTile(note), "stepped back from the door")
+  local gate = L.triggers(E .. "ShepherdGate")
+  expect(not L.goTrigger(gate, { avoid = ring }), "the old shepherd stops the player")
   wait(30); shot("shepherd_gate"); settle()
-  local _, y = pos()
-  expect(y == 3, "turned back from the road")
+  expect(not L.onTile(gate), "turned back from the road")
 end)
 
 beat("02_halia", function()
-  expect(not go(14, 18, { trigger = true }), "Halia calls the player into line")
+  expect(not L.goTrigger(L.triggers(E .. "HaliaCalls")), "Halia calls the player into line")
   wait(30); shot("halia_calls")
   settle({ answers = { "no" }, shots = { [3] = "korinna_reading", [8] = "philon_reading", [12] = "your_hand",
                                          [14] = "hm", [15] = "turn_around", [16] = "again",
@@ -256,8 +307,7 @@ end)
 -- Beat 3: the Akademia -----------------------------------------------------------------------------
 
 beat("03_akademia", function()
-  go(5, 30)
-  L.enter(K.UP, S.MAP_AKADEMIA, "the Akademia door", true)
+  L.useWarp(S.MAP_AKADEMIA, true)
   musicIs(S.MUS_AKADEMIA, "the Akademia's lyre theme")
   shot("akademia_alethea")
   settle({ every = true, answers = { "down", "no" }, hooks = {
@@ -280,8 +330,7 @@ beat("03_akademia", function()
   local species, growth, exp = L.assistLevel100()
   log(string.format("ok ASSIST: starter (species %d, growth %d) set to level 100 (exp %d)", species, growth, exp))
   shot("last_krater")
-  go(10, 12)
-  L.enter(K.DOWN, S.MAP_ELAIA, "the Akademia's door out")
+  L.useWarp(S.MAP_ELAIA)
 end)
 
 -- Beat 4: Kleon's battle, Alethea, and the village after ------------------------------------------------
@@ -289,7 +338,7 @@ end)
 beat("04_kleon", function()
   expect(not getFlag(S.FLAG_HIDE_KLEON_ELAIA), "Kleon waits in the square")
   shot("kleon_waits")
-  expect(not go(14, 19, { trigger = true }), "Kleon calls the player at the steps")
+  expect(not L.goTrigger(L.triggers(E .. "KleonTrigger")), "Kleon calls the player at the steps")
   wait(40); shot("kleon_there_you_are")
   local _, fought = settle({ answers = { "no" }, shots = { [4] = "kleon_oracle", [6] = "kleon_battle_me" } })
   expect(#fought == 1, "one battle with Kleon")
@@ -304,68 +353,94 @@ beat("04_kleon", function()
 end)
 
 beat("04_elaia_after", function()
-  -- the village's things to find
-  collect(24, 11, "FLAG_ITEM_ELAIA_POTION", "ITEM_POTION", "the Potion by the olive press")
-  collect(23, 14, "FLAG_GOT_ELAIA_RELIC_COPPER", "ITEM_RELIC_COPPER", "the Relic Copper in the well",
-          { shotBefore = "well" })
-  collect(5, 3, "FLAG_HIDDEN_ELAIA_HONEY", "ITEM_HONEY", "the Honey at Mom's beehives")
-  -- the villagers after the battle
-  talk(14, 15, { shotBefore = "halia_after" })
-  talk(14, 5, { shotBefore = "village_sign" })
-  talk(26, 12, { shotBefore = "olive_farmer" })
+  visitAll({
+    visitItem("the Potion by the olive press", ball("FLAG_ITEM_ELAIA_POTION"), "FLAG_ITEM_ELAIA_POTION", "ITEM_POTION"),
+    visitItem("the Relic Copper in the well", sign(E .. "Well"), "FLAG_GOT_ELAIA_RELIC_COPPER", "ITEM_RELIC_COPPER",
+              { shotBefore = "well" }),
+    visitItem("the Honey at Mom's beehives", hidden("FLAG_HIDDEN_ELAIA_HONEY"), "FLAG_HIDDEN_ELAIA_HONEY", "ITEM_HONEY"),
+    visitTalk("halia_after", npc(E .. "Halia")),
+    visitTalk("village_sign", sign(E .. "VillageSign")),
+    visitTalk("olive_farmer", npc(E .. "OliveFarmer")),
+  })
+  -- Glykera's bakery: the comb from Mom's hives buys two honey cakes
+  local BK = "ElaiaVillage_BakersHouse_EventScript_"
+  L.useWarp(S.MAP_BAKERS_HOUSE)
+  expect(L.idle(), "no scene plays in Glykera's house")
+  local honey, cakes = L.itemCount(S.ITEM_HONEY), L.itemCount(S.ITEM_OLD_GATEAU)
+  talk(L.npc(BK .. "Glykera"), { shotBefore = "glykera" })
+  expect(getFlag(S.FLAG_GOT_GLYKERA_CAKES), "Glykera trades the comb for honey cakes (FLAG_ICHOR_GOT_GLYKERA_CAKES)")
+  L.check(L.itemCount(S.ITEM_HONEY) == honey - 1, "Glykera takes the Honey")
+  L.check(L.itemCount(S.ITEM_OLD_GATEAU) == cakes + 2,
+          string.format("two honey cakes in the bag (ITEM_OLD_GATEAU %d -> %d)", cakes, L.itemCount(S.ITEM_OLD_GATEAU)))
+  talk(L.npc(BK .. "Glykera"), { shotBefore = "glykera_after" })
+  L.check(L.itemCount(S.ITEM_OLD_GATEAU) == cakes + 2, "asking Glykera again gives no more cakes")
+  visitAll({
+    -- Kimon offers his Finizen for a Wooloo, which the slice's run doesn't catch: say no
+    visitTalk("kimon", npc(BK .. "Kimon"), { shotBefore = "kimon", answers = { "no" } }),
+    visitTalk("bakery_oven", sign(BK .. "Oven")),
+    visitTalk("honey_shelf", sign(BK .. "HoneyShelf")),
+    visitTalk("pithos", sign(BK .. "Pithos")),
+    visitTalk("model_trireme", sign(BK .. "ModelTrireme")),
+    visitTalk("bakery_window", sign(BK .. "Window")),
+  })
+  L.useWarp(S.MAP_ELAIA)
   -- home: Mom's after-battle line and her offer of a meal
-  go(5, 9)
-  L.enter(K.UP, S.MAP_HOUSE_1F, "the front door")
+  L.useWarp(S.MAP_HOUSE_1F)
   expect(L.idle(), "no scene replays at home")
-  talk(3, 3, { shotBefore = "mom_after", answers = { "yes" } })
-  go(5, 8)
-  L.enter(K.DOWN, S.MAP_ELAIA, "the front door")
+  talk(L.npc("ElaiaVillage_PlayersHouse_1F_EventScript_Mom"), { shotBefore = "mom_after", answers = { "yes" } })
+  L.useWarp(S.MAP_ELAIA)
 end)
 
 -- Beat 5: Route 1 and Kronion Hill -------------------------------------------------------------------
+-- Everything on the route is visited nearest-first; what the flock walls off
+-- waits for the second pass, after the hill.
 
+local route1Later
 beat("05_route1", function()
-  go(11, 1)
-  shot("north_gate_open")
-  L.enter(K.UP, S.MAP_ROUTE1, "Route 1")
+  shot("north_gate")
+  L.leaveEdge("up", S.MAP_ROUTE1)
   musicIs(S.MUS_ROUTE1, "the Route 1 theme")
   shot("route1_south")
-  collect(16, 56, "FLAG_GOT_MOOMOO_MILK", "ITEM_MOOMOO_MILK", "the carter's Moomoo Milk", { shotBefore = "carter" })
-  talk(5, 55, { shotBefore = "wall_youth" })
-  trainer("TITYROS", 7, 48, S.MUS_BATTLE_TRAINER)
-  collect(3, 42, "FLAG_ITEM_ROUTE1_POKE_BALL", "ITEM_POKE_BALL", "the Poke Ball past Tityros")
-end)
-
-beat("05_grove", function()
-  trainer("PHYLLIS", 25, 37, S.MUS_BATTLE_TRAINER)
-  collect(27, 35, "FLAG_ITEM_ROUTE1_MIRACLE_SEED", "ITEM_MIRACLE_SEED", "the Miracle Seed in the grove")
-  collect(4, 29, "FLAG_HIDDEN_ROUTE1_ANTIDOTE", "ITEM_ANTIDOTE", "the hidden Antidote")
-  collect(7, 24, "FLAG_GOT_ROUTE1_SITRUS", "ITEM_SITRUS_BERRY", "the olive farmer's Sitrus Berry",
-          { shotBefore = "olive_farmer" })
-  collect(6, 24, "FLAG_HIDDEN_ROUTE1_ORAN", "ITEM_ORAN_BERRY", "the Oran Berry under the big olive")
-  trainer("KOMATAS", 18, 25, S.MUS_BATTLE_TRAINER)
-end)
-
-beat("05_fork", function()
-  collect(15, 20, "FLAG_ITEM_ROUTE1_POTION", "ITEM_POTION", "the Potion at the fork herm")
-  talk(14, 20, { shotBefore = "herm_fork" })
-  trainer("AGIS", 15, 16, S.MUS_BATTLE_TRAINER)
-  collect(15, 14, "FLAG_HIDDEN_ROUTE1_REPEL", "ITEM_REPEL", "the Repel in the wall")
-end)
-
-beat("05_flock", function()
   expect(not getFlag(S.FLAG_HIDE_FLOCK), "the flock is on the road")
-  talk(10, 15, { shotBefore = "amaryllis_before" })
-  talk(11, 14, { shotBefore = "flock_wooloo" })
-  trainer("POLYEIDOS", 27, 18, S.MUS_BATTLE_TRAINER)
+  route1Later = visitAll({
+    visitItem("the carter's Moomoo Milk", npc(R1 .. "Carter"), "FLAG_GOT_MOOMOO_MILK", "ITEM_MOOMOO_MILK",
+              { shotBefore = "carter" }),
+    visitTalk("wall_youth", npc(R1 .. "WallYouth")),
+    visitTalk("herm_south", sign(R1 .. "HermSouth")),
+    visitTrainer("TITYROS", R1 .. "Tityros"),
+    visitItem("the Route 1 Poke Ball", ball("FLAG_ITEM_ROUTE1_POKE_BALL"), "FLAG_ITEM_ROUTE1_POKE_BALL", "ITEM_POKE_BALL"),
+    visitTrainer("PHYLLIS", R1 .. "Phyllis"),
+    visitItem("the Miracle Seed", ball("FLAG_ITEM_ROUTE1_MIRACLE_SEED"), "FLAG_ITEM_ROUTE1_MIRACLE_SEED", "ITEM_MIRACLE_SEED"),
+    visitItem("the hidden Antidote", hidden("FLAG_HIDDEN_ROUTE1_ANTIDOTE"), "FLAG_HIDDEN_ROUTE1_ANTIDOTE", "ITEM_ANTIDOTE"),
+    visitItem("the hidden Repel", hidden("FLAG_HIDDEN_ROUTE1_REPEL"), "FLAG_HIDDEN_ROUTE1_REPEL", "ITEM_REPEL"),
+    visitItem("the olive farmer's Sitrus Berry", npc(R1 .. "OliveFarmer"), "FLAG_GOT_ROUTE1_SITRUS", "ITEM_SITRUS_BERRY",
+              { shotBefore = "olive_farmer" }),
+    visitItem("the Oran Berry under the big olive", hidden("FLAG_HIDDEN_ROUTE1_ORAN"), "FLAG_HIDDEN_ROUTE1_ORAN",
+              "ITEM_ORAN_BERRY"),
+    visitTrainer("KOMATAS", R1 .. "Komatas"),
+    visitItem("the Route 1 Potion", ball("FLAG_ITEM_ROUTE1_POTION"), "FLAG_ITEM_ROUTE1_POTION", "ITEM_POTION"),
+    visitTalk("herm_fork", sign(R1 .. "HermFork")),
+    visitTrainer("AGIS", R1 .. "Agis"),
+    visitTrainer("POLYEIDOS", R1 .. "Polyeidos"),
+    visitTalk("amaryllis_before", npc(R1 .. "Amaryllis")),
+    visitTalk("flock_wooloo", npc(R1 .. "FlockWooloo")),
+    visitTalk("herm_north", sign(R1 .. "HermNorth")),
+  })
+  -- the flock is still there, so the road north is shut
+  for _, it in ipairs(route1Later) do
+    if it.name == "flock_wooloo" or it.name == "amaryllis_before" then
+      L.check(false, "the flock (or Amaryllis) can be reached before the hill: " .. it.name)
+    end
+  end
+  log(string.format("note %d thing(s) on Route 1 wait for the flock to move", #route1Later))
 end)
 
 beat("05_kronion_hill", function()
-  go(29, 19)
-  L.enter(K.RIGHT, S.MAP_KRONION, "Kronion Hill")
+  if not route1Later then route1Later = {} end
+  L.leaveEdge("right", S.MAP_KRONION)
   shot("hill_foot")
   musicIs(S.MUS_ROUTE1, "Kronion Hill keeps the route's theme")
-  expect(not go(5, 11, { trigger = true }), "the summit scene starts at the top of the stair")
+  expect(not L.goTrigger(L.triggers(KH .. "SummitScene")), "the summit scene starts at the top of the stair")
 end)
 
 beat("05_summit", function()
@@ -376,52 +451,64 @@ beat("05_summit", function()
   flagsSet({ "FLAG_RUINS_CLEARED", "FLAG_FOUND_TABLET", "FLAG_DEXNAV_GET", "FLAG_HIDE_ALETHEA_RUINS",
              "FLAG_HIDE_RUINS_GRUNTS", "FLAG_HIDE_TITAN_TABLET", "FLAG_HIDE_FLOCK" }, "the summit's flags")
   shot("summit_after")
-  collect(12, 8, "FLAG_ITEM_KRONION_ESCAPE_ROPE", "ITEM_ESCAPE_ROPE", "the grunts' Escape Rope")
-  collect(15, 8, "FLAG_HIDDEN_KRONION_HARD_STONE", "ITEM_HARD_STONE", "the Hard Stone in the rubble")
-  collect(11, 5, "FLAG_HIDDEN_KRONION_STARDUST", "ITEM_STARDUST", "the Stardust behind the altar")
-  talk(4, 11, { shotBefore = "stele" })
-  talk(11, 7, { shotBefore = "pit_after" })
+  visitAll({
+    visitItem("the grunts' Escape Rope", ball("FLAG_ITEM_KRONION_ESCAPE_ROPE"), "FLAG_ITEM_KRONION_ESCAPE_ROPE",
+              "ITEM_ESCAPE_ROPE"),
+    visitItem("the Hard Stone", hidden("FLAG_HIDDEN_KRONION_HARD_STONE"), "FLAG_HIDDEN_KRONION_HARD_STONE", "ITEM_HARD_STONE"),
+    visitItem("the Stardust", hidden("FLAG_HIDDEN_KRONION_STARDUST"), "FLAG_HIDDEN_KRONION_STARDUST", "ITEM_STARDUST"),
+    visitTalk("stele", sign(KH .. "Stele")),
+    visitTalk("altar", sign(KH .. "Altar")),
+    visitTalk("pit_after", sign(KH .. "Pit"), { shotBefore = "pit_after", every = true }),
+  })
 end)
 
 beat("05_road_open", function()
-  go(0, 17)
-  L.enter(K.LEFT, S.MAP_ROUTE1, "back to Route 1")
+  if not route1Later then L.fail("resume at 05_route1 or earlier: the second Route 1 pass needs the first") end
+  L.leaveEdge("left", S.MAP_ROUTE1)
   shot("flock_gone")
-  talk(10, 15, { shotBefore = "amaryllis_after" })
-  go(11, 0)
+  -- the second pass: whatever the flock walled off, then Amaryllis's after-line
+  for i = #route1Later, 1, -1 do
+    local n = route1Later[i].name
+    if n == "flock_wooloo" or n == "amaryllis_before" then table.remove(route1Later, i) end
+  end
+  local left = visitAll(route1Later)
+  L.check(#left == 0, string.format("everything on Route 1 can be reached after the hill (%d left)", #left))
+  talk(L.npc(R1 .. "Amaryllis"), { shotBefore = "amaryllis_after" })
 end)
 
 -- Beat 6: Akti --------------------------------------------------------------------------------------
 
 beat("06_akti_arrival", function()
-  L.enter(K.UP, S.MAP_AKTI, "Akti", true)
+  L.leaveEdge("up", S.MAP_AKTI, true)
   shot("arrival")
   settle({ every = true })
   flagsSet({ "FLAG_ARRIVED_AKTI", "FLAG_VISITED_AKTI" }, "arrived in Akti")
   musicIs(S.MUS_AKTI, "Akti's theme")
   shot("after_arrival")
-  talk(9, 25, { shotBefore = "diktys_after" })
-  talk(14, 24, { shotBefore = "town_sign" })
-  collect(7, 24, "FLAG_HIDDEN_AKTI_SUPER_POTION", "ITEM_SUPER_POTION", "the Super Potion behind Diktys's nets")
-  talk(6, 23, { shotBefore = "pilgrim" })
+  talk(L.npc(AK .. "Diktys"), { shotBefore = "diktys_after" })
+  talk(L.sign(AK .. "TownSign"), { shotBefore = "town_sign" })
+  collect(hidden("FLAG_HIDDEN_AKTI_SUPER_POTION"), "FLAG_HIDDEN_AKTI_SUPER_POTION", "ITEM_SUPER_POTION",
+          "the Super Potion behind Diktys's nets")
+  talk(L.npc(AK .. "Pilgrim"), { shotBefore = "pilgrim" })
 end)
 
 beat("06_asclepeion", function()
-  go(3, 23)
-  L.enter(K.UP, S.MAP_ASCLEPEION, "the Asclepeion")
+  L.useWarp(S.MAP_ASCLEPEION)
   musicIs(S.MUS_ASCLEPEION, "the Asclepeion's theme")
   shot("asclepeion")
   log(string.format("note party HP before the heal: %d/%d", L.partyHp(0)))
-  talk(7, 2, { from = { { 7, 4 } }, shotBefore = "healer", shots = { [1] = "healer_welcome", [3] = "healer_rest" } })
+  talk(L.npc("AktiTown_Asclepeion_EventScript_Healer"),
+       { shotBefore = "healer", shots = { [1] = "healer_welcome", [3] = "healer_rest" } })
   local hp, maxHp = L.partyHp(0)
   expect(hp == maxHp and hp > 1, string.format("the healer restored the party (%d/%d)", hp, maxHp))
   local hmap, hx, hy = L.lastHeal()
   expect(hmap == S.MAP_AKTI, string.format("the respawn point is Akti (map %d at %d,%d)", hmap, hx, hy))
-  talk(13, 9, { shotBefore = "bandaged_fisher" })
-  talk(3, 3, { shotBefore = "old_man" })
-  talk(2, 2, { shotBefore = "statue" })
-  talk(14, 3, { shotBefore = "pithos_woman" })
-  go(10, 5)
+  visitAll({
+    visitTalk("bandaged_fisher", npc("AktiTown_Asclepeion_EventScript_BandagedFisher")),
+    visitTalk("old_man", npc("AktiTown_Asclepeion_EventScript_OldMan")),
+    visitTalk("statue", sign("AktiTown_Asclepeion_EventScript_Statue")),
+    visitTalk("pithos_woman", npc("AktiTown_Asclepeion_EventScript_PithosWoman")),
+  })
 end)
 
 beat("06_save", function()
@@ -457,18 +544,16 @@ beat("06_save", function()
   expect(L.partyLevel(0) == level and L.partyHp(0) == hp, "the party is as it was saved")
   flagsSet({ "FLAG_ARRIVED_AKTI", "FLAG_RUINS_CLEARED", "FLAG_KLEON_BATTLE_1_DONE" }, "story flags survive the reload")
   musicIs(S.MUS_ASCLEPEION, "the Asclepeion's theme after the reload")
-  go(7, 10)
-  L.enter(K.DOWN, S.MAP_AKTI, "out of the Asclepeion")
+  L.useWarp(S.MAP_AKTI)
 end)
 
 beat("06_agora", function()
-  go(7, 17)
-  L.enter(K.UP, S.MAP_AGORA, "the Agora")
+  L.useWarp(S.MAP_AGORA)
   shot("agora")
-  log(string.format("note the Agora plays %s (map music id %d)", L.song(), L.mapMusic()))
+  musicIs(S.MUS_AGORA, "the Agora's theme")
   -- The shop's BUY/SELL/QUIT menu and its item list are not script prompts, so
   -- this one is played by hand.
-  talk(3, 2, { from = { { 3, 4 } }, shotBefore = "demeas", noSettle = true })
+  talk(L.npc("AktiTown_Agora_EventScript_Demeas"), { shotBefore = "demeas", noSettle = true })
   wait(40); shot("demeas_welcome")
   local t0 = now()
   while not L.taskRunning("Task_ShopMenu") do
@@ -483,114 +568,122 @@ beat("06_agora", function()
   wait(20); shot("agora_menu_again"); tap(K.B)                        -- QUIT
   wait(40); shot("demeas_bye")
   settle()
-  talk(9, 3, { shotBefore = "customer_man" })
-  go(6, 8)
-  L.enter(K.DOWN, S.MAP_AKTI, "out of the Agora")
+  visitAll({
+    visitTalk("customer_man", npc("AktiTown_Agora_EventScript_CustomerMan")),
+    visitTalk("customer_girl", npc("AktiTown_Agora_EventScript_CustomerGirl")),
+  })
+  L.useWarp(S.MAP_AKTI)
 end)
 
 beat("06_fishers_house", function()
-  go(3, 15)
-  L.enter(K.UP, S.MAP_FISHERS, "the Fisher's house")
+  L.useWarp(S.MAP_FISHERS)
   shot("fishers_house")
-  collect(3, 2, "FLAG_GOT_OLD_ROD", "ITEM_OLD_ROD", "Glaukos's Old Rod",
+  collect(npc("AktiTown_FishersHouse_EventScript_Glaukos"), "FLAG_GOT_OLD_ROD", "ITEM_OLD_ROD", "Glaukos's Old Rod",
           { shotBefore = "glaukos", answers = { "no" }, every = true })
-  talk(6, 6, { shotBefore = "grandson" })
-  go(4, 7)
-  L.enter(K.DOWN, S.MAP_AKTI, "out of the Fisher's house")
+  talk(L.npc("AktiTown_FishersHouse_EventScript_Grandson"), { shotBefore = "grandson" })
+  L.useWarp(S.MAP_AKTI)
 end)
 
 beat("06_harbor_before", function()
   -- The quay's west end (and the Potion among its crates) is reached only past
   -- the tile Kleon stands on until the ending; it is collected in 08_after.
-  L.check(L.canReachNextTo(2, 10), "the Potion among the quay crates (2,10) can be reached before the ending")
-  talk(5, 10, { shotBefore = "kleon_before", shots = { [2] = "kleon_soup" } })
-  talk(7, 9, { shotBefore = "nausikles_before" })
-  talk(8, 9, { shotBefore = "rower" })
-  collect(16, 10, "FLAG_ITEM_AKTI_PARALYZE_HEAL", "ITEM_PARALYZE_HEAL", "the Paralyze Heal by the fish stall")
-  talk(18, 9, { shotBefore = "fishwife" })
-  talk(14, 5, { shotBefore = "pier_kid" })
-  collect(23, 6, "FLAG_GOT_MYSTIC_WATER", "ITEM_MYSTIC_WATER", "Hydna's Mystic Water", { shotBefore = "hydna" })
-  collect(21, 8, "FLAG_HIDDEN_AKTI_HEART_SCALE", "ITEM_HEART_SCALE", "the Heart Scale on the beach")
-  collect(24, 4, "FLAG_HIDDEN_AKTI_PEARL", "ITEM_PEARL", "the Pearl on the tide rocks")
-  talk(17, 17, { shotBefore = "temple_old_woman" })
+  L.finding(L.distanceTo(L.ball(S.FLAG_ITEM_AKTI_POTION)) ~= nil,
+            "the Potion among the quay crates can be reached before the ending (QA.md m1)")
+  visitAll({
+    visitTalk("kleon_before", npc(AK .. "Kleon"), { shotBefore = "kleon_before", shots = { [2] = "kleon_soup" } }),
+    visitTalk("nausikles_before", npc(AK .. "Nausikles")),
+    visitTalk("rower", npc(AK .. "Rower")),
+    visitItem("the Paralyze Heal by the fish stall", ball("FLAG_ITEM_AKTI_PARALYZE_HEAL"), "FLAG_ITEM_AKTI_PARALYZE_HEAL",
+              "ITEM_PARALYZE_HEAL"),
+    visitTalk("fishwife", npc(AK .. "Fishwife")),
+    visitTalk("pier_kid", npc(AK .. "Kid")),
+    visitTalk("islet_fisher", npc(AK .. "IsletFisher")),
+    visitItem("Hydna's Mystic Water", npc(AK .. "Hydna"), "FLAG_GOT_MYSTIC_WATER", "ITEM_MYSTIC_WATER",
+              { shotBefore = "hydna" }),
+    visitItem("the Heart Scale on the beach", hidden("FLAG_HIDDEN_AKTI_HEART_SCALE"), "FLAG_HIDDEN_AKTI_HEART_SCALE",
+              "ITEM_HEART_SCALE"),
+    visitItem("the Pearl on the tide rocks", hidden("FLAG_HIDDEN_AKTI_PEARL"), "FLAG_HIDDEN_AKTI_PEARL", "ITEM_PEARL"),
+    visitTalk("grotto_rubble", sign(AK .. "GrottoRubble")),
+    visitTalk("goat", npc(AK .. "Goat")),
+    visitTalk("quay_sign", sign(AK .. "QuaySign")),
+    visitTalk("temple_old_woman", npc(AK .. "OldWoman")),
+  })
 end)
 
 -- Beat 7: the Temple of Hestia ----------------------------------------------------------------------
 
+local T = "AktiTown_TempleOfHestia_EventScript_"
 beat("07_temple", function()
-  go(19, 17)
-  L.enter(K.UP, S.MAP_TEMPLE, "the Temple of Hestia")
+  L.useWarp(S.MAP_TEMPLE)
   musicIs(S.MUS_TEMPLE, "the Temple's theme")
   shot("temple_entry")
   expect(L.getVar(S.VAR_HEARTH_TRIAL) == 0, "no flame on arrival")
-  talk(9, 22, { shotBefore = "euboulos" })
-  talk(6, 21, { shotBefore = "hymn", every = true })
-  -- up the west side of the hall, out of Lampon's sight (he faces down column 8)
-  talk(7, 14, { from = { { 7, 15 } }, shotBefore = "hands_off", avoid = { 8, 16, 8, 22 } })
+  talk(L.npc(T .. "Euboulos"), { shotBefore = "euboulos" })
+  talk(L.sign(T .. "Stele"), { shotBefore = "hymn", every = true })
+  -- to the hearth out of Lampon's sight: he won't let go of it yet
+  talk(L.sign(T .. "GreatHearth"), { shotBefore = "hands_off", avoid = L.sight(T .. "Lampon") })
   expect(L.getVar(S.VAR_HEARTH_TRIAL) == 0, "no flame before Lampon is beaten")
-  trainer("LAMPON", 8, 15, S.MUS_BATTLE_TRAINER)
+  trainer("LAMPON", T .. "Lampon", S.MUS_BATTLE_TRAINER)
 end)
 
 beat("07_hearth_trial", function()
-  local function light(x, y, want, what, opts)
-    opts = opts or {}
-    opts.shotBefore = what
-    talk(x, y, opts)
+  local function light(script, want, what)
+    talk(L.sign(script), { shotBefore = what })
     expect(L.getVar(S.VAR_HEARTH_TRIAL) == want, string.format("%s (trial %d)", what, L.getVar(S.VAR_HEARTH_TRIAL)))
     shot(what .. "_done")
   end
-  light(7, 14, 1, "take_flame", { from = { { 7, 15 } } })
-  light(13, 4, 2, "door_brazier")
-  light(3, 4, 3, "table_brazier")
-  light(3, 16, 4, "loom_brazier")
-  light(13, 16, 5, "bed_brazier")
-  talk(7, 14, { from = { { 7, 15, "up" }, { 9, 15, "up" } }, shotBefore = "return_flame", every = true })
+  -- the order of the hymn: Door, Table, Loom, Bed
+  light(T .. "GreatHearth", 1, "take_flame")
+  light(T .. "BrazierDoor", 2, "door_brazier")
+  light(T .. "BrazierTable", 3, "table_brazier")
+  light(T .. "BrazierLoom", 4, "loom_brazier")
+  light(T .. "BrazierBed", 5, "bed_brazier")
+  talk(L.sign(T .. "GreatHearth"), { shotBefore = "return_flame", every = true })
   flagsSet({ "FLAG_TRIAL_DONE", "FLAG_GOT_CHARCOAL" }, "the trial is done and the Charcoal found")
   expect(L.getVar(S.VAR_HEARTH_TRIAL) == 6 and L.itemCount(S.ITEM_CHARCOAL) == 1, "trial var 6, one Charcoal")
-  trainer("PYRRHA", 3, 12, S.MUS_BATTLE_TRAINER)
-  trainer("AITHRA", 12, 17, S.MUS_BATTLE_TRAINER)
+  trainer("PYRRHA", T .. "Pyrrha", S.MUS_BATTLE_TRAINER)
+  trainer("AITHRA", T .. "Aithra", S.MUS_BATTLE_TRAINER)
 end)
 
 beat("07_ione", function()
   local n0 = #L.battles
-  talk(8, 3, { from = { { 8, 5, "up" } }, shotBefore = "ione", every = true })
+  talk(L.npc(T .. "Ione"), { shotBefore = "ione", every = true })
   local rec
   for i = n0 + 1, #L.battles do if L.battles[i].who == "IONE" then rec = L.battles[i] end end
   battleCheck(rec, "IONE", S.MUS_BATTLE_RIVAL, "Ione")
   flagsSet({ "FLAG_BADGE01_GET", "FLAG_GOT_TM_FACADE" }, "the Hearth Laurel and TM42")
   expect(L.itemCount(S.ITEM_TM42) == 1, "TM42 Facade in the bag")
   local n1 = #L.battles
-  talk(8, 3, { from = { { 8, 5, "up" } }, shotBefore = "ione_after" })
+  talk(L.npc(T .. "Ione"), { shotBefore = "ione_after" })
   expect(#L.battles == n1, "Ione does not battle again")
-  talk(15, 3, { shotBefore = "kanthos" })
-  talk(9, 22, { shotBefore = "euboulos_after" })
+  talk(L.npc(T .. "Kanthos"), { shotBefore = "kanthos" })
+  talk(L.npc(T .. "Euboulos"), { shotBefore = "euboulos_after" })
 end)
 
 -- Beat 8: the harbor ---------------------------------------------------------------------------------
 
 beat("08_harbor_part1", function()
-  go(8, 23)
-  L.enter(K.DOWN, S.MAP_AKTI, "out of the Temple", true)
+  L.useWarp(S.MAP_AKTI, true)
   shot("doorstep")
   settle({ every = true })
-  flagsClear({ "FLAG_HIDE_ALETHEA_AKTI" }, "after part 1, Alethea's hide flag is clear (else leaving and re-entering Akti replays part 1)")
+  flagsClear({ "FLAG_HIDE_ALETHEA_AKTI" },
+             "after part 1, Alethea's hide flag is clear (else leaving and re-entering Akti replays part 1)")
 end)
 
 beat("08_harbor_part2", function()
-  expect(not go(10, 10, { trigger = true }), "the quay starts the ending")
+  local quay = L.triggers(AK .. "HarborPart2Row9", AK .. "HarborPart2Row10", AK .. "HarborPart2Row11")
+  expect(not L.goTrigger(quay), "the quay starts the ending")
   settle({ every = true, answers = { "no" } })
   flagsSet({ "FLAG_SLICE_COMPLETE", "FLAG_HIDE_KLEON_AKTI", "FLAG_HIDE_ALETHEA_AKTI" }, "the slice is complete")
   shot("the_end")
 end)
 
 beat("08_after", function()
-  talk(7, 9, { shotBefore = "nausikles_after" })
-  collect(2, 10, "FLAG_ITEM_AKTI_POTION", "ITEM_POTION", "the Potion among the quay crates")
+  talk(L.npc(AK .. "Nausikles"), { shotBefore = "nausikles_after" })
+  collect(ball("FLAG_ITEM_AKTI_POTION"), "FLAG_ITEM_AKTI_POTION", "ITEM_POTION", "the Potion among the quay crates")
   -- re-entering Akti after the end replays nothing
-  go(3, 23)
-  L.enter(K.UP, S.MAP_ASCLEPEION, "the Asclepeion again")
-  go(7, 10)
-  L.enter(K.DOWN, S.MAP_AKTI, "Akti again")
+  L.useWarp(S.MAP_ASCLEPEION)
+  L.useWarp(S.MAP_AKTI)
   wait(60)
   expect(L.idle(), "Akti after the end is quiet")
   shot("akti_after_the_end")
@@ -623,7 +716,8 @@ L.start(function()
     end
     log("ok every trainer in the slice is beaten")
   end
-  log(string.format("ok the slice played through in %d frames, %d battles", now(), #L.battles))
+  log(string.format("ok the slice played through in %d frames, %d battles, %d design finding(s)", now(),
+                    #L.battles, L.findings))
   if L.bugs > 0 then L.fail(string.format("played to the end, but %d check(s) failed (the BUG lines)", L.bugs)) end
   log("PASS")
 end)

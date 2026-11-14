@@ -41,7 +41,7 @@ tandemaus ponyta hoothoot spinarak murkrow cleffa nickit roggenrola baltoy timbu
 growlithe geodude drilbur nosepass silicobra machop minccino fletchling lillipup munchlax litleo magikarp
 horsea krabby finizen corsola wailmer pokédex pokémon poké moomoo hrrrnk baaa baa chaaan whumpf kalliste's
 herm herms halcyon facade tm42 ichor mom hearthkeeper woodsmoke seabed mainland sitrus stardust louder safer
-ooh hm kingfishers healers has
+ooh hm kingfishers healers has glykera kimon arion thranites
 """.split()
 
 
