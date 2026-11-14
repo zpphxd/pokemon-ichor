@@ -88,6 +88,7 @@ static u8 ProcessRegionMapInput_Zoomed(void);
 static u8 MoveRegionMapCursor_Zoomed(void);
 static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
 static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y);
+static bool32 IsIchorPostgameMapSec(mapsec_u16_t mapSecId);
 static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y);
 static void InitMapBasedOnPlayerLocation(void);
 static void RegionMap_InitializeStateBasedOnSSTidalLocation(void);
@@ -535,6 +536,10 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_RIXY_CHAMBER] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
     [MAPSEC_VIAPOIS_CHAMBER] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
     [MAPSEC_EMBER_SPA] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
+    // Ichor: Kalliste. Add each Aethos town here as its maps land (design/AETHOS_MAP.md).
+    [MAPSEC_ELAIA_VILLAGE] = {MAP_GROUP(MAP_ELAIA_VILLAGE), MAP_NUM(MAP_ELAIA_VILLAGE), HEAL_LOCATION_ELAIA_VILLAGE},
+    [MAPSEC_KALLISTE_ROUTE_1] = {MAP_GROUP(MAP_KALLISTE_ROUTE1), MAP_NUM(MAP_KALLISTE_ROUTE1), HEAL_LOCATION_NONE},
+    [MAPSEC_AKTI_TOWN] = {MAP_GROUP(MAP_AKTI_TOWN), MAP_NUM(MAP_AKTI_TOWN), HEAL_LOCATION_AKTI_TOWN},
 };
 
 static const u8 *const sEverGrandeCityNames[] =
@@ -1209,7 +1214,26 @@ static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
         }
     case REGION_HOENN:
     default:
+            // Ichor: the post-game's places are painted faint and stay unnamed until the game is cleared
+            if (IsIchorPostgameMapSec(sRegionMap_MapSectionLayout[y][x]) && !FlagGet(FLAG_SYS_GAME_CLEAR))
+                return MAPSEC_NONE;
             return sRegionMap_MapSectionLayout[y][x];
+    }
+}
+
+// Ichor: Cape Tainaron, Olympia, Atlantis and the roads to them (design/AETHOS_MAP.md)
+static bool32 IsIchorPostgameMapSec(mapsec_u16_t mapSecId)
+{
+    switch (mapSecId)
+    {
+    case MAPSEC_CAPE_TAINARON:
+    case MAPSEC_OLYMPIA:
+    case MAPSEC_ATLANTIS:
+    case MAPSEC_AETHOS_ROUTE_9:
+    case MAPSEC_AETHOS_ROUTE_10:
+        return TRUE;
+    default:
+        return FALSE;
     }
 }
 
@@ -1502,6 +1526,28 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
         return FlagGet(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_ROUTE_10_POKECENTER:
         return FlagGet(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+    // Ichor: Aethos. Elaia is home: it is a fly target as soon as you have a
+    // Pokemon. Each other town gets its own visited flag when its maps land;
+    // until then it shows as a town you can't fly to (design/AETHOS_MAP.md).
+    case MAPSEC_ELAIA_VILLAGE:
+        return FlagGet(FLAG_SYS_POKEMON_GET) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+    case MAPSEC_AKTI_TOWN:
+        return FlagGet(FLAG_ICHOR_VISITED_AKTI) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+    case MAPSEC_EMPORION_CITY:
+    case MAPSEC_ELEUSA_VILLAGE:
+    case MAPSEC_THYRSA_CITY:
+    case MAPSEC_DELPHOI:
+    case MAPSEC_ARKADIA:
+    case MAPSEC_ASTYRA:
+    case MAPSEC_KALDERA:
+    case MAPSEC_KYTHERA_ISLE:
+    case MAPSEC_KNOSSA_ISLE:
+    case MAPSEC_LAKONIA:
+    case MAPSEC_MOUNT_OLYMPUS:
+    case MAPSEC_CAPE_TAINARON:
+    case MAPSEC_OLYMPIA:
+    case MAPSEC_ATLANTIS:
+        return MAPSECTYPE_CITY_CANTFLY;
     default:
         return MAPSECTYPE_ROUTE;
     }
@@ -2139,6 +2185,17 @@ struct FlyLocation
 
 static const struct FlyLocation sFlyLocations[] =
 {
+    // Ichor: Aethos's fly targets. Add each town with its visited flag as its maps land.
+    {
+        .regionMapType = REGION_MAP_HOENN,
+        .mapsec = MAPSEC_ELAIA_VILLAGE,
+        .flag = FLAG_SYS_POKEMON_GET,
+    },
+    {
+        .regionMapType = REGION_MAP_HOENN,
+        .mapsec = MAPSEC_AKTI_TOWN,
+        .flag = FLAG_ICHOR_VISITED_AKTI,
+    },
     {
         .regionMapType = REGION_MAP_HOENN,
         .mapsec = MAPSEC_LITTLEROOT_TOWN,

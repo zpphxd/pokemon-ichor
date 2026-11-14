@@ -158,6 +158,7 @@ static void PrintStatOnBackOfCard(u8 top, const u8 *str1, u8 *str2, const u8 *co
 static void LoadStickerGfx(void);
 static u8 SetCardBgsAndPals(void);
 static void DrawCardBackStats(void);
+static void DrawIchorLaurels(void);
 static void Task_DoCardFlipTask(u8);
 static bool8 Task_BeginCardFlip(struct Task *task);
 static bool8 Task_AnimateCardFlipDown(struct Task *task);
@@ -252,8 +253,8 @@ static const struct WindowTemplate sTrainerCardWindowTemplates[] =
     },
     [WIN_TRAINER_PIC] = {
         .bg = 3,
-        .tilemapLeft = 19,
-        .tilemapTop = 5,
+        .tilemapLeft = 10, // Ichor: the portrait sits in the kylix's tondo, at the card's centre
+        .tilemapTop = 6,
         .width = 9,
         .height = 10,
         .paletteNum = 8,
@@ -1013,17 +1014,48 @@ static void BufferTextsVarsForCardPage2(void)
     BufferBattleFacilityStats();
 }
 
+// Ichor: the card is a kylix (tools/ichor/art/ui_trainer_card.py). The front's
+// name is inscribed alone above the tondo, and money, Pokedex, time and ID sit
+// in two columns either side of it, each a red label over its ink figure.
+// Positions are in WIN_CARD_TEXT, whose origin is the screen's (8, 8).
+#define ICHOR_CARD_WIDTH  224
+#define ICHOR_NAME_Y      18
+#define ICHOR_COL_W       48
+#define ICHOR_COL_LEFT    26
+#define ICHOR_COL_RIGHT   150
+#define ICHOR_ROW_1       42
+#define ICHOR_ROW_2       74
+#define ICHOR_VALUE_DY    14
+
+static void PrintIchorCardLabel(u32 col, u32 row, const u8 *label)
+{
+    AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, col + GetStringCenterAlignXOffset(FONT_NORMAL, label, ICHOR_COL_W),
+                                 row, sTrainerCardStatColors, TEXT_SKIP_DRAW, label);
+}
+
+static void PrintIchorCardValue(u32 col, u32 row, const u8 *value)
+{
+    AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, col + GetStringCenterAlignXOffset(FONT_NORMAL, value, ICHOR_COL_W),
+                                 row + ICHOR_VALUE_DY, sTrainerCardTextColors, TEXT_SKIP_DRAW, value);
+}
+
 static void PrintNameOnCardFront(void)
 {
     u8 buffer[32];
     u8 *txtPtr;
+    if (sData->cardType != CARD_TYPE_FRLG)
+    {
+        // Ichor: the name alone, centred over the tondo
+        StringCopy(buffer, sData->trainerCard.playerName);
+        ConvertInternationalString(buffer, sData->language);
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, buffer, ICHOR_CARD_WIDTH),
+                                     ICHOR_NAME_Y, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
+        return;
+    }
     txtPtr = StringCopy(buffer, gText_TrainerCardName);
     StringCopy(txtPtr, sData->trainerCard.playerName);
     ConvertInternationalString(txtPtr, sData->language);
-    if (sData->cardType == CARD_TYPE_FRLG)
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 20, 28, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
-    else
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 16, 33, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
+    AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 20, 28, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
 }
 
 static void PrintIdOnCard(void)
@@ -1032,6 +1064,14 @@ static void PrintIdOnCard(void)
     u8 *txtPtr;
     s32 xPos;
     u32 top;
+    if (sData->cardType != CARD_TYPE_FRLG)
+    {
+        // Ichor: the right column's foot
+        ConvertIntToDecimalStringN(buffer, sData->trainerCard.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
+        PrintIchorCardLabel(ICHOR_COL_RIGHT, ICHOR_ROW_2, gText_TrainerCardIDNo);
+        PrintIchorCardValue(ICHOR_COL_RIGHT, ICHOR_ROW_2, buffer);
+        return;
+    }
     txtPtr = StringCopy(buffer, gText_TrainerCardIDNo);
     ConvertIntToDecimalStringN(txtPtr, sData->trainerCard.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
     if (sData->cardType == CARD_TYPE_FRLG)
@@ -1053,6 +1093,15 @@ static void PrintMoneyOnCard(void)
     s32 xOffset;
     u8 top;
 
+    if (sData->isHoenn)
+    {
+        // Ichor: the left column's head
+        ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.money, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+        StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
+        PrintIchorCardLabel(ICHOR_COL_LEFT, ICHOR_ROW_1, gText_TrainerCardMoney);
+        PrintIchorCardValue(ICHOR_COL_LEFT, ICHOR_ROW_1, gStringVar4);
+        return;
+    }
     if (!sData->isHoenn)
         AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 20, 56, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardMoney);
     else
@@ -1085,7 +1134,14 @@ static void PrintPokedexOnCard(void)
 {
     s32 xOffset;
     u8 top;
-    if (FlagGet(FLAG_SYS_POKEDEX_GET))
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) && sData->isHoenn)
+    {
+        // Ichor: the left column's foot
+        ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 4);
+        PrintIchorCardLabel(ICHOR_COL_LEFT, ICHOR_ROW_2, gText_TrainerCardPokedex);
+        PrintIchorCardValue(ICHOR_COL_LEFT, ICHOR_ROW_2, gStringVar4);
+    }
+    else if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         if (!sData->isHoenn)
             AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 20, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardPokedex);
@@ -1118,7 +1174,7 @@ static void PrintTimeOnCard(void)
     if (!sData->isHoenn)
         AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 20, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardTime);
     else
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 16, 89, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardTime);
+        PrintIchorCardLabel(ICHOR_COL_RIGHT, ICHOR_ROW_1, gText_TrainerCardTime); // Ichor: the right column's head
 
     if (sData->isLink)
     {
@@ -1137,18 +1193,18 @@ static void PrintTimeOnCard(void)
         minutes = 59;
     width = GetStringWidth(FONT_NORMAL, gText_Colon2, 0);
 
+    totalWidth = width + 30;
     if (!sData->isHoenn)
     {
-        x = 144;
+        x = 144 - totalWidth;
         y = 88;
     }
     else
     {
-        x = 128;
-        y = 89;
+        // Ichor: centred in the right column, under its label
+        x = ICHOR_COL_RIGHT + (ICHOR_COL_W - totalWidth) / 2;
+        y = ICHOR_ROW_1 + ICHOR_VALUE_DY;
     }
-    totalWidth = width + 30;
-    x -= totalWidth;
 
     FillWindowPixelRect(WIN_CARD_TEXT, PIXEL_FILL(0), x, y, totalWidth, 15);
     ConvertIntToDecimalStringN(gStringVar4, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
@@ -1176,21 +1232,22 @@ static void PrintProfilePhraseOnCard(void)
 
 static void BufferNameForCardBack(void)
 {
+    // Ichor: the back names the victor alone, inside the wreath, so no "'s TRAINER CARD"
     StringCopy(sData->textPlayersCard, sData->trainerCard.playerName);
     ConvertInternationalString(sData->textPlayersCard, sData->language);
-    if (sData->cardType != CARD_TYPE_FRLG)
-    {
-        StringCopy(gStringVar1, sData->textPlayersCard);
-        StringExpandPlaceholders(sData->textPlayersCard, gText_Var1sTrainerCard);
-    }
 }
+
+// Ichor: the back is the cup's underside. The name sits on the foot, inside the
+// victory wreath; the stats are written below it, where the bowl is widest.
+#define ICHOR_BACK_NAME_Y 48
 
 static void PrintNameOnCardBack(void)
 {
     if (!sData->isHoenn)
         AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 136, 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
     else
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, sData->textPlayersCard, 216), 9, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, sData->textPlayersCard, ICHOR_CARD_WIDTH),
+                                     ICHOR_BACK_NAME_Y, sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->textPlayersCard);
 }
 
 static const u8 sText_HofTime[] = _("{STR_VAR_1}:{STR_VAR_2}:{STR_VAR_3}");
@@ -1211,6 +1268,17 @@ static void PrintStatOnBackOfCard(u8 top, const u8 *statName, u8 *stat, const u8
     static const u8 xOffsets[] = {8, 16};
     static const u8 widths[] = {216, 216};
 
+    if (sData->isHoenn)
+    {
+        // Ichor: the Hall of Heroes on the first line under the wreath, and the
+        // rest on the second, narrower one (link and contest stats are cut systems)
+        u32 y = (top == 0) ? 97 : 113;
+        u32 left = (top == 0) ? 40 : 56;
+        u32 right = (top == 0) ? 184 : 168;
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, left, y, sTrainerCardStatColors, TEXT_SKIP_DRAW, statName);
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, stat, right), y, color == sTrainerCardStatColors ? sTrainerCardTextColors : color, TEXT_SKIP_DRAW, stat);
+        return;
+    }
     AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, xOffsets[sData->isHoenn], top * 16 + 33, sTrainerCardTextColors, TEXT_SKIP_DRAW, statName);
     AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, stat, widths[sData->isHoenn]), top * 16 + 33, color, TEXT_SKIP_DRAW, stat);
 }
@@ -1517,6 +1585,14 @@ static void DrawStarsAndBadgesOnCard(void)
     u16 tileNum = 192;
     u8 palNum = 3;
 
+    if (sData->isHoenn)
+    {
+        // Ichor: the stars are gold rosettes in a row under the tondo. The
+        // Laurels are on the back, in the wreath (DrawCardBackStats).
+        FillBgTilemapBufferRect(3, 143, 15 - sData->trainerCard.stars / 2, 15, sData->trainerCard.stars, 1, 4);
+        CopyBgTilemapBufferToVram(3);
+        return;
+    }
     FillBgTilemapBufferRect(3, 143, 15, yOffsets[sData->isHoenn], sData->trainerCard.stars, 1, 4);
     if (!sData->isLink)
     {
@@ -1575,8 +1651,37 @@ static void DrawCardBackStats(void)
             FillBgTilemapBufferRect(3, 140, 27, 15, 1, 1, 0);
             FillBgTilemapBufferRect(3, 156, 27, 16, 1, 1, 0);
         }
+        DrawIchorLaurels();
     }
     CopyBgTilemapBufferToVram(3);
+}
+
+// Ichor: the victory wreath on the cup's underside gains one gold leaf per
+// Laurel, each with its god's emblem (badges.png). The slots run up the left
+// branch from the tie (Hearth, Herald, Harvest, Mask) and down the right (Moon,
+// Forge, Foam, Sun); they match slot_cells() in tools/ichor/art/ui_trainer_card.py.
+static const u8 sIchorLaurelSlots[NUM_BADGES][2] =
+{
+    {10, 11}, {7, 9}, {7, 6}, {9, 4}, {19, 4}, {21, 6}, {21, 9}, {18, 11},
+};
+
+static void DrawIchorLaurels(void)
+{
+    u32 i;
+    u16 tileNum = 192;
+
+    if (sData->isLink)
+        return;
+    for (i = 0; i < NUM_BADGES; i++, tileNum += 2)
+    {
+        u32 x = sIchorLaurelSlots[i][0], y = sIchorLaurelSlots[i][1];
+        if (!sData->badgeCount[i])
+            continue;
+        FillBgTilemapBufferRect(3, tileNum, x, y, 1, 1, 3);
+        FillBgTilemapBufferRect(3, tileNum + 1, x + 1, y, 1, 1, 3);
+        FillBgTilemapBufferRect(3, tileNum + 16, x, y + 1, 1, 1, 3);
+        FillBgTilemapBufferRect(3, tileNum + 17, x + 1, y + 1, 1, 1, 3);
+    }
 }
 
 static void BlinkTimeColon(void)

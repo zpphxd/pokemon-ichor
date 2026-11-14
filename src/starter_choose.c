@@ -96,18 +96,21 @@ static const struct WindowTemplate sWindowTemplate_StarterLabel =
     .baseBlock = 0x0274
 };
 
+// Ichor: the three kraters stand in a row on Daphne's long table, and each
+// label shows at the top of the wall, over its krater
+// (tools/ichor/art/ui_starter_choose.py).
 static const u8 sPokeballCoords[STARTER_MON_COUNT][2] =
 {
-    {60, 64},
-    {120, 88},
-    {180, 64},
+    {60, 80},
+    {120, 80},
+    {180, 80},
 };
 
 static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
 {
-    {0, 9},
-    {16, 10},
-    {8, 4},
+    {1, 1},
+    {8, 1},
+    {16, 1},
 };
 
 // Ichor: the Python, the Typhon and the Trident (design/PITCH.md §4).
@@ -208,9 +211,9 @@ static const struct OamData sOam_StarterCircle =
 
 static const u8 sCursorCoords[][2] =
 {
-    {60, 32},
-    {120, 56},
-    {180, 32},
+    {60, 46},  // Ichor: the hand points down into each krater
+    {120, 46},
+    {180, 46},
 };
 
 static const union AnimCmd sAnim_Hand[] =
@@ -264,6 +267,40 @@ static const union AnimCmd *const sAnims_Pokeball[] =
     sAnim_Pokeball_Moving,
 };
 
+// Ichor: each krater is painted for its starter, so each has its own frames.
+// Snivy's are Emerald's ball frames (0, 16, 32; the hand stays at 48), then
+// Cyndaquil's at 64 and Piplup's at 112 (pokeball_selection.png).
+#define ICHOR_KRATER_ANIMS(name, base)                                 \
+    static const union AnimCmd name##_Still[] =                         \
+    {                                                                   \
+        ANIMCMD_FRAME(base, 30),                                        \
+        ANIMCMD_END,                                                    \
+    };                                                                  \
+    static const union AnimCmd name##_Moving[] =                        \
+    {                                                                   \
+        ANIMCMD_FRAME(base + 16, 4), ANIMCMD_FRAME(base, 4),            \
+        ANIMCMD_FRAME(base + 32, 4), ANIMCMD_FRAME(base, 4),            \
+        ANIMCMD_FRAME(base + 16, 4), ANIMCMD_FRAME(base, 4),            \
+        ANIMCMD_FRAME(base + 32, 4), ANIMCMD_FRAME(base, 4),            \
+        ANIMCMD_FRAME(base, 32),                                        \
+        ANIMCMD_FRAME(base + 16, 8), ANIMCMD_FRAME(base, 8),            \
+        ANIMCMD_FRAME(base + 32, 8), ANIMCMD_FRAME(base, 8),            \
+        ANIMCMD_FRAME(base + 16, 8), ANIMCMD_FRAME(base, 8),            \
+        ANIMCMD_FRAME(base + 32, 8), ANIMCMD_FRAME(base, 8),            \
+        ANIMCMD_JUMP(0),                                                \
+    };                                                                  \
+    static const union AnimCmd *const name[] = {name##_Still, name##_Moving};
+
+ICHOR_KRATER_ANIMS(sAnims_KraterCyndaquil, 64)
+ICHOR_KRATER_ANIMS(sAnims_KraterPiplup, 112)
+
+static const union AnimCmd *const *const sAnims_Krater[STARTER_MON_COUNT] =
+{
+    sAnims_Pokeball,
+    sAnims_KraterCyndaquil,
+    sAnims_KraterPiplup,
+};
+
 static const union AnimCmd *const sAnims_StarterCircle[] =
 {
     sAnim_StarterCircle,
@@ -290,7 +327,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_PokeballSelect[] =
 {
     {
         .data = gPokeballSelection_Gfx,
-        .size = 0x0800,
+        .size = 0x1400, // Ichor: three kraters' frames and the hand (Emerald: 0x800)
         .tag = TAG_POKEBALL_SELECT
     },
     {}
@@ -446,18 +483,23 @@ void CB2_ChooseStarter(void)
     spriteId = CreateSprite(&sSpriteTemplate_Hand, 120, 56, 2);
     gSprites[spriteId].data[0] = taskId;
 
-    // Create three Poké Ball sprites
+    // Create three Poké Ball sprites (Ichor: three kraters, each with its own frames)
     spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords[0][0], sPokeballCoords[0][1], 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 0;
+    gSprites[spriteId].anims = sAnims_Krater[0];
 
     spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords[1][0], sPokeballCoords[1][1], 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 1;
+    gSprites[spriteId].anims = sAnims_Krater[1];
+    StartSpriteAnim(&gSprites[spriteId], 0);
 
     spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords[2][0], sPokeballCoords[2][1], 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 2;
+    gSprites[spriteId].anims = sAnims_Krater[2];
+    StartSpriteAnim(&gSprites[spriteId], 0);
 
     sStarterLabelWindowId = WINDOW_NONE;
 }
