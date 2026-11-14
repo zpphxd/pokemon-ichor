@@ -633,3 +633,12 @@ const u16 gObjectEventPic_PidgeyOld[] = INCGFX_U16("graphics/object_events/pics/
 const u16 gObjectEventPic_ClefairyOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/clefairy.png", ".4bpp", "-mwidth 2 -mheight 2");
 
 #endif // IS_FRLG
+
+// Ichor object events. Sources: tools/ichor/art/sprites_npc*.py
+const u16 gObjectEventPal_IchorCast[] = INCGFX_U16("graphics/object_events/palettes/ichor_cast.pal", ".gbapal");
+const u32 gObjectEventPic_IchorKleon[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorProfessorDaphne[] = INCGFX_U32("graphics/object_events/pics/people/ichor/professor_daphne.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAlethea[] = INCGFX_U32("graphics/object_events/pics/people/ichor/alethea.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorHierophantIone[] = INCGFX_U32("graphics/object_events/pics/people/ichor/hierophant_ione.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorTitanGrunt[] = INCGFX_U32("graphics/object_events/pics/people/ichor/titan_grunt.png", ".4bpp", "-mwidth 2 -mheight 4");
+// End of Ichor object events

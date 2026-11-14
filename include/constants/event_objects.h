@@ -413,6 +413,16 @@ enum
     OBJ_EVENT_GFX_PUSHABLE_BOULDER_FRLG,
     OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG,
     OBJ_EVENT_GFX_BREAKABLE_ROCK_FRLG,
+
+    // Ichor object events. Add new Ichor IDs at the end of this block.
+    // How to add one: design/phase1/SPRITES_npc.md
+    OBJ_EVENT_GFX_ICHOR_KLEON,
+    OBJ_EVENT_GFX_ICHOR_PROFESSOR_DAPHNE,
+    OBJ_EVENT_GFX_ICHOR_ALETHEA,
+    OBJ_EVENT_GFX_ICHOR_HIEROPHANT_IONE,
+    OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT,
+    // End of Ichor object events
+
     NUM_OBJ_EVENT_GFX,
 };
 
@@ -568,6 +578,11 @@ enum
 #define OBJ_EVENT_PAL_TAG_METEORITE               0x1131
 #define OBJ_EVENT_PAL_TAG_SEAGALLOP               0x1132
 #define OBJ_EVENT_PAL_TAG_SS_ANNE                 0x1133
+
+// Ichor object events: palette tags 0x1134-0x114F are Ichor's.
+// Claim the next free one at the end of this block.
+#define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // Kleon, Daphne, Alethea, Ione, Titan grunt
+// End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS
 // Vanilla
