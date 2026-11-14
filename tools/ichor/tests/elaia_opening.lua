@@ -419,12 +419,12 @@ local function main()
   shot("downstairs")
   goTo(5, 8)
   enter(K.DOWN, S.MAP_ELAIA, "the front door")
-  expectAt(5, 9, "out of the front door")
+  expectAt(5, 13, "out of the front door")
   expect(mapMusic() == S.MUS_ELAIA, "Elaia's theme in the village")
   shot("front_door")
 
   -- Kydippe next door, and her Oran Berries.
-  goTo(17, 7)
+  goTo(17, 11)
   enter(K.UP, S.MAP_KYDIPPE, "Kydippe's door")
   goTo(2, 3); face(K.UP); tap(K.A); wait(60)
   shot("kydippe")
@@ -432,14 +432,14 @@ local function main()
   expect(getFlag(S.FLAG_GOT_KYDIPPE_ORAN), "Kydippe's Oran Berries")
   goTo(4, 7)
   enter(K.DOWN, S.MAP_ELAIA, "Kydippe's door out")
-  expectAt(17, 7, "out of Kydippe's house")
+  expectAt(17, 11, "out of Kydippe's house")
 
   -- The Akademia's door is shut until the thread is read (round Halia's line).
-  local HALIA_RING = { 10, 14, 18, 20 }
-  expect(not go(5, 30, HALIA_RING), "the note on the Akademia door")
+  local HALIA_RING = { 10, 18, 18, 24 }
+  expect(not go(5, 34, HALIA_RING), "the note on the Akademia door")
   wait(40); shot("akademia_note"); settle()
   local nx, ny = pos()
-  expect(not (nx == 5 and ny == 30) and mapId() == S.MAP_ELAIA, "stepped back from the door")
+  expect(not (nx == 5 and ny == 34) and mapId() == S.MAP_ELAIA, "stepped back from the door")
   expect(not getFlag(S.FLAG_THREAD_READ), "the thread is still unread")
 
   -- The north gate turns the player back without a partner.
@@ -449,16 +449,16 @@ local function main()
   expectAt(11, 3, "turned back from the road")
 
   -- Beat 2: Halia reads the threads.
-  expect(not go(14, 18), "Halia calls the player into line")
+  expect(not go(14, 22), "Halia calls the player into line")
   wait(30); shot("halia_calls")
   settle({ [3] = "korinna_reading", [8] = "philon_reading", [12] = "your_hand_silence", [14] = "turn_around",
            [16] = "your_own_business" })
   expect(getFlag(S.FLAG_THREAD_READ), "the thread is read")
-  expectAt(14, 16, "at the head of the line")
+  expectAt(14, 20, "at the head of the line")
   shot("after_the_reading")
 
   -- Beat 3: the Akademia.
-  goTo(5, 30)
+  goTo(5, 34)
   enter(K.UP, S.MAP_AKADEMIA, "the Akademia door", true)
   expect(mapMusic() == S.MUS_AKADEMIA, "the Akademia's lyre theme")
   shot("akademia_alethea")
@@ -490,12 +490,12 @@ local function main()
   shot("last_krater")
   goTo(10, 12)
   enter(K.DOWN, S.MAP_ELAIA, "the Akademia's door out")
-  expectAt(5, 30, "out of the Akademia")
+  expectAt(5, 34, "out of the Akademia")
 
   -- Beat 4: Kleon in the square.
   expect(not getFlag(S.FLAG_HIDE_KLEON_ELAIA), "Kleon waits in the square")
   shot("kleon_waits")
-  expect(not go(14, 19), "Kleon calls the player at the steps")
+  expect(not go(14, 23), "Kleon calls the player at the steps")
   wait(40); shot("kleon_there_you_are")
   local outcome = kleonBattle({ [4] = "kleon_oracle", [6] = "kleon_battle_me" })
   if OUTCOME == "win" then expect(outcome == S.B_OUTCOME_WON, "beat Kleon")

@@ -25,7 +25,7 @@
       "local_id": "LOCALID_ELAIA_HALIA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
       "x": 14,
-      "y": 15,
+      "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -39,7 +39,7 @@
       "local_id": "LOCALID_ELAIA_KORINNA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_F",
       "x": 14,
-      "y": 16,
+      "y": 20,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -53,7 +53,7 @@
       "local_id": "LOCALID_ELAIA_PHILON",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
       "x": 14,
-      "y": 17,
+      "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -67,7 +67,7 @@
       "local_id": "LOCALID_ELAIA_GYLIPPOS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
       "x": 7,
-      "y": 15,
+      "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -81,7 +81,7 @@
       "local_id": "LOCALID_ELAIA_WOMAN",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
       "x": 8,
-      "y": 13,
+      "y": 17,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -95,7 +95,7 @@
       "local_id": "LOCALID_ELAIA_MAN",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
       "x": 16,
-      "y": 20,
+      "y": 24,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -109,7 +109,7 @@
       "local_id": "LOCALID_ELAIA_FARMER",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
       "x": 26,
-      "y": 12,
+      "y": 16,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -123,7 +123,7 @@
       "local_id": "LOCALID_ELAIA_KID",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
       "x": 23,
-      "y": 15,
+      "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -137,7 +137,7 @@
       "local_id": "LOCALID_ELAIA_WOOLOO",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
       "x": 22,
-      "y": 16,
+      "y": 20,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -165,7 +165,7 @@
       "local_id": "LOCALID_ELAIA_KLEON",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
       "x": 14,
-      "y": 17,
+      "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -179,7 +179,7 @@
       "local_id": "LOCALID_ELAIA_ALETHEA",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
       "x": 5,
-      "y": 29,
+      "y": 33,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -192,7 +192,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 24,
-      "y": 11,
+      "y": 15,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -206,21 +206,21 @@
   "warp_events": [
     {
       "x": 17,
-      "y": 6,
+      "y": 10,
       "elevation": 0,
       "dest_map": "MAP_ELAIA_VILLAGE_NEIGHBORS_HOUSE",
       "dest_warp_id": "0"
     },
     {
       "x": 5,
-      "y": 8,
+      "y": 12,
       "elevation": 0,
       "dest_map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F",
       "dest_warp_id": "1"
     },
     {
       "x": 5,
-      "y": 29,
+      "y": 33,
       "elevation": 0,
       "dest_map": "MAP_ELAIA_VILLAGE_AKADEMIA",
       "dest_warp_id": "0"
@@ -266,195 +266,6 @@
     {
       "type": "trigger",
       "x": 10,
-      "y": 14,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 14,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 18,
-      "y": 14,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 15,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 15,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 15,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 16,
-      "y": 15,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 17,
-      "y": 15,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 18,
-      "y": 15,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 16,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 16,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 16,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 16,
-      "y": 16,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 17,
-      "y": 16,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 18,
-      "y": 16,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
-      "y": 17,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 11,
-      "y": 17,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 17,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 16,
-      "y": 17,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 17,
-      "y": 17,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 18,
-      "y": 17,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 10,
       "y": 18,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
@@ -464,33 +275,6 @@
     {
       "type": "trigger",
       "x": 11,
-      "y": 18,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 18,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 16,
-      "y": 18,
-      "elevation": 0,
-      "var": "FLAG_ICHOR_THREAD_READ",
-      "var_value": "0",
-      "script": "ElaiaVillage_EventScript_HaliaCalls"
-    },
-    {
-      "type": "trigger",
-      "x": 17,
       "y": 18,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
@@ -528,6 +312,222 @@
       "type": "trigger",
       "x": 12,
       "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_THREAD_READ",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaCalls"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 23,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -536,7 +536,7 @@
     {
       "type": "trigger",
       "x": 13,
-      "y": 19,
+      "y": 23,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -545,7 +545,7 @@
     {
       "type": "trigger",
       "x": 14,
-      "y": 19,
+      "y": 23,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -554,7 +554,7 @@
     {
       "type": "trigger",
       "x": 15,
-      "y": 19,
+      "y": 23,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -563,7 +563,7 @@
     {
       "type": "trigger",
       "x": 16,
-      "y": 19,
+      "y": 23,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -572,7 +572,7 @@
     {
       "type": "trigger",
       "x": 17,
-      "y": 19,
+      "y": 23,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -581,7 +581,7 @@
     {
       "type": "trigger",
       "x": 18,
-      "y": 19,
+      "y": 23,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -590,7 +590,7 @@
     {
       "type": "trigger",
       "x": 10,
-      "y": 20,
+      "y": 24,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -599,7 +599,7 @@
     {
       "type": "trigger",
       "x": 11,
-      "y": 20,
+      "y": 24,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -608,7 +608,7 @@
     {
       "type": "trigger",
       "x": 12,
-      "y": 20,
+      "y": 24,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -617,7 +617,7 @@
     {
       "type": "trigger",
       "x": 13,
-      "y": 20,
+      "y": 24,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -626,7 +626,7 @@
     {
       "type": "trigger",
       "x": 14,
-      "y": 20,
+      "y": 24,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -635,7 +635,7 @@
     {
       "type": "trigger",
       "x": 15,
-      "y": 20,
+      "y": 24,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -644,7 +644,7 @@
     {
       "type": "trigger",
       "x": 16,
-      "y": 20,
+      "y": 24,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -653,7 +653,7 @@
     {
       "type": "trigger",
       "x": 17,
-      "y": 20,
+      "y": 24,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -662,7 +662,7 @@
     {
       "type": "trigger",
       "x": 18,
-      "y": 20,
+      "y": 24,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -671,7 +671,7 @@
     {
       "type": "trigger",
       "x": 9,
-      "y": 22,
+      "y": 26,
       "elevation": 0,
       "var": "FLAG_ICHOR_KLEON_BATTLE_1_DONE",
       "var_value": "0",
@@ -680,7 +680,7 @@
     {
       "type": "trigger",
       "x": 10,
-      "y": 22,
+      "y": 26,
       "elevation": 0,
       "var": "FLAG_ICHOR_KLEON_BATTLE_1_DONE",
       "var_value": "0",
@@ -689,7 +689,7 @@
     {
       "type": "trigger",
       "x": 18,
-      "y": 22,
+      "y": 26,
       "elevation": 0,
       "var": "FLAG_ICHOR_KLEON_BATTLE_1_DONE",
       "var_value": "0",
@@ -698,7 +698,7 @@
     {
       "type": "trigger",
       "x": 19,
-      "y": 22,
+      "y": 26,
       "elevation": 0,
       "var": "FLAG_ICHOR_KLEON_BATTLE_1_DONE",
       "var_value": "0",
@@ -707,7 +707,7 @@
     {
       "type": "trigger",
       "x": 5,
-      "y": 30,
+      "y": 34,
       "elevation": 0,
       "var": "FLAG_ICHOR_THREAD_READ",
       "var_value": "0",
@@ -718,7 +718,7 @@
     {
       "type": "sign",
       "x": 14,
-      "y": 5,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ElaiaVillage_EventScript_VillageSign"
@@ -726,7 +726,7 @@
     {
       "type": "sign",
       "x": 6,
-      "y": 8,
+      "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_PlayersHouseSign"
@@ -734,7 +734,7 @@
     {
       "type": "sign",
       "x": 16,
-      "y": 6,
+      "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_KydippesHouseSign"
@@ -742,7 +742,7 @@
     {
       "type": "sign",
       "x": 11,
-      "y": 29,
+      "y": 33,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ElaiaVillage_EventScript_AkademiaSign"
@@ -750,7 +750,7 @@
     {
       "type": "sign",
       "x": 13,
-      "y": 14,
+      "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_FestivalBanner"
@@ -758,7 +758,7 @@
     {
       "type": "sign",
       "x": 16,
-      "y": 14,
+      "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_FestivalBanner"
@@ -766,7 +766,7 @@
     {
       "type": "sign",
       "x": 9,
-      "y": 4,
+      "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ElaiaVillage_EventScript_Herm"
@@ -774,7 +774,7 @@
     {
       "type": "sign",
       "x": 24,
-      "y": 6,
+      "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_ShrineDoor"
@@ -782,7 +782,7 @@
     {
       "type": "sign",
       "x": 3,
-      "y": 14,
+      "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_NeighboursDoor"
@@ -790,7 +790,7 @@
     {
       "type": "sign",
       "x": 23,
-      "y": 14,
+      "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ElaiaVillage_EventScript_Well"
@@ -798,22 +798,6 @@
     {
       "type": "sign",
       "x": 3,
-      "y": 2,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ElaiaVillage_EventScript_Beehives"
-    },
-    {
-      "type": "sign",
-      "x": 7,
-      "y": 2,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ElaiaVillage_EventScript_Beehives"
-    },
-    {
-      "type": "sign",
-      "x": 2,
       "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -821,8 +805,24 @@
     },
     {
       "type": "sign",
+      "x": 7,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ElaiaVillage_EventScript_Beehives"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ElaiaVillage_EventScript_Beehives"
+    },
+    {
+      "type": "sign",
       "x": 25,
-      "y": 11,
+      "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_OlivePress"
@@ -830,7 +830,7 @@
     {
       "type": "sign",
       "x": 26,
-      "y": 11,
+      "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_OlivePress"
@@ -838,7 +838,7 @@
     {
       "type": "sign",
       "x": 27,
-      "y": 11,
+      "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_OlivePress"
@@ -846,7 +846,7 @@
     {
       "type": "sign",
       "x": 27,
-      "y": 28,
+      "y": 32,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ElaiaVillage_EventScript_RaceStart"
@@ -854,7 +854,7 @@
     {
       "type": "sign",
       "x": 7,
-      "y": 17,
+      "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_Altar"
@@ -862,7 +862,7 @@
     {
       "type": "sign",
       "x": 8,
-      "y": 17,
+      "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_Altar"
@@ -870,7 +870,7 @@
     {
       "type": "sign",
       "x": 19,
-      "y": 17,
+      "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_Stall"
@@ -878,7 +878,7 @@
     {
       "type": "sign",
       "x": 20,
-      "y": 17,
+      "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_Stall"
@@ -886,7 +886,7 @@
     {
       "type": "sign",
       "x": 21,
-      "y": 17,
+      "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ElaiaVillage_EventScript_Stall"
@@ -894,7 +894,7 @@
     {
       "type": "hidden_item",
       "x": 5,
-      "y": 3,
+      "y": 7,
       "elevation": 3,
       "item": "ITEM_HONEY",
       "flag": "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY",

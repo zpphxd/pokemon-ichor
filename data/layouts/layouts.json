@@ -9328,7 +9328,7 @@
       "id": "LAYOUT_ELAIA_VILLAGE",
       "name": "ElaiaVillage_Layout",
       "width": 30,
-      "height": 34,
+      "height": 38,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Kalliste",
       "border_filepath": "data/layouts/ElaiaVillage/border.bin",
