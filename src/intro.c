@@ -33,7 +33,7 @@
     Scene 0. The copyright card (graphics/intro/copyright.png), then, with
              EXPANSION_INTRO, the "powered by" card (src/expansion_intro.c).
     Scene 1. The studio mark: a drop of ichor falls through the dark and blooms
-             into ΙΧΩΡ, ringed by the Twelve.
+             into ΙΧΩΡ, ringed by the Twelve, over "A GAME BY ZACH POWERS".
     Scene 2. The frieze: Clotho spins, and her thread runs along a black-figure
              frieze of Aethos as the pot turns: the olive grove of Elaia, where
              the golden thread rises unspun; the sea, the trireme and the ketos;
@@ -248,8 +248,9 @@ void PanFadeAndZoomScreen(u16 screenX, u16 screenY, u16 zoom, u16 alpha)
 #define T_DROP_IMPACT     112   // it lands, and the mark's drop flares
 #define T_RING            124   // the ripple reaches the ring of the Twelve
 #define T_LETTERS         140   // ΙΧΩΡ gilds in
-#define T_STUDIO_OUT      300   // fade to black
-#define T_FRIEZE_LOAD     372
+#define T_CREDIT          184   // "A GAME BY ZACH POWERS" fades in beneath, and holds
+#define T_STUDIO_OUT      364   // fade to black
+#define T_FRIEZE_LOAD     398
 // Scene 2: the frieze
 #define T_CLOTHO          410   // fade in on Clotho at her spindle (bar 5)
 #define T_THREAD_GROW     466   // her thread runs out to the right
@@ -564,11 +565,13 @@ static void ResetIntroSprites(void)
 // Scene 1: the studio mark
 // ---------------------------------------------------------------------------
 #define MARK_CX 120
-#define MARK_CY 62
-// studio_mark.pal: the drop is colors 1-5, the ring of the Twelve 6-7, the letters 8-12
+#define MARK_CY 54
+// studio_mark.pal: the drop is colors 1-5, the ring of the Twelve 6-7, the letters 8-12,
+// the credit 13-15
 #define MARK_DROP    1, 5
 #define MARK_RING    6, 2
 #define MARK_LETTERS 8, 5
+#define MARK_CREDIT  13, 3
 
 static void Studio_Load(void)
 {
@@ -605,8 +608,8 @@ static void Studio_Update(s32 t)
     else if (t >= T_DROP_FALL && t < T_DROP_IMPACT)
     {
         s32 dt = t - T_DROP_FALL;
-        // 0.07 px/frame^2 brings it from the top to the mark in 26 frames
-        y = 18 + (dt * dt * 18) / 256;
+        // 0.0625 px/frame^2 brings it from the top to the mark in 26 frames
+        y = 18 + (dt * dt * 16) / 256;
         ShowSprite(SPR_DROP, MARK_CX, y, 4, 8, TRUE);
     }
     else
@@ -639,6 +642,10 @@ static void Studio_Update(s32 t)
         BlendRange(BG_PLTT_ID(0) + 12, 1, coeff, RGB(31, 31, 28));
         BlendRange(BG_PLTT_ID(0) + 5, 1, coeff, RGB(31, 31, 28));
     }
+
+    // Then the credit, unhurried, held long enough to read before the frieze.
+    coeff = Lerp(16, 0, t, T_CREDIT, T_CREDIT + 36);
+    BlendRange(BG_PLTT_ID(0) + MARK_CREDIT, coeff, INK_COLOR);
 
     FadeAll(Lerp(0, 16, t, T_STUDIO_OUT, T_STUDIO_OUT + 32), RGB_BLACK);
 }
