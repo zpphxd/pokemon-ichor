@@ -1647,3 +1647,19 @@ const struct Tileset gTileset_Agros =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Agros,
     .callback = NULL,
 };
+
+// Ichor: eleusa, Eleusa Village (Eleusis): wheat fields, farms and the
+// sanctuary of the Mysteries. Porytiles-managed, built by
+// tools/ichor/art/eleusa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path and animated sea, so rebuild it whenever aethos
+// changes.
+const struct Tileset gTileset_Eleusa =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Eleusa,
+    .palettes = gTilesetPalettes_PorytilesManaged_Eleusa,
+    .metatiles = gMetatiles_PorytilesManaged_Eleusa,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Eleusa,
+    .callback = NULL,
+};

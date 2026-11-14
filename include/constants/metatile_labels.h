@@ -1110,4 +1110,10 @@
 #define METATILE_Agros_PitStair_Right             0x389
 // end gTileset_Agros
 
+// gTileset_Eleusa (Ichor: Eleusa Village), written by tools/ichor/art/eleusa_build.py
+#define METATILE_Eleusa_TorchPost_Lit            0x385
+#define METATILE_Eleusa_TorchPost_Cold           0x386
+#define METATILE_Eleusa_TorchPost_Foot           0x387
+// end gTileset_Eleusa
+
 #endif // GUARD_METATILE_LABELS_H
