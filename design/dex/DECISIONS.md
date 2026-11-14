@@ -164,4 +164,10 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
   Kapnub and Kaminoo on Hyperion's team need no change.
 
   **Not adopted:** random wild Pokémon that are already evolved below their evolution level (open question 22). These are Hoplomex at 16 on Aegina, and Korantha, Stachypter and Plouteras at 22 around Eleusa, 6–10 levels early. They undercut each line's evolution payoff. The recommendation is to drop them and keep only the one-off augury statics (Harpelle 17, Korantha 22, the Persenyx flag) as story rewards. Hoplomex can stay on Aegina as a trainer's Pokémon.
+  - **The main session's rulings on the follow-ups (2026-11-14):**
+    - The three omens are in SYSTEMS.md §6.
+    - The new map spots are routed to world-act2 and world-act3. The Sirens' nests wait for the Odyssey session.
+    - Aetarch wild on the Ascent stays; the Archon's keeps its signature role.
+    - Belornis wild in Lakonia fits LABORS.md's sixth Labor.
+    - Fossils are revive-only at 35, agreed.
 
