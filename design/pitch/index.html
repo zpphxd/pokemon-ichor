@@ -1,0 +1,566 @@
+<title>Pokémon Ichor Pitch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&family=Pixelify+Sans:wght@500;700&family=Silkscreen&display=swap">
+<style>
+/* Layout: a single painted vessel. Clay ground with black-figure ink in light mode; red-figure (clay on glaze) in dark mode. Meander bands divide the friezes. */
+:root {
+  --bg: #D2703A;          /* fired clay */
+  --panel: #DC8550;       /* lighter slip for set-off panels */
+  --fg: #1B130E;          /* black glaze */
+  --muted: #2E180C;
+  --rule: #1B130E;
+  --ochre: #8E2A12;       /* miltos red, decorative only */
+  --map-sea: #1B130E;
+  --map-land: #D2703A;
+  --map-label: #F6E2CF;
+  --gold: #F3C04A;        /* ichor */
+  --font-display: "Pixelify Sans", "Silkscreen", ui-monospace, monospace;
+  --font-body: "Gentium Book Plus", "Iowan Old Style", Georgia, serif;
+  --font-label: "Silkscreen", "Pixelify Sans", ui-monospace, monospace;
+  --s-1: 13px; --s0: 18px; --s1: 21px; --s2: 26px; --s3: 34px; --s4: clamp(44px, 9vw, 88px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17110D; --panel: #22190F; --fg: #E58C52; --muted: #D49A70; --rule: #E58C52; --ochre: #B4432A;
+    --map-sea: #0E0A08; --map-land: #C9672F; --map-label: #F6E2CF; --gold: #F3C04A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17110D; --panel: #22190F; --fg: #E58C52; --muted: #D49A70; --rule: #E58C52; --ochre: #B4432A;
+  --map-sea: #0E0A08; --map-land: #C9672F; --map-label: #F6E2CF; --gold: #F3C04A;
+  color-scheme: dark;
+}
+
+html { background: var(--bg); }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: var(--s0); line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+a { color: inherit; text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+
+/* Greek key band */
+.meander {
+  height: 20px; background: var(--fg);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M0 1H20M0 19H20M3 19V5H15V15H7V9H11' fill='none' stroke='black' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E") repeat-x left center / 20px 20px;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M0 1H20M0 19H20M3 19V5H15V15H7V9H11' fill='none' stroke='black' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E") repeat-x left center / 20px 20px;
+}
+
+.label {
+  font-family: var(--font-label); font-size: var(--s-1); letter-spacing: 0.08em;
+  text-transform: uppercase; line-height: 1.3;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.05; text-wrap: balance; margin: 0; }
+h2 { font-size: var(--s3); }
+h3 { font-size: var(--s1); font-weight: 500; }
+p { margin: 0; max-width: 65ch; }
+ul, ol { margin: 0; padding-left: 1.2em; }
+li + li { margin-top: 0.35em; }
+em { font-style: italic; }
+strong { font-weight: 700; }
+
+/* Hero */
+.hero { padding-block: 40px 32px; display: grid; gap: 32px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; }
+.hero-text { display: grid; gap: 18px; min-width: 0; }
+.hero h1 { font-size: var(--s4); letter-spacing: -0.01em; }
+.greek { font-family: var(--font-body); font-style: italic; font-size: var(--s2); }
+.greek b { font-style: normal; font-weight: 700; }
+.logline { font-size: var(--s1); }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--rule); border-bottom: 2px solid var(--rule); }
+.facts div { padding: 10px 10px 10px 0; display: grid; gap: 2px; min-width: 0; }
+.facts div + div { padding-left: 10px; border-left: 2px solid var(--rule); }
+.facts strong { font-family: var(--font-display); font-size: var(--s2); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+figure { margin: 0; min-width: 0; }
+.map { background: var(--map-sea); border: 2px solid var(--rule); padding: 6px; }
+.map svg { display: block; width: 100%; height: auto; }
+figcaption { margin-top: 10px; font-size: var(--s-1); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 8px; }
+
+/* Sections */
+section { padding-block: 44px; display: grid; gap: 22px; }
+.head { display: grid; gap: 8px; }
+.intro { font-size: var(--s1); }
+
+.grid { display: grid; gap: 22px 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.grid > * { min-width: 0; display: grid; gap: 6px; align-content: start; }
+.grid h3 + .label { margin-top: -2px; }
+
+.reskin { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 0 28px; }
+.reskin div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--rule); min-width: 0; }
+.reskin span:first-child { font-family: var(--font-label); font-size: var(--s-1); text-transform: uppercase; letter-spacing: .06em; padding-top: 3px; }
+.reskin span:last-child { font-weight: 700; text-align: right; }
+
+.acts { display: grid; gap: 28px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.act { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.act .num { font-family: var(--font-display); font-size: var(--s3); }
+
+.table-wrap { overflow-x: auto; border-top: 2px solid var(--rule); border-bottom: 2px solid var(--rule); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 16px; }
+th, td { text-align: left; padding: 9px 12px 9px 0; vertical-align: top; border-bottom: 1px solid var(--rule); }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--font-label); font-size: var(--s-1); font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
+td.n { font-family: var(--font-display); font-size: var(--s1); width: 2.2em; font-variant-numeric: tabular-nums; }
+tr.pantheon td { background: var(--panel); }
+tr.pantheon td:first-child { padding-left: 8px; }
+
+.starters { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.starter { background: var(--panel); border: 2px solid var(--rule); padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.starter h3 { font-size: var(--s2); }
+
+.myths { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 0 28px; }
+.myths div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.myths span:last-child { font-family: var(--font-display); font-weight: 500; text-align: right; }
+
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 130px), 1fr)); gap: 12px; }
+.swatch { display: grid; gap: 6px; min-width: 0; }
+.chip { height: 52px; border: 2px solid var(--rule); }
+.swatch code { font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; }
+
+.phases { list-style: none; padding: 0; display: grid; gap: 0; }
+.phases li { display: grid; grid-template-columns: 3.2em minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--rule); margin: 0; }
+.phases li:first-child { border-top: 2px solid var(--rule); }
+.phases .n { font-family: var(--font-display); font-size: var(--s2); line-height: 1; }
+.phases .gate { display: inline-block; margin-top: 6px; background: var(--fg); color: var(--bg); padding: 3px 8px; }
+
+.calls { background: var(--panel); border: 2px solid var(--rule); padding: 22px; display: grid; gap: 14px; }
+.calls ol { display: grid; gap: 8px; }
+
+footer { padding-block: 28px 48px; font-size: var(--s-1); display: grid; gap: 6px; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); }
+  .acts, .starters { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .facts div:nth-child(n+3) { border-top: 2px solid var(--rule); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .route { stroke-dashoffset: 0; animation: march 6s linear infinite; }
+  @keyframes march { to { stroke-dashoffset: -48; } }
+}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-text">
+      <div class="label">Pitch · A Pokémon Emerald ROM hack · November 2026</div>
+      <h1>Pokémon Ichor</h1>
+      <div class="greek"><b>ἰχώρ</b>, the golden blood of the gods</div>
+      <p class="logline">In the age of heroes, every life is a thread spun by the Fates and read by the Oracle. Except yours. You are the one person in Aethos whose fate was never written, and the only one who can stop a cult of the Titans from freezing time forever.</p>
+      <div class="facts">
+        <div><strong>Gen 1–9</strong><span class="label">Pokémon</span></div>
+        <div><strong>1,025</strong><span class="label">species catchable</span></div>
+        <div><strong>12</strong><span class="label">Olympian trials</span></div>
+        <div><strong>6</strong><span class="label">post-game arcs</span></div>
+      </div>
+    </div>
+
+    <figure>
+      <div class="map">
+        <svg viewBox="0 0 400 300" role="img" aria-labelledby="mapTitle" shape-rendering="crispEdges">
+          <title id="mapTitle">Map of the Aethos region with the main journey from Elaia Village to Mount Olympus</title>
+          <g fill="var(--map-land)">
+            <polygon points="64,0 340,0 340,56 324,88 304,108 292,136 284,164 256,176 236,184 216,204 200,212 188,236 180,260 164,272 152,256 140,236 120,228 100,216 88,196 96,172 108,152 96,132 80,104 72,64 64,32"/>
+            <polygon points="36,136 64,128 80,140 80,164 60,176 40,168 32,152"/>
+            <polygon points="200,240 228,236 236,252 220,264 204,256"/>
+            <polygon points="292,212 316,208 324,224 312,240 300,236 308,224 300,220"/>
+            <polygon points="220,272 260,264 300,268 340,276 352,288 312,296 260,292 224,288"/>
+            <rect x="264" y="208" width="8" height="8"/><rect x="280" y="192" width="8" height="4"/>
+            <rect x="248" y="220" width="4" height="8"/><rect x="328" y="188" width="8" height="8"/>
+            <rect x="356" y="236" width="8" height="4"/>
+          </g>
+          <polygon points="188,52 200,28 212,52" fill="var(--map-label)"/>
+          <polyline class="route" points="48,148 68,162 112,168 160,148 212,116 164,196 276,148 312,224 218,250 284,280 160,232 136,100 200,40"
+            fill="none" stroke="var(--gold)" stroke-width="2" stroke-dasharray="6 6" shape-rendering="geometricPrecision"/>
+
+          <g font-family="Silkscreen, monospace" font-size="9" fill="var(--map-label)" stroke="var(--map-sea)" stroke-width="3" paint-order="stroke" stroke-linejoin="round">
+            <text x="40" y="145" text-anchor="end">ELAIA</text>
+            <text x="76" y="174">AKTI</text>
+            <text x="120" y="181">EMPORION</text>
+            <text x="168" y="151">ELEUSA</text>
+            <text x="220" y="119">THYRSA</text>
+            <text x="172" y="199">ARKADIA</text>
+            <text x="284" y="151">ASTYRA</text>
+            <text x="322" y="214">KALDERA</text>
+            <text x="228" y="246">KYTHERA</text>
+            <text x="300" y="285">KNOSSA</text>
+            <text x="152" y="235" text-anchor="end">LAKONIA</text>
+            <text x="128" y="103" text-anchor="end">DELPHOI</text>
+            <text x="214" y="34">OLYMPUS</text>
+            <text x="88" y="203" text-anchor="end">OLYMPIA</text>
+            <text x="172" y="280">TAINARON</text>
+            <text x="328" y="256" text-anchor="end">ATLANTIS</text>
+          </g>
+
+          <!-- non-temple places -->
+          <g fill="var(--map-sea)" stroke="var(--gold)" stroke-width="2">
+            <rect x="44" y="144" width="8" height="8" transform="rotate(45 48 148)"><title>Elaia Village, home</title></rect>
+            <rect x="271" y="143" width="10" height="10" transform="rotate(45 276 148)"><title>Astyra, the capital</title></rect>
+            <rect x="280" y="276" width="8" height="8" transform="rotate(45 284 280)"><title>Knossa Isle, the Labyrinth</title></rect>
+            <rect x="156" y="228" width="8" height="8" transform="rotate(45 160 232)"><title>Lakonia</title></rect>
+          </g>
+          <g fill="none" stroke="var(--map-label)" stroke-width="1.5" stroke-dasharray="2 2">
+            <rect x="92" y="192" width="8" height="8"><title>Olympia, the Olympiad (post-game)</title></rect>
+            <rect x="160" y="258" width="8" height="8"><title>Cape Tainaron, the Underworld gate (post-game)</title></rect>
+            <rect x="332" y="240" width="8" height="8"><title>Atlantis (post-game)</title></rect>
+          </g>
+          <!-- temples, in order -->
+          <g font-family="Silkscreen, monospace" font-size="8" text-anchor="middle">
+            <g><rect x="63" y="157" width="11" height="11" fill="var(--gold)"/><text x="68.5" y="165.5" fill="#1B130E">1</text><title>1 · Temple of Hestia, Akti Town</title></g>
+            <g><rect x="107" y="163" width="11" height="11" fill="var(--gold)"/><text x="112.5" y="171.5" fill="#1B130E">2</text><title>2 · Temple of Hermes, Emporion City</title></g>
+            <g><rect x="155" y="143" width="11" height="11" fill="var(--gold)"/><text x="160.5" y="151.5" fill="#1B130E">3</text><title>3 · Temple of Demeter, Eleusa Village</title></g>
+            <g><rect x="207" y="111" width="11" height="11" fill="var(--gold)"/><text x="212.5" y="119.5" fill="#1B130E">4</text><title>4 · Temple of Dionysus, Thyrsa City</title></g>
+            <g><rect x="159" y="191" width="11" height="11" fill="var(--gold)"/><text x="164.5" y="199.5" fill="#1B130E">5</text><title>5 · Temple of Artemis, Arkadia</title></g>
+            <g><rect x="307" y="219" width="11" height="11" fill="var(--gold)"/><text x="312.5" y="227.5" fill="#1B130E">6</text><title>6 · Temple of Hephaestus, Kaldera</title></g>
+            <g><rect x="213" y="245" width="11" height="11" fill="var(--gold)"/><text x="218.5" y="253.5" fill="#1B130E">7</text><title>7 · Temple of Aphrodite, Kythera Isle</title></g>
+            <g><rect x="131" y="95" width="11" height="11" fill="var(--gold)"/><text x="136.5" y="103.5" fill="#1B130E">8</text><title>8 · Temple of Apollo, Delphoi</title></g>
+            <g><rect x="194" y="34" width="12" height="12" fill="var(--map-sea)" stroke="var(--gold)" stroke-width="2"/><text x="200" y="43" fill="var(--gold)">P</text><title>Mount Olympus, the Pantheon</title></g>
+          </g>
+        </svg>
+      </div>
+      <figcaption>
+        The Aethos region. The gold line is the main journey, temple by temple, ending on Mount Olympus.
+        <div class="legend label"><span>1–8 · Temples</span><span>◆ · Story cities</span><span>⬚ · Post-game</span><span>P · Pantheon</span></div>
+      </figcaption>
+    </figure>
+  </header>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="world">
+    <div class="head">
+      <div class="label">I · The world</div>
+      <h2>Aethos, in the age of heroes</h2>
+    </div>
+    <p class="intro">A sun-bleached mainland and archipelago with no modern technology. Pokémon are everywhere and the old myths are memories of them. Every familiar system keeps working but wears the era's clothes.</p>
+    <div class="reskin">
+      <div><span>Pokémon Center</span><span>Asclepeion healing temple</span></div>
+      <div><span>Poké Mart</span><span>Agora stall</span></div>
+      <div><span>PC storage</span><span>Pithos, the great jar</span></div>
+      <div><span>Gym</span><span>Temple</span></div>
+      <div><span>Gym Leader</span><span>Hierophant</span></div>
+      <div><span>Badge</span><span>Laurel leaf</span></div>
+      <div><span>Ferry</span><span>Trireme</span></div>
+      <div><span>Elite Four</span><span>The Pantheon</span></div>
+      <div><span>Champion</span><span>The Archon</span></div>
+    </div>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="story">
+    <div class="head">
+      <div class="label">II · The story</div>
+      <h2>Fate against free will</h2>
+    </div>
+    <p class="intro">A story about hubris and what it costs. It has a rival with a real arc, a villain you meet as a kind man before you know what he is, and a climax where the whole region stops.</p>
+
+    <div class="grid">
+      <div><h3>You, the Unwoven</h3><span class="label">Protagonist · Theo or Ianthe</span><p>On the night you were born the Oracle went blind for an hour. She has never been able to see your thread.</p></div>
+      <div><h3>Professor Daphne</h3><span class="label">Philosopher of the Akademia grove</span><p>Believes every myth is a memory of a Pokémon. Professors are named for trees, and the daphne is the laurel.</p></div>
+      <div><h3>Alethea</h3><span class="label">Friend · her name means truth</span><p>Daphne's apprentice. She keeps the Pokédex and digs through ruins for what the prophecies leave out.</p></div>
+      <div><h3>Kleon</h3><span class="label">Rival · from kleos, glory</span><p>Raised in the Lakonian battle school. A prophecy promised him a short, glorious life, and he runs at it. Hubris, a fall, and a way back.</p></div>
+      <div><h3>Team Titan</h3><span class="label">The Titanborn</span><p>Bronze Corinthian helmets and a sickle crest. Admins Hyperion, Iapetos the forger of prophecies, and Rhea. They fight with earth-born Rock, Ground and Steel.</p></div>
+      <div><h3>Kronos</h3><span class="label">Masked leader · secretly Phaedon</span><p>A gentle healer whose daughter Elpis, named for Hope, is fated to die young. He would freeze the world in a golden age where no thread is ever cut.</p></div>
+    </div>
+
+    <div class="acts">
+      <div class="act">
+        <span class="num">Act I</span>
+        <h3>The Unwoven · Laurels 1–3</h3>
+        <ul>
+          <li>A coming-of-age festival, your first Pokémon, your first fight with Kleon.</li>
+          <li>Titan grunts dig in hilltop ruins for a fragment of the Harpe, the old sickle of Kronos.</li>
+          <li>A trireme to the mainland. In the Mystery sanctum of Eleusa, the Titans take the first fragment.</li>
+          <li>Daphne tells you what you are. The Fates weave every life on a Loom, and yours was never spun.</li>
+        </ul>
+      </div>
+      <div class="act">
+        <span class="num">Act II</span>
+        <h3>Hubris · Laurels 4–6</h3>
+        <ul>
+          <li>At the Dionysia, Iapetos stages a tragedy that entrances a whole amphitheater.</li>
+          <li>Crushed by the Huntress Kallisto, Kleon lets Iapetos rewrite his fate and joins the Titans.</li>
+          <li>In the capital you meet a kind healer and his sick daughter. Then the Titans storm the Akropolis.</li>
+          <li>At the volcano forge you learn only someone without a thread can hold the Harpe. That means you.</li>
+        </ul>
+      </div>
+      <div class="act">
+        <span class="num">Act III</span>
+        <h3>The Loom · Laurels 7–8</h3>
+        <ul>
+          <li>Into the Labyrinth to Team Titan's base. The mask comes off. It is the healer.</li>
+          <li>At Delphoi the Fates are found in chains, bound there by the first Archon. You cut them free, and Kronos takes their power. <strong>Dialga awakens.</strong></li>
+          <li><strong>The Frozen Hour.</strong> All of Aethos stops, drained to gray. Only you move. Rouse Uxie, Mesprit and Azelf, then climb the Stair of Hours with Kleon at your side.</li>
+          <li>Then the Ascent of Olympus, the Pantheon, and the Archon.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="twelve">
+    <div class="head">
+      <div class="label">III · The Twelve</div>
+      <h2>Eight temples, four seats on Olympus</h2>
+    </div>
+    <p class="intro">The temples and the Pantheon are the twelve Olympians, with Hestia counted among them. The Archon serves Zeus. Hades is not an Olympian, so he waits below for the post-game.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Olympian</th><th>Type</th><th>Hierophant</th><th>Temple</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td>Hestia</td><td>Normal</td><td>Ione, the Hearthkeeper</td><td>Akti Town</td></tr>
+          <tr><td class="n">2</td><td>Hermes</td><td>Flying</td><td>Kerykos, the Herald</td><td>Emporion City</td></tr>
+          <tr><td class="n">3</td><td>Demeter</td><td>Grass</td><td>Chloe, the Mystagogue</td><td>Eleusa Village</td></tr>
+          <tr><td class="n">4</td><td>Dionysus</td><td>Poison</td><td>Thespis, the Masked Player</td><td>Thyrsa City</td></tr>
+          <tr><td class="n">5</td><td>Artemis</td><td>Dark</td><td>Kallisto, the Moonlit Huntress</td><td>Arkadia</td></tr>
+          <tr><td class="n">6</td><td>Hephaestus</td><td>Steel</td><td>Talos, the Bronzesmith</td><td>Kaldera</td></tr>
+          <tr><td class="n">7</td><td>Aphrodite</td><td>Fairy</td><td>Galatea, the Living Marble</td><td>Kythera Isle</td></tr>
+          <tr><td class="n">8</td><td>Apollo</td><td>Fire</td><td>Phemonoe, the Pythia</td><td>Delphoi</td></tr>
+          <tr class="pantheon"><td class="n">P</td><td>Ares</td><td>Fighting</td><td>Brasidas, the Polemarch</td><td>Olympus</td></tr>
+          <tr class="pantheon"><td class="n">P</td><td>Poseidon</td><td>Water</td><td>Themistokles, the Admiral</td><td>Olympus</td></tr>
+          <tr class="pantheon"><td class="n">P</td><td>Athena</td><td>Psychic</td><td>Hypatia, the Philosopher</td><td>Olympus</td></tr>
+          <tr class="pantheon"><td class="n">P</td><td>Hera</td><td>Dragon</td><td>Olympias, the Serpent Queen</td><td>Olympus</td></tr>
+          <tr class="pantheon"><td class="n">C</td><td>Zeus</td><td>Electric, mixed</td><td>Archon Aristeides the Just</td><td>Olympus</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Hera holds the Dragon seat because in myth she raised the Hydra and set the serpent Ladon to guard the golden apples.</p>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="pokemon">
+    <div class="head">
+      <div class="label">IV · Pokémon</div>
+      <h2>Every generation, cast by myth</h2>
+    </div>
+    <p class="intro">No new species. Every one of the 1,025 can be caught by the end of the post-game, against Glazed's six generations. About 400 appear in the main story, placed where their myth belongs.</p>
+
+    <div class="starters">
+      <div class="starter"><span class="label">Grass · Gen 5</span><h3>Snivy</h3><p>The Python. Serperior is the great serpent of Delphoi that Apollo slew.</p></div>
+      <div class="starter"><span class="label">Fire · Gen 2</span><h3>Cyndaquil</h3><p>The Typhon. Typhlosion is named for the father of monsters, and its ancient Hisuian form suits the era.</p></div>
+      <div class="starter"><span class="label">Water · Gen 4</span><h3>Piplup</h3><p>The Trident. Empoleon carries Poseidon's three prongs on its crest.</p></div>
+    </div>
+    <p>Hisuian forms live in Aethos naturally because the setting is ancient. After the climax, Time Fractures let the Golden Age leak through, bringing the ancient Paradox Pokémon: Great Tusk, Flutter Mane, Roaring Moon and the rest. A post-game Sanctuary of Firsts offers every other starter.</p>
+
+    <div class="myths">
+      <div><span>The three Fates</span><span>Uxie · Mesprit · Azelf</span></div>
+      <div><span>Kronos, Lord of Time</span><span>Dialga</span></div>
+      <div><span>The Titans of Tartarus</span><span>Regigigas &amp; the Regis</span></div>
+      <div><span>Hades and the Underworld</span><span>Giratina</span></div>
+      <div><span>Zeus's thunder-eagle</span><span>Zapdos</span></div>
+      <div><span>The Phoenix</span><span>Ho-Oh</span></div>
+      <div><span>The Dioskouroi twins</span><span>Latias · Latios</span></div>
+      <div><span>Nike, goddess of victory</span><span>Victini</span></div>
+      <div><span>Artemis's Golden Hind</span><span>Xerneas</span></div>
+      <div><span>Hephaestus's golden automaton</span><span>Magearna</span></div>
+      <div><span>The forge under the volcano</span><span>Heatran</span></div>
+      <div><span>Orpheus and the Muses' song</span><span>Meloetta</span></div>
+      <div><span>Eros and Aphrodite</span><span>Enamorus</span></div>
+      <div><span>Hypnos and Nyx</span><span>Cresselia · Darkrai</span></div>
+      <div><span>The evils of Pandora's jar</span><span>Treasures of Ruin</span></div>
+      <div><span>The masks of the Dionysia</span><span>Ogerpon</span></div>
+      <div><span>The Lernaean Hydra</span><span>Hydreigon</span></div>
+      <div><span>Ladon and the golden apples</span><span>Hydrapple</span></div>
+      <div><span>Cerberus</span><span>Mega Houndoom</span></div>
+      <div><span>The Minotaur</span><span>Paldean Tauros</span></div>
+      <div><span>The Stymphalian birds</span><span>Corviknight</span></div>
+      <div><span>Polyphemus the Cyclops</span><span>Dusclops</span></div>
+      <div><span>Circe's swine</span><span>Lechonk</span></div>
+      <div><span>The Lotus-Eaters</span><span>Lotad · Ludicolo</span></div>
+      <div><span>The Sirens</span><span>Altaria</span></div>
+      <div><span>The Golden Fleece</span><span>Mega Ampharos</span></div>
+      <div><span>Scylla</span><span>Grapploct</span></div>
+      <div><span>The Prime Mover</span><span>Arceus</span></div>
+    </div>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="systems">
+    <div class="head">
+      <div class="label">V · Systems</div>
+      <h2>Modern under the marble</h2>
+    </div>
+    <div class="grid">
+      <div><h3>Apotheosis</h3><p>Mega Evolution, including the Legends Z-A Megas. The key stone is the Omphalos and Mega Stones are Ichor Stones. It is the one battle gimmick. Z-Moves, Dynamax and Tera stay off.</p></div>
+      <div><h3>Mortal, Hero, Spartan</h3><p>Three difficulties. Spartan brings level caps, set mode, no items in battle, smarter AI and competitive boss teams. The optional Oath of the Styx is a sworn Nuzlocke ruleset.</p></div>
+      <div><h3>Relics, not HM slaves</h3><p>Talaria sandals to run, Daedalus's Wings to fly, Poseidon's Conch to surf, the Labrys to cut, the Bronze Hammer, the Girdle of Herakles and Hecate's Torch.</p></div>
+      <div><h3>The 2026 checklist</h3><p>Followers, day and night with time-based encounters, the Augur's Eye (DexNav), a Scroll of Deeds quest log, running indoors, reusable TMs, EV and IV views, mints, the party move relearner, menu access to storage, and fast text and battle options.</p></div>
+    </div>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="postgame">
+    <div class="head">
+      <div class="label">VI · After the credits</div>
+      <h2>A post-game bigger than the story</h2>
+    </div>
+    <div class="grid">
+      <div><h3>The Twelve Labors</h3><p>A quest chain of retold myths: the Nemean Lion (Pyroar), the Hydra (Hydreigon), the Golden Hind (Xerneas), the Stymphalian Birds (Corviknight), the Apples of the Hesperides (Hydrapple), Cerberus (Mega Houndoom), and six more.</p></div>
+      <div><h3>Katabasis</h3><p>Pay Charon an obol to cross the Styx, home of Basculegion. Pass Cerberus, walk the Asphodel Meadows and Elysium, free the Titans in Tartarus, then face Hades, Persephone and Giratina.</p></div>
+      <div><h3>The Olympiad</h3><p>The Battle Frontier at Olympia. Its Frontier Brains are heroes: Achilles, Atalanta, Odysseus and Hippolyta. An Arena of Champions hosts rematches with every Hierophant.</p></div>
+      <div><h3>The Odyssey</h3><p>A voyage over the wine-dark sea: the Cyclops's cave, Circe's island, the Sirens, Scylla and Charybdis, the Lotus-Eaters and Aeolus's bag of winds. It ends with a homecoming to Elaia.</p></div>
+      <div><h3>Atlantis</h3><p>A sunken marble city guarded by Manaphy, Kyogre and Lugia.</p></div>
+      <div><h3>The Prime Mover</h3><p>Groudon as Gaia, Kyogre as Oceanus and Rayquaza as Ouranos. Last comes Arceus on the true summit of Olympus.</p></div>
+    </div>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="look">
+    <div class="head">
+      <div class="label">VII · Look and sound</div>
+      <h2>A world painted on pottery</h2>
+    </div>
+    <div class="grid">
+      <div><h3>The interface</h3><p>Text boxes and menus carry terracotta and black meander borders like the bands on this page. Battle intros are black-figure silhouettes, the title screen is a painted amphora, and the trainer card is a kylix cup.</p></div>
+      <div><h3>The overworld</h3><p>Faithful Gen 3 pixel art on 16-pixel tiles, in full color. Olive groves, vineyards, Cycladic villages, marble cities, cypress forests, a volcanic caldera, the Labyrinth, snow above the clouds on Olympus, the gray Underworld and golden Elysium.</p></div>
+      <div><h3>The music</h3><p>Written in the original Greek modes, Dorian, Phrygian, Lydian and Mixolydian, on lyre, kithara, aulos and frame drum. Battles run in Greek folk meters, 7/8 kalamatianos and 9/8 zeibekiko. The Frozen Hour is near silence and a ticking music box.</p></div>
+    </div>
+    <div class="head"><span class="label">Region palette, with each color as the GBA stores it (15-bit BGR555)</span></div>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:#2A6FB0"></div><code>Aegean · 0x59A5</code></div>
+      <div class="swatch"><div class="chip" style="background:#F4F0E8"></div><code>Marble · 0x77DE</code></div>
+      <div class="swatch"><div class="chip" style="background:#6B7A2E"></div><code>Olive · 0x15ED</code></div>
+      <div class="swatch"><div class="chip" style="background:#C4622D"></div><code>Terracotta · 0x1598</code></div>
+      <div class="swatch"><div class="chip" style="background:#F3C04A"></div><code>Ichor gold · 0x271E</code></div>
+      <div class="swatch"><div class="chip" style="background:#6E2547"></div><code>Wine · 0x208D</code></div>
+      <div class="swatch"><div class="chip" style="background:#1B130E"></div><code>Glaze · 0x0443</code></div>
+    </div>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="build">
+    <div class="head">
+      <div class="label">VIII · How we build it</div>
+      <h2>One director, a team of specialist agents</h2>
+    </div>
+    <p class="intro">The game is built on pokeemerald-expansion 1.17.2, the modern Emerald decompilation, so every map, script and sprite is source code under version control. A creative director session owns the vision and reviews everything. Specialist agents work in parallel inside it.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Role</th><th>Owns</th><th>Tools</th></tr></thead>
+        <tbody>
+          <tr><td>Creative director</td><td>Vision, story bible, final review</td><td>The design docs</td></tr>
+          <tr><td>Narrative</td><td>Script, dialogue, character voices</td><td>Poryscript 3.6</td></tr>
+          <tr><td>World and level</td><td>Maps, routes, puzzles, encounter tables</td><td>Porymap 6.3</td></tr>
+          <tr><td>Engine</td><td>Feature config, difficulty, quest log, relics</td><td>C, devkitARM</td></tr>
+          <tr><td>Balance</td><td>Regional dex, trainer teams, level curve</td><td>Expansion data files</td></tr>
+          <tr><td>Pixel art</td><td>Tilesets, trainer and overworld sprites, UI</td><td>Porytiles 2.0, Aseprite</td></tr>
+          <tr><td>Music</td><td>Compositions and instrument sets</td><td>MIDI, mid2agb</td></tr>
+          <tr><td>QA</td><td>Test suite, scripted emulator runs, bug list</td><td>make check, mGBA 0.10 with Lua</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="head"><span class="label">Roadmap · every phase ends in a playable patch</span></div>
+    <ol class="phases">
+      <li><span class="n">0</span><div><h3>Foundation</h3><p>Install the toolchain, fork the expansion, get a clean first build and measure ROM space. Switch on followers, day and night, Megas, DexNav and caps. Set up the tileset pipeline and an automated smoke test, and put the new name on the title screen.</p></div></li>
+      <li><span class="n">1</span><div><h3>Vertical slice</h3><p>Kalliste Isle: Elaia Village, Route 1, Akti Town and the Temple of Hestia. The first Greek tileset, the pottery UI, main cast sprites, three songs, the starters, the first rival battle and the first laurel. About an hour of play.</p><span class="gate label">You playtest and approve the look before we scale</span></div></li>
+      <li><span class="n">2</span><div><h3>Act I</h3><p>Emporion and Eleusa, laurels 2 and 3.</p></div></li>
+      <li><span class="n">3</span><div><h3>Act II</h3><p>Thyrsa, Arkadia, Astyra and Kaldera, laurels 4 to 6.</p></div></li>
+      <li><span class="n">4</span><div><h3>Act III</h3><p>Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour and Olympus. Story complete, version 1.0.</p></div></li>
+      <li><span class="n">5</span><div><h3>Post-game</h3><p>The Labors, Katabasis, the Olympiad, the Odyssey, Atlantis and the Prime Mover.</p></div></li>
+      <li><span class="n">6</span><div><h3>Polish and release</h3><p>Balance passes, a typo sweep, outside beta testers, and the release patch.</p></div></li>
+    </ol>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="field">
+    <div class="head">
+      <div class="label">IX · The field</div>
+      <h2>Against Glazed, and the Greek hack that already exists</h2>
+    </div>
+    <p class="intro">Pokémon Lazarus shipped in 2025 with a Greece-inspired region. It is set in a modern world with Pokémon Centers and Muses as gym leaders. We take the ground it left open: the ancient era, the Olympians, the Titans, the Fates, the Underworld and the great myth cycles.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Glazed</th><th>Lazarus</th><th>Ichor</th></tr></thead>
+        <tbody>
+          <tr><td>Engine</td><td>2012 binary hack</td><td>Emerald</td><td><strong>Modern decomp, expansion 1.17</strong></td></tr>
+          <tr><td>Pokémon</td><td>Gen 1–6</td><td>400+ from Gen 1–9</td><td><strong>All 1,025 catchable</strong></td></tr>
+          <tr><td>Setting</td><td>Tunod, Johto, Rankor</td><td>Modern Greek-flavored Ilios</td><td><strong>Ancient era, myth as the plot</strong></td></tr>
+          <tr><td>Gyms</td><td>Standard</td><td>The Muses</td><td><strong>The twelve Olympians</strong></td></tr>
+          <tr><td>Art</td><td>Gen 3</td><td>Game Boy Color style</td><td><strong>Gen 3 color, pottery UI</strong></td></tr>
+          <tr><td>Post-game</td><td>Johto, legendaries, a World Championship</td><td>Wakewater Isle</td><td><strong>Six arcs and a Battle Frontier</strong></td></tr>
+          <tr><td>Quality of life</td><td>No speed-up</td><td>Modern</td><td><strong>Full 2026 set</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="risks">
+    <div class="head">
+      <div class="label">X · Risks</div>
+      <h2>What could sink it, and the plan for each</h2>
+    </div>
+    <div class="grid">
+      <div><h3>AI-content bans</h3><p>PokéCommunity's 2026 rules ban AI-generated art and writing, and Eevee Expo reportedly does too. A hack built by agents may need its own release channels, or human artists and an editor for final assets. This needs a decision before public release, not now.</p></div>
+      <div><h3>Art is the bottleneck</h3><p>Generated images do not survive the GBA's 16-color tiles without heavy cleanup. We plan palettes first, compile tilesets with Porytiles, use credited free resources, and approve the look at the Phase 1 gate before building more.</p></div>
+      <div><h3>Legal exposure</h3><p>Nintendo has taken down standalone fan games. Patch-only hacks have mostly been left alone. We stay non-commercial, ship only a patch, and players bring their own Emerald ROM.</p></div>
+      <div><h3>Cartridge space</h3><p>A GBA cartridge tops out at 32 MB. We measure a full-species build in Phase 0 and budget art and music against it.</p></div>
+      <div><h3>Fun needs a human</h3><p>Crash and flow tests can be automated. Whether a fight feels fair, or a route drags, needs your hands on the controls at each phase gate.</p></div>
+    </div>
+  </section>
+</div>
+
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section id="calls">
+    <div class="calls">
+      <div class="label">Your calls</div>
+      <h2>Four decisions</h2>
+      <ol>
+        <li><strong>The title.</strong> Pokémon Ichor is the working title. Pokémon Laurel is the open alternate.</li>
+        <li><strong>The starters.</strong> Snivy, Cyndaquil and Piplup, three generations and three myths, none overlapping Lazarus.</li>
+        <li><strong>The go-ahead for Phase 0.</strong> The compiler installer needs your Mac password once. Everything after that runs here.</li>
+        <li><strong>Release policy on AI content.</strong> Not needed until we near a public release.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <span class="label">A fan project</span>
+    <p>Non-commercial. Distributed only as a patch for a legally owned copy of Pokémon Emerald. Pokémon and all related names belong to Nintendo, Game Freak and The Pokémon Company. Built on pokeemerald-expansion by the ROM Hacking Hideout.</p>
+  </footer>
+</div>

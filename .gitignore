@@ -66,3 +66,9 @@ tools/aif2pcm/aif2pcm
 *.smolTM
 __pycache__
 .map_version
+
+# Pokemon Ichor: release patches are never committed
+*.bps
+*.ips
+*.ups
+.claude/settings.local.json
