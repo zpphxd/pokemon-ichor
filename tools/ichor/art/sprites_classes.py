@@ -202,8 +202,136 @@ def shepherd():
     return f, pal
 
 
+# --------------------------------------------------------------------------
+# Harvester (female): olive-picker, headscarf, apron, a basket of olives
+# --------------------------------------------------------------------------
+
+def harvester():
+    pal = Palette([
+        ("ink", INK),
+        *SKIN_SUN,
+        ("brown", (88, 48, 32)),
+        ("ter_l", (232, 120, 80)), ("ter_m", (184, 72, 48)), ("ter_d", (88, 40, 64)),
+        ("lin_l", (248, 240, 216)), ("lin_d", (200, 184, 152)),
+        ("ol_l", (168, 184, 120)), ("ol_m", (112, 128, 56)), ("ol_d", (56, 72, 32)),
+        ("wick_l", (224, 184, 104)), ("wick_d", (160, 112, 56)),
+    ])
+    skin = skin_mat("brown")
+    dress = Mat(["ol_d", "ol_m", "ol_l"], wx=0.85, wy=0.2, cuts=[0.3, 0.75])
+    apron = Mat(["lin_d", "lin_l"], outline="brown", wx=0.8, wy=0.3, cuts=[0.62])
+    scarf = Mat(["ter_d", "ter_m", "ter_l"], cuts=[0.3, 0.7])
+    wicker = Mat(["brown", "wick_d", "wick_l"], outline="brown", wx=0.7, wy=0.5, cuts=[0.45, 0.8])
+    lea = Mat(["brown"])
+    f = Fig(pal)
+
+    # long olive-green dress, the hem swinging a little toward her raised arm
+    body = f.poly([(26, 24), (38, 24), (41, 32), (42, 40), (44, 50), (46, 58), (20, 58), (21, 50), (23, 40),
+                   (24, 32)], dress)
+    for x in (27, 33, 40):
+        f.shade_poly([(x, 44), (x + 1, 44), (x + 1 + (x - 33) // 4, 57), (x + (x - 33) // 4, 57)], 0.45)
+    f.poly([(23, 58), (28, 58), (28, 61), (22, 61)], lea)
+    f.poly([(35, 58), (40, 58), (41, 61), (35, 61)], lea)
+    # linen apron tied with a terracotta sash
+    f.poly([(25, 32), (37, 32), (38, 42), (39, 52), (35, 53), (27, 53), (23, 52), (24, 42)], apron)
+    f.shade_poly([(30, 38), (31, 38), (31, 52), (30, 52)], 0.4)
+    f.shade_poly([(35, 40), (36, 40), (37, 52), (36, 52)], 0.4)
+    f.rect(22, 31, 42, 32, scarf, clip=body, noline=True)
+    f.rect(29, 20, 34, 26, skin, group=400)
+    # near arm (her right) raised, holding up an olive sprig
+    f.thick_line([(26, 26), (21, 30)], 5, skin, group=200)
+    f.thick_line([(21, 30), (18, 23)], 4, skin, group=200)
+    f.poly([(24, 24), (28, 24), (28, 28), (25, 29), (23, 27)], dress, group=210)
+    # far arm hanging to the basket rim
+    f.thick_line([(39, 26), (41, 30), (42, 34)], 4, skin, group=300)
+    # wicker basket on her left hip
+    bask = f.poly([(35, 36), (55, 36), (54, 41), (52, 45), (48, 47), (42, 47), (38, 45), (36, 41)], wicker, group=500)
+
+    # basket weave
+    f.textures = [((bask,), ["brown", "wick_d", "wick_l"], stagger(36, 37, 55, 47, 4, 2), [(0, 0), (1, 0)])]
+    # heap of black and green olives above the rim, two leaves poking out
+    heap = [list("." * 21) for _ in range(9)]
+    rows = {0: (0, -1), 1: (0, -1), 2: (6, 13), 3: (4, 15), 4: (2, 17), 5: (1, 18), 6: (1, 19), 7: (0, 20)}
+    for r, (a, b) in rows.items():
+        for c in range(a, b + 1):
+            heap[r][c] = "k"
+    olives = [(7, 2, "d"), (11, 2, "g"), (4, 4, "g"), (8, 4, "d"), (12, 4, "d"), (15, 4, "g"),
+              (2, 6, "d"), (6, 6, "d"), (10, 6, "g"), (14, 6, "d"), (17, 6, "d")]
+    for c, r, kind in olives:
+        hi, body = ("T", "d") if kind == "d" else ("G", "g")
+        for dc, dr, ch in ((0, 0, hi), (1, 0, body), (2, 0, body), (0, 1, body), (1, 1, body), (2, 1, body)):
+            if heap[r + dr][c + dc] == "k":
+                heap[r + dr][c + dc] = ch
+    for c, r in ((9, 0), (10, 1), (13, 0), (12, 1)):
+        heap[r][c] = "G"
+    for c, r in ((8, 0), (9, 1), (11, 1), (10, 0), (12, 0), (13, 1), (14, 0)):
+        if heap[r][c] == ".":
+            heap[r][c] = "k"
+    heap[8] = list("bWWWWWWWWWWWWWWWWWwwb")
+    f.patch(35, 27, ["".join(r) for r in heap] + ["bwwwwwwwwwwwwwwwwwwbb"],
+            {"k": "ink", "d": "ter_d", "T": "lin_l", "g": "ol_m", "G": "ol_l", "b": "brown",
+             "W": "wick_l", "w": "wick_d"})
+    # hand over the rim
+    f.patch(40, 33, [
+        ".bbbb.",
+        "bLLLLb",
+        "bLMLMb",
+        "bMMMMb",
+        ".bbbb.",
+    ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
+    # olive sprig in her raised hand: a twig, slim silver leaves, two olives
+    f.patch(8, 6, [
+        "..kk.........",
+        ".kGGk........",
+        "kGGgk...kk...",
+        ".kkkbk.kGGk..",
+        "....kbkGgk...",
+        "..kk.kbkk....",
+        ".kGGkkbk.kk..",
+        "kGGgkkbkkGGk.",
+        ".kkk.kbkGgk..",
+        "....kTdbkk...",
+        "...kTddkbk...",
+        "...kdddkbk...",
+        "....kkk.kbk..",
+        ".........kbk.",
+        ".........kbk.",
+    ], {"k": "ink", "G": "ol_l", "g": "ol_m", "b": "brown", "d": "ter_d", "T": "lin_l"})
+    f.patch(15, 19, [
+        ".bbbb.",
+        "bLLLLb",
+        "bLbLMb",
+        "bLLMMb",
+        ".bbbb.",
+    ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
+    # head: terracotta headscarf knotted at the nape, a few loose strands
+    f.patch(24, 5, [
+        ".....kkkkkkk.......",
+        "...kkTTTTTttkk.....",
+        "..kTTTTTTtttttk....",
+        ".kTTTTTTtttttttk...",
+        ".kTTTTTttttttttdk..",
+        "kTTTTTtttttttttddk.",
+        "kTTTTtttttttttdddk.",
+        "ktttttttttttdddddk.",
+        "kbHHbbbbbbbbkddTtk.",
+        ".bHLLLLLLLLMbdTTtdk",
+        ".bkkkLLLkkkMMbdtdk.",
+        ".bLWkLLLkWLMDMbdk..",
+        "bLLLLLLLLLLMDMbtk..",
+        "bLLLLDLLLLMMMbtdTk.",
+        ".bLLDDLLLMMMMbdTtk.",
+        ".bLLLLLLMMMMbkdtdk.",
+        "..bLLtttLMMbk.ktk..",
+        "...bLLLMMMbk...kk..",
+        "....bbbbbbk........",
+    ], {"k": "ink", "T": "ter_l", "t": "ter_m", "d": "ter_d", "b": "brown", "H": "brown",
+        "L": "skin_l", "M": "skin_m", "D": "skin_d", "W": "lin_l"})
+    return f, pal
+
+
 CLASSES = {
     "shepherd": shepherd,
+    "harvester": harvester,
 }
 
 

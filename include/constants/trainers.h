@@ -184,6 +184,7 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_PROFESSOR_DAPHNE,
     // Pokemon Ichor trainer classes (see design/phase1/SPRITES_classes.md)
     TRAINER_PIC_SHEPHERD,
+    TRAINER_PIC_HARVESTER,
     TRAINER_PIC_COUNT,
 };
 
