@@ -84,6 +84,9 @@ fi
 if ! grep -q "Halia sent a gull" "${OUT}text.txt"; then
   echo "SLICE FAIL: the run never reached the end of the slice (Alethea's word from Halia)"; fail=1
 fi
+if ! grep -q "Its streets are still being laid" "${OUT}text.txt"; then
+  echo "SLICE FAIL: the run never reached the end of batch 1 (the Euploia making Emporion)"; fail=1
+fi
 if [ $fail -eq 0 ]; then
   echo "SLICE PASS: $(ls "${OUT}"shots/*.png | wc -l | tr -d ' ') screenshots, $(grep -c ' BATTLE ' "${OUT}run.log") battles," \
        "$(grep -c ' NOTE ' "${OUT}run.log") notes, ${secs}s. Shots in ${OUT}shots/, save states in ${OUT}states/"

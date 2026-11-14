@@ -275,7 +275,9 @@ function L.isTrainerBattle() return emu:read32(S.gBattleTypeFlags) & S.BATTLE_TY
 local function controller(name) return emu:read32(S.gBattlerControllerFuncs) == (S[name] | 1) end
 
 local TRAINERS = { "KLEON_SNIVY", "KLEON_CYNDAQUIL", "KLEON_PIPLUP", "TITYROS", "PHYLLIS", "KOMATAS", "AGIS",
-                   "POLYEIDOS", "PETROS", "AMATHOS", "LAMPON", "PYRRHA", "AITHRA", "IONE" }
+                   "POLYEIDOS", "PETROS", "AMATHOS", "LAMPON", "PYRRHA", "AITHRA", "IONE",
+                   -- Phase 2
+                   "ALETHEA_DECK", "PHORMION", "LYKON" }
 local function defeatedSet()
   local t = {}
   for _, n in ipairs(TRAINERS) do t[n] = L.defeated(S["TRAINER_" .. n]) end
@@ -563,7 +565,10 @@ local function firstStep(goal, avoid, strict)
     local mid, solid, b, te = g.tile(x, y)
     if mid == nil or solid or isWater(b) or g.people[x .. "," .. y] then return nil end
     if avoided(avoid, x, y) then return nil end
-    if strict and not goal(x, y) and (g.warps[x .. "," .. y] or g.coords[x .. "," .. y]) then return nil end
+    -- never cross a warp on the way to something else: a floor warp (the
+    -- Euploia's hatch) takes the player off the map on the first step
+    if not goal(x, y) and g.warps[x .. "," .. y] then return nil end
+    if strict and not goal(x, y) and g.coords[x .. "," .. y] then return nil end
     for _, d in ipairs(DIRS) do if b == S[d[4]] then return nil end end   -- a ledge is only jumped
     if e ~= 0 and te ~= 0 and te ~= 15 and te ~= e then return nil end
     return te

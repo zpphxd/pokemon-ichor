@@ -758,7 +758,93 @@ beat("09b_board", function()
   L.waitUntil(function() return mapId() == S.MAP_DECK end, 600, "the Euploia's deck")
   flagsSet({ "FLAG_BOARDED_EUPLOIA", "FLAG_HIDE_MOM_AKTI" }, "aboard, and Mom has gone home")
   flagsClear({ "FLAG_HIDE_MOM_HOME" }, "Mom is home again")
+  -- "Cast off!" plays on arrival
+  settle({ every = true })
+  musicIs(S.MUS_TRIREME, "the crossing's theme")
   shot("aboard")
+end)
+
+-- Beat 10: the crossing. The deck's people, trainers and items, and the hold, first;
+-- then Nausikles's steering oar starts the calm, the snatchers and the night leg.
+local TD, TH = "TriremeDeck_EventScript_", "TriremeHold_EventScript_"
+beat("10_deck", function()
+  trainer("ALETHEA_DECK", TD .. "Alethea", S.MUS_BATTLE_TRAINER, { answers = { "yes" } })
+  flagsSet({ "FLAG_BATTLED_ALETHEA_DECK" }, "Alethea's practice battle")
+  talk(L.npc(TD .. "Kleon"), { shotBefore = "kleon_at_the_rail" })
+  talk(L.npc(TD .. "Lookout"), { shotBefore = "lookout" })
+  trainer("LYKON", TD .. "Lykon", S.MUS_BATTLE_TRAINER)
+  trainer("PHORMION", TD .. "Phormion", S.MUS_BATTLE_TRAINER)
+  collect(ball("FLAG_ITEM_DECK_SUPER_POTION"), "FLAG_ITEM_DECK_SUPER_POTION", "ITEM_SUPER_POTION",
+          "the Super Potion among the bow cargo")
+  collect(hidden("FLAG_HIDDEN_DECK_HEART_SCALE"), "FLAG_HIDDEN_DECK_HEART_SCALE", "ITEM_HEART_SCALE",
+          "the Heart Scale in the rope coil")
+  talk(L.sign(TD .. "Klepsydra"), { shotBefore = "klepsydra" })
+  L.useWarp(S.MAP_HOLD)
+  shot("the_hold")
+  for _, who in ipairs({ "LakonianRower", "Rower1", "Rower2", "Rower3" }) do
+    talk(L.npc(TH .. who), { shotBefore = string.lower(who) })
+  end
+  collect(ball("FLAG_ITEM_HOLD_POTION"), "FLAG_ITEM_HOLD_POTION", "ITEM_POTION", "the Potion under the bottom bench")
+  L.useWarp(S.MAP_DECK)
+end)
+
+beat("10_calm", function()
+  -- the steering oar: the calm, the split reed, Kleon's stroke, then a free moment
+  talk(L.npc(TD .. "Nausikles"), { shotBefore = "steering_oar", answers = { "yes" }, every = true })
+  shot("the_calm")
+  talk(L.sign(TD .. "Klepsydra"), { shotBefore = "klepsydra_upward" })
+  -- the lookout's shout: crossing x = 8 walks the player to the bow
+  local bow = L.triggers(TD .. "ToBowRow4", TD .. "ToBowRow5", TD .. "ToBowRow6", TD .. "ToBowRow7",
+                         TD .. "ToBowRow8", TD .. "ToBowRow9")
+  expect(not L.goTrigger(bow), "the bow line starts the nest scene")
+  -- the snatchers (fought: no running), the hatching, the chick (take it, no
+  -- nickname), the night leg, and on to Aigina's quay
+  settle({ every = true, answers = { "yes", "no" } })
+  L.waitUntil(function() return mapId() == S.MAP_AEGINA end, 3000, "Aigina's quay")
+  settle({ every = true })
+  flagsSet({ "FLAG_SAVED_HALCYON_NEST", "FLAG_GOT_HALCYLING" }, "the nest is saved and the chick taken")
+  flagsClear({ "FLAG_NO_WHITEOUT", "FLAG_NO_RUNNING" }, "the snatcher battles' flags are cleared")
+  flagsSet({ "FLAG_ARRIVED_AEGINA", "FLAG_VISITED_AEGINA", "FLAG_HIDE_AEGINA_CAST" }, "the arrival on Aigina")
+  shot("aigina_by_night")
+end)
+
+-- Beat 10B: a night ashore on Aigina.
+local AG = "AeginaTown_EventScript_"
+beat("10b_aigina", function()
+  visitAll({
+    visitTalk("gatekeeper", npc(AG .. "Gatekeeper")),
+    visitTalk("fisherwoman", npc(AG .. "Fisherwoman")),
+    visitTalk("kid", npc(AG .. "Kid")),
+    visitTalk("kolona", sign(AG .. "Kolona")),
+    visitTalk("town_sign", sign(AG .. "TownSign")),
+    visitItem("the Big Pearl at the end of the mole", hidden("FLAG_HIDDEN_AEGINA_BIG_PEARL"),
+              "FLAG_HIDDEN_AEGINA_BIG_PEARL", "ITEM_BIG_PEARL"),
+    visitItem("the Stardust at Kolona's foot", hidden("FLAG_HIDDEN_AEGINA_STARDUST"),
+              "FLAG_HIDDEN_AEGINA_STARDUST", "ITEM_STARDUST"),
+  })
+  L.useWarp(S.MAP_AEGINA_MINT)
+  talk(L.npc("AeginaTown_Mint_EventScript_Pheidon"), { shotBefore = "pheidon", answers = { "no" } })
+  L.useWarp(S.MAP_AEGINA)
+  L.useWarp(S.MAP_AEGINA_AIAKIDES)
+  talk(L.npc("AeginaTown_AiakidesHouse_EventScript_Aiakides"), { shotBefore = "aiakides" })
+  L.useWarp(S.MAP_AEGINA)
+  L.useWarp(S.MAP_AEGINA_INN)
+  -- bed: the night by the hearth, Kleon's question (the second answer), then the deck at dawn
+  talk(L.npc("AeginaTown_Inn_EventScript_Endeis"), { shotBefore = "endeis", answers = { "yes", "down" }, every = true })
+  L.waitUntil(function() return mapId() == S.MAP_DECK end, 3000, "the deck at dawn")
+  flagsSet({ "FLAG_AEGINA_NIGHT" }, "the night at the inn")
+end)
+
+-- Beat 10C: the last leg, then (until Emporion is built) the ferry home.
+beat("10c_last_leg", function()
+  settle({ every = true })
+  flagsSet({ "FLAG_CROSSING_DONE" }, "the crossing is done")
+  shot("after_the_last_leg")
+  talk(L.npc(TD .. "Nausikles"), { shotBefore = "ferry_deck", answers = { "yes" } })
+  L.waitUntil(function() return mapId() == S.MAP_AKTI end, 3000, "Akti, by ferry")
+  settle()
+  shot("akti_by_ferry")
+  talk(L.npc(AK .. "Nausikles"), { shotBefore = "ferry_akti" })
 end)
 
 L.start(function()
@@ -783,10 +869,11 @@ L.start(function()
   else
     -- every trainer in the slice
     for _, n in ipairs({ "TITYROS", "PHYLLIS", "KOMATAS", "AGIS", "POLYEIDOS", "PETROS", "AMATHOS", "LAMPON",
-                         "PYRRHA", "AITHRA", "IONE", KLEON_TRAINER[STARTER] }) do
+                         "PYRRHA", "AITHRA", "IONE", KLEON_TRAINER[STARTER],
+                         "ALETHEA_DECK", "PHORMION", "LYKON" }) do
       if not L.defeated(S["TRAINER_" .. n]) then L.fail(n .. " was never beaten") end
     end
-    log("ok every trainer in the slice is beaten")
+    log("ok every trainer so far is beaten")
   end
   log(string.format("ok the slice played through in %d frames, %d battles, %d design finding(s)", now(),
                     #L.battles, L.findings))

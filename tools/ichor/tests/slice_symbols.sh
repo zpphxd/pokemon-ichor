@@ -50,7 +50,7 @@ PATTERN="^($(echo $SYMS | tr ' ' '|'))$"
   # The slice's and Phase 2's maps' event scripts, by name: the tests find people, signs and
   # triggers on the live map by the script they run, never by coordinates.
   echo "  SCRIPTS = {"
-  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^((ElaiaVillage|KallisteRoute1|AktiTown|TriremeEuploia|Aegina|Ichor)[A-Za-z0-9_]*_EventScript_[A-Za-z0-9_]+|Common_EventScript_FindItem)$/ && $3 !~ /_[0-9]+$/ { print "    " $3 " = 0x" $1 "," }'
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^((ElaiaVillage|KallisteRoute1|AktiTown|Trireme|Aegina|Emporion|Eleusa|Ichor)[A-Za-z0-9_]*_EventScript_[A-Za-z0-9_]+|Common_EventScript_FindItem)$/ && $3 !~ /_[0-9]+$/ { print "    " $3 " = 0x" $1 "," }'
   echo "  },"
   # Every song's header, by name: several song ids share one header (Ichor
   # re-pointed Hoenn's slots at its own songs), so tests compare headers.
