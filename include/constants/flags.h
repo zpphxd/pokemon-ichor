@@ -686,8 +686,8 @@
 #define FLAG_ICHOR_VISITED_AEGINA 0x277 // Ichor: Aegina Town visited (fly target)
 #define FLAG_ICHOR_AEGINA_NIGHT 0x278 // Ichor: beat 10B: the night at Endeis's inn
 #define FLAG_ICHOR_CROSSING_DONE 0x279 // Ichor: beat 10C: the Euploia made Emporion; the ferry runs
-#define FLAG_ICHOR_FERRY_TO_AEGINA 0x27A // Ichor: the Euploia ferry is bound for Aegina (with TO_EMPORION clear: Akti)
-#define FLAG_ICHOR_FERRY_TO_EMPORION 0x27B // Ichor: the Euploia ferry is bound for Emporion
+#define FLAG_ICHOR_FERRY_TO_AEGINA 0x27A // Ichor: the Euploia's Aigina stop is open, and so is Aigina Town's north gate (world-act2 sets it, Act II beat 46)
+#define FLAG_ICHOR_FERRY_TO_EMPORION 0x27B // Ichor: the Euploia ferry is bound for Emporion (clear: Akti)
 #define FLAG_ICHOR_TRADED_CHELONET 0x27C // Ichor: Aegina: traded Pheidon a Karkipool for his Chelonet, Stater
 #define FLAG_ICHOR_GOT_BLACK_BELT 0x27D // Ichor: Aegina: Aiakides gave his Black Belt for a look at an Ergant
 #define FLAG_ICHOR_ITEM_DECK_SUPER_POTION 0x27E // Ichor: item ball: Super Potion among the Euploia's bow cargo

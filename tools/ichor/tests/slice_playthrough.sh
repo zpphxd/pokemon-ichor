@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# The slice playthrough: one continuous run of the Phase 1 slice, from a fresh
-# cartridge to the harbor's "Thank you for playing", with key presses only.
+# The playthrough: one continuous run from a fresh cartridge through the Phase 1
+# slice and on into Phase 2 as far as it is built, with key presses only.
 #
 #   tools/ichor/tests/slice_playthrough.sh [rom]     (default: pokeemerald.gba; run make first)
 #
@@ -79,8 +79,10 @@ if grep -q "SLICE FAIL" "${OUT}run.log" || ! grep -q "SLICE done" "${OUT}run.log
 elif ! grep -q "SLICE PASS" "${OUT}run.log"; then
   echo "SLICE FAIL: the run stopped before the end (runner exit $code)"; fail=1
 fi
-if ! grep -q "Thank you for playing" "${OUT}text.txt"; then
-  echo "SLICE FAIL: the run never showed \"Thank you for playing\""; fail=1
+# Phase 2 replaced the slice's farewell card; the run now ends where Act I's
+# built content does (design/phase2/BUILD.md's batches).
+if ! grep -q "Halia sent a gull" "${OUT}text.txt"; then
+  echo "SLICE FAIL: the run never reached the end of the slice (Alethea's word from Halia)"; fail=1
 fi
 if [ $fail -eq 0 ]; then
   echo "SLICE PASS: $(ls "${OUT}"shots/*.png | wc -l | tr -d ' ') screenshots, $(grep -c ' BATTLE ' "${OUT}run.log") battles," \

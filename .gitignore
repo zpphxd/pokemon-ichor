@@ -98,3 +98,15 @@ data/maps/AeginaTown_Inn/scripts.inc
 data/maps/AeginaTown_Mint/scripts.inc
 data/maps/AeginaTown_AiakidesHouse/scripts.inc
 data/scripts/ichor_act1.inc
+data/maps/EmporionCity/scripts.inc
+data/maps/EmporionHarbor/scripts.inc
+data/maps/EmporionCity_Asclepeion/scripts.inc
+data/maps/EmporionCity_Deigma/scripts.inc
+data/maps/EmporionCity_Hephaisteion/scripts.inc
+data/maps/EmporionCity_Tavern/scripts.inc
+data/maps/EmporionCity_PhiloxenosHouse/scripts.inc
+data/maps/EmporionCity_WidowsHouse/scripts.inc
+data/maps/EmporionCity_RunnersHouse/scripts.inc
+data/maps/EmporionCity_PottersWorkshop/scripts.inc
+data/maps/EmporionCity_HiringHall/scripts.inc
+data/maps/EmporionCity_TempleOfHermes/scripts.inc

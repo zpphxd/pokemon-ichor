@@ -9503,10 +9503,10 @@
     {
       "id": "LAYOUT_AEGINA_TOWN",
       "name": "AeginaTown_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 30,
+      "height": 24,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Aegina",
       "border_filepath": "data/layouts/AeginaTown/border.bin",
       "blockdata_filepath": "data/layouts/AeginaTown/map.bin",
       "layout_version": "emerald"
@@ -9558,10 +9558,10 @@
     {
       "id": "LAYOUT_AEGINA_TOWN_INN",
       "name": "AeginaTown_Inn_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 16,
+      "height": 12,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Ergasteria",
       "border_filepath": "data/layouts/AeginaTown_Inn/border.bin",
       "blockdata_filepath": "data/layouts/AeginaTown_Inn/map.bin",
       "layout_version": "emerald"
@@ -9569,10 +9569,10 @@
     {
       "id": "LAYOUT_AEGINA_TOWN_MINT",
       "name": "AeginaTown_Mint_Layout",
-      "width": 10,
+      "width": 9,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Ergasteria",
       "border_filepath": "data/layouts/AeginaTown_Mint/border.bin",
       "blockdata_filepath": "data/layouts/AeginaTown_Mint/map.bin",
       "layout_version": "emerald"
@@ -9580,12 +9580,144 @@
     {
       "id": "LAYOUT_AEGINA_TOWN_AIAKIDES_HOUSE",
       "name": "AeginaTown_AiakidesHouse_Layout",
+      "width": 8,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Ergasteria",
+      "border_filepath": "data/layouts/AeginaTown_AiakidesHouse/border.bin",
+      "blockdata_filepath": "data/layouts/AeginaTown_AiakidesHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY",
+      "name": "EmporionCity_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Emporion",
+      "border_filepath": "data/layouts/EmporionCity/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_HARBOR",
+      "name": "EmporionHarbor_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Isthmos",
+      "border_filepath": "data/layouts/EmporionHarbor/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionHarbor/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_ASCLEPEION",
+      "name": "EmporionCity_Asclepeion_Layout",
       "width": 10,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_Oikia",
-      "border_filepath": "data/layouts/AeginaTown_AiakidesHouse/border.bin",
-      "blockdata_filepath": "data/layouts/AeginaTown_AiakidesHouse/map.bin",
+      "border_filepath": "data/layouts/EmporionCity_Asclepeion/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_Asclepeion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_DEIGMA",
+      "name": "EmporionCity_Deigma_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/EmporionCity_Deigma/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_Deigma/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_HEPHAISTEION",
+      "name": "EmporionCity_Hephaisteion_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/EmporionCity_Hephaisteion/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_Hephaisteion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_TAVERN",
+      "name": "EmporionCity_Tavern_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/EmporionCity_Tavern/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_Tavern/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_PHILOXENOS_HOUSE",
+      "name": "EmporionCity_PhiloxenosHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/EmporionCity_PhiloxenosHouse/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_PhiloxenosHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_WIDOWS_HOUSE",
+      "name": "EmporionCity_WidowsHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/EmporionCity_WidowsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_WidowsHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_RUNNERS_HOUSE",
+      "name": "EmporionCity_RunnersHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/EmporionCity_RunnersHouse/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_RunnersHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_POTTERS_WORKSHOP",
+      "name": "EmporionCity_PottersWorkshop_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/EmporionCity_PottersWorkshop/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_PottersWorkshop/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_HIRING_HALL",
+      "name": "EmporionCity_HiringHall_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/EmporionCity_HiringHall/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_HiringHall/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EMPORION_CITY_TEMPLE_OF_HERMES",
+      "name": "EmporionCity_TempleOfHermes_Layout",
+      "width": 17,
+      "height": 24,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_TempleHermes",
+      "border_filepath": "data/layouts/EmporionCity_TempleOfHermes/border.bin",
+      "blockdata_filepath": "data/layouts/EmporionCity_TempleOfHermes/map.bin",
       "layout_version": "emerald"
     }
   ]

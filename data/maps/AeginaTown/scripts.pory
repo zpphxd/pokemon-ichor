@@ -1,1 +1,189 @@
-mapscripts AeginaTown_MapScripts {}
+// Aigina Town: the island harbor where the Euploia puts in for the night.
+// design/phase2/SCRIPT.md beat 10B and the Aegina Town roster.
+//
+// The voyage night is everything before FLAG_ICHOR_CROSSING_DONE: the player can
+// only be here then by stepping off the Euploia. That night the sky stays dark
+// (the hour is forced to 22, re-applied on every transition until the night at
+// the inn), the gate to the Aphaia Road is shut with the gatekeeper in it, and
+// Nausikles sends everyone to bed. The revised map puts the island's interior in
+// Act II: the gate opens with FLAG_ICHOR_FERRY_TO_AEGINA, which world-act2 sets
+// when Nausikles adds the Aigina stop (its beat 46). Then the gatekeeper stands
+// aside and Nausikles runs the ferry.
+//
+//   VAR_TEMP_1 == 1  the arrival (beat 10B) plays as the player steps onto the quay
+
+mapscripts AeginaTown_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_VISITED_AEGINA)
+        if (!flag(FLAG_ICHOR_CROSSING_DONE)) {
+            if (!flag(FLAG_ICHOR_AEGINA_NIGHT)) {
+                setvar(VAR_0x8004, 22)
+                special(Ichor_SetHoursOverride)
+            }
+            if (!flag(FLAG_ICHOR_ARRIVED_AEGINA)) {
+                setvar(VAR_TEMP_1, 1)
+            }
+        } elif (flag(FLAG_ICHOR_FERRY_TO_AEGINA)) {
+            // the gate is open: the gatekeeper stands by its west pier
+            setobjectxyperm(LOCALID_AEGINA_GATEKEEPER, 23, 4)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        // The voyage night: the gate's leaves shut across the passage. The ids are
+        // gate_shut's two cells in gTileset_Aegina (tools/ichor/maps/aegina.py
+        // checks them against the catalog).
+        if (!flag(FLAG_ICHOR_FERRY_TO_AEGINA)) {
+            setmetatile(24, 3, 0x2C0, TRUE)
+            setmetatile(25, 3, 0x2C1, TRUE)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: AeginaTown_EventScript_Arrival
+    ]
+}
+
+// ---------------------------------------------------------------------------
+// Speakers
+// ---------------------------------------------------------------------------
+
+text AeginaTown_Text_NameKleon { "KLEON" }
+text AeginaTown_Text_NameAlethea { "ALETHEA" }
+
+// ---------------------------------------------------------------------------
+// Beat 10B: the arrival. The player steps off the gangplank onto the quay at
+// (12,12) (warp 0), Kleon and Alethea beside them at (13,12) and (14,12),
+// Nausikles at the gangplank's foot (12,11).
+// ---------------------------------------------------------------------------
+
+script AeginaTown_EventScript_Arrival {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    setflag(FLAG_ICHOR_ARRIVED_AEGINA)
+    setflag(FLAG_ICHOR_VISITED_AEGINA)
+    applymovement(OBJ_EVENT_ID_PLAYER, AeginaTown_Movement_FaceRight)
+    waitmovement(0)
+    // Kleon kneels and pats the stones
+    applymovement(LOCALID_AEGINA_KLEON, AeginaTown_Movement_KleonPatsTheStones)
+    waitmovement(0)
+    setspeaker(AeginaTown_Text_NameKleon)
+    msgbox(format("Solid. Look at it. Not moving at all. Beautiful."))
+    closemessage
+    applymovement(LOCALID_AEGINA_KLEON, AeginaTown_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(AeginaTown_Text_NameAlethea)
+    msgbox(format("Aigina! The first coins in the world were struck here. Turtles.\p"
+                  "I'm going to the mint. Don't wait for me. Truthfully, do wait for me."))
+    setspeaker(AeginaTown_Text_NameKleon)
+    msgbox(format("The ants here turned into soldiers. A whole army out of an anthill.\p"
+                  "I'm going to look at them. Professionally."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, AeginaTown_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(Ichor_Text_NameNausikles)
+    msgbox(format("The inn's paid for. Sleep there. We sail at first light."))
+    closemessage
+    // Alethea makes for the mint, Kleon for the ant hills: east along the quay
+    applymovement(LOCALID_AEGINA_ALETHEA, AeginaTown_Movement_OffEast)
+    applymovement(LOCALID_AEGINA_KLEON, AeginaTown_Movement_OffEast)
+    waitmovement(LOCALID_AEGINA_ALETHEA)
+    waitmovement(LOCALID_AEGINA_KLEON)
+    removeobject(LOCALID_AEGINA_ALETHEA)
+    removeobject(LOCALID_AEGINA_KLEON)
+    setflag(FLAG_ICHOR_HIDE_AEGINA_CAST)
+    releaseall
+}
+
+movement AeginaTown_Movement_KleonPatsTheStones {
+    face_down
+    walk_in_place_slow_down * 2
+    delay_16
+}
+movement AeginaTown_Movement_OffEast { walk_right * 8 }
+movement AeginaTown_Movement_FaceUp { face_up }
+movement AeginaTown_Movement_FaceLeft { face_left }
+movement AeginaTown_Movement_FaceRight { face_right }
+
+// Kleon and Alethea only stand on the quay during the arrival.
+script AeginaTown_EventScript_Cast {
+    end
+}
+
+// ---------------------------------------------------------------------------
+// The people of Aigina
+// ---------------------------------------------------------------------------
+
+// On the voyage night Nausikles sends everyone to the inn; afterwards he is the
+// ferry (data/scripts/ichor_act1.pory).
+script AeginaTown_EventScript_Nausikles {
+    if (flag(FLAG_ICHOR_CROSSING_DONE)) {
+        setvar(VAR_0x8004, 1)
+        goto(Ichor_EventScript_FerryQuay)
+    }
+    lock
+    faceplayer
+    setspeaker(Ichor_Text_NameNausikles)
+    msgbox(format("The inn's paid for. Sleep there. We sail at first light."))
+    release
+}
+
+script AeginaTown_EventScript_Gatekeeper {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_FERRY_TO_AEGINA)) {
+        msgbox(format("The road to Aphaia's temple. Up through the pines. Mind the ants."))
+    } else {
+        msgbox(format("The temple road's shut after dark. The goddess likes her privacy.\p"
+                      "She's very good at it. That's sort of her whole thing."))
+    }
+    release
+}
+
+script AeginaTown_EventScript_Fisherwoman {
+    msgbox(format("Aigina's halfway to everywhere. Kalliste, Emporion, the Isthmus.\p"
+                  "Everybody stops here. Nobody stays. Suits me."), MSGBOX_NPC)
+}
+
+script AeginaTown_EventScript_Kid {
+    msgbox(format("My Ergant's called Myrmidon. Everyone's Ergant here is called Myrmidon.\p"
+                  "It's confusing at the ant races."), MSGBOX_NPC)
+}
+
+script AeginaTown_EventScript_Ergant {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ERGANT, CRY_MODE_NORMAL)
+    msgbox(format("Myrmidon clicks its jaws at you, then turns back to the ant hill."))
+    waitmoncry
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Signs and scenery
+// ---------------------------------------------------------------------------
+
+script AeginaTown_EventScript_TownSign {
+    msgbox(format("AIGINA\nWhere the first coins were struck."), MSGBOX_SIGN)
+}
+
+script AeginaTown_EventScript_Kolona {
+    msgbox(format("A single column, all that's left of an old temple.\p"
+                  "The headland's named for it.\p"
+                  "Sailors steer by it.\p"
+                  "It's been standing here longer than anyone's been counting."), MSGBOX_SIGN)
+}
+
+script AeginaTown_EventScript_InnSign {
+    msgbox(format("THE INN\nBeds, bread and fish. Ask for Endeis."), MSGBOX_SIGN)
+}
+
+script AeginaTown_EventScript_MintSign {
+    msgbox(format("THE MINT\nCoins out. Nothing in."), MSGBOX_SIGN)
+}
+
+script AeginaTown_EventScript_AiakidesSign {
+    msgbox(format("AIAKIDES\nMind the ants."), MSGBOX_SIGN)
+}
+
+script AeginaTown_EventScript_GateSign {
+    msgbox(format("THE APHAIA ROAD\nTo Aphaia's temple, through the pines."), MSGBOX_SIGN)
+}

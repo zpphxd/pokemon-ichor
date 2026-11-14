@@ -421,6 +421,54 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 /* Ichor: world-act1 (ids 40-159) */
 
+=== TRAINER_ICHOR_ALETHEA_DECK ===
+Name: ALETHEA
+Class: Scholar
+Pic: Alethea
+Gender: Female
+Music: Girl
+AI: Check Bad Move
+
+Spalunk
+Level: 12
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_PHORMION ===
+Name: PHORMION
+Class: Sailor
+Pic: Ichor Sailor
+Gender: Male
+Music: Swimmer
+AI: Check Bad Move
+
+Halcyling
+Level: 12
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+- Water Gun
+- Wing Attack
+- Quick Attack
+- Mist
+
+Karkipool
+Level: 13
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+
+=== TRAINER_ICHOR_LYKON ===
+Name: LYKON
+Class: Merchant
+Pic: Merchant
+Gender: Male
+Music: Rich
+AI: Check Bad Move
+
+Onotis
+Level: 12
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Galekit
+Level: 13
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 /* Ichor: world-act2 (ids 160-319) */
 

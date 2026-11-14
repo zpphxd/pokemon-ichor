@@ -44,7 +44,7 @@ AREAS = {
     'T2': ('Troad', 'The Skamander Plain', (61, 64), 'day night surf fish hidden', 'Fighting Normal Bug Steel'),
     'T3': ('Troad', 'The Ida Road', (62, 65), 'day night fish hidden', 'Grass Bug Normal Flying Fairy'),
     'T4': ('Troad', 'Gargaros Peak', (63, 66), 'day rock hidden', 'Flying Rock Electric'),
-    'T5': ('Troad', 'The Hebros Shore (Thrace)', (61, 64), 'day night surf fish', 'Water Normal Ground'),
+    'T5': ('Troad', 'The Hebros Shore, Thrace (beside LABORS\'s Bistonian Plain)', (62, 66), 'day night surf fish', 'Water Normal Ground'),
     'T6': ('Troad', 'The Walls of Laomedon', (63, 66), 'cave rock hidden', 'Rock Steel Fighting Ghost'),
     'T7': ('Troad', 'The Smintheion grounds', (61, 63), 'day night hidden', 'Electric Normal'),
     # Lydia and Phrygia
@@ -59,11 +59,11 @@ AREAS = {
     # The Euxine
     'E1': ('Euxine', 'The Bosporus and the Clashing Rocks (sea lane)', (67, 69), 'surf fish', 'Water Flying'),
     'E2': ('Euxine', 'The Pontic Coast (sea lane)', (68, 70), 'surf fish', 'Water'),
-    'E3': ('Euxine', 'The Thermodon', (68, 70), 'day night surf fish hidden', 'Fighting Normal Fire'),
+    'E3': ('Euxine', 'The Thermodon Road (LABORS\'s map)', (64, 68), 'day night surf fish hidden', 'Fighting Normal Fire'),
     'E4': ('Euxine', 'The Phasis', (69, 71), 'day night surf fish', 'Flying Grass Water Bug'),
     'E5': ('Euxine', 'The Field of Ares', (70, 72), 'day rock', 'Fire Fighting Ground'),
     'E6': ('Euxine', 'The Grove of Ares', (70, 72), 'day night hidden', 'Dragon Grass Dark'),
-    'E7': ('Euxine', 'The Caucasus', (70, 72), 'day rock hidden', 'Rock Dragon Flying Ice'),
+    'E7': ('Euxine', 'The Caucasus: LABORS\'s crag and the caves below', (66, 70), 'day rock hidden', 'Rock Dragon Flying Ice'),
     'E8': ('Euxine', 'The Chalybes\' forges', (69, 71), 'day rock hidden', 'Steel Fire'),
     'E9': ('Euxine', 'Leuke, the White Isle', (70, 72), 'day surf fish', 'Flying Water Fairy'),
     # Scythia and Hyperborea
@@ -96,29 +96,30 @@ AREAS = {
     'B1': ('Libya', 'The Silphium Plateau', (64, 66), 'day night hidden', 'Grass Normal Fire'),
     'B2': ('Libya', 'The Great Sand Sea', (66, 68), 'day night hidden', 'Ground Dragon Bug Rock'),
     'B3': ('Libya', 'Lake Tritonis', (65, 67), 'day surf fish', 'Water Psychic'),
-    'B4': ('Libya', 'The Lotus Coast', (64, 66), 'day surf fish', 'Grass Water Fairy'),
+    'B4': ('Libya', 'The Syrtis Shallows', (64, 66), 'day surf fish', 'Grass Water Fairy'),
     'B5': ('Libya', 'The Salt Ridge', (66, 68), 'day rock', 'Rock Poison Steel'),
     'B6': ('Libya', 'The Garamantes\' Tunnels', (67, 69), 'cave rock surf', 'Ground Water Dark'),
     'B7': ('Libya', 'The Glass Crater', (68, 70), 'cave rock hidden', 'Rock Fire Psychic'),
     'B8': ('Libya', "Antaeus's Ring", (66, 68), 'day', 'Fighting'),
     # The Far West
-    'W1': ('West', 'The Pillars of Herakles (sea lane)', (72, 74), 'surf fish', 'Water'),
+    'W1': ('West', 'The waters of the Strait of the Pillars (LABORS\'s map)', (68, 70), 'surf fish', 'Water'),
     'W2': ('West', 'The Atlantic Shore', (72, 74), 'day surf fish', 'Water Flying Rock'),
-    'W3': ('West', 'The Slopes of Atlas', (74, 76), 'day rock', 'Rock Flying Steel'),
-    'W4': ('West', 'Mount Atlas', (75, 78), 'cave rock hidden', 'Rock Steel Psychic'),
-    'W5': ('West', 'The Garden of the Hesperides', (75, 77), 'day hidden', 'Grass Fairy Dragon'),
+    'W3': ('West', 'The Atlas foothills', (74, 76), 'day rock', 'Rock Flying Steel'),
+    'W4': ('West', 'The Atlas Range', (75, 78), 'cave rock hidden', 'Rock Steel Psychic'),
+    'W5': ('West', 'The Garden of the Hesperides (LABORS\'s map)', (66, 70), 'day hidden', 'Grass Fairy Dragon'),
     'W6': ('West', 'The Silver Mines of Tartessos', (73, 75), 'cave rock', 'Steel Rock Ground'),
-    'W7': ('West', 'Erytheia', (74, 76), 'day surf', 'Normal Fire Water'),
+    'W7': ('West', 'Erytheia (LABORS\'s map)', (65, 69), 'day surf', 'Normal Fire Water'),
     # The Western Sea (ODYSSEY's islands; this doc proposes their tables)
-    'H1': ('WestSea', 'The Tyrrhenian Lane (sea lane)', (62, 64), 'surf fish', 'Water'),
-    'H2': ('WestSea', 'The Strait of Scylla (sea lane)', (64, 66), 'surf fish', 'Water Dark'),
-    'H3': ('WestSea', 'Thrinakia', (63, 65), 'day surf', 'Normal Fire'),
-    'H4': ('WestSea', 'Aiaia', (64, 66), 'day night hidden', 'Poison Normal Psychic'),
-    'H5': ('WestSea', 'The Sirenoussai', (65, 67), 'day surf', 'Flying Ghost'),
-    'H6': ('WestSea', "The Cyclops's Isle", (63, 65), 'day rock', 'Rock Normal'),
-    'H7': ('WestSea', 'The Phlegraean Fields', (66, 68), 'day rock', 'Fire Poison'),
-    'H8': ('WestSea', 'Lake Avernus', (66, 68), 'night surf fish', 'Ghost Water Dark'),
-    'H9': ('WestSea', 'Ogygia', (67, 68), 'day surf fish', 'Fairy Grass Water'),
+    'H1': ('WestSea', 'The western wine-dark sea (ODYSSEY\'s sea map)', (72, 75), 'surf fish', 'Water'),
+    'H2': ('WestSea', 'The Strait of Scylla and Charybdis (ODYSSEY\'s island)', (73, 75), 'surf fish', 'Water Dark'),
+    'H3': ('WestSea', 'Thrinakia (ODYSSEY\'s island)', (73, 75), 'day surf', 'Normal Fire'),
+    'H4': ('WestSea', 'Aiaia (ODYSSEY\'s island)', (72, 74), 'day night hidden', 'Poison Normal Psychic'),
+    'H5': ('WestSea', 'The Sirens\' rocks (ODYSSEY\'s island)', (73, 75), 'day surf', 'Flying Ghost'),
+    'H6': ('WestSea', 'The Cyclops\'s island (ODYSSEY\'s island)', (71, 73), 'day rock', 'Rock Normal'),
+    'H7': ('WestSea', 'The Phlegraean Fields', (74, 76), 'day rock', 'Fire Poison'),
+    'H8': ('WestSea', 'Lake Avernus', (74, 76), 'night surf fish', 'Ghost Water Dark'),
+    'H9': ('WestSea', 'Ogygia', (75, 77), 'day surf fish', 'Fairy Grass Water'),
+    'H10': ('WestSea', 'The Lotus Isle (ODYSSEY\'s island)', (71, 73), 'day surf fish', 'Grass Water'),
     # The Ring of Okeanos
     'O1': ('Okeanos', 'Okeanos, the river-ocean (sea lane)', (75, 78), 'surf fish', 'Water Dragon'),
     'O2': ('Okeanos', 'The Cimmerian Shore', (76, 78), 'night surf hidden', 'Ghost Dark'),
@@ -287,11 +288,11 @@ OVERRIDES = {
     'Hitmonlee': ('B8', 'day', 'pankration'), 'Hitmonchan': ('B8', 'day', 'pankration'), 'Hitmontop': ('B8', 'day', 'pankration'),
     'Hariyama': ('B8', 'day', None), 'Hawlucha': ('B8', 'day', None), 'Scrafty': ('B8', 'day', None),
     'Machamp': ('B8', 'day', 'Antaeus wrestled every stranger'), 'Throh': ('B8', 'day', None), 'Sawk': ('B8', 'day', None),
-    'Drednaw': ('B3', 'surf', None), 'Ludicolo': ('B4', 'surf', 'the Lotus-Eaters (PITCH §4)'),
+    'Drednaw': ('B3', 'surf', None), 'Ludicolo': ('H10', 'surf', 'the Lotus-Eaters (PITCH §4)'),
     # The Far West
-    'Heracross': ('W7', 'day', 'the Hercules beetle on Herakles\'s island'), 'Bouffalant': ('W7', 'day', 'Geryon\'s red cattle'),
+    'Heracross': ('W7', 'day', 'the Hercules beetle on the island of Herakles\'s tenth Labor'), 'Bouffalant': ('W7', 'day', 'Geryon\'s red cattle'),
     'Barbaracle': ('W2', 'day', None), 'Skarmory': ('W3', 'day', None), 'Corviknight': ('W3', 'day', None),
-    'Golurk': ('W4', 'cave', 'Titan-stone walks'), 'Gigalith': ('W4', 'cave', None), 'Archaludon': ('W6', 'hidden', None),
+    'Golurk': ('W4', 'cave', 'the range Herodotus calls the pillar of heaven (4.184)'), 'Gigalith': ('W4', 'cave', None), 'Archaludon': ('W6', 'hidden', None),
     'Duraludon': ('W6', 'cave', None), 'Excadrill': ('W6', 'cave', None),
     'Tsareena': ('W5', 'day', 'a queen of the golden orchard'), 'Lurantis': ('W5', 'day', None),
     'Flapple': ('W5', 'day', 'the golden apples\' dragons'), 'Appletun': ('W5', 'day', None), 'Dipplin': ('W5', 'hidden', None),
@@ -699,7 +700,7 @@ def main():
         if any(n in legend for n in fam):
             for n in fam:
                 if n not in rows:
-                    rows[n] = {'home': 'LEGENDS.md', 'where': 'see LEGENDS.md, master table', 'how': 'quest',
+                    rows[n] = {'home': 'LEGENDS.md', 'where': 'LEGENDS.md §2 gives the home and the doc that places it', 'how': 'quest',
                                'lv': '—', 'note': '', 'area': None}
             continue
         if rname in GIFT_LINES:
@@ -761,7 +762,7 @@ def main():
             else:
                 area, method, note = best_area(w), None, None
             if rname in LAZARUS_LINES:
-                note = (note + '; ' if note else '') + 'wild only, never a gift (D-O6)'
+                note = (note + '; ' if note else '') + 'wild only, never a gift (PG-5)'
             place(w, area, method, note)
             land_of_family = land_of_family or AREAS[area][0]
         for extra in WILD_EXTRA.get(nm(wilds[0]), []) + WILD_EXTRA.get(rname, []):
@@ -819,11 +820,13 @@ def write(order, base, rows, load, nursery_load, area_rows, special, nds):
     L.append('')
     L.append('Generated by `design/oikoumene/coverage.py` from the expansion\'s species data. Edit the script\'s tables, not this file. The rules are in `design/OIKOUMENE.md` §8; legendary quests are in `design/LEGENDS.md`.')
     L.append('')
+    L.append('Areas marked LABORS\'s or ODYSSEY\'s are those docs\' maps on the Oikoumene chart. Their own wild tables (LABORS §3, ODYSSEY §4 and §6) already hold some existing species; the homes listed here join those tables, and every species here has at least one home whatever those tables hold.')
+    L.append('')
     cats = collections.Counter()
     for nd in nds:
         r = rows[nd]
         if r['home'] == 'LEGENDS.md':
-            cats['Legendary, mythical, Ultra Beast or Paradox (LEGENDS.md)'] += 1
+            cats['Legendary, mythical, Ultra Beast or Paradox (LEGENDS.md §2, which names the epics that place some)'] += 1
         elif r['how'] in ('gift',) or 'guest-gift' in r['where']:
             cats['Theoxenia guest-gift lines (SYSTEMS.md §10)'] += 1
         elif r['area']:

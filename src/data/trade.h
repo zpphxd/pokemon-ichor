@@ -1229,6 +1229,32 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_WOOLOO
+    },
+    // Ichor: Pheidon strikes Aegina's turtle coins, and his Chelonet keeps sitting
+    // on the stamps. He'd rather have a Karkipool, something with claws, to guard
+    // the strongbox (design/phase2/SCRIPT.md, Part 2, the mint).
+    // ICHOR_STUB_AETHOS_DEX: SPECIES_CHELONET is a stand-in until the Aethos dex
+    // lands. abilityNum 2 is the hidden-ability slot: Punk Rock on the real
+    // Chelonet; the stand-in gets its own hidden ability meanwhile.
+    // SCRIPT.md has Stater at Lv 14. In-game trades take the level of the
+    // Pokemon given (CreateInGameTradePokemonInternal in src/trade.c), so it
+    // arrives at the Karkipool's level.
+    [INGAME_TRADE_ICHOR_STATER] =
+    {
+        .nickname = _("STATER"),
+        .species = SPECIES_CHELONET,
+        .ivs = {22, 16, 24, 14, 20, 18},
+        .abilityNum = 2,
+        .otId = 49152,
+        .conditions = {5, 30, 5, 5, 5},
+        .personality = 0x5A1B,
+        .heldItem = ITEM_ORAN_BERRY,
+        .mailNum = -1,
+        .otName = _("PHEIDON"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_KARKIPOOL,
+        .level = 14,                         // SCRIPT.md: Stater is Lv 14
     }
 };
 

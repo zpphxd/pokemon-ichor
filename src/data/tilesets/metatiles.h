@@ -445,6 +445,26 @@ const u16 gMetatileAttributes_PorytilesManaged_Eleusa[] = INCBIN_U16("data/tiles
 const u16 gMetatiles_PorytilesManaged_TempleDemeter[] = INCBIN_U16("data/tilesets/secondary/temple_demeter/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_TempleDemeter[] = INCBIN_U16("data/tilesets/secondary/temple_demeter/porytiles_bin/metatile_attributes.bin");
 
+// Ichor: ergasteria
+const u16 gMetatiles_PorytilesManaged_Ergasteria[] = INCBIN_U16("data/tilesets/secondary/ergasteria/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Ergasteria[] = INCBIN_U16("data/tilesets/secondary/ergasteria/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: emporion
+const u16 gMetatiles_PorytilesManaged_Emporion[] = INCBIN_U16("data/tilesets/secondary/emporion/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Emporion[] = INCBIN_U16("data/tilesets/secondary/emporion/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: isthmos
+const u16 gMetatiles_PorytilesManaged_Isthmos[] = INCBIN_U16("data/tilesets/secondary/isthmos/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Isthmos[] = INCBIN_U16("data/tilesets/secondary/isthmos/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: temple_hermes
+const u16 gMetatiles_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: aegina
+const u16 gMetatiles_PorytilesManaged_Aegina[] = INCBIN_U16("data/tilesets/secondary/aegina/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Aegina[] = INCBIN_U16("data/tilesets/secondary/aegina/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: trireme
 const u16 gMetatiles_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatile_attributes.bin");

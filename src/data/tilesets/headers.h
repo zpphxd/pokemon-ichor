@@ -1680,6 +1680,80 @@ const struct Tileset gTileset_TempleDemeter =
     .callback = NULL,
 };
 
+// Ichor: ergasteria, Phase 2's working interiors (Aegina's inn, mint and homes;
+// Emporion's workshops next). A secondary that uses only its own tiles and
+// palettes 6-12, so it works on any primary. Built by
+// tools/ichor/art/ergasteria_build.py.
+const struct Tileset gTileset_Ergasteria =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Ergasteria,
+    .palettes = gTilesetPalettes_PorytilesManaged_Ergasteria,
+    .metatiles = gMetatiles_PorytilesManaged_Ergasteria,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Ergasteria,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary built by tools/ichor/art/emporion_build.py: Emporion
+// City (streets, the house kit, the Agora, the Temple of Hermes and the monuments,
+// Acrocorinth, the workshops). It uses only its own tiles and palettes 6-12; cells
+// on grass borrow aethos's, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Emporion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Emporion,
+    .palettes = gTilesetPalettes_PorytilesManaged_Emporion,
+    .metatiles = gMetatiles_PorytilesManaged_Emporion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Emporion,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary built by tools/ichor/art/emporion_build.py: Emporion's
+// harbor and the Isthmus (the port of Lechaion, the Diolkos, Isthmia), with the
+// city's paving and house kit. Its cells on grass, sand, sea and path borrow
+// aethos's, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Isthmos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Isthmos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Isthmos,
+    .metatiles = gMetatiles_PorytilesManaged_Isthmos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Isthmos,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary built by tools/ichor/art/emporion_build.py: the Temple
+// of Hermes's interior and the Herald's Run. It uses only its own tiles and palettes
+// 6-12, with opaque floors, so it works on any primary (drawn for oikos).
+const struct Tileset gTileset_TempleHermes =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleHermes,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleHermes,
+    .metatiles = gMetatiles_PorytilesManaged_TempleHermes,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
+    .callback = NULL,
+};
+
+// Ichor: aegina, the island secondary for Aegina Town and the Aegina detour. A
+// Porytiles-managed secondary built by tools/ichor/art/aegina_build.py for the
+// aethos primary: its ground cells borrow aethos's grass, sand, sea and path, so
+// rebuild it whenever aethos changes.
+const struct Tileset gTileset_Aegina =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Aegina,
+    .palettes = gTilesetPalettes_PorytilesManaged_Aegina,
+    .metatiles = gMetatiles_PorytilesManaged_Aegina,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Aegina,
+    .callback = NULL,
+};
+
 // Ichor: trireme, the Euploia's deck and hold. A Porytiles-managed secondary
 // built by tools/ichor/art/trireme_build.py for the aethos primary: its sea
 // cells borrow aethos's animated sea, so rebuild it whenever aethos changes.

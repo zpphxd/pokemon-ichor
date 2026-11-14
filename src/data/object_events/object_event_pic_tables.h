@@ -2626,6 +2626,35 @@ static const struct SpriteFrameImage sPicTable_IchorUpturnedBoatL[] = {
 static const struct SpriteFrameImage sPicTable_IchorUpturnedBoatR[] = {
     obj_frame_tiles(gObjectEventPic_IchorUpturnedBoatR),
 };
+
+static const struct SpriteFrameImage sPicTable_IchorPilgrim[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPilgrim, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPronomos[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPronomos, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorEndeis[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorEndeis, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPheidon[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPheidon, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAiakides[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAiakides, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorKleonSeasick[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKleonSeasick, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorKleonTablet[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKleonTablet, 2, 4),
+};
+
 static const struct SpriteFrameImage sPicTable_IchorNestEggs[] = {
     obj_frame_tiles(gObjectEventPic_IchorNestEggs),
 };

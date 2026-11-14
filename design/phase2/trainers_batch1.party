@@ -5,6 +5,11 @@ in design/phase2/BUILD.md); then these move to src/data/trainers.party.
 Ability lines are left out while the Aethos species are vanilla stand-ins
 (ICHOR_STUB_AETHOS_DEX); the abilities SCRIPT.md gives are noted per mon.
 New classes: Scholar (Alethea), Merchant, Pilgrim. Sailor and Hoplite exist.
+
+Registered in src/data/trainers.party: Alethea (40), Phormion (41, with the
+Ichor Sailor portrait) and Lykon (42). Myrmex, Sostratos and Euthymia belong to
+Aigina's interior, which the revised map puts in Act II: world-act2 re-levels
+them and registers them in its own range (160-319).
 */
 
 === TRAINER_ICHOR_ALETHEA_DECK ===
@@ -23,7 +28,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 === TRAINER_ICHOR_PHORMION ===
 Name: PHORMION
 Class: Sailor
-Pic: Sailor
+Pic: Ichor Sailor
 Gender: Male
 Music: Swimmer
 AI: Check Bad Move

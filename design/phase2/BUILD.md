@@ -6,13 +6,17 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 
 ## Batches
 
+The route chain follows the revised `design/AETHOS_MAP.md`; SCRIPT.md's route plan has the reconciliation note.
+
 | # | Batch | Status |
 |---|---|---|
-| 1 | The voyage and Aegina: beats 9A–10C, the *Euploia*, Aegina Town and its three homes, the Aegina detour | in progress |
-| 2 | Emporion and the Temple of Hermes: beats 11–16 | waits for gTileset_Emporion (director) |
-| 3 | The Sacred Way and Hecate's Hollow: beats 17–19, Routes 2–4, Thria | |
-| 4 | Eleusa and the Temple of Demeter: beats 20–22 | waits for gTileset_Eleusa (director) |
+| 1 | The voyage (Routes 2–3) and Aigina: beats 9A–10C, the *Euploia*, Aigina Town and its three homes; Aigina's three interior maps built for world-act2 (Act II) | in progress |
+| 2 | Emporion and the Temple of Hermes: beats 11–16 | in progress (tilesets on main) |
+| 3 | Route 4 (the Isthmus), Hecate's Hollow, Route 5 (the Skironian cliffs): beats 17–19 | tilesets started: `isthmos`, `cave_dark` |
+| 4 | Eleusa and the Temple of Demeter: beats 20–22 | the maps and ambient events started (tilesets on main) |
 | 5 | The revelation: beats 23–25, the sanctum, Return to Kalliste | |
+
+**Moved out of Act I** (to world-act2): Thria, the Rheitoi and the jesters' bridge (Route 15); the Halai Shore's homes and trainers (Route 18); the scripting of Aigina's interior.
 
 ## Batch 1 maps
 
@@ -26,7 +30,7 @@ All are registered (`tools/ichor/new_map.py`) with placeholder layouts copied fr
 | `MAP_AEGINA_TOWN_INN` | room | oikos + **ergasteria** (new) | indoor | interiors agent |
 | `MAP_AEGINA_TOWN_MINT` | room | oikos + **ergasteria** | indoor | interiors agent |
 | `MAP_AEGINA_TOWN_AIAKIDES_HOUSE` | room | oikos + **ergasteria** (or oikia if it fits) | indoor | interiors agent |
-| `MAP_AEGINA_APHAIA_ROAD` | 40×24 | aethos + **aegina** | route | detour agent (after the Aegina tileset) |
+| `MAP_AEGINA_APHAIA_ROAD` | 40×24 | aethos + **aegina** | route | detour agent (after the Aegina tileset); Act II, scripted by world-act2 |
 | `MAP_AEGINA_TEMPLE_OF_APHAIA` | 24×20 | aethos + **aegina** | route | detour agent |
 | `MAP_AEGINA_MOUNT_OROS` | 16×16 | aethos + **aegina** | route | detour agent |
 
@@ -37,6 +41,19 @@ All are registered (`tools/ichor/new_map.py`) with placeholder layouts copied fr
 
 Every secondary stays at or under 504 tiles; leave 496–511 free where a map uses wide doors (CLAUDE.md).
 
+## Batch 2 maps
+
+Registered with placeholder layouts; each owner rewrites its layout.
+
+| Map | Tilesets | Owner |
+|---|---|---|
+| `MAP_EMPORION_CITY` | aethos + **emporion** | Emporion city agent |
+| `MAP_EMPORION_HARBOR` (the harbor district, where the *Euploia* moors) | aethos + **isthmos** | Emporion city agent |
+| `MAP_EMPORION_CITY_ASCLEPEION`, `_DEIGMA`, `_HEPHAISTEION`, `_TAVERN`, `_PHILOXENOS_HOUSE`, `_WIDOWS_HOUSE`, `_RUNNERS_HOUSE`, `_POTTERS_WORKSHOP`, `_HIRING_HALL` | oikos + ergasteria (or civic, oikia) | Emporion interiors agent |
+| `MAP_EMPORION_CITY_TEMPLE_OF_HERMES` | oikos + **temple_hermes** | Temple of Hermes agent |
+
+The city's west gate is the **Isthmus Gate** to Route 4 (batch 3); its seam columns go in the connections table. The Long Walls Gate of SCRIPT.md has no road in the revised map: Astyra is reached through Eleusa in Act II, so it isn't drawn.
+
 ## Warps, connections and seams (batch 1)
 
 | From | To | How |
@@ -45,8 +62,8 @@ Every secondary stays at or under 504 tiles; leave 496–511 free where a map us
 | the deck, the hatch | the hold | warp both ways |
 | the deck | Aegina's quay | scripted warp (end of beat 10, and the ferry) |
 | Aegina's inn, after the night | the deck | scripted warp (beat 10C) |
-| Aegina Town doors | inn, mint, Aiakides's house | warps both ways |
-| Aegina Town, north gate | the Aphaia Road | map connection, up. The Aegina agent picks the gate columns and records them here; the detour agent matches them. |
+| Aegina Town doors | inn, mint, Aiakides's house | warps both ways. Aegina Town's warps: **0** the quay landing (12,12), not a door: `warp(MAP_AEGINA_TOWN, 0)` lands the ferry and the end of beat 10 there; **1** the inn door (15,16); **2** the mint door (21,16); **3** Aiakides's door (27,8). Each door's `dest_warp_id` is 0, so each room's warp 0 is its door mat; the rooms send the player back to town warps 1, 2 and 3. |
+| Aegina Town, north gate | the Aphaia Road | map connection, up. The gate's passage is **columns 24-25** of Aegina Town; row 0 is walkable there and nowhere else (pines and scrub close the rest). Aegina's row 0 is sea west of column 21, so the Aphaia Road's bottom rows over Aegina's columns 0-20 should be sea or shore. With the road at the Aphaia Road's columns c and c+1, the connection's offset is 24 − c. |
 | the Aphaia Road | the Temple of Aphaia, Mount Oros | the detour agent's choice (connections or warps), recorded here |
 
 Record the warp ids and the arrival tiles you choose in this table, so the scripted warps in other maps can use them.
@@ -54,7 +71,7 @@ Record the warp ids and the arrival tiles you choose in this table, so the scrip
 | Map | Arrival tile (x, y) | For |
 |---|---|---|
 | `MAP_TRIREME_EUPLOIA_DECK` | *(trireme agent fills in)* | boarding from a quay |
-| `MAP_AEGINA_TOWN` | *(Aegina agent fills in)* | stepping off the *Euploia* |
+| `MAP_AEGINA_TOWN` | (12,12), the quay below the gangplank; warp 0 is there | stepping off the *Euploia* (beat 10B plays on arrival while `FLAG_ICHOR_ARRIVED_AEGINA` is clear) |
 | `MAP_AKTI_TOWN` | (9, 10), the quay by the gangplank | stepping off the ferry |
 
 ## Flags claimed for batch 1
@@ -67,13 +84,22 @@ Claimed from this session's range (0x200–0x2FF) in `include/constants/flags.h`
 | `FLAG_ICHOR_BATTLED_ALETHEA_DECK`, `FLAG_ICHOR_SAVED_HALCYON_NEST`, `FLAG_ICHOR_GOT_HALCYLING`, `FLAG_ICHOR_HIDE_HALCYON_NEST`, `FLAG_ICHOR_HIDE_DECK_HARPECK`, `FLAG_ICHOR_NO_RUNNING` | beat 10 |
 | `FLAG_ICHOR_ARRIVED_AEGINA`, `FLAG_ICHOR_VISITED_AEGINA`, `FLAG_ICHOR_HIDE_AEGINA_CAST`, `FLAG_ICHOR_AEGINA_NIGHT` | beat 10B |
 | `FLAG_ICHOR_CROSSING_DONE` | beat 10C; also hides the voyage cast on deck afterwards |
-| `FLAG_ICHOR_FERRY_TO_AEGINA`, `FLAG_ICHOR_FERRY_TO_EMPORION` | the ferry's destination (both clear: Akti) |
+| `FLAG_ICHOR_FERRY_TO_EMPORION` | the ferry's destination (clear: Akti) |
+| `FLAG_ICHOR_FERRY_TO_AEGINA` | Aigina's ferry stop and north gate are open: world-act2 sets it at its Act II beat 46. Aigina Town's gatekeeper reads it. |
 | `FLAG_ICHOR_TRADED_CHELONET`, `FLAG_ICHOR_GOT_BLACK_BELT` | Aegina's homes |
 | `FLAG_ICHOR_ITEM_DECK_SUPER_POTION`, `FLAG_ICHOR_HIDDEN_DECK_HEART_SCALE`, `FLAG_ICHOR_ITEM_HOLD_POTION` | the trireme's items |
 | `FLAG_ICHOR_HIDDEN_AEGINA_BIG_PEARL`, `FLAG_ICHOR_HIDDEN_AEGINA_STARDUST` | Aegina Town's hidden items |
 | `FLAG_ICHOR_HERM_AEGINA`, `FLAG_ICHOR_ITEM_APHAIA_SILVER_POWDER`, `FLAG_ICHOR_ITEM_APHAIA_SUPER_POTION`, `FLAG_ICHOR_ITEM_APHAIA_PRETTY_FEATHER`, `FLAG_ICHOR_ITEM_OROS_WINE` | the detour |
 
-The engine session is adding a 2,048-flag bank in IchorSave (`design/ENGINE_API.md` on its branch). Later batches will claim there; batch 1's vanilla flags can move once it lands.
+IchorSave's flag bank is on main. From batch 2 on, new flags are bank flags in this session's offsets (`tools/ichor/claim_ranges.md`: bankflag 0x000–0x0FF, dailyflag 0x40–0x4B, bankvar 0–5), claimed with `python3 tools/ichor/claim.py --range LO-HI bankflag FLAG_ICHOR_... "comment"`. Hidden items still need vanilla flags at or above `FLAG_HIDDEN_ITEMS_START`, from 0x200–0x2FF. Sub-ranges handed to agents:
+
+| Who | bankflag | vanilla (hidden items) |
+|---|---|---|
+| this session | 0x000–0x07F | 0x298–0x29F |
+| Eleusa agent | 0x080–0x0BF | 0x2A0–0x2BB |
+| Emporion city agent | 0x0C0–0x0DF | 0x28A–0x293 |
+| Emporion interiors agent | 0x0E0–0x0EF | 0x294–0x297 |
+| Temple of Hermes agent | 0x0F0–0x0FF | — |
 
 ## Stubs until other sessions land
 
@@ -83,8 +109,14 @@ Each stub is marked in the code with its tag, so it can be found and replaced wi
 - **`ICHOR_STUB_TRAINER_IDS`: trainer ids.** Only 11 ids are free until the Hoenn cut. Parties are written now in `design/phase2/trainers_batch1.party` and registered when this session's range appears in `tools/ichor/claim_ranges.md`. Scripts use the final names (`TRAINER_ICHOR_PHORMION`); `include/constants/ichor_trainer_stubs.h` defines them until then.
 - **`ICHOR_STUB_HERM`, `ICHOR_STUB_RITES`, `ICHOR_STUB_DIG`: herms, altars, dig spots.** The engine session is building them (SYSTEMS.md §3–§5). Until its API is on main, a herm is a bg event that offers to anoint it ("Somewhere, Hermes makes a note.") and sets its flag; an altar shows its SCRIPT.md text and says nothing about prayer mechanics; a fixed dig spot is a bg event with the turned-earth text and no reward. Write each as its own small script with the tag in a comment.
 - **`ICHOR_STUB_OFFERINGS`: Olive Oil, Wine, Barley Cake, Frankincense.** New items from the engine session. Until then, Wine on Mount Oros is an item ball of `ITEM_BERRY_JUICE` with the tag.
-- **`ICHOR_STUB_MUSIC`: songs.** Use these until the Phase 2 songs exist: the deck `MUS_ICHOR_AKTI` (for `MUS_ICHOR_TRIREME`), Aegina Town `MUS_ICHOR_AKTI` (final), the inn's night `MUS_ICHOR_ASCLEPEION` (for `MUS_ICHOR_HEARTH_NIGHT`), the detour `MUS_ICHOR_ROUTE1` (for `MUS_ICHOR_HALAI`).
+- **Music** (Act I's songs are on main; `design/MUSIC.md` has the rules): the deck and hold `MUS_ICHOR_TRIREME`; Aigina Town `MUS_ICHOR_AKTI` (island harbors share it); mainland routes `MUS_ICHOR_ROAD` (its night form switches in by itself); Emporion `MUS_ICHOR_EMPORION`; the Temple of Hermes `MUS_ICHOR_TEMPLE_HERMES`; Eleusa `MUS_ICHOR_ELEUSA`; the Telesterion and the Mysteries `MUS_ICHOR_TEMPLE_DEMETER`; Hecate's Hollow and any cave `MUS_ICHOR_HOLLOW`; Hyperion `MUS_ICHOR_BATTLE_ADMIN`; Daphne's revelation `MUS_ICHOR_REVELATION`; Aigina's interior (Act II) `MUS_ICHOR_ROAD`. Still stubbed (`ICHOR_STUB_MUSIC`): the inn's night by the hearth plays `MUS_ICHOR_ASCLEPEION`, and the Kleon's-stroke march variant of the trireme song doesn't exist. **Never** use Elpis's lullaby (627, 628) in Act I.
 - **`ICHOR_STUB_EMPORION`: the end of batch 1.** Beat 10C calls `Ichor_EventScript_EuploiaMakesEmporion` (in `data/scripts/ichor_act1.pory`). Until Emporion exists it plays a short card and leaves the player on deck with the ferry running, so Akti and Aegina stay reachable.
+
+## Rulings that change SCRIPT.md's tables
+
+- **No random early-evolved wild encounters** (director, 2026-11-14, `design/BALANCE.md`; the dex team's c0c5aeb27f). Dropped: Hoplomex at 1% on the Aegina detour (its slots are Ergant 16 instead), and Korantha, Stachypter and Plouteras at 22 around Eleusa (batch 4). Kept as story rewards: the augury statics (Harpelle 17, Korantha or Persenyx 22) and the Hoplomex on Aiakides's team.
+- **Placements the dex adopted, built as scripted:** Lykopup (static, Lv 20) at Hecate's Hollow; Raknit (static, Lv 20) in the web chamber; Obolorn at 1% at night on Route 2's tombs (Lv 15–20); Pebblith on the Halai cliffs (Lv 10–16); Ergant on Aegina's ant hills (Lv 12–16); Spalunk is Alethea's partner only, never wild on Kalliste.
+- **Every other Phase 2 area** takes its species and levels from each species' `habitat` field in `design/dex/species/*.yaml` (branch `claude/aethos-dex-a7c73a`).
 
 ## Scene helpers this session provides
 
