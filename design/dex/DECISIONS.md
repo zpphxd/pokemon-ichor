@@ -76,6 +76,7 @@ Waiting on the user:
 | 2026-11-14 | The 150 entries are approved. Sprites start. | The user: "Approve, start sprites" |
 | 2026-11-14 | Every sprite must be as detailed and well designed as an official Pokémon's: hand-finished battle sprites, not just code-drawn ones. | The user: "make sure they are as detailed and designed well as any normal pokemon. spend time" |
 | 2026-11-14 | Legendaries, mythicals, the Olympian colossi and the Astral constellations form a top tier: concepts first for the user to pick, then one artist per species. See "The legendary tier" in `design/dex/SPRITES.md`. | The user: "all legendaries and mythical olympians constilations etc need to be fucking awesome. powerful. mysterical. the best pokemon ever designed" |
+| 2026-11-14 | Legendary concepts picked. **Pegaunos: A**, Thunderhead Rampant: a white stallion rearing, with a lightning mane and thunderhead wings. **Ichorin: B**, The Marble Child: a living marble child with a vein of ichor. Both are to be improved well beyond the concepts. See `design/dex/concepts/`. | The user: "I like A and B tho obviously need to be improved", then "1A 2B" |
 | 2026-11-14 | The user likes the starters' look. Final evolutions must feel grand and powerful: large in the frame, commanding poses, richer detail and effects. See "Evolutions must feel grand" in `design/dex/SPRITES.md`. | The user: "i like them. we just want to make sure these look amazing. and evolutions are truly grand and powerful etc" |
 
 ## Next, after the sprites: the Astral type
