@@ -27,7 +27,7 @@ def house_small():
     L = s.B
     flat_roof(L, 0, 0, 64, 17)
     facade(L, 0, 17, 64, 31)
-    L.blit(CHIMNEY, CHIMNEY_KEY, 47, 2)
+    L.blit(CHIMNEY, CHIMNEY_KEY, 48, 2)
     door(L, 18, 26)
     window(L, 41, 23)
     L.blit(POT, POT_KEY, 4, 37)
@@ -44,11 +44,11 @@ def house_two_story():
     L = s.B
     flat_roof(L, 0, 0, 80, 17)
     facade(L, 0, 17, 80, 63)
-    L.blit(CHIMNEY, CHIMNEY_KEY, 9, 2)
+    L.blit(CHIMNEY, CHIMNEY_KEY, 8, 2)
     L.blit(CHIMNEY, CHIMNEY_KEY, 64, 2)
     # upper floor: two shuttered windows and the upper door
-    window(L, 3, 23)
-    window(L, 59, 23)
+    window(L, 9, 23)
+    window(L, 57, 23)
     door(L, 34, 26, step=False)
 
     # landing in front of the upper door, carried on a solid whitewashed pier
@@ -122,7 +122,7 @@ def house_two_story():
     # ground floor: the main door, a small window and a pot
     door(L, 18, 58)
     L.blit(SMALL_WINDOW, WINDOW_KEY, 6, 59)
-    L.blit(POT, POT_KEY, 3, 69)
+    L.blit(POT, POT_KEY, 4, 69)
     return s
 
 
@@ -136,11 +136,6 @@ def shrine():
     flat_roof(L, 0, 0, 80, 40)
     # dome on its drum, centered on the middle column
     cx = 40
-    # the dome's cast shade on the roof (light from the top left)
-    for y in range(26, 37):
-        for x in range(40, 66):
-            if ((x - 46) / 19) ** 2 + ((y - 30) / 7) ** 2 <= 1.0:
-                L.px(x, y, "w2")
     # drum
     L.rect(25, 26, 31, 9, "w1")
     L.vline(25, 26, 34, "dk")
@@ -221,14 +216,13 @@ def paving():
     s = Struct("paving", "Festival-square paving: Cycladic flagstones in whitewashed lime", 4, 3, SEC,
                walk=["....", "....", "...."],
                notes="Slate flagstones set in white lime, one 16 px pattern so any piece "
-                     "joins any other. Layout: NW, N, NE, plain A / W, plain B, E, plain A "
-                     "/ SW, S, SE, plain A. Plain B has the same joints with the stones "
-                     "toned differently, for variety. The curb faces down on the south edge. "
+                     "joins any other. Layout: NW, N, NE, plain / W, plain, E, plain / SW, "
+                     "S, SE, plain. The curb faces down on the south edge. "
                      "Also good for Akti's streets.")
     L = s.B
     for cy in range(3):
         for cx in range(4):
-            paint_flagstones(L, cx * 16, cy * 16, 16, 16, variant=(1 if (cx, cy) == (1, 1) else 0))
+            paint_flagstones(L, cx * 16, cy * 16, 16, 16)
 
     def north(x, y):
         L.hline(x, x + 15, y, "w2")
@@ -299,16 +293,6 @@ def altar():
                      "below, the altar over it.")
     B, M = s.B, s.M
     paint_flagstones(B, 0, 0, 32, 32)
-    # shadow on the flagstones (down-right of the block)
-    # (drawn on the paving layer so it reads as part of the ground)
-    for y in range(27, 32):
-        for x in range(8, 31):
-            if B.get(x, y) in ("sl1", "sl2", "sl3"):
-                B.px(x, y, "sl0")
-    for y in range(10, 29):
-        for x in range(28, 31):
-            if B.get(x, y) in ("sl1", "sl2", "sl3"):
-                B.px(x, y, "sl0")
     # plinth
     M.rect(3, 26, 26, 4, "m2")
     M.hline(3, 28, 26, "m1")
@@ -431,10 +415,6 @@ def garland_posts():
     def post_base(x):
         y0 = 16
         M.blit(base, key, x, y0)
-        # its shadow on the flagstones, falling down-right
-        for (sx, sy) in ((x + 10, y0 + 13), (x + 11, y0 + 14), (x + 12, y0 + 14)):
-            if B.get(sx, sy) in ("sl1", "sl2", "sl3"):
-                B.px(sx, sy, "sl0")
 
     # top row: both sides, swag, left only, right only, bare
     post_top(0, True, True)
@@ -610,95 +590,87 @@ def terraces():
 
 
 # --------------------------------------------------------------------------
-# Olive-press shed (group "stone")
+# Olive-press house (group "cyc")
 # --------------------------------------------------------------------------
 
 def olive_press():
-    s = Struct("olive_press", "Olive-press shed", 3, 3, SEC,
+    s = Struct("olive_press", "Olive-press house", 3, 3, SEC,
                walk=["XXX", "XXX", "XXX"],
-               notes="An open-fronted rubble-stone shed under a cane-reed roof on timber, "
-                     "housing a trapetum (stone basin with an upright millstone) and a "
-                     "basket of olives. Scenery; talk-to tiles for the olive farmer go in "
-                     "front of it.")
+               notes="A whitewashed press-house with a wide arched opening onto its "
+                     "trapetum: a round stone basin, a central pier and two upright "
+                     "millstones on a wooden axle, with a basket of olives. Scenery; the "
+                     "olive farmer stands in front. Roof and wall tiles are shared with the "
+                     "houses, so it costs few tiles.")
     L = s.B
-    # cane-reed roof laid in bundles across timber, sloping down toward us
-    reed = [  # one 8 x 5 course: lit tops, reed strokes, a dark tied-off lower edge
-        "s4s4s4s4",
-        "e2e2s3e2",
-        "e2s3e2e2",
-        "e1e2e1e2",
-        "s1s1s1s1",
-    ]
-    for y in range(0, 20):
-        row = reed[y % 5]
-        for x in range(48):
-            k = ((x + (y // 5) * 3) % 8) // 2 * 2
-            L.px(x, y, row[k:k + 2])
-    L.hline(0, 47, 0, "sk")
-    L.vline(0, 0, 47, "sk")
-    L.vline(47, 0, 47, "sk")
-    # eave beam with round rafter ends
-    L.rect(1, 20, 46, 4, "e1")
-    L.hline(1, 46, 20, "e2")
-    L.hline(1, 46, 23, "s0")
-    for bx in (4, 20, 36):
-        L.blit(["kkkk", "keek", "ke1k", "kkkk"], {"k": "sk", "e": "e2", "1": "e1"}, bx, 20)
-    # interior in deep shade, back wall of rubble
-    L.rect(1, 24, 46, 22, "s0")
-    L.rect(1, 24, 46, 2, "sk")
-    for y in range(27, 44, 4):
-        for x in range(2 + (y % 8), 46, 8):
-            L.hline(x, x + 4, y, "s1")
-    # timber posts at the corners
-    for px_ in (1, 42):
-        L.rect(px_, 24, 5, 22, "e1")
-        L.vline(px_, 24, 45, "sk")
-        L.vline(px_ + 4, 24, 45, "sk")
-        L.vline(px_ + 1, 24, 45, "e2")
-        L.vline(px_ + 3, 24, 45, "s0")
-    # trapetum: a round stone basin, a central pier, two upright millstones
-    L.ellipse(8, 33, 39, 46, "sk")
-    L.ellipse(9, 33, 38, 45, "s4")
-    L.ellipse(9, 35, 38, 45, "s2")
-    L.ellipse(12, 35, 35, 43, "s1")
-    L.ellipse(13, 35, 34, 42, "s0")
-    L.rect(22, 27, 4, 14, "s2")
-    L.vline(22, 27, 40, "sk")
-    L.vline(25, 27, 40, "sk")
-    L.vline(23, 27, 40, "s3")
-    L.hline(22, 25, 27, "s4")
+    flat_roof(L, 0, 0, 48, 17)
+    facade(L, 0, 17, 48, 31)
+    # the arch: a thick wall, so the reveal shows (shaded left and top, lit right)
+    x0, x1, top, spring = 7, 40, 21, 28
+    cxa, r = (x0 + x1) / 2, (x1 - x0) / 2
+    def inside(x, y):
+        if y >= spring:
+            return x0 <= x <= x1
+        return ((x - cxa) / (r + 0.5)) ** 2 + ((y - spring) / (spring - top + 0.5)) ** 2 <= 1.0
+    for y in range(top - 1, 48):
+        for x in range(x0 - 1, x1 + 2):
+            if inside(x, y):
+                L.px(x, y, "dk")
+            elif any(inside(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+                L.px(x, y, "ink")
+    for y in range(top, 48):
+        row = [x for x in range(x0, x1 + 1) if inside(x, y)]
+        if not row:
+            continue
+        L.px(row[0], y, "w3")
+        L.px(row[0] + 1, y, "w4")
+        L.px(row[-1], y, "w1")
+        if y < spring + 2:
+            for x in row[2:-1]:
+                if not inside(x, y - 2):
+                    L.px(x, y, "w4")
+    # the floor of the press room, catching some light
+    L.hline(x0 + 2, x1 - 1, 46, "w4")
+    L.hline(x0, x1, 47, "w3")
+    # trapetum: basin rim, the central pier, two upright millstones on an axle
+    L.ellipse(10, 37, 37, 46, "ink")
+    L.ellipse(11, 37, 36, 45, "w2")
+    L.ellipse(11, 39, 36, 45, "w3")
+    L.ellipse(14, 39, 33, 44, "w4")
+    L.rect(22, 29, 4, 12, "w3")
+    L.vline(22, 29, 40, "ink")
+    L.vline(25, 29, 40, "ink")
+    L.vline(23, 29, 40, "w1")
+    L.hline(22, 25, 29, "w0")
     stone = [
         "  kkkk  ",
-        " k4433k ",
-        "k443322k",
-        "k432221k",
-        "k432211k",
-        "k332211k",
-        "k322111k",
-        " k2211k ",
+        " k0011k ",
+        "k001122k",
+        "k011223k",
+        "k012233k",
+        "k112233k",
+        "k122334k",
+        " k2334k ",
         "  kkkk  ",
     ]
-    sk = {"k": "sk", "4": "s4", "3": "s3", "2": "s2", "1": "s1"}
-    L.blit(stone, sk, 12, 31)
-    L.blit(stone, sk, 28, 31)
-    L.rect(9, 34, 30, 2, "e1")     # the axle beam the donkey turns
-    L.hline(9, 38, 34, "e2")
-    L.vline(8, 33, 36, "sk")
-    L.vline(39, 33, 36, "sk")
-    # a basket of olives by the left post
+    sk = {"k": "ink", "0": "w0", "1": "w1", "2": "w2", "3": "w3", "4": "w4"}
+    # the axle runs from the pier out past the rim, where the donkey is yoked
+    L.rect(24, 33, 17, 2, "tc1")
+    L.hline(24, 40, 33, "tc2")
+    L.px(41, 33, "ink")
+    L.px(41, 34, "ink")
+    L.blit(stone, sk, 14, 33)
+    # a basket of olives at the door
     basket = [
         " gGgGg ",
         "gGgGgGg",
         "kkkkkkk",
-        "ke1e1ek",
-        " keeek ",
+        "kTtTtTk",
+        " kTtTk ",
     ]
-    L.blit(basket, {"g": "ol1", "G": "ol2", "k": "sk", "e": "e2", "1": "e1"}, 2, 41)
-    L.hline(0, 47, 46, "s1")
-    L.hline(0, 47, 47, "sk")
+    L.blit(basket, {"g": "ol1", "G": "ol2", "k": "ink", "T": "tc2", "t": "tc1"}, 39, 42)
     return s
 
 
 def build():
-    return [house_small(), house_two_story(), shrine(), paving(), paving_inner(), altar(),
+    return [house_small(), house_two_story(), shrine(), paving(), altar(),
             garland_posts(), walls(), terraces(), olive_press()]

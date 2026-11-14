@@ -45,8 +45,8 @@ C = {
     # G6 Cycladic flagstones
     "pj1": (216, 208, 200),
     "sl0": (72, 80, 96), "sl1": (104, 112, 128), "sl2": (136, 144, 152), "sl3": (168, 176, 176),
-    # G7 sea
-    "wa1": (40, 80, 152), "wa2": (72, 128, 192), "wa3": (96, 152, 216),
+    # G7 sea: aethos's deep water is b1 with wr ripples
+    "wa1": (40, 80, 152), "wr": (80, 136, 200), "wa3": (96, 152, 216),
 }
 
 GROUPS = {
@@ -62,7 +62,7 @@ GROUPS = {
              "wd1", "wd2", "rd"],
     "paving": ["ink", "w0", "pj1", "sl0", "sl1", "sl2", "sl3", "g0", "g1", "tc1", "b1", "b2",
                "w2", "w3"],
-    "sea": ["b0", "wa1", "wa2", "wa3", "b2", "b3", "w0", "ink"],
+    "sea": ["b0", "wa1", "b1", "wr", "wa3", "b2", "b3", "w0", "ink"],
 }
 for g, names in GROUPS.items():
     assert len(names) <= 15, (g, len(names))
