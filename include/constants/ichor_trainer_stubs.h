@@ -8,14 +8,8 @@
 // its party in src/data/trainers.party (the parties are written in
 // design/phase2/trainers_batch1.party), it is TRAINER_NONE here: the build
 // works, but don't start these battles in tests. Registering one removes its
-// line below. (The id range, 40-159, has landed; these two wait only for
-// their trainer classes.)
+// line below. Batch 1's trainers are all registered; later batches add
+// their stubs here while their classes or ids are pending.
 
-#ifndef TRAINER_ICHOR_ALETHEA_DECK
-#define TRAINER_ICHOR_ALETHEA_DECK TRAINER_NONE
-#endif
-#ifndef TRAINER_ICHOR_LYKON
-#define TRAINER_ICHOR_LYKON        TRAINER_NONE
-#endif
 
 #endif // GUARD_CONSTANTS_ICHOR_TRAINER_STUBS_H

@@ -1253,7 +1253,8 @@ static const struct InGameTrade sIngameTrades[] =
         .otName = _("PHEIDON"),
         .otGender = MALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_KARKIPOOL
+        .requestedSpecies = SPECIES_KARKIPOOL,
+        .level = 14,                         // SCRIPT.md: Stater is Lv 14
     }
 };
 
