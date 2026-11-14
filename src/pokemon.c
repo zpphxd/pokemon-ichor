@@ -5132,8 +5132,9 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_TEAM_MAGMA:
         case TRAINER_CLASS_AQUA_ADMIN:
         case TRAINER_CLASS_MAGMA_ADMIN:
-        case TRAINER_CLASS_TITANBORN: // Ichor
             return MUS_VS_AQUA_MAGMA;
+        case TRAINER_CLASS_TITANBORN: // Ichor
+            return MUS_ICHOR_TITAN;
         // Ichor: Kleon and the Hierophants share the Ichor rival theme
         case TRAINER_CLASS_LAKONIAN:
         case TRAINER_CLASS_HIEROPHANT:
@@ -5167,7 +5168,7 @@ u16 GetBattleBGM(void)
             if (GetCurrentRegion() == REGION_KANTO)
                 return MUS_RG_VS_TRAINER;
             else
-                return MUS_VS_TRAINER;
+                return MUS_ICHOR_BATTLE_TRAINER; // Ichor
         }
     }
     else
@@ -5175,7 +5176,7 @@ u16 GetBattleBGM(void)
         if (GetCurrentRegion() == REGION_KANTO)
             return MUS_RG_VS_WILD;
         else
-            return MUS_VS_WILD;
+            return MUS_ICHOR_BATTLE_WILD; // Ichor
     }
 }
 
