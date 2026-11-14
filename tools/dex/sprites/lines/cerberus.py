@@ -444,8 +444,8 @@ def dikyon(p, view, phase):
         snap = phase if view == "front" else 0
         walk = phase if view == "side" else 0
         # the tail, an ember at its tip
-        _flame(p, (54.5, 37.5), (57, 29.5 - snap), 5.4, bend=-1.0)
-        p.limb(bez((50, 41.5), (54, 41.5), (54.5, 37.5)), 4.2, 3.4, coat, group=9)
+        _flame(p, (53, 38), (55, 30.5 - snap), 5.4, bend=-1.0)
+        p.limb(bez((50, 41.5), (53, 41.5), (53, 38)), 4.2, 3.4, coat, group=9)
         # far legs, darkening to dusk at the paws
         fh = [(45, 45), (43, 51), (45.5, 55.5), (43.5, 59)] if not walk else [(45, 45), (46, 51), (48.5, 55.5), (47, 59)]
         ff = [(31, 47), (32, 53), (33.5, 58.5)] if not walk else [(31, 47), (29, 53), (27.5, 58.5)]
@@ -461,7 +461,7 @@ def dikyon(p, view, phase):
         for a, b in (((20.5, 49), (19.5, 53.5)), ((24, 51), (24, 55))):
             p.lens(a, b, 4.2, pale, fat=0.3, group=2)
         # near legs: the hind leg thrust back with its hock, the foreleg reaching
-        nh = [(48, 44), (52, 50), (55.5, 55), (54, 59)] if not walk else [(48, 44), (50, 50), (51, 55), (49, 59)]
+        nh = [(48, 44), (51.5, 50), (54.5, 55), (53, 59)] if not walk else [(48, 44), (50, 50), (51, 55), (49, 59)]
         nf = [(25, 48), (21, 53), (17.5, 57.5)] if not walk else [(25, 48), (25, 53), (24.5, 57.5)]
         p.limb(nh, 9.6, 4.8, dleg, group=12)
         p.blob(nh[-1][0] - 1, 59.6, 4.6, 2.3, dleg, group=12)
@@ -478,7 +478,7 @@ def dikyon(p, view, phase):
             _dream(p, 33, 36, 1.0, f=-1, g=60, licks=())
         p.limb(bez((19, 39.5), (24.5, 43), (30.5, 39.5)), 3.8, 3.6, bronze, group=34)
         if p.big:
-            p.patch(32, 13 - snap, DHEAD_BACK, DL)
+            p.patch(32, 15 - snap, DHEAD_BACK, DL)
             p.patch(26, 30, KDREAM_NEAR, DL)
             p.patch(7, 21, DHEAD, DL)
             _meander(p, (19, 39.5), (24.5, 43), (30.5, 39.5), range(19, 31))
@@ -602,11 +602,11 @@ def _gflame(p, a, b, w, bend=0.0, cool=0.52, **kw):
                nooutline=True, **kw)
 
 
-# Pylakyon's three heads, hand-drawn hounds, all awake and snarling with open
-# jaws: the near one lowered over the braced foreleg, biggest and brightest,
-# its ears swept back; the middle one raised, muzzle up; the far one reared
-# back and turned the other way, a step darker. Ghost-light eyes with dark
-# pupils, limestone fangs, a red tongue.
+# Pylakyon's three heads, hand-drawn hounds, all awake with open jaws, each
+# with a cream muzzle and cheek and a dusk brow marking: the near one lowered
+# over the braced foreleg, biggest and brightest, ears swept back; the middle
+# one a step darker, raised and snarling; the far one two steps darker,
+# reared back and roaring at the sky, ears pinned. Ghost-light eyes.
 PHEAD_NEAR = [
     ".................#......#...",
     "................#3#....#2#..",
@@ -615,37 +615,37 @@ PHEAD_NEAR = [
     "..............#33321#32210#.",
     ".............#3333222322110#",
     "............#333332222221110#",
-    "...........#3333322222211110#",
-    "..........#33000112222111100#",
+    "...........#33333222dd211110#",
+    "..........#33ddddd2222111100#",
     "........##33#mE##222211111000#",
     "......##3333#E#B#22221111100#.",
-    "....##333333111#222211111000#.",
-    "..##333333222222222111110000#.",
-    "##333322222222222211111000d#..",
-    "#1#3222222222211111111000dd#..",
-    "##1##111111111#1111100000d#...",
+    "....##3333331bb#bbaa11111000#.",
+    "..##3333332222bbbbaa11110000#.",
+    "##3332222bbbbbbbbaaa1111000d#.",
+    "#1#bbbbbbbbbbaaa11111000dd#...",
+    "##1##aaa111111#a111100000d#...",
     ".#b#ddddddddd#a11110000dd#....",
     ".#ddrrrdddbd#aa1110000d#......",
     "..#dddddddb#aaa110000d#.......",
-    "...#aaaaaaaa#aa10000d#........",
-    "....#aaaaaa#.#0dddd#..........",
+    "...#bbbbaaaa#aa10000d#........",
+    "....#baaaaa#.#0dddd#..........",
     ".....##aa##...####............",
     ".......##.....................",
 ]
 PHEAD_MID = [
     "..................#....#.",
     ".................#3#..#2#",
-    "................#332##321#",
-    "..###..........#3332#3221#",
-    ".#1#3#........#333322221#.",
-    "#11#333#......#33332222110#",
-    "##1#33333###.#333322221110#",
-    ".#b#33333333##3330022211100#",
-    "..#bdd2222333333#mE##211100#",
-    "..#ddrdd122222333#E#B#21110#",
-    "...#dddrdd1112222###2211100#",
-    "...#bdddddb#111222222111000#",
-    "....#aabbb#a11112221111000#.",
+    "................#322##321#",
+    "..###..........#3222#2211#",
+    ".#1#3#........#322221111#.",
+    "#11#322#......#32222111110#",
+    "##1#32222###.#322221dd1100#",
+    ".#b#32222222##222ddd111100#",
+    "..#bddbbaa222222#mE##111000#",
+    "..#ddrddaabbb222#E#B#11100#",
+    "...#dddrdd11abbb2###1111000#",
+    "...#bdddddb#11abbbba11110000#",
+    "....#aabbb#a1111aa111110000#.",
     ".....#aaa#aa11111111100dd#..",
     "......###aaa111110000dd#....",
     ".........#aaa100000dd#......",
@@ -653,24 +653,25 @@ PHEAD_MID = [
     "...........###.####.........",
 ]
 PHEAD_FAR = [
-    "....#....#..................",
-    "...#2#..#2#.................",
-    "..#222##222#................",
-    "..#2222#2222#..........###..",
-    "...#222222222#........#1#0#.",
-    ".#22222222222#......#111#00#",
-    ".#222222222222#.###11111#0##",
-    "#2222222222222##21111111#b#.",
-    "#222222##Em#2222111111ddb#..",
-    "#11111#B#E#222111111ddrdd#..",
-    "#1111112###2111111ddrddd#...",
-    "#111111111111111#bdddddb#...",
-    ".#11111111111111a#bbbaa#....",
-    "..#dddd000000000aa#aaa#.....",
-    "....#dddddd00000aaa###......",
-    "......#ddddddd0aaa#.........",
-    "........#ddddd#aa#..........",
-    ".........####.###...........",
+    "..#...................###",
+    ".#1#................##1##",
+    ".#11#.#...........##1111#",
+    "#110#.#1#.......##11111a#",
+    "#10#.#121#....##1111aaa#.",
+    ".#0###1210####11111aa##..",
+    "..##11211111111dd1aa#bb#.",
+    "..#1112111dddd#mE#a#ddd#.",
+    ".#11112110dd#B#E#a#ddb#..",
+    ".#1111211100###aa#dddb#..",
+    "#111112110000aaa#dddrb#..",
+    "#11111210000aaa#ddrrd#...",
+    "#d11110000000aa#bdddb#...",
+    ".#d1100000000aaa#bbba#...",
+    ".#dd1000000d0aaaa#aa#....",
+    "..#dd00000dd#aaaa##......",
+    "...#ddd00ddd##aa#........",
+    "....#dddddd#..##.........",
+    ".....######..............",
 ]
 
 # the near head turned right in profile, for the back view
@@ -682,20 +683,20 @@ PHEAD_BACK = [
     "...#33333#33333#..............",
     "..#3333333333333#.............",
     ".#333333333333333#............",
-    ".#3333333333333333#...........",
-    ".#33333333333333332#..........",
+    ".#333333dd33333333#...........",
+    ".#3333333333ddddd32#..........",
     "#333333333333##Em#22##........",
     ".#22333333333#B#E#2222##......",
-    ".#223333333333#222222221##....",
-    ".#222333333222222222221111##..",
-    "..#d222222222222222211111000##",
-    "..#dd2222222222222211111100#0#",
-    "...#d2222222222#211111110##0##",
+    ".#22333333aabb#bb2222221##....",
+    ".#22233333aabbbb2222221111##..",
+    ".#d2222222aaabbbbbbbb1111000##",
+    "...#dd22222222aaabbbbbbbbbb#0#",
+    "...#d222222222a#211111aaa##0##",
     "....#dd00001111a#ddddddddd#b#.",
     "......#d0000111aa#dbdddrrrdd#.",
     ".......#d000011aaa#bddddddd#..",
-    "........#d00001aa#aaaaaaaa#...",
-    "..........#dddd0#.#aaaaaa#....",
+    "........#d00001aa#aaaabbbb#...",
+    "..........#dddd0#.#aaaaab#....",
     "............####...##aa##.....",
     ".....................##.......",
 ]
@@ -768,6 +769,27 @@ def _hound(p, cx, cy, s=1.0, f=-1, ang=0.0, mouth=0.8, mat=None, g=80, pinned=0.
                 p.fig.px(ex - 2 + i, ey - 1 + j, {"1": "ink", "e": eye, "8": "pale2"}[c])
 
 
+# the middle head seen from behind, turning a little to the right
+PHEAD_REAR = [
+    "..#..........#....",
+    ".#2#........#2#...",
+    ".#22#......#211#..",
+    "#2221#....#2211#..",
+    "#22211####22111#..",
+    ".#222211111111100#",
+    "#2222221111111110#",
+    "#22222111111111dd0#",
+    "#2222111111111ddda#",
+    "#222111111111dddaa#",
+    ".#22111111111ddaab#",
+    ".#2211111111100aa#.",
+    "..#21111111100da#..",
+    "...#1111110000d#...",
+    "....#11100000##....",
+    ".....##000###......",
+    ".......###.........",
+]
+
 def pylakyon(p, view, phase):
     if view in ("front", "side"):
         # weight thrown forward over a braced near foreleg: the near head
@@ -779,8 +801,8 @@ def pylakyon(p, view, phase):
                             ((44, 30), (56, 26), 6, -2.0)):
             _gflame(p, a, b, w, bend=bd, group=20)
         # the serpent tail rising in an S behind the body, its head reared to hiss
-        p.limb(bez3((52, 40), (66, 35), (50, 28), (59, 20.5 - rear)), 7.4, 4.4, serpent, group=9)
-        p.blob(58.5, 19 - rear, 4.2, 3.0, serpent, ang=-15, group=9)
+        p.limb(bez3((52, 41), (66, 38), (50, 32), (59, 26.5 - rear)), 7.4, 4.4, serpent, group=9)
+        p.blob(58.5, 25 - rear, 4.2, 3.0, serpent, ang=-15, group=9)
         # far legs, darker, under the body
         fh = [(46, 45), (43, 51), (48, 55), (46, 59)]
         ff = [(31, 45), (32, 51), (30, 56), (29, 59)]
@@ -817,7 +839,7 @@ def pylakyon(p, view, phase):
         p.limb(bez((14, 41), (25, 50), (36, 41)), 5, 5, pbronze, group=60, cap=False)
         # the heads: far reared back, middle raised, near lowered over the paw
         if p.big:
-            p.patch(33, 1, PHEAD_FAR, PL)
+            p.patch(36, 1, PHEAD_FAR, PL)
             p.patch(12, 7 - rear, PHEAD_MID, PL)
             _meander(p, (14, 41), (25, 50), (36, 41), range(15, 36))
             p.patch(1, 27 + rear, PHEAD_NEAR, PL)
@@ -838,45 +860,84 @@ def pylakyon(p, view, phase):
         p.blob(18, 53, 12, 9, pcoat, group=2)
         p.blob(46, 53, 13.5, 9.5, pcoat, group=3)
         # the necks, thick at the shoulders and running up into each head
-        p.limb(bez((30, 48), (29, 31), (22, 13)), 13, 9, pdark, group=5)
-        p.limb(bez((16, 50), (17, 42), (19, 34)), 15, 11, pcoat, group=4)
+        p.limb(bez((31, 49), (30, 33), (29, 18)), 16, 12, pcoat, group=5)
+        p.limb(bez((15, 50), (16, 43), (19, 34)), 15, 11, pcoat, group=4)
         p.limb(bez((45, 51), (45, 40), (41, 28)), 18, 13, pcoat, group=6)
         for a, b, w, bd in (((10, 47), (4, 36), 8, 1.4), ((29, 46), (33, 30), 9, -0.6),
                             ((54, 47), (59, 36), 8, -1.4)):
             _gflame(p, a, b, w, bend=bd, group=30, cool=0.6)
         p.limb(bez((8, 47), (31, 55), (56, 46)), 5, 5, pbronze, group=34)
         if p.big:
-            p.patch(12, 1, PHEAD_FAR, PL)
-            p.patch(1, 22, PHEAD_MID, PL)
-            p.patch(33, 9, PHEAD_BACK, PL)
+            p.patch(20, 4, PHEAD_REAR, PL)
+            p.patch(1, 23, [r[::-1] for r in PHEAD_FAR], PL)
+            p.patch(33, 10, PHEAD_BACK, PL)
             _meander(p, (8, 47), (31, 55), (56, 46), range(9, 56))
         else:
-            _hound(p, 22, 10, 0.8, f=1, ang=26, mat=pdark)
-            _hound(p, 16, 26, 0.9, f=-1, ang=12)
-            _hound(p, 46, 20, 1.1, f=1, ang=-8, pinned=0.85)
+            _hound(p, 14, 28, 0.8, f=-1, ang=30, mat=pdark)
+            p.blob(28, 9, 7, 6.5, pdark)
+            _hound(p, 46, 21, 1.1, f=1, ang=-8, pinned=0.85)
         return
 
-    if view in ("down", "up"):
+    if view == "down":
+        # follower, toward the camera: the middle head front-on, the near head
+        # lowered to one side, the far head reared up on the other, the mane
+        # burning between, the serpent rising behind
         step = phase
-        back = view == "up"
+        p.limb(bez3((40, 44), (50, 40), (44, 30), (50, 22)), 5, 3.2, serpent, group=9)
+        p.blob(50, 20.5, 3, 2.2, serpent, group=9)
+        for a, b, w, bd in (((24, 34), (14, 16), 7, 2.0), ((40, 32), (49, 13), 7, -2.0),
+                            ((32, 30), (32, 12), 7, 0.0)):
+            _gflame(p, a, b, w, bend=bd, group=20)
+        p.blob(32, 46, 13, 8, pcoat, group=1)
         for x, st in ((25.5, step), (38.5, 1 - step)):
-            p.limb([(x, 48), (x, 60 - 2 * st)], 5.6, 5, pleg, group=12)
-            p.blob(x, 60.5 - 2 * st, 3.6, 1.8, pleg, group=12)
-        p.blob(32, 45, 12, 8, pcoat, group=1)
-        if back:
-            p.limb([(32, 49), (35, 43), (36, 37)], 4, 3.4, serpent, group=9)
-            p.blob(36.5, 35 + step, 3, 2.4, serpent, group=9)
-        for a, b in (((22, 40), (16, 27)), ((42, 40), (48, 27)), ((28, 38), (26, 24)), ((36, 38), (38, 24))):
-            _gflame(p, a, b, 6)
-        for cx, cy, mat in ((18, 32, pcoatI), (46, 32, pdark), (32, 27, pcoatI)):
-            p.lens((cx - 3, cy - 3), (cx - 5, cy - 11 + step), 5, mat, bend=0.4, fat=0.4)
-            p.lens((cx + 3, cy - 3), (cx + 5, cy - 11 + step), 5, mat, bend=-0.4, fat=0.4)
-            p.blob(cx, cy, 6.4, 6, mat, group=3)
-            if not back:
-                p.blob(cx, cy + 3.8, 4.4, 3.2, ppale, group=3)
-                p.pxs([(cx - 3, cy - 1), (cx - 2, cy - 1), (cx + 2, cy - 1), (cx + 3, cy - 1)], "blue2")
-                p.pxs([(cx - 1, cy + 2), (cx, cy + 2), (cx + 1, cy + 2)], "ink")
-        p.limb(bez((19, 40), (32, 45), (45, 40)), 3.4, 3.4, pbronze, group=34)
+            p.limb([(x, 46), (x - 0.5, 53), (x, 59.5 - 2 * st)], 7, 5.4, pleg, group=12 if x < 32 else 13)
+            p.blob(x, 60 - 2 * st, 4.2, 2.2, pleg, group=12 if x < 32 else 13)
+        p.limb(bez((22, 42), (19, 36), (17, 31)), 9, 7.5, pcoat, group=21)
+        p.limb(bez((42, 42), (45, 34), (46, 27)), 8, 6.5, pdark, group=22)
+        p.limb(bez((32, 42), (32, 34), (32, 27)), 10, 8, pcoat, group=23)
+        for a, b, w, bd in (((26, 42), (24, 32), 6, 1.0), ((38, 42), (40, 32), 6, -1.0)):
+            _gflame(p, a, b, w, bend=bd, group=30, cool=0.65)
+        p.limb(bez((19, 42), (32, 47.5), (45, 42)), 3.6, 3.6, pbronze, group=34)
+        _hound(p, 46.5, 25, 0.62, f=1, ang=34, mouth=1.2, mat=pdark, g=80)
+        _hound(p, 17, 31, 0.7, f=-1, ang=-14, mouth=1.0, g=90, pinned=0.85)
+        # the middle head front-on: tall ears, dusk brows, a cream muzzle, open jaw
+        p.lens((27.5, 23), (24.5, 13 + step), 5.6, pcoatI, bend=0.6, fat=0.4)
+        p.lens((36.5, 23), (39.5, 13 + step), 5.6, pcoatI, bend=-0.6, fat=0.4)
+        p.blob(32, 26.5, 7.6, 6.6, pcoatI, group=50)
+        p.blob(32, 33.5, 3.4, 2.4, HMOUTH, group=51, flat=0)
+        p.blob(32, 30.5, 4.4, 3.2, ppale, group=52)
+        p.blob(27.6, 29.5, 2.2, 2.0, ppale, group=52)
+        p.blob(36.4, 29.5, 2.2, 2.0, ppale, group=52)
+        p.pxs([(27.5, 24.5), (28.5, 24.5), (35.5, 24.5), (36.5, 24.5)], "dusk")
+        p.pxs([(28, 25.5), (36, 25.5)], "blue2")
+        p.pxs([(27, 25.5), (37, 25.5)], "ink")
+        p.pxs([(31.5, 28.5), (32.5, 28.5), (32, 29.5)], "ink")
+        if p.big:
+            p.pxs([(30.5, 33.5), (33.5, 33.5)], "pale2")
+            p.px(32, 34.5, "fire0")
+        return
+
+    if view == "up":
+        # follower, walking away: rump and hind legs stepping, the serpent's S
+        # rising over the back, three heads seen from behind in their mane
+        step = phase
+        for a, b, w, bd in (((22, 36), (12, 16), 7, 2.0), ((42, 36), (52, 16), 7, -2.0),
+                            ((32, 32), (31, 12), 7, 0.6)):
+            _gflame(p, a, b, w, bend=bd, group=20)
+        for cx, cy, mat, s_ in ((17, 29, pcoatI, 1.0), (47, 26, pdark, 0.85), (32, 23, pcoat, 0.95)):
+            p.limb(bez((32 + (cx - 32) * 0.3, 44), (cx, cy + 9), (cx, cy + 3)), 8 * s_, 7 * s_, mat)
+            p.lens((cx - 3 * s_, cy - 3), (cx - 4.5 * s_, cy - 11 + step), 5 * s_, mat, bend=0.4, fat=0.4)
+            p.lens((cx + 3 * s_, cy - 3), (cx + 4.5 * s_, cy - 11 + step), 5 * s_, mat, bend=-0.4, fat=0.4)
+            p.blob(cx, cy, 6.2 * s_, 5.8 * s_, mat)
+        for x, st in ((25.5, step), (38.5, 1 - step)):
+            p.limb([(x, 46), (x + 0.5, 53), (x, 59.5 - 2 * st)], 7.6, 5.4, pleg, group=12 if x < 32 else 13)
+            p.blob(x, 60 - 2 * st, 4.2, 2.2, pleg, group=12 if x < 32 else 13)
+        p.blob(32, 46, 13.5, 9, pcoat, group=1)
+        for a, b, w, bd in (((24, 40), (21, 31), 6, 1.0), ((32, 39), (32, 30), 6, 0.0),
+                            ((40, 40), (43, 31), 6, -1.0)):
+            _gflame(p, a, b, w, bend=bd, group=30, cool=0.65)
+        p.limb(bez3((32, 50), (40, 44), (26, 38), (33, 30 + step)), 5, 3.2, serpent, group=40)
+        p.blob(33.5, 28.5 + step, 3, 2.2, serpent, group=40)
         return
 
 
