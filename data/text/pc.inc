@@ -1,20 +1,22 @@
+@ Ichor: the PC is the Pithos, the great storage jar (design/TERMS.md).
 Text_BootUpPC:
-	.string "{PLAYER} booted up the PC.$"
+	.string "{PLAYER} lifted the lid of the Pithos.$"
 
 gText_WhichPCShouldBeAccessed::
-	.string "Which PC should be accessed?$"
+	.string "What will you reach for?$"
 
 gText_AccessedSomeonesPC::
-	.string "Accessed SOMEONE'S PC.$"
+	.string "The Pithos opened.$"
 
 gText_StorageSystemOpened::
-	.string "POKéMON Storage System opened.$"
+	.string "Pokémon rest safely in its jars.$"
 
 gText_AccessedPlayersPC::
-	.string "Accessed {PLAYER}'s PC.$"
+	.string "{PLAYER}'s own things are wrapped\n"
+	.string "in cloth near the top.$"
 
 gText_AccessedLanettesPC::
-	.string "Accessed LANETTE's PC.$"
+	.string "The Pithos opened.$"
 
 gText_AccessedBillsPC::
-	.string "Accessed BILL's PC.$"
+	.string "The Pithos opened.$"

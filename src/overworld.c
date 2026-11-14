@@ -1938,10 +1938,10 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
-    if (IS_FRLG)
-        gFieldCallback = FieldCB_WarpExitFadeFromBlack;
-    else
-        gFieldCallback = ExecuteTruckSequence;
+    // Ichor: a new game wakes up at home in Elaia (src/new_game.c), not in
+    // Hoenn's moving truck, so fade in with the map's music as FRLG does. The
+    // truck sequence would shake the bedroom and stamp truck tiles over it.
+    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
     SetFieldVBlankCallback();

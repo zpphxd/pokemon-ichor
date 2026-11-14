@@ -79,8 +79,9 @@ static void CB2_SkipToNewGame(void)
     static const u8 sText_PlayerFemale[] = _("LEAF");
     static const u8 sText_Rival[] = _("BLUE");
 #else
-    static const u8 sText_PlayerMale[] = _("BRENDAN");
-    static const u8 sText_PlayerFemale[] = _("MAY");
+    // Ichor: the main menu's default names (design/TERMS.md)
+    static const u8 sText_PlayerMale[] = _("THEO");
+    static const u8 sText_PlayerFemale[] = _("IANTHE");
 #endif  // IS_FRLG
 
     if (!UpdatePaletteFade())
