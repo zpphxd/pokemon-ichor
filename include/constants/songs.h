@@ -493,7 +493,7 @@
 
 // Ichor: our songs are appended after the phonemes (see below), so END_MUS covers
 // them; overworld.c sizes its night-music table from it.
-#define END_MUS                     MUS_ICHOR_VICTORY_TRAINER
+#define END_MUS                     MUS_ICHOR_AKADEMIA
 
 // These PH_* constants are phoneme sounds used by the "bard" NPC (see src/bard_music.c and src/mauville_old_man.c).
 // Each comes in a triplet of PH_*_BLEND, PH_*_HELD, and PH_*_SOLO, and the name of each triplet incorporates the English phonetic sound it represents.
@@ -561,6 +561,13 @@
 #define MUS_ICHOR_BATTLE_TRAINER    617
 #define MUS_ICHOR_BATTLE_WILD       618
 #define MUS_ICHOR_VICTORY_TRAINER   619
+#define MUS_ICHOR_ENCOUNTER_RIVAL   620
+#define MUS_ICHOR_ENCOUNTER_TITAN   621
+#define MUS_ICHOR_OBTAIN_KEY_ITEM   622
+#define MUS_ICHOR_OBTAIN_MON        623
+#define MUS_ICHOR_NEW_GAME          624
+#define MUS_ICHOR_AGORA             625
+#define MUS_ICHOR_AKADEMIA          626
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

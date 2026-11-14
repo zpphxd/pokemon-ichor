@@ -334,7 +334,7 @@ BATTLE_RIVAL = Song(
 # the slice, GM-numbered, over Emerald drumset 1 for frame drums, krotala and kymbala.
 VG = 'ichor'
 FRAME_KIT = {'dum': 61, 'tek': 62, 'low': 63, 'tam': 54, 'kro': 75, 'pok': 76, 'tri': 80,
-             'cym': 86, 'taiko': 87, 'deep': 36, 'snare': 38, 'crash': 49, 'tom': 45}
+             'cym': 86, 'taiko': 87, 'deep': 36, 'snare': 38, 'crash': 49, 'tom': 45, 'bell': 83}
 
 
 def bars(pattern, n, last=None):
@@ -883,5 +883,108 @@ VICTORY_TRAINER = Song(
         Track('drums', 0, 90, velocity=100, kit=FRAME_KIT, parts=VI_D),
     ])
 
+# ============================================================ Agora (the market hall)
+# D Greek Hypophrygian (G-G's species on D: the church Mixolydian, C natural), 2/4,
+# the quick island ballos. The aulos (oboe) cries the stalls' tune in A, the syrinx
+# (flute) answers in B around G and C (the bVII colour), and in A2 the two pipes
+# play the tune in parallel thirds. Kithara on the off-beats, krotala on the "and".
+AG_CH = {
+    'intro': ['D'],
+    'A': ['D', 'D', 'C', 'D', 'G', 'C', 'D', 'D', 'D', 'D', 'C', 'D', 'G', 'C', 'Am', 'D'],
+    'B': ['G', 'G', 'C', 'C', 'D', 'D', 'G', 'G', 'Em', 'Em', 'C', 'C', 'Am', 'Am', 'D', 'D'],
+}
+AG_CH['A2'] = AG_CH['A']
+D_HPHR = pcs('D', MIXOLYDIAN)
+AG_TUNE = ('A4:1 D5:1 F#5:1 A5:1 | G5:1 F#5:1 E5:1 D5:1 | E5:1 G5:1 E5:1 C5:1 | D5:2 A4:2 | '
+           'B4:1 D5:1 G5:2 | G5:1 E5:1 C5:1 E5:1 | F#5:1 E5:1 D5:1 C5:1 | D5:4 | '
+           'D5:1 F#5:1 A5:1 F#5:1 | G5:1 A5:1 F#5:2 | E5:1 F#5:1 G5:1 E5:1 | F#5:2 D5:2 | '
+           'G5:1 F#5:1 E5:1 D5:1 | C5:1 E5:1 G5:1 E5:1 | E5:1 C5:1 A4:1 C5:1 | D5:4')
+
+
+def ag_guitar(c):
+    r, t, f = triad(c, 55)
+    dy = sorted([t, f if f < r + 12 else f - 12])
+    return notes([(None, 1), (dy, 1), (None, 1), (dy, 1)])
+
+
+def ag_bass(c):
+    r = triad(c, 38)[0]
+    return notes([(r, 1), (None, 1), (r + 7, 1), (None, 1)])
+
+
+AGORA = Song(
+    name='mus_ichor_agora', title='Agora', meter=(2, 4), grouping=(2, 2), tempo=144,
+    voicegroup=VG, volume=127, reverb=50, priority=0,
+    sections=[('intro', 1), ('A', 16), ('B', 16), ('A2', 16)], loop_from='A',
+    modes={'*': D_HPHR}, target=(30, 60), chords=AG_CH, ref=('MUS_POKE_MART', -21.7),
+    tracks=[
+        Track('aulos', 68, 96, pan=-10, velocity=100, lo='G4', hi='A5', vibrato=(4, 44, 12),
+              parts={'A': AG_TUNE, 'A2': AG_TUNE}),
+        Track('syrinx', 73, 94, pan=12, velocity=100, lo='G4', hi='D6', vibrato=(3, 44, 12), parts={
+            'B': 'B5:1 A5:1 G5:1 D5:1 | B4:1 D5:1 G5:2 | C6:1 B5:1 A5:1 G5:1 | E5:2 C5:2 | '
+                 'D5:1 F#5:1 A5:1 C6:1 | B5:1 A5:1 F#5:2 | G5:1 A5:1 B5:1 D6:1 | D6:2 B5:2 | '
+                 'E5:1 G5:1 B5:1 G5:1 | A5:1 G5:1 F#5:1 E5:1 | G5:1 E5:1 C5:1 E5:1 | G5:2 C6:2 | '
+                 'A5:1 C6:1 B5:1 A5:1 | E5:2 A5:2 | F#5:1 G5:1 A5:1 F#5:1 | D5:2 A4:2',
+            'A2': diatonic(AG_TUNE, D_HPHR, 2)}),
+        Track('kithara', 24, 82, pan=24, velocity=90, gate=0.6, lo='G3', hi='C5',
+              parts={s: gen(c, ag_guitar) for s, c in AG_CH.items()}),
+        Track('bass', 92, 60, velocity=100, gate=0.8, lo='C2', hi='C4',
+              parts={s: gen(c, ag_bass) for s, c in AG_CH.items()}),
+        Track('frame drum', 0, 86, velocity=96, kit=FRAME_KIT, parts={
+            'intro': 'dum:1 tek:1 tek:1 tek:1',
+            'A': bars('dum:1 tek:1 low:1 kro:1', 16, 'dum:1 tek:1 tek:1 tek:1'),
+            'B': bars('dum:1 kro:1 tek:1 kro:1', 16, 'dum:1 tek:1 tek:1 tek:1'),
+            'A2': bars('dum:1 tam:1 low:1 kro:1', 16, 'dum:1 tek:1 tek:1 tek:1')}),
+    ])
+
+# ============================================================ Akademia (Daphne's school)
+# G Hypolydian (F-F's species on G: the church Lydian, with C#), 4/4. Plato's school,
+# so the kithara turns its chords in open fifths, the Pythagorean interval, under a
+# lyre (harp) tune that keeps reaching for the raised fourth. The syrinx takes B, and
+# pizzicato strings walk the bass. B ends on D, which falls to the loop's G.
+AK2_CH = {
+    'intro': ['G'],
+    'A': ['G', 'A', 'G', 'D', 'Em', 'A', 'D', 'G'],
+    'B': ['Em', 'Bm', 'A', 'D', 'G', 'Em', 'A', 'D'],
+}
+G_HLYD = pcs('G', LYDIAN)
+
+
+def ad_fifths(c):
+    r = triad(c, 43)[0]
+    return notes([(r, 1), (r + 7, 1), (r + 12, 1), (r + 7, 1)] * 2)
+
+
+def ad_pizz(c):
+    r, t, f = triad(c, 43)
+    return notes([(r, 2), (t, 2), (f, 2), (t, 2)])
+
+
+AKADEMIA = Song(
+    name='mus_ichor_akademia', title='Akademia', meter=(4, 4), grouping=(2, 2, 2, 2), tempo=100,
+    voicegroup=VG, volume=127, reverb=50, priority=0,
+    sections=[('intro', 1), ('A', 8), ('B', 8)], loop_from='A',
+    modes={'*': G_HLYD}, target=(30, 50), chords=AK2_CH, ref=('MUS_BIRCH_LAB', -23.0),
+    tracks=[
+        Track('lyre', 46, 127, pan=-12, velocity=100, lo='C5', hi='D6', parts={
+            'A': 'D5:2 G5:1 A5:1 B5:2 G5:2 | C#6:2 B5:1 A5:1 E5:4 | D5:2 G5:1 A5:1 B5:2 D6:2 | A5:4 F#5:4 | '
+                 'E5:2 G5:2 B5:3 A5:1 | A5:2 C#6:2 E5:4 | F#5:2 E5:1 F#5:1 A5:2 D5:2 | G5:8'}),
+        Track('syrinx', 73, 120, pan=14, velocity=96, lo='B4', hi='D6', vibrato=(3, 40, 16), parts={
+            'B': 'B5:3 A5:1 G5:2 E5:2 | F#5:3 E5:1 D5:2 B4:2 | C#5:2 E5:2 A5:3 G5:1 | F#5:4 D5:4 | '
+                 'G5:2 B5:2 D6:3 C#6:1 | B5:2 G5:2 E5:4 | E5:2 A5:2 C#6:2 B5:1 A5:1 | A5:4 F#5:4'}),
+        Track('kithara', 24, 100, pan=22, velocity=86, gate=0.9, lo='G2', hi='A4',
+              parts={s: gen(c, ad_fifths) for s, c in AK2_CH.items()}),
+        Track('pizzicato', 45, 110, pan=-24, velocity=90, gate=0.5, lo='G2', hi='B3',
+              parts={s: gen(AK2_CH[s], ad_pizz) for s in ('A', 'B')}),
+        Track('kymbala', 0, 60, velocity=80, kit=FRAME_KIT, parts={
+            'intro': 'tri:8_', 'A': bars('tri:8_ | r:8', 4), 'B': bars('tri:8_ | r:8', 4)}),
+    ])
+
 SONGS = [ELAIA, ROUTE1, BATTLE_RIVAL, AKTI, TEMPLE, ASCLEPEION, TITAN, BATTLE_TRAINER, BATTLE_WILD,
-         VICTORY_TRAINER]
+         VICTORY_TRAINER, AGORA, AKADEMIA]
+
+# The fanfares, encounter themes, victories, title and intro live in songs_engine.py.
+# It imports the helpers above, so it has to be imported after them.
+from songs_engine import ENGINE_SONGS  # noqa: E402
+
+SONGS += ENGINE_SONGS
