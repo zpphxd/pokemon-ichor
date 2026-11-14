@@ -700,405 +700,402 @@
       "height": 1
     },
     {
-      "id": "MAPSEC_VIRIDIAN_CITY",
-      "name": "VIRIDIAN CITY",
-      "x": 4,
-      "y": 8,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_PEWTER_CITY",
-      "name": "PEWTER CITY",
-      "x": 4,
-      "y": 4,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_CERULEAN_CITY",
-      "name": "CERULEAN CITY",
-      "x": 14,
-      "y": 3,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_LAVENDER_TOWN",
-      "name": "LAVENDER TOWN",
-      "x": 18,
-      "y": 6,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_VERMILION_CITY",
-      "name": "VERMILION CITY",
-      "x": 14,
-      "y": 9,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_CELADON_CITY",
-      "name": "CELADON CITY",
-      "x": 11,
-      "y": 6,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_FUCHSIA_CITY",
-      "name": "FUCHSIA CITY",
-      "x": 12,
-      "y": 12,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_CINNABAR_ISLAND",
-      "name": "CINNABAR ISLAND",
-      "x": 4,
-      "y": 14,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_INDIGO_PLATEAU",
-      "name": "INDIGO PLATEAU",
-      "x": 2,
-      "y": 3,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_SAFFRON_CITY",
-      "name": "SAFFRON CITY",
-      "x": 14,
-      "y": 6,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_ROUTE_4_POKECENTER",
-      "name": "ROUTE 4",
-      "name_clone": true,
-      "x": 8,
-      "y": 3,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_ROUTE_10_POKECENTER",
-      "name": "ROUTE 10",
-      "name_clone": true,
-      "x": 18,
-      "y": 3,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_ROUTE_1",
-      "name": "ROUTE 1",
-      "x": 4,
-      "y": 9,
-      "width": 1,
-      "height": 2
-    },
-    {
-      "id": "MAPSEC_ROUTE_2",
+      "id": "MAPSEC_AETHOS_ROUTE_2",
       "name": "ROUTE 2",
-      "x": 4,
-      "y": 5,
-      "width": 1,
+      "x": 20,
+      "y": 7,
+      "width": 3,
       "height": 3
     },
     {
-      "id": "MAPSEC_ROUTE_3",
+      "id": "MAPSEC_AETHOS_ROUTE_3",
       "name": "ROUTE 3",
-      "x": 5,
-      "y": 4,
-      "width": 4,
+      "x": 11,
+      "y": 9,
+      "width": 9,
       "height": 1
     },
     {
-      "id": "MAPSEC_ROUTE_4",
+      "id": "MAPSEC_AETHOS_ROUTE_4",
       "name": "ROUTE 4",
-      "x": 8,
-      "y": 3,
-      "width": 6,
+      "x": 10,
+      "y": 8,
+      "width": 2,
       "height": 1
     },
     {
-      "id": "MAPSEC_ROUTE_5",
+      "id": "MAPSEC_AETHOS_ROUTE_5",
       "name": "ROUTE 5",
-      "x": 14,
-      "y": 4,
+      "x": 13,
+      "y": 7,
       "width": 1,
       "height": 2
     },
     {
-      "id": "MAPSEC_ROUTE_6",
+      "id": "MAPSEC_AETHOS_ROUTE_6",
       "name": "ROUTE 6",
       "x": 14,
-      "y": 7,
+      "y": 6,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_7",
+      "name": "ROUTE 7",
+      "x": 13,
+      "y": 4,
       "width": 1,
       "height": 2
     },
     {
-      "id": "MAPSEC_ROUTE_7",
-      "name": "ROUTE 7",
-      "x": 12,
-      "y": 6,
+      "id": "MAPSEC_AETHOS_ROUTE_8",
+      "name": "ROUTE 8",
+      "x": 10,
+      "y": 4,
       "width": 2,
       "height": 1
     },
     {
-      "id": "MAPSEC_ROUTE_8",
-      "name": "ROUTE 8",
-      "x": 15,
+      "id": "MAPSEC_AETHOS_ROUTE_9",
+      "name": "ROUTE 9",
+      "x": 8,
+      "y": 5,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_10",
+      "name": "ROUTE 10",
+      "x": 5,
       "y": 6,
       "width": 3,
       "height": 1
     },
     {
-      "id": "MAPSEC_ROUTE_9",
-      "name": "ROUTE 9",
-      "x": 15,
-      "y": 3,
-      "width": 3,
+      "id": "MAPSEC_AETHOS_ROUTE_11",
+      "name": "ROUTE 11",
+      "x": 5,
+      "y": 8,
+      "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_ROUTE_10",
-      "name": "ROUTE 10",
-      "x": 18,
-      "y": 3,
+      "id": "MAPSEC_AETHOS_ROUTE_12",
+      "name": "ROUTE 12",
+      "x": 5,
+      "y": 10,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_13",
+      "name": "ROUTE 13",
+      "x": 7,
+      "y": 9,
       "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_14",
+      "name": "ROUTE 14",
+      "x": 9,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_15",
+      "name": "ROUTE 15",
+      "x": 15,
+      "y": 7,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_16",
+      "name": "ROUTE 16",
+      "x": 17,
+      "y": 6,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_17",
+      "name": "ROUTE 17",
+      "x": 18,
+      "y": 5,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_18",
+      "name": "ROUTE 18",
+      "x": 19,
+      "y": 7,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_EUBOIA",
+      "name": "EUBOIA",
+      "x": 12,
+      "y": 2,
+      "width": 6,
       "height": 3
     },
     {
-      "id": "MAPSEC_ROUTE_11",
-      "name": "ROUTE 11",
-      "x": 15,
-      "y": 9,
+      "id": "MAPSEC_AIGINA",
+      "name": "AIGINA",
+      "x": 14,
+      "y": 10,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_19",
+      "name": "ROUTE 19",
+      "x": 23,
+      "y": 10,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_20",
+      "name": "ROUTE 20",
+      "x": 21,
+      "y": 0,
+      "width": 1,
+      "height": 6
+    },
+    {
+      "id": "MAPSEC_SKYROS",
+      "name": "SKYROS",
+      "x": 22,
+      "y": 3,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_LEMNOS",
+      "name": "LEMNOS",
+      "x": 20,
+      "y": 1,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_SAMOTHRAKE",
+      "name": "SAMOTHRAKE",
+      "x": 22,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_21",
+      "name": "ROUTE 21",
+      "x": 24,
+      "y": 3,
+      "width": 2,
+      "height": 5
+    },
+    {
+      "id": "MAPSEC_DELOS",
+      "name": "DELOS",
+      "x": 22,
+      "y": 6,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_PAROS",
+      "name": "PAROS",
+      "x": 22,
+      "y": 10,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_IKARIA",
+      "name": "IKARIA",
+      "x": 24,
+      "y": 6,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_SAMOS",
+      "name": "SAMOS",
+      "x": 26,
+      "y": 7,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_CHIOS",
+      "name": "CHIOS",
+      "x": 26,
+      "y": 5,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_LESBOS",
+      "name": "LESBOS",
+      "x": 26,
+      "y": 2,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_22",
+      "name": "ROUTE 22",
+      "x": 12,
+      "y": 11,
+      "width": 11,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_MELOS",
+      "name": "MELOS",
+      "x": 18,
+      "y": 10,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_23",
+      "name": "ROUTE 23",
+      "x": 13,
+      "y": 12,
+      "width": 9,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_BULL_ROAD",
+      "name": "BULL ROAD",
+      "x": 21,
+      "y": 14,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_24",
+      "name": "ROUTE 24",
+      "x": 11,
+      "y": 13,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_25",
+      "name": "ROUTE 25",
+      "x": 10,
+      "y": 12,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_26",
+      "name": "ROUTE 26",
+      "x": 9,
+      "y": 11,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_27",
+      "name": "ROUTE 27",
+      "x": 8,
+      "y": 10,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_28",
+      "name": "ROUTE 28",
+      "x": 7,
+      "y": 4,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_29",
+      "name": "ROUTE 29",
+      "x": 7,
+      "y": 2,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_30",
+      "name": "ROUTE 30",
+      "x": 10,
+      "y": 2,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_THE_ASCENT",
+      "name": "THE ASCENT",
+      "x": 9,
+      "y": 0,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_31",
+      "name": "ROUTE 31",
+      "x": 9,
+      "y": 13,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_32",
+      "name": "ROUTE 32",
+      "x": 4,
+      "y": 11,
       "width": 3,
       "height": 1
     },
     {
-      "id": "MAPSEC_ROUTE_12",
-      "name": "ROUTE 12",
-      "x": 18,
-      "y": 7,
-      "width": 1,
-      "height": 5
-    },
-    {
-      "id": "MAPSEC_ROUTE_13",
-      "name": "ROUTE 13",
-      "x": 16,
-      "y": 11,
-      "width": 2,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_ROUTE_14",
-      "name": "ROUTE 14",
-      "x": 15,
-      "y": 11,
-      "width": 1,
-      "height": 2
-    },
-    {
-      "id": "MAPSEC_ROUTE_15",
-      "name": "ROUTE 15",
-      "x": 13,
-      "y": 12,
-      "width": 2,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_ROUTE_16",
-      "name": "ROUTE 16",
-      "x": 7,
-      "y": 6,
-      "width": 4,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_ROUTE_17",
-      "name": "ROUTE 17",
-      "x": 7,
-      "y": 7,
-      "width": 1,
-      "height": 5
-    },
-    {
-      "id": "MAPSEC_ROUTE_18",
-      "name": "ROUTE 18",
-      "x": 7,
-      "y": 12,
-      "width": 5,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_ROUTE_19",
-      "name": "ROUTE 19",
-      "x": 12,
-      "y": 13,
-      "width": 1,
-      "height": 2
-    },
-    {
-      "id": "MAPSEC_ROUTE_20",
-      "name": "ROUTE 20",
-      "x": 5,
-      "y": 14,
+      "id": "MAPSEC_AETHOS_ROUTE_33",
+      "name": "ROUTE 33",
+      "x": 2,
+      "y": 4,
       "width": 7,
-      "height": 1
+      "height": 11
     },
     {
-      "id": "MAPSEC_ROUTE_21",
-      "name": "ROUTE 21",
-      "x": 4,
-      "y": 12,
-      "width": 1,
-      "height": 2
-    },
-    {
-      "id": "MAPSEC_ROUTE_22",
-      "name": "ROUTE 22",
-      "x": 2,
-      "y": 8,
-      "width": 2,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_ROUTE_23",
-      "name": "ROUTE 23",
-      "x": 2,
-      "y": 4,
-      "width": 1,
-      "height": 4
-    },
-    {
-      "id": "MAPSEC_ROUTE_24",
-      "name": "ROUTE 24",
-      "x": 14,
-      "y": 1,
-      "width": 1,
-      "height": 2
-    },
-    {
-      "id": "MAPSEC_ROUTE_25",
-      "name": "ROUTE 25",
-      "x": 15,
-      "y": 1,
-      "width": 2,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_VIRIDIAN_FOREST",
-      "name": "VIRIDIAN FOREST",
-      "x": 4,
-      "y": 6,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_MT_MOON",
-      "name": "MT. MOON",
-      "x": 9,
-      "y": 3,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_S_S_ANNE",
-      "name": "S.S. ANNE",
-      "x": 14,
-      "y": 9,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_UNDERGROUND_PATH",
-      "name": "UNDERGROUND PATH",
-      "x": 14,
+      "id": "MAPSEC_ITHAKA",
+      "name": "ITHAKA",
+      "x": 1,
       "y": 7,
       "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_UNDERGROUND_PATH_2",
-      "name": "UNDERGROUND PATH",
-      "name_clone": true,
-      "x": 12,
-      "y": 6,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_DIGLETTS_CAVE",
-      "name": "DIGLETT'S CAVE",
-      "x": 15,
-      "y": 9,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_KANTO_VICTORY_ROAD",
-      "name": "VICTORY ROAD",
-      "x": 2,
+      "id": "MAPSEC_KERKYRA",
+      "name": "KERKYRA",
+      "x": 1,
       "y": 4,
       "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_ROCKET_HIDEOUT",
-      "name": "ROCKET HIDEOUT",
-      "x": 11,
-      "y": 6,
-      "width": 1,
+      "id": "MAPSEC_AETHOS_ROUTE_34",
+      "name": "ROUTE 34",
+      "x": 24,
+      "y": 11,
+      "width": 2,
       "height": 1
     },
     {
-      "id": "MAPSEC_SILPH_CO",
-      "name": "SILPH CO.",
-      "x": 14,
-      "y": 6,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_POKEMON_MANSION",
-      "name": "POKéMON MANSION",
-      "x": 4,
-      "y": 14,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_KANTO_SAFARI_ZONE",
-      "name": "SAFARI ZONE",
-      "x": 12,
-      "y": 12,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_POKEMON_LEAGUE",
-      "name": "POKéMON LEAGUE",
-      "x": 2,
-      "y": 3,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_ROCK_TUNNEL",
-      "name": "ROCK TUNNEL",
-      "x": 18,
-      "y": 5,
+      "id": "MAPSEC_RHODOS",
+      "name": "RHODOS",
+      "x": 26,
+      "y": 11,
       "width": 1,
       "height": 1
     },
@@ -1634,7 +1631,7 @@
     {
       "id": "MAPSEC_ELAIA_VILLAGE",
       "name": "ELAIA VILLAGE",
-      "x": 17,
+      "x": 23,
       "y": 9,
       "width": 1,
       "height": 1
@@ -1642,7 +1639,7 @@
     {
       "id": "MAPSEC_KALLISTE_ROUTE_1",
       "name": "ROUTE 1",
-      "x": 17,
+      "x": 23,
       "y": 8,
       "width": 1,
       "height": 1
@@ -1650,7 +1647,7 @@
     {
       "id": "MAPSEC_AKTI_TOWN",
       "name": "AKTI TOWN",
-      "x": 17,
+      "x": 23,
       "y": 7,
       "width": 1,
       "height": 1
@@ -1659,31 +1656,31 @@
       "id": "MAPSEC_EMPORION_CITY",
       "name": "EMPORION CITY",
       "x": 10,
-      "y": 6,
+      "y": 9,
       "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_AETHOS_ROUTE_2",
-      "name": "ROUTE 2",
-      "x": 11,
-      "y": 5,
+      "id": "MAPSEC_HECATES_HOLLOW",
+      "name": "HECATE'S HOLLOW",
+      "x": 12,
+      "y": 8,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_ELEUSA_VILLAGE",
       "name": "ELEUSA VILLAGE",
-      "x": 12,
-      "y": 5,
+      "x": 14,
+      "y": 7,
       "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_AETHOS_ROUTE_3",
-      "name": "ROUTE 3",
-      "x": 12,
-      "y": 4,
+      "id": "MAPSEC_MT_KITHAIRON",
+      "name": "MT. KITHAIRON",
+      "x": 14,
+      "y": 5,
       "width": 1,
       "height": 1
     },
@@ -1691,191 +1688,199 @@
       "id": "MAPSEC_THYRSA_CITY",
       "name": "THYRSA CITY",
       "x": 12,
-      "y": 3,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_AETHOS_ROUTE_4",
-      "name": "ROUTE 4",
-      "x": 10,
-      "y": 3,
-      "width": 2,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_DELPHOI",
-      "name": "DELPHOI",
-      "x": 9,
-      "y": 3,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_AETHOS_ROUTE_15",
-      "name": "ROUTE 15",
-      "x": 4,
       "y": 4,
-      "width": 5,
+      "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_AETHOS_ROUTE_5",
-      "name": "ROUTE 5",
+      "id": "MAPSEC_LEBADEIA",
+      "name": "LEBADEIA",
+      "x": 9,
+      "y": 4,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_KIRRHA",
+      "name": "KIRRHA",
       "x": 7,
       "y": 5,
       "width": 1,
-      "height": 2
+      "height": 1
     },
     {
-      "id": "MAPSEC_ARKADIA",
-      "name": "ARKADIA",
-      "x": 7,
+      "id": "MAPSEC_AIGION",
+      "name": "AIGION",
+      "x": 5,
       "y": 7,
       "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_AETHOS_ROUTE_6",
-      "name": "ROUTE 6",
-      "x": 8,
-      "y": 6,
-      "width": 2,
+      "id": "MAPSEC_STYX_FALLS",
+      "name": "STYX FALLS",
+      "x": 5,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ARKADIA",
+      "name": "ARKADIA",
+      "x": 7,
+      "y": 10,
+      "width": 1,
       "height": 2
     },
     {
-      "id": "MAPSEC_AETHOS_ROUTE_7",
-      "name": "ROUTE 7",
-      "x": 13,
-      "y": 5,
+      "id": "MAPSEC_NEMEA",
+      "name": "NEMEA",
+      "x": 8,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_DAPHNI",
+      "name": "DAPHNI",
+      "x": 17,
+      "y": 7,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_ASTYRA",
       "name": "ASTYRA",
-      "x": 14,
-      "y": 5,
-      "width": 2,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_AETHOS_ROUTE_11",
-      "name": "ROUTE 11",
-      "x": 13,
-      "y": 7,
-      "width": 4,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_AETHOS_ROUTE_12",
-      "name": "ROUTE 12",
-      "x": 16,
-      "y": 9,
-      "width": 3,
+      "x": 18,
+      "y": 6,
+      "width": 1,
       "height": 2
+    },
+    {
+      "id": "MAPSEC_MARATHON",
+      "name": "MARATHON",
+      "x": 20,
+      "y": 5,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_CAPE_SOUNION",
+      "name": "CAPE SOUNION",
+      "x": 19,
+      "y": 8,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_KALDERA",
       "name": "KALDERA",
-      "x": 19,
+      "x": 23,
       "y": 11,
       "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_AETHOS_ROUTE_13",
-      "name": "ROUTE 13",
-      "x": 11,
-      "y": 12,
-      "width": 8,
-      "height": 1
-    },
-    {
       "id": "MAPSEC_KYTHERA_ISLE",
       "name": "KYTHERA ISLE",
-      "x": 10,
-      "y": 12,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_KNOSSA_ISLE",
-      "name": "KNOSSA ISLE",
-      "x": 17,
+      "x": 12,
       "y": 13,
       "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_AETHOS_ROUTE_14",
-      "name": "ROUTE 14",
-      "x": 9,
-      "y": 10,
-      "width": 2,
-      "height": 2
+      "id": "MAPSEC_AMNISOS",
+      "name": "AMNISOS",
+      "x": 21,
+      "y": 13,
+      "width": 1,
+      "height": 1
     },
     {
-      "id": "MAPSEC_AETHOS_ROUTE_8",
-      "name": "ROUTE 8",
-      "x": 7,
-      "y": 8,
+      "id": "MAPSEC_PALACE_OF_MINOS",
+      "name": "PALACE OF MINOS",
+      "x": 20,
+      "y": 14,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_MT_IDA",
+      "name": "MT. IDA",
+      "x": 18,
+      "y": 14,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_GYTHEION",
+      "name": "GYTHEION",
+      "x": 10,
+      "y": 13,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_LAKONIA",
       "name": "LAKONIA",
-      "x": 8,
-      "y": 9,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_THE_ASCENT",
-      "name": "THE ASCENT",
       "x": 9,
-      "y": 1,
-      "width": 1,
-      "height": 2
-    },
-    {
-      "id": "MAPSEC_MOUNT_OLYMPUS",
-      "name": "MT. OLYMPUS",
-      "x": 8,
-      "y": 0,
-      "width": 2,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_AETHOS_ROUTE_9",
-      "name": "ROUTE 9",
-      "x": 7,
-      "y": 10,
-      "width": 2,
-      "height": 2
-    },
-    {
-      "id": "MAPSEC_CAPE_TAINARON",
-      "name": "CAPE TAINARON",
-      "x": 7,
       "y": 12,
       "width": 1,
       "height": 1
     },
     {
-      "id": "MAPSEC_AETHOS_ROUTE_10",
-      "name": "ROUTE 10",
-      "x": 5,
-      "y": 7,
+      "id": "MAPSEC_LAKE_STYMPHALIA",
+      "name": "LAKE STYMPHALIA",
+      "x": 9,
+      "y": 10,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_DELPHOI",
+      "name": "DELPHOI",
+      "x": 7,
+      "y": 3,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_THERMOPYLAI",
+      "name": "THERMOPYLAI",
+      "x": 9,
+      "y": 2,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_VALE_OF_TEMPE",
+      "name": "VALE OF TEMPE",
+      "x": 10,
+      "y": 1,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_MOUNT_OLYMPUS",
+      "name": "MT. OLYMPUS",
+      "x": 7,
+      "y": 0,
       "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_CAPE_TAINARON",
+      "name": "CAPE TAINARON",
+      "x": 9,
+      "y": 14,
+      "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_OLYMPIA",
       "name": "OLYMPIA",
-      "x": 4,
-      "y": 7,
+      "x": 3,
+      "y": 11,
       "width": 1,
       "height": 1
     },
@@ -1883,7 +1888,7 @@
       "id": "MAPSEC_ATLANTIS",
       "name": "ATLANTIS",
       "x": 1,
-      "y": 11,
+      "y": 13,
       "width": 1,
       "height": 1
     }
