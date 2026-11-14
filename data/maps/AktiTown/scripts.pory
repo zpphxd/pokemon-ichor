@@ -103,7 +103,7 @@ script AktiTown_EventScript_Arrival {
     releaseall
 }
 
-// Diktys sits at (9,23); he stops just north of the player on the road.
+// Diktys sits by his boat at (9,25); he stops just north of the player on the road.
 movement AktiTown_Movement_DiktysToX10 { walk_right walk_down }
 movement AktiTown_Movement_DiktysToX11 { walk_right * 2 walk_down }
 movement AktiTown_Movement_DiktysToX12 { walk_right * 3 walk_down }
@@ -409,9 +409,19 @@ script AktiTown_EventScript_FishersHouseSign {
     msgbox(format("GLAUKOS. Gone fishing.\n(Not really. Knock.)"), MSGBOX_SIGN)
 }
 
-// Not in SCRIPT.md: a shut house and Poseidon's harbor shrine need a line each.
+// Not in SCRIPT.md: a shut house, Poseidon's harbor shrine and the goats in the
+// pen need a line each.
 script AktiTown_EventScript_ShutHouse {
-    msgbox(format("The door is barred. Everyone's down at the harbor."), MSGBOX_SIGN)
+    msgbox(format("The shutters are closed. Everyone's down at the harbor."), MSGBOX_SIGN)
+}
+
+script AktiTown_EventScript_Goat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    msgbox(format("Mehhh! It's chewing a clothes peg."))
+    waitmoncry
+    release
 }
 
 script AktiTown_EventScript_PoseidonShrine {
