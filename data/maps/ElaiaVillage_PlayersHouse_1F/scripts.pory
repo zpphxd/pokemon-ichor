@@ -1,1 +1,116 @@
-mapscripts ElaiaVillage_PlayersHouse_1F_MapScripts {}
+// The player's house, 1F: Melitta's hall and kitchen (beat 1B).
+// Mom's spot is (3,3) at the hearth. Coming down the stairs puts the player on
+// (10,2), and the stair exit walks them to (10,3); she meets them at (9,3).
+
+mapscripts ElaiaVillage_PlayersHouse_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_ELAIA_VILLAGE)
+        if (flag(FLAG_ICHOR_SET_WATER_CLOCK) && !flag(FLAG_ICHOR_TALKED_TO_MOM)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: ElaiaVillage_PlayersHouse_1F_EventScript_FestivalMorning
+    ]
+}
+
+script ElaiaVillage_PlayersHouse_1F_EventScript_FestivalMorning {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    playse(SE_PIN)
+    applymovement(LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYERS_HOUSE_1F_MOM, ElaiaVillage_PlayersHouse_1F_Movement_MomToStairs)
+    waitmovement(0)
+    applymovement(LOCALID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("There you are! Festival morning, and you slept like a stone.\pLet me look at you. …Hm. You'll do.\pToday's the Klotheia. Every youth on Kalliste comes of age today.\pFirst, old Halia reads your thread. She's in the square.\pThen Daphne gives you a partner at the Akademia. A Pokémon!\pOh! Before I forget. These are for you."))
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received the Talaria!"))
+    waitmessage
+    waitfanfare
+    setflag(FLAG_SYS_B_DASH)
+    setflag(FLAG_RECEIVED_RUNNING_SHOES)
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("New sandals for a new road. The cobbler stitched wings on them.\pHe says they're for luck. Hold the B Button and you'll see.\p…\pI remember the night you came, you know. Like it was last week.\pA pilgrim passed through that spring. He swore something odd.\pThat the Oracle at Delphoi went blind for an hour that night.\pOr the night before. Or the week after. You know pilgrims.\pAnyway! Go. Halia hates waiting, and Daphne hates it worse."))
+    closemessage
+    applymovement(LOCALID_PLAYERS_HOUSE_1F_MOM, ElaiaVillage_PlayersHouse_1F_Movement_MomToHearth)
+    waitmovement(0)
+    setflag(FLAG_ICHOR_TALKED_TO_MOM)
+    releaseall
+}
+
+movement ElaiaVillage_PlayersHouse_1F_Movement_MomToStairs {
+    walk_right * 6
+    face_right
+}
+
+movement ElaiaVillage_PlayersHouse_1F_Movement_MomToHearth {
+    walk_left * 6
+    face_left
+}
+
+script ElaiaVillage_PlayersHouse_1F_EventScript_Mom {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_MOM)
+    if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
+        msgbox(format("I heard about the Lakonian boy. The whole village heard."))
+    } elif (flag(FLAG_ICHOR_GOT_STARTER)) {
+        msgbox(format("Let me see! Oh, look at it. Does it eat honey? Everything eats honey."))
+    } elif (flag(FLAG_ICHOR_THREAD_READ)) {
+        msgbox(format("What did Halia say? …Nothing much? Hm. She's getting old.\pDaphne's waiting. Don't make me walk you there."))
+    } else {
+        msgbox(format("The square! Halia's under the old olive. Go, go."))
+    }
+    if (flag(FLAG_ICHOR_GOT_STARTER)) {
+        setspeaker(SP_NAME_MOM)
+        msgbox(format("You look worn out. Sit. Eat something?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            closemessage
+            call(Common_EventScript_OutOfCenterPartyHeal)
+            setspeaker(SP_NAME_MOM)
+            msgbox(format("Bread, honey, and a nap. Works on Pokémon and children both."))
+        } else {
+            setspeaker(SP_NAME_MOM)
+            msgbox(format("Stubborn. You get that from me."))
+        }
+    }
+    release
+}
+
+// Run by the engine (src/field_screen_effect.c) when you white out and wake
+// up at home: you stand at (3,4), in front of Mom at the hearth.
+script ElaiaVillage_PlayersHouse_1F_EventScript_AfterWhiteOut {
+    lockall
+    applymovement(LOCALID_PLAYERS_HOUSE_1F_MOM, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("{PLAYER}! You're home. Sit down, sit down."))
+    call(Common_EventScript_OutOfCenterPartyHeal)
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("Bread, honey, and a nap. Works on Pokémon and children both."))
+    fadedefaultbgm
+    releaseall
+}
+
+script ElaiaVillage_PlayersHouse_1F_EventScript_Hearth {
+    msgbox(format("The family hearth, banked low. Mom says a cold hearth is bad luck."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_PlayersHouse_1F_EventScript_Loom {
+    msgbox(format("A half-woven traveling cloak. Mom says you'll need it someday.\pShe's said “someday” a lot lately."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_PlayersHouse_1F_EventScript_HoneyShelf {
+    msgbox(format("Jars of honey, sealed with wax. One is labelled “NOT FOR {PLAYER}.”"), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_PlayersHouse_1F_EventScript_HestiasAltar {
+    msgbox(format("Hestia's little altar. Mom gives her the first bite of every meal."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_PlayersHouse_1F_EventScript_Window {
+    msgbox(format("A bee bumps against the shutter. Then another."), MSGBOX_SIGN)
+}

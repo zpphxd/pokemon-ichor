@@ -44,6 +44,9 @@
 #include "fldeff.h"
 #include "battle.h"
 
+// Ichor: data/maps/ElaiaVillage_PlayersHouse_1F/scripts.pory
+extern const u8 ElaiaVillage_PlayersHouse_1F_EventScript_AfterWhiteOut[];
+
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
 static void Task_DoContestHallWarp(u8);
@@ -1463,7 +1466,13 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
         if (WaitForWeatherFadeIn() == TRUE)
         {
             DestroyTask(taskId);
-            if (gTasks[taskId].tIsPlayerHouse)
+            // Ichor: at home in Elaia, Melitta does the welcoming (her own script and lines)
+            if (gTasks[taskId].tIsPlayerHouse
+             && GetHealLocationIndexByWarpData(&gSaveBlock1Ptr->lastHealLocation) == HEAL_LOCATION_ELAIA_VILLAGE)
+            {
+                ScriptContext_SetupScript(ElaiaVillage_PlayersHouse_1F_EventScript_AfterWhiteOut);
+            }
+            else if (gTasks[taskId].tIsPlayerHouse)
             {
                 if (IS_FRLG)
                     StringCopy(gStringVar1, COMPOUND_STRING("PROF. OAK"));
