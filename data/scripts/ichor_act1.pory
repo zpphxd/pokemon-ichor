@@ -5,10 +5,11 @@ text Ichor_Text_NameNausikles { "NAUSIKLES" }
 
 // ---------------------------------------------------------------------------
 // The Euploia's ferry (SCRIPT.md Part 2, "Nausikles as the ferry").
-// Once the first voyage is done, Nausikles runs Akti, Aigina and Emporion.
-// On a quay, he asks where to and puts the player on deck; on deck, "Ready to
-// make port?" sails to the chosen quay. The destination rides in two flags
-// (both clear: Akti), because temp vars don't survive the warp to the deck.
+// In Act I it runs Akti and Emporion (the revised map puts Aigina's stop in
+// Act II: world-act2 adds it, using FLAG_ICHOR_FERRY_TO_AEGINA). On a quay
+// Nausikles puts the player on deck; on deck, "Ready to make port?" sails to
+// the chosen quay. The destination rides in flags (both clear: Akti), because
+// temp vars don't survive the warp to the deck.
 // ---------------------------------------------------------------------------
 
 // Called from Nausikles on a quay. VAR_0x8004: the quay he stands on
@@ -17,22 +18,19 @@ script Ichor_EventScript_FerryQuay {
     lock
     faceplayer
     setspeaker(Ichor_Text_NameNausikles)
-    msgbox(format("Where to? Wind's fair, more or less."))
-    // ICHOR_STUB_EMPORION: Emporion joins the list when its quay exists.
     if (var(VAR_0x8004) == 0) {
-        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AIGINA", "STAY")
-        if (var(VAR_RESULT) == 0) {
-            setflag(FLAG_ICHOR_FERRY_TO_AEGINA)
-            clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
-            goto(Ichor_EventScript_FerryBoard)
-        }
-    } else {
-        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AKTI", "STAY")
-        if (var(VAR_RESULT) == 0) {
-            clearflag(FLAG_ICHOR_FERRY_TO_AEGINA)
-            clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
-            goto(Ichor_EventScript_FerryBoard)
-        }
+        // ICHOR_STUB_EMPORION: until Emporion's quay is built, it can't be sailed to.
+        msgbox(format("Emporion's quay is packed solid this week. Ships three deep.\p"
+                      "Come back when they've cleared it. I'll be here."))
+        release
+        end
+    }
+    msgbox(format("Where to? Wind's fair, more or less."))
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AKTI", "STAY")
+    if (var(VAR_RESULT) == 0) {
+        clearflag(FLAG_ICHOR_FERRY_TO_AEGINA)
+        clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
+        goto(Ichor_EventScript_FerryBoard)
     }
     msgbox(format("Suit yourself. I'll be here. The boat'll be here. Probably."))
     release
@@ -62,11 +60,9 @@ script Ichor_EventScript_FerryDeck {
     }
     closemessage
     fadescreen(FADE_TO_BLACK)
-    if (flag(FLAG_ICHOR_FERRY_TO_AEGINA)) {
-        warp(MAP_AEGINA_TOWN, 0)
-    } else {
-        warpsilent(MAP_AKTI_TOWN, 9, 10)
-    }
+    // ICHOR_STUB_EMPORION: FLAG_ICHOR_FERRY_TO_EMPORION sails to Emporion's quay
+    // once it exists; world-act2 adds Aigina (FLAG_ICHOR_FERRY_TO_AEGINA).
+    warpsilent(MAP_AKTI_TOWN, 9, 10)
     waitstate
     release
 }
@@ -82,7 +78,7 @@ script Ichor_EventScript_EuploiaMakesEmporion {
     delay(30)
     msgbox(format("Emporion, the harbor of the world, is next.\p"
                   "Its streets are still being laid.\p"
-                  "Until they are, the Euploia sails Akti and Aigina."))
+                  "Until they are, the Euploia sails back to Akti."))
     closemessage
     delay(30)
     fadescreen(FADE_FROM_BLACK)
