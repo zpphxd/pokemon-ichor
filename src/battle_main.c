@@ -5115,7 +5115,7 @@ static void HandleEndTurn_BattleWon(void)
             PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
         default:
-            PlayBGM(MUS_VICTORY_TRAINER);
+            PlayBGM(MUS_ICHOR_VICTORY_TRAINER); // Ichor
             break;
         }
     }
