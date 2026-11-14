@@ -1576,3 +1576,46 @@ const struct Tileset gTileset_TempleHestia =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHestia,
     .callback = NULL,
 };
+
+// Ichor: Oikos ("household"), the Greek interior primary. It keeps Building's
+// metatile ids and every tile the Hoenn interior secondaries point at, so they
+// still render on it. Managed by Porytiles (tools/ichor/art/oikos_paint.py).
+// No tile animation: Building's TV-on frames would paint Hoenn art over it.
+const struct Tileset gTileset_Oikos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PorytilesManaged_Oikos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Oikos,
+    .metatiles = gMetatiles_PorytilesManaged_Oikos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Oikos,
+    .callback = NULL,
+};
+
+// Ichor: oikia, furnishings of a Greek house. A secondary that uses only its
+// own tiles and palettes 6-12, so it works on any primary. Built by
+// tools/ichor/art/oikia_build.py.
+const struct Tileset gTileset_Oikia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Oikia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Oikia,
+    .metatiles = gMetatiles_PorytilesManaged_Oikia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Oikia,
+    .callback = NULL,
+};
+
+// Ichor: civic, the Greek public halls (Asclepeion, Agora, Akademia). A
+// Porytiles-managed secondary built by tools/ichor/art/civic_tiles.py; it uses
+// only its own tiles and palettes 6-12, so it works on any primary.
+const struct Tileset gTileset_Civic =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Civic,
+    .palettes = gTilesetPalettes_PorytilesManaged_Civic,
+    .metatiles = gMetatiles_PorytilesManaged_Civic,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Civic,
+    .callback = NULL,
+};
