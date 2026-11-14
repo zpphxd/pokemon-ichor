@@ -83,7 +83,10 @@ def _plinth(p, x0, x1, y0, y1, mat, claws=3, **kw):
 
 
 def kronolith(p, view, phase):
-    if view in ("front", "side", "icon"):
+    if view == "icon":
+        _icon(p, phase)
+        return
+    if view in ("front", "side"):
         _front(p, phase if view == "front" else 0)
         return
     if view == "back":
@@ -101,93 +104,102 @@ def kronolith(p, view, phase):
 # front: 3/4 facing left, the Harpe arched over its back
 # --------------------------------------------------------------------------
 
-SPINE = [(61, 23), (61.8, 13), (59, 5), (51.5, 1.2), (41, 1), (32.4, 2.8), (27.4, 5.8), (24.6, 9.6)]
-EDGE = [(24.6, 9.6), (28, 8.4), (33.4, 7.6), (41, 7.4), (48, 8.4), (52.8, 11.6), (54.8, 16.6), (55.2, 23)]
+# the Harpe follows the arch of the back, from the tail's guard to a hooked
+# tip hanging over the crest
+SPINE = [(61.6, 33), (62, 22), (59, 11.6), (52.6, 4.4), (43, 1.4), (33, 2.2), (25.6, 6.2), (21, 11.6), (19.6, 16)]
+EDGE = [(19.6, 16), (23.4, 12.4), (29, 8.6), (36, 6.8), (43.4, 6.8), (50, 9), (54.6, 14), (56.4, 21.6), (56.4, 33)]
+# legs: (elbow or knee, wrist or hock, toe) and their widths; columns that
+# taper and bend into clawed feet
+LEGS = {
+    "ffore": ([(42.6, 40), (46.4, 52.6), (43, 57.6)], 8.0, 5.4),
+    "fhind": ([(48.4, 43), (48, 52), (46, 57.4)], 7.6, 5.2),
+    "nfore": ([(38, 41), (31.4, 52), (26.4, 58.4)], 9.4, 6.0),
+    "nhind": ([(55.4, 40), (57.6, 50.4), (54.4, 58.6)], 9.0, 5.6),
+}
+# fins along the hump, raking back
+FINS = [((27.6, 20.4), (32.4, 9.8), 7.4), ((34.4, 16.6), (40, 8.4), 7.8), ((41.6, 15.8), (47.2, 9.8), 7.4),
+        ((48.4, 18.8), (52.8, 13.6), 5.8)]
 # part ids by name, for the hand-finishing scripts
 PARTS = {}
 
 
+def _leg(p, key, far=False, group=10):
+    (a, b, c), w0, w1 = LEGS[key]
+    mat = stone_d if far else stone
+    bias = 0.3 if far else 0.0
+    PARTS[key] = p.limb([a, b], w0, w1, mat, bias=bias, group=group)
+    # the clawed foot, bent forward from the column
+    PARTS[key + "_foot"] = p.limb([b, c], w1 + 0.6, w1 + 1.4, mat, bias=bias, group=group + 1)
+    if not far and p.big:
+        for i in range(3):
+            cx = c[0] - 2.4 + i * 2.2
+            p.poly([(cx - 1, c[1] + 0.4), (cx + 1.2, c[1] + 0.4), (cx + 0.6, c[1] + 2.4), (cx - 1.4, c[1] + 2)], marble,
+                   group=group + 2)
+
+
 def _front(p, ph):
-    J = 1.6 if ph else 0.0      # frame 2: the jaw drops wider
+    J = 2.0 if ph else 0.0      # frame 2: the jaw drops wider
     H = -0.6 if ph else 0.0     # and the head lifts a touch
 
-    # ---- far legs, in shade: Doric columns on square feet
-    PARTS["ffleg"] = p.poly([(18.6, 40), (27, 40), (26.4, 55), (19, 55)], stone, bias=0.3, group=10)
-    _plinth(p, 16.6, 28.4, 54, 59.6, stone_d, claws=0, bias=0.26, group=12)
-    PARTS["frleg"] = p.poly([(43, 41), (50.6, 41), (50.2, 55), (43.4, 55)], stone, bias=0.34, group=11)
-    _plinth(p, 41.6, 51.6, 54, 59.6, stone_d, claws=0, bias=0.3, group=13)
+    # ---- far legs, in shade
+    _leg(p, "ffore", far=True, group=10)
+    _leg(p, "fhind", far=True, group=13)
 
-    # ---- tail, rising behind the haunch into the Harpe's guard
-    PARTS["tail"] = p.limb(bez3((53, 32), (57.6, 32), (58.4, 27), (58, 21)), 10, 7, stone, bias=0.04, group=80)
+    # ---- tail, rising from the low rump into the Harpe's guard
+    PARTS["tail"] = p.limb(bez3((54, 36), (59, 37), (60.4, 34), (59.4, 30)), 9, 6.6, stone, bias=0.04, group=80)
 
-    # ---- body: shoulder hump, barrel and haunch as one mass
-    body = [(26, 25), (30, 18), (36, 15), (43, 15.4), (50, 20), (56, 25), (60.5, 31), (60.5, 40), (56, 45),
-            (46, 46.5), (38, 46), (30, 43), (25, 34)]
+    # ---- body: the hump arches high behind the head; the hindquarters sit low
+    body = [(22, 33), (23.4, 24), (28.6, 16.4), (35.6, 12.4), (43, 12.2), (49, 15.4), (53.4, 20.6), (57, 27),
+            (60.4, 33), (61, 39), (58.4, 44), (52, 46.6), (44, 47), (37, 45.6), (30, 43), (24.6, 39)]
     PARTS["body"] = p.poly(body, stone, group=1)
-    p.blob(38, 29, 12, 13.4, stone, group=1)
-    p.blob(55, 35, 6.6, 8.4, stone, group=1)
-    PARTS["belly"] = p.blob(45, 44.6, 7.6, 2.2, stone_d, ang=-3, bias=-0.1, group=2)
-    # ---- dorsal fins: the crest's line carried down the spine, raking back
-    fins = [((32, 18), (37.6, 9.8), 7.4), ((38.6, 16.6), (44.6, 10), 7.2), ((45, 19), (50.4, 12.6), 6.4),
-            ((50.6, 22.4), (54.8, 16.6), 5.2)]
+    p.blob(37, 26, 12.6, 13.4, stone, group=1)
+    p.blob(54, 37, 7, 8, stone, group=1)
     PARTS["fins"] = []
-    for i, (a, b, w) in enumerate(fins):
+    for i, (a, b, w) in enumerate(FINS):
         PARTS["fins"].append(p.lens(a, b, w, fin_m, fat=0.28, bend=-1.4, group=30 + i))
-
     # Dialga's pauldron in slate over the shoulder, and a plate on the haunch
-    PARTS["pauldron"] = p.poly([(36.4, 22.6), (44, 18.8), (51, 21.4), (52.4, 29), (48, 36), (41, 36.6),
-                                (37, 29.6)], stone, bias=-0.14, group=61)
-    PARTS["hplate"] = p.poly([(52, 28.6), (56.6, 27), (60.6, 32.4), (59.4, 39.6), (54, 39.4), (51.4, 34)], stone,
-                             bias=-0.08, group=63)
+    PARTS["pauldron"] = p.blob(37.6, 23.4, 7.6, 8.4, stone, ang=-20, bias=-0.14, group=61)
+    PARTS["hplate"] = p.blob(53.6, 33, 5.6, 7, stone, ang=10, bias=-0.08, group=63)
 
-    # ---- near legs: Doric columns, a capital at the shoulder, square feet
-    PARTS["nfleg"] = p.poly([(30, 42), (40.6, 42), (40, 54), (30.6, 54)], stone, group=14)
-    PARTS["nrleg"] = p.poly([(52.6, 38), (60.6, 38), (60.2, 54), (53, 54)], stone, group=15)
-    PARTS["nrcap"] = p.poly([(51.6, 40.4), (61.6, 40.4), (61.2, 43.6), (52, 43.6)], bronze, group=19)
-    _plinth(p, 28.4, 42.4, 53.4, 61, stone_d, claws=3, group=16)
-    _plinth(p, 51.4, 61.6, 53.4, 61, stone_d, claws=2, group=17)
+    # ---- near legs, braced: the foreleg stepping forward, the hind leg crouched
+    _leg(p, "nhind", group=16)
+    _leg(p, "nfore", group=19)
 
-    # ---- neck and chest plates parting around the hourglass
-    p.limb([(37, 26), (30, 27.4)], 16, 15, stone, group=40)
-    PARTS["chestl"] = p.poly([(27, 30.4), (32.6, 29.4), (33, 42.6), (29, 43.4), (26.6, 37)], stone, bias=-0.1,
-                             group=45)
-    PARTS["chestr"] = p.poly([(37.4, 29.2), (43, 30), (44.4, 37), (42.6, 43.4), (37.6, 42.6)], stone, bias=-0.04,
-                             group=46)
-    PARTS["nfcap"] = p.poly([(28.6, 42.6), (42.4, 42.6), (42, 45.8), (29, 45.8)], bronze, group=18)
+    # ---- the chest under the neck, where the hourglass glows
+    PARTS["chest"] = p.blob(32.6, 36.6, 6.4, 7.4, stone, bias=-0.06, group=45)
 
     _head(p, J, H)
 
     # ---- the Harpe: the tail's last plate is a bronze guard; the blade grows from it
     PARTS["blade"] = p.poly(catmull(SPINE, 6) + catmull(EDGE, 6), blade_m, group=81)
-    PARTS["guard"] = p.limb([(56, 22.6), (60, 21.6)], 4.2, 4.2, bronze, group=82)
+    PARTS["guard"] = p.limb([(56.4, 31.6), (61, 31.6)], 4.4, 4.4, bronze, group=82)
 
     if p.big:
         # the stopped hourglass between the chest plates
-        p.patch(31, 30, [
-            ".1111111.",
-            "1qqqqqqq1",
-            "1pdddddp1",
-            "1pSsssSp1",
-            ".1sSSSs1.",
-            "..1sSs1..",
-            "...1S1...",
-            "..1dSd1..",
-            ".1pd.dp1.",
-            "1pdddSdp1",
-            "1pddddqp1",
-            "1psSsssp1",
-            ".1111111.",
-        ], {"1": "sl0", "q": "vi2", "p": "vi1", "d": "vd", "s": "br2", "S": "br3"})
+        p.patch(29, 31, [
+            "167899871",
+            "d1efffe1d",
+            "d1e999e1d",
+            "dd1e8e1dd",
+            "2dd191dd2",
+            "22d1f1d22",
+            "2dd181dd2",
+            "dd1ece1dd",
+            "d1ecc9e1d",
+            "d1e8998ed",
+            "167899871",
+            "111111111",
+        ], {"1": "ink", "2": "sl0", "6": "br0", "7": "br1", "8": "br2", "9": "br3", "c": "vd", "d": "vi0",
+            "e": "vi1", "f": "vi2"})
     else:
-        p.rect(34, 32, 35, 40, glass)
+        p.rect(32, 33, 34, 40, glass)
 
 
 def _head(p, J, H):
-    """The Devourer's head, jaw dropped by J and lifted by H."""
-    # ---- the head: helm and snout over a maw dropped wide, held low
+    """The Devourer's head, held low and thrust forward: a domed Corinthian
+    helm sweeping back into the crest, the jaw dropped by J, lifted by H."""
     def jaw(pts):
-        # rotate the lower jaw down about the hinge
-        hx, hy = 27, 32
+        hx, hy = 24, 43
         a = math.radians(J * 2.4)
         ca, sa = math.cos(a), math.sin(a)
         return [(hx + (x - hx) * ca - (y - hy) * sa, hy + (x - hx) * sa + (y - hy) * ca + H) for x, y in pts]
@@ -195,37 +207,25 @@ def _head(p, J, H):
     def hd(pts):
         return [(x, y + H) for x, y in pts]
 
-    PARTS["jaw"] = p.poly(jaw([(28, 31), (30, 37), (25, 42.5), (16, 47.4), (6.4, 51), (2, 49.8), (2.4, 46),
-                               (10, 42), (18, 38), (24, 33.6)]), stone, group=41)
-    PARTS["void"] = p.poly(hd([(1.4, 25), (10, 27.4), (19, 30), (27, 32.4)]) +
-                           jaw([(27, 35.6), (18, 38.4), (10, 42.4), (2.6, 46.4)]), void, group=42)
-    PARTS["skull"] = p.poly(hd([(1.4, 21), (3, 17.4), (11, 14.4), (21, 13), (28.5, 15.4), (32, 21.4), (30.4, 30.4),
-                                (18, 30), (9, 28), (1.4, 25.4)]), stone, group=43)
-    # the crest: the helm's plume grown into a living fin, brow to nape
-    PARTS["crest"] = p.poly(hd([(8.4, 14.6), (9.6, 11), (11.6, 8.2), (14.4, 5.8), (17.4, 4.8), (19.4, 6.4),
-                                (21.4, 8.8), (25, 11.2), (29, 12.8), (33.6, 15.2), (33, 17.4), (24, 14.4),
-                                (14, 15)]), fin_m, group=46)
-    # the helm: a Corinthian bronze skull, nose-guard down the snout, flared nape
-    PARTS["helm"] = p.poly(hd([(1.6, 19.8), (3, 17.8), (6, 16.2), (8.4, 14.8), (11, 13.2), (15, 12.2), (21, 12),
-                               (27, 12.8), (31.4, 15), (34.4, 18.2), (35.8, 22.4), (36.8, 27), (37.2, 30.6),
-                               (34.4, 30.2), (32, 31.4), (30.4, 30), (28, 26), (24, 22.6), (18, 21.4), (10, 22),
-                               (4, 22), (1.4, 22.6)]), bronze, group=44)
-    # the cheek-guard, sweeping down past the eye to a point at the hinge
-    PARTS["cheek"] = p.poly(hd([(15.6, 21.2), (22, 21.6), (27, 24.8), (30, 29.6), (29.4, 34.6), (25.6, 30.6),
-                                (21.4, 26.6), (17.6, 23.6)]), bronze, group=47)
-    for (x, y), l in (((2.2, 24.8), 6.8), ((8.8, 27), 7.4), ((15.4, 29), 5.6), ((21.4, 30.8), 3.6)):
-        _fang(p, x, y + H, l, group=50)
-    for (x, y), l in (((3.6, 47), 7), ((10.4, 43), 5.8), ((17, 39.4), 3.8)):
-        pts = jaw([(x + 1.6, y)])[0]
-        _fang(p, pts[0] - 1.6, pts[1], l, up=True, group=51)
-
+    PARTS["jaw"] = p.poly(jaw([(26, 43), (26, 46), (22, 49.4), (16, 52.6), (9, 55), (3.6, 55.6), (1.6, 53),
+                               (2.4, 49), (9, 47), (17, 44.6), (22.6, 43.4)]), stone, group=41)
+    PARTS["void"] = p.poly(hd([(1.6, 38), (8, 38.6), (16, 40.6), (24, 43)]) +
+                           jaw([(22, 44), (16, 45.6), (9, 47.6), (2.4, 49.4)]), void, group=42)
+    PARTS["crest"] = p.poly(hd([(11.6, 21.4), (17, 19.6), (23, 17.6), (28.6, 15.6), (29.6, 22), (27, 27), (20, 22.6),
+                                (14, 22.6)]), fin_m, group=46)
+    PARTS["helm"] = p.poly(hd([(1.4, 35.6), (1.4, 32.4), (3, 29), (5.6, 26.4), (8.4, 23.6), (12, 22), (18, 21.6),
+                               (24, 23), (27.6, 26.4), (30, 31), (30.6, 35), (27, 36), (24, 40), (20, 39.6),
+                               (12, 37), (6, 36), (3, 36.4)]), bronze, group=44)
+    for (x, y), l in (((2.6, 38), 6), ((8.6, 39), 5), ((14.6, 40.4), 3.6)):
+        _fang(p, x, y + H, l, w=2.8, group=50)
+    for (x, y), l in (((5.6, 48.6), 4.4), ((11.4, 47), 4), ((17.4, 45), 3)):
+        pts = jaw([(x + 1.4, y)])[0]
+        _fang(p, pts[0] - 1.4, pts[1], l, w=2.4, up=True, group=51)
     if p.big:
-        # the eye, glowing violet in the helm's cut-out
-        p.patch(7, 15 + H, [".1111111.", "1qqw1qp11", "1qqq1pp1.", ".1pp1p11.", "..1111..."],
-                {"1": "ink", "q": "vi2", "p": "vi1", "w": "wh"})
-        p.pxs([(2, 20 + H), (3, 20 + H)], "ink")
+        p.patch(7, 26 + H, ["661111111", "61fbf1e1.", "1effe11..", ".1ee11..."],
+                {"1": "ink", "6": "br0", "f": "vi2", "e": "vi1", "b": "wh"})
     else:
-        p.px(10, 17 + H, "vi2")
+        p.px(9, 28 + H, "vi2")
 
 
 # --------------------------------------------------------------------------
@@ -263,71 +263,92 @@ def _back(p):
         p.patch(48, 18, ["11111", "1ffb1", "1eef1", ".111."], {"1": "ink", "f": "vi2", "e": "vi1", "b": "wh"})
 
 
+def _icon(p, ph):
+    """Party icon: the Devourer boiled down for 32 px. A big gold helm over a
+    violet maw, the hump, four stubby columns, the Harpe arched over all."""
+    J = 1.6 if ph else 0.0
+    p.poly(catmull([(60, 40), (61, 24), (55, 10), (44, 4), (32, 5), (24, 11), (21, 18)], 4) +
+           catmull([(21, 18), (27, 14), (35, 11), (44, 11), (51, 15.6), (54, 25), (54, 40)], 4), blade_m, group=81)
+    for x, far in ((33, True), (50, True)):
+        p.rect(x, 46, x + 6, 57, stone_d, bias=0.3, group=10)
+    p.blob(41, 36, 17, 13, stone, group=1)
+    for (x0, y0), (x1, y1), w in (((30, 18), (33, 9), 8), ((40, 16), (44, 8), 8), ((49, 19), (53, 12), 7)):
+        p.lens((x0, y0), (x1, y1), w, fin_m, fat=0.3, group=30)
+    for x in (27, 45):
+        p.rect(x, 46, x + 8, 58, stone, group=14)
+        p.rect(x - 1, 44, x + 9, 46, bronze, group=18)
+    # the head: helm dome, the maw dropped open, the lower jaw
+    p.poly([(4, 38), (16, 41), (26, 42), (24, 50 + J), (14, 54 + J), (5, 55 + J), (2, 51 + J)], stone, group=41)
+    p.poly([(4, 37), (16, 39.6), (25, 42), (14, 47 + J), (4, 50 + J)], void, group=42)
+    p.poly([(2, 36), (3, 29), (8, 22), (16, 18.6), (25, 20), (31, 26), (32, 33), (28, 40), (16, 39), (6, 38)],
+           bronze, group=44)
+    p.poly([(14, 20), (22, 15.6), (30, 15), (32, 22), (25, 21)], fin_m, group=46)
+    p.rect(9, 27, 13, 29, glass, group=47)
+    p.rect(35, 30, 37, 36, glass, group=48)
+
+
+def _braced_legs(p, st, y0, far=False):
+    """Two column legs braced wide and angled out, stepping in turn."""
+    for sx in (-1, 1):
+        X = lambda x: 32 + sx * (x - 32)
+        lift = (st if sx < 0 else 1 - st) * 2
+        top, foot = (X(24), y0), (X(17.4), 58.6 - lift)
+        mat = stone_d if far else stone
+        p.limb([top, foot], 7.4, 5.4, mat, bias=0.3 if far else 0.0, group=10 + (sx > 0) + (4 if not far else 0))
+        if not far:
+            p.limb([(X(25.6), y0 - 0.6), (X(22.4), y0 - 0.6)], 4, 4, bronze, group=18 + (sx > 0))
+            p.poly([(X(14), 58.4 - lift), (X(21), 58.4 - lift), (X(21.4), 61 - lift), (X(13.6), 61 - lift)], marble,
+                   group=20 + (sx > 0))
+
+
 def _down(p, ph):
-    """Follower walking toward the camera: the helmed head and its starry maw
-    head-on, the Harpe arched up behind, column legs stepping in turn."""
+    """Follower toward the camera: the helmed head held low and thrust at
+    you, the hump rising behind it under the Harpe, forelegs braced wide."""
     st = ph
-    # the Harpe, rising behind the back and curling forward over the head
-    p.poly(catmull([(40, 40), (47, 30), (49, 18), (45, 8), (36, 3), (27, 4), (21, 9)], 6) +
-           catmull([(21, 9), (28, 8.4), (35, 8.4), (41, 12), (43, 19), (41, 29), (36, 38)], 6), blade_m, group=81)
-    # rear legs, behind
-    for sx in (-1, 1):
-        X = lambda x: 32 + sx * (x - 32)
-        p.rect(min(X(18), X(23)), 50, max(X(18), X(23)), 57 - (st if sx < 0 else 1 - st), stone_d, bias=0.3, group=10)
-    # body
-    p.blob(32, 44, 17, 11, stone, group=1)
-    # front legs, stepping in turn
-    for sx in (-1, 1):
-        X = lambda x: 32 + sx * (x - 32)
-        lift = st if sx < 0 else 1 - st
-        p.rect(min(X(20), X(28)), 48, max(X(20), X(28)), 58 - lift, stone, group=14 if sx < 0 else 15)
-        p.rect(min(X(19), X(29)), 47, max(X(19), X(29)), 49, bronze, group=18 if sx < 0 else 19)
-        p.rect(min(X(19), X(29)), 58 - lift, max(X(19), X(29)), 61 - lift, stone_d, group=16 if sx < 0 else 17)
-    # the head: a Corinthian helm seen head-on, its T-shaped opening holding
-    # two slanted eyes either side of the nose-guard and the starry maw below
-    p.blob(32, 25, 14.6, 11, bronze, group=44)
-    p.poly([(28.6, 15), (32, 4.6), (35.4, 15)], fin_m, group=46)
-    p.poly([(21, 26), (43, 26), (40, 38), (32, 40.6), (24, 38)], void, group=42)
-    p.poly([(30.4, 20), (33.6, 20), (33, 30), (31, 30)], bronze, group=45)
-    for x in (23.4, 27, 35.4, 39):
-        p.rect(x, 27, x + 1.4, 30, marble, group=50)
-    for x in (26.4, 30.4, 34.4):
-        p.rect(x, 35, x + 1.4, 37.6, marble, group=51)
+    # the Harpe, rising from behind the hump and curling forward over it
+    p.poly(catmull([(42, 40), (48, 30), (49, 18), (44, 9), (35, 5), (26, 6.6), (20.6, 12)], 6) +
+           catmull([(20.6, 12), (27, 10.4), (34, 10.4), (40, 13.4), (42.4, 20), (41.4, 30), (37.4, 39)], 6),
+           blade_m, group=81)
+    _braced_legs(p, 1 - st, 44, far=True)
+    # the hump, its fins up the middle
+    p.blob(32, 34, 15, 11, stone, group=1)
+    for i, (x, y) in enumerate(((27, 26), (32, 23.4), (37, 26))):
+        p.lens((x, y + 5), (x + 1.4, y - 3), 5, fin_m, fat=0.3, group=30 + i)
+    _braced_legs(p, st, 45)
+    # the head, low and forward: a Corinthian helm head-on, its T-opening
+    # holding two slanted eyes either side of the nose-guard, the maw below
+    p.blob(32, 49, 11, 5.6, stone, group=41)
+    p.blob(32, 47, 8.6, 3.6, void, group=42)
+    p.blob(32, 39, 12, 8, bronze, group=44)
+    p.poly([(30.4, 34), (33.6, 34), (33, 44), (31, 44)], bronze, group=45)
+    for x in (25.6, 29, 35, 38.4):
+        p.rect(x, 44.6, x + 1, 46.4, marble, group=50)
     if p.big:
-        for ex, rows in ((22, ["1111..", "1ffb11", ".1eef1", "..111."]), (36, ["..1111", "11bff1", "1fee1.", ".111.."])):
-            p.patch(ex, 20, rows, {"1": "ink", "f": "vi2", "e": "vi1", "b": "wh"})
-        p.patch(30, 44, ["1e1", "1f1", "1e1"], {"1": "ink", "e": "vi1", "f": "vi2"})
+        for ex, rows in ((24, ["1111..", "1ffb11", ".1eef1", "..111."]), (34, ["..1111", "11bff1", "1fee1.", ".111.."])):
+            p.patch(ex, 37, rows, {"1": "ink", "f": "vi2", "e": "vi1", "b": "wh"})
     else:
-        p.px(24, 22, "vi2")
-        p.px(39, 22, "vi2")
+        p.px(26, 39, "vi2")
+        p.px(37, 39, "vi2")
 
 
 def _up(p, ph):
-    """Follower walking away: the broad back, its fins down the spine, the tail
-    rising into the Harpe arched over toward the head."""
+    """Follower walking away: the hump and its fins from behind, the tail
+    rising into the Harpe arched forward over the back, hind legs braced."""
     st = ph
-    # the helm and crest beyond the shoulders
-    p.blob(32, 20, 11, 7, bronze, group=44)
-    p.poly([(29.6, 14), (32, 6), (34.4, 14)], fin_m, group=46)
-    # front legs beyond, rear legs near
-    for sx in (-1, 1):
-        X = lambda x: 32 + sx * (x - 32)
-        lift = st if sx < 0 else 1 - st
-        p.rect(min(X(20), X(26)), 46, max(X(20), X(26)), 56 - (1 - lift), stone_d, bias=0.3, group=10)
-        p.rect(min(X(17), X(27)), 49, max(X(17), X(27)), 59 - lift, stone, group=14 if sx < 0 else 15)
-        p.rect(min(X(16), X(28)), 49, max(X(16), X(28)), 51, bronze, group=18 if sx < 0 else 19)
-        p.rect(min(X(16), X(28)), 58 - lift, max(X(16), X(28)), 61 - lift, stone_d, group=16 if sx < 0 else 17)
-    # the back
-    p.blob(32, 38, 17, 14, stone, group=1)
-    p.blob(23, 33, 7, 7, stone, bias=-0.12, group=61)
-    p.blob(41, 33, 7, 7, stone, bias=-0.12, group=62)
-    for i, y in enumerate((24, 30, 36)):
-        p.lens((32, y + 5), (32, y - 2), 5.4, fin_m, group=30 + i)
-    # the tail rising at the back into the Harpe, arched over toward the head
-    p.limb([(32, 50), (32, 44)], 9, 7, stone, group=80)
-    p.poly(catmull([(29, 44), (26, 34), (25, 22), (28, 12), (34, 6), (41, 6), (45, 10)], 6) +
-           catmull([(45, 10), (40, 10.4), (35, 12), (32, 18), (31.4, 28), (33, 38), (35, 44)], 6), blade_m, group=81)
-    p.rect(27, 43, 37, 46, bronze, group=82)
+    # the helm beyond the hump
+    p.blob(32, 18, 9, 6, bronze, group=44)
+    p.poly([(29.6, 14), (32, 7), (34.4, 14)], fin_m, group=46)
+    _braced_legs(p, 1 - st, 40, far=True)
+    p.blob(32, 33, 16, 13, stone, group=1)
+    for i, y in enumerate((21, 27, 33)):
+        p.lens((31, y + 5), (33.4, y - 3), 5.4, fin_m, fat=0.3, group=30 + i)
+    _braced_legs(p, st, 44)
+    # the tail rising at the near end, the Harpe arched forward over the back
+    p.limb([(32, 49), (32, 43)], 8, 6, stone, group=80)
+    p.poly(catmull([(28.6, 44), (25.4, 33), (25, 21), (28.6, 11.4), (35, 6.4), (42, 7), (45.4, 11)], 6) +
+           catmull([(45.4, 11), (40.4, 11.4), (35.4, 13), (32, 19), (31.4, 29), (33, 38), (35.4, 44)], 6),
+           blade_m, group=81)
+    p.rect(27, 42, 37, 45, bronze, group=82)
 
 
 MONS = [

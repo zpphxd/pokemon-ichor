@@ -15,7 +15,7 @@ sprites are hand-finished in art/kairazor_*.txt.
 """
 import math
 
-from mon_lib import Mat, Mon, bez3
+from mon_lib import Mat, Mon, bez, bez3, ribbon
 
 INK = (32, 24, 24)
 VI0, VI1, VI2 = (72, 32, 120), (144, 80, 216), (216, 176, 248)
@@ -49,7 +49,9 @@ PARTS = {}
 
 
 def kairazor(p, view, phase):
-    if view in ("front", "side", "icon"):
+    if view == "icon":
+        _icon(p, phase)
+    elif view in ("front", "side"):
         _front(p, phase if view == "front" else 0)
     elif view == "back":
         _back(p)
@@ -65,40 +67,60 @@ def kairazor(p, view, phase):
 
 # the head's offset from the hand-drawn head's frame (the art files draw it)
 HX, HY = 1, 11
-FINGERS = [((46.6, 14), (50.4, 1.6), 6.0), ((48.6, 14), (58.4, 1.8), 6.6), ((50, 16.6), (62.2, 7.6), 7.0),
-           ((50.6, 20.6), (62.4, 17.8), 6.8), ((50, 25), (62, 28.6), 6.4), ((47.6, 29), (58.4, 37.6), 5.8)]
-FAR_FINGERS = [((23, 15), (5.4, 4.6), 5.6), ((24.6, 12.6), (12.4, 1.6), 6.0), ((26.6, 11.6), (21.4, 1.4), 5.8),
-               ((28.6, 12), (29.6, 1.6), 5.2)]
+# the near wing's four sickle-feathers and the far wing's three: (root,
+# control, tip, width), curved quadratic spines that sweep back
+FEATHERS = [((46, 16), (44.4, 7.4), (50.4, 1.6), 7.0), ((48.6, 15.6), (51.6, 5), (61, 3.6), 7.6),
+            ((49.6, 19), (57.4, 11.6), (62.2, 17.4), 7.6), ((49, 23.4), (57.4, 21.6), (60.6, 31), 6.8)]
+FAR_FEATHERS = [((34.4, 16), (33.6, 9.4), (36.4, 4.6), 4.6), ((36.6, 15.6), (38.8, 9.4), (42.6, 6.4), 4.8),
+                ((38.4, 17.6), (42, 13.4), (45.6, 11.4), 4.2)]
 LAYERS = ("far", "tail", "body", "near", "neck", "head")
 
 
-def _razor(p, a, b, w, far=False, **kw):
-    """A razor finger: marble blade, its trailing edge gold, its tip Aegean."""
-    pid = p.lens(a, b, w, marb_d if far else marb, fat=0.3, bend=-1.2, bias=0.3 if far else 0.0, **kw)
+def feather_poly(root, ctrl, tip, w, beat=0.0):
+    """Outline of a sickle-feather along a curved spine: broad near the root,
+    swelling a little, then tapering to a sharp tip."""
+    tip = (tip[0] + beat * 0.6, max(1.6, tip[1] + beat))
+    ctrl = (ctrl[0] + beat * 0.3, ctrl[1] + beat * 0.6)
+    path = bez(root, ctrl, tip, n=16)
+    return ribbon(path, lambda t: w * (0.9 + 0.2 * math.sin(math.pi * min(1, t * 1.6))) * (1 - t ** 2.2) + 0.5)
+
+
+def _feather(p, root, ctrl, tip, w, far=False, beat=0.0, **kw):
+    pts = feather_poly(root, ctrl, tip, w, beat)
+    pid = p.poly(pts, marb_d if far else marb, bias=0.3 if far else 0.0, **kw)
     if p.big:
-        tip = (a[0] + (b[0] - a[0]) * 0.72, a[1] + (b[1] - a[1]) * 0.72)
-        p.lens(tip, b, w * 0.62, aeg, fat=0.2, clip=[pid], noline=True, **kw)
+        t0 = bez(root, ctrl, (tip[0] + beat * 0.6, max(1.6, tip[1] + beat)), n=10)[7]
+        p.lens(t0, (tip[0] + beat * 0.6, max(1.6, tip[1] + beat)), w * 0.6, aeg, fat=0.2, clip=[pid], noline=True,
+               **kw)
     return pid
+
+
+def _razor(p, a, b, w, far=False, **kw):
+    """A straight-spined feather (follower views)."""
+    c = ((a[0] + b[0]) / 2 - (b[1] - a[1]) * 0.12, (a[1] + b[1]) / 2 + (b[0] - a[0]) * 0.12)
+    return _feather(p, a, c, b, w, far=far, **kw)
 
 
 def _front(p, ph, layers=LAYERS):
     W = -3 if ph else 0   # frame 2: the wings beat up
 
     if "far" in layers:
-        # ---- far wing, raised up and back behind the head, in shade
-        PARTS["fhand"] = p.poly([(29.6, 31), (26, 26), (22.4, 20), (20.4, 15), (21, 11), (24.4, 9), (28.4, 10.6),
-                                 (31.4, 15), (33.4, 21), (34.4, 27), (33.6, 31)], marb_d, bias=0.26, group=5)
+        # ---- far wing: small and in shadow, rising behind the neck
+        PARTS["fhand"] = p.poly([(31, 30), (30.4, 22), (31.6, 16), (34.4, 12.6), (38, 12.4), (40.4, 15), (40, 21),
+                                 (37.6, 28)], marb_d, bias=0.3, group=5)
         PARTS["far"] = []
-        for i, (a, b, w) in reversed(list(enumerate(FAR_FINGERS))):
-            PARTS["far"].append(_razor(p, a, (b[0], max(1.6, b[1] + W * 0.5)), w, far=True, group=6 + i))
+        for i, (r, c, t, w) in reversed(list(enumerate(FAR_FEATHERS))):
+            PARTS["far"].append(_feather(p, r, c, t, w, far=True, beat=W * 0.5, group=6 + i))
 
     if "tail" in layers:
-        # ---- tail: sweeping down and back to the balance
-        PARTS["tail"] = p.limb(bez3((46, 46), (50, 54), (55.4, 53.6), (56, 46.4)), 8, 3.4, marb, group=8)
-        PARTS["beam"] = p.limb([(49.6, 45.6), (61.6, 45.6)], 2.2, 2.2, gold, group=9)
-        PARTS["pans"] = [p.poly([(46.6, 48), (53.4, 48), (52.4, 51.4), (50, 52.6), (47.6, 51.4)], aeg, group=10),
-                         p.poly([(56.6, 48), (62.4, 48), (61.6, 51.4), (59.6, 52.6), (57.4, 51.4)], aeg, group=10)]
-        PARTS["pivot"] = p.blob(56, 45.6, 1.7, 1.7, pink, group=11)
+        # ---- tail: sweeping down and back to the balance, its pans hung wide
+        PARTS["tail"] = p.limb(bez3((45, 46), (49, 54), (54.6, 54), (55.4, 47)), 8, 3.4, marb, group=8)
+        PARTS["beam"] = p.limb([(46.6, 46.6), (61.6, 46.6)], 2.4, 2.4, gold, group=9)
+        PARTS["pans"] = [p.poly([(44.6, 49.4), (53, 49.4), (52.4, 51.6), (50.6, 53.6), (47, 53.6), (45.2, 51.6)], aeg,
+                                group=10),
+                         p.poly([(55.4, 49.4), (62.4, 49.4), (62, 51.6), (60.6, 53.6), (57.2, 53.6), (55.8, 51.6)], aeg,
+                                group=10)]
+        PARTS["pivot"] = p.blob(54.6, 46.6, 1.8, 1.8, pink, group=11)
 
     if "body" in layers:
         # ---- body: round and full, Lugia's
@@ -114,24 +136,21 @@ def _front(p, ph, layers=LAYERS):
         PARTS["gem"] = p.poly([(28.4, 40), (31.6, 35.4), (34.8, 40), (31.6, 45)], gem, group=21)
 
     if "near" in layers:
-        # ---- near wing: one broad membrane from shoulder to hand, fanned into razors
-        PARTS["hand"] = p.poly([(37.4, 35), (39, 27), (42, 19), (45.6, 13), (49, 10), (52, 12), (53.4, 17), (52.6, 24),
-                                (50, 30), (45, 36), (41, 38.6)], marb, group=30)
+        # ---- near wing: the arm rising from the shoulder into a hand of four
+        # sickle-feathers, gold along their cutting edges
         PARTS["fingers"] = []
-        for i, (a, b, w) in reversed(list(enumerate(FINGERS))):
-            b = (b[0] + (0.8 * W if i < 2 else 0), max(1.6, b[1] + W * (1 - i * 0.16)))
-            PARTS["fingers"].append(_razor(p, a, b, w, group=32 + i))
-        PARTS["wplate"] = p.poly([(38, 34), (39.6, 26.6), (42.6, 19), (46, 12.6), (49.4, 8.4), (51.4, 9.8),
-                                  (48.6, 14.4), (45.6, 20.4), (43, 27.4), (41.6, 35)], aeg, group=40)
-        PARTS["splate"] = p.poly([(38, 31.6), (43, 28.6), (47.6, 31), (48.6, 36.2), (44.6, 39.6), (39.6, 38.2)], aeg,
+        for i, (r, c, t, w) in reversed(list(enumerate(FEATHERS))):
+            PARTS["fingers"].append(_feather(p, r, c, t, w, beat=W * (1 - i * 0.2), group=32 + i))
+        PARTS["hand"] = p.poly([(37.4, 35), (39, 27), (42, 19.6), (45, 14.4), (48, 12.4), (51, 14), (52, 18.4),
+                                (51, 24), (48, 29.6), (44, 34.6), (40.6, 37)], marb, group=30)
+        PARTS["wplate"] = p.poly([(38, 34), (39.6, 26.6), (42.4, 19.6), (45.4, 14.6), (48, 12.8), (49.4, 14.4),
+                                  (47, 18), (44.6, 23), (42.6, 28.6), (41.4, 35)], aeg, group=40)
+        PARTS["splate"] = p.poly([(38.4, 32), (43, 29.6), (47, 31.6), (47.6, 35.6), (44.4, 38.6), (40, 37.6)], aeg,
                                  group=42)
 
     if "neck" in layers:
-        # ---- neck: Lugia's long curve, rising from the chest and bowing to the head
-        PARTS["neck"] = p.limb(bez3((34, 38), (31.6, 26), (26, 21.6), (21, 27)), 10.6, 7.6, marb, group=50)
-        PARTS["nplates"] = [p.lens(a, b, w, aeg, fat=0.3, group=51) for a, b, w in
-                            (((32.6, 31), (36, 25.4), 4.0), ((29.6, 24.6), (33.4, 20), 3.8),
-                             ((25.4, 22.6), (27.4, 17.4), 3.4))]
+        # ---- neck: one smooth S, rising from the chest and bowing to the head
+        PARTS["neck"] = p.limb(bez3((34, 39), (32.4, 27), (26.4, 20.4), (20.6, 27)), 9.6, 8.0, marb, group=50)
 
     if "head" in layers:
         _head(p, -1 if ph else 0)
@@ -169,11 +188,12 @@ def _head(p, H):
 # back, down, up
 # --------------------------------------------------------------------------
 
-BACK_FINGERS = [((16.4, 33.8), (2, 46.4), 7.0), ((16.2, 29.6), (1.6, 34.6), 7.6), ((16.2, 25.4), (1.6, 22), 8.0),
-                ((16.4, 20.8), (2.4, 9.4), 8.0), ((19, 18), (9.6, 1.6), 7.8), ((22.4, 18), (19.4, 1.4), 7.4),
-                ((25.4, 18.4), (28.4, 2), 6.6)]
-BACK_FAR = [((45, 17), (42, 1.6), 5.8), ((47.6, 15), (50, 1.4), 6.0), ((50.4, 15.6), (57.6, 2.4), 5.8),
-            ((52.4, 18.6), (61.6, 9), 5.4)]
+# the back view's wings: the near one vast, four sickle-feathers sweeping up
+# and back to the left; the far one small and dark behind the head
+BACK_FEATHERS = [((22.4, 18), (24.4, 7.2), (17, 1.6), 8.6), ((19.2, 17.6), (15.4, 4.2), (3.8, 2.6), 9.4),
+                 ((18, 21.8), (8.2, 12.6), (2.4, 19.8), 9.4), ((18.8, 27.2), (8.2, 25), (4.2, 36.6), 8.4)]
+BACK_FAR = [((45, 17), (44, 9), (46.4, 3), 5.0), ((47.4, 16), (50, 9), (54, 4.4), 5.2),
+            ((49, 18.6), (54, 14), (58, 11.6), 4.6)]
 # where the mirrored hand-drawn head sits in the back view
 BHX, BHY = 63, 8
 
@@ -185,19 +205,17 @@ def _back(p, layers=LAYERS):
         PARTS["bfhand"] = p.poly([(38, 36), (40, 28), (43, 21.6), (46.4, 16.4), (50.4, 13.4), (54, 14.4), (55, 18.6),
                                   (53, 24.6), (49, 30.6), (43, 36)], marb_d, bias=0.26, group=5)
         PARTS["bfar"] = []
-        for a, b, w in reversed(BACK_FAR):
-            PARTS["bfar"].append(_razor(p, a, b, w, far=True, group=6))
+        for r, c, t, w in reversed(BACK_FAR):
+            PARTS["bfar"].append(_feather(p, r, c, t, w, far=True, group=6))
     if "body" in layers:
         PARTS["bbody"] = p.blob(30, 53, 20.6, 17, marb, group=1)
         PARTS["bneck"] = p.limb([(40, 42), (42.6, 34), (44, 28)], 12, 10, marb, group=50)
-        PARTS["bplates"] = [p.lens(a, b, w, aeg, fat=0.3, group=51) for a, b, w in
-                            (((30, 56), (33, 47), 5.6), ((34, 46.4), (37.6, 39.4), 5.0), ((38.6, 38.6), (41.6, 32), 4.4))]
     if "near" in layers:
         PARTS["bhand"] = p.poly([(30, 44), (25, 41), (20, 37), (16.4, 32), (15.4, 26), (16.4, 20), (18.4, 15.4),
                                  (21.4, 12.6), (25, 13.4), (28, 18), (30.4, 27), (31.4, 37)], marb, group=30)
         PARTS["bfingers"] = []
-        for a, b, w in reversed(BACK_FINGERS):
-            PARTS["bfingers"].append(_razor(p, a, b, w, group=32))
+        for r, c, t, w in reversed(BACK_FEATHERS):
+            PARTS["bfingers"].append(_feather(p, r, c, t, w, group=32))
         PARTS["bwplate"] = p.poly([(30.6, 40), (29.4, 31), (27, 22.6), (23.6, 15), (20.4, 11.4), (18, 11.4),
                                    (20.4, 16), (24, 24), (26.6, 32.6), (27.6, 41)], aeg, group=40)
         PARTS["bsplate"] = p.poly([(22, 44), (28, 40), (34, 42), (34, 48), (28, 50.6), (22.6, 49)], aeg, group=42)
@@ -208,6 +226,40 @@ def _back(p, layers=LAYERS):
         p.poly([(52, 18), (51, 12.6), (54, 9), (59, 9), (61.6, 13), (61, 18), (58, 16), (55, 15.4)], gold, group=62)
         if p.big:
             p.patch(51, 27, ["11111", "15111", "111dd", ".1dd1"], {"1": "ink", "5": "wh", "d": "vi1"})
+
+
+def _icon(p, ph):
+    """Party icon: Kairazor boiled down for 32 px. A big head under its gold
+    forelock, one wing of three broad sickle-feathers, the balance below."""
+    W = -3 if ph else 0
+    p.limb(bez3((44, 46), (49, 55), (55, 55), (56, 47)), 8, 4, marb, group=8)
+    p.limb([(47, 46), (62, 46)], 3, 3, gold, group=9)
+    for cx in (49.6, 58.4):
+        p.poly([(cx - 4, 50), (cx + 4, 50), (cx + 3, 55), (cx - 3, 55)], aeg, group=10)
+    p.blob(39, 42, 13, 11, marb, group=1)
+    p.poly([(28, 40), (32, 34), (36, 40), (32, 46)], gem, group=21)
+    for (r, c, t, w) in (((44, 17), (42, 7), (48, 1.6), 9), ((47, 17), (53, 6), (61.4, 6), 10),
+                         ((48, 22), (57, 18), (61, 29), 9)):
+        _feather(p, r, c, t, w, beat=W)
+    p.poly([(34, 40), (36, 30), (40, 21), (44, 14), (48, 12.6), (51, 17), (50, 25), (46, 32), (41, 38)], marb, group=30)
+    p.poly([(35, 38), (37, 30), (40.6, 22), (44.6, 15), (47, 14.4), (44, 21), (41, 29), (38.6, 38)], aeg, group=40)
+    p.limb(bez3((35, 39), (33, 28), (28, 24), (23, 28)), 10, 9, marb, group=50)
+    # the head, big; the bare crown sweeping back; the mask round a narrow eye
+    p.poly([(2, 31), (5, 27), (10, 23.4), (16, 21.4), (22, 21.6), (27.4, 24.4), (29.4, 28), (25, 30), (20, 33.6),
+            (14, 35.6), (7, 35.6), (2, 33.6)], marb, group=60)
+    p.poly([(8.6, 27), (14, 25.6), (21, 27), (15, 29.6), (10, 29.6)], aeg, group=61)
+    pts_o, pts_i = [], []
+    for i in range(31):
+        t = i / 30
+        th = math.radians(25 - 250 * t)
+        r = 6.4 if t < 0.62 else 6.4 - 2.4 * (t - 0.62) / 0.38
+        w = 6.0 * (1 - t) ** 0.55 + 1.8
+        x, y = 10.6 + r * math.cos(th), 17.6 + r * math.sin(th)
+        pts_o.append((x + math.cos(th) * w / 2, y + math.sin(th) * w / 2))
+        pts_i.append((x - math.cos(th) * w / 2, y - math.sin(th) * w / 2))
+    p.poly(pts_o + pts_i[::-1], gold, group=62)
+    p.poly([(13.6, 22.6), (15.4, 20.4), (17.2, 22.6), (15.4, 25)], pink, group=63)
+    p.rect(11, 27, 14, 28, gem, group=64)
 
 
 def _wings_v(p, beat, far_side=False):
@@ -241,13 +293,17 @@ def _down(p, ph):
     p.limb([(32, 36), (32, 30)], 7, 6, marb, group=50)
     p.blob(32, 25, 8.6, 7.4, marb, group=60)
     p.poly([(29, 29), (35, 29), (33.6, 32.6), (30.4, 32.6)], marb, group=61)
-    # the forelock arching up over the brow and curling forward
-    p.poly(catmull_pts([(28.4, 19), (25, 12), (28, 6.4), (34, 5), (39, 8.6), (38.4, 14), (35, 15)]) +
-           catmull_pts([(35, 15), (35.6, 11), (33, 9), (30, 10.4), (30, 15), (31, 19)]), gold, group=62)
+    # the forelock springing from the brow and curling forward toward you
+    p.lens((32, 19.4), (30, 7.4), 6.4, gold, bend=1.4, fat=0.4, group=62)
+    p.blob(28.6, 9.4, 2.6, 2.6, gold, group=62)
     p.poly([(32, 17.4), (33.4, 19.6), (32, 21.6), (30.6, 19.6)], pink, group=63)
+    # Lugia's mask round two narrow eyes
+    for sx in (-1, 1):
+        X = lambda x: 32 + sx * (x - 32)
+        p.poly([(X(25), 24), (X(29), 22.6), (X(30.4), 25.4), (X(26), 26.4)], aeg, group=64 + (sx > 0))
     if p.big:
-        for ex, rows in ((25, ["111.", "1511", "1dd1", ".11."]), (35, [".111", "1151", "1dd1", ".11."])):
-            p.patch(ex, 22, rows, {"1": "ink", "5": "wh", "d": "vi1"})
+        for ex, rows in ((26, ["111", "1d1"]), (35, ["111", "1d1"])):
+            p.patch(ex, 23, rows, {"1": "ink", "d": "vi1"})
     else:
         p.px(28, 24, "ink")
         p.px(35, 24, "ink")
