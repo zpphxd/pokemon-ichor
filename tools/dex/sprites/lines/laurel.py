@@ -386,8 +386,9 @@ def kladoe(p, view, phase):
 
 DAPHNYAD_COLORS = [
     ("ink", INK),
-    ("coat0", (112, 72, 40)), ("coat1", (160, 112, 64)), ("coat2", (200, 152, 96)), ("coat3", (232, 192, 136)),
-    ("marble", (248, 240, 224)),
+    # a nymph's skin in limestone and marble, paler than the doe's coat
+    ("coat0", (128, 88, 64)), ("coat1", (184, 144, 104)), ("coat2", (216, 184, 144)), ("coat3", (240, 216, 184)),
+    ("marble", (248, 248, 232)),
     ("leaf0", (40, 64, 32)), ("leaf1", (72, 104, 40)), ("leaf2", (120, 152, 64)), ("silver", (176, 192, 136)),
     ("gold", C.sungold[1]), ("gold0", (184, 112, 32)),
     ("bark0", (40, 56, 48)), ("bark1", (72, 96, 80)), ("bark2", (120, 136, 112)),
@@ -410,12 +411,33 @@ def _dleaf(p, a, b, w, **kw):
     return pid
 
 
-def _spray(p, base, tips, w=4.4, twig=1.8, **kw):
-    """A laurel branch end: twigs from base to each tip, a leaf at each."""
-    for tip, bend in tips:
-        mid = ((base[0] + tip[0]) / 2, (base[1] + tip[1]) / 2)
-        p.limb([base, mid], twig, twig * 0.8, d_bark)
-        _dleaf(p, mid, tip, w, bend=bend, **kw)
+def _dsprig(p, path, specs, first_side=1, tip=None, **kw):
+    """A laurel sprig: a thin twig along path with lanceolate leaves in
+    alternate pairs. specs: [(t, length, width, angle_deg), ...]."""
+    import math
+    p.limb(path, 1.8, 1.2, d_bark, **kw)
+    segs = list(zip(path, path[1:]))
+    lens = [math.hypot(q[0] - o[0], q[1] - o[1]) for o, q in segs]
+    tot = sum(lens)
+
+    def at(t):
+        d = t * tot
+        for (o, q), ln in zip(segs, lens):
+            if d <= ln or (o, q) == segs[-1]:
+                k = d / ln if ln else 0
+                return (o[0] + (q[0] - o[0]) * k, o[1] + (q[1] - o[1]) * k), ((q[0] - o[0]) / ln, (q[1] - o[1]) / ln)
+            d -= ln
+    side = first_side
+    for t, ln, w, ang in specs:
+        (bx, by), (ux, uy) = at(t)
+        r = math.radians(ang) * side
+        dx, dy = ux * math.cos(r) - uy * math.sin(r), ux * math.sin(r) + uy * math.cos(r)
+        _dleaf(p, (bx, by), (bx + dx * ln, by + dy * ln), w, bend=0.35 * side, **kw)
+        side = -side
+    if tip:
+        ln, w = tip
+        (bx, by), (ux, uy) = at(0.97)
+        _dleaf(p, (bx, by), (bx + ux * ln, by + uy * ln), w, bend=0.3, **kw)
 
 
 def _berry(p, x, y):
@@ -424,118 +446,125 @@ def _berry(p, x, y):
         p.px(x - 0.5, y - 0.6, "marble")
 
 
+def _dface(p, cx, cy, L=0):
+    """the nymph's face, turned a little to the left"""
+    p.blob(cx, cy, 6.2, 7, d_skin, ang=12, group=3)
+    if p.big:
+        p.stroke([(cx - 1, cy - 3), (cx + 4, cy - 3)], "ink")       # near lid
+        p.pxs([(cx - 1, cy - 2), (cx + 1, cy - 2), (cx + 2, cy - 2), (cx + 4, cy - 2)], "ink")
+        p.px(cx + 3, cy - 2, "marble")
+        p.pxs([(cx, cy - 2), (cx + 1, cy - 1), (cx + 2, cy - 1)], "gold")
+        p.pxs([(cx - 4, cy - 3), (cx - 3, cy - 3)], "ink")           # far eye
+        p.px(cx - 3, cy - 2, "gold")
+        p.px(cx - 2, cy + 1, "coat0")                                 # nose
+        p.stroke([(cx - 2, cy + 4), (cx - 1, cy + 4)], "coat0")       # mouth
+    else:
+        p.px(cx + 1, cy - 2, "ink")
+
+
 def daphnyad(p, view, phase):
     if view in ("front", "side", "icon"):
-        # Bernini's Daphne: the body sinking into a rooted bark gown in an
-        # S-curve, the near arm flung up and forward into a bough, the far arm
-        # swept up and back, the head tilted toward the sky
-        sw = 1 if (phase == 1 and view != "icon") else 0     # the boughs sway
+        # a laurel nymph in the spirit of Bernini's Daphne: an S-curved body
+        # sinking into a rooted bark gown, the arms rising into laurel sprigs,
+        # the head tilted back, leaf hair falling down her back
+        sw = 1 if (phase == 1 and view != "icon") else 0     # the boughs and hair sway
 
-        # far arm and bough, behind and in shade
-        p.limb(bez((35.5, 30.5), (41.5, 26.5), (44, 19)), 4.4, 3.8, d_skin, bias=0.3, group=20)
-        p.limb(bez((44, 19), (45.5 + sw, 15), (47 + sw, 10.5)), 3.8, 2.4, d_bark, bias=0.2, group=21)
-        for a, b, w, bend in (((47.5 + sw, 10.5), (57 + 2 * sw, 3 + sw), 7.2, -1.1), ((48 + sw, 12.5), (61 + sw, 12.5 - sw), 7.0, -0.8),
-                              ((46.5 + sw, 10), (41.5 + sw, 2.5), 6.0, 0.8), ((47.5 + sw, 14.5), (56.5 + sw, 21 - sw), 6.2, 0.7)):
-            _dleaf(p, a, b, w, bend=bend, bias=0.22)
-        # rooted gown flaring to a hem of roots, bigger roots in front
-        p.poly([(29.6, 41), (39, 41), (41, 43), (42.6, 45.5), (44.8, 49), (47.6, 52.4), (51.5, 55.6), (22.5, 55.6),
-                (25.8, 52.5), (27.6, 49.5), (28.8, 46)], d_bark, group=30)
-        for path, w0 in (([(47, 53), (53, 54.5), (58.5, 55.5)], 3.4), ([(25.5, 53), (21, 53.5), (17, 54)], 3.0),
-                         ([(44, 54), (49, 57), (53.5, 59.5)], 4.6), ([(38, 55), (39.5, 58.5), (38.5, 61)], 4.6),
-                         ([(32.5, 55), (30, 58.5), (26.5, 61.5)], 5.6), ([(27, 54), (19, 57.5), (10, 60.5)], 6.0)):
+        # far arm and sprig, behind and in shade
+        p.limb(bez((35.5, 28), (39.5, 25.5), (41.5, 21.5)), 4.6, 4.0, d_skin, bias=0.3, group=20)
+        p.limb(bez((41.5, 21.5), (43.5, 18), (45, 14)), 4.0, 2.8, d_bark, bias=0.2, group=21)
+        _dsprig(p, [(45, 14), (49.5 - sw, 8.5 - sw), (54 - sw, 5.5 - sw)], [(0.3, 7.5, 4.4, 50), (0.55, 8, 4.4, 45),
+                (0.8, 6.5, 4.0, 45)], tip=(5, 4.0), bias=0.22)
+        _dsprig(p, [(48.5 - sw, 9.5 - sw), (53.5 - sw, 12 - sw), (58 - sw, 13.5 - 2 * sw)], [(0.45, 7, 4.2, 50),
+                (0.8, 6, 4.0, 45)], tip=(5.5, 4.0), bias=0.22)
+        # rooted gown flaring to a hem of uneven roots
+        p.poly([(30.5, 41), (42, 41), (44, 45), (46.5, 49), (49.5, 52.5), (53, 55.6), (23, 55.6), (26.5, 51.5),
+                (28.5, 47), (30, 43.5)], d_bark, group=30)
+        for path, w0 in (([(48, 53), (54, 54.5), (59.5, 55.5)], 3.4), ([(26, 53), (21.5, 53.5), (17.5, 54)], 3.0),
+                         ([(45, 54), (50, 57), (54.5, 59.5)], 4.6), ([(39, 55), (40.5, 58), (39.5, 60.3)], 4.6),
+                         ([(33.5, 55), (31, 58.3), (27.5, 60.6)], 5.6), ([(28, 54), (20, 57.5), (11, 60.5)], 6.0)):
             p.limb(path, w0, 2.2, d_bark, group=31)
-        # torso in an S-curve, bark climbing the waist in tongues
-        p.blob(30.2, 33, 6.2, 5.0, d_skin, group=1)
-        p.limb([(30.6, 34), (33.8, 41)], 9.0, 6.6, d_skin, group=1)
-        p.poly([(28, 42), (29, 37), (30.5, 41), (33, 35), (35, 41), (37, 38), (39, 42)], d_bark, group=30)
-        p.limb([(30.5, 30), (27.5, 20.5)], 6.0, 5.2, d_skin, group=1)
-        # leaf-ears streaming back like hair
-        _dleaf(p, (28.5, 17), (39, 28.5), 5.4, bend=-0.8, bias=0.2)
-        _dleaf(p, (29.5, 14.5), (44, 22.5 + sw), 6.2, bend=-0.9)
-        _dleaf(p, (29, 11.5), (46.5, 14.5 + sw), 6.8, bend=0.6)
-        # head tilted up toward the sky, a short refined muzzle
-        p.blob(25, 14.5, 6.6, 6, d_skin, ang=-15, group=3)
-        p.limb([(19.5, 15), (14.5, 13.5)], 5.0, 3.8, d_skin, group=3)
-        # the living wreath, berries of sun-gold
-        for a, b in (((18.5, 9), (15.5, 5.5)), ((21, 7.5), (19.5, 3.2)), ((24, 7), (24.5, 2.5)), ((27, 7.5), (30, 3.8)),
-                     ((29.5, 9), (34, 7))):
-            _dleaf(p, a, b, 3.6, bend=0.3)
-        for x, y in ((18, 8), (23, 6), (28, 7)):
+        # torso: chest forward, a slender waist, hips back; bark tongues
+        p.blob(29.4, 30.6, 5.8, 4.4, d_skin, group=1)
+        p.limb([(30.4, 32), (34, 39)], 9.0, 6.4, d_skin, group=1)
+        p.blob(36.4, 42, 6.8, 3.2, d_skin, group=1)
+        p.poly([(29.5, 43.5), (30.4, 40.2), (32, 42.6), (33.4, 36.6), (35, 41.4), (36.8, 35.6), (38.6, 41.2),
+                (40.4, 38.4), (41.6, 41.6), (43, 41.8), (43.4, 45), (29.5, 45)], d_bark, group=30)
+        p.limb([(28.8, 19.5), (30.4, 26.5)], 5.2, 5.6, d_skin, group=1)
+        # a fall of laurel-leaf hair down her back
+        for a, b, w, bend, bias in (((33, 26), (39.5, 40.5 + sw), 4.4, -0.5, 0.2), ((34, 18), (46, 33 + sw), 5.0, -0.8, 0.2),
+                                    ((33, 14), (45, 28 + sw), 5.0, -0.8, 0.2), ((32.5, 20), (37.5, 34 + sw), 4.6, -0.4, 0.0),
+                                    ((32, 16), (40, 29.5 + sw), 5.0, -0.6, 0.0), ((31.5, 12), (42, 22.5 + sw), 5.4, -0.7, 0.0)):
+            _dleaf(p, a, b, w, bend=bend, bias=bias)
+        # the face, the fawn's leaf-ears from the temples, the wreath
+        _dface(p, 25, 15)
+        _dleaf(p, (30, 9.5), (45.5, 3.5 + sw), 5.6, bend=0.9)
+        _dleaf(p, (30.5, 11.5), (48, 9 + sw), 6.0, bend=0.5)
+        for a, b in (((21, 8.5), (17, 5)), ((24, 7.5), (22.5, 3)), ((27.5, 7.5), (29, 3)), ((30.5, 8.5), (34.5, 5.5))):
+            _dleaf(p, a, b, 3.8, bend=0.3)
+        for x, y in ((20, 8), (25, 6), (30, 7)):
             _berry(p, x, y)
-        # near arm flung up and forward, turning to bark, and its bough
-        p.limb(bez((27, 30.5), (16, 29.5), (12, 21.5)), 4.8, 3.8, d_skin, group=22)
-        p.limb(bez((12, 21.5), (9.5 - sw, 17), (8 - sw, 11)), 3.8, 2.6, d_bark, group=23)
-        for a, b, w, bend in (((10 - sw, 12.5), (19.5 - sw, 6 + sw), 6.2, -0.7), ((9.5 - sw, 16), (2 - sw, 22), 6.0, 0.6),
-                              ((8.5 - sw, 13), (0.5, 14.5 + sw), 7.0, 0.9), ((8 - sw, 10.5), (1 + sw, 3), 7.4, 1.2),
-                              ((9 - sw, 10), (15.5 - 2 * sw, 2 + sw), 7.2, -1.2)):
-            _dleaf(p, a, b, w, bend=bend)
-
-        if p.big:
-            p.stroke([(20, 12), (24, 12)], "ink")        # the lid
-            p.pxs([(21, 13), (23, 13), (25, 11)], "ink")
-            p.px(22, 13, "marble")
-            p.px(21, 14, "gold")
-            p.pxs([(16, 13), (17, 13)], "ink")           # the far eye, just showing
-            p.pxs([(13, 13), (14, 13), (13, 14)], "ink") # nose
-        else:
-            p.px(22, 13, "ink")
+        # near arm flung up and forward, turning to bark, and its sprigs
+        p.limb(bez((26.5, 28.5), (22, 27.5), (18.5, 24.5)), 5.0, 4.2, d_skin, group=22)
+        p.limb(bez((18.5, 24.5), (15, 21), (13, 16.5)), 4.2, 3.0, d_bark, group=23)
+        _dsprig(p, [(11 + sw, 13.5 - sw), (15 + sw, 9 - sw), (17.5 + sw, 5.5 - sw)], [(0.35, 6.5, 4.2, 50),
+                (0.7, 6, 4.0, 50)], first_side=-1, tip=(4.5, 3.8), bias=0.15)
+        _dsprig(p, [(12.5, 15.5), (8 + sw, 16.5 - sw), (4.5 + sw, 19 - 2 * sw)], [(0.35, 6.5, 5.0, 55),
+                (0.7, 6, 5.0, 50)], first_side=-1, tip=(4.5, 4.2))
+        _dsprig(p, [(13, 16.5), (9.5 + sw, 12 - sw), (5.5 + sw, 8 - sw)], [(0.25, 7.5, 5.4, 50), (0.5, 8, 5.4, 45),
+                (0.75, 6.5, 5.0, 45)], tip=(5.5, 4.8))
+        for x, y in ((9 + sw, 12 - sw), (14 + sw, 10 - sw), (50 - sw, 9 - sw)):
+            _berry(p, x, y)
         return
 
     if view == "back":
-        _dleaf(p, (32, 18), (16, 30), 8, bend=1.2)
-        p.blob(26, 66, 22, 18, d_skin, group=1)
-        p.limb([(30, 52), (38, 32)], 12, 10, d_skin, group=1)
-        p.blob(40, 24, 8.4, 8.2, d_skin, group=3)
-        p.limb([(45, 27), (53, 29)], 8, 6.4, d_skin, group=3)
-        p.limb([(26, 48), (14, 30), (10, 16)], 6, 4.4, d_bark, group=20)
-        _spray(p, (10, 16), [((3, 9), 1.0), ((10, 3), 0.8), ((18, 6), -0.8)], w=6)
-        for a, b, bend in (((34, 18), (31, 12), 0.5), ((38, 16), (37, 10), 0.5), ((42, 16), (45, 11), -0.5),
-                           ((45, 18), (50, 15), -0.5)):
-            _dleaf(p, a, b, 4, bend=bend)
-        for x, y in ((36, 16), (41, 15), (46, 17)):
-            _berry(p, x, y)
-        p.eye(45, 21, 4, 4, shine="marble", shine_at=(1, 1))
+        # (the hand-finished art replaces this) over the shoulder, the face in
+        # right profile, the leaf hair down her back, a sprig raised above
+        p.blob(28, 60, 26, 28, d_skin, group=1)
+        p.poly([(35.5, 21), (43, 23), (44.5, 28), (45.5, 34), (31, 35), (33, 28)], d_skin, group=1)
+        p.blob(41, 16, 7, 8, d_skin, group=3)
+        p.limb([(46, 15), (49, 16.5)], 3, 2, d_skin, group=3)
+        for a, b in (((34, 20), (22, 44)), ((32, 16), (13, 37)), ((35, 14.5), (17, 32)), ((36, 21), (26, 41))):
+            _dleaf(p, a, b, 5.8, bend=1.0)
+        p.limb(bez((14, 41), (9.5, 36), (9.5, 30)), 6.4, 5.4, d_skin, group=22)
+        p.limb(bez((9.5, 30), (8.5, 25), (9.5, 19)), 5.2, 3.6, d_bark, group=23)
+        _dsprig(p, [(9.5, 19), (7, 12), (5, 6)], [(0.45, 7.5, 5.4, 50), (0.72, 7, 5.2, 45)], tip=(5, 4.8))
+        p.eye(42, 13, 3, 2, shine="marble")
         return
 
     if view in ("down", "up"):
-        # follower: gliding on her roots, the boughs held high; phase sways
-        # the roots like a hem and stirs the leaves
+        # follower: gliding on her roots; the sprigs sway and the hair falls
         sway = phase
         p.poly([(26, 44), (38, 44), (40, 54), (24, 54)], d_bark, group=30)
         for path in (([(27, 53), (20, 57 + sway)]), ([(30, 54), (28, 60)]), ([(34, 54), (36, 60)]),
                      ([(37, 53), (44, 57 + 1 - sway)])):
             p.limb(path, 3.8, 2.2, d_bark, group=31)
+        # hair falling behind the shoulders
+        for a, b in (((27, 18), (22, 38)), ((37, 18), (42, 38)), ((29, 20), (26, 40)), ((35, 20), (38, 40))):
+            _dleaf(p, a, b, 6, bend=0.6 if a[0] < 32 else -0.6, bias=0.2 if view == "down" else 0.0)
+        p.limb([(32, 27), (32, 43)], 8.6, 7.4, d_skin, group=1)
+        p.limb([(27, 32), (19, 24)], 4.4, 3.8, d_skin, group=22)
+        p.limb([(37, 32), (46, 27)], 4.4, 3.8, d_skin, group=23)
+        p.limb([(19, 24), (14, 12)], 3.8, 2.8, d_bark, group=22)
+        p.limb([(46, 27), (51, 17)], 3.8, 2.8, d_bark, group=23)
+        _dsprig(p, [(14, 13), (9 + sway, 7), (5 + sway, 3)], [(0.4, 6.5, 5.0, 50), (0.75, 6, 4.8, 45)], tip=(4.5, 4.4))
+        _dsprig(p, [(14, 13), (19, 8), (21, 3.5)], [(0.5, 6, 4.6, 50)], first_side=-1, tip=(4.5, 4.2))
+        _dsprig(p, [(51, 18), (56 - sway, 12), (60 - sway, 9)], [(0.4, 6, 4.6, 50), (0.75, 5.5, 4.4, 45)],
+                first_side=-1, tip=(4, 4.0), bias=0.15)
         if view == "up":
-            p.limb([(32, 30), (32, 43)], 9, 8, d_skin, group=1)
-        # the boughs are not a mirror: one flung high, the other swept wide
-        p.limb([(27, 33), (19, 24)], 4.4, 3.8, d_skin, group=22)
-        p.limb([(37, 33), (46, 28)], 4.4, 3.8, d_skin, group=23)
-        p.limb([(19, 24), (14, 11)], 3.8, 2.8, d_bark, group=22)
-        p.limb([(46, 28), (51, 18)], 3.8, 2.8, d_bark, group=23)
-        for base, tip, w, bend in (((14, 12), (4, 5 + sway), 6.6, 1.0), ((14, 12), (20, 2.5), 6.0, -1.0),
-                                   ((15, 15), (5, 16 - sway), 5.2, 0.5), ((51, 19), (60, 13 + 1 - sway), 5.6, -1.0),
-                                   ((51, 19), (47, 10), 4.6, 1.0), ((50, 21), (59, 23 - (1 - sway)), 4.8, -0.5)):
-            _dleaf(p, base, tip, w, bend=bend, bias=0.15 if base[0] > 40 else 0.0)
-        if view == "down":
-            _dleaf(p, (26, 18), (22, 31), 5.6, bend=0.6)
-            _dleaf(p, (38, 18), (42, 31), 5.6, bend=-0.6)
-            p.limb([(32, 30), (32, 43)], 9, 8, d_skin, group=1)
-            p.blob(32, 33, 3, 2.6, d_skin, bias=-0.15, group=1)
-        p.blob(32, 19, 7, 6.4, d_skin, group=3)
-        if view == "down":
-            p.limb([(32, 22), (32, 27)], 7, 4.4, d_skin, group=3)
-        for a, b, bend in (((27, 14), (23, 10), 0.5), ((30, 12), (29, 8), 0.5), ((34, 12), (35, 8), -0.5),
-                           ((37, 14), (41, 10), -0.5)):
-            _dleaf(p, a, b, 3.6, bend=bend)
-        for x, y in ((28, 13), (32, 11), (36, 13)):
-            _berry(p, x, y)
-        if view == "up":
-            _dleaf(p, (28, 20), (25, 34), 6.0, bend=0.6)
-            _dleaf(p, (36, 20), (39, 34), 6.0, bend=-0.6)
+            p.blob(32, 19, 6.2, 7, d_skin, group=3)
+            for a, b in (((30, 14), (27, 36)), ((34, 14), (37, 36)), ((32, 15), (32, 40))):
+                _dleaf(p, a, b, 6.4, bend=0.4)
         else:
+            p.blob(32, 19, 5.6, 6.6, d_skin, group=3)
             p.eye(28, 18, 2, 3, shine="marble")
             p.eye(34, 18, 2, 3, shine="marble")
-            p.px(32, 25, "ink")
+            p.stroke([(31, 23), (32, 23)], "coat0")
+        for a, b in (((27, 14), (23, 10)), ((30, 12.5), (29, 8)), ((34, 12.5), (35, 8)), ((37, 14), (41, 10))):
+            _dleaf(p, a, b, 3.6, bend=0.4)
+        _dleaf(p, (27.5, 15), (17, 10 + sway), 5.2, bend=-0.6)
+        _dleaf(p, (36.5, 15), (47, 10 + (1 - sway)), 5.2, bend=0.6)
+        for x, y in ((28, 13), (32, 11), (36, 13)):
+            _berry(p, x, y)
         return
 
 
