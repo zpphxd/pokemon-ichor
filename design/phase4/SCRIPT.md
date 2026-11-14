@@ -1,0 +1,18786 @@
+# Phase 4 script: Act III, "The Loom", from Kaldera to the next Klotheia
+
+Owner: Narrative (the world-act3 session). This is the source of truth for Act III's scene dialogue, NPC rosters, trainers, wild encounters, the two temple rites, item placement, flags, music and art: Kythera (Laurel 7), Knossa and the Labyrinth, Lakonia, Delphoi (Laurel 8), the Loom, the Frozen Hour, the Stair of Hours, the Ascent, the Pantheon and the Archon, the credits and the epilogue at the next Klotheia. Map and script agents implement from this file.
+
+It continues the Act II script (world-act2, in progress), which ends at Kaldera's harbor with Kydippe's letter (STORY II-14).
+
+**Which document wins.**
+- `design/PITCH.md` is the bible, and `design/STORY.md` is the approved story. Where this file quotes a STORY draft scene (§7.4–§7.11), the STORY text is the master text, and this file reproduces it word for word with staging added.
+- `design/LABYRINTH.md` is approved and wins on everything inside Knossa. This file does not rewrite it. It adds only what STORY §7.4 and §8.3 add, recasts LABYRINTH's placeholder species with the Aethos dex (dex decision D5 (a)), and writes the rosters LABYRINTH leaves as one-line reasons.
+- `design/SYSTEMS.md` wins on mechanics (relics, rites, herms, theoxenia, the star chart, excavation). This file supplies the words.
+- `design/BALANCE.md` is the single source for levels. Where STORY gives a different level, this file follows BALANCE and says so in Open questions.
+- `design/MAP_DESIGN.md` binds every map. `design/AETHOS_MAP.md` fixes where places are.
+- Every deviation is listed in Open questions at the end.
+
+## How to read this file
+
+Phase 1's and Phase 2's conventions hold (`design/phase1/SCRIPT.md` and `design/phase2/SCRIPT.md`, "How to read this file"). In short:
+- Each line is one text box, about 2 lines of 36 characters. A blank line separates boxes. `NAME:` opens a speaker's turn.
+- `[brackets]` are stage directions. `{PLAYER}` is the player's name and `{STR_VAR_1}` is set by the script.
+- Choices are `?? YES/NO` or a multichoice, then `> YES:` and `> NO:` branches.
+- The charmap has no em dash and no straight double quote. Dialogue uses `…`, `-` and “ ”.
+
+Five more for Act III:
+- **Species are the Aethos dex** (`design/dex/species/*.yaml` on `claude/aethos-dex-a7c73a`). Constants are written `SPECIES_<NAME>`. Only Aethos species appear before the League; the League itself is Aethos-only too, and the National Dex opens after the credits (D5 (a)).
+- **The starters.** `VAR_STARTER_MON`: 0 Nebrel (Grass), 1 Kynder (Fire), 2 Hipling (Water). Kleon leads with the line that beats yours: Pylakyon against Nebrel, Seismare against Kynder, Daphnyad against Hipling. Alethea has no starter (the third krater waits for Elpis, decision S9).
+- **Beats are numbered by STORY's ids:** III-1 to III-12 for Act III, L-1 to L-10 for the League and the epilogue, with letters for sub-beats (III-1A, III-1B). This keeps clear of Phase 2's beats 9–25 and Act II's numbering.
+- **Maps.** Act III's own maps are named here. Maps that belong to the slice, Phase 2 or Act II (Kaldera, Arkadia, Astyra, Kirrha, Elaia) are written with their likely ids and marked *(Act II's id)* or *(slice)*; their owners' ids win.
+- **Flags, vars and trainer ids.** This file names them; the build claims them from this session's ranges in `tools/ichor/claim_ranges.md`: IchorSave bank flags at offsets 0x200–0x2FF (`claim.py bankflag`), daily flags 0x58–0x63, bank vars 12–17, and trainer ids 320–499. Hidden items can also use the vanilla flag ranges that hoenn-cut's batch 2 frees. Systems with reserved ranges (herms, constellations, sherds, prophecy tablets, pages, gifts, altars, theoxenia, xenia) use those, per `design/ENGINE_API.md`.
+
+---
+
+## Act III in one paragraph
+
+Mom is gone, Kleon is a Titan, Alethea is an exile, and the Titans hold all three pieces of the sickle. At Kaldera's harbor Daphne sails home to Astyra to sit with a friend's sick daughter, and sends you west after Alethea's letter. The voyage is long: the trireme puts in at Melos, where an armless marble goddess on the hillside watches you only when you look away. On Kythera, where Aphrodite came ashore on the foam, Titan crews are commandeering every hull for Knossa, and two Titan guests eat a fisherman out of his house while he smiles, because the law says a host can't refuse. Alethea is waiting on the quay: she was only exiled from Astyra. At the Spring of Kallirhoe a youth has knelt over his own reflection so long the moss has grown over his knees, and Galatea, the living marble, tells you what that is: love that won't let a thing change isn't love, it's a pool. You win the Foam Laurel among her watching statues, the Naiads of the Neraida falls give you the Horn of Achelous, and the trireme makes Amnisos by dawn. Under the palace of Knossa you walk the seven rings of the Labyrinth on Ariadne's red thread, free a frightened bull named Starry, stop Kleon killing him, and watch the kind healer of Astyra take off a golden mask. In the archive you find a sealed tablet with a little girl's name on it. Kleon goes home to Lakonia to ask Iapetos to his face, and in the kitchen of the house he grew up in, the Titan in the closed bronze helmet comes home and takes it off: she is his mother. She read his prophecy wrong. It never said he'd die. Kleon melts the forgery in the hearth, Iapetos comes for his deserter and slips away, Alethea scrapes the wax of Elpis's tablet and finds the Pythia's true words underneath, and Kleon battles you clean for the first time in his life, with nothing written either way. The Horn climbs the Kastalian falls to Delphoi, where every Titan in Aethos is camped among the laurels. The Pythia, who has said one word at a time for a year, beats you in a temple of sunbeams and then says a whole sentence: your mother's name. At the spring at dusk, in a bee-priestess's veil you've never seen, Mom tells you everything: the one-hour thread, the Spinner who took it back, the night under the old olive, and the two hundred and twelve rigged games of knucklebones. That night the Titans storm the Omphalos, it cracks, and you go down to the Loom with the jar of honey that was never for you. Three old women in chains ask you to cut them free, knowing what Phaedon will do with it, and you do. The world stops. You walk it alone, gray and silent but for a music box, waking the Cutter at Talos's anvil, the Measurer at the Pool of Mnemosyne, and the Spinner under the olive you were born beneath. In a bedroom in Astyra a father finally reads his daughter's real prophecy and understands that he made it come true. Kleon breaks his own thread by will, and together you climb the Stair of Hours, beat the healer and his blind lieutenant, and then Kleon carries his enemy down the crumbling stair where no one will ever see. You beat the Lord of Time, and still nothing moves, until the Moment comes running down the edge of the falling sickle and you seize it by the forelock. Time starts again at dawn. Mom says you came back up. Elpis wakes, finishes her song, and says her thread isn't finished yet. Then the frightened world wants certainty back. Iapetos is voted into exile with the same urn he used. On Olympus, past four Pantheon seats, the Archon tells you he spared you as a baby because your mother fed him honey, and then fights you for the last knot of the Fates' chains. You win it and untie it together, and it turns gold and blows away south. A year later, at the next Klotheia, Halia can't read anyone, Kleon comes second to a Wooloo, Elpis gets the third krater, and Daphne asks her old question one more time. You can answer: WE'LL SEE.
+
+**The dread,** one line each, rising to the Loom:
+- The Titans are taking every ship. Nobody asks where; everyone knows.
+- A Kronist on Kythera's quay: "The cloth runs out at Delphoi. Ask anyone. Ask the Pythia."
+- In Lakonia the elders count the boys every morning, as if some might be gone.
+- At Delphoi the Pythia says nothing to anyone, all day; the melissai say she's stopped sleeping.
+- On the night of the Omphalos the stars over Parnassos are all in the wrong places by a hand's width, and a music box ticks somewhere under the ground.
+
+**The hope,** one line each, after the Stair:
+- A herald shouting the news the wrong way round and laughing about it.
+- The Pythia laughing.
+- On Kronion Hill, the hum has stopped and the sheep are fine.
+- On the stump of Athena's olive, a shoot a cubit long.
+
+---
+
+## The route plan
+
+The chains follow the revised `design/AETHOS_MAP.md` (main, 7e6f4123cf: Routes 1–34 in story order, plus the Ascent and the Bull Road), with its `MAPSEC_*` names from `include/constants/region_map_sections_ichor.h`. Act III "rewards backtracking" (MAP_DESIGN §5): new relics open old places, and the road to Delphoi runs back through Act II's Arkadia. Every leg is a long voyage or two or three routes with a waypoint between. The story travels by trireme; the sea routes can also be surfed with Poseidon's Conch.
+
+**The chains**
+- **Route 22, the long voyage:** Kaldera *(Act II)* → the *Euploia*, Route 22 west across 12 cells of sea → **Melos**, a morning ashore (obsidian, the armless Aphrodite) → Route 22 on to Cape Malea → **Skandeia**, Kythera's harbor.
+- **Kythera Isle:** Skandeia → the Foam Road → **Paphia**, the temple town. Off the Foam Road: the Spring of Kallirhoe and Echo's sea caves below it. North of Paphia: the Neraida falls (the Horn of Achelous), a dead end with a reward.
+- **Route 23, to Knossa:** Skandeia → the *Euploia* along Knossa's north coast (Antikythera's islet and wreck lie on it, optional) → **Amnisos** → the **Bull Road** → the **Palace of Minos** and the Labyrinth (LABYRINTH §2–§7). **Mt. Ida** is optional.
+- **To Lakonia:** Amnisos → the *Euploia* back along Route 23 to Skandeia (a call) → **Route 24**, the strait off Malea → **Gytheion**, Lakonia's port (a waypoint with a healer) → **Route 25** up the Eurotas → **Lakonia**.
+- **To Delphoi:** Lakonia → **Route 26**, north past the battle school's training grounds → **Lake Stymphalia**, the marsh, a waypoint on the main path → **Route 27** over the hills → Arkadia *(Act II)* → Routes 12 and 11 *(Act II)* → Aigion → the Gulf ferry, Route 10 *(Act II)* → **Kirrha** *(Act II)* → **Route 28**, the Sacred Olives and the Kastalian Gorge (the Horn of Achelous) → **Delphoi**.
+- **Under Delphoi:** the Omphalos court → the Omphalos stair → the Loom.
+- **The Frozen Hour:** Delphoi, Kaldera's forge *(Act II)*, the Pool of Mnemosyne in Arkadia *(Act II)*, Astyra *(Act II)*, Elaia's old olive *(slice)*, by Daedalus's Wings and the herms, then the Stair of Hours.
+- **The League:** Astyra *(Act II)* for the morning after and the trial → Delphoi → **Route 29** over Parnassos, past the Korykian cave → **Thermopylai**, the hot gates → **Route 30** across the Thessalian plain under Pelion → **the Vale of Tempe**, the last healer → **the Ascent**: the Foothills, the Weeping Cliff, the Ice Caves, the Snowfields, the Crags → the Gate of the Horai → the Pantheon's four seats → the Summit → the Hall of Heroes → the credits → Elaia, the next Klotheia.
+
+```
+ [KALDERA] (Act II) == Route 22 ==== (MELOS) ==== Route 22 ==== Cape Malea
+                                                                    |
+                    the Neraida falls (Horn) -- [PAPHIA] -- Foam Road -- [SKANDEIA], Kythera
+                                                  temple of      |            |       \
+                                                  Aphrodite   Kallirhoe    Route 24    Route 23 (Antikythera) ==> [AMNISOS]
+                                                              Echo's caves    |                                     |
+                                                                         (GYTHEION)                             Bull Road
+                                                                              |                                     |
+                                                                          Route 25                         PALACE OF MINOS -- Mt. Ida
+                                                                              |                                     |
+                                                                         [LAKONIA]                         the LABYRINTH (LABYRINTH.md)
+                                                                              |
+                                                                          Route 26
+                                                                              |
+                                                                     (LAKE STYMPHALIA)
+                                                                              |
+                                                                          Route 27
+                                                                              |
+                     Kirrha (Act II) == ferry == Aigion -- Routes 11, 12 -- [ARKADIA] (Act II)
+                        |
+                    Route 28: the Sacred Olives, the Kastalian Gorge (Horn)
+                        |
+                    [DELPHOI] -- the Omphalos -- the LOOM; the Stair of Hours
+                        |
+                    Route 29 over Parnassos (the Korykian cave)
+                        |
+                    (THERMOPYLAI) -- Route 30, Thessaly -- (VALE OF TEMPE) -- the Ascent -- Gate of the Horai -- PANTHEON -- Summit
+```
+
+**Connections, map by map.** Sizes are in tiles; a GBA screen is 15×10. Interiors are listed in each region's rosters. The region parts below may refine a size; their numbers win.
+
+| # | Map | Size | Section | Joins |
+|---|---|---|---|---|
+| 1 | `MAP_TRIREME_EUPLOIA_DECK` (Phase 2's) or an Act III deck | 24×16 | — | Kaldera, Melos, Skandeia, Amnisos, Gytheion, by scripted warps |
+| 2 | `MAP_ROUTE22_MYRTOAN_SEA` | long sea route | `MAPSEC_AETHOS_ROUTE_22` | Optional, by Surf: Kaldera's west coast to Cape Malea, with Melos on it. The story crosses it by trireme. |
+| 3 | `MAP_MELOS` | about 30×24 | `MAPSEC_MELOS` | The story trireme's stop. Joins Route 22. |
+| 4 | `MAP_KYTHERA_SKANDEIA` | 40×30 | `MAPSEC_KYTHERA_ISLE` | The quay (east). West edge: the Foam Road. Bays to Routes 23 and 24. |
+| 5 | `MAP_KYTHERA_FOAM_ROAD` | 64×24, about 4.5 screens | `MAPSEC_KYTHERA_ISLE` | East edge: Skandeia. West edge: Paphia. North side: the Spring of Kallirhoe. |
+| 6 | `MAP_KYTHERA_SPRING_OF_KALLIRHOE` | 26×22 | `MAPSEC_KYTHERA_ISLE` | South edge: the Foam Road. A stair in the rock: Echo's caves. |
+| 7 | `MAP_KYTHERA_ECHO_CAVES` | 32×26 | `MAPSEC_KYTHERA_ISLE` | Optional. Up: the spring. A sea mouth to Route 23 by Surf. |
+| 8 | `MAP_KYTHERA_PAPHIA` | 44×34 | `MAPSEC_KYTHERA_ISLE` | East edge: the Foam Road. North edge: the Neraida falls. The temple at the top. |
+| 9 | `MAP_KYTHERA_NERAIDA_FALLS` | 30×44, about 4 screens tall | `MAPSEC_KYTHERA_ISLE` | South edge: Paphia. Waterfalls (the Horn) to the upper pool, a dead end with a reward. |
+| 10 | `MAP_ROUTE23_CRETAN_SEA` | long sea route | `MAPSEC_AETHOS_ROUTE_23` | Optional, by Surf: Skandeia's south bay along Knossa's north coast to Amnisos. Antikythera's islet and wreck. |
+| 11 | Amnisos, the Bull Road, the Palace of Minos, Mt. Ida, the Labyrinth | per LABYRINTH §2 and §4 | `MAPSEC_AMNISOS`, `MAPSEC_BULL_ROAD`, `MAPSEC_PALACE_OF_MINOS` (with the Labyrinth), `MAPSEC_MT_IDA` | Amnisos's quay to the trireme |
+| 12 | `MAP_ROUTE24_MALEA_STRAIT` | sea route | `MAPSEC_AETHOS_ROUTE_24` | Optional, by Surf: Skandeia's north bay to Gytheion's harbor |
+| 13 | `MAP_GYTHEION` | 36×28 | `MAPSEC_GYTHEION` | The quay (south). North edge: Route 25. The causeway east to the islet of Kranai. A healer: a fly target. |
+| 14 | `MAP_ROUTE25_EUROTAS` | 32×70, about 6 screens tall | `MAPSEC_AETHOS_ROUTE_25` | South edge: Gytheion. North edge: Lakonia. |
+| 15 | `MAP_LAKONIA` | 52×42 | `MAPSEC_LAKONIA` | South edge: Route 25. North edge: Route 26. |
+| 16 | `MAP_ROUTE26_SKIRITIS` | about 3 screens | `MAPSEC_AETHOS_ROUTE_26` | South edge: Lakonia. North edge: Lake Stymphalia. |
+| 17 | `MAP_LAKE_STYMPHALIA` | 40×40 | `MAPSEC_LAKE_STYMPHALIA` | The marsh, crossed by a causeway on the main path. South: Route 26. North: Route 27. |
+| 18 | `MAP_ROUTE27_ARKADIAN_HILLS` | about 3 screens | `MAPSEC_AETHOS_ROUTE_27` | South: Lake Stymphalia. North-west: Arkadia *(Act II's seam: agree the columns)*. |
+| 19 | `MAP_ROUTE28_SACRED_OLIVES` | 56×26, about 4 screens | `MAPSEC_AETHOS_ROUTE_28` | West edge: Kirrha *(Act II)*. East end: the Kastalian Gorge. |
+| 20 | `MAP_ROUTE28_KASTALIAN_GORGE` | 30×56, about 5 screens tall | `MAPSEC_AETHOS_ROUTE_28` | South: the Sacred Olives. North, up the falls (the Horn): Delphoi. |
+| 21 | `MAP_DELPHOI` | 52×46 | `MAPSEC_DELPHOI` | South edge: the gorge. North-west: Route 29 (the Korykian path; its far end opens at L-5). |
+| 22 | `MAP_KORYKIAN_CAVE` | 28×24 | `MAPSEC_AETHOS_ROUTE_29` | Optional, off Route 29's lower slope; open before the climax |
+| 23 | `MAP_DELPHOI_OMPHALOS_STAIR` | 14×40 | `MAPSEC_DELPHOI` | Down from the cracked Omphalos to the Loom |
+| 24 | `MAP_THE_LOOM` | 34×14, one screen tall and two wide | `MAPSEC_DELPHOI` | The cavern. The Stair of Hours rises from it after the cut. |
+| 25 | `MAP_STAIR_OF_HOURS` | 24×110 | `MAPSEC_DELPHOI` | Twelve landings, from the Omphalos court into the gray sky |
+| 26 | `MAP_ROUTE29_PARNASSOS` | about 4 screens | `MAPSEC_AETHOS_ROUTE_29` | Delphoi to Thermopylai, over Parnassos. Gate: the climax (L-5). |
+| 27 | `MAP_THERMOPYLAI` | waypoint | `MAPSEC_THERMOPYLAI` | The hot gates: hot springs that heal, Lakonian veterans holding the pass. Routes 29 and 30. |
+| 28 | `MAP_ROUTE30_THESSALY` | about 4 screens | `MAPSEC_AETHOS_ROUTE_30` | The Thessalian plain under Pelion. Thermopylai to Tempe. |
+| 29 | `MAP_VALE_OF_TEMPE` | waypoint | `MAPSEC_VALE_OF_TEMPE` | Where Daphne became the laurel; the last healer. Route 30 and the Ascent. |
+| 30 | `MAP_ASCENT_FOOTHILLS` … `MAP_ASCENT_CRAGS` | per the League road part | `MAPSEC_THE_ASCENT` | Tempe to the Gate of the Horai |
+| 31 | `MAP_OLYMPUS_GATE` | 30×24 | `MAPSEC_MOUNT_OLYMPUS` | The Gate of the Horai, above the clouds: the last Asclepeion and Agora. North: the Pantheon. |
+| 32 | `MAP_PANTHEON_ARES`, `_POSEIDON`, `_ATHENA`, `_HERA` | each unique | `MAPSEC_MOUNT_OLYMPUS` | In order. No way back down once the first seat is entered, as in Emerald. |
+| 33 | `MAP_OLYMPUS_SUMMIT` | 24×20 | `MAPSEC_MOUNT_OLYMPUS` | The Archon's altar |
+| 34 | `MAP_HALL_OF_HEROES` | 20×16 | `MAPSEC_MOUNT_OLYMPUS` | The Hall of Fame |
+
+**Real geography behind it.**
+- Melos sits on the way from Thera to Cape Malea. Its obsidian was traded across the Aegean for thousands of years before anyone worked bronze, and in 1820 a farmer dug up the armless Aphrodite there.
+- Kythera lies off Cape Malea. Its ancient harbor was Skandeia, on the east coast, and its sanctuary of Aphrodite Ourania was among the oldest in Greece; Herodotus says the Phoenicians founded it. Hesiod has Aphrodite drift past Kythera on the foam before coming ashore on Cyprus, which is why the bible's Kythera is "Cyprus / Paphos". The real Neraida waterfall is at Mylopotamos, on the west side.
+- Antikythera is the next island south. Sponge divers found a wreck off it in 1900, and in the wreck a bronze box of gears that counted the days, the moon and the games: the oldest calculator in the world, a clock for the hours.
+- Gytheion was Sparta's port on the Lakonian Gulf. Paris and Helen spent their first night together on its islet, Kranai. The road up the Eurotas valley to Sparta passes Amyklai, where Apollo killed his friend Hyakinthos with a discus and the Hyakinthia mourned him every summer.
+- Sparta had no walls ("our walls are our men"). Its boys went to the agoge at seven, cut reeds from the Eurotas for their beds with their bare hands, and ate black broth in the mess halls. North of it the Skiritis, a hill country whose men were Sparta's scouts, leads up toward Arkadia. AETHOS_MAP puts Lake Stymphalia on that road, as the bible has it.
+- Delphi's port was Kirrha. Between them lies the sacred plain, which it was a sacrilege to farm, and it is still a sea of olives. The Kastalian spring rises in the cleft of the Phaedriades, the two shining cliffs above the sanctuary. The Korykian cave above Delphi belonged to Pan and the nymphs.
+- North over Parnassos, Thermopylai's hot springs gave the pass its name, where three hundred Spartans held the road. Beyond the Thessalian plain, under Pelion of the centaurs, the river Peneios runs through the Vale of Tempe below Olympus: where Daphne became the laurel, and where Apollo went to be purified after killing the Python.
+- In the *Iliad* (5.749) the Horai, the Hours, keep the gate of Olympus, a gate of cloud.
+
+## Pacing and levels
+
+Act III is the longest act: about 13 hours on a first run, with about 2 more optional. Levels follow `design/BALANCE.md`'s rows for Kythera, Knossa, Lakonia, Delphoi, the climax, and the Ascent and Pantheon. No map's wild band is wider than 5, and the bands rise along the road.
+
+| Stretch | BALANCE row | Time | Wild levels | Trainer levels | Boss |
+|---|---|---|---|---|---|
+| Kaldera to Kythera: Route 22 by trireme, with a morning on Melos | Kythera | 30 min | 38–42 (Melos; fishing) | 42–43 | — |
+| *Optional:* Route 22 by Surf | Kythera | 15 min | 38–43 | 42–44 | — |
+| Skandeia | Kythera | 20 min | 38–42 (fishing) | 42–43 | — |
+| The Foam Road | Kythera | 15 min | 39–43 | 42–45 | — |
+| The Spring of Kallirhoe; Echo's caves (optional) | Kythera | 15 min | 40–44 | 43–45 | — |
+| Paphia | Kythera | 15 min | — | — | — |
+| The Temple of Aphrodite | Kythera | 20 min | — | 44–46 | Galatea 46 / 46 / 47 / 47 / 48 |
+| The Neraida falls | Kythera | 15 min | 41–45 | 44–47 | — |
+| *Optional:* Route 23 and Antikythera | Kythera | 15 min | 40–45 | 43–45 | — |
+| Knossa: Amnisos, the Bull Road, the Palace, the Labyrinth | Knossa | 3 h | 42–49 (LABYRINTH §9) | 45–50 | Hyperion 50–53; Kleon 51–54 |
+| *Optional:* Mt. Ida | Knossa | 20 min | 44–48 | 47–49 | — |
+| Routes 23 and 24 back by trireme; *optional* Route 24 by Surf | Lakonia | 15 min | 45–49 | 48–50 | — |
+| Gytheion | Lakonia | 15 min | 45–48 (fishing) | — | — |
+| Route 25, the Eurotas | Lakonia | 20 min | 46–50 | 49–51 | — |
+| Lakonia | Lakonia | 40 min | 47–50 (the school's fields) | 50–53 | Iapetos 52–54; Kleon 53–55 |
+| Route 26, Lake Stymphalia, Route 27 | Lakonia | 40 min | 47–50; Lernip 28–30 in rain | 50–53 | — |
+| Arkadia, Routes 12 and 11, the ferry (Act II's maps) | — | 15 min | Act II's tables | — | — |
+| Route 28: the Sacred Olives | Delphoi | 15 min | 48–51 | 52–54 | — |
+| Route 28: the Kastalian Gorge and the Titan muster | Delphoi | 20 min | 48–52 | 52–55 | — |
+| Delphoi | Delphoi | 20 min | 48–52 (the precinct at night; the Kastalian pools) | 53–55 | — |
+| *Optional:* the Korykian cave | Delphoi | 20 min | 49–52 | 53–55 | — |
+| The Temple of Apollo | Delphoi | 25 min | — | 54–56 | Phemonoe 55 / 55 / 56 / 56 / 57 |
+| The Kastalian spring (Mom) | Delphoi | 10 min | — | — | — |
+| The Omphalos at night | climax | 15 min | — | 56–57 | Two Gigas 56–57, with Rhea beside you |
+| The Loom | climax | 10 min | — | — | — |
+| The Frozen Hour | climax | 50 min | none (wild encounters are off) | — | — |
+| The Stair of Hours | climax | 20 min | — | — | Kronos (Phaedon) 58–60 and Hyperion 57–59, with Kleon beside you; the Lord of Time 60 |
+| The resolution | climax | 10 min | — | — | — |
+| Astyra: the morning after, the trial | League | 20 min | — | — | — |
+| Route 29, Thermopylai, Route 30, Tempe | Ascent | 45 min | 52–55 | 56–58 | — |
+| The Ascent | Ascent | 1 h 15 min | 54–58 | 58–62 | — |
+| The Pantheon | Pantheon | 40 min | — | — | Brasidas 60–61, Themistokles 61–62, Hypatia 62–63, Olympias 63–64 |
+| The Summit | Pantheon | 15 min | — | — | the Archon 65–67 |
+| The credits and the epilogue | — | 15 min | — | — | — |
+
+The curve runs Talos's ace 43 → Galatea's 48 → Hyperion's 53 and Kleon's 54 → Iapetos's 54 and Kleon's 55 → Phemonoe's 57 → Kronos's 60 and the Lord of Time's 60 → Olympias's 64 → the Archon's 67, which tracks Emerald's Wallace 46 → Elite Four 49–57 → Wallace 58, about ten levels higher at the top, as BALANCE intends.
+
+---
+
+## Conventions for Act III
+
+### Trainers
+
+Format: the `src/data/trainers.party` syntax, as in the slice and Phase 2. Moves are listed only where they differ from the default (the last four level-up moves in the dex learnset), and every listed move must be in the species' dex learnset at or below that level, or in its teachable list (a TM the trainer could have).
+
+| Who | IVs | AI | Items |
+|---|---|---|---|
+| Route trainers | 14 | Basic Trainer | — |
+| Titanborn grunts | 14 | Basic Trainer | — |
+| Gigas | 20 | Basic Trainer | one Hyper Potion |
+| Acolytes | 20 | Basic Trainer | — |
+| Kleon | 24; his starter 31 | Basic Trainer, Check Bad Move | two Hyper Potions; Full Restores from Lakonia on |
+| Hierophants (Galatea, Phemonoe) | 24; the ace 31 | Basic Trainer, Check Bad Move | two Full Restores |
+| Titan admins (Iapetos; Hyperion on the Stair) | 24; the ace 31 | Basic Trainer, Check Bad Move | two Full Restores |
+| Kronos (Phaedon) | 31 | Basic Trainer, Check Bad Move, Try To Faint | two Full Restores |
+| The Pantheon | 31 | Basic Trainer, Check Bad Move, Try To Faint, Smart Switching | three Full Restores |
+| The Archon | 31 | as the Pantheon | four Full Restores |
+| Partners (Rhea, Kleon) | as their own row | partner AI | none |
+
+- **Spartan difficulty** needs its own boss teams from Balance (the level cap is each stage's boss ace), as in the slice. **Mortal** bosses are 3 levels lower.
+- **Trainer ids 320–499 are Act III's**, the League included (hoenn-cut batch 1, `tools/ichor/claim_ranges.md` on `claude/hoenn-cut-db6209`): defined only in the "world-act3" block of `include/constants/opponents.h`, with `TRAINERS_END_ACT3` set to the highest id + 1, and the parties under `/* Ichor: world-act3 */` in `src/data/trainers.party`. Flags always by constant, never by number (`SYSTEM_FLAGS` moves to 0x860).
+- **Trainer constants** are `TRAINER_ICHOR_<NAME>`, unique across the game (grep the slice and Phase 2 before naming). Kleon has one constant per starter, as in Phase 2: `TRAINER_ICHOR_KLEON_LAKONIA_PYLAKYON`, `_SEISMARE`, `_DAPHNYAD`. Partners are `PARTNER_ICHOR_<NAME>`.
+- **Evolved forms in late areas** (BALANCE's rule): a route trainer's Pokémon is the evolved form wherever its evolution level is below the trainer's level. Only stone, trade and friendship evolutions may stay unevolved, and then only with a reason.
+- **Wild tables** follow BALANCE's two rulings: late areas' main tables carry the evolved forms at the band's levels, and no wild Pokémon is ever evolved earlier than its evolution level allows. First stages appear only in small named spots at lower levels, in swarms and omens, or by breeding. Act III's spots, from the dex team (`design/dex/DECISIONS.md`): the cradle shrine (Knossa, Kymbash 33), the reed-bed nests (the Stymphalian marsh, Chalkip 33), the oldest altar (Delphoi, Pyrapod 32 at night), the ice caves' side grotto (the Ascent, Pagoshard 40). Omens (SYSTEMS §6): the Sporadon swarm in Lakonia's training fields (38), the Hymnet cygnet at the Kastalian spring at dawn (33), the Kryopuff snow on the Ascent's lowest slopes (38). Lernip is the exception: a rare rain-only hunt in the Stymphalian marsh at 28–30.
+- **Fossils:** Monophant and Sepidart are revive-only at 35, in Daedalus's workshop.
+
+**New trainer classes.** Names fit `TrainerClass.name[13]`. Each needs a front portrait and a walker. Classes already in the game (the slice, Phase 2 and LABYRINTH: ACOLYTE, AUGUR, BEEKEEPER, FISHER, GOATHERD, HARVESTER, HIEROPHANT, HOPLITE, INITIATE, JESTER, LAKONIAN, MERCHANT, PILGRIM, POTTER, RUNNER, SAILOR, SCHOLAR, SHEPHERD, SWINEHERD, TITAN ADMIN, TITANBORN, GIGAS, MINOAN PRIEST, BULL-LEAPER, AUTOMATON) are reused wherever they fit.
+
+| Class | Who | Portrait | Walker | Placeholder pic |
+|---|---|---|---|---|
+| SCULPTOR | Kythera's and Paphia's marble carvers | a dusty carver with a mallet and a half-freed marble face | new | Hiker |
+| DIVER | Kythera's and Antikythera's sponge divers | a lean diver with a stone weight on a cord and a net bag of sponges | the swimmer, recolored | Swimmer M / F |
+| HIERODULE | not used | — | — | — (Aphrodite's acolytes are ACOLYTEs, to avoid the word's history) |
+| CADET | the Lakonian agoge's boys and girls | a cropped-haired youth in a short red cloak, barefoot, with a reed in hand | new, red; shares the LAKONIAN walker's palette | Camper / Picnicker |
+| SCOUT | the Skiritai on Route 8 | a hill-scout in a felt cap with a sling and a short spear | new | Ruin Maniac |
+| MELISSA | Delphoi's bee-priestesses | a pale-gold veil with a honeycomb hem, a clay smoker | new; Mom's melissa sprite shares its palette | Lady |
+| KITHARODE | singers training for the Pythian games | a robed singer with a big kithara | new | Gentleman |
+| PROPHETES | Delphoi's verse-priests (Iapetos's old office) | a priest in white with a wax tablet and a laurel sprig | new | Psychic M |
+| MOUNTAINEER | climbers on the Ascent | a climber in a fleece cloak with a staff and a coil of rope | new | Hiker |
+| VETERAN | old hoplites on the Ascent, the "old veteran" archetype | a gray hoplite with a dented shield | the HOPLITE walker, gray | Black Belt |
+| PANTHEON | the four seats | each its own portrait | each its own walker | Elite Four |
+| ARCHON | Aristeides | see STORY §2 | his own | Champion |
+
+Ex-Titanborn on the Ascent keep the TITANBORN class with their helmets pushed back.
+
+### Flags, vars and save state
+
+- **Story state is in flags**, as in Phase 2. Knossa keeps LABYRINTH §13's two vars, `VAR_ICHOR_KNOSSA` and `VAR_ICHOR_LABYRINTH`. Act III adds **one** bank var, `VAR_ICHOR_ACT3`, so the whole act's scripts can test "after this beat" with one compare instead of chains of flags. Its values are fixed here; every region uses them.
+
+  | Value | Set when | Beat |
+  |---|---|---|
+  | 0 | Act II ends (Kydippe's letter read) | II-14 |
+  | 1 | You board the *Euploia* at Kaldera | III-1B |
+  | 2 | You land at Skandeia | III-1C |
+  | 3 | You win the Foam Laurel | III-1G |
+  | 4 | You receive the Horn of Achelous | III-1H |
+  | 5 | You land at Amnisos (`VAR_ICHOR_KNOSSA` runs inside Knossa) | III-3 |
+  | 6 | The dawn after the Icarus Shaft (LABYRINTH scene L) | III-3 |
+  | 7 | You land at Gytheion | III-5A |
+  | 8 | The helmet comes off | III-5E |
+  | 9 | Iapetos is beaten and slips away | III-5F |
+  | 10 | Kleon's clean battle is won | III-5I |
+  | 11 | You reach Delphoi | III-6C |
+  | 12 | You win the Sun Laurel | III-6D |
+  | 13 | Mom gives you Melitta's Honey | III-7 |
+  | 14 | The Omphalos opens | III-8 |
+  | 15 | You cut the chains: the Frozen Hour begins | III-9 |
+  | 16 | Kleon wakes | III-10 |
+  | 17 | The multi battle on the Stair is won | III-11 |
+  | 18 | You seize the Moment: time restarts | III-11 |
+  | 19 | Elpis's line, and Ophiuchus | III-12 |
+  | 20 | The Archon's decree is read in Astyra | L-1 |
+  | 21 | Iapetos is ostracized | L-2 |
+  | 22 | The pass over Parnassos opens (Route 29's palisade, after the trial) | L-5 |
+  | 23 | You enter the first Pantheon seat | L-7 |
+  | 24 | You beat the Archon | L-8 |
+  | 25 | The credits have rolled | L-9 |
+  | 26 | The epilogue is done: the post-game | L-10 |
+
+- **The Frozen Hour** is an engine mode, not a var: `FLAG_ICHOR_FROZEN_HOUR` switches it on (Engine needs, below). Its progress is in flags: `FLAG_ICHOR_ROUSED_CUTTER`, `FLAG_ICHOR_ROUSED_MEASURER`, `FLAG_ICHOR_ROUSED_SPINNER`, `FLAG_ICHOR_PHAEDON_READ_TABLET`, `FLAG_ICHOR_GOT_UNFINISHED_DECREE`, `FLAG_ICHOR_WORE_MELITTAS_CLOAK`.
+- **The Laurels** are the vanilla badge flags, `FLAG_BADGE07_GET` (the Foam Laurel) and `FLAG_BADGE08_GET` (the Sun Laurel).
+- **Relics** follow SYSTEMS §1: `FLAG_ICHOR_GOT_HORN_OF_ACHELOUS`, and Knossa's three in LABYRINTH §13.
+- **Herms:** `FLAG_ICHOR_HERM_KYTHERA`, `_KNOSSA` (LABYRINTH's), `_ROUTE25` (the Eurotas), `_ROUTE26`, `_ROUTE28` (the Kastalian gorge), `_THERMOPYLAI`, `_ASCENT`, in the herm range. The region parts name the ones they place.
+- **Constellations** (SYSTEMS §8): Cygnus at the Foam Laurel; Taurus, Corona Borealis, Pleiades and Capricornus at Knossa (LABYRINTH); Corvus at the Sun Laurel; Ophiuchus at the resolution; Aquila on beating the Archon; the Unwoven at the credits.
+- **Prophecy fragment 8** (the widow of Lakonia) is in Lakonia. Fragments 1–7 belong to Acts I and II.
+- **Amphorae:** #11, the judgement of Paris, from Kythera's four dig spots; #12, Theseus, from Knossa's (LABYRINTH).
+
+### Key items new in Act III
+
+| Item | What it is | Where |
+|---|---|---|
+| `ITEM_FOAM_LAUREL`, `ITEM_SUN_LAUREL` | Not items: badges 7 and 8 | — |
+| `ITEM_HORN_OF_ACHELOUS` | Relic 8, Waterfall | Kythera, the Naiads of the Neraida falls |
+| Ariadne's Thread, the Labrys, the Helm of Darkness | Relics 9–11 | Knossa (LABYRINTH) |
+| `ITEM_KLEONS_DRAFT` | Iapetos's wax draft of Kleon's prophecy ("He'll run straight at it.") | The Ring VI archive (LABYRINTH scene H) |
+| `ITEM_SEALED_TABLET` | "ELPIS, DAUGHTER OF PHAEDON. Revised." Sealed with a little hook. After Lakonia its description changes: Alethea's line is written under the forgery. | The Ring VI archive (STORY §7.4) |
+| `ITEM_MELITTAS_HONEY` | The jar labelled NOT FOR {PLAYER}. Used up at the Loom. | Delphoi, from Mom (STORY §7.5) |
+| `ITEM_UNFINISHED_DECREE` | "DECREE OF THE GOLDEN AGE… its Keeper shall be Iape-" | Optional. The Stoa, in the Frozen Hour |
+| `ITEM_MEDONS_KNOT` | The last knot of the chains. Untied on the Summit; it leaves the bag at once. | The Summit (STORY §7.10) |
+
+### Music
+
+Every cue Act III needs, so the regions name the same ones. Modes and meters follow PITCH §7 and STORY's music plan; the rules there bind (the lullaby never resolves until Elpis; the Frozen Hour has only the music box; the home theme's countermelody is withheld until the spring).
+
+| Cue | Where | Brief |
+|---|---|---|
+| `MUS_ICHOR_KYTHERA` | Skandeia, Paphia | Lydian, warm: lyre and a slow swaying 6/8 like a swell under a boat. Doves in the percussion (finger cymbals). |
+| `MUS_ICHOR_FOAM_ROAD` | Kythera's routes | The town theme opened out: aulos over surf. |
+| `MUS_ICHOR_KALLIRHOE` | the spring and Echo's caves | One phrase, and its echo a bar later, quieter. Nothing else. |
+| `MUS_ICHOR_TEMPLE_APHRODITE` | Galatea's Gallery | Mixolydian; a music-box-like plucked kithara that **stops whenever a statue moves**, so silence means danger. |
+| `MUS_ICHOR_BATTLE_HIEROPHANT` (Phase 2's) | Galatea, Phemonoe | — |
+| `MUS_ICHOR_AMNISOS` … `MUS_ICHOR_ICARUS` | Knossa | LABYRINTH §9's fourteen cues |
+| `MUS_ICHOR_LAKONIA` | Gytheion, the Eurotas Road, Lakonia, Route 8 | The Lakonian march: a slow 7/8 frame drum and a pipe, Dorian, spare. Few notes, like the people. |
+| `MUS_ICHOR_HEARTH_ONLY` | Rhea's kitchen (§6.9) | No track: the hearth crackle (an ambient SE loop). When Kleon speaks again, a frame drum alone in 7/8. |
+| `MUS_ICHOR_BATTLE_RIVAL` (the slice's) | Kleon | At Lakonia a **clean** arrangement: the same tune with the Titan 9/8 layer taken out. |
+| `MUS_ICHOR_BATTLE_ADMIN` (Phase 2's) | Iapetos, with his aulos-chorus layer; Hyperion on the Stair, with his forge layer | — |
+| `MUS_ICHOR_DELPHOI` | the Sacred Olives, the gorge, Delphoi | Dorian, high and bright: kithara over a bee-hum drone. The melody is a Pythian nome. |
+| `MUS_ICHOR_TITAN_MUSTER` | the camps on the slopes | `MUS_ICHOR_TITAN` (exists) at half tempo, with a crowd's chant |
+| `MUS_ICHOR_TEMPLE_APOLLO` | the Pythian Light | Lydian; a single sustained chord that brightens as each beam lands |
+| `MUS_ICHOR_HOME_COUNTER` | the Kastalian spring (§6.10), and Elaia's town theme forever after | Elaia's home theme in the arrangement it was written for: lyre and a woman's hum, **with the countermelody, heard for the first time** |
+| `MUS_ICHOR_OMPHALOS_NIGHT` | the night battle at the gate | The Titan theme and Delphoi's theme at once, fighting for the bar |
+| `MUS_ICHOR_FATES` | the Loom; each sanctuary in the Frozen Hour, one voice each | Three voices: Nemira a lyre, Lotira an aulos, Thanira a frame drum. All three together only at the Loom and on the Stair. |
+| `MUS_ICHOR_MUSIC_BOX` | the Frozen Hour, everywhere | Elpis's lullaby ticked slowly on a comb, missing its last bar. No other track may play. |
+| `MUS_ICHOR_KRONOS` | the multi battle on the Stair | The lullaby slowed and made enormous, Phrygian, full ensemble |
+| `MUS_ICHOR_LORD_OF_TIME` | the Lord of Time | The meter changes every phrase, 7/8 to 9/8 to 5/8 and back |
+| `MUS_ICHOR_LULLABY_RESOLVED` | Elpis's line | Her hum, all the way through. It resolves to the tonic, for the first time in the game. |
+| `MUS_ICHOR_MAIN_THEME` (the title's) | the end of the Stair; the credits | Lydian, rising |
+| `MUS_ICHOR_ASCENT` | the Ascent | The main theme in Mixolydian, slow and climbing, with wind |
+| `MUS_ICHOR_OLYMPUS_GATE` | the Gate of the Horai | Quiet and high: harmonics and a slow pulse, a lobby before the storm |
+| `MUS_ICHOR_PANTHEON` | the four seats | A battle theme in 9/8 with each god's color on top: Ares brass, Poseidon surf, Athena aulos, Hera a low drone |
+| `MUS_ICHOR_ARCHON` | the Summit | Mixolydian, stately, kithara and drum. It stops on "Gods help you." |
+| `MUS_ICHOR_HALL_OF_HEROES` | the Hall | A short fanfare |
+| `MUS_ICHOR_CREDITS` | the credits | The main theme, and under it in the second half, Elaia's home theme with its countermelody |
+
+### Tilesets
+
+Biome tilesets are secondaries on the `aethos` primary (ART_PLAN §1), drawn at 128 px wide and compiled with Porytiles, with palettes planned first (6 primary, 7 secondary). At most 504 tiles per secondary, and 496–511 left free where a map uses wide doors. Each region's art section lists its pieces.
+
+| Tileset | Biome | Used by |
+|---|---|---|
+| `kythera` | sea-foam coves: white marble and pink stone, myrtle and roses, foam-white surf, scallop-shell motifs, doves | Skandeia, the Foam Road, the spring, Paphia, the falls |
+| `temple_aphrodite` | (may fold into `kythera`) the gallery's statues, bronze mirrors, rose marble | the Temple of Aphrodite |
+| `knossa`, `labyrinth` | LABYRINTH §11 | Knossa |
+| `lakonia` | the battle school: an unwalled town of plain houses, plane trees, Eurotas reeds and oleanders, the agoge's sand yard and ring, bronze shields, the dark Taygetos wall | Gytheion, Route 25, Lakonia, Route 26, Lake Stymphalia, Route 27 |
+| `delphoi` | Parnassos's slopes: the shining Phaedriades cliffs, terraces of treasuries, the temple, the theater and stadium, laurels and pines, the Kastalian spring, the sea of olives below | Route 28 (the Sacred Olives, the gorge), Delphoi, Route 29 and the Korykian cave |
+| `loom` | the cavern of the Loom (posts, beam, animated warp threads, the red knots, the last row, the chasm) and the Stair of Hours (pale stone landings, frozen sundials, gray sky) | the Omphalos stair, the Loom, the Stair |
+| `thessaly` | the road north: Thermopylai's steaming springs and the Phokian wall, the Thessalian plain's wheat and horse pastures under Pelion's forest edge, the Peneios's plane trees and laurels in the Vale of Tempe | Thermopylai, Route 30, the Vale of Tempe |
+| `olympus` | above the clouds: snowfields, ice caves, crags and eagle nests, a sea of cloud, the gate of cloud, the Pantheon's halls, the summit altar | the Ascent, the Gate, the Pantheon, the Summit, the Hall |
+
+The Frozen Hour needs no tileset: the engine grays the palettes. It needs **herm head variants** (one metatile per facing) in the `aethos` primary, where the herms live.
+
+---
+
+# Part 1. Scenes
+
+## Beat III-1A. Kaldera: Daphne goes home
+
+Per STORY III-1 and the Act II hand-off (II-14). Status: NEW.
+
+**Setup.** The morning after Kydippe's letter. The player wakes at Kaldera *(Act II's rest point)* and walks down to the harbor, `MAP_KALDERA_HARBOR` *(Act II's id, provisional)*. An `ON_FRAME` script runs once with `VAR_ICHOR_ACT3` = 0 and Act II's last flag set (`FLAG_ICHOR_KYDIPPE_LETTER`, *Act II's name*). Daphne sits on a bollard with a traveling bag at her feet and a wax-sealed letter in her lap. The *Euploia* is moored behind her. The ash has stopped falling.
+```text
+DAPHNE: There you are. I didn't sleep either. Don't tell anyone.
+
+DAPHNE: I'm meant to be the wise one. Wise people sleep.
+
+DAPHNE: I'm going home. Astyra, I mean. Home's a strange word this week.
+
+DAPHNE: Phaedon's girl is poorly, and he's away so much.
+
+DAPHNE: Somebody should sit with her. Read to her. She likes the olive one.
+```
+[She holds up the letter.]
+```text
+DAPHNE: And this came last night, with the fish. From Alethea.
+
+DAPHNE: It's addressed to me. Truthfully, it's for you.
+```
+[A sign window, in Alethea's hand.]
+```text
+Daphne. I'm on Kythera. I'm allowed: they only threw me out of Astyra.
+
+Everywhere else is outside the walls. I checked.
+
+The Titans are taking every ship on the island. Every hull with oars.
+
+They say it's for Knossa. They say it loudly, on the quay.
+
+Truthfully, I'd like company. Send {PLAYER}. -A.
+```
+```text
+DAPHNE: Their whole fleet rowed past the caldera at midnight. Westward.
+
+DAPHNE: Kythera for the ships. Knossa after.
+
+DAPHNE: That's the order my book put things in, too.
+
+DAPHNE: I wish I'd written a shorter book.
+```
+[She lifts a leather satchel from her bag.]
+```text
+DAPHNE: Take her these. Tracings. The palace frescoes at Knossa.
+
+DAPHNE: I made them in my Library days, from older tracings. She'll know.
+
+{PLAYER} took the satchel of tracings.
+```
+[Daphne stands and looks at the player for a moment.]
+```text
+DAPHNE: And {PLAYER}. Your mother.
+
+DAPHNE: Wherever she's gone, she chose it. She always chooses.
+
+DAPHNE: She's better at hiding than I am. And I hid for thirteen years.
+
+DAPHNE: Go on. Nausikles has been pretending not to listen.
+```
+[Nausikles, by the gangplank, coils a rope that is already coiled.]
+```text
+NAUSIKLES: Kaldera to Kythera. Two days' row, with water at Melos.
+
+NAUSIKLES: Wind willing. Titans willing.
+
+NAUSIKLES: Aboard? Once we're out, we don't turn back.
+```
+?? YES/NO
+```text
+> YES:
+NAUSIKLES: Good. Mind the oars. They still don't mind you.
+
+> NO:
+NAUSIKLES: Take your time. The Titans aren't.
+```
+[YES: Daphne waves from the quay with both arms, like someone who doesn't wave often. Fade out. Set `FLAG_ICHOR_DAPHNE_SAILED_ASTYRA` (hides her at Kaldera; she appears in Astyra per Act II's Phaedon's house), set `VAR_ICHOR_ACT3` = 1 and warp to the deck at night (Open questions 1 on the deck map). The voyage is Route 22, `MAPSEC_AETHOS_ROUTE_22`: twelve cells of sea, west past Melos to Cape Malea, the longest voyage of Act III.]
+
+**Design note.** "Phaedon's girl is poorly, and he's away so much" reads as a kind friend's worry the first time. After Knossa it is the reason Phaedon is never home: he is under an island, forging a sickle. Daphne isn't hiding it; she doesn't know (STORY III-4).
+
+## Beat III-1B. Route 22, by night
+
+Per STORY III-1 ("Titan ships are requisitioned for Knossa"). Status: NEW.
+
+**The map.** The *Euploia*'s deck at night: the DNS night tint, the sail down, the rowers' chant low and slow below decks. Nausikles is at the steering oars, a lookout at the bow, and two passengers who will battle (Part 3). The rail can be fished (Part 4). The voyage ends when the player talks to Nausikles or sleeps on the cargo, whichever comes first.
+
+[On arrival, a coord trigger two tiles from the bow. The lookout points west.]
+```text
+LOOKOUT: Ships. West. No lamps.
+```
+[The camera pans to the western rail. A string of low black shapes on the horizon, hull-down, all in a line, all going the same way. Oars dip without a sound.]
+```text
+LOOKOUT: Nine. Ten. Twelve. All rowing the same way.
+
+LOOKOUT: Not a lamp between them.
+
+NAUSIKLES: Titans. Let them go. We're not racing anyone tonight.
+```
+[The camera pans back. Nausikles leans on the steering oar and looks at the water behind the ship.]
+```text
+NAUSIKLES: Look at the wake.
+
+NAUSIKLES: It's running ahead of us. Thirty years at sea and I never saw that.
+
+NAUSIKLES: The sea's going the wrong way again. Like the tide at Akti.
+```
+**The sailors.** Other NPCs on deck have one line each, so the dread builds as the player walks the deck:
+```text
+OARSMAN: The Pythia doesn't even say soon now. She doesn't say anything.
+
+PASSENGER: My cousin's a seer on Paros. She's stopped reading.
+
+PASSENGER: She says it's all one day now.
+
+OLD SAILOR: Kythera's where she came ashore. Aphrodite. On the foam.
+
+OLD SAILOR: The foam's still there. Mind you, so's everything else.
+```
+**Nausikles, to end the night.**
+```text
+NAUSIKLES: Sleep, if you can. We make Melos at first light.
+
+NAUSIKLES: Water, bread, and on. Kythera's a long way yet.
+```
+?? YES/NO (Sleep?)
+```text
+> YES:
+NAUSIKLES: I'll wake you when there's land. Or Titans. Whichever.
+
+> NO:
+NAUSIKLES: Suit yourself. The fish don't sleep either.
+```
+[YES: fade to black. Morning. Fade in on `MAP_MELOS`'s jetty, the *Euploia* moored off the hamlet with her boat run up on the shingle. Set `FLAG_ICHOR_REACHED_MELOS` and run beat III-1B2.]
+
+## Beat III-1B2. Melos: a morning ashore
+
+Per AETHOS_MAP (Melos: "An obsidian dig site, and an Aphrodite rite before Kythera"). Status: NEW.
+
+**Setup.** The *Euploia* puts in at Klima, a fishing hamlet on Melos's great round bay, for water. The hamlet is a row of boathouses at the waterline with brightly painted doors, a jetty, a well, and three houses climbing the slope behind. Above them, terraced fields; above the fields, a hillside that glitters black in the sun: obsidian. On arrival an `ON_FRAME` script runs once.
+```text
+NAUSIKLES: Melos. Water, bread, and an hour to stretch your legs.
+
+NAUSIKLES: Every ship that ever sailed past here stopped here. For the water.
+
+NAUSIKLES: And the glass. See the hill? It's black glass, all of it.
+
+NAUSIKLES: People came here for knives before anyone knew how to make bronze.
+```
+[A beat. He looks at the beach. A long line of keel-marks runs down into the water, fresh.]
+```text
+NAUSIKLES: The Titans watered here too. Last night, by the look of it.
+
+NAUSIKLES: Go on. I'll fill the jars. Come back when you've had your look.
+```
+[The player is free on `MAP_MELOS`. Its households, the obsidian slope and the statue are in Part 2; the statue's rite is Part 5.]
+
+**The statue in the field.** On the middle terrace, in a stone niche in the terrace wall, stands a marble woman half sunk in the earth, her robe slipping from her hips, both arms gone at the shoulder. An old bronze mirror is propped against the opposite wall, facing her. The farmer who found her, Kentrios, is hoeing beside the niche. A coord trigger on the terrace's stair runs once.
+```text
+KENTRIOS: Careful on the terrace. Mind the lady.
+
+KENTRIOS: Found her last spring. My hoe hit her shoulder. I nearly died.
+
+KENTRIOS: She'd been down there longer than my family's been up here.
+
+KENTRIOS: Aphrodite, the priest at Kythera says. I'd have guessed that.
+
+KENTRIOS: No arms. I dug the whole field for her arms. Not a finger.
+```
+[He leans on the hoe.]
+```text
+KENTRIOS: I'll tell you something odd. You'll think I've been in the sun.
+
+KENTRIOS: She turns. Her head. When you're not looking at her.
+
+KENTRIOS: She faced the sea when I stood her up. Now she faces whoever's here.
+
+KENTRIOS: I put the old mirror up so she could see herself. She liked that.
+
+KENTRIOS: She doesn't turn while she's in the mirror. Try it. Go on.
+```
+[The rite (Part 5): walk the terrace path to the niche. Turning aside lets her head turn after you; walking toward the mirror, or toward her, she stays still. Nothing happens if she turns. It's a taste of the Temple of Aphrodite, with no penalty.]
+
+**At the niche.** Facing her:
+```text
+A marble woman, half in the earth, with no arms. She's looking at you.
+
+You're fairly sure she was looking at the sea a moment ago.
+
+Make an offering to Aphrodite?
+```
+?? YES/NO. YES opens the offering menu (SYSTEMS §3: she loves Frankincense, and likes Pretty Feathers and sea gifts; a Pearl works). On the first offering:
+```text
+You lay it at the foot of the niche.
+
+The sea wind drops for a moment. Somewhere, a dove calls.
+
+KENTRIOS: Ha. She liked that. I can tell. She's facing the sea again.
+```
+[Aphrodite Favor at SYSTEMS §3's rates, +5 more the first time (the rite's bonus). Set `FLAG_ICHOR_MELOS_RITE`. Kentrios's household gift follows in Part 2.]
+
+**Design note.** The armless statue that turns when you look away is the gallery on Kythera in one gentle object: the rule (watched things stay put) and the mirror (a mirror counts as watching), with nothing at stake. On Kythera the statues walk. In the Frozen Hour everyone is a statue, and nobody turns at all.
+
+**Sailing on.** Nausikles, at the jetty:
+```text
+NAUSIKLES: Jars are full. Kythera, then. We'll see Malea by sunset.
+```
+?? YES/NO (Sail on?)
+```text
+> YES:
+NAUSIKLES: Good. Leave the glass. It cuts.
+
+> NO:
+NAUSIKLES: The jars won't get any fuller. But all right.
+```
+[YES: fade out. Run beat III-1B3.]
+
+## Beat III-1B3. Cape Malea
+
+Status: NEW. A short passage on the deck, in the afternoon light of the script, whatever the clock says (no tint is forced).
+
+[The deck. A great gray headland rises off the starboard bow, its cliffs straight down into a rough sea. The sail fills and the rowers rest.]
+```text
+NAUSIKLES: Malea. Round that, the old sailors say, and you forget your home.
+
+NAUSIKLES: We're not rounding it. Kythera's just off the point.
+
+OLD SAILOR: My father rounded Malea once. He came back. He said.
+
+OLD SAILOR: He never did remember which house was ours.
+```
+[Fade out. Fade in on `MAP_KYTHERA_SKANDEIA`'s quay, the *Euploia* berthed. Set `FLAG_ICHOR_CROSSED_ROUTE22` and run beat III-1C.]
+
+## Beat III-1C. Skandeia: the requisition
+
+Per STORY III-1. Status: NEW.
+
+**Setup.** On first entry with `FLAG_ICHOR_CROSSED_ROUTE22` set: set `VAR_ICHOR_ACT3` = 2 and `FLAG_ICHOR_VISITED_SKANDEIA` (fly). An `ON_FRAME` script runs. The harbor is crowded and wrong: every fishing boat has been hauled up the slip and chalked with a sickle; a line of Titanborn carry oars past, ten at a time. A Titan crew boss stands at the *Euploia*'s gangplank with a wax tablet.
+```text
+MOLYBDOS: Trireme, three banks, one captain. Good. She's requisitioned.
+
+MOLYBDOS: For Knossa. Orders of the Hand.
+
+NAUSIKLES: She's the Euploia. She's been requisitioned by better than you.
+
+NAUSIKLES: By the sea, mostly. She won.
+
+MOLYBDOS: The sea's not here. I am.
+```
+[Molybdos turns to the player.]
+```text
+MOLYBDOS: You. Off the ship? Then you're crew. Crew fights for the hull.
+
+MOLYBDOS: May your thread never be cut. Now let's see about your Pokémon.
+```
+[Battle `TRAINER_ICHOR_MOLYBDOS`. Defeat line in Part 3. After:]
+```text
+MOLYBDOS: Fine. Keep your tub. We've got forty already.
+
+MOLYBDOS: Forty-one, with the fish boat. Nobody wanted the fish boat.
+```
+[He chalks a line through the tablet and stamps off down the quay. Set `FLAG_ICHOR_EUPLOIA_KEPT`. Nausikles pats the gangplank.]
+```text
+NAUSIKLES: Forty boats. For one island. What are they carrying, a mountain?
+
+NAUSIKLES: I'll be here. She's not moving without me, and I'm not moving.
+```
+**The Kronist.** On the quay steps, a man in plain clothes with a sickle pin stands on a crate. A little crowd of dockhands listens with their arms folded. Talking to him (or walking past within 2 tiles, once):
+```text
+KRONIST: Ask any seer on this island. Go on. Ask.
+
+KRONIST: Every thread ends on the same day. Every one. Yours. Mine.
+
+KRONIST: The cloth runs out at Delphoi. Ask anyone. Ask the Pythia.
+
+KRONIST: She won't answer. She can't. We can.
+
+KRONIST: May your thread never be cut, friend.
+```
+?? Multichoice: NOR YOURS / NO THANKS
+```text
+> NOR YOURS:
+KRONIST: Ha! You know the words. Come to the feast. There's always bread.
+
+> NO THANKS:
+KRONIST: Everybody says that. Then their seer stops talking to them.
+```
+A dockhand in the crowd, after:
+```text
+DOCKHAND: He's right about the seers. That's what I can't get past.
+
+DOCKHAND: The rest, I don't know. But he's right about the seers.
+```
+[The player is free. A coord trigger at the head of the quay, where the town's main street begins, runs beat III-1C2 once.]
+
+## Beat III-1C2. Alethea, and the bad guests
+
+Per STORY III-1 (Alethea rejoins) and SYSTEMS §10 (bad guests). Status: NEW.
+
+[Alethea runs down the street with a trowel in one hand and a half-eaten fig in the other. She stops in front of the player, out of breath.]
+```text
+ALETHEA: {PLAYER}! You came. Truthfully, I wasn't sure the letter would.
+
+ALETHEA: The gulls here are mostly decorative.
+
+ALETHEA: And yes. I'm allowed. They only exiled me from Astyra.
+
+ALETHEA: I read the decree twice. It doesn't say a word about islands.
+```
+[She looks at the player properly.]
+```text
+ALETHEA: …You look awful. What happened?
+```
+[The player takes out Kydippe's letter. Alethea reads it. Hold 60 frames.]
+```text
+ALETHEA: Oh.
+
+ALETHEA: {PLAYER}. I'm sorry. I'm so sorry.
+
+ALETHEA: “She knew. I don't know how.” That sounds like her.
+
+ALETHEA: Then we keep going. That's what I've got.
+
+ALETHEA: Truthfully, it's all I've ever got.
+```
+[The player hands over the satchel. She opens it on the spot and spreads a tracing against the wall: a bull, a leaping youth, dolphins.]
+```text
+ALETHEA: Daphne's tracings. Oh, she kept these. She swore she'd burned them.
+
+ALETHEA: The palace at Knossa. Bulls. Dolphins. A man with lilies on his head.
+
+ALETHEA: Forty Titan boats, all for Knossa. And Daphne sends me Knossa.
+
+ALETHEA: She knew. Of course she knew. It's in her book. Last chapter.
+```
+[She rolls the tracing up.]
+```text
+ALETHEA: Come and eat first. There's a man here who'll feed anyone.
+
+ALETHEA: That's the problem.
+```
+[She walks to the door of `MAP_KYTHERA_SKANDEIA_AXYLOS_HOUSE` and waits. Set `FLAG_ICHOR_ALETHEA_REJOINED`. Inside: Axylos, an old fisherman with a white beard and patched sleeves, stands at a long table. Two Titanborn sit at it with their helmets pushed back and their boots on the bench. The table is covered in fish bones and empty bowls. A goat's tether hangs from a peg with no goat on it.]
+```text
+AXYLOS: Guests! Sit. Eat first.
+
+AXYLOS: Then tell me who you are. Not before.
+
+OCHROS: There's no more bread, old man.
+
+AXYLOS: There's always more bread.
+```
+[Axylos takes the last loaf from the shelf and sets it in front of them. Psephos tears it in half without looking up.]
+```text
+PSEPHOS: And the wine.
+
+AXYLOS: And the wine.
+```
+[Alethea leans in to the player.]
+```text
+ALETHEA: Three days. They've eaten his fish, his figs and both his goats.
+
+ALETHEA: He keeps smiling. He has to. It's the law.
+
+ALETHEA: A host can't refuse a guest. Zeus watches the door.
+
+ALETHEA: Nobody ever said anything about guests refusing guests, though.
+```
+?? Challenge the Titan guests? YES/NO
+```text
+> NO:
+ALETHEA: …Truthfully, I'd have said no too. Then I'd have hated myself.
+```
+[NO: the player is free; talking to Axylos or the guests asks again.]
+```text
+> YES:
+OCHROS: The kid wants the table. Hear that, Psephos?
+
+PSEPHOS: I heard. I'm still eating.
+
+OCHROS: Eat faster.
+```
+[A double battle: `TRAINER_ICHOR_OCHROS` and `TRAINER_ICHOR_PSEPHOS` together. After:]
+```text
+OCHROS: Bad bread anyway.
+
+PSEPHOS: It was good bread.
+
+OCHROS: It was good bread.
+```
+[They take their helmets and go. At the door Psephos turns round, puts a coin on the table, thinks better of it, and takes it back. They're gone. Set `FLAG_ICHOR_BAD_GUESTS_GONE`; Zeus Favor +5 (SYSTEMS §10).]
+```text
+AXYLOS: Well! Now there's room at the table.
+
+AXYLOS: Sit. Both of you. I've got… I've got olives.
+
+AXYLOS: I've always got olives.
+```
+[He heals the party. Then he takes a little bronze ring from a nail over the hearth, broken clean in two, and gives the player half.]
+```text
+AXYLOS: My father had a guest-friend in Amnisos, on Knossa. And I have his son.
+
+AXYLOS: Thirty years since either of us crossed. But the ring remembers.
+
+AXYLOS: Take him my half. He'll feed you. He has to. It's the law.
+
+{PLAYER} received half of a Broken Ring!
+```
+[Set `FLAG_ICHOR_XENIA_BROKEN_RING_1` (SYSTEMS §10's Broken Ring chain: Kythera → Amnisos → Lakonia → Delphoi). From now on Axylos's house is Skandeia's xenia host: heal, and a bed until a chosen hour.]
+```text
+ALETHEA: I'm going to walk up to the temple town. Paphia. Come with me?
+
+ALETHEA: There's a spring on the way I want to see. Everyone says it's sad.
+
+ALETHEA: I'll go ahead. Catch me up on the Foam Road. Truthfully, I'll be digging.
+```
+[She leaves. Hide Alethea in Skandeia (`FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA`), show her at Aphrodite's rock on the Foam Road.]
+
+**Design note.** The bad guests are the Odyssey's suitors in miniature, and they come before Knossa on purpose: the player has just watched a man keep a law that costs him everything because the law is older than him. That is the Archon's secret, played small (STORY §2: "You don't harm the house that feeds you").
+
+## Beat III-1D. The Foam Road
+
+Per STORY III-1. Status: NEW.
+
+**The walk.** The road leaves Skandeia's west gate and runs along the island's south shore to Paphia. Its beats are in Part 2. Two scenes play on it.
+
+**Aphrodite's rock.** Halfway along, a great white rock stands in the shallows, and the surf breaks round it in a collar of foam that never quite goes away. Alethea kneels on the beach beside it with her trowel. A coord trigger runs once with `FLAG_ICHOR_ALETHEA_REJOINED` set.
+```text
+ALETHEA: There you are. Look. That's the rock.
+
+ALETHEA: Where she came ashore on the foam. Aphrodite. They say.
+
+ALETHEA: Hesiod says she sailed past Kythera first and landed on Cyprus.
+
+ALETHEA: Kythera says Hesiod was seasick and missed it.
+```
+[She points the trowel at a patch of turned earth above the tide line.]
+```text
+ALETHEA: Somebody's dug here and given up. Badly. Go on. You've got a trowel.
+```
+[The dig spot is the first of amphora #11's four sherds. Digging it gives a potsherd painted with three women's feet in a row and one golden apple (Part 6).]
+```text
+{PLAYER} dug up a potsherd!
+
+Three pairs of feet in a row, painted in black. And a golden apple.
+
+ALETHEA: Three goddesses and one apple. The judgement of Paris.
+
+ALETHEA: He gave it to her. Aphrodite. She promised him the loveliest woman alive.
+
+ALETHEA: She was already married. It went badly. Ten years badly.
+
+ALETHEA: There'll be more pieces on the island. There always are.
+```
+[Set `FLAG_ICHOR_SHERD_PARIS_1`. Alethea walks off north toward the spring gap. Hide her here, show her at the spring.]
+
+**The great herm.** At the road's fork (Part 2, beat 4) stands Kythera's great herm. Anointing it follows SYSTEMS §4 and sets `FLAG_ICHOR_HERM_KYTHERA`. Its plinth:
+```text
+A herm of Hermes, the oil on his face long dried.
+
+His plinth reads: WEST, PAPHIA AND THE GODDESS. NORTH, THE SPRING.
+```
+
+## Beat III-1D2. Hermes at the herm (theoxenia E1)
+
+Per SYSTEMS §10, extended tier, E1. Status: SYSTEMS. Optional.
+
+**The gate.** The messenger appears at the Foam Road's great herm only when the core three theoxenia are done (`FLAG_ICHOR_THEOXENIA_DEMETER`, `_HEPHAESTUS` and `_POSEIDON`, *ichor-engine's names*). Poseidon's falls after Laurel 7, so most players meet Hermes on a return to Kythera, by Wings or by trireme. Hermes always comes first in the strangers' chain. He stays until his test is passed.
+
+**The tells.** He has no shadow. The player's follower bows when it comes within 3 tiles of him. The Augur's Eye on this map adds: "Something here is watching you."
+
+[A young man sits on the herm's plinth with his feet in a puddle of dust. They are bare and bleeding.]
+```text
+MESSENGER: Sandals. You've got sandals. Good ones. Winged, almost.
+
+MESSENGER: I had sandals. I'm a messenger. I've a message for Paphia.
+
+MESSENGER: I won't get there by sunset on these feet. Look at them.
+
+MESSENGER: Lend me yours? I'll wait for you at the herm by Paphia's gate.
+
+MESSENGER: You'd have to walk. No running. The whole way.
+```
+?? Lend him your Talaria? YES/NO
+```text
+> NO:
+MESSENGER: Fair. Most people say no. I'll sit here and bleed a bit more.
+
+> YES:
+{PLAYER} handed over the Talaria.
+
+MESSENGER: Ah. Ahh. Whoever made these knew feet.
+
+MESSENGER: See you at the gate. Don't hurry. You can't.
+```
+[YES: set `FLAG_ICHOR_TALARIA_LENT`. Running (hold B) is off until the player reaches Paphia's gate herm. The messenger walks west and is hidden here (`FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD`) and shown at Paphia's gate (`FLAG_ICHOR_HIDE_HERMES_PAPHIA` cleared). If the player Flies or warps away instead, he is back at the Foam Road herm next time, wearing the Talaria, and the test resumes from there ("MESSENGER: You took a shortcut. I could tell. Your feet are clean.").]
+
+**The reveal, at Paphia's gate herm** (SYSTEMS §10's text, word for word). [He sits on the herm's base, swinging his feet, wearing your Talaria.]
+```text
+MESSENGER: There you are. Fine sandals. Whoever made these knew feet.
+
+MESSENGER: Most people say no. Some say yes, then chase me for them.
+
+MESSENGER: You just walked. The whole way. Without much whining.
+```
+[He stands. There is no shadow under him. There never was.]
+```text
+HERMES: Look at my feet, {PLAYER}. No shadow. Bad habit of ours, pretending.
+
+HERMES: Remember it. We're about. More than you'd think.
+
+HERMES: Your sandals. I loosened the left strap. You're welcome.
+
+HERMES: And this. A tortoise. My first lyre was a tortoise shell. Don't tell him.
+
+{PLAYER} received a Squirtle from Hermes!
+```
+[The gift per SYSTEMS §10: Squirtle Lv 45, White Herb, Modest, Rain Dish, god-taught Shell Smash, 3 perfect IVs, Cherish Ball, the Xenia Ribbon, fateful, met as "a guest-gift of Hermes". Hermes Favor +15. Clear `FLAG_ICHOR_TALARIA_LENT`, set `FLAG_ICHOR_THEOXENIA_HERMES`, hide Hermes. The Stranger omen kind (SYSTEMS §6) is now live.]
+
+**Design note.** Hermes teaches the first tell, "No shadow", on Kythera, the act before the Frozen Hour. In the Frozen Hour one shadowless figure moves on an Astyra rooftop (engine E18). A player who did this test will know who it is.
+
+## Beat III-1E. The Spring of Kallirhoe
+
+Per STORY III-1 ("Narcissus bends over his own reflection forever") and STORY §2, Galatea. Status: NEW.
+
+**Setup.** `MAP_KYTHERA_SPRING_OF_KALLIRHOE` is a glade in the myrtle above the sea: a round pool fed by a thin fall from a rock lip, ringed with narcissus flowers, with a stair cut into the rock that goes down to the sea caves. At the pool's edge a young man kneels, looking down. Moss has grown over his knees and the backs of his hands. A Narcisheen bends beside him at the same angle.
+
+Alethea stands a few tiles back, as if she doesn't want to get closer. A coord trigger runs once on entry.
+```text
+ALETHEA: There. Him. Don't walk too close. You'll ripple him.
+```
+[A beat. From the caves below, faintly:]
+```text
+VOICE: …ripple him.
+
+ALETHEA: That's the other one. You never see her. You only hear the end of things.
+
+ALETHEA: Truthfully, everyone here calls him Narkissos. He's never said.
+
+ALETHEA: Three summers he's knelt there. His mother brings him bread.
+
+ALETHEA: He doesn't eat it. The birds do.
+
+ALETHEA: I asked him once what he sees. He said, “Nothing that will ever leave.”
+
+VOICE: …ever leave.
+```
+[She turns away from the pool.]
+```text
+ALETHEA: He isn't sad. That's what's horrible. He's happy. He'd stay forever.
+
+ALETHEA: I'm going on to Paphia. I'll see you at the bay.
+```
+[Alethea leaves by the south path. Hide her here, show her on Paphia's jetty. Set `FLAG_ICHOR_SAW_KALLIRHOE`.]
+
+**The youth.** Talking to him:
+```text
+A young man kneels at the water's edge. He doesn't look up.
+
+YOUTH: Shh. He's just about to smile.
+
+VOICE: …about to smile.
+```
+Again:
+```text
+YOUTH: You can look too. He doesn't mind. He never minds anything.
+
+VOICE: …minds anything.
+```
+**The pool.** Checking the water:
+```text
+The pool is perfectly still. You see the sky, the myrtle, and yourself.
+
+Your reflection looks a little older than you remember.
+```
+**Narcibulb.** A sign by the pool, scratched on a flat stone:
+```text
+“Bulbs planted at this spring turn their faces to the water and change.”
+
+“Nowhere else on Kythera. Nowhere else at all.”
+```
+(Narcibulb evolves into Narcisheen only when it levels up on this map, as the dex has it.)
+
+## Beat III-1F. Paphia: Alethea goes ahead
+
+Per STORY III-1 and LABYRINTH §2's arrival ("Alethea is on the quay, sent ahead by Daphne with a satchel of tracings"). Status: NEW.
+
+**Setup.** Paphia climbs a hill above a small west-facing bay. On first entry with `FLAG_ICHOR_SAW_KALLIRHOE` or `FLAG_ICHOR_ALETHEA_REJOINED` set, a coord trigger at the top of the jetty stair runs once (`FLAG_ICHOR_ALETHEA_SAILED_KNOSSA` unset). A fat little sailing boat with a single brown sail is tied at the jetty, its deck stacked with clay jars sealed with wax. It smells of thyme. Alethea sits on a jar with the satchel on her knees.
+```text
+ALETHEA: There you are. Look at this. A honey boat. From Amnisos.
+
+ALETHEA: The Titans took everything with oars. This has a sail and a smell.
+
+ALETHEA: They didn't want it. It's going home to Knossa tonight.
+
+ALETHEA: I'm going with it.
+```
+[She stands.]
+```text
+ALETHEA: You've got a temple to do. I'm no use in temples.
+
+ALETHEA: They're riddles. You know how I feel about riddles.
+
+ALETHEA: I'll read the frescoes before the Titans break them.
+
+ALETHEA: Daphne's tracings against the real walls. Truthfully, I can't wait.
+
+ALETHEA: Meet me on the quay at Amnisos. I'll be the one covered in plaster dust.
+```
+?? YES/NO (Be careful?)
+```text
+> YES:
+ALETHEA: Me? I'm always careful. It's everyone else who's the problem.
+
+> NO:
+ALETHEA: Good. Neither will you. I'll see you there.
+```
+[She climbs aboard. The honey boat's skipper casts off without a word. The boat slides out of the bay and its sail goes small against the sea. Set `FLAG_ICHOR_ALETHEA_SAILED_KNOSSA`; hide Alethea and the boat. The Knossa writer shows her on Amnisos's quay.]
+
+**Pygmalion.** The temple town's own story is told by its households (Part 2). The one the player should meet before the temple is Pygmalion, in his workshop by the temple stair, an old sculptor with marble dust in his beard. He is Galatea's husband. His lines are in his roster entry; he ends them by pointing up the stair:
+```text
+PYGMALION: She's up there now. She'll fight you. She fights everybody.
+
+PYGMALION: She used to stand very still.
+
+PYGMALION: I was never so glad of anything as when she stopped.
+```
+
+## Beat III-1G. The Temple of Aphrodite: Galatea
+
+Per SYSTEMS §12 #7 and STORY §2, the Twelve. Status: NEW + SYSTEMS. The rite itself is Part 5.
+
+**Entering.** The temple stands at the top of Paphia's stair, white marble veined with pink, roses climbing its columns, doves on the roof ridge. Inside the door, the temple guide Charis stands beside a dove-shaped altar (Aphrodite's rites, SYSTEMS §3; she loves Frankincense and likes Pretty Feathers and sea gifts).
+```text
+CHARIS: Welcome to the house of the goddess. Mind the statues.
+
+CHARIS: They're very beautiful. And very jealous.
+
+CHARIS: Look at them, and they stand still. Look away, and they come closer.
+
+CHARIS: A statue you can see in a mirror is a statue you can see.
+
+CHARIS: If one touches you, you'll find yourself back at the door of that room.
+
+CHARIS: No harm done. Only pride.
+
+CHARIS: The Living Marble waits in the rose court. She doesn't move either.
+
+CHARIS: Until she does.
+```
+**The safety valve.** Talking to Charis again offers a walk-through:
+```text
+CHARIS: Would you like me to show you the first room?
+```
+?? YES/NO. YES: Charis walks the teaching corridor herself, facing the mirror at its end the whole way. The statue behind her doesn't move. She turns aside once, deliberately; it slides a step toward her; she faces the mirror again and it stops. She walks back. "CHARIS: Like that. Faces and mirrors. Nothing else counts."
+
+**Galatea.** On the dais at the north end of the rose court stands a woman in a white chiton, perfectly still, one hand raised, her skin faintly veined like the marble around her. She doesn't react as the player approaches. While the player faces her, she does nothing. When the player has stepped onto the dais's bottom step, or turns away from her, she steps down.
+```text
+GALATEA: You looked away. Everyone does, in the end.
+
+GALATEA: Don't be embarrassed. I spent a long time being looked at.
+
+GALATEA: I was perfect once. Marble. Then someone loved me, and I cracked.
+
+GALATEA: It's the best thing that ever happened to me.
+
+GALATEA: I've cracked all over since.
+
+GALATEA: My statues are the ones who stayed perfect.
+
+GALATEA: They hate being looked away from.
+
+GALATEA: Show me what you love. And whether you'll let it change.
+```
+[Battle `TRAINER_ICHOR_GALATEA_1`, with `MUS_ICHOR_BATTLE_HIEROPHANT`. Defeat text: "There. A crack. They always start somewhere." After:]
+```text
+GALATEA: Well. That's how it's supposed to feel. I'd forgotten.
+
+GALATEA: Take this. The Foam Laurel. She came ashore on the foam, you know.
+
+GALATEA: Wet, cold, and not at all sure about any of it. Like everyone.
+
+{PLAYER} received the Foam Laurel from Galatea!
+```
+[Set `FLAG_BADGE07_GET`, `VAR_ICHOR_ACT3` = 3. The Star Chart chime: "A new star has appeared in your Star Chart: Cygnus, the swan." (SYSTEMS §8 #6.) Set `FLAG_ICHOR_CONSTELLATION_CYGNUS`.]
+```text
+GALATEA: And this. It's a kind light. It doesn't burn. It just shows things.
+
+{PLAYER} received TM Dazzling Gleam!
+```
+[Set `FLAG_ICHOR_GOT_TM_DAZZLING_GLEAM`.]
+```text
+GALATEA: You came by the spring, I expect. Everyone does.
+
+GALATEA: Did you see the boy?
+```
+?? YES/NO
+```text
+> YES:
+GALATEA: Then you saw the most faithful lover on this island.
+
+> NO:
+GALATEA: You walked right past him. People do. He doesn't notice.
+```
+```text
+GALATEA: He looks at the one face that will never get older or cross with him.
+
+GALATEA: Love that won't let a thing change isn't love. It's a pool.
+
+GALATEA: My husband learned that. It took him forty years and a goddess.
+```
+[She looks out of the court's open side, south-east, over the sea.]
+```text
+GALATEA: You're going to Knossa. All Kythera knows where the ships went.
+
+GALATEA: Ask the Knossans who their old queen loved.
+
+GALATEA: Then don't ask again.
+```
+[A beat. Then lighter:]
+```text
+GALATEA: One more thing. The falls north of town have gone quiet.
+
+GALATEA: Krenaia keeps sending to the temple for a laureled one.
+
+GALATEA: That's you now. Go and see what the water wants.
+```
+[Set `FLAG_ICHOR_GALATEA_FALLS_HINT`. Galatea returns to the dais and stands still again. Talking to her afterward:]
+```text
+GALATEA: I'm practicing standing still. I'm terrible at it now. Isn't it wonderful?
+```
+**After the Laurel** (MAP_DESIGN §4). The statues in every room stand on their plinths facing the dais and never move again. The mirrors stay where the player left them. The acolytes are marked beaten. Charis:
+```text
+CHARIS: The statues have turned to face her. They do that, when someone wins.
+
+CHARIS: They're sulking. It's very beautiful.
+```
+
+**Design note.** Galatea is the theme's voice for the act (STORY §2): the statue who came alive by being changed, against Narcissus, who would rather be a statue. In hindsight, Phaedon is the boy at the pool.
+
+## Beat III-1H. The Neraida falls: the Horn of Achelous
+
+Per SYSTEMS §1, myth-quest 8, "The Silent Falls". Status: SYSTEMS, with the words here.
+
+**Setup.** `MAP_KYTHERA_NERAIDA_FALLS` runs north from Paphia up a green ravine of plane trees and old water-mills to a tall double waterfall. The falls are silent: the water falls, white and steady, and makes no sound at all. The field's ambient water SE is switched off on this map until the quest is done, and its music drops to a single sustained note. At the foot of the falls stands the Naiads' spring-shrine: a stone basin, an altar, and on the altar a great curved bull's horn wreathed in dead flowers. Krenaia, the Naiads' priestess, sits on the basin's rim with her feet in the water.
+
+**Before the Laurel** (`FLAG_BADGE07_GET` unset):
+```text
+KRENAIA: Listen. No. Listen.
+
+KRENAIA: The water still falls. It just doesn't say anything.
+
+KRENAIA: I'll tell the goddess's champion, when there is one.
+
+KRENAIA: It's not for me to ask a stranger.
+```
+**After the Laurel:**
+```text
+KRENAIA: Galatea sent you? Good. Then you're laureled. Listen.
+```
+[Hold 60 frames of silence.]
+```text
+KRENAIA: That. That's the falls. They've said nothing since the spring.
+
+KRENAIA: Since the tide turned the wrong way at Kalliste, they tell me.
+
+KRENAIA: See the horn? That's the river's. Achelous. A river god.
+
+KRENAIA: He wrestled Herakles for a bride, once. As a bull. He lost a horn.
+
+KRENAIA: The Naiads filled it with fruit. It's never been empty.
+
+KRENAIA: Until this year. Everything's been running out this year.
+
+KRENAIA: Fill it again. Three fruits of the field. Whatever grows.
+```
+?? Offer three berries as first fruits? YES/NO (Needs 3 berries of any kind: First Fruits, SYSTEMS §3. The route's terraces have two berry trees, Part 2.)
+```text
+> NO, or fewer than 3 berries:
+KRENAIA: Three. Any three. The terraces below have bushes.
+
+KRENAIA: The river doesn't mind which.
+
+> YES:
+You lay three berries in the mouth of the horn.
+```
+[The dead flowers on the horn turn green, then bloom. The horn fills from inside with fruit, grapes, figs and pomegranates spilling over its lip. A beat. Then, all at once, the sound of the falls: a roar that fills the ravine. Shake the screen for 20 frames. The field's water SE comes back, and the map's music with it.]
+```text
+KRENAIA: There he is. Loud, isn't he? Rivers always are.
+
+KRENAIA: Take it. He'd want it to travel. Rivers don't sit still.
+
+KRENAIA: It climbs water the way he did.
+
+{PLAYER} received the Horn of Achelous!
+```
+[Set `FLAG_ICHOR_GOT_HORN_OF_ACHELOUS` and `VAR_ICHOR_ACT3` = 4. Aphrodite Favor +5. The Horn is relic 8, Waterfall, on the Relic Ring's prompt (SYSTEMS §1).]
+```text
+KRENAIA: The pool above the falls hasn't been seen in a year. Go and look.
+
+KRENAIA: Somebody's paper blew up there. A sketch of a dancing floor.
+```
+[Climbing the falls with the Horn leads to the upper pool (Part 2): Daedalus's page VII, the Minoan vault door, an optional trainer, and a ledge path back down.]
+
+**Daedalus's page VII.** In a crevice by the upper pool, weighted with a stone (LABYRINTH §1):
+```text
+A sheet of old papyrus, half dried into the rock.
+
+A sketch of a floor of five-by-five squares, each with a symbol.
+
+Notes in a cramped hand: “The crane dance. Seven turns.”
+
+“Theseus had it wrong.”
+
+{PLAYER} found Daedalus's page VII!
+```
+[Set `FLAG_ICHOR_DAEDALUS_PAGE_7`. Its content is LABYRINTH §1's: Ring VII, the whole crane dance.]
+
+**The vault door.** In the cliff behind the upper pool:
+```text
+A door cut into the cliff, with no handle. Only a hollow shaped like a double axe.
+
+Old paint flakes round its frame. Blue dolphins. Red bulls.
+```
+After `FLAG_ICHOR_GOT_LABRYS` (LABYRINTH): "Cleave the seal with the Labrys?" YES opens Kythera's Minoan vault (Part 5, Part 6).
+
+## Beat III-1I. Skandeia: "Amnisos by dawn"
+
+LABYRINTH §1, seed 13. Status: LABYRINTH.
+
+**Setup.** Nausikles waits at the *Euploia*'s gangplank. Before `VAR_ICHOR_ACT3` reaches 4:
+```text
+> before the Foam Laurel:
+NAUSIKLES: Temple first.
+
+NAUSIKLES: I won't sail into Titans with a crew that's won nothing.
+
+> after the Laurel, before the Horn:
+NAUSIKLES: Krenaia's boy was down here asking for you.
+
+NAUSIKLES: The falls, north of Paphia.
+
+NAUSIKLES: Go and see. I've waited forty years for less.
+```
+**With `VAR_ICHOR_ACT3` ≥ 4:**
+```text
+NAUSIKLES: Knossa, then. Where the forty boats went.
+
+NAUSIKLES: We'll make Amnisos by dawn.
+
+NAUSIKLES: Whatever you do there, don't go under the palace.
+```
+?? YES/NO (Sail now?)
+```text
+> YES:
+NAUSIKLES: I said don't. You heard me say don't. Remember that.
+
+> NO:
+NAUSIKLES: Finish up. Kythera's a hard place to leave. Everyone says so.
+```
+[YES: fade out. Set `FLAG_ICHOR_SAILED_FOR_KNOSSA`. Warp to the deck at night for the crossing, Route 23 along Knossa's north coast (`MAPSEC_AETHOS_ROUTE_23`, ten cells). No scene: the deck's objects are hidden except Nausikles and the lookout, who says "LOOKOUT: Land. And a lot of boats on it." Then warp to Amnisos's quay at dawn. The Knossa writer's arrival scene (LABYRINTH §2) takes over there and sets `VAR_ICHOR_ACT3` = 5.]
+
+**Later voyages.** From now on Nausikles runs the southern lanes on request: Kaldera, Melos, Skandeia, Amnisos and, after Knossa, Gytheion. Talking to him at any of those quays offers the others he has visited.
+
+## The trireme calls at Skandeia, on the way to Gytheion
+
+Between LABYRINTH's dawn (scene L, `VAR_ICHOR_ACT3` = 6) and Gytheion (`VAR_ICHOR_ACT3` = 7, the Lakonia writer's). Status: NEW. Optional.
+
+**Setup.** The *Euploia* sails from Amnisos with the player and Alethea aboard (the Knossa writer's hand-off) and puts in at Skandeia for water on the way north to Gytheion, Route 24 (the Lakonia writer's). The player lands on Skandeia's quay with `FLAG_ICHOR_SKANDEIA_CALL` set and is free on Kythera; Nausikles sails on when asked. Alethea waits at the gangplank (`FLAG_ICHOR_HIDE_ALETHEA_CALL` cleared).
+```text
+NAUSIKLES: Water, then Gytheion. Lakonia's a day up the gulf.
+
+NAUSIKLES: Your Lakonian boy went ahead on a fish boat. Before dawn. Didn't wait.
+```
+**Alethea**, at the gangplank:
+```text
+ALETHEA: A sky. Truthfully, I'd forgotten what one looked like.
+
+ALETHEA: I keep thinking about the healer's face. When the mask came off.
+
+ALETHEA: He looked relieved. That's the worst part.
+```
+**The quay**, changed while the player was under Knossa. The slips are still empty. The Kronist preaches to nobody. The dockhand:
+```text
+DOCKHAND: Forty boats went to Knossa. Thirty came back past here last night.
+
+DOCKHAND: Low in the water. Going north. Nobody waved.
+```
+**Phereklos**, if visited:
+```text
+PHEREKLOS: They didn't bring my boats back.
+
+PHEREKLOS: They rowed them north, full of Titans.
+
+PHEREKLOS: Delphoi, a sailor said. Everything's going to Delphoi.
+```
+**Sailing on.** Nausikles:
+```text
+NAUSIKLES: Gytheion? Lakonia's port. Bring a cloak.
+
+NAUSIKLES: They don't talk there, so it's cold.
+```
+?? YES/NO
+```text
+> YES:
+NAUSIKLES: Good. Out past the cape, then north.
+
+> NO:
+NAUSIKLES: We'll go when you're ready. The gulf's not going anywhere.
+```
+[YES: set `FLAG_ICHOR_SAILED_FOR_GYTHEION` and hand off to the Lakonia writer's crossing (Route 24) and Gytheion's arrival, which sets `VAR_ICHOR_ACT3` = 7. Hide Alethea here.]
+
+## Beat III-2. A pointer: the old man on the sea-rock
+
+Per STORY III-2 and SYSTEMS §10, the core tier (Poseidon). Status: SYSTEMS. Optional.
+
+Poseidon's test is at a cape near Astyra, reached with the Conch, after Laurel 7 and before Knossa. It is scripted there *(Act II's map)*. Kythera only points to it. With `FLAG_BADGE07_GET` set and `FLAG_ICHOR_THEOXENIA_POSEIDON` unset, the old sailor on Skandeia's quay has a new line:
+```text
+OLD SAILOR: Strangest thing in Astyra's waters.
+
+OLD SAILOR: Under the cape, by the white shrine.
+
+OLD SAILOR: An old man sits on a sea-rock out there. The spray goes right over him.
+
+OLD SAILOR: And he's dry. Bone dry. Every time.
+
+OLD SAILOR: Sailors leave him bread. He gives them advice about fishing rods.
+```
+The same line comes from Phereklos at the knucklebones table, if asked about the sea (Part 2).
+
+## Optional. Antikythera: the box of gears
+
+Per STORY's motifs ("The hour"). Status: NEW. Optional, with Poseidon's Conch.
+
+**Setup.** `MAP_ROUTE23_CRETAN_SEA`, the western stretch of Route 23, runs south-east from Skandeia's east bay toward Knossa (Part 2). Its landmark is Antikythera, a low islet ringed by a reef. On the reef, at low water, the ribs of an old ship stick up out of the sand. In the lee of the ribs, half-buried, sits a lump of sea-green bronze the size of a loaf. Checking it:
+```text
+A lump of green bronze the size of a loaf, cracked open like a nut.
+
+Inside: gears. Dozens of them. Every tooth cut by hand.
+
+On the face, dials. One counts the days. One, the moon.
+
+One counts the games.
+
+Somebody built a box that counted the hours.
+
+The sea got into it. It's stopped.
+```
+[Set `FLAG_ICHOR_SAW_GEAR_BOX`. Skyllias, in Skandeia, pays it off (Part 2). The box isn't taken: it's too heavy, and it isn't yours.]
+
+**Design note.** A stopped machine for counting the hours, found the act before the hours stop. Players who read it will remember it on the Stair, under the frozen sundials.
+
+## Knossa: how this region reads
+
+`design/LABYRINTH.md` is approved and wins on everything inside Knossa. This region does not rewrite it. It does four things:
+1. **Walks LABYRINTH in story order** as Act III beats III-3A to III-3Q, saying for each scene "per LABYRINTH §8 Scene X, word for word", so a script agent can build Knossa from one list.
+2. **Writes STORY §7.4's four additions out in full** at their insertion points. LABYRINTH's own Scene H and Scene J already carry all four (the approved text was updated to match STORY), so nothing here contradicts it; the copies are here so the builder and the reviewer check the same words.
+3. **Writes the connective beats** LABYRINTH leaves implicit: the landing, Sarpedon and the first leap, Alethea above ground, her meeting you after the escape, and Daphne's letter (STORY III-4).
+4. **Recasts LABYRINTH's placeholder species** with the Aethos dex (dex decision D5 (a)) in Part 3 and Part 4, and writes Amnisos's rosters (Part 2).
+
+**Map ids.** LABYRINTH names its 29 maps but not their constants. These are proposed; the four marked **new** are additions this region needs (Open questions).
+
+| Map | Constant | Size |
+|---|---|---|
+| Amnisos | `MAP_KNOSSA_AMNISOS` | 40×30 |
+| Amnisos interiors | `MAP_KNOSSA_AMNISOS_ASCLEPEION`, `_AGORA`, `_KYDONS_HOUSE`, `_TAVERN`, `_XENIA_HOUSE`, `_LEAPERS_HOUSE`, `_FISHERS_HUT` | small |
+| The Cave of Eileithyia | `MAP_KNOSSA_CAVE_OF_EILEITHYIA` | 20×16 |
+| The Bull Road | `MAP_KNOSSA_BULL_ROAD` | 30×50 |
+| The vineyard terraces (**new**: its own encounter table needs its own map) | `MAP_KNOSSA_BULL_ROAD_VINEYARD` | 20×16 |
+| The beekeeper's hut (**new**: the rest point is a house, so it needs an interior) | `MAP_KNOSSA_BULL_ROAD_HUT` | 8×6 |
+| The Bull Road vault (behind the labrys door) | `MAP_KNOSSA_BULL_ROAD_VAULT` | 8×8 |
+| The Bronze Heel | `MAP_KNOSSA_BRONZE_HEEL` | 30×20 |
+| The Palace of Minos | `MAP_KNOSSA_PALACE` | 60×50 |
+| Palace interiors | `MAP_KNOSSA_PALACE_THRONE_ROOM`, `_WEST_MAGAZINES`, `_QUEENS_MEGARON`, `_GRAND_STAIRCASE` | — |
+| The Ida path, the Idaean Cave | `MAP_KNOSSA_IDA_PATH`, `MAP_KNOSSA_IDAEAN_CAVE` | 40×40, 30×30 |
+| The cradle shrine (**new**: the dex's low-level Kymbash spot) | `MAP_KNOSSA_CRADLE_SHRINE` | 14×10 |
+| The Labyrinth | `MAP_LABYRINTH_RING1` … `_RING7`, `MAP_LABYRINTH_WORKSHOP`, `_MINOS_TOMB`, `_ARCHIVE`, `_VAULT`, `_STARRY_CHAMBER`, `_ICARUS_SHAFT` | LABYRINTH §4 |
+
+State runs on LABYRINTH's `VAR_ICHOR_KNOSSA`, whose values this region proposes in Part 8. `VAR_ICHOR_ACT3` is 5 on landing and 6 at the dawn after the Icarus Shaft, as 00 says.
+
+---
+
+## Beat III-3A. Amnisos: dawn, and the repairs
+
+Per STORY III-3 and LABYRINTH §2, "Arrival". This picks up from the Kythera region's departure (seed 13: "We'll make Amnisos by dawn").
+
+**Setup.** The *Euploia* scene ends with a fade, and the player appears on `MAP_KNOSSA_AMNISOS`'s quay. The scene's lines don't depend on the clock; if it isn't morning, the DNS tint simply shows the real hour. Alethea stands on the quay with a satchel. Four Titan triremes are moored along the far mole, their sails furled, no crew on deck (metatiles, not objects).
+
+[Gulls. The sea-drum of `MUS_ICHOR_AMNISOS`. Bees hum on every roof. Alethea waves both arms.]
+```text
+ALETHEA: There you are! I've been on this quay since the bees woke up.
+
+ALETHEA: I came over on a honey boat. Two days of bees. Never again.
+
+ALETHEA: Daphne sent me ahead with these. Tracings. Every bull on every pot.
+```
+[She pats the satchel. It clinks.]
+```text
+ALETHEA: Daphne thinks the Titans' last stop is here. So do I.
+
+ALETHEA: Truthfully, so does everyone.
+```
+[She points down the mole.]
+```text
+ALETHEA: Four of their ships. They came in the night with no lights.
+
+ALETHEA: Ask anyone about the palace and they say it's “closed for repairs.”
+
+ALETHEA: The repairs wear bronze helmets.
+
+ALETHEA: I'm staying up top. Frescoes, the Bronze Heel, anything with writing on.
+
+ALETHEA: You go and be brave somewhere dark. You're better at it than me.
+
+ALETHEA: The palace is south, up the Bull Road. Mind the herd.
+```
+[Alethea walks off toward the Agora and is hidden. Set `VAR_ICHOR_ACT3` = 5, `VAR_ICHOR_KNOSSA` = 1, `FLAG_ICHOR_ARRIVED_KNOSSA`, `FLAG_ICHOR_VISITED_AMNISOS` (fly; the heal location is the Asclepeion). Hide Alethea on the quay (`FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY`); show her at the Bronze Heel and in the Queen's Megaron.]
+
+**Design note.** STORY III-1 has Alethea rejoin you on Kythera, and LABYRINTH has her on Amnisos's quay "sent ahead by Daphne with a satchel of tracings". The Kythera region sends her ahead on a honey boat; this beat is where the two meet.
+
+## Beat III-3B. The Bull Road: the herd, and the Heel
+
+Per LABYRINTH §2, "The Bull Road". The route's beats, trainers and gates are LABYRINTH's; this beat adds the words.
+
+**The signs.**
+```text
+[Sign, the north end]
+THE BULL ROAD. The palace, south. Mind the herd.
+
+[The great herm at the fork, which is also the sign]
+East: the Bronze Heel. South: the palace.
+
+[The door in the east cliff, before the Labrys]
+A door with no handle. In its middle, a hollow the shape of a double axe.
+
+[The same door, with the Labrys]
+The Labrys fits the hollow as if it grew there.
+```
+The great herm is anointed as SYSTEMS §4 says (`FLAG_ICHOR_HERM_KNOSSA`).
+
+**The herd crossing** (the route's set piece). In the open meadow below the narrow cutting, three Taurivet objects of the palace herd wander across the road on a slow random walk; they block, they never battle. A big man in a sheepskin follows them with a stick.
+
+HERDER **Milon**, who has carried the same bull every day since it was a calf:
+```text
+MILON: Mind them. They're the palace herd. They don't mind you.
+
+MILON: See the big one? I've carried him every day since he was born.
+
+MILON: It's how I got these arms. One day a calf, next day a bit more calf.
+
+MILON: Now he's a bull. I still carry him. Some days.
+
+MILON: You're going up to leap? Practice on old Lampos here first.
+
+MILON: Wait for his head to cross the line I scratched. Then up and over.
+```
+?? Try a practice leap? YES/NO
+- **NO:** "MILON: Wise. Most people who say yes are wiser afterward."
+- **YES:** the bull-leap special (`special Ichor_BullLeap`) on a 5-tile lane, at Mortal's speed and window whatever the difficulty.
+  - **Early:** "Too soon!" / "MILON: You jumped at the morning. Again?"
+  - **Late:** a fade, "Ooof." / "MILON: He jumped at you. That's the other way round."
+  - **Clean, the first time:**
+```text
+MILON: Ha! Over and down! He didn't even notice. That's the compliment.
+
+MILON: Here. For your trouble. Sarpedon will make you do it properly.
+
+{PLAYER} received a Lum Berry!
+```
+[Set `FLAG_ICHOR_MILON_PRACTICE`. After it, Milon: "MILON: Sarpedon's in the court. Thirty summers of leaping. Still has all his teeth. Most of them."]
+
+**The rest point.** The beekeeper's hut (Part 2) heals and gives Honey.
+
+**The south end.** Two Titanborn objects stand across the road below the palace, flavor only. Talking to either:
+```text
+TITANBORN: Palace is closed. Repairs.
+
+TITANBORN: What are we repairing? Hm. Ask the priestess.
+```
+
+**The Bronze Heel** (optional spur, east at the fork). Alethea is here on the player's first visit, kneeling by the giant bronze foot on the beach. Her lines are LABYRINTH seed 16, word for word:
+```text
+ALETHEA: One vein, neck to heel, stoppered with a bronze nail.
+
+ALETHEA: They said ichor ran in it. The gods' blood.
+
+ALETHEA: Or a very good grease. Truthfully, nobody checked.
+```
+[Then, new:]
+```text
+ALETHEA: The foot's standing on old seabed. Look in the rock by the tide line.
+
+ALETHEA: Two shapes. Bones, or something that used to be.
+
+ALETHEA: The tide's eating that ledge. Dig one out before it eats both.
+```
+[Set `FLAG_ICHOR_HIDE_ALETHEA_HEEL` after this talk. The fossil dig is Part 4's fixed find: one fossil, the player's choice; the other is gone for now.]
+
+## Beat III-3C. The North Entrance
+
+Per LABYRINTH §2, "Arrival", item 3. The North Entrance's charging-bull relief stands over the gate. Two Titanborn hold it, `TRAINER_ICHOR_KERAMOS` and `TRAINER_ICHOR_GYPSOS` (Part 3); each sight line covers the gate, so both are mandatory.
+
+After both are beaten, LABYRINTH's line:
+```text
+GYPSOS: Fine. The priestess will deal with you.
+```
+[Both step aside to the gate's edges. Set `VAR_ICHOR_KNOSSA` = 2.]
+
+## Beat III-3D. The palace above ground, and Ariadne (Scene A)
+
+Per LABYRINTH §3: three scenes in the palace, the West Magazines, the Throne Room and the Central Court.
+
+**The West Magazines.** The Titan camp among pithoi taller than you. Overheard talk starts the Ring IV password trail without giving the answers away (LABYRINTH §3, §6 Ring IV). Three Titanborn objects sit on upturned jars:
+```text
+TITANBORN: Down there they ask you three questions at the stair. Like a sphinx.
+
+TITANBORN: A sphinx in a big helmet. Enkelados. Don't laugh at him.
+
+TITANBORN: First one's easy. What does the sickle reap. Everybody knows that.
+
+TITANBORN: The second one I get wrong every time. I always say the bull.
+
+TITANBORN: You don't say the bull.
+```
+A fourth, a doubter (STORY §5, archetype 10), sits apart polishing a helmet:
+```text
+TITANBORN: In the golden age, do we still get to eat? I've asked three times.
+
+TITANBORN: Nobody answers. They just say “the feast.” Which feast?
+```
+
+**The Queen's Megaron.** Alethea is here, reading the dolphin fresco with her nose an inch from the plaster. She is STORY III-1's "reads Knossa's frescoes above ground".
+```text
+ALETHEA: Dolphins. Lilies. A prince with a feather crown, walking something.
+
+ALETHEA: Whatever he was walking, somebody scraped it off. Long ago.
+
+ALETHEA: People always scrape off the part they don't like. Then paint flowers.
+```
+[She steps along to a bull-leaper panel. A sickle has been scratched across it, fresh.]
+```text
+ALETHEA: That one's new. A sickle, over the leaper. Scratched last week.
+
+ALETHEA: They're not repairing anything. They're signing it.
+
+ALETHEA: Ariadne's in the Throne Room. She said she was expecting you.
+
+ALETHEA: She said it like a threat. I liked her immediately.
+```
+
+**The Theatral Area** (west), an object on its worn paving:
+```text
+Worn steps in the paving, in a pattern. Someone danced here a long time.
+
+The same feet, round and round. Like a crane wading.
+```
+It is the dancing floor's twin (LABYRINTH §3), a quiet hint for Ring VII.
+
+**Scene A, the Throne Room: Ariadne.** Per LABYRINTH §8 Scene A, word for word. [Set `FLAG_ICHOR_MET_ARIADNE`, `VAR_ICHOR_KNOSSA` = 3.]
+
+## Beat III-3E. The Central Court: the first leap, and the Thread (Scene B)
+
+Per LABYRINTH §3, "Bull-leaping". LABYRINTH gives the rules and the prizes; this is Sarpedon's voice.
+
+[The Central Court. A nine-tile lane of painted paving between frescoed walls. At the far end, the Gentle Bull, a calm Taurivet, chews and watches. An old man with a scarred chin leans on the pen rail.]
+```text
+SARPEDON: Ariadne sent you. She sends me everyone she likes.
+
+SARPEDON: And a few she doesn't, to see what happens.
+
+SARPEDON: I'm Sarpedon. I leapt bulls in this court for thirty summers.
+
+SARPEDON: Now I teach. It's the same job, done sitting down.
+
+SARPEDON: That's the Gentle Bull. He's earned the name. He'll still flatten you.
+
+SARPEDON: Stand on the near end. He runs at you. You don't run at him.
+
+SARPEDON: See the painted line? When his head crosses it, take the horns.
+
+SARPEDON: Not before. Before, you're jumping at air.
+
+SARPEDON: Not after. After, you're jumping at a bull.
+
+SARPEDON: Ready?
+```
+?? YES/NO
+- **NO:** "SARPEDON: Nobody's ready. That's why it's called practice."
+
+**YES:** `special Ichor_BullLeap` at the difficulty's speed and window (LABYRINTH §3's table).
+```text
+> Too early:
+Too soon!
+
+SARPEDON: Early. You hugged the air. Again.
+
+> Too late:
+Ooof.
+
+SARPEDON: Late. You hugged the bull. Again. Slower, old friend.
+
+> Clean:
+SARPEDON: …
+
+SARPEDON: Ha! Clean! Over the horns and down on your feet!
+
+SARPEDON: Thirty summers, and I still like seeing that.
+
+SARPEDON: Go and tell her you can leap a bull. She'll know what it means.
+```
+[After each miss the window grows by 2 frames, up to double, and the bull runs slower (LABYRINTH §3). Set `FLAG_ICHOR_FIRST_LEAP`, `VAR_ICHOR_KNOSSA` = 4.]
+
+**Sarpedon afterward** runs the leaping sessions and their prizes (Part 5):
+```text
+SARPEDON: Want to leap for prizes? I count. Miss once and we start over.
+```
+
+**Scene B, the Grand Staircase: the Thread.** Per LABYRINTH §8 Scene B, word for word. It needs `FLAG_ICHOR_FIRST_LEAP`; before it, Ariadne at the stair says only:
+```text
+ARIADNE: Have you leapt the bull yet? No? Then you'd only get lost.
+```
+[Set `FLAG_ICHOR_GOT_THREAD`, `VAR_ICHOR_KNOSSA` = 5.]
+
+## Beat III-3F. Ring I, the Threshold
+
+Per LABYRINTH §6, Ring I: the threshold hearth, the 30-step flame, the five braziers, the fresco door, and the thread tutorial with Ariadne's "TIE IT HERE." The first trainer, priestess Akakallis, is easy and in plain view (Part 3). [Set `FLAG_ICHOR_RING1_GATE` and `VAR_ICHOR_KNOSSA` = 6 when the gate brazier catches.]
+
+## Beat III-3G. Ring II, the Runner's Ring (Scene C)
+
+Per LABYRINTH §6, Ring II: the sun and moon gates, the Long Hall, the three herald gates. **Scene C, the first sighting:** per LABYRINTH §8 Scene C, word for word. [Set `VAR_ICHOR_KNOSSA` = 7 at the stair down.]
+
+## Beat III-3H. Ring III and Daedalus's workshop (Scene D)
+
+Per LABYRINTH §6, Ring III: the front way through the webs, or the back way by the glow-marks. **Scene D, the workshop: Daedalus**, per LABYRINTH §8 Scene D, word for word, with its Number Nine line if `FLAG_ICHOR_NUMBER_NINE_UNTIED` is set.
+
+The workshop's objects, per LABYRINTH seed 17:
+```text
+[The music box on the bench]
+A little bronze music box. Its tune never quite reaches the end.
+
+[Daedalus, asked about it]
+DAEDALUS: The first one I made. I made a better one for a friend's little girl.
+```
+[Set `FLAG_ICHOR_MET_DAEDALUS`, `FLAG_ICHOR_GOT_LABRYS`, `FLAG_ICHOR_DAEDALUS_LIFT`, `VAR_ICHOR_KNOSSA` = 8. The heal bed and the Pithos are live from here. Daedalus also revives fossils from now on (Part 2).]
+
+## Beat III-3I. Ring IV, the Masks
+
+Per LABYRINTH §6, Ring IV: the barracks, the helmet disguise, the mess hall's passwords, the servants' passage. The four sentries battle only if they see you undisguised (Part 3).
+
+**The checkpoint.** LABYRINTH lists Enkelados's three questions; these are his boxes.
+```text
+ENKELADOS: Halt. Helmet on, so you're ours. Questions, so I know it.
+
+ENKELADOS: What does the sickle reap?
+```
+?? THE HOURS / THE WHEAT / THE FATES
+```text
+ENKELADOS: Who stands at the heart?
+```
+?? THE BULL / THE MASTER / THE FATES
+```text
+ENKELADOS: Which way do we turn?
+```
+?? FORWARD / BACKWARD / NOWHERE
+```text
+> All three right (the hours, the master, backward):
+ENKELADOS: Good. Down you go, recruit. Mind the bull. Nobody minds the bull.
+
+> Any wrong:
+ENKELADOS: …That's not the catechism. Helmet off.
+```
+[A wrong answer starts `TRAINER_ICHOR_ENKELADOS`; afterward "ENKELADOS: Go on, then. I'm not paid to fight twice." and you pass anyway. Set `FLAG_ICHOR_ENKELADOS_PASSED` either way, and `VAR_ICHOR_KNOSSA` = 9.]
+
+## Beat III-3J. Ring V, the Hunt (Scenes E and F)
+
+Per LABYRINTH §6, Ring V: the grated gallery, Asterion's loop, the skylight pools, the cracked walls, the bell.
+- **Scene E, pool 1: Kleon**, per LABYRINTH §8 Scene E, word for word, with one character fix: its first line ends in an em dash ("Face your—"), which the charmap doesn't have. It becomes "KLEON: THERE you are, beast! Kleon of Lakonia! Face your-". [Set `FLAG_ICHOR_KLEON_HUMBLED`, `VAR_ICHOR_KNOSSA` = 10.]
+- **Scene F, Minos's tomb: the Helm**, per LABYRINTH §8 Scene F, word for word, with its first line split into two boxes for the box width: "A low tomb behind the broken wall." / "Painted pillars. Dust older than the palace." [Set `FLAG_ICHOR_GOT_HELM`, `VAR_ICHOR_KNOSSA` = 11; 12 at the south stair.]
+
+## Beat III-3K. Ring VI, the Forge (Scenes G and H)
+
+Per LABYRINTH §6, Ring VI: the teaching room, the Hall of Dials, the Bronzong sentries and their alarm pool, the archive, the vault, the forge, and the Mistress's shrine below.
+
+**Scene H, the archive: the forged prophecy.** Per LABYRINTH §8 Scene H, word for word. LABYRINTH's text already includes STORY §7.4's first addition. For the builder, the scene's end with the addition in place reads:
+```text
+In the margin: “Better. He'll run straight at it.”
+
+A little hook for a signature.
+
+{PLAYER} took the wax tablet.
+
+On the bottom shelf, one tablet is sealed shut with a blob of wax.
+
+“ELPIS, DAUGHTER OF PHAEDON. Revised.”
+
+The seal is pressed with a little hook.
+
+{PLAYER} took the sealed tablet.
+```
+[Main path: taking the sealed tablet is automatic, so Lakonia and the Frozen Hour can count on it (STORY §7.4). Give `ITEM_KLEONS_DRAFT` and `ITEM_SEALED_TABLET`. Set `FLAG_ICHOR_ARCHIVE_TABLET`, `FLAG_ICHOR_GOT_ELPIS_TABLET`, `VAR_ICHOR_KNOSSA` = 13.]
+
+The sealed tablet's Bag description, until Lakonia changes it:
+```text
+Tied shut, sealed with a little hook. “ELPIS, DAUGHTER OF PHAEDON. Revised.”
+```
+
+**Scene G, the forge: Hyperion.** Per LABYRINTH §8 Scene G, word for word. [Battle `TRAINER_ICHOR_HYPERION_KNOSSA`. Set `VAR_ICHOR_KNOSSA` = 14. The stair down opens.]
+
+**The Mistress's shrine** on the landing below: the second heal. Its priestess, with Honey in the Bag (LABYRINTH §6):
+```text
+SHRINE PRIESTESS: The Mistress keeps this landing. Rest. You've earned the stair.
+
+> with Honey in the Bag:
+SHRINE PRIESTESS: Is that honey? For the Mistress?
+```
+?? Offer a Honey? YES/NO
+```text
+> YES:
+SHRINE PRIESTESS: “To the Mistress of the Labyrinth, one jar of honey.”
+
+SHRINE PRIESTESS: That's what the old tablets say. Word for word.
+
+ARIADNE: [offscreen] Honey. Always honey. The old tablets say so.
+```
+[One Honey is taken. Hestia Favor and the Mistress's rite are SYSTEMS §3's; the offering sets `FLAG_ICHOR_MISTRESS_HONEY` and gives a Max Elixir once. The jar labelled NOT FOR {PLAYER} is not in the Bag yet (Mom has it), so this is ordinary Honey.]
+
+## Beat III-3L. Ring VII, the Choros (Scene I)
+
+Per LABYRINTH §6, Ring VII. **Scene I, Ariadne joins**, per LABYRINTH §8 Scene I, word for word. The double battle is `setmultitrainerbattle`: the player and `PARTNER_ICHOR_ARIADNE` against `TRAINER_ICHOR_PORPHYRION` and, if `FLAG_ICHOR_ENKELADOS_PASSED` was set without a fight, `TRAINER_ICHOR_ENKELADOS`; otherwise `TRAINER_ICHOR_KLYTIOS` (Part 3). [Set `FLAG_ICHOR_ARIADNE_JOINED`, `VAR_ICHOR_KNOSSA` = 15.]
+
+Then the mirror antechamber (one mirror, then three, `special Ichor_TraceBeam`) and the crane dance (LABYRINTH §5.7). [On the dance: set `FLAG_ICHOR_DANCE_DONE`, place **Corona Borealis**, `VAR_ICHOR_KNOSSA` = 16.]
+
+## Beat III-3M. The Starry Chamber (Scene J)
+
+Per LABYRINTH §8 Scene J, word for word. The bull-leap three times, the collar and the Labrys, the battle with Kleon (`TRAINER_ICHOR_KLEON_KNOSSA_PYLAKYON`, `_SEISMARE` or `_DAPHNYAD`, by your starter), the mask, the plea, Rhea and the lever.
+
+LABYRINTH's Scene J already carries STORY §7.4's additions 2, 3 and 4. For the builder, each in place:
+
+**Addition 2,** after "PHAEDON: Daedalus understood. He buried a son.":
+```text
+PHAEDON: Daphne's book told me where the pieces lay. She sent it to me herself.
+
+PHAEDON: She thought she was helping a friend with a sick child. She was.
+```
+This is also STORY §4's "Daphne's book told me where" seed, so nothing more is needed for it.
+
+**Addition 3,** after the YES/NO to "Will you carry it for me?" and before "PHAEDON: Rhea. Turn the house.":
+
+?? Show Phaedon the sealed tablet? YES/NO
+```text
+> YES:
+PHAEDON: Iapetos said you'd bring me something. A tablet.
+
+PHAEDON: He said Daphne's girl would forge one. To stop me.
+
+PHAEDON: I'm not going to read it. I'm sorry. I can't afford to.
+
+> NO:
+PHAEDON: Whatever's in your bag, keep it. I've made up my mind.
+```
+[YES sets `FLAG_ICHOR_SHOWED_PHAEDON_TABLET`. The tablet stays in the Bag either way.]
+
+**Addition 4,** the stage direction before Rhea's lines:
+
+[Rhea stands at the great lever. She looks at Kleon for a long time. Then at Ariadne, with her brother's head in her lap.]
+
+Staging: Rhea's helmeted object faces Kleon's for 90 frames, then turns to face Ariadne for 30, then faces the lever. Kleon doesn't look back; he is staring at Phaedon's stair.
+
+[After the collar: set `FLAG_ICHOR_ASTERION_FREED` and place **Taurus**. After the unmasking: `FLAG_ICHOR_PHAEDON_UNMASKED`. After Rhea: `FLAG_ICHOR_RHEA_MERCY`, `VAR_ICHOR_KNOSSA` = 17, and the Turning begins.]
+
+## Beat III-3N. The Turning
+
+Per LABYRINTH §7: out the way you came, the thread holding the house open, Asterion breaking through where there's no thread, Kleon following sullenly ("I'm following the *thread*. Not you."), Daedalus waving you through the workshop, the RETURN option disabled ("The thread shakes in your hand. Walk it."), and Rhea's open threshold. Every line is LABYRINTH's. [Set `FLAG_ICHOR_TURNING_DONE`, `VAR_ICHOR_KNOSSA` = 18 at the threshold.]
+
+## Beat III-3O. The palace court at night (Scene K), and Alethea
+
+**Scene K, Kleon goes.** Per LABYRINTH §8 Scene K, word for word. [Set `FLAG_ICHOR_SHOWED_KLEON_TABLET`. Kleon walks north out of the court and is hidden (`FLAG_ICHOR_HIDE_KLEON_KNOSSA`).]
+
+**Alethea, after the escape** (LABYRINTH §8, Alethea's arc: "meets you after the escape"). She runs in through the North Entrance as Kleon goes out of it.
+```text
+ALETHEA: {PLAYER}! Was that Kleon? He nearly knocked me into a fresco.
+
+ALETHEA: The Titan ships left the mole an hour ago. All four. No lights.
+
+ALETHEA: …You look like you've seen somebody you know.
+```
+[The player tells her. Fade to black and back, 30 frames.]
+```text
+ALETHEA: Phaedon. The healer. Elpis's father.
+
+ALETHEA: …
+
+ALETHEA: Daphne loves them both. She's sitting with that little girl right now.
+
+ALETHEA: I have to write to her. Tonight. Before anyone else does.
+
+ALETHEA: “Dear Daphne. Your friend is the man in the gold mask.” No.
+
+ALETHEA: I'll find the words. Writing things down is the one thing I'm good at.
+```
+?? Show Alethea the sealed tablet? YES/NO
+```text
+> YES:
+ALETHEA: That seal. That's his little hook. Lykophron's. Iapetos's.
+
+ALETHEA: “ELPIS, DAUGHTER OF PHAEDON. Revised.”
+
+ALETHEA: He revised a seven-year-old.
+
+ALETHEA: I want to open it so badly my teeth hurt. Truthfully.
+
+ALETHEA: It isn't ours to open. Not here. Not like this.
+
+ALETHEA: Keep it safe. Somebody's going to need to read it.
+
+> NO:
+ALETHEA: Whatever you're not telling me, I'll dig it up eventually. I always do.
+```
+```text
+ALETHEA: Go and sleep. Ariadne's given us her rooms. She says the Titans won't.
+```
+[Fade to black. Set `FLAG_ICHOR_ALETHEA_TOLD`. The night passes in the Queen's Megaron; the party is healed.]
+
+**Design note.** Alethea doesn't break the seal here. STORY III-5 has her read the scraped wax at Lakonia, and STORY §7.7 has Phaedon break the seal in the Frozen Hour; how she reads it without breaking it is the Lakonia region's to stage (Open questions).
+
+## Beat III-3P. Dawn: the Icarus Shaft (Scene L), and Asterion
+
+[Before dawn, the Queen's Megaron. Ariadne stands at the door. LABYRINTH §7's line:]
+```text
+ARIADNE: He wants you. He says bring the wings.
+```
+[The player takes Daedalus's lift down to the workshop.]
+
+**Scene L, the Icarus Shaft.** Per LABYRINTH §8 Scene L, word for word, through the landing in the Central Court at dawn, where Ariadne sleeps against Asterion's flank. [Set `FLAG_ICHOR_ICARUS_FLIGHT`, `VAR_ICHOR_KNOSSA` = 19, **`VAR_ICHOR_ACT3` = 6**.] If all seven pages are returned, the Master Plan scene follows on the next workshop visit (LABYRINTH Scene L).
+
+**Asterion.** Per LABYRINTH §10, "Asterion's return": he waits in the court, lowers his head to you, and steps into an offered ball (Lv 50, a catch that can't fail), with Ariadne's "He's decided. Don't look at me. He's never once asked me first." [`FLAG_ICHOR_CAUGHT_ASTERION`.] If you don't take him he stays, and leaping with him doubles the prizes.
+
+**Alethea at dawn**, by the court's light well, with a sealed letter and a gull on her wrist:
+```text
+ALETHEA: I wrote it. Six times. The seventh one's going.
+
+ALETHEA: It just says what happened. Plainly. She'd hate anything else.
+```
+[She opens her hand. The gull flies north. Gull SE, wings SE.]
+```text
+ALETHEA: Kydon lent me one of his order gulls. He swears they find anyone.
+
+ALETHEA: The captain says the wind for Gytheion comes up this evening.
+
+ALETHEA: Kleon's gone home to Lakonia. So are we. I'm coming with you.
+
+ALETHEA: Truthfully, I've never been.
+
+ALETHEA: They say you can hear the whole town not talking.
+```
+[Hide Alethea in the court; show her on Amnisos's quay (`FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY` cleared). The player is free until evening on Knossa: the vineyard, the Bronze Heel, Mount Ida, the vault, the leaping prizes.]
+
+## Beat III-3Q. Optional: the Bull Road vault, Mount Ida, the cradle shrine, the Cave of Eileithyia
+
+These are LABYRINTH's optional places (§2, §9). Each opens on a return.
+- **The Bull Road vault,** behind the labrys door (after Ring III): an Ichor Stone (`FLAG_ICHOR_BULL_ROAD_VAULT`). The player's first Minoan vault is a short walk from where they get the Labrys.
+- **Mount Ida.** Its gate is a labrys seal (`FLAG_ICHOR_IDA_GATE`). The path climbs past goat pastures to the Idaean Cave, where Rhea hid the infant Zeus from Kronos while the Kouretes clashed their shields. Epimenides sleeps in its first chamber (Part 2), and Amalthea's horn shrine at the back places **Capricornus**. The cave's mouth is **the cradle shrine**, the dex team's low-level Kymbash spot (Part 4).
+- **The Cave of Eileithyia,** behind Amnisos: Gennaia, the cave's keeper, gives a rare egg (Part 2); an Ichor Stone; Hera Favor +5 at the birth-goddess's stone.
+
+**Design note.** The Idaean Cave is a Lakonia seed. Epimenides tells you, in passing, how a mother on Crete hid a baby's cry with clashing bronze. At Lakonia (STORY III-5) Rhea's Kourodin hid Kleon's cough the same way. Nobody connects them for you.
+
+## Beat III-4. Amnisos's quay, evening: Daphne's letter
+
+Per STORY III-4. It needs `VAR_ICHOR_ACT3` = 6 and plays the first time the player walks onto the quay after the time-of-day check finds it evening or night; if the player arrives in the day, Nausikles says "Wind's not up yet. This evening." and the scene waits (or the player rests at the xenia house until dusk, SYSTEMS §10).
+
+[Evening. The *Euploia* rides at the quay. Alethea sits on a bollard. A gull drops onto the bollard beside her with a small tube on its leg.]
+```text
+ALETHEA: That was fast. She must have written back the minute she read it.
+
+ALETHEA: It's addressed to both of us. You read it. I can't.
+```
+[A sign-window letter, one box per line, in Daphne's hand.]
+```text
+“Alethea. {PLAYER}. Your gull found me at Elpis's bedside.”
+
+“I know.”
+
+“I'm staying with Elpis. Someone should.”
+
+“She thinks her papa's gone to buy her a real bull.”
+
+“She's worse. She sleeps most of the day now. She still hums.”
+
+“I sent him that book. I'd send it again, for a sick child.”
+
+“That's the worst of it.”
+
+“I won't tell her. I'm a coward about one thing in my life, and it's this.”
+
+“Go and find your mother. Then come and tell me I was wrong about something.”
+
+“I would love to be wrong. -D.”
+```
+[Hold 60 frames on the quay. Sea SE only.]
+```text
+ALETHEA: She signed it with a D. She never does. She always writes her whole name.
+
+ALETHEA: With a little laurel leaf on the end. She's very vain about the leaf.
+
+ALETHEA: …Come on. Lakonia.
+```
+[Alethea walks up the gangplank and is hidden. Set `FLAG_ICHOR_DAPHNE_LETTER_KNOSSA`.]
+```text
+NAUSIKLES: Gytheion, on the evening wind. Last call. Coming?
+```
+?? YES/NO
+```text
+> YES:
+NAUSIKLES: Good. The Lakonians won't say hello. Don't take it personally.
+
+> NO:
+NAUSIKLES: Not long, then. This wind won't wait, and neither will that girl.
+```
+[YES: fade out. Set `FLAG_ICHOR_SAILED_FOR_GYTHEION`, `VAR_ICHOR_KNOSSA` = 20, and warp to `MAP_TRIREME_EUPLOIA_DECK`. **Hand-off:** the Lakonia region owns the voyage and its arrival at Gytheion (beat III-5A). Per the revised AETHOS_MAP, the *Euploia* sails back along Route 23 to Skandeia, calls there, and crosses Route 24, the strait off Malea, to Gytheion. After this, the *Euploia* runs Amnisos, Skandeia and Gytheion on request, so Knossa stays open for the post-game.]
+
+## Lakonia in one paragraph
+
+The *Euploia* carries you back from Knossa to Kythera for one night's water and bread, then crosses the strait off Cape Malea, where sailors say you forget your home, and puts you ashore at Gytheion at dusk, where a fisherman is bailing his boat with a Titan's bronze helmet: Kleon paid for his passage with it. The road climbs the Eurotas valley past reed beds the battle school's boys cut barehanded for their beds, past Apollo's throne at Amyklai, where a god killed his friend by accident and the town still mourns him every summer, to a town with no walls. Kleon has been sitting in his mother's cold kitchen for three days, waiting for Iapetos to come and explain his handwriting. Someone else comes. The Titan in the closed bronze helmet walks past him, lights the hearth the way you only light your own, and takes the helmet off. She hid his cough from the elders with dancing shields. She buried two children before him. She read his prophecy and heard death in it, and it never said he would die. Kleon melts the forgery in her fire and gives the real tablet back to her: she needs it more than he does. Iapetos comes for his deserter in a white mask and slips away like the fox nobody catches. By the fire, Alethea scrapes the wax off the little girl's sealed tablet and finds what the Pythia really said, writes it underneath in her own hand, and can't say why good news frightens her. Rhea gives her son the Kourodin that hid him once, and Kleon fights you in the battle-school ring with nothing written either way, for the first time in his life. Then the three of them take the goat paths over Taygetos toward Delphoi, and you take the road north past the battle school's training grounds, across the causeway through Lake Stymphalia's reeds where bronze-feathered birds roost, and over the hills into Arkadia, making noise.
+
+**What Lakonia must not do.** It must not let anyone work out what "the day the hours stop" means for Phaedon's plan: Alethea feels the chill and stops there. Rhea is outside when the tablet is read, so the one person who knows the master's plan never hears the line. It must not say where Mom is: Rhea knows only that the helmets came back from Kalliste empty.
+
+## Beat III-5A. The *Euploia*: round Malea
+
+Per STORY III-5. NEW.
+
+**The voyage** (AETHOS_MAP, Act III steps 4–5). The story trireme carries you back from Amnisos along Route 23 to Kythera, puts in at Skandeia for one evening, then crosses **Route 24**, the strait off Malea, to Gytheion. The player stays aboard for both legs; the call at Skandeia is a short scripted stop on the deck.
+
+**Setup.** The Knossa part ends with the player boarding at Amnisos's quay (`VAR_ICHOR_ACT3` is 6). The warp lands on `MAP_TRIREME_EUPLOIA_DECK` at dusk, and this beat runs from the deck's `ON_FRAME` while `FLAG_ICHOR_ARRIVED_GYTHEION` is unset. Nausikles is at the steering oars. Alethea stands at the rail with her satchel held against her chest. Kleon is not aboard.
+
+[Skandeia's quay, alongside. Dock workers roll water jars up the gangplank. The deck's background shows Skandeia's harbor (Kythera's tileset, or the deck map's harbor variant).]
+```text
+NAUSIKLES: Skandeia. Water and bread, and we sail at first light.
+
+NAUSIKLES: Nobody goes ashore.
+
+NAUSIKLES: Last time I let a passenger off here, she married a fisherman.
+
+NAUSIKLES: Sleep on deck. The stars are free.
+```
+[Fade to black. Night SE: waves, a creaking mast. Fade in by day, at sea. Gulls. The rowers' stroke.]
+
+```text
+NAUSIKLES: Gytheion by dusk. If Malea lets us.
+
+NAUSIKLES: You know what sailors say. “Round Malea, and forget your home.”
+
+NAUSIKLES: The cape makes its own wind. It blew Odysseus off course for ten years.
+
+NAUSIKLES: I've only ever lost a hat to it. Hold on to yours.
+```
+[Alethea, at the rail.]
+```text
+ALETHEA: I wrote to Daphne before we sailed. About Phaedon.
+
+ALETHEA: Four tries. Every time I wrote it down, it looked like a lie.
+
+ALETHEA: It's the first time I've told the truth and not believed it myself.
+
+ALETHEA: Kleon went last night. On a fishing boat. He didn't say goodbye.
+
+ALETHEA: He paid the fisherman with his helmet. The bronze one.
+
+ALETHEA: Truthfully, I think that was the goodbye.
+
+ALETHEA: You've still got the sealed tablet? The one with her name on it.
+
+ALETHEA: Don't open it. It isn't addressed to us.
+
+ALETHEA: …I keep telling myself that.
+```
+[Wind SE. The sail cracks taut. `special ShakeCamera`, 30 frames. The deck tilts one tile's worth: a short slide movement on the player.]
+```text
+NAUSIKLES: There's Malea! Everyone who isn't rowing, sit DOWN!
+```
+[Fade to black. A gull. Fade in at dusk, the DNS evening tint, the ship riding easy.]
+```text
+NAUSIKLES: Gytheion. Lakonia's front door.
+
+NAUSIKLES: Lakonians don't think much of doors. You'll see.
+
+NAUSIKLES: I'll wait at the quay till the wind turns. It's a long walk up the valley.
+```
+[Fade out. Warp to `MAP_GYTHEION`'s quay. Set `VAR_ICHOR_ACT3` = 7, `FLAG_ICHOR_ARRIVED_GYTHEION` and `FLAG_ICHOR_VISITED_GYTHEION` (Gytheion is a fly target). Nausikles stays on Gytheion's quay from now on and runs the Act III lanes (Part 2, Gytheion).]
+
+**Design note.** "Round Malea and forget your home" is a real sailors' proverb (Strabo 8.6.20). It lands as a joke here and in hindsight as the act's question: Rhea forgot hers for a cause, and comes back to it tonight.
+
+## Beat III-5B. Gytheion at dusk
+
+Per STORY III-5. NEW.
+
+**Setup.** On arrival, a coord trigger on the quay's first row while `FLAG_ICHOR_GYTHEION_DUSK` is unset. The quay steps are stained purple. A fisherman sits in his boat by the steps, bailing it with a bronze Corinthian helmet. Alethea stands beside the player.
+```text
+FISHERMAN: Evening. Don't mind the smell. That's money, that is. Purple.
+
+FISHERMAN: Bought this off a boy last night. Holds water. Mostly.
+```
+[He tips the helmet over the side. The sickle on its cheek-piece catches the last light.]
+```text
+ALETHEA: That's Kleon's.
+
+FISHERMAN: Couldn't say. Loud boy. Red cloak. Ate my bread.
+
+FISHERMAN: Told me he was going home to ask somebody something.
+
+FISHERMAN: Lakonians. They walk twenty miles to ask one question.
+
+FISHERMAN: Then they don't listen to the answer.
+```
+[Alethea looks up the valley road.]
+```text
+ALETHEA: I'm walking ahead. You'll want to battle everyone on the road.
+
+ALETHEA: I want to get there before dark.
+
+ALETHEA: Truthfully, I want to get there before Kleon does anything.
+
+ALETHEA: The town's at the top of the valley. You can't miss it. It hasn't got any walls.
+```
+[Alethea walks off north along the quay and up Route 25. Set `FLAG_ICHOR_GYTHEION_DUSK` and `FLAG_ICHOR_HIDE_ALETHEA_GYTHEION`. The fisherman stays by the steps; see Part 2.]
+
+## Beat III-5C. Route 25, up the Eurotas
+
+Per STORY III-5. NEW. The road is the beat; its set pieces (the reed-cutters, Amyklai, the Vapheio door, the cadets on their run, Hestia's farmhouse) are in Part 2. One scripted moment marks the top of it.
+
+**Setup.** At the road's last screen, a coord trigger across the path while `FLAG_ICHOR_SAW_LAKONIA` is unset. The plane trees open, and Lakonia lies in the valley floor: plain houses in loose clusters, no wall anywhere, and behind it the dark wall of Taygetos.
+```text
+The town at the top of the valley has no walls at all.
+
+Behind it, the mountain does the job instead.
+```
+[Set `FLAG_ICHOR_SAW_LAKONIA`.]
+
+## Beat III-5D. Lakonia: no walls
+
+Per STORY III-5. NEW.
+
+**Setup.** Entering `MAP_LAKONIA` from the east edge (Route 25's bridge) with `VAR_ICHOR_ACT3` = 7 and `FLAG_ICHOR_LAKONIA_ARRIVED` unset, an `ON_FRAME` script runs. Gylippos stands at the east edge of the agora, leaning on his staff. Alethea is beside him.
+```text
+GYLIPPOS: Kalliste.
+
+GYLIPPOS: No walls. You noticed. Visitors always notice.
+
+GYLIPPOS: “Our walls are our men.” Lykourgos said it. We've been saying it since.
+
+GYLIPPOS: Fewer words. The boy's home.
+
+GYLIPPOS: West end. His mother's house. The door with the shield over it.
+
+GYLIPPOS: Three days. He sits. He doesn't eat.
+
+ALETHEA: He told the Titans at the port he was here. He wants Iapetos to come.
+
+ALETHEA: Truthfully, I don't think Iapetos goes anywhere himself. He sends people.
+
+GYLIPPOS: His mother will come.
+
+GYLIPPOS: Lampito always comes home when it's bad.
+
+GYLIPPOS: …
+
+GYLIPPOS: Lakonians speak little. Lampito speaks less.
+```
+[Gylippos walks off toward the Lesche. Alethea stays by the agora's herm until the player goes west. Set `FLAG_ICHOR_LAKONIA_ARRIVED` and `FLAG_ICHOR_VISITED_LAKONIA` (fly).]
+
+**Design note.** This is the first time the player hears the name Lampito. They have heard Rhea's voice twice and never her name. It should read as nothing at all until the helmet comes off.
+
+## Beat III-5E. The helmet comes off
+
+Per STORY III-5 and §6.9. NEW. The second unmasking, mirrored: Phaedon unmasked to ask for help; Rhea unmasks to ask her son's forgiveness, in the kitchen of the house he grew up in.
+
+**Setup.** Entering `MAP_LAKONIA_LAMPITOS_HOUSE` with `FLAG_ICHOR_LAKONIA_ARRIVED` set and `VAR_ICHOR_ACT3` = 7. Alethea follows the player in (her object is shown inside from this point). The room: a kitchen with a cold hearth, a loom against the wall with a small red cloak on it, a plain table and two stools, a chest under the loom, and two grave-stelai painted on the plaster. Kleon sits at the table without his helmet.
+
+**Music.** None. When Rhea lights the hearth, the hearth-crackle loop starts (`MUS_ICHOR_HEARTH_ONLY`). When Kleon speaks after the long hold, a frame drum alone in a slow 7/8 comes in under it.
+```text
+KLEON: Oh. It's you.
+
+KLEON: Course it's you. Who else would walk all the way up here.
+
+KLEON: Sit, if you want. There's nothing to eat. My mother's away.
+
+KLEON: She's always away. She writes. Two lines a week.
+
+KLEON: This one was waiting when I got in.
+```
+[He holds up a scrap of papyrus.]
+```text
+KLEON: “Eat. Stop running at things.”
+
+KLEON: …She's got a point. Don't tell her.
+
+KLEON: I sent word to the Titans at the port. Told them to tell the Voice.
+
+KLEON: “Kleon's at home. Come and explain your handwriting.”
+
+ALETHEA: He won't come himself. He sends people.
+
+KLEON: Then I'll explain it to them.
+```
+[The door opens. A figure in a closed bronze Corinthian helmet stands in it, the sickle on its cheek-pieces, a long chain wrapped round one forearm. Kleon is on his feet.]
+```text
+KLEON: You.
+
+KLEON: From the Akropolis. From the bull. The one with the chain.
+
+KLEON: Did he send you? Where is he?
+```
+[The figure doesn't answer. It walks past him to the hearth, kneels, and strikes a flame into the kindling, quickly, the way you only light your own. The fire catches. Crackle loop.]
+```text
+KLEON: …Who said you could touch that?
+
+RHEA: No one sent me.
+
+RHEA: I came home.
+
+KLEON: This isn't your home. This is my mother's house.
+
+RHEA: Yes.
+```
+[She stands. She unwinds the chain from her arm and lays it on the table. Then she puts both hands to the helmet and lifts it off. Her sprite changes in one frame: gray hair, a square jaw, Kleon's eyebrows. She sets the helmet on the table. It stays there as a placed object.]
+
+[Kleon doesn't move. Hold 120 frames. Only the fire.]
+```text
+KLEON: …Mother.
+```
+[The frame drum comes in.]
+```text
+RHEA: Sit down, Kleon.
+
+RHEA: Sit.
+```
+[He sits.]
+```text
+ALETHEA: I'll wait outside. This isn't mine to write down.
+
+KLEON: No. Stay. Both of you.
+
+KLEON: I'm not hearing this on my own.
+
+RHEA: You were born early. Small. You coughed.
+
+RHEA: The elders come to look at every baby. You know what they do.
+
+KLEON: …The mountain. Yeah.
+
+RHEA: I had my Kourodin dance in the yard. Shields. All night.
+
+RHEA: Nobody heard you cough.
+
+KLEON: The shield-dancers. From the story. The baby they hid from Kronos.
+
+KLEON: That was… me?
+
+RHEA: You.
+```
+[She looks at the two stelai painted on the wall.]
+```text
+RHEA: Before you there were two.
+
+RHEA: The Oracle read them at birth. Both would go before their mother.
+
+RHEA: Both did.
+
+RHEA: A prophecy took my children. I let it. I stood still and let it.
+
+KLEON: You said that. At Knossa. By the lever.
+
+KLEON: I didn't know it was about me.
+
+RHEA: Then you. The Oracle's verse came for you. I read it.
+
+RHEA: I heard death in it.
+
+RHEA: So I stopped standing still.
+
+RHEA: At Delphoi a priest told me he knew a man who'd stop the cutting.
+
+KLEON: Iapetos.
+
+RHEA: Iapetos.
+
+KLEON: The Titans. The tunnels. The chain. You did all of it for me.
+
+RHEA: For you.
+
+KLEON: And then he wrote me a better thread. And I took it. And you…
+
+RHEA: He pointed my son at a monster. I watched you run at it.
+
+RHEA: That's when I started hating him.
+```
+[She opens the chest under the loom and takes out a small, plain lead tablet. Item close-up: scratched lead, worn soft at the corners, no hook anywhere on it.]
+```text
+RHEA: Yours. From Delphoi. The day you were born.
+
+RHEA: Lead. Nobody's touched it. Not him. Not anyone.
+
+RHEA: Read it. Out loud. I never could.
+
+KLEON: “Kleon, son of Lampito.”
+
+KLEON: “Glorious while young…”
+
+KLEON: “…and his glory will not die.”
+```
+[Hold 60 frames. The fire.]
+```text
+KLEON: That's it?
+
+KLEON: That's all of it? Where's the dying?
+
+KLEON: I've been running at it since I was seven. Where is it?
+
+RHEA: I read it wrong.
+
+RHEA: I'd buried two. I heard what I was afraid of.
+```
+[Kleon looks at the lead for a long time. Then he takes a wax tablet from his belt: the one Iapetos gave him under the cypresses in Arkadia.]
+```text
+KLEON: And this one. The better thread.
+
+KLEON: “Kleon of Lakonia shall slay the starry bull.” Lovely handwriting.
+
+KLEON: “He'll run straight at it.” That's what he wrote about me. In the draft.
+
+KLEON: I did. Didn't I. Straight at it.
+```
+[He holds the wax tablet over the hearth. The wax softens and runs. Hiss SE. The tablet's icon over the fire fades out, and it's gone.]
+```text
+KLEON: There.
+```
+[He holds the lead tablet out to his mother.]
+```text
+KLEON: Keep it. I don't need it. You do.
+```
+[Rhea takes it in both hands. She holds it a long time.]
+```text
+RHEA: …Hm.
+
+KLEON: Hm? Thirteen years, and you've got “hm”?
+
+RHEA: We're Lakonian.
+
+KLEON: Fewer words. Yeah. I know.
+
+KLEON: …I know.
+```
+[Set `VAR_ICHOR_ACT3` = 8 and `FLAG_ICHOR_RHEA_UNMASKED`. Rhea's walker is now the unhelmeted sprite everywhere. The helmet object stays on the table for the rest of the game. Beat III-5F follows at once.]
+
+**Interacting with the room** (from this beat on; the stelai also before it):
+
+| Object | Text |
+|---|---|
+| The stelai | "Two grave-stelai, painted on the plaster." / "One says AGIS. IN WAR." / "The other has no name. Only a swallow, painted small." / "In Lakonia, only the war dead get their names on a stone." |
+| The stelai, with Kleon in the room | KLEON: "My brother and sister. Before me. I never met them." / KLEON: "She never says their names." / KLEON: "Half the boys in Lakonia are called Agis. She hates it." |
+| The loom | "A red cloak on the loom. Too small for anyone in this house." |
+| The helmet | "Rhea's helmet. Closed, bronze, the sickle on its cheek-pieces." / "Without a head in it, it's only a pot." |
+| The hearth | Before III-5E: "Cold. Nobody's lit it in a long time." After: "The fire's going. Someone's home." |
+| The chest | "Kleon's things from before the battle school." / "A wooden sword. A sling. One small sandal." |
+
+## Beat III-5F. Every draft has a next draft
+
+Per STORY III-5 and §2 (Iapetos, arc 8). NEW.
+
+**Setup.** Straight after III-5E. Footsteps outside, many. Alethea is at the window.
+```text
+ALETHEA: There are helmets in the yard. A lot of helmets.
+
+IAPETOS: [offscreen] Lampito? May I tell you something true?
+```
+[Rhea sets the lead tablet down on the table. She looks at the helmet beside it, and leaves it there. She goes out bare-headed. Kleon goes after her. Warp the player and Alethea to the yard: `MAP_LAKONIA`, in front of the house.]
+
+[The lane outside Lampito's yard. Two Gigas in big helmets and bronze-scaled cuirasses, Gration and Pallas. Titanborn Kachlex and Plinthos at the gate. Between them, a thin man in a white tragic mask, a wax tablet on a cord at his neck. His right hand is dark with ink to the wrist. Music: `MUS_ICHOR_ENCOUNTER_ADMIN`, Iapetos's layer, a chorus of aulos.]
+```text
+IAPETOS: There you are. And without your face on. How brave.
+
+IAPETOS: You left the threshold open at Knossa. The master noticed.
+
+IAPETOS: I noticed first. Noticing is most of my work.
+
+IAPETOS: Deserting is a story, Lampito. I've written you a better one.
+
+IAPETOS: You came home to fetch your boy for the muster. Loyal to the end.
+
+IAPETOS: Come to Delphoi, and that's what happened. I'll write it down myself.
+
+RHEA: No.
+
+IAPETOS: And Kleon. Here's a better thread.
+```
+[He holds out a fresh wax tablet.]
+```text
+KLEON: I just melted the last one. In my mother's fire.
+
+KLEON: It went hiss. It was great.
+
+IAPETOS: Pity. That was some of my best work.
+
+ALETHEA: Keeper Lykophron. You can take the mask off. We know your hand.
+
+IAPETOS: May I tell you something true?
+
+IAPETOS: I don't wear it for you. I wear it for them.
+```
+[He tilts the mask toward the grunts at the gate.]
+```text
+IAPETOS: They like a face that doesn't change. Most people do.
+
+IAPETOS: Gigas. Bring the deserter. Leave the children.
+
+RHEA: Leave the boy.
+
+KLEON: …Who asked you?
+
+RHEA: His mother.
+
+KLEON: Yeah. Fair.
+
+RHEA: I'll take the big one. Kleon, the small ones.
+
+RHEA: Kalliste. The mask.
+```
+[Pallas and the two grunts go for Rhea and Kleon at the gate. Battle SE from offscreen. Gration steps in front of the player.]
+```text
+GRATION: The Voice wants the deserter. You're in the way. That's all you are.
+```
+[Battle `TRAINER_ICHOR_GIGAS_GRATION`.]
+```text
+GRATION: Fine! Fine. I'm only the doorway.
+```
+[He steps aside. Alethea runs up.]
+```text
+ALETHEA: Hold still. Truthfully, this is every Hyper Potion I own.
+```
+[Fade, the heal SE. The party is healed.]
+```text
+IAPETOS: Well. If nobody else will, I suppose I'll take a turn.
+```
+[Battle `TRAINER_ICHOR_IAPETOS_LAKONIA`, with `MUS_ICHOR_BATTLE_ADMIN` and its aulos-chorus layer. His defeat line:]
+```text
+IAPETOS: Hm. That isn't how I'd have written it.
+```
+[After the battle:]
+```text
+IAPETOS: Beautifully done. I'll write it so you lose, of course. Later.
+
+IAPETOS: Nobody reads the first draft.
+
+IAPETOS: Every draft has a next draft.
+```
+[His Kerdovix flicks its tail across the lane. A swirl of dust, and the place where he stood is empty. The Gigas back away after him and are gone.]
+```text
+ALETHEA: He's gone. Of course he is. Nobody's ever caught him.
+
+ALETHEA: Truthfully, I'd like to be the first.
+```
+[Rhea and Kleon come back from the gate. Pallas has run. Kachlex and Plinthos sit in the dust by the wall, helmets off.]
+```text
+KACHLEX: The Voice ran. He always runs. We walk.
+
+PLINTHOS: In the golden age, do we still get to eat? I asked him. Again.
+
+RHEA: Go home. Both of you.
+
+PLINTHOS: …Is that an order, Lady Rhea?
+
+RHEA: Advice. From a deserter.
+```
+[Set `VAR_ICHOR_ACT3` = 9 and `FLAG_ICHOR_IAPETOS_LAKONIA_DONE`. Hide the Gigas and Iapetos. Kachlex and Plinthos move to the agora's steps as optional trainers (Part 3). Rhea and Kleon go to the well in the yard. Alethea goes back inside.]
+```text
+ALETHEA: Come inside a moment. There's something I want to look at by the fire.
+```
+
+**Design note.** Iapetos's escape is his ace's ability. Kerdovix is the Teumessian vixen, fated never to be caught, and its only ability is Emergency Exit. He leaves the way his Pokémon would.
+
+## Beat III-5G. What the Pythia said
+
+Per STORY III-5 and §2 (Alethea, arc 8). NEW.
+
+**Setup.** Inside `MAP_LAKONIA_LAMPITOS_HOUSE` with `FLAG_ICHOR_IAPETOS_LAKONIA_DONE` set and `FLAG_ICHOR_ALETHEA_READ_TABLET` unset. Talking to Alethea at the table starts it. Rhea and Kleon are outside at the well and can't hear. Rhea's lead tablet lies on the table beside the helmet.
+```text
+ALETHEA: Lead. The Pythia's words go on lead. Cut in, so they last.
+
+ALETHEA: Wax is for drafts. You write on it, you smooth it, you write again.
+
+ALETHEA: {PLAYER}. The sealed tablet. From the archive. Can I see it?
+```
+[The sealed tablet's item close-up: a wax-faced tablet, closed, a blob of wax over the clasp pressed with a little hook. "ELPIS, DAUGHTER OF PHAEDON. Revised." scratched on the outside.]
+```text
+ALETHEA: It's heavy. Too heavy for wax and wood.
+
+ALETHEA: There's lead under the wax. He poured wax over a lead tablet and wrote on top.
+
+ALETHEA: I don't want to break his seal. It isn't addressed to us.
+
+ALETHEA: …Truthfully, I've wanted to since Knossa.
+```
+?? Let Alethea break the seal? YES/NO
+```text
+> NO:
+ALETHEA: No. You're right. It's his.
+
+ALETHEA: Ask me again before we leave. I'll still want to.
+```
+[NO ends the talk. Talking to her again asks again. She won't leave Lakonia until it's done (III-5J waits on `FLAG_ICHOR_ALETHEA_READ_TABLET`).]
+```text
+> YES:
+```
+[She breaks the hook-pressed wax with her thumbnail and opens the tablet.]
+```text
+ALETHEA: “ELPIS, DAUGHTER OF PHAEDON. Revised.”
+
+ALETHEA: “Short is her thread. The shears are near.”
+
+ALETHEA: That's his hand. The hook on the end of every line.
+```
+[She takes a trowel from her belt and scrapes back the wax along the bottom edge, very gently. Scrape SE, three times.]
+```text
+ALETHEA: There. Cut in the lead, under all of it. Older. Plainer.
+
+ALETHEA: The prophetes who took it down wrote what she said. Then he covered it.
+
+ALETHEA: “Her thread ends the day the hours stop.”
+```
+[Hold 60 frames. The fire.]
+```text
+ALETHEA: That's what the Pythia said. That's all of it.
+
+ALETHEA: The day the hours stop. Hours don't stop.
+
+ALETHEA: So it's good news. Isn't it? It's a long way off. It's never.
+
+ALETHEA: Then why would anybody scrape it off?
+
+ALETHEA: …
+
+ALETHEA: I don't know why that frightens me. It ought to be the best news in the world.
+```
+[She smooths the wax below the forgery with the trowel's flat edge and writes. Stylus-scratch SE.]
+```text
+ALETHEA: I'm writing it underneath. Where he'll see it. In my own hand.
+
+ALETHEA: Then he can say I'm wrong. He can't say I hid it.
+```
+[The tablet's close-up again. Under the forgery, in a different hand:]
+```text
+“Scraped from the wax. The Pythia's words, as she spoke them:”
+
+“Her thread ends the day the hours stop.”
+
+“Truthfully. Alethea.”
+```
+[She closes the tablet, warms a new blob of wax at the hearth, presses it over the clasp, and stamps it with the tip of her trowel.]
+```text
+ALETHEA: There. A trowel, not a hook. He'll know the difference.
+
+ALETHEA: It's his to open. Somebody should let him choose.
+
+ALETHEA: You'll see him before I do. Everybody does, in the end. He heals everyone.
+
+ALETHEA: Make him read it, {PLAYER}. Truthfully. Make him.
+
+{PLAYER} put the sealed tablet away.
+```
+[Set `FLAG_ICHOR_ALETHEA_READ_TABLET`. `ITEM_SEALED_TABLET`'s description changes (Part 6).]
+
+**Design note.** STORY's Frozen Hour has Phaedon look at the seal "for a long time" before he breaks it. That is this seal: he expects a hook and finds a trowel, which is how he knows, before reading a word, that someone other than Iapetos wants him to see it.
+
+## Beat III-5H. It hid you once
+
+Per STORY III-5 and §2 (Rhea, arc 3). NEW.
+
+**Setup.** Leaving the house with `FLAG_ICHOR_ALETHEA_READ_TABLET` set and `FLAG_ICHOR_KLEON_GOT_KOURODIN` unset. In the yard, by the well, Rhea and Kleon. The yard is small and beaten flat, with room for a Pokémon to dance.
+```text
+RHEA: Kleon.
+```
+[She holds out a Poké Ball.]
+```text
+RHEA: Take it.
+
+KLEON: That's your Kourodin.
+
+RHEA: It hid you once.
+
+RHEA: Now it can stand in front of you. In the open.
+
+KLEON: …
+
+KLEON: Fewer words. Right.
+
+KLEON: …Thanks, Mother.
+```
+[He clips the ball to his belt and turns to the player.]
+```text
+KLEON: {PLAYER}. Before anything else. Before Delphoi.
+
+KLEON: One fight. You and me. The ring at the school.
+
+KLEON: No prophecy. No better thread. Nothing written either way.
+
+KLEON: I've never had a fight like that. Not once. Not since I was born.
+
+KLEON: I'll be at the ring. Come when you're ready.
+```
+[Kleon runs off north-west toward the agoge. Set `FLAG_ICHOR_KLEON_GOT_KOURODIN`. Rhea stays in the yard.]
+```text
+> Rhea, if spoken to again:
+RHEA: Go on. He's never waited for anything in his life.
+```
+
+## Beat III-5I. The ring
+
+Per STORY III-5 and §2 (Kleon, arc 8). NEW.
+
+**Setup.** The battle-school ring is the round sand floor in the agoge's yard on `MAP_LAKONIA` (Part 2). With `FLAG_ICHOR_KLEON_GOT_KOURODIN` set and `VAR_ICHOR_ACT3` = 9, Kleon stands in the middle of it. Cadets sit along the low wall that rings it, and among them, arms folded, a big gray-bearded man in a plain red cloak: Brasidas, the Polemarch. A coord trigger at the ring's gap starts the scene.
+```text
+CADET: That's Kleon! The one who ran off with the Titans!
+
+CADET: He came back! Nobody comes back!
+```
+[The player walks to the ring's middle.]
+```text
+KLEON: You came.
+
+KLEON: Look at them. Every boy in the school's here.
+
+KLEON: The last time I fought in this ring, I knew how I'd end. Glorious, and dead.
+
+KLEON: Now I don't know anything.
+
+KLEON: If I lose, I lose. If I win, I win. That's all it is.
+
+KLEON: …That's terrifying. Come on.
+```
+[Battle `TRAINER_ICHOR_KLEON_LAKONIA_<STARTER>`, chosen by `VAR_STARTER_MON`, with `MUS_ICHOR_BATTLE_RIVAL` in its clean arrangement: the Titan 9/8 layer taken out. `FLAG_ICHOR_NO_WHITEOUT` is set for this battle; the story goes on either way.]
+```text
+Defeat: KLEON: …Huh. I lost. And nothing happened. The sky's still there.
+Victory: KLEON: I won! I won. And it doesn't mean anything. Isn't that great?
+```
+[After the battle, if the player won:]
+```text
+KLEON: You know what that was?
+
+KLEON: The first fight I've ever had where I didn't know the end.
+
+KLEON: I thought it'd feel like falling. It feels like running.
+```
+[If the player lost:]
+```text
+KLEON: Don't look like that. It wasn't written. Next time it might go your way.
+
+KLEON: That's the best part. Nobody knows.
+```
+[Brasidas steps over the wall into the ring. The cadets go silent.]
+```text
+BRASIDAS: Kleon.
+
+KLEON: Polemarch! Sir. You… you saw that?
+
+BRASIDAS: Lakonians never asked how long. Only how well.
+
+BRASIDAS: Well. Both of you.
+```
+[He looks at the player.]
+```text
+BRASIDAS: The mountain, Kalliste. When you climb it, I'll be there.
+```
+[He steps back over the wall and walks off toward the Lesche. Kleon stares after him.]
+```text
+KLEON: Brasidas talked to me. He said “well.”
+
+KLEON: He said “both of you.” But he looked at me first.
+
+KLEON: …Did he look at me first?
+```
+?? YES/NO
+```text
+> YES:
+KLEON: I knew it. I KNEW it.
+
+> NO:
+KLEON: You're a terrible friend. Truthfully, as Alethea would say.
+```
+[Set `VAR_ICHOR_ACT3` = 10 and `FLAG_ICHOR_KLEON_LAKONIA_DONE`. Kleon walks back to his mother's house. Brasidas is hidden from Lakonia until the Pantheon (`FLAG_ICHOR_HIDE_BRASIDAS_LAKONIA`).]
+
+**Design note.** Brasidas's line here is the first half of his Pantheon line. On Olympus he finishes it: "Show me well." (Open questions, Lakonia 6.)
+
+## Beat III-5J. The goat paths
+
+Per STORY III-5 and III-8. NEW.
+
+**Setup.** A coord trigger across Lakonia's north road, two tiles short of the Route 26 seam, with `VAR_ICHOR_ACT3` = 10 and `FLAG_ICHOR_LAKONIA_PARTED` unset. Rhea, Kleon and Alethea wait by the north road's herm. Rhea wears a traveling cloak and no helmet. Until this beat, all three can be found in town (Rhea and Kleon at the house, Alethea at the graves; Part 2), so the player can dig prophecy fragment 8 with Alethea there to read it.
+```text
+RHEA: Delphoi.
+
+RHEA: Every Titan in Aethos is there. Tents in the laurels. The last muster.
+
+RHEA: The master goes down to the Loom when he's ready. He's nearly ready.
+
+RHEA: He needs you there. To carry it.
+
+KLEON: Then we don't go. Simple. He can't do it without you.
+
+ALETHEA: It isn't simple. The cloth runs out anyway. Every thread. The same day.
+
+ALETHEA: If we stay away, it ends in chains. If we go, it ends… some other way.
+
+RHEA: He'll wait for you. He's patient. He's a healer.
+
+RHEA: The Voice sent helmets to Kalliste. For your mother.
+
+RHEA: Leverage. So you'd come down to the Loom for her.
+
+RHEA: They came back with nothing. She's cleverer than him.
+```
+[Hold 30 frames.]
+```text
+RHEA: We go over Taygetos, by the goat paths. They'll watch the roads for me.
+
+RHEA: Not for you. Take the road. Make noise.
+
+KLEON: Make noise. That's my best thing.
+
+KLEON: …That's your best thing too, now. Go on. Be loud.
+
+ALETHEA: I'm going with them.
+
+ALETHEA: Someone should write down what a Titan admin does when she changes sides.
+
+ALETHEA: Truthfully, I expect it's mostly walking.
+
+RHEA: Kalliste.
+
+RHEA: At Knossa. You were in the hole I didn't seal.
+
+RHEA: …Good.
+
+KLEON: See you at Delphoi. Don't get there first. I mean it.
+```
+[The three walk west off the road onto the Taygetos path and out of sight. Set `FLAG_ICHOR_LAKONIA_PARTED`, `FLAG_ICHOR_HIDE_RHEA_LAKONIA`, `FLAG_ICHOR_HIDE_KLEON_LAKONIA` and `FLAG_ICHOR_HIDE_ALETHEA_LAKONIA`. The road north is Route 26. `VAR_ICHOR_ACT3` stays 10 until the Delphoi part's arrival (11).]
+
+**Design note.** The player has Daedalus's Wings, so "take the road" is a suggestion, not a wall. The road is the long way on purpose (AETHOS_MAP, Act III steps 6–7): Route 26, Lake Stymphalia and Route 27 to Arkadia, then back the way you came on Act II's Routes 12 and 11 to Aigion, the ferry (Route 10) to Kirrha, and Route 28 up the Kastalian falls to Delphoi. The journey to the climax feels long and runs past places the player already knows.
+
+## Optional beat: prophecy fragment 8, the widow of Lakonia
+
+Per STORY §4 and SYSTEMS §5. NEW.
+
+**Setup.** A fixed dig spot in the little burial plot beside Lampito's house (Spartans buried their dead inside the town; Lykourgos said it stopped people fearing death). Turned earth shows there from `FLAG_ICHOR_RHEA_UNMASKED` on. The Trowel digs it. Before III-5J, Alethea stands at the plot's gate and reads it on the spot. After III-5J, the tablet waits in the bag for her to read at the next meeting (the fragments' usual rule).
+
+[A lead tablet, folded in half, the way pilgrims sent questions to an oracle.]
+```text
+{PLAYER} dug up a folded lead tablet!
+
+ALETHEA: A question tablet. Somebody asked the Oracle something and kept the answer.
+
+ALETHEA: “Will my last child live long?” That's the question. Scratched in by hand.
+
+ALETHEA: And the answer, cut neat: “Your last child will be glorious young.”
+
+ALETHEA: No hook. No scraping. Nobody's touched it.
+
+ALETHEA: Nobody scraped this one. She just read it wrong.
+```
+[If Rhea is still at the house, she has come to the plot's gate.]
+```text
+RHEA: Put it back.
+
+RHEA: …No. Keep it. I've stopped hiding things in the ground.
+```
+[Set `FLAG_ICHOR_PROPHECY_8` (`FLAG_ICHOR_PROPHECY_START` + 7). If all eight fragments are now held, SYSTEMS §5's extra line follows:]
+```text
+> with all eight fragments:
+ALETHEA: That's all eight. Eight people.
+
+ALETHEA: Every one of them read a worse story than the one they were given.
+
+ALETHEA: Seven of them, he scraped. This one, nobody did.
+
+ALETHEA: He's the second-best forger in Aethos.
+
+ALETHEA: The best one is being afraid.
+```
+
+## Optional beat: Hestia's theoxenia (E2), the roofless farmhouse
+
+Per SYSTEMS §10, the extended tier, E2. NEW words.
+
+**Where and when.** Route 25, the roofless farmhouse in the west fields, about 40 tiles south of Amyklai's altar. The visit is live while `FLAG_ICHOR_THEOXENIA_HERMES` is set (the chain's first link, Kythera) and `FLAG_ICHOR_THEOXENIA_HESTIA` is unset. A Stranger omen can name it: "Smoke tried to rise from a roofless house on Route 25, and the rain put it out." Until the chain reaches it, the farmhouse is an empty ruin ("The hearth's cold. Someone lived here, not long ago.").
+
+**The test** (SYSTEMS's rules). Rekindle her hearth. The nearest fire is Apollo's altar at Amyklai, 40 tiles north. While the visit is live, the road's south half rains (the script sets `WEATHER_RAIN` on `MAP_ROUTE25_EUROTAS` on load), and rain shortens a carried flame to 20 steps (SYSTEMS §2, relay and water). Two roadside herm-shrines stand between the altar and the farmhouse, each within 20 steps of the next, and each relights a carried flame. A flame that goes out just goes out; walk back to the last shrine and relight it. Nothing is lost.
+
+[A woman in a gray shawl sits on the hearthstone of a farmhouse with no roof. Rain falls into the room. The hearth is black.]
+```text
+WOMAN: Oh. A visitor. Mind the floor. It's mostly puddle.
+
+WOMAN: The roof went to the Titans. The beams, I mean. For somebody's palisade.
+
+WOMAN: The hearth went out with it. First time in my life.
+
+WOMAN: I don't know what to do with my hands.
+
+WOMAN: There's fire at the god's altar up the road. At Amyklai.
+
+WOMAN: It's a long way in rain.
+```
+?? Carry fire for her? YES/NO
+```text
+> NO:
+WOMAN: No. Of course. It's raining. I'd stay in too, if I had an in.
+
+> YES:
+WOMAN: Light your torch at the altar. Mind the rain. It eats a flame.
+
+WOMAN: The little shrines along the road will lend you more. They always have.
+```
+[The player lights Hecate's Torch at Amyklai's altar and carries the flame back, relighting at the shrines as needed. At the hearth:]
+```text
+Light the hearth? YES/NO
+```
+[YES: the flame goes into the kindling and catches. The rain still falls into the room, but no drop lands on the fire.]
+```text
+WOMAN: There. Oh, that's better.
+
+WOMAN: You carried it all that way. In the rain. With your own two hands.
+
+WOMAN: Most people bring me a blanket. A blanket's kind. It isn't a fire.
+```
+[She stands. There is no shadow under her. The rain bends round her and doesn't touch her shawl.]
+```text
+HESTIA: Look at my feet, if you like. My nephew taught you that.
+
+HESTIA: I'm the one nobody paints. First offering, last thought. I don't mind.
+
+HESTIA: A house without a fire is only walls. Ione taught you that. She's mine.
+
+HESTIA: This one carries its own fire. If its tail goes out, so does it.
+
+HESTIA: Don't let it go out.
+
+{PLAYER} received a Charmander from Hestia!
+
+HESTIA: Keep it warm. And go home now and then. That's all a hearth ever asks.
+```
+[Set `FLAG_ICHOR_THEOXENIA_HESTIA`. Hestia Favor +15. The gift is SYSTEMS's: Charmander, Lv 45, Charcoal, Timid, Solar Power, Dragon Dance, with the shared touches (Cherish Ball, 3 perfect IVs, the Xenia Ribbon, the fateful flag, "a guest-gift of Hestia"). The farmhouse's hearth stays lit for the rest of the game, and a family moves back in after the climax (Part 2).]
+
+## Optional beat: Ares's theoxenia (E4), the ambush in the Arkadian hills
+
+Per SYSTEMS §10, the extended tier, E4. NEW words.
+
+**Where and when.** Route 27, the gully below the Skiritai lookout, where the Titan columns' road runs close to the path. Live while `FLAG_ICHOR_THEOXENIA_HERMES` is set, `FLAG_ICHOR_THEOXENIA_ARES` is unset, and `VAR_ICHOR_ACT3` ≥ 7. After the climax the two attackers are ex-Titanborn who never heard it was over, so the visit can't be missed. A Stranger omen can name it: "A rooster crowed at midnight in the hills above Stymphalia, and an old soldier laughed."
+
+[A grizzled veteran sits against a boulder, a bronze cockerel-crested helmet in his lap and a real cockerel on his shoulder. Two Titanborn stand over him.]
+```text
+AULAX: Hand it over, grandad. The muster needs every Pokémon it can get.
+
+GAIEOS: The golden age needs you. It just needs your Pokémon more.
+
+VETERAN: Two of you. One of me. I've had worse mornings.
+```
+[He sees the player.]
+```text
+VETERAN: Ah. Two of them. Two of us. I like those odds. Don't you?
+```
+?? Stand beside him? YES/NO
+```text
+> NO:
+VETERAN: Go on, then. Everyone's busy. I'll manage.
+```
+[NO: the three hold their places, and the visit waits for the player to come back.]
+```text
+> YES:
+VETERAN: Good! Left side's yours. I always take the right. Old wound.
+```
+[Double battle: the player and `PARTNER_ICHOR_ARES_VETERAN` against `TRAINER_ICHOR_TITANBORN_CHOMA` and `TRAINER_ICHOR_TITANBORN_KERAMOS` (Part 3). A loss ends the visit kindly: "VETERAN: Never mind. We'll go again tomorrow. War's patient."]
+```text
+AULAX: That old man hits like a landslide.
+
+GAIEOS: Run. Just run.
+```
+[They run north toward the columns. The cockerel crows, though it's nowhere near dawn. The veteran stands, and keeps standing longer than a man should. There is no shadow under him.]
+```text
+ARES: Feet, child. My brother's trick. No shadow. I never bother hiding it.
+
+ARES: Down in the town they chained my statue. So I'd never leave Lakonia.
+
+ARES: Nobody chains a god. I stay because they fight well.
+
+ARES: And because they asked.
+
+ARES: You stood beside a stranger because it was two on one.
+
+ARES: That's all war ever should be.
+
+ARES: This one's a rooster's grandson. Alektryon. He fell asleep on watch once.
+
+ARES: I made him a bird so he'd wake the sun every morning. He hasn't slept since.
+
+{PLAYER} received a Torchic from Ares!
+
+ARES: Don't let it sleep on watch.
+```
+[Set `FLAG_ICHOR_THEOXENIA_ARES`. Ares Favor +15. The gift is SYSTEMS's: Torchic, Lv 50, Expert Belt, Adamant, Speed Boost, Swords Dance, with the shared touches ("a guest-gift of Ares").]
+
+**Design note.** The chained statue is real: Pausanias (3.15.7) saw an Enyalios in fetters at Sparta, bound so war would never leave the city. It stands in Lakonia's agora (Part 2), so a player who reads its plaque before Route 27 hears Ares's line as a reply.
+
+## Beat III-6A. Kirrha and the Sacred Olives: the Titans' road
+
+Per STORY III-6. Status: NEW.
+
+**Where you come from.** Lakonia's last beat (III-5J) sends everyone to Delphoi: Rhea and Kleon over the mountains by her old goat paths, Alethea ahead by the Gulf ferry, and you by the road: Routes 26 and 27 past Lake Stymphalia, Arkadia, Routes 12 and 11, Aigion and the ferry to Kirrha *(Act II's maps; ids provisional)*. Kirrha's east edge opens onto the Sacred Olives.
+
+**Setup.** A coord trigger across the road two tiles inside `MAP_ROUTE28_SACRED_OLIVES`'s west seam runs with `VAR_ICHOR_ACT3` = 10 and `FLAG_ICHOR_SACRED_OLIVES_COLUMN` unset. Four Titanborn objects stand on the road at the far edge of the first screen, facing east; an old man with a cypress staff stands at the grove's edge beside the road.
+
+[Ahead, where the road runs into the olives, a column of Titanborn marches east in step. Their chant carries back over the trees.]
+```text
+TITANBORN: [offscreen] What does the sickle reap?
+
+TITANBORN: [offscreen] THE HOURS!
+
+TITANBORN: [offscreen] Who stands at the heart?
+
+TITANBORN: [offscreen] THE MASTER!
+```
+[The column walks off east and out of sight (hidden: `FLAG_ICHOR_HIDE_TITAN_COLUMN_OLIVES`). The old man turns.]
+```text
+HIERON: Third column today. They don't cut. They don't pick.
+
+HIERON: They don't even step off the road. Very respectful of my olives.
+
+HIERON: Funny, for a band of thieves.
+
+HIERON: This plain is the god's. Nobody ploughs it. Nobody's allowed.
+
+HIERON: Kirrha tried, once. Long ago. The god sent every city in Hellas.
+
+HIERON: Now there's no Kirrha to speak of. Just a harbor and me.
+
+HIERON: I'm the warden. I watch the olives grow. It's slower than it sounds.
+
+HIERON: You're going up? To Delphoi?
+```
+?? YES/NO
+```text
+> YES:
+HIERON: Everyone is. Pilgrims, Titans, goats. Nobody's coming down.
+
+> NO:
+HIERON: Hm. You've got the walk of someone going up.
+```
+```text
+HIERON: The Oracle's said one word a day for a year. Lately not even that.
+
+HIERON: Mind the rows. The god doesn't like his grass trampled.
+
+HIERON: He puts things in it.
+
+HIERON: My hut's halfway along. There's a spring. Drink if you're tired.
+```
+[Hieron walks back into the olives and goes home (his roadside object is hidden; he now lives in his hut). Set `FLAG_ICHOR_SACRED_OLIVES_COLUMN`.]
+
+**The route** is in Part 2. Its scenes are small: the desecrated altar (Psammos, Part 3), the oldest olive (a hidden Leaf Stone), Hieron's hut (the rest point), and the gorge's mouth in view at the east end, the Phaedriades shining above it.
+
+**The sign at the west end:**
+```text
+THE SACRED PLAIN
+
+The god's olives. Do not cut, plough or pick.
+
+East: the Kastalian falls, and Delphoi above them.
+```
+
+**The desecrated altar** (SYSTEMS §3), by the road on the second screen, before Psammos is beaten:
+```text
+A roadside altar of Apollo. A sickle has been scratched across the god's name.
+
+Someone has left a fresh olive branch on it anyway.
+```
+After Psammos is beaten, the altar can be cleansed as SYSTEMS §3 specifies (`FLAG_ICHOR_ALTAR_CLEANSED_SACRED_OLIVES`).
+
+## Beat III-6B. The Kastalian Gorge: the last muster
+
+Per STORY III-6 and §5 ("Act III: an army… Doubt creeps into the ranks"). Status: NEW.
+
+**The map** is in Part 2: the gorge climbs north from the plain, through the Titans' camp among the laurels, past a Gigas at the cutting and up the Kastalian falls, which only the Horn of Achelous can climb.
+
+**Setup.** At the camp's south tents, a coord trigger runs with `VAR_ICHOR_ACT3` = 10 and `FLAG_ICHOR_GORGE_SENTRIES` unset. Two Titanborn sentries stand across the lane, helmets down.
+```text
+SENTRY: Halt! Who goes- state your crew and your-
+
+SENTRY 2: Look at the hat. Look at the cloak.
+
+SENTRY 2: That's the one.
+
+SENTRY: …The Unwoven? Here?
+
+SENTRY 2: Orders. Nobody touches the Unwoven. Let them through.
+
+SENTRY: Through to where?
+
+SENTRY 2: Wherever they like. The master says they'll come down on their own.
+
+SENTRY: Down where?
+
+SENTRY 2: Don't know. Didn't ask. You don't ask a Gigas things. Move.
+```
+[They step aside, one each way, and stand stiffly. Set `FLAG_ICHOR_GORGE_SENTRIES`.]
+
+Talking to the sentries afterwards:
+```text
+SENTRY: We're not to touch you. Some of the others might, though.
+
+SENTRY: The doubters. They battle anyone. Gives them something to do.
+```
+```text
+SENTRY 2: May your thread never be cut.
+
+SENTRY 2: …You're meant to say “Nor yours.” Never mind.
+```
+
+**The camp.** Tents among the laurels on both banks of the stream, cookfires, a bread oven, sickle banners, racks of shovels nobody is using. The Titans are waiting for the night. Everyone in the camp knows it is tonight or tomorrow, and nobody says which. The named grunts and their lines are in Part 2; the battling ones in Part 3.
+
+**Agrios at the cutting.** Above the camp the gorge pinches to a cutting two tiles wide between rock and stream. Gigas Agrios stands in it, facing south (sight 4), mandatory.
+```text
+AGRIOS: The orders say let you through.
+
+AGRIOS: The orders don't say untested.
+```
+(His battle text is in Part 3.) After his defeat he steps onto the rock and lets you by:
+```text
+AGRIOS: Go on up. Everything goes up tonight.
+```
+
+**The great herm** stands at the foot of the lower fall, its face scratched with a sickle. Cleansing and anointing follow SYSTEMS §4 (`FLAG_ICHOR_HERM_KASTALIAN`):
+```text
+A great herm of Hermes, at the foot of the falls.
+
+Someone has scratched a sickle across his face. It's fresh.
+```
+
+**The falls.** The lower and upper falls need the Horn of Achelous (SYSTEMS §1). Facing a fall without it: "The Kastalian falls come down white and loud. Nobody climbs these. Nobody's let to." With it, the relic prompt.
+
+**The dread,** told at the camp's last cookfire by the camp cook (Part 2), and seen as the player climbs: the sky over Parnassos, the only part of the map not in shadow, never changes color through the whole climb.
+
+## Beat III-6C. Delphoi: the Pythia passes
+
+Per STORY III-6 and SYSTEMS §11. Status: NEW.
+
+**Setup.** On first entry to `MAP_DELPHOI` from the top of the falls (the spring's cleft, the lower town's east side), set `VAR_ICHOR_ACT3` = 11 and `FLAG_ICHOR_VISITED_DELPHOI` (the Fly flag), and run an `ON_FRAME` scene. On the Sacred Way's first switchback a line of pilgrims kneels along the wall.
+
+[A procession comes down the Sacred Way from the spring toward the temple: two veiled melissai, and between them a woman in white with wet hair and a laurel crown. The pilgrims go quiet. She is the Pythia, Phemonoe, coming from her bath in the Kastalian spring, as the Pythia does before the god speaks.]
+
+[She passes the player. She stops. She turns her head, slowly, and looks at the player for a long time. Hold 60 frames.]
+```text
+PYTHIA: …
+
+PYTHIA: I can't see you.
+```
+[She walks on up the Sacred Way and into the temple. The melissai follow. One of them looks back at the player twice.]
+```text
+PILGRIM: Four words. She said four words!
+
+OLD PILGRIM: To a child in a hat!
+
+PILGRIM: I've been here since the spring before last. I got “soon.”
+
+OLD PILGRIM: I got “no.” I hadn't asked anything yet.
+```
+[Alethea runs down the steps from the treasuries with a satchel full of wax tablets.]
+```text
+ALETHEA: {PLAYER}! You made it! You came the long way. Everyone did.
+
+ALETHEA: Kleon and his mother came over the mountain. On goat paths. At night.
+
+ALETHEA: She knows every path in Aethos. She used them to move Titans.
+
+ALETHEA: You saw the camp? Every Titan there is, waiting.
+
+ALETHEA: I wrote to the Archon. Truthfully. A letter from an exile.
+
+ALETHEA: He'll read it eventually. He'll come eventually. He's very… eventual.
+
+ALETHEA: The Pythia's the eighth Hierophant. Did you know she battles?
+
+ALETHEA: Truthfully, I didn't. I thought she just sat on the tripod and sighed.
+
+ALETHEA: Go and win. I'll be in Astyra's treasury, copying the walls.
+
+ALETHEA: Every city brags on its walls in this place. I'm copying the brags.
+```
+[She goes back up to the Astyran treasury. Set `FLAG_ICHOR_DELPHOI_ARRIVED`.]
+
+**The north-west gate**, at the foot of Route 29 beyond the stadium, before L-5. The path is open as far as the Korykian cave; the pass over Parnassos is shut further up, at the Archon's palisade (the League road part, `MAP_ROUTE29_PARNASSOS`):
+```text
+GUARD: The road north, over Parnassos. Thermopylai, then Thessaly.
+
+GUARD: You can go up as far as Pan's cave. Past that, the pass is shut.
+
+GUARD: While that camp sits in the gorge, nobody goes over. Nobody comes down.
+
+GUARD: The Archon's men will want it shut too. Whenever they get here.
+```
+
+### Optional: Kleon and Rhea at the stadium
+
+`FLAG_ICHOR_DELPHOI_STADIUM_SCENE`. With `VAR_ICHOR_ACT3` 11–13, Kleon runs laps on the stadium's track and Rhea sits on the stone seats, bare-headed, a chain wrapped round her forearm. A coord trigger at the stadium's entrance.
+```text
+RHEA: Faster.
+
+KLEON: [panting] I'm… going… as fast as I-
+
+RHEA: Then that's fast enough. Again.
+
+KLEON: {PLAYER}! You came by the road. We came over the top.
+
+KLEON: Mother knows every goat path in Aethos.
+
+RHEA: I used them to move Titans. Now I use them to move one boy.
+
+KLEON: I'm not a- …Fine.
+
+KLEON: The camp in the gorge. Every helmet left in Aethos. Waiting for dark.
+
+RHEA: Tonight or tomorrow. Not later.
+
+RHEA: Win your laurel. Eat something. Sleep if you can.
+
+KLEON: She says that to everyone now. “Eat something.” It's very strange.
+
+RHEA: …Eat something.
+```
+Talking to either afterwards:
+```text
+KLEON: The stadium's six hundred feet. Apollo measured it with his own feet.
+
+KLEON: He had big feet. I've checked.
+```
+```text
+RHEA: He runs like his father did. Too fast at the start.
+
+RHEA: Don't tell him.
+```
+
+## Beat III-6D. The Temple of Apollo: the Pythian Light
+
+Per SYSTEMS §12 #8 and §11. Status: NEW. The rite's rules and layout are in Part 5.
+
+**The door.** Three inscriptions over the temple's door, an object:
+```text
+Carved over the door: KNOW THYSELF.
+
+Under it, smaller: NOTHING TOO MUCH.
+
+Under that, one letter on its own: E.
+
+Nobody knows what the E means. People have written books about it.
+```
+
+**The pronaos.** A temple boy in white, Eudoros, sweeps the porch with a laurel broom and keeps one eye on the swallows nesting in the beams.
+```text
+EUDOROS: Pilgrim? The Pythia isn't answering today. Or any day.
+
+EUDOROS: Oh. You're here for the laurel. That's different. She'll fight you.
+
+EUDOROS: She doesn't talk much, but she fights a lot.
+
+EUDOROS: The god's light comes in through the roof. Show it where to go.
+
+EUDOROS: Turn the mirrors. Light the gold discs. The doors open for the light.
+
+EUDOROS: And mind the swallows. They're the god's. They know it.
+```
+If the player has failed a stage and returns to him:
+```text
+EUDOROS: Light goes straight until something turns it. Like people.
+
+EUDOROS: If a mirror's gone wrong, Pherenike will set it back. Just ask.
+```
+
+**The teach room, solved** (the first disc lit):
+```text
+The beam strikes the gold disc. It blazes.
+
+Somewhere inside the wall, a bronze bolt slides back.
+```
+
+**By night** (a stage entered after dark):
+```text
+The light through the roof is pale tonight. A moonbeam.
+
+It goes the same way. The god's sister lends him her light at night.
+```
+
+**The adyton.** When the beam lands on the bronze brazier at the foot of the steps:
+```text
+The beam gathers on the brazier's bowl. The oil smokes, then catches.
+
+The brazier is burning. Fire, made from light.
+```
+[The player lights Hecate's Torch from it; the carry is in Part 5.] When the carried flame lights the tripod's bowl:
+
+[Flame climbs the bronze legs of the tripod that stands over the chasm. Vapour rises from the crack beneath it and turns gold in the firelight. On the tripod's seat, a laurel branch across her knees, sits the Pythia. She has been there all along.]
+```text
+PYTHIA: …
+
+PYTHIA: Come.
+```
+[Battle `TRAINER_ICHOR_PHEMONOE`, `MUS_ICHOR_BATTLE_HIEROPHANT`. She speaks single words through the whole battle (Part 3). Her defeat line:]
+```text
+PYTHIA: …Bright.
+```
+[After the battle:]
+```text
+PYTHIA: Yours.
+
+{PLAYER} received the Sun Laurel!
+
+A new star has appeared in your Star Chart: Corvus, the raven.
+
+PYTHIA: Take.
+
+{PLAYER} received TM Mystical Fire!
+```
+[Set `FLAG_BADGE08_GET`, `FLAG_ICHOR_CONSTELLATION_CORVUS`, `FLAG_ICHOR_GOT_TM_MYSTICAL_FIRE`, `VAR_ICHOR_ACT3` = 12. The rite stays solved (Part 5).]
+
+Then, at once, STORY §7.5's opening, word for word:
+
+[The Pythia's temple, after the battle. Phemonoe sits on her tripod.]
+```text
+PYTHIA: …
+
+PYTHIA: Melitta.
+```
+[Hold 60 frames. It is the first time anyone has heard her say more than one word in a year.]
+```text
+PYTHIA: Someone's waiting for you. At the spring.
+
+PYTHIA: She's been waiting thirteen years.
+```
+[Eudoros, at the adyton steps, drops his broom.]
+```text
+EUDOROS: She said a sentence. Two! I have to tell someone.
+
+EUDOROS: …I'm not going to tell anyone. Nobody would believe me.
+```
+[Set `FLAG_ICHOR_PYTHIA_SPOKE`. When the player leaves the temple, the day-and-night tint is held at evening for the rest of III-7, whatever the clock says: the sun is going down behind Parnassos.]
+
+Talking to the Pythia again before III-7:
+```text
+PYTHIA: …Spring.
+```
+
+## Beat III-7. Mom at the Kastalian spring
+
+Per STORY III-7; **STORY §7.5 is the master text**, reproduced word for word below, with §6.10's staging. Status: NEW.
+
+- **Where:** the Kastalian spring, in the cleft of the Phaedriades at the east of `MAP_DELPHOI`.
+- **Needs:** the Sun Laurel (`VAR_ICHOR_ACT3` = 12). **Gives:** `ITEM_MELITTAS_HONEY`.
+- **Setup.** A coord trigger on the path into the cleft, with `FLAG_ICHOR_PYTHIA_SPOKE` set and `FLAG_ICHOR_MOM_SPRING` unset. Before this, the spring has no one at it but a dozing pilgrim and a sign; Mom's object is hidden (`FLAG_ICHOR_HIDE_MOM_DELPHOI_SPRING`) and is shown now.
+- **Staging (§6.10).** Dusk at the spring: the DNS evening tint, held. The spring's waterfall animates down the rock into the lion-head basin. Mom is her new sprite: the melissa's pale-gold veil with a honeycomb hem, in the same palette family as her slice sprite. Her Melisseer follows her as a small object with a humming emote, and hums (an emote bubble every 90 frames) through the scene. **`MUS_ICHOR_HOME_COUNTER`** plays: Elaia's home theme in the arrangement it was written for, lyre and a woman's hum, with its countermelody heard for the first time in the game.
+
+[The Kastalian spring at dusk. Water falls from the cleft in the rock. A woman in a pale-gold veil with a honeycomb hem stands at the pool. A bee hums at her shoulder.]
+```text
+MOM: There you are. You look thin. Have you been eating?
+
+MOM: …Don't look at me like that. I know. I know.
+
+MOM: Sit. My knees aren't what they were when I lived here.
+
+MOM: I said a pilgrim told me about the blind hour.
+
+MOM: There wasn't any pilgrim.
+
+MOM: I was here. I was a bee, once. A melissa.
+
+MOM: We carried honey down to the Loom. For the three of them.
+
+MOM: Nobody else would. A thousand years in chains, and nobody fed them.
+
+MOM: When I was carrying you, I took the honey down like always.
+
+MOM: The middle one measured your thread. She didn't mean to. It's what her hands do.
+
+MOM: One hour. You'd have had one hour.
+```
+[Hold 90 frames. Only the spring. The music drops to the hum alone.]
+```text
+MOM: I begged. I'm not proud of it. I begged three old women in chains.
+
+MOM: The Spinner said she couldn't change what she'd spun.
+
+MOM: But she could take it back. Unspin it. As if it had never been.
+
+MOM: No thread. No hour. No knot. No promise of anything, ever.
+
+MOM: Nobody would see what you'd be. Not the Pythia. Not even them.
+
+MOM: I said yes before she'd finished asking.
+
+MOM: I ran that same night. As far as a boat would go. To Daphne.
+
+MOM: And one night, under the old olive in the square, you came.
+
+MOM: Kydippe heard me. She came out in her nightdress and knelt in the dirt.
+
+MOM: Far away, the Spinner held her hands still for an hour.
+
+MOM: And the Oracle went blind.
+
+MOM: You didn't cry. You looked around like you'd lost something.
+
+MOM: You had. An hour. I traded it for everything else.
+
+MOM: So that's what you are. You're the thing I chose.
+
+MOM: I'm sorry I lied. I'm not sorry I did it.
+```
+?? Multichoice: WHY DIDN'T YOU TELL ME? / I KNOW.
+```text
+> WHY DIDN'T YOU TELL ME?:
+MOM: Because you'd have wondered every day if it was worth it.
+
+MOM: I wanted you to just live. Not prove anything.
+
+> I KNOW.:
+MOM: …Of course you do. You've got Daphne's nose for things. And my chin.
+```
+```text
+MOM: The helmets came to Elaia. My bee hummed it the day before.
+
+MOM: I'd packed by supper. Where do you hide a runaway bee?
+
+MOM: In the hive. Phemonoe took me in. She always was the brave one.
+
+MOM: Oh. And one more thing, while I'm confessing.
+
+MOM: The knucklebones. I cheated. The bee hums the throws.
+
+MOM: All two hundred and twelve.
+
+MOM: …Well. You had to find out sometime.
+```
+[She takes the jar from her bag: the one from the shelf at home.]
+```text
+MOM: Here. You can have it now.
+
+{PLAYER} received Melitta's Honey!
+
+The label still says “NOT FOR {PLAYER}.”
+
+MOM: It was never for you. It was for them. The last of the Delphoi honey.
+
+MOM: You're going down there tonight, aren't you.
+```
+?? YES/NO
+```text
+> YES:
+MOM: Stubborn. You get that from me.
+
+> NO:
+MOM: Liar. Good. You'll need that.
+```
+```text
+MOM: Then take it to them. Tell them Melitta says thank you.
+
+MOM: Tell them it was worth it. Every day.
+```
+[She reaches out and straightens the player's petasos: a short movement script, Mom one step forward, a 16-frame pause facing the player, one step back.]
+```text
+MOM: And come back up. You hear me? That's all I'll ask.
+
+MOM: Every time. Come back up.
+```
+[Give `ITEM_MELITTAS_HONEY`. Set `FLAG_ICHOR_MOM_SPRING`, `VAR_ICHOR_ACT3` = 13. The music holds on the countermelody, then fades.]
+
+**After the scene,** night falls at once: from here to the end of III-8, `MAP_DELPHOI` and its interiors are held at the DNS night tint whatever the clock says. Mom stays at the spring, facing the water.
+```text
+MOM: I'm not going anywhere. Not tonight.
+
+MOM: Go and see to your Pokémon. Eat something. Then go up.
+```
+Talking to the Melisseer:
+```text
+The bee hums at you. It sounds like it's about to say something.
+
+It doesn't. It's a bee.
+```
+
+**The night before the Omphalos,** while `VAR_ICHOR_ACT3` = 13, the town changes (the player can heal, shop and prepare):
+- The pilgrims have gone indoors; the Sacred Way is empty.
+- An augur on the theater's top row (Iamos, Part 3) watches the sky:
+  ```text
+  IAMOS: The stars are wrong tonight. All of them. A hand's width off.
+
+  IAMOS: I've watched the sky over Parnassos for thirty years.
+
+  IAMOS: I've never seen it lean.
+  ```
+- Near the Omphalos court, a faint ticking SE plays every 60 frames, the music box far under the ground. Checking the Omphalos:
+  ```text
+  The stone in its net of wool. It's warm.
+
+  You put your ear to it. Something under it is ticking.
+  ```
+- Kleon and Rhea stand at the gate of the Omphalos court, Kleon with his helmet off and a hand on his Pokémon's ball, Rhea's chain unwound. Talking to them before you step in:
+  ```text
+  KLEON: Tonight. Mother says tonight. The bees went quiet at sunset.
+
+  RHEA: Bees know.
+  ```
+
+## Beat III-8. The Omphalos at night
+
+Per STORY III-8 and §3 (Rhea's arc, beat 4). Status: NEW; written here in full.
+
+- **Where:** the Omphalos court before the temple, at night, and the Sacred Way below it.
+- **Needs:** `VAR_ICHOR_ACT3` = 13. **Gives:** the open Omphalos.
+- **Who:** Rhea (your partner), Kleon, two Gigas, the muster, Hyperion, Phaedon, the Archon and his guard, Mom, Alethea.
+- **Setup.** A coord trigger across the gate of the Omphalos court, with `VAR_ICHOR_ACT3` = 13 and `FLAG_ICHOR_OMPHALOS_NIGHT` unset. Before stepping in, a confirm: "The court is very quiet. Go in?" YES runs the scene; NO steps the player back one tile. **Music:** silence, then `MUS_ICHOR_OMPHALOS_NIGHT` from the horn.
+
+[The player steps into the court. The Omphalos stands in the middle in its net of knotted wool. Kleon and Rhea stand at the court's gate behind the player. Silence. Then, far below in the gorge, a horn. Another. A third, close.]
+```text
+KLEON: That's them. That's all of them.
+```
+[`special ShakeCamera`, small. Down the switchbacks of the Sacred Way the torch metatiles light one by one, climbing. Titanborn objects come over the lower walls and up the steps, a crowd drawn into the metatiles behind them.]
+```text
+KLEON: Every helmet in Aethos. Coming up the Sacred Way.
+
+RHEA: Hold the gate.
+
+KLEON: Holding!
+```
+[Kleon steps into the court's gate, facing down the Sacred Way, and throws a ball. His Kourodin comes out beside him: the shield-clash SE, twice. The Titans' front rank stops at the gate.]
+```text
+KLEON: Come on, then! One at a time, or all at once. I'm not fussy!
+```
+[Two huge figures vault the court's side wall: Gigas, in bigger helmets and bronze-scaled cuirasses. They land between the player and the Omphalos.]
+```text
+EPHIALTES: The stone. Clear the stone.
+
+THOAS: That's the deserter. And the child.
+
+EPHIALTES: The child's not to be touched. The deserter is.
+```
+[Rhea walks up beside the player and unwinds the chain from her forearm.]
+```text
+RHEA: Two of them. Two of us.
+
+RHEA: Beside me.
+
+RHEA: I've never fought on the right side. I'd like to see what it's like.
+```
+[Multi battle, `setmultitrainerbattle`: the player and `PARTNER_ICHOR_RHEA_DELPHOI` against `TRAINER_ICHOR_GIGAS_EPHIALTES` and `TRAINER_ICHOR_GIGAS_THOAS`. `FLAG_ICHOR_NO_WHITEOUT` is not set: a loss is a normal whiteout, and the scene replays from the trigger. Their defeat lines are in Part 3.]
+
+[After the battle, the two Gigas back against the wall and sit down hard.]
+```text
+EPHIALTES: Doesn't matter. Doesn't matter now. He's here.
+```
+[A big man comes up the Sacred Way through the Titans, a lit torch in one fist, squinting. Hyperion. His eyes are clouded (the Act III palette).]
+```text
+HYPERION: Unwoven! Is that you? It's dark as a well up here.
+
+HYPERION: Lampito! Thought you'd gone home.
+
+RHEA: I did.
+
+HYPERION: Huh. Good for you. Stand back, the pair of you.
+```
+[He walks to the Omphalos and holds the torch to its net of wool. The wool catches. Fire runs along every knot of the net (an animated metatile swap over 30 frames). The stone glows from inside, a deep red.]
+```text
+HYPERION: Old wool. Goes up like a dry year.
+```
+[A crack like thunder. `special ShakeCamera`, large. The Omphalos splits along a seam, like an egg, and the two halves fall open. Below them a stair of pale stone goes down into the dark. From far below, louder now, a music box is ticking.]
+```text
+HYPERION: There. Told you I'd get it open, my lord.
+```
+[Set `FLAG_ICHOR_OMPHALOS_OPEN`, `VAR_ICHOR_ACT3` = 14. The Titanborn at the gate fall quiet. They part. A man in a plain white healer's chiton walks up through them, carrying a lined case. He has no mask on; the gold mask hangs at his belt, beside a little clay bull. Phaedon.]
+
+[He stops beside the open stone. He looks at Rhea.]
+```text
+PHAEDON: Lampito.
+
+RHEA: Phaedon.
+
+PHAEDON: You left the threshold open. At Knossa. I'm glad you did.
+
+PHAEDON: I think I'd have done the same.
+
+RHEA: No. You'd have sealed it. And been sorry.
+
+PHAEDON: …Yes. Probably.
+```
+[He looks at the player. He doesn't say anything. He smiles, tired, the way he smiled at the Asclepeion counter in Astyra, and goes down the stair with the case.]
+```text
+HYPERION: Mind the steps, my lord. Mind the-
+
+HYPERION: I can't see the steps. Hold on. I'm coming.
+```
+[Hyperion follows him down, one hand on the wall, and is gone.]
+
+[Far below, at the sanctuary's gate where the Sacred Way begins, bronze glints. The Archon's guard comes through it at a run, and with them an old man in a plain undyed cloak, with a staff.]
+```text
+GUARD CAPTAIN: [far below] In the Archon's name! Lay down your-
+
+GUARD CAPTAIN: [far below] Hold them! Hold the gate!
+```
+[The guard and the Titans close at the lower gate. The old man doesn't fight. Across the whole height of the sanctuary he looks up at the court, at the open stone, at the player. He looks for a long time. Hold 90 frames.]
+```text
+ARISTEIDES: [far below] …Hm.
+```
+[Up the east steps from the spring path come Mom, in her melissa's veil, and Alethea, with a lit clay lamp.]
+```text
+MOM: There you are.
+
+ALETHEA: We heard the horn. Truthfully, everyone in Phokis heard the horn.
+
+ALETHEA: Take the lamp- no. You'll want both hands. I'll hold it here.
+```
+[Alethea raises the lamp over the stairhead. The first steps show, pale stone, going down and down.]
+```text
+MOM: Go on, then. I'll be right here. At the top.
+
+MOM: I've done my waiting at the bottom of things. I'll wait up here this time.
+
+MOM: Up's this way. Remember that.
+```
+?? Go down the stair? YES/NO
+```text
+> NO:
+MOM: Take a breath first. Then go. They won't wait, and nor should you.
+```
+[NO asks again on the next talk to the stairhead.]
+```text
+> YES:
+```
+[Mom clasps her hands. At the gate, the Titans surge; Rhea steps back to Kleon and spreads her arms, between the Titans and her son. Kleon swings. The player goes down the stair (warp to `MAP_DELPHOI_OMPHALOS_STAIR`). Set `FLAG_ICHOR_OMPHALOS_NIGHT`.]
+
+**The tableau, for the Frozen Hour.** These are the positions the court holds when the world stops, and the Frozen Hour's Delphoi uses them (STORY §7.7's first table). The scene leaves every object here, so the freeze only has to stop them:
+
+| Who | Where | Pose |
+|---|---|---|
+| Mom | the top of the Omphalos stair, west side | facing the stair, hands clasped |
+| Alethea | beside Mom, east side | facing the stair, the lamp raised (a lamp frame on her sprite) |
+| Rhea | the court's gate, one tile inside | facing south, arms spread, between the gate and Kleon |
+| Kleon | in the gate | facing south, mid-swing, mouth open on a shout |
+| Kleon's Kourodin | beside him | shield up |
+| The Archon | the sanctuary's lower gate, far below | mid-stride, facing north (up) |
+| The Archon's guard | around him | mid-clash with Titanborn |
+| Titanborn | on the switchbacks and at the court's gate | mid-step, climbing |
+| Ephialtes, Thoas | against the court's west wall | sitting |
+| The Omphalos | open | two halves, the stair between |
+
+### The Omphalos stair (`MAP_DELPHOI_OMPHALOS_STAIR`)
+
+A long stair down, 14×40: one switchback of pale steps cut into rock older than the temple, lit by nothing, with the music box's tick growing louder as you go (the ticking SE every 60 frames, then every 40, then 30). No encounters. Three things on the way:
+```text
+[Halfway down: a torch on the steps, burnt out]
+Hyperion's torch. He must have dropped it. He went on down in the dark.
+```
+```text
+[A burnt scrap of wool on a step]
+A knot of the Omphalos's net. Charred. Every knot is tied the same way.
+```
+```text
+[The wall, near the bottom]
+Something is cut into the rock here. Three women, and a loom.
+
+It's older than any writing. You can read it anyway.
+```
+The bottom of the stair is the Loom's east entrance.
+
+## Beat III-9. The Loom
+
+Per STORY III-9; **STORY §7.6 is the master text**, reproduced word for word below, with §6.11's staging. Status: NEW.
+
+- **Where:** `MAP_THE_LOOM`, the cavern under the Omphalos, at night.
+- **Needs:** III-8 (`FLAG_ICHOR_OMPHALOS_OPEN`). **Gives:** the Frozen Hour.
+- **Who:** Phaedon, Hyperion, the three Fates, the Lord of Time.
+- **The map (§6.11).** One screen tall and two wide, 34×14. The two posts and the beam are metatiles across the middle of the map. The warp threads beyond counting are animated BG metatiles, swaying slowly. Every thread is white with a red knot drawn into its tiles. At the bottom row every thread ends: the last row is a visible line where the cloth stops, and below it the chasm is black. The three Fates are object events using their dex art's overworld sprites, standing at the warp; their chains are metatiles from each wrist to a post or the beam. Phaedon kneels by a lined case near the east end; Hyperion stands at the chasm's edge.
+- **Music.** **`MUS_ICHOR_FATES`**: Nemira's lyre, Lotira's aulos and Thanira's frame drum together for the first time. Under it, the music box ticks.
+- **Setup.** On entering from the stair, the camera scrolls west across the whole Loom before control returns (a camera-object pan, 4 tiles a second).
+
+[A long stair down. Far off, a music box ticks. The cavern opens, and the Loom fills the screen: two posts, a beam and threads beyond counting. Every thread is white with a red knot. They all stop on the same row near the floor, and below that row there is only dark.]
+```text
+The Loom. Every life in Aethos hangs here.
+
+Every thread ends on the same row. There's no cloth below it.
+```
+[Three figures stand at the Loom, chained at the wrists to the posts and the beam. Their hands never stop moving. Phaedon kneels by a lined case. Hyperion stands at the chasm's edge, squinting into the dark.]
+```text
+PHAEDON: You came down. Of course you did.
+
+PHAEDON: Your mother's up there. I can tell by your face.
+```
+?? Show Phaedon the sealed tablet? YES/NO
+
+(Asked only with `ITEM_SEALED_TABLET` in the bag. NO, or no tablet: the scene goes straight on.)
+```text
+> YES:
+PHAEDON: I told you at Knossa. I won't read it. Not now. Not here.
+
+PHAEDON: If it says what Iapetos warned me it would, I'd stop.
+
+PHAEDON: And then she dies. So no.
+```
+```text
+PHAEDON: Look at them. That's all I'll ask. Look.
+```
+[The camera pans along the Loom to the three Fates.]
+```text
+SPINNER: …Someone's come.
+
+MEASURER: Someone with nothing to measure.
+
+CUTTER: Someone I can't cut.
+
+SPINNER: Oh. Oh, it's you.
+
+SPINNER: You've grown. We never get to see them grow. Only the thread.
+```
+?? Give them Melitta's Honey? YES/NO
+```text
+> NO:
+The honey jar is heavy in your bag.
+```
+[NO asks again.]
+```text
+> YES:
+You hold up the jar. The Spinner reaches as far as her chain allows.
+
+SPINNER: Thyme. Kalliste thyme.
+
+MEASURER: Melitta's.
+
+CUTTER: She always brought too much. We never said.
+
+SPINNER: She says thank you? Tell her we're the ones who say that.
+
+SPINNER: Tell her it was worth it. Every day.
+```
+[Remove `ITEM_MELITTAS_HONEY`. Set `FLAG_ICHOR_GAVE_FATES_HONEY`.]
+```text
+PHAEDON: A thousand years. The first Archon chained them here.
+
+PHAEDON: So no thread would ever change. So every oracle would come true.
+
+PHAEDON: They tie the knots. They can't stop. They can't choose.
+
+PHAEDON: I'm asking you to cut them free. That's all I've ever asked.
+```
+[He opens the case. The Harpe lies on red cloth, gold and black.]
+```text
+PHAEDON: It doesn't like anyone with a thread. It'll like you.
+```
+?? Take the Harpe? YES/NO
+```text
+> NO:
+PHAEDON: I know. I said no too, the first time.
+```
+[NO asks again.]
+```text
+> YES:
+{PLAYER} lifted the Harpe. It's light. It hums.
+
+MEASURER: Listen to us before you listen to him.
+
+MEASURER: Every thread on this Loom ends tonight. Every one.
+
+MEASURER: We've known for a year. The tides knew. The birds knew.
+
+CUTTER: His. Hers, at the top of the stair. The little girl's, in the city.
+
+SPINNER: We tied it so. We couldn't help it. The chains don't let us help it.
+
+MEASURER: Cut us free, and he'll take what we are. The world will stop.
+
+MEASURER: Leave us, and it stops anyway. Tonight. In chains.
+
+SPINNER: The only thread that doesn't end tonight is yours.
+
+SPINNER: Because it isn't ours. We let it go.
+
+CUTTER: Cut us free. Then, after, come and find us. Wake us.
+
+CUTTER: You'll be the only one who can.
+
+SPINNER: Will it work? We don't know.
+
+MEASURER: We've never not known before.
+
+CUTTER: …It's horrible. I think I like it.
+
+SPINNER: We let you go once, little one. Will you let us go?
+```
+?? Cut the chains? YES/NO
+```text
+> NO:
+SPINNER: …Take your time. We have until the end of the cloth.
+```
+[NO asks again.]
+```text
+> YES:
+```
+[Three strokes. Each stroke is a 4-frame white flash and a bell SE, and that Fate's chain metatiles swap to broken ends: the Spinner's, the Measurer's, the Cutter's. Each chain parts with a sound like a bell. For the first time in a thousand years, three pairs of hands stop moving: the three Fates' objects stop their working animation.]
+```text
+SPINNER: Oh. My hands.
+
+MEASURER: They're still.
+
+CUTTER: …
+```
+[Phaedon stands.]
+```text
+PHAEDON: Thank you. I mean that. I'll always mean that.
+
+PHAEDON: Lord of Time. Your sickle's here.
+```
+[The Harpe tears itself out of the player's hands and flies down into the chasm (a small spinning object, down off the map's bottom edge). The screen fades to black for 30 frames. A sound like a mountain breathing: a long low rumble SE.]
+```text
+HYPERION: It's coming up! Back from the edge, Unwoven!
+```
+[The Lord of Time rises out of the chasm: the 64×64 object (engine E10), the Harpe in its grip, rising one tile every 8 frames from below the last row. `special ShakeCamera`, the whole screen, for as long as it rises. Its eyes find the Loom.]
+```text
+PHAEDON: Stop the cutting. Stop all of it. Let nothing end.
+```
+[It lays the Harpe across the warp. Every thread stops swaying: the warp's animation halts. The music box's tick stops, then starts again, slower. `special Ichor_FrozenHourBegin` (engine E2): color drains from the Loom outward, the BG palettes nearest the Loom first, one palette every 6 frames, until the whole screen is gray except for the player. **Music:** when the gray begins to spread, every instrument of the Fates' theme stops on a single beat. Silence. Then the tick: `MUS_ICHOR_MUSIC_BOX`.]
+```text
+CUTTER: Go! Sisters, go!
+```
+[Three sparks, white, gray and black, leap from the Fates and shoot up through the ceiling: three spark objects, off the top edge. The Fates' figures fade (a 20-frame blend to the background, then hidden). The Lord of Time rises through the rock above, and gray sky shows through: the ceiling metatiles swap to a ragged opening onto gray. A stair of pale stone unfolds upward behind it: the Stair of Hours' foot appears at the Loom's west end as metatiles, one step every 6 frames. Phaedon and Hyperion step onto it. Both are unfrozen objects (engine E3): they keep their color.]
+```text
+PHAEDON: Come up when you're ready. I'll tell you all of it then.
+```
+[They climb out of sight up the stair and are hidden.]
+```text
+The Loom is still. Every thread hangs where it stopped.
+
+Somewhere very far off, a music box is ticking.
+
+You can move. You seem to be the only one.
+```
+[Set `VAR_ICHOR_ACT3` = 15 and `FLAG_ICHOR_CUT_THE_CHAINS`. `FLAG_ICHOR_FROZEN_HOUR` is already set by `Ichor_FrozenHourBegin`. Control returns. The Frozen Hour (III-10) begins here: the Stair's first step won't take the player's weight yet, and the way out is back up the Omphalos stair.]
+
+**The Loom, after the cut,** for the Frozen Hour writer: the warp hangs still and gray; the three broken chains hang from the posts and the beam; the hole in the ceiling shows gray sky; the Stair of Hours rises from the west end. Checking the warp:
+```text
+Every thread stopped mid-sway. Every knot on the same row.
+
+Except that there's no thread for you here. There never was.
+```
+
+## Beat III-10. The Frozen Hour
+
+Per STORY.md §3 III-10, §6.12 (staging) and §7.7 (master text). Status: NEW.
+
+**How it plays, in one paragraph.** The world has stopped on the night of the Omphalos. Every map is gray (E1), every person and Pokémon is frozen mid-motion, and the only music anywhere is Elpis's music box ticking out her lullaby without its last bar. You can move; you seem to be the only one. Daedalus's Wings still fly, and every herm you anointed since Act I has turned its stone head toward the next place you need to go (E12). Three sparks flew from the Loom to three sanctuaries. You wake the Cutter at Kaldera's forge, the Measurer at the Pool of Mnemosyne, and the Spinner under the old olive in Elaia, in any order, and each opens four landings of the Stair of Hours. You must also go to Astyra, where a father sits at his frozen daughter's bedside, and show him the tablet you took from the Labyrinth. When all of that is done, Kleon breaks his own thread at Delphoi's gate, and the two of you climb.
+
+**Master text.** Every box from STORY §7.7 below is reproduced word for word. Lines marked *(added)* are this file's connective tissue. Where a master-text box runs past two lines on the screen, the build splits it at a sentence break; the words don't change.
+
+**State on entry.** `VAR_ICHOR_ACT3` is 15 and `FLAG_ICHOR_FROZEN_HOUR` is set (`special Ichor_FrozenHourBegin`, at the end of the Loom, III-9). `FLAG_ICHOR_HIDE_FROZEN_ONLY` is cleared, so every map's frozen-only objects appear (P8). The whiteout point is the Omphalos court (P5).
+
+### III-10A. The Loom, after
+
+[Picks up from the Delphoi writer's last box at the Loom: "You can move. You seem to be the only one." The Loom is gray from edge to edge. The warp threads hang still. The Fates' places at the posts are empty, their broken chains on the ground. The pale stair Phaedon and Hyperion climbed rises into the cavern's roof through a split in the rock; its lowest step is out of reach. `MUS_ICHOR_MUSIC_BOX`, slow. The player has control.]
+
+| Interact with | Text |
+|---|---|
+| The pale stair *(added)* | "A stair of pale stone, going up through the rock." / "Its first step hangs out of reach." |
+| A thread on the Loom *(added)* | "White thread, and a red knot. Somebody's. It doesn't sway." |
+| The last row *(added)* | "Every thread stops here. Below it, nothing has been woven." |
+| A broken chain *(added)* | "Black adamant. Cut clean, three times." |
+| The chasm *(added)* | "Dark all the way down. Something huge went up out of it." |
+
+[The way out is the Omphalos stair, south. On `MAP_DELPHOI_OMPHALOS_STAIR` every lamp's flame is a still gray shape. Footsteps are the only sound effect. At the top step a coord trigger runs once: the warp to the Omphalos court.]
+
+### III-10B. Delphoi, climbing out
+
+[`MAP_DELPHOI`, the Omphalos court, in the Frozen Hour. Gray. Nothing moves. The player steps out of the stair mouth beside Mom.]
+```text
+The sky is the color of ash. Nothing moves anywhere.
+```
+
+| Interact with | Text |
+|---|---|
+| Mom, at the top of the stair, hands clasped | "She's warm. She doesn't move." / "She was waiting for you to come back up." |
+| Alethea, lamp raised | "The lamp's flame has stopped mid-flicker. It gives no light at all." |
+| Rhea, arms spread | "Rhea stands between the stair and the Titans. Between them and her son." |
+| Kleon, mid-swing | "Kleon's mouth is open on a shout." |
+| The Archon, at the gate | "The Archon, mid-stride at the gate. Late. He looks as if he knew he would be." |
+| The Stair, before any Fate is roused | "The first step won't take your weight. The hour is holding its breath." |
+| An anointed herm | "The herm's stone face has turned. It's looking toward Kaldera." (The text names whichever place it points to.) |
+| A bird in the air, anywhere | "A bird hangs in the air, wings up. You could touch it." |
+| The Pythia, at the temple door *(added)* | "Phemonoe, halfway down the temple steps, one hand out. As if she'd felt something coming." |
+| A Gigas, mid-charge *(added)* | "His spear is level. His foot is off the ground. It will stay there." |
+| The smoke from the Omphalos's net *(added)* | "Smoke from the burned wool, standing in the air like a gray tree." |
+| The cracked Omphalos *(added)* | "The navel of the world, split in two. A pale stair climbs out of it into the sky." |
+| A melissa at the hives *(added)* | "A bee hangs an inch from her veil. She'll never feel it land." |
+
+[The Stair of Hours stands out of the split Omphalos: pale steps climbing into the gray sky. Its foot is a warp to `MAP_STAIR_OF_HOURS`. Before any Fate is roused, stepping on it shows the Stair row above. Once some landings are open, the warp works and the closed flights are blocked on the Stair itself (P5).]
+
+**Leaving Delphoi.** The Wings work from anywhere outside. On the first Fly out of Delphoi, the fly map shows every town gray, and the landing points of the three sanctuaries (Kaldera, Arkadia, Elaia) and Astyra are marked as they always are. Nothing on the fly map says where to go; the herms and the Measurer do.
+
+### III-10C. Kaldera's forge: the Cutter
+
+[`MAP_KALDERA_TELCHINES_FORGE` *(Act II's id; the forge where Talos told you the Harpe's secret, II-13)*. In the Frozen Hour Talos is here, back at work. Gray. When the player first enters, a coord trigger two tiles inside the door starts the scene.]
+
+[Talos frozen at the anvil, hammer raised. Sparks hang in the air like small stars. On the cold anvil sits a gray figure with shears in her lap.]
+
+[She is Thanira, drawn gray: her overworld sprite with the E1 gray applied, though she is an unfrozen object (E3) and turns her head to the player.]
+```text
+CUTTER: You found me. Good. I wasn't sure anyone could.
+
+CUTTER: I've cut every thread in Aethos. Every one, for a thousand years.
+
+CUTTER: I always knew when. Before they were born, I knew.
+
+CUTTER: Do you know what it's like? To love someone you've already cut?
+
+CUTTER: …Now I don't know anything. My hands are empty.
+
+CUTTER: It's the most frightening thing that's ever happened to me.
+
+CUTTER: Help me up.
+```
+[The player takes her hand: the player faces her and both objects step one tile closer. `special Ichor_UnfreezeObject` blends her from gray toward her true palette, but stops at a third: a little color comes into her: black, then terracotta. The frame drum, Thanira's voice from `MUS_ICHOR_FATES`, joins the music box and stays for as long as the player is on this map.]
+```text
+CUTTER: Warm. Of course you're warm. You're the only thing still going.
+
+CUTTER: Four hours of the stair are mine. They'll take your weight now.
+
+CUTTER: Go and get my sisters.
+```
+[Her spark flies toward Delphoi: she becomes a small black spark object that rises off the top of the screen. Four landings open. The herms re-point. Set `FLAG_ICHOR_ROUSED_CUTTER`.]
+
+**If the Cutter is not the first Fate roused** *(added)*. Her lines need no change: "Four hours of the stair are mine" is true in any order.
+
+| Interact with | Text |
+|---|---|
+| Talos, hammer raised | "The hammer's at the top of its swing. It's been there a long time." *(added)* |
+| The hanging sparks | "Sparks, hanging in the air like small stars. Not one of them is falling." *(added)* |
+| The cold anvil, after | "Cold iron. Someone sat here and waited for you." *(added)* |
+| A Telchine at the bellows *(added)* | "Its paws are on the bellows. The fire behind it is a still orange shape." |
+
+### III-10D. The Pool of Mnemosyne: the Measurer
+
+[`MAP_ARKADIA_POOL_OF_MNEMOSYNE` *(Act II's id)*. Arkadia's cypress wood, gray. The pool is the only thing in the world that moves: its surface ripples. The ripple is an animated metatile that E1 exempts: the pool's palette slot is left in color, a dull silver, the only one on the map. A gray figure with a measuring rod stands at the water's edge. Coord trigger at the pool's rim.]
+```text
+MEASURER: The pool remembers. Even now. Memory doesn't need time to move.
+
+MEASURER: Look in. I'll show you who chained us.
+```
+[`special Ichor_SepiaMemoryBegin` (E5): the gray swaps for sepia. A picture window shows the pool's picture, in sepia: a young man in a white cloak at the Loom, hammering a black chain onto a post. Three figures stand at the warp with their backs to him. The music box falls silent for the memory; under it, one held low aulos note.]
+```text
+MEDON: The Oracle said a king's death would save the city.
+
+MEDON: So my father put on a peasant's cloak and walked into the spears.
+
+MEDON: If oracles can be wrong, he died for nothing.
+
+MEDON: So they won't be. Not ever again. Not for anyone.
+
+MEDON: Hold still. Please. I'm sorry. Hold still.
+```
+[The sepia fades. Gray again. `special Ichor_SepiaMemoryEnd`. The music box resumes. Set `FLAG_ICHOR_SAW_MEDON`.]
+```text
+MEASURER: Medon. The first Archon. He cried the whole time he worked.
+
+MEASURER: He made every knot tight, so his father's would mean something.
+
+MEASURER: Grief is a very strong smith.
+
+MEASURER: He kept one last knot. Archons have kept it ever since. In a box.
+
+MEASURER: Remember that, after.
+
+MEASURER: And go to the city before you go home. The healer is there.
+
+MEASURER: He isn't at the top of the stair. He's with her.
+
+MEASURER: Your hand, please.
+```
+[The player takes her hand. A third of her color comes back. The aulos, Lotira's voice, joins the music box for the rest of this map.]
+```text
+MEASURER: Four more hours. That's eight. The last four are my little sister's.
+```
+[Her spark, a white one, flies toward Delphoi. Four more landings open. The herms re-point. Set `FLAG_ICHOR_ROUSED_MEASURER`.]
+
+**Order variants** *(added; master text is the recommended order, Kaldera before Arkadia before Elaia)*. Only the lines whose facts change are swapped; everything else stands.
+
+| Condition | Replaces | With |
+|---|---|---|
+| The Measurer is the first Fate roused | "Four more hours. That's eight. The last four are my little sister's." | "MEASURER: Four hours. The other eight are my sisters'." |
+| The Spinner is roused already, the Cutter not | the same box | "MEASURER: Four more hours. That's eight. The last four are the Cutter's." |
+| The Measurer is the last Fate roused | the same box | "MEASURER: Four more hours. That's all twelve. We'll all come." |
+| The Spinner is roused already (you've been home) | "MEASURER: And go to the city before you go home. The healer is there." | "MEASURER: And go to the city. The healer is there." |
+| Phaedon has read the tablet already | the three boxes from "And go to the city…" to "He's with her." | "MEASURER: You've been to the city. You've seen him. Good." |
+
+| Interact with | Text |
+|---|---|
+| The pool, after *(added)* | "The water moves. Nothing else in the world does." |
+| A cypress *(added)* | "Not a needle stirs." |
+
+### III-10E. Astyra
+
+[`MAP_ASTYRA` *(Act II's id)*, the Agora. Gray streets. A herald stopped mid-shout. Lysimachos frozen over a basket of ostraka. A Kronist frozen on his cart with his mouth open.]
+
+| Interact with | Text |
+|---|---|
+| The Kairos statue | "The runner on the razor. Someone scratched a sickle over his face." / "In the gray, the scratch is the only thing that looks new." |
+| Lysimachos | "He's holding up a shard. It says ARISTEIDES." |
+| The herald *(added)* | "His mouth is open on a word. You'll never know which one." |
+| The Kronist on his cart *(added)* | "He's pointing at the sky. He was promised this." |
+| The statue of King Kodros *(added)* | "The king who walked into the spears. In the gray, he looks like everyone else." |
+| The Asclepeion's counter *(added)* | "The healer's place is empty. A clean bandage lies folded where he stands." |
+
+**The shadowless figure** (optional, E18, decision S13). [The first time the player crosses the Agora in the Frozen Hour, a figure in a traveler's hat walks along the edge of a rooftop at the top of the screen, four tiles, unfrozen and in color, and steps out of sight. It has no shadow. No text. Set `FLAG_ICHOR_SAW_SHADOWLESS`. Players who learned Hermes's tells (E1 of the theoxenia chain, on Kythera's road) will know.]
+
+[The Stoa: `MAP_ASTYRA_ARCHONS_STOA` *(Act II's id)*. Keeper Lykophron sits frozen at his desk, stylus raised.]
+```text
+A wax tablet lies under his hand.
+
+“DECREE OF THE GOLDEN AGE. In the first hour without end…
+
+…by the will of Kronos, its Keeper shall be Iape-”
+
+The stylus stopped two letters short of his own name.
+```
+?? Take the tablet? YES/NO
+```text
+> YES:
+{PLAYER} took the unfinished decree.
+
+> NO:
+You leave him to it. He isn't going anywhere.
+```
+[Optional. The trial (L-2) uses it if you have it, and stands without it. YES gives `ITEM_UNFINISHED_DECREE` and sets `FLAG_ICHOR_GOT_UNFINISHED_DECREE`. NO asks again on the next talk.]
+
+| Interact with | Text |
+|---|---|
+| Lykophron's right hand *(added)* | "His right hand is dark with ink to the wrist." |
+| The shelves of records *(added)* | "Rows of tablets, every one in the same neat hand." |
+
+[Phaedon's house: `MAP_ASTYRA_PHAEDONS_HOUSE` *(Act II's id)*, Elpis's room. Elpis frozen in bed, mouth open on a note, the clay bull in her arms. Daphne frozen in the chair, a book open in her lap. On the shelf a small bronze music box ticks: the only moving thing in the room. On the floor by the bed sits Phaedon, in color, holding Elpis's hand. He doesn't look up.]
+
+[The music box is an unfrozen object (E3) with a 2-frame tick animation. In this room the music box track plays a little louder and closer, as if from the shelf.]
+
+| Interact with | Text |
+|---|---|
+| The music box | "It's ticking. It's the tune you've heard everywhere since the world stopped." / "A scratched label: From Papa's friend under the island." |
+| Daphne *(added)* | "Daphne, frozen mid-word. One finger keeps her place on the page." |
+| Ophidrop, asleep on the blanket *(added)* | "The little temple snake is curled on Elpis's feet. It hasn't stirred." |
+
+[Talking to Phaedon:]
+```text
+PHAEDON: She was humming when it stopped.
+
+PHAEDON: I've been sitting here trying to remember how it ends.
+
+PHAEDON: Seven years, every night. She never gets to the end.
+
+PHAEDON: She always falls asleep first.
+
+PHAEDON: Daphne was reading to her. The olive on the Akropolis. The one that grew back.
+
+PHAEDON: I read her the rest. I don't know if she can hear me.
+
+PHAEDON: It isn't a garden. I thought it would be a garden.
+
+PHAEDON: I thought she'd play in it. Forever. Never tired.
+
+PHAEDON: She isn't tired. She isn't anything.
+```
+?? Show him the sealed tablet? YES/NO
+```text
+> NO:
+Phaedon doesn't look up.
+```
+[NO asks again on the next talk; the next talk starts at the question.]
+```text
+> YES:
+```
+[Phaedon takes it. He looks at the seal for a long time. He breaks it.]
+```text
+PHAEDON: “ELPIS, DAUGHTER OF PHAEDON. Revised.”
+
+PHAEDON: “Short is her thread. The shears are near.”
+
+PHAEDON: That's it. That's what they gave me.
+
+PHAEDON: And underneath, in different writing…
+
+PHAEDON: “Scraped from the wax. The Pythia's words, as she spoke them:”
+
+PHAEDON: “Her thread ends the day the hours stop.”
+
+PHAEDON: “Truthfully. Alethea.”
+```
+[Hold 90 frames. The music box ticks.]
+```text
+PHAEDON: The day the hours stop.
+
+PHAEDON: Not young. Not soon. The day the hours stop.
+
+PHAEDON: That's never. It was always never. Unless someone…
+```
+[He looks at the gray window.]
+```text
+PHAEDON: …I stopped them.
+
+PHAEDON: He handed me a short thread, and I went and made it true.
+
+PHAEDON: Her thread's ended. Tonight. I ended it.
+```
+[He holds the tablet out to the player without looking at it again, and the player takes it back. It stays `ITEM_SEALED_TABLET`; its description now reads "The seal is broken." He stands, slowly, still holding her hand.]
+```text
+PHAEDON: Do you understand? If you wake the world, it's already cut.
+
+PHAEDON: She won't wake with it. She can't. Her thread is done.
+
+PHAEDON: This way she's here. Humming. I can hold her hand.
+
+PHAEDON: I'm sorry. I'll be at the top of the stair.
+
+PHAEDON: Please don't come up.
+```
+[He lets go of her hand, very carefully, and leaves: he walks out of the door and is hidden. Set `FLAG_ICHOR_PHAEDON_READ_TABLET`. The herms re-point.]
+```text
+Elpis's mouth is open on a note. You don't know which one.
+```
+[Talking to Elpis afterward repeats that last box.]
+
+### III-10F. Elaia: home
+
+[`MAP_ELAIA_VILLAGE` *(slice)*. Gray. Halia frozen under her canopy, spindle mid-turn. The kid's Wooloo stopped mid-chew on a garland. The player's house is empty, the hearth cold.]
+
+[`MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F` *(slice)*:]
+
+| Interact with | Text |
+|---|---|
+| Mom's loom | "The traveling cloak is finished. It's folded on the stool." / "A note is pinned to it: Someday. -M." Then ?? Put it on? If YES: "{PLAYER} put on Melitta's cloak." (Cosmetic: decision S13.) |
+| The honey shelf | "There's a clean ring where the jar sat. No dust. It wasn't gone long." |
+| The knucklebones | "Record against Mom: 0 wins, 212 losses." / "Now you know why." |
+| Halia | "Her spindle is mid-turn. She's frowning at it, the way she frowned at you." |
+| The cold hearth *(added)* | "No fire. There's always a fire." |
+| The klepsydra, upstairs *(added)* | "A drop of water hangs from the spout. It isn't going to fall." |
+
+- **The cloak** (E17). YES sets `FLAG_ICHOR_WORE_MELITTAS_CLOAK` and swaps the player's palette to the honey-gold cloak. NO: "You leave it folded. It'll keep." *(added)*, and the question is asked again on the next look. After the climax the loom offers it on and off: "Wear Melitta's cloak?" / "Take off Melitta's cloak?" *(added)*.
+- **The knucklebones record** reads IchorSave's real counts (`momWins`, `momLosses`), as the slice's does. Before Delphoi the wins can only be 0; 212 is the count on a game where the player never played her.
+
+[The square. Among the roots of the old olive sits a gray figure with a distaff. Coord trigger two tiles from the olive.]
+```text
+SPINNER: There you are. Back where you started.
+
+SPINNER: This is where your thread came up. Out of the dark, like a root.
+
+SPINNER: We didn't spin it. You did. You've been spinning it all along.
+
+SPINNER: Look. It's gold. We don't spin gold. Nobody does.
+```
+[The only colored thing on the map besides the player: a thin gold thread, drawn into the olive's root metatiles, runs from the roots to the player's feet. It is a separate palette slot E1 leaves alone while this scene runs.]
+```text
+SPINNER: It's what a thread looks like when nobody's decided it yet.
+
+SPINNER: The olives came in silver on your festival day. That was us. Looking.
+
+SPINNER: We wanted to see you on your day. We never get to see anyone's day.
+
+SPINNER: And Halia. She tried so hard to read you. Tell her it wasn't her eyes.
+
+SPINNER: Give me your hand. That's all twelve hours. We'll all come.
+```
+[The player takes her hand. The lyre, Nemira's voice, joins the music box for the rest of the map. Her spark flies toward Delphoi. All twelve landings open. Set `FLAG_ICHOR_ROUSED_SPINNER`. The herms re-point.]
+
+**Order variants** *(added)*:
+
+| Condition | Replaces | With |
+|---|---|---|
+| The Spinner is not the last Fate roused | "SPINNER: Give me your hand. That's all twelve hours. We'll all come." | "SPINNER: Give me your hand. Four more hours. Find my sister, and we'll all come." |
+
+[If the Spinner is not last, her spark still flies to Delphoi, and only her four landings open.]
+
+### III-10G. Delphoi again: Kleon wakes
+
+[It needs all three Fates roused and Elpis's room seen, because Phaedon goes to the top of the stair only after that scene: `FLAG_ICHOR_ROUSED_CUTTER`, `_MEASURER`, `_SPINNER` and `FLAG_ICHOR_PHAEDON_READ_TABLET`. The player walks back through the frozen court. As the player passes Kleon, his eyes move: a coord trigger on the row in front of the gate.]
+
+[If the conditions aren't met, Kleon's interact text is the table's "Kleon's mouth is open on a shout."]
+
+[A crack, like ice. Color runs into Kleon from his fist, then everywhere: `special Ichor_UnfreezeObject`, the 16-frame blend. It is the first sound effect in the world that isn't your footsteps.]
+```text
+KLEON: -ow. OW. What-
+
+KLEON: Why's everyone… why is everything gray?
+
+KLEON: I heard you. Walking. Everything else stopped, and I could hear you walking.
+
+KLEON: I had a thread. I could feel it. Like a leash. Stopped tight.
+
+KLEON: I pulled. It hurt. I pulled anyway.
+```
+[He opens his fist. A short gray thread lies across his palm, snapped: an item picture window.]
+```text
+KLEON: …I think I broke it.
+
+KLEON: So I'm like you now. No prophecy. Nothing written.
+
+KLEON: I'll die when I die. Huh.
+
+KLEON: That's either the worst thing that's ever happened to me, or the best.
+```
+[He looks at Rhea, frozen with her arms spread in front of him.]
+```text
+KLEON: She was standing in front of me. When it stopped. Look at her.
+
+KLEON: …Mother.
+
+KLEON: Right. Where's the fight? Up there? Good. Let's go up.
+```
+[Kleon joins as a follower NPC (`setfollowernpc`, with `battlePartner` set to his Stair partner team) if the expansion's NPC followers are enabled; otherwise he waits at the foot of the Stair and on each landing as you climb (P5). Field sound effects stay muted except your footsteps and his. Set `VAR_ICHOR_ACT3` to 16.]
+
+| Interact with Kleon, after | Text |
+|---|---|
+| In the court *(added)* | "KLEON: Up. Before I think about it." |
+
+---
+
+## Beat III-11. The Stair of Hours
+
+Per STORY.md §3 III-11, §6.13 (staging) and §7.8 (master text). Status: NEW. The map is designed in P5.
+
+- **Needs:** all twelve landings open, and Kleon awake. **Gives:** time restarts.
+- **Who:** Kleon (partner), Phaedon, Hyperion, the Lord of Time, the Fates, the Moment.
+
+### III-11A. The climb
+
+[`MAP_STAIR_OF_HOURS`. The music box with all three Fates' voices together, for the first time since the Loom (`MUS_ICHOR_FATES` over `MUS_ICHOR_MUSIC_BOX`, P9). The climb. On the lower landings, frozen Titanborn stand mid-step, following their master up. A coord trigger on the second landing:]
+```text
+KLEON: They followed him up. He told them they'd live forever up here.
+
+KLEON: Look at them.
+```
+
+| Interact with | Text |
+|---|---|
+| A sundial, landings 1–11 *(added)* | "A sundial cut into the stone. Its shadow stopped on the {STR_VAR_1} hour." ({STR_VAR_1} is first to eleventh, by landing.) |
+| A frozen Titanborn *(added)* | "Mid-step, one hand on the rock. Following." |
+| Another *(added)* | "This one's eyes are shut tight, as if he's waiting for a blow." |
+| Petros, landing 5 *(added)* | "Petros, the digger from Kronion Hill. His helmet's pushed back. He looks like he's about to ask a question." |
+| Amathos, beside him *(added)* | "Amathos, with his hand on Petros's shoulder. Steadying him. Or being steadied." |
+| A spark at a sundial *(added)* | "One of the Fates' sparks, circling the sundial. It's warm." Then the party is healed: "Your Pokémon are rested." |
+| Kleon, on the climb *(added)* | "KLEON: Keep going. If I stop I'll start thinking." |
+
+[Items on the lower landings are in P6. The sparks that heal are on the fourth, eighth and eleventh landings (P5).]
+
+### III-11B. The twelfth landing
+
+[A coord trigger on the top step of the eleventh flight. The camera rises to the twelfth landing. A sundial cut into the stone, its shadow stopped at the top of the hour. Phaedon stands beside it, and Hyperion beside him, squinting. Above them the Lord of Time fills the sky, the Harpe in its grip (the E10 large object, in the sky rows above the landing). Phaedon and Hyperion are in color; so is the Lord of Time.]
+```text
+HYPERION: Is that them? I can't… it's all the same gray.
+
+HYPERION: He said noon forever. He said I'd never lose the light.
+
+HYPERION: It's not noon. It's not anything.
+
+PHAEDON: I asked you not to come up.
+
+KLEON: Yeah. We're bad at that.
+
+PHAEDON: Kleon. You broke your own thread. I can see it. That must have hurt.
+
+PHAEDON: You'd have made a fine healer. You never had patience for endings either.
+
+PHAEDON: {PLAYER}. If you beat me, the world wakes. You know what that means for her.
+
+PHAEDON: Please. Let me keep her. Like this.
+```
+?? YES/NO
+```text
+> YES:
+PHAEDON: …You don't mean it. Kind people say yes first.
+
+KLEON: Then they think. Sorry, healer.
+
+> NO:
+PHAEDON: No. I wouldn't either. Not for someone else's.
+```
+```text
+PHAEDON: Hyperion. One more fight. Then you can rest.
+
+HYPERION: Roast them, my lord?
+
+PHAEDON: Gently.
+```
+[Multi battle with `setmultitrainerbattle` (E13): the player and Kleon against Phaedon and Hyperion. `TRAINER_ICHOR_PHAEDON_STAIR` and `TRAINER_ICHOR_HYPERION_STAIR`; Kleon's team by `VAR_STARTER_MON`: 0 → `PARTNER_ICHOR_KLEON_STAIR_PYLAKYON`, 1 → `_SEISMARE`, 2 → `_DAPHNYAD`. Music `MUS_ICHOR_KRONOS`. Set `FLAG_ICHOR_NO_WHITEOUT` (the slice's `B_FLAG_NO_WHITEOUT`) first. Their defeat lines:]
+```text
+PHAEDON: There. Every hurt closes, if you let it.
+
+HYPERION: Hot… no. Not hot. Cold. Everything's cold.
+```
+**If the player loses** *(added)*. [Clear nothing. Fade to gray and back. The party is restored by the sparks, which gather round the player.]
+```text
+The sparks gather round you. Warm. Your Pokémon get up.
+
+KLEON: Again. They're tired too. I can tell.
+```
+[The player stands on the eleventh landing's top step, facing up. The trigger runs again from "PHAEDON: Hyperion. One more fight." on the next step up.]
+
+[On a win: clear `FLAG_ICHOR_NO_WHITEOUT`. Set `VAR_ICHOR_ACT3` to 17.]
+
+### III-11C. The crumble
+
+[After the battle, Hyperion sits down hard on the steps. Below the twelfth landing the stair begins to fall away, hour by hour, into the gray. (E11: the eleventh flight's top row swaps to the sky metatile with `setmetatile` and `DrawWholeMapView`, and `special ShakeCamera` shakes for 8 frames.)]
+```text
+KLEON: The stair's going! Big man, it's going!
+
+HYPERION: Where's the edge? I can't find the edge.
+
+HYPERION: Go on, then. Leave me. I'd leave me.
+```
+[Kleon looks up at the Lord of Time. Then at the player. Then at Hyperion: three turns of his object, 20 frames apart.]
+```text
+KLEON: That's where the song is. Up there. With you.
+
+KLEON: Nobody's going to sing about this.
+
+KLEON: …Good. Go on. I've got him.
+```
+[Kleon hauls Hyperion's arm over his shoulders and starts down the crumbling stair. The two objects walk down together, Kleon a tile ahead and Hyperion following, one row per 16 frames. Kleon's follower NPC state is cleared.]
+```text
+HYPERION: Who's that? Who's got me?
+
+KLEON: Nobody. Walk.
+```
+[The camera stays at the top and watches them grow small. The flights between the landings fall row by row just behind them as they go: each row swaps to sky a few frames after they leave it, with a small shake per row. The landings themselves, each an hour-stone with its sundial, stay hanging in the gray: they are hours, not steps. When the two objects pass out of view below, the crumble stops. Phaedon doesn't move.]
+```text
+PHAEDON: I can't stop it now either. Did you know? It doesn't listen to me.
+
+PHAEDON: It never did. It just wanted what I wanted. Nothing ending.
+
+PHAEDON: Go. I won't stand in your way.
+
+PHAEDON: I'll stand here and hope you lose.
+```
+[Phaedon steps aside, to the landing's left edge, and stays there. The spark circling the twelfth sundial now heals (P5).]
+
+| Interact with, now | Text |
+|---|---|
+| Phaedon *(added)* | "He's watching the stair where they went down. He doesn't look at you." |
+| The edge of the landing *(added)* | "The steps are gone. The hour-stones hang in the gray below, one under another." |
+
+### III-11D. The Lord of Time
+
+[The player steps up into the Lord of Time's shadow: a 3×2 block of shadow metatiles at the top of the landing. A static battle at Lv 60, catchable: `setwildbattle SPECIES_KRONOLITH, 60` with `FLAG_ICHOR_NO_WHITEOUT` and the wild no-running flag (`WE_FLAG_NO_RUNNING` → `FLAG_ICHOR_NO_RUNNING`) set, and its own music, `MUS_ICHOR_LORD_OF_TIME`. It knows Future Sight, Trick Room, High Horsepower and Roar of Time.]
+
+[Before the battle, the large object lowers its head toward the player: a 2-frame lean. No text. The screen flashes once and the battle begins.]
+
+**If the player loses** *(added)*. [The sparks restore the party as before.]
+```text
+The sparks gather round you. Warm.
+
+The Lord of Time hasn't moved. It doesn't need to.
+```
+[The shadow trigger can be stepped on again.]
+
+**Caught or beaten.** [Clear both battle flags. If caught, set `FLAG_ICHOR_CAUGHT_LORD_OF_TIME`; the great shape is gone from the sky, and the Harpe hangs in the air where its hand was. If beaten, set `FLAG_ICHOR_LORD_OF_TIME_FAINTED`; the great shape stays above the landing, its eyes shut and its grip open.]
+
+[After it is caught or beaten:]
+```text
+The Lord of Time is still. The sky is still gray.
+
+Nothing moves. Far below, the music box ticks on.
+```
+[Three faint sparks settle on the landing: the Fates, their hands free. Each spark becomes its Fate's object, drawn at the third of her color she has had since she was roused.]
+```text
+CUTTER: It's beaten. It isn't over.
+
+MEASURER: Stopped time won't start by itself. It needs a moment.
+
+SPINNER: Somebody has to choose one. We never have.
+
+SPINNER: Every moment we ever saw was already woven.
+
+CUTTER: Take one, and the world moves. We don't know what it brings.
+
+MEASURER: Not for the girl in the city. Not for anyone.
+
+SPINNER: There. Look.
+```
+
+### III-11E. The Moment, and the twelve chimes
+
+[The Harpe slips from the Lord of Time's grip and tips over the landing's edge: the Harpe object turns end over end and starts to fall past the player's right side. Something small and bright comes running along its blade on tiptoe, toward you: the Moment, a small gold object, running along the falling blade's line on the landing's paving. A painted line crosses the paving one tile in front of the player.]
+```text
+Something is running down the edge of the falling sickle.
+
+Long hair in front. Nothing behind.
+```
+?? Take the moment? YES/NO
+```text
+> NO:
+It's past you. Gone.
+```
+[NO: it wheels round in the sky and comes back along the blade, and the question is asked again. The Moment's object streaks off the screen's east edge and returns from the west in a wide arc.]
+```text
+> YES:
+```
+[The timing: a painted line on the paving. Press A as the forelock crosses it. `special Ichor_BullLeap` (E7): `VAR_0x8004` = the Moment's object, `VAR_0x8005` = the line's tile, `VAR_0x8006` = the window, 14 frames on Mortal, 10 on Hero, 6 on Spartan. The Moment crosses the 9 tiles toward the line at 1 tile per 6 frames on Hero (8 Mortal, 5 Spartan), like the Gentle Bull.]
+```text
+> Too early:
+Too soon! It sidesteps you.
+
+> Too late:
+Too late. It's past.
+```
+[After a miss it comes round again, the window wider each time: 2 more frames per miss, up to double the starting window. It is never harder than the bull, and it never stops coming. A miss asks nothing; it simply comes again after its arc, and the special runs again.]
+```text
+> Clean:
+```
+[One white frame. A sound like a breath drawn in. The music box stops ticking: the BGM cuts on that frame, and for the first time in the Frozen Hour there is silence.]
+```text
+You have it by the forelock.
+```
+[It twists free at once, as it always does, and streaks away east into the gray. It leaves a gold feather-glint where the player's hand was, a one-tile sparkle field effect for 30 frames. Set `FLAG_ICHOR_MOMENT_SEIZED`. Set `VAR_ICHOR_ACT3` to 18.]
+```text
+There's nothing behind to hold. It's gone.
+```
+[The twelve chimes. The Harpe strikes the eleventh landing. A chime, and a twelfth of the color comes back (`special Ichor_ColorReturnStep` with `VAR_0x8004` = 1). Then a chime on every landing below, all the way down: the camera pans down the stair one landing per chime, following the Harpe as it falls, and each chime is `Ichor_ColorReturnStep` 2, 3, and so on. Sky, stone, the sea far below, gold on the Omphalos. The chimes are tuned to the lullaby's first twelve notes (P9). With step 11 the camera returns to the top. On the twelfth chime, the sundial's shadow moves: its shadow metatile shifts one step. E6's last step clears `FLAG_ICHOR_FROZEN_HOUR` and the DNS tint resumes at dawn. Wind. Birds. The sea. Then `MUS_ICHOR_MAIN_THEME`, rising. The three Fates stand on the landing, solid now, in color.]
+```text
+CUTTER: There. That's the end of the old cloth.
+
+MEASURER: Everything after this, nobody wove.
+
+SPINNER: Not us. Not anyone. It's all like yours now.
+```
+[Far below at the stair's foot, the Harpe lies in three pieces again: a camera glance down, three small glints on the Omphalos step.]
+```text
+CUTTER: We'll keep those. One each. So no one ever holds it whole again.
+```
+[If the Lord of Time was beaten rather than caught, it sinks back down through the clouds below the stair, slowly, into the deep: a 64-frame descent of the large object, and a low rumble. Phaedon falls to his knees beside the sundial (the kneeling frame, P10).]
+```text
+PHAEDON: Elpis.
+```
+[Fade to white. Set `FLAG_ICHOR_HIDE_FROZEN_ONLY`. Every frozen-only object on every map is hidden again, and every map's ordinary objects come back to life with the mode cleared.]
+
+---
+
+## Beat III-12. Elpis's line
+
+Per STORY.md §3 III-12, §6.14 (staging) and §7.9 (master text). Status: NEW.
+
+- **Where:** Delphoi at dawn, then Astyra, Phaedon's house.
+- **Gives:** Ophiuchus placed [SYSTEMS §8 #17].
+
+### III-12A. Delphoi at dawn
+
+[`MAP_DELPHOI`, the Omphalos court, by the DNS dawn tint. The Stair of Hours is gone: the split Omphalos is only a split stone, with the Harpe's three pieces lying on its step. Fade in from white. The player stands at the top of the Omphalos stair, where Mom is. Color, and noise everywhere at once: wind, birds, the Titanborn crying out as they wake, a dog somewhere below, the falls. No music yet. Mom's hands unclasp.]
+```text
+MOM: {PLAYER}!
+
+MOM: You came back up.
+```
+[She holds the player. Hold 60 frames.]
+```text
+MOM: Don't say anything. You'll ruin it.
+```
+[At the stair's foot, Kleon sets Hyperion down on the Omphalos step. The sun comes up over the mountain. Hyperion turns his face to it: his object turns east.]
+```text
+HYPERION: …There it is.
+```
+[Rhea walks to the Archon's guard and holds out her wrists.]
+```text
+RHEA: Rhea. Lampito. Either name. I'm done.
+
+KLEON: Mother-
+
+RHEA: Good fight. Eat something.
+```
+[Phaedon comes down the last steps: his object walks in from the Omphalos stair mouth. He looks at no one.]
+```text
+PHAEDON: Take me to her. Please. Before they take me anywhere else.
+```
+[The Archon nods. Two guards go with him. Set `FLAG_ICHOR_RHEA_SURRENDERED`. Fade to Astyra.]
+
+**State handed off** to the League writer (L-1 onward). Delphoi's court after this beat: the Titanborn sit in the sanctuary with their helmets off, the Archon's guard among them; the Pythia stands at the temple door; Mom, Alethea and Kleon are hidden from Delphoi until the League writer places them. Rhea and Hyperion are in the guard's custody. Phaedon stays at Elpis's bedside under guard, two hoplites at the door, until his sentence (L-3).
+
+### III-12B. Astyra: Elpis's line
+
+[`MAP_ASTYRA_PHAEDONS_HOUSE`, Elpis's room. Morning comes in through the window with the city's noise: a dog, a herald, everyone talking at once (three ambient SE, staggered). The DNS morning tint. Daphne is in the chair, her book on the floor. Elpis sits up in bed with her clay bull. Phaedon stops in the doorway. The player stands behind him in the doorway's other tile.]
+```text
+ELPIS: Papa! You missed it. I got to the end.
+
+ELPIS: Of the song. All the way to the end. Listen.
+```
+[She hums the lullaby, all the way through, and for the first time it resolves: `MUS_ICHOR_LULLABY_RESOLVED`, played once, with no other sound. It ends on the tonic.]
+```text
+DAPHNE: She did. I heard it. I'd never heard the end before.
+```
+[Phaedon kneels by the bed: the kneeling frame.]
+```text
+PHAEDON: Little one. Listen. The Oracle. What it said about you.
+
+PHAEDON: It's gone. All of it. Nobody can read anybody now.
+
+PHAEDON: Not the Pythia. Not me. I don't know how long you have.
+
+PHAEDON: I don't know. I don't know anything.
+```
+[Elpis thinks about it: her object turns to the window and back, 40 frames.]
+```text
+ELPIS: Then my thread isn't finished yet.
+```
+[Hold 120 frames, with no music. The city's noise goes on outside. Phaedon puts his face down on the blanket: the face-down frame.]
+```text
+ELPIS: Papa? Are you sad or happy?
+
+PHAEDON: I don't know that either.
+
+ELPIS: {PLAYER}. This is Starry. Papa says there's a real one.
+
+ELPIS: Is he still sad?
+```
+?? YES/NO
+```text
+> YES:
+ELPIS: Then we should go and see him.
+
+> NO:
+ELPIS: Good. I'd like to meet him.
+```
+[Then Ophiuchus is placed: the Star Chart's chime and a one-line system message. Set `FLAG_ICHOR_STAR_OPHIUCHUS` (the constellation range, #17).]
+```text
+A new star has appeared in your Star Chart: Ophiuchus, the healer.
+```
+[Set `FLAG_ICHOR_ELPIS_LINE`. Set `VAR_ICHOR_ACT3` to 19. Astyra's Asclepeion becomes the heal and whiteout point. Fade out. The League writer begins in Astyra the next morning (L-1).]
+
+| Interact with, before the fade *(added)* | Text |
+|---|---|
+| The music box | "It's stopped. Somebody wound it all the way down." |
+| Daphne | "DAPHNE: Not now. Later. Let me just sit here and be wrong about everything." |
+
+## Beat L-1. Astyra, the morning after
+
+Per STORY.md §3, L-1. It picks up where III-12 ends, in Phaedon's house, with `VAR_ICHOR_ACT3` at 19 and Ophiuchus placed.
+
+**The maps** are Act II's: the city outdoors `MAP_ASTYRA` *(Act II's id)*, with its Agora and the Archon's Stoa, and Phaedon's house `MAP_ASTYRA_PHAEDONS_HOUSE` *(Act II's id)*.
+
+**Setup.** Phaedon stays at home under guard: two of the Archon's hoplites sit on the step outside, eating figs Daphne gave them. When the player leaves the house with `VAR_ICHOR_ACT3` at 19, an `ON_FRAME` script runs on `MAP_ASTYRA`. The DNS morning tint. The Agora is full: crowds are drawn into the metatiles, and the named NPCs below stand as objects. The city's noise plays as ambient SE: a dog, a herald's bell, everyone talking at once.
+
+[Daphne comes out of the house behind the player and pulls the door to, gently.]
+```text
+DAPHNE: He's asleep. In the chair, holding her hand. She's awake and humming.
+
+DAPHNE: I've never seen anyone sleep so badly or look so happy about it.
+
+DAPHNE: Go on. Go and look at the city. It's making a terrible racket.
+
+DAPHNE: Truthfully, as Alethea would say, I think it's frightened.
+```
+[Daphne goes back inside. The camera pans down the street to the Agora and the bema, the herald's stone platform, where Kerykos is climbing up with a scroll. He rings his bell three times.]
+```text
+KERYKOS: HEAR YE! Hear ye! A decree of the Archon of Aethos!
+
+KERYKOS: I read them. I don't write them. Hold on to your vegetables.
+
+KERYKOS: “Aristeides, Archon, to every city of Aethos.”
+
+KERYKOS: “The Fates are loosed. The Oracle is silent. No thread can be read.”
+
+KERYKOS: “Merchants hoard grain. Cities count their spears.”
+
+KERYKOS: “Mothers do not know what to tell their children.”
+
+KERYKOS: “At the new moon I will carry Medon's Knot to Delphoi…”
+
+KERYKOS: “…and tie it on the Loom. And fate will be made safe again.”
+```
+[Half the crowd cheers. Half groans. A cabbage sails past the bema and misses.]
+```text
+KERYKOS: Missed! Thank you! The herald is not the decree!
+
+KERYKOS: “Until the new moon, as the law of Olympus requires…”
+
+KERYKOS: “…the Archon sits upon the mountain, to answer any challenger.”
+
+KERYKOS: “If it is written, meet it with dignity.”
+
+KERYKOS: …He always ends with that one. Hear ye. That's the lot.
+```
+[Kerykos climbs down, spots the player and comes straight over, bell still in hand.]
+```text
+KERYKOS: {PLAYER}! Hermes keep you. You look like you've been up all night.
+
+KERYKOS: Up all hour, I suppose. Ha! Too soon?
+
+KERYKOS: Medon's Knot. Tie it on the Loom. Do you know what that means?
+
+KERYKOS: Neither do I. I just read it. Very well, I might add.
+
+KERYKOS: But I'm a herald. I know what a crowd sounds like.
+
+KERYKOS: Half of them want it tied. Half want it burned.
+
+KERYKOS: All of them want somebody else to decide.
+
+KERYKOS: If you want to argue with an Archon, he's on top of Olympus.
+
+KERYKOS: It's a long road. Over Parnassos, through the hot gates, up Tempe.
+
+KERYKOS: And the Assembly sits at noon, here in the Agora. The Keeper's case.
+
+KERYKOS: Your friend's been up all night with her tablets. She hums when angry.
+```
+**The ferry rumor** (only if `FLAG_ICHOR_THEOXENIA_HERMES` is set and `FLAG_ICHOR_THEOXENIA_DIONYSUS` is not: it points to beat L-5A):
+```text
+KERYKOS: Oh! And a word from the roads, since the roads are my trade.
+
+KERYKOS: The Gulf ferry's crew caught a rich boy asleep on Aigion's quay.
+
+KERYKOS: Ivy in his hair. Purple cloak. They mean to ransom him.
+
+KERYKOS: Hermes doesn't like it. Neither do I. Just saying. Loudly.
+```
+[Set `VAR_ICHOR_ACT3` to 20. The player is free. Alethea stands on the Stoa's steps behind a trestle table of tablets; talking to her, or stepping onto the steps, starts beat L-2.]
+
+**The Agora, the morning after.** These six stand as objects until the trial, then join the vote in beat L-2. Their rosters are in Part 2.
+
+| Who | Where | One line |
+|---|---|---|
+| Eutychos, the grain-dealer | his stall, sacks piled to the awning | "Nobody knows if the harvest comes in. So it's my grain until it does." |
+| Amphilytos, the seer | an empty booth with a painted eye | "A man asked me about rain. I said, probably. He thanked me." |
+| The Kronist preacher | sitting on the edge of his cart | "I stood here with my mouth open for an hour. I felt it. Stone." |
+| A Titanborn, helmet in her hands | the foot of the Stoa's steps | "Where do I give myself up? …Is there a line? There's a line." |
+| A mother and her small son | by the fountain | "He asked how long he'll live. I said I don't know. He said “good.”" |
+| Lysimachos, the Archon's father | his bench, his basket of ostraka | "My boy's up a mountain with a box. I've a basket of his name on pots." |
+
+---
+
+## Beat L-2. The Agora: the trial of Iapetos
+
+Per STORY.md §3, L-2, and Iapetos's arc, §2 item 10. The staging mirrors Alethea's ostracism (STORY §6.5, Act II): the same Agora, the same urn, the same six citizens, the same count board. This time the hook is on the other side of the table.
+
+**Setup.** `VAR_ICHOR_ACT3` is 20. The Stoa's steps are the speakers' platform. The great urn stands below them. Objects: Thrasyllos, the epistates, at a little lectern; Keeper Lykophron, bare-faced, in his blue-bordered himation, his right hand ink-dark, a wax tablet on a cord at his neck, with two hoplites behind him; Alethea at her trestle table; Kerykos; and the six from beat L-1. The crowd is drawn into the metatiles. Music: Act II's dry frame-drum pulse for the vote (Part 9).
+
+**Before it starts.** Talking to Alethea at the table:
+```text
+ALETHEA: You came. Good. I need someone in the crowd who already believes me.
+
+ALETHEA: Truthfully, I need about six thousand someones. One will do to start.
+
+ALETHEA: He's had all night too. He's been busy. Look at that pile.
+```
+[She nods at Lykophron's side of the steps, where a hoplite is stacking tablets three deep.]
+```text
+ALETHEA: Records. Orders from the Archon, with the Archon's seal.
+
+ALETHEA: All proving he was the Archon's loyal man. For five years.
+
+ALETHEA: He's written five years of loyalty since last night. Lovely hand.
+
+ALETHEA: Ready?
+```
+?? YES/NO
+```text
+> NO:
+ALETHEA: Neither am I. Come back when one of us is.
+
+> YES:
+ALETHEA: Then stand where I can see you. I'll look at you when it gets bad.
+```
+[Thrasyllos rings a small bronze bell. The crowd's noise drops to a mutter.]
+```text
+THRASYLLOS: The Assembly is sitting. I'm Thrasyllos, epistates for today.
+
+THRASYLLOS: Chosen by lot this morning. Lot, mind. Not fate. I checked.
+
+THRASYLLOS: The question before the city is an ostracism.
+
+THRASYLLOS: The name proposed is Lykophron, Keeper of Records.
+
+THRASYLLOS: The Keeper may speak first. Briefly. I have a stall to open.
+```
+[Lykophron steps forward and opens his hands to the crowd. His voice is warm and very clear.]
+```text
+LYKOPHRON: May I tell the Assembly something true?
+
+LYKOPHRON: I have kept the Archon's records for five years.
+
+LYKOPHRON: Every order I carried, he sealed. Every seal is here. Count them.
+
+LYKOPHRON: When the Titans came, I was the Archon's man. I am still his man.
+
+LYKOPHRON: And this girl was voted out of this city for forgery. By you.
+
+LYKOPHRON: Ask yourselves why she wants you to vote again.
+```
+[A murmur. Someone in the crowd laughs. Alethea's hands are flat on the table.]
+```text
+ALETHEA: Because you lied the first time. Truthfully.
+
+THRASYLLOS: The citizen will wait her turn. …It's her turn. Go on.
+```
+[Alethea lifts the first tablet. Each exhibit is an item close-up in a picture window.]
+```text
+ALETHEA: This is a wax tablet. It was found in a Titan archive under Knossa.
+
+ALETHEA: It's a draft. A prophecy for a Lakonian boy, being written.
+
+ALETHEA: “Kleon of Lakonia shall slay the starry bull.” And in the margin:
+
+ALETHEA: “Better. He'll run straight at it.”
+
+ALETHEA: Look at the end of the line. A little hook.
+```
+[Close-up of Kleon's draft: the stylus line ends in a small curl. Take `ITEM_KLEONS_DRAFT`.]
+```text
+ALETHEA: Now look at the Keeper's records. The bottom of any order.
+```
+[Close-up of one of Lykophron's records: under the Archon's owl, the same small curl.]
+```text
+ALETHEA: The Archon's owl. And under it, the same little hook.
+
+LYKOPHRON: Every scribe has habits.
+
+ALETHEA: Yes. Yours is putting it on other people's fates.
+```
+[She lifts a cracked tablet, its wax seal broken.]
+```text
+ALETHEA: This one was sealed. On the bottom shelf of the same archive.
+
+ALETHEA: “ELPIS, DAUGHTER OF PHAEDON. Revised.”
+
+ALETHEA: “Short is her thread. The shears are near.”
+
+ALETHEA: Under the wax, scraped away, are the Pythia's own words.
+
+ALETHEA: “Her thread ends the day the hours stop.”
+
+ALETHEA: A healer was told his girl would die young. So he stopped the hours.
+
+ALETHEA: You were all stone for an hour because of that hook.
+```
+[If the player still has `ITEM_SEALED_TABLET`, Alethea took it from them before the trial; if Phaedon kept it in the Frozen Hour, she has it from him: "Phaedon sent this to me at dawn. With a note. It said: Use it." Take `ITEM_SEALED_TABLET` if held.]
+
+[A longer murmur. Lykophron doesn't move.]
+```text
+ALETHEA: There were more on the shelf. Forty-one. Ariadne of Knossa sent them.
+
+ALETHEA: On a honey boat. Every one of them says “Revised.”
+
+ALETHEA: Every one of them ends in a hook.
+```
+**The unfinished decree** (only if `FLAG_ICHOR_GOT_UNFINISHED_DECREE` is set):
+```text
+ALETHEA: {PLAYER}. You have the other one. The one from his desk.
+```
+?? Show the Assembly the unfinished decree? YES/NO
+```text
+> NO:
+ALETHEA: …All right. Your call. I trust you. That's new for me too.
+
+> YES:
+```
+[The player holds up the tablet. Close-up: “DECREE OF THE GOLDEN AGE… its Keeper shall be Iape-”. Take `ITEM_UNFINISHED_DECREE`. Set `FLAG_ICHOR_TRIAL_DECREE_SHOWN`.]
+```text
+ALETHEA: Found on the Keeper's desk, in the Stoa, while the world was stopped.
+
+ALETHEA: “Decree of the Golden Age. In the first hour without end…”
+
+ALETHEA: “…by the will of Kronos, its Keeper shall be Iape-”
+
+ALETHEA: He stopped two letters short of his own name. His real one.
+
+ALETHEA: Iapetos. The Titan who reads you a better thread.
+```
+[Lykophron looks at the tablet for a long time.]
+```text
+LYKOPHRON: …That's my hand.
+
+LYKOPHRON: That's my name. Most of it.
+```
+**The prophecy fragments.** `special Ichor_CountFlagRange` with `VAR_0x8004` = `FLAG_ICHOR_PROPHECY_START` and `VAR_0x8005` = 8 returns the count in `VAR_RESULT` (ENGINE_API's `Ichor_CountFlags`). `{STR_VAR_1}` is the count as a word.
+```text
+> 0:
+ALETHEA: He used more people than these. On lead tablets, all over Aethos.
+
+ALETHEA: We didn't find them. That's all right. These will do.
+
+ALETHEA: Truthfully, they'll more than do.
+
+> 1 to 7:
+ALETHEA: And these. {STR_VAR_1} lead tablets, dug up from Kalliste to Lakonia.
+
+ALETHEA: Every one says one thing on top and another underneath.
+
+ALETHEA: Every one is a person he used. I've written their names on the back.
+
+ALETHEA: And every one ends in a hook.
+
+> 8:
+ALETHEA: And these. Eight lead tablets, dug up from Kalliste to Lakonia.
+
+ALETHEA: I'll read the top, and then what's scraped underneath.
+
+ALETHEA: A quarryman of Emporion. “The quarry closes. You'll starve.”
+
+ALETHEA: Underneath: “The quarry closes. You'll find other work.”
+
+ALETHEA: The harbor-master. “Close the port to the Archon's ships.”
+
+ALETHEA: Underneath: “Keep the port open.”
+
+ALETHEA: A soldier of Thyrsa. “You'll die in the next war.”
+
+ALETHEA: Underneath: “You'll come home from the next war.”
+
+ALETHEA: A bride of Eleusa. “Your husband will leave you.”
+
+ALETHEA: Underneath: “Your husband will be late.”
+```
+[Laughter, the first of the morning. Alethea waits for it.]
+```text
+ALETHEA: Kallisto of Arkadia. “Show no mercy at the new moon.”
+
+ALETHEA: Underneath: “Show mercy at the new moon.”
+
+ALETHEA: A farmer of Kalliste. “Your olives will fail.”
+
+ALETHEA: Underneath: “Your olives will come in silver.”
+
+ALETHEA: Hyperion of the Titans. “You'll end your days in the dark.”
+
+ALETHEA: Underneath: “…and be glad of it.” He cut off the end. Only the end.
+
+ALETHEA: And a widow of Lakonia. “Your last child will be glorious young.”
+
+ALETHEA: Nobody scraped that one. She read it wrong. He found her anyway.
+
+ALETHEA: Eight lives. One hand. One little hook.
+
+ALETHEA: He didn't change what they'd be. He changed what they believed.
+
+ALETHEA: And then they went and did it.
+```
+[Set `FLAG_ICHOR_TRIAL_ALL_FRAGMENTS` if the count is 8. Lykophron's answer is the last word before the vote.]
+```text
+LYKOPHRON: May I tell the Assembly something true?
+
+LYKOPHRON: Every one of you asked to be told who you'd be.
+
+LYKOPHRON: I only ever told you something you could bear to hear.
+
+LYKOPHRON: Hers is a worse story. Mine was a better one. You chose mine before.
+
+ALETHEA: They believed the better story last time.
+
+ALETHEA: Truthfully, I'm asking you to believe the worse one.
+
+THRASYLLOS: Thank you both. That was more than briefly. Citizens, the urn.
+```
+**The vote.** [One by one the six named citizens walk to the urn and drop a shard. Each drop is a clay-clink SE. Each says one line as they pass the player.]
+```text
+EUTYCHOS: I sold him grain at a discount once. He said I'd die poor. Clink.
+
+AMPHILYTOS: Forty years reading threads. Only his ever came true.
+
+AMPHILYTOS: Now I know why. Clink.
+
+PREACHER: I preached his gospel off a cart. He wrote it. Enough of his writing.
+
+TITANBORN: Do I get a shard? I'm a citizen. …Thank you. Clink.
+
+MOTHER: He told my sister her boy would drown. She kept him from the sea.
+
+MOTHER: He's a fisherman now. Clink.
+```
+```text
+> fewer than 8 fragments:
+LYSIMACHOS: Habit. I'm sorry. My hand does it by itself.
+
+> all 8:
+LYSIMACHOS: Just this once, I've written somebody else's name.
+```
+[The rest of the crowd files past the urn, drawn as a scrolling metatile line. The frame drum quickens. Two officials tip the urn onto a cloth. Thrasyllos picks up shards and reads them as fast as he can.]
+```text
+THRASYLLOS: LYKOPHRON. LYKOPHRON. LYKOPHRON…
+
+THRASYLLOS: LYKOPHRON. This one says LYKOPHRON and also a drawing.
+
+THRASYLLOS: I won't describe the drawing. LYKOPHRON. LYKOPHRON…
+```
+[The count board, a sign window, ticks up in three updates.]
+```text
+LYKOPHRON, 1,312.
+
+LYKOPHRON, 4,480.
+
+> fewer than 8 fragments:
+LYKOPHRON, 6,000+. Others: 41.
+
+> all 8:
+LYKOPHRON, 6,000+. Others: none.
+```
+```text
+> fewer than 8 fragments:
+THRASYLLOS: Forty-one for ARISTEIDES. Somebody's father, I expect.
+
+> all 8:
+THRASYLLOS: Unanimous. …I didn't know the Assembly could do that.
+
+THRASYLLOS: Nor did the Assembly, by the look of it.
+```
+[The drum stops. Silence. Thrasyllos reads the decree from a fresh clay tablet.]
+```text
+THRASYLLOS: By the vote of the city, Lykophron, called Iapetos, is ostracized.
+
+THRASYLLOS: He will leave Astyra by sunset and not return for ten years.
+
+THRASYLLOS: By the same vote, the city lifts the exile of Alethea of Kalliste.
+
+THRASYLLOS: Voted on false evidence. The city was wrong. It says so here.
+
+THRASYLLOS: In writing. That's unusual too.
+```
+[Close-up of the decree. The city's owl seal, and under it nothing: no hook, only clay. Then the camera holds on Alethea. She doesn't speak for 90 frames.]
+```text
+ALETHEA: …They believed me.
+
+ALETHEA: Truthfully. They believed me.
+
+ALETHEA: I don't know what to do with my hands.
+```
+[The hoplites take Lykophron's arms. On his way down the steps he stops in front of the player. His name box changes here and stays changed.]
+```text
+IAPETOS: {PLAYER}. May I tell you something true?
+
+IAPETOS: Ask your Just Archon about Kalliste.
+```
+[He goes, between the hoplites, without looking back. Set `VAR_ICHOR_ACT3` to 21, `FLAG_ICHOR_IAPETOS_OSTRACIZED`, `FLAG_ICHOR_ALETHEA_EXILE_LIFTED`. Hide Lykophron (`FLAG_ICHOR_HIDE_LYKOPHRON_AGORA`). Beat L-3 follows at once.]
+
+**Design note.** "Ask your Just Archon about Kalliste" is the whole of his parting shot (STORY §2). It hands the player the question the Archon answers on the Summit (§7.10, "That forger told you to ask me about Kalliste. So ask."). With all 8 fragments, the vote is unanimous and Lysimachos writes another name for once; that is the reward, and nothing in the main path depends on it.
+
+---
+
+## Beat L-3. The Agora: the sentences
+
+Per STORY.md §3, L-3, and the sentences in §2 (Phaedon arc 8, Hyperion arc 8, Rhea arc 5). STORY places this beat at Akti; this script stages the asking in Astyra, before the same Assembly, and shows the result at Akti, Kaldera and Lakonia (Open questions 1).
+
+[Thrasyllos rings his bell again.]
+```text
+THRASYLLOS: The Assembly has three more names this morning.
+
+THRASYLLOS: The ones who stood with the Lord of Time when the hours stopped.
+
+THRASYLLOS: Bring them up.
+```
+[Hoplites bring Phaedon, Hyperion and Rhea up the Stoa's steps. Hyperion walks with a hand on Petros's shoulder; Amathos follows with Hyperion's helmet under his arm. Rhea walks by herself, bare-headed. Kleon is in the crowd below her and pushes forward to the front.]
+```text
+THRASYLLOS: Phaedon, healer of the Asclepeion. Do you ask for anything?
+
+PHAEDON: No.
+
+PHAEDON: Whatever you decide is less than I've earned. Only be quick.
+
+PHAEDON: She's awake, and I'd like to be there when she wakes up tomorrow.
+```
+[A stir at the back of the crowd. Someone small and broad is pushing through it with a covered basket.]
+```text
+IONE: Let me through. Thank you. Mind the basket, it's soup.
+
+IONE: All the way from Kalliste and nobody's fed me. Bad sign in a city.
+```
+[Ione climbs the steps and sets the basket down beside Phaedon.]
+```text
+IONE: Ione. Hearthkeeper of Akti. A word for the Assembly, then I'll sit.
+
+IONE: In my temple, anyone who sits at the hearth can't be harmed.
+
+IONE: A suppliant. That's older than Archons too.
+
+IONE: This man sat at Hestia's hearth the day he took off his mask.
+
+IONE: He's been sitting at one ever since. You can see it on him.
+
+IONE: Send him to me. I feed everyone either way.
+```
+[Thrasyllos looks at the crowd. The crowd looks at its feet, and then nods.]
+```text
+THRASYLLOS: Exile to Kalliste, then. To heal at Akti, under Ione's roof.
+
+THRASYLLOS: For the rest of his life.
+
+PHAEDON: …Elpis can see the sea.
+
+IONE: There's a room with a window on the harbor. I'll air it.
+```
+[Daphne, who has come down from the house and stood at the back all this time, steps up beside Phaedon.]
+```text
+DAPHNE: I'll come to Akti. Every month. I'll bring books.
+
+PHAEDON: Bring the wrong ones. She likes the wrong ones.
+```
+```text
+THRASYLLOS: Hyperion of Kaldera. Do you ask the city for anything?
+
+HYPERION: Light, if you've got any spare. No? Didn't think so.
+
+HYPERION: I gave my word to the wrong man. I'll take what comes.
+```
+[A second stir. A tall man in a leather apron climbs the steps, with forge-burns up both arms.]
+```text
+TALOS: Talos. Kaldera's smith.
+
+TALOS: Send him to my forge. He knows fire. He'll learn the rest.
+
+HYPERION: The smith. …I robbed your forge.
+
+TALOS: You did. You can sweep it.
+
+HYPERION: I can't see a broom.
+
+TALOS: You don't need eyes for iron. You need ears. And patience.
+
+TALOS: You've got one of those.
+
+HYPERION: Which one?
+
+TALOS: We'll find out.
+
+THRASYLLOS: Kaldera, then. The smith's forge.
+
+PETROS: We're going too. Somebody has to hold his arm.
+
+AMATHOS: And the bellows. He likes it hot.
+```
+```text
+THRASYLLOS: Rhea. Or Lampito. Do you ask the city for anything?
+
+RHEA: No.
+
+THRASYLLOS: …That's all?
+
+RHEA: Lakonian.
+```
+[A grizzled Lakonian elder climbs the steps from the envoys' bench.]
+```text
+GYLIPPOS: Gylippos, of the Lakonian elders. Lakonia asks for its own.
+
+GYLIPPOS: Send her home. We'll keep her there. Fewer guards needed.
+
+GYLIPPOS: Fewer words.
+
+THRASYLLOS: House arrest, in Lakonia. In her own house.
+
+RHEA: My own house. My own hearth. My son at the door.
+
+RHEA: They took my helmet and gave me my kitchen. I've had worse trades.
+
+KLEON: That's a punishment?
+
+RHEA: It's a promotion.
+```
+[The crowd laughs. Kleon goes red to the ears.]
+```text
+KLEON: I'll walk you home.
+
+RHEA: I can walk.
+
+KLEON: I know. I'll walk with you.
+```
+```text
+THRASYLLOS: And the rank and file, the Titanborn who gave themselves up:
+
+THRASYLLOS: they go home. Most of them were stone too. They've been punished.
+
+THRASYLLOS: The Assembly is dissolved. I have a stall to open.
+```
+[The crowd breaks up. Phaedon, between his hoplites, stops in front of the player.]
+```text
+PHAEDON: {PLAYER}. How are your Pokémon?
+
+PHAEDON: …Let me see them. Old habit. They'll let me. Won't you?
+```
+[The nearer hoplite shrugs. Phaedon's Panacoil uncoils from his shoulders. Heal the party; the Asclepeion's heal jingle.]
+```text
+PHAEDON: Easy now. There.
+
+PHAEDON: Every hurt closes, if you let it.
+
+PHAEDON: I didn't let mine. I'm going to try, at Akti. Ione says she'll make me.
+```
+[He goes with the hoplites, toward the house and Elpis. Alethea comes down the steps with an armful of tablets and stands next to the player.]
+```text
+ALETHEA: The Keeper's chair is empty now. Somebody has to keep the records.
+
+ALETHEA: Somebody who signs her own name at the bottom.
+
+ALETHEA: Truthfully, I'd be good at it. Nobody's going to ask me.
+
+ALETHEA: …Don't look at me like that. Go on. Go and win something.
+
+ALETHEA: I'm going to sit here and be believed for a while. It's very strange.
+```
+[Set `FLAG_ICHOR_SENTENCES_DONE`. Hide the Stoa's trial objects. From now on: Phaedon and Elpis are at Akti (`FLAG_ICHOR_HIDE_PHAEDON_AKTI` and `FLAG_ICHOR_HIDE_ELPIS_AKTI` cleared; `FLAG_ICHOR_HIDE_PHAEDON_ASTYRA` set), Hyperion, Petros and Amathos at Kaldera's forge (`FLAG_ICHOR_HIDE_HYPERION_KALDERA` cleared), Rhea at home in Lakonia under house arrest (`FLAG_ICHOR_RHEA_HOUSE_ARREST`). Alethea stays at the Stoa's trestle table until the credits.]
+
+**The hook for the credits.** Alethea's "Nobody's going to ask me" is answered by the new Archon after the Hall of Heroes (the Pantheon writer's beat): she is made Keeper of Records by the player.
+
+### What changes, if you go and look (optional)
+
+**Akti** *(slice: `MAP_AKTI_TOWN`, `MAP_AKTI_TOWN_ASCLEPEION`)*, after `FLAG_ICHOR_SENTENCES_DONE`. Phaedon takes the Asclepeion's counter; the slice's healer stays at his elbow, learning. **Every heal in Akti is his from now on.** The heal script's lines become:
+```text
+PHAEDON: Easy now. There.
+
+PHAEDON: Every hurt closes, if you let it.
+```
+Talking to him a second time, after the heal:
+```text
+PHAEDON: She asked me this morning how long she has. I said I don't know.
+
+PHAEDON: Every morning I look at her and I don't know.
+
+PHAEDON: It's unbearable. It's wonderful.
+```
+Elpis, on the quay, on a stool someone has carried down for her, with her clay bull:
+```text
+ELPIS: I saw the sea! It's much bigger than Papa said. He said “big.”
+
+ELPIS: It's not big. It's everything. It goes all the way to the edge.
+
+ELPIS: Here. I found this. You can have it. I've got lots of sea now.
+
+{PLAYER} received a Shoal Shell!
+```
+[Set `FLAG_ICHOR_GOT_ELPIS_SHELL`. After: "ELPIS: Ione says I have to come in when the wind's cold. The wind's never cold."]
+
+Ione, at the hearth in the Temple of Hestia:
+```text
+IONE: He sweeps the hearth every morning before I'm up.
+
+IONE: I've told him he doesn't have to. He says he does.
+
+IONE: A hearth isn't the fire, you know. He's learning that. Slowly.
+```
+The guard Ione was sent, on the Asclepeion's bench, asleep with a bowl in his lap: "He's asleep. Ione fed him."
+
+**Kaldera** *(Act II's forge, `MAP_KALDERA_TEMPLE_OF_HEPHAESTUS` or wherever Talos's anvil is)*. Hyperion works the great bellows by feel. Petros and Amathos feed the fire.
+```text
+HYPERION: Who's that? …The Unwoven. I know your walk. Light feet.
+
+HYPERION: The smith says I hit the iron like I'm angry at it. I am angry at it.
+
+HYPERION: There's a sound it makes when it's ready. A ring. I can hear it.
+
+HYPERION: I hear it better than I ever saw it. Don't tell him.
+
+TALOS: He's good. Don't tell him either.
+
+PETROS: He roasts us. Not literally.
+
+AMATHOS: Mostly.
+```
+
+**Lakonia** *(Rhea's house: the Lakonia writer's id)*. A twelve-year-old cadet stands at Rhea's door with a spear twice his height. "CADET: I'm guarding the prisoner. She gave me bread. I'm still guarding her." Inside, Rhea at her hearth, bare-headed:
+```text
+RHEA: Arrested. In my own kitchen. Sit.
+
+RHEA: Eat. That's not a request. I'm under arrest. You're not.
+
+RHEA: The boy's out running. He runs every morning now. Not toward anything.
+
+RHEA: Good.
+```
+
+---
+
+## Beat L-4. The Akropolis, and Kronion Hill (optional)
+
+Per STORY.md §3, L-4, and the foreshadowing map's last two rows.
+
+**The Akropolis** *(Act II's `MAP_ASTYRA_AKROPOLIS`)*, any visit after `VAR_ICHOR_ACT3` reaches 19. The rubble-filled split of the Old Temple's court is as Act II left it. The stump of Athena's olive, an object:
+```text
+The stump of Athena's olive, torn out by the roots on the night of the raid.
+
+A green shoot has come up out of the split wood. It's a cubit long.
+
+It wasn't there the day before yesterday.
+```
+Act II's guard captain, who stood his men down that night on the forged order, stands beside the stump:
+```text
+GUARD CAPTAIN: I stood my men down that night. On an order with his seal.
+
+GUARD CAPTAIN: This morning I came up to look at the stump. Habit.
+
+GUARD CAPTAIN: I've been standing here since. I'm not sure I'm allowed to go.
+
+GUARD CAPTAIN: Somebody should stand by it. After everything. It seems fair.
+```
+If `FLAG_ICHOR_THEOXENIA_HERMES` is set and Athena's visit (SYSTEMS §10, E3) isn't done, an old weaver sits at a loom below the Akropolis's west stair. Her test and reveal are SYSTEMS's, word for word.
+
+**Kronion Hill** *(slice: `MAP_KALLISTE_ROUTE1_KRONION_HILL`)*, any visit after `VAR_ICHOR_ACT3` reaches 19. Amaryllis's flock grazes on the summit, all over the dig pit's spoil.
+```text
+AMARYLLIS: The hill's stopped humming. The sheep are fine.
+
+AMARYLLIS: They went up it this morning on their own. Grazed the top.
+
+AMARYLLIS: First time all year. I sat down and cried. Don't tell anyone.
+```
+The broken altar, which the slice describes as "warm, like a sleeping animal":
+```text
+The altar is cold. Just a stone in the sun.
+```
+
+---
+
+## Beat L-5. Delphoi, and the pass over Parnassos
+
+Per STORY.md §3, L-5, and SYSTEMS §10 (E5) and §11. AETHOS_MAP's revised League road runs Delphoi → Route 29 over Parnassos → Thermopylai → Route 30 → the Vale of Tempe → the Ascent. Route 29's gate is the climax: its pass opens here.
+
+### L-5A. The Gulf ferry: Dionysus (optional)
+
+SYSTEMS §10, extended tier, E5. **Opens** when `FLAG_ICHOR_THEOXENIA_HERMES` is set (Hermes's visit always comes first, because he teaches the tells) and `VAR_ICHOR_ACT3` is 19 or more. The youth appears on any crossing of the Gulf ferry, Route 10 *(Act II's deck map, `MAP_GULF_FERRY_DECK` or its id)*, either way, until the test is passed. Kerykos's rumor in beat L-1 and the day's Stranger omen point to him: "A drowsy boy is tied to the Gulf ferry's mast, and the sailors are laughing."
+
+**The rules,** per SYSTEMS: you aren't told who he is. Pass, and he stands up taller than he was. Fail, and the visit ends kindly, and he's back on a later crossing with the same test. The fourth answer, HE'S A GOD, appears only if you spotted a tell.
+
+[Mid-crossing. A youth in a purple cloak sits asleep against the mast, tied to it with good rope. Ivy is twined in his hair. Three sailors stand round him, pleased with themselves. At the stern the helmsman keeps his eyes on the water and won't look at them.]
+
+**The youth,** if examined before talking to the sailors (this sets `FLAG_TEMP_1`, the tell):
+```text
+He's asleep, and smiling. The rope's tied tight.
+
+Ivy is growing along the rope. It wasn't there a moment ago.
+
+There's no shadow under him.
+```
+If a follower is out, it bows its head within 3 tiles of him (SYSTEMS's second tell), which is a hint to look.
+
+**The sailors.**
+```text
+MATE: Look at that cloak. Purple. You know what purple costs?
+
+MATE: Found him asleep on Aigion's quay. Gold rings on every finger.
+
+MATE: A prince, that is. His father'll pay. Or Cyprus will.
+
+HELMSMAN: [from the stern] Let him go. I've said it. I'll keep saying it.
+
+MATE: The helmsman's soft. You've got a face like a judge. You decide.
+
+MATE: Ransom him, or sell him?
+```
+?? Multichoice: RANSOM HIM / SELL HIM / LET HIM GO, and HE'S A GOD if `FLAG_TEMP_1` is set
+```text
+> RANSOM HIM:
+MATE: A sensible one! We'll write to his father. Whoever he is.
+
+YOUTH: [in his sleep] Never mind, child. Another day.
+
+> SELL HIM:
+MATE: Ha! A merchant's heart. Cyprus it is.
+
+YOUTH: [in his sleep] Never mind, child. Another day.
+```
+[RANSOM and SELL end the visit. The youth sleeps on until the ferry lands, and is tied to the mast again on a later crossing.]
+```text
+> LET HIM GO:
+MATE: Let him- Are you mad? Do you know what purple costs?
+
+YOUTH: [opening one eye] More than you'd think. Less than you'd like.
+
+> HE'S A GOD:
+MATE: A god? On my ferry? Gods don't fall asleep on quays.
+
+YOUTH: [opening one eye] They do if the wine's good enough.
+```
+[The rope falls off the mast by itself. Dark wine wells up between the deck planks, sweet-smelling. Vines shoot up the mast and hang grapes off the yard. Ivy wraps the oars. Somewhere a drum starts, though nobody is drumming. Something roars like a lion, from nowhere.]
+```text
+MATE: What- what is- Who are you?
+```
+[The three sailors back to the rail. They jump. Three splashes. Three dolphins come up, look back once, and swim off alongside, grinning.]
+```text
+> LET HIM GO:
+DIONYSUS: You said let him go. To three men with a knife and a bargain.
+
+DIONYSUS: That's rarer than gold. Rarer than purple, certainly.
+
+> HE'S A GOD:
+DIONYSUS: You looked at my feet. Hermes has been telling people, hasn't he.
+
+DIONYSUS: He's insufferable. He's right, but he's insufferable.
+```
+```text
+DIONYSUS: Don't worry about them. They'll have a lovely time. Dolphins do.
+
+DIONYSUS: I'm Dionysus. The Loosener. I let things go. It's my whole job.
+
+DIONYSUS: You've been letting things go lately too. Three old women, I heard.
+
+DIONYSUS: [to the helmsman] You said it first, and kept saying it. The wine's yours.
+
+HELMSMAN: I'll row myself, then. Again.
+
+DIONYSUS: And you. My maenads danced to drums. This one's never stopped.
+
+{PLAYER} received a Grookey from Dionysus!
+
+DIONYSUS: Feed it grapes. It'll drum anyway.
+```
+[He walks to the bow and isn't there any more. The vines stay on the mast. Give Grookey per SYSTEMS §10's table: Lv 50, Grassy Seed, Adamant, Grassy Surge (hidden ability), Drum Beating, a Cherish Ball, 3 perfect IVs, the Xenia Ribbon, the fateful flag, met "a guest-gift of Dionysus". Dionysus Favor +15. Set `FLAG_ICHOR_THEOXENIA_DIONYSUS`, hide the youth and the three sailors (`FLAG_ICHOR_HIDE_E5_YOUTH`, `FLAG_ICHOR_HIDE_E5_SAILORS`).]
+```text
+HELMSMAN: Kirrha, then. With a vine on my mast. Nobody will ever believe me.
+
+HELMSMAN: Here. Take some. It came up through the deck. I'm not drinking it.
+
+{PLAYER} received 3 Wine!
+```
+**After.** On every later crossing the vines are still on the mast (`FLAG_ICHOR_FERRY_VINES` shows them as metatiles on the deck map), the ferry has a new crew, and three dolphin objects leap off the bow on the way across.
+```text
+HELMSMAN: New crew. Good lads. They don't tie anyone to anything.
+
+HELMSMAN: The old ones follow us out every morning. I throw them a fish.
+```
+
+### L-5B. The temple: the Pythia laughs
+
+The Delphoi writer owns `MAP_DELPHOI` and the temple. **When** the player enters the Temple of Apollo's adyton with `VAR_ICHOR_ACT3` at 19 or more and `FLAG_ICHOR_PYTHIA_KNOW_THYSELF` unset. Phemonoe sits on her tripod over the chasm, laughing. Two melissai stand in the doorway, looking at each other.
+```text
+PYTHIA: Ha. Ha! Hahaha.
+
+PYTHIA: Oh. Oh, it's you. Come in. Mind the chasm, it doesn't mind you.
+
+PYTHIA: A man came this morning and asked me who he'd marry.
+
+PYTHIA: I said, “I don't know!” He looked so frightened.
+
+PYTHIA: I haven't stopped laughing since. My sisters think I've gone mad.
+
+PYTHIA: I can see you now, you know.
+
+PYTHIA: Not your thread. You. You're standing right there, Melitta's child.
+```
+[She gets down off the tripod, which the melissai have never seen her do.]
+```text
+PYTHIA: For a thousand years they asked me who they'd be.
+
+PYTHIA: Ask me who you want to be. That one I can help with.
+
+PYTHIA: Here. The first thing I've given anyone in a year that isn't bad news.
+
+{PLAYER} received a Golden Pythian Laurel!
+```
+[Set `FLAG_ICHOR_PYTHIA_KNOW_THYSELF`; the "Know thyself" service opens (Part 5). Then:]
+```text
+PYTHIA: The three of them have gone home. Their own homes, for the first time.
+
+PYTHIA: The forge on Kaldera. The pool in Arkadia. Your olive, in Elaia.
+
+PYTHIA: They said visitors are welcome. They said to bring honey.
+
+PYTHIA: I said you'd given them the last of it. They said bring some anyway.
+```
+**The Fates' sanctuaries** are a pointer only. Their static encounters, at level 60, are the Frozen Hour writer's (Part 4 of that region).
+
+### L-5C. The House of the Melissai: Mom's note
+
+The Delphoi writer owns the House of the Melissai, where Mom hid. After `VAR_ICHOR_ACT3` reaches 19, Mom is gone home (`FLAG_ICHOR_HIDE_MOM_DELPHOI` set; she is at home in Elaia, `FLAG_ICHOR_HIDE_MOM_HOME` cleared). A wax tablet on the table by her empty bed:
+```text
+A note, in Mom's hand.
+
+“Gone home. The bees will have eaten the house by now.”
+
+“Come back up. -M.”
+```
+The melissa who swept her room:
+```text
+MELISSA: She left on the first ferry. She said she'd be sick the whole way.
+
+MELISSA: She was. She waved anyway. With the hand that wasn't on the rail.
+```
+
+### L-5D. Route 29: the pass over Parnassos opens
+
+`MAP_ROUTE29_PARNASSOS` climbs north out of Delphoi past the Korykian cave, then over the Parnassos saddle and down to Thermopylai (Part 5). **The climax gate** is a palisade of the Archon's guard across the saddle, above the cave. Mnasippos, captain of the Archon's guard, holds it with two hoplites. Everything below it, the Korykian path and the cave, is open before the climax.
+
+**Before the climax** (`VAR_ICHOR_ACT3` below 19):
+```text
+MNASIPPOS: The pass is shut. Archon's orders. Titans all over this mountain.
+
+MNASIPPOS: Go and see the cave if you like. Pan won't mind. I would.
+```
+**After the climax, before the trial** (`VAR_ICHOR_ACT3` 19 or 20):
+```text
+MNASIPPOS: The road to Olympus. The Archon's orders: it's still shut.
+
+MNASIPPOS: It opens to challengers “after the city has judged its own.”
+
+MNASIPPOS: He meant the Keeper. Astyra's Assembly. He wants it done first.
+
+MNASIPPOS: Don't ask me why. He's the Just. I'm only the captain.
+```
+**After the trial** (`VAR_ICHOR_ACT3` 21):
+```text
+MNASIPPOS: There you are. The Assembly's word came by gull this morning.
+
+MNASIPPOS: The city has judged its own. The road to Olympus is open.
+
+MNASIPPOS: It's a long way. Over the mountain, through the hot gates,
+
+MNASIPPOS: across Thessaly to Tempe. The Archon's man at Tempe counts Laurels.
+
+MNASIPPOS: He's up there. He said you'd come.
+
+MNASIPPOS: He said it like a man who'd been told by a doctor.
+```
+[The hoplites draw the palisade's gate open. Set `VAR_ICHOR_ACT3` to 22 and `FLAG_ICHOR_PARNASSOS_PASS_OPEN`. On later visits: "MNASIPPOS: It's a long way up. It's longer down, they say, if you lose."]
+
+---
+
+## Beat L-6. The League road
+
+Per STORY.md §3, L-6 ("Victory Road through the clouds. Ex-Titanborn on the road, lost without their master."), PITCH §1 and the revised AETHOS_MAP: Route 29 over Parnassos, Thermopylai, Route 30 across Thessaly, the Vale of Tempe, then the Ascent to Olympus. Seven cells of the map, about two hours. The maps are in Part 5; this beat is what the player meets on the way.
+
+### L-6A. Route 29: over Parnassos
+
+Above Mnasippos's palisade the path climbs to the saddle of Parnassos, where snow lies in the hollows even in summer. On the saddle, among the stones of an old town, a plaque:
+```text
+LYKOREIA. Here the ark came to rest, when the flood went down.
+
+The two who were left threw stones over their shoulders.
+
+The stones stood up as people. That's who lived here first.
+```
+An old shepherdess keeps a summer hut on the saddle (Part 2).
+
+### L-6B. Thermopylai: the hot gates
+
+**Arrival.** Coming down off Parnassos, the road narrows to a shelf between a cliff and a salt marsh, and steam rises off the rocks ahead. The first time the player enters `MAP_THERMOPYLAI`, an old Lakonian in a red cloak steps into the road at the West Gate: Maron, the garrison's captain.
+```text
+MARON: Hold. Nobody passes the hot gates without a word. Tradition.
+
+MARON: …That's the word. You can go on. Mind the steam.
+
+MARON: Lakonia sent us. Old men. To hold the pass. In case.
+
+MARON: In case of what, nobody says. Nobody knows anything any more.
+
+MARON: So we're holding it. It's what we know how to do.
+
+MARON: The lads at the wall will want a fight. Lakonians always do.
+```
+[Set `FLAG_ICHOR_THERMOPYLAI_ARRIVED`. Maron walks back to the garrison house.]
+
+**The memorial.** On the little hill above the springs stands a stone lion on a plinth. The epitaph, an object:
+```text
+A stone lion, worn smooth by the wind.
+
+The plinth says: “Stranger, tell them in Lakonia: we lie here.”
+
+“We did as we were told.”
+```
+Talking to the plinth a second time, with VETERAN Leon beaten:
+```text
+LEON: Three hundred. A seer told them how it would end. They stayed anyway.
+
+LEON: First time anyone's held this pass without knowing the end.
+
+LEON: It's much more frightening. I'm enjoying it enormously.
+```
+
+**The hot springs.** Pools of steaming water below the cliff, an object at the edge (the springs heal, free, any time):
+```text
+The water is hot enough to cook an egg, and smells of eggs too.
+
+Your Pokémon soak until they look quite pleased with themselves.
+```
+[Heal the party.]
+
+### L-6C. Route 30: the Thessalian plain
+
+The plain under Pelion is wheat to the horizon, with the mountain dark with forest on its east side. Two pieces of lore stand on it.
+
+**The Lapiths' table,** in a field, an object:
+```text
+A stone table, broken clean in half, lying in a field of wheat.
+
+A wedding feast was laid on it once. The centaurs came down off Pelion.
+
+They drank, and broke everything. Including the table.
+```
+**Chiron's cave,** high on Pelion's slope, reached by climbing a stream fall with the Horn of Achelous. A round stone fills the cave mouth. Chalked on it:
+```text
+A great round stone has been rolled into the cave mouth.
+
+Someone has chalked on it: “OUT. BACK SOON. TEACHING. -C.”
+```
+It is a seed for the post-game: the cave opens for Centaurus, and the Olympiad's Achilles (POSTGAME), who was raised there. Until then, nothing else happens here, except the view.
+
+### L-6D. The Vale of Tempe
+
+`MAP_VALE_OF_TEMPE`. Route 30 comes up out of the plain into a gorge between Olympus and Ossa, loud with the Peneios. Plane trees lean over the water. A bridge, a healer's house with a stall, two more houses, Apollo's old altar, and at the river's edge a laurel so old its trunk has split into three and grown back together. It is the last healer before the Ascent, and a fly target (`FLAG_ICHOR_VISITED_TEMPE`).
+
+**Daphne, at the first laurel.** The first time the player enters Tempe with `VAR_ICHOR_ACT3` at 22, Daphne is sitting on the laurel's roots in her new sandals, with a scroll case on her knees (`FLAG_ICHOR_HIDE_DAPHNE_TEMPE` cleared from `FLAG_ICHOR_SENTENCES_DONE`; set again after the scene). A coord trigger at the bridge's north end:
+```text
+DAPHNE: {PLAYER}! Over here. Mind the roots, they've been here longer than you.
+
+DAPHNE: I walked. Three days. My sandals have opinions.
+```
+[The player walks over. Daphne puts a hand flat on the trunk.]
+```text
+DAPHNE: This is it. The first laurel. Where the girl I'm named for stopped.
+
+DAPHNE: She ran from a god until she couldn't run. She asked to be changed.
+
+DAPHNE: And she became this. Rooted. She never had to run again.
+
+DAPHNE: I did the same thing, you know. I ran to Kalliste and put down roots.
+
+DAPHNE: I stood still so long I nearly forgot I had feet.
+```
+[She holds up the scroll case.]
+```text
+DAPHNE: I stopped at the Library in Delphoi on the way. I asked for my book.
+
+DAPHNE: The one they banned. Fifteen years ago, out of that door, in the rain.
+
+DAPHNE: The librarian found it in a drawer marked DO NOT READ.
+
+DAPHNE: It was very well thumbed.
+
+DAPHNE: I'm going to write a better one. With more wrong answers in it.
+```
+```text
+DAPHNE: Olympus, then. An Archon on a mountain with a box.
+
+DAPHNE: A guess is only a question that's gotten too confident.
+
+DAPHNE: He's very confident. Go and ask him some questions.
+
+DAPHNE: And come back down. Your mother will ask me. I'm a terrible liar.
+```
+[She stays sitting under the tree. On a later talk: "DAPHNE: I'm going to sit here a while. Not for thirteen years. Just until it gets dark." Set `FLAG_ICHOR_DAPHNE_TEMPE`. She is gone on the next visit.]
+
+**Kroke, on the bridge.** An ex-Titanborn sits on the bridge's parapet with her helmet pushed back and her sickle clasp in her hand. She is grunt archetype 10, the doubter, and she doesn't battle.
+```text
+KROKE: Going up? Everyone's going up. To see the Archon. Or the box.
+
+KROKE: I followed him up a stair once. The healer. Then I was stone.
+
+KROKE: In the golden age, did we still get to eat? Nobody ever answered that.
+
+KROKE: I asked three times. In the barracks. At the muster. On the stair.
+
+KROKE: Now there's nobody to ask. So I'm sitting here. Thinking about bread.
+```
+Second talk:
+```text
+KROKE: I could go home. I've got one. I just don't know what I'd say.
+
+KROKE: “I'm back. I was a statue.” They'd want to know what it was like.
+
+KROKE: It was like nothing. That's the worst part. It wasn't even sad.
+```
+After the player has beaten the Archon: "KROKE: I went home. They didn't ask. They just fed me. I'm going back again tomorrow."
+
+**The laurel boy.** Under Apollo's altar, a boy in white is cutting laurel with a little bronze sickle. Every eight years a boy carries laurel from Tempe to Delphoi, the way Apollo did after he killed the serpent, to crown the Pythian victors.
+```text
+LAUREL BOY: Don't step on the cuttings! They're for Delphoi. For the Games.
+
+LAUREL BOY: Apollo came here to wash, after the serpent. Then he cut a branch.
+
+LAUREL BOY: So every eight years somebody walks it down. This year it's me.
+
+LAUREL BOY: My uncle says there mightn't be Games now. Nobody knows who'll win.
+
+LAUREL BOY: I said, that's the point of Games. He went quiet.
+
+LAUREL BOY: Here. You look like you'll want a laurel. This one's a spare.
+
+{PLAYER} received a Pythian Laurel!
+```
+[Set `FLAG_ICHOR_GOT_TEMPE_LAUREL`. After: "LAUREL BOY: It's a long walk down. I don't mind. I've never been anywhere."]
+
+**The Ascent's gate.** At the Vale's west end, where a path leaves the river and climbs into the beech woods on Olympus's flank, a stone gate-post stands with the Archon's owl on it. Koronos, an old Thessalian warden of the Archon's, sits on a stool beside it.
+
+With fewer than eight Laurels (only possible with a debug save, but scripted anyway):
+```text
+KORONOS: Eight Laurels, the law says. You're short. Come back with the rest.
+```
+With eight:
+```text
+KORONOS: Another one. Hm. Sit, sit. Let me see your Laurels.
+
+KORONOS: One, two… Hestia's. Hermes's. Demeter's, that's a good one.
+
+KORONOS: …Seven. Eight. The Pythia's own. She laughed when she gave it, they say.
+
+KORONOS: Eight. By the Archon's order, the Ascent is open to you.
+
+KORONOS: I've sat at this post forty years. Hundreds went up.
+
+KORONOS: Most came down. I couldn't tell you which ones would. Never could.
+
+KORONOS: Go on. I'll be here. I'm always here. It's the job.
+```
+[Koronos moves his stool aside. Set `FLAG_ICHOR_ASCENT_LAURELS_SHOWN`. On later talks: "KORONOS: Up and down. Up and down. That's the mountain."]
+
+### L-6E. The Ascent: the Weeping Cliff, the ice and the snow
+
+**The Weeping Cliff.** Under the cliff that looks like a seated woman with her face in her hands, an old woman lays flowers at the pool's edge. Fourteen young cypresses stand round the water.
+```text
+OLD WOMAN: Fourteen. One for each of her children. Somebody planted them.
+
+OLD WOMAN: She boasted she had more children than a goddess. The goddess's two came.
+
+OLD WOMAN: She cried until she turned to stone. And then she kept crying.
+
+OLD WOMAN: When the hours stopped, the water stopped. First time ever.
+
+OLD WOMAN: Next morning it was running again. I was so glad.
+
+OLD WOMAN: Is that strange? To be glad a stone's crying again?
+
+OLD WOMAN: I lost a son. I come up and we keep each other company.
+```
+The cliff face, an object at its foot:
+```text
+The rock has the shape of a woman, sitting, her face in her hands.
+
+Water seeps from where her eyes would be and runs down into the pool.
+```
+
+**Medon's storeroom** (Ice Caves B1F) is a door in the ice with a bronze chain across it, older than the cave's ice. A labrys seal: the Labrys cleaves it (SYSTEMS §1).
+```text
+A door cut into the rock, behind the ice. A bronze chain runs across it.
+
+Letters are cut above it, very old: BY ORDER OF MEDON, ARCHON. NO ONE.
+```
+?? Cleave the chain with the Labrys? YES/NO. YES: the chain falls in three pieces. Inside, a small dry room with a stone bench, an Ichor Stone on a shelf, and a wax tablet sealed in a jar. Reading the tablet:
+```text
+A wax tablet, in a jar, kept from the damp. The hand is shaky.
+
+“I tied the last knot tonight. My hands won't stop.”
+
+“I've put the chains on them. Every oracle will come true now.”
+
+“Father, you didn't die for nothing. I made sure. I made sure of everything.”
+
+“I'm going to keep the last knot. Somebody has to. I'm so tired. -Medon”
+```
+[Set `FLAG_ICHOR_MEDON_STOREROOM`. The Ichor Stone is the room's item.]
+
+**The hearth in the ice.** A warm side chamber on B1F, the climb's midpoint rest. An old woman keeps a fire in a stone hearth cut into the cave wall, the only warm place on the mountain. She is a xenia host (SYSTEMS §10).
+```text
+ESCHARA: Sit. Eat first.
+
+ESCHARA: Then tell me who you are. Not before.
+```
+[Heal the party. The xenia rest menu: dawn, noon, dusk or night, if still ahead today.]
+```text
+ESCHARA: They call me Eschara. It means the hearth. I forget the other name.
+
+ESCHARA: Nobody up here needed it. You don't, to keep a fire.
+
+ESCHARA: Everyone who climbs sits here once. Kings. Thieves. That Archon.
+
+ESCHARA: He sat where you're sitting, last week, and didn't eat. I made him.
+
+ESCHARA: He's carrying something heavy. Not the box. The box is small.
+```
+Second talk: "ESCHARA: Go on up. The fire will be here. It's been here longer than the caves."
+
+**The snow-watcher.** A stone hut stands in the lee of a rock on the Snowfields, smoke going straight up. Its roster is Part 2. Chionis, who has watched the snow on the Ascent for fifty winters, gives the Ice Stone to anyone who shows him a Niflake.
+
+### L-6F. The Gate of the Horai
+
+`MAP_OLYMPUS_GATE`. The last of the cloud bank thins under your feet and the Crags' cut steps come out onto a terrace of white marble above a sea of cloud. There is no roof; the sky is the roof. At the north end stands a gate made of cloud, rolling slowly in on itself and never moving. Three women keep the terrace. None of them has a shadow (SYSTEMS §10's first tell), and none of them says what she is.
+
+**Kleon,** at the terrace's south edge, sitting with his legs over the cloud (`FLAG_ICHOR_HIDE_KLEON_OLYMPUS_GATE` cleared from `FLAG_ICHOR_SENTENCES_DONE`). He doesn't battle.
+```text
+KLEON: About time! I've been up here an hour. Lakonians run.
+
+KLEON: I walked her home. Mother. Then I ran here. Don't ask me why.
+
+KLEON: I don't know why. I think I wanted to see the top. Just to see it.
+
+KLEON: …I'm not going in. It's your climb.
+
+KLEON: Brasidas is in there. The Polemarch. My hero, when I was little.
+
+KLEON: If you tell him I said that, I'll deny it.
+
+KLEON: He's going to say something Lakonian at you. Short. Let it land.
+
+KLEON: If you win, I'll be first at something next year. A footrace. Probably.
+
+KLEON: Go on. I'll wait here. I stood still a whole hour once. Nothing to it.
+```
+Second talk: "KLEON: Still here. Still not going in. Go."
+
+**The Horai.**
+```text
+EIRENE: Peace, traveler. I keep the healing here. Sit, if you're tired.
+```
+[Eirene keeps the terrace's Asclepeion, a marble table with a Panacoil coiled on it. Heal as at any Asclepeion. Her heal line: "EIRENE: Rest. There's nothing happening yet. That's what rest is."]
+```text
+EUNOMIA: Order, traveler. I keep the stall. Every price is fixed. And fair.
+
+EUNOMIA: I like things the way they are. I won't pretend I don't.
+```
+[Eunomia keeps the Agora stall, a marble table with jars (Part 2).]
+```text
+DIKE: Justice, traveler. I keep the door.
+
+DIKE: We kept this gate before the first Archon. We'll keep it after the last.
+```
+**Their lines,** each on a second talk:
+```text
+EIRENE: When the hours stopped, we stood here and watched the clouds stop.
+
+EIRENE: A whole hour with no hours in it. For us, that's a fish with no water.
+
+EIRENE: Then you started them again. Thank you. We were very bored.
+
+EUNOMIA: The Archon came through a week ago with a little box.
+
+EUNOMIA: Order. That's what's in it. I'd keep it, if I were him. I'm not him.
+
+DIKE: They call him the Just. He's been sitting by his box all week.
+
+DIKE: Wondering if he is. I could tell him. Nobody ever asks the door.
+
+EIRENE: He wants peace. Peace is my whole job.
+
+EIRENE: It isn't the same as nothing happening. He'll learn that from you.
+```
+**The way down.** Eirene can send a challenger back down before the first seat: "EIRENE: If you want to go down, the cloud will carry you. It always comes back up." ?? YES/NO: YES fades out and warps to the Vale of Tempe, by the Ascent's gate. It is the dungeon's shortcut out, and it works until the Archon is beaten.
+
+**The door.** Dike stands before the gate of cloud.
+```text
+DIKE: Through here sit four of the Twelve. Then the summit, and the Archon.
+
+DIKE: Once you go in, the cloud closes behind you. Until it's over.
+
+DIKE: Will you go in?
+```
+?? YES/NO
+```text
+> NO:
+DIKE: The hours will wait. They're good at it now.
+
+> YES:
+DIKE: Then go. And when you come out, tell us how it went.
+
+DIKE: We never know. That's new. We're still getting used to it.
+```
+[YES: the gate of cloud rolls aside. The player walks through, and the screen whites out. Warp to `MAP_PANTHEON_ARES`. The Pantheon writer's beat L-7 begins there, and sets `VAR_ICHOR_ACT3` to 23 on entry.]
+
+## Beat L-7. The Pantheon
+
+Per STORY L-7 and §2's Twelve. The four seats of the Pantheon are the four Olympians who have no temple below: Ares, Poseidon, Athena and Hera. Each holder asks the theme's question in their own way, so the League's last hour is an argument, not a gauntlet:
+- **Brasidas** asks how well, not how long.
+- **Themistokles** says the words are never the thread, and nobody's too good to be wrong.
+- **Hypatia** asks who you are, when no one wrote you.
+- **Olympias** asks whether a fate you write for someone you love is a lie or a gift.
+
+Then the Archon asks the last one: would you take certainty back?
+
+**The way in.** The Gate of the Horai (`MAP_OLYMPUS_GATE`) is the League-road part's: its Asclepeion, its Agora, its keepers, and the prompt at its north door. This part starts on the far side of that door.
+
+**The rules of the Pantheon** (Emerald's Elite Four, re-skinned):
+- The four halls run in a line, `MAP_PANTHEON_ARES` → `_POSEIDON` → `_ATHENA` → `_HERA` → `MAP_OLYMPUS_SUMMIT`. Each hall's south door seals behind you, and its north door opens only when its seat is beaten.
+- There is no healing between seats. Items from the bag are allowed.
+- A loss whites out to the Gate's Asclepeion and clears every seat's done flag (`FLAG_ICHOR_PANTHEON_ARES_DONE` and the rest), so the next attempt starts again with Brasidas, as in Emerald.
+- `VAR_ICHOR_ACT3` is set to 23 the first time the player steps into the Hall of Shields, and never lowered.
+
+**The halls are silent.** No BGM plays in a hall, only its own ambience (P9): the clink of shields, surf on cloud, owls, a serpent's hiss. `MUS_ICHOR_PANTHEON` plays only in battle, with that god's layer on top. The silence makes each holder's speech the room's music.
+
+### L-7A. The Hall of Shields: Brasidas the Polemarch (Ares)
+
+**The hall** (`MAP_PANTHEON_ARES`, 13×22). A long, narrow war-hall. Bronze shields hang rim to rim on every column, dented, some holed, each with a name scratched on its inner face. The floor is raked sand, like a palaestra. Two braziers burn at the far end on either side of a *tropaion*: a post hung with a captured helmet and cuirass. A plain wooden bench stands under it, and on the bench sits a gray, square man in a red cloak, oiling a spear he doesn't need.
+
+[The south door grinds shut behind the player. Stone SE. Set `VAR_ICHOR_ACT3` to 23 if it is lower. The player walks up the sand; a coord trigger three tiles from the bench runs the scene. Brasidas stands.]
+```text
+BRASIDAS: You're the one Kleon won't stop talking about.
+
+BRASIDAS: He talks a great deal. For a Lakonian.
+
+BRASIDAS: They said that about me too. It wasn't a compliment.
+```
+[He looks along the columns.]
+```text
+BRASIDAS: These shields. Every one came home on a man, or with one.
+
+BRASIDAS: Mine isn't here. It fell in the sea at Pylos.
+
+BRASIDAS: The enemy fished it out and hung it on their trophy.
+
+BRASIDAS: With your shield or on it. That's what our mothers say.
+
+BRASIDAS: I came home without it. And lived. Nobody had a word for that.
+```
+```text
+BRASIDAS: When the seers still talked, a hundred of them told me how I'd die.
+
+BRASIDAS: My mother sent the last one away. She said, “My son is a good man.”
+
+BRASIDAS: “But Lakonia has many better.” Then she made him soup.
+
+BRASIDAS: She was right. I spent my life trying to prove her wrong.
+
+BRASIDAS: That's a life. I recommend it.
+```
+[He sets the spear down against the tropaion.]
+```text
+BRASIDAS: Lakonians never asked how long.
+
+BRASIDAS: Only how well. Show me well.
+```
+[Battle `TRAINER_ICHOR_BRASIDAS`. Battle music `MUS_ICHOR_PANTHEON`, Ares's layer (brass).]
+
+Defeat text: "BRASIDAS: Well. That was well."
+```text
+BRASIDAS: Good. No speech. You don't need one.
+
+BRASIDAS: The boy. Kleon. Tell him I said he can stop proving things.
+
+BRASIDAS: He won't. But tell him.
+
+BRASIDAS: Go on. The admiral's next. He'll talk. Let him.
+```
+[The north door grinds open. Set `FLAG_ICHOR_PANTHEON_ARES_DONE`.]
+
+**Talking to him again**
+```text
+BRASIDAS: Go. The sand's raked. I'll rake it again.
+```
+
+**The shields** (any column)
+```text
+A bronze shield, dented on the rim. A name is scratched inside it.
+
+The name has been rubbed smooth by a thumb. Someone came here often.
+```
+
+**The tropaion**
+```text
+A trophy post hung with an enemy's helmet. There's an empty peg at the top.
+
+It's the right size for a shield.
+```
+
+**Design note.** Pylos is real (Thucydides 4.12): Brasidas was wounded steering his ship onto the beach, his shield fell into the sea, and the Athenians set it on their trophy. His mother Argileonis's answer is in Plutarch's *Sayings of Spartan Women*. Brasidas never had a fate that fit: he lived without the shield, and was the best of men in a city that said it had better. He is Kleon's hero for a reason.
+
+### L-7B. The Hall of Ships: Themistokles the Admiral (Poseidon)
+
+**The hall** (`MAP_PANTHEON_POSEIDON`, 22×16). Wide and bright. The whole east wall is open, framed by two columns, onto a sea of cloud that rolls like water far below; the cloud layer moves slowly past. The floor is a blue-green mosaic of waves, and a trireme's bronze ram juts up out of it near the far end like a rock in a bay, with a small deck of planks built over it. Tarred planks are stacked along the west wall, sweet-smelling, and a model trireme sits on a trestle. A sun-dark man in a sea-stained cloak paces the planks on the ram, talking before you're through the door.
+
+[The south door seals. The scene starts at the door.]
+```text
+THEMISTOKLES: Ah! The Kallistan! Come in, mind the planks.
+
+THEMISTOKLES: They're for a ship I'll never build. I like the smell.
+```
+[He hops down off the ram and walks to meet the player halfway.]
+```text
+THEMISTOKLES: The year the great fleet came, Astyra asked the Pythia what to do.
+
+THEMISTOKLES: She said, “Trust the wooden wall.” Very helpful. Thank you, Apollo.
+
+THEMISTOKLES: Half the city built a wooden fence round the Akropolis.
+
+THEMISTOKLES: I built ships.
+
+THEMISTOKLES: Same words. Two readings. The fence burned. The ships won.
+
+THEMISTOKLES: The words are never the thread. Your friend proved that at the trial.
+```
+```text
+THEMISTOKLES: And your Archon. Old Aristeides. Up there with his box.
+
+THEMISTOKLES: I had him exiled once. Best thing I ever did for him.
+
+THEMISTOKLES: He came back the night before the battle.
+
+THEMISTOKLES: Rowed straight through the enemy fleet to tell me we were surrounded.
+
+THEMISTOKLES: Then he said, “Let's be rivals in who serves the city better.”
+
+THEMISTOKLES: Insufferable. I've never forgiven him for being right.
+```
+[He jumps back up onto the ram.]
+```text
+THEMISTOKLES: Nobody's too good to be wrong. Not him. Not me.
+
+THEMISTOKLES: Let's find out about you. Into the narrows!
+```
+[Battle `TRAINER_ICHOR_THEMISTOKLES`. `MUS_ICHOR_PANTHEON`, Poseidon's layer (surf).]
+
+Defeat text: "THEMISTOKLES: Ha! Sunk in the narrows. With my own trick!"
+```text
+THEMISTOKLES: Well rowed. You know what he'll do up there?
+
+THEMISTOKLES: Tell you the truth. Then fight you anyway. With everything.
+
+THEMISTOKLES: He's the worst liar in Aethos. It only took him one lie to prove it.
+
+THEMISTOKLES: Next is the philosopher.
+
+THEMISTOKLES: Don't let her ask you what a ship is. We'll be here all night.
+```
+[The north door opens. Set `FLAG_ICHOR_PANTHEON_POSEIDON_DONE`.]
+
+**Talking to him again**
+```text
+THEMISTOKLES: Still here? The narrows are that way. Up.
+```
+
+**The model trireme**
+```text
+A model trireme, every oar carved. The ram is real bronze.
+
+A label in a big, careless hand: “THE WOODEN WALL.”
+```
+
+**The open wall**
+```text
+A sea of cloud, rolling in long slow swells. Gulls ride it.
+
+There are no gulls this high. You look again. They're still there.
+```
+
+**Design note.** The wooden-walls oracle is Herodotus 7.141–143: the oracle was right and half the city misread it. That is the game's third rule of fate in one anecdote: the thread is always right; the words often aren't. Aristides crossing the blockade at night to bring Themistokles the news is in Herodotus 8.79 and Plutarch's *Aristides*. Themistokles's last line about the worst liar in Aethos reads as banter now and as the Archon's secret one hall later (STORY §4, twist 3).
+
+### L-7C. The Hall of Questions: Hypatia the Philosopher (Athena)
+
+**The hall** (`MAP_PANTHEON_ATHENA`, 17×17). Square and high. Scroll niches climb every wall to the ceiling, each niche stuffed full, and little owls sleep in the topmost rows. A long table runs down the middle under one lamp, covered in wax tablets of circles, triangles and crossed-out sums. At its head a woman in a plain undyed philosopher's cloak turns a bronze disc pierced with stars: an astrolabe. She doesn't look up until you're at the table.
+
+[The south door seals.]
+```text
+HYPATIA: Sit, if you like. Don't, if you don't. The chair has no opinion.
+```
+[She holds up the astrolabe.]
+```text
+HYPATIA: This measures the stars. Where they are. Where they'll be.
+
+HYPATIA: It still works, you know. The sky stayed lawful when the Loom stopped.
+
+HYPATIA: The stars are certain. People aren't.
+
+HYPATIA: I used to think that was a flaw in people. I'm revising it.
+```
+```text
+HYPATIA: For a thousand years everyone in Aethos had an answer before a question.
+
+HYPATIA: Who will I be? Ask the Pythia. How will I die? Ask the Pythia.
+
+HYPATIA: Whom should I marry? Ask the Pythia, and then ask her again.
+
+HYPATIA: You're the first person I've met who had to work it out.
+```
+[She sets the astrolabe down and looks at the player properly for the first time.]
+```text
+HYPATIA: No one wrote you. So who are you?
+
+HYPATIA: Answer in battle. It's quicker.
+```
+[Battle `TRAINER_ICHOR_HYPATIA`. `MUS_ICHOR_PANTHEON`, Athena's layer (aulos).]
+
+Defeat text: "HYPATIA: Interesting. That's an answer. It isn't the end of one."
+```text
+HYPATIA: Write that down somewhere. No. Don't. You'll only revise it.
+
+HYPATIA: The last seat is the queen's. She'll tell you a story about her son.
+
+HYPATIA: Listen carefully. Then decide if it was true.
+
+HYPATIA: She never has.
+```
+[The north door opens. Set `FLAG_ICHOR_PANTHEON_ATHENA_DONE`.]
+
+**Talking to her again**
+```text
+HYPATIA: Still thinking? Good. Think on the stairs. It's warmer.
+```
+
+**The tablets on the table**
+```text
+Wax tablets full of circles. One sum has been crossed out six times.
+
+Under the last try, in small letters: “Close. Not yet.”
+```
+
+**An owl in a high niche**
+```text
+A little owl opens one eye at you, considers it, and closes it again.
+```
+
+**Design note.** Hypatia of Alexandria taught mathematics and astronomy and wrote on the astrolabe. The game keeps her to her work and leaves her death out. Her question is Daphne's, grown up: Daphne asked which came first, the Pokémon or the story; Hypatia asks who you are when nobody told the story first.
+
+### L-7D. The Hall of Eyes: Olympias the Serpent Queen (Hera)
+
+**The hall** (`MAP_PANTHEON_HERA`, 15×19). Rich and close. Every slab of marble is veined like a peacock's tail, so the walls are all eyes: Argos's hundred, set in the bird by Hera. Bronze serpents coil up four columns, and one of them blinks. At the far end a golden-apple tree grows out of a bronze urn the size of a well, apples hanging gold among dark leaves. Under it, on a low throne, sits a handsome older woman with a live snake asleep across her shoulders like a stole.
+
+[The south door seals. As the player walks up, the serpent on her shoulders lifts its head and watches. The player's follower, if any, stops and looks at it.]
+```text
+OLYMPIAS: Don't mind her. She's only dangerous to people who flinch.
+
+OLYMPIAS: …You didn't flinch. Your mother raised you properly.
+
+OLYMPIAS: I hear she lied to you for thirteen years. Good for her.
+
+OLYMPIAS: I lied to my son for longer than that.
+```
+[She strokes the snake's head with one finger.]
+```text
+OLYMPIAS: I told my son a god was his father.
+
+OLYMPIAS: He believed me, and he conquered the world.
+
+OLYMPIAS: Was I lying?
+```
+?? Multichoice: YES / NO / I DON'T KNOW
+```text
+> YES:
+OLYMPIAS: Of course I was. And he still conquered it. So which of us is the liar?
+
+> NO:
+OLYMPIAS: Sweet. Wrong, perhaps. Or right. I genuinely never found out.
+
+> I DON'T KNOW:
+OLYMPIAS: Neither do I. That's the only honest answer anyone's ever given me.
+```
+```text
+OLYMPIAS: Hera gave her serpents a job each, you know.
+
+OLYMPIAS: Guard the apples. Chase the girl. Kill the hero.
+
+OLYMPIAS: Every one of them did exactly what it was told. Look how well that went.
+
+OLYMPIAS: Mine aren't told anything. Let's see what they decide.
+```
+[Battle `TRAINER_ICHOR_OLYMPIAS`. `MUS_ICHOR_PANTHEON`, Hera's layer (a low drone).]
+
+Defeat text: "OLYMPIAS: Hm. He'd have liked you. He liked anyone who wouldn't stay put."
+```text
+OLYMPIAS: Go on up. The old man's waiting with his box.
+
+OLYMPIAS: He's going to tell you something. Don't forgive him too quickly.
+
+OLYMPIAS: Or do. You're not my child. I'll never know how you turn out.
+
+OLYMPIAS: Isn't that restful.
+```
+[The north door opens on a stair cut into the mountain, climbing into white light. Set `FLAG_ICHOR_PANTHEON_HERA_DONE`.]
+
+**Talking to her again**
+```text
+OLYMPIAS: Up. Before she wakes properly. She's grumpy in the afternoons.
+```
+
+**The golden-apple tree**
+```text
+A tree of golden apples, growing out of a bronze urn.
+
+One apple has a single bite out of it. The bite has gone gold too.
+```
+
+**A bronze serpent on a column**
+```text
+A bronze serpent, coiled round the column. You're fairly sure it's bronze.
+
+It blinks.
+```
+
+**Design note.** Olympias of Epirus kept tame snakes and, Plutarch says, let it be believed that her son Alexander was fathered by Zeus. She is Hera's seat because Hera is the mother of the Olympians, and the goddess of serpents that did as they were told: Ladon on the golden apples, the Python she set on Leto, the Hydra she raised to kill Herakles. She is the third mother of the act, after Rhea, who stood still, and Melitta, who chose freedom: Olympias wrote her son a fate, and it worked, and she doesn't know if that was love. The YES/NO/I DON'T KNOW changes nothing; it's there because the player should have to answer.
+
+## Beat L-8. The Summit: the Archon
+
+Per STORY §7.10 (master text) and §6.15 (staging). Gives Medon's Knot, untied; the Hall of Heroes; the credits.
+
+**The Summit** (`MAP_OLYMPUS_SUMMIT`, 24×20). The stair from the Hall of Eyes comes out onto the top of the world. The map's lower edge is a cloud weather layer, so the summit seems to float; nothing below shows but white. A broad stone platform, worn smooth, climbs in three shallow terraces to a great plain altar under open sky. No roof, no columns, no gold: Olympus's real summit is bare rock and wind. An old man in an undyed cloak stands beside the altar with a staff. On the altar sits a small bronze box.
+
+**Music.** `MUS_ICHOR_ARCHON` starts as the player steps onto the summit. It carries through the scene and the battle (its battle arrangement) and back, and **stops dead on "Gods help you."** After that there is no music: rope creak and wind, until the Hall.
+
+[A coord trigger on the top terrace. The player walks to the altar.]
+
+[A great altar under an open sky, above the clouds. Aristeides stands beside it in a plain undyed cloak. On the altar sits a small bronze box.]
+```text
+ARISTEIDES: You climbed. Everyone said you would. I didn't need an oracle.
+
+ARISTEIDES: I've been Archon for twenty years. Do you know what the job is?
+
+ARISTEIDES: Keeping a box.
+```
+[He opens it. Inside lies a fist-sized knot of black thread, with one red strand through it.]
+
+[Staging: the box object's lid opens (a two-frame object). The Knot's item picture shows in a window, the way the expansion shows an item close-up: a black fist of thread, one red strand through it. Frame 1 of 5 (P10).]
+```text
+ARISTEIDES: Medon's Knot. The last of the chain. The one that holds the rest.
+
+ARISTEIDES: Tie it on the Loom, and every knot goes tight again.
+
+ARISTEIDES: Every oracle comes true. No chains needed.
+
+ARISTEIDES: A thousand years of peace. Kings who stepped down when they were told.
+
+ARISTEIDES: Wars nobody fought, because everyone knew who'd win.
+
+ARISTEIDES: And now? Lakonia sharpens spears. Emporion hoards grain.
+
+ARISTEIDES: The Pythia sits in her temple and laughs. Have you heard her laugh?
+
+ARISTEIDES: People are frightened, child. I'm frightened.
+
+ARISTEIDES: That forger told you to ask me about Kalliste. So ask.
+```
+?? Multichoice: WHAT HAPPENED? / I THINK I KNOW.
+```text
+> I THINK I KNOW.:
+ARISTEIDES: Then you can tell me if I get it wrong.
+```
+[WHAT HAPPENED? goes straight on.]
+```text
+ARISTEIDES: Twelve years ago, the old Archon sent me to find a runaway bee.
+
+ARISTEIDES: A melissa who left Delphoi before the night the Oracle went blind.
+
+ARISTEIDES: I found a beekeeper on Kalliste. And a baby who never cried.
+
+ARISTEIDES: I knocked. She didn't ask my name. She sat me down.
+
+ARISTEIDES: Bread. Honey. The good honey.
+
+ARISTEIDES: You don't harm the house that feeds you. That's older than Archons.
+
+ARISTEIDES: So I went home and wrote that she'd drowned. Both of you.
+
+ARISTEIDES: My first lie. I wrote it very badly.
+
+ARISTEIDES: The Keeper read it. A forger knows a forgery.
+
+ARISTEIDES: He's held it over me ever since. That's how he got his post.
+
+ARISTEIDES: That's how they found you. That's why a girl was voted out of my city.
+
+ARISTEIDES: Everything else in my life was written. That wasn't.
+
+ARISTEIDES: The one thing I ever chose. And look what it did.
+
+ARISTEIDES: I spared one free child, and the world stopped.
+
+ARISTEIDES: What happens when everyone is free?
+```
+[He closes the box.]
+```text
+ARISTEIDES: The law of Olympus is simple. Whoever beats the Archon keeps the box.
+
+ARISTEIDES: If I win, I carry this to Delphoi and tie it at the new moon.
+
+ARISTEIDES: If you win… it's yours. And so is the fear.
+
+ARISTEIDES: I won't go easy. A just man doesn't.
+```
+[Battle `TRAINER_ICHOR_ARISTEIDES`. His defeat line:]
+```text
+ARISTEIDES: …Unwritten. All of it. Even this.
+```
+[After the battle, Aristeides sits on the altar step and holds out the box.]
+```text
+ARISTEIDES: It's yours. The box. The knot. The office. The fear.
+
+ARISTEIDES: Archon of Aethos. Gods help you.
+```
+[`MUS_ICHOR_ARCHON` stops on this box. Wind SE only from here. Give `ITEM_MEDONS_KNOT`. Set `FLAG_ICHOR_GOT_MEDONS_KNOT` and `VAR_ICHOR_ACT3` to 24. Hide the box object (`FLAG_ICHOR_HIDE_KNOT_BOX`).]
+```text
+{PLAYER} received Medon's Knot.
+
+It's cold and heavy. Heavier than it should be.
+```
+?? Untie Medon's Knot? YES/NO
+```text
+> NO:
+The knot sits in your palm. It isn't going anywhere.
+```
+[NO asks again.]
+```text
+> YES:
+```
+[The player pulls at the red strand. It doesn't move.]
+```text
+It's tied tight. Tighter than anything you've ever held.
+
+ARISTEIDES: It took a grieving man a whole night to tie that.
+
+ARISTEIDES: It'll take two to undo it. Here. I'll hold. You pull.
+```
+[Six pulls. Each is a YES-to-continue box with a rope-creak SE.]
+
+[Staging (E15): Aristeides stands and takes the other side of the knot: his object steps beside the player and turns to face them. The knot's item picture steps through three looser frames, one per two pulls: frame 2 after the second pull, frame 3 after the fourth, frame 4 after the sixth.]
+```text
+The red strand slides a little.
+
+…A little more.
+
+The black loops loosen, one by one.
+```
+[The six YES-to-continue boxes sit between and after these three lines: pull, pull, "The red strand slides a little.", pull, pull, "…A little more.", pull, pull, "The black loops loosen, one by one." A NO at any pull: "Aristeides waits. His hands don't move." and the same pull asks again.]
+
+[The knot's icon steps through three looser frames. Then it is only thread, and it isn't black. It's gold.]
+
+[Frame 5: a single gold thread. Hold 60 frames.]
+```text
+It isn't black anymore. It's gold.
+```
+[A wind off the summit lifts the thread out of their hands. It drifts away over the clouds, south, toward the sea.]
+
+[Staging: the item window closes. A small gold thread object rises from between the two of them and drifts off the screen's south edge on a slow sine path over the cloud layer (E15). Take `ITEM_MEDONS_KNOT` from the bag. Set `FLAG_ICHOR_KNOT_UNTIED`. Wind SE swells once and settles.]
+```text
+ARISTEIDES: …There it goes.
+
+ARISTEIDES: I'm going home. My father collects my name on broken pots.
+
+ARISTEIDES: He'll be pleased. He was always sick of hearing me called the Just.
+```
+[The Hall of Heroes. Then the credits (§6.15).]
+
+**Design note.** Every box above is STORY §7.10, word for word. The staging around the pulls is §6.15's. The untying has no music on purpose: the theme of the League is a knot two people who disagree undo with their hands, and the only sounds are the rope and the wind on the mountain.
+
+## Beat L-9. The Hall of Heroes, and the credits
+
+Per STORY L-9 and §6.15. Makes the player Archon of Aethos (decision S7). Makes Alethea Keeper of Records (STORY §2, Alethea, arc step 10: "the new Archon makes her Keeper of Records"). Places Aquila. Rolls the credits and places the Unwoven.
+
+**The Hall** (`MAP_HALL_OF_HEROES`, 20×16). A *heroön*, a hero's shrine, cut into the rock behind the summit altar. A long, low room of painted stelai set into both walls, one for each Archon: a name, and below it little carved figures of the Pokémon who stood with them. The first stele, by the door, is weathered almost smooth. The last, at the far end, is fresh and crisp. Beyond it waits a blank slab of white marble, and beside the slab a mason with chalk-white hands and a mallet. Daylight comes in through a slot in the roof and falls on the blank stone.
+
+[Aristeides gets up from the altar step.]
+```text
+ARISTEIDES: But first, the Hall. The law's very particular about this part.
+
+ARISTEIDES: Humor an old man.
+```
+[He walks to a door in the rock behind the altar. The player follows. Warp to `MAP_HALL_OF_HEROES`. Music: `MUS_ICHOR_HALL_OF_HEROES` begins quietly. The two walk the length of the room together; the camera keeps pace with the stelai.]
+```text
+ARISTEIDES: Every Archon is cut into this wall. And every Pokémon who stood with them.
+```
+[They pass the first stele. The player's object turns to look at it.]
+```text
+“MEDON, SON OF KODROS. FIRST ARCHON.”
+
+The figures under his name are worn away. Only the name is left.
+
+ARISTEIDES: Medon's is first. You can hardly read it now.
+
+ARISTEIDES: Mine's last. Until this morning.
+```
+[At the blank slab, the mason looks up.]
+```text
+MNEMON: Partners first, Archon. Then the name. Stone's patient. I'm not.
+```
+[The vanilla Hall of Fame record, re-skinned (P10): each party Pokémon in turn is shown as it is cut into the slab, with a chisel SE per Pokémon, then the player's name across the top. The party is recorded. Set `FLAG_ICHOR_ARCHON_OF_AETHOS`.]
+```text
+MNEMON: There. Cut deep. They'll still read that in a thousand years.
+
+MNEMON: …Or they won't. Nobody can say now, can they.
+
+MNEMON: Isn't that a thing.
+```
+[The Star Chart's chime.]
+```text
+A new star has appeared in your Star Chart: Aquila, the eagle of Zeus.
+```
+[Set Aquila's constellation flag (`FLAG_ICHOR_CONSTELLATIONS_START + 15`, SYSTEMS §8 #16).]
+```text
+ARISTEIDES: One more thing. Then I'm going home. I mean it this time.
+
+ARISTEIDES: The Archon's seal. The owl.
+```
+[He holds out a small bronze ring with an owl cut into its bezel.]
+```text
+ARISTEIDES: A forger pressed this into wax for five years, and I let him.
+
+ARISTEIDES: Don't let anyone.
+
+{PLAYER} received the Archon's Seal!
+
+ARISTEIDES: An Archon's first act is to name a Keeper of Records.
+
+ARISTEIDES: Mine was chosen for me. By a man with a little hook.
+
+ARISTEIDES: I think you know who it should be. Truthfully, as she'd say.
+```
+[Mnemon sets a fresh wax tablet on the blank slab's ledge. The player steps up and presses the seal into the wax: the player's object faces the slab, a stamp SE. The tablet's text shows in a sign window.]
+```text
+“ALETHEA OF KALLISTE, KEEPER OF RECORDS. By order of the Archon.”
+
+Under the owl there's no little hook. Just your name.
+```
+[Set `FLAG_ICHOR_ALETHEA_KEEPER`.]
+```text
+ARISTEIDES: Good. She'll be insufferable about it. She's earned that.
+
+ARISTEIDES: Keep the ring on a cord. Not on your finger. Rings get lost.
+
+ARISTEIDES: Go home, Archon. Your mother will want to look at you.
+```
+[He turns and walks back out the way they came, slowly, leaning on the staff. The player is left alone with the stelai and the light from the roof. Hold 60 frames. Fade to white. The game saves, as Emerald does at its Hall of Fame. Then the credits.]
+
+### The credits
+
+[E14, `special Ichor_CreditsFrieze`. Music `MUS_ICHOR_CREDITS`: the main Ichor theme, Lydian, rising. In the second half, under it, Elaia's home theme with the countermelody first heard at the Kastalian spring.]
+
+**The frieze** (`design/phase1/INTRO.md`'s boot-intro frieze, scrolled the other way). The intro's black-figure pot turns again, and a golden thread runs across it: past Olympus with its cloud bank, past the temple fronts, over the wine-dark sea and its dolphins, down to Kalliste and the third olive in Elaia's grove. There it sinks into the olive's roots, where it first came up in the intro. The olive's leaves stir once.
+
+**Over the frieze,** the credits scroll in the dialogue box's terracotta-and-black frame.
+
+**The last image.** The Star Chart opens over a night sky. Every placed constellation glows. The last empty patch, which has been there since Eleusa, fills slowly with a figure in a petasos and a traveling cloak (honey-gold if `FLAG_ICHOR_WORE_MELITTAS_CLOAK` is set), holding nothing.
+```text
+A new star has appeared in your Star Chart: the Unwoven.
+```
+[Set the Unwoven's constellation flag (SYSTEMS §8 #24). Hold 120 frames. Then, centered, in the pottery font:]
+```text
+THE END
+```
+[Hold until a button is pressed. Set `VAR_ICHOR_ACT3` to 25 and `FLAG_SYS_GAME_CLEAR`. Respawn point: `MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_2F` (slice), at the bed. Warp there; the epilogue begins on the next load.]
+
+**Credits text plan** (a stage note only; the director fills in the names):
+
+| Section | Who |
+|---|---|
+| Title card | POKéMON ICHOR. A fan work, made for fun. |
+| Direction | the creative director (the main session) |
+| Story | the story lead (`STORY.md`), the Labyrinth (`LABYRINTH.md`), the systems (`SYSTEMS.md`) |
+| The Aethos Dex | the dex session: 152 species, their names, art and entries |
+| The world | the region builders: the slice; Act I (world-act1); Act II (world-act2); Act III (world-act3) |
+| Engine | ichor-engine; hoenn-cut |
+| Art | tiles, sprites, portraits, battle backgrounds, menus, the pottery UI |
+| Music | the Ichor score, in the old modes |
+| Playtesting and taste | the user, who playtested every look and said what it should be |
+| Built on | pokeemerald-expansion (rh-hideout and its contributors), on the pret decompilation |
+| Tools | Porymap, poryscript, porytiles, mGBA |
+| With thanks | the poets and historians the myths came from |
+| Legal | Pokémon is © Nintendo, Creatures and Game Freak. This is an unofficial fan work, not for sale. |
+| Last card | “Every myth is a memory of a Pokémon.” Daphne. |
+
+## Beat L-10. The epilogue: the next Klotheia
+
+Per STORY §7.11 (master text) and decision S14. Elaia, the morning after the credits: a year on, the next Klotheia. Gives the post-game.
+
+**Setup.** On the first load after the credits (`VAR_ICHOR_ACT3` 25), the slice's festival-day dressing is back on Elaia (garlands, the canopy, the honey-cake stall, the footrace ribbon), behind `FLAG_ICHOR_EPILOGUE_FESTIVAL`. The festival NPCs stand where the slice put them on its own festival morning, with the epilogue lines in P2. The music is the slice's festival theme; Elaia's home theme, wherever it plays, keeps the countermelody from now on.
+
+**Who's where.**
+- Player's house 1F: Mom at the hearth; Phaedon by the hearth holding a jar; Elpis on a stool (shown by `FLAG_ICHOR_EPILOGUE_KITCHEN_GUESTS`).
+- The square: Halia under her canopy; a line of youths: Korinna's little brother, a girl from Akti, and Elpis at the end once the kitchen scene is done.
+- The footrace finish line, south of the square: Kleon, out of breath; Gylippos; Rhea, with no helmet; the kid's Wooloo with the winner's ribbon round its neck.
+- The Akademia: Daphne and Alethea, and the third krater on the long table.
+
+**Order.** The scenes play as the player walks: the room, then downstairs, then the square, then the finish line, then the Akademia. The square's and the finish line's scenes are coord triggers. The Akademia's scene needs both done (`FLAG_ICHOR_EPILOGUE_HALIA`, `FLAG_ICHOR_EPILOGUE_FOOTRACE`); until then Daphne says: "DAPHNE: You're early! Go and watch the race. Someone's coming. I can feel it in my scrolls." and Elpis isn't there yet. When both are set, Elpis's object walks from the square to the Akademia door and is hidden, so she's inside when the player enters.
+
+[Fade in. The player's room, morning. The klepsydra drips.]
+```text
+MOM: [offscreen] {PLAYER}! Did you fill your water clock?
+
+MOM: [offscreen] Festival day! You can't be late on festival day!
+```
+[It is the slice's opening, a year later, word for word. The player is free to move. The klepsydra's object text is the slice's.]
+
+[Downstairs. Mom at the hearth.]
+```text
+MOM: There you are. Archon of Aethos, and you still sleep like a stone.
+
+MOM: Let me look at you. …Hm. You'll do.
+
+MOM: Halia's in the square. She says she's reading threads anyway.
+
+MOM: “Tradition,” she says. She can't see a single one. She's never been happier.
+
+MOM: Oh. And there's a man from Akti in my kitchen. And his little girl.
+
+MOM: He brought me a jar of honey. Bad honey. I've told him so.
+```
+[Phaedon stands by the hearth holding a jar. Elpis sits on a stool, swinging her legs.]
+```text
+PHAEDON: Good morning. Your mother is very honest about honey.
+
+PHAEDON: Ione lets me come to the festival. One day a year. With a guard.
+
+PHAEDON: The guard's at the door. He's asleep. Ione fed him.
+
+ELPIS: I'm having my thread read! Papa says nobody can read it. That's the fun part.
+```
+[Elpis hops off the stool and runs out of the door: her object walks to the door and is hidden, and her object in the square's line is shown at the line's end. Set `FLAG_ICHOR_EPILOGUE_KITCHEN`. A guard object sits asleep against the house wall outside, beside the door, for the rest of the day: "The guard is asleep, smiling. There's honey on his chin."]
+
+[The square, hung with garlands. Halia under her canopy. A line of youths: Korinna's little brother, a girl from Akti, and Elpis at the end.]
+
+[A coord trigger as the player enters the square. The slice's chime plays at each reading, and stops, every time, the way it stopped for the player in the slice.]
+```text
+HALIA: Next! Hold out your hand.
+
+HALIA: …Nothing. Not a scrap. Same as all morning.
+
+HALIA: Well. It seems your thread is your own business.
+
+HALIA: Next!
+```
+[Elpis steps up.]
+```text
+HALIA: And who's this? A little one. Hold out your hand, little one.
+
+HALIA: …Nothing at all. Isn't that grand?
+
+ELPIS: Is that bad?
+
+HALIA: Every thread has knots, child. You'll pull through. Next!
+```
+[Set `FLAG_ICHOR_EPILOGUE_HALIA`. Elpis steps out of line and stands by the old olive, looking up into it.]
+
+[The footrace finish line. Kleon, out of breath.]
+
+[A coord trigger at the finish line. The kid's Wooloo stands past the line with the winner's ribbon round its neck, chewing.]
+```text
+KLEON: Second! I came SECOND. To a Wooloo.
+
+KLEON: …It was a really fast Wooloo.
+
+GYLIPPOS: Kleon.
+
+KLEON: Fewer words. I know, Elder. I know.
+```
+[Rhea stands beside Gylippos with no helmet, watching her son.]
+```text
+RHEA: Second. Good.
+
+KLEON: Good? GOOD?
+
+RHEA: Next year, first. Or not. We'll see.
+```
+[Set `FLAG_ICHOR_EPILOGUE_FOOTRACE`.]
+
+[The Akademia. Daphne and Alethea. The third krater sits on the table.]
+```text
+DAPHNE: There you are! Come in. Mind the scrolls. They still bite.
+
+DAPHNE: Elpis! You came. There's someone here who's waited a whole year.
+
+DAPHNE: I told everyone. Someone always comes late.
+```
+[Elpis looks into the krater. The last starter looks back.]
+```text
+ELPIS: Hello. I'm Elpis. I don't know how long I've got. Do you?
+```
+[The starter climbs out into her arms.]
+
+[**Which starter.** The krater holds the line neither the player nor Kleon took: `(VAR_STARTER_MON + 2) % 3`.
+
+| The player chose | Kleon took | Elpis gets |
+|---|---|---|
+| 0, Nebrel | Kynder | **Hipling** |
+| 1, Kynder | Hipling | **Nebrel** |
+| 2, Hipling | Nebrel | **Kynder** |
+
+It is always the one your own starter beats, which is the kind of joke Daphne would make. The starter is an NPC's, so nothing is given: Elpis's object swaps to a sheet carrying it (P10) and it follows her as a small object for the rest of the day. Hide the krater (`FLAG_ICHOR_HIDE_KRATER_<SPECIES>`, the slice's convention, for the species above).]
+```text
+ALETHEA: I'm writing it all down. The Loom. The Stair. All of it.
+
+ALETHEA: Truthfully. Every word. It's going to be very long.
+
+ALETHEA: Kleon asked me to leave him out of it. I said no.
+
+DAPHNE: {PLAYER}. Before anything else, a question. Humor me.
+
+DAPHNE: Which came first? The Pokémon, or the story?
+```
+?? Multichoice: THE POKéMON / THE STORY / WE'LL SEE
+```text
+> THE POKéMON:
+DAPHNE: Still my answer too. I'd still love to be wrong.
+
+> THE STORY:
+DAPHNE: Still a heretic! Wonderful.
+
+> WE'LL SEE:
+DAPHNE: …Ha! Oh, that's the best one yet.
+```
+```text
+DAPHNE: Alethea, write that down.
+
+ALETHEA: …I'm writing that down.
+```
+[Fade out. The player is free. The post-game begins.]
+
+[Set `FLAG_ICHOR_EPILOGUE_DONE` and `VAR_ICHOR_ACT3` to 26. Fade back in on the Akademia with control returned. Daphne and Alethea switch to their post-game lines (below), and the world changes as the table in "After the epilogue" says.]
+
+**Design note.** Every box from the water clock to "…I'm writing that down." is STORY §7.11, word for word. The game ends where it began, on the same festival and the same question; the only new thing in the scene is the third answer.
+
+### After the epilogue: the post-game begins
+
+`POSTGAME.md` §1 owns what the post-game does with everyone. This table is what a player sees the first time they meet each person after the epilogue fades, so the two documents agree. Lines are new unless marked.
+
+| Who | Where | What changed | Their first line |
+|---|---|---|---|
+| **Daphne** | the Akademia, after the epilogue | She upgrades the Pokédex to the National Dex (the **Oikoumene Dex** if POSTGAME's P2 is approved): `special EnableNationalPokedex`, `FLAG_ICHOR_GOT_NATIONAL_DEX`. | "DAPHNE: Your codex. Give it here. Alethea's been adding pages. / DAPHNE: The world's a lot bigger than Aethos. It always was. We just never had to look." |
+| **Alethea** | the Akademia, then Astyra's Stoa | Keeper of Records, by the player's seal | "ALETHEA: Keeper of Records! By order of the Archon. That's you, apparently. / ALETHEA: I've already found three mistakes in the archive. Truthfully, four." |
+| **Kleon** | Elaia's well, after the epilogue | He proposes the Labors (POSTGAME §1, LABORS scene 0) | "KLEON: Herakles had twelve. Let's see about us." (POSTGAME's line) |
+| **Phaedon** | Akti's Asclepeion, under Ione's roof | Every heal in Akti is his from now on (STORY §2, Phaedon, step 8) | "PHAEDON: Easy now. There. Every hurt closes, if you let it." (the Astyra line, now at Akti) / If asked: "PHAEDON: Every morning I look at her and I don't know. It's unbearable. It's wonderful." |
+| **Elpis** | Akti, in the Asclepeion's garden, with her starter | She can be taken to Knossa to meet Asterion (POSTGAME §3.4) | "ELPIS: Papa says I can't go to Knossa without a grown-up. You're the Archon. Is that a grown-up?" |
+| **Ione** | the Temple of Hestia, Akti | Phaedon's host | "IONE: Send him to me, I said. I feed everyone either way. He does the dishes." |
+| **Hyperion** | Talos's forge, Kaldera | Working iron by feel, nearly blind; Petros and Amathos on the bellows (STORY §2, Hyperion, step 8) | "HYPERION: Who's that? …Ha! The Unwoven. I'd know those footsteps anywhere." / PETROS: "He roasts us. Not literally. Mostly." (STORY's line) |
+| **Rhea** | her house, Lakonia | Under house arrest, which she treats as a promotion; Kleon visits | "RHEA: Confined to my own house. I've never been promoted before." |
+| **Aristeides** | at home in Astyra, with Lysimachos | A private citizen; rematch weekly on Olympus with the Pantheon (POSTGAME) | "LYSIMACHOS: Thirty of them now. ARISTEIDES, ARISTEIDES. Not one says “the Just.” / ARISTEIDES: He's very pleased." |
+| **Iapetos** | gone: exiled for ten years, place unknown | His desk in the Stoa is bare | Object at the desk: "A bare desk. One wax tablet, smoothed blank. Somebody pressed a thumb into the corner and left a print." |
+| **The Fates** | their sanctuaries: the Cutter at Talos's anvil, the Measurer at the Pool of Mnemosyne, the Spinner under Elaia's old olive | Each waits to be caught (the climax part sets their level) | "CUTTER: My hands keep picking things up just to put them down." / "MEASURER: We can measure from anywhere. We'd like to see more than one cave." (STORY's line) / "SPINNER: Spin something? I'd love to. Nobody's asked me for anything in a thousand years." |
+| **The Lord of Time** | if it fainted on the Stair, in the deep under the Omphalos | A rematch after the credits (STORY §2) | Object at the cracked Omphalos: "Far below, something enormous is breathing slowly. It sounds like it's waiting." |
+| **Asterion** | the Starry Chamber, Knossa, with Ariadne | Catchable, if not caught (LABYRINTH §10) | "ARIADNE: He sleeps at the heart now. Not chained. He just likes it there." |
+| **Mom** | home, Elaia | Knucklebones are fair now (STORY §8.3, SYSTEMS §9) | At the knucklebones: "MOM: Rematch? I gave the bee the day off. / MOM: Don't look so pleased. I'm still better than you." |
+| **Halia** | under her canopy, Elaia | Reads threads anyway (POSTGAME's spindle quest) | "HALIA: Hold out your hand. …Nothing. Lovely. I'll never get tired of that." |
+| **Kronion Hill** | Route 1 | The hum has stopped | The old shepherd on Kronion Hill: "OLD SHEPHERD: The hill's stopped humming. The sheep are fine." (STORY §4's line) |
+
+---
+
+# Part 2. NPC rosters
+
+## The *Euploia*, the southern voyage (`MAP_TRIREME_EUPLOIA_DECK`, Act III objects)
+
+The deck map is Phase 2's (Open questions 1). For Act III's crossings (Route 22 by night, the Malea passage, Route 23, and the call at Skandeia before Route 24) its Act I objects are hidden and these are shown (`FLAG_ICHOR_HIDE_DECK_ACT3` cleared from `VAR_ICHOR_ACT3` 1 until the player lands at Gytheion).
+
+| NPC | Where | Role |
+|---|---|---|
+| Nausikles | the steering oars, stern | the captain; ends the voyage |
+| The lookout | the bow | the Titan fleet (beat III-1B) |
+| Oarsman, passenger, old sailor | amidships, the rail | one dread line each (beat III-1B) |
+| SAILOR Eudoros, MERCHANT Kerdon | amidships; by the cargo | optional trainers (Part 3) |
+
+**Cargo** (an object):
+```text
+Amphorae lashed under a net. Oil from Kaldera. Nobody wanted oil.
+```
+**The klepsydra** at the stern:
+```text
+The captain's water clock. The water drips out of it a little too slowly.
+```
+
+## Skandeia (`MAP_KYTHERA_SKANDEIA`)
+
+**Layout.** About 40×30. A harbor town on Kythera's east coast, built down a slope to a curved stone quay. The quay runs along the east side; the slipways at its north end, where the Titans have hauled up the fishing boats, give onto the north bay, which is open water to Route 24 and Gytheion. The east bay is open water: its northern half joins Route 22 (from Melos and Malea) and its southern half Route 23 (toward Antikythera and Knossa). Behind the quay, the Asclepeion and the Agora face the water from the first row of buildings, so both are in view from the gangplank. The houses climb the slope above in white cubes with blue doors, each with a pot of roses or basil on the step. At the top of the town, the west gate opens onto the Foam Road with a sign. A shrine of Aphrodite of the Harbor stands at the quay's south end: a small marble niche with a bronze dove.
+
+**Identity:** the shipyard with no ships. Every hull on the island has been taken; the slips are empty, chalked with sickles, and the shipwright has nothing to do but play knucklebones. After the climax the boats come back, battered, and the slips fill up again (`VAR_ICHOR_ACT3` ≥ 19).
+
+**Seams.** Skandeia, the Foam Road, the spring, Paphia, the falls, Melos and the sea maps of Routes 22 and 23 all use the `kythera` secondary, so their shared seams are exempt from the primary-only strip (MAP_DESIGN §5). Skandeia's north bay meets Route 24, which is the Lakonia writer's: if Route 24 doesn't use `kythera`, the 6 rows nearest that seam use only `aethos` water metatiles. Route 22's east end meets Kaldera *(Act II's map)* under the same rule.
+
+| NPC | Where | Role |
+|---|---|---|
+| Nausikles | the *Euploia*'s gangplank | the voyage to Knossa (III-1I); the southern lanes |
+| Molybdos | the gangplank, on arrival | crew boss; battle (III-1C); then gone |
+| The Kronist | on a crate on the quay steps | the cloth runs out at Delphoi |
+| Dockhand | in the Kronist's crowd | flavor |
+| Old sailor | mending a net on the quay | flavor; the Poseidon pointer (III-2) |
+| Titanborn porters | carrying oars up the slips (2, walking a loop) | flavor; gone after Knossa |
+| Philinna | the Agora's fish stall | the stallkeeper; a seed for post-game E7 |
+| Axylos, Skyllias and Bathykleia, Euodia, Nikarete, Phereklos | their houses | households (below) |
+
+**The slips** (an object, the chalked hull of the one boat left):
+```text
+A fishing boat hauled up on the slip. Somebody's chalked a sickle on its bow.
+
+Underneath, smaller, somebody else has chalked: NOT THIS ONE. IT LEAKS.
+```
+**The harbor shrine** (an object):
+```text
+Aphrodite of the Harbor. A bronze dove on a marble niche.
+
+Sailors leave her a shell before they sail. The niche is full of shells.
+
+Nobody's sailed in a week. The shells are all old.
+```
+**Old sailor** (before III-2's condition):
+```text
+OLD SAILOR: Forty boats they took. They left the nets. What do I do with nets?
+
+OLD SAILOR: Catch Titans, I suppose.
+```
+**Dockhand** (after the climax, `VAR_ICHOR_ACT3` ≥ 19):
+```text
+DOCKHAND: The boats came back. Half of them. Rowed by Titans with no helmets on.
+
+DOCKHAND: They said sorry. Every one of them. Then they asked for breakfast.
+```
+**The Titanborn porters** (before Knossa):
+```text
+TITANBORN: Oars to the slip. Oars to the slip. Don't ask me what for. Oars.
+```
+**Philinna**, at the fish stall (no shop; a seed for SYSTEMS's post-game E7, the love letter between two shy villagers):
+```text
+PHILINNA: Fish! Fish! …There's no fish. They took the boats.
+
+PHILINNA: There's a potter up in Paphia who comes down every week to buy fish.
+
+PHILINNA: He never says anything. He just buys fish.
+
+PHILINNA: He doesn't even like fish. I asked his sister.
+```
+**Hidden items:** a Big Pearl under the last shell in the harbor shrine's niche; a Heart Scale at the end of the north slip.
+
+| House | Who | Event | Opens |
+|---|---|---|---|
+| Axylos's house | the xenia host | the bad guests (III-1C2); rest; the Broken Ring | arrival |
+| The divers' house | Skyllias and Bathykleia | Skyllias: the gear box, for a TM; Bathykleia: an in-game trade | arrival; the TM after Antikythera |
+| The perfumer's house | Euodia | a Soothe Bell | arrival |
+| Nikarete's house | a grandmother whose grandson went with the Titans | lore now; a gift when he comes home | arrival; the gift after the climax |
+| Phereklos's yard | the shipwright with no ships | knucklebones | arrival |
+
+### Asclepeion (`MAP_KYTHERA_SKANDEIA_ASCLEPEION`)
+
+- **Who:** the healer, and the healer's Panacoil curled on the counter.
+- **The room:** a harbor Asclepeion, long and low, with a wide window onto the quay and a stone bath in the floor fed by sea water through a channel, where sailors soak their hands. Nets hang drying from the rafters, because the healer's husband had nowhere else to put them this week.
+```text
+HEALER: Sea water and quiet. Best cure there is. We'll do the rest.
+
+> after the climax:
+HEALER: Everyone came in this morning with the same bad dream.
+
+HEALER: Gray, they said. And still. I told them to soak their hands.
+```
+The Pithos is a tall jar by the window.
+
+### Agora (`MAP_KYTHERA_SKANDEIA_AGORA`)
+
+- **Who:** the stallkeeper, Teukros, who sells from the hull of an old boat cut in half and stood on end as a counter.
+- **The room:** a rope-and-sailcloth market hall. The counter is half a boat. Coils of rope, lamp oil, bundles of myrtle, jars of Frankincense on a high shelf under a dove carved in the beam.
+```text
+TEUKROS: Rope? Oil? Myrtle for the goddess? Frankincense, she loves it.
+
+TEUKROS: Don't buy a boat. I haven't got one. Nobody has.
+```
+Stock in Part 6.
+
+### Axylos's house (`MAP_KYTHERA_SKANDEIA_AXYLOS_HOUSE`)
+
+- **Who:** Axylos, an old fisherman who keeps the old law. In the *Iliad* Axylos lived by the road and welcomed everyone into his house.
+- **The room:** one big room that is almost all table: a long board on trestles that seats twelve, benches down both sides, a hearth at the end with a bronze pot that's never cold. Nets and a single oar on the wall. A peg with an empty goat's tether. A shelf of mismatched bowls, more bowls than one man could ever need.
+- **Events:** the bad guests (beat III-1C2); then Skandeia's xenia host (SYSTEMS §10): heal, a bed until a chosen hour, and the first half of the Broken Ring.
+```text
+> before III-1C2: [the Titan guests at the table; Axylos serves them]
+AXYLOS: Sit. Eat first. Then tell me who you are. Not before.
+
+AXYLOS: Oh. There's not much left. There's always something, though.
+
+> after:
+AXYLOS: Sit. Eat first. Then tell me who you are. Not before.
+
+[heal the party]
+
+AXYLOS: Stay the night? I can wake you when you like.
+```
+[The rest choices are SYSTEMS §10's: dawn, noon, dusk or night, whichever are still ahead today.]
+```text
+> after the climax:
+AXYLOS: Two Titans came by this morning. Helmets off. With a goat.
+
+AXYLOS: Not my goat. A goat. I fed them, of course. They cried. Of course.
+```
+
+### The divers' house (`MAP_KYTHERA_SKANDEIA_DIVERS_HOUSE`)
+
+- **Who:** Skyllias, a sponge diver gone gray, and his daughter Bathykleia, who dives now. Herodotus says a diver called Skyllias swam eighty stades underwater to warn the Greek fleet.
+- **The room:** a cool stone room half below the street, three steps down. Sponges hang drying from every beam like clouds. Stone diving weights on cords by the door, a basket of black sea-urchins, a long bench where the sponges are beaten and trimmed. A tank in the floor with a Telkanvil in it, hammering a sponge flat with its claws.
+- **Events:** two. Skyllias's story leads to a reward; Bathykleia offers a trade.
+
+**Skyllias**
+```text
+SKYLLIAS: Forty years under the water. I've seen everything down there.
+
+SKYLLIAS: Wrecks. Statues. A bronze horse with no rider.
+
+SKYLLIAS: And off Antikythera, a box. A box full of little bronze wheels.
+
+SKYLLIAS: Too heavy to bring up. Too strange to leave. I left it on the reef.
+
+SKYLLIAS: Go and look, if you can swim that far. Tell me if it's still there.
+```
+With `FLAG_ICHOR_SAW_GEAR_BOX` set:
+```text
+SKYLLIAS: Still there? Stopped, I expect. The sea stops everything in the end.
+
+SKYLLIAS: I always thought it was a clock.
+
+SKYLLIAS: A clock for something bigger than days.
+
+SKYLLIAS: Who'd want a clock like that? Somebody frightened of running out.
+
+SKYLLIAS: Here. For swimming out to an old man's box. It's what I'd have wanted.
+
+{PLAYER} received TM Liquidation!
+
+SKYLLIAS: It hits like the sea does. All at once, and then it's gone.
+```
+[Set `FLAG_ICHOR_GOT_TM_LIQUIDATION`.]
+
+**Bathykleia**
+```text
+BATHYKLEIA: That's Ankyra in the tank. It followed Father home from Kaldera.
+
+BATHYKLEIA: It hammers sponges. Beautifully. But it won't stop hammering.
+
+BATHYKLEIA: I want something quiet to dive with. Something that sits.
+
+BATHYKLEIA: The little marble ones on the temple hill. Glyphlet. They just sit.
+
+BATHYKLEIA: Trade me a Glyphlet for Ankyra?
+```
+?? Trade a Glyphlet for her Telkanvil? YES/NO. YES: in-game trade, Telkanvil nicknamed **ANKYRA**, Lv 42, with its hidden ability (Sharpness), holding a Metal Coat. `FLAG_ICHOR_TRADED_TELKANVIL`.
+```text
+> YES, after the trade:
+BATHYKLEIA: Look at it. It's just sitting. On my hand. Oh, I love it.
+
+BATHYKLEIA: Ankyra's yours. The coat's for its claws. It gets cold.
+
+> NO:
+BATHYKLEIA: Back in the tank, Ankyra. Hammer quietly.
+```
+
+### The perfumer's house (`MAP_KYTHERA_SKANDEIA_PERFUMERS_HOUSE`)
+
+- **Who:** Euodia, who presses rose and myrtle oil for the goddess's altars. Her name means "sweet scent".
+- **The room:** a narrow, high-ceilinged room that smells strongly enough to make the screen's first box say so. A stone press with a long beam, shelves of little alabaster bottles, rose petals drying on cloths on every flat surface including the bed. A copper still bubbles on the hearth. One window, always shut, "so the smell doesn't escape and get ideas".
+- **Event:** a gift, on the first visit.
+```text
+This room smells overwhelmingly of roses.
+
+EUODIA: Don't open the window. The smell gets out and the bees come.
+
+EUODIA: Rose oil for the goddess. Myrtle for the dead. Both for weddings.
+
+EUODIA: This island runs on love, you know. Badly, mostly. But it runs.
+
+EUODIA: Here. A little bell. I hang it over the still. It keeps me calm.
+
+{PLAYER} received a Soothe Bell!
+
+EUODIA: Give it to a Pokémon you haven't got through to yet.
+
+EUODIA: The marble ones on the hill take a long time to love anybody.
+```
+[Set `FLAG_ICHOR_GOT_SOOTHE_BELL`. The hint matters: Glyphlet and Erosie evolve through friendship.]
+```text
+> later:
+EUODIA: If you smell roses in the temple, that's me. I do the altars on Fridays.
+
+EUODIA: Well. On the day after the day after the feast. We don't have Fridays.
+```
+
+### Nikarete's house (`MAP_KYTHERA_SKANDEIA_NIKARETE_HOUSE`)
+
+- **Who:** Nikarete, a net-mender, whose grandson Lithos went with Hyperion's crews last year.
+- **The room:** a two-room house; the front room is all loom and nets, the back room a boy's: a narrow bed still made, a slingshot on a nail, a clay Titan helmet he made himself as a child, painted badly gold. A window looks at the empty slips.
+- **Event:** lore now. After the climax, Lithos is home, and gives a gift.
+```text
+NIKARETE: My grandson went with the Titans. Lithos. A year last spring.
+
+NIKARETE: The big man came through with silver. Shouting. Kind, I suppose.
+
+NIKARETE: Lithos said they'd stop the dying. His mother died, you see.
+
+NIKARETE: I said, then who'll mend the nets? He laughed. He has a nice laugh.
+
+NIKARETE: He's skinny. His helmet's too big for him.
+
+NIKARETE: If you see him, tell him to come home.
+
+NIKARETE: Tell him I'm not angry. Tell him I'm a bit angry.
+```
+With `VAR_ICHOR_ACT3` ≥ 19: Lithos sits on his bed in the back room with his helmet in his lap.
+```text
+LITHOS: I was on the stair. I was frozen on it. Did you know that?
+
+LITHOS: I could see my own hand in front of my face. Gray. And not moving.
+
+LITHOS: They said we'd live forever. I think I did, for an hour.
+
+LITHOS: I didn't like it. I came home.
+
+LITHOS: Grandmother says I'm to give you this. She says you know why.
+
+{PLAYER} received an Ability Capsule!
+```
+[Set `FLAG_ICHOR_LITHOS_HOME`. Whether the player met Lithos at Knossa doesn't matter: he is one of Ring IV's Titanborn (LABYRINTH §9), and if beaten there he adds "LITHOS: You knocked me flat at Knossa. Grandmother says I deserved it." (Open questions 9).]
+```text
+NIKARETE: Look at him. All that way to stop dying.
+
+NIKARETE: And he came back to mend nets.
+
+NIKARETE: Badly. He mends them badly. Oh, I'm glad.
+```
+
+### Phereklos's yard (`MAP_KYTHERA_SKANDEIA_SHIPWRIGHTS_HOUSE`)
+
+- **Who:** Phereklos, the shipwright. In the *Iliad* a Phereklos built the ships Paris sailed to fetch Helen, "the ships that began the evils". This one says it wasn't him.
+- **The room:** a timber shed with a house at the back, open on the slip side. A half-built keel on trestles that will never be finished this week, adzes and augers on the wall, curls of shavings ankle-deep. In the middle, a barrel for a table, and on it a set of knucklebones in a bowl.
+- **Event:** knucklebones (SYSTEMS §9). Phereklos plays **Bold**: he chases the Aphrodite throw whenever he holds three different sides. "It's her island. It'd be rude not to."
+```text
+PHEREKLOS: No hulls, no timber, no work. Sit. Throw bones with me.
+
+PHEREKLOS: I always go for the Aphrodite. All four faces. One, three, four, six.
+
+PHEREKLOS: It's her island. It'd be rude not to.
+```
+?? Play knucklebones? YES/NO (best of 5, SYSTEMS §9)
+```text
+> win, the first time:
+PHEREKLOS: Ha! Beaten in my own shed. Here. I found it in a keel joint.
+
+{PLAYER} received a Big Pearl!
+
+> win, later (once a day):
+PHEREKLOS: Again! Take the shavings. No, take this. Shavings are for me.
+
+[a random small prize: Pearl, Stardust or Honey]
+
+> lose:
+PHEREKLOS: Aphrodite smiles on me today. She doesn't usually. Again tomorrow?
+```
+[First win sets `FLAG_ICHOR_KNUCKLEBONES_SKANDEIA`. Daily wins use `FLAG_DAILY_ICHOR_KNUCKLEBONES_SKANDEIA`.]
+```text
+> asked about the ships (a talk option after a game):
+PHEREKLOS: People say a Phereklos built the ships that took Helen. Not me.
+
+PHEREKLOS: My great-great-grandfather. Every family's got one.
+
+PHEREKLOS: Now Titans have all my ships.
+
+PHEREKLOS: And I don't even know where they're going.
+
+> after III-2's condition:
+PHEREKLOS: You want a sea story? Ask the old men about the dry man under the cape.
+
+> after the climax:
+PHEREKLOS: They brought back nineteen of my forty. Patched with Titan helmets.
+
+PHEREKLOS: You can't buy bronze like that. I'm keeping the helmets.
+```
+
+## The Foam Road (`MAP_KYTHERA_FOAM_ROAD`)
+
+**Layout.** About 64×24, four and a half screens, from Skandeia's west gate (east edge) to Paphia's east gate (west edge). The road runs along the island's south shore between the sea and a ridge of myrtle, rose briar and pink stone: shingle beaches, low sea-cliffs, a quarry of rose marble, and coves where the surf leaves the sand white with foam. The ground steps down toward Skandeia in a run of ledges along the cliff path, so the trip back east is quick. The north edge has one gap, a stone stair through the myrtle, which is the connection to the Spring of Kallirhoe.
+
+**The beats**, east to west, walking away from Skandeia:
+1. **A calm stretch** of shingle, and a sign: "THE FOAM ROAD. Paphia and the temple, west. The spring of Kallirhoe, north."
+2. **Forced grass band 1,** 3 deep, a strip of sea-grass and thrift between the myrtle hedge and a cliff edge, the full width of the path.
+3. **The first trainer,** easy and in plain view on the shingle with a rod: FISHER Amphitos (42, two Pokémon).
+4. **The fork.** Kythera's great herm stands here (beat III-1D; Hermes's theoxenia E1 sits on its plinth when it's live). North, the stair up to the spring. West, the road. **Hidden item:** behind the herm, an Ether.
+5. **The cutting.** The road narrows to a two-tile path under a sea-cliff, with the surf on the other side. SCULPTOR Skopas (44), mandatory, sits on a block of marble mid-cutting, facing east, sight 4 across the whole width. **Forced grass band 2,** 4 deep, starts right behind him, so there is no chance to heal between them.
+6. **The set piece: Aphrodite's rock** (beat III-1D). A great white rock in the shallows with its collar of foam. On the beach: Alethea's dig spot (the first sherd), and **the rest point**: a freshwater spring that runs out of the cliff into a stone basin, where pilgrims drink before the temple.
+   ```text
+   Fresh water runs out of the cliff into a stone basin. Pilgrims drink here.
+
+   It's cold and sweet. Your Pokémon drink, and look rested.
+   ```
+   (It heals the party.)
+7. **Out on the rocks,** facing the sea: DIVER Pontinos (43), optional. Reaching him means walking out along a reef spit at low tide; he guards a sealed jar (a Hyper Potion).
+8. **The quarry spur** (optional, a relic gate). South-west of the road, a quarry of rose marble cut into the hill, its mouth blocked by fallen column drums.
+   ```text
+   Column drums, cut and never used, fallen across the quarry path.
+
+   Too heavy to move by hand. Herakles could, probably.
+   ```
+   The Girdle of Herakles (Act II) moves them. Inside: the densest optional grass on the route (with Glyphlet most common, the marble table's own), a sealed jar on the quarry's top step reached by walking round through that grass (Rare Candy), and a fixed dig spot: the fourth sherd of amphora #11.
+9. **A second relic gate, the Horn's** (visible on the first pass, opened on the way back from the falls). A thin cascade drops down the cliff into the sea west of the rock: "A little waterfall pours off the cliff. Something glints at the top." With the Horn: a cliff-top cove with Pretty Feather ×3 (Aphrodite likes them) and a hidden Heart Scale.
+10. **Forced grass band 3,** 3 deep, in a myrtle grove the road passes straight through.
+11. **The Titan at the end:** TITANBORN Kassiteros (45), mandatory, at the narrow approach to Paphia's gate, hauling a fishing boat up the road on log rollers ("For Knossa! Everything floats eventually"). His sight line crosses the only path. After Knossa he's gone, and the boat is still there, abandoned on its rollers.
+12. **Paphia in view:** the temple's roof and its doves above the trees, and a sign: "PAPHIA. The Temple of Aphrodite."
+
+**The boat on rollers** (an object, after Kassiteros is beaten):
+```text
+A fishing boat on log rollers, halfway to nowhere.
+
+KASSITEROS is painted on its bow.
+
+That's not its name. That's the Titan's. He wanted it remembered.
+```
+**Width varies:** the cutting is two tiles; the coves and the rock's beach are open.
+
+## The Spring of Kallirhoe (`MAP_KYTHERA_SPRING_OF_KALLIRHOE`)
+
+**Layout.** About 26×22. A round glade in the myrtle above the sea, reached by the stair from the Foam Road's fork (south edge). The pool sits in the middle, fed by a thin fall from a rock lip on the north side, ringed by narcissus flowers. Grass grows in a horseshoe round the pool (this map's table). A rock stair in the north-east corner goes down to Echo's caves. A thicket of myrtle closes a back path on the west side, cut with Demeter's Sickle (Act I).
+
+| NPC | Where | Role |
+|---|---|---|
+| The youth | kneeling at the pool's south edge | beat III-1E; never moves |
+| Narcisheen | kneeling beside him | a static object, not an encounter: "It doesn't look up either." |
+| The voice | — (text only, from the caves) | Echo |
+| PILGRIM Philotes | on the bench by the fall | optional trainer (Part 3) |
+| The youth's mother | arrives in the evenings | flavor (below) |
+
+**The youth's mother** (shown only in the evening and at night, `FLAG_ICHOR_SAW_KALLIRHOE` set): a tired woman who sets a wrapped loaf beside him and sits on the bench.
+```text
+MOTHER: I bring bread. He doesn't eat it. The birds are very fat.
+
+MOTHER: He was a beautiful boy. Everybody said. He heard them.
+
+MOTHER: Now he's found the one person who'll never tell him otherwise.
+
+> after the climax:
+MOTHER: He looked up. This morning. Just for a moment.
+
+MOTHER: He said the water went gray and he couldn't see himself.
+
+MOTHER: And then he looked at me. As if he'd forgotten I was there.
+```
+**The fall** (an object):
+```text
+A thin fall of water off a lip of rock. It makes almost no sound.
+```
+**Behind the myrtle** (Sickle): a little ledge over the sea with a visible item (a Miracle Seed) and a fixed dig spot: the second sherd of amphora #11.
+
+**In the Frozen Hour** (for the Frozen Hour writer): the youth is the only person in Aethos who looks exactly the same as before. Suggested text: "The youth at the pool. Frozen, and looking down. He looks no different from yesterday."
+
+## Echo's sea caves (`MAP_KYTHERA_ECHO_CAVES`)
+
+**Layout.** About 32×26, optional. The rock stair from the spring drops into a cave system where the spring runs down to the sea. Three chambers:
+- **The Speaking Hall,** lit by a crack in the roof: a high chamber where every text box is followed by a quieter one repeating its last words. FISHER Kalamis fishes the pool here.
+- **The dark gallery** (Hecate's Torch, Act I): a dark passage with one brazier at its mouth (SYSTEMS §2), where Echolali is commonest. DIVER Kolymbos waits at the far end by a lamp, so he can be seen before he sees you.
+- **The sea mouth:** a low arch where the cave opens onto the sea. Surf out through it to Route 23.
+
+**The echo.** On this map, every NPC's box gets a short echo box after it: the line's last two or three words, prefixed "VOICE:". A script helper handles it. The player's own actions echo too:
+```text
+You call out.
+
+VOICE: …out.
+
+VOICE: …out.
+```
+(An "Echo" object in the Speaking Hall: "Call out?" YES plays the boxes above. No one is ever there.)
+
+**Rewards:** a visible Big Pearl on a ledge in the Speaking Hall reached round the pool's rim; a hidden Heart Scale in the dark gallery's end; and a visible TM Hyper Voice at the sea mouth (Balance numbers it) on a rock reached only by Surf from inside the cave.
+
+## Paphia (`MAP_KYTHERA_PAPHIA`)
+
+**Layout.** About 44×34. A temple town on a hill above a small west-facing bay. The Foam Road enters at the east gate onto a little square where the Asclepeion and the Agora face each other, both in view from the gate; in the square stands a plain herm by the gate, where Hermes's theoxenia waits (beat III-1D2). From the square, streets climb in terraces of white houses with rose-pink doorframes to the great stair, which runs straight up the hill's spine to the temple. **The temple is the crown:** it stands alone at the very top, its roof ridge lined with doves, visible from everywhere in town and from the Foam Road. West, a stair drops down to the bay's jetty (beat III-1F). The north edge, past an orchard, is the road to the Neraida falls, with a sign.
+
+**Identity:** doves and mirrors. Doves on every roof and in the temple's dovecote; polished bronze mirrors hung by every door, because Paphians say the goddess likes to check her face when she visits.
+
+| NPC | Where | Role |
+|---|---|---|
+| Alethea | the jetty, once | beat III-1F |
+| The honey boat's skipper | the jetty, once | silent; casts off |
+| Hermes (the messenger) | the gate herm, when E1 is live | III-1D2 |
+| Gatekeeper | the north gate | the falls road |
+| A girl with a dove | the square | flavor |
+| An old man at a mirror | outside his door | flavor |
+| Pygmalion, Peristera, Leukippe, Eumelos, Lysis | their houses | households (below) |
+
+**Gatekeeper**, at the north gate:
+```text
+> before the Laurel:
+GATEKEEPER: The falls road. Nothing up there but mills and quiet. Very quiet.
+
+> after:
+GATEKEEPER: You've got the Laurel? Krenaia'll want you. Up the ravine.
+```
+**A girl with a dove**:
+```text
+GIRL: My dove's called Little Aphrodite. All the doves here are.
+
+GIRL: It's confusing at the temple.
+```
+**An old man at a mirror**, combing his beard:
+```text
+OLD MAN: The goddess checks her face in every mirror in town.
+
+OLD MAN: So we keep them clean.
+
+OLD MAN: Mostly I check mine. It's not getting any better.
+```
+**The temple stair** (a sign at its foot):
+```text
+THE TEMPLE OF APHRODITE. Hierophant: Galatea, the Living Marble.
+
+Pilgrims are asked not to stare at the statues. They notice.
+```
+**Hidden items:** an Ultra Ball behind the dovecote, and a Pearl under the mirror by the jetty. The mirror itself: "A face looks back at you, smiling. It's yours."
+
+| House | Who | Event | Opens |
+|---|---|---|---|
+| Pygmalion's workshop | the sculptor, Galatea's husband | lore now; a Shiny Stone after the climax | arrival; the gift at `VAR_ICHOR_ACT3` ≥ 19 |
+| The dovecote | Peristera, the temple's dove-keeper | an Egg (Erosie) | arrival |
+| The mirror-house | Leukippe, who polishes the temple's mirrors | the rite's hint; a Mirror Herb after the Laurel | arrival; the gift after `FLAG_BADGE07_GET` |
+| The orchard house | Eumelos, keeper of a barren apple tree | a dig (the third sherd); a Gold Stater when amphora #11 is complete | arrival; the gift after the amphora |
+| The potter's house | Lysis, a shy potter | an in-game trade (Himerow) | arrival |
+
+### Asclepeion (`MAP_KYTHERA_PAPHIA_ASCLEPEION`)
+
+- **Who:** the healer and Panacoil.
+- **The room:** built round an open courtyard full of roses, with the counter on the shady side and beds under a colonnade on the other. Panacoil sleeps in the rose bed, not on the counter. A little fountain in the middle that the doves bathe in.
+```text
+HEALER: Rest in the roses. Panacoil does. It won't get up for anyone.
+```
+
+### Agora (`MAP_KYTHERA_PAPHIA_AGORA`)
+
+- **Who:** Theodote, who sells offerings to pilgrims, and Lysis's sister helps on market days.
+- **The room:** a covered stoa with a long marble counter, cages of doves for sale (you can't buy one; "they're for the goddess, and she's particular"), shelves of incense, honey cakes and little marble votive feet and hands, the parts people want healed.
+```text
+THEODOTE: Frankincense for the goddess. Honey for you. Feet for your sore feet.
+
+THEODOTE: The marble feet. People leave them at the temple. It's a whole thing.
+```
+Stock in Part 6.
+
+### Pygmalion's workshop (`MAP_KYTHERA_PAPHIA_PYGMALIONS_WORKSHOP`)
+
+- **Who:** Pygmalion, the old sculptor who carved Galatea out of one block of marble and talked to her every night until she answered. Her husband now, for forty years.
+- **The room:** a sculptor's yard with a roof over half of it. Blocks of marble, chisels in racks, a hoist with a block and tackle, a wooden model of a woman with joints that move. In the corner, under a dust sheet, a statue he never finished. A narrow bed against the wall, a small table set for two.
+- **Events:** lore now; after the climax, a Shiny Stone.
+```text
+PYGMALION: I carved her, you know. Galatea.
+
+PYGMALION: Out of one block. Not a vein in it.
+
+PYGMALION: She was perfect. She didn't move. I talked to her every night anyway.
+
+PYGMALION: Then one night she was warm. And then she was arguing with me.
+
+PYGMALION: Forty years. She still argues. She says she's cracked all over now.
+
+PYGMALION: Laugh lines. That's what she means. I tell her so. She argues.
+```
+**The dust sheet** (an object):
+```text
+A statue under a dust sheet. You can see the shape of a woman's shoulder.
+
+PYGMALION: Don't. That's the one I started before her. I never finished it.
+
+PYGMALION: I was frightened it'd wake up too. I only had the one heart.
+```
+With `VAR_ICHOR_ACT3` ≥ 19:
+```text
+PYGMALION: Everyone stood still for an hour, they say. Like my statues.
+
+PYGMALION: I was in the middle of a sentence. To her. About supper.
+
+PYGMALION: When it started again, she finished the sentence for me.
+
+PYGMALION: I didn't like the stillness. I used to want it. Funny.
+
+PYGMALION: Here. I've had this since before I met her.
+
+PYGMALION: It makes a thing lovelier.
+
+PYGMALION: It was going to go in the eyes of the statue. I'd rather it went to you.
+
+{PLAYER} received a Shiny Stone!
+```
+[Set `FLAG_ICHOR_GOT_SHINY_STONE_PYGMALION`. Aphrell evolves into Aphrogene with it.]
+
+### The dovecote (`MAP_KYTHERA_PAPHIA_DOVECOTE`)
+
+- **Who:** Peristera, the temple's dove-keeper, an old woman with seed in every pocket. In one myth Aphrodite turned a nymph called Peristera into a dove.
+- **The room:** a round tower house, the ground floor her kitchen and bed, the upper floor (seen through a ladder hole) all nesting holes in the wall, with doves going in and out of the windows. Feathers drift down through the hole onto everything. A basket by the stove with a single egg in it, wrapped in wool, that is not a dove's.
+- **Event:** a gift of an Egg.
+```text
+PERISTERA: Mind the feathers. Mind the doves. Mind me, I'm old.
+
+PERISTERA: See that egg? A Himerow left it in my dovecote. They do that.
+
+PERISTERA: They're Eros's birds. They dive at people and fall in love with them.
+
+PERISTERA: The doves won't sit on it. I've tried. I sat on it myself one night.
+
+PERISTERA: Take it. Keep it warm. Walk about with it. That's all eggs want.
+```
+?? YES/NO
+```text
+> YES:
+{PLAYER} received an Egg!
+
+PERISTERA: When it hatches, be nice to it. That's how they grow up.
+
+> NO:
+PERISTERA: It'll keep. Eggs are patient. Doves aren't.
+```
+[The Egg hatches an Erosie (the dex: never found in the wild; it grows into Himerow through friendship). Set `FLAG_ICHOR_GOT_EROSIE_EGG`.]
+
+### The mirror-house (`MAP_KYTHERA_PAPHIA_MIRROR_HOUSE`)
+
+- **Who:** Leukippe, who polishes the temple's bronze mirrors and makes new ones.
+- **The room:** a workshop with the walls lined in bronze mirrors at different angles, so the player's sprite shows up four times, small, in the mirror tiles (a metatile with a dim reflection). A bench with polishing sand and felt, a mold for a round mirror, a casting pit. A ladder to a loft where she sleeps.
+- **Events:** the rite's hint, on the first visit; a Mirror Herb after the Laurel.
+```text
+LEUKIPPE: Going up to the temple? Then listen. Free advice.
+
+LEUKIPPE: The statues can't move while somebody's looking at them.
+
+LEUKIPPE: Somebody. Not you. A mirror counts. A mirror is somebody's eyes.
+
+LEUKIPPE: The flat ones on the walls show what's behind you.
+
+LEUKIPPE: The ones on stands, up in the rose court, I made those. They turn.
+
+LEUKIPPE: Turn one to look down your path, and walk it. That's the whole trick.
+
+LEUKIPPE: Don't tell Galatea I told you. She thinks it's more fun if you suffer.
+```
+With `FLAG_BADGE07_GET`:
+```text
+LEUKIPPE: You did it! Did you turn my mirrors? Of course you did.
+
+LEUKIPPE: I keep a sprig of this by the casting pit. It copies what it sees.
+
+{PLAYER} received a Mirror Herb!
+
+LEUKIPPE: Give it to a Pokémon. It'll copy a stat boost, if it sees one.
+```
+[Set `FLAG_ICHOR_GOT_MIRROR_HERB`.]
+
+### The orchard house (`MAP_KYTHERA_PAPHIA_ORCHARD_HOUSE`)
+
+- **Who:** Eumelos, who keeps the apple orchard below the north gate and one old tree in his own yard that hasn't fruited "since the goddesses quarrelled".
+- **The room:** a farmhouse kitchen opening straight onto a walled yard with the old tree in it: gray, twisted, leafless. Apple racks along the walls, all empty but one with three small green apples. A ladder. A pruning hook. A painted plate on the wall with a golden apple on it.
+- **Events:** a fixed dig spot at the old tree's roots (the third sherd); when amphora #11 is complete, the tree bears gold.
+```text
+EUMELOS: That tree? It hasn't fruited since the goddesses quarrelled.
+
+EUMELOS: That's what my grandmother said. She said it about everything.
+
+EUMELOS: There's a story about an apple. Gold. Thrown among three goddesses.
+
+EUMELOS: “For the fairest.” Well. That'll start an argument.
+
+EUMELOS: People say this is the tree it grew on. People say a lot of things.
+
+EUMELOS: Dig round the roots if you like. I've dug. I found nothing but bits of pot.
+```
+[The yard's dig spot gives the third sherd: `FLAG_ICHOR_SHERD_PARIS_3`.]
+
+With `FLAG_ICHOR_AMPHORA_PARIS` (amphora #11 complete, SYSTEMS §5):
+```text
+EUMELOS: Look. LOOK. The tree. Overnight.
+
+EUMELOS: Leaves. Blossom. And one apple, and it's… it's gold. Real gold.
+
+EUMELOS: I can't eat that. I can't sell it. Nobody would believe me.
+
+EUMELOS: Here. You found the pot. You have the apple's worth.
+
+{PLAYER} received a Gold Stater!
+
+EUMELOS: Somebody'll come for the apple one day. Something with a lot of heads.
+
+EUMELOS: That's what my grandmother said. She said it about everything.
+```
+[Set `FLAG_ICHOR_GOT_EUMELOS_STATER`. This is the amphora's lead (SYSTEMS §5): a golden-apple tree, which seeds Ladon for the post-game Labors.]
+
+### The potter's house (`MAP_KYTHERA_PAPHIA_POTTERS_HOUSE`)
+
+- **Who:** Lysis, a shy young potter, and his sister, who helps at the Agora. He goes down to Skandeia every week to buy fish he doesn't like (Philinna's stall).
+- **The room:** a potter's workshop on the ground floor, a kick-wheel by the door, a beehive kiln in the yard, shelves of perfume flasks drying, every one with the same little painted fish on it. Upstairs (by a ladder), two beds and a pile of fish bones nobody has thrown away.
+- **Event:** an in-game trade.
+```text
+LYSIS: Oh. Hello. Sorry. Hello.
+
+LYSIS: That's my Himerow on the kiln. Pothos. It keeps diving at me.
+
+LYSIS: My sister says it's in love with me. It's a bird. It's very confusing.
+
+LYSIS: I'd like something that just… flies about. And doesn't look at me.
+
+LYSIS: A Galenyon? They fish. They don't look at anybody.
+
+LYSIS: Would you trade me one for Pothos?
+```
+?? Trade a Galenyon for his Himerow? YES/NO. YES: in-game trade, Himerow nicknamed **POTHOS** ("longing"), Lv 43, Super Luck, holding a Razor Claw. `FLAG_ICHOR_TRADED_HIMEROW`.
+```text
+> YES, after the trade:
+LYSIS: It's fishing. It isn't looking at me. That's… that's lovely, thank you.
+
+LYSIS: Pothos already likes you. It likes everyone. That was the problem.
+
+> NO:
+LYSIS: That's all right. Sorry. Sorry for asking.
+
+> after the trade, on later visits:
+LYSIS: Do you know the girl at the fish stall in Skandeia? Philinna?
+
+LYSIS: No reason. I'm just. No reason.
+```
+**The fish flasks** (an object):
+```text
+Little perfume flasks, all drying. Every one has the same painted fish.
+
+The fish is smiling. Fish don't smile. This one does.
+```
+(Lysis and Philinna are the two shy villagers SYSTEMS §10 E7, Aphrodite's post-game test, needs. Open questions 7.)
+
+### The Temple of Aphrodite (`MAP_KYTHERA_TEMPLE_OF_APHRODITE`)
+
+The rite and its rooms are Part 5. Charis is the guide at the door.
+
+## The Neraida falls (`MAP_KYTHERA_NERAIDA_FALLS`)
+
+**Layout.** About 30×44, four screens tall, from Paphia's north gate (south edge) up a green ravine to the falls. A river runs down the middle in pools and little weirs, crossed by stepping stones and one plank bridge. Old water-mills stand on the banks, most of them still. Plane trees and oleander. The ground climbs in terraces up the west bank, with ledges dropping south toward Paphia. At the top, the double waterfall: a lower fall into a plunge pool where the Naiads' shrine stands, and an upper fall above it that the Horn climbs, to the upper pool on a shelf of rock.
+
+**The beats**, south to north:
+1. **A calm stretch** past the orchard and a sign: "THE NERAIDA FALLS. The Naiads' shrine, north. Mind the stones."
+2. **Forced grass band 1,** 3 deep, across the riverbank meadow, walled by the river on one side and the terrace wall on the other.
+3. **The first trainer,** easy, in plain view on a rock with his goats: GOATHERD Lykidas (44).
+4. **The mill** (the rest point): Myles's mill, the one mill still turning, with its door open (household below).
+5. **The berry terraces:** two berry trees on the west terraces (a Lum Berry tree and a Sitrus Berry tree), so a player who reaches the shrine without three berries finds them here. Optional grass on the terraces, with a sealed jar (a Max Repel) on the top terrace reached by walking round through it. BEEKEEPER Kerinthos (45) keeps hives among the terrace grass, optional, facing his hives.
+6. **The ford.** The river narrows to a single line of stepping stones. AUGUR Mopsos (46), mandatory, stands on the far bank watching the birds, facing south across the ford, sight 5. **Forced grass band 2,** 4 deep, starts on the far bank behind him.
+7. **The set piece: the silent falls** and the Naiads' shrine (beat III-1H), at the plunge pool. Krenaia. The horn on the altar.
+8. **The climb** (the Horn): up the upper fall to the upper pool (`FLAG_ICHOR_GOT_HORN_OF_ACHELOUS`).
+9. **The upper pool:** Daedalus's page VII in a crevice; the Minoan vault door in the cliff; a visible Protein on a rock in the pool; HARVESTER Thestylis (47), optional, cutting reeds at the pool's edge; and the way back: a ledge path down the east side of the ravine to the mill, one way, so the climb is never repeated by accident (MAP_DESIGN §1: no trapping, since the falls go back up any time).
+
+**Hidden items:** in the mill-race below the turning wheel, a Mystic Water; behind the shrine's basin, a Pearl.
+
+**The silent falls** (an object, before the quest):
+```text
+A tall white waterfall. The water pours down steadily.
+
+It makes no sound at all. You can hear your own heartbeat.
+```
+After the quest:
+```text
+The falls roar. You can't hear yourself think. It's wonderful.
+```
+
+| NPC | Where | Role |
+|---|---|---|
+| Krenaia | the shrine's basin | the Horn of Achelous (III-1H) |
+| Myles | his mill | the rest point; a gift |
+| A miller's boy | on the plank bridge | flavor |
+
+**A miller's boy**:
+```text
+BOY: The falls went quiet and the mills stopped. Water, but no push.
+
+BOY: Grandfather says the river's sulking. Rivers do. He says.
+```
+After the quest:
+```text
+BOY: They're all turning! Every mill! Grandfather's dancing. Don't look.
+```
+
+### Myles's mill (`MAP_KYTHERA_NERAIDA_FALLS_MILL`)
+
+- **Who:** Myles, an old miller. In Lakonian legend a Myles, son of the first king, invented the millstone. He claims him. "Every miller does."
+- **The room:** a mill house with the great millstone in the middle of the floor turning on its shaft, so the room is round around it. Sacks of grain, a flour-white cat, flour on every surface, a bed in a loft, a bread oven in the wall. The wheel's rumble is the room's ambient sound; before the quest the wheel turns but the room is silent, which is the first hint of the falls' trouble.
+- **Events:** the rest point: he heals the party with bread and a sit-down. On the first visit, a gift.
+```text
+> before the Horn:
+MYLES: Sit. Have bread. My mill's the only one still turning.
+
+MYLES: It turns because I push it. With my back. Don't tell anyone.
+
+[heal the party]
+
+MYLES: My family say we're from Myles, the first miller.
+
+MYLES: The man who made the millstone.
+
+MYLES: Every miller says that. Every one I've met is called Myles.
+
+MYLES: Here. It ticks. Keeps time with the stone.
+
+MYLES: It helps when you do a thing over and over.
+
+{PLAYER} received a Metronome!
+
+> after the Horn:
+MYLES: Hear that? That's the river doing the pushing. My back thanks you.
+
+[heal the party]
+```
+[Set `FLAG_ICHOR_GOT_METRONOME`.]
+
+## Melos (`MAP_MELOS`)
+
+**Layout.** About 30×24, on Route 22 (`MAPSEC_MELOS`). Klima, a fishing hamlet on the inner shore of Melos's great round bay: a row of boathouses at the waterline with bright-painted sea doors (red, blue, green), a stone jetty where the *Euploia*'s boat lands, and a well with a stone trough. Three houses climb the slope behind. Above them, two terraces of barley and vines; on the middle terrace, in a niche in the terrace wall, the armless statue and the mirror facing her (beat III-1B2). Above the terraces, the obsidian slope: a hillside of black glass that glitters in the light, cut with old knapping pits, where the dig spots are. A path along the bay's west shore ends at white pumice cliffs over the sea (a dead end with a reward). The hamlet has no Asclepeion or Agora; the boathouse family heals, and Nausikles sells nothing. **Identity:** black glass and a white goddess. Melos sold knives to the world before bronze, and a farmer found its Aphrodite with a hoe.
+
+**The beats** (it isn't a route, but it has a rhythm): the jetty and the well; FISHER Kimolos on the jetty's end, easy, in plain view; the houses; the terrace stair and the statue (a set piece, and the rite); a band of grass across the upper terrace path, 3 deep, the only way to the slope; TITANBORN Theion at the top of it, mandatory for the slope, filling sacks with obsidian; the slope's dig spots; the pumice cliffs.
+
+| NPC | Where | Role |
+|---|---|---|
+| Nausikles | the jetty | sails on (III-1B2) |
+| Kentrios | the middle terrace, by the niche | the statue (III-1B2); his household |
+| A girl at the well | the well | flavor |
+| The boathouse family, Melanippos | their houses | households (below) |
+
+**A girl at the well:**
+```text
+GIRL: Ships stop for our water. Then they go. Nobody stays on Melos.
+
+GIRL: The Titans didn't even say thank you. They took the bucket.
+```
+After the climax:
+```text
+GIRL: The Titans brought the bucket back! With a letter. It says sorry.
+
+GIRL: It's spelled wrong.
+```
+**The well** (an object):
+```text
+A deep well with a stone trough. The water is cold and tastes of rock.
+```
+**The pumice cliffs** (the west path's dead end): white rock worn into waves by the sea, as smooth as marble. A visible item, a Star Piece, on the cliff's lip; a hidden Pearl in a hollow below it.
+```text
+White stone, worn by the sea into curves like frozen waves.
+
+It looks soft. It isn't.
+```
+**The obsidian slope:** two daily dig spots (SYSTEMS §5's Act III loot table) and one fixed find, the knapper's lump (below). Checking the ground:
+```text
+Black glass, everywhere. It glints like wet stone.
+
+People were cutting with this before anyone knew how to make bronze.
+```
+**Hidden items:** an Ultra Ball under the jetty's last stone; a Heart Scale behind the statue's niche (it shows only after the rite: "Something glints at the foot of the niche.").
+
+| House | Who | Event | Opens |
+|---|---|---|---|
+| Kentrios's farmhouse | the farmer who found the statue | a gift, after the rite | the stop |
+| Melanippos's house | an obsidian knapper | bring him a lump of glass from the slope, for a TM | the stop |
+| The boathouse | a fisher family who live over their boat | the rest point; a gift | the stop |
+
+The *Euploia* calls at Melos only on this first voyage; afterward the player reaches it by Nausikles's southern lanes or by Surf on Route 22.
+
+### Kentrios's farmhouse (`MAP_MELOS_FARMHOUSE`)
+
+- **Who:** Kentrios, the farmer who found the statue with his hoe.
+- **The room:** a low farmhouse with a threshing floor in front. Inside, one room: a hearth, a hoe on pegs, baskets of barley, and on a shelf a row of things he dug up looking for her arms: a clay lamp, a coin, a marble toe that isn't hers, a broken comb.
+- **Event:** a gift, after the rite (`FLAG_ICHOR_MELOS_RITE`).
+```text
+KENTRIOS: Everything on that shelf came out of the field. Looking for her arms.
+
+KENTRIOS: A lamp. A coin. A toe. Not hers. She's got all hers.
+
+> after the rite:
+KENTRIOS: She turned back to the sea when you gave her that. I saw.
+
+KENTRIOS: Here. I found this in the niche when I stood her up. It smells of roses.
+
+{PLAYER} received a Rose Incense!
+
+KENTRIOS: Take it to Kythera. Somebody there will know what it's for.
+```
+[Set `FLAG_ICHOR_GOT_ROSE_INCENSE`. Rose Incense is the expansion's item; it boosts Grass moves, and the roses are Aphrodite's.]
+```text
+> after the climax:
+KENTRIOS: An hour, they say, everything stood still. Like her.
+
+KENTRIOS: When it started again she was facing my door. She's never done that.
+```
+
+### Melanippos's house (`MAP_MELOS_KNAPPERS_HOUSE`)
+
+- **Who:** Melanippos, an old obsidian knapper who still makes blades the way his family always has, and polishes black mirrors.
+- **The room:** a workshop with a stone floor deep in black flakes that crunch underfoot. A leather pad on the knee-high anvil stone, antler hammers in a row, cores of glass on a shelf. On the wall, a round mirror of polished obsidian: it reflects, darkly.
+- **Event:** a small quest. Bring him a lump of good glass from the slope's fixed dig spot, past Theion, for a TM.
+```text
+MELANIPPOS: Glass. Black glass. My family's knapped it since before bronze.
+
+MELANIPPOS: Then bronze came, and everyone laughed at us.
+
+MELANIPPOS: Now the Titans want it.
+
+MELANIPPOS: A big man's crews dug half my slope last night. For edges, they said.
+
+MELANIPPOS: Bring me a good lump. Not chips. There's a seam at the top.
+
+MELANIPPOS: The young one in the helmet's sitting on it, I expect.
+```
+**The mirror** (an object):
+```text
+A round mirror of polished black glass. Your face in it is dark and calm.
+
+MELANIPPOS: A black mirror shows you as you'll be when you're old. So they say.
+
+MELANIPPOS: Mostly it shows you as you are, but darker. Same thing.
+```
+With the lump (`FLAG_ICHOR_MELOS_OBSIDIAN_LUMP`, the slope's fixed dig):
+```text
+MELANIPPOS: Ahh. That's the seam. Look at that. Not a flaw in it.
+
+MELANIPPOS: Watch.
+```
+[Three knocks, a crack, and a long black blade comes away. Hold 30 frames.]
+```text
+MELANIPPOS: The oldest edge in the world. Teach it to your Pokémon.
+
+{PLAYER} received TM Stone Edge!
+
+MELANIPPOS: Bronze bends. Glass doesn't. It breaks, but it doesn't bend.
+```
+[Set `FLAG_ICHOR_GOT_TM_STONE_EDGE`.]
+
+### The boathouse (`MAP_MELOS_BOATHOUSE`)
+
+- **Who:** Myrtis and her husband Kalchedon, fishers, and their baby, who live in the room over their boat.
+- **The room:** the ground floor is the boathouse itself: the sea comes in under the painted doors, and their boat sits on rollers on a stone slip. A ladder goes up to the living room: a bed, a cradle hung from a beam, nets, a hearth on a stone slab, and a window right over the water.
+- **Events:** the rest point (Myrtis heals the party with fish soup), and a gift on the first visit.
+```text
+MYRTIS: Up the ladder, mind the baby. Sit. Soup. It's fish. It's always fish.
+
+[heal the party]
+
+MYRTIS: The sea comes in under the door when it's rough. We sleep over it.
+
+MYRTIS: My husband says the boat keeps us dry. The boat says nothing.
+
+KALCHEDON: Here. For the road. It keeps the rain in longer.
+
+KALCHEDON: Old sailor's trick.
+
+{PLAYER} received a Damp Rock!
+```
+[Set `FLAG_ICHOR_GOT_DAMP_ROCK`.]
+```text
+> later:
+MYRTIS: Athens came here once, my grandmother said. Long ago. With ships.
+
+MYRTIS: They said the strong do what they can.
+
+MYRTIS: And the weak suffer what they must.
+
+MYRTIS: Then they did what they could. Melos remembers. Soup?
+```
+(The Melian Dialogue, Thucydides 5.84–116, one line of it. It sits in a quiet room the act before the Archon's peace is argued over on Olympus.)
+
+## Route 22, past Melos (`MAP_ROUTE22_CRETAN_SEA`, `MAP_ROUTE22_MYRTOAN_SEA`)
+
+Route 22 (`MAPSEC_AETHOS_ROUTE_22`) is the story's long voyage, twelve cells of sea from Kaldera west past Melos to Cape Malea and Kythera. The story crosses it on the *Euploia* (beats III-1B to III-1B3). The sea itself is optional, by Surf, in two maps either side of Melos.
+
+**`MAP_ROUTE22_CRETAN_SEA`,** about 80×30. East edge: Kaldera *(Act II's seam)*. West edge: Melos's bay. Open sea broken by lines of rocks into lanes, the trireme lane's stakes down the middle, and **Anydros**, the "waterless" islet, a rock with a dead fig tree and a sealed jar (a Max Ether) on its only ledge. DIVER Kymaios (42) floats in plain view near the Kaldera end; SAILOR Antalkidas (43) rows across the channel past Anydros, mandatory for the islet.
+
+**`MAP_ROUTE22_MYRTOAN_SEA`,** about 80×30. East edge: Melos. West edge: Skandeia's east bay (its northern half). The Myrtoan Sea, rougher, with Malea's gray cliffs drawn along the north edge as impassable headland and its surf as a line the player can't cross. FISHER Nikandros (42) fishes from a rock in plain view; DIVER Hagne (43) dives by a sunken column, optional, guarding a hidden Big Pearl. A sign on a stake near Malea:
+```text
+CAPE MALEA. Round it and forget your home, the sailors say.
+
+Someone has scratched underneath: NOT TRUE. I REMEMBERED. MOSTLY.
+```
+
+## Route 23, the Cretan Sea (`MAP_ROUTE23_CRETAN_SEA`)
+
+**Layout.** About 60×40, optional, by Surf: the western stretch of Route 23 (`MAPSEC_AETHOS_ROUTE_23`), which runs along Knossa's north coast to Amnisos. West edge: Skandeia's east bay (its southern half); Echo's caves' sea mouth opens onto its north-west corner. The open sea runs south-east with lines of rocks and two sandbars to break it into lanes, and the trireme lane's stakes across the middle. The landmark is **Antikythera**, an islet in the south-east quarter: a beach, a patch of grass (this route's only land table), a reef ringed by surf, and the wreck on it. The east edge is open water where the lane goes on along Knossa's coast to Amnisos (Open questions 16): "The open sea. Without a ship, it's a long way to anywhere." (a sign on a stake).
+
+**The beats:** a calm stretch of open water off Skandeia; DIVER Bathyllos (43) on a sandbar, in plain view; a line of rocks forcing the player through a channel where SAILOR Euthykles (45) rows a small boat across it, mandatory for the islet; the islet; DIVER Myrsine (44) on the reef, optional.
+
+**Rewards:** on the islet, a visible Big Pearl on the beach; on the wreck, a hidden Star Piece among its ribs; the gear box (Optional, Antikythera, above).
+
+**The wreck** (an object):
+```text
+The ribs of an old ship, sticking out of the reef like a fish's bones.
+
+Somebody's ship. Somebody's cargo. Somebody's very bad afternoon.
+```
+
+## Amnisos (`MAP_KNOSSA_AMNISOS`)
+
+**Layout.** About 40×30, per LABYRINTH §2. The quay runs along the north edge, where the trireme lands, and a stone mole curves out to the east. The **Asclepeion and the Agora face the quay**, so both are in view the moment you step off. Houses climb the slope behind in flat-roofed terraces, **every roof lined with beehives**. The carved mouth of the Cave of Eileithyia sits in the cliff above the town's west end, up a goat path. A gap in the town wall at the south edge, with a sign, is the Bull Road. **Identity:** bees, and the view south from the quay: the palace on its hill, red columns catching the light. Amnisos has no temple; the palace is its crown.
+
+**Signs.**
+```text
+[Sign, the quay]
+AMNISOS. The harbor of Knossa. Honey, saffron, octopus. Ask for the good jar.
+
+[Sign, the south gap]
+South: the Bull Road, to the palace of Minos.
+
+[Sign, the cave path]
+The Cave of Eileithyia. Bring an offering. Bring a shawl. It's cold.
+```
+
+| NPC | Where | Role |
+|---|---|---|
+| Nausikles | the quay | the *Euploia*: Kythera, Gytheion, and later every lane |
+| A Titanborn veteran | the mole, until the Turning | STORY §5 archetype 7; flavor |
+| A sailor | the quay | the Titan ships |
+| A girl with a Melibee | the ladder to the roofs | flavor |
+| An old woman | the foot of the cave path | the Cave of Eileithyia |
+| A kid by the hives | a rooftop, by ladder | flavor; after the raid, a rumor |
+| The harbor shrine | object, the quay's end | hides a Bronze Obol behind it |
+| Kydon, Lykastos, Aithon, Euanthe, Polypos | their houses | households (below) |
+
+**Nausikles**
+```text
+> before the raid:
+NAUSIKLES: We'll be here till you're done. Whatever it is. Don't tell me.
+
+NAUSIKLES: I never ask passengers what they're doing. It's bad for business.
+
+> after the raid (VAR_ICHOR_ACT3 = 6):
+NAUSIKLES: Gytheion's on the evening wind. Lakonia after that. Cheerful place.
+```
+**The Titanborn veteran**, on the mole, by the moored Titan ships. Gone after the Turning, when the ships sail.
+```text
+TITANBORN: I've known how I die since I was sixteen. Forty years of knowing.
+
+TITANBORN: I'm tired of knowing. The master says soon nobody will have to.
+
+TITANBORN: I'm not fighting you, child. I'm watching the boats. That's my whole job.
+```
+**The sailor**
+```text
+SAILOR: Four Titan ships in the night, and every one of them sat low in the water.
+
+SAILOR: Heavy cargo. Shovels, they said. Nobody sails shovels at night.
+
+> after the raid:
+SAILOR: They left as quiet as they came. Somebody lit a fire under them, I'd say.
+```
+**The girl with a Melibee**
+```text
+GIRL: This is Bombos. He's a drone. Drones don't do anything.
+
+GIRL: Mama says that's not true. They do one thing. Then they're done.
+
+GIRL: I don't know what the thing is. She won't tell me.
+```
+**The old woman**
+```text
+OLD WOMAN: Up there's Eileithyia's cave. She brings the babies.
+
+OLD WOMAN: I climbed it for all six of mine. Took me longer every time.
+
+OLD WOMAN: Gennaia keeps it now. Bring her something sweet. She's earned it.
+```
+**The kid by the hives**
+```text
+> before the raid:
+KID: At the new moon you can hear it under the palace. Like a cow, but sad.
+
+> after FLAG_ICHOR_ASTERION_FREED:
+KID: It stopped! The thing under the palace. Mama cried. I don't know why.
+```
+**The harbor shrine** (an object)
+```text
+A little shrine with a double axe painted on it.
+
+A jar of honey sits in front of it.
+
+The honey's fresh. Someone leaves it every morning.
+```
+**Hidden items:** a Pearl at the end of the jetty; a Bronze Obol behind the harbor shrine (LABYRINTH §2).
+
+| House | Who | Event | Opens |
+|---|---|---|---|
+| Kydon's honey house | Kydon, the honey-seller from Emporion's Agora, home for the thyme harvest | a Honey gift (seed 3 pays off); the Mistress's tip; a return gift after the raid | arrival; the return after `FLAG_ICHOR_ASTERION_FREED` |
+| The Double Axe, a tavern | Lykastos the champion, with Kressa and Dorion | knucklebones (SYSTEMS §9): the champion's TM, the regulars' gifts | arrival |
+| Aithon's house | the xenia host | heal, rest until a chosen hour, and the Broken Ring's second link (SYSTEMS §10) | arrival |
+| The old leaper's house | Euanthe, Sarpedon's wife | a timing hint; the Focus Band after your first clean leap | arrival; after `FLAG_ICHOR_FIRST_LEAP` |
+| Polypos's hut | an old octopus fisher | an in-game trade (Aphrell for Telkanvil); the Pyanopsia beans story (seed 14) | arrival |
+
+### The Asclepeion (`MAP_KNOSSA_AMNISOS_ASCLEPEION`)
+
+- **Who:** Akestor, the healer, a broad man with honey-stained cuffs, and the Asclepeion's Panacoil.
+- **The room:** a Minoan hall lit from above by a square light well, with a sunken pool under it where the Panacoil coils. A bee fresco runs round the walls. Shelves of little clay pots hold honey-and-wax salves, each stamped with a double axe. The counter is a gypsum block worn smooth at one end where everyone leans. The Pithos is a painted Minoan jar with octopus arms wrapped round it.
+- **Event:** the heal, and one seed for the unmasking, said in passing.
+```text
+AKESTOR: Rest them here. Honey in the wounds. Nothing heals cleaner.
+
+AKESTOR: An Astyran taught me that. Phaedon. The best of us.
+
+AKESTOR: He came through two winters ago. Taught us a stitch. Healer's hands.
+
+[heal the party]
+
+> after FLAG_ICHOR_PHAEDON_UNMASKED:
+AKESTOR: Phaedon? No. You must have it wrong. Not him.
+
+AKESTOR: …Rest them. I'll do the stitch he taught me. It's still a good stitch.
+```
+**Design note.** Daedalus says "Healer's hands, that one" in Scene D. Akestor says it first, kindly, about a named man, an hour before the player meets Daedalus. A player who notices has the twist a ring early.
+
+### The Agora (`MAP_KNOSSA_AMNISOS_AGORA`)
+
+- **Who:** Anthousa, the stallkeeper, who sells saffron by the thread and argues about it.
+- **The room:** a colonnaded market hall with red Minoan columns, wide at the top. Baskets of crocus stigmas glow on the counter, bronze double-axe hooks hang from the beams with bundles of thyme on them, and octopus-painted jars stand in a row behind. A loom-weight scale sits on the counter.
+- **Stock:** Ultra Ball, Hyper Potion, Max Potion, Full Heal, Revive, Max Repel, Honey, Olive Oil. After the raid: Full Restore.
+```text
+ANTHOUSA: Saffron! Picked by hand, one thread at a time. That's why it costs.
+
+ANTHOUSA: No, you can't have it cheaper. Pick it yourself, then.
+
+> after the raid:
+ANTHOUSA: The palace is ours again? Then the herd's ours. Then the price goes up.
+```
+
+### Kydon's honey house (`MAP_KNOSSA_AMNISOS_KYDONS_HOUSE`)
+
+- **Who:** Kydon, the Knossan honey-seller from Emporion's Agora (Phase 2, seed 3), home for the thyme harvest. He remembers you.
+- **The room:** a narrow house whose back wall *is* the hillside, with clay hive-tubes built into it so the bees fly in and out through the rock. A wax press and a drip tray stand under them. The bull-leaper awning from his Emporion stall is folded in the corner, and a perch by the window holds his order gulls.
+- **Event:** a gift (seed 3 pays off), a tip that leads to a reward (the Mistress's shrine in Ring VI), and a return gift after the raid. `FLAG_ICHOR_GOT_KYDON_HONEY`, `FLAG_ICHOR_GOT_KYDON_LEFTOVERS`.
+```text
+KYDON: You! From Emporion. You bought nothing and asked a lot of questions.
+
+KYDON: Welcome to the hive. Mind your head. Mind your hands. Mind everything.
+
+KYDON: Thyme honey. The bees drink thyme and fear. I told you that.
+
+KYDON: Take some. Three jars. Don't tell my sister.
+
+{PLAYER} received 3 Honey!
+
+KYDON: If you go under the palace, and you won't, take a jar for the Mistress.
+
+KYDON: The old ones always did. There's a landing down there. She keeps it.
+
+> after FLAG_ICHOR_ASTERION_FREED:
+KYDON: It's stopped. The bellowing. First new moon in two winters, and nothing.
+
+KYDON: Taste that. Thyme. Only thyme. No fear in it at all.
+
+KYDON: That's the good jar. I don't sell the good jar. Here.
+
+{PLAYER} received Leftovers!
+
+KYDON: Keep a bit of something back. Always. That's the beekeeper's rule.
+```
+
+### The Double Axe, a tavern (`MAP_KNOSSA_AMNISOS_TAVERN`)
+
+- **Who:** Lykastos, the champion, a lean old sailor who throws with his eyes shut; Kressa, a fishwife who plays Cautious; Dorion, a young oarsman who plays Bold (SYSTEMS §9's personalities).
+- **The room:** low beams hung with clay octopus traps, a rack of bulls' horns over the door, a long bench under a fresco of dolphins with half their paint gone, and the knucklebones table: a slab of gypsum dished in the middle from a thousand years of throws.
+- **Event:** knucklebones, per SYSTEMS §9. Amnisos is one of its six taverns. The champion's first loss gives **TM Taunt** and a trainer-card line ("Beat Lykastos of Amnisos at bones"); the regulars give Olive Oil (Kressa) and Wine (Dorion). Champion flag `FLAG_ICHOR_KNUCKLEBONES_AMNISOS`.
+```text
+LYKASTOS: Bones? I don't look when I throw. Looking's for people who doubt.
+
+> after his first loss:
+LYKASTOS: …I looked, that time. Don't tell anyone I looked.
+
+{PLAYER} received TM Taunt!
+
+KRESSA: Rethrow the ones. Only the ones. Everything else, you live with.
+
+DORION: Go for Aphrodite! Always go for Aphrodite! …I'm very poor.
+```
+
+### Aithon's house, the xenia host (`MAP_KNOSSA_AMNISOS_XENIA_HOUSE`)
+
+- **Who:** Aithon, a big widower who tells tall tales and swears they're true. Aithon is the name Odysseus gave himself when he lied his way through a Cretan story (*Odyssey* 19).
+- **The room:** a courtyard house round a small lustral basin with three steps down into it, guest couches along two walls, a ship painted on the third, and a long table that is always set for more people than live here. A clay lamp burns in a niche day and night "for whoever's late".
+- **Event:** the xenia host (SYSTEMS §10): a heal, a bed until dawn, noon, dusk or night, and **the Broken Ring's second link**. With the first half-ring from Kythera's host (the Kythera region's link 1), Aithon matches the halves, gives a gift and hands you the next half for Lakonia. `FLAG_ICHOR_BROKEN_RING_2`; Zeus Xenios +3.
+```text
+AITHON: Sit. Eat first.
+
+AITHON: Then tell me who you are. Not before.
+
+[heal the party]
+
+AITHON: I've hosted kings. Two of them. One was lying, so call it one and a half.
+
+AITHON: Stay the night, if you like. Or till noon. I'll wake you when you say.
+```
+[The rest menu: DAWN / NOON / DUSK / NIGHT / NO, per SYSTEMS §10.]
+```text
+> with the Kythera half-ring in the Bag:
+AITHON: What's that? Show me. …Ha! That's my cousin Phrasidemos's ring.
+
+AITHON: Broke it over a bet. He kept half, I kept half. Look. It fits.
+
+AITHON: That makes you a guest-friend twice over. Here. Cretan wine.
+
+{PLAYER} received 2 Wine!
+
+AITHON: And this. The other half of someone else's quarrel. In Lakonia.
+
+{PLAYER} received a half-ring!
+
+AITHON: Take it to the old woman in Lakonia who keeps the mess hall's fire.
+
+AITHON: She owes me a story. Tell her I'm still waiting.
+```
+The Lakonia region owns link 3 and the name of the mess-hall woman; "Phrasidemos" is the Kythera region's host, a placeholder until that region names him (Open questions).
+
+### The old leaper's house (`MAP_KNOSSA_AMNISOS_LEAPERS_HOUSE`)
+
+- **Who:** Euanthe, Sarpedon's wife, who leapt bulls herself before he ever did and says so.
+- **The room:** a two-room house. In the front, a frieze painted along the wall of young leapers in a row, one of them circled in charcoal ("That's him. The skinny one."). Little bronze bulls stand on a shelf, a prize from every summer. A splint and a coil of linen bandage hang on a peg by the door. In the back, a loom, and a sleeping cat on the warp.
+- **Event:** a timing hint before your first leap, and the **Focus Band** after it. `FLAG_ICHOR_GOT_FOCUS_BAND_KNOSSA`.
+```text
+EUANTHE: You're going up to Sarpedon. I can tell. You've got leaping knees.
+
+EUANTHE: I'll tell you what he won't, because he likes watching people learn.
+
+EUANTHE: Watch the head, not the horns. The horns lie. The head can't.
+
+EUANTHE: And don't jump. Let the bull throw you. He's stronger than you are.
+
+> after FLAG_ICHOR_FIRST_LEAP:
+EUANTHE: You leapt! I can smell bull on you. Good. Here.
+
+EUANTHE: He wore this round his wrist every summer. He fell anyway.
+
+EUANTHE: Then he got up. That's what it's for. Getting up.
+
+{PLAYER} received a Focus Band!
+
+EUANTHE: I leapt before him, you know. Three summers. Nobody paints the girls.
+```
+
+### Polypos's hut (`MAP_KNOSSA_AMNISOS_FISHERS_HUT`)
+
+- **Who:** Polypos, an old octopus fisher, named for what he catches, who has an opinion about Astyrans.
+- **The room:** a one-room hut under an upturned boat hull for a roof. Rows of clay octopus pots are stacked by the door. Two octopuses hang drying on a line across the room. A bean pot simmers on the hearth, always.
+- **Event:** an in-game trade and lore (seed 14). His Telkanvil keeps hammering the octopus pots flat. `FLAG_ICHOR_TRADED_TELKANVIL`; a new entry in the in-game trade table (`src/data/trade.h`).
+```text
+POLYPOS: Octopus. You put a pot down, the octopus moves in. It thinks it's clever.
+
+POLYPOS: Beans? Ha. Every autumn the Astyrans boil beans in one big pot.
+
+POLYPOS: Some prince of theirs sailed home from here with only beans left.
+
+POLYPOS: We sold him the beans. Knossan beans. They still owe us for the pot.
+
+POLYPOS: Now. This one. Smith of the sea. Hammers everything. My pots!
+
+POLYPOS: I want something soft. Something that comes in on the foam.
+
+POLYPOS: You wouldn't trade me an Aphrell? From Kythera, over the water?
+```
+?? Trade an Aphrell for his Telkanvil? YES/NO. YES: in-game trade, Telkanvil nicknamed **TELCHIS**, Lv 44, ability Steelworker, holding a Metal Coat. The Telchines were the smiths of the sea who lived on Crete and Rhodes before the gods.
+```text
+> YES, after the trade:
+POLYPOS: There. Soft as foam. It's already asleep in a pot.
+
+POLYPOS: Telchis'll hammer for you instead. Point it at something you hate.
+
+> NO:
+POLYPOS: Then I'll keep buying pots. The potter loves me.
+```
+
+## The Bull Road (`MAP_KNOSSA_BULL_ROAD`) and its houses
+
+The route's NPCs are Milon the herder (beat III-3B), the two Titanborn at the south end (beat III-3B), and the beekeeper in her hut.
+
+### The beekeeper's hut (`MAP_KNOSSA_BULL_ROAD_HUT`)
+
+- **Who:** Bombylia, an old beekeeper who talks to her skeps and expects an answer.
+- **The room:** one round room built over a spring. The spring rises in a stone basin in the floor, and its overflow runs out under the door. Straw skeps line the walls on shelves. A clay smoker, a veil on a nail, and a narrow cot. Bees come and go through a gap under the eaves.
+- **Event:** the route's rest point (MAP_DESIGN §1): drink from the spring and the party is healed. A Honey gift, once. `FLAG_ICHOR_GOT_BOMBYLIA_HONEY`.
+```text
+BOMBYLIA: Come in, come in. They know you're here. They told me.
+
+BOMBYLIA: Drink from the spring. It comes up cold from under the mountain.
+
+[heal the party]
+
+BOMBYLIA: Here. Two jars. The bees say you'll need them below.
+
+{PLAYER} received 2 Honey!
+
+BOMBYLIA: They're never wrong about honey. About people, sometimes.
+
+> later:
+BOMBYLIA: Drink. Rest. The bees and I won't mind. Much.
+
+[heal the party]
+```
+
+### The vineyard terraces (`MAP_KNOSSA_BULL_ROAD_VINEYARD`)
+
+Not a house: the optional grass west of the road (LABYRINTH §2), made its own small map so its rarer table can exist (Open questions). A gap in the terrace wall leads in. An old vintner's sign:
+```text
+[Sign]
+Vines of the house of Minos. Dionysus courted a princess of this house.
+
+He brought his own wine. Very forward of him.
+```
+Two optional trainers (Part 3) and the sealed jar on the upper terrace, reached by walking round through the grass.
+
+### The Bull Road vault (`MAP_KNOSSA_BULL_ROAD_VAULT`)
+
+Behind the labrys door: a small corbelled chamber, painted with lilies, holding a sealed jar on a stone bench. An Ichor Stone (`FLAG_ICHOR_BULL_ROAD_VAULT`).
+```text
+Painted lilies, bright as the day they were done.
+
+Nobody's breathed in here for ages.
+```
+
+## The Bronze Heel (`MAP_KNOSSA_BRONZE_HEEL`)
+
+A shore spur east of the Bull Road's fork (LABYRINTH §2). A colossal bronze foot stands on the beach, green with age, a bronze nail stoppering the vein in its heel. Tide pools run out along a rocky peninsula. Alethea is here on the first visit (beat III-3B).
+```text
+[The foot, an object]
+A bronze foot, taller than a house. The rest of him is nowhere.
+
+A nail of bronze stops a vein in the heel. It's been hammered in hard.
+```
+The fossil dig, the hidden Metal Coat at the peninsula's tip, and a daily dig spot in the tide pools are in Part 6.
+
+## The Palace of Minos (`MAP_KNOSSA_PALACE`) and its rooms
+
+| NPC | Where | Role |
+|---|---|---|
+| Ariadne | the Throne Room (Scene A); the Grand Staircase (Scene B); the court after the raid | LABYRINTH §8 |
+| Sarpedon | the Central Court, by the pen | the bull-master; the first leap (beat III-3E) and the leaping prizes |
+| The Gentle Bull | the pen | a calm Taurivet; the leap |
+| Titanborn ×3, and a doubter | the West Magazines | the password trail (beat III-3D) |
+| Alethea | the Queen's Megaron | the frescoes (beat III-3D) |
+| Titanborn ×2 | the North Entrance | `TRAINER_ICHOR_KERAMOS`, `_GYPSOS` (Part 3) |
+
+**After the raid** the Titanborn are gone (`FLAG_ICHOR_HIDE_PALACE_GRUNTS`, set with `FLAG_ICHOR_TURNING_DONE`), and Sarpedon has the court to himself:
+```text
+SARPEDON: They're gone. The court's ours. Leap any time. I'll count.
+
+SARPEDON: Ariadne's brother likes to watch. Don't let him join in. He cheats.
+```
+
+The palace rooms are LABYRINTH's: the Throne Room (the gypsum throne and griffin frescoes), the West Magazines (rows of giant pithoi, the Titan camp), the Queen's Megaron (the dolphin fresco, Ariadne's rooms, where you spend the night after the raid), and the Grand Staircase (the light well, down to Ring I).
+
+## The Labyrinth's residents
+
+All LABYRINTH's, and none rewritten here:
+- **Daedalus** (Scene D, Scene L, the Master Plan), **Number Four** ("She bites"), and **Number Nine** if you untied him in Emporion (seed 4).
+- **The shrine priestess** at the Mistress's landing below Ring VI (beat III-3K).
+- **Asterion**, and after the raid **Ariadne** in the court beside him.
+
+**Daedalus revives fossils** (dex: Monophant and Sepidart are revive-only, at Lv 35, in Daedalus's workshop). From `FLAG_ICHOR_MET_DAEDALUS` on, with a fossil in the Bag:
+```text
+DAEDALUS: Is that a bone? In rock? Give it here. Gently.
+
+DAEDALUS: I can't make life. Nobody can. I can remind a thing it had some.
+
+DAEDALUS: Come back when you've been down a ring. This takes patience. Mine.
+```
+[Set `FLAG_ICHOR_FOSSIL_GIVEN`. The next time the player enters the workshop:]
+```text
+DAEDALUS: There. It woke up cross. They always do. So did I, this morning.
+
+{PLAYER} received a Monophant!
+```
+[Or "a Sepidart", by the fossil given. Level 35, as the dex sets it. Set `FLAG_ICHOR_FOSSIL_REVIVED`.]
+```text
+> Monophant:
+DAEDALUS: One eye. Shepherds found its skull in a cave and made up a giant.
+
+> Sepidart:
+DAEDALUS: A thunderbolt, they called these. Little stone darts after a storm.
+```
+
+## Mount Ida (`MAP_KNOSSA_IDA_PATH`, `MAP_KNOSSA_IDAEAN_CAVE`, `MAP_KNOSSA_CRADLE_SHRINE`)
+
+Optional, behind a labrys seal on the Bull Road's south-west (LABYRINTH §2). The path climbs through goat pastures and holm oaks to the Idaean Cave, whose mouth is **the cradle shrine**: a small walled forecourt with bronze shields nailed to its rock face, where the Kymbash clang (Part 4). Inside, the cave's deep chambers, where the Kourodin dance, and Amalthea's horn shrine at the back.
+
+**Epimenides**, asleep on a ledge in the cave's first chamber. The sage of Knossos who slept fifty-seven years in this cave, and the Cretan who said all Cretans are liars. His talk is lore that leads to a reward: Amalthea's horn at the back of the cave places **Capricornus** (SYSTEMS §8), and his story is a quiet seed for Lakonia.
+```text
+EPIMENIDES: Mm? Oh. Is it still the same year?
+
+EPIMENIDES: I lay down in here for a nap. Fifty-seven years ago. Nobody woke me.
+
+EPIMENIDES: Rude. Cretans. We're all liars, you know. I'm a Cretan. Think about that.
+
+EPIMENIDES: This is where the Mother hid her baby from the father who ate his children.
+
+EPIMENIDES: She had the dancers clash their shields all night, so he'd never hear it cry.
+
+EPIMENIDES: Mothers do that. Make a great noise so nobody hears the small thing.
+
+EPIMENIDES: Listen. The dancers are still here. Clang. Clang. Hear them?
+
+EPIMENIDES: At the back there's a goat's horn. The goat who fed the baby.
+
+EPIMENIDES: Touch it and look up. I'd come with you, but I'm very tired.
+
+> after Capricornus is placed:
+EPIMENIDES: Saw her, did you? The goat in the stars. Good. I'll sleep, then.
+```
+[At the horn shrine: "A great goat's horn, filled to the brim with fruit that never rots." / "You touch it. Overhead, in the dark, a goat made of stars lowers her head." Place **Capricornus**; set `FLAG_ICHOR_AMALTHEA_HORN`.]
+
+The Minoan vault in Ida's peak sanctuary is post-story (LABYRINTH §9). Three optional trainers walk the path and the cave (Part 3).
+
+## The Cave of Eileithyia (`MAP_KNOSSA_CAVE_OF_EILEITHYIA`)
+
+Optional, up the goat path behind Amnisos (LABYRINTH §2). A long low cave, its floor worn into a path, ending at a stalagmite fenced with a little stone wall and polished smooth by hands. Offerings sit round it: tiny clay babies, honey cakes, a bronze pin.
+
+- **Who:** Gennaia, the cave's keeper, a brisk old midwife.
+- **Event:** a gift of a rare **Egg**, the Ichor Stone in the cave's side pocket, and Hera Favor +5 for an offering at the stone (SYSTEMS §3). `FLAG_ICHOR_GOT_EILEITHYIA_EGG`.
+```text
+GENNAIA: Women climb up here to ask for an easy birth. I give them tea.
+
+GENNAIA: Men climb up to ask for sons. I give them directions home.
+
+GENNAIA: Touch the stone if you like. Everyone does. That's why it shines.
+
+> the first time, with room in the party:
+GENNAIA: Someone left this on the stone at the last new moon. Nobody came back.
+
+GENNAIA: It's warm. It's been warm for a month. It wants someone.
+
+{PLAYER} received an Egg!
+
+GENNAIA: Keep it close. They hatch for whoever's there. Like the rest of us.
+```
+The Egg hatches an **Eripip** (dex #26, hatched only from eggs). Amalthea, the goat who nursed Zeus, was a Cretan goat; Eripip is her line's baby.
+
+## Route 24, the strait off Malea (`MAP_ROUTE24_MALEA_STRAIT`)
+
+**Layout.** About 56×30, open sea, `MAPSEC_AETHOS_ROUTE_24`, optional by Surf (the story crosses it by trireme). The east edge is Skandeia's north bay on Kythera; the west edge is Gytheion's harbor mouth. The north side is Cape Malea's cliffs: a band of fast current tiles along them carries surfers west, so the trip toward Lakonia is quick and the trip back toward Kythera has to swing wide to the south (the sea's version of a ledge). Mid-strait lies the low islet of Elaphonisos, with white sand and a little grass, and in the clear shallows off its north shore a drowned town: streets, house walls and a square, drawn as metatiles under shallow water. A rocky islet near Gytheion holds a fisher. **The set piece** is the drowned town: you can see it, and you can't reach it until the post-game's Nereid Pearl (Dive).
+
+**Route beats, east to west.** Skandeia's bay and a sign buoy → open water with a Sailor in plain view in his skiff → the Malea current under the cliffs → Elaphonisos (a Diver on the sand, a visible item, a hidden item, the drowned town) → a second Diver in the shallows → the fishers' rock → Gytheion's mole.
+
+| NPC | Where | Role |
+|---|---|---|
+| Sign buoy | Skandeia's bay | "WEST: GYTHEION. NORTH: CAPE MALEA. Mind the cape." |
+| The drowned town | off Elaphonisos | relic gate (Dive, post-game) |
+
+**The drowned town** (an object on the shallows)
+```text
+Under the clear water: streets. Walls. A square with a well in it.
+
+Somebody's town. The sea came in and nobody left.
+
+You can't reach it from up here.
+```
+After the Nereid Pearl (post-game): "Dive here?" (the Atlantis arc owns what's down there).
+
+## Gytheion (`MAP_GYTHEION`)
+
+**Layout.** About 32×24, `MAPSEC_GYTHEION`: a harbor hamlet, the waypoint between Route 24 and Route 25 (AETHOS_MAP). It has a healer, so it is a fly target. It curves round a small bay under a steep hill. The quay runs along the east side, where Route 24's harbor mouth opens; the Asclepeion stands on the quay, in view the moment you step off, and the hamlet's one market stall stands beside it under a purple awning. The quay steps and the shingle beach south of them are stained purple from the dye-works, and heaps of crushed murex shell lie behind the dye-works like gray snow. A stone causeway runs out from the beach to the islet of Kranai, with a small shrine on it. The hill behind the hamlet holds a little theater cut into the slope, whose stage-building is the Asclepeion. Route 25 leaves from the north edge through a gap between the last houses and the hill, with a sign. **Identity:** purple. Everything here is stained with the color only kings can afford, and nobody in Gytheion can afford it.
+
+| NPC | Where | Role |
+|---|---|---|
+| Fisherman with Kleon's helmet | by the quay steps | flavor; III-5B |
+| Nausikles | the *Euploia*'s berth | the ferry |
+| Stallkeeper | the purple awning on the quay | the hamlet's Agora (an outdoor stall) |
+| Dyer's boy | outside the dye-works | flavor |
+| Old woman on the causeway | the causeway | flavor |
+| Lakonian on the north road | the north gap | flavor |
+| Porphyris, Lysandros, Klymene, Timaia | their houses | households (below) |
+
+**Fisherman with Kleon's helmet** (after III-5B)
+```text
+FISHERMAN: Best bucket I ever owned. Bronze doesn't rot.
+
+FISHERMAN: Got a little sickle on the side. Very fancy. Don't know what it's for.
+
+> after the climax:
+FISHERMAN: People keep offering to buy my bucket. Ex-Titans. They want to melt it.
+
+FISHERMAN: I said no. It holds water.
+```
+**Nausikles** (the ferry, from III-5A on)
+```text
+NAUSIKLES: The Euploia's yours, while the wind holds. Where to?
+```
+?? Multichoice: SKANDEIA / AMNISOS / STAY
+```text
+> STAY:
+NAUSIKLES: Suits me. I've got a Lakonian trying to teach me to row. Lakonian-style.
+
+NAUSIKLES: It's the same as normal rowing, but nobody talks.
+```
+[SKANDEIA or AMNISOS: fade out and warp to that quay.]
+
+**Dyer's boy**
+```text
+DYER'S BOY: You can smell us from Kythera. Ma says that's how you know we're working.
+
+DYER'S BOY: Ten thousand shells for one cloak. I've counted. Twice.
+```
+**Old woman on the causeway**
+```text
+OLD WOMAN: That's Kranai. Paris and Helen's first night, after Sparta.
+
+OLD WOMAN: Everyone tells it like she was stolen. Ask Klymene how she tells it.
+```
+**Lakonian on the north road**
+```text
+LAKONIAN: Lakonia's up the valley. All day's walk.
+
+LAKONIAN: …
+
+LAKONIAN: That's all I've got.
+```
+
+| House | Who | Event | Opens |
+|---|---|---|---|
+| The dye-works | Porphyris, the dyer | bring her three shells for a King's Rock | on arrival |
+| Lysandros's house | the old harbor-master | trade a Karkitox for his Kynoketos | on arrival |
+| The shrine on Kranai | Klymene, the shrine-keeper | a question, and a Shiny Stone | after the climax |
+| Timaia's house | a cadet's mother | carry a fig cake to her son on Route 25, for Leftovers | on arrival |
+
+### The Asclepeion (`MAP_GYTHEION_ASCLEPEION`)
+
+- **The room:** built into the stage-building of the little theater, so the healing room is a long, narrow hall with painted scenery flats still on one wall (a palace, a sea) and the counter where the actors once sold tickets. A window looks out over the front rows, where patients sit in the sun.
+- **Who:** the healer, and her Panacoil, which greets you at the counter. This counter is Gytheion's heal location, and Fly lands outside its door.
+```text
+HEALER: Sit in the front row, love. Best seat for getting better.
+
+[heal the party]
+
+HEALER: There. Applause optional.
+```
+
+### The stall on the quay
+
+- **Not a building:** Gytheion is a hamlet, so its Agora is one stall on the quay under a purple awning, with the stock on racks of drying nets. The stallkeeper wears gloves stained to the elbow.
+- **Stock:** Part 6, Shops.
+```text
+STALLKEEPER: Everything's purple. Don't ask. It's the water.
+```
+
+### The dye-works (`MAP_GYTHEION_DYEWORKS`)
+
+- **Who:** Porphyris, a dyer with purple arms to the elbow and a laugh you can hear from the quay.
+- **The room:** a stone shed open to the sea at one end, three great lead vats steaming over low fires, a heap of crushed shells in the corner, skeins of wool hanging from the rafters in every shade from pink to near-black, and a stool with a single finished hank of true purple on it, under a cloth.
+- **Event:** a small quest. She's short of murex. Bring her three **Shoal Shells**. Four lie hidden around the bay (Part 6), so a player can miss one.
+```text
+PORPHYRIS: Come in, come in. Breathe through your mouth. Everyone does.
+
+PORPHYRIS: Ten thousand snails for one king's cloak. And the Titans took my boats.
+
+PORPHYRIS: Bring me shells. Three good ones.
+
+PORPHYRIS: The beach has them. Kranai has them. The gulf has plenty.
+
+> with fewer than three:
+PORPHYRIS: That's {STR_VAR_1}. I said three. I'm a dyer, not a poet. I count.
+
+> with three:
+PORPHYRIS: Oh, look at those. Look at that spiral.
+
+PORPHYRIS: Purple's for kings. I've never met one. They send their servants.
+
+PORPHYRIS: Here. This is the nearest thing to a crown I've got.
+
+{PLAYER} received a King's Rock!
+
+> after:
+PORPHYRIS: Wear something purple and people step aside. Try it. It's very funny.
+```
+[`FLAG_ICHOR_GOT_KINGS_ROCK_GYTHEION`. The three shells leave the bag.]
+
+### Lysandros's house (`MAP_GYTHEION_LYSANDROS_HOUSE`)
+
+- **Who:** Lysandros, the old harbor-master, who once commanded Lakonia's ships and is still annoyed about it.
+- **The room:** a house on the harbor wall with a window that's mostly sea. A map of the gulf is scratched straight into the plaster, with every rock and current marked. Three model triremes stand on a shelf. A bronze ship's ram serves as a doorstop.
+- **Event:** an in-game trade. His Kynoketos is bored of the harbor. `FLAG_ICHOR_TRADED_KYNOKETOS`.
+```text
+LYSANDROS: Lakonians hate the sea. I'm Lakonian. I love the sea. You see my problem.
+
+LYSANDROS: They made me admiral once. Won them a war. Then they made me harbor-master.
+
+LYSANDROS: That's how Lakonia says thank you.
+
+LYSANDROS: My Kynoketos has got the same problem. Too big for a harbor.
+
+LYSANDROS: I'd trade him for something that likes mud. A Karkitox, from the marsh.
+```
+?? Trade a Karkitox for his Kynoketos? YES/NO. YES: in-game trade, Kynoketos nicknamed **MALEA**, Lv 47, with its hidden ability (Moxie), holding a Wide Lens.
+```text
+> YES, after the trade:
+LYSANDROS: Malea. Named for the cape. Same temper.
+
+LYSANDROS: He'll pull you round any headland. Just don't let him choose where.
+
+> NO:
+LYSANDROS: Then he'll keep circling the harbor. He's got lovely manners. For a sea monster.
+```
+
+### The shrine on Kranai (`MAP_GYTHEION_KRANAI_SHRINE`)
+
+- **Who:** Klymene, who keeps the islet's little shrine of Aphrodite-of-the-Union. In the *Iliad*, Klymene was one of Helen's maids.
+- **The room:** one whitewashed room with a single niche, two clay doves in it, and a hundred tiny votive sandals hung on strings from the ceiling, left by couples who came here to run away together. A bench under the window faces Kythera.
+- **Event:** lore, then a question, then a gift, which waits for the climax.
+```text
+KLYMENE: Paris and Helen stopped here. Their first night. Everybody knows that.
+
+KLYMENE: Everybody tells it like she was carried off. Like a sack of barley.
+
+KLYMENE: She chose. Nobody ever tells it that way. She chose, and a war came of it.
+
+> before the climax:
+KLYMENE: Come back when you've chosen something big. I'll have something for you.
+
+> after the climax (`VAR_ICHOR_ACT3` ≥ 19):
+KLYMENE: Oh, you have. Look at your face. Something big.
+
+KLYMENE: Nobody's fated now, they say. So everyone's a Helen.
+
+KLYMENE: A question, then. Would you rather a long, safe life, or the one you want?
+```
+?? Multichoice: A LONG, SAFE ONE / THE ONE I WANT / I DON'T KNOW YET
+```text
+> A LONG, SAFE ONE:
+KLYMENE: Sensible. Helen would've hated you. Here.
+
+> THE ONE I WANT:
+KLYMENE: Ha! There she is. Here.
+
+> I DON'T KNOW YET:
+KLYMENE: That's the only honest answer anyone's ever given me. Here.
+
+{PLAYER} received a Shiny Stone!
+
+KLYMENE: The acolytes on Kythera use those. It makes a foam-born thing grow up.
+```
+[`FLAG_ICHOR_GOT_SHINY_STONE_KRANAI`. The Shiny Stone evolves Aphrell into Aphrogene, so it pays back Kythera.]
+
+### Timaia's house (`MAP_GYTHEION_TIMAIA_HOUSE`)
+
+- **Who:** Timaia, a fisherman's widow whose only son, Teleklos, went up to the battle school at seven.
+- **The room:** a small house that smells of bread, with a bread oven built into one corner, nets mended and folded on a bench, a child's wooden spear propped behind the door, and on the table a cloth over something fig-shaped.
+- **Event:** a quest. Cadets aren't allowed food from home. She bakes him a fig cake every month anyway, and every month she eats it herself. Carry this month's to Teleklos on Route 25.
+```text
+TIMAIA: My boy's in the school. Nine years now.
+
+TIMAIA: They let him write. Two words. “Fine. Fine.”
+
+TIMAIA: They're not allowed food from home. It makes them soft, the elders say.
+
+TIMAIA: I bake him one every month. Then I eat it. I'm very soft. Look at me.
+
+TIMAIA: You're going up the valley. He cuts reeds by the river. Teleklos.
+
+TIMAIA: Would you…? Don't tell anyone. Least of all him.
+```
+?? Carry the fig cake? YES/NO. YES: `FLAG_ICHOR_CARRYING_FIG_CAKE` (a key-item cake, "Timaia's fig cake").
+```text
+> after delivering it:
+TIMAIA: He ate it? He ATE it?
+
+TIMAIA: “Fewer words,” he said. Course he did. His father said that.
+
+TIMAIA: Here. He'd never take these. You might.
+
+{PLAYER} received Leftovers!
+
+TIMAIA: Funny name for it. That's all that's ever left in this house, when he's gone.
+```
+[`FLAG_ICHOR_GOT_LEFTOVERS_GYTHEION`.]
+
+## Route 25, the Eurotas (`MAP_ROUTE25_EUROTAS`)
+
+**Layout.** About 32×70, six screens tall, `MAPSEC_AETHOS_ROUTE_25`, running north from Gytheion up the Eurotas valley (AETHOS_MAP: Gytheion is at the route's south, Lakonia to its west at the top). The south edge is Gytheion; in the last screen the road turns west through the plane trees and leaves by the west edge into Lakonia. The river winds up the east side in a bed of reeds and pink oleander; the west side is fields, barley and olive, rising to the dark foot of Taygetos. Low terraces step the valley floor, and their ledges drop south toward Gytheion, so the way back is quick and the way up takes work. Plane trees stand in the last screen before the town. Two thirds of the way up, on a low hill, is Amyklai: a sanctuary of Apollo with a huge bronze statue of the god seated on a throne, built over the tomb of Hyakinthos, and a spring beside it. In the west fields, a roofless farmhouse.
+
+**Route beats, south to north.**
+1. **A calm stretch** out of Gytheion between the fields and the river, and a sign: "ROUTE 25. Up the Eurotas to Lakonia. The boys have right of way."
+2. **The first trainer,** easy and in plain view on the path: Cadet Agiatis, out on a training run, two Pokémon.
+3. **Forced grass band 1,** 3 deep, between the river's reeds and the first terrace wall.
+4. **The reed beds** (the set piece). Cadets in red cloaks stand knee-deep in the river, cutting reeds with their bare hands for their beds, as the agoge's boys always did. Teleklos is the one on the bank (below).
+5. **The ford.** A narrow stone ford across a side stream; Cadets Isadas and Phoibidas run drills on either bank, and their sight lines meet across it. **Forced grass band 2,** 4 deep, starts right on the far bank, so there's no chance to heal between them.
+6. **The roofless farmhouse** off to the west across a field, with two roadside herm-shrines on the path toward it (Hestia's theoxenia; Part 1).
+7. **Amyklai** (the rest point and landmark). The spring heals. The great herm (`FLAG_ICHOR_HERM_ROUTE25`) stands at its foot and doubles as the sign: "SOUTH: GYTHEION. NORTH: LAKONIA. Apollo of Amyklai, on the hill." Polyboia, the priestess, keeps the altar's fire, which is also Hestia's test's fire. An optional Pilgrim sits on the steps.
+8. **The Vapheio door** (the relic gate). In the hillside below Amyklai, a stone passage leads into a round beehive tomb, closed by a bronze door with a hollow shaped like a double axe. It's visible from the road. It is one of LABYRINTH §9's five Minoan vaults and opens with the Labrys after the story.
+9. **Forced grass band 3,** 3 deep, in the plane trees, with Hoplite Amompharetos at the narrow cutting before it, mandatory, his sight line across the cutting's full width.
+10. **The town in view** (beat III-5C's trigger) as the road turns west, and a sign at the west edge: "LAKONIA. No walls. Mind the boys."
+
+**Other parts of the route.**
+- **Optional grass:** an oleander meadow on the east bank, past the reed beds, holds the route's rarer slots and a visible item; a reed thicket that only Demeter's Sickle opens leads into it (below).
+- **An optional Fisher** faces the river from a flat rock, his back to the path.
+- **Hidden items:** behind Apollo's throne, and in the reeds at the ford.
+- **Width varies:** a narrow cutting at band 3, an open valley floor at the farmhouse.
+
+| NPC | Where | Role |
+|---|---|---|
+| Teleklos | the reed beds' bank | the reed-cutters; Timaia's quest |
+| Reed-cutting cadets | knee-deep in the river | flavor |
+| Polyboia | Amyklai's altar | priestess; lore; a gift |
+| Cadet runner | the path, after band 2 | flavor |
+| The throne of Amyklai | the hill | object |
+| The hyacinths | beside the tomb | object |
+
+**Teleklos** (the reed-cutters)
+```text
+TELEKLOS: Reeds. For our beds. We cut them by hand.
+
+TELEKLOS: No knives. That's the rule. If you're soft, you sleep on the floor.
+
+TELEKLOS: My hands are fine. Don't look at my hands.
+```
+[If the player has Demeter's Sickle, the reed thicket behind him can be cut.]
+```text
+> after the player cuts the thicket:
+TELEKLOS: That's cheating.
+
+TELEKLOS: …
+
+TELEKLOS: Do the next one.
+```
+[The thicket opens the oleander meadow (optional grass, a visible item).]
+```text
+> carrying Timaia's fig cake:
+{PLAYER} held out the fig cake.
+
+TELEKLOS: That's… is that from Gytheion? Is that hers?
+
+TELEKLOS: We're not allowed. Food from home. It makes you soft.
+
+TELEKLOS: …
+```
+[He looks up and down the river. The other cadets are bent over the reeds. He takes it and eats it in four bites.]
+```text
+TELEKLOS: Tell her it was fine.
+
+TELEKLOS: Fewer words. Tell her it was fine.
+```
+[`FLAG_ICHOR_DELIVERED_FIG_CAKE`. The cake leaves the bag. Timaia's reward waits in Gytheion.]
+
+**Reed-cutting cadet**
+```text
+CADET: In the battle school you get one cloak a year. One. You make it last.
+
+CADET: If you see a red cloak in the reeds, it's mine. Don't tell the eiren.
+```
+**Cadet runner**
+```text
+CADET: Running to Gytheion and back. Before noon.
+
+CADET: …It's after noon? Don't tell anyone. I'm going to keep running.
+```
+**Polyboia** (Amyklai's priestess)
+```text
+POLYBOIA: Apollo of Amyklai. He sits on a grave.
+
+POLYBOIA: Not his brother's. His friend's.
+
+POLYBOIA: Hyakinthos. They threw the discus in a meadow. The wind turned it.
+
+POLYBOIA: It struck the boy, and he died in the god's arms.
+
+POLYBOIA: A god. Who sees everything coming. He didn't see that.
+
+POLYBOIA: Every summer, three days of mourning. No garlands. No songs.
+
+POLYBOIA: Then a great feast. Songs all night. The mourning makes room for it.
+
+> after the Sun Laurel:
+POLYBOIA: You've been to Delphoi. You've got his light on you.
+
+POLYBOIA: Take this. He'd want it carried somewhere bright.
+
+{PLAYER} received a Heat Rock!
+```
+[`FLAG_ICHOR_GOT_HEAT_ROCK_AMYKLAI`. The altar also takes Apollo's daily prayer (`FLAG_DAILY_ICHOR_PRAYED_APOLLO`, SYSTEMS §3).]
+
+**The throne of Amyklai** (an object)
+```text
+A bronze god sits on a throne the size of a house.
+
+Under his feet, they say, is a grave. He has sat on it a very long time.
+```
+**The hyacinths** (an object beside the tomb)
+```text
+Dark flowers, with marks on the petals like letters. AI AI.
+
+Grief, written on a flower, so it comes back every spring.
+```
+**The roofless farmhouse,** before Hestia's visit and after it
+```text
+> before:
+The hearth's cold. Someone lived here, not long ago.
+
+> after Hestia's visit, before the climax:
+The fire in the open hearth burns steadily. Rain never seems to reach it.
+
+> after the climax:
+[A farmer and his wife are back, rebuilding the roof.]
+FARMER: The Titans took our beams. Now they're bringing them back. In ones and twos.
+
+FARMER: One of them cried. I didn't know what to do. I gave him soup.
+```
+**The Vapheio door** (an object)
+```text
+A round tomb in the hillside, shaped like a beehive. Old. Older than Lakonia.
+
+The bronze door has no handle. Only a hollow shaped like a double axe.
+
+> with the Labrys, before the story's end:
+The Labrys fits the hollow. Something inside still holds the door shut.
+
+Like the Labyrinth's dials, before they were turned.
+
+It isn't ready yet.
+
+> with the Labrys, after the credits:
+Use the Labrys? YES/NO
+```
+[YES: the door swings in. The vault's contents are LABYRINTH §9's: coins, a fossil, an Ichor Stone, and a Minoan-era rare. Its painted cups show men catching bulls with nets. `FLAG_ICHOR_MINOAN_VAULT_5`.]
+
+## Lakonia (`MAP_LAKONIA`)
+
+**Layout.** About 52×42, on the valley floor, with no wall anywhere. The town is five loose villages run together, each a cluster of plain flat-roofed houses round a yard, with plane trees between. Route 25 comes in at the **east edge**, across the Eurotas on a plain stone bridge, and the Asclepeion and the Agora stand on either side of the way in. The road runs west to the **agora** in the middle: the Persian Stoa along its east side, its columns carved as captive Persians holding up the roof; the chained statue of Enyalios in the middle; the Lesche, the elders' hall, on the west; and the syssition, the mess hall, on the north. **West**, against the foot of Taygetos: Lampito's house, with a shield over its door and a little burial plot beside it; Gylippos's house; Chilon's house. **North-west:** the agoge, the battle school (the town's crown): its barracks, its beaten-sand yard, the round **battle-school ring** with a low wall the cadets sit on, the cadets' yard where young Alekrow drill at dawn, and beyond them the **training fields**, the town's only tall grass, with the **Sown Field**, a ploughed strip where the cadets practice in furrows. **North-east:** the palaestra and its **wrestling sands**. **East:** the Eurotas river, and on its marshy bank, beside the bridge, the sanctuary of Artemis Orthia. **North:** Route 26, past the battle school's outer training grounds to Lake Stymphalia, through a gap in the plane trees with a sign. **South:** the Mani road, Route 31 to Cape Tainaron, closed until the post-game: a rope across it, and a sign. **Identity:** no walls, and the boys. Every screen has a cadet running across it.
+
+**The dread here** (STORY's line): the elders count the boys every morning, as if some might be gone. Some are.
+
+| NPC | Where | Role |
+|---|---|---|
+| Gylippos | the Lesche, after III-5D | elder; his house (below) |
+| Kachlex, Plinthos | the agora's steps, after III-5F | Titanborn doubters; optional battles (Part 3) |
+| Counting elder | outside the Lesche | flavor; the dread |
+| Cadets (several) | running every lane | flavor |
+| Mother at the well | a village yard | flavor |
+| Augur | on the Lesche's roof | the day's omen (SYSTEMS §6) |
+| Sign at the Mani road | the south rope | relic-style gate (post-game, Route 31) |
+| The chained Enyalios | the agora | object |
+| The Persian Stoa | the agora's east side | object |
+| The battle-school ring | the agoge | III-5I |
+
+**Counting elder**
+```text
+ELDER: Twelve. Thirteen. Fourteen. …Fourteen.
+
+ELDER: There were sixteen in that herd yesterday. Two went north in the night.
+
+ELDER: To Delphoi. To the Titans. To live forever.
+
+ELDER: We count them every morning now. Lakonia never used to count.
+
+> after the climax:
+ELDER: Sixteen. Two came back. Thin, and very quiet. Sixteen.
+```
+**Mother at the well**
+```text
+MOTHER: My son writes two words. My daughter writes four. She's the talker.
+
+> after III-5E:
+MOTHER: Lampito's home. With no helmet. The whole street's pretending not to look.
+```
+**Augur** (on the Lesche roof)
+```text
+AUGUR: Birds over Taygetos. Going north, all of them.
+
+AUGUR: Even the ones that never go north.
+
+[the day's omen]
+```
+When the day's omen is the Sporadon swarm:
+```text
+AUGUR: A crop springs up overnight. In the battle school's Sown Field.
+
+AUGUR: Nobody planted it. Well. Somebody planted it a long time ago.
+```
+Townsfolk repeat it: "CADET: The Sown Field came up in the night. With teeth!"
+
+**The chained Enyalios** (an object)
+```text
+A bronze war god, his ankles bound in bronze fetters.
+
+The plaque: “So that War will never leave Lakonia.”
+
+Someone has hung a fresh garland on the chain.
+```
+**The Persian Stoa** (an object)
+```text
+The roof is held up by carved men in trousers and tall hats. Persians.
+
+Lakonia beat them, and made them hold up its porch forever.
+```
+**Sign at the Mani road**
+```text
+THE MANI ROAD. South, to the cape. Closed by order of the elders.
+
+“Nobody needs to go south.”
+```
+The rope is lifted after the credits (UNDERWORLD owns the road).
+
+| House | Who | Event | Opens |
+|---|---|---|---|
+| Lampito's house | Rhea and Kleon | III-5E to III-5H; fragment 8's plot beside it | III-5D |
+| Gylippos's house | the elder | the scytale: a message only a matching staff can read | III-5D |
+| The syssition | Dexippos, the cook | black broth; TM Bulk Up, and a daily berry | on arrival |
+| The agoge | Archidamos, the boys' master | the school's gauntlet, for a Focus Sash | III-5D |
+| The palaestra | Hipposthenes, the wrestler | show him a Geogrip from the sands, for a Choice Band | on arrival |
+| Artemis Orthia | Kleta, the priestess | the cheese game, for a Scope Lens | on arrival |
+| Chilon's house | the sage | answer in the fewest words, for Wise Glasses | on arrival; a new line after the climax |
+| Lichas's house | the town's host | xenia: rest, and the Broken Ring's third link | on arrival |
+
+### The Asclepeion (`MAP_LAKONIA_ASCLEPEION`)
+
+- **The room:** a bare stone room with one long bench and nothing on the walls. The counter is a plank on two stones. A bowl of cold water stands on it. It's the least comfortable Asclepeion in Aethos, and the cleanest.
+- **Who:** the healer, a Lakonian woman of very few words, and her Panacoil.
+```text
+HEALER: Wounds?
+
+[heal the party]
+
+HEALER: Done.
+
+> a second time in a row:
+HEALER: Again? Fight better.
+```
+
+### The Agora (`MAP_LAKONIA_AGORA`)
+
+- **The room:** a stall with a set of great scales, because Lakonia pays in iron bars, and a pile of them stacked by the door like firewood. The stallkeeper weighs everything.
+- **Stock:** Part 6, Shops.
+```text
+STALLKEEPER: You pay in coin? Hm. Foreigners. Fine. Put it on the scale.
+
+STALLKEEPER: Iron's honest. You can't hide a bar of iron up your sleeve.
+```
+
+### Lampito's house (`MAP_LAKONIA_LAMPITOS_HOUSE`)
+
+- **Who:** Lampito, who is Rhea, and her son Kleon.
+- **The room:** described in beat III-5E: a kitchen with a hearth, a loom with a small red cloak, a table and two stools, a chest, and two grave-stelai painted on the plaster. A little yard outside, beaten flat, with a well. The burial plot is beside the yard.
+- **Events:** III-5E to III-5H, and fragment 8. After III-5J the house is empty; the hearth stays lit. After the climax Rhea lives here under house arrest (STORY §2), and UNDERWORLD's scenes 2 and 20 play on its step.
+```text
+> after III-5J, before the climax:
+The hearth's still warm. Somebody banked it before they left.
+
+> after the climax, Rhea at home:
+RHEA: Under arrest. In my own house. With my own fire.
+
+RHEA: It's a promotion.
+
+> Kleon visiting (after the credits):
+KLEON: She makes me eat. Constantly. I think it's a punishment.
+```
+
+### Gylippos's house (`MAP_LAKONIA_GYLIPPOS_HOUSE`)
+
+- **Who:** Gylippos, the Lakonian elder from the slice, who chaperoned the delegation to the Klotheia.
+- **The room:** almost empty. A sleeping mat, a stool, a staff, a water jar. On the wall hang a dozen wooden staffs of exactly the same thickness, each with a name burned into it: the elders' scytale staffs. A leather strap lies coiled on the stool.
+- **Event:** a message only a matching staff can read. A scytale is a strap with letters on it; wound round the right staff, the letters line up. Gylippos hands you a strap whose staff is with the scout Othryades on Route 27. Wind it there and it reads "THIRD PLANE TREE. DIG." The third plane tree north of Lakonia's agora hides a Life Orb.
+```text
+GYLIPPOS: Kalliste. Sit. On the floor. The stool's mine.
+
+GYLIPPOS: …
+
+GYLIPPOS: Kleon was a small baby. I was there, that day. I saw the shields.
+
+GYLIPPOS: I said nothing. For thirteen years. Lakonians are good at that.
+
+GYLIPPOS: Here.
+```
+[He holds out the leather strap.]
+```text
+GYLIPPOS: A message. Wound on a staff. Only the twin staff reads it.
+
+GYLIPPOS: The twin is with Othryades. A scout. Past the lake, in the hills.
+
+GYLIPPOS: Go and read it. Fewer questions.
+
+{PLAYER} received a leather strap!
+
+> after reading it on Route 27:
+GYLIPPOS: You read it? Good. Did you dig?
+
+GYLIPPOS: …Hm. I put that there forty years ago. Glad somebody did.
+```
+[`FLAG_ICHOR_GOT_SCYTALE_STRAP`, then `FLAG_ICHOR_READ_SCYTALE` on Route 27, then the hidden item `FLAG_ICHOR_HIDDEN_LAKONIA_LIFE_ORB` becomes diggable with the Trowel (it is a fixed dig, invisible to the Augur's Eye until the strap is read).]
+
+### The syssition (`MAP_LAKONIA_SYSSITION`)
+
+- **Who:** Dexippos, the mess-hall cook, enormously proud of the worst soup in the world.
+- **The room:** one long low room with fifteen men's places at a single plank table, each with its own clay cup hung on a peg above it, and a great black cauldron over a fire at the far end. A barrel of barley in the corner. No windows; Lakonian men eat in the dark and don't complain.
+- **Event:** the black broth. The first bowl you finish earns TM Bulk Up. After that, one bowl a day, and a berry with it.
+```text
+DEXIPPOS: Black broth! Pork, blood, salt, vinegar. Nothing else. Nothing needed.
+
+DEXIPPOS: A king from the east tasted it once. You know what he said?
+
+DEXIPPOS: “Now I understand why Lakonians don't fear death.”
+
+DEXIPPOS: Ha! He meant it as an insult. We took it as a compliment. Bowl?
+```
+?? Eat a bowl? YES/NO
+```text
+> YES, the first time:
+{PLAYER} ate the black broth.
+
+It tastes like a cold iron bar that's been in a fight.
+
+DEXIPPOS: Finished it! All of it! You can stand in the line.
+
+DEXIPPOS: Here. What the broth does for you, this does for your Pokémon.
+
+{PLAYER} received TM Bulk Up!
+
+> YES, a later day:
+DEXIPPOS: Back! Nobody comes back! Here, and a berry. To take the taste out.
+
+[a random berry: Sitrus, Lum or Chesto]
+
+> YES, the same day:
+DEXIPPOS: One bowl a day. Two and you'd live forever. We can't have that.
+
+> NO:
+DEXIPPOS: Soft! A soft foreigner! Come back when you're hungrier.
+```
+[`FLAG_ICHOR_GOT_TM_BULK_UP`, `FLAG_DAILY_ICHOR_BLACK_BROTH`.]
+
+### The agoge (`MAP_LAKONIA_AGOGE`)
+
+- **Who:** Archidamos, the boys' master (the *paidonomos*), with a whip he never uses and a voice he does.
+- **The room:** the barracks of one herd of boys. Thirty sleeping mats of cut reeds in rows on a beaten floor, a rack of wooden practice spears, thirty red cloaks on thirty pegs, and at the far end Archidamos's stool under a painted list of the herd's names. Some names are crossed out with a straight line: gone north.
+- **Event:** the school's gauntlet. Three cadets stand in a line down the room, and Archidamos at the end. Beat all four in a row, no healing between (fleeing the room resets it), for a Focus Sash. A rematch each week after the credits.
+```text
+ARCHIDAMOS: A foreigner in my barracks. Good. The boys need someone to lose to.
+
+ARCHIDAMOS: Three of mine, then me. One after another. No healing. No crying.
+
+ARCHIDAMOS: Lakonians don't fall to one blow. Let's see if you do.
+
+> after the gauntlet:
+ARCHIDAMOS: Not soft. Hm. Not soft at all.
+
+ARCHIDAMOS: Take this. A Lakonian stays up on one leg. This does it for your Pokémon.
+
+{PLAYER} received a Focus Sash!
+
+> the crossed-out names, if examined:
+ARCHIDAMOS: Gone north. To Delphoi. I'll cross them back in when they come home.
+
+ARCHIDAMOS: If.
+```
+[`FLAG_ICHOR_AGOGE_GAUNTLET`, `FLAG_ICHOR_GOT_FOCUS_SASH`. The gauntlet is Part 3's Cadets Lykiskos, Hagnon and Eudamidas, then Archidamos.]
+
+### The palaestra (`MAP_LAKONIA_PALAESTRA`)
+
+- **Who:** Hipposthenes, an old wrestler with six Olympic crowns, who has heard you can't wrestle a Geogrip off the ground and wants to try.
+- **The room:** an open court with a roofed porch on one side: oil flasks and bronze scrapers on hooks, a sandpit for wrestling, a bench of folded cloaks, and six olive crowns, dried brown, nailed above the door. The **wrestling sands** outside are the courtyard's big sand floor, on `MAP_LAKONIA`.
+- **Event:** a "show me". Bring him a Geogrip. One lives on the wrestling sands on some days, by day, one at a time (Part 4). Reward: a Choice Band.
+```text
+HIPPOSTHENES: Six crowns. Olympia, six times. Wrestling. Nobody ever threw me.
+
+HIPPOSTHENES: There's a thing on the sands out there. Comes up out of the ground.
+
+HIPPOSTHENES: Stronger every time you knock it down. Like that giant in the old story.
+
+HIPPOSTHENES: Catch me one. I want to see if I can lift it.
+
+> with a Geogrip in the party:
+HIPPOSTHENES: There! Look at it. Feet in the sand. It's drinking the ground.
+
+HIPPOSTHENES: Don't let it touch the earth, they said. That's how you beat it.
+
+HIPPOSTHENES: Easier said. Here. I wore this my last three crowns.
+
+{PLAYER} received a Choice Band!
+
+HIPPOSTHENES: You can only do one thing in it. So do it well.
+```
+[`FLAG_ICHOR_GOT_CHOICE_BAND`.]
+
+### The sanctuary of Artemis Orthia (`MAP_LAKONIA_ORTHIA`)
+
+- **Who:** Kleta, the priestess, who holds the goddess's wooden image, which is small enough to carry and heavier than it looks.
+- **The room:** a small temple court on the marshy river bank, with willow trees growing right up to the steps (the image was found in a willow thicket, bound upright in willow withies, which is why she's called Orthia, "upright"). A long stone altar is set with round cheeses. Low benches for watchers run along one side.
+- **Event:** the cheese game. In the old rite, boys stole cheeses from the altar while others tried to stop them. Here the stoppers are two acolyte cadets who patrol the court with their eyes open, using the Artemis trial's sight rule (non-battle sight objects, SYSTEMS §12). Take the three cheeses from the altar without being seen. Seen means you're walked back to the steps, nothing lost. Reward: a Scope Lens. The altar also takes Artemis's daily prayer.
+```text
+KLETA: The goddess likes boys to be quick and girls to be quicker. Want to try?
+
+KLETA: Three cheeses on the altar. Two cadets watching. Don't be seen.
+
+KLETA: In my grandmother's day they used whips. We use looking. It's worse.
+
+> after three cheeses:
+KLETA: Three! And not one of them saw you. Artemis is pleased. She's a hunter.
+
+KLETA: Take this. For seeing what's there before it sees you.
+
+{PLAYER} received a Scope Lens!
+```
+[`FLAG_ICHOR_ORTHIA_CHEESES`, `FLAG_ICHOR_GOT_SCOPE_LENS`.]
+
+### Chilon's house (`MAP_LAKONIA_CHILON_HOUSE`)
+
+- **Who:** Chilon, a very old man who collects Lakonian sayings, and who will tell anyone that "Know thyself" was his before Delphoi carved it over a door.
+- **The room:** a small house where every wall is scratched with sayings, one or two words each, in a hundred hands, floor to ceiling. One pottery shard on a shelf has a single word on it: IF.
+- **Event:** a quiz. He asks three questions; the answer with the fewest words is always right. Three right in one go earns Wise Glasses. After the climax he has a new line.
+```text
+CHILON: “Know thyself.” Mine. I said it first.
+
+CHILON: Delphoi carved it on a door and took the credit.
+
+CHILON: “Nothing too much.” Also mine. I'm very modest about it.
+
+CHILON: Three questions. Answer like a Lakonian. Fewest words wins.
+```
+?? Question 1: "A king writes: if I enter Lakonia, I will burn your town. What does Lakonia write back?" Multichoice: WE WILL FIGHT YOU ON EVERY HILL / IF. / PLEASE DON'T
+```text
+> IF.:
+CHILON: If! Ha! That's the one. It's on my shelf.
+```
+?? Question 2: "A mother hands her son his shield before a war. What does she say?" Multichoice: BE CAREFUL / WITH IT, OR ON IT. / WRITE TO ME
+```text
+> WITH IT, OR ON IT.:
+CHILON: Come home carrying it, or carried on it. Four words. Cruel. Correct.
+```
+?? Question 3: "A stranger asks: how long will you live?" Multichoice: UNTIL I'M OLD / NOBODY KNOWS / WELL.
+```text
+> WELL.:
+CHILON: Not how long. How well. One word. You're wasted on that island.
+
+{PLAYER} received Wise Glasses!
+
+> any wrong answer:
+CHILON: Too many words. Start again. Fewer.
+
+> after the climax:
+CHILON: Prophecy's over, they say. Nobody knows how long they've got.
+
+CHILON: “Know thyself,” then. It's all that's left. Told you it was mine.
+```
+[`FLAG_ICHOR_CHILON_QUIZ`, `FLAG_ICHOR_GOT_WISE_GLASSES`. "With it or on it" is Plutarch's; "If" is the Lakonians' real answer to Philip of Macedon.]
+
+### Lichas's house (`MAP_LAKONIA_LICHAS_HOUSE`)
+
+- **Who:** Lichas, who once won the chariot race at Olympia under a false name, because Lakonians were banned that year, and got caught when he ran out to crown his own driver. He is the town's host.
+- **The room:** the only house in Lakonia with cushions, which the neighbors find suspicious. A hearth, a guest bed behind a curtain, a bronze tripod from Olympia with someone else's name on it, and a basket of figs.
+- **Event:** xenia (SYSTEMS §10): his table heals, his bed rests you to dawn, noon, dusk or night, and he is the **Broken Ring**'s third link (Kythera → Amnisos → Lakonia → Delphoi). Bring him the Amnisos half and he matches it, gives an Oran-and-Leppa basket, and hands you the Delphoi half.
+```text
+LICHAS: Sit. Eat first. Then tell me who you are. Not before.
+
+[heal the party]
+
+LICHAS: Lakonians are poor hosts. Too few words. Too little soup.
+
+LICHAS: I'm the exception.
+
+LICHAS: I won at Olympia once, you know. Under another name. They whipped me for it.
+
+LICHAS: Worth it. Rest a while?
+
+> with the Broken Ring's Amnisos half:
+LICHAS: A ring-half from Amnisos? Let me see… there. A ring again.
+
+LICHAS: My half of the next one goes to Delphoi. A melissa there. She'll know.
+
+{PLAYER} received half of a broken ring!
+```
+[`FLAG_ICHOR_XENIA_LAKONIA`, `FLAG_ICHOR_BROKEN_RING_3`. Zeus Xenios +3.]
+
+## Route 26, past the training grounds (`MAP_ROUTE26_SKIRITIS`)
+
+**Layout.** About 34×50, four screens tall, `MAPSEC_AETHOS_ROUTE_26`, running north from Lakonia past the battle school's outer training grounds to Lake Stymphalia (AETHOS_MAP: "north past the battle school's training grounds"). The south half is the agoge's country: a running track beaten along the upper Eurotas, a practice field of long grass, and the **Platanistas**, an island ringed by plane trees inside a moat, reached by two bridges, one with a statue of Herakles and one with Lykourgos. At dawn two teams of boys cross by the two bridges and fight to throw each other into the water. The north half climbs into the first hills of the Skiritis, whose people were Lakonia's scouts: holm-oak, scree and rock walls. On the east side, below a ridge you can't climb, runs a second, lower road: the Titans' road, where columns of Titanborn march north. Terrace ledges drop south toward Lakonia. The reeds of Lake Stymphalia show over the last rise.
+
+**Route beats, south to north.**
+1. **A sign** at Lakonia's north gap: "ROUTE 26. North past the training grounds to Lake Stymphalia."
+2. **The first trainer,** easy and in plain view on the running track: Cadet Anaxilas, running laps, two Pokémon. Other cadets run the track as walkers.
+3. **Forced grass band 1,** 3 deep, across the practice field at the track's far end, walled by the moat on one side and a terrace on the other.
+4. **The Platanistas** (the set piece). The path crosses the island: in by Herakles's bridge, out by Lykourgos's. Cadet Anaxandros holds Herakles's bridge, mandatory, his sight line along its full length. On the island, two teams of cadets wrestle at the water's edge (flavor), and the biggest plane tree hides an item.
+5. **The great herm** (`FLAG_ICHOR_HERM_ROUTE26`) at the fork past Lykourgos's bridge, as the sign: "SOUTH: LAKONIA. NORTH: STYMPHALIA. EAST: the old altar."
+6. **The east spur** (a dead end that pays): a path to the Phoibaion, the little old altar where the two teams made their offering before the fight. A cracked rock (the Bronze Hammer) opens a way down to the stream beside it, where a hidden item lies; a visible item sits on the altar's step.
+7. **The Titan columns** come in view below the ridge on the east, from here to the lake (Part 2, below).
+8. **Scout Dienekes,** mandatory, on a rock where the path narrows between two rock walls; his sight line covers the gap. **Forced grass band 2,** 4 deep, starts right behind him, in scrub between the walls.
+9. **Lake Stymphalia in view:** reeds, still water and birds, and the seam.
+
+**Other parts of the route.**
+- **Hidden items:** under the Platanistas's biggest plane tree; in the stream below the Hammer rock.
+- **Width varies:** a one-tile bridge at Herakles's, an open field at band 1, a narrow gap at Dienekes.
+
+| NPC | Where | Role |
+|---|---|---|
+| Running cadets | the track | flavor |
+| Wrestling cadets | the Platanistas's shore | flavor |
+| The two bridges | the Platanistas | objects |
+| Titan columns | the east road, below the ridge | set piece (unreachable) |
+
+**Wrestling cadet**
+```text
+CADET: Two teams. One island. Last team standing on it wins.
+
+CADET: I've been thrown in four times this morning.
+
+CADET: I'm winning, though. Spiritually.
+```
+**Herakles's bridge** (an object)
+```text
+A bridge onto the island, with a statue of Herakles at its head.
+
+The other bridge has Lykourgos. You choose your bridge, and then you fight.
+```
+**The Titan columns** (an object sign on the ridge's edge)
+```text
+Below the ridge, a line of bronze helmets marches north. It doesn't end.
+
+Some of them are singing. Some of them are boys.
+
+> after the climax:
+The road below is empty. A helmet lies in the dust, upside down, full of rain.
+```
+The columns are four Titanborn objects on a loop: each reaches the north end of the visible stretch and is hidden, and another appears at the south end, so the column never ends. The same set piece continues along Route 27's lower road.
+
+## Lake Stymphalia (`MAP_LAKE_STYMPHALIA`)
+
+**Layout.** About 44×40, `MAPSEC_LAKE_STYMPHALIA`: the waypoint between Route 26 and Route 27, on the main path (AETHOS_MAP keeps it "in Lakonia", just north of the city). A wide lake under bare hills, ringed by reed beds, where bronze-feathered birds roost. **The causeway** is the way across: an old stone causeway on piles from the south shore (Route 26), then wooden boardwalks over the mud, threading north-west across three reed islets to the west shore (Route 27). Tall reed grass grows on the islets; on the middle islet it fills the causeway's whole width. Surf works on the open water. Off the causeway: in the north-west, behind a dense curtain of reeds, the **reed-bed nests** (`MAP_LAKE_STYMPHALIA_NESTS`, 18×14), where small wading birds build in the shallows; at the far east end, down a side boardwalk, the **deep reeds** (`MAP_LAKE_STYMPHALIA_DEEP_REEDS`, 18×14), a dead-end pool of black water among reeds taller than the player. Two reed walls frame the lake and invite a return: on the **north shore**, a bed where the bronze birds roost so thick nobody can walk in (LABORS's Stymphalian Reeds, Labor 6); on the **south-east shore**, a reed wall that grows back as fast as Demeter's Sickle cuts it (LABORS's Springs of Lerna, Labor 2). Both show what's behind: glints of bronze in the north, eight pools in a ring in the south-east. **Identity:** the birds. They watch the causeway, they clink when they shift, and they rise all at once if you stand still too long.
+
+**Beats along the causeway, south to west.**
+1. **The south shore** and a sign: "LAKE STYMPHALIA. Keep to the causeway. Mind the birds. They mind you."
+2. **The first trainer,** easy and in plain view on the first boardwalk: Fisher Kyknos.
+3. **Islet 1**, a little reed grass to one side (optional).
+4. **Akanthis's stilt hut** (the rest point): an old fowler's hut on stilts beside the causeway. She sits you by her fire (the party heals) and tells you the Lernip rumor.
+5. **The long boardwalk,** one tile wide, where the Titanborn straggler Borboros sits with his legs over the edge, blocking it. Mandatory.
+6. **Islet 2** and **the forced band,** 3 deep of reed grass across the causeway's width, right behind Borboros, so there's no chance to heal between. The side boardwalk east to the deep reeds starts here.
+7. **The nests' curtain** (north, through the reeds), with Augur Melampous watching the birds beside it (optional).
+8. **Islet 3,** with Harvester Donax cutting reeds, facing away (optional), and a visible item on a far rock reached by Surf.
+9. **The west shore** and a sign: "WEST: ROUTE 27, over the hills into Arkadia."
+
+**Other parts of the lake.**
+- **Hidden items:** under Akanthis's stilt hut; at the deep reeds' end (clear weather).
+- **The birds rise.** Standing still on the causeway for 8 seconds sets the nearest roost off: bronze birds lift out of the reeds (a field effect), circle, and settle. Purely a sight, and a Labor 6 foreshadow.
+
+| NPC | Where | Role |
+|---|---|---|
+| Akanthis | the stilt hut | rest point; the Lernip rumor |
+| The north reeds | the north shore | gate (Labor 6) |
+| The south-east reeds | the south-east shore | gate (Labor 2) |
+
+**Akanthis** (an old fowler, on the steps of her stilt hut)
+```text
+AKANTHIS: Sit. By the fire. Everyone who crosses gets a sit. Them's the rules.
+```
+[Heal the party.]
+```text
+AKANTHIS: Forty years I've limed birds in these reeds. Bronze ones, now. Mind your eyes.
+
+AKANTHIS: There's a thing in the deep reeds. East, down the side boards.
+
+AKANTHIS: Only in the rain. Swims up when the water's all rings.
+
+AKANTHIS: Small. Green. Too many heads for a small green thing.
+
+AKANTHIS: Three times in forty years, I've seen it. You've got young eyes. And that Eye.
+
+AKANTHIS: Come back when it rains. The augur'll tell you when.
+```
+[The first time she says it, `FLAG_ICHOR_HEARD_LERNIP_RUMOR` is set, and the next day's omen is forced to the lake's rain entry (Part 4). After the climax, the omen entry stays in the pool. Later talks heal and say one line: "AKANTHIS: Sit. Fire's still going."]
+```text
+> after a Lernip is caught:
+AKANTHIS: You got it? The many-headed thing? Hm.
+
+AKANTHIS: Mind it grows. The old ones say it grows a head for every one you cut.
+```
+**The north reeds** (an object)
+```text
+The reeds here are thick with roosting birds. Their feathers clink like coins.
+
+As you step closer, a hundred bronze heads turn toward you at once.
+
+You step back.
+```
+(Post-game: LABORS's Labor 6 opens a reed-bed entrance here.)
+
+**The south-east reeds** (an object)
+```text
+A wall of reeds. You cut a path with Demeter's Sickle.
+
+…By the time you look up, it's grown back.
+```
+(Post-game: LABORS's Labor 2, the Springs of Lerna.)
+
+## Route 27, over the hills into Arkadia (`MAP_ROUTE27_ARKADIAN_HILLS`)
+
+**Layout.** About 48×40, `MAPSEC_AETHOS_ROUTE_27`, climbing west from Lake Stymphalia's west shore over the hills into Arkadia (AETHOS_MAP's two cells, west and south-west of the lake). The Skiritis's hill country: oak and holm-oak giving way to pine, scree slopes, goat paths and rock walls. The path climbs west; its terrace ledges drop east toward the lake, so the way back is quick. Below a ridge on the south side, the Titans' lower road carries the columns on west toward Arkadia and the Gulf. Halfway is the Karyai spring under walnut trees, where the maidens of Karyai danced for Artemis, on the old border between Lakonia and Arkadia. Near the top the pines open and Arkadia's cypresses show over the last rise.
+
+**Route beats, east to west.**
+1. **A sign** at the lake's west shore: "ROUTE 27. Over the hills into Arkadia. Scouts on the heights."
+2. **The first trainer,** easy and in plain view among his goats on the path: Shepherd Tityos, two Pokémon.
+3. **Forced grass band 1,** 3 deep, in a hollow between two rock walls.
+4. **The Titan columns,** below the ridge to the south (Route 26's set piece, continued), now marching west.
+5. **Ares's gully** (theoxenia E4, Part 1), just off the path to the south, where the columns' road runs close below it.
+6. **Scout Othryades,** mandatory, on the only bridge over a ravine; his sight line covers the bridge. He has the scytale's twin staff. **Forced grass band 2,** 4 deep, begins at the bridge's west end.
+7. **The Karyai spring** (the rest point): the spring heals, two berry trees grow under the walnuts, and the great herm (`FLAG_ICHOR_HERM_ROUTE27`) stands beside it as the fork sign: "EAST: STYMPHALIA. WEST: ARKADIA. SOUTH: the lookout."
+8. **The lookout spur** (south, a dead end that pays): a goat path up to a Skiritai watchtower, a column drum fallen across the last stretch (the Girdle of Herakles), and behind it a visible TM Stone Edge and a view back over the lake and all of Lakonia.
+9. **Scout Sthenelaidas,** mandatory, at the narrow top of the pass. **Forced grass band 3,** 3 deep, in the pines behind him.
+10. **Arkadia in view:** cypresses over the rise, and the seam to Act II's Arkadia (agree the columns with the world-act2 session).
+
+**Other parts of the route.**
+- **Hidden items:** under the Karyai walnut nearest the spring; at the watchtower's foot.
+- **Width varies:** a ravine bridge one tile wide; an open slope at the spring.
+
+| NPC | Where | Role |
+|---|---|---|
+| Karyai spring | halfway | rest point |
+| Skiritai watchtower | the lookout spur | object |
+
+**Karyai spring** (an object)
+```text
+A cold spring under walnut trees.
+
+Girls from Karyai danced here once, for Artemis.
+
+Builders liked the dance so much they carved the girls as pillars.
+
+You drink. You feel better.
+```
+[Heal the party.]
+
+**The Skiritai watchtower** (at the end of the lookout spur)
+```text
+From up here you can see the lake, the road, and all of Lakonia. No walls.
+
+A scout's carved a line on the parapet: “WE SEE THEM FIRST.”
+```
+
+## Route 28, the Sacred Olives (`MAP_ROUTE28_SACRED_OLIVES`)
+
+**Layout.** About 56×26, four screens west to east, from Kirrha's east edge to the gorge's mouth. The sacred plain is a sea of olives: old trees in long irregular rows, silver-green, walled into terraces by low dry-stone walls. The road, worn white, runs east between them. To the south the plain falls away toward Kirrha's bay; to the north the first slopes of Parnassos rise, and over the last screen the two shining cliffs of the Phaedriades stand above the gorge's mouth. **Identity:** the god's untouched olives, and Titans marching through them in step. No one may cut here, so there is nothing to cut: Demeter's Sickle has nothing to do on this map, and its prompt says so ("These are the god's. Even the Sickle knows it.").
+
+**Beats, west to east.**
+1. **A calm stretch** along the plain's wall, and the sign (Part 1).
+2. **Forced grass band 1,** 3 deep, across the road between two terrace walls: long grass grown up between the olive rows, which nobody is allowed to scythe.
+3. **The first trainer,** easy and in plain view on the road: PILGRIM Euangelos (Lv 52, two Pokémon).
+4. **The desecrated altar** at a narrow point where two old trunks pinch the road, guarded by TITANBORN Psammos (mandatory; sight 3 across the gap).
+5. **Forced grass band 2,** 4 deep, right behind Psammos, so there's no chance to heal between.
+6. **The set piece and rest point.** The oldest olive on the plain, a vast hollow trunk (2×2), with Hieron's hut under its branches. The hut's spring heals. A Leaf Stone is hidden in the hollow trunk.
+7. **Optional,** north of the road through a gap in the wall: a side row of grass with RUNNER Phayllos facing away up the row (optional), and a Max Repel at the row's dead end.
+8. **Forced grass band 3,** 3 deep, in a low hollow where the plain dips before the gorge.
+9. **TITANBORN Plinthis** (mandatory) at the plain's east gate, where the road narrows into the gorge's mouth.
+10. **The gorge in view:** the stream comes down out of the cleft, and the Phaedriades shine.
+
+**Ledges** step down westward on the terraces, so the walk back to Kirrha is quick. **Signs** at both ends; the east one reads "THE KASTALIAN GORGE. Delphoi above. The falls are the god's stair." **Hidden items:** the Leaf Stone in the oldest olive; a Revive under the altar's step. **Seam:** the west seam with Kirrha *(Act II)* uses only `aethos` metatiles in its 8 columns (MAP_DESIGN §5); agree the road's row with Act II.
+
+| NPC | Where | Role |
+|---|---|---|
+| Hieron | the road's edge (III-6A), then his hut | the plain's warden |
+| Titanborn column ×4 | the road, east end of screen 1 | III-6A only |
+| Pilgrim family (a father, two children) | resting under an olive by band 2 | flavor |
+| Euangelos, Psammos, Phayllos, Plinthis | Part 3 | trainers |
+
+**The pilgrim family**
+```text
+FATHER: We walked from Thyrsa. Three weeks. To ask one question.
+
+FATHER: Will the harvest come in. That's all. Will it come in.
+
+GIRL: Papa says she'll say one word. I hope it's “yes.” It's short.
+
+BOY: I hope it's “figs.”
+```
+After the climax (`VAR_ICHOR_ACT3` ≥ 19):
+```text
+FATHER: She didn't answer. She laughed. Then she said, “Plant it and see.”
+
+FATHER: I could have thought of that. I've decided to be pleased.
+```
+
+### Hieron's hut (`MAP_ROUTE28_SACRED_OLIVES_WARDENS_HUT`)
+
+- **Who:** Hieron, warden of the sacred plain for forty years, who has watched more olives grow than anyone alive and is still not bored.
+- **The room:** a one-room stone hut built against the oldest olive, so that a great root comes in through the back wall and serves as a bench. A spring runs in a stone channel across the floor and out under the door; a ladle hangs over it. A pruning hook hangs on the wall, rusted shut, with a tag. A shelf of olive-wood carvings of every trainer who's passed.
+- **Events:** the rest point (the spring heals the party); a gift of Olive Oil ×3; after the climax, a Big Root.
+```text
+HIERON: Drink. It's the god's water. Comes all the way from the spring above.
+
+HIERON: Here. Oil from fallen olives.
+
+HIERON: Fallen ones aren't picked. That's the rule.
+
+{PLAYER} received 3 Olive Oil!
+
+HIERON: For the herms. Hermes likes a good oil. So do I.
+```
+[Heal the party. `FLAG_ICHOR_GOT_HIERON_OIL`.] The pruning hook:
+```text
+A pruning hook, rusted shut. A tag on it says: NEVER.
+```
+The carvings:
+```text
+Little olive-wood figures. Pilgrims, runners, a soldier.
+
+The newest is a big man with a torch. It's been carved squinting.
+```
+Later visits:
+```text
+HIERON: The Titans go up. The pilgrims go up. Nobody comes down. I counted.
+```
+After the climax:
+```text
+HIERON: They came back down through my olives. The Titans. In ones and twos.
+
+HIERON: They stepped off the road this time. To sit under the trees.
+
+HIERON: One of them cried on my roots. I let him. Roots don't mind.
+
+HIERON: Take this. It came up where he sat.
+
+{PLAYER} received a Big Root!
+```
+[`FLAG_ICHOR_GOT_HIERON_BIG_ROOT`.]
+
+## Route 28, the Kastalian Gorge (`MAP_ROUTE28_KASTALIAN_GORGE`)
+
+**Layout.** About 30×56, five screens tall, climbing north. The Pleistos's side-stream, white and loud, comes down the middle of the gorge from the Kastalian spring far above. The lower two screens are the **Titan muster**: tents of brown hide on terraces among laurel and pine on both banks, cookfires, a beehive bread oven, sickle banners on poles, racks of unused shovels, a rope corral of Taurivet. The road runs up the east bank through the camp. On the third screen the gorge pinches to **the cutting**, two tiles wide between rock and stream, where Gigas Agrios stands. Above it the **great herm** stands at the foot of **the lower fall**. Between the two falls is a ledge with a pool, laurel scrub and grass. **The upper fall** comes down from the cleft of the Phaedriades, and its top is Delphoi's south-east edge, by the spring. **Identity:** an army camped in a holy place, waiting for dark.
+
+**Beats, south to north.**
+1. **The camp's south tents** and the sentries (Part 1).
+2. **Forced grass band 1,** 3 deep, between the tents' guy-ropes and the stream: there is no way round, tents one side and white water the other.
+3. **The camp lane.** TITANBORN Kisseris (mandatory) faces across the lane from the cookhouse (sight 3). The cook, the kid, the grieving mother and the quiet one (below) stand or sit about the lane as objects; the rest of the crowd is in the metatiles.
+4. **Optional:** TITANBORN Chomas, the doubter, sits by a cookfire on the west bank, facing the fire (optional). Reach the west bank by the plank bridge.
+5. **Every dead end pays.** Up a side terrace above the camp, through a patch of optional grass, the quartermaster's tent stands alone with a Max Ether outside it (visible) and a hidden Full Restore in a crate.
+6. **The cutting** and Gigas Agrios (mandatory).
+7. **Forced grass band 2,** 4 deep, directly behind Agrios in the laurel scrub at the cutting's mouth.
+8. **The great herm** at the foot of the lower fall, and **the lower fall** (the Horn).
+9. **The middle ledge:** TITANBORN Asbolos (mandatory) on the ledge path (sight 4), then **forced grass band 3,** 3 deep, along the pool's rim.
+10. **Behind the lower fall,** a niche you can see from the ledge and reach by Surfing the pool: a hidden Mystic Water.
+11. **Optional:** MELISSA Chrysis at the pool's far end, filling jars, facing the water (optional).
+12. **The upper fall** (the Horn), and the cleft opening into Delphoi.
+
+**Ledges** step down southward on the east bank's terraces, so the way back to the plain is quick once you've climbed. **Relic gates:** the falls (main path). A cracked boulder (the Bronze Hammer) blocks a shortcut path from the middle ledge back down to the camp; smashing it makes a loop. **Signs:** at the foot ("THE KASTALIAN GORGE. Delphoi above"), and at the herm ("Here the road ends and the water begins").
+
+| NPC | Where | Role |
+|---|---|---|
+| Two sentries | the south tents | III-6B |
+| The cook, Ochthos, the kid, the grieving mother | the camp lane | grunt archetypes 6, 11, 8 and 3 (STORY §5) |
+| Kisseris, Chomas, Agrios, Asbolos, Chrysis | Part 3 | trainers |
+| A Taurivet in the corral | west bank | an object |
+
+**The cook** (archetype 6, the servant at the feast), by the bread oven:
+```text
+COOK: Bread? It's free. Everything's free in the camp. That's the point.
+
+COOK: At the Kronia my master poured my wine. One day a year.
+
+COOK: The master says every day, soon. Every day a feast.
+
+COOK: I asked who'd bake the bread, if every day's a feast.
+
+COOK: Nobody answered. So I'm still baking it.
+```
+At night (`VAR_ICHOR_ACT3` = 13), the dread:
+```text
+COOK: Look up. The stars over Parnassos. They've all slid. A hand's width.
+
+COOK: I've baked under those stars since I was a boy. I know where they go.
+
+COOK: They don't go there.
+```
+
+**Ochthos, the quiet one** (archetype 11), sitting alone on a rock by the stream, his helmet in his lap:
+```text
+OCHTHOS: …
+
+OCHTHOS: I came for my mother. She's sick.
+
+OCHTHOS: …If it works, is she sick forever?
+```
+Talking again:
+```text
+OCHTHOS: I don't know who to ask. You don't look like you know either.
+```
+After the climax he is gone from the gorge; he is at the Delphoi Asclepeion, sitting by the spring (below).
+
+**The kid** (archetype 8), trying on a helmet three sizes too big:
+```text
+KID: My friends joined. The helmets are cool.
+
+KID: …Is that not a reason?
+
+KID: It's a bit heavy, actually.
+```
+
+**The grieving mother** (archetype 3), sitting on a crate by a tent with a bundle in her arms:
+```text
+MOTHER: My thread ends on the same day as my baby's. Every seer says so.
+
+MOTHER: Either we all die that day, or nobody ever dies again.
+
+MOTHER: I know which one I'm betting on.
+```
+After the climax she is in Delphoi's Agora, buying honey cakes:
+```text
+MOTHER: Nobody knows when anybody's thread ends now. Not even hers.
+
+MOTHER: So I'm buying her a honey cake today. In case. Every day, in case.
+```
+
+## Delphoi (`MAP_DELPHOI`)
+
+**Layout.** About 52×46, terraced up the south face of Parnassos under the Phaedriades. You come up the falls at the **south-east**, into the cleft where **the Kastalian spring** rises: a fountain-house cut into the rock, water running from bronze lion-head spouts into a long stone basin, the **lion-head basin**. West of the spring lies **the lower town**: the Asclepeion and the Agora first, side by side on the little square at the top of the falls path, both in view the moment you arrive; then a lane of houses along the terrace, the House of the Melissai with its wall of hives at the lane's end, and the Pilgrims' House. Above the lower town is the **sanctuary's wall**, with its **gate** at the foot of **the Sacred Way**. The Sacred Way zigzags up the slope in three switchbacks past **the treasuries** (Astyra's small marble one, the Siphnians' rich one with its maidens holding up the porch), the statues of Kleobis and Biton, **the Rock of the Sibyl** with **the oldest altar** at its foot, and the Lesche of the Knidians on the north-east. At the top of the Sacred Way is **the temple terrace**: the great Temple of Apollo, the crown of the map, with **the Omphalos court** in front of it behind its own gate. Above the temple, **the theater**'s curved tiers; above the theater, on the highest terrace, **the stadium**; past the stadium, **the north gate** onto the Ascent (closed until L-5). The north-west edge opens onto the Korykian path. East of the theater, the **laurel terraces**: the god's laurel grove, with grass (the map's wild table). **Identity:** the navel of the world, terraced up a mountain; bees everywhere, and a god's stone in a net of wool.
+
+**What's where.**
+- **First things first:** the Asclepeion and the Agora face the falls' top.
+- **The temple is the crown:** at the top of the Sacred Way, framed by every switchback.
+- **The oldest altar:** a rough stone at the foot of the Rock of the Sibyl, Gaia's before it was Apollo's, the spot where a rare Pyrapod comes at night (Part 4).
+- **The lion-head basin:** the lowest step of the spring's basin, under the third lion-head spout, where the Hymnet omen's cygnet waits at dawn (Part 4).
+- **The laurel terraces:** the god's grove east of the theater, grass with the precinct's wild table (Part 4). The great laurel at their top drops a sprig a day (SYSTEMS §3's laurel trees; `FLAG_DAILY_ICHOR_LAUREL_DELPHOI`).
+- **Exits:** the falls (south-east) and the north-west gate onto Route 29, the Korykian path (its pass is shut further up until L-5). Each has a sign.
+- **Hidden items:** a Pearl in the lion-head basin ("pilgrims throw things in"); Stardust on the theater's top row; a Bronze Obol behind the oldest altar.
+
+| NPC | Where | Role |
+|---|---|---|
+| The Pythia (Phemonoe) and two melissai | the Sacred Way (III-6C), then the temple | the eighth Hierophant |
+| Alethea | III-6C, then the Astyran treasury | — |
+| Kleon and Rhea | the stadium, then the Omphalos court's gate (III-8) | optional scene |
+| Mom | the spring (III-7 to III-8) | — |
+| Pilgrims in the queue (four objects; the rest drawn) | the Sacred Way's first switchback | flavor; they change after the climax |
+| The north-west gate guard | the foot of Route 29 | the pass over Parnassos, shut until L-5 |
+| Iamos | the theater's top row | Part 3 |
+| Orsippos | the stadium's track | Part 3 |
+| A melissa at the hives | outside the House of the Melissai | flavor |
+| The spring's dozing pilgrim | by the basin | flavor |
+| Households | below | — |
+
+**The queue of pilgrims** (four objects at the first switchback):
+```text
+PILGRIM: I've been in this queue since the barley was green. Twice.
+
+PILGRIM 2: I asked if I should marry. She said “soon.” Soon what?
+
+PILGRIM 3: I asked when I'd die. She looked at me a long time and said “same.”
+
+PILGRIM 3: Same as what? Same as who? I've been here a year asking.
+
+PILGRIM 4: Don't push. There's an order. It's by who's most desperate.
+```
+After the climax (`VAR_ICHOR_ACT3` ≥ 19), the queue is laughing:
+```text
+PILGRIM: She laughed! The Pythia laughed. Right in my face. It was lovely.
+
+PILGRIM 2: I asked if I should marry. She said “Do you want to?”
+
+PILGRIM 2: I said yes. She said, “Then that's your oracle.” I'm going home.
+```
+
+**The melissa at the hives**
+```text
+MELISSA: Mind the bees. They're the god's, and they know it.
+
+MELISSA: The Pythia used to be called the Delphic Bee.
+
+MELISSA: Before she stopped talking.
+```
+After III-7 and before the climax:
+```text
+MELISSA: The bees went quiet at sunset. All of them at once.
+
+MELISSA: Bees know things. Don't ask me how. I've never asked them.
+```
+
+**The spring's dozing pilgrim**, before III-7:
+```text
+OLD MAN: Wash your hair in the spring. That's what the Pythia does.
+
+OLD MAN: I did. Didn't help. I've had a cold for a week.
+```
+
+**The statues of Kleobis and Biton** (object):
+```text
+Two marble brothers, side by side, fists at their sides.
+
+A plaque: KLEOBIS AND BITON OF ARGOS.
+
+They pulled their mother's cart to Hera's temple.
+
+She asked the goddess for the best thing a mortal could have.
+
+That night they lay down in the temple and didn't wake up.
+
+Under it someone has scratched: COUNT NO ONE HAPPY TILL THEY'RE DEAD.
+
+Under that, newer, in a careful hand: I DON'T LIKE THIS STORY. -A.
+```
+
+**The Omphalos** (object), before III-8:
+```text
+An egg-shaped stone in a net of knotted wool. The navel of the world.
+
+Zeus let two eagles fly from the ends of the earth. They met here.
+
+A worn plaque: THE STONE THAT KRONOS SWALLOWED. Set here by Zeus.
+
+The stone is warm, like Kronion Hill's altar was. It hums, very low.
+```
+
+**The Rock of the Sibyl** (object):
+```text
+A crag where the first prophetess stood, before there was a temple. Herophile.
+
+They say she sang her prophecies, and none of them were cheerful.
+```
+
+**The oldest altar** (object):
+```text
+A rough stone with a hollow worn in its top.
+
+No god's name. It's older than names.
+
+The ashes in the hollow are warm, though nobody's lit it.
+```
+At night, when the Pyrapod has come (Part 4), the hollow is glowing.
+
+### Asclepeion (`MAP_DELPHOI_ASCLEPEION`)
+
+- **Who:** Epione, the healer, who washes every patient's hands in spring water first because "the god likes clean hands", and her Panacoil.
+- **The room:** a mountain Asclepeion cut back into the rock, so the rear wall is raw stone, and a thread of the Kastalian runs out of a crack in it into a basin behind the counter. Votive tablets cover the side walls: clay arms, legs, eyes and ears, offered by people who were healed. A Pithos jar painted with laurel stands in the corner. Benches for pilgrims who walked too far.
+- **Events:** the heal; after the climax, Ochthos and his mother.
+```text
+EPIONE: Hands in the water first. The god likes clean hands. So do I.
+
+[heal the party]
+
+EPIONE: There. Every one of them, mended.
+
+EPIONE: Mind the stairs. Everyone falls on the stairs.
+```
+The votive tablets:
+```text
+Little clay arms, legs, ears and eyes, hung on pegs.
+
+Each one says thank you. Some say it more than once.
+```
+While `VAR_ICHOR_ACT3` = 13:
+```text
+EPIONE: I've made up every bed. Every one. Don't ask me why.
+
+EPIONE: …I know why. So do you.
+```
+After the climax, Ochthos sits by the basin beside an old woman with a shawl over her knees:
+```text
+OCHTHOS: This is her. My mother. The healer's looking after her.
+
+OCHTHOS: She's still sick. She might get better. She might not.
+
+OCHTHOS: Nobody knows. Nobody's ever not known before.
+
+OCHTHOS: …It's better. I don't know why it's better. It is.
+```
+```text
+OCHTHOS'S MOTHER: He sat by a fire for a month with a helmet on, for me.
+
+OCHTHOS'S MOTHER: Silly boy. Good boy.
+```
+
+### Agora (`MAP_DELPHOI_AGORA`)
+
+- **Who:** Lampsakos, the stallkeeper, who sells to pilgrims and has never once been asked for change.
+- **The room:** a long portico with its back wall open to the valley: stalls under a striped awning selling clay votive figurines (owls, bees, little tripods), bundles of laurel sprigs, honey cakes on trays, lead strips for writing questions on, and the ordinary goods. A row of tiny bronze tripods for sale on a shelf, each one a little crooked.
+- **Stock:** Ultra Ball, Hyper Potion, Full Heal, Revive, Max Repel, Full Restore (from the Sun Laurel on), Honey (the melissai's, by the jar).
+```text
+LAMPSAKOS: Laurel? Figurine? A lead strip to write your question on?
+
+LAMPSAKOS: Questions are free. Lead's two obols. Answers are the god's business.
+```
+The tripods:
+```text
+Little bronze tripods, a hand high. Every one leans slightly to the left.
+
+A card: AS USED BY THE PYTHIA. Probably not.
+```
+After the climax:
+```text
+LAMPSAKOS: Nobody's buying lead strips. Nobody's got questions.
+
+LAMPSAKOS: Well. They've got questions. They're asking each other.
+
+LAMPSAKOS: I've started selling dice.
+```
+
+### The House of the Melissai (`MAP_DELPHOI_HOUSE_OF_THE_MELISSAI`)
+
+- **Who:** the melissai, the bee-priestesses who serve the Pythia, under Hagne, the eldest, who was a novice when Melitta was. Mom hides here before III-7.
+- **The room:** a long low house built into the terrace, its whole back wall a honeycomb of clay hive-jars set into the stone, so the bees come and go through holes to the outside and hum through the house. Wax-sealing benches; racks of honey jars with labels; smokers on hooks; pale-gold veils on pegs by the door. At the far end, a doorway hung with a heavy curtain into an inner room.
+- **Events:** before III-7, the inner room is barred; after III-7, Mom is in the inner room until night; after the climax, a gift.
+```text
+HAGNE: A visitor. We don't get visitors. We get pilgrims. It's different.
+
+HAGNE: Mind the bees. They come and go through the wall. It's their house too.
+
+HAGNE: We carry honey for the god. And for…
+
+HAGNE: For the god. Just the god.
+```
+The curtain, before III-7:
+```text
+HAGNE: Not that room. That room's for the bees. Only the bees.
+
+HAGNE: …Very particular bees.
+```
+The honey racks:
+```text
+Rows of honey jars, each labelled in a neat hand.
+
+One place on the shelf is empty.
+
+There's a clean ring in the dust there, the shape of a jar.
+```
+After III-7 (until III-8), the curtain is open and Mom sits in the inner room, her veil back, with a cup of something hot:
+```text
+MOM: They gave me my old bed. It's very small. I was very small.
+
+MOM: Hagne still snores. Thirteen years, and she still snores.
+
+HAGNE: [from the other room] I heard that.
+```
+After the climax (`VAR_ICHOR_ACT3` ≥ 19; Mom has gone home to Elaia):
+```text
+HAGNE: Melitta's gone home. She cried at the door. She'll say she didn't.
+
+HAGNE: We've no one to carry honey down to, now. The cave's empty.
+
+HAGNE: So we're keeping it. Take some. It was always for whoever came late.
+
+{PLAYER} received 5 Honey!
+
+{PLAYER} received a Silver Powder!
+```
+[`FLAG_ICHOR_GOT_MELISSAI_HONEY`.] In the post-game:
+```text
+HAGNE: Melitta writes. She's started a new jar. She labelled it the same.
+
+HAGNE: “Habit,” she says.
+```
+
+### Theokles's house (`MAP_DELPHOI_THEOKLES_HOUSE`)
+
+- **Who:** Theokles, an old prophetes, one of the priests who turn the Pythia's words into verse. He sat beside Iapetos, who was called Lykophron here, for twenty years.
+- **The room:** a scholar's study with no windows worth the name: wax tablets on every surface, stacked like roof tiles; a big painted chart on one wall marking the long and short beats of hexameter verse; a potted laurel that is mostly dead; a rack of styluses, one bent nearly double; a writing desk with two stools, one dusty.
+- **Events:** lore; with `VAR_ICHOR_ACT3` ≥ 11, the story of the blind hour and a gift; after the climax, a daily weather omen.
+```text
+THEOKLES: The Pythia speaks. Then someone like me writes it up properly.
+
+THEOKLES: Hexameters. Gods prefer hexameters. Six feet a line.
+
+THEOKLES: She hasn't given me anything to write up in a year. One word a day.
+
+THEOKLES: You can't make a hexameter out of “soon.” I've tried.
+```
+The two stools:
+```text
+Two stools at one desk. The second one is dusty.
+```
+Talking again (first time with `VAR_ICHOR_ACT3` ≥ 11):
+```text
+THEOKLES: That stool. Lykophron sat there. Twenty years.
+
+THEOKLES: I hear he's gone up in the world.
+
+THEOKLES: Keeper of Records, to the Archon. Good for him. Bad for the records.
+
+THEOKLES: He had beautiful handwriting. Too beautiful.
+
+THEOKLES: You'd read what he wrote, and you'd believe it, and you'd want to.
+
+THEOKLES: He was on duty the night she went blind. Thirteen years ago.
+
+THEOKLES: She said three words, that night. “I can't see.”
+
+THEOKLES: He wrote forty lines.
+
+THEOKLES: Everyone said it was the finest thing he'd ever done.
+
+THEOKLES: A child with no thread, carrying a sickle to the Loom. Lovely verse.
+
+THEOKLES: I copied it out myself. I wish I hadn't. People read my copy.
+
+THEOKLES: He bent that stylus the day he left.
+
+THEOKLES: Temper. He had a temper about drafts.
+
+THEOKLES: Take it. I don't want it on my rack.
+
+{PLAYER} received a Twisted Spoon!
+
+THEOKLES: Bent bronze. It's good for thinking crooked. He'd know.
+```
+[`FLAG_ICHOR_GOT_THEOKLES_STYLUS`.] Later visits before the climax:
+```text
+THEOKLES: Three words. Forty lines.
+
+THEOKLES: I've thought about the difference every day since.
+```
+After the climax, he has a new board on the wall with weather signs, and reads the day's omen (SYSTEMS §6) each day:
+```text
+THEOKLES: No more prophecies. So I've taken up the weather. Clouds don't lie.
+
+THEOKLES: Well. They exaggerate.
+
+THEOKLES: Today: {STR_VAR_1}.
+```
+
+### The Pilgrims' House (`MAP_DELPHOI_PILGRIMS_HOUSE`)
+
+- **Who:** Theoxena, who keeps the house where pilgrims wait for the Oracle, and has fed some of them for a year. A xenia host (SYSTEMS §10). Among the guests, Philagros, who has waited longest.
+- **The room:** a courtyard house: sleeping mats in rows under a gallery, a long table with mismatched bowls, a hearth at one end. On the courtyard wall, hundreds of folded lead strips hang on nails, each with a pilgrim's question scratched on it, like the oak at Dodona. A big pot of lentils that never seems to empty, because she never stops refilling it.
+- **Events:** the xenia host (rest until a chosen hour, per SYSTEMS §10); Philagros's thread, which pays after the climax.
+```text
+THEOXENA: Come in, come in. Sit. Eat. Then tell me your name. In that order.
+
+THEOXENA: Everyone here's waiting for the Oracle. Some of them for a year.
+
+THEOXENA: I don't mind. A house is for filling.
+```
+[The xenia rest, per SYSTEMS §10: "Rest until… MORNING / DAY / DUSK / NIGHT".]
+
+The question strips:
+```text
+Hundreds of folded lead strips on nails. Questions for the god.
+
+“Is the child mine?” “Will the ship come in?” “Should I sell the mule?”
+
+One just says “WHY.” Nothing else.
+```
+**Philagros**, at the long table, before the climax:
+```text
+PHILAGROS: I came to ask one thing. Whether my daughter forgives me.
+
+PHILAGROS: I've waited a year. The Pythia gave me one word. “Ask.”
+
+PHILAGROS: Ask who? Ask what? I've written it on six strips.
+
+PHILAGROS: I'll wait for a proper answer. A whole sentence. I've got time.
+```
+After the climax (`VAR_ICHOR_ACT3` ≥ 19):
+```text
+PHILAGROS: I went back. She laughed. A real laugh, from the tripod.
+
+PHILAGROS: Then she said, “I told you. Ask. Her.”
+
+PHILAGROS: A whole sentence. Of a kind. I'm going home to ask her.
+
+PHILAGROS: Here. I won't need it. I'm done waiting for bells.
+
+{PLAYER} received a Soothe Bell!
+```
+[`FLAG_ICHOR_GOT_PHILAGROS_BELL`. Philagros is hidden afterwards.]
+```text
+THEOXENA: Half my mats are empty this week.
+
+THEOXENA: Everyone's gone home to ask each other.
+
+THEOXENA: I've made too many lentils. I always make too many lentils.
+```
+
+### Koretas's house (`MAP_DELPHOI_KORETAS_HOUSE`)
+
+- **Who:** old Koretas, a goatherd named for his ancestor, the goatherd who found the Oracle; and his granddaughter Aix, who does all the actual work.
+- **The room:** a stone house where half the room is a byre: a low wall divides the family's end, with its hearth and bed shelf, from the goats' end, with straw and a manger. Cheese baskets hang from the rafters to drain. A niche over the hearth holds a carved goat with a laurel in its mouth.
+- **Event:** an in-game trade. Give them a Melibee for their meadow, and get their Kerazap, nicknamed **PROPHET**, holding a Thunder Stone. `FLAG_ICHOR_TRADED_KERAZAP_DELPHOI`.
+```text
+KORETAS: My great-great-ever-so-great grandfather found the Oracle.
+
+KORETAS: Him and his goats.
+
+KORETAS: His goats wandered near a crack in the hill and started jumping about.
+
+KORETAS: Bleating in verse. Well. Bleating. He leaned over the crack to look.
+
+KORETAS: And he started prophesying. Couldn't stop.
+
+KORETAS: So they built a temple on it.
+
+AIX: Grandfather. The trade.
+
+KORETAS: Yes. The goat. Our goat bleats in verse too. We call him Prophet.
+
+KORETAS: He's never once been right. Lovely goat.
+
+AIX: We need a bee for the thyme meadow.
+
+AIX: The goats eat the flowers before they set.
+
+AIX: Would you trade us a Melibee? For Prophet?
+```
+?? Trade a Melibee for their Kerazap? YES/NO. YES: in-game trade, Kerazap nicknamed **PROPHET**, Lv 50, holding a Thunder Stone, with its hidden ability (Harvest).
+```text
+> YES, after the trade:
+AIX: There. Prophet's yours. He likes thyme and arguments.
+
+KORETAS: He'll tell you the future. It'll be wrong. That's half the fun.
+
+> NO:
+AIX: The meadow will wait. Meadows are good at that.
+```
+After the climax:
+```text
+KORETAS: The crack's quiet. The old fumes have stopped. The goats are bored.
+
+KORETAS: So am I. It's restful.
+```
+
+### Chrysothemis's house (`MAP_DELPHOI_KITHARODE_HOUSE`)
+
+- **Who:** Chrysothemis, a kitharode (a singer to the kithara) who has trained for the Pythian games for eleven years and has never once been allowed to compete, because the games are only every four years and he keeps getting colds.
+- **The room:** a practice room with a raised wooden platform at one end facing an audience of one stool, kitharas on pegs in a row from small to enormous, a winner's laurel crown on a nail (his teacher's), and the five movements of the Pythian nome painted round the walls as five little scenes of Apollo and the serpent.
+- **Events:** a minigame (the nome quiz), and a rematch after the Sun Laurel and again after the climax.
+```text
+CHRYSOTHEMIS: The Pythian nome! Five movements!
+
+CHRYSOTHEMIS: Apollo kills the Python, in music.
+
+CHRYSOTHEMIS: First, he looks the ground over. Then he challenges it.
+
+CHRYSOTHEMIS: Then the fight. Then the victory. Then the serpent's last hiss.
+
+CHRYSOTHEMIS: I'll play you four. You tell me what comes next. Yes?
+```
+?? YES/NO. YES: three rounds. Each round, he names a movement and the player picks the next from three choices:
+```text
+CHRYSOTHEMIS: He looks the ground over. Then?
+
+?? THE CHALLENGE / THE HISS / THE VICTORY
+```
+```text
+CHRYSOTHEMIS: The fight. Then?
+
+?? THE VICTORY / THE CHALLENGE / A NAP
+```
+```text
+CHRYSOTHEMIS: The victory. And last?
+
+?? THE SERPENT'S HISS / AN ENCORE / THE CHALLENGE
+```
+Right answers: THE CHALLENGE, THE VICTORY, THE SERPENT'S HISS. A wrong answer ends the round kindly ("No, no. Listen again.") and the quiz can be retried at once.
+```text
+> all three right:
+CHRYSOTHEMIS: Yes! You've an ear. A whole ear. Most people have half.
+
+CHRYSOTHEMIS: Take this. My teacher gave it me. I've never been able to use it.
+
+{PLAYER} received TM Hyper Voice!
+```
+[`FLAG_ICHOR_KITHARODE_QUIZ`.] His rematch is Part 3.
+After the climax:
+```text
+CHRYSOTHEMIS: They're holding the games again! Nobody knows who'll win!
+
+CHRYSOTHEMIS: Nobody knows! For the first time ever! I might win!
+
+CHRYSOTHEMIS: I won't. But I might.
+```
+
+### The treasury of Astyra (`MAP_DELPHOI_ASTYRAN_TREASURY`)
+
+- **Who:** Aristion, the treasury's keeper, an old Astyran who polishes the spoils of the city's old war and tells everyone about it. Alethea, from III-6C until III-8.
+- **The room:** a small Doric treasury of white marble, one room deep: captured shields and helmets on stands, a bronze prow on a plinth, and every wall carved with inscriptions. Two of the inscriptions are hymns to Apollo, with the musical notes carved over the words in little letters.
+- **Events:** an ostrakon (SYSTEMS §5's ostraka; one of the 30); Alethea's lines.
+```text
+ARISTION: The treasury of Astyra! Built from the spoils of the old war.
+
+ARISTION: Look at it.
+
+ARISTION: I polish every shield every day. Some days twice.
+
+ARISTION: The neighbors complained, once. Noise. The polishing.
+
+ARISTION: They tried to have me exiled for it. Look.
+```
+[He takes a pot-shard from the shelf.]
+```text
+ARISTION: “ARISTION. Polishes too loud.” Somebody cared enough to write it.
+
+ARISTION: I keep it. It's the proudest thing I own.
+
+ARISTION: Take it. You look like a collector.
+
+{PLAYER} received an ostrakon!
+```
+[An ostrakon flag in `FLAG_ICHOR_OSTRAKA_START`'s range; the director numbers it.]
+**Alethea**, copying an inscription with a stylus, from III-6C until III-8:
+```text
+ALETHEA: Every city's treasury says the same thing. “We won. The god agreed.”
+
+ALETHEA: Truthfully, it's lovely. Everyone's so sure.
+
+ALETHEA: Look. This one's a hymn, with the notes carved over the words.
+
+ALETHEA: Somebody wrote down exactly how it goes. So nobody could get it wrong.
+```
+Talking again:
+```text
+ALETHEA: I keep wanting to send him the tablet. Phaedon. Elpis's real words.
+
+ALETHEA: He won't read it. You saw him. Some people won't open a letter.
+
+ALETHEA: …Bring it with you. Tonight. Just in case he changes.
+```
+After the climax:
+```text
+ARISTION: Someone sang the hymn on the wall. The one with the notes. Out loud!
+
+ARISTION: A girl with a satchel. Badly. In tune, but badly. I wept.
+```
+
+### The treasury of the Siphnians (`MAP_DELPHOI_SIPHNIAN_TREASURY`)
+
+- **Who:** Eupolis, the keeper, from Siphnos, an island that used to be rich.
+- **The room:** the richest building on the Sacred Way: two marble maidens hold up the porch on their heads instead of columns, and inside a frieze runs round all four walls, gods against Giants, painted bright. Gold leaf has been scraped off in places. A heavy chest with a padlock, and on it a gilded egg-shaped rock.
+- **Event:** the tithe. Pay the god the tenth the Siphnians never did: give Eupolis a Nugget, and get Choice Specs. `FLAG_ICHOR_SIPHNIAN_TITHE`.
+```text
+EUPOLIS: Siphnos had gold mines. The god said: a tenth to me, every year.
+
+EUPOLIS: One year we sent him a gilded rock instead. That one. On the chest.
+
+EUPOLIS: The sea came into the mines that winter. All of them. Gone.
+
+EUPOLIS: So now I keep a treasury with nothing in it, and I apologize.
+
+EUPOLIS: Would you pay our tenth? One Nugget. I'd give you something back.
+```
+?? Give Eupolis a Nugget? YES/NO
+```text
+> YES:
+EUPOLIS: Into the chest. There. The god has his tenth. Two hundred years late.
+
+EUPOLIS: Take these. Lenses from our last good year.
+
+EUPOLIS: For seeing clearly.
+
+{PLAYER} received Choice Specs!
+
+> NO:
+EUPOLIS: No. Of course. Nobody likes paying for someone else's rock.
+```
+The frieze (object):
+```text
+Gods fighting Giants, all the way round.
+
+A brother and sister with bows, side by side.
+
+One Giant has an arrow in his left eye. He's still coming.
+```
+After III-8 (the player has met Gigas Ephialtes):
+```text
+The Giant with the arrow in his eye. He looks like someone you've met.
+```
+
+### The Lesche of the Knidians (`MAP_DELPHOI_LESCHE`)
+
+- **Who:** Polemon, a guide who has written down every statue, plaque and pebble in the sanctuary and would like to tell you about all of them.
+- **The room:** a long clubhouse hall with stone benches along both walls and two enormous wall paintings above them by a painter long dead: on the left, a city falling; on the right, the Underworld. Polemon's guidebook, unbelievably thick, sits on a lectern.
+- **Events:** lore; Spell Tag; in the post-game, the lead to the Underworld (`UNDERWORLD.md`'s).
+```text
+POLEMON: The Lesche! Where the men of Knidos came to talk. Look at the walls.
+
+POLEMON: Left: a city falling. Right: the land of the dead. Cheerful, isn't it?
+
+POLEMON: I've described them both. Every figure. It took me nine years.
+
+POLEMON: Would you like to hear it? It's only four hours.
+```
+?? YES/NO
+```text
+> YES:
+POLEMON: Wonderful! Here, the ferryman. Here, a man plaiting a rope.
+
+POLEMON: Behind him, a donkey eating the rope as fast as he plaits it.
+
+POLEMON: Here, a man pushing a stone uphill. It always rolls back. Always.
+
+POLEMON: Here, girls carrying water in broken jars. Forever. They never fill.
+
+POLEMON: …You see the theme. The dead do one thing, over and over.
+
+POLEMON: Nothing ever ends down there. Nothing ever finishes, either.
+
+POLEMON: Take this. It fell off the painting. Don't tell the Knidians.
+
+{PLAYER} received a Spell Tag!
+
+> NO:
+POLEMON: Everyone says no. Then they come back. The dead are very interesting.
+```
+[`FLAG_ICHOR_GOT_POLEMON_SPELL_TAG`.] The rope-plaiter (object):
+```text
+A man plaits a rope. Behind him a donkey eats the other end.
+
+The rope is exactly as long as it's always been.
+```
+After the climax:
+```text
+POLEMON: I went down to the Loom. With a lamp. Everyone's been.
+
+POLEMON: I've started describing it. Every thread. It'll take me a lifetime.
+
+POLEMON: Isn't that grand? A lifetime. Nobody knows how long that is anymore.
+```
+In the post-game (after `VAR_ICHOR_ACT3` = 26), the lead:
+```text
+POLEMON: The painter put a door in the Underworld picture. Look. Bottom corner.
+
+POLEMON: There's a real one. Cape Tainaron, at the tip of Lakonia. People go in.
+
+POLEMON: They mostly don't come out. I'd like a full description, if you go.
+```
+
+### The Temple of Apollo (`MAP_DELPHOI_TEMPLE_OF_APOLLO`)
+
+The rite's rooms are in Part 5. Its people: Eudoros, the temple boy (Part 1); the three acolytes (Part 3); the Pythia.
+
+After the climax and before L-5, the Pythia sits on the tripod laughing quietly to herself, and to the player:
+```text
+PYTHIA: Ha.
+
+PYTHIA: …Ha. I'm sorry. I can't stop. Everything's so dark.
+
+PYTHIA: Come back when I've stopped. There'll be something for you.
+```
+("Know thyself" opens at L-5, the League writer's beat.)
+
+## The Korykian path (the lower half of `MAP_ROUTE29_PARNASSOS`) and cave (`MAP_KORYKIAN_CAVE`)
+
+*Assembly note:* the revised AETHOS_MAP puts this path on Route 29, so the League road part's `MAP_ROUTE29_PARNASSOS` absorbs it as its lower half, open before the climax; everything below is that half's content.
+
+**The path. Layout.** About 30×40, three screens, climbing north-west from Delphoi's north-west edge onto the high meadows of Parnassos: switchbacks through pine, then an open upland of thyme and rock with goats on it, then a limestone face with a dark mouth. Optional. **Beats:** a sign ("THE KORYKIAN CAVE. Pan's and the nymphs'. Bring a gift."); a calm stretch of pines; **forced grass band 1** (3 deep) where the path crosses a meadow between two rock walls; GOATHERD Aipolos, easy, in plain view; **Pan's shrine** (a set piece: a rough altar with a set of pan-pipes carved on it, and offerings of knucklebones; praying here follows SYSTEMS §3 for Pan); MOUNTAINEER Oreias, mandatory, on the narrow ledge path below the cave (sight 4); **forced grass band 2** (3 deep) right behind him; the cave mouth. **Ledges** drop back toward Delphoi. **Every dead end pays:** a side spur up a scree slope to a lookout over the whole Gulf, with a visible Ultra Ball and the best view in the game. **Hidden:** a Rare Candy at the lookout's very tip.
+
+**The cave. Layout.** About 28×24. A huge chamber, the first one lit gray-green from the mouth, its floor heaped with stalagmites; then a lower, darker hall (Hecate's Torch makes it readable, SYSTEMS §2; a lit brazier at its entrance is the landmark); then **the niche of the knucklebones** at the back, where thousands of offered knucklebones lie heaped in a hollow of the rock, and a coil-shaped hollow above them, **the coiled niche**, where a Pelython sleeps on some days (Part 4). PILGRIM Korykia is in the lower hall (optional, facing a wall of offerings). **The payoff:** a Lucky Egg on the knucklebones heap, the cave's dead end. Then back out the way you came.
+
+| NPC | Where | Role |
+|---|---|---|
+| Aipolos, Oreias | the path | trainers |
+| Korykia | the cave | trainer (optional) |
+| Goats (Kerazap objects) | the meadow | flavor |
+
+**Pan's shrine** (object):
+```text
+A rough altar with pan-pipes cut into its face.
+
+Heaps of knucklebones lie on it as offerings.
+
+People threw them here for Pan and the nymphs. To ask them for luck.
+
+Or to see who'd win.
+```
+**The knucklebones heap** (object, deep in the cave):
+```text
+Thousands of knucklebones. More than you could count in a week.
+
+Every one was thrown for luck. Some of them must have worked.
+```
+```text
+Under the top of the heap, something rounder than a knucklebone.
+
+{PLAYER} found a Lucky Egg!
+```
+[`FLAG_ICHOR_ITEM_KORYKIAN_LUCKY_EGG`.]
+
+## The Omphalos stair and the Loom
+
+No NPCs but the scene's (Part 1). The Loom, after the climax, belongs to the post-game: the League writer and the post-game epics decide whether it can be visited.
+
+## The frozen world
+
+In the Frozen Hour no one can speak but the Fates, Phaedon, Hyperion and, at the end, Kleon. A "roster" here is what each frozen person or thing says when the player looks at it: a narrator's box or two, in STORY's tone. Every box marked *(added)* is this file's; the rest are §7.7's tables, reproduced in P1.
+
+**The generic rule.** Any object on any map that has no frozen-specific line answers with one of these, chosen by the object's local id modulo 3 (`Ichor_EventScript_FrozenGeneric`, P5):
+- "They don't move. They don't blink."
+- "Frozen mid-step, one foot off the ground."
+- "Caught halfway through a word."
+
+Trainers' sight is off (every object is frozen), and talking to a trainer gives the generic line, not a battle. A Pokémon object answers: "It's frozen with its ears up, listening for something."
+
+### The sanctuaries and Astyra: set dressing
+
+Each frozen map needs its people placed or posed for the night of the Omphalos. Objects marked **frozen-only** use `FLAG_ICHOR_HIDE_FROZEN_ONLY` as their hide flag, so they appear only in the Frozen Hour. Poses use `MOVEMENT_TYPE_ICHOR_FROZEN_STEP` (E4) unless noted.
+
+| Map | Set dressing |
+|---|---|
+| `MAP_DELPHOI_OMPHALOS_STAIR` | Lamps drawn as still gray flames (metatiles). No objects. |
+| `MAP_DELPHOI`, the court (frozen-only) | Mom at the top of the stair, hands clasped (the "waiting" frame); Alethea beside her with her lamp raised; Rhea with her arms spread in front of Kleon (a new frame, P10); Kleon mid-swing at the gate (a new frame); the Archon mid-stride in the gateway, two guards behind him; four Titanborn and two Gigas mid-charge across the court, E4; the Pythia halfway down the temple steps; a melissa at the hives with a bee object hanging by her veil; two birds in flight over the court (static flying-pose objects); the smoke from the burned net as a still gray column of metatiles. The Kastalian falls drawn as still water: the falls' animated metatiles are stopped by E1. |
+| `MAP_KALDERA_TELCHINES_FORGE` *(Act II's id)* | Talos at the anvil, hammer raised (a new frame); 6–8 spark sprites hanging in the air above the anvil, as one static field-effect object; two Telchines at the bellows; the Cutter on the anvil (frozen-only, unfrozen object). |
+| `MAP_ARKADIA_POOL_OF_MNEMOSYNE` *(Act II's id)* | The pool's surface as the one animated metatile E1 exempts; an owl in flight over the water (static); the Measurer at the edge (frozen-only, unfrozen object). |
+| `MAP_ASTYRA` *(Act II's id)* | The herald mid-shout on the Agora steps; Lysimachos over his basket of ostraka; the Kronist on his cart with his mouth open; townsfolk mid-step across the square; three pigeons in flight; the shadowless figure (frozen-only, unfrozen, no shadow, on a rooftop edge). |
+| `MAP_ASTYRA_ARCHONS_STOA` *(Act II's id)* | Keeper Lykophron at his desk, stylus raised (a new frame: the ink-dark hand up); the wax tablet as an object on the desk. |
+| `MAP_ASTYRA_PHAEDONS_HOUSE` *(Act II's id)* | Elpis in bed, mouth open on a note; Daphne in the chair, book open; the music box on the shelf (unfrozen, ticking); Phaedon sitting on the floor by the bed (frozen-only, unfrozen object, a new sitting frame); Ophidrop asleep on the blanket. |
+| `MAP_ELAIA_VILLAGE` *(slice)* | Halia under her canopy, spindle mid-turn; the kid and the Wooloo mid-chew on a garland; townsfolk mid-step; the Spinner among the old olive's roots (frozen-only, unfrozen object); the gold thread as a separate palette slot in the olive's root metatiles. |
+| `MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F` *(slice)* | The cloak folded on the loom's stool, with its note (an object, frozen-only); the honey shelf's clean ring (a metatile swap); the hearth cold (its fire metatile swapped to ash). Mom is not here: she is at Delphoi. |
+
+### Other places the Wings can reach
+
+The player may fly anywhere. These maps get a few lines each, so the frozen world rewards a look without asking for a tour. Everything not listed takes the generic rule.
+
+**Akti** (`MAP_AKTI_TOWN`, `MAP_AKTI_TOWN_TEMPLE_OF_HESTIA`, *slice*)
+
+| Interact with | Text |
+|---|---|
+| The wave at the quay (metatiles, a curled crest) *(added)* | "A wave stands curled over the quay, clear as glass." / "There's a fish inside it, looking out." |
+| Ione, at the hearth *(added)* | "Ione is bent over the hearth with a log in her hands." / "The flame is a still gold shape, like a leaf." |
+| The Hearth's fire *(added)* | "It doesn't flicker. It doesn't warm you. It's the first time it hasn't." |
+| The Asclepeion counter *(added)* | "The healer's mid-smile. Her Panacoil is coiled on the counter, still as a bracelet." |
+
+**Kronion Hill** (`MAP_KALLISTE_ROUTE1_KRONION_HILL`, *slice*)
+
+| Interact with | Text |
+|---|---|
+| The old altar *(added)* | "For the first time, the hill isn't humming." |
+
+**Emporion** (*Phase 2's maps*)
+
+| Interact with | Text |
+|---|---|
+| Kerykos, on the temple steps, mid-proclamation *(added)* | "Kerykos, one arm flung out, mid-proclamation." / "For once, he's stopped talking." |
+| A Harpeck over a fish stall *(added)* | "It has a sardine in its beak and its wings spread. It's been about to get away for an hour." |
+
+**Eleusa** (*Phase 2's maps*)
+
+| Interact with | Text |
+|---|---|
+| Chloe, by the one lamp in the Telesterion *(added)* | "Chloe sits by her lamp. Its flame doesn't move." / "She doesn't look surprised. She never does." |
+
+**Thyrsa** (*Act II's maps*)
+
+| Interact with | Text |
+|---|---|
+| Thespis, in the theater *(added)* | "Thespis is mid-bow to an empty theater, a mask in each hand." |
+| An actor mid-line *(added)* | "His mouth is open on the last word of a tragedy. Nobody will ever hear the satyr play." |
+
+**Arkadia** (*Act II's maps*)
+
+| Interact with | Text |
+|---|---|
+| Kallisto, on her moonlit rock *(added)* | "Kallisto, with her bow drawn. The arrow's point is gray." / "Whatever she was aiming at is safe." |
+
+**Kaldera** (*Act II's maps*)
+
+| Interact with | Text |
+|---|---|
+| The caldera's smoke *(added)* | "The volcano's smoke stands up out of the crater like a column in a temple." |
+| A smith in the forge town *(added)* | "Sweat on his forehead, not running." |
+
+**Kythera** (Act III's maps)
+
+| Interact with | Text |
+|---|---|
+| The youth at the Spring of Kallirhoe *(added)* | "He's kneeling over the water, looking at himself." / "He's the only one who looks the same as before." |
+| Galatea, among her statues *(added)* | "Galatea stands in her gallery." / "For once, you can't tell which one she is." |
+| The foam on the beach *(added)* | "Foam, stopped mid-wash. It looks like lace." |
+
+**Knossa** (Act III's maps)
+
+| Interact with | Text |
+|---|---|
+| Asterion, in the Central Court *(added)* | "Asterion stands with one hoof raised. Ariadne's hand is on his neck." |
+| Ariadne *(added)* | "Her eyes are closed. She was humming." |
+| Daedalus, in the workshop *(added)* | "Daedalus, bent over a bench, a tiny gear in his tweezers." |
+| The workshop's music box *(added)* | "The first music box. It's silent. Its comb has stopped between two notes." / "Somewhere, its better twin is still going." |
+
+**Lakonia** (Act III's maps)
+
+| Interact with | Text |
+|---|---|
+| Gylippos, in the agoge yard with a lamp *(added)* | "Gylippos, counting the bunks by lamplight. His lips are on a number." |
+| Rhea's house *(added)* | "The kitchen's empty. The helmet is still on the table." |
+
+## Astyra, the morning after (`MAP_ASTYRA`, Act II's id)
+
+Act II's Astyra rosters stand. From `VAR_ICHOR_ACT3` 19 to 21 these six join the Agora; after the trial they keep their after-lines until the credits. Every other Astyran on Act II's roster gains one line, written by the Act II team to the theme below: nobody knows what comes next, and they keep saying so, some frightened and some delighted.
+
+| NPC | Where | Role |
+|---|---|---|
+| Eutychos, the grain-dealer | his stall | flavor; votes |
+| Amphilytos, the seer | an empty booth | flavor; votes |
+| The Kronist preacher (Act II's) | his cart | flavor; votes |
+| A Titanborn, helmet in her hands | the Stoa's steps | flavor; votes |
+| A mother and her son | the fountain | flavor; votes |
+| Lysimachos (SYSTEMS §5) | his bench | the ostraka collector; votes |
+| Thrasyllos, the epistates | the Stoa's lectern | the trial |
+| Kerykos (Phase 2) | the bema | the decree |
+
+**Eutychos**
+```text
+EUTYCHOS: Grain! Buy grain! Nobody knows if the harvest comes in!
+
+EUTYCHOS: What do you mean, nobody ever knew? They knew last year. I asked.
+
+> after the trial:
+EUTYCHOS: I've opened the sacks. Prices back down. Half price, for a day.
+
+EUTYCHOS: Don't tell the other dealers. They'll say I've gone soft. I have.
+```
+**Amphilytos**
+```text
+AMPHILYTOS: Forty years I've told people their futures.
+
+AMPHILYTOS: A man asked me about rain. I looked up and said, probably.
+
+AMPHILYTOS: He thanked me. I've never been thanked before.
+
+> after the trial:
+AMPHILYTOS: I'm going to read the weather. Clouds, birds, the wind.
+
+AMPHILYTOS: I'll be wrong a lot. That's what everyone says it's for.
+```
+**The Kronist preacher**
+```text
+PREACHER: I stood here with my mouth open for an hour. They tell me. I felt it.
+
+PREACHER: Stone. Inside and out. No feast. No golden anything.
+
+PREACHER: I'm going home to eat something hot and not explain it to anyone.
+```
+**The Titanborn at the steps**
+```text
+TITANBORN: Where do I give myself up? …Is there a line? There's a line.
+
+TITANBORN: I joined for the bread. Then the helmet. Then I couldn't stop.
+
+> after the trial:
+TITANBORN: They said go home. Just like that. I've been standing here an hour.
+
+TITANBORN: I think I'm working up to it.
+```
+**The mother and her son**
+```text
+MOTHER: He asked me how long he'll live. I said I don't know.
+
+MOTHER: He said “good” and went back to his game. He's six.
+
+BOY: I'm going to live till I'm a hundred. Or till Tuesday. Nobody knows!
+```
+**Lysimachos**
+```text
+LYSIMACHOS: My boy's up a mountain with a box. I've a basket of his name on pots.
+
+LYSIMACHOS: When he comes down, I'll have a few more. He'll be pleased.
+
+LYSIMACHOS: He's always pleased when someone says it to his face.
+```
+His ostraka service is SYSTEMS §5's, unchanged.
+
+**Thrasyllos**, after the trial, at a herb stall at the Agora's edge:
+```text
+THRASYLLOS: Epistates for one day. Chosen by lot. Back to the thyme now.
+
+THRASYLLOS: Unanimous! Or nearly. My wife won't believe me.
+```
+
+## The Assembly (`MAP_ASTYRA`, the Stoa's steps), beats L-2 and L-3
+
+| Who | Role in the beat |
+|---|---|
+| Thrasyllos | presides |
+| Lykophron (Iapetos) | the accused; Act II's sprite, bare-faced, ink-dark right hand |
+| Alethea | prosecutes |
+| Kerykos | herald; votes |
+| The six citizens | vote |
+| Phaedon, Hyperion, Rhea | the three sentenced, brought up by hoplites |
+| Ione, Talos, Gylippos | ask for them |
+| Petros, Amathos | lead Hyperion |
+| Daphne, Kleon | in the crowd |
+| Two hoplites | guard Lykophron, then Phaedon |
+
+That is 19 objects at the peak, over the 16-object limit (STORY §6). The trial and the sentences are two object sets: the six citizens and Kerykos are hidden when L-3 begins (`FLAG_ICHOR_HIDE_TRIAL_CROWD`), and the three sentenced, Ione, Talos, Gylippos, Petros and Amathos appear (`FLAG_ICHOR_HIDE_SENTENCE_CROWD` cleared). Lykophron and his hoplites leave at the end of L-2.
+
+## Akti, after the sentences (slice maps)
+
+| Who | Where | What |
+|---|---|---|
+| Phaedon | the Asclepeion's counter | every heal in Akti; his second line |
+| Elpis | a stool on the quay | gift: a Shoal Shell |
+| Ione | the hearth, Temple of Hestia | her line |
+| The sleeping guard | the Asclepeion's bench | "He's asleep. Ione fed him." |
+
+The slice's Akti healer stays beside Phaedon:
+```text
+HEALER: He's teaching me the snake. Panacoil. Mine never listened to me.
+
+HEALER: It listens to him. He says it's because he listens to it.
+```
+
+## Kaldera, after the sentences (Act II's forge)
+
+Hyperion at the bellows, Petros and Amathos at the fire, Talos at the anvil: lines in beat L-3. Talking to the anvil after:
+```text
+The iron on the anvil is still glowing. Someone worked it by ear.
+```
+
+## Lakonia, after the sentences (the Lakonia writer's maps)
+
+| Who | Where | What |
+|---|---|---|
+| A cadet, twelve, with a spear | Rhea's door | her guard |
+| Rhea | her hearth | her line; after the credits, the Lakonia writer's post-game lines |
+
+## Kronion Hill (slice)
+
+Amaryllis and her flock, on the summit: lines in beat L-4.
+
+## The Akropolis (Act II's)
+
+Act II's guard captain, by the stump: lines in beat L-4.
+
+## The Gulf ferry (Act II's deck map), beat L-5A
+
+| Who | Where | What |
+|---|---|---|
+| The youth | tied to the mast | Dionysus, E5 |
+| The mate | amidships | the test |
+| Two sailors | either side of the mast | flavor (below) |
+| The helmsman | the stern | the one who said no; gift: 3 Wine |
+
+**The two sailors**
+```text
+SAILOR: Gold rings! Ten of them! I counted. I counted twice.
+
+SAILOR: He smells like a vineyard. Is that normal for princes?
+```
+
+## Delphoi, after the climax (the Delphoi writer's maps)
+
+| Who | Where | What |
+|---|---|---|
+| Phemonoe, the Pythia | the adyton | she laughs; "Know thyself"; gift: a Golden Pythian Laurel |
+| A melissa | the House of the Melissai | Mom's note |
+| Two melissai | the adyton's door | flavor (below) |
+
+**The melissai at the adyton's door**
+```text
+MELISSA: She got off the tripod. Off it! In thirty years I've never seen her feet.
+
+MELISSA: She has very nice feet. Who knew.
+```
+
+## Route 29, Parnassos (`MAP_ROUTE29_PARNASSOS`)
+
+**The lower half is the Delphoi writer's Korykian path, absorbed as written:** its sign, GOATHERD Aipolos, Pan's shrine, MOUNTAINEER Oreias, the goats, the lookout spur, and the side entrance to `MAP_KORYKIAN_CAVE` (the Delphoi part, Part 2 and Part 3). The upper half, above the palisade, is this part's.
+
+| NPC | Where | Role |
+|---|---|---|
+| Mnasippos, captain of the Archon's guard | the palisade on the saddle | the climax gate (beat L-5D) |
+| Two hoplites | the palisade | flavor |
+| Old Pyrrhis, a shepherdess | her summer hut on the saddle | the household (below) |
+| Sheep (Wooloo objects) | the saddle's meadow | flavor |
+
+**The hoplites at the palisade**
+```text
+HOPLITE: Every challenger in Aethos is coming. That's what the captain says.
+
+HOPLITE: So far it's been you and a goat.
+```
+
+### Pyrrhis's summer hut (`MAP_ROUTE29_SHEPHERDS_HUT`)
+
+- **Who:** Pyrrhis, an old shepherdess who brings her flock up to the saddle every summer, as her family has since the flood, she says.
+- **The room:** a low drystone hut half sunk in the slope, roofed with turf, one room with a sleeping shelf of fleeces, a cheese press, a milk pail, and on a ledge by the door a row of smooth river stones set out like a family, largest to smallest.
+- **Event:** lore that leads to a reward. She tells the flood story; show her a Rock-type Pokémon, "a stone that stood up", and she gives you the stone that wouldn't. `FLAG_ICHOR_GOT_EVERSTONE_PYRRHIS`.
+```text
+PYRRHIS: In, in. Mind the cheese. It's younger than you, but not by much.
+
+PYRRHIS: My family's come up here since the flood. The big one. The first.
+
+PYRRHIS: When the water went down, two were left. Up here. On this saddle.
+
+PYRRHIS: A voice said throw your mother's bones behind you. They wept at that.
+
+PYRRHIS: Then they understood. Earth's the mother. Stones are her bones.
+
+PYRRHIS: So they threw stones over their shoulders. And the stones stood up.
+
+PYRRHIS: People. Us. That's why we're all a bit stubborn.
+
+PYRRHIS: Have you got a stone that stood up? A rock one? Let me see it.
+
+> with a Rock-type in the party:
+PYRRHIS: There. See? A stone that decided to get up. That's all any of us are.
+
+PYRRHIS: Here. This one never did. It's sat on my ledge sixty years.
+
+PYRRHIS: It never changes. Hold it, and nothing that holds it changes either.
+
+PYRRHIS: Like the old days. Take it. I've no use for it now.
+
+{PLAYER} received an Everstone!
+
+> after:
+PYRRHIS: The flock's fine. The hill's fine. The world started again, they say.
+
+PYRRHIS: I slept through it. At my age you sleep through most things.
+```
+
+## Thermopylai (`MAP_THERMOPYLAI`)
+
+**Layout.** About 44×20, three screens wide and two tall: a road on a shelf between the cliffs of Kallidromos (south) and the salt marsh of the Malian Gulf (north). It runs from the West Gate, where Route 29 comes down, to the East Gate onto Route 30. Little Anthela sits by the West Gate: the inn, the council-house of the Amphiktyons and a shrine of Demeter. The hot springs steam below the cliff at the Middle Gate, where the old Phokian wall still crosses the narrows with a one-tile gap. The garrison house and the bathhouse stand by the springs. The stone lion on its hill is above them. The goatherd's house sits at the cliff's foot by the East Gate, with a gate in its yard onto the Anopaia path, which climbs the cliffs and loops round above the pass. **Identity:** the narrowest road in Aethos, steaming, held by old men in red cloaks who don't know how it ends and are enjoying that very much. It has no Asclepeion (the springs heal), so it isn't a fly target; the great herm by the springs (`FLAG_ICHOR_HERM_THERMOPYLAI`) is the Fly point.
+
+- **First things first:** the springs are in view from both gates, and a sign at each says "HOT SPRINGS. Free. Mind the eggs."
+- **Exits:** the West Gate (Route 29) and the East Gate (Route 30), each a gap in an old wall with a sign.
+- **Hidden items:** in the reeds at the marsh's edge north of the road, and behind the stone lion.
+
+| NPC | Where | Role |
+|---|---|---|
+| Maron, the garrison's captain | the West Gate, then the garrison house | arrival (L-6B); the household |
+| VETERANs Leon, Ariston, Lachares | the road, the wall's gap, the wall's top | trainers (Part 3) |
+| Gorgo, the bath-keeper | the bathhouse | the household |
+| Eurydemos, a goatherd | his house at the East Gate | the household |
+| Pylagoras, clerk of the Amphiktyons | the council-house, Anthela | the household |
+| Megistias, the innkeeper | the inn, Anthela | the household |
+| A Lakonian veteran asleep on the wall | the Phokian wall | flavor (below) |
+| A pilgrim from the north | by the springs | flavor (below) |
+
+**The sleeping veteran**
+```text
+VETERAN: Zzz… Hold the pass… Zzz…
+
+VETERAN: …I'm holding it. I'm holding it lying down. It's allowed.
+```
+**The pilgrim from the north**
+```text
+PILGRIM: I'm walking south to Delphoi. To ask the Pythia how my life goes.
+
+PILGRIM: What do you mean, she laughs? At what? …At everyone?
+
+PILGRIM: Huh. I might go anyway. I've never heard a Pythia laugh.
+```
+
+| House | Who | Event | Opens |
+|---|---|---|---|
+| The bathhouse | Gorgo, the bath-keeper | show her a Fire-type: a Heat Rock | the first visit |
+| The garrison | Maron, the captain | beat the three veterans: a Rocky Helmet | the first visit |
+| The goatherd's house | Eurydemos | the lost goat on the Anopaia path: a Thunder Stone, and the path | the first visit |
+| The council-house | Pylagoras, the Amphiktyons' clerk | an in-game trade: your Lebetron for his Enigmaw | the first visit |
+| The inn | Megistias, the innkeeper | knucklebones (SYSTEMS §9) | the first visit |
+
+### The bathhouse (`MAP_THERMOPYLAI_BATHHOUSE`)
+
+- **Who:** Gorgo, the bath-keeper, who has run the springs' bathhouse for thirty years and knows everyone's knees.
+- **The room:** a vaulted stone room built over a hot pool, steam rising off the water, stone benches round the edge with oil flasks and bronze strigils hung above them, a yellow-stained sulfur channel running across the floor to a grate, and a stack of folded linen by the door.
+- **Event:** a "show me" request. Show her a Fire-type and she gives you a Heat Rock from the spring's mouth. `FLAG_ICHOR_GOT_HEAT_ROCK`.
+```text
+GORGO: In or out, but shut the door. The steam's paid for.
+
+GORGO: Athena made these springs, they say. For Herakles, after a hard day.
+
+GORGO: He had a lot of hard days. So the springs never run dry.
+
+GORGO: Have you got a Pokémon that likes it hot? A fire one? Let me see.
+
+> with a Fire-type in the party:
+GORGO: There. Look at it. It wants to get in. They always do.
+
+GORGO: Here. A stone from the spring's mouth. It stays warm for a week.
+
+GORGO: Give it to your fire one. Sunshine lasts longer when it holds it.
+
+{PLAYER} received a Heat Rock!
+
+> after:
+GORGO: The old men soak every evening. They say it's for their wounds.
+
+GORGO: It's for the gossip.
+```
+
+### The garrison (`MAP_THERMOPYLAI_GARRISON`)
+
+- **Who:** Maron, captain of the Lakonian veterans sent to hold the pass, and his younger brother Prokles, who cooks.
+- **The room:** a long low barracks along the cliff, sleeping mats in a straight row with a red cloak folded at the foot of each, bronze shields stacked by the door, spears in a rack, a table with a pot of black broth and wooden bowls, and on the wall a painted list of three hundred names, faded almost to nothing.
+- **Event:** beat the three VETERANs outside (Leon, Ariston and Lachares) and Maron gives you a Rocky Helmet. `FLAG_ICHOR_GOT_ROCKY_HELMET`.
+```text
+MARON: Sit. My brother made the broth. Don't say anything about the broth.
+
+PROKLES: It's very good broth.
+
+MARON: It's very Lakonian broth.
+
+MARON: The names on the wall. The three hundred. My great-grandfather's there.
+
+MARON: Him and his brother. Two brothers, like us. They fought best.
+
+MARON: Herodotus says so. Look it up. Somebody wrote it down, so it's true.
+
+> before the three veterans are beaten:
+MARON: My lads want a fight with every challenger. Beat all three.
+
+MARON: Then you've held the pass. Come and tell me.
+
+> after all three:
+MARON: All three? Then you've held the hot gates. Not many have.
+
+MARON: Here. A helmet. We've spares. Someone always comes back without his.
+
+MARON: Whoever hits you hits bronze. Lakonian bronze. They'll feel it.
+
+{PLAYER} received a Rocky Helmet!
+
+> after:
+MARON: My great-grandfather knew how it'd end, and stayed. I don't, and I'm staying.
+
+MARON: I think mine's the braver. Don't tell him.
+```
+
+### The goatherd's house (`MAP_THERMOPYLAI_GOATHERDS_HOUSE`)
+
+- **Who:** Eurydemos, a goatherd who keeps his goats on the cliffs above the pass. His family showed an army the mountain path once, long ago, and the pass has never let them forget it.
+- **The room:** a crooked hut built into the cliff's foot, with a goat pen inside the door, a kid asleep in a basket, cheeses on every shelf, a shepherd's crook, and one whole wall scratched over in charcoal with every path on the mountain.
+- **Event:** a small quest. His goat, a Kerazap, has wandered up the Anopaia path. He opens the path for you; find the goat at the path's top and it trots home ahead of you, and he gives you a Thunder Stone. The path stays open, a loop of cliff paths with items. `FLAG_ICHOR_ANOPAIA_OPEN`, `FLAG_ICHOR_FOUND_EURYDEMOS_GOAT`.
+```text
+EURYDEMOS: Don't stand in the door like that. The kid thinks you're a wolf.
+
+EURYDEMOS: You know who I am? Everyone at the pass knows. My family, anyway.
+
+EURYDEMOS: Long ago one of us showed an army the path round the back.
+
+EURYDEMOS: Over the cliffs. The Anopaia. The three hundred died for it.
+
+EURYDEMOS: We've never shown anyone since. Not once. That's the rule.
+
+EURYDEMOS: …But my goat's up there. The old one. Since yesterday.
+
+EURYDEMOS: I can't climb it any more. My knees. You could.
+
+EURYDEMOS: For good, this time. For a goat. Will you?
+```
+?? YES/NO
+```text
+> NO:
+EURYDEMOS: No. Quite right. Nobody should use that path.
+
+EURYDEMOS: …The goat's still up there, though.
+
+> YES:
+EURYDEMOS: There's the gate, in the yard. Go up. Bring her down.
+
+EURYDEMOS: She'll come if you say her name. It's Aix. It means goat. I was tired.
+```
+[Set `FLAG_ICHOR_ANOPAIA_OPEN`: the yard gate opens. At the path's top, a Kerazap object: "AIX: Baa-zzt." / "The goat looks at you, then trots off down the path ahead of you." Hide it there, show it in the pen. Back at the house:]
+```text
+EURYDEMOS: Aix! There you are, you old fool. Look at her. Not even sorry.
+
+EURYDEMOS: Thank you. My family used that path for something good. First time.
+
+EURYDEMOS: Here. A stone that crackles. Old Aix would've eaten it. Keep it.
+
+{PLAYER} received a Thunder Stone!
+
+> after:
+EURYDEMOS: Use the path whenever you like. I've decided. It's my path.
+```
+
+### The council-house of the Amphiktyons (`MAP_THERMOPYLAI_COUNCIL_HOUSE`)
+
+- **Who:** Pylagoras, clerk of the Amphiktyons, the league of twelve peoples who meet here at Anthela in spring and at Delphoi in autumn, and look after the shrine.
+- **The room:** a pillared hall with twelve stone seats in a horseshoe, one for each people of the league, a bronze tablet of the old laws on the end wall, scroll niches down both sides, a brazier in the middle, and one cushion, on the clerk's own bench.
+- **Event:** an in-game trade. His Enigmaw asks riddles in council and nobody can get a word in. He'll trade it for a Lebetron, "something loud enough to call order". `FLAG_ICHOR_TRADED_ENIGMAW`.
+```text
+PYLAGORAS: Twelve seats. Twelve peoples. One clerk. Guess which one I am.
+
+PYLAGORAS: We look after Delphoi, the league. The shrine, the plain, the roads.
+
+PYLAGORAS: The bronze says nobody may farm the sacred plain. Not one furrow.
+
+PYLAGORAS: Lot of fuss over a field. Wars, once. Over a field.
+
+PYLAGORAS: My problem's smaller. My Enigmaw asks riddles in council.
+
+PYLAGORAS: Nobody can get a word in. We haven't passed a law in a year.
+
+PYLAGORAS: You wouldn't trade me a Lebetron? Something loud enough to call order?
+```
+?? Trade a Lebetron for his Enigmaw? YES/NO. YES: in-game trade, Enigmaw nicknamed **AINIGMA**, Lv 56, with its hidden ability (Analytic), holding a Wise Glasses.
+```text
+> YES, after the trade:
+PYLAGORAS: There. Order. Listen to that kettle. Nobody will argue with that.
+
+PYLAGORAS: Ainigma will like you. Answer its riddles. Or don't. It won't mind.
+
+> NO:
+PYLAGORAS: Then the riddles continue. “What has twelve seats and no laws?” Us.
+```
+
+### The inn (`MAP_THERMOPYLAI_INN`)
+
+- **Who:** Megistias, the innkeeper. His ancestor was the seer who read the omens for the three hundred, saw how it would end, and stayed.
+- **The room:** a smoky common room with one long table, a hearth, a knucklebones board scratched into the floor by the fire, and over the door a seer's staff hung on two pegs that nobody touches, black with smoke.
+- **Event:** knucklebones (SYSTEMS §9): Megistias is the pass's champion. Beat him for a prize. `FLAG_ICHOR_KNUCKLEBONES_THERMOPYLAI`.
+```text
+MEGISTIAS: Sit, eat, roll. That's the inn's whole menu.
+
+MEGISTIAS: The staff over the door? My ancestor's. A seer. He read the omens here.
+
+MEGISTIAS: He saw how it would end. The king sent him away to live. He stayed.
+
+MEGISTIAS: Seers in my family have been staying ever since. I keep an inn.
+
+MEGISTIAS: Knucklebones? I'm the champion of the pass. Of the inn. Of this table.
+
+MEGISTIAS: I can't see how a throw will land. Nobody can now. Isn't that good?
+```
+[The knucklebones game, SYSTEMS §9's rules. A win gives the champion-tier prize from SYSTEMS §9's table; Balance picks which.]
+
+## Route 30, the Thessalian plain (`MAP_ROUTE30_THESSALY`)
+
+| NPC | Where | Role |
+|---|---|---|
+| Peirithoos, a farmer | his farmhouse | the household; the rest point |
+| A wheat-cutter | the fields | flavor (below) |
+
+**The wheat-cutter**
+```text
+HARVESTER: The plain feeds half of Aethos. Nobody knows if this year will.
+
+HARVESTER: Nobody ever knew, my father says. We just used to pretend.
+```
+
+### Peirithoos's farmhouse (`MAP_ROUTE30_FARMHOUSE`)
+
+- **Who:** Peirithoos, a Lapith farmer named for the king whose wedding the centaurs broke up, and his wife Hippodameia, named for the bride.
+- **The room:** a big Thessalian farm kitchen: a long hearth, harness and ropes on the walls, wheat sheaves stacked to the beams, a cheese press, and for a table, half of a great stone table, broken clean across. "Grandfather kept the good half."
+- **Events:** the rest point (Hippodameia feeds and heals the party), and an in-game trade. His Kaprodon tramples the wheat; he'd trade it for a Kerazap, "something that eats weeds, not crops". `FLAG_ICHOR_TRADED_KAPRODON`.
+```text
+HIPPODAMEIA: Sit. You've walked from the hot gates? You'll eat. Sit.
+```
+[Heal the party.]
+```text
+PEIRITHOOS: That table? Half of it's out in the field. The other half's this.
+
+PEIRITHOOS: My great-great-whatever's wedding. The centaurs came down off Pelion.
+
+PEIRITHOOS: Never give a centaur wine. That's the whole moral. Write it down.
+
+PEIRITHOOS: One of them wasn't like that. The old one, in the cave on the mountain.
+
+PEIRITHOOS: Taught heroes. Healers. Grandmother said he chalked a sign on his door.
+
+PEIRITHOOS: My problem's smaller. My boar. It tramples the wheat.
+
+PEIRITHOOS: You wouldn't trade me a Kerazap? Something that eats weeds, not crops?
+```
+?? Trade a Kerazap for his Kaprodon? YES/NO. YES: in-game trade, Kaprodon nicknamed **KALYDON**, Lv 57, with its hidden ability (Intimidate), holding a Soft Sand.
+```text
+> YES, after the trade:
+PEIRITHOOS: Kalydon. It's from a story about a boar. A bad one. It'll suit him.
+
+PEIRITHOOS: Go easy on him. He's only ever been told he's a nuisance.
+
+> NO:
+PEIRITHOOS: Back to the wheat, then. He'll eat it before I cut it.
+```
+
+## The Vale of Tempe (`MAP_VALE_OF_TEMPE`)
+
+**Layout.** About 30×24, a gorge between Olympus (west) and Ossa (east), with the Peneios running down the middle from north to south, loud and green. Route 30 comes in at the south edge. A stone bridge crosses the river halfway up. On the east bank: the healer's house with the stall, the laurel-keepers' house, and Apollo's old altar under the plane trees. On the west bank: the river-keeper's hut on stilts, the first laurel at the water's edge, and at the north-west the Ascent's gate, where the path climbs into the beech woods. **Identity:** the last soft green place before the mountain, the tree a nymph became, and the Professor sitting under it. It is a fly target: its healer is the heal location.
+
+- **First things first:** the healer's house is the first door past the south edge, with its sign in view: "THE HEALER'S. Rest. Supplies. The last before the mountain."
+- **Exits:** Route 30 (south) and the Ascent (north-west, Koronos's gate), each with a sign.
+- **Hidden items:** under the bridge on the west bank, and in the hollow of a plane tree by the altar.
+
+| NPC | Where | Role |
+|---|---|---|
+| Daphne | the first laurel's roots | the send-off (L-6D) |
+| Kroke, ex-Titanborn | the bridge's parapet | the doubter; no battle |
+| The laurel boy | Apollo's altar | gift: a Pythian Laurel |
+| Koronos, the Archon's warden | the Ascent's gate | the Laurel check |
+| Philyra, the healer | the healer's house | heal and the stall |
+| The laurel-keeper | the laurel-keepers' house | the household |
+| Old Enipeus, the river-keeper | the river hut | the household |
+
+**The first laurel** (object):
+```text
+A laurel so old its trunk split into three and grew back together.
+
+Its roots go down into the river like fingers, holding on.
+
+Its leaves move when there's no wind. Probably the river.
+```
+**Apollo's altar** (object):
+```text
+An old altar under the plane trees, washed clean by a thousand springs.
+
+Apollo came here to be clean, after he killed the serpent at Delphoi.
+
+Someone has left a sprig of laurel on it. Someone always does.
+```
+
+### The healer's house (`MAP_VALE_OF_TEMPE_HEALERS_HOUSE`)
+
+- **Who:** Philyra, the healer, who keeps the last healing counter before the Ascent, and her Panacoil, which sleeps in a basket of linden flowers.
+- **The room:** a plane-wood house built over the river on stone piers, the healer's counter at one end with linden flowers drying on racks above it, a stall table of jars at the other, a window over the water, and a bench where climbers sit and look at the mountain and don't talk.
+- **Services:** heal (the Asclepeion's service), the stall (below), and the heal location for Fly.
+```text
+PHILYRA: Rest here. It's the last soft bench before the snow.
+
+PHILYRA: Linden tea. My grandmother's grandmother was a linden tree, she said.
+
+PHILYRA: I didn't believe her. I'm starting to. Things change into things.
+```
+**The stall** (a fixed stock): Ultra Ball, Hyper Potion, Max Potion, Full Heal, Revive, Max Repel.
+
+### The laurel-keepers' house (`MAP_VALE_OF_TEMPE_LAUREL_HOUSE`)
+
+- **Who:** the laurel boy's mother, who keeps the house that has cut laurel for Delphoi's crowns for as long as there have been Games.
+- **The room:** a small house with bundles of laurel drying from every beam so you have to duck, a loom with a laurel-pattern border half woven, a little shrine of Apollo with a lyre on it, and a boy-sized bronze sickle on a hook by the door.
+- **Event:** a gift, after the boy's (beat L-6D): she gives you a second Pythian Laurel if you've already had his. `FLAG_ICHOR_GOT_LAUREL_KEEPER_GIFT`.
+```text
+LAUREL-KEEPER: Duck. Everyone hits the laurel. It's good luck, they say.
+
+LAUREL-KEEPER: My boy's walking it down to Delphoi this year. His first time.
+
+LAUREL-KEEPER: I asked the seer how he'd do. Before. She always said “well”.
+
+LAUREL-KEEPER: This year there's nobody to ask. So I'm worrying. Like a mother.
+
+> after the boy's gift:
+LAUREL-KEEPER: He gave you one? Then you'd better have the pair. Here.
+
+{PLAYER} received a Pythian Laurel!
+
+LAUREL-KEEPER: Don't tell him. He thinks he's the generous one in the family.
+```
+
+### The river-keeper's hut (`MAP_VALE_OF_TEMPE_RIVER_HUT`)
+
+- **Who:** old Enipeus, who keeps the ford and the eel traps and says the river is the nymph's father.
+- **The room:** a hut on stilts over the west bank, with nets and eel traps hung from the rafters, a punt-pole in the corner, a trapdoor in the floor straight down to the water, and a carved driftwood figure of a bearded river god with reeds for a beard.
+- **Event:** lore that leads to a reward. His granddaughter is to marry, and a bride of the vale wears a crown with one leaf from the first laurel. Pick a leaf (examine the tree after talking to him) and bring it; he gives you Mystic Water. `FLAG_ICHOR_GOT_LAUREL_LEAF`, `FLAG_ICHOR_GOT_MYSTIC_WATER_ENIPEUS`.
+```text
+ENIPEUS: Mind the trapdoor. It goes straight to the eels.
+
+ENIPEUS: The river? That's Peneios. Old man. The nymph's father, Daphne.
+
+ENIPEUS: When the god chased her she prayed to him. And he made her the tree.
+
+ENIPEUS: Some father. Turned his girl into a tree so a god couldn't have her.
+
+ENIPEUS: …I'd have done the same. Don't tell my granddaughter.
+
+ENIPEUS: She's to marry. A bride of the vale wears one leaf from the first laurel.
+
+ENIPEUS: My knees won't take the roots. Would you pick one? Just one. Ask first.
+```
+[Examining the first laurel after this: "You ask the tree, out loud, feeling foolish. A leaf comes loose into your hand." / "{PLAYER} picked a laurel leaf." Back at the hut:]
+```text
+ENIPEUS: There. The real one. You can tell. It smells like a girl running.
+
+ENIPEUS: Here. River water, from where the springs come up under the tree.
+
+ENIPEUS: It keeps. It's kept since before the god came. Water's patient.
+
+{PLAYER} received Mystic Water!
+```
+
+## The Ascent
+
+| Who | Where | What |
+|---|---|---|
+| The old woman | the Weeping Cliff's pool | lore |
+| Eschara | the hearth chamber, Ice Caves B1F | xenia host: heal and rest |
+| Chionis, the snow-watcher | his hut, the Snowfields | gift: an Ice Stone |
+| Kleon | the Gate's south edge | his send-off |
+| Eirene, Eunomia, Dike | the Gate of the Horai | heal, shop, door |
+
+### The snow-watcher's hut (`MAP_ASCENT_SNOWFIELDS_HUT`)
+
+- **Who:** Chionis, who has watched the Ascent's snow for fifty winters and knows every kind of it by name.
+- **The room:** one round stone room dug half into the hillside, a hearth in the middle with a smoke-hole above it, fleeces on every surface, skis and snowshoes hung on pegs, a row of clay jars along one wall, each labelled with a winter ("THE BIG ONE", "THE WET ONE", "THE ONE WITH THE EAGLE"), and a Niflake asleep in the coldest corner by the door.
+- **Event:** a "show me" request. Show him a Niflake and he gives you an Ice Stone. `FLAG_ICHOR_GOT_ICE_STONE_CHIONIS`. He also lets you rest: a bed, no heal (the hearth chamber below is the heal).
+```text
+CHIONIS: Shut the door! The snow follows people in. It's nosy.
+
+CHIONIS: Fifty winters I've watched it. Forty kinds of snow. Forty-one now.
+
+CHIONIS: This year there was an hour when it stopped in the air. Every flake.
+
+CHIONIS: I've a jar for it. Look. Empty. I couldn't catch any. They wouldn't fall.
+
+CHIONIS: Bring me a Niflake, would you? Mine's old. I like to see a young one.
+
+> with a Niflake in the party:
+CHIONIS: There. Look at it. Like a flake that decided to stay.
+
+CHIONIS: Here. This came out of the ice caves the year of the big one.
+
+CHIONIS: Give it to a Niflake that's ready. It'll know what to do.
+
+{PLAYER} received an Ice Stone!
+
+> after:
+CHIONIS: Boreas carried off a girl from Astyra, they say. Up here somewhere.
+
+CHIONIS: I've never seen her. I've seen a lot of wind. I'll keep looking.
+```
+
+### The Gate of the Horai (`MAP_OLYMPUS_GATE`), Eunomia's stall
+
+The last Agora before the Pantheon. A fixed stock, at fixed prices (Eunomia: "Every price is fair"):
+
+| Item |
+|---|
+| Ultra Ball |
+| Hyper Potion |
+| Max Potion |
+| Full Restore |
+| Full Heal |
+| Revive |
+| Max Repel |
+
+## The Pantheon halls
+
+The halls hold only their seat-holders and their objects (P1). There are no attendants: each holder greets you in person.
+
+## The Summit (`MAP_OLYMPUS_SUMMIT`)
+
+| NPC or object | Where | Role |
+|---|---|---|
+| Aristeides | beside the altar | the Archon (P1) |
+| The bronze box | on the altar | Medon's Knot; hidden after L-8 |
+| A wind-bent juniper | on the second terrace | object |
+
+**The juniper**
+```text
+A juniper, bent flat by a thousand years of wind. It's still growing.
+```
+**The view south** (the platform's south edge)
+```text
+Cloud, all the way to the sea. Somewhere under it is everything.
+```
+**After the epilogue.** The summit is the Pantheon's weekly rematch (POSTGAME). Aristeides waits by the altar once a week, without his box:
+```text
+ARISTEIDES: The law says I must answer any challenger.
+
+ARISTEIDES: It doesn't say I can't enjoy it.
+```
+
+## The Hall of Heroes (`MAP_HALL_OF_HEROES`)
+
+| NPC or object | Where | Role |
+|---|---|---|
+| Mnemon | by the blank slab, then by the player's stele | the Hall's mason |
+| The stelai | both walls | lore |
+| The player's stele | the end of the row | the record |
+
+**Mnemon**, the Hall's mason. Old, broad and chalk-white to the elbows; he has cut every Archon since Aristeides's predecessor and thinks of them all as clients. His name means "the one who remembers" (*mnēmōn*), the title of the officials who kept a city's records.
+```text
+> after the record:
+MNEMON: Back to see it? Everyone comes back. Then they pretend they didn't.
+
+MNEMON: I cut the letters a finger deep. Weather takes a finger a thousand years.
+
+MNEMON: Medon's, by the door, I cut myself. Re-cut, I mean. Third time this century.
+
+MNEMON: He keeps wearing off. Like he's trying to.
+```
+**Medon's stele**
+```text
+“MEDON, SON OF KODROS. FIRST ARCHON.”
+
+The figures under his name are worn away. Only the name is left.
+```
+**Aristeides's stele**
+```text
+“ARISTEIDES, SON OF LYSIMACHOS.”
+
+Scratched very small in the corner: “the Just.” Then crossed out.
+```
+**The player's stele**
+```text
+“{PLAYER} OF KALLISTE, ARCHON OF AETHOS.”
+
+Your partners are cut below, every one. The stone is still white.
+```
+**A stele in the middle of the row**
+```text
+An Archon's name, and under it a Pokémon nobody alive has seen.
+
+Every myth is a memory of a Pokémon, Daphne says. So is every stone.
+```
+
+## Elaia on the epilogue day (`MAP_ELAIA_VILLAGE`, slice)
+
+The slice's festival NPCs, a year on, in their slice voices. Each line replaces their slice festival lines while `FLAG_ICHOR_EPILOGUE_FESTIVAL` is set, and stays until the next new day, when they take ordinary post-game lines.
+
+| NPC | Where | Epilogue line |
+|---|---|---|
+| Halia | under the canopy | the scene (P1), then: "HALIA: Next! …Oh, it's you. Come for another nothing? I've plenty." |
+| Korinna | by the garland tree | "KORINNA: Right half the time, she said. A whole year, and she was right exactly half of it. / KORINNA: I counted. I'm choosing to hear that as a compliment. Again." |
+| Korinna's little brother | first in Halia's line | "BOY: Korinna says if Halia sees nothing it means I'm going to be a hero. / BOY: Korinna lies a lot." |
+| The girl from Akti | second in line | "GIRL: My grandmother had her thread read here. And her grandmother. / GIRL: They all knew everything. I'm going to know nothing. I'm so excited." |
+| Philon | east of the canopy | "PHILON: The knot near the start was a sprained ankle. / PHILON: I'm told that counts. Grandma says I was very brave about it. I wasn't." |
+| Olive farmer | by the olive press | "OLIVE FARMER: Silver again this year. Every tree. / OLIVE FARMER: Nobody watching any more, I suppose. They came in silver anyway. Habit." |
+| Festival-goer (woman) | by the garlanded tree | "FESTIVAL-GOER: My sister sailed to Delphoi again. “Will it be a boy?” / FESTIVAL-GOER: The Pythia laughed at her. Then she gave her a laurel sprig and told her to wait and see." |
+| Festival-goer (man) | by the finish line | "FESTIVAL-GOER: A Wooloo won the footrace. A WOOLOO. / FESTIVAL-GOER: The Lakonian boy demanded a rematch with the finish line again. Some things don't change." |
+| Gylippos | at the finish line, then the square's west edge | the scene (P1), then: "GYLIPPOS: She came. / GYLIPPOS: …That was the conversation." |
+| Rhea | at the finish line | the scene (P1), then: "RHEA: Two lines a week, I used to write him. Lakonian. / RHEA: I may write three now. Don't tell the elders." |
+| Kleon | at the finish line, then by the well | the scene (P1), then: "KLEON: I'm not upset. I'm Lakonian. We don't get upset. / KLEON: It was a REALLY fast Wooloo." After the epilogue he moves to the well (the post-game table). |
+| Kid with Wooloo | past the finish line, with the winner | "KID: Told you she was fast. She ate the finish ribbon. / WOOLOO: Baa! [It is wearing the winner's ribbon. Some of it.]" |
+| Old shepherd | the north exit | "OLD SHEPHERD: Another year! Mind the tall grass. And the goats. And the Archon. / OLD SHEPHERD: That's you. Strange world." |
+| Glykera | at her stall, then home | "GLYKERA: Honey cakes! Melitta brought me a whole jar this year. Without being asked! / GLYKERA: Take two. On the house. On the Archon's house, I suppose." (Gives `ITEM_OLD_GATEAU` ×2 once: `FLAG_ICHOR_EPILOGUE_CAKES`.) |
+| Kimon | Glykera's house, by the window | "KIMON: Halcyon days came on time this year. Right on time. / KIMON: First time in my life I was glad to see the sea do what it's told." |
+| Kydippe | her house, in her chair | "KYDIPPE: Another festival. I've delivered half that square, you know. / KYDIPPE: You still look around like you've lost something. Did you find it? …Good." |
+| Phaedon's guard | asleep against the player's house wall | "The guard is asleep, smiling. There's honey on his chin." |
+| The scribe's stool | gone | The square's west edge by the altar is empty. The altar: "The village altar. Someone's left a wax tablet on it, wiped smooth. Nothing on it at all." |
+
+**Player's house 1F, the epilogue day**
+
+| Who or what | Line |
+|---|---|
+| Mom, after the scene | "MOM: Go on. Festival. I'll keep the man from Akti out of my honey." |
+| Phaedon, after the scene | "PHAEDON: She hasn't coughed all week. I've stopped counting the days. / PHAEDON: That's new. I used to count everything." |
+| The jar on the hearth | "A jar of honey from Akti. The label says “GOOD HONEY.” / Someone has added, in Mom's hand: “no.”" |
+| The honey shelf | "A new jar, sealed with wax. The label says “NOT FOR {PLAYER}.”" (the post-game finale's jar, SYSTEMS §10) |
+| Mom's loom | "The loom has something new on it. Small. Child-sized. / Mom says it's for nobody in particular." |
+
+---
+
+# Part 3. Trainers
+
+## Kythera's trainers
+
+Format and conventions are 00_front's: route trainers and Titanborn IVs 14, AI Basic Trainer; acolytes IVs 20; Galatea IVs 24 with her ace at 31, AI Basic Trainer and Check Bad Move, two Full Restores. Moves are listed only for the set-piece trainers and Galatea, and every listed move is in the dex learnset at or below its level or in its teachable list.
+
+**New classes used here** (00_front's table): SCULPTOR, DIVER. Reused: SAILOR, MERCHANT, FISHER, PILGRIM, TITANBORN, ACOLYTE, GOATHERD, BEEKEEPER, AUGUR, HARVESTER, HIEROPHANT.
+
+## The *Euploia*, the southern voyage
+
+**SAILOR Eudoros.** Amidships, at the rail, in plain view. Optional.
+```text
+Before: EUDOROS: Can't sleep. Nobody can. Might as well battle.
+Defeat: EUDOROS: There. Now I'm tired. Thank you.
+After:  EUDOROS: Twelve ships, no lamps. Nobody rows dark unless ashamed.
+```
+```
+=== TRAINER_ICHOR_EUDOROS ===
+Name: EUDOROS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**MERCHANT Kerdon.** By the oil amphorae at the bow, facing the cargo. Optional. His name means "gain".
+```text
+Before: KERDON: I bought forty jars of oil for Kythera. Then the Titans took the boats.
+Defeat: KERDON: A loss. Another loss. It's a theme.
+After:  KERDON: Who needs oil when nobody can sail? Nobody. That's who.
+```
+```
+=== TRAINER_ICHOR_KERDON ===
+Name: KERDON
+Class: Merchant
+Pic: Merchant
+Gender: Male
+Music: Rich
+AI: Basic Trainer
+
+Pithound
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Midonos
+Level: 42
+Ability: Good as Gold
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Midonos evolves from Onotis holding a Nugget, and a merchant would have one.
+
+## Melos
+
+**FISHER Kimolos.** On the end of Klima's jetty, facing the bay, in plain view. Easy. Named for the next island over.
+```text
+Before: KIMOLOS: Off the trireme? Everyone's off a trireme. Battle while they fill up.
+Defeat: KIMOLOS: Beaten before the jars are full. A record.
+After:  KIMOLOS: The Titans watered here last night. Forty boats. Not one fish bought.
+```
+```
+=== TRAINER_ICHOR_KIMOLOS ===
+Name: KIMOLOS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**TITANBORN Theion.** At the top of the upper terrace's grass band, on the obsidian seam, filling a sack with black glass. Mandatory for the slope. *Theion* is sulphur, which Melos also mined, and it means "divine" too; he likes that.
+```text
+Before: THEION: The master wants edges. Glass edges. I want my lunch. You'll do.
+Defeat: THEION: Cut. Should've seen that coming. It's glass.
+After:  THEION: The Hand's crews dug all night. I fell asleep. They left me. Again.
+```
+```
+=== TRAINER_ICHOR_THEION ===
+Name: THEION
+Class: Titanborn
+Pic: Titanborn M
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gigantomb
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Kapnub evolves into Gigantomb at 35, so a Gigantomb at 43 is a crew's ordinary digger here, not Hyperion's prize; his is far bigger (STORY §2). Cairnolith evolves only by trade.
+
+## Route 22 (optional, by Surf), levels 42–43
+
+**DIVER Kymaios** ("of the wave"). Near the Kaldera end, floating in plain view.
+```text
+Before: KYMAIOS: All the way out here? You're braver than you look. Or wetter.
+Defeat: KYMAIOS: Under I go.
+After:  KYMAIOS: Ships pass all night. No lamps. I keep my head down.
+```
+```
+=== TRAINER_ICHOR_KYMAIOS ===
+Name: KYMAIOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**SAILOR Antalkidas.** Rowing across the channel past Anydros. Mandatory for the islet. Named for a Spartan admiral who made a famous peace.
+```text
+Before: ANTALKIDAS: This channel's mine. Pay the toll. The toll's a battle.
+Defeat: ANTALKIDAS: Peace, then. On your terms.
+After:  ANTALKIDAS: Anydros has no water. Fig tree died of thirst. Nobody lives there.
+```
+```
+=== TRAINER_ICHOR_ANTALKIDAS ===
+Name: ANTALKIDAS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kynoketos
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**FISHER Nikandros.** On a rock in the Myrtoan Sea, in plain view.
+```text
+Before: NIKANDROS: The Myrtoan's rough. So am I. Battle?
+Defeat: NIKANDROS: Rough, but not tough. Noted.
+After:  NIKANDROS: Don't go round Malea. You'll forget your mother's name.
+```
+```
+=== TRAINER_ICHOR_NIKANDROS ===
+Name: NIKANDROS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Narkeray
+Level: 41
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**DIVER Hagne** ("pure"). Diving by the sunken column, facing it. Optional; guards a hidden Big Pearl.
+```text
+Before: HAGNE: There's a whole temple under us. One column sticks up. Mine.
+Defeat: HAGNE: The column wins. It always does.
+After:  HAGNE: Something shiny at its foot. I'm saving it. Take it. I'll find another.
+```
+```
+=== TRAINER_ICHOR_HAGNE ===
+Name: HAGNE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Swimmer
+AI: Basic Trainer
+
+Aphrogene
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Skandeia
+
+**TITANBORN Molybdos,** the crew boss (beat III-1C). Mandatory, a scene battle. His name is "lead", a Titan's earth-word.
+```text
+Before: [beat III-1C]
+Defeat: MOLYBDOS: Lead sinks. Should've seen that coming.
+After:  [beat III-1C]
+```
+```
+=== TRAINER_ICHOR_MOLYBDOS ===
+Name: MOLYBDOS
+Class: Titanborn
+Pic: Titanborn M
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Cairnolith evolves only by trade, and a Titan grunt has nobody to trade with.
+
+**TITANBORN Ochros and Psephos,** the bad guests (beat III-1C2). One double battle, both trainers at once (`trainerbattle` two-trainer, as Emerald's twins). "Ochre" and "pebble".
+```text
+Before: [beat III-1C2]
+Defeat: OCHROS: Full. I was full anyway.
+Defeat: PSEPHOS: I wasn't full.
+After:  [beat III-1C2]
+```
+```
+=== TRAINER_ICHOR_OCHROS ===
+Name: OCHROS
+Class: Titanborn
+Pic: Titanborn M
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_PSEPHOS ===
+Name: PSEPHOS
+Class: Titanborn
+Pic: Titanborn F
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Kaprodon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Midonos
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Kolossette evolves by trade with a Metal Coat; Midonos is loot ("PSEPHOS: It came off a merchant. He didn't need it." if the player checks the table before the battle).
+
+## The Foam Road
+
+**1. FISHER Amphitos.** On the shingle after grass band 1, facing the sea with his rod, in plain view. The route's easy first trainer.
+```text
+Before: AMPHITOS: Shh. The fish are thinking. Oh, all right. Battle.
+Defeat: AMPHITOS: The fish saw that. They'll never respect me now.
+After:  AMPHITOS: Aphrodite came out of this sea. She could send fish.
+```
+```
+=== TRAINER_ICHOR_AMPHITOS ===
+Name: AMPHITOS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. SCULPTOR Skopas.** Mid-cutting on a block of marble, facing east, sight 4. Mandatory. Grass band 2 is right behind him. Named for the Parian sculptor of the same name.
+```text
+Before: SKOPAS: Stand still. No, don't. I need you to move for this.
+Defeat: SKOPAS: Wonderful. Do it again. No, don't.
+After:  SKOPAS: I came to carve the goddess. The marble here's pink. She'd look sunburnt.
+```
+```
+=== TRAINER_ICHOR_SKOPAS ===
+Name: SKOPAS
+Class: Sculptor
+Pic: Sculptor
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Glyphlet
+Level: 43
+Ability: Sturdy
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Glyphlet evolves through friendship. Skopas: "It doesn't love me yet. I'm not very lovable. I'm a sculptor."
+
+**3. DIVER Pontinos.** Out on the reef spit, facing the sea. Optional; guards a sealed jar.
+```text
+Before: PONTINOS: You walked out here? On the reef? Brave. Or tide-blind.
+Defeat: PONTINOS: Sunk. Like a sponge.
+After:  PONTINOS: The tide comes in at dusk. I won't come for you.
+```
+```
+=== TRAINER_ICHOR_PONTINOS ===
+Name: PONTINOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Aphrell evolves only with a Shiny Stone.
+
+**4. TITANBORN Kassiteros.** At the narrow approach to Paphia, hauling a fishing boat on rollers. Mandatory. "Tin", the other half of bronze. Hidden after Knossa (`FLAG_ICHOR_HIDE_KASSITEROS`, set at `VAR_ICHOR_ACT3` ≥ 6).
+```text
+Before: KASSITEROS: For Knossa! Everything floats eventually. Help me push.
+Defeat: KASSITEROS: You could've just helped me push.
+After:  KASSITEROS: It's not even downhill to Knossa. Why are we pushing it uphill?
+```
+```
+=== TRAINER_ICHOR_KASSITEROS ===
+Name: KASSITEROS
+Class: Titanborn
+Pic: Titanborn M
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+"Hyperion's crews dug them out of the sea caves at Kaldera. They hammer the boats tight."
+
+## The Spring of Kallirhoe and Echo's caves
+
+**PILGRIM Philotes.** On the bench by the fall, at the spring. Optional. A lovesick pilgrim who came to drink from the spring and stayed to sigh.
+```text
+Before: PHILOTES: She doesn't know I exist. Battle me. Distract me.
+Defeat: PHILOTES: Even my Pokémon don't love me back.
+After:  PHILOTES: Look at him, by the pool. That's what love does. I'm going to be like that.
+```
+```
+=== TRAINER_ICHOR_PHILOTES ===
+Name: PHILOTES
+Class: Pilgrim
+Pic: Pilgrim M
+Gender: Male
+Music: Girl
+AI: Basic Trainer
+
+Himerow
+Level: 43
+Ability: Cute Charm
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narcisheen
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**FISHER Kalamis.** At the Speaking Hall's pool, in plain view. Every box he speaks is echoed (Part 2).
+```text
+Before: KALAMIS: Quiet. You'll scare the echo.
+Defeat: KALAMIS: Beaten. VOICE: …beaten. Yes, thank you.
+After:  KALAMIS: I found a pink stone in a fish once. My Aphrell went all beautiful.
+```
+```
+=== TRAINER_ICHOR_KALAMIS ===
+Name: KALAMIS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Narkeray
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrogene
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**DIVER Kolymbos.** At the dark gallery's far end, by a lamp (SYSTEMS §2: a lamp marks every trainer in the dark). Mandatory only if the player wants the sea mouth.
+```text
+Before: KOLYMBOS: Who's there? Light, then you. Fine. Battle.
+Defeat: KOLYMBOS: Down I go.
+After:  KOLYMBOS: The voice repeats you. Don't say anything twice.
+```
+```
+=== TRAINER_ICHOR_KOLYMBOS ===
+Name: KOLYMBOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Galenyon
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kynoketos
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## The Temple of Aphrodite: acolytes, levels 44–46
+
+**ACOLYTE Anthousa** ("flowering"). In the rose court's side alcove, facing the wall, beside a sealed jar. Optional.
+```text
+Before: ANTHOUSA: You turned round to look at me. Good. Always look at a lady.
+Defeat: ANTHOUSA: Lovely. Truly lovely.
+After:  ANTHOUSA: The stand mirrors turn. Point one down your path.
+```
+```
+=== TRAINER_ICHOR_ANTHOUSA ===
+Name: ANTHOUSA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Aphrogene
+Level: 44
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Psychora
+Level: 45
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+**ACOLYTE Rhodanthe** ("rose-flower"). At the gallery's north door, facing south across the doorway, sight 4. Mandatory: the gate between the test and the master.
+```text
+Before: RHODANTHE: The statues watched you all the way here. So did I.
+Defeat: RHODANTHE: You didn't look away once. I'm impressed.
+After:  RHODANTHE: She planted the first pomegranate. Here, we say.
+```
+```
+=== TRAINER_ICHOR_RHODANTHE ===
+Name: RHODANTHE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Himerow
+Level: 45
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Korantha
+Level: 45
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Aphrogene
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+## Hierophant Galatea, the Living Marble, levels 46–48 (Hero difficulty)
+
+Love and its changes, on Aphrodite's island: Eros's diving bird, the tortoise Aphrodite stood on in Pheidias's statue at Elis, the foam-born, the pomegranate the goddess planted, and the marble that woke. Modelled on Winona's and Wallace's place in Emerald's curve, a few levels up (BALANCE: Galatea 46–48).
+
+```
+=== TRAINER_ICHOR_GALATEA_1 ===
+Name: GALATEA
+Class: Hierophant
+Pic: Hierophant Galatea
+Gender: Female
+Music: Female
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Himerow
+Level: 46
+Ability: Cute Charm
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dazzling Gleam
+- Acrobatics
+- Tailwind
+- Play Rough
+
+Chelyra
+Level: 46
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Sing
+- Alluring Voice
+- Earth Power
+- Calm Mind
+
+Aphrogene @ Mystic Water
+Level: 47
+Ability: Marvel Scale
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Moonblast
+- Scald
+- Calm Mind
+- Draining Kiss
+
+Korantha @ Miracle Seed
+Level: 47
+Ability: Natural Cure
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dazzling Gleam
+- Energy Ball
+- Synthesis
+- Leech Seed
+
+Kalliglyph @ Sitrus Berry
+Level: 48
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Dazzling Gleam
+- Power Gem
+- Calm Mind
+- Wish
+```
+- **Himerow** leads with Tailwind, so the player learns that love moves fast. Play Rough and Acrobatics hit hard once it's set.
+- **Chelyra** sings, and Punk Rock boosts its Alluring Voice. Aphrodite's tortoise: Pheidias carved her with one foot on a tortoise.
+- **Aphrogene** builds Calm Mind and drains back what it loses. Marvel Scale makes it tougher once the player lands a status on it. (No Misty Terrain: it would stop Chelyra's own Sing.)
+- **Korantha** heals itself and drains. The goddess planted the first pomegranate, they say on Kythera.
+- **Kalliglyph**, Galatea's own partner, is the marble that woke: Solid Rock blunts super-effective hits, Calm Mind builds, Wish heals the next in line. Its Rock half makes a Steel or Fire answer think twice.
+- **The matchups:**
+  - Fairy is weak to Poison and Steel. Steel answers on the road so far: Taurivet and Kolossette from Kaldera, Telkanvil (Bathykleia's ANKYRA, in Skandeia), Midonos from Thyrsa. Poison: Thyrsivy, Oinopard, Karkitox (not until Lakonia), Panacoil.
+  - Nebrel players: Daphnyad (Grass/Fairy) is neutral to most of the team and takes Fairy moves for neutral; ANKYRA, two doors from the quay, is the answer the town hands them.
+  - Kynder players: Pylakyon (Fire/Ghost) resists Fairy and burns Korantha; Kalliglyph's Rock half is its one wall.
+  - Hipling players: Seismare (Water/Ground) hits Kalliglyph hard with both types and takes Chelyra's Earth Power for neutral.
+
+Defeat text: "There. A crack. They always start somewhere."
+
+## The Neraida falls
+
+**1. GOATHERD Lykidas.** On a rock with his goats, in plain view, past grass band 1. Easy. Theocritus's goatherd poet.
+```text
+Before: LYKIDAS: The falls stopped singing. So I sing to the goats. Battle?
+Defeat: LYKIDAS: Even the goats looked sorry for me.
+After:  LYKIDAS: A poet wrote about a goatherd called Lykidas. A better one.
+```
+```
+=== TRAINER_ICHOR_LYKIDAS ===
+Name: LYKIDAS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Gelasable
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. BEEKEEPER Kerinthos** ("bee-bread"). Among his hives in the terrace grass, facing them. Optional.
+```text
+Before: KERINTHOS: Careful! The hives. Battle me over there. No, there.
+Defeat: KERINTHOS: The bees saw. They'll talk.
+After:  KERINTHOS: The bees went quiet with the falls. Odd, isn't it?
+```
+```
+=== TRAINER_ICHOR_KERINTHOS ===
+Name: KERINTHOS
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Melisseer
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Psychora
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**3. AUGUR Mopsos.** On the far bank of the ford, watching the birds, facing south, sight 5. Mandatory. Mopsos was a seer of the Argonauts who understood birds.
+```text
+Before: MOPSOS: The birds told me you'd cross. They didn't say whether you'd win.
+Defeat: MOPSOS: The birds never say whether. Only that.
+After:  MOPSOS: Every bird here flew east a week ago. Then back.
+```
+```
+=== TRAINER_ICHOR_MOPSOS ===
+Name: MOPSOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Sophowl
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Enigmaw
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Psychic
+- Close Combat
+- Calm Mind
+- Future Sight
+```
+Close Combat is a TM in its teachable list; the rest are level-up moves at or below 46.
+
+**4. HARVESTER Thestylis.** Cutting reeds at the upper pool, facing the water. Optional. Theocritus's reaper girl.
+```text
+Before: THESTYLIS: You climbed the falls? With a horn? Show me what else you've got.
+Defeat: THESTYLIS: Cut down. Like a reed.
+After:  THESTYLIS: Reeds grow back. That's the nice thing about reeds.
+```
+```
+=== TRAINER_ICHOR_THESTYLIS ===
+Name: THESTYLIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Korantha
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hierolive
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Hierolive evolves with a Leaf Stone; a harvester grows olives.
+
+## Route 23 and Antikythera (optional), levels 43–45
+
+**1. DIVER Bathyllos.** On the first sandbar, in plain view.
+```text
+Before: BATHYLLOS: Out here on purpose? Me too. The sponges are better past the stakes.
+Defeat: BATHYLLOS: Back to the bottom with me.
+After:  BATHYLLOS: Old Skyllias says there's a box of wheels out here. Mad.
+```
+```
+=== TRAINER_ICHOR_BATHYLLOS ===
+Name: BATHYLLOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Aphrell
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. SAILOR Euthykles.** Rowing a small boat back and forth across the channel between the rocks, mandatory for the islet. His boat is the only one on the island the Titans missed.
+```text
+Before: EUTHYKLES: They took every boat but mine. Battle, to celebrate.
+Defeat: EUTHYKLES: Lost to someone without a boat. Embarrassing.
+After:  EUTHYKLES: I'm not going in till they've gone. I sleep on the islet.
+```
+```
+=== TRAINER_ICHOR_EUTHYKLES ===
+Name: EUTHYKLES
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Kynoketos
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Harpelle
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**3. DIVER Myrsine** ("myrtle"). On the reef by the wreck, facing it. Optional.
+```text
+Before: MYRSINE: That wreck's mine. I found it. Well. Skyllias found it. I found it second.
+Defeat: MYRSINE: Second again.
+After:  MYRSINE: Something shiny's in the ribs. You've got longer arms.
+```
+```
+=== TRAINER_ICHOR_MYRSINE ===
+Name: MYRSINE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Swimmer
+AI: Basic Trainer
+
+Narkeray
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrogene
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Every species in Kythera's teams and tables, with its link
+
+| Species | Where | Link |
+|---|---|---|
+| Aphrell, Aphrogene | the foam beaches; the acolytes; Galatea | the foam-born; the dex's own Kythera line |
+| Narcibulb, Narcisheen | the spring; Philotes | Narcissus; evolves only at the spring |
+| Echolali | Echo's caves | Echo, who can only repeat |
+| Erosie, Himerow | the Egg; the hills; Galatea | Eros, Aphrodite's son |
+| Glyphlet, Kalliglyph | the marble grounds and quarry; Galatea's ace | Galatea, the statue that woke |
+| Chelyra | the hills (†); Galatea | Aphrodite's tortoise at Elis |
+| Korantha | Galatea, the acolytes | the pomegranate Aphrodite planted |
+| Psychora | the hills (†); acolytes | Psyche, whom Eros loved |
+| Galenyon | every shore | the halcyons, Aphrodite's calm seas |
+| Narkeray, Kynoketos, Telkanvil | the water; divers; Ankyra | the sea between Kythera and Kaldera |
+| Kolossette, Taurivet, Cairnolith, Plouteras, Kaprodon, Midonos | the Titans | earth-born, from Kaldera's forge crews |
+| Narthip | Melos's slope (†) | the fennel stalk that carried fire; at home on volcanic ground |
+| Gigantomb | Theion; Melos (†, 1%) | the giant buried under an island, breathing smoke |
+
+## Knossa's trainers: conventions and casting
+
+Every trainer in LABYRINTH §9's table, recast with Aethos species at LABYRINTH's levels, with 00's conventions: route trainers and Titanborn IVs 14; priestesses, automata and Ariadne IVs 20 (the acolyte row); Gigas IVs 20 and one Hyper Potion; Hyperion IVs 24 with a 31 ace and two Full Restores; Kleon IVs 24 with a 31 starter and two Hyper Potions. Moves are listed for the bosses and set pieces only, and every listed move is in the dex learnset at or below that level, or in the species' teachable list.
+
+**Team Titan is earth-born** (PITCH §3): Rock, Ground and Steel, and the Kaldera crews' fire. The Aethos dex gives them Cairnolith, Laolith (by trade), Plouteras, Kolossette and Kolossard, Taurivet, Gigantomb, Kaprodon and Geogrip.
+
+**Minoan priestesses** carry the Mistress's three signs, as LABYRINTH asks: "a snake, a bee, a lily". The snake is Panacoil, the healer serpent; the bee is Melisseer, the Delphic bee, here the Minoan one (dex † deviation); the lily is Korantha, the pomegranate maiden of the Kore's fields, standing in for the lily, which the dex lacks.
+
+| # | Trainer | Class | Where | Mandatory? | Levels |
+|---|---|---|---|---|---|
+| 1 | Kerinthe | Beekeeper | the Bull Road, first, in plain view | yes | 44 |
+| 2 | Euphemos | Bull-leaper | the Bull Road's cutting, before band 2 | yes | 45 |
+| 3 | Phaistia | Minoan Priest | the palace approach | yes | 46–47 |
+| 4 | Iphitos | Bull-leaper | the vineyard terraces | no | 46 |
+| 5 | Propolis | Beekeeper | the vineyard's upper terrace | no | 46–47 |
+| 6 | Glauke | Bull-leaper | the Bronze Heel | no | 46 |
+| 7–8 | Keramos, Gypsos | Titanborn | the North Entrance | yes | 45 |
+| 9 | Akakallis | Minoan Priest | Ring I, the first narrow point | yes | 46 |
+| 10 | Xenodike | Minoan Priest | Ring I, the far corner | no | 47 |
+| 11 | Tephra | Titanborn | Ring II, over the stair down | yes | 46 |
+| 12 | Sinopos | Titanborn | Ring II, the side gallery | no | 46 |
+| 13 | No. 3 | Automaton | Ring III, the web maze's neck | yes, on the front way | 47 |
+| 14 | No. 7 | Automaton | Ring III, a side room | no | 47 |
+| 15–18 | Lithos, Koniortos, Sideros, Chalkos | Titanborn | Ring IV's four sentry posts | only if they see you undisguised | 46–47 |
+| 19 | Pelos | Titanborn | Ring IV, the armory | no | 47–48 |
+| 20 | Enkelados | Gigas | Ring IV's checkpoint (a wrong answer), or Ring VII | only after a wrong answer | 49 |
+| 21–24 | Anthrakos, Porinos, Argillos, Smyris | Titanborn | Ring VI, the alarm pool | when a Bronzong sees you | 47–48 |
+| 25 | Mimas | Gigas | Ring VI, the forge door | yes | 49 |
+| 26 | Alkyoneus | Gigas | Ring VI, the vault route | no | 49–50 |
+| 27 | **Hyperion** | Titan Admin | Ring VI, the forge | yes | 50–53 |
+| 28–29 | Porphyrion, with Enkelados or Klytios | Gigas | Ring VII, the dancing floor (double, with Ariadne) | yes | 49–50 |
+| 30 | **Kleon** | Lakonian | the Starry Chamber | yes | 51–54 |
+| — | Ariadne | partner | Ring VII | — | 49–50 |
+| 31–33 | Battos, Idaia, Agesilaos | Goatherd, Pilgrim, Cadet | Mount Ida (optional) | no | 47–49 |
+
+Ring V has no trainers: Asterion is its checkpoint (LABYRINTH §4).
+
+## The Bull Road, levels 44–47
+
+**1. BEEKEEPER Kerinthe.** In plain view on the first terrace, among her skeps. Easy: two Pokémon. Her name is *kerinthos*, bee-bread.
+```text
+Before: KERINTHE: Shh. They're working. Battle quietly.
+Defeat: KERINTHE: You didn't get stung once. They like you.
+After:  KERINTHE: Minoans kept bees before anyone. We painted them on everything.
+```
+```
+=== TRAINER_ICHOR_KERINTHE ===
+Name: KERINTHE
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melibee
+Level: 44
+Ability: Honey Gather
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melisseer
+Level: 44
+Ability: Forewarn
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Melibee evolves only if female; a male drone stays Melibee for life, so a level 44 Melibee obeys BALANCE's rule.
+
+**2. BULL-LEAPER Euphemos.** Mandatory. His sight line crosses the narrow cutting, with forced grass band 2 right behind him (LABYRINTH §2, beat 5).
+```text
+Before: EUPHEMOS: You walk like someone who's never been thrown. Let's fix that.
+Defeat: EUPHEMOS: Thrown! By a walker!
+After:  EUPHEMOS: Sarpedon says watch the head. Sarpedon says a lot of things.
+```
+```
+=== TRAINER_ICHOR_EUPHEMOS ===
+Name: EUPHEMOS
+Class: Bull-leaper
+Pic: Bull-leaper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Ikaroth
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**3. MINOAN PRIEST Phaistia.** Mandatory, at the narrow approach to the palace (LABYRINTH §2, beat 9). Named for Phaistos, the palace across the island.
+```text
+Before: PHAISTIA: The palace is closed. The priestess decides who it's closed to.
+Defeat: PHAISTIA: …Not to you, it seems.
+After:  PHAISTIA: Ariadne will want to see you. She wants to see very few people.
+```
+```
+=== TRAINER_ICHOR_PHAISTIA ===
+Name: PHAISTIA
+Class: Minoan Priest
+Pic: Minoan Priestess
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Korantha
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+**4. BULL-LEAPER Iphitos.** Optional, in the vineyard terraces, facing the vines.
+```text
+Before: IPHITOS: I'm practicing on the vines. They don't charge. Will you?
+Defeat: IPHITOS: You charged. I didn't leap. That's the wrong way round.
+After:  IPHITOS: Hoplomex jump better than me. I've stopped pretending they don't.
+```
+```
+=== TRAINER_ICHOR_IPHITOS ===
+Name: IPHITOS
+Class: Bull-leaper
+Pic: Bull-leaper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Taurivet
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**5. BEEKEEPER Propolis.** Optional, on the vineyard's upper terrace by the sealed jar. *Propolis* is bee glue, and he is very sticky about his terrace.
+```text
+Before: PROPOLIS: That jar's on my terrace. My terrace, my jar. Battle for it.
+Defeat: PROPOLIS: Fine. It's your jar. It was never really mine either.
+After:  PROPOLIS: Bees glue the cracks in the hive shut. With me. That's my name.
+```
+```
+=== TRAINER_ICHOR_PROPOLIS ===
+Name: PROPOLIS
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Melisseer
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melibee
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Thyrsivy
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**6. BULL-LEAPER Glauke.** Optional, on the Bronze Heel, doing handstands on the giant's toe.
+```text
+Before: GLAUKE: I leap the bronze one. He never moves. He's perfect.
+Defeat: GLAUKE: You moved. That's cheating.
+After:  GLAUKE: A bronze giant walked this shore every day once. Three laps a day.
+```
+```
+=== TRAINER_ICHOR_GLAUKE ===
+Name: GLAUKE
+Class: Bull-leaper
+Pic: Bull-leaper
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## The North Entrance: Titanborn, level 45
+
+**7–8. TITANBORN Keramos and Gypsos.** Both mandatory, under the charging-bull relief (LABYRINTH §2). Keramos is pottery clay; Gypsos is gypsum, the stone the palace is built of. Gypsos is STORY §5's archetype 10, the doubter.
+```text
+Before: KERAMOS: Palace is closed. For repairs. We're the repairs.
+Defeat: KERAMOS: Repairs are going badly.
+After:  KERAMOS: Don't go under. Not because we said. Because of the bull.
+
+Before: GYPSOS: In the golden age, do we still get to eat? I keep asking.
+Defeat: GYPSOS: Nobody ever answers. You didn't either.
+After:  GYPSOS: Fine. The priestess will deal with you.
+```
+```
+=== TRAINER_ICHOR_KERAMOS ===
+Name: KERAMOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Plouteras
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_GYPSOS ===
+Name: GYPSOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Ring I, the Threshold: priestesses, levels 46–47
+
+Two priestesses named for daughters of Minos, who "test anyone Ariadne sends" (LABYRINTH §6).
+
+**9. MINOAN PRIEST Akakallis.** Mandatory, easy (two Pokémon), lamp-lit at the first narrow point past the threshold hearth: the dungeon's first trainer, in plain view (LABYRINTH §4).
+```text
+Before: AKAKALLIS: Ariadne sent you with her thread. So I test you. That's the rule.
+Defeat: AKAKALLIS: You'll do. Carry the fire carefully. It's older than the walls.
+After:  AKAKALLIS: Every brazier down here takes only the hearth's fire. Mind the draughts.
+```
+```
+=== TRAINER_ICHOR_AKAKALLIS ===
+Name: AKAKALLIS
+Class: Minoan Priest
+Pic: Minoan Priestess
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Panacoil
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+**10. MINOAN PRIEST Xenodike.** Optional, facing away in the far corner, guarding TM Rock Slide.
+```text
+Before: XENODIKE: You found my corner. Nobody finds my corner. Battle, then.
+Defeat: XENODIKE: Take the scroll. I was only guarding it from boredom.
+After:  XENODIKE: My sister tests the brave. I test the nosy. You're both.
+```
+```
+=== TRAINER_ICHOR_XENODIKE ===
+Name: XENODIKE
+Class: Minoan Priest
+Pic: Minoan Priestess
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Korantha
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Persenyx
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Melisseer
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+## Ring II, the Runner's Ring: Titanborn scouts, level 46
+
+"Turn back! The bull's loose down here!" (LABYRINTH §6). Tephra is volcanic ash, a girl off Hyperion's Kaldera crews; Sinopos is red ochre.
+
+**11. TITANBORN Tephra.** Mandatory, lamp-lit, her sight across the stair down.
+```text
+Before: TEPHRA: Turn back! The bull's loose down here! …Fine. Battle first.
+Defeat: TEPHRA: Ow. Hyperion says I fight like a landslide. Downhill only.
+After:  TEPHRA: It nearly had me in the Long Hall. It looked at me. Then it didn't.
+```
+```
+=== TRAINER_ICHOR_TEPHRA ===
+Name: TEPHRA
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Gigantomb
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**12. TITANBORN Sinopos.** Optional, in the side gallery with the Silver Owl. STORY §5's archetype 8, the kid.
+```text
+Before: SINOPOS: I'm a scout! I scout. This gallery. It's very scouted.
+Defeat: SINOPOS: My friends joined. The helmets are good. Is that not a reason?
+After:  SINOPOS: …I don't think it's a very good reason, now I say it out loud.
+```
+```
+=== TRAINER_ICHOR_SINOPOS ===
+Name: SINOPOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Ring III, the Mysteries: Daedalus's automata, level 47
+
+The automata use Pokémon overworld sprites, as LABYRINTH §11 says, with the AUTOMATON class's bronze portrait. LABYRINTH's Bronzong and Golett become the dex's bronze giants, Kolossette and Kolossard (the Talos line, Daedalus's school), and No. 7 keeps a Kourodin, a bronze shield-dancer.
+
+**13. AUTOMATON No. 3.** Mandatory on the front way, at the web maze's one narrow neck, lit by its own glowing eyes.
+```text
+Before: NO. 3: CLICK. INTRUDER. CLICK. WIND ME. NO. BATTLE.
+Defeat: NO. 3: WHIRR… RUN… DOWN…
+After:  NO. 3: …CLICK.
+```
+```
+=== TRAINER_ICHOR_AUTOMATON_3 ===
+Name: NO. 3
+Class: Automaton
+Pic: Automaton
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+**14. AUTOMATON No. 7.** Optional, in the side room with TM Poltergeist. Its before-line is LABYRINTH's.
+```text
+Before: AUTOMATON 7: CLICK. WHIRR. CHALLENGE. CHALLENGE. CHALLENGE.
+Defeat: NO. 7: CHALLENGE… MET.
+After:  NO. 7: CLICK. GOOD. CLICK.
+```
+```
+=== TRAINER_ICHOR_AUTOMATON_7 ===
+Name: NO. 7
+Class: Automaton
+Pic: Automaton
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kourodin
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 47
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+Kolossette evolves only by trade, so it may stay unevolved at 47 (00's rule).
+
+## Ring IV, the Masks: Titanborn and Enkelados, levels 46–49
+
+LABYRINTH's five earth-born names. The four sentries battle you only if they see you undisguised; fighting through all of them is a valid way to play.
+
+**15. TITANBORN Lithos** (stone). The first post. Archetype 1, the dig-crew laborer.
+```text
+Before: LITHOS: No helmet? No pass. That's the whole rule.
+Defeat: LITHOS: The quarry closed. Then this. I'm not lucky with rock.
+After:  LITHOS: The disguise's in the barracks locker. I didn't tell you that.
+```
+**16. TITANBORN Koniortos** (dust). The second post. Archetype 2, the true believer.
+```text
+Before: KONIORTOS: The earth remembers the golden age. So do I. Nearly.
+Defeat: KONIORTOS: Dust to dust. I'm the dust.
+After:  KONIORTOS: When the master's done, nobody will be dust. Not ever.
+```
+**17. TITANBORN Sideros** (iron). The third post. Archetype 5, the soldier who wants out.
+```text
+Before: SIDEROS: The seer said I'd die in a war. Titans don't go to wars.
+Defeat: SIDEROS: Titans stop them. That's the idea. It's a good idea.
+After:  SIDEROS: …Is this a war? It feels like a war.
+```
+**18. TITANBORN Chalkos** (bronze). The fourth post, at the mess hall's door. Archetype 6, the servant at the feast.
+```text
+Before: CHALKOS: At the Kronia my master poured my wine. One day a year.
+Defeat: CHALKOS: Kronos says every day. I'd settle for one more.
+After:  CHALKOS: The mess hall's that way. They talk too much in there.
+```
+**19. TITANBORN Pelos** (mud). Optional, the armory guard, with the Hyper Potion behind him. Archetype 4, the resentful poor.
+```text
+Before: PELOS: The rich get readings at Delphoi. I got told I'd be poor.
+Defeat: PELOS: I'd like a turn being surprised. That wasn't the surprise I meant.
+After:  PELOS: Take the potion. It's not mine. Nothing down here is mine.
+```
+```
+=== TRAINER_ICHOR_LITHOS ===
+Name: LITHOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_KONIORTOS ===
+Name: KONIORTOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_SIDEROS ===
+Name: SIDEROS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossard
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_CHALKOS ===
+Name: CHALKOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Taurivet
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_PELOS ===
+Name: PELOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**20. GIGAS Enkelados.** The checkpoint (beat III-3I). He battles only after a wrong answer; otherwise he waits for you on the dancing floor in Ring VII. In myth Athena buried him under a whole island, so his team is a stone giant and a bronze one.
+```text
+Defeat: ENKELADOS: Buried again. Story of my life.
+After:  ENKELADOS: Go on, then. I'm not paid to fight twice.
+```
+```
+=== TRAINER_ICHOR_ENKELADOS ===
+Name: ENKELADOS
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Laolith
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+## Ring VI, the Forge: the alarm pool, the Gigas and Hyperion, levels 47–53
+
+**21–24. TITANBORN Anthrakos, Porinos, Argillos and Smyris.** The barracks pool that answers the Bronzong sentries' alarms (LABYRINTH §6), in that order; after the fourth, "Nobody's left to answer the bell." Anthrakos is coal, from the forge; Porinos, poros stone; Argillos, clay; Smyris, emery from Naxos.
+```text
+Before: ANTHRAKOS: The bell rang! Somebody's- oh. You.
+Defeat: ANTHRAKOS: Somebody else answer the next one.
+
+Before: PORINOS: That bell again. I was eating.
+Defeat: PORINOS: I was eating, and now I'm not, and I lost.
+
+Before: ARGILLOS: Bell, bell, bell. I hear it in my sleep. Battle!
+Defeat: ARGILLOS: Ring it again and I'm not coming.
+
+Before: SMYRIS: Last one in the barracks. They sent me. They always send me.
+Defeat: SMYRIS: That's everyone. Ring all you like now.
+```
+```
+=== TRAINER_ICHOR_ANTHRAKOS ===
+Name: ANTHRAKOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossard
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_PORINOS ===
+Name: PORINOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_ARGILLOS ===
+Name: ARGILLOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gigantomb
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_SMYRIS ===
+Name: SMYRIS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**25. GIGAS Mimas.** Mandatory, at the forge door. Hephaestus killed the Giant Mimas with a ladle of molten metal, so Mimas keeps the forge's fire and its bronze.
+```text
+Before: MIMAS: The forge is the Hand's. Nobody walks into the Hand's forge.
+Defeat: MIMAS: …Nobody but you.
+After:  MIMAS: He'll roast you. Mostly not literally.
+```
+```
+=== TRAINER_ICHOR_MIMAS ===
+Name: MIMAS
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Taurivet
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+**26. GIGAS Alkyoneus.** Optional, on the vault route. In myth he couldn't die while he stood on the soil he was born from, until Herakles dragged him off it. His ace is Geogrip, the dex's Antaeus, who has the same weakness.
+```text
+Before: ALKYONEUS: Stand on my ground and you can't beat me. That's the rule.
+Defeat: ALKYONEUS: …You didn't stand on it. You moved me off it. Clever.
+After:  ALKYONEUS: The vault's that way. Don't tell the Voice I let you by.
+```
+```
+=== TRAINER_ICHOR_ALKYONEUS ===
+Name: ALKYONEUS
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Plouteras
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Geogrip
+Level: 50
+Ability: Earth Eater
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+**27. TITAN ADMIN Hyperion,** at the forge (LABYRINTH Scene G), levels 50–53. STORY §2's team: "Taurivet; Laolith; Pyrapod; Hymnaria; Gigantomb (50–53)", light and fire around a buried giant, his ace the thing he fears. **No Apotheosis** (LABYRINTH §9). Defeat line: "HYPERION: Hot! HOT. Fine!" (Scene G).
+```
+=== TRAINER_ICHOR_HYPERION_KNOSSA ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Admin Hyperion
+Gender: Male
+Music: Titan
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Taurivet
+Level: 50
+Ability: Flame Body
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flare Blitz
+- Heavy Slam
+- Stomping Tantrum
+- Scary Face
+
+Laolith
+Level: 50
+Ability: Sturdy
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Drain Punch
+- Stealth Rock
+
+Pyrapod @ Eviolite
+Level: 51
+Ability: Magic Bounce
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flamethrower
+- Will-O-Wisp
+- Iron Defense
+- Calm Mind
+
+Hymnaria
+Level: 51
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hyper Voice
+- Heat Wave
+- Air Slash
+- Roost
+
+Gigantomb @ Sitrus Berry
+Level: 53
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Earth Power
+- Heat Crash
+- Stealth Rock
+```
+- **Taurivet** leads: the bronze bull of his home forge, charging blind.
+- **Laolith** brings Stealth Rock, the Hand's crews' work.
+- **Pyrapod stays unevolved, on purpose.** It evolves at 34 (to Mantipod), so a level 51 Pyrapod needs a reason, and STORY casts it. The reason: it holds an **Eviolite** and is built to wall, with Iron Defense, Calm Mind, Will-O-Wisp and Magic Bounce. Hyperion keeps his fire low and squat, where he can still see it. It also leaves Mantipod, the Pythia's ace, unspoiled for Delphoi. If the director prefers no unevolved boss Pokémon, swap in Mantipod 51 with Flamethrower, Psychic, Calm Mind and Will-O-Wisp (Open questions).
+- **Hymnaria** is the swan of Apollo's light: Punk Rock and Hyper Voice, the loudest thing in the forge.
+- **Gigantomb** is the giant buried under an island, breathing smoke (dex #84, "Admin Hyperion's ace"). It learns Eruption at 54, one level after this battle; the Stair of Hours rematch (the climax region) can have it.
+- **The matchups:**
+  - Nebrel players (Daphnyad) are weak to four of the five; their Fairy typing at least shrugs off Drain Punch. Their answers on Knossa are Telchis (Polypos's traded Telkanvil) and Kynoketos or Narkeray fished at the Bronze Heel.
+  - Kynder players (Pylakyon) are neutral to the fire and weak to the rock.
+  - Hipling players (Seismare) have the edge throughout.
+
+Prize: money and **TM Flare Blitz** (LABYRINTH §9).
+
+## Ring VII, the Choros: the double battle, levels 49–50
+
+**28–29. GIGAS Porphyrion, with Enkelados or Klytios,** against you and Ariadne, on the dancing floor (LABYRINTH Scene I). If you passed Enkelados's checkpoint without a fight, he stands beside Porphyrion here; if you beat him there, his place goes to **Klytios**, whom Hecate burned with her torches in the war of the Giants.
+```text
+Before: PORPHYRION: Priestess. The master said you'd stay above.
+Defeat: PORPHYRION: The master said a lot of things. You were right about that.
+
+Before: KLYTIOS: Torches. Always torches. I hate torches.
+Defeat: KLYTIOS: …Put it out. Please. I'll go.
+```
+```
+=== TRAINER_ICHOR_PORPHYRION ===
+Name: PORPHYRION
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Taurivet
+Level: 50
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Laolith
+Level: 50
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+```
+=== TRAINER_ICHOR_KLYTIOS ===
+Name: KLYTIOS
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Gigantomb
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 49
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+**Ariadne as your partner**, in `src/data/battle_partners.party`. LABYRINTH's placeholders become the Mistress's three signs in the Aethos dex: the bee, the snake and the flower. Melisseer's Pollen Puff heals an ally in a double battle, and Panacoil's hidden ability, Hospitality, heals the ally beside it as it comes in: a priestess who keeps people alive.
+```
+=== PARTNER_ICHOR_ARIADNE ===
+Name: ARIADNE
+Class: Minoan Priest
+Pic: Ariadne
+Gender: Female
+AI: Basic Trainer
+
+Melisseer
+Level: 50
+Ability: Forewarn
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Pollen Puff
+- Psychic
+- Defend Order
+- Quiver Dance
+
+Panacoil
+Level: 49
+Ability: Hospitality
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Wish
+- Dazzling Gleam
+- Sludge Bomb
+- Helping Hand
+
+Korantha
+Level: 49
+Ability: Natural Cure
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Moonblast
+- Energy Ball
+- Grassy Terrain
+- Synthesis
+```
+
+## The Starry Chamber: Kleon, levels 51–54
+
+**30. LAKONIAN Kleon,** at the heart (LABYRINTH Scene J). STORY §2's Knossa team, which replaces LABYRINTH's placeholders as D5 (a) requires: "Starter, final stage (54); Hoplektor (52); Dorydrake (52); Nemeleon (51); Laolith (51)". The Laolith is the Cairnolith the Titans gave him on the Akropolis ("It's from Kronion Hill. Like you."), traded up by the Titans' own hands. Intro, defeat and after lines are Scene J's ("Don't. Move. That's MY bull." / "…No. No, that's not how it goes."). Music: the rival theme with the Titan 9/8 layer, the last time he fights as a Titan agent.
+```
+=== TRAINER_ICHOR_KLEON_KNOSSA_PYLAKYON ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon Titan
+Gender: Male
+Music: Rival
+Items: Hyper Potion / Hyper Potion
+AI: Basic Trainer / Check Bad Move
+
+Laolith
+Level: 51
+Ability: Iron Fist
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Stone Edge
+- Earthquake
+- Body Press
+- Stealth Rock
+
+Nemeleon
+Level: 51
+Ability: Fur Coat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Double-Edge
+- Crunch
+- Bulk Up
+- Noble Roar
+
+Dorydrake
+Level: 52
+Ability: Moxie
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Rush
+- Crunch
+- Dig
+- Bulk Up
+
+Hoplektor
+Level: 52
+Ability: Guts
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Drill Peck
+- Counter
+- Bulk Up
+
+Pylakyon @ Sitrus Berry
+Level: 54
+Ability: Blaze
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Phantom Force
+- Flamethrower
+- Crunch
+- Will-O-Wisp
+```
+The other two entries change only the ace:
+- `TRAINER_ICHOR_KLEON_KNOSSA_SEISMARE`: **Seismare** @ Sitrus Berry, Lv 54: Wave Crash, Earthquake, Bounce, Agility.
+- `TRAINER_ICHOR_KLEON_KNOSSA_DAPHNYAD`: **Daphnyad** @ Sitrus Berry, Lv 54: Petal Blizzard, Dazzling Gleam, Leaf Blade, Synthesis.
+
+| Your starter | Kleon's ace | Why |
+|---|---|---|
+| Nebrel (Daphnyad by now) | Pylakyon | Fire beats Grass |
+| Kynder (Pylakyon) | Seismare | Water beats Fire |
+| Hipling (Seismare) | Daphnyad | Grass beats Water |
+
+He leads with Laolith and its Stealth Rock, and his Dorydrake has Moxie: Kleon's whole fight is momentum, the glory he was promised running straight at the thing in front of him. Laolith and Dorydrake are "the hit-it-again" pair; Hoplektor's Counter punishes a player who stays in. LABYRINTH's walker note stands: as a Titan agent he wears the bronze helmet pushed back like a cap, so he uses a "Kleon Titan" portrait (STORY §2).
+
+## Mount Ida (optional), levels 47–49
+
+**31. GOATHERD Battos.** On the Ida path, among his goats.
+```text
+Before: BATTOS: My goats eat thyme and thunder. Ask me what that tastes like.
+Defeat: BATTOS: Like losing. Fine. Like losing.
+After:  BATTOS: The cave up there's where the baby god was fed. By a goat. Ours.
+```
+```
+=== TRAINER_ICHOR_BATTOS ===
+Name: BATTOS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kerazap
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerastorm
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**32. PILGRIM Idaia.** At the cradle shrine's gate, leaving an offering.
+```text
+Before: IDAIA: I came to hear the shields. You're louder than the shields.
+Defeat: IDAIA: Quieter now. Both of us.
+After:  IDAIA: Listen at the shrine wall. You can hear them clang, deep down.
+```
+```
+=== TRAINER_ICHOR_IDAIA ===
+Name: IDAIA
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melisseer
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**33. CADET Agesilaos.** In the Idaean Cave's deep chamber, sitting cross-legged among the dancing Kourodin. A Lakonian boy on a school pilgrimage, the first CADET the player meets, and a quiet seed: Lakonia's battle school trains with these dancers (dex #103–104).
+```text
+Before: AGESILAOS: The instructors sent us to hear the Kouretes. I'm hearing them.
+Defeat: AGESILAOS: Fewer words. I know. The elders always say that.
+After:  AGESILAOS: In Lakonia the shield-dancers clash for every new baby. For luck.
+```
+```
+=== TRAINER_ICHOR_AGESILAOS ===
+Name: AGESILAOS
+Class: Cadet
+Pic: Cadet
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplektor
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kourodin
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Every species in Knossa, with its myth or setting link
+
+| Species | Why it's on Knossa |
+|---|---|
+| Taurivet | the palace herd, the Gentle Bull, the bull-leapers: Crete was the island of bulls. The dex has no plain bull, so Hephaestus's bronze bull stands in († Open questions). |
+| Asterlorn | Asterion, the one and only |
+| Melibee, Melisseer | the Minoan bee, the Mistress's honey (seed 2) |
+| Panacoil, Korantha | the snake goddess and the flower of the Minoan priestesses |
+| Kolossette, Kolossard | Talos, the bronze giant who walked Crete's shore three times a day (dex: Kolossard on Knossa's coastal cliffs); Daedalus's automata |
+| Ikaroth | Icarus, below the workshop's cliffs in harsh sun |
+| Mitoclew | Ariadne's clew, rolling ahead in the Labyrinth's dead ends |
+| Kymbash, Kourodin | the Kouretes who clashed shields over the infant Zeus in the Idaean Cave |
+| Kerazap, Kerastorm, Eripip | Amalthea, the goat who fed Zeus on Crete |
+| Monophant, Sepidart | fossils dug on Knossa, revived by Daedalus |
+| Telkanvil | the Telchines, smiths of the sea who lived on Crete before the gods |
+| Thyrsivy, Oinopard | the vineyards of the house of Minos, where Dionysus courted Ariadne |
+| Hyphantis, Kalyptor, Persenyx, Lykanax | the dark of the rings: webs, shades, the Kore's dark, the hunt |
+| Sophowl, Psychora, Chelyra, Amnoze | the starlit Choros and its painted sky |
+
+## Conventions for Lakonia
+
+- Levels rise along the road (00_front, as revised by the director's map): Route 24 48–50, Route 25 49–51, Lakonia 50–53 (Iapetos 52–54, Kleon 53–55), Route 26 50–51, Lake Stymphalia 51–52, Route 27 52–53.
+- Route trainers, cadets and Titanborn: IVs 14, AI Basic Trainer. Gigas: IVs 20, one Hyper Potion. Iapetos: IVs 24, ace 31, two Full Restores. Kleon: IVs 24, starter 31, two Full Restores. The gods as partners: IVs 31.
+- The agoge's gauntlet: Archidamos is the house's checkpoint boss; his cadets are ordinary trainers.
+- Pic and Music values are vanilla placeholders until the sprites arrive (00_front's class table).
+- A ` / ` inside a trainer's Before, Defeat or After line is a page break (`\p`).
+
+## Route 24, the strait off Malea (optional), levels 48–50
+
+**1. SAILOR Eurybiades.** In plain view, in a skiff just out of Skandeia's bay.
+```text
+Before: EURYBIADES: Lakonian navy! Well. Me. I'm the Lakonian navy.
+Defeat: EURYBIADES: Sunk. The navy's sunk. Tell nobody.
+After:  EURYBIADES: Lakonians hate boats. That's why there's only me.
+```
+```
+=== TRAINER_ICHOR_EURYBIADES ===
+Name: EURYBIADES
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Galenyon
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Karkitox
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. DIVER Skyllis.** On Elaphonisos's sand, facing the drowned town.
+```text
+Before: SKYLLIS: I can hold my breath for a whole battle. Watch.
+Defeat: SKYLLIS: …Gasp! Fine. You win. I needed air anyway.
+After:  SKYLLIS: There's a town down there. I've touched its doorsteps. / I can't stay down long enough to knock.
+```
+```
+=== TRAINER_ICHOR_SKYLLIS ===
+Name: SKYLLIS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Narkeray
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 48
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**3. DIVER Kolymbe.** In the shallows north of the islet, surfacing and diving on a loop.
+```text
+Before: KOLYMBE: Sponges! I dive for sponges! Want to see what else I dive for?
+Defeat: KOLYMBE: Battles, apparently. Badly.
+After:  KOLYMBE: A stone on a rope, and down you go. / Then you let go of it. That's the hard part.
+```
+```
+=== TRAINER_ICHOR_KOLYMBE ===
+Name: KOLYMBE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Swimmer
+AI: Basic Trainer
+
+Aphrogene
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kynoketos
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Aphrogene evolves by Shiny Stone; Kolymbe got hers from Kythera's acolytes, which the dex names as the species' keepers.
+
+**4. FISHER Halieus.** On the fishers' rock near Gytheion, facing the water. Optional.
+```text
+Before: HALIEUS: You're scaring the fish. I'll scare you back.
+Defeat: HALIEUS: The fish are laughing at me. I can hear them.
+After:  HALIEUS: Murex for the dyers, mullet for me. Titans for nobody.
+```
+```
+=== TRAINER_ICHOR_HALIEUS ===
+Name: HALIEUS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Kynoketos
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Karkitox
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Route 25, levels 49–51
+
+**1. CADET Agiatis.** The road's first trainer, easy, running down the path toward you.
+```text
+Before: AGIATIS: Out of the way! Training run! …Or battle me. That's training too.
+Defeat: AGIATIS: I'll run it off. I'll run everything off.
+After:  AGIATIS: Girls run in Lakonia. Everybody else's girls stay home. Theirs lose.
+```
+```
+=== TRAINER_ICHOR_AGIATIS ===
+Name: AGIATIS
+Class: Cadet
+Pic: Picnicker
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Hoplomex
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerazap
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. CADET Teleklos.** On the reed beds' bank. Mandatory: the bank is the only dry way past the reeds, and he faces it.
+```text
+Before: TELEKLOS: My hands hurt. I'm going to take it out on you.
+Defeat: TELEKLOS: …My hands hurt more now.
+After:  [his Part 2 lines]
+```
+```
+=== TRAINER_ICHOR_TELEKLOS ===
+Name: TELEKLOS
+Class: Cadet
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Cairnolith
+Level: 49
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Cairnolith evolves only by trade, and nobody in the battle school will trade with Teleklos. ("Nobody trades with the boy whose mother bakes.")
+
+**3. CADET Isadas** and **4. CADET Phoibidas.** Either bank of the ford. Both mandatory; their sight lines meet across the ford's single tile, and band 2 starts behind Phoibidas.
+```text
+Isadas before:    ISADAS: You have to cross the ford. We have to stop you. That's the drill.
+Isadas defeat:    ISADAS: Drill failed. I'll be running laps till the moon's up.
+Isadas after:     ISADAS: Phoibidas will get you. He never lets anyone past. He's very annoying.
+
+Phoibidas before: PHOIBIDAS: Isadas let you past? Typical. Not me.
+Phoibidas defeat: PHOIBIDAS: Oh. I let you past. Don't tell Isadas.
+Phoibidas after:  PHOIBIDAS: The grass is full past here. I'd go round. You can't go round. Ha.
+```
+```
+=== TRAINER_ICHOR_ISADAS ===
+Name: ISADAS
+Class: Cadet
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Dorydrake
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Nemeleon
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_PHOIBIDAS ===
+Name: PHOIBIDAS
+Class: Cadet
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplektor
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplomex
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**5. FISHER Alpheios.** On a flat rock in the river, facing the water. Optional.
+```text
+Before: ALPHEIOS: Eels. The Eurotas has eels. And now, you.
+Defeat: ALPHEIOS: Slippery. Like the eels.
+After:  ALPHEIOS: The cadets steal my eels. / They're not allowed food from home. Eels aren't from home.
+```
+```
+=== TRAINER_ICHOR_ALPHEIOS ===
+Name: ALPHEIOS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Karkitox
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**6. PILGRIM Theodora.** On Amyklai's steps. Optional.
+```text
+Before: THEODORA: I came to mourn Hyakinthos. I'm early. Let's battle while I wait.
+Defeat: THEODORA: Now I've something to mourn.
+After:  THEODORA: Three days of grief, then a feast. I'm here for the feast, honestly.
+```
+```
+=== TRAINER_ICHOR_THEODORA ===
+Name: THEODORA
+Class: Pilgrim
+Pic: Hex Maniac
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Kalyptor
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**7. HOPLITE Amompharetos.** At the narrow cutting below the plane trees. Mandatory; band 3 is right behind him. At Plataea the real Amompharetos refused an order to retreat and dropped a boulder at his general's feet: "My vote."
+```text
+Before: AMOMPHARETOS: Lakonians don't step back. Not for generals. Not for you.
+Defeat: AMOMPHARETOS: …Fine. I'm stepping sideways. That's different.
+After:  AMOMPHARETOS: They told me to retreat, once. I put a rock at their feet. “My vote,” I said.
+```
+```
+=== TRAINER_ICHOR_AMOMPHARETOS ===
+Name: AMOMPHARETOS
+Class: Hoplite
+Pic: Black Belt
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Laolith
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kourodin
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplektor
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Lakonia, levels 50–55
+
+### Gigas Gration (III-5F), level 52
+
+```
+=== TRAINER_ICHOR_GIGAS_GRATION ===
+Name: GRATION
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Aqua
+Items: Hyper Potion
+AI: Basic Trainer
+
+Laolith
+Level: 52
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 52
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Belornis
+Level: 52
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+Defeat text: "Fine! Fine. I'm only the doorway." Gration is a Giant of the Gigantomachy, and his name is clear of LABYRINTH's five (Enkelados, Porphyrion, Mimas, Alkyoneus, Klytios). Pallas, his partner, fights Rhea offscreen and needs no party.
+
+### Keeper Iapetos, the Voice (III-5F), levels 52–54
+
+A liar's story in every slot (STORY §2): the theater mask, the weaver of the gods' crimes, the cynic who never found an honest man, the riddling sphinx, and the vixen fated never to be caught.
+
+```
+=== TRAINER_ICHOR_IAPETOS_LAKONIA ===
+Name: IAPETOS
+Class: Titan Admin
+Pic: Titan Admin Iapetos
+Gender: Male
+Music: Aqua
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Prosomime
+Level: 52
+Ability: Illusion
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Nasty Plot
+- Psychic
+- Sludge Bomb
+- Shadow Ball
+
+Hyphantis
+Level: 52
+Ability: Swarm
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Sticky Web
+- Throat Chop
+- Sucker Punch
+- Lunge
+
+Pithound
+Level: 53
+Ability: Prankster
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Foul Play
+- Psychic
+- Light Screen
+- Yawn
+
+Enigmaw
+Level: 53
+Ability: Forewarn
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- Psychic
+- Future Sight
+- Calm Mind
+
+Kerdovix @ Sitrus Berry
+Level: 54
+Ability: Emergency Exit
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Foul Play
+- Parting Shot
+- Detect
+```
+- **Prosomime leads,** and its Illusion makes it look like his last Pokémon, so the first thing Iapetos shows you is a lie. Shadow Ball is a TM in its teachable list.
+- **Hyphantis** lays Sticky Web on turn one: Arachne weaving the field against you.
+- **Pithound's** Prankster puts Light Screen and Yawn first: the cynic in the jar, who searched for an honest man and never found one, makes sure you never get a straight fight.
+- **Kerdovix** is the ace and the exit. While anything else is left, Emergency Exit switches it out the moment it drops below half, and Parting Shot does the same on purpose, so it is the last thing you get to finish. He leaves the field the way he leaves the scene.
+- **The matchups:** Bug and Fairy moves hit three of the five, and the school's fields sell Fighting-type answers (Hoplomex, Hoplektor) for the other two. Pylakyon (Fire/Ghost) is weak to Pithound and Kerdovix's Dark moves; Daphnyad (Grass/Fairy) walls Enigmaw and Throat Chop but fears Sludge Bomb; Seismare is neutral down the line.
+
+Defeat text: "Hm. That isn't how I'd have written it."
+
+### Titanborn Kachlex and Plinthos (after III-5F), level 52
+
+The doubters (STORY §5, archetype 10). On the agora's steps with their helmets off; optional. After the climax they're gone ("went home").
+```text
+Kachlex before:  KACHLEX: The Voice ran. We stayed. I don't know why. / Battle me, so I know I'm doing something.
+Kachlex defeat:  KACHLEX: Yeah. That's about right.
+Kachlex after:   KACHLEX: He said in the golden age nobody gets old. / I asked, do the old stay old? He didn't answer that either.
+
+Plinthos before: PLINTHOS: In the golden age, do we still get to eat? / You don't know either. Nobody does.
+Plinthos defeat: PLINTHOS: I'm going to find some bread. Whatever age it is.
+Plinthos after:  PLINTHOS: Lady Rhea told us to go home. She said it was advice. / Lakonian advice is an order with manners.
+```
+```
+=== TRAINER_ICHOR_TITANBORN_KACHLEX ===
+Name: KACHLEX
+Class: Titanborn
+Pic: Titanborn
+Gender: Male
+Music: Aqua
+AI: Basic Trainer
+
+Plouteras
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_TITANBORN_PLINTHOS ===
+Name: PLINTHOS
+Class: Titanborn
+Pic: Titanborn
+Gender: Male
+Music: Aqua
+AI: Basic Trainer
+
+Taurivet
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Laolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+### The agoge's gauntlet, levels 50–53
+
+Three cadets in a line down the barracks, then Archidamos. No healing between; leaving the room resets the line.
+```text
+LYKISKOS before:  LYKISKOS: First in line! I'm always first. I'm also always beaten. Let's go.
+LYKISKOS defeat:  LYKISKOS: Beaten. Consistent, at least.
+HAGNON before:    HAGNON: Lykiskos is soft. I'm not soft. Feel my arm. …No, don't.
+HAGNON defeat:    HAGNON: I'm soft. I'm so soft.
+EUDAMIDAS before: EUDAMIDAS: One more and you get the master. Nobody gets the master.
+EUDAMIDAS defeat: EUDAMIDAS: You get the master. Sorry. / Good luck. Fewer words than that, though.
+ARCHIDAMOS before: ARCHIDAMOS: Three of mine down. Now me. No crying.
+ARCHIDAMOS defeat: ARCHIDAMOS: …Not soft. Hm.
+```
+```
+=== TRAINER_ICHOR_LYKISKOS ===
+Name: LYKISKOS
+Class: Cadet
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gelasable
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_HAGNON ===
+Name: HAGNON
+Class: Cadet
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Dorydrake
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Nemeleon
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_EUDAMIDAS ===
+Name: EUDAMIDAS
+Class: Cadet
+Pic: Picnicker
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Kourodin
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplektor
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_ARCHIDAMOS ===
+Name: ARCHIDAMOS
+Class: Hoplite
+Pic: Black Belt
+Gender: Male
+Music: Hiker
+Items: Hyper Potion
+AI: Basic Trainer / Check Bad Move
+
+Geogrip
+Level: 52
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Bulk Up
+- Superpower
+- High Horsepower
+- Shore Up
+
+Dorydrake
+Level: 52
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kourodin
+Level: 53
+Ability: Dancer
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Sacred Sword
+- Heavy Slam
+- Noble Roar
+- Swords Dance
+```
+The rematch, weekly after the credits, takes the Aethos post-game row (BALANCE).
+
+### Kleon, the clean battle (III-5I), levels 53–55
+
+He has the team STORY §2 gives him at Lakonia: his starter's final stage (the one that beats yours), the cockerel from Elaia's farmyards grown into a war-bird, a Spartoi sown in the school's field, a lion from Lakonia's hills, the ant-soldier from outside the school, and his mother's Kourodin, given to him an hour ago. Three versions by starter.
+
+```
+=== TRAINER_ICHOR_KLEON_LAKONIA_PYLAKYON ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Hoplomex
+Level: 53
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Close Combat
+- X-Scissor
+- Crunch
+- Bulk Up
+
+Nemeleon
+Level: 53
+Ability: Fur Coat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Double-Edge
+- Crunch
+- Bulk Up
+- Crush Claw
+
+Dorydrake
+Level: 54
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dragon Dance
+- Dragon Rush
+- Brick Break
+- Crunch
+
+Hoplektor
+Level: 54
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Brave Bird
+- Close Combat
+- Drill Peck
+- Bulk Up
+
+Kourodin
+Level: 54
+Ability: Dancer
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Sacred Sword
+- Heavy Slam
+- Teeter Dance
+- Swords Dance
+
+Pylakyon @ Charcoal
+Level: 55
+Ability: Blaze
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Phantom Force
+- Temper Flare
+- Crunch
+- Will-O-Wisp
+```
+`TRAINER_ICHOR_KLEON_LAKONIA_SEISMARE` (the player chose Kynder) is the same five, then:
+```
+Seismare @ Mystic Water
+Level: 55
+Ability: Torrent
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Wave Crash
+- Earthquake
+- Liquidation
+- Agility
+```
+`TRAINER_ICHOR_KLEON_LAKONIA_DAPHNYAD` (the player chose Hipling) is the same five, then:
+```
+Daphnyad @ Miracle Seed
+Level: 55
+Ability: Overgrow
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Petal Blizzard
+- Dazzling Gleam
+- Energy Ball
+- Synthesis
+```
+- **The order is the story.** He leads with the ant-soldier from outside the school, the first thing he caught here as a boy, and his starter comes last, as it always has. His mother's Kourodin is fifth, one slot before the end: it stands in front of him.
+- **Kourodin's Dancer** copies any dance move used on the field, and it knows Teeter Dance itself: the shield-dance that once hid a baby's cough now makes the whole field stagger.
+- **Every move is in the dex learnset at or below its level** (Pylakyon's Phantom Force at 53, Seismare's Wave Crash at 54, Daphnyad's Petal Blizzard at 51, Hoplektor's Brave Bird at 53, Dorydrake's Dragon Dance at 54, Kourodin's Sacred Sword at 42).
+- **No whiteout.** `FLAG_ICHOR_NO_WHITEOUT` is set for this battle, and both outcomes go on (Part 1).
+
+Defeat text: "…Huh. I lost. And nothing happened. The sky's still there." Victory text: "I won! I won. And it doesn't mean anything. Isn't that great?"
+
+## Route 26, past the training grounds, levels 50–51
+
+**1. CADET Anaxilas.** The route's first trainer, easy, running laps on the track in plain view.
+```text
+Before: ANAXILAS: Lap forty! Or forty-one. Battle me while I count.
+Defeat: ANAXILAS: Now I've lost the count AND the battle.
+After:  ANAXILAS: The island's past the field. Two bridges. Pick one and don't fall in.
+```
+```
+=== TRAINER_ICHOR_ANAXILAS ===
+Name: ANAXILAS
+Class: Cadet
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Hoplomex
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gelasable
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. CADET Anaxandros.** At the head of Herakles's bridge onto the Platanistas. Mandatory: the path crosses the island, and his sight line runs the bridge's length.
+```text
+Before: ANAXANDROS: Herakles's bridge is my team's. Cross it and you're on my side. Or in the moat.
+Defeat: ANAXANDROS: …Fine. You're on my side. Welcome to the team. We lost.
+After:  ANAXANDROS: Out by Lykourgos's bridge. Nobody ever says thank you to Lykourgos.
+```
+```
+=== TRAINER_ICHOR_ANAXANDROS ===
+Name: ANAXANDROS
+Class: Cadet
+Pic: Camper
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Dorydrake
+Level: 50
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplektor
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**3. SCOUT Dienekes.** Mandatory, on a rock where the path narrows between two rock walls; band 2 starts behind him. At Thermopylae, told the Persian arrows would hide the sun, the real Dienekes said: good, then we'll fight in the shade.
+```text
+Before: DIENEKES: Seen you coming for a mile. That's the job. Now, the other job.
+Defeat: DIENEKES: Should've seen that coming too.
+After:  DIENEKES: They say the Titans' arrows will blot out the sun. / Good. We'll fight in the shade.
+```
+```
+=== TRAINER_ICHOR_DIENEKES ===
+Name: DIENEKES
+Class: Scout
+Pic: Ruin Maniac
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Cairnolith
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Harpelle
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Lake Stymphalia, levels 51–52
+
+**1. FISHER Kyknos.** The lake's first trainer, easy, on the first boardwalk in plain view.
+```text
+Before: KYKNOS: The birds here drop feathers like knives. / I fish in a helmet. Battle me in one.
+Defeat: KYKNOS: A feather went down my collar. I'm blaming you.
+After:  KYKNOS: Akanthis in the stilt hut says there's a monster in the deep reeds. / She says that about everything.
+```
+```
+=== TRAINER_ICHOR_KYKNOS ===
+Name: KYKNOS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Karkitox
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. TITANBORN Borboros.** The straggler from the columns, sitting on the long boardwalk with his legs over the edge. Mandatory: the boardwalk is one tile wide and he's in the way. The doubter, in STORY §5's exact words.
+```text
+Before: BORBOROS: In the golden age, do we still get to eat? / I've asked three times. Nobody answers.
+Defeat: BORBOROS: Nobody answers that either.
+After:  BORBOROS: The column won't wait. It never waits. / I'm going to sit here a while. You can step over me.
+```
+```
+=== TRAINER_ICHOR_TITANBORN_BORBOROS ===
+Name: BORBOROS
+Class: Titanborn
+Pic: Titanborn
+Gender: Male
+Music: Aqua
+AI: Basic Trainer
+
+Kolossard
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Plouteras
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**3. AUGUR Melampous.** By the nests' reed curtain, watching the birds. Optional. Melampous was the seer who understood birds after snakes licked his ears.
+```text
+Before: MELAMPOUS: Bronze birds. They read nothing. I read them. Battle?
+Defeat: MELAMPOUS: The birds saw that coming. I didn't.
+After:  MELAMPOUS: The little ones nest in there, in the shallows. / Mornings and evenings. Wade in quiet.
+```
+```
+=== TRAINER_ICHOR_MELAMPOUS ===
+Name: MELAMPOUS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Belornis
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**4. HARVESTER Donax.** Cutting reeds on islet 3, facing away. Optional.
+```text
+Before: DONAX: Reeds for roofs. Reeds for pipes. Reeds for the cadets' beds. Reeds for you!
+Defeat: DONAX: I'll cut you a pipe to cry into.
+After:  DONAX: The south reeds grow back while you watch. / I don't cut there. Nobody cuts there.
+```
+```
+=== TRAINER_ICHOR_DONAX ===
+Name: DONAX
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Karkitox
+Level: 51
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelonet
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Route 27, over the hills into Arkadia, levels 52–53
+
+**1. SHEPHERD Tityos.** The route's first trainer, easy, in plain view among his goats on the path.
+```text
+Before: TITYOS: My goats climb better than you. They battle better too. Watch.
+Defeat: TITYOS: The goats are disappointed in me.
+After:  TITYOS: There's a watchtower south of the spring. / Past a fallen drum. Only a strong back moves that.
+```
+```
+=== TRAINER_ICHOR_TITYOS ===
+Name: TITYOS
+Class: Shepherd
+Pic: Hiker
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Kerazap
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+```
+
+**2. SCOUT Othryades.** On the ravine bridge. Mandatory; band 2 starts at the bridge's west end. At the Battle of the Champions the real Othryades was the last Lakonian standing, and wrote "VICTORY" on a shield in his own blood.
+```text
+Before: OTHRYADES: One bridge. One scout. That's me, and that's the bridge.
+Defeat: OTHRYADES: Still standing. Mostly. Fine. Cross.
+After:  OTHRYADES: A strap from Gylippos? Give it here. My staff's his twin.
+```
+```
+=== TRAINER_ICHOR_OTHRYADES ===
+Name: OTHRYADES
+Class: Scout
+Pic: Ruin Maniac
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Lykanax
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Nemeleon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hyphantis
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+**The scytale.** With `FLAG_ICHOR_GOT_SCYTALE_STRAP`, after his battle:
+```text
+OTHRYADES: Wind it. Tight. Round and round.
+
+[The strap's close-up: wound on the staff, the letters line up.]
+
+“FEWER WORDS. THIRD PLANE TREE. DIG.”
+
+OTHRYADES: Ha. That's Gylippos. Forty years, and still “fewer words.”
+```
+[`FLAG_ICHOR_READ_SCYTALE`. The strap leaves the bag.]
+
+**3. SCOUT Sthenelaidas.** At the narrow top of the pass, before band 3. Mandatory. The real Sthenelaidas made Lakonia's shortest war speech: "Vote for war. Don't let the Athenians get any bigger."
+```text
+Before: STHENELAIDAS: Last scout on the road. I'll keep it short. Battle.
+Defeat: STHENELAIDAS: Short. Like I said.
+After:  STHENELAIDAS: Arkadia's over the rise. Cypresses. Wolves at night. Mind both.
+```
+```
+=== TRAINER_ICHOR_STHENELAIDAS ===
+Name: STHENELAIDAS
+Class: Scout
+Pic: Ruin Maniac
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Enigmaw
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Lykanax
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+### Ares's theoxenia: the ambush (optional), level 52, double battle
+
+The attackers, as one double battle (`Double Battle: Yes` on each, or the expansion's two-opponent form), with the god beside you.
+```
+=== TRAINER_ICHOR_TITANBORN_CHOMA ===
+Name: AULAX
+Class: Titanborn
+Pic: Titanborn
+Gender: Male
+Music: Aqua
+AI: Basic Trainer
+
+Laolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_TITANBORN_KERAMOS ===
+Name: GAIEOS
+Class: Titanborn
+Pic: Titanborn
+Gender: Male
+Music: Aqua
+AI: Basic Trainer
+
+Gigantomb
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Plouteras
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== PARTNER_ICHOR_ARES_VETERAN ===
+Name: VETERAN
+Class: Veteran
+Pic: Black Belt
+Gender: Male
+Music: Hiker
+
+Hoplektor
+Level: 53
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Brave Bird
+- Close Combat
+- Drill Peck
+- Bulk Up
+
+Kaprodon
+Level: 53
+Ability: Intimidate
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Thrash
+- Crunch
+- Earthquake
+- Night Slash
+
+Dorydrake
+Level: 53
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Dragon Rush
+- Brick Break
+- Bulk Up
+- Crunch
+```
+His three are Ares's own myths: Alektryon, the sentry he turned into a rooster (Hoplektor is the dex's Alektryon line); the boar whose shape he took to kill Adonis; and the Spartoi, the warriors who sprang from his dragon's sown teeth. Kaprodon's Earthquake hits allies in a double; the AI should prefer Thrash and Crunch while the player's partner slot is filled.
+
+## Conventions for Delphoi
+
+00_front's table holds: route trainers and Titanborn IVs 14, Basic Trainer; Gigas IVs 20 with a Hyper Potion; acolytes IVs 20; Phemonoe IVs 24, her ace 31, two Full Restores, Basic Trainer and Check Bad Move; Rhea as a partner, IVs 24, her ace 31. Moves are listed only for the Hierophant, the Gigas pair and Rhea, and every listed move is in the species' dex learnset at or below that level, or its teachable list. Every route Pokémon below is in its evolved form (BALANCE).
+
+**New classes used here** (00_front's table): MELISSA, KITHARODE, PROPHETES, MOUNTAINEER. Reused: PILGRIM, TITANBORN, RUNNER, AUGUR, GOATHERD, GIGAS, HIEROPHANT, TITAN ADMIN (Rhea, as a partner).
+
+## The Sacred Olives, levels 52–54
+
+**1. PILGRIM Euangelos.** On the road, first screen past band 1, facing west, in plain view. Easy. Two Pokémon.
+```text
+Before: EUANGELOS: I've walked a month to hear good news. I'd settle for a battle.
+Defeat: EUANGELOS: Not the news I wanted. News, though.
+After:  EUANGELOS: My name means good news. My mother was an optimist.
+```
+```
+=== TRAINER_ICHOR_EUANGELOS ===
+Name: EUANGELOS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Sophowl
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melisseer
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. TITANBORN Psammos.** At the desecrated altar, facing east across the narrow point (sight 3). Mandatory. Archetype 1, the dig-crew laborer.
+```text
+Before: PSAMMOS: Orders are, nobody touches the Unwoven. Nobody said nobody battles.
+Defeat: PSAMMOS: Fair. That's fair. Don't tell the Gigas I asked.
+After:  PSAMMOS: I scratched the altar. Hyperion said to. I'd rather I hadn't.
+```
+```
+=== TRAINER_ICHOR_PSAMMOS ===
+Name: PSAMMOS
+Class: Titanborn
+Pic: Titanborn M
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Cairnolith stays unevolved: it evolves only by trade.
+
+**3. RUNNER Phayllos.** In the side row north of the road, facing up the row, away from the player. Optional.
+```text
+Before: PHAYLLOS: Training for the Pythian games! Race you to a battle!
+Defeat: PHAYLLOS: Outrun! On my own track!
+After:  PHAYLLOS: The games are every four years. I keep being two years early.
+```
+```
+=== TRAINER_ICHOR_PHAYLLOS ===
+Name: PHAYLLOS
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Cool
+AI: Basic Trainer
+
+Harpelle
+Level: 52
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Basilops
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**4. TITANBORN Plinthis.** At the plain's east gate where the road narrows into the gorge (sight 4). Mandatory. Archetype 4, the resentful poor.
+```text
+Before: PLINTHIS: The rich get readings and plan around them. I got told I'd be poor.
+Defeat: PLINTHIS: Poor and beaten. The reading's holding up.
+After:  PLINTHIS: I'd like a turn being surprised. Just once. Tonight, maybe.
+```
+```
+=== TRAINER_ICHOR_PLINTHIS ===
+Name: PLINTHIS
+Class: Titanborn
+Pic: Titanborn F
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Taurivet
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gigantomb
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+She's one of Hyperion's crews: his bulls, his buried giants.
+
+## The Kastalian Gorge, levels 53–55
+
+**5. TITANBORN Kisseris.** In the camp lane, facing across it from the cookhouse (sight 3). Mandatory. Archetype 5, the soldier who wants out.
+```text
+Before: KISSERIS: Seer said I'd die in a war. Titans don't go to wars. Titans stop them.
+Defeat: KISSERIS: …So what's all this, then? A camp. Helmets. Gigas. Tonight.
+After:  KISSERIS: It's a war. Isn't it. I joined to get out of one, and it's a war.
+```
+```
+=== TRAINER_ICHOR_KISSERIS ===
+Name: KISSERIS
+Class: Titanborn
+Pic: Titanborn M
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Hoplomex
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**6. TITANBORN Chomas.** By a cookfire on the west bank, facing the fire. Optional. Archetype 10, the doubter.
+```text
+Before: CHOMAS: In the golden age, do we still get to eat? I've asked three times.
+Defeat: CHOMAS: Nobody answers. Not even you. You just win.
+After:  CHOMAS: If nothing ever ends, does dinner? Does it never end, or never come?
+```
+```
+=== TRAINER_ICHOR_CHOMAS ===
+Name: CHOMAS
+Class: Titanborn
+Pic: Titanborn M
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossette
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Midonos
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Kolossette evolves only by trade.
+
+**7. GIGAS Agrios.** In the cutting, facing south (sight 4). Mandatory. In the myth the Fates themselves killed Agrios with bronze clubs, which he hasn't heard.
+```text
+Before: [Part 1]
+Defeat: AGRIOS: Tested. Fine. Go on up.
+After:  AGRIOS: Go on up. Everything goes up tonight.
+```
+```
+=== TRAINER_ICHOR_GIGAS_AGRIOS ===
+Name: AGRIOS
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Kaprodon
+Level: 54
+Ability: Intimidate
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Cairnolith
+Level: 54
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Kolossard
+Level: 55
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+**8. TITANBORN Asbolos.** On the middle ledge path above the lower fall (sight 4). Mandatory. Archetype 9, the flattered.
+```text
+Before: ASBOLOS: They read me my true thread. Free! It said I'd be a hero tonight.
+Defeat: ASBOLOS: Tonight's not over. I can still be a hero later. Right?
+After:  ASBOLOS: Maybe the hero part means something else. Readings are like that.
+```
+```
+=== TRAINER_ICHOR_ASBOLOS ===
+Name: ASBOLOS
+Class: Titanborn
+Pic: Titanborn F
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Kaprodon
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**9. MELISSA Chrysis.** At the far end of the middle pool, filling jars, facing the water. Optional.
+```text
+Before: CHRYSIS: The melissai fetch the god's water. Today I'll fetch a battle.
+Defeat: CHRYSIS: Spilled every jar. Ah well. There's plenty more falling.
+After:  CHRYSIS: The Pythia hasn't slept in a month. Don't tell anyone I told you.
+```
+```
+=== TRAINER_ICHOR_CHRYSIS ===
+Name: CHRYSIS
+Class: Melissa
+Pic: Melissa
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Melisseer
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hymnaria
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Her After line is the dread line from 00_front ("the melissai say she's stopped sleeping").
+
+## Delphoi, levels 54–55 (all optional)
+
+**10. RUNNER Orsippos.** On the stadium's track, running laps, facing along it (sight 3). Optional; he's on the track, but the seats go round him.
+```text
+Before: ORSIPPOS: Six hundred feet! Apollo paced it out. Let's see your feet.
+Defeat: ORSIPPOS: Lapped! In the god's own stadium!
+After:  ORSIPPOS: That Lakonian boy runs here every morning. His mother shouts.
+```
+```
+=== TRAINER_ICHOR_ORSIPPOS ===
+Name: ORSIPPOS
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Cool
+AI: Basic Trainer
+
+Basilops
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Lykanax
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 55
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**11. AUGUR Iamos.** On the theater's top row, facing the sky. Optional; talk to him.
+```text
+Before: IAMOS: The birds over Parnassos are all flying west. Let's see what you are.
+Defeat: IAMOS: A bird I didn't read. That's a first.
+After:  IAMOS: [day] The birds won't land on the temple roof. They circle it.
+After:  IAMOS: [VAR_ICHOR_ACT3 = 13] Part 1's line: the stars are a hand's width off.
+```
+```
+=== TRAINER_ICHOR_IAMOS ===
+Name: IAMOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Basilops
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 55
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**12. KITHARODE Chrysothemis.** In his house, on the practice platform. Talk to him after the quiz. Optional, with rematches (below).
+```text
+Before: CHRYSOTHEMIS: Battle me while I warm up. Music is a battle, really.
+Defeat: CHRYSOTHEMIS: A flat ending! On the last note!
+After:  CHRYSOTHEMIS: Come back. I'll have practiced. I'm always practicing.
+```
+```
+=== TRAINER_ICHOR_CHRYSOTHEMIS ===
+Name: CHRYSOTHEMIS
+Class: Kitharode
+Pic: Kitharode
+Gender: Male
+Music: Rich
+AI: Basic Trainer
+
+Chelyra
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hymnaria
+Level: 55
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+**Rematches:** `TRAINER_ICHOR_CHRYSOTHEMIS_2` after the climax (Chelyra 60, Hymnaria 61, Echolali 61) and `_3` in the post-game, scaled to BALANCE's post-game row. Chelyra and Hymnaria are both singers; Echolali joins once Kythera's echoes have reached him.
+
+## The Korykian path and cave, levels 53–55
+
+**13. GOATHERD Aipolos.** On the meadow path, in plain view. Easy.
+```text
+Before: AIPOLOS: My goats think they're prophets. Battle me before they start.
+Defeat: AIPOLOS: Bleated it. The goats saw that coming.
+After:  AIPOLOS: Pan lives up in the cave. Leave him something. He gets lonely.
+```
+```
+=== TRAINER_ICHOR_AIPOLOS ===
+Name: AIPOLOS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Kerazap
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerastorm
+Level: 53
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Kerazap evolves only by a Thunder Stone.
+
+**14. MOUNTAINEER Oreias.** On the ledge path below the cave, facing south (sight 4). Mandatory for the cave.
+```text
+Before: OREIAS: The flood came up to here, they say. Two people climbed out. Let's climb.
+Defeat: OREIAS: Down I go. Not all the way. Just to the ledge.
+After:  OREIAS: The cave's huge. Bring a light. And a knucklebone, for manners.
+```
+```
+=== TRAINER_ICHOR_OREIAS ===
+Name: OREIAS
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Female
+Music: Hiker
+AI: Basic Trainer
+
+Cairnolith
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Pythoros
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**15. PILGRIM Korykia.** In the cave's lower hall, facing a wall of offerings. Optional.
+```text
+Before: KORYKIA: I came to throw a knucklebone for the nymphs. You'll do instead.
+Defeat: KORYKIA: The nymphs had other plans.
+After:  KORYKIA: I threw mine. It came up four. Four's lucky here. I think.
+```
+```
+=== TRAINER_ICHOR_KORYKIA ===
+Name: KORYKIA
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Chelyra
+Level: 54
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Elektear
+Level: 55
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## The Temple of Apollo acolytes, levels 54–56
+
+**16. PROPHETES Onomakritos.** At the pronaos's inner door, facing it (sight 3); the door won't open until the first disc is lit, so he's met on the way through. Mandatory. In history, an Onomakritos was caught writing lines into old oracles and banished; this one is very touchy about it.
+```text
+Before: ONOMAKRITOS: I put her words into verse. Exactly her words. Exactly.
+Defeat: ONOMAKRITOS: A rough line. I won't change it. I never change a word.
+After:  ONOMAKRITOS: Some of us never change a word. Remember that.
+```
+```
+=== TRAINER_ICHOR_ONOMAKRITOS ===
+Name: ONOMAKRITOS
+Class: Prophetes
+Pic: Prophetes
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Enigmaw
+Level: 54
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Mantipod
+Level: 54
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+**17. MELISSA Pherenike.** In the second chamber's side aisle, facing away, guarding the alcove where she resets mirrors on request (Part 5). Optional.
+```text
+Before: PHERENIKE: Need a mirror set back? Battle first. Rules are rules.
+Defeat: PHERENIKE: Fine. Fine! I'll turn them. You only had to ask nicely.
+After:  PHERENIKE: Talk to me if the light's gone wrong. I'll set the mirrors back.
+```
+```
+=== TRAINER_ICHOR_PHERENIKE ===
+Name: PHERENIKE
+Class: Melissa
+Pic: Melissa
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Melisseer
+Level: 55
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Hymnaria
+Level: 55
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+She resets the mirrors whether or not she's been battled; the battle is only for the asking. Her bark is worse than her sting.
+
+**18. MELISSA Bremousa.** At the top of the stair down to the adyton, facing it (sight 3). Mandatory.
+```text
+Before: BREMOUSA: The god's fire is below. Nobody carries it down without my say.
+Defeat: BREMOUSA: Say given. Mind the vents. They blow out anything you carry.
+After:  BREMOUSA: Go left of the third vent. Everyone goes right. Everyone's wrong.
+```
+```
+=== TRAINER_ICHOR_BREMOUSA ===
+Name: BREMOUSA
+Class: Melissa
+Pic: Melissa
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Hymnaria
+Level: 55
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Mantipod
+Level: 56
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+
+## Hierophant Phemonoe, the Pythia, levels 55–57 (Hero difficulty)
+
+The god's light and the god's bee. Apollo's swans, Apollo's cattle, the Delphic bee who brings the sun, the fire-stealer that flowers in it, and the tripod itself. She builds sun: her Melisseer sets it, her Promethex blooms in it, and everything else burns brighter for it. She is the eighth Hierophant and the Oracle, and she has nothing to say.
+
+```
+=== TRAINER_ICHOR_PHEMONOE ===
+Name: PHEMONOE
+Class: Hierophant
+Pic: Hierophant Phemonoe
+Gender: Female
+Music: Female
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Melisseer
+Level: 56
+Ability: Forewarn
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Sunny Day
+- Quiver Dance
+- Bug Buzz
+- Psychic
+
+Hymnaria
+Level: 55
+Ability: Flame Body
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Mystical Fire
+- Air Slash
+- Roost
+- Hyper Voice
+
+Taurivet
+Level: 55
+Ability: Flash Fire
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flare Blitz
+- Iron Head
+- Shift Gear
+- Earthquake
+
+Promethex
+Level: 56
+Ability: Chlorophyll
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Solar Beam
+- Heat Wave
+- Strength Sap
+- Weather Ball
+
+Mantipod @ Sitrus Berry
+Level: 57
+Ability: Magic Bounce
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Heat Wave
+- Psychic
+- Future Sight
+- Calm Mind
+```
+- **Melisseer leads** and sets the sun at once: the Pythia was "the Delphic Bee", and this is the Oracle's bee. It is her one off-type Pokémon, and the battle's lesson: the bee is the weather-maker; take it out first or fight in her sun.
+- **Hymnaria** are Apollo's swans, who drew his chariot to the far north every winter.
+- **Taurivet** are the god's cattle, the herd Hermes stole as a baby (SYSTEMS's Hermes amphora). Earthquake is a TM.
+- **Promethex** carries stolen fire in a fennel stalk. In her sun, Chlorophyll doubles its Speed and Solar Beam needs no charge; Weather Ball turns Fire in the sun.
+- **Mantipod** is the tripod the Pythia sits on, the dex's "Pythia Phemonoe's ace". Magic Bounce sends status moves back; Future Sight is a prophecy that lands two turns later, which is the only kind of prophecy she still makes.
+- **Single words.** Her trainer slides: on sending out her last Pokémon, "PYTHIA: …Hm."; at low HP, "PYTHIA: Close."
+- **The matchups.** Daphnyad players (Grass/Fairy) are weak to Fire and lean on their other team members: Water and Rock types (Telkanvil and Galenyon from Kaldera and the coasts, Kynoketos, Laolith, Cairnolith) wash out her sun. Pylakyon players are neutral to her Fire and must watch Psychic and Earthquake. Seismare players have the easiest time, and must watch Promethex's Solar Beam.
+- **Spartan** needs its own set from Balance, level cap 57.
+
+## The Omphalos at night: Gigas Ephialtes and Thoas, levels 56–57
+
+A multi battle (`setmultitrainerbattle`): the player and Rhea against both. Ephialtes, in the myth, was the Giant Apollo shot in the left eye; this one wears his helmet low on that side. Thoas was one of the two Giants the Fates killed with bronze clubs.
+
+```text
+EPHIALTES: Before: [Part 1]
+EPHIALTES: Defeat: Doesn't matter. He's here.
+THOAS: Defeat: Two of us. Two of you. It should've been even.
+```
+```
+=== TRAINER_ICHOR_GIGAS_EPHIALTES ===
+Name: EPHIALTES
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Polyphant
+Level: 56
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Rock Slide
+- Double-Edge
+- Stone Edge
+- Milk Drink
+
+Pythoros
+Level: 57
+Ability: Intimidate
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Earthquake
+- Crunch
+- Dragon Rush
+- Coil
+```
+```
+=== TRAINER_ICHOR_GIGAS_THOAS ===
+Name: THOAS
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Midonos
+Level: 56
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Krystolos
+Level: 57
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+```
+- **Pythoros** is the serpent of Delphoi itself, earth-born, the Python Apollo killed at the spring. The Titans brought it back to the god's own house.
+- **Polyphant** is a Cyclops; **Midonos** is a Titan crew's gold-greedy beast; **Krystolos** is stone that never changes. All earth-born or near it, as Team Titan's are (PITCH §3).
+- Ephialtes's Pythoros uses Earthquake, which hits his own partner too; Thoas's Krystolos (Ice/Rock) takes it. It is the Gigas's carelessness, and the player's opening.
+
+## Rhea, your partner, level 57
+
+Her first battle on your side (STORY §2, Rhea's arc, beat 4). STORY gives Laolith, Geogrip and Kourodin, but she gave Kourodin to Kleon at Lakonia (III-5H), so her third is **Plouteras**, the blind god of wealth, Demeter's child, from her own Ground team (STORY §2's table). Open questions has it.
+
+```
+=== PARTNER_ICHOR_RHEA_DELPHOI ===
+Name: RHEA
+Class: Titan Admin
+Pic: Rhea Unmasked
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Laolith
+Level: 57
+Ability: Iron Fist
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Hammer Arm
+- Rock Slide
+- Stealth Rock
+
+Geogrip
+Level: 57
+Ability: Earth Eater
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- High Horsepower
+- Superpower
+- Circle Throw
+- Bulk Up
+
+Plouteras
+Level: 57
+Ability: Thick Fat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- High Horsepower
+- Wish
+- Body Slam
+- Helping Hand
+```
+- **She never uses Earthquake beside you.** Her sets leave out every move that hits a partner: Laolith's Rock Slide hits only the foes. Plouteras's Wish and Helping Hand are for you. It's the most she's said to anyone in years.
+- **The ace is Laolith,** at 31 IVs: the stone she carried for the two she buried, grown hard.
+
+## Every species in Delphoi's region, with its myth or setting link
+
+| Species | Where | Why here |
+|---|---|---|
+| Melibee, Melisseer | the plain, the gorge, the laurel terraces; Phemonoe's lead | The Delphic bee; the melissai |
+| Mantipod, Pyrapod | the precinct at night; the oldest altar; Phemonoe's ace | The Pythia's tripod |
+| Hymnaria, Hymnet | the Kastalian pools; the lion-head basin omen | Apollo's swans |
+| Elektear | the poplars by the Kastalian stream at dusk | The Heliades, the sun's daughters |
+| Pythoros, Pelython | the Korykian path and cave; the coiled niche; Gigas Ephialtes | The Python of Delphoi |
+| Enigmaw | the rocks of the plain and gorge | The sphinx; Oedipus met her on the road from Delphoi |
+| Kerazap, Kerastorm | the Korykian meadows; Koretas's trade | The goats who found the Oracle |
+| Sophowl | the plain and precinct at night | Athena Pronaia's owls, at Delphoi's lower sanctuary |
+| Basilops, Galenyon, Harpelle | the plain and the high rocks | Birds the augurs read |
+| Cairnolith | everywhere on the slopes | The stones of Parnassos |
+| Taurivet | Phemonoe; the camp's corral | Apollo's cattle; Hyperion's bulls |
+| Promethex | Phemonoe | Fire carried in a stalk |
+| Chelyra | the Korykian path; Chrysothemis | The lyre, Apollo's instrument |
+| Hierolive, Elapling | the sacred olives | The god's olives |
+| Kalyptor, Hyphantis, Plouteras | the Korykian cave's dark hall | The underground |
+| Lykanax | the Korykian path at night | The wolves whose howling led Deukalion's people up Parnassos after the flood |
+
+## The Stair of Hours: the multi battle, levels 57–60
+
+`setmultitrainerbattle` (E13). A multi battle gives each trainer at most three Pokémon, so Phaedon, Hyperion and Kleon bring three each, as STORY §2 casts them; no fourth is needed or possible. Conventions per 00_front: Phaedon IVs 31, AI Basic Trainer, Check Bad Move, Try To Faint, two Full Restores; Hyperion IVs 24 with his ace 31, two Full Restores; Kleon as a partner, no items. On Spartan the level cap is 60 and these use competitive sets (Balance); on Mortal they are 3 levels lower.
+
+Moves are listed for every Pokémon here and are checked against the dex learnsets (`design/dex/species/*.yaml`): each is a level-up move at or below its level, a move learned on evolving, or in its teachable list. The doubles logic: no move here hits its own ally, so Earthquake, Sludge Wave, Petal Blizzard and Boomburst are left out on purpose.
+
+### Phaedon, as Kronos
+
+Talos's one vein, Sisyphus who chained Death, and the healer's serpent: three things that tried to stop an ending. Panacoil is his own partner, the one that healed your team in Astyra, and its hidden ability, Hospitality, heals Hyperion whenever it comes in. Its Heal Pulse and Life Dew spend the battle closing Hyperion's wounds. In the fight he is still mending people.
+
+```
+=== TRAINER_ICHOR_PHAEDON_STAIR ===
+Name: PHAEDON
+Class: Kronos
+Pic: Phaedon
+Gender: Male
+Music: Kronos
+Items: Full Restore / Full Restore
+Double Battle: Yes
+AI: Basic Trainer / Check Bad Move / Try To Faint
+
+Kolossard @ Leftovers
+Level: 58
+Ability: Clear Body
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- High Horsepower
+- Heavy Slam
+- Rock Slide
+- Protect
+
+Bouldyphus @ Lum Berry
+Level: 59
+Ability: Sturdy
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stone Edge
+- Phantom Force
+- Endeavor
+- Block
+
+Panacoil @ Black Sludge
+Level: 60
+Ability: Hospitality
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Sludge Bomb
+- Life Dew
+- Heal Pulse
+```
+- **Kolossard:** High Horsepower (48), Heavy Slam (36), Rock Slide (40, both foes), Protect (teachable).
+- **Bouldyphus:** Stone Edge (49), Phantom Force (57), Endeavor (45), Block (25). Block keeps one of your Pokémon in, the way Sisyphus kept Death in chains; Endeavor is the boulder dragged back down to its own height. Sturdy means it never falls to one blow.
+- **Panacoil:** Moonblast (55), Sludge Bomb (teachable), Life Dew (11), Heal Pulse (1). The ace, last out.
+
+Battle intro: "KRONOS PHAEDON would like to battle!" (Open questions: the class name.) Defeat line: "PHAEDON: There. Every hurt closes, if you let it."
+
+### Hyperion
+
+Light and fire around a buried giant, as at Knossa, cut to three for the multi battle.
+
+```
+=== TRAINER_ICHOR_HYPERION_STAIR ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Hyperion Clouded
+Gender: Male
+Music: Admin
+Items: Full Restore / Full Restore
+Double Battle: Yes
+AI: Basic Trainer / Check Bad Move
+
+Taurivet @ Charcoal
+Level: 57
+Ability: Flame Body
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Flare Blitz
+- Iron Head
+- Rock Slide
+- Shift Gear
+
+Hymnaria
+Level: 58
+Ability: Flash Fire
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Heat Wave
+- Hurricane
+- Mystical Fire
+- Roost
+
+Gigantomb @ Sitrus Berry
+Level: 59
+Ability: Solid Rock
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Eruption
+- Earth Power
+- Stone Edge
+- Heat Crash
+```
+- **Taurivet:** Flare Blitz (48), Iron Head (on evolving), Rock Slide (teachable), Shift Gear (53).
+- **Hymnaria:** Heat Wave (50, both foes), Hurricane (56), Mystical Fire (46), Roost (53).
+- **Gigantomb:** Eruption (54), Earth Power (46), Stone Edge (50), Heat Crash (42). Eruption is strongest at full health, so Panacoil's healing makes it worse: the two men fight well together.
+- **No Apotheosis** (LABYRINTH §9: a Titan admin doesn't get the player's gimmick).
+- The music is `MUS_ICHOR_KRONOS` for the whole battle (Phaedon's), not the admin theme; Hyperion's `Music:` field only matters if the engine picks the second trainer's.
+
+Defeat line: "HYPERION: Hot… no. Not hot. Cold. Everything's cold."
+
+### Kleon, beside you
+
+His starter in its final stage, the cockerel he caught at Elaia grown into a hoplite, and his mother's Kourodin, which hid his cough from the elders once. The partner AI plays him. Three constants by `VAR_STARTER_MON`.
+
+```
+=== PARTNER_ICHOR_KLEON_STAIR_PYLAKYON ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+AI: Basic Trainer
+
+Pylakyon
+Level: 58
+Ability: Strong Jaw
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Flare Blitz
+- Phantom Force
+- Crunch
+- Protect
+
+Hoplektor
+Level: 57
+Ability: Defiant
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Brave Bird
+- Close Combat
+- Wide Guard
+- Bulk Up
+
+Kourodin
+Level: 57
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hyper Voice
+- Sacred Sword
+- Heavy Slam
+- Noble Roar
+```
+```
+=== PARTNER_ICHOR_KLEON_STAIR_SEISMARE ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+AI: Basic Trainer
+
+Seismare
+Level: 58
+Ability: Torrent
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Wave Crash
+- High Horsepower
+- Aqua Jet
+- Protect
+
+Hoplektor
+Level: 57
+Ability: Defiant
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Brave Bird
+- Close Combat
+- Wide Guard
+- Bulk Up
+
+Kourodin
+Level: 57
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hyper Voice
+- Sacred Sword
+- Heavy Slam
+- Noble Roar
+```
+```
+=== PARTNER_ICHOR_KLEON_STAIR_DAPHNYAD ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+AI: Basic Trainer
+
+Daphnyad
+Level: 58
+Ability: Overgrow
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Moonblast
+- Energy Ball
+- Dazzling Gleam
+- Synthesis
+
+Hoplektor
+Level: 57
+Ability: Defiant
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Brave Bird
+- Close Combat
+- Wide Guard
+- Bulk Up
+
+Kourodin
+Level: 57
+Ability: Punk Rock
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Hyper Voice
+- Sacred Sword
+- Heavy Slam
+- Noble Roar
+```
+- **The starters:** Pylakyon's Flare Blitz (56), Phantom Force (53), Crunch (30, boosted by Strong Jaw), Protect (teachable). Seismare's Wave Crash (54), High Horsepower (on evolving: it can't use Earthquake without hitting you), Aqua Jet (10), Protect. Daphnyad's Moonblast (56), Energy Ball (46), Dazzling Gleam (34, both foes), Synthesis (20).
+- **Hoplektor:** Brave Bird (53), Close Combat (48), Wide Guard (on evolving), Bulk Up (16). Wide Guard shields both of you from Heat Wave and Rock Slide: Kleon, for once, standing in front of someone.
+- **Kourodin:** Hyper Voice (32, both foes, boosted by Punk Rock), Sacred Sword (42), Heavy Slam (36), Noble Roar (46). These match Kleon's Lakonia team (the Lakonia writer's), one level up.
+- The matchups: Kolossard and Bouldyphus are weak to Water, Grass, Ground and Fighting; Hoplektor's Close Combat and the starters' coverage answer them. Gigantomb is 4× weak to Water and Ground, so Seismare players have it easiest there; Pylakyon players lean on Hoplektor and Kourodin, and on their own team.
+
+## The Lord of Time
+
+A wild battle, not a trainer: `setwildbattle SPECIES_KRONOLITH, 60` on the twelfth landing (III-11D). Its moves at Lv 60 are its last four level-up moves, which the dex built for this fight: Future Sight (48), Trick Room (54), High Horsepower (58), Roar of Time (60). Ability Pressure. Catchable; running is off (`FLAG_ICHOR_NO_RUNNING`) and so is whiteout (`FLAG_ICHOR_NO_WHITEOUT`). One only. It is not shiny-locked.
+
+## Conventions for the League road
+
+Per 00_front: route trainers IVs 14, AI Basic Trainer; Titanborn IVs 14; Gigas IVs 20 with one Hyper Potion. **Levels** per the director's re-spread, inside BALANCE's Ascent row: Route 29 at 56–57, Thermopylai at 57, Route 30 at 57–58, the Ascent at 58–62. Moves are listed only for the set-piece trainer, Gigas Eurytos, and every listed move is in the species' dex learnset at or below that level. Every Pokémon is evolved wherever its evolution level is below the trainer's; the unevolved ones are trade or stone evolutions, each with a reason in its trainer's lines. Every trainer name is 10 characters or fewer (`TRAINER_NAME_LENGTH`).
+
+**Route 29's lower half** (the Korykian path) keeps the Delphoi writer's GOATHERD Aipolos (53) and MOUNTAINEER Oreias (54), and the cave keeps PILGRIM Korykia; their parties are in the Delphoi part. The trainers below are the upper half's, beyond the palisade.
+
+**The layout** of the checkpoints (MAP_DESIGN §1): the first trainer on each route is easy and in plain view; each map has at least one mandatory trainer at a narrow point and at least one optional trainer off the path; the last trainer, Eurytos, guards the steps into the cloud. No trainers stand on the Vale of Tempe or the Gate of the Horai.
+
+| # | Map | Trainer | Levels | Sight | Role |
+|---|---|---|---|---|---|
+| 1 | Route 29 | SHEPHERD Lykos | 56 | 3, plain view | easy, first past the palisade |
+| 2 | Route 29 | MOUNTAINEER Oribasios | 57 | 4, across the saddle path | mandatory |
+| 3 | Route 29 | PILGRIM Theoris | 56–57 | 3, facing away | optional, behind the pine brakes (the Sickle) |
+| 4 | Route 29 | TITANBORN Sitalkes | 57 | 3 | optional, on the tarn's islet (the Conch) |
+| 5 | Route 29 | AUGUR Ampyx | 57 | 5, across the descent's narrows | mandatory |
+| 6 | Thermopylai | VETERAN Leon | 57 | 3, plain view | easy, by the springs |
+| 7 | Thermopylai | VETERAN Ariston | 57 | 4, the wall's gap | mandatory |
+| 8 | Thermopylai | VETERAN Lachares | 57 | 3, facing the sea | optional, on the wall's top |
+| 9 | Route 30 | HARVESTER Ischys | 57 | 3, plain view | easy, in the wheat |
+| 10 | Route 30 | RUNNER Atrax | 57 | 4, the causeway | mandatory |
+| 11 | Route 30 | GOATHERD Phylakos | 57 | 3, facing away | optional, on Pelion's slope |
+| 12 | Route 30 | CADET Kleomenes | 58 | 3 | optional, by the Lapiths' table |
+| 13 | Route 30 | SCOUT Arimnestos | 58 | 5, the mouth of Tempe | mandatory |
+| 14 | Foothills | MOUNTAINEER Agathon | 58 | 3, plain view | easy, first on the Ascent |
+| 15 | Foothills | PILGRIM Damaris | 58–59 | 4, the beech-wood path | mandatory |
+| 16 | Weeping Cliff | KITHARODE Phrynis | 59 | 3, plain view | mandatory |
+| 17 | Weeping Cliff | MOUNTAINEER Timandra | 59 | 3, facing away | optional, on the ledge |
+| 18 | Weeping Cliff | FISHER Bathykles | 59 | 3 | optional, on the rock in the pool (the Conch) |
+| 19 | Weeping Cliff | MOUNTAINEER Epikles | 59–60 | 4, the falls' foot | mandatory |
+| 20 | Ice Caves 1F | MOUNTAINEER Hippias | 59–60 | 3, lamp | mandatory |
+| 21 | Ice Caves 1F | AUGUR Erinna | 60 | 3, lamp | optional, behind the cracked ice (the Hammer) |
+| 22 | Ice Caves B1F | TITANBORN Thinos | 60 | 4, the lake's edge | mandatory |
+| 23 | Snowfields | MOUNTAINEER Oreithyia | 60 | 4, plain view | mandatory |
+| 24 | Snowfields | MOUNTAINEERs Kleobis and Biton | 61 | 3 each, side by side | mandatory, a two-trainer double |
+| 25 | Snowfields | PILGRIM Praxilla | 61 | 3, facing away | optional |
+| 26 | Snowfields | VETERAN Alkamenes | 61 | 4 | mandatory |
+| 27 | Crags | KITHARODE Euxenos | 61 | 3 | optional |
+| 28 | Crags | MOUNTAINEER Kineas | 62 | 4 | mandatory |
+| 29 | Crags | GIGAS Eurytos | 61–62 | 3, the cloud steps | mandatory, the last |
+
+## Route 29, Parnassos, levels 56–57
+
+**1. SHEPHERD Lykos.** On the saddle's meadow just past the palisade, in plain view, with his flock and a big dark wolf lying among the sheep.
+```text
+Before: LYKOS: My wolf keeps the other wolves off. Want to see how?
+Defeat: LYKOS: He's better at it with wolves.
+After:  LYKOS: Wolves led people up here after the flood, they say. Followed the howling.
+```
+```
+=== TRAINER_ICHOR_SHEPHERD_LYKOS ===
+Name: LYKOS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Kerazap
+Level: 56
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Lykanax
+Level: 56
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+Kerazap evolves only by a Thunder Stone; Lykos's has never met one.
+
+**2. MOUNTAINEER Oribasios.** Mandatory. On the narrow saddle path below the Hammer's rockfall, facing down the road; his sight line covers the whole path.
+```text
+Before: ORIBASIOS: Rope, staff, Pokémon. All you need for a mountain. Show me yours.
+Defeat: ORIBASIOS: All right. You've got a mountain in you.
+After:  ORIBASIOS: The kettle-thing draws lightning. It's struck that cliff twice.
+```
+```
+=== TRAINER_ICHOR_MOUNTAINEER_ORIBASIOS ===
+Name: ORIBASIOS
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Basilops
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Lebetron
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**3. PILGRIM Theoris.** Optional. On the terrace behind the pine brakes that Demeter's Sickle clears, facing an old shrine, away from the player.
+```text
+Before: THEORIS: I'm walking to Olympus to ask a god a question. Practice?
+Defeat: THEORIS: That's my answer, then. Or one of them.
+After:  THEORIS: The question? “What now?” I've had it for a week. No answer.
+```
+```
+=== TRAINER_ICHOR_PILGRIM_THEORIS ===
+Name: THEORIS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Melisseer
+Level: 56
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Mantipod
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**4. TITANBORN Sitalkes.** Optional. On a rock islet in the saddle's tarn, reached with Poseidon's Conch. Helmet pushed back. Grunt archetype 1, rebuilding.
+```text
+Before: SITALKES: I'm going up to apologize. To whoever's there. Practice first?
+Defeat: SITALKES: Right. Sorry. That's one. I'll need a lot.
+After:  SITALKES: I dug for Hyperion three years. He's at a forge now. Good for him.
+```
+```
+=== TRAINER_ICHOR_TITANBORN_SITALKES ===
+Name: SITALKES
+Class: Titanborn
+Pic: Titanborn M
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossard
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gigantomb
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**5. AUGUR Ampyx.** Mandatory. At the narrows where the path drops off the saddle toward Thermopylai; his sight line spans the gap between two rocks.
+```text
+Before: AMPYX: Thirty years I read birds. They told me what was coming. Now they fly.
+Defeat: AMPYX: Didn't see that coming. Ha! None of us do now.
+After:  AMPYX: I watch them anyway. Turns out I just like birds.
+```
+```
+=== TRAINER_ICHOR_AUGUR_AMPYX ===
+Name: AMPYX
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Psychic
+AI: Basic Trainer
+
+Pithound
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Enigmaw
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Thermopylai, level 57
+
+The Lakonian veterans who hold the pass. All three must be beaten for Maron's Rocky Helmet (Part 2).
+
+**6. VETERAN Leon.** By the springs, in plain view, sitting on a rock with his feet in the hot water.
+```text
+Before: LEON: A challenger! Wait. Let me get my feet out. Right. Ready.
+Defeat: LEON: Good. You'll do. I'll put my feet back in.
+After:  LEON: The cairn-stone's my oldest. Never trusted anyone with it to trade.
+```
+```
+=== TRAINER_ICHOR_VETERAN_LEON ===
+Name: LEON
+Class: Veteran
+Pic: Veteran
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Hoplektor
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**7. VETERAN Ariston.** Mandatory. In the one-tile gap of the Phokian wall at the Middle Gate; his sight line runs the length of the narrows. A soldier who once came home when the rest didn't, and has decided that isn't the worst thing.
+```text
+Before: ARISTON: They called me the one who came back. As if that was the worst thing.
+Defeat: ARISTON: You'll come back too. Make sure you do. It's not the worst thing.
+After:  ARISTON: Forty years I knew how I'd die. Now I don't. I sleep like a baby.
+```
+```
+=== TRAINER_ICHOR_VETERAN_ARISTON ===
+Name: ARISTON
+Class: Veteran
+Pic: Veteran
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Hoplektor
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Dorydrake
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Laolith
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**8. VETERAN Lachares.** Optional. On top of the Phokian wall, facing out over the marsh to the sea, reached by a stair at the wall's north end.
+```text
+Before: LACHARES: I'm watching for ships. There aren't any. I'll watch you instead.
+Defeat: LACHARES: Go on, then. Nothing's coming. Nothing ever does.
+After:  LACHARES: My grandfather watched from this wall. He saw them come. I see gulls.
+```
+```
+=== TRAINER_ICHOR_VETERAN_LACHARES ===
+Name: LACHARES
+Class: Veteran
+Pic: Veteran
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Hoplomex
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kourodin
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Dorydrake
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## Route 30, the Thessalian plain, levels 57–58
+
+**9. HARVESTER Ischys.** In the first wheat field past the East Gate, in plain view, resting on his sickle.
+```text
+Before: ISCHYS: Break from the wheat! Thank the gods. Battle me slowly.
+Defeat: ISCHYS: Back to the wheat. It's very long, this field.
+After:  ISCHYS: Nobody knows if the harvest'll be good. I'm cutting it anyway.
+```
+```
+=== TRAINER_ICHOR_HARVESTER_ISCHYS ===
+Name: ISCHYS
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Gelasable
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Stachypter
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**10. RUNNER Atrax.** Mandatory. On the raised causeway between two drainage ditches, the only dry way across the low plain; his sight line covers the causeway.
+```text
+Before: ATRAX: I carry news from Larisa to the hot gates. Nobody stops me. Stop me.
+Defeat: ATRAX: Stopped. First time. Don't tell Larisa.
+After:  ATRAX: The news is always the same now. “Nobody knows.” I run it anyway.
+```
+```
+=== TRAINER_ICHOR_RUNNER_ATRAX ===
+Name: ATRAX
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Cool
+AI: Basic Trainer
+
+Basilops
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Nemeleon
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hoplektor
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**11. GOATHERD Phylakos.** Optional. On Pelion's lower slope, facing up the mountain toward the stream fall, away from the player.
+```text
+Before: PHYLAKOS: The old centaur's cave is up there. I mind his goats while he's out.
+Defeat: PHYLAKOS: He'd have beaten you. He beat everyone. Then taught them.
+After:  PHYLAKOS: He chalked “back soon” on his door. Years ago. I believe him.
+```
+```
+=== TRAINER_ICHOR_GOATHERD_PHYLAKOS ===
+Name: PHYLAKOS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Kerastorm
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kaprodon
+Level: 57
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**12. CADET Kleomenes.** Optional. Sitting on the Lapiths' broken table in the wheat, getting his breath back; a Lakonian cadet who ran north to see Brasidas.
+```text
+Before: KLEOMENES: I'm running to Olympus! To see the Polemarch! You're not him!
+Defeat: KLEOMENES: That's all right. He'd have beaten me faster.
+After:  KLEOMENES: Kleon was in my old barracks. He came second in everything.
+```
+```
+=== TRAINER_ICHOR_CADET_KLEOMENES ===
+Name: KLEOMENES
+Class: Cadet
+Pic: Cadet M
+Gender: Male
+Music: Youngster
+AI: Basic Trainer
+
+Hoplektor
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Dorydrake
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**13. SCOUT Arimnestos.** Mandatory. On a rock at the mouth of the Vale of Tempe, where the plain narrows into the gorge; a Skiritan scout Lakonia sent north to watch the plain.
+```text
+Before: ARIMNESTOS: Lakonia sent me to watch the plain. In case. In case of you, now.
+Defeat: ARIMNESTOS: I'll report you. “Strong. Going up.” That's the whole report.
+After:  ARIMNESTOS: Nobody's marching anywhere. I watch anyway. Old habits.
+```
+```
+=== TRAINER_ICHOR_SCOUT_ARIMNESTOS ===
+Name: ARIMNESTOS
+Class: Scout
+Pic: Scout
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Hoplomex
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Harpelle
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Lykanax
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## The Ascent: the Foothills, level 58–59
+
+**14. MOUNTAINEER Agathon.** Just past Koronos's gate, in plain view, the first trainer on the Ascent.
+```text
+Before: AGATHON: First time up? Me too. Let's see which of us turns back.
+Defeat: AGATHON: Neither, I hope. I'm going to sit for a minute.
+After:  AGATHON: My father climbed it at my age. He said it's all the way up.
+```
+```
+=== TRAINER_ICHOR_MOUNTAINEER_AGATHON ===
+Name: AGATHON
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Basilops
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**15. PILGRIM Damaris.** Mandatory. Where the path through the beech woods narrows between two great trunks; her sight line covers the gap.
+```text
+Before: DAMARIS: I'm going to the gate of the gods. To say thank you. For what? Waking up.
+Defeat: DAMARIS: Thank you for that too. I think.
+After:  DAMARIS: I was stone for an hour in Thyrsa. In the middle of a sneeze.
+```
+```
+=== TRAINER_ICHOR_PILGRIM_DAMARIS ===
+Name: DAMARIS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Melisseer
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 58
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Sophowl
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## The Weeping Cliff, levels 59–60
+
+**16. KITHARODE Phrynis.** On the pool path, in plain view, tuning a kithara with eleven strings.
+```text
+Before: PHRYNIS: Eleven strings! The judges say seven's plenty. What do you say?
+Defeat: PHRYNIS: Out of tune. Me, not the kithara.
+After:  PHRYNIS: I'm writing a song about the hour everything stopped. No tune yet.
+```
+```
+=== TRAINER_ICHOR_KITHARODE_PHRYNIS ===
+Name: PHRYNIS
+Class: Kitharode
+Pic: Kitharode
+Gender: Male
+Music: Gentleman
+AI: Basic Trainer
+
+Hymnaria
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Echolali
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**17. MOUNTAINEER Timandra.** Optional. On the ledge above the first short fall, facing the cliff, with a sealed jar behind her.
+```text
+Before: TIMANDRA: You climbed the little fall to get up here? Then climb over me.
+Defeat: TIMANDRA: Fine. The jar's yours. I only guard it because it's pretty.
+After:  TIMANDRA: My mother climbed this cliff. And hers. I'm the first who lost.
+```
+```
+=== TRAINER_ICHOR_MOUNTAINEER_TIMANDRA ===
+Name: TIMANDRA
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Female
+Music: Hiker
+AI: Basic Trainer
+
+Basilops
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossard
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Krystolos
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**18. FISHER Bathykles.** Optional. On a rock in the middle of the pool, reached by Surf, with his line in the water under the falls.
+```text
+Before: BATHYKLES: The fish in this pool taste of salt. It's the tears. Don't think about it.
+Defeat: BATHYKLES: Reeled in. By a swimmer.
+After:  BATHYKLES: I fish here because nobody else will. That's the whole trick.
+```
+```
+=== TRAINER_ICHOR_FISHER_BATHYKLES ===
+Name: BATHYKLES
+Class: Fisher
+Pic: Fisher
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Telkanvil
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kynoketos
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**19. MOUNTAINEER Epikles.** Mandatory. At the foot of the great fall, where the only way on is up it with the Horn; his sight line covers the pool's edge.
+```text
+Before: EPIKLES: Every challenger stops here to look up. I stop them before they climb.
+Defeat: EPIKLES: Go on, then. Climb. Don't look down. It's very far.
+After:  EPIKLES: I've climbed it forty times. It's never got shorter. I keep checking.
+```
+```
+=== TRAINER_ICHOR_MOUNTAINEER_EPIKLES ===
+Name: EPIKLES
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Krystolos
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossard
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Borapteryx
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## The Ice Caves, levels 59–60
+
+**20. MOUNTAINEER Hippias.** Mandatory. In the first dark hall of 1F, beside a lamp (SYSTEMS §2: a lamp marks every mandatory trainer in the dark).
+```text
+Before: HIPPIAS: Mind the ice! It slides you right into me. Every time. Everyone.
+Defeat: HIPPIAS: Slid right into that, didn't I.
+After:  HIPPIAS: Found an Ice Stone in here once. My Niflake's very grand now.
+```
+```
+=== TRAINER_ICHOR_MOUNTAINEER_HIPPIAS ===
+Name: HIPPIAS
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Cairnolith
+Level: 59
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Krystolos
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chionyad
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**21. AUGUR Erinna.** Optional. In the dark side branch behind cracked ice that the Bronze Hammer breaks, beside a lamp.
+```text
+Before: ERINNA: I came up here to be alone with my visions. They stopped. Battle?
+Defeat: ERINNA: I didn't foresee that. I'm starting to enjoy saying so.
+After:  ERINNA: It's quiet without visions. I can hear the ice. It sings, a bit.
+```
+```
+=== TRAINER_ICHOR_AUGUR_ERINNA ===
+Name: ERINNA
+Class: Augur
+Pic: Augur
+Gender: Female
+Music: Psychic
+AI: Basic Trainer
+
+Amnoze
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Mantipod
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Melisseer
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**22. TITANBORN Thinos.** Mandatory. At the edge of B1F's frozen lake, where the slide path starts. Helmet pushed back. Grunt archetype 7, the old veteran, now a little lighter.
+```text
+Before: THINOS: They made us vote with pebbles. Where to dig. I always voted home.
+Defeat: THINOS: Outvoted. Story of my life.
+After:  THINOS: I'm going home now. Nobody voted. I just decided. It's very strange.
+```
+```
+=== TRAINER_ICHOR_TITANBORN_THINOS ===
+Name: THINOS
+Class: Titanborn
+Pic: Titanborn M
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Laolith
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Geogrip
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## The Snowfields, levels 60–61
+
+**23. MOUNTAINEER Oreithyia.** Mandatory, in plain view on the first rise out of the caves, her cloak snapping in the wind.
+```text
+Before: OREITHYIA: The north wind carried off a girl with my name once. Let it try me.
+Defeat: OREITHYIA: Blown over. By a summer breeze.
+After:  OREITHYIA: Mother named me for her. Then said never stand on cliffs. Mothers.
+```
+```
+=== TRAINER_ICHOR_MOUNTAINEER_OREITHYIA ===
+Name: OREITHYIA
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Female
+Music: Hiker
+AI: Basic Trainer
+
+Krystolos
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chionyad
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Borapteryx
+Level: 60
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**24. MOUNTAINEERs Kleobis and Biton.** Mandatory. Two brothers in harness, hauling a cart of offerings up the pass for the Gate; they stand side by side across the narrow cut, and their sight lines together cover it, so they challenge the player at once as a two-trainer double. They are named for the statues at Delphoi (the Delphoi part), the brothers who pulled their mother's cart to the temple when the oxen didn't come.
+```text
+Before: KLEOBIS: Our oxen wouldn't climb. So we pulled the cart ourselves.
+Before: BITON: We've done it before. Mother's cart. Up a hill. She was very proud.
+Defeat: KLEOBIS: Beaten, and we've still got the cart to pull.
+Defeat: BITON: Pulling's easier than this.
+After:  KLEOBIS: Mother named us for the statues at Delphoi. Then made us earn it.
+After:  BITON: Offerings for the Gate. Bread, oil, a cheese. The Hours like cheese.
+```
+```
+=== TRAINER_ICHOR_KLEOBIS ===
+Name: KLEOBIS
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Laolith
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kolossard
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+```
+=== TRAINER_ICHOR_BITON ===
+Name: BITON
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Taurivet
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kourodin
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**25. PILGRIM Praxilla.** Optional. At the shrine of Boreas off the main track, facing the shrine, with offerings of wool.
+```text
+Before: PRAXILLA: I bring the north wind wool, so he'll be gentler. It hasn't worked.
+Defeat: PRAXILLA: Gentle. That was gentle, wasn't it? It didn't feel gentle.
+After:  PRAXILLA: My moon bear fell asleep in a drift once. I dug an hour. It snored.
+```
+```
+=== TRAINER_ICHOR_PILGRIM_PRAXILLA ===
+Name: PRAXILLA
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Girl
+AI: Basic Trainer
+
+Chelyra
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Starkos
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kerastorm
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**26. VETERAN Alkamenes.** Mandatory. At the Snowfields' north end, where the drifts narrow to a single trodden path up to the Crags. An old soldier who has never once struck first.
+```text
+Before: ALKAMENES: Forty years a soldier. Never struck the first blow. You first.
+Defeat: ALKAMENES: There. That's the right order. Go on up.
+After:  ALKAMENES: My son's a farmer. I asked the seer if he'd be a soldier. She laughed.
+```
+```
+=== TRAINER_ICHOR_VETERAN_ALKAMENES ===
+Name: ALKAMENES
+Class: Veteran
+Pic: Veteran
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Hoplektor
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Laolith
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kourodin
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## The Crags, levels 61–62
+
+**27. KITHARODE Euxenos.** Optional. On a ledge by the rope bridge, playing to the eagles.
+```text
+Before: EUXENOS: The eagles like the low strings. Let's see what you like.
+Defeat: EUXENOS: You liked winning. Fair enough.
+After:  EUXENOS: I'm to sing at the Archon's victory. Whoever he turns out to be.
+```
+```
+=== TRAINER_ICHOR_KITHARODE_EUXENOS ===
+Name: EUXENOS
+Class: Kitharode
+Pic: Kitharode
+Gender: Male
+Music: Gentleman
+AI: Basic Trainer
+
+Sophowl
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Elektear
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hymnaria
+Level: 61
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**28. MOUNTAINEER Kineas.** Mandatory. On the last switchback below the fog line, where the path is one tile wide between the rock and the drop.
+```text
+Before: KINEAS: Above here it's cloud. You can't see your feet. Can you see mine?
+Defeat: KINEAS: Up you go. Keep to the left. The right is mostly air.
+After:  KINEAS: My eagle was born on this crag. It still comes home every spring.
+```
+```
+=== TRAINER_ICHOR_MOUNTAINEER_KINEAS ===
+Name: KINEAS
+Class: Mountaineer
+Pic: Mountaineer
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Krystolos
+Level: 62
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Borapteryx
+Level: 62
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aetarch
+Level: 62
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**29. GIGAS Eurytos.** Mandatory, the Ascent's last checkpoint. At the foot of the steps cut up into the cloud, sitting on a rock with his big helmet off beside him. He guarded Kronos's door in the Labyrinth for two winters.
+```text
+Before: EURYTOS: I guarded the master's door two winters. Nobody's asked me to since.
+
+Before: EURYTOS: So I'm guarding this. If you can't get past me, you can't pass him.
+
+Defeat: EURYTOS: …Past me. Good. Go on, then. I'll keep watching the steps.
+
+After:  EURYTOS: When you come down, tell me how it went. I'm not going anywhere.
+
+After:  EURYTOS: I was stone on the stair, two steps behind the healer. Nothing to say.
+```
+```
+=== TRAINER_ICHOR_GIGAS_EURYTOS ===
+Name: EURYTOS
+Class: Gigas
+Pic: Gigas
+Gender: Male
+Music: Titan
+Items: Hyper Potion
+AI: Basic Trainer
+
+Taurivet
+Level: 61
+Ability: Flash Fire
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Flare Blitz
+- Heavy Slam
+- Shift Gear
+- Raging Fury
+
+Kolossard
+Level: 62
+Ability: Clear Body
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Earthquake
+- Stone Edge
+- Heavy Slam
+- Stealth Rock
+
+Laolith
+Level: 62
+Ability: Iron Fist
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Hammer Arm
+- Head Smash
+- Stone Edge
+- Body Press
+
+Gigantomb
+Level: 62
+Ability: Solid Rock
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+- Eruption
+- Earth Power
+- Stone Edge
+- Stealth Rock
+```
+- **Taurivet** opens with Shift Gear if it isn't threatened, then Raging Fury: the Titans' fire, once more.
+- **Kolossard** and **Gigantomb** both carry Stealth Rock, so the last fight before the Pantheon punishes switching, as the Pantheon will.
+- **Laolith's** Iron Fist powers Hammer Arm; Head Smash at 60 is its last lesson.
+- Every Eurytos move is in the dex learnset at or below level 62: Taurivet's Flare Blitz 48, Heavy Slam 44, Shift Gear 53, Raging Fury 58; Kolossard's Earthquake 56, Stone Edge 60, Heavy Slam 36, Stealth Rock 32; Laolith's Hammer Arm 54, Head Smash 60, Stone Edge 44, Body Press 40; Gigantomb's Eruption 54, Earth Power 46, Stone Edge 50, Stealth Rock 38.
+
+**New trainer pics needed:** Veteran, Mountaineer (male and female), Kitharode, Cadet M, Scout. Shepherd, Goatherd, Harvester, Runner, Pilgrim, Augur, Fisher, Titanborn and Gigas exist or come from the slice, Phase 2 and LABYRINTH. The new classes are 00_front's.
+
+## The Pantheon and the Archon, levels 60–67 (Hero difficulty)
+
+**Conventions** (00_front): IVs 31 in every stat; three Full Restores each (the Archon four); AI Basic Trainer (which carries Check Bad Move, Try To Faint and the viability checks) plus Smart Switching. Every move below is in the species' dex learnset at or below its level, or in its teachable list; teachable moves are marked (TM). Battle music by class: PANTHEON plays `MUS_ICHOR_PANTHEON` with the seat's layer, ARCHON plays `MUS_ICHOR_ARCHON`'s battle arrangement.
+
+**Spartan** teams are Balance's (each stage's level cap is its boss's ace). **Mortal** bosses are 3 levels lower. Post-game rematches scale to BALANCE's Aethos post-game row (POSTGAME §3.1: weekly, on Olympus).
+
+**Matchups by starter** use the player's final stage: **Daphnyad** (Grass/Fairy), **Pylakyon** (Fire/Ghost) and **Seismare** (Water/Ground). By the Ascent every player can also have Chionyad or Krystolos (Ice), Basilops and Borapteryx (Flying), Aetarch (Electric), and the Fates and the Lord of Time if caught.
+
+### Brasidas the Polemarch, levels 60–61
+
+Ares's seat, Fighting. The whole team is the phalanx and the palaestra: Myrmidons, a wrestler who draws strength from the earth, the shield-dancers of his own battle school, a stone warrior, and the cockerel that wakes the sun, which is also the Lakonian oath.
+
+```
+=== TRAINER_ICHOR_BRASIDAS ===
+Name: BRASIDAS
+Class: Pantheon
+Pic: Pantheon Brasidas
+Gender: Male
+Music: Elite Four
+Items: Full Restore / Full Restore / Full Restore
+AI: Basic Trainer / Smart Switching
+
+Hoplomex @ Muscle Band
+Level: 60
+Ability: Defiant
+Nature: Adamant
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Close Combat
+- X-Scissor
+- Crunch
+- Bulk Up
+
+Geogrip @ Leftovers
+Level: 60
+Ability: Earth Eater
+Nature: Careful
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- High Horsepower
+- Drain Punch
+- Shore Up
+- Bulk Up
+
+Kourodin @ Throat Spray
+Level: 60
+Ability: Punk Rock
+Nature: Bold
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Boomburst
+- Body Press
+- Iron Defense
+- Flash Cannon
+
+Laolith @ Sitrus Berry
+Level: 60
+Ability: Iron Fist
+Nature: Adamant
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hammer Arm
+- Stone Edge
+- Ice Punch
+- Stealth Rock
+
+Hoplektor @ Flame Orb
+Level: 61
+Ability: Guts
+Nature: Jolly
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- No Retreat
+- Close Combat
+- Brave Bird
+- Iron Head
+```
+- **Hoplomex** leads, the Myrmidons who were ants before they were soldiers. Defiant punishes the player's Intimidate (Aetarch, Pythoros, Kynoketos).
+- **Geogrip** is Antaeus, who was strong only while he touched his mother the earth: Earth Eater turns the player's Ground moves into healing, and Shore Up keeps him standing. Seismare players must not Earthquake into him.
+- **Kourodin** is the Kouretes, the shield-dancers of Brasidas's own school. Iron Defense, then Body Press off its Defense; Boomburst fires the Throat Spray.
+- **Laolith** lays Stealth Rock early, so every later switch costs the player. Ice Punch (TM) under Iron Fist is for Flying and Dragon answers.
+- **Hoplektor**, the ace (the dex: "Polemarch Brasidas of the Pantheon fields one as his ace"). Flame Orb burns it on turn one, and Guts turns the burn into power. No Retreat is the Lakonian oath, with your shield or on it: every stat up, and it can never switch out. Iron Head (TM) is for Fairy types.
+- **The matchups:**
+  - **Daphnyad** resists Fighting and hits back with Fairy, but Kourodin (Steel), Hoplektor's Brave Bird and Iron Head, and Hoplomex's X-Scissor all threaten it. The player wants a Psychic or Flying partner.
+  - **Pylakyon** is immune to every Fighting move here, which makes this its seat, except for Hoplomex's Crunch, Geogrip's High Horsepower and Laolith's Stone Edge. Geogrip's High Horsepower is the real threat.
+  - **Seismare** is neutral to Fighting and hits Laolith, Kourodin and Hoplektor hard with Water, but its Ground moves heal Geogrip.
+
+Defeat text: "Well. That was well."
+
+### Themistokles the Admiral, levels 61–62
+
+Poseidon's seat, Water. A rain fleet. Dakrock opens with Drizzle, and everything behind it rows faster in the wet. Themistokles won his battle by luring the enemy into narrows where their numbers didn't help; his team does the same to a player who stays in too long.
+
+```
+=== TRAINER_ICHOR_THEMISTOKLES ===
+Name: THEMISTOKLES
+Class: Pantheon
+Pic: Pantheon Themistokles
+Gender: Male
+Music: Elite Four
+Items: Full Restore / Full Restore / Full Restore
+AI: Basic Trainer / Smart Switching
+
+Dakrock @ Damp Rock
+Level: 61
+Ability: Drizzle
+Nature: Calm
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Stealth Rock
+- Muddy Water
+- Power Gem
+- Tearful Look
+
+Galenyon @ Scope Lens
+Level: 61
+Ability: Sniper
+Nature: Timid
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Hydro Pump
+- Hurricane
+- Ice Beam
+- Roost
+
+Karkitox @ Life Orb
+Level: 61
+Ability: Tough Claws
+Nature: Adamant
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Swords Dance
+- Crabhammer
+- Poison Jab
+- Knock Off
+
+Telkanvil @ Sitrus Berry
+Level: 62
+Ability: Sharpness
+Nature: Adamant
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Razor Shell
+- Iron Head
+- Swords Dance
+- Aqua Jet
+
+Kynoketos @ Mystic Water
+Level: 62
+Ability: Moxie
+Nature: Adamant
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Dragon Dance
+- Wave Crash
+- Crunch
+- Earthquake
+```
+- **Dakrock** is Niobe, the weeping cliff, who boasted she had more children than a goddess and lost them all: hubris, and five turns of rain. Tearful Look lowers both of the player's attacking stats ("no one fights well beside such grief").
+- **Galenyon** is the halcyon. In rain, Hurricane (TM) never misses and Hydro Pump hits like a ram. He leaves the halcyon's own Cloud Nine at home: it would calm his rain.
+- **Karkitox** sets up with Swords Dance; Tough Claws and Life Orb make Crabhammer the narrows. Poison Jab is for Fairy types; Knock Off (TM) takes the player's held item.
+- **Telkanvil** is the Telchines, the sea-smiths, and Themistokles built a fleet: Razor Shell under Sharpness, and Aqua Jet to finish.
+- **Kynoketos**, the ace, the ketos, the sea-monster sent against a city. Dragon Dance once, then Wave Crash in the rain; Moxie snowballs. Earthquake (TM) is for Electric answers.
+- **The matchups:**
+  - **Daphnyad** hits Dakrock, Galenyon, Telkanvil and Kynoketos with Grass, but Galenyon's Hurricane and Ice Beam, Karkitox's Poison Jab (four times effective) and Telkanvil's Iron Head all hunt it. Fairy walls Kynoketos's Dragon moves, not its Wave Crash.
+  - **Pylakyon** is weak to Water, Ground and Rock, so this is its hardest seat. Its job is to burn a physical attacker (Will-O-Wisp, if taught) and get out.
+  - **Seismare** is neutral to Water and its Ground moves hit Dakrock, Telkanvil and Karkitox super effectively; it fears Galenyon's Hydro Pump only in rain, and Kynoketos.
+  - Electric answers (Aetarch, Narkeray, Kerastorm) are the obvious counter to a rain team, which is why Dakrock and Kynoketos carry Ground moves.
+
+Defeat text: "Ha! Sunk in the narrows. With my own trick!"
+
+### Hypatia the Philosopher, levels 62–63
+
+Athena's seat, Psychic. Each Pokémon is a way of thinking: the cynic in his jar who answers your strength with your own, the sleeper who dreams forever, the bee who hums what happens next, the sphinx's riddle, and Athena's owl, who can't be bluffed.
+
+```
+=== TRAINER_ICHOR_HYPATIA ===
+Name: HYPATIA
+Class: Pantheon
+Pic: Pantheon Hypatia
+Gender: Female
+Music: Elite Four
+Items: Full Restore / Full Restore / Full Restore
+AI: Basic Trainer / Smart Switching
+
+Pithound @ Rocky Helmet
+Level: 62
+Ability: Unaware
+Nature: Bold
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Foul Play
+- Psyshock
+- Slack Off
+- Calm Mind
+
+Amnoze @ Sitrus Berry
+Level: 62
+Ability: Comatose
+Nature: Calm
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Yawn
+- Dream Eater
+- Calm Mind
+- Moonlight
+
+Melisseer @ Focus Sash
+Level: 62
+Ability: Forewarn
+Nature: Timid
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Quiver Dance
+- Bug Buzz
+- Expanding Force
+- Future Sight
+
+Enigmaw @ Expert Belt
+Level: 63
+Ability: Analytic
+Nature: Modest
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Psychic
+- Focus Blast
+- Shadow Ball
+- Final Gambit
+
+Sophowl @ Leftovers
+Level: 63
+Ability: Unaware
+Nature: Calm
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Calm Mind
+- Psychic
+- Hurricane
+- Roost
+```
+- **Pithound** is Diogenes in his jar, who searched Athens by daylight with a lamp for an honest man. Unaware ignores the player's boosts, and Foul Play uses the player's own Attack. A No Retreat Hoplektor or a Dragon Danced Kynoketos the player has caught learns nothing here.
+- **Amnoze** is Endymion, asleep forever by Selene's wish: the one thing in the room that never changes. Comatose means it can't be put to sleep or poisoned; Yawn puts you to sleep for its Dream Eater. Hypatia keeps it "to remember what forever looks like".
+- **Melisseer** is the Delphic bee that hums tomorrow. Forewarn tells Hypatia the player's strongest move; Future Sight lands two turns later; Focus Sash lets it Quiver Dance once.
+- **Enigmaw** is the sphinx. Focus Blast (TM) and Shadow Ball (TM) cover what Psychic can't. Final Gambit is the riddle answered: when it's nearly done, it throws all its remaining HP at you, the way the sphinx leapt from her rock.
+- **Sophowl**, the ace (the dex: "Philosopher Hypatia's patient, unshakable ace"). Calm Mind and Roost, Unaware so it can't be bluffed, and Hurricane for Fighting and Grass types.
+- **The matchups:**
+  - **Pylakyon** is Ghost, so Psychic can't touch its weakness and its Ghost moves hit everything here twice over; but Pithound's Foul Play and Enigmaw's Shadow Ball are super effective on it.
+  - **Daphnyad** is neutral to Psychic; it fears Sophowl's Hurricane and Melisseer's Bug Buzz is only neutral. Its Fairy moves hit Enigmaw.
+  - **Seismare** is neutral across the board and outlasts Amnoze; a Dark or Bug teammate makes this seat short.
+  - Bug, Ghost and Dark answers are the plan: the Labyrinth's Hyphantis, Kalyptor and Kerdovix all fit.
+
+Defeat text: "Interesting. That's an answer. It isn't the end of one."
+
+### Olympias the Serpent Queen, levels 63–64
+
+Hera's seat, Dragon. Every serpent Hera ever gave a job: Triptolemus's chariot-dragon (Demeter's, borrowed), the dragon's-teeth soldiers of Thebes, the Python Hera set on Leto, Ladon on her golden apples, and the Hydra she raised to kill Herakles. Three of them Coil. She tells them nothing, so they decide.
+
+```
+=== TRAINER_ICHOR_OLYMPIAS ===
+Name: OLYMPIAS
+Class: Pantheon
+Pic: Pantheon Olympias
+Gender: Female
+Music: Elite Four
+Items: Full Restore / Full Restore / Full Restore
+AI: Basic Trainer / Smart Switching
+
+Stachypter @ Grassy Seed
+Level: 63
+Ability: Seed Sower
+Nature: Jolly
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Grassy Glide
+- Dragon Claw
+- Tailwind
+- Earthquake
+
+Dorydrake @ Loaded Dice
+Level: 63
+Ability: Moxie
+Nature: Adamant
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Dragon Dance
+- Scale Shot
+- Close Combat
+- Iron Head
+
+Pythoros @ Leftovers
+Level: 63
+Ability: Intimidate
+Nature: Impish
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Coil
+- Earthquake
+- Dragon Rush
+- Stone Edge
+
+Melodrakon @ Sitrus Berry
+Level: 64
+Ability: Harvest
+Nature: Relaxed
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Glare
+- Coil
+- Play Rough
+- Outrage
+
+Lernathan @ Black Sludge
+Level: 64
+Ability: Regenerator
+Nature: Adamant
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Coil
+- Gunk Shot
+- Outrage
+- Recover
+```
+- **Stachypter** leads with Tailwind for the team behind it, and Grassy Glide strikes first in its own terrain (Seed Sower). Earthquake (TM) for Fire and Steel types.
+- **Dorydrake** is the Spartoi, sown from a dragon's teeth, who came out of the ground armed and fought each other down to five. Dragon Dance, then Scale Shot with Loaded Dice; Moxie snowballs. Iron Head (TM) for Fairy types. The dex has Olympias field one.
+- **Pythoros** is the Python, which Hera set on Leto to stop her giving birth to Apollo. Coil makes Dragon Rush accurate. The dex has Olympias field one.
+- **Melodrakon** is Ladon, who guarded Hera's golden apples and never moved. Glare paralyzes; Harvest regrows its Sitrus Berry. The dex says she "keeps" one: here it is.
+- **Lernathan**, the ace, the Hydra, which Hera raised in the marsh to kill Herakles, the head that can't die. Regenerator and Recover keep it coming back; Coil makes Gunk Shot sure. Olympias's ace is the one monster Hera made for a single fated purpose, and it failed; she keeps it because it is still here anyway. This is the dex's pseudo-legendary, the first one the player sees at its final stage.
+- **The matchups:**
+  - **Daphnyad** is Fairy, so every Dragon move here does nothing to it. Olympias knows: Lernathan's Gunk Shot is four times effective, Dorydrake has Iron Head, Stachypter has Earthquake and Grassy Glide is neutral. Daphnyad still sweeps the middle of her team.
+  - **Pylakyon** takes Earthquake and Stone Edge hard and has no Dragon answer of its own; it is the support here.
+  - **Seismare** is four times weak to Stachypter's Grassy Glide, which comes first, so a Seismare lead is a mistake. Its Ground moves hit Lernathan.
+  - Ice and Fairy are the plan: Chionyad (Ice/Fairy) from the Ascent's snowfields is the best single answer, and the reason the Ascent hands it out.
+
+Defeat text: "Hm. He'd have liked you. He liked anyone who wouldn't stay put."
+
+### Aristeides the Just, the Archon, levels 65–67
+
+Zeus's seat, Electric, mixed. STORY §2 casts every slot: law, and hubris punished. **He holds nothing bought.** Aristides was famously poor, and the Archon's team carries only what a farm or a hillside would give him: berries, leftovers, a herb. It is a characterization the player can read on the summary screen; Balance may want shop items back on Spartan (PQ).
+
+```
+=== TRAINER_ICHOR_ARISTEIDES ===
+Name: ARISTEIDES
+Class: Archon
+Pic: Archon Aristeides
+Gender: Male
+Music: Champion
+Items: Full Restore / Full Restore / Full Restore / Full Restore
+AI: Basic Trainer / Smart Switching
+
+Lebetron @ Shuca Berry
+Level: 65
+Ability: Galvanize
+Nature: Modest
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Boomburst
+- Flash Cannon
+- Flamethrower
+- Fake Out
+
+Elektear @ Leftovers
+Level: 65
+Ability: Static
+Nature: Modest
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Thunderbolt
+- Energy Ball
+- Leech Seed
+- Synthesis
+
+Kerastorm @ Sitrus Berry
+Level: 66
+Ability: Harvest
+Nature: Modest
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Nasty Plot
+- Thunderbolt
+- Moonblast
+- Milk Drink
+
+Krystolos @ Chople Berry
+Level: 66
+Ability: Solid Rock
+Nature: Adamant
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Icicle Crash
+- Stone Edge
+- Earthquake
+- Rock Polish
+
+Sepivolt @ Power Herb
+Level: 66
+Ability: Electromorphosis
+Nature: Modest
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Meteor Beam
+- Lock-On
+- Zap Cannon
+- Ice Beam
+
+Aetarch @ Lum Berry
+Level: 67
+Ability: Reckless
+Nature: Naive
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Supercell Slam
+- Brave Bird
+- Thunderbolt
+- Roost
+```
+- **Lebetron** is Salmoneus, the king who dragged bronze kettles behind his chariot and threw torches to fake Zeus's thunder, until Zeus struck him down. Galvanize makes Boomburst real thunder, and Flamethrower (TM) is the torches. Fake Out opens. The Shuca Berry softens its four-times Ground weakness once. It leads because it is the lesson: pretending to be a god ends one way.
+- **Elektear** is the Heliades, who wept amber for their brother Phaethon when Zeus struck him from the sun's chariot. Leech Seed and Synthesis; Energy Ball is four times effective on Seismare.
+- **Kerastorm** is Amalthea, the goat whose hide became the aegis. Harvest regrows its Sitrus Berry, Milk Drink heals, and Nasty Plot makes it a win condition if left alone.
+- **Krystolos** is the everlasting ice, what never changes. Solid Rock softens its two four-times weaknesses and the Chople Berry covers Fighting once. Rock Polish fixes its speed.
+- **Sepivolt** is a thunderbolt fossil from the first Archon's age. Power Herb fires Meteor Beam in one turn; Lock-On guarantees the Zap Cannon after it. Ice Beam (TM) for Dragon and Grass types.
+- **Aetarch**, the ace, the eagle of Zeus (the dex: "Archon Aristeides's ace"). Reckless powers Brave Bird and Supercell Slam; Lum Berry shrugs off the first status; Roost. The one Pokémon he chose for himself, he says, if asked after (P2).
+- **The matchups:**
+  - **Seismare** is Ground, immune to four of his Electric types' main moves: this is its seat. Elektear's Energy Ball, Kerastorm's Moonblast and Krystolos's Earthquake are what stop it.
+  - **Daphnyad** resists Electric and Grass, and its Grass moves hit Krystolos and Sepivolt hard; it fears Lebetron's Flash Cannon and Flamethrower, Aetarch's Brave Bird and Krystolos's Icicle Crash.
+  - **Pylakyon** is neutral to Electric, and its Fire moves hit Lebetron and Elektear super effectively; it fears Krystolos's Stone Edge and Earthquake and Sepivolt's Meteor Beam.
+  - Ground types are the plan, which the Ascent supplies (Pythoros; Geogrip and Seismare). Lebetron's Lightning Rod is not used, so the player's own Electric types aren't wasted on a sponge; that is Balance's to tune.
+- **Spartan:** if Balance wants it, Aetarch is the place for an Apotheosis, the Archon's one concession to the player's own gimmick. Nothing in the story depends on it.
+
+Defeat text: "…Unwritten. All of it. Even this." (STORY §7.10)
+
+**Levels.** BALANCE gives the Archon 65–67, and this file follows it. STORY §2 suggests 66–70 (PQ).
+
+---
+
+# Part 4. Wild encounters
+
+## Kythera's wild Pokémon
+
+In `src/data/wild_encounters.json` terms, as in the slice and Phase 2: land slots 20/20/10/10/10/10/5/5/4/4/1/1; `_Morning` covers morning, day and evening, and `_Night` is given where it differs. Fishing and water fall back to `_Morning`.
+
+**Levels** are 00_front's Kythera rows (BALANCE's Kythera stage, wild 38–45). Talos's ace was 43, so the voyage's fish start at 38 and the bands rise along the island to the falls' 45. No band is wider than 5.
+
+**BALANCE's two rulings hold** (00_front, Conventions): every table carries evolved forms at the band's levels, and nothing is evolved earlier than its evolution level allows. No first stage of a level-evolution line appears on Kythera. Halcyling (which evolves at 24) and Ketofry (at 20) are left out on purpose; Ketofry's dex habitat says "any water", which the ruling overrides (Open questions 4). The lines that do appear unevolved evolve by stone (Aphrell), friendship (Glyphlet), place (Narcibulb, at the spring) or a known move (Chelyra's line), or are single stages (Echolali).
+
+**Deviations from the dex's habitats** are marked † (Open questions 5): Kythera's own lines are few, so the tables borrow widespread lines that fit an island of love and the sea.
+
+| Map | Land band |
+|---|---|
+| Melos (the terraces and the obsidian slope) | 38–42 |
+| The Foam Road | 39–43 |
+| The Spring of Kallirhoe | 40–44 |
+| Echo's caves | 40–44 |
+| The Neraida falls | 41–45 |
+| Antikythera (Route 23's islet) | 40–44 |
+
+## Melos
+
+`MAP_MELOS`, land `encounter_rate: 20`: the upper terrace's grass band and the obsidian slope. A volcanic island, so the table leans to stone and fire.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Narthip † | 38–40 | Glyphlet | 38–40 |
+| 1 | 20% | Glyphlet | 38–40 | Gelasable † | 38–40 |
+| 2 | 10% | Galenyon | 38–40 | Cairnolith † | 38–40 |
+| 3 | 10% | Aphrell | 38–40 | Harpelle † | 38–40 |
+| 4 | 10% | Cairnolith † | 39–41 | Aphrell | 39–41 |
+| 5 | 10% | Himerow | 39–41 | Chelyra † | 39–41 |
+| 6 | 5% | Harpelle † | 40–41 | Galenyon | 40–41 |
+| 7 | 5% | Narthip † | 40–41 | Glyphlet | 40–41 |
+| 8 | 4% | Glyphlet | 41–42 | Gelasable † | 41–42 |
+| 9 | 4% | Cairnolith † | 41–42 | Cairnolith † | 41–42 |
+| 10 | 1% | Gigantomb † | 42–42 | Gigantomb † | 42–42 |
+| 11 | 1% | Himerow | 42–42 | Harpelle † | 42–42 |
+
+Narthip evolves only with a Fire Stone, so it may stand at 38. Gigantomb (from Kapnub at 35) is the dex's half-buried giant; one in a hundred on a volcanic island the Titans have just dug over.
+
+## The Foam Road
+
+`MAP_KYTHERA_FOAM_ROAD`, land `encounter_rate: 20`. The quarry spur shares the table but its grass is drawn densest where Glyphlet sits (Part 2).
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Aphrell | 39–41 | Glyphlet | 39–41 |
+| 1 | 20% | Galenyon | 39–41 | Gelasable † | 39–41 |
+| 2 | 10% | Glyphlet | 39–41 | Aphrell | 39–41 |
+| 3 | 10% | Himerow | 40–42 | Chelyra † | 40–42 |
+| 4 | 10% | Psychora † | 40–42 | Galenyon | 40–42 |
+| 5 | 10% | Aphrell | 40–42 | Harpelle † | 40–42 |
+| 6 | 5% | Narcibulb | 40–42 | Glyphlet | 41–42 |
+| 7 | 5% | Chelyra † | 41–42 | Gelasable † | 41–42 |
+| 8 | 4% | Galenyon | 41–43 | Aphrell | 41–43 |
+| 9 | 4% | Harpelle † | 41–43 | Echolali | 41–43 |
+| 10 | 1% | Himerow | 43–43 | Chelyra † | 43–43 |
+| 11 | 1% | Glyphlet | 43–43 | Harpelle † | 43–43 |
+
+## The Spring of Kallirhoe
+
+`MAP_KYTHERA_SPRING_OF_KALLIRHOE`, land `encounter_rate: 20`. The grass is a horseshoe round the pool.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Narcibulb | 40–42 | Glyphlet | 40–42 |
+| 1 | 20% | Narcibulb | 41–43 | Chelyra † | 40–42 |
+| 2 | 10% | Psychora † | 40–42 | Narcibulb | 40–42 |
+| 3 | 10% | Himerow | 41–43 | Gelasable † | 41–43 |
+| 4 | 10% | Glyphlet | 40–42 | Echolali | 41–43 |
+| 5 | 10% | Aphrell | 40–42 | Glyphlet | 41–43 |
+| 6 | 5% | Galenyon | 42–43 | Narcibulb | 42–43 |
+| 7 | 5% | Psychora † | 42–43 | Chelyra † | 42–43 |
+| 8 | 4% | Himerow | 42–44 | Echolali | 42–44 |
+| 9 | 4% | Narcibulb | 43–44 | Gelasable † | 43–44 |
+| 10 | 1% | Narcisheen | 44–44 | Narcisheen | 44–44 |
+| 11 | 1% | Echolali | 44–44 | Echolali | 44–44 |
+
+Narcisheen is the dex's "rare wild one" bending over the pool. Echolali is heard here long before it's seen, as the dex says, and is commoner below.
+
+## Echo's caves
+
+`MAP_KYTHERA_ECHO_CAVES`, land `encounter_rate: 10`, one table for the cave floor; the dark gallery is where Echolali's share is drawn largest (the table is per map, so the gallery simply has the most floor).
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Cairnolith † | 40–42 |
+| 1 | 20% | Aphrell | 40–42 |
+| 2 | 10% | Echolali | 40–42 |
+| 3 | 10% | Galenyon | 40–42 |
+| 4 | 10% | Glyphlet | 41–43 |
+| 5 | 10% | Harpelle † | 41–43 |
+| 6 | 5% | Echolali | 42–43 |
+| 7 | 5% | Cairnolith † | 42–43 |
+| 8 | 4% | Aphrell | 42–44 |
+| 9 | 4% | Echolali | 43–44 |
+| 10 | 1% | Narcisheen | 44–44 |
+| 11 | 1% | Echolali | 44–44 |
+
+Echolali totals 21% here: the dex calls it "rare, at any hour", and this is its one home, so it is the commonest place it's rare.
+
+## The Neraida falls
+
+`MAP_KYTHERA_NERAIDA_FALLS`, land `encounter_rate: 20`. The terrace grass and the riverbank share it; the upper pool has no grass.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Himerow | 41–43 | Gelasable † | 41–43 |
+| 1 | 20% | Glyphlet | 41–43 | Glyphlet | 41–43 |
+| 2 | 10% | Psychora † | 41–43 | Chelyra † | 41–43 |
+| 3 | 10% | Chelyra † | 42–44 | Harpelle † | 42–44 |
+| 4 | 10% | Gelasable † | 42–44 | Echolali | 42–44 |
+| 5 | 10% | Galenyon | 42–44 | Galenyon | 42–44 |
+| 6 | 5% | Narcibulb † | 42–44 | Gelasable † | 43–44 |
+| 7 | 5% | Melisseer † | 43–44 | Chelyra † | 43–44 |
+| 8 | 4% | Himerow | 43–45 | Glyphlet | 43–45 |
+| 9 | 4% | Harpelle † | 43–45 | Harpelle † | 43–45 |
+| 10 | 1% | Melisseer † | 45–45 | Echolali | 45–45 |
+| 11 | 1% | Himerow | 45–45 | Chelyra † | 45–45 |
+
+Melisseer: Kerinthos keeps hives here. A female Melibee evolves at 21, so a wild Melisseer at 43 is allowed; males stay Melibee and don't appear.
+
+## Antikythera, Route 23's islet
+
+`MAP_ROUTE23_CRETAN_SEA`, land `encounter_rate: 20`, on the islet's patch of grass only.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Galenyon | 40–42 | Galenyon | 40–42 |
+| 1 | 20% | Aphrell | 40–42 | Aphrell | 40–42 |
+| 2 | 10% | Glyphlet | 40–42 | Glyphlet | 40–42 |
+| 3 | 10% | Harpelle † | 41–43 | Harpelle † | 41–43 |
+| 4 | 10% | Galenyon | 41–43 | Echolali | 41–43 |
+| 5 | 10% | Aphrell | 41–43 | Aphrell | 41–43 |
+| 6 | 5% | Himerow | 42–43 | Harpelle † | 42–43 |
+| 7 | 5% | Glyphlet | 42–43 | Galenyon | 42–43 |
+| 8 | 4% | Harpelle † | 43–44 | Glyphlet | 43–44 |
+| 9 | 4% | Galenyon | 43–44 | Aphrell | 43–44 |
+| 10 | 1% | Himerow | 44–44 | Echolali | 44–44 |
+| 11 | 1% | Aphrell | 44–44 | Harpelle † | 44–44 |
+
+## Fishing and water
+
+Fishing `encounter_rate: 30`; water `encounter_rate: 4`, slots 60/30/5/4/1. By Act III the player has the Good Rod (Phase 2) and probably the Super Rod (Act II's), so all three rods are filled at real levels.
+
+| Map | Old Rod (70 / 30) | Good Rod (60 / 20 / 20) | Super Rod (40 / 40 / 15 / 4 / 1) |
+|---|---|---|---|
+| The *Euploia*, the southern voyage (Open questions 1) | Aphrell 38–40 / Narkeray 38–40 | Narkeray 39–42 / Aphrell 39–41 / Narkeray 40–42 | Narkeray 40–42 / Aphrell 40–42 / Kynoketos 40–42 / Narkeray 42 / Kynoketos 42 |
+| `MAP_KYTHERA_SKANDEIA` | Aphrell 38–40 / Narkeray 38–40 | Aphrell 39–41 / Narkeray 39–42 / Aphrell 40–42 | Narkeray 40–42 / Aphrell 40–42 / Kynoketos 40–42 / Telkanvil † 42 / Kynoketos 42 |
+| `MAP_KYTHERA_FOAM_ROAD` | Aphrell 39–41 / Narkeray 39–41 | Aphrell 40–42 / Narkeray 40–42 / Aphrell 41–42 | as Skandeia, +1 level |
+| `MAP_KYTHERA_PAPHIA` (the bay) | Aphrell 39–41 / Narkeray 39–41 | Aphrell 40–42 / Narkeray 40–42 / Aphrell 41–42 | as Skandeia, +1 level |
+| `MAP_KYTHERA_ECHO_CAVES` (the Speaking Hall's pool, sea-fed) | Aphrell 40–42 / Narkeray 40–42 | Narkeray 41–43 / Aphrell 41–43 / Narkeray 42–43 | Narkeray 42–44 / Aphrell 42–44 / Kynoketos 42–44 / Narkeray 44 / Kynoketos 44 |
+| `MAP_MELOS` | Aphrell 38–40 / Narkeray 38–40 | Aphrell 39–41 / Narkeray 39–42 / Aphrell 40–42 | Narkeray 40–42 / Aphrell 40–42 / Kynoketos 40–42 / Telkanvil † 42 / Kynoketos 42 |
+| `MAP_ROUTE22_CRETAN_SEA` | Aphrell 38–40 / Narkeray 38–40 | Narkeray 38–41 / Aphrell 38–40 / Narkeray 39–41 | Narkeray 39–41 / Aphrell 39–41 / Kynoketos 39–41 / Telkanvil † 41 / Kynoketos 42 |
+| `MAP_ROUTE22_MYRTOAN_SEA` | Aphrell 39–41 / Narkeray 39–41 | Narkeray 39–42 / Aphrell 39–41 / Narkeray 40–42 | Kynoketos 40–42 / Narkeray 40–42 / Aphrell 40–42 / Kynoketos 42 / Kynoketos 43 |
+| `MAP_ROUTE23_CRETAN_SEA` | Aphrell 40–42 / Narkeray 40–42 | Narkeray 41–44 / Aphrell 41–43 / Narkeray 42–44 | Kynoketos 42–44 / Narkeray 42–44 / Aphrell 42–44 / Telkanvil † 44 / Kynoketos 45 |
+| `MAP_KYTHERA_SPRING_OF_KALLIRHOE`, `MAP_KYTHERA_NERAIDA_FALLS` | none: "The water's too clear to fish. You can see every pebble." | — | — |
+
+| Map (water) | 60% | 30% | 5% | 4% | 1% |
+|---|---|---|---|---|---|
+| Skandeia, the Foam Road, Paphia's bay | Galenyon 38–42 | Aphrell 38–42 | Narkeray 40–42 | Galenyon 42 | Kynoketos 42 |
+| Echo's caves (the pool and the sea mouth) | Aphrell 40–43 | Galenyon 40–43 | Narkeray 42–43 | Echolali 43 | Kynoketos 44 |
+| The Neraida falls (the plunge and upper pools) | Galenyon 41–44 | Narcisheen † 41–44 | Galenyon 43–44 | Narcisheen † 44 | Galenyon 45 |
+| Melos's bay; Route 22 (both maps) | Galenyon 38–42 | Aphrell 38–42 | Narkeray 40–42 | Kynoketos 41–42 | Telkanvil † 42 |
+| Route 23 | Galenyon 40–44 | Aphrell 40–44 | Narkeray 42–44 | Kynoketos 43–44 | Telkanvil † 45 |
+
+Kynoketos stays rare: it is a 540-total pseudo-Gyarados (dex #32), and the dex keeps it to the Super Rod off headlands.
+
+## Knossa's wild tables
+
+In `src/data/wild_encounters.json` terms, as in Phase 2. Land slots are 20/20/10/10/10/10/5/5/4/4/1/1. Each map defines `_Morning` (morning, day and evening) and, where it differs, `_Night`. The Labyrinth's rings are underground but still follow the clock, as LABYRINTH §9 has them (night-only moon-dancers in Ring II's Moon Room and Ring VII).
+
+**Levels** are LABYRINTH §9's, inside BALANCE's Knossa row (wild 42–48) and 00's table (Ring VII up to 49; Mount Ida 44–48). No band is wider than 5.
+
+**BALANCE's rulings apply** (00, "Wild tables"): the main tables carry evolved forms at the band's levels, nothing appears evolved before its evolution level allows, and first stages appear only in small named spots. Knossa's one such spot is **the cradle shrine** at the Idaean Cave's mouth, the dex team's Kymbash 33. Stone, trade, friendship and held-item evolutions may stay unevolved (Kerazap, Kolossette, Onotis), and Melibee males never evolve.
+
+**Deviations from the dex's habitats** are marked †, and listed in Open questions.
+
+| Map | Land band | Rate |
+|---|---|---|
+| The Bull Road | 42–45 | 20 |
+| The vineyard terraces | 43–45 | 25 |
+| The Bronze Heel | 43–45 | 20 |
+| Ring I, the Threshold | 44–46 | 8 (relay chambers are puzzle rooms) |
+| Ring II, the Runner's Ring | 44–46 | 10 |
+| Ring III, the Mysteries | 45–47 | 10 |
+| Ring IV, the Masks (side tunnels only) | 45–47 | 4 |
+| Ring V, the Hunt | 46–48 | 8 |
+| Ring VI, the Forge (not the Hall of Dials) | 46–48 | 6 |
+| Ring VII, the Choros | 47–49 | 10 |
+| The Ida path | 44–48 | 20 |
+| The Idaean Cave | 44–48 | 10 |
+| The cradle shrine (the rare low spot) | 33–37 | 5 |
+| The Cave of Eileithyia | 44–47 | 10 |
+
+**No encounters:** Amnisos (fishing only), the palace, the workshop, Minos's tomb, the archive, the vault, the Starry Chamber, the Icarus Shaft, the Bull Road vault, the hut. **During the Turning** every ring's encounters are off (LABYRINTH §7: "Nothing hunts you"), by a check on `FLAG_ICHOR_RHEA_MERCY` and not yet `FLAG_ICHOR_TURNING_DONE`.
+
+**Puzzle rooms run quiet** (LABYRINTH §9): Ring I's relay corridors and Ring VI's Hall of Dials use a floor metatile with no encounters, and the rate above applies only to the ring's other floor.
+
+## The Bull Road
+
+`MAP_KNOSSA_BULL_ROAD`: the terraces, the meadow at the herd crossing, the olive grove of band 3.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Taurivet † | 42–44 | Gelasable | 42–44 |
+| 1 | 20% | Melibee † | 42–44 | Sophowl † | 42–44 |
+| 2 | 10% | Onotis | 42–44 | Taurivet † | 42–44 |
+| 3 | 10% | Kerazap | 42–44 | Onotis | 42–44 |
+| 4 | 10% | Galenyon | 42–44 | Kalyptor † | 42–44 |
+| 5 | 10% | Cairnolith | 43–45 | Cairnolith | 43–45 |
+| 6 | 5% | Melisseer † | 43–45 | Gelasable | 44–45 |
+| 7 | 5% | Taurivet † | 44–45 | Sophowl † | 44–45 |
+| 8 | 4% | Onotis | 44–45 | Kalyptor † | 44–45 |
+| 9 | 4% | Kerazap | 44–45 | Onotis | 44–45 |
+| 10 | 1% | Kolossard | 45 | Amnoze † | 45 |
+| 11 | 1% | Ikaroth | 45 | Midonos † | 45 |
+
+- **Taurivet** is the palace herd (LABYRINTH's Tauros); **Melibee** and **Melisseer** are the Minoan bee; **Sophowl** takes Noctowl's night slot; **Onotis** takes Mudbray's (a donkey for a donkey).
+- **Ikaroth** lives "only in harsh sunlight" by the dex. The tables can't read the weather, so it is a 1% day slot on the route's east cliffs, which overlook the palace hill above the workshop (Open questions).
+
+## The vineyard terraces
+
+`MAP_KNOSSA_BULL_ROAD_VINEYARD`. LABYRINTH's rarer table: Hisuian Lilligant becomes Korantha.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Thyrsivy † | 43–45 | Oinopard † | 43–45 |
+| 1 | 20% | Onotis | 43–45 | Gelasable | 43–45 |
+| 2 | 10% | Melibee † | 43–45 | Thyrsivy † | 43–45 |
+| 3 | 10% | Melisseer † | 43–45 | Sophowl † | 43–45 |
+| 4 | 10% | Gelasable | 43–45 | Onotis | 43–45 |
+| 5 | 10% | Midonos † | 43–45 | Midonos † | 43–45 |
+| 6 | 5% | Thyrsivy † | 44–45 | Oinopard † | 44–45 |
+| 7 | 5% | Onotis | 44–45 | Kalyptor † | 44–45 |
+| 8 | 4% | Korantha † | 44–45 | Persenyx † | 44–45 |
+| 9 | 4% | Melisseer † | 44–45 | Thyrsivy † | 44–45 |
+| 10 | 1% | Korantha † | 45 | Persenyx † | 45 |
+| 11 | 1% | Kerazap | 45 | Amnoze † | 45 |
+
+## The Bronze Heel
+
+`MAP_KNOSSA_BRONZE_HEEL`: the beach grass and the peninsula. Kolossard walks this shore, as Talos did (dex: Knossa's coastal cliffs, rare).
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Kolossette † | 43–45 | Kolossette † | 43–45 |
+| 1 | 20% | Galenyon | 43–45 | Karkitox † | 43–45 |
+| 2 | 10% | Karkitox † | 43–45 | Gelasable | 43–45 |
+| 3 | 10% | Taurivet † | 43–45 | Kalyptor † | 43–45 |
+| 4 | 10% | Cairnolith | 43–45 | Cairnolith | 43–45 |
+| 5 | 10% | Onotis | 43–45 | Sophowl † | 43–45 |
+| 6 | 5% | Taurivet † | 44–45 | Karkitox † | 44–45 |
+| 7 | 5% | Ikaroth | 44–45 | Kolossette † | 44–45 |
+| 8 | 4% | Kolossard | 44–45 | Gelasable | 44–45 |
+| 9 | 4% | Galenyon | 44–45 | Cairnolith | 44–45 |
+| 10 | 1% | Kolossard | 45 | Telkanvil † | 45 |
+| 11 | 1% | Telkanvil † | 45 | Kalyptor † | 45 |
+
+## Fishing and water
+
+Fishing `encounter_rate: 30`; water `encounter_rate: 4`, slots 60/30/5/4/1. Rods and the Conch are all in hand by Act III, so these levels are final. Ketofry keeps its Old Rod slot at the band's level everywhere (the dex: "any water in Aethos"), the Magikarp exception.
+
+| Map | Old Rod (70 / 30) | Good Rod (60 / 20 / 20) | Super Rod (40 / 40 / 15 / 4 / 1) |
+|---|---|---|---|
+| `MAP_KNOSSA_AMNISOS` | Ketofry 42–44 / Karkitox † 42–44 | Karkitox † 43–45 / Narkeray 43–45 / Ketofry 43–45 | Narkeray 44–46 / Telkanvil † 44–46 / Karkitox † 45–46 / Kynoketos 46 / Kynoketos 46 |
+| `MAP_KNOSSA_BRONZE_HEEL` (the tide pools and the point) | Ketofry 42–44 / Karkitox † 42–44 | Narkeray 43–45 / Karkitox † 43–45 / Ketofry 43–45 | Telkanvil † 44–46 / Kynoketos 45–46 / Narkeray 44–46 / Kynoketos 46 / Telkanvil † 46 |
+
+Kynoketos is the dex's "rare, off rocky headlands" Super Rod find; the Heel's point is Knossa's headland, so it is likelier there.
+
+| Map (water) | 60% | 30% | 5% | 4% | 1% |
+|---|---|---|---|---|---|
+| Amnisos's harbor, the Heel's shallows | Galenyon 43–45 | Karkitox † 43–45 | Narkeray 44–45 | Telkanvil † 45 | Kynoketos 45 |
+
+## The Labyrinth's rings
+
+One table per ring map, `_Morning`, with `_Night` where LABYRINTH has a night-only Pokémon. The rings are deeper as they go in, so the bands rise ring by ring.
+
+**Mitoclew** is the Labyrinth's own (dex: its passages, uncommon, "easiest to find in dead ends"); it appears in every ring but Ring VI's forge. **Kalyptor** takes LABYRINTH's ghost and candle slots, **Hyphantis** its web-spiders, and **Kolossette** and **Kolossard** its Minoan bronze.
+
+**Ring I, the Threshold** (`MAP_LABYRINTH_RING1`), 44–46:
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Mitoclew | 44–46 |
+| 1 | 20% | Cairnolith | 44–46 |
+| 2 | 10% | Kalyptor † | 44–46 |
+| 3 | 10% | Kolossette † | 44–46 |
+| 4 | 10% | Plouteras † | 44–46 |
+| 5 | 10% | Mitoclew | 44–46 |
+| 6 | 5% | Cairnolith | 45–46 |
+| 7 | 5% | Kalyptor † | 45–46 |
+| 8 | 4% | Kolossette † | 45–46 |
+| 9 | 4% | Plouteras † | 45–46 |
+| 10 | 1% | Kolossard | 46 |
+| 11 | 1% | Kourodin † | 46 |
+
+**Ring II, the Runner's Ring** (`MAP_LABYRINTH_RING2`), 44–46. LABYRINTH's rare stray from the palace herd is a Taurivet; its moon-dancer is **Amnoze**, the Endymion who sleeps under the moon, at night in the Moon Room's grass.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Mitoclew | 44–46 | Mitoclew | 44–46 |
+| 1 | 20% | Kalyptor † | 44–46 | Kalyptor † | 44–46 |
+| 2 | 10% | Cairnolith | 44–46 | Cairnolith | 44–46 |
+| 3 | 10% | Hyphantis † | 44–46 | Hyphantis † | 44–46 |
+| 4 | 10% | Kolossette † | 44–46 | Kolossette † | 44–46 |
+| 5 | 10% | Plouteras † | 44–46 | Plouteras † | 44–46 |
+| 6 | 5% | Mitoclew | 45–46 | Amnoze † | 45–46 |
+| 7 | 5% | Kalyptor † | 45–46 | Kalyptor † | 45–46 |
+| 8 | 4% | Cairnolith | 45–46 | Mitoclew | 45–46 |
+| 9 | 4% | Hyphantis † | 45–46 | Hyphantis † | 45–46 |
+| 10 | 1% | Taurivet † | 46 | Amnoze † | 46 |
+| 11 | 1% | Kolossard | 46 | Taurivet † | 46 |
+
+**Ring III, the Mysteries** (`MAP_LABYRINTH_RING3`), 45–47, pitch dark. LABYRINTH's Golett becomes a lost Kolossette, one of Daedalus's strays.
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Hyphantis † | 45–47 |
+| 1 | 20% | Kalyptor † | 45–47 |
+| 2 | 10% | Persenyx † | 45–47 |
+| 3 | 10% | Mitoclew | 45–47 |
+| 4 | 10% | Plouteras † | 45–47 |
+| 5 | 10% | Hyphantis † | 45–47 |
+| 6 | 5% | Kalyptor † | 46–47 |
+| 7 | 5% | Persenyx † | 46–47 |
+| 8 | 4% | Mitoclew | 46–47 |
+| 9 | 4% | Plouteras † | 46–47 |
+| 10 | 1% | Kolossette † | 47 |
+| 11 | 1% | Kolossard | 47 |
+
+**Ring IV, the Masks** (`MAP_LABYRINTH_RING4`), 45–47, side tunnels only:
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Cairnolith | 45–47 |
+| 1 | 20% | Plouteras † | 45–47 |
+| 2 | 10% | Kolossette † | 45–47 |
+| 3 | 10% | Mitoclew | 45–47 |
+| 4 | 10% | Cairnolith | 45–47 |
+| 5 | 10% | Plouteras † | 45–47 |
+| 6 | 5% | Kolossette † | 46–47 |
+| 7 | 5% | Mitoclew | 46–47 |
+| 8 | 4% | Cairnolith | 46–47 |
+| 9 | 4% | Plouteras † | 46–47 |
+| 10 | 1% | Kaprodon † | 47 |
+| 11 | 1% | Geogrip † | 47 |
+
+**Ring V, the Hunt** (`MAP_LABYRINTH_RING5`), 46–48. Artemis's ring: LABYRINTH's Hisuian Sneasel becomes **Lykanax**, the hunting wolf. Asterion is Asterlorn and only one exists, so no table has wild bulls of his kind.
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Kalyptor † | 46–48 |
+| 1 | 20% | Mitoclew | 46–48 |
+| 2 | 10% | Lykanax † | 46–48 |
+| 3 | 10% | Hyphantis † | 46–48 |
+| 4 | 10% | Plouteras † | 46–48 |
+| 5 | 10% | Kalyptor † | 46–48 |
+| 6 | 5% | Lykanax † | 47–48 |
+| 7 | 5% | Mitoclew | 47–48 |
+| 8 | 4% | Hyphantis † | 47–48 |
+| 9 | 4% | Cairnolith | 47–48 |
+| 10 | 1% | Kaprodon † | 48 |
+| 11 | 1% | Persenyx † | 48 |
+
+**Ring VI, the Forge** (`MAP_LABYRINTH_RING6`), 46–48. LABYRINTH's forge coal, swords, bells and keys become the dex's forge-dwellers: Kolossette among the molds and scrap (dex: Kaldera's forge), Taurivet and Gigantomb from Hyperion's Kaldera, and a stray Kourodin.
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Kolossette | 46–48 |
+| 1 | 20% | Taurivet † | 46–48 |
+| 2 | 10% | Gigantomb † | 46–48 |
+| 3 | 10% | Cairnolith | 46–48 |
+| 4 | 10% | Kolossette | 46–48 |
+| 5 | 10% | Taurivet † | 46–48 |
+| 6 | 5% | Gigantomb † | 47–48 |
+| 7 | 5% | Kourodin † | 47–48 |
+| 8 | 4% | Kolossard | 47–48 |
+| 9 | 4% | Kolossette | 47–48 |
+| 10 | 1% | Kolossard | 48 |
+| 11 | 1% | Gigantomb † | 48 |
+
+**Ring VII, the Choros** (`MAP_LABYRINTH_RING7`), 47–49, starlit. LABYRINTH's fallen stars and meteorite idols become the dex's sky-watchers: Sophowl the owl, Psychora the soul-moth, Chelyra the lyre that sings at night, and Mitoclew, which knows Cosmic Power and Moonlight. Amnoze sleeps here at night.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Sophowl † | 47–49 | Sophowl † | 47–49 |
+| 1 | 20% | Mitoclew | 47–49 | Mitoclew | 47–49 |
+| 2 | 10% | Psychora † | 47–49 | Psychora † | 47–49 |
+| 3 | 10% | Chelyra † | 47–49 | Chelyra † | 47–49 |
+| 4 | 10% | Melisseer † | 47–49 | Amnoze † | 47–49 |
+| 5 | 10% | Sophowl † | 47–49 | Sophowl † | 47–49 |
+| 6 | 5% | Mitoclew | 48–49 | Mitoclew | 48–49 |
+| 7 | 5% | Psychora † | 48–49 | Psychora † | 48–49 |
+| 8 | 4% | Chelyra † | 48–49 | Chelyra † | 48–49 |
+| 9 | 4% | Melisseer † | 48–49 | Amnoze † | 48–49 |
+| 10 | 1% | Kerastorm | 49 | Amnoze † | 49 |
+| 11 | 1% | Amnoze † | 49 | Kerastorm | 49 |
+
+## Mount Ida (optional)
+
+**The Ida path** (`MAP_KNOSSA_IDA_PATH`), 44–48: Amalthea's goat pastures. Kerastorm lives "deep in the Diktaean cave" by the dex and on these slopes as a rarity here.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Kerazap | 44–46 | Gelasable | 44–46 |
+| 1 | 20% | Onotis | 44–46 | Sophowl † | 44–46 |
+| 2 | 10% | Cairnolith | 44–46 | Kerazap | 44–46 |
+| 3 | 10% | Ikaroth | 44–46 | Kalyptor † | 44–46 |
+| 4 | 10% | Melisseer † | 44–46 | Cairnolith | 44–46 |
+| 5 | 10% | Gelasable | 44–46 | Onotis | 44–46 |
+| 6 | 5% | Kerazap | 47–48 | Amnoze † | 47–48 |
+| 7 | 5% | Chelyra † | 47–48 | Chelyra † | 47–48 |
+| 8 | 4% | Kerastorm | 47–48 | Gelasable | 47–48 |
+| 9 | 4% | Sophowl † | 47–48 | Sophowl † | 47–48 |
+| 10 | 1% | Kolossard | 48 | Kerastorm | 48 |
+| 11 | 1% | Kerastorm | 48 | Amnoze † | 48 |
+
+**The Idaean Cave** (`MAP_KNOSSA_IDAEAN_CAVE`), 44–48: the dex's "Diktaean cave" (Open questions). Its main table carries **Kourodin at the band's levels** (dex: "common in the deep chambers… at levels 42–48"); at night the oldest dance in the deepest chamber, so the night table's top slots are the band's highest.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Kourodin | 44–46 | Kourodin | 44–46 |
+| 1 | 20% | Kalyptor † | 44–46 | Kalyptor † | 44–46 |
+| 2 | 10% | Cairnolith | 44–46 | Cairnolith | 44–46 |
+| 3 | 10% | Mitoclew † | 44–46 | Mitoclew † | 44–46 |
+| 4 | 10% | Kourodin | 46–48 | Kourodin | 46–48 |
+| 5 | 10% | Plouteras † | 44–46 | Plouteras † | 44–46 |
+| 6 | 5% | Kourodin | 47–48 | Kourodin | 47–48 |
+| 7 | 5% | Kerastorm | 46–48 | Kerastorm | 46–48 |
+| 8 | 4% | Kalyptor † | 47–48 | Kalyptor † | 47–48 |
+| 9 | 4% | Cairnolith | 47–48 | Kourodin | 48 |
+| 10 | 1% | Kerastorm | 48 | Kourodin | 48 |
+| 11 | 1% | Kourodin | 48 | Kerastorm | 48 |
+
+**The cradle shrine** (`MAP_KNOSSA_CRADLE_SHRINE`), the dex team's named low-level spot: "Rare in the cradle shrine at the mouth of the Diktaean cave, at level 33, day and night." A small walled forecourt where the bronze shields hang. It is BALANCE's "rare lower-level spot": the one place on Knossa a first stage lives in the wild. Day and night are the same. Rate 5, so the shrine stays a quiet room.
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Kerazap | 33–35 |
+| 1 | 20% | Cairnolith | 33–35 |
+| 2 | 10% | Mitoclew † | 33–35 |
+| 3 | 10% | Kalyptor † | 33–35 |
+| 4 | 10% | Kerazap | 34–36 |
+| 5 | 10% | Cairnolith | 34–36 |
+| 6 | 5% | **Kymbash** | 33 |
+| 7 | 5% | Mitoclew † | 35–37 |
+| 8 | 4% | Kalyptor † | 35–37 |
+| 9 | 4% | Kerazap | 35–37 |
+| 10 | 1% | **Kymbash** | 33 |
+| 11 | 1% | Cairnolith | 37 |
+
+Kymbash evolves into Kourodin at 35, so a player who raises one in the shrine has it evolve two levels later, in the cave behind.
+
+## The Cave of Eileithyia (optional)
+
+`MAP_KNOSSA_CAVE_OF_EILEITHYIA`, 44–47.
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Kalyptor † | 44–46 |
+| 1 | 20% | Mitoclew † | 44–46 |
+| 2 | 10% | Cairnolith | 44–46 |
+| 3 | 10% | Plouteras † | 44–46 |
+| 4 | 10% | Hyphantis † | 44–46 |
+| 5 | 10% | Persenyx † | 44–46 |
+| 6 | 5% | Kalyptor † | 46–47 |
+| 7 | 5% | Mitoclew † | 46–47 |
+| 8 | 4% | Cairnolith | 46–47 |
+| 9 | 4% | Persenyx † | 46–47 |
+| 10 | 1% | Kerastorm | 47 |
+| 11 | 1% | Amnoze † | 47 |
+
+## Statics, gifts and fixed finds
+
+| What | Where | Level | How |
+|---|---|---|---|
+| **Asterlorn (Asterion)** | the palace court, after the raid | 50 | a catch that can't fail (LABYRINTH §10); one only |
+| **Monophant or Sepidart** | Daedalus's workshop | 35 | revived from the fossil dug at the Bronze Heel; one choice (dex). The other fossil turns up in post-game Atlantis. |
+| **The fossil dig** | the Bronze Heel, the ledge by the tide line | — | a fixed dig (SYSTEMS §5): two shapes in the rock, a SKULL and a DART. Choose one; the ledge crumbles into the sea after. `FLAG_ICHOR_FOSSIL_DUG`. |
+| **Eripip** | the Cave of Eileithyia | hatches at 1 | Gennaia's Egg |
+| **Telkanvil "TELCHIS"** | Polypos's hut | 44 | in-game trade for an Aphrell |
+| **A palace-herd Taurivet** | the Central Court | 50 | the 20-leap prize (LABYRINTH §3): hidden ability Anger Point and Raging Fury, which it would otherwise learn at 58 |
+
+The fossil choice, as a fixed dig:
+```text
+Two shapes in the rock by the tide line. One like a skull. One like a dart.
+
+The ledge is crumbling. There's only time to free one.
+```
+?? THE SKULL / THE DART
+```text
+{PLAYER} dug up the Skull Fossil!
+
+The tide comes in over the ledge. The other shape is gone.
+```
+
+## Lakonia's tables
+
+In `src/data/wild_encounters.json` terms. Land slots are 20/20/10/10/10/10/5/5/4/4/1/1; water 60/30/5/4/1; Old Rod 70/30; Good Rod 60/20/20; Super Rod 40/40/15/4/1. Each map defines `_Morning` (used for morning, day and evening) and `_Night` where it differs, except the reed-bed nests, which split the day into all four times.
+
+**Levels follow BALANCE's Lakonia row** (wild 46–50), starting near Kleon's 54 at Knossa minus 4 and rising along the road: Route 24 45–49, Route 25 46–50, Lakonia's fields 47–50, Route 26 47–49, Lake Stymphalia 47–50, Route 27 48–50. No band is wider than 5.
+
+**BALANCE's two rulings hold** (00_front): the main tables carry evolved forms at band levels, and no wild Pokémon is evolved earlier than its evolution level allows. First and middle stages appear only in Lakonia's named small spots below (the cadets' yard, the wrestling sands, the Sown Field's swarm, the reed-bed nests, the deep reeds), and on the Old and Good Rods, at lower levels.
+
+**Deviations from the dex's habitats** are marked †, and listed in Open questions, Lakonia 9.
+
+## Route 24, the strait off Malea, and Gytheion's harbor
+
+Water and fishing only. Gytheion's harbor uses the same tables.
+
+| Slot | Rate | Surf | Levels |
+|---|---|---|---|
+| 0 | 60% | Galenyon | 45–48 |
+| 1 | 30% | Narkeray † | 45–48 |
+| 2 | 5% | Karkitox † | 46–49 |
+| 3 | 4% | Kynoketos | 47–49 |
+| 4 | 1% | Telkanvil † | 48–49 |
+
+| Rod | Slot | Rate | Species | Levels |
+|---|---|---|---|---|
+| Old | 0 | 70% | Ketofry | 5–10 |
+| Old | 1 | 30% | Karkipool | 10–15 |
+| Good | 0 | 60% | Narkeray | 35–40 |
+| Good | 1 | 20% | Ketofry | 15–19 |
+| Good | 2 | 20% | Karkipool | 20–27 |
+| Super | 0 | 40% | Kynoketos | 45–49 |
+| Super | 1 | 40% | Narkeray | 45–49 |
+| Super | 2 | 15% | Karkitox † | 45–49 |
+| Super | 3 | 4% | Telkanvil † | 47–49 |
+| Super | 4 | 1% | Kynoketos | 49–49 |
+
+Kynoketos is the dex's "off rocky headlands, Super Rod, rare" sea monster, and Cape Malea is the rockiest headland in Aethos, so it is commoner here than anywhere.
+
+## Route 25
+
+`MAP_ROUTE25_EUROTAS`, land `encounter_rate: 20`. The oleander meadow behind the Sickle thicket shares the table; its reason to visit is the visible item and the densest grass.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Gelasable | 46–48 | Gelasable | 46–48 |
+| 1 | 20% | Hoplomex | 46–48 | Cairnolith | 46–48 |
+| 2 | 10% | Kerazap | 46–48 | Kerazap | 46–48 |
+| 3 | 10% | Chelonet † | 46–48 | Karkitox † | 46–48 |
+| 4 | 10% | Cairnolith | 47–49 | Gelasable | 47–49 |
+| 5 | 10% | Galenyon † | 47–49 | Kaplet † | 47–49 |
+| 6 | 5% | Onotis † | 47–49 | Chelonet † | 47–49 |
+| 7 | 5% | Kaplet † | 47–49 | Kalyptor † | 47–49 |
+| 8 | 4% | Elapling † | 48–50 | Cairnolith | 48–50 |
+| 9 | 4% | Hoplomex | 49–50 | Karkitox † | 48–50 |
+| 10 | 1% | Nemeleon | 50–50 | Nemeleon | 50–50 |
+| 11 | 1% | Stachypter † | 50–50 | Kalyptor † | 50–50 |
+
+- **Kalyptor** at night is the ghost of the tomb under Amyklai's throne; the dex's Kerameikos is the nearest habitat.
+- **Kaplet** stays a Kaplet (it evolves only by leveling up in Arkadia), so a wild one at 47 is lawful.
+- **Chelonet** evolves by knowing Sing, so it can be wild at any level.
+- **Elapling** at 48 waits on a Leaf Stone, not a level.
+
+Fishing in the river: Old Rod Ketofry 5–10 (70%) and Ketofry 10–14 (30%); Good Rod Ketofry 15–19 (60%), Karkipool 20–27 (40%); Super Rod Karkitox † 45–49 (55%), Kynoketos † 45–49 (45%).
+
+## Lakonia: the training fields
+
+`MAP_LAKONIA`, land `encounter_rate: 15`. The training fields and the Sown Field are the town's only tall grass.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Dorydrake | 47–49 | Gelasable | 47–49 |
+| 1 | 20% | Hoplomex | 47–49 | Dorydrake | 47–49 |
+| 2 | 10% | Gelasable | 47–49 | Hoplomex | 47–49 |
+| 3 | 10% | Kerazap | 47–49 | Cairnolith | 47–49 |
+| 4 | 10% | Hoplomex | 48–50 | Gelasable | 48–50 |
+| 5 | 10% | Dorydrake | 48–50 | Dorydrake | 48–50 |
+| 6 | 5% | Cairnolith | 48–50 | Kerazap | 48–50 |
+| 7 | 5% | Chelonet † | 48–50 | Cairnolith | 48–50 |
+| 8 | 4% | Hoplektor | 49–50 | Hoplomex | 49–50 |
+| 9 | 4% | Gelasable | 49–50 | Gelasable | 49–50 |
+| 10 | 1% | Nemeleon | 50–50 | Nemeleon | 50–50 |
+| 11 | 1% | Hoplektor | 50–50 | Dorydrake | 50–50 |
+
+**The named spots in town.**
+
+| Spot | What | How | Level | When |
+|---|---|---|---|---|
+| **The Sown Field** (the training fields' ploughed strip) | Sporadon swarm | SYSTEMS §6 swarm: half of `MAP_LAKONIA`'s land slots become Sporadon for the day. The augur: "A crop springs up overnight. In the battle school's Sown Field." The Augur's Eye finds them in the furrows. | 38 | the omen's day |
+| **The cadets' yard** (by the ring) | Alekrow | Two Alekrow objects drill in the yard, fighting each other; talk to one for a wild battle. Gone at 10:00 and after a battle, back the next morning. | 34–35 | mornings, 06:00–10:00 |
+| **The wrestling sands** (the palaestra's court) | Geogrip | One Geogrip object half-buried in the sand, by day, on one day in four (a daily roll). One at a time; gone once caught or beaten, until another day. | 48 | by day |
+
+Sporadon and Alekrow are the region's lower-level first and middle stages, in named spots as BALANCE asks. The Sown Field is Kadmos's field in miniature: the Spartoi sprang up fully armed from the dragon's teeth he sowed, and Sporadon is the dex's Spartoi line.
+
+## Lake Stymphalia
+
+`MAP_LAKE_STYMPHALIA`, land `encounter_rate: 20` (the reed grass on the islets, including the forced band on the middle islet).
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Galenyon † | 47–48 | Karkitox | 47–48 |
+| 1 | 20% | Gelasable | 47–48 | Gelasable | 47–48 |
+| 2 | 10% | Belornis | 47–48 | Karkitox | 47–49 |
+| 3 | 10% | Chelonet † | 47–48 | Cairnolith | 47–48 |
+| 4 | 10% | Kerazap | 47–49 | Chelonet † | 47–49 |
+| 5 | 10% | Belornis | 47–49 | Gelasable | 47–49 |
+| 6 | 5% | Karkitox | 47–49 | Karkitox | 48–50 |
+| 7 | 5% | Galenyon † | 48–50 | Kalyptor † | 48–50 |
+| 8 | 4% | Belornis | 49–50 | Cairnolith | 49–50 |
+| 9 | 4% | Gelasable | 49–50 | Gelasable | 49–50 |
+| 10 | 1% | Belornis | 50–50 | Karkitox | 50–50 |
+| 11 | 1% | Galenyon † | 50–50 | Kalyptor † | 50–50 |
+
+Belornis is uncommon here at 46–50, as the dex has it, and is also the post-game Labors' bird (LABORS Labor 6). Water: Surf Karkitox 47–50 (60%), Galenyon † 47–50 (30%), Karkitox 48–50 (5%), Galenyon 48–50 (4%), Karkitox 50 (1%). Fishing: the river's tables.
+
+### The reed-bed nests (`MAP_LAKE_STYMPHALIA_NESTS`)
+
+A small reed-grass pocket in the shallows, through a curtain of reeds off the causeway, in the lake's north-west corner. The nests' grass is drawn as reeds standing in water (tall-grass behavior), so the player wades through it. Land `encounter_rate: 25`. This is the first map to split the day into all four times, so the rare Chalkip live only at morning and evening, as the dex has them.
+
+| Slot | Rate | `_Morning` and `_Evening` | Levels | `_Day` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|---|---|
+| 0 | 20% | Belornis | 47–48 | Belornis | 47–48 | Karkitox | 47–48 |
+| 1 | 20% | Galenyon † | 47–48 | Galenyon † | 47–48 | Karkitox | 47–49 |
+| 2 | 10% | Belornis | 47–49 | Belornis | 47–49 | Gelasable | 47–48 |
+| 3 | 10% | Karkitox | 47–48 | Karkitox | 47–48 | Gelasable | 47–49 |
+| 4 | 10% | Galenyon † | 47–49 | Galenyon † | 47–49 | Karkitox | 48–50 |
+| 5 | 10% | Belornis | 48–50 | Belornis | 48–50 | Cairnolith | 47–49 |
+| 6 | 5% | **Chalkip** | 33–33 | Karkitox | 48–50 | Karkitox | 49–50 |
+| 7 | 5% | Belornis | 49–50 | Belornis | 49–50 | Gelasable | 49–50 |
+| 8 | 4% | **Chalkip** | 33–33 | Galenyon † | 49–50 | Cairnolith | 49–50 |
+| 9 | 4% | Karkitox | 49–50 | Karkitox | 49–50 | Karkitox | 49–50 |
+| 10 | 1% | **Chalkip** | 33–33 | Belornis | 50–50 | Gelasable | 50–50 |
+| 11 | 1% | Belornis | 50–50 | Belornis | 50–50 | Karkitox | 50–50 |
+
+- **Chalkip** is 10% at morning and evening, at level 33, the dex's rare spot. The Augur's Eye shows it as a glint among the reeds, and Melampous, the augur by the curtain, tells you when to come.
+- **If the engine falls back** to two tables only, keep Chalkip in `_Morning` and accept the daytime ones (Open questions, Lakonia 10).
+
+### The deep reeds (`MAP_LAKE_STYMPHALIA_DEEP_REEDS`): the Lernip hunt
+
+The pseudo-legendary's spot, staged like Bagon's ledge in Meteor Falls: a named place, a local's rumor, and a reason to come back.
+
+- **The place.** A dead-end pool of black water at the lake's far east end, down a side boardwalk from the causeway's middle islet, among reeds taller than the player. Its land table is the lake's; Lernip is not in it.
+- **The rumor.** Akanthis the fowler (Part 2): "Only in the rain. Swims up when the water's all rings."
+- **The reason to come back.** A weather omen entry, added to SYSTEMS §6's late-area list: **Weather: Lernip.** "Rain over Lake Stymphalia. Akanthis says the deep reeds are moving." The first time Akanthis tells the rumor, the next day's omen is forced to this entry (SYSTEMS's forced-omen precedent). After that it stays in the weather pool like any other.
+- **The find.** On loading `MAP_LAKE_STYMPHALIA_DEEP_REEDS` while it rains (the omen's weather, set in the lake's `ON_TRANSITION`), a script rolls: until the player has caught a Lernip, it surfaces every rainy visit; after one is caught, one rainy visit in four. When it surfaces, a ripple object appears in the reeds that only the Augur's Eye picks out (a small "!" when the Eye is on). Walk up to it and press A for a wild battle with **Lernip at level 28–30** (random in range), its rain-only spot.
+- **In clear weather** the deep reeds hold a hidden item at the very end, so the trip is never empty.
+
+`FLAG_ICHOR_HEARD_LERNIP_RUMOR`, `FLAG_ICHOR_CAUGHT_LERNIP`, `FLAG_DAILY_ICHOR_LERNIP_ROLLED`.
+
+## Route 26, past the training grounds
+
+`MAP_ROUTE26_SKIRITIS`, land `encounter_rate: 20`. The practice field's long grass and the scrub past Dienekes share it.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Hoplomex | 47–48 | Gelasable | 47–48 |
+| 1 | 20% | Cairnolith | 47–48 | Cairnolith | 47–48 |
+| 2 | 10% | Kerazap | 47–49 | Dorydrake | 47–49 |
+| 3 | 10% | Dorydrake | 47–49 | Kerazap | 47–49 |
+| 4 | 10% | Gelasable | 47–49 | Hoplomex | 47–49 |
+| 5 | 10% | Chelonet † | 47–49 | Gelasable | 48–49 |
+| 6 | 5% | Hoplomex | 48–49 | Chelonet † | 48–49 |
+| 7 | 5% | Cairnolith | 48–49 | Cairnolith | 48–49 |
+| 8 | 4% | Hoplektor | 48–49 | Dorydrake | 48–49 |
+| 9 | 4% | Kerazap | 48–49 | Kalyptor † | 48–49 |
+| 10 | 1% | Nemeleon | 49–49 | Nemeleon | 49–49 |
+| 11 | 1% | Hoplektor | 49–49 | Nemeleon | 49–49 |
+
+The training grounds carry the battle school's species (Hoplomex, Dorydrake, Hoplektor); Nemeleon is the dex's "Lakonia's hills, rare, at dusk". Kalyptor at night haunts the Phoibaion.
+
+## Route 27, over the hills into Arkadia
+
+`MAP_ROUTE27_ARKADIAN_HILLS`, land `encounter_rate: 20`.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Cairnolith | 48–49 | Gelasable | 48–49 |
+| 1 | 20% | Kerazap | 48–49 | Lykanax † | 48–49 |
+| 2 | 10% | Chelonet † | 48–50 | Cairnolith | 48–50 |
+| 3 | 10% | Hyphantis † | 48–50 | Hyphantis † | 48–50 |
+| 4 | 10% | Gelasable | 48–50 | Kerazap | 48–50 |
+| 5 | 10% | Hyphantis † | 49–50 | Kaprodon † | 49–50 |
+| 6 | 5% | Nemeleon | 49–50 | Lykanax † | 49–50 |
+| 7 | 5% | Harpelle † | 49–50 | Gelasable | 49–50 |
+| 8 | 4% | Chelyra † | 49–50 | Chelonet † | 49–50 |
+| 9 | 4% | Enigmaw † | 49–50 | Cairnolith | 49–50 |
+| 10 | 1% | Nemeleon | 50–50 | Nemeleon | 50–50 |
+| 11 | 1% | Enigmaw † | 50–50 | Kaprodon † | 50–50 |
+
+Route 27 runs straight into Arkadia's forest, so it borrows Arkadia's species (Hyphantis in the oaks' webs, Lykanax and Kaprodon after dark); Route 26 keeps Lakonia's.
+
+## After the climax
+
+No Lakonian table changes. The Titan columns on Routes 26 and 27 are gone, and the deep reeds keep their rainy-day Lernip. LABORS's two reed gates open in the post-game.
+
+## Delphoi's tables
+
+In `src/data/wild_encounters.json` terms, as in the slice and Phase 2. Land slots are 20/20/10/10/10/10/5/5/4/4/1/1; `_Morning` covers morning, day and evening and `_Night` covers night. Levels follow BALANCE's **Delphoi** row (wild 48–52) and 00_front's table. Every main table carries evolved forms at the band's levels (BALANCE's rulings); first stages appear only at the named spots and omens below. **Deviations from the dex's habitats are marked †** and listed in Open questions.
+
+| Map | Land band |
+|---|---|
+| The Sacred Olives | 48–51 |
+| The Kastalian Gorge | 48–52 |
+| Delphoi, the laurel terraces | 48–52 |
+| The Korykian path (Route 29's lower half) | 52–54, in the League road part |
+| The Korykian cave | 49–52 |
+| The Omphalos stair, the Loom | none |
+
+## Route 28, the Sacred Olives (`MAP_ROUTE28_SACRED_OLIVES`)
+
+Land `encounter_rate: 20`. The long grass between the god's olive rows.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Melibee | 48–50 | Gelasable | 48–50 |
+| 1 | 20% | Galenyon | 48–50 | Sophowl † | 48–50 |
+| 2 | 10% | Basilops † | 49–51 | Gelasable | 49–51 |
+| 3 | 10% | Melisseer | 49–51 | Cairnolith | 49–51 |
+| 4 | 10% | Elapling † | 48–50 | Elapling † | 48–50 |
+| 5 | 10% | Gelasable | 49–51 | Sophowl † | 49–51 |
+| 6 | 5% | Cairnolith | 49–51 | Lykanax † | 49–51 |
+| 7 | 5% | Galenyon | 50–51 | Gelasable | 50–51 |
+| 8 | 4% | Melibee | 50–51 | Cairnolith | 50–51 |
+| 9 | 4% | Basilops † | 50–51 | Sophowl † | 50–51 |
+| 10 | 1% | Enigmaw | 51 | Elektear | 51 |
+| 11 | 1% | Hierolive † | 51 | Hierolive † | 51 |
+
+## Route 28, the Kastalian Gorge (`MAP_ROUTE28_KASTALIAN_GORGE`)
+
+Land `encounter_rate: 20`. The laurel scrub and grass on the terraces and the pool's rim.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Melibee | 48–50 | Gelasable | 48–50 |
+| 1 | 20% | Cairnolith | 48–50 | Cairnolith | 48–50 |
+| 2 | 10% | Pythoros | 49–51 | Sophowl † | 49–51 |
+| 3 | 10% | Melisseer | 49–51 | Elektear | 49–51 |
+| 4 | 10% | Basilops † | 49–51 | Gelasable | 49–51 |
+| 5 | 10% | Galenyon | 49–51 | Lykanax † | 49–51 |
+| 6 | 5% | Pythoros | 50–52 | Sophowl † | 50–52 |
+| 7 | 5% | Hymnaria | 50–52 | Elektear | 50–52 |
+| 8 | 4% | Melibee | 51–52 | Cairnolith | 51–52 |
+| 9 | 4% | Cairnolith | 51–52 | Gelasable | 51–52 |
+| 10 | 1% | Enigmaw | 52 | Pythoros | 52 |
+| 11 | 1% | Enigmaw | 52 | Lykanax † | 52 |
+
+Surfing the pool between the falls, and the stream's slack water (`encounter_rate: 4`):
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 60% | Hymnaria | 48–51 |
+| 1 | 30% | Galenyon | 48–51 |
+| 2 | 5% | Hymnaria | 50–52 |
+| 3 | 4% | Galenyon | 50–52 |
+| 4 | 1% | Kynoketos † | 52 |
+
+Fishing (`encounter_rate: 20`): Old Rod Ketofry 15–19 (it stays the Magikarp role; it evolves at 20); Good Rod Ketofry 15–19, Karkitox † 48–50; Super Rod Karkitox † 49–52, Kynoketos † 50–52 (5%).
+
+## Delphoi, the laurel terraces and the precinct (`MAP_DELPHOI`)
+
+Land `encounter_rate: 15`, lower than a route's: this is a town, and its grass is the god's grove. The table also covers the weedy ground among the altars in the precinct. The Kastalian pools by the spring are Surfable.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Melibee | 48–50 | Mantipod | 48–50 |
+| 1 | 20% | Melisseer † | 48–50 | Sophowl † | 48–50 |
+| 2 | 10% | Hymnaria | 49–51 | Mantipod | 49–51 |
+| 3 | 10% | Basilops † | 49–51 | Gelasable | 49–51 |
+| 4 | 10% | Cairnolith | 49–51 | Elektear | 49–51 |
+| 5 | 10% | Galenyon | 49–51 | Cairnolith | 49–51 |
+| 6 | 5% | Hymnaria | 50–52 | Mantipod | 50–52 |
+| 7 | 5% | Melisseer † | 51–52 | Sophowl † | 51–52 |
+| 8 | 4% | Melibee | 51–52 | Gelasable | 51–52 |
+| 9 | 4% | Cairnolith | 51–52 | Mantipod | 51–52 |
+| 10 | 1% | Enigmaw | 52 | Elektear | 52 |
+| 11 | 1% | Pythoros | 52 | Mantipod | 52 |
+
+`_Night` carries Mantipod at 48–52, as the dex has it ("the temple precinct of Delphoi, among the altars at night"). Melisseer is raised from the dex's "rare" here because the melissai's hives are on this map.
+
+Surfing the Kastalian pools (`encounter_rate: 4`): Hymnaria 48–52 (90%), Galenyon 48–51 (10%). Fishing: as the gorge.
+
+## The Korykian path (Route 29's lower half)
+
+*Superseded at assembly:* Route 29 has one land table, at 52–54, in the League road part; the Korykian cave keeps its own table below.
+
+Land `encounter_rate: 20`. Pine slopes and the thyme upland.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Kerazap | 49–51 | Lykanax † | 49–51 |
+| 1 | 20% | Cairnolith | 49–51 | Cairnolith | 49–51 |
+| 2 | 10% | Pythoros | 49–51 | Sophowl † | 49–51 |
+| 3 | 10% | Basilops † | 50–52 | Kerazap | 50–52 |
+| 4 | 10% | Chelyra † | 49–51 | Chelyra † | 49–51 |
+| 5 | 10% | Melibee | 49–51 | Gelasable | 49–51 |
+| 6 | 5% | Kerazap | 51–52 | Lykanax † | 51–52 |
+| 7 | 5% | Pythoros | 51–52 | Pythoros | 51–52 |
+| 8 | 4% | Enigmaw | 51–52 | Sophowl † | 51–52 |
+| 9 | 4% | Chelyra † | 51–52 | Kerazap | 51–52 |
+| 10 | 1% | Kerastorm † | 52 | Lykanax † | 52 |
+| 11 | 1% | Enigmaw | 52 | Chelyra † | 52 |
+
+## The Korykian cave (`MAP_KORYKIAN_CAVE`)
+
+Land `encounter_rate: 10`, both halls. The first hall's daylight and the dark hall share one table.
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Cairnolith | 49–51 |
+| 1 | 20% | Kalyptor † | 49–51 |
+| 2 | 10% | Hyphantis † | 49–51 |
+| 3 | 10% | Plouteras † | 49–51 |
+| 4 | 10% | Cairnolith | 50–52 |
+| 5 | 10% | Kalyptor † | 50–52 |
+| 6 | 5% | Pythoros | 50–52 |
+| 7 | 5% | Hyphantis † | 51–52 |
+| 8 | 4% | Plouteras † | 51–52 |
+| 9 | 4% | Pythoros | 51–52 |
+| 10 | 1% | Pythoros | 52 |
+| 11 | 1% | Echolali † | 52 |
+
+Echolali: Echo was a nymph, and Pan wanted her; a stray one has come over the sea to the nymphs' own cave.
+
+## The named spots and omens
+
+Each is a once-at-a-time overworld Pokémon, not a table slot, so the tables above keep their 5-level bands (BALANCE's rulings: first stages only in small named spots at lower levels, swarms, omens or breeding).
+
+| Spot | Map | Species | Level | When | How |
+|---|---|---|---|---|---|
+| **The oldest altar**, at the foot of the Rock of the Sibyl, at the bottom of the temple precinct | `MAP_DELPHOI` | Pyrapod | 32 | Night only; rare | On each map load at night, a daily roll (1 in 4) shows a Pyrapod object sitting in the altar's warm hollow, which glows. Talk to it for a wild battle. Beaten or caught, it's gone until the next night's roll (`FLAG_DAILY_ICHOR_PYRAPOD_ALTAR`). Checking the altar on a night it hasn't come: "The ashes are warm. Nothing's here tonight." |
+| **The lion-head basin**, the lowest step of the Kastalian spring's basin, under the third lion-head spout | `MAP_DELPHOI` | Hymnet | 33 | Dawn (morning) only, on a day the omen sends one | SYSTEMS §6's rare-visitor omen: the omen text is "One cygnet waits at the Kastalian spring at dawn." On that morning a Hymnet object floats in the basin below the third spout. Talk to it for a wild battle; it's gone with the morning, or once met (`FLAG_DAILY_ICHOR_HYMNET_OMEN`). |
+| **The coiled niche**, a coil-shaped hollow in the rock above the knucklebones heap, the back of the Korykian cave | `MAP_KORYKIAN_CAVE` | Pelython | 33 | Any time; rare | A daily roll (1 in 3) on entering the cave: on those days a Pelython object sleeps in the niche, and the cave's entrance text adds "Somewhere at the back, something hisses in its sleep." Talk to it for a wild battle (`FLAG_DAILY_ICHOR_PELYTHON_NICHE`). |
+
+**Why the levels are lower.** These are the dex's own levels (Pyrapod "at level 32", Hymnet "at level 33", Pelython "at level 33"), each below the evolution level (34, 35, 36), so a caught one evolves within a level or three, as BALANCE intends for rare first stages in late areas.
+
+## The climax's maps
+
+`MAP_DELPHOI_OMPHALOS_STAIR` and `MAP_THE_LOOM` have no encounters. From the cut on, the Frozen Hour switches wild encounters off everywhere (engine E1).
+
+## The Frozen Hour: none
+
+Wild encounters are off everywhere while `FLAG_ICHOR_FROZEN_HOUR` is set (E1): grass, caves, surfing, fishing and the Augur's Eye all find nothing (P5 has the messages). The Stair of Hours has no wild table.
+
+## The climax's legendaries, after
+
+### The three Fates, at their sanctuaries
+
+When time restarts, the Fates go home: each waits at the sanctuary where you roused her, to be caught (static, level 60, one only each, as the dex has it). They appear from `VAR_ICHOR_ACT3` 22, when the Ascent's gate opens (STORY L-5: "The Fates wait at their sanctuaries"). STORY §2 said level 50; this file follows the dex's 60, which also sits inside BALANCE's League band.
+
+| Fate | Species | Where | Moves at Lv 60 (the dex's last four) | Shown by |
+|---|---|---|---|---|
+| The Cutter | Thanira (Psychic/Ghost) | Kaldera's forge, on the anvil | Future Sight, Night Slash, X-Scissor, Destiny Bond | `FLAG_ICHOR_HIDE_CUTTER_KALDERA` cleared at 22 |
+| The Measurer | Lotira (Psychic/Normal) | the Pool of Mnemosyne, at the water's edge | Future Sight, Guard Split, Power Split, Psychic | `FLAG_ICHOR_HIDE_MEASURER_ARKADIA` |
+| The Spinner | Nemira (Psychic/Fairy) | Elaia, among the old olive's roots | Future Sight, Sticky Web, Dazzling Gleam, Psychic | `FLAG_ICHOR_HIDE_SPINNER_ELAIA` |
+
+In scenes their name boxes stay SPINNER, MEASURER and CUTTER (decision S10); the battle uses the species names. Each speaks before her battle.
+
+**The Cutter, at the forge.** [Talos works at the anvil beside her. He doesn't seem to mind.]
+```text
+CUTTER: You came. I wasn't sure. Nobody knows anything now.
+
+CUTTER: Isn't it awful?
+
+CUTTER: Talos lets me sit by the fire. I keep wanting to cut something.
+
+CUTTER: Would you take me with you? I'd like to see what happens next.
+
+CUTTER: I've never once wanted to see what happens next.
+```
+?? Battle the Cutter? YES/NO. YES: `setwildbattle SPECIES_THANIRA, 60`. NO: "CUTTER: Take your time. It's all anyone has now."
+
+**The Measurer, at the pool.**
+```text
+MEASURER: We can measure from anywhere. We'd like to see more than one cave.
+
+MEASURER: The pool can keep its memories without me.
+
+MEASURER: Memory doesn't need watching.
+```
+?? Battle the Measurer? YES/NO. YES: `setwildbattle SPECIES_LOTIRA, 60`. NO: "MEASURER: Then I'll wait. I've gotten very good at it."
+
+(Her first box is STORY §2's line for her, given there as "LOTIRA:"; the name box follows decision S10.)
+
+**The Spinner, under the olive.** [Halia sits under her canopy nearby, reading threads she can't see.]
+```text
+SPINNER: Halia keeps telling the children their threads are their own business.
+
+SPINNER: She says it like it's good news. It is.
+
+SPINNER: Spin with me a while? Somewhere that isn't here.
+```
+?? Battle the Spinner? YES/NO. YES: `setwildbattle SPECIES_NEMIRA, 60`. NO: "SPINNER: Then I'll watch the children. I never got to, before."
+
+**Caught or fainted.** Caught: set `FLAG_ICHOR_CAUGHT_THANIRA` (or `_LOTIRA`, `_NEMIRA`) and hide her object. If she faints, she isn't gone: "The Cutter is gone. The anvil is still warm." She is back at her sanctuary the next day (a daily reset of her hide flag while uncaught). If the player runs, she stays.
+
+### The Lord of Time, again
+
+If it fainted on the Stair (`FLAG_ICHOR_LORD_OF_TIME_FAINTED`) and wasn't caught, it sank back into the deep under the Omphalos. **After the credits** (`VAR_ICHOR_ACT3` 25 and on) it can be battled again in the Loom, `MAP_THE_LOOM`, reached by the Omphalos stair. The Delphoi writer owns the map; its post-climax state is below.
+
+- **The Loom, after.** The warp threads sway again. There are no red knots on them, and below the old last row new cloth is being woven, plain and unknotted, down into the dark. The Fates' posts are empty and the chains are gone. At the chasm's edge, when the rematch is due, the Lord of Time's head and the Harpe-less hand rise above the edge (the large object, its lower half behind a foreground metatile row).
+```text
+The threads are moving. Nobody's tying knots in them.
+
+At the edge of the dark, something enormous is breathing.
+```
+- Battle: `setwildbattle SPECIES_KRONOLITH, 60`, `MUS_ICHOR_LORD_OF_TIME`. If it faints again, it returns after the next credits (the Hall of Heroes, as Emerald's legendaries do). Caught: `FLAG_ICHOR_CAUGHT_LORD_OF_TIME`.
+- Caught or not, the Lord of Time is the post-game's key to the colossi (dex D4): brought to the Omphalos, it gives back three bronze lots. That quest belongs to POSTGAME.md.
+
+### The Moment
+
+Not catchable in the story. It flies off toward Olympia at the end of III-11 and waits at the altar of Kairos after the Olympiad (the dex's habitat; POSTGAME.md): "You seized it once. Try twice."
+
+## The League road's tables
+
+In `src/data/wild_encounters.json` terms, as in Phase 2. Land slots are 20/20/10/10/10/10/5/5/4/4/1/1; each map defines `_Morning` (morning, day and evening) and, where it differs, `_Night`. **Levels** follow the director's re-spread inside BALANCE's Ascent row (wild 52–58): Route 29 at 52–54, Route 30 at 53–55, the Ascent at 54–58, rising map by map, no band wider than 5.
+
+**BALANCE's rulings apply** (00_front, "Wild tables"): the main tables carry evolved forms at the band's levels, and no wild Pokémon is evolved earlier than its evolution level allows. First stages appear only in the road's two named spots: **the ice caves' side grotto** (`MAP_ASCENT_ICE_GROTTO`, Pagoshard at 40, the dex's habitat) and **the Low Pasture** (the Ascent's lowest slopes, just above Koronos's gate at Tempe: Kryopuff at 38, only on the snow omen's days, SYSTEMS §6). Aetling is not wild (Open questions 6). Stone, move and trade evolutions (Niflake, Kerazap, Cairnolith, Chelonet) may appear unevolved at band levels.
+
+**Deviations from the dex's habitats** are marked † and listed in Open questions 7.
+
+| Map | Land band | Rate |
+|---|---|---|
+| `MAP_ROUTE29_PARNASSOS` | 52–54 | 20 |
+| `MAP_THERMOPYLAI` | none (fishing only) | — |
+| `MAP_ROUTE30_THESSALY` | 53–55 | 20 |
+| `MAP_VALE_OF_TEMPE` | none (fishing only) | — |
+| `MAP_ASCENT_FOOTHILLS` | 54–56 | 20 |
+| `MAP_ASCENT_WEEPING_CLIFF` | 55–57 | 20 |
+| `MAP_ASCENT_ICE_CAVES_1F`, `_B1F` | 55–58 | 10 |
+| `MAP_ASCENT_ICE_GROTTO` | 40 | 5 |
+| `MAP_ASCENT_SNOWFIELDS` | 56–58 | 20 |
+| `MAP_ASCENT_CRAGS` | 56–58 | 15 |
+| `MAP_OLYMPUS_GATE` | none | — |
+
+## Route 29, Parnassos (`MAP_ROUTE29_PARNASSOS`)
+
+One table for the whole route, so the lower half (the Korykian path, open before the climax) runs 2–3 levels above the Delphoi writer's 49–52 for it (Open questions 13). The Korykian cave keeps the Delphoi writer's own table. The thyme upland, the pine terraces and the saddle's meadow.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Kerazap | 52–53 | Lykanax † | 52–53 |
+| 1 | 20% | Cairnolith | 52–53 | Cairnolith | 52–53 |
+| 2 | 10% | Pythoros | 52–54 | Sophowl † | 52–54 |
+| 3 | 10% | Basilops † | 52–54 | Kerazap | 52–54 |
+| 4 | 10% | Chelyra † | 52–54 | Amnoze † | 52–54 |
+| 5 | 10% | Melisseer | 52–54 | Pythoros | 52–54 |
+| 6 | 5% | Enigmaw | 53–54 | Starkos † | 53–54 |
+| 7 | 5% | Kerastorm † | 53–54 | Kalyptor † | 53–54 |
+| 8 | 4% | Lebetron † | 53–54 | Lykanax † | 53–54 |
+| 9 | 4% | Kerazap | 54–54 | Chelyra † | 54–54 |
+| 10 | 1% | Pythoros | 54–54 | Lykanax † | 54–54 |
+| 11 | 1% | Sophowl † | 54–54 | Kerastorm † | 54–54 |
+
+Pythoros's dex habitat is "the muddy slopes of Parnassus above Delphoi by day… most of all in the morning after rain", which is this route; it also appears at night here. Melisseer is the Delphoi laurels' bee, raised to 10%.
+
+**Water: the saddle's tarn.** Surf: Galenyon † 52–54 (60%), Narkeray † 52–54 (40%). Old Rod: Ketofry 15–20. Good Rod: Ketofry 25–30. Super Rod: Kynoketos 52–54.
+
+## Thermopylai (`MAP_THERMOPYLAI`)
+
+No grass: it is a road on a shelf. **Fishing** off the marsh jetty, the Malian Gulf: Old Rod Ketofry 15–20; Good Rod Ketofry 25–30 (80%), Karkipool † 30–35 (20%); Super Rod Kynoketos 53–55 (50%), Karkitox † 53–55 (30%), Narkeray † 53–55 (20%). **Surf** in the marsh channel: Galenyon † 53–55 (60%), Karkitox † 53–55 (40%).
+
+## Route 30, the Thessalian plain (`MAP_ROUTE30_THESSALY`)
+
+The tall grass of the plain's ditches and field edges, and Pelion's lower slope.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Kerazap | 53–54 | Gelasable † | 53–54 |
+| 1 | 20% | Gelasable † | 53–54 | Lykanax † | 53–54 |
+| 2 | 10% | Stachypter † | 53–55 | Kaprodon † | 53–55 |
+| 3 | 10% | Basilops † | 53–55 | Sophowl † | 53–55 |
+| 4 | 10% | Chelonet † | 53–55 | Kerazap | 53–55 |
+| 5 | 10% | Nemeleon † | 53–55 | Amnoze † | 53–55 |
+| 6 | 5% | Korantha † | 54–55 | Starkos † | 54–55 |
+| 7 | 5% | Kaprodon † | 54–55 | Persenyx † | 54–55 |
+| 8 | 4% | Lebetron † | 54–55 | Nemeleon † | 54–55 |
+| 9 | 4% | Kerazap | 55–55 | Gelasable † | 55–55 |
+| 10 | 1% | Chelyra † | 55–55 | Kaprodon † | 55–55 |
+| 11 | 1% | Stachypter † | 55–55 | Lykanax † | 55–55 |
+
+**Water: Lake Boibeis.** Surf: Galenyon † 53–55 (60%), Karkitox † 53–55 (30%), Narkeray † 53–55 (10%). Fishing as Thermopylai.
+
+## The Vale of Tempe (`MAP_VALE_OF_TEMPE`)
+
+No grass. **The Peneios.** Surf (the river's slow reach above the bridge): Galenyon † 53–55 (50%), Hymnaria † 53–55 (30%, Apollo's swans), Narkeray † 53–55 (20%). Old Rod: Ketofry 15–20. Good Rod: Ketofry 25–30 (80%), Karkipool † 30–35 (20%). Super Rod: Kynoketos 53–55 (50%), Narkeray † 53–55 (30%), Karkitox † 53–55 (20%).
+
+## The Foothills (`MAP_ASCENT_FOOTHILLS`)
+
+The Low Pasture, the beech-wood clearings and the terraces of Olympus's lower slopes.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Kerazap | 54–55 | Gelasable † | 54–55 |
+| 1 | 20% | Cairnolith | 54–55 | Cairnolith | 54–55 |
+| 2 | 10% | Basilops | 55–56 | Lykanax † | 55–56 |
+| 3 | 10% | Lebetron | 55–56 | Sophowl † | 55–56 |
+| 4 | 10% | Chelonet † | 54–55 | Kerazap | 54–55 |
+| 5 | 10% | Gelasable † | 54–55 | Lebetron | 55–56 |
+| 6 | 5% | Nemeleon † | 55–56 | Amnoze † | 55–56 |
+| 7 | 5% | Chelyra † | 55–56 | Nemeleon † | 55–56 |
+| 8 | 4% | Enigmaw † | 55–56 | Chelonet † | 55–56 |
+| 9 | 4% | Kerazap | 56–56 | Gelasable † | 56–56 |
+| 10 | 1% | Sophowl † | 56–56 | Starkos † | 56–56 |
+| 11 | 1% | Basilops | 56–56 | Lykanax † | 56–56 |
+
+**The Low Pasture.** The first grass past Koronos's gate, on the Ascent's lowest slopes. On days when the omen is snow (SYSTEMS §6: "Snow falls on the lowest slopes of the Ascent"), the omen system swaps this patch's table for one slot: Kryopuff at 38, about one encounter in five there, with snow weather over the patch. On other days it shares the Foothills table. The patch is its own encounter zone in the omen system's terms, so it needs either a per-metatile table (the omen system's call) or its own tiny map, `MAP_ASCENT_LOW_PASTURE` (Open questions 5).
+
+**Water: the mountain tarn.** Surf: Galenyon † 54–56 (60%), Narkeray † 54–56 (40%). Super Rod: Kynoketos 54–56.
+
+## The Weeping Cliff (`MAP_ASCENT_WEEPING_CLIFF`)
+
+The cypress grass round the pool and on the ledges.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Cairnolith | 55–56 | Cairnolith | 55–56 |
+| 1 | 20% | Basilops | 55–56 | Sophowl † | 55–56 |
+| 2 | 10% | Lebetron | 55–57 | Kalyptor † | 55–57 |
+| 3 | 10% | Kerazap | 55–56 | Lykanax † | 55–57 |
+| 4 | 10% | Chelyra † | 55–57 | Kerazap | 55–56 |
+| 5 | 10% | Krystolos | 55–57 | Krystolos | 55–57 |
+| 6 | 5% | Borapteryx | 56–57 | Amnoze † | 56–57 |
+| 7 | 5% | Sophowl † | 56–57 | Borapteryx | 56–57 |
+| 8 | 4% | Enigmaw † | 56–57 | Chelyra † | 56–57 |
+| 9 | 4% | Nemeleon † | 56–57 | Lykanax † | 56–57 |
+| 10 | 1% | Aetarch | 57–57 | Starkos † | 57–57 |
+| 11 | 1% | Basilops | 57–57 | Kalyptor † | 57–57 |
+
+**The spring.** Dakrock isn't in the grass. Per the dex ("found by checking the spring at the foot of the cliff"): checking the spring at the cliff's foot once a day (`FLAG_DAILY_ICHOR_DAKROCK_SPRING`) has a one-in-four chance of a wild battle with Dakrock at 57. Otherwise: "The spring is warm. It tastes of salt." With Dakrock: "The spring is warm. Something in it is crying too." It is catchable on any later day it appears.
+
+**Water: the pool.** Surf: Galenyon † 55–57 (60%), Narkeray † 55–57 (35%), Kynoketos 56–57 (5%). Super Rod: Kynoketos 55–57.
+
+## The Ice Caves (`MAP_ASCENT_ICE_CAVES_1F`, `_B1F`)
+
+One table at all hours. Encounter rate 10, and 5 in the slide rooms, so steps on the ice feel like decisions.
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Krystolos | 55–56 |
+| 1 | 20% | Cairnolith | 55–56 |
+| 2 | 10% | Kalyptor † | 55–56 |
+| 3 | 10% | Plouteras † | 56–57 |
+| 4 | 10% | Kourodin † | 56–57 |
+| 5 | 10% | Krystolos | 56–57 |
+| 6 | 5% | Kolossard † | 56–57 |
+| 7 | 5% | Hyphantis † | 56–57 |
+| 8 | 4% | Kalyptor † | 57–58 |
+| 9 | 4% | Krystolos | 57–58 |
+| 10 | 1% | Pythoros † | 58–58 |
+| 11 | 1% | Krystolos | 58–58 |
+
+**Water: B1F's open channel.** Surf: Telkanvil † 55–58 (60%), Narkeray † 55–58 (30%), Kynoketos 56–58 (10%). Super Rod: Kynoketos 55–58.
+
+## The side grotto (`MAP_ASCENT_ICE_GROTTO`)
+
+The Grotto of Icicles, off Ice Caves 1F behind a cracked ice wall the Bronze Hammer breaks. Per the dex: "a side grotto off the ice caves of the Ascent, at any time; rare, at level 40. It hides among real icicles on the grotto walls." Encounter rate 5.
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0–11 | 100% | Pagoshard | 40–40 |
+
+Examining the icicles on the walls, any of them: "Icicles, longer than your arm. One of them blinks."
+
+## The Snowfields (`MAP_ASCENT_SNOWFIELDS`)
+
+The deep-snow patches are its grass. Snow weather all day.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Niflake | 56–57 | Niflake | 56–57 |
+| 1 | 20% | Borapteryx | 56–57 | Borapteryx | 56–57 |
+| 2 | 10% | Krystolos | 56–58 | Kalyptor † | 56–58 |
+| 3 | 10% | Basilops | 56–58 | Krystolos | 56–58 |
+| 4 | 10% | Cairnolith | 56–57 | Lykanax † | 56–58 |
+| 5 | 10% | Kerazap | 56–57 | Sophowl † | 56–58 |
+| 6 | 5% | Lebetron | 57–58 | Amnoze † | 57–58 |
+| 7 | 5% | Niflake | 57–58 | Niflake | 57–58 |
+| 8 | 4% | Aetarch | 57–58 | Borapteryx | 57–58 |
+| 9 | 4% | Borapteryx | 57–58 | Starkos † | 57–58 |
+| 10 | 1% | Chionyad † | 58–58 | Chionyad † | 58–58 |
+| 11 | 1% | Borapteryx | 58–58 | Lykanax † | 58–58 |
+
+## The Crags (`MAP_ASCENT_CRAGS`)
+
+The scrub on the ledges and the grass round the nests. Fog weather above the cloud line.
+
+| Slot | Rate | `_Morning` | Levels | `_Night` | Levels |
+|---|---|---|---|---|---|
+| 0 | 20% | Basilops | 56–57 | Borapteryx | 56–57 |
+| 1 | 20% | Borapteryx | 56–57 | Sophowl † | 56–57 |
+| 2 | 10% | Krystolos | 56–58 | Krystolos | 56–58 |
+| 3 | 10% | Cairnolith | 56–58 | Cairnolith | 56–58 |
+| 4 | 10% | Lebetron | 56–58 | Kalyptor † | 56–58 |
+| 5 | 10% | Aetarch | 56–58 | Lykanax † | 56–58 |
+| 6 | 5% | Harpelle † | 57–58 | Harpelle † | 57–58 |
+| 7 | 5% | Kerastorm † | 57–58 | Starkos † | 57–58 |
+| 8 | 4% | Sophowl † | 57–58 | Borapteryx | 57–58 |
+| 9 | 4% | Enigmaw † | 57–58 | Amnoze † | 57–58 |
+| 10 | 1% | Aetarch | 58–58 | Sophowl † | 58–58 |
+| 11 | 1% | Basilops | 58–58 | Borapteryx | 58–58 |
+
+Aetarch is in 11% of daytime encounters on the Crags and rarer below: uncommon, as the dex has it, and never in the night table, because it hunts by day.
+
+## The Gate of the Horai
+
+No encounters. It is above the weather.
+
+## The Pantheon, the Summit and the Hall
+
+No wild encounters. The halls are floored stone and sand; the Summit's cloud layer is weather, not grass or water.
+
+## Elaia on the epilogue day
+
+Elaia's and Route 1's tables are the slice's and don't change for the epilogue. The post-game's additions (shades at night, Time Fractures, the National Dex species arriving) are `POSTGAME.md`'s and `OIKOUMENE.md`'s.
+
+---
+
+# Part 5. The rites, the dungeons and the climax's mechanics
+
+## The statue in the field (Melos)
+
+A first, gentle taste of Aphrodite's verb, **marble and mirrors** (SYSTEMS §12 #7), on the stop before Kythera, and an offering rite (SYSTEMS §3). Nothing can go wrong here.
+
+- **The statue** is one object in a niche on the middle terrace, facing the sea at the start. It never moves from its tile: it only turns. It uses 98_engine's E8 rule with a rooted flag (`MOVEMENT_TYPE_ICHOR_STATUE_ROOTED`, Open questions 17): on each player step, if the player isn't facing it and isn't facing the bronze mirror propped opposite it, it turns to face the player.
+- **The mirror** is a wall mirror on the far side of the terrace path, facing the niche. Walking along the terrace toward the mirror, the player sees the statue behind them in it, so she stays facing the sea.
+- **What the player learns:** look at her and she's still; look away and she has turned; the mirror counts as looking. On Kythera the same statues walk.
+- **No penalty.** She can't reach anyone. Kentrios's lines (beat III-1B2) say the rule aloud once, in a farmer's words.
+- **The offering:** at the niche, any offering (SYSTEMS §3's Aphrodite row: Frankincense loved; Pretty Feathers and sea gifts liked) gives Favor at the usual rates, +5 the first time, and turns her back to the sea. `FLAG_ICHOR_MELOS_RITE`. Melos has no altar prayer of its own; the niche counts as Aphrodite's shrine for `FLAG_DAILY_ICHOR_PRAYED_APHRODITE`.
+- **After the Laurel** she stays facing the sea, whatever the player does: "She's looking out at Kythera. She doesn't turn any more."
+
+## Galatea's Gallery (the Temple of Aphrodite)
+
+Per SYSTEMS §12, Aphrodite's verb: **marble and mirrors**. The rules (statues move only while unwatched, a statue seen in a mirror can't move, a touch sends you back to the stage's start, the turnable mirrors as the first rotating mirror in the game) are SYSTEMS's; the engine is 98_engine's E8, `MOVEMENT_TYPE_ICHOR_STATUE`. This section lays them out.
+
+### What the player sees
+
+A temple of white marble veined with pink, entered from the south, in three rooms one behind the other, each larger than the last.
+- **The pronaos,** a short marble corridor three tiles wide, with one statue in a niche and one tall bronze mirror at the far end.
+- **The gallery,** a long colonnaded hall with statues on low plinths between the columns: youths, nymphs, a woman wringing out her hair. Two flat bronze mirrors hang on its walls. Rose petals on the floor.
+- **The rose court,** an open courtyard planted with roses, three statues among the beds, three bronze mirrors on stone stands (one fixed, two turnable), and Galatea's dais at the north end under an awning, with a single statue on it that is Galatea.
+
+The statues are 16×32 objects in four poses, white with faint pink veins. When a statue moves, its sprite doesn't animate: it is simply one tile nearer, with a stone-grinding SE. The temple's music, `MUS_ICHOR_TEMPLE_APHRODITE`, is a plucked kithara that **stops for one beat each time a statue moves**, so silence means one is coming.
+
+```text
+  +--------------------[ DAIS: GALATEA ]--------------------+
+  |   (S7)         rose bed        [P2 turnable]      (S8)   |
+  |        [P1 fixed, faces S]                               |   ROSE COURT
+  |   rose bed     (S9)        [P3 turnable]   [Anthousa]   |   (master)
+  |                                              alcove, jar |
+  +------------------------- door --------------------------+
+  |  [mirror W1 on north wall, faces S]   [Rhodanthe] door   |
+  |   (S2)  .  col  .  (S3)  .  col  .  (S4)  .  col  .      |   GALLERY
+  |   .  col  .  .  .  col  .  .  .  col  .  .  [mirror W2]  |   (test)
+  |   (S5)                                       faces W     |
+  +- door ---------------------------------------------------+
+  |  [mirror M0 on north wall]                               |
+  |   (S1) niche     corridor 3 wide, 10 long                |   PRONAOS
+  |                  [Charis] [dove altar]                   |   (teach)
+  +----------------------[ entrance ]------------------------+
+     (S) statue   [W] wall mirror   [P] mirror on a stand
+```
+
+### What the player does
+
+1. **The rule, as the player meets it.** A statue checks on each step the player takes. If the player is **facing it** (it is in the line of tiles straight ahead, with nothing solid between), or is **facing a mirror that shows it**, it stays. Otherwise it steps one tile toward the player. Turning on the spot isn't a step, so the player can always stop and turn to look.
+2. **What a mirror shows.**
+   - A **wall mirror** shows what is behind you when you face it: every statue in the line of tiles straight behind the player, back from the mirror.
+   - A **mirror on a stand** points one of four ways. Facing it, you see along the line it points. Pressing A on a turnable stand turns it 90° clockwise:
+     ```text
+     A bronze mirror on a stand. It's pointing west.
+
+     Turn it?
+     ```
+     YES: "The mirror swings round on its stand. It's pointing north now." The fixed stand says: "This one's set into the stone. It won't turn."
+3. **A touch.** A statue that steps onto the tile next to the player and is facing them touches them:
+   ```text
+   A cold marble hand rests on your shoulder.
+
+   …You're back at the door.
+   ```
+   The player is warped to the current room's door, and that room's statues return to their plinths. Nothing else is lost: turned mirrors **stay turned**, so a second try is easier.
+4. **Battles don't count.** The step hook ignores steps taken while a trainer walks up to the player, and no steps pass in battle, as in Phase 2's Herald's Run.
+
+### The three rooms: teach, test, master
+
+| Room | Teaches | What's in it |
+|---|---|---|
+| **The pronaos** (teach) | A statue moves only while unwatched; a wall mirror shows what's behind you | S1 stands in a niche on the corridor's west side, halfway along. The player walks north past it. Facing north, the player faces M0, the tall mirror on the end wall, which shows S1 behind them: it can't move. A fresco on the east wall halfway invites a look ("A painted dove. Its eye seems to follow you."); turning to read it lets S1 step. Charis's walk-through is the safety valve (Part 1). |
+| **The gallery** (test) | Choosing a path that keeps every statue watched | Four statues (S2–S5) between the columns, two wall mirrors (W1 on the north wall facing south, W2 on the east wall facing west). The door in is in the south-west corner; the door out is in the north-east, where Rhodanthe stands. The safe route: walk north up the west aisle facing W1, which shows S5 and S2 behind and ahead; then east along the north aisle facing S3 and S4 straight ahead; then a short dog-leg south to the door, facing W2, which shows the north aisle behind you. The west-to-east dash along the south aisle is the tempting shortcut, and it leaves S2–S4 unwatched. SYSTEMS asks for three statues; a fourth makes the shortcut fail every time (Open questions 6). |
+| **The rose court** (master) | Pointing a mirror down your own path | Three statues (S7–S9) among the rose beds, the fixed mirror P1 facing south, and two turnable mirrors, P2 and P3. The dais is reachable only by a path that turns three times between rose beds. Turned right, P2 covers the court's east lane and P3 its middle: the player turns each from the side they approach it, then walks the lane facing it. Anthousa's alcove is off the middle lane, optional, with a sealed jar (Max Revive) beside her. |
+| **The dais** | — | Galatea stands on it like a fourth statue. She moves only when the player looks away (beat III-1G). |
+
+The intended route through the court is about 46 steps with both mirrors turned right first. A player who walks the rose beds' edges facing a statue at all times can do it without the mirrors, more slowly; nothing forces the "right" answer.
+
+### Placement and gates
+
+- **Charis:** the pronaos, by the door, beside the dove altar (Aphrodite's rites, SYSTEMS §3). Not a trainer.
+- **Rhodanthe:** the gallery's north-east door, facing south, sight 4 across the doorway. Mandatory. Her sight line is a trainer sight line; while she walks up to the player, statues don't move.
+- **Anthousa:** the rose court's alcove, facing the wall. Optional.
+- **Galatea:** the dais. The court's north end has no gate: the dais is open once the court is crossed.
+- **The doors** between rooms are plain doorways (no locks). A touch only resets the room the player is in, so solving the pronaos once means it stays solved for the visit.
+
+### State
+
+| Name | Values |
+|---|---|
+| `VAR_TEMP_1` | the room the player is in, 0–2 (for the touch's return point) |
+| Statue coordinates | the objects' own positions; reset to their template coordinates on a touch or on leaving the map |
+| `FLAG_ICHOR_GALLERY_MIRROR_P2`, `_P3` (2 bits each, as a bank var's bits or two flags each) | the turnable mirrors' facings, permanent |
+| `FLAG_ICHOR_GALLERY_DONE` | set when the player first reaches the dais, permanent |
+
+After `FLAG_BADGE07_GET`, every statue stands on its plinth facing the dais and uses a still movement type; the mirrors stay as they were left; Rhodanthe and Anthousa are marked beaten (MAP_DESIGN §4).
+
+## The Silent Falls (the Neraida falls)
+
+Per SYSTEMS §1, myth-quest 8. One short quest of about 10 minutes, with no time of day.
+
+| Step | What happens | State |
+|---|---|---|
+| 1 | The falls are silent. The ravine's mills have stopped. | the map's water SE and BGM are muted while `FLAG_ICHOR_GOT_HORN_OF_ACHELOUS` is unset |
+| 2 | Krenaia won't ask a stranger until the player holds the Foam Laurel. | `FLAG_BADGE07_GET` |
+| 3 | The horn on the altar, wreathed in dead flowers. | an object |
+| 4 | Offer three berries (any kind) as First Fruits (SYSTEMS §3). Two berry trees on the terraces make sure nobody is stuck. | `checkitem` for any 3 berries, removing them in bag order |
+| 5 | The horn fills; the falls roar; the mills turn. | sound restored; the mill objects animate |
+| 6 | The Horn of Achelous, relic 8, Waterfall. Aphrodite Favor +5. | `FLAG_ICHOR_GOT_HORN_OF_ACHELOUS`, `VAR_ICHOR_ACT3` = 4 |
+
+**The map** follows MAP_DESIGN §1 (SYSTEMS §1's note for this map): forced grass below the falls, the trainers, the set piece, the reward above (page VII), and a way back down.
+
+## Echo's caves
+
+A small optional cave (MAP_DESIGN §3).
+- **Teach:** the Speaking Hall echoes every box, safely, in a lit room.
+- **Test:** the dark gallery (Hecate's Torch): one brazier at its mouth, lit by the player, shows the first stretch; the rest is read by the echo of the player's footsteps. Each wrong turn's dead end has an item (a hidden Heart Scale; a Zinc).
+- **Payoff:** the sea mouth, a TM on a rock, and the way out by Surf to Route 23.
+- **The midpoint rest** is the spring above; the cave is small enough not to need one inside.
+
+## Kythera's Minoan vault (after the story's Labrys)
+
+LABYRINTH §9 lists Kythera's among the five optional vaults the Labrys opens. The door is at the Neraida falls' upper pool (beat III-1H). Inside: a single painted room, its plaster cracked, a fresco of a bull-leaper in blue and red, and three stone chests.
+```text
+Painted plaster, half fallen. A girl in mid-air over a bull's back.
+
+The paint is older than anything on Kythera. Someone sailed it here.
+```
+**Contents** (Part 6): Gold Stater ×2, a Comet Shard, an Ichor Stone (Balance picks which), and a Rare Bone. LABYRINTH also promises "a Minoan-era rare" in each vault; this file leaves which to the Knossa writer and the dex team (Open questions 8).
+
+## The Labyrinth's mechanics: where each is specified
+
+Knossa has no temple and no rite. Its dungeon is LABYRINTH's, and every mechanic is specified there; this table only says where, and which engine need in `98_engine.md` builds it.
+
+| Mechanic | LABYRINTH | Engine need |
+|---|---|---|
+| Ariadne's Thread: laying, winding, tying off, RETURN, knockdowns | §5.1 | E16 (§12, row 1) |
+| Darkness, the torch, braziers, lit zones; Ring I's flame relay | §5.2; §6 Ring I | E16 (§12, rows 3–4) |
+| Glow-paint (Ring III's back way) | §6 Ring III | E16 (§12, row 4) |
+| Asterion's AI, patrol, charge, stun and breakthroughs | §5.3; §6 Rings II and V | E16 (§12, rows 5–6) |
+| The Helm of Darkness | §5.4 | E16 (§12, row 7) |
+| Dials, and the sun and moon gates | §5.5; §6 Rings II and VI | E16 (§12, rows 10–11) |
+| Sentries, alarms and the disguise | §5.6; §6 Rings IV and VI | E16 (§12, rows 8–9, 17) |
+| The mirrors and the beam (Ring VII) | §6 Ring VII | **E9**, shared with Apollo's Pythian Light at Delphoi |
+| The crane dance (the Choros) | §5.7 | E16 (§12, row 13) |
+| Bull-leaping (the court; the heart's three leaps) | §3 | **E7**, built generic so the Stair of Hours reuses it for the Moment |
+| The Turning | §7 | E16 (§12, row 2) |
+| Daedalus's lift; the sunken floor | §4 | E16 (§12, rows 15–16) |
+| The Icarus Shaft (scene L) | §7, Scene L | script: a camera rise on a scripted map |
+| The Endless Labyrinth | §10 | post-game (Phase 5) |
+
+## Bull-leaping prizes
+
+LABYRINTH §3's prizes, for consecutive clean leaps in one session with Sarpedon. The 20-leap Tauros becomes a Taurivet of the palace herd (Part 4).
+
+| Leaps | Prize | Flag |
+|---|---|---|
+| 3 | Olive Oil ×5 | `FLAG_ICHOR_LEAP_PRIZE_3` |
+| 5 | TM Body Slam | `FLAG_ICHOR_LEAP_PRIZE_5` |
+| 10 | the **Leaper's Sash** (a held item: the holder can't be made to flinch) | `FLAG_ICHOR_LEAP_PRIZE_10` |
+| 20 | a Taurivet of the palace herd, Lv 50, Anger Point, with Raging Fury | `FLAG_ICHOR_LEAP_PRIZE_20` |
+
+```text
+SARPEDON: Three! Oil for your trouble. The court's floor drinks it.
+
+SARPEDON: Five! I've seen worse. I've been worse.
+
+SARPEDON: Ten. Ten clean. Here. My sash. I only fell in it twice.
+
+SARPEDON: Twenty. …Take him. He's chosen you. They do, sometimes.
+```
+With Asterion uncaught and in the court after the raid, the window widens by 2 frames ("he's helping") and the prizes double (LABYRINTH §10).
+
+## Lakonia has no temple
+
+Lakonia's Olympian is Ares, and his seat is in the Pantheon (PITCH §3), so the region has no rite-puzzle. Its puzzles are small and spread across the town, each reusing a verb the player already knows.
+
+## The fire-carry (Hestia's theoxenia, E2)
+
+The Hearth Trial's relay verb, out on a road in the rain (SYSTEMS §2).
+- **Source:** Apollo's altar at Amyklai. Hecate's Torch takes a flame there.
+- **Target:** the roofless farmhouse's hearth, about 40 tiles south-west.
+- **Rain:** while the visit is live, the road rains, and a carried flame lasts 20 steps (SYSTEMS §2, water).
+- **Relays:** two roadside herm-shrines at 18 and 36 tiles from the altar along the farm track, each a small lit niche that relights the carried flame. The track from the second shrine to the hearth is 14 steps, so a careful walker never runs dry; a wanderer does, and walks back.
+- **Safety valve:** a dead flame just goes out ("Your torch hisses out in the rain."). The shrines never go out. Nothing else is lost.
+- **State:** `VAR_TEMP_2` and `VAR_TEMP_3`, the carried flame (as LABYRINTH §13's Ring I uses them); `FLAG_ICHOR_THEOXENIA_HESTIA` at the end.
+
+## Orthia's cheeses
+
+The Artemis trial's stealth verb, in one small court (SYSTEMS §12, non-battle sight objects).
+- **The court** is 12×9: the altar along the north wall with three cheeses, willow trees as cover, two benches.
+- **Two acolyte cadets** walk fixed loops, each with a sight band of 3 tiles in their facing. Willow trunks block sight. One cadet stops and turns every fourth step.
+- **Teach:** the first cheese sits at the altar's west end, reachable along the willows without crossing either loop.
+- **Test:** the second is in the middle, where the loops cross; wait behind the central willow for a gap.
+- **Master:** the third is at the east end, behind the turning cadet; time it to his turn.
+- **Seen:** "CADET: Cheese thief!" and the player is walked back to the steps. Cheeses already taken stay taken.
+- **State:** `VAR_TEMP_1` (cheeses taken), `FLAG_ICHOR_ORTHIA_CHEESES`.
+
+## The agoge's gauntlet
+
+Four battles in a row in one long room, with no healing between (MAP_DESIGN §4's acolyte rhythm, indoors). Walking out of the door resets it. Archidamos's rematch weekly after the credits. State: `VAR_TEMP_1` (beaten in a row), `FLAG_ICHOR_AGOGE_GAUNTLET`.
+
+## The scytale
+
+A message on a leather strap that only its twin staff can read: Gylippos's strap, Othryades's staff on Route 27. Pure script and an item close-up (the strap wound on the staff). State: `FLAG_ICHOR_GOT_SCYTALE_STRAP`, `FLAG_ICHOR_READ_SCYTALE`; the Life Orb's fixed dig under Lakonia's third plane tree is hidden from the Augur's Eye until the message is read.
+
+## Chilon's quiz
+
+Three multichoice questions; the shortest answer is always right; any wrong answer starts the three again. State: `VAR_TEMP_1`, `FLAG_ICHOR_CHILON_QUIZ`.
+
+## The Pythian Light (Temple of Apollo)
+
+Per SYSTEMS §12 #8, Apollo's verb: **beams**. The beam-trace special is engine E9 (`special Ichor_TraceBeam`), shared with Labyrinth Ring VII's mirrors. The rules here (mirrors turned by A, beams turning at mirrors, discs that open doors, a moonbeam by night on the same path, the master stage's fire carried to the tripod) are SYSTEMS's; this section lays them out.
+
+### What the player sees
+
+`MAP_DELPHOI_TEMPLE_OF_APOLLO`, about 36×30, the temple's inside, entered from the south door under KNOW THYSELF. Three parts, one behind the other:
+
+- **The pronaos:** the porch. A shaft of sun comes down through a high window onto a bronze mirror on a stand. A gold sun-disc is set in the wall across the porch. The inner door is shut.
+- **The cella, in four chambers,** divided by bronze-grilled screens, each with a doorway that is shut until that chamber's disc is lit:
+  1. **The Hall of Tripods:** gilded tripods of old victories down both sides. The **smoke-hole** in the roof above its middle lets the god's light in.
+  2. **The Hall of Lyres:** lyres and kitharas hung on the walls; Pherenike's side aisle on its west, behind a screen.
+  3. **The Hall of the Serpent:** a great bronze serpent coiled round a pillar in the middle, which blocks the straight line.
+  4. **The Hall of Laurels:** potted laurels in rows, and the stair down to the adyton at its north end, where Bremousa stands.
+- **The adyton:** sunk below the cella floor, the oldest room in the temple. Bare rock floor with **vents** that breathe up vapour from the chasm below. A **bronze brazier** at the foot of the steps. At the far end, **the tripod** over the crack in the rock, and Phemonoe's seat on it, in shadow.
+
+```text
+  +--------------------------------------------------------+
+  |                    ADYTON (sunk)                        |
+  |   [tripod over the crack]        vents: v v   v  v      |
+  |        ^ carry the flame          v    v   v            |
+  |   (M7)                   (M8)            [brazier]      |
+  +---------------------------------stair-------------------+
+  | 4 HALL OF LAURELS   (M6) . . . . . [disc 4] [Bremousa]  |
+  +----- door 3 ---------------------------------------------+
+  | 3 HALL OF THE SERPENT  (M4)  [serpent pillar]  (M5)    |
+  |                                     [disc 3]           |
+  +----------------------------------------- door 2 -------+
+  | 2 HALL OF LYRES (M3)          [disc 2]   |[Pherenike]  |
+  +----- door 1 -------------------------------------------+
+  | 1 HALL OF TRIPODS   (M2)   * smoke-hole *   [disc 1]   |
+  +---------------------------------- inner door ----------+
+  | PRONAOS  [high window] -> (M1)        [disc 0]          |
+  |          [Eudoros]          [Onomakritos]               |
+  +--------------------[ south door: KNOW THYSELF ]---------+
+   (M) bronze mirror on a stand, four facings   * light source
+```
+
+### What the player does
+
+1. **Turn a mirror.** A mirror is an object with four facings. Interacting:
+   ```text
+   A bronze mirror on a stand, polished bright.
+
+   Turn it?
+   ```
+   YES turns it 90° clockwise (`turnobject`) and runs `special Ichor_TraceBeam` for the room's beam. The beam is drawn as metatiles along its path, a bright stripe on the floor, straight until it meets a mirror, where it turns by the mirror's facing, or a wall or screen, where it stops.
+   ```text
+   You turn the mirror. The light swings across the floor.
+   ```
+2. **Light a disc.** When the beam ends on a gold disc, the disc's metatile swaps to its blazing frame and that chamber's doorway opens (a `setmetatile` and `DrawWholeMapView`):
+   ```text
+   The beam strikes the gold disc. It blazes.
+
+   Somewhere inside the wall, a bronze bolt slides back.
+   ```
+   A disc stays lit for good once lit (`FLAG_ICHOR_APOLLO_DISC_0` … `_4`).
+3. **Carry the light on.** Each chamber's doorway, once open, lets the beam through into the next chamber. In the four chambers there is **one beam**, from the smoke-hole, and it has to be passed on: the mirrors of each chamber send it to the next doorway and, through it, to the next chamber's mirrors. A doorway that's shut stops the beam.
+4. **By night,** the same light falls as a moonbeam (`gettimeofday` in `ON_LOAD` swaps the beam metatiles' palette to pale silver). Everything works the same. The text is in Part 1.
+5. **The adyton** is the master stage (below).
+6. **The safety valve.** Pherenike, in the Hall of Lyres' side aisle, resets every mirror in the cella to its start facing, at any time, battled or not:
+   ```text
+   PHERENIKE: All of them back how they were? Fine. Turn, turn, turn. There.
+   ```
+   Eudoros at the door also explains the rule again if asked (Part 1). Nothing in the rite can be lost, and no step can strand you.
+
+### The three stages: teach, test, master
+
+| Stage | Teaches | What's in it |
+|---|---|---|
+| **Teach** (the pronaos) | A mirror turns light; a lit disc opens a door | One shaft of sun from the high window onto **M1**. One gold disc, **disc 0**, across the porch. Turned once, M1 sends the beam onto the disc, and the inner door opens. Onomakritos stands at the inner door: mandatory, easy to read. |
+| **Test** (the four chambers) | Passing one beam through a chain of mirrors and doorways | **Chamber 1:** the smoke-hole's light falls on **M2**; one turn sends it to **disc 1** (door 1 opens), and a second turn sends it through door 1. **Chamber 2:** the beam arrives on **M3**; disc 2 is in plain sight, then the beam must go on through door 2, so M3 is turned twice, as in chamber 1. Pherenike's aisle is here. **Chamber 3:** the serpent pillar blocks the straight line, so two mirrors, **M4** and **M5**, carry the beam round it to **disc 3**, and then on through door 3. **Chamber 4:** **M6** takes the beam to **disc 4** at the stair head; then Bremousa, mandatory. |
+| **Master** (the adyton) | Beams combined with Hestia's flame (carry the fire) | Two mirrors, **M7** and **M8**, take the beam down the stair and focus it on the **bronze brazier**: it lights (Part 1's text). Fire, made from light. Then the player lights Hecate's Torch from the brazier (SYSTEMS §2) and **carries the flame** across the adyton to the tripod, through the **vents**: a vent tile blows out a carried flame, as the draughts in Demeter's master stage do. A carried flame here lasts **24 steps** on Hero (30 Mortal, 20 Spartan); the clean route round the vents is 18. A blown-out flame is relit at the brazier, which stays lit for good (`FLAG_ICHOR_APOLLO_BRAZIER`). The tripod lit, Phemonoe appears (Part 1). |
+
+**Bremousa's tip** ("Go left of the third vent. Everyone goes right.") is the master stage's safety valve: it tells you the one trick in the route.
+
+### Placement and gates
+
+- **Onomakritos:** the pronaos, at the inner door, facing it, sight 3. Mandatory.
+- **Pherenike:** the Hall of Lyres' side aisle behind a screen, facing the wall. Optional. Talk to her to reset mirrors.
+- **Bremousa:** the Hall of Laurels, at the stair head, facing north, sight 3. Mandatory.
+- **Phemonoe:** on the tripod in the adyton, hidden (an object with `FLAG_ICHOR_HIDE_PHEMONOE_TRIPOD` set) until the tripod is lit.
+- **Doors:** metatile doors, each opened by its disc's flag in `ON_LOAD` and at the moment the disc lights.
+- **Battles don't touch the beams:** the mirrors and discs keep their state through any battle.
+
+### State
+
+| Name | Values |
+|---|---|
+| `VAR_TEMP_1` … `VAR_TEMP_8` | mirrors M1–M8's facings, 0–3; reset on leaving the map (the lit discs keep the doors open, so nothing is lost) |
+| `VAR_TEMP_9` | the carried flame's steps left |
+| `FLAG_ICHOR_APOLLO_DISC_0` … `_4` | discs lit, permanent |
+| `FLAG_ICHOR_APOLLO_BRAZIER` | the adyton's brazier lit, permanent |
+| `FLAG_ICHOR_PYTHIAN_LIGHT_DONE` | the tripod lit, permanent |
+
+After `FLAG_BADGE08_GET`, every disc stays blazing, every door stands open, the brazier and tripod burn, and the mirrors are fixed in their solved facings: "The mirrors are bolted where you left them. Eudoros polishes them every morning."
+
+**Engine.** `special Ichor_TraceBeam` (E9), `turnobject`, `setmetatile`, `DrawWholeMapView`, the carried-flame step count from the fire system (SYSTEMS §2), vent tiles as coord events that douse. **Medium,** shared with Ring VII.
+
+## The Kastalian falls
+
+Two waterfalls, climbed with the Horn of Achelous (SYSTEMS §1, relic 8), on the main path. The pool between them is Surfable, and the niche behind the lower fall holds the hidden Mystic Water. The Bronze Hammer's boulder makes the shortcut loop down to the camp (Part 2).
+
+## The Omphalos and the Loom
+
+The Omphalos's states, as metatiles and an object: **whole**, in its net of wool; **burning**, fire running along the knots (a 4-frame animated metatile swap); **open**, two halves and the stair between. `FLAG_ICHOR_OMPHALOS_OPEN` holds it open from III-8 on; what it becomes after the climax is the League and post-game writers' (00_front: the Lord of Time returns the three bronze lots "at the Omphalos").
+
+The Loom map's construction is Part 1's III-9 staging and Part 10's tileset list.
+
+## How the Frozen Hour runs
+
+### State and engine
+
+| What | How |
+|---|---|
+| The mode | `FLAG_ICHOR_FROZEN_HOUR` (E1), set by `special Ichor_FrozenHourBegin` at the Loom (E2) and cleared by `special Ichor_ColorReturnStep` 12 on the Stair (E6) |
+| Frozen-only objects | Every map's Frozen Hour objects (the Fates, Phaedon in Elpis's room, the posed people at Delphoi, the cloak) use the hide flag `FLAG_ICHOR_HIDE_FROZEN_ONLY`. It is set on a new game, cleared at the Loom, and set again on the twelfth chime. |
+| Objects hidden during the hour | Ordinary objects that must not be in a frozen scene (for example Delphoi's daytime Titan muster, which the court's posed objects replace) use their map's own hide flags, set at the Loom and cleared at dawn. |
+| Unfrozen objects | E3, by the `ichor_unfrozen` field on the object or by `special Ichor_UnfreezeObject`: the Fates, Phaedon, Hyperion, Kleon after he wakes, the music box, the shadowless figure, the Lord of Time, the Moment, the falling Harpe |
+| Talking to frozen people | E1 routes any frozen object's talk to its map's frozen script if it has one (P1 and P2's tables), else to `Ichor_EventScript_FrozenGeneric` (P2's three lines). |
+| Herms | E12: `Ichor_EventScript_FrozenHerm` swaps every anointed great herm's head on map load and answers its talk |
+| The heal and whiteout point | The Omphalos court in Delphoi, from the Loom until dawn. There are no fights before the Stair, so it matters only there, where the Fates' sparks heal instead (below). |
+| The Pithos | Works. "The Pithos still opens. Jars don't need time." (on the first use in the hour) |
+| Asclepeions and Agoras | Their keepers are frozen. The counter says: "The healer is frozen mid-smile. There's no one to help." / "The stallkeeper is frozen with a coin halfway to the box." |
+
+### Travel
+
+- **Order is free, but Astyra is required,** and the Measurer points to it. The recommended order, which the herms nudge the player toward, is Kaldera, Arkadia, Astyra, Elaia: home last.
+- **Daedalus's Wings** fly to every town and every anointed herm, as always. Flying lands on a gray map, and the music box never stops between maps.
+- **What still works:** walking and running (the Talaria), the Wings, Hecate's Torch (its light is gray but it shows the way), Ariadne's Thread, the Labrys, the Helm, the Bronze Hammer and the Girdle on things already in the world.
+- **What doesn't** (each with a box on use):
+  | Relic or action | Text |
+  |---|---|
+  | Poseidon's Conch | "You blow the Conch. The sea is glass. Nothing comes." |
+  | The Horn of Achelous | "The falls have stopped. There's no river to climb." |
+  | Fishing | "The water's as still as stone. Nothing will bite." |
+  | The Trowel | "The earth won't give. It's waiting too." |
+  | The Augur's Eye | "Nothing is moving. There's nothing to see." |
+  | Praying at an altar | "The smoke doesn't rise. The gods have nothing to say. Or they're watching." |
+- **Wild encounters** are off (E1), so the walk is quiet on purpose: STORY's "no wild encounters, no music but the music box".
+
+### The herms
+
+Each anointed great herm (SYSTEMS §4; `FLAG_ICHOR_HERMS_START` range) points to the first place in this list that isn't done yet. Un-anointed herms stay as they are: your faith in Act I pays off a second time.
+
+| Not done yet | The herm's head faces | Talk text |
+|---|---|---|
+| The Cutter (`FLAG_ICHOR_ROUSED_CUTTER` unset) | Kaldera | "The herm's stone face has turned. It's looking toward Kaldera." |
+| The Measurer | Arkadia | "The herm's stone face has turned. It's looking toward Arkadia." |
+| Elpis's room (`FLAG_ICHOR_PHAEDON_READ_TABLET` unset) | Astyra | "The herm's stone face has turned. It's looking toward Astyra." |
+| The Spinner | Kalliste | "The herm's stone face has turned. It's looking toward Kalliste." |
+| Nothing: all four done | Delphoi | "The herm's stone face has turned. It's looking toward Delphoi." |
+
+- **The facing.** Each herm's map gives the compass direction from that herm to each of the five places (a five-entry table per herm in its map script), and E12 picks the matching head metatile: one of four facings, so a herm due south-east of Delphoi looks up-left.
+- **An un-anointed great herm:** "A herm. Its stone face looks where it always has." *(added)*
+- **Signpost herms** (the slice's Route 1 three and the like) don't turn.
+
+### The Fates' gates on the Stair
+
+Each Fate, when roused, opens four landings: the first Fate roused opens landings 1–4, the second 5–8, and the third 9–12, whatever the order. On map load, `MAP_STAIR_OF_HOURS` counts the three `FLAG_ICHOR_ROUSED_*` flags and swaps the collision of the flights above the open landings (`setmetatile`).
+
+| Where | Text |
+|---|---|
+| The Stair's foot, no Fate roused (in the court) | "The first step won't take your weight. The hour is holding its breath." (STORY) |
+| The first closed flight, some Fates roused *(added)* | "The next step won't take your weight. Not yet." |
+| A closed flight, after the first visit *(added)* | "This hour is still holding its breath." |
+
+Kleon's waking (III-10G) needs all twelve landings open, so the climb with Kleon always reaches the top.
+
+## The Stair of Hours (`MAP_STAIR_OF_HOURS`)
+
+**Layout.** 24×110, one vertical map, so the camera can stand at the top and look down during the crumble.
+- **Twelve landings,** each an hour-stone: a platform of pale stone about 9×5 tiles with a sundial cut into its center, its shadow stopped on its own hour. They spiral up by alternating sides: landing 1 at the bottom left, 2 right, 3 left, and so on, each about 9 rows above the last. Flights of steps 3 tiles wide and 4 rows long join them, so the walk zigzags up the screen.
+- **Landing 1** sits at rows 100–104. The foot, rows 105–109, is the split Omphalos's top, where the warp from the court lands.
+- **The twelfth landing** is wider, 14×6 at rows 6–11, with the big sundial in its center, the 3×2 block of the Lord of Time's shadow at its top edge, and the left edge where Phaedon stands aside.
+- **The sky rows,** 0–5, hold the Lord of Time (E10), a 64×64 object filling the sky above the landing with the Harpe in its grip.
+- **Around everything,** gray sky: an animated-cloud metatile E1 holds still. Below landing 1 and on both sides, the cloud sea over Delphoi.
+- **Frozen Titanborn** stand mid-step on landings 1–6 (six objects, E4), following their master up: two on landing 1, one on 2, one on 3, and on landing 5 Petros and Amathos. None are on 7–12: the faithful didn't get that far.
+- **The three sparks** that heal sit at the sundials of the fourth, eighth and eleventh landings once their landings are open, and a fourth at the twelfth landing's sundial after the crumble. Each is an unfrozen spark object; talking to one restores the party.
+- **Items** on landings 3, 7 and 10 (P6): things the climbing Titanborn dropped.
+- **Object count.** The live object budget is 16. Kleon, Phaedon, Hyperion, the Lord of Time, three Fate sparks that become the Fates, the Moment, the Harpe and the twelfth landing's spark are 10; the six Titanborn and three items are spread down the map, so no more than 16 are ever within the loaded range.
+- **The crumble** (E11) swaps the flights below the twelfth landing to sky, row by row behind Kleon and Hyperion, and leaves the landings hanging. After the climax the map is never entered again: at dawn the stair is gone, and the court's warp is removed.
+- **Music:** the music box with all three Fates' voices; `MUS_ICHOR_KRONOS` for the multi battle; `MUS_ICHOR_LORD_OF_TIME`; silence when the Moment is seized; the chimes; `MUS_ICHOR_MAIN_THEME`.
+
+**Rulebook notes (MAP_DESIGN §3).** The Stair is a climb, not a puzzle. Its "dungeon" structure is the whole Frozen Hour: teach (the Cutter's four landings, with the gate text), test (the other two sanctuaries in any order), payoff (the multi battle, the Lord of Time and the Moment). The midpoint rests are the sparks. The way out is time itself.
+
+### The Moment's timing
+
+`special Ichor_BullLeap` (E7), the bull-leap reused. The player learned the timing at Knossa: three leaps over Asterion.
+
+| | Mortal | Hero | Spartan |
+|---|---|---|---|
+| The Moment's speed | 1 tile per 8 frames | 1 tile per 6 frames | 1 tile per 5 frames |
+| The window | 14 frames | 10 frames | 6 frames |
+| After each miss | +2 frames, up to double | the same | the same |
+
+- **Fail forward.** A miss is never punished: the Moment streaks off, wheels round and comes again along the blade. NO to "Take the moment?" does the same. There is no limit on tries.
+- **Clean:** `VAR_RESULT` 1. The BGM cuts on the frame of the press.
+
+## The trial: presenting evidence (beat L-2)
+
+**What the player does.** Very little, on purpose. The trial is Alethea's; the player's part is to stand where she can see them, and to choose whether to show the unfinished decree. The tension is in what the player has already done: whether they took the decree in the Frozen Hour, and how many prophecy fragments they dug up.
+
+| Exhibit | Source | Shown by | Effect |
+|---|---|---|---|
+| Kleon's draft | `ITEM_KLEONS_DRAFT`, main path (Knossa) | Alethea, from the player | the hook on a fate |
+| Elpis's tablet | `ITEM_SEALED_TABLET`, main path (Knossa); or Phaedon, if he kept it | Alethea | the forgery behind the Frozen Hour |
+| The archive shelf | Ariadne, by honey boat | Alethea | 41 "Revised." tablets |
+| The unfinished decree | `ITEM_UNFINISHED_DECREE`, optional (the Frozen Hour) | the player, YES/NO | Lykophron is Iapetos: "That's my hand." |
+| The prophecy fragments | `FLAG_ICHOR_PROPHECY_START` + 0–7, optional | Alethea, automatic | 0, 1–7 or 8 lines; 8 makes the vote unanimous |
+
+**Outcomes.** The vote always exiles Lykophron; the main-path exhibits are enough (STORY §4: "The fragments are optional"). With all 8, the board reads "Others: none", Lysimachos writes another name, and Thrasyllos remarks on it. The trial can't be failed or lost, and nothing in it is missable: if the player leaves Astyra before talking to Alethea, she is still at her table when they come back.
+
+**Engine.** All script. The fragment count is `Ichor_CountFlags(FLAG_ICHOR_PROPHECY_START, 8)` from ENGINE_API, called as `special Ichor_CountFlagRange` (Open questions 4). The count board is Act II's sign window from the ostracism. The close-ups are item picture windows, as STORY §6.5 uses.
+
+## Dionysus's test (beat L-5A)
+
+**Rules** (SYSTEMS §10's, applied):
+- **Opens** after Hermes's visit (`FLAG_ICHOR_THEOXENIA_HERMES`) and after the climax (`VAR_ICHOR_ACT3` at 19 or more). It appears on any Gulf ferry crossing until passed.
+- **The test:** "Speak up." Pass with LET HIM GO; HE'S A GOD passes too, with a better line, and appears only if the tell was spotted.
+- **The tell:** examining the youth before talking to the mate sets `FLAG_TEMP_1` (cleared by the map change at the end of the crossing). The follower's bow is the hint to look.
+- **Failure** (RANSOM HIM, SELL HIM) ends the visit kindly. Nothing is lost.
+- **The gift:** SYSTEMS's Grookey row, with the shared touches. Dionysus Favor +15.
+- **After:** the vines stay on the mast (`FLAG_ICHOR_FERRY_VINES`), the crew is new, and three dolphins run with the ferry.
+
+**Engine.** Scripts: an `examine` script that sets the temp flag, a multichoice built with or without the fourth option, `givemon` and `setmondata` as SYSTEMS's engine table describes, three jump-into-sea movements and three dolphin objects. No new code.
+
+## "Know thyself" (beat L-5B)
+
+SYSTEMS §11, opened by `FLAG_ICHOR_PYTHIA_KNOW_THYSELF`. Phemonoe's service, from her tripod:
+
+| Option | Costs | Does |
+|---|---|---|
+| KNOW ONE THING | a Pythian Laurel | perfects one IV of one Pokémon (hyper training) |
+| KNOW EVERYTHING | a Golden Pythian Laurel | perfects all six |
+| CHOOSE A NATURE | nothing, once a day | changes a Pokémon's nature, as the mints do |
+
+Her lines, before the menu, every visit:
+```text
+PYTHIA: For a thousand years they asked me who they'd be.
+
+PYTHIA: Ask me who you want to be. That one I can help with.
+```
+After a service: "PYTHIA: There. Who you are is up to you. That's still true. I just helped a little." With no laurels to spend: "PYTHIA: Bring me a laurel. Boys cut them at Tempe. Or dig them up. People leave them everywhere."
+
+## The gates on the League road
+
+| Gate | Where | Shut until | Who | What opens |
+|---|---|---|---|---|
+| **The climax gate** | Route 29, the palisade on the Parnassos saddle, above the Korykian cave | L-5: the trial (`VAR_ICHOR_ACT3` 21) | Mnasippos, captain of the Archon's guard | the pass to Thermopylai; sets `VAR_ICHOR_ACT3` to 22 |
+| **The Laurel check** | the Vale of Tempe, the Ascent's foot | eight Laurels | Koronos, the Archon's warden | the Ascent; sets `FLAG_ICHOR_ASCENT_LAURELS_SHOWN` |
+| **The point of no return** | the Gate of the Horai's north door | — | Dike | the Pantheon |
+
+The palisade's lines change three times: before the climax (Titans on the mountain), after it (the city must judge its own first), and after the trial (open). Everything below it, the Korykian path and cave, is open from Act III's arrival at Delphoi.
+
+## Route 29, Parnassos (`MAP_ROUTE29_PARNASSOS`)
+
+**Layout.** About 40×52, four screens. AETHOS_MAP gives it two cells, (7, 2) and (8, 2): north out of Delphoi, then east. It climbs north from Delphoi's north seam through pine terraces (the Korykian path), turns east across the snow-patched saddle of Parnassos, and drops east down a gully to Thermopylai's West Gate.
+
+**The lower half: the Korykian path,** absorbed from the Delphoi part as written (its beats, trainers and items): the sign, the pines, forced grass band 1 (3 deep), GOATHERD Aipolos, Pan's shrine, MOUNTAINEER Oreias with forced grass band 2 behind him, the side mouth of `MAP_KORYKIAN_CAVE`, and the lookout spur with its Ultra Ball and hidden Rare Candy. Its sign gains a line: "ROUTE 29. North: the Korykian cave. Over Parnassos: Thermopylai (the pass is guarded)." **Ledges** drop back toward Delphoi.
+
+**The upper half,** above the palisade:
+1. **The palisade** across the saddle path (the climax gate, Part 5's table).
+2. **The saddle's meadow:** snow in the hollows, sheep, Pyrrhis's summer hut, and SHEPHERD Lykos, easy, in plain view.
+3. **Lykoreia's stones,** the route's set piece: an old town's foundations on the saddle, with the plaque of the flood (beat L-6A), and the great herm (`FLAG_ICHOR_HERM_ROUTE29`).
+4. **Forced grass band 3,** 4 deep, across the saddle between snowbanks.
+5. **The rockfall,** the Bronze Hammer, on the main path, and **MOUNTAINEER Oribasios,** mandatory, just past it, with **forced grass band 4** (3 deep) right behind him.
+6. **The tarn:** a small mountain lake south of the path; Poseidon's Conch reaches the islet with TITANBORN Sitalkes and a sealed jar (TM Thunder).
+7. **The pine brakes,** off the path on the north terraces: Demeter's Sickle, and behind them PILGRIM Theoris and a Full Heal.
+8. **The descent:** a gully east, with **AUGUR Ampyx** mandatory at the narrows, and a fallen column drum (the Girdle) that, pushed from below, opens a ledge loop back up to the saddle.
+9. **The east edge:** a sign, "THERMOPYLAI. The hot gates. Mind the steam."
+- **Hidden items:** behind the great herm; at the tarn's far shore; in the corner of the pine brakes.
+- **Width varies:** the open saddle, the one-tile gully, the wide meadow.
+
+## Thermopylai (`MAP_THERMOPYLAI`)
+
+The layout is in Part 2. Its puzzle, such as it is: **the Anopaia path**, the goatherd's loop. Once Eurydemos opens his yard gate, the path climbs the cliff in switchbacks, crosses a ledge above the Middle Gate where the whole pass is in view (the best view of the springs' steam, and the stone lion from above), passes a Hammer boulder hiding a Max Ether, and comes to the goat at the top, then drops by ledges to the East Gate. It is a dead end that pays twice (the goat's Thunder Stone and the ledge's items) and a one-way shortcut east. MAP_DESIGN's "every dead end pays" and "ledges are one-way shortcuts" both hold.
+
+## Route 30, the Thessalian plain (`MAP_ROUTE30_THESSALY`)
+
+**Layout.** About 44×36, four screens. AETHOS_MAP gives it cell (10, 2); it runs east from Thermopylai's East Gate across the plain, then north into the mouth of Tempe. Wheat in great flat fields cut by drainage ditches, a raised causeway, Lake Boibeis on the east side, and Pelion's forested slope rising along the east edge.
+1. **The East Gate** and a sign: "ROUTE 30. Thessaly. North: Tempe and the mountain. East: Pelion. Mind the centaurs (there aren't any)."
+2. **HARVESTER Ischys,** easy, in plain view in the first field.
+3. **Forced grass band 1,** 4 deep, the tall grass along a ditch between two fields.
+4. **The causeway:** **RUNNER Atrax,** mandatory, with **forced grass band 2** (4 deep) right after the causeway's end.
+5. **The Lapiths' table,** the set piece, in the wheat, with **CADET Kleomenes** (optional) sitting on it.
+6. **Peirithoos's farmhouse,** the rest point, by the road.
+7. **The great herm** at the fork (`FLAG_ICHOR_HERM_ROUTE30`), as the sign: "NORTH: TEMPE. EAST: PELION. WEST: THE HOT GATES."
+8. **Pelion's slope:** GOATHERD Phylakos (optional); a stream fall that the Horn of Achelous climbs to Chiron's ledge, with the chalked stone (beat L-6C) and a hidden item at the ledge's end.
+9. **Lake Boibeis:** Poseidon's Conch reaches an islet with a sealed jar (TM Earth Power) and a reed bed that Demeter's Sickle clears to a hidden item.
+10. **Forced grass band 3,** 3 deep, where the plain narrows into the gorge, and **SCOUT Arimnestos,** mandatory, on his rock at the mouth of Tempe.
+11. **The north edge:** a sign, "THE VALE OF TEMPE. The last healer before the mountain."
+- **Ledges** step down westward along the field terraces toward Thermopylai.
+- **Width varies:** the open plain, the narrow causeway, the gorge mouth.
+
+## The Vale of Tempe (`MAP_VALE_OF_TEMPE`)
+
+The layout is in Part 2. A waypoint with no puzzle and no grass: a breath before the climb. Daphne's scene (beat L-6D), the healer, the Laurel check and the river. The river's west bank is reached by the bridge; a Surf-only reach above the bridge leads to a hidden item on a gravel bar.
+
+## The Ascent: a Victory Road (MAP_DESIGN §1 and §3)
+
+The Ascent is one long dungeon of five maps and a grotto, from the Vale of Tempe to the Gate of the Horai. It is the final exam of the overworld, as the Labyrinth was of the temples: every relic the player owns, combined.
+
+### Teach, test, combine
+
+| Map | Teaches, safely | Tests | Combines |
+|---|---|---|---|
+| Foothills | The Ascent's rule: every relic gate has a reward behind it. The first gate is a Hammer rockfall on the main path, in plain view. | The Sickle's box thickets, the Conch's tarn, the Girdle's drum, each guarding an optional reward | The drum is pushed from above to open the loop back to Koronos's gate |
+| Weeping Cliff | The Horn: a short 2-tile fall with nothing at the top but a view, then a ledge and a jar | The great fall, mandatory, after Epikles | Surf the pool to reach the fall's foot, so Conch and Horn work together |
+| Ice Caves 1F | Ice floors: a lit mouth chamber with one slide that ends safely at a jar | A dark hall of slides, readable only by lighting three braziers with the Torch | Slides and darkness together; the Hammer opens the grotto and Erinna's branch |
+| Ice Caves B1F | — (the midpoint rest is here: Eschara's hearth) | A frozen lake of slides with no natural stops | The Girdle: push boulders onto the ice, and they slide until they stop, making new stops for you; the Labrys cleaves Medon's chain |
+| Snowfields | Deep snow is grass: the first band is short and walled | Three forced bands with mandatory trainers between, so there is no heal between them | The Winged Talaria (optional) leap a crevasse to an item; the Hammer's upgrade breaks a great 2×2 ice boulder |
+| Crags | Ledges and a rope bridge | The fog: above the cloud line the view shrinks (fog weather), and the path is one tile wide | A meltwater fall to the high nest (the Horn), then the cloud steps and Eurytos |
+
+### Relic gates on the League road
+
+| Relic | Where | What's behind it | Main path? |
+|---|---|---|---|
+| Bronze Hammer | Route 29: the saddle's rockfall | the road on | **Yes** |
+| Bronze Hammer | Thermopylai: a boulder on the Anopaia path | a Max Ether | No |
+| Bronze Hammer | Foothills: the rockfall on the terraces | the road on | **Yes** |
+| Bronze Hammer | Ice Caves 1F: two cracked ice walls | the Grotto of Icicles; Erinna's branch | No |
+| Hephaestus's Hammer (upgrade) | Snowfields: a great 2×2 ice boulder | a pocket with a Full Restore | No |
+| Hecate's Torch | Ice Caves 1F and B1F: five braziers | the slide halls made readable | **Yes** |
+| Three-Flamed Torch (upgrade) | Ice Caves B1F | a wider light on the lake; one more hidden item shows | No |
+| Demeter's Sickle | Route 29: the pine brakes | Theoris, a Full Heal | No |
+| Demeter's Sickle | Route 30: Lake Boibeis's reed bed | a hidden item | No |
+| Demeter's Sickle | Foothills: box thickets on a side terrace | a Full Heal and a hidden item | No |
+| Girdle of Herakles | Route 29: a fallen drum in the gully | the loop back to the saddle | No (a shortcut) |
+| Girdle of Herakles | Foothills: a fallen drum by the shrine of the Twelve | the loop back to Koronos's gate | No (a shortcut) |
+| Girdle of Herakles | Ice Caves B1F: three boulders on the lake | the way across | **Yes** |
+| Poseidon's Conch | Route 29: the saddle's tarn | Sitalkes, TM Thunder | No |
+| Poseidon's Conch | Route 30: Lake Boibeis | TM Earth Power | No |
+| Poseidon's Conch | Tempe: the reach above the bridge | a hidden item | No |
+| Poseidon's Conch | Foothills: the mountain tarn | a hidden item | No |
+| Poseidon's Conch | Weeping Cliff: the pool | Bathykles; the way to the great fall's foot | **Yes** (with the Horn) |
+| Horn of Achelous | Route 30: Pelion's stream fall | Chiron's ledge (lore, a hidden item) | No |
+| Horn of Achelous | Weeping Cliff: the short fall, then the great fall | Timandra's jar; the Ice Caves' mouth | **Yes** (the great fall) |
+| Horn of Achelous | Crags: the meltwater fall | the high nest | No |
+| The Labrys | Ice Caves B1F: Medon's chained door | Medon's storeroom | No |
+| Winged Talaria (upgrade) | Snowfields: a one-tile crevasse | a Max Revive and a hidden Rare Candy beyond | No |
+
+**Daedalus's Wings.** Tempe is a fly target (its healer), and Thermopylai, Route 29 and Route 30 have great herms. On the Ascent, the Foothills' great herm (`FLAG_ICHOR_HERM_ASCENT`) is the last Fly point; above it the climb is walked. The Gate itself becomes a Fly point once visited (`FLAG_ICHOR_VISITED_OLYMPUS_GATE`).
+
+### The ice floors
+
+Sootopolis's ice, reused: a player who steps onto ice slides in their facing direction until they hit something.
+- **Teach** (1F, the mouth chamber, lit by daylight): one patch, four tiles long, ending against a rock beside a jar with Never-Melt Ice. A sign: "THE ICE. You'll slide until something stops you. Choose the something."
+- **Test** (1F, the dark hall): three braziers. Unlit, the hall is flash level 0 with rim-lit walls (SYSTEMS §2); each brazier lit with the Torch reveals a quarter of the slide map for good (`IchorSave.litBraziers`). Every wrong slide ends somewhere safe: against a wall, back at the hall's mouth, or beside a trainer.
+- **Combine** (B1F, the frozen lake): no natural stops in the middle of the lake. Three boulders stand at its edges; pushed with the Girdle, a boulder slides until it hits something, and then it is a stop. The puzzle is the order: push the first to stop the second. **The safety valve:** stepping off the lake's south edge resets the boulders, and Eschara's chamber is beside the reset point, so a player stuck on the lake is never far from a heal or a hint ("ESCHARA: The stones go first. Then you.").
+
+### The midpoint, the payoff and the shortcuts out
+
+- **The rest points before the Ascent:** Thermopylai's hot springs, Peirithoos's farmhouse on Route 30, and the healer at Tempe.
+- **The midpoint rest:** Eschara's hearth chamber on B1F, a xenia host (heal, rest until a chosen hour).
+- **The rest point on the Snowfields:** the snow-watcher's hut (a bed; no heal).
+- **The payoff:** the Gate of the Horai, and the Pantheon behind it.
+- **Shortcuts out:** the Foothills' drum loop back to Koronos's gate; a one-way ice chute from B1F's exit back to 1F's mouth, opened from above once the lake is crossed; and Eirene's cloud from the Gate down to Tempe.
+
+### The maps
+
+**`MAP_ASCENT_FOOTHILLS`, 34×50.** AETHOS_MAP's cell (9, 1). West from Koronos's gate at Tempe, the path climbs Olympus's lower flank through beech woods and black pine, past shepherds' terraces, to the foot of the Weeping Cliff.
+1. **The Low Pasture,** the first grass past the gate: the snow omen's patch (Part 4). A sign: "THE ASCENT. Olympus, above. Turn back if you're tired. Nobody will think less of you. The Archon's warden will, a little."
+2. **MOUNTAINEER Agathon,** easy, in plain view.
+3. **Forced grass band 1,** 4 deep, between drystone terrace walls.
+4. **The rockfall,** the Hammer, on the main path.
+5. **The beech woods:** **PILGRIM Damaris,** mandatory, between two great trunks, with **forced grass band 2** (4 deep) right behind her.
+6. **The shrine of the Twelve,** the set piece: a roadside altar with twelve worn faces in a ring, where climbers leave an offering on the way up. Praying here follows SYSTEMS §3 (Zeus). Beside it, a fallen column drum (the Girdle) that, pushed from the north, opens a ledge loop back to the Low Pasture. The great herm stands at the altar (`FLAG_ICHOR_HERM_ASCENT`).
+7. **The mountain tarn,** off the path to the east: the Conch reaches a hidden item on its far shore.
+8. **Box thickets** on a side terrace: the Sickle, and behind them a Full Heal and a hidden Nugget.
+9. **Forced grass band 3,** 3 deep, in the last clearing.
+10. **The north edge:** a sign, "THE WEEPING CLIFF. Mind your footing. Mind your manners."
+- **Ledges** step down toward Tempe.
+- **Hidden items:** behind the shrine of the Twelve, at the tarn's far shore, in the box thickets' corner.
+
+**`MAP_ASCENT_WEEPING_CLIFF`, 30×44.** A bowl in the mountain with a cliff on three sides. The north face is shaped like a seated woman with her face in her hands; water seeps from her eyes and falls into a round pool ringed by fourteen young cypresses.
+1. A short path in from the south, a sign: "THE WEEPING CLIFF. She cried for her fourteen. She's still crying."
+2. **KITHARODE Phrynis,** mandatory, in plain view on the pool path.
+3. **The short fall** (the Horn's teach step), 2 tiles, to a ledge with MOUNTAINEER Timandra (optional, facing away) and a sealed jar.
+4. **The pool:** Surf across it (the Conch). FISHER Bathykles on his rock; a hidden item in the reeds.
+5. **The old woman** with her flowers, by the cypresses; the spring at the cliff's foot (Dakrock, Part 4).
+6. **MOUNTAINEER Epikles,** mandatory, at the foot of the great fall.
+7. **The great fall,** 8 tiles, the Horn: up to the ledge and the dark mouth of the Ice Caves.
+
+**`MAP_ASCENT_ICE_CAVES_1F`, 40×36.** Through the mountain's shoulder.
+1. **The mouth chamber,** lit by daylight: the teach slide, Never-Melt Ice.
+2. **The first brazier,** just inside the dark, and **MOUNTAINEER Hippias** by his lamp.
+3. **The dark hall:** three braziers, the slide test.
+4. **Two cracked ice walls** (the Hammer): east, the **Grotto of Icicles** (`MAP_ASCENT_ICE_GROTTO`, 12×10, Pagoshard); west, **AUGUR Erinna** by her lamp and a jar with TM Blizzard.
+5. **The stair down** to B1F.
+
+**`MAP_ASCENT_ICE_CAVES_B1F`, 36×30.** Under the mountain: a frozen lake in a black cavern.
+1. **Eschara's hearth chamber,** warm, off the stair's foot: the midpoint rest.
+2. **TITANBORN Thinos,** mandatory, at the lake's edge.
+3. **The frozen lake:** two braziers and three boulders (the combine step).
+4. **An open-water channel** along the east wall, by Surf, to a Max Revive.
+5. **Medon's storeroom** (the Labrys), in the north wall.
+6. **The way up and out** to the Snowfields, and the one-way chute back to 1F's mouth.
+
+**`MAP_ASCENT_SNOWFIELDS`, 44×40.** AETHOS_MAP's cell (9, 0). Out into a white upland under falling snow, with Olympus's summits showing and vanishing in the cloud ahead.
+1. **The cave's exit** and a sign: "THE SNOWFIELDS. Keep to the poles. The snow moves the rest."
+2. **MOUNTAINEER Oreithyia,** mandatory, in plain view on the first rise.
+3. **Forced deep-snow band 1,** 3 deep.
+4. **Chionis's hut** in the lee of a rock (`MAP_ASCENT_SNOWFIELDS_HUT`).
+5. **MOUNTAINEERs Kleobis and Biton** with their cart, across the narrow cut, mandatory, and **forced band 2** (4 deep) right behind them.
+6. **The shrine of Boreas,** off the track: PILGRIM Praxilla (optional) and a hidden Rare Candy in the drift behind it.
+7. **The crevasse:** the Winged Talaria leap it to a Max Revive (optional).
+8. **The great ice boulder** (Hephaestus's Hammer, optional): a pocket with a Full Restore.
+9. **Forced band 3,** 3 deep, and **VETERAN Alkamenes,** mandatory, at the north end.
+10. A sealed jar on a snow ledge reached through optional deep snow: TM Ice Beam.
+
+**`MAP_ASCENT_CRAGS`, 30×50.** The mountain's last rock face, climbed by ledges, cut steps and one rope bridge, with eagle nests on every ledge too high to reach. Halfway up, the cloud bank: fog weather from there to the top.
+1. **KITHARODE Euxenos** (optional) by the rope bridge.
+2. **The chain-ring,** an object: "A bronze ring, rusted into the rock, with a stub of chain. Something was chained here once, a long time ago. An eagle is watching you from the nest above it."
+3. **The meltwater fall** (the Horn, optional) to the high nest: TM Hurricane, and a hidden Star Piece in the nest.
+4. **The fog line.** From here the view closes in.
+5. **MOUNTAINEER Kineas,** mandatory, on the one-tile switchback.
+6. **GIGAS Eurytos,** mandatory, at the foot of the cloud steps.
+7. **The cloud steps,** cut into the rock and vanishing upward into white: the Gate.
+
+**`MAP_OLYMPUS_GATE`, 30×24.** Above the clouds: a terrace of white marble floating on a sea of cloud, with the summits of Olympus rising behind the gate of cloud at the north end. No roof. The Asclepeion and the Agora are marble tables open to the sky. A Pithos jar stands by the south steps. Kleon sits at the south edge with his legs over the cloud.
+
+## The Pantheon as a gauntlet
+
+The Pantheon is MAP_DESIGN §4's temple rules turned inside out: there is no puzzle, because the four holders are the puzzle. It keeps the rulebook's shape anyway.
+- **Teach, test, master** runs across the four seats: Brasidas teaches commitment (a team that can't switch out of its own oaths), Themistokles weather, Hypatia stat-boosting that doesn't work, Olympias a seat whose type the player's best answer is immune to.
+- **No healing between seats,** as in Emerald. Each hall has one save point (the player can save anywhere) and nothing else.
+- **A loss** whites out to the Gate of the Horai and clears all four `FLAG_ICHOR_PANTHEON_*_DONE` flags.
+- **The view is the reward.** Each hall's after-scene opens the next door on a stair that climbs higher; the last opens on the Summit's light.
+
+## Medon's Knot: the untying
+
+A rite with no verb but pulling (E15): six YES-to-continue boxes with a rope creak each, three looser frames of the Knot's picture, then the gold thread. NO pauses it without resetting it. It can't be failed; it can only be refused, and refusing just waits, as the master text says: "It isn't going anywhere."
+
+## The Hall of Heroes: the record
+
+The vanilla Hall of Fame, re-skinned (P10): the party is recorded as figures cut into the player's stele, one chisel SE per Pokémon. The record is what the Hall's PC shows in the post-game: talking to Mnemon's slab later shows every past record, as Emerald's Hall of Fame PC does.
+
+---
+
+# Part 6. Items and rewards by map
+
+## The relic of Kythera
+
+| # | Relic | From | Opens on Kythera | Opens elsewhere |
+|---|---|---|---|---|
+| 8 | **Horn of Achelous** (Waterfall) | Krenaia, the Naiads' shrine (beat III-1H) | the upper pool (page VII, the vault door); the Foam Road's cliff cascade | the Kastalian falls up to Delphoi (main path); the Ascent; Arkadia's temple waterfall (SYSTEMS §1's relic gate) |
+
+## By map
+
+Flag naming follows the slice: visible items `FLAG_ICHOR_ITEM_<MAP>_<ITEM>`, hidden items `FLAG_ICHOR_HIDDEN_<MAP>_<ITEM>`, gifts as named in the scenes. TM numbers are vanilla where vanilla has the move; Balance assigns the rest.
+
+| Map | Item | How | Where |
+|---|---|---|---|
+| Kaldera harbor | (a satchel of tracings) | staging only, no item | Daphne (III-1A) |
+| The *Euploia*, southern voyage | Hyper Potion | visible | among the oil amphorae |
+| Melos | Ultra Ball | hidden | under the jetty's last stone |
+| Melos | Heart Scale | hidden | behind the statue's niche, after the rite |
+| Melos | Star Piece | visible | the pumice cliffs' lip |
+| Melos | Pearl | hidden | a hollow below the pumice cliffs |
+| Melos, the obsidian slope | a lump of black glass (a flag, not an item) | fixed dig | the seam at the top, past Theion |
+| Melos, the obsidian slope | daily finds (2 spots) | daily dig | SYSTEMS §5's Act III table |
+| Melos, Kentrios's farmhouse | Rose Incense | gift, after the rite | — |
+| Melos, Melanippos's house | TM Stone Edge | gift, for the lump of glass | — |
+| Melos, the boathouse | Damp Rock | gift, Kalchedon | — |
+| Route 22, the Cretan Sea | Max Ether | visible (sealed jar) | Anydros's ledge |
+| Route 22, the Myrtoan Sea | Big Pearl | hidden | the foot of Hagne's sunken column |
+| Skandeia | Big Pearl | hidden | under the last shell in the harbor shrine |
+| Skandeia | Heart Scale | hidden | the end of the north slip |
+| Skandeia, Axylos's house | half of a Broken Ring (key item) | gift, after the bad guests | — |
+| Skandeia, the divers' house | TM Liquidation | gift, Skyllias, after the gear box | — |
+| Skandeia, the divers' house | Telkanvil "ANKYRA" (Metal Coat) | in-game trade for a Glyphlet | — |
+| Skandeia, the perfumer's house | Soothe Bell | gift, Euodia | — |
+| Skandeia, Nikarete's house | Ability Capsule | gift, Lithos, after the climax | — |
+| Skandeia, Phereklos's yard | Big Pearl | knucklebones, first win | — |
+| Skandeia, Phereklos's yard | Pearl, Stardust or Honey | knucklebones, daily | — |
+| The Foam Road | Potsherd (amphora #11, 1 of 4) | fixed dig | the beach by Aphrodite's rock |
+| The Foam Road | Ether | hidden | behind the great herm |
+| The Foam Road | Hyper Potion | visible (sealed jar) | past Pontinos, on the reef spit |
+| The Foam Road, the quarry (the Girdle) | Rare Candy | visible (sealed jar) | the quarry's top step |
+| The Foam Road, the quarry (the Girdle) | Potsherd (amphora #11, 4 of 4) | fixed dig | the quarry floor |
+| The Foam Road, the cliff cove (the Horn) | Pretty Feather ×3 | visible | the cove's ledge |
+| The Foam Road, the cliff cove (the Horn) | Heart Scale | hidden | the cove's corner |
+| The Spring of Kallirhoe (the Sickle) | Miracle Seed | visible | the ledge behind the myrtle |
+| The Spring of Kallirhoe (the Sickle) | Potsherd (amphora #11, 2 of 4) | fixed dig | the ledge |
+| Echo's caves | Big Pearl | visible | the Speaking Hall's ledge |
+| Echo's caves | Heart Scale | hidden | the dark gallery's end |
+| Echo's caves | Zinc | visible | a dark dead end |
+| Echo's caves | TM Hyper Voice | visible | a rock at the sea mouth, by Surf |
+| Paphia | Ultra Ball | hidden | behind the dovecote |
+| Paphia | Pearl | hidden | under the mirror by the jetty |
+| Paphia, Pygmalion's workshop | Shiny Stone | gift, after the climax | — |
+| Paphia, the dovecote | Egg (Erosie) | gift, Peristera | — |
+| Paphia, the mirror-house | Mirror Herb | gift, Leukippe, after the Laurel | — |
+| Paphia, the orchard house | Potsherd (amphora #11, 3 of 4) | fixed dig | the old tree's roots |
+| Paphia, the orchard house | Gold Stater | gift, Eumelos, when amphora #11 is complete | — |
+| Paphia, the potter's house | Himerow "POTHOS" (Razor Claw) | in-game trade for a Galenyon | — |
+| The Temple of Aphrodite | Max Revive | visible (sealed jar) | Anthousa's alcove |
+| The Temple of Aphrodite | the Foam Laurel; TM Dazzling Gleam | Galatea | — |
+| The Neraida falls | Max Repel | visible (sealed jar) | the top terrace |
+| The Neraida falls | Lum Berry tree, Sitrus Berry tree | berry trees | the west terraces |
+| The Neraida falls | Mystic Water | hidden | the mill-race below the wheel |
+| The Neraida falls | Pearl | hidden | behind the shrine's basin |
+| The Neraida falls, the mill | Metronome | gift, Myles | — |
+| The Neraida falls | **Horn of Achelous** | Krenaia (III-1H) | — |
+| The Neraida falls, the upper pool | Daedalus's page VII | found | a crevice by the pool |
+| The Neraida falls, the upper pool | Protein | visible | a rock in the pool |
+| Kythera's Minoan vault (the Labrys) | Gold Stater ×2, Comet Shard, an Ichor Stone, Rare Bone | visible (stone chests) | the vault |
+| Route 23, Antikythera | Big Pearl | visible | the islet's beach |
+| Route 23, Antikythera | Star Piece | hidden | in the wreck's ribs |
+| Paphia's gate herm | Squirtle (Hermes, E1) | theoxenia | — (SYSTEMS §10) |
+
+**Amphora #11, the judgement of Paris** (SYSTEMS §5): its four sherds are all on Kythera, one each at the Foam Road's rock, the spring's ledge, Eumelos's tree and the quarry. Daphne completes it at the Akademia; its lead is Eumelos's golden tree.
+
+## Shops
+
+| Where | Stock |
+|---|---|
+| Skandeia, Teukros's stall | Ultra Ball, Great Ball, Hyper Potion, Full Heal, Revive, Max Repel, Escape Rope, Olive Oil, Barley Cake, Honey, Frankincense (500, SYSTEMS §3) |
+| Paphia, Theodote's stall | Ultra Ball, Hyper Potion, Full Heal, Revive, Max Repel, Frankincense, Olive Oil, Honey. After `FLAG_BADGE07_GET`: Max Potion. Marble votives (cosmetic offerings: "a marble foot", 100; Aphrodite takes them as a liked offering at Favor rates Balance sets; Open questions 12) |
+
+**New key items:** half of a Broken Ring (SYSTEMS §10's chain; probably ichor-engine's), the Horn of Achelous (relic), Daedalus's page VII (LABYRINTH).
+
+## Items and rewards by map
+
+Flag naming follows the slice and Phase 2: visible items `FLAG_ICHOR_ITEM_<MAP>_<ITEM>`, hidden items `FLAG_ICHOR_HIDDEN_<MAP>_<ITEM>`, gifts as named in the scenes. LABYRINTH §6 and §9 are the source for everything inside the rings; they're repeated here so the item list is complete in one place. Which Ichor Stone each vault holds is Balance's call.
+
+**The relics of Knossa**, in SYSTEMS §1's order:
+
+| # | Relic | From | Opens on Knossa | Opens elsewhere |
+|---|---|---|---|---|
+| 9 | **Ariadne's Thread** | Ariadne, the Grand Staircase (Scene B) | the Labyrinth | the Wandering Halls in Hecate's Hollow (SYSTEMS §1) |
+| 10 | **The Labrys** | Daedalus, the workshop (Scene D) | Rings IV–VII; the Bull Road vault; Mount Ida's gate | Kaldera's labrys door, the Minoan vaults (LABYRINTH §9) |
+| 11 | **The Helm of Darkness** | Minos's tomb (Scene F) | Rings V–VI | the Mystery sanctum's crypt at Eleusa (SYSTEMS §1) |
+
+| Map | Item | How | Where |
+|---|---|---|---|
+| Amnisos | Pearl | hidden | the end of the jetty (LABYRINTH §2) |
+| Amnisos | Bronze Obol | hidden | behind the harbor shrine (LABYRINTH §2) |
+| Amnisos | Max Repel | visible | by the cave path's first switchback |
+| Amnisos | Hyper Potion | visible | on a hive roof, up the girl's ladder |
+| Amnisos | Potsherd (Theseus amphora, #12) | fixed dig | the beach below the cave path |
+| Amnisos | Honey ×3; Leftovers after the raid | gift, Kydon | his honey house |
+| Amnisos | TM Taunt | Lykastos's first loss at bones | the Double Axe |
+| Amnisos | Olive Oil; Wine | Kressa's and Dorion's losses | the Double Axe |
+| Amnisos | Wine ×2; the Lakonia half-ring | the Broken Ring, link 2 | Aithon's house |
+| Amnisos | Focus Band | gift, Euanthe, after your first leap | the old leaper's house |
+| Amnisos | Telkanvil "TELCHIS" (Metal Coat) | in-game trade for an Aphrell | Polypos's hut |
+| The Cave of Eileithyia | an Egg (Eripip) | gift, Gennaia | the birth-stone |
+| The Cave of Eileithyia | Ichor Stone | visible | the side pocket (LABYRINTH §2) |
+| The Bull Road | Lum Berry | gift, Milon, the practice leap | the herd crossing |
+| The Bull Road | Honey ×2 | gift, Bombylia | the beekeeper's hut |
+| The Bull Road | Full Heal | visible | the herd crossing's fence |
+| The Bull Road | Olive Oil ×2 | hidden | behind the great herm (LABYRINTH §2) |
+| The vineyard terraces | PP Up | visible (the sealed jar) | the upper terrace, reached through the grass (LABYRINTH §2) |
+| The vineyard terraces | Wine | hidden | the walled corner (LABYRINTH §2) |
+| The vineyard terraces | Potsherd (#12) | fixed dig | the lowest terrace |
+| The Bull Road vault | Ichor Stone | visible | behind the labrys door, after Ring III (LABYRINTH §2) |
+| The Bronze Heel | Skull or Dart Fossil | fixed dig, one choice | the ledge by the tide line |
+| The Bronze Heel | Metal Coat | hidden | the peninsula's tip (LABYRINTH §2's hidden item) |
+| The Bronze Heel | Big Pearl | visible (a sealed jar) | on the giant's ankle, reached over the tide rocks |
+| The Bronze Heel | daily dig spot | daily | the tide pools (LABYRINTH §2) |
+| The palace | Silver Owl | hidden | under the gypsum bench in the Throne Room |
+| The palace | Hyper Potion ×2 | visible | in an open pithos in the West Magazines |
+| The palace | Potsherd (#12) | fixed dig | the Theatral Area's worn paving |
+| The palace | bull-leap prizes | Sarpedon | the Central Court (Part 5) |
+| Ring I | TM Rock Slide | visible | Xenodike's corner |
+| Ring I | Hyper Potion ×2 | visible | the thread-teaching side passage; the hidden anchor alcove |
+| Ring I | Bronze Obol | visible | the alcove behind B2 |
+| Ring I | the hidden anchor (+30 spool) | Page I | behind B3 |
+| Ring II | TM Wild Charge | visible | the sun corridor's room |
+| Ring II | Moon Stone | visible | the Moon Room |
+| Ring II | Full Heal | visible | the alcove Asterion breaks open in Scene C |
+| Ring II | Silver Owl | visible | the optional scout's gallery |
+| Ring III | Max Ether | visible | the first web pocket |
+| Ring III | Rare Bone | visible | a web pocket in the maze |
+| Ring III | TM Poltergeist | visible | Automaton No. 7's room |
+| Ring III | Star Piece | visible | the glow trail's side spur |
+| Ring III | **the Labrys** | Daedalus | the workshop (Scene D) |
+| Ring IV | Max Revive | visible | the barracks |
+| Ring IV | Hyper Potion | visible | the armory, behind Pelos |
+| Ring V | Revive, Max Elixir, Silver Owl | visible | three of the eight niches |
+| Ring V | Gold Stater; **the Helm of Darkness** | visible; Scene F | Minos's tomb |
+| Ring V | TM Megahorn, Star Piece | visible | the treasure room behind %3 |
+| Ring VI | TM Iron Head, Hyper Potion | visible | the bellows room |
+| Ring VI | Hyper Potion | visible | the slag heap's dead end |
+| Ring VI | Gold Stater ×3, Comet Shard, Ichor Stone, Max Revive | the vault | dials B B A (Page VI) |
+| Ring VI | Kleon's draft; **the sealed tablet** | Scene H | the archive |
+| Ring VI | Max Elixir | the Mistress's offering, once | the shrine landing |
+| Hyperion | TM Flare Blitz | prize | the forge |
+| Ring VII | Star Piece | visible | a side alcove |
+| The heart | Taurus, Corona Borealis; Artemis, Aphrodite and Hestia Favor +5 each | — | Scene J and the dance (LABYRINTH §9) |
+| The workshop | Monophant or Sepidart | Daedalus revives the fossil | — |
+| The workshop | **Daedalus's Compass**; the Pleiades; the Hall of Failures | all 7 pages | the Master Plan (LABYRINTH Scene L) |
+| The Ida path | Thunder Stone | visible | the goat pasture's top rock |
+| The cradle shrine | Throat Spray | hidden | behind the bronze shields on the wall |
+| The cradle shrine | Potsherd (#12) | fixed dig | the forecourt, after Ring III's Labrys opens Ida's gate |
+| The Idaean Cave | Capricornus | Amalthea's horn | the back of the cave |
+| Mount Ida's peak sanctuary | a Minoan vault (post-story) | the Labrys | LABYRINTH §9 |
+
+**Shops.** Amnisos's Agora (Part 2). The workshop has no shop; the lift reaches Amnisos.
+
+## Lakonia's items by map
+
+Flag naming follows the slice: visible items `FLAG_ICHOR_ITEM_<MAP>_<ITEM>`, hidden items `FLAG_ICHOR_HIDDEN_<MAP>_<ITEM>`, gifts as named in the scenes. Dig spots follow SYSTEMS §5: daily spots use the Act III loot table.
+
+| Map | Item | How | Where |
+|---|---|---|---|
+| Route 24 | Max Ether | visible | on Elaphonisos, above the tide line |
+| Route 24 | Big Pearl | hidden | at the drowned town's edge, in the shallows |
+| Route 24 | Shoal Shell ×2 | hidden | on the fishers' rock; at Elaphonisos's north point |
+| Gytheion | Shoal Shell | hidden | on the purple beach, below the dye-works |
+| Gytheion | Shoal Shell | hidden | on Kranai, behind the shrine |
+| Gytheion | Pearl | hidden | at the end of the mole |
+| Gytheion, the dye-works | King's Rock | three Shoal Shells, Porphyris | — |
+| Gytheion, Lysandros's house | Kynoketos "MALEA" | in-game trade for a Karkitox | — |
+| Gytheion, Kranai | Shiny Stone | Klymene's question, after the climax | — |
+| Gytheion, Timaia's house | Leftovers | deliver her fig cake to Teleklos | — |
+| Route 25 | Hyper Potion | visible | on the first terrace, past band 1 |
+| Route 25 | TM Swords Dance | visible | in the oleander meadow (behind the Sickle thicket) |
+| Route 25 | Revive | hidden | in the reeds at the ford |
+| Route 25 | Rare Candy | hidden | behind Apollo's throne |
+| Route 25, Amyklai | Heat Rock | Polyboia, after the Sun Laurel | — |
+| Route 25 | Charmander | Hestia's theoxenia (E2) | — |
+| Lakonia | Life Orb | fixed dig, after the scytale is read | under the third plane tree north of the agora |
+| Lakonia | Rare Candy | hidden | behind the Persian Stoa's last column |
+| Lakonia | Bronze Obol | hidden | in the Eurotas shallows by Orthia's steps |
+| Lakonia | Prophecy fragment 8 | fixed dig, from III-5E | the burial plot beside Lampito's house |
+| Lakonia, the syssition | TM Bulk Up | the first bowl of black broth | — |
+| Lakonia, the syssition | Sitrus, Lum or Chesto Berry | one bowl a day | — |
+| Lakonia, the agoge | Focus Sash | the gauntlet | — |
+| Lakonia, the palaestra | Choice Band | show Hipposthenes a Geogrip | — |
+| Lakonia, Orthia | Scope Lens | the cheese game | — |
+| Lakonia, Chilon's house | Wise Glasses | the quiz | — |
+| Lakonia, Lichas's house | Oran Berry ×3, Leppa Berry ×3 | the Broken Ring's third link | — |
+| Lakonia, Gylippos's house | Leather strap (key item) | Gylippos | — |
+| Route 26 | Full Heal | visible | on the Phoibaion's step (the east spur) |
+| Route 26 | Max Elixir | hidden | in the stream below the Hammer rock |
+| Route 26 | Muscle Band | hidden | under the Platanistas's biggest plane tree |
+| Lake Stymphalia | Max Repel | visible | on a far rock past islet 3, by Surf |
+| Lake Stymphalia | Damp Rock | hidden | under Akanthis's stilt hut |
+| Lake Stymphalia, the deep reeds | Max Revive | hidden | at the pool's end (clear weather) |
+| Lake Stymphalia, the nests | Pretty Feather ×2 | visible | in an empty nest (Artemis's offering) |
+| Route 27 | TM Stone Edge | visible | at the watchtower, behind the Girdle drum |
+| Route 27 | Ultra Ball ×3 | hidden | under the walnut nearest the Karyai spring |
+| Route 27 | Star Piece | hidden | at the watchtower's foot |
+| Route 27 | Hyper Potion | visible | in the hollow, past band 1 |
+| Route 27, Karyai | Sitrus and Lum berry trees | berry trees | under the walnuts |
+| Route 27 | Torchic | Ares's theoxenia (E4) | — |
+
+## Story items
+
+| Item | Change in Lakonia |
+|---|---|
+| `ITEM_SEALED_TABLET` | After III-5G its description reads: "ELPIS, DAUGHTER OF PHAEDON. Revised." / "Resealed with a trowel's mark." / "Under the forgery, in Alethea's hand: the Pythia's true words." Its close-up shows the trowel seal. |
+| `ITEM_KLEONS_DRAFT` | No change. Kleon melts his own copy (the Arkadia tablet), not the player's archive draft, which the trial still needs (L-2). |
+| Leather strap | Key item, Gylippos to Othryades. "A leather strap of jumbled letters." / "Gylippos says a staff will fix that." |
+| Timaia's fig cake | Key item, Gytheion to Route 25. "Still warm. Absolutely not allowed." |
+
+## Shops
+
+| Agora | Stock |
+|---|---|
+| Gytheion | Ultra Ball, Net Ball, Dive Ball, Hyper Potion, Full Heal, Revive, Max Repel, Super Repel |
+| Lakonia | Ultra Ball, Hyper Potion, Max Potion, Full Heal, Revive, Max Repel, X Attack, X Defense, Guard Spec., Dire Hit |
+
+## Items and rewards by map
+
+Flag naming follows the slice and Phase 2: visible items `FLAG_ICHOR_ITEM_<MAP>_<ITEM>`, hidden items `FLAG_ICHOR_HIDDEN_<MAP>_<ITEM>`, gifts as named in the scenes. Dig spots use Act III's daily table (SYSTEMS §5). TM numbers are vanilla where vanilla has the move; Balance assigns the rest.
+
+| Map | Item | How | Where |
+|---|---|---|---|
+| The Sacred Olives | Leaf Stone | hidden | in the oldest olive's hollow trunk |
+| The Sacred Olives | Revive | hidden | under the desecrated altar's step |
+| The Sacred Olives | Max Repel | visible | at the dead end of the north side row, past Phayllos |
+| The Sacred Olives | Olive Oil ×3 | gift, Hieron | his hut |
+| The Sacred Olives | Big Root | gift, Hieron, after the climax | his hut |
+| The Sacred Olives | dig spot | daily | the bare earth by the plain's east gate |
+| The Kastalian Gorge | Max Ether | visible | outside the quartermaster's tent, up the side terrace |
+| The Kastalian Gorge | Full Restore | hidden | in a crate in the quartermaster's tent's corner |
+| The Kastalian Gorge | Mystic Water | hidden | the niche behind the lower fall (Surf the pool) |
+| The Kastalian Gorge | Hyper Potion ×2 | visible | on the middle ledge, behind band 3 |
+| Delphoi | Pearl | hidden | in the lion-head basin |
+| Delphoi | Stardust | hidden | on the theater's top row, west end |
+| Delphoi | Bronze Obol | hidden | behind the oldest altar |
+| Delphoi | Laurel sprig | daily | the great laurel at the top of the laurel terraces (SYSTEMS §3) |
+| Delphoi, temple | Sun Laurel | Phemonoe | — |
+| Delphoi, temple | TM Mystical Fire | Phemonoe | — |
+| Delphoi, spring | Melitta's Honey | gift, Mom (III-7) | — |
+| Delphoi, the House of the Melissai | Honey ×5, Silver Powder | gift, Hagne, after the climax | — |
+| Delphoi, Theokles's house | Twisted Spoon | gift, Theokles (`VAR_ICHOR_ACT3` ≥ 11) | his bent stylus |
+| Delphoi, the Pilgrims' House | Soothe Bell | gift, Philagros, after the climax | — |
+| Delphoi, Koretas's house | Kerazap “PROPHET” | in-game trade for a Melibee | holding a Thunder Stone |
+| Delphoi, Chrysothemis's house | TM Hyper Voice | the nome quiz | — |
+| Delphoi, the treasury of Astyra | an ostrakon (“ARISTION. Polishes too loud.”) | gift, Aristion | one of SYSTEMS §5's 30 |
+| Delphoi, the Siphnian treasury | Choice Specs | the tithe: give a Nugget | — |
+| Delphoi, the Lesche | Spell Tag | Polemon's tour | — |
+| The Korykian path | Ultra Ball | visible | at the scree lookout |
+| The Korykian path | Rare Candy | hidden | at the lookout's very tip |
+| The Korykian cave | Lucky Egg | visible (an object) | on the knucklebones heap, the cave's dead end |
+| The Korykian cave | Star Piece | hidden | in the first hall, behind the tallest stalagmite |
+| The Omphalos stair | — | — | lore only |
+| The Loom | — | `ITEM_MELITTAS_HONEY` is removed (III-9) | — |
+
+**The new key item.** `ITEM_MELITTAS_HONEY`, 00_front's: "Melitta's Honey. A clay jar of thyme honey from Delphoi. The label says NOT FOR {PLAYER}." The bag's description doesn't change. It can't be used, held, sold or tossed; it is given at the Loom.
+
+**Shops.** Delphoi's Agora (Part 2): Ultra Ball, Hyper Potion, Full Heal, Revive, Max Repel, and Full Restore from `FLAG_BADGE08_GET`; and Honey by the jar.
+
+## Items and rewards
+
+| Where | Item | How | Flag |
+|---|---|---|---|
+| The Stoa, Lykophron's desk | `ITEM_UNFINISHED_DECREE` (key item) | Optional, ?? Take the tablet? | `FLAG_ICHOR_GOT_UNFINISHED_DECREE` |
+| Elpis's room | `ITEM_SEALED_TABLET` stays in the bag; its description changes to "The seal is broken." | Phaedon reads it and gives it back | `FLAG_ICHOR_PHAEDON_READ_TABLET` |
+| Elaia, Mom's loom | Melitta's cloak (cosmetic, not an item: E17) | ?? Put it on? | `FLAG_ICHOR_WORE_MELITTAS_CLOAK` |
+| The Stair, landing 3 | Full Restore (item ball) | "A Titanborn's pack, dropped mid-climb." on pickup *(added)* | `FLAG_ICHOR_ITEM_STAIR_FULL_RESTORE_1` |
+| The Stair, landing 7 | Max Revive (item ball) | — | `FLAG_ICHOR_ITEM_STAIR_MAX_REVIVE` |
+| The Stair, landing 10 | Full Restore (item ball) | — | `FLAG_ICHOR_ITEM_STAIR_FULL_RESTORE_2` |
+| The resolution | Ophiuchus (SYSTEMS §8 #17) | Elpis's line | `FLAG_ICHOR_STAR_OPHIUCHUS` |
+| The Stair | The Lord of Time (Kronolith, Lv 60), if caught | III-11D | `FLAG_ICHOR_CAUGHT_LORD_OF_TIME` |
+
+`ITEM_MELITTAS_HONEY` was used up at the Loom (the Delphoi writer's III-9). The Harpe's three pieces stay with the Fates and are never items. Kleon's snapped thread is a picture, not an item.
+
+**Item descriptions** (bag text, two lines each):
+- `ITEM_UNFINISHED_DECREE`: "A wax decree for a golden age. The Keeper's name stops two letters short."
+- `ITEM_SEALED_TABLET`, after Astyra: "ELPIS, DAUGHTER OF PHAEDON. Revised. The seal is broken."
+
+## Items and rewards by map
+
+Flag naming follows the slice: visible items `FLAG_ICHOR_ITEM_<MAP>_<ITEM>`, hidden items `FLAG_ICHOR_HIDDEN_<MAP>_<ITEM>`, gifts as named in the scenes. TM numbers are vanilla where vanilla has the move; Balance assigns the rest. `ITEM_PYTHIAN_LAUREL` and `ITEM_GOLDEN_PYTHIAN_LAUREL` are the Bottle Caps, renamed (SYSTEMS §11).
+
+| Map | Item | How | Where |
+|---|---|---|---|
+| Astyra, the trial | — | takes `ITEM_KLEONS_DRAFT`, `ITEM_SEALED_TABLET` if held, `ITEM_UNFINISHED_DECREE` if shown | — |
+| Astyra, the sentences | a full heal | Phaedon | — |
+| Akti | Shoal Shell | gift, Elpis | the quay |
+| Gulf ferry | Grookey | gift, Dionysus (E5) | — |
+| Gulf ferry | Wine ×3 | gift, the helmsman | — |
+| Delphoi, the adyton | Golden Pythian Laurel | gift, the Pythia | — |
+| Route 29 (lower half) | the Delphoi part's items | — | the Korykian path |
+| Route 29, Pyrrhis's hut | Everstone | gift, for showing a Rock-type | — |
+| Route 29 | Max Repel | visible | Lykoreia's stones |
+| Route 29 | Ultra Ball ×3 | visible | past the rockfall |
+| Route 29 | Full Heal | visible | behind the pine brakes (the Sickle) |
+| Route 29 | TM Thunder | visible, sealed jar | the tarn's islet (the Conch) |
+| Route 29 | Max Ether | hidden | behind the great herm |
+| Route 29 | PP Up | hidden | the tarn's far shore |
+| Route 29 | Nugget | hidden | the corner of the pine brakes |
+| Thermopylai, the bathhouse | Heat Rock | gift, for showing a Fire-type | — |
+| Thermopylai, the garrison | Rocky Helmet | gift, after the three veterans | — |
+| Thermopylai, the goatherd's | Thunder Stone | gift, for bringing the goat home | — |
+| Thermopylai, the council-house | Enigmaw "AINIGMA" | in-game trade for a Lebetron | holding Wise Glasses |
+| Thermopylai, the inn | a knucklebones prize | the minigame (SYSTEMS §9) | — |
+| Thermopylai | Max Ether | visible | behind the Hammer boulder, the Anopaia path |
+| Thermopylai | Full Restore | visible | the Anopaia ledge above the Middle Gate |
+| Thermopylai | Star Piece | hidden | in the reeds at the marsh's edge |
+| Thermopylai | Big Nugget | hidden | behind the stone lion |
+| Route 30, the farmhouse | Kaprodon "KALYDON" | in-game trade for a Kerazap | holding Soft Sand |
+| Route 30 | Hyper Potion ×2 | visible | by the Lapiths' table |
+| Route 30 | TM Earth Power | visible, sealed jar | Lake Boibeis's islet (the Conch) |
+| Route 30 | Revive ×2 | visible | the causeway's end |
+| Route 30 | Rare Candy | hidden | Chiron's ledge (the Horn) |
+| Route 30 | Pearl | hidden | the reed bed (the Sickle) |
+| Route 30 | Max Repel | hidden | behind the great herm |
+| Tempe | Pythian Laurel | gift, the laurel boy | Apollo's altar |
+| Tempe, the laurel-keepers' | Pythian Laurel | gift, after the boy's | — |
+| Tempe, the river hut | Mystic Water | gift, for a leaf of the first laurel | — |
+| Tempe | Max Elixir | hidden | under the bridge, west bank |
+| Tempe | Full Heal | hidden | the plane tree's hollow by the altar |
+| Tempe | Big Pearl | hidden | the gravel bar above the bridge (the Conch) |
+| Foothills | Ultra Ball ×3 | visible | past the rockfall |
+| Foothills | Full Heal | visible | behind the box thickets (the Sickle) |
+| Foothills | Max Ether | hidden | behind the shrine of the Twelve |
+| Foothills | PP Up | hidden | the tarn's far shore (the Conch) |
+| Foothills | Nugget | hidden | the box thickets' corner |
+| Weeping Cliff | TM Scald | visible, sealed jar | Timandra's ledge (the short fall) |
+| Weeping Cliff | Max Elixir | visible | under the cypresses |
+| Weeping Cliff | Pearl | hidden | the reeds in the pool (the Conch) |
+| Weeping Cliff | Big Pearl | hidden | the pool's north shore, under the falls |
+| Ice Caves 1F | Never-Melt Ice | visible | the teach slide's end |
+| Ice Caves 1F | TM Blizzard | visible, sealed jar | Erinna's branch (the Hammer) |
+| Ice Caves 1F | Hyper Potion ×2 | visible | the dark hall's far corner |
+| Ice Caves 1F | Full Restore | hidden | under an icicle in the Grotto of Icicles |
+| Ice Caves B1F | Ichor Stone | visible | Medon's storeroom (the Labrys) |
+| Ice Caves B1F | Max Revive | visible | the open-water channel's end (the Conch) |
+| Ice Caves B1F | Revive ×2 | visible | the lake's north shore |
+| Ice Caves B1F | Dusk Ball ×3 | hidden | shows only in the Three-Flamed Torch's wider light, by the channel |
+| Snowfields | Ice Stone | gift, Chionis, for showing a Niflake | the hut |
+| Snowfields | TM Ice Beam | visible, sealed jar | the snow ledge, through optional deep snow |
+| Snowfields | Max Revive | visible | past the crevasse (the Winged Talaria) |
+| Snowfields | Full Restore | visible | the great ice boulder's pocket (Hephaestus's Hammer) |
+| Snowfields | Rare Candy | hidden | the drift behind Boreas's shrine |
+| Snowfields | Max Potion | hidden | under the cart's wheel, once Kleobis and Biton are beaten |
+| Crags | TM Hurricane | visible, sealed jar | the high nest (the Horn) |
+| Crags | Full Restore | visible | the rope bridge's far end |
+| Crags | Max Elixir | visible | the switchback below Kineas |
+| Crags | Star Piece | hidden | the high nest |
+| Crags | Sharp Beak | hidden | a lower nest beside the chain-ring |
+| Gate of the Horai | — | Eunomia's stall (Part 2) | — |
+
+**Two new in-game trades** for the trade table (`src/data/trade.h`): AINIGMA (Enigmaw, Thermopylai) and KALYDON (Kaprodon, Route 30).
+
+## By map
+
+| Map | Item | How |
+|---|---|---|
+| The four Pantheon halls | — | Prize money only |
+| The Summit | `ITEM_MEDONS_KNOT` | From Aristeides after the battle. Taken from the bag when it's untied, minutes later. |
+| The Hall of Heroes | **the Archon's Seal** (proposed `ITEM_ARCHONS_SEAL`, a key item) | From Aristeides. Description: "The Archon's owl seal, on a bronze ring. There's no little hook under the owl. Keep it on a cord." It has no field use in 1.0; the post-game may use it for decrees (PQ). |
+| Elaia, the epilogue | `ITEM_OLD_GATEAU` ×2 | Glykera's stall, once (`FLAG_ICHOR_EPILOGUE_CAKES`) |
+| The Akademia, after the epilogue | the National Dex | Daphne (`special EnableNationalPokedex`) |
+
+Prize money for the Pantheon and the Archon follows the vanilla Elite Four and Champion classes' rates.
+
+---
+
+# Part 7. Names introduced
+
+## Names introduced on Kythera
+
+All names are Greek-rooted and clear of the Lazarus avoid-list, and none is used elsewhere in `design/` (checked) except where noted.
+
+| Name | Who or what | Root |
+|---|---|---|
+| Skandeia | Kythera's harbor town | the island's real ancient harbor |
+| Paphia | the temple town | "the Paphian", Aphrodite's title from Paphos on Cyprus (PITCH's Kythera is "Cyprus / Paphos") |
+| The Foam Road | the island's south-shore route | Aphrodite's birth from the sea foam (Hesiod) |
+| The Spring of Kallirhoe | the pool where the youth kneels | the bible's name ("fair-flowing") |
+| Echo's caves | the sea caves below it | Echo, who could only repeat |
+| The Neraida falls | the double waterfall | the real waterfall at Mylopotamos, "of the nymphs" |
+| Antikythera | Route 23's islet | the real island, and its bronze calculator |
+| Melos, Klima | the trireme's stop on Route 22, and its fishing hamlet | the real island (AETHOS_MAP's section) and its real hamlet of boathouses, near where the armless Aphrodite was found |
+| Anydros | Route 22's islet | "waterless"; a real islet near Thera |
+| The Myrtoan Sea | Route 22's western map | the real sea between the Cyclades and the Peloponnese |
+| Cape Malea | the headland off Kythera | the real cape; "round Malea and forget your home" is an old sailors' proverb |
+| Kentrios | the farmer who found the statue | after the farmer who found the Aphrodite of Melos in 1820 |
+| Melanippos | the obsidian knapper | "black horse"; black glass |
+| Myrtis, Kalchedon | the boathouse family | a Boeotian poet's name; the city at the Bosporus's mouth |
+| Kimolos, Theion | Melos's trainers | the next island over; sulphur, which Melos mined, and "divine" |
+| Kymaios, Antalkidas, Nikandros, Hagne | Route 22's trainers | "of the wave"; the Spartan admiral of the King's Peace; a Hellenistic poet; "pure" |
+| Molybdos, Ochros, Psephos, Kassiteros | Titanborn | lead, ochre, pebble, tin: earth-words, clear of Phase 2's and LABYRINTH's |
+| Axylos | Skandeia's xenia host | the *Iliad*'s Axylos, who lived by the road and welcomed everyone |
+| Skyllias, Bathykleia | the divers | the diver of Herodotus 8.8; "glory of the deep" |
+| Euodia | the perfumer | "sweet scent" |
+| Nikarete | the net-mender | a classical woman's name |
+| Lithos | her grandson | LABYRINTH's Ring IV Titanborn, given a home (Open questions 9) |
+| Phereklos | the shipwright | the shipwright of Paris's ships (*Iliad* 5.59–64) |
+| Teukros, Theodote | the Agora stallkeepers | classical names |
+| Philinna | the fish stall | a classical name; one of E7's shy villagers |
+| Eudoros, Kerdon | the voyage's trainers | a Myrmidon captain; "gain" |
+| Amphitos, Skopas, Pontinos | Foam Road trainers | classical; the Parian sculptor; "of the sea" |
+| Philotes, Kalamis, Kolymbos | spring and cave trainers | "affection"; "reed"; "diver" |
+| Charis | the temple guide | "grace" |
+| Anthousa, Rhodanthe | Aphrodite's acolytes | "flowering"; "rose-flower" |
+| Galatea | the Hierophant | the bible's |
+| Pygmalion | her husband, the sculptor | Ovid's sculptor, whose statue woke |
+| Peristera | the dove-keeper | the nymph Aphrodite turned into a dove |
+| Leukippe | the mirror-polisher | "white mare"; the heroine of a Greek novel |
+| Eumelos | the orchardist | a Homeric name, with *melon*, apple, inside it |
+| Lysis | the shy potter | Plato's dialogue on friendship |
+| Krenaia | the Naiads' priestess | *krene*, a spring |
+| Myles | the miller | the Lakonian Myles who invented the millstone |
+| Lykidas, Kerinthos, Mopsos, Thestylis | the falls' trainers | Theocritus's goatherd; "bee-bread"; the Argonauts' bird-seer; Theocritus's reaper girl |
+| Bathyllos, Euthykles, Myrsine | Route 23 trainers | a classical name; "well-famed"; "myrtle" |
+| Ankyra, Pothos | the trade Pokémon | "anchor"; "longing", one of the Erotes |
+
+## Names introduced on Knossa
+
+LABYRINTH's names (Ariadne, Daedalus, Asterion, Sarpedon, Kydon, Akakallis, Xenodike, Lithos, Koniortos, Sideros, Chalkos, Pelos, Enkelados, Mimas, Alkyoneus, Porphyrion, Klytios, Number Four, Number Nine) stand. These are new. All are Greek-rooted and clear of the Lazarus avoid-list.
+
+| Name | Who or what | Root |
+|---|---|---|
+| Akestor | healer, Amnisos | "healer", a Homeric name |
+| Anthousa | stallkeeper, Amnisos | "flowering"; she sells saffron |
+| Lykastos | knucklebones champion, Amnisos | a Cretan city and its founder |
+| Kressa, Dorion | the tavern's regulars | "the Cretan woman"; a classical name |
+| Aithon | xenia host, Amnisos | the false name Odysseus gave himself as a Cretan (*Odyssey* 19) |
+| Euanthe | Sarpedon's wife, a retired bull-leaper | "fair-flowering" |
+| Polypos | octopus fisher, Amnisos | *polypous*, octopus |
+| TELCHIS | the traded Telkanvil's nickname | the Telchines, the sea-smiths of Crete and Rhodes |
+| Bombos | the girl's Melibee | *bombos*, a buzz |
+| Gennaia | keeper of the Cave of Eileithyia | *genna*, birth |
+| Milon | herder, the Bull Road | Milon of Kroton, who carried a calf every day until it was a bull |
+| Lampos | Milon's bull | "bright", a name for a horse of the dawn |
+| Bombylia | beekeeper, the Bull Road's hut | *bombylios*, a bumblebee |
+| Kerinthe, Propolis | Bull Road beekeepers | *kerinthos*, bee-bread; *propolis*, bee glue |
+| Euphemos, Iphitos, Glauke | bull-leapers | Homeric names: "good gift", "mighty", "gleaming" |
+| Phaistia | Minoan priestess, the palace approach | Phaistos, Crete's second palace |
+| Keramos, Gypsos | Titanborn, the North Entrance | potter's clay; gypsum, the palace's stone |
+| Tephra, Sinopos | Titanborn scouts, Ring II | volcanic ash; red ochre |
+| Anthrakos, Porinos, Argillos, Smyris | Titanborn, Ring VI's alarm pool | coal, poros stone, clay, emery |
+| Epimenides | the sage asleep in the Idaean Cave | the Cretan seer who slept 57 years in a cave of Zeus, and said "Cretans are always liars" |
+| Battos, Idaia, Agesilaos | Mount Ida's trainers | a goatherd in Theocritus; "of Ida"; a Spartan king |
+| The Double Axe | Amnisos's tavern | *labrys* |
+| The cradle shrine | the Idaean Cave's mouth | the dex team's name |
+
+## Names introduced in Lakonia
+
+All Greek-rooted and clear of the Lazarus avoid-list. Real Spartans where a real Spartan fits.
+
+| Name | Who or what | Root |
+|---|---|---|
+| Gytheion, Kranai | Lakonia's port; the islet | the real port; the islet where Paris and Helen stopped |
+| Elaphonisos | the islet in Route 24, the strait off Malea | the real islet off Cape Malea, with a drowned Bronze Age town (Pavlopetri) beside it |
+| Porphyris | the dyer, Gytheion | *porphyra*, the purple dye |
+| Lysandros | the old harbor-master | the Spartan admiral who won the Peloponnesian War |
+| Klymene | the shrine-keeper on Kranai | one of Helen's maids in the *Iliad* (3.144) |
+| Timaia | a cadet's mother, Gytheion | a Spartan woman's name |
+| Teleklos | her son, a cadet | an early Spartan king |
+| Halieus, Eurybiades, Skyllis, Kolymbe | Route 24 trainers | "fisherman"; the Spartan admiral at Salamis; the diver of Skione who cut the Persians' anchors; "diver" |
+| Agiatis, Isadas, Phoibidas | Route 25 cadets | a Spartan queen; the youth who fought unarmored and was crowned and fined for it; a Spartan commander |
+| Alpheios, Theodora, Amompharetos | Route 25 trainers | the river; "gift of god"; the captain who wouldn't retreat at Plataea |
+| Amyklai, Polyboia | the sanctuary; its priestess | the real sanctuary; Hyakinthos's sister |
+| Vapheio | the beehive tomb | the real Lakonian tholos with the gold bull-catching cups |
+| Lampito | Rhea's real name | from STORY (a Spartan queen's name) |
+| Agis, Kyniska | the names on the stelai (one painted, one not) | UNDERWORLD's proposal for Kleon's elder siblings |
+| Gration, Pallas | Gigas | Giants of the Gigantomachy (Artemis killed Gration; Athena flayed Pallas) |
+| Kachlex, Plinthos, Aulax, Gaieos, Borboros | Titanborn | "gravel", "brick", "furrow", "earthen", "mire", in the Titanborn's earth-word style |
+| Dexippos | the syssition's cook | a Spartan name |
+| Archidamos | the agoge's boys' master | a line of Spartan kings |
+| Lykiskos, Hagnon, Eudamidas | the gauntlet's cadets | Greek and Spartan names |
+| Hipposthenes | the old wrestler | the real Spartan who won six Olympic wrestling crowns |
+| Kleta | Orthia's priestess | one of the Spartans' two Graces |
+| Chilon | the sage | the Spartan sage credited with "Know thyself" |
+| Lichas | Lakonia's host | the Spartan who won at Olympia under a false name |
+| Anaxilas, Anaxandros | Route 26 cadets | Spartan names; Anaxandros was an Agiad king (renamed from Antalkidas at assembly, which Kythera uses) |
+| The Platanistas, the Phoibaion | Route 26's island and altar | the real plane-tree island where Spartan teams fought, and the altar beside it |
+| Akanthis | the lake's fowler | "goldfinch" |
+| Kyknos, Melampous, Donax | Lake Stymphalia trainers | "swan"; the seer who understood birds; "reed" |
+| Dienekes, Othryades, Sthenelaidas | scouts on Routes 26 and 27 | the "fight in the shade" Spartan; the last Spartan at the Battle of the Champions; the ephor of the shortest war speech |
+| Tityos | Route 27 shepherd | a giant of myth, here a goatherd |
+| Karyai | the spring on Route 27 | the real border town whose dancing maidens became the caryatids |
+| The Sown Field | the battle school's ploughed strip | Kadmos's sowing of the dragon's teeth |
+| The reed-bed nests, the deep reeds | Lake Stymphalia's two named spots | — |
+
+## Names introduced in Delphoi
+
+All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, no Lazarus places or cast; "Pythios Town" is on it, and nothing here is named for Pytho).
+
+| Name | Who or what | Root |
+|---|---|---|
+| Hieron | warden of the sacred plain | "holy" |
+| Euangelos | Pilgrim | "good news" |
+| Psammos | Titanborn | "sand", an earth-word, as Team Titan's grunts' names are |
+| Phayllos | Runner | the athlete of Kroton who won three times at the Pythian games |
+| Plinthis | Titanborn | *plinthos*, a brick |
+| Kisseris | Titanborn | "pumice" |
+| Chomas | Titanborn | *choma*, a heaped mound of earth |
+| Ochthos | Titanborn (the quiet one) | "a bank, a mound" |
+| Asbolos | Titanborn | "gypsum" |
+| Agrios | Gigas | a Giant the Fates killed with bronze clubs |
+| Ephialtes | Gigas | the Giant Apollo shot in the left eye |
+| Thoas | Gigas | the other Giant the Fates killed |
+| Chrysis | Melissa | "golden" |
+| Eudoros | the temple boy | "good gift" |
+| Onomakritos | Prophetes | the oracle-collector of Athens caught adding lines to old oracles |
+| Pherenike | Melissa | "bringer of victory" |
+| Bremousa | Melissa | from *bremo*, to hum or roar |
+| Orsippos | Runner | the Megarian runner who first ran the stadium race unclothed |
+| Iamos | Augur | the seer-son of Apollo, founder of a line of seers |
+| Chrysothemis | Kitharode | the first winner of the Pythian singing contest |
+| Aipolos | Goatherd | "goatherd" |
+| Oreias | Mountaineer | "of the mountains" |
+| Korykia | Pilgrim | the nymph of the Korykian cave |
+| Epione | Delphoi's healer | the wife of Asclepius, "soothing" |
+| Lampsakos | Delphoi's stallkeeper | a Greek city on the Hellespont, as a family name |
+| Hagne | eldest melissa | "pure" |
+| Theokles | an old prophetes | "glory of the god" |
+| Theoxena | the Pilgrims' House's host | "a god's guest" |
+| Philagros | a pilgrim | "lover of the fields" |
+| Koretas, Aix | a goatherd and his granddaughter | the goatherd who found the Oracle; "goat" |
+| Aristion | keeper of Astyra's treasury | the Athenian hoplite on the famous grave stele |
+| Eupolis | keeper of the Siphnian treasury | classical name |
+| Polemon | guide at the Lesche | the ancient guide-writer who described Delphi's treasuries |
+| Herophile | the first prophetess, on the Rock of the Sibyl (lore) | the Delphic Sibyl's name |
+| Kleobis, Biton | the marble brothers (lore) | the real statues at Delphi |
+| PROPHET | the traded Kerazap's nickname | — |
+
+## Names introduced
+
+| Name | Who | Notes |
+|---|---|---|
+| **Medon** | The first Archon, seen in the Pool of Mnemosyne's memory | STORY §2. Son of King Kodros. Named in prose only by the Measurer; his name box reads MEDON. |
+
+No other new names: every speaker here is already cast (STORY §2), and the frozen are named only where they were before (Petros, Amathos, Lysimachos, Halia, Ione, Kerykos, Thespis, Kallisto, Chloe, Talos, Daedalus, Ariadne, Gylippos, Galatea). The Fates' name boxes are SPINNER, MEASURER and CUTTER (decision S10).
+
+## Names introduced on the League road
+
+All Greek-rooted, checked against `design/` and the other Act III parts for reuse, and against LAZARUS.md. Several were renamed to clear names the sibling parts had already used (Open questions 17).
+
+| Name | Who | Root and reason |
+|---|---|---|
+| Thrasyllos | Astyra's epistates for the day | A common Athenian name; "bold". The epistates was chosen by lot for one day. |
+| Eutychos | Astyra's grain-dealer | "Lucky" |
+| Amphilytos | Astyra's out-of-work seer | The seer who prophesied to Peisistratos (Herodotus 1.62) |
+| Mnasippos | captain of the Archon's guard on Route 29 | "Mindful of horses"; a plain soldier's name |
+| Pyrrhis | the shepherdess on the Parnassos saddle | From Pyrrha, who threw the stones after the flood |
+| Lykos | a SHEPHERD on Route 29 | "Wolf"; the wolves of Lykoreia |
+| Ampyx | an AUGUR on Route 29 | The father of Mopsos the Lapith seer |
+| Maron, Prokles | the garrison's captain and his brother | Maron and his brother fought best at Thermopylai (Herodotus 7.227); Prokles, a founder of Sparta's royal houses. Maron's real brother, Alpheios, is a Lakonian fisher's name in the Lakonia part, so it isn't reused. |
+| Gorgo | Thermopylai's bath-keeper | Leonidas's wife, the sharpest tongue in Lakonia |
+| Eurydemos | Thermopylai's goatherd | The name of the betrayer's father (Herodotus 7.213) |
+| Aix | his goat | "Goat". He was tired. |
+| Pylagoras | clerk of the Amphiktyons | The title of a delegate to the Amphiktyonic council |
+| Megistias | Thermopylai's innkeeper | The seer at Thermopylai who saw the end and stayed (Herodotus 7.221) |
+| Leon, Ariston, Lachares, Alkamenes | VETERANs | Lakonian soldiers' names |
+| Ischys | a HARVESTER on Route 30 | A Thessalian of myth, "strength" |
+| Atrax | a RUNNER on Route 30 | A Thessalian town and its founder |
+| Phylakos | a GOATHERD on Route 30 | A Thessalian king, "guardian" |
+| Kleomenes | a Lakonian CADET | A Spartan king's name |
+| Arimnestos | a Skiritan SCOUT | The Spartan who killed Mardonios at Plataia |
+| Peirithoos, Hippodameia | the Lapith farmer and his wife | The Lapith king and his bride, whose wedding the centaurs broke up |
+| Koronos | the Archon's warden at Tempe | A Lapith king of Thessaly |
+| Philyra | Tempe's healer | Chiron's mother, who became a linden tree |
+| Enipeus | Tempe's river-keeper | A Thessalian river god |
+| Kroke | the ex-Titanborn doubter at Tempe | *krokē*, shingle: an earth-word, as Titanborn names are |
+| Sitalkes, Thinos | ex-Titanborn on Route 29 and in the ice caves | Sitalkes, a Thracian king; *this, thinos*, a sand-heap |
+| Eurytos | a Gigas on the Crags | One of the Giants of the Gigantomachy (Apollodorus 1.6.2); LABYRINTH's five Gigas names and the Delphoi part's are untouched |
+| Agathon, Damaris, Epikles, Oribasios, Timandra, Hippias, Oreithyia, Kineas | MOUNTAINEERs and a PILGRIM | Oribasios "mountain-walker"; Oreithyia, the girl Boreas carried off |
+| Kleobis and Biton | the brother MOUNTAINEERs | Named for the statues at Delphoi, the brothers who drew their mother's cart (Herodotus 1.31) |
+| Phrynis, Euxenos | KITHARODEs | Phrynis, the kitharode who added strings; Euxenos, "good to guests" |
+| Theoris, Praxilla | PILGRIMs | Theoris, "a sacred embassy"; Praxilla, a Sikyonian poet |
+| Erinna | an AUGUR | A poet |
+| Bathykles | a FISHER | "Deep-glory" |
+| Eschara | the hearth-keeper in the ice caves | *eschara*, the hearth |
+| Chionis | the snow-watcher | *chiōn*, snow; also a Spartan runner |
+| Eunomia, Dike, Eirene | the three Horai at the Gate | Hesiod's Hours, daughters of Zeus and Themis: Order, Justice and Peace (*Theogony* 901) |
+| The laurel boy | Tempe | The *daphnephoros* of the Septerion, who carried laurel from Tempe to Delphoi every eight years |
+| The mate, the helmsman | the Gulf ferry | the *Hymn to Dionysus*'s crew; only the helmsman knew a god |
+
+Places named: Lykoreia, the saddle's tarn, the hot gates (the West, Middle and East Gates), Anthela, the Phokian wall, the Anopaia path, the Lapiths' table, Lake Boibeis, Chiron's ledge, the first laurel, the Low Pasture, the shrine of the Twelve, the Weeping Cliff, the Grotto of Icicles, Medon's storeroom, the shrine of Boreas, the Gate of the Horai.
+
+## Names introduced
+
+| Name | Who or what | Root and notes |
+|---|---|---|
+| **Brasidas**, **Themistokles**, **Hypatia**, **Olympias** | The four Pantheon seats | PITCH §3. Historical: the Spartan general (d. 422 BC), the Athenian admiral of Salamis, the Alexandrian philosopher, and Alexander's mother. |
+| **Mnemon** | The Hall of Heroes' mason | *mnēmōn*, "one who remembers": the title of the officials who kept a Greek city's records. Clear of LAZARUS and unused in `design/`. |
+| **Argileonis** | Brasidas's mother (named only in this file's notes; in dialogue she is "my mother") | Plutarch, *Sayings of Spartan Women* |
+| **The Hall of Shields**, **the Hall of Ships**, **the Hall of Questions**, **the Hall of Eyes** | The four Pantheon halls, in conversation and on the map-name popup | Plain English, like the Laurels |
+| **The Hall of Heroes** | The Hall of Fame | TERMS.md's term; a *heroön* in the room description |
+| **Pylos**, **the great fleet** | Places in Brasidas's and Themistokles's stories | Pylos is named; Salamis and Persia are not, so Aethos stays its own world |
+| **The Archon's Seal** | Key item | The owl seal Iapetos forged with his hook |
+
+Medon, Kodros, Aristeides and Lysimachos are STORY's.
+
+---
+
+# Part 8. Flags and vars
+
+## Kythera's flags
+
+Names only, `FLAG_ICHOR_*` in the IchorSave bank (00_front); none is claimed yet.
+
+**Story**
+- `VAR_ICHOR_ACT3` 1 (boarding at Kaldera), 2 (landing at Skandeia), 3 (the Foam Laurel), 4 (the Horn). The Knossa writer sets 5 at Amnisos.
+- `FLAG_ICHOR_DAPHNE_SAILED_ASTYRA`, `FLAG_ICHOR_REACHED_MELOS`, `FLAG_ICHOR_CROSSED_ROUTE22`
+- Melos: `FLAG_ICHOR_MELOS_RITE`, `FLAG_ICHOR_MELOS_OBSIDIAN_LUMP` (the fixed dig), `FLAG_ICHOR_VISITED_MELOS` (for Nausikles's lanes; Melos is not a fly target, Open questions 18)
+- The call after Knossa: `FLAG_ICHOR_SKANDEIA_CALL`, `FLAG_ICHOR_SAILED_FOR_GYTHEION`, `FLAG_ICHOR_HIDE_ALETHEA_CALL`
+- `FLAG_ICHOR_VISITED_SKANDEIA` (fly; Open questions 2 on Paphia)
+- `FLAG_ICHOR_EUPLOIA_KEPT`, `FLAG_ICHOR_ALETHEA_REJOINED`, `FLAG_ICHOR_BAD_GUESTS_GONE`
+- `FLAG_ICHOR_SAW_KALLIRHOE`, `FLAG_ICHOR_ALETHEA_SAILED_KNOSSA`
+- `FLAG_ICHOR_GALLERY_DONE`, `FLAG_ICHOR_GALATEA_FALLS_HINT`
+- `FLAG_ICHOR_SAILED_FOR_KNOSSA`
+- `FLAG_ICHOR_SAW_GEAR_BOX`
+
+**Laurel, relic, star chart**
+- `FLAG_BADGE07_GET` (the Foam Laurel)
+- `FLAG_ICHOR_GOT_HORN_OF_ACHELOUS` (relic range, SYSTEMS §1)
+- `FLAG_ICHOR_CONSTELLATION_CYGNUS` (constellation range, SYSTEMS §8 #6)
+- `FLAG_ICHOR_DAEDALUS_PAGE_7` (pages range, LABYRINTH §13)
+
+**Systems**
+- Herm: `FLAG_ICHOR_HERM_KYTHERA`
+- Xenia: `FLAG_ICHOR_XENIA_BROKEN_RING_1` (xenia range; the chain's later links are Amnisos's, Lakonia's and Delphoi's)
+- Theoxenia E1: `FLAG_ICHOR_THEOXENIA_HERMES`, `FLAG_ICHOR_TALARIA_LENT`, `FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD`, `FLAG_ICHOR_HIDE_HERMES_PAPHIA` (theoxenia range). Reads `FLAG_ICHOR_THEOXENIA_DEMETER`, `_HEPHAESTUS`, `_POSEIDON`.
+- Sherds: `FLAG_ICHOR_SHERD_PARIS_1` … `_4` (sherd range, amphora #11 at `FLAG_ICHOR_SHERDS_START + 40`), `FLAG_ICHOR_AMPHORA_PARIS` (amphora range)
+- Knucklebones: `FLAG_ICHOR_KNUCKLEBONES_SKANDEIA`, `FLAG_DAILY_ICHOR_KNUCKLEBONES_SKANDEIA`
+- The gallery: `FLAG_ICHOR_GALLERY_MIRROR_P2`, `_P3` (or 2 bits each in a bank var, Part 5)
+- The vault: `FLAG_ICHOR_MINOAN_VAULT_KYTHERA` (LABYRINTH §13's `MINOAN_VAULT_*` set)
+- Daily prayer: `FLAG_DAILY_ICHOR_PRAYED_APHRODITE` (exists in Phase 2's list)
+
+**Gifts and trades**
+- `FLAG_ICHOR_GOT_TM_DAZZLING_GLEAM`, `FLAG_ICHOR_GOT_TM_LIQUIDATION`, `FLAG_ICHOR_GOT_TM_STONE_EDGE`
+- Melos: `FLAG_ICHOR_GOT_ROSE_INCENSE`, `FLAG_ICHOR_GOT_DAMP_ROCK`
+- `FLAG_ICHOR_GOT_SOOTHE_BELL`, `FLAG_ICHOR_GOT_METRONOME`, `FLAG_ICHOR_GOT_MIRROR_HERB`, `FLAG_ICHOR_GOT_SHINY_STONE_PYGMALION`, `FLAG_ICHOR_GOT_EROSIE_EGG`, `FLAG_ICHOR_GOT_EUMELOS_STATER`
+- `FLAG_ICHOR_LITHOS_HOME`
+- In-game trades: `FLAG_ICHOR_TRADED_TELKANVIL` (Skandeia), `FLAG_ICHOR_TRADED_HIMEROW` (Paphia). Two new entries in `src/data/trade.h`.
+
+**Object hide flags**
+- Alethea: `FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA`, `_FOAM_ROAD`, `_KALLIRHOE`, `_PAPHIA` (each shown and hidden in turn through III-1C2 to III-1F)
+- The honey boat: `FLAG_ICHOR_HIDE_HONEY_BOAT`
+- The Titans: `FLAG_ICHOR_HIDE_MOLYBDOS`, `FLAG_ICHOR_HIDE_BAD_GUESTS`, `FLAG_ICHOR_HIDE_KASSITEROS`, `FLAG_ICHOR_HIDE_SKANDEIA_PORTERS` (porters and Kassiteros go at `VAR_ICHOR_ACT3` ≥ 6)
+- The Kronist: `FLAG_ICHOR_HIDE_KRONIST_SKANDEIA` (gone after the climax)
+- Lithos: `FLAG_ICHOR_HIDE_LITHOS_HOME` (shown at `VAR_ICHOR_ACT3` ≥ 19)
+- The deck's Act III objects: `FLAG_ICHOR_HIDE_DECK_ACT3`
+- Daphne at Kaldera: covered by `FLAG_ICHOR_DAPHNE_SAILED_ASTYRA`
+
+**Item balls and hidden items:** about 32, named as in Part 6.
+
+**Temp vars**
+- `VAR_TEMP_1`: the gallery room (Part 5).
+
+**Vanilla flags used:** `FLAG_BADGE07_GET`, `VAR_STARTER_MON` (for Galatea's matchup text only, none needed).
+
+## Flags and vars
+
+Engine: claim these as `FLAG_ICHOR_*` in the IchorSave bank (00). LABYRINTH §13's flags all stand and are not repeated in full: its relics, shortcuts and gates, pages and rewards, story flags, disguise and bell, ring gates, vaults, leap prizes and hide flags. This region adds the ones below.
+
+**`VAR_ICHOR_KNOSSA`** (LABYRINTH §13: "Story state, 0–20"). The values, proposed:
+
+| Value | Set when | Beat |
+|---|---|---|
+| 0 | not yet arrived | — |
+| 1 | you land at Amnisos | III-3A |
+| 2 | the North Entrance's grunts are beaten | III-3C |
+| 3 | Ariadne, Scene A | III-3D |
+| 4 | the first clean leap | III-3E |
+| 5 | the Thread, Scene B | III-3E |
+| 6 | Ring I's gate brazier catches | III-3F |
+| 7 | Ring II cleared | III-3G |
+| 8 | Daedalus and the Labrys, Scene D | III-3H |
+| 9 | past Enkelados's checkpoint | III-3I |
+| 10 | Kleon humbled, Scene E | III-3J |
+| 11 | the Helm, Scene F | III-3J |
+| 12 | Ring V's south stair | III-3J |
+| 13 | the archive, Scene H | III-3K |
+| 14 | Hyperion beaten, Scene G | III-3K |
+| 15 | Ariadne joins, Scene I | III-3L |
+| 16 | the crane dance | III-3L |
+| 17 | Rhea turns the house, Scene J | III-3M |
+| 18 | out through the threshold | III-3N |
+| 19 | the Icarus Shaft, Scene L (`VAR_ICHOR_ACT3` = 6) | III-3P |
+| 20 | you sail for Gytheion | III-4 |
+
+Values 13 and 14 can come in either order (the Hall of Dials allows both); scripts that need both test the two flags, not the var.
+
+**`VAR_ICHOR_ACT3`:** 5 at III-3A; 6 at III-3P (00's table).
+
+**Story, new in this region**
+- `FLAG_ICHOR_VISITED_AMNISOS` (fly; heal location the Asclepeion)
+- `FLAG_ICHOR_MILON_PRACTICE`
+- `FLAG_ICHOR_MISTRESS_HONEY`
+- `FLAG_ICHOR_ALETHEA_TOLD` (the night after the raid)
+- `FLAG_ICHOR_DAPHNE_LETTER_KNOSSA` (III-4)
+- `FLAG_ICHOR_SAILED_FOR_GYTHEION`
+- `FLAG_ICHOR_FOSSIL_DUG`, `FLAG_ICHOR_FOSSIL_GIVEN`, `FLAG_ICHOR_FOSSIL_REVIVED`
+- `FLAG_ICHOR_AMALTHEA_HORN` (Capricornus)
+
+LABYRINTH §13's story flags used by the scenes above: `ARRIVED_KNOSSA`, `MET_ARIADNE`, `FIRST_LEAP`, `GOT_THREAD`, `MET_DAEDALUS`, `GOT_LABRYS`, `DAEDALUS_LIFT`, `NUMBER_NINE_FOUND`, `ENKELADOS_PASSED`, `KLEON_HUMBLED`, `GOT_HELM`, `ARCHIVE_TABLET`, `GOT_ELPIS_TABLET`, `ARIADNE_JOINED`, `DANCE_DONE`, `ASTERION_FREED`, `PHAEDON_UNMASKED`, `SHOWED_PHAEDON_TABLET`, `RHEA_MERCY`, `TURNING_DONE`, `SHOWED_KLEON_TABLET`, `ICARUS_FLIGHT`, `CAUGHT_ASTERION`, `BULL_ROAD_VAULT`, `IDA_GATE`, all as `FLAG_ICHOR_*`. `FLAG_ICHOR_GOT_ELPIS_TABLET` is the flag for 00's item `ITEM_SEALED_TABLET`; `FLAG_ICHOR_ARCHIVE_TABLET` for `ITEM_KLEONS_DRAFT`.
+
+**Gifts and households**
+- `FLAG_ICHOR_GOT_KYDON_HONEY`, `FLAG_ICHOR_GOT_KYDON_LEFTOVERS`
+- `FLAG_ICHOR_KNUCKLEBONES_AMNISOS` (the champion; one of SYSTEMS §9's six), `FLAG_ICHOR_BONES_KRESSA`, `FLAG_ICHOR_BONES_DORION`
+- `FLAG_ICHOR_BROKEN_RING_2` (SYSTEMS §10's chain, link 2; the xenia range)
+- `FLAG_ICHOR_GOT_FOCUS_BAND_KNOSSA`
+- `FLAG_ICHOR_TRADED_TELKANVIL` (a new entry in `src/data/trade.h`)
+- `FLAG_ICHOR_GOT_BOMBYLIA_HONEY`
+- `FLAG_ICHOR_GOT_EILEITHYIA_EGG`
+
+**Systems**
+- Herm: `FLAG_ICHOR_HERM_KNOSSA` (the Bull Road's great herm; the herm range)
+- Constellations: Taurus, Corona Borealis, Pleiades, Capricornus (the constellation range)
+- Amphora #12's four sherds (the sherd range, `+4×12`): Amnisos's beach, the vineyard's lowest terrace, the Theatral Area, the cradle shrine
+- Daily dig: the Bronze Heel's tide pools, Amnisos's beach (the daily dig range)
+- Rites: `FLAG_DAILY_ICHOR_PRAYED_HERA` at the Cave of Eileithyia; Favor per SYSTEMS §3
+
+**Object hide flags**
+- Alethea: `FLAG_ICHOR_HIDE_ALETHEA_AMNISOS_QUAY`, `_HEEL`, `_MEGARON`, `_COURT`
+- Kleon: `FLAG_ICHOR_HIDE_KLEON_KNOSSA` (LABYRINTH's Kleon hide flags cover the rings)
+- The palace: `FLAG_ICHOR_HIDE_PALACE_GRUNTS` (with `FLAG_ICHOR_TURNING_DONE`)
+- Amnisos: `FLAG_ICHOR_HIDE_AMNISOS_VETERAN`, `FLAG_ICHOR_HIDE_TITAN_SHIPS` (the moored ships are metatiles; the flag swaps them on load)
+- The Bull Road: `FLAG_ICHOR_HIDE_BULL_ROAD_GRUNTS`
+- Daphne's gull: `FLAG_ICHOR_HIDE_DAPHNE_GULL`
+
+**Battle**
+- `FLAG_ICHOR_NO_WHITEOUT` for Kleon at the heart, so losing to him replays the chamber instead of whiting out (as Phase 2 does for his rival battles).
+
+**Temp vars:** LABYRINTH §13's (`VAR_TEMP_1` dance progress; `VAR_TEMP_2`, `_3` carried flame; `VAR_TEMP_4` leap count; `VAR_TEMP_5` Turning pulses).
+
+**Save data:** `IchorSave.thread` (LABYRINTH §5.1) and `IchorSave.litBraziers` (Ring I's six, Ring III's, Ring VI's forge).
+
+## Lakonia's flags
+
+Engine: claim these as `FLAG_ICHOR_*` in the IchorSave bank once this session's range is assigned. Lakonia sets `VAR_ICHOR_ACT3` to 7, 8, 9 and 10 (00_front's table) and needs no new var.
+
+**Story**
+- `FLAG_ICHOR_ARRIVED_GYTHEION`, `FLAG_ICHOR_VISITED_GYTHEION` (fly; Gytheion's healer is its heal location), `FLAG_ICHOR_GYTHEION_DUSK`, `FLAG_ICHOR_SAW_LAKONIA`, `FLAG_ICHOR_LAKONIA_ARRIVED`, `FLAG_ICHOR_VISITED_LAKONIA` (fly)
+- `FLAG_ICHOR_RHEA_UNMASKED`, `FLAG_ICHOR_IAPETOS_LAKONIA_DONE`, `FLAG_ICHOR_ALETHEA_READ_TABLET`, `FLAG_ICHOR_KLEON_GOT_KOURODIN`, `FLAG_ICHOR_KLEON_LAKONIA_DONE`, `FLAG_ICHOR_LAKONIA_PARTED`
+
+**Systems**
+- Herms: `FLAG_ICHOR_HERM_ROUTE25` (Amyklai), `FLAG_ICHOR_HERM_ROUTE26` (past the Platanistas), `FLAG_ICHOR_HERM_ROUTE27` (the Karyai spring), in the herm range. These replace 00_front's `_EUROTAS` and `_ROUTE8`.
+- Prophecy: `FLAG_ICHOR_PROPHECY_8` (`FLAG_ICHOR_PROPHECY_START` + 7)
+- Theoxenia: `FLAG_ICHOR_THEOXENIA_HESTIA`, `FLAG_ICHOR_THEOXENIA_ARES` (SYSTEMS §10's names); their hide flags `FLAG_ICHOR_HIDE_HESTIA_FARMHOUSE`, `FLAG_ICHOR_HIDE_ARES_VETERAN`, `FLAG_ICHOR_HIDE_AMBUSH_CHOMA`, `FLAG_ICHOR_HIDE_AMBUSH_KERAMOS`
+- Xenia: `FLAG_ICHOR_XENIA_LAKONIA`, `FLAG_ICHOR_BROKEN_RING_3`
+- Daily prayers: `FLAG_DAILY_ICHOR_PRAYED_APOLLO` (Amyklai), `FLAG_DAILY_ICHOR_PRAYED_ARTEMIS` (Orthia)
+- Minoan vault: `FLAG_ICHOR_MINOAN_VAULT_5` (LABYRINTH §13's name; Vapheio)
+- Omens: the Sporadon swarm and the Lernip rain entry use `IchorSave.omen`; `FLAG_ICHOR_HEARD_LERNIP_RUMOR` forces the next day's omen once
+
+**Gifts and households**
+- `FLAG_ICHOR_GOT_KINGS_ROCK_GYTHEION`, `FLAG_ICHOR_TRADED_KYNOKETOS`, `FLAG_ICHOR_GOT_SHINY_STONE_KRANAI`
+- `FLAG_ICHOR_CARRYING_FIG_CAKE`, `FLAG_ICHOR_DELIVERED_FIG_CAKE`, `FLAG_ICHOR_GOT_LEFTOVERS_GYTHEION`
+- `FLAG_ICHOR_GOT_HEAT_ROCK_AMYKLAI`
+- `FLAG_ICHOR_GOT_SCYTALE_STRAP`, `FLAG_ICHOR_READ_SCYTALE`
+- `FLAG_ICHOR_GOT_TM_BULK_UP`, `FLAG_DAILY_ICHOR_BLACK_BROTH`
+- `FLAG_ICHOR_AGOGE_GAUNTLET`, `FLAG_ICHOR_GOT_FOCUS_SASH`
+- `FLAG_ICHOR_GOT_CHOICE_BAND`
+- `FLAG_ICHOR_ORTHIA_CHEESES`, `FLAG_ICHOR_GOT_SCOPE_LENS`
+- `FLAG_ICHOR_CHILON_QUIZ`, `FLAG_ICHOR_GOT_WISE_GLASSES`
+- In-game trade: one new entry in `src/data/trade.h` (Kynoketos MALEA for a Karkitox)
+
+**Wild spots**
+- `FLAG_DAILY_ICHOR_ALEKROW_YARD` (the cadets' yard), `FLAG_DAILY_ICHOR_GEOGRIP_SANDS` (the daily roll), `FLAG_DAILY_ICHOR_LERNIP_ROLLED`, `FLAG_ICHOR_CAUGHT_LERNIP`
+
+**Object hide flags**
+- Alethea: `FLAG_ICHOR_HIDE_ALETHEA_GYTHEION`, `FLAG_ICHOR_HIDE_ALETHEA_LAKONIA`
+- Kleon: `FLAG_ICHOR_HIDE_KLEON_LAKONIA` (and his house and ring objects, shown by the story flags above)
+- Rhea: `FLAG_ICHOR_HIDE_RHEA_LAKONIA` (hidden after III-5J; shown again after the climax by `VAR_ICHOR_ACT3` ≥ 19, under house arrest)
+- Iapetos's party: `FLAG_ICHOR_HIDE_IAPETOS_LAKONIA`, `FLAG_ICHOR_HIDE_GIGAS_LAKONIA`, `FLAG_ICHOR_HIDE_DOUBTERS_LAKONIA` (Kachlex and Plinthos, hidden after the climax)
+- Brasidas: `FLAG_ICHOR_HIDE_BRASIDAS_LAKONIA`
+- Routes 26 and 27: `FLAG_ICHOR_HIDE_TITAN_COLUMNS` (set by the climax); Lake Stymphalia: `FLAG_ICHOR_HIDE_BORBOROS` (after the climax; his trainer flag lets the boardwalk be crossed once he's beaten)
+- The farmhouse family: `FLAG_ICHOR_HIDE_FARMHOUSE_FAMILY` (cleared after the climax)
+
+**Battle**
+- `FLAG_ICHOR_NO_WHITEOUT` (the slice's), for Kleon's clean battle.
+
+**Temp vars**
+- `VAR_TEMP_1`: Orthia's cheeses; the gauntlet's run; Chilon's quiz.
+- `VAR_TEMP_2`, `VAR_TEMP_3`: the carried flame (Hestia's test).
+
+**Vanilla flags used:** `FLAG_BADGE08_GET` (Polyboia's gift waits on the Sun Laurel), `VAR_STARTER_MON`.
+
+## Flags and vars for Delphoi
+
+Names only, claimed from this session's range later (00_front). `VAR_ICHOR_ACT3` takes 11, 12, 13, 14 and 15 here, as 00_front's table says.
+
+**Story**
+- `FLAG_ICHOR_SACRED_OLIVES_COLUMN`, `FLAG_ICHOR_GORGE_SENTRIES`
+- `FLAG_ICHOR_VISITED_DELPHOI` (fly), `FLAG_ICHOR_DELPHOI_ARRIVED`, `FLAG_ICHOR_DELPHOI_STADIUM_SCENE`
+- `FLAG_ICHOR_PYTHIAN_LIGHT_DONE`, `FLAG_ICHOR_PYTHIA_SPOKE`
+- `FLAG_ICHOR_MOM_SPRING`
+- `FLAG_ICHOR_OMPHALOS_OPEN`, `FLAG_ICHOR_OMPHALOS_NIGHT`
+- `FLAG_ICHOR_GAVE_FATES_HONEY`, `FLAG_ICHOR_CUT_THE_CHAINS`
+- `FLAG_ICHOR_FROZEN_HOUR` (set by `special Ichor_FrozenHourBegin`, engine E2)
+
+**Laurel and constellation**
+- `FLAG_BADGE08_GET` (the Sun Laurel), `FLAG_ICHOR_CONSTELLATION_CORVUS` (in the constellation range), `FLAG_ICHOR_GOT_TM_MYSTICAL_FIRE`
+
+**The rite**
+- `FLAG_ICHOR_APOLLO_DISC_0` … `_4`, `FLAG_ICHOR_APOLLO_BRAZIER`
+
+**Systems** (named by SYSTEMS.md)
+- Herm: `FLAG_ICHOR_HERM_KASTALIAN`
+- Desecrated altar: `FLAG_ICHOR_ALTAR_CLEANSED_SACRED_OLIVES`
+- Daily prayer: `FLAG_DAILY_ICHOR_PRAYED_APOLLO` (Phase 2 named it), `FLAG_DAILY_ICHOR_PRAYED_PAN` (Pan's shrine)
+- Laurel tree: `FLAG_DAILY_ICHOR_LAUREL_DELPHOI`
+- Ostrakon: one in `FLAG_ICHOR_OSTRAKA_START`'s range (Aristion's)
+- Named spots: `FLAG_DAILY_ICHOR_PYRAPOD_ALTAR`, `FLAG_DAILY_ICHOR_HYMNET_OMEN`, `FLAG_DAILY_ICHOR_PELYTHON_NICHE`
+
+**Gifts and households**
+- `FLAG_ICHOR_GOT_HIERON_OIL`, `FLAG_ICHOR_GOT_HIERON_BIG_ROOT`
+- `FLAG_ICHOR_GOT_MELISSAI_HONEY`, `FLAG_ICHOR_GOT_THEOKLES_STYLUS`, `FLAG_ICHOR_GOT_PHILAGROS_BELL`, `FLAG_ICHOR_KITHARODE_QUIZ`, `FLAG_ICHOR_SIPHNIAN_TITHE`, `FLAG_ICHOR_GOT_POLEMON_SPELL_TAG`
+- In-game trade: `FLAG_ICHOR_TRADED_KERAZAP_DELPHOI` (one new entry in `src/data/trade.h`)
+- Items: `FLAG_ICHOR_ITEM_KORYKIAN_LUCKY_EGG`, and the visible and hidden item flags of Part 6
+
+**Object hide flags**
+- `FLAG_ICHOR_HIDE_TITAN_COLUMN_OLIVES`, `FLAG_ICHOR_HIDE_HIERON_ROAD`
+- `FLAG_ICHOR_HIDE_GORGE_CAMP` (the whole muster's objects, set after the climax: the camp is struck)
+- `FLAG_ICHOR_HIDE_PYTHIA_PROCESSION`, `FLAG_ICHOR_HIDE_ALETHEA_DELPHOI`, `FLAG_ICHOR_HIDE_KLEON_STADIUM`, `FLAG_ICHOR_HIDE_RHEA_STADIUM`
+- `FLAG_ICHOR_HIDE_MOM_DELPHOI_SPRING`, `FLAG_ICHOR_HIDE_MOM_MELISSAI` (the inner room)
+- `FLAG_ICHOR_HIDE_PHEMONOE_TRIPOD`
+- The night of the Omphalos: `FLAG_ICHOR_HIDE_OMPHALOS_SCENE` (Kleon, Rhea, the two Gigas, Hyperion, Phaedon, the guard, the Archon, the court's Titanborn; cleared at III-8's start and kept for the Frozen Hour's tableau)
+- The Loom: `FLAG_ICHOR_HIDE_LOOM_FATES`, `FLAG_ICHOR_HIDE_LOOM_PHAEDON`, `FLAG_ICHOR_HIDE_LOOM_HYPERION`
+- After the climax: `FLAG_ICHOR_HIDE_PHILAGROS`, `FLAG_ICHOR_HIDE_OCHTHOS_GORGE`
+
+**Battle**
+- None. The Omphalos's partner battle whites out normally and replays.
+
+**Temp vars**
+- `VAR_TEMP_1` … `VAR_TEMP_8`: the temple's mirror facings. `VAR_TEMP_9`: the carried flame's steps.
+
+**Vanilla flags used:** `FLAG_BADGE08_GET`, `VAR_STARTER_MON`.
+
+## Flags and vars
+
+**`VAR_ICHOR_ACT3`** (00_front): 15 on entry; 16 when Kleon wakes; 17 after the multi battle; 18 when the Moment is seized; 19 after Elpis's line.
+
+**The Frozen Hour** (00_front names)
+- `FLAG_ICHOR_FROZEN_HOUR` (the engine mode, E1)
+- `FLAG_ICHOR_ROUSED_CUTTER`, `FLAG_ICHOR_ROUSED_MEASURER`, `FLAG_ICHOR_ROUSED_SPINNER`
+- `FLAG_ICHOR_PHAEDON_READ_TABLET`
+- `FLAG_ICHOR_GOT_UNFINISHED_DECREE`
+- `FLAG_ICHOR_WORE_MELITTAS_CLOAK`
+
+**Story, new here**
+- `FLAG_ICHOR_SAW_MEDON` (the Pool memory; the Underworld and the Summit can test it)
+- `FLAG_ICHOR_SAW_SHADOWLESS` (optional; a Hermes line in the post-game can test it)
+- `FLAG_ICHOR_MOMENT_SEIZED`
+- `FLAG_ICHOR_RHEA_SURRENDERED`
+- `FLAG_ICHOR_ELPIS_LINE`
+
+**Legendaries**
+- `FLAG_ICHOR_CAUGHT_LORD_OF_TIME`, `FLAG_ICHOR_LORD_OF_TIME_FAINTED`
+- `FLAG_ICHOR_CAUGHT_THANIRA`, `FLAG_ICHOR_CAUGHT_LOTIRA`, `FLAG_ICHOR_CAUGHT_NEMIRA`
+
+**Constellations** (the constellation range, SYSTEMS §8)
+- `FLAG_ICHOR_STAR_OPHIUCHUS` (#17)
+
+**Items**
+- `FLAG_ICHOR_ITEM_STAIR_FULL_RESTORE_1`, `FLAG_ICHOR_ITEM_STAIR_MAX_REVIVE`, `FLAG_ICHOR_ITEM_STAIR_FULL_RESTORE_2`
+
+**Object hide flags**
+- `FLAG_ICHOR_HIDE_FROZEN_ONLY`: every map's frozen-only objects. **Set on a new game** (`Ichor_InitSave` or the new-game flag list), cleared at the Loom, set on the twelfth chime.
+- `FLAG_ICHOR_HIDE_CUTTER_KALDERA`, `FLAG_ICHOR_HIDE_MEASURER_ARKADIA`, `FLAG_ICHOR_HIDE_SPINNER_ELAIA`: the post-climax statics. Set on a new game; cleared at `VAR_ICHOR_ACT3` 22; reset daily while the Fate is uncaught and fainted.
+- `FLAG_ICHOR_HIDE_LORD_OF_TIME_LOOM`: the rematch object in the Loom. Set on a new game; cleared after the credits if `FLAG_ICHOR_LORD_OF_TIME_FAINTED` is set and it isn't caught.
+- Phaedon's and Kleon's objects at Delphoi in the resolution use the Delphoi writer's hide flags for them.
+
+**Battle**
+- `FLAG_ICHOR_NO_WHITEOUT` (the slice's, `B_FLAG_NO_WHITEOUT`): the multi battle and the Lord of Time
+- `FLAG_ICHOR_NO_RUNNING`, assigned to `WE_FLAG_NO_RUNNING` in `include/config/wild_encounter.h` (it is 0 today): the Lord of Time on the Stair. A config change; say why in the commit.
+
+**Temp vars**
+- `VAR_TEMP_1`: the Moment's misses, for the widening window.
+- `VAR_TEMP_2`: the chime counter, 1–12.
+
+**Vanilla flags used:** `VAR_STARTER_MON` (Kleon's partner team).
+
+## Flags and vars on the League road
+
+Names only, claimed later from this session's range. **`VAR_ICHOR_ACT3`:** 20 after the decree (L-1), 21 after the ostracism (L-2), 22 when Mnasippos opens the Parnassos pass (L-5D). The Pantheon writer sets 23. (00_front's row 22 reads "The Ascent's gate opens"; with the revised map it is the Parnassos pass, Open questions 11.)
+
+**Story**
+- `FLAG_ICHOR_TRIAL_DECREE_SHOWN`, `FLAG_ICHOR_TRIAL_ALL_FRAGMENTS`
+- `FLAG_ICHOR_IAPETOS_OSTRACIZED`, `FLAG_ICHOR_ALETHEA_EXILE_LIFTED`
+- `FLAG_ICHOR_SENTENCES_DONE`, `FLAG_ICHOR_RHEA_HOUSE_ARREST`
+- `FLAG_ICHOR_PYTHIA_KNOW_THYSELF` (SYSTEMS §11's)
+- `FLAG_ICHOR_PARNASSOS_PASS_OPEN`
+- `FLAG_ICHOR_THERMOPYLAI_ARRIVED`
+- `FLAG_ICHOR_DAPHNE_TEMPE`
+- `FLAG_ICHOR_ASCENT_LAURELS_SHOWN`
+- `FLAG_ICHOR_MEDON_STOREROOM`
+- Fly: `FLAG_ICHOR_VISITED_TEMPE` (the healer's heal location), `FLAG_ICHOR_VISITED_OLYMPUS_GATE`
+
+**Relic-gate and puzzle state**
+- Route 29: `FLAG_ICHOR_ROUTE29_ROCKFALL`, `FLAG_ICHOR_ROUTE29_PINE_BRAKES`, `FLAG_ICHOR_ROUTE29_DRUM_PUSHED`
+- Thermopylai: `FLAG_ICHOR_ANOPAIA_OPEN`, `FLAG_ICHOR_ANOPAIA_BOULDER`
+- Route 30: `FLAG_ICHOR_ROUTE30_REED_BED`
+- The Ascent: `FLAG_ICHOR_ASCENT_ROCKFALL`, `FLAG_ICHOR_ASCENT_BOX_THICKETS`, `FLAG_ICHOR_ASCENT_DRUM_PUSHED`, `FLAG_ICHOR_ASCENT_ICE_WALL_GROTTO`, `FLAG_ICHOR_ASCENT_ICE_WALL_ERINNA`, `FLAG_ICHOR_ASCENT_GREAT_ICE_BOULDER`, `FLAG_ICHOR_ASCENT_LAKE_CROSSED` (opens the one-way chute), `FLAG_ICHOR_MEDON_CHAIN_CLEAVED`
+- Braziers: 5 indices in `IchorSave.litBraziers` (Ice Caves 1F ×3 plus the first, B1F ×2), in the `FLAG_ICHOR_BRAZIERS_START` range
+- The lake's boulders: `VAR_TEMP_1` (pushed bits), reset on leaving the lake
+
+**Systems**
+- Herms: `FLAG_ICHOR_HERM_ROUTE29`, `FLAG_ICHOR_HERM_THERMOPYLAI`, `FLAG_ICHOR_HERM_ROUTE30`, `FLAG_ICHOR_HERM_ASCENT` (the Foothills' shrine of the Twelve), in the herm range
+- Theoxenia: `FLAG_ICHOR_THEOXENIA_DIONYSUS` (E5, in the theoxenia range); reads `FLAG_ICHOR_THEOXENIA_HERMES`
+- Knucklebones: `FLAG_ICHOR_KNUCKLEBONES_THERMOPYLAI`
+- Daily: `FLAG_DAILY_ICHOR_DAKROCK_SPRING`, `FLAG_DAILY_ICHOR_PYTHIA_NATURE`
+- The Low Pasture's snow omen reads `IchorSave.omen` (SYSTEMS §6)
+
+**Gifts and trades**
+- `FLAG_ICHOR_GOT_ELPIS_SHELL`, `FLAG_ICHOR_GOT_E5_WINE`, `FLAG_ICHOR_GOT_PYTHIA_GOLDEN_LAUREL`
+- `FLAG_ICHOR_GOT_EVERSTONE_PYRRHIS`
+- `FLAG_ICHOR_GOT_HEAT_ROCK`, `FLAG_ICHOR_GOT_ROCKY_HELMET`, `FLAG_ICHOR_FOUND_EURYDEMOS_GOAT`, `FLAG_ICHOR_GOT_THUNDER_STONE_EURYDEMOS`, `FLAG_ICHOR_TRADED_ENIGMAW`
+- `FLAG_ICHOR_TRADED_KAPRODON`
+- `FLAG_ICHOR_GOT_TEMPE_LAUREL`, `FLAG_ICHOR_GOT_LAUREL_KEEPER_GIFT`, `FLAG_ICHOR_GOT_LAUREL_LEAF`, `FLAG_ICHOR_GOT_MYSTIC_WATER_ENIPEUS`
+- `FLAG_ICHOR_GOT_ICE_STONE_CHIONIS`
+
+**Object hide flags**
+- Astyra: `FLAG_ICHOR_HIDE_AGORA_MORNING` (the six citizens, shown from `VAR_ICHOR_ACT3` 19), `FLAG_ICHOR_HIDE_TRIAL_CROWD`, `FLAG_ICHOR_HIDE_SENTENCE_CROWD`, `FLAG_ICHOR_HIDE_LYKOPHRON_AGORA`, `FLAG_ICHOR_HIDE_PHAEDON_ASTYRA`, `FLAG_ICHOR_HIDE_THRASYLLOS_STALL`
+- Akti: `FLAG_ICHOR_HIDE_PHAEDON_AKTI`, `FLAG_ICHOR_HIDE_ELPIS_AKTI`, `FLAG_ICHOR_HIDE_AKTI_GUARD`
+- Kaldera: `FLAG_ICHOR_HIDE_HYPERION_KALDERA` (with Petros and Amathos)
+- Lakonia: `FLAG_ICHOR_HIDE_RHEA_ARREST` (the cadet guard)
+- The ferry: `FLAG_ICHOR_HIDE_E5_YOUTH`, `FLAG_ICHOR_HIDE_E5_SAILORS`, `FLAG_ICHOR_FERRY_VINES` (shows the vines and the dolphins)
+- Delphoi: `FLAG_ICHOR_HIDE_MOM_DELPHOI` (the Delphoi writer's flag, set here)
+- Thermopylai: `FLAG_ICHOR_HIDE_MARON_WEST_GATE`, `FLAG_ICHOR_HIDE_AIX_PATH`, `FLAG_ICHOR_HIDE_AIX_PEN`
+- Tempe: `FLAG_ICHOR_HIDE_DAPHNE_TEMPE`
+- The Gate: `FLAG_ICHOR_HIDE_KLEON_OLYMPUS_GATE`
+
+**Temp flags:** `FLAG_TEMP_1`, the ferry's tell.
+
+**Vanilla flags used:** `FLAG_BADGE01_GET` … `FLAG_BADGE08_GET` (Koronos's count).
+
+## Flags and vars
+
+Names only, from this session's range when it's assigned (00_front).
+
+**Story**
+- `FLAG_ICHOR_GOT_MEDONS_KNOT`, `FLAG_ICHOR_KNOT_UNTIED`
+- `FLAG_ICHOR_ARCHON_OF_AETHOS` (the party is recorded; the title is used from here on)
+- `FLAG_ICHOR_ALETHEA_KEEPER`, `FLAG_ICHOR_GOT_ARCHONS_SEAL`
+- `FLAG_ICHOR_EPILOGUE_FESTIVAL` (Elaia's festival dressing and the epilogue rosters)
+- `FLAG_ICHOR_EPILOGUE_KITCHEN`, `FLAG_ICHOR_EPILOGUE_HALIA`, `FLAG_ICHOR_EPILOGUE_FOOTRACE`, `FLAG_ICHOR_EPILOGUE_DONE`
+- `FLAG_ICHOR_EPILOGUE_CAKES`, `FLAG_ICHOR_GOT_NATIONAL_DEX`
+
+**The Pantheon** (cleared on a loss, as Emerald's `FLAG_DEFEATED_ELITE_4_*`)
+- `FLAG_ICHOR_PANTHEON_ARES_DONE`, `_POSEIDON_DONE`, `_ATHENA_DONE`, `_HERA_DONE`
+
+**Constellations** (SYSTEMS §8, in `FLAG_ICHOR_CONSTELLATIONS_START`'s range): Aquila (#16) in the Hall; the Unwoven (#24) at the credits.
+
+**Object hide flags**
+- The Summit: `FLAG_ICHOR_HIDE_KNOT_BOX`, `FLAG_ICHOR_HIDE_ARISTEIDES_SUMMIT` (set after the Hall; cleared weekly by the rematch, POSTGAME)
+- Elaia, the epilogue: `FLAG_ICHOR_EPILOGUE_KITCHEN_GUESTS` (Phaedon and Elpis in the player's house; cleared at the epilogue, set again after it so they go home to Akti), `FLAG_ICHOR_HIDE_ELPIS_SQUARE`, `FLAG_ICHOR_HIDE_RHEA_ELAIA`, `FLAG_ICHOR_HIDE_KLEON_FOOTRACE`, `FLAG_ICHOR_HIDE_EPILOGUE_GUARD`, `FLAG_ICHOR_HIDE_WOOLOO_RIBBON`
+- The krater: the slice's `FLAG_ICHOR_HIDE_KRATER_<SPECIES>` convention, for Elpis's species
+
+**Vars**
+- `VAR_ICHOR_ACT3`: 23 on entering the Hall of Shields, 24 when the Archon is beaten, 25 when the credits end, 26 when the epilogue is done.
+
+**Vanilla flags used:** `FLAG_SYS_GAME_CLEAR` (after the credits), `FLAG_BADGE08_GET` (the Gate's check, League-road part), `VAR_STARTER_MON` (Elpis's starter), `special EnableNationalPokedex`.
+
+---
+
+# Part 9. Music and sound
+
+## Kythera's music
+
+The cues are 00_front's: `MUS_ICHOR_TRIREME` (Phase 2's, at night the slow variant) for the voyage; `MUS_ICHOR_KYTHERA` for Skandeia and Paphia; `MUS_ICHOR_FOAM_ROAD` for the Foam Road, the falls, Melos and the sea maps of Routes 22 and 23; `MUS_ICHOR_KALLIRHOE` for the spring and Echo's caves; `MUS_ICHOR_TEMPLE_APHRODITE` for the gallery; `MUS_ICHOR_BATTLE_HIEROPHANT` for Galatea; `MUS_ICHOR_TITAN` for the Titanborn; `MUS_ICHOR_HEARTH_NIGHT` (Phase 2's) for Axylos's table after the guests have gone.
+
+Three notes on how they play here:
+- **The Kronist** speaks over the town theme, and the theme doesn't change. The menace is that nobody stops him.
+- **The silent falls:** on `MAP_KYTHERA_NERAIDA_FALLS`, until the Horn is won, the map's BGM is a single sustained aulos note under no melody, and the water SE is off. When the horn fills, `MUS_ICHOR_FOAM_ROAD` comes in at full volume on the same frame as the roar.
+- **Galatea's gallery:** the kithara stops for one beat whenever a statue moves. The music team writes the track with a rest that the engine can drop in (a "hold" that a script triggers), or the gallery uses two tracks and a fast fade (Open questions 13).
+
+## Sound effects needed
+
+- A **stone-grinding step**, for a statue moving one tile.
+- A **mirror turning** on its stand: a bronze scrape and a click.
+- **The echo:** the expansion's text-box sound, quieter and later, for the echo boxes.
+- **The falls' roar,** loud, on the frame the horn fills; then the ordinary waterfall loop.
+- **A horn filling:** a soft rush of fruit.
+- **Doves:** a coo, for Paphia's ambient.
+- **Oars in the dark:** a dip and a drip with no chant, for the Titan fleet passing.
+- **The gear box:** one dry click when the player checks it, and then nothing.
+- **Obsidian:** a glassy clink for the slope's dig spots, and three sharp knocks and a crack for Melanippos's blade.
+- **The statue turning** on Melos: a soft stone scrape, quieter than the gallery's step.
+
+## Music
+
+LABYRINTH §9's fourteen cues, named for 00's `MUS_ICHOR_AMNISOS` … `MUS_ICHOR_ICARUS`. Modes and briefs are LABYRINTH's.
+
+| Cue | Where | Brief (LABYRINTH §9) |
+|---|---|---|
+| `MUS_ICHOR_AMNISOS` | Amnisos, its interiors | Lydian; lyre over a slow sea-drum |
+| `MUS_ICHOR_BULL_ROAD` | the Bull Road, the vineyard, the Bronze Heel, the Ida path | Mixolydian; 7/8 kalamatianos |
+| `MUS_ICHOR_PALACE` | the palace, above ground | Dorian; stately, a frame-drum heartbeat |
+| `MUS_ICHOR_BULL_LEAP` | the leaping minigame | fast 7/8, crowd claps |
+| `MUS_ICHOR_LABYRINTH` | Rings I–III and VII | Phrygian; a lyre ostinato in 7/8; the motif D E F G E F G E A, the crane dance |
+| `MUS_ICHOR_ASTERION_NEAR` | Rings II and V, within 6 tiles of him | the same tune without drums: a low aulos drone and a heartbeat |
+| `MUS_ICHOR_CHARGE` | Asterion's charge | a two-bar sting |
+| `MUS_ICHOR_TITAN_WING` | Rings IV and VI | a variant of `MUS_ICHOR_TITAN` |
+| `MUS_ICHOR_WORKSHOP` | Daedalus's workshop | **Elpis's lullaby** on the ticking prototype music box: the same melody as 00's `MUS_ICHOR_MUSIC_BOX`, never reaching its last bar |
+| `MUS_ICHOR_MINOS_TOMB` | Minos's tomb | near-silence; one low string |
+| `MUS_ICHOR_BATTLE_ADMIN` (Phase 2's) | Hyperion | with his forge-hammer layer |
+| `MUS_ICHOR_CHOROS` | the dancing floor | each step plays its note; solved, the full motif with harmony |
+| `MUS_ICHOR_STARRY_CHAMBER` | the heart | high harmonics and the star-clock's tick |
+| `MUS_ICHOR_PHAEDON` | the unmasking | Elpis's lullaby in minor |
+| `MUS_ICHOR_TURNING` | the escape | the Labyrinth motif at double speed, 7/8 |
+| `MUS_ICHOR_ICARUS` | the Icarus Shaft, the dawn | the main Ichor theme in Lydian, rising |
+
+**Kleon at the heart** uses `MUS_ICHOR_BATTLE_RIVAL` with its Titan 9/8 layer: the last time he fights as a Titan agent. At Lakonia the same tune comes back "clean" (00).
+
+**No music** for Daphne's letter (III-4): the sea, the gull, and the creak of the *Euploia* at the quay. The Kaldera letter (II-14) had the home theme on one lyre; this one has nothing, because nobody here is home.
+
+**Sound effects needed:** a bull's snort and hooves; the leap's grunt and landing; "Ooof"; bees (a loop for Amnisos's roofs and the hut); a gull with wings; a wax tablet's seal cracking (for the Frozen Hour, later); shields clanging (the cradle shrine and the Idaean Cave's dancers, a distant loop); a goat's bleat; the tide covering the fossil ledge; Daedalus's lift's counterweight. LABYRINTH §9 and §12 have the dungeon's own (the thread's whisper, the bell, the dials' grind, the alarm, the Turning's pulse).
+
+## Lakonia's music
+
+| Cue | Where |
+|---|---|
+| `MUS_ICHOR_TRIREME` (Phase 2's) | the *Euploia*, III-5A |
+| `MUS_ICHOR_LAKONIA` | Gytheion, Route 25, Lakonia, Route 26, Lake Stymphalia, Route 27. Gytheion's version adds a little sea-drum under the march; Lake Stymphalia's takes the drum out and lets the birds' clink carry the beat. |
+| `MUS_ICHOR_HEARTH_ONLY` | Lampito's kitchen in III-5E: no track, the hearth crackle; when Kleon speaks after the hold, a frame drum alone in a slow 7/8 |
+| `MUS_ICHOR_ENCOUNTER_ADMIN`, `MUS_ICHOR_BATTLE_ADMIN` | Iapetos, with his top layer: a chorus of aulos in close, sour thirds, like a play's chorus that knows the ending |
+| `MUS_ICHOR_BATTLE_RIVAL` (clean) | Kleon at the ring: the rival theme with the Titan 9/8 layer removed, so the tune is the boy's again |
+| `MUS_ICHOR_BATTLE_HIEROPHANT` (Phase 2's) | the agoge's gauntlet, for Archidamos |
+| `MUS_ICHOR_HEARTH_NIGHT` (Phase 2's) | Hestia's farmhouse, after the fire catches |
+| the theoxenia reveal sting (SYSTEMS §10) | Hestia and Ares |
+
+**Silences.** III-5E has no music until Kleon's "…Mother." III-5G plays under the hearth loop only. The Titan columns on Routes 26 and 27 carry a far-off chant (an ambient SE) under the route's theme.
+
+**Sound effects needed:** the hearth's crackle as a loop; wax hissing in a fire; a trowel scraping wax (three variations); a stylus scratching; wax being pressed; a crowd of cadets going silent (a cut-off murmur); a cockerel's crow; rain on an open hearth; a scytale strap winding; a fox's bark, short, for Kerdovix's exit; bronze feathers clinking in reeds.
+
+## Music and sound for Delphoi
+
+Cues are 00_front's.
+
+| Cue | Where |
+|---|---|
+| `MUS_ICHOR_DELPHOI` | the Sacred Olives, the gorge's upper half, Delphoi by day, the Korykian path |
+| `MUS_ICHOR_TITAN_MUSTER` | the gorge's camp (the lower two screens) |
+| `MUS_ICHOR_DARK_CAVE` (Phase 2's) | the Korykian cave |
+| `MUS_ICHOR_TEMPLE_APOLLO` | the temple, through the rite |
+| `MUS_ICHOR_BATTLE_HIEROPHANT` (Phase 2's) | Phemonoe |
+| `MUS_ICHOR_HOME_COUNTER` | the Kastalian spring, III-7: **the countermelody's first hearing.** From here on, Elaia's town theme always has it (STORY's music plan). |
+| (no music) | Delphoi on the night of III-8, before the horn: wind, the bees' silence, the far tick |
+| `MUS_ICHOR_OMPHALOS_NIGHT` | III-8, from the horn |
+| `MUS_ICHOR_BATTLE_ADMIN` (Phase 2's), with Rhea's 7/8 frame-drum layer | the partner battle at the Omphalos; Rhea's layer is on her side for the first time |
+| (no music) | the Omphalos stair: the tick only |
+| `MUS_ICHOR_FATES` | the Loom, all three voices together for the first time; stops on one beat as the gray spreads |
+| `MUS_ICHOR_MUSIC_BOX` | from the gray onward |
+
+**Sound effects needed:** a horn (three, far to near); fire running through wool; a stone splitting like thunder; a bell for each chain (three, a little different); a mountain breathing (a long low rumble); the music box's tick (one SE, played at a rate the script sets); Mom's bee hum (a short emote SE); laughter from a crowd of pilgrims (after the climax, optional); a mirror turning on its stand; a disc blazing; a vent's gust blowing out a flame; Kourodin's shield-clash (Lakonia's).
+
+## Music
+
+| Cue | Where | Notes |
+|---|---|---|
+| `MUS_ICHOR_MUSIC_BOX` | every map, from the Loom to the Moment | The only track in the Frozen Hour (E1 forces it). Elpis's lullaby ticked slowly on a comb, missing its last bar, then the bar's silence, then it begins again. In Elpis's room it plays closer: the same track at full volume with the reverb off, as if from the shelf. |
+| `MUS_ICHOR_FATES`, one voice | each sanctuary, once its Fate is roused, for the rest of that map | Three layered versions of the music box: with Thanira's frame drum (Kaldera), with Lotira's aulos (the Pool), with Nemira's lyre (Elaia). Built as three tracks, `MUS_ICHOR_MUSIC_BOX_DRUM`, `_AULOS` and `_LYRE`, if the engine can't layer. |
+| The music box with all three voices | the Stair of Hours, once all three are roused | The only other time all three Fates play together is the Loom (STORY's music plan). Track `MUS_ICHOR_MUSIC_BOX_FATES`. |
+| (none) | Medon's memory | The music box falls silent; one held low aulos note under the sepia. A short track, `MUS_ICHOR_MEMORY`, or the note as a long SE. |
+| `MUS_ICHOR_KRONOS` | the multi battle | The lullaby slowed and made enormous, Phrygian, full ensemble. It stops on the half cadence, like every version before Elpis. |
+| `MUS_ICHOR_LORD_OF_TIME` | the Lord of Time | The meter changes every phrase, 7/8 to 9/8 to 5/8 and back, as if time can't settle |
+| Silence | the frame you seize the Moment | The tick stops. The first silence in the Frozen Hour. The Moment has no theme. |
+| The twelve chimes | the color return | Twelve bell notes, the lullaby's first twelve, one per `Ichor_ColorReturnStep`. Built as one bell SE played at twelve pitches, or twelve SEs. |
+| `MUS_ICHOR_MAIN_THEME` | after the twelfth chime | Lydian, rising, as at the Icarus Shaft |
+| (none) | Delphoi at dawn | No music: wind, birds, voices, the falls, until Mom's lines are done. Then Delphoi's own theme on the next map load. |
+| `MUS_ICHOR_LULLABY_RESOLVED` | Elpis's line | Her hum, all the way through. It resolves to the tonic, for the first time in the game. This is the composer's most important brief (STORY §6.14). Then 120 frames of nothing. |
+
+## Sound
+
+- **In the Frozen Hour:** the player's footsteps only (E1). Doors open without their sound. No cries, no wind, no water.
+- **The first other sound** is Kleon's crack, like ice, as he wakes. After it, his footsteps join yours.
+- **Sound effects needed:**
+  - a crack like ice (Kleon waking);
+  - a breath drawn in (seizing the Moment);
+  - the twelve chimes;
+  - stone falling away (the crumble, per row), and a long low rumble (the Lord of Time sinking);
+  - the city's morning, as three ambient SE: a dog, a herald's call, a crowd talking at once;
+  - the Star Chart's chime (exists for SYSTEMS §8).
+- **Sound returning,** one layer at a time after the twelfth chime (STORY §6.13): wind, then birds, then the sea far below, then the main theme. Each layer is an ambient SE started 30 frames after the one before.
+
+## Music on the League road
+
+| Cue | Where | Note |
+|---|---|---|
+| Act II's Astyra town theme | the morning after | Act II's cue. Under the decree, the herald's bell and crowd SE only. |
+| Act II's ostracism cue | the trial's vote | STORY §6.5's dry frame-drum pulse, reused. It quickens as the urn fills and cuts dead before the decree. After the decree, silence for Alethea's 90 frames. |
+| Alethea's theme (Act II's) | after "They believed me." | Played once, on a lyre, as in §6.5, but this time with the second voice that §6.5 left out. |
+| No music | the sentences | Ambient crowd only. Phaedon's heal plays the Asclepeion jingle. |
+| `MUS_ICHOR_DELPHOI` | Delphoi, the Pythia; Route 29's lower half | Her laugh plays over it. |
+| A short reveal sting (proposed) | Dionysus's reveal | Two bars: drums out of nowhere. The core theoxenia reveals may already have one; reuse it (Open questions 10). |
+| `MUS_ICHOR_ASCENT` | Route 29's upper half, Route 30, the Foothills, the Weeping Cliff, the Snowfields, the Crags | — |
+| `MUS_ICHOR_LAKONIA` | Thermopylai | The Lakonian march: the veterans brought it with them. |
+| `MUS_ICHOR_AKADEMIA` (the slice's) | the Vale of Tempe | Daphne's grove theme, for the tree she was named for. Under her scene it plays as written. |
+| `MUS_ICHOR_DARK_CAVE` (Phase 2's) | the Ice Caves and the grotto | A drone and drips; ice adds a high glass ring to the drips. |
+| `MUS_ICHOR_HEARTH_NIGHT` (Phase 2's) | Eschara's chamber, Peirithoos's farmhouse | The solo lyre by a fire. |
+| `MUS_ICHOR_OLYMPUS_GATE` | the Gate of the Horai | — |
+
+**Sound effects.** A herald's bell; a crowd cheering and groaning at once; a cabbage's thud; a clay shard dropped in an urn (Act II's clink); a crowd's laugh; a rope falling off a mast; wine welling through planks; vines growing (a creak and rustle); a drum from nowhere; a lion's roar; three splashes; a dolphin's whistle; a palisade gate dragged open; steam hissing from the springs; a goat's bleat with a crackle in it (Aix, a Kerazap); a river's roar (Tempe, an ambient loop); leaves without wind; ice sliding; an icicle chime; a boulder sliding on ice; a chain cleaved (the Labrys's ring); a soft wind for the snowfields; an eagle's cry; a rope bridge creaking; the gate of cloud rolling aside (a long soft rumble, like far thunder that doesn't stop).
+
+## Music
+
+| Cue | Where | Notes |
+|---|---|---|
+| (none) | the four Pantheon halls, out of battle | Ambience only (below). The holder's speech is the room's music. |
+| `MUS_ICHOR_PANTHEON` | each Pantheon battle | One 9/8 battle theme with the seat's top layer: Ares brass, Poseidon surf, Athena aulos, Hera a low drone (00_front) |
+| `MUS_ICHOR_ARCHON` | the Summit, from the first step through the battle (its battle arrangement) and the after-scene | Mixolydian, kithara and drum. **Stops dead on "Gods help you."** |
+| (none) | the untying | Rope and wind only |
+| `MUS_ICHOR_HALL_OF_HEROES` | the Hall | A short fanfare that settles into a held chord under the record and the seal |
+| `MUS_ICHOR_CREDITS` | the credits | The main theme, Lydian, rising; in the second half, Elaia's home theme with its countermelody underneath |
+| the slice's festival theme | Elaia on the epilogue day | Unchanged. Elaia's home theme keeps the countermelody from the spring on (00_front). |
+
+## Sound effects
+
+- **Each hall's ambience,** looped quietly: shields knocking together in a draught (Ares); surf on cloud, a gull (Poseidon); an owl, a page turning (Athena); a serpent's hiss, rare (Hera).
+- Stone doors: sealing (south) and grinding open (north).
+- The Summit: wind, constant; it swells once when the gold thread lifts away.
+- The box's lid; the rope creak (six, slightly different each pull, rising in pitch as the knot gives).
+- The Hall: a chisel strike per recorded Pokémon; the seal pressed into wax.
+- The Star Chart's chime (exists) for Aquila and the Unwoven.
+- The epilogue: the slice's spindle chime and its stop, at each reading; a Wooloo's bleat at the finish line.
+
+---
+
+# Part 10. Art needs per map
+
+## Kythera's art
+
+### Tileset: `kythera`
+
+A secondary on the `aethos` primary, 128 px wide, Porytiles. Palettes planned first (7 secondary): sea-foam white and pale aqua; rose marble and pink stone; myrtle and olive greens; Cycladic white and Aegean-blue doors; terracotta roofs and pots; bronze (mirrors, the herm's oil-stain, the gear box); and one spare for the temple's roses.
+
+- **Coast:** foam-edged surf (animated, 3 frames), shingle, white sand with foam lines, low sea-cliffs in pink stone, reef spits, tide rocks, Aphrodite's rock (a 3×3 metatile rock in the shallows with an animated foam collar).
+- **Land:** myrtle hedges, rose briar, thrift and sea-grass (the tall grass variant), plane trees and oleander for the ravine, a rose-marble quarry with cut blocks and fallen column drums (the Girdle gate), terraces with dry-stone walls.
+- **Water:** the Neraida falls (a two-stage waterfall; the climbable variant for the Horn), plunge pools, stepping stones, a plank bridge, weirs, a water-mill with a turning wheel (animated; a still variant), the Spring of Kallirhoe's round pool with narcissus flowers round it and a thin fall.
+- **Town:** Cycladic white cube houses with blue doors and rose-pink doorframes, potted roses and basil, curved stone quays, empty slipways chalked with sickles, a half-built keel, the harbor shrine with a bronze dove, bronze mirrors by doors (with a dim reflection metatile), dovecotes, the Paphia great stair, an apple orchard, the honey boat (a small sailboat, as metatiles or an object).
+- **Caves:** Echo's caves' rock (a variant of the coast cliff, darker), a lit roof crack, the sea mouth arch.
+- **The vault door:** a cliff door with the double-axe hollow and a flaking Minoan frame (blue dolphins, red bulls); the vault's interior fresco (a bull-leaper) on a cracked plaster wall.
+- **Routes 22 and 23:** open sea, sandbars, the trireme lane's stakes, rough Myrtoan water, Malea's gray headland as an impassable cliff edge, Anydros's bare rock with a dead fig tree, a sunken column, the Antikythera islet's beach and the wreck's ribs on the reef.
+- **Melos** (in `kythera`, or borrowing Act II's Kaldera volcanic pieces where the two sets agree): boathouses at the waterline with painted sea doors (red, blue, green), a stone jetty, a well with a trough, barley and vine terraces, a terrace-wall niche, the obsidian slope (black glass ground with a glint animation, knapping pits) and white pumice cliffs worn into waves.
+
+### Tileset: `temple_aphrodite` (may fold into `kythera`)
+
+- White marble veined with pink, Ionic columns with roses climbing them, low statue plinths, a rose-bed courtyard with gravel paths, an awninged dais, the dove altar, a painted dove fresco, rose petals on the floor (a floor variant), wall-hung bronze mirrors (four facings), the doorways between the three rooms.
+
+### Interiors
+
+Every room is its own (MAP_DESIGN §2), drawn from the room catalogs (`ROOMS_oikia.md`, `ROOMS_civic.md`); pieces the catalogs lack are listed for drawing.
+
+| Interior | Pieces it needs that the catalogs may lack |
+|---|---|
+| Skandeia Asclepeion | a sea-water floor bath with a channel; a wide window onto the quay; nets in the rafters |
+| Skandeia Agora | a half-boat counter stood on end; rope coils; a carved dove on a beam |
+| Axylos's house | a twelve-seat trestle table; a shelf of mismatched bowls; an empty goat's tether on a peg |
+| The divers' house | sponges hanging from beams; stone diving weights on cords; a floor tank (with an animated Telkanvil object) |
+| The perfumer's house | an oil press with a long beam; a copper still on the hearth; alabaster bottles; petals drying on cloths |
+| Nikarete's house | a net loom; a boy's back room with a painted clay helmet on a shelf |
+| Phereklos's yard | a half-built keel on trestles; shavings on the floor; a barrel table with knucklebones |
+| Paphia Asclepeion | an open rose courtyard with a little fountain; a colonnade of beds |
+| Paphia Agora | a marble counter; dove cages; shelves of marble votive feet and hands |
+| Pygmalion's workshop | marble blocks; a hoist with block and tackle; a jointed wooden model; a statue under a dust sheet; a table set for two |
+| The dovecote | a round tower room; nesting holes in the wall above; a ladder hole; drifting feathers |
+| The mirror-house | walls of angled bronze mirrors (reflection metatiles); a casting pit; a polishing bench |
+| The orchard house | apple racks; the walled yard with the gray old tree (and a golden-blossom variant) |
+| The potter's house | a kick-wheel; a beehive kiln in the yard; flasks with painted fish |
+| Myles's mill | a round floor around a great turning millstone (animated); flour sacks; a bread oven |
+| Kythera's Minoan vault | a cracked painted plaster room; three stone chests |
+| Kentrios's farmhouse (Melos) | a threshing floor outside; a shelf of dug-up oddments |
+| Melanippos's house (Melos) | a floor of black flakes; a knapper's anvil stone and antler hammers; a polished obsidian mirror |
+| The boathouse (Melos) | a ground-floor boat on a stone slip under painted sea doors; a ladder to a living room over the water; a hanging cradle |
+
+### Sprites and portraits
+
+| Who or what | Overworld | Portrait |
+|---|---|---|
+| Galatea | 16×32, white chiton, faintly marble-veined skin; a still "statue" pose frame | yes (Hierophant) |
+| Charis, Krenaia | 16×32 | — |
+| Axylos, Skyllias, Bathykleia, Euodia, Nikarete, Lithos (helmet off), Phereklos, Teukros, Theodote, Philinna | 16×32, townsfolk palette families | — |
+| Pygmalion, Peristera, Leukippe, Eumelos, Lysis, Myles | 16×32 | — |
+| The youth at the spring | a kneeling sprite (one frame, looking down) | — |
+| The youth's mother | townsfolk | — |
+| The Kronist | the Kronist walker (plain clothes, sickle pin), shared with Act II | — |
+| The messenger / Hermes | barefoot, bleeding feet; **no shadow** (SYSTEMS §10's first tell) | — |
+| Marble statues | four 16×32 objects (a youth with a rose, a nymph, a woman wringing her hair, a discus-thrower), one frame each | — |
+| Bronze mirrors on stands | an object, four facings | — |
+| The honey boat | a small sailboat object (or metatiles) | — |
+| The gear box | a small object (a cracked green-bronze lump) | — |
+| The armless statue (Melos) | a 16×32 object, half sunk in earth, four facings for its turning head | — |
+| Kentrios, Melanippos, Myrtis, Kalchedon, the girl at the well | 16×32, townsfolk palette families | — |
+| Doves | a small dove object, perched and flying | — |
+| SCULPTOR, DIVER | new class walkers (00_front) | new class portraits |
+| ACOLYTE (Aphrodite's) | the acolyte walker, rose-pink palette | the acolyte portrait, recolored |
+
+### Battle backgrounds
+
+- **Kythera's shore:** white sand, foam, pink cliffs, a blue sea.
+- **Galatea's gallery:** the rose court, statues on plinths in silhouette, an awning.
+
+### Screens
+
+- Alethea's letter (III-1A) uses the standard sign window.
+- No full-screen pictures. The potsherd's item picture is SYSTEMS §5's.
+
+## Art needs
+
+LABYRINTH §11 is the art list for Knossa: the `knossa` and `labyrinth` tilesets, their palettes, the sprites and portraits, the three battle backgrounds, the Starry Chamber's ceiling picture, and the ~310 KiB ROM estimate. It stands. This region adds:
+
+### Tileset pieces
+
+| Tileset | New pieces |
+|---|---|
+| `knossa` | The four Titan triremes at Amnisos's mole, furled, with a "sailed" variant (empty water) for `FLAG_ICHOR_HIDE_TITAN_SHIPS`; roof beehives (two shapes) for every Amnisos roof; the harbor shrine with its painted double axe and honey jar; the vineyard's terrace walls, vines on trellises and a vintner's sign; the Bull Road vault's corbelled lily chamber; the cradle shrine's walled forecourt with bronze shields on the rock; the Idaean Cave's horn shrine (a giant goat's horn spilling fruit); the Cave of Eileithyia's polished stalagmite inside its little wall, with clay offerings round it; the Bronze Heel's crumbling fossil ledge (two frames: intact, gone). |
+
+### Interiors
+
+Every interior is unique (MAP_DESIGN §2). Eleven new rooms on the `building` primary, from the room catalogs, with these pieces the catalogs probably lack:
+
+| Room | New pieces |
+|---|---|
+| Amnisos's Asclepeion | a square Minoan light well with a sunken pool under it; a bee fresco frieze; salve-pot shelves; a gypsum counter; an octopus-painted Pithos |
+| Amnisos's Agora | red downward-tapering columns; saffron baskets on the counter; bronze double-axe hooks with thyme bundles; octopus jars; a loom-weight scale |
+| Kydon's honey house | clay hive-tubes built into a rock back wall, with bees; a wax press and drip tray; the folded bull-leaper awning; a gull perch |
+| The Double Axe | clay octopus traps from the beams; a bull's-horn rack; a faded dolphin fresco; the dished gypsum knucklebones table |
+| Aithon's house | a lustral basin with three steps down; guest couches; a painted ship; a long table set for too many; a lamp niche |
+| The old leaper's house | a leapers frieze with one figure circled in charcoal; a shelf of bronze bull figurines; a splint on a peg; a loom with a cat asleep on the warp |
+| Polypos's hut | an upturned-boat-hull ceiling; stacked octopus pots; two octopuses on a drying line; a bean pot on the hearth |
+| The beekeeper's hut | a round room built over a spring basin with an overflow channel under the door; skep shelves; a smoker and veil |
+| The Bull Road vault | painted lilies; a sealed jar on a stone bench |
+| The cradle shrine | bronze shields nailed to rock; a stone cradle-altar with offerings |
+| The Cave of Eileithyia | the polished birth-stone, its wall, its clay babies and honey cakes |
+
+### Sprites
+
+| Sprite | Kind | Notes |
+|---|---|---|
+| Alethea | walker frames | With her satchel of tablets: kneeling at the Heel, nose-to-fresco in the Megaron, a gull on her wrist at dawn |
+| Kleon | portrait | "Kleon Titan": the bronze helmet pushed back like a cap (STORY §2), for the heart's battle |
+| Sarpedon | walker | LABYRINTH lists him; an old man with a scarred chin, leaning on a rail |
+| Milon | walker | A huge herder in a sheepskin with a stick |
+| Euanthe | walker | An old woman with a leaper's shoulders |
+| Akestor, Anthousa, Aithon, Polypos, Lykastos, Kressa, Dorion, Bombylia, Gennaia, Epimenides | walkers | From the townsfolk walkers by palette swap (healer, stallkeeper, host, fisher, sailor, fishwife, oarsman, beekeeper, elder woman, elder man). Epimenides needs a lying-down frame and a very long beard. |
+| Kydon | walker | Exists (Phase 2) |
+| The girl with a Melibee, the kid by the hives | walkers | townsfolk children |
+| The Titanborn veteran | walker | the grunt walker, gray-bearded, helmet off |
+| CADET | portrait, walker | 00's new class; Agesilaos is its first use |
+| GOATHERD, PILGRIM, BEEKEEPER, TITANBORN | portraits, walkers | exist (the slice, Phase 2) |
+| GIGAS, MINOAN PRIEST, BULL-LEAPER, AUTOMATON | portraits, walkers | LABYRINTH §11 |
+| Pokémon objects | follower sprites | Taurivet ×3 (the palace herd, the Gentle Bull, Lampos); Melibee (Bombos, on the girl's shoulder); Kourodin ×2 (dancing in the Idaean Cave); Daphne's gull and Kydon's gulls |
+| Objects | small | the sealed tablet and Kleon's draft as item icons and item pictures (wax tablets, one tied and sealed with a hook); the Skull and Dart Fossils; the half-ring; Daphne's letter tube on the gull's leg |
+
+### Battle backgrounds
+
+LABYRINTH §11's three (the Labyrinth, the palace court, the Starry Chamber). The Bull Road, the vineyard, the Ida path and the Bronze Heel use the slice's grass and beach backgrounds; the Idaean Cave and the Cave of Eileithyia use Phase 2's dark cave.
+
+### Screens
+
+- Daphne's letter as a sign window in her hand (the same window as Kydippe's letter at Kaldera).
+- Map-name steles for every new map: Amnisos, the Bull Road, the Bronze Heel, the Palace of Minos, the Labyrinth (one stele for all its rings), Mount Ida, the Cave of Eileithyia.
+
+## Lakonia's art
+
+### Tileset: `lakonia`
+
+00_front's secondary for Gytheion, Route 25, Lakonia, Route 26, Lake Stymphalia and Route 27. Palettes, planned first (7 secondary):
+1. **Lakonian red** (cloaks, shields, doors) and bronze.
+2. **Plain stone and whitewash** (houses, the stoa, stelai).
+3. **Vegetation:** plane trees, oak and holm-oak, olive, barley.
+4. **River:** reeds, pink oleander, the Eurotas's green water.
+5. **Taygetos:** the dark mountain wall, scree, pines.
+6. **Purple** (Gytheion's dye-stains, murex heaps, the dye-works' vats).
+7. **Marsh:** black water, reed grass in shallows, bronze-feather glints.
+
+**Pieces.**
+- **Gytheion:** a curved quay with purple-stained steps; the dye-works' open shed and lead vats; murex shell heaps; the causeway to Kranai and its whitewashed shrine; a small hillside theater with a stage-building (the Asclepeion's frontage); fishing boats.
+- **Route 25:** a winding river in reeds and oleander; terrace walls with ledges; a stone ford; a roofless farmhouse (roofed and unroofed variants for after the climax); two roadside herm-shrines (lit niche); **the throne of Amyklai** (a 3×4 seated bronze god on a throne over a tomb mound); hyacinths; the **Vapheio tholos** door (a 2×2 bronze door with a labrys hollow, in a hillside dromos) and its open variant; plane trees.
+- **Lakonia:** plain flat-roofed houses in loose clusters round yards (no wall pieces anywhere); a door with a shield over it (Lampito's); a small burial plot with low stones; the **Persian Stoa** (columns carved as captives, 3 tiles tall); **the chained Enyalios** (a 1×2 bronze statue in fetters); the Lesche; the syssition's long low building; the agoge's barracks, its beaten-sand yard and **the battle-school ring** (a round sand floor 7 tiles across with a low wall the cadets sit on); the training fields' tall grass and **the Sown Field's furrows** (plough-furrow tall grass); the palaestra's colonnade and **wrestling sands**; Orthia's small temple in willows on a river bank; a rope across the Mani road.
+- **Route 26:** a beaten running track; a practice field of long grass; **the Platanistas** (a plane-tree island in a moat, with two bridges, a Herakles statue and a Lykourgos statue); the Phoibaion's little altar; the first holm-oak and scree.
+- **Lake Stymphalia:** a stone causeway on piles and wooden boardwalks over mud; reed grass in shallows (a tall-grass behavior drawn as reeds in water); rocky islets; a stilt hut; dense reed curtains (walls); the north bed's roosting-bird reeds and the south bed's regrowing reeds as visible gates.
+- **Route 27:** rock walls and goat paths; oak, holm-oak and pine; scree slopes; a one-tile ravine bridge; the Karyai spring under walnut trees; a Skiritai watchtower; a fallen column drum; a cracked Hammer rock; the lower Titan road seen below a ridge.
+- **Route 24 (sea), the strait off Malea:** Cape Malea's cliffs; current tiles; Elaphonisos's white sand; **the drowned town** in shallow water (streets and walls as underwater metatiles).
+- **Seams** use only `aethos` primary metatiles near connected edges (MAP_DESIGN §5): Gytheion–Route 25, Route 25–Lakonia, Lakonia–Route 26, Route 26–Lake Stymphalia and Lake Stymphalia–Route 27 share `lakonia`, so they're exempt; **Route 27–Arkadia** is a cross-tileset seam and needs the 6-row rule.
+
+### Interiors
+
+Every one unique (MAP_DESIGN §2). From the room catalogs (`ROOMS_oikia.md`, `ROOMS_civic.md`), with these new pieces to draw: lead dye vats; a scratched wall map; model triremes and a bronze ram; a niche with clay doves and hanging votive sandals; a bread oven in a corner; a bare-plank counter on stones; great scales and stacked iron bars; painted grave-stelai (one with a name, one with a swallow); a loom with a small red cloak; a closed Corinthian helmet as a table object; a wall of scytale staffs; a long low mess table with cups on pegs and a black cauldron; reed sleeping mats in rows and a painted name list with crossed-out names; wrestling oil flasks, scrapers and dried olive crowns; willow trees and a cheese altar; walls scratched floor to ceiling with sayings; a room with cushions and an Olympic tripod; a theater's painted scenery flats and ticket counter.
+
+| Interior | Size (about) |
+|---|---|
+| Gytheion: Asclepeion (the stage-building), the dye-works, Lysandros's house, the Kranai shrine, Timaia's house (the Agora is a stall on the quay) | 12×6, 12×8, 9×7, 7×6, 8×7 |
+| Lakonia: Asclepeion, Agora, Lampito's house, Gylippos's house, the syssition, the agoge, the palaestra, Orthia, Chilon's house, Lichas's house | 8×6, 8×6, 10×8 plus the yard on the town map, 6×6, 14×6, 16×8, 12×10, 12×9, 7×7, 9×8 |
+| Lake Stymphalia: the nests, the deep reeds | 18×14 each |
+
+### Sprites
+
+| Who | Overworld | Portrait (64×64) | Notes |
+|---|---|---|---|
+| Rhea, helmeted | 16×32 | yes | INVENTORY lists her as new; faceless under the helmet |
+| Rhea, unhelmeted (Lampito) | 16×32 | yes | STORY §8.4: gray hair, square jaw, Kleon's eyebrows. **The swap happens in one frame,** so both sheets share a palette and a body. |
+| Kleon, no helmet | 16×32 | — | His Titan-agent sprite without the helmet pushed back; he sold it |
+| Iapetos, masked | 16×32 | yes | the white tragic mask, the wax tablet on a cord, **the ink-dark right hand** |
+| Gigas (class) | 16×32 | yes | LABYRINTH's |
+| Cadet (class), M and F | 16×32 each | yes | 00_front's class table |
+| Scout (class) | 16×32 | yes | 00_front's |
+| Diver (class), M and F | swimmer recolor | yes | 00_front's |
+| Veteran (class) | HOPLITE recolor | yes | Ares's disguise uses it, with a cockerel object on the shoulder |
+| Hestia's disguise | townsfolk woman in a gray shawl | — | no shadow after the reveal |
+| Brasidas | 16×32 | (the Pantheon's) | the Pantheon writer's sprite, borrowed |
+| Gylippos | the slice's | — | — |
+| Fisherman with Kleon's helmet | townsfolk fisher | — | plus a helmet "bucket" object |
+| Alekrow drilling, Geogrip in the sand, Lernip ripple | Pokémon overworld sprites | — | the ripple is a field effect |
+
+**Objects:** a lead tablet (Kleon's), a wax tablet over a fire (an item icon that fades), the sealed tablet with a trowel seal (a second close-up frame), a folded question tablet (fragment 8), a scytale strap wound on a staff (close-up), Timaia's fig cake (item icon), the Titan columns' marching walkers (the Titanborn walker), a cockerel.
+
+### Battle backgrounds
+
+- **The battle-school ring:** a round sand floor, a low wall of seated cadets drawn into the background, plane trees behind.
+- **The Lakonian valley:** fields, the Eurotas, and the dark wall of Taygetos (for Routes 25, 26 and 27).
+- **Lake Stymphalia:** black water and reeds, with bronze glints.
+
+### Screens
+
+- Item close-ups (the expansion's item picture windows): Kleon's lead tablet; the wax forgery melting; the sealed tablet opened, then resealed with the trowel mark; Alethea's three lines under the forgery; the folded question tablet; the scytale wound on its staff.
+
+### ROM estimate
+
+| Item | Size |
+|---|---|
+| The `lakonia` tileset | ~14 KiB |
+| 7 outdoor maps (Route 24, Gytheion, Route 25, Lakonia, Route 26, Lake Stymphalia, Route 27) and 2 lake pockets, 15 interiors | ~75 KiB |
+| Scripts and text | ~45 KiB |
+| New sprites and portraits (Rhea ×2, Iapetos, Cadet ×2, Scout, Diver ×2, Veteran) | ~20 KiB |
+| Battle backgrounds (3) | ~15 KiB |
+| **Total** | **~165 KiB** |
+
+## Art needs for Delphoi
+
+### Tilesets
+
+| Tileset | Maps | Contents |
+|---|---|---|
+| `delphoi` | the Sacred Olives, the gorge, Delphoi, the Korykian path | **The plain:** olive trees old and gnarled in several shapes (one 2×2 vast hollow trunk), long uncut grass between rows (the tall-grass tile, silver-green), dry-stone terrace walls with ledges, the white road, a roadside altar (clean and desecrated), the warden's stone hut against a root. **The gorge:** a white mountain stream with rapids, two waterfalls (animated), a pool, laurel and pine scrub, rock walls, plank bridges, a cracked boulder; Titan tents of brown hide (2×2, several), cookfires (animated), a beehive bread oven, sickle banners on poles, shovel racks, a rope corral. **The sanctuary:** the Phaedriades cliffs, pale and shining, as a backdrop band; the Kastalian fountain-house with bronze lion-head spouts and its long basin (animated water); terraces and retaining walls of polygonal masonry; the Sacred Way's paving and switchbacks; small marble treasury fronts (a Doric one; a richer one with two maiden-columns); the statues of Kleobis and Biton; the Rock of the Sibyl and the oldest altar (with a glowing-hollow frame); the Temple of Apollo's great Doric front with KNOW THYSELF over the door; the Omphalos in its net of wool, in three states (whole, burning, open); the Omphalos court's wall and gate; the theater's curved tiers; the stadium's track and stone seats; the north gate; the laurel grove with a great laurel; clay hive-jars in a wall; torches on the Sacred Way (unlit and lit). **The heights:** pines, a thyme upland, scree, a limestone face with a cave mouth, Pan's shrine with carved pipes. |
+| `temple_apollo` (may fold into `delphoi`) | the Temple of Apollo | Doric columns inside, bronze-grilled screens with doorways (shut and open), gilded tripods, hung lyres, the bronze serpent pillar, potted laurels, gold sun-discs (unlit and blazing), the beam stripes along the floor in sun-gold and moon-silver (horizontal, vertical, and the four turns), the high window's light shaft, the smoke-hole, the adyton's rock floor with vents (animated vapour), the bronze brazier (unlit and lit), the tripod over the crack (unlit and lit). |
+| `loom` (shared with the Frozen Hour's writer, who owns the Stair) | the Omphalos stair, the Loom | **The stair:** pale stone steps cut into dark rock, a carving of three women at a loom. **The Loom:** two great posts and the beam; warp threads beyond counting, white, each with a red knot, swaying (a 4-frame animation, and a still frame for after the cut); the last row, a hard line where the cloth stops; the black chasm below; chains from wrist-height to the posts and beam, whole and broken; the ceiling, whole and torn open onto gray sky; the Stair of Hours' foot. |
+
+The Frozen Hour's Delphoi uses these same maps under the engine's gray (E1); no tileset of its own.
+
+### Interiors
+
+Every interior is unique (MAP_DESIGN §2), laid out for its owner from the room catalogs on the `building` primary. Pieces the catalogs probably lack:
+
+| Room | New pieces |
+|---|---|
+| Hieron's hut | a great root through the back wall as a bench, a spring channel across the floor, a rusted pruning hook, a shelf of olive-wood figures |
+| Delphoi's Asclepeion | a raw rock back wall with a spring trickling into a basin, votive clay limbs on pegs, a laurel-painted Pithos |
+| Delphoi's Agora | an open-backed portico onto the valley, stalls of votive figurines and laurel bundles, honey cakes, lead strips, crooked little tripods |
+| The House of the Melissai | a back wall of clay hive-jars with bees going in and out, wax-sealing benches, honey racks with one gap, veils on pegs, a heavy curtain to an inner room with a small bed |
+| Theokles's house | tablets stacked like roof tiles, a hexameter chart, a dead potted laurel, a stylus rack with one bent stylus, two stools at one desk |
+| The Pilgrims' House | rows of sleeping mats under a gallery, a long table with mismatched bowls, a wall of lead question-strips on nails, a great lentil pot |
+| Koretas's house | half the room a byre with straw and a manger behind a low wall, draining cheese baskets, a niche with a carved goat |
+| Chrysothemis's house | a practice platform, a row of kitharas small to enormous, a winner's crown on a nail, the nome's five scenes painted round the walls |
+| The treasury of Astyra | shields and helmets on stands, a bronze prow on a plinth, walls of carved inscriptions with musical notes |
+| The Siphnian treasury | two maiden-columns at the porch, a painted gods-and-Giants frieze round the walls with scraped gold, a padlocked chest with a gilded rock |
+| The Lesche | stone benches, two huge wall paintings (a falling city; the Underworld, with the rope-plaiter and his donkey), a lectern with a very thick book |
+
+### Sprites
+
+| Sprite | Kind | Notes |
+|---|---|---|
+| Phemonoe, the Pythia | portrait, walker, seated-on-tripod object | A woman of about fifty in white, long hair often wet, a laurel crown, a laurel branch; still, tired eyes that look past you. In battle she never changes expression. |
+| Mom in her melissa's veil | walker | STORY §8.4: a pale-gold veil with a honeycomb hem, the same palette family as her slice sprite. A frame with her hands clasped (the stairhead) and a reaching frame (the petasos). |
+| Mom's Melisseer | follower object | the dex's overworld sprite, with a humming emote |
+| Melissai | walker (the MELISSA class) | veiled, pale gold; Hagne is older and stooped |
+| Prophetes | walker | white robe, wax tablet, laurel sprig; Theokles is older |
+| Eudoros | walker | a boy in white with a laurel broom |
+| Rhea unhelmeted | walker | Lakonia's (STORY §8.4), with a frame for arms spread |
+| Kleon with Kourodin | walker frames | a mid-swing frame; a mouth-open shout frame for the freeze |
+| Hyperion | walker | the clouded-eye palette (Act III); carrying a lit torch |
+| Phaedon | walker | the healer's chiton, the gold mask at his belt beside the clay bull, carrying the lined case; a kneeling frame for the Loom |
+| Aristeides and the Archon's guard | walkers | a white beard, an undyed cloak, an olive wreath, a staff; a mid-stride frame for the freeze |
+| Gigas Ephialtes, Thoas, Agrios | walkers | the Gigas class; Ephialtes's helmet worn low over his left eye |
+| Titanborn crowd | walker | the class, many; a climbing frame |
+| The Fates | objects | their dex art's overworld sprites, chained (a working animation) and still; then fading |
+| The Lord of Time | 64×64 object | engine E10, rising (it moves only vertically), the Harpe in its grip |
+| The Harpe | object | in its lined case (open and shut); in the player's hands (a held frame); a small spinning object |
+| Three sparks | small objects | white, gray and black |
+| Bronze mirror | object | four facings, on a stand |
+| The Omphalos | object or metatiles | whole, burning, open |
+| Pyrapod, Hymnet, Pelython | objects | their dex overworld sprites for the named spots (Pyrapod sitting in a glowing hollow; Hymnet floating; Pelython coiled asleep) |
+| Kerazap goats | objects | the dex's sprite, grazing |
+| New classes | portraits, walkers | MELISSA, KITHARODE, PROPHETES, MOUNTAINEER (00_front's table) |
+
+### Battle backgrounds
+
+New: **the Temple of Apollo** (columns in gold light, a tripod's glow), **the Omphalos court at night** (the cracked stone, torchlight on the Sacred Way below, wrong stars), **mountain gorge** (laurel and white water, for the gorge and the Korykian path). The cave uses Phase 2's dark cave.
+
+### Screens
+
+- The **Sun Laurel** icon for the laurel case.
+- Item icons: Melitta's Honey (the jar from the slice's shelf, with its label), the ostrakon (shared), TM disc colors per Balance.
+- Item close-ups: **Melitta's Honey**, a picture window at its item-get (the jar, NOT FOR {PLAYER} on the label, as the slice's shelf showed it).
+- Map-name steles for every new map.
+
+## Art
+
+### Tileset: `loom` (the Stair of Hours)
+
+The Stair shares the `loom` secondary with the Loom and the Omphalos stair (00_front).
+- **Landings:** pale limestone hour-stones with weathered edges; flights of steps 3 wide; the edge of a landing over empty sky; a crumbled-step piece and the sky tile it swaps to.
+- **Sundials:** a small one for landings 1–11 and a large one for the twelfth, with the gnomon's shadow drawn on separate metatiles so it can move one step on the twelfth chime (two frames: stopped, and moved).
+- **The Lord of Time's shadow:** a 3×2 block of dark-stone metatiles at the top of the twelfth landing.
+- **The sky:** gray cloud, and below it the cloud sea over Delphoi. Drawn in true color; the gray is E1's.
+- **The painted line** across the twelfth landing's paving, for the Moment.
+
+### Frozen-world pieces on other tilesets
+
+- **Herm head variants:** four facings of the great herm's head, in the `aethos` primary (00_front).
+- **Akti's curled wave:** a 3×2 metatile wave crest over the quay, with a fish drawn inside it, in the `akti` secondary *(slice tileset)*.
+- **Still water:** a stopped frame of every animated water metatile the frozen maps show (the Kastalian falls, Akti's harbor, Kythera's foam). E1 should stop tile animations rather than need new art; these are only needed where the stopped frame looks wrong.
+- **The burned net's smoke:** a still gray smoke column, 1×3 metatiles, in `delphoi`.
+- **The gold thread** in Elaia's old olive roots: root metatiles with a thin gold line, on a palette slot of their own *(slice tileset; one palette color)*.
+- **Elaia, the player's house:** the cold-hearth (ash) metatile and the honey shelf's clean ring *(slice tileset)*.
+
+### Sprites
+
+| Who or what | Overworld | Notes |
+|---|---|---|
+| The three Fates | 32×32 each, floating, from their dex art (STORY §6.11) | Drawn in true color. In the Frozen Hour they show gray, then a third of their color once roused, then full color after the chimes: palette blends, not new art. |
+| The Fates' sparks | 8×8 or 16×16, three colors: white, gray, black | Rising and settling frames |
+| The Lord of Time | 64×64 large object (E10), holding the Harpe | Its concept is the user's choice (dex). A "lean" frame and a "still" frame with its grip open. |
+| The Moment | 16×16, a small gold running figure | Running frames along a line, and a streak (a stretched frame) for its exit |
+| The Harpe, falling | 16×16 spinning object, 4 frames | Lands as three glints |
+| The gold feather-glint | a field effect, 1 tile | — |
+| Phaedon | new frames: sitting on the floor by a bed; kneeling; face down on a blanket | STORY §8.4 asks for "Phaedon kneeling" |
+| Kleon | new frames: mid-swing at the gate; carrying Hyperion (two objects walking, so only an arm-over-shoulder frame is needed if the two are drawn as one 32×32 object) | — |
+| Hyperion | clouded eyes (a palette tweak, STORY §8.4); sitting hard on the steps | — |
+| Mom | in her melissa veil (the Delphoi writer's sprite), with a hands-clasped waiting frame | — |
+| Alethea | a lamp-raised frame | — |
+| Rhea | an arms-spread frame | — |
+| Talos | a hammer-raised frame | — |
+| Lykophron | a stylus-raised frame, ink-dark right hand | — |
+| The player | the honey-gold cloak palette (E17) | Optional |
+| Birds in flight | static flying-pose objects: a gull, a pigeon, an owl | — |
+| The shadowless figure | a traveler in a petasos, with no shadow | Optional (E18) |
+
+### Pictures
+
+- The pool's picture: Medon at the Loom, hammering a black chain onto a post, three figures at the warp with their backs to him. 240×160 or a 128×96 picture window, drawn in true color and shown through E5's sepia.
+- Kleon's snapped thread on his palm (an item picture, 32×32).
+
+### Battle backgrounds
+
+- **The Stair of Hours:** a pale stone landing over gray cloud, with the great sundial; for the multi battle and the Lord of Time.
+
+## Art needs on the League road
+
+### Tilesets
+
+**`delphoi`** (the Delphoi part's) covers Route 29's lower half, the Korykian path. Route 29's upper half needs a few pieces it may not have: snow lying in hollows, the saddle's open meadow, an old town's foundations (Lykoreia), a turf-roofed drystone hut exterior, a small tarn, a wooden palisade with a gate (open and shut), and a gully. They can live in `delphoi` or in `olympus`.
+
+**`thessaly`** (proposed, new; or folded into `lakonia` and `olympus`, Open questions 14) for Thermopylai, Route 30 and Tempe:
+- **Thermopylai:** a road on a narrow shelf, a cliff face (Kallidromos) with the Anopaia switchbacks, a salt marsh with reeds and a jetty, steaming hot pools (animated steam) with a yellow sulfur edge, the ruined Phokian wall with a one-tile gap and a stair, a stone lion on a plinth on a little hill, three old gate gaps in walls, small houses of the hamlet (Anthela), a shrine of Demeter, a goat pen.
+- **Route 30:** flat wheat fields (a wheat metatile that reads as crop, not grass), drainage ditches with tall grass along them (the encounter tile), a raised causeway, a lake edge with reeds (Boibeis), Pelion's forested slope (oak and chestnut), a stream fall (waterfall), a rock ledge with a cave mouth blocked by a great round stone with chalk on it, the broken stone table, a big farmhouse exterior.
+- **Tempe:** a green gorge with plane trees, a fast river with rapids and a slow reach, a stone bridge, houses on stilts and piers over water, an ancient three-trunked laurel at the water's edge (2×3), an old altar under the trees, a stone gate-post with the owl.
+
+**`olympus`** (00_front) covers every Ascent map and the Gate. Its pieces, map by map:
+- **Foothills:** beech and black-pine woods, drystone terrace walls, a rockfall (Hammer), box thickets (Sickle), a fallen column drum (Girdle), the shrine of the Twelve (an altar with twelve faces in a ring), a mountain tarn, milestones.
+- **Weeping Cliff:** the cliff face shaped like a seated woman with her face in her hands, a large composite of about 6×8 metatiles with a seep animation at the eyes; the 2-tile short fall and the 8-tile great fall (waterfall metatiles); a round pool with reeds; fourteen young cypresses; a warm spring; flowers laid at the water's edge.
+- **Ice Caves:** ice walls, rim-lit for darkness; ice floor (the slide behavior); icicles, long and short; frozen columns; cracked ice walls (Hammer); a frozen lake with open-water channel edges; a stone hearth cut into the wall, with firelight; Medon's door with its bronze chain, intact and cleaved; braziers, lit and unlit (shared with the slice's if they suit).
+- **Snowfields:** deep snow (the encounter tile), trodden snow paths, snow-laden pines, marker poles, a crevasse, a great 2×2 ice boulder, the shrine of Boreas with wool offerings, the snow-watcher's hut's exterior, a cart.
+- **Crags:** rock ledges and cut steps, a rope bridge, eagle nests (large and small), a meltwater fall, the chain-ring in the rock, the cloud bank's edge (fog tiles), cloud steps vanishing upward.
+- **The Gate:** a cloud floor (animated, slow), a white marble terrace and its south steps, marble tables for the Asclepeion and the Agora, a Pithos jar, and the gate of cloud: a tall animated cloud doorway that rolls in on itself.
+
+### Interiors
+
+Every interior is unique (MAP_DESIGN §2). Most pieces are in the room catalogs (`ROOMS_oikia.md`, `ROOMS_civic.md`); new pieces are in italics.
+
+| Interior | Room |
+|---|---|
+| `MAP_ROUTE29_SHEPHERDS_HUT` | a low sunken drystone hut, a fleece sleeping shelf, a cheese press, a milk pail, *a ledge of smooth stones set out like a family* |
+| `MAP_THERMOPYLAI_BATHHOUSE` | *a vaulted room over a steaming pool*, stone benches, *oil flasks and strigils on hooks*, *a sulfur channel and grate*, folded linen |
+| `MAP_THERMOPYLAI_GARRISON` | a long low barracks, *sleeping mats in a straight row with red cloaks folded at the foot*, stacked bronze shields, a spear rack, a broth pot, *a faded painted list of names* |
+| `MAP_THERMOPYLAI_GOATHERDS_HOUSE` | a crooked cliff hut, *an indoor goat pen*, a basket, cheese shelves, a crook, *a charcoal path-map covering one wall* |
+| `MAP_THERMOPYLAI_COUNCIL_HOUSE` | *a pillared hall with twelve stone seats in a horseshoe*, *a bronze law tablet*, scroll niches, a brazier, one cushion |
+| `MAP_THERMOPYLAI_INN` | a smoky common room, one long table, a hearth, *a knucklebones board scratched in the floor*, *a seer's staff on two pegs over the door* |
+| `MAP_ROUTE30_FARMHOUSE` | a big farm kitchen, a long hearth, harness and rope on the walls, wheat sheaves to the beams, a cheese press, *half of a great stone table* |
+| `MAP_VALE_OF_TEMPE_HEALERS_HOUSE` | a plane-wood house on piers, the healer's counter with *linden flowers drying on racks*, a stall table of jars, a window over the water, a bench |
+| `MAP_VALE_OF_TEMPE_LAUREL_HOUSE` | *laurel bundles from every beam*, a loom with a laurel border, a little shrine of Apollo with a lyre, *a boy-sized sickle on a hook* |
+| `MAP_VALE_OF_TEMPE_RIVER_HUT` | a hut on stilts, nets and eel traps from the rafters, a punt-pole, *a trapdoor to the water*, *a driftwood river god with a reed beard* |
+| `MAP_ASCENT_SNOWFIELDS_HUT` | *a round stone room with a central hearth and smoke-hole*, fleeces, *skis and snowshoes on pegs*, *a row of labelled winter jars* |
+
+`MAP_ASCENT_ICE_GROTTO` (12×10) is icicles and a narrow ice floor, all from `olympus`. The Low Pasture, if it becomes its own map, is Foothills pasture.
+
+### Elsewhere
+
+- **The Gulf ferry** *(Act II's map)*: vine and grape metatiles for the mast and yard, and ivy on the oars, shown by `FLAG_ICHOR_FERRY_VINES`.
+- **Astyra** *(Act II's maps)*: nothing new. The trial reuses the ostracism's urn, count board and crowd metatiles. The decree's close-up is a new item picture: a clay tablet with the city's owl seal and no hook.
+- **The Akropolis** *(Act II's)*: the stump with the green shoot, a 1×2 metatile swap.
+- **Kronion Hill** *(slice)*: sheep on the summit (Wooloo objects, as the slice's flock).
+
+### Sprites
+
+| Who | Overworld | Notes |
+|---|---|---|
+| Thrasyllos | townsfolk body, new palette | — |
+| Eutychos, Amphilytos, the mother and boy | townsfolk walkers | shared palette families |
+| The Titanborn with her helmet in her hands; Kroke, Sitalkes, Thinos | the Titanborn walker with the **helmet pushed back** | one variant sheet for all ex-Titanborn |
+| Mnasippos, Koronos | the HOPLITE walker in the Archon's colors (white and blue); Koronos old and seated on a stool | — |
+| Maron, Prokles | the VETERAN walker, red cloaks | — |
+| Ione, Talos, Gylippos, Petros, Amathos, Kerykos, Lysimachos, Daphne, Alethea, Kleon | existing | Daphne in her new sandals, and a seated pose under the laurel |
+| Phaedon | Act II's, unmasked | — |
+| Hyperion | Act II's, with clouded eyes (a palette tweak, STORY §8.4) | — |
+| Rhea | unhelmeted (the Lakonia writer's) | — |
+| Lykophron | Act II's, bare-faced, ink-dark right hand | — |
+| Elpis | Act II's, with a stool on the quay | — |
+| The youth (Dionysus) | asleep against a mast (one frame), and standing, ivy-crowned, in purple | **no shadow** (E18's per-object opt-out) |
+| The mate, two sailors, the helmsman | the SAILOR walker | — |
+| Three dolphins | a jumping dolphin object, 2 frames | reused for every later crossing |
+| Pyrrhis, Gorgo, Philyra, the laurel-keeper, Hippodameia | townsfolk women, varied palettes | — |
+| Eurydemos, Pylagoras, Megistias, Peirithoos, Enipeus | townsfolk men, varied palettes | — |
+| The laurel boy | a youth in white with a sickle and an armful of laurel | — |
+| Aix | a Kerazap object | — |
+| The old woman at the cliff | townsfolk elder | — |
+| Eschara | an old woman wrapped in fleeces | — |
+| Chionis | an old man in fleeces with snowshoes | — |
+| Eunomia, Dike, Eirene | one body, a woman in a long white peplos with a garland, in three palettes (white and gold; white and blue; white and green), each with one held thing: a scroll, scales, an olive branch | **no shadow**, all three |
+| Kleobis and Biton | the MOUNTAINEER walker in harness, and a cart object | — |
+
+**Trainer portraits** (64×64): VETERAN, MOUNTAINEER (male and female), KITHARODE, CADET M, SCOUT. SHEPHERD, GOATHERD, HARVESTER, RUNNER, PILGRIM, AUGUR, TITANBORN, FISHER and GIGAS exist or come from the slice, Phase 2 and LABYRINTH.
+
+### Battle backgrounds
+
+- **The mountain road:** pine and thyme upland (Route 29), shared with the Delphoi part's heights if it has one.
+- **The plain:** wheat under a wide sky (Route 30).
+- **The Ascent:** a mountain meadow with Olympus in cloud behind (the Foothills, the Weeping Cliff).
+- **Snow:** white upland under falling snow (the Snowfields).
+- **Ice cave:** blue-black ice with icicles (the caves and the grotto).
+- **Above the clouds:** rock and sky, with the cloud sea below (the Crags).
+
+### Screens
+
+- The decree of exile's close-up (the owl seal, no hook).
+- The trial's exhibits reuse STORY §6's close-ups: Kleon's draft, Elpis's tablet, the unfinished decree, a Keeper's record with a hook under the owl.
+
+## Tilesets
+
+All in `olympus` (00_front), unless the halls need their own secondary for palette room. Plan the halls' palettes together: four halls with four color identities, and one shared marble.
+
+| Map | Pieces |
+|---|---|
+| The Hall of Shields | raked-sand floor, columns hung with round bronze shields (three variants: plain, dented, holed), braziers (2×2, animated), a tropaion post with a helmet and cuirass and an empty peg, a plain bench, red cloth hangings |
+| The Hall of Ships | blue-green wave mosaic floor, an open east wall framed by two columns onto a sea of cloud (an animated cloud metatile row, slow), a bronze ram jutting from the floor with a small plank deck on it, stacked tarred planks, a model trireme on a trestle |
+| The Hall of Questions | scroll niches floor to ceiling (stuffed, and a few empty), little owls asleep in the top niches, a long table of wax tablets drawn with circles, a single hanging lamp, an astrolabe on a stand |
+| The Hall of Eyes | peacock-eyed marble (a veined slab tile with "eyes"), four columns with coiled bronze serpents, a golden-apple tree in a bronze urn (2×3), a low throne |
+| The Summit | worn stone terraces, a great plain altar, a wind-bent juniper, the cloud weather layer at the map's lower edge |
+| The Hall of Heroes | a rock-cut room, painted stelai set in both walls (a weathered one, ordinary ones, a crisp new one, a blank white slab), a roof slot that lets a shaft of daylight fall on the blank slab |
+
+## Sprites and portraits
+
+| Who or what | Overworld | Portrait (64×64) |
+|---|---|---|
+| Brasidas | 16×32: gray, square, red cloak, a spear | yes |
+| Themistokles | 16×32: sun-dark, sea-stained cloak, rope at his belt | yes |
+| Hypatia | 16×32: plain undyed philosopher's cloak, an astrolabe | yes |
+| Olympias | 16×32: rich robes, a live snake across her shoulders (the snake is part of the sprite; its head lifts in a second frame) | yes |
+| Aristeides | 16×32: white beard, undyed cloak, olive wreath, staff, the bronze box under his arm (the Act II sprite, if Act II draws one); a second sheet without the box for after the summit | yes (Act II's, if drawn) |
+| Mnemon | 16×32: broad, chalk-white to the elbows, mallet | — |
+| Elpis with her starter | Elpis's walker (Act II's) plus three follower-sized starter objects (the base stages, which exist as followers) | — |
+| Rhea, unhelmeted | the Lakonia part's sheet (gray-haired, square-jawed, Kleon's eyebrows) | the Lakonia part's |
+| Kleon, festival | a runner's sheet: short chiton, bare feet, no greaves, his hair a mess | — |
+| Phaedon, at Elaia | his Act II healer's sheet, holding a jar | — |
+| The sleeping guard | the HOPLITE walker, seated, asleep (one frame) | — |
+| The Wooloo with the ribbon | the slice's Wooloo object, with a ribbon frame | — |
+
+## Objects and item pictures
+
+- **The bronze box:** an object, 2 frames (shut, open).
+- **Medon's Knot:** an item picture in 5 frames: a tight black fist of thread with one red strand; looser ×3; a single gold thread. Item icon: frame 1.
+- **The gold thread:** a small object (16×16), 2-frame shimmer, for the sine drift south (E15).
+- **The Archon's Seal:** an item icon, a bronze ring with an owl.
+- **The tablet in the Hall:** a sign-window picture of a wax tablet with the owl seal and no hook.
+
+## Battle backgrounds
+
+- **The Pantheon:** four, one per hall: sand and shields; waves and cloud; scrolls and lamplight; peacock marble.
+- **The Summit:** open sky above cloud, the altar behind.
+
+## Screens
+
+- **The Hall of Fame screen, re-skinned:** the record as a white marble stele on a rock wall, each Pokémon's sprite appearing as if cut in (a chisel-dust wipe), the player's name in carved letters across the top. A UI pass shared with the existing Hall of Fame code.
+- **The credits frieze** (E14): the boot intro's frieze art, reused; new frames only for the gold thread's run home and its sinking into the olive's roots.
+- **The Star Chart's last patch:** the player's figure as a constellation, in two variants (Theo, Ianthe) and the cloak's two palettes.
+
+---
+
+# Part 11. Engine needs
+
+Everything Act III asks of the engine, with the names the scenes above use. Each item builds on an existing system. `design/ENGINE_API.md` (the ichor-engine session) is the API of record: where it already provides something, its name wins, and these become requests to that session. What ichor-engine hasn't built, this session builds as small `// Ichor:` edits, coordinated through the director.
+
+| # | Need | Name used in this script | What it does | Builds on | Effort |
+|---|---|---|---|---|---|
+| E1 | **The Frozen Hour mode** | `FLAG_ICHOR_FROZEN_HOUR` | While the flag is set, on every map load and every frame: every BG and OBJ palette is shown through `TintPalette_GrayScale`, except the player's and any **unfrozen** object's; the day-and-night tint is suspended; every object event is frozen (movement none, animation held on its current frame, no idle turns); wild encounters are off; the map's BGM is replaced by `MUS_ICHOR_MUSIC_BOX`; field sound effects are muted except the player's footsteps and those a script plays. Fly (Daedalus's Wings) and the herms still work. | `TintPalette_GrayScale` (`src/palette.c`), the DNS hook (`OW_ENABLE_DNS`), `ObjectEvent` freezing (`FreezeObjectEvents`, `src/event_object_movement.c`), the wild-encounter check (`src/wild_encounter.c`), the map-music hook (`src/overworld.c`) | Medium |
+| E2 | **The gray spreading** at the Loom | `special Ichor_FrozenHourBegin` | Applies E1 palette by palette, outward from the Loom: the BG palettes nearest first, one palette every 6 frames, the player's excluded. Then sets `FLAG_ICHOR_FROZEN_HOUR`. | E1 | Low |
+| E3 | **Unfrozen objects** | `special Ichor_UnfreezeObject` (`VAR_0x8004` = local id); map JSON flag `ichor_unfrozen` | An unfrozen object keeps its color and moves normally in the Frozen Hour: Phaedon and Hyperion, Kleon once he wakes, the Fates as they rouse, Elpis's music box (its 2-frame tick), the Pool of Mnemosyne's ripple, and the optional shadowless figure. The special plays Kleon's "color runs in from his fist" as a 16-frame blend from gray. | E1, `BlendPalette` | Low–Medium |
+| E4 | **Frozen poses** | `MOVEMENT_TYPE_ICHOR_FROZEN_STEP` | Holds an object on its walk frame, mid-step, so frozen people look caught in motion. Birds in flight use a static flying-pose object graphic. | movement types (`include/constants/event_object_movement.h`) | Low |
+| E5 | **Sepia memory** at the Pool of Mnemosyne | `special Ichor_SepiaMemoryBegin`, `Ichor_SepiaMemoryEnd` | Swaps the gray for `TintPalette_SepiaTone` while Medon's memory plays, then back. Gray is the present and sepia is memory; the two never mix on screen. | `TintPalette_SepiaTone` | Low |
+| E6 | **The twelve-step color return** on the Stair | `special Ichor_ColorReturnStep` (`VAR_0x8004` = 1–12) | Blends every palette from its grayscale copy toward the original by one twelfth per call. Step 12 clears `FLAG_ICHOR_FROZEN_HOUR`, restores the DNS tint at dawn, and lets the field sound back in. | E1, the expansion's palette blend routines | Low–Medium |
+| E7 | **The bull-leap timing special**, built generic | `special Ichor_BullLeap` (`VAR_0x8004` = the moving object, `VAR_0x8005` = the line's tile, `VAR_0x8006` = the window in frames) | LABYRINTH §3. Returns `VAR_RESULT` 0 early, 1 clean, 2 late. Reused on the Stair for the Moment: the object is the Moment, it runs along the falling sickle's edge, and the window widens by 2 frames after each miss, up to double. | `src/fishing.c`'s wait-for-A step | Low–Medium |
+| E8 | **Marble statues** (Galatea's Gallery) | `MOVEMENT_TYPE_ICHOR_STATUE` | SYSTEMS §12, Aphrodite. On each player step, a statue steps one tile toward the player unless the player is facing it, or is facing a bronze mirror that reflects it. A statue that reaches the player sends them to the stage's start (a script, not a battle). | the copy-the-player movement types | Medium |
+| E9 | **Beams** (Apollo's Pythian Light; Ring VII's mirrors) | `special Ichor_TraceBeam` (`VAR_0x8004` = the source's beam id) | SYSTEMS §12. Walks the grid from the source, turns at mirror objects by their facing, swaps beam metatiles along the path, and returns in `VAR_RESULT` which target it ended on. Mirrors turn 90° when the player pushes A on them. Ring VII and Apollo share it, as LABYRINTH §12 says. | `setmetatile`, `DrawWholeMapView` | Medium |
+| E10 | **Large objects** | the Lord of Time's overworld graphic | A 64×64 object for the Lord of Time at the Loom and on the Stair; it holds the Harpe in every concept under review. `OW_LARGE_OW_SUPPORT` is already on for Asterion. | `OW_LARGE_OW_SUPPORT` | Low (art) |
+| E11 | **The crumbling Stair** | script only | Row by row below the twelfth landing: `setmetatile` to the sky metatile, `DrawWholeMapView`, `special ShakeCamera`, while Kleon's and Hyperion's objects walk down just ahead of the swap. The camera object stays at the top. | existing commands | Low |
+| E12 | **Herm heads in the Frozen Hour** | script helper `Ichor_EventScript_FrozenHerm` | Each anointed great herm's head metatile swaps to the variant facing the nearest unvisited sanctuary, on map load, chosen from the three `FLAG_ICHOR_ROUSED_*` flags and `FLAG_ICHOR_PHAEDON_READ_TABLET`. Un-anointed herms stay as they are. Talking to one names the place. | the herm system (SYSTEMS §4, ichor-engine), `setmetatile` | Low |
+| E13 | **Multi and partner battles** | `setmultitrainerbattle` | The Omphalos gate (you and Rhea against two Gigas) and the Stair (you and Kleon against Phaedon and Hyperion). Partner teams are `PARTNER_ICHOR_*`. | `asm/macros/event.inc`, the expansion's partner battles | Low |
+| E14 | **The credits frieze, reversed** | `special Ichor_CreditsFrieze` | Reuses the boot intro's frieze (`design/phase1/INTRO.md`), scrolled the other way: the golden thread runs home across the turning pot, past Olympus, the temple and the sea, to the third olive in Elaia, and sinks into its roots. Then the Star Chart's last patch fills with the player's shape. | the intro's frieze code | Medium |
+| E15 | **The Knot untying** | script only | Six YES-to-continue pulls with a rope-creak SE; the Knot's item picture swaps through three looser frames and then a single gold thread; a gold thread object drifts off south on a sine path. | item picture windows (`showitempic`-style), a sine movement | Low |
+| E16 | **The Labyrinth's systems** | LABYRINTH §12 | Ariadne's Thread, darkness and lit zones, glow-paint, Asterion's AI, the Helm of Darkness, sentries, the disguise, dials, sun and moon gates, the dancing floor, the lift, the sunken floor, the alarms | LABYRINTH §12's table | Per that table |
+| E17 | **Melitta's cloak** (optional, decision S13) | `FLAG_ICHOR_WORE_MELITTAS_CLOAK` | A palette swap of the player's overworld sprite to the honey-gold cloak | the player's palette | Low |
+| E18 | **The shadowless figure** (optional) | a normal object with no shadow | Ichor gives every object a shadow, so one without stands out (SYSTEMS §10's first tell). It moves at the edge of an Astyra rooftop in the Frozen Hour, unfrozen, and is gone. | the shadow flag | Low |
+
+**Order of work.** E1–E4 and E6 carry the climax and come first; they also let every frozen map be tested headlessly by setting one flag. E7 is needed by Knossa before the climax. E8 and E9 are the two temples. E10, E14 and E15 are art-heavy and come last.
+
+**Tests.** Each need gets a headless Lua check on `tools/ichor/mgba_headless.c`: E1 sets `FLAG_ICHOR_FROZEN_HOUR` and checks the palette buffer is gray outside the player's slot and that a wild-grass walk triggers no battle; E6 runs twelve steps and checks the buffer matches the original; E7 drives A at fixed frames and checks `VAR_RESULT`; E8 walks backward in a corridor and checks the statue's coordinates; E9 turns a mirror and checks the target metatile.
+
+---
+
+# Open questions
+
+Each region's questions, in story order. The ones that need the director or the user are repeated in Decisions for the user.
+
+1. Kythera: The *Euploia*'s deck map is Phase 2's, whose fishing table is levelled 10–15 and whose objects are Act I's; Act III uses the deck for Route 22 by night, the Malea passage, Route 23 and the run to Gytheion, so I propose a second map, `MAP_TRIREME_EUPLOIA_DECK_SOUTH`, sharing the deck's layout with Act III's objects and a 38–42 fishing table (the same ship, so the shared layout doesn't break "every interior is unique").
+2. Kythera: AETHOS_MAP gives the island one section, `MAPSEC_KYTHERA_ISLE`, so only one fly target; I chose Skandeia (the harbor) and let the Foam Road's great herm serve Paphia's side, or add a `MAPSEC_PAPHIA` at the same cell.
+3. Kythera: Act III's voyages are Nausikles's *Euploia* (he gives the ship away only in the post-game Odyssey); if Act II's Astyra–Kaldera trireme is another ship, III-1A's captain changes and Nausikles needs a line on how he got south.
+4. Kythera: Ketofry's dex habitat ("any water") conflicts with the director's ruling (it evolves at 20), so no Kythera fishing table has it; the dex team may want a named low-level fry pool somewhere instead.
+5. Kythera: the wild tables borrow widespread lines outside their dex habitats (Psychora, Chelyra, Gelasable, Harpelle, Cairnolith, Melisseer, Narcibulb on the falls, Narcisheen surfing, Telkanvil fishing), marked †, because Kythera's own lines are only six; the dex team should bless or replace them.
+6. Kythera: SYSTEMS §12 gives the gallery "three statues"; I use four, so the tempting south-aisle shortcut always fails, which teaches the room's point.
+7. Kythera: Lysis and Philinna are set up as the two shy villagers for SYSTEMS's post-game E7 (Aphrodite's love-letter test); the POSTGAME writer should use them or tell me to cut the seed.
+8. Kythera: LABYRINTH §9 promises each Minoan vault "a Minoan-era rare"; I left Kythera's vault's rare to the Knossa writer and the dex team.
+9. Kythera: Nikarete's grandson is LABYRINTH's Ring IV Titanborn Lithos, given a Kythera home and a post-climax return; the Knossa writer may add one line to his Ring IV text ("My grandmother mends nets on Kythera.") or I'll drop the tie.
+10. Kythera: Psephos is written female (a Titanborn F walker); if Team Titan's grunt sprites are male-only, she becomes male.
+11. Kythera: Galatea's team has no Misty Terrain on purpose (it would block her own Chelyra's Sing); Balance can trade Sing for Misty Terrain on Spartan.
+12. Kythera: Paphia's marble votive feet as a cosmetic offering item is new; Balance can cut it and let the stall sell Frankincense only.
+13. Kythera: the gallery's music must stop for one beat when a statue moves; that needs either a script-triggered rest in the track or two tracks with a fast fade.
+14. Kythera: The Lakonia writer owns Route 24; if it doesn't use the `kythera` secondary, Skandeia's north bay needs a primary-only strip 6 rows deep at that seam.
+15. Kythera: "Phaedon's girl is poorly, and he's away so much" assumes Act II hasn't already shown Daphne leaving Kaldera; if it has, III-1A moves to Daphne's letter and the satchel arrives by gull with Alethea's letter.
+16. Kythera: `MAP_ROUTE23_CRETAN_SEA` is Route 23's western stretch (Kythera to Antikythera); Route 23 runs ten cells to Amnisos, so either the Knossa writer adds an eastern map along Knossa's coast joining my east edge, or my east edge stays an open-sea dead end.
+17. Kythera: Melos's statue needs a rooted variant of engine E8 that turns instead of stepping (`MOVEMENT_TYPE_ICHOR_STATUE_ROOTED`); if that's too much, a step-hook script that turns the object does the same job.
+18. Kythera: Melos (`MAPSEC_MELOS`) has no Asclepeion, so I made it a Nausikles lane stop and a Surf destination rather than a fly target; the director may want a heal location there.
+19. Kythera: The call at Skandeia after Knossa means the Knossa writer's trireme from Amnisos warps to Skandeia's quay (`FLAG_ICHOR_SKANDEIA_CALL`), and the Lakonia writer's Route 24 crossing starts from `FLAG_ICHOR_SAILED_FOR_GYTHEION`; both hand-offs need agreeing.
+20. Kythera: Route 22's eastern map joins Kaldera, which is Act II's; the seam columns need agreeing with the Act II writer.
+21. Kythera: Melos's map can use the `kythera` secondary with a few volcanic pieces, or borrow Act II's Kaldera set where they agree; the art lead should pick one so the island doesn't need a third set.
+22. Knossa: STORY §7.4's four additions are already folded into LABYRINTH's Scene H and Scene J, so this region copies them at their insertion points but changes nothing; if LABYRINTH is revised, both copies must move together.
+23. Knossa: two LABYRINTH lines need a build fix the approved text lacks: Scene E's em dash ("Face your—" becomes "Face your-"), and two lines that wrap to three lines in the game font and are split into two boxes with no word changed: Scene H's margin line (at "A little hook for a signature.") and Scene F's first line (at "Painted pillars.").
+24. Knossa: the sealed tablet stays sealed here, but STORY III-5 has Alethea read its scraped wax at Lakonia and STORY §7.7 has Phaedon break the seal in the Frozen Hour; the Lakonia region must stage how she reads and signs it without breaking the seal (a tied diptych read through its gap, or a reseal with her own wax).
+25. Knossa: four maps are added to LABYRINTH's 29 (the vineyard terraces, needed because one map can hold only one land table; the beekeeper's hut, because the rest point is a house; the Bull Road vault; and the cradle shrine, the dex's low-level Kymbash spot). Amnisos's Asclepeion and Agora interiors are also counted separately from LABYRINTH's "interiors ×5".
+26. Knossa: the dex places Kymbash, Kourodin and Kerastorm in the "Diktaean cave"; LABYRINTH's Mount Ida has the Idaean Cave. This region keeps LABYRINTH's name and puts the dex's species there. The dex team or the director should pick one name.
+27. Knossa: STORY and LABYRINTH give Hyperion an unevolved Pyrapod at 51 (it evolves at 34). Kept, holding an Eviolite as a deliberate wall, which also saves Mantipod for Phemonoe; the alternative is Mantipod 51.
+28. Knossa: the dex has no ordinary bull, so the palace herd, the Gentle Bull and LABYRINTH's wild Tauros are all Taurivet, Hephaestus's bronze bull (a dex habitat deviation); the dex team may want a plain Cretan bull instead.
+29. Knossa: many Labyrinth species are † deviations from dex habitats (Kalyptor, Hyphantis, Persenyx, Plouteras, Sophowl, Psychora, Chelyra, Amnoze, Lykanax, Melibee and Melisseer as the Minoan bee), because the dex's own Knossa species are few; the dex team should confirm or add Knossa to those habitats.
+30. Knossa: Ikaroth appears "only in harsh sunlight" by the dex, which an encounter table can't test; it is a 1% day slot on the Bull Road, the Bronze Heel and the Ida path unless the engine adds weather-gated slots.
+31. Knossa: Alethea's letter goes by one of Kydon's "order gulls", and Daphne's reply comes back the same day; if Act II establishes how gull post works (Halia's gull at Kaldera), match it.
+32. Knossa: the Broken Ring's Kythera host is named "Phrasidemos" in Aithon's line as a placeholder; the Kythera region names the real host, and the Lakonia region names the mess-hall woman who holds link 3.
+33. Knossa: LABYRINTH's `TRAINER_ICHOR_KLEON_KNOSSA` becomes three constants by Kleon's ace (00's convention: `_PYLAKYON`, `_SEISMARE`, `_DAPHNYAD`), and his heart battle needs a "Kleon Titan" portrait with the helmet pushed back.
+34. Knossa: the proposed `VAR_ICHOR_KNOSSA` values (0–20) are this region's reading of LABYRINTH §13's list; LABYRINTH's owner should confirm them before ring scripts are written.
+35. Knossa: the Old Rod still catches Ketofry at the band's level (42–44), the Magikarp exception to BALANCE's evolved-forms rule, as Phase 2 does.
+36. Knossa: Gigas Klytios (LABYRINTH's stand-in when Enkelados is already beaten) and the Mount Ida trainers (Battos, Idaia, Agesilaos, 47–49) are this region's additions to LABYRINTH §9's trainer table.
+37. Lakonia: Levels follow 00_front and BALANCE: Iapetos 52–54 and Kleon 53–55, against STORY's "about 55" and "about 57". BALANCE's Lakonia boss row names "Rhea 52–54", but Rhea doesn't battle in Lakonia (she unmasks); suggest BALANCE's row become "Iapetos 52–54, Kleon 53–55".
+38. Lakonia: For the Delphoi writer: Rhea gives her Kourodin to Kleon in III-5H, so STORY's Delphoi partner team (Laolith, Geogrip, Kourodin) can't stand. UNDERWORLD has her keep an old, never-evolved Cairnolith with an Everstone; suggest her Delphoi team be Cairnolith (Everstone), Geogrip and Plouteras (her Akropolis three, STORY §2).
+39. Lakonia: For the Delphoi writer: Rhea, Kleon and Alethea leave Lakonia together by the goat paths over Taygetos (III-5J) and should be at Delphoi before the player; Alethea carries prophecy fragment 8 unread if the player dug it after III-5J.
+40. Lakonia: The voyage calls at Skandeia between Amnisos and Gytheion (AETHOS_MAP step 4). It plays on the *Euploia*'s deck with a harbor background; the Knossa writer's departure should warp onto the deck and hand over to III-5A.
+41. Lakonia: The Gigas are now Gration and Pallas (not Ephialtes and Agrios), to clear the Delphoi part's Ephialtes and the other part's Agrios.
+42. Lakonia: The stelai use UNDERWORLD's proposed names for Kleon's siblings, Agis and Kyniska (only Agis's is written: Lakonia named only the war dead). Agis collides with the slice's HOPLITE Agis; Kleon's line ("Half the boys in Lakonia are called Agis") turns the clash into a joke. Confirm, or rename one.
+43. Lakonia: Rhea never says her dead children's names in III-5E, so UNDERWORLD's scene 20 ("You never say their names." "I'm saying them now.") stays the first time.
+44. Lakonia: Brasidas's cameo says the first half of his STORY line ("Lakonians never asked how long. Only how well."); the Pantheon writer should end his intro with the second half, "Show me well."
+45. Lakonia: Alethea reseals Elpis's tablet with her trowel's mark (III-5G), so STORY §7.7's "He looks at the seal for a long time. He breaks it." is literally true; the Frozen Hour writer may want one line of staging there ("A trowel, pressed into the wax. Not a hook.").
+46. Lakonia: Kleon melts his own Arkadia copy of the forgery, not `ITEM_KLEONS_DRAFT` (the archive draft), which the trial at L-2 still uses.
+47. Lakonia: Habitat deviations (†): Galenyon, Narkeray, Karkitox, Kynoketos and Telkanvil on the strait and the river; Chelonet, Onotis, Kaplet, Elapling, Stachypter and Kalyptor on Route 25; Chelonet and Kalyptor on Route 26; Hyphantis, Lykanax, Kaprodon, Harpelle, Chelyra and Enigmaw on Route 27's Arkadian slopes; Galenyon at the lake. The dex team may prefer fewer.
+48. Lakonia: The reed-bed nests are the first map to define all four time-of-day tables (`_Morning`, `_Day`, `_Evening`, `_Night`) so Chalkip lives only at morning and evening; if the engine's fallback can't do it, Chalkip goes in `_Morning` and appears by day too.
+49. Lakonia: The Lernip hunt adds a weather entry to SYSTEMS §6's omen list ("Rain over Lake Stymphalia. Akanthis says the deep reeds are moving.") and forces it once after the rumor; the omen owner (ichor-engine) should confirm the forced-omen hook.
+50. Lakonia: Lake Stymphalia has no healer (AETHOS_MAP gives healers only to the five hamlets); Akanthis's fire heals as a route rest point, with no heal location.
+51. Lakonia: Nausikles runs the Act III ferry from Gytheion's quay (Skandeia, Amnisos); the Kythera and Knossa writers should give him the same menu at their quays.
+52. Lakonia: The Mani road leaves Lakonia's south edge as Route 31 (post-game), roped off until the credits; UNDERWORLD owns it, and its seam with `MAP_LAKONIA` needs agreeing.
+53. Lakonia: Route 27's west seam meets Act II's Arkadia and crosses tilesets (`lakonia` to Arkadia's); the world-act2 session must agree the columns and keep 8 columns of primary-only metatiles each side. The layout assumes Route 27 runs west, then south-west, across its two cells into Arkadia; if Arkadia's edge is elsewhere, the beats hold and the direction turns.
+54. Lakonia: Hestia's gift is Charmander at 45 (SYSTEMS's table), a level below Route 25's wild band of 46–50; BALANCE's gift rule says gifts sit inside their stage's band. Fine as a god's gift, or raise it to 46.
+55. Lakonia: LABORS's Labors 2 and 6 should use `MAP_LAKE_STYMPHALIA`, which shows both post-game gates: the roosting north reeds (Labor 6) and the regrowing south-east reeds (Labor 2, the Springs of Lerna).
+56. Lakonia: The Vapheio door is shown on Route 25 with the Labrys in hand but opens only after the credits, per LABYRINTH §9's "after the story"; if the director wants it open from Knossa on, drop the "isn't ready yet" text.
+57. Delphoi: STORY §2 gives Rhea Laolith, Geogrip and Kourodin at the Omphalos, but she gives Kourodin to Kleon at Lakonia (III-5H); this file gives her Plouteras instead, from her STORY §2 Ground team.
+58. Delphoi: Rhea's partner team is at 57 with an ace at IVs 31; STORY says "about 58". 00_front's night-battle row is 56–57, so she matches the Gigas.
+59. Delphoi: who travels with whom from Lakonia (Rhea and Kleon over the mountains, Alethea by the ferry, the player by Routes 26 and 27) must match the Lakonia writer's III-5J.
+60. Delphoi: Kirrha and the Gulf ferry are Act II's; the Sacred Olives' west seam and road row need agreeing with world-act2.
+61. Delphoi: SYSTEMS §12 #8 says the master stage carries fire "to the Omphalos's tripod"; here the tripod is the Pythia's, in the adyton, because 00_front puts the Omphalos in its court outside the temple.
+62. Delphoi: Phemonoe's team has one off-type Pokémon (Melisseer, the Delphic bee, as her sun-setter); the dex has only four non-starter, non-admin Fire finals (Hymnaria, Taurivet, Promethex, Mantipod).
+63. Delphoi: TM Mystical Fire has no vanilla number; Balance assigns it. The alternative is vanilla TM Overheat, Flannery's.
+64. Delphoi: Melibee is in late tables because only females evolve (dex), so a male Melibee at 50 is natural; if BALANCE reads this as a first stage too late, swap its slots for Melisseer.
+65. Delphoi: † habitat deviations: Basilops (dex: the Ascent), Sophowl (Akropolis), Lykanax (Arkadia), Elapling and Hierolive (Elaia, the Akropolis), Chelyra (Arkadia), Kerastorm (Knossa's cave), Kalyptor (Kerameikos), Hyphantis (Astyra), Plouteras (the sanctum), Echolali (Kythera), Karkitox (Stymphalia), Kynoketos (open coasts), and Melisseer raised from "rare" on Delphoi's own map. Each has a setting reason here; the dex team may prefer to add these habitats.
+66. Delphoi: Pyrapod, Hymnet and Pelython are once-at-a-time objects at named spots (daily rolls of 1 in 4, the omen, and 1 in 3), not table slots, so the 5-level band rule holds.
+67. Delphoi: the forced night tint from III-7's end to III-8 needs the DNS hook to accept a script override (a small part of engine E1's DNS work).
+68. Delphoi: the Archon reaching Delphoi depends on Alethea's letter (III-6C, "He's very… eventual"); the League writer may want to pay it off.
+69. Delphoi: the Loom after the climax (visitable or sealed) and the opened Omphalos's later state are left to the League and post-game writers.
+70. Delphoi: Theokles reveals that Lykophron was the prophetes on duty in the blind hour and wrote forty lines from three words; this is STORY §2's secret 1 told to the player before Iapetos's trial. Cut it to "He was on duty that night" if the director wants the trial to break it.
+71. Delphoi: the Korykian cave's Lucky Egg is a strong item for Act III; Balance may swap it for an Amulet Coin-class reward.
+72. Delphoi: Aristion's ostrakon needs its number in SYSTEMS §5's 30.
+73. Frozen Hour: STORY's decree text "Iape-" is three letters short of "Iapetos", but the next box says "two letters short"; reproduced verbatim. A one-character fix to "Iapet-" makes both true.
+74. Frozen Hour: STORY lets the sanctuaries be woken in any order, but the Measurer's and Spinner's master lines count hours in the recommended order; P1 adds small order variants. Alternatively, the herms could enforce the order.
+75. Frozen Hour: the three Fates are static at level 60 after the climax, following the dex; STORY §2 says level 50.
+76. Frozen Hour: the Fates appear from `VAR_ICHOR_ACT3` 22 (STORY L-5). Earlier, right after the resolution, would hand players three Lv 60 legendaries before the Ascent.
+77. Frozen Hour: Kaldera's forge is written as `MAP_KALDERA_TELCHINES_FORGE`, the sea-cave forge where Talos told the Harpe's secret, with Talos placed there. If Act II's Talos works at a temple forge instead, the Cutter moves there.
+78. Frozen Hour: Phaedon hands the sealed tablet back after reading it, so the trial (L-2) has it. STORY doesn't say who keeps it.
+79. Frozen Hour: healing on the Stair comes from the Fates' sparks at four sundials, and both Stair battles are no-whiteout with a retry. STORY gives no heal between the multi battle and the Lord of Time, and the crumbled stair means no going down.
+80. Frozen Hour: the Lord of Time battle needs `WE_FLAG_NO_RUNNING` assigned to a new flag (`FLAG_ICHOR_NO_RUNNING`), a config change in `include/config/wild_encounter.h`.
+81. Frozen Hour: Phaedon's trainer class is written "Kronos" (battle intro "KRONOS PHAEDON"). Alternatives: TITAN MASTER, or HEALER.
+82. Frozen Hour: Kleon follows as an NPC follower (`setfollowernpc`, which exists behind `FNPC_ENABLE_NPC_FOLLOWERS`) if that config is on; otherwise he waits on landings.
+83. Frozen Hour: the crumble keeps the twelve landings hanging as hour-stones, so STORY's "the Harpe strikes the eleventh landing … a chime on every landing below" still has landings to strike after the steps fall.
+84. Frozen Hour: E1 needs a default talk route for frozen objects (`Ichor_EventScript_FrozenGeneric`) and a way to exempt one palette slot per map (the Pool's ripple, Elaia's gold thread); both are small additions to E1.
+85. Frozen Hour: Elpis's room, the Stoa, the Pool and the forge are Act II's maps; their frozen objects and frozen scripts need adding to those maps' scripts, so Act II's builder and this session share them.
+86. Frozen Hour: `FLAG_ICHOR_HIDE_FROZEN_ONLY` and the three Fates' hide flags must be set on a new game; that needs a line in the new-game flag setup.
+87. Frozen Hour: the four-voice music box tracks (`MUS_ICHOR_MUSIC_BOX_DRUM`, `_AULOS`, `_LYRE`, `_FATES`) are added cues beyond 00_front's list, unless the music engine can layer `MUS_ICHOR_FATES` over the box.
+88. Frozen Hour: the Lord of Time rematch is in the Loom after the credits at Lv 60, the dex's level; BALANCE's post-game legendaries sit at 70–80 if Balance wants it higher.
+89. League road: STORY L-3 places the sentences "at Akti"; this script stages the asking before the Assembly in Astyra the same day (Ione, Talos and Gylippos come to ask) and shows each result at Akti, Kaldera and Lakonia as optional visits. Confirm.
+90. League road: the ostracism used as a trial is staged in the Agora before the Stoa's steps, mirroring Act II's ostracism map; if Act II staged II-10 inside the Stoa, move L-2 there and keep everything else.
+91. League road: the six voters are new (Eutychos, Amphilytos, the preacher, a Titanborn, a mother, Lysimachos); ideally they are the same six named citizens who voted Alethea out in Act II, with these lines given to them. Act II team to confirm.
+92. League road: the fragment count needs ENGINE_API's `Ichor_CountFlags` exposed as a script special (`special Ichor_CountFlagRange`, `VAR_0x8004` first flag, `VAR_0x8005` count, result in `VAR_RESULT`). Request to ichor-engine.
+93. League road: the Kryopuff snow omen now sits on the Low Pasture, the Ascent's lowest slopes just above Koronos's gate at Tempe; it needs either a per-zone omen table or a tiny map `MAP_ASCENT_LOW_PASTURE` (not in 00_front's list). Director's call.
+94. League road: Aetling's dex habitat ("the nests on the crags of the Ascent… rare, at level 38") isn't among the director's named first-stage spots, so Aetling isn't wild; add a "high nest" spot at 38 on the Crags if the dex team wants it.
+95. League road: dex-habitat deviations (†), for the dex team: on the slopes, Gelasable, Lykanax, Sophowl, Amnoze, Starkos, Nemeleon, Chelonet, Chelyra, Enigmaw, Kalyptor, Harpelle, Basilops (Route 29 and 30) and Lebetron (Routes 29 and 30); on the Thessalian plain, Stachypter, Korantha, Kaprodon and Persenyx; in the ice caves, Plouteras, Kourodin, Kolossard, Hyphantis, Kalyptor and Pythoros; in the waters, Telkanvil, Narkeray, Galenyon, Hymnaria, Karkipool and Karkitox; Kerastorm on Route 29 and the Crags; Chionyad wild at 1% on the Snowfields.
+96. League road: maps added beyond 00_front's list: `MAP_ASCENT_ICE_GROTTO` (12×10, Pagoshard's side grotto, at the director's request) and eleven interiors, all houses with households (Route 29's hut; Thermopylai's bathhouse, garrison, goatherd's house, council-house and inn; Route 30's farmhouse; Tempe's healer's house, laurel-keepers' house and river hut; the Snowfields' hut).
+97. League road: every trainer name now fits `TRAINER_NAME_LENGTH` (10): ARISTODEMOS became ARISTON and the Snowfields' veteran is ALKAMENES.
+98. League road: Dionysus's reveal wants a short theoxenia sting; if the core reveals (Demeter, Hephaestus, Poseidon) don't define one, a shared `MUS_ICHOR_THEOXENIA` jingle would serve all sixteen.
+99. League road: the Horai keep the Gate openly, as in the *Iliad*, but never name themselves and have no shadows (the theoxenia tell), so the rule that gods walk Aethos only in disguise bends without breaking. Confirm the tone.
+100. League road: Daphne's send-off moved from Delphoi's north gate to the first laurel at Tempe, her namesake, as the director suggested; she has walked there from Delphoi's Library with her banned book.
+101. League road: Hyperion's true oracle (fragment 7) is read to him at Talos's forge "with this one found" (STORY §4); that reading is left to the post-game writers.
+102. League road: renamed to clear names the sibling parts already use: the gate captain Dexippos (Lakonia's cook) is now Mnasippos; Polemon (Delphoi's guide) is Leon; Hagnon (a Lakonian cadet) is Ampyx; Othryades (a Lakonian scout) is Kleomenes; Kerdon (a Kythera merchant) is Bathykles; Psephos (a Kythera grunt) is Thinos; Myrtis (a Kythera fisher) is Praxilla; Gigas Agrios (Delphoi's) is Eurytos; the garrison captain avoids Dienekes (a Lakonian scout) as Maron. Kleobis and Biton keep their names as a nod to the Delphoi part's statues.
+103. League road: Kleon waits at the Gate of the Horai, having run up ahead; he doesn't battle, as STORY gives him no League battle. If Balance wants a last rival fight before the Pantheon, this is where it would go.
+104. League road: Chiron's cave on Route 30 is a sealed seed only ("OUT. BACK SOON. TEACHING. -C."); POSTGAME's Centaurus and the Olympiad's Achilles should decide what opens it.
+105. Pantheon: the Archon is at 65–67 per BALANCE and 00_front; STORY §2 suggests 66–70. Confirm BALANCE's.
+106. Pantheon: the Fates' catch level after the climax is 60 in the dex, 50 in STORY §2 and POSTGAME §1; the climax part should rule and POSTGAME should match.
+107. Pantheon: adds a key item, the Archon's Seal (`ITEM_ARCHONS_SEAL`), not in 00_front's key-item table. It carries the Keeper beat; drop it to a scripted prop if the item list is closed.
+108. Pantheon: Alethea is made Keeper in the Hall of Heroes, by the player sealing the order (choice-free), and learns it after the epilogue. The alternative is a scene in Astyra after the epilogue.
+109. Pantheon: Aquila is placed in the Hall of Heroes, not on the Summit, so the Knot scene stays quiet.
+110. Pantheon: the Pantheon resets on a loss, as Emerald's Elite Four does. Confirm, since POSTGAME's weekly rematch assumes the vanilla structure.
+111. Pantheon: the Gate of the Horai's north-door prompt ("no way back down") is the League-road part's; this part starts on the far side.
+112. Pantheon: Brasidas's and Themistokles's stories use real history (Pylos, the wooden-walls oracle, Aristides crossing the blockade) with Salamis and Persia unnamed ("the great fleet"). The director should say how much real history Aethos allows.
+113. Pantheon: the Archon's team holds only berries, Leftovers and a Power Herb, as a portrait of a poor, just man. Balance may want shop items on Spartan.
+114. Pantheon: Olympias's ace is Lernathan (the Hydra Hera raised), with the dex's Melodrakon, Dorydrake and Pythoros also on the team; the dex team should know the pseudo-legendary's final stage debuts in the League.
+115. Pantheon: Themistokles uses Dakrock, whose dex habitat is the Ascent's weeping cliff: the player can catch one on the way up, which is intended.
+116. Pantheon: the epilogue's Wooloo is a National Dex species shown before the National Dex opens; it's the slice's own object, post-credits, and STORY names it, so it stays.
+117. Pantheon: Elpis's starter is `(VAR_STARTER_MON + 2) % 3`, the one the player's starter beats. It shows as a follower object and is never given.
+118. Pantheon: the National Dex upgrade is Daphne's, after the epilogue; if POSTGAME's P2 is approved it is named the Oikoumene Dex.
+119. Pantheon: the credits list "the user" as playtester and judge of taste without a name; the director fills the credits.
+
+---
+
+# STORY.md alignment
+
+Every Act III and League beat in STORY §3 is scripted here, in order, and every STORY draft scene this act uses (§7.4–§7.11) is reproduced word for word; the region writers checked each by script against STORY. Where this file differs from STORY, it is one of these, each also in Decisions for the user:
+
+| STORY says | This script | Why |
+|---|---|---|
+| Iapetos "about Lv 55", Kleon "about Lv 57" at Lakonia | Iapetos 52–54, Kleon 53–55 | BALANCE's Lakonia boss band, under Phemonoe's 57 |
+| Rhea partners at Delphoi with Laolith, Geogrip and Kourodin, about 58 | Laolith, Geogrip and Plouteras, at 57 | She gives Kourodin to Kleon at Lakonia (III-5H), and the night battle's band is 56–57 |
+| The Fates are caught at level 50 | Level 60 | The dex's habitat entries; the climax band is 55–60 |
+| The Archon at 66–70 | 65–67 | BALANCE |
+| The decree breaks off at "Iape-", "two letters short" | Reproduced as written | "Iape-" is three letters short of Iapetos; changing it to "Iapet-" makes both true (decision 5) |
+| L-3: the sentences "at Akti" | Asked at the trial in Astyra; their results shown at Akti, Kaldera and Lakonia | One scene, while everyone is in the capital |
+| L-2's ostracism in the Stoa | In the Agora, before the Stoa, as Act II's ostracism | Mirrors §6.5's staging |
+| Elpis "gets the third starter" | The line the player's starter beats, `(VAR_STARTER_MON + 2) % 3`, shown as her follower | The one neither the player nor Kleon took |
+| The new Archon makes Alethea Keeper of Records | In the Hall of Heroes, by the player sealing the order (no choice) | It lands as the player's first act as Archon |
+
+**What the revised AETHOS_MAP adds** beyond STORY's beats, written in this file's voice: a morning ashore on Melos (III-1B2), a second call at Skandeia on the way from Knossa to Gytheion, Lake Stymphalia on the main road north of Lakonia, and the League road's Route 29 over Parnassos, Thermopylai, Route 30 and the Vale of Tempe before the Ascent.
+
+---
+
+# Decisions for the user
+
+Each has a recommendation. **★** marks the ones that change the most.
+
+| # | Decision | Recommendation | Alternative |
+|---|---|---|---|
+| **A1 ★** | **Lakonia's boss levels.** BALANCE's row names Rhea, who doesn't battle there. | Rewrite the row as "Iapetos 52–54, Kleon 53–55" | STORY's 55 and 57, which overtake Phemonoe's 57 |
+| **A2 ★** | **Rhea's partner team at the Omphalos** | Laolith, Geogrip, Plouteras | Cairnolith (with an Everstone), Geogrip, Plouteras (the Lakonia writer's suggestion, from UNDERWORLD) |
+| **A3 ★** | **The Fates' catch level** | 60, the dex's; POSTGAME §1 should match | 50, as STORY and POSTGAME have it |
+| A4 | **The Archon's levels** | 65–67 (BALANCE) | 66–70 (STORY) |
+| A5 | **The decree's broken name** | Change STORY's "Iape-" to "Iapet-", one character | Keep "Iape-" and change "two letters" to "three" |
+| **A6 ★** | **Extra maps** beyond the planned list: Knossa's vineyard terraces, beekeeper's hut, Bull Road vault and cradle shrine; the Ascent's ice grotto and snowfields hut; Melos; Route 22's two sea maps; the Stymphalian reed-bed nests and deep reeds | Approve all; each exists because one map holds one land table, or a rest point is a house | Fold them into their parents and lose the named rare spots |
+| A7 | **Fly targets.** Kythera has one section, so one fly point; Melos has no healer | Skandeia flies; Melos is a trireme stop and a Surf destination | Add `MAPSEC_PAPHIA`, and a healer on Melos |
+| A8 | **The trireme.** Act III's voyages are Nausikles's *Euploia* | Yes, with an Act III copy of the deck (`MAP_TRIREME_EUPLOIA_DECK_SOUTH`), because Phase 2's has Lv 10–15 fishing and Act I objects | Reuse Phase 2's deck with its objects hidden by flag |
+| A9 | **The trial is mandatory**: the Ascent's gate opens after it | Yes | Make the trial optional and open the gate at L-1 |
+| A10 | **A new key item, the Archon's Seal**, carries the Keeper beat | Yes | A scripted prop |
+| A11 | **Phaedon's trainer class** on the Stair | KRONOS ("KRONOS PHAEDON") | TITAN MASTER, or HEALER |
+| A12 | **Hyperion's Pyrapod at Knossa** stays unevolved at 51 | Yes, holding an Eviolite as a deliberate wall; it saves Mantipod for Phemonoe | Mantipod 51 |
+| A13 | **Theokles at Delphoi** tells the player that Lykophron wrote the Unwoven Prophecy from three words, before the trial | Keep: the trial still has its own reveal (the pattern of hooks) | Cut it |
+| A14 | **Real history in the Pantheon** (Brasidas at Pylos, the wooden-walls oracle, Aristeides crossing the blockade), with Salamis and Persia unnamed | Keep, as color | Myth only |
+| A16 | **The Kryopuff snow omen's patch** on the Ascent's Low Pasture | A tiny map, `MAP_ASCENT_LOW_PASTURE`, so the omen needs no per-zone table | A per-zone omen table in the engine |
+| A17 | **The Horai at the Gate** keep it openly but never name themselves, and cast no shadows (the gods' tell) | Yes | Name them as the Hours |
+| A18 | **Daphne's send-off** happens at the Vale of Tempe, under the first laurel, her namesake | Yes | At Delphoi's gate |
+| A15 | **Kleon's dead brother is Agis** (UNDERWORLD's name), which the slice's hoplite Agis shares | Rename the brother (for example Archidamos) | Keep both; a joke line covers it |
+
+**For the director: id budgets.**
+- **Flags.** The regions name about 310 new `FLAG_ICHOR_*` flags (story, hide, gift and item flags) outside the systems' reserved ranges, against this session's 256 bank flags (0x200–0x2FF). Hidden items (about 60) can go to the vanilla ranges hoenn-cut's batch 2 frees; if that isn't enough, Act III needs about 64 more bank flags.
+- **Vars.** Three: `VAR_ICHOR_ACT3`, and LABYRINTH's `VAR_ICHOR_KNOSSA` and `VAR_ICHOR_LABYRINTH`, inside bank vars 12–17.
+- **Trainers.** The regions define about 170 trainer and partner entries against ids 320–499, the League included; the count is in the report.
+
+**For the dex team:**
+- Every table entry outside a species' dex habitat is marked † in Part 4; the tables need them because late areas carry evolved forms and the dex has 152 species. The dex can widen those habitats or name substitutes.
+- The palace herd at Knossa is Taurivet, Hephaestus's bronze bull, because the dex has no plain bull.
+- The dex's "Diktaean cave" (Kymbash, Kourodin, Kerastorm) is placed in LABYRINTH's Idaean Cave on Mt. Ida. One name should win.
+- Ikaroth's "harsh sunlight only" can't be tested by a table; it is a 1% day slot unless the engine gates slots by weather.
+- Lernathan's final stage debuts as Olympias's ace in the Pantheon.
+
+**For world-act2** (seams and shared maps):
+- Seams: Kaldera with Route 22, Arkadia with Route 27, Kirrha with Route 28.
+- The Frozen Hour's set dressing and scripts go on Act II's maps: Kaldera's forge, the Pool of Mnemosyne, Astyra's Agora and Stoa, Phaedon's house. Their ids here are provisional.
+- The Kaldera opener (III-1A) assumes Act II hasn't already sent Daphne home; and gull post should match how Act II's Kydippe letter arrives.
+- The trial's six voters should be Act II's six ostracism voters.
+
+**For ichor-engine** (beyond Part 11's list): a `special Ichor_CountFlagRange` for the trial's fragment count; a script override for the day-and-night tint (III-7 to III-8); a rooted "turns but doesn't walk" variant of the statue movement for Melos; four time-of-day encounter tables on the reed-bed nests; a forced weather omen for the Lernip hunt; `FLAG_ICHOR_NO_RUNNING` for the Lord of Time (`include/config/wild_encounter.h`); a generic talk script for frozen people and one exempt palette slot per map in the Frozen Hour.
+
+**For music:** the Frozen Hour's music box with each Fate's voice added needs either four extra tracks or the engine layering `MUS_ICHOR_FATES` over it; the gallery's music must stop for a beat when a statue moves; a shared theoxenia-reveal jingle would serve all the gods.
