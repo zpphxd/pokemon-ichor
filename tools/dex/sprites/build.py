@@ -428,6 +428,8 @@ def dump(mon, view, phase, out=None, draft=False):
 
 
 def _dump(mon, view, phase, arr):
+    if arr is None or not arr.any():
+        raise SystemExit(f"{mon.name} has no {view} view (phase {phase}) to dump; draw it in the line's .py first")
     pal = mon.palette()
     hexd = "0123456789abcdef"
     print(f"# {mon.name} {view} phase {phase}. Legend: " +
