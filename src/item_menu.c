@@ -2591,7 +2591,9 @@ static void LoadBagMenuTextWindows(void)
     LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
     LoadMessageBoxGfx(0, 10, BG_PLTT_ID(13));
     ListMenuLoadStdPalAt(BG_PLTT_ID(12), 1);
-    LoadPalette(&gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    // Ichor: menus and messages here use the dialogue box's parchment and ink
+    // palette instead of the white standard menu palette.
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i <= WIN_POCKET_NAME; i++)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
