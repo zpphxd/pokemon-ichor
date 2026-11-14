@@ -257,7 +257,7 @@ and the Temple of Hermes on its height. They are block data, not maps.
 | `img/emporion_scene_agora.png` | The stoa, the Agora shop, the stalls, Pegasus, the notice board |
 | `img/emporion_scene_temple.png` | The Temple of Hermes on its terrace, the Asclepeion, the Peirene, Acrocorinth behind |
 | `img/emporion_scene_port.png` | Lechaion: quays, sheds, warehouses, the crane, the ship and the Diolkos |
-| `img/emporion_scene_*_pass1.png`, `_pass2`, `_pass3` | The three render-and-critique passes; the unsuffixed image is the final one |
+| `img/emporion_scene_*_pass1.png`, `_pass2` | The first two render-and-critique passes; the unsuffixed image is the third and final |
 | `img/emporion_scene_temple_interior.png` | The Herald's Run, a mock of the temple's interior (TILES_temple_hermes.md) |
 """
 
