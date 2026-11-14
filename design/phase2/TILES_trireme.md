@@ -223,7 +223,7 @@ Seven groups, one per secondary palette (6-12). Every 8×8 tile draws from one g
 
 ### The three tiers of rowers' benches
 
-`benches`, hold (1, 2), 2 wide by 3 tall. Thranites (row 2), zygites (row 3), thalamites (row 4), each rower sat facing aft with his loom running up to the hull. Solid. Rows 7-8 are the port bank's lower tiers.
+`benches`, hold (1, 2), 2 wide by 3 tall. Thranites (row 2), zygites (row 3), thalamites (row 4): a seat with its cushion every 16 px, its oar's loom angled up through the tiers to its port. Solid. Row 7 is the port bank's bottom tier, its looms angled down; row 8 the bilge.
 
 ```text
 0x2FF 0x300   X X
@@ -231,9 +231,9 @@ Seven groups, one per secondary palette (6-12). Every 8×8 tile draws from one g
 0x306 0x308   X X
 ```
 
-### An empty seat on the bottom tier
+### A seat without its oar
 
-`empty_seat`, hold (5, 4), 1 wide by 1 tall. A cushion and no rower: put a talkable rower's object event here. Also at (13,4), (9,7) and (14,7).
+`empty_seat`, hold (5, 4), 1 wide by 1 tall. A cushion and no loom: a talkable rower's object event sits here. Also at (13,4), (9,7) and (14,7).
 
 ```text
 0x309   X
@@ -321,3 +321,82 @@ Seven groups, one per secondary palette (6-12). Every 8×8 tile draws from one g
 <!-- end generated -->
 
 ## Render-and-critique passes
+
+Every pass was a render (`tools/ichor/maps/trireme.py --render`, 2x) or an in-game screenshot from
+`tools/ichor/tests/trireme.sh`, looked at, criticised and fixed. The renders are in `img/`:
+`trireme_deck.png`, `trireme_hold.png`, the deck in its states (`trireme_deck_calm.png`,
+`trireme_deck_cast_off.png`, `trireme_deck_last_leg.png`), GBA-screen crops along the voyage
+(`trireme_screens.png`), the scenes in game (`trireme_scenes.png` and `trireme_scene_*.png`) and
+the numbered sheet (`trireme_sheet.png`).
+
+### Pass 0: the first deck
+
+- **What was wrong.**
+  - The ship read as a barge: a hexagon with a blunt bow, a flat-cut stern and a tall, even hull side.
+  - The aphlaston was a broom of thin lines, and the stem post a stick.
+  - The ram was too small to find and the eye a dot.
+  - The deck was one empty field of planks, and the sail small for the ship.
+- **What changed.**
+  - The outline became three curves (the deck's north edge, the port rail, the waterline). They taper over 74 px to a stem at the waterline, with the rail rising in a sheer to bow and stern.
+  - The stem post and the aphlaston became tapering timbers drawn along splines. The stem curls back into a gilded volute. The aphlaston is five bound timbers that rise and curl forward over the helm, with bronze bands and a gilded tip.
+  - The ram grew to a three-finned bronze beak 38 px long, with the proembolion above it, and the eye doubled in size.
+
+### Pass 1: the budget, and a deck worth walking
+
+- **What was wrong.**
+  - The first full build needed 756 tiles against a limit of 504.
+  - The deck planks repeated every 128 px instead of 32: the plank row index wasn't wrapped.
+  - The bow's and stern's planking followed the curving rail, so every tile there was unique.
+  - The sail's seams and brail rings ran on 9 and 6 px steps, which never line up with the tiles.
+  - On deck, the sea of planks still had nothing in it.
+- **What changed.**
+  - The hull is symmetric about the ship's middle (x = 191.5), and the build mirrors the bow's body onto the stern, so the stern's curves are the bow's tiles, flipped. The ram, eye, stem, aphlaston and steering oars are drawn after the mirror. Strakes, seams and brails now sit on the 8 px grid. The hold's rowers went to two tunic colours, and near-duplicate tiles merge within 4 px. The result is 496 tiles.
+  - The deck gained gratings over the rowers, spare oars lashed along the port rail, the crew's water jar and wider sails.
+  - The helm moved to x = 20, so the stern's planking behind the tillers reads as out of reach.
+  - The coast moved ahead of the bow (see below).
+
+### Pass 2: the GBA screen, and the hold
+
+- **The screens** (`trireme_screens.png`): every 15×10 view has a landmark.
+  - Boarding: the sail and the mast.
+  - The bow: the ram, the eye and the stem.
+  - Midships: the hatch, the gratings and the ladder down the side.
+  - The stern: the aphlaston, the tillers and the klepsydra.
+  - The gaps in the rail read as openings onto the water.
+- **What was wrong in the hold.** The first hold drew a rower on every seat, 8 px tall. Beside the 16×32 rower NPCs they were half scale, a crowd of dolls. The second hold had cushions on long shelves and read as a cupboard.
+- **What changed.** Under sail the rowers rest ("Oars in, lads!"), so the hold shows the oars at rest instead.
+  - Each seat is a block with its cushion, red and blue alternating.
+  - Each oar's loom is angled up through the tiers to a port in the hull, bright with daylight. On the port bank the looms angle down.
+  - The talkable rowers sit on seats drawn without a loom.
+  - The light falls down the ladder's column onto the gangway.
+
+### Pass 3: in game
+
+- **Kleon never walked to the hatch.** He was off screen from the helm, so the object was despawned and the movement went nowhere. Every scripted move of someone who may be off screen now sets the template, sets the live object and adds it. Kleon's pose swaps follow SPRITES.md's recipe.
+- **The sail sagged off screen.** The helm's view showed only its corner. The calm now pans the camera forward along the deck, so the whole sail sags in view, Kleon walks to the hatch in shot, and the camera comes back before the player is free.
+- **The dark trireme was a smudge.** Our sail hid most of its pass. The camera now follows the sailors' eyes forward past the sail, and the dark ship slides out from behind it along ten cells of open sea. Its furled sail carries a pale sickle.
+- **Beat 10C ended on a black map.** Fading to black before calling the stub, which fades again, saved a black palette: `FadeSelectedPals` copies faded over unfaded on every fade out. The deck now leaves the fade to the stub.
+
+## Scene objects (`tools/ichor/art/trireme_objects.py`)
+
+Drawn in the "Ichor cast" OBJ palette, so they cost no palette slot on the deck, which shows the cast.
+
+| Object | Size | What |
+|---|---|---|
+| `OBJ_EVENT_GFX_ICHOR_NEST_EGGS` | 32×32 | The floating nest: a raft of woven seaweed on the flat sea, a rim of weed and white feathers, three eggs |
+| `OBJ_EVENT_GFX_ICHOR_NEST_HATCHING` | 32×32 | Two eggs cracked; a chick's blue head and bronze beak out of the third |
+| `OBJ_EVENT_GFX_ICHOR_NEST_EMPTY` | 32×32 | The nest with only broken shells |
+| `OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_BOW`, `_STERN` | 64×32 each | A trireme with no lamps, black and low, oars muffled, a pale sickle on its furled sail; the two halves move together |
+
+## The deck's fixed places
+
+| What | Where |
+|---|---|
+| Boarding (warp 0, not a door) | (13,4), the starboard entry port: `warp(MAP_TRIREME_EUPLOIA_DECK, 0)` |
+| The hatch (warp 1, `MB_LADDER`) | (14,7), to the hold's warp 0 |
+| The hold's ladder (warp 0, `MB_LADDER`) | (11,5), to the deck's warp 1 |
+| The helm | the player at (19,6) facing the tiller's knob at (20,6); Nausikles at (19,7) |
+| Fishing | the gaps at (7,3) and (13,3) in the starboard bulwark, and the rope ladder at (15,10) on the port side |
+| The bow's trigger line | x = 8, rows 4-9, in the calm only |
+
+**The coast is ahead, not astern.** SCRIPT.md beat 10C has the coastline "in the east". On this map the bow points west, so a coast drawn in the east would sit astern, and the ship would seem to be sailing away from Emporion. It is drawn low on the north-western horizon, ahead of the bow and in view from the starboard rail. The scene walks the player there.

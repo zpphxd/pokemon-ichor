@@ -31,10 +31,15 @@ mapscripts TriremeEuploia_Deck_MapScripts {
         setflag(FLAG_TEMP_8)
         setflag(FLAG_TEMP_9)
         setflag(FLAG_TEMP_A)
+        // Kleon's pose (design/phase2/SPRITES.md): green at the rail until the
+        // set piece swaps him to his walker; reading his mother's tablet at night
+        setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ICHOR_KLEON_SEASICK)
         getplayerxy(VAR_0x8004, VAR_0x8005)
         if (flag(FLAG_ICHOR_AEGINA_NIGHT) && !flag(FLAG_ICHOR_CROSSING_DONE)) {
-            // beat 10C: Kleon at the bow, Alethea at the rail; a clear morning
+            // beat 10C: Kleon at the bow, not green at all; Alethea at the
+            // rail; a clear morning
             setvar(VAR_TEMP_0, 3)
+            setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ICHOR_KLEON)
             setobjectxyperm(LOCALID_DECK_KLEON, 3, 6)
             setobjectmovementtype(LOCALID_DECK_KLEON, MOVEMENT_TYPE_FACE_LEFT)
             setobjectxyperm(LOCALID_DECK_ALETHEA, 7, 4)
@@ -100,18 +105,19 @@ script TriremeDeck_EventScript_CastOff {
 
 script TriremeDeck_EventScript_Kleon {
     lock
-    faceplayer
     setspeaker(TriremeDeck_Text_NameKleon)
     if (var(VAR_TEMP_1) != 0) {
+        faceplayer
         msgbox(format("LEFT! And LEFT! And LEFT, RIGHT, LEFT!"))
     } else {
+        // he stays bent over the rail while he talks, and heaves at the end
         msgbox(format("I'm fine. Lakonians never get seasick.\p"
                       "Lakonians fight on land. That's why. We've got loads of land.\p"
-                      "Don't look at the water. I'm not looking at the water.\p"
-                      "Hrk."))
+                      "Don't look at the water. I'm not looking at the water."))
         closemessage
-        applymovement(LOCALID_DECK_KLEON, TriremeDeck_Movement_FaceUp)
-        waitmovement(0)
+        applymovement(LOCALID_DECK_KLEON, TriremeDeck_Movement_KleonHeave)
+        waitmovement(LOCALID_DECK_KLEON)
+        msgbox(format("Hrk."))
     }
     release
 }
@@ -329,11 +335,16 @@ script TriremeDeck_EventScript_TheCalm {
     msgbox(format("My reed! It split clean through!\pI can't keep the stroke!"))
     closemessage
 
-    // Kleon pushes off the rail and walks to the hatch, still green. (He is in
-    // the camera's view; addobject makes sure of it.) His template moves onto
-    // the hatch, so he is there whenever he respawns in the calm.
-    setobjectxy(LOCALID_DECK_KLEON, 7, 4)
+    // Kleon pushes off the rail and walks to the hatch, still green: his pose
+    // swaps to his walker where he stands (SPRITES.md's recipe; removeobject
+    // sets his hide flag, FLAG_ICHOR_CROSSING_DONE, so it is cleared again at
+    // once). His template moves onto the hatch, so he is there whenever he
+    // respawns in the calm.
+    setobjectxyperm(LOCALID_DECK_KLEON, 7, 4)
+    setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ICHOR_KLEON)
+    removeobject(LOCALID_DECK_KLEON)
     addobject(LOCALID_DECK_KLEON)
+    clearflag(FLAG_ICHOR_CROSSING_DONE)
     applymovement(LOCALID_DECK_KLEON, TriremeDeck_Movement_KleonToHatch)
     waitmovement(0)
     setobjectxyperm(LOCALID_DECK_KLEON, 14, 7)
@@ -652,12 +663,15 @@ script TriremeDeck_EventScript_NightLeg {
     // the night tint, whatever the clock says, until the inn
     setvar(VAR_0x8004, 22)
     special(Ichor_SetHoursOverride)
-    // Places for the night, live or respawned (anyone may be off screen)
+    // Places for the night, live or respawned (anyone may be off screen).
+    // Kleon is at the rail again, no longer green, reading his mother's
+    // tablet: his pose swaps as in the calm, his hide flag cleared at once.
     setobjectxyperm(LOCALID_DECK_KLEON, 7, 4)
     setobjectmovementtype(LOCALID_DECK_KLEON, MOVEMENT_TYPE_FACE_UP)
-    setobjectxy(LOCALID_DECK_KLEON, 7, 4)
+    setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ICHOR_KLEON_TABLET)
+    removeobject(LOCALID_DECK_KLEON)
     addobject(LOCALID_DECK_KLEON)
-    turnobject(LOCALID_DECK_KLEON, DIR_NORTH)
+    clearflag(FLAG_ICHOR_CROSSING_DONE)
     setobjectxyperm(LOCALID_DECK_ALETHEA, 10, 7)
     setobjectxy(LOCALID_DECK_ALETHEA, 10, 7)
     addobject(LOCALID_DECK_ALETHEA)
@@ -778,16 +792,18 @@ script TriremeDeck_EventScript_LastLeg {
     msgbox(format("All of that. And somewhere in it, the next laurel."))
     closemessage
     delay(30)
+    // The stub fades to black itself: fading here first would save a black
+    // palette (FadeSelectedPals copies faded over unfaded on every fade out).
+    call(Ichor_EventScript_EuploiaMakesEmporion)
+    // ICHOR_STUB_EMPORION: until batch 2 makes the call above a warp to
+    // Emporion's quay, the player stays on deck: the voyage cast goes ashore
+    // (their flag is FLAG_ICHOR_CROSSING_DONE) and the coast drops astern.
     fadescreen(FADE_TO_BLACK)
-    // The voyage cast goes ashore (their flag is FLAG_ICHOR_CROSSING_DONE); the
-    // coast and the morning are handed back before the next scene.
     removeobject(LOCALID_DECK_KLEON)
     removeobject(LOCALID_DECK_ALETHEA)
     call(TriremeDeck_EventScript_CoastOff)
     special(DrawWholeMapView)
-    setvar(VAR_0x8004, 0)
-    special(Ichor_SetHoursOverride)
-    call(Ichor_EventScript_EuploiaMakesEmporion)
+    fadescreen(FADE_FROM_BLACK)
     releaseall
 }
 
@@ -799,6 +815,8 @@ movement TriremeDeck_Movement_FaceUp { face_up }
 movement TriremeDeck_Movement_FaceDown { face_down }
 movement TriremeDeck_Movement_FaceLeft { face_left }
 movement TriremeDeck_Movement_FaceRight { face_right }
+// Kleon over the rail: the heave (his seasick pose walking in place)
+movement TriremeDeck_Movement_KleonHeave { walk_in_place_slow_up * 3 }
 
 // to the helm at (19,6), from beside Nausikles at (18,7) or below him at (19,8)
 movement TriremeDeck_Movement_HelmFromWest { walk_up walk_right face_right }

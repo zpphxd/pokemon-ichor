@@ -50,9 +50,6 @@ TriremeTest_Setup:
 	setflag FLAG_ICHOR_WINDS_TURNED
 	setflag FLAG_ICHOR_MOM_HARBOR
 	setflag FLAG_ICHOR_BOARDED_EUPLOIA
-	@ The crossing's trainers are stubs (ICHOR_STUB_TRAINER_IDS: TRAINER_NONE):
-	@ mark trainer 0 beaten, so Phormion's sight never starts a battle.
-	setflag TRAINER_FLAGS_START
 	@ No wild encounters on the walk (the deck has none; this is for safety).
 	setvar VAR_REPEL_STEP_COUNT, 999
 	@ The gangplank's warp, as Akti's quay and the ferry use it: the deck's warp 0.

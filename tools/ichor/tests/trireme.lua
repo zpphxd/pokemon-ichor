@@ -39,6 +39,7 @@ local function now() return emu:currentFrame() end
 local function sb1() return emu:read32(S.gSaveBlock1Ptr) end
 local function sb2() return emu:read32(S.gSaveBlock2Ptr) end
 local function getFlag(f) return (emu:read8(sb1() + S.OFF_SB1_FLAGS + (f >> 3)) >> (f & 7)) & 1 == 1 end
+local function defeated(t) return getFlag(S.TRAINER_FLAGS_START + t) end
 local function tempVar1() return emu:read16(sb1() + S.OFF_SB1_VARS + 2 * S.VAR_TEMP_1_INDEX) end
 local function partyCount() return emu:read8(emu:read32(S.gPlayerPartyCountPtr)) end
 local function mapId()
@@ -225,11 +226,17 @@ local function main()
   walk({ { 9, 4 }, { 9, 8 }, { 10, 8 } }, "to Alethea")
   face(K.UP)
   tap(K.A); wait(4)
-  -- B pages through and answers her YES/NO with no: her trainer id is a stub
-  play("05_alethea", 6000, 40, function() return K.B end)
-  expect(not getFlag(S.FLAG_BATTLED_ALETHEA), "no practice battle on a no")
+  -- yes to her practice battle (A); the battle is fought as it comes
+  play("05_alethea", 12000, 40)
+  expect(getFlag(S.FLAG_BATTLED_ALETHEA) and defeated(S.TRAINER_ALETHEA),
+         "Alethea's practice battle is fought and FLAG_ICHOR_BATTLED_ALETHEA_DECK set")
+  -- Lykon by the bow cargo, facing away: talked to from (8,8)
+  walk({ { 9, 8 }, { 8, 8 } }, "to Lykon")
+  face(K.LEFT)
+  talk("05_lykon")
+  expect(defeated(S.TRAINER_LYKON), "Lykon is beaten when talked to")
   -- The Super Potion among the bow cargo, from (4,6)
-  walk({ { 9, 8 }, { 9, 6 }, { 4, 6 } }, "to the bow cargo")
+  walk({ { 8, 6 }, { 4, 6 } }, "to the bow cargo")
   face(K.UP)
   talk("06_super_potion")
   expect(getFlag(S.FLAG_ITEM_SUPER_POTION), "the Super Potion is found among the bow cargo")
@@ -263,13 +270,18 @@ local function main()
   expect(x == 14 and y == 7, string.format("the ladder comes up through the hatch at (14,7) (at %d,%d)", x, y))
   shot("14_up_the_hatch.png")
 
+  -- Aft past Phormion: his sight spans the deck at x = 16
+  r = walkTo({ { 14, 6 }, { 18, 6 } })
+  expect(r == "taken", "Phormion stops the player crossing the deck at x = 16")
+  play("15_phormion", 12000, 40)
+  expect(defeated(S.TRAINER_PHORMION), "Phormion is beaten")
   -- The klepsydra, from (19,5); the Heart Scale in the coil, from (18,8)
-  walk({ { 14, 6 }, { 18, 6 }, { 18, 5 }, { 19, 5 } }, "to the klepsydra")
+  walk({ { 18, 6 }, { 18, 5 }, { 19, 5 } }, "to the klepsydra")
   face(K.UP)
-  talk("15_klepsydra")
+  talk("16_klepsydra")
   walk({ { 18, 5 }, { 18, 8 } }, "to the coil")
   face(K.DOWN)
-  talk("16_heart_scale")
+  talk("17_heart_scale")
   expect(getFlag(S.FLAG_HIDDEN_HEART_SCALE), "the Heart Scale is hidden in the stern's rope coil")
 
   -- Nausikles at the helm, from (18,7): the set piece, to the free moment
@@ -301,7 +313,7 @@ local function main()
   -- play() returns when the player is free: on Aigina's quay
   waitUntil(function() return mapId() == S.MAP_AEGINA and idle() end, 3000, "Aigina's quay")
   shot("40_aigina_quay.png")
-  expect(battles == 2, string.format("two snatcher battles (%d)", battles))
+  expect(battles == 5, string.format("three trainer battles and two snatchers (%d)", battles))
   expect(getFlag(S.FLAG_SAVED_NEST), "the nest is saved")
   expect(getFlag(S.FLAG_GOT_HALCYLING) and partyCount() == 2, "the Halcyling joins the party")
   expect(not getFlag(S.FLAG_NO_WHITEOUT) and not getFlag(S.FLAG_NO_RUNNING),

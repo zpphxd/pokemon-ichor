@@ -516,9 +516,6 @@ def draw_helm(s: Scene):
     """The helmsman's bench across the stern deck at (20, 5-7), the two
     tillers' knobs resting on it (draw_stern), and the planked stern beyond."""
     M = s.M
-    bench = ["kkkkkkkkkk", "kPPPPPPPPk", "kppppppppk", "kpwwwwwwpk", "kp      pk", "kk      kk"]
-    for y in (5 * CELL + 2, 6 * CELL + 10):
-        pass
     for y in range(5 * CELL + 2, 8 * CELL - 2):
         for dx, c in ((0, "ink"), (1, "pk3"), (2, "pk3"), (3, "pk2"), (4, "pk2"), (5, "pk1"),
                       (6, "wd1"), (7, "ink")):
@@ -526,7 +523,6 @@ def draw_helm(s: Scene):
     for y in (5 * CELL + 2, 8 * CELL - 3):
         for dx in range(8):
             M.px(20 * CELL + 6 + dx, y, "ink")
-    del bench
 
 
 def draw_oar_bundle(s: Scene, x, y):

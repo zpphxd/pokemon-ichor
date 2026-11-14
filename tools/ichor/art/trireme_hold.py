@@ -2,16 +2,18 @@
 
 The rowers' deck under the open deck, lit by the daylight through the oar
 ports and the hatch. Across the top, the starboard hull from inside: deck
-beams, strakes, frames and two rows of oar ports. Below it the starboard
-bank, three tiers of benches stepping down toward the gangway (thranites at
-the top, zygites, thalamites at the bottom), the rowers sat facing aft with
-their oar looms running up to the ports. The gangway runs the length of the
-hull (rows 5-6) past the mast's foot and the ladder up to the hatch, where
-the light falls; the port bank's two lower tiers fill rows 7-8. Water jars
-and rope at the bow end, a lamp and a pithos at the stern end.
+beams, strakes, frames and a row of oar ports bright with the day. Below it
+the starboard bank, three tiers of seats stepping down toward the gangway
+(thranites at the top, zygites, thalamites at the bottom). Under sail the
+rowers rest ("Oars in, lads!"), so each seat keeps only its cushion, and its
+oar lies in its port, the loom angled up through the tiers. The gangway runs
+the length of the hull (rows 5-6) past the mast's step and the ladder up to
+the hatch, where the light falls; the port bank's bottom tier (row 7), its
+looms angled down, and the bilge (row 8) close the room. Water jars and rope at
+the bow end, a lamp and a pithos at the stern end.
 
-Empty seats on the bottom tiers are where the talkable rowers sit (object
-events), and where the Potion lies under the port bench.
+The talkable rowers (object events) sit on the bottom tiers, on seats with no
+loom drawn; the Potion lies under the port bench.
 """
 from __future__ import annotations
 
@@ -322,11 +324,11 @@ def walkability(s: Scene):
             "Deck beams, strakes, frames every 32 px, two rows of oar ports with the daylight "
             "in them. Solid.")
     s.piece("benches", "The three tiers of rowers' benches", 1, 2, 2, 3,
-            "Thranites (row 2), zygites (row 3), thalamites (row 4), each rower sat facing aft "
-            "with his loom running up to the hull. Solid. Rows 7-8 are the port bank's lower "
-            "tiers.")
-    s.piece("empty_seat", "An empty seat on the bottom tier", 5, 4, 1, 1,
-            "A cushion and no rower: put a talkable rower's object event here. Also at (13,4), "
+            "Thranites (row 2), zygites (row 3), thalamites (row 4): a seat with its cushion "
+            "every 16 px, its oar's loom angled up through the tiers to its port. Solid. Row 7 "
+            "is the port bank's bottom tier, its looms angled down; row 8 the bilge.")
+    s.piece("empty_seat", "A seat without its oar", 5, 4, 1, 1,
+            "A cushion and no loom: a talkable rower's object event sits here. Also at (13,4), "
             "(9,7) and (14,7).")
     s.piece("seat_potion", "The port bottom bench with a gap under it", POTION[0], POTION[1], 1, 1,
             "The Potion's item jar goes here.")

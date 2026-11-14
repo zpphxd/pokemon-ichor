@@ -59,7 +59,7 @@ The city's west gate is the **Isthmus Gate** to Route 4 (batch 3); its seam colu
 | From | To | How |
 |---|---|---|
 | Akti quay, the gangplank | the deck | scripted warp (beat 9B, and the ferry) |
-| the deck, the hatch | the hold | warp both ways |
+| the deck, the hatch | the hold | warp both ways: the deck's warp **1** is the hatch (14,7), the hold's warp **0** the ladder's foot (11,5); each sends to the other (both `MB_LADDER`) |
 | the deck | Aegina's quay | scripted warp (end of beat 10, and the ferry) |
 | Aegina's inn, after the night | the deck | scripted warp (beat 10C) |
 | Aegina Town doors | inn, mint, Aiakides's house | warps both ways. Aegina Town's warps: **0** the quay landing (12,12), not a door: `warp(MAP_AEGINA_TOWN, 0)` lands the ferry and the end of beat 10 there; **1** the inn door (15,16); **2** the mint door (21,16); **3** Aiakides's door (27,8). Each door's `dest_warp_id` is 0, so each room's warp 0 is its door mat; the rooms send the player back to town warps 1, 2 and 3. |
@@ -70,7 +70,7 @@ Record the warp ids and the arrival tiles you choose in this table, so the scrip
 
 | Map | Arrival tile (x, y) | For |
 |---|---|---|
-| `MAP_TRIREME_EUPLOIA_DECK` | *(trireme agent fills in)* | boarding from a quay |
+| `MAP_TRIREME_EUPLOIA_DECK` | (13,4), the starboard entry port where the gangplank comes aboard; warp **0** is there (not a door): `warp(MAP_TRIREME_EUPLOIA_DECK, 0)` | boarding from a quay, the ferry, and the inn's warp for beat 10C. Casting off plays on arrival there while `FLAG_ICHOR_BOARDED_EUPLOIA` is set and `FLAG_ICHOR_SAVED_HALCYON_NEST` clear; beat 10C plays on any arrival while `FLAG_ICHOR_AEGINA_NIGHT` is set and `FLAG_ICHOR_CROSSING_DONE` clear |
 | `MAP_AEGINA_TOWN` | (12,12), the quay below the gangplank; warp 0 is there | stepping off the *Euploia* (beat 10B plays on arrival while `FLAG_ICHOR_ARRIVED_AEGINA` is clear) |
 | `MAP_AKTI_TOWN` | (9, 10), the quay by the gangplank | stepping off the ferry |
 
