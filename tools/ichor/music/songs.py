@@ -988,3 +988,8 @@ SONGS = [ELAIA, ROUTE1, BATTLE_RIVAL, AKTI, TEMPLE, ASCLEPEION, TITAN, BATTLE_TR
 from songs_engine import ENGINE_SONGS  # noqa: E402
 
 SONGS += ENGINE_SONGS
+
+# Act I (Phase 2) and Elpis's lullaby live in songs_act1.py, which imports both modules.
+from songs_act1 import ACT1_SONGS  # noqa: E402
+
+SONGS += ACT1_SONGS
