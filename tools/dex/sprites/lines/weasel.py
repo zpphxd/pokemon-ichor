@@ -171,19 +171,18 @@ def gelasable(p, view, phase):
         p.limb(near_f, 4.4, 3.4, s_tn, group=13)
         p.limb(bez((44, 46), (49, 37), (43, 30 - F)), 12, 10.5, s_tn, group=1)
         p.limb([(38.5, 38.5 - F), (44, 41.5), (50.5, 41)], 7.4, 7.4, s_dark, group=8)
-        # the head turned all the way back to laugh at us: round skull, ears
-        # low on the sides, a white muzzle round the open mouth
-        p.circle(49, 19 - F, 2.7, s_tn, bias=0.25, group=5)
-        p.circle(31, 19 - F, 2.9, s_tn, group=6)
-        head = p.blob(40, 23.5 - F, 9, 8.2, s_tn, group=3)
-        p.blob(40, 27.5 - F, 8.8, 4.6, s_tn, group=3)
-        p.blob(40, 28 - F, 6.2, 4.4, s_white, clip=[head], group=4)
-        p.blob(40, 27.6 - F, 4.4, 2.6, s_mouth, group=9)
+        # the head turned all the way back to laugh at us: a broad mustelid
+        # head, small ears low on the sides, a short white muzzle
+        p.circle(49.5, 20 - F, 2.4, s_tn, bias=0.25, group=5)
+        p.circle(30.5, 20 - F, 2.5, s_tn, group=6)
+        p.blob(40, 23 - F, 8.8, 8, s_tn, group=3)
+        p.blob(40, 26.5 - F, 9.8, 4.8, s_tn, group=3)
+        p.blob(40, 27.4 - F, 5.2, 3.8, s_white, group=4)
+        p.blob(40, 27.8 - F, 2.4, 2.2, s_mouth, group=9)
         if p.big:
-            p.pxs([(34, 20 - F), (35, 20 - F), (36, 20 - F), (42, 20 - F), (43, 20 - F)], "ink")
-            p.pxs([(34, 21 - F), (42, 21 - F)], "w1")
-            p.pxs([(35, 21 - F), (43, 21 - F)], "ink")
-            p.pxs([(39, 23 - F), (40, 23 - F)], "ink")
+            p.eye(34, 20 - F, 3, 2, shine="w1", shine_at=(0, 0))
+            p.eye(43, 20 - F, 3, 2, shine="w1", shine_at=(0, 0))
+            p.pxs([(39, 24 - F), (40, 24 - F), (41, 24 - F)], "ink")
             for x, y in ((39, 39), (44, 42), (49, 41)):
                 _torch(p, x, y - (F if x < 42 else 0))
         else:
