@@ -288,12 +288,19 @@ def pole(x, start, cells):
 
 
 def figure(spec, d, pose):
-    """The figure for one direction and pose as resolved palette rows."""
+    """The figure for one direction and pose as resolved palette rows.
+
+    The "bow" pose is the down-facing stand with the spec's "bow" overlays
+    painted on top. Only walkers that play Movement_PkmnCenterNurse_Bow have
+    one; see build_sheet."""
     head = spec["head"][d]
-    body = ARCHETYPES[spec["arch"]][d][pose]
+    base = "stand" if pose == "bow" else pose
+    body = ARCHETYPES[spec["arch"]][d][base]
     fig = list(head) + list(body)
     over = spec.get("over", {}).get(d, {})
-    keys = ["all", pose] if pose == "stand" else ["all", "walk", pose]
+    keys = ["all", base] if base == "stand" else ["all", "walk", pose]
+    if pose == "bow":
+        keys.append("bow")
     for key in keys:
         for start, rows in over.get(key, []):
             _paint(fig, start, rows, len(head), f"{spec['name']} {d} {pose} [{key}]")
@@ -331,6 +338,14 @@ def build_sheet(spec):
     order = [("down", "stand"), ("up", "stand"), ("left", "stand"),
              ("down", "walk0"), ("down", "walk1"), ("up", "walk0"), ("up", "walk1"),
              ("left", "walk0"), ("left", "walk1")]
+    # Frame 9 is the bow that sAnimTable_Nurse's ANIM_NURSE_BOW plays. A walker
+    # whose scripts run Movement_PkmnCenterNurse_Bow needs it, or waitmovement
+    # never returns.
+    if "bow" in spec.get("over", {}).get("down", {}):
+        rows = figure(spec, "down", "bow")
+        frames[("down", "bow")] = build_frame(rows, FEET_ROW + 1 - len(rows), legend, pal,
+                                              f"{spec['name']} down bow")
+        order.append(("down", "bow"))
     return np.hstack([frames[k] for k in order])
 
 
@@ -1099,7 +1114,27 @@ HEALER = dict(
         down={"all": [("b0", ["..kbb______bbk..", "___b________b___"]),
                       ("b2", ["___________Oo___"]),
                       pole(0, 2, _ROD), ("b5", ["__S_____________"])],
-              "walk1": [("b5", ["..SSSCCCCCQSSk..", "..kkCCCCCCCQkk.."])]},
+              "walk1": [("b5", ["..SSSCCCCCQSSk..", "..kkCCCCCCCQkk.."])],
+              # The bow: the crown tips toward the viewer, so the top of the
+              # head drops a pixel, the fillet two, the eyes close and the neck
+              # disappears. Her left hand comes up over her heart; the rod
+              # stays planted.
+              "bow": [(0, ["___.............",
+                           "___..kkkkkk.....",
+                           "___.kbbbbbbk....",
+                           "___kbuubbbbbk...",
+                           "___bubbbbbbbbk..",
+                           "___gggggggggvk..",
+                           "___bbbbbbbbbbk..",
+                           "___bbSSSSSSbbk..",
+                           "___bSkkSSkkSbk..",
+                           "___bsSSSSSSsbk..",
+                           "___bbssSSssbbk..",
+                           "___bbLLLLLLbbk.."]),
+                      ("b2", ["___SSLLLLSSSOk..",
+                              "___SsLLLLLLsSk..",
+                              "___SsggggggSSk..",
+                              "___SSLLLLLLLlk.."])]},
         up={"all": [("b0", ["...kbbubbbubk...", "____kbubbbuk____", "_____kubbuk_____",
                             "______kkkk______"]),
                     ("b2", ["___Oo___________"]),

@@ -2,7 +2,7 @@
   "id": "MAP_AKTI_TOWN_AGORA",
   "name": "AktiTown_Agora",
   "layout": "LAYOUT_AKTI_TOWN_AGORA",
-  "music": "MUS_ICHOR_AKTI",
+  "music": "MUS_ICHOR_AGORA",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_AKTI_TOWN",
   "requires_flash": false,

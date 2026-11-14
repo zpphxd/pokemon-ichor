@@ -2568,8 +2568,19 @@ static const struct SpriteFrameImage sPicTable_IchorDiver[] = {
     overworld_ascending_frames(gObjectEventPic_IchorDiver, 2, 4),
 };
 
+// Ichor: ten frames, the standard nine plus frame 9, the bow that
+// sAnimTable_Nurse's ANIM_NURSE_BOW plays when the Asclepeion heals.
 static const struct SpriteFrameImage sPicTable_IchorHealer[] = {
-    overworld_ascending_frames(gObjectEventPic_IchorHealer, 2, 4),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 0),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 1),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 2),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 3),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 4),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 5),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 6),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 7),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 8),
+    overworld_frame(gObjectEventPic_IchorHealer, 2, 4, 9),
 };
 
 static const struct SpriteFrameImage sPicTable_IchorMerchant[] = {
