@@ -117,10 +117,12 @@ local function acceptName(what)
 end
 
 -- Play out whatever the game is doing until the player is free again for 20
--- frames. A on a YES/NO answers YES. `at` maps A-press counts to screenshot
--- names, taken just before that press.
+-- frames. A on a YES/NO answers YES. While a message box is up, each box gets
+-- time to print in full before A, so `at` can map message-box counts to
+-- screenshot names, taken just before that box is dismissed.
+local function boxUp() return emu:read8(S.sFieldMessageBoxMode) ~= 0 end
 local function settle(at, limit)
-  local t0, calm, presses = now(), 0, 0
+  local t0, calm, boxes = now(), 0, 0
   at = at or {}
   while calm < 20 do
     if idle() then
@@ -134,10 +136,16 @@ local function settle(at, limit)
         -- CONFIRM, then "Is this the correct time?" offers NO first
         wait(30); tap(K.A); wait(40); tap(K.UP); wait(10); tap(K.A)
         waitUntil(function() return not on("CB2_WallClock") end, 600, "the water clock to close")
+      elseif boxUp() then
+        wait(34)                                 -- fast text: a full box prints in this
+        if boxUp() then
+          boxes = boxes + 1
+          if at[boxes] then shot(at[boxes]) end
+          tap(K.A)
+        end
+        wait(4)
       else
-        presses = presses + 1
-        if at[presses] then shot(at[presses]) end
-        tap(K.A)
+        tap(K.A)                                 -- a cutscene, a fanfare, a menu
         wait(6)
       end
     end
@@ -268,10 +276,13 @@ local function face(key) tap(key, 16); wait(10) end
 -- --- The battle -------------------------------------------------------------------------
 
 local function kleonBattle(at)
-  local t0, presses = now(), 0
+  local t0, boxes = now(), 0
   while not inBattle() do
-    presses = presses + 1
-    if at[presses] then shot(at[presses]) end
+    if boxUp() then
+      wait(34)
+      boxes = boxes + 1
+      if at[boxes] then shot(at[boxes]) end
+    end
     tap(K.A); wait(9)
     if now() - t0 > 6000 then fail("no battle with Kleon") end
   end
@@ -386,7 +397,7 @@ local function main()
 
   -- Beat 1B: Mom, the Talaria and the pilgrim's story.
   shot("mom_comes_over")
-  settle({ [2] = "mom_klotheia", [8] = "talaria", [12] = "mom_oracle" })
+  settle({ [3] = "mom_klotheia", [7] = "talaria", [13] = "mom_oracle" })
   expect(getFlag(S.FLAG_TALKED_TO_MOM), "Mom has spoken")
   expect(getFlag(S.FLAG_SYS_B_DASH), "the Talaria (running) are on")
   shot("downstairs")
@@ -401,7 +412,7 @@ local function main()
   enter(K.UP, S.MAP_KYDIPPE, "Kydippe's door")
   goTo(2, 3); face(K.UP); tap(K.A); wait(60)
   shot("kydippe")
-  settle({ [3] = "kydippe_oran" })
+  settle({ [2] = "kydippe_delivered_you" })
   expect(getFlag(S.FLAG_GOT_KYDIPPE_ORAN), "Kydippe's Oran Berries")
   goTo(4, 7)
   enter(K.DOWN, S.MAP_ELAIA, "Kydippe's door out")
@@ -424,8 +435,8 @@ local function main()
   -- Beat 2: Halia reads the threads.
   expect(not go(14, 18), "Halia calls the player into line")
   wait(30); shot("halia_calls")
-  settle({ [2] = "korinna_reading", [6] = "philon_reading", [10] = "your_hand", [12] = "turn_around",
-           [15] = "your_own_business" })
+  settle({ [3] = "korinna_reading", [8] = "philon_reading", [12] = "your_hand_silence", [14] = "turn_around",
+           [16] = "your_own_business" })
   expect(getFlag(S.FLAG_THREAD_READ), "the thread is read")
   expectAt(14, 16, "at the head of the line")
   shot("after_the_reading")
@@ -438,8 +449,11 @@ local function main()
   -- Alethea, Daphne's question, then the starter screen.
   t0, presses = now(), 0
   while not on("CB2_StarterChoose") do
-    presses = presses + 1
-    if presses == 4 then shot("daphne_question") end
+    if boxUp() then
+      wait(34)
+      presses = presses + 1
+      if presses == 6 then shot("daphne_question") end
+    end
     tap(K.A); wait(12)
     if now() - t0 > 8000 then fail("no starter screen") end
   end
@@ -447,8 +461,8 @@ local function main()
   if STARTER == 0 then tap(K.LEFT) elseif STARTER == 2 then tap(K.RIGHT) end
   wait(30); tap(K.A); wait(60); shot("starter_confirm"); tap(K.A)
   waitUntil(inOverworld, 1200, "the Akademia after the starter screen")
-  settle({ [1] = "daphne_on_the_starter", [6] = "pokedex", [10] = "kleon_arrives", [14] = "kleon_chooses",
-           [18] = "kleon_leaves" })
+  settle({ [1] = "daphne_on_the_starter", [7] = "pokedex", [10] = "kleon_arrives", [14] = "kleon_chooses",
+           [19] = "he_did_not_ask" })
   expect(getVar(S.VAR_STARTER_MON) == STARTER, "VAR_STARTER_MON is " .. SPECIES[STARTER])
   expect(getFlag(S.FLAG_GOT_STARTER) and getFlag(S.FLAG_SYS_POKEMON_GET), "got a partner")
   expect(getFlag(S.FLAG_SYS_POKEDEX_GET), "got the Pokedex")
@@ -467,14 +481,14 @@ local function main()
   shot("kleon_waits")
   expect(not go(14, 19), "Kleon calls the player at the steps")
   wait(40); shot("kleon_there_you_are")
-  local outcome = kleonBattle({ [3] = "kleon_oracle", [7] = "kleon_battle_me" })
+  local outcome = kleonBattle({ [4] = "kleon_oracle", [6] = "kleon_battle_me" })
   if OUTCOME == "win" then expect(outcome == S.B_OUTCOME_WON, "beat Kleon")
   elseif OUTCOME == "lose" then expect(outcome == S.B_OUTCOME_LOST, "lost to Kleon")
   else log("note battle outcome " .. outcome) end
   waitUntil(inOverworld, 600, "the square after the battle")
   expect(mapId() == S.MAP_ELAIA, "still in Elaia after the battle, win or lose")
   wait(30); shot("after_the_battle")
-  settle({ [4] = "gylippos", [7] = "alethea_arrives", [9] = "alethea_heals", [12] = "poke_balls" })
+  settle({ [4] = "gylippos", [8] = "alethea_arrives", [9] = "alethea_heals", [14] = "kronion_hill" })
   expect(getFlag(S.FLAG_KLEON_BATTLE_1_DONE), "the first battle is done")
   expect(getFlag(S.FLAG_WON_KLEON_1) == (outcome == S.B_OUTCOME_WON), "the win flag matches the outcome")
   expect(getFlag(S.FLAG_GOT_POKEBALLS), "Alethea's Poke Balls")
@@ -497,7 +511,7 @@ local function main()
                  S.SCR_OP_CALLNATIVE, { S.SetCB2WhiteOut | 1, 4 }, S.SCR_OP_WAITSTATE, S.SCR_OP_END })
   waitUntil(function() return mapId() == S.MAP_HOUSE_1F and inOverworld() end, 3000, "home after whiting out")
   wait(90); shot("whiteout_home")
-  settle({ [3] = "whiteout_mom" })
+  settle({ [1] = "whiteout_mom" })
   expectAt(3, 4, "woke by the hearth")
   hp, maxHp = partyHp(0)
   expect(hp == maxHp and hp > 0, string.format("Mom healed the party (%d/%d)", hp, maxHp))
