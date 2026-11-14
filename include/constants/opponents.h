@@ -45,7 +45,10 @@
 // Ids 22-39 are the director's reserve.
 
 // world-act1, ids 40-159: the crossing, Aegina, Emporion, the Sacred Way, Eleusa.
-#define TRAINERS_END_ACT1                     0
+// 40 and 42 wait for their classes (SCHOLAR, MERCHANT) from the sprites work:
+// TRAINER_ICHOR_ALETHEA_DECK and TRAINER_ICHOR_LYKON are stubs until then.
+#define TRAINER_ICHOR_PHORMION                41
+#define TRAINERS_END_ACT1                     42
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

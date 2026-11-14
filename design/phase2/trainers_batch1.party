@@ -5,6 +5,11 @@ in design/phase2/BUILD.md); then these move to src/data/trainers.party.
 Ability lines are left out while the Aethos species are vanilla stand-ins
 (ICHOR_STUB_AETHOS_DEX); the abilities SCRIPT.md gives are noted per mon.
 New classes: Scholar (Alethea), Merchant, Pilgrim. Sailor and Hoplite exist.
+
+Registered so far: Phormion (id 41). Alethea (40) and Lykon (42) wait for the
+Scholar and Merchant classes. Myrmex, Sostratos and Euthymia belong to
+Aigina's interior, which the revised map puts in Act II: world-act2 re-levels
+them and registers them in its own range (160-319).
 */
 
 === TRAINER_ICHOR_ALETHEA_DECK ===
