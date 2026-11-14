@@ -11,7 +11,7 @@ The route chain follows the revised `design/AETHOS_MAP.md`; SCRIPT.md's route pl
 | # | Batch | Status |
 |---|---|---|
 | 1 | The voyage (Routes 2–3) and Aigina: beats 9A–10C, the *Euploia*, Aigina Town and its three homes; Aigina's three interior maps built for world-act2 (Act II) | in progress |
-| 2 | Emporion and the Temple of Hermes: beats 11–16 | waits for gTileset_Emporion (director) |
+| 2 | Emporion and the Temple of Hermes: beats 11–16 | in progress (tilesets on main) |
 | 3 | Route 4 (the Isthmus), Hecate's Hollow, Route 5 (the Skironian cliffs): beats 17–19 | tilesets started: `isthmos`, `cave_dark` |
 | 4 | Eleusa and the Temple of Demeter: beats 20–22 | the maps and ambient events started (tilesets on main) |
 | 5 | The revelation: beats 23–25, the sanctum, Return to Kalliste | |
@@ -40,6 +40,19 @@ All are registered (`tools/ichor/new_map.py`) with placeholder layouts copied fr
 - `ergasteria` ("workshops"): Phase 2's working interiors. `oikia` is full and `civic` has 48 tiles left, so this new secondary on the `oikos` primary carries the furniture those rooms share (copied from oikia/civic as needed) plus the new pieces. Batch 1 draws Aegina's inn (courtyard cistern, wooden guest gallery, turtle mosaic, hearth), the mint (two anvils, coin dies on a rack, a blank-heating brazier, scales, a turtle-stamped chest) and Aiakides's house (shield and spear trophy, clay-ant shrine, an anthill in a pot). Leave room: Emporion's workshops (the forge, the potter's wheel and kiln) are planned for this set in batch 2. Keep under 440 tiles in batch 1.
 
 Every secondary stays at or under 504 tiles; leave 496–511 free where a map uses wide doors (CLAUDE.md).
+
+## Batch 2 maps
+
+Registered with placeholder layouts; each owner rewrites its layout.
+
+| Map | Tilesets | Owner |
+|---|---|---|
+| `MAP_EMPORION_CITY` | aethos + **emporion** | Emporion city agent |
+| `MAP_EMPORION_HARBOR` (the harbor district, where the *Euploia* moors) | aethos + **isthmos** | Emporion city agent |
+| `MAP_EMPORION_CITY_ASCLEPEION`, `_DEIGMA`, `_HEPHAISTEION`, `_TAVERN`, `_PHILOXENOS_HOUSE`, `_WIDOWS_HOUSE`, `_RUNNERS_HOUSE`, `_POTTERS_WORKSHOP`, `_HIRING_HALL` | oikos + ergasteria (or civic, oikia) | Emporion interiors agent |
+| `MAP_EMPORION_CITY_TEMPLE_OF_HERMES` | oikos + **temple_hermes** | Temple of Hermes agent |
+
+The city's west gate is the **Isthmus Gate** to Route 4 (batch 3); its seam columns go in the connections table. The Long Walls Gate of SCRIPT.md has no road in the revised map: Astyra is reached through Eleusa in Act II, so it isn't drawn.
 
 ## Warps, connections and seams (batch 1)
 
@@ -82,9 +95,11 @@ IchorSave's flag bank is on main. From batch 2 on, new flags are bank flags in t
 
 | Who | bankflag | vanilla (hidden items) |
 |---|---|---|
-| this session | 0x000–0x07F | 0x28A–0x29F |
+| this session | 0x000–0x07F | 0x298–0x29F |
 | Eleusa agent | 0x080–0x0BF | 0x2A0–0x2BB |
-| next agents | 0x0C0–0x0FF | ask |
+| Emporion city agent | 0x0C0–0x0DF | 0x28A–0x293 |
+| Emporion interiors agent | 0x0E0–0x0EF | 0x294–0x297 |
+| Temple of Hermes agent | 0x0F0–0x0FF | — |
 
 ## Stubs until other sessions land
 
