@@ -4176,7 +4176,19 @@ static void DebugAction_DestroyFollowerNPC(u8 taskId)
     X(MUS_ICHOR_OBTAIN_MON)         \
     X(MUS_ICHOR_NEW_GAME)           \
     X(MUS_ICHOR_AGORA)              \
-    X(MUS_ICHOR_AKADEMIA)
+    X(MUS_ICHOR_AKADEMIA)           \
+    X(MUS_ICHOR_ELPIS_LULLABY)      \
+    X(MUS_ICHOR_ELPIS_LULLABY_BOX)  \
+    X(MUS_ICHOR_TRIREME)            \
+    X(MUS_ICHOR_ROAD)               \
+    X(MUS_ICHOR_ROAD_NIGHT)         \
+    X(MUS_ICHOR_EMPORION)           \
+    X(MUS_ICHOR_TEMPLE_HERMES)      \
+    X(MUS_ICHOR_ELEUSA)             \
+    X(MUS_ICHOR_TEMPLE_DEMETER)     \
+    X(MUS_ICHOR_BATTLE_ADMIN)       \
+    X(MUS_ICHOR_REVELATION)         \
+    X(MUS_ICHOR_HOLLOW)
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \
