@@ -1,0 +1,8 @@
+# Per-tileset Porytiles config for gTileset_Kalliste.
+# No layout pairs kalliste with a primary yet, so name the partner explicitly.
+# The sources are drawn by tools/ichor/art/kalliste_build.py, which also checks
+# that the compiled metatiles use only kalliste's own tiles and palettes 6-12.
+tileset:
+  primary_pairing:
+    mode: manual
+    partners: [gTileset_Aethos]
