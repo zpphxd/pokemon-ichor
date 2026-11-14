@@ -18,6 +18,7 @@ STATIC_ASSERT(offsetof(struct IchorSave, thread) == 0x1A0, IchorSaveThreadOffset
 STATIC_ASSERT(offsetof(struct IchorSave, reserved) == 0x450, IchorSaveReservedOffset);
 STATIC_ASSERT(offsetof(struct SaveBlock3, ichor) == 0, IchorSaveFirstInSaveBlock3);
 STATIC_ASSERT(ICHOR_FLAGS_START % 8 == 0 && ICHOR_DAILY_FLAGS_START % 8 == 0, IchorFlagBanksByteAligned);
+STATIC_ASSERT(FLAGS_COUNT <= ICHOR_FLAGS_START, VanillaFlagsBelowIchorBanks);
 STATIC_ASSERT(ICHOR_FLAGS_END < ICHOR_DAILY_FLAGS_START && ICHOR_DAILY_FLAGS_END < SPECIAL_FLAGS_START, IchorFlagBanksFit);
 STATIC_ASSERT(ICHOR_VARS_START > VARS_END && ICHOR_VARS_END < SPECIAL_VARS_START, IchorVarBankFits);
 

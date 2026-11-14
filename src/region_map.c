@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_relics.h"
 #include "main.h"
 #include "text.h"
 #include "menu.h"
@@ -2567,7 +2568,7 @@ static void CB_ExitFlyMap(void)
             }
             else
             {
-                SetMainCallback2(CB2_ReturnToPartyMenuFromFlyMap);
+                SetMainCallback2(Ichor_GetFlyMapCancelCallback()); // Ichor: back to the bag or field after the Wings
             }
             TRY_FREE_AND_SET_NULL(sFlyMap);
             FreeAllWindowBuffers();

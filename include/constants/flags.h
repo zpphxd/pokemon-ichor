@@ -1681,6 +1681,33 @@
 #define FLAG_ICHOR_XENIA_START                  (ICHOR_FLAGS_START + 0x2E0) // 32: hosts and token-chain links (§10)
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
+
+// The relics (SYSTEMS §1). Each FLAG_ICHOR_GOT_* is set whenever its item
+// enters the bag. They sit at FLAG_ICHOR_RELICS_START + (item - ITEM_TALARIA);
+// the Talaria's is the slice's FLAG_SYS_B_DASH instead.
+#define FLAG_ICHOR_GOT_TALARIA                  FLAG_SYS_B_DASH
+#define FLAG_ICHOR_GOT_BRONZE_HAMMER            (FLAG_ICHOR_RELICS_START + 0x01)
+#define FLAG_ICHOR_GOT_HECATES_TORCH            (FLAG_ICHOR_RELICS_START + 0x02)
+#define FLAG_ICHOR_GOT_DEMETERS_SICKLE          (FLAG_ICHOR_RELICS_START + 0x03)
+#define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES       (FLAG_ICHOR_RELICS_START + 0x04)
+#define FLAG_ICHOR_GOT_POSEIDONS_CONCH          (FLAG_ICHOR_RELICS_START + 0x05)
+#define FLAG_ICHOR_GOT_DAEDALUS_WINGS           (FLAG_ICHOR_RELICS_START + 0x06)
+#define FLAG_ICHOR_GOT_HORN_OF_ACHELOUS         (FLAG_ICHOR_RELICS_START + 0x07)
+#define FLAG_ICHOR_GOT_ARIADNES_THREAD          (FLAG_ICHOR_RELICS_START + 0x08)
+#define FLAG_ICHOR_GOT_LABRYS                   (FLAG_ICHOR_RELICS_START + 0x09)
+#define FLAG_ICHOR_GOT_HELM_OF_DARKNESS         (FLAG_ICHOR_RELICS_START + 0x0A)
+#define FLAG_ICHOR_GOT_NEREID_PEARL             (FLAG_ICHOR_RELICS_START + 0x0B)
+#define FLAG_ICHOR_GOT_AEOLUS_BAG               (FLAG_ICHOR_RELICS_START + 0x0C)
+// upgrades, from the rites' gift II
+#define FLAG_ICHOR_WINGED_TALARIA               (FLAG_ICHOR_RELICS_START + 0x20) // Hermes: leap one-tile gaps
+#define FLAG_ICHOR_THREE_FLAMED_TORCH           (FLAG_ICHOR_RELICS_START + 0x21) // Hecate: wider light, burns thornwebs
+#define FLAG_ICHOR_HEPHAESTUS_HAMMER            (FLAG_ICHOR_RELICS_START + 0x22) // Hephaestus: great boulders
+#define FLAG_ICHOR_TRITON_CONCH                 (FLAG_ICHOR_RELICS_START + 0x23) // Poseidon: calms whirlpools (post-game)
+#define FLAG_ICHOR_HELM_OF_HADES                (FLAG_ICHOR_RELICS_START + 0x24) // Hades: works in shadow by day (post-game)
+// state
+#define FLAG_ICHOR_TORCH_DOUSED                 (FLAG_ICHOR_RELICS_START + 0x30) // the torch is out (Relic Ring)
+#define FLAG_ICHOR_HELM_ON                      (FLAG_ICHOR_RELICS_START + 0x31) // the Helm of Darkness is worn
+#define FLAG_ICHOR_NO_RELICS                    (FLAG_ICHOR_RELICS_START + 0x32) // set in ON_TRANSITION: no relics here; cleared on every map change
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
 // Ichor bank flags: end
 

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_relics.h"
 #include "event_data.h"
 #include "pokedex.h"
 
@@ -64,6 +65,7 @@ void ClearTempFieldEventData(void)
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_CTRL_OBJ_DELETE);
     FlagClear(FLAG_NURSE_UNION_ROOM_REMINDER);
+    Ichor_OnMapTransition(); // Ichor: FLAG_ICHOR_NO_RELICS lasts one map
 }
 
 void ClearDailyFlags(void)

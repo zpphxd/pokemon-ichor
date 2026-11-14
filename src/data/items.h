@@ -7307,6 +7307,204 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_Glimmoranite,
     },
 
+    // Ichor: the relics (design/SYSTEMS.md §1). Key items used from the field;
+    // src/ichor_relics.c runs them.
+    [ITEM_TALARIA] =
+    {
+        .name = ITEM_NAME("Talaria"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Winged sandals\n"
+            "from Mom. Hold B\n"
+            "to run."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorTalaria,
+        .iconPic = gItemIcon_Talaria,
+        .iconPalette = gItemIconPalette_Talaria,
+    },
+    [ITEM_BRONZE_HAMMER] =
+    {
+        .name = ITEM_NAME("Bronze Hammer"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Kedalion's votive\n"
+            "hammer. It breaks\n"
+            "marble rubble."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorContextual,
+        .iconPic = gItemIcon_BronzeHammer,
+        .iconPalette = gItemIconPalette_BronzeHammer,
+    },
+    [ITEM_HECATES_TORCH] =
+    {
+        .name = ITEM_NAME("Hecate's Torch"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A torch lit at the\n"
+            "crossroads. Lights\n"
+            "dark places."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorTorch,
+        .iconPic = gItemIcon_HecatesTorch,
+        .iconPalette = gItemIconPalette_HecatesTorch,
+    },
+    [ITEM_DEMETERS_SICKLE] =
+    {
+        .name = ITEM_NAME("Demeter's Sickle"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A harvest blade.\n"
+            "It clears thorn\n"
+            "thickets."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorContextual,
+        .iconPic = gItemIcon_DemetersSickle,
+        .iconPalette = gItemIconPalette_DemetersSickle,
+    },
+    [ITEM_GIRDLE_OF_HERAKLES] =
+    {
+        .name = ITEM_NAME("Girdle of Herakles"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "The hero's belt.\n"
+            "Its wearer can\n"
+            "push column drums."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorContextual,
+        .iconPic = gItemIcon_GirdleOfHerakles,
+        .iconPalette = gItemIconPalette_GirdleOfHerakles,
+    },
+    [ITEM_POSEIDONS_CONCH] =
+    {
+        .name = ITEM_NAME("Poseidon's Conch"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Blow it at the\n"
+            "shore and a dolphin\n"
+            "carries you."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorContextual,
+        .iconPic = gItemIcon_PoseidonsConch,
+        .iconPalette = gItemIconPalette_PoseidonsConch,
+    },
+    [ITEM_DAEDALUS_WINGS] =
+    {
+        .name = ITEM_NAME("Daedalus's Wings"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Wax and feathers.\n"
+            "Fly to places\n"
+            "you have been."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorWings,
+        .iconPic = gItemIcon_DaedalusWings,
+        .iconPalette = gItemIconPalette_DaedalusWings,
+    },
+    [ITEM_HORN_OF_ACHELOUS] =
+    {
+        .name = ITEM_NAME("Horn of Achelous"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "The river god's\n"
+            "horn. It climbs\n"
+            "waterfalls."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorContextual,
+        .iconPic = gItemIcon_HornOfAchelous,
+        .iconPalette = gItemIconPalette_HornOfAchelous,
+    },
+    [ITEM_ARIADNES_THREAD] =
+    {
+        .name = ITEM_NAME("Ariadne's Thread"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A red clew. It\n"
+            "leads you back out\n"
+            "of a dungeon."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorThread,
+        .iconPic = gItemIcon_EscapeRope, // the coil, in red
+        .iconPalette = gItemIconPalette_AriadnesThread,
+    },
+    [ITEM_LABRYS] =
+    {
+        .name = ITEM_NAME("Labrys"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "The double axe of\n"
+            "Knossa. It cleaves\n"
+            "seals and chains."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorContextual,
+        .iconPic = gItemIcon_Labrys,
+        .iconPalette = gItemIconPalette_Labrys,
+    },
+    [ITEM_HELM_OF_DARKNESS] =
+    {
+        .name = ITEM_NAME("Helm of Darkness"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Hades's helm.\n"
+            "Whoever wears it\n"
+            "goes unseen."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorHelm,
+        .iconPic = gItemIcon_HelmOfDarkness,
+        .iconPalette = gItemIconPalette_HelmOfDarkness,
+    },
+    [ITEM_NEREID_PEARL] =
+    {
+        .name = ITEM_NAME("Nereid Pearl"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A sea nymph's\n"
+            "pearl. It lets you\n"
+            "dive deep water."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorContextual,
+        .iconPic = gItemIcon_NereidPearl,
+        .iconPalette = gItemIconPalette_NereidPearl,
+    },
+    [ITEM_AEOLUS_BAG] =
+    {
+        .name = ITEM_NAME("Aeolus's Bag"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "The winds, tied in\n"
+            "a bag. Open it to\n"
+            "blow fog away."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_IchorAeolusBag,
+        .iconPic = gItemIcon_AeolusBag,
+        .iconPalette = gItemIconPalette_AeolusBag,
+    },
+
 // Gems
 #if I_PRICE >= GEN_9
     #define GEM_PRICE 15000

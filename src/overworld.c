@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_relics.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -1106,10 +1107,8 @@ void SetDefaultFlashLevel(void)
 {
     if (!gMapHeader.cave)
         gSaveBlock1Ptr->flashLevel = 0;
-    else if (FlagGet(FLAG_SYS_USE_FLASH))
-        gSaveBlock1Ptr->flashLevel = 1;
     else
-        gSaveBlock1Ptr->flashLevel = gMaxFlashLevel - 1;
+        gSaveBlock1Ptr->flashLevel = Ichor_GetTorchFlashLevel(); // Ichor: Hecate's Torch lights dark maps
 }
 
 void SetFlashLevel(s32 flashLevel)

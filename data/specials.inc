@@ -638,3 +638,16 @@ gSpecials::
 	def_special UpdateTrainerCardPhotoIcons
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
+	@ Ichor: relics (src/ichor_relics.c)
+	def_special Ichor_CanUseRelic
+	def_special Ichor_RelicPromptsAuto
+	def_special Ichor_RelicPose, waitstate=1
+	def_special Ichor_FollowerHop
+	def_special Ichor_CheckFlagInVar
+	def_special Ichor_SetFlagInVar
+	def_special Ichor_AnimateTorchFlash, waitstate=1
+	def_special Ichor_IsInDarkMap
+	def_special Ichor_SetTorchDoused
+	def_special Ichor_ClearFog
+	def_special Ichor_BuildRelicRing
+	def_special Ichor_UseRingChoice

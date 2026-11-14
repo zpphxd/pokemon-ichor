@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_relics.h"
 #include "data.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -1529,9 +1530,7 @@ static void Task_UseFly(u8 taskId)
             if (!IsWeatherNotFadingIn())
                 return;
 
-            gFieldEffectArguments[0] = GetCursorSelectionMonId();
-            if ((int)gFieldEffectArguments[0] > PARTY_SIZE - 1)
-                gFieldEffectArguments[0] = 0;
+            gFieldEffectArguments[0] = Ichor_GetFlyEffectArg(); // Ichor: only Daedalus's Wings fly
 
             FieldEffectStart(FLDEFF_USE_FLY);
             fieldEffectStarted = TRUE;
@@ -2938,6 +2937,12 @@ bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
     bool32 noDucking = gFieldEffectArguments[0] & SHOW_MON_CRY_NO_DUCKING;
+    if (Ichor_IsRelicShowArg(gFieldEffectArguments[0])) // Ichor: a relic, not a Pokémon
+    {
+        Ichor_StartRelicShow(gFieldEffectArguments[0] & ~(ICHOR_FIELD_EFFECT_RELIC | SHOW_MON_CRY_NO_DUCKING));
+        FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        return FALSE;
+    }
     pokemon = &gParties[B_TRAINER_PLAYER][(u8)gFieldEffectArguments[0]];
     gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
     gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_IS_SHINY);

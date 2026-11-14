@@ -25,7 +25,8 @@ RUNNER=build/tools/ichor-mgba-headless
 # Engine addresses every check may need, besides slice_symbols.sh's.
 ENGINE_SYMS="gSaveBlock3Ptr gSpecialVar_0x8000 gSpecialVar_0x8001 gSpecialVar_0x8002 gSpecialVar_0x8003
 gSpecialVar_0x8005 gSpecialVar_0x8006 gSpecialVar_0x8007 gSpecialVar_0x800A gSpecialVar_0x800B gLocalTime
-gStringVar1 gStringVar2 gStringVar3 gPlayerPartyCount gFieldEffectArguments gSaveBlock1Ptr"
+gStringVar1 gStringVar2 gStringVar3 gPlayerPartyCount gFieldEffectArguments gSaveBlock1Ptr
+gWeather CB2_FlyMap CB2_Bag Task_ShowStartMenu"
 
 engine_prepare() {
   local tag="$1" out="$2" consts="$3" asm="$4"
@@ -53,7 +54,7 @@ engine_prepare() {
          n && /\.space/ { print "  " n " = 0,"; n = "" }' "$out/consts.s"
     arm-none-eabi-nm "$ELF" | awk -v pat="$pattern" '$3 ~ pat && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
     # Ichor's own functions and scripts, by name, for checks that look for them.
-    arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(Ichor|EventScript_Ichor)[A-Za-z0-9_]*$/ && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
+    arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(Ichor|EventScript_Ichor)[A-Za-z0-9_]*$|^EventScript_(CutTree|RockSmash|StrengthBoulder|UseSurf|UseWaterfall|UseDive)$/ && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
     echo "}"
   } > "$out/engine_symbols.lua"
 

@@ -84,6 +84,8 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | `FLAG_DAILY_ICHOR_LAUREL_START` | `0x2870` | 32 | Laurel trees, one sprig a day |
 | `FLAG_DAILY_ICHOR_GENERAL_START` | `0x2890` | 112 | Claimed by name |
 
+**One assembler caveat.** The `compare` macro (and the `goto_if_eq`-style macros built on it) treats a second argument in `0x4000`–`0x40FF` as a var and anything else as a number. So comparing a var *against a bank var* needs `compare_var_to_var` explicitly. Comparing a bank var against a number works as usual.
+
 **Tests read the banks from IchorSave,** not from SaveBlock1. `tools/ichor/tests/engine_lib.lua`'s `L.getFlag`, `L.setFlag`, `L.getVar` and `L.setVar` handle every range.
 
 **Check:** `tools/ichor/tests/ichor_save.sh`.
@@ -92,12 +94,12 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 ## Status of the rest of this file
 
-§1 is built. **§2–§5 are the planned API, published early so the world sessions can write their scripts against it now.** The names in them are fixed: build against them, and stub what isn't there yet. The behavior lands batch by batch:
+§1 and §2 are built. **§3–§5 are the planned API, published early so the world sessions can write their scripts against it now.** The names in them are fixed: build against them, and stub what isn't there yet. The behavior lands batch by batch:
 
 | § | System | Batch | State |
 |---|---|---|---|
 | 1 | Save state and banks | 1 | **Built** |
-| 2 | Relics, darkness and braziers | 2 | Planned, names fixed |
+| 2 | Relics, darkness and braziers | 2 | **Built** |
 | 3 | Rites: altars, Favor, blessings, gifts | 3 | Planned, names fixed |
 | 4 | Herm waystones and the Wings | 4 | Planned, names fixed |
 | 5 | Labyrinth mechanics, then the Frozen Hour | 5 | Hooks only |
@@ -126,7 +128,9 @@ Relics are key items. **No Pokémon ever needs a field move:** the party menu of
 | `ITEM_NEREID_PEARL` | Nereid Pearl | Dive | A on deep water |
 | `ITEM_AEOLUS_BAG` | Aeolus's Bag | Defog | From the bag |
 
-**Giving a relic.** Use `giveitem(ITEM_BRONZE_HAMMER)`. The engine sets the relic's flag whenever the item enters the bag, so scripts can check either.
+**Giving a relic.** Use `giveitem(ITEM_BRONZE_HAMMER)`. The engine sets the relic's flag whenever the item enters the bag (`AddBagItem`), so scripts can check either. The icons are in `graphics/items/icons/`, drawn by `tools/ichor/art/items_relics.py`; Ariadne's Thread is the Escape Rope's coil in red.
+
+**Check:** `tools/ichor/tests/ichor_relics.sh`.
 
 **Relic flags** (bank, in `FLAG_ICHOR_RELICS_START`'s range):
 - `FLAG_ICHOR_GOT_<RELIC>` for each relic above: `_BRONZE_HAMMER`, `_HECATES_TORCH`, `_DEMETERS_SICKLE`, `_GIRDLE_OF_HERAKLES`, `_POSEIDONS_CONCH`, `_DAEDALUS_WINGS`, `_HORN_OF_ACHELOUS`, `_ARIADNES_THREAD`, `_LABRYS`, `_HELM_OF_DARKNESS`, `_NEREID_PEARL`, `_AEOLUS_BAG`.
@@ -149,35 +153,57 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
 | Great boulder (2×2) | any | `EventScript_IchorGreatBoulder` | Hephaestus's Hammer |
 | Labrys seal or bronze chain | any | `EventScript_IchorLabrysSeal` | Labrys |
 
+- Any sprite works for the new obstacles, since the scripts never animate them; they remove the object with a sound. Only `EventScript_RockSmash` plays the rubble's breaking animation, so it needs the rubble sprite.
+- **Art note:** `OBJ_EVENT_GFX_BREAKABLE_ROCK` draws nothing on Route 1 (found by `tools/ichor/tests/ichor_relics.sh`). The marble-rubble swap (INVENTORY §1) should fix it. The cut tree draws as a bush until the thorn-thicket art lands.
 - Like vanilla, an obstacle comes back when the map reloads. To clear it for good, give the object a hide flag of your own; the script's `removeobject` sets it.
 - **Water needs no events:** Surf, Waterfall and Dive come from the map's metatile behaviors, exactly as in Emerald, and check the Conch, the Horn and the Pearl.
 - **The wording without the relic** follows SYSTEMS §1: "A thorn thicket. A good blade would clear it." and "The blocks won't shift by hand. A good hammer would break them."
 
 ### Darkness and braziers (SYSTEMS §2)
 
-- **A dark map** is one whose header has `"cave": true` (Porymap: "Requires Flash"). Without the Torch the light radius is 1.5 tiles. With it, 3.5. The Three-Flamed Torch or Hecate's blessing gives 4, and both give 4.5.
+- **A dark map** is one whose header has `"cave": true` (Porymap: "Requires Flash"). The light radius comes from `Ichor_GetTorchFlashLevel` (`src/ichor_relics.c`):
+
+  | | Flash level | Radius |
+  |---|---|---|
+  | No Torch | 7 | 1.5 tiles |
+  | Hecate's Torch | 3 | 3.5 tiles |
+  | The Three-Flamed Torch, or Hecate's blessing | 2 | 4 tiles |
+  | Both | 1 | 4.5 tiles |
+  | Torch doused (Relic Ring) | 8 | black: glow-paint only, once its palettes exist |
+
 - **Braziers** are metatiles, so the map draws them. Each gets a flag in `FLAG_ICHOR_BRAZIERS_START`'s range; ask for a block of indices for your maps.
   ```
   // the brazier's bg event
   script Map_Brazier1 {
-      setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0)
+      setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0)  // its flag
+      setvar(VAR_0x8005, TRUE)              // TRUE: lighting it lights the zone the player stands in
       call(EventScript_IchorBrazier)        // asks, lights it, sets the flag
       if (var(VAR_RESULT) == TRUE) {        // TRUE only when it was lit just now
-          setmetatile(...)                  // swap to your lit metatiles
+          setmetatile(...)                  // swap in your lit metatiles
           special(DrawWholeMapView)
       }
       releaseall
   }
   ```
-  In the map's ON_LOAD, swap the metatiles of every brazier whose flag is set.
+  Without the Torch it says "A cold bronze brazier. It needs a flame." Once lit it says "The brazier burns steadily." In the map's ON_LOAD, swap the metatiles of every brazier whose flag is set.
 - **Lit zones.** A coord event on each threshold of a brazier's zone:
-  - going in: `setvar(VAR_0x8004, <brazier flag>)` and then `call(EventScript_IchorEnterLitZone)`, which brightens the map if that brazier is lit;
-  - going out: `call(EventScript_IchorLeaveLitZone)`, which goes back to the torch's radius.
+  - going in: `setvar(VAR_0x8004, <brazier flag>)`, then `call(EventScript_IchorEnterLitZone)`. It brightens the map fully if that brazier is lit.
+  - going out: `call(EventScript_IchorLeaveLitZone)`, which eases back to the torch's radius.
+- **A map that loads with the player inside a lit zone** sets `setflashlevel(0)` in its ON_TRANSITION when the zone's flag is set.
+
+### Calls for scripted relic moments
+
+- `setvar(VAR_0x8004, ITEM_X)`, then `call(EventScript_IchorRelicPose)`: the player raises relic X, its icon shows over their head with a chime, and a follower hops. Use it when a story script uses a relic.
+- `specialvar(VAR_RESULT, Ichor_CanUseRelic)` with `VAR_0x8004` = the relic and `VAR_0x8005` = an upgrade flag or 0. Returns `ICHOR_RELIC_OK`, `_MISSING`, `_FORBIDDEN` or `_TOO_WEAK` (`include/constants/ichor.h`).
+- `specialvar(VAR_RESULT, Ichor_RelicPromptsAuto)`: TRUE when the player chose AUTO.
+- `specialvar(VAR_RESULT, Ichor_IsInDarkMap)`.
 
 ### The player's side
 
-- **The Relic Ring:** SELECT opens a menu of the registered item plus every owned free relic (the Wings, the Torch, the Helm, the Thread, and Hestia's Hearthfire while you hold her blessing). It opens on the last entry used.
-- **The option "Relic prompts":** ASK (the default) or AUTO. Surf and Waterfall always ask.
+- **The Relic Ring:** once the player owns a free relic, SELECT opens a menu in the top-right corner: the registered item first, then FLY, DOUSE TORCH or LIGHT TORCH, WEAR HELM or REMOVE HELM, and THREAD. Hestia's Hearthfire joins it with the rites (§3). It opens on the last entry used, so SELECT then A repeats the last action. Before the first free relic, SELECT runs the registered item as in Emerald.
+- **From the bag,** each relic does what it does in the field. The contextual relics (Hammer, Sickle, Girdle, Labrys, Conch, Horn and Pearl) act on the obstacle or water in front of the player, or say there's nothing to use them on. The Wings open the fly map, and cancelling it returns to the bag. The Torch douses or relights on dark maps, and the Helm goes on or off. The Thread escapes a dungeon like the Escape Rope, and Aeolus's Bag clears fog from the map until the player leaves it.
+- **The Town Map** flies with R once the Wings are owned (`OW_FLAG_POKE_RIDER` is `FLAG_ICHOR_GOT_DAEDALUS_WINGS`).
+- **The option "Relic prompts":** the RELIC PROMPTS row of the options menu, ASK (the default) or AUTO. Water (Surf, Waterfall, Dive) always asks. The menu's eight rows are 14 px apart, so they still fit the vanilla box.
 - **The pose:** the player raises the relic, its icon shows over their head, and a chime plays. No Pokémon cut-in appears, and a follower hops beside you as before.
 
 ### A change to the slice (for the map owner)
