@@ -1634,24 +1634,256 @@
     {
       "id": "MAPSEC_ELAIA_VILLAGE",
       "name": "ELAIA VILLAGE",
-      "x": 4,
-      "y": 11,
+      "x": 17,
+      "y": 9,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_KALLISTE_ROUTE_1",
       "name": "ROUTE 1",
-      "x": 4,
-      "y": 10,
+      "x": 17,
+      "y": 8,
       "width": 1,
       "height": 1
     },
     {
       "id": "MAPSEC_AKTI_TOWN",
       "name": "AKTI TOWN",
+      "x": 17,
+      "y": 7,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_EMPORION_CITY",
+      "name": "EMPORION CITY",
+      "x": 10,
+      "y": 6,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_2",
+      "name": "ROUTE 2",
+      "x": 11,
+      "y": 5,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ELEUSA_VILLAGE",
+      "name": "ELEUSA VILLAGE",
+      "x": 12,
+      "y": 5,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_3",
+      "name": "ROUTE 3",
+      "x": 12,
+      "y": 4,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_THYRSA_CITY",
+      "name": "THYRSA CITY",
+      "x": 12,
+      "y": 3,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_4",
+      "name": "ROUTE 4",
+      "x": 10,
+      "y": 3,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_DELPHOI",
+      "name": "DELPHOI",
+      "x": 9,
+      "y": 3,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_15",
+      "name": "ROUTE 15",
       "x": 4,
+      "y": 4,
+      "width": 5,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_5",
+      "name": "ROUTE 5",
+      "x": 7,
+      "y": 5,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_ARKADIA",
+      "name": "ARKADIA",
+      "x": 7,
+      "y": 7,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_6",
+      "name": "ROUTE 6",
+      "x": 8,
+      "y": 6,
+      "width": 2,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_7",
+      "name": "ROUTE 7",
+      "x": 13,
+      "y": 5,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ASTYRA",
+      "name": "ASTYRA",
+      "x": 14,
+      "y": 5,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_11",
+      "name": "ROUTE 11",
+      "x": 13,
+      "y": 7,
+      "width": 4,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_12",
+      "name": "ROUTE 12",
+      "x": 16,
       "y": 9,
+      "width": 3,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_KALDERA",
+      "name": "KALDERA",
+      "x": 19,
+      "y": 11,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_13",
+      "name": "ROUTE 13",
+      "x": 11,
+      "y": 12,
+      "width": 8,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_KYTHERA_ISLE",
+      "name": "KYTHERA ISLE",
+      "x": 10,
+      "y": 12,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_KNOSSA_ISLE",
+      "name": "KNOSSA ISLE",
+      "x": 17,
+      "y": 13,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_14",
+      "name": "ROUTE 14",
+      "x": 9,
+      "y": 10,
+      "width": 2,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_8",
+      "name": "ROUTE 8",
+      "x": 7,
+      "y": 8,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_LAKONIA",
+      "name": "LAKONIA",
+      "x": 8,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_THE_ASCENT",
+      "name": "THE ASCENT",
+      "x": 9,
+      "y": 1,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_MOUNT_OLYMPUS",
+      "name": "MT. OLYMPUS",
+      "x": 8,
+      "y": 0,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_9",
+      "name": "ROUTE 9",
+      "x": 7,
+      "y": 10,
+      "width": 2,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_CAPE_TAINARON",
+      "name": "CAPE TAINARON",
+      "x": 7,
+      "y": 12,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_AETHOS_ROUTE_10",
+      "name": "ROUTE 10",
+      "x": 5,
+      "y": 7,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_OLYMPIA",
+      "name": "OLYMPIA",
+      "x": 4,
+      "y": 7,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ATLANTIS",
+      "name": "ATLANTIS",
+      "x": 1,
+      "y": 11,
       "width": 1,
       "height": 1
     }
