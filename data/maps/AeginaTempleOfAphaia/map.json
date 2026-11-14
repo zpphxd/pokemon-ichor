@@ -4,7 +4,7 @@
   "layout": "LAYOUT_AEGINA_TEMPLE_OF_APHAIA",
   "music": "MUS_ICHOR_ROUTE1",
   "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_TEMPLE_OF_APHAIA",
+  "region_map_section": "MAPSEC_AIGINA",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_ROUTE",

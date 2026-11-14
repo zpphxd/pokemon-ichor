@@ -4,7 +4,7 @@
   "layout": "LAYOUT_TRIREME_EUPLOIA_DECK",
   "music": "MUS_ICHOR_AKTI",
   "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_AETHOS_ROUTE_11",
+  "region_map_section": "MAPSEC_AETHOS_ROUTE_2",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
   "map_type": "MAP_TYPE_OCEAN_ROUTE",

@@ -1891,38 +1891,6 @@
       "y": 13,
       "width": 1,
       "height": 1
-    },
-    {
-      "id": "MAPSEC_AEGINA_TOWN",
-      "name": "AEGINA TOWN",
-      "x": 12,
-      "y": 7,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_APHAIA_ROAD",
-      "name": "APHAIA ROAD",
-      "x": 12,
-      "y": 7,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_TEMPLE_OF_APHAIA",
-      "name": "TEMPLE OF APHAIA",
-      "x": 12,
-      "y": 7,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "id": "MAPSEC_MOUNT_OROS",
-      "name": "MOUNT OROS",
-      "x": 12,
-      "y": 7,
-      "width": 1,
-      "height": 1
     }
   ]
 }

@@ -4,7 +4,7 @@
   "layout": "LAYOUT_AEGINA_TOWN_AIAKIDES_HOUSE",
   "music": "MUS_ICHOR_AKTI",
   "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_AEGINA_TOWN",
+  "region_map_section": "MAPSEC_AIGINA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",

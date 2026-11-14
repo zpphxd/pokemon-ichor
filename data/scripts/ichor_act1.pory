@@ -5,14 +5,14 @@ text Ichor_Text_NameNausikles { "NAUSIKLES" }
 
 // ---------------------------------------------------------------------------
 // The Euploia's ferry (SCRIPT.md Part 2, "Nausikles as the ferry").
-// Once the first voyage is done, Nausikles runs Akti, Aegina and Emporion.
+// Once the first voyage is done, Nausikles runs Akti, Aigina and Emporion.
 // On a quay, he asks where to and puts the player on deck; on deck, "Ready to
 // make port?" sails to the chosen quay. The destination rides in two flags
 // (both clear: Akti), because temp vars don't survive the warp to the deck.
 // ---------------------------------------------------------------------------
 
 // Called from Nausikles on a quay. VAR_0x8004: the quay he stands on
-// (0 Akti, 1 Aegina, 2 Emporion).
+// (0 Akti, 1 Aigina, 2 Emporion).
 script Ichor_EventScript_FerryQuay {
     lock
     faceplayer
@@ -20,7 +20,7 @@ script Ichor_EventScript_FerryQuay {
     msgbox(format("Where to? Wind's fair, more or less."))
     // ICHOR_STUB_EMPORION: Emporion joins the list when its quay exists.
     if (var(VAR_0x8004) == 0) {
-        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AEGINA", "STAY")
+        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AIGINA", "STAY")
         if (var(VAR_RESULT) == 0) {
             setflag(FLAG_ICHOR_FERRY_TO_AEGINA)
             clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
@@ -82,7 +82,7 @@ script Ichor_EventScript_EuploiaMakesEmporion {
     delay(30)
     msgbox(format("Emporion, the harbor of the world, is next.\p"
                   "Its streets are still being laid.\p"
-                  "Until they are, the Euploia sails Akti and Aegina."))
+                  "Until they are, the Euploia sails Akti and Aigina."))
     closemessage
     delay(30)
     fadescreen(FADE_FROM_BLACK)
