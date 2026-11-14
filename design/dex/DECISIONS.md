@@ -140,5 +140,5 @@ ROM budget notes for whoever implements the dex. These come from the main sessio
     - Pelython (36), Pyrapod (34) and Hymnet (35) in Delphoi (48–52)
     - Aetling (40), Kryopuff (40) and Pagoshard (42) on the Ascent (52–58)
     - Elegull (42) in the post-game (55–70)
-  - **Recommended fix:** late areas' wild tables carry the evolved forms at the area's levels, and the first stages turn up only in rare lower-level spots, swarms or eggs, the way Victory Road works. The alternative is raising those evolution levels to just above each area's band.
+  - **Decided (2026-11-14, by the main session, now in `design/BALANCE.md`): keep the evolution levels.** From Astyra on, late areas' wild tables carry the evolved forms at the band's levels. First stages appear only in rare lower-level spots, in swarms or omens, or by breeding. Lernip is the exception: a rare rain-only hunt at Lake Stymphalia at about level 30. The species' habitat text follows this.
   - **Superseded:** the earlier "keep Victory Road under 40" note above.
