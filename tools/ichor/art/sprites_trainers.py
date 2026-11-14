@@ -45,11 +45,13 @@ def kleon():
     f = Fig(pal)
 
     # cloak, behind everything, billowing to his left
-    f.poly([(25, 23), (38, 23), (43, 28), (47, 36), (51, 46), (52, 52), (48, 51), (45, 54), (41, 51),
+    f.poly([(25, 23), (38, 23), (43, 28), (47, 36), (52, 44), (55, 50), (51, 51), (47, 55), (42, 51),
             (37, 53), (31, 51), (26, 53), (21, 51), (20, 44), (21, 32)], cloak)
     f.shade_poly([(44, 36), (45, 36), (48, 52), (46, 52)], 0.5)
     f.shade_poly([(40, 40), (41, 40), (42, 52), (41, 52)], 0.5)
     f.shade_poly([(47, 40), (48, 40), (51, 50), (50, 50)], -0.4)
+    f.shade_poly([(49, 42), (50, 42), (54, 49), (53, 49)], 0.5)
+    f.shade_poly([(22, 36), (23, 36), (23, 50), (22, 50)], 0.4)
     # legs, feet apart
     f.poly([(25, 41), (29, 41), (29, 46), (28, 52), (27, 57), (24, 57), (24, 52), (24, 46)], skin, group=100)
     f.poly([(33, 41), (37, 41), (38, 46), (39, 52), (40, 57), (37, 57), (35, 52), (34, 46)], skin, group=101)
@@ -225,60 +227,67 @@ def titan_grunt():
     bronze = Mat(["br_x", "br_d", "br_m", "br_l"], cuts=[0.12, 0.42, 0.74])
     lea = Mat(["lea"])
     f = Fig(pal)
-    # legs in a wide, aggressive stance, dark wraps and sandals
-    f.poly([(24, 42), (29, 42), (27, 50), (24, 57), (20, 57), (22, 50)], tunic, group=100)
-    f.poly([(33, 42), (38, 42), (40, 50), (43, 57), (39, 57), (35, 50)], tunic, group=101)
-    f.poly([(18, 57), (25, 57), (25, 61), (17, 61)], lea)
-    f.poly([(38, 57), (45, 57), (46, 61), (38, 61)], lea)
-    # bronze greaves
-    f.poly([(22, 49), (27, 49), (25, 56), (21, 56)], bronze)
-    f.poly([(35, 49), (40, 49), (42, 56), (38, 56)], bronze)
-    # dark tunic with a short skirt
-    body = f.poly([(24, 23), (38, 23), (39, 32), (42, 43), (31, 44), (20, 43), (23, 32)], tunic)
-    f.rect(20, 32, 42, 33, lea, clip=body)
-    # arms raised in fists, like any good grunt
-    f.thick_line([(24, 25), (18, 31)], 4, skin, group=200)
-    f.thick_line([(18, 31), (17, 24)], 4, skin, group=200)
-    f.ellipse((14, 20, 19, 25), skin, group=201)
-    f.thick_line([(38, 25), (44, 31)], 4, skin, group=300)
-    f.thick_line([(44, 31), (45, 24)], 4, skin, group=300)
-    f.ellipse((43, 20, 48, 25), skin, group=301)
-    f.rect(15, 26, 20, 27, lea)
-    f.rect(42, 26, 46, 27, lea)
-    f.rect(29, 20, 33, 25, skin, group=400)
+    # legs in a low, wide crouch, weight on the back (left) leg, front knee bent
+    f.poly([(23, 40), (29, 40), (27, 47), (22, 52), (20, 57), (16, 57), (18, 51), (21, 46)], tunic, group=100)
+    f.poly([(32, 40), (38, 40), (41, 47), (44, 52), (45, 57), (41, 57), (39, 52), (35, 46)], tunic, group=101)
+    f.poly([(14, 57), (21, 57), (21, 61), (13, 61)], lea)
+    f.poly([(40, 57), (47, 57), (48, 61), (40, 61)], lea)
+    f.poly([(18, 50), (23, 50), (21, 56), (16, 56)], bronze)
+    f.poly([(39, 50), (43, 50), (45, 56), (41, 56)], bronze)
+    # dark tunic, hunched forward, short pleated skirt
+    body = f.poly([(23, 22), (39, 21), (41, 30), (43, 42), (31, 44), (19, 42), (22, 30)], tunic)
+    f.rect(19, 31, 43, 32, lea, clip=body)
+    for x in (24, 29, 34, 39):
+        f.shade_poly([(x, 34), (x + 1, 34), (x + 1 + (x - 31) // 6, 43), (x + (x - 31) // 6, 43)], 0.5)
+    f.shade_poly([(36, 22), (39, 22), (41, 30), (38, 30)], 0.35)
+    # bronze shoulder guard on the near shoulder
+    f.ellipse((19, 20, 27, 26), bronze, group=150)
+    # near arm hangs low, gripping a bronze sickle
+    f.thick_line([(22, 24), (18, 33)], 4, skin, group=200)
+    f.ellipse((15, 32, 20, 37), skin, group=201)
+    f.thick_line([(17, 36), (15, 43)], 2, lea, group=210)
+    f.patch(8, 41, [
+        "..kkkk...",
+        ".kGYYyk..",
+        "kGk..kyk.",
+        "kYk...kk.",
+        "kYk......",
+        ".kYk.....",
+        "..kYkk...",
+        "...kkk...",
+    ], {"k": "ink", "G": "br_l", "Y": "br_m", "y": "br_d"})
+    # far arm cocked, fist raised at his chest
+    f.thick_line([(38, 23), (44, 31)], 4, skin, group=300)
+    f.thick_line([(44, 31), (39, 30)], 4, skin, group=300)
+    f.ellipse((35, 27, 40, 32), skin, group=301)
+    f.rect(28, 19, 33, 23, skin, group=400)
     # sickle emblem on the chest
-    f.patch(28, 25, [
+    f.patch(27, 23, [
         "..YY..",
         ".Y..Y.",
         "Y...Y.",
         "Y.....",
-        ".Y....",
-        "..YYY.",
+        ".YYY..",
     ], {"Y": "br_l"})
-    f.pxs([(30, 31), (31, 31)], "br_d")
-    # Corinthian helmet with a horsehair crest
-    f.patch(22, 1, [
-        "....kkkkkkkk.......",
-        "..kkCCCCCCCCkk.....",
-        ".kCCCRRRCCCCCck....",
-        ".kCRRRCCCCCCCck....",
-        "..kkkkkkkkkkkk.....",
-        "...kGGGYYYYYyk.....",
-        "..kGGYYYYYYYYyk....",
-        "..kGYYYYYYYYYyyk...",
-        ".kGYYYYYYYYYYYyk...",
-        ".kGYkkkkYkkkkYyk...",
-        ".kGYkWkkYkWkkYyk...",
-        ".kGYYkkYYYkkYYyk...",
-        ".kGYYYkYYYkYYYyk...",
-        ".kYYyYkYLYkYyYyk...",
-        ".kYYyykYLYkyyyyk...",
-        "..kYyykLLLkyyyk....",
-        "..kyyyklkklyyyk....",
-        "...kkkkLLLkkkk.....",
-        "......kbbbk........",
+    # low Corinthian helmet: swept-back crest, T-shaped face opening, glowing eyes
+    f.patch(21, 6, [
+        "......kkkkkk......",
+        "..kkkRRRRRRCCkk...",
+        ".kRRRCCCCCCCCCCck.",
+        "kCCkkkkkkkkkkkkkkk",
+        "..kGGYYYYYYYYyyk..",
+        ".kGYYYYYYYYYYYyyk.",
+        ".kGYYYYYYYYYYYYyk.",
+        ".kGkkkkkkkkkkkkyk.",
+        ".kGkRkkkkkkRkkkyk.",
+        ".kGYYYYkkkYYYYyyk.",
+        ".kYYyYYkLkYYyyyyk.",
+        "..kYyyYkLkYyyyyk..",
+        "..kyyyykLkyyyyk...",
+        "...kkkkkkkkkkk....",
     ], {"k": "ink", "C": "crest_d", "c": "crest_d", "R": "crest_l", "G": "br_l", "Y": "br_m", "y": "br_d",
-        "W": "skin_l", "L": "skin_m", "l": "skin_l", "b": "lea"})
+        "L": "skin_d"})
+    f.pxs([(24, 11), (25, 11)], "br_l")
     return f, pal
 
 
@@ -308,18 +317,25 @@ def professor_daphne():
     f.line([(21, 44), (36, 54)], "blue_l")
     # right arm out in a welcoming gesture
     f.thick_line([(25, 25), (20, 32)], 4, chiton, group=200)
-    f.thick_line([(20, 32), (14, 30)], 3, skin, group=201)
-    f.patch(9, 27, [
-        ".kk...",
-        "kLLk..",
-        "kLLLkk",
-        ".kLLLk",
-        "..kkk.",
-    ], {"k": "hair_d", "L": "skin_l"})
+    f.thick_line([(20, 32), (16, 24)], 3, skin, group=201)
+    # index finger raised: a teacher making a point
+    f.patch(13, 16, [
+        ".k...",
+        "kLk..",
+        "kLk..",
+        "kLkkk",
+        "kLLLk",
+        "kLLMk",
+        ".kkk.",
+    ], {"k": "hair_d", "L": "skin_l", "M": "skin_m"})
     # left arm hugging a scroll
     f.thick_line([(38, 25), (41, 33)], 4, him, group=300)
     f.poly([(35, 30), (44, 34), (42, 38), (33, 34)], par, group=310)
     f.ellipse((32, 32, 36, 37), par, group=311)
+    f.poly([(41, 36), (45, 36), (46, 47), (42, 48)], par, group=313)
+    f.line([(42, 39), (44, 39)], "par_d")
+    f.line([(43, 42), (45, 42)], "par_d")
+    f.line([(43, 45), (44, 45)], "par_d")
     f.ellipse((38, 33, 42, 37), skin, group=312)
     f.rect(30, 20, 34, 25, skin, group=400)
     # head: chestnut hair in a bun, laurel wreath

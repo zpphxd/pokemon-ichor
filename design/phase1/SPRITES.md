@@ -21,3 +21,10 @@ The new pics are front-only (no back pic). Hoenn trainer pics are untouched.
 | `graphics/birch_speech/birch.png` | Professor Daphne | The new-game intro portrait. Same file, so no code changes. |
 
 Preview: `design/phase1/img/sprites_trainers.png` (Brendan for scale, then Kleon, Ione, grunt, Daphne).
+
+## Tier 1 polish, pass 1
+
+- Titan grunt: lower Corinthian helmet with a swept-back crest, a T-shaped face opening with red eyes, a low crouch, a bronze shoulder guard, a sickle in the near hand and the far fist cocked.
+- Daphne: index finger raised as if mid-lecture, with the end of the scroll unrolled.
+- Kleon: a wider cloak flare and extra cloak folds.
+- Still open: full 3/4 turns with weight shift for all four, more cloth folds, and Kleon's swagger pose. Ione is unchanged.
