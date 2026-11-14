@@ -894,7 +894,7 @@
     {
       "type": "hidden_item",
       "x": 5,
-      "y": 2,
+      "y": 3,
       "elevation": 3,
       "item": "ITEM_HONEY",
       "flag": "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY",

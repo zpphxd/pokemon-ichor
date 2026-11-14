@@ -335,10 +335,10 @@ def north(g):
 def upper_village(g):
     # --- Melitta's house, her hives behind it, her yard in front ---
     g.struct("house_large", 4, 4, door_solid=False)          # door (5,8)
-    for x, y in ((3, 2), (5, 2), (7, 2)):                     # three skeps along the forest's foot
+    for x, y in ((3, 2), (5, 3), (7, 2)):                     # three skeps along the forest's foot
         g.set(x, y, SKEP, SOLID, "skep")
     g.set(2, 6, SKEP, SOLID, "skep")                         # and one more round the side
-    flowers(g, [(2, 2), (4, 2), (6, 2), (8, 2), (2, 3), (4, 3), (6, 3), (3, 4), (2, 5), (3, 7), (2, 8)])
+    flowers(g, [(2, 2), (4, 2), (5, 2), (6, 2), (8, 2), (2, 3), (4, 3), (8, 3), (3, 4), (2, 5), (3, 7), (2, 8)])
     # a whitewashed, flagged dooryard, as Cycladic houses have; the road is earth
     g.rect(4, 9, 8, 10, "pave")
     g.rect(9, 9, 9, 10, "path")
@@ -389,10 +389,10 @@ def square(g):
     g.struct("altar_square", 7, 16)                           # the festival altar
     g.block(STALL3, 19, 16, kind="stall")                     # a honey-cake stall
     g.set(23, 14, WELLHEAD, SOLID, "well")
+    g.set(22, 13, TROUGH, SOLID, "trough")                    # a watering trough by the well
     g.olive(7, 19)                                            # shade trees at the square's corners
     g.olive(22, 18)
     g.set(7, 13, TROUGH, SOLID, "trough")
-    g.set(21, 13, TROUGH, SOLID, "trough")
 
 
 def west(g):
@@ -615,7 +615,7 @@ SIGNS = [   # x, y, facing, script
     (20, 17, "NORTH", "Stall"),
     (21, 17, "NORTH", "Stall"),
 ]
-HIDDEN = [("ITEM_HONEY", 5, 2, "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY")]
+HIDDEN = [("ITEM_HONEY", 5, 3, "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY")]
 
 
 def halia_ring(g):
