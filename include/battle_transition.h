@@ -61,6 +61,8 @@ enum BattleTransition
     B_TRANSITION_FRONTIER_CIRCLES_CROSS_IN_SEQ,
     B_TRANSITION_FRONTIER_CIRCLES_ASYMMETRIC_SPIRAL_IN_SEQ,
     B_TRANSITION_FRONTIER_CIRCLES_SYMMETRIC_SPIRAL_IN_SEQ,
+    B_TRANSITION_ICHOR_WILD,    // Ichor: banded pottery wipe for wild battles
+    B_TRANSITION_ICHOR_TRAINER, // Ichor: black-figure face-off for trainer battles
     B_TRANSITION_COUNT
 };
 

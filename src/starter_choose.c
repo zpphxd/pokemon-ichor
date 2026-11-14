@@ -475,7 +475,9 @@ static void Task_StarterChoose(u8 taskId)
 {
     CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
     DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x2A8, 0xD);
-    AddTextPrinterParameterized(0, FONT_NORMAL, gText_BirchInTrouble, 0, 1, 0, NULL);
+    // Ichor: Daphne's three, in the Akademia (Hoenn's text asks you to rescue Birch)
+    AddTextPrinterParameterized(0, FONT_NORMAL, IS_FRLG ? gText_BirchInTrouble
+        : COMPOUND_STRING("Three kraters, three Pokémon.\nWhich one will walk with you?"), 0, 1, 0, NULL);
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Task_HandleStarterChooseInput;
@@ -529,7 +531,8 @@ static void Task_AskConfirmStarter(u8 taskId)
 {
     PlayCry_Normal(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized(0, FONT_NORMAL, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, FONT_NORMAL, IS_FRLG ? gText_ConfirmStarterChoice
+        : COMPOUND_STRING("Will you take this Pokémon?"), 0, 1, 0, NULL); // Ichor
     ScheduleBgCopyTilemapToVram(0);
     CreateYesNoMenu(&sWindowTemplate_ConfirmStarter, 0x2A8, 0xD, 0);
     gTasks[taskId].func = Task_HandleConfirmStarterInput;

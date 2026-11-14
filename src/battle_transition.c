@@ -128,6 +128,8 @@ static void Task_FrontierLogoWave(u8);
 static void Task_FrontierSquares(u8);
 static void Task_FrontierSquaresScroll(u8);
 static void Task_FrontierSquaresSpiral(u8);
+static void Task_IchorWild(u8);
+static void Task_IchorTrainer(u8);
 static void VBlankCB_BattleTransition(void);
 static void VBlankCB_Swirl(void);
 static void HBlankCB_Swirl(void);
@@ -383,6 +385,8 @@ static const TaskFunc sTasks_Main[B_TRANSITION_COUNT] =
     [B_TRANSITION_FRONTIER_CIRCLES_CROSS_IN_SEQ] = Task_FrontierCirclesCrossInSeq,
     [B_TRANSITION_FRONTIER_CIRCLES_ASYMMETRIC_SPIRAL_IN_SEQ] = Task_FrontierCirclesAsymmetricSpiralInSeq,
     [B_TRANSITION_FRONTIER_CIRCLES_SYMMETRIC_SPIRAL_IN_SEQ] = Task_FrontierCirclesSymmetricSpiralInSeq,
+    [B_TRANSITION_ICHOR_WILD] = Task_IchorWild,
+    [B_TRANSITION_ICHOR_TRAINER] = Task_IchorTrainer,
 };
 
 static const TransitionStateFunc sTaskHandlers[] =
@@ -1001,10 +1005,37 @@ static void UNUSED TestBattleTransition(u8 transitionId)
     SetMainCallback2(CB2_TestBattleTransition);
 }
 
+// Ichor: every ordinary field battle opens with a pottery transition, the
+// black-figure face-off for trainers and the banded wipe for wild Pokemon.
+// Set pieces (mugshots, the teams, legendaries, the Frontier) keep their own.
+static u8 IchorPotteryTransition(u8 transitionId)
+{
+    switch (transitionId)
+    {
+    case B_TRANSITION_BLUR:
+    case B_TRANSITION_SWIRL:
+    case B_TRANSITION_SHUFFLE:
+    case B_TRANSITION_BIG_POKEBALL:
+    case B_TRANSITION_POKEBALLS_TRAIL:
+    case B_TRANSITION_CLOCKWISE_WIPE:
+    case B_TRANSITION_RIPPLE:
+    case B_TRANSITION_WAVE:
+    case B_TRANSITION_SLICE:
+    case B_TRANSITION_WHITE_BARS_FADE:
+    case B_TRANSITION_GRID_SQUARES:
+    case B_TRANSITION_ANGLED_WIPES:
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            return B_TRANSITION_ICHOR_TRAINER;
+        return B_TRANSITION_ICHOR_WILD;
+    default:
+        return transitionId;
+    }
+}
+
 void BattleTransition_StartOnField(u8 transitionId)
 {
     gMain.callback2 = CB2_OverworldBasic;
-    LaunchBattleTransitionTask(transitionId);
+    LaunchBattleTransitionTask(IchorPotteryTransition(transitionId));
 }
 
 void BattleTransition_Start(u8 transitionId)
@@ -4836,3 +4867,347 @@ static bool8 FrontierSquaresScroll_End(struct Task *task)
 #undef tScrollYDir
 #undef tScrollUpdateFlag
 #undef tSquareNum
+
+//------------------------------------------------------------------------
+// Ichor: B_TRANSITION_ICHOR_WILD and B_TRANSITION_ICHOR_TRAINER
+// The screen becomes a painted vase (tiles from
+// tools/ichor/art/ui_battle_transitions.py). Window 0 reveals BG0 line by
+// line, as Mugshot does: wild battles sweep in bands from alternate sides;
+// trainer battles sweep a wide clay band in, and the opponent and the
+// player slide onto it as black-figure silhouettes. Both end on black, at
+// about the length of the vanilla transitions they replace.
+//------------------------------------------------------------------------
+
+static const u32 sIchorPottery_Tileset[] = INCGFX_U32("graphics/battle_transitions/ichor_pottery.png", ".4bpp");
+static const u16 sIchorPottery_Palette[] = INCGFX_U16("graphics/battle_transitions/ichor_pottery.png", ".gbapal");
+static const u16 sIchorWild_Tilemap[] = INCBIN_U16("graphics/battle_transitions/ichor_wild.bin");
+static const u16 sIchorTrainer_Tilemap[] = INCBIN_U16("graphics/battle_transitions/ichor_trainer.bin");
+
+#define ICHOR_INK    RGB(4, 3, 3)    // (32, 24, 24), black-figure ink
+#define ICHOR_CLAY   RGB(23, 11, 6)  // (184, 88, 48), terracotta
+
+#define ICHOR_WIN0H_EMPTY ((DISPLAY_WIDTH << 8) | (DISPLAY_WIDTH + 1))
+#define ICHOR_FIGURE_Y 84            // trainer pic centers: feet on the ground line
+
+#define tTimer      data[1]
+#define tSpriteA    data[2]  // opponent A
+#define tSpriteB    data[3]  // opponent B, or MAX_SPRITES
+#define tSpriteP    data[4]  // player
+#define tSpriteQ    data[5]  // in-game partner, or MAX_SPRITES
+#define tTargetA    data[6]
+#define tTargetB    data[7]
+#define tTargetP    data[8]
+#define tTargetQ    data[9]
+#define tFadeStep   data[10] // BLDY added per frame when fading to black
+
+static bool8 IchorWild_Init(struct Task *);
+static bool8 IchorWild_Sweep(struct Task *);
+static bool8 IchorTrainer_Init(struct Task *);
+static bool8 IchorTrainer_Sweep(struct Task *);
+static bool8 IchorTrainer_Slide(struct Task *);
+static bool8 IchorPottery_Hold(struct Task *);
+static bool8 IchorPottery_FadeToBlack(struct Task *);
+static bool8 IchorPottery_End(struct Task *);
+static void VBlankCB_IchorPottery(void);
+
+static const TransitionStateFunc sIchorWild_Funcs[] =
+{
+    IchorWild_Init,
+    IchorWild_Sweep,
+    IchorPottery_Hold,
+    IchorPottery_FadeToBlack,
+    IchorPottery_End,
+};
+
+static const TransitionStateFunc sIchorTrainer_Funcs[] =
+{
+    IchorTrainer_Init,
+    IchorTrainer_Sweep,
+    IchorTrainer_Slide,
+    IchorPottery_Hold,
+    IchorPottery_FadeToBlack,
+    IchorPottery_End,
+};
+
+static void Task_IchorWild(u8 taskId)
+{
+    while (sIchorWild_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+static void Task_IchorTrainer(u8 taskId)
+{
+    while (sIchorTrainer_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
+}
+
+static void IchorPottery_Setup(const u16 *map)
+{
+    u16 *tilemap, *tileset;
+    u32 i;
+
+    InitTransitionData();
+    ScanlineEffect_Clear();
+
+    GetBg0TilesDst(&tilemap, &tileset);
+    CpuCopy16(sIchorPottery_Tileset, tileset, sizeof(sIchorPottery_Tileset));
+    for (i = 0; i < 32 * 20; i++)
+        tilemap[i] = map[i] | (0xF << 12);
+    LoadPalette(sIchorPottery_Palette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+
+    // BG0 shows only inside window 0, which starts empty on every line.
+    sTransitionData->WININ = WININ_WIN0_ALL;
+    sTransitionData->WINOUT = WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR;
+    sTransitionData->WIN0V = DISPLAY_HEIGHT;
+    for (i = 0; i < DISPLAY_HEIGHT; i++)
+    {
+        gScanlineEffectRegBuffers[0][i] = ICHOR_WIN0H_EMPTY;
+        gScanlineEffectRegBuffers[1][i] = ICHOR_WIN0H_EMPTY;
+    }
+    sTransitionData->VBlank_DMA = TRUE;
+    SetVBlankCallback(VBlankCB_IchorPottery);
+}
+
+// One line of window 0, revealed `width` pixels from the left or the right.
+static u16 IchorPottery_LineFrom(s32 width, bool32 fromRight)
+{
+    if (width <= 0)
+        return ICHOR_WIN0H_EMPTY;
+    if (width > DISPLAY_WIDTH)
+        width = DISPLAY_WIDTH;
+    if (fromRight)
+        return ((DISPLAY_WIDTH - width) << 8) | DISPLAY_WIDTH;
+    return width;
+}
+
+// Wild: ten 16 px bands sweep in from alternate sides, each two frames
+// after the one above, 24 px a frame; about 36 frames in all, close to
+// the Slice transition it replaces.
+#define ICHOR_WILD_BAND_DELAY 2
+#define ICHOR_WILD_SPEED      24
+
+static bool8 IchorWild_Init(struct Task *task)
+{
+    IchorPottery_Setup(sIchorWild_Tilemap);
+    task->tTimer = 0;
+    task->tFadeStep = 2;
+    task->tState++;
+    return FALSE;
+}
+
+static bool8 IchorWild_Sweep(struct Task *task)
+{
+    u32 y;
+    s32 lastWidth = 0;
+
+    sTransitionData->VBlank_DMA = FALSE;
+    task->tTimer++;
+    for (y = 0; y < DISPLAY_HEIGHT; y++)
+    {
+        u32 band = y / 16;
+        s32 width = (task->tTimer - (s32)band * ICHOR_WILD_BAND_DELAY) * ICHOR_WILD_SPEED;
+        gScanlineEffectRegBuffers[0][y] = IchorPottery_LineFrom(width, band & 1);
+        lastWidth = width;
+    }
+    sTransitionData->BG0HOFS_Upper++;
+    if (lastWidth >= DISPLAY_WIDTH)
+    {
+        task->tTimer = 2;  // frames to hold the finished vase
+        task->tState++;
+    }
+    sTransitionData->VBlank_DMA = TRUE;
+    return FALSE;
+}
+
+// A trainer pic, repainted as a black figure: its darkest shades (the
+// outlines) take the band's clay, as if incised through the glaze, and every
+// other color becomes the glaze.
+static void IchorPottery_BlackFigure(u8 spriteId)
+{
+    u32 i, base = OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum);
+    u32 lum[16], darkest = 0xFFFF;
+
+    for (i = 1; i < 16; i++)
+    {
+        u16 c = gPlttBufferUnfaded[base + i];
+        lum[i] = (c & 0x1F) * 3 + ((c >> 5) & 0x1F) * 6 + ((c >> 10) & 0x1F);
+        if (lum[i] < darkest)
+            darkest = lum[i];
+    }
+    for (i = 1; i < 16; i++)
+    {
+        u16 color = (lum[i] <= darkest + 10) ? ICHOR_CLAY : ICHOR_INK;
+        gPlttBufferUnfaded[base + i] = color;
+        gPlttBufferFaded[base + i] = color;
+    }
+}
+
+static u8 IchorPottery_CreateFigure(enum TrainerPicID picId, s16 x, bool32 facingRight)
+{
+    u8 spriteId = CreateTrainerSprite(picId, x, ICHOR_FIGURE_Y, 0, NULL);
+    gSprites[spriteId].oam.priority = 0;
+    if (facingRight)
+    {
+        gSprites[spriteId].hFlip = TRUE;
+        gSprites[spriteId].oam.matrixNum = ST_OAM_HFLIP;
+    }
+    IchorPottery_BlackFigure(spriteId);
+    return spriteId;
+}
+
+static bool8 IchorTrainer_Init(struct Task *task)
+{
+    bool32 twoOpponents = (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && TRAINER_BATTLE_PARAM.opponentB != TRAINER_NONE
+                       && TRAINER_BATTLE_PARAM.opponentB != 0xFFFF;
+    bool32 partner = (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) && gPartnerTrainerId != TRAINER_PARTNER(PARTNER_NONE);
+
+    IchorPottery_Setup(sIchorTrainer_Tilemap);
+    task->tFadeStep = 1;
+
+    // Opponents enter from the right and face left; the player (and a
+    // partner) enter from the left, flipped to face them.
+    gReservedSpritePaletteCount = 10;
+    task->tTargetA = twoOpponents ? 150 : 172;
+    task->tSpriteA = IchorPottery_CreateFigure(GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentA), DISPLAY_WIDTH + 40, FALSE);
+    task->tSpriteB = MAX_SPRITES;
+    if (twoOpponents)
+    {
+        task->tTargetB = 200;
+        task->tSpriteB = IchorPottery_CreateFigure(GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentB), DISPLAY_WIDTH + 90, FALSE);
+    }
+    gReservedSpritePaletteCount = 12;
+    task->tTargetP = partner ? 84 : 68;
+    task->tSpriteP = IchorPottery_CreateFigure(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), -40, TRUE);
+    task->tSpriteQ = MAX_SPRITES;
+    if (partner)
+    {
+        task->tTargetQ = 36;
+        task->tSpriteQ = IchorPottery_CreateFigure(GetTrainerPicFromId(gPartnerTrainerId), -90, TRUE);
+    }
+
+    task->tTimer = 0;
+    task->tState++;
+    return FALSE;
+}
+
+// The band sweeps in: the upper half from the left, the lower half from the
+// right, each with a slanted leading edge like a brush stroke.
+#define ICHOR_TRAINER_SPEED 12
+
+static bool8 IchorTrainer_Sweep(struct Task *task)
+{
+    u32 y;
+    s32 reach;
+
+    sTransitionData->VBlank_DMA = FALSE;
+    task->tTimer++;
+    reach = task->tTimer * ICHOR_TRAINER_SPEED;
+    for (y = 0; y < DISPLAY_HEIGHT; y++)
+    {
+        if (y < DISPLAY_HEIGHT / 2)
+            gScanlineEffectRegBuffers[0][y] = IchorPottery_LineFrom(reach - (s32)(DISPLAY_HEIGHT / 2 - y) / 2, FALSE);
+        else
+            gScanlineEffectRegBuffers[0][y] = IchorPottery_LineFrom(reach - (s32)(y - DISPLAY_HEIGHT / 2) / 2, TRUE);
+    }
+    sTransitionData->BG0HOFS_Upper++;
+    if (reach - DISPLAY_HEIGHT / 4 >= DISPLAY_WIDTH)
+    {
+        PlaySE(SE_MUGSHOT);
+        task->tTimer = 0;
+        task->tState++;
+    }
+    sTransitionData->VBlank_DMA = TRUE;
+    return FALSE;
+}
+
+// Ease a figure toward its mark: a quarter of the distance each frame.
+static bool32 IchorPottery_SlideFigure(s16 spriteId, s16 target)
+{
+    s32 dist;
+
+    if (spriteId >= MAX_SPRITES)
+        return TRUE;
+    dist = target - gSprites[spriteId].x;
+    if (dist == 0)
+        return TRUE;
+    if (dist / 4 != 0)
+        gSprites[spriteId].x += dist / 4;
+    else
+        gSprites[spriteId].x += (dist > 0) ? 1 : -1;
+    return FALSE;
+}
+
+static bool8 IchorTrainer_Slide(struct Task *task)
+{
+    bool32 done = TRUE;
+
+    sTransitionData->BG0HOFS_Upper++;
+    done &= IchorPottery_SlideFigure(task->tSpriteA, task->tTargetA);
+    done &= IchorPottery_SlideFigure(task->tSpriteB, task->tTargetB);
+    done &= IchorPottery_SlideFigure(task->tSpriteP, task->tTargetP);
+    done &= IchorPottery_SlideFigure(task->tSpriteQ, task->tTargetQ);
+    if (done)
+    {
+        task->tTimer = 28;  // frames the face-off holds
+        task->tState++;
+    }
+    return FALSE;
+}
+
+static bool8 IchorPottery_Hold(struct Task *task)
+{
+    sTransitionData->BG0HOFS_Upper++;
+    if (--task->tTimer <= 0)
+    {
+        task->tTimer = 0;
+        sTransitionData->BLDCNT = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_DARKEN;
+        sTransitionData->BLDY = 0;
+        task->tState++;
+    }
+    return FALSE;
+}
+
+static bool8 IchorPottery_FadeToBlack(struct Task *task)
+{
+    sTransitionData->BG0HOFS_Upper++;
+    if (sTransitionData->BLDY < 16)
+        sTransitionData->BLDY = min(16, sTransitionData->BLDY + task->tFadeStep);
+    else
+        task->tState++;
+    return FALSE;
+}
+
+static bool8 IchorPottery_End(struct Task *task)
+{
+    DmaStop(0);
+    FadeScreenBlack();
+    DestroyTask(FindTaskIdByFunc(task->func));
+    return FALSE;
+}
+
+static void VBlankCB_IchorPottery(void)
+{
+    DmaStop(0);
+    VBlankCB_BattleTransition();
+    if (sTransitionData->VBlank_DMA)
+        DmaCopy16(3, gScanlineEffectRegBuffers[0], gScanlineEffectRegBuffers[1], DISPLAY_HEIGHT * 2);
+    REG_BG0HOFS = sTransitionData->BG0HOFS_Upper;
+    REG_BG0VOFS = 0;
+    REG_WININ = sTransitionData->WININ;
+    REG_WINOUT = sTransitionData->WINOUT;
+    REG_WIN0V = sTransitionData->WIN0V;
+    REG_BLDCNT = sTransitionData->BLDCNT;
+    REG_BLDY = sTransitionData->BLDY;
+    // Line 0 is set here; each HBlank then writes the next line's value.
+    REG_WIN0H = gScanlineEffectRegBuffers[1][0];
+    DmaSet(0, &gScanlineEffectRegBuffers[1][1], &REG_WIN0H, B_TRANS_DMA_FLAGS);
+}
+
+#undef tTimer
+#undef tSpriteA
+#undef tSpriteB
+#undef tSpriteP
+#undef tSpriteQ
+#undef tTargetA
+#undef tTargetB
+#undef tTargetP
+#undef tTargetQ
+#undef tFadeStep

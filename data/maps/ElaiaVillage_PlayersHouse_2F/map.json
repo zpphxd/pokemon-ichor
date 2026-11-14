@@ -1,8 +1,8 @@
 {
   "id": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_2F",
   "name": "ElaiaVillage_PlayersHouse_2F",
-  "layout": "LAYOUT_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
-  "music": "MUS_LITTLEROOT",
+  "layout": "LAYOUT_ELAIA_VILLAGE_PLAYERS_HOUSE_2F",
+  "music": "MUS_ICHOR_ELAIA",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ELAIA_VILLAGE",
   "requires_flash": false,
@@ -17,13 +17,80 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 7,
+      "x": 8,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_1F",
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [],
-  "bg_events": []
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 2,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_SET_WATER_CLOCK",
+      "var_value": "0",
+      "script": "ElaiaVillage_PlayersHouse_2F_EventScript_StairGate"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_PlayersHouse_2F_EventScript_WaterClock"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_PlayersHouse_2F_EventScript_Kibotos"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_PlayersHouse_2F_EventScript_Kibotos"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
+      "script": "ElaiaVillage_PlayersHouse_2F_EventScript_Knucklebones"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_PlayersHouse_2F_EventScript_Window"
+    },
+    {
+      "type": "sign",
+      "x": 0,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_PlayersHouse_2F_EventScript_Scrolls"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_PlayersHouse_2F_EventScript_Scrolls"
+    }
+  ]
 }

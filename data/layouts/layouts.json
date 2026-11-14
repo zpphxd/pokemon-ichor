@@ -9327,10 +9327,10 @@
     {
       "id": "LAYOUT_ELAIA_VILLAGE",
       "name": "ElaiaVillage_Layout",
-      "width": 20,
-      "height": 20,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "width": 30,
+      "height": 34,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kalliste",
       "border_filepath": "data/layouts/ElaiaVillage/border.bin",
       "blockdata_filepath": "data/layouts/ElaiaVillage/map.bin",
       "layout_version": "emerald"
@@ -9410,6 +9410,50 @@
       "secondary_tileset": "gTileset_Oikia",
       "border_filepath": "data/layouts/AktiTown_FishersHouse/border.bin",
       "blockdata_filepath": "data/layouts/AktiTown_FishersHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ELAIA_VILLAGE_PLAYERS_HOUSE_1F",
+      "name": "ElaiaVillage_PlayersHouse_1F_Layout",
+      "width": 12,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/ElaiaVillage_PlayersHouse_1F/border.bin",
+      "blockdata_filepath": "data/layouts/ElaiaVillage_PlayersHouse_1F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ELAIA_VILLAGE_PLAYERS_HOUSE_2F",
+      "name": "ElaiaVillage_PlayersHouse_2F_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/ElaiaVillage_PlayersHouse_2F/border.bin",
+      "blockdata_filepath": "data/layouts/ElaiaVillage_PlayersHouse_2F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ELAIA_VILLAGE_NEIGHBORS_HOUSE",
+      "name": "ElaiaVillage_NeighborsHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/ElaiaVillage_NeighborsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/ElaiaVillage_NeighborsHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ELAIA_VILLAGE_AKADEMIA",
+      "name": "ElaiaVillage_Akademia_Layout",
+      "width": 16,
+      "height": 13,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Civic",
+      "border_filepath": "data/layouts/ElaiaVillage_Akademia/border.bin",
+      "blockdata_filepath": "data/layouts/ElaiaVillage_Akademia/map.bin",
       "layout_version": "emerald"
     }
   ]
