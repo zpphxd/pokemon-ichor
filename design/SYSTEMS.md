@@ -1744,7 +1744,7 @@ struct IchorSave              // in SaveBlock3; ~760 bytes of 1,624
 
 ## Decisions for the user
 
-> **Approved by the user, 2026-11-14:** D1 (the relic re-mapping), D3 (all 15 gods), D8 (core plus extended theoxenia) and L10 (seven rings). Every other decision here and in the other doc follows the designer's recommendation. PITCH.md has been updated to match.
+> **Approved by the user, 2026-11-14:** D1 (the relic re-mapping), D3 (all 15 gods), D8 (core plus extended theoxenia) and L10 (seven rings). Every other decision here and in the other doc follows the designer's recommendation. PITCH.md has been updated to match. D10 (the three Kalliste relic gates) was approved by the director under the user's map rules.
 
 These are the ones this file raises. LABYRINTH.md adds its own.
 
