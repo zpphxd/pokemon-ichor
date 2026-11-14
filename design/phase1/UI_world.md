@@ -154,8 +154,7 @@ The in-game shots came from a temporary, uncommitted patch to `src/field_control
 
 ## Not done, or left for others
 
-- **The area view's glow** (`graphics/pokedex/area_glow.png`) is still Emerald's pink. It belongs to the Pokédex screen.
-- **The evolution sparkles** (the white circles that ring the Pokémon) are Emerald's. They belong to the evolution or battle-effects art.
+- **The area view's glow** and **the evolution sparkles** are done: gold hatching and gold sparks (`UI_remnants.md`).
 - **The map-name popup themes** for the new sections default to the stele (`src/map_name_popup.c`, not mine).
 - **Fly targets for the other towns** need their visited flags when their maps land (`design/AETHOS_MAP.md`, "Adding a map later").
 - **`cursor_large.png`** is redrawn, but only the cut PokéNav's zoomed map shows it.

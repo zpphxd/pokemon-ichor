@@ -155,7 +155,7 @@ The art already says these words; the strings are not mine.
 
 ## Not done, or left on purpose
 
-- **The unknown Pokémon's "?" ball,** which the list shows for unseen neighbors, is a Pokémon sprite (`graphics/pokemon/question_mark/`), not codex art. It is still Emerald's black-and-white ball.
+- **The unknown Pokémon's "?",** which the list shows for unseen neighbors, is now a clay roundel (`UI_remnants.md`).
 - **The region map** under the area page belongs to the region-map agent.
 - **Walda's patterns** are fired in clay but keep their Hoenn shapes (Azumarill, Pikachu, ...). The Walda icons are untouched. Nothing in Aethos reaches them.
 - **The search page** keeps Emerald's rounded label pills; it is recolored, not redrawn.
