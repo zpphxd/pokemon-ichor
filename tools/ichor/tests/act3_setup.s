@@ -1,9 +1,9 @@
 @ Test-only event scripts for the Act III engine checks (ichor_statues,
-@ ichor_bull_leap). Never linked into the ROM: engine_build.sh assembles this
-@ file with the game's own macros and links it into spare EWRAM against
-@ pokeemerald.elf. Each header's ON_FRAME entry runs once while VAR_TEMP_F is
-@ 0 (engine_lib.lua's L.runHeader). The Lua passes local ids and coordinates
-@ in VAR_0x8000-VAR_0x8009.
+@ ichor_bull_leap, ichor_beam). Never linked into the ROM: engine_build.sh
+@ assembles this file with the game's own macros and links it into spare EWRAM
+@ against pokeemerald.elf. Each header's ON_FRAME entry runs once while
+@ VAR_TEMP_F is 0 (engine_lib.lua's L.runHeader). The Lua passes local ids and
+@ coordinates in VAR_0x8000-VAR_0x8009.
 #include "config/general.h"
 #include "config/battle.h"
 #include "config/item.h"
@@ -134,5 +134,14 @@ Act3Test_Leap:
 	lockall
 	setvar VAR_TEMP_F, 1
 	special Ichor_BullLeap
+	releaseall
+	end
+
+@ --- special Ichor_TraceBeam with VAR_0x8004 and VAR_0x8005 as the Lua set them
+	test_header Act3Test_BeamHeader, Act3Test_Beam
+Act3Test_Beam:
+	lockall
+	setvar VAR_TEMP_F, 1
+	special Ichor_TraceBeam
 	releaseall
 	end

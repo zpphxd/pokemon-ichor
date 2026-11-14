@@ -1,5 +1,5 @@
-// Constants for the Act III engine checks: ichor_statues and ichor_bull_leap
-// (see engine_consts.h and act3_lib.lua).
+// Constants for the Act III engine checks: ichor_statues, ichor_bull_leap and
+// ichor_beam (see engine_consts.h and act3_lib.lua).
 #include "engine_consts.h"
 #include "task.h"
 #include "constants/event_object_movement.h"
