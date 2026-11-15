@@ -5,6 +5,7 @@
 #include "constants/trainers.h"
 #include "constants/battle.h"
 #include "constants/pokeball.h"
+#include "constants/battle_ai.h"
 #include "difficulty.h"
 #include "debug.h"
 
@@ -354,7 +355,10 @@ static inline const struct TrainerMon *GetTrainerPartyFromId(u16 trainerId)
 
 static inline const u64 GetTrainerAIFlagsFromId(u16 trainerId)
 {
-    return GetTrainerStructFromId(trainerId)->aiFlags;
+    u64 flags = GetTrainerStructFromId(trainerId)->aiFlags;
+    if (GetCurrentDifficultyLevel() == DIFFICULTY_HARD)
+        flags |= AI_FLAG_SMART_TRAINER;
+    return flags;
 }
 
 static inline enum TrainerPicID SanitizeTrainerPic(enum TrainerPicID trainerPicId)

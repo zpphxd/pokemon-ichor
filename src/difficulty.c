@@ -6,10 +6,15 @@
 
 enum DifficultyLevel GetCurrentDifficultyLevel(void)
 {
-    if (!B_VAR_DIFFICULTY)
+    if (!B_VAR_DIFFICULTY || !FlagGet(FLAG_ICHOR_DIFFICULTY_CHOSEN))
         return DIFFICULTY_NORMAL;
 
-    return VarGet(B_VAR_DIFFICULTY);
+    enum DifficultyLevel difficulty = VarGet(B_VAR_DIFFICULTY);
+    assertf(difficulty <= DIFFICULTY_MAX, "Invalid Ichor difficulty: %u", difficulty)
+    {
+        return DIFFICULTY_NORMAL;
+    };
+    return difficulty;
 }
 
 void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
@@ -21,6 +26,28 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
         desiredDifficulty = DIFFICULTY_MAX;
 
     VarSet(B_VAR_DIFFICULTY, desiredDifficulty);
+    FlagSet(FLAG_ICHOR_DIFFICULTY_CHOSEN);
+}
+
+u16 Ichor_ChooseDifficulty(void)
+{
+    if (FlagGet(FLAG_ICHOR_DIFFICULTY_CHOSEN) || gSpecialVar_0x8004 > DIFFICULTY_HARD)
+        return FALSE;
+
+    SetCurrentDifficultyLevel(gSpecialVar_0x8004);
+    if (gSpecialVar_0x8004 == DIFFICULTY_HARD)
+        gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+    return TRUE;
+}
+
+u16 Ichor_GetStepGlassLimit(void)
+{
+    switch (GetCurrentDifficultyLevel())
+    {
+    case DIFFICULTY_EASY: return 150;
+    case DIFFICULTY_HARD: return 100;
+    default: return 120;
+    }
 }
 
 enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16 partnerId)

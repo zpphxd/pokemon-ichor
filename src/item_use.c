@@ -1209,6 +1209,12 @@ bool32 CannotUseItemsInBattle(enum Item itemId, struct Pokemon *mon)
     u32 i, battlerTarget;
     u16 hp = GetMonData(mon, MON_DATA_HP);
 
+    if (GetCurrentDifficultyLevel() == DIFFICULTY_HARD && battleUsage != EFFECT_ITEM_THROW_BALL)
+    {
+        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Spartan's rules forbid using\nitems in battle."));
+        return TRUE;
+    }
+
     if (gPartyMenu.slotId == 0)
         battlerTarget = B_POSITION_PLAYER_LEFT;
     else if (gPartyMenu.slotId == 1)

@@ -28,12 +28,40 @@ script ElaiaVillage_PlayersHouse_2F_EventScript_WaterClock {
         // The clock takes over the screen at the end of this frame; the delay
         // parks the script until the field comes back (as vanilla's clock does).
         delay(30)
+        call(ElaiaVillage_PlayersHouse_2F_EventScript_ChooseDifficulty)
         setflag(FLAG_ICHOR_SET_WATER_CLOCK)
         msgbox(format("Drip… drip… drip. Good as new."))
     } else {
         msgbox(format("Drip… drip… The water says it's still today."))
     }
     releaseall
+}
+
+script ElaiaVillage_PlayersHouse_2F_EventScript_ChooseDifficulty {
+    if (!flag(FLAG_ICHOR_DIFFICULTY_CHOSEN)) {
+        msgbox(format("Every road begins with a choice.\pMortal is an easier journey. Hero is the usual challenge.\pSpartan limits your level, uses set battles, and forbids battle items.\pIts trainers fight smarter. You may still throw Pithoi to catch Pokémon.\pChoose carefully. This road stays with this save."))
+        while (!flag(FLAG_ICHOR_DIFFICULTY_CHOSEN)) {
+            message(format("Which road will you take?"))
+            waitmessage
+            multichoicedefault(0, 0, MULTI_ICHOR_DIFFICULTY, TRUE, 1)
+            copyvar(VAR_0x8004, VAR_RESULT)
+            switch (var(VAR_RESULT)) {
+                case 0:
+                    msgbox(format("Take the Mortal road?"), MSGBOX_YESNO)
+                case 1:
+                    msgbox(format("Take the Hero road?"), MSGBOX_YESNO)
+                case 2:
+                    msgbox(format("Take the Spartan road?"), MSGBOX_YESNO)
+            }
+            if (var(VAR_RESULT) == YES) {
+                specialvar(VAR_RESULT, Ichor_ChooseDifficulty)
+                if (var(VAR_RESULT) == FALSE) {
+                    msgbox(format("That choice could not be saved. Try again."))
+                }
+            }
+        }
+    }
+    return
 }
 
 script ElaiaVillage_PlayersHouse_2F_EventScript_Kibotos {

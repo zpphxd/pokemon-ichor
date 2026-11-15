@@ -74,6 +74,336 @@ Comments can be added as C comment blocks
 
 /*Comments can also be on a single line*/
 
+/* Ichor: Act I difficulty variants. Mortal keeps Hero's sets at -3 levels.
+ * Spartan keeps the stage's levels and species, with trained, natured sets.
+ * These are mechanically integrated; natural-level balance approval remains. */
+
+=== TRAINER_ICHOR_IONE_1 ===
+Difficulty: Easy
+Name: IONE
+Class: Hierophant
+Pic: Hierophant Ione
+Gender: Female
+Music: Female
+Items: Potion / Potion
+AI: Basic Trainer
+
+Galekit
+Level: 9
+Ability: Run Away
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Tackle
+- Tail Whip
+- Quick Attack
+- Bite
+
+Onotis @ Oran Berry
+Level: 10
+Ability: Own Tempo
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Stomp
+- Double Kick
+- Pay Day
+- Growl
+
+Nemecub @ Sitrus Berry
+Level: 11
+Ability: Fur Coat
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Fire Fang
+- Headbutt
+- Work Up
+- Leer
+
+=== TRAINER_ICHOR_IONE_1 ===
+Difficulty: Hard
+Name: IONE
+Class: Hierophant
+Pic: Hierophant Ione
+Gender: Female
+Music: Female
+AI: Smart Trainer
+
+Galekit @ Oran Berry
+Level: 12
+Ability: Run Away
+Nature: Jolly
+EVs: 252 Atk / 4 SpD / 252 Spe
+- Tackle
+- Tail Whip
+- Quick Attack
+- Bite
+
+Onotis @ Oran Berry
+Level: 13
+Ability: Own Tempo
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 SpD
+- Stomp
+- Double Kick
+- Pay Day
+- Growl
+
+Nemecub @ Sitrus Berry
+Level: 14
+Ability: Fur Coat
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 SpD
+- Fire Fang
+- Headbutt
+- Work Up
+- Leer
+
+=== TRAINER_ICHOR_KERYKOS_1 ===
+Difficulty: Easy
+Name: KERYKOS
+Class: Hierophant
+Pic: Hierophant Kerykos
+Gender: Male
+Music: Male
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Lophops
+Level: 15
+Ability: Keen Eye
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Pluck
+- Echoed Voice
+- Feather Dance
+- Quick Attack
+
+Halcyling @ Oran Berry
+Level: 16
+Ability: Cloud Nine
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Water Pulse
+- Pluck
+- Aqua Jet
+- Mist
+
+Harpelle @ Sitrus Berry
+Level: 17
+Ability: Pickpocket
+IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
+- Pluck
+- Thief
+- Taunt
+- Tailwind
+
+=== TRAINER_ICHOR_KERYKOS_1 ===
+Difficulty: Hard
+Name: KERYKOS
+Class: Hierophant
+Pic: Hierophant Kerykos
+Gender: Male
+Music: Male
+AI: Smart Trainer
+
+Lophops @ Oran Berry
+Level: 18
+Ability: Keen Eye
+Nature: Jolly
+EVs: 252 Atk / 4 SpD / 252 Spe
+- Pluck
+- Echoed Voice
+- Feather Dance
+- Quick Attack
+
+Halcyling @ Sitrus Berry
+Level: 19
+Ability: Cloud Nine
+Nature: Modest
+EVs: 252 HP / 252 SpA / 4 SpD
+- Water Pulse
+- Pluck
+- Aqua Jet
+- Mist
+
+Harpelle @ Sitrus Berry
+Level: 20
+Ability: Pickpocket
+Nature: Jolly
+EVs: 252 Atk / 4 SpD / 252 Spe
+- Pluck
+- Thief
+- Taunt
+- Tailwind
+
+=== TRAINER_ICHOR_CHLOE_1_DAY ===
+Difficulty: Easy
+Name: CHLOE
+Class: Hierophant
+Pic: Acolyte F
+Gender: Female
+Music: Female
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Rhoaril
+Level: 21
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Magical Leaf
+- Leech Seed
+- Mega Drain
+- Astonish
+
+Stachyss
+Level: 21
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Seed Bomb
+- Glare
+- Coil
+- Synthesis
+
+Elapling @ Miracle Seed
+Level: 22
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Bullet Seed
+- Rock Smash
+- Leech Seed
+- Worry Seed
+
+Korantha @ Sitrus Berry
+Level: 23
+IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
+- Petal Dance
+- Giga Drain
+- Fairy Wind
+- Leech Seed
+
+=== TRAINER_ICHOR_CHLOE_1_NIGHT ===
+Difficulty: Easy
+Name: CHLOE
+Class: Hierophant
+Pic: Acolyte F
+Gender: Female
+Music: Female
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Rhoaril
+Level: 21
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Magical Leaf
+- Leech Seed
+- Mega Drain
+- Astonish
+
+Stachyss
+Level: 21
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Seed Bomb
+- Glare
+- Coil
+- Synthesis
+
+Elapling @ Miracle Seed
+Level: 22
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Bullet Seed
+- Rock Smash
+- Leech Seed
+- Worry Seed
+
+Persenyx @ Sitrus Berry
+Level: 23
+IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
+- Hex
+- Giga Drain
+- Leech Seed
+- Magical Leaf
+
+=== TRAINER_ICHOR_CHLOE_1_DAY ===
+Difficulty: Hard
+Name: CHLOE
+Class: Hierophant
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Smart Trainer
+
+Rhoaril @ Sitrus Berry
+Level: 24
+Nature: Bold
+EVs: 252 HP / 252 Def / 4 SpD
+- Magical Leaf
+- Leech Seed
+- Mega Drain
+- Astonish
+
+Stachyss @ Sitrus Berry
+Level: 24
+Nature: Impish
+EVs: 252 HP / 252 Def / 4 SpD
+- Seed Bomb
+- Glare
+- Coil
+- Synthesis
+
+Elapling @ Miracle Seed
+Level: 25
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 SpD
+- Bullet Seed
+- Rock Smash
+- Leech Seed
+- Worry Seed
+
+Korantha @ Sitrus Berry
+Level: 26
+Nature: Timid
+EVs: 252 SpA / 4 SpD / 252 Spe
+- Petal Dance
+- Giga Drain
+- Fairy Wind
+- Leech Seed
+
+=== TRAINER_ICHOR_CHLOE_1_NIGHT ===
+Difficulty: Hard
+Name: CHLOE
+Class: Hierophant
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Smart Trainer
+
+Rhoaril @ Sitrus Berry
+Level: 24
+Nature: Bold
+EVs: 252 HP / 252 Def / 4 SpD
+- Magical Leaf
+- Leech Seed
+- Mega Drain
+- Astonish
+
+Stachyss @ Sitrus Berry
+Level: 24
+Nature: Impish
+EVs: 252 HP / 252 Def / 4 SpD
+- Seed Bomb
+- Glare
+- Coil
+- Synthesis
+
+Elapling @ Miracle Seed
+Level: 25
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 SpD
+- Bullet Seed
+- Rock Smash
+- Leech Seed
+- Worry Seed
+
+Persenyx @ Sitrus Berry
+Level: 26
+Nature: Modest
+EVs: 252 HP / 252 SpA / 4 SpD
+- Hex
+- Giga Drain
+- Leech Seed
+- Magical Leaf
+
 
 /* TRAINER_NONE */
 
@@ -596,7 +926,7 @@ Lophops
 Level: 17
 IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
 
-/* Hero difficulty. Spartan needs its own boss team from Balance, as in the slice.
+/* Hero difficulty. The Mortal/Spartan variants are below.
  * ICHOR_STUB_MUSIC: the Hierophant class plays MUS_ICHOR_BATTLE_RIVAL (src/pokemon.c)
  * until MUS_ICHOR_BATTLE_HIEROPHANT exists. */
 === TRAINER_ICHOR_KERYKOS_1 ===

@@ -19,6 +19,7 @@
 #endif
 
 u32 GetCurrentLevelCap(void);
+bool32 IsHardLevelCapEnabled(void);
 u32 GetSoftLevelCapExpValue(u32 level, u32 expValue);
 u32 GetCurrentEVCap(void);
 

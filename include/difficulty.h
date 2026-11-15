@@ -13,5 +13,7 @@ void Script_IncreaseDifficulty(void);
 void Script_DecreaseDifficulty(void);
 void Script_GetDifficulty(void);
 void Script_SetDifficulty(struct ScriptContext *);
+u16 Ichor_ChooseDifficulty(void);
+u16 Ichor_GetStepGlassLimit(void);
 
 #endif // GUARD_DIFFICULTY_H

@@ -137,8 +137,7 @@ static s32 DifficultyStep(void)
 
 static u32 GetSpoolLength(void)
 {
-    static const u8 sSpool[] = { 150, 120, 100 };  // Mortal, Hero, Spartan
-    return sSpool[DifficultyStep() + 1];
+    return Ichor_GetStepGlassLimit();
 }
 
 // --- Light (§5.3) -------------------------------------------------------------------------

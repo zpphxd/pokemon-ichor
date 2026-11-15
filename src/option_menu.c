@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/ichor.h"
 #include "option_menu.h"
+#include "difficulty.h"
 #include "overworld.h"
 #include "bg.h"
 #include "gpu_regs.h"
@@ -265,7 +266,8 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tMenuSelection = 0;
         gTasks[taskId].tTextSpeed = gSaveBlock2Ptr->optionsTextSpeed;
         gTasks[taskId].tBattleSceneOff = gSaveBlock2Ptr->optionsBattleSceneOff;
-        gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;
+        gTasks[taskId].tBattleStyle = GetCurrentDifficultyLevel() == DIFFICULTY_HARD
+            ? OPTIONS_BATTLE_STYLE_SET : gSaveBlock2Ptr->optionsBattleStyle;
         gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
         gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
@@ -577,6 +579,9 @@ static void DayNightTint_DrawChoices(u8 selection)
 
 static u8 BattleStyle_ProcessInput(u8 selection)
 {
+    if (GetCurrentDifficultyLevel() == DIFFICULTY_HARD)
+        return OPTIONS_BATTLE_STYLE_SET;
+
     if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         selection ^= 1;

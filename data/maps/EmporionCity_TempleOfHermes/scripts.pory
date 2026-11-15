@@ -659,9 +659,7 @@ script EmporionCity_TempleOfHermes_EventScript_StartRun {
     waitmovement(0)
     removeobject(LOCALID_HERMES_KERYKOS)
     setvar(VAR_TEMP_1, 0)
-    // The glass: 120 steps on Hero. Mortal is 150 and Spartan 100 (SYSTEMS.md §12) once
-    // the difficulty setting exists.
-    setvar(VAR_TEMP_2, 120)
+    specialvar(VAR_TEMP_2, Ichor_GetStepGlassLimit)
     setvar(VAR_TEMP_3, 1)
     call(EmporionCity_TempleOfHermes_EventScript_DrawRoom)
     special(DrawWholeMapView)

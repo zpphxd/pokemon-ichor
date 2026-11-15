@@ -3,24 +3,26 @@
 #include "event_data.h"
 #include "caps.h"
 #include "pokemon.h"
+#include "difficulty.h"
 
+bool32 IsHardLevelCapEnabled(void)
+{
+    return B_EXP_CAP_TYPE == EXP_CAP_HARD && GetCurrentDifficultyLevel() == DIFFICULTY_HARD;
+}
 
 u32 GetCurrentLevelCap(void)
 {
     static const u32 sLevelCapFlagMap[][2] =
     {
-        {FLAG_BADGE01_GET, 15},
-        {FLAG_BADGE02_GET, 19},
-        {FLAG_BADGE03_GET, 24},
-        {FLAG_BADGE04_GET, 29},
-        {FLAG_BADGE05_GET, 31},
-        {FLAG_BADGE06_GET, 33},
-        {FLAG_BADGE07_GET, 42},
-        {FLAG_BADGE08_GET, 46},
-        {FLAG_IS_CHAMPION, 58},
+        {FLAG_BADGE01_GET, 14},
+        {FLAG_BADGE02_GET, 20},
+        {FLAG_BADGE03_GET, 26},
     };
 
     u32 i;
+
+    if (!IsHardLevelCapEnabled())
+        return MAX_LEVEL;
 
     if (B_LEVEL_CAP_TYPE == LEVEL_CAP_FLAG_LIST)
     {
@@ -29,6 +31,7 @@ u32 GetCurrentLevelCap(void)
             if (!FlagGet(sLevelCapFlagMap[i][0]))
                 return sLevelCapFlagMap[i][1];
         }
+        return 32; // The next connected chapter is Thyrsa; extend as it is built.
     }
     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
     {
@@ -46,7 +49,7 @@ u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
     u32 levelDifference;
     u32 currentLevelCap = GetCurrentLevelCap();
 
-    if (B_EXP_CAP_TYPE == EXP_CAP_NONE)
+    if (B_EXP_CAP_TYPE == EXP_CAP_NONE || !IsHardLevelCapEnabled())
         return expValue;
 
     if (level < currentLevelCap)

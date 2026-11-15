@@ -288,6 +288,7 @@
 #define ICHOR_VARS_COUNT                                 32
 #define ICHOR_VARS_END                                   (ICHOR_VARS_START + ICHOR_VARS_COUNT - 1)
 // Ichor bank vars: claim.py bankvar adds lines here, in order.
+#define VAR_ICHOR_DIFFICULTY                    (ICHOR_VARS_START + 0x000) // Ichor: save-fixed difficulty; expansion DIFFICULTY_* value
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000
