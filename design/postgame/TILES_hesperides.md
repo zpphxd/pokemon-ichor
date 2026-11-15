@@ -50,7 +50,7 @@
 | mountain |  | `cr0` `cr1` `cr2` `cr3` `sw1` `sw2` `w0` `ev0` `ev1` `gd` `g1` `ink` `mq1` `mq2` `hg0` |
 | sky |  | `ns0` `ns1` `ns2` `ev1` `ev2` `ev3` `w0` `gl` `sw2` `cr1` `cr2` |
 
-**Tile budget.** 358 of 504 tiles (320 metatiles). The door animations copy their frames into tiles 504-511, so the build fails past 504. Static tiles within two pixels of one another are merged.
+**Tile budget.** 360 of 504 tiles (320 metatiles). The door animations copy their frames into tiles 504-511, so the build fails past 504. Static tiles within two pixels of one another are merged.
 
 **Scripted swaps.** The build writes the ids scripts swap to the `gTileset_Hesperides` block at the end of `include/constants/metatile_labels.h`: `METATILE_Hesperides_Ladon_Head`, `METATILE_Hesperides_Ladon_Coil`, `METATILE_Hesperides_Ladon_W`, `METATILE_Hesperides_Ladon_E`.
 

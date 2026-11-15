@@ -66,10 +66,9 @@ def _gold_tex():
 
 def _feather_tex():
     """The barley's shapes again, bleached to straw with silver awns."""
-    t = G.recolor_tex(0x00D, {"t0": "sg0", "t1": "sg1", "gd": "dt2", "t3": "w1", "tg": "w0"})
+    t = G.recolor_tex(0x00D, {"t0": "sg0", "t1": "sg1", "gd": "dt2", "t3": "dt3", "tg": "w1"})
     for (x, y) in ((0, 0), (8, 0), (12, 8), (4, 8)):
-        t[((x + 1) % 16, (y - 1) % 16)] = "w0"
-        t[((x + 2) % 16, (y - 1) % 16)] = "w1"
+        t[((x + 1) % 16, (y - 1) % 16)] = "w1"
     return t
 
 
@@ -129,7 +128,7 @@ def _road_px(X, Y):
 def road():
     return G.blob_set(
         "road", "Dirt road (and worn track)", SEC_G,
-        G.earth_overlay(_road_px, "l0", "g1", margin=2.5, radius=4.5, amp=1.8, seed=2.3),
+        G.earth_overlay(_road_px, "l0", None, seed=2.3, ring_rate=2, lit_c="rd3"),
         on="grass", walk=".",
         notes="Thrace's roads are beaten earth: hoof-prints, pebbles, a darker lip where the grass "
               "gives way. 47 soft-edge shapes over borrowed aethos grass; a region one cell wide "
@@ -143,7 +142,7 @@ def _road_base(L, ox, oy):
 
 
 def road_join(road_struct):
-    paint = G.earth_overlay(_road_px, "l0", "g1", margin=2.5, radius=4.5, amp=1.8, seed=2.3)
+    paint = G.earth_overlay(_road_px, "l0", None, seed=2.3, ring_rate=2, lit_c="rd3")
     return G.join_set(
         "road_join", "The road meets aethos's limestone path", SEC_G, paint, _road_base, "l1",
         notes="Where the dirt road becomes aethos's limestone path, so a road can run into a seam "
@@ -196,28 +195,25 @@ def decor():
         for y, x in np.argwhere(G.ring(vis)):
             if (x + y) % 2:
                 M.px(i * 16 + x, y, "dt1")
-    # tussocks: a mound of dead straw, lit on top
+    # tussocks: tufts of last year's straw, blades fanning from a dark foot
     def tussock(ox, cx, cy, r):
-        for y in range(16):
-            for x in range(16):
-                d = math.hypot((x - cx) / r, (y - cy) / (r * 0.7))
-                if d < 1:
-                    up = y < cy - r * 0.2
-                    k = F.h(x, y, 31)
-                    c = "sg3" if up and k % 3 else ("sg2" if d < 0.7 else "sg1")
-                    if k % 5 == 0:
-                        c = "sg0" if not up else "sg4"
-                    M.px(ox + x, y, c)
-        for x in range(16):
-            for y in range(16):
-                if M.get(ox + x, y) and not M.get(ox + x, y + 1) and y + 1 < 16:
-                    M.px(ox + x, y + 1, "gd")
-        # straw blades sticking out of the top
-        for dx in (-3, -1, 2, 4):
-            M.px(ox + int(cx + dx), int(cy - r * 0.7) - 1, "sg3")
-    tussock(32, 8, 9, 5.5)
-    tussock(48, 5, 6, 3.5)
-    tussock(48, 11, 11, 3.8)
+        blades = [(-r, 0.55), (-r * 0.6, 0.85), (-r * 0.25, 1.0), (0.1, 0.95), (r * 0.4, 0.9),
+                  (r * 0.75, 0.7), (r, 0.45)]
+        for (dx, hgt) in blades:
+            ht = r * 1.3 * hgt
+            n = int(ht) + 1
+            for j in range(n + 1):
+                u = j / n
+                x = int(round(cx + dx * u * (0.6 + 0.4 * u)))
+                y = int(round(cy - ht * u))
+                c = "sg1" if u < 0.3 else ("sg2" if u < 0.65 else ("sg3" if dx < 0.5 else "sg2"))
+                if j == n:
+                    c = "sg4" if dx < 0 else "sg3"
+                M.px(ox + x, y, c)
+        for dx in range(-int(r * 0.6), int(r * 0.6) + 1):
+            M.px(ox + int(cx) + dx, int(cy) + 1, "gd")
+        M.px(ox + int(cx), int(cy), "sg0")
+        M.px(ox + int(cx) - 1, int(cy), "t1")
     # flowers: tiny heads on green stalks, scattered
     def flowers(ox, head, centre, pts):
         for (x, y) in pts:
@@ -247,26 +243,31 @@ def decor():
     return F.pick(s, ["turf", "tussock", "tussocks", "poppies", "salvia", "plumes"])
 
 
+MUD_SEEDS = [(2, 3), (9, 1), (14, 6), (6, 9), (12, 13), (3, 14), (8, 5), (0, 9)]
+
+
 def _mud_px(X, Y):
-    k = F.hp(X, Y, 29)
-    c = "md2" if k % 4 else "md1"
+    """Drying mud: plates split by a net of cracks (a 16 px periodic Voronoi),
+    a puddle glint here and there."""
     x, y = X % 16, Y % 16
-    # cracks in drying mud
-    if (x == 5 and 2 <= y <= 9) or (y == 9 and 5 <= x <= 12) or (x == 12 and 9 <= y <= 15) \
-            or (y == 4 and 0 <= x <= 5):
-        c = "md1"
-    if k % 13 == 0:
-        c = "md0"
-    # standing water glints
-    if (x, y) in ((9, 3), (10, 3), (2, 12), (3, 12), (14, 6)):
-        c = "b4" if (x + y) % 2 else "b3"
-    return c
+    ds = []
+    for (sx, sy) in MUD_SEEDS:
+        best = min(math.hypot(x - sx - dx, y - sy - dy) for dx in (-16, 0, 16) for dy in (-16, 0, 16))
+        ds.append(best)
+    ds.sort()
+    if ds[1] - ds[0] < 1.0:
+        return "md0" if F.hp(x, y, 5) % 3 == 0 else "md1"
+    if ds[1] - ds[0] < 1.8 and F.hp(x, y, 7) % 2:
+        return "md1"
+    if (x, y) in ((9, 3), (10, 3), (2, 12), (14, 7)):
+        return "b4" if (x + y) % 2 else "b3"
+    return "md2"
 
 
 def mudflat():
     return G.blob_set(
         "mudflat", "Mudflats", SEC_W,
-        G.earth_overlay(_mud_px, "md1", "md2", margin=2.0, radius=4.5, amp=2.0, seed=6.1),
+        G.earth_overlay(_mud_px, "md1", None, seed=6.1, lit_c="g3"),
         on="grass", walk="M", oik=True,
         notes="Lake Maeotis's shore: cracked grey-brown mud with standing water in the hoof-holes, "
               "47 soft-edge shapes over borrowed grass, walkable (`MB_PUDDLE`, so feet splash). Lay "
@@ -274,7 +275,7 @@ def mudflat():
 
 
 def river():
-    paint = G.water_painter(lambda X, Y: F.grass_px(X, Y), ("md0", "md1", "g3"), "b2", "b4")
+    paint = G.water_painter(lambda X, Y: F.grass_px(X, Y), ("md1", "md2", "g3"), "b2", "b4")
     return G.blob_set(
         "river", "Rivers and lakes, with soft banks", SEC_W, paint, on="sea", walk="P",
         notes="Fresh water (`MB_POND_WATER`, surfable; fish here) over borrowed aethos sea, so it "
@@ -353,21 +354,21 @@ def reeds_ford():
         G.reed_clump(M, 32 + x, y, cols)
         M.px(32 + x - 1, y + 1, "gd")
         M.px(32 + x, y + 1, "gd")
-    # the ford: gravel under thin water, drawn whole
+    # the ford: gravel seen through clear water, the current's ripples
     for i in (3, 4):
         for y in range(16):
             for x in range(16):
-                k = F.hp(x, y, 51 + i)
-                c = "md2" if k % 3 else "md1"
-                if k % 7 == 0:
+                k = F.hp(x, y, 51)
+                c = "b3"
+                if k % 5 == 0:
+                    c = "md2"
+                elif k % 7 == 0:
                     c = "b4"
-                if (x + 2 * y) % 9 == 0:
-                    c = "b3"
                 B.px(i * 16 + x, y, c)
-        for y in (3, 11):
+        for (ry, ph) in ((3, 0), (10, 5)):
             for x in range(16):
-                if (x + y // 2) % 4 < 2:
-                    B.px(i * 16 + x, y, "w0" if x % 4 == 0 else "b4")
+                if (x + ph) % 8 < 4:
+                    B.px(i * 16 + x, ry + ((x + ph) % 8 == 2), "w0" if (x + ph) % 8 == 1 else "b4")
     for (x, y, r) in ((4, 5, 2.6), (11, 9, 3.0), (5, 13, 2.2)):
         for yy in range(16):
             for xx in range(16):
@@ -376,6 +377,8 @@ def reeds_ford():
                     B.px(64 + xx, yy, "md2" if yy < y else "md1")
                 elif d < r + 1 and yy >= y:
                     B.px(64 + xx, yy, "md0")
+                elif d < r + 1.6 and yy >= y and (xx + yy) % 2:
+                    B.px(64 + xx, yy, "w0")
     for (x, y) in ((3, 4), (10, 7), (6, 12)):
         put(M, 80 + x - 2, y - 1, [".aaa.", "abbbm", ".mmm."], {"a": "g3", "b": "md2", "m": "md1"})
     return s

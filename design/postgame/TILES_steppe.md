@@ -49,7 +49,7 @@
 | heights |  | `hr0` `hr1` `hr2` `hr3` `hr4` `au1` `au2` `bn1` `bn2` `ink` `g1` `g2` `gd` `tb1` `tb2` |
 | grove |  | `wl1` `wl2` `wl3` `wl4` `k1` `k2` `k3` `t0` `g1` `gd` `tb1` `tb2` `tb3` `b3` `sg3` |
 
-**Tile budget.** 467 of 504 tiles (448 metatiles). The door animations copy their frames into tiles 504-511, so the build fails past 504. Static tiles within two pixels of one another are merged.
+**Tile budget.** 462 of 504 tiles (448 metatiles). The door animations copy their frames into tiles 504-511, so the build fails past 504. Static tiles within two pixels of one another are merged.
 
 **Scripted swaps.** The build writes the ids scripts swap to the `gTileset_Steppe` block at the end of `include/constants/metatile_labels.h`: `METATILE_Steppe_DigMound`, `METATILE_Steppe_DigMound_Dug`, `METATILE_Steppe_Kurgan_Door_Shut`, `METATILE_Steppe_Kurgan_Door`, `METATILE_Steppe_Kurgan_Crown`, `METATILE_Steppe_Kurgan_Crown_Idol`.
 

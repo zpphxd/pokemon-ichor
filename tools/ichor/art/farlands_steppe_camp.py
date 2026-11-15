@@ -696,12 +696,25 @@ def troughs():
     return s
 
 
+def river():
+    import farlands_ground as G
+    paint = G.water_painter(lambda X, Y: F.grass_px(X, Y), ("md1", "sn1", "g3"), "b3", "w0",
+                            seed=4.1)
+    return G.blob_set(
+        "river", "The Thermodon", SEC_Y, paint, on="sea", walk="P",
+        notes="The river Themiskyra stands on: fresh water (`MB_POND_WATER`) over borrowed aethos "
+              "sea, 47 soft-edge shapes, the land side of an edge cell drawn as aethos grass with a "
+              "stony lip. The same shapes as `steppe`'s `river`, so the Thermodon runs on from the "
+              "Thermodon Road (across a seam strip of aethos water).")
+
+
 def build():
     out = {}
     stp = St.build()
     for k in ("road", "road_join", "decor"):
         out[k] = stp[k]
-    for s in (palisade(), gate(), hall(), stable(), tents(), wagons(), yard(), fence(), troughs()):
+    for s in (palisade(), gate(), hall(), stable(), tents(), wagons(), yard(), fence(), troughs(),
+              river()):
         out[s.key] = s
     return out
 
@@ -717,8 +730,9 @@ SPEC = {
         ("halls", ["hall", "stable"]),
         ("tents", ["tents", "wagons"]),
         ("yard", ["yard", "fence", "troughs"]),
+        ("river", ["river"]),
     ],
-    "rows": {"ground": 0, "walls": 10, "halls": 16, "tents": 24, "yard": 32},
+    "rows": {"ground": 0, "walls": 10, "halls": 16, "tents": 24, "yard": 32, "river": 40},
     "why_split": "The steppe's land fills `steppe`'s 504 tiles, so the camps built on it are "
                  "their own set (and the Greek colonies another, `steppe_town`). Themiskyra borders the "
                  "Thermodon Road, Diomedes's yard the Bistonian Plain, the Wagon Camp the Steppe Road: "

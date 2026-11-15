@@ -171,7 +171,7 @@ def blade_texture(ramp, gap, foot, tip, per_row=7, rows=(7, 15), seed=0, plume=N
     return t
 
 
-def grass_overlay(tex, ring_c, awn_c, tip_c, margin=1.0, radius=4.5, amp=2.2, seed=1.1, jag=1.2,
+def grass_overlay(tex, ring_c, awn_c, tip_c, margin=2.0, radius=5.0, amp=2.6, seed=1.1, jag=1.4,
                   awns=True):
     """Painter for a tall-grass region over borrowed ground."""
     def paint(L, ox, oy, key):
@@ -199,10 +199,12 @@ def grass_overlay(tex, ring_c, awn_c, tip_c, margin=1.0, radius=4.5, amp=2.2, se
 # Earth: dirt roads, red earth, mud
 # --------------------------------------------------------------------------
 
-def earth_overlay(px_fn, ring_c, halo_c=None, margin=2.5, radius=4.5, amp=1.8, seed=2.3,
-                  halo_rate=3, ring_rate=1):
+def earth_overlay(px_fn, ring_c, halo_c=None, margin=2.5, radius=5.0, amp=2.4, seed=2.3,
+                  halo_rate=3, ring_rate=1, lit_c=None):
     """Painter for an earth region (a road, a field of red earth, mud).
-    px_fn(X, Y) -> color of the region's texture at absolute pixel X, Y."""
+    px_fn(X, Y) -> color of the region's texture at absolute pixel X, Y.
+    The rim is ring_c where the region's edge faces down or right (its
+    shadowed lip) and lit_c (if given) where it faces up or left."""
     def paint(L, ox, oy, key):
         vis = soft_mask(key, margin, radius, amp, seed)
         for y in range(16):
@@ -210,8 +212,14 @@ def earth_overlay(px_fn, ring_c, halo_c=None, margin=2.5, radius=4.5, amp=1.8, s
                 if vis[y, x]:
                     L.px(ox + x, oy + y, px_fn(ox + x, oy + y))
         for y, x in np.argwhere(ring(vis)):
-            if (x * 3 + y) % ring_rate == 0:
+            if (x * 3 + y) % ring_rate:
+                continue
+            below = y + 1 < 16 and not vis[y + 1, x]
+            right = x + 1 < 16 and not vis[y, x + 1]
+            if below or right or lit_c is None:
                 L.px(ox + x, oy + y, ring_c)
+            elif lit_c:
+                L.px(ox + x, oy + y, lit_c)
         if halo_c:
             for y, x in np.argwhere(halo(vis)):
                 if (x + 2 * y) % halo_rate == 0:
@@ -287,7 +295,7 @@ def join_set(key, title, section, road_painter, road_base, blend_c, notes, oik=F
 # Water with soft banks
 # --------------------------------------------------------------------------
 
-def water_painter(land_px, lip, shallow, ripple, margin=2.0, radius=5.0, amp=2.0, seed=4.1,
+def water_painter(land_px, lip, shallow, ripple, margin=2.0, radius=5.5, amp=2.4, seed=4.1,
                   reeds=None):
     """Painter for a water region over borrowed aethos sea: the land part of
     an edge cell is drawn with land_px(X, Y) (aethos grass, pixel for pixel,

@@ -52,7 +52,7 @@
 | marble |  | `ml0` `ml1` `ml2` `ml3` `w0` `gl` `ev1` `ev2` `ink` `gd` `g1` `b3` `ap1` `ap2` `ap3` |
 | works |  | `tb0` `tb1` `tb2` `tb3` `dg1` `dg2` `dg3` `rr1` `rr2` `rr3` `rr4` `ink` `gd` `g1` `ev1` |
 
-**Tile budget.** 463 of 504 tiles (464 metatiles). The door animations copy their frames into tiles 504-511, so the build fails past 504. Static tiles within two pixels of one another are merged.
+**Tile budget.** 478 of 504 tiles (464 metatiles). The door animations copy their frames into tiles 504-511, so the build fails past 504. Static tiles within two pixels of one another are merged.
 
 ## Ground
 

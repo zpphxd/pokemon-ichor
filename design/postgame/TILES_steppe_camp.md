@@ -13,7 +13,7 @@
 
 ## How to use it
 
-**Ids.** Each grid lists metatile ids as Porymap shows them, row by row, with the walk codes beside them. Each section starts on a fixed row of the sheet (ground at 0x200, walls at 0x250, halls at 0x280, tents at 0x2C0, yard at 0x300). Structures are placed first-fit in build order, so appending one never moves another. Place pieces by key and name, never by raw id: `tools/ichor/maps/farlands_tiles.py` holds every far-lands catalog as a Python dict (`mid('steppe_camp', key, piece)`, and `soft('steppe_camp', key, region, x, y)` for soft ground); `build/steppe_camp/catalog.json` is the same as JSON.
+**Ids.** Each grid lists metatile ids as Porymap shows them, row by row, with the walk codes beside them. Each section starts on a fixed row of the sheet (ground at 0x200, walls at 0x250, halls at 0x280, tents at 0x2C0, yard at 0x300, river at 0x340). Structures are placed first-fit in build order, so appending one never moves another. Place pieces by key and name, never by raw id: `tools/ichor/maps/farlands_tiles.py` holds every far-lands catalog as a Python dict (`mid('steppe_camp', key, piece)`, and `soft('steppe_camp', key, region, x, y)` for soft ground); `build/steppe_camp/catalog.json` is the same as JSON.
 
 **The Oikoumene's pieces** (drawn for world-oikoumene's lands, OIKOUMENE.md; `oikoumene_pieces('steppe_camp')` lists them): `wagons`. The rest serve LABORS's maps first; both sessions may use anything here.
 
@@ -25,6 +25,7 @@
 | `.` | Passable. |
 | `T` | Passable, drawn over the player, who walks behind it. |
 | `D` | Door: `MB_NON_ANIMATED_DOOR`. Put the warp here. |
+| `P` | Fresh water: `MB_POND_WATER`, surfable. |
 
 **Soft ground.** Grasses, roads, earth, mud and water come as 47 soft-edged shapes, keyed by a cell's neighbors (`farlands_lib.blob_key`, or `shape()` in `farlands_tiles.py`): `1|` then N NE E SE S SW W NW, 1 where the neighbor is in the region, a diagonal counting only when both its sides are. `1|11111111` is the full interior. Draw regions as irregular masks that follow the land (MAP_DESIGN 1: never plain rectangles); the shapes round every outer corner and wobble every edge.
 
@@ -48,7 +49,7 @@
 | stone |  | `sn0` `sn1` `sn2` `sn3` `w1` `w0` `g1` `g2` `g3` `gd` `md1` `lc` `ink` `b3` `tb1` |
 | roof |  | `g1` `g2` `gd` `t1` `sg0` `sg1` `sg2` `sg3` `tb0` `tb1` `tb2` `tb3` `ink` `fr2` `w0` |
 
-**Tile budget.** 444 of 496 tiles (296 metatiles). Its maps use wide doors, whose animation frames copy over tiles 496-511 (`DOOR_TILE_START_SIZE2`, `src/field_door.c`), so the build fails past 496. Static tiles within two pixels of one another are merged.
+**Tile budget.** 460 of 496 tiles (368 metatiles). Its maps use wide doors, whose animation frames copy over tiles 496-511 (`DOOR_TILE_START_SIZE2`, `src/field_door.c`), so the build fails past 496. Static tiles within two pixels of one another are merged.
 
 ## Ground
 
@@ -399,3 +400,61 @@ Shape keys and their ids:
 | `trough_L` | 0x314 | `X` | grass | — |
 | `trough_R` | 0x315 | `X` | grass | — |
 | `hay` | 0x316 | `X` | grass | — |
+
+## River
+
+### The Thermodon
+
+`river`, 8 wide by 6 tall. The river Themiskyra stands on: fresh water (`MB_POND_WATER`) over borrowed aethos sea, 47 soft-edge shapes, the land side of an edge cell drawn as aethos grass with a stony lip. The same shapes as `steppe`'s `river`, so the Thermodon runs on from the Thermodon Road (across a seam strip of aethos water).
+
+Shape keys and their ids:
+
+| Shape key | Id |
+|---|---|
+| `1|00000000` | 0x340 |
+| `1|00000010` | 0x341 |
+| `1|00001000` | 0x342 |
+| `1|00001010` | 0x343 |
+| `1|00001110` | 0x344 |
+| `1|00100000` | 0x345 |
+| `1|00100010` | 0x346 |
+| `1|00101000` | 0x347 |
+| `1|00101010` | 0x348 |
+| `1|00101110` | 0x349 |
+| `1|00111000` | 0x34A |
+| `1|00111010` | 0x34B |
+| `1|00111110` | 0x34C |
+| `1|10000000` | 0x34D |
+| `1|10000010` | 0x34E |
+| `1|10000011` | 0x34F |
+| `1|10001000` | 0x350 |
+| `1|10001010` | 0x351 |
+| `1|10001011` | 0x352 |
+| `1|10001110` | 0x353 |
+| `1|10001111` | 0x354 |
+| `1|10100000` | 0x355 |
+| `1|10100010` | 0x356 |
+| `1|10100011` | 0x357 |
+| `1|10101000` | 0x358 |
+| `1|10101010` | 0x359 |
+| `1|10101011` | 0x35A |
+| `1|10101110` | 0x35B |
+| `1|10101111` | 0x35C |
+| `1|10111000` | 0x35D |
+| `1|10111010` | 0x35E |
+| `1|10111011` | 0x35F |
+| `1|10111110` | 0x360 |
+| `1|10111111` | 0x361 |
+| `1|11100000` | 0x362 |
+| `1|11100010` | 0x363 |
+| `1|11100011` | 0x364 |
+| `1|11101000` | 0x365 |
+| `1|11101010` | 0x366 |
+| `1|11101011` | 0x367 |
+| `1|11101110` | 0x368 |
+| `1|11101111` | 0x369 |
+| `1|11111000` | 0x36A |
+| `1|11111010` | 0x36B |
+| `1|11111011` | 0x36C |
+| `1|11111110` | 0x36D |
+| `1|11111111` | 0x36E |

@@ -80,7 +80,7 @@ def _red_px(X, Y):
     return c
 
 
-RED_PAINT = dict(margin=2.5, radius=4.5, amp=2.0, seed=5.7)
+RED_PAINT = dict(seed=5.7, lit_c="re3")
 
 
 def _red_painter():
@@ -155,7 +155,7 @@ def scrub():
                      "edges; line a cattle track with them.")
     ground(s, "grass")
     M = s.M
-    ramp = ("mq0", "mq1", "mq2", "mq3")
+    ramp = ("mq1", "mq2", "mq3", "dg3")
     for i, (cx, cy, rx, ry, seed) in enumerate(((8, 9, 7, 5.5, 1.0), (7.5, 9.5, 6.5, 5.0, 2.5))):
         m = F.blob(cx, cy, rx, ry, 16, 16, wobble=0.12, k=6, seed=seed)
         tmp = F.Layer(16, 16)
@@ -570,13 +570,19 @@ LETTERS = {
 
 
 def _carve(L, x, y, word):
+    w = sum(len(LETTERS[c][0]) + 1 for c in word) - 1
+    for j in range(-2, 7):
+        for i in range(-2, w + 2):
+            c = "ml0" if j in (-2, 6) or i in (-2, w + 1) else "ml1"
+            L.px(x + i, y + j, c)
     for ch in word:
         g = LETTERS[ch]
         for j, row in enumerate(g):
             for i, c in enumerate(row):
                 if c == "1":
-                    L.px(x + i, y + j, "ap2")
-                    L.px(x + i + 1, y + j + 1, "ml0") if L.get(x + i + 1, y + j + 1) not in ("ap2",) else None
+                    L.px(x + i, y + j, "ap3")
+                    if L.get(x + i + 1, y + j + 1) == "ml1":
+                        L.px(x + i + 1, y + j + 1, "ap1")
         x += len(g[0]) + 1
 
 
@@ -758,18 +764,25 @@ def strait():
                     elif v == 5 and f == 2:
                         L.px(i * 16 + x, y, "b4")
     M = s.M
-    # fog: a dithered bank of violet-white mist, denser westward
+    # fog: a bank of violet-white mist in soft bands, thinning at its eastern edge
+    def mist(x, y):
+        v = math.sin(2 * math.pi * (y + 1.5 * math.sin(2 * math.pi * x / 16)) / 8)
+        if v > 0.55:
+            return "w0"
+        if v > -0.2:
+            return "ev3"
+        return "ev2"
     for i in (2, 3, 4, 5):
         for y in range(16):
             for x in range(16):
                 X = i * 16 + x
-                dens = 1.0 if i != 2 else max(0.0, (10 - x) / 10 + 0.15 * math.sin(y * 0.8))
-                k = F.hp(x, y, 33)
-                if dens >= 1.0:
-                    c = "ev3" if (x + y) % 2 else ("w0" if k % 3 else "ev2")
-                    M.px(X, y, c)
-                elif dens > 0.0 and (k % 10) / 10 < dens:
-                    M.px(X, y, "ev3" if (x + y) % 2 else "ev2")
+                if i == 2:
+                    edge = 9 + 2.2 * math.sin(2 * math.pi * y / 16 + 0.7) + 1.0 * math.sin(4 * math.pi * y / 16)
+                    if x > edge + 1.5:
+                        continue
+                    if x > edge and (x + y) % 2:
+                        continue
+                M.px(X, y, mist(x, y))
     for i, (cx, w) in ((4, (9, 7)), (5, (0, 8))):
         pass
     # the dark shape: a low silhouette of something built, rings and a spire

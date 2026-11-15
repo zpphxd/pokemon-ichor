@@ -13,7 +13,7 @@
   "data/tilesets/secondary/far_west/porytiles_bin/anim/twinkle/1.png": "971ce04352ea55d9ddc620a693abd6e4",
   "data/tilesets/secondary/far_west/porytiles_bin/anim/twinkle/2.png": "d02651acbd58fa70221d0c8a27f55757",
   "data/tilesets/secondary/far_west/porytiles_bin/metatile_attributes.bin": "9dfde3997367ecad049b45b3ae13cadd",
-  "data/tilesets/secondary/far_west/porytiles_bin/metatiles.bin": "08fcf50a0edf66825e4bb0ec144e04d8",
+  "data/tilesets/secondary/far_west/porytiles_bin/metatiles.bin": "ab9f28627b94612972b4803c4ea47807",
   "data/tilesets/secondary/far_west/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/far_west/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/far_west/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -30,7 +30,7 @@
   "data/tilesets/secondary/far_west/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/far_west/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/far_west/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/far_west/porytiles_bin/tiles.png": "6503fa14697a6faa5ad0decb80b70e9b",
+  "data/tilesets/secondary/far_west/porytiles_bin/tiles.png": "46fccc4ab3ea82c75d77165c2ed0e43f",
   "data/tilesets/secondary/far_west/porytiles_src/anim/anim.json": "246527029b24f081ffd9ab6bbaac0237",
   "data/tilesets/secondary/far_west/porytiles_src/anim/breakers/0.png": "61d6876c21129203793d612820d7c0c8",
   "data/tilesets/secondary/far_west/porytiles_src/anim/breakers/1.png": "ff7da40653341dde6710117f589a0506",
@@ -51,7 +51,7 @@
   "data/tilesets/secondary/far_west/porytiles_src/anim/twinkle/key.png": "5e790b39ce8e70ee1b7fafb3ce144f4b",
   "data/tilesets/secondary/far_west/porytiles_src/attributes.csv": "f7bc799ff44dba07906d3a5217f18780",
   "data/tilesets/secondary/far_west/porytiles_src/bottom.png": "b1620766ec028146ad34a284a17503dd",
-  "data/tilesets/secondary/far_west/porytiles_src/middle.png": "e0a0f19d32ce49ef16b997985f34e4d7",
+  "data/tilesets/secondary/far_west/porytiles_src/middle.png": "2f640d749888461d100870f87685c3a7",
   "data/tilesets/secondary/far_west/porytiles_src/top.png": "3df8ff714f5d1884d2a46ae0912779ce",
   "include/porytiles_generated/tilesets/far_west/generated_anim_code.h": "c9d7dff8c102aee142291ea91742bc00"
 }
