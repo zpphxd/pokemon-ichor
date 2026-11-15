@@ -13,6 +13,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
+#include "ichor_frozen.h"
 #include "ichor_relics.h"
 #include "ichor_rites.h"
 #include "ichor_save.h"
@@ -813,6 +814,8 @@ static bool32 IsNight(void)
 // Poseidon: half as many while surfing.
 u32 Ichor_ModifyEncounterRate(u32 rate)
 {
+    if (Ichor_IsFrozenHour())  // nothing moves in the Frozen Hour, wild Pokémon included
+        return 0;
     if (Ichor_IsFrenzy())
         return rate * 2;
     if (Ichor_IsBlessed(ICHOR_GOD_ARTEMIS))

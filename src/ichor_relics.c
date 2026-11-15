@@ -17,6 +17,7 @@
 #include "fieldmap.h"
 #include "fldeff.h"
 #include "follower_npc.h"
+#include "ichor_frozen.h"
 #include "ichor_relics.h"
 #include "ichor_save.h"
 #include "item.h"
@@ -107,6 +108,7 @@ void Ichor_OnItemAdded(u16 itemId)
 void Ichor_OnMapTransition(void)
 {
     FlagClear(FLAG_ICHOR_NO_RELICS);
+    Ichor_FrozenHourOnMapTransition();
 }
 
 // --- Light (SYSTEMS §2) -------------------------------------------------------

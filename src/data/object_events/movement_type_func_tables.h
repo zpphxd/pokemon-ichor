@@ -461,6 +461,11 @@ u8 (*const gMovementTypeFuncs_RunInPlace[])(struct ObjectEvent *, struct Sprite 
     MovementType_MoveInPlace_Step1,
 };
 
+u8 (*const gMovementTypeFuncs_IchorFrozenStep[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_IchorFrozenStep_Step0,
+    MovementType_IchorFrozenStep_Step1,
+};
+
 u8 (*const gMovementTypeFuncs_Invisible[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_Invisible_Step0,
     MovementType_Invisible_Step1,

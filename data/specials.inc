@@ -677,3 +677,9 @@ gSpecials::
 	def_special Ichor_CountHerms
 	def_special Ichor_GetHermState
 	def_special Ichor_AnointHerm
+	@ Ichor: the Frozen Hour (src/ichor_frozen.c)
+	def_special Ichor_FrozenHourBegin, waitstate=1
+	def_special Ichor_UnfreezeObject
+	def_special Ichor_SepiaMemoryBegin
+	def_special Ichor_SepiaMemoryEnd
+	def_special Ichor_ColorReturnStep

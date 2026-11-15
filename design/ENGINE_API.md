@@ -13,10 +13,10 @@ All of Ichor's own persistent state lives in **`struct IchorSave`** (`include/ic
 |---|---|
 | Size | 1,280 bytes, fixed. SaveBlock3 is now 1,284 of its 1,624 bytes. |
 | Version | `ICHOR_SAVE_VERSION` (1). Version 0 means a save from before IchorSave. |
-| New game | `Ichor_InitSave()` (from `NewGameInitData`): everything zero, except `version = 1` and `momLosses = 212`. |
-| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. |
+| New game | `Ichor_InitSave()` (from `NewGameInitData`): everything zero, except `version = ICHOR_SAVE_VERSION` (2) and `momLosses = 212`. |
+| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Version 2 added `frozenHourStep` (§5), carved from `headerReserved`. |
 | New day | `Ichor_DoDailyEvents()` (from `DoDailyEvents`) clears the daily flag bank. |
-| Headroom | 176 bytes in `reserved`, plus 24 in `headerReserved`. |
+| Headroom | 176 bytes in `reserved`, plus 23 in `headerReserved`. |
 
 **Adding a field later.**
 1. Take its bytes from the front of `reserved` and shrink `reserved` by the same amount. The struct must stay 1,280 bytes; `STATIC_ASSERT`s in `src/ichor_save.c` pin the size and the offsets.
@@ -94,7 +94,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 ## Status of the rest of this file
 
-§1–§3 are built. **§4–§5 are the planned API, published early so the world sessions can write their scripts against it now.** The names in them are fixed: build against them, and stub what isn't there yet. The behavior lands batch by batch:
+§1–§5 are built. **§6 is the planned API, published early so world-act3 can write its scripts against it now.** The names in it are fixed: build against them, and stub what isn't there yet.
 
 | § | System | Batch | State |
 |---|---|---|---|
@@ -102,7 +102,8 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 2 | Relics, darkness and braziers | 2 | **Built** |
 | 3 | Rites: altars, Favor, blessings, gifts | 3 | **Built** |
 | 4 | Herm waystones and the Wings | 4 | **Built** |
-| 5 | Labyrinth mechanics, then the Frozen Hour | 5 | Hooks only |
+| 5 | The Frozen Hour (SCRIPT.md Phase 4, E1–E6) | 5 | **Built** |
+| 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials | 5 | Planned, names fixed |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
@@ -341,11 +342,41 @@ Route 1's fork herm becomes its great herm. In `data/maps/KallisteRoute1/scripts
  }
 ```
 
-## 5. Later: the Labyrinth and the Frozen Hour
+## 5. The Frozen Hour (Phase 4 SCRIPT.md, Part 11, E1–E6)
 
-These come after herms, unless the director reorders them. IchorSave already holds Ariadne's Thread (§1). Each needs its maps first, so world-act3 and the engine session agree the details before it is built:
+Built in `src/ichor_frozen.c`. Tested by `tools/ichor/tests/ichor_frozen.sh` (21 checks on Route 1). The names are world-act3's.
+
+### The mode (E1)
+
+While `FLAG_ICHOR_FROZEN_HOUR` is set:
+- **Every tileset and sprite palette is gray.** The exceptions are the player, the follower and any unfrozen object (E3). The tint lives in the unfaded palette buffer, so fades, warps, weather and battles all keep it. The day-and-night tint is off.
+- **Everyone else is frozen,** including people who spawn later. A script's `lockall`/`releaseall` doesn't thaw them, and frozen trainers don't see you. Talking to a frozen person still runs their script, so check the flag there, and don't `faceplayer`.
+- **There are no wild encounters** on foot or surfing.
+- **The map's music is `MUS_ICHOR_ELPIS_LULLABY_BOX`,** on every map.
+- **Not built:** muting the field's own sound effects. Scripts' `playse` is unaffected anyway.
+
+Setting the flag takes effect on the next map load. To freeze the map the player is on, use E2.
+
+**Palettes are shared.** A sprite palette is gray or in color as a whole, so an unfrozen object that shares a palette with frozen ones colors them too. Give Phaedon, Hyperion, Kleon and the Fates palettes of their own.
+
+### Calls
+
+| Call | What it does |
+|---|---|
+| `setvar(VAR_0x8004, <x>)`, `setvar(VAR_0x8005, <y>)`, `special(Ichor_FrozenHourBegin)` | **E2, the gray spreading.** It starts at the Loom's tile (map coordinates). One palette goes gray every 6 frames: tileset palettes by the nearest on-screen tile drawn with them, sprite palettes by the nearest person wearing them. People freeze as it reaches them. Then the flag is set and the music box starts. The special waits until it's done; don't add `waitstate`. |
+| `setvar(VAR_0x8004, LOCALID_...)`, `special(Ichor_UnfreezeObject)` | **E3, unfrozen objects.** Call it in the map's `ON_TRANSITION` for objects that should load in color (Phaedon, Hyperion, Elpis's music box, the pool's ripple). Called on someone standing frozen (Kleon waking), their color runs back in over 16 frames and they can move. The list resets on every map load. |
+| `MOVEMENT_TYPE_ICHOR_FROZEN_STEP_DOWN`, `_UP`, `_LEFT`, `_RIGHT` | **E4, frozen poses.** The object holds its walk animation's stride frame in that direction. It's a normal movement type: set it in Porymap. |
+| `special(Ichor_SepiaMemoryBegin)`, `special(Ichor_SepiaMemoryEnd)` | **E5, sepia memory.** The gray turns sepia for the memory, then back. It also works outside the hour, tinting everything but the player and follower. |
+| `setvar(VAR_0x8004, <1–12>)`, `special(Ichor_ColorReturnStep)` | **E6, the color returns.** Each step brings back a twelfth of the color and is saved (`IchorSave.frozenHourStep`), so a map load mid-Stair keeps it. Step 12 clears the flag and brings back the day-and-night tint and the map's music. Frozen people thaw when the script ends: end it with `releaseall`, or they thaw once no script is running. |
+
+### Still to build for Phase 4 (from Part 11)
+
+E7–E18 are not in this batch: the bull-leap timing, statues, beams, large objects, herm heads, the reversed frieze, Melitta's cloak and the shadowless figure. E11, E13 and E15 are script-only. E12, the herm heads, needs only `FLAG_ICHOR_HERMS_START + HERM_<id>` (§4) and `setmetatile`.
+
+## 6. The Labyrinth (LABYRINTH.md §5, §12)
+
+Being built in batch 5, after the Frozen Hour. IchorSave already holds Ariadne's Thread (§1). The planned pieces:
 - **Ariadne's Thread on the floor:** the per-step callback, the drawing and winding, tying off, and RETURN TO… (LABYRINTH.md §5.1).
 - **Asterion:** patrol, sight and charge AI (§5.3).
-- **The Helm of Darkness:** stealth in the dark, through `OW_FLAG_NO_TRAINER_SEE` and Asterion's sight.
+- **The Helm of Darkness:** stealth in the dark, through the trainer-sight light test and Asterion's sight.
 - **Daedalus's wall dials,** turned with the Labrys.
-- **The Frozen Hour:** the gray palette drain and frozen NPCs (STORY.md).

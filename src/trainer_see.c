@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_frozen.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -604,6 +605,8 @@ static u8 GetTrainerApproachDistance(struct ObjectEvent *trainerObj)
     u8 i;
     u8 approachDistance;
 
+    if (Ichor_IsHeldByFrozenHour(trainerObj)) // Ichor: frozen trainers see nothing
+        return 0;
     PlayerGetDestCoords(&x, &y);
     if (trainerObj->trainerType == TRAINER_TYPE_NORMAL)  // can only see in one direction
     {

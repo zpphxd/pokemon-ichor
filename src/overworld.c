@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ichor_relics.h"
+#include "ichor_frozen.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -1243,6 +1244,9 @@ u16 GetCurrLocationDefaultMusic(void)
 {
     u16 music;
 
+    if (Ichor_IsFrozenHour()) // Ichor: only the music box plays
+        return MUS_ICHOR_ELPIS_LULLABY_BOX;
+
     // Play the desert music only when the sandstorm is active on Route 111.
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE111)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE111)
@@ -1266,6 +1270,8 @@ u16 GetCurrLocationDefaultMusic(void)
 u16 GetWarpDestinationMusic(void)
 {
     u16 music = GetLocationMusic(&sWarpDestination);
+    if (Ichor_IsFrozenHour()) // Ichor: only the music box plays
+        return MUS_ICHOR_ELPIS_LULLABY_BOX;
     if (music != MUS_ROUTE118)
     {
         return music;
@@ -1777,6 +1783,8 @@ void UpdateTimeOfDay(bool32 updateBlend)
 // Whether a map type is naturally lit/outside
 bool32 MapHasNaturalLight(enum MapType mapType)
 {
+    if (Ichor_SuspendsDayNight()) // Ichor: no time of day in the Frozen Hour
+        return FALSE;
     return (OW_ENABLE_DNS
          && (mapType == MAP_TYPE_TOWN
           || mapType == MAP_TYPE_CITY
@@ -1854,6 +1862,7 @@ static void OverworldBasic(void)
     CameraUpdate();
     UpdateCameraPanning();
     BuildOamBuffer();
+    Ichor_FrozenHourFrame(); // Ichor: gray palettes and still people
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();

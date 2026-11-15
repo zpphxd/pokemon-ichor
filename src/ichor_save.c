@@ -44,7 +44,15 @@ void Ichor_InitSave(void)
 void Ichor_OnSaveLoaded(void)
 {
     if (gIchorSave.version == 0)
+    {
         SetDefaults();
+        return;
+    }
+    if (gIchorSave.version < 2)
+    {
+        gIchorSave.frozenHourStep = 0;
+        gIchorSave.version = 2;
+    }
 }
 
 void Ichor_DoDailyEvents(u32 daysSince)
