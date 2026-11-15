@@ -9756,8 +9756,8 @@
     {
       "id": "LAYOUT_KYTHERA_TEMPLE_OF_APHRODITE",
       "name": "KytheraTempleOfAphrodite_Layout",
-      "width": 17,
-      "height": 24,
+      "width": 21,
+      "height": 36,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_TempleAphrodite",
       "border_filepath": "data/layouts/KytheraTempleOfAphrodite/border.bin",
