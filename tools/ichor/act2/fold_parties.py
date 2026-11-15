@@ -78,10 +78,12 @@ def main(files):
     b = party.index('/* Ichor: world-act3')
     PARTY.write_text(party[:a] + '\n'.join(out).rstrip() + '\n\n\n' + party[b:])
     opp = OPP.read_text()
-    # Act II's ids: 160-319, then 820-849 from the shared reserve (tools/ichor/claim_ranges.md).
-    blocks_ids = list(range(160, 320)) + list(range(820, 850))
+    # Act II's ids: 160-319, then 820-849 from the shared reserve, then 1344-1403 from the
+    # block the trainer limit's raise to 1,536 opens (tools/ichor/claim_ranges.md). The last
+    # block is only valid once that raise is on main; batches 1-3 stay below it.
+    blocks_ids = list(range(160, 320)) + list(range(820, 850)) + list(range(1344, 1404))
     if len(order) > len(blocks_ids):
-        sys.exit(f'{len(order)} trainers, but Act II has {len(blocks_ids)} ids (160-319, 820-849): ask the director for more')
+        sys.exit(f'{len(order)} trainers, but Act II has {len(blocks_ids)} ids (160-319, 820-849, 1344-1403): ask the director for more')
     defs = [f'#define {n:<37} {blocks_ids[i]}' for i, n in enumerate(order)]
     end = blocks_ids[len(order) - 1] + 1 if order else 0
     new = ('// world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.\n' + '\n'.join(defs)
