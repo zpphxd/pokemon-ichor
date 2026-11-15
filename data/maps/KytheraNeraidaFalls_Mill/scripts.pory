@@ -50,7 +50,7 @@ script KytheraNeraidaFalls_Mill_EventScript_Myles {
 script KytheraNeraidaFalls_Mill_EventScript_Cat {
     lock
     faceplayer
-    playmoncry(SPECIES_MEOWTH, CRY_MODE_NORMAL)
+    playmoncry(SPECIES_GALEKIT, CRY_MODE_NORMAL)
     waitmoncry
     release
 }

@@ -121,7 +121,7 @@ script KytheraNeraidaFalls_EventScript_Boy {
 script KytheraNeraidaFalls_EventScript_Goat {
     lock
     faceplayer
-    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
     msgbox(format("Mehhh."))
     waitmoncry
     release
