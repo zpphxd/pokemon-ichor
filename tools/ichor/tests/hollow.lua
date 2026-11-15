@@ -91,9 +91,11 @@ local function quiet(on) L.setVar(S.VAR_REPEL_STEP_COUNT, on and 250 or 0) end
 local function setHour(want)
   local now = emu:read8(S.gLocalTime + 2)
   local off = L.sb2() + S.OFF_SB2_LOCAL_TIME_OFFSET
-  local h = (emu:read8(off + 2) + (now - want)) % 24
-  if h >= 12 then h = h - 24 end
-  emu:write8(off + 2, h & 0xFF)
+  local previous = emu:read8(off + 2)
+  if previous >= 128 then previous = previous - 256 end
+  -- The offset is signed; keep the new value in 0..23 so RTC subtraction
+  -- normalizes it through its midnight borrow, not an overflowing hour.
+  emu:write8(off + 2, (previous + now - want) % 24)
 end
 
 -- --- The east mouth -------------------------------------------------------------------------
@@ -101,6 +103,7 @@ end
 local function eastMouth()
   L.setBeat("east_mouth", false)
   warpTo(S.MAP_HOLLOW, 46, 34)
+  expect(emu:read8(S.gLocalTime + 2) == 12, "the cave is loaded at noon")
   expect(L.mapMusic() == S.MUS_HOLLOW, "the Hollow plays MUS_ICHOR_HOLLOW")
   expect(flash() == LIT and region() == 1, string.format("daylight at the east mouth (flash %d, region %d)", flash(), region()))
   L.shot("east_mouth_daylight")
@@ -297,6 +300,7 @@ local function night()
   L.setBeat("night", false)
   setHour(22)
   warpTo(S.MAP_HOLLOW, 24, 14)
+  expect(emu:read8(S.gLocalTime + 2) == 22, "the cave is loaded at 22:00")
   expect(L.npc(P .. "Hound").present, "at night a black hound sits at the pillar")
   L.go(24, 11)
   L.settle({ shots = { [1] = "hounds_fade" } })

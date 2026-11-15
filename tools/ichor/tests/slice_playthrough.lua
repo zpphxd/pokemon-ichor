@@ -1006,7 +1006,7 @@ beat("11_city", function()
     end),
     visitShop("general_stall", npc(EC .. "GeneralStallkeeper")),
     visitShop("kydon", npc(EC .. "Kydon")),
-    visitTalk("offerings_stall", npc(EC .. "OfferingsStallkeeper")),
+    visitShop("offerings_stall", npc(EC .. "OfferingsStallkeeper")),
     visit("pasion", npc(EC .. "Pasion"), function()
       talk(L.npc(EC .. "Pasion"), { shotBefore = "pasion" })              -- YES: sell him the obol
       L.check(L.money() == money + 600, string.format("Pasion pays 600 for a Bronze Obol (money %d -> %d)",
@@ -1133,24 +1133,25 @@ end)
 -- The Dolphin: knucklebones with the champion and both regulars, until each is beaten once.
 beat("11_tavern", function()
   local TV = "EmporionCity_Tavern_EventScript_"
-  local function knucklebones(who, flag, item)
+  local function knucklebones(who, flag, item, quantity)
     local before, tries = item and L.itemCount(S[item]), 0
     while not getFlag(S[flag]) do
       tries = tries + 1
       if tries > 25 then L.check(false, who .. ": never won at knucklebones in 25 games") return end
-      talk(L.npc(TV .. who), { shotBefore = tries == 1 and string.lower(who) or nil })
+      talk(L.npc(TV .. who), { shotBefore = tries == 1 and string.lower(who) or nil,
+                             menuChoice = 4, limit = 40000 })
     end
     log(string.format("ok beat %s at knucklebones in %d game(s) (%s)", who, tries, flag))
     if item then
-      L.check(L.itemCount(S[item]) > before, string.format("%s's prize: %s (%d -> %d)", who, item, before,
+      L.check(L.itemCount(S[item]) == before + quantity, string.format("%s's prize: %s (%d -> %d)", who, item, before,
                                                           L.itemCount(S[item])))
     end
   end
   room(S.MAP_TAVERN, function()
     shot("tavern")
     knucklebones("Myrtale", "FLAG_KNUCKLEBONES_EMPORION")          -- TM Fling (a flag until the TM exists)
-    knucklebones("Strepsiades", "FLAG_KNUCKLEBONES_STREPSIADES", "ITEM_BERRY_JUICE")
-    knucklebones("Stratyllis", "FLAG_KNUCKLEBONES_STRATYLLIS", "ITEM_BERRY_JUICE")
+    knucklebones("Strepsiades", "FLAG_KNUCKLEBONES_STREPSIADES", "ITEM_OLIVE_OIL", 2)
+    knucklebones("Stratyllis", "FLAG_KNUCKLEBONES_STRATYLLIS", "ITEM_WINE", 1)
     visitAll({
       visitTalk("bones_table", sign(TV .. "BonesTable")),
       visitTalk("tavern_mosaic", sign(TV .. "Mosaic")),
@@ -1425,7 +1426,7 @@ end)
 beat("15_laurel_story", function()
   local PX = "EmporionCity_PhiloxenosHouse_EventScript_"
   room(S.MAP_PHILOXENOS, function()
-    collect(npc(PX .. "Philoxenos"), "FLAG_PHILOXENOS_LAUREL_2", "ITEM_BERRY_JUICE",
+    collect(npc(PX .. "Philoxenos"), "FLAG_PHILOXENOS_LAUREL_2", "ITEM_WINE",
             "Philoxenos's Wine for the Herald Laurel's story", { shotBefore = "philoxenos_laurel" })
   end)
 end)
