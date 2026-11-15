@@ -18,6 +18,7 @@ text KallisteRoute1_Text_SpeakerPhyllis { "PHYLLIS" }
 text KallisteRoute1_Text_SpeakerKomatas { "KOMATAS" }
 text KallisteRoute1_Text_SpeakerAgis { "AGIS" }
 text KallisteRoute1_Text_SpeakerPolyeidos { "POLYEIDOS" }
+text KallisteRoute1_Text_SpeakerThestylis { "THESTYLIS" }
 
 // --- the carter and her Mudbray (south grove) --------------------------------
 script KallisteRoute1_EventScript_Carter {
@@ -112,6 +113,23 @@ text KallisteRoute1_Text_TityrosIntro {
 
 text KallisteRoute1_Text_TityrosDefeat {
     format("Scattered my flock! It'll take all afternoon to round them up.")
+}
+
+// Taking lunch up to the pickers in Phyllis's grove. Her line closes the
+// grove narrows' south mouth (Virgil's Thestylis pounds garlic and thyme for
+// the reapers, Eclogue 2).
+script KallisteRoute1_EventScript_Thestylis {
+    trainerbattle_single(TRAINER_ICHOR_THESTYLIS, KallisteRoute1_Text_ThestylisIntro, KallisteRoute1_Text_ThestylisDefeat)
+    setspeaker(KallisteRoute1_Text_SpeakerThestylis)
+    msgbox(format("Hear the cicadas? That means noon. That means I'm late."), MSGBOX_AUTOCLOSE)
+}
+
+text KallisteRoute1_Text_ThestylisIntro {
+    format("Lunch for the pickers! Garlic, thyme, bread. Don't even look at it.")
+}
+
+text KallisteRoute1_Text_ThestylisDefeat {
+    format("You win. The bread's still mine, though. They count it.")
 }
 
 script KallisteRoute1_EventScript_Phyllis {

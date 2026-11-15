@@ -321,7 +321,7 @@ script KytheraFoamRoad_EventScript_Kymodoke {
 }
 
 script KytheraFoamRoad_EventScript_Menalkas {
-    trainerbattle_single(TRAINER_ICHOR_MENALKAS, Kythera_Text_MenalkasIntro, Kythera_Text_MenalkasDefeat)
+    trainerbattle_single(TRAINER_ICHOR_MENALKAS_KYTHERA, Kythera_Text_MenalkasIntro, Kythera_Text_MenalkasDefeat)
     setspeaker(Kythera_Text_SpeakerMenalkas)
     msgbox(Kythera_Text_MenalkasAfter, MSGBOX_AUTOCLOSE)
 }

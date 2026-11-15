@@ -132,7 +132,7 @@ script KytheraNeraidaFalls_EventScript_Goat {
 // ---------------------------------------------------------------------------
 
 script KytheraNeraidaFalls_EventScript_Lykidas {
-    trainerbattle_single(TRAINER_ICHOR_LYKIDAS, Kythera_Text_LykidasIntro, Kythera_Text_LykidasDefeat)
+    trainerbattle_single(TRAINER_ICHOR_LYKIDAS_KYTHERA, Kythera_Text_LykidasIntro, Kythera_Text_LykidasDefeat)
     setspeaker(Kythera_Text_SpeakerLykidas)
     msgbox(Kythera_Text_LykidasAfter, MSGBOX_AUTOCLOSE)
 }
@@ -150,7 +150,7 @@ script KytheraNeraidaFalls_EventScript_Mopsos {
 }
 
 script KytheraNeraidaFalls_EventScript_Thestylis {
-    trainerbattle_single(TRAINER_ICHOR_THESTYLIS, Kythera_Text_ThestylisIntro, Kythera_Text_ThestylisDefeat)
+    trainerbattle_single(TRAINER_ICHOR_THESTYLIS_KYTHERA, Kythera_Text_ThestylisIntro, Kythera_Text_ThestylisDefeat)
     setspeaker(Kythera_Text_SpeakerThestylis)
     msgbox(Kythera_Text_ThestylisAfter, MSGBOX_AUTOCLOSE)
 }

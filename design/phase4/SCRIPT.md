@@ -10852,7 +10852,7 @@ Defeat: LYKIDAS: Even the goats looked sorry for me.
 After:  LYKIDAS: A poet wrote about a goatherd called Lykidas. A better one.
 ```
 ```
-=== TRAINER_ICHOR_LYKIDAS ===
+=== TRAINER_ICHOR_LYKIDAS_KYTHERA ===
 Name: LYKIDAS
 Class: Goatherd
 Pic: Goatherd
@@ -10929,7 +10929,7 @@ Defeat: THESTYLIS: Cut down. Like a reed.
 After:  THESTYLIS: Reeds grow back. That's the nice thing about reeds.
 ```
 ```
-=== TRAINER_ICHOR_THESTYLIS ===
+=== TRAINER_ICHOR_THESTYLIS_KYTHERA ===
 Name: THESTYLIS
 Class: Harvester
 Pic: Harvester
@@ -11394,7 +11394,7 @@ Defeat: MENALKAS: Fine. Fine. They'll eat the thrift instead.
 After:  MENALKAS: Sheep don't care for the sea. They face inland. Wise animals.
 ```
 ```
-=== TRAINER_ICHOR_MENALKAS ===
+=== TRAINER_ICHOR_MENALKAS_KYTHERA ===
 Name: MENALKAS
 Class: Shepherd
 Pic: Shepherd

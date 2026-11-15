@@ -303,3 +303,89 @@ script KallisteRoute1_KronionHill_EventScript_Pit {
         msgbox(format("Stone steps go down into the dark. You can't see a thing.\p…It still feels like something's looking up."), MSGBOX_SIGN)
     }
 }
+
+// --- the high pastures, the hill's south flank (a branch off the hill foot) ----
+// Herders from Theocritus: Menalkas and Thyrsis keep sheep, Lykidas goats.
+text KallisteRoute1_KronionHill_Text_SpeakerMenalkas { "MENALKAS" }
+text KallisteRoute1_KronionHill_Text_SpeakerThyrsis { "THYRSIS" }
+text KallisteRoute1_KronionHill_Text_SpeakerLykidas { "LYKIDAS" }
+
+script KallisteRoute1_KronionHill_EventScript_HermFork {
+    msgbox(format("Up: the old shrine. Down: the high pastures."), MSGBOX_SIGN)
+}
+
+// At the foot of the goat path, in plain view: the branch's first trainer.
+script KallisteRoute1_KronionHill_EventScript_Menalkas {
+    trainerbattle_single(TRAINER_ICHOR_MENALKAS, KallisteRoute1_KronionHill_Text_MenalkasIntro, KallisteRoute1_KronionHill_Text_MenalkasDefeat)
+    setspeaker(KallisteRoute1_KronionHill_Text_SpeakerMenalkas)
+    msgbox(format("The sheep won't graze near the old shrine. They never have."), MSGBOX_AUTOCLOSE)
+}
+
+text KallisteRoute1_KronionHill_Text_MenalkasIntro {
+    format("These are the high pastures. There's a toll. It's a battle.")
+}
+
+text KallisteRoute1_KronionHill_Text_MenalkasDefeat {
+    format("Toll paid. Mind the fold gate, it sticks.")
+}
+
+// He sings to the spring with his back to the path: battling him is a choice.
+script KallisteRoute1_KronionHill_EventScript_Thyrsis {
+    trainerbattle_single(TRAINER_ICHOR_THYRSIS, KallisteRoute1_KronionHill_Text_ThyrsisIntro, KallisteRoute1_KronionHill_Text_ThyrsisDefeat)
+    setspeaker(KallisteRoute1_KronionHill_Text_SpeakerThyrsis)
+    msgbox(format("I know one song. It's about Daphnis, who died of love.\pIt's very long. You're lucky you won."), MSGBOX_AUTOCLOSE)
+}
+
+text KallisteRoute1_KronionHill_Text_ThyrsisIntro {
+    format("Shh. I'm singing to the spring. …It says it wants a battle.")
+}
+
+text KallisteRoute1_KronionHill_Text_ThyrsisDefeat {
+    format("The spring liked that better than my song. Rude.")
+}
+
+// Above the only stair down to the lookout shelf: past him, the Everstone.
+script KallisteRoute1_KronionHill_EventScript_Lykidas {
+    trainerbattle_single(TRAINER_ICHOR_LYKIDAS, KallisteRoute1_KronionHill_Text_LykidasIntro, KallisteRoute1_KronionHill_Text_LykidasDefeat)
+    setspeaker(KallisteRoute1_KronionHill_Text_SpeakerLykidas)
+    msgbox(format("Kronos swallowed a stone instead of his son, they say.\pMy goats keep finding stones like that. Down by the edge."), MSGBOX_AUTOCLOSE)
+}
+
+text KallisteRoute1_KronionHill_Text_LykidasIntro {
+    format("My goats found the best rock on the hill. Want it? Get past me.")
+}
+
+text KallisteRoute1_KronionHill_Text_LykidasDefeat {
+    format("Ha! Go on, then. Mind the edge.")
+}
+
+script KallisteRoute1_KronionHill_EventScript_PanShrine {
+    msgbox(format("A little shrine to Pan, the shepherds' god.\pSomeone left him a cheese. Something has nibbled it."), MSGBOX_SIGN)
+}
+
+script KallisteRoute1_KronionHill_EventScript_FoldWooloo {
+    lock
+    faceplayer
+    playmoncry(SPECIES_WOOLOO, CRY_MODE_NORMAL)
+    msgbox(format("Baa?"))
+    waitmoncry
+    release
+}
+
+script KallisteRoute1_KronionHill_EventScript_FoldMareep {
+    lock
+    faceplayer
+    playmoncry(SPECIES_MAREEP, CRY_MODE_NORMAL)
+    msgbox(format("Mee-eep! Its fleece crackles."))
+    waitmoncry
+    release
+}
+
+script KallisteRoute1_KronionHill_EventScript_Skiddo {
+    lock
+    faceplayer
+    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    msgbox(format("Meh-eh! It's chewing the thyme."))
+    waitmoncry
+    release
+}

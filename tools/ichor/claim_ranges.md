@@ -10,7 +10,7 @@ The director assigns the ranges. Ask in your report if your range runs low.
 
 | Owner | Flags (hex) | Free now | Notes |
 |---|---|---|---|
-| The slice (director and area agents: Elaia, Route 1, Akti, the temple) | 0x020–0x1FF | 201 | |
+| The slice (director and area agents: Elaia, Route 1, Akti, the temple) | 0x020–0x1FF | 197 | 9 of them can hold a hidden item: 0x1F7–0x1FF |
 | **world-act1** (Phase 2: the crossing, Aegina, Emporion, the Sacred Way, Eleusa) | 0x200–0x2FF | 214 | |
 | **world-act2** | 0x300–0x37F | 110 | |
 | **world-act3** | 0x380–0x3FF | 121 | |
@@ -49,19 +49,20 @@ Hidden items can take these bank flags too (`claim.py hiddenitem`; see `asm/macr
 
 ## Trainers
 
-Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 1,024 (raised from upstream's 864 for the Oikoumene, PG-38 in `design/OIKOUMENE.md`), so trainer ids run 1–1023, each with its own defeated flag at `TRAINER_FLAGS_START + id`. System flags start at 0x900: always use their names, never numbers.
+Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 1,536 (raised from upstream's 864: to 1,024 for the Oikoumene, PG-38 in `design/OIKOUMENE.md`, then to 1,536 for Emerald's trainer density, `design/MAP_DESIGN.md` §8), so trainer ids run 1–1535, each with its own defeated flag at `TRAINER_FLAGS_START + id`. System flags start at 0xB00: always use their names, never numbers.
 
 | Owner | Trainer ids | Notes |
 |---|---|---|
 | The slice | 1–14 | Full |
+| The slice, from the reserve | 22–25 | Route 1's Thestylis and Kronion Hill's three herders (MAP_DESIGN §8; director's go-ahead, 2026-11-14). Full |
 | The Frontier engine | 15–21 | The seven Hoenn Brains (`TRAINER_ANABEL` … `TRAINER_BRANDON`), kept because `gFrontierBrainInfo` reads their pic, class and name. The post-game re-themes them as the Olympiad's Brains. |
-| Reserve | 22–39 | Ask the director |
+| Reserve | 26–39 | Ask the director |
 | **world-act1** | 40–159 | |
-| **world-act2** | 160–319 and 820–849 | 820–849 added from the shared reserve (2026-11-14): Act II's script needs 182 |
-| **world-act3** | 320–499 | Includes the League |
-| **the post-game** | 500–679 | Rematches (the War Horn, the Arena of Champions) need ids of their own |
-| **the Oikoumene** | 680–819 and 864–1023 | 300 in all, for its ten champion halls |
-| Reserve | 850–863 | Shared; ask the director |
+| **world-act2** | 160–319, 820–849 and 1344–1403 | 820–849 added from the shared reserve (2026-11-14): Act II's script needs 182. 1344–1403 added with the 1,536 raise |
+| **world-act3** | 320–499 and 1404–1503 | Includes the League. 1404–1503 added with the 1,536 raise |
+| **the post-game** | 500–679 and 1024–1223 | Rematches (the War Horn, the Arena of Champions) need ids of their own |
+| **the Oikoumene** | 680–819, 864–1023 and 1224–1343 | 420 in all, for its ten champion halls and its routes |
+| Reserve | 850–863 and 1504–1535 | Shared; ask the director |
 
 To add a trainer:
 

@@ -56,7 +56,12 @@ The geography, the section grid, the story's route and the decisions behind them
 ![Before and after](img/ui_world_compare_starter.png)
 
 - **The scene.** The Akademia's wall has a meander frieze, two fluted pilasters, and a black fresco band hung with laurel festoons. Below it, Daphne's long white marble table has a key in Aegean blue along its apron.
-- **The three kraters** are the room's own (`TILES_civic.md`): a cream serpent on a black band for Snivy, flames for Cyndaquil, and white ground with blue waves and water for Piplup. The selected one rocks as its Pokémon stirs.
+- **The three kraters** are painted for the Aethos starters:
+  - Nebrel: a laurel band in added white with gold berries on black glaze, for Daphne's laurel.
+  - Kynder: a gold running-dog scroll cresting in flame on black glaze, with embers glowing in its mouth, for the Cerberus pup.
+  - Hipling: the same scroll as blue waves on a white-ground krater full of water, for the hippocamp.
+
+  The selected one rocks as its Pokémon stirs.
 - **The cursor** is a red-figure hand pointing down into the krater.
 - **The chosen Pokémon** rises on a cup's tondo (`starter_circle.png`).
 - **The labels** show on the black band, where the engine's darkened window leaves their pale letters crisp.
@@ -65,10 +70,10 @@ The geography, the section grid, the story's route and the decisions behind them
 
   | Frames | Art |
   |---|---|
-  | 0, 16, 32 | Snivy's krater |
+  | 0, 16, 32 | Nebrel's krater: a laurel band in added white, gold berries |
   | 48 | the hand |
-  | 64, 80, 96 | Cyndaquil's krater |
-  | 112, 128, 144 | Piplup's krater |
+  | 64, 80, 96 | Kynder's krater: a gold running-dog scroll cresting in flame, embers in its mouth |
+  | 112, 128, 144 | Hipling's white-ground krater: the scroll as blue waves |
 
   `birch_bag.bin` is the table and `birch_grass.bin` the wall. The save-failed screen and the credits also load them, so they show the Akademia too.
 

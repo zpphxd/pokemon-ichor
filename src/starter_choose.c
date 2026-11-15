@@ -270,8 +270,8 @@ static const union AnimCmd *const sAnims_Pokeball[] =
 };
 
 // Ichor: each krater is painted for its starter, so each has its own frames.
-// Snivy's are Emerald's ball frames (0, 16, 32; the hand stays at 48), then
-// Cyndaquil's at 64 and Piplup's at 112 (pokeball_selection.png).
+// Nebrel's are Emerald's ball frames (0, 16, 32; the hand stays at 48), then
+// Kynder's at 64 and Hipling's at 112 (pokeball_selection.png).
 #define ICHOR_KRATER_ANIMS(name, base)                                 \
     static const union AnimCmd name##_Still[] =                         \
     {                                                                   \
@@ -293,14 +293,14 @@ static const union AnimCmd *const sAnims_Pokeball[] =
     };                                                                  \
     static const union AnimCmd *const name[] = {name##_Still, name##_Moving};
 
-ICHOR_KRATER_ANIMS(sAnims_KraterCyndaquil, 64)
-ICHOR_KRATER_ANIMS(sAnims_KraterPiplup, 112)
+ICHOR_KRATER_ANIMS(sAnims_KraterKynder, 64)
+ICHOR_KRATER_ANIMS(sAnims_KraterHipling, 112)
 
 static const union AnimCmd *const *const sAnims_Krater[STARTER_MON_COUNT] =
 {
     sAnims_Pokeball,
-    sAnims_KraterCyndaquil,
-    sAnims_KraterPiplup,
+    sAnims_KraterKynder,
+    sAnims_KraterHipling,
 };
 
 static const union AnimCmd *const sAnims_StarterCircle[] =

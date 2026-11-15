@@ -101,7 +101,7 @@
 #define FLAG_ICHOR_HIDE_SCRIBE 0x4F // Ichor: hide the traveling scribe in Elaia's square after beat 4
 
 // Scripts
-#define FLAG_UNUSED_0x050                        0x050 // Unused Flag
+#define FLAG_ICHOR_ITEM_KRONION_BURN_HEAL        0x050 // Ichor: item ball: Kronion Hill Burn Heal, on the olive terraces
 #define FLAG_SET_WALL_CLOCK                      0x51
 #define FLAG_RESCUED_BIRCH                       0x52
 #define FLAG_LEGENDARIES_IN_SOOTOPOLIS           0x53
@@ -109,7 +109,7 @@
 #define FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT      0x54 // Ichor: Akti: object flag that hides Kapra, the loose goat
 #define FLAG_ICHOR_GOT_SOOTHE_BELL           0x55 // Ichor: Akti: Aigon gave his goat's old bell (Soothe Bell)
 
-#define FLAG_UNUSED_0x056                    0x056 // Unused Flag
+#define FLAG_ICHOR_ITEM_KRONION_EVERSTONE    0x056 // Ichor: item ball: Kronion Hill Everstone, on the lookout shelf
 #define FLAG_UNUSED_0x057                    0x057 // Unused Flag
 #define FLAG_UNUSED_0x058                    0x058 // Unused Flag
 #define FLAG_UNUSED_0x059                    0x059 // Unused Flag
@@ -551,9 +551,9 @@
 
 // Hidden Items
 #define FLAG_HIDDEN_ITEMS_START                                                         0x1F4
-#define FLAG_UNUSED_0x1F4                                    0x1F4 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_KRONION_PRETTY_FEATHER             0x1F4 // Ichor: hidden item: Kronion Hill Pretty Feather, on the tip of the point
 #define FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET                  (FLAG_HIDDEN_ITEMS_START + 0x01)
-#define FLAG_UNUSED_0x1F6                                    0x1F6 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ELAIA_X_SPEED                      0x1F6 // Ichor: hidden item: Elaia X Speed, in the corner past the race start
 #define FLAG_UNUSED_0x1F7                                    0x1F7 // Unused Flag
 #define FLAG_UNUSED_0x1F8                                    0x1F8 // Unused Flag
 #define FLAG_UNUSED_0x1F9                                    0x1F9 // Unused Flag
@@ -1337,15 +1337,15 @@
 #define FLAG_UNUSED_0x4FF                                           0x4FF // Unused Flag
 
 // Trainer Flags
-// Trainer flags occupy 0x500 - 0x8FF (Ichor: MAX_TRAINERS_COUNT_EMERALD is 1024)
+// Trainer flags occupy 0x500 - 0xAFF (Ichor: MAX_TRAINERS_COUNT_EMERALD is 1536)
 // See constants/opponents.h. The values there + FLAG_TRAINER_FLAG_START are the flag IDs
 
 #define TRAINER_FLAGS_START                                         0x500
-#define TRAINER_FLAGS_END                                           (TRAINER_FLAGS_START + MAX_TRAINERS_COUNT - 1) // 0x8FF (Ichor: 1024 trainers)
+#define TRAINER_FLAGS_END                                           (TRAINER_FLAGS_START + MAX_TRAINERS_COUNT - 1) // 0xAFF (Ichor: 1536 trainers)
 
 // System Flags
 
-#define SYSTEM_FLAGS                                   (TRAINER_FLAGS_END + 1) // 0x900 (Ichor)
+#define SYSTEM_FLAGS                                   (TRAINER_FLAGS_END + 1) // 0xB00 (Ichor)
 
 #define FLAG_SYS_POKEMON_GET                         (SYSTEM_FLAGS + 0x0) // FLAG_0x860
 #define FLAG_SYS_POKEDEX_GET                         (SYSTEM_FLAGS + 0x1)
