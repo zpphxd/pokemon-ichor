@@ -28,6 +28,7 @@ gSpecialVar_0x8005 gSpecialVar_0x8006 gSpecialVar_0x8007 gSpecialVar_0x800A gSpe
 gStringVar1 gStringVar2 gStringVar3 gPlayerPartyCount gFieldEffectArguments gSaveBlock1Ptr
 gWeather CB2_FlyMap CB2_Bag Task_ShowStartMenu sFlyMap gSprites SpriteCB_FlyDestIcon sCarriedFlame sDig
 sBowedAt UpdateShadowFieldEffect gScanlineEffect gScanlineEffectRegBuffers sGlowForTest
+gTimeUpdateCounter gTimeOfDay
 gPlttBufferUnfaded gPlttBufferFaded"
 
 engine_prepare() {

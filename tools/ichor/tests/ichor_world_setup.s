@@ -123,6 +123,15 @@ WorldTest_Respawn:
 	releaseall
 	end
 
+@ --- Save the game (the Lua answers the prompts) -----------------------------------
+	test_header WorldTest_SaveHeader, WorldTest_Save
+WorldTest_Save:
+	lockall
+	setvar VAR_TEMP_F, 1
+	special SaveGame
+	releaseall
+	end
+
 @ RtcCalcLocalTimeOffset(gLocalTime.days, VAR_0x8004, VAR_0x8005, 0)
 	.thumb
 	.align 2

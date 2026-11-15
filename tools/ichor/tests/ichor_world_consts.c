@@ -2,6 +2,7 @@
 #include "engine_consts.h"
 #include "constants/event_object_movement.h"
 #include "constants/ichor.h"
+#include "constants/rtc.h"
 #include "constants/trainer_types.h"
 #include "sprite.h"
 #include "constants/map_groups.h"
@@ -24,3 +25,6 @@ K(SPRITE_SIZE, sizeof(struct Sprite))
 K(OFF_SPRITE_CALLBACK, offsetof(struct Sprite, callback))
 K(OFF_SPRITE_DATA0, offsetof(struct Sprite, data))
 K(MAX_SPRITES, MAX_SPRITES)
+K(ICHOR_OPTION_TINT_OFF, ICHOR_OPTION_TINT_OFF)
+K(OFF_ICHOR_OPTIONS_W, offsetof(struct IchorSave, options))
+K(TIME_NIGHT, TIME_NIGHT)

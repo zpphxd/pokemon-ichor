@@ -38,6 +38,13 @@ static void RetintNow(void)
     gTimeUpdateCounter = 0;  // OverworldBasic re-reads the time and re-tints next frame
 }
 
+// The options menu's DAY/NIGHT TINT OFF: the overworld draws in daytime colors
+// at every hour (overworld.c), unless a script holds a time of day.
+bool32 Ichor_IsTintOff(void)
+{
+    return (gIchorSave.options & ICHOR_OPTION_TINT_OFF) && gIchorSave.heldTimeOfDay == 0;
+}
+
 // special Ichor_HoldTimeOfDay: the tint holds at TIME_* VAR_0x8004 until released.
 void Ichor_HoldTimeOfDay(void)
 {

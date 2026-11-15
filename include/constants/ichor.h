@@ -72,6 +72,7 @@
 // --- Relics (SYSTEMS §1) ----------------------------------------------------
 // IchorSave.options bits
 #define ICHOR_OPTION_RELIC_AUTO  (1 << 0)  // "Relic prompts": clear = ASK (the default), set = AUTO
+#define ICHOR_OPTION_TINT_OFF    (1 << 1)  // "Day/night tint": clear = ON (the default), set = OFF: daytime colors all day
 
 // gFieldEffectArguments[0] for a field effect a relic performs: the player
 // raises the relic and its icon shows, instead of a Pokémon's cut-in. The low

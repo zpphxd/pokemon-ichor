@@ -1776,6 +1776,14 @@ void UpdateTimeOfDay(bool32 updateBlend)
         }
         gTimeOfDay = TIME_DAY;
     }
+    // Ichor: DAY/NIGHT TINT OFF (the options menu) draws daytime colors at every
+    // hour. Only the colors change: gTimeOfDay keeps the clock for encounters,
+    // music and events, and a script's held tint still shows.
+    if (updateBlend && Ichor_IsTintOff())
+    {
+        gTimeBlend.weight = gTimeBlend.altWeight = DEFAULT_WEIGHT;
+        gTimeBlend.startBlend = gTimeBlend.endBlend = gTimeOfDayBlend[TIME_DAY];
+    }
 }
 
 #undef MORNING_HOUR_MIDDLE

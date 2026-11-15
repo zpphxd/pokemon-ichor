@@ -131,4 +131,51 @@ L.start(function()
   -- The party's highest level (the setup's Piplup is level 20)
   L.runHeader("WorldTest_LevelHeader")
   expect(L.getVar(S.VAR_0x8009) == 20, string.format("Ichor_GetHighestPartyLevel reads the party (%d)", L.getVar(S.VAR_0x8009)))
+
+  -- DAY/NIGHT TINT: noon's colors and 22:00's differ on Route 1; OFF in the
+  -- options menu draws noon's at night while the clock still says night; it
+  -- survives a save and CONTINUE; ON brings the night back.
+  local SLOT, COLOR = 2, 5
+  local function faded() return emu:read16(S.gPlttBufferFaded + (SLOT * 16 + COLOR) * 2) end
+  local function retint() emu:write16(S.gTimeUpdateCounter, 0); wait(40) end
+  local function tintOff() return emu:read8(L.ichor() + S.OFF_ICHOR_OPTIONS_W) & S.ICHOR_OPTION_TINT_OFF ~= 0 end
+  local function startMenuTo(action)
+    tap(K.START); wait(30)
+    local n, index = emu:read8(S.sNumStartMenuActions)
+    for i = 0, n - 1 do if emu:read8(S.sCurrentStartMenuActions + i) == action then index = i end end
+    if not index then L.fail("no start menu action " .. action) end
+    for _ = 1, (index - emu:read8(S.sStartMenuCursorPos)) % n do tap(K.DOWN); wait(4) end
+    tap(K.A)
+  end
+  local function toggleTint(name)
+    startMenuTo(6)                                  -- OPTION
+    L.waitUntil(function() return L.taskRunning("Task_OptionMenuProcessInput") end, 600, "the option menu")
+    wait(30)
+    for _ = 1, 7 do tap(K.DOWN); wait(4) end        -- DAY/NIGHT TINT
+    shot(name .. "_before")
+    tap(K.RIGHT); wait(10)
+    shot(name)
+    tap(K.B)
+    L.waitUntil(function() return not L.taskRunning("Task_OptionMenuProcessInput") end, 600, "the option menu to close")
+    wait(90); tap(K.B)                              -- back on the start menu: close it
+    L.waitUntil(L.idle, 1200, "the field")
+    retint()
+  end
+  clock(12, 0); retint()
+  local noon = faded()
+  clock(22, 0); retint()
+  local night = faded()
+  expect(noon ~= night and not tintOff(), string.format("with the tint ON, 22:00 is tinted (%04X) apart from noon (%04X)", night, noon))
+  toggleTint("options_tint_off")
+  expect(tintOff() and faded() == noon and emu:read8(S.gTimeOfDay) == S.TIME_NIGHT,
+         string.format("OFF draws noon's colors at 22:00 (%04X), and the clock still says night (%d)", faded(), emu:read8(S.gTimeOfDay)))
+  shot("night_tint_off")
+  L.runHeader("WorldTest_SaveHeader", { answers = { "yes", "yes" } })
+  emu:reset()
+  L.continueSave()
+  retint()
+  expect(tintOff() and faded() == noon, string.format("OFF survives a save and CONTINUE (%04X)", faded()))
+  toggleTint("options_tint_on")
+  expect(not tintOff() and faded() == night, string.format("ON brings the night's colors back (%04X)", faded()))
+  shot("night_tint_on")
 end)

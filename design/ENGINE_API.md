@@ -561,6 +561,22 @@ Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested b
 
 `specialvar(VAR_RESULT, Ichor_GetHighestPartyLevel)` gives the level of the strongest Pokémon in the party, not counting Eggs. "Level thirty strong?" is `if (var(VAR_RESULT) >= 30)`.
 
+### The DAY/NIGHT TINT option
+
+**The setting.** The options menu has a DAY/NIGHT TINT row, ON or OFF. It's saved in `IchorSave.options` (`ICHOR_OPTION_TINT_OFF`, clear by default), so a new game is ON.
+
+**ON** is the expansion's day-and-night tint (`OW_ENABLE_DNS`), as before.
+
+**OFF** draws the overworld in daytime colors at every hour. Only the colors change:
+- `gTimeOfDay` and `GetTimeOfDay()` still follow the clock. So do the time-of-day encounter tables, night music, night-only events, Hecate's night test, the xenia rest and the omens.
+- Night lamps don't glow.
+
+**Not affected by the setting:**
+- A script's held tint (`Ichor_HoldTimeOfDay`, such as Delphoi's night) shows whatever the setting.
+- The Frozen Hour's gray and its color return are their own system.
+
+**For C code:** `Ichor_IsTintOff()` is TRUE when OFF is chosen and no tint is held.
+
 ### The xenia rest (SYSTEMS §10)
 
 A host's bed moves the clock forward to dawn (06:00), noon (12:00), dusk (19:00) or night (20:30), never back and never past midnight. The menu offers only the hours still ahead today, then NOT NOW:
