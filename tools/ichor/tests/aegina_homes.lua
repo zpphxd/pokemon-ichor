@@ -246,8 +246,11 @@ local function boot()
 end
 
 local function inn()
+  -- FLAG_ICHOR_CROSSING_DONE keeps beat 10C from playing when the night ends on
+  -- deck (trireme.sh plays it); nothing in the inn reads it
   local setup = { S.SCR_OP_SETFLAG, { S.FLAG_SYS_POKEMON_GET, 2 },
-                  S.SCR_OP_SETFLAG, { S.FLAG_ARRIVED_AEGINA, 2 } }
+                  S.SCR_OP_SETFLAG, { S.FLAG_ARRIVED_AEGINA, 2 },
+                  S.SCR_OP_SETFLAG, { S.FLAG_CROSSING_DONE, 2 } }
   giveMon(setup, S.SPECIES_KARKIPOOL, 14)
   warpInto(setup, S.MAP_INN)
   local x, y = pos()
@@ -288,9 +291,7 @@ local function inn()
   wait(30)
   shot("inn_08_deck.png")
   expect(getFlag(S.FLAG_AEGINA_NIGHT), "the night sets FLAG_ICHOR_AEGINA_NIGHT")
-  -- the inn clears the night; on deck, beat 10C forces a morning (hour 10)
-  local h = hoursOverride()
-  expect(h == 0 or h == 10, string.format("the forced night tint is cleared (hour override %d)", h))
+  expect(hoursOverride() == 0, "the forced night tint is cleared")
   local hp, maxHp = partyHp(0)
   expect(hp == maxHp, string.format("the night heals the party (%d/%d)", hp, maxHp))
 
