@@ -48,7 +48,7 @@
       "x": 18,
       "y": 15,
       "respawn_map": "MAP_KIRRHA_INN",
-      "respawn_npc": "LOCALID_KIRRHA_INN_STROPHIOS",
+      "respawn_npc": "LOCALID_KIRRHA_INN_RESPAWN",
       "respawn_x": 6,
       "respawn_y": 4
     }

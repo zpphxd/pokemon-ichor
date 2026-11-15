@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/west_homes/porytiles_bin/metatile_attributes.bin": "53c5e4b5ea4490faccf823d8a352f324",
-  "data/tilesets/secondary/west_homes/porytiles_bin/metatiles.bin": "715c71ef6f6044ae676f1a3b4d0ab330",
+  "data/tilesets/secondary/west_homes/porytiles_bin/metatile_attributes.bin": "e9bfc1946e4b6aa9c040632d61492b50",
+  "data/tilesets/secondary/west_homes/porytiles_bin/metatiles.bin": "df2237124fc6b34914b0e619c4cff277",
   "data/tilesets/secondary/west_homes/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/west_homes/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/west_homes/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/west_homes/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/west_homes/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/west_homes/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/west_homes/porytiles_bin/tiles.png": "fda7dd2d0825f8f400a8bf791dd95dcc",
-  "data/tilesets/secondary/west_homes/porytiles_src/attributes.csv": "24f9040c462f9f2955b545091da44652",
-  "data/tilesets/secondary/west_homes/porytiles_src/bottom.png": "63cdd91f187c7278256ac8966cc633da",
-  "data/tilesets/secondary/west_homes/porytiles_src/middle.png": "bba0aafde5d5efe128d882412fe62603",
-  "data/tilesets/secondary/west_homes/porytiles_src/top.png": "98d37157a4c68daea4d57a0ba0bb6ad5"
+  "data/tilesets/secondary/west_homes/porytiles_bin/tiles.png": "25b315367297312ab74ccb1ad465c5a0",
+  "data/tilesets/secondary/west_homes/porytiles_src/attributes.csv": "89fa505c6ac4e743f0f9f41390f0414a",
+  "data/tilesets/secondary/west_homes/porytiles_src/bottom.png": "38390ac1f8e29d59ebe9132835fff394",
+  "data/tilesets/secondary/west_homes/porytiles_src/middle.png": "78704fc003c400183d81c2c49cde48c0",
+  "data/tilesets/secondary/west_homes/porytiles_src/top.png": "2081cf49789a1fc19fe269b954a4d171"
 }

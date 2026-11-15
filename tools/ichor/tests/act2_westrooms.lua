@@ -28,7 +28,7 @@ local function warpTo(map, x, y, extra)
                        S.SCR_OP_WAITSTATE, S.SCR_OP_END }) do s[#s + 1] = b end
   L.runRamScript(s)
   L.waitUntil(function() return L.mapId() == map and L.idle() end, 3000, "arrival on map " .. map)
-  wait(30)
+  wait(60)                                      -- past the fade-in, for the tour shots
 end
 
 local function setFlagOp(flag) return { S.SCR_OP_SETFLAG, { flag, 2 } } end
@@ -64,6 +64,19 @@ local function hurt()
   for slot = 0, 1 do emu:write16(L.partyMon(slot) + S.OFF_MON_HP, 1) end
 end
 local function healed() return L.partyHp(0) > 1 and L.partyHp(1) > 1 end
+
+-- Talk to a healer and photograph the heal: the first line, the party's balls set
+-- down on the fire, and the healer's last line.
+local function healTalk(target, name)
+  L.talk(target, { noSettle = true })
+  L.waitUntil(L.boxUp, 300, "the healer's first line")
+  wait(90); shot(name .. "_1")                 -- the whole line printed
+  tap(K.A)
+  wait(50); shot(name .. "_balls")
+  wait(50); shot(name .. "_balls_2")
+  wait(60); shot(name .. "_balls_3")
+  L.settle({ shots = { [1] = name .. "_2" } })
+end
 
 -- Walk to the far tile and screenshot: the room's second view.
 local function far(name, x, y) L.go(x, y); shot(name .. "_far") end
@@ -110,7 +123,7 @@ local function main()
          "a Halcyling and a Lophops in the party")
   shot("hall")
   hurt()
-  L.talk(L.npc(HALL .. "Keeper"), { shots = { [1] = "hall_keeper_cold", [2] = "hall_keeper_warm" } })
+  healTalk(L.npc(HALL .. "Keeper"), "hall_keeper")
   expect(healed(), "the hall-keeper heals the party at the fire")
   local hm = L.lastHeal()
   expect(hm == S.MAP_LEBADEIA, "entering the hall sets the respawn to Lebadeia")
@@ -167,9 +180,11 @@ local function main()
   L.setBeat("37_inn", false)
   warpTo(S.MAP_INN, 6, 10)
   shot("inn")
+  -- (people only spawn near the camera: check Xenodike from beside her place)
+  L.go(11, 4)
   expect(not L.npc(INN .. "Xenodike").present, "Xenodike isn't at the inn while she's at the lookout")
   hurt()
-  L.talk(L.npc(INN .. "Strophios"), { shots = { [1] = "inn_strophios" } })
+  healTalk(L.npc(INN .. "Strophios"), "inn_strophios")
   expect(healed(), "Strophios heals the party")
   expect(L.lastHeal() == S.MAP_KIRRHA, "entering the inn sets the respawn to Kirrha")
   L.talk(L.npc(INN .. "Pylades"), { shots = { [5] = "inn_pylades_fig" } })
@@ -180,7 +195,7 @@ local function main()
   expect(L.itemCount(S.ITEM_RELIC_COPPER_W) == coins + 1, "a pilgrim's coin down the well")
   far("inn", 12, 8)
   local sashes = L.itemCount(S.ITEM_FOCUS_SASH)
-  warpTo(S.MAP_INN, 6, 10, setFlagOp(S.FLAG_XENODIKE))
+  warpTo(S.MAP_INN, 11, 4, setFlagOp(S.FLAG_XENODIKE))
   expect(L.npc(INN .. "Xenodike").present, "Xenodike is at the inn once she came down")
   shot("inn_xenodike")
   L.talk(L.npc(INN .. "Pylades"), { shots = { [2] = "inn_xenodike_yes" } })
@@ -209,7 +224,7 @@ local function main()
 
   -- ---- Kirrha: the muleteer's house ---------------------------------------------------
   L.setBeat("37_muleteer", false)
-  warpTo(S.MAP_MULETEER, 7, 8)
+  warpTo(S.MAP_MULETEER, 8, 6)
   shot("muleteer")
   expect(L.npc(MUL .. "Melisseer").present, "the Melisseer hums by the window before the trade")
   L.talk(L.npc(MUL .. "Melisseer"))

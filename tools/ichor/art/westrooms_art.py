@@ -429,19 +429,33 @@ def floor_planks():
 
 
 def floor_cave(seed=0):
-    """The goatherd's cave half: the hill's own rock, worn level, with
-    beaten earth in the hollows."""
+    """The goatherd's cave half: the hill's own rock, worn into low uneven
+    plates, with beaten earth packed into the cracks between them. A periodic
+    Voronoi so it tiles."""
+    seeds = [(4, 3), (12, 6), (6, 12), (14, 14)] if not seed else [(2, 6), (10, 2), (9, 10), (15, 12)]
+
+    def owner(x, y):
+        best, bi = None, 0
+        for i, (sx, sy) in enumerate(seeds):
+            dx = min(abs(x - sx), 16 - abs(x - sx))
+            dy = min(abs(y - sy), 16 - abs(y - sy))
+            d = dx * dx + dy * dy * 1.4
+            if best is None or d < best:
+                best, bi = d, i
+        return bi
+    own = [[owner(x, y) for x in range(16)] for y in range(16)]
     g = [["3"] * 16 for _ in range(16)]
     for y in range(16):
         for x in range(16):
-            n = noise(x // 4, y // 4, 60 + seed)
-            n2 = noise(x, y, 61 + seed)
-            if n < 0.35:
-                g[y][x] = "E" if n2 < 0.85 else "e"
+            o = own[y][x]
+            if own[y][(x + 1) % 16] != o or own[(y + 1) % 16][x] != o:
+                g[y][x] = "E" if noise(x, y, 62 + seed) < 0.7 else "e"
+            elif own[(y - 1) % 16][x] != o or own[y][(x - 1) % 16] != o:
+                g[y][x] = "4"
             else:
-                g[y][x] = "3" if n2 < 0.8 else "4"
-            if n2 > 0.97:
-                g[y][x] = "2"
+                g[y][x] = "3" if o % 2 else ("3" if noise(x, y, 63 + seed) < 0.6 else "4")
+                if noise(x, y, 64 + seed) < 0.04:
+                    g[y][x] = "2"
     return rows_to_grid("stone", g)
 
 

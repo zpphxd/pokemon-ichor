@@ -2,8 +2,15 @@
 // Room: tools/ichor/maps/westrooms.py. A square inn round a courtyard well. Strophios
 // (6,2) stands behind the long table, between the hearth and a stack of bedding, and is
 // talked to across it from (6,4). The heal is the Asclepeion's: the balls warm on the
-// hearth at his x-2..x-1, and he bows. This is Kirrha's heal location,
+// hearth at his x-2..x-1, and he nods. This is Kirrha's heal location,
 // HEAL_LOCATION_KIRRHA; a whiteout wakes the player at (6,4).
+//
+// The whiteout's heal script (EventScript_AfterWhiteOutHeal) bows the respawn NPC with
+// nurse_joy_bow, and only a walker with sAnimTable_Nurse has that frame: on any other it
+// hangs. Strophios's sprite has none, so the heal location's respawn NPC is
+// LOCALID_KIRRHA_INN_RESPAWN, an object that never appears (hidden by
+// FLAG_SYS_POKEMON_GET); a missing object makes the bow a no-op. When his sprite gets a
+// bow frame, point respawn_npc at LOCALID_KIRRHA_INN_STROPHIOS and drop the stand-in.
 //
 // Pylades (11,2) gives the fig on a string for Xenodike at Route 9's lookout. The fig is
 // a key item that doesn't exist (ICHOR_STUB_KEY_ITEMS: ITEM_PYLADES_FIG); the shared
@@ -37,7 +44,8 @@ script Kirrha_Inn_EventScript_Strophios {
     setspeaker(Kirrha_Inn_Name_Strophios)
     message(format("My ancestor was king of this harbor. Now I'm king of the beds."))
     waitmessage
-    applymovement(LOCALID_KIRRHA_INN_STROPHIOS, Movement_PkmnCenterNurse_Bow)
+    // A nod, not the healer's bow: Strophios's walker has no bow frame (ANIM_NURSE_BOW).
+    applymovement(LOCALID_KIRRHA_INN_STROPHIOS, Common_Movement_WalkInPlaceFasterDown)
     waitmovement(0)
     waitbuttonpress
     release

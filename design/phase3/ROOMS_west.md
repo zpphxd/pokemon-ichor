@@ -21,13 +21,108 @@ Act II batch 2's nine rooms (beats 35–37): Lebadeia's pilgrims' hall, Herkyna'
 tools/ichor/tests/act2_westrooms.sh                                  # after make
 ```
 
-The driver writes each room's `map.bin` and `border.bin`, its `layouts.json` entry, and its `map.json` events and music from the spots listed with the room, so the coordinates live in one place. `scripts.pory` is written by hand. The run checks that every warp, person and readable thing is reachable from the door and read from the tile in front of it, that each healer can be talked to only across the counter in front of them (so the heal's balls land where they're drawn for), that every 8x8 tile takes its colors from one palette, and that each room renders from the compiled tiles over `gTileset_Oikos` exactly as composed.
+The driver writes each room's `map.bin` and `border.bin`, its `layouts.json` entry, and its `map.json` events and music from the spots listed with the room, so the coordinates live in one place. `scripts.pory` is written by hand. The run checks that every warp, person and readable thing is reachable from the door and read from the tile in front of it, that each healer can be talked to only across the counter in front of them (so the heal's balls land where they're drawn for), that every 8x8 tile takes its colors from one palette, and that each room renders from the compiled tiles over `gTileset_Oikos` exactly as composed. It also writes the one-sheet overview, `design/phase3/img/west_interiors_overview.png`.
+
+![The nine rooms](img/west_interiors_overview.png)
+
+## Three secondaries, grouped by what the rooms share
+
+Nine rooms of new art come to about 1,200 tiles, and a secondary holds 504 (door animations own 504-511). Grouping by town put Lebadeia's three rooms at 483 with no room to grow, so the rooms are grouped by the art they share instead, as batch 1's were:
+
+| Secondary | Directory | Rooms | Why together |
+|---|---|---|---|
+| `gTileset_WestStone` | `west_stone` | Lebadeia's pilgrims' hall, the mason's house | the living rock, the rough-laid rubble, cut stone and its dust, votive tablets |
+| `gTileset_WestHarbor` | `west_harbor` | Kirrha's inn, Agora stall, the muleteer's and Thyia's | harbor whitewash with the rope moulding, sailcloth, boats and rope, straw and hay, brooms |
+| `gTileset_WestHomes` | `west_homes` | Herkyna's river house, Tisamenos's and Helike's houses | the three households by the water: river pebbles and reeds, the ship frieze, the hillside |
+
+All three are on the `oikos` primary, use only their own tiles and palettes 6-12, and are compiled by the same script against an empty stand-in primary. The near-duplicate merge (tiles within 2 px of another are redrawn as it) skips two walls whose small differences are the point: the frieze's ship numbers (merged, 402 became 406) and the mason's loose stone.
+
+## Palettes
+
+Seven, shared by all three sets, all multiples of 8 and none an aethos color. Four are oikia's, so its floors and a few of its pieces (the kline, stools, tables, amphorae, pithos, hearth and soot, window, chest, lampstand, herbs, the doormat) are reused exactly as drawn.
+
+| Palette | Colors for |
+|---|---|
+| wall | oikia's plaster, beams, red-ochre dado, shutter blue and sky; Kirrha's sea-blue dado and rope moulding, Lebadeia's river-wave band |
+| floor | oikia's terracotta, boards and limestone; packed earth, the mason's stone dust and Tisamenos's ship's planking are drawn from it |
+| wood | furniture, linen and sailcloth, red and blue cloth, bronze fittings; votive tablets, bundles, the painted sign |
+| clay | pottery, the hearth's stone and fire, soot, white slip; the fire pit and kerb, the black-figure ship frieze, clay votives |
+| nature | leaves, wicker, straw and hay, rope and wool, and three mule greys (in place of oikia's fish silvers) |
+| bronze | oikia's bronze, flame, water and marble: the mill-race and the well, the goat bells, the ship's lantern |
+| stone | rough stone and living rock, timber and tar, lichen, lamp glow: the rock walls, rubble, the shed's tarred planks, the goat pen |
+
+## The looks
+
+- **Lebadeia:** whitewash over a band of Herkyna's river in blue running waves, on a footing of grey Parnassian limestone. The pilgrims' hall is cut into the hill: its back wall is bare rock, every inch of it hung with wooden tablets. The mason's back wall is his own rough-laid rubble.
+- **Kirrha:** harbor whitewash under a tarred, rope-lashed beam, a twisted rope moulding over a sea-blue dado. The stall is a fishing shed of tarred planks; the muleteer's stable end is the underside of his hay loft.
+- **Aigion:** Tisamenos's walls are one long black-figure frieze of numbered ships, like a pot. Helike's house is half rough whitewash with an ochre band, half the living hillside, mossy in its cracks.
+
+## Healing and the respawn
+
+The pilgrims' hall and the inn heal the way the Asclepeion does: `EventScript_PkmnCenterNurse_TakeAndHealPkmn`, talked to across a counter, so the party's balls (placed at a fixed offset from the player) land on the fire: the hall's fire pit, and the inn's hearth. Each room sets its town's respawn on entry. `HEAL_LOCATION_LEBADEIA` respawns at (7,7) in front of the hall-keeper, `HEAL_LOCATION_KIRRHA` at (6,4) in front of Strophios. Their outdoor tiles in `src/data/heal_locations.json` are placeholders, (16,14) and (18,15), for the integrator to set below each door.
+
+**The bow.** The heal scripts bow the healer with `nurse_joy_bow`, which plays a tenth walker frame only the healer walkers have (`sAnimTable_Nurse`); on any other walker it never ends and the game hangs (found by the in-game test). So the hall-keeper is `OBJ_EVENT_GFX_ICHOR_HEALER`, and bows. Strophios has his own sprite without that frame: his talk script nods instead, and the whiteout's heal (which bows whoever the respawn NPC is) points at `LOCALID_KIRRHA_INN_RESPAWN`, a stand-in object that never appears, so the bow is skipped. When the sprites agent gives Strophios a bow frame, point `respawn_npc` at `LOCALID_KIRRHA_INN_STROPHIOS` and drop the stand-in.
+
+## Render-and-critique passes
+
+Every room had at least three: source previews of the whole room (pass 1), the fixes re-rendered (pass 2), and the compiled rooms in the game with their people, from `tools/ichor/tests/act2_westrooms.sh` (pass 3).
+
+### Pass 1: the rooms from source
+
+| Room | What was wrong |
+|---|---|
+| Pilgrims' hall | the votive tablets a noisy scatter of orange chips, not rows; the sleeping benches read as cabinets; the smoke invisible; the rock-cut floor read as grey planks; both sides empty |
+| Herkyna's | the pebble floor dark and busy; the reed mats a saturated checkerboard |
+| Mason's | the rubble wall a regular block wall, the loose stone an obvious pale square; the chisels read as a barred window; the snake relief read as a "2"; the floor empty |
+| Inn | the bundles on their shelf read as books; the blue dado busy with sparkles; the courtyard empty round the well |
+| Agora stall | the upturned boat read as a fish; votives hung over the floor read as clutter lying on it |
+| Muleteer's | the mule a grey blob; the hay loft a woven grid; the straw floor loud; a harness lying on the floor |
+| Thyia's | sparse in the middle |
+| Tisamenos's | the ships read as striped awnings: pale sails, no hulls |
+| Helike's | the cave floor a gravel noise; the goat pen read as a crate of gold |
+
+### Pass 2: fixes, re-rendered
+
+| Room | Change |
+|---|---|
+| Pilgrims' hall | tablets in three tidy rows on pegs and strings, some darkened with age, the newest pale; benches redrawn as beds (pillow, tick, folded blanket); a wavering smoke column; the floor one broad slab per cell; bed rolls on the floor, bundles; the hall narrowed from 16 to 14 |
+| Herkyna's | larger, calmer pebbles; reeds plaited in a herringbone, bound every half-cell; a toy goose and a basket of river stones by the pen |
+| Mason's | rough-laid rubble of every size with pinning stones; the loose stone a stone like the rest with a darker gap round it; chisels hung point-down from a peg rail; the snake rising from its coil, its eye cut; a roughed-out herm and a spoiled drum; the room cut to 12x8 |
+| Inn | squat knotted bundles and corded blanket rolls with name tags; one line of wave in a plain dado; a pilgrim waiting by the well |
+| Agora stall | a full hull, keel up, red stripe at the gunwale, the eye on the bow; the votives on strings down the wall (wreaths in one 8-px column, clay in the other, so no tile mixes palettes), and a trestle table of clay feet and omphaloi |
+| Muleteer's | the mule redrawn lying on its side, head down, long ears up; heaped hay; calmer straw; the harness back on the wall |
+| Thyia's | a chest and a wool basket |
+| Tisamenos's | bold black hulls with eyes and red strakes, dark sails, oars down into a black sea with red wave lines |
+| Helike's | the cave floor worn plates with earth in the cracks; trodden brown straw; the cradle drawn into the pen in the stone palette (overlaid, it mixed palettes in its tiles) |
+
+### Pass 3: in the game
+
+Read from `build/test_westrooms/shots/` (a quickstart save, a Halcyling and a Lophops, every room toured with its people, every service played).
+
+<!-- westrooms: pass 3 -->
+
+## Stubs and deviations
+
+| Tag | Where | What waits |
+|---|---|---|
+| `ICHOR_STUB_KEY_ITEMS` | Pylades's fig | `ITEM_PYLADES_FIG`; `FLAG_ICHOR_PYLADES_FIG` carries it, with a received message |
+| `ICHOR_STUB_RITES` | Thyia's laurel | Act II's laurel indices: `FLAG_ICHOR_THYIA_LAUREL_TODAY` (bank 0x1B5) stands in for her daily flag, so until the swap she gives one sprig in all |
+| `ICHOR_STUB_AETHOS_DEX` | Halcyling (Goose), Melisseer, Lophops, Kerazap, Galenyon | the dex |
+
+Deviations, closest reading taken:
+- **Thyia's name box reads THYIA.** SCRIPT.md tagged her lines PHEMONIS, a draft name; the director confirms THYIA.
+- **Aigion's Soothe Bell** sets `FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION`, not SCRIPT.md's `FLAG_ICHOR_GOT_SOOTHE_BELL` (Act I's, Aigon's bell in Akti). Herkyna's Mystic Water likewise sets `FLAG_ICHOR_GOT_MYSTIC_WATER_HERKYNA`, not Act I's `FLAG_ICHOR_GOT_MYSTIC_WATER`.
+- **KASSOTIS's level** is the offered Lophops's, as every in-game trade's is (SCRIPT.md says Lv 30). She is female (personality 0x2510) and holds a Mental Herb. The muleteer has no name in SCRIPT.md; her OT is OUREUS, Homer's word for a mule, the harbor's name for him.
+- **Xenodike at the inn** is hidden by `FLAG_TEMP_1` (set on entry until `FLAG_ICHOR_XENODIKE_CAME_DOWN`), not Part 8's `FLAG_ICHOR_HIDE_XENODIKE_INN`, to save a bank flag; Goose in Herkyna's pen likewise.
+- **Lines of my own,** short and in the rooms' voices, where SCRIPT.md gives none: the second pilgrim in the hall (a weaver), the inn's pilgrim by the well, Pylades's reminder and after-lines, Xenodike's two lines at the inn, Herkyna's after-line, Agamedes's line on the loose stone once found, the muleteer's refusals, the Melisseer's and Kerazap's cries, Helike's after-line, and every sign. The pilgrims' hall's three pilgrims of beat 35B sit outside on the steps (the parnassos agent's).
+- **Two hidden items** the rooms' stories suggest (vanilla flags 0x334-0x335, the director's range): a pilgrim's coin down the inn's well (Relic Copper, the game's Bronze Obol), asked of the well instead of the god; and Stardust in the mason's drift of stone dust.
+- **The hall-keeper wears the healer's walker,** for the bow (above).
 
 <!-- westrooms: begin generated -->
 
 - `gTileset_WestStone` (`data/tilesets/secondary/west_stone`): **120** metatiles of 512, **361** tiles of 504, palettes 6-12. Sheet: `design/phase3/img/west_stone_sheet.png`.
 - `gTileset_WestHarbor` (`data/tilesets/secondary/west_harbor`): **176** metatiles of 512, **457** tiles of 504, palettes 6-12. Sheet: `design/phase3/img/west_harbor_sheet.png`.
-- `gTileset_WestHomes` (`data/tilesets/secondary/west_homes`): **152** metatiles of 512, **399** tiles of 504, palettes 6-12. Sheet: `design/phase3/img/west_homes_sheet.png`.
+- `gTileset_WestHomes` (`data/tilesets/secondary/west_homes`): **160** metatiles of 512, **421** tiles of 504, palettes 6-12. Sheet: `design/phase3/img/west_homes_sheet.png`.
 
 ### The pilgrims' hall, Lebadeia
 
@@ -56,7 +151,7 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
 | # | Kind | Tile | Detail | What |
 |---|---|---|---|---|
 | 1 | warp | (6,8), (7,8) | to `MAP_LEBADEIA` warp 0 | the exit |
-| 2 | npc | (7,5) | faces south, `OBJ_EVENT_GFX_ICHOR_WOMAN` | the hall-keeper, at the fire (heals) |
+| 2 | npc | (7,5) | faces south, `OBJ_EVENT_GFX_ICHOR_HEALER` | the hall-keeper, at the fire (heals) |
 | 3 | npc | (0,3) | faces east, `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET` | a pilgrim on a bench, under a blanket |
 | 4 | npc | (3,5) | faces east, `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_2` | a pilgrim drying out by the fire |
 | 5 | bg | (2,1) | read from (2,2) facing north | the votive wall |
@@ -158,12 +253,12 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
 ```
     012345678901234
   0 ###############
-  1 #########78####
-  2 ...###2#...34..
-  3 ##...6####...##
-  4 #b........#..##
-  5 ##....#c.....##
-  6 ##....9a.5...##
+  1 #########89####
+  2 ...###2#...45..
+  3 ##...7####...##
+  4 #c........#..##
+  5 ##....#d.....##
+  6 ##....ab.6...##
   7 ##...........##
   8 ##...........##
   9 #.............#
@@ -175,16 +270,17 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
 |---|---|---|---|---|
 | 1 | warp | (6,11), (7,11) | to `MAP_KIRRHA` warp 0 | the exit |
 | 2 | npc | (6,2) | faces south, `OBJ_EVENT_GFX_ICHOR_STROPHIOS` | Strophios, behind the long table (heals) |
-| 3 | npc | (11,2) | faces south, `OBJ_EVENT_GFX_ICHOR_PYLADES` | Pylades, by the bundles |
-| 4 | npc | (12,2) | faces west, `OBJ_EVENT_GFX_ICHOR_XENODIKE` | Xenodike, beside Pylades (after FLAG_ICHOR_XENODIKE_CAME_DOWN) |
-| 5 | npc | (9,6) | faces west, `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_3` | a pilgrim sitting by the well, waiting |
-| 6 | bg | (5,3) | read from (5,4) facing north | the painted sign, over the hearth (read across the table) |
-| 7 | bg | (9,1) | read from (9,2) facing north | the bundles with their name tags |
-| 8 | bg | (10,1) | read from (10,2) facing north | the bundles with their name tags |
-| 9 | bg | (6,6) | read from (6,7) facing north | the well |
-| a | bg | (7,6) | read from (7,7) facing north | the well |
-| b | bg | (1,4) | read from (2,4) facing west | an alcove |
-| c | hidden | (7,5) | `ITEM_RELIC_COPPER`, `FLAG_ICHOR_HIDDEN_KIRRHA_INN_RELIC_COPPER` | a pilgrim's coin down the well, asked of the well instead of the god |
+| 3 | npc | (6,2) | faces south, `OBJ_EVENT_GFX_ICHOR_STROPHIOS` | the whiteout heal's respawn NPC: never shown (Strophios's sprite has no bow frame) |
+| 4 | npc | (11,2) | faces south, `OBJ_EVENT_GFX_ICHOR_PYLADES` | Pylades, by the bundles |
+| 5 | npc | (12,2) | faces west, `OBJ_EVENT_GFX_ICHOR_XENODIKE` | Xenodike, beside Pylades (after FLAG_ICHOR_XENODIKE_CAME_DOWN) |
+| 6 | npc | (9,6) | faces west, `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_3` | a pilgrim sitting by the well, waiting |
+| 7 | bg | (5,3) | read from (5,4) facing north | the painted sign, over the hearth (read across the table) |
+| 8 | bg | (9,1) | read from (9,2) facing north | the bundles with their name tags |
+| 9 | bg | (10,1) | read from (10,2) facing north | the bundles with their name tags |
+| a | bg | (6,6) | read from (6,7) facing north | the well |
+| b | bg | (7,6) | read from (7,7) facing north | the well |
+| c | bg | (1,4) | read from (2,4) facing west | an alcove |
+| d | hidden | (7,5) | `ITEM_RELIC_COPPER`, `FLAG_ICHOR_HIDDEN_KIRRHA_INN_RELIC_COPPER` | a pilgrim's coin down the well, asked of the well instead of the god |
 
 ### The Agora stall, Kirrha
 
@@ -303,7 +399,7 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
   2 ###...2....#6.
   3 ###..7........
   4 ........5#...#
-  5 ...#....##..##
+  5 .#.#..#.##..##
   6 ...11.........
 ```
 

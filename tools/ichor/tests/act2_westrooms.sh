@@ -43,7 +43,7 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
   echo "}"
   echo "for k, v in pairs(X) do S[k] = v end"
   arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(Lebadeia|Kirrha|Aigion)_[A-Za-z]+_EventScript_[A-Za-z0-9_]+$/ { print "S.SCRIPTS." $3 " = 0x" $1 }'
-  arm-none-eabi-nm "$ELF" | awk '$3 == "SetCB2WhiteOut" || $3 == "ScrCmd_createmon" { print "S." $3 " = S." $3 " or 0x" $1 }'
+  arm-none-eabi-nm "$ELF" | awk '$3 == "SetCB2WhiteOut" || $3 == "ScrCmd_createmon" || $3 == "CB2_PokeStorage" { print "S." $3 " = S." $3 " or 0x" $1 }'
   echo "return S"
 } > "${OUT}symbols.lua"
 
