@@ -58,4 +58,7 @@ void InitTilesetAnim_PorytilesManaged_Neraida(void);
 // [Porytiles] Auto-generated declaration. Do not remove.
 void InitTilesetAnim_PorytilesManaged_Melos(void);
 
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Lakonia(void);
+
 #endif // GUARD_TILESET_ANIMS_H

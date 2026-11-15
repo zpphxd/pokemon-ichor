@@ -1204,4 +1204,9 @@
 #define METATILE_TempleAphrodite_Mirror_Dim               0x22F
 // end gTileset_TempleAphrodite
 
+// gTileset_Lakonia (Ichor: Lakonia, the town with no walls), written by tools/ichor/art/lakonia_build.py
+#define METATILE_Lakonia_SownField_Teeth          0x324
+#define METATILE_Lakonia_SownField                0x322
+// end gTileset_Lakonia
+
 #endif // GUARD_METATILE_LABELS_H

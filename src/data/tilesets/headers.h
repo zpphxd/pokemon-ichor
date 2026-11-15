@@ -616,3 +616,18 @@ const struct Tileset gTileset_Labyrinth =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
     .callback = NULL,
 };
+
+// Ichor: lakonia, Lakonia, the town with no walls (Act III). Porytiles-managed, built by
+// tools/ichor/art/lakonia_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Lakonia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Lakonia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Lakonia,
+    .metatiles = gMetatiles_PorytilesManaged_Lakonia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Lakonia,
+    .callback = InitTilesetAnim_PorytilesManaged_Lakonia,
+};
