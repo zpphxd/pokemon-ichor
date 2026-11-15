@@ -424,6 +424,12 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_TITANBORN] = { _("TITANBORN"), 5 },
     [TRAINER_CLASS_ACOLYTE] = { _("ACOLYTE"), 5 },
     [TRAINER_CLASS_HIEROPHANT] = { _("HIEROPHANT"), 25 },
+    // Ichor: Act II batch 1 (design/phase3/SPRITES.md). Act II's road pays a
+    // little more than Act I's; actors and vintners own their trade.
+    [TRAINER_CLASS_MAENAD] = { _("MAENAD"), 5 },
+    [TRAINER_CLASS_SATYR] = { _("SATYR"), 5 },
+    [TRAINER_CLASS_ACTOR] = { _("ACTOR"), 7 },
+    [TRAINER_CLASS_VINTNER] = { _("VINTNER"), 6 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =

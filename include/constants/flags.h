@@ -1701,6 +1701,7 @@
 #ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
+#define FLAG_ICHOR_HIDE_ELEUSA_EAST_HOPLITE     (FLAG_ICHOR_GENERAL_START + 0x10C) // Ichor: the hoplite in Eleusa's east wall gap (48,25), hidden when Route 15 opens in Act II (batch 4)
 #define FLAG_ICHOR_HIDE_ELEUTHERAI_VINES        (FLAG_ICHOR_GENERAL_START + 0x110) // Ichor: Act II: the old vines across Route 6 are cut (beat 26)
 #define FLAG_ICHOR_HIDE_HERALD_BARRIER          (FLAG_ICHOR_GENERAL_START + 0x111) // Ichor: Act II: the herald has lifted his barrier on Route 6 and gone (beat 26)
 #define FLAG_ICHOR_HIDE_ALETHEA_ROUTE6          (FLAG_ICHOR_GENERAL_START + 0x112) // Ichor: Act II: hide Alethea by Route 6's vines (beat 26)
