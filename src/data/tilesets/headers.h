@@ -616,3 +616,77 @@ const struct Tileset gTileset_Labyrinth =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
     .callback = NULL,
 };
+
+// Ichor: amnisos, Amnisos, the harbor of Knossa (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea and shallows, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_Amnisos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Amnisos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Amnisos,
+    .metatiles = gMetatiles_PorytilesManaged_Amnisos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Amnisos,
+    .callback = InitTilesetAnim_PorytilesManaged_Amnisos,
+};
+
+// Ichor: bull_road, the Bull Road, its vineyard terraces and the Bronze Heel (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea and shallows, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_BullRoad =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_BullRoad,
+    .palettes = gTilesetPalettes_PorytilesManaged_BullRoad,
+    .metatiles = gMetatiles_PorytilesManaged_BullRoad,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_BullRoad,
+    .callback = InitTilesetAnim_PorytilesManaged_BullRoad,
+};
+
+// Ichor: palace_minos, the Palace of Minos above ground (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea and shallows, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_PalaceMinos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_PalaceMinos,
+    .palettes = gTilesetPalettes_PorytilesManaged_PalaceMinos,
+    .metatiles = gMetatiles_PorytilesManaged_PalaceMinos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_PalaceMinos,
+    .callback = NULL,
+};
+
+// Ichor: palace_rooms, the Palace of Minos's rooms and the Bull Road vault (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py; it uses only its own tiles and palettes
+// 6-12, so it works on any primary.
+const struct Tileset gTileset_PalaceRooms =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_PalaceRooms,
+    .palettes = gTilesetPalettes_PorytilesManaged_PalaceRooms,
+    .metatiles = gMetatiles_PorytilesManaged_PalaceRooms,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_PalaceRooms,
+    .callback = NULL,
+};
+
+// Ichor: ida, Mount Ida and the caves (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea and shallows, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_Ida =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Ida,
+    .palettes = gTilesetPalettes_PorytilesManaged_Ida,
+    .metatiles = gMetatiles_PorytilesManaged_Ida,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Ida,
+    .callback = NULL,
+};
