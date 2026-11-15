@@ -29,4 +29,11 @@
 // Batch 3 owns the var's values and replaces this with its own constant.
 #define ICHOR_PG_KATABASIS_DONE 18
 
+// ICHOR_STUB_CARRIED_FLAME: Hestia's fire for the Euploia (Lampon's recruitment). The
+// engine's FLAME_HESTIA_SHIP is on ichor-engine's branch; this stands in until it
+// merges, and only the stubs in data/scripts/ichor_postgame_crew.pory compare with it.
+#ifndef FLAME_HESTIA_SHIP
+#define FLAME_HESTIA_SHIP 0x7F
+#endif
+
 #endif // GUARD_CONSTANTS_ICHOR_POSTGAME_H

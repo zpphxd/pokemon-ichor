@@ -48,30 +48,67 @@ script EventScript_IchorPgCrew_Joined {
 // Lampon, keeper of Hestia's great hearth (Akti, the Temple of Hestia)
 //
 // Carry fire from the great hearth to the ship's hearth: SYSTEMS.md §2's carried
-// flame, 30 steps on Hero, a callback to the slice's Hearth Trial, where the sea wind
-// put the torch out at the door. This time the fire rides in Lampon's lidded pot.
-// The shortest way from the hearth to the quay's trigger is 28 steps: 8 to the temple
-// door, 1 down its step, 19 across the plaza and up the harbor street.
+// flame, 30 steps, a callback to the slice's Hearth Trial, where the sea wind put the
+// torch out at the door. This time the fire rides on Hecate's Torch, which the wind
+// can't touch. The shortest way from the hearth to the quay's trigger is 28 steps:
+// 8 to the temple door, 1 down its step, 19 across the plaza and up the harbor street.
 // ===========================================================================
 
-// ICHOR_STUB_CARRIED_FLAME: the carried flame isn't built (ichor-engine has the ask).
-// Until it lands, the fire lives for exactly one door: lit in the temple, it survives
-// the step out into Akti and dies on any other map change, which is the flame's own
-// rule ("the flame dies when you leave"). When the engine's flame lands:
-//   TakeHearthFire starts Hestia's flame on the torch (30 steps on Hero; the engine
-//     scales Mortal and Spartan, shows the count and says "The flame gutters." at 5);
-//   HearthFireArrives becomes "is Hestia's flame still burning?" into VAR_TEMP_6.
-// The call sites (the hearth, Akti's ON_TRANSITION and the quay trigger) stay as they are.
-script EventScript_IchorPgStub_TakeHearthFire {
+// ICHOR_STUB_CARRIED_FLAME: Hestia's fire for the ship is built on ichor-engine's
+// branch, not on this one yet. Each stub below stands for one engine call, and the
+// call sites (the great hearth, Akti's ON_TRANSITION, the quay) stay as they are when
+// the engine merges. Replace each `call(EventScript_IchorPgStub_X)` with:
+//   TakeFlame     setvar(VAR_0x8004, FLAME_HESTIA_SHIP), setvar(VAR_0x8005, 30),
+//                 special(Ichor_TakeFlame)       VAR_RESULT is FALSE without a lit Torch
+//   GetFlameKind  specialvar(VAR_RESULT, Ichor_GetFlameKind)
+//   GetFlameSteps specialvar(VAR_RESULT, Ichor_GetFlameSteps)
+//   PutOutFlame   special(Ichor_PutOutFlame)       the fire is spent on the ship's hearth
+// then delete the four stubs, FLAG_ICHOR_PG_HEARTH_FIRE's use here and the stand-in
+// FLAME_HESTIA_SHIP in include/constants/ichor_postgame.h. The engine's fire keeps its
+// steps through doors and warps, costs 2 a step in rain (the dry budget, 30, always
+// gets you there), and gutters at 5. Never read VAR_TEMP_2 or VAR_TEMP_3 for it: Akti's
+// slice triggers use both. Until then the fire never runs out, and the Torch isn't
+// needed.
+script EventScript_IchorPgStub_TakeFlame {
     setflag(FLAG_ICHOR_PG_HEARTH_FIRE)
+    setvar(VAR_RESULT, TRUE)
     return
 }
 
-script EventScript_IchorPgStub_HearthFireArrives {
+script EventScript_IchorPgStub_GetFlameKind {
+    setvar(VAR_RESULT, FLAME_NONE)
     if (flag(FLAG_ICHOR_PG_HEARTH_FIRE)) {
-        clearflag(FLAG_ICHOR_PG_HEARTH_FIRE)
-        setvar(VAR_TEMP_6, 1)
+        setvar(VAR_RESULT, FLAME_HESTIA_SHIP)
     }
+    return
+}
+
+script EventScript_IchorPgStub_GetFlameSteps {
+    setvar(VAR_RESULT, 0)
+    if (flag(FLAG_ICHOR_PG_HEARTH_FIRE)) {
+        setvar(VAR_RESULT, 30)
+    }
+    return
+}
+
+script EventScript_IchorPgStub_PutOutFlame {
+    clearflag(FLAG_ICHOR_PG_HEARTH_FIRE)
+    return
+}
+
+// Whether Hestia's fire for the ship is still burning on the Torch: VAR_RESULT TRUE or FALSE.
+script EventScript_IchorPgCrew_HestiaFireBurns {
+    call(EventScript_IchorPgStub_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_HESTIA_SHIP) {
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    call(EventScript_IchorPgStub_GetFlameSteps)
+    if (var(VAR_RESULT) == 0) {
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    setvar(VAR_RESULT, TRUE)
     return
 }
 
@@ -94,13 +131,16 @@ script EventScript_IchorPgCrew_Lampon {
         release
         end
     }
-    if (flag(FLAG_ICHOR_PG_HEARTH_FIRE)) {
-        msgbox(format("What are you waiting for? The quay! Lid on! Go!"))
+    call(EventScript_IchorPgCrew_HestiaFireBurns)
+    if (var(VAR_RESULT) == TRUE) {
+        setspeaker(IchorPgCrew_Name_Lampon)
+        msgbox(format("What are you waiting for? The quay! Go!"))
         release
         end
     }
+    setspeaker(IchorPgCrew_Name_Lampon)
     if (flag(FLAG_ICHOR_PG_LAMPON_ASKED)) {
-        msgbox(format("The great hearth, the pot, the quay. Lid on. Don't stop to chat.\p"
+        msgbox(format("The great hearth, your torch, the quay. Don't stop to chat.\p"
                       "If it goes out, come back and light it again. Fires do that."))
         release
         end
@@ -109,8 +149,8 @@ script EventScript_IchorPgCrew_Lampon {
                   "You've got a ship now, Ione says. A ship is a house that floats.\p"
                   "And a house needs a hearth, lit from Hestia's. From this one.\p"
                   "Colonists did it. Carried fire from home all the way to the new city.\p"
-                  "Here, my fire-pot. Light it at the great hearth, and keep the lid ON.\p"
-                  "The sea wind ate your torch last time. It won't get the pot.\p"
+                  "Light that torch of Hecate's at the great hearth. Hestia won't mind.\p"
+                  "The sea wind ate your torch last time. It won't get that one.\p"
                   "Thirty steps to the quay, near enough. Don't stop to chat.\p"
                   "I'll meet you at the ship. I'm coming too. Somebody has to cook."))
     setflag(FLAG_ICHOR_PG_LAMPON_ASKED)
@@ -120,20 +160,28 @@ script EventScript_IchorPgCrew_Lampon {
 // The great hearth, once Lampon has asked. From the slice's GreatHearth script.
 script EventScript_IchorPgCrew_LamponHearth {
     lockall
-    if (flag(FLAG_ICHOR_PG_HEARTH_FIRE)) {
-        msgbox(format("The fire in Lampon's pot burns low and steady. The quay is waiting."))
+    call(EventScript_IchorPgCrew_HestiaFireBurns)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("Hestia's fire burns on your torch, low and steady. The quay is waiting."))
         releaseall
         end
     }
     msgbox(format("The great hearth of Hestia. It has never once gone out.\p"
-                  "Light Lampon's pot from it, for the ship?"), MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        closemessage
-        playse(SE_M_EMBER)
-        waitse
-        call(EventScript_IchorPgStub_TakeHearthFire)
-        msgbox(format("{PLAYER} lit the pot and set the lid on. Off to the quay!"))
+                  "Light your torch from it, for the ship?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        releaseall
+        end
     }
+    closemessage
+    call(EventScript_IchorPgStub_TakeFlame)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Your torch is dark. Light it first, and then take Hestia's fire."))
+        releaseall
+        end
+    }
+    playse(SE_M_EMBER)
+    waitse
+    msgbox(format("Hestia's fire catches on your torch. Thirty steps, Lampon said. To the quay!"))
     releaseall
 }
 
@@ -168,13 +216,23 @@ script EventScript_IchorPgCrew_LamponQuay {
         case 11: applymovement(OBJ_EVENT_ID_PLAYER, IchorPgCrew_Movement_QuayFrom11)
     }
     waitmovement(0)
+    // The fire may have died on the way (the engine's steps ran out, or water).
+    call(EventScript_IchorPgCrew_HestiaFireBurns)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(IchorPgCrew_Name_Lampon)
+        msgbox(format("It went out? …It went out. Fires do that.\p"
+                      "Back to the great hearth. I'll wait. I'm good at waiting."))
+        releaseall
+        end
+    }
     setspeaker(IchorPgCrew_Name_Lampon)
     msgbox(format("There! You didn't drop it! I ran round the back way.\p"
                   "Don't tell Ione. I was very dignified about it.\p"
-                  "Give it here. Gently. GENTLY.\p"
+                  "Hold it steady. Let me take a light from it. Gently. GENTLY.\p"
                   "A ship's a house that floats. Now this one has a hearth.\p"
                   "I'll keep it lit. And I'll cook. Somebody has to."))
     closemessage
+    call(EventScript_IchorPgStub_PutOutFlame)
     applymovement(LOCALID_AKTI_PG_LAMPON, IchorPgCrew_Movement_LamponBoards)
     waitmovement(0)
     removeobject(LOCALID_AKTI_PG_LAMPON)

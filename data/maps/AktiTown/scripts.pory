@@ -33,7 +33,7 @@ mapscripts AktiTown_MapScripts {
             setvar(VAR_TEMP_3, 1)
         }
         // The post-game (data/scripts/ichor_postgame_opening.pory): the herald, the
-        // Euploia's quay, Hestia's fire. VAR_TEMP_5, VAR_TEMP_6 and FLAG_TEMP_18-1B.
+        // Euploia's quay, Hestia's fire. VAR_TEMP_5, VAR_TEMP_6 and FLAG_TEMP_18-1D.
         call(EventScript_IchorPg_AktiSetUp)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
@@ -305,9 +305,6 @@ script AktiTown_EventScript_Diktys {
 }
 
 script AktiTown_EventScript_Nausikles {
-    if (flag(FLAG_ICHOR_POSTGAME)) {
-        goto(EventScript_IchorPg_Nausikles)
-    }
     if (flag(FLAG_BADGE01_GET) && !flag(FLAG_ICHOR_SLICE_COMPLETE) && !flag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)) {
         goto(AktiTown_EventScript_HarborPart2Talk)
     }

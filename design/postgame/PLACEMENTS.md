@@ -30,7 +30,7 @@ These are placed on this branch, for reference when another branch merges over t
 | `MAP_AKTI_TOWN` | 14, 20 | `AUGUR` (herald stand-in) | face down | `FLAG_TEMP_18` | `EventScript_IchorHerald_Akti` | The herald in the plaza |
 | `MAP_AKTI_TOWN` | 6, 8 | `ALETHEA` | face down | `FLAG_TEMP_19` (until the ship is yours) | `EventScript_IchorPg_AletheaOnDeck` | Alethea on the Euploia's deck |
 | `MAP_AKTI_TOWN` | 8, 10 | `ACOLYTE_M` | face right | `FLAG_TEMP_1A` (only while the fire is coming) | `EventScript_IchorPgCrew_LamponQuayTalk` | Lampon waiting for Hestia's fire |
-| `MAP_AKTI_TOWN` | 5, 9 | (Nausikles, moved) | face right | — | `EventScript_IchorPg_Nausikles` | Nausikles on the bollard: `setobjectxyperm` in the post-game |
+| `MAP_AKTI_TOWN` | 5, 9 | `SAILOR` | face right | `FLAG_TEMP_1D` | `EventScript_IchorPg_Nausikles` | Nausikles on the bollard. The slice's Nausikles at the gangplank (7, 9) hides behind `FLAG_TEMP_1C` in the post-game, which frees the gangplank's cell. |
 | `MAP_AKTI_TOWN` | 10, 9–11 | coord, `VAR_TEMP_5` = 1 | | | `EventScript_IchorPg_AktiShipRow9`… | ODYSSEY scene 1 |
 | `MAP_AKTI_TOWN` | 10, 9–11 | coord, `VAR_TEMP_6` = 1 | | | `EventScript_IchorPgCrew_LamponQuayRow9`… | Hestia's fire reaches the quay (`ICHOR_STUB_CARRIED_FLAME`) |
 | `MAP_AKTI_TOWN` | 7, 9 | coord, `VAR_TEMP_5` = 2 | | | `EventScript_IchorPg_AktiGangplank` | The gangplank: `EventScript_IchorBoardShip`, `VOYAGE_AKTI` |
@@ -38,7 +38,7 @@ These are placed on this branch, for reference when another branch merges over t
 | `MAP_AKTI_TOWN_ASCLEPEION` | 7, 2 | `ELDER_M` (Phaedon stand-in) | face down | `FLAG_TEMP_18` | `EventScript_IchorPg_Phaedon` | Phaedon at the counter. The healer moves to (11, 3) and still answers a whiteout. |
 | `MAP_AKTI_TOWN_ASCLEPEION` | 0, 9 | `KID_F` (Elpis stand-in) | face right | `FLAG_TEMP_19` | `EventScript_IchorPg_Elpis` | Elpis by the cots |
 | `MAP_AKTI_TOWN_FISHERS_HOUSE` | 3, 2 / 6, 6 | (Glaukos / Glaukias) | | `FLAG_TEMP_18` / `FLAG_TEMP_19` | branch to `EventScript_IchorPgCrew_Glaukias` | The sea has kept Glaukos; Glaukias begs to sail |
-| `MAP_AKTI_TOWN_TEMPLE_OF_HESTIA` | 8, 15 | (Lampon) | | `FLAG_TEMP_18` (once crew) | branch after his `trainerbattle` | Lampon asks for the fire; the great hearth lights his pot |
+| `MAP_AKTI_TOWN_TEMPLE_OF_HESTIA` | 8, 15 | (Lampon) | | `FLAG_TEMP_18` (once crew) | branch after his `trainerbattle` | Lampon asks for the fire; the great hearth lights Hecate's Torch with it (`ICHOR_STUB_CARRIED_FLAME` until the engine's `FLAME_HESTIA_SHIP` merges) |
 | `MAP_AKTI_TOWN_AGORA` | 3, 2 | (Demeas) | | | branch to `EventScript_IchorPgCrew_DemeasRope` | A coil of rope, on Diktys's tab |
 | `MAP_KALLISTE_ROUTE1` | 7, 25 | (the olive farmer) | | | branch to `EventScript_IchorPgCrew_OliveFarmerRoot` | The Big Root for Diktys's boat |
 

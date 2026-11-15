@@ -366,29 +366,34 @@ script EventScript_IchorPg_AkademiaKraters {
 //   FLAG_TEMP_19  Alethea on the Euploia's deck (6,8), until the ship is yours
 //   FLAG_TEMP_1A  Lampon at the gangplank (8,10), only while Hestia's fire is coming
 //   FLAG_TEMP_1B  Diktys, once he's crew (ichor_postgame_crew.pory)
+//   FLAG_TEMP_1C  the slice's Nausikles at the gangplank (7,9): gone in the post-game
+//   FLAG_TEMP_1D  the post-game's Nausikles, on the bollard at the quay's west end (5,9)
 //   VAR_TEMP_5    1: scene 1 waits on the line x = 10 (rows 9-11); 2: the gangplank boards
-//   VAR_TEMP_6    1: Hestia's fire came out of the temple alive (ICHOR_STUB_CARRIED_FLAME)
+//   VAR_TEMP_6    1: Hestia's fire is on its way to the quay (ichor_postgame_crew.pory)
+// World-act1's Phase 2 uses VAR_TEMP_1-4 here, so the post-game starts at 5.
 script EventScript_IchorPg_AktiSetUp {
     if (!flag(FLAG_ICHOR_POSTGAME)) {
         setflag(FLAG_TEMP_18)
         setflag(FLAG_TEMP_19)
         setflag(FLAG_TEMP_1A)
+        setflag(FLAG_TEMP_1D)
         return
     }
-    // The slice's quay is long over.
+    // The slice's quay is long over, and its Nausikles at the gangplank (7,9) with it.
     setflag(FLAG_ICHOR_HIDE_KLEON_AKTI)
     setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
-    // Nausikles sits on the bollard at the quay's west end, coiling a rope.
-    setobjectxyperm(LOCALID_AKTI_NAUSIKLES, 5, 9)
-    setobjectmovementtype(LOCALID_AKTI_NAUSIKLES, MOVEMENT_TYPE_FACE_RIGHT)
+    setflag(FLAG_TEMP_1C)
     if (flag(FLAG_ICHOR_GOT_EUPLOIA)) {
         setflag(FLAG_TEMP_19)
         setvar(VAR_TEMP_5, 2)
     } else {
         setvar(VAR_TEMP_5, 1)
     }
-    call(EventScript_IchorPgStub_HearthFireArrives)
-    if (var(VAR_TEMP_6) != 1) {
+    // Lampon waits at the gangplank while Hestia's fire is on its way.
+    call(EventScript_IchorPgStub_GetFlameKind)
+    if (var(VAR_RESULT) == FLAME_HESTIA_SHIP) {
+        setvar(VAR_TEMP_6, 1)
+    } else {
         setflag(FLAG_TEMP_1A)
     }
     if (flag(FLAG_ICHOR_CREW_DIKTYS)) {
@@ -426,7 +431,7 @@ script EventScript_IchorPg_AktiShip {
     lockall
     setvar(VAR_TEMP_5, 0)
     playse(SE_PIN)
-    applymovement(LOCALID_AKTI_NAUSIKLES, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_AKTI_PG_NAUSIKLES, Common_Movement_ExclamationMark)
     waitmovement(0)
     switch (var(VAR_0x8008)) {
         case 9: applymovement(OBJ_EVENT_ID_PLAYER, IchorPg_Movement_ShipFrom9)

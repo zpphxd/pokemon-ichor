@@ -1751,7 +1751,7 @@
 #define FLAG_ICHOR_SHIP_KEEL                    (FLAG_ICHOR_GENERAL_START + 0x30F) // Ichor: post-game ship upgrade: the Phaeacian keel, the Outer Sea no longer loops
 #define FLAG_ICHOR_PG_KLEON_AT_WELL             (FLAG_ICHOR_GENERAL_START + 0x310) // Ichor: post-game: Kleon's 'Let's see about us' at Elaia's well has played (LABORS scene 0)
 #define FLAG_ICHOR_PG_LAMPON_ASKED              (FLAG_ICHOR_GENERAL_START + 0x311) // Ichor: post-game crew: Lampon asked you to carry Hestia's fire to the Euploia's hearth
-#define FLAG_ICHOR_PG_HEARTH_FIRE               (FLAG_ICHOR_GENERAL_START + 0x312) // Ichor: post-game crew: Hestia's fire is lit for the ship; it lives one door past the temple (ICHOR_STUB_CARRIED_FLAME)
+#define FLAG_ICHOR_PG_HEARTH_FIRE               (FLAG_ICHOR_GENERAL_START + 0x312) // Ichor: post-game crew: carrying Hestia's fire for the ship; the stub's state until the engine's flame merges (ICHOR_STUB_CARRIED_FLAME)
 #define FLAG_ICHOR_PG_DIKTYS_ASKED              (FLAG_ICHOR_GENERAL_START + 0x313) // Ichor: post-game crew: Diktys asked for a Big Root and a coil of rope to mend his boat
 #define FLAG_ICHOR_PG_GOT_ROPE                  (FLAG_ICHOR_GENERAL_START + 0x314) // Ichor: post-game crew: Demeas put a coil of rope on Diktys's tab (Akti's Agora)
 #define FLAG_ICHOR_PG_GOT_BIG_ROOT              (FLAG_ICHOR_GENERAL_START + 0x315) // Ichor: post-game crew: the Route 1 olive farmer gave you a root for Diktys's boat
