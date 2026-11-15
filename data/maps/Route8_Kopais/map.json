@@ -18,6 +18,11 @@
       "map": "MAP_LEBADEIA",
       "offset": 0,
       "direction": "left"
+    },
+    {
+      "map": "MAP_THYRSA_CITY",
+      "offset": -9,
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -117,6 +122,34 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route8_Kopais_EventScript_Traveler",
       "flag": "FLAG_ICHOR_THEOXENIA_START+0x22"
+    },
+    {
+      "local_id": "LOCALID_ROUTE8_PELOPIDAS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_FOWLER",
+      "x": 28,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "5",
+      "script": "Route8_Kopais_EventScript_Pelopidas",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE8_MEGAREUS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 21,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route8_Kopais_EventScript_Megareus",
+      "flag": "0"
     },
     {
       "local_id": "LOCALID_ROUTE8_TIMOXENA",

@@ -295,7 +295,8 @@ Thyrsa's side (Gla's two excepted: the Conch), which reed patches are forced, wh
 trainer's sight line is mandatory, and that a trainer who walks up to the player never ends up
 blocking the road. Today: three forced bands (band 1 at x 46-48, band 2 at x 27-29, band 3 at
 x 8-11, each the full height between the water and the rock), 216 grass cells of which 194 are
-reeds; Ismenias and Perses are mandatory, Gorgidas, Timoxena and Euphrosyne optional.
+reeds; Ismenias and Perses are mandatory, Gorgidas, Pelopidas, Megareus, Timoxena and
+Euphrosyne optional (each of those still stands where most players walk).
 
 ### The art
 
@@ -345,6 +346,26 @@ reeds; Ismenias and Perses are mandatory, Gorgidas, Timoxena and Euphrosyne opti
    reloaded. The jog is two tiles wide now ((16,13) is road), and the builder checks every
    trainer's stopping place against the road. Left as is: the scrub east of band 1 still reads
    a little planted at 2x; it reads as a hillside at GBA scale.
+5. **Pass 5** (the route standard, MAP_DESIGN section 8, `tools/ichor/map_audit.py`). An
+   11.1-screen middle route needs seven trainers: two more stand on the road now, Pelopidas
+   (a fowler crouched in band 2, watching it, sight 5) and Megareus (a runner at the
+   Onchestos post, watching the road). The audit's edge check found the west and east edges
+   open the whole height, walking into the neighbors' rock and trees: both edges are closed
+   now by a column of olives, except Lebadeia's road and verges (rows 11-14) and Thyrsa's
+   gate road (rows 14-15). Route 8's `right` connection to Thyrsa is in its map.json, so the
+   audit can measure forced grass between the ends: 10 cells (bands of 3, 3 and 4).
+
+**`map_audit.py Route8_Kopais`** (2026-11-14):
+
+```text
+Route8_Kopais  [route, Arkadia, middle]
+  64x26 = 11.1 screens; grass 216 (19/screen, 13%); water 24%; forced grass 10; trainers 7; items 6 + 4 hidden; signs 13; NPCs 9; wild: land MN (10/9 spp), surf M (4 spp), fish M (4 spp), Lv 27–30
+  WARN  edge: open edge cells (0, 11)-(0, 14) walk left into solid Lebadeia (27, 11)-(27, 14)
+  NOTE  wild: no _Day land table (day falls back to morning)
+```
+
+The one warning is Lebadeia's placeholder layout (a copy of an Act I map): the parnassos
+agent's Lebadeia opens its road and verges on those rows.
 
 ### Deviations
 
@@ -367,6 +388,9 @@ reeds; Ismenias and Perses are mandatory, Gorgidas, Timoxena and Euphrosyne opti
   and the dike: "a quick way home".
 - **Gorgidas is optional.** He nets birds at the reed edge facing the road (sight 3 covers
   the road), but the reed bed behind him lets a player go round.
+- **Two trainers SCRIPT.md doesn't name,** for the route standard: FOWLER Pelopidas (Gorgidas's
+  partner: the two founded Thebes's Sacred Band) and RUNNER Megareus (named for Onchestos's
+  king, Hippomenes's father), Lv 30-31, in `design/phase3/parties/kopais.party`.
 - **Extra rewards** beyond Part 6's list, for MAP_DESIGN's "every dead end pays" and the
   user's call for optional grass with a reason: an Ultra Ball deep in Timoxena's reeds, a
   Full Heal on the reed-boat shore, a hidden Nugget in the Treasury's wall ("a king so rich he

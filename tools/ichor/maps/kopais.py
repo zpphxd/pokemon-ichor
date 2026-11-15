@@ -482,6 +482,7 @@ def stamps(m):
             m.named("water_bits", n, x, y)
     # aethos trees and signs
     m.olives = set()
+    edge_walls(m)
     m.put(7, 11, STELE)                                          # the west sign
     m.put(55, 13, STELE)                                         # the east sign
     m.put(39, 12, STELE)                                         # the dike's sign
@@ -508,6 +509,30 @@ def stamps(m):
             m.put(x, y, BOULDER)
 
 
+def edge_walls(m):
+    """Close both edges except where the roads cross the seams (Lebadeia's road and
+    verges, rows 11-14; Thyrsa's gate road, rows 14-15): a column of olives along each
+    edge, stacked crown over trunk, with a boulder where a pair of rows is left over."""
+    def column(x, rows):
+        rows = list(rows)
+        while len(rows) >= 2:
+            pass_rows = rows[-2:]
+            y = pass_rows[0]
+            below = (x, y + 2) in m.olives
+            m.put(x, y, OLIVE_TOP[0]); m.put(x + 1, y, OLIVE_TOP[1])
+            bot = OLIVE_STACK if below else OLIVE_BOT
+            m.put(x, y + 1, bot[0]); m.put(x + 1, y + 1, bot[1])
+            m.olives.add((x, y))
+            rows = rows[:-2]
+        for y in rows:
+            m.put(x, y, BOULDER)
+            m.put(x + 1, y, BOULDER)
+    column(0, range(0, WEST_ROAD - 1))                     # rows 0-10
+    column(0, range(WEST_ROAD + 3, H))                     # rows 15-25
+    column(62, range(0, EAST_ROAD))                        # rows 0-13
+    column(62, range(EAST_ROAD + 2, H))                    # rows 16-25
+
+
 def tree(m, x, y, kind):
     if any((xx, yy) in m.stamped or m.at(xx, yy) != "." for xx in (x, x + 1) for yy in (y, y + 1)):
         return
@@ -526,6 +551,10 @@ def events(m):
     E = {
         "connections": [
             {"map": "MAP_LEBADEIA", "offset": 0, "direction": "left"},
+            # Thyrsa's Neistan Gate: its west edge is open on rows 23-24, Route 8's east
+            # edge on rows 14-15 (BUILD.md, q = 14). Thyrsa's side ("left", offset +9) is
+            # added at integration.
+            {"map": "MAP_THYRSA_CITY", "offset": EAST_ROAD - 23, "direction": "right"},
         ],
         "object_events": [
             # the east end: Gorgidas netting birds at the reed edge, Alethea's first note
@@ -544,6 +573,13 @@ def events(m):
             obj(P + "MAN", 25, 14, S8 + "Traveler", "MOVEMENT_TYPE_FACE_LEFT",
                 flag="FLAG_ICHOR_THEOXENIA_START+0x22", local_id="LOCALID_ROUTE8_TRAVELER"),
             # Timoxena in the reeds, facing the water; an Ultra Ball deep in them
+            # Pelopidas, crouched in band 2 watching the reeds for birds: his sight
+            # runs down through the band (the route standard's sixth trainer)
+            obj(P + "FOWLER", 28, 10, S8 + "Pelopidas", "MOVEMENT_TYPE_FACE_DOWN", trainer=True,
+                sight=5, local_id="LOCALID_ROUTE8_PELOPIDAS"),
+            # Megareus, a runner training at Onchestos's racing post, watching the road
+            obj(P + "YOUTH_M", 21, 17, S8 + "Megareus", "MOVEMENT_TYPE_FACE_UP", trainer=True,
+                sight=2, local_id="LOCALID_ROUTE8_MEGAREUS"),
             obj(P + "FOWLER_F", 21, 9, S8 + "Timoxena", "MOVEMENT_TYPE_FACE_UP", trainer=True,
                 sight=2, local_id="LOCALID_ROUTE8_TIMOXENA"),
             item_ball(18, 10, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_ROUTE8_ULTRA_BALL"),

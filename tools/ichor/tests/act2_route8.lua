@@ -108,6 +108,7 @@ local function main()
   -- Band 2, the herm at the spur fork, the decoy traveler, Timoxena's reeds.
   L.setBeat("35A_herm", false)
   L.go(28, 15); shot("band_2")
+  expect(L.defeated(S.TRAINER_PELOPIDAS), "Pelopidas saw the player cross band 2")
   L.go(24, 15); shot("the_great_herm")
   L.talk(L.sign(R8 .. "GreatHerm"), { shots = { [1] = "herm_sign" } })
   expect(L.getFlag(S.FLAG_HERM), "the great herm anointed (Olive Oil)")
@@ -122,6 +123,8 @@ local function main()
 
   -- Onchestos, note 3, the spur, the Sphinx's ledge.
   L.setBeat("35A_spur", false)
+  L.talk(L.npc(R8 .. "Megareus"), { shotBefore = "megareus" })
+  expect(L.defeated(S.TRAINER_MEGAREUS), "Megareus raced at Onchestos")
   L.talk(L.sign(R8 .. "SignOnchestos"), { shots = { [1] = "onchestos" } })
   L.talk(L.sign(R8 .. "DigOnchestos"))
   read("Note3", "note_3")
@@ -129,13 +132,28 @@ local function main()
   L.go(24, 23); shot("sphinx_ledge")
   L.talk(L.sign(R8 .. "SignSphinx"))
   local sphinx = L.npc(R8 .. "Enigmaw")
-  if sphinx.present then
-    L.talk(sphinx, { shots = { [1] = "enigmaw" } })
-    expect(L.getFlag(S.FLAG_ENIGMAW), "the Enigmaw caught or beaten")
-    expect(not L.npc(R8 .. "Enigmaw").present, "the ledge is empty")
-  else
-    L.note("the Enigmaw hides at night: the clock says it's night")
+  if not sphinx.present then
+    -- the emulator's clock says night, when the Enigmaw is away: bring it out for the
+    -- run (the ON_TRANSITION's own day check is the same flag)
+    L.note("night on the clock: the Enigmaw is hidden; spawning it to test its battle")
+    L.runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
+                     S.SCR_OP_CLEARFLAG, { S.FLAG_TEMP_ENIGMAW, 2 },
+                     S.SCR_OP_ADDOBJECT, { S.LOCALID_ENIGMAW, 2 }, S.SCR_OP_END })
+    wait(30)
+    sphinx = L.npc(R8 .. "Enigmaw")
   end
+  expect(sphinx.present, "the Enigmaw on the Sphinx's ledge")
+  -- slice_lib runs from wild battles; fight this one, as a player catching or beating it would
+  local isTrainer = L.isTrainerBattle
+  L.isTrainerBattle = function() return true end
+  -- come down the goat path onto the slab from the north, so the follower trails
+  -- behind on the path and not on the Enigmaw's tile
+  L.go(24, 21); L.go(24, 23); L.face(K.DOWN)
+  L.tap(K.A); wait(10)
+  L.settle({ shots = { [1] = "enigmaw" } })
+  L.isTrainerBattle = isTrainer
+  expect(L.getFlag(S.FLAG_ENIGMAW), "the Enigmaw beaten (the test's Surf knocks it out)")
+  expect(not L.npc(R8 .. "Enigmaw").present, "the ledge is empty")
   L.talk(L.ball(S.FLAG_ITEM_HYPER_POTION))
   expect(L.itemCount(S.ITEM_HYPER_POTION) >= 1, "the Hyper Potion on the Sphinx's ledge")
   L.talk(L.sign(R8 .. "DigSphinx"))

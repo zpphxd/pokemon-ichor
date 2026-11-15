@@ -7,6 +7,7 @@
 #include "constants/ichor.h"
 #include "constants/items.h"
 #include "constants/map_groups.h"
+#include "constants/map_event_ids.h"
 #include "constants/moves.h"
 #include "constants/opponents.h"
 #include "constants/script_commands.h"
@@ -31,6 +32,12 @@ K(TRAINER_ISMENIAS, TRAINER_ICHOR_ISMENIAS)
 K(TRAINER_TIMOXENA, TRAINER_ICHOR_TIMOXENA)
 K(TRAINER_PERSES, TRAINER_ICHOR_PERSES)
 K(TRAINER_EUPHROSYNE, TRAINER_ICHOR_EUPHROSYNE)
+K(TRAINER_PELOPIDAS, TRAINER_ICHOR_PELOPIDAS)
+K(TRAINER_MEGAREUS, TRAINER_ICHOR_MEGAREUS)
+K(SCR_OP_CLEARFLAG, SCR_OP_CLEARFLAG)
+K(SCR_OP_ADDOBJECT, SCR_OP_ADDOBJECT)
+K(FLAG_TEMP_ENIGMAW, FLAG_TEMP_11)
+K(LOCALID_ENIGMAW, LOCALID_ROUTE8_ENIGMAW)
 
 // The flags the road reads and sets
 K(FLAG_ACT2_BEGUN, FLAG_ICHOR_ACT2_BEGUN)

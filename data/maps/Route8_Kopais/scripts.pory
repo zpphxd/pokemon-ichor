@@ -42,6 +42,8 @@ script Route8_Kopais_EventScript_PlaceEnigmaw {
 text Route8_Kopais_Text_SpeakerGorgidas { "GORGIDAS" }
 text Route8_Kopais_Text_SpeakerIsmenias { "ISMENIAS" }
 text Route8_Kopais_Text_SpeakerTimoxena { "TIMOXENA" }
+text Route8_Kopais_Text_SpeakerPelopidas { "PELOPIDAS" }
+text Route8_Kopais_Text_SpeakerMegareus { "MEGAREUS" }
 text Route8_Kopais_Text_SpeakerPerses { "PERSES" }
 text Route8_Kopais_Text_SpeakerEuphrosyne { "EUPHROSYNE" }
 text Route8_Kopais_Text_SpeakerEelSmoker { "EEL-SMOKER" }
@@ -246,6 +248,42 @@ text Route8_Kopais_Text_IsmeniasIntro {
 
 text Route8_Kopais_Text_IsmeniasDefeat {
     format("Slippery. Like my stock.")
+}
+
+// Pelopidas and Megareus are the kopais agent's, for the route standard (MAP_DESIGN
+// section 8); their lines aren't SCRIPT.md's. Pelopidas is Gorgidas's partner (the
+// two founded Thebes's Sacred Band); Megareus is named for Onchestos's king, the
+// father of Hippomenes, who beat Atalanta with the golden apples.
+script Route8_Kopais_EventScript_Pelopidas {
+    trainerbattle_single(TRAINER_ICHOR_PELOPIDAS, Route8_Kopais_Text_PelopidasIntro, Route8_Kopais_Text_PelopidasDefeat)
+    setspeaker(Route8_Kopais_Text_SpeakerPelopidas)
+    msgbox(format("Gorgidas and I have netted this shore since we were boys."))
+    setspeaker(Route8_Kopais_Text_SpeakerPelopidas)
+    msgbox(format("He says I count too loudly."), MSGBOX_AUTOCLOSE)
+}
+
+text Route8_Kopais_Text_PelopidasIntro {
+    format("Gorgidas nets them, I count them. Hold still. You're a bird now.")
+}
+
+text Route8_Kopais_Text_PelopidasDefeat {
+    format("Forty-one birds, and you. I'll write you down as a heron.")
+}
+
+script Route8_Kopais_EventScript_Megareus {
+    trainerbattle_single(TRAINER_ICHOR_MEGAREUS, Route8_Kopais_Text_MegareusIntro, Route8_Kopais_Text_MegareusDefeat)
+    setspeaker(Route8_Kopais_Text_SpeakerMegareus)
+    msgbox(format("She stops for the apples, you see. That's the whole plan."))
+    setspeaker(Route8_Kopais_Text_SpeakerMegareus)
+    msgbox(format("I ate one on the way here. It's still a good plan."), MSGBOX_AUTOCLOSE)
+}
+
+text Route8_Kopais_Text_MegareusIntro {
+    format("I'm racing Atalanta at the next games. Three golden apples! Race me first!")
+}
+
+text Route8_Kopais_Text_MegareusDefeat {
+    format("Beaten. And I'm down to two apples.")
 }
 
 script Route8_Kopais_EventScript_Timoxena {
