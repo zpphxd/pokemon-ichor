@@ -2,10 +2,11 @@
 """The follower's emotion bubbles and the balls it rides in, as pottery.
 
 Usage:
-    /usr/bin/python3 tools/ichor/art/follower_icons.py [--write] [--preview DIR]
+    /usr/bin/python3 tools/ichor/art/follower_icons.py [--write] [--emotes-only] [--preview DIR]
 
 --write    rewrites graphics/misc/emotes.png and emotes.pal, and the 28 follower
            ball sheets graphics/object_events/pics/misc/ball_*.png
+--emotes-only  limits --write to the emotion sheet/palette; leaves balls alone
 --preview  writes DIR/follower_icons.png: every emote frame and ball frame at 6x
 
 Emotes (graphics/misc/emotes.png, src/trainer_see.c sSpriteImageTable_Emotes).
@@ -39,6 +40,7 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(__file__))
 from sprites_lib import ROOT  # noqa: E402
+from field_effects import _SHARD, GLYPHS  # noqa: E402
 
 MISC = os.path.join(ROOT, "graphics/misc")
 BALL_DIR = os.path.join(ROOT, "graphics/object_events/pics/misc")
@@ -85,7 +87,7 @@ def grid(rows, key):
 # emotes.pal. U/u/L are the shard's terracotta, shade and cream chip, as in
 # may.pal's 12-14; P/p/l the poisoned shard's olive glaze.
 EMOTE_PAL = [
-    TRANSPARENT,
+    (112, 192, 160),
     INK,                 # 1 k  ink
     (224, 136, 88),      # 2 U  terracotta
     (184, 88, 48),       # 3 u  terracotta shade
@@ -101,53 +103,36 @@ EMOTE_PAL = [
 EK = {"k": 1, "U": 2, "u": 3, "L": 4, "r": 5, "w": 6, "P": 7, "p": 8, "l": 9, "g": 10}
 
 # The field's shard (field_effects.py _SHARD): '#' is the 8x8 glyph field.
-SHARD = [
-    "................",
-    "...kkkkk..kkk...",
-    "..kLLUUUkkUUuk..",
-    ".kLUUUUUUUUUUuk.",
-    ".kLU########Uuk.",
-    ".kUU########Uuk.",
-    "..kU########Uuk.",
-    "..kU########Uk..",
-    ".kUU########Uk..",
-    ".kUU########Uuk.",
-    ".kUU########Uuk.",
-    ".kuU########uuk.",
-    "..kuuuuuuuuuuk..",
-    "...kkkkkuukkk...",
-    "........kuk.....",
-    ".........k......",
-]
+SHARD = _SHARD
 
 # Each emotion: two 8x8 glyphs, A and B. '.' is the shard's own clay.
 FACES = {
     "happy": ([
         "........",
-        ".k....k.",
-        "k.k..k.k",
+        "..k..k..",
+        ".k.k.k.k",
         "........",
-        "k......k",
         ".k....k.",
-        "..kkkk..",
+        "..krrk..",
+        "...kk...",
         "........",
     ], [
         "........",
-        ".k....k.",
-        "k.k..k.k",
+        "..k..k..",
+        ".k.k.k.k",
         "........",
         ".kkkkkk.",
-        ".krrrrk.",
-        "..kkkk..",
+        "..krrk..",
+        "...kk...",
         "........",
     ]),
     "neutral": ([
         "........",
-        "..k..k..",
+        "..kk.kk.",
         "..k..k..",
         "........",
         "........",
-        "..kkkk..",
+        "...kk...",
         "........",
         "........",
     ], [
@@ -161,14 +146,14 @@ FACES = {
         "........",
     ]),
     "sad": ([
-        "........",
         ".kk..kk.",
         "........",
         "..k..k..",
         "..k..k..",
         "........",
-        "..kkkk..",
-        ".k....k.",
+        "...kk...",
+        "..k..k..",
+        "........",
     ], [
         "........",
         ".kk..kk.",
@@ -180,14 +165,14 @@ FACES = {
         ".k....k.",
     ]),
     "upset": ([
-        ".k....k.",
+        "........",
+        ".kk..kk.",
         "..k..k..",
         "........",
         "..k..k..",
-        "..k..k..",
-        "........",
+        ".krrrrk.",
         "..kkkk..",
-        ".k....k.",
+        "........",
     ], [
         ".k....kw",
         "..k..k.w",
@@ -200,13 +185,13 @@ FACES = {
     ]),
     "angry": ([
         "k......k",
-        ".kk..kk.",
-        "...kk...",
+        ".k....k.",
+        "..k..k..",
         "..k..k..",
         "........",
         "..kkkk..",
-        ".k....k.",
-        "........",
+        ".krrrrk.",
+        "..kkkk..",
     ], [
         "k.....rr",
         ".kk..kr.",
@@ -222,8 +207,8 @@ FACES = {
         "........",
         "........",
         "........",
-        "kk..kk..",
-        "kk..kk..",
+        ".kk..kk.",
+        ".kk..kk.",
         "........",
         "........",
     ], [
@@ -238,15 +223,15 @@ FACES = {
     ]),
     "love": ([
         "........",
-        "........",
-        "..k..k..",
-        ".kkkkkk.",
-        ".kkkkkk.",
-        "..kkkk..",
+        ".kk..kk.",
+        "krrkkrrk",
+        "krrrrrrk",
+        ".krrrrk.",
+        "..krrk..",
         "...kk...",
         "........",
     ], [
-        "........",
+        ".g......",
         ".kk..kk.",
         "krrkkrrk",
         "krrrrrrk",
@@ -255,16 +240,7 @@ FACES = {
         "...kk...",
         "........",
     ]),
-    "surprise": ([
-        "...kkk..",
-        "...kkk..",
-        "...kkk..",
-        "....k...",
-        "....k...",
-        "........",
-        "...kk...",
-        "...kk...",
-    ], [
+    "surprise": (GLYPHS["exclamation"], [
         "..kkkk..",
         "..kkkk..",
         "..kkkk..",
@@ -274,16 +250,7 @@ FACES = {
         "...kk...",
         "...kk...",
     ]),
-    "curious": ([
-        "..kkkk..",
-        ".kk..kk.",
-        ".....kk.",
-        "....kk..",
-        "...kk...",
-        "........",
-        "...kk...",
-        "...kk...",
-    ], [
+    "curious": (GLYPHS["question"], [
         "...kkkk.",
         "..kk..kk",
         "......kk",
@@ -294,14 +261,14 @@ FACES = {
         "....kk..",
     ]),
     "music": ([
-        "....kk..",
-        "....kkk.",
-        "....k.kk",
-        "....k...",
-        "....k...",
-        ".kkkk...",
-        "kgkkk...",
-        ".kkk....",
+        "...kkk..",
+        "...kgkk.",
+        "...k..k.",
+        "...k..k.",
+        ".kkk..k.",
+        "kgkk.kk.",
+        ".kk..kk.",
+        "........",
     ], [
         "...kk...",
         "...kkk..",
@@ -314,13 +281,13 @@ FACES = {
     ]),
     "poisoned": ([
         "........",
-        "....kk..",
-        "...k..k.",
-        "...k..k.",
-        "....kk..",
         ".kk.....",
-        "k..k....",
-        ".kk.....",
+        "k..k.kk.",
+        ".kk.k..k",
+        "....k..k",
+        ".....kk.",
+        "..kk....",
+        ".k..k...",
     ], [
         "...kk...",
         "..k..k..",
@@ -519,12 +486,15 @@ def ball_sheet(key, frames_wide):
 # Write and preview
 # --------------------------------------------------------------------------
 
-def write():
+def write(emotes_only=False):
     frames = emote_frames()
     assert len(frames) == 23
-    save_png(os.path.join(MISC, "emotes.png"), np.hstack(frames), EMOTE_PAL)
-    write_jasc(os.path.join(MISC, "emotes.pal"), EMOTE_PAL)
+    palette = EMOTE_PAL
+    save_png(os.path.join(MISC, "emotes.png"), np.hstack(frames), palette)
+    write_jasc(os.path.join(MISC, "emotes.pal"), palette)
     print("wrote graphics/misc/emotes.png, emotes.pal")
+    if emotes_only:
+        return
 
     folk = read_jasc(FOLK_PAL)
     assert folk[1] == INK and folk[9] == (248, 240, 216), "ichor_folk.pal changed order"
@@ -567,6 +537,6 @@ def preview(out_dir):
 
 if __name__ == "__main__":
     if "--write" in sys.argv:
-        write()
+        write(emotes_only="--emotes-only" in sys.argv)
     if "--preview" in sys.argv:
         preview(sys.argv[sys.argv.index("--preview") + 1])

@@ -47,9 +47,23 @@ a supported engine state and still needs an Ichor-native sheet in its own
 `player_underwater.pal`. It is not counted as redrawn by this checkpoint.
 The current ROM builds and passes smoke and all three Elaia opening runs.
 Both genders have new in-game walk/run captures from `player_ow_walk.lua`.
-The earlier in-game images below show the previous artwork. Native source
-checks cover the other regenerated sheets, but are not in-game fishing,
-surfing or field-move coverage.
+The earlier in-game images below show the previous artwork.
+
+`bash tools/ichor/tests/elaia_effects.sh` now covers both genders' twelve
+fishing animations (including finite hooked-rod loops), four surf facings,
+four surf-step animations, four get-on/off poses and the five-frame relic
+raise. It spawns the actual graphics ID, uses the engine's image/animation
+tables, and verifies the dynamically allocated palette tag and live palette
+bytes against the matching ROM source. Every finite selected animation
+reaches its real end; looping states are checked through one cycle.
+The complete field/state run passes 538 checks with 229 captures against the
+post-Pokemon baseline and new ROM.
+
+These captures are explicitly **forced engine-state evidence**: an idle NPC
+callback prevents normal NPC behavior from overriding the selected player
+animation. They are not proof that early Elaia gameplay permits fishing or
+late relics, nor do isolated rider states exercise the surf mount/controller.
+Underwater, bikes, watering and decorating remain outside this checkpoint.
 
 ## Palettes: how the roles were remapped
 

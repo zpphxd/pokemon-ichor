@@ -13,8 +13,20 @@ Those opening captures do not exercise every water-contact frame. The
 dedicated effect-route testing section below and its images remain historical;
 current contact-effect review must not be inferred from them.
 
+**2026-11-15 follow-on native pass:** grass/reed motion and landing bursts,
+sandal soles, the shared chipped-pottery emote outline, all eleven follower
+emotion pairs, four contact-shadow shapes and all eight warp-arrow frames
+are newly authored native pixels. Grass/reed resting tile coverage remains
+matched to the tiles. Shadows keep weather-palette index 9 (hardware black);
+the XL source is still 64x32 and is a forced-template check, not a used
+overworld state. Arrow sheet order is north/west/east/south, then their
+saffron blinks; the engine's direction-indexed animation order is different.
+No production layout, collision, animation table or shared/ball palette changes.
+
 **Sources:**
-- `tools/ichor/art/field_effects.py`: every effect and the two shared effect palettes. Rebuild with `/usr/bin/python3 tools/ichor/art/field_effects.py --write`. `--preview DIR` writes the 6× art sheet.
+- `tools/ichor/art/field_effects.py`: every effect and the two shared effect palettes. `--write --only PNG ...` regenerates selected sheets **without writing shared palettes**. The full `--write` also rewrites shared effect palettes. `--preview DIR` writes the 6× art sheet.
+- `tools/ichor/art/follower_icons.py --write --emotes-only`: regenerates the 23-frame emotion sheet and its own palette **without writing follower balls**. Its pottery outline and punctuation reuse the field source.
+- `tools/ichor/art/check_elaia_effects.py`: source-exact dimensions, 4bpp/indexing, transparency, BGR555, palette-role and distinct-frame checks. `--before DIR --output DIR` renders native-resolution and nearest-neighbor comparison sheets.
 - `tools/ichor/art/surf_poses.py`: Theo and Ianthe riding the dolphin. Rebuild with `/usr/bin/python3 tools/ichor/art/surf_poses.py --write`.
 
 **Images (`img/`):**
@@ -26,9 +38,9 @@ current contact-effect review must not be inferred from them.
 
 | Effect | Files | Palette | Now | Plays on |
 |---|---|---|---|---|
-| Tall-grass rustle | `tall_grass.png` | general_1 | Cut from aethos's barley metatile (`0x00D`), so the tuft over the player's feet matches the tile pixel for pixel. Each step bends the stalks apart and throws gold grain and chaff. | `MB_TALL_GRASS`, Route 1 |
+| Tall-grass rustle | `tall_grass.png` | general_1 | Resting foot coverage matches aethos's barley metatile (`0x00D`); four native motion stages flex anchored stalks with grain tips. | `MB_TALL_GRASS`, Route 1 |
 | Landing in tall grass | `jump_tall_grass.png` | general_1 | Stalks and grain burst out from under the feet. | Ledges into barley |
-| Long grass | `long_grass.png`, `jump_long_grass.png` | general_1 | Cut from aethos's reeds (`0x015`). They part around the player as they step in, then close. | `MB_LONG_GRASS` |
+| Long grass | `long_grass.png`, `jump_long_grass.png` | general_1 | Resting reeds match `0x015`; native stalk clusters bend and recover through the existing motion slots. | `MB_LONG_GRASS` |
 | Footprints | `sand_footprints.png` | general_0 | Sandal soles: smooth ovals with a strap dent, in the sand's own shades. | `MB_SAND`, the Akti beach |
 | Ripples | `ripple.png` | general_1 | Five growing native rings, with broken light/shadow arcs and a bright central waterline. | `MB_PUDDLE`, `MB_POND_WATER` |
 | Splashes | `splash.png`, `jump_small_splash.png`, `jump_big_splash.png` | general_0 | Native foam-tipped water fans with separate droplets and a deep-blue underside. | Puddles, shallows |
@@ -36,6 +48,7 @@ current contact-effect review must not be inferred from them.
 | Emotes "!", "?", "!!", "X" | `emotion_exclamation.png`, `emotion_question.png`, `emotion_double_exclamation.png`, `emote_x.png` | may | Pottery shards with black-figure glyphs, after the pottery UI. A cream glaze chip on the top left and a broken edge on the top. | Trainers spotting you, scripted emotes |
 | Heart emote | `emotion_heart.png` | npc_1 | The same shard, with a black-figure heart. | Scripted emotes |
 | Warp arrow | `arrow.png` | the player's palette | Terracotta with an ink outline and a cream glint; it blinks to saffron. | Standing on an exit mat |
+| Shadows | `shadow_small.png`, `shadow_medium.png`, `shadow_large.png`, `shadow_extra_large.png` | weather, index 9 | Flat native contact ellipses, keeping the original four size contracts and hardware OBJ blend. XL is not selected by current overworld object graphics. | Object shadows; XL forced-template fixture only |
 | Surf mount | `surf_blob.png` | the player's palette | A Minoan dolphin for Poseidon's Conch, after the Knossos fresco: an Aegean-blue back, a saffron stripe down the flank, a cream belly. Facing south, its head comes up between the rider's shins. Facing north, the tail flukes show. In profile, the snout, dorsal fin and raised tail show past the rider. | Surfing |
 | Riders | `people/brendan/surfing.png`, `people/may/surfing.png` | brendan, may | Theo and Ianthe astride, in their petasos and chlamys, shins down the dolphin's flanks, plus a hop pose for mounting and dismounting. They replace Emerald's recolored Brendan and May. | Surfing |
 | Heal: the "monitor" | `pokecenter_monitor/0.png`, `1.png` | general_0 | The Asclepeion's rod-of-Asclepius relief lighting up during the heal: the serpent white and gold, the rod gold, flickering bright and dim. The pixels are traced from the relief in `rooms/akti_asclepeion.bin` (map pixels x 112–135, y 8–23), so the glow lands on it. Before, a pale rectangle flashed beside the relief. | `FLDEFF_POKECENTER_HEAL` |
@@ -69,7 +82,32 @@ current contact-effect review must not be inferred from them.
   - The dolphin also uses the two blue slots, 5 and 6, as Emerald's blob did. It is a lighter blue under Theo and a deeper blue under Ianthe.
 - **may.pal.** The "!" family always loads may.pal, and draws only in its terracotta, cream and ink.
 
-## Testing
+## Current reproducible engine coverage
+
+`bash tools/ichor/tests/elaia_effects.sh` uses the real ROM and its matching
+ELF. Set `ROM=/path/pokeemerald.gba` to compare another preserved build;
+the matching `.elf` must be beside it. It links test scripts/helpers into
+one spare EWRAM page, never into the production ROM.
+
+The post-Pokemon baseline and new ROM each pass **538 checks / 229 captures**.
+Actual key input steps across Route 1's existing grass, records frames
+1,2,3,4,0 and verifies cleanup after leaving. Elaia itself has no placed
+barley/reed/sand metatiles; those must not be claimed as normal Elaia gameplay.
+The other captures are explicitly labeled engine fixtures: real owner-tracking
+field emotes, forced emotion indices on the actual Nebrel follower, four shadow
+templates with weather tag/black/blend checks, four visibly adjacent arrow
+direction/blink sequences, sandal orientations, landing bursts, and reeds over one temporary
+RAM tile. The original tile is restored; no production map is modified.
+
+Fishing/surf/relic figures use actual player graphics IDs and animation/image
+tables. Every selected state's live palette tag and palette bytes are checked
+against its ROM source. The NPC callback is held idle so it cannot replace
+the selected animation. This proves native state rendering and finite
+animation completion, not full controller/late-relic gameplay eligibility.
+`make` and original smoke pass. Native and matched engine comparison artifacts
+are retained in the checkpoint session, not committed as ROMs or saves.
+
+## Historical testing
 
 The check ran in the headless runner, over the real tiles, with temporary patches that were reverted before committing:
 - **The lab.** `LAYOUT_KALLISTE_ROUTE1` was switched to `gTileset_Aethos` + `gTileset_Kalliste` and filled with a test lab: barley, reeds, sand, a puddle pool, a row of ledges landing on reeds, grass, barley and a puddle, the sea, and an exit mat with a warp.
@@ -82,7 +120,6 @@ The check ran in the headless runner, over the real tiles, with temporary patche
 
 | Effect | Why |
 |---|---|
-| Jump and object shadows (`shadow_*.png`) | Neutral blended ovals in the weather palette. They read the same on any ground. |
 | Bike tire tracks, follower tracks (slither, spot, bug), deep-sand footprints, sand pile | Not in the slice: Aethos has no bikes, and aethos has no `MB_DEEP_SAND`. They take the new sand colors through general_0. |
 | Short grass (`short_grass.png`) | aethos has no `MB_SHORT_GRASS`. It now draws in barley and gold, and needs redrawing if a short-grass metatile is added. |
 | Ash, hot springs, cave dust, bubbles and water surfacing (Dive), rock climb, secret power, sand pillar, Deoxys rock, record mix lights, spotlight, Hall of Fame monitors, field-move streaks, ORAS dowsing, Fly's bird, Cut grass, the tree/mountain/sand disguises, Hoenn's scripted sparkles, the shiny sparkle, unused grass and sand | Not reachable in the slice. The water and sand ones take the new colors. |
