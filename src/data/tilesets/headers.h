@@ -447,3 +447,18 @@ const struct Tileset gTileset_Labyrinth =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
     .callback = NULL,
 };
+
+// Ichor: steppe, the steppe: Thrace, the Thermodon and Scythia (post-game). Porytiles-managed, built by
+// tools/ichor/art/farlands_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Steppe =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Steppe,
+    .palettes = gTilesetPalettes_PorytilesManaged_Steppe,
+    .metatiles = gMetatiles_PorytilesManaged_Steppe,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Steppe,
+    .callback = NULL,
+};
