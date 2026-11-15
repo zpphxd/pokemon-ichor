@@ -1,1 +1,102 @@
+// The muleteer's house, Kirrha (SCRIPT.md Part 2, Kirrha interiors).
+// Room: tools/ichor/maps/westrooms.py. Half stable, half house: three stalls under the
+// hay loft, one mule asleep; the muleteer (10,4) by his hearth. The Melisseer that moved
+// into his beehive hovers by the window (13,4) until he trades it away.
+//
+// The in-game trade: his Melisseer, KASSOTIS (female, Mental Herb), for a Lophops
+// (INGAME_TRADE_ICHOR_KASSOTIS in src/data/trade.h; FLAG_ICHOR_TRADED_MELISSEER, which
+// is also the Melisseer object's hide flag). The trade gives her the offered
+// Lophops's level, as every in-game trade does; SCRIPT.md's Lv 30 is about where a
+// player's Lophops is by now.
+// ICHOR_STUB_AETHOS_DEX: Melisseer and Lophops are stand-in species until the dex lands.
+
 mapscripts Kirrha_MuleteersHouse_MapScripts {}
+
+text Kirrha_MuleteersHouse_Name_Muleteer { "MULETEER" }
+text Kirrha_MuleteersHouse_Name_Melisseer { "MELISSEER" }
+
+script Kirrha_MuleteersHouse_EventScript_Muleteer {
+    lock
+    faceplayer
+    setspeaker(Kirrha_MuleteersHouse_Name_Muleteer)
+    if (flag(FLAG_ICHOR_TRADED_MELISSEER)) {
+        msgbox(format("Kassotis. After the spring up at Delphoi. The Pythia drinks from it.\p"
+                      "Then she says the future. Your bee doesn't need the water, apparently."))
+        release
+        end
+    }
+    msgbox(format("Mules up to Delphoi! Well. Not this month.\p"
+                  "This came down off the mountain and moved into my beehive.\p"
+                  "It hums. Always the day before something. A mule kicks, a storm comes.\p"
+                  "Yesterday it hummed all day, and today you walked in.\p"
+                  "It gives me the shivers. I'd trade it for anything that just flies.\p"
+                  "A Lophops, say. Something that's stupid in a normal way."))
+    // The in-game trade, written out (as the ingame_trade macro does) so each line carries his name.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_KASSOTIS)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Trade a Lophops for his Melisseer?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Kirrha_MuleteersHouse_Name_Muleteer)
+        msgbox(format("Suit yourself. It'll hum at you till you change your mind."))
+        release
+        end
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        setspeaker(Kirrha_MuleteersHouse_Name_Muleteer)
+        msgbox(format("Suit yourself. It'll hum at you till you change your mind."))
+        release
+        end
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Kirrha_MuleteersHouse_Name_Muleteer)
+        msgbox(format("That's not a Lophops. A Lophops is stupid in a normal way. That's clever in a normal way."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    setflag(FLAG_ICHOR_TRADED_MELISSEER)
+    removeobject(LOCALID_KIRRHA_MULETEER_MELISSEER)
+    setspeaker(Kirrha_MuleteersHouse_Name_Muleteer)
+    msgbox(format("Kassotis. After the spring up at Delphoi. The Pythia drinks from it.\p"
+                  "Then she says the future. Your bee doesn't need the water, apparently."))
+    release
+}
+
+script Kirrha_MuleteersHouse_EventScript_Melisseer {
+    lock
+    faceplayer
+    playmoncry(SPECIES_MELISSEER, CRY_MODE_NORMAL)
+    setspeaker(Kirrha_MuleteersHouse_Name_Melisseer)
+    msgbox(format("Mmmmmmmm."))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("It hums one long note at you, as if you're late for something."))
+    release
+}
+
+script Kirrha_MuleteersHouse_EventScript_Mule {
+    msgbox(format("A mule asleep in the straw. Nine days without the climb to Delphoi, and it's making the most of it."),
+           MSGBOX_SIGN)
+}
+
+script Kirrha_MuleteersHouse_EventScript_Hive {
+    if (flag(FLAG_ICHOR_TRADED_MELISSEER)) {
+        msgbox(format("A wooden beehive on the windowsill, over the bed. It's quiet now."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A wooden beehive on the windowsill, over the bed. The bees moved out when the hum moved in."),
+               MSGBOX_SIGN)
+    }
+}
+
+script Kirrha_MuleteersHouse_EventScript_Ladder {
+    msgbox(format("The ladder up to the hay loft. A mule's bell hangs from the top rung."), MSGBOX_SIGN)
+}
+
+script Kirrha_MuleteersHouse_EventScript_EmptyStall {
+    msgbox(format("An empty stall, swept and waiting. Nine days empty."), MSGBOX_SIGN)
+}

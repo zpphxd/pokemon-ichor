@@ -1,1 +1,60 @@
+// The old sweeper's house, Kirrha (SCRIPT.md Part 2, Kirrha interiors).
+// Room: tools/ichor/maps/westrooms.py. Thyia (5,4), who swept Apollo's floor at Delphoi
+// for forty years, at her table in a room full of brooms; her potted laurel (6..7,1..2)
+// is from the tree at the temple door. (SCRIPT.md's dialogue tagged her lines PHEMONIS,
+// a draft name; the director confirms THYIA.)
+//
+// First visit: the Pythia's lore (FLAG_ICHOR_HEARD_THYIA). Then one Laurel Sprig a day.
+// ICHOR_STUB_RITES: the engine hasn't given Act II's laurel trees their indices, so
+// FLAG_ICHOR_THYIA_LAUREL_TODAY, a bank flag of this agent's, stands in for her daily
+// flag (FLAG_DAILY_ICHOR_LAUREL_KIRRHA = FLAG_DAILY_ICHOR_LAUREL_START + her index).
+// Until the swap the stand-in never clears, so she gives one sprig in all.
+
 mapscripts Kirrha_SweepersHouse_MapScripts {}
+
+text Kirrha_SweepersHouse_Name_Thyia { "THYIA" }
+
+script Kirrha_SweepersHouse_EventScript_Thyia {
+    lock
+    faceplayer
+    setspeaker(Kirrha_SweepersHouse_Name_Thyia)
+    if (!flag(FLAG_ICHOR_HEARD_THYIA)) {
+        msgbox(format("Forty years I swept the god's floor. Every morning. The same floor.\p"
+                      "The Pythia used to talk to me all day. Chatter, chatter. About anything.\p"
+                      "Then, a year ago, she started saying less. Then less. Then “soon.”\p"
+                      "She's not ill. I know ill. She's looking at something, and it's close.\p"
+                      "I came down here so I wouldn't have to watch her look at it."))
+        setflag(FLAG_ICHOR_HEARD_THYIA)
+    }
+    // ICHOR_STUB_RITES: swap FLAG_ICHOR_THYIA_LAUREL_TODAY for her daily laurel flag.
+    if (flag(FLAG_ICHOR_THYIA_LAUREL_TODAY)) {
+        msgbox(format("One a day. The tree's young. So am I, compared to it."))
+        release
+        end
+    }
+    msgbox(format("Take a sprig from my laurel. It's from the temple door.\p"
+                  "Apollo likes his own leaves back. Everybody does."))
+    giveitem(ITEM_LAUREL_SPRIG)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_THYIA_LAUREL_TODAY)
+    }
+    release
+}
+
+script Kirrha_SweepersHouse_EventScript_Laurel {
+    msgbox(format("A young laurel in a big clay pot. Its leaves smell of the temple steps."), MSGBOX_SIGN)
+}
+
+script Kirrha_SweepersHouse_EventScript_OldBroom {
+    msgbox(format("Over the bed, on two pegs like a sword: a broom worn down to its binding. Forty years of the god's floor."),
+           MSGBOX_SIGN)
+}
+
+script Kirrha_SweepersHouse_EventScript_NewBrooms {
+    msgbox(format("New brooms, hung from the beam to dry. She still makes them. She just has nothing left to sweep."),
+           MSGBOX_SIGN)
+}
+
+script Kirrha_SweepersHouse_EventScript_CornerBrooms {
+    msgbox(format("Brooms in every corner, and not one speck of dust anywhere."), MSGBOX_SIGN)
+}

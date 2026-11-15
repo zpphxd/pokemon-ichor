@@ -8,7 +8,7 @@
 // after that, about each new one.
 // ICHOR_STUB_XENIA_REST: resting moves the clock forward (SYSTEMS.md §10), which needs the
 // engine's rest call; until then the menu is offered, the screen fades and the clock stays.
-// ICHOR_STUB_OFFERINGS: the Laurel Sprig is an offering and waits for the item.
+// Each new laurel's line comes with a Laurel Sprig, the engine's offering.
 // Kleon's later line waits for FLAG_ICHOR_KLEON_JOINED_TITANS (region B2).
 // ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
 
@@ -77,7 +77,8 @@ script ThyrsaCity_PindarosHouse_EventScript_LaurelLines {
     msgbox(format("Good. Good. I'll write you a line. One line. That's all you get, for now.\p"
                   "I write the whole ode when the race is over. Not before.\p"
                   "Here. A sprig of laurel. A victor's crown starts somewhere."))
-    // ICHOR_STUB_OFFERINGS: giveitem(ITEM_LAUREL_SPRIG) when the offering exists.
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_LAUREL_SPRIG)
     setvar(VAR_RESULT, TRUE)
     return
 }

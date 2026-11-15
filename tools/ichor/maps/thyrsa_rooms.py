@@ -40,6 +40,7 @@ import thyrsa_rooms_art as A  # noqa: E402
 import thyrsa_rooms_kithairon  # noqa: E402,F401
 import thyrsa_rooms_civic  # noqa: E402,F401
 import thyrsa_rooms_homes  # noqa: E402,F401
+import thyrsa_rooms_polish  # noqa: E402,F401  (batch 2's polish pass: Manto's cages, Polos's room)
 import thyrsa_rooms_build as B  # noqa: E402
 
 IMG = ROOT / "design/phase3/img"
@@ -338,7 +339,13 @@ ROOMS = {
         "stamps": [("herbs", 0, 0), ("kalathos", 0, 2), ("cornel_staff", 2, 0), ("sky_window", 5, 0), ("tripod_cold", 3, 2),
                    ("feather_pots", 7, 2), ("pithos", 9, 4), ("pallet", 0, 6), ("stool", 6, 4),
                    ("cage_a", 2, 4), ("cage_b", 6, 2), ("cage_c", 8, 6), ("cage_b", 1, 3),
-                   ("mat", 4, 7)],
+                   ("mat", 4, 7),
+                   # polish pass: a cage on a cord from every beam, the sleeping crow on
+                   # its perch, feathers underfoot
+                   ("beam_cage_a", 1, 0), ("beam_cage_c", 3, 0), ("beam_cage_b", 4, 0),
+                   ("beam_cage_d", 6, 0), ("beam_cage_c", 8, 0), ("beam_cage_a", 9, 0),
+                   ("perch_crow", 9, 2), ("floor_feathers", 4, 5), ("floor_feathers", 7, 5),
+                   ("cage_a", 8, 4), ("table_round", 6, 6), ("pots", 1, 7), ("mortar", 7, 7)],
         "spots": [
             warp([(4, 7), (5, 7)], "MAP_THYRSA_CITY", 7),
             npc("Manto", (5, 3), "south", G + "MANTO", "ThyrsaCity_MantoHouse_EventScript_Manto",
@@ -407,7 +414,11 @@ ROOMS = {
         "stamps": [("mask_king", 0, 0), ("mask_tragic", 1, 0), ("mask_elektra", 2, 0), ("mask_comic", 3, 0),
                    ("mask_satyr", 4, 0), ("boot_shelf", 0, 1), ("bronze_mirror", 3, 1),
                    ("window", 5, 0), ("costume_trunk", 5, 2), ("urn_table", 1, 5), ("klismos_l", 2, 5),
-                   ("kline_v", 0, 7), ("lampstand", 6, 6), ("mat", 3, 9)],
+                   ("kline_v", 0, 7), ("lampstand", 6, 6), ("mat", 3, 9),
+                   # polish pass: the robes he wore, the crown he won, his lines on a stand,
+                   # and a red rug worn pale where he paces them
+                   ("robe_rack", 6, 3), ("crown_peg", 6, 1), ("script_stand", 0, 3),
+                   ("rug", 2, 6), ("stool", 4, 2)],
         "spots": [
             warp([(3, 9), (4, 9)], "MAP_THYRSA_CITY", 5),
             npc("Polos", (4, 4), "south", G + "ACTOR", "ThyrsaCity_ActorHouse_EventScript_Polos",

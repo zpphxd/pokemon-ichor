@@ -7,8 +7,9 @@
 // one scripted throw with SCRIPT.md's lines: the regulars lose two times in three, the
 // champion one time in three. Swap ThyrsaCity_Tavern_EventScript_Match for the game's
 // match script (with each opponent's personality) when it lands.
-// ICHOR_STUB_OFFERINGS: the regulars' first-win prizes (Olive Oil x2, Wine) wait for the
-// offerings. ICHOR_STUB_TMS: Aristomache's TM Encore waits for Balance to number it.
+// The regulars' first-win prizes are offerings (SCRIPT.md Part 2): Phaidimos's Olive Oil
+// x2 (FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS) and Glauke's Wine (FLAG_ICHOR_KNUCKLEBONES_GLAUKE).
+// ICHOR_STUB_TMS: Aristomache's TM Encore waits for Balance to number it.
 // ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
 
 mapscripts ThyrsaCity_Tavern_MapScripts {}
@@ -52,6 +53,14 @@ script ThyrsaCity_Tavern_EventScript_Phaidimos {
         setspeaker(ThyrsaCity_Tavern_Name_Phaidimos)
         if (var(VAR_RESULT) == TRUE) {
             msgbox(format("Fours. I told you. Up to something."))
+            if (!flag(FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS)) {
+                msgbox(format("Take this. Oil for the god. He likes a careful player."))
+                setspeaker(SP_NAME_NONE)
+                giveitem(ITEM_OLIVE_OIL, 2)
+                if (var(VAR_RESULT) == TRUE) {
+                    setflag(FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS)
+                }
+            }
         } else {
             msgbox(format("Sixes. I thanked the god. The god listened."))
         }
@@ -72,6 +81,14 @@ script ThyrsaCity_Tavern_EventScript_Glauke {
         setspeaker(ThyrsaCity_Tavern_Name_Glauke)
         if (var(VAR_RESULT) == TRUE) {
             msgbox(format("Ruin! Seven times! Wonderful."))
+            if (!flag(FLAG_ICHOR_KNUCKLEBONES_GLAUKE)) {
+                msgbox(format("Here, my jar. I'd only drink it."))
+                setspeaker(SP_NAME_NONE)
+                giveitem(ITEM_WINE)
+                if (var(VAR_RESULT) == TRUE) {
+                    setflag(FLAG_ICHOR_KNUCKLEBONES_GLAUKE)
+                }
+            }
         } else {
             msgbox(format("Not ruin! How dull. Again!"))
         }

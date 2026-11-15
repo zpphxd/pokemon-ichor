@@ -1,1 +1,86 @@
-mapscripts Lebadeia_PilgrimsHall_MapScripts {}
+// The pilgrims' hall, Lebadeia (SCRIPT.md Part 2, Lebadeia interiors; beat 35B).
+// Room: tools/ichor/maps/westrooms.py. A long hall cut into the rock: the hall-keeper
+// (7,5) tends the fire pit in the middle and is talked to across its stone kerb from
+// (7,7). The heal is the Asclepeion's (EventScript_PkmnCenterNurse_TakeAndHealPkmn):
+// the party's balls warm on the fire pit, at her x-2..x-1, y-1..y, and she bows. This
+// is Lebadeia's heal location, HEAL_LOCATION_LEBADEIA, and a whiteout wakes the player
+// at (7,7) in front of her.
+
+mapscripts Lebadeia_PilgrimsHall_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_LEBADEIA)
+    }
+}
+
+text Lebadeia_PilgrimsHall_Name_Keeper { "HALL-KEEPER" }
+text Lebadeia_PilgrimsHall_Name_Pilgrim { "PILGRIM" }
+
+script Lebadeia_PilgrimsHall_EventScript_Keeper {
+    lock
+    faceplayer
+    setspeaker(Lebadeia_PilgrimsHall_Name_Keeper)
+    msgbox(format("Cold, are you? Everyone's cold after. Sit by the fire."))
+    incrementgamestat(GAME_STAT_USED_POKECENTER)
+    setvar(VAR_0x800B, LOCALID_LEBADEIA_HALL_KEEPER)
+    call(EventScript_PkmnCenterNurse_TakeAndHealPkmn)
+    setspeaker(Lebadeia_PilgrimsHall_Name_Keeper)
+    message(format("There. Warm through. The earth takes the heat out of you."))
+    waitmessage
+    applymovement(LOCALID_LEBADEIA_HALL_KEEPER, Movement_PkmnCenterNurse_Bow)
+    waitmovement(0)
+    waitbuttonpress
+    release
+}
+
+script Lebadeia_PilgrimsHall_EventScript_BenchPilgrim {
+    lock
+    faceplayer
+    setspeaker(Lebadeia_PilgrimsHall_Name_Pilgrim)
+    msgbox(format("The priests pull you down through a hole, feet first.\p"
+                  "Then something takes you by the ankles. And you see.\p"
+                  "Or hear. Or I fainted. The priests say it counts either way."))
+    release
+}
+
+script Lebadeia_PilgrimsHall_EventScript_WeaverPilgrim {
+    lock
+    faceplayer
+    setspeaker(Lebadeia_PilgrimsHall_Name_Pilgrim)
+    msgbox(format("I'm a weaver. I came up saying the cloth runs out.\p"
+                  "I went home and looked at my loom. Plenty of cloth.\p"
+                  "So I came back. To ask whose cloth."))
+    release
+}
+
+// The votive wall: one tablet at random from four, then the newest.
+script Lebadeia_PilgrimsHall_EventScript_VotiveWall {
+    lockall
+    msgbox(format("A wall of little wooden tablets, each a pilgrim's thanks."))
+    random(4)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("“I asked if my son would come home from the sea. He did. HIPPARCHOS.”"))
+        case 1:
+            msgbox(format("“I asked for a cure for my cough. He said: stop shouting. EUDOXOS.”"))
+        case 2:
+            msgbox(format("“I asked nothing. I just wanted to see. It was very dark. MELO.”"))
+        default:
+            msgbox(format("“I asked about my debts. I forget the answer. I'm told I paid. KLEARCHOS.”"))
+    }
+    msgbox(format("The newest tablets all say the same four words: “The cloth runs out.”"))
+    releaseall
+}
+
+script Lebadeia_PilgrimsHall_EventScript_Fire {
+    msgbox(format("The fire in its pit, burning low. Wet cloaks steam on the kerb."), MSGBOX_SIGN)
+}
+
+script Lebadeia_PilgrimsHall_EventScript_HoneyCakes {
+    msgbox(format("A basket of honey cakes by the door. For the snakes below, says a scratched tablet. Not for you."),
+           MSGBOX_SIGN)
+}
+
+script Lebadeia_PilgrimsHall_EventScript_Staffs {
+    msgbox(format("Pilgrims' staffs, and the white linen they go down in. The linen is clean. The staffs aren't."),
+           MSGBOX_SIGN)
+}

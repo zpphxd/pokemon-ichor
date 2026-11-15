@@ -535,7 +535,7 @@ const struct Tileset gTileset_Thyrsa =
     .palettes = gTilesetPalettes_PorytilesManaged_Thyrsa,
     .metatiles = gMetatiles_PorytilesManaged_Thyrsa,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Thyrsa,
-    .callback = NULL,
+    .callback = InitTilesetAnim_Thyrsa,     // Semele's smoke (src/tileset_anims.c)
 };
 
 // Porytiles-managed secondary built by tools/ichor/art/temple_dionysus_build.py: the Temple
@@ -591,6 +591,62 @@ const struct Tileset gTileset_ThyrsaStone =
     .palettes = gTilesetPalettes_PorytilesManaged_ThyrsaStone,
     .metatiles = gMetatiles_PorytilesManaged_ThyrsaStone,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaStone,
+    .callback = NULL,
+};
+
+// Ichor (Act II batch 2): Trophonios's cave under Lebadeia (SCRIPT.md Part 5, beats 35B-35C).
+// A Porytiles-managed secondary for the aethos primary, built by tools/ichor/art/trophonios_build.py.
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_Trophonios =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Trophonios,
+    .palettes = gTilesetPalettes_PorytilesManaged_Trophonios,
+    .metatiles = gMetatiles_PorytilesManaged_Trophonios,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Trophonios,
+    .callback = NULL,
+};
+
+// Ichor (Act II rooms, the road west): Lebadeia's pilgrims' hall and the mason's house: living rock, rubble, cut stone. A Porytiles-managed secondary for the oikos
+// primary, built by tools/ichor/maps/westrooms.py (art in tools/ichor/art/westrooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_WestStone =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_WestStone,
+    .palettes = gTilesetPalettes_PorytilesManaged_WestStone,
+    .metatiles = gMetatiles_PorytilesManaged_WestStone,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_WestStone,
+    .callback = NULL,
+};
+
+// Ichor (Act II rooms, the road west): Kirrha's pilgrims' inn, Agora stall, the muleteer's and the old sweeper's houses. A Porytiles-managed secondary for the oikos
+// primary, built by tools/ichor/maps/westrooms.py (art in tools/ichor/art/westrooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_WestHarbor =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_WestHarbor,
+    .palettes = gTilesetPalettes_PorytilesManaged_WestHarbor,
+    .metatiles = gMetatiles_PorytilesManaged_WestHarbor,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_WestHarbor,
+    .callback = NULL,
+};
+
+// Ichor (Act II rooms, the road west): Herkyna's river house in Lebadeia, and Aigion's old Achaean's and goatherd's houses. A Porytiles-managed secondary for the oikos
+// primary, built by tools/ichor/maps/westrooms.py (art in tools/ichor/art/westrooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_WestHomes =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_WestHomes,
+    .palettes = gTilesetPalettes_PorytilesManaged_WestHomes,
+    .metatiles = gMetatiles_PorytilesManaged_WestHomes,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_WestHomes,
     .callback = NULL,
 };
 

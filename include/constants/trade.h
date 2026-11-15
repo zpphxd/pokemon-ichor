@@ -24,6 +24,7 @@ enum InGameTradeID
     // Ichor
     INGAME_TRADE_ICHOR_ARION, // Kimon's Finizen, for a Wooloo (Elaia, Glykera's house)
     INGAME_TRADE_ICHOR_PATHOS, // Euthykles's Prosomime, for a Gelasable (Thyrsa, the mask workshop)
+    INGAME_TRADE_ICHOR_KASSOTIS, // the muleteer's Melisseer, for a Lophops (Kirrha, the muleteer's house)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon
