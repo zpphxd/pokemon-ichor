@@ -202,7 +202,7 @@ script MtKithairon_EventScript_Sheep {
 
 // --- trainers -----------------------------------------------------------------------------------
 script MtKithairon_EventScript_Lykidas {
-    trainerbattle_single(TRAINER_ICHOR_LYKIDAS, MtKithairon_Text_LykidasIntro, MtKithairon_Text_LykidasDefeat)
+    trainerbattle_single(TRAINER_ICHOR_LYKIDAS_KITHAIRON, MtKithairon_Text_LykidasIntro, MtKithairon_Text_LykidasDefeat)
     setspeaker(MtKithairon_Text_SpeakerLykidas)
     msgbox(format("Kithairon eats people, they say. It's never eaten me. I taste of goat."), MSGBOX_AUTOCLOSE)
 }

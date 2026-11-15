@@ -12509,7 +12509,7 @@ Defeat: LYKIDAS: Beaten by a lowlander! Don't tell the goats.
 After:  LYKIDAS: Kithairon eats people, they say. It's never eaten me. I taste of goat.
 ```
 ```
-=== TRAINER_ICHOR_LYKIDAS ===
+=== TRAINER_ICHOR_LYKIDAS_KITHAIRON ===
 Name: LYKIDAS
 Class: Goatherd
 Pic: Goatherd
