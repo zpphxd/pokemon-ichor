@@ -94,6 +94,20 @@ LEGEND = {"~": "sea", "s": "sand", "g": "grass", ",": "tall", "T": "grass", "r":
 # Route 22, the Cretan Sea: Kaldera to Melos
 # ===========================================================================
 
+def melos_shrub(g):
+    """Melos's woods' undergrowth, as on Melos's own crest: wild roses and
+    lichened rocks between the trees, so a wood's rim isn't a row of boulders."""
+    rock = g.m("rocks", "rock_grass")
+
+    def shrub(x, y):
+        # never two rocks side by side, so a rim never lines up into a wall
+        if K.hashed(x, y, 17) < 0.6 or rock in (g.get(x - 1, y), g.get(x, y - 1)):
+            g.piece("flowers", "briar", x, y)
+        else:
+            g.piece("rocks", "rock_grass", x, y)
+    return shrub
+
+
 def islet(s, x0, rows):
     """Land an islet from (y, row) pairs at column offset x0 (' ' is sea)."""
     for (y, row) in rows:
@@ -162,7 +176,9 @@ def cretan():
     for (x, y) in ((74, 5), (77, 21), (75, 12)):
         g.set(x, y, K.SEA_ROCK, True)
     woods = [(x, y) for y, row in enumerate(s.plan) for x, c in enumerate(row) if c == "T"]
-    g.woods(woods, seed=21, pines=0.3, cypresses=0.5)
+    g.woods(woods, seed=21, pines=0.3, cypresses=0.5, shrubs=melos_shrub(g))
+    for (x, y) in ((9, 26), (14, 22), (4, 28)):
+        tide(g, x, y, x)                                     # Melos's bay runs on: its tide rocks
     g.piece("rocks", "stake", 22, 23)                         # the route's sign at the Melos end
     g.piece("rocks", "stake", 70, 27)                         # and at the Kaldera end
 
@@ -236,10 +252,12 @@ def myrtoan():
     # Cape Malea's gray cliffs along the north edge, and the surf the player can't cross
     # (whole sea stacks on a 2-cell grid, the second row offset by one, so no
     # stack is ever cut in half)
+    # (all one kind of stack: "big" is cut from a larger rock and showed its
+    # seam all along the headland)
     for i, x in enumerate(range(4, 62, 2)):
-        rock2(g, x, 0, "big" if K.hashed(x, 0, 5) < 0.6 else "block")
+        rock2(g, x, 0, "block")
         if x + 1 < 62:
-            rock2(g, x + 1, 2, "block" if K.hashed(x, 2, 7) < 0.55 else "big")
+            rock2(g, x + 1, 2, "block")
     for x in range(4, 64):
         tide(g, x, 4, x)
     # lanes
@@ -268,7 +286,7 @@ def myrtoan():
         if K.behavior(g.get(x, y), "melos") == "MB_SAND":
             g.piece("sand_decor", n, x, y)
     woods = [(x, y) for y, row in enumerate(s.plan) for x, c in enumerate(row) if c == "T"]
-    g.woods(woods, seed=23, pines=0.3, cypresses=0.5)
+    g.woods(woods, seed=23, pines=0.3, cypresses=0.5, shrubs=melos_shrub(g))
     g.piece("rocks", "stake", 12, 6)                          # CAPE MALEA
     g.piece("rocks", "stake", 68, 27)                         # ROUTE 22, at the Melos end
     g.piece("rocks", "stake", 9, 20)                          # ROUTE 22, at the Skandeia end
