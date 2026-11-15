@@ -460,6 +460,9 @@ const struct Tileset gTileset_Euploia =
     .palettes = gTilesetPalettes_PorytilesManaged_Euploia,
     .metatiles = gMetatiles_PorytilesManaged_Euploia,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Euploia,
+    .callback = NULL, // the hearth fire's animation isn't wired yet (BUILD.md, batch 1)
+};
+
 // Ichor (world-postgame): westsea, Route 33's western sea. A Porytiles-managed
 // secondary built by tools/ichor/art/westsea_build.py for the aethos primary: its
 // sea, sand and grass cells borrow aethos's ground, so rebuild it when aethos changes.
@@ -473,6 +476,7 @@ const struct Tileset gTileset_Westsea =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Westsea,
     .callback = NULL,
 };
+
 // Ichor: steppe, the steppe: Thrace, the Thermodon and Scythia (post-game). Porytiles-managed, built by
 // tools/ichor/art/farlands_build.py for the aethos primary: its ground cells
 // borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild

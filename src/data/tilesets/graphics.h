@@ -762,6 +762,8 @@ const u16 gTilesetPalettes_PorytilesManaged_Euploia[][16] =
     INCBIN_U16("data/tilesets/secondary/euploia/porytiles_bin/palettes/13.gbapal"),
     INCBIN_U16("data/tilesets/secondary/euploia/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/euploia/porytiles_bin/palettes/15.gbapal")
+};
+
 // Ichor (world-postgame): westsea
 const u32 gTilesetTiles_PorytilesManaged_Westsea[] = INCBIN_U32("data/tilesets/secondary/westsea/porytiles_bin/tiles.4bpp.lz");
 
@@ -782,7 +784,9 @@ const u16 gTilesetPalettes_PorytilesManaged_Westsea[][16] =
     INCBIN_U16("data/tilesets/secondary/westsea/porytiles_bin/palettes/12.gbapal"),
     INCBIN_U16("data/tilesets/secondary/westsea/porytiles_bin/palettes/13.gbapal"),
     INCBIN_U16("data/tilesets/secondary/westsea/porytiles_bin/palettes/14.gbapal"),
-    INCBIN_U16("data/tilesets/secondary/westsea/porytiles_bin/palettes/15.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/westsea/porytiles_bin/palettes/15.gbapal")
+};
+
 // Ichor: steppe (the steppe: Thrace, the Thermodon and Scythia), written by tools/ichor/art/farlands_build.py
 const u32 gTilesetTiles_PorytilesManaged_Steppe[] = INCBIN_U32("data/tilesets/secondary/steppe/porytiles_bin/tiles.4bpp.lz");
 
