@@ -1,1 +1,123 @@
-mapscripts Arkadia_GoatherdHouse_MapScripts {}
+// Krotos's house, half of it a byre (SCRIPT.md Part 2, Arkadia interiors). Room:
+// tools/ichor/maps/arkrooms.py. Krotos (4,5), one of Pan's men, lost three kids to Pan's
+// panic last night. Find them in town and he gives the Lucky Egg.
+//
+// The three lost kids stand on MAP_ARKADIA (the arkadia agent's map): one behind the
+// Asclepeion's rock, one on the temple stair, one asleep in Pan's grotto's mouth. Each is an
+// OBJ_EVENT_GFX_SPECIES(KERAZAP) object whose hide flag is FLAG_ICHOR_KROTOS_KID_<n> and
+// whose script is Arkadia_GoatherdHouse_EventScript_LostKid<n> below: talking to it sends
+// it home (fade, hide, flag). Home, it turns up in the byre's straw here: the three
+// Kerazap objects in the pen show once their flag is set (FLAG_TEMP_11-13, set in
+// ON_TRANSITION for the kids still lost).
+// ICHOR_STUB_AETHOS_DEX: Kerazap is a stand-in. ICHOR_STUB_MUSIC: Arkadia's own cue.
+
+mapscripts Arkadia_GoatherdHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_KROTOS_KID_1)) {
+            setflag(FLAG_TEMP_11)
+        }
+        if (!flag(FLAG_ICHOR_KROTOS_KID_2)) {
+            setflag(FLAG_TEMP_12)
+        }
+        if (!flag(FLAG_ICHOR_KROTOS_KID_3)) {
+            setflag(FLAG_TEMP_13)
+        }
+    }
+}
+
+text Arkadia_GoatherdHouse_Name_Krotos { "KROTOS" }
+
+script Arkadia_GoatherdHouse_EventScript_Krotos {
+    lock
+    faceplayer
+    setspeaker(Arkadia_GoatherdHouse_Name_Krotos)
+    if (flag(FLAG_ICHOR_GOT_LUCKY_EGG)) {
+        msgbox(format("Pan's our god up here. Half goat. Plays the pipes. Frightens everyone.\p"
+                      "He's never once frightened a goat. They know him. They're his."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_KROTOS_KID_1) && flag(FLAG_ICHOR_KROTOS_KID_2) && flag(FLAG_ICHOR_KROTOS_KID_3)) {
+        msgbox(format("All three! You're a better goatherd than me. Don't tell Pan.\p"
+                      "Here. A hen's egg the size of my fist. It's lucky. Everyone says so."))
+        giveitem(ITEM_LUCKY_EGG)
+        if (var(VAR_RESULT) == FALSE) {
+            setspeaker(Arkadia_GoatherdHouse_Name_Krotos)
+            msgbox(format("No room for an egg? Make some. It'll keep. It's kept this long."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_LUCKY_EGG)
+        setspeaker(Arkadia_GoatherdHouse_Name_Krotos)
+        msgbox(format("I never ate it. You don't eat a thing everyone says is lucky."))
+        release
+        end
+    }
+    msgbox(format("Panic! Pan's own panic, last night. Every kid I've got went over the rail.\p"
+                  "I found most of them. Three are still loose in town.\p"
+                  "They'll be somewhere stupid. Kids always are. Bring them back?"))
+    release
+}
+
+// The lost kids, on MAP_ARKADIA. Each object runs its own; VAR_LAST_TALKED is its local id.
+script Arkadia_GoatherdHouse_EventScript_LostKid1 {
+    setvar(VAR_0x8004, 1)
+    goto(Arkadia_GoatherdHouse_EventScript_LostKid)
+}
+
+script Arkadia_GoatherdHouse_EventScript_LostKid2 {
+    setvar(VAR_0x8004, 2)
+    goto(Arkadia_GoatherdHouse_EventScript_LostKid)
+}
+
+script Arkadia_GoatherdHouse_EventScript_LostKid3 {
+    setvar(VAR_0x8004, 3)
+    goto(Arkadia_GoatherdHouse_EventScript_LostKid)
+}
+
+script Arkadia_GoatherdHouse_EventScript_LostKid {
+    lock
+    faceplayer
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A Kerazap kid, trembling. It sees you and bleats, very offended.\p"
+                  "It trots off toward home."))
+    waitmoncry
+    fadescreen(FADE_TO_BLACK)
+    removeobject(VAR_LAST_TALKED)
+    if (var(VAR_0x8004) == 1) {
+        setflag(FLAG_ICHOR_KROTOS_KID_1)
+    } elif (var(VAR_0x8004) == 2) {
+        setflag(FLAG_ICHOR_KROTOS_KID_2)
+    } else {
+        setflag(FLAG_ICHOR_KROTOS_KID_3)
+    }
+    fadescreen(FADE_FROM_BLACK)
+    release
+}
+
+script Arkadia_GoatherdHouse_EventScript_HomeKid {
+    lock
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A Kerazap kid, home in the straw. It ignores you completely."))
+    waitmoncry
+    release
+}
+
+script Arkadia_GoatherdHouse_EventScript_Syrinx {
+    msgbox(format("A syrinx on a peg: seven reeds, bound with cord. Pan's own instrument."), MSGBOX_SIGN)
+}
+
+script Arkadia_GoatherdHouse_EventScript_PanMask {
+    msgbox(format("A wooden mask of Pan over the byre door, horned and grinning."), MSGBOX_SIGN)
+}
+
+script Arkadia_GoatherdHouse_EventScript_Kids {
+    msgbox(format("Kid goats asleep in the straw, in a heap. One opens an eye, then thinks better of it."),
+           MSGBOX_SIGN)
+}
+
+script Arkadia_GoatherdHouse_EventScript_Press {
+    msgbox(format("A cheese press, a stone on its beam. Whey drips into a bowl."), MSGBOX_SIGN)
+}

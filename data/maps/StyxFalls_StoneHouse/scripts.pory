@@ -1,1 +1,53 @@
+// Kepheus's house, and its lean-to (SCRIPT.md Part 2, Styx Falls interiors). Room:
+// tools/ichor/maps/arkrooms.py. Kepheus (5,4) at his clay model of the cirque gives TM
+// Bulldoze. A hidden Everstone lies in the rubble in the lean-to's corner (13,6).
+// ICHOR_STUB_TMS: TM Bulldoze waits for Balance to number it; the flag and the line run now.
+// ICHOR_STUB_MUSIC: Styx Falls's own quiet cue.
+
 mapscripts StyxFalls_StoneHouse_MapScripts {}
+
+text StyxFalls_StoneHouse_Name_Kepheus { "KEPHEUS" }
+
+script StyxFalls_StoneHouse_EventScript_Kepheus {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_StoneHouse_Name_Kepheus)
+    if (flag(FLAG_ICHOR_GOT_TM_BULLDOZE)) {
+        msgbox(format("That black stone on the beam? The water wore that hole in it.\p"
+                      "Took a thousand years.\p"
+                      "Patient water. I don't trust patient things."))
+        release
+        end
+    }
+    msgbox(format("The falls bring the cliff down a stone at a time. Somebody has to shift them.\p"
+                  "Over the ridge at Pheneos, Herakles dug channels for a whole lake. In a morning.\p"
+                  "I've cleared this terrace every spring for forty years. Nobody sings about me.\p"
+                  "That's fine. I'd only argue with the words.\p"
+                  "Here. It's what Herakles did with his club, more or less. Shift the ground."))
+    // ICHOR_STUB_TMS: giveitem(ITEM_TM_BULLDOZE) once Balance gives Bulldoze a TM number.
+    setflag(FLAG_ICHOR_GOT_TM_BULLDOZE)
+    setspeaker(StyxFalls_StoneHouse_Name_Kepheus)
+    msgbox(format("That black stone on the beam? The water wore that hole in it.\p"
+                  "Took a thousand years.\p"
+                  "Patient water. I don't trust patient things."))
+    release
+}
+
+script StyxFalls_StoneHouse_EventScript_Model {
+    msgbox(format("A clay model of the cirque. The falls are a dribble from a jug.\p"
+                  "The pool is a dish. It never quite fills."), MSGBOX_SIGN)
+}
+
+script StyxFalls_StoneHouse_EventScript_Stone {
+    msgbox(format("A smooth black stone with a hole worn right through it, hanging on a cord."),
+           MSGBOX_SIGN)
+}
+
+script StyxFalls_StoneHouse_EventScript_Sledge {
+    msgbox(format("A stone-sledge on runners, loaded again with stones the falls brought down."),
+           MSGBOX_SIGN)
+}
+
+script StyxFalls_StoneHouse_EventScript_Tools {
+    msgbox(format("Crowbars and mattocks, the handles worn pale. Forty springs of them."), MSGBOX_SIGN)
+}
