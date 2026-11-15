@@ -41,8 +41,8 @@ Walking, running, fishing, field-move and surfing sheets were regenerated in
 the 2026-11-15 Elaia native pass with a cleaner petasos contour and eye glints.
 All their motion frames are distinct and match their source arrays.
 
-The bike, watering, decorating and underwater sheets remain untouched.
-The first three groups are unused by Aethos's current design; underwater is
+The bike and underwater sheets remain outside this checkpoint.
+Bikes, watering and decorating are unused by Aethos's current design; underwater is
 a supported engine state and still needs an Ichor-native sheet in its own
 `player_underwater.pal`. It is not counted as redrawn by this checkpoint.
 The current ROM builds and passes smoke and all three Elaia opening runs.
@@ -63,7 +63,28 @@ These captures are explicitly **forced engine-state evidence**: an idle NPC
 callback prevents normal NPC behavior from overriding the selected player
 animation. They are not proof that early Elaia gameplay permits fishing or
 late relics, nor do isolated rider states exercise the surf mount/controller.
-Underwater, bikes, watering and decorating remain outside this checkpoint.
+Underwater and bikes remain outside this checkpoint.
+
+## Unused watering and decorating artwork
+
+`tools/ichor/art/player_unused.py --write --check` replaces only the four
+existing watering/decorating PNGs with Theo/Ianthe's established native
+petasos, faces, chlamys, chiton and sandals. The watering vessel is a small
+handled clay jug with two pouring phases in each facing; source order remains
+down 0/1, up 2/3, left 4/5. The unchanged engine image tables expose those six
+32x32 frames through their nine standard entries and mirror the east-facing
+views. Decorating keeps its single 16x32 frame, now a crouched player holding
+a small clay vessel. Shared palette bytes, controllers and availability are
+unchanged; this artwork does not enable either unused system.
+
+`bash tools/ichor/tests/player_unused.sh` exercises the actual graphics IDs,
+animation/image tables, all sixteen live palette words, hardware mirroring
+and complete OBJ VRAM frame transfers. Both exact before and current ROMs
+pass 242 checks with 34 captures each. These are labeled test-only fixtures,
+not ordinary gameplay or proof of controller eligibility. Three source
+regressions, four native PNG checks, helper/build and original smoke pass.
+Complete palette-correct 1x/4x comparisons and matching ROM/ELF/map packages
+are preserved in the coordinator's session artifacts.
 
 ## Palettes: how the roles were remapped
 
@@ -90,8 +111,8 @@ Only Theo has a chlamys highlight; Ianthe's chlamys uses two shades because `may
 ## Side effects on the untouched sheets
 
 These still use Brendan's and May's art, so they now draw in the new colors:
-- **Brendan's bike, watering and decorating sheets:** the white beanie turns cream, the navy clothes Aegean blue, the green band straw-gold, the red trim terracotta.
-- **May's:** the green bandana turns straw-gold, the brown hair stays brown, the gray knot and dark shorts turn Aegean blue.
+- **Brendan's bike sheets:** the white beanie turns cream, the navy clothes Aegean blue, the green band straw-gold, the red trim terracotta.
+- **May's bike sheets:** the green bandana turns straw-gold, the brown hair stays brown, the gray knot and dark shorts turn Aegean blue.
 - **Rival Brendan and May** (`OBJ_EVENT_GFX_RIVAL_*`) and the **link players** take the same colors. Ichor's rival is Kleon, so the rivals should not appear in the slice.
 - **The "!" and "?" emotes** above trainers use `may.pal` 14 and 15: cream with ink, nearly as before.
 - **Reflections** are filtered from the live palette by the engine, so they follow automatically.

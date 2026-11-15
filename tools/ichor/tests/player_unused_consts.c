@@ -1,0 +1,9 @@
+#include "elaia_effects_consts.c"
+
+K(GFX_THEO_WATER, OBJ_EVENT_GFX_BRENDAN_WATERING)
+K(GFX_IANTHE_WATER, OBJ_EVENT_GFX_MAY_WATERING)
+K(GFX_THEO_DECOR, OBJ_EVENT_GFX_BRENDAN_DECORATING)
+K(GFX_IANTHE_DECOR, OBJ_EVENT_GFX_MAY_DECORATING)
+K(FRAME_IMAGE_SIZE, sizeof(struct SpriteFrameImage))
+K(OFF_FRAME_IMAGE_DATA, offsetof(struct SpriteFrameImage, data))
+K(OFF_FRAME_IMAGE_SIZE, offsetof(struct SpriteFrameImage, size))
