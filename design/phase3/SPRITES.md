@@ -250,3 +250,199 @@ The harness was throwaway and isn't committed: a consts file, an assembled blob 
 - **Part 10's other art:** the battle backgrounds, item icons, the Mask Laurel icon and the map-name steles aren't this batch's.
 - **Two tones per material:** as in the slice, materials have two tones plus the outline.
 - **Not opened in Porymap:** the entries follow the slice's format exactly, so they should display.
+
+# Act II, batch 2: the road west
+
+The Fowler class and the people of beats 35–37: Route 8 (the Kopais), Lebadeia and Trophonios's cave, Route 9, Kirrha, the Gulf ferry and Aigion. They follow batch 1's house style and SCRIPT.md Part 10's sprite list, and every name is the one BUILD.md's batch 2 block fixed. `include/constants/ichor_gfx_stubs_act2.h`'s batch 2 aliases are deleted, so the maps' names now resolve to the real art.
+
+| Source | Rebuild | Preview |
+|---|---|---|
+| `tools/ichor/art/sprites_act2_b2_classes.py` (the two Fowler portraits) | `python3 tools/ichor/art/sprites_act2_b2_classes.py --write` | `--preview DIR`: the 3× sheet, 6× singles, pixel grids |
+| `tools/ichor/art/sprites_act2_b2.py` (walkers, poses, the note, the extras) | `python3 tools/ichor/art/sprites_act2_b2.py --write` | `--preview DIR` for the 4× sheet; `--grids DIR` for 8× pixel grids |
+
+`--write` with no name also rewrites the contact sheets:
+
+- `img/sprites_batch2.png`: every walker, pose and object at 2×, after seven of the walkers they're drawn to match (the slice's fisher, sailor, elder, goatherd, hoplite and Alethea, and batch 1's Kronist).
+- `img/portraits_batch2.png`: the two Fowlers at 2× on the grass battle background, after five earlier portraits (Shepherd, Harvester, Goatherd, Vintner, Maenad).
+
+In-game captures: `img/sprites_batch2_ingame.png` (all 23 sheets in the Quickstart bedroom, turned down, left, up and right) and `img/portraits_batch2_ingame.png` (both Fowler battle intros).
+
+## For party files
+
+| Trainers | `Class:` | `Pic:` |
+|---|---|---|
+| Gorgidas (Route 8) | `Fowler` | `Fowler M` |
+| Timoxena (Route 8) | `Fowler` | `Fowler F` |
+
+The staged `design/phase3/parties/kopais.party` already says this. `tools/ichor/act2/fold_parties.py` folds a class or pic to a stand-in only when `trainers.h` lacks it, so rerunning it now writes the real ones.
+
+## Trainer class
+
+| Constant | Shown as | Money | Who |
+|---|---|---|---|
+| `TRAINER_CLASS_FOWLER` | FOWLER | 5 | the Kopais's bird-catchers |
+
+- **Money:** 5, the same as batch 1's Maenads and Satyrs. Fowlers are poor marsh folk, so they pay like the mountain's bacchants rather than the vintners and actors.
+- **Ball:** the default.
+- **In the box:** checked in battle: "You are challenged by FOWLER GORGIDAS!" and "FOWLER TIMOXENA!" both fit.
+
+## Trainer pics
+
+Each is a 64×64, 16-color front pic with its palette embedded in the PNG. The two have their own palettes, which is Part 3's "one male and one female palette".
+
+| Constant | `Pic:` | Look | File |
+|---|---|---|---|
+| `TRAINER_PIC_FOWLER_M` | `Fowler M` | A lean, clean-shaven man under a broad straw hat with a peaked crown and a terracotta band. He wears a short undyed tunic belted in terracotta, with bare legs and sandals. A folded net hangs over his far shoulder and down his back, with his far hand on its fold. His near hand holds a green reed decoy-pipe to his lips. A wicker quail cage, a speckled quail inside, hangs from his belt at the near hip. | `graphics/trainers/front_pics/fowler_m.png` |
+| `TRAINER_PIC_FOWLER_F` | `Fowler F` | The same hat with a sky-blue band. Long dark hair falls behind her, and a braid tied in blue lies over her near shoulder. Her paler linen tunic reaches the knee, with a sky-blue girdle. The net is over her far shoulder and the pipe at her lips. Her far hand holds the quail's cage up to show you: Timoxena's decoy. | `graphics/trainers/front_pics/fowler_f.png` |
+
+## Walkers
+
+All sheets are in `graphics/object_events/pics/people/ichor/`. Each is 144×32 (nine 16×32 frames in the slice's layout, feet on row 30, the 1 px step bob) and uses `sAnimTable_Standard`.
+
+| Constant | Sheet | Palette | Look | Used in |
+|---|---|---|---|---|
+| `OBJ_EVENT_GFX_ICHOR_FOWLER` | `fowler.png` | folk | The peaked straw hat across the whole frame with a terracotta band, short dark hair and no beard. An undyed tunic with a terracotta belt, the folded net over his left shoulder (down his back from behind), the decoy-pipe at the corner of his mouth, and the wicker cage hanging from his right hand. | Route 8 (Gorgidas) |
+| `OBJ_EVENT_GFX_ICHOR_FOWLER_F` | `fowler_f.png` | folk | The same hat with a sky-blue band, hair past her jaw and a long braid down her back over the net, and a paler linen tunic to mid-calf with a sky-blue girdle. The same pipe, net and cage. | Route 8 (Timoxena) |
+| `OBJ_EVENT_GFX_ICHOR_SAON` | `saon.png` | folk | Bald under a terracotta fillet, gray brows, a white fringe and a long white beard, a white robe to the floor with a terracotta girdle. He holds a wax tablet at his chest in both hands (a wooden frame, dark wax, a scratched line); from the side it is a plank. | Lebadeia (the grille; beat 35C) |
+| `OBJ_EVENT_GFX_ICHOR_TROPHONIAN_PRIEST` | `trophonian_priest.png` | folk | Dark hair streaked gray and a short gray beard under the same fillet, the same white robe, and a lit clay lamp held out before him for the descent. | Lebadeia (by the chair; beat 35C) |
+| `OBJ_EVENT_GFX_ICHOR_AGAMEDES` | `agamedes.png` | folk | Dark curls under a terracotta sweatband, a short beard with stone dust in it, a terracotta exomis under a dusty linen apron, and hands and forearms gray with stone dust. A wooden mallet is held up beside his shoulder. | the mason's house |
+| `OBJ_EVENT_GFX_ICHOR_PANOPEUS` | `panopeus.png` | folk | The sailor's bare chest, linen kilt and blue sash, under a tall blue felt pilos with a terracotta band (the captain's hat; the fisher's is brown), and a full black beard going gray. | Kirrha's and Aigion's quays, the ferry (beat 37B) |
+| `OBJ_EVENT_GFX_ICHOR_TEMPLE_GUARD` | `temple_guard.png` | cast | The Hoplite with a white horsehair crest, a white cloak (two edges from the front, the whole back from behind), a blue chiton under the linen corselet, bronze greaves, a spear, and a white shield rimmed in bronze with Apollo's green laurel wreath. | Kirrha's pilgrims' gate (beat 37A) |
+| `OBJ_EVENT_GFX_ICHOR_HERKYNA` | `herkyna.png` | folk | A girl of nine (the child's body): dark hair loose to her shoulders with a white flower over one ear, a sky-blue tunic, barefoot. | Herkyna's house |
+| `OBJ_EVENT_GFX_ICHOR_XENODIKE` | `xenodike.png` | folk | Dark hair in a knot, a linen chiton to mid-calf, a terracotta traveling cloak pinned at the right shoulder, and a sky-blue cloth bundle under her left arm. | Route 9's lookout, Kirrha's inn |
+| `OBJ_EVENT_GFX_ICHOR_THYIA` | `thyia.png` | folk | White hair drawn back into a bun on the crown, a kind old face with smiling eyes and rosy cheeks, a blue peplos, a linen apron, and a twig besom in her right hand with its bristles on the floor. | the old sweeper's house |
+| `OBJ_EVENT_GFX_ICHOR_TISAMENOS` | `tisamenos.png` | folk | The elder walker with a full head of white hair (Elder M is bald) and a long white beard, a sea-blue himation, and the walking staff. | the old Achaean's house |
+| `OBJ_EVENT_GFX_ICHOR_HELIKE` | `helike.png` | folk | A terracotta kerchief over dark hair worn long in a braid, the goatherd's shaggy goat-hair cloak over an undyed dress to mid-calf, a bronze bell at her belt, and a crook. | the goatherd's house |
+
+### Facing and placement
+
+- **The Fowlers** read best facing down or sideways, where the pipe and cage show. From behind, the net is the read (and her braid).
+- **Saon** faces down to show the tablet; the priest faces down to show the lamp.
+- **The temple guards** are the Hoplite's frames, so as with Agis the side view is all shield: white with the laurel.
+- **Thyia, Tisamenos and Helike** carry a broom, staff or crook in the right hand. As with the slice's staff carriers, the hand holds still when they walk, and the prop swaps sides facing right.
+- **Agamedes's mallet** swaps sides facing right too.
+- **Shadows:** every batch 2 walker keeps its shadow (`SHADOW_SIZE_M`), so any of them can stand in for a decoy (SYSTEMS.md §10's tell).
+
+## Poses
+
+Pose sheets are nine 16×32 frames in the standard order, played by `sAnimTable_Standard`, as in batch 1: the facing picks the pose, and `walk_in_place_*` plays its small motion. None of them should walk.
+
+| Constant | Palette | Face down | Face left / right | Face up | Walking in place |
+|---|---|---|---|---|---|
+| `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET` | folk | sitting on the step, wrapped in a terracotta blanket to the chin, hands holding it shut, the white chiton's hem and bare feet below | in profile, knees up under the blanket | the blanket over the back | down or left: a shiver, the head ducking into the blanket |
+| `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_2` | folk | the same, gray-haired, in a blue blanket | | | |
+| `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_3` | folk | the same, auburn-haired, in an olive blanket | | | |
+| `OBJ_EVENT_GFX_ICHOR_ALETHEA_RIM` | cast | seated on the rim, a wax tablet on her knees, the satchel open beside her with a scroll showing, stylus in hand | in profile, writing on the tablet on her knee | from behind (`ALETHEA_SEATED`'s back) | down: the stylus lifts and scratches; left: she writes |
+
+- **The pilgrims** sit on the steps facing down, so walking in place makes them shiver ("Everyone's cold after"). The three swaps are three sheets: one palette can only swap colors by using different indices.
+- **Alethea at the springs (beat 35B)** sits on the bright spring's rim in `ALETHEA_RIM`, facing down and walking in place to write. When she "stands and waves", swap her to `ALETHEA` (two objects with hide flags, or a `VAR_OBJ_GFX_ID_n` respawn, as batch 1's recipe).
+
+## Field object
+
+| Constant | Sheet | Size | Palette | Look | Use |
+|---|---|---|---|---|---|
+| `OBJ_EVENT_GFX_ICHOR_ALETHEA_NOTE` | `misc/ichor/alethea_note.png` | 16×32, one frame, inanimate | folk | A green reed with a brown plume stuck in a tuft of mud, with a slip of wax tablet tied to it: a wooden frame, dark wax, Alethea's scratched lines. | Route 8, five times (beat 35A) |
+
+It is 16×32 rather than the slice's 16×16 tablet because a reed taller than a tile reads as a reed among the Kopais's reeds. It uses `sAnimTable_Inanimate`; don't `turnobject` it.
+
+## Part 10's other folk (extras)
+
+These are the slice's townsfolk recolored inside the folk palette, so a road-west map still loads only the folk tag. Each is its own sheet. Only the muleteer's staff is new pixels.
+
+| Constant | Made from | Reads as | For |
+|---|---|---|---|
+| `OBJ_EVENT_GFX_ICHOR_STROPHIOS` | Merchant | the apron and purse over a terracotta chiton | Strophios, Kirrha's innkeeper |
+| `OBJ_EVENT_GFX_ICHOR_PYLADES` | batch 1's herald's head on the tunic body | a clean-shaven youth under a terracotta fillet, a sky-blue chiton | Pylades |
+| `OBJ_EVENT_GFX_ICHOR_MULETEER` | Man, plus the elder's staff | the bearded man in an undyed exomis with a walking staff | Kirrha's muleteer |
+| `OBJ_EVENT_GFX_ICHOR_EEL_SMOKER` | Man | the bearded man in a smoke-gray exomis | Route 8's eel-smokers |
+| `OBJ_EVENT_GFX_ICHOR_ELDER_M_STONE` | Elder M | the bald elder in a terracotta himation | the old man on Route 9's boundary stone |
+| `OBJ_EVENT_GFX_ICHOR_ELDER_M_LETHE` | Elder M | the bald elder in an ochre himation | the old man who drank from Lethe |
+
+Others from Part 10 already fit sheets that exist:
+- Herkyna's grandmother: `ELDER_F`.
+- Lebadeia's cake-seller and child: `WOMAN` and `KID_M`.
+- The decoys (Route 8's traveler, Kirrha's beggar): `MAN` or any walker above, all with shadows.
+- The Kronist on the crate: `KRONIST`.
+
+## Palette plan
+
+**No new tag.** Every sheet uses the slice's folk or cast palette, unchanged:
+
+| Tag | Sheets |
+|---|---|
+| `OBJ_EVENT_PAL_TAG_ICHOR_FOLK` (0x1135) | both Fowlers, Saon, the priest, the three pilgrims, Agamedes, Panopeus, Herkyna, Xenodike, Thyia, Tisamenos, Helike, the note, and the six extras |
+| `OBJ_EVENT_PAL_TAG_ICHOR_CAST` (0x1134) | the temple guard (the Hoplite's palette) and Alethea on the rim (her own) |
+
+**Measured in game:** all 23 sheets at once in the Quickstart bedroom. The live `sSpritePaletteTags` read `1200 1100 1135 1134 FFFF…` (the weather, the player, folk and cast), **4 of 16 slots**. A road-west map loads folk, plus cast where Alethea, Kleon, a grunt or the temple guards stand.
+
+## Deviations from SCRIPT.md
+
+- **The Fowlers' hat** has a peaked crown, the tholia of Boeotia's Tanagra figurines (the Kopais is in Boeotia). Part 3 says it "shares the fisher's straw hat", but the slice's fisher wears a brown felt pilos. The only straw hat in the game is the player's domed petasos, and in battle the Fowler stood opposite the player's back pic in nearly the same hat. The peak keeps them apart.
+- **The Fowler F walker** wears her tunic to mid-calf, not short, so she reads as a woman at 16×32. Her portrait's tunic stops at the knee.
+- **"One male and one female palette"** became two pics and two walkers, each pic with its own palette.
+- **The priest** isn't white-haired like Saon: Part 10 calls them all elders, but at 16×32 a second white head would read as a second Saon. He is graying and carries a lamp.
+- **The pilgrims** are "three palette swaps of the initiate/pilgrim body", but no such body exists in this tree, so they are drawn new: one seated, wrapped body, recolored three ways.
+- **Agamedes** is "the potter walker with a mallet", but no potter walker exists on this branch (world-act1's POTTER isn't merged), so he is drawn new on the tunic body. His mallet is held up beside his shoulder: hanging at his side, it read as a box on the floor.
+- **The temple guard** is the Hoplite's pixels recolored in the cast palette. A palette swap inside one palette means new indices, so it is its own sheet.
+- **Xenodike** sits on the lookout's bench in beat 36, but she is drawn as a walker because she walks down off the map. Stand her on the bench tile facing down.
+- **Thyia:** the old sweeper's house's lines call her PHEMONIS while the house table calls her Thyia. The sheet is `THYIA`, the name the stub fixed. The world session should settle her name.
+- **Not drawn:** the reed-boat boy (he sits in a reed-boat object, which is a new object, not a swap) and the Pokémon objects (follower sprites).
+
+## Critique passes
+
+**Walkers**
+
+1. **First draft** (4× next to the slice's fisher, sailor, elder, goatherd and hoplite).
+   - Fowler F was the man in a different belt. The face was the same, her braid was two pixels, and the tunic was the same color.
+   - The quail cage hung at the feet and read as a yellow box on the ground.
+   - Saon's fillet ribbons ran down the back of his bald head as a red stripe, a mohawk.
+   - The priest's gray hair under the fillet read as a steel helmet.
+   - Agamedes's stone-gray hands were linen-pale and read as white gloves. His mallet hung at his feet like a box.
+   - Thyia's hair was a white cloud twice the size of her face, and the three blank rows above her head lifted it further.
+   - Tisamenos's white hair had gray speckles and read as a sheep's fleece.
+   - Helike's kerchief covered her head down to the brows: a red helmet.
+2. **Redraw.**
+   - Fowler F has a sky-blue hatband and girdle, a paler linen tunic, hair past her jaw, and a braid down her back over the net.
+   - The cage is a domed wicker cage with gold ribs, held by its loop in the hand at the hip.
+   - Saon's back is a white fringe under the fillet, with the knot only.
+   - The priest is dark-haired going gray.
+   - Agamedes's hands are solid stone gray, and his mallet is a wooden head held up beside his shoulder.
+   - Thyia has a small bun on the crown, a face as large as anyone's, and no blank rows.
+   - Tisamenos's hair has linen strands instead of speckles.
+   - Helike's kerchief sits on the crown, with her hair showing at the brow and sides.
+3. **In game** (all 23 sheets in the bedroom, turned through four facings; then the Fowler battles).
+   - All four facings show the right frames, right is left mirrored, and both palettes load by tag.
+   - At 1× every walker reads as itself: the hats, the white priests, the guard's laurel shield, the note's slip on its reed.
+   - Opposite the player in battle, the Fowler's domed hat was the player's own. Both the portraits and the walkers now have the peaked crown (the tholia, above).
+   - The note's sheet turns to garbage if `turnvobject` is run on it; it is inanimate, as above.
+
+**Portraits**
+
+1. **First draft.**
+   - The hat brim sat over the brows, so the eyes vanished under it and the face was a blank.
+   - The hair was ink-dark and merged with the outline.
+   - The cage's dark interior with two quail pixels read as a jack-o'-lantern.
+   - Fowler F differed from M only in the band color.
+2. **Redraw.**
+   - The hat is raised three rows so the brows and eyes sit under the brim's shadow, and the hair is a warmer brown.
+   - Fowler F has long hair behind, a braid over her near shoulder, and a knee-length tunic. She holds the cage up in her far hand to show you the decoy quail.
+   - The cage is three gold ribs over the wicker's shadowed back wall, with a plump speckled quail visible between them.
+3. **In game.**
+   - Both battle intros were checked. Their VS silhouettes read as broad-hatted figures, and the class and name fit the box.
+   - The peaked crown (above) went in after this pass, and the walkers took it too.
+
+## In-game check
+
+The check was throwaway and isn't committed: an assembled blob, a consts file, the Lua and a shell runner. It changes no map or party.
+
+- **Walkers.** After Quickstart, a test-only event script, assembled with the game's macros, is copied into spare EWRAM (0x0203F000) and run as the bedroom's `ON_FRAME` script. It creates the 23 sheets as virtual objects (`createvobject`), then turns them west, north and east with 60 frames between (`turnvobject`). The Lua screenshots each facing and logs `sSpritePaletteTags`.
+- **Portraits.** The Lua writes `TRAINER_CLASS_FOWLER` and `TRAINER_PIC_FOWLER_M` / `_F` into Gorgidas's and Timoxena's `gTrainers` rows (every difficulty) in the emulator's ROM (`emu.memory.cart0`). The blob then gives a Pokémon and runs `trainerbattle_no_intro` against each. The intros are screenshotted every 30 frames.
+
+`make` is green and `tools/ichor/smoke_test.sh` passes. The ROM is 22,553,452 B (67.21%), 53,440 B more than the batch's start: 22 uncompressed sheets at 2,304 B each, the note and the two portraits.
+
+## Still open (batch 2)
+
+- **Not drawn:** the reed-boat boy in his reed-boat object.
+- **Part 10's other art:** the marsh and mountain-road battle backgrounds, item icons and the map-name steles aren't this batch's.
+- **Two tones per material:** as in the slice.
+- **Not opened in Porymap:** the entries follow the slice's format exactly.

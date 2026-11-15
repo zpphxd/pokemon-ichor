@@ -6281,26 +6281,26 @@ MULETEER: Then she says the future. Your bee doesn't need the water, apparently.
 - **Event:** one Laurel Sprig a day from her potted laurel (SYSTEMS.md §3, a laurel tree), and the Pythia's lore.
 
 ```text
-PHEMONIS: Forty years I swept the god's floor. Every morning. The same floor.
+THYIA: Forty years I swept the god's floor. Every morning. The same floor.
 
-PHEMONIS: The Pythia used to talk to me all day. Chatter, chatter. About anything.
+THYIA: The Pythia used to talk to me all day. Chatter, chatter. About anything.
 
-PHEMONIS: Then, a year ago, she started saying less. Then less. Then “soon.”
+THYIA: Then, a year ago, she started saying less. Then less. Then “soon.”
 
-PHEMONIS: She's not ill. I know ill. She's looking at something, and it's close.
+THYIA: She's not ill. I know ill. She's looking at something, and it's close.
 
-PHEMONIS: I came down here so I wouldn't have to watch her look at it.
+THYIA: I came down here so I wouldn't have to watch her look at it.
 ```
 [Then, once a day:]
 ```text
-PHEMONIS: Take a sprig from my laurel. It's from the temple door.
+THYIA: Take a sprig from my laurel. It's from the temple door.
 
-PHEMONIS: Apollo likes his own leaves back. Everybody does.
+THYIA: Apollo likes his own leaves back. Everybody does.
 
 [Give `ITEM_LAUREL_SPRIG` ×1. Its daily flag is `FLAG_DAILY_ICHOR_LAUREL_KIRRHA`.]
 
 > already today:
-PHEMONIS: One a day. The tree's young. So am I, compared to it.
+THYIA: One a day. The tree's young. So am I, compared to it.
 ```
 **After the climax** (Act III's scripts may reuse this): "She laughed today. The Pythia. I heard it from here."
 
