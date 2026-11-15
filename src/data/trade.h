@@ -1255,6 +1255,29 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_KARKIPOOL,
         .level = 14,                         // SCRIPT.md: Stater is Lv 14
+    },
+    // Ichor: Thaletas hooked a torpedo ray on the crossing and can't hold it
+    // without his hands going numb. He'd rather have anything with legs: an
+    // Onotis (design/phase2/SCRIPT.md, Part 2, the Deigma). A man in Astyra
+    // named it Socrates: touch it and you can't think straight for an hour.
+    // ICHOR_STUB_AETHOS_DEX: SPECIES_NARKERAY and SPECIES_ONOTIS are stand-ins
+    // until the Aethos dex lands.
+    [INGAME_TRADE_ICHOR_SOCRATES] =
+    {
+        .nickname = _("SOCRATES"),
+        .species = SPECIES_NARKERAY,
+        .ivs = {18, 12, 20, 24, 22, 16},
+        .abilityNum = 0,
+        .otId = 23611,
+        .conditions = {5, 5, 30, 5, 5},
+        .personality = 0x3C7,
+        .heldItem = ITEM_SHELL_BELL,
+        .mailNum = -1,
+        .otName = _("THALES"),               // a mon keeps 7 letters of its OT: Thaletas, on paper
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_ONOTIS,
+        .level = 15,                         // SCRIPT.md: Socrates is Lv 15
     }
 };
 

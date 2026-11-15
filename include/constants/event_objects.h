@@ -465,6 +465,8 @@ enum
     OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_STERN,
     // Phase 2, batch 2: Hierophant Kerykos (tools/ichor/art/sprites_kerykos.py)
     OBJ_EVENT_GFX_ICHOR_KERYKOS,
+    // Phase 2, batch 2: Emporion's interiors
+    OBJ_EVENT_GFX_ICHOR_KEDALION,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,

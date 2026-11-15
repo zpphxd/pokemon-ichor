@@ -1,1 +1,123 @@
-mapscripts EmporionCity_Asclepeion_MapScripts {}
+// Emporion's Asclepeion (design/phase2/SCRIPT.md, Part 2): a harbor Asclepeion,
+// long and bright, the healer at her counter with a wide sea window at her
+// back. Room: tools/ichor/maps/emporion_rooms.py (ASCLEPEION), on civic with
+// the slice's counter and Pithos. The door is the threshold mosaic at (8, 8),
+// warp 0. Its MAP_EMPORION_CITY dest_warp_id (0) is a placeholder until the city
+// agent's door ids are known; so are HEAL_LOCATION_EMPORION_CITY's map x and y
+// in src/data/heal_locations.json (the tile outside the door).
+//
+// Healing and the Pithos follow AktiTown_Asclepeion: the shared healer script,
+// and the Pithos's own menu, which names the town.
+
+mapscripts EmporionCity_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_EMPORION_CITY)
+    }
+}
+
+text EmporionCity_Asclepeion_Text_NamePanacoil { "PANACOIL" }
+text EmporionCity_Asclepeion_Text_NameSailor { "SAILOR" }
+text EmporionCity_Asclepeion_Text_NameOldWoman { "OLD WOMAN" }
+text EmporionCity_Asclepeion_Text_NameYoungHealer { "YOUNG HEALER" }
+
+script EmporionCity_Asclepeion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_EMPORION_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script EmporionCity_Asclepeion_EventScript_Panacoil {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PANACOIL, CRY_MODE_NORMAL)
+    setspeaker(EmporionCity_Asclepeion_Text_NamePanacoil)
+    msgbox(format("Hss."))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("It looks you over, very professionally."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The Pithos: Akti's menu (Ichor_EventScript_Pithos), with Emporion's name.
+// ---------------------------------------------------------------------------
+
+script EmporionCity_Asclepeion_EventScript_Pithos {
+    lockall
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(Ichor_Text_PithosLook)
+    msgbox(Ichor_Text_PithosLift)
+    goto(EmporionCity_Asclepeion_EventScript_PithosMenu)
+}
+
+script EmporionCity_Asclepeion_EventScript_PithosMenu {
+    message(Ichor_Text_PithosReach)
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Ichor_Text_PithosOptionPokemon,
+                   Ichor_Text_PithosOptionThings, Ichor_Text_PithosOptionClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("The Pithos of Emporion opened."))
+            msgbox(Ichor_Text_PithosPokemonRest)
+            special(ShowPokemonStorageSystemPC)
+            goto(EmporionCity_Asclepeion_EventScript_PithosMenu)
+        case 1:
+            msgbox(Ichor_Text_PithosThings)
+            special(PlayerPC)
+            goto(EmporionCity_Asclepeion_EventScript_PithosMenu)
+    }
+    msgbox(Ichor_Text_PithosClose)
+    releaseall
+    end
+}
+
+// ---------------------------------------------------------------------------
+// The people of the Asclepeion
+// ---------------------------------------------------------------------------
+
+script EmporionCity_Asclepeion_EventScript_Sailor {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Asclepeion_Text_NameSailor)
+    msgbox(format("Fell asleep on deck in the halcyon calm.\p"
+                  "Three days. I'm the color of a boiled octopus."))
+    release
+}
+
+script EmporionCity_Asclepeion_EventScript_OldWoman {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Asclepeion_Text_NameOldWoman)
+    msgbox(format("My grandson went to the Mysteries last year.\p"
+                  "He won't tell me a thing. He just smiles now. Infuriating."))
+    release
+}
+
+script EmporionCity_Asclepeion_EventScript_YoungHealer {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Asclepeion_Text_NameYoungHealer)
+    msgbox(format("We get a lot of snatcher bites. They bite the hand that holds the bread."))
+    release
+}
+
+script EmporionCity_Asclepeion_EventScript_Statue {
+    msgbox(format("Asclepius by the sea window, his snake-wound staff in hand. Sailors touch its foot for luck."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_Asclepeion_EventScript_BellPull {
+    msgbox(format("A ship's rope for a bell-pull. You give it a tug. Somewhere in back, a bell."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_Asclepeion_EventScript_Anchors {
+    msgbox(format("Small bronze anchors, hung up by sailors who came home."), MSGBOX_SIGN)
+}
+
+script EmporionCity_Asclepeion_EventScript_Votives {
+    msgbox(format("Clay votives on the wall: a leg, an eye, a ship. Thanks for each one healed."),
+           MSGBOX_SIGN)
+}

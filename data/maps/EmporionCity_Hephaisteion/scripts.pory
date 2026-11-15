@@ -1,1 +1,160 @@
-mapscripts EmporionCity_Hephaisteion_MapScripts {}
+// The Hephaisteion's forge (design/phase2/SCRIPT.md, beat 13 and Part 2):
+// Kedalion's cold forge, relit from Hestia's coal, and the Bronze Hammer.
+// Room: tools/ichor/maps/emporion_rooms.py ("hephaisteion"), on ergasteria.
+// The street door is the mat at (5..6, 8), warp 0. Its MAP_EMPORION_CITY
+// dest_warp_id (0) is a placeholder until the city agent's door ids are known.
+//
+// Kedalion (4,4) sits on his anvil, glaring at the cold forge. Show him the
+// Charcoal from Akti's hearth (FLAG_ICHOR_GOT_CHARCOAL, beat 7) and the forge
+// takes: its metatiles swap to lit (EmporionCity_Hephaisteion_EventScript_LightForge,
+// written by the room builder at the end of this file), and ON_LOAD keeps them
+// lit afterward. Sets FLAG_ICHOR_FORGE_RELIT and FLAG_ICHOR_GOT_BRONZE_HAMMER.
+
+mapscripts EmporionCity_Hephaisteion_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_FORGE_RELIT)) {
+            call(EmporionCity_Hephaisteion_EventScript_LightForge)
+        }
+    }
+}
+
+text EmporionCity_Hephaisteion_Text_NameKedalion { "KEDALION" }
+text EmporionCity_Hephaisteion_Text_NameApprentice { "APPRENTICE" }
+
+script EmporionCity_Hephaisteion_EventScript_Kedalion {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_FORGE_RELIT)) {
+        setspeaker(EmporionCity_Hephaisteion_Text_NameKedalion)
+        // ICHOR_STUB_OFFERINGS: from here Kedalion sells ITEM_BRONZE_VOTIVE (400,
+        // SCRIPT.md Part 6) once the offerings are items; until then, just the line.
+        msgbox(format("Hear that? That's a happy forge. Votives for the gods, if you want one."))
+        release
+        end
+    }
+    setspeaker(EmporionCity_Hephaisteion_Text_NameKedalion)
+    msgbox(format("Cold. Cold as a fish. Forty years this forge has burned.\p"
+                  "Then the calm came, and it went out. Like someone blew on it.\p"
+                  "I've tried pine. Olive. Charcoal from three islands. Nothing takes.\p"
+                  "A forge isn't lit from any old fire, see.\p"
+                  "Only from a hearth that's never gone out.\p"
+                  "When the old colonists sailed, they carried fire from home. Always."))
+    checkitem(ITEM_CHARCOAL)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(EmporionCity_Hephaisteion_Text_NameKedalion)
+        msgbox(format("Got any fire from a hearth that's never gone out? No?\p"
+                      "Akti's never has. Euboulos at the temple there might spare a coal."))
+        release
+        end
+    }
+    setspeaker(EmporionCity_Hephaisteion_Text_NameKedalion)
+    msgbox(format("…What's that smell? Woodsmoke. And… soup?\p"
+                  "That's hearth-coal. That's from Hestia's own hearth! At Akti!"))
+    setspeaker(EmporionCity_Hephaisteion_Text_NameKedalion)
+    msgbox(format("Spare me a sliver? Just a sliver. You keep the rest."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(EmporionCity_Hephaisteion_Text_NameKedalion)
+        msgbox(format("Keep it, then. I'll sit here and be cold. Like a fish."))
+        release
+        end
+    }
+    closemessage
+    // He turns to the forge with the sliver; it catches with a roar.
+    applymovement(LOCALID_EMPORION_HEPHAISTEION_KEDALION, Common_Movement_FaceUp)
+    waitmovement(0)
+    delay(20)
+    playse(SE_M_FLAME_WHEEL)
+    fadescreenspeed(FADE_TO_WHITE, 2)
+    call(EmporionCity_Hephaisteion_EventScript_LightForge)
+    special(DrawWholeMapView)
+    setflag(FLAG_ICHOR_FORGE_RELIT)
+    fadescreenspeed(FADE_FROM_WHITE, 2)
+    waitse
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The forge catches with a roar. Sparks climb the smoke."))
+    closemessage
+    applymovement(LOCALID_EMPORION_HEPHAISTEION_KEDALION, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(EmporionCity_Hephaisteion_Text_NameKedalion)
+    msgbox(format("HA! Listen to her! Like she never went out!\p"
+                  "My master would be pleased. He never says so. He just hammers louder.\p"
+                  "Here. This hung over the forge for luck. Now it's yours. For luck."))
+    // ICHOR_STUB_RELICS: giveitem(ITEM_BRONZE_HAMMER) once the engine's relics are
+    // on main (design/ENGINE_API.md §2; the engine sets the relic flag itself).
+    // Until then, the flag and the receive message.
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
+    message(format("{PLAYER} received the Bronze Hammer!"))
+    waitmessage
+    waitfanfare
+    setflag(FLAG_ICHOR_GOT_BRONZE_HAMMER)
+    // ICHOR_STUB_RITES: Hephaestus Favor +5 (special(Ichor_AddFavor) with
+    // VAR_0x8004 = ICHOR_GOD_HEPHAESTUS, VAR_0x8005 = 5) once the rites land.
+    setspeaker(EmporionCity_Hephaisteion_Text_NameKedalion)
+    msgbox(format("Rocks. Rubble. Broken marble. Hit it where it's tired. It comes apart.\p"
+                  "I once carried a blind giant on my shoulders all the way to the sunrise.\p"
+                  "After that, a bit of rubble's nothing."))
+    release
+}
+
+script EmporionCity_Hephaisteion_EventScript_Apprentice {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Hephaisteion_Text_NameApprentice)
+    if (flag(FLAG_ICHOR_FORGE_RELIT)) {
+        msgbox(format("He's off the anvil. First time in a week.\p"
+                      "Now he won't stop hammering. I'm going to miss the quiet."))
+    } else {
+        msgbox(format("The forge went out and Master sat on the anvil for a week.\p"
+                      "He said if he got off it, the cold would win."))
+    }
+    release
+}
+
+script EmporionCity_Hephaisteion_EventScript_Forge {
+    if (flag(FLAG_ICHOR_FORGE_RELIT)) {
+        msgbox(format("The forge roars. Over it, an empty hook, and a clean hammer shape in the soot."),
+               MSGBOX_SIGN)
+    } else {
+        msgbox(format("The forge is cold. Gray ash, dead charcoal.\p"
+                      "Over it hangs an empty hook. A clean hammer shape is left in the soot."),
+               MSGBOX_SIGN)
+    }
+}
+
+script EmporionCity_Hephaisteion_EventScript_Bellows {
+    msgbox(format("Two goatskins on a plank, their nozzle run into the hearth. They wheeze."), MSGBOX_SIGN)
+}
+
+script EmporionCity_Hephaisteion_EventScript_TongsRack {
+    msgbox(format("Tongs and hammers on their pegs. Every one is worn smooth at the grip."), MSGBOX_SIGN)
+}
+
+script EmporionCity_Hephaisteion_EventScript_Trough {
+    msgbox(format("The quenching trough. The water is black, and a pair of tongs lies in it."), MSGBOX_SIGN)
+}
+
+script EmporionCity_Hephaisteion_EventScript_Workbench {
+    msgbox(format("A bronze ingot, a file, and a helmet half beaten out of a sheet."), MSGBOX_SIGN)
+}
+
+script EmporionCity_Hephaisteion_EventScript_Votives {
+    msgbox(format("Little bronze votives: a smith, a bull, an owl. Gifts for the gods, made here."),
+           MSGBOX_SIGN)
+}
+
+// ergasteria_build: begin generated
+
+// Written by tools/ichor/art/ergasteria_build.py; don't edit by hand.
+
+script EmporionCity_Hephaisteion_EventScript_LightForge {
+    setmetatile(3, 1, 0x34A, TRUE)
+    setmetatile(4, 1, 0x34B, TRUE)
+    setmetatile(5, 1, 0x34C, TRUE)
+    setmetatile(3, 2, 0x34E, TRUE)
+    setmetatile(4, 2, 0x34F, TRUE)
+    setmetatile(5, 2, 0x350, TRUE)
+    return
+}
+
+// ergasteria_build: end generated

@@ -1007,3 +1007,334 @@ k.k.............
 kdk.............
 k.k.............
 """, 1, 1, walk={(0, 0)}, note="a line of ants across the floor, marching for the crumbs")
+
+
+# ===========================================================================
+# Batch 2: Emporion's Hephaisteion (tools/ichor/maps/emporion_rooms.py)
+#
+# A forge built into the temple's courtyard, under a smoke-black roof: the
+# great forge and its hood, cold or lit, the goatskin bellows, the smith's
+# horned anvil on an oak stump, the quenching trough, the tongs rack, a
+# basket of charcoal, and the shelf of bronze votives Kedalion sells once the
+# fire is back. The floor is beaten earth (the floor palette's earth tones,
+# saved for this), the wall smoke-blackened plaster.
+# ===========================================================================
+
+from char_canvas import Canvas  # noqa: E402
+
+
+def _earth(variant):
+    """Beaten earth, swept but sooty: a speckle that repeats every 8 pixels so
+    the plain floor costs one tile; a shadow under the wall or along the left
+    edge, as oikia's floors have; the alt cell has a few cinders in it."""
+    c = Canvas(16, 16)
+    for y in range(16):
+        for x in range(16):
+            h = ((x % 8) * 37 + (y % 8) * 91 + (x % 8) * (y % 8) * 13) % 29
+            c.put(x, y, "h" if h in (0, 11) else "E" if h in (4, 17, 23) else "e")
+    if variant in ("top", "corner"):
+        for x in range(16):
+            c.put(x, 0, "K")
+            c.put(x, 1, "E")
+            c.put(x, 2, "E")
+            c.put(x, 3, "E" if x % 2 == 0 else "e")
+    if variant in ("left", "corner"):
+        for y in range(16):
+            c.put(0, y, "K")
+            c.put(1, y, "E")
+            if y % 2 == 0:
+                c.put(2, y, "E")
+    if variant == "alt":
+        for (x, y, ch) in [(4, 5, "K"), (5, 5, "E"), (11, 9, "K"), (10, 10, "K"), (11, 10, "E"),
+                           (6, 12, "K"), (13, 3, "E"), (2, 13, "E")]:
+            c.put(x, y, ch)
+    return grid("floor", c.text())
+
+
+FLOORS["earth"] = {v: _earth(v) for v in ("plain", "alt", "top", "left", "corner")}
+
+
+def wall_smoke():
+    """The forge's back wall: the ceiling beam black with soot, the plaster
+    under it smoked from black at the top to stone-gray at the plinth. The
+    soot streaks repeat every 8 pixels, so the wall costs four tiles."""
+    rows = ["k" * 16, "2" * 16, "1" * 16, "1" * 16, "k" * 16]
+    # Soot hangs in streaks from the beam: each column of the 8-pixel repeat
+    # has its own depth, so the black comes down in a ragged fringe.
+    depth = [14, 9, 17, 11, 7, 15, 12, 18]
+    for y in range(5, 28):
+        row = []
+        for x in range(16):
+            d = depth[x % 8]
+            if y < 7:
+                ch = "k"
+            elif y < 5 + d:
+                ch = "k" if (y + x) % 5 == 0 else "1"
+            elif y < 5 + d + 3:
+                ch = "2"
+            elif y < 24:
+                ch = "S" if (x % 8 + y) % 6 else "2"
+            else:
+                ch = "S"
+            row.append(ch)
+        rows.append("".join(row))
+    rows += ["2" * 16, "1" * 16, "1" * 16, "k" * 16]
+    assert len(rows) == 32, len(rows)
+    return grid("wall", "\n".join(rows))
+
+
+WALLS["smoke"] = wall_smoke()
+
+
+def _forge_hood(lit):
+    """The forge's stone hood, 3x2 against the back wall: a flue rising
+    through the roof, the hood flaring over the hearth, its lintel, and in the
+    middle the empty iron hook where the Bronze Hammer hung, a clean hammer
+    shape left in the soot behind it. Lit, the fire glows on the lintel and
+    up inside the hood."""
+    c = Canvas(48, 32)
+    # the flue, up through the ceiling: dark stone, black with soot
+    c.box(14, 0, 33, 11, "s")
+    c.vline(15, 0, 10, "S")
+    c.vline(32, 0, 10, "a")
+    for y in (3, 7):
+        c.hline(15, 32, y, "a")
+    for x in (20, 27):
+        c.vline(x, 0, 2, "a")
+        c.vline(x + 3, 4, 6, "a")
+        c.vline(x, 8, 10, "a")
+    # the hood: a trapezoid flaring from the flue to the lintel
+    for y in range(11, 25):
+        half = 10 + (y - 11) * 14 // 13
+        x0, x1 = 24 - half, 23 + half
+        c.hline(x0, x1, y, "s")
+        c.put(x0, y, "k")
+        c.put(x1, y, "k")
+        c.put(x0 + 1, y, "S")
+        c.put(x1 - 1, y, "a")
+    c.hline(10, 37, 11, "k")
+    # soot thick up the hood's middle
+    for y in range(12, 25):
+        for x in range(12, 36):
+            if c.get(x, y) == "s" and (x * 7 + y * 5) % 7 < 3:
+                c.put(x, y, "a")
+    # the lintel: a stone beam across the front of the hood
+    c.box(0, 24, 47, 31, "S")
+    c.hline(1, 46, 25, "t")
+    c.hline(1, 46, 29, "s")
+    c.hline(1, 46, 30, "s")
+    for x in (12, 24, 36):
+        c.vline(x, 25, 29, "s")
+    # the empty hook, and the hammer's clean shape in the soot behind it
+    c.rect(19, 13, 28, 16, "S")          # the head's shadow
+    c.rect(22, 17, 25, 22, "S")          # the haft's shadow
+    c.hline(20, 27, 14, "t")
+    c.vline(23, 17, 22, "t")
+    c.vline(23, 12, 15, "k")
+    c.vline(24, 12, 15, "k")
+    c.put(22, 15, "k")
+    c.put(22, 16, "k")
+    c.put(23, 16, "k")
+    c.put(25, 13, "c")
+    if lit:
+        # firelight on the lintel and up the hood's throat
+        c.hline(1, 46, 29, "F")
+        c.hline(1, 46, 30, "f")
+        c.hline(1, 46, 31, "f")
+        for x in range(2, 46, 3):
+            c.put(x, 28, "F")
+        for y in range(16, 24):
+            for x in range(8, 40):
+                if c.get(x, y) in ("a", "s") and (x * 3 + y) % 4 == 0:
+                    c.put(x, y, "f" if y < 21 else "F")
+        for (x, y) in ((17, 23), (21, 22), (27, 23), (31, 22), (12, 23), (36, 23)):
+            c.put(x, y, "Y")
+    return c.text()
+
+
+stamp("forge_hood", "clay", _forge_hood(False), 3, 2,
+      note="the forge's stone hood and flue, black with soot; the empty hook where the Bronze Hammer hung")
+stamp("forge_hood_lit", "clay", _forge_hood(True), 3, 2,
+      note="the hood with the forge lit: firelight on the lintel and up its throat")
+
+
+def _forge(lit):
+    """The hearth itself, 3x1: a raised bed of stone with the fire on it and
+    the bellows' clay nozzle let into its right end. Cold, the bed is gray ash
+    and dead charcoal; lit, the coals glow and flames lick up at the hood."""
+    c = Canvas(48, 16)
+    # the stone curb, its top rim lit, its face in courses
+    c.box(1, 2, 46, 15, "S")
+    c.hline(2, 45, 3, "t")
+    c.hline(2, 45, 8, "k")
+    c.hline(2, 45, 9, "t")
+    c.hline(2, 45, 14, "s")
+    c.hline(2, 45, 12, "s")
+    for x in (9, 20, 31, 42):
+        c.vline(x, 10, 11, "s")
+    for x in (4, 15, 26, 37):
+        c.vline(x, 13, 14, "s")
+    # the clay tuyere at the right end, where the bellows blow in
+    c.box(41, 10, 46, 13, "m")
+    c.put(42, 11, "l")
+    c.put(43, 11, "l")
+    c.put(45, 12, "k")
+    # the bed of the fire
+    for y in range(4, 8):
+        for x in range(3, 45):
+            n = (x * 13 + y * 7) % 11
+            if lit:
+                c.put(x, y, "Y" if n == 0 else "F" if n < 5 else "f" if n < 9 else "d")
+            else:
+                c.put(x, y, "a" if n < 4 else "s" if n < 8 else "t" if n == 8 else "k")
+    if lit:
+        # flames licking up off the coals
+        for (x0, hgt) in ((8, 3), (14, 4), (20, 2), (25, 4), (31, 3), (37, 4)):
+            c.vline(x0, 4 - hgt, 3, "F")
+            c.put(x0, 4 - hgt, "Y")
+            c.put(x0 - 1, 3, "f")
+            c.put(x0 + 1, 3, "f")
+        c.hline(2, 45, 3, "F")
+    else:
+        for (x, y) in ((10, 5), (11, 5), (22, 6), (23, 5), (33, 6), (34, 6), (17, 4)):
+            c.put(x, y, "k")
+    return c.text()
+
+
+stamp("forge_cold", "clay", _forge(False), 3, 1,
+      note="the forge's hearth, cold: gray ash and dead charcoal on a stone bed")
+stamp("forge_lit", "clay", _forge(True), 3, 1,
+      note="the forge's hearth, lit from Hestia's coal: glowing coals, flames licking at the hood")
+
+stamp("bellows", "iron", """
+................
+................
+....kkk..kkk....
+...kNNNkkNNNk...
+..kNNnNNkNnNNk..
+..kNnnnNkNnnNk..
+..knnnnnkknnnk..
+..knnnnnkknnnk..
+..kNnnnnkNnnnk..
+...knnnkkknnk...
+...kknkkSkknk...
+kkkkkkkSSSkkk...
+kIssssssSSk.....
+kkkkkkkkkkk.....
+...kNNNNNNNNk...
+...kkkkkkkkkk...
+""", 1, 1, note="the bellows: two goatskins on a plank, their iron nozzle run into the hearth")
+
+stamp("smith_anvil", "iron", """
+................
+................
+................
+....kkkkkkkk....
+.kkkwwwwwwwSk...
+kSSSSSSSSSSSsk..
+.kkkssssssssk...
+....kIssssIk....
+.....kIssIk.....
+....kkkkkkkk....
+...kNNNNNNNNk...
+...knNNNNNNnk...
+...knnNnnNnnk...
+...knnnNNnnnk...
+...knnnnnnnnk...
+....kkkkkkkk....
+""", 1, 1, note="the smith's anvil: a horned iron anvil on an oak stump")
+
+stamp("quench_trough", "bronze", """
+................................
+................................
+................................
+................................
+..kkkkkkkkkkkkkkkkkkkkkkkkkkkk..
+.kMMMMMMMMMMMMMMMMMMMMMMMMMMMMk.
+.kMmkkkkkkkkkkkkkkkkkkkkkkkkmmk.
+.kMkuuuuUuuuuuuuuuuuaUuuuuuukmk.
+.kMkuuUuuuuukkuuuuuuuuuUuuuukmk.
+.kMkuuuuuuukzkkkkkuuuuuuuuuukmk.
+.kmmkkkkkkkkkkkkkkkkkkkkkkkkmnk.
+.knmmmmmmmmmmmmmmmmmmmmmmmmmmnk.
+.knnmnnmnnnmnnmnnnmnnmnnnmnnnnk.
+.knnnnnnnnnnnnnnnnnnnnnnnnnnnnk.
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
+................................
+""", 2, 1, note="the quenching trough: a stone trough of dark water, tongs left in it")
+
+stamp("tongs_rack", "iron", """
+................................
+....k.......k..........k........
+...kSk.....kSk........kSk.......
+...kSk.....kSk.......kSSk..kkk..
+...kSk.....kSk......kSsk..kSSSk.
+...kSk.....kSk......kSk...kIIsk.
+...kSkk...kkSk.....kSk.....kkk..
+...kSkSk.kSkSk.....kNk......kNk.
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNk
+knnnnknnnnnnknnnnnnknnnnnnknnnnk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+..kSk..kSk.........kNk......kNk.
+..kSk..kSk.........kNk......kNk.
+..ksk..ksk.........kNk......kNk.
+...k....k...........k........k..
+""", 2, 1, note="the tongs rack: a pegged plank of tongs and hammers")
+
+stamp("votive_shelf", "bronze", """
+................................
+................................
+.....k.....................k....
+....kyk.......kkk.........kyk...
+....kbk......kyybk..kk....kbk...
+...kybk.....kybbbkkybk...kybbk..
+...kbbzk....kbbbbbbbzk...kbbbk..
+....kbk.....kbk.kbkk.....kbbzk..
+....kzk.....kzk.kzk.......kzk...
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyk
+kbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbk
+kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+..kzk......................kzk..
+..kkk......................kkk..
+""", 2, 1, note="a low shelf of bronze votives for sale: a little smith, a bull, an owl")
+
+stamp("workbench", "wood", """
+................................
+................................
+................................
+..........kkkkk.................
+.........kybbbbk.......kk.......
+..kkk...kyybbbzzk.....kbbk......
+.kbbbk..kybbkkkzk.kkkkbbbkk.kk..
+.kzzzzk.kkkkkkkkkkkkkkkkkkkkkkk.
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+khhhhhhhhhhhhhhhhhhhhhhhhhhhhhhk
+khlllllllllllllllllllllllllllllk
+kmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+.kmdk......................kmdk.
+.kmdk......................kmdk.
+.kkkk......................kkkk.
+""", 2, 1, note="the smith's bench: an ingot, a half-beaten bronze helmet, a hammer and a file")
+
+stamp("charcoal_basket", "nature", """
+................
+................
+................
+................
+....kkk.kk......
+..kkSkkkSkkk....
+.kkSkkSkkkSkk...
+.kJJJJJJJJJJJk..
+.kjJjJjJjJjJjk..
+..kjjjjjjjjjk...
+..kKjKjKjKjKk...
+..kjjjjjjjjjk...
+...kKjKjKjKk....
+...kjjjjjjjk....
+....kkkkkkk.....
+................
+""", 1, 1, note="a wicker basket heaped with charcoal")

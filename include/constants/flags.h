@@ -1696,6 +1696,22 @@
 #define FLAG_ICHOR_GOT_TM_AERIAL_ACE            (FLAG_ICHOR_GENERAL_START + 0x0F5) // Ichor: TM40 Aerial Ace from Kerykos
 #define FLAG_ICHOR_HERALDS_RUN_FAILED           (FLAG_ICHOR_GENERAL_START + 0x0F6) // Ichor: the step-glass ran dry once (Angelos's hint)
 #define FLAG_ICHOR_HERALDS_RUN_TOLD             (FLAG_ICHOR_GENERAL_START + 0x0F7) // Ichor: Kerykos explained the Herald's Run
+#define FLAG_ICHOR_DEIGMA_CLUE                  (FLAG_ICHOR_GENERAL_START + 0x0E0) // Ichor: Emporion: beat 12, Alethea learned of the forty lamps and saw the hook under the seal
+#define FLAG_ICHOR_TRADED_NARKERAY              (FLAG_ICHOR_GENERAL_START + 0x0E1) // Ichor: Emporion: traded Thaletas an Onotis for his Narkeray, Socrates
+#define FLAG_ICHOR_FORGE_RELIT                  (FLAG_ICHOR_GENERAL_START + 0x0E2) // Ichor: Emporion: beat 13, the Hephaisteion's forge relit from Hestia's coal
+#define FLAG_ICHOR_GOT_BRONZE_HAMMER            (FLAG_ICHOR_GENERAL_START + 0x0E3) // Ichor: Emporion: beat 13, Kedalion gave the Bronze Hammer (ICHOR_STUB_RELICS: the engine's relic flag)
+#define FLAG_ICHOR_HIRING_HALL                  (FLAG_ICHOR_GENERAL_START + 0x0E4) // Ichor: Emporion: beat the Titans' crew boss in the hiring hall and took his Rocky Helmet
+#define FLAG_ICHOR_KNUCKLEBONES_EMPORION        (FLAG_ICHOR_GENERAL_START + 0x0E5) // Ichor: Emporion: Myrtale, the Dolphin's champion, lost her first game of knucklebones to you
+#define FLAG_ICHOR_KNUCKLEBONES_STREPSIADES     (FLAG_ICHOR_GENERAL_START + 0x0E6) // Ichor: Emporion: beat Strepsiades at knucklebones (his prize paid)
+#define FLAG_ICHOR_KNUCKLEBONES_STRATYLLIS      (FLAG_ICHOR_GENERAL_START + 0x0E7) // Ichor: Emporion: beat Stratyllis at knucklebones (her prize paid)
+#define FLAG_ICHOR_PHILOXENOS_LAUREL_2          (FLAG_ICHOR_GENERAL_START + 0x0E8) // Ichor: Emporion: told Philoxenos the story of the Herald Laurel
+#define FLAG_ICHOR_PHILOXENOS_LAUREL_3          (FLAG_ICHOR_GENERAL_START + 0x0E9) // Ichor: Emporion: told Philoxenos the story of the Harvest Laurel
+#define FLAG_ICHOR_GOT_QUICK_CLAW               (FLAG_ICHOR_GENERAL_START + 0x0EA) // Ichor: Emporion: Dromokleia gave a runner's Quick Claw
+#define FLAG_ICHOR_WROTE_TO_MOM                 (FLAG_ICHOR_GENERAL_START + 0x0EB) // Ichor: Emporion: after Act I, the runners took your letter home to Mom
+#define FLAG_ICHOR_GOT_WIDOWS_GIFT              (FLAG_ICHOR_GENERAL_START + 0x0EC) // Ichor: Emporion: Penelopeia gave her husband's Sea Incense
+#define FLAG_ICHOR_EUPHRONIOS_1                 (FLAG_ICHOR_GENERAL_START + 0x0ED) // Ichor: Emporion: Euphronios painted your Harpeck
+#define FLAG_ICHOR_EUPHRONIOS_2                 (FLAG_ICHOR_GENERAL_START + 0x0EE) // Ichor: Emporion: Euphronios painted your Chelonet
+#define FLAG_ICHOR_EUPHRONIOS_3                 (FLAG_ICHOR_GENERAL_START + 0x0EF) // Ichor: Emporion: Euphronios painted your Stachyss
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
@@ -2505,5 +2521,7 @@
 #define TESTING_FLAG_UNUSED_7                   (TESTING_FLAGS_START + 0x7)
 #endif // TESTING
 
+// Ichor: story flags read before their owners claim them (ICHOR_STUB_STORY_FLAGS).
+#include "constants/ichor_flag_stubs.h"
 
 #endif // GUARD_CONSTANTS_FLAGS_H

@@ -676,6 +676,7 @@ const u32 gObjectEventPic_IchorPronomos[] = INCGFX_U32("graphics/object_events/p
 const u32 gObjectEventPic_IchorEndeis[] = INCGFX_U32("graphics/object_events/pics/people/ichor/endeis.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorPheidon[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pheidon.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorAiakides[] = INCGFX_U32("graphics/object_events/pics/people/ichor/aiakides.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKedalion[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kedalion.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorKleonSeasick[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_seasick.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorKleonTablet[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_tablet.png", ".4bpp", "-mwidth 2 -mheight 4");
 

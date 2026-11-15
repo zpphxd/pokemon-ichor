@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/ergasteria/porytiles_bin/metatile_attributes.bin": "232d2f0ee77186b83ab906dff61c52d3",
-  "data/tilesets/secondary/ergasteria/porytiles_bin/metatiles.bin": "c91ddaaadf0dc0c71b36bd5d61c62478",
+  "data/tilesets/secondary/ergasteria/porytiles_bin/metatile_attributes.bin": "2786e4df6228a0b188eff32d7ec2743a",
+  "data/tilesets/secondary/ergasteria/porytiles_bin/metatiles.bin": "baa528ac97ad49d96288942a3e7d10e1",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/00.pal": "395259102cd54e1a0568846a8d0a51c7",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/01.pal": "18e095382615dc1fa5ddc1c7bcbbfd39",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/02.pal": "c97ed6720ac909f75f122470b62ae8e2",
@@ -11,15 +11,15 @@
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/07.pal": "a70e5c58b622b62c07cc7a5e3ee07f7e",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/08.pal": "6ea371e3c145a6aa3a54b5c19f7da8e1",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/09.pal": "87a1714c6c3e03e31369cd17aaaa9943",
-  "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/10.pal": "04b89cb6657c06cd75b9be8ec3f8cb1a",
+  "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/10.pal": "61a60d5512de2e22ea2d11387d984e91",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/11.pal": "9a5c2012fc6d13970bb774df234ba3af",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/12.pal": "a813a97323961918112b5ce47b0c5d7e",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/ergasteria/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/ergasteria/porytiles_bin/tiles.png": "b022036fb73dbe82ffdc293a6aaa7ab7",
-  "data/tilesets/secondary/ergasteria/porytiles_src/attributes.csv": "479cb96287f436ad167a4003165f7938",
-  "data/tilesets/secondary/ergasteria/porytiles_src/bottom.png": "9da5ec780a30b1180c79da180296b168",
-  "data/tilesets/secondary/ergasteria/porytiles_src/middle.png": "9682271eba14c0d1048efaafe293678e",
-  "data/tilesets/secondary/ergasteria/porytiles_src/top.png": "1c865f39ba031342e332d0c2f1f59c88"
+  "data/tilesets/secondary/ergasteria/porytiles_bin/tiles.png": "25d5a9882aecebce6dfbaa02c5c9f45c",
+  "data/tilesets/secondary/ergasteria/porytiles_src/attributes.csv": "3559717e5872a96a6be480ac161275b6",
+  "data/tilesets/secondary/ergasteria/porytiles_src/bottom.png": "6646834a96c13adc0e000efea9fe280e",
+  "data/tilesets/secondary/ergasteria/porytiles_src/middle.png": "504e9074109c43856c86d46b4d3065f1",
+  "data/tilesets/secondary/ergasteria/porytiles_src/top.png": "ef4f350291e75f82b8f0a8ddda407744"
 }

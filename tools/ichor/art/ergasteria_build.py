@@ -4,10 +4,10 @@
 Works like oikia_build.py (design/phase1/TILES_oikia.md), whose generic pieces
 it reuses:
 
-1. Compose every cell of every room (tools/ichor/maps/aegina_homes.py; batch 2
-   adds Emporion's) and of the catalog layouts from the pieces in
-   ergasteria_art.py: floor or wall on the bottom layer, furniture on the
-   middle layer, overhangs on the top layer.
+1. Compose every cell of every room (tools/ichor/maps/aegina_homes.py and
+   tools/ichor/maps/emporion_rooms.py) and of the catalog layouts from the
+   pieces in ergasteria_art.py: floor or wall on the bottom layer, furniture on
+   the middle layer, overhangs on the top layer.
 2. Deduplicate the cells into metatiles and write Porytiles' sources to
    data/tilesets/secondary/ergasteria/porytiles_src/.
 3. Compile with Porytiles, paired with gTileset_Aethos, and copy back any solid
@@ -18,11 +18,26 @@ it reuses:
    and to the composed source.
 5. Write each room's layout (data/layouts/<Layout>/map.bin, border.bin and its
    layouts.json size and tilesets), the 2x renders in design/phase2/img/, the
-   metatile sheet and catalog, and the generated tables in
-   design/phase2/TILES_ergasteria.md and ROOMS_ergasteria.md.
+   metatile sheet and catalog, the generated tables in the set's TILES doc and
+   each room module's ROOMS doc, and each room variant's setmetatile script in
+   its map's scripts.pory.
+
+The same machinery builds more than one set: a RoomSet names the tileset, its
+art module and its docs, and each room spec says which set it is built from
+("set", default "ergasteria"). limen_build.py builds gTileset_Limen with it.
 
 Rooms are data in Python: the builder rewrites their blockdata on every run,
 so metatile ids may move freely. Edit a room in its module, not in Porymap.
+
+Room spec keys beyond oikia's (see aegina_homes.py for the rest):
+  set       the RoomSet that builds it (default "ergasteria")
+  floors    more grid characters, each to another floor
+  walls     more grid characters, each to another wall style
+  blocked   grid characters whose floor can't be walked on (the Deigma's sea)
+  variants  {name: {"swap": {stamp: other stamp}, "drop": [stamp, ...],
+            "script": label}}: the room as it looks after an event. Its cells
+            join the tileset, and the cells that differ from the room as built
+            become a setmetatile script (`label`) in the map's scripts.pory.
 
 Usage: /usr/bin/python3 tools/ichor/art/ergasteria_build.py [--no-compile] [--preview DIR]
 """
@@ -30,6 +45,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -44,15 +60,11 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT / "tools/ichor"))
 sys.path.insert(0, str(ROOT / "tools/ichor/maps"))
 
-import ergasteria_art as A  # noqa: E402
+import ergasteria_art as EA  # noqa: E402
 import oikia_build as OB  # noqa: E402  (Cell, over, cut, check_spots, ...)
 
-TILESET = "gTileset_Ergasteria"
 PARTNER = "gTileset_Aethos"
 PRIMARY = "gTileset_Oikos"          # what the rooms' layouts use
-TS = ROOT / "data/tilesets/secondary/ergasteria"
-SRC = TS / "porytiles_src"
-BIN = TS / "porytiles_bin"
 IMG = ROOT / "design/phase2/img"
 MAGENTA = np.array([255, 0, 255], np.uint8)
 FIRST_METATILE = 0x200
@@ -60,16 +72,38 @@ FIRST_TILE = 512
 SECONDARY_PALS = range(6, 13)
 MAX_METATILES = 512
 MAX_TILES = 504                     # door animations overwrite tiles 504-511
-BUDGET_TILES = 440                  # batch 1's ceiling, so batch 2 has room
 
 WALK, SOLID, WARP = OB.WALK, OB.SOLID, OB.WARP
 Cell, over, empty, cut = OB.Cell, OB.over, OB.empty, OB.cut
 
 
+class RoomSet:
+    """One secondary tileset built from composed rooms."""
+
+    def __init__(self, name, tileset, art, tiles_doc, catalog=None, budget=None,
+                 default_rooms_doc=None, sheet_cats=()):
+        self.name = name                    # "ergasteria"; the data/tilesets/secondary folder
+        self.tileset = tileset              # "gTileset_Ergasteria"
+        self.A = art                        # the art module: PALETTES, FLOORS, WALLS, VOID, RUGS, STAMPS
+        self.ts = ROOT / "data/tilesets/secondary" / name
+        self.src = self.ts / "porytiles_src"
+        self.bin = self.ts / "porytiles_bin"
+        self.tiles_doc = tiles_doc
+        self.catalog = catalog or (lambda: {})
+        self.budget = budget                # a soft ceiling: warn above it
+        self.default_rooms_doc = default_rooms_doc
+        self.sheet_cats = sheet_cats        # (catalog name, image name) rendered to design/phase2/img/
+        self.pal_sets = {n: set(p.values()) for n, p in art.PALETTES.items()}
+
+    def log(self, msg):
+        print(f"{self.name}: {msg}")
+
+
 def room_modules():
-    """The modules whose ROOMS dicts are built from ergasteria."""
+    """The modules whose ROOMS dicts are built from these sets."""
     import aegina_homes
-    return [aegina_homes]
+    import emporion_rooms
+    return [aegina_homes, emporion_rooms]
 
 
 # --------------------------------------------------------------------------
@@ -80,7 +114,8 @@ def room_modules():
 #               '#' void.
 # --------------------------------------------------------------------------
 
-def compose(spec, stamps=None):
+def compose(rs, spec, stamps=None):
+    A = rs.A
     stamps = stamps or A.STAMPS
     grid = spec["grid"]
     H, W = len(grid), len(grid[0])
@@ -90,6 +125,7 @@ def compose(spec, stamps=None):
     floors.update(spec.get("floors", {}))
     walls = {"W": spec["wall"]}
     walls.update(spec.get("walls", {}))
+    blocked = set(spec.get("blocked", ""))
 
     def ch(x, y):
         return grid[y][x] if 0 <= x < W and 0 <= y < H else "#"
@@ -153,8 +189,9 @@ def compose(spec, stamps=None):
                 c.bottom = rug_at[(x, y)].copy()
             elif g in floors:
                 mat = A.FLOORS[floors[g]]
-                top_sh = ch(x, y - 1) not in floors
-                left_sh = ch(x - 1, y) not in floors
+                same = floors if g not in blocked else {g: None}
+                top_sh = ch(x, y - 1) not in same
+                left_sh = ch(x - 1, y) not in same
                 if top_sh and left_sh:
                     v = "corner"
                 elif top_sh:
@@ -165,7 +202,11 @@ def compose(spec, stamps=None):
                     v = "alt"
                 else:
                     v = "plain"
+                if v not in mat:
+                    v = "top" if v == "corner" and "top" in mat else "plain"
                 c.bottom = mat[v].copy()
+                if g in blocked:
+                    c.block = SOLID
             else:
                 raise ValueError(f"{spec.get('title')}: unknown grid char {g!r} at ({x},{y})")
             if hasattr(c, "flat"):
@@ -176,6 +217,14 @@ def compose(spec, stamps=None):
     return cells
 
 
+def variant_spec(spec, var):
+    """The room spec as one of its variants: stamps swapped or dropped."""
+    swap, drop = var.get("swap", {}), set(var.get("drop", ()))
+    stamps = [(swap.get(n, n), x, y) for (n, x, y) in spec["stamps"] if n not in drop]
+    stamps += list(var.get("add", ()))
+    return dict(spec, stamps=stamps)
+
+
 image_of = OB.image_of
 
 
@@ -183,9 +232,9 @@ image_of = OB.image_of
 # Checks on the art
 # --------------------------------------------------------------------------
 
-def check_palettes():
+def check_palettes(rs):
     taken = OB.aethos_colors()
-    for name, pal in A.PALETTES.items():
+    for name, pal in rs.A.PALETTES.items():
         assert len(pal) <= 15, f"palette {name} has {len(pal)} colors"
         for ch, rgb in pal.items():
             assert all(v % 8 == 0 for v in rgb), f"{name}.{ch} {rgb} is not a multiple of 8"
@@ -193,17 +242,14 @@ def check_palettes():
             assert rgb != (255, 0, 255), "magenta is Porytiles' transparency"
 
 
-PAL_SETS = {n: set(p.values()) for n, p in A.PALETTES.items()}
-
-
-def check_subtiles(layer, where):
+def check_subtiles(rs, layer, where):
     for qy in (0, 8):
         for qx in (0, 8):
             q = layer[qy:qy + 8, qx:qx + 8]
             cols = {tuple(int(v) for v in c) for c in q[q[..., 3] > 0][:, :3]}
             if not cols:
                 continue
-            if not any(cols <= s for s in PAL_SETS.values()):
+            if not any(cols <= s for s in rs.pal_sets.values()):
                 raise ValueError(f"8x8 tile at {where} +({qx},{qy}) mixes palettes: {sorted(cols)}")
 
 
@@ -211,8 +257,9 @@ def check_subtiles(layer, where):
 # Tileset sources
 # --------------------------------------------------------------------------
 
-def basic_cells():
+def basic_cells(rs):
     """(name, cell) for the bare floors, walls, void and rug pieces."""
+    A = rs.A
     out = []
     for mat, vs in A.FLOORS.items():
         for v in ("plain", "alt", "top", "left", "corner"):
@@ -241,7 +288,7 @@ def basic_cells():
     return out
 
 
-def collect(layouts):
+def collect(rs, layouts):
     order, index = [], {}
 
     def add(c):
@@ -251,7 +298,7 @@ def collect(layouts):
             order.append(c)
         return index[k]
 
-    for _, c in basic_cells():
+    for _, c in basic_cells(rs):
         add(c)
     ids = {}
     for name, cells in layouts.items():
@@ -259,10 +306,10 @@ def collect(layouts):
     return order, ids
 
 
-def write_sources(order):
+def write_sources(rs, order):
     n = len(order)
     if n > MAX_METATILES:
-        raise SystemExit(f"ergasteria: {n} metatiles is over the {MAX_METATILES} limit")
+        raise SystemExit(f"{rs.name}: {n} metatiles is over the {MAX_METATILES} limit")
     rows = (n + 7) // 8
     imgs = {k: np.zeros((rows * 16, 128, 4), np.uint8) for k in ("bottom", "middle", "top")}
     for k in imgs:
@@ -274,44 +321,44 @@ def write_sources(order):
         for k, layer in (("bottom", c.bottom), ("middle", c.middle), ("top", c.top)):
             if layer is None:
                 continue
-            check_subtiles(layer, f"metatile {FIRST_METATILE + i:#x} {k}")
+            check_subtiles(rs, layer, f"metatile {FIRST_METATILE + i:#x} {k}")
             reg = imgs[k][y:y + 16, x:x + 16]
             m = layer[..., 3] > 0
             reg[m, :3] = layer[m, :3]
         if c.behavior != "MB_NORMAL":
             attrs.append(f"{i},{c.behavior}")
-    SRC.mkdir(parents=True, exist_ok=True)
+    rs.src.mkdir(parents=True, exist_ok=True)
     for k, img in imgs.items():
-        Image.fromarray(img, "RGBA").save(SRC / f"{k}.png")
-    (SRC / "attributes.csv").write_text("\n".join(attrs) + "\n")
-    print(f"ergasteria: {n} metatiles written to {SRC.relative_to(ROOT)}")
+        Image.fromarray(img, "RGBA").save(rs.src / f"{k}.png")
+    (rs.src / "attributes.csv").write_text("\n".join(attrs) + "\n")
+    rs.log(f"{n} metatiles written to {rs.src.relative_to(ROOT)}")
 
 
-def porytiles():
+def porytiles(rs):
     exe = shutil.which("porytiles") or os.path.expanduser("~/.local/bin/porytiles")
     # Porytiles only compiles a secondary against a primary it manages, so
-    # ergasteria is paired with aethos, as oikia is. It never keeps an aethos
+    # the set is paired with aethos, as oikia is. It never keeps an aethos
     # tile or palette (unshare_primary_tiles and check_compiled see to that),
     # so aethos's checksum cache, which can lag its sources, isn't verified.
-    cmd = [exe, "compile-tileset", TILESET,
+    cmd = [exe, "compile-tileset", rs.tileset,
            "--primary-pairing-mode", "manual", "--primary-pairing-partners", PARTNER,
            "--no-verify-checksums"]
     r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
     if r.returncode != 0:
         sys.stderr.write(r.stdout + r.stderr)
-        raise SystemExit("ergasteria: porytiles failed")
+        raise SystemExit(f"{rs.name}: porytiles failed")
     if r.stdout.strip() or r.stderr.strip():
         print((r.stdout + r.stderr).strip())
 
 
-def unshare_primary_tiles():
-    """oikia_build's fix, for ergasteria: copy each solid tile Porytiles
-    borrowed from aethos into ergasteria's own tiles.png."""
+def unshare_primary_tiles(rs):
+    """oikia_build's fix: copy each solid tile Porytiles borrowed from aethos
+    into the set's own tiles.png."""
     prim = OB.tiles_of(np.array(Image.open(ROOT / "data/tilesets/primary/aethos/porytiles_bin/tiles.png")) % 16)
-    im = Image.open(BIN / "tiles.png")
+    im = Image.open(rs.bin / "tiles.png")
     assert im.mode == "P"
     own = list(OB.tiles_of(np.array(im)))
-    meta = np.fromfile(BIN / "metatiles.bin", "<u2")
+    meta = np.fromfile(rs.bin / "metatiles.bin", "<u2")
     used = max((int(e) & 0x3FF) for e in meta if (int(e) & 0x3FF) >= FIRST_TILE)
     own = own[:used - FIRST_TILE + 1]
     copies = {}
@@ -332,21 +379,21 @@ def unshare_primary_tiles():
     arr = sheet.reshape(rows, 16, 8, 8).swapaxes(1, 2).reshape(rows * 8, 128)
     out = Image.fromarray(arr, "P")
     out.putpalette(im.getpalette())
-    out.save(BIN / "tiles.png")
-    meta.astype("<u2").tofile(BIN / "metatiles.bin")
-    cache = ROOT / f"porytiles/tilesets/{TILESET}/tileset.cache.json"
+    out.save(rs.bin / "tiles.png")
+    meta.astype("<u2").tofile(rs.bin / "metatiles.bin")
+    cache = ROOT / f"porytiles/tilesets/{rs.tileset}/tileset.cache.json"
     data = json.loads(cache.read_text())
     for f in ("tiles.png", "metatiles.bin"):
-        key = str((BIN / f).relative_to(ROOT))
+        key = str((rs.bin / f).relative_to(ROOT))
         if key in data:
-            data[key] = hashlib.md5((BIN / f).read_bytes()).hexdigest()
+            data[key] = hashlib.md5((rs.bin / f).read_bytes()).hexdigest()
     cache.write_text(json.dumps(data, indent=2) + "\n")
-    print(f"ergasteria: copied {len(copies)} solid tiles Porytiles had borrowed from aethos")
+    rs.log(f"copied {len(copies)} solid tiles Porytiles had borrowed from aethos")
     return len(copies)
 
 
-def check_compiled():
-    meta = np.fromfile(BIN / "metatiles.bin", "<u2").reshape(-1, 8)
+def check_compiled(rs):
+    meta = np.fromfile(rs.bin / "metatiles.bin", "<u2").reshape(-1, 8)
     bad, pals = [], set()
     for i, row in enumerate(meta):
         for e in row:
@@ -357,33 +404,34 @@ def check_compiled():
                 bad.append((FIRST_METATILE + i, idx, pal))
             pals.add(pal)
     if bad:
-        raise SystemExit(f"ergasteria: metatiles reach outside ergasteria: {bad[:8]}")
+        raise SystemExit(f"{rs.name}: metatiles reach outside {rs.name}: {bad[:8]}")
     used = len({int(e) & 0x3FF for e in meta.ravel() if int(e) & 0x3FF >= FIRST_TILE})
     top = max(int(e) & 0x3FF for e in meta.ravel()) - FIRST_TILE + 1
     if top > MAX_TILES:
-        raise SystemExit(f"ergasteria: tiles reach {top}, over {MAX_TILES} (504-511 belong to door animations)")
-    if used > BUDGET_TILES:
-        print(f"ergasteria: WARNING {used} tiles is over batch 1's budget of {BUDGET_TILES}")
-    print(f"ergasteria: compiled {len(meta)} metatiles, {used} tiles, palettes {sorted(pals)}")
+        raise SystemExit(f"{rs.name}: tiles reach {top}, over {MAX_TILES} (504-511 belong to door animations)")
+    if rs.budget and used > rs.budget:
+        rs.log(f"WARNING {used} tiles is over the budget of {rs.budget}")
+    rs.log(f"compiled {len(meta)} metatiles, {used} tiles, palettes {sorted(pals)}")
     return len(meta), used, sorted(pals)
 
 
 # --------------------------------------------------------------------------
-# Catalogs: every piece on the floors and walls it stands on, so a room can be
-# re-dressed by hand, and so the sheet shows the set.
+# ergasteria's catalogs: every piece on the floors and walls it stands on, so a
+# room can be re-dressed by hand, and so the sheet shows the set.
 # --------------------------------------------------------------------------
 
 WALL_HUNG = ["window", "niche", "herbs", "jar_shelf", "honey_shelf", "die_rack", "vault_door",
-             "shield_spear"]
+             "shield_spear", "tongs_rack"]
 BACK = ["ant_shrine"]
 FREE = ["kline", "klismos_r", "klismos_l", "stool", "bench", "table", "table_round",
         "amphora", "amphora_plain", "pithos", "pots", "myrtle", "fish_basket",
         "knucklebones", "lampstand", "column", "anvil", "brazier_small", "scales",
-        "turtle_chest", "coin_table", "anthill_pot", "cistern", "hearth_floor", "ant_trail", "mat"]
+        "turtle_chest", "coin_table", "anthill_pot", "cistern", "hearth_floor", "ant_trail", "mat",
+        "smith_anvil", "quench_trough", "votive_shelf", "charcoal_basket"]
 GALLERY = ["gallery_door", "gallery_rail", "gallery_blanket", "gallery_lamp", "ladder"]
 
 
-def _row_pack(names, width, y0, x0=1, gap=1):
+def _row_pack(A, names, width, y0, x0=1, gap=1):
     out, x, y, rowh = [], x0, y0, 0
     for n in names:
         w, h = A.STAMPS[n]["w"], A.STAMPS[n]["h"]
@@ -395,7 +443,8 @@ def _row_pack(names, width, y0, x0=1, gap=1):
     return out, y + rowh
 
 
-def catalog():
+def ergasteria_catalog():
+    A = EA
     cats = {}
     for floor, wall in (("terracotta", "blue"), ("flags", "stone")):
         placed, x = [], 0
@@ -408,7 +457,7 @@ def catalog():
             placed.append((n, x, 3 - A.STAMPS[n]["h"]))
             x += A.STAMPS[n]["w"]
         width = max(24, x)
-        free, bottom = _row_pack(FREE, width, 5)
+        free, bottom = _row_pack(A, FREE, width, 5)
         placed += free
         rug_y = bottom + 1
         height = rug_y + 4
@@ -429,7 +478,26 @@ def catalog():
         "floor": "flags", "wall": "blue", "walls": {"G": "gallery"}, "grid": grid,
         "rugs": [], "stamps": placed, "spots": [],
     }
+    # the forge, cold and lit, on the smithy's earth under its smoke-black wall
+    grid = ["WWWWWWWWWW", "WWWWWWWWWW"] + ["." * 10 for _ in range(3)]
+    cats["catalog_forge"] = {
+        "title": "The Hephaisteion's forge, cold and lit",
+        "floor": "earth", "wall": "smoke", "grid": grid, "rugs": [],
+        "stamps": [("forge_hood", 0, 0), ("forge_cold", 0, 2), ("bellows", 3, 2),
+                   ("forge_hood_lit", 5, 0), ("forge_lit", 5, 2), ("bellows", 8, 2)],
+        "spots": [],
+    }
     return cats
+
+
+ERGASTERIA = RoomSet(
+    "ergasteria", "gTileset_Ergasteria", EA,
+    tiles_doc=ROOT / "design/phase2/TILES_ergasteria.md",
+    catalog=ergasteria_catalog, budget=None,
+    default_rooms_doc=ROOT / "design/phase2/ROOMS_ergasteria.md",
+    sheet_cats=(("catalog_terracotta", "ergasteria_catalog.png"),
+                ("catalog_gallery", "ergasteria_gallery.png"),
+                ("catalog_forge", "ergasteria_forge.png")))
 
 
 # --------------------------------------------------------------------------
@@ -440,23 +508,22 @@ def blockdata(cells, ids):
     return OB.blockdata(cells, ids)
 
 
-def render_compiled(blocks, width, primary):
+def render_compiled(rs, blocks, width, primary):
     import render_map as RM
     RM.read_fieldmap_constants()
     syms = RM.scan_tileset_symbols()
     r = RM.Renderer(RM.Tileset(RM.resolve_tileset(primary, syms)),
-                    RM.Tileset(RM.resolve_tileset(TILESET, syms)))
+                    RM.Tileset(RM.resolve_tileset(rs.tileset, syms)))
     return np.array(RM.render_blocks(r, blocks, width))
 
 
 save_scaled = OB.save_scaled
 
 
-def update_layouts_json(sizes):
-    """Point each room's layouts.json entry at ergasteria with its size.
+def update_layouts_json(rs, sizes, primary=PRIMARY):
+    """Point each room's layouts.json entry at the set with its size.
     Only the four fields that change are edited, in place, so the rest of the
     file keeps its formatting."""
-    import re
     path = ROOT / "data/layouts/layouts.json"
     text = path.read_text()
     out = text
@@ -468,17 +535,17 @@ def update_layouts_json(sizes):
         block = out[start:end]
         new = block
         for field, value in (("width", str(w)), ("height", str(h)),
-                             ("primary_tileset", f'"{PRIMARY}"'), ("secondary_tileset", f'"{TILESET}"')):
+                             ("primary_tileset", f'"{primary}"'), ("secondary_tileset", f'"{rs.tileset}"')):
             new, n = re.subn(rf'("{field}": )[^,\n]+', lambda m: m.group(1) + value, new)
             assert n == 1, f"{folder}: no {field} in layouts.json"
         out = out[:start] + new + out[end:]
     json.loads(out)
     if out != text:
         path.write_text(out)
-        print("ergasteria: layouts.json updated")
+        rs.log("layouts.json updated")
 
 
-def room_doc(name, spec, cells):
+def room_doc(rs, name, spec, cells):
     H, W = len(cells), len(cells[0])
     marks = {}
     for i, spot in enumerate(spec["spots"], 1):
@@ -487,10 +554,12 @@ def room_doc(name, spec, cells):
             marks.setdefault(t, str(i) if i < 10 else chr(ord("a") + i - 10))
     lines = [f"### {spec['title']}", ""]
     lines.append(f"- Map: `{spec['map']}`. Layout: `data/layouts/{spec['layout']}/map.bin`, "
-                 f"**{W}x{H}** blocks, `gTileset_Oikos` + `gTileset_Ergasteria`.")
+                 f"**{W}x{H}** blocks, `gTileset_Oikos` + `{rs.tileset}`.")
     floors = ", ".join([spec["floor"]] + list(spec.get("floors", {}).values()))
     walls = ", ".join([spec["wall"]] + list(spec.get("walls", {}).values()))
     lines.append(f"- Floor: {floors}. Wall: {walls}. Render: `design/phase2/img/{spec['render']}` (2x).")
+    for vname, var in spec.get("variants", {}).items():
+        lines.append(f"- Variant `{vname}`: `{var['script']}` in the map's scripts.pory swaps its cells.")
     lines.append("")
     lines.append("Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table; "
                  "a bg event is marked on its furniture tile.")
@@ -524,9 +593,11 @@ def room_doc(name, spec, cells):
     return "\n".join(lines)
 
 
-def stamp_doc(composed, ids, cats):
+def stamp_doc(rs, composed, ids, cats, rooms):
+    """Where each stamp first appears (a catalog if it's in one, else a room)."""
+    A = rs.A
     where = {}
-    for cat, spec in cats.items():
+    for cat, spec in list(cats.items()) + list(rooms.items()):
         for (n, sx, sy) in spec["stamps"]:
             if n in where:
                 continue
@@ -539,27 +610,28 @@ def stamp_doc(composed, ids, cats):
                     row.append(f"{ids[cat][sy + cy][sx + cx]:03X}" if not empty(sub) else "---")
                 rows.append(" ".join(row))
             where[n] = (cat.replace("catalog_", ""), " / ".join(rows))
-    lines = ["| Stamp | Cells | Palette | From | Metatiles (catalog) | What it is |",
+    lines = ["| Stamp | Cells | Palette | From | Metatiles (where) | What it is |",
              "|---|---|---|---|---|---|"]
     for n, st in A.STAMPS.items():
         if n not in where:
             continue
         cat, ids_ = where[n]
-        lines.append(f"| `{n}` | {st['w']}x{st['h']} | {st['pal']} | {st['source']} | "
+        lines.append(f"| `{n}` | {st['w']}x{st['h']} | {st['pal']} | {st.get('source', rs.name)} | "
                      f"{ids_} ({cat}) | {st['note']} |")
     return "\n".join(lines)
 
 
-def base_doc(order):
+def base_doc(rs, order):
     index = {c.key(): FIRST_METATILE + i for i, c in enumerate(order)}
     lines = ["| Piece | Metatile |", "|---|---|"]
-    for name, c in basic_cells():
+    for name, c in basic_cells(rs):
         lines.append(f"| {name} | `{index[c.key()]:03X}` |")
     return "\n".join(lines)
 
 
-def splice(path, text):
-    begin, end = "<!-- ergasteria_build: begin generated -->", "<!-- ergasteria_build: end generated -->"
+def splice(path, text, tag="ergasteria_build", comment=("<!-- ", " -->")):
+    begin = f"{comment[0]}{tag}: begin generated{comment[1]}"
+    end = f"{comment[0]}{tag}: end generated{comment[1]}"
     doc = path.read_text()
     a, b = doc.index(begin) + len(begin), doc.index(end)
     path.write_text(doc[:a] + "\n\n" + text.strip() + "\n\n" + doc[b:])
@@ -578,58 +650,74 @@ def all_rooms():
     for mod in room_modules():
         for n, spec in mod.ROOMS.items():
             assert n not in rooms, f"room {n} defined twice"
-            rooms[n] = spec
+            rooms[n] = dict(spec, _module=mod)
     return rooms
 
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--no-compile", action="store_true",
-                    help="compose and check only; leave Porytiles' files alone")
-    ap.add_argument("--preview", metavar="DIR", help="also write source-composed previews here (3x)")
-    args = ap.parse_args()
+def rooms_of(rs):
+    return {n: s for n, s in all_rooms().items() if s.get("set", "ergasteria") == rs.name}
 
-    check_palettes()
-    rooms = all_rooms()
-    cats = catalog()
-    composed = {n: compose(s) for n, s in list(rooms.items()) + list(cats.items())}
+
+def variant_script(spec, vname, var, base_cells, base_ids, var_cells, var_ids):
+    """A poryscript that turns the room as built into its variant."""
+    lines = [f"script {var['script']} {{"]
+    H, W = len(base_cells), len(base_cells[0])
+    for y in range(H):
+        for x in range(W):
+            if base_ids[y][x] != var_ids[y][x] or base_cells[y][x].block != var_cells[y][x].block:
+                solid = "TRUE" if var_cells[y][x].block == SOLID else "FALSE"
+                lines.append(f"    setmetatile({x}, {y}, 0x{var_ids[y][x]:03X}, {solid})")
+    lines.append("    return")
+    lines.append("}")
+    return "\n".join(lines)
+
+
+def build(rs, args):
+    """Compose, compile and check one set; write its rooms. Returns the composed rooms."""
+    check_palettes(rs)
+    rooms = rooms_of(rs)
+    cats = rs.catalog()
+    layouts = {n: compose(rs, s) for n, s in list(rooms.items()) + list(cats.items())}
     for n, spec in rooms.items():
-        check_spots(n, spec, composed[n])
-    order, ids = collect(composed)
-    print(f"ergasteria: {len(order)} unique metatiles")
+        check_spots(n, spec, layouts[n])
+        for vname, var in spec.get("variants", {}).items():
+            layouts[f"{n}@{vname}"] = compose(rs, variant_spec(spec, var))
+    order, ids = collect(rs, layouts)
+    rs.log(f"{len(order)} unique metatiles")
 
     if args.preview:
         d = Path(args.preview)
-        for n, cells in composed.items():
-            save_scaled(image_of(cells), d / f"{n}.png", 3)
+        for n, cells in layouts.items():
+            save_scaled(image_of(cells), d / f"{n.replace('@', '_')}.png", 3)
 
     if args.no_compile:
         for c in order:
             for k, layer in (("bottom", c.bottom), ("middle", c.middle), ("top", c.top)):
                 if layer is not None:
-                    check_subtiles(layer, k)
-        return
+                    check_subtiles(rs, layer, k)
+        return rooms, layouts
 
-    write_sources(order)
-    porytiles()
-    unshare_primary_tiles()
-    nmeta, ntiles, pals = check_compiled()
+    write_sources(rs, order)
+    porytiles(rs)
+    unshare_primary_tiles(rs)
+    nmeta, ntiles, pals = check_compiled(rs)
 
     void_id = None
-    for name, c in basic_cells():
+    for name, c in basic_cells(rs):
         if name.startswith("void"):
             void_id = FIRST_METATILE + [o.key() for o in order].index(c.key())
     sizes = {}
-    for n, cells in composed.items():
+    scripts = {}
+    for n, cells in layouts.items():
         H, W = len(cells), len(cells[0])
         blocks = blockdata(cells, ids[n])
         want = image_of(cells)
-        got = {p: render_compiled(blocks, W, p) for p in (PRIMARY, "gTileset_Aethos", "gTileset_Building")}
+        got = {p: render_compiled(rs, blocks, W, p) for p in (PRIMARY, "gTileset_Aethos", "gTileset_Building")}
         if not np.array_equal(got[PRIMARY], want):
-            raise SystemExit(f"ergasteria: {n} does not render as composed")
+            raise SystemExit(f"{rs.name}: {n} does not render as composed")
         for p, img in got.items():
             if not np.array_equal(img, want):
-                raise SystemExit(f"ergasteria: {n} renders differently on {p}")
+                raise SystemExit(f"{rs.name}: {n} renders differently on {p}")
         if n in rooms:
             spec = rooms[n]
             d = ROOT / "data/layouts" / spec["layout"]
@@ -638,30 +726,53 @@ def main():
             np.array([void_id | SOLID] * 4, "<u2").tofile(d / "border.bin")
             save_scaled(got[PRIMARY], IMG / spec["render"], 2)
             sizes[spec["layout"]] = (W, H)
-            print(f"ergasteria: {n} {W}x{H} -> data/layouts/{spec['layout']}, design/phase2/img/{spec['render']}")
-    update_layouts_json(sizes)
-    cat = composed["catalog_terracotta"]
-    save_scaled(render_compiled(blockdata(cat, ids["catalog_terracotta"]), len(cat[0]), PRIMARY),
-                IMG / "ergasteria_catalog.png", 2)
-    gal = composed["catalog_gallery"]
-    save_scaled(render_compiled(blockdata(gal, ids["catalog_gallery"]), len(gal[0]), PRIMARY),
-                IMG / "ergasteria_gallery.png", 2)
-    sheet = subprocess.run([sys.executable, str(ROOT / "tools/ichor/render_map.py"), "--sheet", "ergasteria",
-                            "--primary", "oikos", "--scale", "2", "-o", str(IMG / "ergasteria_sheet.png")],
+            rs.log(f"{n} {W}x{H} -> data/layouts/{spec['layout']}, design/phase2/img/{spec['render']}")
+        elif "@" in n:
+            base, vname = n.split("@")
+            spec = rooms[base]
+            save_scaled(got[PRIMARY], IMG / spec["render"].replace(".png", f"_{vname}.png"), 2)
+            scripts.setdefault(spec["layout"], []).append(
+                variant_script(spec, vname, spec["variants"][vname], layouts[base], ids[base], cells, ids[n]))
+    update_layouts_json(rs, sizes)
+    for layout, texts in scripts.items():
+        pory = ROOT / "data/maps" / layout / "scripts.pory"
+        splice(pory, f"// Written by tools/ichor/art/{rs.name}_build.py; don't edit by hand.\n\n"
+               + "\n\n".join(texts), tag=f"{rs.name}_build", comment=("// ", ""))
+    for cat, img in rs.sheet_cats:
+        cells = layouts[cat]
+        save_scaled(render_compiled(rs, blockdata(cells, ids[cat]), len(cells[0]), PRIMARY), IMG / img, 2)
+    sheet = subprocess.run([sys.executable, str(ROOT / "tools/ichor/render_map.py"), "--sheet", rs.name,
+                            "--primary", "oikos", "--scale", "2", "-o", str(IMG / f"{rs.name}_sheet.png")],
                            cwd=ROOT, capture_output=True, text=True)
     if sheet.returncode != 0:
         sys.stderr.write(sheet.stderr)
-        raise SystemExit("ergasteria: sheet render failed")
-    rooms_doc = ROOT / "design/phase2/ROOMS_ergasteria.md"
-    tiles_doc = ROOT / "design/phase2/TILES_ergasteria.md"
-    if rooms_doc.exists():
-        splice(rooms_doc, "\n".join(room_doc(n, s, composed[n]) for n, s in rooms.items()))
-    if tiles_doc.exists():
+        raise SystemExit(f"{rs.name}: sheet render failed")
+    docs = {}
+    for n, s in rooms.items():
+        doc = getattr(s["_module"], "ROOMS_DOC", rs.default_rooms_doc)
+        docs.setdefault(doc, []).append(room_doc(rs, n, s, layouts[n]))
+    for doc, texts in docs.items():
+        if doc.exists():
+            splice(doc, "\n".join(texts), tag=f"{rs.name}_build")
+    if rs.tiles_doc.exists():
         stats = (f"Built: **{len(order)}** metatiles (`0x200`-`{FIRST_METATILE + len(order) - 1:#05x}`) "
-                 f"of 512, **{ntiles}** tiles of {MAX_TILES} (batch 1's budget: {BUDGET_TILES}), "
-                 f"palettes {pals[0]}-{pals[-1]}.\n\n")
-        splice(tiles_doc, stats + base_doc(order) + "\n\n" + stamp_doc(composed, ids, cats))
-    print(f"ergasteria: identical on oikos, aethos and building; {nmeta} metatiles, {ntiles} tiles, palettes {pals}")
+                 f"of 512, **{ntiles}** tiles of {MAX_TILES}, palettes {pals[0]}-{pals[-1]}.\n\n")
+        splice(rs.tiles_doc, stats + base_doc(rs, order) + "\n\n" + stamp_doc(rs, layouts, ids, cats, rooms),
+               tag=f"{rs.name}_build")
+    rs.log(f"identical on oikos, aethos and building; {nmeta} metatiles, {ntiles} tiles, palettes {pals}")
+    return rooms, layouts
+
+
+def parse_args():
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--no-compile", action="store_true",
+                    help="compose and check only; leave Porytiles' files alone")
+    ap.add_argument("--preview", metavar="DIR", help="also write source-composed previews here (3x)")
+    return ap.parse_args()
+
+
+def main():
+    build(ERGASTERIA, parse_args())
 
 
 if __name__ == "__main__":

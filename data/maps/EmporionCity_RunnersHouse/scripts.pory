@@ -1,1 +1,95 @@
+// The runners' house (design/phase2/SCRIPT.md, Part 2): the barracks of
+// Kerykos's day-runners, the heralds who carry messages on foot. Dromokleia,
+// the chief runner, and two young runners. Room: tools/ichor/maps/emporion_rooms.py
+// ("runners"), on domos. The street door is the mat at (5..6, 8), warp 0. Its
+// MAP_EMPORION_CITY dest_warp_id (0) is a placeholder until the city agent's
+// door ids are known.
+//
+// Dromokleia gives a Quick Claw on the first visit (FLAG_ICHOR_GOT_QUICK_CLAW).
+// After Act I she takes a letter home (FLAG_ICHOR_WROTE_TO_MOM), and Mom answers
+// it with Honey x3 on the next visit to Elaia (Part 2, Return to Kalliste).
+
 mapscripts EmporionCity_RunnersHouse_MapScripts {}
+
+text EmporionCity_RunnersHouse_Text_NameDromokleia { "DROMOKLEIA" }
+text EmporionCity_RunnersHouse_Text_NameRunner { "RUNNER" }
+
+script EmporionCity_RunnersHouse_EventScript_Dromokleia {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE) && !flag(FLAG_ICHOR_WROTE_TO_MOM)) {
+        setspeaker(EmporionCity_RunnersHouse_Text_NameDromokleia)
+        msgbox(format("A letter for Kalliste? For your mother? Write it. We'll run it.\p"
+                      "What does it say? …“I'm eating.” That's all?\p"
+                      "Mothers like short letters. It means you're busy, not dead."))
+        setflag(FLAG_ICHOR_WROTE_TO_MOM)
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_GOT_QUICK_CLAW)) {
+        setspeaker(EmporionCity_RunnersHouse_Text_NameDromokleia)
+        msgbox(format("Message to carry? We run anywhere. Ships for the sea, us for the rest.\p"
+                      "Take this. Every runner wears one. For a head start."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_QUICK_CLAW)
+        if (var(VAR_RESULT) == FALSE) {
+            call(Common_EventScript_ShowBagIsFull)
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_QUICK_CLAW)
+        release
+        end
+    }
+    setspeaker(EmporionCity_RunnersHouse_Text_NameDromokleia)
+    if (flag(FLAG_ICHOR_DEIGMA_CLUE)) {
+        msgbox(format("Your scholar friend's letter is on its way to Kalliste.\p"
+                      "The sea part's a ship. I don't like to talk about the sea part."))
+    } else {
+        msgbox(format("Message to carry? We run anywhere. Ships for the sea, us for the rest."))
+    }
+    release
+}
+
+script EmporionCity_RunnersHouse_EventScript_Runner {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_RunnersHouse_Text_NameRunner)
+    if (flag(FLAG_ICHOR_DEIGMA_CLUE)) {
+        msgbox(format("Sixty-one steps, the Lakonian did the Herald's Run in.\p"
+                      "I did it in sixty-three. In my dreams. Every night."))
+    } else {
+        msgbox(format("Stretch first. Always stretch first. Then run like a goat's after you."))
+    }
+    release
+}
+
+script EmporionCity_RunnersHouse_EventScript_YoungRunner {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_RunnersHouse_Text_NameRunner)
+    msgbox(format("Shh. I ran to Eleusa and back before dawn. My legs are still arguing."))
+    release
+}
+
+script EmporionCity_RunnersHouse_EventScript_RoadMap {
+    msgbox(format("Every road in Aethos, scratched into the plaster, the stades tallied beside each.\p"
+                  "Someone has scratched “TOO FAR” next to the road over the mountains."), MSGBOX_SIGN)
+}
+
+script EmporionCity_RunnersHouse_EventScript_Ribbon {
+    msgbox(format("A red finishing ribbon, nailed over the door to the yard. It's frayed from being touched."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_RunnersHouse_EventScript_WaterJar {
+    msgbox(format("A big jar of water with a bronze ladle. The ladle is warm from use."), MSGBOX_SIGN)
+}
+
+script EmporionCity_RunnersHouse_EventScript_Klepsydra {
+    msgbox(format("A water clock. The runners time each other by it, and then argue."), MSGBOX_SIGN)
+}
+
+script EmporionCity_RunnersHouse_EventScript_Sandals {
+    msgbox(format("Sandals in pairs on the pegs, laced and ready for the road."), MSGBOX_SIGN)
+}

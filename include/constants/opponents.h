@@ -48,6 +48,8 @@
 #define TRAINER_ICHOR_ALETHEA_DECK            40
 #define TRAINER_ICHOR_PHORMION                41
 #define TRAINER_ICHOR_LYKON                   42
+// Emporion's interiors, ids 60-64 (the hiring hall)
+#define TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS 60
 // The Temple of Hermes (ids 65-79; tools/ichor/maps/temple_hermes.py)
 #define TRAINER_ICHOR_PODARGE                 65
 #define TRAINER_ICHOR_EUCHIDAS                66

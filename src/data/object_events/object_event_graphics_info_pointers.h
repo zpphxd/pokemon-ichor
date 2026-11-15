@@ -437,6 +437,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPronom
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorEndeis;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPheidon;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAiakides;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKedalion;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonSeasick;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonTablet;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEggs;
@@ -875,6 +876,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_ENDEIS] =             &gObjectEventGraphicsInfo_IchorEndeis,
     [OBJ_EVENT_GFX_ICHOR_PHEIDON] =            &gObjectEventGraphicsInfo_IchorPheidon,
     [OBJ_EVENT_GFX_ICHOR_AIAKIDES] =           &gObjectEventGraphicsInfo_IchorAiakides,
+    [OBJ_EVENT_GFX_ICHOR_KEDALION] =           &gObjectEventGraphicsInfo_IchorKedalion,
     [OBJ_EVENT_GFX_ICHOR_KLEON_SEASICK] =      &gObjectEventGraphicsInfo_IchorKleonSeasick,
     [OBJ_EVENT_GFX_ICHOR_KLEON_TABLET] =       &gObjectEventGraphicsInfo_IchorKleonTablet,
     [OBJ_EVENT_GFX_ICHOR_NEST_EGGS] = &gObjectEventGraphicsInfo_IchorNestEggs,

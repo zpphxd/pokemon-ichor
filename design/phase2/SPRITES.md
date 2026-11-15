@@ -59,6 +59,7 @@ Every sheet is 144×32: nine 16×32 frames in the slice's layout, with feet on r
 | `OBJ_EVENT_GFX_ICHOR_ENDEIS` | `endeis.png` | folk | Dark hair streaked gray under a terracotta kerchief, an ochre peplos, a linen apron, and a terracotta wine jug in her right hand. | the island woman, with Melitta's apron |
 | `OBJ_EVENT_GFX_ICHOR_PHEIDON` | `pheidon.png` | folk | Dark curls going gray at the temples, a short beard, an undyed exomis under a terracotta leather apron, and the striking hammer in his right hand. | new, on the slice's tunic body |
 | `OBJ_EVENT_GFX_ICHOR_AIAKIDES` | `aiakides.png` | folk | Close-cropped white hair, a short white beard and stern brows. A white chiton with a black belt (the one he gives away), a faded terracotta soldier's cloak, and a stick. | the old man's staff, on a soldier's tunic body |
+| `OBJ_EVENT_GFX_ICHOR_KEDALION` | `kedalion.png` | folk | Batch 2, Emporion's Hephaisteion. A broad smith, bald on top with a black fringe and a great black beard, soot on his brow, a sooty gray exomis under a black leather apron, and his tongs. | Pheidon's tunic body, with his own head, apron and tongs; the bald dome and the black beard keep him apart from Pheidon and the slice's merchant |
 | `OBJ_EVENT_GFX_ICHOR_KLEON_SEASICK` | `kleon_seasick.png` | cast | Kleon at the rail (see below) | Kleon |
 | `OBJ_EVENT_GFX_ICHOR_KLEON_TABLET` | `kleon_tablet.png` | cast | Kleon reading his mother's wax tablet (see below) | Kleon |
 

@@ -562,6 +562,24 @@ IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
 - Taunt
 - Tailwind
 
+/* Emporion's hiring hall (design/phase2/SCRIPT.md, Part 3): the Titans' crew boss,
+   signing on dockhands. Optional; beating him wins his Rocky Helmet. */
+=== TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS ===
+Name: CREW BOSS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 15
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Spalunk
+Level: 16
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
 /* Ichor: world-act2 (ids 160-319) */
 
 

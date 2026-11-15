@@ -66,6 +66,8 @@
 #define SPECIES_MELIBEE     SPECIES_COMBEE       // Bug, Demeter's bee
 #define SPECIES_ELALEAF     SPECIES_SEEDOT       // Grass, the olive sprout
 #define SPECIES_RHOARIL     SPECIES_BOUNSWEET    // Grass, Persephone's pomegranate
+// Emporion (batch 2)
+#define SPECIES_PANACOIL    SPECIES_ARBOK        // Poison/Fairy, the healer serpent coiled in every Asclepeion
 
 #endif // ICHOR_AETHOS_DEX
 

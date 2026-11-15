@@ -22,11 +22,17 @@ def stage(n, path):
     return subprocess.run(["git", "show", f":{n}:{path}"], capture_output=True, text=True, check=True).stdout
 
 
-def union_lines(text):
+def union_lines(text, dedupe):
+    """Ours, then theirs. With dedupe (path lists such as .gitignore), drop
+    non-blank lines theirs repeats; never in code or data, where repeated
+    lines (blank lines, "Level: 15") are real."""
     def both(m):
         ours = m.group(1).splitlines(keepends=True)
-        seen = set(ours)
-        return "".join(ours + [l for l in m.group(2).splitlines(keepends=True) if l not in seen])
+        theirs = m.group(2).splitlines(keepends=True)
+        if dedupe:
+            seen = {l for l in ours if l.strip()}
+            theirs = [l for l in theirs if l not in seen]
+        return "".join(ours + theirs)
     return CONFLICT.sub(both, text)
 
 
@@ -49,7 +55,7 @@ for path in sys.argv[1:]:
         text = union_groups(path)
     else:
         with open(path) as f:
-            text = union_lines(f.read())
+            text = union_lines(f.read(), path.endswith((".gitignore", "ichor_maps.inc")))
     if "<<<<<<<" in text:
         raise SystemExit(f"{path}: unresolved conflict left")
     with open(path, "w") as f:
