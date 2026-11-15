@@ -15,6 +15,7 @@ bool32 Ichor_IsBlessed(u32 god);
 
 // Engine hooks, one call each in vanilla code
 void Ichor_OnItemAdded(u16 itemId);             // item.c, AddBagItem
+void Ichor_BeforeMapTransition(void);
 void Ichor_OnMapTransition(void);
 void Ichor_OnFieldFrame(void);
 bool32 Ichor_IsCarryingFlame(void);

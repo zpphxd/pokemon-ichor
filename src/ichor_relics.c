@@ -110,8 +110,30 @@ void Ichor_OnItemAdded(u16 itemId)
         FlagSet(flag);
 }
 
+// A carried flame whose kind travels (sFlameTravels) survives the map change:
+// its steps and kind are kept across ClearTempFieldEventData's reset.
+static EWRAM_DATA u16 sTravellingFlame[2] = {0};
+
+static bool32 FlameTravels(u32 kind);
+
+void Ichor_BeforeMapTransition(void)
+{
+    sTravellingFlame[0] = sTravellingFlame[1] = 0;
+    if (Ichor_IsCarryingFlame() && FlameTravels(VarGet(VAR_TEMP_3)))
+    {
+        sTravellingFlame[0] = VarGet(VAR_TEMP_2);
+        sTravellingFlame[1] = VarGet(VAR_TEMP_3);
+    }
+}
+
 void Ichor_OnMapTransition(void)
 {
+    if (sTravellingFlame[1] != FLAME_NONE)
+    {
+        VarSet(VAR_TEMP_2, sTravellingFlame[0]);
+        VarSet(VAR_TEMP_3, sTravellingFlame[1]);
+        sTravellingFlame[0] = sTravellingFlame[1] = 0;
+    }
     FlagClear(FLAG_ICHOR_NO_RELICS);
     Ichor_FrozenHourOnMapTransition();
     Ichor_LabyrinthOnMapTransition();
@@ -426,6 +448,17 @@ static const u8 *const sFlameNames[FLAME_COUNT] =
     [FLAME_HESTIA_SHIP] = COMPOUND_STRING("Hestia's fire"),
     [FLAME_LERNA]     = COMPOUND_STRING("Kleon's fire"),
 };
+
+// Kinds that survive a door or an edge: the rest die when you leave the map.
+static const bool8 sFlameTravels[FLAME_COUNT] =
+{
+    [FLAME_HESTIA_SHIP] = TRUE,  // Akti's temple, its streets, the quay, the Euploia
+};
+
+static bool32 FlameTravels(u32 kind)
+{
+    return kind < FLAME_COUNT && sFlameTravels[kind];
+}
 
 bool32 Ichor_IsCarryingFlame(void)
 {

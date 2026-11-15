@@ -58,6 +58,7 @@ void InitEventData(void)
 
 void ClearTempFieldEventData(void)
 {
+    Ichor_BeforeMapTransition(); // Ichor: a carried flame that travels outlives the temp vars
     memset(&gSaveBlock1Ptr->flags[TEMP_FLAGS_START / 8], 0, TEMP_FLAGS_SIZE);
     memset(&gSaveBlock1Ptr->vars[TEMP_VARS_START - VARS_START], 0, TEMP_VARS_SIZE);
     FlagClear(FLAG_SYS_ENC_UP_ITEM);
