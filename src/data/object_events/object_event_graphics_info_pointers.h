@@ -504,6 +504,8 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMulete
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorEelSmoker;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorElderMStone;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorElderMLethe;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCobweb;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGreatBoulder;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -1001,6 +1003,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_EEL_SMOKER] =               &gObjectEventGraphicsInfo_IchorEelSmoker,
     [OBJ_EVENT_GFX_ICHOR_ELDER_M_STONE] =            &gObjectEventGraphicsInfo_IchorElderMStone,
     [OBJ_EVENT_GFX_ICHOR_ELDER_M_LETHE] =            &gObjectEventGraphicsInfo_IchorElderMLethe,
+    [OBJ_EVENT_GFX_ICHOR_COBWEB] = &gObjectEventGraphicsInfo_IchorCobweb,
+    [OBJ_EVENT_GFX_ICHOR_GREAT_BOULDER] = &gObjectEventGraphicsInfo_IchorGreatBoulder,
     // End of Ichor object events
 };
 

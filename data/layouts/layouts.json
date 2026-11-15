@@ -763,10 +763,10 @@
     {
       "id": "LAYOUT_TROPHONIOS_CAVE_B1F",
       "name": "TrophoniosCave_B1F_Layout",
-      "width": 16,
-      "height": 12,
+      "width": 30,
+      "height": 24,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_KithaironCave",
+      "secondary_tileset": "gTileset_Trophonios",
       "border_filepath": "data/layouts/TrophoniosCave_B1F/border.bin",
       "blockdata_filepath": "data/layouts/TrophoniosCave_B1F/map.bin",
       "layout_version": "emerald"
@@ -774,10 +774,10 @@
     {
       "id": "LAYOUT_TROPHONIOS_CAVE_B2F",
       "name": "TrophoniosCave_B2F_Layout",
-      "width": 16,
-      "height": 12,
+      "width": 26,
+      "height": 22,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_KithaironCave",
+      "secondary_tileset": "gTileset_Trophonios",
       "border_filepath": "data/layouts/TrophoniosCave_B2F/border.bin",
       "blockdata_filepath": "data/layouts/TrophoniosCave_B2F/map.bin",
       "layout_version": "emerald"

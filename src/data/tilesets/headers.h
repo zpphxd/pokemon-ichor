@@ -594,6 +594,20 @@ const struct Tileset gTileset_ThyrsaStone =
     .callback = NULL,
 };
 
+// Ichor (Act II batch 2): Trophonios's cave under Lebadeia (SCRIPT.md Part 5, beats 35B-35C).
+// A Porytiles-managed secondary for the aethos primary, built by tools/ichor/art/trophonios_build.py.
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_Trophonios =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Trophonios,
+    .palettes = gTilesetPalettes_PorytilesManaged_Trophonios,
+    .metatiles = gMetatiles_PorytilesManaged_Trophonios,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Trophonios,
+    .callback = NULL,
+};
+
 // Ichor (Act II rooms, the road west): Lebadeia's pilgrims' hall and the mason's house: living rock, rubble, cut stone. A Porytiles-managed secondary for the oikos
 // primary, built by tools/ichor/maps/westrooms.py (art in tools/ichor/art/westrooms_*.py).
 // It uses only its own tiles and palettes 6-12.

@@ -864,10 +864,10 @@
 #define FLAG_UNUSED_0x32D                                           0x32D // Unused Flag
 #define FLAG_UNUSED_0x32E                                           0x32E // Unused Flag
 #define FLAG_UNUSED_0x32F                                           0x32F // Unused Flag
-#define FLAG_UNUSED_0x330                                           0x330 // Unused Flag
-#define FLAG_UNUSED_0x331                                           0x331 // Unused Flag
-#define FLAG_UNUSED_0x332                                           0x332 // Unused Flag
-#define FLAG_UNUSED_0x333                                           0x333 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_TROPHONIOS_B1F_BRONZE_OBOL                0x330 // Ichor: Act II: hidden item: Trophonios's cave B1F, a Bronze Obol in the underground stream
+#define FLAG_ICHOR_HIDDEN_TROPHONIOS_B1F_HONEY                      0x331 // Ichor: Act II: hidden item: Trophonios's cave B1F, honey left behind the throne of Mnemosyne
+#define FLAG_ICHOR_HIDDEN_TROPHONIOS_B2F_ETHER                      0x332 // Ichor: Act II: hidden item: Trophonios's cave B2F, an Ether in fork A's loop
+#define FLAG_ICHOR_HIDDEN_TROPHONIOS_B2F_DUSK_STONE                 0x333 // Ichor: Act II: hidden item: Trophonios's cave B2F, a Dusk Stone at the black pool's far rim
 #define FLAG_ICHOR_HIDDEN_KIRRHA_INN_RELIC_COPPER                   0x334 // Ichor: Act II: hidden: a pilgrim's coin down the inn's well
 #define FLAG_ICHOR_HIDDEN_LEBADEIA_MASON_STARDUST                   0x335 // Ichor: Act II: hidden: Stardust in the mason's dust drift
 #define FLAG_UNUSED_0x336                                           0x336 // Unused Flag
@@ -1837,6 +1837,15 @@
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
+#define FLAG_ICHOR_TROPHONIOS_SNAKE_FED         (FLAG_ICHOR_GENERAL_START + 0x1A8) // Ichor: Act II: the snake in Trophonios's cave took the honey; its niche is clear (Part 5)
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_MAX_REPEL (FLAG_ICHOR_GENERAL_START + 0x1A9) // Ichor: Act II: item ball: Trophonios's cave B1F Max Repel past the marble rubble
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_ESCAPE_ROPE (FLAG_ICHOR_GENERAL_START + 0x1AA) // Ichor: Act II: item ball: Trophonios's cave B1F Escape Rope at the ladder's foot
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_MAX_ETHER (FLAG_ICHOR_GENERAL_START + 0x1AB) // Ichor: Act II: item ball: Trophonios's cave B2F Max Ether at fork B's dead end
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_HYPER_POTION (FLAG_ICHOR_GENERAL_START + 0x1AC) // Ichor: Act II: item ball: Trophonios's cave B2F Hyper Potion at fork C's dead end
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_SPELL_TAG (FLAG_ICHOR_GENERAL_START + 0x1AD) // Ichor: Act II: item ball: Trophonios's cave B2F Spell Tag in the web den
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_TM_FUTURE_SIGHT (FLAG_ICHOR_GENERAL_START + 0x1AE) // Ichor: Act II: item ball: Trophonios's cave B2F TM Future Sight on the oracle's ledge
+#define FLAG_ICHOR_HIDE_TROPHONIOS_GREAT_BOULDER (FLAG_ICHOR_GENERAL_START + 0x1AF) // Ichor: Act II: Trophonios's great boulder is split (Hephaestus's Hammer); stays gone
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_DAMP_ROCK (FLAG_ICHOR_GENERAL2_START + 0x080) // Ichor: Act II: item ball: Trophonios's cave B1F Damp Rock in the wet corner by the stream's outlet
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

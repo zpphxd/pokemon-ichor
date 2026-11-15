@@ -2991,6 +2991,12 @@ static const struct SpriteFrameImage sPicTable_IchorElderMLethe[] = {
     overworld_ascending_frames(gObjectEventPic_IchorElderMLethe, 2, 4),
 };
 
+static const struct SpriteFrameImage sPicTable_IchorCobweb[] = {
+    obj_frame_tiles(gObjectEventPic_IchorCobweb),
+};
+static const struct SpriteFrameImage sPicTable_IchorGreatBoulder[] = {
+    obj_frame_tiles(gObjectEventPic_IchorGreatBoulder),
+};
 // End of Ichor object events
 
 // Ichor: the ground item jar

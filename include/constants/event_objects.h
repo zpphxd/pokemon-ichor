@@ -529,6 +529,8 @@ enum
     OBJ_EVENT_GFX_ICHOR_EEL_SMOKER,
     OBJ_EVENT_GFX_ICHOR_ELDER_M_STONE,
     OBJ_EVENT_GFX_ICHOR_ELDER_M_LETHE,
+    OBJ_EVENT_GFX_ICHOR_COBWEB,  // Trophonios's cave (tools/ichor/art/trophonios_objects.py)
+    OBJ_EVENT_GFX_ICHOR_GREAT_BOULDER,  // Trophonios's cave (tools/ichor/art/trophonios_objects.py)
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
