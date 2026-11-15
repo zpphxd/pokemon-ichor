@@ -85,6 +85,10 @@ The Hoenn cut freed Hoenn's map-section ids 0–57 and 59–85 for the Oikoumene
 - The Hoenn names stay defined as aliases in `include/constants/region_map_sections_hoenn.h`, so upstream code still compiles. When you give a slot a real name, rename it in the json and change its alias line.
 - 58 is `MAPSEC_BATTLE_FRONTIER`, which the kept Pyramid and Pike maps still use. It frees once the Olympiad replaces them.
 - 86 (`MAPSEC_SECRET_BASE`) and 87 (`MAPSEC_DYNAMIC`) are engine sections and stay.
+- **The Oikoumene's sections are named** (PG-11 as amended, director 2026-11-14), by `tools/ichor/oikoumene_sections.py`; `--list` prints every id:
+  - **Hoenn block, 0–85:** `MAPSEC_AETHOS` and the Troad, Egypt, the Black Sea, Lydia, Libya and the North (67 names). Slots 2, 8, 50–54, 57–59, 65, 66, 68, 69, 71, 79, 84 and 85 stay `MAPSEC_OIKOUMENE_<id>` until the chart's audit clears them.
+  - **Kanto tail,** the 53 spare ids after `MAPSEC_RHODOS`: the first is `MAPSEC_THE_OIKOUMENE`, on the Aethos chart; the next 40 (`MAPSEC_OIKOUMENE2_FIRST` to `_LAST`) are Aithiopia, the Far West, the Western Sea and Okeanos, a second Oikoumene range; 12 stay spare. Their FRLG names are aliases in `include/constants/region_map_sections_oikoumene.h`.
+  - The epics' maps on the Oikoumene chart (LABORS's and ODYSSEY's, built by world-postgame) use names from the same script.
 - Every slot appears in `map_name_popup.c`'s theme table and most in `region_map.c`. A few have more upstream behavior behind their Hoenn name, so check before reusing them:
   - 2 (Dewford): weather
   - 8 (Slateport): the battle tent
