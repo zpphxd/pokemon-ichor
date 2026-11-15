@@ -131,3 +131,13 @@ TEST("Ichor: a map's own temp vars are never read as a carried flame")
     VarSet(VAR_TEMP_2, 0);
     VarSet(VAR_TEMP_3, 0);
 }
+
+TEST("Ichor: hidden items decode vanilla flags and bank flags from the same field")
+{
+    EXPECT_EQ(Ichor_GetHiddenItemFlag(0), FLAG_HIDDEN_ITEMS_START);
+    EXPECT_EQ(Ichor_GetHiddenItemFlag(FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY - FLAG_HIDDEN_ITEMS_START), FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY);
+    EXPECT_EQ(Ichor_GetHiddenItemFlag(ICHOR_HIDDEN_ITEM_BANK_ID), ICHOR_FLAGS_START);
+    EXPECT_EQ(Ichor_GetHiddenItemFlag(ICHOR_HIDDEN_ITEM_BANK_ID + (FLAG_ICHOR_GENERAL_START - ICHOR_FLAGS_START)), FLAG_ICHOR_GENERAL_START);
+    EXPECT_EQ(Ichor_GetHiddenItemFlag(ICHOR_HIDDEN_ITEM_BANK_ID + (ICHOR_FLAGS2_END - ICHOR_FLAGS_START)), ICHOR_FLAGS2_END);
+    EXPECT_LT(ICHOR_HIDDEN_ITEM_BANK_ID + (ICHOR_FLAGS2_END - ICHOR_FLAGS_START), 1 << 13);  // fits the 13-bit field
+}

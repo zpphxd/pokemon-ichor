@@ -29,6 +29,13 @@ them too: LO-HI is then an offset into the bank's general range. For bankflag,
 offsets 0x000-0x4FF are the first bank (FLAG_ICHOR_GENERAL_START) and
 0x500-0xADF the second (FLAG_ICHOR_GENERAL2_START + offset - 0x500), so the
 ranges in claim_ranges.md run on as one line.
+
+Hidden items take bank flags too (asm/macros/map.inc packs them):
+
+  python3 tools/ichor/claim.py --range 0x500-0x63F hiddenitem FLAG_ICHOR_HIDDEN_ITEM_THYRSA_ETHER "behind the theater"
+
+claims from the same bank and range as bankflag; only the name must start
+FLAG_ICHOR_HIDDEN_ITEM_.
 """
 import re
 import sys
@@ -46,6 +53,10 @@ BANKS = {
     "bankflag": (ROOT / "include/constants/flags.h", "FLAG_ICHOR_",
                  [(0x000, 0x4FF, "FLAG_ICHOR_GENERAL_START"), (0x500, 0xADF, "FLAG_ICHOR_GENERAL2_START")],
                  "Ichor bank flags"),
+    # a bank flag for a hidden item: the same bank and lines as bankflag
+    "hiddenitem": (ROOT / "include/constants/flags.h", "FLAG_ICHOR_HIDDEN_ITEM_",
+                   [(0x000, 0x4FF, "FLAG_ICHOR_GENERAL_START"), (0x500, 0xADF, "FLAG_ICHOR_GENERAL2_START")],
+                   "Ichor bank flags"),
     "dailyflag": (ROOT / "include/constants/flags.h", "FLAG_DAILY_ICHOR_",
                   [(0x00, 0x6F, "FLAG_DAILY_ICHOR_GENERAL_START")], "Ichor daily bank flags"),
     "bankvar": (ROOT / "include/constants/vars.h", "VAR_ICHOR_", [(0, 31, "ICHOR_VARS_START")], "Ichor bank vars"),
