@@ -2350,7 +2350,7 @@ AUGUR: Cranes mean sowing. In this season? Someone ought to go and look.
 ```
 [Set `FLAG_ICHOR_DEMETER_OMEN_TOLD`.]
 
-**Setup.** Show Cami on the Maiden's Well's worn bench (Phase 2's seed object) when `FLAG_BADGE05_GET` is set and `FLAG_ICHOR_THEOXENIA_DEMETER` is unset: clear `FLAG_ICHOR_HIDE_THEOXENIA_DEMETER`. She is a young woman in a gray shawl, sitting on the bench and facing the well (`OBJ_EVENT_GFX_ICHOR_CAMI`, the sitting pose; the user named her and gave the photo she is drawn from, SYSTEMS.md §10). Until that sprite is on main, the elder-woman walker stands in, tagged `ICHOR_STUB_TRAINER_ART`. Eleusa's sign by the well still says an old woman sat on this bench: that is the song's version, and her reveal answers it.
+**Setup.** Show Cami on the Maiden's Well's worn bench (Phase 2's seed object) when `FLAG_BADGE05_GET` is set and `FLAG_ICHOR_THEOXENIA_DEMETER` is unset: clear `FLAG_ICHOR_HIDE_THEOXENIA_DEMETER`. She is a young woman in a gray shawl, sitting on the seat stone just south of the Kallichoron well and facing it (`OBJ_EVENT_GFX_ICHOR_CAMI` with `MOVEMENT_TYPE_FACE_UP`: her north-facing frames are the seated pose; the user named her and gave the photo she is drawn from, SYSTEMS.md §10). While she should stay seated, her script never uses `faceplayer`. Her sprite's palette tag, `OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA`, costs Eleusa's map one more OBJ palette slot. Eleusa's sign by the well still says an old woman sat on this bench: that is the song's version, and her reveal answers it.
 
 **The tells** (SYSTEMS.md §10). She has **no shadow**. Within 3 tiles, the player's follower **bows**. With the Augur's Eye open on this map, its screen adds "Something here is watching you." And her shawl:
 ```text
@@ -2444,7 +2444,7 @@ CAMI: Ha. Oh, that's terrible. Tell it again.
 
 CAMI: I haven't laughed since my daughter went away.
 ```
-[She stands, and she is taller than she was: the object becomes `OBJ_EVENT_GFX_ICHOR_DEMETER`, her revealed form (two objects swapped by hide flags, as Act II does it; BUILD.md). Gold light fills the well-yard: a fade to white over 16 frames and back. The dry stalks around the well turn green and heavy (the well-yard's dry-grass metatiles swap to ripe wheat), and the dry fig over the well bursts into leaf (its metatile swaps to the fig in leaf, with fruit).]
+[She stands: `applymovement` her object with `nurse_joy_bow` and `waitmovement` (her rise, `ANIM_ICHOR_RISE`, 56 frames, ending facing down). Then she is taller than she was: swap her for `OBJ_EVENT_GFX_ICHOR_DEMETER`, her revealed form (two objects swapped by hide flags, as Act II does it; BUILD.md). Gold light fills the well-yard: a fade to white over 16 frames and back. The dry stalks around the well turn green and heavy (the well-yard's dry-grass metatiles swap to ripe wheat), and the dry fig over the well bursts into leaf (its metatile swaps to the fig in leaf, with fruit).]
 ```text
 DEMETER: I sat at this well once before. The song says I was an old woman.
 
