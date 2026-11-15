@@ -100,6 +100,23 @@ The user's standard for every route (director, 2026-11-14): "Thoughtfully. Engag
 
 **Engine APIs now on main** (`design/ENGINE_API.md`): relics by `giveitem` (`ITEM_HECATES_TORCH`); obstacles (`OBJ_EVENT_GFX_BREAKABLE_ROCK` + `EventScript_RockSmash` for marble rubble, needing the Bronze Hammer); darkness (`"cave": true`), braziers (`EventScript_IchorBrazier`, this session's block `FLAG_ICHOR_BRAZIERS_START + 0x14`–`0x1F`) and lit zones; altars (`EventScript_IchorAltar_<God>`, `EventScript_IchorDesecratedAltar`); great herms (`EventScript_IchorGreatHerm`, `HERM_AETHOS_ROUTE_4` / `_5`, with a table row in `src/data/ichor_herms.h` and a heal location each). Use them, not stubs, unless the API isn't built yet.
 
+### Hecate's Hollow (the Hollow agent)
+
+One map, `MAP_HECATES_HOLLOW` (48×40, dark, `MAP_TYPE_UNDERGROUND`, group `gMapGroup_DungeonsAct1`), built by `tools/ichor/maps/hecates_hollow.py`; the plan and passes are in `design/phase2/MAPS_hollow.md`. SCRIPT.md's two halves share it: the cobweb on the Hekataion's west road splits them, so the first half is only ever crossed without the Torch.
+
+| Mouth | Warp cells (the map's edge) | Warp ids | Leads to |
+|---|---|---|---|
+| east | (47, 33), (47, 34), (47, 35), daylight on rows 33–35 | **0** = (47, 34), the middle; 1 = (47, 33); 2 = (47, 35) | `MAP_ROUTE4_ISTHMUS`, warp `ROUTE4_MOUTH_WARP` (placeholder 0, in the builder) |
+| west | (0, 26), (0, 27), (0, 28), daylight on rows 26–28 | **3** = (0, 27), the middle; 4 = (0, 26); 5 = (0, 28) | `MAP_ROUTE5_SKIRONIAN_CLIFFS`, warp `ROUTE5_MOUTH_WARP` (placeholder 0) |
+
+Route 4's mouth tile should target `MAP_HECATES_HOLLOW` warp **0**, Route 5's warp **3**. Neither route is on the Hollow's branch, so until both are, the builder points each mouth at the other (the build needs a map that exists). **After merging:** set `ROUTE4_MOUTH_WARP` and `ROUTE5_MOUTH_WARP` in `hecates_hollow.py` to the routes' mouth warp ids and rerun it; `hollow.sh` then expects to walk out onto Route 5.
+
+- **Trainers 100–103:** `TRAINER_ICHOR_HEKABE`, `_KALLIAS`, `_PHAINO`, `_BATTOS` (`TRAINERS_END_ACT1` 104 on the branch).
+- **Flags:** bank 0x020–0x02B (`FLAG_ICHOR_HECATES_HOUND`, `_HOLLOW_RAKNIT`, `_MET_HOLLOW_CRONE`, `_GOT_HEKABE_SUPPER`, `_HIDE_HOLLOW_WEB_WEST`, `_CHAMBER`, `_SHORTCUT`, `_ITEM_HOLLOW_BRONZE_OBOL`, `_SILK_SCARF`, `_ETHER`, `_DUSK_BALL`, `_REVIVE`); vanilla 0x2B0–0x2B3 (`FLAG_ICHOR_HIDDEN_HOLLOW_ESCAPE_ROPE`, `_HONEY`, `_STARDUST`, `_HARD_STONE`).
+- **Braziers:** the Hollow's two are `FLAG_ICHOR_BRAZIERS_START + 0x14` (Hekabe's hall) and `+ 0x15` (hall 2). The Hekataion's torches go by `FLAG_ICHOR_GOT_HECATES_TORCH`.
+- **Stub tags:** `ICHOR_STUB_DARKNESS` (lit places are flash 1: see below), `ICHOR_STUB_SFX` (the panned bark is the hound's cry), `ICHOR_STUB_AMPHORA` (Raknit waits on `FLAG_ICHOR_AMPHORAE_START + 2`, the third amphora), `ICHOR_STUB_SPRITE` (Kallias battles as an Acolyte), `ICHOR_STUB_AETHOS_DEX` (`SPECIES_LYKOPUP` Poochyena, `SPECIES_RAKNIT` Spinarak, added to `ichor_species_stubs.h`), `ICHOR_STUB_COINS` (the Bronze Obol is `ITEM_RELIC_COPPER`).
+- **For the engine session:** in game, flash level 0 never lets the dark come back. `AnimateFlash(0)` ends with `ScanlineEffect_Stop`, and a dark map loaded at flash 0 never starts the scanline effect, so a later `animateflash` to a darker level changes the saved level but not the screen. The Hollow keeps its lit places at flash 1 until that's fixed (one constant, `HH_LIT`); the Telesterion's quarters and `EventScript_IchorEnterLitZone` / `EventScript_IchorBrazier` (with `VAR_0x8005 = TRUE`) have the same problem.
+
 ## Warps, connections and seams (batch 1)
 
 | From | To | How |

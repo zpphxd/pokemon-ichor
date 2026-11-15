@@ -682,6 +682,77 @@ IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
 - Quick Attack
 - Synthesis
 
+/* Hecate's Hollow (design/phase2/SCRIPT.md Part 3, "Hecate's Hollow trainers"; the map is
+ * tools/ichor/maps/hecates_hollow.py). Hekabe and Kallias are SCRIPT.md's; Phaino (fork 2's
+ * dead end, in the dark) and Battos (at the west mouth) are the map's own optional pair.
+ * Levels 18-20, BALANCE.md's Eleusa band. Aethos stand-ins, so no Ability: lines.
+ * ICHOR_STUB_SPRITE: Kallias is an INITIATE, a class not drawn yet (SPRITES.md); he
+ * battles as an Acolyte until it is. */
+
+=== TRAINER_ICHOR_HEKABE ===
+Name: HEKABE
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Suspicious
+AI: Check Bad Move
+
+Galekit
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Gelasable
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_KALLIAS ===
+Name: KALLIAS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Pebblith
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Onotis
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_PHAINO ===
+Name: PHAINO
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Suspicious
+AI: Check Bad Move
+
+Onotis
+Level: 18
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Galekit
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_BATTOS ===
+Name: BATTOS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Pebblith
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kerazap
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
 /* Ichor: world-act2 (ids 160-319) */
 
 

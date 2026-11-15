@@ -6,7 +6,8 @@
     "gMapGroup_IndoorKalliste",
     "gMapGroup_IndoorAegina",
     "gMapGroup_IndoorEmporion",
-    "gMapGroup_IndoorEleusa"
+    "gMapGroup_IndoorEleusa",
+    "gMapGroup_DungeonsAct1"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -94,5 +95,8 @@
     "EleusaSanctum_B1F",
     "EleusaSanctum_B2F",
     "EleusaSanctum_B3F"
+  ],
+  "gMapGroup_DungeonsAct1": [
+    "HecatesHollow"
   ]
 }

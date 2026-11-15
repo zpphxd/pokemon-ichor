@@ -68,6 +68,9 @@
 #define SPECIES_RHOARIL     SPECIES_BOUNSWEET    // Grass, Persephone's pomegranate
 // Emporion (batch 2)
 #define SPECIES_PANACOIL    SPECIES_ARBOK        // Poison/Fairy, the healer serpent coiled in every Asclepeion
+// Hecate's Hollow (batch 3): its two statics
+#define SPECIES_LYKOPUP     SPECIES_POOCHYENA    // Dark, Hecate's black hound (the dex: Intimidate, Strong Jaw / Unnerve)
+#define SPECIES_RAKNIT      SPECIES_SPINARAK     // Bug, Arachne's spiderling (the dex: Swarm, Frisk / Defiant)
 
 #endif // ICHOR_AETHOS_DEX
 

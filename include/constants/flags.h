@@ -740,10 +740,10 @@
 #define FLAG_UNUSED_0x2AD  0x2AD // Unused Flag
 #define FLAG_UNUSED_0x2AE  0x2AE // Unused Flag
 #define FLAG_UNUSED_0x2AF  0x2AF // Unused Flag
-#define FLAG_UNUSED_0x2B0  0x2B0 // Unused Flag
-#define FLAG_UNUSED_0x2B1  0x2B1 // Unused Flag
-#define FLAG_UNUSED_0x2B2  0x2B2 // Unused Flag
-#define FLAG_UNUSED_0x2B3  0x2B3 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_HOLLOW_ESCAPE_ROPE 0x2B0 // Ichor: Hecate's Hollow: hidden Escape Rope on fork 1's loop
+#define FLAG_ICHOR_HIDDEN_HOLLOW_HONEY 0x2B1 // Ichor: Hecate's Hollow: hidden Honey in Hecate's supper niche
+#define FLAG_ICHOR_HIDDEN_HOLLOW_STARDUST 0x2B2 // Ichor: Hecate's Hollow: hidden Stardust on fork 3's loop
+#define FLAG_ICHOR_HIDDEN_HOLLOW_HARD_STONE 0x2B3 // Ichor: Hecate's Hollow: hidden Hard Stone in the shortcut tunnel
 #define FLAG_UNUSED_0x2B4  0x2B4 // Unused Flag
 #define FLAG_UNUSED_0x2B5  0x2B5 // Unused Flag
 #define FLAG_UNUSED_0x2B6  0x2B6 // Unused Flag
@@ -1724,6 +1724,18 @@
 #define ICHOR_GIFT_HIEROPHANT                   3
 #define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_HECATES_HOUND                (FLAG_ICHOR_GENERAL_START + 0x020) // Ichor: beat 18: Hecate's hound (Lykopup, static, night) at the Hekataion caught or beaten
+#define FLAG_ICHOR_HOLLOW_RAKNIT                (FLAG_ICHOR_GENERAL_START + 0x021) // Ichor: Hecate's Hollow: the web chamber's Raknit (static, after the Arachne amphora) caught or beaten
+#define FLAG_ICHOR_MET_HOLLOW_CRONE             (FLAG_ICHOR_GENERAL_START + 0x022) // Ichor: beat 18: heard the old woman out at Hecate's Hollow's east mouth
+#define FLAG_ICHOR_GOT_HEKABE_SUPPER            (FLAG_ICHOR_GENERAL_START + 0x023) // Ichor: Hecate's Hollow: Hekabe's Barley Cake, after her battle
+#define FLAG_ICHOR_HIDE_HOLLOW_WEB_WEST         (FLAG_ICHOR_GENERAL_START + 0x024) // Ichor: Hecate's Hollow: the cobweb on the road west, burnt (hides its two objects)
+#define FLAG_ICHOR_HIDE_HOLLOW_WEB_CHAMBER      (FLAG_ICHOR_GENERAL_START + 0x025) // Ichor: Hecate's Hollow: the web chamber's cobweb, burnt
+#define FLAG_ICHOR_HIDE_HOLLOW_WEB_SHORTCUT     (FLAG_ICHOR_GENERAL_START + 0x026) // Ichor: Hecate's Hollow: the shortcut's cobweb by the east mouth, burnt
+#define FLAG_ICHOR_ITEM_HOLLOW_BRONZE_OBOL      (FLAG_ICHOR_GENERAL_START + 0x027) // Ichor: Hecate's Hollow: Bronze Obol (Relic Copper) at fork 2's dead end
+#define FLAG_ICHOR_ITEM_HOLLOW_SILK_SCARF       (FLAG_ICHOR_GENERAL_START + 0x028) // Ichor: Hecate's Hollow: Silk Scarf in the web chamber
+#define FLAG_ICHOR_ITEM_HOLLOW_ETHER            (FLAG_ICHOR_GENERAL_START + 0x029) // Ichor: Hecate's Hollow: Ether by the second brazier
+#define FLAG_ICHOR_ITEM_HOLLOW_DUSK_BALL        (FLAG_ICHOR_GENERAL_START + 0x02A) // Ichor: Hecate's Hollow: Dusk Ball in the shortcut tunnel
+#define FLAG_ICHOR_ITEM_HOLLOW_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x02B) // Ichor: Hecate's Hollow: Revive in Kallias's side passage
 #define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
 #define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
 #define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)
