@@ -165,14 +165,24 @@ Elaia owns the polished **Eripip** and **Galekit**, not their later stages.
 | Ione, Titan Grunt | Native three-quarter portraits and all nine walker states redrawn in `sprites_trainers.py` and `sprites_npc.py`. Their existing portrait and shared cast palettes retained unchanged; palette-correct native comparisons and genuine ROM portraits verified. Artistically accepted at checkpoint scope, not whole-town approval. |
 | Eopeep, Alekrow, Hoplektor; Kerazap, Kerastorm; Harpeck, Harpelle; Epopoi, Lophops, Basilops; Karkipool, Karkitox; Ketofry, Kynoketos; Melibee, Melisseer; Onotis, Midonos; Ergant, Hoplomex; Narthip, Promethex; Nemecub, Nemeleon; Elaleaf, Elapling, Hierolive; Spalunk, Plouteras; Kampillar, Nymveil, Psychora; Pebblith, Cairnolith, Laolith; Narkeray; Chelonet, Chelyra; Gelasable | Still awaiting this batch's native polish; existing sprites retained, not claimed redrawn. This includes species used only by the local trainers. |
 | Theo, Ianthe, Kleon, Alethea, Melitta; shared folk already polished in Elaia; pickups and starter kraters; Elaia's five contact effects | Elaia's human/opening-object checkpoint `dfb7974fbc` and twelve-species checkpoint `9ae5aff4af` are integrated. Preserve those sources and sprites. Further shared grass/reed rustle, sandal prints, emotes, shadows, warp-arrow, follower-emotion and supported-player-state evidence belong to Elaia's continuation, not this batch. |
-| Kronion tablet; two upturned-boat halves | Tablet markings and lighting refined at native 16x16 resolution. The boat is now drawn directly at 32x16, then split into matched halves, instead of extracting and remapping tileset art. Existing cast palette and object wiring retained. Nine-map ROM gallery and same-camera prop before/after evidence captured; actor animation phases can differ. The tablet is captured during the Route 1 review's real cutscene drop, not an ordinary summit visit. Creative approval pending. |
-| Remaining local walkers: Acolyte F/M, Augur, Diver, Goatherd, Healer, Hoplite, Kid F, Merchant and Sailor | Existing assets retained for now; ten placed sheets still await native polish. Pilgrim is not placed in these nine maps and is not claimed by this batch. |
-| Remaining local class portraits: Shepherd, Harvester, Goatherd, Hoplite, Augur and Acolyte M/F; local healing effects | Existing assets retained for now; these seven portraits are the local trainer-pic union beyond the already polished cast. Merchant, Sailor and Pilgrim portraits are not used by those local trainers. Shared emotes and related effects are assigned to Elaia's continuation above. |
+| Kronion tablet | Markings and lighting refined at native 16x16 resolution, preserving the cast palette and wiring. Captured during the Route 1 review's real cutscene drop, not an ordinary summit visit. Creative approval pending. |
+| Two upturned-boat halves | Direct native 32x16 drawing split into matched halves, replacing tileset extraction. Restrained plank seam and keel clusters use the existing cast palette. Native and real harbor evidence artistically accepted at checkpoint scope. |
+| Sailor and Diver walkers | Eight-row native directional heads, longer cloth bodies, distinct strides and all nine engine frames implemented in `sprites_folk.py`. Costumes and folk palette preserved; Sailor's shoulder rope matches the existing portrait identity. Palette-correct complete sheets and real harbor before/after captured against the exact post-Elaia ROM. Creative approval pending. |
+| Remaining local walkers: Acolyte F/M, Augur, Goatherd, Healer, Hoplite, Kid F and Merchant | Existing assets retained for now; eight placed sheets still await native polish. Merchant/Sailor walkers remain owned here. Pilgrim is absent from these nine maps and its walker belongs to the voyage/Aegina batch. |
+| Remaining local class portraits: Shepherd, Harvester, Goatherd, Hoplite, Augur and Acolyte M/F; local healing effects | Existing assets retained for now; these seven portraits are the local trainer-pic union beyond the already polished cast. Merchant, Sailor and Pilgrim portraits are not used by those local trainers and belong to the voyage/Aegina batch. Shared emotes and related effects are assigned to Elaia's continuation above. |
 | Tiles, animated metatiles, battle backgrounds, UI, weather and move animations | Retained explicitly; not part of a native creature/character/object sprite redraw claim. Temple braziers and hearth-trial changes are metatiles, not object sprites. |
 
 The town batch is **not complete**. Full shared regeneration and final ROM
 evidence must follow integration of Elaia's landed polish so its assets are not
 reverted. Greek god ball art has separate ownership and is excluded here.
+
+The harbor-walker checkpoint preserves every other folk sheet byte-for-byte;
+all 22 arrays reproduce their checked-in PNGs. Native image checks, helper
+compilation, `make -j$(sysctl -n hw.ncpu)` and smoke pass. The matching gallery
+passes at all eleven cameras across the nine maps, including both harbor
+walkers. ROM usage remains 23,040,960 bytes (68.67%). This does not mark the
+remaining 39 owned species, eight walkers, seven portraits or healing effects
+finished.
 
 | Item | Where | Status | Phase | Notes |
 |---|---|---|---|---|

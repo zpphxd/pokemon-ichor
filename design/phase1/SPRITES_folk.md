@@ -7,12 +7,25 @@ Overworld walking sprites for Kalliste's island people and the slice's trainer c
 `shepherd` now use the native `elaia_*` cloth bodies in the same source file.
 They add shoulder/waist/hem folds without changing costumes, props, stature,
 palette tags, or the nine-frame engine order. Kydippe also has shaded shawl
-folds. The other ten walkers retain their original bodies for their own
+folds. The ten walkers outside that checkpoint were reserved for their own
 town batches. All twelve generated arrays and distinct movement frames have
 been checked. The rebuilt ROM passes smoke and the three Elaia opening runs,
 with current village/interior captures of the shared folk. The earlier
 screenshots below are historical; native checks do not replace director
 review of every character and pose.
+
+**Akti harbor checkpoint:** `sailor` and `diver` now use eight-row directional
+heads and the longer native `akti_tunic` body with all nine distinct engine
+frames. Terracotta headband, beard, blue sash and linen kilt remain on the
+Sailor; the restrained shoulder rope agrees with his existing battle portrait.
+Hydna retains her wet shoulder-length hair, blue wrap, bare feet and sponge
+bag. The folk palette, anchors and animation order are unchanged. Rebuild only
+these sheets with `python3 tools/ichor/art/sprites_folk.py sailor diver --write`.
+All 22 folk arrays reproduce; the other 20 PNGs are unchanged. Native checks,
+build and smoke pass, and `tools/ichor/tests/akti_sprites.lua` captures both
+placed harbor walkers among eleven shots across nine maps. Complete colored
+native comparisons and matching post-Elaia ROM captures are review evidence,
+not artistic approval. Eight remaining Akti walkers still await polish.
 
 - **Source:** `tools/ichor/art/sprites_folk.py`. Every head, body and prop is ASCII art in that file, one character per pixel.
 - **Rebuild the PNGs and the folk palette:** `python3 tools/ichor/art/sprites_folk.py --write`
@@ -39,7 +52,7 @@ All sheets are in `graphics/object_events/pics/people/ichor/`. The names match t
 | `OBJ_EVENT_GFX_ICHOR_KID_M` | `kid_m.png` | folk | A mop of dark hair, a short terracotta tunic, barefoot. Child-sized: 16 rows tall. | kids, Glaukos's grandson |
 | `OBJ_EVENT_GFX_ICHOR_KID_F` | `kid_f.png` | folk | Two short pigtails tied with terracotta, a short saffron tunic, barefoot. Child-sized. | kids, the customer girl |
 | `OBJ_EVENT_GFX_ICHOR_FISHER` | `fisher.png` | folk | A brown felt pilos, a gray beard, a faded sea-blue tunic with a rope belt, a net over the shoulder | Diktys, Glaukos, the fisher with the bandaged hand |
-| `OBJ_EVENT_GFX_ICHOR_SAILOR` | `sailor.png` | folk | Tousled hair under a terracotta headband with tails, a short jaw beard, bare-chested above an undyed linen kilt with a blue sash | the Lakonian rower, Nausikles |
+| `OBJ_EVENT_GFX_ICHOR_SAILOR` | `sailor.png` | folk | Tousled hair under a terracotta headband with tails, a short jaw beard, bare-chested above an undyed linen kilt with a blue sash, a shoulder rope | the Lakonian rower, Nausikles |
 | `OBJ_EVENT_GFX_ICHOR_DIVER` | `diver.png` | folk | Wet black hair to the shoulders with a blue sheen, a short sea-blue wrap tied with linen, barefoot, a net bag of sponges at her hip | Hydna |
 | `OBJ_EVENT_GFX_ICHOR_HEALER` | `healer.png` | folk | Long brown hair to her shoulders under an olive-green fillet, a white chiton to the floor with a green sash, a gold serpent armlet, and the rod of Asclepius (a green serpent coiled on a staff) in her right hand | the Asclepeion healer |
 | `OBJ_EVENT_GFX_ICHOR_MERCHANT` | `merchant.png` | folk | Balding, with a brown beard, a blue chiton with a leather belt, a linen apron, a coin purse | Demeas |

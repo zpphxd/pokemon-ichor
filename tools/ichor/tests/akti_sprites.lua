@@ -9,6 +9,8 @@ local places = {
     {"MAP_KALLISTE_ROUTE1", "route1", 12, 2},
     {"MAP_KALLISTE_ROUTE1_KRONION_HILL", "kronion_cast", 9, 10},
     {"MAP_AKTI_TOWN", "akti_boat", 8, 27},
+    {"MAP_AKTI_TOWN", "akti_sailor", 7, 11},
+    {"MAP_AKTI_TOWN", "akti_diver", 25, 8},
     {"MAP_AKTI_TOWN_TEMPLE_OF_HESTIA", "temple", 8, 6},
     {"MAP_AKTI_TOWN_ASCLEPEION", "asclepeion", 6, 5},
     {"MAP_AKTI_TOWN_AGORA", "agora", 5, 5},

@@ -313,6 +313,73 @@ ARCHETYPES["elaia_kid"] = _dirs(
          walk1=_with(_ELAIA_KID_LEFT, {2: "....kSsCCQk.....", 3: "....kSsCCQk.....",
                                       4: "....kSSCCQk.....", 5: "...kYYkXYk......", 6: "..kFFk.kFFk....."})),
 )
+
+# Eight-row harbor heads keep room for a longer torso and a complete stride.
+_AKTI_DOWN = [
+    "...kCCSSSCQk....",
+    "..kCCCCCCCQQk...",
+    "..kSCCQCCCQSsk..",
+    "..kSsCCQCCQSsk..",
+    "..kSsTTTTTTSsk..",
+    "..kSSCCCCCQSSk..",
+    "...kCCCQCCQQk...",
+    "....kXYkkXYk....",
+    "....kXYkkXYk....",
+    "....kXYkkXYk....",
+    "....kXYkkXYk....",
+    "....kXYkkXYk....",
+    "....kXYkkXYk....",
+    "...kFFFkkFFk....",
+]
+_AKTI_UP = _with(_AKTI_DOWN, {0: "...kCCCCCCQk....", 3: "..kSsCQCCCQSsk.."})
+_AKTI_LEFT = [
+    ".....kSSCQk.....",
+    "....kCCCCQQk....",
+    "....kCSsCQk.....",
+    "....kCSsCQQk....",
+    "....kTSsTTk.....",
+    "....kCSSCQQk....",
+    "....kCCQCCQk....",
+    "....kkXYkkkk....",
+    ".....kXYk.......",
+    ".....kXYk.......",
+    ".....kXYk.......",
+    ".....kXYk.......",
+    ".....kXYk.......",
+    "....kFFFk.......",
+]
+_AKTI_STEP0 = {
+    11: "....kXYkkFFk....", 12: "....kXYk........", 13: "...kFFFk........",
+}
+_AKTI_STEP1 = {
+    11: "....kFFkkXYk....", 12: "........kXYk....", 13: "........kFFk....",
+}
+
+
+def _akti_front(rows):
+    return dict(stand=rows,
+                walk0=_with(rows, {**_HANDS_W0, **_AKTI_STEP0}),
+                walk1=_with(rows, {**_HANDS_W1, **_AKTI_STEP1}))
+
+
+ARCHETYPES["akti_tunic"] = _dirs(
+    _akti_front(_AKTI_DOWN), _akti_front(_AKTI_UP),
+    dict(
+        stand=_AKTI_LEFT,
+        walk0=_with(_AKTI_LEFT, {
+            **_ARM_BACK,
+            8: "....kXYkkYYk....", 9: "....kXYkkkYYk...", 10: "...kXYk..kYYk...",
+            11: "..kXYk....kYYk..", 12: "..kXYk....kYYk..",
+            13: ".kFFFk....kFFk..",
+        }),
+        walk1=_with(_AKTI_LEFT, {
+            **_ARM_FWD,
+            8: "....kYYkkXYk....", 9: "....kYYkkkXYk...", 10: "...kYYk..kXYk...",
+            11: "..kYYk....kXYk..", 12: "..kYYk....kXYk..",
+            13: ".kFFk.....kFFFk.",
+        }),
+    ),
+)
 POSES = ("stand", "walk0", "walk1")
 DIRS = ("down", "up", "left")
 
@@ -1020,105 +1087,97 @@ FISHER = dict(
 # A rower or deckhand (the Lakonian rower too): tousled hair under a
 # terracotta headband, a short jaw beard, bare-chested above an undyed linen
 # kilt with a blue sash.
-_SAILOR_CHEST = ["...kSSSSSSSsk...", "..kSSSSSSSSSsk..", "..kSSsSSSSsSsk..", "..kSsSsSSsSSsk.."]
+_SAILOR_CHEST = ["...kSSSSSSsk....", "..kSSSSSSSSssk..",
+                 "..kSSSSsSSSSsk..", "..kSSssSSSSSsk.."]
+_SAILOR_ROPE_DOWN = ["__________lL____", "_________l__L___",
+                     "_________l__L___", "__________lL____"]
+_SAILOR_ROPE_UP = ["____Ll__________", "___L__l_________",
+                   "___L__l_________", "____Ll__________"]
+_SAILOR_ROPE_LEFT = ["________lL______", "_______l__L_____",
+                     "_______l__L_____", "________lL______"]
 SAILOR = dict(
-    name="sailor", pal="folk", arch="tunic",
+    name="sailor", pal="folk", arch="akti_tunic",
     roles=dict(C="l", Q="y", T="n", F="b"),
     head=dict(
         down=[
-            ".....kkkkkk.....",
-            "....kbbbbbbk....",
-            "...kbbkbbkbbk...",
-            "..kbbbbbbbbbbk..",
-            "..kuuuuuuuuubk..",
-            "..kbSbbSbbSbbk..",
-            "..bsSkSSSSkSsb..",
-            "..bbSkSSSSkSbb..",
-            "...bbSSSSSSbb...",
-            "....bbbssbbb....",
+            ".....bbbbbb.....",
+            "....bubbbbub....",
+            "...buuuuuuubb...",
+            "...bSSbSSbSSb...",
+            "...bSkSSSSkSb...",
+            "...bSSSSSSssb...",
+            "....bSSSsssbb...",
+            ".....bbsssbb....",
         ],
         up=[
-            ".....kkkkkk.....",
-            "....kbbbbbbk....",
-            "...kbuubbbbbk...",
-            "..kbubbbbbbbbk..",
-            "..kuuuuuuuuubk..",
-            "..kbbbbuubbbbk..",
-            "..bsbbbuubbbsb..",
-            "..bsbbbbubbbsb..",
+            ".....bbbbbb.....",
+            "....bubbbbub....",
+            "...buuuuuuubb...",
             "...bbbbbbbbbb...",
-            "....bbSSSSbb....",
+            "...bsbbbbbbSb...",
+            "...bsbbbbbbSb...",
+            "....bbbbbbbb....",
+            ".....bSSssb.....",
         ],
         left=[
-            "......kkkkk.....",
-            "....kkbbkbbk....",
-            "...kbbbbbbbbk...",
-            "..kbbbbbbbbbbk..",
-            "..kuuuuuuuuuuk..",
-            "..kbSbSbbbbbbuk.",
-            "..kSSSSSbsbbbuk.",
-            "..kSkSSSssbbbk..",
-            "..kSkSSbbbbbk...",
-            "...bbbbbbbk.....",
+            ".....bbbbbb.....",
+            "....bubbbbb.....",
+            "...buuuuuuuub...",
+            "...bSbbbbbbbub..",
+            "...bSSSSbsbbub..",
+            "..bSkSSSssbbb...",
+            "...bSSSsbbbbb...",
+            "....bssbbbb.....",
         ],
     ),
     over=dict(
-        down={"all": [("b0", _SAILOR_CHEST)]},
-        up={"all": [("b0", ["...kSSSSSSSsk...", "..kSSSSsSSSSsk..", "..kSSsSsSSsSsk..",
-                            "..kSsSSsSSsSsk.."])]},
+        down={"all": [("b0", _SAILOR_CHEST), ("b0", _SAILOR_ROPE_DOWN)]},
+        up={"all": [("b0", ["...kSSSSSSsk....", "..kSSSSsSSSSsk..", "..kSSSSsSSSSsk..",
+                            "..kSSssSSSSSsk.."]), ("b0", _SAILOR_ROPE_UP)]},
         left={"stand": [("b0", [".....kSSssk.....", "....ksSSsssk....", "....ksSSsssk....",
-                                "....ksSSsssk...."])],
+                                "....ksSSsssk...."]), ("b0", _SAILOR_ROPE_LEFT)],
               "walk0": [("b0", [".....kSSssk.....", "....kssSSssk....", "....kssSSssk....",
-                                "....kssSSssk...."])],
+                                "....kssSSssk...."]), ("b0", _SAILOR_ROPE_LEFT)],
               "walk1": [("b0", [".....kSSssk.....", "....kSSssssk....", "....kSSssssk....",
-                                "....kSSssssk...."])]},
+                                "....kSSssssk...."]), ("b0", _SAILOR_ROPE_LEFT)]},
     ),
 )
 
 # Hydna, the sponge diver: wet black hair to her shoulders, a short sea-blue
 # wrap tied with linen, bare feet, and a net bag of sponges at her hip.
 DIVER = dict(
-    name="diver", pal="folk", arch="tunic",
+    name="diver", pal="folk", arch="akti_tunic",
     roles=dict(C="a", Q="B", T="L", F="s"),
     head=dict(
         down=[
             ".....kkkkkk.....",
-            "....kknnnkkk....",
-            "...kknkkkknkk...",
-            "..kknkkkkkknkk..",
-            "..kkkkkkkkkkkk..",
-            "..kkkSSkkSSkkk..",
-            "..kkSSSSSSSSkk..",
-            "..kkSkSSSSkSkk..",
-            "..kkSkSSSSkSkk..",
-            "..knsSSSSSSsnk..",
-            "..knksSSSSsknk..",
+            "....kBnkkkkk....",
+            "...kBnkkknnkk...",
+            "...kkSSkkSSkk...",
+            "...kSkSSSSkSk...",
+            "...knSSSSSsnk...",
+            "...knsSSSssnk...",
+            "...knksSssknk...",
         ],
         up=[
             ".....kkkkkk.....",
-            "....kknnnkkk....",
-            "...kknkkkknkk...",
-            "..kknkkkkkknkk..",
-            "..kknkkkkkknkk..",
-            "..kkkkkkkkkkkk..",
-            "..kknkkkkkknkk..",
-            "..kkkkkkkkkkkk..",
-            "..kknkkkkkknkk..",
-            "..kkkkkkkkkkkk..",
-            "..kkknkkkknkkk..",
+            "....kBnkkkkk....",
+            "...kBnkkkkkkk...",
+            "...kknkkkkkkk...",
+            "...kknkkkkkkk...",
+            "...kknkkkkkkk...",
+            "...knkkkkkknk...",
+            "...knkkkkkknk...",
         ],
         left=[
-            "......kkkkk.....",
-            "....kknnnkkk....",
-            "...kknkkkknkk...",
-            "..kknkkkkkkknk..",
-            "..kkkkkkkkkkkk..",
-            "..kkSkkkkkknkk..",
-            "..kSSSSkkkkkkk..",
-            "..kSkSSSkknkkk..",
-            "..kSkSSSSkkkkk..",
-            "..ksSSSSkknkkk..",
-            "...kssskkkkknk..",
+            ".....kkkkkk.....",
+            "....kBnnkkkk....",
+            "...kBnkkkkkkk...",
+            "...kSkkkkknkk...",
+            "..kSSSSSknkkk...",
+            "..kSkSSSsknkk...",
+            "...ksSSSSkkkk...",
+            "....kssskknkk...",
         ],
     ),
     over=dict(
