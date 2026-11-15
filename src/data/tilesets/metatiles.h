@@ -140,3 +140,7 @@ const u16 gMetatileAttributes_PorytilesManaged_ThyrsaHomes[] = INCBIN_U16("data/
 // Ichor: thyrsa_stone
 const u16 gMetatiles_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: trophonios
+const u16 gMetatiles_PorytilesManaged_Trophonios[] = INCBIN_U16("data/tilesets/secondary/trophonios/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Trophonios[] = INCBIN_U16("data/tilesets/secondary/trophonios/porytiles_bin/metatile_attributes.bin");

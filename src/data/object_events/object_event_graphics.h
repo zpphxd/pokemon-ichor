@@ -697,6 +697,8 @@ const u32 gObjectEventPic_IchorWoodenImage[] = INCGFX_U32("graphics/object_event
 const u32 gObjectEventPic_IchorWoodenImageGarland[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/wooden_image_garland.png", ".4bpp");
 const u32 gObjectEventPic_IchorMask[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mask.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gObjectEventPic_IchorCrows[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/crows.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_IchorCobweb[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/cobweb.png", ".4bpp");
+const u32 gObjectEventPic_IchorGreatBoulder[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/great_boulder.png", ".4bpp");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)

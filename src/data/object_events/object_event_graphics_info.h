@@ -8338,6 +8338,42 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHarvesterThyr
     .anims = sAnimTable_Standard,
     .images = sPicTable_IchorHarvester,
 };
+// Trophonios's cave: a 16x16 field object (tools/ichor/art/trophonios_objects.py).
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCobweb = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = sOamTables_16x16,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorCobweb,
+};
+// Trophonios's cave: a 32x32 field object (tools/ichor/art/trophonios_objects.py).
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGreatBoulder = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_CAST,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorGreatBoulder,
+};
 // End of Ichor object events
 
 // Ichor: items lying in the world are small clay jars sealed with beeswax,
