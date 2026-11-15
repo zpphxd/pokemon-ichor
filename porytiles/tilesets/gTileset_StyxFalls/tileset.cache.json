@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/styx_falls/porytiles_bin/metatile_attributes.bin": "ca8817d0da318bfab3035c9a93752a9e",
-  "data/tilesets/secondary/styx_falls/porytiles_bin/metatiles.bin": "f707c980121570c0493fb4f0b3caeb6c",
+  "data/tilesets/secondary/styx_falls/porytiles_bin/metatile_attributes.bin": "c13927f972b335b425a4d5a2c01f5a06",
+  "data/tilesets/secondary/styx_falls/porytiles_bin/metatiles.bin": "ccf2c240df0d59b3a950e28a2822d02b",
   "data/tilesets/secondary/styx_falls/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/styx_falls/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/styx_falls/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/styx_falls/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/styx_falls/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/styx_falls/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/styx_falls/porytiles_bin/tiles.png": "233b4c343611ad79ea1b2b61a3a5d6ed",
-  "data/tilesets/secondary/styx_falls/porytiles_src/attributes.csv": "95b4a0b32794e57e924da126948a62f6",
-  "data/tilesets/secondary/styx_falls/porytiles_src/bottom.png": "212546fe849eddf34c6fbdd3835ff35b",
-  "data/tilesets/secondary/styx_falls/porytiles_src/middle.png": "6a8f62d426524276a6bf80a22afecb1f",
-  "data/tilesets/secondary/styx_falls/porytiles_src/top.png": "a27c06b187e4ce079e4de50a8b617c6d"
+  "data/tilesets/secondary/styx_falls/porytiles_bin/tiles.png": "4e33d185e2bfa7f7f169e94461845912",
+  "data/tilesets/secondary/styx_falls/porytiles_src/attributes.csv": "f185ab2b91d303e9685da0669c539033",
+  "data/tilesets/secondary/styx_falls/porytiles_src/bottom.png": "720ce65bf7e4e52d4bbad76e61a814e4",
+  "data/tilesets/secondary/styx_falls/porytiles_src/middle.png": "0642477618d95310c75dc91eb09f0c70",
+  "data/tilesets/secondary/styx_falls/porytiles_src/top.png": "0b017e554fa952b7897aec3a25220e12"
 }

@@ -55,6 +55,29 @@ def fir_border(cat):
             cat.cell("fir_stack", 0, 0)[0], cat.cell("fir_stack", 1, 0)[0]]
 
 
+def soften(m, x0, y0, x1, y1, ch, seed=0, grow=True, nibble=22):
+    """Turn a rectangle of grass into a patch that follows the land: its corners
+    eaten, its edges nibbled, a few cells bulging out where there's room."""
+    for y in range(y0, y1 + 1):
+        for x in range(x0, x1 + 1):
+            if m.at(x, y) != ch:
+                continue
+            edge_x = x in (x0, x1)
+            edge_y = y in (y0, y1)
+            h = L.hsh(x, y, seed + 41)
+            if (edge_x and edge_y) or ((edge_x or edge_y) and h < nibble):
+                m.ch[y][x] = "."
+    if grow:
+        for y in range(y0, y1 + 1):
+            for x in (x0 - 1, x1 + 1):
+                if m.at(x, y) == "." and L.hsh(x, y, seed + 7) < 35 and y0 < y < y1:
+                    m.ch[y][x] = ch
+        for x in range(x0, x1 + 1):
+            for y in (y0 - 1, y1 + 1):
+                if m.at(x, y) == "." and L.hsh(x, y, seed + 9) < 35 and x0 < x < x1:
+                    m.ch[y][x] = ch
+
+
 def hidden(x, y, item, flag):
     return {"type": "hidden_item", "x": x, "y": y, "elevation": 3, "item": item, "flag": flag}
 
@@ -146,9 +169,9 @@ def route11():
         "FsssssssFF#rrrrrrrrrrr@rnnnrr######FFFFF",   #    rim 4
         "FF......FF..===========...........FFFFFF",
         "FF......FF..=..FFFF...........,,,.FFFFFF",
-        "FFFFFFFFFFF#=#.FFFF.............FFFFFFFF",   # 50 Styx Falls's seam: core only
-        "FFFFFFFFFFF#=#.FFFF.............FFFFFFFF",
-        "FFFFFFFFFF##==|||||||.........FFFFFFFFFF",   #    Azan (12,52)
+        "FFFFFFFFFFF#==.FFFF.............FFFFFFFF",   # 50 Styx Falls's seam: core only
+        "FFFFFFFFFFF#==.FFFF.............FFFFFFFF",   #    (two wide: Azan, come up to battle, leaves room)
+        "FFFFFFFFFF##==|||||||.........FFFFFFFFFF",   #    Azan (12,53)
         "FFFFFFFFFF##=========FFFFFFFFFFFFFFFFFFF",
         "FFFFFFFFFF##=========FFFFFFFFFFFFFFFFFFF",
         "FFFFFFFFFF##==########FFFFFFFFFFFFFFFFFF",   # 55 the cleft (12-13)
@@ -156,6 +179,24 @@ def route11():
     # tidy the woods' edges (ragged, staggered: MAP_DESIGN section 7)
     m.cells([(11, 6), (11, 7), (12, 6)], "F")
     m.cells([(36, 13), (37, 13)], "F")
+    # pass 3, the route standard (15 grass cells a screen): optional grass with a
+    # reason to go in, following the land
+    R = m.rect
+    for (x0, y0, x1, y1, s) in ((13, 6, 17, 7, 11), (22, 6, 26, 7, 12), (11, 30, 18, 32, 13),
+                                (11, 34, 25, 34, 14), (14, 39, 18, 40, 15), (19, 40, 24, 40, 16),
+                                (23, 43, 26, 45, 17), (23, 49, 33, 49, 18), (2, 48, 7, 49, 19),
+                                (2, 40, 9, 40, 20), (2, 42, 6, 43, 21), (13, 27, 20, 27, 22),
+                                (20, 20, 23, 21, 23), (27, 28, 28, 32, 24), (10, 35, 11, 40, 25),
+                                (24, 48, 33, 48, 26), (20, 42, 23, 42, 27), (15, 20, 17, 21, 28),
+                                (10, 27, 11, 29, 29), (10, 12, 13, 13, 30), (12, 30, 18, 32, 31),
+                                (24, 37, 26, 40, 32), (21, 13, 23, 13, 33), (16, 19, 21, 19, 34),
+                                (13, 49, 14, 49, 35), (2, 37, 9, 37, 26), (14, 37, 18, 37, 36)):
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                if m.at(x, y) == ".":
+                    m.ch[y][x] = ","
+        soften(m, x0, y0, x1, y1, ",", seed=s, grow=False, nibble=0 if s < 27 else 8)
+    m.cells([(3, 43), (6, 43), (5, 40), (18, 34), (12, 31), (23, 50)], ".")   # items, digs, trainers
 
     # --- stamps ---------------------------------------------------------------------------
     # the seam: Aigion's olives, pines and cypresses on aethos ground
@@ -184,8 +225,10 @@ def route11():
     for (x, y) in slope:
         k = L.hsh(x, y, 3) % 7
         m.named("ruins", ("rubble", "rubble_b", "rubble", "rubble_b", "capital", "stump", "drum_lie")[k], x, y)
-    m.named("ruins", "lip", 21, 15)
-    m.named("ruins", "gap", 20, 17)
+    m.named("ruins", "lip", 21, 15)                          # drum 1's button
+    m.named("ruins", "gap", 20, 17)                          # drum 2's button
+    m.button(18, 18)                                          # drum 3's, on the lane
+    m.button(5, 11)                                           # the cave drum's, on the ledge
     # the shepherd's cave in the ledge's face
     m.named("chasm", "in_L", 5, 9)
     m.named("chasm", "in_R", 6, 9)
@@ -234,7 +277,7 @@ def route11():
     m.force_open |= {(21, 15), (20, 17)}
 
     E = {
-        "connections": [],
+        "connections": [{"map": "MAP_STYX_FALLS", "offset": R11_SOUTH - SF_NORTH, "direction": "down"}],
         "object_events": [
             # beat 38: the muleteer and his mules, Alethea, the three drums
             obj(P + "MULETEER", 23, 13, R11 + "Muleteer", "MOVEMENT_TYPE_FACE_LEFT",
@@ -273,6 +316,13 @@ def route11():
             obj(P + "MAN", 27, 50, R11 + "Echemos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2),
             obj(P + "SHEPHERD", 12, 53, R11 + "Azan", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=4),
             item_ball(20, 53, "ITEM_HYPER_POTION", "FLAG_ICHOR_ITEM_ROUTE11_HYPER_POTION"),
+            # the route standard's five more (MAP_DESIGN section 8)
+            obj(P + "HUNTRESS", 12, 31, R11 + "Maira", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=3),
+            obj(P + "MAN", 18, 34, R11 + "Dryops", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=3),
+            obj(P + "SHEPHERD", 28, 39, R11 + "Psophis", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=3),
+            obj(P + "CHARCOALER", 24, 44, R11 + "Amphidamas", "MOVEMENT_TYPE_FACE_LEFT", trainer=True,
+                sight=3),
+            obj(P + "GOATHERD", 23, 50, R11 + "Phylas", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=2),
         ],
         "warp_events": [],
         "coord_events": [
@@ -297,6 +347,8 @@ def route11():
             sign(5, 39, R11 + "BrokenBridge"),
             sign(17, 9, R11 + "Column"),
             hidden(18, 15, "ITEM_REVIVE", "FLAG_ICHOR_HIDDEN_ROUTE11_REVIVE"),
+            hidden(12, 21, "ITEM_CHARCOAL", "FLAG_ICHOR_HIDDEN_ROUTE11_CHARCOAL"),
+            hidden(16, 9, "ITEM_STARDUST", "FLAG_ICHOR_HIDDEN_ROUTE11_STARDUST"),
         ],
     }
     views = [(19, 3), (19, 9), (20, 14), (18, 19), (18, 24), (14, 28), (22, 29), (25, 33),
@@ -333,7 +385,7 @@ def styx():
         "!!@@@.....!!==!!!!!!!!!!!!!!FFFFFFFF",   #    Horkia's house against the cliff
         "!!@@@.......==....!!!!!!!!!!FFFFFFFF",
         "!.@@@.......==......KKKKKKK!FFFFFFFF",   #    the black pool
-        "!wwww.========.......KKKKKK.........",
+        "!..===========.....KKKKKKKKKFFFFFFFF",
         "!......@@@@@==....KKKKKKKKKK........",   # 15 the inn
         "!......@@@@@==...@KKKKKKKKKK........",   #    the Oath Stone (17,16)
         "!......@@@@@==.....KKKKKKKKK........",
@@ -343,13 +395,16 @@ def styx():
         "!@@@@@......==......................",
         "!..=================================",   #    the road out, to Route 12
         "!...........========================",
-        "FF..........rrrrrrrrrrrrrrrrFFFFFFFF",
-        "FF..........rrrrrrrrrrrrrrrrFFFFFFFF",   # 25
-        "FF..........rrrrrrrrrrrrrrrrFFFFFFFF",
-        "FF..........rrrrrrrrrrrrrrrrFFFFFFFF",
-        "FF..........rrrrrrrrrrrrrrrrFFFFFFFF",
-        "FF..........rrrrrrrrrrrrrrrrFFFFFFFF",
+        "FF..........rrrrrrrrrrrrrrrrFFFFFFFF",   #    the cirque's south lip
+        "FFF.......FFF.....FFFF..FFFFFFFFFFFF",   # 25
+        "FFFFFF..FFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
     ])
+    # the east edge is open only where the road leaves (rows 22-23)
+    m.rect(35, 15, 35, 21, "F")
+    m.rect(34, 15, 34, 15, "F")
     # the Styx: one thread down the black cliff into the pool
     for y, piece in zip(range(6, 13), ("thread_top", "thread", "thread_b", "thread", "thread_b",
                                         "thread", "thread_foot")):
@@ -381,7 +436,7 @@ def styx():
                     break
 
     E = {
-        "connections": [],
+        "connections": [{"map": "MAP_ROUTE11_KRATHIS_GORGE", "offset": SF_NORTH - R11_SOUTH, "direction": "up"}, {"map": "MAP_ROUTE12_CYPRESS_ROAD", "offset": SF_EAST - R12_WEST, "direction": "right"}],
         "object_events": [
             # beat 39: Alethea at the Oath Stone, looking up
             obj(P + "ALETHEA", 16, 16, SF + "Alethea", "MOVEMENT_TYPE_FACE_UP",
@@ -392,6 +447,7 @@ def styx():
             obj(MULE, 29, 18, SF + "Mule", "MOVEMENT_TYPE_FACE_LEFT", flag="FLAG_TEMP_1"),
             obj(P + "ELDER_M", 21, 19, SF + "OldMan", "MOVEMENT_TYPE_FACE_UP"),
             obj(P + "KID_F", 14, 18, SF + "Girl", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+            item_ball(23, 20, "ITEM_SPELL_TAG", "FLAG_ICHOR_ITEM_STYX_FALLS_HOOF_CUP"),
         ],
         "warp_events": [
             warp(9, 17, "MAP_STYX_FALLS_INN", 0),
@@ -414,21 +470,268 @@ def styx():
 
 
 # ===========================================================================
+# Route 12, the Cypress Road (56 x 36): over Kyllene's shoulder to Arkadia
+# ===========================================================================
+
+def route12():
+    m = Map("Route12_CypressRoad", 56, 36, "kyllene")
+    m.core_cols = set(range(0, 8))          # Styx Falls's seam: core and aethos only
+    m.aethos_rows = set(range(30, 36))      # Arkadia's seam (the arkadia set): aethos only
+    m.decor_rate = 9
+    R = m.rect
+    # West to east: the climb out of the cirque (Phegeus), stairs north through
+    # two cliff steps onto Kyllene's shoulder; the west lobe of the meadow
+    # (Aipytos among his goats); the neck between two rock walls (band 1); the
+    # main meadow under the cave cliff (the great herm, the Cave of Maia,
+    # Laodike); the hawk spur north (the drum, the nest, page IV) and the cliff
+    # split; the east rock's hollow (the great boulder) and the east knoll
+    # (Komatas); the narrow track down (Telphousa) into the cypress clearing
+    # (band 2); the glade (the shrine, Basanos); the kiln (Kypselos); the
+    # descent through the cypresses to Arkadia's gate.
+    m.grid([
+        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF#######FFFFFFFFFFFFFFFFF",   # 0  the hawk's cliff
+        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF###@###FFFFFFFFFFFFFFFFF",   #    the nest (35,1)
+        "FFFFFFFFFFFFFF###################.=;;;##################",   #    the spur's top
+        "FFF##############FFFFF#####...####=;;;##################",
+        "F.....==..;;;;;..##########...@====;;;##################",   #    the cliff split (30,4)
+        "F.....==.;;;;;;..#################=#####################",   # 5
+        "F.....==.;;;;;...#####||||||||||##@######...############",   #    the drum's gap (34,6)
+        "F.....==....@@...#####||||||||||##=######...############",   #    the drum (34,7)
+        "F.....===========;;;;.||||@|||||..=.######.#############",   #    the Cave of Maia (26,8)
+        "F.....===========;;;;.=============....###.####......FFF",
+        "F.....==.;;;;;;..;;;;..@........==.....###.####......FFF",   # 10
+        "F.....==.;;;;;;..;;;;..@;;;;;;;.==...................FFF",
+        "F____#@@##############..;;;;;;;.==.;;;;;......;;;;;;.FFF",
+        "F....|@@||||||||||||||..;;;;;;;.==.;;;;;......;;;;;;.FFF",
+        ".....F==..FFFFFFFFFFFF..;;;;;;;.==.;;;;;......;;;;;;.FFF",
+        ".....F==;;FFFFFFFFFFFF..;;;;;;;.==.;;;;;......;;;;;;.FFF",   # 15
+        "......==;;FFFFFFFFFFFF.;;;;;;;;.==............;;;;;;.FFF",
+        "......==;;FFFFFFFFFFFF.;;;;;;;;.==...................FFF",
+        "F____|@@||FFFFFFFFFFFF..........==...................FFF",
+        "F....|@@||FFFFFFFFFFFFYYYYYYYYYYY=YYYYYYYYYYYYYYYYYYYYYY",
+        ".;;;;.==..FFFFFFFFFFFFYYYYYYYYYYY=YYYYYYYYYYYYYYYYYYYYYY",   # 20
+        ".;;;;.==..FFFFFFFF...@@....YYYYYY=,,,,....YYSSSSSSSSFFFF",
+        "========..FFFFFFFF...@@....YYYYYY.,,,,===.YYSS@@SSSSFFFF",   #    Telphousa (33,22)
+        "========..FFFFFFFF...@@....YYYYYYY,,,,======SS@@SSSSFFFF",
+        "..........FFFFFFFF..,,,,,..YYYYYYY,,,,Y==YYYS,,,,,SSFFFF",
+        "..........FFFFFFFF..,,,,,..YYYYYY.....Y==YYYS,,,,,SSFFFF",   # 25
+        "FFFFFFFFFFFFFFFFFF.........YYYYYYnnnnYY==YYYSSSSSSSSFFFF",
+        "FFFFFFFFFFFFFFFFFFYYYYYYYY...============YYYSSSSSSSSFFFF",
+        "FFFFFFFFFFFFFFFFFFFFFFFFFF|||@@||nnn||||||FFFFFFFFFFFFFF",
+        "FFFFFFFFFFFFFFFFFFFFFFFFFF...==...........FFFFFFFFFFFFFF",
+        ".............................==.........................",   # 30 Arkadia's seam: aethos only
+        ".............................==.........................",
+        ".............................==.........................",
+        ".............................==.........................",
+        ".............................==.........................",
+        ".............................==.........................",   # 35
+    ])
+    # pass 2: firs on the high ground instead of bare rock, cliff faces below it
+    R = m.rect
+    R(3, 3, 16, 3, "|")                     # the west lobe's back wall
+    R(17, 2, 31, 5, "F")                    # firs over the cave cliff and the neck
+    R(27, 3, 29, 4, ".")                    # the split's far ledge (daily dig)
+    R(30, 4, 33, 4, "=")
+    m.cells([(30, 4)], "@")
+    R(17, 6, 21, 7, "|")                    # the neck's north wall
+    R(38, 2, 55, 5, "F")                    # the east rock: firs above a cliff
+    R(39, 6, 55, 8, "|")
+    R(41, 6, 43, 7, ".")                    # the hollow behind the great boulder
+    m.cells([(42, 8)], ".")
+    R(39, 9, 46, 11, ".")
+    m.cells([(41, 9), (43, 9)], "b")
+    R(32, 5, 33, 7, "#")
+    R(35, 5, 38, 7, "#")
+    R(36, 3, 38, 4, "F")
+    m.cells([(38, 2)], "F")
+    for (x0, y0, x1, y1, s) in ((9, 4, 14, 6, 1), (9, 10, 14, 11, 2), (24, 11, 30, 17, 3),
+                                (35, 12, 39, 15, 4), (46, 12, 51, 17, 5), (20, 24, 24, 25, 6),
+                                (45, 24, 49, 25, 7)):
+        soften(m, x0, y0, x1, y1, ";" if s < 6 else ",", seed=s)
+    # pass 3, the route standard: more grass by the climb and under the cypresses
+    for (x0, y0, x1, y1, ch) in ((1, 24, 9, 25, ","), (1, 16, 5, 17, ","), (23, 18, 30, 18, ";"),
+                                 (36, 17, 44, 18, ";"), (18, 26, 25, 26, ",")):
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                if m.at(x, y) == ".":
+                    m.ch[y][x] = ch
+    # the west edge is open only where the road comes in (rows 22-23), the south
+    # edge only at the road to Arkadia's gate (28-31)
+    m.cells([(0, 14), (0, 15), (0, 16), (0, 17), (0, 20), (0, 21), (0, 24), (0, 25)], "F")
+
+    # --- stamps --------------------------------------------------------------------------
+    for (x, y) in ((6, 12), (7, 12), (6, 13), (7, 13), (6, 18), (7, 18), (6, 19), (7, 19),
+                   (29, 28), (30, 28)):
+        m.named("terraces", "stair", x, y)                    # rock-cut steps up the cliffs
+    m.named("hawk", "gap", 34, 6)
+    m.named("split", "split", 30, 4)
+    m.named("tortoises", "nest", 35, 1)
+    m.named("cave_door", "door", 26, 8)
+    m.named("marks", "herm_top", 23, 10)
+    m.named("marks", "herm", 23, 11)
+    m.named("marks", "dig", 28, 4)                            # across the split (daily)
+    m.named("marks", "dig", 50, 10)                           # the east knoll (daily)
+    m.named("marks", "dig", 25, 10)                           # the Potsherd at the cave's mouth (fixed)
+    m.named("tortoises", "tort_big_L", 12, 7)
+    m.named("tortoises", "tort_big_R", 13, 7)
+    for (x, y) in ((10, 6), (15, 5), (27, 13), (37, 10), (42, 15), (29, 17), (44, 12), (49, 15),
+                      (16, 10), (24, 17)):
+        if m.at(x, y) in (".", ";"):
+            m.named("tortoises", ("tort", "tort_b")[(x + y) % 2], x, y)
+    m.named("shrine", "bad_top", 46, 22)
+    m.named("shrine", "bad_top_R", 47, 22)
+    m.named("shrine", "base", 46, 23)
+    m.named("shrine", "base_R", 47, 23)
+    m.stamp("kiln", 21, 21)
+    m.put(5, 21, L.STELE)                                     # the west sign
+    m.put(31, 31, L.STELE)                                    # the south sign
+    m.put(35, 8, L.STELE)                                     # the hawk spur's sign
+    m.put(21, 9, L.STELE)                                     # the cave's sign, by the herm
+    # Arkadia's seam: cypresses, pines and olives on aethos ground, the road between;
+    # a row of trees along the edge, so it's open only at the road (28-31)
+    for x in list(range(0, 28, 2)) + list(range(32, 56, 2)):
+        m.pine(x, 34) if (x // 2) % 3 == 0 else m.olive(x, 34)
+    for (x, y) in ((0, 30), (4, 31), (8, 30), (12, 31), (16, 31), (20, 30), (44, 30), (48, 31),
+                   (52, 30), (38, 31), (24, 31)):
+        m.pine(x, y) if (x // 2) % 3 == 0 else m.olive(x, y)
+    for (x, y) in ((33, 30), (19, 33), (36, 30), (27, 31), (32, 32), (11, 33), (41, 33), (46, 32),
+                   (6, 32), (53, 32)):
+        m.acypress(x, y)
+    m.elev.update({(34, 7): 0, (34, 6): 1, (34, 5): 0})
+    m.force_open |= {(34, 6)}
+
+    E = {
+        "connections": [{"map": "MAP_STYX_FALLS", "offset": R12_WEST - SF_EAST, "direction": "left"}, {"map": "MAP_ARKADIA", "offset": 6, "direction": "down"}],
+        "object_events": [
+            obj(P + "SHEPHERD", 9, 21, R12 + "Phegeus", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=4),
+            obj(P + "GOATHERD", 11, 7, R12 + "Aipytos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=3),
+            obj("OBJ_EVENT_GFX_SPECIES(KERAZAP)", 9, 7, R12 + "Goat", "MOVEMENT_TYPE_WANDER_AROUND",
+                rx=1, ry=1),
+            obj("OBJ_EVENT_GFX_SPECIES(KERAZAP)", 14, 10, R12 + "Goat", "MOVEMENT_TYPE_FACE_LEFT"),
+            obj(P + "HUNTRESS", 37, 2, R12 + "Hekaerge", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
+            obj(P + "YOUTH_F", 27, 10, R12 + "Laodike", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=0),
+            obj(P + "GOATHERD", 48, 12, R12 + "Korythos", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3),
+            obj(P + "HUNTRESS", 33, 22, R12 + "Telphousa", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=1),  # sight 1: walking up she would plug the track
+            obj(P + "CHARCOALER", 23, 23, R12 + "Kypselos", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=1),
+            obj(P + "TITAN_GRUNT", 46, 24, R12 + "Basanos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2),
+            obj("OBJ_EVENT_GFX_PUSHABLE_BOULDER", 34, 7, "EventScript_StrengthBoulder",
+                flag="FLAG_ICHOR_ROUTE12_HAWK_DRUM", local_id="LOCALID_ROUTE12_HAWK_DRUM", elevation=0),
+            obj("OBJ_EVENT_GFX_PUSHABLE_BOULDER", 42, 9, "EventScript_IchorGreatBoulder",
+                local_id="LOCALID_ROUTE12_GREAT_BOULDER"),
+            item_ball(42, 6, "ITEM_RARE_CANDY", "FLAG_ICHOR_ITEM_ROUTE12_RARE_CANDY"),
+            item_ball(49, 16, "ITEM_HYPER_POTION", "FLAG_ICHOR_ITEM_ROUTE12_HYPER_POTION"),
+            item_ball(50, 22, "ITEM_FULL_HEAL", "FLAG_ICHOR_ITEM_ROUTE12_FULL_HEAL"),
+        ],
+        "warp_events": [warp(26, 8, "MAP_ROUTE12_CAVE_OF_MAIA", 0)],
+        "coord_events": [trigger(34, 6, R12 + "HawkDrumStep", NEVER, "99")],
+        "bg_events": [
+            sign(5, 21, R12 + "SignWest"),
+            sign(31, 31, R12 + "SignSouth"),
+            sign(35, 8, R12 + "SignHawk"),
+            sign(21, 9, R12 + "SignCave"),
+            sign(23, 11, R12 + "GreatHerm"),
+            sign(35, 1, R12 + "HawkNest"),
+            sign(28, 4, R12 + "DigSpot"),
+            sign(50, 10, R12 + "DigSpot"),
+            sign(25, 10, R12 + "DigPotsherd"),
+            sign(30, 4, R12 + "CliffSplit"),
+            sign(46, 23, R12 + "Shrine"),
+            sign(47, 23, R12 + "Shrine"),
+            sign(13, 7, R12 + "TortoiseBoulder"),
+            sign(27, 13, R12 + "TortoiseBoulder"),
+            hidden(33, 8, "ITEM_PRETTY_FEATHER", "FLAG_ICHOR_HIDDEN_ROUTE12_PRETTY_FEATHER"),
+            hidden(12, 7, "ITEM_HEART_SCALE", "FLAG_ICHOR_HIDDEN_ROUTE12_HEART_SCALE"),
+            hidden(22, 11, "ITEM_HONEY", "FLAG_ICHOR_HIDDEN_ROUTE12_HONEY"),
+        ],
+    }
+    views = [(3, 22), (7, 16), (8, 9), (18, 9), (26, 11), (34, 4), (43, 10), (48, 14), (33, 19),
+             (36, 23), (46, 24), (22, 24), (30, 28), (29, 33)]
+    return m, E, views
+
+
+# ===========================================================================
+# The Cave of Maia (20 x 11): where Hermes was born
+# ===========================================================================
+
+def cave():
+    m = Map("Route12_CaveOfMaia", 20, 11, "maia")
+    # Shallow and dry, wider than deep. The back wall: the cradle niche, the
+    # tortoise-shell lyre above it. By the entrance, the altar of Hermes and his
+    # face carved in an outcrop. The priestess's lamp, stool and jar.
+    m.grid([
+        "####################",
+        "####################",
+        "###||||||||||||||###",   #    the back wall: the lyre (9,2)
+        "##||||||||||||||||##",   #    the cradle niche (9-10,3)
+        "#..................#",
+        "#..................#",   # 5
+        "#..................#",
+        "##...........##....#",   #    the herm's outcrop (13-14,7-8)
+        "###..........||...##",
+        "#######....#########",
+        "#########..#########",   # 10 the way out (9-10,10)
+    ])
+    m.named("maia", "lyre", 8, 3)
+    m.named("maia", "cradle_L", 9, 3)
+    m.named("maia", "cradle_R", 10, 3)
+    m.named("maia", "herm_face", 13, 8)
+    m.named("maia", "altar_L", 15, 7)
+    m.named("maia", "altar_R", 16, 7)
+    m.named("maia", "lamp", 5, 4)
+    m.named("maia", "stool", 4, 5)
+    m.named("maia", "jar", 16, 4)
+    m.named("maia", "spring", 17, 5)
+    m.named("cfloor", "exit", 9, 10)
+    m.named("cfloor", "exit", 10, 10)
+    E = {
+        "object_events": [
+            obj(P + "PRIESTESS", 5, 5, CM + "Priestess", "MOVEMENT_TYPE_FACE_DOWN",
+                local_id="LOCALID_MAIA_PRIESTESS"),
+            obj(P + "ALETHEA", 10, 4, CM + "Alethea", "MOVEMENT_TYPE_FACE_UP",
+                flag="FLAG_ICHOR_HIDE_ALETHEA_MAIA", local_id="LOCALID_MAIA_ALETHEA"),
+            obj(P + "MAN", 3, 7, CM + "Euandros", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=3),
+            # pilgrims' leavings at the cave's two dead ends (the route standard's two items)
+            item_ball(1, 4, "ITEM_MAX_REPEL", "FLAG_ICHOR_ITEM_MAIA_MAX_REPEL"),
+            item_ball(18, 4, "ITEM_LEPPA_BERRY", "FLAG_ICHOR_ITEM_MAIA_LEPPA_BERRY"),
+        ],
+        "warp_events": [warp(9, 10, "MAP_ROUTE12_CYPRESS_ROAD", 0), warp(10, 10, "MAP_ROUTE12_CYPRESS_ROAD", 0)],
+        "coord_events": [trigger(x, 9, CM + "AletheaScene") for x in (9, 10)],
+        "bg_events": [
+            sign(8, 3, CM + "Lyre"),
+            sign(9, 3, CM + "Cradle"),
+            sign(10, 3, CM + "Cradle"),
+            sign(13, 8, CM + "HermFace"),
+            sign(15, 7, "EventScript_IchorAltar_Hermes"),
+            sign(16, 7, "EventScript_IchorAltar_Hermes"),
+            sign(5, 4, CM + "Lamp"),
+            hidden(11, 3, "ITEM_PP_UP", "FLAG_ICHOR_HIDDEN_MAIA_PP_UP"),
+            hidden(16, 4, "ITEM_FRESH_WATER", "FLAG_ICHOR_HIDDEN_MAIA_FRESH_WATER"),
+        ],
+    }
+    return m, E, [(9, 9), (9, 5), (15, 6)]
+
+
+# ===========================================================================
 # Running the builds
 # ===========================================================================
 
 MAPS = {
     "route11": ("LAYOUT_ROUTE11_KRATHIS_GORGE", "Route11_KrathisGorge", route11, ROAD_MUSIC, None),
     "styx": ("LAYOUT_STYX_FALLS", "StyxFalls", styx, ROAD_MUSIC, None),
+    "route12": ("LAYOUT_ROUTE12_CYPRESS_ROAD", "Route12_CypressRoad", route12, ROAD_MUSIC, None),
+    "cave": ("LAYOUT_ROUTE12_CAVE_OF_MAIA", "Route12_CaveOfMaia", cave, "MUS_ICHOR_HOLLOW", None),
 }
-BORDERS = {}
-ENTRIES = {"route11": [(19, 0), (20, 0)], "styx": [(12, 0), (13, 0)]}
-EXITS = {"route11": [(12, 55), (13, 55)], "styx": [(35, 22), (35, 23)]}
+BORDERS = {"cave": lambda c: [c.named("cwall", "1|11111111")[0]] * 4}
+ENTRIES = {"route11": [(19, 0), (20, 0)], "styx": [(12, 0), (13, 0)], "route12": [(0, 22), (0, 23)],
+           "cave": [(9, 10), (10, 10)]}
+EXITS = {"route11": [(12, 55), (13, 55)], "styx": [(35, 22), (35, 23)], "route12": [(29, 35), (30, 35)]}
 UNREACHABLE_OK = {
     "route11": {(5, 40), (3, 43), (6, 43), (4, 45)},
+    "route12": {(42, 6), (28, 4), (30, 4)},        # behind the great boulder; across the split
 }
 # Cells scripts open (drums moved, the gap filled) for the reach check
-OPENS = {"route11": {(20, 15), (20, 16), (19, 18), (6, 11), (20, 17)}}
+OPENS = {"route11": {(20, 15), (20, 16), (19, 18), (6, 11), (20, 17)},
+         "route12": {(34, 7), (34, 6)}}
 
 
 def check(key, m, E):
@@ -447,6 +750,28 @@ def check(key, m, E):
     if key in EXITS and not (set(EXITS[key]) & seen):
         bad.append("THE FAR EXIT")
     print(f"  {m.name}: {len(seen)} cells reachable" + (f"; OUT OF REACH: {', '.join(bad)}" if bad else ""))
+    # A trainer who spots the player walks over and stays there until the map
+    # reloads: from every tile they can spot the player on, the player must still
+    # reach everything they could before (a trainer must never plug a narrow way).
+    facing = {"MOVEMENT_TYPE_FACE_UP": (0, -1), "MOVEMENT_TYPE_FACE_DOWN": (0, 1),
+              "MOVEMENT_TYPE_FACE_LEFT": (-1, 0), "MOVEMENT_TYPE_FACE_RIGHT": (1, 0)}
+    for o in E.get("object_events", []):
+        d = facing.get(o.get("movement_type"))
+        if o.get("trainer_type") != "TRAINER_TYPE_NORMAL" or not d:
+            continue
+        t = (o["x"], o["y"])
+        for k in range(2, int(o.get("trainer_sight_or_berry_tree_id") or 0) + 1):
+            p = (t[0] + d[0] * k, t[1] + d[1] * k)
+            if p not in seen:
+                break
+            stop = (p[0] - d[0], p[1] - d[1])
+            before = L.reach(m, [p], blocked_extra=people - opens)
+            after = L.reach(m, [p], blocked_extra=(people - opens - {t}) | {stop})
+            cut = before - after - {stop}
+            if cut:
+                print(f"  {m.name}: TRAINER PLUGS THE WAY: {o['script'].split('_')[-1]} spots the player at "
+                      f"{p}, stops at {stop} and cuts off {len(cut)} cells")
+                break
     m.force_open -= opens
     if key in EXITS:
         forced, _ = L.forced_bands(m, ENTRIES[key], EXITS[key], people - opens, opens)
@@ -462,6 +787,9 @@ def build(only=None, shapes_only=False, tag=""):
             continue
         m, E, views = fn()
         m.missing = missing
+        L.RENDER.mkdir(parents=True, exist_ok=True)
+        (L.RENDER / f"{m.name}.txt").write_text(
+            "\n".join(f"{y:2d} " + "".join(r) for y, r in enumerate(m.ch)) + "\n")
         m.autotile()
         built[key] = (m, E, views, layout, folder, music, extra)
     if shapes_only:

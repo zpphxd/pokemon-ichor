@@ -31,6 +31,18 @@
       "y": 32,
       "respawn_map": "MAP_THYRSA_CITY_ASCLEPEION",
       "respawn_npc": "LOCALID_THYRSA_HEALER"
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_11",
+      "map": "MAP_ROUTE11_KRATHIS_GORGE",
+      "x": 26,
+      "y": 36
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_12",
+      "map": "MAP_ROUTE12_CYPRESS_ROAD",
+      "x": 23,
+      "y": 12
     }
   ]
 }

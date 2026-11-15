@@ -1,1 +1,262 @@
-mapscripts Route12_CypressRoad_MapScripts {}
+// Route 12, the Cypress Road: beat 40's road over Kyllene's shoulder and the
+// route's roster. Text from design/phase3/SCRIPT.md: Part 2 (Route 12), Part 3
+// (Route 12 trainers) and Part 6 (page IV); the three trainers SCRIPT.md doesn't
+// name (Phegeus, Hekaerge, Korythos) meet the route standard (MAP_DESIGN §8).
+// The Cave of Maia (beat 40 itself) is its own map, warp 0 at (26,8). Layout and
+// events: tools/ichor/maps/heights.py.
+//
+// The hawk spur's drum (34,7) stands on a transition tile; pushed north with the
+// Girdle it drops into the gap (34,6) and makes a step (beat 38's second rule,
+// tested). The forest shrine is desecrated altar index 10 (BUILD.md batch 3).
+
+mapscripts Route12_CypressRoad_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_ROUTE12_HAWK_DRUM)) {
+            setmetatile(34, 6, METATILE_Kyllene_DrumWedged, FALSE)
+        }
+        if (flag(FLAG_ICHOR_ALTAR_CLEANSED_ROUTE12)) {
+            setmetatile(46, 22, METATILE_Kyllene_Shrine_Top, FALSE)
+            setmetatile(47, 22, METATILE_Kyllene_Shrine_TopR, FALSE)
+        }
+    }
+    // after a prayer at the shrine (VAR_TEMP_4 1), show the moon mended at once
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_4, 1: Route12_CypressRoad_EventScript_ShrineRedraw
+    ]
+}
+
+text Route12_CypressRoad_Text_SpeakerAipytos { "AIPYTOS" }
+text Route12_CypressRoad_Text_SpeakerLaodike { "LAODIKE" }
+text Route12_CypressRoad_Text_SpeakerTelphousa { "TELPHOUSA" }
+text Route12_CypressRoad_Text_SpeakerKypselos { "KYPSELOS" }
+text Route12_CypressRoad_Text_SpeakerBasanos { "GRUNT" }
+text Route12_CypressRoad_Text_SpeakerPhegeus { "PHEGEUS" }
+text Route12_CypressRoad_Text_SpeakerHekaerge { "HEKAERGE" }
+text Route12_CypressRoad_Text_SpeakerKorythos { "KORYTHOS" }
+
+// --- the hawk spur ----------------------------------------------------------------------
+script Route12_CypressRoad_EventScript_HawkDrumStep {
+    lockall
+    playse(SE_M_STRENGTH)
+    removeobject(LOCALID_ROUTE12_HAWK_DRUM)
+    setmetatile(34, 6, METATILE_Kyllene_DrumWedged, FALSE)
+    special(DrawWholeMapView)
+    msgbox(format("The drum drops into the gap and wedges there. A step up the spur."))
+    releaseall
+}
+
+// Daedalus's page IV, woven into the nest (Part 6). ICHOR_STUB_KEY_ITEMS: the pages
+// have no item yet, so the flag is set and the page read here.
+script Route12_CypressRoad_EventScript_HawkNest {
+    lockall
+    if (flag(FLAG_ICHOR_DAEDALUS_PAGE_4)) {
+        msgbox(format("The hawk's nest, high on its pinnacle. Just sticks now, and a few feathers."))
+        releaseall
+        end
+    }
+    msgbox(format("Woven into the hawk's nest, among the sticks: a page."))
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} found Daedalus's page IV!"))
+    waitfanfare
+    waitmessage
+    msgbox(format("A page in a cramped hand, the ink run by rain.\pA plan of corridors, and a narrow door."))
+    msgbox(format("“The cooks go round, not through. Two guards never look at a tray.”"))
+    msgbox(format("In the corner, a little drawing of a hawk, not quite finished."))
+    setflag(FLAG_ICHOR_DAEDALUS_PAGE_4)
+    releaseall
+}
+
+// The Winged Talaria leap it (Hermes Favor 60): a daily dig waits beyond.
+script Route12_CypressRoad_EventScript_CliffSplit {
+    msgbox(format("The goat path is split across, too wide to step. On the far side, turned earth."), MSGBOX_SIGN)
+}
+
+// --- the shrine of Artemis and its guard ---------------------------------------------------
+script Route12_CypressRoad_EventScript_Shrine {
+    lockall
+    if (!defeated(TRAINER_ICHOR_GRUNT_ROUTE12_BASANOS)) {
+        msgbox(format("A shrine of Artemis, with a bronze crescent moon on its gable.\pSomeone has scratched a sickle across the moon."))
+        releaseall
+        end
+    }
+    setvar(VAR_TEMP_4, 1)
+    setvar(VAR_0x8004, ICHOR_GOD_ARTEMIS)
+    setvar(VAR_0x8005, 10)
+    goto(EventScript_IchorDesecratedAltar)
+}
+
+script Route12_CypressRoad_EventScript_ShrineRedraw {
+    setvar(VAR_TEMP_4, 0)
+    if (flag(FLAG_ICHOR_ALTAR_CLEANSED_ROUTE12)) {
+        setmetatile(46, 22, METATILE_Kyllene_Shrine_Top, FALSE)
+        setmetatile(47, 22, METATILE_Kyllene_Shrine_TopR, FALSE)
+        special(DrawWholeMapView)
+    }
+}
+
+script Route12_CypressRoad_EventScript_Basanos {
+    trainerbattle_single(TRAINER_ICHOR_GRUNT_ROUTE12_BASANOS, Route12_CypressRoad_Text_BasanosIntro, Route12_CypressRoad_Text_BasanosDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerBasanos)
+    msgbox(format("Go on. Pray to her. She's very good at listening. Not so good at answering."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_BasanosIntro {
+    format("The goddess of childbirth. That's her too, you know. Artemis.\pShe sat by while the Pythia read my baby. I scratched her moon. I'd do it twice.")
+}
+
+text Route12_CypressRoad_Text_BasanosDefeat {
+    format("My thread ends the same day as my little girl's. Did you know that?\pEither we all die that day, or nobody ever dies again. I know which I'm betting on.")
+}
+
+// --- trainers -------------------------------------------------------------------------------
+script Route12_CypressRoad_EventScript_Aipytos {
+    trainerbattle_single(TRAINER_ICHOR_AIPYTOS, Route12_CypressRoad_Text_AipytosIntro, Route12_CypressRoad_Text_AipytosDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerAipytos)
+    msgbox(format("Those gray rocks? Some of them are tortoises. Some of them are rocks."))
+    msgbox(format("I've been sitting on one for an hour. I still don't know which."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_AipytosIntro {
+    format("Kyllene! Best grass in Arkadia. The goats agree. Battle me on it.")
+}
+
+text Route12_CypressRoad_Text_AipytosDefeat {
+    format("Beaten on my own mountain. The goats saw. They'll never respect me now.")
+}
+
+script Route12_CypressRoad_EventScript_Laodike {
+    trainerbattle_single(TRAINER_ICHOR_LAODIKE, Route12_CypressRoad_Text_LaodikeIntro, Route12_CypressRoad_Text_LaodikeDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerLaodike)
+    msgbox(format("The priestess in the cave knows Hermes's tune. Bring her a Chelyra."))
+    msgbox(format("Not mine. Mine's shy. It only sings when there's a battle going."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_LaodikeIntro {
+    format("I came up to play for Hermes. On his own lyre. Well. My own lyre. Listen.")
+}
+
+text Route12_CypressRoad_Text_LaodikeDefeat {
+    format("You've got a better ear than I have. Or a better battle. One of the two.")
+}
+
+script Route12_CypressRoad_EventScript_Telphousa {
+    trainerbattle_single(TRAINER_ICHOR_TELPHOUSA, Route12_CypressRoad_Text_TelphousaIntro, Route12_CypressRoad_Text_TelphousaDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerTelphousa)
+    msgbox(format("Someone scratched the goddess's shrine. Back in the glade."))
+    msgbox(format("There's a man sitting on its step. Eating. Like he's proud of it."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_TelphousaIntro {
+    format("Out of the open, into my trees. Wrong order, traveler.")
+}
+
+text Route12_CypressRoad_Text_TelphousaDefeat {
+    format("You're quick in the trees. The goddess likes that. I don't.")
+}
+
+script Route12_CypressRoad_EventScript_Kypselos {
+    trainerbattle_single(TRAINER_ICHOR_KYPSELOS, Route12_CypressRoad_Text_KypselosIntro, Route12_CypressRoad_Text_KypselosDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerKypselos)
+    msgbox(format("Arkadian charcoal goes to every forge in Aethos. Even Kaldera's."))
+    msgbox(format("The smiths there say it's the best. They say it to my face. Once a year."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_KypselosIntro {
+    format("Don't stand downwind. …You're downwind. Battle, then. Upwind.")
+}
+
+text Route12_CypressRoad_Text_KypselosDefeat {
+    format("Burned too hot. That's the worst thing for charcoal. And for me.")
+}
+
+script Route12_CypressRoad_EventScript_Phegeus {
+    trainerbattle_single(TRAINER_ICHOR_PHEGEUS, Route12_CypressRoad_Text_PhegeusIntro, Route12_CypressRoad_Text_PhegeusDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerPhegeus)
+    msgbox(format("Up the steps, then the meadow. Kyllene's shoulder. Then it's downhill to Arkadia."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_PhegeusIntro {
+    format("Out of the black water's hollow at last! Let's warm up. Battle!")
+}
+
+text Route12_CypressRoad_Text_PhegeusDefeat {
+    format("Warm enough. Too warm.")
+}
+
+script Route12_CypressRoad_EventScript_Hekaerge {
+    trainerbattle_single(TRAINER_ICHOR_HEKAERGE, Route12_CypressRoad_Text_HekaergeIntro, Route12_CypressRoad_Text_HekaergeDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerHekaerge)
+    msgbox(format("The hawk brought something shiny to its nest. Paper, I think. Hawks can't read."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_HekaergeIntro {
+    format("You moved the drum? Then you can climb. Can you fight?")
+}
+
+text Route12_CypressRoad_Text_HekaergeDefeat {
+    format("You can. The hawk's all yours.")
+}
+
+script Route12_CypressRoad_EventScript_Korythos {
+    trainerbattle_single(TRAINER_ICHOR_KORYTHOS, Route12_CypressRoad_Text_KorythosIntro, Route12_CypressRoad_Text_KorythosDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerKorythos)
+    msgbox(format("See that boulder in the rock? A smith's hammer would crack it. Nothing less."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CypressRoad_Text_KorythosIntro {
+    format("The knoll's mine in summer. You'll have to battle for a seat.")
+}
+
+text Route12_CypressRoad_Text_KorythosDefeat {
+    format("Take the seat. Mind the tortoise. If it's a tortoise.")
+}
+
+script Route12_CypressRoad_EventScript_Goat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    msgbox(format("Bleat! A spark jumps off its horns."))
+    waitmoncry
+    release
+}
+
+// --- signs and landmarks ---------------------------------------------------------------------
+script Route12_CypressRoad_EventScript_SignWest {
+    msgbox(format("ROUTE 12 · THE CYPRESS ROAD\pNorth: Styx Falls. Over Kyllene to Arkadia."), MSGBOX_SIGN)
+}
+
+script Route12_CypressRoad_EventScript_SignCave {
+    msgbox(format("The Cave of Maia. Here Hermes was born. Please wipe your feet."), MSGBOX_SIGN)
+}
+
+script Route12_CypressRoad_EventScript_GreatHerm {
+    lockall
+    msgbox(format("The Cave of Maia. Here Hermes was born. Please wipe your feet."))
+    call(EventScript_IchorAnointHerm)
+    releaseall
+}
+
+script Route12_CypressRoad_EventScript_SignHawk {
+    msgbox(format("North: the hawk cliff. Goats only. You are not a goat."), MSGBOX_SIGN)
+}
+
+script Route12_CypressRoad_EventScript_SignSouth {
+    msgbox(format("ARKADIA. Lamps lit at dusk. Wolves after."), MSGBOX_SIGN)
+}
+
+script Route12_CypressRoad_EventScript_TortoiseBoulder {
+    msgbox(format("A gray boulder shaped like a tortoise's shell.\p…It just moved.\pNo. It didn't. Probably."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_DIG: the daily dig spots (the east knoll; across the cliff split).
+script Route12_CypressRoad_EventScript_DigSpot {
+    msgbox(format("The earth here has been turned. Something might be buried."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_DIG: the fixed dig in the scree at the cave's mouth: a Potsherd of
+// amphora #8, Orpheus (Part 6). When the dig API lands:
+// setvar(VAR_0x8004, <fixed index, from world-act2>), setvar(VAR_0x8005, ITEM_<the sherd>),
+// goto(EventScript_IchorDigFixed).
+script Route12_CypressRoad_EventScript_DigPotsherd {
+    msgbox(format("Loose scree at the cave's mouth. Something might be buried in it."), MSGBOX_SIGN)
+}

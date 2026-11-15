@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/arkadia_heights/porytiles_bin/metatile_attributes.bin": "0a8adafa8b5f5b7428b525dd9cbc4237",
-  "data/tilesets/secondary/arkadia_heights/porytiles_bin/metatiles.bin": "aabadc289dd96b3aac60e89e5856b178",
+  "data/tilesets/secondary/arkadia_heights/porytiles_bin/metatile_attributes.bin": "0b8234a2d3fe11f2450e60b6a9acabb0",
+  "data/tilesets/secondary/arkadia_heights/porytiles_bin/metatiles.bin": "71b13a6455c1200e0b1db4ef7c15c9f7",
   "data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/arkadia_heights/porytiles_bin/tiles.png": "8013b5dc19db0c2a3cec4edb026396dc",
-  "data/tilesets/secondary/arkadia_heights/porytiles_src/attributes.csv": "692d0ecc18e8fa762f924b1c833e1e27",
-  "data/tilesets/secondary/arkadia_heights/porytiles_src/bottom.png": "f5039c5e9e7816d97482655307d3ce04",
-  "data/tilesets/secondary/arkadia_heights/porytiles_src/middle.png": "97f3cd27db9eee6ebe44e63638326bf7",
-  "data/tilesets/secondary/arkadia_heights/porytiles_src/top.png": "7cea1c3cb744f6055a7e64e586ab5804"
+  "data/tilesets/secondary/arkadia_heights/porytiles_bin/tiles.png": "5b17e780f3bf013d5da1f3c5e028d909",
+  "data/tilesets/secondary/arkadia_heights/porytiles_src/attributes.csv": "5927329d42cde7b62a2028018953b24e",
+  "data/tilesets/secondary/arkadia_heights/porytiles_src/bottom.png": "f7edf065509963fc9a3b2182143760b6",
+  "data/tilesets/secondary/arkadia_heights/porytiles_src/middle.png": "5497b801920f524e4e21b8166a6dd638",
+  "data/tilesets/secondary/arkadia_heights/porytiles_src/top.png": "d48fcefaf0b124f141a1a623808ab92b"
 }

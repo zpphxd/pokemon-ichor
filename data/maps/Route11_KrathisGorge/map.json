@@ -13,7 +13,13 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": [],
+  "connections": [
+    {
+      "map": "MAP_STYX_FALLS",
+      "offset": 0,
+      "direction": "down"
+    }
+  ],
   "object_events": [
     {
       "local_id": "LOCALID_ROUTE11_MULETEER",
@@ -297,6 +303,71 @@
       "trainer_sight_or_berry_tree_id": "ITEM_HYPER_POTION",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_ITEM_ROUTE11_HYPER_POTION"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HUNTRESS",
+      "x": 12,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route11_KrathisGorge_EventScript_Maira",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "x": 18,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route11_KrathisGorge_EventScript_Dryops",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
+      "x": 28,
+      "y": 39,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route11_KrathisGorge_EventScript_Psophis",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_CHARCOALER",
+      "x": 24,
+      "y": 44,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route11_KrathisGorge_EventScript_Amphidamas",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GOATHERD",
+      "x": 23,
+      "y": 50,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route11_KrathisGorge_EventScript_Phylas",
+      "flag": "0"
     }
   ],
   "warp_events": [],
@@ -460,6 +531,22 @@
       "elevation": 3,
       "item": "ITEM_REVIVE",
       "flag": "FLAG_ICHOR_HIDDEN_ROUTE11_REVIVE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 12,
+      "y": 21,
+      "elevation": 3,
+      "item": "ITEM_CHARCOAL",
+      "flag": "FLAG_ICHOR_HIDDEN_ROUTE11_CHARCOAL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 16,
+      "y": 9,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ROUTE11_STARDUST"
     }
   ]
 }

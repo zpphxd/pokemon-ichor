@@ -13,7 +13,18 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": [],
+  "connections": [
+    {
+      "map": "MAP_ROUTE11_KRATHIS_GORGE",
+      "offset": 0,
+      "direction": "up"
+    },
+    {
+      "map": "MAP_ROUTE12_CYPRESS_ROAD",
+      "offset": 0,
+      "direction": "right"
+    }
+  ],
   "object_events": [
     {
       "local_id": "LOCALID_STYX_ALETHEA",
@@ -81,6 +92,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "StyxFalls_EventScript_Girl",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 23,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SPELL_TAG",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_STYX_FALLS_HOOF_CUP"
     }
   ],
   "warp_events": [
@@ -193,15 +217,7 @@
     },
     {
       "type": "sign",
-      "x": 21,
-      "y": 14,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "StyxFalls_EventScript_Pool"
-    },
-    {
-      "type": "sign",
-      "x": 26,
+      "x": 19,
       "y": 14,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -210,22 +226,6 @@
     {
       "type": "sign",
       "x": 18,
-      "y": 15,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "StyxFalls_EventScript_Pool"
-    },
-    {
-      "type": "sign",
-      "x": 19,
-      "y": 15,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "StyxFalls_EventScript_Pool"
-    },
-    {
-      "type": "sign",
-      "x": 20,
       "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",

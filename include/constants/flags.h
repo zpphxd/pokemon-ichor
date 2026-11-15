@@ -872,26 +872,26 @@
 #define FLAG_UNUSED_0x335                                           0x335 // Unused Flag
 #define FLAG_UNUSED_0x336                                           0x336 // Unused Flag
 #define FLAG_UNUSED_0x337                                           0x337 // Unused Flag
-#define FLAG_ICHOR_ITEM_ROUTE11_SUPER_POTION                        0x338 // Ichor: Ichor: Act II: Route 11, the Super Potion on the river spur's gravel bank
-#define FLAG_ICHOR_ITEM_ROUTE11_MAX_ETHER                           0x339 // Ichor: Ichor: Act II: Route 11, the Max Ether across the broken plank bridge (the Winged Talaria)
-#define FLAG_ICHOR_ITEM_ROUTE11_CALCIUM                             0x33A // Ichor: Ichor: Act II: Route 11, the Calcium on the ledge above the side waterfall (the Horn of Achelous)
-#define FLAG_ICHOR_ITEM_ROUTE11_ULTRA_BALL_1                        0x33B // Ichor: Ichor: Act II: Route 11, an Ultra Ball in the shepherd's cave (the Girdle)
-#define FLAG_ICHOR_ITEM_ROUTE11_ULTRA_BALL_2                        0x33C // Ichor: Ichor: Act II: Route 11, the second Ultra Ball in the shepherd's cave
-#define FLAG_ICHOR_ITEM_ROUTE11_HYPER_POTION                        0x33D // Ichor: Ichor: Act II: Route 11, the Hyper Potion at the gorge-head path's dead end
-#define FLAG_ICHOR_HIDDEN_ROUTE11_REVIVE                            0x33E // Ichor: Ichor: Act II: Route 11, hidden Revive in the fallen temple's tumbled stone
-#define FLAG_ICHOR_HIDDEN_STYX_FALLS_OBOL                           0x33F // Ichor: Ichor: Act II: Styx Falls, hidden Bronze Obol on the black pool's lip
+#define FLAG_ICHOR_ITEM_ROUTE11_SUPER_POTION                        0x338 // Ichor: Act II: Route 11, the Super Potion on the river spur's gravel bank
+#define FLAG_ICHOR_ITEM_ROUTE11_MAX_ETHER                           0x339 // Ichor: Act II: Route 11, the Max Ether across the broken plank bridge (the Winged Talaria)
+#define FLAG_ICHOR_ITEM_ROUTE11_CALCIUM                             0x33A // Ichor: Act II: Route 11, the Calcium on the ledge above the side waterfall (the Horn of Achelous)
+#define FLAG_ICHOR_HIDDEN_ROUTE11_CHARCOAL                          0x33B // Ichor: Act II: Route 11, hidden Charcoal in the ash of Apheidas's kiln
+#define FLAG_ICHOR_HIDDEN_ROUTE11_STARDUST                          0x33C // Ichor: Act II: Route 11, hidden Stardust at the foot of the fallen temple's standing column
+#define FLAG_ICHOR_ITEM_ROUTE11_HYPER_POTION                        0x33D // Ichor: Act II: Route 11, the Hyper Potion at the gorge-head path's dead end
+#define FLAG_ICHOR_HIDDEN_ROUTE11_REVIVE                            0x33E // Ichor: Act II: Route 11, hidden Revive in the fallen temple's tumbled stone
+#define FLAG_ICHOR_HIDDEN_STYX_FALLS_OBOL                           0x33F // Ichor: Act II: Styx Falls, hidden Bronze Obol on the black pool's lip
 #define FLAG_HIDE_LILYCOVE_CONTEST_HALL_BLEND_MASTER                0x340
-#define FLAG_ICHOR_HIDDEN_STYX_FALLS_ETHER                          0x341 // Ichor: Ichor: Act II: Styx Falls, hidden Ether in the cleft from Route 11
-#define FLAG_ICHOR_ITEM_ROUTE12_RARE_CANDY                          0x342 // Ichor: Ichor: Act II: Route 12, the Rare Candy in the meadow hollow (Hephaestus's Hammer)
-#define FLAG_ICHOR_ITEM_ROUTE12_HYPER_POTION                        0x343 // Ichor: Ichor: Act II: Route 12, the Hyper Potion on the meadow's east knoll
+#define FLAG_ICHOR_HIDDEN_STYX_FALLS_ETHER                          0x341 // Ichor: Act II: Styx Falls, hidden Ether in the cleft from Route 11
+#define FLAG_ICHOR_ITEM_ROUTE12_RARE_CANDY                          0x342 // Ichor: Act II: Route 12, the Rare Candy in the meadow hollow (Hephaestus's Hammer)
+#define FLAG_ICHOR_ITEM_ROUTE12_HYPER_POTION                        0x343 // Ichor: Act II: Route 12, the Hyper Potion on the meadow's east knoll
 #define FLAG_HIDE_BATTLE_FRONTIER_RECEPTION_GATE_SCOTT              0x344
-#define FLAG_ICHOR_ITEM_ROUTE12_FULL_HEAL                           0x345 // Ichor: Ichor: Act II: Route 12, the Full Heal in the side glade by the shrine of Artemis
-#define FLAG_ICHOR_HIDDEN_ROUTE12_PRETTY_FEATHER                    0x346 // Ichor: Ichor: Act II: Route 12, hidden Pretty Feather at the foot of the hawk spur
-#define FLAG_ICHOR_HIDDEN_ROUTE12_HEART_SCALE                       0x347 // Ichor: Ichor: Act II: Route 12, hidden Heart Scale under the biggest tortoise boulder
-#define FLAG_UNUSED_0x348                                           0x348 // Unused Flag
-#define FLAG_UNUSED_0x349                                           0x349 // Unused Flag
+#define FLAG_ICHOR_ITEM_ROUTE12_FULL_HEAL                           0x345 // Ichor: Act II: Route 12, the Full Heal in the side glade by the shrine of Artemis
+#define FLAG_ICHOR_HIDDEN_ROUTE12_PRETTY_FEATHER                    0x346 // Ichor: Act II: Route 12, hidden Pretty Feather at the foot of the hawk spur
+#define FLAG_ICHOR_HIDDEN_ROUTE12_HEART_SCALE                       0x347 // Ichor: Act II: Route 12, hidden Heart Scale under the biggest tortoise boulder
+#define FLAG_ICHOR_HIDDEN_ROUTE12_HONEY                             0x348 // Ichor: Act II: Route 12, hidden Honey left as an offering at the great herm
+#define FLAG_ICHOR_HIDDEN_MAIA_PP_UP                                0x349 // Ichor: Act II: the Cave of Maia, hidden PP Up under the swaddling in the cradle niche
 #define FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO                         0x34A
-#define FLAG_UNUSED_0x34B                                           0x34B // Unused Flag
+#define FLAG_ICHOR_HIDDEN_MAIA_FRESH_WATER                          0x34B // Ichor: Act II: the Cave of Maia, hidden Fresh Water in the priestess's jar
 #define FLAG_UNUSED_0x34C                                           0x34C // Unused Flag
 #define FLAG_UNUSED_0x34D                                           0x34D // Unused Flag
 #define FLAG_UNUSED_0x34E                                           0x34E // Unused Flag
@@ -1824,17 +1824,23 @@
 #define FLAG_ICHOR_BOARDED_GULF_FERRY           (FLAG_ICHOR_GENERAL_START + 0x167) // Ichor: Act II: boarded Panopeus's ferry at Kirrha (beat 37B)
 #define FLAG_ICHOR_GULF_CROSSED                 (FLAG_ICHOR_GENERAL_START + 0x168) // Ichor: Act II: crossed the Gulf to Aigion (beat 37B-C)
 #define FLAG_ICHOR_VISITED_AIGION               (FLAG_ICHOR_GENERAL_START + 0x169) // Ichor: Act II: Aigion is a fly target (beat 37C)
-#define FLAG_ICHOR_HIDE_ROUTE11_DRUMS           (FLAG_ICHOR_GENERAL_START + 0x1C0) // Ichor: Ichor: Act II: the three drums on Route 11 are moved, the road to Styx Falls open (beat 38)
-#define FLAG_ICHOR_ROUTE11_MULETEER             (FLAG_ICHOR_GENERAL_START + 0x1C1) // Ichor: Ichor: Act II: the muleteer gave the Hard Stone and went up the gorge (beat 38; hides his Route 11 objects)
-#define FLAG_ICHOR_HIDE_ALETHEA_ROUTE11         (FLAG_ICHOR_GENERAL_START + 0x1C2) // Ichor: Ichor: Act II: Alethea went on up the gorge from the drums (beat 38)
-#define FLAG_ICHOR_ROUTE11_DRUM_1               (FLAG_ICHOR_GENERAL_START + 0x1C3) // Ichor: Ichor: Act II: Route 11's drum 1 rolled over the edge (beat 38)
-#define FLAG_ICHOR_ROUTE11_DRUM_2               (FLAG_ICHOR_GENERAL_START + 0x1C4) // Ichor: Ichor: Act II: Route 11's drum 2 wedged in the gap (beat 38)
-#define FLAG_ICHOR_ROUTE11_DRUM_3               (FLAG_ICHOR_GENERAL_START + 0x1C5) // Ichor: Ichor: Act II: Route 11's drum 3 rolled to the cliff (beat 38)
-#define FLAG_ICHOR_ROUTE11_CAVE_DRUM            (FLAG_ICHOR_GENERAL_START + 0x1C6) // Ichor: Ichor: Act II: the drum across Route 11's shepherd's cave rolled aside (the Girdle)
-#define FLAG_ICHOR_SAW_STYX                     (FLAG_ICHOR_GENERAL_START + 0x1C7) // Ichor: Ichor: Act II: Alethea showed you the Styx at the Oath Stone (beat 39; hides her there)
-#define FLAG_ICHOR_HIDE_ALETHEA_MAIA            (FLAG_ICHOR_GENERAL_START + 0x1C8) // Ichor: Ichor: Act II: Alethea went on from the Cave of Maia to Arkadia (beat 40)
-#define FLAG_ICHOR_MAIA_SINGER                  (FLAG_ICHOR_GENERAL_START + 0x1C9) // Ichor: Ichor: Act II: the Cave of Maia's priestess played Hermes's tune for a Chelyra (the Throat Spray)
-#define FLAG_ICHOR_ROUTE12_HAWK_DRUM            (FLAG_ICHOR_GENERAL_START + 0x1CA) // Ichor: Ichor: Act II: Route 12's hawk-spur drum dropped into its gap, a step (the Girdle)
+#define FLAG_ICHOR_HIDE_ROUTE11_DRUMS           (FLAG_ICHOR_GENERAL_START + 0x1C0) // Ichor: Act II: Route 11's drums 1 and 2 are moved, the road to Styx Falls open (beat 38)
+#define FLAG_ICHOR_ROUTE11_MULETEER             (FLAG_ICHOR_GENERAL_START + 0x1C1) // Ichor: Act II: the muleteer gave the Hard Stone and went up the gorge (beat 38; hides his Route 11 objects)
+#define FLAG_ICHOR_HIDE_ALETHEA_ROUTE11         (FLAG_ICHOR_GENERAL_START + 0x1C2) // Ichor: Act II: Alethea went on up the gorge from the drums (beat 38)
+#define FLAG_ICHOR_ROUTE11_DRUM_1               (FLAG_ICHOR_GENERAL_START + 0x1C3) // Ichor: Act II: Route 11's drum 1 rolled over the edge (beat 38)
+#define FLAG_ICHOR_ROUTE11_DRUM_2               (FLAG_ICHOR_GENERAL_START + 0x1C4) // Ichor: Act II: Route 11's drum 2 wedged in the gap (beat 38)
+#define FLAG_ICHOR_ROUTE11_DRUM_3               (FLAG_ICHOR_GENERAL_START + 0x1C5) // Ichor: Act II: Route 11's drum 3 rolled to the cliff (beat 38)
+#define FLAG_ICHOR_ROUTE11_CAVE_DRUM            (FLAG_ICHOR_GENERAL_START + 0x1C6) // Ichor: Act II: the drum across Route 11's shepherd's cave rolled aside (the Girdle)
+#define FLAG_ICHOR_SAW_STYX                     (FLAG_ICHOR_GENERAL_START + 0x1C7) // Ichor: Act II: Alethea showed you the Styx at the Oath Stone (beat 39; hides her there)
+#define FLAG_ICHOR_HIDE_ALETHEA_MAIA            (FLAG_ICHOR_GENERAL_START + 0x1C8) // Ichor: Act II: Alethea went on from the Cave of Maia to Arkadia (beat 40)
+#define FLAG_ICHOR_MAIA_SINGER                  (FLAG_ICHOR_GENERAL_START + 0x1C9) // Ichor: Act II: the Cave of Maia's priestess played Hermes's tune for a Chelyra (the Throat Spray)
+#define FLAG_ICHOR_ROUTE12_HAWK_DRUM            (FLAG_ICHOR_GENERAL_START + 0x1CA) // Ichor: Act II: Route 12's hawk-spur drum dropped into its gap, a step (the Girdle)
+#define FLAG_ICHOR_ITEM_ROUTE11_ULTRA_BALL_1    (FLAG_ICHOR_GENERAL_START + 0x1CB) // Ichor: Act II: Route 11, an Ultra Ball in the shepherd's cave (the Girdle)
+#define FLAG_ICHOR_ITEM_ROUTE11_ULTRA_BALL_2    (FLAG_ICHOR_GENERAL_START + 0x1CC) // Ichor: Act II: Route 11, the second Ultra Ball in the shepherd's cave
+#define FLAG_ICHOR_ITEM_STYX_FALLS_HOOF_CUP     (FLAG_ICHOR_GENERAL_START + 0x1CD) // Ichor: Act II: Styx Falls, a Spell Tag left among the hoof-cups at the pool
+#define FLAG_ICHOR_ROUTE11_DRUMS_SEEN           (FLAG_ICHOR_GENERAL_START + 0x1CE) // Ichor: Act II: the muleteer told you the road was shut (beat 38's first scene)
+#define FLAG_ICHOR_ITEM_MAIA_MAX_REPEL          (FLAG_ICHOR_GENERAL_START + 0x1CF) // Ichor: Act II: the Cave of Maia, a pilgrim's Max Repel at the west end
+#define FLAG_ICHOR_ITEM_MAIA_LEPPA_BERRY        (FLAG_ICHOR_GENERAL_START + 0x1D0) // Ichor: Act II: the Cave of Maia, a Leppa Berry offering in the east alcove
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)

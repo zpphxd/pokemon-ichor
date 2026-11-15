@@ -16,11 +16,13 @@ HEAD = """# The Arkadian climb's tilesets
 Aigion to Arkadia: the Krathis gorge, its white water and its fallen temple of
 Artemis; the Styx's black cliff and still black pool, and Nonakris's slab-roofed
 houses; Kyllene's wind-combed meadow, its tortoise boulders, the hawk's cliff, and
-the first cypresses. Two secondaries on the `aethos` primary:
+the first cypresses. Four secondaries on the `aethos` primary:
 
 | Tileset | Maps |
 |---|---|
-| `gTileset_ArkadiaHeights` | Route 11 (the Krathis Gorge), Styx Falls, Route 12 (the Cypress Road) |
+| `gTileset_ArkadiaHeights` | Route 11 (the Krathis Gorge) |
+| `gTileset_StyxFalls` | Styx Falls and Nonakris |
+| `gTileset_Kyllene` | Route 12 (the Cypress Road) |
 | `gTileset_MaiaCave` | the Cave of Maia |
 
 **This catalog is generated** by `tools/ichor/art/heights_build.py` (painters:
@@ -30,11 +32,21 @@ render-and-critique passes at the end are written by hand and kept across rebuil
 
 ## How it fits together
 
-**One set for the climb.** Route 11, Styx Falls and Route 12 share
-`gTileset_ArkadiaHeights`, so their seams need no aethos-only strip. Route 11's seam
-with Aigion (the `kirrha` set) and Route 12's with Arkadia (`arkadia`) are drawn in
-aethos pieces: `tools/ichor/maps/heights.py` keeps the six rows at each of those seams
-to aethos metatiles and fails the build otherwise.
+**A shared core, three outdoor sets.** Everything the climb wanted didn't fit one
+secondary's 504 tiles, so the outdoor art is split three ways: a **core** (the road,
+limestone and its faces, the firs, oaks and cypresses, the terrace rims, the herms and
+marks) and each map's own pieces. The core is painted once and packed first, at the same
+metatile ids, in all three sets; after Porytiles compiles each set, `align_core` renumbers
+its tiles so the core's come first in the same order, and the build asserts the core's
+metatiles, tiles and palettes (6-12) match in all three. That matters at a seam: crossing
+from one map to the next swaps the secondary tiles in VRAM without redrawing the screen,
+so whatever was already on screen must find the same pixels in the next set. The map
+builder keeps the strips at the climb's own seams (Route 11/Styx Falls, six rows each
+side; Styx Falls/Route 12, eight columns each side) to core and aethos pieces. Route 11's
+seam with Aigion (the `kirrha` set) and Route 12's with Arkadia (`arkadia`) are drawn in
+aethos pieces only: `tools/ichor/maps/heights.py` keeps the six rows at each of those
+seams to aethos metatiles and fails the build otherwise. Always rebuild all four sets
+together (`--only` repacks the others for the labels but leaves this doc alone).
 
 **Place pieces by key and cell name** from `build/heights/<dir>/catalog.json`, never by
 raw id (`tools/ichor/maps/heights.py` does). Ids below are the current build's.
@@ -85,9 +97,17 @@ sets whenever aethos is repainted.
 The Cave of Maia has its own three: `cave` (warm brown rock, sand), `relic` (the lyre, the
 cloth, the lamp), `altar` (marble and bronze).
 
+**Drum buttons.** A drum pushed with the Girdle runs the coord event on the tile it
+lands on when that tile is MB_STRENGTH_BUTTON (`HandleBoulderActivateVictoryRoadSwitch`);
+the event's var condition (`VAR_TEMP_9` 99) never holds on foot, so only a drum sets it
+off. The `ruins` piece's `lip` and `gap` (and the hawk spur's `gap`) are buttons, and the
+`buttons` piece holds road shapes that are buttons too: `Map.button(x, y)` puts the road's
+own shape there as a button.
+
 **Scripted swaps** (`include/constants/metatile_labels.h`): `METATILE_ArkadiaHeights_DrumWedged`
-(drum 2 in the gap, and the hawk spur's drum), `_DrumRest` (drum 3 against the cliff, and the
-shepherd's cave drum), `_Gap`, and the shrine's `_Shrine_Top`, `_Shrine_TopR`, `_ShrineBad_Top`,
+(drum 2 in the gap), `_DrumRest` (drum 3 against the cliff, and the shepherd's cave drum),
+`_Gap`, `_Lip` (shut once drum 1 has gone over), `METATILE_Kyllene_DrumWedged` (the hawk
+spur's drum), and the shrine's `_Shrine_Top`, `_Shrine_TopR`, `_ShrineBad_Top`,
 `_ShrineBad_TopR`.
 """
 

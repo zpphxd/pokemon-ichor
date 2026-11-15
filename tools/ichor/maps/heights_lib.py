@@ -137,6 +137,7 @@ class Map:
         self.no_decor = set()
         self.shapes_used = {k: set() for k in SHAPE_SETS}
         self.missing = []
+        self.buttons = set()
         self.water_cells = set()
         self.stamped = set()
         self.seed = sum(map(ord, name))
@@ -198,6 +199,12 @@ class Map:
     def named(self, key, name, x, y):
         mid, wk = self.cat.named(key, name)
         self.put(x, y, mid, wk)
+
+    def button(self, x, y):
+        """A drum's button on the road at (x, y): the road's own shape there, as
+        MB_STRENGTH_BUTTON (the `buttons` piece; heights_build.BUTTON_SHAPES)."""
+        assert self.ch[y][x] == "=", (self.name, x, y, "a button goes on the road")
+        self.buttons.add((x, y))
 
     def tree(self, kind, x, y):
         """A fir (2 x 3), oak (2 x 2), young fir or cypress (1 x 2/3): (x, y) its
@@ -273,21 +280,41 @@ class Map:
                     continue
                 c = ch[y][x]
                 aeth = self.seam((x, y))
+                if self.setname == "maia":
+                    if c == ".":
+                        self.set(x, y, *self.cat.named("cfloor", "pebbles" if hsh(x, y, 3) < 14 else "plain"))
+                    elif c == "#":
+                        self.set(x, y, *self.shape("cwall", blob_key(rock, x, y)))
+                    elif c == "|":
+                        self.set(x, y, *self.shape("cface", self.face_key(x, y, c)[:4] + "0"))
+                    elif c == "@":
+                        self.set(x, y, *self.cat.named("cfloor", "plain"))
+                    else:
+                        raise ValueError(f"{self.name}: unknown cave ground {c!r} at {x},{y}")
+                    continue
                 if c == ".":
                     self.set(x, y, GRASS, ".")
                 elif c == "S":
                     self.set(x, y, SHADE, ".")
                 elif c == ",":
-                    if aeth:
-                        self.set(x, y, TALL, "G")
+                    if aeth or self.core_seam((x, y)):
+                        self.set(x, y, TALL, "G")       # aethos's barley at a seam
                     else:
                         self.set(x, y, *self.shape("tall", blob_key(tall, x, y)))
                 elif c == ";":
-                    assert not aeth, (self.name, x, y)
-                    self.set(x, y, *self.shape("meadow_tall", blob_key(mtall, x, y)))
+                    if aeth or self.core_seam((x, y)):
+                        self.set(x, y, TALL, "G")
+                    else:
+                        self.set(x, y, *self.shape("meadow_tall", blob_key(mtall, x, y)))
                 elif c == "=":
                     if aeth:
                         self.set(x, y, self.patch(self.region("="), x, y), ".")
+                    elif (x, y) in self.buttons:
+                        key = blob_key(road, x, y)
+                        if not self.cat.has("buttons", key):
+                            raise ValueError(f"{self.name}: no button on road shape {key} at {x},{y}: "
+                                             "add it to heights_build.BUTTON_SHAPES")
+                        self.set(x, y, *self.cat.named("buttons", key))
                     else:
                         self.set(x, y, *self.shape("path", blob_key(road, x, y)))
                 elif c == "P":

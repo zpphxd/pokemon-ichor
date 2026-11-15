@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/maia_cave/porytiles_bin/metatile_attributes.bin": "4cacc9cea166b9724065904069a80635",
-  "data/tilesets/secondary/maia_cave/porytiles_bin/metatiles.bin": "c910cde97aeedbf3cbd22fe18efb0d59",
+  "data/tilesets/secondary/maia_cave/porytiles_bin/metatile_attributes.bin": "9e898f806f6c907707cd678e24875a89",
+  "data/tilesets/secondary/maia_cave/porytiles_bin/metatiles.bin": "7ed8245f9b78ba381f2e3b63017da7b2",
   "data/tilesets/secondary/maia_cave/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/maia_cave/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/maia_cave/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/maia_cave/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/maia_cave/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/maia_cave/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/maia_cave/porytiles_bin/tiles.png": "20dcca4b34845664e03715c1861cefdf",
-  "data/tilesets/secondary/maia_cave/porytiles_src/attributes.csv": "09ddcae5bd99765e91b095de5e5ff8f5",
-  "data/tilesets/secondary/maia_cave/porytiles_src/bottom.png": "587f33677c513f90a9fcbceb05c2ad80",
-  "data/tilesets/secondary/maia_cave/porytiles_src/middle.png": "0d56d6f68ee8cb1ac0a7c9264fa09287",
-  "data/tilesets/secondary/maia_cave/porytiles_src/top.png": "0d56d6f68ee8cb1ac0a7c9264fa09287"
+  "data/tilesets/secondary/maia_cave/porytiles_bin/tiles.png": "c159fe5e5f888d85572b1b248fd96374",
+  "data/tilesets/secondary/maia_cave/porytiles_src/attributes.csv": "420c42e7a49d2af29a64c23b6572fc41",
+  "data/tilesets/secondary/maia_cave/porytiles_src/bottom.png": "f771beba98336e898298ce30e22a3975",
+  "data/tilesets/secondary/maia_cave/porytiles_src/middle.png": "592a6b69dad0f50e4211d2e78e706ce8",
+  "data/tilesets/secondary/maia_cave/porytiles_src/top.png": "592a6b69dad0f50e4211d2e78e706ce8"
 }

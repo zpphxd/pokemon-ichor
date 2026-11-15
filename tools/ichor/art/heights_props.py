@@ -137,6 +137,10 @@ def ruins():
                        "`_E` its worn steps. `jars` the muleteer's empty jars, `hoofcups` the "
                        "hoof-cups at Styx Falls.")
     H.ground(s, "path", [(0, 0), (1, 0), (2, 0), (4, 1), (6, 1), (7, 1)])
+    # drum 1's and drum 2's buttons: a pushed drum landing here runs the coord
+    # event on the tile (HandleBoulderActivateVictoryRoadSwitch)
+    s.behaviors[(2, 0)] = "MB_STRENGTH_BUTTON"
+    s.behaviors[(3, 0)] = "MB_STRENGTH_BUTTON"
     H.ground(s, "grass", [(4, 0), (5, 0), (6, 0), (7, 0), (0, 1), (1, 1), (2, 1), (3, 1), (5, 1)])
     # drum at rest against the cliff (the cliff lies west of it)
     d = L16()
@@ -1026,6 +1030,30 @@ def rock_detail():
     return s
 
 
+def cave_door():
+    """The Cave of Maia's mouth in the meadow's cliff: a face cell with a low,
+    dark opening. MB_NON_ANIMATED_DOOR: the warp sits on it."""
+    s = H.struct("cave_door", "The Cave of Maia's mouth", 1, 1, SEC, walk=["D"],
+                 names={"door": (0, 0)},
+                 notes="A face cell (the foot row) with a cave's dark mouth: "
+                       "MB_NON_ANIMATED_DOOR, put the warp there.")
+    d = L16()
+    face_fill(d, variant=2)
+    for y in range(16):
+        for x in range(16):
+            if ((x - 7.5) / 6.5) ** 2 + ((y - 16) / 13.0) ** 2 <= 1:
+                d.px(x, y, "qr0")
+    for y in range(4, 16):
+        for x in range(16):
+            if d.get(x, y) == "qr0" and x + 1 < 16 and d.get(x + 1, y) not in ("qr0",):
+                d.px(x + 1, y, "qr1")
+    for x in range(3, 13):
+        if d.get(x, 15) == "qr0":
+            d.px(x, 15, "qr1" if x % 3 else "qr2")       # light on the threshold
+    place(s, "bottom", 0, 0, d)
+    return s
+
+
 def build():
     return [ruins(), kiln(), chasm(), falls(), terraces(), houses(), markers(), shrine(), decor(),
-            rock_detail()]
+            rock_detail(), cave_door()]

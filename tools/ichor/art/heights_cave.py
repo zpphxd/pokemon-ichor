@@ -20,6 +20,9 @@ import heights_props as P
 
 SEC = "cave"
 RAMP = ("qd0", "qd1", "qd2", "qd3", "qd4", "qd5")
+# The rock seen from above sits a step darker than the faces, so the cave's mass
+# reads as rock against the pale sand and not as more floor.
+TOP_RAMP = ("qd0", "qd0", "qd1", "qd2", "qd3", "qd4")
 CAVE = {"K": "ink", "0": "qd0", "1": "qd1", "2": "qd2", "3": "qd3", "4": "qd4", "5": "qd5",
         "a": "qe1", "b": "qe2", "c": "qe3"}
 
@@ -36,7 +39,7 @@ def floor_px(x, y):
 
 def cwall():
     return H.shape_set("cwall", "The cave's rock, from above", SEC, G.wanted("cwall"),
-                       lambda s, ox, oy, k: G.paint_rock_cell(s.B, ox, oy, k, RAMP, floor=floor_px,
+                       lambda s, ox, oy, k: G.paint_rock_cell(s.B, ox, oy, k, TOP_RAMP, floor=floor_px,
                                                               ferns=False), "X",
                        "The cave's warm brown rock seen from above, on the sandy floor. "
                        "Impassable. Names are blob shape keys.")

@@ -63,6 +63,7 @@ LABELS = [
     ("heights", "ruins", "drum_wedged", "DrumWedged"),
     ("heights", "ruins", "drum_rest", "DrumRest"),
     ("heights", "ruins", "gap", "Gap"),
+    ("heights", "ruins", "lip", "Lip"),
     ("kyllene", "hawk", "drum_wedged", "DrumWedged"),
     ("kyllene", "shrine", "top", "Shrine_Top"),
     ("kyllene", "shrine", "top_R", "Shrine_TopR"),
@@ -76,12 +77,14 @@ CORE = ["path", "rock", "face", "fir", "fir_stack", "fir_young", "oak", "cypress
         "fir_shade", "fir_stack_shade", "fir_young_shade", "oak_shade", "cypress_shade",
         "cypress_stack_shade", "terraces", "marks", "rock_detail"]
 EXTRAS = {
-    "heights": [("gorge", ["tall", "water", "rapids", "ruins", "kiln", "chasm", "falls", "spring"])],
+    "heights": [("gorge", ["tall", "water", "rapids", "ruins", "buttons", "kiln", "chasm", "falls", "spring"])],
     "styx": [("styx", ["bface", "blackpool", "blackpool_deep", "thread", "houses", "stones"])],
-    "kyllene": [("kyllene", ["meadow_tall", "tall", "decor", "tortoises", "shrine", "kiln", "split",
+    "kyllene": [("kyllene", ["meadow_tall", "tall", "decor", "tortoises", "shrine", "kiln", "split", "cave_door",
                              "hawk"])],
 }
 CAVE = [("cave", ["cwall", "cface", "cfloor", "maia"])]
+# The road shapes that drum buttons sit on (Route 11: drum 3's lane, the cave drum's ledge).
+BUTTON_SHAPES = ("1|00101010", "1|00100010")
 SECTION_TITLES = {
     "core": "Core: shared by all three outdoor sets at the same ids",
     "gorge": "The Krathis gorge: white water, the fallen temple, the kiln, the ravine, the side "
@@ -128,6 +131,14 @@ def painted():
                                    "boulders shaped like tortoise shells (some of them are "
                                    "Chelonet). `nest` the hawk's stick nest on its pinnacle (rock "
                                    "all round).")
+    pa = ss["path"]
+    ss["buttons"] = H.crop(pa, "buttons", "Drum buttons on the road", list(BUTTON_SHAPES),
+                           notes="Road cells that look like `path`'s shapes of the same names but "
+                                 "are MB_STRENGTH_BUTTON: a drum pushed onto one runs the coord "
+                                 "event there. The map builder puts them where a map asks for a "
+                                 "button (Map.button).")
+    for cell in ss["buttons"].names.values():
+        ss["buttons"].behaviors[cell] = "MB_STRENGTH_BUTTON"
     ru = ss.pop("ruins")
     keep = [n for n in ru.names if n not in ("hoofcups",)]
     ss["ruins"] = H.crop(ru, "ruins", ru.title, keep, notes=ru.notes)
@@ -348,6 +359,49 @@ def borrow_ground(binp, secs, ids):
     return patched
 
 
+def align_core(binp, core):
+    """Renumber a set's tiles so the core's come first, in the order the core's
+    metatiles first use them. Porytiles numbers tiles its own way, so the same
+    core art lands at different tile indices in each set; but crossing a seam
+    swaps the secondary tiles in VRAM without redrawing the screen, so a core
+    cell drawn with one set's tile numbers must find the same pixels under the
+    next set's. Done the same way in every set, the core ends up identical."""
+    meta = np.fromfile(binp / "metatiles.bin", "<u2").reshape(-1, 8)
+    im = Image.open(binp / "tiles.png")
+    a = np.array(im)
+    w = a.shape[1] // 8
+    tiles = [a[y:y + 8, x:x + 8].copy() for y in range(0, a.shape[0], 8) for x in range(0, a.shape[1], 8)]
+    order, seen = [], set()
+    for i in core:
+        for e in meta[i]:
+            t = (int(e) & 0x3FF) - 512
+            if t >= 0 and t not in seen:
+                seen.add(t)
+                order.append(t)
+    perm = order + [t for t in range(len(tiles)) if t not in seen]      # new index -> old
+    new_of = {old: new for new, old in enumerate(perm)}
+    for i in range(len(meta)):
+        for j in range(8):
+            e = int(meta[i, j])
+            t = (e & 0x3FF) - 512
+            if t >= 0:
+                meta[i, j] = (e & ~0x3FF) | (512 + new_of[t])
+    out = np.zeros_like(a)
+    for pos, old in enumerate(perm):
+        y, x = divmod(pos, w)
+        out[y * 8:y * 8 + 8, x * 8:x * 8 + 8] = tiles[old]
+    img = Image.fromarray(out, mode="P")
+    img.putpalette(im.getpalette())
+    if "transparency" in im.info:
+        img.info["transparency"] = im.info["transparency"]
+    img.save(binp / "tiles.png", **({"transparency": im.info["transparency"]} if "transparency" in im.info else {}))
+    meta.astype("<u2").tofile(binp / "metatiles.bin")
+    for f in ("tiles.4bpp", "tiles.4bpp.lz"):
+        (binp / f).unlink(missing_ok=True)
+    return meta[core].copy(), [out[(p // w) * 8:(p // w) * 8 + 8, (p % w) * 8:(p % w) * 8 + 8].copy()
+                                 for p in range(len(order))]
+
+
 def verify(binp, rows, patched, label):
     raw = np.fromfile(binp / "metatiles.bin", "<u2").reshape(-1, 8)
     aethos = np.fromfile(AETHOS_META, "<u2").reshape(-1, 8)
@@ -467,6 +521,7 @@ def main():
     wanted = args.only.split(",") if args.only else list(SETS)
     report = {}
     all_ids = {}
+    aligned = {}
     for name in wanted:
         cave = name == "maia"
         secs = sections_for(name, ss)
@@ -480,6 +535,9 @@ def main():
         if not args.no_compile:
             binp = compile_set(info, H.CAVE_GROUPS if cave else H.GROUPS)
             patched = borrow_ground(binp, secs, ids)
+            if not cave:
+                core = sorted({i - 0x200 for k in CORE for row in ids[k] for i in row})
+                aligned[name] = align_core(binp, core)
             used = verify(binp, rows, patched, name)
             report[name] = (used, rows * 8, secs, ids)
     out = [n for n in all_ids if n != "maia"]
@@ -487,6 +545,25 @@ def main():
         for b in out:
             for k in CORE:
                 assert all_ids[a][0][k] == all_ids[b][0][k], f"core {k} moved between {a} and {b}"
+    # ... and the core's metatiles point at the same tiles, with the same pixels, in every set
+    for a in aligned:
+        for b in aligned:
+            (ma, ta), (mb, tb) = aligned[a], aligned[b]
+            assert (ma == mb).all(), f"the core's tile entries differ between {a} and {b}"
+            assert len(ta) == len(tb) and all((x == y).all() for x, y in zip(ta, tb)), \
+                f"the core's tile pixels differ between {a} and {b}"
+            for i in range(6, 13):
+                pa = ROOT / f"data/tilesets/secondary/{SETS[a]['dir']}/porytiles_bin/palettes/{i:02d}.pal"
+                pb = ROOT / f"data/tilesets/secondary/{SETS[b]['dir']}/porytiles_bin/palettes/{i:02d}.pal"
+                assert pa.read_text() == pb.read_text(), f"palette {i} differs between {a} and {b}"
+    if len(aligned) > 1:
+        print(f"core aligned: {len(next(iter(aligned.values()))[1])} tiles at the same indices in "
+              f"{', '.join(aligned)}")
+    # the labels and the catalog doc cover every set: with --only, pack the others
+    # too (packing is cheap and decides the ids), and leave the doc for a full build
+    for name in SETS:
+        if name not in all_ids:
+            all_ids[name] = (pack(sections_for(name, ss))[0], ss)
     write_labels(all_ids)
     if not args.no_compile:
         for name in wanted:
@@ -494,8 +571,11 @@ def main():
                 print(images(name).relative_to(ROOT))
             except SystemExit as e:
                 print("sheet image skipped:", e)
-        import heights_catalog
-        heights_catalog.main(report, ss)
+        if set(wanted) == set(SETS):
+            import heights_catalog
+            heights_catalog.main(report, ss)
+        else:
+            print("TILES_heights.md left as it was: run without --only to regenerate it")
 
 
 if __name__ == "__main__":
