@@ -13,7 +13,35 @@ The play check is `tools/ichor/tests/egypt_rooms.sh`.
 <!-- egypt: begin overview -->
 <!-- egypt: end overview -->
 
+## Stopped at
+
+The Oikoumene was paused mid-batch (usage limit; the main story first). State at the stop:
+
+**Done**
+- `gTileset_Per` drawn, registered and compiled: 482 of 504 tiles, 368 metatiles, palettes 6-12, identical on oikos, aethos and building. Its Porytiles config carries palette hints (without them the packer runs for many minutes).
+- The Asclepeion's and the Agora's counters come from civic pixel for pixel (`civic_piece` in `per_art.py`).
+- All twelve rooms are laid out (`egypt_rooms.py`), their map.json events written from the same data, and every warp, person and sign is checked reachable.
+- Scripts for all twelve rooms: the healers and Pithos (the slice's shared scripts), both Agoras' marts, the egg-ovens' day care (the vanilla specials, Neferu and Tiy), Daphne's fossil revival (all eleven fossils and the four Galar pairs, `givemon` at Lv 20) and Oikoumene Dex rating, the incense merchant's nine incenses (myrrh is `ICHOR_STUB_LEGEND`), Lykos's trade (`INGAME_TRADE_ICHOR_POIKILOS`, Smeargle for Kecleon), Ipy's `Oik_EventScript_FisherGift`, Merit's linen errand to Khay (Reaper Cloth), the Apis puzzle (a Paldean Combat Tauros with its hidden ability, Lv 60) and the scribe's three riddles (Twisted Spoon; the Unown chambers are `ICHOR_STUB_LEGEND`).
+- Flags: bank 0x414-0x41A (seven). ROM 22,226,452 B (66.24%), about +35 KB over the build before these rooms.
+- Two render-and-critique passes, on the composed previews (notes below).
+- `map_audit.py --root . Naukratis_ Memphis_`: the only FAILs are the door mats naming Naukratis and Memphis warps 0-6 and 0-4, which those towns don't have on this branch (the egypt-towns agent's doors, by BUILD.md's fixed numbering).
+
+**Partial**
+- The play check (`tools/ichor/tests/egypt_rooms.sh`, `.lua`, `_consts.c`, `_setup.s`) is written but has never been run, so it is unverified.
+- Text widths have not been measured with `text_width.py`.
+
+**Not started**
+- The third render pass (in-game, from the check's screenshots), the 2x contact sheet `design/oikoumene/img/egypt_rooms.png`, the smoke test, the stand-ins table and the full write-up of each household.
+
+**`make`:** green at the last commit (`ab3166b1fa`).
+
+Stand-ins (`ICHOR_STUB_SPRITE`): Egyptian men use `_MAN`, women `_WOMAN`, the scribe `_AUGUR`, the embalmer `_ACOLYTE_M`, the Phoenician and Yada'il `_MERCHANT`, the Greek sailor and Lykos `_SAILOR`. Music in the houses is still the placeholder town song (`ICHOR_STUB_MUSIC`). No heal locations yet for Naukratis or Memphis (the chart agent's).
+
 ## Render-and-critique passes
+
+**Pass 1** (composed previews, first layouts). The rooms were too big for what was in them; sacks read as pale blobs, the ear stele vanished into the whitewash, beds read as benches, the stall partitions as white slabs, the embalming tables as pale shapes on a pale floor. *Fixed:* rooms cut to 11-13 wide; reed-mat rugs under the wards and waiting corners; sacks redrawn in burlap with their contents showing; the stele grey with carved ears; the bed given a striped coverlet and a dark headrest; the partitions plastered with a brick end; the tables in darker stone.
+
+**Pass 2** (composed previews). Every room now reads: the counters, the ovens, the rug in the incense shop, the temple wall and papyrus columns at Memphis, the ibis, baboon and glyph panel at the scribe's. Still open: the potter's lower half is thin, and the net-loft's nets are faint against the matting.
 
 <!-- egypt: begin passes -->
 <!-- egypt: end passes -->
