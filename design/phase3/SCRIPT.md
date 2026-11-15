@@ -8414,7 +8414,7 @@ Ants. Do not sit.
 | Kronist at the stall | by the old spring house | free bread; a reading you can't have |
 | Toxaris, Anacharsis | the Stoa's steps; the Dipylon | Archers (trainers, Part 3) |
 | Zenon | the Painted Stoa | Philosopher (trainer) |
-| Antisthenes | by the empty jars | Philosopher (trainer) |
+| Krates | by the empty jars | Philosopher (trainer) |
 | The guard at the ramp | the Akropolis's foot | closed until the raid |
 | Old man at the crossing | the Agora's south corner | a theoxenia decoy |
 | Thirsty girl | the Dipylon fountain | a theoxenia decoy |
@@ -8665,7 +8665,7 @@ Per MAP_DESIGN §2, every door in Astyra opens, someone is home, and something h
 | The Agora (market hall) | stallkeepers | the capital's markets | arrival |
 | The Stoa of the Archon | the Council's clerk | the hearing (beat 52); the decree's copies | arrival |
 | The Library | Apellikon, Daphne, a scholar | beat 51; Daedalus's page V | arrival; Daphne after beat 50 |
-| The Lyceum | Theophrastos and the walkers | the peripatetic gauntlet: Choice Specs; the Panathenaia's torch | arrival |
+| The Lyceum | Tyrtamos and the walkers | the peripatetic gauntlet: Choice Specs; the Panathenaia's torch | arrival |
 | The Glaux, a tavern | Xanthippe and two regulars | knucklebones | arrival |
 | Phaedon's house | Elpis, Phaedon, Daphne | beats 50 and 56; the Destiny Knot | arrival; the knot after the raid |
 | Kephalos's house | Kephalos, the xenia host | heal and rest; his cloak for Alethea; the Pure Incense | arrival; the cloak after the raid |
@@ -8739,36 +8739,36 @@ After the raid the desk is empty and the clerk says: "The Keeper's gone to the A
 
 ### The Lyceum (`MAP_ASTYRA_LYCEUM`)
 
-- **The room:** a gymnasium in a grove. A square colonnade, the *peripatos*, runs round a garden of plane trees; on one side a sand palaestra where athletes wrestle; at the head of the walk the altar of Apollo Lykeios with an unlit torch stand. Theophrastos's bench sits under the biggest plane, covered in pressed leaves.
-- **Event: the walk.** The Lyceum's philosophers teach walking. Theophrastos invites you to walk the colonnade with his three best: each falls in beside you as you pass and battles you, with no stop to heal between. He waits at the end of the walk. Win all four and he gives the **Leftovers**. Lose, and you may walk again from the start. Part 3 has the trainers.
+- **The room:** a gymnasium in a grove. A square colonnade, the *peripatos*, runs round a garden of plane trees; on one side a sand palaestra where athletes wrestle; at the head of the walk the altar of Apollo Lykeios with an unlit torch stand. Tyrtamos's bench sits under the biggest plane, covered in pressed leaves.
+- **Event: the walk.** The Lyceum's philosophers teach walking. Tyrtamos invites you to walk the colonnade with his three best: each falls in beside you as you pass and battles you, with no stop to heal between. He waits at the end of the walk. Win all four and he gives the **Leftovers**. Lose, and you may walk again from the start. Part 3 has the trainers.
 ```text
-THEOPHRASTOS: Ah. A walker. You've the legs of someone who walks far.
+TYRTAMOS: Ah. A walker. You've the legs of someone who walks far.
 
-THEOPHRASTOS: We teach walking here. The mind keeps pace with the feet.
+TYRTAMOS: We teach walking here. The mind keeps pace with the feet.
 
-THEOPHRASTOS: Walk my colonnade. My three best will walk with you.
+TYRTAMOS: Walk my colonnade. My three best will walk with you.
 
-THEOPHRASTOS: They'll argue. Argue back. With Pokémon. It's quicker.
+TYRTAMOS: They'll argue. Argue back. With Pokémon. It's quicker.
 
-THEOPHRASTOS: No stopping to heal. Thinking doesn't stop to heal.
+TYRTAMOS: No stopping to heal. Thinking doesn't stop to heal.
 ```
 ?? YES/NO
 ```text
 > YES:
-THEOPHRASTOS: Good. Left foot first. It's traditional. I invented it.
+TYRTAMOS: Good. Left foot first. It's traditional. I invented it.
 
 > NO:
-THEOPHRASTOS: Sit, then. Sitting's a kind of walking that hasn't started.
+TYRTAMOS: Sit, then. Sitting's a kind of walking that hasn't started.
 ```
 [On a win over all four:]
 ```text
-THEOPHRASTOS: You walked well. You argued better.
+TYRTAMOS: You walked well. You argued better.
 
-THEOPHRASTOS: Here. Aristotle's reading crystal. He left it to me with the garden.
+TYRTAMOS: Here. Aristotle's reading crystal. He left it to me with the garden.
 
 {PLAYER} received Choice Specs!
 
-THEOPHRASTOS: He said it lets you think about one thing at a time. Fiercely.
+TYRTAMOS: He said it lets you think about one thing at a time. Fiercely.
 ```
 [`FLAG_ICHOR_LYCEUM_WALK_DONE`, `FLAG_ICHOR_GOT_CHOICE_SPECS`.]
 
@@ -14914,15 +14914,15 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 - Extrasensory
 ```
 
-**PHILOSOPHER Antisthenes.** By the row of empty jars in the Agora. Optional. Antisthenes taught Diogenes, the cynic who lived in a jar; Pithound is that cynic.
+**PHILOSOPHER Krates.** By the row of empty jars in the Agora. Optional. Krates was the pupil of Diogenes, the cynic who lived in a jar; Pithound is that cynic.
 ```text
-Before: ANTISTHENES: My student lives in a jar. I live in a house. We argue.
-Defeat: ANTISTHENES: You win. I'll tell him. He'll say winning is a habit.
-After:  ANTISTHENES: He's looking for an honest man. With a lamp. In daylight.
+Before: KRATES: My teacher lives in a jar. I live in a house. We argue.
+Defeat: KRATES: You win. I'll tell him. He'll say winning is a habit.
+After:  KRATES: He's looking for an honest man. With a lamp. In daylight.
 ```
 ```
-=== TRAINER_ICHOR_ANTISTHENES ===
-Name: ANTISTHENES
+=== TRAINER_ICHOR_KRATES ===
+Name: KRATES
 Class: Philosopher
 Pic: Philosopher
 Gender: Male
@@ -14941,7 +14941,7 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 ## The Lyceum walk, levels 36–37
 
-The peripatetic gauntlet (Part 2, the Lyceum). The three walkers stand at the colonnade's corners facing along the walk, each with sight 4 across its width, so the walk can't be done without them. No heal between. Theophrastos waits at the end under the plane tree. Losing ends the walk; the walkers reset, and the player may try again.
+The peripatetic gauntlet (Part 2, the Lyceum). The three walkers stand at the colonnade's corners facing along the walk, each with sight 4 across its width, so the walk can't be done without them. No heal between. Tyrtamos waits at the end under the plane tree. Losing ends the walk; the walkers reset, and the player may try again.
 
 **ATHLETE Autolykos.** First corner. Autolykos was the Athenian boy who won the pankration at Olympia, and the rich man's feast thrown for him is the setting of Xenophon's *Symposium*.
 ```text
@@ -14971,15 +14971,15 @@ Level: 36
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 ```
 
-**PHILOSOPHER Aristoxenos.** Second corner. Aristoxenos wrote the first book on harmony: why some tunes come to rest and others don't.
+**PHILOSOPHER Archytas.** Second corner. Archytas, the Pythagorean, worked out harmony in numbers: why some tunes come to rest and others don't.
 ```text
-Before: ARISTOXENOS: A tune must come home to its last note. Does your team?
-Defeat: ARISTOXENOS: Resolved. Beautifully. I hate it.
-After:  ARISTOXENOS: The saddest tunes stop one note short. You wait forever.
+Before: ARCHYTAS: A tune must come home to its last note. Does your team?
+Defeat: ARCHYTAS: Resolved. Beautifully. I hate it.
+After:  ARCHYTAS: The saddest tunes stop one note short. You wait forever.
 ```
 ```
-=== TRAINER_ICHOR_ARISTOXENOS ===
-Name: ARISTOXENOS
+=== TRAINER_ICHOR_ARCHYTAS ===
+Name: ARCHYTAS
 Class: Philosopher
 Pic: Philosopher
 Gender: Male
@@ -15027,15 +15027,15 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 ```
 Geogrip is Antaeus, the wrestler strong only while he touched his mother; one wild Geogrip at a time lives at Lakonia's palaestra (dex), and an athlete would travel far for one.
 
-**PHILOSOPHER Theophrastos, master of the Lyceum.** Under the plane tree at the walk's end. Theophrastos ran Aristotle's school after him and wrote the first great books on plants.
+**PHILOSOPHER Tyrtamos, master of the Lyceum.** Under the plane tree at the walk's end. Tyrtamos ran Aristotle's school after him and wrote the first great books on plants. Aristotle renamed him Theophrastos, the name history kept.
 ```text
-Before: THEOPHRASTOS: Three walks, three arguments. Here's the fourth.
-Defeat: THEOPHRASTOS: Well argued. Every leaf where it should be.
+Before: TYRTAMOS: Three walks, three arguments. Here's the fourth.
+Defeat: TYRTAMOS: Well argued. Every leaf where it should be.
 After:  [the Choice Specs, Part 2]
 ```
 ```
-=== TRAINER_ICHOR_THEOPHRASTOS ===
-Name: THEOPHRASTOS
+=== TRAINER_ICHOR_TYRTAMOS ===
+Name: TYRTAMOS
 Class: Philosopher
 Pic: Philosopher
 Gender: Male
@@ -20521,7 +20521,7 @@ world-act1 places the item balls. Phase 2's set was tuned for Act I; the two row
 |---|---|---|---|
 | Astyra | Poseidon's Conch | gift (beat 57) | the salt well's bottom |
 | Astyra, the Library | Daedalus's page V | gift, Apellikon (the Perdix question) | — |
-| Astyra, the Lyceum | Choice Specs | gift, Theophrastos (the walk) | — |
+| Astyra, the Lyceum | Choice Specs | gift, Tyrtamos (the walk) | — |
 | Astyra, Kritios's workshop | Scope Lens | show him a Rock-type | — |
 | Astyra, Phaedon's house | Destiny Knot | gift, Elpis (after the raid) | — |
 | Astyra, Kephalos's house | Kephalos's Cloak (key item) | gift, after the raid; delivered to Alethea in beat 57 | — |
@@ -21013,11 +21013,11 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Toxaris | Archer, the Stoa's steps | Lucian's Skythian, who argues friendship |
 | Anacharsis | Archer, the Dipylon | the Skythian prince who came to Athens for wisdom |
 | Zenon | Philosopher, the Painted Stoa | Zeno, who taught in the Painted Stoa (the Stoics) |
-| Antisthenes | Philosopher, by the jars | Diogenes's teacher |
+| Krates | Philosopher, by the jars | Diogenes's pupil |
 | Autolykos | Athlete, the Lyceum | the boy pankratiast of Xenophon's *Symposium* |
-| Aristoxenos | Philosopher, the Lyceum | the first writer on harmony |
+| Archytas | Philosopher, the Lyceum | the Pythagorean harmonist |
 | Phrynon | Athlete, the Lyceum | an Athenian Olympic victor |
-| Theophrastos | the Lyceum's master | Aristotle's successor, the first botanist |
+| Tyrtamos | the Lyceum's master | Theophrastos, by his birth name: Aristotle's successor, the first botanist |
 | Brygos | Potter, the Kerameikos | the potter whose name a great painter's cups carry |
 | Proxenos | Pilgrim, at Hegeso's stele | Hegeso's father, named on her stele |
 | Hegeso | the stele in the Kerameikos | the real grave stele of Hegeso |
@@ -22053,7 +22053,7 @@ Every interior is unique (MAP_DESIGN §2): 16 rooms, each laid out for its owner
 | Daphne | walker | The sandalled version (Phase 2 asks for it). Sitting on a stool with a scroll. |
 | Kerykos | walker frames | On the herald's stone with his staff raised. Exists from Phase 2. |
 | Euthyphron | walker | A Kronist on a cart: plain chiton, sickle pin, arms open. The cart is a separate 2×1 object. |
-| Boutes, Pandrosa, Apellikon, Theophrastos, Kephalos, Lysimachos, Kritios, Kalonike and her daughters, Eukleides, Praxagora, Kleitos, Sideros (unhelmeted, bandaged), Chalkos (bandaged), Manes, Hipponikos, Diopeithes, Hierokles, the farmer | walkers | From the townsfolk walkers by palette swap where they fit (elder man, elder woman, priestess, scholar, merchant, child, fisher, farmer). Boutes in sea-blue; Pandrosa in white with an olive sprig; Kephalos in a garland; Lysimachos poor and patched. |
+| Boutes, Pandrosa, Apellikon, Tyrtamos, Kephalos, Lysimachos, Kritios, Kalonike and her daughters, Eukleides, Praxagora, Kleitos, Sideros (unhelmeted, bandaged), Chalkos (bandaged), Manes, Hipponikos, Diopeithes, Hierokles, the farmer | walkers | From the townsfolk walkers by palette swap where they fit (elder man, elder woman, priestess, scholar, merchant, child, fisher, farmer). Boutes in sea-blue; Pandrosa in white with an olive sprig; Kephalos in a garland; Lysimachos poor and patched. |
 | The six voters | walkers | Euthyphron, Xanthippe, Kritios, Praxagora, Kephalos and Lysimachos, each with a shard-dropping frame. |
 | The urn | object | A great clay urn in a fence. |
 | The count board | sign window | A wooden board, three states. |
