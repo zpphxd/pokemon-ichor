@@ -27,6 +27,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+extern const u8 EventScript_IchorFrozenGeneric[];
+
 #define TINT_FULL      192   // all the way to gray (or sepia)
 #define TINT_STEPS     12    // the Stair's twelve steps back to color
 #define BLEND_IN_SPEED 12    // TINT_FULL / 16: an unfrozen object's color runs in over 16 frames
@@ -56,6 +58,7 @@ static EWRAM_DATA struct
     u8 unfrozenMapNum, unfrozenMapGroup;
     bool8 sepia;
     bool8 spreading;
+    bool8 mapHasScripts;  // this map's own scripts answer frozen people (Ichor_FrozenScriptsHere)
     bool8 anyTinted;
     u8 spreadOrder[NUM_PALS_TOTAL + 16];  // BG slots, then 16 + OBJ slot
     u8 spreadCount;
@@ -168,6 +171,7 @@ bool32 Ichor_KeepsObjectFrozen(struct ObjectEvent *objectEvent)
 
 void Ichor_FrozenHourOnMapTransition(void)
 {
+    sFrozen.mapHasScripts = FALSE;
     sFrozen.heldObjects = 0;
     sFrozen.blendIn = 0;
     sFrozen.unfrozenCount = 0;
@@ -466,4 +470,37 @@ void Ichor_ColorReturnStep(void)
     RefreshAllPalettes();
     if (step >= TINT_STEPS)
         Overworld_ChangeMusicToDefault();
+}
+
+// --- Talking to frozen people ----------------------------------------------------------------
+
+// field_control_avatar.c: on a map with no frozen scripts of its own, talking
+// to someone the hour holds gets a generic line instead of their script, so
+// frozen trainers don't battle (Phase 4 SCRIPT.md Part 2, "The generic rule").
+// Inanimate objects (item balls, rocks) keep their scripts.
+const u8 *Ichor_FrozenTalkScript(u32 objectEventId, const u8 *script)
+{
+    struct ObjectEvent *objectEvent = &gObjectEvents[objectEventId];
+
+    if (!Ichor_IsFrozenHour() || sFrozen.mapHasScripts || objectEvent->inanimate || !HourHolds(objectEvent))
+        return script;
+    return EventScript_IchorFrozenGeneric;
+}
+
+// special Ichor_FrozenScriptsHere: this map's own scripts answer its frozen
+// people (call it in ON_TRANSITION). Each script checks FLAG_ICHOR_FROZEN_HOUR
+// itself, and can goto(EventScript_IchorFrozenGeneric) for the generic line.
+void Ichor_FrozenScriptsHere(void)
+{
+    sFrozen.mapHasScripts = TRUE;
+}
+
+// specialvar Ichor_FrozenGenericLine: the line for the object last talked to:
+// 0-2 by its local id, or 3 for a Pokémon.
+u16 Ichor_FrozenGenericLine(void)
+{
+    struct ObjectEvent *objectEvent = &gObjectEvents[gSelectedObjectEvent];
+    if (objectEvent->graphicsId & OBJ_EVENT_MON)
+        return 3;
+    return objectEvent->localId % 3;
 }

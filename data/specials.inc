@@ -683,6 +683,8 @@ gSpecials::
 	def_special Ichor_SepiaMemoryBegin
 	def_special Ichor_SepiaMemoryEnd
 	def_special Ichor_ColorReturnStep
+	def_special Ichor_FrozenScriptsHere
+	def_special Ichor_FrozenGenericLine
 	@ Ichor: the Labyrinth (src/ichor_labyrinth.c)
 	def_special Ichor_AddThreadFloor
 	def_special Ichor_AddThreadAnchor

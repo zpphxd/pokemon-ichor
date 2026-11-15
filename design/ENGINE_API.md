@@ -351,7 +351,12 @@ Built in `src/ichor_frozen.c`. Tested by `tools/ichor/tests/ichor_frozen.sh` (21
 
 While `FLAG_ICHOR_FROZEN_HOUR` is set:
 - **Every tileset and sprite palette is gray.** The exceptions are the player, the follower and any unfrozen object (E3). The tint lives in the unfaded palette buffer, so fades, warps, weather and battles all keep it. The day-and-night tint is off.
-- **Everyone else is frozen,** including people who spawn later. A script's `lockall`/`releaseall` doesn't thaw them, and frozen trainers don't see you. Talking to a frozen person still runs their script, so check the flag there, and don't `faceplayer`.
+- **Everyone else is frozen,** including people who spawn later. A script's `lockall`/`releaseall` doesn't thaw them, and frozen trainers don't see you.
+- **Talking to a frozen person** gives Phase 4's generic line (`EventScript_IchorFrozenGeneric`), never their own script, so frozen trainers don't battle:
+  - "They don't move. They don't blink.", "Frozen mid-step, one foot off the ground." or "Caught halfway through a word.", by local id modulo 3;
+  - "It's frozen with its ears up, listening for something." for a Pokémon object.
+  - Inanimate objects (item balls, rocks) keep their own scripts.
+  - **A map with frozen scripts of its own** calls `special(Ichor_FrozenScriptsHere)` in `ON_TRANSITION`. Then every object's own script runs. Those scripts check `FLAG_ICHOR_FROZEN_HOUR` themselves, and can `goto(EventScript_IchorFrozenGeneric)` for anyone without a line. Don't `faceplayer` a frozen person.
 - **There are no wild encounters** on foot or surfing.
 - **The map's music is `MUS_ICHOR_ELPIS_LULLABY_BOX`,** on every map.
 - **Not built:** muting the field's own sound effects. Scripts' `playse` is unaffected anyway.
