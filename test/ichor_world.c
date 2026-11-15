@@ -72,15 +72,14 @@ TEST("Ichor: a held time of day overrides the clock until released")
 
 TEST("Ichor: a carried flame counts down even on a quiet step, and water puts it out")
 {
-    VarSet(VAR_TEMP_2, 10);
-    VarSet(VAR_TEMP_3, FLAME_HEARTH);
+    Ichor_SetCarriedFlame(FLAME_HEARTH, 10);
     EXPECT_EQ(Ichor_CarriedFlameStep(FALSE), FALSE);
-    EXPECT_EQ(VarGet(VAR_TEMP_2), 9);
-    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_HEARTH);
+    EXPECT_EQ(Ichor_GetFlameSteps(), 9);
+    EXPECT_EQ(Ichor_GetFlameKind(), FLAME_HEARTH);
 
     gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_SURFING;
     EXPECT_EQ(Ichor_CarriedFlameStep(FALSE), FALSE);
-    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_NONE);
+    EXPECT_EQ(Ichor_GetFlameKind(), FLAME_NONE);
     EXPECT_EQ(Ichor_IsCarryingFlame(), FALSE);
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
 }
@@ -97,28 +96,38 @@ TEST("Ichor: rain burns a carried flame down two steps at a time, and it still g
 {
     u8 weather = gWeatherPtr->currWeather;
     gWeatherPtr->currWeather = WEATHER_RAIN;
-    VarSet(VAR_TEMP_2, 8);
-    VarSet(VAR_TEMP_3, FLAME_LERNA);
+    Ichor_SetCarriedFlame(FLAME_LERNA, 8);
     Ichor_CarriedFlameStep(FALSE);
-    EXPECT_EQ(VarGet(VAR_TEMP_2), 6);
+    EXPECT_EQ(Ichor_GetFlameSteps(), 6);
     Ichor_CarriedFlameStep(FALSE);  // 6 -> 4: past 5, so it guttered (silently here)
-    EXPECT_EQ(VarGet(VAR_TEMP_2), 4);
-    VarSet(VAR_TEMP_2, 1);
+    EXPECT_EQ(Ichor_GetFlameSteps(), 4);
+    Ichor_SetCarriedFlame(FLAME_LERNA, 1);
     Ichor_CarriedFlameStep(FALSE);  // never below 0
-    EXPECT_EQ(VarGet(VAR_TEMP_2), 0);
-    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_NONE);
+    EXPECT_EQ(Ichor_GetFlameSteps(), 0);
+    EXPECT_EQ(Ichor_GetFlameKind(), FLAME_NONE);
     gWeatherPtr->currWeather = weather;
 }
 
 TEST("Ichor: a carried flame doesn't drown aboard the Euploia")
 {
-    VarSet(VAR_TEMP_2, 10);
-    VarSet(VAR_TEMP_3, FLAME_HESTIA_SHIP);
+    Ichor_SetCarriedFlame(FLAME_HESTIA_SHIP, 10);
     gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_SURFING;
     FlagSet(FLAG_ICHOR_GENERAL_START + 0x302);  // world-postgame's FLAG_ICHOR_ON_SHIP
     Ichor_CarriedFlameStep(FALSE);
-    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_HESTIA_SHIP);
-    EXPECT_EQ(VarGet(VAR_TEMP_2), 9);
+    EXPECT_EQ(Ichor_GetFlameKind(), FLAME_HESTIA_SHIP);
+    EXPECT_EQ(Ichor_GetFlameSteps(), 9);
     FlagClear(FLAG_ICHOR_GENERAL_START + 0x302);
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
+}
+
+TEST("Ichor: a map's own temp vars are never read as a carried flame")
+{
+    Ichor_SetCarriedFlame(FLAME_NONE, 0);
+    VarSet(VAR_TEMP_2, 1);  // Thyrsa's ON_TRANSITION does this
+    VarSet(VAR_TEMP_3, 1);
+    EXPECT_EQ(Ichor_IsCarryingFlame(), FALSE);
+    Ichor_CarriedFlameStep(FALSE);
+    EXPECT_EQ(VarGet(VAR_TEMP_2), 1);
+    VarSet(VAR_TEMP_2, 0);
+    VarSet(VAR_TEMP_3, 0);
 }

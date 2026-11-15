@@ -110,30 +110,14 @@ void Ichor_OnItemAdded(u16 itemId)
         FlagSet(flag);
 }
 
-// A carried flame whose kind travels (sFlameTravels) survives the map change:
-// its steps and kind are kept across ClearTempFieldEventData's reset.
-static EWRAM_DATA u16 sTravellingFlame[2] = {0};
-
 static bool32 FlameTravels(u32 kind);
-
-void Ichor_BeforeMapTransition(void)
-{
-    sTravellingFlame[0] = sTravellingFlame[1] = 0;
-    if (Ichor_IsCarryingFlame() && FlameTravels(VarGet(VAR_TEMP_3)))
-    {
-        sTravellingFlame[0] = VarGet(VAR_TEMP_2);
-        sTravellingFlame[1] = VarGet(VAR_TEMP_3);
-    }
-}
+static void PutOutFlame(void);
+static EWRAM_DATA struct { u16 steps; u8 kind; } sCarriedFlame = {0};
 
 void Ichor_OnMapTransition(void)
 {
-    if (sTravellingFlame[1] != FLAME_NONE)
-    {
-        VarSet(VAR_TEMP_2, sTravellingFlame[0]);
-        VarSet(VAR_TEMP_3, sTravellingFlame[1]);
-        sTravellingFlame[0] = sTravellingFlame[1] = 0;
-    }
+    if (!FlameTravels(sCarriedFlame.kind))
+        PutOutFlame();  // the flame dies when you leave, unless its kind travels
     FlagClear(FLAG_ICHOR_NO_RELICS);
     Ichor_FrozenHourOnMapTransition();
     Ichor_LabyrinthOnMapTransition();
@@ -460,15 +444,34 @@ static bool32 FlameTravels(u32 kind)
     return kind < FLAME_COUNT && sFlameTravels[kind];
 }
 
+// The carried flame lives here, not in the map's temp vars, which map scripts
+// use for their own ends. EWRAM: a save and CONTINUE puts it out.
 bool32 Ichor_IsCarryingFlame(void)
 {
-    return VarGet(VAR_TEMP_3) != FLAME_NONE && VarGet(VAR_TEMP_2) != 0;
+    return sCarriedFlame.kind != FLAME_NONE && sCarriedFlame.steps != 0;
+}
+
+void Ichor_SetCarriedFlame(u32 kind, u32 steps)
+{
+    sCarriedFlame.kind = steps != 0 ? kind : FLAME_NONE;
+    sCarriedFlame.steps = kind != FLAME_NONE ? steps : 0;
 }
 
 static void PutOutFlame(void)
 {
-    VarSet(VAR_TEMP_2, 0);
-    VarSet(VAR_TEMP_3, FLAME_NONE);
+    Ichor_SetCarriedFlame(FLAME_NONE, 0);
+}
+
+// specialvar Ichor_GetFlameKind: the carried flame's FLAME_* kind, or FLAME_NONE.
+u16 Ichor_GetFlameKind(void)
+{
+    return Ichor_IsCarryingFlame() ? sCarriedFlame.kind : FLAME_NONE;
+}
+
+// specialvar Ichor_GetFlameSteps: its steps left (0 without one).
+u16 Ichor_GetFlameSteps(void)
+{
+    return Ichor_IsCarryingFlame() ? sCarriedFlame.steps : 0;
 }
 
 // special Ichor_TakeFlame: the torch takes fire VAR_0x8004 (FLAME_*) for VAR_0x8005
@@ -478,8 +481,7 @@ void Ichor_TakeFlame(void)
     gSpecialVar_Result = FALSE;
     if (!Ichor_HasRelic(ITEM_HECATES_TORCH) || FlagGet(FLAG_ICHOR_TORCH_DOUSED) || gSpecialVar_0x8005 == 0)
         return;
-    VarSet(VAR_TEMP_2, gSpecialVar_0x8005);
-    VarSet(VAR_TEMP_3, gSpecialVar_0x8004);
+    Ichor_SetCarriedFlame(gSpecialVar_0x8004, gSpecialVar_0x8005);
     gSpecialVar_Result = TRUE;
 }
 
@@ -517,11 +519,11 @@ bool32 Ichor_CarriedFlameStep(bool32 canTalk)
             ScriptContext_SetupScript(EventScript_IchorFlameDrowned);
         return canTalk;
     }
-    before = VarGet(VAR_TEMP_2);
+    before = sCarriedFlame.steps;
     steps = before > cost ? before - cost : 0;
-    VarSet(VAR_TEMP_2, steps);
+    sCarriedFlame.steps = steps;
     if (steps == 0)
-        VarSet(VAR_TEMP_3, FLAME_NONE);
+        sCarriedFlame.kind = FLAME_NONE;
     if (!canTalk || (steps != 0 && !(before > ICHOR_FLAME_GUTTER_STEPS && steps <= ICHOR_FLAME_GUTTER_STEPS)))
         return FALSE;
     ScriptContext_SetupScript(steps == 0 ? EventScript_IchorFlameSpent : EventScript_IchorFlameGutters);
@@ -531,11 +533,11 @@ bool32 Ichor_CarriedFlameStep(bool32 canTalk)
 // The start menu's panel: "Hearth fire: 12 steps".
 void Ichor_BufferFlamePanel(u8 *dst)
 {
-    u32 kind = VarGet(VAR_TEMP_3);
+    u32 kind = sCarriedFlame.kind;
     dst = StringCopy(dst, kind < FLAME_COUNT && sFlameNames[kind] ? sFlameNames[kind] : COMPOUND_STRING("Carried fire"));
     dst = StringCopy(dst, COMPOUND_STRING(": "));
-    dst = ConvertIntToDecimalStringN(dst, VarGet(VAR_TEMP_2), STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringCopy(dst, VarGet(VAR_TEMP_2) == 1 ? COMPOUND_STRING(" step") : COMPOUND_STRING(" steps"));
+    dst = ConvertIntToDecimalStringN(dst, sCarriedFlame.steps, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringCopy(dst, sCarriedFlame.steps == 1 ? COMPOUND_STRING(" step") : COMPOUND_STRING(" steps"));
 }
 
 void Ichor_SetTorchDoused(void)

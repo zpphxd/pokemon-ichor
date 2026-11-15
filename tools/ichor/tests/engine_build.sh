@@ -26,7 +26,7 @@ RUNNER=build/tools/ichor-mgba-headless
 ENGINE_SYMS="gSaveBlock3Ptr gSpecialVar_0x8000 gSpecialVar_0x8001 gSpecialVar_0x8002 gSpecialVar_0x8003
 gSpecialVar_0x8005 gSpecialVar_0x8006 gSpecialVar_0x8007 gSpecialVar_0x800A gSpecialVar_0x800B gLocalTime
 gStringVar1 gStringVar2 gStringVar3 gPlayerPartyCount gFieldEffectArguments gSaveBlock1Ptr
-gWeather CB2_FlyMap CB2_Bag Task_ShowStartMenu sFlyMap gSprites SpriteCB_FlyDestIcon
+gWeather CB2_FlyMap CB2_Bag Task_ShowStartMenu sFlyMap gSprites SpriteCB_FlyDestIcon sCarriedFlame
 gPlttBufferUnfaded gPlttBufferFaded"
 
 engine_prepare() {

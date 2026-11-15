@@ -15,10 +15,12 @@ bool32 Ichor_IsBlessed(u32 god);
 
 // Engine hooks, one call each in vanilla code
 void Ichor_OnItemAdded(u16 itemId);             // item.c, AddBagItem
-void Ichor_BeforeMapTransition(void);
 void Ichor_OnMapTransition(void);
 void Ichor_OnFieldFrame(void);
 bool32 Ichor_IsCarryingFlame(void);
+void Ichor_SetCarriedFlame(u32 kind, u32 steps);
+u16 Ichor_GetFlameKind(void);
+u16 Ichor_GetFlameSteps(void);
 bool32 Ichor_CarriedFlameStep(bool32 canTalk);  // ichor_rites.c, Ichor_OnStep
 void Ichor_BufferFlamePanel(u8 *dst);           // start_menu.c               // event_data.c, ClearTempFieldEventData
 u8 Ichor_GetTorchFlashLevel(void);              // overworld.c, SetDefaultFlashLevel
