@@ -1753,3 +1753,45 @@ const struct Tileset gTileset_TempleDionysus =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleDionysus,
     .callback = NULL,
 };
+
+// Ichor (Act II rooms): Thyrsa's plastered rooms: the Asclepeion, the Agora, Pindaros's and Polos's houses. A Porytiles-managed secondary for the oikos
+// primary, built by tools/ichor/maps/thyrsa_rooms.py (art in tools/ichor/art/thyrsa_rooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ThyrsaRooms =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ThyrsaRooms,
+    .palettes = gTilesetPalettes_PorytilesManaged_ThyrsaRooms,
+    .metatiles = gMetatiles_PorytilesManaged_ThyrsaRooms,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaRooms,
+    .callback = NULL,
+};
+
+// Ichor (Act II rooms): Thyrsa's households: Staphylos's, Eudora's, Euthykles's workshop and Manto's. A Porytiles-managed secondary for the oikos
+// primary, built by tools/ichor/maps/thyrsa_rooms.py (art in tools/ichor/art/thyrsa_rooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ThyrsaHomes =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ThyrsaHomes,
+    .palettes = gTilesetPalettes_PorytilesManaged_ThyrsaHomes,
+    .metatiles = gMetatiles_PorytilesManaged_ThyrsaHomes,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaHomes,
+    .callback = NULL,
+};
+
+// Ichor (Act II rooms): the stone rooms: Eleutherai's watch-house and homes, the Kantharos tavern and Chthonia's house. A Porytiles-managed secondary for the oikos
+// primary, built by tools/ichor/maps/thyrsa_rooms.py (art in tools/ichor/art/thyrsa_rooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ThyrsaStone =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ThyrsaStone,
+    .palettes = gTilesetPalettes_PorytilesManaged_ThyrsaStone,
+    .metatiles = gMetatiles_PorytilesManaged_ThyrsaStone,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaStone,
+    .callback = NULL,
+};

@@ -9569,10 +9569,10 @@
     {
       "id": "LAYOUT_ELEUTHERAI_WATCH_HOUSE",
       "name": "Eleutherai_WatchHouse_Layout",
-      "width": 10,
+      "width": 16,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaStone",
       "border_filepath": "data/layouts/Eleutherai_WatchHouse/border.bin",
       "blockdata_filepath": "data/layouts/Eleutherai_WatchHouse/map.bin",
       "layout_version": "emerald"
@@ -9580,10 +9580,10 @@
     {
       "id": "LAYOUT_ELEUTHERAI_LYSIDIKE_HOUSE",
       "name": "Eleutherai_LysidikeHouse_Layout",
-      "width": 10,
+      "width": 12,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaStone",
       "border_filepath": "data/layouts/Eleutherai_LysidikeHouse/border.bin",
       "blockdata_filepath": "data/layouts/Eleutherai_LysidikeHouse/map.bin",
       "layout_version": "emerald"
@@ -9591,10 +9591,10 @@
     {
       "id": "LAYOUT_ELEUTHERAI_OINOE_HOUSE",
       "name": "Eleutherai_OinoeHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 9,
+      "height": 7,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaStone",
       "border_filepath": "data/layouts/Eleutherai_OinoeHouse/border.bin",
       "blockdata_filepath": "data/layouts/Eleutherai_OinoeHouse/map.bin",
       "layout_version": "emerald"
@@ -9605,7 +9605,7 @@
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_ThyrsaRooms",
       "border_filepath": "data/layouts/ThyrsaCity_Asclepeion/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_Asclepeion/map.bin",
       "layout_version": "emerald"
@@ -9613,10 +9613,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY_AGORA",
       "name": "ThyrsaCity_Agora_Layout",
-      "width": 13,
-      "height": 9,
+      "width": 14,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_ThyrsaRooms",
       "border_filepath": "data/layouts/ThyrsaCity_Agora/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_Agora/map.bin",
       "layout_version": "emerald"
@@ -9635,10 +9635,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY_TAVERN",
       "name": "ThyrsaCity_Tavern_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 13,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaStone",
       "border_filepath": "data/layouts/ThyrsaCity_Tavern/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_Tavern/map.bin",
       "layout_version": "emerald"
@@ -9646,10 +9646,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY_MASK_WORKSHOP",
       "name": "ThyrsaCity_MaskWorkshop_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 16,
+      "height": 7,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaHomes",
       "border_filepath": "data/layouts/ThyrsaCity_MaskWorkshop/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_MaskWorkshop/map.bin",
       "layout_version": "emerald"
@@ -9657,10 +9657,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY_ACTOR_HOUSE",
       "name": "ThyrsaCity_ActorHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 7,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaRooms",
       "border_filepath": "data/layouts/ThyrsaCity_ActorHouse/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_ActorHouse/map.bin",
       "layout_version": "emerald"
@@ -9668,10 +9668,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY_EUDORA_HOUSE",
       "name": "ThyrsaCity_EudoraHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 13,
+      "height": 11,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaHomes",
       "border_filepath": "data/layouts/ThyrsaCity_EudoraHouse/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_EudoraHouse/map.bin",
       "layout_version": "emerald"
@@ -9682,7 +9682,7 @@
       "width": 10,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaHomes",
       "border_filepath": "data/layouts/ThyrsaCity_MantoHouse/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_MantoHouse/map.bin",
       "layout_version": "emerald"
@@ -9690,10 +9690,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY_PINDAROS_HOUSE",
       "name": "ThyrsaCity_PindarosHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 12,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaRooms",
       "border_filepath": "data/layouts/ThyrsaCity_PindarosHouse/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_PindarosHouse/map.bin",
       "layout_version": "emerald"
@@ -9701,10 +9701,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY_SOWN_HOUSE",
       "name": "ThyrsaCity_SownHouse_Layout",
-      "width": 10,
+      "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaStone",
       "border_filepath": "data/layouts/ThyrsaCity_SownHouse/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_SownHouse/map.bin",
       "layout_version": "emerald"
@@ -9712,10 +9712,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY_VINTNER_HOUSE",
       "name": "ThyrsaCity_VintnerHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 14,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ThyrsaHomes",
       "border_filepath": "data/layouts/ThyrsaCity_VintnerHouse/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_VintnerHouse/map.bin",
       "layout_version": "emerald"

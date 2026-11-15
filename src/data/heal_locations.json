@@ -367,6 +367,14 @@
       "respawn_npc": "LOCALID_PLAYERS_HOUSE_1F_MOM",
       "respawn_x": 3,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_THYRSA_CITY",
+      "map": "MAP_THYRSA_CITY",
+      "x": 21,
+      "y": 32,
+      "respawn_map": "MAP_THYRSA_CITY_ASCLEPEION",
+      "respawn_npc": "LOCALID_THYRSA_HEALER"
     }
   ]
 }

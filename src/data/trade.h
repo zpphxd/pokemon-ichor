@@ -1229,6 +1229,23 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_WOOLOO
+    },
+    // ICHOR_STUB_AETHOS_DEX: Prosomime and Gelasable are stand-ins until the dex lands.
+    [INGAME_TRADE_ICHOR_PATHOS] =
+    {
+        .nickname = _("PATHOS"),
+        .species = SPECIES_PROSOMIME,
+        .ivs = {18, 12, 16, 24, 26, 20},
+        .abilityNum = 0,
+        .otId = 30517,
+        .conditions = {5, 30, 5, 5, 5},
+        .personality = 0x91,
+        .heldItem = ITEM_ORAN_BERRY,
+        .mailNum = -1,
+        .otName = _("EUTHYKL"),   // seven letters: the OT field holds no more
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_GELASABLE
     }
 };
 

@@ -1,1 +1,121 @@
+// The Kantharos, a cellar tavern (SCRIPT.md Part 2, Thyrsa; the game: SYSTEMS.md §9).
+// Room: tools/ichor/maps/thyrsa_rooms.py. Aristomache, Thyrsa's champion, keeps the bar
+// (9,3; talked to across it from (9,5)); Phaidimos (3,6) and Glauke (5,6) play at the
+// worn table in the sunken floor.
+//
+// ICHOR_STUB_KNUCKLEBONES: the knucklebones game isn't in the game yet. Each match is
+// one scripted throw with SCRIPT.md's lines: the regulars lose two times in three, the
+// champion one time in three. Swap ThyrsaCity_Tavern_EventScript_Match for the game's
+// match script (with each opponent's personality) when it lands.
+// ICHOR_STUB_OFFERINGS: the regulars' first-win prizes (Olive Oil x2, Wine) wait for the
+// offerings. ICHOR_STUB_TMS: Aristomache's TM Encore waits for Balance to number it.
+// ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
+
 mapscripts ThyrsaCity_Tavern_MapScripts {}
+
+text ThyrsaCity_Tavern_Name_Aristomache { "ARISTOMACHE" }
+text ThyrsaCity_Tavern_Name_Phaidimos { "PHAIDIMOS" }
+text ThyrsaCity_Tavern_Name_Glauke { "GLAUKE" }
+
+// VAR_0x8004: how many of three throws the player wins. Leaves VAR_RESULT TRUE on a win.
+script ThyrsaCity_Tavern_EventScript_Match {
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Four bones, a leather cup, a best of five."))
+    playse(SE_BALL_BOUNCE_1)
+    message(format("Clack. Clatter. Clack."))
+    waitmessage
+    waitse
+    delay(20)
+    random(3)
+    if (var(VAR_RESULT) < VAR_0x8004) {
+        playse(SE_SUCCESS)
+        msgbox(format("{PLAYER} won the match!"))
+        setvar(VAR_RESULT, TRUE)
+    } else {
+        playse(SE_FAILURE)
+        msgbox(format("{PLAYER} lost the match."))
+        setvar(VAR_RESULT, FALSE)
+    }
+    return
+}
+
+script ThyrsaCity_Tavern_EventScript_Phaidimos {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Tavern_Name_Phaidimos)
+    msgbox(format("Ones, I rethrow. Threes, I keep. Sixes, I thank the god.\p"
+                  "Fours I don't trust. Fours are up to something."))
+    msgbox(format("A match?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        setvar(VAR_0x8004, 2)
+        call(ThyrsaCity_Tavern_EventScript_Match)
+        setspeaker(ThyrsaCity_Tavern_Name_Phaidimos)
+        if (var(VAR_RESULT) == TRUE) {
+            msgbox(format("Fours. I told you. Up to something."))
+        } else {
+            msgbox(format("Sixes. I thanked the god. The god listened."))
+        }
+    }
+    release
+}
+
+script ThyrsaCity_Tavern_EventScript_Glauke {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Tavern_Name_Glauke)
+    msgbox(format("Aphrodite or ruin! Throw everything!\p"
+                  "I've been ruined six times this month. It's very exciting."))
+    msgbox(format("A match?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        setvar(VAR_0x8004, 2)
+        call(ThyrsaCity_Tavern_EventScript_Match)
+        setspeaker(ThyrsaCity_Tavern_Name_Glauke)
+        if (var(VAR_RESULT) == TRUE) {
+            msgbox(format("Ruin! Seven times! Wonderful."))
+        } else {
+            msgbox(format("Not ruin! How dull. Again!"))
+        }
+    }
+    release
+}
+
+script ThyrsaCity_Tavern_EventScript_Aristomache {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Tavern_Name_Aristomache)
+    if (flag(FLAG_ICHOR_KNUCKLEBONES_THYRSA)) {
+        msgbox(format("Sit. Throw. Don't talk."))
+    } else {
+        msgbox(format("Thyrsa's champion. Sit. I don't talk while I throw."))
+    }
+    msgbox(format("A match?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    setvar(VAR_0x8004, 1)
+    call(ThyrsaCity_Tavern_EventScript_Match)
+    if (var(VAR_RESULT) == TRUE && !flag(FLAG_ICHOR_KNUCKLEBONES_THYRSA)) {
+        setspeaker(ThyrsaCity_Tavern_Name_Aristomache)
+        msgbox(format("…Again.\p"
+                      "That's what they shout in the theater when they love a thing. Again.\p"
+                      "Here. Encore. Do what you just did, but more."))
+        // ICHOR_STUB_TMS: giveitem(ITEM_TM_ENCORE) once Balance gives Encore a TM number.
+        setflag(FLAG_ICHOR_KNUCKLEBONES_THYRSA)
+    }
+    release
+}
+
+script ThyrsaCity_Tavern_EventScript_Frieze {
+    msgbox(format("A painted frieze runs round the cellar: satyrs chasing maenads.\p"
+                  "Look closer. The maenads are winning."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_Tavern_EventScript_BonesTable {
+    msgbox(format("A stone table, worn into a shallow bowl by a hundred years of throws."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_Tavern_EventScript_GreatCup {
+    msgbox(format("Over the bar hangs the Kantharos: a great two-handled cup, Dionysus's own.\p"
+                  "It's big enough to bathe a Pokémon in. Someone has."), MSGBOX_SIGN)
+}

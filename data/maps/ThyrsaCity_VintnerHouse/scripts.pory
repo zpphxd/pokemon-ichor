@@ -1,1 +1,126 @@
-mapscripts ThyrsaCity_VintnerHouse_MapScripts {}
+// Staphylos's house: the vintner's press-house (SCRIPT.md Part 2, Thyrsa).
+// Room: tools/ichor/maps/thyrsa_rooms.py. Staphylos (4,6) and his daughter Erigone (10,3).
+//
+// Treading the grapes, once a day: say YES and climb onto the treading floor, (5..8, 3..4).
+// VAR_TEMP_2 is 1 while you tread; each step onto a floor cell runs TreadStep (coord
+// events), which counts in VAR_TEMP_1. Thirty steps fill the vat. Stepping off the floor
+// onto any cell round it (TreadOff) ends it early, once you've trodden at all; talk to
+// Staphylos again to start over.
+// ICHOR_STUB_OFFERINGS: the two jars of Wine wait for the item.
+// ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
+
+mapscripts ThyrsaCity_VintnerHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_2, 0)
+        setvar(VAR_TEMP_1, 0)
+    }
+}
+
+text ThyrsaCity_VintnerHouse_Name_Staphylos { "STAPHYLOS" }
+text ThyrsaCity_VintnerHouse_Name_Erigone { "ERIGONE" }
+
+script ThyrsaCity_VintnerHouse_EventScript_Staphylos {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_VintnerHouse_Name_Staphylos)
+    if (flag(FLAG_BADGE04_GET) && !flag(FLAG_ICHOR_GOT_STAPHYLOS_NUGGET)) {
+        msgbox(format("The Masked Player gave you his laurel? Then you'll want this.\p"
+                      "Found it in a grape skin, at the bottom of the press. A gold nugget.\p"
+                      "My father swore a donkey left it there. I say give it to a donkey."))
+        setspeaker(ThyrsaCity_VintnerHouse_Name_Erigone)
+        msgbox(format("He means an Onotis. Let it hold it. Wait and see."))
+        giveitem(ITEM_NUGGET)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_STAPHYLOS_NUGGET)
+            setspeaker(ThyrsaCity_VintnerHouse_Name_Staphylos)
+            msgbox(format("Midas had a donkey's ears, they say. Everything he touched went gold.\p"
+                          "He couldn't eat. Couldn't drink. Gold wine's no wine at all."))
+        }
+        release
+        end
+    }
+    if (var(VAR_TEMP_2) == 1) {
+        msgbox(format("Tread, tread! The vat won't fill itself."))
+        release
+        end
+    }
+    if (flag(FLAG_DAILY_ICHOR_TREADING)) {
+        msgbox(format("The vat's full for today. Come back tomorrow, with clean feet."))
+        release
+        end
+    }
+    msgbox(format("Off with your sandals! Up you get! The god hates sandals in the wine.\p"
+                  "Tread till the vat's full. Thirty good steps. Don't fall in."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        setvar(VAR_TEMP_1, 0)
+        setvar(VAR_TEMP_2, 1)
+    } else {
+        setspeaker(ThyrsaCity_VintnerHouse_Name_Staphylos)
+        msgbox(format("Sandals on, then. Coward's feet."))
+    }
+    release
+}
+
+script ThyrsaCity_VintnerHouse_EventScript_TreadStep {
+    addvar(VAR_TEMP_1, 1)
+    playse(SE_MUD_BALL)
+    if (var(VAR_TEMP_1) >= 30) {
+        goto(ThyrsaCity_VintnerHouse_EventScript_TreadDone)
+    }
+    end
+}
+
+script ThyrsaCity_VintnerHouse_EventScript_TreadOff {
+    if (var(VAR_TEMP_1) == 0) {
+        end
+    }
+    lockall
+    setvar(VAR_TEMP_2, 0)
+    setspeaker(ThyrsaCity_VintnerHouse_Name_Staphylos)
+    msgbox(format("Half a vat! Half a wine. Back up, back up!"))
+    setvar(VAR_TEMP_1, 0)
+    releaseall
+    end
+}
+
+script ThyrsaCity_VintnerHouse_EventScript_TreadDone {
+    lockall
+    setvar(VAR_TEMP_2, 0)
+    playse(SE_PUDDLE)
+    waitse
+    setspeaker(ThyrsaCity_VintnerHouse_Name_Erigone)
+    msgbox(format("Look at your feet! Purple to the knee! That's how you know."))
+    setspeaker(ThyrsaCity_VintnerHouse_Name_Staphylos)
+    msgbox(format("Good vintage. Here, two jars. One for the god, one for you.\p"
+                  "Don't drink yours before you pour his. He notices."))
+    // ICHOR_STUB_OFFERINGS: giveitem(ITEM_WINE, 2) when the offering exists.
+    setflag(FLAG_DAILY_ICHOR_TREADING)
+    releaseall
+    end
+}
+
+script ThyrsaCity_VintnerHouse_EventScript_Erigone {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_VintnerHouse_Name_Erigone)
+    if (flag(FLAG_DAILY_ICHOR_TREADING)) {
+        msgbox(format("Your feet are still purple. Good. It wears off in a week."))
+    } else {
+        msgbox(format("Father says the god hates sandals. I think the god just likes feet."))
+    }
+    release
+}
+
+script ThyrsaCity_VintnerHouse_EventScript_Shrine {
+    msgbox(format("The family shrine of Dionysus: a little bronze panther on a marble altar,\l"
+                  "a cup of this year's wine in front of it."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_VintnerHouse_EventScript_Press {
+    msgbox(format("The great beam press. A cake of crushed grapes sits under its board, still dripping."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_VintnerHouse_EventScript_Vat {
+    msgbox(format("The vat sunk in the floor before the spout, dark with new must."), MSGBOX_SIGN)
+}
