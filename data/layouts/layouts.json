@@ -961,10 +961,10 @@
     {
       "id": "LAYOUT_STYX_FALLS_INN",
       "name": "StyxFalls_Inn_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 17,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_StyxRooms",
       "border_filepath": "data/layouts/StyxFalls_Inn/border.bin",
       "blockdata_filepath": "data/layouts/StyxFalls_Inn/map.bin",
       "layout_version": "emerald"
@@ -972,10 +972,10 @@
     {
       "id": "LAYOUT_STYX_FALLS_OATH_HOUSE",
       "name": "StyxFalls_OathHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 9,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_StyxRooms",
       "border_filepath": "data/layouts/StyxFalls_OathHouse/border.bin",
       "blockdata_filepath": "data/layouts/StyxFalls_OathHouse/map.bin",
       "layout_version": "emerald"
@@ -983,10 +983,10 @@
     {
       "id": "LAYOUT_STYX_FALLS_STONE_HOUSE",
       "name": "StyxFalls_StoneHouse_Layout",
-      "width": 10,
+      "width": 14,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_StyxRooms",
       "border_filepath": "data/layouts/StyxFalls_StoneHouse/border.bin",
       "blockdata_filepath": "data/layouts/StyxFalls_StoneHouse/map.bin",
       "layout_version": "emerald"
@@ -997,7 +997,7 @@
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_ArkadiaRooms",
       "border_filepath": "data/layouts/Arkadia_Asclepeion/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_Asclepeion/map.bin",
       "layout_version": "emerald"
@@ -1006,9 +1006,9 @@
       "id": "LAYOUT_ARKADIA_AGORA",
       "name": "Arkadia_Agora_Layout",
       "width": 13,
-      "height": 9,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_ArkadiaRooms",
       "border_filepath": "data/layouts/Arkadia_Agora/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_Agora/map.bin",
       "layout_version": "emerald"
@@ -1016,10 +1016,10 @@
     {
       "id": "LAYOUT_ARKADIA_NYKTIMOS_HALL",
       "name": "Arkadia_NyktimosHall_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 16,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ArkadiaHomes",
       "border_filepath": "data/layouts/Arkadia_NyktimosHall/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_NyktimosHall/map.bin",
       "layout_version": "emerald"
@@ -1027,10 +1027,10 @@
     {
       "id": "LAYOUT_ARKADIA_KLYMENE_HOUSE",
       "name": "Arkadia_KlymeneHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 11,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ArkadiaRooms",
       "border_filepath": "data/layouts/Arkadia_KlymeneHouse/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_KlymeneHouse/map.bin",
       "layout_version": "emerald"
@@ -1038,10 +1038,10 @@
     {
       "id": "LAYOUT_ARKADIA_CHARCOAL_HUT",
       "name": "Arkadia_CharcoalHut_Layout",
-      "width": 10,
+      "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ArkadiaHomes",
       "border_filepath": "data/layouts/Arkadia_CharcoalHut/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_CharcoalHut/map.bin",
       "layout_version": "emerald"
@@ -1049,10 +1049,10 @@
     {
       "id": "LAYOUT_ARKADIA_GOATHERD_HOUSE",
       "name": "Arkadia_GoatherdHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 14,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_ArkadiaHomes",
       "border_filepath": "data/layouts/Arkadia_GoatherdHouse/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_GoatherdHouse/map.bin",
       "layout_version": "emerald"

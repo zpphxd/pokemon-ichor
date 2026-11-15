@@ -1,1 +1,63 @@
+// Horkia's house, where the oaths sworn at the falls are kept (SCRIPT.md Part 2, Styx Falls
+// interiors). Room: tools/ichor/maps/arkrooms.py. Horkia (5,5) beside the table of the day's
+// oaths. Lore and a Cleanse Tag; after the Moon Laurel, one more thing about Kallisto's cup.
+// ICHOR_STUB_MUSIC: Styx Falls's own quiet cue.
+
 mapscripts StyxFalls_OathHouse_MapScripts {}
+
+text StyxFalls_OathHouse_Name_Horkia { "HORKIA" }
+
+script StyxFalls_OathHouse_EventScript_Horkia {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_OathHouse_Name_Horkia)
+    if (!flag(FLAG_ICHOR_GOT_CLEANSE_TAG)) {
+        msgbox(format("Every cup's an oath. Every name's somebody who swore on the water.\p"
+                      "When they keep it, they come back and take the cup home. Most do.\p"
+                      "A Lakonian king came up here once. Kleomenes.\p"
+                      "He wanted all Arkadia to swear.\p"
+                      "Swear to follow him. On the Styx. My great-great-grandmother said no.\p"
+                      "Arkadians don't swear easily. That's why it counts when we do.\p"
+                      "You walk the black water's road. Take this.\p"
+                      "The dead keep their distance from it."))
+        giveitem(ITEM_CLEANSE_TAG)
+        if (var(VAR_RESULT) == FALSE) {
+            setspeaker(StyxFalls_OathHouse_Name_Horkia)
+            msgbox(format("Your bag's full. Come back. The tag will wait. Everything here waits."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_CLEANSE_TAG)
+        release
+        end
+    }
+    if (flag(FLAG_BADGE05_GET)) {
+        msgbox(format("The Huntress's laurel. She came up here to swear, once. Years ago.\p"
+                      "Her cup's still on the shelf. She never came back for it.\p"
+                      "I don't read the linen. That's not my place. I just keep the cups."))
+        release
+        end
+    }
+    msgbox(format("Every cup's an oath. Every name's somebody who swore on the water.\p"
+                  "When they keep it, they come back and take the cup home. Most do."))
+    release
+}
+
+script StyxFalls_OathHouse_EventScript_Cups {
+    msgbox(format("Hoof-cups, dozens of them, each tied with a scrap of linen. A name is scratched on every scrap."),
+           MSGBOX_SIGN)
+}
+
+script StyxFalls_OathHouse_EventScript_CupsEast {
+    msgbox(format("More hoof-cups. Some of the linen is so old it has gone the color of the rock."),
+           MSGBOX_SIGN)
+}
+
+script StyxFalls_OathHouse_EventScript_Tablet {
+    msgbox(format("A wax tablet: today's oaths. Two lines. The wax under them is smooth and waiting."),
+           MSGBOX_SIGN)
+}
+
+script StyxFalls_OathHouse_EventScript_Lamp {
+    msgbox(format("A clay lamp in a niche in the cliff. It has never been put out."), MSGBOX_SIGN)
+}

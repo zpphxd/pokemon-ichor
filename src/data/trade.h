@@ -1246,6 +1246,26 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_GELASABLE
+    },
+    // Ichor: Hippothoos's little bear hates the smoke of his kiln; a Gelasable
+    // laughs the rats out of his charcoal sacks. She's named for Kallisto's boy.
+    // Personality 0x6E: female, Timid. ICHOR_STUB_AETHOS_DEX: both are stand-ins.
+    // SCRIPT.md says Lv 32; an in-game trade takes the level of the Gelasable given.
+    [INGAME_TRADE_ICHOR_ARKAS] =
+    {
+        .nickname = _("ARKAS"),
+        .species = SPECIES_ARKOBY,
+        .ivs = {22, 16, 18, 14, 20, 24},
+        .abilityNum = 0,
+        .otId = 51824,
+        .conditions = {5, 5, 30, 5, 5},
+        .personality = 0x6E,
+        .heldItem = ITEM_SMOKE_BALL,
+        .mailNum = -1,
+        .otName = _("HIPPOTH"),   // seven letters: the OT field holds no more
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_GELASABLE
     }
 };
 

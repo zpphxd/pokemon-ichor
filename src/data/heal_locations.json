@@ -31,6 +31,14 @@
       "y": 32,
       "respawn_map": "MAP_THYRSA_CITY_ASCLEPEION",
       "respawn_npc": "LOCALID_THYRSA_HEALER"
+    },
+    {
+      "id": "HEAL_LOCATION_ARKADIA",
+      "map": "MAP_ARKADIA",
+      "x": 24,
+      "y": 6,
+      "respawn_map": "MAP_ARKADIA_ASCLEPEION",
+      "respawn_npc": "LOCALID_ARKADIA_HEALER"
     }
   ]
 }
