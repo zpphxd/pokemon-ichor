@@ -13,6 +13,7 @@
 --
 -- Prints "TEMPLE ok ..." per check, "TEMPLE shot ..." per screenshot, and ends with
 -- "TEMPLE done"; any failure prints "TEMPLE FAIL: ..." first.
+-- SPRITE_REVIEW=1 also captures Ione's portrait/send-out sequence every 60 frames.
 
 local S = dofile("build/temple_trial/symbols.lua")
 local OUT = "build/temple_trial/"
@@ -390,7 +391,14 @@ local function ioneAndAfter()
     tap(K.A); wait(9)
     if now() - t0 > 6000 then fail("no battle with Ione") end
   end
-  wait(480)
+  if os.getenv("SPRITE_REVIEW") == "1" then
+    for i = 1, 8 do
+      wait(60)
+      shot(string.format("25_ione_intro_%02d.png", i))
+    end
+  else
+    wait(480)
+  end
   shot("25_ione_battle.png")
   while not inOverworld() do tap(K.A); wait(6) end
   expect(emu:read8(S.gBattleOutcome) == S.B_OUTCOME_WON, "beat Ione")

@@ -59,6 +59,9 @@ def _nest(p, cx, top, w, L=0, water=True):
 
 
 def halcyling(p, view, phase):
+    if not p.big:
+        _halcyling_small(p, view, phase)
+        return
     if view in ("front", "side", "icon"):
         L = 1 if (phase == 1 and view == "front") else 0
         hop = view == "side" and phase == 1
@@ -118,6 +121,75 @@ def halcyling(p, view, phase):
         return
 
 
+def _halcyling_small(p, view, phase):
+    """Native miniatures: the follower walks on feet, never in its nest."""
+    if view == "up":
+        rows = [
+            ".........22.....",
+            ".......2542.....",
+            ".....254442.....",
+            "....25544432....",
+            "...2554443332...",
+            "...2544433332...",
+            "....24433332....",
+            "...2444433332...",
+            "..254443333332..",
+            ".25444333333332.",
+            "..244333333332..",
+            "...2333333332...",
+            "....23333332....",
+            ".....222222.....",
+            ".....6....6.....",
+            "....666..666....",
+        ]
+    elif view == "down":
+        rows = [
+            "........22......",
+            "......2542......",
+            "....2554432.....",
+            "...255444332....",
+            "...241443132....",
+            "...21a141a132...",
+            "...2114411132...",
+            "....2aa1aa32....",
+            "...2889198732...",
+            "..248881887432..",
+            "..248876887432..",
+            "...2877777632...",
+            "....27777632....",
+            ".....266662.....",
+            ".....6....6.....",
+            "....666..666....",
+        ]
+    else:
+        rows = [
+            "..........22....",
+            "........2542....",
+            "......2554432...",
+            ".....255444332..",
+            ".....21a144332..",
+            ".....211144332..",
+            "..229222443332..",
+            "22222.2aa873332..",
+            "......aa8876332.",
+            ".....28888764432",
+            ".....28887765432",
+            "......2777634332",
+            ".......26663332.",
+            "........222222..",
+            "........6...6...",
+            ".......666.666..",
+        ]
+    rows = list(rows)
+    if phase:
+        rows[-2:] = [".....6....66....", "....666........."] if view in ("down", "up") else [
+            "........66......", "...........666.."]
+    x = (p.W - max(map(len, rows))) // 2
+    y = p.H - len(rows) - 1 - (phase if view == "icon" else 0)
+    legend = {format(i, "x"): name for i, name in enumerate(p.fig.pal.names) if i}
+    p.fig.patch(x, y, rows, legend)
+
+
 # --------------------------------------------------------------------------
 # Galenyon, the halcyon: Alcyone over the calm sea
 # --------------------------------------------------------------------------
@@ -144,7 +216,8 @@ GALENYON_SHINY = {
     "or0": (168, 104, 24), "or1": (232, 168, 40), "or2": (248, 216, 112),
 }
 
-g_blue = Mat(["bl0", "bl1", "bl2", "bl3"], line="bl0", cuts=[0.2, 0.42, 0.7])
+g_blue = Mat(["bl0", "bl1", "bl2", "bl3", "bl4"], outline="bl0", line="bl1",
+             cuts=[0.14, 0.34, 0.58, 0.82])
 g_breast = Mat(["or0", "or1", "or2"], line="or0", cuts=[0.36, 0.64])
 g_white = Mat(["wh0", "wh"], line="wh0", cuts=[0.6])
 g_beak = Mat(["beak", "beak2"], line="ink", cuts=[0.55])
@@ -152,46 +225,63 @@ g_water = Mat(["sea", "wh0", "wh"], line="sea", cuts=[0.3, 0.6])
 
 
 def galenyon(p, view, phase):
+    if not p.big:
+        _galenyon_small(p, view, phase)
+        return
     if view in ("front", "side", "icon"):
         up = phase == 1
-        # far wing, raised behind the head (the upstroke in frame 2)
         fw = 3 if up else 0
-        p.poly([(30, 22), (20, 12 - fw), (10, 8 - 2 * fw), (4, 10 - 2 * fw), (12, 16 - fw), (22, 24)],
-               g_blue, bias=0.2, group=1)
-        # fanned tail
-        for a, b in (((44, 30), (56, 22)), ((44, 31), (58, 27)), ((44, 32), (57, 32))):
-            p.lens(a, b, 4, g_blue, bias=0.1, group=2)
-        # body: sleek, orange breast
-        p.blob(34, 31, 11, 6.4, g_blue, ang=-12, group=3)
-        p.blob(32, 34, 9, 4, g_breast, ang=-12, group=4)
-        # head, crest swept back
-        p.lens((22, 20), (34, 15), 4.4, g_blue, bend=0.8, group=5)
-        p.lens((24, 22), (35, 20), 3.6, g_blue, bend=0.4, group=5)
-        p.blob(22, 24, 6.6, 6, g_blue, group=6)
-        p.blob(20, 28.5, 3.8, 2.2, g_white, group=7)
-        # the spear beak
-        p.poly([(16.5, 23), (2, 29), (16.5, 27)], g_beak, group=8)
-        # near wing: a wide downstroke over the water
-        p.poly([(30, 29), (42, 33 + fw), (52, 38 + fw), (60, 44 + fw), (54, 45 + fw), (42, 41), (32, 36)],
-               g_blue, group=9)
-        # the calm water, reflecting the breast
+        p.poly([(29, 27), (24, 21), (16, 15 - fw), (7, 12 - fw),
+                (9, 16 - fw), (14, 19), (10, 18), (13, 22), (19, 24),
+                (15, 24), (20, 27), (27, 30)], g_blue, bias=0.2, group=1, noline=True)
+        for a, b, w in (((40, 34), (53, 23), 4.5),
+                        ((42, 35), (56, 29), 4), ((43, 36), (54, 35), 3)):
+            p.lens(a, b, w, g_blue, bias=0.12, group=2, noline=True)
+        p.blob(34, 34, 11, 5.5, g_blue, ang=-18, group=3, noline=True)
+        p.blob(30, 37, 7.5, 3.5, g_breast, ang=-16, group=4, noline=True)
+        p.lens((25, 25), (34, 20), 3.5, g_blue, bend=0.8, group=5, noline=True)
+        p.lens((26, 26), (34, 25), 2.5, g_blue, group=5, noline=True)
+        p.blob(23, 28, 5.5, 5, g_blue, group=6, noline=True)
+        p.blob(22, 32, 3.3, 1.8, g_white, group=7, noline=True)
+        p.poly([(18, 27), (5, 31), (18, 30)], g_beak, group=8, noline=True)
+        p.poly([(31, 31), (36, 32), (43, 37 + fw), (51, 42 + fw),
+                (57, 46 + fw), (53, 47 + fw), (48, 44 + fw), (50, 48 + fw),
+                (46, 47 + fw), (42, 43), (44, 48), (40, 45), (37, 39),
+                (35, 43), (32, 39), (29, 35)], g_blue, group=9, noline=True)
         if view != "side":
-            p.rect(14, 53, 50, 53, g_water, flat=2, nooutline=True)
-            p.rect(18, 54, 46, 55, g_water, flat=1, nooutline=True)
-            p.rect(26, 54, 36, 55, g_breast, flat=1, nooutline=True)
-        if p.big:
-            p.eye(20, 21, 3, 4, shine="wh")
-            p.px(23, 23, "gold")
-        else:
-            p.px(21, 23, "ink")
+            p.rect(17, 54, 47, 54, g_water, flat=2, nooutline=True)
+            p.rect(22, 55, 43, 55, g_water, flat=0, nooutline=True)
+            p.rect(28, 55, 35, 55, g_breast, flat=1, nooutline=True)
+        p.patch(20, 25, ["ccc", "c1c", "b1c", "cc."],
+                {"c": "gold", "1": "ink", "b": "wh"})
+        p.stroke([(7, 31), (17, 30)], "beak")
+        p.stroke([(14, 17 - fw), (24, 25)], "bl3")
+        p.stroke([(36, 35), (45, 42 + fw)], "bl4")
+        p.stroke([(35, 37), (39, 42)], "bl1")
+        p.stroke([(41, 38 + fw), (49, 44 + fw)], "bl3")
+        p.pxs([(27, 34), (28, 34), (30, 36)], "or2")
         return
 
     if view == "back":
-        p.poly([(30, 40), (12, 26), (2, 22), (4, 30), (18, 44)], g_blue, group=1)
-        p.poly([(34, 40), (52, 26), (62, 22), (60, 30), (46, 44)], g_blue, group=1)
-        p.blob(32, 56, 12, 14, g_blue, group=3)
-        p.blob(34, 30, 8, 7.4, g_blue, group=6)
-        p.poly([(41, 29), (61, 34), (41, 33)], g_beak, group=8)
+        p.poly([(31, 43), (21, 33), (11, 24), (4, 20), (6, 25),
+                (12, 31), (8, 29), (11, 34), (17, 38), (14, 37),
+                (18, 42), (27, 48)], g_blue, group=1, bias=0.2, noline=True)
+        p.poly([(34, 45), (40, 40), (47, 35), (54, 29), (60, 25),
+                (57, 32), (52, 38), (55, 36), (51, 42), (46, 44),
+                (48, 44), (43, 48), (35, 51)], g_blue, group=2, noline=True)
+        p.blob(30, 60, 11.5, 16, g_blue, group=3, noline=True)
+        p.limb([(32, 47), (35, 41), (37, 37)], 10, 8, g_blue, group=3, noline=True)
+        p.lens((34, 28), (26, 21), 3.5, g_blue, group=6, noline=True)
+        p.blob(37, 33, 6.5, 6, g_blue, group=6, noline=True)
+        p.blob(41, 38, 3, 1.5, g_white, group=7, noline=True)
+        p.poly([(43, 32), (58, 37), (43, 36)], g_beak, group=8, noline=True)
+        p.patch(39, 30, ["ccc", "c1c", "c1b", ".cc"],
+                {"c": "gold", "1": "ink", "b": "wh"})
+        p.stroke([(10, 29), (26, 43)], "bl4")
+        p.stroke([(39, 45), (53, 34)], "bl4")
+        p.stroke([(24, 50), (28, 59)], "bl3")
+        p.stroke([(36, 49), (34, 61)], "bl1")
+        p.stroke([(44, 36), (55, 37)], "beak")
         return
 
     if view in ("down", "up"):
@@ -206,6 +296,84 @@ def galenyon(p, view, phase):
             p.eye(27, 26, 2, 3, shine="wh")
             p.eye(35, 26, 2, 3, shine="wh")
         return
+
+
+def _galenyon_small(p, view, phase):
+    if view == "up":
+        rows = [
+            "..........22............",
+            "..........2452..........",
+            ".........2544432........",
+            ".........2544432........",
+            ".........2444332........",
+            "..22......24332.....22..",
+            ".24522....24432...22542.",
+            "..24554222544332255442..",
+            "...244554455443554432...",
+            "....2244565444564322....",
+            ".......2244433322.......",
+            ".........243332.........",
+            ".........233332.........",
+            "..........2332..........",
+            "...........22...........",
+        ]
+    elif view == "down":
+        rows = [
+            ".............22.........",
+            "...........2542.........",
+            ".........2554432........",
+            ".........2c14c32........",
+            ".........2b11b32........",
+            "..........ab1ba.........",
+            "..22.....299d9932...22..",
+            ".24522..2499d9943225542.",
+            "..24554224998994455442..",
+            "...244554988879544432...",
+            "....2244548887454322....",
+            ".......2248873322.......",
+            ".........277772.........",
+            "..........2772..........",
+            "...........22...........",
+        ]
+    else:
+        rows = [
+            "...22...................",
+            "...24522................",
+            "....2455422.....22......",
+            ".....2445542..2542......",
+            "......2245542254432.....",
+            ".........22555c1332.....",
+            "...........244b1332.....",
+            "......ddeee22243332...22",
+            "...ddddd2222.bb9883225442",
+            ".............b9987544432",
+            "..............287654432.",
+            "...............2454432..",
+            "................2444332.",
+            ".................2332332",
+            "..................22.22.",
+        ]
+    rows = list(rows)
+    if phase:
+        if view in ("down", "up"):
+            rows[4] = ".22" + rows[4][3:21] + "22."
+            rows[5] = "2542" + rows[5][4:20] + "2452"
+            rows[6] = ".25422" + rows[6][6:18] + "22452."
+            rows[7] = "..245542" + rows[7][8:16] + "2455442."
+            rows[8] = "...22442" + rows[8][8:16] + "24422..."
+            rows[9] = ".....222" + rows[9][8:16] + "222....."
+            rows[10] = "........" + rows[10][8:16] + "........"
+        else:
+            rows[9:] = [
+                ".............b9987545542",
+                "..............2876555442",
+                "...............24444432.",
+                "................233332..",
+                ".................2332232",
+                "..................22.22.",
+            ]
+    legend = {format(i, "x"): name for i, name in enumerate(p.fig.pal.names) if i}
+    p.fig.patch((p.W - max(map(len, rows))) // 2, p.H - len(rows) - 1, rows, legend)
 
 
 MONS = [

@@ -76,6 +76,31 @@ Greek now covers everything the slice shows except the few items below: all 15 s
 
 ## 1. Overworld
 
+### Route 1 / Akti native redraw coverage
+
+The second town-scoped polish pass covers **KallisteRoute1,
+KallisteRoute1_KronionHill, AktiTown**, and all six implemented Akti interiors:
+**TempleOfHestia, Asclepeion, Agora, FishersHouse, DiversHouse and
+GoatherdsHouse**. The older **Greek** labels below record conversion, not approval
+of this new native-art pass.
+
+Map objects, all encounter periods and the referenced trainer parties establish
+20 directly used species. Their complete evolution families contain 43 species.
+Elaia owns the polished **Eripip** and **Galekit**, not their later stages.
+
+| Coverage | Native redraw status |
+|---|---|
+| Halcyling, Galenyon | New matched native battle fronts, backs, six follower frames and two menu-icon frames implemented from `tools/dex/sprites/lines/halcyon.py` and its six hand-finished art grids. Existing normal/shiny color identities, palette files and bird footprints retained deliberately. Creative and matched in-game review still pending. |
+| Ione, Titan Grunt | Native three-quarter portraits and all nine walker states redrawn in `sprites_trainers.py` and `sprites_npc.py`. Their existing portrait and shared cast palettes retained unchanged. Creative and matched in-game review still pending. |
+| Eopeep, Alekrow, Hoplektor; Kerazap, Kerastorm; Harpeck, Harpelle; Epopoi, Lophops, Basilops; Karkipool, Karkitox; Ketofry, Kynoketos; Melibee, Melisseer; Onotis, Midonos; Ergant, Hoplomex; Narthip, Promethex; Nemecub, Nemeleon; Elaleaf, Elapling, Hierolive; Spalunk, Plouteras; Kampillar, Nymveil, Psychora; Pebblith, Cairnolith, Laolith; Narkeray; Chelonet, Chelyra; Gelasable | Still awaiting this batch's native polish; existing sprites retained, not claimed redrawn. This includes species used only by the local trainers. |
+| Theo, Ianthe, Kleon, Alethea, Melitta; shared folk already polished in Elaia; pickups and starter kraters; Elaia's five contact effects | Inherit the first town batch after its serial integration. Do not regenerate these from the older base. |
+| Other local folk and class portraits; Kronion tablet; two upturned-boat halves; local healing effects and emotes | Existing assets retained for now; local polish/review still outstanding. The boat is an object sprite even though its original source derives from tile artwork. |
+| Tiles, animated metatiles, battle backgrounds, UI, weather and move animations | Retained explicitly; not part of a native creature/character/object sprite redraw claim. Temple braziers and hearth-trial changes are metatiles, not object sprites. |
+
+The town batch is **not complete**. Full shared regeneration and final ROM
+evidence must follow integration of Elaia's landed polish so its assets are not
+reverted. Greek god ball art has separate ownership and is excluded here.
+
 | Item | Where | Status | Phase | Notes |
 |---|---|---|---|---|
 | Outdoor primary tileset `aethos` | `data/tilesets/primary/aethos/`, `porytiles/tilesets/gTileset_Aethos/`, `tools/ichor/art/aethos_*.py`, `design/phase1/TILES_aethos.md` | Greek | 1 | Replaces `general`: olives, cypress, limestone, Aegean, Asclepeion and Agora exteriors. Elaia, Route 1, Kronion Hill and Akti use it. 18 free tile slots. |

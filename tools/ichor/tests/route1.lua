@@ -14,6 +14,7 @@
 --
 -- Prints "ROUTE1 ok ..." per check and "ROUTE1 shot ..." per screenshot, and
 -- ends with "ROUTE1 done"; any failure prints "ROUTE1 FAIL: ..." first.
+-- SPRITE_REVIEW=1 also captures the trainer/send-out sequence every 60 frames.
 
 local S = dofile("build/test_route1/symbols.lua")
 local OUT = os.getenv("ROUTE1_OUT") or "build/test_route1/"
@@ -145,7 +146,14 @@ local function battle(name, trainer)
     tap(K.A); wait(9)
     if now() - t0 > 4000 then fail("no battle for " .. name) end
   end
-  wait(480)  -- the intro plays itself; the action menu then waits for input
+  if os.getenv("SPRITE_REVIEW") == "1" then
+    for i = 1, 8 do
+      wait(60)
+      shot(string.format("%s_intro_%02d.png", name, i))
+    end
+  else
+    wait(480)
+  end
   shot(name .. ".png")
   t0 = now()
   while not inOverworld() do
