@@ -1724,6 +1724,38 @@
 #define ICHOR_GIFT_HIEROPHANT                   3
 #define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_EMBLEM_GATE                  (FLAG_ICHOR_GENERAL_START + 0x3C0) // Ichor: Periodos: Gate Emblem, Hektor (Troad). The ten Emblems stay contiguous for Ichor_CountFlags
+#define FLAG_ICHOR_EMBLEM_LION                  (FLAG_ICHOR_GENERAL_START + 0x3C1) // Ichor: Periodos: Lion Emblem, Croesus (Lydia)
+#define FLAG_ICHOR_EMBLEM_FLEECE                (FLAG_ICHOR_GENERAL_START + 0x3C2) // Ichor: Periodos: Fleece Emblem, Medea (Black Sea)
+#define FLAG_ICHOR_EMBLEM_ARROW                 (FLAG_ICHOR_GENERAL_START + 0x3C3) // Ichor: Periodos: Arrow Emblem, Abaris (North)
+#define FLAG_ICHOR_EMBLEM_SCARAB                (FLAG_ICHOR_GENERAL_START + 0x3C4) // Ichor: Periodos: Scarab Emblem, Proteus (Egypt)
+#define FLAG_ICHOR_EMBLEM_DAWN                  (FLAG_ICHOR_GENERAL_START + 0x3C5) // Ichor: Periodos: Dawn Emblem, Memnon (Aithiopia)
+#define FLAG_ICHOR_EMBLEM_SILPHIUM              (FLAG_ICHOR_GENERAL_START + 0x3C6) // Ichor: Periodos: Silphium Emblem, Kyrene (Libya)
+#define FLAG_ICHOR_EMBLEM_SILVER                (FLAG_ICHOR_GENERAL_START + 0x3C7) // Ichor: Periodos: Silver Emblem, Arganthonios (Far West)
+#define FLAG_ICHOR_EMBLEM_TRIPOD                (FLAG_ICHOR_GENERAL_START + 0x3C8) // Ichor: Periodos: Tripod Emblem, Milo (Western Sea)
+#define FLAG_ICHOR_EMBLEM_ROSE                  (FLAG_ICHOR_GENERAL_START + 0x3C9) // Ichor: Periodos: Rose Emblem, Rhadamanthys (Okeanos)
+#define FLAG_ICHOR_PRIZE_GATE                   (FLAG_ICHOR_GENERAL_START + 0x3CA) // Ichor: Periodos: Hektor's TM and Rocky Helmet given
+#define FLAG_ICHOR_PRIZE_LION                   (FLAG_ICHOR_GENERAL_START + 0x3CB) // Ichor: Periodos: Croesus's prize given
+#define FLAG_ICHOR_PRIZE_FLEECE                 (FLAG_ICHOR_GENERAL_START + 0x3CC) // Ichor: Periodos: Medea's prize given
+#define FLAG_ICHOR_PRIZE_ARROW                  (FLAG_ICHOR_GENERAL_START + 0x3CD) // Ichor: Periodos: Abaris's prize given
+#define FLAG_ICHOR_PRIZE_SCARAB                 (FLAG_ICHOR_GENERAL_START + 0x3CE) // Ichor: Periodos: Proteus's prize given
+#define FLAG_ICHOR_PRIZE_DAWN                   (FLAG_ICHOR_GENERAL_START + 0x3CF) // Ichor: Periodos: Memnon's prize given
+#define FLAG_ICHOR_PRIZE_SILPHIUM               (FLAG_ICHOR_GENERAL_START + 0x3D0) // Ichor: Periodos: Kyrene's prize given
+#define FLAG_ICHOR_PRIZE_SILVER                 (FLAG_ICHOR_GENERAL_START + 0x3D1) // Ichor: Periodos: Arganthonios's prize given
+#define FLAG_ICHOR_PRIZE_TRIPOD                 (FLAG_ICHOR_GENERAL_START + 0x3D2) // Ichor: Periodos: Milo's prize given (the calf, LEGENDS 4.16)
+#define FLAG_ICHOR_PRIZE_ROSE                   (FLAG_ICHOR_GENERAL_START + 0x3D3) // Ichor: Periodos: Rhadamanthys's prize given
+#define FLAG_ICHOR_SHORTCUT_GATE                (FLAG_ICHOR_GENERAL_START + 0x3D4) // Ichor: Periodos: Skaian Gate trapdoor and ladder unbarred
+#define FLAG_ICHOR_SHORTCUT_LION                (FLAG_ICHOR_GENERAL_START + 0x3D5) // Ichor: Periodos: treasury midpoint shortcut open
+#define FLAG_ICHOR_SHORTCUT_FLEECE              (FLAG_ICHOR_GENERAL_START + 0x3D6) // Ichor: Periodos: Aietes's palace midpoint shortcut open
+#define FLAG_ICHOR_SHORTCUT_ARROW               (FLAG_ICHOR_GENERAL_START + 0x3D7) // Ichor: Periodos: round temple midpoint shortcut open
+#define FLAG_ICHOR_SHORTCUT_SCARAB              (FLAG_ICHOR_GENERAL_START + 0x3D8) // Ichor: Periodos: precinct of Proteus midpoint shortcut open
+#define FLAG_ICHOR_SHORTCUT_DAWN                (FLAG_ICHOR_GENERAL_START + 0x3D9) // Ichor: Periodos: bath-court midpoint shortcut open
+#define FLAG_ICHOR_SHORTCUT_SILPHIUM            (FLAG_ICHOR_GENERAL_START + 0x3DA) // Ichor: Periodos: hippodrome midpoint shortcut open
+#define FLAG_ICHOR_SHORTCUT_SILVER              (FLAG_ICHOR_GENERAL_START + 0x3DB) // Ichor: Periodos: royal gallery midpoint shortcut open
+#define FLAG_ICHOR_SHORTCUT_TRIPOD              (FLAG_ICHOR_GENERAL_START + 0x3DC) // Ichor: Periodos: palaestra midpoint shortcut open
+#define FLAG_ICHOR_SHORTCUT_ROSE                (FLAG_ICHOR_GENERAL_START + 0x3DD) // Ichor: Periodos: tower of Kronos midpoint shortcut open
+#define FLAG_ICHOR_OIKOUMENE_ARRIVED            (FLAG_ICHOR_GENERAL_START + 0x3DE) // Ichor: Oikoumene: first landed at any Oikoumene port (Alethea's quay scene; the AETHOS and THE OIKOUMENE fly targets)
+#define FLAG_ICHOR_SUPER_ROD_GIVEN              (FLAG_ICHOR_GENERAL_START + 0x3DF) // Ichor: Oikoumene: a first-port fisher gave the Super Rod (the others give a Big Pearl)
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end

@@ -3,7 +3,11 @@
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorDynamic",
     "gMapGroup_SpecialArea",
-    "gMapGroup_IndoorKalliste"
+    "gMapGroup_IndoorKalliste",
+    "gMapGroup_Oikoumene",
+    "gMapGroup_IndoorTroad",
+    "gMapGroup_IndoorEgypt",
+    "gMapGroup_IndoorPontos"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -53,5 +57,57 @@
     "ElaiaVillage_BakersHouse",
     "AktiTown_DiversHouse",
     "AktiTown_GoatherdsHouse"
+  ],
+  "gMapGroup_Oikoumene": [
+    "Sestos",
+    "Hellespont",
+    "Ilion",
+    "Naukratis",
+    "Pharos",
+    "DeltaReeds",
+    "Memphis",
+    "Bosporus",
+    "Salmydessos",
+    "PonticCoast",
+    "Aia"
+  ],
+  "gMapGroup_IndoorTroad": [
+    "Sestos_Asclepeion",
+    "Sestos_Agora",
+    "Sestos_HerosTower",
+    "Sestos_FerryHouse",
+    "Sestos_NetLoft",
+    "Ilion_Asclepeion",
+    "Ilion_Agora",
+    "Ilion_PriamsPalace",
+    "Ilion_CassandrasRoom",
+    "Ilion_GuestRoom",
+    "Ilion_HorseStable",
+    "Ilion_MasonsHouse",
+    "Ilion_WeaversHouse",
+    "Ilion_TempleOfAthena"
+  ],
+  "gMapGroup_IndoorEgypt": [
+    "Naukratis_Asclepeion",
+    "Naukratis_Agora",
+    "Naukratis_FieldStation",
+    "Naukratis_EggOvens",
+    "Naukratis_IncenseShop",
+    "Naukratis_PottersHouse",
+    "Naukratis_NetLoft",
+    "Memphis_Asclepeion",
+    "Memphis_Agora",
+    "Memphis_ApisStable",
+    "Memphis_ScribesHouse",
+    "Memphis_EmbalmersHouse"
+  ],
+  "gMapGroup_IndoorPontos": [
+    "Salmydessos_PhineussHouse",
+    "Salmydessos_BirdCatchersHouse",
+    "Aia_Asclepeion",
+    "Aia_Agora",
+    "Aia_PhrixosSonsHouse",
+    "Aia_LinenWeaversHouse",
+    "Aia_PalaceWorkshop"
   ]
 }

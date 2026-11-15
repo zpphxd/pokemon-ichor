@@ -1,154 +1,202 @@
 {
   "map_sections": [
     {
-      "id": "MAPSEC_OIKOUMENE_00"
+      "id": "MAPSEC_AETHOS",
+      "name": "AETHOS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_01"
+      "id": "MAPSEC_SESTOS",
+      "name": "SESTOS"
     },
     {
       "id": "MAPSEC_OIKOUMENE_02"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_03"
+      "id": "MAPSEC_HELLESPONT",
+      "name": "THE HELLESPONT"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_04"
+      "id": "MAPSEC_ILION",
+      "name": "ILION"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_05"
+      "id": "MAPSEC_SKAMANDER_PLAIN",
+      "name": "SKAMANDER PLAIN"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_06"
+      "id": "MAPSEC_IDA_ROAD",
+      "name": "THE IDA ROAD"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_07"
+      "id": "MAPSEC_GARGAROS_PEAK",
+      "name": "GARGAROS PEAK"
     },
     {
       "id": "MAPSEC_OIKOUMENE_08"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_09"
+      "id": "MAPSEC_WALLS_OF_LAOMEDON",
+      "name": "LAOMEDON'S WALLS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_10"
+      "id": "MAPSEC_CHRYSE",
+      "name": "CHRYSE"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_11"
+      "id": "MAPSEC_HEBROS_SHORE",
+      "name": "HEBROS SHORE"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_12"
+      "id": "MAPSEC_ABDERA",
+      "name": "ABDERA"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_13"
+      "id": "MAPSEC_BISTONIAN_PLAIN",
+      "name": "BISTONIAN PLAIN"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_14"
+      "id": "MAPSEC_NAUKRATIS",
+      "name": "NAUKRATIS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_15"
+      "id": "MAPSEC_DELTA_REEDS",
+      "name": "THE DELTA REEDS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_16"
+      "id": "MAPSEC_PHAROS",
+      "name": "PHAROS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_17"
+      "id": "MAPSEC_MEMPHIS",
+      "name": "MEMPHIS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_18"
+      "id": "MAPSEC_PYRAMID_FIELD",
+      "name": "PYRAMID FIELD"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_19"
+      "id": "MAPSEC_GREAT_PYRAMID",
+      "name": "GREAT PYRAMID"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_20"
+      "id": "MAPSEC_NILE",
+      "name": "THE NILE"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_21"
+      "id": "MAPSEC_HELIOPOLIS",
+      "name": "HELIOPOLIS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_22"
+      "id": "MAPSEC_LAKE_MOERIS",
+      "name": "LAKE MOERIS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_23"
+      "id": "MAPSEC_VALLEY_OF_TOMBS",
+      "name": "VALLEY OF TOMBS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_24"
+      "id": "MAPSEC_HEKATOMPYLOS",
+      "name": "HEKATOMPYLOS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_25"
+      "id": "MAPSEC_ELEPHANTINE",
+      "name": "ELEPHANTINE"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_26"
+      "id": "MAPSEC_ABYDOS",
+      "name": "ABYDOS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_27"
+      "id": "MAPSEC_BOSPORUS",
+      "name": "THE BOSPORUS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_28"
+      "id": "MAPSEC_SALMYDESSOS",
+      "name": "SALMYDESSOS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_29"
+      "id": "MAPSEC_PONTIC_COAST",
+      "name": "PONTIC COAST"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_30"
+      "id": "MAPSEC_THEMISKYRA",
+      "name": "THEMISKYRA"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_31"
+      "id": "MAPSEC_THERMODON_ROAD",
+      "name": "THERMODON ROAD"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_32"
+      "id": "MAPSEC_AIA",
+      "name": "AIA"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_33"
+      "id": "MAPSEC_PHASIS",
+      "name": "THE PHASIS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_34"
+      "id": "MAPSEC_FIELD_OF_ARES",
+      "name": "FIELD OF ARES"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_35"
+      "id": "MAPSEC_GROVE_OF_ARES",
+      "name": "GROVE OF ARES"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_36"
+      "id": "MAPSEC_LEUKE",
+      "name": "LEUKE"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_37"
+      "id": "MAPSEC_ISLE_OF_ARES",
+      "name": "ISLE OF ARES"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_38"
+      "id": "MAPSEC_CAUCASUS",
+      "name": "THE CAUCASUS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_39"
+      "id": "MAPSEC_CHALYBIA",
+      "name": "CHALYBIA"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_40"
+      "id": "MAPSEC_ROYAL_ROAD",
+      "name": "THE ROYAL ROAD"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_41"
+      "id": "MAPSEC_SARDIS",
+      "name": "SARDIS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_42"
+      "id": "MAPSEC_PACTOLUS_SANDS",
+      "name": "PACTOLUS SANDS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_43"
+      "id": "MAPSEC_MOUNT_TMOLUS",
+      "name": "MOUNT TMOLUS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_44"
+      "id": "MAPSEC_HYPAIPA",
+      "name": "HYPAIPA"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_45"
+      "id": "MAPSEC_MAEANDER",
+      "name": "THE MAEANDER"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_46"
+      "id": "MAPSEC_MILETOS",
+      "name": "MILETOS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_47"
+      "id": "MAPSEC_MOUNT_LATMOS",
+      "name": "MOUNT LATMOS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_48"
+      "id": "MAPSEC_CHASM_OF_GYGES",
+      "name": "CHASM OF GYGES"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_49"
+      "id": "MAPSEC_GORDION",
+      "name": "GORDION"
     },
     {
       "id": "MAPSEC_OIKOUMENE_50"
@@ -166,10 +214,12 @@
       "id": "MAPSEC_OIKOUMENE_54"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_55"
+      "id": "MAPSEC_MOUNT_SIPYLOS",
+      "name": "MOUNT SIPYLOS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_56"
+      "id": "MAPSEC_AMMONION",
+      "name": "AMMONION"
     },
     {
       "id": "MAPSEC_OIKOUMENE_57"
@@ -186,19 +236,24 @@
       "id": "MAPSEC_OIKOUMENE_59"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_60"
+      "id": "MAPSEC_SAND_SEA",
+      "name": "GREAT SAND SEA"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_61"
+      "id": "MAPSEC_KYRENE",
+      "name": "KYRENE"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_62"
+      "id": "MAPSEC_SILPHIUM_PLATEAU",
+      "name": "SILPHIUM PLATEAU"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_63"
+      "id": "MAPSEC_TRITONIS",
+      "name": "TRITONIS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_64"
+      "id": "MAPSEC_SYRTIS",
+      "name": "SYRTIS SHALLOWS"
     },
     {
       "id": "MAPSEC_OIKOUMENE_65"
@@ -207,7 +262,8 @@
       "id": "MAPSEC_OIKOUMENE_66"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_67"
+      "id": "MAPSEC_SALT_RIDGE",
+      "name": "THE SALT RIDGE"
     },
     {
       "id": "MAPSEC_OIKOUMENE_68"
@@ -216,43 +272,54 @@
       "id": "MAPSEC_OIKOUMENE_69"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_70"
+      "id": "MAPSEC_ANTAEUS_RING",
+      "name": "ANTAEUS'S RING"
     },
     {
       "id": "MAPSEC_OIKOUMENE_71"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_72"
+      "id": "MAPSEC_GARAMANTES_TUNNELS",
+      "name": "GARAMANTES"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_73"
+      "id": "MAPSEC_GLASS_CRATER",
+      "name": "GLASS CRATER"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_74"
+      "id": "MAPSEC_OLBIA",
+      "name": "OLBIA"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_75"
+      "id": "MAPSEC_STEPPE_ROAD",
+      "name": "THE STEPPE ROAD"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_76"
+      "id": "MAPSEC_LAKE_MAEOTIS",
+      "name": "LAKE MAEOTIS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_77"
+      "id": "MAPSEC_FEATHER_WASTES",
+      "name": "FEATHER WASTES"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_78"
+      "id": "MAPSEC_ARIMASPIAN_HEIGHTS",
+      "name": "ARIMASPI HEIGHTS"
     },
     {
       "id": "MAPSEC_OIKOUMENE_79"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_80"
+      "id": "MAPSEC_RHIPAEAN_PASS",
+      "name": "RHIPAEAN PASS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_81"
+      "id": "MAPSEC_CAVE_OF_BOREAS",
+      "name": "CAVE OF BOREAS"
     },
     {
-      "id": "MAPSEC_OIKOUMENE_82"
+      "id": "MAPSEC_HYPERBOREA",
+      "name": "HYPERBOREA"
     },
     {
       "id": "MAPSEC_OIKOUMENE_83"
@@ -679,333 +746,168 @@
       "height": 1
     },
     {
-      "id": "MAPSEC_SEAFOAM_ISLANDS",
-      "name": "SEAFOAM ISLANDS",
-      "x": 8,
-      "y": 14,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_THE_OIKOUMENE",
+      "name": "THE OIKOUMENE"
     },
     {
-      "id": "MAPSEC_POKEMON_TOWER",
-      "name": "POKéMON TOWER",
-      "x": 18,
-      "y": 6,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_CATARACTS",
+      "name": "THE CATARACTS"
     },
     {
-      "id": "MAPSEC_CERULEAN_CAVE",
-      "name": "CERULEAN CAVE",
-      "x": 13,
-      "y": 3,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_MEROE",
+      "name": "MEROE"
     },
     {
-      "id": "MAPSEC_POWER_PLANT",
-      "name": "POWER PLANT",
-      "x": 18,
-      "y": 4,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_TABLE_OF_THE_SUN",
+      "name": "TABLE OF THE SUN"
     },
     {
-      "id": "MAPSEC_ONE_ISLAND",
-      "name": "ONE ISLAND",
-      "x": 1,
-      "y": 8,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_MOUNT_NYSA",
+      "name": "MOUNT NYSA"
     },
     {
-      "id": "MAPSEC_TWO_ISLAND",
-      "name": "TWO ISLAND",
-      "x": 9,
-      "y": 9,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_MOUNTAINS_OF_THE_MOON",
+      "name": "MOON MOUNTAINS"
     },
     {
-      "id": "MAPSEC_THREE_ISLAND",
-      "name": "THREE ISLAND",
-      "x": 18,
-      "y": 12,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_PYGMY_MARSHES",
+      "name": "PYGMY MARSHES"
     },
     {
-      "id": "MAPSEC_FOUR_ISLAND",
-      "name": "FOUR ISLAND",
-      "x": 3,
-      "y": 4,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_GATE_OF_DAWN",
+      "name": "GATE OF DAWN"
     },
     {
-      "id": "MAPSEC_FIVE_ISLAND",
-      "name": "FIVE ISLAND",
-      "x": 16,
-      "y": 11,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_PILLARS",
+      "name": "THE PILLARS"
     },
     {
-      "id": "MAPSEC_SEVEN_ISLAND",
-      "name": "SEVEN ISLAND",
-      "x": 5,
-      "y": 8,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_OCEAN_STREAM",
+      "name": "OCEAN STREAM"
     },
     {
-      "id": "MAPSEC_SIX_ISLAND",
-      "name": "SIX ISLAND",
-      "x": 17,
-      "y": 5,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_ERYTHEIA",
+      "name": "ERYTHEIA"
     },
     {
-      "id": "MAPSEC_KINDLE_ROAD",
-      "name": "KINDLE ROAD",
-      "x": 2,
-      "y": 3,
-      "width": 1,
-      "height": 6
+      "id": "MAPSEC_HESPERIDES",
+      "name": "THE HESPERIDES"
     },
     {
-      "id": "MAPSEC_TREASURE_BEACH",
-      "name": "TREASURE BEACH",
-      "x": 1,
-      "y": 9,
-      "width": 1,
-      "height": 2
+      "id": "MAPSEC_ATLAS_RIDGE",
+      "name": "ATLAS'S RIDGE"
     },
     {
-      "id": "MAPSEC_CAPE_BRINK",
-      "name": "CAPE BRINK",
-      "x": 9,
-      "y": 7,
-      "width": 1,
-      "height": 2
+      "id": "MAPSEC_GADEIRA",
+      "name": "GADEIRA"
     },
     {
-      "id": "MAPSEC_BOND_BRIDGE",
-      "name": "BOND BRIDGE",
-      "x": 13,
-      "y": 12,
-      "width": 4,
-      "height": 1
+      "id": "MAPSEC_TARTESSOS",
+      "name": "TARTESSOS"
     },
     {
-      "id": "MAPSEC_THREE_ISLE_PORT",
-      "name": "THREE ISLE PORT",
-      "x": 18,
-      "y": 13,
-      "width": 2,
-      "height": 1
+      "id": "MAPSEC_ATARANTES",
+      "name": "THE ATARANTES"
     },
     {
-      "id": "MAPSEC_RESORT_GORGEOUS",
-      "name": "RESORT GORGEOUS",
-      "x": 16,
-      "y": 9,
-      "width": 3,
-      "height": 1
+      "id": "MAPSEC_ATLANTIC_SHORE",
+      "name": "ATLANTIC SHORE"
     },
     {
-      "id": "MAPSEC_WATER_LABYRINTH",
-      "name": "WATER LABYRINTH",
-      "x": 14,
-      "y": 10,
-      "width": 3,
-      "height": 1
+      "id": "MAPSEC_ATLAS_RANGE",
+      "name": "ATLAS RANGE"
     },
     {
-      "id": "MAPSEC_FIVE_ISLE_MEADOW",
-      "name": "FIVE ISLE MEADOW",
-      "x": 17,
-      "y": 10,
-      "width": 1,
-      "height": 3
+      "id": "MAPSEC_WINE_DARK_SEA",
+      "name": "WINE-DARK SEA"
     },
     {
-      "id": "MAPSEC_MEMORIAL_PILLAR",
-      "name": "MEMORIAL PILLAR",
-      "x": 18,
-      "y": 12,
-      "width": 1,
-      "height": 3
+      "id": "MAPSEC_OUTER_SEA",
+      "name": "THE OUTER SEA"
     },
     {
-      "id": "MAPSEC_OUTCAST_ISLAND",
-      "name": "OUTCAST ISLAND",
-      "x": 15,
-      "y": 0,
-      "width": 1,
-      "height": 3
+      "id": "MAPSEC_LOTUS_ISLE",
+      "name": "LOTUS ISLE"
     },
     {
-      "id": "MAPSEC_GREEN_PATH",
-      "name": "GREEN PATH",
-      "x": 15,
-      "y": 3,
-      "width": 3,
-      "height": 1
+      "id": "MAPSEC_CYCLOPS_ISLE",
+      "name": "CYCLOPS ISLE"
     },
     {
-      "id": "MAPSEC_WATER_PATH",
-      "name": "WATER PATH",
-      "x": 18,
-      "y": 3,
-      "width": 1,
-      "height": 5
+      "id": "MAPSEC_AIOLIA",
+      "name": "AIOLIA"
     },
     {
-      "id": "MAPSEC_RUIN_VALLEY",
-      "name": "RUIN VALLEY",
-      "x": 16,
-      "y": 7,
-      "width": 2,
-      "height": 2
+      "id": "MAPSEC_AIAIA",
+      "name": "AIAIA"
     },
     {
-      "id": "MAPSEC_TRAINER_TOWER",
-      "name": "TRAINER TOWER",
-      "x": 5,
-      "y": 6,
-      "width": 1,
-      "height": 2
+      "id": "MAPSEC_SIRENS_ROCKS",
+      "name": "SIRENS' ROCKS"
     },
     {
-      "id": "MAPSEC_CANYON_ENTRANCE",
-      "name": "CANYON ENTRANCE",
-      "x": 5,
-      "y": 9,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_SCYLLA_STRAIT",
+      "name": "THE STRAIT"
     },
     {
-      "id": "MAPSEC_SEVAULT_CANYON",
-      "name": "SEVAULT CANYON",
-      "x": 6,
-      "y": 9,
-      "width": 1,
-      "height": 3
+      "id": "MAPSEC_THRINAKIA",
+      "name": "THRINAKIA"
     },
     {
-      "id": "MAPSEC_TANOBY_RUINS",
-      "name": "TANOBY RUINS",
-      "x": 3,
-      "y": 12,
-      "width": 7,
-      "height": 1
+      "id": "MAPSEC_KROTON",
+      "name": "KROTON"
     },
     {
-      "id": "MAPSEC_SEVII_ISLE_22",
-      "name": "SEVII ISLE 22",
-      "x": 9,
-      "y": 12,
-      "width": 1,
-      "height": 3
+      "id": "MAPSEC_CUMAE",
+      "name": "CUMAE"
     },
     {
-      "id": "MAPSEC_SEVII_ISLE_23",
-      "name": "SEVII ISLE 23",
-      "x": 3,
-      "y": 14,
-      "width": 6,
-      "height": 1
+      "id": "MAPSEC_ELEA",
+      "name": "ELEA"
     },
     {
-      "id": "MAPSEC_SEVII_ISLE_24",
-      "name": "SEVII ISLE 24",
-      "x": 2,
-      "y": 12,
-      "width": 1,
-      "height": 3
+      "id": "MAPSEC_PHLEGRAEAN_FIELDS",
+      "name": "BURNING FIELDS"
     },
     {
-      "id": "MAPSEC_NAVEL_ROCK_FRLG",
-      "name": "NAVEL ROCK",
-      "x": 10,
-      "y": 8,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_OGYGIA",
+      "name": "OGYGIA"
     },
     {
-      "id": "MAPSEC_MT_EMBER",
-      "name": "MT. EMBER",
-      "x": 2,
-      "y": 3,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_OKEANOS",
+      "name": "OKEANOS"
     },
     {
-      "id": "MAPSEC_BERRY_FOREST",
-      "name": "BERRY FOREST",
-      "x": 14,
-      "y": 12,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_CIMMERIAN_SHORE",
+      "name": "CIMMERIAN SHORE"
     },
     {
-      "id": "MAPSEC_ICEFALL_CAVE",
-      "name": "ICEFALL CAVE",
-      "x": 3,
-      "y": 4,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_LAND_OF_DREAMS",
+      "name": "LAND OF DREAMS"
     },
     {
-      "id": "MAPSEC_ROCKET_WAREHOUSE",
-      "name": "ROCKET WAREHOUSE",
-      "x": 17,
-      "y": 11,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_GATES_OF_THE_SUN",
+      "name": "GATES OF THE SUN"
     },
     {
-      "id": "MAPSEC_TRAINER_TOWER_2",
-      "name": "TRAINER TOWER",
-      "name_clone": true,
-      "x": 5,
-      "y": 6,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_ISLES_OF_THE_BLESSED",
+      "name": "BLESSED ISLES"
     },
     {
-      "id": "MAPSEC_DOTTED_HOLE",
-      "name": "DOTTED HOLE",
-      "x": 16,
-      "y": 8,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_GORGONS_ISLE",
+      "name": "GORGONS' ISLE"
     },
     {
-      "id": "MAPSEC_LOST_CAVE",
-      "name": "LOST CAVE",
-      "x": 18,
-      "y": 9,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_GRAIAI",
+      "name": "CAVE OF GRAIAI"
     },
     {
-      "id": "MAPSEC_PATTERN_BUSH",
-      "name": "PATTERN BUSH",
-      "x": 17,
-      "y": 3,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_SPRINGS_OF_OKEANOS",
+      "name": "OKEANOS SPRINGS"
     },
     {
-      "id": "MAPSEC_ALTERING_CAVE_FRLG",
-      "name": "ALTERING CAVE",
-      "x": 15,
-      "y": 0,
-      "width": 1,
-      "height": 1
+      "id": "MAPSEC_SELVAGE",
+      "name": "THE SELVAGE"
     },
     {
       "id": "MAPSEC_TANOBY_CHAMBERS",
