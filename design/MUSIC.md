@@ -136,6 +136,7 @@ spun (the intro):      D4:1 A4:1 D5:1 E5:1 F5:4
 | Act III, the unmasking (LABYRINTH Scene J) | **Phaedon's theme in minor**: D Aeolian, with B♭ for B in bars 2, 4 and 7, chords Dm \| Gm \| Dm \| Am \| F \| C \| Gm Am. Strings and a low lyre under his speech. |
 | Act III, the Loom | The box's tick starts again, slower, when the gray spreads. |
 | The Frozen Hour | The music box (628), alone. Each Fate's voice from the Loom joins it for the rest of her sanctuary (see 7). |
+| The Frozen Hour, Medon's memory at the Pool of Mnemosyne | **The box stops.** Memory is never frozen: gray is the present and sepia is memory, and the two never mix (STORY §6.12). One held aulos note is the scene's only sound. The box comes back when the gray does, with Lotira's voice once she's roused. |
 | The Stair, Kronos's theme | **Phrygian and enormous**: E♭ for E and B♭ for B, ♩=56, full ensemble with chorus and horns, and the Sickle's grind D-E♭ in the bass. Still stopping on A. |
 | The Moment | The tick stops on the frame you seize it: the first silence of the Frozen Hour. |
 | The resolution (III-12) | Elpis hums all eight bars, alone, and **bar 8 sounds for the first time**. A rises to D. Then 120 frames of silence. |
@@ -165,7 +166,7 @@ Against Elaia's lyre it moves in sixths, thirds and open fifths, with no dissona
 | **Act III, the Kastalian spring** | **The first time it sounds**: lyre (Elaia's tune) and a woman's hum (this line), nothing else. |
 | The Frozen Hour, Mom at the top of the stair | The music box only, by rule. |
 | After Delphoi | Elaia's theme always carries it, as a variant of `mus_ichor_elaia` with the aulos or hum on this line, for the director to assign when the post-Delphoi maps land. |
-| The credits | Under the main theme in the second half (§6.15). |
+| The credits | Under Elaia's theme, in the credits' second half, after the main theme (§1). The main theme ends in D Lydian and Elaia's theme is D Dorian, so the two play in sequence and never layer. |
 
 ---
 
@@ -223,8 +224,8 @@ E5:1 F5:1 E5:1 D5:1 E5:2 B4:3
 | Act II, Arkadia's new moon (§6.4) | "A single lyre plays Kleon's rival motif in minor." It is slowed to 3/4 and loses its 9/8 drive. The semitone stays, and the final drop to B never comes: it stops on E. |
 | Act II, the Akropolis | As a Titan agent his battle theme takes the Sickle's tritone: E-F-E-D-E-B♭, the fall to a diminished fifth instead of a fourth. |
 | Act III, Lakonia (§6.9) | "A frame drum alone in a slow 7/8": Kleos's rhythm, 2+2+3, with no notes. |
-| The Frozen Hour, Kleon breaks free | The first sound after the music box: Kleos on a single aulos, in time, over the box. |
-| The Stair, carrying Hyperion down | **In major**, E-F♯-E-D♯-E-B. No one will sing about it, so it has no words and no drums. |
+| The Frozen Hour, Kleon breaks free | The first sound after the music box: Kleos on a single aulos, in time, over the box. E Phrygian uses the box's own seven notes (D Dorian's), so the two sit together. |
+| The Stair, carrying Hyperion down | **In C major**, C-D-C-B-C-G: the semitone opened to a whole step, as on the trireme, and set on the music box's own notes so it plays over the box, which is still ticking. A single aulos, no words and no drums, because no one will sing about it. It fades as the camera watches them get smaller. (E major's F♯, C♯ and D♯ would clash with the box.) |
 | The epilogue footrace | Back to 9/8, light and quick: second place, to a Wooloo. |
 
 ---
@@ -299,7 +300,7 @@ Against the lullaby the rod moves mostly in sixths, thirds and octaves.
 | Act III, the Loom | **All three for the first time**, with no lullaby on top: the cloth itself. When the gray spreads, every voice stops on a single beat. Silence, then the tick. |
 | The Frozen Hour | Each roused Fate's voice joins the music box for the rest of her sanctuary: Thanira at Kaldera's forge, Lotira at the Pool of Mnemosyne, Nemira at the old olive in Elaia. Build these as three variants of 628 that add one track each. |
 | The Stair, once all three are roused | All three with the music box. Then the Lord of Time's battle. |
-| The resolution | The Fates come down with their hands free: the three voices once more, and in bar 8 the shears are put down for good (no roll, no stroke) while the spindle turns forwards. |
+| The end of the Stair, after the twelfth chime (`MUS_ICHOR_FATES_FREE`) | The Fates come down with their hands free: the three voices once more, and in bar 8 the shears are put down for good (no roll, no stroke) while the spindle turns forwards, into the main theme in D Lydian. Rule 4 keeps all three voices to the Loom and the Stair, so this is its place, not the resolution. The spindle's D in bar 8 is the Fates' own line: the lullaby's A-to-D stays Elpis's alone (rule 1) and isn't heard here. |
 
 ---
 
@@ -388,6 +389,16 @@ The **night road** needs no map work. `sNightMusicTable` in `src/overworld.c` ma
 
 Each is a copy of 636 with the one extra track.
 
+## Cues adopted from the act scripts
+
+The act scripts asked for three cues MUSIC.md didn't have. All three are adopted (director, 2026-11-14).
+
+| Cue | Where | Brief | Rule it keeps |
+|---|---|---|---|
+| `MUS_ICHOR_HEARTH_NIGHT` | Aegina's inn (Act I); Axylos's table, Hestia's farmhouse, Eschara, Peirithoos (Act III); any night-before scene | A solo lyre by a fire, short and quiet: Hestia's hymn slowed and unharmonised, in its own Phrygian. | Never Mom's motto, F-G-A. That belongs to Elaia's theme (rule 3). |
+| `MUS_ICHOR_ENCOUNTER_ADMIN` | Each admin's entrance: Hyperion at Eleusa, Iapetos at Lakonia, Rhea | The admins' Sickle, E-B♭-A in 7/8, as 621 is the grunts'. A short loop that hands off to 636. | The Sickle's tritone never rests. |
+| `MUS_ICHOR_THEOXENIA` | Every god's reveal from disguise (SYSTEMS §10) | One shared two-bar sting, drums out of nowhere, so the moment is known on sight across all fifteen gods. The god's own line follows in the scene's music. | A sting, not a BGM: it never loops. |
+
 ## Themes still to write
 
 | Theme | Brief | Source |
@@ -400,6 +411,7 @@ Each is a copy of 636 with the one extra track.
 | The Archon | Mixolydian, stately, kithara and drum; it stops on "Gods help you". | STORY §6.15 |
 | Iapetos's tragedy and the satyr play | The Sickle as a processional; a fast 9/8 aulos romp. | STORY §6.3 |
 | The Hierophant battle | Not yet scored. | INVENTORY §8 |
+| *The Periodos*, the Oikoumene's ten halls | One theme in ten short arrangements. A is the Thread (motif 1) in D Dorian as a processional for aulos, kithara and frame drum, the same in every hall: home arrives first. B is in the land's own mode and meter and quotes the first phrase of its land track (OIKOUMENE §7). Intro 1, then A 8 and B 8, about 30 seconds, in the `ichor` voicegroup. If ROM runs short, one arrangement serves all ten. | `oikoumene/PERIODOS.md` §6 |
 
 ## What the engine taught us
 
