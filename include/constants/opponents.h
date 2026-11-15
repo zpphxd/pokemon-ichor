@@ -59,7 +59,14 @@
 #define TRAINER_ICHOR_EUCHIDAS                66
 #define TRAINER_ICHOR_PHILONIDES              67
 #define TRAINER_ICHOR_KERYKOS_1               68
-#define TRAINERS_END_ACT1                     69
+// Route 4, the Isthmus road (batch 3, ids 80-99)
+#define TRAINER_ICHOR_EXEKIAS                 80
+#define TRAINER_ICHOR_MYRRHINE                81
+#define TRAINER_ICHOR_GRUNT_ROUTE4_LAAS       82
+#define TRAINER_ICHOR_MENALKAS                83
+#define TRAINER_ICHOR_PHEIDIPPOS              84
+#define TRAINER_ICHOR_KAPELOS                 85
+#define TRAINERS_END_ACT1                     86
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

@@ -33,6 +33,12 @@
       "respawn_npc": "LOCALID_EMPORION_HEALER",
       "respawn_x": 8,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_4",
+      "map": "MAP_ROUTE4_ISTHMUS",
+      "x": 23,
+      "y": 8
     }
   ]
 }

@@ -1160,6 +1160,243 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ROUTE4_ISTHMUS",
+          "base_label": "gRoute4Isthmus_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_EPOPOI"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 18,
+                "species": "SPECIES_NEMECUB"
+              },
+              {
+                "min_level": 19,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 16,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 19,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE4_ISTHMUS",
+          "base_label": "gRoute4Isthmus_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_EPOPOI"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 18,
+                "species": "SPECIES_NEMECUB"
+              },
+              {
+                "min_level": 19,
+                "max_level": 19,
+                "species": "SPECIES_NEMECUB"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE4_ISTHMUS",
+          "base_label": "gRoute4Isthmus_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 18,
+                "max_level": 19,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 18,
+                "species": "SPECIES_OBOLORN"
+              },
+              {
+                "min_level": 18,
+                "max_level": 18,
+                "species": "SPECIES_NEMECUB"
+              }
+            ]
+          }
         }
       ]
     },
