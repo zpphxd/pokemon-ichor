@@ -667,6 +667,12 @@ const u32 gObjectEventPic_IchorAcolyteF[] = INCGFX_U32("graphics/object_events/p
 const u32 gObjectEventPic_IchorTablet[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/tablet.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatL[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_l.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatR[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_r.png", ".4bpp");
+// The Theoxenia's Sam, Apollo, Cami and Demeter (tools/ichor/art/sprites_npc_theoxenia.py)
+const u16 gObjectEventPal_IchorTheoxenia[] = INCGFX_U16("graphics/object_events/palettes/ichor_theoxenia.pal", ".gbapal");
+const u32 gObjectEventPic_IchorSam[] = INCGFX_U32("graphics/object_events/pics/people/ichor/sam.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorApollo[] = INCGFX_U32("graphics/object_events/pics/people/ichor/apollo.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorCami[] = INCGFX_U32("graphics/object_events/pics/people/ichor/cami.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorDemeter[] = INCGFX_U32("graphics/object_events/pics/people/ichor/demeter.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorMirror[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mirror_stand.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorMirrorMark[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mirror_mark.png", ".4bpp");
 // End of Ichor object events

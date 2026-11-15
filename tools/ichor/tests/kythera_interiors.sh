@@ -22,7 +22,9 @@ if [ ! -x "$RUNNER" ] || [ "$SRC" -nt "$RUNNER" ]; then
   cc -O2 -I"$MGBA_PREFIX/include" "$SRC" -L"$MGBA_PREFIX/lib" -lmgba -o "$RUNNER" || exit 1
 fi
 
-KYTHERA_OUT="$OUT/" "$TIMEOUT" 600 "$RUNNER" \
+# Map group numbers move whenever groups are added or cut, so read them from map_groups.json.
+read KY_GROUP ME_GROUP < <(python3 -c 'import json; o=json.load(open("data/maps/map_groups.json"))["group_order"]; print(o.index("gMapGroup_IndoorKythera"), o.index("gMapGroup_IndoorMelos"))')
+KYTHERA_GROUP_KY="$KY_GROUP" KYTHERA_GROUP_ME="$ME_GROUP" KYTHERA_OUT="$OUT/" "$TIMEOUT" 600 "$RUNNER" \
   --script tools/ichor/tests/kythera_interiors.lua --frames 40000 --until "KYTHERA done" "$ROM" > "$OUT/run.log" 2>&1
 code=$?
 grep -o "KYTHERA \(ok\|FAIL\|PASS\).*" "$OUT/run.log"

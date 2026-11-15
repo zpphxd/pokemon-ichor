@@ -1275,6 +1275,8 @@ All the species, their sprites and their cries are already in the ROM.
 
 ### Decisions for the user
 
+> **Settled by the user, 2026-11-14.** Asked directly: the Oikoumene opens in stages (PG-6, PG-7, PG-8); the Orpheus moment is Persephone's return, and nobody returns from the dead (K4); the five Titans and Briareus are freed (K3); the suitors stay, comic, with Mom in control (O3); Argos lives and joins you (O4); the legend castings are approved as a set (PG-31); the House of Night is built for 1.0 (PG-26, overriding K8's stretch). **Every other decision below takes its recommendation** (the user: "Take the recommendations"). Any can still be changed later.
+
 This file's decisions are folded into the post-game's consolidated list in `OIKOUMENE.md` §13, alongside POSTGAME's P1–P11. The ones that are this file's:
 
 | # | Decision | Recommendation | First draft's number |

@@ -20,6 +20,7 @@
 #include "config/battle.h"
 #include "config/caps.h"
 #include "config/contest.h"
+#include "config/ichor.h" // Ichor: the Hoenn-only systems cut from the ROM
 #include "config/debug.h"
 #include "config/dexnav.h"
 #include "config/follower_npc.h"

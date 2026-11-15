@@ -175,6 +175,15 @@ ifneq ($(LTO),0)
     override CFLAGS += -flto=auto -fno-fat-lto-objects -fno-asynchronous-unwind-tables -ffunction-sections -fdata-sections
   endif
 endif
+# Ichor: per-function and per-variable sections without LTO too, so --gc-sections
+# drops each unused function and table, not only whole unused files. The Hoenn-only
+# systems cut in include/config/ichor.h rely on it. The test build keeps whole-file
+# sections (its linker script expects them), so cut code there needs stand-in labels.
+ifeq ($(LTO),0)
+  ifneq ($(TEST),1)
+    override CFLAGS += -ffunction-sections -fdata-sections
+  endif
+endif
 
 ifeq ($(ANALYZE),1)
   override CFLAGS += -fanalyzer
