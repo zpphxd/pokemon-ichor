@@ -470,6 +470,109 @@ Galekit
 Level: 13
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
+/* Kleon at the Isthmus Gate (SCRIPT.md Part 3, "Kleon, second battle"): his ace is the
+   starter that beats yours. VAR_STARTER_MON 0 (Nebrel) faces _KYNDER, 1 (Kynder) faces
+   _HIPLING, 2 (Hipling) faces _NEBREL. No Ability lines while the Aethos stand-ins are in. */
+
+=== TRAINER_ICHOR_KLEON_2_KYNDER ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+Double Battle: No
+AI: Basic Trainer
+
+Lophops
+Level: 19
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Pluck
+- Echoed Voice
+- Quick Attack
+- Sand Attack
+
+Alekrow
+Level: 20
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack
+
+Dikyon
+Level: 21
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Fire Fang
+- Flame Charge
+- Bite
+- Thunder Fang
+
+=== TRAINER_ICHOR_KLEON_2_HIPLING ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+Double Battle: No
+AI: Basic Trainer
+
+Lophops
+Level: 19
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Pluck
+- Echoed Voice
+- Quick Attack
+- Sand Attack
+
+Alekrow
+Level: 20
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack
+
+Thalamare
+Level: 21
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Aqua Jet
+- Flip Turn
+- Bulldoze
+- Double Kick
+
+=== TRAINER_ICHOR_KLEON_2_NEBREL ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+Double Battle: No
+AI: Basic Trainer
+
+Lophops
+Level: 19
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Pluck
+- Echoed Voice
+- Quick Attack
+- Sand Attack
+
+Alekrow
+Level: 20
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack
+
+Kladoe
+Level: 21
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Magical Leaf
+- Fairy Wind
+- Quick Attack
+- Synthesis
+
 /* Ichor: world-act2 (ids 160-319) */
 
 

@@ -48,7 +48,11 @@
 #define TRAINER_ICHOR_ALETHEA_DECK            40
 #define TRAINER_ICHOR_PHORMION                41
 #define TRAINER_ICHOR_LYKON                   42
-#define TRAINERS_END_ACT1                     43
+// Emporion city agent, ids 43-59: Kleon at the Isthmus Gate, one team per starter
+#define TRAINER_ICHOR_KLEON_2_KYNDER          43
+#define TRAINER_ICHOR_KLEON_2_HIPLING         44
+#define TRAINER_ICHOR_KLEON_2_NEBREL          45
+#define TRAINERS_END_ACT1                     46
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

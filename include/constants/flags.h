@@ -702,10 +702,10 @@
 #define FLAG_ICHOR_ITEM_OROS_WINE 0x287 // Ichor: item ball: Wine by Zeus's altar on Mount Oros
 #define FLAG_ICHOR_HIDE_AEGINA_CAST 0x288 // Ichor: hide Kleon and Alethea on Aegina's quay once the voyage party has split up
 #define FLAG_ICHOR_NO_RUNNING 0x289 // Ichor: set to make a scripted wild battle unescapable (WE_FLAG_NO_RUNNING)
-#define FLAG_UNUSED_0x28A  0x28A // Unused Flag
-#define FLAG_UNUSED_0x28B  0x28B // Unused Flag
-#define FLAG_UNUSED_0x28C  0x28C // Unused Flag
-#define FLAG_UNUSED_0x28D  0x28D // Unused Flag
+#define FLAG_ICHOR_HIDDEN_EMPORION_BRONZE_OBOL 0x28A // Ichor: hidden item: Bronze Obol in a crack in the harbor wall
+#define FLAG_ICHOR_HIDDEN_EMPORION_HEART_SCALE 0x28B // Ichor: hidden item: Heart Scale on the quay steps
+#define FLAG_ICHOR_HIDDEN_EMPORION_HONEY 0x28C // Ichor: hidden item: Honey under Kydon's awning
+#define FLAG_ICHOR_HIDDEN_EMPORION_STARDUST 0x28D // Ichor: hidden item: Stardust at the top of Acrocorinth's stair
 #define FLAG_UNUSED_0x28E  0x28E // Unused Flag
 #define FLAG_UNUSED_0x28F  0x28F // Unused Flag
 #define FLAG_UNUSED_0x290  0x290 // Unused Flag
@@ -1682,6 +1682,28 @@
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_ARRIVED_EMPORION             (FLAG_ICHOR_GENERAL_START + 0x0C0) // Ichor: beat 11: stepped off the Euploia onto Emporion's quay (the herald's welcome played)
+#define FLAG_ICHOR_VISITED_EMPORION             (FLAG_ICHOR_GENERAL_START + 0x0C1) // Ichor: Emporion visited (fly target)
+#define FLAG_ICHOR_RITES_TUTORIAL               (FLAG_ICHOR_GENERAL_START + 0x0C2) // Ichor: beat 11: prayed at the quay herm with Kerykos; his three Olive Oil (ICHOR_STUB_OFFERINGS until the item exists)
+#define FLAG_ICHOR_GOT_TROWEL                   (FLAG_ICHOR_GENERAL_START + 0x0C3) // Ichor: beat 11: Alethea's Trowel (ICHOR_STUB_OFFERINGS until the item exists)
+#define FLAG_ICHOR_HIDE_KLEON_QUAY              (FLAG_ICHOR_GENERAL_START + 0x0C4) // Ichor: hide beat 11's Kleon on Emporion's quay
+#define FLAG_ICHOR_HIDE_KERYKOS_QUAY            (FLAG_ICHOR_GENERAL_START + 0x0C5) // Ichor: hide beat 11's Kerykos on Emporion's quay
+#define FLAG_ICHOR_HIDE_ALETHEA_QUAY            (FLAG_ICHOR_GENERAL_START + 0x0C6) // Ichor: hide beat 11's Alethea on Emporion's quay
+#define FLAG_ICHOR_KLEON_WON_HERALD             (FLAG_ICHOR_GENERAL_START + 0x0C7) // Ichor: beat 14: Kleon came out of the Temple of Hermes with the Herald Laurel
+#define FLAG_ICHOR_HIDE_KLEON_TEMPLE_STEPS      (FLAG_ICHOR_GENERAL_START + 0x0C8) // Ichor: hide beat 14's Kleon at the Temple of Hermes's door
+#define FLAG_ICHOR_HIDE_KLEON_ISTHMUS_GATE      (FLAG_ICHOR_GENERAL_START + 0x0C9) // Ichor: hide Kleon at the Isthmus Gate (SCRIPT.md's _SACRED_GATE)
+#define FLAG_ICHOR_KLEON_BATTLE_2_DONE          (FLAG_ICHOR_GENERAL_START + 0x0CA) // Ichor: beat 16: Kleon's second battle at the Isthmus Gate fought
+#define FLAG_ICHOR_WON_KLEON_2                  (FLAG_ICHOR_GENERAL_START + 0x0CB) // Ichor: beat 16: won Kleon's second battle
+#define FLAG_ICHOR_DAEDALUS_PAGE_1              (FLAG_ICHOR_GENERAL_START + 0x0CC) // Ichor: traded Glykera an Olive Oil for Daedalus's page I (LABYRINTH.md seed; until the page item exists)
+#define FLAG_ICHOR_NUMBER_NINE_UNTIED           (FLAG_ICHOR_GENERAL_START + 0x0CD) // Ichor: untied Number Nine, who walked off his plinth (also hides him)
+#define FLAG_ICHOR_HIDE_SYKEAS_HARPECK          (FLAG_ICHOR_GENERAL_START + 0x0CE) // Ichor: hide the snatcher on Sykeas's awning (beaten, caught or fled)
+#define FLAG_ICHOR_GOT_SYKEAS_FIGS              (FLAG_ICHOR_GENERAL_START + 0x0CF) // Ichor: Sykeas gave his figs and the Pretty Feather
+#define FLAG_ICHOR_MET_HALITHERSES              (FLAG_ICHOR_GENERAL_START + 0x0D0) // Ichor: talked to Halitherses the augur on Emporion's mole once
+#define FLAG_ICHOR_DUG_EMPORION_QUAY            (FLAG_ICHOR_GENERAL_START + 0x0D1) // Ichor: beat 11: dug the Arachne sherd from the planter by the quay herm (ICHOR_STUB_DIG)
+#define FLAG_ICHOR_HERM_EMPORION                (FLAG_ICHOR_GENERAL_START + 0x0D2) // Ichor: anointed the great herm at Emporion's crossroads (ICHOR_STUB_HERM)
+#define FLAG_ICHOR_ITEM_EMPORION_SUPER_POTION   (FLAG_ICHOR_GENERAL_START + 0x0D3) // Ichor: item ball: Super Potion on the ship sheds' slipway
+#define FLAG_ICHOR_ITEM_EMPORION_X_SPEED        (FLAG_ICHOR_GENERAL_START + 0x0D4) // Ichor: item ball: X Speed at the end of the stoa
+#define FLAG_ICHOR_ITEM_EMPORION_REPEL          (FLAG_ICHOR_GENERAL_START + 0x0D5) // Ichor: item ball: Repel behind the Deigma
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

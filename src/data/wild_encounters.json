@@ -37023,6 +37023,95 @@
           }
         },
         {
+          "map": "MAP_EMPORION_HARBOR",
+          "base_label": "gEmporionHarbor_Morning",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 10,
+                "max_level": 13,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 10,
+                "max_level": 13,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 12,
+                "max_level": 15,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 12,
+                "max_level": 14,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 13,
+                "max_level": 15,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_NARKERAY"
+              }
+            ]
+          }
+        },
+        {
           "map": "MAP_AEGINA_APHAIA_ROAD",
           "base_label": "gAeginaAphaiaRoad_Morning",
           "land_mons": {
