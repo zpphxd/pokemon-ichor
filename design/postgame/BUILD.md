@@ -129,10 +129,10 @@ New post-game systems are built here, in the conventions of ENGINE_API.md, docum
 
 | Ask | Who builds it | Needed by here | The name, once it lands | Fallback until then |
 |---|---|---|---|---|
-| **E7, the bull-leap timing** | world-act3 | The Moment (batch 2), Labor 7 (batch 5), Charybdis's fig tree (batch 6) | `special(Ichor_BullLeap)`: `VAR_0x8004` the moving object, `0x8005` the line's tile, `0x8006` the window; `VAR_RESULT` 0 early, 1 clean, 2 late | A YES/NO on the beat |
+| **E7, the bull-leap timing** | world-act3: **built**, on origin/claude/world-act3-4e546d (`src/ichor_bull_leap.c`, API in its `design/phase4/ENGINE_ACT3.md`), not on main yet | The Moment (batch 2), Labor 7 (batch 5), Charybdis's fig tree (batch 6) | `special(Ichor_BullLeap)`: `VAR_0x8004` the moving object's local id, `0x8005` the line's tile `ICHOR_TILE(x, y)`, `0x8006` the window in frames (0 = 10), `0x8007` frames per tile (0 = 6); waits by itself; `VAR_RESULT` `ICHOR_LEAP_EARLY`/`_CLEAN`/`_LATE` (0/1/2, `include/constants/ichor_act3.h`). One call is one pass: for fail-forward, move the object back and call again with a wider window. | A YES/NO on the beat |
 | **The carried flame** | ichor-engine, building now | Lampon (batch 1), Labor 2 (batch 4) | `setvar(VAR_0x8004, FLAME_x)`, `setvar(VAR_0x8005, <dry steps>)`, `special(Ichor_TakeFlame)`; `VAR_TEMP_2` steps left, `VAR_TEMP_3` the kind; `call(EventScript_IchorDraught)` puts it out. Asked for: in rain each step costs 2 (scripts give the dry budget); a lit brazier refills a flame; kinds `FLAME_HESTIA_SHIP` and `FLAME_LERNA` | A line of dialogue |
 | **The disguise sprite** | with the director | Circe's forms, the beggar (batch 6) | `setvar(VAR_0x8004, OBJ_EVENT_GFX_…)`, `special(Ichor_SetPlayerGraphics)`, 0 to clear | An icon over the player |
-| **E9, the beam trace,** made generic for water | world-act3 (asked) | Labor 5 (batch 4) | — | Fixed states per sluice |
+| **E9, the beam trace** | world-act3: **built**, already generic | Labor 5 (batch 4) | `special(Ichor_TraceBeam)`: `VAR_0x8004` the source object (the beam leaves the way it faces), `0x8005` the first of six metatiles in a row (E–W, N–S, NE, NW, SE, SW): pass six water-channel metatiles. Turns are E8 mirror objects (`MOVEMENT_TYPE_ICHOR_MIRROR*`), so the sluice dials are mirror objects. `VAR_RESULT` the object it ends on or 0, end tile in `0x8006`/`0x8007`. At most 2 beams at once, 128 tiles, 16 turns, no crossing. | Fixed states per sluice |
 | **Asterion's charge for the boar** | ichor-engine (built; asked for a hit script, `Ichor_AddDrift`, and a no-hearing bit) | Labor 4 (batch 4) | `special(Ichor_StartAsterion)` on any object | Scripted lanes |
 | **The no-shadow opt-out, the follower's bow** | with the director (theoxenia is unassigned) | E6–E13, Labor 9 | — | Dialogue tells |
 | **The Scroll of Deeds' pages** | with the director (unassigned) | Batches 5–7 | — | Flags only |
@@ -142,6 +142,15 @@ New post-game systems are built here, in the conventions of ENGINE_API.md, docum
 **IchorEpics takes no version bump** (ichor-engine has version 3 for the forced omen and the held time of day): all its defaults are zero-valid, and `reserved` has always been zero-filled.
 
 ---
+
+## 4a. Seams with the act sessions
+
+| Seam | Agreed | Notes |
+|---|---|---|
+| **Route 32 ↔ Arkadia** (world-act2) | Arkadia (50×44) west edge; its road on rows 36–37, verges 35 and 38; 8 aethos-only columns each side. Our `right` connection to `MAP_ARKADIA` has offset *r* − 36, where *r* is the Sacred Way's road row on its east edge. | Their barrier hides on `FLAG_SYS_GAME_CLEAR`; we ask them to swap it for `FLAG_ICHOR_POSTGAME` at integration. We add our connection; the director joins them. |
+| **Route 34 ↔ Kaldera** (world-act2, provisional) | `MAP_KALDERA_CALDERA_ROAD` (32×56)'s east edge, open water on rows 46–51 by the old port; 8 aethos-only columns. Closed until the post-game by whirlpools (Triton's Conch). | Their batch 6 hasn't started; they'll warn us if the rows move. |
+| **Route 31 ↔ Lakonia** (world-act3) | Lakonia's south edge, roped off until the post-game. They send the columns and their 6 primary-only rows when Lakonia is built. | Route 25 enters Lakonia on the east; Route 26 leaves north. |
+| **Lake Stymphalia** (Labor 6's reeds) | It's world-act3's Route 27, not world-act2's. | Ask world-act3 when batch 4 starts. |
 
 ## 5. Shared work with world-oikoumene
 
