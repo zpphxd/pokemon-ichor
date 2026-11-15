@@ -126,7 +126,6 @@ class PMap(L.Map):
                 elif c == "~":
                     assert not aeth
                     self.set(x, y, *self.shape("water", L.blob_key(water, x, y), x, y))
-                    self.water_cells.add((x, y))
                 elif c == "g":
                     assert not aeth
                     self.set(x, y, *self.shape("gully", L.blob_key(gully, x, y), x, y))
@@ -429,8 +428,8 @@ def lebadeia():
     # the east seam: aethos olives on the slopes, grass verges by the road
     m.rect(24, 0, W - 1, 10, "O")
     m.rect(24, 11, W - 1, 11, ".")
-    m.rect(24, 14, W - 1, 15, ".")
-    m.rect(24, 16, W - 1, H - 1, "O")
+    m.rect(24, 14, W - 1, 14, ".")
+    m.rect(24, 15, W - 1, H - 1, "O")
     m.rect(24, 5, 25, 10, ".")               # the slope opens behind the hall
     m.rect(0, 0, 9, 0, "L")                  # scrub on the oracle's rock
     # paths: from the steps down through the grove to the road; to the doors
@@ -488,6 +487,8 @@ def lebadeia():
     m.put(28, 11, STELE)                      # the east gate
     m.put(1, 11, STELE)                       # the west way out
     m.named("markers", "dig", 8, 10)          # a daily dig spot under the planes (ICHOR_STUB_DIG)
+    m.force_block |= {(0, 8), (0, 10)}        # the plane's crown at the west edge: no way off the map
+    m.cells([(0, 7)], "L")
 
     E = {
         "connections": [
@@ -507,6 +508,7 @@ def lebadeia():
             obj(P + "ELDER_M", 2, 4, LB + "OldMan", "MOVEMENT_TYPE_FACE_RIGHT"),
             obj(P + "MERCHANT", 14, 11, LB + "CakeSeller", "MOVEMENT_TYPE_FACE_DOWN"),
             obj(P + "KID_M", 9, 18, LB + "Child", "MOVEMENT_TYPE_FACE_RIGHT"),
+            item_ball(13, 9, "ITEM_REVIVE", "FLAG_ICHOR_ITEM_LEBADEIA_REVIVE"),
         ],
         "warp_events": [
             warp(*hall, "MAP_LEBADEIA_PILGRIMS_HALL", 0),
@@ -661,6 +663,32 @@ def route9():
     m.rect(9, 38, 10, H - 1, "=")
     m.rect(11, 38, 11, H - 1, ".")
 
+    # --- the route standard (MAP_DESIGN section 8): grass on every road ------
+    m.rect(44, 17, 49, 19, ",")              # the goats' slope, down to the road
+    m.rect(50, 15, W - 1, 18, "L")           # the east edge stays closed above the road
+    m.rect(41, R9_EAST, 44, R9_EAST + 1, ",")      # band A1, 4 deep
+    m.rect(37, 17, 38, 19, ",")              # the cleft's floor
+    m.rect(21, 11, 25, 12, ",")              # band F1, 5 deep
+    m.rect(14, 7, 18, 8, ",")                # band F2, 5 deep
+    m.rect(19, 9, 20, 10, ",")               # the fork's corner
+    m.rect(27, 13, 28, 14, ",")              # the fork's foot
+    m.rect(11, 7, 13, 8, ",")                # the lookout's shelf, its east end
+    m.rect(6, 8, 10, 8, ",")
+    m.rect(25, 6, 27, 8, ",")                # the broken bridge's far bank
+    m.rect(25, 2, 26, 5, ",")                # ... and the gully path
+    m.rect(37, 9, 42, 11, ",")               # the Sphinx's seat
+    m.rect(2, 25, 12, 26, ",")               # terrace 1
+    m.rect(9, 28, 18, 29, ",")               # terrace 2
+    m.rect(4, 31, 20, 31, ",")               # terrace 3
+    m.rect(26, 24, 32, 27, ",")              # the grove below the crossroads
+    m.rect(22, 28, 23, 32, ",")              # band B2, 5 deep below the cutting
+    m.rect(18, 33, 20, 34, ",")              # band B2b on the terrace path
+    m.rect(9, 35, 10, 38, ",")               # band B3 among the olives
+    m.rect(8, 39, 8, 42, ",")                # the road's verges down to Kirrha
+    m.rect(11, 39, 11, 42, ",")
+    m.cells([(24, 25)], ".")                 # Phokos's place in the cutting's wall
+    m.cells([(21, 30)], ".")                 # Daulis's place beside band B2
+
     # --- the treasury's ruin and its drums (36C) -----------------------------
     ox, oy = DRUMS
     for j, row in enumerate(PUZZLE):
@@ -734,7 +762,6 @@ def route9():
         m.wild_olive(x, y)
     for (x, y) in ((26, 23), (30, 23)):
         m.wild_olive(x, y)
-    m.wild_olive(50, 17)
     # signs (aethos steles)
     m.put(48, 18, STELE)                    # the east end
     m.put(26, 14, STELE)                    # the north-west fork
@@ -787,6 +814,12 @@ def route9():
             # TM Rock Tomb stands in until the TM list is redone
             item_ball(13, 15, "ITEM_TM_ROCK_TOMB", "FLAG_ICHOR_ITEM_ROUTE9_TM_ROCK_SLIDE"),
             item_ball(17, 14, "ITEM_HARD_STONE", "FLAG_ICHOR_ITEM_ROUTE9_HARD_STONE"),
+            # the route standard's four more: Phokos in the cutting and Daulis by band B2
+            # (both across the road), Amphissa on terrace 2 and Mopsos on the Sphinx's seat
+            obj(P + "HOPLITE", 24, 25, R9 + "Phokos", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
+            obj(P + "FOWLER_F", 21, 30, R9 + "Daulis", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=2),
+            obj(P + "HARVESTER", 6, 29, R9 + "Amphissa", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=3),
+            obj(P + "AUGUR", 38, 11, R9 + "Mopsos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2),
             # the south-west road: Lykoreus on the terrace, the terrace end's potion
             obj(P + "SHEPHERD", 16, 35, R9 + "Lykoreus", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=4),
             item_ball(12, 25, "ITEM_SUPER_POTION", "FLAG_ICHOR_ITEM_ROUTE9_SUPER_POTION"),

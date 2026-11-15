@@ -105,7 +105,11 @@
 #define TRAINER_ICHOR_ANTHIA                  214
 #define TRAINER_ICHOR_PROKRIS                 215
 #define TRAINER_ICHOR_KALLISTO_1              216
-#define TRAINERS_END_ACT2                     217
+#define TRAINER_ICHOR_PHOKOS                  217
+#define TRAINER_ICHOR_DAULIS                  218
+#define TRAINER_ICHOR_AMPHISSA                219
+#define TRAINER_ICHOR_MOPSOS                  220
+#define TRAINERS_END_ACT2                     221
 
 // world-act3, ids 320-499: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0

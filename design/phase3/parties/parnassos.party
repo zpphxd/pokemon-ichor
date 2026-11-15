@@ -80,3 +80,70 @@ Chelonet
 Level: 32
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
+
+/* Added by the parnassos agent for the route standard (MAP_DESIGN section 8): Route 9
+   needs nine trainers in its 15 screens; SCRIPT.md names five. */
+
+=== TRAINER_ICHOR_PHOKOS ===
+Name: PHOKOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Check Bad Move
+
+Chelonet
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_DAULIS ===
+Name: DAULIS
+Class: Fowler
+Pic: Fowler F
+Gender: Female
+Music: Cool
+AI: Check Bad Move
+
+Lophops
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Harpelle
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_AMPHISSA ===
+Name: AMPHISSA
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Melibee
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Onotis
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_MOPSOS ===
+Name: MOPSOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Lophops
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Harpelle
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe

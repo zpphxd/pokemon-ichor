@@ -1836,6 +1836,7 @@
 #define FLAG_ICHOR_OMEN_SCHISTE_ENIGMAW         (FLAG_ICHOR_GENERAL_START + 0x18D) // Ichor: Act II: the omen's Enigmaw on the Split Road's boundary stone is caught or beaten
 #define FLAG_ICHOR_OMEN_SCHISTE_TOLD            (FLAG_ICHOR_GENERAL_START + 0x18E) // Ichor: Act II: an augur told the Split Road's omen; the Enigmaw may sit on the stone (ICHOR_STUB_OMENS)
 #define FLAG_ICHOR_ITEM_ROUTE9_ULTRA_BALL       (FLAG_ICHOR_GENERAL_START + 0x18F) // Ichor: Act II: item ball, the olive grove below Route 9's crossroads
+#define FLAG_ICHOR_ITEM_LEBADEIA_REVIVE         (FLAG_ICHOR_GENERAL_START + 0x190) // Ichor: Act II: item ball, Lebadeia's river bank by the pilgrims' hall
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)

@@ -406,6 +406,72 @@ text Route9_Schiste_Text_LykoreusDefeat {
     format("Wolves would've won.")
 }
 
+// --- the route standard's four more trainers (MAP_DESIGN section 8; not in SCRIPT.md) ---
+text Route9_Schiste_Text_SpeakerPhokos { "PHOKOS" }
+text Route9_Schiste_Text_SpeakerDaulis { "DAULIS" }
+text Route9_Schiste_Text_SpeakerAmphissa { "AMPHISSA" }
+text Route9_Schiste_Text_SpeakerMopsos { "MOPSOS" }
+
+// HOPLITE Phokos, in the cutting's wall: a Phokian walking home from guard duty.
+script Route9_Schiste_EventScript_Phokos {
+    trainerbattle_single(TRAINER_ICHOR_PHOKOS, Route9_Schiste_Text_PhokosIntro, Route9_Schiste_Text_PhokosDefeat)
+    setspeaker(Route9_Schiste_Text_SpeakerPhokos)
+    msgbox(format("Phokis guarded Delphoi for a hundred years. Now Delphoi guards itself.\pWith a shut gate and one word. I'm going home."), MSGBOX_AUTOCLOSE)
+}
+
+text Route9_Schiste_Text_PhokosIntro {
+    format("Halt! …Sorry. Habit. I'm off duty. Battle me anyway.")
+}
+
+text Route9_Schiste_Text_PhokosDefeat {
+    format("Good thing I'm off duty.")
+}
+
+// FOWLER Daulis, by the grass below the cutting: Daulis is where the nightingale sings.
+script Route9_Schiste_EventScript_Daulis {
+    trainerbattle_single(TRAINER_ICHOR_DAULIS, Route9_Schiste_Text_DaulisIntro, Route9_Schiste_Text_DaulisDefeat)
+    setspeaker(Route9_Schiste_Text_SpeakerDaulis)
+    msgbox(format("In my town the nightingales sing all night. Nobody minds. We're used to sad stories."), MSGBOX_AUTOCLOSE)
+}
+
+text Route9_Schiste_Text_DaulisIntro {
+    format("Shh! You'll scare the nightingales. …Too late. Battle, then.")
+}
+
+text Route9_Schiste_Text_DaulisDefeat {
+    format("Now they're laughing at me. Nightingales can laugh.")
+}
+
+// HARVESTER Amphissa, picking up fallen olives on the second terrace.
+script Route9_Schiste_EventScript_Amphissa {
+    trainerbattle_single(TRAINER_ICHOR_AMPHISSA, Route9_Schiste_Text_AmphissaIntro, Route9_Schiste_Text_AmphissaDefeat)
+    setspeaker(Route9_Schiste_Text_SpeakerAmphissa)
+    msgbox(format("Amphissa's my town, up the valley. Apollo loved a girl there once.\pEveryone's still a little proud about it."), MSGBOX_AUTOCLOSE)
+}
+
+text Route9_Schiste_Text_AmphissaIntro {
+    format("These are the god's olives. Fallen ones only! Battle me for them.")
+}
+
+text Route9_Schiste_Text_AmphissaDefeat {
+    format("Take a fallen one. They're the sweetest.")
+}
+
+// AUGUR Mopsos, reading the birds from the Sphinx's seat.
+script Route9_Schiste_EventScript_Mopsos {
+    trainerbattle_single(TRAINER_ICHOR_MOPSOS, Route9_Schiste_Text_MopsosIntro, Route9_Schiste_Text_MopsosDefeat)
+    setspeaker(Route9_Schiste_Text_SpeakerMopsos)
+    msgbox(format("Some mornings a great bird sits on this rock. It never moves.\pIt just watches the three roads. I think it's waiting for a question."), MSGBOX_AUTOCLOSE)
+}
+
+text Route9_Schiste_Text_MopsosIntro {
+    format("The birds over the crossroads said you'd come up here and battle me.")
+}
+
+text Route9_Schiste_Text_MopsosDefeat {
+    format("The birds were right. They always are, about other people.")
+}
+
 // --- beat 36C: the treasury ruin's drums ------------------------------------------------
 // The drums are EventScript_StrengthBoulder objects (the Girdle: ENGINE_API section 2).
 // A drum pushed west onto a gully's lip teeters there; when the player steps into the

@@ -81,9 +81,9 @@ def crag():
 def water():
     s = P.shape_set("water", "The Herkyna: water with a pebbly bank", SEC, wanted("water"),
                     KG.paint_water_cell, "X",
-                    "Aethos's animated water under a bank of pale pebbles and reeds. "
-                    "MB_POND_WATER: surf it with the Conch and fish it. Names are blob shape "
-                    "keys; the interior is `1|11111111`.", on="sea", behavior="MB_POND_WATER")
+                    "Aethos's animated water under a bank of pale pebbles and reeds: a "
+                    "mountain stream, so it blocks and takes no Conch or rod. Names are blob "
+                    "shape keys; the interior is `1|11111111`.", on="sea")
     return P.recolor_struct(s)
 
 

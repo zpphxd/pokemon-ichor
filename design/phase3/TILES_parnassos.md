@@ -55,7 +55,7 @@ treasury's drums at rest, beat 36C), and `_AltarApollo` (the shrine once cleanse
 
 | Tileset | Tiles | Metatiles |
 |---|---|---|
-| `gTileset_Parnassos` | 497 of 504 | 272 of 512 |
+| `gTileset_Parnassos` | 497 of 504 | 288 of 512 |
 
 ![sheet](img/tiles_parnassos_sheet.png)
 
@@ -63,49 +63,49 @@ treasury's drums at rest, beat 36C), and `_AltarApollo` (the shrine once cleanse
 
 ### Tall grass with soft edges
 
-`tall`, 8 wide by 2 tall. Barley tall grass on aethos grass, cut from one field so any outline works (agros's painter, as on every route). MB_TALL_GRASS throughout. Names are blob shape keys (`1|NNEESESSWWNW`).
+`tall`, 8 wide by 4 tall. Barley tall grass on aethos grass, cut from one field so any outline works (agros's painter, as on every route). MB_TALL_GRASS throughout. Names are blob shape keys (`1|NNEESESSWWNW`).
 
-15 shapes, from 0x200; the interior `1|11111111` is 0x200.
+29 shapes, from 0x200; the interior `1|11111111` is 0x200.
 
 ### The road with soft edges
 
 `path`, 8 wide by 3 tall. The limestone road and its goat tracks, scalloped where they meet the grass (agros's painter). Names are blob shape keys.
 
-23 shapes, from 0x210; the interior `1|11111111` is 0x210.
+22 shapes, from 0x220; the interior `1|11111111` is 0x220.
 
 ### Crags: pale limestone with a south face
 
 `crag`, 8 wide by 4 tall. Parnassos's limestone seen from above, its south face showing, on aethos grass. Fill any region: the face appears along every south edge, with a shadow on the grass below. Impassable. Kithairon's painter, recolored. Names are blob shape keys.
 
-28 shapes, from 0x228; the interior `1|11111111` is 0x228.
+29 shapes, from 0x238; the interior `1|11111111` is 0x238.
 
 ### The Herkyna: water with a pebbly bank
 
-`water`, 8 wide by 2 tall. Aethos's animated water under a bank of pale pebbles and reeds. MB_POND_WATER: surf it with the Conch and fish it. Names are blob shape keys; the interior is `1|11111111`.
+`water`, 8 wide by 2 tall. Aethos's animated water under a bank of pale pebbles and reeds: a mountain stream, so it blocks and takes no Conch or rod. Names are blob shape keys; the interior is `1|11111111`.
 
-13 shapes, from 0x248; the interior `1|11111111` is 0x248.
+13 shapes, from 0x258; the interior `1|11111111` is 0x258.
 
 ### Paving: polygonal limestone flags
 
 `pave`, 8 wide by 4 tall. Old polygonal flags, worn into the grass at their edges: the crossroads' triangle, Lebadeia's precinct, the treasury's floor. Walkable. Where paving meets the road, count the road as paving (and the paving as road) so they join without a grass seam. Names are blob shape keys.
 
-25 shapes, from 0x258; the interior `1|11111111` is 0x258.
+25 shapes, from 0x268; the interior `1|11111111` is 0x268.
 
 ### Gullies: a dry ravine from above
 
 `gully`, 8 wide by 2 tall. A dry gully: its far wall's face falls into a dark floor, the near lips catch the light. Impassable. The treasury's drums roll into one; the broken bridge spans another. Names are blob shape keys.
 
-16 shapes, from 0x278; the interior `1|11111111` is 0x278.
+16 shapes, from 0x288; the interior `1|11111111` is 0x288.
 
 ### Crag detail: cracks, boulders, tufts, juniper
 
 `crag_detail`, 2 wide by 1 tall. Interior crag cells to scatter through a big crag (Kithairon's, recolored): `crack`, `boulders`, `tuft`, `juniper`. Block.
 
 ```text
-0x288 0x289   X X
+0x298 0x299   X X
 ```
 
-Pieces: `crack` 0x288, `juniper` 0x289.
+Pieces: `crack` 0x298, `juniper` 0x299.
 
 ## Laurels, wild olives, plane trees, scrub, flowers
 
@@ -114,9 +114,9 @@ Pieces: `crack` 0x288, `juniper` 0x289.
 `laurel`, 2 wide by 3 tall. Apollo's tree: a dense dark egg of glossy leaves on a slim grey trunk. The top row is drawn over the player.
 
 ```text
-0x28A 0x28B   T T
-0x292 0x293   X X
-0x29A 0x29B   X X
+0x29A 0x29B   T T
+0x2A2 0x2A3   X X
+0x2AA 0x2AB   X X
 ```
 
 ### A laurel's base with the next laurel's crown over it
@@ -124,7 +124,7 @@ Pieces: `crack` 0x288, `juniper` 0x289.
 `laurel_stack`, 2 wide by 1 tall. Between two laurels in a column: the upper laurel's base row, the lower laurel's crown top over it. Blocks.
 
 ```text
-0x28C 0x28D   X X
+0x29C 0x29D   X X
 ```
 
 ### Young laurel (1 x 2)
@@ -132,8 +132,8 @@ Pieces: `crack` 0x288, `juniper` 0x289.
 `laurel_young`, 1 wide by 2 tall. A sapling laurel for gaps in the scrub. Its top half is drawn over the player.
 
 ```text
-0x28E   T
-0x296   X
+0x29E   T
+0x2A6   X
 ```
 
 ### Wild olive (2 x 2)
@@ -141,8 +141,8 @@ Pieces: `crack` 0x288, `juniper` 0x289.
 `wild_olive`, 2 wide by 2 tall. The oleaster of Parnassos's terraces: a gnarled two-stemmed trunk under thin silver-green leaves. The top row is drawn over the player.
 
 ```text
-0x290 0x291   T T
-0x298 0x299   X X
+0x2A0 0x2A1   T T
+0x2A8 0x2A9   X X
 ```
 
 ### Plane tree (3 x 3)
@@ -150,9 +150,9 @@ Pieces: `crack` 0x288, `juniper` 0x289.
 `plane`, 3 wide by 3 tall. The oriental plane of Lebadeia's grove: a great spreading crown over a pale mottled trunk. The top row and the bottom corners are drawn over the player; the trunk and the crown's middle row block.
 
 ```text
-0x29C 0x29D 0x29E   T T T
-0x2A4 0x2A5 0x2A6   X X X
-0x2AC 0x2AD 0x2AE   T X T
+0x2AC 0x2AD 0x2AE   T T T
+0x2B4 0x2B5 0x2B6   X X X
+0x2BC 0x2BD 0x2BE   T X T
 ```
 
 ### Scrub: kermes oak and laurel bushes
@@ -160,20 +160,20 @@ Pieces: `crack` 0x288, `juniper` 0x289.
 `scrub`, 2 wide by 1 tall. Low bushes for the laurel scrub along the road: `oak` a round kermes oak, `laurel` a young bay, `pair` two small bushes. Block.
 
 ```text
-0x294 0x295   X X
+0x2A4 0x2A5   X X
 ```
 
-Pieces: `oak` 0x294, `laurel` 0x295.
+Pieces: `oak` 0x2A4, `laurel` 0x2A5.
 
 ### Mountain flowers and a tussock
 
 `meadow`, 2 wide by 1 tall. Walkable. Scatter through open grass with aethos's red anemones (0x004): `broom` yellow Spanish broom, `white` asphodel, `tuft` a tussock.
 
 ```text
-0x2A0 0x2A1   . .
+0x2B0 0x2B1   . .
 ```
 
-Pieces: `broom` 0x2A0, `white` 0x2A1.
+Pieces: `broom` 0x2B0, `white` 0x2B1.
 
 ## Worked stone: the herm, altars, the treasury's ruin, steps, bridges
 
@@ -182,63 +182,63 @@ Pieces: `broom` 0x2A0, `white` 0x2A1.
 `markers`, 8 wide by 3 tall. On borrowed grass except the gully drums. `herm_top` over `herm`: the great herm. `stone_top` over `boundary`: the old boundary stone of the crossroads. `altar_top` over `altar` (or `altar_bad`, the god's face scratched with a sickle): Apollo's little marble altar. `cairn` the pilgrims' cairn; `bench_L`, `bench_R` the lookout's bench; `chair` the stone chair of Mnemosyne (walkable: the reading's seat); `drum` a column drum at rest; `drum_gully*` drums fallen into a gully (on the gully's floor, for the treasury's push puzzle); `capital`, `stump` Doric pieces; `rubble`, `feathers`, `dig`, `scree`, `scree_b` walkable; `boulder` a grey rock; `drum_b` a drum lying on its side.
 
 ```text
-0x2B0 0x2B1 0x2B2 0x2B3 0x2B4 0x2B5 0x2B6 0x2B7   T T T . . . X X
-0x2B8 0x2B9 0x2BA 0x2BB 0x2BC 0x2BD 0x2BE 0x2BF   X X X X X X X X
-0x2C0 0x2C1 0x2C2 0x2C3 0x2C4 0x2C5 0x2C6 0x2C7   X X . . . . . .
+0x2C0 0x2C1 0x2C2 0x2C3 0x2C4 0x2C5 0x2C6 0x2C7   T T T . . . X X
+0x2C8 0x2C9 0x2CA 0x2CB 0x2CC 0x2CD 0x2CE 0x2CF   X X X X X X X X
+0x2D0 0x2D1 0x2D2 0x2D3 0x2D4 0x2D5 0x2D6 0x2D7   X X . . . . . .
 ```
 
-Pieces: `herm_top` 0x2B0, `stone_top` 0x2B1, `altar_top` 0x2B2, `dig` 0x2B3, `rubble` 0x2B4, `feathers` 0x2B5, `bench_L` 0x2B6, `bench_R` 0x2B7, `herm` 0x2B8, `boundary` 0x2B9, `altar` 0x2BA, `altar_bad` 0x2BB, `cairn` 0x2BC, `drum` 0x2BD, `capital` 0x2BE, `boulder` 0x2BF, `drum_gully` 0x2C0, `drum_gully_b` 0x2C1, `scree` 0x2C2.
+Pieces: `herm_top` 0x2C0, `stone_top` 0x2C1, `altar_top` 0x2C2, `dig` 0x2C3, `rubble` 0x2C4, `feathers` 0x2C5, `bench_L` 0x2C6, `bench_R` 0x2C7, `herm` 0x2C8, `boundary` 0x2C9, `altar` 0x2CA, `altar_bad` 0x2CB, `cairn` 0x2CC, `drum` 0x2CD, `capital` 0x2CE, `boulder` 0x2CF, `drum_gully` 0x2D0, `drum_gully_b` 0x2D1, `scree` 0x2D2.
 
 ### The herm, the boundary stone and the chair, on paving
 
 `pmarkers`, 5 wide by 1 tall. `markers`' `herm_top` over `herm`, `stone_top` over `boundary`, and `chair`, on the paving's flags instead of grass.
 
 ```text
-0x2C8 0x2C9 0x2CA 0x2CB 0x2CC   T X T X .
+0x2D8 0x2D9 0x2DA 0x2DB 0x2DC   T X T X .
 ```
 
-Pieces: `herm_top` 0x2C8, `herm` 0x2C9, `stone_top` 0x2CA, `boundary` 0x2CB, `chair` 0x2CC.
+Pieces: `herm_top` 0x2D8, `herm` 0x2D9, `stone_top` 0x2DA, `boundary` 0x2DB, `chair` 0x2DC.
 
 ### The treasury's broken walls
 
 `ruin`, 8 wide by 1 tall. The Phokian treasury's ashlar, on borrowed grass. `W_L`, `W_M`, `W_R`: a west-east wall with its coping and south face; `W_low` the same broken low; `W_stub` a fallen end; `NS` a north-south wall seen from above, `NS_end` its south end with a bit of face; `door_L` a door jamb.
 
 ```text
-0x2D0 0x2D1 0x2D2 0x2D3 0x2D4 0x2D5 0x2D6 0x2D7   X X X X X X X X
+0x2E0 0x2E1 0x2E2 0x2E3 0x2E4 0x2E5 0x2E6 0x2E7   X X X X X X X X
 ```
 
-Pieces: `W_L` 0x2D0, `W_M` 0x2D1, `W_low` 0x2D2, `W_R` 0x2D3, `NS` 0x2D4, `NS_end` 0x2D5, `W_stub` 0x2D6, `door_L` 0x2D7.
+Pieces: `W_L` 0x2E0, `W_M` 0x2E1, `W_low` 0x2E2, `W_R` 0x2E3, `NS` 0x2E4, `NS_end` 0x2E5, `W_stub` 0x2E6, `door_L` 0x2E7.
 
 ### The pilgrims' steps
 
 `steps`, 3 wide by 1 tall. Three pale limestone risers going down to the south: the steps of Lebadeia's precinct, where the pilgrims sit. West-east; walkable.
 
 ```text
-0x2A8 0x2A9 0x2AA   . . .
+0x2B8 0x2B9 0x2BA   . . .
 ```
 
-Pieces: `L` 0x2A8, `M` 0x2A9, `R` 0x2AA.
+Pieces: `L` 0x2B8, `M` 0x2B9, `R` 0x2BA.
 
 ### Stone bridges over the Herkyna
 
 `bridge`, 4 wide by 2 tall. Over a river two cells wide. The road bridge is two rows: `N_L` `N_R` (its north parapet) over `S_L` `S_R` (its south parapet). The footbridge is one row, `F_L` `F_R`, parapets both sides. Walkable; count these cells as river when tiling the banks, so the water runs under.
 
 ```text
-0x2D8 0x2D9 0x2DA 0x2DB   . . . .
-0x2E0 0x2E1 0x2E2 0x2E3   . . . .
+0x2E8 0x2E9 0x2EA 0x2EB   . . . .
+0x2F0 0x2F1 0x2F2 0x2F3   . . . .
 ```
 
-Pieces: `N_L` 0x2D8, `N_R` 0x2D9, `S_L` 0x2E0, `S_R` 0x2E1, `F_L` 0x2DA, `F_R` 0x2DB, `F_L2` 0x2E2, `F_R2` 0x2E3.
+Pieces: `N_L` 0x2E8, `N_R` 0x2E9, `S_L` 0x2F0, `S_R` 0x2F1, `F_L` 0x2EA, `F_R` 0x2EB, `F_L2` 0x2F2, `F_R2` 0x2F3.
 
 ### The broken timber bridge
 
 `timber`, 3 wide by 1 tall. A plank bridge over a gully three cells wide: `W`, `gap` (the middle planks fell: MB_ICHOR_GAP, so the Winged Talaria leap it at a run), `E`. Walkable but the gap. Count these cells as gully when tiling it.
 
 ```text
-0x2CD 0x2CE 0x2CF   . X .
+0x2DD 0x2DE 0x2DF   . X .
 ```
 
-Pieces: `W` 0x2CD, `gap` 0x2CE, `E` 0x2CF.
+Pieces: `W` 0x2DD, `gap` 0x2DE, `E` 0x2DF.
 
 ## Lebadeia's precinct: the grille, the springs
 
@@ -247,32 +247,32 @@ Pieces: `W` 0x2CD, `gap` 0x2CE, `E` 0x2CF.
 `face`, 5 wide by 1 tall. South-face cells of the crag (blob key `1|11100011`) over the precinct's paving, a shadowed foot at their base (`plain` the bare face). `grille` the bronze grille shut across Trophonios's cave mouth (blocks); `grille_open` swung back, MB_NON_ANIMATED_DOOR, the cave's warp (the map swaps it in when `FLAG_ICHOR_TROPHONIOS_GRILLE_OPEN` is set); `spout` the spring of Mnemosyne running out of the rock; `tablets` pilgrims' tablets hung on pegs.
 
 ```text
-0x2E8 0x2E9 0x2EA 0x2EB 0x2EC   X D X X X
+0x2F8 0x2F9 0x2FA 0x2FB 0x2FC   X D X X X
 ```
 
-Pieces: `grille` 0x2E8, `grille_open` 0x2E9, `spout` 0x2EA, `tablets` 0x2EB, `plain` 0x2EC.
+Pieces: `grille` 0x2F8, `grille_open` 0x2F9, `spout` 0x2FA, `tablets` 0x2FB, `plain` 0x2FC.
 
 ### The spring of Lethe (2 x 2)
 
 `lethe`, 2 wide by 2 tall. A square stone basin of black, still water: forgetting. Blocks. A hidden item can sit in it (the Bronze Obol someone threw in to forget something).
 
 ```text
-0x2DC 0x2DD   X X
-0x2E4 0x2E5   X X
+0x2EC 0x2ED   X X
+0x2F4 0x2F5   X X
 ```
 
-Pieces: `NW` 0x2DC, `NE` 0x2DD, `SW` 0x2E4, `SE` 0x2E5.
+Pieces: `NW` 0x2EC, `NE` 0x2ED, `SW` 0x2F4, `SE` 0x2F5.
 
 ### The spring of Mnemosyne (2 x 2)
 
 `mnemosyne`, 2 wide by 2 tall. Bright running water in a stone rim, fed from the spout above (put `face`'s `spout` over its west column) and spilling east through a notch into the Herkyna: put the river's water cells against its east side and count these cells as water when tiling the river. Blocks.
 
 ```text
-0x2DE 0x2DF   X X
-0x2E6 0x2E7   X X
+0x2EE 0x2EF   X X
+0x2F6 0x2F7   X X
 ```
 
-Pieces: `NW` 0x2DE, `NE` 0x2DF, `SW` 0x2E6, `SE` 0x2E7.
+Pieces: `NW` 0x2EE, `NE` 0x2EF, `SW` 0x2F6, `SE` 0x2F7.
 
 ## The lookout's view: the Phaidriades and Delphoi, the ravine
 
@@ -281,21 +281,21 @@ Pieces: `NW` 0x2DE, `NE` 0x2DF, `SW` 0x2E6, `SE` 0x2E7.
 `far`, 8 wide by 2 tall. A backdrop across the lookout's ravine, from the top: cliff tops (`top_a`, `top_b`), faces (`face_a`, `face_b`) with the Kastalian gorge and its falls between them (`gorge_top`, `gorge`, `gorge_foot`), the cliffs' foot (`foot`, `foot_b`), the slope with the sanctuary (`slope`, `slope_b`, `temple_L` `temple_R`, `theater`, `roofs`), and `slope_foot` falling into the ravine. All block.
 
 ```text
-0x2F0 0x2F1 0x2F2 0x2F3 0x2F4 0x2F5 0x2F6 0x2F7   X X X X X X X X
-0x2F8 0x2F9 0x2FA 0x2FB 0x2FC 0x2FD 0x2FE 0x2FF   X X X X X X X X
+0x300 0x301 0x302 0x303 0x304 0x305 0x306 0x307   X X X X X X X X
+0x308 0x309 0x30A 0x30B 0x30C 0x30D 0x30E 0x30F   X X X X X X X X
 ```
 
-Pieces: `top_a` 0x2F0, `face_a` 0x2F1, `face_b` 0x2F2, `gorge_top` 0x2F3, `gorge` 0x2F4, `gorge_foot` 0x2F5, `foot` 0x2F6, `slope` 0x2F7, `temple_L` 0x2F8, `temple_R` 0x2F9, `theater` 0x2FA, `roofs` 0x2FB, `slope_foot` 0x2FC.
+Pieces: `top_a` 0x300, `face_a` 0x301, `face_b` 0x302, `gorge_top` 0x303, `gorge` 0x304, `gorge_foot` 0x305, `foot` 0x306, `slope` 0x307, `temple_L` 0x308, `temple_R` 0x309, `theater` 0x30A, `roofs` 0x30B, `slope_foot` 0x30C.
 
 ### The ravine, and the lookout's lip
 
 `ravine`, 1 wide by 1 tall. `dark` the ravine's depth; `mist` the same with a thread of mist; `lip` the lookout's near edge (grass to the south, the drop to the north; walkable, the player stops at it).
 
 ```text
-0x28F   .
+0x29F   .
 ```
 
-Pieces: `lip` 0x28F.
+Pieces: `lip` 0x29F.
 
 ## Lebadeia's houses (Eleusa's kit)
 
@@ -304,42 +304,42 @@ Pieces: `lip` 0x28F.
 `roof_tile`, 3 wide by 2 tall. Red Laconian tiles. Repeat the middle column for a wider house.
 
 ```text
-0x300 0x301 0x302   X X X
-0x308 0x309 0x30A   X X X
+0x310 0x311 0x312   X X X
+0x318 0x319 0x31A   X X X
 ```
 
-Pieces: `R0_L` 0x300, `R0_M` 0x301, `R0_R` 0x302, `R1_L` 0x308, `R1_M` 0x309, `R1_R` 0x30A.
+Pieces: `R0_L` 0x310, `R0_M` 0x311, `R0_R` 0x312, `R1_L` 0x318, `R1_M` 0x319, `R1_R` 0x31A.
 
 ### Wall rows: upper and lower (on the socle)
 
 `wall`, 3 wide by 2 tall. Plain plaster. Every window, door and extra below is a W0 or W1 M cell, so it can stand anywhere between the corners.
 
 ```text
-0x303 0x304 0x305   X X X
-0x30B 0x30C 0x30D   X X X
+0x313 0x314 0x315   X X X
+0x31B 0x31C 0x31D   X X X
 ```
 
-Pieces: `W0_L` 0x303, `W0_M` 0x304, `W0_R` 0x305, `W1_L` 0x30B, `W1_M` 0x30C, `W1_R` 0x30D.
+Pieces: `W0_L` 0x313, `W0_M` 0x314, `W0_R` 0x315, `W1_L` 0x31B, `W1_M` 0x31C, `W1_R` 0x31D.
 
 ### Upper-wall cells: windows and garlic
 
 `windows`, 2 wide by 1 tall. W0 cells. `shutters` is an open window with ox-blood shutters, `lattice` a small timber grille, `closed` shutters shut, `garlic` strings of garlic and onions on a peg.
 
 ```text
-0x2A2 0x2A3   X X
+0x2B2 0x2B3   X X
 ```
 
-Pieces: `shutters` 0x2A2, `lattice` 0x2A3.
+Pieces: `shutters` 0x2B2, `lattice` 0x2B3.
 
 ### Doors (lower-wall cells)
 
 `doors`, 2 wide by 1 tall. W1 cells; every one is a door (MB_NON_ANIMATED_DOOR): put the warp there. `plank` a dark plank door in ox-blood jambs, `dutch` its top leaf open, `curtain` an arched doorway with a striped wool curtain, `barn_l` + `barn_r` a wide double door (warp on both).
 
 ```text
-0x2ED 0x2EE   D D
+0x2FD 0x2FE   D D
 ```
 
-Pieces: `plank` 0x2ED, `curtain` 0x2EE.
+Pieces: `plank` 0x2FD, `curtain` 0x2FE.
 
 ## Render-and-critique passes
 
@@ -405,6 +405,28 @@ olive groves cut into it.
 - **Lebadeia:** scrub on the oracle's rock above the precinct, and the east seam's olive
   rows are left whole.
 
+### Pass 4: the route standard (MAP_DESIGN section 8)
+
+`tools/ichor/map_audit.py` measured Route 9 at 93 grass cells (6 a screen, against 15) and
+5 trainers (against 9), and Lebadeia at no item ball and 44 cells of surfable river with no
+surf or fishing table.
+- **Grass on every road.** The goats' slope is grass down to the road; band A1 is 4 deep and
+  the cleft's floor is grass under Onomarchos's eye; F1 and F2 on the fork are 5 deep, with
+  grass at the fork's foot and corner, on the lookout's shelf, the bridge's far bank and the
+  gully path; the Sphinx's seat, all three olive terraces and the grove below the
+  crossroads are grass; B2 is 5 deep below the cutting, a new band B2b crosses the terrace
+  path, B3 runs 4 deep through the olives, and aethos's tall grass lines the road down to
+  Kirrha. 232 cells (15 a screen); forced on the main road between the ends: A1-A2 with
+  the slope, the cleft, B2, B2b and B3 (the audit counts 21 forced cells).
+- **Four more trainers**, staged in `design/phase3/parties/parnassos.party` and folded:
+  HOPLITE Phokos in a notch of the cutting's wall (sight 2 across it, mandatory), FOWLER
+  Daulis beside band B2 (sight 2 across it, mandatory), HARVESTER Amphissa on the second
+  olive terrace (optional) and AUGUR Mopsos on the Sphinx's seat (optional). Levels 31-32.
+- **The Herkyna** is a mountain stream: it blocks and takes neither the Conch nor a rod, so
+  Lebadeia needs no water tables. Lebadeia gets a visible Revive on the river bank (13,9).
+- The east edges are closed above and below their roads (Route 9's x 51 rows 15-18 are
+  woods; Lebadeia's west corner under the plane is blocked).
+
 ### What's left (honest)
 
 - The paving (crossroads, precinct, the treasury's floor) reads busy, more cobble than
@@ -466,7 +488,7 @@ crossroads.
 **Items.** Visible: Max Revive (the lookout's tip, 1,7), PP Max (across the broken bridge,
 26,8), TM (the treasury, 13,15: TM Rock Tomb stands in for Rock Slide, `ICHOR_STUB_TMS`),
 Hard Stone (the treasury, 17,14), Super Potion (terrace 1's end, 12,25), Ultra Ball (the
-grove below the crossroads, 31,27). Hidden: Ether (the cairn's foot, 10,7), Pretty
+grove below the crossroads, 31,27); Lebadeia's Revive (the river bank, 13,9). Hidden: Ether (the cairn's foot, 10,7), Pretty
 Feather (the Sphinx's seat, 40,10), Nugget (the treasury's floor, 12,14), Revival Herb
 (terrace 1, 3,25); Lebadeia's Bronze Obol (Lethe, 3,4, as `ITEM_RELIC_COPPER`), Calcium
 (behind the pilgrims' hall, 18,5) and Honey (the plane's hollow, 1,10).
