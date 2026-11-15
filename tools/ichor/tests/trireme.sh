@@ -58,7 +58,7 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
   awk '/^k_[A-Za-z0-9_]+:/ { n = substr($1, 3, length($1) - 3); next }
        n && /\.word/  { print "  " n " = " $2 ","; n = "" }
        n && /\.space/ { print "  " n " = 0,"; n = "" }' "$OUT/consts.s"
-  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gMain|gSaveBlock1Ptr|gSaveBlock2Ptr|gMapHeader|gObjectEvents|gPlayerAvatar|gBattleOutcome|gSpecialVar_0x8008|gSpecialVar_0x8009|gPlayerPartyCountPtr|CB2_Overworld|BattleMainCB2|sGlobalScriptContextStatus|sLockFieldControls)$/ \
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gMain|gSaveBlock1Ptr|gSaveBlock2Ptr|gMapHeader|gObjectEvents|gPlayerAvatar|gBattleOutcome|gSpecialVar_0x8008|gSpecialVar_0x8009|gPartiesCount|gParties|CB2_Overworld|BattleMainCB2|sGlobalScriptContextStatus|sLockFieldControls)$/ \
     { print "  " $3 " = 0x" $1 "," }'
   echo "}"
 } > "$LUA"

@@ -313,7 +313,7 @@ local function main()
                        S.FLAG_CROSSING_DONE, S.FLAG_AIGINA_STOP }) do setFlag(f) end
   -- (Quickstart's lead is level 14 and the island's wild ones 12-16, so the lead
   -- is raised to 100 and a Repel that never runs out turns every one away)
-  emu:write8(emu:read32(S.gPlayerPartyPtr) + S.OFF_MON_LEVEL, 100)
+  emu:write8(S.gParties + S.OFF_MON_LEVEL, 100)
   setVar(S.VAR_REPEL_STEP_COUNT, 30000)
 
   -- 1. Aigina Town, through the open gate, onto the road

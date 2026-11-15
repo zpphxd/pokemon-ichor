@@ -399,10 +399,13 @@ end
 local function widow()
   warpInto({}, S.MAP_WIDOW)
   shot("widow_01_room.png")
-  walkTo({ { 3, 4 }, { 2, 4 } })
+  -- Penelopeia stands at (3,3), beside her loom, so (1,3) stays free for reading it
+  walkTo({ { 3, 4 } })
   talk(K.UP, "widow_02_penelopeia")
   expect(getFlag(S.FLAG_GOT_WIDOWS_GIFT), "Penelopeia gives the Sea Incense (FLAG_ICHOR_GOT_WIDOWS_GIFT)")
   talk(K.UP, "widow_03_after")
+  walkTo({ { 2, 4 }, { 2, 3 }, { 1, 3 } })
+  talk(K.UP, "widow_04_loom")
 end
 
 local function potter()

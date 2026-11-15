@@ -157,7 +157,7 @@ ROOMS = {
             ("coord", "the player's place in beat 12, beside Alethea", (6, 5)),
             ("coord", "Alethea at the notice board (beat 12)", (1, 8)),
             ("coord", "the player behind her at the notice board (beat 12)", (2, 8)),
-            ("npc", "Thaletas, the trader, by the water with his Narkeray", (13, 5), "east"),
+            ("npc", "Thaletas, the trader, by the water with his Narkeray", (14, 5), "west"),
             ("npc", "the wool merchant, at her bolts", (1, 4), "east"),
             ("npc", "the grain merchant, by his sacks", (7, 7), "west"),
             ("bg", "the public notice, sealed with the Archon's owl", (0, 8), (1, 8, "west")),

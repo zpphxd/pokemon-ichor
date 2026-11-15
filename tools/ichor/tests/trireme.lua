@@ -41,7 +41,7 @@ local function sb2() return emu:read32(S.gSaveBlock2Ptr) end
 local function getFlag(f) return (emu:read8(sb1() + S.OFF_SB1_FLAGS + (f >> 3)) >> (f & 7)) & 1 == 1 end
 local function defeated(t) return getFlag(S.TRAINER_FLAGS_START + t) end
 local function tempVar1() return emu:read16(sb1() + S.OFF_SB1_VARS + 2 * S.VAR_TEMP_1_INDEX) end
-local function partyCount() return emu:read8(emu:read32(S.gPlayerPartyCountPtr)) end
+local function partyCount() return emu:read8(S.gPartiesCount) end
 local function mapId()
   local loc = sb1() + S.OFF_SB1_LOCATION
   return emu:read8(loc) * 256 + emu:read8(loc + 1)
