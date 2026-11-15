@@ -75,6 +75,25 @@ SEA_WATER_SHARE = 0.5     # a route whose open ground is mostly water is a sea r
 # Where each place sits on BALANCE.md's curve (the stage's name as BALANCE.md bolds it), and its band.
 # Routes go by number (AETHOS_MAP.md's story order); other places by name prefix. Add places as they're built.
 STAGES = [  # (stage, band, route numbers, place prefixes)
+    # Ichor (world-postgame): the post-game's places come first, so their names win over shorter prefixes
+    # further down ("Nemea" would take NemeaGlen, "Olympus" OlympusSummit, "Ascent" AscentOfTainaron,
+    # "Stymphalia" StymphalianReeds, and the Oikoumene's "Aia" Aiaia). design/postgame/BUILD.md §1 has the
+    # naming rule: every post-game map's directory starts with one of these.
+    ("post-game", "late", (),
+     ("Euploia", "ManiRoad", "CapeTainaron", "Tainaron", "Underworld", "AcheronBank", "Styx", "Asphodel",
+      "Crossroads", "Lethe", "LakeOfMnemosyne", "HouseOfHades", "BronzeGates", "Tartarus", "Sisyphus", "Chasm",
+      "Elysium", "AscentOfTainaron", "HouseOfNight",
+      "Heraion", "NemeaGlen", "LionsDen", "Lerna", "LadonFord", "Erymanthos", "Snowfield", "Augeas", "StableYard",
+      "StymphalianReeds", "BullsShore", "BullsCrossing", "Abdera", "BistonianPlain", "Diomedes", "ThermodonRoad",
+      "Themiskyra", "HippolytasHall", "WesternCape", "OceanStream", "StraitOfThePillars", "Erytheia",
+      "GeryonsPasture", "CaucasusCrag", "Hesperides", "AtlasRidge",
+      "SacredWay", "Olympia", "Altis",
+      "Atlantis", "BeyondThePillars", "Nereid", "KorykianCave", "CloudMeadows", "OuranosSky", "OlympusSummit",
+      "Rhodos", "Ithaka", "Kerkyra", "PostgameTest")),
+    ("Oikoumene", "late", (),  # the Odyssey's sea and islands, at the Oikoumene's levels (POSTGAME §2)
+     ("MaleiaWaters", "WineDarkSea", "OuterSea", "LotusIsle", "CyclopsIsle", "CyclopsCave", "Aiolia", "Aiaia",
+      "CircesHall", "SirensStrait", "TheStrait", "ScyllasCave", "CharybdisHoard", "Thrinakia", "ProteusIslet",
+      "Scheria", "MistBeach")),
     ("Kalliste", "early", (1,), ("Elaia", "Kalliste", "Akti")),
     ("Emporion", "early", (2, 3), ("TriremeEuploia", "Aegina", "Emporion")),
     ("Eleusa", "early", (4, 5), ("HecatesHollow", "Eleusa")),
