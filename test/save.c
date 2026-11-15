@@ -6,7 +6,7 @@
 // Please note that this simple check is not 100% foolproof, but should be able to catch most unintended shifts.
 #define T_SAVEBLOCK1_SIZE 15588 // Ichor: 1,024 trainer flags (MAX_TRAINERS_COUNT_EMERALD, PG-38), 20 bytes over upstream
 #define T_SAVEBLOCK2_SIZE 3884
-#define T_SAVEBLOCK3_SIZE 1284 // Ichor: IchorSave (1,280 bytes, include/ichor_save.h) plus dexNavChain
+#define T_SAVEBLOCK3_SIZE 1476 // Ichor: IchorSave (1,472 bytes since version 4, include/ichor_save.h) plus dexNavChain
 #define T_POKEMONSTORAGE_SIZE 34144
 
 TEST("SaveBlock1 is backwards compatible")

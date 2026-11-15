@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_relics.h"
 #include "ichor_rites.h"
 #include "config/save.h"
 #include "battle_pike.h"
@@ -147,12 +148,13 @@ static void Task_SaveAfterLinkBattle(u8 taskId);
 static void Task_WaitForBattleTowerLinkSave(u8 taskId);
 static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
-// Ichor: "BLESSING / Apollo (412)" (SYSTEMS §3), where the Safari panel sits
+// Ichor: "BLESSING / Apollo (412)" (SYSTEMS §3) and a carried flame's steps
+// (SYSTEMS §2), where the Safari panel sits
 static const struct WindowTemplate sWindowTemplate_IchorBlessing = {
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = 12,
+    .width = 17,
     .height = 4,
     .paletteNum = 15,
     .baseBlock = 0x8
@@ -447,8 +449,18 @@ static void ShowIchorBlessingWindow(void)
     sIchorBlessingWindowId = AddWindow(&sWindowTemplate_IchorBlessing);
     PutWindowTilemap(sIchorBlessingWindowId);
     DrawStdWindowFrame(sIchorBlessingWindowId, FALSE);
-    StringCopy(gStringVar4, COMPOUND_STRING("BLESSING\n"));
-    Ichor_BufferBlessingPanel(gStringVar4 + StringLength(gStringVar4));
+    if (!Ichor_HasBlessing())
+        StringCopy(gStringVar4, COMPOUND_STRING("CARRIED FIRE\n"));
+    else if (!Ichor_IsCarryingFlame())
+        StringCopy(gStringVar4, COMPOUND_STRING("BLESSING\n"));
+    else
+        gStringVar4[0] = EOS;
+    if (Ichor_HasBlessing())
+        Ichor_BufferBlessingPanel(gStringVar4 + StringLength(gStringVar4));
+    if (Ichor_HasBlessing() && Ichor_IsCarryingFlame())
+        StringAppend(gStringVar4, COMPOUND_STRING("\n"));
+    if (Ichor_IsCarryingFlame())
+        Ichor_BufferFlamePanel(gStringVar4 + StringLength(gStringVar4));
     AddTextPrinterParameterized(sIchorBlessingWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sIchorBlessingWindowId, COPYWIN_GFX);
 }
@@ -565,7 +577,7 @@ static bool32 InitStartMenuStep(void)
     case 3:
         if (GetSafariZoneFlag())
             ShowSafariBallsWindow();
-        else if (Ichor_HasBlessing())
+        else if (Ichor_HasBlessing() || Ichor_IsCarryingFlame())
             ShowIchorBlessingWindow();
         if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             ShowPyramidFloorWindow();

@@ -1027,8 +1027,8 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 
 === TRAINER_ICHOR_GORGIDAS ===
 Name: GORGIDAS
-Class: Shepherd
-Pic: Shepherd
+Class: Fowler
+Pic: Fowler M
 Gender: Male
 Music: Cool
 AI: Check Bad Move
@@ -1059,8 +1059,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_TIMOXENA ===
 Name: TIMOXENA
-Class: Shepherd
-Pic: Shepherd
+Class: Fowler
+Pic: Fowler F
 Gender: Female
 Music: Female
 AI: Check Bad Move
