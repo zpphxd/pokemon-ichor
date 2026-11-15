@@ -1,0 +1,82 @@
+/* Staged by world-act2 from design/phase3/SCRIPT.md Part 3 (the road west). The parnassos agent owns these. */
+
+=== TRAINER_ICHOR_KORETAS ===
+Name: KORETAS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_ONOMARCHOS ===
+Name: ONOMARCHOS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Melibee
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Gelasable
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_ROUTE9_PSEPHOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Spalunk
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_PHAYLLOS ===
+Name: PHAYLLOS
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Cool
+AI: Check Bad Move
+
+Harpelle
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lophops
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LYKOREUS ===
+Name: LYKOREUS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Gelasable
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelonet
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+

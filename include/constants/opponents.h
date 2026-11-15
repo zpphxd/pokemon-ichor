@@ -76,7 +76,21 @@
 #define TRAINER_ICHOR_KLEON_3_HIPLING         185
 #define TRAINER_ICHOR_KLEON_3_NEBREL          186
 #define TRAINER_ICHOR_SILENOS                 187
-#define TRAINERS_END_ACT2                     188
+#define TRAINER_ICHOR_GORGIDAS                188
+#define TRAINER_ICHOR_ISMENIAS                189
+#define TRAINER_ICHOR_TIMOXENA                190
+#define TRAINER_ICHOR_PERSES                  191
+#define TRAINER_ICHOR_EUPHROSYNE              192
+#define TRAINER_ICHOR_PHILOMELOS              193
+#define TRAINER_ICHOR_MELAMPOS                194
+#define TRAINER_ICHOR_KORETAS                 195
+#define TRAINER_ICHOR_ONOMARCHOS              196
+#define TRAINER_ICHOR_GRUNT_ROUTE9_PSEPHOS    197
+#define TRAINER_ICHOR_PHAYLLOS                198
+#define TRAINER_ICHOR_LYKOREUS                199
+#define TRAINER_ICHOR_KEPHISIOS               200
+#define TRAINER_ICHOR_LAMPRIAS                201
+#define TRAINERS_END_ACT2                     202
 
 // world-act3, ids 320-499: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0

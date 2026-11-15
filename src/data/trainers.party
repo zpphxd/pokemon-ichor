@@ -1025,6 +1025,234 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 - Poison Jab
 - Toxic
 
+=== TRAINER_ICHOR_GORGIDAS ===
+Name: GORGIDAS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Cool
+AI: Check Bad Move
+
+Lophops
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_ISMENIAS ===
+Name: ISMENIAS
+Class: Shepherd
+Pic: Fisherman
+Gender: Male
+Music: Swimmer
+AI: Check Bad Move
+
+Ketofry
+Level: 29
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kynoketos
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Karkitox
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_TIMOXENA ===
+Name: TIMOXENA
+Class: Shepherd
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Harpelle
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Galenyon
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_PERSES ===
+Name: PERSES
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Chelonet
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Sing
+- Mud Bomb
+- Rollout
+- Round
+
+Spalunk
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_EUPHROSYNE ===
+Name: EUPHROSYNE
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Kerazap
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Gelasable
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_PHILOMELOS ===
+Name: PHILOMELOS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Raknit
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_MELAMPOS ===
+Name: MELAMPOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Lophops
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Enigmaw
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Psybeam
+- Force Palm
+- Air Slash
+- Mind Reader
+
+=== TRAINER_ICHOR_KORETAS ===
+Name: KORETAS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_ONOMARCHOS ===
+Name: ONOMARCHOS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Melibee
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Gelasable
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_ROUTE9_PSEPHOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Spalunk
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_PHAYLLOS ===
+Name: PHAYLLOS
+Class: Hoplite
+Pic: Shepherd
+Gender: Male
+Music: Cool
+AI: Check Bad Move
+
+Harpelle
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lophops
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LYKOREUS ===
+Name: LYKOREUS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Gelasable
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelonet
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_KEPHISIOS ===
+Name: KEPHISIOS
+Class: Shepherd
+Pic: Fisherman
+Gender: Male
+Music: Swimmer
+AI: Check Bad Move
+
+Narkeray
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kynoketos
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LAMPRIAS ===
+Name: LAMPRIAS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Rich
+AI: Check Bad Move
+
+Midonos
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
 
 /* Ichor: world-act3 (ids 320-499) */
 

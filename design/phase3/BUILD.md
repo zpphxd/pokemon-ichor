@@ -9,7 +9,7 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 | # | Batch | Beats | Status |
 |---|---|---|---|
 | 1 | **The Kithairon crossing and Thyrsa:** Route 6, Mt. Kithairon (Eleutherai and the pass), Route 7 and the Kronia grounds, Thyrsa City and its interiors, the theater and skene, the Temple of Dionysus | 26–34 | built 2026-11-14 (below: what's left) |
-| 2 | The road west: Route 8, Lebadeia and Trophonios's cave, Route 9, Kirrha, the Gulf ferry, Aigion | 35–37 | |
+| 2 | The road west: Route 8, Lebadeia and Trophonios's cave, Route 9, Kirrha, the Gulf ferry, Aigion | 35–37 | in progress, with batch 1's polish pass alongside |
 | 3 | Arkadia: Route 11, Styx Falls, Route 12, Arkadia and its interiors, the Cypress Wood, the Pool, the Temple of Artemis | 38–44 | |
 | 4 | Back to the Isthmus and the road of the Mysteries: Route 13, Nemea, Route 14, the Act II changes to Emporion, Eleusa and Akti, Route 15 with Thria, Daphni, Route 16; Aigina's interior scripted onto world-act1's maps | 45–47 | |
 | 5 | Astyra: the city and its interiors, the Kerameikos and the paupers' graves, the Akropolis, Phaleron, the salt well | 48–57 | |
@@ -17,6 +17,83 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 | 7 | The optional lands: Euboia; Routes 17–18 with Marathon, Halai and Sounion; the open Aegean | — | |
 
 Each batch ends with a report to the director: the branch and commit, what's playable, the map renders, the test results and the ROM delta.
+
+## Batch 2: the road west, and batch 1's polish
+
+Built on the merge of main's Hoenn cut and engine batches 2–4, so **use the engine directly; batch 1's stubs for these are gone from new work**:
+- **Relics** (ENGINE_API §2): obstacles are objects running `EventScript_CutTree` (thorn thicket, the Sickle), `EventScript_RockSmash` (marble rubble, the Hammer), `EventScript_StrengthBoulder` (column drum, the Girdle), `EventScript_IchorCobweb`, `EventScript_IchorGreatBoulder`; give a relic with `giveitem(ITEM_GIRDLE_OF_HERAKLES)` and the like (the item sets its `FLAG_ICHOR_GOT_*`). Dark maps: `"requires_flash": true`, braziers with `EventScript_IchorBrazier` and lit zones.
+- **Rites** (§3): `EventScript_IchorAltar_<God>`, `EventScript_IchorTempleAltar_<God>`, `EventScript_IchorDesecratedAltar` (after your own guard battle), `special(Ichor_AddFavor)`. Offerings are real items: `ITEM_OLIVE_OIL`, `ITEM_BARLEY_CAKE`, `ITEM_WINE`, `ITEM_FRANKINCENSE`, `ITEM_LAUREL_SPRIG`, `ITEM_BRONZE_VOTIVE`.
+- **Herms** (§4): the great herm's bg event runs `EventScript_IchorGreatHerm`. Add its row to `src/data/ichor_herms.h` and its `HEAL_LOCATION_HERM_AETHOS_ROUTE_<N>` (the landing tile south of it) to `src/data/heal_locations.json`, both appended. Ids `HERM_AETHOS_ROUTE_6` … `_9` exist.
+- **Still stubbed** (keep the tags): dig spots (`ICHOR_STUB_DIG`), knucklebones, the Aethos dex, Act II's music cues, new key items and TMs, the xenia rest's clock.
+- **Engine ranges, given by the ichor-engine session** (ENGINE_API §1's "Index blocks given out", 2026-11-14):
+  - Braziers, `FLAG_ICHOR_BRAZIERS_START` +0x20–0x2F: +0x20 Antiope's cave, +0x21 Trophonios B1F, +0x22 the oracle's chamber; the rest for batches 3–7.
+  - Desecrated altars, indices 8–15 (in `VAR_0x8005` to `EventScript_IchorDesecratedAltar`): 8 Kithairon's shrine, 9 Route 9's altar.
+  - Decoys, `FLAG_ICHOR_THEOXENIA_START` +0x20–0x27: +0x20 Eleutherai's old man, +0x21 Thyrsa's blind beggar, +0x22 Route 8's traveler, +0x23 Kirrha's beggar. (Batch 1's two decoys move here from the bank flags they used.)
+  - Fixed digs, `FLAG_ICHOR_DIG_FIXED_START` +0x10–0x1B: +0x10 the Treasury of Minyas, +0x11 Gla (both Route 8), +0x12 Trophonios's great boulder, +0x13 Route 9's gully.
+  - **Digs aren't built**, but their names are fixed (ENGINE_API §8), so script against them behind `ICHOR_STUB_DIG`: a fixed find is `setvar(VAR_0x8004, <index>)`, `setvar(VAR_0x8005, ITEM_…)`, `goto(EventScript_IchorDigFixed)`; a daily spot is `setvar(VAR_0x8004, <spot>)`, `setvar(VAR_0x8005, ICHOR_DIG_ACT_II)`, `goto(EventScript_IchorDigSpot)` (ask this session for daily spot indices). Hide a dig-spot object with the same flag as its find.
+
+### Who builds what
+
+| Agent | Builds | Files it owns |
+|---|---|---|
+| **kopais** | The `kopais` secondary (SCRIPT.md Part 10: marsh reeds as the grass, reed-bed edges, marsh and lake water, mudflats, the Minyan dike, the Treasury of Minyas, Gla); `MAP_ROUTE8_KOPAIS` (64×26): beat 35A, Part 2's roster, Alethea's notes, the herm | `tools/ichor/art/kopais_*.py`, `data/tilesets/secondary/kopais/`, `tools/ichor/maps/kopais.py`, the map's layout and `data/maps/Route8_Kopais/`, `design/phase3/TILES_kopais.md` |
+| **parnassos** | The `parnassos` secondary (grey limestone, laurels, olives, planes, the crossroads, the treasury ruin, Lebadeia's springs and precinct); `MAP_LEBADEIA` (32×28: beat 35B, Saon and the grille, the springs of Lethe and Mnemosyne) and `MAP_ROUTE9_SCHISTE` (52×44: beat 36, the three roads, the lookout, the treasury ruin, the Sphinx's ledge, the altar, the herm) | `tools/ichor/art/parnassos_*.py`, `data/tilesets/secondary/parnassos/`, `tools/ichor/maps/parnassos.py`, those two maps, `design/phase3/TILES_parnassos.md` |
+| **harbors** | A `kirrha` secondary for the two harbor towns (quays, boats, nets, the gulf, the towns' houses, their own crags and olives drawn to match Parnassos's look), and the ferry from the `trireme` deck pieces (copy world-act1's art if it's on main, else draw a small deck of your own); `MAP_KIRRHA` (36×30: beat 37A, Delphoi's temple guards at the closed north road), `MAP_GULF_FERRY_DECK` (20×12: beat 37B, scripted warps quay to quay) and `MAP_AIGION` (28×24: beat 37C) | `tools/ichor/art/kirrha_*.py`, `data/tilesets/secondary/kirrha/`, `tools/ichor/maps/harbors.py`, those three maps, `design/phase3/TILES_kirrha.md` |
+| **trophonios** | Trophonios's cave: a `trophonios` secondary on `aethos` (start from batch 1's `gTileset_KithaironCave` art, plus Part 10's chalk handprints, the snake cleft, the black pool, the bread offerings); `MAP_TROPHONIOS_CAVE_B1F` and `_B2F` (Part 5's descent, dark, braziers; beat 35C, the reading) | `tools/ichor/art/trophonios_*.py`, `data/tilesets/secondary/trophonios/`, `tools/ichor/maps/trophonios.py`, the two floors, `design/phase3/TILES_trophonios.md` |
+| **rooms2** | The nine interiors on `oikos` (Part 10's list of new pieces; new secondaries as the art needs, grouped by shared pieces as batch 1's rooms did): Lebadeia's pilgrims' hall (heals), Herkyna's and the mason's houses; Kirrha's pilgrims' inn (heals), Agora stall (the shop), the muleteer's (a trade: Melisseer) and the old sweeper's houses; Aigion's old Achaean's and goatherd's houses | `tools/ichor/art/westrooms_*.py`, their secondaries, `tools/ichor/maps/westrooms.py`, those nine maps, `design/phase3/ROOMS_west.md`, the heal locations `HEAL_LOCATION_LEBADEIA` and `HEAL_LOCATION_KIRRHA`, the trade entry |
+| **sprites2** | Part 10's batch 2 sprites: the FOWLER class (portrait, male and female; walker), Saon and the priests, pilgrims in blankets, Agamedes, Panopeus, Delphoi's temple guards, Alethea seated on a rim, Alethea's notes (object); the named folk as palette swaps | as batch 1's sprites agent, with `tools/ichor/art/sprites_act2_b2*.py` and `design/phase3/SPRITES.md` |
+| **polish-kithairon** | Batch 1's crossing, made to look its best: Mt. Kithairon's climb (cliff faces, ledges, a sense of height instead of flat pine blocks and grey slabs), the maenads' drums, Route 7's empty west meadow, and anything else a fresh critique finds. Then the crossing's engine swaps: the vines and drums to the relic obstacles, the herms (and their table rows), the shrine to `EventScript_IchorDesecratedAltar`, the Barley Cake and other offerings | the kithairon, kronia and kithairon-cave art and builders, and the five crossing maps |
+| **polish-thyrsa** | Thyrsa's central plaza (a wide bare cobble field), Eudora's yard, Manto's and Polos's sparse rooms, Semele's smoke (the 2-frame animation, a callback in `src/tileset_anims.c`), and anything else a fresh critique finds. Then the engine swaps on every Thyrsa map: the Neistan drum to `EventScript_StrengthBoulder`, Silenos's Girdle as `giveitem`, the temple's altar to `EventScript_IchorTempleAltar_Dionysus` with the Hierophant's gift calls, the offerings (the Agora's wine counter sells `ITEM_WINE`), the rooms' rites | the thyrsa, thyrsa_rooms, homes and stone, temple and theater art and builders, Thyrsa's 14 maps and Eleutherai's three rooms |
+
+Parties are staged in `design/phase3/parties/{kopais,trophonios,parnassos,harbors}.party`; wild tables in `design/phase3/encounters/region_b1.json` (Route 8 and 9 land, the cave's one table for both floors, fishing and the Conch's water for Route 8, Kirrha, the ferry and Aigion).
+
+### Maps
+
+| Map (directory) | `MAPSEC` | Type | Size | Group | Owner |
+|---|---|---|---|---|---|
+| `MAP_ROUTE8_KOPAIS` (`Route8_Kopais`) | `MAPSEC_AETHOS_ROUTE_8` | route | 64×26 | TownsAndRoutes | kopais |
+| `MAP_LEBADEIA` (`Lebadeia`) | `MAPSEC_LEBADEIA` | town | 32×28 | TownsAndRoutes | parnassos |
+| `MAP_ROUTE9_SCHISTE` (`Route9_Schiste`) | `MAPSEC_AETHOS_ROUTE_9` | route | 52×44 | TownsAndRoutes | parnassos |
+| `MAP_KIRRHA` (`Kirrha`) | `MAPSEC_KIRRHA` | town | 36×30 | TownsAndRoutes | harbors |
+| `MAP_GULF_FERRY_DECK` (`GulfFerry_Deck`) | `MAPSEC_AETHOS_ROUTE_10` | ocean route | 20×12 | TownsAndRoutes | harbors |
+| `MAP_AIGION` (`Aigion`) | `MAPSEC_AIGION` | town | 28×24 | TownsAndRoutes | harbors |
+| `MAP_TROPHONIOS_CAVE_B1F`, `_B2F` | `MAPSEC_LEBADEIA` | underground, dark | Part 5's | IndoorLebadeia | trophonios |
+| `MAP_LEBADEIA_PILGRIMS_HALL`, `_HERKYNA_HOUSE`, `_MASONS_HOUSE` | `MAPSEC_LEBADEIA` | indoor | each room's own | IndoorLebadeia | rooms2 |
+| `MAP_KIRRHA_INN`, `_AGORA`, `_MULETEERS_HOUSE`, `_SWEEPERS_HOUSE` | `MAPSEC_KIRRHA` | indoor | | IndoorKirrha | rooms2 |
+| `MAP_AIGION_ACHAEANS_HOUSE`, `_GOATHERDS_HOUSE` | `MAPSEC_AIGION` | indoor | | IndoorAigion | rooms2 |
+
+### Seams and warps
+
+| Seam | Columns or rows | Owner |
+|---|---|---|
+| Thyrsa's Neistan Gate → Route 8's east edge | Thyrsa's west edge is open only on rows 23–24. Route 8's road meets its east edge on rows *q*…*q*+1, the kopais agent's choice, recorded here; seam strips aethos-only (8 columns, Part 10). This session adds both connections at integration (Thyrsa's map.json is the polish-thyrsa agent's builder's). | kopais |
+| Route 8's west edge ↔ Lebadeia's east edge | **fixed now**: both maps' roads on rows 12–13 (verges 11 and 14), offset 0 both ways; seam strips aethos-only (different secondaries) | kopais, parnassos |
+| Lebadeia's west edge ↔ Route 9's east edge | the parnassos agent's choice (one tileset, no strip) | parnassos |
+| Route 9's south edge ↔ Kirrha's north edge | **fixed now**: Route 9's road at columns 8–11 (verges 8 and 11), Kirrha's at 26–29; Route 9 `down` offset −18, Kirrha `up` offset +18; seam strips aethos-only | parnassos, harbors |
+| Kirrha's north road to Delphoi (Route 28, Act III) | drawn closed, with Delphoi's temple guards (beat 37A); not a connection yet | harbors |
+| Aigion's south edge → Route 11 (batch 3) | draw the road's first rows; record the columns here | harbors |
+
+**Door warps, fixed now** (outdoor warp *N* → the interior's warp 0, which leads back):
+
+| Outdoor map | Warp | Leads to |
+|---|---|---|
+| `MAP_LEBADEIA` | 0, 1, 2 | `_PILGRIMS_HALL`, `_HERKYNA_HOUSE`, `_MASONS_HOUSE` |
+| `MAP_LEBADEIA` | 3 | `MAP_TROPHONIOS_CAVE_B1F` (the bronze grille; closed by script until `FLAG_ICHOR_TROPHONIOS_GRILLE_OPEN`) |
+| `MAP_KIRRHA` | 0, 1, 2, 3 | `_INN`, `_AGORA`, `_MULETEERS_HOUSE`, `_SWEEPERS_HOUSE` |
+| `MAP_AIGION` | 0, 1 | `_ACHAEANS_HOUSE`, `_GOATHERDS_HOUSE` |
+| `MAP_TROPHONIOS_CAVE_B1F` | 1 | `MAP_TROPHONIOS_CAVE_B2F`'s warp 0 (the stair down) |
+
+The oracle's way out (beat 35C, "the hole is the way out") is a scripted warp to Lebadeia, in front of warp 3.
+
+### Ids
+
+**Trainers** 188–201: kopais 188–192 (Gorgidas, Ismenias, Timoxena, Perses, Euphrosyne), trophonios 193–194 (Philomelos, Melampos), parnassos 195–199 (Koretas, Onomarchos, grunt Psephos, Phayllos, Lykoreus), harbors 200–201 (Kephisios, Lamprias). Two names were over 10 characters and are renamed in SCRIPT.md: Amphilochos is now **Melampos** and Kephisodoros **Kephisios**.
+
+**Bank flags**: this session 0x160–0x16F (already claimed, use them: `FLAG_ICHOR_VISITED_LEBADEIA`, `_TROPHONIOS_GRILLE_OPEN`, `_TROPHONIOS_READING`, `_FOUND_HERKYNAS_GOOSE`, `_VISITED_KIRRHA`, `_PYLADES_FIG`, `_XENODIKE_CAME_DOWN`, `_BOARDED_GULF_FERRY`, `_GULF_CROSSED`, `_VISITED_AIGION`); kopais 0x170–0x17F; parnassos 0x180–0x197; harbors 0x198–0x1A7; trophonios 0x1A8–0x1AF; rooms2 0x1B0–0x1BF. The polish agents use what's left of batch 1's: kithairon 0x126 and 0x129–0x12F, thyrsa 0x13C–0x13F, rooms 0x14E–0x14F, temple 0x152–0x153, scenes 0x15E–0x15F. 0x1C0–0x1FF is all that's left for batches 3–7; the director has the ask for more.
+
+**Names to watch:** `FLAG_ICHOR_GOT_SOOTHE_BELL` is Act I's; Aigion's Soothe Bell needs its own name (`FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION`). Part 8's `FLAG_ICHOR_GOT_GIRDLE` is the engine's `FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES`. `ITEM_PYLADES_FIG` doesn't exist: use `FLAG_ICHOR_PYLADES_FIG` and a message, tagged `ICHOR_STUB_KEY_ITEMS`.
+
+**Tests:** each map agent writes a headless test of its beats, as batch 1's did; this session writes `tools/ichor/tests/act2_batch2.sh` (the audit and the walk, extended west to Aigion) and runs both batches' suites.
 
 ## Handovers waiting for later batches
 

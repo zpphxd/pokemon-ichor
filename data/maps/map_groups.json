@@ -5,7 +5,10 @@
     "gMapGroup_SpecialArea",
     "gMapGroup_IndoorKalliste",
     "gMapGroup_IndoorKithairon",
-    "gMapGroup_IndoorThyrsa"
+    "gMapGroup_IndoorThyrsa",
+    "gMapGroup_IndoorLebadeia",
+    "gMapGroup_IndoorKirrha",
+    "gMapGroup_IndoorAigion"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -17,7 +20,13 @@
     "MtKithairon",
     "Route7_KroniaGrounds",
     "ThyrsaCity",
-    "ThyrsaTheater"
+    "ThyrsaTheater",
+    "Route8_Kopais",
+    "Lebadeia",
+    "Route9_Schiste",
+    "Kirrha",
+    "GulfFerry_Deck",
+    "Aigion"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -81,5 +90,22 @@
     "ThyrsaCity_SownHouse",
     "ThyrsaCity_VintnerHouse",
     "ThyrsaTheater_Skene"
+  ],
+  "gMapGroup_IndoorLebadeia": [
+    "TrophoniosCave_B1F",
+    "TrophoniosCave_B2F",
+    "Lebadeia_PilgrimsHall",
+    "Lebadeia_HerkynaHouse",
+    "Lebadeia_MasonsHouse"
+  ],
+  "gMapGroup_IndoorKirrha": [
+    "Kirrha_Inn",
+    "Kirrha_Agora",
+    "Kirrha_MuleteersHouse",
+    "Kirrha_SweepersHouse"
+  ],
+  "gMapGroup_IndoorAigion": [
+    "Aigion_AchaeansHouse",
+    "Aigion_GoatherdsHouse"
   ]
 }

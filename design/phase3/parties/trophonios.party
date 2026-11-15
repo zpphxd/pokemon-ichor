@@ -1,0 +1,38 @@
+/* Staged by world-act2 from design/phase3/SCRIPT.md Part 3 (the road west). The trophonios agent owns these. */
+
+=== TRAINER_ICHOR_PHILOMELOS ===
+Name: PHILOMELOS
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Raknit
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_MELAMPOS ===
+Name: MELAMPOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Lophops
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Enigmaw
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Psybeam
+- Force Palm
+- Air Slash
+- Mind Reader
+

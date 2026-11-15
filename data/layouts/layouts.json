@@ -693,6 +693,193 @@
       "border_filepath": "data/layouts/ThyrsaTheater_Skene/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaTheater_Skene/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE8_KOPAIS",
+      "name": "Route8_Kopais_Layout",
+      "width": 30,
+      "height": 64,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Agros",
+      "border_filepath": "data/layouts/Route8_Kopais/border.bin",
+      "blockdata_filepath": "data/layouts/Route8_Kopais/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LEBADEIA",
+      "name": "Lebadeia_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Akti",
+      "border_filepath": "data/layouts/Lebadeia/border.bin",
+      "blockdata_filepath": "data/layouts/Lebadeia/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE9_SCHISTE",
+      "name": "Route9_Schiste_Layout",
+      "width": 30,
+      "height": 64,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Agros",
+      "border_filepath": "data/layouts/Route9_Schiste/border.bin",
+      "blockdata_filepath": "data/layouts/Route9_Schiste/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KIRRHA",
+      "name": "Kirrha_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Akti",
+      "border_filepath": "data/layouts/Kirrha/border.bin",
+      "blockdata_filepath": "data/layouts/Kirrha/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_GULF_FERRY_DECK",
+      "name": "GulfFerry_Deck_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Akti",
+      "border_filepath": "data/layouts/GulfFerry_Deck/border.bin",
+      "blockdata_filepath": "data/layouts/GulfFerry_Deck/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AIGION",
+      "name": "Aigion_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Akti",
+      "border_filepath": "data/layouts/Aigion/border.bin",
+      "blockdata_filepath": "data/layouts/Aigion/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_TROPHONIOS_CAVE_B1F",
+      "name": "TrophoniosCave_B1F_Layout",
+      "width": 16,
+      "height": 12,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_KithaironCave",
+      "border_filepath": "data/layouts/TrophoniosCave_B1F/border.bin",
+      "blockdata_filepath": "data/layouts/TrophoniosCave_B1F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_TROPHONIOS_CAVE_B2F",
+      "name": "TrophoniosCave_B2F_Layout",
+      "width": 16,
+      "height": 12,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_KithaironCave",
+      "border_filepath": "data/layouts/TrophoniosCave_B2F/border.bin",
+      "blockdata_filepath": "data/layouts/TrophoniosCave_B2F/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LEBADEIA_PILGRIMS_HALL",
+      "name": "Lebadeia_PilgrimsHall_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Lebadeia_PilgrimsHall/border.bin",
+      "blockdata_filepath": "data/layouts/Lebadeia_PilgrimsHall/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LEBADEIA_HERKYNA_HOUSE",
+      "name": "Lebadeia_HerkynaHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Lebadeia_HerkynaHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Lebadeia_HerkynaHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_LEBADEIA_MASONS_HOUSE",
+      "name": "Lebadeia_MasonsHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Lebadeia_MasonsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Lebadeia_MasonsHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KIRRHA_INN",
+      "name": "Kirrha_Inn_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Kirrha_Inn/border.bin",
+      "blockdata_filepath": "data/layouts/Kirrha_Inn/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KIRRHA_AGORA",
+      "name": "Kirrha_Agora_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Kirrha_Agora/border.bin",
+      "blockdata_filepath": "data/layouts/Kirrha_Agora/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KIRRHA_MULETEERS_HOUSE",
+      "name": "Kirrha_MuleteersHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Kirrha_MuleteersHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Kirrha_MuleteersHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KIRRHA_SWEEPERS_HOUSE",
+      "name": "Kirrha_SweepersHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Kirrha_SweepersHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Kirrha_SweepersHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AIGION_ACHAEANS_HOUSE",
+      "name": "Aigion_AchaeansHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Aigion_AchaeansHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Aigion_AchaeansHouse/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_AIGION_GOATHERDS_HOUSE",
+      "name": "Aigion_GoatherdsHouse_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Oikia",
+      "border_filepath": "data/layouts/Aigion_GoatherdsHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Aigion_GoatherdsHouse/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

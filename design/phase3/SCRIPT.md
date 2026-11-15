@@ -6315,7 +6315,7 @@ PHEMONIS: One a day. The tree's young. So am I, compared to it.
 | Panopeus | the steering oar | the captain (beat 37B) |
 | Alethea | the stern | beat 37B |
 | Goats (2) | the pen | flavor |
-| Kephisodoros, Lamprias | the rail, the bow | trainers (Part 3) |
+| Kephisios, Lamprias | the rail, the bow | trainers (Part 3) |
 
 **Goats**
 ```text
@@ -13298,16 +13298,16 @@ Level: 31
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 ```
 
-**7. AUGUR Amphilochos.** On B2F, by the black pool, facing it. Optional. His ancestor, the seer Amphiaraos, foresaw his own death at Thebes and rode out anyway; the earth opened and swallowed him and his chariot whole.
+**7. AUGUR Melampos.** On B2F, by the black pool, facing it. Optional. His ancestor, the seer Amphiaraos, foresaw his own death at Thebes and rode out anyway; the earth opened and swallowed him and his chariot whole.
 ```text
-Before: AMPHILOCHOS: My ancestor rode into the earth. I walked. It seemed more polite.
-Defeat: AMPHILOCHOS: I didn't see that coming. Which is new.
-After:  AMPHILOCHOS: Birds don't fly down here. I've no idea what's going to happen.
-After:  AMPHILOCHOS: Lovely. Awful. Lovely.
+Before: MELAMPOS: My ancestor rode into the earth. I walked. It seemed more polite.
+Defeat: MELAMPOS: I didn't see that coming. Which is new.
+After:  MELAMPOS: Birds don't fly down here. I've no idea what's going to happen.
+After:  MELAMPOS: Lovely. Awful. Lovely.
 ```
 ```
-=== TRAINER_ICHOR_AMPHILOCHOS ===
-Name: AMPHILOCHOS
+=== TRAINER_ICHOR_MELAMPOS ===
+Name: MELAMPOS
 Class: Augur
 Pic: Augur
 Gender: Male
@@ -13459,15 +13459,15 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 ## The Gulf ferry, Route 10, level 31
 
-**13. FISHER Kephisodoros.** At the rail amidships, facing the water. Optional. Named for the Kephisos, the river that feeds the Kopais.
+**13. FISHER Kephisios.** At the rail amidships, facing the water. Optional. Named for the Kephisos, the river that feeds the Kopais.
 ```text
-Before: KEPHISODOROS: Something big's been nibbling my line all crossing. Is it you?
-Defeat: KEPHISODOROS: It wasn't you. It's still nibbling.
-After:  KEPHISODOROS: The gulf's deep enough to hide anything. Even a ray that bites back.
+Before: KEPHISIOS: Something big's been nibbling my line all crossing. Is it you?
+Defeat: KEPHISIOS: It wasn't you. It's still nibbling.
+After:  KEPHISIOS: The gulf's deep enough to hide anything. Even a ray that bites back.
 ```
 ```
-=== TRAINER_ICHOR_KEPHISODOROS ===
-Name: KEPHISODOROS
+=== TRAINER_ICHOR_KEPHISIOS ===
+Name: KEPHISIOS
 Class: Fisher
 Pic: Fisherman
 Gender: Male
@@ -19089,7 +19089,7 @@ Pausanias describes the real descent: pilgrims drank from Lethe and Mnemosyne, c
   [Philomelos, at the stair's foot]               fork C --- ahead: dead end, Hyper Potion
         |                                           |  left: the snake niche (honey)
    side passage: marble rubble (Hammer)             |
-     -> Max Repel                                [the black pool: Amphilochos]
+     -> Max Repel                                [the black pool: Melampos]
         |                                           |   great boulder (Hephaestus's Hammer) -> dig
    [stair down to B2F]                           [THE ORACLE'S CHAMBER: brazier 2, the hole]
                                                      TM Future Sight on a ledge
@@ -19147,7 +19147,7 @@ Pausanias describes the real descent: pilgrims drank from Lethe and Mnemosyne, c
    ```
    Set `FLAG_ICHOR_TROPHONIOS_SNAKE_FED`. Without Honey: "It isn't going to move for nothing. The pilgrims carried honey cakes." Saon gives one Honey at the grille if the player has none (beat 35B), so this never blocks; the Agora at Kirrha and Phase 2's Emporion stall sell more.
    - The snake is never named or shown. Pausanias's pilgrims fed snakes, and Trophonios was a snake-god in some tellings. Players can decide what it was.
-8. **The black pool,** past the niche: a still pool in a round chamber, the water black even in torchlight. Amphilochos sits beside it (Part 3, optional). A great boulder (Hephaestus's Hammer, the Favor 60 upgrade) closes a side niche with a fixed dig spot.
+8. **The black pool,** past the niche: a still pool in a round chamber, the water black even in torchlight. Melampos sits beside it (Part 3, optional). A great boulder (Hephaestus's Hammer, the Favor 60 upgrade) closes a side niche with a fixed dig spot.
    ```text
    The water is black, and perfectly still. It doesn't reflect the torch.
    ```
@@ -19173,7 +19173,7 @@ Hecate's Hollow taught the dark by sound; the Mystery sanctum by braziers and ch
 ### Placement and gates
 
 - **Philomelos:** B1F, at the stair's foot, facing the stair, sight 3. Mandatory once you're down.
-- **Amphilochos:** B2F, beside the black pool, facing the water. Optional.
+- **Melampos:** B2F, beside the black pool, facing the water. Optional.
 - **The grille:** `FLAG_ICHOR_TROPHONIOS_GRILLE_OPEN`, set by Saon's YES.
 - **The snake:** a blocking object, hidden by `FLAG_ICHOR_TROPHONIOS_SNAKE_FED`.
 - **The goose:** an object on B1F, hidden by `FLAG_ICHOR_FOUND_HERKYNAS_GOOSE`.
@@ -20916,7 +20916,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Herkyna | a girl, Lebadeia | the nymph of Lebadeia's river, whose goose escaped into a cave (Pausanias 9.39) |
 | Agamedes | mason, Lebadeia | Trophonios's brother, who robbed a treasury through a loose stone |
 | Philomelos | Pilgrim, Trophonios's cave | "lover of song"; a Phokian general |
-| Amphilochos | Augur, Trophonios's cave | the son of the seer Amphiaraos, whom the earth swallowed at Thebes |
+| Melampos | Augur, Trophonios's cave | named for the founder of Amphiaraos's line of seers, who understood the speech of animals; the earth swallowed Amphiaraos at Thebes |
 | Koretas | Goatherd, Route 9 | the goatherd who found Delphi's oracle by his goats (Diodorus 16.26) |
 | Onomarchos | Pilgrim, Route 9 | "name-ruler"; a Phokian general |
 | Psephos | Titanborn, Route 9 | "pebble", the voting pebble; from the contract's earth-words |
@@ -20927,7 +20927,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Xenodike | a pilgrim at Route 9's lookout | "just to strangers"; a classical name |
 | Thyia | the old sweeper, Kirrha | the first priestess of Dionysus at Delphi, a Phokian nymph |
 | Panopeus | the Gulf ferry's captain | the twin of Krisos; the two fought in the womb |
-| Kephisodoros | Fisher, the Gulf ferry | "gift of the Kephisos", the river that feeds the Kopais |
+| Kephisios | Fisher, the Gulf ferry | "of the Kephisos", the river that feeds the Kopais |
 | Lamprias | Merchant, the Gulf ferry | Plutarch's brother |
 | Tisamenos | the keeper of the ship-list, Aigion | a son of Orestes, king of Achaea |
 | Helike | goatherd, Aigion | the nymph who nursed infant Zeus, and the Achaean town the sea swallowed in 373 BC |

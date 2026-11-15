@@ -1,0 +1,30 @@
+/* Staged by world-act2 from design/phase3/SCRIPT.md Part 3 (the road west). The harbors agent owns these. */
+
+=== TRAINER_ICHOR_KEPHISIOS ===
+Name: KEPHISIOS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Swimmer
+AI: Check Bad Move
+
+Narkeray
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kynoketos
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LAMPRIAS ===
+Name: LAMPRIAS
+Class: Merchant
+Pic: Merchant
+Gender: Male
+Music: Rich
+AI: Check Bad Move
+
+Midonos
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+

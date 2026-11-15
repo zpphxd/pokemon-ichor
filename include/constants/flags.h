@@ -1801,6 +1801,16 @@
 #define FLAG_ICHOR_SAW_CROWS                    (FLAG_ICHOR_GENERAL_START + 0x14D) // Ichor: Act II (cross-map; set by Thyrsa City's crows at the Elektran Gate): saw which way they flew
 #define FLAG_ICHOR_MET_LASOS                    (FLAG_ICHOR_GENERAL_START + 0x150) // Ichor: Act II: Lasos welcomed the player to the Temple of Dionysus (beat 31)
 #define FLAG_ICHOR_GOT_TM_TOXIC                 (FLAG_ICHOR_GENERAL_START + 0x151) // Ichor: Act II: Thespis gave TM06 Toxic with the Mask Laurel (beat 31)
+#define FLAG_ICHOR_VISITED_LEBADEIA             (FLAG_ICHOR_GENERAL_START + 0x160) // Ichor: Act II: Lebadeia is a fly target (beat 35B)
+#define FLAG_ICHOR_TROPHONIOS_GRILLE_OPEN       (FLAG_ICHOR_GENERAL_START + 0x161) // Ichor: Act II: Saon opened the bronze grille to Trophonios's cave (beat 35B)
+#define FLAG_ICHOR_TROPHONIOS_READING           (FLAG_ICHOR_GENERAL_START + 0x162) // Ichor: Act II: the oracle's reading has played; the hole is the way out (beat 35C)
+#define FLAG_ICHOR_FOUND_HERKYNAS_GOOSE         (FLAG_ICHOR_GENERAL_START + 0x163) // Ichor: Act II: Herkyna's goose is home from Trophonios's cave
+#define FLAG_ICHOR_VISITED_KIRRHA               (FLAG_ICHOR_GENERAL_START + 0x164) // Ichor: Act II: Kirrha is a fly target (beat 37A)
+#define FLAG_ICHOR_PYLADES_FIG                  (FLAG_ICHOR_GENERAL_START + 0x165) // Ichor: Act II: Pylades gave you the fig on a string for Xenodike (ICHOR_STUB_KEY_ITEMS: ITEM_PYLADES_FIG)
+#define FLAG_ICHOR_XENODIKE_CAME_DOWN           (FLAG_ICHOR_GENERAL_START + 0x166) // Ichor: Act II: Xenodike came down from Route 9's lookout to Kirrha's inn
+#define FLAG_ICHOR_BOARDED_GULF_FERRY           (FLAG_ICHOR_GENERAL_START + 0x167) // Ichor: Act II: boarded Panopeus's ferry at Kirrha (beat 37B)
+#define FLAG_ICHOR_GULF_CROSSED                 (FLAG_ICHOR_GENERAL_START + 0x168) // Ichor: Act II: crossed the Gulf to Aigion (beat 37B-C)
+#define FLAG_ICHOR_VISITED_AIGION               (FLAG_ICHOR_GENERAL_START + 0x169) // Ichor: Act II: Aigion is a fly target (beat 37C)
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end
