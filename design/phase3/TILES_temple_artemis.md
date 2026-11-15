@@ -241,7 +241,16 @@ line and past H3's stele; Anthia, her gate and the feather; the shortcut to the 
 the hind's three touches (A, B, C), past H5, H6 and H7, Sagitta and the hedge; Prokris;
 Kallisto's scene and battle, the Moon Laurel, Ursa Major, the TM flag, the rite and its
 feather; her after-lines and the pool; a re-entry with the garden solved, the hounds asleep and
-the hind grazing in A; the great altar.
+the hind grazing in A; the great altar. 50 checks, 76 screenshots; it measured the engine's
+periods as the builder models them (a step every 16 frames, a turn every 49). It found one real
+bug on the way: the hind reappeared in clearing A whenever she scrolled off screen after a bolt
+(her template now follows her, `copyobjectxytoperm`).
+
+**`map_audit.py Arkadia_TempleOfArtemis`**: the cells are unique and the feather sits on a
+walkable, reachable cell. Its two failures are the door's warps to `MAP_ARKADIA` warp 6, which
+doesn't exist until the arkadia agent's town lands. Its seven warnings are the rock's top
+(Prokris, Kallisto, the pool, the Star Piece, the rock's trigger), which the audit reads with
+the stair's hedge up; it lowers at the hind's third touch.
 
 ## For the integrator
 
