@@ -2281,8 +2281,10 @@ static void SetPartyMonsAllowedInMinigame(void)
 
 static bool16 IsMonAllowedInPokemonJump(struct Pokemon *mon)
 {
+#if !ICHOR_CUT_MINIGAMES // Ichor: the minigames are cut
     if (GetMonData(mon, MON_DATA_IS_EGG) != TRUE && IsSpeciesAllowedInPokemonJump(GetMonData(mon, MON_DATA_SPECIES)))
         return TRUE;
+#endif
     return FALSE;
 }
 

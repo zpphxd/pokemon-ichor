@@ -19,7 +19,6 @@ EventScript_BufferSprayName_2:
 	bufferitemname STR_VAR_1, ITEM_REPEL
 	goto EventScript_BufferSprayName_1
 
-
 EventScript_SprayWoreOff::
 	lock
 	call EventScript_BufferSprayName
@@ -38,12 +37,10 @@ EventScript_HandleMultipleSprays::
 .endif
 	return
 
-
 EventScript_SprayWoreOffMessage::
 	msgbox Text_SprayWoreOff, MSGBOX_SIGN
 	releaseall
 	end
-
 
 EventScript_UseSingleSpray::
 .if VAR_LAST_REPEL_LURE_USED == 0
@@ -65,12 +62,10 @@ EventScript_UseSingleSpray_2:
 	goto EventScript_UseSingleSpray_1
 .endif
 
-
 EventScript_SetSingleSprayAndUse::
 	setvar VAR_RESULT, 0
 	call EventScript_UseSpray
 	return
-
 
 EventScript_UseDifferentSpray::
 	specialvar LOCAL_VAR_NEW_SPRAY, GetSprayId
@@ -86,7 +81,6 @@ EventScript_UseDifferentSpray_2:
 	call EventScript_SetSingleSprayAndUse
 	goto EventScript_UseDifferentSpray_1
 
-
 .if VAR_LAST_REPEL_LURE_USED != 0
 EventScript_UseLastUsedSpray::
 	msgbox Text_SprayWoreOffAskUseAnother, MSGBOX_YESNO
@@ -100,7 +94,6 @@ EventScript_UseLastUsedSpray_2:
 	call EventScript_SetSingleSprayAndUse
 	goto EventScript_UseLastUsedSpray_1
 .endif
-
 
 .if I_REPEL_LURE_MENU == TRUE
 EventScript_ChooseWhichSpray::
@@ -125,7 +118,6 @@ EventScript_ChooseWhichSpray_3:
 	goto EventScript_ChooseWhichSpray_1
 .endif
 
-
 EventScript_UseSpray::
 	playse SE_REPEL
 	waitse
@@ -134,7 +126,6 @@ EventScript_UseSpray::
 	bufferitemname STR_VAR_2, LOCAL_VAR_SPRAY
 	msgbox Text_SprayWoreOffUseX, MSGBOX_SIGN
 	return
-
 
 Text_SprayWoreOff::
 	.string "{STR_VAR_1}'s effect wore off…$"
