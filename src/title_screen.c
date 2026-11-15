@@ -42,7 +42,7 @@ enum {
 #define VERSION_BANNER_Y_GOAL 16   // Ichor: POKEMON rests over ICHOR (was 66)
 #define START_BANNER_X 120         // Ichor: centered (was 128)
 #define PRESS_START_Y 147          // Ichor: on the black foot (was 108)
-#define COPYRIGHT_Y 155            // Ichor: the fan-work line (was 148)
+#define COPYRIGHT_Y 155            // Ichor: the creator credit (was 148)
 #define ICHOR_BACKDROP RGB(4, 3, 3) // Ichor: the black gloss, (32,24,24)
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
@@ -243,33 +243,43 @@ static const union AnimCmd sAnim_PressStart_4[] =
 };
 static const union AnimCmd sAnim_Copyright_0[] =
 {
-    ANIMCMD_FRAME(21, 4),
+    ANIMCMD_FRAME(29, 4),
     ANIMCMD_END,
 };
 static const union AnimCmd sAnim_Copyright_1[] =
 {
-    ANIMCMD_FRAME(25, 4),
+    ANIMCMD_FRAME(33, 4),
     ANIMCMD_END,
 };
 static const union AnimCmd sAnim_Copyright_2[] =
 {
-    ANIMCMD_FRAME(29, 4),
+    ANIMCMD_FRAME(37, 4),
     ANIMCMD_END,
 };
 static const union AnimCmd sAnim_Copyright_3[] =
 {
-    ANIMCMD_FRAME(33, 4),
+    ANIMCMD_FRAME(41, 4),
     ANIMCMD_END,
 };
 static const union AnimCmd sAnim_Copyright_4[] =
 {
-    ANIMCMD_FRAME(37, 4),
+    ANIMCMD_FRAME(45, 4),
+    ANIMCMD_END,
+};
+static const union AnimCmd sAnim_Copyright_5[] =
+{
+    ANIMCMD_FRAME(49, 4),
+    ANIMCMD_END,
+};
+static const union AnimCmd sAnim_Copyright_6[] =
+{
+    ANIMCMD_FRAME(53, 4),
     ANIMCMD_END,
 };
 
-// The "Press Start" and copyright graphics are each 5 32x8 segments long
+// Ichor: seven 32x8 segments keep both creators' names on one line.
 #define NUM_PRESS_START_FRAMES 5
-#define NUM_COPYRIGHT_FRAMES 5
+#define NUM_COPYRIGHT_FRAMES 7
 
 static const union AnimCmd *const sStartCopyrightBannerAnimTable[NUM_PRESS_START_FRAMES + NUM_COPYRIGHT_FRAMES] =
 {
@@ -284,6 +294,8 @@ static const union AnimCmd *const sStartCopyrightBannerAnimTable[NUM_PRESS_START
     sAnim_Copyright_2,
     sAnim_Copyright_3,
     sAnim_Copyright_4,
+    sAnim_Copyright_5,
+    sAnim_Copyright_6,
 };
 
 static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate =
@@ -299,7 +311,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_PressStart[] =
 {
     {
         .data = gTitleScreenPressStartGfx,
-        .size = 0x520,
+        .size = 0x720,
         .tag = TAG_PRESS_START_COPYRIGHT
     },
     {},
@@ -442,7 +454,7 @@ static void CreateCopyrightBanner(s16 x, s16 y)
     u8 i;
     u8 spriteId;
 
-    x -= 64;
+    x -= (NUM_COPYRIGHT_FRAMES - 1) * 16;
     for (i = 0; i < NUM_COPYRIGHT_FRAMES; i++, x += 32)
     {
         spriteId = CreateSprite(&sStartCopyrightBannerSpriteTemplate, x, y, 0);
