@@ -16,7 +16,7 @@ ASM="${LUA%.lua}.s"
 arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -Wno-trigraphs \
   -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -o "$ASM" tools/ichor/tests/slice_consts.c \
   || { echo "could not compile slice_consts.c"; exit 1; }
-SYMS="gMain gSaveBlock1Ptr gSaveBlock2Ptr gObjectEvents gPlayerAvatar gBackupMapLayout gBattleOutcome
+SYMS="gMain gSaveBlock1Ptr gSaveBlock2Ptr gSaveBlock3Ptr gObjectEvents gPlayerAvatar gBackupMapLayout gBattleOutcome
 gBattleMons gParties gTasks gMapHeader gBattleTypeFlags gStringVar4 gSpecialVar_Result gSpecialVar_0x8004
 gSpecialVar_0x8008 gSpecialVar_0x8009 gMPlayInfo_BGM gSongTable gExperienceTables gSpeciesInfo
 sSubstructOffsets sGlobalScriptContextStatus sGlobalScriptContext sLockFieldControls sCurrentMapMusic sFieldMessageBoxMode

@@ -88,8 +88,24 @@ local waitUntil = L.waitUntil
 
 function L.sb1() return emu:read32(S.gSaveBlock1Ptr) end
 function L.sb2() return emu:read32(S.gSaveBlock2Ptr) end
-function L.getVar(v) return emu:read16(L.sb1() + S.OFF_SB1_VARS + (v - S.VARS_START) * 2) end
-function L.getFlag(f) return (emu:read8(L.sb1() + S.OFF_SB1_FLAGS + (f >> 3)) >> (f & 7)) & 1 == 1 end
+-- IchorSave, in SaveBlock3, holds the Ichor bank of flags and vars
+-- (GetFlagPointer and GetVarPointer in src/event_data.c send their ids there).
+local function ichor() return emu:read32(S.gSaveBlock3Ptr) + S.OFF_SB3_ICHOR end
+function L.getVar(v)
+  if v >= S.ICHOR_VARS_START and v <= S.ICHOR_VARS_END then
+    return emu:read16(ichor() + S.OFF_ICHOR_VARS + (v - S.ICHOR_VARS_START) * 2)
+  end
+  return emu:read16(L.sb1() + S.OFF_SB1_VARS + (v - S.VARS_START) * 2)
+end
+function L.getFlag(f)
+  local base, o = L.sb1() + S.OFF_SB1_FLAGS, f
+  if f >= S.ICHOR_FLAGS_START and f <= S.ICHOR_FLAGS_END then
+    base, o = ichor() + S.OFF_ICHOR_FLAGS, f - S.ICHOR_FLAGS_START
+  elseif f >= S.ICHOR_DAILY_FLAGS_START and f <= S.ICHOR_DAILY_FLAGS_END then
+    base, o = ichor() + S.OFF_ICHOR_DAILY_FLAGS, f - S.ICHOR_DAILY_FLAGS_START
+  end
+  return (emu:read8(base + (o >> 3)) >> (o & 7)) & 1 == 1
+end
 function L.defeated(t) return L.getFlag(S.TRAINER_FLAGS_START + t) end
 function L.mapId()
   local loc = L.sb1() + S.OFF_SB1_LOCATION
@@ -265,7 +281,23 @@ function L.logText()
   if s ~= lastText and #s > 0 then
     lastText = s
     local x, y = L.pos()
-    log(string.format("TEXT %d %d,%d %s", L.mapId(), x, y, s))
+    -- The console cuts a line near 1 KB, so a long speech (a herald's) goes out
+    -- a few pages at a time: each TEXT line ends on a page break (\p).
+    local chunk = {}
+    local function flush()
+      if #chunk > 0 then log(string.format("TEXT %d %d,%d %s", L.mapId(), x, y, table.concat(chunk))) end
+      chunk = {}
+    end
+    local page = {}
+    for i, b in ipairs(hex) do
+      page[#page + 1] = b
+      if b == "FB" or i == #hex then
+        if #chunk + #page > 400 then flush() end
+        for _, c in ipairs(page) do chunk[#chunk + 1] = c end
+        page = {}
+      end
+    end
+    flush()
   end
 end
 
@@ -277,7 +309,9 @@ local function controller(name) return emu:read32(S.gBattlerControllerFuncs) == 
 local TRAINERS = { "KLEON_SNIVY", "KLEON_CYNDAQUIL", "KLEON_PIPLUP", "TITYROS", "PHYLLIS", "KOMATAS", "AGIS",
                    "POLYEIDOS", "PETROS", "AMATHOS", "LAMPON", "PYRRHA", "AITHRA", "IONE",
                    -- Phase 2
-                   "ALETHEA_DECK", "PHORMION", "LYKON" }
+                   "ALETHEA_DECK", "PHORMION", "LYKON",
+                   "CREW_BOSS", "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS",
+                   "KLEON_2_KYNDER", "KLEON_2_HIPLING", "KLEON_2_NEBREL" }
 local function defeatedSet()
   local t = {}
   for _, n in ipairs(TRAINERS) do t[n] = L.defeated(S["TRAINER_" .. n]) end
@@ -353,6 +387,8 @@ end
 --             multichoice menus (default: YES / the first choice)
 --   every   = true              screenshot every message box (beat_text_NN)
 --   limit   = frames before giving up
+--   stop    = function() -> bool  return as soon as it holds (a warp landing
+--             on a map whose scene the next beat plays)
 -- Returns the number of message boxes and the battles fought.
 -- A script that waits on the same thing for this long, while A is pressed, is a
 -- softlock. By default that fails the run. With SLICE_WORKAROUNDS=1 a stuck
@@ -390,6 +426,7 @@ function L.settle(opts)
     return (opts.answers or {})[answered] or "yes"
   end
   while calm < 20 do
+    if opts.stop and opts.stop() then return boxes, fought end
     if L.idle() then
       calm = calm + 1
       frame()
@@ -487,6 +524,10 @@ local function isWater(b)
   end
   return WATER[b]
 end
+local function isArrow(b)
+  return b == S.MB_SOUTH_ARROW_WARP or b == S.MB_NORTH_ARROW_WARP or b == S.MB_EAST_ARROW_WARP
+      or b == S.MB_WEST_ARROW_WARP
+end
 
 local DIRS = { { 0, -1, K.UP, "MB_JUMP_NORTH" }, { 0, 1, K.DOWN, "MB_JUMP_SOUTH" },
                { -1, 0, K.LEFT, "MB_JUMP_WEST" }, { 1, 0, K.RIGHT, "MB_JUMP_EAST" } }
@@ -555,19 +596,27 @@ local function avoided(avoid, x, y)
   return avoid[x .. "," .. y] == true
 end
 L.avoided = avoided
-local function firstStep(goal, avoid, strict)
+-- Tiles every walk on a map keeps off unless one is the goal: L.keepOff[mapId] =
+-- { ["x,y"] = true }. A beat sets it for triggers it means to step on later (a
+-- scene's tread, a gate) or that would spoil a walk (a one-way turnstile).
+L.keepOff = {}
+local function firstStep(goal, avoid, strict, throughPeople)
   local g = grid()
+  local hold = L.keepOff[L.mapId()]
   local known = learned[L.mapId()] or {}
   local sx, sy = L.pos()
   local se = emu:read8(L.playerObject() + 0x0B) & 0xF   -- currentElevation
   local function key(x, y, e) return x .. "," .. y .. "," .. e end
   local function enterable(x, y, e)
     local mid, solid, b, te = g.tile(x, y)
-    if mid == nil or solid or isWater(b) or g.people[x .. "," .. y] then return nil end
+    if mid == nil or solid or isWater(b) or (g.people[x .. "," .. y] and not throughPeople) then return nil end
     if avoided(avoid, x, y) then return nil end
+    if hold and hold[x .. "," .. y] and not goal(x, y) then return nil end
     -- never cross a warp on the way to something else: a floor warp (the
-    -- Euploia's hatch) takes the player off the map on the first step
-    if not goal(x, y) and g.warps[x .. "," .. y] then return nil end
+    -- Euploia's hatch) takes the player off the map on the first step. A door
+    -- mat (an arrow warp) only fires while its arrow is held, so walks cross
+    -- those (the Hephaisteion's workbench is past its mat).
+    if not goal(x, y) and g.warps[x .. "," .. y] and not isArrow(b) then return nil end
     if strict and not goal(x, y) and g.coords[x .. "," .. y] then return nil end
     for _, d in ipairs(DIRS) do if b == S[d[4]] then return nil end end   -- a ledge is only jumped
     if e ~= 0 and te ~= 0 and te ~= 15 and te ~= e then return nil end
@@ -799,19 +848,28 @@ end
 -- Walk until goal(x, y) holds for the player's tile. Returns true on arrival, or
 -- false when the game took control on the way (the caller decides what that was).
 local function walk(goal, what, avoid)
+  local waits = 0
   for _ = 1, 400 do
     local x, y = L.pos()
     if goal(x, y) then return true end
     local k = firstStep(goal, avoid, true) or firstStep(goal, avoid, false)
+    -- someone wandering (Emporion's runner, in his lane) may stand in the only
+    -- way for a moment: wait for them to move on
+    while not k and waits < 20 and firstStep(goal, avoid, false, true) do
+      waits = waits + 1
+      wait(30)
+      k = firstStep(goal, avoid, true) or firstStep(goal, avoid, false)
+    end
     if not k then fail(string.format("no path from (%d,%d) to %s on map %d", x, y, what, L.mapId())) end
     local r = L.step(k)
     if r == "taken" then return false end
-    if r == "blocked" then
+    local dx, dy = 0, 0
+    for _, d in ipairs(DIRS) do if d[3] == k then dx, dy = d[1], d[2] end end
+    -- (a wanderer who stepped into the way is no reason to remember the step)
+    if r == "blocked" and not L.objectOn(x + dx, y + dy) then
       local m = L.mapId()
       learned[m] = learned[m] or {}
       learned[m][x .. "," .. y .. "," .. k] = true
-      local dx, dy = 0, 0
-      for _, d in ipairs(DIRS) do if d[3] == k then dx, dy = d[1], d[2] end end
       local mid, _, b = grid().tile(x + dx, y + dy)
       L.note(string.format("blocked step on map %d from (%d,%d) to (%d,%d): metatile 0x%03X, behavior 0x%02X, no collision bit",
                            m, x, y, x + dx, y + dy, mid or 0, b or 0))
