@@ -10,6 +10,7 @@
 # Aphrodite's altar, the rubble, the Good Rod, the inn (rest and the trade), the
 # great herm, and over the seam into Eleusa and back.
 # Output in build/test_route5/ (screenshots in shots/); see route5.lua.
+# ROUTE5_FROM=inn starts at the inn's door (the inn, the herm and the seam only).
 set -u
 cd "$(dirname "$0")/../../.."
 ROM="${1:-pokeemerald.gba}"
@@ -20,7 +21,7 @@ engine_prepare ROUTE5 "$OUT" tools/ichor/tests/route5_consts.c tools/ichor/tests
 # slice's maps), the engine scripts the road runs, and a few addresses.
 {
   echo "return {"
-  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gPartiesCount)$/ && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gPartiesCount|CB2_PokeStorage)$/ && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
   echo "  SCRIPTS = {"
   arm-none-eabi-nm "$ELF" | awk '$3 ~ /^Route5_(SkironianCliffs|RestHouse)_EventScript_[A-Za-z0-9_]+$/ && $3 !~ /_[0-9]+$/ { print "    " $3 " = 0x" $1 "," }'
   arm-none-eabi-nm "$ELF" | awk '$3 ~ /^EventScript_(StrengthBoulder|CutTree|RockSmash|IchorAltar_Aphrodite|IchorGreatHerm)$/ && !seen[$3]++ { print "    " $3 " = 0x" $1 "," }'

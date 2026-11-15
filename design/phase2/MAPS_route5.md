@@ -13,7 +13,7 @@ tools/ichor/tests/route5.sh                                       # walks the ro
 
 ![The Inn of the Plain](img/route5_rest_house.png)
 
-Review copies (not committed) go to `build/render/route5/`: the collision overlay (`route5_walk.png`: red solid, green tall grass, orange trainer sight, yellow people, cyan warps, white bg events, pink hidden items), fifteen 15x10 screen views along the road (`view_*.png`) and their contact sheet (`route5_views.png`). `img/route5_walk.png` and `img/route5_views.png` are copies of the last pass.
+Review copies (not committed) go to `build/render/route5/`: the collision overlay (`route5_walk.png`: red solid, green tall grass, orange trainer sight, yellow people, cyan warps, white bg events, pink hidden items), fifteen 15x10 screen views along the road (`view_*.png`) and their contact sheet (`route5_views.png`). `img/route5_walk.png` and `img/route5_views.png` are copies of the last pass; `img/route5_rest_house_walk.png` is the inn's room with its solid cells and events marked the same way.
 
 ## The plan
 
@@ -138,7 +138,11 @@ Route5_RestHouse  [interior, Eleusa, early]
 - The strait shows at the bottom of the screen all along the cliff road; the seat reads as a throne on the edge with Kynegeiros beside it; the niches and the altar stone read at a glance.
 - Night tables are live: the first run met a wild Gelasable at 20 in the clearing's band after dark, the next a Pebblith, then a Galekit.
 - The followers walk behind the player on the one-cell ledge and the cleft stair without blocking either.
+- The inn: Xenokles's rest heals the party; the trade opens the box, takes the Onotis and hands back GALANTHIS, then the Onotis stands in the stable's stall where Galanthis's place by the sandals was empty. Every one of the room's five readable spots answers.
+- The great herm reads and takes the oil; the seam carries the player onto Eleusa's west road at (0,26) and back onto Route 5 at (67,22), each map drawing the other's olives at the edge.
 - Two things the walk found and the map fixed: Kynegeiros and Mopsos walking into the narrow ways (pass 3), and the pitch-gatherer's long name.
+
+The last full run: `ROUTE5 PASS: 73 checks, 55 screenshots`. `ROUTE5_FROM=inn tools/ichor/tests/route5.sh` starts at the inn's door and plays only the inn, the herm and the seam (26 checks, a few minutes instead of half an hour).
 
 ## The inn's room
 

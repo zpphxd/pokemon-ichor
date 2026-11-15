@@ -46,8 +46,8 @@ local function nickname(slot)
   return s
 end
 
--- Between beats: a fresh repel, and the party healed (Surf has 15 PP; the road
--- has more battles than that).
+-- Between beats: a fresh repel, and the party healed, so every stretch starts with
+-- full HP and PP.
 local function quiet()
   L.setVar(S.VAR_REPEL_STEP_COUNT, 250)
   if L.mapId() == S.MAP_ROUTE5 then L.runHeader("Route5Test_HealHeader") end
@@ -282,10 +282,17 @@ L.start(function()
   L.waitUntil(function() return L.mapId() == S.MAP_ROUTE5 and L.idle() end, 3000, "the warp to Route 5")
   L.wait(30)
   quiet()
-  cliffRoad()
-  meadow()
-  terrace()
-  shore()
+  if os.getenv("ROUTE5_FROM") == "inn" then
+    -- a shortcut for working on the road's east end: not the walk
+    L.runHeader("Route5Test_ToInnHeader", { limit = 4000 })
+    L.waitUntil(function() return L.mapId() == S.MAP_ROUTE5 and L.idle() end, 3000, "the warp to the inn")
+    L.note("ROUTE5_FROM=inn: the walk starts at the inn's door")
+  else
+    cliffRoad()
+    meadow()
+    terrace()
+    shore()
+  end
   inn()
   eastEnd()
   L.log("ok the walk is done")
