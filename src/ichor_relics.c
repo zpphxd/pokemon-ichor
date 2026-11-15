@@ -58,6 +58,9 @@ extern const u8 EventScript_IchorThornweb[];
 extern const u8 EventScript_IchorGreatBoulder[];
 extern const u8 EventScript_IchorLabrysSeal[];
 extern const u8 EventScript_IchorThreadMenu[];
+extern const u8 EventScript_IchorFlameGutters[];
+extern const u8 EventScript_IchorFlameSpent[];
+extern const u8 EventScript_IchorFlameDrowned[];
 extern const u8 EventScript_IchorRelicRing[];
 extern const u8 EventScript_IchorTorchDoused[];
 extern const u8 EventScript_IchorTorchRelit[];
@@ -413,12 +416,91 @@ void ItemUseOutOfBattle_IchorTorch(u8 taskId)
 }
 
 // special Ichor_SetTorchDoused: VAR_0x8004 TRUE douses, FALSE relights.
+// --- Carried flames (SYSTEMS §2) ---------------------------------------------------
+
+static const u8 *const sFlameNames[FLAME_COUNT] =
+{
+    [FLAME_HEARTH]    = COMPOUND_STRING("Hearth fire"),
+    [FLAME_SANCTUM]   = COMPOUND_STRING("Sanctum fire"),
+    [FLAME_THRESHOLD] = COMPOUND_STRING("Threshold fire"),
+};
+
+bool32 Ichor_IsCarryingFlame(void)
+{
+    return VarGet(VAR_TEMP_3) != FLAME_NONE && VarGet(VAR_TEMP_2) != 0;
+}
+
+static void PutOutFlame(void)
+{
+    VarSet(VAR_TEMP_2, 0);
+    VarSet(VAR_TEMP_3, FLAME_NONE);
+}
+
+// special Ichor_TakeFlame: the torch takes fire VAR_0x8004 (FLAME_*) for VAR_0x8005
+// steps. VAR_RESULT is FALSE without a lit Hecate's Torch.
+void Ichor_TakeFlame(void)
+{
+    gSpecialVar_Result = FALSE;
+    if (!Ichor_HasRelic(ITEM_HECATES_TORCH) || FlagGet(FLAG_ICHOR_TORCH_DOUSED) || gSpecialVar_0x8005 == 0)
+        return;
+    VarSet(VAR_TEMP_2, gSpecialVar_0x8005);
+    VarSet(VAR_TEMP_3, gSpecialVar_0x8004);
+    gSpecialVar_Result = TRUE;
+}
+
+// special Ichor_PutOutFlame: a draught, or a script's own reason.
+void Ichor_PutOutFlame(void)
+{
+    PutOutFlame();
+}
+
+// Ichor_OnStep: the carried flame burns down a step. Water puts it out. At 5
+// steps it gutters; at 0 it is the torch's ordinary flame again. Scripts only
+// start when `canTalk` (the blessing's step didn't start one).
+bool32 Ichor_CarriedFlameStep(bool32 canTalk)
+{
+    u32 steps;
+
+    if (!Ichor_IsCarryingFlame())
+        return FALSE;
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+    {
+        PutOutFlame();
+        if (canTalk)
+            ScriptContext_SetupScript(EventScript_IchorFlameDrowned);
+        return canTalk;
+    }
+    steps = VarGet(VAR_TEMP_2) - 1;
+    VarSet(VAR_TEMP_2, steps);
+    if (steps == 0)
+        VarSet(VAR_TEMP_3, FLAME_NONE);
+    if (!canTalk || (steps != 0 && steps != ICHOR_FLAME_GUTTER_STEPS))
+        return FALSE;
+    ScriptContext_SetupScript(steps == 0 ? EventScript_IchorFlameSpent : EventScript_IchorFlameGutters);
+    return TRUE;
+}
+
+// The start menu's panel: "Hearth fire: 12 steps".
+void Ichor_BufferFlamePanel(u8 *dst)
+{
+    u32 kind = VarGet(VAR_TEMP_3);
+    dst = StringCopy(dst, kind < FLAME_COUNT && sFlameNames[kind] ? sFlameNames[kind] : COMPOUND_STRING("Carried fire"));
+    dst = StringCopy(dst, COMPOUND_STRING(": "));
+    dst = ConvertIntToDecimalStringN(dst, VarGet(VAR_TEMP_2), STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringCopy(dst, VarGet(VAR_TEMP_2) == 1 ? COMPOUND_STRING(" step") : COMPOUND_STRING(" steps"));
+}
+
 void Ichor_SetTorchDoused(void)
 {
     if (gSpecialVar_0x8004)
+    {
         FlagSet(FLAG_ICHOR_TORCH_DOUSED);
+        PutOutFlame();  // a doused torch carries no fire
+    }
     else
+    {
         FlagClear(FLAG_ICHOR_TORCH_DOUSED);
+    }
 }
 
 // Where the fly map goes back to if the player cancels: the party menu after a

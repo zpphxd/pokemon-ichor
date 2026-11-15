@@ -667,6 +667,12 @@ const u32 gObjectEventPic_IchorAcolyteF[] = INCGFX_U32("graphics/object_events/p
 const u32 gObjectEventPic_IchorTablet[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/tablet.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatL[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_l.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatR[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_r.png", ".4bpp");
+// The Theoxenia's Sam, Apollo, Cami and Demeter (tools/ichor/art/sprites_npc_theoxenia.py)
+const u16 gObjectEventPal_IchorTheoxenia[] = INCGFX_U16("graphics/object_events/palettes/ichor_theoxenia.pal", ".gbapal");
+const u32 gObjectEventPic_IchorSam[] = INCGFX_U32("graphics/object_events/pics/people/ichor/sam.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorApollo[] = INCGFX_U32("graphics/object_events/pics/people/ichor/apollo.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorCami[] = INCGFX_U32("graphics/object_events/pics/people/ichor/cami.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorDemeter[] = INCGFX_U32("graphics/object_events/pics/people/ichor/demeter.png", ".4bpp", "-mwidth 2 -mheight 4");
 // Act II batch 1 (tools/ichor/art/sprites_act2.py). The wine palette is the folk
 // palette index for index, with its blues turned to grape and its terracotta to wine.
 const u16 gObjectEventPal_IchorWine[] = INCGFX_U16("graphics/object_events/palettes/ichor_wine.pal", ".gbapal");
@@ -697,6 +703,30 @@ const u32 gObjectEventPic_IchorWoodenImage[] = INCGFX_U32("graphics/object_event
 const u32 gObjectEventPic_IchorWoodenImageGarland[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/wooden_image_garland.png", ".4bpp");
 const u32 gObjectEventPic_IchorMask[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mask.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gObjectEventPic_IchorCrows[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/crows.png", ".4bpp", "-mwidth 4 -mheight 4");
+// Act II batch 2 (tools/ichor/art/sprites_act2_b2.py)
+const u32 gObjectEventPic_IchorFowler[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fowler.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorFowlerF[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fowler_f.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorSaon[] = INCGFX_U32("graphics/object_events/pics/people/ichor/saon.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorTrophonianPriest[] = INCGFX_U32("graphics/object_events/pics/people/ichor/trophonian_priest.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPilgrimBlanket[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pilgrim_blanket.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPilgrimBlanket2[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pilgrim_blanket_2.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPilgrimBlanket3[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pilgrim_blanket_3.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAgamedes[] = INCGFX_U32("graphics/object_events/pics/people/ichor/agamedes.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPanopeus[] = INCGFX_U32("graphics/object_events/pics/people/ichor/panopeus.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorTempleGuard[] = INCGFX_U32("graphics/object_events/pics/people/ichor/temple_guard.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAletheaRim[] = INCGFX_U32("graphics/object_events/pics/people/ichor/alethea_rim.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAletheaNote[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/alethea_note.png", ".4bpp");
+const u32 gObjectEventPic_IchorHerkyna[] = INCGFX_U32("graphics/object_events/pics/people/ichor/herkyna.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorXenodike[] = INCGFX_U32("graphics/object_events/pics/people/ichor/xenodike.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorThyia[] = INCGFX_U32("graphics/object_events/pics/people/ichor/thyia.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorTisamenos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/tisamenos.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorHelike[] = INCGFX_U32("graphics/object_events/pics/people/ichor/helike.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorStrophios[] = INCGFX_U32("graphics/object_events/pics/people/ichor/strophios.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPylades[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pylades.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorMuleteer[] = INCGFX_U32("graphics/object_events/pics/people/ichor/muleteer.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorEelSmoker[] = INCGFX_U32("graphics/object_events/pics/people/ichor/eel_smoker.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorElderMStone[] = INCGFX_U32("graphics/object_events/pics/people/ichor/elder_m_stone.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorElderMLethe[] = INCGFX_U32("graphics/object_events/pics/people/ichor/elder_m_lethe.png", ".4bpp", "-mwidth 2 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)

@@ -1027,8 +1027,8 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 
 === TRAINER_ICHOR_GORGIDAS ===
 Name: GORGIDAS
-Class: Shepherd
-Pic: Shepherd
+Class: Fowler
+Pic: Fowler M
 Gender: Male
 Music: Cool
 AI: Check Bad Move
@@ -1059,8 +1059,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_TIMOXENA ===
 Name: TIMOXENA
-Class: Shepherd
-Pic: Shepherd
+Class: Fowler
+Pic: Fowler F
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -1252,6 +1252,327 @@ AI: Check Bad Move
 Midonos
 Level: 31
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_APHEIDAS ===
+Name: APHEIDAS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Cairnolith
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Gelasable
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_AUGE ===
+Name: AUGE
+Class: Hoplite
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Lykanax
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Harpelle
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Acrobatics
+- Feint Attack
+- Pluck
+- Taunt
+
+=== TRAINER_ICHOR_ECHEMOS ===
+Name: ECHEMOS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lophops
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_AZAN ===
+Name: AZAN
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Chelonet
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lophops
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_AIPYTOS ===
+Name: AIPYTOS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelonet
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LAODIKE ===
+Name: LAODIKE
+Class: Shepherd
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Chelonet
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelyra
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Alluring Voice
+- Mud Bomb
+- Disarming Voice
+- Sing
+
+=== TRAINER_ICHOR_TELPHOUSA ===
+Name: TELPHOUSA
+Class: Hoplite
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Lykanax
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Harpelle
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Acrobatics
+- Feint Attack
+- Pluck
+- Taunt
+
+Arkoby
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Crunch
+- Slash
+- Moonlight
+- Fake Tears
+
+=== TRAINER_ICHOR_KYPSELOS ===
+Name: KYPSELOS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Cairnolith
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Plouteras
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_GRUNT_ROUTE12_BASANOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Cairnolith
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Plouteras
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_EUADNE ===
+Name: EUADNE
+Class: Hoplite
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Lykanax
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kaprodon
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Double-Edge
+- Stomping Tantrum
+- Night Slash
+- Take Down
+
+=== TRAINER_ICHOR_AGAPENOR ===
+Name: AGAPENOR
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Gelasable
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_KYRENE ===
+Name: KYRENE
+Class: Hoplite
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Arkoby
+Level: 33
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Crunch
+- Slash
+- Moonlight
+- Fake Tears
+
+Lykanax
+Level: 33
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+=== TRAINER_ICHOR_ANTHIA ===
+Name: ANTHIA
+Class: Hoplite
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Harpelle
+Level: 34
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Acrobatics
+- Feint Attack
+- Pluck
+- Taunt
+
+Oinopard
+Level: 34
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+=== TRAINER_ICHOR_PROKRIS ===
+Name: PROKRIS
+Class: Hoplite
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Lykanax
+Level: 34
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+Harpelle
+Level: 35
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Acrobatics
+- Night Slash
+- Feint Attack
+- Taunt
+
+Arkoby
+Level: 35
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Crunch
+- Slash
+- Moonlight
+- Fake Tears
+
+=== TRAINER_ICHOR_KALLISTO_1 ===
+Name: KALLISTO
+Class: Hierophant
+Pic: Hierophant Ione
+Gender: Female
+Music: Female
+Items: Hyper Potion / Hyper Potion
+AI: Basic Trainer
+
+Harpelle
+Level: 35
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Tailwind
+- Acrobatics
+- Night Slash
+- Taunt
+
+Lykanax
+Level: 35
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Crunch
+- Sucker Punch
+- Hone Claws
+- Noble Roar
+
+Oinopard
+Level: 35
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Night Slash
+- Poison Jab
+- Crunch
+- Hone Claws
+
+Kaprodon
+Level: 36
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Double-Edge
+- Payback
+- Stomping Tantrum
+- Amnesia
+
+Starkos @ Sitrus Berry
+Level: 37
+IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
+- Play Rough
+- Crunch
+- Moonlight
+- Charm
 
 
 /* Ichor: world-act3 (ids 320-499) */

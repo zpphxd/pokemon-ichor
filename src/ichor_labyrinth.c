@@ -38,12 +38,14 @@
 #include "constants/items.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/rtc.h"
+#include "constants/trainer_types.h"
 
 #include "data/ichor_thread.h"
 
 extern const u8 EventScript_IchorThreadLow[];
 extern const u8 EventScript_IchorAsterionKnockdown[];
 extern const u8 EventScript_IchorAsterionBrokeWall[];
+extern const u8 EventScript_IchorRecruitBump[];
 
 #define MAX_FLOORS        4
 #define MAX_ANCHORS_HERE  8
@@ -111,6 +113,7 @@ static EWRAM_DATA struct
     u8 aStunAfterStep;     // frames of stun once the step into a broken wall ends
     u8 aPatrolFacing;      // the way he faced when he left his patrol
     bool8 aPendingFace;
+    u8 recruitBumped;      // the Titanborn object that last said "Watch it, recruit." + 1
 } sLab = {0};
 
 #define sThread (gIchorSave.thread)
@@ -160,17 +163,72 @@ static bool32 IsHelmed(void)
     return FlagGet(FLAG_ICHOR_HELM_ON);
 }
 
-// trainer_see.c: a trainer's sight. Frozen in the Frozen Hour, none; against
-// the Helm, none in the dark and 2 tiles in light.
+static bool32 IsTitanborn(struct ObjectEvent *obj)
+{
+    return obj->trainerType == TRAINER_TYPE_ICHOR_TITANBORN || obj->trainerType == TRAINER_TYPE_ICHOR_SENTRY;
+}
+
+static bool32 IsRunning(void)
+{
+    return (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_DASH) != 0;
+}
+
+// trainer_see.c: a trainer's sight. Frozen in the Frozen Hour, none. Titanborn
+// take a disguised player for a recruit unless they run within 3 tiles
+// (LABYRINTH §5.6). Against the Helm, none in the dark and 2 tiles in light.
 u8 Ichor_GetTrainerSightRange(struct ObjectEvent *trainer)
 {
     u32 range = trainer->trainerRange_berryTreeId;
 
     if (Ichor_IsHeldByFrozenHour(trainer))
         return 0;
-    if (IsHelmed())
+    if (FlagGet(FLAG_ICHOR_DISGUISE_ON) && IsTitanborn(trainer))
+        range = IsRunning() ? min(range, 3) : 0;
+    if (range != 0 && IsHelmed())
         return GetPlayerLight() == LIGHT_DARK ? 0 : min(range, 2);
     return range;
+}
+
+// trainer_see.c: a sentry (TRAINER_TYPE_ICHOR_SENTRY) also sees the lines either
+// side of its own, from 2 tiles out to its range, over open floor. Seen there,
+// the player is called to from the sentry's post: the approach is 1, no steps.
+u8 Ichor_GetSentrySideSight(struct ObjectEvent *sentry, u8 range, s16 px, s16 py)
+{
+    u32 code = sentry->facingDirection - 1;
+    s32 dx = px - sentry->currentCoords.x, dy = py - sentry->currentCoords.y;
+    s32 forward = dx * sCodeDx[code] + dy * sCodeDy[code];
+    s32 side = sCodeDx[code] != 0 ? dy : dx;
+    s32 d;
+
+    if (abs(side) != 1 || forward < 2 || forward > range)
+        return 0;
+    for (d = 1; d < forward; d++)
+    {
+        s32 x = sentry->currentCoords.x + sCodeDx[code] * d + (sCodeDx[code] != 0 ? 0 : side);
+        s32 y = sentry->currentCoords.y + sCodeDy[code] * d + (sCodeDy[code] != 0 ? 0 : side);
+        if (MapGridGetCollisionAt(x, y))
+            return 0;
+    }
+    return 1;
+}
+
+// field_player_avatar.c: a disguised player walking into a Titanborn gets
+// "Watch it, recruit." Once per bump: the player has to step away first.
+void Ichor_OnPlayerBump(u32 collision, u32 direction)
+{
+    struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = player->currentCoords.x, y = player->currentCoords.y;
+    u8 id;
+
+    if (collision != COLLISION_OBJECT_EVENT || !FlagGet(FLAG_ICHOR_DISGUISE_ON) || direction < DIR_SOUTH || direction > DIR_EAST)
+        return;
+    x += sCodeDx[direction - 1];
+    y += sCodeDy[direction - 1];
+    id = GetObjectEventIdByPosition(x, y, player->currentElevation);
+    if (id >= OBJECT_EVENTS_COUNT || !IsTitanborn(&gObjectEvents[id]) || id + 1 == sLab.recruitBumped)
+        return;
+    sLab.recruitBumped = id + 1;
+    ScriptContext_SetupScript(EventScript_IchorRecruitBump);
 }
 
 // --- Registration (each ring's ON_LOAD) ------------------------------------------------------
@@ -1029,8 +1087,6 @@ void Ichor_LabyrinthFrame(void)
     if (gPlayerAvatar.objectEventId >= OBJECT_EVENTS_COUNT || !gObjectEvents[gPlayerAvatar.objectEventId].active)
         return;
     UpdateHelmLook();
-    if (sLab.floorCount == 0 && sLab.aState == AST_OFF)
-        return;
 
     GetPlayerTile(&x, &y);
     if (!sLab.seenPlayer)
@@ -1040,6 +1096,14 @@ void Ichor_LabyrinthFrame(void)
         sLab.lastY = sLab.entryY = y;
     }
     stepped = (x != sLab.lastX || y != sLab.lastY);
+    if (stepped)
+        sLab.recruitBumped = 0;
+    if (sLab.floorCount == 0 && sLab.aState == AST_OFF)
+    {
+        sLab.lastX = x;
+        sLab.lastY = y;
+        return;
+    }
 
     if (sLab.floorCount != 0 && HasThread())
     {

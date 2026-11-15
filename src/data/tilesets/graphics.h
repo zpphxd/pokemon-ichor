@@ -690,6 +690,57 @@ const u16 gTilesetPalettes_PorytilesManaged_TempleHermes[][16] =
     INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/palettes/15.gbapal")
 };
 
+// Ichor: labyrinth
+const u32 gTilesetTiles_PorytilesManaged_Labyrinth[] = INCBIN_U32("data/tilesets/secondary/labyrinth/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Labyrinth[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/palettes/15.gbapal")
+};
+
+// The doused set (SYSTEMS.md §2, "Douse"): black but for the glow paint, the flames
+// and a faint thread. Load it over palettes 6-12 while the torch is doused. Written
+// by tools/ichor/art/labyrinth_build.py; not yet wired into the engine.
+const u16 gTilesetPalettes_LabyrinthGlow[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/glow/12.gbapal")
+};
+
+// The dawn set (LABYRINTH.md §8, scene L): the workshop dimmed and cooled but for the
+// grey light down the Icarus Shaft. Load it over palettes 6-12 for the scene. Written
+// by tools/ichor/art/labyrinth_build.py; not yet wired into the engine.
+const u16 gTilesetPalettes_LabyrinthDawn[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/12.gbapal")
+};
+
 // Ichor: kithairon, the Kithairon crossing (Route 6, Eleutherai and Mt. Kithairon); built by tools/ichor/art/kithairon_build.py
 const u32 gTilesetTiles_PorytilesManaged_Kithairon[] = INCBIN_U32("data/tilesets/secondary/kithairon/porytiles_bin/tiles.4bpp.lz");
 

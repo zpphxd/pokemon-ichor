@@ -8,6 +8,7 @@ local FLOOR, TWIN = 1, 2
 local H, V, NE, NW, SE, SW, CAPN, CAPS, CAPW, CAPE = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 local AX, AY, BX, BY = 15, 49, 19, 49          -- the two bronze rings
 local ASTERION = 3                             -- the youth's template, rewritten
+local SHEPHERD = 4                             -- Tityros, at (12,49) facing west
 local MX, MY = 13, 43                          -- where he stands
 
 -- --- Helpers -------------------------------------------------------------------------------
@@ -185,6 +186,44 @@ L.start(function()
   expect(r == "taken" or not L.idle(), "helmed in light, at two tiles: seen")
   settle({ limit = 20000 })  -- the shepherd's battle
   L.setFlag(S.FLAG_ICHOR_HELM_ON, false)
+
+  -- === A Titan sentry (the shepherd again, unbeaten, sight 5) and the disguise ===========
+  warpTo(9, 47)                                  -- out of his line first
+  L.setFlag(S.TRAINER_FLAGS_START + S.TRAINER_ICHOR_TITYROS, false)
+  L.setFlag(S.FLAG_SYS_B_DASH, true)
+  local t = L.sb1() + S.OFF_SB1_TEMPLATES
+  for i = 0, 63 do
+    local tpl = t + i * S.TEMPLATE_SIZE
+    if emu:read8(tpl + S.OFF_TPL_LOCAL_ID) == SHEPHERD then
+      emu:write16(tpl + S.OFF_TPL_TRAINER_TYPE, S.TRAINER_TYPE_ICHOR_SENTRY)
+      emu:write16(tpl + S.OFF_TPL_TRAINER_TYPE + 2, 5)
+      break
+    end
+  end
+  L.setVar(S.VAR_0x8008, SHEPHERD)
+  L.runHeader("LabTest_RespawnHeader")
+  L.setFlag(S.FLAG_ICHOR_DISGUISE_ON, true)
+  r = L.step(K.DOWN)                             -- (9,48): the lane beside his, 3 out
+  wait(60)
+  expect(r == "moved" and L.idle(), "disguised and walking, in a sentry's side lane: taken for a recruit")
+  steps({ K.DOWN, K.RIGHT, K.RIGHT })            -- (11,49): right in front of him
+  emu:addKey(K.RIGHT)
+  local bumped = false
+  for _ = 1, 60 do wait(1) if L.boxUp() then bumped = true end end
+  emu:clearKey(K.RIGHT)
+  shot("recruit")
+  settle()
+  expect(bumped, "walking into him: \"Watch it, recruit.\"")
+  steps({ K.UP, K.LEFT })                        -- (10,48): the side lane, 2 out, walking
+  wait(30)
+  expect(L.idle(), "still a recruit, walking")
+  emu:addKey(K.B)
+  r = L.step(K.LEFT)                             -- running into (9,48), 3 out
+  emu:clearKey(K.B)
+  L.waitUntil(function() return L.inBattle() or not L.idle() end, 120, "the sentry")
+  expect(not L.idle(), "running within 3 tiles of a sentry's band gives the disguise away")
+  settle({ limit = 20000 })
+  L.setFlag(S.FLAG_ICHOR_DISGUISE_ON, false)
 
   -- === Asterion ==========================================================================
   -- He sees, charges, misses the dodging player and breaks the cracked wall at (13,50)

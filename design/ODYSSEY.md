@@ -1499,6 +1499,8 @@ ODYSSEUS: The fish are biting again. Thank you. And thank your crab-checker.
 
 ## Decisions for the user
 
+> **Settled by the user, 2026-11-14.** Asked directly: the Oikoumene opens in stages (PG-6, PG-7, PG-8); the Orpheus moment is Persephone's return, and nobody returns from the dead (K4); the five Titans and Briareus are freed (K3); the suitors stay, comic, with Mom in control (O3); Argos lives and joins you (O4); the legend castings are approved as a set (PG-31); the House of Night is built for 1.0 (PG-26, overriding K8's stretch). **Every other decision below takes its recommendation** (the user: "Take the recommendations"). Any can still be changed later.
+
 - **O1. One way.** Once you round Maleia, the Wings don't work until you're home (recommended: it's what makes the homecoming land). The alternative is free travel, which breaks the suitors' premise.
 - **O2. The Cyclops is a Polyphant,** a Pokémon, not a talking giant: the dex's own thesis, with Odysseus's tale as the embellishment and "NOBODY" kept as the boast. It isn't catchable.
 - **O3. The suitors** are comic social climbers courting Mom, because her child is the Archon. Check the tone: it's played for laughs, and Mom is in control throughout.

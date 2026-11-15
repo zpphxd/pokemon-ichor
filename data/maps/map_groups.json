@@ -8,7 +8,9 @@
     "gMapGroup_IndoorThyrsa",
     "gMapGroup_IndoorLebadeia",
     "gMapGroup_IndoorKirrha",
-    "gMapGroup_IndoorAigion"
+    "gMapGroup_IndoorAigion",
+    "gMapGroup_IndoorStyx",
+    "gMapGroup_IndoorArkadia"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -26,7 +28,13 @@
     "Route9_Schiste",
     "Kirrha",
     "GulfFerry_Deck",
-    "Aigion"
+    "Aigion",
+    "Route11_KrathisGorge",
+    "StyxFalls",
+    "Route12_CypressRoad",
+    "Arkadia",
+    "Arkadia_CypressWood",
+    "PoolOfMnemosyne"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -107,5 +115,20 @@
   "gMapGroup_IndoorAigion": [
     "Aigion_AchaeansHouse",
     "Aigion_GoatherdsHouse"
+  ],
+  "gMapGroup_IndoorStyx": [
+    "Route12_CaveOfMaia",
+    "StyxFalls_Inn",
+    "StyxFalls_OathHouse",
+    "StyxFalls_StoneHouse"
+  ],
+  "gMapGroup_IndoorArkadia": [
+    "Arkadia_Asclepeion",
+    "Arkadia_Agora",
+    "Arkadia_NyktimosHall",
+    "Arkadia_KlymeneHouse",
+    "Arkadia_CharcoalHut",
+    "Arkadia_GoatherdHouse",
+    "Arkadia_TempleOfArtemis"
   ]
 }
