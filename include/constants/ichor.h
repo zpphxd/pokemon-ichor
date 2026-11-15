@@ -99,6 +99,15 @@
 #define THREAD_ANCHOR_UNNAMED          0
 #define THREAD_ANCHOR_GRAND_STAIRCASE  1
 
+// Carried flames (SYSTEMS §2): VAR_TEMP_3 holds the kind, VAR_TEMP_2 the steps
+// left. Names for the start menu are in src/ichor_relics.c; add new kinds at the end.
+#define FLAME_NONE       0
+#define FLAME_HEARTH     1
+#define FLAME_SANCTUM    2
+#define FLAME_THRESHOLD  3
+#define FLAME_COUNT      4
+#define ICHOR_FLAME_GUTTER_STEPS  5  // "The flame gutters."
+
 // Light radius levels for dark maps (SYSTEMS §2; sFlashLevelToRadius)
 #define ICHOR_FLASH_NO_TORCH      7  // 24 px
 #define ICHOR_FLASH_TORCH         3  // 56 px

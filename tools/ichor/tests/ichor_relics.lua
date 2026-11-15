@@ -339,6 +339,44 @@ L.start(function()
   wait(30)
   warpHome()
 
+  -- 4c. Carried flames (SYSTEMS §2): the hearth fire, 7 steps
+  local function flame() return L.getVar(S.VAR_TEMP_2), L.getVar(S.VAR_TEMP_3) end
+  local function takeFlame(steps)
+    L.setVar(S.VAR_0x8004, S.FLAME_HEARTH); L.setVar(S.VAR_0x8005, steps)
+    L.runHeader("RelicTest_TakeFlameHeader")
+  end
+  local function stepTalks(key)
+    emu:addKey(key)
+    local box = false
+    for f = 1, 70 do wait(1) if f == 12 then emu:clearKey(key) end if L.boxUp() then box = true end end
+    emu:clearKey(key)
+    settle()
+    return box
+  end
+  takeFlame(7)
+  local fs, fk = flame()
+  expect(fs == 7 and fk == S.FLAME_HEARTH, "Hecate's Torch takes the hearth fire, 7 steps")
+  tap(K.START); wait(40); shot("flame_panel"); tap(K.B); wait(30)
+  L.step(K.RIGHT)
+  local guttered = stepTalks(K.LEFT)
+  fs = flame()
+  expect(guttered and fs == 5, string.format("at 5 steps left: \"The flame gutters.\" (%d left)", fs))
+  for _, k in ipairs({ K.RIGHT, K.LEFT, K.RIGHT, K.LEFT }) do L.step(k) end
+  local spent = stepTalks(K.RIGHT)
+  fs, fk = flame()
+  expect(spent and fs == 0 and fk == S.FLAME_NONE, "at 0 the carried fire dies down to the torch's own")
+  L.step(K.LEFT)
+  takeFlame(20)
+  L.runHeader("RelicTest_DraughtHeader")
+  fs, fk = flame()
+  expect(fk == S.FLAME_NONE, "a draught snuffs it out")
+  takeFlame(20)
+  L.runHeader("RelicTest_DouseHeader")
+  fs, fk = flame()
+  expect(fk == S.FLAME_NONE and not L.getFlag(S.FLAG_ICHOR_TORCH_DOUSED), "dousing the torch puts it out too")
+  local px, py = L.pos()
+  expect(px == PX and py == PY, string.format("back where the water section starts (%d,%d)", px, py))
+
   -- 6. Water. Ocean in front, a two-tile waterfall, then deep water.
   setMetatile(OX, OY, OCEAN, 1)
   setMetatile(OX, OY - 1, WATERFALL, 1)

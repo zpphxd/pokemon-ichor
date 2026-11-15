@@ -1,7 +1,9 @@
 // Ichor: scripts' small needs (design/ENGINE_API.md §7): counting a flag range,
-// a forced omen, and holding the day-and-night tint.
+// a forced omen, holding the day-and-night tint; and carried flames (§2).
 #include "global.h"
 #include "event_data.h"
+#include "field_player_avatar.h"
+#include "ichor_relics.h"
 #include "ichor_save.h"
 #include "rtc.h"
 #include "test/test.h"
@@ -63,4 +65,19 @@ TEST("Ichor: a held time of day overrides the clock until released")
     }
     Ichor_ReleaseTimeOfDay();
     EXPECT_EQ(gIchorSave.heldTimeOfDay, 0);
+}
+
+TEST("Ichor: a carried flame counts down even on a quiet step, and water puts it out")
+{
+    VarSet(VAR_TEMP_2, 10);
+    VarSet(VAR_TEMP_3, FLAME_HEARTH);
+    EXPECT_EQ(Ichor_CarriedFlameStep(FALSE), FALSE);
+    EXPECT_EQ(VarGet(VAR_TEMP_2), 9);
+    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_HEARTH);
+
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_SURFING;
+    EXPECT_EQ(Ichor_CarriedFlameStep(FALSE), FALSE);
+    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_NONE);
+    EXPECT_EQ(Ichor_IsCarryingFlame(), FALSE);
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
 }

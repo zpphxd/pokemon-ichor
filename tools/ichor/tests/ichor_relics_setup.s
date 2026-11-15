@@ -159,3 +159,27 @@ RelicTest_CallR3:
 	bx r3
 	.pool
 
+
+@ --- Carried flames: take one (VAR_0x8004 kind, VAR_0x8005 steps), a draught, a douse
+	.arm
+	.align 2
+	test_header RelicTest_TakeFlameHeader, RelicTest_TakeFlame
+RelicTest_TakeFlame:
+	setvar VAR_TEMP_F, 1
+	special Ichor_TakeFlame
+	end
+
+	test_header RelicTest_DraughtHeader, RelicTest_Draught
+RelicTest_Draught:
+	setvar VAR_TEMP_F, 1
+	call EventScript_IchorDraught
+	end
+
+	test_header RelicTest_DouseHeader, RelicTest_Douse
+RelicTest_Douse:
+	setvar VAR_TEMP_F, 1
+	setvar VAR_0x8004, 1
+	special Ichor_SetTorchDoused
+	setvar VAR_0x8004, 0
+	special Ichor_SetTorchDoused
+	end

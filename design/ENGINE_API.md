@@ -215,6 +215,18 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
   - going out: `call(EventScript_IchorLeaveLitZone)`, which eases back to the torch's radius.
 - **A map that loads with the player inside a lit zone** sets `setflashlevel(0)` in its ON_TRANSITION when the zone's flag is set.
 
+### Carried flames (SYSTEMS §2)
+
+- **A carried flame** is a named fire on Hecate's Torch for a set number of steps. Its kind is in `VAR_TEMP_3` (`FLAME_HEARTH`, `FLAME_SANCTUM`, `FLAME_THRESHOLD`; add new kinds at the end, with their names in `src/ichor_relics.c`). Its steps left are in `VAR_TEMP_2`. Both reset on a map change, so the flame dies when you leave.
+- **A brazier that gives its fire:** `setvar(VAR_0x8004, FLAME_HEARTH)`, `setvar(VAR_0x8005, 20)`, then `special(Ichor_TakeFlame)`. `VAR_RESULT` is `FALSE` without a lit Torch. A brazier already lit with that fire relights it the same way (the relay).
+- **A brazier that wants a named fire** checks `VAR_TEMP_3` itself, then `special(Ichor_PutOutFlame)` if the fire is spent on it.
+- **Each step burns one.** At 5 steps left: "The flame gutters." At 0: "The carried fire dies down to the torch's own flame."
+- **Water puts it out:** "The water puts out the carried fire." Surfing, which covers falling into water and the waterfall, does it on the next step. Dousing the Torch from the Ring puts it out silently.
+- **Wind:** a draughty doorway's coord event runs `call(EventScript_IchorDraught)`. It does nothing without a flame; with one, "A draught snuffs out the carried fire."
+- **The start menu's panel** shows "Hearth fire: 12 steps", under the blessing when there is one.
+- **Order, Return and Reveal** (SYSTEMS's other verbs) are the map's own script.
+- **Rain** isn't decided yet; world-postgame is asking.
+
 ### Calls for scripted relic moments
 
 - `setvar(VAR_0x8004, ITEM_X)`, then `call(EventScript_IchorRelicPose)`: the player raises relic X, its icon shows over their head with a chime, and a follower hops. Use it when a story script uses a relic.

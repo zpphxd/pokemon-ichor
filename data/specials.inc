@@ -1074,6 +1074,9 @@ gSpecials::
 	def_special Ichor_SepiaMemoryEnd
 	def_special Ichor_ColorReturnStep
 	def_special Ichor_FrozenScriptsHere
+	@ Ichor: carried flames (src/ichor_relics.c)
+	def_special Ichor_TakeFlame
+	def_special Ichor_PutOutFlame
 	def_special Ichor_FrozenGenericLine
 	@ Ichor: the Labyrinth (src/ichor_labyrinth.c)
 	def_special Ichor_AddThreadFloor
