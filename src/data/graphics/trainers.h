@@ -504,6 +504,25 @@ const u16 gTrainerPalette_AcolyteM[] = INCGFX_U16("graphics/trainers/front_pics/
 const u32 gTrainerFrontPic_AcolyteF[] = INCGFX_U32("graphics/trainers/front_pics/acolyte_f.png", ".4bpp.smol");
 const u16 gTrainerPalette_AcolyteF[] = INCGFX_U16("graphics/trainers/front_pics/acolyte_f.png", ".gbapal");
 
+// Pokemon Ichor, Act II batch 1 (tools/ichor/art/sprites_act2_classes.py)
+const u32 gTrainerFrontPic_Maenad[] = INCGFX_U32("graphics/trainers/front_pics/maenad.png", ".4bpp.smol");
+const u16 gTrainerPalette_Maenad[] = INCGFX_U16("graphics/trainers/front_pics/maenad.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Satyr[] = INCGFX_U32("graphics/trainers/front_pics/satyr.png", ".4bpp.smol");
+const u16 gTrainerPalette_Satyr[] = INCGFX_U16("graphics/trainers/front_pics/satyr.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Actor[] = INCGFX_U32("graphics/trainers/front_pics/actor.png", ".4bpp.smol");
+const u16 gTrainerPalette_Actor[] = INCGFX_U16("graphics/trainers/front_pics/actor.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Vintner[] = INCGFX_U32("graphics/trainers/front_pics/vintner.png", ".4bpp.smol");
+const u16 gTrainerPalette_Vintner[] = INCGFX_U16("graphics/trainers/front_pics/vintner.png", ".gbapal");
+
+const u32 gTrainerFrontPic_HierophantThespis[] = INCGFX_U32("graphics/trainers/front_pics/hierophant_thespis.png", ".4bpp.smol");
+const u16 gTrainerPalette_HierophantThespis[] = INCGFX_U16("graphics/trainers/front_pics/hierophant_thespis.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Silenos[] = INCGFX_U32("graphics/trainers/front_pics/silenos.png", ".4bpp.smol");
+const u16 gTrainerPalette_Silenos[] = INCGFX_U16("graphics/trainers/front_pics/silenos.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1314,5 +1333,30 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_ACOLYTE_F] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
+    },
+    // Ichor: Act II batch 1
+    [TRAINER_PIC_MAENAD] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Maenad, gTrainerPalette_Maenad),
+    },
+    [TRAINER_PIC_SATYR] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Satyr, gTrainerPalette_Satyr),
+    },
+    [TRAINER_PIC_ACTOR] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Actor, gTrainerPalette_Actor),
+    },
+    [TRAINER_PIC_VINTNER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Vintner, gTrainerPalette_Vintner),
+    },
+    [TRAINER_PIC_HIEROPHANT_THESPIS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_HierophantThespis, gTrainerPalette_HierophantThespis),
+    },
+    [TRAINER_PIC_SILENOS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Silenos, gTrainerPalette_Silenos),
     },
 };

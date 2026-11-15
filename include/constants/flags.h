@@ -1713,6 +1713,7 @@
 #ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
+#define FLAG_ICHOR_HIDE_ELEUSA_EAST_HOPLITE     (FLAG_ICHOR_GENERAL_START + 0x10C) // Ichor: the hoplite in Eleusa's east wall gap (48,25), hidden when Route 15 opens in Act II (batch 4)
 #define FLAG_ICHOR_GOT_PROTECTIVE_PADS          (FLAG_ICHOR_GENERAL_START + 0x140) // Ichor: Act II rooms: Peneleos's gift after the recruit's sparring match (Eleutherai)
 #define FLAG_ICHOR_OINOE_GARLAND                (FLAG_ICHOR_GENERAL_START + 0x141) // Ichor: Act II rooms: Oinoe's ivy garland errand is open; cleared when she gives the Big Root (Eleutherai)
 #define FLAG_ICHOR_TWINS_AMPHIS                 (FLAG_ICHOR_GENERAL_START + 0x142) // Ichor: Act II rooms: showed Amphis a Chelonet or Chelyra; got the Metronome (Eleutherai)

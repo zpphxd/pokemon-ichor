@@ -342,6 +342,91 @@
           "species": "SPECIES_CAIRNOLITH"
         }
       ]
+    },
+    "water_mons": {
+      "encounter_rate": 4,
+      "mons": [
+        {
+          "min_level": 30,
+          "max_level": 33,
+          "species": "SPECIES_HALCYLING"
+        },
+        {
+          "min_level": 30,
+          "max_level": 33,
+          "species": "SPECIES_KETOFRY"
+        },
+        {
+          "min_level": 30,
+          "max_level": 33,
+          "species": "SPECIES_GALENYON"
+        },
+        {
+          "min_level": 30,
+          "max_level": 33,
+          "species": "SPECIES_KARKIPOOL"
+        },
+        {
+          "min_level": 30,
+          "max_level": 33,
+          "species": "SPECIES_NARKERAY"
+        }
+      ]
+    },
+    "fishing_mons": {
+      "encounter_rate": 30,
+      "mons": [
+        {
+          "min_level": 22,
+          "max_level": 25,
+          "species": "SPECIES_KETOFRY"
+        },
+        {
+          "min_level": 22,
+          "max_level": 25,
+          "species": "SPECIES_KARKIPOOL"
+        },
+        {
+          "min_level": 24,
+          "max_level": 27,
+          "species": "SPECIES_KARKIPOOL"
+        },
+        {
+          "min_level": 24,
+          "max_level": 26,
+          "species": "SPECIES_KETOFRY"
+        },
+        {
+          "min_level": 25,
+          "max_level": 27,
+          "species": "SPECIES_NARKERAY"
+        },
+        {
+          "min_level": 30,
+          "max_level": 34,
+          "species": "SPECIES_KYNOKETOS"
+        },
+        {
+          "min_level": 30,
+          "max_level": 34,
+          "species": "SPECIES_NARKERAY"
+        },
+        {
+          "min_level": 30,
+          "max_level": 34,
+          "species": "SPECIES_KARKIPOOL"
+        },
+        {
+          "min_level": 30,
+          "max_level": 34,
+          "species": "SPECIES_KYNOKETOS"
+        },
+        {
+          "min_level": 30,
+          "max_level": 34,
+          "species": "SPECIES_NARKERAY"
+        }
+      ]
     }
   },
   {
