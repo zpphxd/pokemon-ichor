@@ -489,7 +489,7 @@
       "x": 32,
       "y": 15,
       "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route9_Schiste_EventScript_Shrine"
     },
     {

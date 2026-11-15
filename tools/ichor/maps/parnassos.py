@@ -840,7 +840,7 @@ def route9():
             sign(12, 38, R9 + "SignSouthWest"),
             sign(30, 14, R9 + "GreatHerm"),
             sign(25, 17, R9 + "SignCrossroads"),
-            sign(32, 15, R9 + "Shrine", "BG_EVENT_PLAYER_FACING_NORTH"),
+            sign(32, 15, R9 + "Shrine"),
             sign(34, 14, R9 + "LaurelTree", "BG_EVENT_PLAYER_FACING_NORTH"),
             sign(7, 5, R9 + "Falls", "BG_EVENT_PLAYER_FACING_NORTH"),
             sign(9, 7, R9 + "Cairn"),
