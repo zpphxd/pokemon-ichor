@@ -16,7 +16,7 @@ It reuses Emerald's title-screen layers, so the file names stay Emerald's:
   pokemon_logo.pal      BG palettes 0-13: row 0 the gold, row 13 the painting
   rayquaza_and_clouds.pal  BG palette 14: the thread; color 15 shimmers
   emerald_version.png   the version-banner sprite pair: POKEMON
-  press_start.png       PRESS START and the fan-work line (sprites)
+  press_start.png       PRESS START and the creator credit (sprites)
 
 pokemon_logo.bin (the identity tilemap) and logo_shine.png are kept as they
 are. The figures live in title_fates.py, the letters in title_lettering.py.
@@ -96,8 +96,8 @@ PRESS_PAL = [
     (200, 144, 40),   # 2 mid
     (240, 192, 64),   # 3 lit
     (248, 232, 152),  # 4 glint
-    (152, 64, 32),    # 5 fan line, clay shade
-    (224, 136, 88),   # 6 fan line, clay light
+    (152, 64, 32),    # 5 creator credit, clay shade
+    (224, 136, 88),   # 6 creator credit, clay light
 ]
 
 # --------------------------------------------------------------------------
@@ -132,7 +132,7 @@ LABELS = [
 BANNER_LEFT_X, BANNER_Y_GOAL = 88, 16
 BANNER_TEXT_TOP = 2                  # row in the 128x32 sprite
 
-# PRESS START / fan line sprites (title_screen.c CreatePressStartBanner etc.)
+# PRESS START / creator credit sprites (title_screen.c CreatePressStartBanner etc.)
 START_BANNER_X = 120
 PRESS_Y, FAN_Y = 147, 155            # sprite centers
 
@@ -367,10 +367,9 @@ def build_banner():
 
 
 def build_press_start():
-    """160x24, 4bpp. Row 0 tiles 1-19: PRESS START; row 1 tiles 1-19: the
-    fan-work line. title_screen.c shows tiles 1-20 and 21-40 as five 32x8
-    sprites each, so image x maps to screen x - 32 (START_BANNER_X 120)."""
-    img = np.zeros((24, 160), int)
+    """224x24, 4bpp. PRESS START uses tiles 1-20; the creator credit uses
+    tiles 29-56. Each row begins with a blank tile before its 32x8 sprites."""
+    img = np.zeros((24, 224), int)
     center = START_BANNER_X - 32  # image x that lands on the screen center
     press = set_word({k: shade_thin(v) if k != " " else v for k, v in LET.PRESS.items()},
                      "PRESS · START", 1, 7)
@@ -380,10 +379,12 @@ def build_press_start():
     for y, row in enumerate(press):
         for x, ch in enumerate(row):
             img[0 + y, x0 + x] = pk[ch]
-    fan = set_word(LET.SMALL, "A FAN WORK · 2026", 1, 5)
-    w = len(fan[0])
+    credit = set_word(LET.SMALL, "A GAME BY SAMUEL BISHOP AND ZACH POWERS", 1, 5)
+    w = len(credit[0])
+    center = 120
     x0 = center - w // 2
-    for y, row in enumerate(fan):
+    assert x0 >= 8 and x0 + w <= 224, "creator credit must fit its seven sprites"
+    for y, row in enumerate(credit):
         for x, ch in enumerate(row):
             if ch == "#":
                 img[8 + 1 + y, x0 + x] = 6
@@ -528,11 +529,11 @@ def composite(painting, thread, logo, t=0, eva=16, evb=0, amp=4, drift=0.25,
             if v and 0 <= top + yy < H and 0 <= left + xx < W:
                 out[top + yy, left + xx] = BANNER[v]
     if press:
-        for row, cy in ((0, PRESS_Y), (1, FAN_Y)):
+        for row, cy, width, offset in ((0, PRESS_Y, 168, 88), (1, FAN_Y, 224, 120)):
             for yy in range(8):
-                for xx in range(8, 160):
+                for xx in range(8, width):
                     v = ps[row * 8 + yy, xx]
-                    sx, sy = xx + START_BANNER_X - 88, cy - 4 + yy
+                    sx, sy = xx + START_BANNER_X - offset, cy - 4 + yy
                     if v and 0 <= sx < W and 0 <= sy < H:
                         out[sy, sx] = PRESS_PAL[v]
     return out

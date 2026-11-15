@@ -7,7 +7,7 @@ The bible's title screen is "a painted amphora". The screen is the belly of a bl
 - In the panel the three Fates handle a white thread. **Clotho** spins it from her distaff and drop spindle. **Lachesis** lays it along a marked rod. **Atropos**, veiled, closes her spring shears on it.
 - Each Fate has a painted name label, as on the François Vase: ΚΛΩΘΩ, ΛΑΧΕΣΙΣ, ΑΤΡΟΠΟΣ.
 - One **golden thread** drifts free past all three, never spun and never cut. That thread is the player.
-- **ICHOR** is a gilded V-cut inscription in Greek lapidary capitals. POKÉMON, PRESS · START and "A FAN WORK · 2026" match it.
+- **ICHOR** is a gilded V-cut inscription in Greek lapidary capitals. POKÉMON, PRESS · START and "A GAME BY SAMUEL BISHOP AND ZACH POWERS" match it.
 
 Screenshots: `img/title_1_glint.png` through `img/title_5_drift.png`. They are in-game captures. The expansion's dev-only Quickstart badge is now hidden in the game too (`QUICKSTART_HUD`, `UI_remnants.md`).
 
@@ -21,7 +21,7 @@ Emerald's layers and effects are reused, so the file names are still Emerald's.
 | BG1 | `clouds.png`, `clouds.bin` | The golden thread, a 2 px cord that wraps every 256 px | BG 14, `rayquaza_and_clouds.pal` | Drifts right at 1 px per 8 frames; the scanline wave ripples it; color 15 pulses; alpha 12/8 makes it glow |
 | BG2 | `pokemon_logo.png`, `pokemon_logo.bin` (unchanged identity map) | ICHOR, 8bpp affine | BG 0 (index 0 is the backdrop) | Shine sweeps; slides up 32 px |
 | OBJ | `emerald_version.png` | POKÉMON, as the two version-banner sprites | OBJ 0 | Slides down and fades in |
-| OBJ | `press_start.png` | Row 0: PRESS · START (blinks). Row 1: the fan-work line | Own | As in Emerald |
+| OBJ | `press_start.png` | Row 0: PRESS · START (blinks). Row 1: the creator credit (seven 32×8 sprites) | Own | As in Emerald |
 | OBJ window | `logo_shine.png` (unchanged) | Shine shape | n/a | Lightens BG2 under it |
 
 `pokemon_logo.pal` holds all 224 colors the build loads for BG2. The logo uses only row 0, so row 13 carries the painting's palette.
@@ -37,7 +37,7 @@ Emerald's layers and effects are reused, so the file names are still Emerald's.
 
 Every change is marked `// Ichor:`.
 
-- Banner, PRESS START and fan-line positions are constants. The banner is centered and rests at y 16.
+- Banner, PRESS START and creator-credit positions are constants. The banner is centered and rests at y 16.
 - The shine flash colors: a clay ramp, a white-gold peak, and the backdrop restored to the gloss ink instead of `RGB_BLACK`.
 - BG1 blending is `BLDALPHA(12, 8)` (was 6/15) so the thread glows.
 - Phase 3 drifts BG1 sideways (`gBattle_BG1_X`) instead of scrolling it up.
