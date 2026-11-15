@@ -9697,6 +9697,72 @@
       "border_filepath": "data/layouts/Melos_BoathouseLoft/border.bin",
       "blockdata_filepath": "data/layouts/Melos_BoathouseLoft/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_FOAM_ROAD",
+      "name": "KytheraFoamRoad_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kythera",
+      "border_filepath": "data/layouts/KytheraFoamRoad/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraFoamRoad/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_SPRING_OF_KALLIRHOE",
+      "name": "KytheraSpringOfKallirhoe_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Kythera",
+      "border_filepath": "data/layouts/KytheraSpringOfKallirhoe/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraSpringOfKallirhoe/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_PAPHIA",
+      "name": "KytheraPaphia_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Paphia",
+      "border_filepath": "data/layouts/KytheraPaphia/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraPaphia/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_NERAIDA_FALLS",
+      "name": "KytheraNeraidaFalls_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Neraida",
+      "border_filepath": "data/layouts/KytheraNeraidaFalls/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraNeraidaFalls/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_ECHO_CAVES",
+      "name": "KytheraEchoCaves_Layout",
+      "width": 28,
+      "height": 28,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Melos",
+      "border_filepath": "data/layouts/KytheraEchoCaves/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraEchoCaves/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_TEMPLE_OF_APHRODITE",
+      "name": "KytheraTempleOfAphrodite_Layout",
+      "width": 17,
+      "height": 24,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_TempleAphrodite",
+      "border_filepath": "data/layouts/KytheraTempleOfAphrodite/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraTempleOfAphrodite/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

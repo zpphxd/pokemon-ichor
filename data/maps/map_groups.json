@@ -140,7 +140,11 @@
     "ElaiaVillage",
     "KallisteRoute1",
     "AktiTown",
-    "KallisteRoute1_KronionHill"
+    "KallisteRoute1_KronionHill",
+    "KytheraFoamRoad",
+    "KytheraSpringOfKallirhoe",
+    "KytheraPaphia",
+    "KytheraNeraidaFalls"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
@@ -1196,7 +1200,9 @@
     "KytheraPaphia_PygmalionsWorkshop",
     "KytheraPaphia_MirrorHouse",
     "KytheraPaphia_OrchardHouse",
-    "KytheraNeraidaFalls_Mill"
+    "KytheraNeraidaFalls_Mill",
+    "KytheraEchoCaves",
+    "KytheraTempleOfAphrodite"
   ],
   "gMapGroup_IndoorMelos": [
     "Melos_Farmhouse",
