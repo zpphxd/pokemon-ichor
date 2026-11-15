@@ -333,7 +333,7 @@
       "x": 11,
       "y": 7,
       "elevation": 3,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_6",
       "var_value": "0",
       "script": "Route9_Schiste_EventScript_Lookout"
     },
@@ -342,7 +342,7 @@
       "x": 11,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_6",
       "var_value": "0",
       "script": "Route9_Schiste_EventScript_Lookout"
     },
@@ -351,7 +351,7 @@
       "x": 17,
       "y": 23,
       "elevation": 3,
-      "var": "VAR_TEMP_3",
+      "var": "VAR_TEMP_7",
       "var_value": "0",
       "script": "Route9_Schiste_EventScript_DrumRoll1"
     },

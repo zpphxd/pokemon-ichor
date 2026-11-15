@@ -70,7 +70,7 @@ Parties are staged in `design/phase3/parties/{kopais,trophonios,parnassos,harbor
 |---|---|---|
 | Thyrsa's Neistan Gate → Route 8's east edge | Thyrsa's west edge is open only on rows 23–24. Route 8's road meets its east edge on rows *q*…*q*+1, the kopais agent's choice, recorded here; seam strips aethos-only (8 columns, Part 10). This session adds both connections at integration (Thyrsa's map.json is the polish-thyrsa agent's builder's). | kopais |
 | Route 8's west edge ↔ Lebadeia's east edge | **fixed now**: both maps' roads on rows 12–13 (verges 11 and 14), offset 0 both ways; seam strips aethos-only (different secondaries) | kopais, parnassos |
-| Lebadeia's west edge ↔ Route 9's east edge | the parnassos agent's choice (one tileset, no strip) | parnassos |
+| Lebadeia's west edge ↔ Route 9's east edge | **chosen:** Lebadeia's road on rows 12-13 (verges 11, 14), Route 9's on rows 20-21 (verges 19, 22). Lebadeia `left` offset −8, Route 9 `right` offset +8. Both on `gTileset_Parnassos`, so no strip | parnassos |
 | Route 9's south edge ↔ Kirrha's north edge | **fixed now**: Route 9's road at columns 8–11 (verges 8 and 11), Kirrha's at 26–29; Route 9 `down` offset −18, Kirrha `up` offset +18; seam strips aethos-only | parnassos, harbors |
 | Kirrha's north road to Delphoi (Route 28, Act III) | drawn closed, with Delphoi's temple guards (beat 37A); not a connection yet | harbors |
 | Aigion's south edge → Route 11 (batch 3) | draw the road's first rows; record the columns here | harbors |

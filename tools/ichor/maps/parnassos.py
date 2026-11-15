@@ -432,7 +432,7 @@ def lebadeia():
     m.rect(24, 14, W - 1, 15, ".")
     m.rect(24, 16, W - 1, H - 1, "O")
     m.rect(24, 5, 25, 10, ".")               # the slope opens behind the hall
-    m.cells([(26, 16), (27, 16), (24, 17), (25, 17)], ".")
+    m.rect(0, 0, 9, 0, "L")                  # scrub on the oracle's rock
     # paths: from the steps down through the grove to the road; to the doors
     m.rect(3, 7, 4, 11, "=")
     m.rect(17, 10, 17, 11, "=")
@@ -741,6 +741,7 @@ def route9():
     m.put(24, 23, STELE)                    # the cutting
     m.cells([(25, 17)], ".")
     m.put(25, 17, STELE)                    # the crossroads
+    m.cells([(13, 38)], ".")
     m.put(12, 38, STELE)                    # the south-west end
 
     lx, ly = DRUMS
@@ -794,8 +795,8 @@ def route9():
         "warp_events": [],
         "coord_events": (
             [trigger(34, y, R9 + "Crossroads", "VAR_TEMP_1") for y in (16, 17)]
-            + [trigger(11, y, R9 + "Lookout", "VAR_TEMP_2") for y in (7, 8)]
-            + [trigger(lx + 2, ly + 5, R9 + "DrumRoll1", "VAR_TEMP_3"),
+            + [trigger(11, y, R9 + "Lookout", "VAR_TEMP_6") for y in (7, 8)]
+            + [trigger(lx + 2, ly + 5, R9 + "DrumRoll1", "VAR_TEMP_7"),
                trigger(lx + 3, ly + 1, R9 + "DrumRoll3", "VAR_TEMP_4")]
             + [trigger(x, 36, R9 + "TowardKirrha", "VAR_TEMP_5") for x in (9, 10)]
         ),

@@ -22,9 +22,9 @@ mapscripts Route9_Schiste_MapScripts {
             setvar(VAR_TEMP_1, 0)
         }
         if (flag(FLAG_ICHOR_ROUTE9_LOOKOUT_SEEN) || flag(FLAG_ICHOR_HIDE_ALETHEA_ROUTE9)) {
-            setvar(VAR_TEMP_2, 1)
+            setvar(VAR_TEMP_6, 1)
         } else {
-            setvar(VAR_TEMP_2, 0)
+            setvar(VAR_TEMP_6, 0)
         }
         if (flag(FLAG_ICHOR_HIDE_ALETHEA_ROUTE9) || !flag(FLAG_ICHOR_SCHISTE_ARRIVED)) {
             setvar(VAR_TEMP_5, 1)
@@ -38,7 +38,7 @@ mapscripts Route9_Schiste_MapScripts {
             setflag(FLAG_TEMP_11)
             setflag(FLAG_TEMP_12)
             setflag(FLAG_TEMP_13)
-            setvar(VAR_TEMP_3, 1)
+            setvar(VAR_TEMP_7, 1)
             setvar(VAR_TEMP_4, 1)
         }
         // ICHOR_STUB_OMENS: the omen's Enigmaw sits on the boundary stone once an
@@ -136,14 +136,14 @@ script Route9_Schiste_EventScript_AletheaLookout {
 script Route9_Schiste_EventScript_TowardKirrha {
     setflag(FLAG_ICHOR_HIDE_ALETHEA_ROUTE9)
     setvar(VAR_TEMP_5, 1)
-    setvar(VAR_TEMP_2, 1)
+    setvar(VAR_TEMP_6, 1)
 }
 
 // --- beat 36B: the lookout -----------------------------------------------------------------
 script Route9_Schiste_EventScript_Lookout {
     lockall
     setflag(FLAG_ICHOR_ROUTE9_LOOKOUT_SEEN)
-    setvar(VAR_TEMP_2, 1)
+    setvar(VAR_TEMP_6, 1)
     // Alethea comes up the goat path behind you and stops at your side.
     clearflag(FLAG_TEMP_14)
     addobject(LOCALID_ROUTE9_ALETHEA_LOOKOUT)
@@ -414,7 +414,7 @@ text Route9_Schiste_Text_LykoreusDefeat {
 // gone once the path is open.
 script Route9_Schiste_EventScript_DrumRoll1 {
     lockall
-    setvar(VAR_TEMP_3, 1)
+    setvar(VAR_TEMP_7, 1)
     getobjectxy(LOCALID_ROUTE9_DRUM_1, CURRENT_POSITION, VAR_0x8004, VAR_0x8005)
     if (var(VAR_0x8004) == 16 && var(VAR_0x8005) == 23) {
         call(Route9_Schiste_EventScript_Rumble)

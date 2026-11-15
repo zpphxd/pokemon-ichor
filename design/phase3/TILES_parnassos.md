@@ -55,7 +55,7 @@ treasury's drums at rest, beat 36C), and `_AltarApollo` (the shrine once cleanse
 
 | Tileset | Tiles | Metatiles |
 |---|---|---|
-| `gTileset_Parnassos` | 498 of 504 | 272 of 512 |
+| `gTileset_Parnassos` | 497 of 504 | 272 of 512 |
 
 ![sheet](img/tiles_parnassos_sheet.png)
 
@@ -343,4 +343,146 @@ Pieces: `plank` 0x2ED, `curtain` 0x2EE.
 
 ## Render-and-critique passes
 
-(Written by hand.)
+Renders: `design/phase3/img/Lebadeia.png` and `design/phase3/img/Route9_Schiste.png` (2x);
+the 15 x 10 screen sheets and the collision review are in `build/render/parnassos/`
+(`tools/ichor/maps/parnassos.py` writes all of them). Each pass below was judged against
+MAP_DESIGN.md and batch 1's renders (Route 6, Thyrsa City), whose open flat rock the
+polish agents are now fixing.
+
+### Pass 1: the first layout
+
+**Route 9.** Built rock-first: everything not road was crag, with laurel scrub and a few
+olive groves cut into it.
+- The crag interiors were the worst thing on the map: whole screens of plain grey rock
+  top with a juniper or two, reading as concrete. This is exactly the flatness the user
+  flagged on Kithairon.
+- The far side of the lookout read as one grey wall with white specks along its top, and
+  the slope under it as a dark green band speckled white, like flowers.
+- The south seam's aethos olives stood in a strict grid, and odd-length runs left deep-shade
+  squares behind.
+- The crossroads' paving was a big stair-stepped blob, not a triangle.
+- The terraces worked: a loop up the west stair, ledges down, the Super Potion at the end.
+
+**Lebadeia.** Also rock-first.
+- The Herkyna ran dead straight from top to bottom, two cells wide: a canal, not a river.
+- The gorge's south wall was a flat grey field, and the north side above the hall the same.
+- Only three planes, for a grove that's meant to shade the whole precinct.
+- The east seam's olives stood in rows.
+
+### Pass 2: woods first, a winding river, the far cliffs repainted
+
+- **Both maps now start as laurel woods,** not rock. `PMap.laurels()` fills them with bay
+  laurels in staggered column pairs, mixed with pairs of aethos's olives and cypresses
+  (about a quarter and a tenth), so the slopes read as Parnassos's laurel scrub and wild
+  olive and the colors vary. Crag is used where height is meant.
+- **The far cliffs** (`parnassos_far.py`) became rounded buttresses on a 32 px period, lit on
+  their left, with ledge lines and clefts, so two cells side by side read as one irregular
+  wall. The tops are scrubby hazy rock with no white specks, the slope has dark cypress
+  points instead of white ones, and the Kastalian falls drop through a dark slot between
+  the two cliffs. The ravine's flat black band was replaced by the slope falling away into
+  darkness (`slope_foot`), which reads as depth and cost fewer tiles.
+- **The Herkyna winds:** it leaves Mnemosyne's notch at x 10-11, swings to 11-12 for the road
+  bridge, back to 10-11 for the footbridge, and out to the south edge at 11-12. Planes
+  stand along it (four now), and the gorge's sides are laurel woods.
+- Still wrong: long straight crag bands two rows deep (a lit top row and a face row)
+  crossing whole screens, and odd olive runs leaving pale shade squares, and in the seam,
+  aethos boulders that look like loaves.
+
+### Pass 3: rock as steps, staggered olives
+
+- **Crag bands became one row deep:** a single crag row with open ground north and south
+  draws a thin lit lip over a full south face, a low cliff step. Route 9's slope now
+  climbs in steps between bands of woods, and the big grey tops are gone except the
+  cutting's walls, the treasury's outcrop and the crossroads' shoulder.
+- **Olive runs stagger only when their length is odd** (a crown tip on grass tops the run),
+  so no leftover cell is needed and the shade squares and loaves are gone, except where a
+  one-row gap was left, which the builder now avoids.
+- **Two-row strips of woods** (between steps) alternate young laurels, cypresses and bushes
+  instead of a hedge of identical saplings.
+- **The crossroads** is a tighter triangle: its north point takes the fork, its east side
+  the cleft, its south-west point the cutting; the boundary stone sits inside it with the
+  old man beside it, the herm and Apollo's laurel shrine on its north edge.
+- **Lebadeia:** scrub on the oracle's rock above the precinct, and the east seam's olive
+  rows are left whole.
+
+### What's left (honest)
+
+- The paving (crossroads, precinct, the treasury's floor) reads busy, more cobble than
+  polygonal flag. A calmer flag texture would need a repaint and its tiles are at the
+  budget's edge (497 of 504).
+- The terrace lips are aethos's ledges, which read as thin plank lines at this scale.
+  They're the primary's terrace ledge everywhere, so they're kept for consistency.
+- The precinct's rock face is one cell tall. The springs and chair read clearly, but the
+  oracle's rock could feel higher; a taller face needs a second face row the crag
+  painter doesn't draw.
+- The cutting's walls are narrow crag tops, plain grey.
+- The SE quadrant of Route 9 (below the east road) is olive groves and steps the road
+  never enters. It's scenery seen from the road's edge, but it's a lot of map for that.
+
+## Map notes
+
+**Seams.**
+- Lebadeia's east edge ↔ Route 8: road on rows 12-13 (verges 11, 14), `right` offset 0;
+  Lebadeia's columns 24-31 are aethos-only (checked by the builder).
+- Lebadeia's west edge ↔ Route 9's east edge: Lebadeia's road on rows 12-13, Route 9's on
+  rows 20-21 (verges 19, 22). Lebadeia `left` offset −8, Route 9 `right` offset +8. Both
+  maps are on `gTileset_Parnassos`, so there's no strip.
+- Route 9's south edge → Kirrha's north edge: Route 9's road at columns 9-10 (verges 8,
+  11), `down` offset −18; rows 38-43 are aethos-only (olives, the road's patch, a stele).
+
+**Warps and scripted arrivals.** Lebadeia's warps 0, 1 and 2 are the pilgrims' hall door
+(17,9), Herkyna's door (5,18) and the mason's door (18,19); warp 3 is the bronze grille
+(6,2), shut by `Lebadeia_EventScript_SetGrille` (a blocking metatile) until
+`FLAG_ICHOR_TROPHONIOS_GRILLE_OPEN`. The tile in front of the grille, (6,3), is the stone
+chair of Mnemosyne, walkable: 35C's warp back lands the player on it, facing south.
+
+**Story triggers.** Lebadeia's arrival pan runs on the first frame (`VAR_TEMP_6` 0); the
+springs talk on the pilgrims' steps, row 6 (`VAR_TEMP_1` 0). Route 9's crossroads scene
+fires at (34,16) and (34,17) (`VAR_TEMP_1`), the lookout scene at (11,7) and (11,8)
+(`VAR_TEMP_6`), the drums' rolls at (17,23) and (18,19) (`VAR_TEMP_7`, `_4`), and Alethea
+goes ahead to Kirrha at (9,36) and (10,36) (`VAR_TEMP_5`). Neither map uses `VAR_TEMP_2`
+or `_3` (main's carried-flame code reads that pair).
+
+**The drums (36C).** D1 (17,23) is pushed west from (18,23) onto the gully's lip (16,23);
+stepping where it stood rolls it into the gully (15,23). D2 (19,21) is pushed east into
+the alcove (20,21), where it stops against the rock. D3 (18,19) is pushed west from (19,19)
+onto the lip (17,19); stepping where it stood rolls it in (16,19), sets
+`FLAG_ICHOR_HIDE_SCHISTE_DRUMS`, and the way into the treasury, (18,18), is open. The drums
+are `EventScript_StrengthBoulder` objects behind `FLAG_TEMP_11`-`13`, so walking off the map
+resets them; the story flag keeps them gone, and the map draws them at rest in the gully
+and the alcove. Every drum can only be pushed one way, so no arrangement traps the player.
+
+**Herm.** Route 9's great herm stands at (30,13)-(30,14) beside the crossroads; its landing
+tile is (30,15): `HERM_AETHOS_ROUTE_9` in `src/data/ichor_herms.h` and
+`HEAL_LOCATION_HERM_AETHOS_ROUTE_9` in `src/data/heal_locations.json`.
+
+**Forced grass** (the builder's check, on the main road): band A1 (x 42-44, rows 20-21) and
+A2 (x 39-40) on the east road; B2 (x 22-23, rows 29-32, below the cutting) and B3 (x 9-10,
+rows 35-37, among the olives) on the south-west road. On the north-west fork (a dead end):
+F1 (x 21-23, rows 11-12) and F2 (x 15-17, rows 7-8). Optional grass: the goats' slope, the
+Sphinx's seat track, both olive terraces, the bridge's far bank and the grove below the
+crossroads.
+
+**Items.** Visible: Max Revive (the lookout's tip, 1,7), PP Max (across the broken bridge,
+26,8), TM (the treasury, 13,15: TM Rock Tomb stands in for Rock Slide, `ICHOR_STUB_TMS`),
+Hard Stone (the treasury, 17,14), Super Potion (terrace 1's end, 12,25), Ultra Ball (the
+grove below the crossroads, 31,27). Hidden: Ether (the cairn's foot, 10,7), Pretty
+Feather (the Sphinx's seat, 40,10), Nugget (the treasury's floor, 12,14), Revival Herb
+(terrace 1, 3,25); Lebadeia's Bronze Obol (Lethe, 3,4, as `ITEM_RELIC_COPPER`), Calcium
+(behind the pilgrims' hall, 18,5) and Honey (the plane's hollow, 1,10).
+
+**Deviations from SCRIPT.md** (each the closest reading):
+- Saon's NO leaves the grille shut; asking him again offers the descent again. SCRIPT's
+  "The grille is open whenever you're ready" is kept as his line.
+- Drum 2 is pushed east into an alcove where it stops against rock, rather than south;
+  drums 1 and 3 roll into the gully as written. The engine's own column-drum prompt
+  replaces SCRIPT's drum text, and the engine's cleansing lines replace the shrine's.
+- The Kastalian falls aren't animated (a static white rope): an animation needs a
+  `src/tileset_anims.c` callback, an engine edit.
+- The Sphinx's seat on Route 9 is a dead end above the crossroads (feathers, a hidden Pretty
+  Feather); the omen's Enigmaw sits on the boundary stone, shown only once
+  `FLAG_ICHOR_OMEN_SCHISTE_TOLD` is set (`ICHOR_STUB_OMENS`: the augurs aren't built).
+- No sea glimpse in Route 9's far corner: Kirrha's map sits below that edge, and sea
+  against its north rows would break the seam. The treasury's view sign carries the gulf.
+- The pilgrims' hall is the Eleusa house kit, not a hall cut into the rock; rooms2 builds
+  its rock-backed interior.
