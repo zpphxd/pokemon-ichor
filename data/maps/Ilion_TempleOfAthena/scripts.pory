@@ -1,1 +1,54 @@
-mapscripts Ilion_TempleOfAthena_MapScripts {}
+// The temple of Athena, Ilion: the Palladion. Room: troad_rooms.py.
+// The Palladion (5,0..2) fell from the sky; while it stood, the city couldn't
+// fall. Its keeper (3,3) says it hums at night now. After his battle in the
+// guest-room, Odysseus stands before it (6,3): he hides on FLAG_TEMP_1, which
+// ON_TRANSITION sets until TRAINER_ICHOR_ODYSSEUS is beaten. A worshipper at the
+// offering table. The door mat (5,11) is warp 0, back to MAP_ILION warp 8.
+
+mapscripts Ilion_TempleOfAthena_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!defeated(TRAINER_ICHOR_ODYSSEUS)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Ilion_TempleOfAthena_Text_NameOdysseus { "ODYSSEUS" }
+
+script Ilion_TempleOfAthena_EventScript_Keeper {
+    msgbox(format("It hums at night now. It never did before.\p"
+                  "Before, we knew why it was here. While it stood, the city couldn't fall.\p"
+                  "Now nothing's going to fall. So why is it humming?"), MSGBOX_NPC)
+}
+
+script Ilion_TempleOfAthena_EventScript_Odysseus {
+    lock
+    faceplayer
+    setspeaker(Ilion_TempleOfAthena_Text_NameOdysseus)
+    msgbox(format("I stole that once. Or one like it.\p"
+                  "Don't look at me like that. It was a long war, and she forgave me. Mostly."))
+    closemessage
+    applymovement(LOCALID_ILION_TEMPLE_ODYSSEUS, Common_Movement_FaceUp)
+    waitmovement(0)
+    release
+}
+
+script Ilion_TempleOfAthena_EventScript_Worshipper {
+    msgbox(format("I leave her olives every morning. The owl on the roof eats them. I think she'd want that."),
+           MSGBOX_NPC)
+}
+
+// ICHOR_STUB_LEGEND: Deoxys (design/LEGENDS.md §4.4, The Things That Fell). The
+// keeper's "it hums at night" is the quest's first step. Once its flags exist,
+// the keeper gives the Palladion's splinter here, and touching the Palladion with
+// Deoxys in the party changes it to its Defense form.
+script Ilion_TempleOfAthena_EventScript_Palladion {
+    msgbox(format("The Palladion: a small dark image of Pallas, spear raised, older than the city.\p"
+                  "They say it fell from the sky. There's a hum about it, faint, like a bee in a jar."),
+           MSGBOX_SIGN)
+}
+
+script Ilion_TempleOfAthena_EventScript_OfferingTable {
+    msgbox(format("An offering table: olives, a honey cake, a little clay owl. The flame on it is small and steady."),
+           MSGBOX_SIGN)
+}

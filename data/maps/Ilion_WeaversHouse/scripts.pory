@@ -1,1 +1,75 @@
+// The peplos-weaver's house, Ilion. Room: troad_rooms.py.
+// Theano (2,3) weaves Athena's robe on the great loom: saffron, the gods fighting
+// the giants in red (as the Panathenaic peplos was; Iliad 6.302 has a Theano lay a
+// robe on Athena's knees at Troy). Her dye pots are dry: bring a Cheri (madder
+// red), an Oran (woad blue) and an Aspear (weld yellow) for a Silk Scarf.
+// FLAG_ICHOR_WEAVER_SILK_SCARF. Her Leavanny hems the selvage. The door mat (4,7)
+// is warp 0, back to MAP_ILION warp 7.
+
 mapscripts Ilion_WeaversHouse_MapScripts {}
+
+text Ilion_WeaversHouse_Text_NameTheano { "THEANO" }
+
+script Ilion_WeaversHouse_EventScript_Theano {
+    lock
+    faceplayer
+    setspeaker(Ilion_WeaversHouse_Text_NameTheano)
+    if (flag(FLAG_ICHOR_WEAVER_SILK_SCARF)) {
+        msgbox(format("The robe goes up to Athena at the summer festival. Every woman in Ilion helps carry it.\p"
+                      "It's heavier than it looks. Most things made with care are."))
+        release
+        end
+    }
+    checkitem(ITEM_CHERI_BERRY)
+    if (var(VAR_RESULT) == TRUE) {
+        checkitem(ITEM_ORAN_BERRY)
+        if (var(VAR_RESULT) == TRUE) {
+            checkitem(ITEM_ASPEAR_BERRY)
+            if (var(VAR_RESULT) == TRUE) {
+                goto(Ilion_WeaversHouse_EventScript_Dyes)
+            }
+        }
+    }
+    msgbox(format("Athena's robe. Every year a new one goes up to her temple, and every year I weave it.\p"
+                  "The gods fight the giants on it, in red on saffron. Or they would, if I had any dye.\p"
+                  "Bring me berries for the pots? A Cheri for red, an Oran for blue and an Aspear for yellow."))
+    release
+}
+
+script Ilion_WeaversHouse_EventScript_Dyes {
+    msgbox(format("Are those berries? A Cheri, an Oran and an Aspear! Madder, woad and weld.\p"
+                  "May I? The pots have been dry a week."))
+    removeitem(ITEM_CHERI_BERRY)
+    removeitem(ITEM_ORAN_BERRY)
+    removeitem(ITEM_ASPEAR_BERRY)
+    setspeaker(Ilion_WeaversHouse_Text_NameTheano)
+    msgbox(format("There. The giants' blood, the sea and the goddess's gold, all in the pots.\p"
+                  "Take this, from the same loom. My Leavanny finished the edge."))
+    giveitem(ITEM_SILK_SCARF)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_WEAVER_SILK_SCARF)
+    }
+    release
+}
+
+script Ilion_WeaversHouse_EventScript_Leavanny {
+    lock
+    faceplayer
+    playmoncry(SPECIES_LEAVANNY, CRY_MODE_NORMAL)
+    msgbox(format("The Leavanny is hemming a leaf with one arm. It ignores you very politely."))
+    waitmoncry
+    release
+}
+
+script Ilion_WeaversHouse_EventScript_Peplos {
+    msgbox(format("Athena's robe, half woven: saffron, with gods and giants fighting in red.\p"
+                  "The giants are winning, for now. There's no more red."), MSGBOX_SIGN)
+}
+
+script Ilion_WeaversHouse_EventScript_DyePots {
+    if (flag(FLAG_ICHOR_WEAVER_SILK_SCARF)) {
+        msgbox(format("Three dye pots, full: red, blue and yellow, steaming a little."), MSGBOX_SIGN)
+        end
+    }
+    msgbox(format("Three dye pots, dry. A crust of color at the bottom of each."), MSGBOX_SIGN)
+}

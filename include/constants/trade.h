@@ -26,6 +26,9 @@ enum InGameTradeID
     // Ichor: the Oikoumene, the Black Sea (design/oikoumene/ROOMS_pontos.md)
     INGAME_TRADE_ICHOR_PHASIANOS, // Ixos's Unfezant, for a Pidgeot (Salmydessos, the bird-catcher's)
     INGAME_TRADE_ICHOR_TIGRIS,    // Byssa's Persian, for a Liepard (Aia, the linen-weaver's)
+    // Ichor: the Oikoumene, Troad rooms (troad-rooms)
+    INGAME_TRADE_ICHOR_AITHYIA, // Kymon's Cramorant, for a Pelipper (Sestos, the ferry house)
+    INGAME_TRADE_ICHOR_AITHON,  // Idaios's Rapidash, for a Mudsdale (Ilion, the stable)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

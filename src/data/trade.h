@@ -1269,6 +1269,42 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = FEMALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_LIEPARD
+    },
+    // Ichor: the Oikoumene, Troad rooms (troad-rooms). Kymon the ferryman's
+    // Cramorant, named for Athena Aithyia, the diver-bird, for your Pelipper.
+    [INGAME_TRADE_ICHOR_AITHYIA] =
+    {
+        .nickname = _("AITHYIA"),
+        .species = SPECIES_CRAMORANT,
+        .ivs = {24, 26, 20, 22, 20, 28},
+        .abilityNum = 0,
+        .otId = 51904,
+        .conditions = {5, 5, 30, 5, 5},
+        .personality = 0x91,
+        .heldItem = ITEM_BIG_PEARL,
+        .mailNum = -1,
+        .otName = _("KYMON"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_PELIPPER
+    },
+    // Idaios's Rapidash, named for one of Hektor's horses ("blazing"), for your
+    // Mudsdale: a horse that pulls, for a horse that runs.
+    [INGAME_TRADE_ICHOR_AITHON] =
+    {
+        .nickname = _("AITHON"),
+        .species = SPECIES_RAPIDASH,
+        .ivs = {22, 28, 20, 18, 20, 30},
+        .abilityNum = 1,
+        .otId = 30715,
+        .conditions = {30, 5, 5, 5, 5},
+        .personality = 0x4E,
+        .heldItem = ITEM_CHARCOAL,
+        .mailNum = -1,
+        .otName = _("IDAIOS"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_MUDSDALE
     }
 };
 

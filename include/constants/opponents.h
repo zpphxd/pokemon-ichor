@@ -70,7 +70,9 @@
 #define TRAINER_ICHOR_POLITES                    689
 #define TRAINER_ICHOR_HIPPOTHOOS                 690
 #define TRAINER_ICHOR_ANCHISES                   691
-#define TRAINERS_END_OIKOUMENE                692
+// The Troad's rooms, 692-699 (troad-rooms).
+#define TRAINER_ICHOR_ODYSSEUS                692 // the pilgrims' guest-room, Ilion
+#define TRAINERS_END_OIKOUMENE                693
 
 // Ids 820-863 are the director's reserve. 864-1023 are the Oikoumene's (above).
 

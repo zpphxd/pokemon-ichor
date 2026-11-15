@@ -1,1 +1,27 @@
+// The Ilion Asclepeion: the city's, columned, with couches along the east wall
+// where pilgrims sleep hoping for a dream of the god. Room: troad_rooms.py.
+// The healer stands at (7,2) on the door's axis, the spring two cells to her left.
+// The door mat (7,10) is warp 0, back to MAP_ILION warp 0.
+//
+// No setrespawn yet: HEAL_LOCATION_ILION is the chart agent's (BUILD.md §5). Its
+// respawn_npc is LOCALID_ILION_HEALER.
+
 mapscripts Ilion_Asclepeion_MapScripts {}
+
+script Ilion_Asclepeion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_ILION_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script Ilion_Asclepeion_EventScript_Charioteer {
+    msgbox(format("Turned my team too tight round the post at the games. The chariot went one way and I went the other.\p"
+                  "The healer says rest the wrist. The horses say otherwise."), MSGBOX_NPC)
+}
+
+script Ilion_Asclepeion_EventScript_Pilgrim {
+    msgbox(format("You sleep here and the god sends a dream. That's how the cure comes.\p"
+                  "I've slept three nights and dreamed about fish. I'm taking it as a sign."), MSGBOX_NPC)
+}

@@ -673,3 +673,79 @@ Gogoat
 Level: 70
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 
+/* Ichor: the Oikoumene, Troad rooms */
+
+/* ICHOR_STUB_CLASS: Odysseus fights as a HOPLITE with the hoplite's pic until the
+   sprites agent's ODYSSEUS pic and his title class land (OIKOUMENE.md §6). His team
+   is POSTGAME §3.1's rental hand, strengthened: what he picked up on the way home.
+   Argos the dog, Athena's owl, Aeolus's bag of winds, Circe's swine, Poseidon's sea,
+   and the bow that went through twelve axes. */
+=== TRAINER_ICHOR_ODYSSEUS ===
+Name: ODYSSEUS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+Items: Full Restore / Full Restore
+Double Battle: No
+AI: Check Bad Move / Try To Faint / Check Viability / Smart Switching
+
+Stoutland @ Sitrus Berry
+Level: 76
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Ability: Scrappy
+Nature: Jolly
+- Return
+- Crunch
+- Play Rough
+- Superpower
+
+Noctowl @ Leftovers
+Level: 76
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Ability: Tinted Lens
+Nature: Modest
+- Hurricane
+- Psychic Noise
+- Moonblast
+- Roost
+
+Grumpig @ Light Clay
+Level: 76
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Ability: Thick Fat
+Nature: Calm
+- Psychic
+- Power Gem
+- Thunder Wave
+- Trick Room
+
+Drifblim @ Mental Herb
+Level: 77
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Ability: Unburden
+Nature: Timid
+- Shadow Ball
+- Air Slash
+- Will-O-Wisp
+- Tailwind
+
+Kingdra @ Life Orb
+Level: 77
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Ability: Swift Swim
+Nature: Modest
+- Hydro Pump
+- Draco Meteor
+- Ice Beam
+- Rain Dance
+
+Inteleon @ Scope Lens
+Level: 78
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Ability: Sniper
+Nature: Timid
+- Snipe Shot
+- Dark Pulse
+- Ice Beam
+- U-turn

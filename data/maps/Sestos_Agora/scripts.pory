@@ -1,1 +1,41 @@
+// The Sestos Agora: a chandler's stall on the quay. Room: troad_rooms.py.
+// Philon keeps the stall at (2,2) behind the counter; a sailor reads the shelves.
+// Late-game stock, for a long way from home. The door mat (4,7) is warp 0, back
+// to MAP_SESTOS warp 1.
+
 mapscripts Sestos_Agora_MapScripts {}
+
+text Sestos_Agora_Text_NamePhilon { "PHILON" }
+
+script Sestos_Agora_EventScript_Chandler {
+    lock
+    faceplayer
+    setspeaker(Sestos_Agora_Text_NamePhilon)
+    msgbox(format("Rope, pitch, oil, Poké Balls. Everything a long voyage eats."))
+    pokemart(Sestos_Agora_Mart)
+    setspeaker(Sestos_Agora_Text_NamePhilon)
+    msgbox(format("Fair winds. Mind the current at the narrows."))
+    release
+}
+
+mart Sestos_Agora_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_NET_BALL
+    ITEM_DIVE_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_RESTORE
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+}
+
+script Sestos_Agora_EventScript_Sailor {
+    msgbox(format("Every sailor out of Sestos buys a Dive Ball and never throws it.\p"
+                  "It's for luck. The strait has eaten better boats than mine."), MSGBOX_NPC)
+}
+
+script Sestos_Agora_EventScript_Shelves {
+    msgbox(format("Coils of rope, jars of pitch, bronze cups and bales of sailcloth. It all smells of tar."),
+           MSGBOX_SIGN)
+}

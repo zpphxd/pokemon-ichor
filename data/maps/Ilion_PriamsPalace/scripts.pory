@@ -1,1 +1,64 @@
+// Priam's palace, Ilion: the megaron. Room: troad_rooms.py.
+// King Priam stands by his throne (12,2) and would rather talk about horses than
+// the war. After the Gate Emblem (Hektor's hall, the Skaian Gate) he gives the
+// Soothe Bell: "My son's alive. Nobody wrote that." FLAG_ICHOR_PRIAM_SOOTHE_BELL.
+// Two guards at the porch, a steward by the wine. The door mat (7,12) is warp 0,
+// back to MAP_ILION warp 2.
+
 mapscripts Ilion_PriamsPalace_MapScripts {}
+
+text Ilion_PriamsPalace_Text_NamePriam { "PRIAM" }
+
+script Ilion_PriamsPalace_EventScript_Priam {
+    lock
+    faceplayer
+    setspeaker(Ilion_PriamsPalace_Text_NamePriam)
+    if (flag(FLAG_ICHOR_PRIAM_SOOTHE_BELL)) {
+        msgbox(format("Hektor tells me the new foals are ready, as if I hadn't been down to the stable at dawn.\p"
+                      "I was down at dawn. I'm always down at dawn."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_EMBLEM_GATE)) {
+        msgbox(format("You beat my son at the gate. He came home grinning like a boy.\p"
+                      "There's a song where I go to the Greek camp at night and kiss the hands that killed him.\p"
+                      "My son's alive. Nobody wrote that.\p"
+                      "Take this. His mother hung it over his cradle. It rang every time he laughed."))
+        giveitem(ITEM_SOOTHE_BELL)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_PRIAM_SOOTHE_BELL)
+        }
+        release
+        end
+    }
+    msgbox(format("Do you ride? No? Come and look at my horses before you decide.\p"
+                  "The grays are of the line Zeus gave my great-grandfather Tros, for a son he took up to Olympus.\p"
+                  "A fair trade, Tros always said. Nobody asked the son.\p"
+                  "The war? Everyone wants to talk about the war. Ask me about the bays."))
+    release
+}
+
+script Ilion_PriamsPalace_EventScript_GuardWest {
+    msgbox(format("The king's rule: no talk of the war in the hall. So we talk about horses. All day."),
+           MSGBOX_NPC)
+}
+
+script Ilion_PriamsPalace_EventScript_GuardEast {
+    msgbox(format("Prince Hektor keeps his own guard at the gate. We get the hall, and the horse talk."),
+           MSGBOX_NPC)
+}
+
+script Ilion_PriamsPalace_EventScript_Steward {
+    msgbox(format("The king's wine is watered three to one. The king doesn't know. Don't tell the king."),
+           MSGBOX_NPC)
+}
+
+script Ilion_PriamsPalace_EventScript_Frieze {
+    msgbox(format("A painted frieze: a bay and a white at the gallop. Someone has scratched a tiny rider on the white."),
+           MSGBOX_SIGN)
+}
+
+script Ilion_PriamsPalace_EventScript_Hearth {
+    msgbox(format("The great hearth of the megaron. The steward says the fire hasn't gone out in a hundred years.\p"
+                  "He says it a lot."), MSGBOX_SIGN)
+}

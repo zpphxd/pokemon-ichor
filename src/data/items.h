@@ -15804,14 +15804,16 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_BlackAugurite,
     },
 
+    // Ichor: the Xenion, a guest-gift (decision PG-14, OIKOUMENE.md §8). It stands
+    // in for a trade: Odysseus gives the first in Ilion's guest-room.
     [ITEM_LINKING_CORD] =
     {
-        .name = ITEM_NAME("Linking Cord"),
+        .name = ITEM_NAME("Xenion"),
         .price = 8000,
         .description = COMPOUND_STRING(
-            "A string exuding\n"
-            "energy loved by\n"
-            "certain Pokémon."),
+            "A guest-gift for\n"
+            "Pokémon that evolve\n"
+            "when they're traded."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_EVOLUTION_ITEM,
         .type = ITEM_USE_PARTY_MENU,
