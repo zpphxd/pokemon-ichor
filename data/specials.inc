@@ -673,3 +673,7 @@ gSpecials::
 	def_special Ichor_CheckAltarCleansed
 	def_special Ichor_CleanseAltar
 	def_special Ichor_AresVictory
+	@ Ichor: herm waystones (src/ichor_herms.c)
+	def_special Ichor_CountHerms
+	def_special Ichor_GetHermState
+	def_special Ichor_AnointHerm

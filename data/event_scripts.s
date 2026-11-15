@@ -1698,6 +1698,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/field_move_scripts.inc"
 	.include "data/scripts/ichor_relics.inc" @ Ichor: relics
 	.include "data/scripts/ichor_rites.inc" @ Ichor: rites
+	.include "data/scripts/ichor_herms.inc" @ Ichor: herm waystones
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/profile_man.inc"
 	.include "data/scripts/day_care.inc"

@@ -31,24 +31,38 @@
 // The Relic Ring's entry for Hestia's Hearthfire (not an item)
 #define ICHOR_RING_HEARTHFIRE   0xFFF0
 
-// --- Herm waystones (SYSTEMS §4): one great herm per route ----------------
-#define HERM_KALLISTE_ROUTE_1  0
-#define HERM_ROUTE_2           1
-#define HERM_ROUTE_3           2
-#define HERM_ROUTE_4           3
-#define HERM_ROUTE_5           4
-#define HERM_ROUTE_6           5
-#define HERM_ROUTE_7           6
-#define HERM_ROUTE_8           7
-#define HERM_ROUTE_9           8
-#define HERM_ROUTE_10          9
-#define HERM_ROUTE_11          10
-#define HERM_ROUTE_12          11
-#define HERM_ROUTE_13          12
-#define HERM_ROUTE_14          13
-#define HERM_ROUTE_15          14
-#define HERM_COUNT             15
-#define HERM_MAX               32  // the flag range's size
+// --- Herm waystones (SYSTEMS §4) ---------------------------------------------
+// One great herm per land route, named for its map section in design/AETHOS_MAP.md
+// (sea routes have none). HERM_COUNT counts the routes before the post-game: the
+// Scroll of Deeds and the all-herms bonus count those.
+#define HERM_KALLISTE_ROUTE_1       0
+#define HERM_AETHOS_ROUTE_4         1
+#define HERM_AETHOS_ROUTE_5         2
+#define HERM_AETHOS_ROUTE_6         3
+#define HERM_AETHOS_ROUTE_7         4
+#define HERM_AETHOS_ROUTE_8         5
+#define HERM_AETHOS_ROUTE_9         6
+#define HERM_AETHOS_ROUTE_11        7
+#define HERM_AETHOS_ROUTE_12        8
+#define HERM_AETHOS_ROUTE_13        9
+#define HERM_AETHOS_ROUTE_14        10
+#define HERM_AETHOS_ROUTE_15        11
+#define HERM_AETHOS_ROUTE_16        12
+#define HERM_AETHOS_ROUTE_17        13
+#define HERM_AETHOS_ROUTE_18        14
+#define HERM_BULL_ROAD              15
+#define HERM_AETHOS_ROUTE_25        16
+#define HERM_AETHOS_ROUTE_26        17
+#define HERM_AETHOS_ROUTE_27        18
+#define HERM_AETHOS_ROUTE_28        19
+#define HERM_AETHOS_ROUTE_29        20
+#define HERM_AETHOS_ROUTE_30        21
+#define HERM_THE_ASCENT             22
+#define HERM_COUNT                  23
+// the post-game's land routes, after HERM_COUNT
+#define HERM_AETHOS_ROUTE_31        23
+#define HERM_AETHOS_ROUTE_32        24
+#define HERM_MAX                    32  // the flag range's size
 
 // --- Relics (SYSTEMS §1) ----------------------------------------------------
 // IchorSave.options bits

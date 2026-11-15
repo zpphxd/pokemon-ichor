@@ -101,7 +101,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 1 | Save state and banks | 1 | **Built** |
 | 2 | Relics, darkness and braziers | 2 | **Built** |
 | 3 | Rites: altars, Favor, blessings, gifts | 3 | **Built** |
-| 4 | Herm waystones and the Wings | 4 | Planned, names fixed |
+| 4 | Herm waystones and the Wings | 4 | **Built** |
 | 5 | Labyrinth mechanics, then the Frozen Hour | 5 | Hooks only |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
@@ -171,7 +171,13 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
   | Both | 1 | 4.5 tiles |
   | Torch doused (Relic Ring) | 8 | black: glow-paint only, once its palettes exist |
 
-- **Braziers** are metatiles, so the map draws them. Each gets a flag in `FLAG_ICHOR_BRAZIERS_START`'s range; ask for a block of indices for your maps.
+- **Braziers** are metatiles, so the map draws them. Each gets a flag in `FLAG_ICHOR_BRAZIERS_START`'s range; ask the engine session for a block of indices for your maps. Blocks given out so far:
+
+  | Indices | Owner | Use |
+  |---|---|---|
+  | +0x00–0x0F | engine | tests and the slice |
+  | +0x10–0x13 | world-act1 | the Telesterion's season braziers in Eleusa: autumn, winter, spring, summer |
+  | +0x14–0x1F | world-act1 | kept: the Mystery sanctum's four, Eleusa's procession torches |
   ```
   // the brazier's bg event
   script Map_Brazier1 {
@@ -301,14 +307,39 @@ The altar scripts use `VAR_0x8004`–`0x8007` and `VAR_0x800A`–`0x800B`.
 
 ## 4. Herm waystones (SYSTEMS §4)
 
-- **One great herm per route.** Its bg event script is `EventScript_IchorGreatHerm`, used directly. The engine knows which herm it is from the map.
-- **Herm ids** (`include/constants/ichor.h`): `HERM_KALLISTE_ROUTE_1` and `HERM_ROUTE_2` to `HERM_ROUTE_15`. Room is left for 32. Each herm's flag is `FLAG_ICHOR_HERMS_START + id`.
+Built in `src/ichor_herms.c`, `src/data/ichor_herms.h` and `data/scripts/ichor_herms.pory`. Tested by `tools/ichor/tests/ichor_herms.sh`.
+
+- **One great herm per route.** Its bg event runs `EventScript_IchorGreatHerm` directly. A herm that is already a sign with its own line calls `EventScript_IchorAnointHerm` after it, between `lockall` and `releaseall`. The engine knows which herm it is from the map; on a map with no herm row, both scripts do nothing.
+- **Herm ids** (`include/constants/ichor.h`) follow AETHOS_MAP's land routes and their map sections: `HERM_KALLISTE_ROUTE_1`, `HERM_AETHOS_ROUTE_4` … `_18`, `HERM_BULL_ROAD`, `HERM_AETHOS_ROUTE_25` … `_30` and `HERM_THE_ASCENT`. That is 23 before the post-game (`HERM_COUNT`). The post-game's `HERM_AETHOS_ROUTE_31` and `_32` come after them and don't count toward the bonus. Sea routes have no herm. Room is left for 32.
+- **Each herm's flag** is `FLAG_ICHOR_HERMS_START + id`. A script that needs to know whether a herm is anointed (the Frozen Hour's turning heads) checks that flag. Nothing else sets it; the herm script does.
 - **Each herm needs one engine table row and one heal location.** Tell the engine session the herm's map and its landing tile (the tile south of it, on the main path), or add both rows yourself:
-  - `src/data/ichor_herms.h`: `[HERM_ROUTE_2] = { MAP_..., HEAL_LOCATION_HERM_ROUTE_2 },`
-  - `src/data/heal_locations.json`: `HEAL_LOCATION_HERM_ROUTE_2`, with the landing tile's map, x and y.
-- **Anointing** costs 1 Olive Oil and gives Hermes +1 Favor, once per herm. Anointing every herm gives Hermes +10 more.
-- **With the Wings,** every anointed herm's route is a fly target on the region map, landing on the tile south of the herm.
-- **Count:** `specialvar(VAR_RESULT, Ichor_CountHerms)`, for the Scroll of Deeds ("Herms anointed: 7 of 22").
+  - `src/data/ichor_herms.h`: `[HERM_AETHOS_ROUTE_4] = { .map = MAP_..., .mapsec = MAPSEC_AETHOS_ROUTE_4, .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_4 },`
+  - `src/data/heal_locations.json`: `HEAL_LOCATION_HERM_AETHOS_ROUTE_4`, with the landing tile's map, x and y.
+
+  | Herm | Map | Herm tile | Landing tile |
+  |---|---|---|---|
+  | `HERM_KALLISTE_ROUTE_1` | `MAP_KALLISTE_ROUTE1` | (14,20), the fork's herm | (14,21) |
+
+- **What the player sees.**
+  - With no Olive Oil: "A great herm, hung with old garlands. Hermes's face, worn smooth. Travelers anoint these with olive oil."
+  - With oil: the same, then "Anoint it with olive oil? (You have 2.)" YES takes one Olive Oil, gives Hermes +1 Favor, chimes, and says "The oil runs down the old stone face. Somewhere, Hermes makes a note."
+  - Anointed: "The great herm's face still shines with your oil. Hermes remembers you passed."
+  - The last herm adds "Every great herm in Aethos shines with your oil now. Hermes is delighted!" It gives Hermes +10 more and sets `FLAG_ICHOR_ALL_HERMS_REWARD` (the Scroll of Deeds' stamp).
+- **With Daedalus's Wings,** every anointed herm's route shows a lit dot on the fly map and is a fly target. The player lands on the herm's landing tile.
+- **Count:** `specialvar(VAR_RESULT, Ichor_CountHerms)` returns the herms anointed and puts `HERM_COUNT` in `VAR_0x8004`, for the Scroll of Deeds ("Herms anointed: 7 of 23").
+
+### A change to Route 1 (for the map owner)
+
+Route 1's fork herm becomes its great herm. In `data/maps/KallisteRoute1/scripts.pory`:
+
+```diff
+ script KallisteRoute1_EventScript_HermFork {
+     msgbox(format("East: Kronion Hill. North: Akti Town."), MSGBOX_SIGN)
++    lockall
++    call(EventScript_IchorAnointHerm)
++    releaseall
+ }
+```
 
 ## 5. Later: the Labyrinth and the Frozen Hour
 

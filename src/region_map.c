@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_herms.h"
 #include "ichor_relics.h"
 #include "main.h"
 #include "text.h"
@@ -1457,6 +1458,8 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
 
 static u8 GetMapsecType(mapsec_u16_t mapSecId)
 {
+    if (Ichor_IsHermFlyTarget(mapSecId)) // Ichor: an anointed herm's route is a fly target (SYSTEMS §4)
+        return MAPSECTYPE_CITY_CANFLY;
     switch (mapSecId)
     {
     case MAPSEC_NONE:
@@ -2445,6 +2448,23 @@ static void CreateFlyDestIcons(void)
             gSprites[spriteId].sIconMapSec = sFlyLocations[i].mapsec;
         }
     }
+
+    // Ichor: a lit dot on every anointed herm's route (SYSTEMS §4)
+    for (i = 0; i < HERM_MAX; i++)
+    {
+        u32 mapsec = Ichor_GetAnointedHermMapsec(i);
+        if (mapsec == MAPSEC_NONE || GetRegionMapType(mapsec) != regionMapType)
+            continue;
+        GetMapSecDimensions(mapsec, &x, &y, &width, &height);
+        spriteId = CreateSpriteUnchecked(&sFlyDestIconSpriteTemplate, (x + MAPCURSOR_X_MIN) * 8 + 4, (y + MAPCURSOR_Y_MIN) * 8 + 4, 10);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.shape = SPRITE_SHAPE(8x8);
+            gSprites[spriteId].callback = SpriteCB_FlyDestIcon;
+            StartSpriteAnim(&gSprites[spriteId], SPRITE_SHAPE(8x8));
+            gSprites[spriteId].sIconMapSec = mapsec;
+        }
+    }
 }
 
 // Draw a red outline box on the mapsec if its corresponding flag has been set
@@ -2590,6 +2610,8 @@ u32 FilterFlyDestination(struct RegionMap* regionMap)
     case MAPSEC_EVER_GRANDE_CITY:
         return (FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && regionMap->posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
     default:
+        if (Ichor_GetHermHealLocation(regionMap->mapSecId) != HEAL_LOCATION_NONE) // Ichor: land south of the herm
+            return Ichor_GetHermHealLocation(regionMap->mapSecId);
         if (sMapHealLocations[regionMap->mapSecId][2] != HEAL_LOCATION_NONE)
             return sMapHealLocations[regionMap->mapSecId][2];
         else
