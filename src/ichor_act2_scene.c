@@ -306,62 +306,102 @@ void Ichor_TheaterGaze(void)
 }
 
 // --------------------------------------------------------------------------
-// The program: a papyrus sheet in a picture box (beat 32)
+// The picture window: a 64x64 image in a picture box. The Dionysia's program
+// (beat 32), and Astyra's decree, forged order and practice tablets (beats
+// 52-55). One shows at a time, so they share a tag.
 // --------------------------------------------------------------------------
 
-#define TAG_PROGRAM  0x4A31
+#define TAG_PICTURE  0x4A31
 
-static const u32 sProgramGfx[] = INCBIN_U32("graphics/ichor/act2/program.4bpp");
-static const u16 sProgramPal[] = INCBIN_U16("graphics/ichor/act2/program.gbapal");
+static const u32 sPictureGfx_Program[] = INCBIN_U32("graphics/ichor/act2/program.4bpp");
+static const u16 sPicturePal_Program[] = INCBIN_U16("graphics/ichor/act2/program.gbapal");
+static const u32 sPictureGfx_Decree[] = INCBIN_U32("graphics/ichor/act2/decree.4bpp");
+static const u16 sPicturePal_Decree[] = INCBIN_U16("graphics/ichor/act2/decree.gbapal");
+static const u32 sPictureGfx_ForgedOrder[] = INCBIN_U32("graphics/ichor/act2/forged_order.4bpp");
+static const u16 sPicturePal_ForgedOrder[] = INCBIN_U16("graphics/ichor/act2/forged_order.gbapal");
+static const u32 sPictureGfx_PracticeTablets[] = INCBIN_U32("graphics/ichor/act2/practice_tablets.4bpp");
+static const u16 sPicturePal_PracticeTablets[] = INCBIN_U16("graphics/ichor/act2/practice_tablets.gbapal");
 
-static const struct OamData sOam_Program =
+static const struct SpriteSheet sPictureSheets[ICHOR_PICTURE_COUNT] =
+{
+    [ICHOR_PICTURE_PROGRAM]          = {sPictureGfx_Program, sizeof(sPictureGfx_Program), TAG_PICTURE},
+    [ICHOR_PICTURE_DECREE]           = {sPictureGfx_Decree, sizeof(sPictureGfx_Decree), TAG_PICTURE},
+    [ICHOR_PICTURE_FORGED_ORDER]     = {sPictureGfx_ForgedOrder, sizeof(sPictureGfx_ForgedOrder), TAG_PICTURE},
+    [ICHOR_PICTURE_PRACTICE_TABLETS] = {sPictureGfx_PracticeTablets, sizeof(sPictureGfx_PracticeTablets), TAG_PICTURE},
+};
+
+static const struct SpritePalette sPicturePalettes[ICHOR_PICTURE_COUNT] =
+{
+    [ICHOR_PICTURE_PROGRAM]          = {sPicturePal_Program, TAG_PICTURE},
+    [ICHOR_PICTURE_DECREE]           = {sPicturePal_Decree, TAG_PICTURE},
+    [ICHOR_PICTURE_FORGED_ORDER]     = {sPicturePal_ForgedOrder, TAG_PICTURE},
+    [ICHOR_PICTURE_PRACTICE_TABLETS] = {sPicturePal_PracticeTablets, TAG_PICTURE},
+};
+
+static const struct OamData sOam_Picture =
 {
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64),
     .priority = 0,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_Program =
+static const struct SpriteTemplate sSpriteTemplate_Picture =
 {
-    .tileTag = TAG_PROGRAM,
-    .paletteTag = TAG_PROGRAM,
-    .oam = &sOam_Program,
+    .tileTag = TAG_PICTURE,
+    .paletteTag = TAG_PICTURE,
+    .oam = &sOam_Picture,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-#define PROGRAM_X 10   // the box's tile position, as ScriptMenu_ShowPokemonPic takes it
-#define PROGRAM_Y 2
+#define PICTURE_X 10   // the box's tile position, as ScriptMenu_ShowPokemonPic takes it
+#define PICTURE_Y 2
 
-static EWRAM_DATA u8 sProgramWindowId = 0;
-static EWRAM_DATA u8 sProgramSpriteId = 0;
-static EWRAM_DATA bool8 sProgramShown = FALSE;
+static EWRAM_DATA u8 sPictureWindowId = 0;
+static EWRAM_DATA u8 sPictureSpriteId = 0;
+static EWRAM_DATA bool8 sPictureShown = FALSE;
 
+static void ShowPicture(u32 picture)
+{
+    if (sPictureShown)
+        return;
+    if (picture >= ICHOR_PICTURE_COUNT)
+        picture = ICHOR_PICTURE_PROGRAM;
+    LoadSpriteSheet(&sPictureSheets[picture]);
+    LoadSpritePalette(&sPicturePalettes[picture]);
+    sPictureSpriteId = CreateSprite(&sSpriteTemplate_Picture, PICTURE_X * 8 + 40, PICTURE_Y * 8 + 40, 0);
+    sPictureWindowId = CreateWindowFromRect(PICTURE_X, PICTURE_Y, 8, 8);
+    SetStandardWindowBorderStyle(sPictureWindowId, TRUE);
+    ScheduleBgCopyTilemapToVram(0);
+    sPictureShown = TRUE;
+}
+
+// special(Ichor_ShowPicture) with VAR_0x8004 = ICHOR_PICTURE_*
+void Ichor_ShowPicture(void)
+{
+    ShowPicture(gSpecialVar_0x8004);
+}
+
+void Ichor_HidePicture(void)
+{
+    if (!sPictureShown)
+        return;
+    DestroySprite(&gSprites[sPictureSpriteId]);
+    FreeSpriteTilesByTag(TAG_PICTURE);
+    FreeSpritePaletteByTag(TAG_PICTURE);
+    ClearToTransparentAndRemoveWindow(sPictureWindowId);
+    sPictureShown = FALSE;
+}
+
+// The Dionysia's own calls (ThyrsaTheater), which leave VAR_0x8004 alone.
 void Ichor_ShowProgram(void)
 {
-    struct SpriteSheet sheet = {sProgramGfx, sizeof(sProgramGfx), TAG_PROGRAM};
-    struct SpritePalette pal = {sProgramPal, TAG_PROGRAM};
-
-    if (sProgramShown)
-        return;
-    LoadSpriteSheet(&sheet);
-    LoadSpritePalette(&pal);
-    sProgramSpriteId = CreateSprite(&sSpriteTemplate_Program, PROGRAM_X * 8 + 40, PROGRAM_Y * 8 + 40, 0);
-    sProgramWindowId = CreateWindowFromRect(PROGRAM_X, PROGRAM_Y, 8, 8);
-    SetStandardWindowBorderStyle(sProgramWindowId, TRUE);
-    ScheduleBgCopyTilemapToVram(0);
-    sProgramShown = TRUE;
+    ShowPicture(ICHOR_PICTURE_PROGRAM);
 }
 
 void Ichor_HideProgram(void)
 {
-    if (!sProgramShown)
-        return;
-    DestroySprite(&gSprites[sProgramSpriteId]);
-    FreeSpriteTilesByTag(TAG_PROGRAM);
-    FreeSpritePaletteByTag(TAG_PROGRAM);
-    ClearToTransparentAndRemoveWindow(sProgramWindowId);
-    sProgramShown = FALSE;
+    Ichor_HidePicture();
 }

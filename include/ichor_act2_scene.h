@@ -2,7 +2,8 @@
 #define GUARD_ICHOR_ACT2_SCENE_H
 
 // Ichor: Act II's scenes that need the engine (design/phase3/SCRIPT.md, beats
-// 32-34): the Dionysia in Thyrsa's theater. Every function here is a special
+// 32-34): the Dionysia in Thyrsa's theater, and its picture window, which
+// Astyra's beats 52-55 reuse. Every function here is a special
 // (data/specials.inc); the scripts are data/maps/ThyrsaTheater*/scripts.pory
 // and data/scripts/ichor_act2.pory. The stages and pairs are in
 // constants/ichor_act2_scene.h.
@@ -16,7 +17,9 @@ void Ichor_TheaterTranceStart(void);     // the pulse begins on every pair and g
 void Ichor_TheaterTranceRelease(void);   // pair gSpecialVar_0x8004 laughs: its pulse drains away
 void Ichor_TheaterTranceWake(void);      // the laugh runs round the cavea: every pair drains, top first (waits)
 void Ichor_TheaterGaze(void);            // the masks' eyes pass along the tiers, block by block (waits)
-void Ichor_ShowProgram(void);            // Alethea's program, in a picture box
+void Ichor_ShowPicture(void);            // picture gSpecialVar_0x8004 (ICHOR_PICTURE_*), in a picture box
+void Ichor_HidePicture(void);
+void Ichor_ShowProgram(void);            // Alethea's program: Ichor_ShowPicture's ICHOR_PICTURE_PROGRAM
 void Ichor_HideProgram(void);
 
 #endif // GUARD_ICHOR_ACT2_SCENE_H
