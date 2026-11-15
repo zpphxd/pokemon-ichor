@@ -84,6 +84,9 @@ palette changes were needed.
 `SPRITE_REVIEW=1 tools/ichor/tests/route1.sh` and
 `SPRITE_REVIEW=1 tools/ichor/tests/temple_trial.sh` additionally capture the
 real portrait/send-out sequence without changing its timing or input.
+The Route 1 review also records `18_tablet_dropped.png` during the real ruins
+cutscene; the tablet is hidden on an ordinary map visit. That optional capture
+waits four frames for the newly spawned sprite to render.
 The Kronion tablet's native markings and the Akti boat's shallow hull are drawn
 in `sprites_objects.py` and `akti_objects.py`. The boat's two halves share one
 32x16 source and keep the cast palette; its renderer no longer samples tiles.

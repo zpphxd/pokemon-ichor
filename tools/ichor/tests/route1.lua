@@ -266,6 +266,7 @@ local function main()
   local t0, n, nextShot = now(), 0, now() + 40
   local fights = { { "19_battle_petros", S.TRAINER_PETROS }, { "21_battle_amathos", S.TRAINER_AMATHOS } }
   local fought = 0
+  local tabletSeen = false
   while not (getFlag(S.FLAG_RUINS_CLEARED) and idle()) do
     if now() - t0 > 30000 then fail("the summit scene never finished") end
     if inBattle() then
@@ -273,6 +274,12 @@ local function main()
       local f = fights[fought] or { "battle_extra", S.TRAINER_AMATHOS }
       battle(f[1], f[2])
     else
+      if os.getenv("SPRITE_REVIEW") == "1" and fought == 2
+          and not tabletSeen and not getFlag(S.FLAG_HIDE_TABLET) then
+        wait(4)
+        shot("18_tablet_dropped.png")
+        tabletSeen = true
+      end
       if now() >= nextShot then
         n = n + 1
         shot(string.format("18_scene_%02d.png", n))
@@ -285,6 +292,9 @@ local function main()
   settle()
   expect(fought == 2, "two grunt battles in the scene")
   expect(getFlag(S.FLAG_FOUND_TABLET), "the tablet is found")
+  if os.getenv("SPRITE_REVIEW") == "1" then
+    expect(tabletSeen, "the dropped tablet was captured while visible")
+  end
   expect(getFlag(S.FLAG_DEXNAV_GET), "the Augur's Eye is given")
   expect(getFlag(S.FLAG_HIDE_ALETHEA_RUINS) and getFlag(S.FLAG_HIDE_RUINS_GRUNTS), "Alethea and the grunts are gone")
   expect(getFlag(S.FLAG_HIDE_FLOCK), "the flock is told to move")
