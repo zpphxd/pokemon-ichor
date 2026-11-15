@@ -647,12 +647,12 @@
             "All day it calls out its own name from\n"
             "the olive branches. Epopoi, popoi! When\n"
             "startled, its tiny crest pops up."),
-        .pokemonScale = 1218,
+        .pokemonScale = 1186,
         .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Epopoi,
-        .frontPicSize = MON_COORDS_SIZE(48, 40),
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
         .frontPicYOffset = 3,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -717,12 +717,12 @@
             "bird for a mile comes to listen. None of\n"
             "them remembers what it said, only that\n"
             "they all agreed."),
-        .pokemonScale = 520,
-        .pokemonOffset = 15,
+        .pokemonScale = 583,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Lophops,
-        .frontPicSize = MON_COORDS_SIZE(56, 56),
+        .frontPicSize = MON_COORDS_SIZE(48, 56),
         .frontPicYOffset = 4,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
@@ -731,7 +731,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Lophops,
-        .backPicSize = MON_COORDS_SIZE(64, 48),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Lophops,
@@ -786,13 +786,13 @@
             "the cliffs, and calls itself king. The\n"
             "smoke of altars drifts up into it, and\n"
             "it is said the gods go hungry."),
-        .pokemonScale = 303,
+        .pokemonScale = 288,
         .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Basilops,
-        .frontPicSize = MON_COORDS_SIZE(64, 64),
-        .frontPicYOffset = 0,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 2,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -800,7 +800,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Basilops,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Basilops,
@@ -808,7 +808,7 @@
         .iconSprite = gMonIcon_Basilops,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(0, 13, SHADOW_SIZE_M)
+        SHADOW(0, 11, SHADOW_SIZE_M)
         FOOTPRINT(Basilops)
         OVERWORLD(
             sPicTable_Basilops,
@@ -922,8 +922,8 @@
             "lanes, laughing softly. Farmers leave\n"
             "it scraps at the crossroads, for it runs\n"
             "errands for the goddess of the night."),
-        .pokemonScale = 326,
-        .pokemonOffset = 6,
+        .pokemonScale = 305,
+        .pokemonOffset = 5,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Gelasable,
@@ -936,7 +936,7 @@
         ),
         .frontAnimId = ANIM_H_SHAKE,
         .backPic = gMonBackPic_Gelasable,
-        .backPicSize = MON_COORDS_SIZE(64, 56),
+        .backPicSize = MON_COORDS_SIZE(56, 48),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE,
         .palette = gMonPalette_Gelasable,
@@ -2479,13 +2479,13 @@
             "It wakes long before dawn and peeps at\n"
             "the dark sky, as if afraid it will miss\n"
             "the sun. It cannot bear to be late."),
-        .pokemonScale = 728,
+        .pokemonScale = 749,
         .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Eopeep,
-        .frontPicSize = MON_COORDS_SIZE(40, 40),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(32, 40),
+        .frontPicYOffset = 3,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2493,7 +2493,7 @@
         ),
         .frontAnimId = ANIM_H_JUMPS,
         .backPic = gMonBackPic_Eopeep,
-        .backPicSize = MON_COORDS_SIZE(48, 48),
+        .backPicSize = MON_COORDS_SIZE(56, 48),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .palette = gMonPalette_Eopeep,
@@ -2501,7 +2501,7 @@
         .iconSprite = gMonIcon_Eopeep,
         .iconPalIndex = 1,
         .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
-        SHADOW(-2, 11, SHADOW_SIZE_S)
+        SHADOW(0, 10, SHADOW_SIZE_S)
         FOOTPRINT(Eopeep)
         OVERWORLD(
             sPicTable_Eopeep,
@@ -2548,13 +2548,13 @@
             "the sun is watching. It fights anything\n"
             "that steps into its yard, even its own\n"
             "reflection."),
-        .pokemonScale = 476,
+        .pokemonScale = 453,
         .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Alekrow,
-        .frontPicSize = MON_COORDS_SIZE(56, 64),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(48, 64),
+        .frontPicYOffset = 3,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2562,7 +2562,7 @@
         ),
         .frontAnimId = ANIM_V_STRETCH,
         .backPic = gMonBackPic_Alekrow,
-        .backPicSize = MON_COORDS_SIZE(56, 56),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         .palette = gMonPalette_Alekrow,
@@ -2570,7 +2570,7 @@
         .iconSprite = gMonIcon_Alekrow,
         .iconPalIndex = 3,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-1, 11, SHADOW_SIZE_S)
+        SHADOW(6, 10, SHADOW_SIZE_S)
         FOOTPRINT(Alekrow)
         OVERWORLD(
             sPicTable_Alekrow,
@@ -2630,7 +2630,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .backPic = gMonBackPic_Hoplektor,
-        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicSize = MON_COORDS_SIZE(56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Hoplektor,
@@ -2638,7 +2638,7 @@
         .iconSprite = gMonIcon_Hoplektor,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-1, 11, SHADOW_SIZE_M)
+        SHADOW(2, 11, SHADOW_SIZE_M)
         FOOTPRINT(Hoplektor)
         OVERWORLD(
             sPicTable_Hoplektor,
@@ -2818,13 +2818,13 @@
             "It swoops on picnics and snatches food\n"
             "from the plate before it reaches a mouth.\n"
             "What it cannot carry off, it spoils."),
-        .pokemonScale = 656,
-        .pokemonOffset = 17,
+        .pokemonScale = 609,
+        .pokemonOffset = 16,
         .trainerScale = 256,
         .trainerOffset = 0,
         .frontPic = gMonFrontPic_Harpeck,
-        .frontPicSize = MON_COORDS_SIZE(40, 48),
-        .frontPicYOffset = 2,
+        .frontPicSize = MON_COORDS_SIZE(40, 40),
+        .frontPicYOffset = 3,
         .frontAnimFrames = ANIM_FRAMES(
             ANIMCMD_FRAME(0, 1),
             ANIMCMD_FRAME(1, 20),
@@ -2832,7 +2832,7 @@
         ),
         .frontAnimId = ANIM_V_SLIDE_WOBBLE_SMALL,
         .backPic = gMonBackPic_Harpeck,
-        .backPicSize = MON_COORDS_SIZE(56, 48),
+        .backPicSize = MON_COORDS_SIZE(64, 56),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         .palette = gMonPalette_Harpeck,
@@ -2840,7 +2840,7 @@
         .iconSprite = gMonIcon_Harpeck,
         .iconPalIndex = 2,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-6, 11, SHADOW_SIZE_S)
+        SHADOW(-4, 10, SHADOW_SIZE_S)
         FOOTPRINT(Harpeck)
         OVERWORLD(
             sPicTable_Harpeck,
@@ -2886,10 +2886,10 @@
             "It arrives as a sudden squall. When the\n"
             "wind drops, every loaf in the market is\n"
             "gone, and what is left smells awful."),
-        .pokemonScale = 258,
+        .pokemonScale = 256,
         .pokemonOffset = 0,
-        .trainerScale = 256,
-        .trainerOffset = 0,
+        .trainerScale = 264,
+        .trainerOffset = 1,
         .frontPic = gMonFrontPic_Harpelle,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 1,
@@ -2908,7 +2908,7 @@
         .iconSprite = gMonIcon_Harpelle,
         .iconPalIndex = 5,
         .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
-        SHADOW(-12, 12, SHADOW_SIZE_M)
+        SHADOW(-9, 12, SHADOW_SIZE_M)
         FOOTPRINT(Harpelle)
         OVERWORLD(
             sPicTable_Harpelle,

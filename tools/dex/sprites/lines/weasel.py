@@ -139,11 +139,142 @@ GELASABLE_SHINY = {
     "tn0": (128, 128, 136), "tn1": (176, 176, 184), "tn2": (216, 216, 216), "tn3": (240, 240, 240),
     "cd0": (24, 48, 112), "cd1": (48, 96, 168), "cd2": (104, 160, 216),
 }
+GELASABLE_FOOTPRINT = [
+    "................",
+    "................",
+    "................",
+    ".....#...#......",
+    "....##...##.....",
+    "..#.........#...",
+    "..##.......##...",
+    "......###.......",
+    ".....#####......",
+    "....#######.....",
+    "....#######.....",
+    ".....#####......",
+    "................",
+    "................",
+    "................",
+    "................",
+]
 
 s_tn = Mat(["tn0", "tn1", "tn2", "tn3"], line="tn0", cuts=[0.16, 0.42, 0.7])
 s_white = Mat(["w0", "w1"], line="tn1", cuts=[0.52])
 s_dark = Mat(["cd0", "cd1", "cd2"], line="cd0", cuts=[0.34, 0.66])
 s_mouth = Mat(["m0", "m1"], line="m0", cuts=[0.5])
+
+GELASABLE_MINI = {
+    "side": [
+        "..................8998",
+        ".................8a99.",
+        "..................8942",
+        "...25............23442",
+        "..25542...........2442",
+        "..551144..........2442",
+        ".16771143.........2442",
+        ".766efe632.......23442",
+        "..266f6632..25554444432",
+        "...2666332255444433332",
+        "....8ac988544333333322",
+        "...cd8cdb8443332222232",
+        "....cb8cb8343322222222",
+        ".....6624443322...2332",
+        ".....2443332.......232",
+        "....24432232.......232",
+        "...24432..232.....23432",
+        "..24432...232.....24432",
+        ".23222.....22......222.",
+    ],
+    "down": [
+        ".............8998...",
+        "..............a98...",
+        ".......22....2442...",
+        "......2552...2442...",
+        ".....2555442.2442...",
+        "....2515544322442...",
+        "....571..17432332...",
+        "....6761e76623332...",
+        ".....66efe6623322...",
+        "......2666623332....",
+        ".....88ac9ac9882....",
+        ".....cd8cd8cd832....",
+        "......b8b8b844332...",
+        "......7644444332...",
+        "......6444333322...",
+        "......244333322.....",
+        ".....24432.2332.....",
+        ".....2332...2332....",
+        ".....222.....222....",
+    ],
+    "up": [
+        ".............8998...",
+        "..............a98...",
+        ".......22....2442...",
+        "......2552...2442...",
+        ".....2555442.2442...",
+        "....2555544322442...",
+        "....5554443323332...",
+        "....5544443323332...",
+        ".....443333223332...",
+        "......2333223332....",
+        ".....88ac9ac9882....",
+        ".....cd8cd8cd832....",
+        "......b8b8b844332...",
+        "......5544444332...",
+        "......5444333322...",
+        "......244333322.....",
+        ".....24432.2332.....",
+        ".....2332...2332....",
+        ".....222.....222....",
+    ],
+}
+GELASABLE_MINI_STEP = {
+    "side": {
+        0: ".................8998.",
+        1: "................8a99..",
+        2: ".................89442",
+        14: ".....2443332......2332.",
+        15: ".....24332232.....232..",
+        16: "......24332232...2342..",
+        17: ".......2443232...2432..",
+        18: ".......222.22....222...",
+    },
+    "down": {
+        0: "............8998....",
+        1: ".............a98....",
+        2: ".......22...24442...",
+        7: "....676ee76623332...",
+        8: ".....66eff6623322...",
+        16: "......2432.24432....",
+        17: "......232...2332....",
+        18: "......22....222.....",
+    },
+    "up": {
+        0: "............8998....",
+        1: ".............a98....",
+        2: ".......22...24442...",
+        16: "......2432.24432....",
+        17: "......232...2332....",
+        18: "......22....222.....",
+    },
+}
+
+
+def _gelasable_mini(p, view, phase):
+    direction = "side" if view == "icon" else view
+    rows = list(GELASABLE_MINI[direction])
+    if phase:
+        for y, row in GELASABLE_MINI_STEP[direction].items():
+            rows[y] = row
+    if view == "icon":
+        rows[5] = "..551154..........2442"
+        rows[6] = ".167711143........2442"
+        rows[7] = ".766eff632.......23442" if phase else ".766efe632.......23442"
+    points = [(x, y) for y, row in enumerate(rows) for x, value in enumerate(row) if value != "."]
+    x0 = 16 - (min(x for x, _ in points) + max(x for x, _ in points)) // 2
+    y0 = 30 - max(y for _, y in points)
+    legend = {format(i, "x"): name for i, name in enumerate(p.fig.pal.names) if i}
+    p.fig.patch(x0, y0, rows, legend)
 
 
 def _torch(p, x, y):
@@ -159,85 +290,106 @@ def _torch(p, x, y):
 
 
 def gelasable(p, view, phase):
-    """Battle sprites are hand-finished (art/gelasable_*.txt); this draft
-    matches them for the icon and the follower."""
+    """Low, long-bodied laughing mustelid; matched native battle and field poses."""
+    if not p.big and view in ("icon", "down", "up", "side"):
+        _gelasable_mini(p, view, phase)
+        return
     if view in ("front", "side", "icon"):
-        # coiled like a spring, haunches low, the head turned back over its
-        # shoulder to laugh at whoever is behind it
-        F = 1 if (phase == 1 and view != "side") else 0
-        W = view == "side" and phase == 1
-        p.limb(bez((15, 49), (0, 45), (5, 30 - F)), 6.4, 5.4, s_tn, group=20)
-        p.limb(bez((5, 31 - F), (8, 20 - F), (17, 22 - 2 * F)), 5.4, 4.4, s_dark, group=20)
-        if W:
-            far_h, far_f = [(21, 52), (21, 59)], [(46, 52), (47, 59)]
-            near_h, near_f = [(16, 52), (16, 59)], [(43, 51), (44, 59)]
+        laugh = phase if view != "side" else 0
+        walk = phase if view == "side" else 0
+        head = 5 - laugh
+        p.limb(bez((43, 49), (60, 43), (54, 25 - laugh)), 6, 4.2, s_tn, group=20)
+        p.limb(bez((54, 26 - laugh), (55, 18 - laugh), (46 - laugh, 20)),
+               4.6, 3.2, s_dark, group=20)
+        if walk:
+            far_f, far_h = [(23, 49), (26, 58)], [(45, 49), (42, 59)]
+            near_f, near_h = [(20, 48), (17, 59)], [(43, 50), (50, 59)]
         else:
-            far_h, far_f = [(21, 52), (24, 56), (23.5, 59)], [(46, 52), (51, 56), (54.5, 59)]
-            near_h, near_f = [(16, 52), (13.5, 56), (11, 59)], [(43, 51), (46, 55.5), (49, 59)]
-        p.limb(far_h, 4.6, 3.2, s_tn, bias=0.35, group=10)
-        p.limb(far_f, 3.8, 3.0, s_tn, bias=0.35, group=11)
-        body = p.limb(bez((18, 50), (30, 41), (44, 47)), 12, 11, s_tn, group=1)
-        p.blob(17, 50, 7.4, 6.6, s_tn, group=1)
-        p.limb(bez((24, 53), (32, 52.5), (42, 53)), 3.4, 3, s_white, clip=[body], group=2)
-        p.limb(near_h, 5.4, 3.4, s_tn, group=12)
-        p.limb(near_f, 4.4, 3.4, s_tn, group=13)
-        p.limb(bez((44, 46), (49, 37), (43, 30 - F)), 12, 10.5, s_tn, group=1)
-        p.limb([(38.5, 38.5 - F), (44, 41.5), (50.5, 41)], 7.4, 7.4, s_dark, group=8)
-        # the head turned all the way back to laugh at us: a broad mustelid
-        # head, small ears low on the sides, a short white muzzle
-        p.circle(49.5, 20 - F, 2.4, s_tn, bias=0.25, group=5)
-        p.circle(30.5, 20 - F, 2.5, s_tn, group=6)
-        p.blob(40, 23 - F, 8.8, 8, s_tn, group=3)
-        p.blob(40, 26.5 - F, 9.8, 4.8, s_tn, group=3)
-        p.blob(40, 27.4 - F, 5.2, 3.8, s_white, group=4)
-        p.blob(40, 27.8 - F, 2.4, 2.2, s_mouth, group=9)
+            far_f, far_h = [(24, 49), (23, 58)], [(44, 49), (45, 59)]
+            near_f, near_h = [(21, 48), (17, 55), (11, 59)], [(44, 49), (49, 56), (53, 59)]
+        p.limb(far_f, 3.6, 2.6, s_tn, bias=0.45, group=10)
+        p.limb(far_h, 4.2, 2.8, s_tn, bias=0.45, group=11)
+        body = p.limb(bez((22, 47), (32, 49), (44, 48)), 11, 12, s_tn, group=1)
+        p.blob(43, 49, 7.2, 6, s_tn, group=1)
+        neck = p.limb(bez((23, 45), (26, 40), (24, 28 + head)), 10, 8.5, s_tn, group=1)
+        p.limb(bez((20, 32 + head), (20, 47), (35, 53)), 4.8, 3.2, s_white,
+               clip=[body, neck], group=2)
+        p.limb(near_f, 4.2, 3, s_tn, group=12)
+        p.limb(near_h, 4.8, 3, s_tn, group=13)
+        p.limb(bez((18, 38 - laugh), (24, 41 - laugh), (30, 38 - laugh)),
+               5.8, 4.6, s_dark, clip=[neck], group=8)
+        p.circle(29, 19 + head, 2.2, s_tn, bias=0.4, group=5)
+        p.circle(19, 17 + head, 2.5, s_tn, group=6)
+        p.blob(23, 23 + head, 7.8, 6.3, s_tn, ang=-0.12, group=3)
+        p.poly([(13, 24 + head), (20, 24 + head), (26, 27 + head),
+                (22, 32 + head), (17, 31 + head), (12, 27 + head)], s_white, group=4)
+        p.poly([(16, 26 + head), (23, 27 + head), (20, 31 + head)],
+               s_mouth, group=9)
         if p.big:
-            p.eye(34, 20 - F, 3, 2, shine="w1", shine_at=(0, 0))
-            p.eye(43, 20 - F, 3, 2, shine="w1", shine_at=(0, 0))
-            p.pxs([(39, 24 - F), (40, 24 - F), (41, 24 - F)], "ink")
-            for x, y in ((39, 39), (44, 42), (49, 41)):
-                _torch(p, x, y - (F if x < 42 else 0))
+            p.patch(16, 21 + head, [
+                "211....21",
+                ".71....7.",
+                ".........",
+                ".........",
+                ".77......",
+                "..7e17...",
+                "...ef1...",
+                "....f....",
+            ])
+            p.pxs([(12, 25 + head), (13, 25 + head)], "ink")
         else:
-            p.pxs([(35, 21 - F), (43, 21 - F)], "ink")
-            for x, y in ((39, 39), (44, 42), (49, 41)):
-                p.px(x, y, "g1")
+            p.pxs([(18, 22 + head), (25, 23 + head)], "ink")
+            p.px(18, 23 + head, "w1")
+            p.px(13, 25 + head, "ink")
+        for x, y in ((19, 39), (24, 41), (29, 39)):
+            _torch(p, x, y - laugh)
         return
 
     if view == "back":
-        # the hand-finished art replaces this
-        p.limb(bez((14, 72), (24, 50), (40, 44)), 24, 18, s_tn, group=1)
-        p.limb(bez((40, 50), (44, 40), (43, 30)), 14, 12, s_tn, group=1)
-        p.blob(38, 22, 8, 6.4, s_tn, group=3)
+        p.limb(bez((21, 63), (3, 42), (10, 28)), 9, 5.5, s_tn, group=20)
+        p.limb(bez((10, 28), (12, 19), (22, 22)), 5.8, 3.8, s_dark, group=20)
+        body = p.limb(bez((25, 68), (30, 51), (43, 41)), 29, 18, s_tn, group=1)
+        neck = p.limb(bez((43, 46), (46, 39), (44, 32)), 15, 12, s_tn, group=1)
+        p.limb(bez((49, 35), (49, 47), (42, 54)), 5, 3.8, s_white,
+               clip=[body, neck], group=2)
+        p.limb(bez((37, 42), (44, 45), (51, 40)), 7, 5, s_dark, clip=[neck], group=8)
+        p.circle(38, 25, 3, s_tn, group=5)
+        p.circle(47, 26, 2.4, s_tn, bias=0.4, group=6)
+        p.blob(43, 31, 9, 7, s_tn, group=3)
+        p.poly([(48, 31), (55, 33), (54, 36), (48, 39), (45, 35)], s_white, group=4)
+        p.poly([(49, 35), (53, 35), (50, 39)], s_mouth, group=9)
+        p.eye(47, 29, 3, 2, shine="w1", shine_at=(1, 1))
+        p.pxs([(54, 32), (55, 32)], "ink")
+        p.px(49, 35, "w1")
+        for x, y in ((38, 42), (44, 44), (50, 41)):
+            _torch(p, x, y)
         return
 
     if view in ("down", "up"):
-        # follower slinking low; every other step it stops to snicker
         s = phase
-        p.limb([(27.5, 52), (27, 59)], 4, 3.2, s_tn, group=12)
-        p.limb([(36.5, 52), (37, 59)], 4, 3.2, s_tn, group=13)
-        tail = [(36, 52), (48, 50), (46, 36)] if view == "down" else [(32, 52), (44 + 2 * s, 46), (41 + 2 * s, 33)]
-        p.limb(bez(*tail), 5, 4, s_tn, group=20)
-        tip = tail[2]
-        p.limb(bez((tip[0] + 0.5, tip[1] + 5), tip, (tip[0] - 4, tip[1] - 3)), 4.6, 3.4, s_dark, group=20)
-        body = p.blob(32, 48, 8.4, 7.4, s_tn, group=1)
+        p.limb([(27, 51), (25 + 2 * s, 60 - 2 * s)], 3.6, 2.8, s_tn, group=12)
+        p.limb([(37, 51), (39 - 2 * s, 58 + 2 * s)], 3.6, 2.8, s_tn, group=13)
+        p.limb(bez((36, 51), (48 - s, 47), (43 - s, 31)), 5.4, 3.6, s_tn, group=20)
+        p.limb(bez((43 - s, 32), (45 - s, 27), (39 - s, 28)), 3.8, 2.8, s_dark, group=20)
+        body = p.blob(32, 48, 8.8, 7.2, s_tn, group=1)
         if view == "down":
-            p.blob(32, 49, 4.6, 5.6, s_white, clip=[body], group=2)
-        p.limb([(32, 41.5), (32, 39)], 14, 12.4, s_dark, group=8)
-        p.circle(24.5, 27, 3.2, s_tn, group=5)
-        p.circle(39.5, 27, 3.2, s_tn, group=6)
-        head = p.blob(32, 32 - s, 8.4, 6.8, s_tn, group=3)
+            p.blob(32, 49, 4.5, 5, s_white, clip=[body], group=2)
+        p.limb([(26, 43), (32, 45), (38, 43)], 5, 4, s_dark, group=8)
+        p.circle(26, 33 - s, 2.4, s_tn, group=5)
+        p.circle(37, 34 - s, 2, s_tn, group=6)
+        p.blob(32, 38 - s, 7.3, 5.8, s_tn, group=3)
         if view == "down":
-            p.blob(32, 36.5 - s, 5, 3, s_white, group=4)
-            p.blob(32, 36.6 - s, 3.4, 1.2 + 0.8 * s, s_mouth, group=9)
-            p.pxs([(27, 29 - s), (28, 29 - s), (29, 29 - s), (35, 29 - s), (36, 29 - s), (37, 29 - s)], "ink")
-            p.pxs([(28, 30 - s), (36, 30 - s)], "w1")
-            p.pxs([(31, 34 - s), (32, 34 - s)], "ink")
-        for x, y in ((27, 41), (31, 42), (35, 41)):
+            p.blob(31, 41 - s, 4.8, 3.2, s_white, group=4)
+            p.poly([(28, 41 - s), (34, 41 - s), (31, 45 - s)], s_mouth, group=9)
+            p.pxs([(27, 36 - s), (28, 36 - s), (34, 37 - s)], "ink")
+            p.px(28, 37 - s, "w1")
+            p.pxs([(30, 39 - s), (31, 39 - s)], "ink")
+        for x, y in ((27, 44), (32, 46), (37, 44)):
             _torch(p, x, y)
         return
 
 
 MONS = [
     Mon("Galekit", GALEKIT_COLORS, GALEKIT_SHINY, galekit, foot="paw", icon_pal=5),
-    Mon("Gelasable", GELASABLE_COLORS, GELASABLE_SHINY, gelasable, foot="paw"),
+    Mon("Gelasable", GELASABLE_COLORS, GELASABLE_SHINY, gelasable, foot=GELASABLE_FOOTPRINT, icon_pal=5),
 ]
