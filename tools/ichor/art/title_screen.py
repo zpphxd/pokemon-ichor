@@ -379,7 +379,7 @@ def build_press_start():
     for y, row in enumerate(press):
         for x, ch in enumerate(row):
             img[0 + y, x0 + x] = pk[ch]
-    credit = set_word(LET.SMALL, "A GAME BY SAMUEL GUTKNECHT AND ZACH POWERS", 1, 5)
+    credit = set_word(LET.SMALL, "A GAME BY ZACH POWERS AND SAMUEL GUTKNECHT", 1, 5)
     w = len(credit[0])
     center = 120
     x0 = center - w // 2

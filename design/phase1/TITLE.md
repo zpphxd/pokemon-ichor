@@ -7,7 +7,7 @@ The bible's title screen is "a painted amphora". The screen is the belly of a bl
 - In the panel the three Fates handle a white thread. **Clotho** spins it from her distaff and drop spindle. **Lachesis** lays it along a marked rod. **Atropos**, veiled, closes her spring shears on it.
 - Each Fate has a painted name label, as on the François Vase: ΚΛΩΘΩ, ΛΑΧΕΣΙΣ, ΑΤΡΟΠΟΣ.
 - One **golden thread** drifts free past all three, never spun and never cut. That thread is the player.
-- **ICHOR** is a gilded V-cut inscription in Greek lapidary capitals. POKÉMON, PRESS · START and "A GAME BY SAMUEL GUTKNECHT AND ZACH POWERS" match it.
+- **ICHOR** is a gilded V-cut inscription in Greek lapidary capitals. POKÉMON, PRESS · START and "A GAME BY ZACH POWERS AND SAMUEL GUTKNECHT" match it.
 
 Screenshots: `img/title_1_glint.png` through `img/title_5_drift.png`. They are in-game captures. The expansion's dev-only Quickstart badge is now hidden in the game too (`QUICKSTART_HUD`, `UI_remnants.md`).
 
