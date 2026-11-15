@@ -1040,7 +1040,19 @@ DAEDALUS: Build a cage for a monster and you call it engineering.
 
 DAEDALUS: Build one for a frightened animal and you know what it is.
 
-DAEDALUS: Here.
+DAEDALUS: He asked me for one more cage. Small enough to carry.
+
+DAEDALUS: Strong enough that nothing inside could ever get out.
+
+DAEDALUS: For something he calls his Lord.
+
+DAEDALUS: I made it. I never gave it to him.
+
+DAEDALUS: Here. You decide what it holds.
+
+{PLAYER} received the MASTER BALL!
+
+DAEDALUS: And this.
 
 {PLAYER} received the Labrys!
 
@@ -1050,6 +1062,8 @@ DAEDALUS: The dials. The seals. The chains.
 
 DAEDALUS: Especially the chains.
 ```
+**The Master Ball** (user, 2026-11-14, "Yes, Daedalus"). It is the game's one Master Ball on the main path, as Emerald's came from the villain's hideout. Phaedon commissioned it for the Lord of Time; Daedalus kept it back, and you can carry it up the Stair and spend it on the creature it was made for, or on anything else. Its bag description: "Daedalus's work. Nothing caught in it ever gets out." It is a plain `giveitem`, flag-gated so it is given once.
+
 If the player untied the statue in Emporion:
 ```text
 DAEDALUS: Oh. You found Number Nine. He's been gone a year. Did he behave?

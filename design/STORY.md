@@ -716,6 +716,7 @@ Approved in `design/LABYRINTH.md` §8; this file only links them to the spine.
 - **Daedalus** is a father who outlived his son.
   - He built Kronos his collar and his hour, because a grieving father told him no father would ever bury a child again. Then he repented and gave you the Labrys.
   - [NEW] He also built Elpis's music box, which is why its tune is the workshop's tune and the Frozen Hour's.
+  - [NEW] Phaedon asked him for a ball nothing could escape, for the Lord of Time. He made it and never handed it over; he gives it to you with the Labrys (LABYRINTH Scene D). It is the main path's one Master Ball, and the Stair is where it was meant to be used.
 - **Ariadne** is Asterion's half-sister and the Mistress's priestess.
   - She let the Titans in because their master swore he could mend anything. She gives you the thread so someone will witness what they're doing. It is the game's theme, held in your hand.
   - [POSTGAME] She is the Brain of the Endless Labyrinth.
