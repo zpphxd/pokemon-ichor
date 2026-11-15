@@ -68,7 +68,7 @@ Parties are staged in `design/phase3/parties/{kopais,trophonios,parnassos,harbor
 
 | Seam | Columns or rows | Owner |
 |---|---|---|
-| Thyrsa's Neistan Gate → Route 8's east edge | Thyrsa's west edge is open only on rows 23–24. Route 8's road meets its east edge on rows *q*…*q*+1, the kopais agent's choice, recorded here; seam strips aethos-only (8 columns, Part 10). This session adds both connections at integration (Thyrsa's map.json is the polish-thyrsa agent's builder's). | kopais |
+| Thyrsa's Neistan Gate → Route 8's east edge | Thyrsa's west edge is open only on rows 23–24. Route 8's road meets its east edge on rows *q*…*q*+1, the kopais agent's choice, recorded here; seam strips aethos-only (8 columns, Part 10). This session adds both connections at integration (Thyrsa's map.json is the polish-thyrsa agent's builder's). **q = 14** (kopais, 2026-11-14): Route 8's road reaches its east edge on rows 14–15, with grass verges on 13 and 16, and columns 56–63 are aethos only (Thyrsa's olive grove runs on into them: olives, cypresses, boulders, the road on aethos's limestone patch). Connections: Thyrsa `left` to Route 8 with offset −9; Route 8 `right` to Thyrsa with offset +9. | kopais |
 | Route 8's west edge ↔ Lebadeia's east edge | **fixed now**: both maps' roads on rows 12–13 (verges 11 and 14), offset 0 both ways; seam strips aethos-only (different secondaries) | kopais, parnassos |
 | Lebadeia's west edge ↔ Route 9's east edge | the parnassos agent's choice (one tileset, no strip) | parnassos |
 | Route 9's south edge ↔ Kirrha's north edge | **fixed now**: Route 9's road at columns 8–11 (verges 8 and 11), Kirrha's at 26–29; Route 9 `down` offset −18, Kirrha `up` offset +18; seam strips aethos-only | parnassos, harbors |
