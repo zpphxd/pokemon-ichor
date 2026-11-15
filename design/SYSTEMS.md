@@ -1231,7 +1231,7 @@ About 12 chain flags. Resting stores nothing.
 
 | God | Disguise | The test | When and where | Gift |
 |---|---|---|---|---|
-| **Demeter** | **An old woman by the Maiden's Well.** In the Homeric *Hymn to Demeter*, the grieving goddess sat by the Maiden's Well at Eleusis as an old woman, until the king's daughters took her in. | **Share food and comfort her.** Offer her a drink from the bag. She refuses Wine (she did in the *Hymn*). Water is accepted. Water plus a Barley Cake is her *kykeon*, barley water with mint, and is loved. Then she asks for a joke: three choices, two that land. Old Iambe made the goddess laugh with a crude joke, the first laugh of her grief. | **After Laurel 5.** Eleusa's well, on any return visit. An omen points there. | **Snivy** (Grass), whose line ends in Serperior. Demeter's chariot was drawn by serpents. |
+| **Demeter** | **Cami, a young woman by the Maiden's Well** (named and drawn by the user's request, from a photo they gave; 2026-11-14). In the Homeric *Hymn to Demeter*, the grieving goddess sat by the Maiden's Well at Eleusis as an old woman, until the king's daughters took her in. The song remembered her wrong, and her reveal says so. | **Share food and comfort her.** Offer her a drink from the bag. She refuses Wine (she did in the *Hymn*). Water is accepted. Water plus a Barley Cake is her *kykeon*, barley water with mint, and is loved. Then she asks for a joke: three choices, two that land. Old Iambe made the goddess laugh with a crude joke, the first laugh of her grief. | **After Laurel 5.** Eleusa's well, on any return visit. An omen points there. | **Snivy** (Grass), whose line ends in Serperior. Demeter's chariot was drawn by serpents. |
 | **Hephaestus** | **A lame tinker,** his cart broken on the caldera switchbacks, with a toolbag too heavy for him. | **Walk at his pace.** You carry the bag, and can't run while you do. Halfway up, a goat-path scramble cuts the corner, and he can't take it with his leg. Take it and you arrive alone; he sits down: "Go on. Everyone does." Climb back down to him and walk the long way together. The scramble is two-way, so no ledge strands anyone (MAP_DESIGN §1). Reach the rim forge together. | **After Laurel 6.** Kaldera's caldera road. | **Cyndaquil** (Fire), evolving to **Hisuian Typhlosion** (Fire/Ghost). In myth Typhon is buried under the volcano, his breath feeding Hephaestus's forge. PITCH §4 ties Typhlosion to Typhon and puts Hisuian forms in Aethos. |
 | **Poseidon** | **An old fisherman** on a sea-rock below a cape shrine, dry in the spray. | **Answer truthfully,** after Aesop's honest woodcutter. Your Old Rod slips into the sea. The old man dives, then holds up a gold rod, a silver rod, and your salt-cracked one: "This one yours?" Choose your own. Claiming gold or silver gets your old rod back with a sigh: "Come back when the tide's honest." | **After Laurel 7,** before Knossa. A cape near Astyra, reached with the Conch. | **Piplup** (Water), whose line ends in Empoleon with its trident crest |
 
@@ -1247,15 +1247,17 @@ Winning the Poseidon test also gives the **Good Rod**, the "silver" one, if you 
 
 **Demeter, at the Maiden's Well.**
 
-[The old woman laughs, a cracked sound, then a real one.]
+[Cami laughs, a cracked sound, then a real one.]
 ```text
-OLD WOMAN: Ha. Oh, that's terrible. Tell it again.
+CAMI: Ha. Oh, that's terrible. Tell it again.
 
-OLD WOMAN: I haven't laughed since my girl went away.
+CAMI: I haven't laughed since my daughter went away.
 ```
 [She stands, and she is taller than she was. Gold light fills the well-yard. The dry stalks around the well turn green and heavy.]
 ```text
-DEMETER: I sat at this well once before, like this. An old woman nobody knew.
+DEMETER: I sat at this well once before. The song says I was an old woman.
+
+DEMETER: People remember what they expect. Nobody expects a god.
 
 DEMETER: A girl brought me water. Another made me laugh. I never forgot them.
 
@@ -1265,7 +1267,7 @@ DEMETER: You did both. Hold out your hands.
 
 DEMETER: It grows where it's tended. So do you.
 
-DEMETER: Don't tell anyone the old woman was me. They'll feed every beggar in Eleusa.
+DEMETER: Don't tell anyone Cami was me. They'll feed every stranger in Eleusa.
 
 DEMETER: …Actually. Tell everyone.
 ```
@@ -1332,7 +1334,7 @@ Glaukos, the slice's old fisher who gave you the Old Rod, is named for the fishe
 | E5 | **Dionysus** | A drowsy youth with ivy in his hair, tied to a trireme's mast by sailors (the Homeric *Hymn to Dionysus*) | **Speak up.** The sailors ask you: "Ransom him, or sell him?" Pass with "Let him go." A fourth choice, "He's a god," appears only if you spotted a tell; it passes too, with a better line. As in the *Hymn*, vines climb the mast, and the sailors leap overboard as dolphins. | Post-climax, the crossing to Delphoi | **Grookey.** Rillaboom drums, and the maenads danced to drums. |
 | E6 | **Artemis** | A girl with a bow, watching a harvest feast at a vineyard | **Find the forgotten altar.** Every altar at the feast has offerings but one small shrine at the edge, hers. Make an offering there. King Oeneus forgot Artemis at his harvest, and she sent the Calydonian Boar. | Post-game, Thyrsa's vineyards | **Tepig.** "The boar I sent was its great-grandmother. This one's tamer." |
 | E7 | **Aphrodite** | An old woman collecting shells on Kythera's foam beach | **Discretion.** Carry a love letter between two shy villagers. The bag lets you read it, but don't. | Post-game, Kythera | **Oshawott**, evolving to **Hisuian Samurott.** Its scalchop is a scallop shell, and Aphrodite came ashore on one. |
-| E8 | **Apollo** | A hired herdsman who lost his master's cattle. Apollo served King Admetus as a herdsman for a year. | **Track them.** Follow backward hoofprints: Hermes stole Apollo's cattle walking them backward. Walk against the prints to a cave. This pays off the Hermes amphora (§5). | Post-game, near Arkadia | **Chimchar.** Infernape's crown of fire is the sun's. |
+| E8 | **Apollo** | **Sam,** a hired herdsman who lost his master's cattle, playing a lyre far too fine for a herdsman (named and drawn by the user's request, from a photo they gave; 2026-11-14). Apollo served King Admetus as a herdsman for a year, and the lyre is the one Hermes gave him to settle the stolen cattle (Homeric *Hymn to Hermes*). In the cave: "A baby stole these from me once. Walked them backwards. Then he paid me with this." | **Track them.** Follow backward hoofprints: Hermes stole Apollo's cattle walking them backward. Walk against the prints to a cave. This pays off the Hermes amphora (§5). | Post-game, near Arkadia | **Chimchar.** Infernape's crown of fire is the sun's. |
 | E9 | **Hera** | An old woman stranded at a flooded ford. Hera tested Jason this way at the river Anauros. | **Carry her across.** Twelve tiles of ford, with no running. Mid-river you lose a sandal, as Jason did; she gives it back on the far bank. | Post-game, the river below Arkadia | **Chikorita.** Meganium's flower collar; lilies sprang from Hera's milk. |
 | E10 | **Hecate** | A hooded old woman at a three-way crossroads, **at night only.** This is the one test that needs a time, and a xenia rest (§10) can reach it. | **Don't look back.** Leave her supper, a Barley Cake, at the stone, then walk 8 steps without turning toward her. Turning ends the visit. | Post-game, the mouth of Hecate's Hollow | **Mudkip.** A creature of thresholds, half water and half earth. |
 | E11 | **Hades** | A grey, ragged shade on a riverbank, buried without the ferryman's fare | **Give your obol.** The Bronze Obol, your Elaia well coin. | Post-game, before the Katabasis, the river near Cape Tainaron | **Totodile.** "The river's jaws. He'll mind you." |
