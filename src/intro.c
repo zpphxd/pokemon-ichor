@@ -172,11 +172,13 @@ static u8 SetUpCopyrightScreen(void)
             if (gMultibootProgramStruct.gcmb_field_2 == 2)
             {
                 // check the multiboot ROM header game code to see if we already did this
+#if !ICHOR_CUT_MULTIBOOT // Ichor: the Colosseum multiboot program is cut
                 if (*(u32 *)(EWRAM_START + 0xAC) == COLOSSEUM_GAME_CODE)
                 {
                     CpuCopy16(&gMultiBootProgram_PokemonColosseum_Start, (void *)EWRAM_START, sizeof(gMultiBootProgram_PokemonColosseum_Start));
                     *(u32 *)(EWRAM_START + 0xAC) = COLOSSEUM_GAME_CODE;
                 }
+#endif
                 GameCubeMultiBoot_ExecuteProgram(&gMultibootProgramStruct);
             }
         }

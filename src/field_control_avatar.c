@@ -602,6 +602,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     if (MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive()) // Ichor: ivy walls; the script checks the thyrsus
         return EventScript_UseRockClimb;
 
+#if !ICHOR_CUT_SECRET_BASES // Ichor: secret bases are cut
     elevation = position->elevation;
     if (elevation == MapGridGetElevationAt(position->x, position->y))
     {
@@ -634,6 +635,9 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         CheckInteractedWithFriendsPosterDecor();
         return NULL;
     }
+#else
+    (void)elevation;
+#endif
 
     return NULL;
 }
@@ -824,8 +828,10 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         ScriptContext_SetupScript(SSTidalCorridor_EventScript_ReachedStepCount);
         return TRUE;
     }
+#if !ICHOR_CUT_POKENAV // Ichor: Match Call is cut
     if (TryStartMatchCall())
         return TRUE;
+#endif
     return FALSE;
 }
 

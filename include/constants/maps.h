@@ -12,6 +12,9 @@ enum
     MAP_UNDEFINED = (0xFF | (0xFF << 8)),
 };
 
+// Ichor: the deleted Hoenn and FRLG maps' names, kept as never-matching stubs.
+#include "constants/maps_removed_stub.h"
+
 #define MAP_GROUP(map) (map >> 8)
 #define MAP_NUM(map) (map & 0xFF)
 

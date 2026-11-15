@@ -20,8 +20,8 @@ local L = dofile("tools/ichor/tests/ichor_lib.lua")
 local K = L.K
 local OUT = os.getenv("BOW_OUT") or "build/bow_test/"
 
-local AKTI, INDOOR = 0, 75
-local MAP_AKTI, MAP_ASCLEPEION = 59, 4
+local AKTI, MAP_AKTI = L.map("MAP_AKTI_TOWN")
+local INDOOR, MAP_ASCLEPEION = L.map("MAP_AKTI_TOWN_ASCLEPEION")
 local HEALER_LOCALID = 1                 -- LOCALID_AKTI_HEALER, the map's first object
 local ANIM_NURSE_BOW = 20                -- ANIM_STD_COUNT + 0
 

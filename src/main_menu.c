@@ -1074,15 +1074,27 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             DestroyTask(taskId);
             break;
         case ACTION_MYSTERY_GIFT:
+#if !ICHOR_CUT_MYSTERY_GIFT // Ichor: Mystery Gift is cut
             SetMainCallback2(CB2_InitMysteryGift);
+#else
+            SetMainCallback2(CB2_ReinitMainMenu);
+#endif
             DestroyTask(taskId);
             break;
         case ACTION_MYSTERY_EVENTS:
+#if !ICHOR_CUT_MYSTERY_GIFT // Ichor: Mystery Gift is cut
             SetMainCallback2(CB2_InitMysteryEventMenu);
+#else
+            SetMainCallback2(CB2_ReinitMainMenu);
+#endif
             DestroyTask(taskId);
             break;
         case ACTION_EREADER:
+#if !ICHOR_CUT_MYSTERY_GIFT // Ichor: Mystery Gift is cut
             SetMainCallback2(CB2_InitEReader);
+#else
+            SetMainCallback2(CB2_ReinitMainMenu);
+#endif
             DestroyTask(taskId);
             break;
         case ACTION_INVALID:
