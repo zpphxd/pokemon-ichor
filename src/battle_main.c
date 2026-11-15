@@ -424,6 +424,15 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_TITANBORN] = { _("TITANBORN"), 5 },
     [TRAINER_CLASS_ACOLYTE] = { _("ACOLYTE"), 5 },
     [TRAINER_CLASS_HIEROPHANT] = { _("HIEROPHANT"), 25 },
+    // Ichor: Phase 2's classes, as world-act1 pays them (merchants like gentlemen);
+    // fishers and beekeepers pay like their placeholders, the fisherman and bug catcher.
+    [TRAINER_CLASS_MERCHANT] = { _("MERCHANT"), 20 },
+    [TRAINER_CLASS_PILGRIM] = { _("PILGRIM"), 3 },
+    [TRAINER_CLASS_FISHER] = { _("FISHER"), 10, B_TRAINER_CLASS_POKE_BALLS >= GEN_8 ? BALL_DIVE : BALL_LURE },
+    [TRAINER_CLASS_BEEKEEPER] = { _("BEEKEEPER"), 4 },
+    // Ichor: Act III's. Sculptors pay like hikers, divers like swimmers.
+    [TRAINER_CLASS_SCULPTOR] = { _("SCULPTOR"), 10 },
+    [TRAINER_CLASS_DIVER] = { _("DIVER"), 2, BALL_DIVE },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =
