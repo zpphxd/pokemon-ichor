@@ -4188,7 +4188,17 @@ static void DebugAction_DestroyFollowerNPC(u8 taskId)
     X(MUS_ICHOR_TEMPLE_DEMETER)     \
     X(MUS_ICHOR_BATTLE_ADMIN)       \
     X(MUS_ICHOR_REVELATION)         \
-    X(MUS_ICHOR_HOLLOW)
+    X(MUS_ICHOR_HOLLOW)             \
+    X(MUS_ICHOR_WIDER_WORLD)        \
+    X(MUS_ICHOR_PLAIN_OF_TROY)      \
+    X(MUS_ICHOR_BLACK_LAND)         \
+    X(MUS_ICHOR_NECROPOLIS)         \
+    X(MUS_ICHOR_BLACK_SEA)          \
+    X(MUS_ICHOR_BATTLE_OIKOUMENE)   \
+    X(MUS_ICHOR_BATTLE_PERIODOS)    \
+    X(MUS_ICHOR_PERIODOS_TROAD)     \
+    X(MUS_ICHOR_PERIODOS_EGYPT)     \
+    X(MUS_ICHOR_PERIODOS_PONTOS)
 
 #define SOUND_LIST_SE               \
     X(SE_USE_ITEM)                  \

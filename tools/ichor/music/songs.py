@@ -993,3 +993,8 @@ SONGS += ENGINE_SONGS
 from songs_act1 import ACT1_SONGS  # noqa: E402
 
 SONGS += ACT1_SONGS
+
+# The Oikoumene's batch 1 (the post-game's second map) lives in songs_oikoumene.py.
+from songs_oikoumene import OIKOUMENE_SONGS  # noqa: E402
+
+SONGS += OIKOUMENE_SONGS

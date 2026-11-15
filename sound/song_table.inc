@@ -645,6 +645,16 @@ gSongTable::
 	song mus_ichor_battle_admin, MUSIC_PLAYER_BGM, 0
 	song mus_ichor_revelation, MUSIC_PLAYER_BGM, 0
 	song mus_ichor_hollow, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_wider_world, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_plain_of_troy, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_black_land, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_necropolis, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_black_sea, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_battle_oikoumene, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_battle_periodos, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_periodos_troad, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_periodos_egypt, MUSIC_PLAYER_BGM, 0
+	song mus_ichor_periodos_pontos, MUSIC_PLAYER_BGM, 0
 
 	.align 2
 dummy_song_header:
