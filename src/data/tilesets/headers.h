@@ -1723,3 +1723,45 @@ const struct Tileset gTileset_TempleHermes =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
     .callback = NULL,
 };
+
+// Ichor: kithairon, the Kithairon crossing: Route 6, Eleutherai and Mt. Kithairon. Porytiles-managed, built by
+// tools/ichor/art/kithairon_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, road, sea and tall grass, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Kithairon =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kithairon,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kithairon,
+    .metatiles = gMetatiles_PorytilesManaged_Kithairon,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kithairon,
+    .callback = NULL,
+};
+
+// Ichor: kronia, the Kithairon crossing: Route 7 and the Kronia grounds. Porytiles-managed, built by
+// tools/ichor/art/kithairon_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, road, sea and tall grass, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Kronia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kronia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kronia,
+    .metatiles = gMetatiles_PorytilesManaged_Kronia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kronia,
+    .callback = NULL,
+};
+
+// Ichor: kithairon_cave, the Kithairon crossing: Antiope's cave. Porytiles-managed, built by
+// tools/ichor/art/kithairon_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, road, sea and tall grass, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_KithaironCave =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_KithaironCave,
+    .palettes = gTilesetPalettes_PorytilesManaged_KithaironCave,
+    .metatiles = gMetatiles_PorytilesManaged_KithaironCave,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_KithaironCave,
+    .callback = NULL,
+};
