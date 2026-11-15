@@ -220,8 +220,10 @@ def main():
                 if 0 in front + follower:
                     print(f"SPRITE NOTE {name}: identical frame pair; confirm intentional static motion")
             for name in args.image:
-                size = (64, 64) if Path(name).parts[:3] == ("graphics", "trainers", "front_pics") else None
-                check_image(inside(args.root, name), size=size)
+                path = inside(args.root, name)
+                relative = path.relative_to(args.root.resolve())
+                size = (64, 64) if relative.parts[:3] == ("graphics", "trainers", "front_pics") else None
+                check_image(path, size=size)
                 print(f"SPRITE PASS {name}")
     except (OSError, ValueError) as error:
         print(f"SPRITE FAIL: {error}", file=sys.stderr)

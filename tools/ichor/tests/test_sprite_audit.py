@@ -1,9 +1,12 @@
 """Regression tests for the redraw rollout's native asset gate."""
 import importlib.util
+import io
 import json
 import tempfile
 import unittest
+from contextlib import redirect_stderr
 from pathlib import Path
+from unittest.mock import patch
 
 from PIL import Image
 
@@ -74,6 +77,15 @@ class SpriteAuditTest(unittest.TestCase):
         path = self.image("wrong.png", (128, 128))
         with self.assertRaisesRegex(ValueError, "expected"):
             audit.check_image(path, (64, 64))
+
+    def test_absolute_portrait_path_cannot_bypass_dimensions(self):
+        path = self.image("graphics/trainers/front_pics/wrong.png", (32, 32))
+        errors = io.StringIO()
+        with patch.object(audit.sys, "argv", [
+                "sprite_audit", "--root", str(self.root), "check", "--image", str(path)]):
+            with redirect_stderr(errors):
+                self.assertEqual(audit.main(), 1)
+        self.assertIn("expected (64, 64)", errors.getvalue())
 
     def test_empty_sprite_fails(self):
         path = self.image("empty.png")
