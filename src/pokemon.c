@@ -5141,6 +5141,14 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_LAKONIAN:
         case TRAINER_CLASS_HIEROPHANT:
             return MUS_ICHOR_BATTLE_RIVAL;
+        // Ichor: the Periodos champions and Helen. ICHOR_STUB_MUSIC: the
+        // Hierophants' theme until "Battle! Champion of the Periodos" has an id
+        case TRAINER_CLASS_PRINCE:
+        case TRAINER_CLASS_PHARAOH:
+        case TRAINER_CLASS_PRIESTESS:
+        case TRAINER_CLASS_QUEEN:
+        case TRAINER_CLASS_KING:
+            return MUS_ICHOR_BATTLE_RIVAL;
         case TRAINER_CLASS_LEADER:
             return MUS_VS_GYM_LEADER;
         case TRAINER_CLASS_CHAMPION:

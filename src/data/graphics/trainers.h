@@ -504,6 +504,52 @@ const u16 gTrainerPalette_AcolyteM[] = INCGFX_U16("graphics/trainers/front_pics/
 const u32 gTrainerFrontPic_AcolyteF[] = INCGFX_U32("graphics/trainers/front_pics/acolyte_f.png", ".4bpp.smol");
 const u16 gTrainerPalette_AcolyteF[] = INCGFX_U16("graphics/trainers/front_pics/acolyte_f.png", ".gbapal");
 
+// Pokemon Ichor: the Oikoumene, batch 1 (tools/ichor/art/sprites_oikoumene_trainers.py)
+const u32 gTrainerFrontPic_TrojanHoplite[] = INCGFX_U32("graphics/trainers/front_pics/trojan_hoplite.png", ".4bpp.smol");
+const u16 gTrainerPalette_TrojanHoplite[] = INCGFX_U16("graphics/trainers/front_pics/trojan_hoplite.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Charioteer[] = INCGFX_U32("graphics/trainers/front_pics/charioteer.png", ".4bpp.smol");
+const u16 gTrainerPalette_Charioteer[] = INCGFX_U16("graphics/trainers/front_pics/charioteer.png", ".gbapal");
+
+const u32 gTrainerFrontPic_ShepherdOfIda[] = INCGFX_U32("graphics/trainers/front_pics/shepherd_of_ida.png", ".4bpp.smol");
+const u16 gTrainerPalette_ShepherdOfIda[] = INCGFX_U16("graphics/trainers/front_pics/shepherd_of_ida.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Argonaut[] = INCGFX_U32("graphics/trainers/front_pics/argonaut.png", ".4bpp.smol");
+const u16 gTrainerPalette_Argonaut[] = INCGFX_U16("graphics/trainers/front_pics/argonaut.png", ".gbapal");
+
+const u32 gTrainerFrontPic_ColchianSorceress[] = INCGFX_U32("graphics/trainers/front_pics/colchian_sorceress.png", ".4bpp.smol");
+const u16 gTrainerPalette_ColchianSorceress[] = INCGFX_U16("graphics/trainers/front_pics/colchian_sorceress.png", ".gbapal");
+
+const u32 gTrainerFrontPic_ChalybesSmith[] = INCGFX_U32("graphics/trainers/front_pics/chalybes_smith.png", ".4bpp.smol");
+const u16 gTrainerPalette_ChalybesSmith[] = INCGFX_U16("graphics/trainers/front_pics/chalybes_smith.png", ".gbapal");
+
+const u32 gTrainerFrontPic_PriestOfTheSun[] = INCGFX_U32("graphics/trainers/front_pics/priest_of_the_sun.png", ".4bpp.smol");
+const u16 gTrainerPalette_PriestOfTheSun[] = INCGFX_U16("graphics/trainers/front_pics/priest_of_the_sun.png", ".gbapal");
+
+const u32 gTrainerFrontPic_ScribeOfThoth[] = INCGFX_U32("graphics/trainers/front_pics/scribe_of_thoth.png", ".4bpp.smol");
+const u16 gTrainerPalette_ScribeOfThoth[] = INCGFX_U16("graphics/trainers/front_pics/scribe_of_thoth.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Embalmer[] = INCGFX_U32("graphics/trainers/front_pics/embalmer.png", ".4bpp.smol");
+const u16 gTrainerPalette_Embalmer[] = INCGFX_U16("graphics/trainers/front_pics/embalmer.png", ".gbapal");
+
+const u32 gTrainerFrontPic_NileBoatman[] = INCGFX_U32("graphics/trainers/front_pics/nile_boatman.png", ".4bpp.smol");
+const u16 gTrainerPalette_NileBoatman[] = INCGFX_U16("graphics/trainers/front_pics/nile_boatman.png", ".gbapal");
+
+const u32 gTrainerFrontPic_PhoenicianTrader[] = INCGFX_U32("graphics/trainers/front_pics/phoenician_trader.png", ".4bpp.smol");
+const u16 gTrainerPalette_PhoenicianTrader[] = INCGFX_U16("graphics/trainers/front_pics/phoenician_trader.png", ".gbapal");
+
+const u32 gTrainerFrontPic_PrinceHektor[] = INCGFX_U32("graphics/trainers/front_pics/prince_hektor.png", ".4bpp.smol");
+const u16 gTrainerPalette_PrinceHektor[] = INCGFX_U16("graphics/trainers/front_pics/prince_hektor.png", ".gbapal");
+
+const u32 gTrainerFrontPic_PharaohProteus[] = INCGFX_U32("graphics/trainers/front_pics/pharaoh_proteus.png", ".4bpp.smol");
+const u16 gTrainerPalette_PharaohProteus[] = INCGFX_U16("graphics/trainers/front_pics/pharaoh_proteus.png", ".gbapal");
+
+const u32 gTrainerFrontPic_PriestessMedea[] = INCGFX_U32("graphics/trainers/front_pics/priestess_medea.png", ".4bpp.smol");
+const u16 gTrainerPalette_PriestessMedea[] = INCGFX_U16("graphics/trainers/front_pics/priestess_medea.png", ".gbapal");
+
+const u32 gTrainerFrontPic_QueenHelen[] = INCGFX_U32("graphics/trainers/front_pics/queen_helen.png", ".4bpp.smol");
+const u16 gTrainerPalette_QueenHelen[] = INCGFX_U16("graphics/trainers/front_pics/queen_helen.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1314,5 +1360,66 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_ACOLYTE_F] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
+    },
+    // Pokemon Ichor: the Oikoumene, batch 1
+    [TRAINER_PIC_TROJAN_HOPLITE] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_TrojanHoplite, gTrainerPalette_TrojanHoplite),
+    },
+    [TRAINER_PIC_CHARIOTEER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Charioteer, gTrainerPalette_Charioteer),
+    },
+    [TRAINER_PIC_SHEPHERD_OF_IDA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_ShepherdOfIda, gTrainerPalette_ShepherdOfIda),
+    },
+    [TRAINER_PIC_ARGONAUT] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Argonaut, gTrainerPalette_Argonaut),
+    },
+    [TRAINER_PIC_COLCHIAN_SORCERESS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_ColchianSorceress, gTrainerPalette_ColchianSorceress),
+    },
+    [TRAINER_PIC_CHALYBES_SMITH] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_ChalybesSmith, gTrainerPalette_ChalybesSmith),
+    },
+    [TRAINER_PIC_PRIEST_OF_THE_SUN] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PriestOfTheSun, gTrainerPalette_PriestOfTheSun),
+    },
+    [TRAINER_PIC_SCRIBE_OF_THOTH] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_ScribeOfThoth, gTrainerPalette_ScribeOfThoth),
+    },
+    [TRAINER_PIC_EMBALMER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Embalmer, gTrainerPalette_Embalmer),
+    },
+    [TRAINER_PIC_NILE_BOATMAN] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_NileBoatman, gTrainerPalette_NileBoatman),
+    },
+    [TRAINER_PIC_PHOENICIAN_TRADER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PhoenicianTrader, gTrainerPalette_PhoenicianTrader),
+    },
+    [TRAINER_PIC_PRINCE_HEKTOR] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PrinceHektor, gTrainerPalette_PrinceHektor),
+    },
+    [TRAINER_PIC_PHARAOH_PROTEUS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PharaohProteus, gTrainerPalette_PharaohProteus),
+    },
+    [TRAINER_PIC_PRIESTESS_MEDEA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PriestessMedea, gTrainerPalette_PriestessMedea),
+    },
+    [TRAINER_PIC_QUEEN_HELEN] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_QueenHelen, gTrainerPalette_QueenHelen),
     },
 };

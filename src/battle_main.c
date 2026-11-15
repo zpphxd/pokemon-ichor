@@ -424,6 +424,24 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_TITANBORN] = { _("TITANBORN"), 5 },
     [TRAINER_CLASS_ACOLYTE] = { _("ACOLYTE"), 5 },
     [TRAINER_CLASS_HIEROPHANT] = { _("HIEROPHANT"), 25 },
+    // Ichor: the Oikoumene, batch 1. Short labels, shared where they match (PG-39)
+    [TRAINER_CLASS_TROJAN_HOPLITE] = { _("HOPLITE"), 10, BALL_GREAT },
+    [TRAINER_CLASS_CHARIOTEER] = { _("CHARIOTEER"), 12, BALL_FAST },
+    [TRAINER_CLASS_SHEPHERD_OF_IDA] = { _("SHEPHERD"), 5 },
+    [TRAINER_CLASS_ARGONAUT] = { _("ARGONAUT"), 12, BALL_DIVE },
+    [TRAINER_CLASS_COLCHIAN_SORCERESS] = { _("SORCERESS"), 10, BALL_MOON },
+    [TRAINER_CLASS_CHALYBES_SMITH] = { _("SMITH"), 10, BALL_HEAVY },
+    [TRAINER_CLASS_PRIEST_OF_THE_SUN] = { _("SUN PRIEST"), 12, BALL_ULTRA },
+    [TRAINER_CLASS_SCRIBE_OF_THOTH] = { _("SCRIBE"), 10, BALL_REPEAT },
+    [TRAINER_CLASS_EMBALMER] = { _("EMBALMER"), 10, BALL_DUSK },
+    [TRAINER_CLASS_NILE_BOATMAN] = { _("BOATMAN"), 8, BALL_NET },
+    [TRAINER_CLASS_PHOENICIAN_TRADER] = { _("TRADER"), 20, BALL_LUXURY },
+    // Ichor: the Periodos champions' titles
+    [TRAINER_CLASS_PRINCE] = { _("PRINCE"), 30, BALL_ULTRA },
+    [TRAINER_CLASS_PHARAOH] = { _("PHARAOH"), 30, BALL_LUXURY },
+    [TRAINER_CLASS_PRIESTESS] = { _("PRIESTESS"), 30, BALL_MOON },
+    [TRAINER_CLASS_QUEEN] = { _("QUEEN"), 30, BALL_LUXURY },
+    [TRAINER_CLASS_KING] = { _("KING"), 40, BALL_LUXURY },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =
@@ -5112,6 +5130,11 @@ static void HandleEndTurn_BattleWon(void)
             break;
         case TRAINER_CLASS_LEADER:
         case TRAINER_CLASS_HIEROPHANT: // Ichor
+        case TRAINER_CLASS_PRINCE:     // Ichor: the Periodos champions win like Hierophants
+        case TRAINER_CLASS_PHARAOH:
+        case TRAINER_CLASS_PRIESTESS:
+        case TRAINER_CLASS_QUEEN:
+        case TRAINER_CLASS_KING:
             PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
         default:
