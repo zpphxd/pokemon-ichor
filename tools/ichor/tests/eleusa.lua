@@ -124,12 +124,16 @@ local function doors()
   expect(L.mapId() == S.MAP_ELEUSA, "the Ploutonion is shut before the sanctum opens")
   L.shot("ploutonion_shut")
   L.setFlag(S.FLAG_SANCTUM_OPEN, true)
+  -- in play the Mysteries bring the player down the Anaktoron's stair first, so
+  -- B1F's arrival scene has played before anyone uses the Ploutonion's gate
+  L.setFlag(S.FLAG_SANCTUM_ARRIVED, true)
   local x, y = L.pos()
   warpTo(S.MAP_ELEUSA, x, y)
   L.useWarp(S.MAP_E_SANCTUM_B1F)
   expect(L.mapId() == S.MAP_E_SANCTUM_B1F, "and open once FLAG_ICHOR_SANCTUM_OPEN is set")
   L.useWarp(S.MAP_ELEUSA)
   L.setFlag(S.FLAG_SANCTUM_OPEN, false)
+  L.setFlag(S.FLAG_SANCTUM_ARRIVED, false)
   local _ = gate
 end
 
