@@ -22,6 +22,7 @@
 #include "task.h"
 #include "trig.h"
 #include "constants/field_weather.h"
+#include "constants/rgb.h"
 #include "constants/rtc.h"
 
 #include "data/ichor_act2_theater.h"

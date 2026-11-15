@@ -81,7 +81,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ThyrsaTheater_EventScript_Cast",
-      "flag": "FLAG_ICHOR_HIDE_DIONYSIA_CAST"
+      "flag": "FLAG_TEMP_16"
     },
     {
       "local_id": "LOCALID_THEATER_CHORUS",
@@ -100,8 +100,8 @@
     {
       "local_id": "LOCALID_THEATER_FATE_1",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_FATE_SPINNER",
-      "x": 13,
-      "y": 7,
+      "x": 11,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -114,7 +114,7 @@
     {
       "local_id": "LOCALID_THEATER_FATE_2",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_FATE_MEASURER",
-      "x": 15,
+      "x": 11,
       "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -128,7 +128,7 @@
     {
       "local_id": "LOCALID_THEATER_FATE_3",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_FATE_CUTTER",
-      "x": 16,
+      "x": 13,
       "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -151,13 +151,13 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ThyrsaTheater_EventScript_Cast",
-      "flag": "FLAG_ICHOR_HIDE_DIONYSIA_CAST"
+      "flag": "FLAG_TEMP_17"
     },
     {
       "local_id": "LOCALID_THEATER_JAR",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 15,
-      "y": 6,
+      "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -165,12 +165,12 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ThyrsaTheater_EventScript_Jar",
-      "flag": "FLAG_ICHOR_HIDE_DIONYSIA_CAST"
+      "flag": "FLAG_TEMP_18"
     },
     {
       "local_id": "LOCALID_THEATER_KING",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GOLD_MASK_KING",
-      "x": 20,
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
+      "x": 21,
       "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -179,7 +179,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ThyrsaTheater_EventScript_Cast",
-      "flag": "FLAG_ICHOR_HIDE_DIONYSIA_CAST"
+      "flag": "FLAG_TEMP_19"
     },
     {
       "local_id": "LOCALID_THEATER_ACTOR",
@@ -193,11 +193,11 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ThyrsaTheater_EventScript_Cast",
-      "flag": "FLAG_ICHOR_HIDE_DIONYSIA_CAST"
+      "flag": "FLAG_TEMP_1A"
     },
     {
       "local_id": "LOCALID_THEATER_ALETHEA",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 17,
       "y": 18,
       "elevation": 3,
@@ -211,8 +211,8 @@
     },
     {
       "local_id": "LOCALID_THEATER_KLEON_SEAT",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_SEATED",
-      "x": 15,
+      "graphics_id": "OBJ_EVENT_GFX_VAR_2",
+      "x": 16,
       "y": 17,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
@@ -240,7 +240,7 @@
     {
       "local_id": "LOCALID_THEATER_MASK_2",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MASK",
-      "x": 20,
+      "x": 21,
       "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -295,8 +295,8 @@
     },
     {
       "local_id": "LOCALID_THEATER_KLEON",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_SEATED",
-      "x": 21,
+      "graphics_id": "OBJ_EVENT_GFX_VAR_3",
+      "x": 22,
       "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -459,8 +459,8 @@
       "x": 19,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_ICHOR_DIONYSIA",
-      "var_value": "7",
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
       "script": "ThyrsaTheater_EventScript_KleonApproach"
     },
     {
@@ -468,8 +468,8 @@
       "x": 20,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_ICHOR_DIONYSIA",
-      "var_value": "7",
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
       "script": "ThyrsaTheater_EventScript_KleonApproach"
     }
   ],

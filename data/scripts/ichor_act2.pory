@@ -1,0 +1,31 @@
+// Act II's shared scene scripts (design/phase3/BUILD.md: the scenes agent's file).
+// Scripts here are called from more than one map, or will be when later batches
+// land: receiving the act's relics and pages, so the obtain text and the flags
+// they set live in one place.
+
+// ICHOR_STUB_RELICS: the relics are engine batch 2. Until ITEM_GIRDLE_OF_HERAKLES
+// exists, receiving the Girdle sets its flag (FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES,
+// aliased in flags.h) and plays the key item's fanfare. When the item lands,
+// replace the setflag with giveitem(ITEM_GIRDLE_OF_HERAKLES): the engine sets the
+// flag whenever the item enters the bag (ENGINE_API.md, "Giving a relic").
+script EventScript_IchorAct2_ReceiveGirdle {
+    setflag(FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES)
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
+    message(format("{PLAYER} received the Girdle of Herakles!"))
+    waitmessage
+    waitfanfare
+    closemessage
+}
+
+// Daedalus's pages (LABYRINTH.md): page III, the theater's crane, from Silenos.
+// The pages are FLAG_ICHOR_PAGES_START + n, page I at + 0.
+script EventScript_IchorAct2_ReceiveDaedalusPage3 {
+    setflag(FLAG_ICHOR_PAGES_START + 2)
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
+    message(format("{PLAYER} received Daedalus's page III!"))
+    waitmessage
+    waitfanfare
+    closemessage
+}

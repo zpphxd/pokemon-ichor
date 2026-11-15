@@ -93,7 +93,7 @@ class Catalog:
 # Where the people stand. (Columns 0-39, rows 0-33.)
 SEAT_PLAYER = (18, 18)      # the front row, center: the player's seat
 SEAT_ALETHEA = (17, 18)     # ... and Alethea beside them
-SEAT_KLEON = (15, 17)       # Kleon, the front row to the left
+SEAT_KLEON = (16, 17)       # Kleon, the front row to the left (the diagonal's first seat)
 RESERVED = {SEAT_PLAYER, SEAT_ALETHEA, SEAT_KLEON}
 
 DOOR_IVY, DOOR_CROWN, DOOR_GOAT = (14, 5), (19, 5), (25, 5)   # each door's lower cell
@@ -101,6 +101,8 @@ BACK_DOOR = (30, 7)         # the skene's back door, in the east wing (warp 1)
 GATE = ((19, 33), (20, 33))  # the top gate (warp 0, and 2)
 THYMELE = (19, 12)
 LOOM = (12, 6)              # the Fates' loom (props swapped in for the play)
+KING = (21, 7)              # where the gold-masked king kneels
+KLEON_EDGE = (22, 7)        # Kleon on the stage's edge, beat 33
 VINE = (27, 6)              # the prop vine Silenos cuts
 TORCHES = [(15, 9), (24, 9), (15, 15), (24, 15)]   # head cells; the foot is below
 
@@ -314,25 +316,32 @@ def theater_events(g):
                 "LOCALID_THEATER_WORKER"),
             obj(P + "YOUTH_M", 8, 21, TH + "WorkerTiers", "MOVEMENT_TYPE_FACE_UP", "FLAG_BADGE04_GET"),
             obj(P + "YOUTH_F", 30, 26, TH + "WorkerTiers", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_BADGE04_GET"),
-            # the Dionysia's cast (beat 32): on stage and in the orchestra
-            obj(P + "HERALD", 20, 15, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_HERALD"),
+            # the Dionysia's cast (beat 32): on stage and in the orchestra. The ones who
+            # make an entrance during the play hide behind temp flags the map's
+            # ON_TRANSITION sets; objects that change their look use OBJ_EVENT_GFX_VAR_n.
+            obj(P + "HERALD", 20, 15, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_TEMP_16",
+                "LOCALID_THEATER_HERALD"),
             obj(P + "CHORUS_LEADER", 18, 13, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN",
                 "FLAG_ICHOR_HIDE_CHORUS_LEADER", "LOCALID_THEATER_CHORUS"),
-            obj(P + "FATE_SPINNER", 13, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_FATE_1"),
-            obj(P + "FATE_MEASURER", 15, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_FATE_2"),
-            obj(P + "FATE_CUTTER", 16, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_FATE_3"),
-            obj(P + "BEE_WOMAN", 14, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_BEE"),
-            obj("OBJ_EVENT_GFX_ITEM_BALL", 15, 6, TH + "Jar", "MOVEMENT_TYPE_NONE", CAST, "LOCALID_THEATER_JAR"),
-            obj(P + "GOLD_MASK_KING", 20, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_KING"),
-            obj(P + "UNWOVEN_ACTOR", 20, 10, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_ACTOR"),
+            obj(P + "FATE_SPINNER", 11, 6, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_FATE_1"),
+            obj(P + "FATE_MEASURER", 11, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_FATE_2"),
+            obj(P + "FATE_CUTTER", 13, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", CAST, "LOCALID_THEATER_FATE_3"),
+            obj(P + "BEE_WOMAN", 14, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_TEMP_17", "LOCALID_THEATER_BEE"),
+            obj("OBJ_EVENT_GFX_ITEM_BALL", 15, 7, TH + "Jar", "MOVEMENT_TYPE_NONE", "FLAG_TEMP_18",
+                "LOCALID_THEATER_JAR"),
+            obj("OBJ_EVENT_GFX_VAR_1", KING[0], KING[1], TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_TEMP_19",
+                "LOCALID_THEATER_KING"),
+            obj(P + "UNWOVEN_ACTOR", 20, 10, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_TEMP_1A",
+                "LOCALID_THEATER_ACTOR"),
             # in the seats
-            obj(P + "ALETHEA", SEAT_ALETHEA[0], SEAT_ALETHEA[1], TH + "AletheaSeat", "MOVEMENT_TYPE_FACE_UP",
+            obj("OBJ_EVENT_GFX_VAR_0", SEAT_ALETHEA[0], SEAT_ALETHEA[1], TH + "AletheaSeat", "MOVEMENT_TYPE_FACE_UP",
                 CAST, "LOCALID_THEATER_ALETHEA"),
-            obj(P + "KLEON_SEATED", SEAT_KLEON[0], SEAT_KLEON[1], TH + "KleonSeat", "MOVEMENT_TYPE_FACE_UP",
+            obj("OBJ_EVENT_GFX_VAR_2", SEAT_KLEON[0], SEAT_KLEON[1], TH + "KleonSeat", "MOVEMENT_TYPE_FACE_UP",
                 CAST, "LOCALID_THEATER_KLEON_SEAT"),
             # the masks that float off the cast's faces (shown only as the trance breaks)
             obj(P + "MASK", 14, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_TEMP_11", "LOCALID_THEATER_MASK_1"),
-            obj(P + "MASK", 20, 7, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_TEMP_12", "LOCALID_THEATER_MASK_2"),
+            obj(P + "MASK", KING[0], KING[1], TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_TEMP_12",
+                "LOCALID_THEATER_MASK_2"),
             obj(P + "MASK", 20, 10, TH + "Cast", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_TEMP_13", "LOCALID_THEATER_MASK_3"),
             # Thespis at the palace door, and Silenos in the east parodos
             obj(P + "THESPIS", DOOR_CROWN[0], DOOR_CROWN[1] + 1, TH + "Thespis", "MOVEMENT_TYPE_FACE_DOWN",
@@ -340,14 +349,14 @@ def theater_events(g):
             obj(P + "SILENOS", 31, 8, TH + "Cast", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_TEMP_15",
                 "LOCALID_THEATER_SILENOS"),
             # beat 33: Kleon on the stage's edge, in the empty theater
-            obj(P + "KLEON_SEATED", 21, 7, TH + "KleonEmpty", "MOVEMENT_TYPE_FACE_DOWN",
+            obj("OBJ_EVENT_GFX_VAR_3", KLEON_EDGE[0], KLEON_EDGE[1], TH + "KleonEmpty", "MOVEMENT_TYPE_FACE_DOWN",
                 "FLAG_ICHOR_HIDE_KLEON_THEATER", "LOCALID_THEATER_KLEON"),
             # after: a cleaner on the tiers
             obj(P + "ELDER_F", 10, 24, TH + "Cleaner", "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
                 "FLAG_ICHOR_HIDE_THEATER_CLEANER", "LOCALID_THEATER_CLEANER"),
         ],
         "coord_events": [trigger(x, y, TH + "KeeperStop", "VAR_ICHOR_DIONYSIA", "0") for (x, y) in stops]
-        + [trigger(x, 8, TH + "KleonApproach", "VAR_ICHOR_DIONYSIA", "7") for x in (19, 20)],
+        + [trigger(x, 8, TH + "KleonApproach", "VAR_TEMP_2", "1") for x in (19, 20)],
         "bg_events": [
             sign(THYMELE[0], THYMELE[1] + 1, TH + "Thymele", "BG_EVENT_PLAYER_FACING_NORTH"),
             sign(THYMELE[0] + 1, THYMELE[1] + 1, TH + "Thymele", "BG_EVENT_PLAYER_FACING_NORTH"),
@@ -471,9 +480,9 @@ def skene_events():
             # beat 32, backstage: Thespis at the rack, Silenos and Alethea with the player
             obj(P + "THESPIS", SK_RACK[0], 3, SK + "Thespis", "MOVEMENT_TYPE_FACE_UP",
                 "FLAG_ICHOR_HIDE_THESPIS_SKENE", "LOCALID_SKENE_THESPIS"),
-            obj(P + "SILENOS", 12, 4, SK + "SilenosWings", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_TEMP_11",
+            obj(P + "SILENOS", 13, 4, SK + "SilenosWings", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_TEMP_11",
                 "LOCALID_SKENE_SILENOS_WINGS"),
-            obj(P + "ALETHEA", 11, 4, SK + "AletheaWings", "MOVEMENT_TYPE_FACE_UP", "FLAG_TEMP_12",
+            obj(P + "ALETHEA", 11, 5, SK + "AletheaWings", "MOVEMENT_TYPE_FACE_UP", "FLAG_TEMP_12",
                 "LOCALID_SKENE_ALETHEA"),
             # beat 34: Silenos on his chest in the prop room
             obj(P + "SILENOS", SK_SILENOS[0], SK_SILENOS[1], SK + "Silenos", "MOVEMENT_TYPE_FACE_DOWN",
