@@ -1076,6 +1076,11 @@ gSpecials::
 	def_special Ichor_SepiaMemoryBegin
 	def_special Ichor_SepiaMemoryEnd
 	def_special Ichor_ColorReturnStep
+	def_special Ichor_FrozenScriptsHere
+	@ Ichor: carried flames (src/ichor_relics.c)
+	def_special Ichor_TakeFlame
+	def_special Ichor_PutOutFlame
+	def_special Ichor_FrozenGenericLine
 	@ Ichor: the Labyrinth (src/ichor_labyrinth.c)
 	def_special Ichor_AddThreadFloor
 	def_special Ichor_AddThreadAnchor
@@ -1092,3 +1097,10 @@ gSpecials::
 	def_special Ichor_TurnDial
 	@ Ichor: world-act3 (src/ichor_kythera.c)
 	def_special Ichor_TakeFirstFruits
+	@ Ichor: scripts' small needs (src/ichor_save.c, ichor_time.c, ichor_omen.c)
+	def_special Ichor_CountFlagRange
+	def_special Ichor_HoldTimeOfDay
+	def_special Ichor_ReleaseTimeOfDay
+	def_special Ichor_ForceOmen
+	def_special Ichor_CheckOmen
+	def_special Ichor_GetOmen

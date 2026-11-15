@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_frozen.h"
 #include "ichor_rites.h"
 #include "ichor_relics.h"
 #include "battle_setup.h"
@@ -419,6 +420,7 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
         script = GetObjectEventScriptPointerByObjectEventId(objectEventId);
 
     script = GetRamScript(gSpecialVar_LastTalked, script);
+    script = Ichor_FrozenTalkScript(objectEventId, script); // Ichor: frozen people answer with a generic line
     return script;
 }
 

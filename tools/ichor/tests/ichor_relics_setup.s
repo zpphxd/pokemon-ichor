@@ -109,7 +109,7 @@ RelicTest_Spawn:
 RelicTest_Flash:
 	lockall
 	setvar VAR_TEMP_F, 1
-	callnative SetDefaultFlashLevel
+	callnative RelicTest_DefaultFlashLevel
 	releaseall
 	end
 
@@ -131,4 +131,55 @@ RelicTest_Warp:
 	warpsilent MAP_KALLISTE_ROUTE1, VAR_0x8008, VAR_0x8009
 	waitstate
 	releaseall
+	end
+
+@ --- SetDefaultFlashLevel, rebuilt here: LTO inlines the game's own copy away ----
+@ The light on a map load: none on a lit map, else the Torch's radius.
+	.thumb
+	.align 2
+	.thumb_func
+	.global RelicTest_DefaultFlashLevel
+RelicTest_DefaultFlashLevel:
+	push {lr}
+	ldr r0, =gMapHeader
+	ldrb r0, [r0, #0x1A]          @ the cave bit is bit 5 of this byte
+	lsl r0, r0, #26
+	bpl RelicTest_DefaultFlashLevel_Lit
+	ldr r3, =Ichor_GetTorchFlashLevel
+	bl RelicTest_CallR3
+	b RelicTest_DefaultFlashLevel_Set
+RelicTest_DefaultFlashLevel_Lit:
+	mov r0, #0
+RelicTest_DefaultFlashLevel_Set:
+	ldr r3, =SetFlashLevel
+	bl RelicTest_CallR3
+	pop {r0}
+	bx r0
+RelicTest_CallR3:
+	bx r3
+	.pool
+
+
+@ --- Carried flames: take one (VAR_0x8004 kind, VAR_0x8005 steps), a draught, a douse
+	.arm
+	.align 2
+	test_header RelicTest_TakeFlameHeader, RelicTest_TakeFlame
+RelicTest_TakeFlame:
+	setvar VAR_TEMP_F, 1
+	special Ichor_TakeFlame
+	end
+
+	test_header RelicTest_DraughtHeader, RelicTest_Draught
+RelicTest_Draught:
+	setvar VAR_TEMP_F, 1
+	call EventScript_IchorDraught
+	end
+
+	test_header RelicTest_DouseHeader, RelicTest_Douse
+RelicTest_Douse:
+	setvar VAR_TEMP_F, 1
+	setvar VAR_0x8004, 1
+	special Ichor_SetTorchDoused
+	setvar VAR_0x8004, 0
+	special Ichor_SetTorchDoused
 	end
