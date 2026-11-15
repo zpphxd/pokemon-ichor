@@ -450,6 +450,12 @@ enum
     // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
+    // The Theoxenia's gods drawn from life, disguised and revealed
+    // (tools/ichor/art/sprites_npc_theoxenia.py)
+    OBJ_EVENT_GFX_ICHOR_SAM,
+    OBJ_EVENT_GFX_ICHOR_APOLLO,
+    OBJ_EVENT_GFX_ICHOR_CAMI,
+    OBJ_EVENT_GFX_ICHOR_DEMETER,
     // Act II batch 1 (tools/ichor/art/sprites_act2.py, design/phase3/SPRITES.md)
     OBJ_EVENT_GFX_ICHOR_MAENAD,
     OBJ_EVENT_GFX_ICHOR_MAENAD_THYRSA,
@@ -650,7 +656,8 @@ enum
 // Claim the next free one at the end of this block.
 #define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // the cast, plus the Shepherd, Hoplite, Augur and Acolyte walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
-#define OBJ_EVENT_PAL_TAG_ICHOR_WINE              0x1136 // Thyrsa: the folk palette with grape purples and wine red (Act II)
+#define OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA         0x1136 // Sam, Apollo, Cami and Demeter: true gold, white, green
+#define OBJ_EVENT_PAL_TAG_ICHOR_WINE              0x1137 // Thyrsa: the folk palette with grape purples and wine red (Act II)
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS

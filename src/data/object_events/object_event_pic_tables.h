@@ -2627,6 +2627,58 @@ static const struct SpriteFrameImage sPicTable_IchorUpturnedBoatR[] = {
     obj_frame_tiles(gObjectEventPic_IchorUpturnedBoatR),
 };
 
+// Ichor: twelve frames, the standard nine plus 9-11, the lyre strum that
+// sAnimTable_IchorLyre plays (see object_event_anims.h).
+static const struct SpriteFrameImage sPicTable_IchorSam[] = {
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 0),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 1),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 2),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 3),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 4),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 5),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 6),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 7),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 8),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 9),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 10),
+    overworld_frame(gObjectEventPic_IchorSam, 2, 4, 11),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorApollo[] = {
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 0),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 1),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 2),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 3),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 4),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 5),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 6),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 7),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 8),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 9),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 10),
+    overworld_frame(gObjectEventPic_IchorApollo, 2, 4, 11),
+};
+
+// Ichor: eleven frames, the standard nine plus 9, sitting on the well's bench
+// facing up, and 10, rising from it (sAnimTable_IchorCami).
+static const struct SpriteFrameImage sPicTable_IchorCami[] = {
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 0),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 1),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 2),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 3),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 4),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 5),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 6),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 7),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 8),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 9),
+    overworld_frame(gObjectEventPic_IchorCami, 2, 4, 10),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorDemeter[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorDemeter, 2, 4),
+};
+
 static const struct SpriteFrameImage sPicTable_IchorMaenad[] = {
     overworld_ascending_frames(gObjectEventPic_IchorMaenad, 2, 4),
 };

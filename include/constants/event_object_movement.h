@@ -355,6 +355,10 @@
 
 #define ANIM_NURSE_BOW (ANIM_STD_COUNT + 0)
 #define ANIM_RAISE_HAND (ANIM_STD_COUNT + 0)
+// Ichor: the Theoxenia's extra animations share ANIM_NURSE_BOW's slot, so
+// nurse_joy_bow plays them (sAnimTable_IchorLyre, sAnimTable_IchorCami).
+#define ANIM_ICHOR_STRUM (ANIM_STD_COUNT + 0)   // Sam's and Apollo's lyre
+#define ANIM_ICHOR_RISE  (ANIM_STD_COUNT + 0)   // Cami rises from the bench
 
 #define ANIM_FIELD_MOVE 0
 

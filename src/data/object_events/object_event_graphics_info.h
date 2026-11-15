@@ -7774,6 +7774,85 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatR
     .anims = sAnimTable_Inanimate,
     .images = sPicTable_IchorUpturnedBoatR,
 };
+
+// The Theoxenia's gods drawn from life (design/SYSTEMS.md §10). A disguised
+// god casts no shadow; the engine handles that, not the graphics.
+// Sam, Apollo's disguise: nurse_joy_bow plays his lyre strum (sAnimTable_IchorLyre).
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSam = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_IchorLyre,
+    .images = sPicTable_IchorSam,
+};
+
+// Apollo revealed: the same strum on a gold lyre.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorApollo = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_IchorLyre,
+    .images = sPicTable_IchorApollo,
+};
+
+// Cami, Demeter's disguise: facing up she sits on the well's bench, and
+// nurse_joy_bow stands her up facing down (sAnimTable_IchorCami).
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCami = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_IchorCami,
+    .images = sPicTable_IchorCami,
+};
+
+// Demeter revealed: a standard walker.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDemeter = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_IchorDemeter,
+};
 // Act II batch 1 (design/phase3/SPRITES.md)
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMaenad = {
     .tileTag = TAG_NONE,

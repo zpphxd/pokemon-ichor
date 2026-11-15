@@ -432,6 +432,10 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyt
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatL;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatR;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSam;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorApollo;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCami;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDemeter;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMaenad;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMaenadThyrsa;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSatyr;
@@ -890,6 +894,10 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatL,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatR,
+    [OBJ_EVENT_GFX_ICHOR_SAM] =                &gObjectEventGraphicsInfo_IchorSam,
+    [OBJ_EVENT_GFX_ICHOR_APOLLO] =             &gObjectEventGraphicsInfo_IchorApollo,
+    [OBJ_EVENT_GFX_ICHOR_CAMI] =               &gObjectEventGraphicsInfo_IchorCami,
+    [OBJ_EVENT_GFX_ICHOR_DEMETER] =            &gObjectEventGraphicsInfo_IchorDemeter,
     [OBJ_EVENT_GFX_ICHOR_MAENAD] =                   &gObjectEventGraphicsInfo_IchorMaenad,
     [OBJ_EVENT_GFX_ICHOR_MAENAD_THYRSA] =            &gObjectEventGraphicsInfo_IchorMaenadThyrsa,
     [OBJ_EVENT_GFX_ICHOR_SATYR] =                    &gObjectEventGraphicsInfo_IchorSatyr,
