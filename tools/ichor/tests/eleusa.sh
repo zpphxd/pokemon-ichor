@@ -22,7 +22,7 @@ engine_prepare ELEUSA "$OUT" tools/ichor/tests/eleusa_consts.c ""
 # few addresses the walk reads besides.
 {
   echo "return {"
-  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gPartiesCount|sSpritePaletteTags)$/ && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gPartiesCount|sSpritePaletteTags|sDig|gBagPosition|Task_BagMenu_HandleInput|ScrCmd_createmon)$/ && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
   echo "  SCRIPTS = {"
   arm-none-eabi-nm "$ELF" | awk '$3 ~ /^EleusaVillage[A-Za-z0-9_]*_EventScript_[A-Za-z0-9_]+$/ && $3 !~ /_[0-9]+$/ { print "    " $3 " = 0x" $1 "," }'
   echo "  },"

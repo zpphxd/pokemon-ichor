@@ -302,7 +302,8 @@ def kick_cells(g, season):
 GFX = "OBJ_EVENT_GFX_ICHOR_"
 CROWD = "FLAG_ICHOR_HIDE_MYSTERIES_CROWD"        # beat 22's congregation, there only for the scene
 GRUNTS = "FLAG_ICHOR_HIDE_TELESTERION_GRUNTS"    # the two who climb out of the Anaktoron
-SCENE_FLAGS = {CROWD, GRUNTS, "FLAG_ICHOR_HIDE_KLEON_TELESTERION"}
+SCENE_FLAGS = {CROWD, GRUNTS, "FLAG_ICHOR_HIDE_KLEON_TELESTERION",
+               "FLAG_ICHOR_HIDE_DAPHNE_ELEUSA", "FLAG_ICHOR_HIDE_ALETHEA_REVELATION"}
 OBJECTS = [
     # local id, gfx, x, y, facing, script, hide flag[, trainer sight]
     ("DOSO", GFX + "ELDER_F", 11, 25, "RIGHT", "Doso", "0"),
@@ -327,6 +328,8 @@ OBJECTS = [
     ("INITIATE_2", GFX + "YOUTH_F", 12, 18, "UP", "Hush", CROWD),
     ("INITIATE_3", GFX + "YOUTH_M", 14, 18, "UP", "Hush", CROWD),
     ("INITIATE_4", GFX + "PILGRIM", 15, 18, "UP", "Hush", CROWD),
+    ("DAPHNE", GFX + "PROFESSOR_DAPHNE", 12, 23, "DOWN", "Daphne", "FLAG_ICHOR_HIDE_DAPHNE_ELEUSA"),
+    ("ALETHEA_REVELATION", GFX + "ALETHEA", 14, 24, "LEFT", "Daphne", "FLAG_ICHOR_HIDE_ALETHEA_REVELATION"),
 ]
 MYSTERIES_SPOT = (13, 17)                 # where Kerykos's YES lands the player (eleusa scripts)
 KLEON_DOOR = (14, 14)                     # Kleon's post at the Anaktoron's door after beat 22
@@ -432,7 +435,7 @@ def script_block(g):
     o.append("    if (flag(FLAG_BADGE03_GET)) {")
     o.append(f"        call({PX}BoardPits)")
     o.append("    }")
-    o.append("    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {")
+    o.append("    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT) && !flag(FLAG_ICHOR_ACT1_COMPLETE)) {")
     o.append(f"        call({PX}DrawRaid)")
     o.append("    }")
     o.append("    if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {")

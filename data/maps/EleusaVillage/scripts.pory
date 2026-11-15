@@ -9,21 +9,27 @@
 //   beat 22  the procession arrives as the player walks out of the Telesterion with the
 //            Harvest Laurel; Kerykos's YES closes the doors and the night of the
 //            Mysteries plays in the Telesterion (its scripts.pory)
-// The morning after (beats 24-25) comes with the next batch.
+// Beats 24-25 close the act after the Sickle, then on the next hall entry.
 //
 // Temp vars: VAR_TEMP_8 is 1 once the saffron thread is tied (Krokis's gate triggers
 // read it); VAR_TEMP_9 is 1 while the procession's arrival waits to play (ON_FRAME).
 //
-// Stubs, until the engine session's batches land (design/phase2/BUILD.md):
-//   ICHOR_STUB_RITES   Demeter's field shrine shows its text, nothing about prayer
-//   ICHOR_STUB_DIG     the fields' two daily dig spots show the turned earth only
-//   ICHOR_STUB_SPRITE  the initiates walk as pilgrims and youths, Eudemos as an elder
+// Remaining presentation stub (design/phase2/BUILD.md): ICHOR_STUB_SPRITE,
+// the initiates walk as pilgrims and youths, Eudemos as an elder.
 
 mapscripts EleusaVillage_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         // beat 20: the first step in, and Eleusa is a place the Wings can find
         setflag(FLAG_ICHOR_ARRIVED_ELEUSA)
         setflag(FLAG_ICHOR_VISITED_ELEUSA)
+        setweather(WEATHER_NONE)
+        setvar(VAR_0x8004, OMEN_WEATHER)
+        setvar(VAR_0x8005, OMEN_WEATHER_ELEUSA_SUN)
+        specialvar(VAR_RESULT, Ichor_CheckOmen)
+        if (var(VAR_RESULT) == TRUE) {
+            setweather(WEATHER_DROUGHT)
+        }
+        call(EleusaVillage_EventScript_PlaceOmenVisitor)
         if (flag(FLAG_ICHOR_SAFFRON_THREAD)) {
             setvar(VAR_TEMP_8, 1)
         }
@@ -36,26 +42,60 @@ mapscripts EleusaVillage_MapScripts {
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_9, 1: EleusaVillage_EventScript_ProcessionArrives
+        VAR_TEMP_A, 1: EleusaVillage_EventScript_KleonDeparture
     ]
+}
+
+script EleusaVillage_EventScript_PlaceOmenVisitor {
+    setvar(VAR_0x8004, OMEN_VISITOR)
+    setvar(VAR_0x8005, OMEN_VISITOR_ELEUSA_KORANTHA)
+    specialvar(VAR_RESULT, Ichor_CheckOmen)
+    if (var(VAR_RESULT) == FALSE) {
+        setflag(FLAG_ICHOR_HIDE_OMEN_KORANTHA)
+        removeobject(LOCALID_ELEUSA_OMEN_KORANTHA)
+    }
+    return
 }
 
 // Who is in the village: Kleon waits in the square until the Mysteries begin; the
 // procession is here from the Harvest Laurel until then. Its arrival plays once, on
 // the first step out with the Laurel.
 script EleusaVillage_EventScript_PlaceCast {
+    if (flag(FLAG_ICHOR_GOT_DEMETERS_SICKLE)) {
+        setflag(FLAG_ICHOR_HIDE_PROCESSION_ELEUSA)
+        setflag(FLAG_ICHOR_HIDE_KLEON_ELEUSA)
+        setflag(FLAG_ICHOR_HIDE_ALETHEA_ELEUSA)
+        if (!flag(FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA)) {
+            clearflag(FLAG_ICHOR_HIDE_KLEON_ELEUSA)
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_ELEUSA)
+            setobjectxyperm(LOCALID_ELEUSA_KLEON, 26, 12)
+            setvar(VAR_TEMP_A, 1)
+        } elif (flag(FLAG_ICHOR_ACT1_COMPLETE) && !flag(FLAG_ICHOR_LEFT_ELEUSA_WITH_ALETHEA)) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_ELEUSA)
+            setobjectxyperm(LOCALID_ELEUSA_ALETHEA, 44, 11)
+        }
+        return
+    }
     if (flag(FLAG_ICHOR_MYSTERIES_BEGUN)) {
         setflag(FLAG_ICHOR_HIDE_KLEON_ELEUSA)
         setflag(FLAG_ICHOR_HIDE_PROCESSION_ELEUSA)
+        setflag(FLAG_ICHOR_HIDE_ALETHEA_ELEUSA)
+        if (flag(FLAG_ICHOR_ACT1_COMPLETE) && !flag(FLAG_ICHOR_LEFT_ELEUSA_WITH_ALETHEA)) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_ELEUSA)
+            setobjectxyperm(LOCALID_ELEUSA_ALETHEA, 44, 11)
+        }
         return
     }
     clearflag(FLAG_ICHOR_HIDE_KLEON_ELEUSA)
     if (flag(FLAG_BADGE03_GET)) {
         clearflag(FLAG_ICHOR_HIDE_PROCESSION_ELEUSA)
+        clearflag(FLAG_ICHOR_HIDE_ALETHEA_ELEUSA)
         if (!flag(FLAG_ICHOR_PROCESSION_ARRIVED)) {
             setvar(VAR_TEMP_9, 1)
         }
     } else {
         setflag(FLAG_ICHOR_HIDE_PROCESSION_ELEUSA)
+        setflag(FLAG_ICHOR_HIDE_ALETHEA_ELEUSA)
     }
     return
 }
@@ -72,6 +112,37 @@ text EleusaVillage_Text_NameAlethea { "ALETHEA" }
 text EleusaVillage_Text_NameKerykos { "KERYKOS" }
 text EleusaVillage_Text_NameEudemos { "EUDEMOS" }
 text EleusaVillage_Text_NameInitiate { "INITIATE" }
+text EleusaVillage_Text_NameHerald { "HERALD" }
+
+script EleusaVillage_EventScript_PassedNorthVines {
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+        setflag(FLAG_ICHOR_LEFT_ELEUSA_WITH_ALETHEA)
+        setflag(FLAG_ICHOR_HIDE_ALETHEA_ELEUSA)
+        removeobject(LOCALID_ELEUSA_ALETHEA)
+    }
+    releaseall
+    end
+}
+
+script EleusaVillage_EventScript_NorthHerald {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameHerald)
+    msgbox(format("Thyrsa's preparing the Dionysia. The road opens when the play's ready."))
+    release
+}
+
+script EleusaVillage_EventScript_NorthRoadBarrier {
+    lockall
+    setspeaker(EleusaVillage_Text_NameHerald)
+    msgbox(format("Thyrsa's preparing the Dionysia. The road opens when the play's ready."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, EleusaVillage_Movement_BackFromNorthBarrier)
+    waitmovement(0)
+    releaseall
+}
+
+movement EleusaVillage_Movement_BackFromNorthBarrier { walk_down }
 
 // ---------------------------------------------------------------------------
 // Beat 19: Krokis's gate
@@ -259,9 +330,67 @@ script EleusaVillage_EventScript_Alethea {
     lock
     faceplayer
     setspeaker(EleusaVillage_Text_NameAlethea)
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+        msgbox(format("Ready when you are. Truthfully, I've been ready since breakfast."))
+        release
+        end
+    }
     msgbox(format("I sent word to Daphne with one of Kerykos's runners. She's coming.\p"
                   "She hates boats. She'll arrive cross."))
     release
+}
+
+script EleusaVillage_EventScript_KleonDeparture {
+    setvar(VAR_TEMP_A, 2)
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) != 25 || var(VAR_0x8005) != 12) {
+        fadescreen(FADE_TO_BLACK)
+        warp(MAP_ELEUSA_VILLAGE, 25, 12)
+        waitstate
+        end
+    }
+    lockall
+    hidefollower
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_EAST)
+    setspeaker(EleusaVillage_Text_NameKleon)
+    msgbox(format("You're back. They got it anyway, didn't they. I can tell from your face.\p"
+                  "An old man held my hand the whole time I was on the door. An initiate.\p"
+                  "Shaking. He said the Mysteries promise you come back. Like the grain.\p"
+                  "I said, “Back from where?” He just patted my hand.\p"
+                  "I didn't ask what he meant. I didn't want to know. That's a first."))
+    setspeaker(EleusaVillage_Text_NameAlethea)
+    msgbox(format("Kleon…"))
+    setspeaker(EleusaVillage_Text_NameKleon)
+    msgbox(format("I'm going to Thyrsa. The Dionysia.\p"
+                  "All of Aethos will be in that theater.\p"
+                  "Somebody should give them something worth watching.\p"
+                  "And you were good tonight. Side by side. Don't tell anyone.\p"
+                  "Vines on the road? Lakonians don't need roads."))
+    closemessage
+    applymovement(LOCALID_ELEUSA_KLEON, EleusaVillage_Movement_KleonLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_ELEUSA_KLEON)
+    setflag(FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA)
+    setflag(FLAG_ICHOR_HIDE_KLEON_ELEUSA)
+    setflag(FLAG_ICHOR_HIDE_KLEON_TELESTERION)
+    setspeaker(EleusaVillage_Text_NameAlethea)
+    msgbox(format("He's going to break his neck.\p"
+                  "Truthfully, he'll probably be fine. That's the annoying part."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    setspeaker(SP_NAME_NONE)
+    msgbox("Morning.")
+    fadescreen(FADE_FROM_BLACK)
+    updatefollowingmon
+    releaseall
+}
+
+movement EleusaVillage_Movement_KleonLeaves {
+    walk_fast_down * 11
+    walk_fast_right * 19
+    walk_fast_up * 13
+    jump_2_up
+    walk_fast_up * 6
 }
 
 script EleusaVillage_EventScript_Eudemos {
@@ -433,17 +562,59 @@ script EleusaVillage_EventScript_Beehives {
     msgbox(format("Straw beehives. The bees are busy in the poppies."), MSGBOX_SIGN)
 }
 
-// ICHOR_STUB_RITES: Demeter's field shrine. When the rites land (ENGINE_API.md §3)
-// this becomes EventScript_IchorAltar_Demeter.
 script EleusaVillage_EventScript_FieldShrine {
+    lockall
+    setspeaker(SP_NAME_NONE)
     msgbox(format("A little stone altar, heaped with a sheaf, barley cakes and poppies.\p"
-                  "A shrine of Demeter, for the first fruits."), MSGBOX_SIGN)
+                  "A shrine of Demeter, for the first fruits."))
+    goto(EventScript_IchorAltar_Demeter)
 }
 
-// ICHOR_STUB_DIG: the fields' daily dig spots (SYSTEMS.md §5; Persephone's sherds).
-// When the Trowel's dig lands, these take the daily-dig script.
+script EleusaVillage_EventScript_DigSpotWest {
+    setvar(VAR_0x8004, 2)
+    goto(EleusaVillage_EventScript_DigSpot)
+}
+
+script EleusaVillage_EventScript_DigSpotEast {
+    setvar(VAR_0x8004, 3)
+    goto(EleusaVillage_EventScript_DigSpot)
+}
+
 script EleusaVillage_EventScript_DigSpot {
-    msgbox(format("Turned earth, with a glint of pottery in it."), MSGBOX_SIGN)
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_PERSEPHONE))
+    goto(EventScript_IchorDigSpot)
+}
+
+script EleusaVillage_EventScript_OmenKorantha {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x8004, OMEN_VISITOR)
+    setvar(VAR_0x8005, OMEN_VISITOR_ELEUSA_KORANTHA)
+    specialvar(VAR_RESULT, Ichor_CheckOmen)
+    if (var(VAR_RESULT) == FALSE || flag(FLAG_ICHOR_HIDE_OMEN_KORANTHA)) {
+        setflag(FLAG_ICHOR_HIDE_OMEN_KORANTHA)
+        removeobject(LOCALID_ELEUSA_OMEN_KORANTHA)
+        msgbox(format("Only the wheat is here now."))
+        release
+        end
+    }
+    msgbox(format("A flower-crowned Pokémon stands among the wheat."))
+    closemessage
+    setwildbattle(SPECIES_KORANTHA, 22)
+    playmoncry(SPECIES_KORANTHA, CRY_MODE_ENCOUNTER)
+    waitmoncry
+    delay(20)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    dowildbattle
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_CAUGHT || var(VAR_RESULT) == B_OUTCOME_WON) {
+        setflag(FLAG_ICHOR_HIDE_OMEN_KORANTHA)
+        removeobject(LOCALID_ELEUSA_OMEN_KORANTHA)
+    }
+    release
 }
 
 // --- Generated by tools/ichor/maps/eleusa.py from the layout. Do not edit. ---

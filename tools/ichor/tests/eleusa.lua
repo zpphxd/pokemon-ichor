@@ -33,24 +33,28 @@ local function warpTo(map, x, y)
   L.wait(30)
 end
 
--- A level-100 lead, written into party slot 0 (personality and OT id 0, so the
--- box data's substructs sit in order unencrypted), then raised by slice_lib's assist.
-local function giveLead()
-  local mon = L.partyMon(0)
-  for o = 0, S.POKEMON_SIZE - 1 do emu:write8(mon + o, 0) end
-  for k, b in ipairs({ 0xCE, 0xBF, 0xCD, 0xCE, 0xFF }) do emu:write8(mon + 7 + k, b) end -- "TEST"
-  emu:write8(mon + 18, 2)
-  emu:write8(mon + 19, 0x02)
-  emu:write8(mon + 20, 0xFF)
-  emu:write16(mon + S.OFF_BOXMON_SECURE, S.SPECIES_LEAD & 0x7FF)
-  local sum = 0
-  for o = 0, 47, 2 do sum = sum + emu:read16(mon + S.OFF_BOXMON_SECURE + o) end
-  emu:write16(mon + S.OFF_BOXMON_CHECKSUM, sum & 0xFFFF)
-  emu:write8(mon + S.OFF_MON_LEVEL, 5)
-  emu:write8(S.gPartiesCount, 1)
-  L.assistLevel100()
+-- Use the engine's own creation/move commands, as the Emporion walk does.
+local function giveLead(level)
+  level = level or 100
+  local creationLevel = level == S.MAX_LEVEL and 5 or level
+  for i = 0, S.PARTY_SIZE - 1 do
+    for o = 0, S.POKEMON_SIZE - 1 do emu:write8(L.partyMon(i) + o, 0) end
+  end
+  emu:write8(S.gPartiesCount, 0)
+  L.setVar(S.VAR_TEMP_0, 0)
+  L.runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
+                   S.SCR_OP_CALLNATIVE, { S.ScrCmd_createmon | 1, 4 }, 0, S.PARTY_SIZE,
+                   { S.SPECIES_LEAD, 2 }, { creationLevel, 2 }, { 0, 4 },
+                   S.SCR_OP_SETMONMOVE, 0, 0, { S.MOVE_FLAMETHROWER, 2 }, S.SCR_OP_END })
+  L.settle()
+  if level == S.MAX_LEVEL then
+    -- Obedience uses met level, so create at 5 and reuse the existing strength assist.
+    L.setVar(S.VAR_TEMP_0, 0)
+    L.assistLevel100()
+    L.settle()
+  end
   local hp, maxhp = L.partyHp(0)
-  expect(L.partyLevel(0) == S.MAX_LEVEL and hp > 0, string.format("a level-100 lead (HP %d/%d)", hp, maxhp))
+  expect(L.partyLevel(0) == level and hp > 0, string.format("a level-%d lead (HP %d/%d)", level, hp, maxhp))
   -- Hecate's Torch (the braziers are the engine's, and want it), and the story's
   -- trainers counted beaten: this walk checks the places; temple_demeter.sh plays the story.
   L.setFlag(S.FLAG_GOT_HECATES_TORCH, true)
@@ -74,6 +78,52 @@ end
 
 local function flash() return emu:read8(L.sb1() + S.OFF_SB1_FLASH) end
 
+local function bagCounts()
+  local counts = {}
+  local encryptionKey = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  for i = 0, S.BAG_SLOTS - 1 do
+    local slot = L.sb1() + S.OFF_SB1_BAG + i * S.ITEM_SLOT_SIZE
+    local item = emu:read16(slot)
+    counts[item] = (counts[item] or 0) + (emu:read16(slot + S.OFF_ITEM_SLOT_QUANTITY) ~ encryptionKey)
+  end
+  return counts
+end
+
+local function collectibleFlags()
+  local flags = {}
+  for i = 0, 3 do flags[S.FLAG_PERSEPHONE_SHERDS + i] = L.getFlag(S.FLAG_PERSEPHONE_SHERDS + i) end
+  for i = 0, 29 do flags[S.FLAG_OSTRAKA + i] = L.getFlag(S.FLAG_OSTRAKA + i) end
+  return flags
+end
+
+local function dig(name, flag)
+  local before, flagsBefore = bagCounts(), collectibleFlags()
+  talk(L.sign(V .. name), name, { every = true })
+  local find = emu:read16(S.sDig + S.OFF_DIG_FIND)
+  local quantity = emu:read8(S.sDig + S.OFF_DIG_QUANTITY)
+  expect(L.getFlag(flag), name .. " records its own daily excavation")
+  if find < S.ITEMS_COUNT then
+    expect(quantity >= 1 and L.itemCount(find) == (before[find] or 0) + quantity, name .. " grants its actual item and quantity")
+  else
+    local foundFlag = emu:read16(S.sDig + S.OFF_DIG_FIND_FLAG)
+    expect(flagsBefore[foundFlag] == false and L.getFlag(foundFlag),
+           name .. " grants a new Persephone sherd or ostrakon, not another area's sherd")
+  end
+  local after, flagsAfter = bagCounts(), collectibleFlags()
+  talk(L.sign(V .. name), name .. "_again")
+  local unchanged = true
+  local repeated = bagCounts()
+  for item, quantityAfter in pairs(after) do
+    if repeated[item] ~= quantityAfter then unchanged = false end
+  end
+  for item, quantityAfter in pairs(repeated) do
+    if after[item] ~= quantityAfter then unchanged = false end
+  end
+  for f, set in pairs(flagsAfter) do if L.getFlag(f) ~= set then unchanged = false end end
+  expect(unchanged, name .. " gives nothing extra on the same day")
+  return find
+end
+
 -- --- The village ---------------------------------------------------------------------------
 
 local function village()
@@ -82,7 +132,7 @@ local function village()
   -- a repel for the walk round the village: the wheat's wild Pokemon are
   -- wheat()'s to meet, and one jumping out on the way to a person can leave
   -- the talk that follows pressing A into nothing
-  L.setVar(S.VAR_REPEL_STEP_COUNT, 250)
+  L.setVar(S.VAR_REPEL_STEP_COUNT, 2000)
   expect(L.mapMusic() == S.MUS_ELEUSA, "Eleusa plays MUS_ICHOR_ELEUSA")
   L.shot("west_gate")
   -- everyone in the village
@@ -91,9 +141,36 @@ local function village()
   end
   -- every sign and thing to read
   for _, s in ipairs({ "VillageSign", "SanctuarySign", "TempleSign", "PloutonionSign", "NorthRoadSign",
-                       "RharianSign", "WellBench", "Beehives", "FieldShrine", "DigSpot" }) do
+                       "RharianSign", "WellBench", "Beehives", "DigSpotWest", "DigSpotEast" }) do
     talk(L.sign(V .. s), s, { shots = { [1] = "read_" .. s } })
   end
+  expect(not L.getFlag(S.FLAG_DIG_WEST) and not L.getFlag(S.FLAG_DIG_EAST),
+         "both fields stay undug without the actual Trowel")
+  local favorBefore = emu:read8(L.ichor() + S.OFF_ICHOR_FAVOR + S.GOD_DEMETER)
+  L.talk(L.sign(V .. "FieldShrine"), { answers = { 4 }, every = true })
+  expect(emu:read8(L.ichor() + S.OFF_ICHOR_FAVOR + S.GOD_DEMETER) == favorBefore,
+         "leaving Demeter's field-shrine menu grants no Favor")
+  L.talk(L.sign(V .. "FieldShrine"), { answers = { 0 }, every = true })
+  expect(emu:read8(L.ichor() + S.OFF_ICHOR_FAVOR + S.GOD_DEMETER) == favorBefore + 1
+         and emu:read8(L.ichor() + S.OFF_ICHOR_BLESSING) == S.GOD_DEMETER,
+         "the field shrine's actual prayer grants Demeter Favor and her blessing")
+  L.talk(L.sign(V .. "FieldShrine"), { answers = { 0 } })
+  expect(emu:read8(L.ichor() + S.OFF_ICHOR_FAVOR + S.GOD_DEMETER) == favorBefore + 1,
+         "a repeated field-shrine prayer does not farm daily Favor")
+  L.setVar(S.VAR_TEMP_0, 0)
+  L.runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
+                   S.SCR_OP_ADDITEM, { S.ITEM_TROWEL, 2 }, { 1, 2 }, S.SCR_OP_END })
+  L.settle()
+  expect(L.itemCount(S.ITEM_TROWEL) == 1, "the field-dig fixture receives one real Trowel")
+  dig("DigSpotWest", S.FLAG_DIG_WEST)
+  expect(not L.getFlag(S.FLAG_DIG_EAST), "digging the west field leaves the east field available")
+  local savedSeed = emu:read32(L.sb1() + S.OFF_SB1_DAILY_SEED)
+  -- Both first rolls are sherds, with or without Demeter's blessing.
+  emu:write32(L.sb1() + S.OFF_SB1_DAILY_SEED, 0x3C)
+  expect(dig("DigSpotEast", S.FLAG_DIG_EAST) == S.FIND_PERSEPHONE_SHERD
+         and L.getFlag(S.FLAG_PERSEPHONE_SHERDS),
+         "the east field's real sherd belongs to Persephone's amphora")
+  emu:write32(L.sb1() + S.OFF_SB1_DAILY_SEED, savedSeed)
   -- the items, visible and hidden
   for _, f in ipairs({ "FLAG_ITEM_SUPER_POTION", "FLAG_ITEM_AWAKENING" }) do
     L.talk(L.ball(S[f]))
@@ -234,6 +311,128 @@ local function temple()
   expect(L.mapId() == S.MAP_ELEUSA, "back up the stair to the village")
 end
 
+local function omenVisitor()
+  L.setBeat("visitor", false)
+  local kind = emu:read8(L.ichor() + S.OFF_ICHOR_OMEN_KIND)
+  local entry = emu:read16(L.ichor() + S.OFF_ICHOR_OMEN_ENTRY)
+  local noRunning = L.getFlag(S.FLAG_NO_RUNNING)
+  local function reloadVillage()
+    warpTo(S.MAP_TEMPLE_DEMETER, 13, 24)
+    warpTo(S.MAP_ELEUSA, 31, 34)
+  end
+  local function setOmen(k, e)
+    emu:write8(L.ichor() + S.OFF_ICHOR_OMEN_KIND, k)
+    emu:write16(L.ichor() + S.OFF_ICHOR_OMEN_ENTRY, e)
+  end
+  -- An older save has no new hide flag. That must not reveal an off-day visitor.
+  setOmen(S.OMEN_GOOD_SIGN, S.OMEN_LUCKY_THREE)
+  L.setFlag(S.FLAG_OMEN_KORANTHA, false)
+  reloadVillage()
+  expect(not L.npc(V .. "OmenKorantha").present, "no off-day visitor, even with an unset legacy hide flag")
+  setOmen(S.OMEN_VISITOR, S.OMEN_KORANTHA)
+  L.setFlag(S.FLAG_OMEN_KORANTHA, false)
+  reloadVillage()
+  expect(L.npc(V .. "OmenKorantha").present, "the matching omen reveals Korantha in the wheat")
+  L.shot("korantha_in_the_wheat")
+  local visitor = L.npc(V .. "OmenKorantha").tiles[1]
+  L.go(visitor.x - 1, visitor.y)
+  expect(emu:saveStateFile(L.OUT .. "before_visitor.ss", 31), "saved the uncaught visitor's entry state")
+  giveLead(5)
+  L.setFlag(S.FLAG_NO_RUNNING, true)
+  L.talk(L.npc(V .. "OmenKorantha"))
+  expect(L.battles[#L.battles].outcome == S.B_OUTCOME_LOST
+         and not L.getFlag(S.FLAG_OMEN_KORANTHA) and not L.getFlag(S.FLAG_CTRL_OBJ_DELETE),
+         "a loss does not consume the visitor or leave the field-delete control flag set")
+  expect(emu:loadStateFile(L.OUT .. "before_visitor.ss", 31), "restored the uncaught visitor's entry state")
+  L.wait(20)
+  L.setFlag(S.FLAG_NO_RUNNING, false)
+  L.talk(L.npc(V .. "OmenKorantha"), { stop = L.inBattle, every = true })
+  L.wait(120)
+  expect(emu:read16(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_SPECIES) == S.SPECIES_KORANTHA
+         and emu:read8(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_LEVEL) == 22,
+         "the visitor starts a real level-22 Korantha encounter")
+  local ran = L.battle()
+  L.settle()
+  expect(ran.outcome == S.B_OUTCOME_RAN and not L.getFlag(S.FLAG_OMEN_KORANTHA),
+         "running does not consume today's rare visitor")
+  reloadVillage()
+  expect(L.npc(V .. "OmenKorantha").present, "the uncaught visitor survives map reentry")
+  L.setFlag(S.FLAG_NO_RUNNING, true)
+  L.talk(L.npc(V .. "OmenKorantha"), { stop = L.inBattle })
+  L.wait(120)
+  expect(emu:read16(S.gBattleMons + S.OFF_BATTLE_MON_MOVES) == S.MOVE_FLAMETHROWER
+         and emu:read8(S.gBattleMons + S.OFF_BATTLE_MON_PP) > 0,
+         "the defeat fixture has a usable first-slot attack")
+  L.battle()
+  L.settle()
+  expect(L.battles[#L.battles].outcome == S.B_OUTCOME_WON and L.getFlag(S.FLAG_OMEN_KORANTHA)
+         and not L.npc(V .. "OmenKorantha").present,
+         "defeating the visitor removes it and saves today's hide state")
+  reloadVillage()
+  expect(not L.npc(V .. "OmenKorantha").present, "the defeated visitor cannot respawn on same-day reentry")
+  L.setFlag(S.FLAG_OMEN_KORANTHA, false)
+  reloadVillage()
+  expect(L.npc(V .. "OmenKorantha").present, "a later matching omen can send a new visitor")
+  local battlesBeforeExpiry = #L.battles
+  setOmen(S.OMEN_GOOD_SIGN, S.OMEN_LUCKY_THREE)
+  L.talk(L.npc(V .. "OmenKorantha"))
+  expect(#L.battles == battlesBeforeExpiry and not L.npc(V .. "OmenKorantha").present,
+         "a day change while standing in the wheat cannot start an expired visitor encounter")
+  setOmen(S.OMEN_VISITOR, S.OMEN_KORANTHA)
+  L.setFlag(S.FLAG_OMEN_KORANTHA, false)
+  reloadVillage()
+  local script = { S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 } }
+  local encryptionKey = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  for i = 0, S.BAG_POKEBALLS_COUNT - 1 do
+    local slot = L.sb1() + S.OFF_SB1_POKEBALLS + i * S.ITEM_SLOT_SIZE
+    local item = emu:read16(slot)
+    if item ~= 0 then
+      script[#script + 1] = S.SCR_OP_REMOVEITEM
+      script[#script + 1] = { item, 2 }
+      script[#script + 1] = { emu:read16(slot + S.OFF_ITEM_SLOT_QUANTITY) ~ encryptionKey, 2 }
+    end
+  end
+  script[#script + 1] = S.SCR_OP_ADDITEM
+  script[#script + 1] = { S.ITEM_MASTER_BALL, 2 }
+  script[#script + 1] = { 1, 2 }
+  script[#script + 1] = S.SCR_OP_END
+  L.setVar(S.VAR_TEMP_0, 0)
+  L.runRamScript(script)
+  L.settle()
+  expect(L.itemCount(S.ITEM_MASTER_BALL) == 1, "the capture fixture grants one real Master Ball")
+  L.talk(L.npc(V .. "OmenKorantha"), { stop = L.inBattle })
+  L.waitUntil(function()
+    if emu:read32(S.gBattlerControllerFuncs) == (S.HandleInputChooseAction | 1) then return true end
+    L.tap(K.A); L.wait(4)
+    return false
+  end, 1200, "the visitor's battle action menu")
+  L.tap(K.UP); L.tap(K.RIGHT); L.tap(K.A) -- BAG
+  L.waitUntil(function() return L.taskRunning("Task_BagMenu_HandleInput") end, 1200, "the battle Bag")
+  L.wait(30)
+  for i = 1, S.POCKETS_COUNT do
+    if emu:read8(S.gBagPosition + S.OFF_BAG_POSITION_POCKET) == S.POCKET_POKE_BALLS then break end
+    L.tap(K.RIGHT); L.wait(50)
+  end
+  expect(emu:read8(S.gBagPosition + S.OFF_BAG_POSITION_POCKET) == S.POCKET_POKE_BALLS,
+         "the battle Bag opens the Poke Ball pocket")
+  L.tap(K.UP); L.tap(K.UP); L.tap(K.A); L.wait(20); L.tap(K.A)
+  L.waitUntil(function()
+    if L.inOverworld() then return true end
+    if L.on("CB2_NamingScreen") then L.acceptName("caught_korantha") else L.tap(K.A); L.wait(4) end
+    return false
+  end, 12000, "the Master Ball capture and return to the wheat")
+  L.settle()
+  expect(emu:read8(S.gBattleOutcome) == S.B_OUTCOME_CAUGHT
+         and emu:read8(S.gPartiesCount) == 2 and L.itemCount(S.ITEM_MASTER_BALL) == 0
+         and L.getFlag(S.FLAG_OMEN_KORANTHA) and not L.npc(V .. "OmenKorantha").present,
+         "an actual capture consumes the ball, adds the visitor to the party and removes its object")
+  reloadVillage()
+  expect(not L.npc(V .. "OmenKorantha").present, "the captured visitor stays gone on same-day reentry")
+  setOmen(kind, entry)
+  L.setFlag(S.FLAG_NO_RUNNING, noRunning)
+  reloadVillage()
+end
+
 L.start(function()
   L.quickstart()
   giveLead()
@@ -241,5 +440,6 @@ L.start(function()
   doors()
   wheat()
   temple()
+  omenVisitor()
   L.log("ok the walk is done")
 end)

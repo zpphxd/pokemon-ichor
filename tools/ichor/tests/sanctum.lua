@@ -4,7 +4,9 @@
 -- breadth-first search over the live map, one step at a time). People, signs, items,
 -- triggers and warps are found by the script they run or the flag they set, so a moved
 -- person never breaks the walk; a missing one fails with its name. The setup (the blob's
--- SanctumTest_SetupHeader) is the only state written directly; after that every flag
+-- SanctumTest_SetupHeader) supplies progression; the full-Bag case temporarily fills
+-- the key-item pocket and restores it before retrying. The missing-relic case
+-- also clears and restores its ownership flag. Progression flags
 -- is set by the game. The grain pits and the theft's line are kept off except where a
 -- step means to tread on them.
 --
@@ -14,12 +16,34 @@
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, K, emu = L.S, L.K, L.emu
 for k, v in pairs(dofile(L.OUT .. "sanctum_symbols.lua")) do S[k] = v end
+S.SCRIPTS.EventScript_CutTree = S.EventScript_CutTree
 
 local B1 = "EleusaSanctum_B1F_EventScript_"
 local B2 = "EleusaSanctum_B2F_EventScript_"
 local B3 = "EleusaSanctum_B3F_EventScript_"
 
 local function expect(cond, what) L.expect(cond, what) end
+
+local function fillKeyItemPocket()
+  local pocket = L.sb1() + S.OFF_SB1_BAG + S.OFF_BAG_KEY_ITEMS
+  local saved = {}
+  local key = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  for i = 0, S.BAG_KEYITEMS_COUNT - 1 do
+    saved[i] = { emu:read16(pocket + i * S.ITEM_SLOT_SIZE),
+                 emu:read16(pocket + i * S.ITEM_SLOT_SIZE + 2) ~ key }
+    emu:write16(pocket + i * S.ITEM_SLOT_SIZE, S.ITEM_HECATES_TORCH)
+    emu:write16(pocket + i * S.ITEM_SLOT_SIZE + 2, 1 ~ key)
+  end
+  return function()
+    -- Map transitions can relocate the save blocks and change the encryption key.
+    local livePocket = L.sb1() + S.OFF_SB1_BAG + S.OFF_BAG_KEY_ITEMS
+    local liveKey = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+    for i = 0, S.BAG_KEYITEMS_COUNT - 1 do
+      emu:write16(livePocket + i * S.ITEM_SLOT_SIZE, saved[i][1])
+      emu:write16(livePocket + i * S.ITEM_SLOT_SIZE + 2, saved[i][2] ~ liveKey)
+    end
+  end
+end
 
 -- Battles at Eleusa's levels can cost the lead. slice_lib's L.battle presses A through
 -- everything but the action and move menus, which can't choose who comes out next; this
@@ -157,7 +181,15 @@ local function granaries()
   -- the second and third braziers, the dig behind the great jar, the sealed granary's seed
   talk(L.sign(B1 .. "Brazier1"), "bay C's brazier")
   expect(L.getFlag(S.FLAG_BRAZIER_1) and flash() == 0, "bay C's brazier lights the upper gallery")
-  talk(L.sign(B1 .. "DigSpot"), "the dig behind the great jar")
+  expect(L.itemCount(S.ITEM_TROWEL) == 1, "the sanctum fixture carries the real Trowel")
+  expect(not L.getFlag(S.FLAG_DIG_SHERD), "the fixed granary find starts unclaimed")
+  talk(L.sign(B1 .. "DigSpot"), "the dig behind the great jar", { every = true })
+  expect(L.getFlag(S.FLAG_DIG_SHERD) and L.getFlag(S.FLAG_PERSEPHONE_SHERDS),
+         "the granary's real find is a Persephone sherd")
+  talk(L.sign(B1 .. "DigSpot"), "the granary dig again")
+  local sherds = 0
+  for i = 0, 3 do if L.getFlag(S.FLAG_PERSEPHONE_SHERDS + i) then sherds = sherds + 1 end end
+  expect(sherds == 1, "the fixed granary dig cannot give a second sherd")
   talk(L.sign(B1 .. "Brazier2"), "the Ploutonion landing's brazier")
   expect(L.getFlag(S.FLAG_BRAZIER_2), "the Ploutonion landing's brazier lit")
   L.shot("b1f_landing_lit")
@@ -231,6 +263,7 @@ local function vault()
   L.shot("b3f_arrival")
   -- the sickle can be looked at before the scene
   talk(L.sign(B3 .. "Sickle"), "the bronze sickle in the dust")
+  local restorePocket = fillKeyItemPocket()
   L.keepOff[S.MAP_B3F] = nil
   local before = #L.battles
   expect(not L.goTrigger(line), "the line, five steps from the chest, starts the theft")
@@ -243,12 +276,22 @@ local function vault()
   expect(L.defeated(S.TRAINER_HYPERION), "TRAINER_ICHOR_HYPERION_1's flag set")
   expect(L.getFlag(S.FLAG_FRAGMENT_STOLEN), "the shard is gone up the tunnel (FLAG_ICHOR_FRAGMENT_STOLEN)")
   expect(L.getFlag(S.FLAG_HIDE_HYPERION), "Hyperion gone, the tunnel caved in")
+  expect(L.mapId() == S.MAP_B3F and not L.getFlag(S.FLAG_GOT_SICKLE),
+         "a full key-item pocket cannot skip the sickle reward or start departure")
+  local beforeFavor = favor(S.ICHOR_GOD_DEMETER)
+  restorePocket()
+  talk(L.sign(B3 .. "Sickle"), "the sickle can be collected after making room", { every = true })
+  expect(favor(S.ICHOR_GOD_DEMETER) == beforeFavor + 10,
+         "the successful retry grants Demeter's myth-quest Favor once")
   expect(L.getFlag(S.FLAG_GOT_SICKLE) and L.itemCount(S.ITEM_DEMETERS_SICKLE) == 1, "Demeter's Sickle received")
   expect(favor(S.ICHOR_GOD_DEMETER) >= 10, string.format("Demeter's Favor +10 (%d)", favor(S.ICHOR_GOD_DEMETER)))
   local x, y = L.pos()
   expect(L.mapId() == S.MAP_ELEUSA and x == 25 and y == 12,
          string.format("faded out to the Telesterion's steps, outside (%d,%d)", x, y))
   L.shot("telesterion_steps")
+  expect(L.getFlag(S.FLAG_KLEON_LEFT), "Kleon leaves for Thyrsa after the sickle")
+  expect(not L.getFlag(S.FLAG_ACT1_COMPLETE) and not L.getFlag(S.FLAG_BADGE04_GET),
+         "departure grants neither Act I completion nor a fourth Laurel")
 end
 
 -- --- Back down, and the climb back ----------------------------------------------------------
@@ -260,10 +303,24 @@ local function climb()
   L.wait(20)
   expect(tile(15, 10) == S.MT_BOULDER or tile(15, 10) == S.MT_ROCK_PILE, "the tunnel is caved in")
   expect(tile(14, 12) == S.MT_DIG_CRYPT, "the cave-in bared the old foundations: a dig")
+  expect(not L.getFlag(S.FLAG_DIG_PAGE_II) and not L.getFlag(S.FLAG_PAGE_II),
+         "Daedalus's exposed page starts unclaimed")
   -- the line no longer plays anything
   local line = L.triggers(B3 .. "Theft")
   expect(L.goTrigger(line), "the line is quiet after the theft")
   talk(L.sign(B3 .. "Tunnel"), "the caved-in tunnel", { shots = { [1] = "b3f_tunnel" } })
+  talk(L.sign(B3 .. "DigSpot"), "Daedalus's page in the exposed foundations", { every = true })
+  expect(L.getFlag(S.FLAG_DIG_PAGE_II) and L.getFlag(S.FLAG_PAGE_II),
+         "actual excavation grants Daedalus's second page")
+  local bagBefore = L.snapshot(L.sb1() + S.OFF_SB1_BAG, S.BAG_SIZE)
+  local pagesBefore = {}
+  for i = 0, 6 do pagesBefore[i] = L.getFlag(S.FLAG_PAGE_II - 1 + i) end
+  talk(L.sign(B3 .. "DigSpot"), "the foundations after collecting the page")
+  local unchanged = L.snapshot(L.sb1() + S.OFF_SB1_BAG, S.BAG_SIZE) == bagBefore
+  for i, owned in pairs(pagesBefore) do
+    if L.getFlag(S.FLAG_PAGE_II - 1 + i) ~= owned then unchanged = false end
+  end
+  expect(unchanged and L.getFlag(S.FLAG_DIG_PAGE_II), "the fixed page cannot be excavated twice")
   L.talk(L.ball(S.FLAG_ITEM_SOFT_SAND))
   expect(L.getFlag(S.FLAG_ITEM_SOFT_SAND) and L.itemCount(S.ITEM_SOFT_SAND) >= 1, "the Soft Sand at the tunnel's mouth")
   pickHidden(S.FLAG_HIDDEN_OBOL, { 3, 11 }, { 2, 11 }, K.UP, "the Bronze Obol in the oldest granary's dust")
@@ -289,9 +346,92 @@ local function climb()
   expect(L.mapId() == S.MAP_B1F, "up to the granaries")
   L.go(5, 4)
   expect(L.objectAt(L.npc(B1 .. "Chloe").localId) == nil, "Chloe has left the stair")
+end
+
+local function revelation()
+  local daphne = "EleusaVillage_TempleOfDemeter_EventScript_Daphne"
+  L.setBeat("revelation_full_bag", false)
+  expect(emu:saveStateFile(L.OUT .. "before_revelation.ss", 31), "saved the revelation entry")
+  local restorePocket = fillKeyItemPocket()
+  L.useWarp(S.MAP_TELESTERION, true)
+  L.settle({ every = true })
+  expect(not L.getFlag(S.FLAG_REVELATION) and not L.getFlag(S.FLAG_ACT1_COMPLETE)
+         and L.itemCount(S.ITEM_STAR_CHART) == 0,
+         "a full key-item pocket leaves the scene and reward available")
+  expect(L.npc(daphne).present, "Daphne stays to retry when the Bag is full")
+  restorePocket()
+  L.talk(L.npc(daphne), { every = true, menuChoice = 0, answers = { "no" } })
+  expect(L.mapId() == S.MAP_ELEUSA and L.getFlag(S.FLAG_ACT1_COMPLETE),
+         "making room and speaking to Daphne completes Act I")
+  expect(L.getFlag(S.FLAG_REVELATION) and L.getFlag(S.FLAG_GOT_STAR_CHART)
+         and L.itemCount(S.ITEM_STAR_CHART) == 1,
+         "WHY? and declining home grant one real Star Chart")
+  expect(not L.getFlag(S.FLAG_BADGE04_GET), "Act I completion does not grant Laurel 4")
+
+  expect(emu:loadStateFile(L.OUT .. "before_revelation.ss", 31), "restored the other dialogue branch")
+  L.setBeat("revelation_other_branch", false)
+  L.useWarp(S.MAP_TELESTERION, { every = true, menuChoice = 1, answers = { "yes" } })
+  L.settle({ every = true, menuChoice = 1, answers = { "yes" } })
+  expect(L.mapId() == S.MAP_ELEUSA and L.getFlag(S.FLAG_REVELATION)
+         and L.getFlag(S.FLAG_ACT1_COMPLETE) and L.itemCount(S.ITEM_STAR_CHART) == 1,
+         "HOW DO YOU KNOW? and offering to go home reach the same completion")
+
+  L.setBeat("north_road", false)
+  L.keepOff[S.MAP_ELEUSA] = L.triggers("EleusaVillage_EventScript_NorthRoadBarrier")
+  L.go(45, 10)
+  local ax, ay = L.objectAt(S.LOCALID_VILLAGE_ALETHEA)
+  expect(ax == 44 and ay == 11, "Alethea waits by the vines after the revelation")
+  L.talk(L.npc("EleusaVillage_EventScript_Alethea"), { every = true })
+  local restorePocket = fillKeyItemPocket()
+  L.setFlag(S.FLAG_GOT_SICKLE, false)
+  L.talk(L.npc("EventScript_CutTree", 2), { every = true })
+  expect(not L.getFlag(S.FLAG_NORTH_VINES_CUT) and L.npc("EventScript_CutTree", 2).present,
+         "without Sickle ownership the vines remain closed")
+  restorePocket()
+  L.setFlag(S.FLAG_GOT_SICKLE, true)
+  L.talk(L.npc("EventScript_CutTree", 2), { every = true, answers = { "no" } })
+  expect(not L.getFlag(S.FLAG_NORTH_VINES_CUT), "declining to cut leaves the north-road gate closed")
+  L.talk(L.npc("EventScript_CutTree", 2), { every = true, answers = { "yes" } })
+  expect(L.getFlag(S.FLAG_NORTH_VINES_CUT) and not L.npc("EventScript_CutTree", 2).present,
+         "the actual Sickle clears and saves the middle-west vine gate")
+  L.go(45, 8)
+  L.settle()
+  expect(L.getFlag(S.FLAG_LEFT_WITH_ALETHEA) and not L.objectAt(S.LOCALID_VILLAGE_ALETHEA),
+         "passing the cleared vines hides Alethea and saves her departure")
+  for _, x in ipairs({ 45, 46 }) do
+    L.go(x, 7)
+    L.step(K.UP)
+    L.settle({ every = true })
+    local px, py = L.pos()
+    expect(L.mapId() == S.MAP_ELEUSA and px == x and py == 7,
+           "the herald turns back the north-road column " .. x)
+  end
   L.useWarp(S.MAP_TELESTERION)
-  expect(L.mapId() == S.MAP_TELESTERION, "out by the Anaktoron's stair into the Telesterion")
-  L.shot("telesterion_out")
+  L.settle()
+  expect(not L.npc(daphne).present and not L.objectAt(S.LOCALID_REVELATION_ALETHEA),
+         "the revelation actors are gone on reentry")
+  expect(tile(2, 21) == S.MT_HALL_BRAZIER_LIT_00, "the autumn brazier is restored after Act I")
+  expect(L.itemCount(S.ITEM_STAR_CHART) == 1, "reentry does not duplicate the Star Chart")
+  L.runHeader("SanctumTest_SaveHeader")
+  emu:reset()
+  L.continueSave()
+  expect(L.getFlag(S.FLAG_KLEON_LEFT) and L.getFlag(S.FLAG_REVELATION)
+         and L.getFlag(S.FLAG_GOT_STAR_CHART) and L.getFlag(S.FLAG_ACT1_COMPLETE)
+         and not L.getFlag(S.FLAG_BADGE04_GET) and L.itemCount(S.ITEM_STAR_CHART) == 1,
+         "saving and CONTINUE preserve the real ending flags and Chart, without Laurel 4")
+  expect(L.getFlag(S.FLAG_DIG_SHERD) and L.getFlag(S.FLAG_PERSEPHONE_SHERDS)
+         and L.itemCount(S.ITEM_TROWEL) == 1,
+         "saving and CONTINUE preserve the fixed Persephone sherd and real Trowel")
+  expect(L.getFlag(S.FLAG_DIG_PAGE_II) and L.getFlag(S.FLAG_PAGE_II),
+         "saving and CONTINUE preserve Daedalus's excavated second page")
+  expect(not L.npc(daphne).present and not L.objectAt(S.LOCALID_REVELATION_ALETHEA),
+         "saving and CONTINUE do not replay the revelation")
+  L.useWarp(S.MAP_ELEUSA)
+  L.settle()
+  L.go(45, 10)
+  expect(L.getFlag(S.FLAG_LEFT_WITH_ALETHEA) and not L.objectAt(S.LOCALID_VILLAGE_ALETHEA)
+         and L.getFlag(S.FLAG_NORTH_VINES_CUT) and not L.npc("EventScript_CutTree", 2).present,
+         "saving and CONTINUE preserve the cleared vines and Alethea's departure")
 end
 
 L.start(function()
@@ -300,5 +440,6 @@ L.start(function()
   hall()
   vault()
   climb()
+  revelation()
   L.log("ok the sanctum is done")
 end)

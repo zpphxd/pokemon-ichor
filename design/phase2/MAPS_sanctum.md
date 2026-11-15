@@ -175,9 +175,9 @@ Objects stand on plain flagstones: shadowed floor variants aren't kept under the
 
 | Floor | Visible | Hidden | Other |
 |---|---|---|---|
-| B1F | Hyper Potion (Bolos's side pit) | Miracle Seed (the sealed granary) | the Persephone sherd's fixed dig behind the great jar in bay B (`ICHOR_STUB_DIG`) |
+| B1F | Hyper Potion (Bolos's side pit) | Miracle Seed (the sealed granary) | the real Persephone sherd's fixed dig behind the great jar in bay B (fixed index 2; Trowel required) |
 | B2F | TM28 Dig (Gaios's alcove), Super Potion (by the second panel) | Ether (the basin's overflow) | the spring heals |
-| B3F | Soft Sand (the tunnel's mouth) | Bronze Obol (`ITEM_RELIC_COPPER`, the vault's dust) | Demeter's Sickle (Chloe); Daedalus's page II, a fixed dig after the cave-in (`ICHOR_STUB_DIG`) |
+| B3F | Soft Sand (the tunnel's mouth) | Bronze Obol (`ITEM_RELIC_COPPER`, the vault's dust) | Demeter's Sickle (Chloe); the real Daedalus page II fixed dig after the cave-in (fixed index 3; Trowel required) |
 
 `tools/ichor/map_audit.py EleusaSanctum` reports 0 FAIL and 0 WARN. Its only note is that B1F has no `_Night` table.
 
@@ -192,4 +192,4 @@ Objects stand on plain flagstones: shadowed floor variants aren't kept under the
 - **Pithoi, amphorae and columns drawn on the crypt's flagstones**, with their contact shadows. The composed ones drop the shadows.
 - **The grunts' lamps as moving lights, and the Kapnub's embers** (Part 5): the engine's halo sprites, a stretch goal (SYSTEMS.md §2). The grunts on B2F have a lamp standing beside them.
 - **A chasm edge with its own glow.** The ember floor is the hall's cracked flagstones in the fire palette.
-- **Hecate's chalk** on B2F, and the sherd's and page's dig spots: these need the engine's douse palettes and excavation.
+- **Hecate's chalk** on B2F still needs the engine's douse palettes. The B1F Persephone find and B3F page II dig are integrated; the sanctum harness checks actual collectible flags, repeat protection and saved-game persistence.

@@ -60,6 +60,7 @@ mapscripts EleusaVillage_TempleOfDemeter_MapScripts {
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_8, 1: EleusaVillage_TempleOfDemeter_EventScript_TheMysteries
+        VAR_TEMP_D, 1: EleusaVillage_TempleOfDemeter_EventScript_Revelation
     ]
 }
 
@@ -68,6 +69,20 @@ mapscripts EleusaVillage_TempleOfDemeter_MapScripts {
 // congregation is here only for its scene; afterwards Kleon keeps the Anaktoron's door
 // (beat 24 sets FLAG_ICHOR_HIDE_KLEON_TELESTERION when he leaves for Thyrsa).
 script EleusaVillage_TempleOfDemeter_EventScript_PlaceCast {
+    setflag(FLAG_ICHOR_HIDE_DAPHNE_ELEUSA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_REVELATION)
+    if (flag(FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA)) {
+        setflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
+        setflag(FLAG_ICHOR_HIDE_KLEON_TELESTERION)
+        setflag(FLAG_ICHOR_HIDE_TELESTERION_GRUNTS)
+        setflag(FLAG_ICHOR_HIDE_MYSTERIES_CROWD)
+        if (!flag(FLAG_ICHOR_DAPHNE_REVELATION)) {
+            clearflag(FLAG_ICHOR_HIDE_DAPHNE_ELEUSA)
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_REVELATION)
+            setvar(VAR_TEMP_D, 1)
+        }
+        return
+    }
     if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
         setflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
     } elif (flag(FLAG_ICHOR_LESSER_MYSTERIES_DONE)) {
@@ -83,9 +98,11 @@ script EleusaVillage_TempleOfDemeter_EventScript_PlaceCast {
         clearflag(FLAG_ICHOR_HIDE_MYSTERIES_CROWD)
         clearflag(FLAG_ICHOR_HIDE_KLEON_TELESTERION)
         setvar(VAR_TEMP_8, 1)
-    } else {
+    } elif (!flag(FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA)) {
         setobjectxyperm(LOCALID_TEMPLE_DEMETER_KLEON, 14, 14)
         setobjectmovementtype(LOCALID_TEMPLE_DEMETER_KLEON, MOVEMENT_TYPE_FACE_LEFT)
+    } else {
+        setflag(FLAG_ICHOR_HIDE_KLEON_TELESTERION)
     }
     return
 }
@@ -99,6 +116,138 @@ text EleusaVillage_TempleOfDemeter_Text_NameKerykos { "KERYKOS" }
 text EleusaVillage_TempleOfDemeter_Text_NameAlethea { "ALETHEA" }
 text EleusaVillage_TempleOfDemeter_Text_NameKleon { "KLEON" }
 text EleusaVillage_TempleOfDemeter_Text_NameGrunt { "GRUNT" }
+text EleusaVillage_TempleOfDemeter_Text_NameDaphne { "DAPHNE" }
+
+script EleusaVillage_TempleOfDemeter_EventScript_Daphne {
+    if (flag(FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA) && !flag(FLAG_ICHOR_DAPHNE_REVELATION)) {
+        goto(EleusaVillage_TempleOfDemeter_EventScript_Revelation)
+    }
+    end
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
+    setvar(VAR_TEMP_D, 2)
+    lockall
+    checkitem(ITEM_STAR_CHART)
+    if (var(VAR_RESULT) == FALSE) {
+        checkitemspace(ITEM_STAR_CHART)
+        if (var(VAR_RESULT) == FALSE) {
+            setspeaker(SP_NAME_NONE)
+            msgbox(format("Make room in your Bag, then speak to Daphne. She has something for you."))
+            releaseall
+            end
+        }
+    }
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8004) != 13 || var(VAR_0x8005) != 24) {
+        fadescreen(FADE_TO_BLACK)
+        warp(MAP_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER, 13, 24)
+        waitstate
+        end
+    }
+    hidefollower
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_WEST)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameAlethea)
+    msgbox(format("She came on the morning boat. She was sick the whole way."))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
+    msgbox(format("Thirteen years on one island. The sea and I aren't friends.\p"
+                  "New sandals, too. They pinch. Don't look at them.\p"
+                  "{PLAYER}. Sit. The steps are cold, but they're honest.\p"
+                  "Halia wrote to me. After the Klotheia, and again when you sailed.\p"
+                  "She looked at your thread four times. Once by lamplight.\p"
+                  "She didn't see a short thread. Or a long one. Or a knotted one.\p"
+                  "She didn't see one at all."))
+    delay(60)
+    msgbox(format("Here's what I know. I'll try to say it plainly. I'm out of practice.\p"
+                  "Under Delphoi there's a Loom. Three old women work it.\p"
+                  "One spins every life. One measures it. One cuts it.\p"
+                  "Everyone in Aethos is a thread on it. Korinna. Philon. Kleon.\p"
+                  "Me. Halia. Kanthos the donkey, probably.\p"
+                  "Not you."))
+    multichoice(0, 0, MULTI_ICHOR_UNWOVEN, TRUE)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("That part isn't mine to tell. It's your mother's."))
+    } else {
+        msgbox(format("Someone I trust told me. Before you could walk."))
+    }
+    msgbox(format("When you see your mother, ask her. She'll tell you.\p"
+                  "She's waited thirteen years to. She hoped she'd never have to.\p"
+                  "Now the part that is mine.\p"
+                  "Alethea read you the front of this. The list of places.\p"
+                  "That list is mine. It's my book. Chapter by chapter."))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameAlethea)
+    msgbox(format("She wrote a book about the Harpe. Years ago. Before me."))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
+    msgbox(format("Where the sickle broke. Where the pieces fell. Where they'd be joined.\p"
+                  "I was wrong about Kalliste. Thank the gods. I was right about Eleusa.\p"
+                  "They're digging where I told them to dig.\p"
+                  "…And then there's the back.\p"
+                  "Hold a lamp low and old scratches stand up. I taught Alethea that."))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameAlethea)
+    msgbox(format("I saw it on the hill. I wanted to tell you.\p"
+                  "Truthfully, I nearly did. Twice."))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
+    msgbox(format("I asked her to wait until I was sure. That was wrong of me.\p"
+                  "It says: “At the Klotheia, watch the threads.”\p"
+                  "“Bring word of the Unwoven.”\p"
+                  "Unwoven. That's their word for you.\p"
+                  "They weren't on Kalliste for the hill. They were there for you."))
+    delay(60)
+    msgbox(format("You could go home. Nobody would blame you. I'd row you myself.\p"
+                  "Badly. But I'd row."))
+    setspeaker(SP_NAME_NONE)
+    msgbox("Go home?", MSGBOX_YESNO)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("…No. You won't. You've got her chin.\p"
+                      "Still. It was worth asking."))
+    } else {
+        msgbox(format("No. I didn't think so."))
+    }
+    msgbox(format("Then take this.\p"
+                  "When people were sure of a story, they put it in the sky."))
+    setspeaker(SP_NAME_NONE)
+    checkitem(ITEM_STAR_CHART)
+    if (var(VAR_RESULT) == FALSE) {
+        giveitem(ITEM_STAR_CHART)
+        if (var(VAR_RESULT) == FALSE) {
+            updatefollowingmon
+            releaseall
+            end
+        }
+    }
+    setflag(FLAG_ICHOR_GOT_STAR_CHART)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
+    msgbox(format("You're not in the sky yet. Neither am I.\p"
+                  "I've been a tree on that island for thirteen years. Rooted.\p"
+                  "I think it's time I walked somewhere.\p"
+                  "Astyra. The Library. I'm going to try to unwrite a book."))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameAlethea)
+    msgbox(format("And I'm coming with you, {PLAYER}. Obviously. I brought two trowels.\p"
+                  "…Three."))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
+    msgbox(format("And write to your mother. Not about this. Tell her you're eating."))
+    closemessage
+    applymovement(LOCALID_TEMPLE_DEMETER_DAPHNE, EleusaVillage_TempleOfDemeter_Movement_DaphneLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_TEMPLE_DEMETER_DAPHNE)
+    setflag(FLAG_ICHOR_HIDE_DAPHNE_ELEUSA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_REVELATION)
+    setflag(FLAG_ICHOR_DAPHNE_REVELATION)
+    setflag(FLAG_ICHOR_ACT1_COMPLETE)
+    setspeaker(SP_NAME_NONE)
+    fadescreen(FADE_TO_BLACK)
+    msgbox("END OF ACT I\nTHE UNWOVEN")
+    msgbox(format("Thank you for playing Act I of Pokémon Ichor."))
+    updatefollowingmon
+    warp(MAP_ELEUSA_VILLAGE, 25, 12)
+    waitstate
+    releaseall
+}
+
+movement EleusaVillage_TempleOfDemeter_Movement_DaphneLeaves {
+    walk_down * 3
+}
 
 // ---------------------------------------------------------------------------
 // The people of the hall
@@ -807,7 +956,7 @@ script EleusaVillage_TempleOfDemeter_EventScript_DrawHall {
     if (flag(FLAG_BADGE03_GET)) {
         call(EleusaVillage_TempleOfDemeter_EventScript_BoardPits)
     }
-    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
+    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT) && !flag(FLAG_ICHOR_ACT1_COMPLETE)) {
         call(EleusaVillage_TempleOfDemeter_EventScript_DrawRaid)
     }
     if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {

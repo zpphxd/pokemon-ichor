@@ -12,7 +12,9 @@
 # Konis and Gaios; on B3F reads the sickle, plays the theft and beats Hyperion (to
 # MUS_ICHOR_BATTLE_ADMIN), takes Demeter's Sickle and lands on the Telesterion's steps.
 # Then goes back down: the tunnel caved in, a wild battle to the ordinary wild music,
-# and the climb up all three floors and out by the Anaktoron's stair.
+# and the climb up all three floors and out by the Anaktoron's stair. Exercises
+# full key-item pocket recovery for the Sickle and Star Chart, Kleon's departure,
+# both revelation branches, restored hall braziers, and saving/CONTINUE after Act I.
 # Output in build/test_sanctum/ (screenshots in shots/); see sanctum.lua.
 set -u
 cd "$(dirname "$0")/../../.."

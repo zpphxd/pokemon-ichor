@@ -617,7 +617,7 @@ OBJECTS = [
     # the Telesterion's steps (25, 12) as the player walks out with the Harvest Laurel, and
     # Kerykos stands on them with his staff. ICHOR_STUB_SPRITE: the initiates are drawn
     # as pilgrims and youths until the Initiate walker exists; Eudemos as an elder.
-    ("ALETHEA", GFX + "ALETHEA", 24, 14, "UP", "Alethea", PROCESSION),
+    ("ALETHEA", GFX + "ALETHEA", 24, 14, "UP", "Alethea", "FLAG_ICHOR_HIDE_ALETHEA_ELEUSA"),
     ("KERYKOS", GFX + "KERYKOS", 27, 12, "LEFT", "Kerykos", PROCESSION),
     ("EUDEMOS", GFX + "ELDER_M", 30, 14, "LEFT", "Eudemos", PROCESSION),
     ("INITIATE_1", GFX + "PILGRIM", 22, 14, "UP", "Initiate1", PROCESSION),
@@ -626,6 +626,17 @@ OBJECTS = [
     ("INITIATE_4", GFX + "PILGRIM", 32, 15, "UP", "Initiate4", PROCESSION),
     ("INITIATE_5", GFX + "YOUTH_M", 23, 22, "DOWN", "Initiate5", PROCESSION),
     ("INITIATE_6", GFX + "YOUTH_F", 26, 23, "LEFT", "Initiate6", PROCESSION),
+    ("NORTH_HERALD", GFX + "PILGRIM", 46, 5, "DOWN", "NorthHerald", "0"),
+    ("VINES_WEST", "OBJ_EVENT_GFX_CUTTABLE_TREE", 44, 9, "DOWN", "@EventScript_CutTree",
+     "FLAG_ICHOR_ELEUSA_VINES_WEST_CUT"),
+    ("VINES_MIDWEST", "OBJ_EVENT_GFX_CUTTABLE_TREE", 45, 9, "DOWN", "@EventScript_CutTree",
+     "FLAG_ICHOR_ELEUSA_VINES_MIDWEST_CUT"),
+    ("VINES_MIDEAST", "OBJ_EVENT_GFX_CUTTABLE_TREE", 46, 9, "DOWN", "@EventScript_CutTree",
+     "FLAG_ICHOR_ELEUSA_VINES_MIDEAST_CUT"),
+    ("VINES_EAST", "OBJ_EVENT_GFX_CUTTABLE_TREE", 47, 9, "DOWN", "@EventScript_CutTree",
+     "FLAG_ICHOR_ELEUSA_VINES_EAST_CUT"),
+    ("OMEN_KORANTHA", "OBJ_EVENT_GFX_SPECIES(KORANTHA)", 32, 35, "LEFT", "OmenKorantha",
+     "FLAG_ICHOR_HIDE_OMEN_KORANTHA"),
 ]
 # Krokis's gate (beat 19): a coord trigger across the Sacred Way just inside the west
 # entrance, two steps short of her stool. It plays once (VAR_TEMP_8 is 1 once the
@@ -650,13 +661,13 @@ SIGNS = [
     (30, 8, "NORTH", "PloutonionSign"),
     (28, 32, "ANY", "RharianSign"),
     (35, 22, "ANY", "WellBench"),
-    (18, 34, "ANY", "FieldShrine"),             # ICHOR_STUB_RITES: Demeter's field altar
+    (18, 34, "ANY", "FieldShrine"),
     (41, 31, "ANY", "Beehives"),
 ]
 # The road of the Mysteries is shut in Act I: a hoplite at (47,25) turns the player
 # back from the line x = 46. (The story batch opens it in Act II.)
 EAST_GUARD_LINE = []
-DIG = [(9, 36), (38, 35)]                       # ICHOR_STUB_DIG: the fields' two daily dig spots
+DIG = [(9, 36, "DigSpotWest"), (38, 35, "DigSpotEast")]
 
 
 def warps(g):
@@ -697,7 +708,7 @@ def write_events(g):
             "movement_type": f"MOVEMENT_TYPE_FACE_{facing}", "movement_range_x": 0, "movement_range_y": 0,
             "trainer_type": "TRAINER_TYPE_NORMAL" if sight else "TRAINER_TYPE_NONE",
             "trainer_sight_or_berry_tree_id": str(sight[0]) if sight else "0",
-            "script": PX + script, "flag": flag})
+            "script": script[1:] if script.startswith("@") else PX + script, "flag": flag})
     for item, x, y, flag in ITEMS:
         objs.append({
             "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL", "x": x, "y": y, "elevation": 3,
@@ -711,10 +722,14 @@ def write_events(g):
                           "var_value": "0", "script": PX + "RoadShut"} for x, y in EAST_GUARD_LINE]
     m["coord_events"] += [{"type": "trigger", "x": x, "y": y, "elevation": 0, "var": "VAR_TEMP_8",
                            "var_value": "0", "script": PX + "KrokisGate"} for x, y in KROKIS_GATE]
+    m["coord_events"] += [{"type": "trigger", "x": x, "y": y, "elevation": 0, "var": "VAR_TEMP_4",
+                           "var_value": "0", "script": PX + script}
+                          for y, script in ((8, "PassedNorthVines"), (6, "NorthRoadBarrier"))
+                          for x in NORTH_SEAM]
     bgs = [{"type": "sign", "x": x, "y": y, "elevation": 0,
             "player_facing_dir": f"BG_EVENT_PLAYER_FACING_{f}", "script": PX + s} for x, y, f, s in SIGNS]
     bgs += [{"type": "sign", "x": x, "y": y, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-             "script": PX + "DigSpot"} for x, y in DIG]
+             "script": PX + script} for x, y, script in DIG]
     bgs += [{"type": "hidden_item", "x": x, "y": y, "elevation": 3, "item": item, "flag": flag,
              "quantity": 1, "underfoot": False} for item, x, y, flag in HIDDEN]
     m["bg_events"] = bgs
@@ -880,9 +895,16 @@ def check(g):
         if (x, y) not in reach:
             problems.append(f"{who} at ({x},{y}) is cut off")
     still = reach_from(g, start, frozenset(people))
+    vines = {(o["x"], o["y"]) for o in m["object_events"] if o["script"] == "EventScript_CutTree"}
+    after_sickle = reach_from(g, start, frozenset(people - vines))
+    if (45, 8) in still:
+        problems.append("the Eleutherai vines can be bypassed without the Sickle")
+    if (45, 8) not in after_sickle:
+        problems.append("the Sickle cannot open the Eleutherai road")
     for o in m["object_events"]:
         x, y = o["x"], o["y"]
-        if not any((x + dx, y + dy) in still for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0))):
+        accessible = after_sickle if o["script"] == PX + "NorthHerald" else still
+        if not any((x + dx, y + dy) in accessible for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0))):
             problems.append(f"{o.get('local_id', o['graphics_id'])} at ({x},{y}) can't be talked to past the others")
     for w in m["warp_events"]:
         if (w["x"], w["y"] + 1) not in still:

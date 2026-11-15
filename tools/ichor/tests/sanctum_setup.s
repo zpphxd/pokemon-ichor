@@ -52,6 +52,7 @@ SanctumTest_Setup:
 	setflag FLAG_BADGE02_GET
 	setflag FLAG_BADGE03_GET
 	additem ITEM_HECATES_TORCH
+	additem ITEM_ALETHEAS_TROWEL
 	setflag FLAG_ICHOR_LESSER_MYSTERIES_DONE
 	setflag FLAG_ICHOR_BRAZIERS_START + 0x10
 	setflag FLAG_ICHOR_BRAZIERS_START + 0x11
@@ -71,5 +72,13 @@ SanctumTest_BackDown:
 	setvar VAR_TEMP_F, 1
 	warp MAP_ELEUSA_SANCTUM_B3F, 0
 	waitstate
+	releaseall
+	end
+
+	test_header SanctumTest_SaveHeader, SanctumTest_Save
+SanctumTest_Save:
+	lockall
+	setvar VAR_TEMP_F, 1
+	special SaveGame
 	releaseall
 	end

@@ -26,8 +26,6 @@
 //   ICHOR_STUB_MUSIC  MUS_ICHOR_ENCOUNTER_TITAN stands in for the admins' encounter theme
 //                     (SCRIPT.md: MUS_ICHOR_ENCOUNTER_ADMIN, not composed yet). His battle
 //                     plays MUS_ICHOR_BATTLE_ADMIN through his class (src/pokemon.c).
-//   ICHOR_STUB_DIG    Daedalus's page II, bared by the cave-in, shows only until the
-//                     engine's excavation lands.
 
 const B3F_STAND_X = 10          // where the player is brought to stand for the scene
 const B3F_STAND_Y = 6
@@ -206,10 +204,21 @@ script EleusaSanctum_B3F_EventScript_TheSickle {
     setspeaker(EleusaSanctum_B3F_Text_NameChloe)
     msgbox(format("Take hers. It cuts what's grown across a path. Nothing else."))
     msgbox(format("That's all she ever wanted it to cut."))
+    call(EleusaSanctum_B3F_EventScript_ReceiveSickle)
+    return
+}
+
+script EleusaSanctum_B3F_EventScript_ReceiveSickle {
     // The relic (ENGINE_API.md §2): the engine sets FLAG_ICHOR_GOT_DEMETERS_SICKLE as it
     // enters the bag. Demeter Favor +10 for her myth-quest (§3).
     setspeaker(SP_NAME_NONE)
     giveitem(ITEM_DEMETERS_SICKLE)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Make room in your Bag, then return to the bronze sickle."))
+        special(RemoveCameraObject)
+        updatefollowingmon
+        return
+    }
     setvar(VAR_0x8004, ICHOR_GOD_DEMETER)
     setvar(VAR_0x8005, ICHOR_FAVOR_MYTH_QUEST)
     special(Ichor_AddFavor)
@@ -328,6 +337,12 @@ script EleusaSanctum_B3F_EventScript_Sickle {
     if (flag(FLAG_ICHOR_GOT_DEMETERS_SICKLE)) {
         end
     }
+    if (flag(FLAG_ICHOR_HIDE_HYPERION_SANCTUM)) {
+        lockall
+        call(EleusaSanctum_B3F_EventScript_ReceiveSickle)
+        releaseall
+        end
+    }
     msgbox(format("A bronze sickle in the dust. Someone decided it wasn't worth taking."), MSGBOX_SIGN)
 }
 
@@ -337,12 +352,13 @@ script EleusaSanctum_B3F_EventScript_Tunnel {
     }
 }
 
-// ICHOR_STUB_DIG: Daedalus's page II (SCRIPT.md Part 6), where the cave-in bared the old
-// foundations.
+// Daedalus's page II, in the foundations exposed by the cave-in.
 script EleusaSanctum_B3F_EventScript_DigSpot {
     if (flag(FLAG_ICHOR_HIDE_HYPERION_SANCTUM)) {
-        msgbox(format("The cave-in has bared old foundation stones. A corner of parchment shows between two.\p"
-                      "It won't come up by hand."), MSGBOX_SIGN)
+        setspeaker(SP_NAME_NONE)
+        setvar(VAR_0x8004, 3)
+        setvar(VAR_0x8005, ICHOR_FIND_PAGE(2))
+        goto(EventScript_IchorDigFixed)
     }
 }
 
