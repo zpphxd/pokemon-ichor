@@ -659,6 +659,10 @@ def events():
             trainer=True, sight=2, move="MOVEMENT_TYPE_FACE_LEFT"),
         obj("LOCALID_THYRSA_HEGELOCHOS", "OBJ_EVENT_GFX_ICHOR_ACTOR", 38, 18, S + "Hegelochos",
             trainer=True, sight=2, move="MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT", rx=2),
+        # Manto's crows (Part 2, Manto's house): a flock over the road outside the
+        # Elektran Gate, shown only for their scene (FLAG_TEMP_13, set on load)
+        obj("LOCALID_THYRSA_CROWS", "OBJ_EVENT_GFX_ICHOR_CROWS", 27, 41, S + "Crows",
+            flag="FLAG_TEMP_13"),
         obj("LOCALID_THYRSA_THYRSIVY", "OBJ_EVENT_GFX_SPECIES(THYRSIVY)", 13, 35, S + "Thyrsivy",
             flag="FLAG_ICHOR_HIDE_OMEN_THYRSIVY"),
         item_ball("LOCALID_THYRSA_ITEM_BLACK_SLUDGE", 19, 16, "ITEM_BLACK_SLUDGE",
@@ -690,6 +694,10 @@ def events():
     for x in SOUTH_SEAM:
         coord.append({"type": "trigger", "x": x, "y": 37, "elevation": 3, "var": "VAR_TEMP_1",
                       "var_value": "0", "script": f"{S}ArrivalX{x}"})
+    # Manto's crows, from the inside of the Elektran Gate, in the evening or at night
+    for x in SOUTH_SEAM:
+        coord.append({"type": "trigger", "x": x, "y": 37, "elevation": 3, "var": "VAR_TEMP_3",
+                      "var_value": "0", "script": S + "Crows"})
     coord.append({"type": "trigger", "x": 43, "y": 18, "elevation": 3, "var": "VAR_TEMP_2",
                   "var_value": "0", "script": S + "TheaterKeeperStop"})
     signs = [

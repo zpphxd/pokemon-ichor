@@ -39,6 +39,12 @@ mapscripts ThyrsaCity_TempleOfDionysus_MapScripts {
         } else {
             setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ICHOR_THESPIS)
         }
+        // Oinoe's ivy garland, once laid, stays on the wooden image.
+        if (flag(FLAG_ICHOR_GARLAND_LAID)) {
+            setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE_GARLAND)
+        } else {
+            setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE)
+        }
     }
     MAP_SCRIPT_ON_LOAD {
         call(ThyrsaCity_TempleOfDionysus_EventScript_DrawStage)
@@ -236,15 +242,17 @@ script ThyrsaCity_TempleOfDionysus_EventScript_LasosRules {
 script ThyrsaCity_TempleOfDionysus_EventScript_Image {
     lock
     msgbox(format("An old wooden statue. A cheerful face, like a happy dog. Very worn."))
-    // ICHOR_STUB_GARLAND: Oinoe's errand (SCRIPT.md Part 2, Eleutherai). When the rooms
-    // agent's FLAG_ICHOR_OINOE_GARLAND and FLAG_ICHOR_GARLAND_LAID and the key item
-    // ITEM_IVY_GARLAND exist, add here:
-    //   if (flag(FLAG_ICHOR_OINOE_GARLAND) && !flag(FLAG_ICHOR_GARLAND_LAID)) {
-    //       msgbox(format("You lay Oinoe's garland at its feet. “From Eleutherai.”\p"
-    //                     "For a moment the wood smells of wine."))
-    //       removeitem(ITEM_IVY_GARLAND)
-    //       setflag(FLAG_ICHOR_GARLAND_LAID)
-    //   }
+    // Oinoe's errand (SCRIPT.md Part 2, Eleutherai): the rooms agent's Oinoe sets
+    // FLAG_ICHOR_OINOE_GARLAND when she hands over the garland. ICHOR_STUB_KEY_ITEMS:
+    // ITEM_IVY_GARLAND isn't an item yet, so there's nothing to take from the bag.
+    if (flag(FLAG_ICHOR_OINOE_GARLAND) && !flag(FLAG_ICHOR_GARLAND_LAID)) {
+        msgbox(format("You lay Oinoe's garland at its feet. “From Eleutherai.”\p"
+                      "For a moment the wood smells of wine."))
+        setflag(FLAG_ICHOR_GARLAND_LAID)
+        setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE_GARLAND)
+        removeobject(LOCALID_DIONYSUS_IMAGE)
+        addobject(LOCALID_DIONYSUS_IMAGE)
+    }
     release
     end
 }

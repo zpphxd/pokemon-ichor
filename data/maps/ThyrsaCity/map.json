@@ -344,6 +344,20 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_THYRSA_CROWS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_CROWS",
+      "x": 27,
+      "y": 41,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_EventScript_Crows",
+      "flag": "FLAG_TEMP_13"
+    },
+    {
       "local_id": "LOCALID_THYRSA_THYRSIVY",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(THYRSIVY)",
       "x": 13,
@@ -529,6 +543,42 @@
       "var": "VAR_TEMP_1",
       "var_value": "0",
       "script": "ThyrsaCity_EventScript_ArrivalX29"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 37,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "ThyrsaCity_EventScript_Crows"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 37,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "ThyrsaCity_EventScript_Crows"
+    },
+    {
+      "type": "trigger",
+      "x": 28,
+      "y": 37,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "ThyrsaCity_EventScript_Crows"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 37,
+      "elevation": 3,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "ThyrsaCity_EventScript_Crows"
     },
     {
       "type": "trigger",

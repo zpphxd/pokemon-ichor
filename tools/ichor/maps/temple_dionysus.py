@@ -184,7 +184,8 @@ ALTAR = [(x, y) for y in (43, 44) for x in (8 + 1, 9 + 1, 10 + 1)]
 # People: (local id, graphics, x, y, facing, trainer sight or None, script)
 PEOPLE = [
     ("LOCALID_DIONYSUS_LASOS", "OBJ_EVENT_GFX_ICHOR_ELDER_M", 13, 46, "DOWN", None, "Lasos"),
-    ("LOCALID_DIONYSUS_IMAGE", "OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE", 7, 46, "DOWN", None, "Image"),
+    # The image wears Oinoe's ivy garland once it is laid: VAR_OBJ_GFX_ID_1, set in ON_TRANSITION
+    ("LOCALID_DIONYSUS_IMAGE", "OBJ_EVENT_GFX_VAR_1", 7, 46, "DOWN", None, "Image"),
     ("LOCALID_DIONYSUS_MYNNISKOS", "OBJ_EVENT_GFX_ICHOR_ACTOR", 8, 39, "UP", 3, "Mynniskos"),
     ("LOCALID_DIONYSUS_THETTALOS", "OBJ_EVENT_GFX_ICHOR_ACTOR", 18, 24, "UP", 1, "Thettalos"),
     ("LOCALID_DIONYSUS_THEODOROS", "OBJ_EVENT_GFX_ICHOR_ACTOR", 4, 15, "UP", 3, "Theodoros"),

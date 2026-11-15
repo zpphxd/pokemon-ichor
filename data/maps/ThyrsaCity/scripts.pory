@@ -10,6 +10,8 @@
 //   VAR_TEMP_2 == 0  the theater keeper turns you back at the high gate (no laurel)
 //   FLAG_TEMP_11     hides the guard who stands aside once the drum has fallen
 //   FLAG_TEMP_12     hides Alethea at the Neistan Gate until her scene
+//   VAR_TEMP_3 == 0  Manto's crows wait over the road outside the Elektran Gate
+//   FLAG_TEMP_13     hides the crows until their scene
 
 mapscripts ThyrsaCity_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
@@ -33,6 +35,11 @@ mapscripts ThyrsaCity_MapScripts {
             clearflag(FLAG_ICHOR_HIDE_NEISTAN_DRUM)
         }
         setflag(FLAG_TEMP_12)
+        // Manto's crows (her house's quest): only while she's waiting to hear of them.
+        setflag(FLAG_TEMP_13)
+        if (!flag(FLAG_ICHOR_MANTO_CROWS) || flag(FLAG_ICHOR_SAW_CROWS)) {
+            setvar(VAR_TEMP_3, 1)
+        }
         // The omen's visitor stands in the old trellises only once Manto has told it.
         if (!flag(FLAG_ICHOR_OMEN_THYRSIVY_TOLD)) {
             setflag(FLAG_ICHOR_HIDE_OMEN_THYRSIVY)
@@ -214,9 +221,8 @@ script ThyrsaCity_EventScript_Alethea {
                   "The baby did. That was Dionysus. And the room's been smoking ever since.\p"
                   "Truthfully, it's probably a hot spring. Don't tell the priests I said so."))
     // ICHOR_STUB_DIG: prophecy tablet #3 is a fixed dig under Eudora's fig (the rooms
-    // agent's map). Its flags sit in FLAG_ICHOR_PROPHECY_START's range: found at +3,
-    // read at +8+3, until the engine names FLAG_ICHOR_PROPHECY_3 and _3_READ.
-    if (flag(FLAG_ICHOR_PROPHECY_START+3) && !flag(FLAG_ICHOR_PROPHECY_START+11)) {
+    // agent's map). flags.h names its flags in FLAG_ICHOR_PROPHECY_START's range.
+    if (flag(FLAG_ICHOR_PROPHECY_3) && !flag(FLAG_ICHOR_PROPHECY_3_READ)) {
         call(ThyrsaCity_EventScript_TabletThree)
     }
     release
@@ -232,7 +238,7 @@ script ThyrsaCity_EventScript_TabletThree {
                   "The old one says: “You'll come home from the next war.”\p"
                   "And at the end of the new one, a little hook.\p"
                   "Another one for my list. Truthfully, I'm not enjoying this list."))
-    setflag(FLAG_ICHOR_PROPHECY_START+11)
+    setflag(FLAG_ICHOR_PROPHECY_3_READ)
 }
 
 // ---------------------------------------------------------------------------
@@ -664,4 +670,41 @@ script ThyrsaCity_EventScript_DigSemele {
 
 script ThyrsaCity_EventScript_DigVineyard {
     msgbox(format("The earth here has been turned. Something might be buried."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// Manto's crows (SCRIPT.md Part 2, Manto's house): at the Elektran Gate in the
+// evening or at night, the flock wheels over the Kronia and flies south.
+
+script ThyrsaCity_EventScript_Crows {
+    gettimeofday
+    if (var(VAR_0x8000) < TIME_EVENING) {
+        end
+    }
+    lockall
+    setvar(VAR_TEMP_3, 1)
+    clearflag(FLAG_TEMP_13)
+    addobject(LOCALID_THYRSA_CROWS)
+    applymovement(LOCALID_THYRSA_CROWS, ThyrsaCity_Movement_CrowsCircle)
+    waitmovement(LOCALID_THYRSA_CROWS)
+    msgbox(format("The crows circle the feast once, then fly south. Away from the city, against the wind."))
+    applymovement(LOCALID_THYRSA_CROWS, ThyrsaCity_Movement_CrowsSouth)
+    waitmovement(LOCALID_THYRSA_CROWS)
+    removeobject(LOCALID_THYRSA_CROWS)
+    setflag(FLAG_TEMP_13)
+    setflag(FLAG_ICHOR_SAW_CROWS)
+    releaseall
+    end
+}
+
+movement ThyrsaCity_Movement_CrowsCircle {
+    walk_fast_left * 2
+    walk_fast_down
+    walk_fast_right * 3
+    walk_fast_up
+    walk_fast_left
+}
+
+movement ThyrsaCity_Movement_CrowsSouth {
+    walk_faster_down * 7
 }
