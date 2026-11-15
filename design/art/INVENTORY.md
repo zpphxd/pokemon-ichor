@@ -205,7 +205,7 @@ Elaia owns the polished **Eripip** and **Galekit**, not their later stages.
 | Ione, Titan Grunt | Native three-quarter portraits and all nine walker states redrawn in `sprites_trainers.py` and `sprites_npc.py`. Their existing portrait and shared cast palettes retained unchanged; palette-correct native comparisons and genuine ROM portraits verified. Artistically accepted at checkpoint scope, not whole-town approval. |
 | Eopeep, Alekrow, Hoplektor; Kerazap, Kerastorm; Harpeck, Harpelle; Epopoi, Lophops, Basilops; Karkipool, Karkitox; Ketofry, Kynoketos; Melibee, Melisseer; Onotis, Midonos; Ergant, Hoplomex; Narthip, Promethex; Elaleaf, Elapling, Hierolive; Spalunk, Plouteras; Kampillar, Nymveil, Psychora; Pebblith, Cairnolith, Laolith; Narkeray; Chelonet, Chelyra; Gelasable | Still awaiting this batch's native polish; existing sprites retained, not claimed redrawn. This includes species used only by the local trainers. |
 | Theo, Ianthe, Kleon, Alethea, Melitta; shared folk already polished in Elaia; pickups and starter kraters; Elaia's contact/shared effects | Elaia's human/opening-object checkpoint `dfb7974fbc`, twelve-species checkpoint `9ae5aff4af` and shared-effects checkpoint `70ff39b430` on main `840dbefb8624` are integrated. All 16 new effects/emotion sheets and the emote palette match that landed base; accepted local human sheets remain unchanged. Further supported-player-state evidence belongs to Elaia's continuation, not this batch. |
-| Kronion tablet | Markings and lighting refined at native 16x16 resolution, preserving the cast palette and wiring. Captured during the Route 1 review's real cutscene drop, not an ordinary summit visit. Creative approval pending. |
+| Kronion tablet | Markings and lighting refined at native 16x16 resolution, preserving the cast palette and wiring. Captured during the Route 1 review's real cutscene drop, not an ordinary summit visit. Artistically accepted at checkpoint scope. |
 | Two upturned-boat halves | Direct native 32x16 drawing split into matched halves, replacing tileset extraction. Restrained plank seam and keel clusters use the existing cast palette. Native and real harbor evidence artistically accepted at checkpoint scope. |
 | Sailor and Diver walkers | Eight-row native directional heads, longer cloth bodies, distinct strides and all nine engine frames implemented in `sprites_folk.py`. Costumes and folk palette preserved; Sailor's shoulder rope matches the existing portrait identity. Palette-correct complete sheets and real harbor before/after captured against the exact post-Elaia ROM. Artistically accepted at checkpoint scope. |
 | Healer and Kid F walkers | Native eight-row directional heads, folded chiton and child-sized saffron tunic with complete strides. Healer's tenth bow frame retains closed eyes, head dip, hand over heart and planted serpent rod. All 19 states reproduce, and the preview now includes the full tenth frame. Both real heal paths hold the bow for exactly 32 frames and restore player control. Existing palette, costumes and animation wiring preserved; artistically accepted at checkpoint scope. |
@@ -245,6 +245,30 @@ four folk regressions and `tools/ichor/art/check_elaia_effects.py`. Both
 fourteen-camera galleries pass against the exact new main ROM and the
 combined Akti ROM. The earlier post-Elaia Pokemon baseline and comparisons
 remain preserved separately; no equivalent Elaia child commits were reapplied.
+
+**Coordinator partial Akti integration verification:** accepted source snapshot
+`2d1a23993f` includes the earlier accepted Ione/Titan, Halcyling/Galenyon,
+tablet/boat and ten shared-walker checkpoints. Its existing merge of effects
+main `840dbefb86` permits a fast-forward without reapplying Elaia equivalents.
+The combined `make -f make_tools.mk`, `make -j$(sysctl -n hw.ncpu)` and original
+smoke (9 captures) pass. Four folk regressions verify all 22 source arrays;
+19 sprite-audit regressions, 13 regional species checks and all 23 changed
+non-icon native PNG checks pass. The two changed icons pass the species-aware
+shared-palette gate instead of the stricter generic BGR555 image gate.
+The eleven retained Elaia species and both Halcyon species pass source-exact
+view/import and native conversion checks. All landed field-effect/emotion
+assets, their painters, shared palettes and protected ball paths are unchanged
+from effects main. Both exact post-effects baseline and current ROM pass the
+17-camera gallery (34 checks each) with map and overworld callback assertions.
+The current Route 1 sprite review (81 captures) and Temple trial sprite review
+(39 captures) pass; actual portraits, harbor, hill/market and smoke views were
+inspected. The ROM uses 23,040,960 bytes (68.67%); SHA256 is
+`127fc563fc314a7f96ffa451068452ff76d9113e0c7bf115a143f54d96fce055`.
+Matching GBA/ELF/map and before/current captures are preserved as a partial
+Akti checkpoint, not the eventual completed-town baseline. Original source
+reconciliation reports 154 changed, no added/removed and 19,995 unchanged
+image/palette sources. Seven local portraits, healing effects and 39 owned
+species remain pending; retained global groups remain in scope.
 
 | Item | Where | Status | Phase | Notes |
 |---|---|---|---|---|
