@@ -2631,5 +2631,11 @@
 #define TESTING_FLAG_UNUSED_7                   (TESTING_FLAGS_START + 0x7)
 #endif // TESTING
 
+// ICHOR_STUB_POSTGAME (world-act2): world-postgame's FLAG_ICHOR_POSTGAME (a bank flag on its
+// branch, set at the end of Act III's epilogue) gates Act II's post-game roads until it lands.
+// Kept at the very end of this file so the real definition, wherever it lands above, wins.
+#ifndef FLAG_ICHOR_POSTGAME
+#define FLAG_ICHOR_POSTGAME FLAG_SYS_GAME_CLEAR
+#endif
 
 #endif // GUARD_CONSTANTS_FLAGS_H
