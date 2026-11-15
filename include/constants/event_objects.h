@@ -503,6 +503,13 @@ enum
     OBJ_EVENT_GFX_ICHOR_THYIA,
     OBJ_EVENT_GFX_ICHOR_TISAMENOS,
     OBJ_EVENT_GFX_ICHOR_HELIKE,
+    // Part 10's other road-west folk: slice townsfolk recolored in the folk palette
+    OBJ_EVENT_GFX_ICHOR_STROPHIOS,
+    OBJ_EVENT_GFX_ICHOR_PYLADES,
+    OBJ_EVENT_GFX_ICHOR_MULETEER,
+    OBJ_EVENT_GFX_ICHOR_EEL_SMOKER,
+    OBJ_EVENT_GFX_ICHOR_ELDER_M_STONE,
+    OBJ_EVENT_GFX_ICHOR_ELDER_M_LETHE,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,

@@ -2802,6 +2802,30 @@ static const struct SpriteFrameImage sPicTable_IchorHelike[] = {
     overworld_ascending_frames(gObjectEventPic_IchorHelike, 2, 4),
 };
 
+static const struct SpriteFrameImage sPicTable_IchorStrophios[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorStrophios, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPylades[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPylades, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorMuleteer[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMuleteer, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorEelSmoker[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorEelSmoker, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorElderMStone[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorElderMStone, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorElderMLethe[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorElderMLethe, 2, 4),
+};
+
 // End of Ichor object events
 
 // Ichor: the ground item jar

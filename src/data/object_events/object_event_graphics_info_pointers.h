@@ -482,6 +482,12 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorXenodi
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorThyia;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTisamenos;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHelike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStrophios;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPylades;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMuleteer;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorEelSmoker;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorElderMStone;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorElderMLethe;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -957,6 +963,12 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_THYIA] =                    &gObjectEventGraphicsInfo_IchorThyia,
     [OBJ_EVENT_GFX_ICHOR_TISAMENOS] =                &gObjectEventGraphicsInfo_IchorTisamenos,
     [OBJ_EVENT_GFX_ICHOR_HELIKE] =                   &gObjectEventGraphicsInfo_IchorHelike,
+    [OBJ_EVENT_GFX_ICHOR_STROPHIOS] =                &gObjectEventGraphicsInfo_IchorStrophios,
+    [OBJ_EVENT_GFX_ICHOR_PYLADES] =                  &gObjectEventGraphicsInfo_IchorPylades,
+    [OBJ_EVENT_GFX_ICHOR_MULETEER] =                 &gObjectEventGraphicsInfo_IchorMuleteer,
+    [OBJ_EVENT_GFX_ICHOR_EEL_SMOKER] =               &gObjectEventGraphicsInfo_IchorEelSmoker,
+    [OBJ_EVENT_GFX_ICHOR_ELDER_M_STONE] =            &gObjectEventGraphicsInfo_IchorElderMStone,
+    [OBJ_EVENT_GFX_ICHOR_ELDER_M_LETHE] =            &gObjectEventGraphicsInfo_IchorElderMLethe,
     // End of Ichor object events
 };
 

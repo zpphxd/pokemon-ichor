@@ -715,6 +715,12 @@ const u32 gObjectEventPic_IchorXenodike[] = INCGFX_U32("graphics/object_events/p
 const u32 gObjectEventPic_IchorThyia[] = INCGFX_U32("graphics/object_events/pics/people/ichor/thyia.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorTisamenos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/tisamenos.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorHelike[] = INCGFX_U32("graphics/object_events/pics/people/ichor/helike.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorStrophios[] = INCGFX_U32("graphics/object_events/pics/people/ichor/strophios.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPylades[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pylades.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorMuleteer[] = INCGFX_U32("graphics/object_events/pics/people/ichor/muleteer.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorEelSmoker[] = INCGFX_U32("graphics/object_events/pics/people/ichor/eel_smoker.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorElderMStone[] = INCGFX_U32("graphics/object_events/pics/people/ichor/elder_m_stone.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorElderMLethe[] = INCGFX_U32("graphics/object_events/pics/people/ichor/elder_m_lethe.png", ".4bpp", "-mwidth 2 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)

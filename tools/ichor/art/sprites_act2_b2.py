@@ -35,7 +35,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sprites_lib import ROOT, save_indexed, to_rgba, upscale, grid_preview  # noqa: E402
 from sprites_npc import checker_bg  # noqa: E402
 from sprites_folk import (ARCHETYPES, PALETTES, DIRS, POSES, pole, _with, _paint, _resolve,  # noqa: E402
-                          build_frame, GOATHERD, HOPLITE, SAILOR, ELDER_M, _STAFF, _SPEAR)
+                          build_frame, GOATHERD, HOPLITE, SAILOR, ELDER_M, MAN, MERCHANT,
+                          _STAFF, _SPEAR)
 import sprites_act2 as b1  # noqa: E402  (registers the wine palette and batch 1's archetypes)
 from sprites_act2 import (_flip, _frame, _same, _ALETHEA_TOP, _ALETHEA_BACK, ORDER,  # noqa: E402
                           build_pose_sheet, build_object_sheet, palette_of, label_font)
@@ -115,22 +116,23 @@ _KEEP_HAND = {"tunic": ("b5", ["..kSSCCCCCQSSk..", "..kkCCCCCCCQkk.."]),
 # A lean man or woman in a short undyed tunic and a broad straw hat, a folded
 # net over the left shoulder, a reed decoy-pipe at the lips and a little wicker
 # quail cage hanging at the right hip. The hat is the walkers' read: a gold
-# brim the full width of the frame, a terracotta band.
+# brim the full width of the frame, a terracotta band, and a peaked crown (the
+# Boeotian tholia), so it never reads as the player's domed petasos.
 
 _STRAW_DOWN = [
-    "......kkkk......",
-    "....kkOOOOkk....",
-    "...kOOOOOOOok...",
-    "...kuuuuuuuuk...",
+    ".......kk.......",
+    "......kOOk......",
+    ".....kOOOok.....",
+    "....kuuuuuuk....",
     ".kkOOOOOOOOOOkk.",
     "kOOOOOOOOOOOOOok",
     ".kkooooooooookk.",
 ]
 _STRAW_LEFT = [
-    ".......kkkk.....",
-    ".....kkOOOOkk...",
-    "....kOOOOOOOok..",
-    "....kuuuuuuuuk..",
+    "........kk......",
+    ".......kOOk.....",
+    "......kOOOok....",
+    ".....kuuuuuuk...",
     "..kkOOOOOOOOOOkk",
     "kOOOOOOOOOOOOOok",
     ".kkooooooooookk.",
@@ -1067,11 +1069,52 @@ ALETHEA_NOTE = dict(name="alethea_note", pal="folk", kind="object", fw=16, fh=32
 
 
 # ==========================================================================
+# Part 10's other named folk: the slice's townsfolk with their roles recolored
+# in the folk palette. No new pixels except the muleteer's staff; each is its
+# own sheet because a palette swap inside one palette means new indices.
+# ==========================================================================
+
+# Strophios, Kirrha's innkeeper: the merchant's apron and purse over a
+# terracotta chiton.
+STROPHIOS = dict(MERCHANT, name="strophios", roles=dict(C="u", Q="b", T="b", F="b"))
+
+# Pylades, his son: a clean-shaven youth under a terracotta fillet (batch 1's
+# herald's head, without the pole and horn) in a sky-blue chiton.
+PYLADES = dict(name="pylades", pal="folk", arch="tunic", roles=dict(C="a", Q="B", T="u", F="b"),
+               head=b1.HERALD["head"])
+
+# The muleteer: the bearded man in an undyed exomis with a terracotta belt, and
+# the walking staff he climbs to Delphoi with.
+MULETEER = dict(
+    MAN, name="muleteer", roles=dict(C="l", Q="y", T="u", F="b"),
+    over=dict(
+        down={"all": MAN["over"]["down"]["all"] + [pole(0, 1, _STAFF), ("b5", ["__S_____________"])],
+              "walk1": [("b5", ["..SSSCCCCCQSSk..", "..kkCCCCCCCQkk.."])]},
+        up={"all": MAN["over"]["up"]["all"] + [pole(14, 1, [c[::-1] for c in _STAFF]),
+                                              ("b5", ["_____________S__"])],
+            "walk0": [("b5", ["..kSSCCCCCQSSS..", "..kkCCCCCCCQkk.."])]},
+        left={"all": [pole(0, 1, _STAFF), ("b4", ["__Ss____________"])]},
+    ),
+)
+
+# The eel-smoker by the fire on Route 8: the bearded man in a smoke-gray
+# exomis.
+EEL_SMOKER = dict(MAN, name="eel_smoker", roles=dict(C="y", Q="b", T="u", F="b"))
+
+# Two old men: the one who sits on Route 9's boundary stone (a terracotta
+# himation) and the one who drank from Lethe forty years ago (an ochre one).
+ELDER_M_STONE = dict(ELDER_M, name="elder_m_stone", roles=dict(C="u", Q="b", T="u", F="b", v="b"))
+ELDER_M_LETHE = dict(ELDER_M, name="elder_m_lethe", roles=dict(C="o", Q="u", T="o", F="b", v="u"))
+
+EXTRAS = [STROPHIOS, PYLADES, MULETEER, EEL_SMOKER, ELDER_M_STONE, ELDER_M_LETHE]
+
+
+# ==========================================================================
 # Output
 # ==========================================================================
 
 WALKERS = [FOWLER, FOWLER_F, SAON, PRIEST, AGAMEDES, PANOPEUS, TEMPLE_GUARD,
-           HERKYNA, XENODIKE, THYIA, TISAMENOS, HELIKE]
+           HERKYNA, XENODIKE, THYIA, TISAMENOS, HELIKE] + EXTRAS
 POSE_SPECS = [PILGRIM_BLANKET, PILGRIM_BLANKET_2, PILGRIM_BLANKET_3, ALETHEA_RIM]
 OBJECTS = [ALETHEA_NOTE]
 

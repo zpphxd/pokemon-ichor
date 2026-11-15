@@ -112,17 +112,19 @@ def fowler(female=False):
     # near arm raised, the hand at the pipe
     f.thick_line([(27, 25), (21, 31)], 5, skin, group=200)
     f.thick_line([(21, 31), (23, 24)], 4, skin, group=201)
-    # the broad straw hat: crown, band, and a brim wider than the shoulders
+    # the broad straw hat with a peaked crown (Boeotia's tholia, the hat of the
+    # Tanagra figurines; the player's petasos is domed): a brim wider than the
+    # shoulders, a band at the crown's foot
     f.ellipse((13, 5, 51, 11), straw, group=800)
-    f.poly([(25, 6), (27, 1), (31, 0), (36, 0), (40, 1), (41, 6)], straw, group=810)
-    f.rect(25, 4, 41, 6, band, clip=810, noline=True)
+    f.poly([(24, 7), (29, 2), (32, 0), (34, 0), (37, 2), (42, 7)], straw, group=810)
+    f.rect(24, 5, 42, 6, band, clip=810, noline=True)
 
     _net_mesh(f, net_id)
     # straw weave on the brim and crown
     for x in range(16, 49, 3):
         f.px(x, 8 if x % 2 else 9, "straw_m")
-    for x in range(28, 40, 3):
-        f.px(x, 2, "straw_m")
+    for x in (30, 33, 36):
+        f.px(x, 3, "straw_m")
     # head: in the brim's shadow, eyes on the reeds; the pipe at the lips
     if female:
         f.patch(24, 11, [
