@@ -60,6 +60,8 @@
 #define SPECIES_NARKERAY    SPECIES_CHINCHOU     // Water/Electric, the torpedo ray
 #define SPECIES_SPALUNK     SPECIES_DIGLETT      // Ground, Ploutos's mole
 #define SPECIES_PLOUTERAS   SPECIES_DUGTRIO      // Ground
+#define SPECIES_STACHYSS    SPECIES_SUNKERN      // Grass, Triptolemus's wheat serpent (Euphronios asks for one)
+#define SPECIES_PANACOIL    SPECIES_ARBOK        // Poison/Fairy, the healer serpent coiled in every Asclepeion
 
 #endif // ICHOR_AETHOS_DEX
 

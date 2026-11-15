@@ -1695,6 +1695,36 @@ const struct Tileset gTileset_Ergasteria =
     .callback = NULL,
 };
 
+// Ichor: limen, Emporion's harbor-town interiors (the Deigma, the Dolphin,
+// Philoxenos's andron, the widow's room, the runners' house, Euphronios's
+// workshop and the hiring hall). Like ergasteria, it uses only its own tiles
+// and palettes 6-12. Built by tools/ichor/art/limen_build.py.
+const struct Tileset gTileset_Limen =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Limen,
+    .palettes = gTilesetPalettes_PorytilesManaged_Limen,
+    .metatiles = gMetatiles_PorytilesManaged_Limen,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Limen,
+    .callback = NULL,
+};
+
+// Ichor: domos, limen's twin for Emporion's town households and workshops
+// (Philoxenos's andron, the runners' house, Euphronios's workshop): the same
+// art and palettes, in a second set because seven rooms didn't fit one.
+// Built by tools/ichor/art/limen_build.py.
+const struct Tileset gTileset_Domos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Domos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Domos,
+    .metatiles = gMetatiles_PorytilesManaged_Domos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Domos,
+    .callback = NULL,
+};
+
 // Porytiles-managed secondary built by tools/ichor/art/emporion_build.py: Emporion
 // City (streets, the house kit, the Agora, the Temple of Hermes and the monuments,
 // Acrocorinth, the workshops). It uses only its own tiles and palettes 6-12; cells

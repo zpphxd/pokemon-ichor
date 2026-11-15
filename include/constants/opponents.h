@@ -48,7 +48,9 @@
 #define TRAINER_ICHOR_ALETHEA_DECK            40
 #define TRAINER_ICHOR_PHORMION                41
 #define TRAINER_ICHOR_LYKON                   42
-#define TRAINERS_END_ACT1                     43
+// Emporion's interiors, ids 60-64 (the hiring hall)
+#define TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS 60
+#define TRAINERS_END_ACT1                     61
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

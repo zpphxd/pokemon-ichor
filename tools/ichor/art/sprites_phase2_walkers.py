@@ -403,7 +403,73 @@ AIAKIDES = dict(
     ),
 )
 
-FOLK_WALKERS = [PILGRIM, PRONOMOS, ENDEIS, PHEIDON, AIAKIDES]
+# --------------------------------------------------------------------------
+# Kedalion, the smith of Emporion's Hephaisteion (batch 2): a short, broad man,
+# bald on top with a black fringe and a great black beard, soot on his brow, a
+# sooty gray exomis under a black leather apron, and his tongs. He once
+# carried a blind giant to the sunrise on his shoulders.
+# --------------------------------------------------------------------------
+
+_TONGS_K = ["k_k", "kyk", "_y_", "_y_", "_k_"]
+KEDALION = dict(
+    name="kedalion", pal="folk", arch="tunic",
+    roles=dict(C="y", Q="l", T="k", F="b"),
+    head=dict(
+        down=[
+            ".....kkkkkk.....",
+            "....kSSSSSSk....",
+            "...kSSyySSSSk...",
+            "..kSSSSySSSSSk..",
+            "..kkSSSSSSSSkk..",
+            "..kkkkSSSSkkkk..",
+            "..kbSkSSSSkSbk..",
+            "..kbSSSssSSSbk..",
+            "..kkkkkkkkkkkk..",
+            "..kkkbkkkkbkkk..",
+            "...kkkkbbkkkk...",
+        ],
+        up=[
+            ".....kkkkkk.....",
+            "....kSSSSSSk....",
+            "...kSSSSSSSSk...",
+            "..kSSSSSSSSSSk..",
+            "..kSSSSSSSSSsk..",
+            "..kkSSSSSSSSkk..",
+            "..kkkkkkkkkkkk..",
+            "..kkkkbkkbkkkk..",
+            "..kskkkkkkkksk..",
+            "...kkkkkkkkkk...",
+            "....kssSSssk....",
+        ],
+        left=[
+            "......kkkkk.....",
+            "....kkSSSSSk....",
+            "...kSyySSSSSk...",
+            "..kSSSSSSSSSSk..",
+            "..kSSSSSSSSSsk..",
+            "..kkkSSSSSkkkk..",
+            "..kSkSSSSskkkk..",
+            "..kSSSSSSskkbk..",
+            "..kkkkkkkkkkk...",
+            "..kkbkkkbkkk....",
+            "...kkkkkkk......",
+        ],
+    ),
+    over=dict(
+        down={"all": [("b0", ["_____kbbbbk_____", "_____kbbbbk_____", "_____kbbbbk_____",
+                              "_____kbbbbk_____", "_____kkkkkk_____", "_____kbbbbk_____",
+                              "_____kkbbkk_____"]),
+                      pole(0, "b1", _TONGS_K)]},
+        up={"all": [("b0", ["______k__k______"]), ("b4", ["____kkkkkkk_____"]),
+                    pole(13, "b1", [c[::-1] for c in _TONGS_K])]},
+        left={"all": [("b0", ["______kk________"]),
+                      ("b1", ["____kbb_________", "____kbb_________", "____kbb_________",
+                              "____kkk_________", "____kbb_________", "____kbbk________"]),
+                      pole(2, "b1", _TONGS_K)]},
+    ),
+)
+
+FOLK_WALKERS = [PILGRIM, PRONOMOS, ENDEIS, PHEIDON, AIAKIDES, KEDALION]
 
 # --------------------------------------------------------------------------
 # Kleon's poses (cast palette). Each frame is whole: (y0, rows), the rows
@@ -668,6 +734,7 @@ BASES = {
     "endeis": ("woman", "folk"),
     "pheidon": ("merchant", "folk"),
     "aiakides": ("elder_m", "folk"),
+    "kedalion": ("pheidon", "folk"),
     "kleon_seasick": ("kleon", "cast"),
     "kleon_tablet": ("kleon", "cast"),
 }

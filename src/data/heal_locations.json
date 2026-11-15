@@ -367,6 +367,16 @@
       "respawn_npc": "LOCALID_PLAYERS_HOUSE_1F_MOM",
       "respawn_x": 3,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_EMPORION_CITY",
+      "map": "MAP_EMPORION_CITY",
+      "x": 10,
+      "y": 10,
+      "respawn_map": "MAP_EMPORION_CITY_ASCLEPEION",
+      "respawn_npc": "LOCALID_EMPORION_HEALER",
+      "respawn_x": 8,
+      "respawn_y": 4
     }
   ]
 }

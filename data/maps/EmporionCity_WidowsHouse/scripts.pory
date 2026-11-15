@@ -1,1 +1,62 @@
+// The widow's house (design/phase2/SCRIPT.md, Part 2): Penelopeia, a sailor's
+// widow who weaves for a living, in a narrow room up over a rope-maker's yard.
+// Room: tools/ichor/maps/emporion_rooms.py ("widow"), on limen. The stair door
+// is the mat at (3..4, 7), warp 0. Its MAP_EMPORION_CITY dest_warp_id (0) is a
+// placeholder until the city agent's door ids are known.
+//
+// She gives her husband's Sea Incense once (FLAG_ICHOR_GOT_WIDOWS_GIFT), and
+// leaves a seed for the post-game Odyssey.
+
 mapscripts EmporionCity_WidowsHouse_MapScripts {}
+
+text EmporionCity_WidowsHouse_Text_NamePenelopeia { "PENELOPEIA" }
+
+script EmporionCity_WidowsHouse_EventScript_Penelopeia {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_GOT_WIDOWS_GIFT)) {
+        goto(EmporionCity_WidowsHouse_EventScript_PenelopeiaAfter)
+    }
+    setspeaker(EmporionCity_WidowsHouse_Text_NamePenelopeia)
+    msgbox(format("My husband sailed past the Sirens' rocks. With wax in his ears.\p"
+                  "They say he took it out to listen.\p"
+                  "He always did want to hear the end of a song.\p"
+                  "Here. He kept this for luck. Luck should go somewhere."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_SEA_INCENSE)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_WIDOWS_GIFT)
+    release
+}
+
+script EmporionCity_WidowsHouse_EventScript_PenelopeiaAfter {
+    setspeaker(EmporionCity_WidowsHouse_Text_NamePenelopeia)
+    msgbox(format("I weave all day. Some nights I unpick it. Don't ask me why.\p"
+                  "It feels like waiting is a thing you have to keep doing."))
+    release
+    end
+}
+
+script EmporionCity_WidowsHouse_EventScript_Loom {
+    msgbox(format("A shroud on the loom, half woven. The last rows look newer than the first."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_WidowsHouse_EventScript_Window {
+    msgbox(format("The window looks out over the harbor mouth. A stool stands in front of it."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_WidowsHouse_EventScript_Oar {
+    msgbox(format("An oar, its blade painted blue, hung on two pegs. The grip is worn dark."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_WidowsHouse_EventScript_Shrine {
+    msgbox(format("A little altar of Poseidon under his trident, a dried starfish on it."),
+           MSGBOX_SIGN)
+}

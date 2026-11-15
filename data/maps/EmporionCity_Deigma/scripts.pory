@@ -1,1 +1,297 @@
-mapscripts EmporionCity_Deigma_MapScripts {}
+// The Deigma, Emporion's merchants' exchange (design/phase2/SCRIPT.md, beat 12
+// and Part 2). Room: tools/ichor/maps/emporion_rooms.py ("deigma"), on limen.
+// The street door is the mat at (2..3, 9), warp 0. Its MAP_EMPORION_CITY
+// dest_warp_id (0) is a placeholder until the city agent's door ids are known.
+//
+// Beat 12 plays the first time the player comes in after beat 11: Alethea is at
+// Lampis's lamp table (7,5) and waves the player over (6,5); Lampis tells of
+// the forty lamps; she walks to the notice board by the door (1,8), the player
+// behind her (2,8), and sees the hook under the Archon's seal; then she leaves.
+// Sets FLAG_ICHOR_DEIGMA_CLUE. Her object hides on FLAG_TEMP_1, which
+// ON_TRANSITION sets unless the beat is due. (SCRIPT.md also names
+// FLAG_ICHOR_HIDE_ALETHEA_EMPORION for her other objects in the city; until the
+// city agent claims it, FLAG_ICHOR_DEIGMA_CLUE says the same thing.)
+//
+// Thaletas (14,5) trades his Narkeray, SOCRATES, for an Onotis: in-game trade
+// INGAME_TRADE_ICHOR_SOCRATES, FLAG_ICHOR_TRADED_NARKERAY. The ray swims in the
+// harbor beside him (16,5) until then; afterwards the Onotis stands by him
+// (14,4), hidden on FLAG_TEMP_2 until the trade.
+
+mapscripts EmporionCity_Deigma_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_TEMP_1)
+        if (flag(FLAG_ICHOR_ARRIVED_EMPORION) && !flag(FLAG_ICHOR_DEIGMA_CLUE)) {
+            clearflag(FLAG_TEMP_1)
+            setvar(VAR_TEMP_1, 1)
+        }
+        if (!flag(FLAG_ICHOR_TRADED_NARKERAY)) {
+            setflag(FLAG_TEMP_2)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: EmporionCity_Deigma_EventScript_FortyLamps
+    ]
+}
+
+text EmporionCity_Deigma_Text_NameAlethea { "ALETHEA" }
+text EmporionCity_Deigma_Text_NameLampis { "LAMPIS" }
+text EmporionCity_Deigma_Text_NameThaletas { "THALETAS" }
+text EmporionCity_Deigma_Text_NameWoolMerchant { "WOOL MERCHANT" }
+// The name box holds 64 pixels; "GRAIN MERCHANT" needs 66.
+text EmporionCity_Deigma_Text_NameGrainMerchant { "GRAIN TRADER" }
+
+// ---------------------------------------------------------------------------
+// Beat 12. The Deigma: forty lamps
+// ---------------------------------------------------------------------------
+
+script EmporionCity_Deigma_EventScript_FortyLamps {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    applymovement(LOCALID_EMPORION_DEIGMA_ALETHEA, Common_Movement_FaceLeft)
+    waitmovement(0)
+    playse(SE_PIN)
+    applymovement(LOCALID_EMPORION_DEIGMA_ALETHEA, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    setspeaker(EmporionCity_Deigma_Text_NameAlethea)
+    msgbox(format("{PLAYER}! Listen to this. Tell them what you told me."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Deigma_Movement_PlayerToLampsTable)
+    waitmovement(0)
+    applymovement(LOCALID_EMPORION_DEIGMA_LAMPIS, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(EmporionCity_Deigma_Text_NameLampis)
+    msgbox(format("Bronze-helmet folk. Came through four days back.\p"
+                  "Bought twenty shovels, a mile of rope, and forty lamps.\p"
+                  "Forty! I've never sold forty lamps to one person. Not even a priest.\p"
+                  "A big man paid. In silver. Shouting the whole time. Friendly shouting.\p"
+                  "He's been hiring dockhands off the quay all month. Silver a day.\p"
+                  "Then they asked the road to Eleusa. I said the Sacred Way's shut.\p"
+                  "They said they'd go round. Over the goat paths."))
+    setspeaker(EmporionCity_Deigma_Text_NameAlethea)
+    msgbox(format("Shovels. Rope. Forty lamps.\p"
+                  "You don't take forty lamps to a field. You take them underground.\p"
+                  "“Where the grain goes underground.” Under Eleusa. The Mysteries.\p"
+                  "I was right. Daphne was right. Truthfully, I wish we weren't.\p"
+                  "The Sacred Way's the fast road, and only heralds may walk it now."))
+    closemessage
+    // She walks round the lamp table and down to the notice board by the door;
+    // the player follows and stands behind her.
+    applymovement(LOCALID_EMPORION_DEIGMA_ALETHEA, EmporionCity_Deigma_Movement_AletheaToNotice)
+    delay(24)
+    applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Deigma_Movement_PlayerToNotice)
+    waitmovement(LOCALID_EMPORION_DEIGMA_ALETHEA)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    // The hook, first sighting (STORY.md §3): one line, no explanation.
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A public notice, sealed with the Archon's owl:\p"
+                  "“By order of the Archon. The Sacred Way is closed to all but heralds…\p"
+                  "…for the Mysteries' truce. Obey, and be safe.”"))
+    setspeaker(EmporionCity_Deigma_Text_NameAlethea)
+    msgbox(format("Odd. There's a little hook under the owl.\p"
+                  "…Never mind. Probably a clerk's habit."))
+    applymovement(LOCALID_EMPORION_DEIGMA_ALETHEA, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(EmporionCity_Deigma_Text_NameAlethea)
+    msgbox(format("So you need Kerykos's laurel. I'll write to Daphne.\p"
+                  "Kerykos's runners carry letters faster than any ship. Somehow."))
+    closemessage
+    applymovement(LOCALID_EMPORION_DEIGMA_ALETHEA, EmporionCity_Deigma_Movement_AletheaOut)
+    waitmovement(0)
+    playse(SE_EXIT)
+    removeobject(LOCALID_EMPORION_DEIGMA_ALETHEA)
+    setflag(FLAG_ICHOR_DEIGMA_CLUE)
+    releaseall
+}
+
+// From the door mat (2,9) up the aisle and along it to Lampis's table.
+movement EmporionCity_Deigma_Movement_PlayerToLampsTable {
+    walk_up * 4
+    walk_right * 4
+    face_right
+}
+
+// Round the right end of the lamp table, down past the helmet, along the front
+// and up to the notice board (1,8).
+movement EmporionCity_Deigma_Movement_AletheaToNotice {
+    walk_right
+    walk_down * 4
+    walk_left * 7
+    walk_up
+    face_left
+}
+
+// Back along the aisle and down behind her (2,8).
+movement EmporionCity_Deigma_Movement_PlayerToNotice {
+    walk_left * 4
+    walk_down * 3
+    face_left
+}
+
+movement EmporionCity_Deigma_Movement_AletheaOut {
+    walk_down
+    walk_right
+    walk_in_place_faster_down
+}
+
+// ---------------------------------------------------------------------------
+// The people of the Deigma
+// ---------------------------------------------------------------------------
+
+script EmporionCity_Deigma_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Deigma_Text_NameAlethea)
+    msgbox(format("Shovels. Rope. Forty lamps."))
+    release
+}
+
+script EmporionCity_Deigma_EventScript_Lampis {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Deigma_Text_NameLampis)
+    msgbox(format("Forty lamps. I keep thinking about it.\p"
+                  "You'd need a lot of dark to want forty lamps."))
+    release
+}
+
+script EmporionCity_Deigma_EventScript_Thaletas {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_TRADED_NARKERAY)) {
+        setspeaker(EmporionCity_Deigma_Text_NameThaletas)
+        msgbox(format("“Socrates.” A man in Astyra named it. It does what Socrates does.\p"
+                      "Touch it, and you can't think straight for an hour."))
+        release
+        end
+    }
+    setspeaker(EmporionCity_Deigma_Text_NameThaletas)
+    msgbox(format("I hooked this on the crossing. Flat as a plate. Numbs my hands.\p"
+                  "I'd trade it for anything with legs. An Onotis, say. I like a donkey."))
+    // The in-game trade, written out as Pheidon's is (AeginaTown_Mint) so each
+    // line carries Thaletas's name box.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_SOCRATES)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(EmporionCity_Deigma_Text_NameThaletas)
+    msgbox(format("Trade me an Onotis for my Narkeray?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(EmporionCity_Deigma_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(EmporionCity_Deigma_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(EmporionCity_Deigma_Text_NameThaletas)
+        msgbox(format("That's no Onotis. I said legs. Long ears. A donkey."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_NARKERAY)
+    removeobject(LOCALID_EMPORION_DEIGMA_NARKERAY)
+    clearflag(FLAG_TEMP_2)
+    addobject(LOCALID_EMPORION_DEIGMA_ONOTIS)
+    setspeaker(EmporionCity_Deigma_Text_NameThaletas)
+    msgbox(format("“Socrates.” A man in Astyra named it. It does what Socrates does.\p"
+                  "Touch it, and you can't think straight for an hour."))
+    release
+}
+
+script EmporionCity_Deigma_EventScript_NoTrade {
+    setspeaker(EmporionCity_Deigma_Text_NameThaletas)
+    msgbox(format("Then my hands stay numb. Ah, well."))
+    release
+    end
+}
+
+script EmporionCity_Deigma_EventScript_Narkeray {
+    lock
+    playmoncry(SPECIES_NARKERAY, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A torpedo ray, flat as a plate, idling by the quay. It hums faintly."))
+    waitmoncry
+    release
+}
+
+script EmporionCity_Deigma_EventScript_Onotis {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ONOTIS, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("It's nosing through Thaletas's pockets. He doesn't seem to mind."))
+    waitmoncry
+    release
+}
+
+script EmporionCity_Deigma_EventScript_WoolMerchant {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Deigma_Text_NameWoolMerchant)
+    msgbox(format("Purple from Tyre. Saffron from Eleusa. Red from my own shins.\p"
+                  "I don't recommend the last one."))
+    release
+}
+
+script EmporionCity_Deigma_EventScript_GrainMerchant {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Deigma_Text_NameGrainMerchant)
+    msgbox(format("Every city sends Eleusa its first fruits. A share of every harvest.\p"
+                  "All of it goes underground. Into their granaries.\p"
+                  "Nobody knows what they do with it. Eat it, I assume. Slowly."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Things in the hall
+// ---------------------------------------------------------------------------
+
+script EmporionCity_Deigma_EventScript_Notice {
+    msgbox(format("A public notice, sealed with the Archon's owl:\p"
+                  "“By order of the Archon. The Sacred Way is closed to all but heralds…\p"
+                  "…for the Mysteries' truce. Obey, and be safe.”"), MSGBOX_SIGN)
+}
+
+script EmporionCity_Deigma_EventScript_ScribesDesk {
+    msgbox(format("The scribe's desk. Every sample is written down: whose, from where, and the price."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_Deigma_EventScript_Register {
+    msgbox(format("Contracts in their pigeonholes, each tagged with a ship's name."), MSGBOX_SIGN)
+}
+
+script EmporionCity_Deigma_EventScript_Tunny {
+    msgbox(format("A stuffed tunny, as big as a boy. Its glass eye follows you round the hall."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_Deigma_EventScript_Lamps {
+    msgbox(format("Clay oil lamps on a stepped stand. There's a gap where a great many were."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_Deigma_EventScript_Wool {
+    msgbox(format("Bolts of wool: Tyrian purple, saffron, madder red, Aegean blue."), MSGBOX_SIGN)
+}
+
+script EmporionCity_Deigma_EventScript_Oil {
+    msgbox(format("Samples of oil in their amphorae, each sealed with its farm's stamp."), MSGBOX_SIGN)
+}
+
+script EmporionCity_Deigma_EventScript_Grain {
+    msgbox(format("Open sacks of barley and wheat, and a bowl of first fruits."), MSGBOX_SIGN)
+}
+
+script EmporionCity_Deigma_EventScript_Helmet {
+    msgbox(format("A single bronze helmet with a red crest. Nobody in Emporion wears one like it."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_Deigma_EventScript_Scales {
+    msgbox(format("The Deigma's balance. Every sample is weighed before it's priced."), MSGBOX_SIGN)
+}
