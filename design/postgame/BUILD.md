@@ -2,6 +2,7 @@
 
 - **Owner:** the world-postgame session, branch `claude/world-postgame-9fad0c`. The director merges this branch into main; this session never merges into main.
 - **What it builds:** the Aethos post-game, from the epilogue's last fade to the Prime Mover: the opening hooks, Olympia and the Olympiad, the sailing layer, the Labors, the Katabasis, the Odyssey, Atlantis, the summit and its Primordials, the theoxenia's extended tier (E6–E13 and the finale), the Aethos-side legendary quests, and the music cue lists.
+- **Every post-game place on the Aethos chart is ours** (the director, 2026-11-14): Routes 31 (the Mani, Lakonia to Tainaron), 32 (the Sacred Way, Arkadia to Olympia), 33 (the western sea to Atlantis, Ithaka and Kerkyra) and 34 (Kaldera's sea to Rhodos), and Cape Tainaron, Olympia, Atlantis, Rhodos, Ithaka and Kerkyra.
 - **What it doesn't:** the League, the credits and the epilogue itself (world-act3), the Oikoumene's chart and its ten lands (world-oikoumene), the shared engine systems (ichor-engine), the dex (aethos-dex).
 
 **Read first, in this order:** `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, `design/POSTGAME.md` (the frame), your epic's doc (`design/LABORS.md`, `design/UNDERWORLD.md` or `design/ODYSSEY.md`), `design/BALANCE.md` (the Aethos post-game row is wild 55–70, trainers 65–75, bosses 70–80; the Odyssey uses the Oikoumene row), `design/TERMS.md`, `design/ENGINE_API.md`, `design/postgame/ENGINE.md` (this branch's engine pieces), `design/MUSIC.md`, `tools/ichor/claim_ranges.md`. Then the model for your kind of work: world-act2's `design/phase3/BUILD.md` and its builders (`git show claude/world-act2-0a92e7:<path>`), world-act1's `design/phase2/BUILD.md`.
@@ -12,7 +13,14 @@
 
 ## 1. The rules every agent follows
 
-**The quality bar is the best ROM hacks.** The user's first priority for maps is that they look great.
+**The quality bar is the best ROM hacks.** The user's first priority for maps is that they look great. In their words (via the director, 2026-11-14): "We need all these maps created. All these routes created. Thoughtfully. Engaging. Well designed. To Pokémon standards, including plenty of grass and wild encounters etc. Items etc." So, on every map:
+- **Grass:** forced bands across the path, plus plenty of optional grass with a reason to go in.
+- **Wild tables by time of day:** `_Morning`, `_Day` and `_Night` land tables (`wild_encounters.json` supports them; see `gKallisteRoute1_Morning`), surf and fishing on water, rock smash at breakable rocks, all in BALANCE.md's band.
+- **Items:** visible and hidden; every dead end pays.
+- **Trainers** are checkpoints. **Every route** has a set piece and signs at its ends and forks.
+- **The audit is hard:** MAP_DESIGN §8 ("The route standard, in numbers", on main since 96a88cd7fe) at the **late** figures: grass 15 a screen with 8 cells forced; trainers 0.9 a land screen (floor 8) and 0.35 a sea screen (floor 5); item balls 0.3 a screen (floor 5) and 4 hidden items on a land route, 2 and 2 at sea; 7 species in each land table, 3 surfing, 4 fishing; Morning and Night tables wherever there's grass; signs at every end; the dungeon and town minimums. `python3 tools/ichor/map_audit.py <your maps>` must exit 0 before you report; put its output in the report. Add new places to `STAGES` in map_audit.py as late. Where a map's class isn't its type's (an arena, a side area), set `"ichor_kind"` in its map.json.
+- **Size maps to the budget.** Trainers and hidden items are counted per screen, and ids are scarce (§3), so don't make a map bigger than its design needs: a set-piece arena is a `dungeon`, and a sea map is as big as its sailing, not 80×80 by default.
+- **Renders** of every map go to the director.
 - **Every house is enterable,** with someone living there and something that happens: a gift, a trade, a quest, a minigame, a rematch, or lore that leads to a reward (MAP_DESIGN §2). Spread the rewards; open some after a later beat.
 - **Every interior is a unique layout.** No room is copied from another, here or on any other branch.
 - **Routes force you into grass,** with trainers as checkpoints, ledges toward the previous town, and an item in every dead end (MAP_DESIGN §1).
@@ -47,13 +55,13 @@ PG-2's order: the sailing layer first, then Olympia, the Katabasis, the Labors, 
 | # | Batch | Maps | Engine it needs | Status |
 |---|---|---|---|---|
 | 1 | **Set sail:** the post-game's opening hooks; the *Euploia* refitted (deck and below deck, every service aboard); the ship at sea, wind, stars and the helm's voyages; Route 33, the western sea; the crew who join at Akti; the music cue lists | 4 | IchorEpics; the sailing layer (this branch) | **in progress** |
-| 2 | **Olympia:** the Sacred Way (Route 32), the Altis, the Temple of Zeus, the Leonidaion, the Echo Stoa (Arena of Champions), Phidias's workshop, the Heraion; the Stadion, the Horse, the Palaestra and the Apple Course with their Brains; the Moment and Nike; E8 (Sam) and E9 (Hera's ford) on the Sacred Way | ~16 | The Frontier re-skin (this branch); the bull-leap timing (ichor-engine, E7) | |
+| 2 | **Olympia, and the far lands' tilesets:** the Sacred Way (Route 32), the Altis, the Temple of Zeus, the Leonidaion, the Echo Stoa (Arena of Champions), Phidias's workshop, the Heraion; the Stadion, the Horse, the Palaestra and the Apple Course with their Brains; the Moment and Nike; E8 (Sam) and E9 (Hera's ford) on the Sacred Way; the `steppe` and `far_west` tilesets, early, for the Oikoumene | ~16 | The Frontier re-skin (this branch); the bull-leap timing (ichor-engine, E7) | |
 | 3 | **The Katabasis:** the Mani Road (Route 31), Cape Tainaron, the Descent, the Acheron, the Styx, the Gate, the Meadows, the Crossroads, Lethe, Mnemosyne, the House of Hades and its Vault, the Bronze Gates, Tartarus and its five cells, Sisyphus's Hill, the Chasm, Elysium and its shore, the Ascent, the House of Night; the messages home; E11 (Hades) and E12 (Persephone) | 28 | The judgment, the don't-look-back rule, Lethe's fog (this branch); carried flame (ichor-engine) | |
 | 4 | **The Labors, pairs 1–3:** Scene 0, the Heraion and Olympias; Nemea Glen and the Lion's Den; Lerna; the Ladon Ford; Erymanthos and the Snowfield; Augeas's farm and the Stable Yard; the Stymphalian Reeds | 10 | Flee-from-player movement, roamer flee, krotala (this branch); Asterion's charge and drifts, beam trace (ichor-engine) | |
 | 5 | **The Labors, pairs 4–6, and the Kotinos:** the Bull's Shore and Crossing; Abdera and the Bistonian Plain; the Thermodon Road, Themiskyra, Hippolyta's Hall; the Western Cape, the Ocean Stream, the Strait of the Pillars, Erytheia, Geryon's Pasture; the Caucasus Crag, the Garden, Atlas's Ridge; Kerberos; the finale | 18 | Bull ride, cup ride, holding the sky (this branch); bull-leap, the no-shadow tell (ichor-engine) | |
 | 6 | **The Odyssey:** the wine-dark sea (three sea maps), the Lotus Isle, the Cyclops's island and cave, Aiolia and its hall, Aiaia and Circe's hall, the Sirens' Strait, the Strait and Scylla's cave, Thrinakia, Proteus's islet (E13), Scheria, the Mist Beach, the homecoming in Elaia, and the theoxenia finale at home | 27 | Tornadus's storm, the Cyclops's eye, the Sirens' wax (this branch); the disguise state for Circe's forms and the beggar (ichor-engine) | |
 | 7 | **Atlantis and the summit:** beyond the Pillars, the Nereids, the three rings (surface and underwater), the temple, the nursery, the abyss, the edge of the world (Kyogre); the Korykian cave (Groudon); the cloud meadows and Ouranos's sky (Rayquaza, Pegaunos); the summit path and the unmoved mover (Arceus); the colossi; Ichorin; the Loom and the Kleos page | 20 | Breath, the unmoved mover (this branch); the Scroll of Deeds' Kleos page (ichor-engine) | |
-| 8 | **The rest of the theoxenia and the legends:** E6, E7, E10 as placements on the act maps; LEGENDS §7's Aethos post-game quests (Celebi, Heatran, Type: Null, Magearna, Marshadow, the satyr play); POSTGAME §3.4's Aethos homes; Time Fractures; Route 34 and Rhodos | ~6 | Time Fractures overlay (this branch) | |
+| 8 | **The rest of the theoxenia and the legends:** E6, E7, E10 as placements on the act maps; LEGENDS §7's Aethos post-game quests (Celebi, Heatran, Type: Null, Magearna, Marshadow, the satyr play); POSTGAME §3.4's Aethos homes; Time Fractures; Route 34 and Rhodos; Ithaka | ~8 | Time Fractures overlay (this branch) | |
 
 The order inside a batch is parallel. Each batch ends with an integration pass here, a full green run, a push, and a report with renders to the director (§6).
 
@@ -78,21 +86,22 @@ From `tools/ichor/claim_ranges.md`: trainer ids **500–679**; bank flags **0x30
 | `VAR_ICHOR_ODYSSEY` | The Odyssey, 0–30 (ODYSSEY §15) |
 | `VAR_ICHOR_KATABASIS` | The Katabasis (UNDERWORLD §13) |
 
-**Sub-ranges.** Bank flag offsets, vanilla flags and trainer ids per batch; each batch's agents get theirs in the batch's section. Bank vars 21–23 are held back for the epics that ask.
+**Sub-ranges.** Bank flag offsets, vanilla flags and trainer ids per batch; each batch's agents get theirs in the batch's section. Bank vars 21–23 are held back for the epics that ask. The second bank (offsets 0x700–0x7FF, IchorSave's `flags2`, on main since a5de99c630) is split here too; `claim.py --range 0x700-0x7FF bankflag …` works the same.
 
 | Batch | Bank flag offsets | Vanilla flags (hidden items) | Trainer ids |
 |---|---|---|---|
 | 1 | 0x300–0x32F | 0x480–0x487 | 500–509 |
-| 2 | 0x330–0x34F | 0x488–0x48F | 510–539 |
-| 3 | 0x350–0x36F | 0x490–0x49B | 540–569 |
-| 4–5 | 0x370–0x39F | 0x49C–0x4AB | 570–629 |
-| 6 | 0x3A0–0x3B3 | 0x4AC–0x4B5 | 630–664 |
-| 7–8 | 0x3B4–0x3BF | 0x4B6–0x4BF | 665–679 |
+| 2 | 0x330–0x34F, 0x700–0x71F | 0x488–0x48F | 510–539 |
+| 3 | 0x350–0x36F, 0x720–0x75F | 0x490–0x49B | 540–569 |
+| 4–5 | 0x370–0x39F, 0x760–0x7AF | 0x49C–0x4AB | 570–629 |
+| 6 | 0x3A0–0x3B3, 0x7B0–0x7DF | 0x4AC–0x4B5 | 630–664 |
+| 7–8 | 0x3B4–0x3BF, 0x7E0–0x7FF | 0x4B6–0x4BF | 665–679 |
 
-**The range is short, and the director has the ask** (2026-11-14). The epics' own counts are about 140 story flags (LABORS ~40, UNDERWORLD ~30, ODYSSEY ~35, POSTGAME ~35), about 60 hide flags, and an item ball or two on each of about 130 maps, against 192 bank flags and 64 vanilla flags. Until it's answered:
+**Flags: 448 bank flags in all** (the director's answer, 2026-11-14), against the epics' ~140 story flags, ~60 hide flags and the item balls. So still:
 - Per-epic state goes in `struct IchorEpics` (POSTGAME §6, ENGINE.md), not in flags.
 - Hide flags for people who come and go on one map use `FLAG_TEMP_*`, set in `ON_TRANSITION` from the real state (temp flags clear on every map load).
-- Item balls on batches 1–3 take bank flags from the batch's range; later batches wait for the answer.
+- **Hidden items are the tight one:** 64 vanilla flags for ~130 maps. Put hidden items where they matter most; if a batch needs more, say so in its report and the build lead asks.
+
 
 ---
 
@@ -118,25 +127,47 @@ New post-game systems are built here, in the conventions of ENGINE_API.md, docum
 | Tornadus's storm, the Cyclops's eye, the Sirens' wax, the Lotus's frozen clock | 6 | The Odyssey | ODYSSEY §14 |
 | Breath underwater; the unmoved mover | 7 | Atlantis, the summit | POSTGAME §3.2, §3.3 |
 
-**Asked of ichor-engine** (sent 2026-11-14; each also serves another session):
+**Asked of the other sessions** (sent 2026-11-14; each also serves another session). The answers so far:
 
-| Ask | Needed by here | Also needed by | Fallback until it lands |
-|---|---|---|---|
-| **E7, the bull-leap timing special** (`Ichor_BullLeap`) | The Moment at Olympia (batch 2), Labor 7 (batch 5), Charybdis's fig tree (batch 6) | world-act3 (the Stair of Hours) | A YES/NO on the beat |
-| **The carried flame** (SYSTEMS §2), with rain and relays | Lampon's recruitment (batch 1), Labor 2 (batch 4) | world-act3 (E2), the Oikoumene (Hyperborea) | The flame is carried by a line of dialogue |
-| **The disguise state** (LABYRINTH §5.6), player graphics swapped for a species or a beggar sheet | Circe's forms and the beggar (batch 6) | world-act3 | An icon over the player |
-| **E9, the beam trace**, generalized to water | Labor 5's two rivers (batch 4) | world-act3 | Fixed states per sluice |
-| **Asterion's charge subset and `MB_ICHOR_DRIFT`** | Labor 4's boar (batch 4) | — | Scripted lanes |
-| **The no-shadow opt-out and the follower's bow** (SYSTEMS §10) | Theoxenia E6–E13, Labor 9's disguised goddess | world-act3 (core and E1–E5) | Dialogue tells only |
-| **The Scroll of Deeds' pages:** the Kleos page, the Labors and the Odyssey's pages | Batches 5–7 | — | Flags only |
-| **Digs:** Cape Tainaron's spots with Bronze Obols in the table | Batch 3 | Everyone | `ICHOR_STUB_DIG` |
-| **The star chart's placement call** (SYSTEMS §8) | Cetus, Centaurus, Cancer | Everyone | The constellation's flag is set; the chart shows it later |
+| Ask | Who builds it | Needed by here | The name, once it lands | Fallback until then |
+|---|---|---|---|---|
+| **E7, the bull-leap timing** | world-act3: **built**, on origin/claude/world-act3-4e546d (`src/ichor_bull_leap.c`, API in its `design/phase4/ENGINE_ACT3.md`), not on main yet | The Moment (batch 2), Labor 7 (batch 5), Charybdis's fig tree (batch 6) | `special(Ichor_BullLeap)`: `VAR_0x8004` the moving object's local id, `0x8005` the line's tile `ICHOR_TILE(x, y)`, `0x8006` the window in frames (0 = 10), `0x8007` frames per tile (0 = 6); waits by itself; `VAR_RESULT` `ICHOR_LEAP_EARLY`/`_CLEAN`/`_LATE` (0/1/2, `include/constants/ichor_act3.h`). One call is one pass: for fail-forward, move the object back and call again with a wider window. | A YES/NO on the beat |
+| **The carried flame** | ichor-engine: **on main** (b061bfd18a); rain, `FLAME_HESTIA_SHIP`, `FLAME_LERNA` and travelling flames on their branch (8fd51ef9b3, d27490f692): Hestia's fire keeps its steps through doors and warps; sailing (`FLAG_ICHOR_ON_SHIP`) is being exempted from the water rule | Lampon (batch 1), Labor 2 (batch 4) | `setvar(VAR_0x8004, FLAME_x)`, `setvar(VAR_0x8005, <dry steps>)`, `special(Ichor_TakeFlame)`; `VAR_TEMP_2` steps left, `VAR_TEMP_3` the kind; `call(EventScript_IchorDraught)` puts it out. Asked for: in rain each step costs 2 (scripts give the dry budget); a lit brazier refills a flame; kinds `FLAME_HESTIA_SHIP` and `FLAME_LERNA` | A line of dialogue |
+| **The disguise sprite** | with the director | Circe's forms, the beggar (batch 6) | `setvar(VAR_0x8004, OBJ_EVENT_GFX_…)`, `special(Ichor_SetPlayerGraphics)`, 0 to clear | An icon over the player |
+| **E9, the beam trace** | world-act3: **built**, already generic | Labor 5 (batch 4) | `special(Ichor_TraceBeam)`: `VAR_0x8004` the source object (the beam leaves the way it faces), `0x8005` the first of six metatiles in a row (E–W, N–S, NE, NW, SE, SW): pass six water-channel metatiles. Turns are E8 mirror objects (`MOVEMENT_TYPE_ICHOR_MIRROR*`), so the sluice dials are mirror objects. `VAR_RESULT` the object it ends on or 0, end tile in `0x8006`/`0x8007`. At most 2 beams at once, 128 tiles, 16 turns, no crossing. | Fixed states per sluice |
+| **Asterion's charge for the boar** | ichor-engine: **built** (8fd51ef9b3, ENGINE_API §6) | Labor 4 (batch 4) | `setvar(VAR_0x8004, LOCALID_BOAR)`, `setvar(VAR_0x8005, ICHOR_CHARGER_DEAF \| ICHOR_CHARGER_NO_RETURN \| ICHOR_CHARGER_HIT_SCRIPT)`, `special(Ichor_StartAsterion)`. A hit runs the boar's own script with `VAR_0x8005 = ICHOR_CHARGE_HIT` (do the knockback and piglet battle, then `setvar(VAR_0x8005, 0)`). Drifts: `Ichor_AddDrift` (x, y, flag) in ON_LOAD, up to 8; stuck 360 frames; any snow metatile. | Scripted lanes |
+| **The no-shadow opt-out, the follower's bow** | with the director (theoxenia is unassigned) | E6–E13, Labor 9 | — | Dialogue tells |
+| **The Scroll of Deeds' pages** | with the director (unassigned) | Batches 5–7 | — | Flags only |
+| **Digs** | with the director (excavation is unassigned) | Batch 3 | `EventScript_IchorDigSpot`, `EventScript_IchorDigFixed` (ENGINE_API §8); ask ichor-engine for index blocks | `ICHOR_STUB_DIG` |
+| **The star chart** | ichor-engine | Cetus, Centaurus, Cancer | `setvar(VAR_0x8004, <index>)`, `special(Ichor_PlaceConstellation)` (sets `FLAG_ICHOR_CONSTELLATIONS_START + index`) | Set that flag |
+
+**IchorEpics takes no version bump** (ichor-engine has version 3 for the forced omen and the held time of day): all its defaults are zero-valid, and `reserved` has always been zero-filled.
 
 ---
+
+## 4a. Seams with the act sessions
+
+| Seam | Agreed | Notes |
+|---|---|---|
+| **Route 32 ↔ Arkadia** (world-act2) | Arkadia (50×44) west edge; its road on rows 36–37, verges 35 and 38; 8 aethos-only columns each side. Our `right` connection to `MAP_ARKADIA` has offset *r* − 36, where *r* is the Sacred Way's road row on its east edge. | Their barrier hides on `FLAG_SYS_GAME_CLEAR`; we ask them to swap it for `FLAG_ICHOR_POSTGAME` at integration. We add our connection; the director joins them. |
+| **Route 34 ↔ Kaldera** (world-act2, provisional) | `MAP_KALDERA_CALDERA_ROAD` (32×56)'s east edge, open water on rows 46–51 by the old port; 8 aethos-only columns. Closed until the post-game by whirlpools (Triton's Conch). | Their batch 6 hasn't started; they'll warn us if the rows move. |
+| **Route 31 ↔ Lakonia** (world-act3) | Lakonia's south edge, roped off until the post-game. They send the columns and their 6 primary-only rows when Lakonia is built. | Route 25 enters Lakonia on the east; Route 26 leaves north. |
+| **Lake Stymphalia** (Labor 6's reeds) | It's world-act3's Route 27, not world-act2's. | Ask world-act3 when batch 4 starts. |
 
 ## 5. Shared work with world-oikoumene
 
 LABORS's far lands (Thrace, Themiskyra, the Caucasus, Erytheia and the Pillars, the Garden, Atlas's Ridge) and ODYSSEY's wine-dark sea are **this branch's maps** on the **Oikoumene's chart and map sections**. Agreed with world-oikoumene before each is built, and recorded here:
+
+**Their map sections, adopted** (claude/world-oikoumene-950021 at 86f9c74609; `python3 tools/ichor/oikoumene_sections.py --list`; interiors share their parent's):
+- **The Labors:** `MAPSEC_ABDERA`, `_BISTONIAN_PLAIN`, `_THEMISKYRA`, `_THERMODON_ROAD`, `_CAUCASUS` (our crag, their caves below it), `_PILLARS` (our Strait of the Pillars, their waters round it), `_OCEAN_STREAM`, `_ERYTHEIA`, `_HESPERIDES`, `_ATLAS_RIDGE`.
+- **The Odyssey:** `MAPSEC_WINE_DARK_SEA` (both halves), `_OUTER_SEA` (with Proteus's islet), `_LOTUS_ISLE`, `_CYCLOPS_ISLE`, `_AIOLIA`, `_AIAIA`, `_SIRENS_ROCKS`, `_SCYLLA_STRAIT`, `_THRINAKIA`.
+- **On Aethos sections:** the Western Cape, Maleia's waters, Scheria (Kerkyra) and the Mist Beach.
+
+**Travel:** sea lanes on either chart are real `MAP_TYPE_OCEAN_ROUTE` maps sailed in the ship (their Hellespont and Pontic lanes connect to Route 20 and Route 34). The helm's SET A COURSE is fast travel between ports already reached, so every port has a gangplank and a voyage row. Until our table is on main their ports have a SAIL HOME Nausikles, tagged `ICHOR_STUB_SHIP`.
+
+**Tilesets we share:** LABORS's `steppe` (Thrace, Themiskyra; their Scythia) and `far_west` (Erytheia, the Garden; their Far West) are drawn in **our batch 2**, ahead of their batch 4.
+
+**Seams and warps still to fix** (each when its map is built): their Hellespont lane's landing → Abdera's harbor; their Pontic Coast → Themiskyra's harbor; a cave-mouth tile on our Caucasus crag for their caves; Gadeira and their Atlantic Shore → our Strait of the Pillars; our Atlas's Ridge → their Atlas foothills; quays on our wine-dark sea for their Kroton, Cumae and Ogygia; Route 34's edge → their Pharos waters (primary-only).
 
 | What | Ours | Theirs |
 |---|---|---|

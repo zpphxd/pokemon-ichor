@@ -799,6 +799,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/ichor_herms.inc" @ Ichor: herm waystones
 	.include "data/scripts/ichor_labyrinth.inc" @ Ichor: the Labyrinth
 	.include "data/scripts/ichor_postgame_sailing_stubs.inc" @ Ichor: ICHOR_STUB_SAILING, deleted at the batch 1 merge
+	.include "data/scripts/ichor_frozen.inc" @ Ichor: the Frozen Hour
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"

@@ -591,4 +591,7 @@
 #define PHONEME_ID(song)            ((song) - FIRST_PHONEME_SONG)
 #define PHONEME_ID_NONE             0xFF
 
+// Ichor (world-postgame): the post-game's cues by their final names, aliased to stand-ins.
+#include "constants/ichor_songs_postgame.h"
+
 #endif  // GUARD_CONSTANTS_SONGS_H

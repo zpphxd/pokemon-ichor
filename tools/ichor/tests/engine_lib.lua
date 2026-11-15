@@ -77,6 +77,9 @@ function L.getFlag(f)
   elseif f >= S.ICHOR_DAILY_FLAGS_START and f <= S.ICHOR_DAILY_FLAGS_END then
     local o = f - S.ICHOR_DAILY_FLAGS_START
     return (emu:read8(L.ichor() + S.OFF_ICHOR_DAILY_FLAGS + (o >> 3)) >> (o & 7)) & 1 == 1
+  elseif f >= S.ICHOR_FLAGS2_START and f <= S.ICHOR_FLAGS2_END then
+    local o = f - S.ICHOR_FLAGS2_START
+    return (emu:read8(L.ichor() + S.OFF_ICHOR_FLAGS2 + (o >> 3)) >> (o & 7)) & 1 == 1
   end
   return getFlag1(f)
 end
@@ -94,6 +97,8 @@ function L.setFlag(f, on)
     base, o = L.ichor() + S.OFF_ICHOR_FLAGS, f - S.ICHOR_FLAGS_START
   elseif f >= S.ICHOR_DAILY_FLAGS_START and f <= S.ICHOR_DAILY_FLAGS_END then
     base, o = L.ichor() + S.OFF_ICHOR_DAILY_FLAGS, f - S.ICHOR_DAILY_FLAGS_START
+  elseif f >= S.ICHOR_FLAGS2_START and f <= S.ICHOR_FLAGS2_END then
+    base, o = L.ichor() + S.OFF_ICHOR_FLAGS2, f - S.ICHOR_FLAGS2_START
   else
     base, o = L.sb1() + S.OFF_SB1_FLAGS, f
   end
