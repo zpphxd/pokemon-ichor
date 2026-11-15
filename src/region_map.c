@@ -91,8 +91,10 @@ static u8 MoveRegionMapCursor_Zoomed(void);
 static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
 static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y);
 static bool32 IsIchorPostgameMapSec(mapsec_u16_t mapSecId);
+static bool32 IsIchorHiddenCrossing(mapsec_u16_t mapSecId);
 static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y);
 static void InitMapBasedOnPlayerLocation(void);
+static void SnapCursorToMapSec(void);
 static void RegionMap_InitializeStateBasedOnSSTidalLocation(void);
 static u8 GetMapsecType(mapsec_u16_t mapSecId);
 static mapsec_u16_t CorrectSpecialMapSecId_Internal(mapsec_u16_t mapSecId);
@@ -300,8 +302,10 @@ static const u16 ALIGNED(4) sPokedexAreaMap_Pal[] = INCGFX_U16("graphics/pokedex
 static const u32 sPokedexAreaMap_Gfx[] = INCGFX_U32("graphics/pokedex/region_map.png", ".8bpp.smol", "-num_tiles 232 -Wnum_tiles");
 static const u32 sPokedexAreaMap_Tilemap[] = INCGFX_U32("graphics/pokedex/region_map.bin", ".smolTM");
 
+// Ichor: Kanto's chart slot holds the Oikoumene (tools/ichor/art/ui_oikoumene_map.py).
+// Its sheets are always 256 cells; the Fly map loads them all, the dex area 232.
 static const u16 ALIGNED(4) sPokedexAreaMapKanto_Pal[] = INCGFX_U16("graphics/pokedex/region_map_kanto.pal", ".gbapal");
-static const u32 sPokedexAreaMapKanto_Gfx[] = INCGFX_U32("graphics/pokedex/region_map_kanto.png", ".8bpp.smol");
+static const u32 sPokedexAreaMapKanto_Gfx[] = INCGFX_U32("graphics/pokedex/region_map_kanto.png", ".8bpp.smol", "-num_tiles 232 -Wnum_tiles");
 static const u32 sPokedexAreaMapKanto_Tilemap[] = INCGFX_U32("graphics/pokedex/region_map_kanto.bin", ".smolTM");
 static const u16 ALIGNED(4) sRegionMapKanto_Pal[] = INCGFX_U16("graphics/pokenav/region_map/map_kanto.pal", ".gbapal");
 static const u32 sRegionMapKanto_Gfx[] = INCGFX_U32("graphics/pokenav/region_map/map_kanto.png", ".8bpp.smol");
@@ -384,56 +388,17 @@ const struct RegionMapInfo gRegionMapInfos[] =
 
 static const u8 sMapHealLocations[][3] =
 {
-    [MAPSEC_LITTLEROOT_TOWN] = {MAP_GROUP(MAP_LITTLEROOT_TOWN), MAP_NUM(MAP_LITTLEROOT_TOWN), HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F},
-    [MAPSEC_OLDALE_TOWN] = {MAP_GROUP(MAP_OLDALE_TOWN), MAP_NUM(MAP_OLDALE_TOWN), HEAL_LOCATION_OLDALE_TOWN},
-    [MAPSEC_DEWFORD_TOWN] = {MAP_GROUP(MAP_DEWFORD_TOWN), MAP_NUM(MAP_DEWFORD_TOWN), HEAL_LOCATION_DEWFORD_TOWN},
-    [MAPSEC_LAVARIDGE_TOWN] = {MAP_GROUP(MAP_LAVARIDGE_TOWN), MAP_NUM(MAP_LAVARIDGE_TOWN), HEAL_LOCATION_LAVARIDGE_TOWN},
-    [MAPSEC_FALLARBOR_TOWN] = {MAP_GROUP(MAP_FALLARBOR_TOWN), MAP_NUM(MAP_FALLARBOR_TOWN), HEAL_LOCATION_FALLARBOR_TOWN},
-    [MAPSEC_VERDANTURF_TOWN] = {MAP_GROUP(MAP_VERDANTURF_TOWN), MAP_NUM(MAP_VERDANTURF_TOWN), HEAL_LOCATION_VERDANTURF_TOWN},
-    [MAPSEC_PACIFIDLOG_TOWN] = {MAP_GROUP(MAP_PACIFIDLOG_TOWN), MAP_NUM(MAP_PACIFIDLOG_TOWN), HEAL_LOCATION_PACIFIDLOG_TOWN},
-    [MAPSEC_PETALBURG_CITY] = {MAP_GROUP(MAP_PETALBURG_CITY), MAP_NUM(MAP_PETALBURG_CITY), HEAL_LOCATION_PETALBURG_CITY},
-    [MAPSEC_SLATEPORT_CITY] = {MAP_GROUP(MAP_SLATEPORT_CITY), MAP_NUM(MAP_SLATEPORT_CITY), HEAL_LOCATION_SLATEPORT_CITY},
-    [MAPSEC_MAUVILLE_CITY] = {MAP_GROUP(MAP_MAUVILLE_CITY), MAP_NUM(MAP_MAUVILLE_CITY), HEAL_LOCATION_MAUVILLE_CITY},
-    [MAPSEC_RUSTBORO_CITY] = {MAP_GROUP(MAP_RUSTBORO_CITY), MAP_NUM(MAP_RUSTBORO_CITY), HEAL_LOCATION_RUSTBORO_CITY},
-    [MAPSEC_FORTREE_CITY] = {MAP_GROUP(MAP_FORTREE_CITY), MAP_NUM(MAP_FORTREE_CITY), HEAL_LOCATION_FORTREE_CITY},
-    [MAPSEC_LILYCOVE_CITY] = {MAP_GROUP(MAP_LILYCOVE_CITY), MAP_NUM(MAP_LILYCOVE_CITY), HEAL_LOCATION_LILYCOVE_CITY},
-    [MAPSEC_MOSSDEEP_CITY] = {MAP_GROUP(MAP_MOSSDEEP_CITY), MAP_NUM(MAP_MOSSDEEP_CITY), HEAL_LOCATION_MOSSDEEP_CITY},
-    [MAPSEC_SOOTOPOLIS_CITY] = {MAP_GROUP(MAP_SOOTOPOLIS_CITY), MAP_NUM(MAP_SOOTOPOLIS_CITY), HEAL_LOCATION_SOOTOPOLIS_CITY},
-    [MAPSEC_EVER_GRANDE_CITY] = {MAP_GROUP(MAP_EVER_GRANDE_CITY), MAP_NUM(MAP_EVER_GRANDE_CITY), HEAL_LOCATION_EVER_GRANDE_CITY},
-    [MAPSEC_ROUTE_101] = {MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_102] = {MAP_GROUP(MAP_ROUTE102), MAP_NUM(MAP_ROUTE102), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_103] = {MAP_GROUP(MAP_ROUTE103), MAP_NUM(MAP_ROUTE103), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_104] = {MAP_GROUP(MAP_ROUTE104), MAP_NUM(MAP_ROUTE104), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_105] = {MAP_GROUP(MAP_ROUTE105), MAP_NUM(MAP_ROUTE105), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_106] = {MAP_GROUP(MAP_ROUTE106), MAP_NUM(MAP_ROUTE106), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_107] = {MAP_GROUP(MAP_ROUTE107), MAP_NUM(MAP_ROUTE107), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_108] = {MAP_GROUP(MAP_ROUTE108), MAP_NUM(MAP_ROUTE108), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_109] = {MAP_GROUP(MAP_ROUTE109), MAP_NUM(MAP_ROUTE109), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_110] = {MAP_GROUP(MAP_ROUTE110), MAP_NUM(MAP_ROUTE110), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_111] = {MAP_GROUP(MAP_ROUTE111), MAP_NUM(MAP_ROUTE111), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_112] = {MAP_GROUP(MAP_ROUTE112), MAP_NUM(MAP_ROUTE112), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_113] = {MAP_GROUP(MAP_ROUTE113), MAP_NUM(MAP_ROUTE113), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_114] = {MAP_GROUP(MAP_ROUTE114), MAP_NUM(MAP_ROUTE114), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_115] = {MAP_GROUP(MAP_ROUTE115), MAP_NUM(MAP_ROUTE115), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_116] = {MAP_GROUP(MAP_ROUTE116), MAP_NUM(MAP_ROUTE116), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_117] = {MAP_GROUP(MAP_ROUTE117), MAP_NUM(MAP_ROUTE117), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_118] = {MAP_GROUP(MAP_ROUTE118), MAP_NUM(MAP_ROUTE118), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_119] = {MAP_GROUP(MAP_ROUTE119), MAP_NUM(MAP_ROUTE119), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_120] = {MAP_GROUP(MAP_ROUTE120), MAP_NUM(MAP_ROUTE120), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_121] = {MAP_GROUP(MAP_ROUTE121), MAP_NUM(MAP_ROUTE121), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_122] = {MAP_GROUP(MAP_ROUTE122), MAP_NUM(MAP_ROUTE122), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_123] = {MAP_GROUP(MAP_ROUTE123), MAP_NUM(MAP_ROUTE123), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_124] = {MAP_GROUP(MAP_ROUTE124), MAP_NUM(MAP_ROUTE124), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_125] = {MAP_GROUP(MAP_ROUTE125), MAP_NUM(MAP_ROUTE125), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_126] = {MAP_GROUP(MAP_ROUTE126), MAP_NUM(MAP_ROUTE126), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_127] = {MAP_GROUP(MAP_ROUTE127), MAP_NUM(MAP_ROUTE127), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_128] = {MAP_GROUP(MAP_ROUTE128), MAP_NUM(MAP_ROUTE128), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_129] = {MAP_GROUP(MAP_ROUTE129), MAP_NUM(MAP_ROUTE129), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_130] = {MAP_GROUP(MAP_ROUTE130), MAP_NUM(MAP_ROUTE130), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_131] = {MAP_GROUP(MAP_ROUTE131), MAP_NUM(MAP_ROUTE131), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_132] = {MAP_GROUP(MAP_ROUTE132), MAP_NUM(MAP_ROUTE132), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_133] = {MAP_GROUP(MAP_ROUTE133), MAP_NUM(MAP_ROUTE133), HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_134] = {MAP_GROUP(MAP_ROUTE134), MAP_NUM(MAP_ROUTE134), HEAL_LOCATION_NONE},
+    // Ichor: the Hoenn block's ids are the Oikoumene's (constants/region_map_sections_hoenn.h),
+    // so Hoenn's entries are gone. The Oikoumene's fly targets (design/oikoumene/BUILD.md §5):
+    // AETHOS, the crossing target at the chart's centre, lands at Akti. Each town's
+    // heal location is a placeholder tile until its map lands; its builder moves it.
+    [MAPSEC_AETHOS] = {MAP_GROUP(MAP_AKTI_TOWN), MAP_NUM(MAP_AKTI_TOWN), HEAL_LOCATION_AKTI_TOWN},
+    [MAPSEC_SESTOS] = {MAP_GROUP(MAP_SESTOS), MAP_NUM(MAP_SESTOS), HEAL_LOCATION_SESTOS},
+    [MAPSEC_ILION] = {MAP_GROUP(MAP_ILION), MAP_NUM(MAP_ILION), HEAL_LOCATION_ILION},
+    [MAPSEC_NAUKRATIS] = {MAP_GROUP(MAP_NAUKRATIS), MAP_NUM(MAP_NAUKRATIS), HEAL_LOCATION_NAUKRATIS},
+    [MAPSEC_MEMPHIS] = {MAP_GROUP(MAP_MEMPHIS), MAP_NUM(MAP_MEMPHIS), HEAL_LOCATION_MEMPHIS},
+    [MAPSEC_SALMYDESSOS] = {MAP_GROUP(MAP_SALMYDESSOS), MAP_NUM(MAP_SALMYDESSOS), HEAL_LOCATION_SALMYDESSOS},
+    [MAPSEC_AIA] = {MAP_GROUP(MAP_AIA), MAP_NUM(MAP_AIA), HEAL_LOCATION_AIA},
 // Ichor: outside an FRLG build the Kanto IDs below are Aethos's routes and
 // islands (design/AETHOS_MAP.md), so their Kanto heal locations go.
 #if IS_FRLG
@@ -546,6 +511,9 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_ELAIA_VILLAGE] = {MAP_GROUP(MAP_ELAIA_VILLAGE), MAP_NUM(MAP_ELAIA_VILLAGE), HEAL_LOCATION_ELAIA_VILLAGE},
     [MAPSEC_KALLISTE_ROUTE_1] = {MAP_GROUP(MAP_KALLISTE_ROUTE1), MAP_NUM(MAP_KALLISTE_ROUTE1), HEAL_LOCATION_NONE},
     [MAPSEC_AKTI_TOWN] = {MAP_GROUP(MAP_AKTI_TOWN), MAP_NUM(MAP_AKTI_TOWN), HEAL_LOCATION_AKTI_TOWN},
+    // Ichor: THE OIKOUMENE, Aethos's crossing target in the edge fog. FilterFlyDestination
+    // sends it to the last Oikoumene port you were in; Sestos is the default.
+    [MAPSEC_THE_OIKOUMENE] = {MAP_GROUP(MAP_SESTOS), MAP_NUM(MAP_SESTOS), HEAL_LOCATION_SESTOS},
 };
 
 static const u8 *const sEverGrandeCityNames[] =
@@ -558,7 +526,7 @@ static const struct MultiNameFlyDest sMultiNameFlyDestinations[] =
 {
     {
         .name = sEverGrandeCityNames,
-        .mapSecId = MAPSEC_EVER_GRANDE_CITY,
+        .mapSecId = MAPSEC_NONE, // Ichor: Ever Grande's id is the Delta Reeds now; no place has two names
         .flag = FLAG_LANDMARK_POKEMON_LEAGUE
     }
 };
@@ -1216,6 +1184,9 @@ static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
                 return sRegionMapSections_Sevii67[y][x];
         case KANTO_SUBREGION_KANTO:
         default:
+                // Ichor: the Oikoumene's chart, and AETHOS at its centre once you've arrived
+                if (IsIchorHiddenCrossing(sRegionMapSections_Kanto[y][x]))
+                    return MAPSEC_NONE;
                 return sRegionMapSections_Kanto[y][x];
         }
     case REGION_HOENN:
@@ -1223,8 +1194,19 @@ static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
             // Ichor: the post-game's places are painted faint and stay unnamed until the game is cleared
             if (IsIchorPostgameMapSec(sRegionMap_MapSectionLayout[y][x]) && !FlagGet(FLAG_SYS_GAME_CLEAR))
                 return MAPSEC_NONE;
+            if (IsIchorHiddenCrossing(sRegionMap_MapSectionLayout[y][x]))
+                return MAPSEC_NONE;
             return sRegionMap_MapSectionLayout[y][x];
     }
+}
+
+// Ichor: the two crossing targets (design/OIKOUMENE.md §2), AETHOS on the
+// Oikoumene chart and THE OIKOUMENE in the Aethos chart's edge fog, stay
+// unnamed, and draw no fly target, until you've reached the Oikoumene.
+static bool32 IsIchorHiddenCrossing(mapsec_u16_t mapSecId)
+{
+    return (mapSecId == MAPSEC_AETHOS || mapSecId == MAPSEC_THE_OIKOUMENE)
+        && !FlagGet(FLAG_ICHOR_OIKOUMENE_ARRIVED);
 }
 
 // Ichor: Cape Tainaron, Olympia, Atlantis, the Odyssey's islands, Rhodos and
@@ -1367,41 +1349,51 @@ static void InitMapBasedOnPlayerLocation(void)
         y = gRegionMapEntries[sRegionMap->mapSecId].height - 1;
     }
 
+    // Ichor: Hoenn's bent routes (114, 121, 126) had hand-placed cells here;
+    // their ids are the Oikoumene's now (the Pontic Coast, Leuke, Sardis), so
+    // SnapCursorToMapSec below does that job for every section instead.
+    (void)xOnMap;
     switch (sRegionMap->mapSecId)
     {
-    case MAPSEC_ROUTE_114:
-        if (y != 0)
-            x = 0;
-        break;
-    case MAPSEC_ROUTE_126:
-    case MAPSEC_UNDERWATER_126:
-        x = 0;
-        if (gSaveBlock1Ptr->pos.x > 32)
-            x++;
-        if (gSaveBlock1Ptr->pos.x > 51)
-            x++;
-
-        y = 0;
-        if (gSaveBlock1Ptr->pos.y > 37)
-            y++;
-        if (gSaveBlock1Ptr->pos.y > 56)
-            y++;
-        break;
-    case MAPSEC_ROUTE_121:
-        x = 0;
-        if (xOnMap > 14)
-            x++;
-        if (xOnMap > 28)
-            x++;
-        if (xOnMap > 54)
-            x++;
-        break;
     case MAPSEC_UNDERWATER_MARINE_CAVE:
         GetMarineCaveCoords(&sRegionMap->cursorPosX, &sRegionMap->cursorPosY);
         return;
     }
     sRegionMap->cursorPosX = gRegionMapEntries[sRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
     sRegionMap->cursorPosY = gRegionMapEntries[sRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
+    SnapCursorToMapSec();
+}
+
+// Ichor: a section whose cells don't fill its box (a winding route, Okeanos
+// round the Oikoumene's rim) can put the scaled position on someone else's
+// cell. Move it to the section's own cell nearest to where it fell.
+static void SnapCursorToMapSec(void)
+{
+    u16 x, y, bestX = 0, bestY = 0;
+    u32 dist, best = 0xFFFF;
+
+    if (GetMapSecIdAt(sRegionMap->cursorPosX, sRegionMap->cursorPosY) == sRegionMap->mapSecId)
+        return;
+    for (y = MAPCURSOR_Y_MIN; y <= MAPCURSOR_Y_MAX; y++)
+    {
+        for (x = MAPCURSOR_X_MIN; x <= MAPCURSOR_X_MAX; x++)
+        {
+            if (GetMapSecIdAt(x, y) != sRegionMap->mapSecId)
+                continue;
+            dist = abs(x - sRegionMap->cursorPosX) + abs(y - sRegionMap->cursorPosY);
+            if (dist < best)
+            {
+                best = dist;
+                bestX = x;
+                bestY = y;
+            }
+        }
+    }
+    if (best != 0xFFFF)
+    {
+        sRegionMap->cursorPosX = bestX;
+        sRegionMap->cursorPosY = bestY;
+    }
 }
 
 static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
@@ -1464,42 +1456,14 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
     {
     case MAPSEC_NONE:
         return MAPSECTYPE_NONE;
-    case MAPSEC_LITTLEROOT_TOWN:
-        return FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_OLDALE_TOWN:
-        return FlagGet(FLAG_VISITED_OLDALE_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_DEWFORD_TOWN:
-        return FlagGet(FLAG_VISITED_DEWFORD_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_LAVARIDGE_TOWN:
-        return FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_FALLARBOR_TOWN:
-        return FlagGet(FLAG_VISITED_FALLARBOR_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_VERDANTURF_TOWN:
-        return FlagGet(FLAG_VISITED_VERDANTURF_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_PACIFIDLOG_TOWN:
-        return FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_PETALBURG_CITY:
-        return FlagGet(FLAG_VISITED_PETALBURG_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_SLATEPORT_CITY:
-        return FlagGet(FLAG_VISITED_SLATEPORT_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_MAUVILLE_CITY:
-        return FlagGet(FLAG_VISITED_MAUVILLE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_RUSTBORO_CITY:
-        return FlagGet(FLAG_VISITED_RUSTBORO_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_FORTREE_CITY:
-        return FlagGet(FLAG_VISITED_FORTREE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_LILYCOVE_CITY:
-        return FlagGet(FLAG_VISITED_LILYCOVE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_MOSSDEEP_CITY:
-        return FlagGet(FLAG_VISITED_MOSSDEEP_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_SOOTOPOLIS_CITY:
-        return FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    case MAPSEC_EVER_GRANDE_CITY:
-        return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+    // Ichor: Hoenn's towns and Southern Island are gone; their ids are the
+    // Oikoumene's (constants/region_map_sections_hoenn.h).
     case MAPSEC_BATTLE_FRONTIER:
         return FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
-    case MAPSEC_SOUTHERN_ISLAND:
-        return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? MAPSECTYPE_ROUTE : MAPSECTYPE_NONE;
+    // Ichor: the crossing targets, once you've reached the Oikoumene (design/OIKOUMENE.md §2)
+    case MAPSEC_AETHOS:
+    case MAPSEC_THE_OIKOUMENE:
+        return FlagGet(FLAG_ICHOR_OIKOUMENE_ARRIVED) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_NONE;
     // Ichor: outside an FRLG build these Kanto IDs are Aethos's routes and islands
     // (design/AETHOS_MAP.md), so they must not read as Kanto towns.
 #if IS_FRLG
@@ -1573,6 +1537,10 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
     case MAPSEC_ATLANTIS:
         return MAPSECTYPE_CITY_CANTFLY;
     default:
+        // Ichor: an Oikoumene town opens as a fly target once you've been there
+        // (src/regions.c keeps the list, and marks it on every map load)
+        if (Ichor_IsOikoumeneTown(mapSecId))
+            return Ichor_IsOikoumeneTownVisited(mapSecId) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
         return MAPSECTYPE_ROUTE;
     }
 }
@@ -1586,6 +1554,11 @@ static mapsec_u16_t CorrectSpecialMapSecId_Internal(mapsec_u16_t mapSecId)
 {
     u32 i;
 
+    // Ichor: the table below sends Hoenn's caves and dives to their routes.
+    // Some of their ids are Oikoumene places now (Kyrene, Lake Maeotis), which
+    // are on the chart as themselves.
+    if (IsOikoumeneMapSec(mapSecId))
+        return mapSecId;
     for (i = 0; i < ARRAY_COUNT(sMarineCaveMapSecIds); i++)
     {
         if (sMarineCaveMapSecIds[i] == mapSecId)
@@ -2207,6 +2180,8 @@ struct FlyLocation
     u16 mapsec;
 };
 
+#define FLY_OIKOUMENE_VISITED 0xFFFF // Ichor: not a flag; see IsFlyLocationOpen
+
 static const struct FlyLocation sFlyLocations[] =
 {
     // Ichor: Aethos's fly targets. Add each town with its visited flag as its maps land.
@@ -2220,86 +2195,54 @@ static const struct FlyLocation sFlyLocations[] =
         .mapsec = MAPSEC_AKTI_TOWN,
         .flag = FLAG_ICHOR_VISITED_AKTI,
     },
+    // Ichor: THE OIKOUMENE, in the edge fog: to the last Oikoumene port (design/OIKOUMENE.md §2)
     {
         .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_LITTLEROOT_TOWN,
-        .flag = FLAG_VISITED_LITTLEROOT_TOWN,
+        .mapsec = MAPSEC_THE_OIKOUMENE,
+        .flag = FLAG_ICHOR_OIKOUMENE_ARRIVED,
+    },
+    // Ichor: the Oikoumene's fly targets, in Kanto's chart slot. AETHOS at the
+    // centre crosses back to Akti; each town opens once you've been there
+    // (FLY_OIKOUMENE_VISITED: src/regions.c's list, not a flag). Later batches
+    // add their towns here and to sOikoumeneTowns.
+    {
+        .regionMapType = REGION_MAP_KANTO,
+        .mapsec = MAPSEC_AETHOS,
+        .flag = FLAG_ICHOR_OIKOUMENE_ARRIVED,
     },
     {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_OLDALE_TOWN,
-        .flag = FLAG_VISITED_OLDALE_TOWN,
+        .regionMapType = REGION_MAP_KANTO,
+        .mapsec = MAPSEC_SESTOS,
+        .flag = FLY_OIKOUMENE_VISITED,
     },
     {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_DEWFORD_TOWN,
-        .flag = FLAG_VISITED_DEWFORD_TOWN,
+        .regionMapType = REGION_MAP_KANTO,
+        .mapsec = MAPSEC_ILION,
+        .flag = FLY_OIKOUMENE_VISITED,
     },
     {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_LAVARIDGE_TOWN,
-        .flag = FLAG_VISITED_LAVARIDGE_TOWN,
+        .regionMapType = REGION_MAP_KANTO,
+        .mapsec = MAPSEC_NAUKRATIS,
+        .flag = FLY_OIKOUMENE_VISITED,
     },
     {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_FALLARBOR_TOWN,
-        .flag = FLAG_VISITED_FALLARBOR_TOWN,
+        .regionMapType = REGION_MAP_KANTO,
+        .mapsec = MAPSEC_MEMPHIS,
+        .flag = FLY_OIKOUMENE_VISITED,
     },
     {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_VERDANTURF_TOWN,
-        .flag = FLAG_VISITED_VERDANTURF_TOWN,
+        .regionMapType = REGION_MAP_KANTO,
+        .mapsec = MAPSEC_SALMYDESSOS,
+        .flag = FLY_OIKOUMENE_VISITED,
     },
     {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_PACIFIDLOG_TOWN,
-        .flag = FLAG_VISITED_PACIFIDLOG_TOWN,
+        .regionMapType = REGION_MAP_KANTO,
+        .mapsec = MAPSEC_AIA,
+        .flag = FLY_OIKOUMENE_VISITED,
     },
-    {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_PETALBURG_CITY,
-        .flag = FLAG_VISITED_PETALBURG_CITY,
-    },
-    {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_SLATEPORT_CITY,
-        .flag = FLAG_VISITED_SLATEPORT_CITY,
-    },
-    {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_MAUVILLE_CITY,
-        .flag = FLAG_VISITED_MAUVILLE_CITY,
-    },
-    {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_RUSTBORO_CITY,
-        .flag = FLAG_VISITED_RUSTBORO_CITY,
-    },
-    {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_FORTREE_CITY,
-        .flag = FLAG_VISITED_FORTREE_CITY,
-    },
-    {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_LILYCOVE_CITY,
-        .flag = FLAG_VISITED_LILYCOVE_CITY,
-    },
-    {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_MOSSDEEP_CITY,
-        .flag = FLAG_VISITED_MOSSDEEP_CITY,
-    },
-    {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_SOOTOPOLIS_CITY,
-        .flag = FLAG_VISITED_SOOTOPOLIS_CITY,
-    },
-    {
-        .regionMapType = REGION_MAP_HOENN,
-        .mapsec = MAPSEC_EVER_GRANDE_CITY,
-        .flag = FLAG_VISITED_EVER_GRANDE_CITY,
-    },
+// Ichor: the FRLG targets below name ids that are Aethos's and the Oikoumene's
+// outside an FRLG build, and Kanto's chart slot is the Oikoumene's.
+#if IS_FRLG
     {
         .regionMapType = REGION_MAP_KANTO,
         .mapsec = MAPSEC_PALLET_TOWN,
@@ -2400,7 +2343,17 @@ static const struct FlyLocation sFlyLocations[] =
         .mapsec = MAPSEC_ROUTE_10_POKECENTER,
         .flag = FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F,
     },
+#endif // IS_FRLG
 };
+
+// Ichor: whether a fly target is open: its flag, or for an Oikoumene town
+// (FLY_OIKOUMENE_VISITED) whether you've been there.
+static bool32 IsFlyLocationOpen(const struct FlyLocation *loc)
+{
+    if (loc->flag == FLY_OIKOUMENE_VISITED)
+        return Ichor_IsOikoumeneTownVisited(loc->mapsec);
+    return FlagGet(loc->flag);
+}
 
 
 // Sprite data for SpriteCB_FlyDestIcon
@@ -2422,8 +2375,16 @@ static void CreateFlyDestIcons(void)
     {
         if (sFlyLocations[i].regionMapType != regionMapType)
             continue;
+        if (IsIchorHiddenCrossing(sFlyLocations[i].mapsec)) // Ichor: not before you've crossed
+            continue;
 
         GetMapSecDimensions(sFlyLocations[i].mapsec, &x, &y, &width, &height);
+        // Ichor: a section three cells across (the Aethos inlay) takes its
+        // target in its middle cell
+        if (width == 3)
+            x++, width = 1;
+        if (height == 3)
+            y++, height = 1;
         x = (x + MAPCURSOR_X_MIN) * 8 + 4;
         y = (y + MAPCURSOR_Y_MIN) * 8 + 4;
 
@@ -2439,7 +2400,7 @@ static void CreateFlyDestIcons(void)
         {
             gSprites[spriteId].oam.shape = shape;
 
-            if (FlagGet(sFlyLocations[i].flag))
+            if (IsFlyLocationOpen(&sFlyLocations[i]))
                 gSprites[spriteId].callback = SpriteCB_FlyDestIcon;
             else
                 shape += 3;
@@ -2481,7 +2442,9 @@ static void TryCreateRedOutlineFlyDestIcons(void)
 
     for (i = 0; sRedOutlineFlyDestinations[i][1] != MAPSEC_NONE; i++)
     {
-        if (FlagGet(sRedOutlineFlyDestinations[i][0]))
+        // Ichor: only on the chart that has the place (there are two charts now)
+        if (FlagGet(sRedOutlineFlyDestinations[i][0])
+         && GetRegionMapType(sRedOutlineFlyDestinations[i][1]) == GetRegionMapType(gMapHeader.regionMapSectionId))
         {
             mapSecId = sRedOutlineFlyDestinations[i][1];
             GetMapSecDimensions(mapSecId, &x, &y, &width, &height);
@@ -2601,14 +2564,12 @@ u32 FilterFlyDestination(struct RegionMap* regionMap)
 {
     switch (regionMap->mapSecId)
     {
-    case MAPSEC_SOUTHERN_ISLAND:
-        return HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR;
+    // Ichor: Southern Island, Littleroot and Ever Grande are gone; their ids
+    // are the Glass Crater, AETHOS and the Delta Reeds now.
     case MAPSEC_BATTLE_FRONTIER:
         return HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST;
-    case MAPSEC_LITTLEROOT_TOWN:
-        return (gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE : HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE);
-    case MAPSEC_EVER_GRANDE_CITY:
-        return (FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && regionMap->posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
+    case MAPSEC_THE_OIKOUMENE: // Ichor: the last Oikoumene port you were in
+        return Ichor_GetOikoumenePortHealLocation();
     default:
         if (Ichor_GetHermHealLocation(regionMap->mapSecId) != HEAL_LOCATION_NONE) // Ichor: land south of the herm
             return Ichor_GetHermHealLocation(regionMap->mapSecId);

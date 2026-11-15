@@ -339,6 +339,8 @@ static void FindMapsWithMon(enum Species species)
 
         if (GetRegionMapType(headerSectionId) != currentRegionMapType)
             continue;
+        if (!Ichor_IsWildHeaderCurrent(i)) // Ichor: a Nursery shows only this month's young
+            continue;
 
         // Ichor: where this time of day has no table, read the fallback time's,
         // as the field does (GetTimeOfDayForEncounters). Kalliste's maps define

@@ -69,6 +69,10 @@ void CreateWildMon(enum Species species, u8 level);
 bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPokemonArea area, u8 flags);
 bool8 AreLegendariesInSootopolisPreventingEncounters(void);
 u16 GetCurrentMapWildMonHeaderId(void);
+// Ichor: the Nurseries' monthly tables (design/oikoumene/BUILD.md §5)
+u32 Ichor_GetAethosMonth(void);
+u32 Ichor_GetNurseryHeaderOffset(const struct WildPokemonHeader *headers, u32 first, u32 month);
+bool32 Ichor_IsWildHeaderCurrent(u32 headerId);
 bool8 CheckFeebasAtCoords(s16 x, s16 y);
 u32 ChooseWildMonIndex_Land(void);
 u32 ChooseWildMonIndex_Water(void);

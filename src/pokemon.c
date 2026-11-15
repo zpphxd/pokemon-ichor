@@ -5088,6 +5088,13 @@ bool32 IsSpeciesInHoennDex(enum Species species)
         return TRUE;
 }
 
+// ICHOR_STUB_MUSIC: Battle! Oikoumene Trainer (MUS_ICHOR_BATTLE_OIKOUMENE) is the
+// music agent's, in parallel; until its define lands, the Aethos trainer theme
+// stands in. Once songs.h defines it, this falls away by itself.
+#ifndef MUS_ICHOR_BATTLE_OIKOUMENE
+#define MUS_ICHOR_BATTLE_OIKOUMENE MUS_ICHOR_BATTLE_TRAINER
+#endif
+
 u16 GetBattleBGM(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
@@ -5175,15 +5182,18 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_PYRAMID_KING:
             return MUS_VS_FRONTIER_BRAIN;
         default:
-            if (GetCurrentRegion() == REGION_KANTO)
+            if (IS_FRLG && GetCurrentRegion() == REGION_KANTO)
                 return MUS_RG_VS_TRAINER;
+            else if (GetCurrentRegion() == REGION_OIKOUMENE) // Ichor: Battle! Oikoumene Trainer
+                return MUS_ICHOR_BATTLE_OIKOUMENE;
             else
                 return MUS_ICHOR_BATTLE_TRAINER; // Ichor
         }
     }
     else
     {
-        if (GetCurrentRegion() == REGION_KANTO)
+        // Ichor: the Oikoumene holds Kanto's chart slot, not Kanto's music
+        if (IS_FRLG && GetCurrentRegion() == REGION_KANTO)
             return MUS_RG_VS_WILD;
         else
             return MUS_ICHOR_BATTLE_WILD; // Ichor

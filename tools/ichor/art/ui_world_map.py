@@ -72,6 +72,7 @@ COLORS = [
     ("pool", AEGEAN_LIGHT),         # lakes, springs and rivers
     ("ghost", (152, 72, 48)),       # unrevealed places on land: a shade under the clay
     ("ghost_sea", (88, 48, 72)),    # unrevealed places at sea
+    ("mist", (152, 136, 160)),      # the fog at the chart's edge, where the Oikoumene begins
 ]
 C = {name: i for i, (name, _) in enumerate(COLORS)}
 RGB = [rgb for _, rgb in COLORS]
@@ -86,8 +87,10 @@ def cell_px(gx, gy):
 # --- Sections -----------------------------------------------------------------
 # kinds: a town has an Asclepeion (a future fly target); a waypoint is a cave,
 # a pass, a hamlet or a landmark between towns; a road is a land route; a sea
-# route is open water; an isle is an island with no town on it.
-TOWN, WAY, ROAD, SEA, ISLE = "town", "way", "road", "sea", "isle"
+# route is open water; an isle is an island with no town on it. A crossing is
+# the way off this chart onto the Oikoumene's: its id belongs to
+# tools/ichor/oikoumene_sections.py, so only its cell is set here.
+TOWN, WAY, ROAD, SEA, ISLE, CROSS = "town", "way", "road", "sea", "isle", "cross"
 
 
 def route(n):
@@ -189,6 +192,10 @@ SECTIONS = [
     ("MAPSEC_KERKYRA", "KERKYRA", ISLE, [(1, 4)]),
     (*route(34), SEA, [(24, 11), (25, 11)]),
     ("MAPSEC_RHODOS", "RHODOS", ISLE, [(26, 11)]),
+    # The Oikoumene: THE OIKOUMENE, in the fog at the chart's eastern edge, flies
+    # you to your last Oikoumene port (design/OIKOUMENE.md section 2). Hidden
+    # until you've crossed (region_map.c).
+    ("MAPSEC_THE_OIKOUMENE", "THE OIKOUMENE", CROSS, [(27, 5)]),
 ]
 POSTGAME = {"MAPSEC_AETHOS_ROUTE_31", "MAPSEC_CAPE_TAINARON", "MAPSEC_AETHOS_ROUTE_32",
             "MAPSEC_OLYMPIA", "MAPSEC_AETHOS_ROUTE_33", "MAPSEC_ATLANTIS", "MAPSEC_ITHAKA",
@@ -379,7 +386,7 @@ KEY = {"#": "ink", "d": "clay_dk", "c": "clay", "l": "clay_lt", "p": "clay_pale"
        "w": "white", "m": "marble", "M": "marble_dk", "g": "gold", "G": "gold_dk",
        "y": "gold_pale", "o": "olive", "O": "olive_dk", "r": "lava", "R": "lava_dk",
        "b": "pool", "h": "ghost", "s": "ghost_sea", "~": "wine", "'": "parch",
-       "k": "glaze", "v": "wine_lt"}
+       "k": "glaze", "v": "wine_lt", "e": "mist"}
 
 TEMPLE = [          # a Doric temple front: gold pediment, white columns
     "   ##   ",
@@ -732,6 +739,33 @@ DOLPHIN = [         # black-figure dolphins leap in the empty sea, painted in cl
     "                ",
 ]
 
+EDGE_FOG = [         # the fog bank at the eastern edge, and a sail going into it
+    "   eeeee",
+    " eee    ",
+    "    eeee",
+    "  eee   ",
+    "eee  eee",
+    "   ee   ",
+    " eeee   ",
+    "     eee",
+    "   #    ",          # (27, 5): THE OIKOUMENE
+    "  #w  ee",
+    " ee#ww  ",
+    "  #www  ",
+    "  #w'w  ",
+    " GgggG  ",
+    "  GGG ee",
+    "eee     ",
+    "   eeee ",
+    " ee     ",
+    "    eee ",
+    "eeee    ",
+    "  e   ee",
+    "     e  ",
+    " ee     ",
+    "        ",
+]
+
 # Which glyph marks each place (towns, waypoints and the post-game's ghosts)
 GLYPHS = {
     "MAPSEC_ELAIA_VILLAGE": [OLIVE_TREE],
@@ -918,6 +952,7 @@ def paint():
         c.px(x, y, C[col])
     for (x, y, flip) in [(136, 8, False), (216, 88, True)]:  # dolphins in the empty sea
         stamp(c, [r[::-1] for r in DOLPHIN] if flip else DOLPHIN, x, y)
+    stamp(c, EDGE_FOG, *cell_px(27, 4))    # THE OIKOUMENE, past the fog
 
     # The sea: wine strokes on a 16x16 repeat, only on open water, so open sea
     # costs four tiles and every coast tile stays clean.
@@ -1047,7 +1082,7 @@ def rgb_of(c):
 
 # --- Previews -------------------------------------------------------------------
 KIND_COLOR = {TOWN: (240, 192, 64), WAY: (120, 208, 120), ROAD: (112, 168, 224),
-              SEA: (176, 136, 232), ISLE: (232, 232, 232)}
+              SEA: (176, 136, 232), ISLE: (232, 232, 232), CROSS: (232, 120, 160)}
 POST_COLOR = (150, 150, 150)
 
 
@@ -1063,6 +1098,7 @@ CODES = {
     "LAKE_STYMPHALIA": "Stm", "DELPHOI": "Dlp", "THERMOPYLAI": "Thm", "VALE_OF_TEMPE": "Tem",
     "THE_ASCENT": "Asc", "MOUNT_OLYMPUS": "Olym", "CAPE_TAINARON": "Tai", "OLYMPIA": "Olpa",
     "ATLANTIS": "Atl", "ITHAKA": "Ith", "KERKYRA": "Ker", "RHODOS": "Rho",
+    "THE_OIKOUMENE": "Oik",
 }
 
 
@@ -1177,7 +1213,7 @@ def write_sections():
 
     # restore every Kanto slot to its FRLG name first, then hand them out again
     kanto = [s for s in SECTIONS if s[2] in (ROAD, SEA, ISLE) and s[0] not in FIXED]
-    places = [s for s in SECTIONS if s[2] not in (ROAD, SEA, ISLE) and s[0] not in FIXED]
+    places = [s for s in SECTIONS if s[2] not in (ROAD, SEA, ISLE, CROSS) and s[0] not in FIXED]
     assert len(kanto) <= KANTO_LAST - KANTO_FIRST + 1
     aliases = []
     for k, i in enumerate(range(KANTO_FIRST, KANTO_LAST + 1)):
@@ -1191,6 +1227,10 @@ def write_sections():
         i = next(k for k, e in enumerate(secs) if e["id"] == s)
         assert i < APPENDED_START
         secs[i] = entry(s, BY_ID[s][1], BY_ID[s][3])
+    for sec, name, kind, cells in SECTIONS:
+        if kind == CROSS:      # its id is the Oikoumene script's; just place it
+            i = next(k for k, e in enumerate(secs) if e["id"] == sec)
+            secs[i] = entry(sec, secs[i].get("name", name), cells)
     del secs[APPENDED_START:]
     for sec, name, _, cells in places:
         secs.append(entry(sec, name, cells))

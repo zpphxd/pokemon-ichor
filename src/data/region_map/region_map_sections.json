@@ -2,201 +2,393 @@
   "map_sections": [
     {
       "id": "MAPSEC_AETHOS",
-      "name": "AETHOS"
+      "name": "AETHOS",
+      "x": 9,
+      "y": 6,
+      "width": 3,
+      "height": 3
     },
     {
       "id": "MAPSEC_SESTOS",
-      "name": "SESTOS"
+      "name": "SESTOS",
+      "x": 13,
+      "y": 6,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OIKOUMENE_02"
     },
     {
       "id": "MAPSEC_HELLESPONT",
-      "name": "THE HELLESPONT"
+      "name": "THE HELLESPONT",
+      "x": 12,
+      "y": 6,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ILION",
-      "name": "ILION"
+      "name": "ILION",
+      "x": 13,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_SKAMANDER_PLAIN",
-      "name": "SKAMANDER PLAIN"
+      "name": "SKAMANDER PLAIN",
+      "x": 12,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_IDA_ROAD",
-      "name": "THE IDA ROAD"
+      "name": "THE IDA ROAD",
+      "x": 14,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
-      "id": "MAPSEC_GARGAROS_PEAK",
-      "name": "GARGAROS PEAK"
+      "id": "MAPSEC_SILPHIUM_PLATEAU",
+      "name": "SILPHIUM PLATEAU",
+      "x": 10,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OIKOUMENE_08"
     },
     {
       "id": "MAPSEC_WALLS_OF_LAOMEDON",
-      "name": "LAOMEDON'S WALLS"
+      "name": "LAOMEDON'S WALLS",
+      "x": 13,
+      "y": 8,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_CHRYSE",
-      "name": "CHRYSE"
+      "name": "CHRYSE",
+      "x": 12,
+      "y": 8,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_HEBROS_SHORE",
-      "name": "HEBROS SHORE"
+      "name": "HEBROS SHORE",
+      "x": 12,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ABDERA",
-      "name": "ABDERA"
+      "name": "ABDERA",
+      "x": 11,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_BISTONIAN_PLAIN",
-      "name": "BISTONIAN PLAIN"
+      "name": "BISTONIAN PLAIN",
+      "x": 10,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_NAUKRATIS",
-      "name": "NAUKRATIS"
+      "name": "NAUKRATIS",
+      "x": 15,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_DELTA_REEDS",
-      "name": "THE DELTA REEDS"
+      "name": "THE DELTA REEDS",
+      "x": 16,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PHAROS",
-      "name": "PHAROS"
+      "name": "PHAROS",
+      "x": 14,
+      "y": 10,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_MEMPHIS",
-      "name": "MEMPHIS"
+      "name": "MEMPHIS",
+      "x": 16,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PYRAMID_FIELD",
-      "name": "PYRAMID FIELD"
+      "name": "PYRAMID FIELD",
+      "x": 15,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_GREAT_PYRAMID",
-      "name": "GREAT PYRAMID"
+      "name": "GREAT PYRAMID",
+      "x": 14,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_NILE",
-      "name": "THE NILE"
+      "name": "THE NILE",
+      "x": 17,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_HELIOPOLIS",
-      "name": "HELIOPOLIS"
+      "name": "HELIOPOLIS",
+      "x": 17,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_LAKE_MOERIS",
-      "name": "LAKE MOERIS"
+      "name": "LAKE MOERIS",
+      "x": 15,
+      "y": 13,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_VALLEY_OF_TOMBS",
-      "name": "VALLEY OF TOMBS"
+      "name": "VALLEY OF TOMBS",
+      "x": 18,
+      "y": 13,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_HEKATOMPYLOS",
-      "name": "HEKATOMPYLOS"
+      "name": "HEKATOMPYLOS",
+      "x": 18,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ELEPHANTINE",
-      "name": "ELEPHANTINE"
+      "name": "ELEPHANTINE",
+      "x": 19,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ABYDOS",
-      "name": "ABYDOS"
+      "name": "ABYDOS",
+      "x": 17,
+      "y": 13,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_BOSPORUS",
-      "name": "THE BOSPORUS"
+      "name": "THE BOSPORUS",
+      "x": 14,
+      "y": 5,
+      "width": 1,
+      "height": 2
     },
     {
       "id": "MAPSEC_SALMYDESSOS",
-      "name": "SALMYDESSOS"
+      "name": "SALMYDESSOS",
+      "x": 13,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PONTIC_COAST",
-      "name": "PONTIC COAST"
+      "name": "PONTIC COAST",
+      "x": 15,
+      "y": 5,
+      "width": 3,
+      "height": 1
     },
     {
       "id": "MAPSEC_THEMISKYRA",
-      "name": "THEMISKYRA"
+      "name": "THEMISKYRA",
+      "x": 19,
+      "y": 6,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_THERMODON_ROAD",
-      "name": "THERMODON ROAD"
+      "name": "THERMODON ROAD",
+      "x": 19,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_AIA",
-      "name": "AIA"
+      "name": "AIA",
+      "x": 22,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PHASIS",
-      "name": "THE PHASIS"
+      "name": "THE PHASIS",
+      "x": 21,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_FIELD_OF_ARES",
-      "name": "FIELD OF ARES"
+      "name": "FIELD OF ARES",
+      "x": 23,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_GROVE_OF_ARES",
-      "name": "GROVE OF ARES"
+      "name": "GROVE OF ARES",
+      "x": 23,
+      "y": 6,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_LEUKE",
-      "name": "LEUKE"
+      "name": "LEUKE",
+      "x": 15,
+      "y": 4,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ISLE_OF_ARES",
-      "name": "ISLE OF ARES"
+      "name": "ISLE OF ARES",
+      "x": 18,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_CAUCASUS",
-      "name": "THE CAUCASUS"
+      "name": "THE CAUCASUS",
+      "x": 22,
+      "y": 4,
+      "width": 2,
+      "height": 1
     },
     {
       "id": "MAPSEC_CHALYBIA",
-      "name": "CHALYBIA"
+      "name": "CHALYBIA",
+      "x": 20,
+      "y": 6,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ROYAL_ROAD",
-      "name": "THE ROYAL ROAD"
+      "name": "THE ROYAL ROAD",
+      "x": 17,
+      "y": 7,
+      "width": 1,
+      "height": 2
     },
     {
       "id": "MAPSEC_SARDIS",
-      "name": "SARDIS"
+      "name": "SARDIS",
+      "x": 16,
+      "y": 8,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PACTOLUS_SANDS",
-      "name": "PACTOLUS SANDS"
+      "name": "PACTOLUS SANDS",
+      "x": 16,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_MOUNT_TMOLUS",
-      "name": "MOUNT TMOLUS"
+      "name": "MOUNT TMOLUS",
+      "x": 16,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_HYPAIPA",
-      "name": "HYPAIPA"
+      "name": "HYPAIPA",
+      "x": 17,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_MAEANDER",
-      "name": "THE MAEANDER"
+      "name": "THE MAEANDER",
+      "x": 15,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_MILETOS",
-      "name": "MILETOS"
+      "name": "MILETOS",
+      "x": 13,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_MOUNT_LATMOS",
-      "name": "MOUNT LATMOS"
+      "name": "MOUNT LATMOS",
+      "x": 14,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_CHASM_OF_GYGES",
-      "name": "CHASM OF GYGES"
+      "name": "CHASM OF GYGES",
+      "x": 18,
+      "y": 8,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_GORDION",
-      "name": "GORDION"
+      "name": "GORDION",
+      "x": 18,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OIKOUMENE_50"
@@ -215,11 +407,19 @@
     },
     {
       "id": "MAPSEC_MOUNT_SIPYLOS",
-      "name": "MOUNT SIPYLOS"
+      "name": "MOUNT SIPYLOS",
+      "x": 15,
+      "y": 8,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_AMMONION",
-      "name": "AMMONION"
+      "name": "AMMONION",
+      "x": 11,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OIKOUMENE_57"
@@ -237,23 +437,43 @@
     },
     {
       "id": "MAPSEC_SAND_SEA",
-      "name": "GREAT SAND SEA"
+      "name": "GREAT SAND SEA",
+      "x": 12,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_KYRENE",
-      "name": "KYRENE"
+      "name": "KYRENE",
+      "x": 10,
+      "y": 10,
+      "width": 1,
+      "height": 1
     },
     {
-      "id": "MAPSEC_SILPHIUM_PLATEAU",
-      "name": "SILPHIUM PLATEAU"
+      "id": "MAPSEC_GARGAROS_PEAK",
+      "name": "GARGAROS PEAK",
+      "x": 14,
+      "y": 8,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_TRITONIS",
-      "name": "TRITONIS"
+      "name": "TRITONIS",
+      "x": 7,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_SYRTIS",
-      "name": "SYRTIS SHALLOWS"
+      "name": "SYRTIS SHALLOWS",
+      "x": 8,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OIKOUMENE_65"
@@ -263,7 +483,11 @@
     },
     {
       "id": "MAPSEC_SALT_RIDGE",
-      "name": "THE SALT RIDGE"
+      "name": "THE SALT RIDGE",
+      "x": 9,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OIKOUMENE_68"
@@ -273,53 +497,97 @@
     },
     {
       "id": "MAPSEC_ANTAEUS_RING",
-      "name": "ANTAEUS'S RING"
+      "name": "ANTAEUS'S RING",
+      "x": 9,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OIKOUMENE_71"
     },
     {
       "id": "MAPSEC_GARAMANTES_TUNNELS",
-      "name": "GARAMANTES"
+      "name": "GARAMANTES",
+      "x": 9,
+      "y": 13,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_GLASS_CRATER",
-      "name": "GLASS CRATER"
+      "name": "GLASS CRATER",
+      "x": 12,
+      "y": 13,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OLBIA",
-      "name": "OLBIA"
+      "name": "OLBIA",
+      "x": 14,
+      "y": 3,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_STEPPE_ROAD",
-      "name": "THE STEPPE ROAD"
+      "name": "THE STEPPE ROAD",
+      "x": 15,
+      "y": 3,
+      "width": 2,
+      "height": 1
     },
     {
       "id": "MAPSEC_LAKE_MAEOTIS",
-      "name": "LAKE MAEOTIS"
+      "name": "LAKE MAEOTIS",
+      "x": 19,
+      "y": 3,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_FEATHER_WASTES",
-      "name": "FEATHER WASTES"
+      "name": "FEATHER WASTES",
+      "x": 15,
+      "y": 2,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ARIMASPIAN_HEIGHTS",
-      "name": "ARIMASPI HEIGHTS"
+      "name": "ARIMASPI HEIGHTS",
+      "x": 17,
+      "y": 2,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OIKOUMENE_79"
     },
     {
       "id": "MAPSEC_RHIPAEAN_PASS",
-      "name": "RHIPAEAN PASS"
+      "name": "RHIPAEAN PASS",
+      "x": 14,
+      "y": 2,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_CAVE_OF_BOREAS",
-      "name": "CAVE OF BOREAS"
+      "name": "CAVE OF BOREAS",
+      "x": 13,
+      "y": 2,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_HYPERBOREA",
-      "name": "HYPERBOREA"
+      "name": "HYPERBOREA",
+      "x": 13,
+      "y": 1,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OIKOUMENE_83"
@@ -747,167 +1015,331 @@
     },
     {
       "id": "MAPSEC_THE_OIKOUMENE",
-      "name": "THE OIKOUMENE"
+      "name": "THE OIKOUMENE",
+      "x": 27,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_CATARACTS",
-      "name": "THE CATARACTS"
+      "name": "THE CATARACTS",
+      "x": 20,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_MEROE",
-      "name": "MEROE"
+      "name": "MEROE",
+      "x": 21,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_TABLE_OF_THE_SUN",
-      "name": "TABLE OF THE SUN"
+      "name": "TABLE OF THE SUN",
+      "x": 20,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_MOUNT_NYSA",
-      "name": "MOUNT NYSA"
+      "name": "MOUNT NYSA",
+      "x": 19,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_MOUNTAINS_OF_THE_MOON",
-      "name": "MOON MOUNTAINS"
+      "name": "MOON MOUNTAINS",
+      "x": 21,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PYGMY_MARSHES",
-      "name": "PYGMY MARSHES"
+      "name": "PYGMY MARSHES",
+      "x": 22,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_GATE_OF_DAWN",
-      "name": "GATE OF DAWN"
+      "name": "GATE OF DAWN",
+      "x": 25,
+      "y": 10,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PILLARS",
-      "name": "THE PILLARS"
+      "name": "THE PILLARS",
+      "x": 2,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OCEAN_STREAM",
-      "name": "OCEAN STREAM"
+      "name": "OCEAN STREAM",
+      "x": 1,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ERYTHEIA",
-      "name": "ERYTHEIA"
+      "name": "ERYTHEIA",
+      "x": 0,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_HESPERIDES",
-      "name": "THE HESPERIDES"
+      "name": "THE HESPERIDES",
+      "x": 1,
+      "y": 10,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ATLAS_RIDGE",
-      "name": "ATLAS'S RIDGE"
+      "name": "ATLAS'S RIDGE",
+      "x": 2,
+      "y": 10,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_GADEIRA",
-      "name": "GADEIRA"
+      "name": "GADEIRA",
+      "x": 1,
+      "y": 8,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_TARTESSOS",
-      "name": "TARTESSOS"
+      "name": "TARTESSOS",
+      "x": 2,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ATARANTES",
-      "name": "THE ATARANTES"
+      "name": "THE ATARANTES",
+      "x": 4,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ATLANTIC_SHORE",
-      "name": "ATLANTIC SHORE"
+      "name": "ATLANTIC SHORE",
+      "x": 1,
+      "y": 6,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ATLAS_RANGE",
-      "name": "ATLAS RANGE"
+      "name": "ATLAS RANGE",
+      "x": 3,
+      "y": 10,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_WINE_DARK_SEA",
-      "name": "WINE-DARK SEA"
+      "name": "WINE-DARK SEA",
+      "x": 8,
+      "y": 7,
+      "width": 1,
+      "height": 3
     },
     {
       "id": "MAPSEC_OUTER_SEA",
-      "name": "THE OUTER SEA"
+      "name": "THE OUTER SEA",
+      "x": 8,
+      "y": 6,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_LOTUS_ISLE",
-      "name": "LOTUS ISLE"
+      "name": "LOTUS ISLE",
+      "x": 7,
+      "y": 10,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_CYCLOPS_ISLE",
-      "name": "CYCLOPS ISLE"
+      "name": "CYCLOPS ISLE",
+      "x": 5,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_AIOLIA",
-      "name": "AIOLIA"
+      "name": "AIOLIA",
+      "x": 4,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_AIAIA",
-      "name": "AIAIA"
+      "name": "AIAIA",
+      "x": 4,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_SIRENS_ROCKS",
-      "name": "SIRENS' ROCKS"
+      "name": "SIRENS' ROCKS",
+      "x": 5,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_SCYLLA_STRAIT",
-      "name": "THE STRAIT"
+      "name": "THE STRAIT",
+      "x": 7,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_THRINAKIA",
-      "name": "THRINAKIA"
+      "name": "THRINAKIA",
+      "x": 6,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_KROTON",
-      "name": "KROTON"
+      "name": "KROTON",
+      "x": 7,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_CUMAE",
-      "name": "CUMAE"
+      "name": "CUMAE",
+      "x": 5,
+      "y": 6,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ELEA",
-      "name": "ELEA"
+      "name": "ELEA",
+      "x": 6,
+      "y": 7,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PHLEGRAEAN_FIELDS",
-      "name": "BURNING FIELDS"
+      "name": "BURNING FIELDS",
+      "x": 5,
+      "y": 5,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OGYGIA",
-      "name": "OGYGIA"
+      "name": "OGYGIA",
+      "x": 3,
+      "y": 9,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_OKEANOS",
-      "name": "OKEANOS"
+      "name": "OKEANOS",
+      "x": 0,
+      "y": 0,
+      "width": 28,
+      "height": 15
     },
     {
       "id": "MAPSEC_CIMMERIAN_SHORE",
-      "name": "CIMMERIAN SHORE"
+      "name": "CIMMERIAN SHORE",
+      "x": 6,
+      "y": 1,
+      "width": 2,
+      "height": 1
     },
     {
       "id": "MAPSEC_LAND_OF_DREAMS",
-      "name": "LAND OF DREAMS"
+      "name": "LAND OF DREAMS",
+      "x": 3,
+      "y": 2,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_GATES_OF_THE_SUN",
-      "name": "GATES OF THE SUN"
+      "name": "GATES OF THE SUN",
+      "x": 2,
+      "y": 3,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_ISLES_OF_THE_BLESSED",
-      "name": "BLESSED ISLES"
+      "name": "BLESSED ISLES",
+      "x": 0,
+      "y": 6,
+      "width": 1,
+      "height": 2
     },
     {
       "id": "MAPSEC_GORGONS_ISLE",
-      "name": "GORGONS' ISLE"
+      "name": "GORGONS' ISLE",
+      "x": 3,
+      "y": 12,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_GRAIAI",
-      "name": "CAVE OF GRAIAI"
+      "name": "CAVE OF GRAIAI",
+      "x": 2,
+      "y": 11,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_SPRINGS_OF_OKEANOS",
-      "name": "OKEANOS SPRINGS"
+      "name": "OKEANOS SPRINGS",
+      "x": 6,
+      "y": 13,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_SELVAGE",
-      "name": "THE SELVAGE"
+      "name": "THE SELVAGE",
+      "x": 13,
+      "y": 0,
+      "width": 2,
+      "height": 1
     },
     {
       "id": "MAPSEC_TANOBY_CHAMBERS",

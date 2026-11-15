@@ -2,6 +2,7 @@
 #include "ichor_relics.h"
 #include "ichor_frozen.h"
 #include "ichor_time.h"
+#include "regions.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -910,6 +911,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 
     InitSecondaryTilesetAnimation();
     UpdateLocationHistoryForRoamer();
+    Ichor_TrackOikoumene(); // Ichor: the Oikoumene chart's last port and visited towns
     MoveAllRoamers();
     DoCurrentWeather();
     ResetFieldTasksArgs();
@@ -973,6 +975,7 @@ static void LoadMapFromWarp(bool32 a1)
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
     UpdateLocationHistoryForRoamer();
+    Ichor_TrackOikoumene(); // Ichor: the Oikoumene chart's last port and visited towns
     MoveAllRoamersToOtherLocationSets();
     gChainFishingDexNavStreak = 0;
     if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)

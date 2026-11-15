@@ -288,6 +288,7 @@
 #define ICHOR_VARS_COUNT                                 32
 #define ICHOR_VARS_END                                   (ICHOR_VARS_START + ICHOR_VARS_COUNT - 1)
 // Ichor bank vars: claim.py bankvar adds lines here, in order.
+#define VAR_ICHOR_OIK_CHART                     (ICHOR_VARS_START + 0x018) // Ichor: Oikoumene chart: bits 0-1 the last port you were in (src/regions.c), bits 2-15 the towns you have been to, for their fly targets
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000
