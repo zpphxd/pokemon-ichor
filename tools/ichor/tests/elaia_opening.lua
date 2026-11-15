@@ -4,7 +4,7 @@
 -- the road north out of Elaia, and checks the game's state after each beat:
 -- the map, the player's tile, the story flags, the map music, the party.
 --
--- Env: ELAIA_STARTER 0 Snivy, 1 Cyndaquil, 2 Piplup; ELAIA_OUTCOME win (Kleon's
+-- Env: ELAIA_STARTER 0 Nebrel, 1 Kynder, 2 Hipling; ELAIA_OUTCOME win (Kleon's
 -- starter is put on 1 HP), lose (the player's is), or any (played straight);
 -- ELAIA_OUT the screenshot folder; ELAIA_SYMBOLS the table elaia_symbols.sh wrote.
 --
@@ -341,7 +341,7 @@ local function runRamScript(script)
   emu:write32(S.gMapHeader + S.OFF_MAPHEADER_MAPSCRIPTS, tableAddr)
 end
 
--- Kimon's trade: YES to his offer, then pick the Wooloo (the last party slot)
+-- Kimon's trade: YES to his offer, then pick the Galekit (the last party slot)
 -- on the storage screen the expansion opens for in-game trades.
 local function kimonTrade()
   local t0, boxes = now(), 0
@@ -355,9 +355,9 @@ local function kimonTrade()
   end
   wait(90); shot("kimon_choose_mon")
   -- The cursor starts in the jar; up past its name to YOUR PARTY, open the
-  -- party, then the Wooloo (the second Pokemon) and SELECT.
+  -- party, then the Galekit (the second Pokemon) and SELECT.
   tap(K.UP); wait(20); tap(K.UP); wait(20); shot("kimon_your_party")
-  tap(K.A); wait(60); tap(K.DOWN); wait(20); shot("kimon_choose_wooloo")
+  tap(K.A); wait(60); tap(K.DOWN); wait(20); shot("kimon_choose_galekit")
   tap(K.A); wait(40); shot("kimon_choose_menu")
   tap(K.A); wait(40)
   waitUntil(function() return not on("CB2_PokeStorage") end, 1200, "the storage screen to close")
@@ -382,7 +382,7 @@ end
 
 -- --- The opening ----------------------------------------------------------------------------
 
-local SPECIES = { [0] = "Snivy", [1] = "Cyndaquil", [2] = "Piplup" }
+local SPECIES = { [0] = "Nebrel", [1] = "Kynder", [2] = "Hipling" }
 -- Kleon takes the starter that beats yours (SCRIPT.md beat 3).
 local KLEON_TAKES = { [0] = 1, [1] = 2, [2] = 0 }
 
@@ -546,7 +546,7 @@ local function main()
   expect(getFlag(S.FLAG_GOT_STARTER) and getFlag(S.FLAG_SYS_POKEMON_GET), "got a partner")
   expect(getFlag(S.FLAG_SYS_POKEDEX_GET), "got the Pokedex")
   expect(getFlag(S.FLAG_KLEON_TOOK_STARTER), "Kleon took his")
-  local hide = { [0] = S.FLAG_HIDE_KRATER_SNIVY, [1] = S.FLAG_HIDE_KRATER_CYNDAQUIL, [2] = S.FLAG_HIDE_KRATER_PIPLUP }
+  local hide = { [0] = S.FLAG_HIDE_KRATER_NEBREL, [1] = S.FLAG_HIDE_KRATER_KYNDER, [2] = S.FLAG_HIDE_KRATER_HIPLING }
   local third = 3 - STARTER - KLEON_TAKES[STARTER]
   expect(getFlag(hide[STARTER]) and getFlag(hide[KLEON_TAKES[STARTER]]) and not getFlag(hide[third]),
          "the last krater stays: " .. SPECIES[third])
@@ -579,17 +579,17 @@ local function main()
   expect(getFlag(S.FLAG_HIDE_SCRIBE) and metatile(6, 21) == 0x001, "the scribe has gone, and his stool with him")
   shot("square_after")
 
-  -- Kimon trades his Finizen for a Wooloo now the player has Poke Balls.
+  -- Kimon trades his Halcyling for a Galekit now the player has Poke Balls.
   runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
                  S.SCR_OP_CALLNATIVE, { S.ScrCmd_createmon | 1, 4 }, 0, S.PARTY_SIZE,
-                 { S.SPECIES_WOOLOO, 2 }, { 5, 2 }, { 0, 4 }, S.SCR_OP_END })
+                 { S.SPECIES_GALEKIT, 2 }, { 5, 2 }, { 0, 4 }, S.SCR_OP_END })
   wait(30)
   goTo(3, 19, nil)
   enter(K.UP, S.MAP_BAKERS_HOUSE, "Glykera's door, after the battle")
   goTo(9, 6); face(K.UP); tap(K.A); wait(60)
   shot("kimon_offers_arion")
   kimonTrade()
-  expect(getFlag(S.FLAG_DID_KIMON_TRADE), "traded Kimon a Wooloo for Arion")
+  expect(getFlag(S.FLAG_DID_KIMON_TRADE), "traded Kimon a Galekit for Arion")
   -- Coming back with the Hearth Laurel pays: Kimon's pearls. (The laurel is
   -- lent for this check and taken back, so the rest of the run is unchanged.)
   setFlag(S.FLAG_BADGE01_GET, true)

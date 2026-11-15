@@ -6,7 +6,7 @@
 // She has run out of honey: bring her the comb from Melitta's hives (the hidden
 // Honey behind the player's house) and she trades two cakes for it.
 // Kimon rowed triremes for forty years. Once you have Poke Balls (after beat 4)
-// he trades his Finizen, Arion, for a Wooloo from Route 1. After the Hearth
+// he trades his Halcyling, Arion, for a Galekit from Route 1. After the Hearth
 // Laurel he gives you the pearls he dived for as a boy.
 
 mapscripts ElaiaVillage_BakersHouse_MapScripts {}
@@ -64,7 +64,7 @@ script ElaiaVillage_BakersHouse_EventScript_Kimon {
         if (flag(FLAG_BADGE01_GET)) {
             msgbox(format("Halcyon days down at Akti, they tell me. Sea like oil, and no wind.\pTold you. Only oars move a ship then."))
         } else {
-            msgbox(format("The Wooloo's asleep on my feet already.\pBest trade I ever made, and I once swapped a helmet for a goat."))
+            msgbox(format("The Galekit's asleep on my feet already.\pBest trade I ever made, and I once swapped a helmet for a goat."))
         }
         release
         end
@@ -78,10 +78,10 @@ script ElaiaVillage_BakersHouse_EventScript_Kimon {
     // line can carry Kimon's name box.
     setvar(VAR_0x8005, INGAME_TRADE_ICHOR_ARION)
     specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
-    msgbox(format("Arion's my Finizen. He swam beside my ship from Kalliste to Athens and back, twenty years.\pHe's wasted on an old man by a fire. Bring me a Wooloo, something warm for my feet,\pand Arion goes to sea with you. Deal?"), MSGBOX_YESNO)
+    msgbox(format("Arion's my Halcyling. He flew beside my ship from Kalliste to Athens and back, twenty years.\pHe's wasted on an old man by a fire. Bring me a Galekit, something warm for my feet,\pand Arion goes to sea with you. Deal?"), MSGBOX_YESNO)
     if (var(VAR_RESULT) == NO) {
         setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)
-        msgbox(format("Think on it. Wooloo graze all along the road north."))
+        msgbox(format("Think on it. Galekit run all along the road north."))
         release
         end
     }
@@ -89,14 +89,14 @@ script ElaiaVillage_BakersHouse_EventScript_Kimon {
     waitstate
     if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
         setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)
-        msgbox(format("Think on it. Wooloo graze all along the road north."))
+        msgbox(format("Think on it. Galekit run all along the road north."))
         release
         end
     }
     specialvar(VAR_0x800B, GetTradeSpecies)
     if (var(VAR_0x800B) != VAR_0x8009) {
         setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)
-        msgbox(format("That's no Wooloo. My feet know the difference."))
+        msgbox(format("That's no Galekit. My feet know the difference."))
         release
         end
     }

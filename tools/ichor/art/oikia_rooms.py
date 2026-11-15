@@ -159,7 +159,7 @@ ROOMS = {
         "spots": [
             ("warp", "door to Elaia Village (south-arrow mat)", [(4, 7), (5, 7)]),
             ("npc", "Kydippe, by her chair under the window", (2, 2), "south"),
-            ("npc", "Chansey, wandering (keep its range inside x 2-8, y 3-6)", (6, 3), "south"),
+            ("npc", "Galekit, wandering (keep its range inside x 2-8, y 3-6)", (6, 3), "south"),
             ("bg", "niche: a clay Eileithyia, goddess of births (optional)", (7, 1), (7, 2, "north")),
         ],
     },

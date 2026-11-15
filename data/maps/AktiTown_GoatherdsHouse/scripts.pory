@@ -40,8 +40,8 @@ script AktiTown_GoatherdsHouse_EventScript_Aigon {
 script AktiTown_GoatherdsHouse_EventScript_Kid {
     lock
     faceplayer
-    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
-    msgbox(format("Meh! It nibbles your sandal strap."))
+    playmoncry(SPECIES_ERIPIP, CRY_MODE_NORMAL)
+    msgbox(format("Meh! It nibbles your sandal strap. Its fleece crackles."))
     waitmoncry
     release
 }

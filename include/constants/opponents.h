@@ -14,9 +14,9 @@
 // only as far as the trainers that exist, and no two owners edit the same line.
 
 // The slice: Kalliste Isle, ids 1-14 (full). See design/phase1/SCRIPT.md Part 3.
-#define TRAINER_ICHOR_KLEON_ELAIA_SNIVY       1
-#define TRAINER_ICHOR_KLEON_ELAIA_CYNDAQUIL   2
-#define TRAINER_ICHOR_KLEON_ELAIA_PIPLUP      3
+#define TRAINER_ICHOR_KLEON_ELAIA_NEBREL       1
+#define TRAINER_ICHOR_KLEON_ELAIA_KYNDER   2
+#define TRAINER_ICHOR_KLEON_ELAIA_HIPLING      3
 #define TRAINER_ICHOR_TITYROS                 4
 #define TRAINER_ICHOR_PHYLLIS                 5
 #define TRAINER_ICHOR_KOMATAS                 6

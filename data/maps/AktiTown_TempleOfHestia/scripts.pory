@@ -196,7 +196,7 @@ script AktiTown_TempleOfHestia_EventScript_Kanthos {
         "Mind Kanthos. He brays at anyone sneaking about.\p"
         "Once saved the goddess's dignity that way, they say. Good donkey."))
     setspeaker(AktiTown_TempleOfHestia_Text_NameKanthos)
-    playmoncry(SPECIES_MUDBRAY, CRY_MODE_NORMAL)
+    playmoncry(SPECIES_ONOTIS, CRY_MODE_NORMAL)
     msgbox(format("HRRRNK!"))
     waitmoncry
     release
@@ -224,7 +224,7 @@ script AktiTown_TempleOfHestia_EventScript_Pyrrha {
 script AktiTown_TempleOfHestia_EventScript_Aithra {
     trainerbattle_single(TRAINER_ICHOR_AITHRA,
         format("I keep the night watch. I haven't slept since spring. Battle?"),
-        format("Counting Wooloo doesn't help. I've tried. Thousands."))
+        format("Counting goats doesn't help. I've tried. Thousands."))
     setspeaker(AktiTown_TempleOfHestia_Text_NameAithra)
     msgbox(format(
         "Old Kronos swallowed Hestia first and coughed her up last.\p"

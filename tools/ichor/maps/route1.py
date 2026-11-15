@@ -1079,9 +1079,11 @@ def hidden(x, y, item, flag):
 
 
 P = "OBJ_EVENT_GFX_ICHOR_"
-WOOLOO = "OBJ_EVENT_GFX_SPECIES(WOOLOO)"
-MAREEP = "OBJ_EVENT_GFX_SPECIES(MAREEP)"
-SKIDDO = "OBJ_EVENT_GFX_SPECIES(SKIDDO)"
+# Kalliste's herds are Aethos's own: Kerazap goats (Amalthea's line) and their
+# Eripip kids, and Onotis donkeys (BALANCE.md: Aethos's Pokemon only).
+KERAZAP = "OBJ_EVENT_GFX_SPECIES(KERAZAP)"
+ERIPIP = "OBJ_EVENT_GFX_SPECIES(ERIPIP)"
+ONOTIS = "OBJ_EVENT_GFX_SPECIES(ONOTIS)"
 R1 = "KallisteRoute1_EventScript_"
 KH = "KallisteRoute1_KronionHill_EventScript_"
 
@@ -1094,12 +1096,12 @@ ROUTE1_EVENTS = {
     "object_events": [
         # south to north
         obj(P + "WOMAN", 17, 55, R1 + "Carter", "MOVEMENT_TYPE_FACE_UP", local_id="LOCALID_ROUTE1_CARTER"),
-        obj("OBJ_EVENT_GFX_SPECIES(MUDBRAY)", 17, 54, R1 + "Mudbray", "MOVEMENT_TYPE_FACE_LEFT"),
+        obj(ONOTIS, 17, 54, R1 + "Donkey", "MOVEMENT_TYPE_FACE_LEFT"),
         obj(P + "YOUTH_M", 5, 52, R1 + "WallYouth", "MOVEMENT_TYPE_FACE_DOWN"),
         # the first trainer: at the meadow wall's only gap, in plain view
         obj(P + "SHEPHERD", 12, 49, R1 + "Tityros", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3),
-        obj(WOOLOO, 4, 44, R1 + "GrazingWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
-        obj(WOOLOO, 3, 47, R1 + "GrazingWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        obj(KERAZAP, 4, 44, R1 + "GrazingGoat", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        obj(KERAZAP, 3, 47, R1 + "GrazingGoat", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
         item_ball(3, 39, "ITEM_POKE_BALL", "FLAG_ICHOR_ITEM_ROUTE1_POKE_BALL"),
         # the second checkpoint: at the grove narrows' south mouth, her line across its narrowest row
         obj(P + "HARVESTER", 15, 40, R1 + "Thestylis", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=5),
@@ -1112,12 +1114,15 @@ ROUTE1_EVENTS = {
         # mandatory for Kronion Hill: his line covers both rows of the spur
         obj(P + "AUGUR", 24, 17, R1 + "Polyeidos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2),
         obj(P + "YOUTH_F", 10, 15, R1 + "Amaryllis", "MOVEMENT_TYPE_FACE_RIGHT", local_id="LOCALID_ROUTE1_AMARYLLIS"),
-        obj(WOOLOO, 11, 14, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
-        obj(WOOLOO, 12, 14, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
-        obj(WOOLOO, 13, 14, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
-        obj(WOOLOO, 12, 12, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_LEFT", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
-        # the hoplite holding the pass, just north of the flock's gap
-        obj(P + "HOPLITE", 14, 13, R1 + "Agis", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3),
+        obj(KERAZAP, 11, 14, R1 + "FlockGoat", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
+        obj(KERAZAP, 12, 14, R1 + "FlockGoat", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
+        obj(KERAZAP, 13, 14, R1 + "FlockGoat", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
+        obj(KERAZAP, 12, 12, R1 + "FlockGoat", "MOVEMENT_TYPE_FACE_LEFT", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
+        # the hoplite holding the pass, just north of the flock's gap. He stands
+        # west of it, looking east across the gap: east of it, (14,13) is the
+        # only way out of the goat path's last lip, and a beaten trainer never
+        # moves (QA: standing there he walled in anyone who hopped the lip)
+        obj(P + "HOPLITE", 9, 13, R1 + "Agis", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=4),
         item_ball(4, 13, "ITEM_POTION", "FLAG_ICHOR_ITEM_ROUTE1_POTION"),
     ],
     "warp_events": [],
@@ -1137,7 +1142,7 @@ ROUTE1_EVENTS = {
 ROUTE1_MANDATORY = {
     "Tityros": (12, 49, "W", 3, "north"),
     "Thestylis": (15, 40, "W", 5, "north"),
-    "Agis": (14, 13, "W", 3, "north"),
+    "Agis": (9, 13, "E", 4, "north"),
     "Polyeidos": (24, 17, "S", 2, "kronion"),
 }
 
@@ -1158,12 +1163,12 @@ KRONION_EVENTS = {
         # the high pastures, top to bottom
         # the first trainer on the branch: at the goat path's foot, in plain view
         obj(P + "SHEPHERD", 9, 19, KH + "Menalkas", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=4),
-        obj(WOOLOO, 4, 23, KH + "FoldWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
-        obj(MAREEP, 3, 22, KH + "FoldMareep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        obj(KERAZAP, 4, 23, KH + "FoldGoat", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        obj(ERIPIP, 3, 22, KH + "FoldKid", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
         # optional: he sings to the spring, his back to the path
         obj(P + "SHEPHERD", 3, 29, KH + "Thyrsis", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=1),
         item_ball(18, 34, "ITEM_BURN_HEAL", "FLAG_ICHOR_ITEM_KRONION_BURN_HEAL"),
-        obj(SKIDDO, 5, 38, KH + "Skiddo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        obj(KERAZAP, 5, 38, KH + "Goat", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
         # above the only stair down to the lookout shelf
         obj(P + "GOATHERD", 17, 40, KH + "Lykidas", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
         item_ball(11, 44, "ITEM_EVERSTONE", "FLAG_ICHOR_ITEM_KRONION_EVERSTONE"),
@@ -1566,10 +1571,12 @@ class Walk:
         self.dist = dist
         return min(best) if best else None
 
-    def traps(self, starts):
+    def traps(self, starts, people=frozenset()):
         """Cells a walk from the starts reaches but can't come back from (a
-        ledge dropped the player somewhere with no way back up)."""
-        ok = lambda c: self.kind.get(c) in ("open", "grass")
+        ledge dropped the player somewhere with no way back up). people are
+        the cells of objects who never move, walls to the walk: a trainer
+        stays on his cell after he is beaten."""
+        ok = lambda c: self.kind.get(c) in ("open", "grass") and c not in people
         def moves(c):
             for dx, dy in STEPS:
                 n = (c[0] + dx, c[1] + dy)
@@ -1632,6 +1639,14 @@ class Walk:
                 break
             cells.append(c)
         return cells
+
+
+def standing(events):
+    """The cells of objects who are always there and never step aside: no hide
+    flag and no wander range (as mapdata.Map.people counts them)."""
+    return frozenset((e["x"], e["y"]) for e in events["object_events"]
+                     if e.get("flag") in (None, "0", 0, "")
+                     and not int(e.get("movement_range_x") or 0) and not int(e.get("movement_range_y") or 0))
 
 
 def trainers_of(events):
@@ -1716,9 +1731,11 @@ def check_route(r1, kh):
         errs.append("Kronion Hill: the climb to the summit crosses a trainer's line")
     for name in sorted(set(kt) - set(KRONION_MANDATORY)):
         print(f"  {name} is optional")
-    # §1: never use a ledge to trap a player away from an exit.
-    for name, walk_, starts in (("Route 1", w, R1_SOUTH), ("Kronion Hill", k, KH_FOOT)):
-        stuck = walk_.traps(starts)
+    # §1: never use a ledge to trap a player away from an exit, nor stand
+    # anyone who never moves in a ledge pocket's only way out.
+    for name, walk_, starts, events in (("Route 1", w, R1_SOUTH, ROUTE1_EVENTS),
+                                        ("Kronion Hill", k, KH_FOOT, KRONION_EVENTS)):
+        stuck = walk_.traps(starts, standing(events))
         if stuck:
             errs.append(f"{name}: {len(stuck)} cell(s) a player can reach but not leave, e.g. {stuck[:4]}")
     if errs:

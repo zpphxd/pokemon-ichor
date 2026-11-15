@@ -59,7 +59,7 @@ local function check(name, fn) CHECKS[#CHECKS + 1] = { name = name, fn = fn } en
 check("well_twice", function()
   load("04_elaia_after")
   local kid = L.npc(E .. "Kid")
-  L.check(kid.present, "the kid with the Wooloo is in the village")
+  L.check(kid.present, "the kid with the Eripip is in the village")
   talk(kid, { shotBefore = "kid" })                       -- VAR_LAST_TALKED is now the kid
   local n0 = L.itemCount(S.ITEM_RELIC_COPPER)
   talk(L.sign(E .. "Well"), { shotBefore = "well_first", every = true })

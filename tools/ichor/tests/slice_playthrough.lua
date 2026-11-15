@@ -16,7 +16,7 @@
 -- except reading state; options are set in the OPTION menu by hand.
 --
 -- Env: SLICE_OUT (default build/slice/), SLICE_SYMBOLS (default <out>symbols.lua),
--- SLICE_STARTER 0 Snivy / 1 Cyndaquil / 2 Piplup (default 0),
+-- SLICE_STARTER 0 Nebrel / 1 Kynder / 2 Hipling (default 0),
 -- SLICE_GENDER theo / ianthe (default theo), SLICE_FROM <beat> (resume from that
 -- beat's save state), SLICE_WORKAROUNDS=1 (release a stuck waitmovement, logged
 -- as a BUG, so the rest of the slice can still be checked).
@@ -38,9 +38,9 @@ local getFlag, mapId, pos, settle, talk, go = L.getFlag, L.mapId, L.pos, L.settl
 
 local STARTER = tonumber(os.getenv("SLICE_STARTER") or "0")
 local IANTHE = (os.getenv("SLICE_GENDER") or "theo") == "ianthe"
-local SPECIES = { [0] = "Snivy", [1] = "Cyndaquil", [2] = "Piplup" }
+local SPECIES = { [0] = "Nebrel", [1] = "Kynder", [2] = "Hipling" }
 local KLEON_TAKES = { [0] = 1, [1] = 2, [2] = 0 }   -- SCRIPT.md beat 3
-local KLEON_TRAINER = { [0] = "KLEON_CYNDAQUIL", [1] = "KLEON_PIPLUP", [2] = "KLEON_SNIVY" }
+local KLEON_TRAINER = { [0] = "KLEON_KYNDER", [1] = "KLEON_HIPLING", [2] = "KLEON_NEBREL" }
 
 -- --- Checks shared by every beat -----------------------------------------------------------
 
@@ -331,7 +331,7 @@ beat("03_akademia", function()
   expect(L.getVar(S.VAR_STARTER_MON) == STARTER, "VAR_STARTER_MON is " .. SPECIES[STARTER])
   flagsSet({ "FLAG_GOT_STARTER", "FLAG_SYS_POKEMON_GET", "FLAG_SYS_POKEDEX_GET", "FLAG_KLEON_TOOK_STARTER" },
            "a partner, the Pokedex, and Kleon took his")
-  local hide = { [0] = "FLAG_HIDE_KRATER_SNIVY", [1] = "FLAG_HIDE_KRATER_CYNDAQUIL", [2] = "FLAG_HIDE_KRATER_PIPLUP" }
+  local hide = { [0] = "FLAG_HIDE_KRATER_NEBREL", [1] = "FLAG_HIDE_KRATER_KYNDER", [2] = "FLAG_HIDE_KRATER_HIPLING" }
   local third = 3 - STARTER - KLEON_TAKES[STARTER]
   flagsSet({ hide[STARTER], hide[KLEON_TAKES[STARTER]] }, "both taken kraters are hidden")
   flagsClear({ hide[third] }, "the last krater stays: " .. SPECIES[third])
@@ -388,7 +388,7 @@ beat("04_elaia_after", function()
   talk(L.npc(BK .. "Glykera"), { shotBefore = "glykera_after" })
   L.check(L.itemCount(S.ITEM_OLD_GATEAU) == cakes + 2, "asking Glykera again gives no more cakes")
   visitAll({
-    -- Kimon offers his Finizen for a Wooloo, which the slice's run doesn't catch: say no
+    -- Kimon offers his Halcyling for a Galekit, which the slice's run doesn't catch: say no
     visitTalk("kimon", npc(BK .. "Kimon"), { shotBefore = "kimon", answers = { "no" } }),
     visitTalk("bakery_oven", sign(BK .. "Oven")),
     visitTalk("honey_shelf", sign(BK .. "HoneyShelf")),
@@ -437,12 +437,12 @@ beat("05_route1", function()
     visitTrainer("AGIS", R1 .. "Agis"),
     visitTrainer("POLYEIDOS", R1 .. "Polyeidos"),
     visitTalk("amaryllis_before", npc(R1 .. "Amaryllis")),
-    visitTalk("flock_wooloo", npc(R1 .. "FlockWooloo")),
+    visitTalk("flock_goat", npc(R1 .. "FlockGoat")),
     visitTalk("herm_north", sign(R1 .. "HermNorth")),
   })
   -- the flock is still there, so the road north is shut
   for _, it in ipairs(route1Later) do
-    if it.name == "flock_wooloo" or it.name == "amaryllis_before" then
+    if it.name == "flock_goat" or it.name == "amaryllis_before" then
       L.check(false, "the flock (or Amaryllis) can be reached before the hill: " .. it.name)
     end
   end
@@ -476,7 +476,7 @@ beat("05_summit", function()
     -- the high pastures, down the goat path past the herm
     visitTalk("herm_fork_kronion", sign(KH .. "HermFork")),
     visitTrainer("MENALKAS", KH .. "Menalkas"),
-    visitTalk("fold_mareep", npc(KH .. "FoldMareep")),
+    visitTalk("fold_kid", npc(KH .. "FoldKid")),
     visitTrainer("THYRSIS", KH .. "Thyrsis"),
     visitTalk("pan_shrine", sign(KH .. "PanShrine")),
     visitItem("the Burn Heal on the olive terraces", ball("FLAG_ITEM_KRONION_BURN_HEAL"), "FLAG_ITEM_KRONION_BURN_HEAL",
@@ -496,7 +496,7 @@ beat("05_road_open", function()
   -- the second pass: whatever the flock walled off, then Amaryllis's after-line
   for i = #route1Later, 1, -1 do
     local n = route1Later[i].name
-    if n == "flock_wooloo" or n == "amaryllis_before" then table.remove(route1Later, i) end
+    if n == "flock_goat" or n == "amaryllis_before" then table.remove(route1Later, i) end
   end
   local left = visitAll(route1Later)
   L.check(#left == 0, string.format("everything on Route 1 can be reached after the hill (%d left)", #left))

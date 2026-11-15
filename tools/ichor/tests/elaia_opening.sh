@@ -8,9 +8,9 @@
 # naming screen, waking on 2F, the water clock, Mom and the Talaria, Halia's
 # reading, the Akademia and the starter, Kleon taking his, the battle in the
 # square, Alethea's heal and Poke Balls, and the walk north onto Route 1.
-#   run 1: Snivy,     Kleon on 1 HP:  a win  (Kleon takes Cyndaquil)
-#   run 2: Cyndaquil, played straight: either outcome (Kleon takes Piplup)
-#   run 3: Piplup,    the player on 1 HP: a loss (Kleon takes Snivy), and the story goes on
+#   run 1: Nebrel,  Kleon on 1 HP:  a win  (Kleon takes Kynder)
+#   run 2: Kynder,  played straight: either outcome (Kleon takes Hipling)
+#   run 3: Hipling, the player on 1 HP: a loss (Kleon takes Nebrel), and the story goes on
 # Screenshots land in build/elaia_opening/<starter>/; the run fails on any failed
 # check, a crash or a timeout.
 set -u
@@ -35,7 +35,7 @@ fi
 tools/ichor/tests/elaia_symbols.sh "$ELF" "$OUT/symbols.lua" || { echo "ELAIA FAIL: no symbols"; exit 1; }
 
 fails=0
-for run in "0 win snivy" "1 any cyndaquil" "2 lose piplup"; do
+for run in "0 win nebrel" "1 any kynder" "2 lose hipling"; do
   set -- $run
   dir="$OUT/$3"
   mkdir -p "$dir" && rm -f "$dir"/*.png

@@ -104,7 +104,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
       "x": 4,
       "y": 23,
       "elevation": 3,
@@ -113,11 +113,11 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_KronionHill_EventScript_FoldWooloo",
+      "script": "KallisteRoute1_KronionHill_EventScript_FoldGoat",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(MAREEP)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(ERIPIP)",
       "x": 3,
       "y": 22,
       "elevation": 3,
@@ -126,7 +126,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_KronionHill_EventScript_FoldMareep",
+      "script": "KallisteRoute1_KronionHill_EventScript_FoldKid",
       "flag": "0"
     },
     {
@@ -156,7 +156,7 @@
       "flag": "FLAG_ICHOR_ITEM_KRONION_BURN_HEAL"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(SKIDDO)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
       "x": 5,
       "y": 38,
       "elevation": 3,
@@ -165,7 +165,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_KronionHill_EventScript_Skiddo",
+      "script": "KallisteRoute1_KronionHill_EventScript_Goat",
       "flag": "0"
     },
     {

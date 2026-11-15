@@ -649,7 +649,7 @@ def reachable(blocks, start, extra_open=()):
     return seen
 
 
-FLYERS = ("WINGULL",)
+FLYERS = ("WINGULL", "HALCYLING")
 
 # Cells the scenes walk people across: they must stay open.
 SCRIPTED_PATHS = {

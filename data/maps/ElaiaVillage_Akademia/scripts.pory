@@ -1,7 +1,7 @@
 // The Akademia: Daphne, Alethea and the three kraters (beat 3).
 // Room spots (design/phase1/ROOMS_civic.md): the exit mat is (10,12) and the
 // aisle x 8-10 runs clear to Daphne's table. Daphne stands behind it at (10,2);
-// the kraters sit on the table at (9,3) Snivy, (10,3) Cyndaquil, (11,3) Piplup.
+// the kraters sit on the table at (9,3) Nebrel, (10,3) Kynder, (11,3) Hipling.
 // The player comes up to (10,6), "two tiles below the table". Kleon walks in to
 // (9,6), takes his krater from row 5, and leaves the same way.
 
@@ -40,13 +40,13 @@ text ElaiaVillage_Akademia_Text_ThePokemon { "THE POKéMON" }
 text ElaiaVillage_Akademia_Text_TheStory { "THE STORY" }
 
 script ElaiaVillage_Akademia_EventScript_HideTakenKraters {
-    if (flag(FLAG_ICHOR_HIDE_KRATER_SNIVY)) {
+    if (flag(FLAG_ICHOR_HIDE_KRATER_NEBREL)) {
         setmetatile(9, 3, AKADEMIA_BARE_TABLE, TRUE)
     }
-    if (flag(FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL)) {
+    if (flag(FLAG_ICHOR_HIDE_KRATER_KYNDER)) {
         setmetatile(10, 3, AKADEMIA_BARE_TABLE, TRUE)
     }
-    if (flag(FLAG_ICHOR_HIDE_KRATER_PIPLUP)) {
+    if (flag(FLAG_ICHOR_HIDE_KRATER_HIPLING)) {
         setmetatile(11, 3, AKADEMIA_BARE_TABLE, TRUE)
     }
 }
@@ -99,11 +99,11 @@ script ElaiaVillage_Akademia_EventScript_Welcome {
     waitstate
     switch (var(VAR_STARTER_MON)) {
         case 0:
-            setflag(FLAG_ICHOR_HIDE_KRATER_SNIVY)
+            setflag(FLAG_ICHOR_HIDE_KRATER_NEBREL)
         case 1:
-            setflag(FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL)
+            setflag(FLAG_ICHOR_HIDE_KRATER_KYNDER)
         default:
-            setflag(FLAG_ICHOR_HIDE_KRATER_PIPLUP)
+            setflag(FLAG_ICHOR_HIDE_KRATER_HIPLING)
     }
     call(ElaiaVillage_Akademia_EventScript_HideTakenKraters)
     special(DrawWholeMapView)
@@ -111,11 +111,11 @@ script ElaiaVillage_Akademia_EventScript_Welcome {
     setspeaker(ElaiaVillage_Akademia_Name_Daphne)
     switch (var(VAR_STARTER_MON)) {
         case 0:
-            msgbox(format("Snivy. Grown, it's the great serpent that guarded Delphoi.\pApollo himself had to shoot it. Don't tell it. It's vain enough."))
+            msgbox(format("Nebrel. My namesake ran from Apollo and became a laurel.\pThis one only runs from bees. Grown, it crowns the victors."))
         case 1:
-            msgbox(format("Cyndaquil. Raise it well and it becomes Typhon's fire.\pFather of monsters, the old poets said. Raise it kindly."))
+            msgbox(format("Kynder. One head awake, two asleep. One day all three wake.\pThen it's the hound at Hades's gate. Raise it kindly."))
         default:
-            msgbox(format("Piplup. One day it'll wear a trident on its brow, like the sea-god.\pFor now it mostly falls over. With great dignity."))
+            msgbox(format("Hipling. Poseidon struck a rock once, and out came the first horse.\pThis one strikes puddles. Grown, it shakes the seabed."))
     }
     playfanfare(MUS_ICHOR_OBTAIN_MON)
     message(format("{PLAYER} received {STR_VAR_1}!"))
@@ -165,23 +165,23 @@ script ElaiaVillage_Akademia_EventScript_Welcome {
     setspeaker(ElaiaVillage_Akademia_Name_Kleon)
     switch (var(VAR_STARTER_MON)) {
         case 0:
-            msgbox(format("A Snivy? Then I want the fire one. Fire eats grass for breakfast."))
+            msgbox(format("A fawn? Then I want the fire pup. Fire eats grass for breakfast."))
             closemessage
             applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonToMiddleKrater)
             waitmovement(0)
-            setflag(FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL)
+            setflag(FLAG_ICHOR_HIDE_KRATER_KYNDER)
         case 1:
-            msgbox(format("Fire, huh? Then the little sea-bird's mine.\pWater puts out fire."))
+            msgbox(format("Fire, huh? Then the little sea foal's mine.\pWater puts out fire."))
             closemessage
             applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonToRightKrater)
             waitmovement(0)
-            setflag(FLAG_ICHOR_HIDE_KRATER_PIPLUP)
+            setflag(FLAG_ICHOR_HIDE_KRATER_HIPLING)
         default:
-            msgbox(format("The bird? Then I'll take the snake. Roots drink the sea dry."))
+            msgbox(format("The foal? Then I'll take the fawn. Roots drink the sea dry."))
             closemessage
             applymovement(LOCALID_AKADEMIA_KLEON, ElaiaVillage_Akademia_Movement_KleonToLeftKrater)
             waitmovement(0)
-            setflag(FLAG_ICHOR_HIDE_KRATER_SNIVY)
+            setflag(FLAG_ICHOR_HIDE_KRATER_NEBREL)
     }
     playse(SE_BALL)
     call(ElaiaVillage_Akademia_EventScript_HideTakenKraters)
@@ -307,11 +307,11 @@ script ElaiaVillage_Akademia_EventScript_Krater {
     getplayerxy(VAR_0x8004, VAR_0x8005)
     switch (var(VAR_0x8004)) {
         case 9:
-            goto_if_set(FLAG_ICHOR_HIDE_KRATER_SNIVY, ElaiaVillage_Akademia_EventScript_EmptyKrater)
+            goto_if_set(FLAG_ICHOR_HIDE_KRATER_NEBREL, ElaiaVillage_Akademia_EventScript_EmptyKrater)
         case 10:
-            goto_if_set(FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL, ElaiaVillage_Akademia_EventScript_EmptyKrater)
+            goto_if_set(FLAG_ICHOR_HIDE_KRATER_KYNDER, ElaiaVillage_Akademia_EventScript_EmptyKrater)
         default:
-            goto_if_set(FLAG_ICHOR_HIDE_KRATER_PIPLUP, ElaiaVillage_Akademia_EventScript_EmptyKrater)
+            goto_if_set(FLAG_ICHOR_HIDE_KRATER_HIPLING, ElaiaVillage_Akademia_EventScript_EmptyKrater)
     }
     msgbox(format("The last starter peers out of its krater. It looks hopeful."), MSGBOX_SIGN)
 }

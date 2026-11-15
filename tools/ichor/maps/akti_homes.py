@@ -116,7 +116,7 @@ HOMES = {
         "spots": [
             ("warp", "door to Akti Town (south-arrow mat)", [(3, 6), (4, 6)]),
             ("npc", "Aigon the goatherd, at his hearth", (3, 3), "west"),
-            ("npc", "a Skiddo kid, wandering (keep its range inside x 5-7, y 5-6)", (6, 5), "south"),
+            ("npc", "an Eripip kid, wandering (keep its range inside x 5-7, y 5-6)", (6, 5), "south"),
             ("bg", "hearth: \"A pot of goat's milk warms by the fire.\"", (1, 3), (1, 4, "north")),
         ],
     },

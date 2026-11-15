@@ -5,7 +5,7 @@ local S, K, emu = L.S, L.K, L.emu
 local log, expect, wait, shot, settle, tap = L.log, L.expect, L.wait, L.shot, L.settle, L.tap
 
 local PX, PY = 6, 45                 -- in Route 1's south grass
-local WOOLOO_A, WOOLOO_B = 5, 6      -- the two wandering Wooloo (one palette)
+local GOAT_A, GOAT_B = 5, 6      -- the two wandering Kerazap (one palette)
 local YOUTH = 3                      -- the youth, rewritten as caught mid-stride
 local YX, YY = 8, 44
 
@@ -68,8 +68,8 @@ L.start(function()
     for i = 0, 15 do local r, g, b = rgb(baseline[s][i]) if r ~= g or g ~= b then n = n + 1 end end
     if n > best then colorful, best = s, n end
   end
-  local wa, wb = obj(WOOLOO_A), obj(WOOLOO_B)
-  expect(wa and wb, "both Wooloo are on screen")
+  local wa, wb = obj(GOAT_A), obj(GOAT_B)
+  expect(wa and wb, "both Kerazap are on screen")
   local woolSlot = palSlot(wa)
   local woolColors = colors(objPal(woolSlot))
   local routeMusic = L.mapMusic()
@@ -99,7 +99,7 @@ L.start(function()
 
   -- E1: load the map with the hour's flag set
   toRoute1("FrozenTest_EnterHeader")
-  wa, wb = obj(WOOLOO_A), obj(WOOLOO_B)
+  wa, wb = obj(GOAT_A), obj(GOAT_B)
   local player = L.playerObject()
   expect(grayBgCount() == 13, string.format("every tileset palette is gray (%d of 13)", grayBgCount()))
   expect(isGray(objPal(palSlot(wa))) and not isGray(objPal(palSlot(player))),
@@ -125,9 +125,9 @@ L.start(function()
     settle()
     return box, line
   end
-  L.step(K.LEFT); L.step(K.LEFT); L.face(K.UP)    -- (4,45), under the first Wooloo
-  local box, line = talk("talk_wooloo")
-  expect(box and line == 3, "a frozen Wooloo: \"It's frozen with its ears up, listening for something.\"")
+  L.step(K.LEFT); L.step(K.LEFT); L.face(K.UP)    -- (4,45), under the first Kerazap
+  local box, line = talk("talk_goat")
+  expect(box and line == 3, "a frozen Kerazap: \"It's frozen with its ears up, listening for something.\"")
   L.step(K.RIGHT); L.step(K.RIGHT)
 
   -- No wild Pokémon in the tall grass
@@ -157,23 +157,23 @@ L.start(function()
   L.waitUntil(L.idle, 3000, "the field after the battle")
   expect(L.defeated(S.TRAINER_ICHOR_TITYROS), "on a map that answers for itself (Ichor_FrozenScriptsHere), his own script runs: a battle")
   wait(30)
-  expect(grayBgCount() == 13 and frozen(obj(WOOLOO_A)), "after a battle the world is still gray and still")
+  expect(grayBgCount() == 13 and frozen(obj(GOAT_A)), "after a battle the world is still gray and still")
 
   -- releaseall doesn't thaw anyone
   run("FrozenTest_LockReleaseHeader")
   wait(30)
-  expect(frozen(obj(WOOLOO_A)) and frozen(obj(WOOLOO_B)), "a script's releaseall leaves the flock frozen")
+  expect(frozen(obj(GOAT_A)) and frozen(obj(GOAT_B)), "a script's releaseall leaves the flock frozen")
 
-  -- E3: one Wooloo unfrozen; the color runs back in
-  setVar(S.VAR_0x8004, WOOLOO_A)
+  -- E3: one Kerazap unfrozen; the color runs back in
+  setVar(S.VAR_0x8004, GOAT_A)
   run("FrozenTest_UnfreezeHeader", { noSettle = true })
   wait(8)
   local mid = colors(objPal(woolSlot))
   local partly = not isGray(objPal(woolSlot)) and not same(mid, woolColors)
   wait(30)
-  expect(partly, "eight frames in, the Wooloo's color is part way back")
+  expect(partly, "eight frames in, the Kerazap's color is part way back")
   expect(same(colors(objPal(woolSlot)), woolColors), "then all the way")
-  expect(not frozen(obj(WOOLOO_A)) and frozen(obj(WOOLOO_B)), "the unfrozen Wooloo is free and the other still held")
+  expect(not frozen(obj(GOAT_A)) and frozen(obj(GOAT_B)), "the unfrozen Kerazap is free and the other still held")
   shot("unfrozen")
 
   -- E5: a memory in sepia
@@ -207,7 +207,7 @@ L.start(function()
   expect(not L.getFlag(S.FLAG_ICHOR_FROZEN_HOUR) and restored == 13,
          string.format("step 12 ends the hour, every palette as it was (%d of 13)", restored))
   wait(240)
-  expect(not frozen(obj(WOOLOO_B)) and L.mapMusic() == routeMusic, "the flock moves again and the route's music returns")
+  expect(not frozen(obj(GOAT_B)) and L.mapMusic() == routeMusic, "the flock moves again and the route's music returns")
   shot("color_back")
 
   -- E2: the gray spreads from a point
@@ -219,7 +219,7 @@ L.start(function()
   L.waitUntil(L.idle, 900, "the gray to finish spreading")
   wait(10)
   expect(partway > 0 and partway < 13, string.format("part way through, %d of 13 palettes are gray", partway))
-  expect(L.getFlag(S.FLAG_ICHOR_FROZEN_HOUR) and grayBgCount() == 13 and frozen(obj(WOOLOO_B)),
+  expect(L.getFlag(S.FLAG_ICHOR_FROZEN_HOUR) and grayBgCount() == 13 and frozen(obj(GOAT_B)),
          "then all of them, the flag is set and the flock is frozen")
   wait(120)
   expect(L.mapMusic() == S.MUS_ICHOR_ELPIS_LULLABY_BOX, "and the music box plays")
