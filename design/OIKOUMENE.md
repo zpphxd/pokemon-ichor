@@ -1037,53 +1037,53 @@ One list for the user, merging `POSTGAME.md`'s P1–P11 with this file's and LEG
 
 | # | Decision | Recommendation | Same as |
 |---|---|---|---|
-| **PG-1 ★** | **What 1.0 means:** the release with the post-game's core; the story-complete build becomes 0.9 | Yes | P1 |
-| PG-2 | **Build order:** the sailing layer first, then Olympia, the Katabasis, the Labors, the Odyssey, Atlantis and the summit; the Oikoumene's lands alongside, near lands first | Yes | P9 |
-| PG-3 | **Each epic finishes one cast member's arc:** Kleon, the Cutter and Medon, Alethea and Mom, Daphne. The Periodos is Alethea's second, for the land | Yes | P8 |
-| PG-4 | **Oikoumene scope:** 1.0 ships all ten lands at core size, about 45 outdoor maps of this file's, plus the ten halls' 23 maps (PG-33) | Yes | — |
+| **PG-1 ★** | **What 1.0 means:** the release with the post-game's core; the story-complete build becomes 0.9 | **Approved (the user took the recommendations), 2026-11-14.** Yes | P1 |
+| PG-2 | **Build order:** the sailing layer first, then Olympia, the Katabasis, the Labors, the Odyssey, Atlantis and the summit; the Oikoumene's lands alongside, near lands first | **Approved (the user took the recommendations), 2026-11-14.** Yes | P9 |
+| PG-3 | **Each epic finishes one cast member's arc:** Kleon, the Cutter and Medon, Alethea and Mom, Daphne. The Periodos is Alethea's second, for the land | **Approved (the user took the recommendations), 2026-11-14.** Yes | P8 |
+| PG-4 | **Oikoumene scope:** 1.0 ships all ten lands at core size, about 45 outdoor maps of this file's, plus the ten halls' 23 maps (PG-33) | **Approved (the user took the recommendations), 2026-11-14.** Yes | — |
 
 **The second chart**
 
 | # | Decision | Recommendation | Same as |
 |---|---|---|---|
-| **PG-5 ★** | **Lazarus's nine starter lines** appear only as wild Oikoumene Pokémon, never as starters or gifts, so "every Pokémon" stays true | Yes | P5; amends SYSTEMS D9 |
-| **PG-6 ★** | **The Oikoumene's shape:** ten lands round one sea, ringed by Okeanos, as the Greeks drew it | Yes | — |
-| **PG-7 ★** | **The far lands and the wine-dark sea are the Oikoumene's,** on this chart, at their epics' levels: LABORS's Thrace, Themiskyra, the Caucasus and the far west; ODYSSEY's sea and islands | Yes | P10, LB10, O11 |
-| **PG-8 ★** | **How it opens:** the ship opens the near lands (the Troad, the Black Sea, Egypt) from the post-game's start; the epics carry you to their places; Aeolus's Bag, from the Odyssey, opens the rim | Yes | — |
-| PG-9 | **Scheria is Kerkyra** on the Aethos chart, where AETHOS_MAP already paints it; the Odyssey's Outer Sea comes out there | Yes, for ODYSSEY to confirm | ODYSSEY §6.10 |
-| PG-10 | **The songs and the people disagree:** Troy stands, smaller than the songs of its war; Hektor, Memnon and Achilles are alive and have heard their own deaths sung. It squares the epics (Odysseus home, Achilles alive) with Troy's heroes | Yes | — |
-| **PG-11 ★** | **The engine plan:** the Oikoumene takes Kanto's chart slot and gets its section IDs from the Hoenn block the hoenn-cut session frees, with aliases; the Kanto block's 53 spare IDs stay spare | Yes, once the Hoenn audit is done | Replaces the first draft's D-O5 |
-| PG-12 | **A contradiction to settle in POSTGAME:** Atlantis "no longer waits for the Odyssey" (P11), but its first step parts the fog with Aeolus's Bag, which the Odyssey gives | Let Atlantis's fog part when Labor 10's Pillars stand, so P11 holds | P11 |
+| **PG-5 ★** | **Lazarus's nine starter lines** appear only as wild Oikoumene Pokémon, never as starters or gifts, so "every Pokémon" stays true | **Approved (the user took the recommendations), 2026-11-14.** Yes | P5; amends SYSTEMS D9 |
+| **PG-6 ★** | **The Oikoumene's shape:** ten lands round one sea, ringed by Okeanos, as the Greeks drew it | **Approved by the user, 2026-11-14.** Yes | — |
+| **PG-7 ★** | **The far lands and the wine-dark sea are the Oikoumene's,** on this chart, at their epics' levels: LABORS's Thrace, Themiskyra, the Caucasus and the far west; ODYSSEY's sea and islands | **Approved by the user, 2026-11-14.** Yes | P10, LB10, O11 |
+| **PG-8 ★** | **How it opens:** the ship opens the near lands (the Troad, the Black Sea, Egypt) from the post-game's start; the epics carry you to their places; Aeolus's Bag, from the Odyssey, opens the rim | **Approved by the user, 2026-11-14.** Yes | — |
+| PG-9 | **Scheria is Kerkyra** on the Aethos chart, where AETHOS_MAP already paints it; the Odyssey's Outer Sea comes out there | **Approved (the user took the recommendations), 2026-11-14.** Yes, for ODYSSEY to confirm | ODYSSEY §6.10 |
+| PG-10 | **The songs and the people disagree:** Troy stands, smaller than the songs of its war; Hektor, Memnon and Achilles are alive and have heard their own deaths sung. It squares the epics (Odysseus home, Achilles alive) with Troy's heroes | **Approved (the user took the recommendations), 2026-11-14.** Yes | — |
+| **PG-11 ★** | **The engine plan:** the Oikoumene takes Kanto's chart slot and gets its section IDs from the Hoenn block the hoenn-cut session frees, with aliases; the Kanto block's 53 spare IDs stay spare | **Approved (the user took the recommendations), 2026-11-14.** Yes, once the Hoenn audit is done | Replaces the first draft's D-O5 |
+| PG-12 | **A contradiction to settle in POSTGAME:** Atlantis "no longer waits for the Odyssey" (P11), but its first step parts the fog with Aeolus's Bag, which the Odyssey gives | **Approved (the user took the recommendations), 2026-11-14.** Let Atlantis's fog part when Labor 10's Pillars stand, so P11 holds | P11 |
 
 **Systems, items and names**
 
 | # | Decision | Recommendation | Same as |
 |---|---|---|---|
-| PG-13 | **The Oikoumene Dex:** rename the National Dex | Yes | P2 |
-| PG-14 | **The trade-evolution item:** the Linking Cord, sold in the post-game, renamed the **Xenion** (a guest-gift) | Yes, the rename for TERMS | POSTGAME §4 |
-| PG-15 | **The Reveal Glass is ODYSSEY's Mirror of Truth,** Alethea's, from Aiolia's bronze; LEGENDS uses it for the Gorgons' Isle and the Forces | Yes | ODYSSEY §17, TERMS |
-| PG-16 | **The Nurseries:** low-level first stages, one per land, turning monthly | Yes | — |
-| PG-17 | **Helios's cup** as Okeanos's night ferry after Labor 10, and the only way to the Isles of the Blessed | Yes | LABORS Labor 10 |
-| PG-18 | **The Kleos page:** 100% is the twelve laurels; the gods' laurel at Beloved (Favor 60) of all fifteen, or the easier Known (Favor 10) | Beloved | P6 |
-| PG-19 | **The Loom epilogue** at 100%, with Halia's spindle | Yes | P7 |
-| PG-20 | **The Acorn of Dodona by knowledge too:** completing the Oikoumene Dex (Kleos laurel 9) gives it, or the Exp. Charm if Zeus already did | Yes | LEGENDS D-L9 |
+| PG-13 | **The Oikoumene Dex:** rename the National Dex | **Approved (the user took the recommendations), 2026-11-14.** Yes | P2 |
+| PG-14 | **The trade-evolution item:** the Linking Cord, sold in the post-game, renamed the **Xenion** (a guest-gift) | **Approved (the user took the recommendations), 2026-11-14.** Yes, the rename for TERMS | POSTGAME §4 |
+| PG-15 | **The Reveal Glass is ODYSSEY's Mirror of Truth,** Alethea's, from Aiolia's bronze; LEGENDS uses it for the Gorgons' Isle and the Forces | **Approved (the user took the recommendations), 2026-11-14.** Yes | ODYSSEY §17, TERMS |
+| PG-16 | **The Nurseries:** low-level first stages, one per land, turning monthly | **Approved (the user took the recommendations), 2026-11-14.** Yes | — |
+| PG-17 | **Helios's cup** as Okeanos's night ferry after Labor 10, and the only way to the Isles of the Blessed | **Approved (the user took the recommendations), 2026-11-14.** Yes | LABORS Labor 10 |
+| PG-18 | **The Kleos page:** 100% is the twelve laurels; the gods' laurel at Beloved (Favor 60) of all fifteen, or the easier Known (Favor 10) | **Approved (the user took the recommendations), 2026-11-14.** Beloved | P6 |
+| PG-19 | **The Loom epilogue** at 100%, with Halia's spindle | **Approved (the user took the recommendations), 2026-11-14.** Yes | P7 |
+| PG-20 | **The Acorn of Dodona by knowledge too:** completing the Oikoumene Dex (Kleos laurel 9) gives it, or the Exp. Charm if Zeus already did | **Approved (the user took the recommendations), 2026-11-14.** Yes | LEGENDS D-L9 |
 
 **Content**
 
 | # | Decision | Recommendation | Same as |
 |---|---|---|---|
-| PG-21 | **Olympia's facilities:** five, with five Brains; the Dome and Palace cut | Yes | P3 |
-| PG-22 | **The summit's keys:** Arceus needs all four epics and the three Primordials | Yes | P4, LB7 |
-| PG-23 | **The Periodos:** ten land champions and Herakles at the Pillars, with Alethea mapping; Medea, not a third Hippolyta fight, holds the Black Sea. Each champion now keeps a full hall (PG-33) | Yes | — |
-| PG-24 | **Herakles's gate:** the Pillars fight needs the Kotinos | Yes | — |
-| PG-25 | **The Golden Fleece is in Colchis,** as the Black Sea's land quest, not a Kaldera errand | Yes | POSTGAME §3.4 |
-| **PG-26 ★** | **The House of Night in 1.0.** UNDERWORLD places Cresselia and Darkrai there as a stretch goal; if it stays stretch, those two can't be caught in 1.0. It's one 24×20 map | Make it 1.0. If not, the Land of Dreams (§4.10) hosts them as a fallback, with LEGENDS §3.6's beats | K8 |
-| PG-27 | **Zapdos joins its trio** in LEGENDS, and Zeus's gift III becomes a unique Aetarch, the eagle LABORS's Labor 11 already uses | Yes | LEGENDS D-L1 |
-| PG-28 | **Jirachi is the star chart's reward** for all 24 constellations | Yes | LEGENDS D-L3 |
-| **PG-29 ★** | **Time Fractures and the Ultra Beasts are LEGENDS's,** after Hesiod's ages (gold behind, iron ahead) and the cloth's selvage. POSTGAME §3.4's Sky Fractures above Olympus give way to the Selvage | Yes | POSTGAME §3.4, LEGENDS D-L4 |
-| PG-30 | **The Ultra Beasts' name** in dialogue: the Peratai, "the beyond-ones" | Yes | LEGENDS D-L5 |
-| **PG-31 ★** | **The legend castings as a set** (LEGENDS §2), with this pass's changes: Dialga as Chronos and Palkia as Plato's Chora; the Tapus as the Isles' four Okeanids; Yveltal as the dark bird of Ares's island | Yes | LEGENDS D-L8 |
-| PG-32 | **Small items:** a Magma Stone for Heatran (optional); Jirachi joins without a battle if you wish for nothing | Optional; yes | LEGENDS D-L6, D-L10 |
+| PG-21 | **Olympia's facilities:** five, with five Brains; the Dome and Palace cut | **Approved (the user took the recommendations), 2026-11-14.** Yes | P3 |
+| PG-22 | **The summit's keys:** Arceus needs all four epics and the three Primordials | **Approved (the user took the recommendations), 2026-11-14.** Yes | P4, LB7 |
+| PG-23 | **The Periodos:** ten land champions and Herakles at the Pillars, with Alethea mapping; Medea, not a third Hippolyta fight, holds the Black Sea. Each champion now keeps a full hall (PG-33) | **Approved (the user took the recommendations), 2026-11-14.** Yes | — |
+| PG-24 | **Herakles's gate:** the Pillars fight needs the Kotinos | **Approved (the user took the recommendations), 2026-11-14.** Yes | — |
+| PG-25 | **The Golden Fleece is in Colchis,** as the Black Sea's land quest, not a Kaldera errand | **Approved (the user took the recommendations), 2026-11-14.** Yes | POSTGAME §3.4 |
+| **PG-26 ★** | **The House of Night in 1.0.** UNDERWORLD places Cresselia and Darkrai there as a stretch goal; if it stays stretch, those two can't be caught in 1.0. It's one 24×20 map | **Approved by the user, 2026-11-14.** Make it 1.0. If not, the Land of Dreams (§4.10) hosts them as a fallback, with LEGENDS §3.6's beats | K8 |
+| PG-27 | **Zapdos joins its trio** in LEGENDS, and Zeus's gift III becomes a unique Aetarch, the eagle LABORS's Labor 11 already uses | **Approved (the user took the recommendations), 2026-11-14.** Yes | LEGENDS D-L1 |
+| PG-28 | **Jirachi is the star chart's reward** for all 24 constellations | **Approved (the user took the recommendations), 2026-11-14.** Yes | LEGENDS D-L3 |
+| **PG-29 ★** | **Time Fractures and the Ultra Beasts are LEGENDS's,** after Hesiod's ages (gold behind, iron ahead) and the cloth's selvage. POSTGAME §3.4's Sky Fractures above Olympus give way to the Selvage | **Approved (the user took the recommendations), 2026-11-14.** Yes | POSTGAME §3.4, LEGENDS D-L4 |
+| PG-30 | **The Ultra Beasts' name** in dialogue: the Peratai, "the beyond-ones" | **Approved (the user took the recommendations), 2026-11-14.** Yes | LEGENDS D-L5 |
+| **PG-31 ★** | **The legend castings as a set** (LEGENDS §2), with this pass's changes: Dialga as Chronos and Palkia as Plato's Chora; the Tapus as the Isles' four Okeanids; Yveltal as the dark bird of Ares's island | **Approved by the user, 2026-11-14.** Yes | LEGENDS D-L8 |
+| PG-32 | **Small items:** a Magma Stone for Heatran (optional); Jirachi joins without a battle if you wish for nothing | **Approved (the user took the recommendations), 2026-11-14.** Optional; yes | LEGENDS D-L6, D-L10 |
 
 **The Periodos's halls** (`design/oikoumene/PERIODOS.md`)
 
