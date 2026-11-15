@@ -3,12 +3,15 @@
 #include "global.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
+#include "field_weather.h"
+#include "ichor_herms.h"
 #include "ichor_relics.h"
 #include "ichor_save.h"
 #include "rtc.h"
 #include "test/test.h"
 #include "constants/ichor.h"
 #include "constants/rtc.h"
+#include "constants/weather.h"
 
 u16 Ichor_CountFlagRange(void);
 void Ichor_ForceOmen(void);
@@ -69,15 +72,62 @@ TEST("Ichor: a held time of day overrides the clock until released")
 
 TEST("Ichor: a carried flame counts down even on a quiet step, and water puts it out")
 {
-    VarSet(VAR_TEMP_2, 10);
-    VarSet(VAR_TEMP_3, FLAME_HEARTH);
+    Ichor_SetCarriedFlame(FLAME_HEARTH, 10);
     EXPECT_EQ(Ichor_CarriedFlameStep(FALSE), FALSE);
-    EXPECT_EQ(VarGet(VAR_TEMP_2), 9);
-    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_HEARTH);
+    EXPECT_EQ(Ichor_GetFlameSteps(), 9);
+    EXPECT_EQ(Ichor_GetFlameKind(), FLAME_HEARTH);
 
     gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_SURFING;
     EXPECT_EQ(Ichor_CarriedFlameStep(FALSE), FALSE);
-    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_NONE);
+    EXPECT_EQ(Ichor_GetFlameKind(), FLAME_NONE);
     EXPECT_EQ(Ichor_IsCarryingFlame(), FALSE);
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
+}
+
+TEST("Ichor: Aethos's herms and the Oikoumene's waystones keep separate flags")
+{
+    EXPECT_EQ(Ichor_GetHermFlag(HERM_KALLISTE_ROUTE_1), FLAG_ICHOR_HERMS_START);
+    EXPECT_EQ(Ichor_GetHermFlag(HERM_THE_ASCENT), FLAG_ICHOR_HERMS_START + HERM_THE_ASCENT);
+    EXPECT_EQ(Ichor_GetHermFlag(HERM_OIKOUMENE_FIRST), FLAG_ICHOR_WAYSTONES_START);
+    EXPECT_EQ(Ichor_GetHermFlag(HERM_MAX - 1), FLAG_ICHOR_WAYSTONES_START + 31);
+}
+
+TEST("Ichor: rain burns a carried flame down two steps at a time, and it still gutters")
+{
+    u8 weather = gWeatherPtr->currWeather;
+    gWeatherPtr->currWeather = WEATHER_RAIN;
+    Ichor_SetCarriedFlame(FLAME_LERNA, 8);
+    Ichor_CarriedFlameStep(FALSE);
+    EXPECT_EQ(Ichor_GetFlameSteps(), 6);
+    Ichor_CarriedFlameStep(FALSE);  // 6 -> 4: past 5, so it guttered (silently here)
+    EXPECT_EQ(Ichor_GetFlameSteps(), 4);
+    Ichor_SetCarriedFlame(FLAME_LERNA, 1);
+    Ichor_CarriedFlameStep(FALSE);  // never below 0
+    EXPECT_EQ(Ichor_GetFlameSteps(), 0);
+    EXPECT_EQ(Ichor_GetFlameKind(), FLAME_NONE);
+    gWeatherPtr->currWeather = weather;
+}
+
+TEST("Ichor: a carried flame doesn't drown aboard the Euploia")
+{
+    Ichor_SetCarriedFlame(FLAME_HESTIA_SHIP, 10);
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_SURFING;
+    FlagSet(FLAG_ICHOR_GENERAL_START + 0x302);  // world-postgame's FLAG_ICHOR_ON_SHIP
+    Ichor_CarriedFlameStep(FALSE);
+    EXPECT_EQ(Ichor_GetFlameKind(), FLAME_HESTIA_SHIP);
+    EXPECT_EQ(Ichor_GetFlameSteps(), 9);
+    FlagClear(FLAG_ICHOR_GENERAL_START + 0x302);
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
+}
+
+TEST("Ichor: a map's own temp vars are never read as a carried flame")
+{
+    Ichor_SetCarriedFlame(FLAME_NONE, 0);
+    VarSet(VAR_TEMP_2, 1);  // Thyrsa's ON_TRANSITION does this
+    VarSet(VAR_TEMP_3, 1);
+    EXPECT_EQ(Ichor_IsCarryingFlame(), FALSE);
+    Ichor_CarriedFlameStep(FALSE);
+    EXPECT_EQ(VarGet(VAR_TEMP_2), 1);
+    VarSet(VAR_TEMP_2, 0);
+    VarSet(VAR_TEMP_3, 0);
 }

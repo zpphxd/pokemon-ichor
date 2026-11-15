@@ -75,8 +75,10 @@ local function asterionAt()
   return emu:read16(c) - S.MAP_OFFSET, emu:read16(c + 2) - S.MAP_OFFSET
 end
 local function asterionFacing() return emu:read8(asterion() + S.OFF_OBJ_FACING) & 0xF end
--- Route 1 with Asterion at (MX, MY) facing `movement`, dark unless `lit`; the player at (px, py).
-local function stage(px, py, movement, lit)
+-- Route 1 with Asterion at (MX, MY) facing `movement`, dark unless `lit`; the
+-- player at (px, py). `options` are ICHOR_CHARGER_* bits; `script` replaces his
+-- object script (for ICHOR_CHARGER_HIT_SCRIPT).
+local function stage(px, py, movement, lit, options, script)
   warpTo(px, py)
   local t = L.sb1() + S.OFF_SB1_TEMPLATES
   for i = 0, 63 do
@@ -87,11 +89,13 @@ local function stage(px, py, movement, lit)
       emu:write8(tpl + S.OFF_TPL_MOVEMENT, movement)
       emu:write16(tpl + S.OFF_TPL_TRAINER_TYPE, 0)
       emu:write16(tpl + S.OFF_TPL_TRAINER_TYPE + 2, 0)
+      if script then emu:write32(tpl + S.OFF_TPL_SCRIPT, script) end
       break
     end
   end
   L.setVar(S.VAR_0x8008, ASTERION)
   L.runHeader("LabTest_RespawnHeader")
+  L.setVar(S.VAR_0x800A, options or 0)
   L.runHeader("LabTest_AsterionHeader")
   setDark(not lit)
   wait(20)
@@ -290,6 +294,39 @@ L.start(function()
   L.waitUntil(L.idle, 3000, "the field after the knockdown")
   px, py = L.pos()
   expect(px == AX and py == AY, string.format("awake after three steps, he charges (%d,%d)", px, py))
+
+  -- === Labor 4's boar: Asterion's AI with options =======================================
+  -- Deaf: a step two tiles off his line, and he doesn't turn
+  stage(15, 45, S.MOVEMENT_TYPE_FACE_LEFT, true, S.ICHOR_CHARGER_DEAF)
+  L.step(K.UP); L.step(K.LEFT)                   -- (14,44): 2 away
+  wait(40)
+  expect(asterionFacing() == S.DIR_WEST, "a deaf charger doesn't turn toward a step")
+
+  -- A drift stops the charge and holds him; with NO_RETURN he stays where he stuck
+  stage(15, 47, S.MOVEMENT_TYPE_FACE_DOWN, false, S.ICHOR_CHARGER_NO_RETURN)  -- dark: he sees 3, so the dodge is in time
+  L.runHeader("LabTest_DriftHeader")
+  steps({ K.LEFT, K.LEFT })
+  L.step(K.UP)                                   -- (13,46): in his line
+  L.step(K.RIGHT)                                -- out of it
+  wait(150)
+  local bx, by = asterionAt()
+  expect(by == 48 and L.getFlag(S.FLAG_TEMP_2), string.format("the charge ploughs into the drift at (13,48) and sets its flag (%d,%d)", bx or -1, by or -1))
+  wait(260)
+  bx, by = asterionAt()
+  expect(by == 48, "five seconds on, he's still stuck in the snow")
+  wait(300)
+  bx, by = asterionAt()
+  expect(by == 48 and L.idle(), "free again, he doesn't walk back up his line")
+
+  -- A hit runs his own script instead of the knockdown
+  stage(15, 47, S.MOVEMENT_TYPE_FACE_DOWN, false, S.ICHOR_CHARGER_HIT_SCRIPT, L.headers["LabTest_BoarHitScript"])
+  L.setVar(S.VAR_TEMP_4, 0); L.setVar(S.VAR_TEMP_5, 0)
+  steps({ K.LEFT, K.LEFT, K.UP })                -- (13,46), and stay
+  L.waitUntil(function() return L.getVar(S.VAR_TEMP_5) ~= 0 end, 400, "the boar's hit script")
+  settle()
+  px, py = L.pos()
+  expect(L.getVar(S.VAR_TEMP_4) == ASTERION and L.getVar(S.VAR_TEMP_5) == S.ICHOR_CHARGE_HIT and px == 13 and py == 46,
+         "a hit runs the charger's own script (VAR_0x8004 its id, VAR_0x8005 ICHOR_CHARGE_HIT), with no knockdown warp")
 
   -- === A dial ===========================================================================
   L.runHeader("LabTest_DialHeader")

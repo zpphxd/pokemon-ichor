@@ -221,15 +221,17 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
 
 ### Carried flames (SYSTEMS §2)
 
-- **A carried flame** is a named fire on Hecate's Torch for a set number of steps. Its kind is in `VAR_TEMP_3` (`FLAME_HEARTH`, `FLAME_SANCTUM`, `FLAME_THRESHOLD`; add new kinds at the end, with their names in `src/ichor_relics.c`). Its steps left are in `VAR_TEMP_2`. Both reset on a map change, so the flame dies when you leave.
-- **A brazier that gives its fire:** `setvar(VAR_0x8004, FLAME_HEARTH)`, `setvar(VAR_0x8005, 20)`, then `special(Ichor_TakeFlame)`. `VAR_RESULT` is `FALSE` without a lit Torch. A brazier already lit with that fire relights it the same way (the relay).
-- **A brazier that wants a named fire** checks `VAR_TEMP_3` itself, then `special(Ichor_PutOutFlame)` if the fire is spent on it.
-- **Each step burns one.** At 5 steps left: "The flame gutters." At 0: "The carried fire dies down to the torch's own flame."
-- **Water puts it out:** "The water puts out the carried fire." Surfing, which covers falling into water and the waterfall, does it on the next step. Dousing the Torch from the Ring puts it out silently.
+- **A carried flame** is a named fire on Hecate's Torch for a set number of steps. Its kinds are `FLAME_HEARTH`, `FLAME_SANCTUM`, `FLAME_THRESHOLD`, and the post-game's `FLAME_HESTIA_SHIP` (Hestia's fire) and `FLAME_LERNA` (Kleon's fire). Add new kinds at the end, with their names in `src/ichor_relics.c`.
+- **The engine keeps it,** not the map's temp vars. Maps use `VAR_TEMP_*` for their own ends. Read it with `specialvar(VAR_RESULT, Ichor_GetFlameKind)` (`FLAME_NONE` without one) and `specialvar(VAR_RESULT, Ichor_GetFlameSteps)`. The first draft kept it in `VAR_TEMP_2` and `VAR_TEMP_3`; scripts that check those must switch to the specials.
+- **It dies when you leave the map,** unless its kind **travels**. A travelling kind keeps its steps through doors, warps and map edges: so far only `FLAME_HESTIA_SHIP`, Lampon's walk from Akti's temple to the quay. Mark a new kind in `sFlameTravels` (`src/ichor_relics.c`). A save and CONTINUE puts any flame out.
+- **A brazier that gives its fire:** `setvar(VAR_0x8004, FLAME_HEARTH)`, `setvar(VAR_0x8005, 20)`, then `special(Ichor_TakeFlame)`. `VAR_RESULT` is `FALSE` without a lit Torch.
+- **Relighting (the relay).** A brazier already lit with that fire gives a full budget the same way. Do it in the brazier's own script, after `call(EventScript_IchorBrazier)`: if its flag is set and `Ichor_GetFlameKind` is that kind (or any kind, if the brazier hands out its fire), call `Ichor_TakeFlame` again with the dry budget. Labor 2's burned pools work like this.
+- **A brazier that wants a named fire** checks `Ichor_GetFlameKind` itself, then `special(Ichor_PutOutFlame)` if the fire is spent on it.
+- **Each step burns one; in rain, two.** Rain means rain, downpour or a thunderstorm. Scripts always give the dry budget: SYSTEMS's 40 becomes 20 in rain. Passing 5 steps left: "The flame gutters." At 0: "The carried fire dies down to the torch's own flame."
+- **Water puts it out:** "The water puts out the carried fire." Surfing, which covers falling into water and the waterfall, does it on the next step. Sailing doesn't: aboard the Euploia (world-postgame's `FLAG_ICHOR_ON_SHIP`) the torch stays lit. Dousing the Torch from the Ring puts it out silently.
 - **Wind:** a draughty doorway's coord event runs `call(EventScript_IchorDraught)`. It does nothing without a flame; with one, "A draught snuffs out the carried fire."
 - **The start menu's panel** shows "Hearth fire: 12 steps", under the blessing when there is one.
 - **Order, Return and Reveal** (SYSTEMS's other verbs) are the map's own script.
-- **Rain** isn't decided yet; world-postgame is asking.
 
 ### Calls for scripted relic moments
 
@@ -345,6 +347,7 @@ Built in `src/ichor_herms.c`, `src/data/ichor_herms.h` and `data/scripts/ichor_h
 
 - **One great herm per route.** Its bg event runs `EventScript_IchorGreatHerm` directly. A herm that is already a sign with its own line calls `EventScript_IchorAnointHerm` after it, between `lockall` and `releaseall`. The engine knows which herm it is from the map; on a map with no herm row, both scripts do nothing.
 - **Herm ids** (`include/constants/ichor.h`) follow AETHOS_MAP's land routes and their map sections: `HERM_KALLISTE_ROUTE_1`, `HERM_AETHOS_ROUTE_4` … `_18`, `HERM_BULL_ROAD`, `HERM_AETHOS_ROUTE_25` … `_30` and `HERM_THE_ASCENT`. That is 23 before the post-game (`HERM_COUNT`). The post-game's `HERM_AETHOS_ROUTE_31` and `_32` come after them and don't count toward the bonus. Sea routes have no herm. Room is left for 32.
+- **The Oikoumene's waystones** (herms, Thoth's ibis pillars, stone babas and cairns of Ammon; OIKOUMENE §4) take ids from `HERM_OIKOUMENE_FIRST` (32) to 63. They anoint the same way and join the Wings' fly map, but never count toward Aethos's herms or the bonus. Their flags are `FLAG_ICHOR_WAYSTONES_START + (id - 32)`; `Ichor_GetHermFlag(id)` gives any herm's flag. The Oikoumene session sends each waystone's map, map section and landing tile, and the engine session adds its row.
 - **Each herm's flag** is `FLAG_ICHOR_HERMS_START + id`. A script that needs to know whether a herm is anointed (the Frozen Hour's turning heads) checks that flag. Nothing else sets it; the herm script does.
 - **Each herm needs one engine table row and one heal location.** Tell the engine session the herm's map and its landing tile (the tile south of it, on the main path), or add both rows yourself:
   - `src/data/ichor_herms.h`: `[HERM_AETHOS_ROUTE_4] = { .map = MAP_..., .mapsec = MAPSEC_AETHOS_ROUTE_4, .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_4 },`
@@ -478,6 +481,16 @@ His own movement type is his patrol: `FACE_*` or `WALK_SEQUENCE_*`, set in Porym
 | **Hitting a wall** | Stunned for 120 frames (a "?" stands in for the stars), then he walks back to where the charge began. |
 | **Hitting a registered cracked wall** | It becomes its broken metatile (passable), its flag is set, and the camera shakes. He stumbles into the gap, stunned for 60 frames. |
 | **The bronze bell** | `setvar(VAR_0x8004, 30)`, then `special(Ichor_AsterionRest)`. He lies still (facing south) for that many of the player's steps, and wakes early if the player comes next to him. |
+
+**Other chargers.** Labor 4's boar uses the same AI. Pass `ICHOR_CHARGER_*` bits in `VAR_0x8005` to `Ichor_StartAsterion`:
+
+| Option | What it changes |
+|---|---|
+| `ICHOR_CHARGER_DEAF` | Sight only, no hearing. Outdoors his sight is the full 7 tiles. |
+| `ICHOR_CHARGER_NO_RETURN` | After a stun he goes back to his movement type where he stands, instead of walking back up the charge line. |
+| `ICHOR_CHARGER_HIT_SCRIPT` | A hit runs the object's own script, with `VAR_0x8004` = its local id and `VAR_0x8005` = `ICHOR_CHARGE_HIT`, instead of the knockdown warp; then he patrols again. The script does the knockback and the battle, and sets `VAR_0x8005` back to 0 so a later talk isn't read as a hit. |
+
+**Snow drifts:** `setvar(VAR_0x8004, x)`, `setvar(VAR_0x8005, y)`, `setvar(VAR_0x8006, FLAG_...)`, then `special(Ichor_AddDrift)` in `ON_LOAD`, up to 8. A charge that runs into a drift ploughs in and sticks for 6 seconds, then goes on as after any stun, and the drift's flag is set so the map can count which drift caught him.
 
 ### The Helm of Darkness, as built
 
