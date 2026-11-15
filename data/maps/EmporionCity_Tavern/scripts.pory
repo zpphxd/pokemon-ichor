@@ -130,7 +130,7 @@ script EmporionCity_Tavern_EventScript_Match {
         }
         buffernumberstring(STR_VAR_1, VAR_0x8007)
         buffernumberstring(STR_VAR_2, VAR_0x8008)
-        msgbox(format("You throw the four bones: {STR_VAR_1}.\nYour opponent throws: {STR_VAR_2}."))
+        msgbox(format("You throw the four bones: {STR_VAR_1}.\pYour opponent throws: {STR_VAR_2}."))
         if (var(VAR_0x8007) == VAR_0x8008) {
             msgbox(format("A tie. Throw again."))
         }

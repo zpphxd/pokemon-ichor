@@ -308,7 +308,7 @@ script EmporionHarbor_EventScript_CitySign {
 }
 
 script EmporionHarbor_EventScript_HarborRoadSign {
-    msgbox(format("North: the Agora and the Temple of Hermes.\nSouth: the quay."), MSGBOX_SIGN)
+    msgbox(format("North: the Agora and the Temple of Hermes.\pSouth: the quay."), MSGBOX_SIGN)
 }
 
 script EmporionHarbor_EventScript_HiringBoard {
