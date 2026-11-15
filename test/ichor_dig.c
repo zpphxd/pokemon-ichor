@@ -3,6 +3,7 @@
 #include "global.h"
 #include "event_data.h"
 #include "item.h"
+#include "money.h"
 #include "ichor_dig.h"
 #include "ichor_rites.h"
 #include "ichor_save.h"
@@ -13,6 +14,7 @@
 u16 Ichor_DigStart(void);
 u16 Ichor_DigFindKind(void);
 void Ichor_DigFinish(void);
+u16 Ichor_SellToMoneychanger(void);
 
 #define ROLLS 2000
 
@@ -184,4 +186,28 @@ TEST("Ichor: a fixed dig needs the Trowel, digs once, and pays Stardust for a wh
     FlagClear(FLAG_ICHOR_DIG_FIXED_START + 63);
     RemoveBagItem(ITEM_ALETHEAS_TROWEL, 1);
     ResetDig();
+}
+
+TEST("Ichor: a moneychanger buys a coin at the market's price plus his percent")
+{
+    u32 money;
+    memset(&gIchorSave.blessing, 0, sizeof(gIchorSave.blessing));
+    SetMoney(&gSaveBlock1Ptr->money, 0);
+    AddBagItem(ITEM_RELIC_SILVER, 1);
+    gSpecialVar_0x8004 = ITEM_RELIC_SILVER;
+    gSpecialVar_0x8005 = 20;
+    EXPECT_EQ(Ichor_SellToMoneychanger(), TRUE);
+    money = GetMoney(&gSaveBlock1Ptr->money);
+    EXPECT_EQ(money, 2400);                     // the Silver Owl sells for 2,000; +20%
+    EXPECT(!CheckBagHasItem(ITEM_RELIC_SILVER, 1));
+    EXPECT_EQ(Ichor_SellToMoneychanger(), FALSE); // none left
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), money);
+
+    Ichor_SetBlessingTo(ICHOR_GOD_HADES, 100, 0);  // Hades: +50% on the coins, then his +20%
+    AddBagItem(ITEM_RELIC_COPPER, 1);
+    gSpecialVar_0x8004 = ITEM_RELIC_COPPER;
+    EXPECT_EQ(Ichor_SellToMoneychanger(), TRUE);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), money + 900);
+    memset(&gIchorSave.blessing, 0, sizeof(gIchorSave.blessing));
+    SetMoney(&gSaveBlock1Ptr->money, 0);
 }

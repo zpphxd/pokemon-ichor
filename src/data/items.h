@@ -3049,7 +3049,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_RELIC_COPPER] =
     {
         .name = ITEM_NAME("Bronze Obol"),
-        .price = 1000, // Ichor: sells for half; Hades's blessing +50%
+        .price = 2000, // Ichor: sells for 500 (a quarter, ITEM_SELL_FACTOR); Hades's blessing +50%
         .description = COMPOUND_STRING(
             "A bronze coin. The\n"
             "ferryman's fare,\n"
@@ -3066,7 +3066,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_RELIC_SILVER] =
     {
         .name = ITEM_NAME("Silver Owl"),
-        .price = 4000, // Ichor: sells for half; Hades's blessing +50%
+        .price = 8000, // Ichor: sells for 2,000 (a quarter, ITEM_SELL_FACTOR); Hades's blessing +50%
         .description = COMPOUND_STRING(
             "A silver coin with\n"
             "Athena's owl on it.\n"
@@ -3083,7 +3083,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_RELIC_GOLD] =
     {
         .name = ITEM_NAME("Gold Stater"),
-        .price = 10000, // Ichor: sells for half; Hades's blessing +50%
+        .price = 20000, // Ichor: sells for 5,000 (a quarter, ITEM_SELL_FACTOR); Hades's blessing +50%
         .description = COMPOUND_STRING(
             "An old gold coin.\n"
             "Sell it, or keep\n"

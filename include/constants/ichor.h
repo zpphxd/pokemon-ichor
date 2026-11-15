@@ -96,6 +96,14 @@
 // Weather entries (SYSTEMS §6; add new ones at the end)
 #define OMEN_WEATHER_KRYOPUFF  0  // snow on the Ascent's lowest slopes
 #define OMEN_WEATHER_LERNIP    1  // rain over Lake Stymphalia (Phase 4 SCRIPT.md, the Lernip hunt)
+#define OMEN_WEATHER_KERAMEIKOS_FOG  2  // world-act2: fog over Astyra's Kerameikos
+#define OMEN_WEATHER_KITHAIRON_FOG   3  // world-act2: fog on Mt. Kithairon
+// Swarm entries (add new ones at the end)
+#define OMEN_SWARM_GLAUKOIN    0  // world-act2: Astyra
+#define OMEN_SWARM_ROUTE_6     1  // world-act2: the Eleutherai road
+// Visitor entries (add new ones at the end)
+#define OMEN_VISITOR_HIEROLIVE 0  // world-act2: Astyra
+#define OMEN_VISITOR_THYRSIVY  1  // world-act2: Thyrsa's old trellises, after the Dionysia
 // Good-sign entries: the augur's blessing, or today's lucky number (1-6)
 #define OMEN_SIGN_BLESSING     0
 #define OMEN_SIGN_LUCKY(n)     (n)   // "Today, threes are lucky." is OMEN_SIGN_LUCKY(3)

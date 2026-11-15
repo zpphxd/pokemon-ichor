@@ -99,6 +99,11 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | Desecrated altars | 8–15 | world-act2 | the Kithairon shrine, Route 9's altar, and more |
 | Theoxenia | +0x00–0x0F | engine | one visit flag per god (`+ICHOR_GOD_*`), when theoxenia is built |
 | Theoxenia | +0x20–0x27 | world-act2 | decoys: Eleutherai, Thyrsa, Route 8, Kirrha, and more |
+| Theoxenia | +0x28–0x2F | world-act2 | decoys, batch 4: Routes 13–16, Nemea, Daphni, Emporion and Eleusa in Act II |
+| Xenia | +0x00–0x03 | chain 1 | The Potter's Knucklebone (§10): Diktys (Akti), the potter (Emporion), the actor (Thyrsa), the scribe (Astyra, world-act2's Eukleides) |
+| Xenia | +0x04–0x07 | chain 2 | The Split Coin: Emporion, Eleusa, Arkadia, Kaldera |
+| Xenia | +0x08–0x0B | chain 3 | The third chain (Phase 4's Broken Ring) |
+| Xenia | +0x10–0x1F | hosts | One flag per host who has fed you, first come: ask the engine session |
 | Fixed digs | +0x00–0x0F | world-act1 | Kalliste, Route 1, Kronion Hill, Emporion, Aigina |
 | Fixed digs | +0x10–0x1B | world-act2 | the Treasury of Minyas, Gla, Trophonios's great boulder, Route 9's gully, and more |
 | Fixed digs | +0x20–0x2F | world-act3 | Act III's finds, its prophecy tablets and Daedalus's pages |
@@ -713,7 +718,7 @@ if (var(VAR_RESULT) == TRUE) {
 }
 ```
 
-**The coins** are renamed, and sell for half their price at any market (Hades's blessing +50%):
+**The coins** are renamed, and sell at any market for these (a quarter of their price, the expansion's Gen 9 rule; Hades's blessing +50%):
 
 | Item | Name | Sells for |
 |---|---|---|
@@ -721,7 +726,19 @@ if (var(VAR_RESULT) == TRUE) {
 | `ITEM_RELIC_SILVER` | Silver Owl | ¥2,000 |
 | `ITEM_RELIC_GOLD` | Gold Stater | ¥5,000 |
 
-Pasion's "+20%" in Emporion is then ¥600, ¥2,400 and ¥6,000, which his script can write as numbers.
+A moneychanger (Pasion in Emporion, Astyra's) pays the market's price plus his own percent, with any blessing counted:
+
+```
+setvar(VAR_0x8004, ITEM_RELIC_SILVER)
+setvar(VAR_0x8005, 20)                       // +20%
+specialvar(VAR_RESULT, Ichor_SellToMoneychanger)
+if (var(VAR_RESULT) == TRUE) {
+    playse(SE_SHOP)
+    msgbox(format("He pays you ¥{STR_VAR_1}."))
+}
+```
+
+`VAR_RESULT` is `FALSE` if you have none. With no blessing, +20% is ¥600, ¥2,400 and ¥6,000.
 
 **Index blocks** for dig spots are in §1's table. Ask the engine session for more.
 
