@@ -150,6 +150,15 @@ All batch-1 maps are registered (`tools/ichor/new_map.py`, by `tools/ichor/oikou
 
 The precinct of Proteus, the Skaian Gate and Aietes's palace are batch 2's halls; batch 1 leaves their doors in place, locked with a line from a guard (`FLAG_ICHOR_*` none needed: the batch-2 build replaces the script).
 
+**Door warps, fixed so the town and room agents agree without talking.** In each town, warp ids 0, 1, 2… are the doors of the rooms in the table above, in that order (Sestos: 0 Asclepeion, 1 Agora, 2 Hero's tower, 3 ferry house, 4 net-loft). The town's door warp sends to the room's warp 0, its door mat; the room's warp 0 sends back to the town's warp with the room's number. Extra warps in a town (a second door cell, a hall door, a landing, a cave) take ids after the rooms. A room with a second exit (Hero's tower's top) gives it warp 1 onwards.
+
+**Seams between batch 1's agents.**
+- **The Hellespont ↔ the Bosporus** (troad-towns and pontos-towns): the Hellespont's east edge meets the Bosporus's west edge, `right`/`left`, offset 0. On that edge, rows 8–21 are open sea on both maps and every other row is shore or cliff; both maps are at least 30 tall. The 8 columns nearest the seam use aethos metatiles only on both sides.
+- **Inside one land** each agent chooses its own seams (one tileset, so exempt), and records every connection and its open rows or columns in `MAPS_<land>.md`.
+- **To later batches and other sessions** (leave the edge open, aethos-only, and record it): the Hellespont's west edge (Route 20, world-act2), its south shore (the Skamander Plain, batch 2), Ilion's gates (the Skamander Plain and the Ida Road, batch 2); Pharos's north edge (Route 34, world-act3), Memphis's south edge (the Nile and the Pyramid Field, batch 2); the Pontic Coast's landings for Themiskyra (world-postgame) and Leuke (batch 2), and Aia's east gate (the Phasis, batch 2).
+
+**Shared port scripts** (`data/scripts/ichor_oikoumene.pory`, this session's): `Oik_EventScript_AletheaQuay` (the first port you reach plays it, after placing Alethea; it sets `FLAG_ICHOR_OIKOUMENE_ARRIVED`), `Oik_EventScript_FisherGift` (the Super Rod at the first port's net-loft, a Big Pearl elsewhere; the caller keeps its own "given" flag) and `Oik_EventScript_SailHome` (`ICHOR_STUB_SHIP`). Sestos and Naukratis are first ports; Salmydessos and Aia are not (Themiskyra is the Black Sea's).
+
 ---
 
 ## 6. Conventions for every agent

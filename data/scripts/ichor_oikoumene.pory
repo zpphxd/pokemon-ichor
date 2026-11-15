@@ -1,0 +1,55 @@
+// Ichor: scenes and services every Oikoumene port shares
+// (design/OIKOUMENE.md §2 and §5; design/oikoumene/BUILD.md §6).
+//
+// Each port places its own people. A port's scene positions Alethea, then calls
+// Oik_EventScript_AletheaQuay; its net-loft fisher checks its own flag, then
+// calls Oik_EventScript_FisherGift; its Nausikles runs Oik_EventScript_SailHome.
+
+text Oik_Text_NameAlethea { "ALETHEA" }
+text Oik_Text_NameNausikles { "NAUSIKLES" }
+
+// The first Oikoumene port you reach, whichever it is. Sets
+// FLAG_ICHOR_OIKOUMENE_ARRIVED, which shows both crossing targets on the Wings'
+// map. ICHOR_STUB_ODYSSEY: once world-postgame names the voyage's done flag,
+// add her line for players who sailed it first ("I did one for the sea.").
+script Oik_EventScript_AletheaQuay {
+    setspeaker(Oik_Text_NameAlethea)
+    msgbox(format("Every map of out here has a monster in the corner. Some have six.\p"
+                  "Truthfully, every map I've seen is a better story.\p"
+                  "So we're making one. You go and look. I write down what you saw."))
+    closemessage
+    setflag(FLAG_ICHOR_OIKOUMENE_ARRIVED)
+}
+
+// The first port's fisher gives the Super Rod; every other port's gives a Big
+// Pearl. The caller checks and sets its own "given" flag around this.
+script Oik_EventScript_FisherGift {
+    if (flag(FLAG_ICHOR_SUPER_ROD_GIVEN)) {
+        msgbox(format("Another port's lot got to you first with a rod, did they?\p"
+                      "Then have this. Found it in a net. Pearls don't bite."))
+        giveitem(ITEM_BIG_PEARL)
+        return
+    }
+    msgbox(format("Out here the fish are older than your grandmother's stories.\p"
+                  "An old rod won't hold them. Take this one."))
+    giveitem(ITEM_SUPER_ROD)
+    setflag(FLAG_ICHOR_SUPER_ROD_GIVEN)
+}
+
+// ICHOR_STUB_SHIP: until world-postgame's Euploia sails between charts, the
+// helmsman waits on each Oikoumene quay and takes you home to Akti.
+script Oik_EventScript_SailHome {
+    lock
+    faceplayer
+    setspeaker(Oik_Text_NameNausikles)
+    msgbox(format("The ship's ready when you are. Home to Akti?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Take your time. The sea's not going anywhere."))
+        release
+        end
+    }
+    closemessage
+    warp(MAP_AKTI_TOWN, 9, 10)
+    waitstate
+    release
+}
