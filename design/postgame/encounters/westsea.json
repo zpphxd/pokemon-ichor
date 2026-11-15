@@ -1,0 +1,62 @@
+[
+  {
+    "map": "MAP_ROUTE33_WESTERN_SEA",
+    "base_label": "gRoute33WesternSea_Morning",
+    "_why": "Aethos species only (POSTGAME §4), Lv 60-66 (BALANCE: Aethos post-game wild 55-70), evolved forms where the line evolves below 60 (BALANCE's ruling). Galenyon: every coast, on the water (halcyon line). Narkeray: the torpedo ray of the crossings. Harpelle: the sea cliffs (the birds' rock). Telkanvil: Poseidon's smiths, whose forges are in Atlantis past the fog and in Tainaron's sea cave. Aphrell and Karkitox: hooked in the surf with any rod. Kynoketos: off rocky headlands with the Super Rod, rare. Day and evening fall back to this table (OW_TIME_OF_DAY_FALLBACK).",
+    "water_mons": {
+      "encounter_rate": 4,
+      "mons": [
+        {"min_level": 60, "max_level": 63, "species": "SPECIES_GALENYON"},
+        {"min_level": 61, "max_level": 64, "species": "SPECIES_NARKERAY"},
+        {"min_level": 62, "max_level": 65, "species": "SPECIES_HARPELLE"},
+        {"min_level": 63, "max_level": 66, "species": "SPECIES_GALENYON"},
+        {"min_level": 64, "max_level": 66, "species": "SPECIES_TELKANVIL"}
+      ]
+    },
+    "fishing_mons": {
+      "encounter_rate": 30,
+      "mons": [
+        {"min_level": 60, "max_level": 62, "species": "SPECIES_APHRELL"},
+        {"min_level": 60, "max_level": 62, "species": "SPECIES_KARKITOX"},
+        {"min_level": 61, "max_level": 63, "species": "SPECIES_APHRELL"},
+        {"min_level": 61, "max_level": 64, "species": "SPECIES_NARKERAY"},
+        {"min_level": 62, "max_level": 64, "species": "SPECIES_KARKITOX"},
+        {"min_level": 62, "max_level": 65, "species": "SPECIES_NARKERAY"},
+        {"min_level": 62, "max_level": 64, "species": "SPECIES_APHRELL"},
+        {"min_level": 63, "max_level": 66, "species": "SPECIES_TELKANVIL"},
+        {"min_level": 64, "max_level": 66, "species": "SPECIES_KYNOKETOS"},
+        {"min_level": 66, "max_level": 66, "species": "SPECIES_KYNOKETOS"}
+      ]
+    }
+  },
+  {
+    "map": "MAP_ROUTE33_WESTERN_SEA",
+    "base_label": "gRoute33WesternSea_Night",
+    "_why": "At night the rays rise and glow (Narkeray common), the gulls roost, and from Tainaron's cave, the mouth of Hades, a shade sometimes poles out past the cape (Charonaut, 1%: the ferryman's line; the dex puts it on the Styx beyond Tainaron).",
+    "water_mons": {
+      "encounter_rate": 4,
+      "mons": [
+        {"min_level": 60, "max_level": 63, "species": "SPECIES_NARKERAY"},
+        {"min_level": 61, "max_level": 64, "species": "SPECIES_GALENYON"},
+        {"min_level": 63, "max_level": 65, "species": "SPECIES_TELKANVIL"},
+        {"min_level": 63, "max_level": 66, "species": "SPECIES_NARKERAY"},
+        {"min_level": 64, "max_level": 66, "species": "SPECIES_CHARONAUT"}
+      ]
+    },
+    "fishing_mons": {
+      "encounter_rate": 30,
+      "mons": [
+        {"min_level": 60, "max_level": 62, "species": "SPECIES_KARKITOX"},
+        {"min_level": 60, "max_level": 62, "species": "SPECIES_APHRELL"},
+        {"min_level": 61, "max_level": 63, "species": "SPECIES_NARKERAY"},
+        {"min_level": 61, "max_level": 64, "species": "SPECIES_KARKITOX"},
+        {"min_level": 62, "max_level": 64, "species": "SPECIES_APHRELL"},
+        {"min_level": 62, "max_level": 65, "species": "SPECIES_NARKERAY"},
+        {"min_level": 62, "max_level": 64, "species": "SPECIES_KARKITOX"},
+        {"min_level": 63, "max_level": 66, "species": "SPECIES_TELKANVIL"},
+        {"min_level": 64, "max_level": 66, "species": "SPECIES_KYNOKETOS"},
+        {"min_level": 66, "max_level": 66, "species": "SPECIES_KYNOKETOS"}
+      ]
+    }
+  }
+]

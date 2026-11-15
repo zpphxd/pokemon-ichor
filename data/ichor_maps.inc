@@ -15,3 +15,5 @@
 	.include "data/maps/ElaiaVillage_BakersHouse/scripts.inc"
 	.include "data/maps/AktiTown_DiversHouse/scripts.inc"
 	.include "data/maps/AktiTown_GoatherdsHouse/scripts.inc"
+	.include "data/maps/Route33_WesternSea/scripts.inc"
+	.include "data/maps/Route33_WesternSea_HaliasHut/scripts.inc"

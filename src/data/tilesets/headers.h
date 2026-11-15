@@ -447,3 +447,17 @@ const struct Tileset gTileset_Labyrinth =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
     .callback = NULL,
 };
+
+// Ichor (world-postgame): westsea, Route 33's western sea. A Porytiles-managed
+// secondary built by tools/ichor/art/westsea_build.py for the aethos primary: its
+// sea, sand and grass cells borrow aethos's ground, so rebuild it when aethos changes.
+const struct Tileset gTileset_Westsea =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Westsea,
+    .palettes = gTilesetPalettes_PorytilesManaged_Westsea,
+    .metatiles = gMetatiles_PorytilesManaged_Westsea,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Westsea,
+    .callback = NULL,
+};

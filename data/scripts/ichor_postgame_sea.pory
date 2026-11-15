@@ -1,0 +1,94 @@
+// Ichor (world-postgame): obstacles at sea, for every post-game sea map. Route 33
+// (batch 1) uses them first; the Odyssey's seas (batch 6) reuse them.
+//
+// Each is called from an obstacle's object event: an invisible object
+// (MOVEMENT_TYPE_INVISIBLE) on each cell of the obstacle's metatiles, all
+// sharing one hide flag. Each script returns VAR_RESULT = TRUE when the obstacle
+// was cleared just now; it has then removed the object that was talked to, which
+// sets the hide flag. The map's own script removes the obstacle's other cells and
+// swaps in open water with setmetatile, then special(DrawWholeMapView); its
+// ON_LOAD swaps them for good once the flag is set. Route 33's
+// data/maps/Route33_WesternSea/scripts.pory shows the pattern:
+//
+//     script MyMap_EventScript_Whirlpool {
+//         lockall
+//         call(EventScript_IchorWhirlpool)
+//         if (var(VAR_RESULT) == TRUE) {
+//             removeobject(LOCALID_..._2) ...        // the other cells
+//             call(MyMap_EventScript_DrawWhirlpoolCalm) // setmetatile x4
+//             special(DrawWholeMapView)
+//         }
+//         releaseall
+//     }
+
+// ---------------------------------------------------------------------------
+// Whirlpools: Triton's Conch calms them (ENGINE_API.md §2; AETHOS_MAP.md point 9)
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorWhirlpool {
+    setvar(VAR_0x8004, ITEM_POSEIDONS_CONCH)
+    setvar(VAR_0x8005, FLAG_ICHOR_TRITON_CONCH)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        msgbox(format("This place forbids outside tools."), MSGBOX_DEFAULT)
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    if (var(VAR_RESULT) != ICHOR_RELIC_OK) {
+        msgbox(format("The sea turns in a ring here. Something would have to calm it."), MSGBOX_DEFAULT)
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    // water always asks, even under AUTO
+    msgbox(format("The sea turns in a ring here.\pSound Triton's Conch?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    closemessage
+    setvar(VAR_0x8004, ITEM_POSEIDONS_CONCH)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_WHIRLPOOL)
+    waitse
+    removeobject(VAR_LAST_TALKED)
+    msgbox(format("The Conch's low note runs out over the water.\pThe ring slows, and the sea lies flat."), MSGBOX_DEFAULT)
+    setvar(VAR_RESULT, TRUE)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// Sea rocks: the Euploia's bronze ram breaks them (ODYSSEY.md §2)
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorSeaRock {
+    if (!flag(FLAG_ICHOR_SHIP_RAM)) {
+        msgbox(format("Loose rock, jammed across the way. A bronze ram would break it."), MSGBOX_DEFAULT)
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    if (!flag(FLAG_ICHOR_ON_SHIP)) {
+        msgbox(format("Loose rock, jammed across the way.\pThe Euploia's ram would break it, if she were under you."), MSGBOX_DEFAULT)
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    msgbox(format("Loose rock, jammed across the way.\pDrive the bronze ram into it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    closemessage
+    playse(SE_M_STRENGTH)
+    setvar(VAR_0x8004, 1)  // vertical pan
+    setvar(VAR_0x8005, 2)  // horizontal pan
+    setvar(VAR_0x8006, 6)  // shakes
+    setvar(VAR_0x8007, 3)  // delay
+    special(ShakeCamera)
+    waitstate
+    playse(SE_M_ROCK_THROW)
+    removeobject(VAR_LAST_TALKED)
+    msgbox(format("The ram bites. The rock splits and slides under."), MSGBOX_DEFAULT)
+    setvar(VAR_RESULT, TRUE)
+    return
+}

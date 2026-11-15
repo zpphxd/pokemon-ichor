@@ -1,0 +1,61 @@
+// Halia's hut on Route 33's islet: the route's rest point. Halia feeds you and
+// rests your Pokémon by her hearth; her grandson Kymon is out on his raft until
+// you tow him home (Route33_WesternSea_EventScript_KymonAtSea).
+
+mapscripts Route33_WesternSea_HaliasHut_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_R33_KYMON_HOME)) {
+            setflag(FLAG_TEMP_1)   // Kymon's still out at sea
+        }
+    }
+}
+
+text Route33_WesternSea_HaliasHut_Text_SpeakerHalia { "HALIA" }
+text Route33_WesternSea_HaliasHut_Text_SpeakerKymon { "KYMON" }
+
+script Route33_WesternSea_HaliasHut_EventScript_Halia {
+    lock
+    faceplayer
+    setspeaker(Route33_WesternSea_HaliasHut_Text_SpeakerHalia)
+    if (flag(FLAG_ICHOR_R33_KYMON_HOME)) {
+        msgbox(format("You towed my boy home. Sit, eat. The fish is smoked and the bread's only a little sandy."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("My grandson took the raft out past the reef this morning. No wind since.\pHe'll be sitting out there like a gull on a stone."), MSGBOX_DEFAULT)
+    }
+    setspeaker(Route33_WesternSea_HaliasHut_Text_SpeakerHalia)
+    msgbox(format("You look half drowned yourself. Rest by the fire a while?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Route33_WesternSea_HaliasHut_Text_SpeakerHalia)
+        msgbox(format("Suit yourself. The sea will still be there."), MSGBOX_DEFAULT)
+        release
+        end
+    }
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("Your Pokémon are rested."), MSGBOX_DEFAULT)
+    setspeaker(Route33_WesternSea_HaliasHut_Text_SpeakerHalia)
+    msgbox(format("Come back when the wind's against you. It usually is."), MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route33_WesternSea_HaliasHut_EventScript_Kymon {
+    lock
+    faceplayer
+    setspeaker(Route33_WesternSea_HaliasHut_Text_SpeakerKymon)
+    msgbox(format("Gran says I'm grounded. On an island. Where would I even go?"), MSGBOX_DEFAULT)
+    release
+    end
+}
+
+script Route33_WesternSea_HaliasHut_EventScript_Hearth {
+    msgbox(format("Fish hang smoking over the hearth. Mackerel, by the smell."), MSGBOX_SIGN)
+}
+
+script Route33_WesternSea_HaliasHut_EventScript_ModelBoat {
+    msgbox(format("A model boat, carved by someone patient. Its sail is a scrap of an old tunic."), MSGBOX_SIGN)
+}
