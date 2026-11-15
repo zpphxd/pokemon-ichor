@@ -57,6 +57,26 @@ Still wrong:
   - The bay got a rock.
   - Oros's golden band could be skirted up the green grass beside it. That column is closed, so the climb now has a forced band 2 deep.
 
+## The route standard (Act II, 2026-11-14)
+
+The interior moved to Act II (it opens at beat 46), so `map_audit.py` now judges it in the Astyra stage: the road as a middle land route of 6.4 screens, the temple and Oros as one-floor landmarks (`"ichor_kind": "dungeon"`). Before, every map failed: too little grass (39 cells on the road), no hidden items, too few item balls, no surf or fishing tables over 135–277 reachable water cells, and no trainers. Three more render-and-critique passes brought it up.
+
+**Pass 5 (the numbers).**
+- **Forced grass, 8 or more between every pair of ends.** The trunk has two bands now: the golden grass at the ant hills' corner (11-12, 12-15), 4 deep under Myrmex's line, and the band below Sostratos grown to 4 deep (19-24, 7-10). Each branch past the fork has its own: a glade of golden grass in the pines on the Oros path (7-9, 0-3) and golden grass across the road between the herm and the temple steps (22-26, 3-5). Town to either end crosses 12, Oros to the temple 8.
+- **Optional grass** where the land asks for it: green tall grass and golden tufts in the west meadow under the Oros ledge, golden grass on the east plateau round the horos, tall grass down the pistachio and meadow terraces of the way home, and under the orchard's pistachios by the gate. 39 cells became 117 (115 after the passes below: 18 a screen).
+- **People and things.** Five placeholder trainers (Opora in the orchard, Marilades in the glade, Nikasia over the hop home, Myrto at the top of the temple steps, Aigon on Oros's band), three item balls and eight hidden items in the nooks (BUILD.md lists them).
+- **Wrong:** the temple-side band and the band below Sostratos were rectangles, the second split into a golden half and a green half like two flags. Placing Myrto east of the temple steps sealed the forecourt's east half (the altar, the dig spot, the foundations) behind her and the Pretty Feathers; the builder's reach check caught it. The orchard's west corner, picked for a hidden item, turned out to be unreachable decoration.
+
+**Pass 6.**
+- The band below Sostratos is mostly golden now, with green tall grass only in its northeast corner on a diagonal, and scrub cushions at three corners break its outline. The temple-side band leans: it starts under the herm's landing and ends against a scrub cushion, so its edge isn't square.
+- Myrto moved to the west side of the steps, facing east; the Revive moved under the pines at the orchard's foot.
+- A grass cell bulging into the woods east of the band was a one-cell dead end; it went back to pines.
+
+**Pass 7.**
+- Measured every pair of ends both ways. Coming down from the temple, a walker could hop the terrace wall west of the steps and land past the first column of the temple-side band: 7 cells to Oros. Tall grass above the wall (24-26, 1) charges that hop the cell it skips, so it is 8 both ways. (Going home both branches cross less, by the ledges, as the quick way should.)
+- The 2×2 square of tall grass between the orchard's pistachios became an L.
+- Checked every 15×10 view along the walk: each band reads as the road running into grass and out the other side, and the sea is still in view from most screens. The audit passes but for the trainer minimums, which pass when world-act2 registers the eight (batch 4).
+
 ![The Aphaia Road, walk overlay](img/aigina_aphaia_road_walk.png)
 
 ![Every 15x10 view along the walk](img/aigina_interior_screens.png)

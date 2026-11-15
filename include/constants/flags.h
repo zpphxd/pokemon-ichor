@@ -768,15 +768,15 @@
 #define FLAG_UNUSED_0x2CF                                           0x2CF // Unused Flag
 #define FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE                  0x2D0
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH                  0x2D1
-#define FLAG_UNUSED_0x2D2                                           0x2D2 // Unused Flag
-#define FLAG_UNUSED_0x2D3                                           0x2D3 // Unused Flag
-#define FLAG_UNUSED_0x2D4                                           0x2D4 // Unused Flag
-#define FLAG_UNUSED_0x2D5                                           0x2D5 // Unused Flag
-#define FLAG_UNUSED_0x2D6                                           0x2D6 // Unused Flag
-#define FLAG_UNUSED_0x2D7                                           0x2D7 // Unused Flag
-#define FLAG_UNUSED_0x2D8                                           0x2D8 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_APHAIA_BIG_PEARL                          0x2D2 // Ichor: Aphaia Road: hidden Big Pearl at the west end of the bay's beach
+#define FLAG_ICHOR_HIDDEN_APHAIA_REVIVE                             0x2D3 // Ichor: Aphaia Road: hidden Revive in the orchard's west corner
+#define FLAG_ICHOR_HIDDEN_APHAIA_NUGGET                             0x2D4 // Ichor: Aphaia Road: hidden Nugget behind the umbrella pine on the meadow terrace
+#define FLAG_ICHOR_HIDDEN_APHAIA_PRETTY_FEATHER                     0x2D5 // Ichor: Aphaia Road: hidden Pretty Feather past the horos, at the cliff edge
+#define FLAG_ICHOR_HIDDEN_APHAIA_MOON_STONE                         0x2D6 // Ichor: Temple of Aphaia: hidden Moon Stone in the cypress nook west of the way
+#define FLAG_ICHOR_HIDDEN_APHAIA_ETHER                              0x2D7 // Ichor: Temple of Aphaia: hidden Ether in the old foundations' far corner
+#define FLAG_ICHOR_HIDDEN_OROS_STAR_PIECE                           0x2D8 // Ichor: Mount Oros: hidden Star Piece behind Zeus's altar
 
-#define FLAG_UNUSED_0x2D9                                           0x2D9 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_OROS_THUNDER_STONE                        0x2D9 // Ichor: Mount Oros: hidden Thunder Stone on the summit's east lip
 
 #define FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER                     0x2DA
 #define FLAG_UNUSED_0x2DB                                           0x2DB // Unused Flag
@@ -1733,6 +1733,9 @@
 #define ICHOR_GIFT_HIEROPHANT                   3
 #define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_ITEM_APHAIA_HYPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x060) // Ichor: Aphaia Road: item ball, Hyper Potion at the west meadow's end
+#define FLAG_ICHOR_ITEM_APHAIA_LEAF_STONE       (FLAG_ICHOR_GENERAL_START + 0x061) // Ichor: Aphaia Road: item ball, Leaf Stone in the pistachio terrace's far corner
+#define FLAG_ICHOR_ITEM_APHAIA_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x062) // Ichor: Temple of Aphaia: item ball, Great Ball in the cypress nook east of the way
 #define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
 #define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
 #define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)

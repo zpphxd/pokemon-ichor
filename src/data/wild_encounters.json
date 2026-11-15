@@ -676,6 +676,91 @@
                 "species": "SPECIES_GALENYON"
               }
             ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
           }
         },
         {
@@ -814,6 +899,91 @@
                 "species": "SPECIES_GALENYON"
               }
             ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              }
+            ]
           }
         },
         {
@@ -950,6 +1120,91 @@
                 "min_level": 16,
                 "max_level": 16,
                 "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
               }
             ]
           }
