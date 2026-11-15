@@ -78,13 +78,17 @@ def main(files):
     b = party.index('/* Ichor: world-act3')
     PARTY.write_text(party[:a] + '\n'.join(out).rstrip() + '\n\n\n' + party[b:])
     opp = OPP.read_text()
-    defs = [f'#define {n:<37} {160 + i}' for i, n in enumerate(order)]
-    end = 160 + len(order) if order else 0
+    # Act II's ids: 160-319, then 820-849 from the shared reserve (tools/ichor/claim_ranges.md).
+    blocks_ids = list(range(160, 320)) + list(range(820, 850))
+    if len(order) > len(blocks_ids):
+        sys.exit(f'{len(order)} trainers, but Act II has {len(blocks_ids)} ids (160-319, 820-849): ask the director for more')
+    defs = [f'#define {n:<37} {blocks_ids[i]}' for i, n in enumerate(order)]
+    end = blocks_ids[len(order) - 1] + 1 if order else 0
     new = ('// world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.\n' + '\n'.join(defs)
            + ('\n' if defs else '') + f'#define TRAINERS_END_ACT2                     {end}\n')
     opp = re.sub(r'// world-act2, ids 160-319:.*?#define TRAINERS_END_ACT2\s+\d+\n', new, opp, flags=re.S)
     OPP.write_text(opp)
-    print(f'{len(blocks)} parties, ids 160-{end - 1}')
+    print(f'{len(blocks)} parties, {len(order)} ids, the last {end - 1}')
 
 if __name__ == '__main__':
     main(sys.argv[1:])

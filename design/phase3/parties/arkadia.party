@@ -1,0 +1,38 @@
+/* Staged by world-act2 from design/phase3/SCRIPT.md Part 3 (Arkadia). The arkadia agent owns these. */
+
+=== TRAINER_ICHOR_EUADNE ===
+Name: EUADNE
+Class: Huntress
+Pic: Huntress
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Lykanax
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kaprodon
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+- Double-Edge
+- Stomping Tantrum
+- Night Slash
+- Take Down
+
+=== TRAINER_ICHOR_AGAPENOR ===
+Name: AGAPENOR
+Class: Charcoaler
+Pic: Charcoaler
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Gelasable
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Cairnolith
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
