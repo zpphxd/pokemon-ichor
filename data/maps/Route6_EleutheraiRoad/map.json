@@ -151,8 +151,22 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route6_EleutheraiRoad_EventScript_Drum",
+      "script": "EventScript_StrengthBoulder",
       "flag": "FLAG_ICHOR_HIDE_ROUTE6_DRUM"
+    },
+    {
+      "local_id": "LOCALID_ROUTE6_VINES",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 46,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_CutTree",
+      "flag": "FLAG_ICHOR_HIDE_ELEUTHERAI_VINES"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -205,6 +219,32 @@
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Route6_EleutheraiRoad_EventScript_Astylos",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
+      "x": 24,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route6_EleutheraiRoad_EventScript_Dorkis",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 48,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route6_EleutheraiRoad_EventScript_Philinna",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -234,6 +274,15 @@
       "var": "VAR_TEMP_1",
       "var_value": "0",
       "script": "Route6_EleutheraiRoad_EventScript_HeraldScene"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route6_EleutheraiRoad_EventScript_DrumMoved"
     }
   ],
   "bg_events": [
@@ -251,15 +300,31 @@
       "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Route6_EleutheraiRoad_EventScript_Vines"
+      "script": "Route6_EleutheraiRoad_EventScript_VineStock"
     },
     {
-      "type": "sign",
-      "x": 46,
-      "y": 21,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Route6_EleutheraiRoad_EventScript_Vines"
+      "type": "hidden_item",
+      "x": 23,
+      "y": 6,
+      "elevation": 3,
+      "item": "ITEM_WINE",
+      "flag": "FLAG_ICHOR_HIDDEN_ROUTE6_WINE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 7,
+      "y": 15,
+      "elevation": 3,
+      "item": "ITEM_REVIVE",
+      "flag": "FLAG_ICHOR_HIDDEN_ROUTE6_REVIVE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 21,
+      "y": 18,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ROUTE6_STARDUST"
     },
     {
       "type": "sign",

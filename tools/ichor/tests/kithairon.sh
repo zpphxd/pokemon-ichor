@@ -41,6 +41,7 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
        n && /\.space/ { print "  " n " = 0,"; n = "" }' "${OUT}consts.s"
   echo "}"
   echo "for k, v in pairs(X) do S[k] = v end"
+  arm-none-eabi-nm "$ELF" | awk '$3 == "gSaveBlock3Ptr" || $3 == "HealPlayerParty" { print "S." $3 " = 0x" $1 }'
   arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(Route6_EleutheraiRoad|Route6_AntiopesCave|Eleutherai|MtKithairon|Route7_KroniaGrounds)_EventScript_[A-Za-z0-9_]+$/ { print "S.SCRIPTS." $3 " = 0x" $1 }'
   echo "return S"
 } > "${OUT}symbols.lua"

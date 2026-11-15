@@ -1,4 +1,4 @@
-# Per-tileset Porytiles config for gTileset_Kithairon (Route 6, Eleutherai and Mt. Kithairon).
+# Per-tileset Porytiles config for gTileset_Kithairon (Route 6 and Eleutherai).
 # Written by tools/ichor/art/kithairon_build.py, which compiles it against an empty
 # stand-in primary, then points its ground cells at aethos's grass, road, sea and
 # tall grass. Pair it with aethos when compiling it directly.

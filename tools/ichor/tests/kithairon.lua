@@ -19,6 +19,20 @@ local emu = L.emu
 local R6, EL, MK, R7 = "Route6_EleutheraiRoad_EventScript_", "Eleutherai_EventScript_",
   "MtKithairon_EventScript_", "Route7_KroniaGrounds_EventScript_"
 
+-- The crossing's hide flags live in the Ichor bank (IchorSave), which slice_lib's
+-- walker can't read on its own: teach it, so people hidden by them (the cut
+-- thicket, the herald) stop counting as obstacles.
+local function bankFlag(f)
+  local o = f - S.ICHOR_FLAGS_START
+  local base = emu:read32(S.gSaveBlock3Ptr) + S.OFF_SB3_ICHOR + S.OFF_ICHOR_FLAGS
+  return (emu:read8(base + (o >> 3)) >> (o & 7)) & 1 == 1
+end
+local getFlag1 = L.getFlag
+function L.getFlag(f)
+  if f >= S.ICHOR_FLAGS_START and f <= S.ICHOR_FLAGS_END then return bankFlag(f) end
+  return getFlag1(f)
+end
+
 local function metatile(x, y)
   local width = emu:read32(S.gBackupMapLayout + S.OFF_BACKUP_MAP_WIDTH)
   local map = emu:read32(S.gBackupMapLayout + S.OFF_BACKUP_MAP_MAP)
@@ -26,6 +40,8 @@ local function metatile(x, y)
 end
 
 local function warpTo(map, x, y, extra)
+  -- a heal() on this map left VAR_TEMP_0 at 1, which would hold this script back
+  emu:write16(L.sb1() + S.OFF_SB1_VARS + (S.VAR_TEMP_0 - S.VARS_START) * 2, 0)
   local s = { S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 } }
   for _, b in ipairs(extra or {}) do s[#s + 1] = b end
   for _, b in ipairs({ S.SCR_OP_WARP, map >> 8, map & 0xFF, 0xFF, { x, 2 }, { y, 2 },
@@ -33,6 +49,14 @@ local function warpTo(map, x, y, extra)
   L.runRamScript(s)
   L.waitUntil(function() return L.mapId() == map and L.idle() end, 3000, "arrival on map " .. map)
   wait(30)
+end
+
+-- The crossing has more trainers than the test Pokemon's one move has PP for:
+-- heal the party (HP and PP) at each beat, as a player would at the rest points.
+local function heal()
+  L.runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
+                   S.SCR_OP_CALLNATIVE, { S.HealPlayerParty | 1, 4 }, S.SCR_OP_END })
+  wait(20)
 end
 
 -- A scene that a trigger or a talk has just started: let it run a little,
@@ -57,7 +81,7 @@ local function main()
 
   -- Beat 26: Route 6, below the vines.
   L.setBeat("26_route6", false)
-  warpTo(S.MAP_ROUTE6, 45, 24, {
+  warpTo(S.MAP_ROUTE6, 46, 24, {
     S.SCR_OP_CALLNATIVE, { S.ScrCmd_createmon | 1, 4 }, 0, S.PARTY_SIZE,
     { S.SPECIES_TEST, 2 }, { 100, 2 }, { (1 << 17) | (1 << 18) | (1 << 19) | (1 << 20), 4 },
     { S.MOVE_TEST, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 },
@@ -67,11 +91,11 @@ local function main()
     S.SCR_OP_SETVAR, { S.VAR_REPEL_STEP_COUNT, 2 }, { 999, 2 },
   })
   shot("route6_south")
-  expect(metatile(45, 21) ~= S.METATILE_STUMPS, "the old vines stand across the road")
+  -- The young vines are a thorn thicket in the road's gap (Demeter's Sickle).
+  expect(L.objectOn(46, 21), "the young vines grow across the road's gap")
   L.talk(L.npc(R6 .. "Alethea"))
-  L.talk(L.sign(R6 .. "Vines"), { shotBefore = "vines" })
-  expect(metatile(45, 21) == S.METATILE_STUMPS and metatile(46, 21) == S.METATILE_STUMPS,
-         "the Sickle cut the vines to stumps")
+  L.talk(46, 21, { shotBefore = "vines" })
+  expect(not L.objectOn(46, 21) and L.getFlag(S.FLAG_HIDE_VINES), "the Sickle cut the thicket, for good")
   shot("vines_cut")
   expect(not L.goTrigger(L.triggers(R6 .. "HeraldScene")), "the herald's scene starts two rows below his barrier")
   scene("herald_scene", 120)
@@ -86,53 +110,61 @@ local function main()
   L.go(14, 12); shot("route6_stair")
   L.go(18, 9); shot("route6_gap")
   expect(L.defeated(S.TRAINER_PYTHODOROS), "Pythodoros fought at the gap")
+  heal()
   L.go(33, 9); shot("route6_fork")
   L.talk(L.sign(R6 .. "GreatHerm"))
   L.go(46, 9); shot("route6_spur")
   L.go(52, 8); shot("route6_cave_mouth")
-  L.go(33, 5); L.go(33, 1); shot("route6_cutting")
+  L.go(33, 5); shot("route6_band_3")
+  L.go(33, 1); shot("route6_cutting")
   expect(L.defeated(S.TRAINER_ASTYLOS), "Astylos fought in the cutting")
   L.leaveEdge("up", S.MAP_ELEUTHERAI)
 
   -- Beat 27: Eleutherai, the plinth.
   L.setBeat("27_eleutherai", false)
+  heal()
   shot("eleutherai_arrival")
   L.talk(L.sign(EL .. "Plinth"))
   L.talk(L.npc(EL .. "Alethea"), { shotBefore = "plinth_scene" })
   expect(not L.npc(EL .. "Alethea").present, "Alethea went on north")
-  L.go(23, 12); shot("eleutherai_fort_gate")
-  L.go(14, 17); shot("eleutherai_spring")
-  L.go(21, 21); shot("eleutherai_pens")
+  L.go(23, 16); shot("eleutherai_fort_stair")
+  L.go(23, 10); shot("eleutherai_fort_court")
+  L.go(14, 18); shot("eleutherai_spring")
+  L.go(22, 24); shot("eleutherai_pens")
   L.go(10, 1); shot("eleutherai_north")
   L.leaveEdge("up", S.MAP_KITHAIRON)
 
   -- Beat 28: Mt. Kithairon.
   L.setBeat("28_kithairon", false)
+  heal()
   shot("kithairon_south")
-  L.go(9, 48); shot("kithairon_switchback")
+  L.go(8, 50); shot("kithairon_switchback")
   expect(L.defeated(S.TRAINER_LYKIDAS), "Lykidas fought on the first bend")
-  L.go(16, 43); shot("kithairon_clearing_band")
+  L.go(12, 44); shot("kithairon_band_1")
+  L.go(15, 41); shot("kithairon_first_cliff")
   expect(not L.goTrigger(L.triggers(MK .. "DancingFloor")), "the maenads' dance starts at the glade's edge")
   scene("dancing_floor", 150)
   shot("dancing_floor_after")
-  L.go(21, 25); shot("kithairon_euia")
+  heal()
+  L.go(24, 29); shot("kithairon_second_cliff")
   expect(L.defeated(S.TRAINER_EUIA), "Euia fought at the glade's only way north")
-  L.go(30, 21); shot("kithairon_spring_path")
-  L.go(35, 20); shot("aktaions_spring")
-  L.go(22, 17); shot("pentheus_fir")
+  L.go(31, 26); shot("kithairon_spring_path")
+  L.go(35, 24); shot("aktaions_spring")
+  L.go(27, 24); shot("pentheus_fir")
   L.talk(L.npc(MK .. "Phorbas"), { shotBefore = "phorbas" })
   shot("the_fold")
-  L.go(26, 5); shot("ivy_shrine")
+  L.go(35, 8); shot("ivy_shrine")
   L.go(21, 1); shot("kithairon_north_lip")
   L.leaveEdge("up", S.MAP_ROUTE7)
 
   -- Beat 29: Route 7, the Kronia grounds.
   L.setBeat("29_kronia", false)
+  heal()
   shot("route7_south")
-  L.go(21, 31); shot("route7_defile")
+  L.go(20, 30); shot("route7_defile")
   expect(L.defeated(S.TRAINER_KOMOS), "Komos fought in the defile")
-  L.go(14, 26); shot("route7_switchbacks")
-  L.go(20, 19); shot("route7_pasture")
+  L.go(14, 24); shot("route7_switchbacks")
+  L.go(9, 22); shot("route7_meadow")
   expect(L.defeated(S.TRAINER_HAGNON), "Hagnon fought at the last switchback")
   expect(not L.goTrigger(L.triggers(R7 .. "GreeterScene")), "the greeter steps into the road")
   scene("kronia_greeting", 90)
@@ -144,7 +176,7 @@ local function main()
   expect(not L.npc(R7 .. "Reader").present, "the reader went for someone who reads better")
   L.talk(L.npc(R7 .. "StageKronist"))
   L.go(27, 9); shot("kronia_stage")
-  L.go(34, 15); shot("kronia_river")
+  L.go(33, 16); shot("kronia_river")
   L.go(21, 2); shot("route7_north_gate")
 
   -- Antiope's cave.

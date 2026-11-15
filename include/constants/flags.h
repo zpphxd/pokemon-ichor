@@ -816,18 +816,18 @@
 #define FLAG_UNUSED_0x2FD                                           0x2FD // Unused Flag
 #define FLAG_UNUSED_0x2FE                                           0x2FE // Unused Flag
 #define FLAG_UNUSED_0x2FF                                           0x2FF // Unused Flag
-#define FLAG_UNUSED_0x300                                           0x300 // Unused Flag
-#define FLAG_UNUSED_0x301                                           0x301 // Unused Flag
-#define FLAG_UNUSED_0x302                                           0x302 // Unused Flag
-#define FLAG_UNUSED_0x303                                           0x303 // Unused Flag
-#define FLAG_UNUSED_0x304                                           0x304 // Unused Flag
-#define FLAG_UNUSED_0x305                                           0x305 // Unused Flag
-#define FLAG_UNUSED_0x306                                           0x306 // Unused Flag
-#define FLAG_UNUSED_0x307                                           0x307 // Unused Flag
-#define FLAG_UNUSED_0x308                                           0x308 // Unused Flag
-#define FLAG_UNUSED_0x309                                           0x309 // Unused Flag
-#define FLAG_UNUSED_0x30A                                           0x30A // Unused Flag
-#define FLAG_UNUSED_0x30B                                           0x30B // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE6_WINE                               0x300 // Ichor: Act II: hidden item: Route 6, Wine in a forgotten jar by the broken wine-cart
+#define FLAG_ICHOR_HIDDEN_ROUTE6_REVIVE                             0x301 // Ichor: Act II: hidden item: Route 6, a Revive in the west woods' clearing
+#define FLAG_ICHOR_HIDDEN_ELEUTHERAI_BRONZE_OBOL                    0x302 // Ichor: Act II: hidden item: Eleutherai, a Bronze Obol in the spring trough
+#define FLAG_ICHOR_HIDDEN_KITHAIRON_PRETTY_FEATHER                  0x303 // Ichor: Act II: hidden item: Mt. Kithairon, a Pretty Feather at Aktaion's spring
+#define FLAG_ICHOR_HIDDEN_KITHAIRON_HONEY                           0x304 // Ichor: Act II: hidden item: Mt. Kithairon, Honey in Pentheus's fir
+#define FLAG_ICHOR_HIDDEN_KITHAIRON_ETHER                           0x305 // Ichor: Act II: hidden item: Mt. Kithairon, an Ether in the deadfall nook by the foot
+#define FLAG_ICHOR_HIDDEN_ANTIOPE_HARD_STONE                        0x306 // Ichor: Act II: hidden item: Antiope's cave, a Hard Stone in the floor by the pillar
+#define FLAG_ICHOR_HIDDEN_ROUTE7_BRONZE_OBOL                        0x307 // Ichor: Act II: hidden item: Route 7, a Bronze Obol in the reeds by the river
+#define FLAG_ICHOR_HIDDEN_ROUTE7_CHARCOAL                           0x308 // Ichor: Act II: hidden item: Route 7, Charcoal in the bread oven's ash
+#define FLAG_ICHOR_HIDDEN_ROUTE7_PEARL                              0x309 // Ichor: Act II: hidden item: Route 7, a Pearl at the riverbank's end
+#define FLAG_ICHOR_HIDDEN_ROUTE6_STARDUST                           0x30A // Ichor: Act II: hidden item: Route 6, Stardust in the vines by the press
+#define FLAG_ICHOR_HIDDEN_ELEUTHERAI_STARDUST                       0x30B // Ichor: Act II: hidden item: Eleutherai, Stardust at the foot of the empty plinth
 #define FLAG_ICHOR_HIDDEN_THYRSA_CELL_BATTERY                       0x30C // Ichor: Thyrsa City: hidden Cell Battery in the ash of Semele's chamber (16,7)
 #define FLAG_HIDE_PETALBURG_GYM_GREETER                             0x30D
 #define FLAG_ICHOR_HIDDEN_THYRSA_HEART_SCALE                        0x30E // Ichor: Thyrsa City: hidden Heart Scale in the fountain house of Dirke (22,34)
@@ -1758,7 +1758,6 @@
 #define FLAG_ICHOR_ITEM_ANTIOPE_PP_UP           (FLAG_ICHOR_GENERAL_START + 0x117) // Ichor: Act II: item ball: Antiope's cave PP Up on the rock shelf
 #define FLAG_ICHOR_ITEM_ANTIOPE_STAR_PIECE      (FLAG_ICHOR_GENERAL_START + 0x118) // Ichor: Act II: item ball: Antiope's cave Star Piece on the ivy ledge
 #define FLAG_ICHOR_HIDE_ALETHEA_ELEUTHERAI      (FLAG_ICHOR_GENERAL_START + 0x119) // Ichor: Act II: hide Alethea at Eleutherai's plinth (beat 27)
-#define FLAG_ICHOR_DECOY_ELEUTHERAI             (FLAG_ICHOR_GENERAL_START + 0x11A) // Ichor: Act II: gave water to the old man at Eleutherai's trough (a theoxenia decoy)
 #define FLAG_ICHOR_SAW_MAENADS                  (FLAG_ICHOR_GENERAL_START + 0x11B) // Ichor: Act II: saw the maenads dance on Kithairon (beat 28); hides the ring
 #define FLAG_ICHOR_PHORBAS_STORY                (FLAG_ICHOR_GENERAL_START + 0x11C) // Ichor: Act II: Phorbas told the foundling's story at the fold (beat 28)
 #define FLAG_ICHOR_HIDE_KITHAIRON_DRUM          (FLAG_ICHOR_GENERAL_START + 0x11D) // Ichor: Act II: the toppled boundary drum on Kithairon is moved (the Girdle)
@@ -1770,10 +1769,14 @@
 #define FLAG_ICHOR_HIDE_KLEON_KRONIA            (FLAG_ICHOR_GENERAL_START + 0x123) // Ichor: Act II: hide Kleon at the Kronia's tables (beat 29)
 #define FLAG_ICHOR_HIDE_ALETHEA_KRONIA          (FLAG_ICHOR_GENERAL_START + 0x124) // Ichor: Act II: hide Alethea at the Kronia's tables (beat 29)
 #define FLAG_ICHOR_GYPSOS_WENT_HOME             (FLAG_ICHOR_GENERAL_START + 0x125) // Ichor: Act II: Gypsos read tablet 3 and went home to Eudora's house
+#define FLAG_ICHOR_ITEM_KITHAIRON_HYPER_POTION  (FLAG_ICHOR_GENERAL_START + 0x126) // Ichor: Act II: item ball: Mt. Kithairon Hyper Potion in the clearing east of the first switchback
 #define FLAG_ICHOR_ITEM_ROUTE7_FULL_HEAL        (FLAG_ICHOR_GENERAL_START + 0x127) // Ichor: Act II: item ball: Route 7 Full Heal at a switchback's dead end
 #define FLAG_ICHOR_ITEM_ROUTE7_BIG_PEARL        (FLAG_ICHOR_GENERAL_START + 0x128) // Ichor: Act II: item ball: Route 7 Big Pearl on the Asopos's reed islet (the Conch)
 #define FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS       (FLAG_ICHOR_GENERAL_START + 0x14E) // Ichor: Act II rooms: beat Phaidimos at the Kantharos the first time (Olive Oil x2)
 #define FLAG_ICHOR_KNUCKLEBONES_GLAUKE          (FLAG_ICHOR_GENERAL_START + 0x14F) // Ichor: Act II rooms: beat Glauke at the Kantharos the first time (Wine)
+#define FLAG_ICHOR_ITEM_KITHAIRON_ULTRA_BALL    (FLAG_ICHOR_GENERAL_START + 0x129) // Ichor: Act II: item ball: Mt. Kithairon Ultra Ball in the firs' hidden clearing by the glade
+#define FLAG_ICHOR_ITEM_ROUTE7_NET_BALL         (FLAG_ICHOR_GENERAL_START + 0x12A) // Ichor: Act II: item ball: Route 7 Net Ball in the riverside pasture
+#define FLAG_ICHOR_ITEM_ELEUTHERAI_FRESH_WATER  (FLAG_ICHOR_GENERAL_START + 0x12B) // Ichor: Act II: item ball: Eleutherai Fresh Water in the dead end by the fort's stair
 #define FLAG_ICHOR_HIDE_DIONYSIA_CAST           (FLAG_ICHOR_GENERAL_START + 0x154) // Ichor: Act II: hides the Dionysia's cast, herald and seated Kleon outside the play (beat 32)
 #define FLAG_ICHOR_HIDE_THESPIS_SKENE           (FLAG_ICHOR_GENERAL_START + 0x155) // Ichor: Act II: hides Thespis backstage once the masks let go (beat 32)
 #define FLAG_ICHOR_HIDE_KLEON_THEATER           (FLAG_ICHOR_GENERAL_START + 0x156) // Ichor: Act II: hides Kleon on the stage's edge after his third battle (beat 33)

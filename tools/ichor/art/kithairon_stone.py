@@ -555,30 +555,56 @@ def markers():
             K.put(sc, x, y, ["54", "32"], rk)
         _place(s, "middle", 5, cy, sc)
 
-    # the maenads' frame drums
-    for cy, rows in ((1, [
-            "...KKKKKK...",
-            "..K3333333K.",
-            ".K335555333K",
-            ".K355555553K",
-            ".K355555553K",
-            ".K335555333K",
-            "..K3333333K.",
-            "...KKKKKK...",
-    ]), (0, [
-            "....KKKKK...",
-            "..KK33333K..",
-            ".K3335555K..",
-            "K33555553K..",
-            "K3555553K...",
-            ".KKKKKKK....",
-    ])):
+    # the maenads' frame drums (polish pass: they read as pale stones before).
+    # A tympanon: a skin stretched over a deep wooden hoop, painted with a ring
+    # of ochre, bronze jingles set in the hoop, ribbons; one lying on its back,
+    # one stood on its rim with a beater against it.
+    def tympanon(d, cx, cy, rx, ry, depth, upright=False):
+        """A frame drum: a dark wooden hoop round a pale skin with an ochre
+        ring and an ivy leaf painted on it, bronze jingles in the hoop. Lying
+        flat (an ellipse over the hoop's side) or stood on its rim."""
+        h, w = 16, 16
+        yy, xx = np.mgrid[0:h, 0:w]
+        top = ((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2 <= 1.0
+        side = np.zeros((h, w), bool)
+        for k in range(1, depth + 1):
+            side |= ((xx - cx) / rx) ** 2 + ((yy - cy - k) / ry) ** 2 <= 1.0
+        side &= ~top
+        skin = ((xx - cx) / (rx - 2.0)) ** 2 + ((yy - cy) / (ry - 1.6)) ** 2 <= 1.0
+        ring = (((xx - cx) / (rx - 3.4)) ** 2 + ((yy - cy) / (ry - 2.4)) ** 2 <= 1.0) & \
+            ~(((xx - cx) / (rx - 4.4)) ** 2 + ((yy - cy) / (ry - 3.1)) ** 2 <= 1.0)
+        for y, x in np.argwhere(side):
+            d.px(x, y, "wd1" if (x + y) % 5 else "l0")
+            if (x - int(cx)) % 3 == 0 and y == int(cy + ry) + depth // 2:
+                d.px(x, y, "tg")                      # jingles in the hoop's side
+        for y, x in np.argwhere(top & ~skin):
+            d.px(x, y, "l1" if (x - cx) + (y - cy) < 0 else "l0")   # the hoop's rim
+        for y, x in np.argwhere(skin):
+            u = (x - cx) / rx + (y - cy) / ry
+            d.px(x, y, "p3" if u < -0.3 else ("p2" if u < 0.5 else "p1"))
+        for y, x in np.argwhere(ring & skin):
+            d.px(x, y, "tg")
+        # an ivy leaf at the skin's heart
+        d.px(int(cx), int(cy), "t1")
+        d.px(int(cx) - 1, int(cy), "t3")
+        d.px(int(cx), int(cy) - 1, "t3")
+        d.outline("ink")
+
+    for cy, upright in ((1, False), (0, True)):
         d = K.Layer(16, 16)
-        K.put(d, 2, 4, rows, {**rk, "3": "rk2"})
-        d.px(12, 3, "iv1")
-        d.px(13, 2, "iv2")
-        d.px(11, 4, "iv2")
-        _shadow(d, 3, 14, 13)
+        if upright:
+            tympanon(d, 7.0, 7.0, 5.6, 6.2, 2)       # stood on its rim, facing you
+            for (x, y) in ((12, 13), (13, 12), (14, 11), (15, 10)):
+                d.px(x, y, "l1")                     # the beater, leaning on it
+            d.px(15, 9, "p2")
+        else:
+            tympanon(d, 7.5, 6.0, 7.0, 4.2, 3)       # lying on its back
+            for (x, y) in ((1, 11), (0, 12), (0, 13), (1, 14)):
+                d.px(x, y, "t3")                     # a ribbon trailing from the hoop
+        for y in (14, 15):
+            for x in range(2, 15):
+                if not d.a[y, x, 3] and (x + y) % 2 == 0:
+                    d.px(x, y, "gd")
         _place(s, "middle", 6, cy, d)
 
     # a boulder

@@ -490,6 +490,21 @@ const struct Tileset gTileset_KithaironCave =
     .callback = NULL,
 };
 
+// Ichor: kithairon_pass, Mt. Kithairon's pass (the polish pass gave the climb its own
+// set). Porytiles-managed, built by tools/ichor/art/kithairon_build.py for the aethos
+// primary; its core section matches gTileset_Kithairon's and gTileset_Kronia's at the
+// same metatile ids, so its seams need no aethos-only strip.
+const struct Tileset gTileset_KithaironPass =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_KithaironPass,
+    .palettes = gTilesetPalettes_PorytilesManaged_KithaironPass,
+    .metatiles = gMetatiles_PorytilesManaged_KithaironPass,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_KithaironPass,
+    .callback = NULL,
+};
+
 // Ichor: theater, Thyrsa's theater (Act II, beats 32-34): the cavea and its
 // seated crowd, the orchestra, the skene's painted front and doors, the god-machine.
 // Porytiles-managed, built by tools/ichor/art/theater_build.py. It uses only its own

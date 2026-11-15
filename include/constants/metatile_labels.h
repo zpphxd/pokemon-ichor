@@ -1165,12 +1165,13 @@
 #define METATILE_TempleDemeter_DraughtDoor_B            0x274
 // end gTileset_TempleDemeter
 
-// gTileset_Kithairon, gTileset_Kronia, gTileset_KithaironCave (Ichor: the Kithairon crossing), written by tools/ichor/art/kithairon_build.py
-#define METATILE_Kithairon_OldVines             0x2B8
-#define METATILE_Kithairon_OldVines_B           0x2B9
-#define METATILE_Kithairon_OldVines_Stumps      0x2BA
-#define METATILE_Kithairon_Barrier_W            0x2A6
-#define METATILE_Kithairon_Barrier_E            0x2A7
+// gTileset_Kithairon, gTileset_Kronia, gTileset_KithaironPass, gTileset_KithaironCave (Ichor: the Kithairon crossing), written by tools/ichor/art/kithairon_build.py
+#define METATILE_Kithairon_Barrier_W            0x28E
+#define METATILE_Kithairon_Barrier_E            0x28F
+#define METATILE_KithaironPass_Shrine_Top           0x2A8
+#define METATILE_KithaironPass_Shrine               0x2B0
+#define METATILE_KithaironPass_ShrineBad_Top        0x2A9
+#define METATILE_KithaironPass_ShrineBad            0x2B1
 #define METATILE_KithaironCave_Brazier_ColdTop      0x220
 #define METATILE_KithaironCave_Brazier_Cold         0x228
 #define METATILE_KithaironCave_Brazier_LitTop       0x221

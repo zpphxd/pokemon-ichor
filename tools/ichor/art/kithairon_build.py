@@ -47,6 +47,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import kithairon_camp  # noqa: E402
+import kithairon_cliffs  # noqa: E402
 import kithairon_ground  # noqa: E402
 import kithairon_houses  # noqa: E402
 import kithairon_lib as K  # noqa: E402
@@ -64,20 +65,23 @@ NEAR_DUPLICATE_PX = 2
 
 SETS = {
     "kithairon": {"symbol": "gTileset_Kithairon", "dir": "kithairon", "label": "Kithairon",
-                  "title": "Route 6, Eleutherai and Mt. Kithairon"},
+                  "title": "Route 6 and Eleutherai"},
     "kronia": {"symbol": "gTileset_Kronia", "dir": "kronia", "label": "Kronia",
                "title": "Route 7 and the Kronia grounds"},
+    "pass": {"symbol": "gTileset_KithaironPass", "dir": "kithairon_pass", "label": "KithaironPass",
+             "title": "Mt. Kithairon, the maenads' pass"},
     "cave": {"symbol": "gTileset_KithaironCave", "dir": "kithairon_cave",
              "label": "KithaironCave", "title": "Antiope's cave"},
 }
 
 # Metatiles scripts swap: (set, structure, cell name, label)
 LABELS = [
-    ("kithairon", "old_vines", "vines", "OldVines"),
-    ("kithairon", "old_vines", "vines_b", "OldVines_B"),
-    ("kithairon", "old_vines", "stumps", "OldVines_Stumps"),
     ("kithairon", "barrier", "W", "Barrier_W"),
     ("kithairon", "barrier", "E", "Barrier_E"),
+    ("pass", "shrine", "shrine_top", "Shrine_Top"),
+    ("pass", "shrine", "shrine", "Shrine"),
+    ("pass", "shrine", "shrine_bad_top", "ShrineBad_Top"),
+    ("pass", "shrine", "shrine_bad", "ShrineBad"),
     ("cave", "brazier", "cold_top", "Brazier_ColdTop"),
     ("cave", "brazier", "cold", "Brazier_Cold"),
     ("cave", "brazier", "lit_top", "Brazier_LitTop"),
@@ -89,7 +93,7 @@ def painted():
     """Every structure, painted once, by key."""
     ss = {}
     for mod in (kithairon_ground, kithairon_trees, kithairon_stone, kithairon_vines,
-                kithairon_houses, kithairon_camp):
+                kithairon_houses, kithairon_camp, kithairon_cliffs):
         for s in mod.build():
             assert s.key not in ss, s.key
             ss[s.key] = s
@@ -111,10 +115,38 @@ def painted():
                                      "wide (`cave_carving_L`, `_R`), a rock shelf for the PP Up, "
                                      "the marked ivy to the Star Piece's ledge, a crack.")
     mk = ss.pop("markers")
-    ss["markers"] = K.crop(mk, "markers", mk.title,
-                           ["herm_top", "shrine_top", "shrine_bad_top", "dig", "scree_b", "drum_b",
-                            "boulder", "herm", "shrine", "shrine_bad", "boundary", "seat", "scree",
-                            "drum"])
+    ss["markers"] = K.crop(mk, "markers", "Stones of the road: the herm, boundary stones, scree",
+                           ["herm_top", "dig", "scree_b", "boulder", "herm", "boundary", "scree"],
+                           cols=4,
+                           notes="On borrowed grass. `herm_top` over `herm`: the great herm, hung "
+                                 "with ivy. `boundary` a worn boundary stone, `boulder` a grey "
+                                 "rock, `scree`/`scree_b` loose stones (walkable), `dig` turned "
+                                 "earth on grass (walkable).")
+    ss["shrine"] = K.crop(mk, "shrine", "The mountain's shrine, Aktaion's seat, the maenads' drums",
+                          ["shrine_top", "shrine_bad_top", "drum_b", "shrine", "shrine_bad", "seat",
+                           "drum"], cols=3,
+                          notes="On borrowed grass. `shrine_top` over `shrine`: the little rock "
+                                "shrine of Dionysus with its stone cup; `shrine_bad_*` the same "
+                                "with a sickle scratched across the cup (desecrated). `seat` "
+                                "Aktaion's rock seat. `drum` a maenad's frame drum lying on its "
+                                "back, `drum_b` one stood on its rim with a beater: a skin over "
+                                "a deep wooden hoop, an ochre ring, bronze jingles.")
+    cf = ss.pop("cliff_face")
+    ss["cliff_face"] = K.crop(cf, "cliff_face", "Cliff faces: ivy, a crack, a tuft, a seep, a fern",
+                              ["ivy_u", "crack_u", "tuft_u", "ivy_l", "seep_l", "fern_l"], cols=3,
+                              notes="Mid-face cells to scatter along a cliff's south face: `_u` "
+                                    "for its upper row, `_l` for its lower row. `ivy` hangs from "
+                                    "the lip, `crack_u` splits the face with a fern, `tuft_u` a "
+                                    "grass tuft on a ledgelet, `seep_l` a dark wet streak, "
+                                    "`fern_l` a fern at the foot.")
+    ss["cliff_mouth"] = K.crop(cf, "cliff_mouth", "A cave mouth in a cliff's lower row", ["mouth"],
+                               notes="A dark arch in a cliff's lower face row "
+                                     "(MB_NON_ANIMATED_DOOR: put the warp there).")
+    ss["cliff_marked"] = K.crop(cf, "cliff_marked", "The marked ivy of the Thyrsus walls",
+                                ["marked_u", "marked_l"], cols=1,
+                                notes="Thick ivy with gold-marked leaves from lip to foot, "
+                                      "`marked_u` over `marked_l`: Dionysus's Thyrsus (gift II) "
+                                      "climbs it. Put the wall's sign on the lower cell.")
     ss["dig_cave"] = K.crop(mk, "dig_cave", "Turned earth on the cave floor", ["dig_cave"],
                             notes="A fixed dig spot on the cave floor (walkable).")
     # the woods' firs again, standing on aethos's deep-shade grass (0x01C): same
@@ -130,15 +162,18 @@ def painted():
     return ss
 
 
-CORE = ["tall", "path", "crag", "water", "fir", "fir_b", "fir_stack", "fir_stack_b", "fir_young",
-        "oak", "crag_detail", "markers", "fir_shade", "fir_b_shade", "fir_stack_shade",
-        "fir_stack_b_shade", "fir_young_shade", "oak_shade", "meadow"]
+CORE = ["tall", "path", "fir", "fir_b", "fir_stack", "fir_stack_b", "fir_young",
+        "oak", "markers", "fir_shade", "fir_b_shade", "fir_stack_shade",
+        "fir_stack_b_shade", "fir_young_shade", "oak_shade", "meadow",
+        "cliff", "cliff_face", "cliff_stair", "ledge", "rocks", "deadfall"]
 EXTRAS = {
-    "kithairon": [("vines", ["trellis", "old_vines", "press", "cart", "barrier"]),
-                  ("stone", ["fort", "temple", "trough", "pentheus_fir"]),
+    "kithairon": [("vines", ["trellis", "press", "cart", "barrier"]),
+                  ("stone", ["fort", "temple", "trough", "cliff_mouth"]),
                   ("houses", ["roof_tile", "wall", "windows", "doors"])],
     "kronia": [("camp", ["feast_table", "oven", "tent", "big_tent", "stage", "banner",
-                         "camp_small", "trough"])],
+                         "camp_small", "trough", "water"])],
+    "pass": [("mountain", ["pentheus_fir", "shrine", "cliff_marked", "trough", "water", "trampled",
+                           "pear", "leanto"])],
 }
 CAVE = [("cave", ["cave", "cave_floor", "cave_detail", "brazier", "dig_cave"])]
 SECTION_TITLES = {
@@ -147,6 +182,7 @@ SECTION_TITLES = {
     "stone": "Eleutherai's fort, the god's temple, troughs, Pentheus's fir",
     "houses": "Eleutherai's houses (Eleusa's kit)",
     "camp": "The Kronia grounds",
+    "mountain": "The maenads' pass: Pentheus's fir, the shrine, the dancing floor",
     "cave": "Antiope's cave",
 }
 
@@ -375,7 +411,7 @@ def verify(binp, rows, patched, label):
 # --------------------------------------------------------------------------
 
 LABEL_FILE = ROOT / "include/constants/metatile_labels.h"
-LABEL_START = "// gTileset_Kithairon, gTileset_Kronia, gTileset_KithaironCave (Ichor: the Kithairon crossing), written by tools/ichor/art/kithairon_build.py"
+LABEL_START = "// gTileset_Kithairon, gTileset_Kronia, gTileset_KithaironPass, gTileset_KithaironCave (Ichor: the Kithairon crossing), written by tools/ichor/art/kithairon_build.py"
 LABEL_END = "// end gTileset_Kithairon"
 
 
