@@ -1,0 +1,79 @@
+line: endymion
+species:
+
+- dex: 72
+  concept: Sleeping shepherd-lamb
+  name: Amnoze
+  etymology: amnos (Greek, lamb) + doze
+  category: Moonsleep
+  types: [Normal, Psychic]
+  abilities: [Comatose]
+  hidden_ability: Fluffy
+  base_stats: {hp: 105, atk: 65, def: 85, spa: 85, spd: 95, spe: 25}
+  ev_yield: {hp: 2}
+  exp_yield: 168
+  catch_rate: 75
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Slow
+  height_m: 0.6
+  weight_kg: 14.5
+  myth: >-
+    Endymion, a shepherd loved by Selene, the Moon, was granted eternal sleep
+    and eternal youth on Mount Latmos, where she comes down to him every night
+    (Apollodorus 1.7.5; Apollonius of Rhodes, Argonautica 4.57–58).
+  expression: >-
+    Endymion as one of his own lambs, curled up and never waking. Comatose
+    keeps it asleep forever, and nothing else can touch it.
+  art: >-
+    Small: it fills about 38×30 px. A plump lamb in three-quarter view facing
+    left, curled up asleep with its chin on its forelegs and its eyes shut in
+    a contented smile. One horn curves into a shepherd's crook, and its
+    fleece is a soft cloud with a crescent-moon curl on the flank. A few
+    floating dream bubbles rise from it. Marble-white fleece with pale
+    Aegean-blue shading, limestone crook horn, Psychic-pink dream bubbles as
+    the accent, black-figure ink outline. The follower is carried along
+    asleep, drifting a little above the ground.
+  shiny: Its fleece turns pale sun-gold, like the moon low on the horizon.
+  dex_entry:
+    - It has slept since it was born and will
+    - never grow old. On moonlit nights a pale
+    - light settles beside it, and it smiles
+    - in its sleep.
+  habitat: >-
+    Arkadia's moonlit meadows, at night only; rare. It never wakes, so it
+    shows up only by wandering into the grass where it sleeps.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Yawn]
+      - [1, Snore]
+      - [1, Sleep Talk]
+      - [5, Confusion]
+      - [9, Cotton Spore]
+      - [13, Headbutt]
+      - [17, Psybeam]
+      - [21, Moonlight]
+      - [25, Sing]
+      - [29, Zen Headbutt]
+      - [33, Cotton Guard]
+      - [37, Dream Eater]
+      - [41, Body Slam]
+      - [45, Psychic]
+      - [49, Calm Mind]
+      - [53, Double-Edge]
+      - [58, Wish]
+    teachable: [Protect, Substitute, Facade, Endure, Toxic, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Rest, Sleep Talk, Snore, Psychic,
+      Psyshock, Calm Mind, Zen Headbutt, Dream Eater, Psych Up, Light Screen, Reflect, Safeguard,
+      Charm, Body Slam, Double-Edge, Take Down, Headbutt, Hyper Voice, Shadow Ball, Heal Bell,
+      Helping Hand, Trick Room, Gravity, Magic Room, Wonder Room, Defense Curl, Rollout,
+      Iron Defense, Body Press, Stored Power, Expanding Force, Psychic Terrain, Misty Terrain,
+      Dazzling Gleam, Future Sight, Hyper Beam, Giga Impact]
+    egg: [Heal Bell, Lucky Chant, Captivate, Amnesia]
+  signature: >-
+    Comatose: it is always asleep, so no status condition can touch it, and
+    Snore and Sleep Talk work every turn. It knows both from level 1, and
+    Sing and Yawn put its foes to sleep beside it for Dream Eater.
+  new_move: null

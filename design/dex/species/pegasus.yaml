@@ -1,0 +1,84 @@
+line: pegasus
+species:
+
+- dex: 148
+  concept: Thunder-bearer
+  name: Pegaunos
+  etymology: Pegasos (Greek, the winged horse) + keraunos (Greek, thunderbolt)
+  category: Storm Steed
+  types: [Electric, Flying]
+  abilities: [Motor Drive]
+  hidden_ability: Defiant
+  base_stats: {hp: 90, atk: 120, def: 85, spa: 90, spd: 85, spe: 110}
+  ev_yield: {atk: 2, spe: 1}
+  exp_yield: 300
+  catch_rate: 3
+  gender: {genderless: true}
+  egg_groups: [Undiscovered]
+  egg_cycles: 80
+  growth_rate: Slow
+  base_friendship: 0
+  height_m: 2.2
+  weight_kg: 430.0
+  myth: >-
+    The winged horse Pegasus sprang from the Gorgon's neck when Perseus cut off
+    her head, flew up to the gods, and lives in Zeus's house carrying his
+    thunder and lightning (Hesiod, Theogony 280–286). Bellerophon tamed him only
+    with Athena's golden bridle (Pindar, Olympian 13.63–92), and his hoof struck
+    the spring Hippocrene from the rock (Pausanias 9.31.3).
+  expression: >-
+    Zeus's thunder on four hooves. No one rides it without a golden bridle, and
+    anything that tries to tame it by force only makes it stronger.
+  art: >-
+    Large: it fills about 61×61 px. A marble-white stallion rearing in
+    three-quarter view facing left, forelegs raised over a crackle of sparks and
+    long hind legs braced. Its mane splits into three sun-gold lightning bolts,
+    its tail is a fork of gold lightning, Athena's golden bridle crosses its
+    face, and a gold gorgoneion medallion hangs at its collar. Its great wing is
+    a tiered thunderhead of storm-blue feathers with lightning crackling between
+    the tiers. Marble-white coat shaded with pale Aegean blue, bronze hooves,
+    sun-gold lightning and tack, ink and storm-blue wing, electric-blue sparks,
+    black-figure ink outline. Frame 2 beats the wing and crackles the tail; the
+    back sprite shows the head and lightning mane against the wing, and the
+    follower trots with sparks jumping from its hooves.
+  shiny: The coat turns storm-dark gray and the lightning turns Aegean blue.
+  dex_entry:
+    - It leapt into the world from a monster's
+    - severed neck. Now it bears the thunder of
+    - the sky king. Where its hoof strikes rock,
+    - a cold spring wells up.
+  habitat: >-
+    The cloud meadows of Olympus, after you beat the Archon (post-game). It
+    grazes by the spring it struck from the rock and appears only during
+    thunderstorms (static, level 70, one only).
+  learnset:
+    level_up:
+      - [1, Gust]
+      - [1, Thunder Shock]
+      - [1, Stomp]
+      - [1, Charge]
+      - [8, Spark]
+      - [16, Aerial Ace]
+      - [24, Agility]
+      - [32, Wild Charge]
+      - [40, Bounce]
+      - [48, High Horsepower]
+      - [55, Roost]
+      - [62, Brave Bird]
+      - [70, Supercell Slam]
+      - [78, Thunder]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Thunderbolt, Thunder,
+      Thunder Wave, Wild Charge, Volt Switch, Charge Beam, Discharge, Rising Voltage,
+      Electric Terrain, Supercell Slam, Rain Dance, Fly, Bounce, Brave Bird, Aerial Ace, Air Slash,
+      Hurricane, Dual Wingbeat, Acrobatics, Tailwind, Roost, Defog, U-turn, Steel Wing, Sky Attack,
+      High Horsepower, Stomping Tantrum, Bulldoze, Double-Edge, Body Slam, Take Down, Agility,
+      Swords Dance, Bulk Up, Iron Head, Weather Ball, Calm Mind, Scary Face, Roar, Hyper Beam,
+      Giga Impact]
+    egg: []
+  signature: >-
+    A physical thunderbolt: Supercell Slam is Zeus's lightning carried at a
+    gallop, and High Horsepower is the hoof that splits rock. Motor Drive turns
+    any Electric attack into more speed, and Defiant answers every attempt to
+    rein it in.
+  new_move: null

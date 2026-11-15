@@ -1,0 +1,149 @@
+line: nemean
+species:
+
+- dex: 35
+  concept: Golden cub
+  name: Nemecub
+  etymology: Nemea (Greek, the lion's valley, from nemos, grove) + cub
+  category: Golden Cub
+  types: [Normal]
+  abilities: [Fur Coat]
+  hidden_ability: Unnerve
+  base_stats: {hp: 58, atk: 62, def: 60, spa: 35, spd: 50, spe: 55}
+  ev_yield: {atk: 1}
+  exp_yield: 62
+  catch_rate: 120
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.6
+  weight_kg: 18.0
+  myth: >-
+    The lion of Nemea, a child of Typhon, preyed on the valley's herds, and no
+    weapon could wound it. Killing it was the first Labor set for Herakles
+    (Apollodorus, Library 2.5.1).
+  expression: >-
+    A golden cub whose fur already turns thorns and teeth aside. Its paws are
+    too big for it, and so is its opinion of itself.
+  art: >-
+    Small: it fills about 36×36 px. A chunky lion cub sitting up in
+    three-quarter view facing left, chest puffed out, with oversized front
+    paws, a fluffy tuft on its head where a mane will grow, and a tufted tail
+    curled around its feet. A faint pattern of scale-like sheen on its
+    shoulders hints at the plated hide to come. Sun-gold and limestone fur,
+    terracotta tuft and nose, marble highlights, black-figure ink outline. The
+    follower pounces on the player's shadow.
+  shiny: Its gold fur turns marble white with a silver sheen.
+  dex_entry:
+    - Arrows and thorns slide off its gold fur.
+    - It is far too sure of itself, and it
+    - picks fights with lions twice its size.
+  habitat: >-
+    The scrub hills behind Emporion City, mornings and evenings; rare in the
+    tall grass. Hierophant Ione of Akti's Temple of Hestia raises one as her
+    ace.
+  learnset:
+    level_up:
+      - [1, Scratch]
+      - [1, Leer]
+      - [4, Baby-Doll Eyes]
+      - [7, Bite]
+      - [10, Work Up]
+      - [13, Headbutt]
+      - [16, Fury Swipes]
+      - [19, Roar]
+      - [22, Slash]
+      - [25, Crunch]
+      - [28, Take Down]
+      - [31, Noble Roar]
+      - [35, Swords Dance]
+      - [39, Double-Edge]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Work Up, Roar, Hone Claws,
+      Swords Dance, Body Slam, Take Down, Double-Edge, Headbutt, Crunch, Fire Fang, Thunder Fang,
+      Ice Fang, Play Rough, Dig, Iron Tail, Retaliate, Snarl, Taunt, Thief, Covet, Helping Hand,
+      Rock Smash, Strength, Cut, Bulldoze, Stomping Tantrum, Sunny Day, Endeavor, Echoed Voice,
+      Hyper Voice, Trailblaze, Agility, Uproar, Payback]
+    egg: [Yawn, Fake Out, Night Slash, Superpower, Charm]
+  signature: >-
+    Fur Coat from the start, so physical hits barely scratch it. Ione's cub
+    sets up Work Up behind it and hits back with Headbutt.
+  new_move: null
+
+- dex: 36
+  concept: Nemean lion
+  name: Nemeleon
+  etymology: Nemea (Greek, the lion's valley) + leon (Greek, lion)
+  category: Golden Hide
+  types: [Normal]
+  abilities: [Fur Coat]
+  hidden_ability: Unnerve
+  base_stats: {hp: 95, atk: 115, def: 75, spa: 45, spd: 75, spe: 90}
+  ev_yield: {atk: 2}
+  exp_yield: 180
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.6
+  weight_kg: 230.0
+  myth: >-
+    Herakles's arrows bounced off the lion and his club broke on it, so he
+    wrestled it in its cave and strangled it. He skinned it with its own claws
+    and wore the hide ever after (Apollodorus, Library 2.5.1; Theocritus,
+    Idyll 25).
+  expression: >-
+    The hide that turned every weapon, plated like bronze scales under a full
+    golden mane. Only its own claws are sharp enough to cut it.
+  art: >-
+    Large: it fills about 58×56 px. A great lion standing in three-quarter
+    view facing left, head high under a huge layered mane, one forepaw forward
+    with long claws showing. Its shoulders and flanks are covered in
+    overlapping scale plates like a bronze cuirass, and the plates catch the
+    light. Sun-gold mane edged in terracotta, limestone and sun-gold body, the
+    plates shaded with dark sun-gold, marble highlights, black-figure ink
+    outline. The back sprite shows the plated back like armor.
+  shiny: Its hide turns marble white with silver plates and an ink-dark mane.
+  dex_entry:
+    - No blade can pierce its hide. Old
+    - hunters say the only thing sharp enough
+    - to cut it is its own claw, and it will
+    - not lend that to anyone.
+  habitat: >-
+    Evolves from Nemecub at level 30. Wild ones prowl Lakonia's hills (rare,
+    mostly at dusk). The post-game's first Labor is built around the greatest
+    of them.
+  learnset:
+    level_up:
+      - [0, Crush Claw]
+      - [1, Scratch]
+      - [1, Leer]
+      - [1, Baby-Doll Eyes]
+      - [1, Bite]
+      - [10, Work Up]
+      - [13, Headbutt]
+      - [16, Fury Swipes]
+      - [19, Roar]
+      - [22, Slash]
+      - [25, Crunch]
+      - [28, Take Down]
+      - [32, Noble Roar]
+      - [36, Swords Dance]
+      - [42, Double-Edge]
+      - [47, Bulk Up]
+      - [53, Thrash]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Work Up, Roar, Hone Claws,
+      Swords Dance, Body Slam, Take Down, Double-Edge, Headbutt, Crunch, Fire Fang, Thunder Fang,
+      Ice Fang, Play Rough, Dig, Iron Tail, Retaliate, Snarl, Taunt, Thief, Covet, Helping Hand,
+      Rock Smash, Strength, Cut, Bulldoze, Stomping Tantrum, Sunny Day, Endeavor, Echoed Voice,
+      Hyper Voice, Trailblaze, Agility, Uproar, Payback, Bulk Up, Superpower, Brick Break,
+      Wild Charge, Iron Head, Zen Headbutt, Iron Defense, Scary Face, Throat Chop, Hyper Beam,
+      Giga Impact]
+    egg: []
+  signature: >-
+    It learns Crush Claw on evolving, the one thing that can cut its hide. Fur
+    Coat with Bulk Up makes it a wall that hits back.
+  new_move: null

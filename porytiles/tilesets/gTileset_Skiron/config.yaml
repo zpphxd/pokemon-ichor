@@ -1,0 +1,9 @@
+# Per-tileset Porytiles config for gTileset_Skiron, the secondary for Routes 4 and 5.
+# Sources are drawn by tools/ichor/art/skiron_build.py, which compiles Skiron against
+# an empty stand-in primary, checks its own art uses only its tiles and palettes 6-12,
+# then points its ground cells at aethos's grass, path and sea. Pair it with aethos
+# when compiling it directly (the build's borrowed ground is then lost: rerun the script).
+tileset:
+  primary_pairing:
+    mode: manual
+    partners: [gTileset_Aethos]

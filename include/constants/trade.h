@@ -23,6 +23,8 @@ enum InGameTradeID
     INGAME_TRADE_SEEL,
     // Ichor
     INGAME_TRADE_ICHOR_ARION, // Kimon's Finizen, for a Wooloo (Elaia, Glykera's house)
+    INGAME_TRADE_ICHOR_STATER, // Pheidon's Chelonet, for a Karkipool (Aegina, the mint)
+    INGAME_TRADE_ICHOR_SOCRATES, // Thaletas's Narkeray, for an Onotis (Emporion, the Deigma)
     INGAME_TRADE_ICHOR_PATHOS, // Euthykles's Prosomime, for a Gelasable (Thyrsa, the mask workshop)
     INGAME_TRADE_ICHOR_KASSOTIS, // the muleteer's Melisseer, for a Lophops (Kirrha, the muleteer's house)
     INGAME_TRADE_ICHOR_ARKAS, // Hippothoos's Arkoby, for a Gelasable (Arkadia, the charcoal hut)

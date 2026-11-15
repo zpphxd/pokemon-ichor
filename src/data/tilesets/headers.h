@@ -387,6 +387,51 @@ const struct Tileset gTileset_TempleDemeter =
     .callback = NULL,
 };
 
+// Ichor: ergasteria, Phase 2's working interiors (Aegina's inn, mint and homes;
+// Emporion's workshops next). A secondary that uses only its own tiles and
+// palettes 6-12, so it works on any primary. Built by
+// tools/ichor/art/ergasteria_build.py.
+const struct Tileset gTileset_Ergasteria =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Ergasteria,
+    .palettes = gTilesetPalettes_PorytilesManaged_Ergasteria,
+    .metatiles = gMetatiles_PorytilesManaged_Ergasteria,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Ergasteria,
+    .callback = NULL,
+};
+
+// Ichor: limen, Emporion's harbor-town interiors (the Deigma, the Dolphin,
+// Philoxenos's andron, the widow's room, the runners' house, Euphronios's
+// workshop and the hiring hall). Like ergasteria, it uses only its own tiles
+// and palettes 6-12. Built by tools/ichor/art/limen_build.py.
+const struct Tileset gTileset_Limen =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Limen,
+    .palettes = gTilesetPalettes_PorytilesManaged_Limen,
+    .metatiles = gMetatiles_PorytilesManaged_Limen,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Limen,
+    .callback = NULL,
+};
+
+// Ichor: domos, limen's twin for Emporion's town households and workshops
+// (Philoxenos's andron, the runners' house, Euphronios's workshop): the same
+// art and palettes, in a second set because seven rooms didn't fit one.
+// Built by tools/ichor/art/limen_build.py.
+const struct Tileset gTileset_Domos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Domos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Domos,
+    .metatiles = gMetatiles_PorytilesManaged_Domos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Domos,
+    .callback = NULL,
+};
+
 // Porytiles-managed secondary built by tools/ichor/art/emporion_build.py: Emporion
 // City (streets, the house kit, the Agora, the Temple of Hermes and the monuments,
 // Acrocorinth, the workshops). It uses only its own tiles and palettes 6-12; cells
@@ -429,6 +474,65 @@ const struct Tileset gTileset_TempleHermes =
     .metatiles = gMetatiles_PorytilesManaged_TempleHermes,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
     .callback = NULL,
+};
+
+// Ichor: aegina, the island secondary for Aegina Town and the Aegina detour. A
+// Porytiles-managed secondary built by tools/ichor/art/aegina_build.py for the
+// aethos primary: its ground cells borrow aethos's grass, sand, sea and path, so
+// rebuild it whenever aethos changes.
+const struct Tileset gTileset_Aegina =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Aegina,
+    .palettes = gTilesetPalettes_PorytilesManaged_Aegina,
+    .metatiles = gMetatiles_PorytilesManaged_Aegina,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Aegina,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary built by tools/ichor/art/skiron_build.py: Act I's
+// mainland road, Route 4's kilns, tombs, rockslide and camp and Route 5's Skironian
+// cliffs. Its cells on grass, path and sea borrow aethos's, so rebuild it whenever
+// aethos's ground changes.
+const struct Tileset gTileset_Skiron =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Skiron,
+    .palettes = gTilesetPalettes_PorytilesManaged_Skiron,
+    .metatiles = gMetatiles_PorytilesManaged_Skiron,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Skiron,
+    .callback = NULL,
+};
+
+// Ichor: trireme, the Euploia's deck and hold. A Porytiles-managed secondary
+// built by tools/ichor/art/trireme_build.py for the aethos primary: its sea
+// cells borrow aethos's animated sea, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Trireme =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Trireme,
+    .palettes = gTilesetPalettes_PorytilesManaged_Trireme,
+    .metatiles = gMetatiles_PorytilesManaged_Trireme,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Trireme,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary built by tools/ichor/art/cave_dark_build.py: the
+// dark places (Hecate's Hollow, the Salt Grotto, Akti's Sea Grotto, the Kronion
+// Crypt). It uses only its own tiles and palettes 6-12, so it works on any
+// primary; the maps pair it with aethos.
+const struct Tileset gTileset_CaveDark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_CaveDark,
+    .palettes = gTilesetPalettes_PorytilesManaged_CaveDark,
+    .metatiles = gMetatiles_PorytilesManaged_CaveDark,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_CaveDark,
+    .callback = InitTilesetAnim_PorytilesManaged_CaveDark,
 };
 
 // Ichor: labyrinth, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,

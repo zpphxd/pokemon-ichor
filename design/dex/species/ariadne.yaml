@@ -1,0 +1,78 @@
+line: ariadne
+species:
+
+- dex: 99
+  concept: Thread-ball
+  name: Mitoclew
+  etymology: mitos (Greek, thread) + clew (an old word for a ball of thread, and the root of clue)
+  category: Thread Ball
+  types: [Normal]
+  abilities: [Run Away, Friend Guard]
+  hidden_ability: Tangling Hair
+  base_stats: {hp: 85, atk: 45, def: 75, spa: 65, spd: 90, spe: 80}
+  ev_yield: {spd: 2}
+  exp_yield: 145
+  catch_rate: 90
+  gender: {female_pct: 87.5}
+  egg_groups: [Amorphous, Fairy]
+  egg_cycles: 20
+  growth_rate: Fast
+  base_friendship: 70
+  height_m: 0.4
+  weight_kg: 1.5
+  myth: >-
+    Ariadne, King Minos's daughter, gave Theseus a ball of thread to unwind
+    behind him so he could find his way out of the Labyrinth. Later Dionysus
+    married her and set her wedding crown among the stars as the Corona
+    Borealis (Apollodorus, Epitome 1; Ovid, Metamorphoses 8).
+  expression: >-
+    The ball of thread itself, still unwinding, under a floating crown of
+    small stars. A loose end always trails behind it, pointing the way back.
+  art: >-
+    Small: it fills about 34×36 px. A round ball of red thread in three-quarter
+    view facing left, with two bright eyes peeking out between the windings
+    and a loose strand trailing behind like a tail. A small ring of sun-gold
+    stars floats just above it like a crown. Terracotta reds for the thread
+    with darker winding lines, sun-gold stars, marble-white eye highlights,
+    black-figure ink outline. The follower leaves a short thread trail that
+    fades behind it.
+  shiny: The thread turns Aegean blue and the stars silver-white.
+  dex_entry:
+    - A living ball of thread that always knows
+    - the way out. Lost travelers who follow
+    - its loose end come home, though the ball
+    - grows smaller every time.
+  habitat: >-
+    The Labyrinth's passages on Knossa Isle, day or night. Uncommon; it rolls
+    ahead of travelers and is easiest to find in dead ends.
+  learnset:
+    level_up:
+      - [1, Wrap]
+      - [1, String Shot]
+      - [5, Teleport]
+      - [8, Rollout]
+      - [12, Helping Hand]
+      - [16, Bind]
+      - [20, Swift]
+      - [24, Follow Me]
+      - [28, Rapid Spin]
+      - [32, Body Slam]
+      - [36, Wish]
+      - [40, Cosmic Power]
+      - [44, Ally Switch]
+      - [48, Hyper Voice]
+      - [52, Baton Pass]
+      - [56, Moonlight]
+      - [60, Last Resort]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Light Screen, Reflect,
+      Safeguard, Helping Hand, Ally Switch, Trick Room, Gravity, Magic Coat, Skill Swap, Encore,
+      Covet, Thief, Swift, Rollout, Defense Curl, Gyro Ball, Ice Ball, Body Slam, Hyper Voice,
+      Tri Attack, Uproar, Echoed Voice, Charm, Fake Tears, Tickle, Psych Up, Trick, Dazzling Gleam,
+      Stored Power, Wonder Room, Magic Room, Bind]
+    egg: [Sticky Web, Spider Web, Lucky Chant, Heal Bell, Yawn]
+  signature: >-
+    It learns Teleport early and Follow Me later, so it always knows the way
+    out and draws attacks away from its allies. Tangling Hair snarls anyone
+    who strikes it.
+  new_move: null

@@ -1,0 +1,163 @@
+line: kouretes
+species:
+
+- dex: 103
+  concept: Clashing shield
+  name: Kymbash
+  etymology: kymbalon (Greek, cymbal) + bash
+  category: Round Shield
+  types: [Steel]
+  abilities: [Punk Rock]
+  hidden_ability: Dancer
+  base_stats: {hp: 45, atk: 55, def: 90, spa: 50, spd: 45, spe: 35}
+  ev_yield: {def: 1}
+  exp_yield: 64
+  catch_rate: 190
+  gender: {female_pct: 0}
+  egg_groups: [Mineral, Human-Like]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.6
+  weight_kg: 19.5
+  myth: >-
+    When Rhea hid the infant Zeus in a Cretan cave, the Kouretes guarded him,
+    dancing in armor and clashing spears on their shields so that Kronos would
+    not hear him cry (Strabo, Geography 10.3; Apollodorus, Library 1.1).
+  expression: >-
+    One of those clashing shields, round and bronze, with a pair of eyes in
+    its boss. It can't stop rattling, and its din is a kind of lullaby.
+  art: >-
+    Small: it fills about 36×36 px. A round bronze hoplite shield tilted in
+    three-quarter view facing left, floating a little off the ground, with two
+    wide eyes in the central boss and a dent below them like a mouth. A short
+    spear-shaft through its grip sticks out like a pair of arms, and a painted
+    black-figure dancer leaps across its face. Sun-gold and terracotta bronze,
+    marble-white eyes, black-figure ink outline and painted design. The
+    follower clanks as it bounces after the player.
+  shiny: The bronze turns silver, and the painted dancer turns Aegean blue.
+  dex_entry:
+    - It clangs against rocks to make a din
+    - loud enough to drown any cry. Its noise
+    - once hid a crying baby from a king who
+    - swallowed his own children.
+  habitat: >-
+    Rare in the cradle shrine at the mouth of the Diktaean cave, Knossa Isle,
+    at level 33, day and night. Its clanging echoes off the shrine walls.
+    Students at the Lakonian battle school train with it.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Metal Sound]
+      - [4, Growl]
+      - [8, Echoed Voice]
+      - [12, Mirror Shot]
+      - [16, Iron Defense]
+      - [20, Snarl]
+      - [24, Uproar]
+      - [28, Flash Cannon]
+      - [32, Hyper Voice]
+      - [36, Heavy Slam]
+      - [40, Boomburst]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Echoed Voice, Hyper Voice,
+      Uproar, Snarl, Screech, Metal Sound, Flash Cannon, Iron Head, Iron Defense, Heavy Slam,
+      Gyro Ball, Steel Beam, Magnet Rise, Light Screen, Reflect, Safeguard, Rock Tomb, Rollout, Swift,
+      Rain Dance, Sunny Day, Sandstorm, Headbutt]
+    egg: [Quick Guard, Wide Guard, Metal Burst, Counter, Block, Supersonic]
+  signature: >-
+    Punk Rock powers its sound moves from the first level: Growl, Echoed
+    Voice, Snarl and Uproar. It rattles foes long before it can hit hard.
+  new_move: null
+
+- dex: 104
+  concept: Shield-dancer
+  name: Kourodin
+  etymology: kouros (Greek, youth, the root of Kouretes) + din
+  category: War Dance
+  types: [Steel, Fighting]
+  abilities: [Punk Rock]
+  hidden_ability: Dancer
+  base_stats: {hp: 70, atk: 90, def: 110, spa: 90, spd: 75, spe: 70}
+  ev_yield: {def: 2}
+  exp_yield: 176
+  catch_rate: 60
+  gender: {female_pct: 0}
+  egg_groups: [Mineral, Human-Like]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.8
+  weight_kg: 88.0
+  myth: >-
+    The Kouretes leapt and beat spear on shield around the cave where the
+    baby Zeus lay, so Kronos never heard him and never swallowed him. The
+    child grew up and overthrew his father (Strabo, Geography 10.3;
+    Callimachus, Hymn to Zeus).
+  expression: >-
+    A crested dancer that beats its spear on its shield as it leaps, and the
+    shield's eyes are still Kymbash's. Its war dance is the oldest noise ever
+    raised against Kronos.
+  art: >-
+    Large: it fills about 52×60 px. A lean armored dancer in three-quarter view
+    facing left, caught mid-leap with one knee high, a round bronze shield on
+    the left arm and a short spear raised to strike it. A tall horsehair crest
+    on its helmet, a pleated kilt, and Kymbash's wide eyes still open in the
+    shield's boss. Sun-gold and terracotta bronze, a terracotta-red crest,
+    limestone skin, black-figure ink outline with a meander band on the kilt.
+    The follower dances a step whenever the player stops.
+  shiny: Silver armor with an Aegean-blue crest.
+  dex_entry:
+    - It leaps and beats its spear on its
+    - shield in a dance that shakes the hills.
+    - Some say it dances to keep an ancient
+    - enemy from waking.
+  habitat: >-
+    Evolves from Kymbash at level 35. Common in the deep chambers of the
+    Diktaean cave, Knossa Isle, day and night, at levels 42–48. At night the
+    oldest dance alone in the deepest chamber. Instructors at the Lakonian
+    battle school use it.
+  learnset:
+    level_up:
+      - [0, Body Press]
+      - [1, Swords Dance]
+      - [1, Tackle]
+      - [1, Metal Sound]
+      - [4, Growl]
+      - [8, Echoed Voice]
+      - [12, Mirror Shot]
+      - [16, Iron Defense]
+      - [20, Snarl]
+      - [24, Uproar]
+      - [28, Flash Cannon]
+      - [32, Hyper Voice]
+      - [36, Heavy Slam]
+      - [39, Teeter Dance]
+      - [42, Sacred Sword]
+      - [46, Noble Roar]
+      - [50, Close Combat]
+      - [54, Boomburst]
+      - [58, Iron Head]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Echoed Voice, Hyper Voice,
+      Uproar, Snarl, Screech, Metal Sound, Flash Cannon, Iron Head, Iron Defense, Heavy Slam,
+      Gyro Ball, Steel Beam, Magnet Rise, Light Screen, Reflect, Safeguard, Rock Tomb, Rollout, Swift,
+      Rain Dance, Sunny Day, Sandstorm, Headbutt, Body Press, Close Combat, Brick Break, Drain Punch,
+      Focus Blast, Aura Sphere, Vacuum Wave, Low Kick, Low Sweep, Reversal, Coaching, Bulk Up,
+      Swords Dance, Sacred Sword, Smart Strike, Rock Slide, Agility, Feint, Detect, Hyper Beam,
+      Giga Impact]
+    egg: []
+  signature: >-
+    Body Press turns its high Defense into Fighting damage, and Punk Rock
+    powers Hyper Voice and Boomburst. With Dancer it copies every dance it
+    sees, Swords Dance and Teeter Dance included.
+  new_move:
+    name: Shield Clash
+    type: Steel
+    effect: >-
+      Special, 80 power, 100 accuracy, 10 PP. A sound move that hits all
+      adjacent foes, and for two turns they can't use sound moves, as with
+      Throat Chop.
+    why: >-
+      No Steel sound move exists, so Punk Rock on a Steel type has nothing of
+      its own to power. The Kouretes' whole myth is bronze clashing so loudly
+      that a cry goes unheard. If approved it would replace Mirror Shot at
+      level 12 for both stages.

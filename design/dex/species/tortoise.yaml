@@ -1,0 +1,148 @@
+line: tortoise
+species:
+
+- dex: 44
+  concept: Tortoise hatchling
+  name: Chelonet
+  etymology: chelone (Greek, tortoise) + -et (little)
+  category: Tortoise
+  types: [Ground]
+  abilities: [Shell Armor, Sturdy]
+  hidden_ability: Punk Rock
+  base_stats: {hp: 55, atk: 50, def: 80, spa: 45, spd: 50, spe: 20}
+  ev_yield: {def: 1}
+  exp_yield: 60
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Monster, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.3
+  weight_kg: 9.5
+  myth: >-
+    On the day he was born in a cave on Mount Kyllene, the infant Hermes found
+    a mountain tortoise at the cave mouth, scooped out its shell and strung it
+    with seven strings of sheep-gut, making the first lyre (Homeric Hymn to
+    Hermes).
+  expression: >-
+    A hatchling whose smooth, hollow shell hums when the wind blows across it.
+    It is trying to learn the song its shell is for.
+  art: >-
+    Small: it fills about 30×26 px, low and wide. A round-shelled hatchling in
+    three-quarter view facing left, neck stretched up and mouth open mid-hum.
+    Its domed shell has a round sound-hole on the side and two tiny nubs at the
+    front rim where the lyre's horns will grow. Stubby legs, a wide-eyed face
+    and a pale belly plate. Terracotta and limestone shell, olive skin, marble
+    belly plate, black-figure ink outline. The follower hums, and a small note
+    rises over it.
+  shiny: Its shell turns pale marble with sun-gold rims.
+  dex_entry:
+    - Its hollow shell hums in the wind. It
+    - listens to the hum all day, trying to
+    - learn the song its shell was made for.
+  habitat: >-
+    Common on the grassy hills around Emporion City by day, and in Arkadia's
+    high meadows on Mount Kyllene.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Withdraw]
+      - [4, Mud-Slap]
+      - [8, Echoed Voice]
+      - [12, Rollout]
+      - [16, Bulldoze]
+      - [20, Round]
+      - [24, Sing]
+      - [28, Mud Bomb]
+      - [32, Iron Defense]
+      - [36, Earth Power]
+      - [40, Earthquake]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Mud Shot, Dig,
+      Bulldoze, Earthquake, Earth Power, Stomping Tantrum, Sandstorm, Sand Tomb, Stealth Rock,
+      Rock Tomb, Rock Slide, Iron Defense, Body Press, Rollout, Defense Curl, Echoed Voice,
+      Hyper Voice, Uproar, Charm, Helping Hand, Heal Bell, Sunny Day, Body Slam, Take Down, Endeavor,
+      Covet]
+    egg: [Yawn, Curse, Ancient Power, Wish, Shell Smash, Thief]
+  signature: >-
+    It evolves the first time it levels up knowing Sing, which it learns at
+    level 24. Sturdy and Shell Armor keep it safe while it practices.
+  new_move: null
+
+- dex: 45
+  concept: Lyre tortoise
+  name: Chelyra
+  etymology: chelys (Greek, tortoise, and the lyre made from one) + lyra (Greek, lyre)
+  category: Lyre
+  types: [Ground, Fairy]
+  abilities: [Shell Armor, Sturdy]
+  hidden_ability: Punk Rock
+  base_stats: {hp: 85, atk: 65, def: 110, spa: 95, spd: 105, spe: 30}
+  ev_yield: {def: 1, spd: 1}
+  exp_yield: 172
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Monster, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.0
+  weight_kg: 120.0
+  myth: >-
+    The same night he made the lyre, Hermes stole fifty of Apollo's cattle.
+    When Apollo caught him, Hermes played, and Apollo was so charmed that he
+    let him keep the herd in exchange for the lyre (Homeric Hymn to Hermes).
+  expression: >-
+    The shell has become the instrument: two curved horns rise from its back
+    with strings drawn between them. Its music charms foes out of their anger.
+  art: >-
+    Medium: it fills about 48×50 px. A broad tortoise in three-quarter view
+    facing left, head lifted and eyes half-closed as it plays. Two curved horn
+    spines rise from the front of its shell like the arms of a lyre, joined by
+    a crossbar, with seven taut strings running back to the shell. Faint pink
+    glints flicker on the strings. Terracotta and limestone shell with a
+    black-figure meander band around the rim, olive skin, marble horns, a
+    fairy-pink accent, black-figure ink outline. The follower's strings shimmer
+    as it walks.
+  shiny: Its shell turns marble white and its horns sun-gold.
+  dex_entry:
+    - Strings run between two horns on its
+    - shell. It is said a god once forgave a
+    - cattle thief in exchange for its song.
+  habitat: >-
+    Evolves from Chelonet when it levels up knowing Sing. Rare in Arkadia's
+    high meadows on Mount Kyllene, where its songs carry at night.
+  learnset:
+    level_up:
+      - [0, Disarming Voice]
+      - [1, Tackle]
+      - [1, Withdraw]
+      - [1, Mud-Slap]
+      - [1, Echoed Voice]
+      - [12, Rollout]
+      - [16, Bulldoze]
+      - [20, Round]
+      - [24, Sing]
+      - [28, Mud Bomb]
+      - [31, Heal Bell]
+      - [34, Alluring Voice]
+      - [37, Iron Defense]
+      - [40, Calm Mind]
+      - [44, Earth Power]
+      - [48, Moonblast]
+      - [51, Earthquake]
+      - [54, Boomburst]
+      - [58, Wish]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Mud Shot, Dig,
+      Bulldoze, Earthquake, Earth Power, Stomping Tantrum, Sandstorm, Sand Tomb, Stealth Rock,
+      Rock Tomb, Rock Slide, Iron Defense, Body Press, Rollout, Defense Curl, Echoed Voice,
+      Hyper Voice, Uproar, Charm, Helping Hand, Heal Bell, Sunny Day, Body Slam, Take Down, Endeavor,
+      Covet, Dazzling Gleam, Misty Terrain, Draining Kiss, Disarming Voice, Alluring Voice, Calm Mind,
+      Light Screen, Safeguard, Psych Up, Encore, Play Rough, Heavy Slam, Gyro Ball, Hyper Beam,
+      Giga Impact]
+    egg: []
+  signature: >-
+    Sound is its weapon: Disarming Voice on evolving, then Alluring Voice and
+    Boomburst, all boosted by its hidden Punk Rock. A slow special wall that
+    cures the team with Heal Bell.
+  new_move: null

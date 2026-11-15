@@ -1,0 +1,19 @@
+// Mount Oros: Aigina's peak (Act II).
+// design/phase2/SCRIPT.md, "Aegina's interior: an optional detour". The map and
+// every event's place come from tools/ichor/maps/aegina_detour.py.
+//
+// The path climbs from the road through the pines and a band of golden grass to
+// the summit, where King Aiakos prayed for rain at Zeus's altar and ended a
+// drought for all of Greece. A jar of Wine waits beside it (Zeus's offering;
+// ICHOR_STUB_OFFERINGS: the ball holds Berry Juice until the engine adds Wine).
+// The sea is on every side but the road's.
+
+mapscripts AeginaMountOros_MapScripts {}
+
+// ICHOR_STUB_RITES: ENGINE_API section 3's EventScript_IchorAltar_Zeus isn't on
+// this branch. When it lands, point the altar's bg event straight at it.
+script AeginaMountOros_EventScript_AltarOfZeus {
+    msgbox(format("An altar of Zeus on the island's peak. A cloud is sitting on the summit.\p"
+                  "From here you can see Emporion's masts, and the mountains behind them.\p"
+                  "And far out to sea, if you squint and lie a little, Kalliste."), MSGBOX_SIGN)
+}

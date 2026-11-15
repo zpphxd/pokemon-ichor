@@ -115,6 +115,7 @@ LabTest_Respawn:
 LabTest_Asterion:
 	setvar VAR_TEMP_F, 1
 	copyvar VAR_0x8004, VAR_0x8008
+	copyvar VAR_0x8005, VAR_0x800A
 	special Ichor_StartAsterion
 	setvar VAR_0x8004, 13
 	setvar VAR_0x8005, 50
@@ -149,3 +150,22 @@ LabTest_Give:
 	additem VAR_0x8004, VAR_0x8005
 	releaseall
 	end
+
+@ --- A snow drift at (13,48) for a charge to stick in --------------------------
+	test_header LabTest_DriftHeader, LabTest_Drift
+LabTest_Drift:
+	setvar VAR_TEMP_F, 1
+	setvar VAR_0x8004, 13
+	setvar VAR_0x8005, 48
+	setvar VAR_0x8006, FLAG_TEMP_2
+	special Ichor_AddDrift
+	end
+
+@ --- A charger's own script, run by a hit (the boar's knockback and battle) ------
+	.global LabTest_BoarHitScript
+LabTest_BoarHitScript:
+	copyvar VAR_TEMP_4, VAR_0x8004
+	copyvar VAR_TEMP_5, VAR_0x8005
+	setvar VAR_0x8005, 0
+	end
+

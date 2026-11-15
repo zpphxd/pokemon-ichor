@@ -421,6 +421,266 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 /* Ichor: world-act1 (ids 40-159) */
 
+=== TRAINER_ICHOR_ALETHEA_DECK ===
+Name: ALETHEA
+Class: Scholar
+Pic: Alethea
+Gender: Female
+Music: Girl
+AI: Check Bad Move
+
+Spalunk
+Level: 12
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_PHORMION ===
+Name: PHORMION
+Class: Sailor
+Pic: Ichor Sailor
+Gender: Male
+Music: Swimmer
+AI: Check Bad Move
+
+Halcyling
+Level: 12
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+- Water Gun
+- Wing Attack
+- Quick Attack
+- Mist
+
+Karkipool
+Level: 13
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+
+=== TRAINER_ICHOR_LYKON ===
+Name: LYKON
+Class: Merchant
+Pic: Merchant
+Gender: Male
+Music: Rich
+AI: Check Bad Move
+
+Onotis
+Level: 12
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Galekit
+Level: 13
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+/* The Temple of Hermes (design/phase2/SCRIPT.md Part 3). The species are Aethos
+ * stand-ins (ICHOR_STUB_AETHOS_DEX), so no Ability: lines. The dex adds Kerykos's:
+ * Lophops Keen Eye, Halcyling Cloud Nine, Harpelle Pickpocket. */
+
+=== TRAINER_ICHOR_PODARGE ===
+Name: PODARGE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Harpeck
+Level: 15
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+Epopoi
+Level: 15
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+=== TRAINER_ICHOR_EUCHIDAS ===
+Name: EUCHIDAS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lophops
+Level: 16
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+Halcyling
+Level: 16
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Water Pulse
+- Wing Attack
+- Aqua Jet
+- Quick Attack
+
+=== TRAINER_ICHOR_PHILONIDES ===
+Name: PHILONIDES
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Harpeck
+Level: 16
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+Lophops
+Level: 17
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+/* Hero difficulty. Spartan needs its own boss team from Balance, as in the slice.
+ * ICHOR_STUB_MUSIC: the Hierophant class plays MUS_ICHOR_BATTLE_RIVAL (src/pokemon.c)
+ * until MUS_ICHOR_BATTLE_HIEROPHANT exists. */
+=== TRAINER_ICHOR_KERYKOS_1 ===
+Name: KERYKOS
+Class: Hierophant
+Pic: Hierophant Kerykos
+Gender: Male
+Music: Male
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Lophops
+Level: 18
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Pluck
+- Echoed Voice
+- Feather Dance
+- Quick Attack
+
+Halcyling @ Oran Berry
+Level: 19
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Water Pulse
+- Pluck
+- Aqua Jet
+- Mist
+
+Harpelle @ Sitrus Berry
+Level: 20
+IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
+- Pluck
+- Thief
+- Taunt
+- Tailwind
+
+/* Emporion's hiring hall (design/phase2/SCRIPT.md, Part 3): the Titans' crew boss,
+   signing on dockhands. Optional; beating him wins his Rocky Helmet. */
+=== TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS ===
+Name: CREW BOSS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 15
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Spalunk
+Level: 16
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+/* Kleon at the Isthmus Gate (SCRIPT.md Part 3, "Kleon, second battle"): his ace is the
+   starter that beats yours. VAR_STARTER_MON 0 (Nebrel) faces _KYNDER, 1 (Kynder) faces
+   _HIPLING, 2 (Hipling) faces _NEBREL. No Ability lines while the Aethos stand-ins are in. */
+
+=== TRAINER_ICHOR_KLEON_2_KYNDER ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+Double Battle: No
+AI: Basic Trainer
+
+Lophops
+Level: 19
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Pluck
+- Echoed Voice
+- Quick Attack
+- Sand Attack
+
+Alekrow
+Level: 20
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack
+
+Dikyon
+Level: 21
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Fire Fang
+- Flame Charge
+- Bite
+- Thunder Fang
+
+=== TRAINER_ICHOR_KLEON_2_HIPLING ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+Double Battle: No
+AI: Basic Trainer
+
+Lophops
+Level: 19
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Pluck
+- Echoed Voice
+- Quick Attack
+- Sand Attack
+
+Alekrow
+Level: 20
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack
+
+Thalamare
+Level: 21
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Aqua Jet
+- Flip Turn
+- Bulldoze
+- Double Kick
+
+=== TRAINER_ICHOR_KLEON_2_NEBREL ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Rival
+Double Battle: No
+AI: Basic Trainer
+
+Lophops
+Level: 19
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Pluck
+- Echoed Voice
+- Quick Attack
+- Sand Attack
+
+Alekrow
+Level: 20
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack
+
+Kladoe
+Level: 21
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Magical Leaf
+- Fairy Wind
+- Quick Attack
+- Synthesis
 
 /* Ichor: world-act2 (ids 160-319) */
 
@@ -442,8 +702,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_PYTHODOROS ===
 Name: PYTHODOROS
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -610,8 +870,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_HAGNON ===
 Name: HAGNON
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -1080,8 +1340,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_PERSES ===
 Name: PERSES
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Male
 Music: Suspicious
 AI: Check Bad Move
@@ -1121,8 +1381,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_PHILOMELOS ===
 Name: PHILOMELOS
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Male
 Music: Suspicious
 AI: Check Bad Move
@@ -1173,8 +1433,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_ONOMARCHOS ===
 Name: ONOMARCHOS
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Male
 Music: Suspicious
 AI: Check Bad Move
@@ -1257,8 +1517,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_LAMPRIAS ===
 Name: LAMPRIAS
-Class: Shepherd
-Pic: Shepherd
+Class: Merchant
+Pic: Merchant
 Gender: Male
 Music: Rich
 AI: Check Bad Move
@@ -1305,8 +1565,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_ECHEMOS ===
 Name: ECHEMOS
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -1357,8 +1617,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_LAODIKE ===
 Name: LAODIKE
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -1590,8 +1850,8 @@ IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 
 === TRAINER_ICHOR_MNESARETE ===
 Name: MNESARETE
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -1718,8 +1978,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_PHILINNA ===
 Name: PHILINNA
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -1786,8 +2046,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_EUPHRON ===
 Name: EUPHRON
-Class: Shepherd
-Pic: Shepherd
+Class: Pilgrim
+Pic: Pilgrim
 Gender: Male
 Music: Hiker
 AI: Check Bad Move

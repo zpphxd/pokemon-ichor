@@ -1,0 +1,30 @@
+{
+  "brazier_flame": {
+    "frames": [
+      "00",
+      "01",
+      "02"
+    ],
+    "frame_order": [
+      "00",
+      "01",
+      "02",
+      "01"
+    ],
+    "frame_offset": 0
+  },
+  "torch_flame": {
+    "frames": [
+      "00",
+      "01",
+      "02"
+    ],
+    "frame_order": [
+      "00",
+      "01",
+      "02",
+      "01"
+    ],
+    "frame_offset": 1
+  }
+}

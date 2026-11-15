@@ -1,0 +1,136 @@
+line: ketos
+species:
+
+- dex: 31
+  concept: Ketos fry
+  name: Ketofry
+  etymology: ketos (Greek, sea monster) + fry
+  category: Gaping Fish
+  types: [Water]
+  abilities: [Swift Swim]
+  hidden_ability: Rattled
+  base_stats: {hp: 25, atk: 15, def: 50, spa: 15, spd: 25, spe: 75}
+  ev_yield: {spe: 1}
+  exp_yield: 40
+  catch_rate: 255
+  gender: {female_pct: 50}
+  egg_groups: [Water 2, Dragon]
+  egg_cycles: 5
+  growth_rate: Slow
+  height_m: 0.4
+  weight_kg: 4.0
+  myth: >-
+    Poseidon sent a ketos against Ethiopia, and Andromeda was chained to a sea
+    rock to feed it until Perseus killed it. Another came for Hesione at Troy,
+    and Herakles killed it (Apollodorus, Library 2.4.3 and 2.5.9).
+  expression: >-
+    A goggle-eyed fry that can only gape and flop. Nothing about it is
+    monstrous yet except the size of its mouth.
+  art: >-
+    Small: it fills about 30×24 px. A dumpy little fish in three-quarter view
+    facing left, caught mid-flop with its tail curled up over its back, eyes
+    bulging and an enormous gaping mouth lined with tiny teeth. A ragged stub
+    of a dorsal fin and two drooping whisker-barbels hint at the frill to
+    come. Aegean blue back fading to a marble belly, terracotta fins,
+    black-figure ink outline. The follower flops along on land and swims on
+    water.
+  shiny: It turns sun-gold with terracotta fins, like a coin in the shallows.
+  dex_entry:
+    - It can only gape and flop. It is said
+    - the sea god keeps it weak on purpose,
+    - so that no one notices what it will
+    - become.
+  habitat: >-
+    Fishing with the Old Rod in any water in Aethos, day or night; extremely
+    common.
+  learnset:
+    level_up:
+      - [1, Splash]
+      - [15, Tackle]
+      - [25, Flail]
+    teachable: [Bounce, Endure, Hidden Power]
+    egg: [Thrash, Dragon Breath, Ice Fang, Psychic Fangs]
+  signature: >-
+    It knows Splash and nothing else until level 15. Raising one to level 20
+    is the test, and it is worth passing.
+  new_move: null
+
+- dex: 32
+  concept: Ketos
+  name: Kynoketos
+  etymology: kyon (Greek, dog) + ketos (Greek, sea monster)
+  category: Sea Monster
+  types: [Water, Dragon]
+  abilities: [Intimidate, Strong Jaw]
+  hidden_ability: Moxie
+  base_stats: {hp: 105, atk: 135, def: 90, spa: 60, spd: 85, spe: 65}
+  ev_yield: {atk: 2}
+  exp_yield: 214
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Water 2, Dragon]
+  egg_cycles: 5
+  growth_rate: Slow
+  height_m: 8.2
+  weight_kg: 310.0
+  myth: >-
+    The ketos that came for Andromeda and Hesione was the sea monster of the
+    vase painters, and it was set in the sky as the constellation Cetus
+    (Apollodorus, Library 2.4.3; Eratosthenes, Catasterismi).
+  expression: >-
+    The ketos as Greek painters drew it: a hound's head with pricked ears and
+    a beard of fins, on the coiling body of a sea serpent with a curled tail.
+  art: >-
+    Very large: it fills the 64×64 box. A long-snouted hound's head facing
+    left with pricked ears, a frilled beard and jaws open on rows of teeth,
+    rising from a serpentine body that coils in two loops behind it. Two
+    broad finned flippers sit just behind the jaw, and the tail ends in a
+    tight spiral fin like the vase paintings. Deep Aegean blues with a
+    marble-pale scaled belly, terracotta fins and frill, a sun-gold eye,
+    black-figure ink outline. The back sprite shows the coils and the spiral
+    tail.
+  shiny: >-
+    Its blues turn terracotta red with ink-black markings, like a monster
+    painted on a red-figure vase.
+  dex_entry:
+    - It has a hound's head and the coils of
+    - a sea serpent. When the sea god is
+    - angry, it is sent ashore, and only heroes
+    - have ever turned it back.
+  habitat: >-
+    Evolves from Ketofry at level 20. Wild ones surface off Aethos's open
+    coasts with the Super Rod (rare), most often off rocky headlands.
+  learnset:
+    level_up:
+      - [0, Bite]
+      - [1, Splash]
+      - [1, Tackle]
+      - [1, Flail]
+      - [1, Leer]
+      - [1, Twister]
+      - [21, Dragon Tail]
+      - [24, Waterfall]
+      - [27, Ice Fang]
+      - [30, Scary Face]
+      - [33, Crunch]
+      - [36, Dragon Rush]
+      - [39, Aqua Tail]
+      - [42, Dragon Dance]
+      - [45, Rain Dance]
+      - [48, Hydro Pump]
+      - [52, Outrage]
+      - [56, Wave Crash]
+      - [60, Hyper Beam]
+    teachable: [Bounce, Endure, Hidden Power, Protect, Rest, Sleep Talk, Substitute, Facade, Attract,
+      Double Team, Return, Frustration, Secret Power, Swagger, Round, Snore, Waterfall, Surf, Dive,
+      Whirlpool, Scald, Liquidation, Hydro Pump, Brine, Rain Dance, Ice Beam, Blizzard, Icy Wind,
+      Avalanche, Ice Fang, Thunder Fang, Fire Fang, Psychic Fangs, Crunch, Dragon Pulse,
+      Dragon Claw, Dragon Tail, Outrage, Breaking Swipe, Scale Shot, Dragon Dance, Draco Meteor,
+      Aqua Tail, Iron Tail, Thunder Wave, Earthquake, Body Slam, Double-Edge, Bulldoze, Taunt,
+      Roar, Scary Face, Payback, Spite, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    It learns Bite on evolving, from the hound's head. Strong Jaw powers Bite,
+    Ice Fang and Crunch, and Wave Crash is the sea it was sent on, breaking
+    over the shore.
+  new_move: null

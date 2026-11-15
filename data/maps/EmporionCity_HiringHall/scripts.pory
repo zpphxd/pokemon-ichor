@@ -1,0 +1,155 @@
+// The hiring hall (design/phase2/SCRIPT.md, Part 2 and Part 3): a warehouse by
+// the shipsheds where a Titan crew boss signs on dockhands. STORY.md §5 puts the
+// Titans' Emporion base here: crates of shovels and helmets, and a sickle
+// chalked small on one of them. Room: tools/ichor/maps/emporion_rooms.py
+// ("hiring_hall"), on limen. The door is the mat at (8..9, 7), warp 0. Its
+// MAP_EMPORION_HARBOR dest_warp_id (0) is a placeholder until the city agent's
+// door ids are known.
+//
+// The crew boss (9,3) is talked to across his pay table: an optional battle
+// (TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS) for his Rocky Helmet, and the
+// Titanborn blessing. FLAG_ICHOR_HIRING_HALL once the helmet is given. After
+// Act I (FLAG_ICHOR_ACT1_COMPLETE) the hall stands empty: he and the dockhand
+// are gone (their objects hide on that flag), ON_LOAD clears the crates away
+// (EmporionCity_HiringHall_EventScript_EmptyHall, written by the room builder at
+// the end of this file), and the ledger is left open.
+
+mapscripts EmporionCity_HiringHall_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+            call(EmporionCity_HiringHall_EventScript_EmptyHall)
+        }
+    }
+}
+
+text EmporionCity_HiringHall_Text_NameCrewBoss { "CREW BOSS" }
+text EmporionCity_HiringHall_Text_NameDockhand { "DOCKHAND" }
+
+script EmporionCity_HiringHall_EventScript_CrewBoss {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_HIRING_HALL)) {
+        setspeaker(EmporionCity_HiringHall_Text_NameCrewBoss)
+        msgbox(format("May your thread never be cut. Go on, say it back."))
+        release
+        end
+    }
+    if (!defeated(TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS)) {
+        setspeaker(EmporionCity_HiringHall_Text_NameCrewBoss)
+        msgbox(format("Strong back? Silver a day. Bring a shovel. Or don't. We've got crates.\p"
+                      "What's the work? Digging. Where? Somewhere. Who for? A big man.\p"
+                      "He shouts, but he pays. Better than the quarry ever did.\p"
+                      "Too small to dig? Then fight. Beat me, and you can have a hat."))
+        closemessage
+        trainerbattle_no_intro(TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS, EmporionCity_HiringHall_Text_CrewBossDefeat)
+    }
+    setspeaker(EmporionCity_HiringHall_Text_NameCrewBoss)
+    msgbox(format("Ha. Fair. Here, then. A Titan hat. Hurts anyone who hits you."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_ROCKY_HELMET)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_HIRING_HALL)
+    setspeaker(EmporionCity_HiringHall_Text_NameCrewBoss)
+    msgbox(format("May your thread never be cut. That's what we say. Say “Nor yours.”"))
+    release
+}
+
+text EmporionCity_HiringHall_Text_CrewBossDefeat {
+    format("Ha. You'd have made a good digger. Shame.")
+}
+
+script EmporionCity_HiringHall_EventScript_Dockhand {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_HiringHall_Text_NameDockhand)
+    msgbox(format("Silver a day, just to dig. Nobody'll say where.\p"
+                  "My wife says don't. My purse says do."))
+    release
+}
+
+script EmporionCity_HiringHall_EventScript_Ledger {
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+        msgbox(format("The hall is empty. The crates are gone. Someone left the ledger open.\p"
+                      "The last page says: “ELEUSA. FORTY LAMPS. ALL PAID.”"), MSGBOX_SIGN)
+    } else {
+        msgbox(format("The ledger: a column of names, and a day's silver beside each."), MSGBOX_SIGN)
+    }
+}
+
+script EmporionCity_HiringHall_EventScript_SickleCrate {
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+        msgbox(format("Bare boards, scuffed where the crates stood."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A crate like the others. Low on one side, someone has chalked a small sickle."),
+               MSGBOX_SIGN)
+    }
+}
+
+script EmporionCity_HiringHall_EventScript_Crates {
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+        msgbox(format("Bare boards, scuffed where the crates stood."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Crates of new shovels, bronze blades up. Enough for an army of diggers."),
+               MSGBOX_SIGN)
+    }
+}
+
+script EmporionCity_HiringHall_EventScript_Helmets {
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+        msgbox(format("Bare boards, scuffed where the crates stood."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A crate heaped with bronze helmets. Every one the same."), MSGBOX_SIGN)
+    }
+}
+
+script EmporionCity_HiringHall_EventScript_Hoist {
+    msgbox(format("A rope-and-pulley hoist, for swinging cargo off the slipway."), MSGBOX_SIGN)
+}
+
+script EmporionCity_HiringHall_EventScript_ShedDoors {
+    msgbox(format("The great doors out to the shipsheds, barred from inside."), MSGBOX_SIGN)
+}
+
+// limen_build: begin generated
+
+// Written by tools/ichor/art/limen_build.py; don't edit by hand.
+
+script EmporionCity_HiringHall_EventScript_EmptyHall {
+    setmetatile(0, 1, 0x21A, TRUE)
+    setmetatile(13, 1, 0x21A, TRUE)
+    setmetatile(15, 1, 0x21A, TRUE)
+    setmetatile(0, 2, 0x208, FALSE)
+    setmetatile(1, 2, 0x206, FALSE)
+    setmetatile(5, 2, 0x206, FALSE)
+    setmetatile(6, 2, 0x206, FALSE)
+    setmetatile(7, 2, 0x206, FALSE)
+    setmetatile(13, 2, 0x206, FALSE)
+    setmetatile(14, 2, 0x206, FALSE)
+    setmetatile(15, 2, 0x206, FALSE)
+    setmetatile(16, 2, 0x206, FALSE)
+    setmetatile(10, 3, 0x205, FALSE)
+    setmetatile(0, 4, 0x207, FALSE)
+    setmetatile(12, 4, 0x205, FALSE)
+    setmetatile(16, 4, 0x205, FALSE)
+    setmetatile(0, 5, 0x207, FALSE)
+    setmetatile(1, 5, 0x205, FALSE)
+    setmetatile(4, 5, 0x205, FALSE)
+    setmetatile(5, 5, 0x205, FALSE)
+    setmetatile(12, 5, 0x205, FALSE)
+    setmetatile(13, 5, 0x205, FALSE)
+    setmetatile(15, 5, 0x205, FALSE)
+    setmetatile(16, 5, 0x205, FALSE)
+    setmetatile(0, 6, 0x207, FALSE)
+    setmetatile(1, 6, 0x205, FALSE)
+    setmetatile(2, 6, 0x205, FALSE)
+    setmetatile(14, 6, 0x205, FALSE)
+    setmetatile(15, 6, 0x205, FALSE)
+    setmetatile(16, 6, 0x205, FALSE)
+    return
+}
+
+// limen_build: end generated

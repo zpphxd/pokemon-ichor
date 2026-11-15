@@ -1,0 +1,147 @@
+line: leopard
+species:
+
+- dex: 61
+  concept: Vine cub
+  name: Botrykit
+  etymology: botrys (Greek, cluster of grapes) + kit
+  category: Vine Cub
+  types: [Poison]
+  abilities: [Poison Touch, Tangled Feet]
+  hidden_ability: Moxie
+  base_stats: {hp: 50, atk: 60, def: 40, spa: 40, spd: 40, spe: 65}
+  ev_yield: {spe: 1}
+  exp_yield: 60
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.5
+  weight_kg: 8.5
+  myth: >-
+    Leopards were said to love wine. Oppian tells how they were once
+    Dionysus's own nurses, and how Libyan hunters caught them by mixing wine
+    into a spring and waiting for them to drink (Oppian, Cynegetica 4).
+  expression: >-
+    A cub that has found the wine press too early. Its spots are grape
+    clusters, and an ivy collar marks it as the god's.
+  art: >-
+    Small: it fills about 34×32 px. A big-pawed leopard cub in three-quarter
+    view facing left, sitting with its rump down and one paw raised to bat at
+    something. Its spots are little clusters of grapes, and a ring of ivy
+    leaves sits around its neck like a collar. A long tail ends in a curl.
+    Sun-gold and limestone coat, wine-violet grape spots as the Poison
+    accent, olive ivy, black-figure ink outline. The follower pounces at the
+    player's heels.
+  shiny: The coat pales to marble and the grape spots turn olive-green, like unripe fruit.
+  dex_entry:
+    - The grape clusters on its coat are
+    - spots, not fruit, but it still smells
+    - of the wine press. Hunters once caught
+    - its kind by leaving wine by a spring.
+  habitat: >-
+    Thyrsa's vineyards at night, common in the grass between the vine rows.
+    More gather near the wine presses after the harvest.
+  learnset:
+    level_up:
+      - [1, Scratch]
+      - [1, Tail Whip]
+      - [4, Poison Sting]
+      - [7, Bite]
+      - [10, Play Nice]
+      - [13, Poison Fang]
+      - [16, Fury Swipes]
+      - [19, Hone Claws]
+      - [22, Slash]
+      - [25, Toxic]
+      - [28, Poison Jab]
+      - [31, Crunch]
+      - [34, Swagger]
+      - [38, Gunk Shot]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Thief, Taunt, Torment,
+      Snarl, Payback, Poison Jab, Sludge Bomb, Venoshock, Gunk Shot, Toxic Spikes, Dig, Shadow Claw,
+      Iron Tail, Aerial Ace, U-turn, Fake Tears, Knock Off, Sucker Punch, Agility, Hone Claws,
+      Work Up, Play Rough, Body Slam, Take Down, Trailblaze, Covet, Retaliate, Pounce, Charm]
+    egg: [Fake Out, Covet, Quick Attack, Assurance, Feint]
+  signature: >-
+    Poison Touch on its claws and Swagger at level 34: it gets its foes drunk
+    and dizzy, then pounces while they reel.
+  new_move: null
+
+- dex: 62
+  concept: Panther of Dionysus
+  name: Oinopard
+  etymology: oinos (Greek, wine) + pardos (Greek, leopard)
+  category: Revel Cat
+  types: [Poison, Dark]
+  abilities: [Poison Touch, Tangled Feet]
+  hidden_ability: Moxie
+  base_stats: {hp: 75, atk: 108, def: 65, spa: 62, spd: 65, spe: 105}
+  ev_yield: {atk: 2}
+  exp_yield: 176
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 1.4
+  weight_kg: 56.0
+  myth: >-
+    Dionysus rides a leopard in the pebble mosaic of the House of Dionysus at
+    Pella, and big cats draw his chariot on his return from the east in vase
+    paintings. Oppian says the leopards were once his nurses (Cynegetica 4).
+  expression: >-
+    The god's own mount: a lean panther that sways as though drunk, and then
+    moves faster than the eye can follow.
+  art: >-
+    Medium: it fills about 56×46 px, long and low. A panther in three-quarter
+    view facing left, its head low and its shoulders rolling mid-stride, its
+    hips swaying the other way. Grape-cluster rosettes cover its coat, a
+    thick ivy garland is slung across its chest, and a vine with one bunch of
+    grapes trails from its tail. Half-lidded, gold eyes. Black-figure ink
+    coat with sun-gold rosettes, olive ivy, wine-violet grapes as the Poison
+    accent, black-figure ink outline. The back sprite shows the garland and
+    the swinging tail.
+  shiny: The coat turns sun-gold with ink-black rosettes, like a vase painting.
+  dex_entry:
+    - It sways as though drunk, then strikes
+    - faster than the eye can follow. It is
+    - said the wine god rode one to the very
+    - ends of the earth and back.
+  habitat: Evolves from Botrykit at level 34.
+  learnset:
+    level_up:
+      - [0, Night Slash]
+      - [1, Scratch]
+      - [1, Tail Whip]
+      - [1, Poison Sting]
+      - [1, Bite]
+      - [10, Play Nice]
+      - [13, Poison Fang]
+      - [16, Fury Swipes]
+      - [19, Hone Claws]
+      - [22, Slash]
+      - [25, Toxic]
+      - [28, Poison Jab]
+      - [31, Crunch]
+      - [36, Swagger]
+      - [40, Sucker Punch]
+      - [44, Gunk Shot]
+      - [48, Throat Chop]
+      - [53, Teeter Dance]
+      - [58, Lash Out]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Thief, Taunt, Torment,
+      Snarl, Payback, Poison Jab, Sludge Bomb, Venoshock, Gunk Shot, Toxic Spikes, Dig, Shadow Claw,
+      Iron Tail, Aerial Ace, U-turn, Fake Tears, Knock Off, Sucker Punch, Agility, Hone Claws,
+      Work Up, Play Rough, Body Slam, Take Down, Trailblaze, Covet, Retaliate, Pounce, Charm,
+      Hyper Beam, Giga Impact, Dark Pulse, Crunch, Throat Chop, Foul Play, Lash Out, Sludge Wave,
+      Scary Face]
+    egg: []
+  signature: >-
+    Tangled Feet and Teeter Dance: it sets everyone reeling, itself included,
+    and grows harder to hit the drunker the fight gets. Moxie lets the revel
+    build with every knockout.
+  new_move: null

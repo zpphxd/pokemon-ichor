@@ -424,6 +424,10 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_TITANBORN] = { _("TITANBORN"), 5 },
     [TRAINER_CLASS_ACOLYTE] = { _("ACOLYTE"), 5 },
     [TRAINER_CLASS_HIEROPHANT] = { _("HIEROPHANT"), 25 },
+    // Ichor: Phase 2 (design/phase2/SPRITES.md). Merchants pay like gentlemen.
+    [TRAINER_CLASS_SCHOLAR] = { _("SCHOLAR"), 8 },
+    [TRAINER_CLASS_MERCHANT] = { _("MERCHANT"), 20 },
+    [TRAINER_CLASS_PILGRIM] = { _("PILGRIM"), 3 },
     // Ichor: Act II batch 1 (design/phase3/SPRITES.md). Act II's road pays a
     // little more than Act I's; actors and vintners own their trade.
     [TRAINER_CLASS_MAENAD] = { _("MAENAD"), 5 },

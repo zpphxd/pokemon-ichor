@@ -35,6 +35,18 @@ Before you sail, Halia reads your hand once more by lamplight, and is frightened
 
 ## The route plan
 
+> **Reconciled with the revised `design/AETHOS_MAP.md`** (director, 2026-11-14). Where this plan and the map differ, the map wins and this note says where the scenes went:
+> - **The voyage** is Routes 2 and 3 (sea). The night ashore stays: Route 3 passes the island, now spelled **Aigina**.
+> - **Aigina** in Act I is the voyage night only: the town, the inn, the mint and Aiakides. Its north gate stays shut. The island's interior (the Aphaia Road, the Temple of Aphaia, Mount Oros) is Act II content, scripted by world-act2 behind the map's gate and an Act II ferry stop; world-act1 builds the three maps. In Act I the ferry runs Akti and Emporion.
+> - **Route 4, the Isthmus,** takes "Route 2, the Sacred Way" below: beat 17's rockslide and procession, the kilns and the tombs, plus the map's ship-track and Sickle orchard. Emporion's Sacred Gate is the **Isthmus Gate**.
+> - **Hecate's Hollow** is unchanged.
+> - **Route 5, the Skironian cliffs,** takes "Route 3, the Pine Slopes": the rock seat over Salamis, Aphrodite's niches and the pines. A roadside rest house stands where Thria was.
+> - **Thria, the Rheitoi and the jesters' bridge** go to world-act2, on Act II's Route 15, the road of the Mysteries. Krokis's saffron thread stays at Eleusa's gate.
+> - **The Halai Shore** (Routes 5–6 below) leaves Act I. Its homes and trainers go to world-act2 (Route 18, Sounion). Aigialeus's Good Rod moves to a fisher on Route 5's cliffs.
+>
+> The sections below keep their original route names so the words stay traceable; `design/phase2/BUILD.md` maps each to its built map.
+
+
 Act I is a corridor (MAP_DESIGN §5), but a long one. The user wants the mainland to feel far: "it should feel like we are traveling farther". So every stretch is two or three routes with a waypoint between them, each route 2–5 screens long (MAP_DESIGN §1), and the crossing is a voyage with a night ashore. The geography agent and the director can reconcile these chains with `design/AETHOS_MAP.md`.
 
 **The chains**

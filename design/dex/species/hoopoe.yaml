@@ -1,0 +1,219 @@
+line: hoopoe
+species:
+
+- dex: 10
+  concept: Hoopoe chick
+  name: Epopoi
+  etymology: epopoi, the hoopoe's cry in Aristophanes's Birds, from epops (Greek, hoopoe)
+  category: Crest Chick
+  types: [Normal, Flying]
+  abilities: [Keen Eye, Stench]
+  hidden_ability: Unnerve
+  base_stats: {hp: 42, atk: 42, def: 40, spa: 44, spd: 36, spe: 48}
+  ev_yield: {spe: 1}
+  exp_yield: 50
+  catch_rate: 255
+  gender: {female_pct: 50}
+  egg_groups: [Flying]
+  egg_cycles: 15
+  growth_rate: Medium Slow
+  height_m: 0.2
+  weight_kg: 1.2
+  myth: >-
+    When Tereus was changed into a bird, Ovid gave him a crest on his head and
+    a long beak like a spear: the hoopoe, epops in Greek (Metamorphoses
+    6.671–674).
+  expression: >-
+    A fluffy chick whose crest is still a tiny tuft. It already calls its own
+    name from every branch, the hoopoe's cry from the play.
+  art: >-
+    Tiny: it fills about 28×30 px. A round chick hopping in three-quarter view
+    facing left, with a long, slightly curved beak too big for it. A small fan
+    crest of three black-tipped feathers sticks straight up, and its stubby
+    wings are barred black and white. Pale terracotta body with a limestone
+    belly, marble and black-figure ink wing bars, black-figure ink outline. The
+    follower pops its tiny crest up whenever it calls.
+  shiny: The body turns sun-gold and the wing bars Aegean blue.
+  dex_entry:
+    - All day it calls out its own name from
+    - the olive branches. Epopoi, popoi! When
+    - startled, its tiny crest pops up.
+  habitat: >-
+    Route 1 and the olive groves around Elaia Village, in tall grass and under
+    the trees by day. Very common.
+  learnset:
+    level_up:
+      - [1, Peck]
+      - [1, Growl]
+      - [4, Gust]
+      - [7, Sand Attack]
+      - [10, Quick Attack]
+      - [13, Echoed Voice]
+      - [16, Pluck]
+      - [19, Taunt]
+      - [22, Air Cutter]
+      - [25, Roost]
+      - [28, Uproar]
+      - [31, Air Slash]
+      - [34, Tailwind]
+      - [37, Hyper Voice]
+      - [40, Hurricane]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Rain Dance,
+      Aerial Ace, Air Cutter, Pluck, Acrobatics, U-turn, Dual Wingbeat, Tailwind, Roost, Defog,
+      Steel Wing, Echoed Voice, Uproar, Hyper Voice, Taunt, Torment, Snatch, Thief, Confide, Swift,
+      Mud-Slap, Work Up, Double-Edge, Take Down, Helping Hand, Agility, Endeavor]
+    egg: [Brave Bird, Feint Attack, Foresight, Mud Sport, Pursuit, Mirror Move]
+  signature: >-
+    Echoed Voice at level 13 starts a line of talkers: it gets louder the longer
+    the chick keeps calling.
+  new_move: null
+
+- dex: 11
+  concept: Hoopoe
+  name: Lophops
+  etymology: lophos (Greek, crest) + epops (Greek, hoopoe)
+  category: Hoopoe
+  types: [Normal, Flying]
+  abilities: [Keen Eye, Stench]
+  hidden_ability: Unnerve
+  base_stats: {hp: 60, atk: 56, def: 54, spa: 64, spd: 52, spe: 66}
+  ev_yield: {spa: 1, spe: 1}
+  exp_yield: 122
+  catch_rate: 120
+  gender: {female_pct: 50}
+  egg_groups: [Flying]
+  egg_cycles: 15
+  growth_rate: Medium Slow
+  height_m: 0.6
+  weight_kg: 6.5
+  myth: >-
+    In Aristophanes's Birds, two Athenians seek out Tereus the hoopoe. He calls
+    the birds of land and sea together with his song (Birds 227–262) and talks
+    them round to the Athenians' plan.
+  expression: >-
+    Its crest has grown into a fan it raises when it speaks. It's the hoopoe of
+    the play: a host and a persuader, the one bird every other bird comes to
+    hear.
+  art: >-
+    Medium: it fills about 42×44 px. A slender hoopoe perched in three-quarter
+    view facing left, its crest fanned into a half-circle of black-tipped
+    feathers. Its long curved beak is open mid-call and its wings are half
+    raised to show bold black-and-white bars. Terracotta-salmon head and breast,
+    marble and black-figure ink wing bars, limestone belly, black-figure ink
+    outline. The back sprite shows the barred wings spread.
+  shiny: A sun-gold breast with Aegean-blue wing bars.
+  dex_entry:
+    - When it fans its crest and calls, every
+    - bird for a mile comes to listen. None of
+    - them remembers what it said, only that
+    - they all agreed.
+  habitat: >-
+    Common in tall grass along the mainland roads out of Emporion City, by day.
+    Evolves from Epopoi at level 14.
+  learnset:
+    level_up:
+      - [0, Feather Dance]
+      - [1, Peck]
+      - [1, Growl]
+      - [1, Gust]
+      - [1, Sand Attack]
+      - [10, Quick Attack]
+      - [13, Echoed Voice]
+      - [17, Pluck]
+      - [21, Taunt]
+      - [25, Air Cutter]
+      - [29, Roost]
+      - [33, Uproar]
+      - [37, Air Slash]
+      - [41, Tailwind]
+      - [45, Hyper Voice]
+      - [50, Hurricane]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Rain Dance,
+      Aerial Ace, Air Cutter, Pluck, Acrobatics, U-turn, Dual Wingbeat, Tailwind, Roost, Defog,
+      Steel Wing, Echoed Voice, Uproar, Hyper Voice, Taunt, Torment, Snatch, Thief, Confide, Swift,
+      Mud-Slap, Work Up, Double-Edge, Take Down, Helping Hand, Agility, Endeavor, Fly, Air Slash,
+      Heat Wave, Psych Up]
+    egg: []
+  signature: >-
+    Feather Dance on evolving is the crest display. Taunt and Uproar make it a
+    heckler as much as a fighter.
+  new_move: null
+
+- dex: 12
+  concept: King of birds
+  name: Basilops
+  etymology: basileus (Greek, king) + epops (Greek, hoopoe)
+  category: Bird King
+  types: [Normal, Flying]
+  abilities: [Keen Eye, Stench]
+  hidden_ability: Unnerve
+  base_stats: {hp: 80, atk: 70, def: 72, spa: 100, spd: 76, spe: 94}
+  ev_yield: {spa: 2, spe: 1}
+  exp_yield: 216
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Flying]
+  egg_cycles: 15
+  growth_rate: Medium Slow
+  height_m: 1.3
+  weight_kg: 24.0
+  myth: >-
+    The birds build Nephelokokkygia, Cloudcuckooland, a walled city in the sky
+    that blocks the smoke of mortals' offerings until the gods give in. The
+    play ends with a new king of the birds holding Zeus's thunderbolt and
+    marrying Basileia, Sovereignty herself (Aristophanes, Birds 1706–1765).
+  expression: >-
+    The self-made king. Its crest has become a crown, and it nests in a hall
+    woven from cloud, where it keeps the offerings it intercepts.
+  art: >-
+    Large: it fills about 52×56 px. A tall, regal hoopoe standing upright in
+    three-quarter view facing left, its wings folded over its shoulders like a
+    cloak. Its crest is a full crown of fanned feathers, each tipped black, and
+    it stands on a small nest of woven cloud. Terracotta-salmon breast, marble
+    and black-figure ink barred wings, a sun-gold crown, a marble cloud nest,
+    black-figure ink outline. The follower drifts a little way on its cloud
+    between steps.
+  shiny: The breast pales to marble and the crown turns Aegean blue.
+  dex_entry:
+    - It weaves its nest out of cloud, high on
+    - the cliffs, and calls itself king. The
+    - smoke of altars drifts up into it, and
+    - it is said the gods go hungry.
+  habitat: >-
+    The cliffs of the Ascent below Olympus, by day; uncommon. Evolves from
+    Lophops at level 32.
+  learnset:
+    level_up:
+      - [0, Nasty Plot]
+      - [1, Feather Dance]
+      - [1, Peck]
+      - [1, Growl]
+      - [1, Gust]
+      - [1, Sand Attack]
+      - [10, Quick Attack]
+      - [13, Echoed Voice]
+      - [17, Pluck]
+      - [21, Taunt]
+      - [25, Air Cutter]
+      - [29, Roost]
+      - [34, Uproar]
+      - [39, Air Slash]
+      - [44, Tailwind]
+      - [49, Hyper Voice]
+      - [54, Snatch]
+      - [60, Hurricane]
+      - [65, Boomburst]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Rain Dance,
+      Aerial Ace, Air Cutter, Pluck, Acrobatics, U-turn, Dual Wingbeat, Tailwind, Roost, Defog,
+      Steel Wing, Echoed Voice, Uproar, Hyper Voice, Taunt, Torment, Snatch, Thief, Confide, Swift,
+      Mud-Slap, Work Up, Double-Edge, Take Down, Helping Hand, Agility, Endeavor, Fly, Air Slash,
+      Heat Wave, Psych Up, Hurricane, Sky Attack, Brave Bird, Nasty Plot, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Nasty Plot on evolving is the scheme of Cloudcuckooland, and Snatch steals
+    what was meant for others. Unnerve stops foes eating their Berries, the way
+    the city starved the gods.
+  new_move: null

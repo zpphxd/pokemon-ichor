@@ -16,6 +16,8 @@ struct IchorHerm
 
 extern const struct IchorHerm gIchorHerms[HERM_MAX];
 
+u16 Ichor_GetHermFlag(u32 herm);
+
 u32 Ichor_CountAnointedHerms(void);
 bool32 Ichor_IsHermFlyTarget(u32 mapsec);                 // region_map.c, GetMapsecType
 u32 Ichor_GetHermHealLocation(u32 mapsec);                // region_map.c, FilterFlyDestination

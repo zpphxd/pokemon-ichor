@@ -1,0 +1,152 @@
+line: cyclops
+species:
+
+- dex: 105
+  concept: Skull fossil revived
+  name: Monophant
+  etymology: monos (Greek, one) + elephant (from Greek elephas)
+  category: One-Eyed
+  types: [Rock, Normal]
+  abilities: [Rock Head, Thick Fat]
+  hidden_ability: Mind's Eye
+  base_stats: {hp: 75, atk: 90, def: 85, spa: 30, spd: 45, spe: 35}
+  ev_yield: {atk: 1}
+  exp_yield: 70
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Monster, Field]
+  egg_cycles: 30
+  growth_rate: Slow
+  height_m: 0.9
+  weight_kg: 82.0
+  myth: >-
+    The Cyclopes were one-eyed giants, and Polyphemus kept his flocks in a
+    cave on their island (Homer, Odyssey 9). Skulls of dwarf elephants found
+    on Mediterranean islands have one great hole in the middle where the trunk
+    was, and they are a likely source of the tale (Othenio Abel, 1914).
+  expression: >-
+    A dwarf elephant brought back from that misread skull. Its face is still
+    mostly bare bone, and the trunk socket in the middle looks like one great
+    eye, while its real eyes are small and set to the sides.
+  art: >-
+    Medium: it fills about 44×40 px. A stocky little elephant in three-quarter
+    view facing left, head lowered, standing on four thick legs. Its face is a
+    bare bony skull-plate with one huge round socket in the middle, a short
+    curled trunk peeking from the lower edge, and two tiny dark eyes on the
+    sides. Stubby tusks and a woolly back. Marble and limestone bone on the
+    face, terracotta-brown hide and wool, black-figure ink outline. The
+    follower turns its head to look at things with one side at a time.
+  shiny: Ash-gray wool and a sun-gold skull-plate.
+  dex_entry:
+    - Revived from a skull with one great hole
+    - in its brow. Sailors who found such
+    - skulls on lonely islands told tales of
+    - one-eyed giants.
+  habitat: >-
+    Revived at level 35 from the Skull Fossil dug at Knossa Isle, in Daedalus's
+    workshop. You choose one of the two fossils; the other turns up in
+    post-game Atlantis. It isn't found in the wild.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Defense Curl]
+      - [1, Growl]
+      - [5, Rollout]
+      - [9, Rock Throw]
+      - [13, Stomp]
+      - [17, Headbutt]
+      - [21, Rock Tomb]
+      - [25, Ancient Power]
+      - [29, Rest]
+      - [33, Body Slam]
+      - [37, Rock Slide]
+      - [41, Double-Edge]
+      - [45, Head Smash]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sandstorm, Sunny Day,
+      Rain Dance, Rock Tomb, Rock Slide, Rock Blast, Smack Down, Stealth Rock, Stone Edge, Rock Polish,
+      Bulldoze, Earthquake, High Horsepower, Stomping Tantrum, Dig, Mud-Slap, Iron Head, Iron Defense,
+      Zen Headbutt, Body Slam, Double-Edge, Take Down, Headbutt, Strength, Rock Smash, Rollout,
+      Defense Curl, Endeavor, Block, Heavy Slam, Body Press, Superpower, Surf]
+    egg: [Curse, Belly Drum, Counter, Magnitude, Slack Off, Rock Climb]
+  signature: >-
+    Rock Head lets it use Head Smash and Double-Edge without recoil. Mind's
+    Eye, its hidden ability, lets its Normal moves hit Ghosts, which suits a
+    beast whose one great eye isn't an eye at all.
+  new_move: null
+
+- dex: 106
+  concept: Cyclops
+  name: Polyphant
+  etymology: Polyphemos (Greek, the Cyclops; much-told-of) + elephant
+  category: Shepherd
+  types: [Rock, Normal]
+  abilities: [Rock Head, Thick Fat]
+  hidden_ability: Mind's Eye
+  base_stats: {hp: 115, atk: 125, def: 110, spa: 40, spd: 70, spe: 45}
+  ev_yield: {atk: 2}
+  exp_yield: 180
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Monster, Field]
+  egg_cycles: 30
+  growth_rate: Slow
+  height_m: 3.4
+  weight_kg: 590.0
+  myth: >-
+    Polyphemus penned his sheep in a cave and closed it with a stone that
+    twenty-two wagons could not shift. Odysseus made him drunk, blinded his
+    one eye, and escaped clinging under the rams (Homer, Odyssey 9).
+  expression: >-
+    The dwarf elephant grown to a giant's size, with the socket in its brow
+    now every bit a giant eye. It wears a shaggy fleece and herds wild flocks,
+    as Polyphemus did.
+  art: >-
+    Large: it fills the box, about 62×58 px. A massive, shaggy elephant-giant
+    in three-quarter view facing left, rearing slightly with one forefoot
+    raised over a boulder. Its brow is a great bony dome with one huge round
+    socket like a single staring eye, a long trunk hanging below, two small
+    eyes on the sides, and curved tusks. A heavy fleece drapes its shoulders
+    like a shepherd's cloak. Marble and limestone bone, terracotta-brown hide,
+    marble-white fleece, black-figure ink outline. The back sprite shows the
+    woolly back; the follower sometimes stops to sniff the player.
+  shiny: Ash-gray wool and a sun-gold skull-plate, like Monophant's.
+  dex_entry:
+    - It herds wild flocks into its cave and
+    - rolls a boulder across the door each
+    - night. They say no one but it has ever
+    - moved that stone.
+  habitat: Evolves from Monophant at level 39. It isn't found in the wild.
+  learnset:
+    level_up:
+      - [0, Block]
+      - [1, Tackle]
+      - [1, Defense Curl]
+      - [1, Growl]
+      - [5, Rollout]
+      - [9, Rock Throw]
+      - [13, Stomp]
+      - [17, Headbutt]
+      - [21, Rock Tomb]
+      - [25, Ancient Power]
+      - [29, Rest]
+      - [33, Body Slam]
+      - [37, Rock Slide]
+      - [42, Milk Drink]
+      - [46, Double-Edge]
+      - [50, Stone Edge]
+      - [54, Head Smash]
+      - [58, Rock Wrecker]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sandstorm, Sunny Day,
+      Rain Dance, Rock Tomb, Rock Slide, Rock Blast, Smack Down, Stealth Rock, Stone Edge, Rock Polish,
+      Bulldoze, Earthquake, High Horsepower, Stomping Tantrum, Dig, Mud-Slap, Iron Head, Iron Defense,
+      Zen Headbutt, Body Slam, Double-Edge, Take Down, Headbutt, Strength, Rock Smash, Rollout,
+      Defense Curl, Endeavor, Block, Heavy Slam, Body Press, Superpower, Surf, Rock Wrecker,
+      Bulk Up, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    It learns Block on evolving: the door-stone of Polyphemus's cave. Milk
+    Drink keeps the shepherd fed between fights, and Rock Head makes Head
+    Smash free.
+  new_move: null

@@ -450,6 +450,24 @@ enum
     // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
+    // Phase 2's first batch: the voyage and Aegina (design/phase2/SPRITES.md)
+    OBJ_EVENT_GFX_ICHOR_PILGRIM,
+    OBJ_EVENT_GFX_ICHOR_PRONOMOS,
+    OBJ_EVENT_GFX_ICHOR_ENDEIS,
+    OBJ_EVENT_GFX_ICHOR_PHEIDON,
+    OBJ_EVENT_GFX_ICHOR_AIAKIDES,
+    OBJ_EVENT_GFX_ICHOR_KLEON_SEASICK,
+    OBJ_EVENT_GFX_ICHOR_KLEON_TABLET,
+    // The Euploia's scene objects (tools/ichor/art/trireme_objects.py)
+    OBJ_EVENT_GFX_ICHOR_NEST_EGGS,
+    OBJ_EVENT_GFX_ICHOR_NEST_HATCHING,
+    OBJ_EVENT_GFX_ICHOR_NEST_EMPTY,
+    OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_BOW,
+    OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_STERN,
+    // Phase 2, batch 2: Hierophant Kerykos (tools/ichor/art/sprites_kerykos.py)
+    OBJ_EVENT_GFX_ICHOR_KERYKOS,
+    // Phase 2, batch 2: Emporion's interiors
+    OBJ_EVENT_GFX_ICHOR_KEDALION,
     // The Theoxenia's gods drawn from life, disguised and revealed
     // (tools/ichor/art/sprites_npc_theoxenia.py)
     OBJ_EVENT_GFX_ICHOR_SAM,

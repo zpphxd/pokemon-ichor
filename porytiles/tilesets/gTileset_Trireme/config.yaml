@@ -1,0 +1,9 @@
+# Per-tileset Porytiles config for gTileset_Trireme, the Euploia's deck and hold.
+# Sources are drawn by tools/ichor/art/trireme_build.py, which compiles the
+# trireme against an empty stand-in primary, checks its metatiles use only its
+# own tiles and palettes 6-12, then points its sea cells at aethos's sea.
+# Pair it with aethos when compiling it directly.
+tileset:
+  primary_pairing:
+    mode: manual
+    partners: [gTileset_Aethos]

@@ -1463,5 +1463,8 @@ void InitTilesetAnim_Thyrsa(void)
 // [Porytiles] Auto-generated include. Do not remove.
 #include "porytiles_generated/tilesets/aethos/generated_anim_code.h"
 
+// [Porytiles] Auto-generated include. Do not remove.
+#include "porytiles_generated/tilesets/cave_dark/generated_anim_code.h"
+
 // Ichor: gTileset_Kopais's tile animation (Route 8), written by tools/ichor/art/kopais_build.py.
 #include "data/tilesets/kopais_anims.h"

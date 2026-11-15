@@ -11,7 +11,8 @@
 --      Then a trip into the Asclepeion and out (QA M2): part 2 must still be waiting.
 --   2. Loads the quay just east of the trireme's end and steps west across the
 --      trigger line: part 2 plays, Kleon's deal is taken, the slice ends.
--- Passes when FLAG_ICHOR_SLICE_COMPLETE and the hide flags are set at the end.
+-- Passes when FLAG_ICHOR_SLICE_COMPLETE and Kleon's hide flag are set at the end, and Alethea
+-- stays on the quay (Phase 2's pointer to Halia).
 
 local L = dofile("tools/ichor/tests/ichor_lib.lua")
 local K = L.K
@@ -68,15 +69,18 @@ local steps = L.seq(
     { shot = "10_kleon_leaving_b.png", wait = 80 },
     { shot = "11_facing_the_sea.png", wait = 80 } },
   L.talk("12_ribbon", 2, 40),
-  { { wait = 60 }, { shot = "13_thank_you.png" }, { press = K.A, wait = 120 },
-    { shot = "14_back_to_the_harbor.png" },
+  -- Phase 2: no farewell card. Alethea turns round with Halia's message (beat 9A's pointer).
+  { { wait = 30 }, { shot = "13_halia_sent_a_gull.png" } },
+  L.talk("13_pointer", 2, 40),
+  { { wait = 60 }, { shot = "14_after_the_end.png" },
     { expect_flag = FLAG_ICHOR_SLICE_COMPLETE, why = "FLAG_ICHOR_SLICE_COMPLETE was not set" },
     { expect_flag = FLAG_ICHOR_HIDE_KLEON_AKTI, why = "Kleon was not hidden after the ending" },
-    { expect_flag = FLAG_ICHOR_HIDE_ALETHEA_AKTI, why = "Alethea was not hidden after the ending" },
+    { expect_flag = FLAG_ICHOR_HIDE_ALETHEA_AKTI, set = false,
+      why = "Alethea should wait on the quay after the ending (Phase 2's pointer to Halia)" },
 
-    -- the harbor after the slice: Nausikles's last line
-    { warp = { AKTI, MAP_AKTI, -1, 7, 10 }, wait = 220 },
-    { hold = K.UP, frames = 4, wait = 30 } },
+    -- the harbor after the slice: Nausikles's last line (from beside him; Alethea is on (7,10))
+    { warp = { AKTI, MAP_AKTI, -1, 6, 9 }, wait = 220 },
+    { hold = K.RIGHT, frames = 4, wait = 30 } },
   L.talk("15_nausikles_after", 2, 40)
 )
 

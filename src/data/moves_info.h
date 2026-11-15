@@ -22116,6 +22116,54 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_MalignantChain,
     },
 
+    // Ichor: Kronolith's sickle. Mighty Cleave's behavior as a Ground move,
+    // reaching through Substitute too, with Mighty Cleave's animation.
+    [MOVE_HARPE] =
+    {
+        .name = COMPOUND_STRING("Harpe"),
+        .description = COMPOUND_STRING(
+            "The adamant sickle cuts\n"
+            "through any protection."),
+        .effect = EFFECT_HIT,
+        .power = 100,
+        .type = TYPE_GROUND,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .ignoresProtect = TRUE,
+        .ignoresSubstitute = TRUE,
+        .slicingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_MightyCleave,
+    },
+
+    // Ichor: the Kouretes' bronze din. Throat Chop's silencing on a special,
+    // spread sound move, with Clanging Scales's animation.
+    [MOVE_SHIELD_CLASH] =
+    {
+        .name = COMPOUND_STRING("Shield Clash"),
+        .description = COMPOUND_STRING(
+            "Clashing bronze drowns out\n"
+            "foes' sound moves 2 turns."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_BOTH,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .ignoresSubstitute = B_UPDATED_MOVE_FLAGS >= GEN_6,
+        .soundMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_THROAT_CHOP,
+            .chance = 100,
+        }),
+        .battleAnimScript = gBattleAnimMove_ClangingScales,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

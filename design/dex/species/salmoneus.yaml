@@ -1,0 +1,82 @@
+line: salmoneus
+species:
+
+- dex: 130
+  concept: Thunder-faker
+  name: Lebetron
+  etymology: lebēs, lebētos (Greek, bronze cauldron) + elektron (Greek, amber, the root of electric)
+  category: Fake Thunder
+  types: [Steel, Electric]
+  abilities: [Lightning Rod]
+  hidden_ability: Galvanize
+  base_stats: {hp: 70, atk: 75, def: 105, spa: 100, spd: 70, spe: 60}
+  ev_yield: {def: 1, spa: 1}
+  exp_yield: 170
+  catch_rate: 75
+  gender: {female_pct: 0}
+  egg_groups: [Mineral]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 1.1
+  weight_kg: 88.0
+  myth: >-
+    King Salmoneus of Elis called himself Zeus. He dragged bronze kettles
+    behind his chariot to fake thunder and threw torches as lightning, until
+    Zeus struck him down with a real bolt (Apollodorus 1.9.7). A story of
+    hubris.
+  expression: >-
+    A strutting creature in a crown of bent bronze that tows its own thunder: a
+    rattling train of kettles on a chain. Real lightning always finds it first.
+  art: >-
+    Medium: it fills about 50×44 px. A small, puffed-up creature with a round
+    bronze kettle for a body, standing proud in three-quarter view facing left,
+    chest out and chin up, under a lopsided crown made from bent kettle
+    handles. It holds a sputtering torch aloft in one stubby hand like a fake
+    lightning bolt, and a chain over its shoulder drags three dented kettles
+    behind it. A small lightning-rod spike rises through the crown with a real
+    spark crackling at the tip. Sun-gold and terracotta bronze, a sun-gold torch
+    flame, white and Aegean-blue sparks, black-figure ink outline. The follower
+    clanks along with the kettles bouncing behind it.
+  shiny: Silver-gray tin kettles under a gold crown.
+  dex_entry:
+    - It drags clanging kettles behind it to
+    - sound like thunder and waves torches as
+    - lightning. Somehow the real lightning
+    - always finds it, and it never learns.
+  habitat: >-
+    The foothills of the Ascent, by day; uncommon. You hear its kettles long
+    before you see it, and in a storm it draws every lightning strike nearby.
+  learnset:
+    level_up:
+      - [1, Thunder Shock]
+      - [1, Metal Sound]
+      - [1, Fake Out]
+      - [5, Charge]
+      - [9, Swagger]
+      - [13, Spark]
+      - [17, Mirror Shot]
+      - [21, Uproar]
+      - [25, Shock Wave]
+      - [29, Taunt]
+      - [33, Flash Cannon]
+      - [37, Discharge]
+      - [41, Hyper Voice]
+      - [45, Thunderbolt]
+      - [49, Electric Terrain]
+      - [53, Boomburst]
+      - [57, Steel Beam]
+      - [61, Thunder]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Hyper Beam, Thunderbolt,
+      Thunder, Thunder Wave, Volt Switch, Charge Beam, Electro Ball, Electroweb, Eerie Impulse,
+      Rising Voltage, Electric Terrain, Wild Charge, Flash Cannon, Steel Beam, Iron Defense, Gyro Ball,
+      Heavy Slam, Iron Head, Metal Sound, Magnet Rise, Rain Dance, Hyper Voice, Uproar, Echoed Voice,
+      Taunt, Flamethrower, Will-O-Wisp, Flame Charge, Rapid Spin, Rollout, Reflect, Light Screen,
+      Explosion, Fling, Endeavor]
+    egg: [Steel Roller, Flatter, Torment, Self-Destruct, Magnet Bomb]
+  signature: >-
+    Lightning Rod pulls every Electric move to it and raises its Special
+    Attack, so the real lightning always finds it and only makes it stronger.
+    With Galvanize, its clattering Uproar and Hyper Voice become fake thunder
+    that hits for real.
+  new_move: null
