@@ -1035,6 +1035,33 @@ extern const u16 gItemIconPalette_Tatsugirinite[];
 extern const u32 gItemIcon_Glimmoranite[];
 extern const u16 gItemIconPalette_Glimmoranite[];
 
+// Ichor: the relics
+extern const u32 gItemIcon_Talaria[];
+extern const u16 gItemIconPalette_Talaria[];
+extern const u32 gItemIcon_BronzeHammer[];
+extern const u16 gItemIconPalette_BronzeHammer[];
+extern const u32 gItemIcon_HecatesTorch[];
+extern const u16 gItemIconPalette_HecatesTorch[];
+extern const u32 gItemIcon_DemetersSickle[];
+extern const u16 gItemIconPalette_DemetersSickle[];
+extern const u32 gItemIcon_GirdleOfHerakles[];
+extern const u16 gItemIconPalette_GirdleOfHerakles[];
+extern const u32 gItemIcon_PoseidonsConch[];
+extern const u16 gItemIconPalette_PoseidonsConch[];
+extern const u32 gItemIcon_DaedalusWings[];
+extern const u16 gItemIconPalette_DaedalusWings[];
+extern const u32 gItemIcon_HornOfAchelous[];
+extern const u16 gItemIconPalette_HornOfAchelous[];
+extern const u16 gItemIconPalette_AriadnesThread[];
+extern const u32 gItemIcon_Labrys[];
+extern const u16 gItemIconPalette_Labrys[];
+extern const u32 gItemIcon_HelmOfDarkness[];
+extern const u16 gItemIconPalette_HelmOfDarkness[];
+extern const u32 gItemIcon_NereidPearl[];
+extern const u16 gItemIconPalette_NereidPearl[];
+extern const u32 gItemIcon_AeolusBag[];
+extern const u16 gItemIconPalette_AeolusBag[];
+
 // Gems
 extern const u32 gItemIcon_TypeGem[];
 extern const u16 gItemIconPalette_NormalGem[];

@@ -79,17 +79,14 @@ script EmporionCity_Hephaisteion_EventScript_Kedalion {
     msgbox(format("HA! Listen to her! Like she never went out!\p"
                   "My master would be pleased. He never says so. He just hammers louder.\p"
                   "Here. This hung over the forge for luck. Now it's yours. For luck."))
-    // ICHOR_STUB_RELICS: giveitem(ITEM_BRONZE_HAMMER) once the engine's relics are
-    // on main (design/ENGINE_API.md §2; the engine sets the relic flag itself).
-    // Until then, the flag and the receive message.
+    // The relic (design/ENGINE_API.md §2): the engine sets FLAG_ICHOR_GOT_BRONZE_HAMMER
+    // when the item enters the bag.
     setspeaker(SP_NAME_NONE)
-    playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
-    message(format("{PLAYER} received the Bronze Hammer!"))
-    waitmessage
-    waitfanfare
-    setflag(FLAG_ICHOR_GOT_BRONZE_HAMMER)
-    // ICHOR_STUB_RITES: Hephaestus Favor +5 (special(Ichor_AddFavor) with
-    // VAR_0x8004 = ICHOR_GOD_HEPHAESTUS, VAR_0x8005 = 5) once the rites land.
+    giveitem(ITEM_BRONZE_HAMMER)
+    // Hephaestus Favor +5 (ENGINE_API §3).
+    setvar(VAR_0x8004, ICHOR_GOD_HEPHAESTUS)
+    setvar(VAR_0x8005, 5)
+    special(Ichor_AddFavor)
     setspeaker(EmporionCity_Hephaisteion_Text_NameKedalion)
     msgbox(format("Rocks. Rubble. Broken marble. Hit it where it's tired. It comes apart.\p"
                   "I once carried a blind giant on my shoulders all the way to the sunrise.\p"

@@ -18,8 +18,8 @@ local L = dofile("tools/ichor/tests/ichor_lib.lua")
 local K = L.K
 local OUT = os.getenv("ENDING_OUT") or "build/akti_ending/"
 
-local AKTI, MAP_AKTI = 0, 59
-local INDOOR, MAP_ASCLEPEION = 75, 4
+local AKTI, MAP_AKTI = L.map("MAP_AKTI_TOWN")
+local INDOOR, MAP_ASCLEPEION = L.map("MAP_AKTI_TOWN_ASCLEPEION")
 local FLAG_BADGE01_GET = L.system_flag(0x7)
 local FLAG_ICHOR_ARRIVED_AKTI = 0x2E
 local FLAG_ICHOR_HEARTH_TRIAL_DONE = 0x30

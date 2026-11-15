@@ -19,6 +19,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_behaviors_frlg.h"
 #include "wild_encounter.h"
+#include "ichor_frozen.h"
 
 struct ConnectionFlags
 {
@@ -1004,6 +1005,7 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
             LoadPalette((const u16 *)tileset->palettes, destOffset, size);
             ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
+        Ichor_TintBgPalettes(destOffset, size >> 1, !skipFaded); // Ichor: the Frozen Hour's gray
     }
 }
 

@@ -1,3 +1,4 @@
+// Ichor: the tests use Route 1, since Hoenn's Oldale Town is cut (hoenn-cut batch 2).
 #include "global.h"
 #include "event_data.h"
 #include "mass_outbreak.h"
@@ -32,12 +33,12 @@ TEST("startoutbreak can set a dynamic outbreak")
     ZeroMassOutbreak();
 
     RUN_OVERWORLD_SCRIPT(
-        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_OLDALE_TOWN;
+        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_KALLISTE_ROUTE1;
     );
 
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonSpecies, SPECIES_BULBASAUR);
-    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapNum, MAP_NUM(MAP_OLDALE_TOWN));
-    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapGroup, MAP_GROUP(MAP_OLDALE_TOWN));
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapNum, MAP_NUM(MAP_KALLISTE_ROUTE1));
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapGroup, MAP_GROUP(MAP_KALLISTE_ROUTE1));
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonLevel, 2);
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonMoves[0], MOVE_SCRATCH);
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonMoves[1], MOVE_CELEBRATE);
@@ -59,14 +60,14 @@ TEST("startoutbreak can set a dynamic outbreak (vars)")
     VarSet(VAR_0x8005, MOVE_PSYCHIC);
     VarSet(VAR_0x8006, 3);
     VarSet(VAR_0x8007, 4);
-    VarSet(VAR_0x8008, MAP_OLDALE_TOWN);
+    VarSet(VAR_0x8008, MAP_KALLISTE_ROUTE1);
     RUN_OVERWORLD_SCRIPT(
         startoutbreak species=VAR_0x8000, level=VAR_0x8001, move1=VAR_0x8002, move2=VAR_0x8003, move3=VAR_0x8004, move4=VAR_0x8005, probability=VAR_0x8006, daysLeft=VAR_0x8007, map=VAR_0x8008;
     );
 
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonSpecies, SPECIES_BULBASAUR);
-    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapNum, MAP_NUM(MAP_OLDALE_TOWN));
-    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapGroup, MAP_GROUP(MAP_OLDALE_TOWN));
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapNum, MAP_NUM(MAP_KALLISTE_ROUTE1));
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapGroup, MAP_GROUP(MAP_KALLISTE_ROUTE1));
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonLevel, 2);
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonMoves[0], MOVE_SCRATCH);
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonMoves[1], MOVE_CELEBRATE);
@@ -81,13 +82,13 @@ TEST("editoutbreak doesn't touch unset arguments")
     ZeroMassOutbreak();
 
     RUN_OVERWORLD_SCRIPT(
-        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_OLDALE_TOWN;
+        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_KALLISTE_ROUTE1;
         editoutbreak;
     );
 
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonSpecies, SPECIES_BULBASAUR);
-    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapNum, MAP_NUM(MAP_OLDALE_TOWN));
-    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapGroup, MAP_GROUP(MAP_OLDALE_TOWN));
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapNum, MAP_NUM(MAP_KALLISTE_ROUTE1));
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapGroup, MAP_GROUP(MAP_KALLISTE_ROUTE1));
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonLevel, 2);
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonMoves[0], MOVE_SCRATCH);
     EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonMoves[1], MOVE_CELEBRATE);
@@ -108,7 +109,7 @@ TEST("checkhasactiveoutbreak sets the outbreak status to VAR_RESULT")
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 
     RUN_OVERWORLD_SCRIPT(
-        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_OLDALE_TOWN;
+        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_KALLISTE_ROUTE1;
         checkhasactiveoutbreak;
     );
     EXPECT_EQ(gSpecialVar_Result, TRUE);
@@ -119,7 +120,7 @@ TEST("clearactiveoutbreak disables active outbreak")
     ZeroMassOutbreak();
 
     RUN_OVERWORLD_SCRIPT(
-        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_OLDALE_TOWN;
+        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_KALLISTE_ROUTE1;
     );
 
     EXPECT_EQ(IsMassOutbreakActive(), TRUE);
@@ -136,7 +137,7 @@ TEST("getmassoutbreakdata")
     ZeroMassOutbreak();
 
     RUN_OVERWORLD_SCRIPT(
-        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_OLDALE_TOWN;
+        startoutbreak species=SPECIES_BULBASAUR, level=2, move1=MOVE_SCRATCH, move2=MOVE_CELEBRATE, move3=MOVE_FLAMETHROWER, move4=MOVE_PSYCHIC, probability=3, daysLeft=4, map=MAP_KALLISTE_ROUTE1;
         getmassoutbreakdata VAR_0x8000, OUTBREAK_DATA_SPECIES;
         getmassoutbreakdata VAR_0x8001, OUTBREAK_DATA_MOVE1;
         getmassoutbreakdata VAR_0x8002, OUTBREAK_DATA_MOVE2;
@@ -156,6 +157,6 @@ TEST("getmassoutbreakdata")
     EXPECT_EQ(gSpecialVar_0x8005, 2);
     EXPECT_EQ(gSpecialVar_0x8006, 3);
     EXPECT_EQ(gSpecialVar_0x8007, 4);
-    EXPECT_EQ(gSpecialVar_0x8008, MAP_OLDALE_TOWN);
+    EXPECT_EQ(gSpecialVar_0x8008, MAP_KALLISTE_ROUTE1);
 }
 

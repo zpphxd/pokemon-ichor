@@ -1,4 +1,6 @@
 #include "global.h"
+#include "ichor_rites.h"
+#include "ichor_relics.h"
 #include "battle_setup.h"
 #include "bike.h"
 #include "coord_event_weather.h"
@@ -597,9 +599,10 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         SetMsgSignPostAndVarFacing(direction);
         return Common_EventScript_ShowPokemonCenterSign;
     }
-    if (IsFieldMoveUnlocked(FIELD_MOVE_ROCK_CLIMB) && MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive())
+    if (MetatileBehavior_IsRockClimbable(metatileBehavior) == TRUE && !IsRockClimbActive()) // Ichor: ivy walls; the script checks the thyrsus
         return EventScript_UseRockClimb;
 
+#if !ICHOR_CUT_SECRET_BASES // Ichor: secret bases are cut
     elevation = position->elevation;
     if (elevation == MapGridGetElevationAt(position->x, position->y))
     {
@@ -632,6 +635,9 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         CheckInteractedWithFriendsPosterDecor();
         return NULL;
     }
+#else
+    (void)elevation;
+#endif
 
     return NULL;
 }
@@ -640,7 +646,7 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
 {
     if (MetatileBehavior_IsFastWater(metatileBehavior) == TRUE && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return EventScript_CurrentTooFast;
-    if (IsFieldMoveUnlocked(FIELD_MOVE_SURF) && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE
+    if (Ichor_CanUseRelicHere(ITEM_POSEIDONS_CONCH) && IsPlayerFacingSurfableFishableWater() == TRUE // Ichor: Poseidon's Conch
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF)
      )
         return EventScript_UseSurf;
@@ -649,7 +655,7 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_WATERFALL)
      )
     {
-        if (IsFieldMoveUnlocked(FIELD_MOVE_WATERFALL) && IsPlayerSurfingNorth() == TRUE)
+        if (Ichor_CanUseRelicHere(ITEM_HORN_OF_ACHELOUS) && IsPlayerSurfingNorth() == TRUE) // Ichor: the Horn of Achelous
             return EventScript_UseWaterfall;
         else
             return EventScript_CannotUseWaterfall;
@@ -662,7 +668,7 @@ static bool32 TrySetupDiveDownScript(void)
     if (!CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_DIVE))
         return FALSE;
 
-    if (IsFieldMoveUnlocked(FIELD_MOVE_DIVE) && TrySetDiveWarp() == 2)
+    if (Ichor_CanUseRelicHere(ITEM_NEREID_PEARL) && TrySetDiveWarp() == 2) // Ichor: the Nereid Pearl
     {
         ScriptContext_SetupScript(EventScript_UseDive);
         return TRUE;
@@ -675,7 +681,7 @@ static bool32 TrySetupDiveEmergeScript(void)
     if (!CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_DIVE))
         return FALSE;
 
-    if (IsFieldMoveUnlocked(FIELD_MOVE_DIVE) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
+    if (Ichor_CanUseRelicHere(ITEM_NEREID_PEARL) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1) // Ichor
     {
         ScriptContext_SetupScript(EventScript_UseDiveUnderwater);
         return TRUE;
@@ -694,6 +700,8 @@ bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileBehavior
     if (TryStartStepCountScript(metatileBehavior) == TRUE)
         return TRUE;
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior) && UpdateRepelCounter() == TRUE)
+        return TRUE;
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && Ichor_OnStep()) // Ichor: a rite's blessing counts down
         return TRUE;
     if (OnStep_DexNavSearch())
         return TRUE;
@@ -820,8 +828,10 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         ScriptContext_SetupScript(SSTidalCorridor_EventScript_ReachedStepCount);
         return TRUE;
     }
+#if !ICHOR_CUT_POKENAV // Ichor: Match Call is cut
     if (TryStartMatchCall())
         return TRUE;
+#endif
     return FALSE;
 }
 

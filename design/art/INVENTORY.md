@@ -24,14 +24,14 @@ The checklist that makes the total conversion true: every player-facing asset gr
 
 **226 rows** across 11 areas. Counts by status (a row is an asset group or system, so these are not file counts):
 
-| Status | Rows | At `c82f1634f7` |
-|---|---|---|
-| Greek | 86 | 20 |
-| In progress (batch) | 1 | 15 |
-| Hoenn | 45 | 95 |
-| Cut | 46 | 45 |
-| Keep | 31 | 31 |
-| New | 17 | 18 |
+| Status | Rows |
+|---|---|
+| Greek | 87 |
+| In progress (batch) | 1 |
+| Hoenn | 42 |
+| Cut | 47 |
+| Keep | 32 |
+| New | 17 |
 
 | Area | Greek | In progress | Hoenn | Cut | Keep | New | Rows |
 |---|---|---|---|---|---|---|---|
@@ -43,13 +43,13 @@ The checklist that makes the total conversion true: every player-facing asset gr
 | 6. Items | 3 | 0 | 4 | 5 | 2 | 3 | 17 |
 | 7. Text | 11 | 0 | 7 | 1 | 1 | 0 | 20 |
 | 8. Audio | 7 | 0 | 6 | 4 | 3 | 0 | 20 |
-| 9. Data | 2 | 0 | 5 | 3 | 2 | 0 | 12 |
-| 10. Cuts | 0 | 0 | 1 | 18 | 1 | 0 | 20 |
+| 9. Data | 3 | 0 | 2 | 5 | 2 | 0 | 12 |
+| 10. Cuts | 0 | 0 | 1 | 17 | 2 | 0 | 20 |
 | 11. Overlooked | 8 | 0 | 3 | 1 | 9 | 0 | 21 |
 
 Two rows are new since the first count: the `agros` and `akti` tilesets, and the follower's balls.
 
-Greek now covers everything the slice shows except the few items below: all 15 slice maps and their tilesets, the cast, townsfolk and classes, the boot sequence, title and speech, every everyday screen (bag, party, summary, Agora, popups, codex, Pithos, naming, options, trainer card, region map, klepsydra, starter table, evolution, berry tag, the Augur's Eye), the battle interface, backgrounds and transitions, the field effects, doors and ground jars, the slice's item icons, 36 songs, and the system text. The 46 Hoenn rows are almost all Hoenn's own maps, people, music and text, which go as Aethos's maps replace them in Phases 2-5.
+Greek now covers everything the slice shows except the few items below: all 15 slice maps and their tilesets, the cast, townsfolk and classes, the boot sequence, title and speech, every everyday screen (bag, party, summary, Agora, popups, codex, Pithos, naming, options, trainer card, region map, klepsydra, starter table, evolution, berry tag, the Augur's Eye), the battle interface, backgrounds and transitions, the field effects, doors and ground jars, the slice's item icons, 36 songs, and the system text. The 42 Hoenn rows are almost all Hoenn's own maps, people, music and text, which go as Aethos's maps replace them in Phases 2-5.
 
 **ROM now:** 25,648,568 bytes of the 33,554,432-byte limit (76.44 %, from `make`). That leaves 7,905,864 bytes (7.54 MiB) free.
 
@@ -211,7 +211,7 @@ The Aethos regional dex of about 150 species is designed separately in `design/d
 | Laurel case | not in the ROM | New | 1 | ART_PLAN §5. Could share the trainer card's laurel art. |
 | Save prompt and save info panel | `src/start_menu.c`, `src/strings.c:957` (`gText_SavingBadges`), `data/text/save.inc` | Greek | 1 | PLAYER, LAURELS and TIME on the pottery frame, with the place in the dialogue red. |
 | Reset-clock and save-error screens | `graphics/reset_rtc_screen/`, `src/reset_rtc_screen.c`, `src/main_menu.c:259-262` | Keep | 6 | Generic text on the pottery frames. The save-failed screen stands on the Akademia art of the starter table; its small clock icon (`graphics/misc/clock_small.png`) is Emerald's. See §11. |
-| Easy Chat and Mail | `graphics/easy_chat/` (9), `graphics/mail/` (12 mail designs), `src/easy_chat.c` | Hoenn | 6 | Proposed cut, §10. |
+| Easy Chat and Mail | `graphics/easy_chat/` (9), `graphics/mail/` (12 mail designs), `src/easy_chat.c` | Hoenn | Keep | Kept for now ("where safe"): mail items and the Frontier still use them. 45 KiB. |
 | Berry tag and berry check | `graphics/bag/berry_tag*`, `check_berry*`, `src/berry_tag_screen.c` | Greek | 1 | A clay label tied with twine (`ui_berry_tag.py`, `UI_remnants.md`). The berry pictures (`graphics/berries/`) are still Emerald's fruit, with the berry decision (§1). |
 | Pokémon Jump, Berry Crush, Dodrio picking, slot machine and roulette screens | `graphics/pokemon_jump/`, `berry_crush/`, `dodrio_berry_picking/`, `slot_machine/`, `roulette/` | Cut | 6 | Per ART_PLAN, as minigames (§10). |
 | Contest, Berry Blender, Pokéblock, PokéNav, Union Room, Mystery Gift, Wonder Card and secret-base screens | `graphics/contest/`, `berry_blender/`, `pokeblock/`, `pokenav/`, `union_room_chat/`, `wonder_card/`, `wonder_news/`, `link/`, `wireless_status_screen/` | Cut | 6 | Per ART_PLAN (§10). |
@@ -297,15 +297,15 @@ Songs by use. Counts are from `include/constants/songs.h` and sizes are from the
 
 | Item | Where | Status | Phase | Notes |
 |---|---|---|---|---|
-| Hoenn maps | `data/maps/` (954 folders), `data/layouts/` (800 layouts) | Hoenn | 2–5 | The 518 Hoenn maps are joined by 15 Ichor ones (and 417 FRLG ones, which are not built). Replaced by Aethos maps, not repainted (ART_PLAN). About 1.07 MB of scripts, layouts and events (not counting the cut systems' maps, which are in §10), plus about 428 KiB of tilesets. |
+| Hoenn maps | `data/maps/`, `data/layouts/` | Cut | 2–5 | Removed by hoenn-cut batch 2 with their layouts, scripts, encounter tables, heal locations and the tilesets only they used. What's left is the Ichor maps and, until batch 3, the Battle Frontier and Trainer Hill maps. `include/constants/maps_removed_stub.h` keeps the removed names compiling for upstream code. |
 | Ichor maps | `data/maps/{ElaiaVillage*,KallisteRoute1*,AktiTown*}`, `data/ichor_maps.inc` | Greek | 1 | 15 maps: Elaia and its four interiors, Route 1, Kronion Hill, Akti and its six interiors, all on Greek tilesets, with Poryscript scripts. |
-| FRLG maps, tilesets and scripts | 417 `*_Frlg` map folders (9.6 MB on disk), 62 `*_frlg` secondary tilesets and 2 primaries (5.3 MB), 9 FRLG script files, 4 `*_frlg.c` files, about 210 graphics files in `*_frlg` dirs | Cut | 6 | Not built into the Emerald ROM at all (`.if IS_FRLG`), so 0 bytes of ROM. They clutter the repo and every search. Delete after merging, with a note in the commit. |
+| FRLG maps, tilesets and scripts | `*_Frlg` maps, `*_frlg` tilesets and scripts | Cut | 6 | Removed by hoenn-cut batch 2. They were never in the Emerald ROM. A few FRLG tileset animation frames stay, because `src/tileset_anims.c` names them. On upstream merges, resolve modify/delete conflicts on these paths with `git rm`. |
 | Hoenn trainers | `src/data/trainers.party`, `include/constants/opponents.h`, `src/data/battle_partners.party` (2) | Cut | 2–5 | Removed by hoenn-cut batch 1: 847 Hoenn trainers gone, Ichor's 14 renumbered 1–14, and the seven Frontier Brains kept at 15–21 for the Frontier engine. `gTrainers` fell from 132 KiB to 3.4 KiB and now grows only with real trainers. Id ranges per session are in `tools/ichor/claim_ranges.md`. `PARTNER_STEVEN` is still there. FRLG's 624 trainers in `trainers_frlg.party` are not built. |
-| Trainer-slide tables | `src/trainer_slide.c` | Keep | 6 | 355 KiB of mostly empty pointers: `sTrainerSlides` (264 KiB, three difficulties × (`MAX_TRAINERS_COUNT` + partners) × 26 slides) and `sFrontierTrainerSlides` (91 KiB). They are sized by the id limits, not by how many trainers exist, so the trainer cut barely shrank them. Keeping only the Normal difficulty's slides would free about 237 KiB, an engine edit for the director. |
-| Hoenn wild encounter tables | `src/data/wild_encounters.json` (384 Hoenn map headers), `src/wild_encounter.c` | Hoenn | 2–5 | About 20 KiB. Kalliste's tables (Route 1, Kronion Hill, Akti) are in the JSON by morning and night; the codex's AREA view reads them by day too (QA m8). |
-| Heal locations | `src/data/heal_locations.json` (44) | Hoenn | 2–5 | 44: Elaia and Akti are in (`HEAL_LOCATION_ELAIA_VILLAGE`, `HEAL_LOCATION_AKTI_TOWN`). Hoenn's 42 stay with Hoenn's maps. |
-| Fly destinations and region sections | `src/data/region_map/` (241 sections) | Greek | 1 | The Aethos map's sections, with Elaia and Akti as fly targets (`UI_world.md`). Hoenn's sections stay until their maps go. |
-| Flags and vars | `include/constants/flags.h`, `vars.h` | Keep | — | Hoenn story flags can be recycled by renaming (`tools/ichor/claim.py`). 62 flags and 3 vars are claimed so far. |
+| Trainer-slide tables | `src/trainer_slide.c` | Keep | 6 | 404 KiB of mostly empty pointers: `sTrainerSlides` (313 KiB, three difficulties × (`MAX_TRAINERS_COUNT` 1,024 + partners) × 26 slides) and `sFrontierTrainerSlides` (91 KiB). They are sized by the id limits, not by how many trainers exist. Keeping only the Normal difficulty's slides would free about 270 KiB, an engine edit for the director. |
+| Hoenn wild encounter tables | `src/data/wild_encounters.json` | Cut | 2–5 | Removed by hoenn-cut batch 2: 388 Hoenn and FRLG headers. |
+| Heal locations | `src/data/heal_locations.json` | Greek | 1 | Elaia and Akti, plus the Battle Frontier's until batch 3. |
+| Fly destinations and region sections | `src/data/region_map/` (241 sections) | Greek | 1 | The Aethos map's sections, with Elaia and Akti as fly targets (`UI_world.md`). Hoenn's sections stay until their maps go. Hoenn's sections 0–85 are now free `MAPSEC_OIKOUMENE_*` slots (hoenn-cut batch 2; see `tools/ichor/claim_ranges.md`). |
+| Flags and vars | `include/constants/flags.h`, `vars.h` | Keep | — | Hoenn-cut batch 2 freed 700 flags and 95 vars. The per-session ranges are in `tools/ichor/claim_ranges.md`. |
 | Mart stock, tutors, in-game trades, apprentices, lottery | `data/scripts/`, map scripts | Hoenn | 2–5 | Rebuilt per Aethos location. |
 | Move tutors and Frontier rewards | `data/text/move_tutors.inc`, `data/scripts/move_tutors.inc` | Hoenn | 3 | Needs Aethos tutors and, in Phase 5, Olympiad prizes. |
 | Hoenn contest and Frontier data tables | `src/data/contest_*.h`, `src/data/battle_frontier/`, `data/contest_ai_scripts.s` | Cut | 5 | Counted in §10. The Frontier engine is kept; its tables are replaced by Olympiad data. |
@@ -316,16 +316,16 @@ The first block is ART_PLAN's cut list, plus FRLG data, the PokéNav, Mirage Isl
 
 | System | Where | ROM (KiB) | Status | Phase | Notes |
 |---|---|---|---|---|---|
-| Contests | `src/contest*.c`, `contest_ai.c`, `picture_frame`, `graphics/contest/`, `graphics/picture_frame/`, `data/contest_ai_scripts.s`, `include/config/contest.h`, `ContestHall*` maps, `gTileset_Contest`, 8 contest songs | 201.3 | Cut | 6 | Includes the Lilycove Lady, the contest SFX and the contest-category icons in `graphics/types/`. Contest scarves and the summary screen's contest-moves page need to go with it. |
-| Berry Blender | `src/berry_blender.c`, `graphics/berry_blender/`, `data/text/blend_master.inc`, `SE_BERRY_BLENDER` | 38.5 | Cut | 6 | |
-| Pokéblocks | `src/pokeblock*.c`, `use_pokeblock.c`, `graphics/pokeblock/` | 31.3 | Cut | 6 | Tied to the Blender, contests and the Pokénav's conditions. |
-| Secret bases and decorations | `src/secret_base.c`, `decoration*.c`, `graphics/decorations/`, `data/tilesets/*/secret_base*`, `SecretBase_*` maps, `data/text/secret_base_trainers.inc` | 123.4 | Cut | 6 | Includes the player's decorating pose, the doll and cushion object sprites and `record_mixing` hooks. |
-| Mirage Island and Mirage Tower | `src/mirage_tower.c`, `MirageTower_*` maps, `gTileset_MirageTower`, `Route111_NoMirageTower`, `Route130_MirageIsland` layouts, `graphics/misc/mirage_tower*` | 43.6 | Cut | 6 | |
-| PokéNav and Match Call | `src/pokenav*.c` (14 files), `src/match_call.c`, `graphics/pokenav/` (64), `data/text/match_call.inc`, `SE_POKENAV_*` | 137.3 | Cut | 6 | Region map and ribbons are also reachable through the Pokénav. Keep the region map code if the Fly map needs it. |
-| e-Reader and Mystery Gift | `src/mystery_gift*.c`, `mevent*.c`, `ereader*.c`, `data/multiboot_ereader.s`, `graphics/wonder_card/`, `wonder_news/`, `MysteryEventsHouse` | 61.0 | Cut | 6 | Includes the 12.5 KiB e-Reader multiboot program and the Mystery Events House tileset. |
-| Minigames: slots, roulette, Pokémon Jump, Berry Crush, Dodrio picking, lottery corner, Game Corners, Trick House | `src/slot_machine.c`, `roulette.c`, `pokemon_jump.c`, `berry_crush.c`, `dodrio_berry_picking.c`, `lottery_corner.c`, `minigame_countdown.c`, matching `graphics/` and maps | 235.3 | Cut | 6 | Trick House has its own tileset, maps and music. |
-| Link-only features: Union Room, link trade and battle, Cable Club, record mixing, Colosseum multiboot, rfu library, Berry-fix multiboot | `src/union_room*.c`, `link*.c`, `librfu*.c`, `AgbRfu_LinkManager.c`, `cable_club.c`, `record_mixing.c`, `data/multiboot_pokemon_colosseum.s` (164 KiB), `data/multiboot_berry_glitch_fix.s` (15 KiB), `BattleColosseum_*`, `UnionRoom`, `TradeCenter`, `CableClub` maps and tilesets | 419.9 | Cut | 6 | Includes `src/trade.c` (69 KiB) and the trade art. In-game NPC trades share that scene, so the saving is about 70 KiB smaller if they stay. |
-| Hoenn Battle Frontier: maps, art, trainers, text | `BattleFrontier_*` maps (Tower, Dome, Palace, Pike, Pyramid, Arena, Factory, lounge), `BattlePyramidSquare*`, three Battle Tents, `TrainerHill_*`, twelve Frontier and Trainer Hill tilesets, `graphics/battle_frontier/`, `frontier_pass/`, `door_anims/battle_*`, `sFrontierTrainerSlides`, `data/text/battle_tent.inc` | 540.6 | Cut | 5 | Per ART_PLAN: the Hoenn facilities go. The Olympiad (PITCH §6.3) is built fresh at Olympia, with Achilles, Atalanta, Odysseus and Hippolyta as Brains. |
+| Contests | `src/contest*.c`, `contest_ai.c`, `picture_frame`, `graphics/contest/`, `graphics/picture_frame/`, `data/contest_ai_scripts.s`, `include/config/contest.h`, `ContestHall*` maps, `gTileset_Contest`, 8 contest songs | 201.3 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_CONTESTS` in `include/config/ichor.h`). About 21 KiB stays: the summary screen still reads the contest move data and the category icons; guarding that waits for the menus restyle. |
+| Berry Blender | `src/berry_blender.c`, `graphics/berry_blender/`, `data/text/blend_master.inc`, `SE_BERRY_BLENDER` | 38.5 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_CONTESTS`). |
+| Pokéblocks | `src/pokeblock*.c`, `use_pokeblock.c`, `graphics/pokeblock/` | 31.3 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_CONTESTS`). The Safari Zone's feeder now places nothing. |
+| Secret bases and decorations | `src/secret_base.c`, `decoration*.c`, `graphics/decorations/`, `data/tilesets/*/secret_base*`, `SecretBase_*` maps, `data/text/secret_base_trainers.inc` | 123.4 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_SECRET_BASES`). The bedroom PC's DECORATION option closes the PC. About 11 KiB stays, because the Frontier exchange corner names decorations. |
+| Mirage Island and Mirage Tower | `src/mirage_tower.c`, `MirageTower_*` maps, `gTileset_MirageTower`, `Route111_NoMirageTower`, `Route130_MirageIsland` layouts, `graphics/misc/mirage_tower*` | 43.6 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_MIRAGE_TOWER`). |
+| PokéNav and Match Call | `src/pokenav*.c` (14 files), `src/match_call.c`, `graphics/pokenav/` (64), `data/text/match_call.inc`, `SE_POKENAV_*` | 137.3 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_POKENAV`). |
+| e-Reader and Mystery Gift | `src/mystery_gift*.c`, `mevent*.c`, `ereader*.c`, `data/multiboot_ereader.s`, `graphics/wonder_card/`, `wonder_news/`, `MysteryEventsHouse` | 61.0 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_MYSTERY_GIFT`, `ICHOR_CUT_MULTIBOOT`). The main menu's Mystery Gift entries go back to the menu. |
+| Minigames: slots, roulette, Pokémon Jump, Berry Crush, Dodrio picking, lottery corner, Game Corners, Trick House | `src/slot_machine.c`, `roulette.c`, `pokemon_jump.c`, `berry_crush.c`, `dodrio_berry_picking.c`, `lottery_corner.c`, `minigame_countdown.c`, matching `graphics/` and maps | 235.3 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_MINIGAMES`). |
+| Link-only features: Union Room, link trade and battle, Cable Club, record mixing, Colosseum multiboot, rfu library, Berry-fix multiboot | `src/union_room*.c`, `link*.c`, `librfu*.c`, `AgbRfu_LinkManager.c`, `cable_club.c`, `record_mixing.c`, `data/multiboot_pokemon_colosseum.s` (164 KiB), `data/multiboot_berry_glitch_fix.s` (15 KiB), `BattleColosseum_*`, `UnionRoom`, `TradeCenter`, `CableClub` maps and tilesets | 419.9 | Cut | 6 | Union Room, Cable Club, record mixing and the Colosseum and Berry-fix multiboot programs are cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_LINK`, `ICHOR_CUT_MULTIBOOT`). The RFU library and link-battle core stay, because main.c, battles and the overworld call into them. `trade.c` stays for in-game trades. |
+| Hoenn Battle Frontier: maps, art, trainers, text | `BattleFrontier_*` maps (Tower, Dome, Palace, Pike, Pyramid, Arena, Factory, lounge), `BattlePyramidSquare*`, three Battle Tents, `TrainerHill_*`, twelve Frontier and Trainer Hill tilesets, `graphics/battle_frontier/`, `frontier_pass/`, `door_anims/battle_*`, `sFrontierTrainerSlides`, `data/text/battle_tent.inc` | 540.6 | Cut | 5 | Maps cut by hoenn-cut batch 3. Kept: the Battle Pyramid floor, top and squares (the Labyrinth's engine builds floors from them), the Pike rooms and the Trainer Hill floors, whose layouts the engine loads. The art the engine no longer reaches drops out of the ROM by itself (the build now uses -ffunction-sections). |
 | FRLG data in the ROM | 75 FRLG songs (239 KiB), two FRLG Japanese fonts (64 KiB), 62 FRLG trainer pics (43 KiB), Kanto and Sevii region-map art, `hall_of_fame_frlg.c`, `voicegroup_frlg_*` | 365.4 | Cut | 6 | Per ART_PLAN, but FRLG maps are not in the ROM, so this is the whole ROM saving. The repo cleanup is in §9. |
 | **Total, ART_PLAN's list (Frontier engine kept)** | | **2,197.7** | | | **2.15 MiB (2.25 MB)** |
 | Hoenn Battle Frontier engine and data tables | `src/battle_tower.c` (`gBattleFrontierMons` 32 KiB, `gBattleFrontierTrainers` 16 KiB), `battle_dome.c`, `battle_pike.c`, `battle_pyramid.c`, `battle_arena.c`, `battle_factory*.c`, `battle_palace.c`, `battle_tent.c`, `trainer_hill.c`, `trainer_tower*.c`, `frontier_util.c`, Frontier songs | 341.2 | Keep | 5 | Keep: the Olympiad needs the facilities' rules. Replace the Hoenn trainer and Pokémon tables. Removing the engine too adds 341 KiB. |
@@ -335,9 +335,9 @@ Additional Hoenn-only systems. They are **not** on ART_PLAN's list, so they are 
 
 | System | Where | ROM (KiB) | Status | Phase | Notes |
 |---|---|---|---|---|---|
-| Mauville Old Man: bard, storyteller, hipster, Giddy, trader | `src/mauville_old_man.c`, `bard_music.c` (162 KiB of phoneme data), `sound/direct_sound_samples/phonemes/`, `ph_*.mid` | 283.8 | Cut | 6 | The biggest candidate. Easy Chat words and phonemes. |
-| TV shows, Battle TV and Pokémon News | `src/tv.c`, `battle_tv.c`, `data/text/tv.inc` (2,193 string lines), `pokemon_news.inc` | 76.6 | Cut | 6 | The Aethos world has no TV. The oikos tileset already turns the TV into a loom. |
-| Easy Chat and Mail | `src/easy_chat.c`, `data/text/`, `graphics/easy_chat/`, `graphics/mail/`, 12 mail items | 59.1 | Cut | 6 | Mail has no setting. Easy Chat words also feed trainer greetings. |
+| Mauville Old Man: bard, storyteller, hipster, Giddy, trader | `src/mauville_old_man.c`, `bard_music.c` (162 KiB of phoneme data), `sound/direct_sound_samples/phonemes/`, `ph_*.mid` | 283.8 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_MAUVILLE_MAN`). Not approved in the brief, but its maps were gone and the bard is an Easy Chat feature. Set the switch to 0 to restore it. |
+| TV shows, Battle TV and Pokémon News | `src/tv.c`, `battle_tv.c`, `data/text/tv.inc` (2,193 string lines), `pokemon_news.inc` | 76.6 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_TV`). |
+| Easy Chat and Mail | `src/easy_chat.c`, `data/text/`, `graphics/easy_chat/`, `graphics/mail/`, 12 mail items | 59.1 | Keep | 6 | Kept for now ("where safe"): mail items and the Frontier still use them. 45 KiB. |
 | Safari Zone | `src/safari_zone.c`, `battle_controller_safari.c`, `healthbox_safari.png`, Safari maps | 40.9 | Cut | 6 | |
 | Cable car and SS Tidal and ferries | `src/cable_car.c`, `ss_anne.c`, `seagallop.c`, graphics | 44.9 | Cut | 6 | Triremes replace ferries. |
 | Apprentice, Lilycove Lady, wall-clock set screen, mass outbreaks | `src/apprentice.c`, `lilycove_lady.c`, `wallclock.c`, `mass_outbreak.c` | 68.2 | Cut | 6 | The Lilycove Lady is counted under Contests, not here. The wall clock stays: `wallclock.c` now runs the klepsydra (§5). |

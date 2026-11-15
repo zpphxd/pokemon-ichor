@@ -102,8 +102,10 @@ end
 -- in the first u16 of substruct 0 and the checksum is the sum of the 16-bit
 -- halves (include/pokemon.h: BoxPokemon is 80 bytes, secure data at 0x20).
 function M.give_test_mon(species, level)
-  local party = emu:read32(M.sym("gPlayerPartyPtr"))
-  local count = emu:read32(M.sym("gPlayerPartyCountPtr"))
+  -- gParties[B_TRAINER_PLAYER] and gPartiesCount[B_TRAINER_PLAYER] (index 0). Not the
+  -- gPlayerPartyPtr consts: no ROM code reads them, so -fdata-sections drops them.
+  local party = M.sym("gParties")
+  local count = M.sym("gPartiesCount")
   for o = 0, 99 do emu:write8(party + o, 0) end
   for k, b in ipairs({ 0xCE, 0xBF, 0xCD, 0xCE, 0xFF }) do emu:write8(party + 7 + k, b) end -- "TEST"
   emu:write8(party + 18, 2)                    -- language: English
@@ -121,7 +123,7 @@ function M.give_test_mon(species, level)
 end
 
 function M.party_hp()
-  return emu:read16(emu:read32(M.sym("gPlayerPartyPtr")) + 86)
+  return emu:read16(M.sym("gParties") + 86)
 end
 
 -- lastHealLocation as {group, num, x, y}
@@ -203,6 +205,18 @@ function M.seq(...)
     for _, s in ipairs(list) do table.insert(out, s) end
   end
   return out
+end
+
+-- A map's group and number, read from include/constants/map_groups.h (generated
+-- by mapjson), so tests never hardcode them: e.g. M.map("MAP_AKTI_TOWN").
+function M.map(const)
+  local f = assert(io.open("include/constants/map_groups.h", "r"))
+  for line in f:lines() do
+    local num, group = line:match("^%s+" .. const .. "%s+= %((%d+) | %((%d+) << 8%)%),")
+    if num then f:close(); return tonumber(group), tonumber(num) end
+  end
+  f:close()
+  error("no " .. const .. " in include/constants/map_groups.h")
 end
 
 return M

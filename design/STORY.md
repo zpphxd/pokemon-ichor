@@ -716,6 +716,7 @@ Approved in `design/LABYRINTH.md` §8; this file only links them to the spine.
 - **Daedalus** is a father who outlived his son.
   - He built Kronos his collar and his hour, because a grieving father told him no father would ever bury a child again. Then he repented and gave you the Labrys.
   - [NEW] He also built Elpis's music box, which is why its tune is the workshop's tune and the Frozen Hour's.
+  - [NEW] Phaedon asked him for a ball nothing could escape, for the Lord of Time. He made it and never handed it over; he gives it to you with the Labrys (LABYRINTH Scene D). It is the main path's one Master Ball, and the Stair is where it was meant to be used.
 - **Ariadne** is Asterion's half-sister and the Mistress's priestess.
   - She let the Titans in because their master swore he could mend anything. She gives you the thread so someone will witness what they're doing. It is the game's theme, held in your hand.
   - [POSTGAME] She is the Brain of the Endless Labyrinth.
@@ -1286,7 +1287,7 @@ As approved in LABYRINTH.md §6 and §8, Scene J, with three small additions (§
 7. **The music box's source.** In Elpis's room the box sits on her shelf, a small object with a 2-frame tick animation: the only animated object in the frozen world.
 8. **A god, optional.** On one Astyra rooftop, a shadowless figure moves at the edge of the screen and is gone. Players who learned Hermes's tells will know.
 
-**Music.** The music box only. When each Fate wakes, her voice from the Fates' theme joins the music box for the rest of that sanctuary.
+**Music.** The music box only. When each Fate wakes, her voice from the Fates' theme joins the music box for the rest of that sanctuary. Once Kleon breaks free, Kleos joins it on a single aulos. In the sepia memory at the Pool of Mnemosyne the box stops, and one held aulos note plays instead (MUSIC.md §2, §5).
 
 ### 6.13 The Stair of Hours
 
@@ -1376,7 +1377,7 @@ As approved in LABYRINTH.md §6 and §8, Scene J, with three small additions (§
 **Music.**
 - **The Archon's theme** is Mixolydian, stately, on kithara and drum. It stops when he says "Gods help you."
 - Untying the knot has no music: rope and wind.
-- **The credits** play the main Ichor theme and, under it in the second half, Elaia's home theme with its countermelody from the spring scene.
+- **The credits** play the main Ichor theme, then, in the second half, Elaia's home theme with its countermelody from the spring scene. The two follow each other: the main theme ends in Lydian and Elaia's is Dorian, so they never layer (MUSIC.md).
 
 ---
 

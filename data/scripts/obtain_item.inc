@@ -229,7 +229,9 @@ EventScript_PutHiddenItemInPocket::
 	copyvar VAR_0x8004, VAR_0x8008
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
+#if !ICHOR_CUT_TV // Ichor: TV is cut
 	special TryPutTreasureInvestigatorsOnAir
+#endif
 	special SetHiddenItemFlag
 	callnative Script_UpdateDowseState
 	releaseall

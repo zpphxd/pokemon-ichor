@@ -168,12 +168,16 @@ MauvilleCity_PokemonCenter_1F_EventScript_AlreadyTraded::
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToReceive::
+#if !ICHOR_CUT_SECRET_BASES // Ichor: decorations are cut
 	special TraderMenuGetDecoration
+#endif
 	goto_if_eq VAR_0x8004, 0, MauvilleCity_PokemonCenter_1F_EventScript_CancelPickDecor
 	goto_if_eq VAR_0x8004, 0xFFFF, MauvilleCity_PokemonCenter_1F_EventScript_InvalidDecor
 	msgbox MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_PokemonCenter_1F_EventScript_PickDifferentDecor
+#if !ICHOR_CUT_SECRET_BASES // Ichor: decorations are cut
 	special DoesPlayerHaveNoDecorations
+#endif
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_PokemonCenter_1F_EventScript_DontHaveAnyDecor
 	goto MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToGive
 	end
@@ -202,14 +206,20 @@ MauvilleCity_PokemonCenter_1F_EventScript_DontHaveAnyDecor::
 
 MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToGive::
 	msgbox MauvilleCity_PokemonCenter_1F_Text_PickTheDecorToTrade, MSGBOX_DEFAULT
+#if !ICHOR_CUT_SECRET_BASES // Ichor: decorations are cut
 	special TraderShowDecorationMenu
+#endif
 	goto_if_eq VAR_0x8006, 0, MauvilleCity_PokemonCenter_1F_EventScript_CancelGiveDecor
 	goto_if_eq VAR_0x8006, 0xFFFF, MauvilleCity_PokemonCenter_1F_EventScript_DecorInUse
+#if !ICHOR_CUT_SECRET_BASES // Ichor: decorations are cut
 	special IsDecorationCategoryFull
+#endif
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_PokemonCenter_1F_EventScript_NoRoomForDecor
 	msgbox MauvilleCity_PokemonCenter_1F_Text_SoWellTradeTheseDecor, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToGive
+#if !ICHOR_CUT_SECRET_BASES // Ichor: decorations are cut
 	special TraderDoDecorationTrade
+#endif
 	msgbox MauvilleCity_PokemonCenter_1F_Text_SendDecorToYourPC, MSGBOX_DEFAULT
 	release
 	end
@@ -269,10 +279,6 @@ MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales:
 	.string "are even remotely legendary?$"
 
 @ Unused
-MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale:
-	.string "Incidentally… Would you care to hear\n"
-	.string "another legendary tale?$"
-
 MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend:
 	.string "Hmm…\n"
 	.string "I'm not satisfied…\p"
@@ -785,7 +791,6 @@ MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory::
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a TRAINER with\n"
 	.string "baby-smooth skin!$"
-
 
 MauvilleCity_PokemonCenter_1F_EventScript_Storyteller::
 	lock

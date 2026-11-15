@@ -36,16 +36,18 @@ PATTERN="^($(echo $SYMS | tr ' ' '|'))$"
        n && /\.space/ { print "  " n " = 0,"; n = "" }' "$ASM"
   # The first definition wins: a static name used in two files would be ambiguous.
   arm-none-eabi-nm "$ELF" | awk -v pat="$PATTERN" '$3 ~ pat && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
-  # Statics whose name several files use: take the one inside that file's .text
-  # (its range from the linker map).
+  # Statics whose name several files use: take the one inside that file's code
+  # (its ranges from the linker map: one .text, or one .text.<fn> per function
+  # now that the build uses -ffunction-sections).
   for want in HandleInputChooseAction@battle_controller_player WaitForMovementFinish@scrcmd; do
     name=${want%@*}; obj=${want#*@}
-    set -- $(awk -v o="src/$obj.o" '$1 == ".text" && $4 == o { print $2, $3; exit }' "${ELF%.elf}.map")
-    lo=$(( $1 )); hi=$(( $1 + $2 ))
+    ranges=$(awk -v o="src/$obj.o" '$NF == o && $(NF-2) ~ /^0x08/ { print $(NF-2), $(NF-1) }' "${ELF%.elf}.map")
     arm-none-eabi-nm "$ELF" | awk -v n="$name" '$3 == n { print $1 }' | while read -r a; do
       v=$(( 16#$a ))
-      [ $v -ge $lo ] && [ $v -lt $hi ] && echo "  $name = 0x$a,"
-    done
+      echo "$ranges" | while read -r lo sz; do
+        [ -n "$lo" ] && [ $v -ge $(( lo )) ] && [ $v -lt $(( lo + sz )) ] && echo "  $name = 0x$a,"
+      done
+    done | head -1
   done
   # The slice's and Phase 2's maps' event scripts, by name: the tests find people, signs and
   # triggers on the live map by the script they run, never by coordinates.
