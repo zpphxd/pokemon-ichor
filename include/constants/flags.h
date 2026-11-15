@@ -1267,14 +1267,14 @@
 #define FLAG_UNUSED_0x4BD                                           0x4BD // Unused Flag
 #define FLAG_UNUSED_0x4BE                                           0x4BE // Unused Flag
 #define FLAG_UNUSED_0x4BF                                           0x4BF // Unused Flag
-#define FLAG_UNUSED_0x4C0                                           0x4C0 // Unused Flag
-#define FLAG_UNUSED_0x4C1                                           0x4C1 // Unused Flag
-#define FLAG_UNUSED_0x4C2                                           0x4C2 // Unused Flag
-#define FLAG_UNUSED_0x4C3                                           0x4C3 // Unused Flag
-#define FLAG_UNUSED_0x4C4                                           0x4C4 // Unused Flag
-#define FLAG_UNUSED_0x4C5                                           0x4C5 // Unused Flag
-#define FLAG_UNUSED_0x4C6                                           0x4C6 // Unused Flag
-#define FLAG_UNUSED_0x4C7                                           0x4C7 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_HELLESPONT_PEARL                          0x4C0 // Ichor: hidden item: Hellespont Pearl at the Abdera landing's end
+#define FLAG_ICHOR_HIDDEN_HELLESPONT_RARE_CANDY                     0x4C1 // Ichor: hidden item: Hellespont Rare Candy behind Achilles's mound
+#define FLAG_ICHOR_HIDDEN_HELLESPONT_NUGGET                         0x4C2 // Ichor: hidden item: Hellespont Nugget on Helle's rock
+#define FLAG_ICHOR_HIDDEN_SESTOS_HEART_SCALE                        0x4C3 // Ichor: hidden item: Sestos Heart Scale at the mole's end
+#define FLAG_ICHOR_HIDDEN_SESTOS_ULTRA_BALL                         0x4C4 // Ichor: hidden item: Sestos Ultra Ball in the headland's trees
+#define FLAG_ICHOR_HIDDEN_ILION_LEAF_STONE                          0x4C5 // Ichor: hidden item: Ilion Leaf Stone under the Skaian oak
+#define FLAG_ICHOR_HIDDEN_ILION_REVIVAL_HERB                        0x4C6 // Ichor: hidden item: Ilion Revival Herb at the citadel's east corner
+#define FLAG_ICHOR_HIDDEN_ILION_STAR_PIECE                          0x4C7 // Ichor: hidden item: Ilion Star Piece in the horse yard
 #define FLAG_UNUSED_0x4C8                                           0x4C8 // Unused Flag
 #define FLAG_UNUSED_0x4C9                                           0x4C9 // Unused Flag
 #define FLAG_UNUSED_0x4CA                                           0x4CA // Unused Flag
@@ -1769,6 +1769,14 @@
 #define FLAG_ICHOR_TRADED_UNFEZANT              (FLAG_ICHOR_GENERAL_START + 0x435) // Ichor: Oikoumene: Ixos traded his Unfezant for a Pidgeot (Salmydessos)
 #define FLAG_ICHOR_GOT_HEAT_ROCK                (FLAG_ICHOR_GENERAL_START + 0x436) // Ichor: Oikoumene: Phrixos's sons gave the Heat Rock (Aia)
 #define FLAG_ICHOR_TRADED_PERSIAN               (FLAG_ICHOR_GENERAL_START + 0x437) // Ichor: Oikoumene: Byssa traded her Persian for a Liepard (Aia)
+#define FLAG_ICHOR_ITEM_HELLESPONT_PEARL_STRING (FLAG_ICHOR_GENERAL_START + 0x3E4) // Ichor: Hellespont item ball: Pearl String on the sandbar
+#define FLAG_ICHOR_ITEM_HELLESPONT_DIVE_BALL    (FLAG_ICHOR_GENERAL_START + 0x3E5) // Ichor: Hellespont item ball: Dive Ball at the strip's west end
+#define FLAG_ICHOR_ITEM_HELLESPONT_MAX_REVIVE   (FLAG_ICHOR_GENERAL_START + 0x3E6) // Ichor: Hellespont item ball: Max Revive in Rhoiteion's grove
+#define FLAG_ICHOR_ITEM_SESTOS_STAR_PIECE       (FLAG_ICHOR_GENERAL_START + 0x3E7) // Ichor: Sestos item ball: Star Piece in the acropolis grove
+#define FLAG_ICHOR_ITEM_ILION_HARD_STONE        (FLAG_ICHOR_GENERAL_START + 0x3E8) // Ichor: Ilion item ball: Hard Stone in the mason's garden
+#define FLAG_ICHOR_ITEM_ILION_PP_UP             (FLAG_ICHOR_GENERAL_START + 0x3E9) // Ichor: Ilion item ball: PP Up in the citadel's east corner
+#define FLAG_ICHOR_ITEM_ILION_ELIXIR            (FLAG_ICHOR_GENERAL_START + 0x3EA) // Ichor: Ilion item ball: Elixir in the citadel's west corner, behind the palace
+#define FLAG_ICHOR_HELLESPONT_GOT_RARE_BONE     (FLAG_ICHOR_GENERAL_START + 0x3EB) // Ichor: the Hellespont: the old man counting slipway stones gave his Rare Bone
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)

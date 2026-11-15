@@ -1,1 +1,193 @@
-mapscripts Sestos_MapScripts {}
+// Sestos: the Troad's port on the Hellespont (design/OIKOUMENE.md §4.1, §2;
+// design/oikoumene/MAPS_troad.md). Layout and events come from
+// tools/ichor/maps/sestos.py.
+//
+// Alethea's quay scene (OIKOUMENE §5): the first time anyone lands at an
+// Oikoumene port. She waits at the root of the mole, (7, 22); the triggers at
+// (8, 23) and (8, 24) are the only way off the mole into the town, where the
+// Euploia's gangplank lands. VAR_TEMP_1 == 0 arms them until
+// FLAG_ICHOR_OIKOUMENE_ARRIVED is set (here, or at another first port), which
+// also hides her.
+
+mapscripts Sestos_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_OIKOUMENE_ARRIVED)) {
+            setvar(VAR_TEMP_1, 1)
+        } else {
+            setvar(VAR_TEMP_1, 0)
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Speakers
+// ---------------------------------------------------------------------------
+
+text Sestos_Text_NameAlethea { "ALETHEA" }
+text Sestos_Text_NameDemo { "DEMO" }
+text Sestos_Text_NamePhanias { "PHANIAS" }
+
+// ---------------------------------------------------------------------------
+// Alethea on the quay
+// ---------------------------------------------------------------------------
+
+script Sestos_EventScript_AletheaY23 {
+    lockall
+    applymovement(LOCALID_SESTOS_ALETHEA, Sestos_Movement_AletheaDown1)
+    waitmovement(0)
+    goto(Sestos_EventScript_AletheaScene)
+}
+
+script Sestos_EventScript_AletheaY24 {
+    lockall
+    applymovement(LOCALID_SESTOS_ALETHEA, Sestos_Movement_AletheaDown2)
+    waitmovement(0)
+    goto(Sestos_EventScript_AletheaScene)
+}
+
+script Sestos_EventScript_AletheaScene {
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    call(Oik_EventScript_AletheaQuay)
+    call(Sestos_EventScript_AletheaFarewell)
+    applymovement(LOCALID_SESTOS_ALETHEA, Sestos_Movement_AletheaLeave)
+    waitmovement(0)
+    removeobject(LOCALID_SESTOS_ALETHEA)
+    setvar(VAR_TEMP_1, 1)
+    releaseall
+}
+
+script Sestos_EventScript_AletheaFarewell {
+    setspeaker(Sestos_Text_NameAlethea)
+    msgbox(format("Start with that tower on the point. Everyone here has a story about it.\p"
+                  "Find out which one's true. I'll be on the ship, writing."))
+    closemessage
+}
+
+// If the player talks to her first, she plays the scene where she stands.
+script Sestos_EventScript_Alethea {
+    lock
+    faceplayer
+    call(Oik_EventScript_AletheaQuay)
+    call(Sestos_EventScript_AletheaFarewell)
+    setvar(VAR_TEMP_1, 1)
+    release
+}
+
+movement Sestos_Movement_AletheaDown1 { walk_down face_right }
+movement Sestos_Movement_AletheaDown2 { walk_down * 2 face_right }
+movement Sestos_Movement_AletheaLeave { walk_up * 2 }
+
+// ---------------------------------------------------------------------------
+// The ship (ICHOR_STUB_SHIP: Nausikles stands at the gangplank's foot until
+// world-postgame's EventScript_IchorBoardShip replaces him)
+// ---------------------------------------------------------------------------
+
+script Sestos_EventScript_Nausikles {
+    goto(Oik_EventScript_SailHome)
+}
+
+// ---------------------------------------------------------------------------
+// People
+// ---------------------------------------------------------------------------
+
+script Sestos_EventScript_QuayFisher {
+    lock
+    faceplayer
+    msgbox(format("The net-loft's just up the quay. The old fisher there\n"
+                  "gives a proper rod to new faces off the boats.\p"
+                  "Proper for out here, anyway. The fish are older than your gods."))
+    release
+}
+
+script Sestos_EventScript_Sailor {
+    lock
+    faceplayer
+    msgbox(format("Fastest water in the world, the strait.\p"
+                  "You ride it east like a horse. Going west, you crawl along the shore."))
+    release
+}
+
+script Sestos_EventScript_NetMender {
+    lock
+    faceplayer
+    setspeaker(Sestos_Text_NameDemo)
+    msgbox(format("Hero's lamp has burned every night since I was a girl.\p"
+                  "She says a swimmer's coming. I've never seen him.\p"
+                  "Haven't stopped looking, either."))
+    release
+}
+
+script Sestos_EventScript_Kid {
+    lock
+    faceplayer
+    msgbox(format("Leander swam the whole strait every night!\pI can swim to the boat and back. Twice."))
+    release
+}
+
+script Sestos_EventScript_TowerWatcher {
+    lock
+    faceplayer
+    msgbox(format("Hero's up in her tower. She keeps the lamp.\p"
+                  "The wind on those stairs blows out anything you carry up.\p"
+                  "She manages. She's had practice."))
+    release
+}
+
+script Sestos_EventScript_HermElder {
+    lock
+    faceplayer
+    setspeaker(Sestos_Text_NamePhanias)
+    msgbox(format("Fifty years I've sat by this herm. The ferry's never once been on time.\p"
+                  "The boat is. The ferryman isn't."))
+    release
+}
+
+script Sestos_EventScript_GateGuard {
+    lock
+    faceplayer
+    msgbox(format("Nothing to guard up there but olives.\p"
+                  "Best view of Troy, though. Over the water, on a clear day."))
+    release
+}
+
+script Sestos_EventScript_Gardener {
+    lock
+    faceplayer
+    msgbox(format("Over the strait they grow the best wheat in the world.\pWe grow beans. Somebody has to."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Signs
+// ---------------------------------------------------------------------------
+
+script Sestos_EventScript_TownSign {
+    msgbox(format("SESTOS\nThe ferry town of the Hellespont."), MSGBOX_SIGN)
+}
+
+script Sestos_EventScript_QuaySign {
+    msgbox(format("THE QUAY\nThe Asclepeion and the Agora are just up the steps."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_HERM: a great waystone until the engine gives the Oikoumene its
+// herm ids; then it anoints and joins the Wings' map like Aethos's.
+script Sestos_EventScript_Herm {
+    msgbox(format("A great herm, garlanded with sea pinks.\pHermes watches the crossroads, and the boats."), MSGBOX_SIGN)
+}
+
+script Sestos_EventScript_TowerPlaque {
+    msgbox(format("HERO'S TOWER\nThe lamp is lit at dusk. Don't put it out."), MSGBOX_SIGN)
+}
+
+script Sestos_EventScript_RoadSign {
+    msgbox(format("South: the Hebros shore and the Abdera landing."), MSGBOX_SIGN)
+}
+
+script Sestos_EventScript_PointSign {
+    msgbox(format("HERO'S POINT\nThe shore path runs down to the strait."), MSGBOX_SIGN)
+}
+
+script Sestos_EventScript_AcropolisWall {
+    msgbox(format("The old wall of Sestos.\pIts gate has stood open as long as anyone can remember."), MSGBOX_SIGN)
+}

@@ -25,7 +25,11 @@
 {% endif %}
 ## endfor
 
+// Ichor: the Augur's Eye's hidden slots. The JSON's hidden_mons field defines this
+// once a map fills them (troad-towns added the field); this is the fallback.
+#ifndef NUM_HIDDEN_MONS_ENCOUNTER_SLOTS
 #define NUM_HIDDEN_MONS_ENCOUNTER_SLOTS   3
+#endif
 
 #define WILD_CHECK_REPEL    (1 << 0)
 #define WILD_CHECK_KEEN_EYE (1 << 1)

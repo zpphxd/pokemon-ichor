@@ -462,3 +462,19 @@ const struct Tileset gTileset_Chalkeon =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Chalkeon,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary built by tools/ichor/art/troas_build.py: the Troad
+// (the plain's wheat, reeds and banks, mounds and pines, the Hellespont's current and
+// Helle's rock, Sestos's harbor and Hero's tower, Ilion's walls, gates, houses, palace
+// and temple). Palettes 6-12; cells on grass, sand and sea borrow aethos's, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Troas =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Troas,
+    .palettes = gTilesetPalettes_PorytilesManaged_Troas,
+    .metatiles = gMetatiles_PorytilesManaged_Troas,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Troas,
+    .callback = NULL,
+};

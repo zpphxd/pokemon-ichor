@@ -73,6 +73,14 @@
               9
             ]
           }
+        },
+        {
+          "type": "hidden_mons",
+          "encounter_rates": [
+            50,
+            40,
+            10
+          ]
         }
       ],
       "encounters": [
@@ -368,6 +376,536 @@
                 "min_level": 7,
                 "max_level": 7,
                 "species": "SPECIES_GROWLITHE_HISUI"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HELLESPONT",
+          "base_label": "gHellespont_Morning",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_MUDSDALE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_EXPLOUD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_FEAROW"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_GUMSHOOS"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_FARFETCHD"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_CRAMORANT"
+              },
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              },
+              {
+                "min_level": 65,
+                "max_level": 66,
+                "species": "SPECIES_MUDSDALE"
+              },
+              {
+                "min_level": 66,
+                "max_level": 66,
+                "species": "SPECIES_EXPLOUD"
+              },
+              {
+                "min_level": 66,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_CRAMORANT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_TENTACRUEL"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_MANTINE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_CLAWITZER"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 61,
+                "species": "SPECIES_WISHIWASHI"
+              },
+              {
+                "min_level": 60,
+                "max_level": 61,
+                "species": "SPECIES_TENTACRUEL"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_SEADRA"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_WISHIWASHI"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_CLAWITZER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_SEADRA"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_CLAWITZER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_WISHIWASHI"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_TENTACRUEL"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_SEADRA"
+              }
+            ]
+          },
+          "hidden_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              },
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_FARFETCHD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_MANTINE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HELLESPONT",
+          "base_label": "gHellespont_Day",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_GUMSHOOS"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_MUDSDALE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_EXPLOUD"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_FEAROW"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_CRAMORANT"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_FARFETCHD"
+              },
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              },
+              {
+                "min_level": 65,
+                "max_level": 66,
+                "species": "SPECIES_SWELLOW"
+              },
+              {
+                "min_level": 66,
+                "max_level": 66,
+                "species": "SPECIES_GUMSHOOS"
+              },
+              {
+                "min_level": 66,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              }
+            ]
+          },
+          "hidden_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              },
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_FARFETCHD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_MANTINE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HELLESPONT",
+          "base_label": "gHellespont_Evening",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_NOCTOWL"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_MUDSDALE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_EXPLOUD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_FARFETCHD"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_NOCTOWL"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_FEAROW"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_MR_RIME"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_CRAMORANT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 66,
+                "species": "SPECIES_EXPLOUD"
+              },
+              {
+                "min_level": 66,
+                "max_level": 66,
+                "species": "SPECIES_NOCTOWL"
+              },
+              {
+                "min_level": 66,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              }
+            ]
+          },
+          "hidden_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              },
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_FARFETCHD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_MANTINE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HELLESPONT",
+          "base_label": "gHellespont_Night",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_NOCTOWL"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_MUDSDALE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_EXPLOUD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 64,
+                "species": "SPECIES_FARFETCHD"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_NOCTOWL"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_FEAROW"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_MR_RIME"
+              },
+              {
+                "min_level": 63,
+                "max_level": 65,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_CRAMORANT"
+              },
+              {
+                "min_level": 65,
+                "max_level": 66,
+                "species": "SPECIES_EXPLOUD"
+              },
+              {
+                "min_level": 66,
+                "max_level": 66,
+                "species": "SPECIES_NOCTOWL"
+              },
+              {
+                "min_level": 66,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              }
+            ]
+          },
+          "hidden_mons": {
+            "encounter_rate": 1,
+            "mons": [
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_MR_RIME"
+              },
+              {
+                "min_level": 64,
+                "max_level": 66,
+                "species": "SPECIES_FARFETCHD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_MANTINE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SESTOS",
+          "base_label": "gSestos_Morning",
+          "water_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_PELIPPER"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_CRAMORANT"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_TENTACRUEL"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_MANTINE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_CLAWITZER"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 61,
+                "species": "SPECIES_WISHIWASHI"
+              },
+              {
+                "min_level": 60,
+                "max_level": 61,
+                "species": "SPECIES_TENTACRUEL"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_SEADRA"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_WISHIWASHI"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_CLAWITZER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_SEADRA"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_CLAWITZER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_WISHIWASHI"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_TENTACRUEL"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_SEADRA"
               }
             ]
           }
