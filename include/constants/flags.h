@@ -1819,6 +1819,11 @@
 #define FLAG_ICHOR_THYIA_LAUREL_TODAY           (FLAG_ICHOR_GENERAL_START + 0x1B5) // Ichor: Act II: ICHOR_STUB_RITES: stands in for Thyia's daily laurel flag (FLAG_DAILY_ICHOR_LAUREL_START + Kirrha's index)
 #define FLAG_ICHOR_TISAMENOS_BIRD               (FLAG_ICHOR_GENERAL_START + 0x1B6) // Ichor: Act II: showed Tisamenos a sea bird (Pretty Feather x2)
 #define FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION       (FLAG_ICHOR_GENERAL_START + 0x1B7) // Ichor: Act II: Helike gave a goat bell (Soothe Bell); Act I's is FLAG_ICHOR_GOT_SOOTHE_BELL
+#define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
+#define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
+#define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)
+#define FLAG_ICHOR_ALETHEA_GOT_SKYLAPS          (FLAG_ICHOR_GENERAL_START + 0x1FD) // Ichor: Act II: Alethea caught the storm-hound Skylaps (beat 43)
+#define FLAG_ICHOR_HUNT_DONE                    (FLAG_ICHOR_GENERAL_START + 0x1FE) // Ichor: Act II: the Hunt for the Hind is won (beat 44)
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end
@@ -2634,5 +2639,11 @@
 #define TESTING_FLAG_UNUSED_7                   (TESTING_FLAGS_START + 0x7)
 #endif // TESTING
 
+// ICHOR_STUB_POSTGAME (world-act2): world-postgame's FLAG_ICHOR_POSTGAME (a bank flag on its
+// branch, set at the end of Act III's epilogue) gates Act II's post-game roads until it lands.
+// Kept at the very end of this file so the real definition, wherever it lands above, wins.
+#ifndef FLAG_ICHOR_POSTGAME
+#define FLAG_ICHOR_POSTGAME FLAG_SYS_GAME_CLEAR
+#endif
 
 #endif // GUARD_CONSTANTS_FLAGS_H
