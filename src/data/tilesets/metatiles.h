@@ -109,3 +109,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/ti
 // Ichor: steppe
 const u16 gMetatiles_PorytilesManaged_Steppe[] = INCBIN_U16("data/tilesets/secondary/steppe/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Steppe[] = INCBIN_U16("data/tilesets/secondary/steppe/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: far_west
+const u16 gMetatiles_PorytilesManaged_FarWest[] = INCBIN_U16("data/tilesets/secondary/far_west/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_FarWest[] = INCBIN_U16("data/tilesets/secondary/far_west/porytiles_bin/metatile_attributes.bin");

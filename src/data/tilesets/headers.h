@@ -462,3 +462,18 @@ const struct Tileset gTileset_Steppe =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Steppe,
     .callback = NULL,
 };
+
+// Ichor: far_west, the far west: Erytheia, the Pillars, the Ocean Stream (post-game). Porytiles-managed, built by
+// tools/ichor/art/farlands_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_FarWest =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_FarWest,
+    .palettes = gTilesetPalettes_PorytilesManaged_FarWest,
+    .metatiles = gMetatiles_PorytilesManaged_FarWest,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_FarWest,
+    .callback = InitTilesetAnim_PorytilesManaged_FarWest,
+};
