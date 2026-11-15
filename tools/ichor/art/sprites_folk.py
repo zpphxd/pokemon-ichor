@@ -245,6 +245,74 @@ KID = _dirs(
 )
 
 ARCHETYPES = {"tunic": TUNIC, "midi": MIDI, "robe": ROBE, "kid": KID}
+
+# Elaia's shared cloth construction: a folded shoulder, bloused waist and
+# separated ankles. Keep the other towns' source bodies until their batch.
+_ELAIA_DOWN = [
+    "...kCCSSSCQk....",
+    "..kCCCCCCCQQk...",
+    "..kSCCQCCCQSsk..",
+    "..kSsCCQCCQSsk..",
+    "..kSsTTTTTTSsk..",
+    "..kSSCCCCCQSSk..",
+    "...kCCCQCCQQk...",
+    "....kXYkkXYk....",
+    "....kXYkkXYk....",
+    "...kFFFkkFFk....",
+]
+_ELAIA_UP = _with(_ELAIA_DOWN, {0: "...kCCCCCCQk....", 2: "..kSCCQCCCQSsk..",
+                               3: "..kSsCQCCCQSsk..", 6: "...kCCQCCCQQk..."})
+_ELAIA_LEFT = [
+    ".....kSSCQk.....",
+    "....kCCCCQQk....",
+    "....kCSsCQk.....",
+    "....kCSsCQQk....",
+    "....kTSsTTk.....",
+    "....kCSSCQQk....",
+    "....kCCQCCQk....",
+    "....kkXYkkkk....",
+    ".....kXYk.......",
+    "....kFFFk.......",
+]
+ARCHETYPES["elaia_tunic"] = _dirs(
+    _front(_ELAIA_DOWN), _front(_ELAIA_UP),
+    dict(stand=_ELAIA_LEFT, walk0=_with(_ELAIA_LEFT, {**_ARM_BACK, **_STRIDE_W0}),
+         walk1=_with(_ELAIA_LEFT, {**_ARM_FWD, **_STRIDE_W1})),
+)
+_ELAIA_MIDI_DOWN = _with(_ELAIA_DOWN, {7: "...kCCCQCCQQk...", 8: "...kkXYkkXYkk..."})
+_ELAIA_MIDI_UP = _with(_ELAIA_UP, {7: "...kCCQCCCQQk...", 8: "...kkXYkkXYkk..."})
+_ELAIA_MIDI_LEFT = _with(_ELAIA_LEFT, {7: "....kCCQCCQk....", 8: "....kkXYkkkk...."})
+ARCHETYPES["elaia_midi"] = _dirs(
+    _front_midi(_ELAIA_MIDI_DOWN), _front_midi(_ELAIA_MIDI_UP),
+    dict(stand=_ELAIA_MIDI_LEFT,
+         walk0=_with(_ELAIA_MIDI_LEFT, {**_ARM_BACK, 8: "...kXYkkkYYk....", 9: "..kFFk...kFFk..."}),
+         walk1=_with(_ELAIA_MIDI_LEFT, {**_ARM_FWD, 8: "...kYYkkkXYk....", 9: "..kFFk...kFFk..."})),
+)
+_ELAIA_ROBE_DOWN = _with(_ELAIA_DOWN, {7: "...kCCCQCCCQk...", 8: "..kCCCCQCCCCQk..",
+                                     9: "..kkkFFkkFFkkk.."})
+_ELAIA_ROBE_UP = _with(_ELAIA_UP, {7: "...kCCQCCCCQk...", 8: "..kCCCQCCCCCQk..",
+                                 9: "..kkkFFkkFFkkk.."})
+_ELAIA_ROBE_LEFT = _with(_ELAIA_LEFT, {7: "...kCCQCCCQk....", 8: "...kCCCQCCCQk...",
+                                     9: "...kFFkkkkkkk..."})
+ARCHETYPES["elaia_robe"] = _dirs(
+    _front_robe(_ELAIA_ROBE_DOWN), _front_robe(_ELAIA_ROBE_UP),
+    dict(stand=_ELAIA_ROBE_LEFT,
+         walk0=_with(_ELAIA_ROBE_LEFT, {**_ARM_BACK, 7: "..kCCQCCCCQk....",
+                                       8: "..kCCCQCCCCQk...", 9: "..kFFkkkkkkFFk.."}),
+         walk1=_with(_ELAIA_ROBE_LEFT, {**_ARM_FWD, 9: "....kFFkkkkkk..."})),
+)
+_ELAIA_KID_DOWN = _with(_KID_DOWN, {1: "...kCCCCCCQQk...", 3: "...kSCQCCCQSk...",
+                                  4: "...kSCCQCCQSk..."})
+_ELAIA_KID_UP = _with(_ELAIA_KID_DOWN, {0: "....kkCCCCkk....", 3: "...kSCCQCCQSk..."})
+_ELAIA_KID_LEFT = _with(_KID_LEFT, {1: "....kCCCCQQk....", 3: "....kCSsCQQk...."})
+ARCHETYPES["elaia_kid"] = _dirs(
+    _front_kid(_ELAIA_KID_DOWN), _front_kid(_ELAIA_KID_UP),
+    dict(stand=_ELAIA_KID_LEFT,
+         walk0=_with(_ELAIA_KID_LEFT, {2: "....kCCSsQk.....", 3: "....kCCSsQk.....",
+                                      4: "....kCCSSQk.....", 5: "...kXYkYYk......", 6: "..kFFk.kFFk....."}),
+         walk1=_with(_ELAIA_KID_LEFT, {2: "....kSsCCQk.....", 3: "....kSsCCQk.....",
+                                      4: "....kSSCCQk.....", 5: "...kYYkXYk......", 6: "..kFFk.kFFk....."})),
+)
 POSES = ("stand", "walk0", "walk1")
 DIRS = ("down", "up", "left")
 
@@ -356,7 +424,7 @@ def build_sheet(spec):
 # Melitta, the player's mother and Elaia's beekeeper: hair up in a bun tied
 # with a honey-gold ribbon, a terracotta peplos and a linen apron.
 MOM = dict(
-    name="mom", pal="folk", arch="robe",
+    name="mom", pal="folk", arch="elaia_robe",
     roles=dict(C="u", Q="b", T="L", F="b"),
     head=dict(
         down=[
@@ -410,7 +478,7 @@ MOM = dict(
 # Halia, the old island priestess who reads each youth's thread: a saffron
 # veil over gray hair, a white peplos, and a drop spindle in her left hand.
 PRIESTESS = dict(
-    name="priestess", pal="folk", arch="robe",
+    name="priestess", pal="folk", arch="elaia_robe",
     roles=dict(C="L", Q="l", T="O", F="b"),
     head=dict(
         down=[
@@ -473,7 +541,7 @@ PRIESTESS = dict(
 # olive wreath, its leaves sprigging past his brown hair, tied behind with
 # terracotta ribbons.
 YOUTH_M = dict(
-    name="youth_m", pal="folk", arch="tunic",
+    name="youth_m", pal="folk", arch="elaia_tunic",
     roles=dict(C="L", Q="l", T="b", F="b"),
     head=dict(
         down=[
@@ -518,7 +586,7 @@ YOUTH_M = dict(
 # Korinna, a sharp-tongued festival youth: a sky-blue chiton to mid-calf with
 # a linen girdle, and a long braid tied with a terracotta ribbon.
 YOUTH_F = dict(
-    name="youth_f", pal="folk", arch="midi",
+    name="youth_f", pal="folk", arch="elaia_midi",
     roles=dict(C="a", Q="B", T="L", F="b"),
     head=dict(
         down=[
@@ -572,7 +640,7 @@ YOUTH_F = dict(
 # An island man: a knee-length ochre exomis off his right shoulder, a brown
 # beard and sandals.
 MAN = dict(
-    name="man", pal="folk", arch="tunic",
+    name="man", pal="folk", arch="elaia_tunic",
     roles=dict(C="o", Q="u", T="b", F="b"),
     head=dict(
         down=[
@@ -624,7 +692,7 @@ MAN = dict(
 # An island woman: a blue peplos, an ochre himation over her left shoulder and
 # a linen kerchief over her hair.
 WOMAN = dict(
-    name="woman", pal="folk", arch="robe",
+    name="woman", pal="folk", arch="elaia_robe",
     roles=dict(C="B", Q="n", T="n", F="b"),
     head=dict(
         down=[
@@ -685,7 +753,7 @@ WOMAN = dict(
 # a walking staff in his right hand.
 _STAFF = ["_k", "ko"] + ["ku"] * 17 + ["kb"]
 ELDER_M = dict(
-    name="elder_m", pal="folk", arch="midi",
+    name="elder_m", pal="folk", arch="elaia_midi",
     roles=dict(C="g", Q="v", T="g", F="b"),
     head=dict(
         down=[
@@ -742,18 +810,18 @@ ELDER_M = dict(
 # Kydippe, the old midwife: a dark wool himation drawn over her gray hair and
 # wrapped round her, her hands folded in front, a linen chiton below.
 _KYDIPPE_FRONT = [
-    "..kubbbbbbbbkk..",
-    "..kubbbbbbbbkk..",
-    "..kubbbbbbbbkk..",
-    "..kubbbbbbbbkk..",
+    "..kubbubbbbbkk..",
+    "..kubbbubbbbkk..",
+    "..kubbbbubbbkk..",
+    "..kubbbbbubbkk..",
     "..kubbbSSbbbkk..",
     "..kubbbbbbbbkk..",
-    "..kkuuuuuuuukk..",
+    "..kkuubuuuuukk..",
     "...klllllllyk...",
     "..klllllllllyk..",
 ]
 ELDER_F = dict(
-    name="elder_f", pal="folk", arch="robe",
+    name="elder_f", pal="folk", arch="elaia_robe",
     roles=dict(C="b", Q="k", T="b", F="b"),
     head=dict(
         down=[
@@ -810,7 +878,7 @@ ELDER_F = dict(
 
 # A barefoot island boy: a short terracotta tunic and a mop of dark hair.
 KID_M = dict(
-    name="kid_m", pal="folk", arch="kid",
+    name="kid_m", pal="folk", arch="elaia_kid",
     roles=dict(C="u", Q="b", T="u", F="s"),
     head=dict(
         down=[
@@ -895,7 +963,7 @@ KID_F = dict(
 # a gray beard, a faded sea-blue tunic with a rope belt, and a net slung over
 # his shoulder.
 FISHER = dict(
-    name="fisher", pal="folk", arch="tunic",
+    name="fisher", pal="folk", arch="elaia_tunic",
     roles=dict(C="a", Q="B", T="u", F="b"),
     head=dict(
         down=[
@@ -1206,7 +1274,7 @@ MERCHANT = dict(
 # olives on her left hip.
 _BASKET = ["_kkk_", "kvgvk", "kOOOk", "kOoOk", "_kkk_"]
 HARVESTER = dict(
-    name="harvester", pal="folk", arch="robe",
+    name="harvester", pal="folk", arch="elaia_robe",
     roles=dict(C="g", Q="v", T="b", F="b"),
     head=dict(
         down=[
@@ -1334,7 +1402,7 @@ _BLANK3 = ["................"] * 3
 # Tityros and the island shepherds: a bronze felt pilos, a sheepskin mantle
 # over a blue tunic, sandals, and a crook in his right hand.
 SHEPHERD = dict(
-    name="shepherd", pal="cast", arch="tunic",
+    name="shepherd", pal="cast", arch="elaia_tunic",
     roles=dict(C="B", Q="n", T="b", F="b"),
     head=dict(
         down=_BLANK3 + [

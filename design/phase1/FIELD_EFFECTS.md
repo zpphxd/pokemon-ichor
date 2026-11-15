@@ -2,6 +2,17 @@
 
 The overworld effects a slice playthrough shows, redrawn to sit on the aethos and civic tiles. Every file keeps Emerald's size, frame layout and animation, so no engine table changed.
 
+**2026-11-15 native contact pass:** ripples, the three splash sheets and
+ledge dust now come from `ripple_frames`, `splash_frames` and `dust_frames`
+in the painter, rather than loading the existing PNG's Emerald pixel
+shapes. All five sheets preserve exact engine dimensions and have distinct
+frames. The two unused ash colors in `general_1.pal` are now written at
+their already-truncated BGR555 values. No ball art or ball palette changed.
+Native checks, the rebuilt ROM, smoke and all three Elaia opening runs pass.
+Those opening captures do not exercise every water-contact frame. The
+dedicated effect-route testing section below and its images remain historical;
+current contact-effect review must not be inferred from them.
+
 **Sources:**
 - `tools/ichor/art/field_effects.py`: every effect and the two shared effect palettes. Rebuild with `/usr/bin/python3 tools/ichor/art/field_effects.py --write`. `--preview DIR` writes the 6× art sheet.
 - `tools/ichor/art/surf_poses.py`: Theo and Ianthe riding the dolphin. Rebuild with `/usr/bin/python3 tools/ichor/art/surf_poses.py --write`.
@@ -19,9 +30,9 @@ The overworld effects a slice playthrough shows, redrawn to sit on the aethos an
 | Landing in tall grass | `jump_tall_grass.png` | general_1 | Stalks and grain burst out from under the feet. | Ledges into barley |
 | Long grass | `long_grass.png`, `jump_long_grass.png` | general_1 | Cut from aethos's reeds (`0x015`). They part around the player as they step in, then close. | `MB_LONG_GRASS` |
 | Footprints | `sand_footprints.png` | general_0 | Sandal soles: smooth ovals with a strap dent, in the sand's own shades. | `MB_SAND`, the Akti beach |
-| Ripples | `ripple.png` | general_1 | Emerald's rings, now in foam white and aethos turquoise. The outer ring fades into the puddle's own color. | `MB_PUDDLE`, `MB_POND_WATER` |
-| Splashes | `splash.png`, `jump_small_splash.png`, `jump_big_splash.png` | general_0 | Emerald's droplets in aethos's foam and sea blues. | Puddles, shallows |
-| Ledge-hop dust | `ground_impact_dust.png` | general_0 | Emerald's puffs, now in pale limestone dust. | Landing from a ledge |
+| Ripples | `ripple.png` | general_1 | Five growing native rings, with broken light/shadow arcs and a bright central waterline. | `MB_PUDDLE`, `MB_POND_WATER` |
+| Splashes | `splash.png`, `jump_small_splash.png`, `jump_big_splash.png` | general_0 | Native foam-tipped water fans with separate droplets and a deep-blue underside. | Puddles, shallows |
+| Ledge-hop dust | `ground_impact_dust.png` | general_0 | Three native limestone puff clusters spreading apart, with a lit upper rim. | Landing from a ledge |
 | Emotes "!", "?", "!!", "X" | `emotion_exclamation.png`, `emotion_question.png`, `emotion_double_exclamation.png`, `emote_x.png` | may | Pottery shards with black-figure glyphs, after the pottery UI. A cream glaze chip on the top left and a broken edge on the top. | Trainers spotting you, scripted emotes |
 | Heart emote | `emotion_heart.png` | npc_1 | The same shard, with a black-figure heart. | Scripted emotes |
 | Warp arrow | `arrow.png` | the player's palette | Terracotta with an ink outline and a cream glint; it blinks to saffron. | Standing on an exit mat |

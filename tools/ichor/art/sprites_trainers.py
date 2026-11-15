@@ -38,87 +38,58 @@ def kleon():
     cloak = Mat(["cr_d", "cr_m", "cr_l"], wx=0.85, wy=0.15, cuts=[0.2, 0.6])
     linen = Mat(["lin_d", "lin_l"], wx=0.8, wy=0.2, cuts=[0.62])
     bronze = Mat(["br_d", "br_m", "br_l"], cuts=[0.3, 0.7])
-    hair = Mat(["hair_d", "hair_l"], wx=0.5, wy=0.6, cuts=[0.3])
     leather = Mat(["lea"])
-    ball_top = Mat(["cr_m", "cr_l"])
-    ball_bot = Mat(["lin_d", "lin_l"])
     f = Fig(pal)
 
-    # cloak, behind everything, billowing to his left
-    f.poly([(25, 23), (38, 23), (43, 28), (47, 36), (52, 44), (55, 50), (51, 51), (47, 55), (42, 51),
-            (37, 53), (31, 51), (26, 53), (21, 51), (20, 44), (21, 32)], cloak)
-    f.shade_poly([(44, 36), (45, 36), (48, 52), (46, 52)], 0.5)
-    f.shade_poly([(40, 40), (41, 40), (42, 52), (41, 52)], 0.5)
-    f.shade_poly([(47, 40), (48, 40), (51, 50), (50, 50)], -0.4)
-    f.shade_poly([(49, 42), (50, 42), (54, 49), (53, 49)], 0.5)
-    f.shade_poly([(22, 36), (23, 36), (23, 50), (22, 50)], 0.4)
-    # legs, feet apart
-    f.poly([(25, 41), (29, 41), (29, 46), (28, 52), (27, 57), (24, 57), (24, 52), (24, 46)], skin, group=100)
-    f.poly([(33, 41), (37, 41), (38, 46), (39, 52), (40, 57), (37, 57), (35, 52), (34, 46)], skin, group=101)
-    f.poly([(22, 57), (28, 57), (28, 61), (21, 61)], leather)
-    f.poly([(36, 57), (41, 57), (43, 61), (36, 61)], leather)
-    # tunic (exomis) and belt
-    tunic = f.poly([(25, 23), (37, 23), (37, 32), (39, 40), (37, 42), (31, 42), (25, 42), (23, 40), (25, 32)], linen)
-    f.rect(22, 32, 40, 33, leather, clip=tunic)
-    f.shade_poly([(30, 35), (31, 35), (31, 42), (30, 42)], 0.6)
-    f.shade_poly([(35, 35), (36, 35), (37, 42), (36, 42)], 0.6)
-    f.shade_poly([(33, 24), (35, 24), (35, 31), (33, 31)], 0.25)
-    # right arm: fist on hip
-    f.thick_line([(25, 25), (21, 31)], 4, skin, group=200)
-    f.thick_line([(21, 31), (25, 34)], 3, skin, group=200)
-    f.ellipse((23, 32, 26, 35), skin, group=200)
-    # left arm: raised, showing off a ball
-    upper = f.thick_line([(37, 25), (42, 29)], 4, skin, group=300)
-    f.thick_line([(42, 29), (43, 22)], 3, skin, group=300)
-    f.poly([(36, 26), (38, 25), (42, 27), (43, 30), (41, 31)], bronze, clip=upper)
-    f.ellipse((40, 15, 46, 21), ball_bot, group=310)
-    f.poly([(40, 17), (41, 15), (45, 15), (46, 17)], ball_top, group=311)
-    f.ellipse((41, 20, 44, 23), skin, group=312)
-    # neck (the head itself is hand-drawn below)
-    f.rect(29, 20, 33, 25, skin, group=400)
-    # cloak pinned at the left shoulder with a bronze brooch
-    f.ellipse((35, 22, 37, 24), bronze)
-    # tunic folds
-    f.line([(28, 36), (27, 41)], "lin_d")
-    f.line([(33, 35), (33, 41)], "lin_d")
-    f.line([(27, 25), (29, 30)], "lin_d")
-    # knees, sandal straps, armband shine
-    f.pxs([(26, 49), (36, 49)], "skin_m")
-    f.line([(24, 54), (27, 54)], "lea")
-    f.line([(37, 54), (39, 54)], "lea")
-    f.pxs([(38, 27), (39, 27), (35, 22)], "br_l")
-    # head: cropped Lakonian hair, heavy brows, a smirk
-    f.patch(24, 4, [
-        ".....k..k..k....",
-        "....kHkkHkkHkk..",
-        "...kHhHHhHHHHHk.",
-        "..kHhhHHhHHHhHHk",
-        "..kHhHHHHHHhHHHk",
-        ".kHHhHHHHHHHHHHk",
-        ".kHHHHHhHHHHHhHk",
-        ".kHHHHHHHHHHHHHk",
-        ".kHHMMMMHMMMMHHk",
-        ".kHLkkkLLLkkkMHk",
-        ".kLLkkLLLLkkMDMb",
-        ".kLLkWLLLLkWMDDb",
-        ".kLLMMLLLLMMMDDb",
-        ".kLLLLLLDLLMMDb.",
-        "..bLLLLLDDLMMMb.",
-        "..bLLLLLLLLkMMb.",
-        "...bLLLLDkkMMb..",
-        "...bLLLLLLLMMb..",
-        "....bLLLLMMMb...",
-        ".....bbbbbbb....",
-    ], {"k": "ink", "H": "hair_d", "h": "hair_l", "L": "skin_l", "M": "skin_m", "D": "skin_d",
-        "b": "lea", "W": "lin_l"})
-    # the ball in his raised hand
-    f.patch(40, 15, [
-        ".kkkk.",
-        "kRRCCk",
-        "kkWkkk",
-        "kWWwwk",
-        ".kwwk.",
-    ], {"k": "ink", "R": "cr_l", "C": "cr_m", "W": "lin_l", "w": "lin_d"})
+    f.poly([(24, 23), (36, 22), (41, 29), (45, 35), (53, 41), (57, 48),
+            (54, 50), (47, 52), (42, 49), (35, 51), (26, 48), (19, 50), (20, 31)], cloak)
+    for x, y in ((39, 29), (43, 34), (25, 31)):
+        f.shade_poly([(x, y), (x + 1, y), (x + 7, 48), (x + 4, 48)], 0.45)
+    f.shade_poly([(35, 29), (36, 29), (41, 48), (39, 48)], -0.35)
+    f.poly([(25, 41), (30, 41), (28, 49), (23, 55), (19, 55), (23, 48)], skin, group=100)
+    f.poly([(33, 40), (38, 40), (38, 47), (40, 55), (36, 56), (33, 49)], skin, group=101)
+    f.poly([(19, 53), (24, 54), (24, 59), (26, 61), (15, 61), (15, 59)], leather)
+    f.poly([(35, 54), (40, 53), (41, 58), (45, 60), (45, 61), (34, 61)], leather)
+    f.line([(19, 57), (23, 57)], "br_d")
+    f.line([(36, 57), (39, 57)], "br_d")
+    tunic = f.poly([(25, 22), (36, 24), (36, 31), (35, 34), (39, 43),
+                    (34, 44), (30, 43), (26, 44), (23, 42), (25, 33), (23, 27)], linen)
+    f.rect(22, 33, 40, 34, leather, clip=tunic)
+    for a, b in (((27, 35), (25, 42)), ((31, 36), (32, 43)), ((33, 25), (34, 31))):
+        f.line([a, b], "lin_d")
+    f.thick_line([(25, 26), (18, 31), (24, 35)], 5, skin, group=200)
+    f.poly([(20, 25), (24, 23), (26, 25), (24, 29), (21, 29)], bronze, group=210)
+    f.thick_line([(36, 26), (42, 30), (44, 22)], 4, skin, group=300)
+    f.rect(28, 20, 31, 25, skin, group=400)
+    f.poly([(24, 22), (29, 23), (35, 22), (39, 24), (38, 28),
+            (32, 28), (26, 25), (22, 25)], cloak, group=410)
+    f.ellipse((24, 22, 27, 25), bronze, group=420)
+    f.pxs([(22, 25), (23, 25), (25, 23)], "br_l")
+    f.line([(31, 25), (35, 26), (37, 25)], "cr_l")
+    key = {"k": "ink", "H": "hair_d", "h": "hair_l", "L": "skin_l",
+           "M": "skin_m", "D": "skin_d", "b": "lea", "W": "lin_l"}
+    f.patch(22, 4, [
+        "......k..k......",
+        "...k.kHkkHk.k...",
+        "..kHkHHhHHHkHk..",
+        ".kHhhHHHHhHHHk..",
+        "..kHHhHHHHHHHhk.",
+        ".kHHHHHHHHHHHHk.",
+        ".kHHLLHHLLLHHHk.",
+        "..kLLkLLLLkkHHk.",
+        "..kLkWkLLLkWMDk.",
+        "..kLkkkLLLkkMDk.",
+        "...kLLLLLLLMMbk.",
+        "...kLLLMLLMMbk..",
+        "....kLLkWWkMb...",
+        ".....kLLLMMb....",
+        "......kLMMb.....",
+        ".......bbb......",
+    ], key)
+    f.patch(22, 33, [".bbbb.", "bLLLLb", "bLMLMb", ".bMMb."], key)
+    f.patch(41, 21, [".bbb.", "bLLMb", "bLMMb", ".bbb."], key)
+    f.patch(41, 16, [".kkkk.", "kRRCCk", "kkWkkk", "kWWwwk", ".kwwk."],
+            {"k": "ink", "R": "cr_l", "C": "cr_m", "W": "lin_l", "w": "lin_d"})
     return f, pal
 
 
@@ -307,14 +278,19 @@ def professor_daphne():
     par = Mat(["par_d", "par_l"], cuts=[0.6])
     f = Fig(pal)
     # blue chiton, floor length
-    f.poly([(25, 23), (37, 23), (40, 40), (42, 60), (20, 60), (22, 40)], chiton)
+    f.poly([(27, 23), (37, 24), (38, 37), (43, 58), (39, 60),
+            (32, 59), (28, 61), (20, 60), (23, 45), (24, 34)], chiton)
     f.poly([(22, 60), (27, 60), (27, 62), (22, 62)], Mat(["hair_d"]))
     f.poly([(34, 60), (39, 60), (39, 62), (34, 62)], Mat(["hair_d"]))
     # himation wrapped diagonally from her left shoulder to the knees
-    f.poly([(31, 23), (38, 23), (41, 34), (43, 52), (36, 54), (24, 50), (21, 44), (27, 38), (33, 32)], him)
-    for x in (30, 36):
-        f.shade_poly([(x, 38), (x + 1, 38), (x + 3, 52), (x + 2, 52)], 0.45)
-    f.line([(21, 44), (36, 54)], "blue_l")
+    f.poly([(33, 23), (38, 24), (41, 33), (42, 44), (39, 53),
+            (34, 54), (25, 49), (21, 44), (26, 37), (32, 31)], him)
+    for a, b in (((36, 29), (28, 40)), ((38, 34), (26, 45)), ((39, 40), (34, 51))):
+        f.line([a, b], "him_d")
+    f.shade_poly([(35, 29), (37, 31), (26, 42), (24, 42)], -0.4)
+    f.line([(23, 46), (34, 53)], "him_m")
+    f.line([(27, 54), (25, 59)], "blue_d")
+    f.line([(35, 54), (38, 58)], "blue_l")
     # right arm out in a welcoming gesture
     f.thick_line([(25, 25), (20, 32)], 4, chiton, group=200)
     f.thick_line([(20, 32), (16, 24)], 3, skin, group=201)
@@ -339,26 +315,25 @@ def professor_daphne():
     f.ellipse((38, 33, 42, 37), skin, group=312)
     f.rect(30, 20, 34, 25, skin, group=400)
     # head: chestnut hair in a bun, laurel wreath
-    f.patch(22, 4, [
-        ".........kkkk......",
-        "........kHhhHk.....",
-        "......kkkHHHkkk....",
-        "....kkGgGkkkGgGkk..",
-        "...kGhhhhhhhhhhGgk.",
-        "..kgHhhhhhhhhhhHgk.",
-        "..kGHhhHHHHHhhhHGk.",
-        "..kHhhHLLLLLHhhhHk.",
-        "..kHhHLLLLLLLHhhHk.",
-        ".kHhHkkkLLLkkkHhHHk",
-        ".kHhHLkkLLLkkMHhHHk",
-        ".kHhHLkWLLLkWMHhHHk",
-        ".kHhHLLLLDLLMMHhHHk",
-        ".kHhHHLLLDLLMMHhHk.",
-        ".kHhHHbLLLLLMbHhHk.",
-        "..kHhHHbLddLbHHhHk.",
-        "..kHhHHHbLLbHHHHk..",
-        "...kHHkkkbbkkHHk...",
-        "....kk......kkk....",
+    f.patch(23, 3, [
+        "..........kkk...",
+        ".........kHhhk..",
+        ".......kkHHHHk..",
+        "....kkGgGkkGgk..",
+        "...kGhhhhhhHggk.",
+        "..kghhHHHHhhhGk.",
+        "..kHhHLLLLLhhhHk",
+        "..kHhLLLLLLLhhHk",
+        "..kHLkkLLLkkLHHk",
+        "..kHLkWLLLkWMHHk",
+        "..kHLLkLLLkMMHHk",
+        "...HLLLLLLLMMHHk",
+        "...HLLLMMLMMMHHk",
+        "...HHLLLkWkMDHk.",
+        "....HHLLLMMMHHk.",
+        ".....HHLLMMHHk..",
+        "......kHMMHk....",
+        ".......kkkk.....",
     ], {"k": "ink", "H": "hair_d", "h": "hair_l", "G": "leaf_l", "g": "leaf_d", "L": "skin_l",
         "M": "skin_m", "D": "skin_d", "d": "skin_d", "b": "hair_d", "W": "him_l"})
     return f, pal
@@ -407,6 +382,8 @@ def main():
         figs[name] = (arr, pal)
         if write:
             save_indexed(arr, pal, os.path.join(FRONT, name + ".png"))
+            if name == "professor_daphne":
+                save_indexed(arr, pal, os.path.join(ROOT, "graphics/birch_speech/birch.png"))
     if pv:
         os.makedirs(pv, exist_ok=True)
         preview(figs, os.path.join(pv, "trainers.png"))

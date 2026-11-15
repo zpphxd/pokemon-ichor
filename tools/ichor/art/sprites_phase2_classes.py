@@ -54,13 +54,15 @@ def alethea():
     f = Fig(pal)
 
     # the ponytail, tied at the back of her head and swinging behind her shoulder
-    tail = f.poly([(40, 9), (43, 8), (46, 11), (47, 16), (47, 22), (45, 28), (43, 32), (42, 27),
-                   (43, 21), (42, 15)], hair, group=40)
+    tail = f.poly([(36, 13), (39, 12), (43, 15), (44, 21), (49, 26),
+                   (47, 29), (43, 27), (41, 22), (39, 18)], hair, group=40)
     # legs, weight on the far one
-    f.poly([(26, 45), (31, 45), (30, 51), (29, 57), (25, 57), (26, 51)], skin, group=100)
+    f.poly([(26, 45), (31, 45), (28, 51), (24, 57), (20, 57), (23, 51)], skin, group=100)
     f.poly([(34, 45), (38, 45), (39, 51), (40, 57), (36, 57), (35, 51)], skin, group=101)
-    f.poly([(23, 57), (30, 57), (30, 61), (22, 61)], lea)
+    f.poly([(20, 55), (25, 56), (24, 59), (25, 61), (17, 61), (17, 59)], lea)
     f.poly([(35, 57), (41, 57), (42, 61), (35, 61)], lea)
+    f.line([(21, 57), (24, 57)], "umber")
+    f.line([(36, 57), (39, 57)], "umber")
     # the chiton to the knee, bloused over a leather girdle
     body = f.poly([(26, 23), (38, 23), (40, 31), (41, 38), (43, 47), (22, 47), (24, 38), (25, 31)], chiton)
     f.rect(22, 33, 42, 34, lea, clip=body, noline=True)
@@ -81,7 +83,7 @@ def alethea():
     # the satchel of scrolls on her left hip
     f.poly([(37, 37), (47, 37), (47, 44), (45, 46), (39, 46), (37, 44)], satchel, group=500)
 
-    f.textures = [((tail,), ["brown", "umber"], [(44, 12), (45, 16), (45, 20), (44, 24), (44, 28)],
+    f.textures = [((tail,), ["brown", "umber"], [(39, 14), (41, 17), (42, 21), (45, 25), (47, 27)],
                    [(0, 0), (0, 1)])]
     # a kolpos line where the chiton blouses over the girdle
     f.line([(24, 32), (40, 32)], "gold_m")
@@ -115,27 +117,24 @@ def alethea():
     # dust from the dig on her hem and knee
     f.pxs([(24, 45), (27, 46), (39, 45), (27, 51)], "umber")
     # head: a blue headband over dark hair parted in a fringe, eyes wide, a grin
-    f.patch(22, 1, [
-        "......kkkkkkkk........",
-        "....kkbbbhhbbbkk......",
-        "...kbbhhbbbbbbbbk.....",
-        "..kbhhbbbbbbbbbbbk....",
-        "..kUUUUUUUBBBBBBNNk...",
-        ".kBBBBBBBBBBBBBNNNbkk.",
-        ".kbbbbbbbbbbbbbbbhbkNk",
-        ".kbhbbbbbbbbbbbbbbbkBk",
-        "kbbbLLLLbbLLLLbbbhbkk.",
-        "kbbLLLLLLLLLLLMbbbbbk.",
-        "kbLkkkLLLLkkkMMbbhbk..",
-        ".bLkkLLLLLLkkMDbbbk...",
-        ".bLkWLLLLLLkWMDbbk....",
-        "bLLMMLLLLLMMMDDbbk....",
-        "bLLLLLDLLLLMMDbhk.....",
-        ".bLLLDDLLLMMMDbbk.....",
-        ".bLLLLbRRbLMMbbk......",
-        "..bLLLLbbLLMMbk.......",
-        "...bLLLLLLMMbk........",
-        "....bbbbbbbbk.........",
+    f.patch(22, 5, [
+        "......kkkkk.....",
+        "....kkbhhbbkk...",
+        "...kbhhbbbbbbk..",
+        "..kbhbbbbbbbbbk.",
+        "..kUUUUBBBBBNNk.",
+        "..kBBBBBBBBNNNk.",
+        "..kbbbLLbbLLbbk.",
+        "..kbLLLLLLLLbbk.",
+        "..bLLkkLLLkkMbk.",
+        "..bLLkWLLLkWMbk.",
+        "..bLLkkLLLkkMbk.",
+        "...bLLLLLLLMMbk.",
+        "...bLLMLLLMMMbk.",
+        "....bLLkWkMMbk..",
+        ".....bLLLMMbk...",
+        "......bLMMbk....",
+        ".......bbbb.....",
     ], AKEY)
     return f, pal
 

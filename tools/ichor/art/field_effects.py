@@ -19,8 +19,8 @@ What is here, and why it looks the way it does:
 * Tall grass and reeds are cut from the aethos metatiles themselves
   (render_map.Renderer), so the tuft that hides the player's feet matches the
   barley tile pixel for pixel. The rustle adds bent stalks, gold grain and chaff.
-* Ripples, splashes, ledge dust and footprints keep Emerald's shapes and take
-  the new palettes; the footprints are reshaped into sandal soles.
+* Ripples, splashes and ledge dust are native drawings in the old engine
+  frame slots; the footprints are reshaped into sandal soles.
 * The emotes ("!", "?", "!!", "X" in may.pal; the heart in npc_1.pal) are
   pottery shards with black-figure glyphs, after the pottery UI.
 * The warp arrow is terracotta with an ink outline, blinking to saffron.
@@ -88,8 +88,8 @@ GENERAL_1 = RawPal([
     (112, 168, 224),   # 7 sea-sky water
     (176, 216, 240),   # 8 water light
     (248, 240, 216),   # 9 foam
-    (148, 131, 98),    # 10 ash (Emerald's, kept)
-    (180, 172, 148),   # 11 ash light (Emerald's, kept)
+    (144, 128, 96),    # 10 ash, exact BGR555
+    (176, 168, 144),   # 11 ash light, exact BGR555
     (240, 192, 64),    # 12 barley grain gold  (Emerald: teal greens 12-15)
     (200, 144, 40),    # 13 grain ochre
     (144, 152, 72),    # 14 meadow shade
@@ -166,10 +166,6 @@ def save(arr, pal, name):
     im.save(path, bits=4, transparency=0)
 
 
-def load_vanilla(name):
-    return np.array(Image.open(os.path.join(PICS, name)))
-
-
 _RENDERER = None
 
 
@@ -195,6 +191,62 @@ def metatile_indices(mid, pal):
                 raise ValueError(f"metatile {mid:#x} color {c} is not in the effect palette")
             out[y, x] = lut[c]
     return out
+
+
+def ripple_frames():
+    frames = []
+    for phase, (rx, ry) in enumerate(((2, 1), (4, 2), (5, 3), (6, 3), (7, 4))):
+        im = Image.new("P", (16, 16), 0)
+        d = ImageDraw.Draw(im)
+        box = (8 - rx, 8 - ry, 8 + rx, 8 + ry)
+        d.arc(box, 185, 345, fill=8)
+        d.arc(box, 5, 165, fill=6 if phase == 4 else 7)
+        if phase < 3:
+            d.line((6, 8, 9, 8), fill=9)
+        frames.append(np.array(im))
+    return frames
+
+
+def splash_frames(big=False, landing=False):
+    """Hand-drawn fans of water, in the engine's existing frame slots."""
+    count = 4 if big else 3 if landing else 2
+    size = 16 if big else 8
+    frames = []
+    for phase in range(count):
+        im = Image.new("P", (16, size), 0)
+        d = ImageDraw.Draw(im)
+        cx, floor = 8, size - 2
+        rise = (5, 7, 4, 2)[phase] if big else (3, 4, 2)[phase]
+        spread = phase + (3 if big else 1)
+        d.polygon([(cx - spread - 1, floor), (cx - spread - 2, floor - rise),
+                   (cx - 2, floor - 2), (cx - 1, floor - rise - 1),
+                   (cx + 1, floor - 2), (cx + spread + 2, floor - rise + 1),
+                   (cx + spread + 1, floor)], fill=7)
+        d.arc((cx - spread - 1, floor - 2, cx + spread + 1, floor + 1), 0, 180, fill=8)
+        d.line((cx - spread - 2, floor - rise, cx - spread, floor - 1), fill=5)
+        d.line((cx + spread, floor - 1, cx + spread + 2, floor - rise + 1), fill=6)
+        d.line((cx - 1, floor - 1, cx - 1, floor - rise - 1), fill=4)
+        d.point((cx + spread + 2, floor - rise + 1), fill=5)
+        d.point((cx - spread - 2, floor - rise), fill=4)
+        if phase < count - 1:
+            d.point((cx + spread + 1, floor - rise - 2), fill=5)
+            d.point((cx - spread - 1, floor - rise - 1), fill=4)
+        frames.append(np.array(im))
+    return frames
+
+
+def dust_frames():
+    frames = []
+    for phase in range(3):
+        im = Image.new("P", (16, 8), 0)
+        d = ImageDraw.Draw(im)
+        for x, y, w in ((3 - phase, 5 - phase, 3), (7, 4 + phase, 4),
+                        (11 + phase, 5 - phase, 3)):
+            d.ellipse((x, y, x + w, y + 2), fill=3)
+            d.line((x + 1, y, x + w - 1, y), fill=1)
+            d.point((x + 1, y + 1), fill=2)
+        frames.append(np.array(im))
+    return frames
 
 
 def overlay(base, rows, legend):
@@ -371,7 +423,7 @@ def jump_long_grass_frames():
 
 
 # --------------------------------------------------------------------------
-# Ripple, splashes, dust, footprints: Emerald's shapes, the new palettes
+# Native contact effects and sandal footprints
 # --------------------------------------------------------------------------
 
 def sandal_frames():
@@ -743,12 +795,13 @@ def build():
         "pokecenter_monitor/1.png": (monitor_frames()[1], GENERAL_0),
         "pokeball_glow.png": (ball_frame(), BALL),
     }
-    # Emerald's shapes, re-embedded with the new palettes (the game reads the
-    # .pal files; this keeps the PNGs' own colors honest for editors)
-    for name, pal in (("ripple.png", GENERAL_1), ("splash.png", GENERAL_0),
-                      ("jump_small_splash.png", GENERAL_0), ("jump_big_splash.png", GENERAL_0),
-                      ("ground_impact_dust.png", GENERAL_0)):
-        out[name] = (load_vanilla(name), pal)
+    out.update({
+        "ripple.png": (strip(ripple_frames()), GENERAL_1),
+        "splash.png": (strip(splash_frames()), GENERAL_0),
+        "jump_small_splash.png": (strip(splash_frames(landing=True)), GENERAL_0),
+        "jump_big_splash.png": (strip(splash_frames(big=True)), GENERAL_0),
+        "ground_impact_dust.png": (strip(dust_frames()), GENERAL_0),
+    })
     return out
 
 

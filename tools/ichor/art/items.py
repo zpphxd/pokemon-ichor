@@ -1218,21 +1218,21 @@ FOLK_PAL = os.path.join(ROOT, "graphics/object_events/palettes/ichor_folk.pal")
 FOLK_INDEX = {"k": 1, "b": 2, "u": 3, "o": 4, "O": 5, "s": 6, "S": 7, "l": 8, "L": 9}
 JAR = [
     "................",
-    "................",
     "......kkkk......",
     ".....kOOook.....",
     ".....kLLllk.....",
     "......ksuk......",
-    "....kSsuuubk....",
-    "...kSSsuuuubk...",
-    "..kkkkkkkkkkkk..",
-    "..kLkLkLkLkLkk..",
-    "..kSsuuuuuubbk..",
-    "..kSsuuuuuubbk..",
-    "...ksuuuuubbk...",
-    "....ksuuubbk....",
-    ".....kbbbbk.....",
-    "......kkkk......",
+    "....kkSsukk.....",
+    "...kSkSsuuuk....",
+    "..kSbkSSsuuuk...",
+    "..kb.kSsuububk..",
+    "..kkkLbLLLLbuk..",
+    "...kSbkbkbkbbk..",
+    "...kSsuuuuubbk..",
+    "....kSsuubbuk...",
+    ".....ksuubbk....",
+    ".....kbbbbbk....",
+    "......kkkkk.....",
 ]
 
 
