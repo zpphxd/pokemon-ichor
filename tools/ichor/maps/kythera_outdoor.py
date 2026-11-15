@@ -237,30 +237,59 @@ class Grid:
         return all(self.inside(x + i, y + j) and self.get(x + i, y + j) in ok
                    and not self.solid[y + j, x + i] for j in range(h) for i in range(w))
 
-    def woods(self, cells, seed=0, pines=0.22, cypresses=0.5, boulders=0.0):
-        """Fill a set of (x, y) cells with a dense, staggered mix of olives, stone
-        pines and cypresses (and a few boulders if asked), so a tree line never
-        settles into a rhythm. Trees go in reading order; 2x2 trees take any
-        free 2x2, cypresses fill the narrow gaps, and what is left is deep-shade
-        grass, solid (scrub between the trunks)."""
+    def woods(self, cells, seed=0, pines=0.22, cypresses=0.5, boulders=0.0, skip=0.42, shrubs=None,
+              glades=True):
+        """Fill a set of (x, y) cells with a staggered mix of olives, stone pines
+        and cypresses, so a tree line never settles into rows (MAP_DESIGN §7).
+        Trees go top-down so crowns stack; each 2x2 spot is skipped with
+        probability `skip` so the next row's trees fall between this row's, and
+        the trees' sizes and kinds vary by a hash. A second pass puts cypresses
+        in the narrow gaps and `shrubs(x, y)` (a myrtle, a briar) in some single
+        cells; open patches left inside become small glades with flowers. Every
+        cell ends solid."""
         cells = set(cells)
-        for (x, y) in sorted(cells, key=lambda p: (p[1], p[0])):
+        order = sorted(cells, key=lambda p: (p[1], p[0]))
+        for (x, y) in order:
             if not self.free(x, y):
                 continue
-            r = hashed(x, y, seed)
             fits2 = all((x + i, y + j) in cells and self.free(x + i, y + j) for i in (0, 1) for j in (0, 1))
-            fits_c = all((x, y + j) in cells and self.free(x, y + j) for j in (0, 1))
-            if fits2 and r >= pines + 0.08:
-                self.olive(x, y)
-            elif fits2 and r < pines:
+            if not fits2 or hashed(x, y, seed + 11) < skip:
+                continue
+            r = hashed(x, y, seed)
+            if r < pines:
                 self.pine(x, y)
-            elif fits_c and hashed(x, y, seed + 3) < cypresses + (0.4 if not fits2 else 0):
+            else:
+                self.olive(x, y)
+        for (x, y) in order:
+            if not self.free(x, y):
+                continue
+            fits_c = all((x, y + j) in cells and self.free(x, y + j) for j in (0, 1))
+            r = hashed(x, y, seed + 3)
+            if fits_c and r < cypresses:
                 self.cypress(x, y)
+            elif shrubs and r < cypresses + 0.25:
+                shrubs(x, y)
             elif boulders and hashed(x, y, seed + 5) < boulders:
                 self.set(x, y, BOULDER["grass"], True)
+        def edge(x, y):
+            return any((x + dx, y + dy) not in cells and self.inside(x + dx, y + dy)
+                       and not self.solid[y + dy, x + dx] for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+        for (x, y) in cells:
+            if self.get(x, y) not in (GRASS, GRASS_SHADE, FLOWERS):
+                continue
+            if edge(x, y):
+                # the wood's rim never shows open grass that won't let you in: a
+                # cypress, a shrub or a boulder closes it
+                if (x, y + 1) in cells and self.free(x, y + 1):
+                    self.cypress(x, y)
+                elif shrubs:
+                    shrubs(x, y)
+                if self.get(x, y) in (GRASS, GRASS_SHADE, FLOWERS):
+                    self.set(x, y, BOULDER["grass"], True)
         for (x, y) in cells:
             if self.get(x, y) in (GRASS, GRASS_SHADE, FLOWERS):
-                self.set(x, y, GRASS_SHADE, True)
+                # the understory between the trunks; now and then a glade's anemones
+                self.set(x, y, FLOWERS if glades and hashed(x, y, seed + 7) < 0.08 else GRASS_SHADE, True)
             self.solid[y, x] = True          # crown tips inside the woods too
 
 

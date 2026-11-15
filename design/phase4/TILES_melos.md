@@ -65,7 +65,7 @@ hints.
 | bronze | Bronze mirrors, the harbor shrine's dove, the great herm, the Minoan vault door |
 | melos | Melos's obsidian slope on its earth and grass |
 
-**Tile budget.** 468 of 504 tiles (424 metatiles). The door animations copy their
+**Tile budget.** 503 of 504 tiles (424 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 
@@ -75,7 +75,7 @@ fails past 504. Static tiles within two pixels of one another are merged.
 
 ### The obsidian slope, soft-edged
 
-`obsidian`, 8 wide by 6 tall. Melos's hillside of black volcanic glass, as all 47 soft-edge shapes on aethos grass (kythera_lib.blob_key gives a cell's key from a mask), its edge broken into scree. Walkable. The full interior is `1|11111111`; it glints now and then in the sun (the `glint` animation).
+`obsidian`, 8 wide by 6 tall. Melos's volcanic hillside: warm scree and tuff pebbles with chips of black glass, as all 47 soft-edge shapes on aethos grass (kythera_lib.blob_key gives a cell's key from a mask), its edge crumbling into the meadow. Walkable. The full interior is `1|11111111`; it glints now and then in the sun (the `glint` animation). The obsidian itself runs through it in veins (`obsidian_veins`).
 
 Shape keys (kythera_lib.blob_key) and their ids:
 
@@ -296,6 +296,29 @@ ids                                      walk
 | 0x29B | (3, 1) | `X` | `MB_NORMAL` | COVERED | sand |
 | 0x29C | (4, 1) | `X` | `MB_NORMAL` | COVERED | sand |
 | 0x29D | (5, 1) | `X` | `MB_NORMAL` | COVERED | sand |
+
+### Veins of obsidian through the scree
+
+`obsidian_veins`, 5 wide by 2 tall. Drawn on the slope's full interior (`obsidian` `1|11111111`), so they sit anywhere inside it. Chain pieces join the middle of two sides: `WE`, `NS`, and the bends `NE` `NW` `SE` `SW`; `end_W` (and `end_E`) is a vein coming in from that side and pinching out. `spoil` is a knapper's heap of waste flakes, `lens` a lone pod of glass. Walkable.
+
+```text
+ids                                walk
+0x2A0 0x2A1 0x2A2 0x2A3 0x2A4   . . . . .
+0x2A8 0x2A9 0x2AA 0x2AB 0x2AC   . . . . .
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x2A0 | `WE` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2A1 | `NS` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2A2 | `NE` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2A3 | `NW` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2A4 | `SE` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2A8 | `SW` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2A9 | `end_W` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2AA | `end_E` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2AB | `spoil` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2AC | `lens` | `.` | `MB_NORMAL` | COVERED |  |
 
 ## The coast
 

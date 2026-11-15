@@ -40,26 +40,32 @@ def grass_px(X, Y):
 # --------------------------------------------------------------------------
 
 def _obsidian_tex():
-    """16x16 periodic: glassy black facets with conchoidal sheen lines."""
+    """16x16 periodic: the slope's scree, warm volcanic earth strewn with tuff
+    pebbles, and black glass only in chips that catch the light. (The veins of
+    glass are their own pieces, obsidian_veins.) A critique pass found the old
+    all-glass texture read as deep water from across the map."""
     t = {}
     for y in range(16):
         for x in range(16):
-            # facets: angular cells shaded by a fake normal
-            fx = (x + (y // 4) * 3) % 8
-            fy = y % 4
-            k = K.h(x // 4 + (y // 4) * 5, y // 4, 41)
-            base = ("ob0", "ob1", "ob1", "ob2")[k % 4]
-            if fy == 0 and fx < 6:
-                base = "ob2" if base != "ob2" else "ob3"
-            if fx == 7:
-                base = "ob0"
-            t[(x, y)] = base
-    # curved sheen arcs (the glass's ripples)
-    for (cx, cy, r) in ((5, 6, 4.5), (12, 13, 3.5)):
-        for a in np.linspace(math.pi * 1.05, math.pi * 1.6, 9):
-            x = int(round(cx + r * math.cos(a))) % 16
-            y = int(round(cy + r * math.sin(a))) % 16
-            t[(x, y)] = "ob3"
+            k = K.hp(x, y, 43)
+            t[(x, y)] = "l0" if k % 5 else "kt1"
+            if K.hp(x, y, 47) % 11 == 0:
+                t[(x, y)] = "l1"
+    # pebbles: lit on top, shadowed below
+    for (px, py, r) in ((3, 3, 1.6), (10, 2, 1.2), (13, 9, 1.8), (6, 11, 1.4), (1, 13, 1.0),
+                        (9, 14, 1.1), (14, 5, 0.9)):
+        for dy in range(-2, 3):
+            for dx in range(-2, 3):
+                d = math.hypot(dx, dy * 1.2)
+                if d <= r:
+                    c = "p1" if dy < 0 else ("l1" if dy == 0 else "l0")
+                    t[((px + dx) % 16, (py + dy) % 16)] = c
+        t[(px % 16, (py + 2) % 16)] = "kt1"
+    # obsidian chips, each with a pinpoint of sheen
+    for (cx, cy) in ((7, 6), (12, 13), (2, 8)):
+        for (dx, dy, c) in ((0, 0, "ob1"), (1, 0, "ob0"), (0, 1, "ob0"), (-1, 0, "ob2")):
+            t[((cx + dx) % 16, (cy + dy) % 16)] = c
+        t[((cx + 1) % 16, (cy - 1) % 16)] = "ob3"
     return t
 
 
@@ -71,10 +77,12 @@ def obsidian():
     names = {k: (i % w, i // w) for i, k in enumerate(keys)}
     s = struct("obsidian", "The obsidian slope, soft-edged", w, hh, SEC_M,
                walk=["." * w] * hh, names=names,
-               notes="Melos's hillside of black volcanic glass, as all 47 soft-edge shapes on aethos "
-                     "grass (kythera_lib.blob_key gives a cell's key from a mask), its edge broken "
-                     "into scree. Walkable. The full interior is `1|11111111`; it glints now and "
-                     "then in the sun (the `glint` animation).")
+               notes="Melos's volcanic hillside: warm scree and tuff pebbles with chips of black "
+                     "glass, as all 47 soft-edge shapes on aethos grass (kythera_lib.blob_key gives "
+                     "a cell's key from a mask), its edge crumbling into the meadow. Walkable. The "
+                     "full interior is `1|11111111`; it glints now and then in the sun (the "
+                     "`glint` animation). The obsidian itself runs through it in veins "
+                     "(`obsidian_veins`).")
     B = s.B
     tex_ = _obsidian_tex()
 
@@ -86,10 +94,10 @@ def obsidian():
                 if vis[y, x]:
                     L.px(ox + x, oy + y, tex_[((ox + x) % 16, (oy + y) % 16)])
         for y, x in np.argwhere(ring(vis)):
-            L.px(ox + x, oy + y, "l0" if (x + y) % 3 else "ob1")
+            L.px(ox + x, oy + y, "kt1" if (x + y) % 3 else "l1")
         for y, x in np.argwhere(halo(vis)):
             if (x * 7 + y * 3) % 5 == 0:
-                L.px(ox + x, oy + y, "ob1" if (x + y) % 2 else "l1")
+                L.px(ox + x, oy + y, "l0" if (x + y) % 2 else "l1")
     for k, (cx, cy) in names.items():
         paint(B, cx * 16, cy * 16, k)
     for i in range(len(keys), w * hh):
@@ -155,6 +163,96 @@ def obsidian_bits():
         ".k2222211k",
         "..kkkkkkk.",
     ], {"k": "ob0", "3": "ob3", "b": "ob2", "2": "ob1", "1": "ob0"})
+    return s
+
+
+VEIN_PORTS = {"W": (-0.5, 7.5), "E": (15.5, 8.5), "N": (8.5, -0.5), "S": (7.5, 15.5)}
+
+
+def obsidian_veins():
+    """Veins of black glass through the scree, as chain pieces. Each joins two
+    ports (W, E, N, S: the middle of that side, so chains connect), bulging a
+    little as real seams do; `end_*` pieces taper the vein out from that side;
+    `spoil` is a knapper's heap of waste flakes and `lens` a lone pod of glass."""
+    names = {"WE": (0, 0), "NS": (1, 0), "NE": (2, 0), "NW": (3, 0), "SE": (4, 0),
+             "SW": (0, 1), "end_W": (1, 1), "end_E": (2, 1), "spoil": (3, 1), "lens": (4, 1)}
+    s = struct("obsidian_veins", "Veins of obsidian through the scree", 5, 2, SEC_M,
+               walk=[".....", "....."], names=names,
+               notes="Drawn on the slope's full interior (`obsidian` `1|11111111`), so they sit "
+                     "anywhere inside it. Chain pieces join the middle of two sides: `WE`, `NS`, "
+                     "and the bends `NE` `NW` `SE` `SW`; `end_W` (and `end_E`) is a vein "
+                     "coming in from that side and pinching out. `spoil` is a knapper's heap of "
+                     "waste flakes, `lens` a lone pod of glass. Walkable.")
+    B = s.B
+    tex_ = _obsidian_tex()
+
+    def bez(p0, p2, bulge, n=48):
+        mx, my = (p0[0] + p2[0]) / 2, (p0[1] + p2[1]) / 2
+        p1 = (mx + bulge[0], my + bulge[1])
+        out = []
+        for i in range(n + 1):
+            u = i / n
+            out.append(((1 - u) ** 2 * p0[0] + 2 * (1 - u) * u * p1[0] + u * u * p2[0],
+                        (1 - u) ** 2 * p0[1] + 2 * (1 - u) * u * p1[1] + u * u * p2[1], u))
+        return out
+
+    def draw(ox, oy, pts, width):
+        for y in range(16):
+            for x in range(16):
+                best, bu = 99.0, 0.0
+                for (px, py, u) in pts:
+                    d = math.hypot(x - px, y - py)
+                    if d < best:
+                        best, bu = d, u
+                w = width(bu)
+                if best < w * 0.45:
+                    c = "ob0"
+                elif best < w * 0.8:
+                    c = "ob1"
+                elif best < w:
+                    c = "ob2" if y < pts[min(len(pts) - 1, int(bu * len(pts)))][1] else "ob1"
+                elif best < w + 0.9:
+                    c = "kt1"
+                else:
+                    continue
+                B.px(ox + x, oy + y, c)
+        # a run of sheen along the vein's upper flank
+        for (px, py, u) in pts[6:-6:7]:
+            X, Y = int(round(px)), int(round(py - width(u) * 0.55))
+            if 0 <= X < 16 and 0 <= Y < 16:
+                B.px(ox + X, oy + Y, "ob3")
+
+    for name, (cx, cy) in names.items():
+        ox, oy = cx * 16, cy * 16
+        for y in range(16):
+            for x in range(16):
+                B.px(ox + x, oy + y, tex_[(x, y)])
+        if len(name) == 2 and name.isupper():
+            a, b = VEIN_PORTS[name[0]], VEIN_PORTS[name[1]]
+            bulge = {"WE": (0, -1.5), "NS": (1.5, 0), "NE": (-1.5, 1.5), "NW": (1.5, 1.5),
+                     "SE": (-1.5, -1.5), "SW": (1.5, -1.5)}[name]
+            draw(ox, oy, bez(a, b, bulge), lambda u: 2.6 + 0.6 * math.sin(u * math.pi))
+        elif name.startswith("end_"):
+            a = VEIN_PORTS[name[-1]]
+            tip = (7.5 + (a[0] - 7.5) * -0.25, 7.5 + (a[1] - 7.5) * -0.25)
+            draw(ox, oy, bez(a, tip, (0.8, -0.8)), lambda u: max(0.4, 2.8 * (1 - u)))
+        elif name == "lens":
+            draw(ox, oy, bez((3.0, 9.5), (12.5, 6.0), (0.5, -1.0)),
+                 lambda u: 0.6 + 2.6 * math.sin(u * math.pi))
+        elif name == "spoil":
+            for (fx, fy, r) in ((7.5, 9, 5.5), (4, 11, 3.0), (11.5, 11, 3.2)):
+                for y in range(16):
+                    for x in range(16):
+                        d = math.hypot((x - fx) / r, (y - fy) / (r * 0.7))
+                        if d < 1:
+                            k = K.h(x, y, 61) % 6
+                            c = ("ob0", "ob1", "ob1", "ob2", "kt1", "l0")[k]
+                            if d > 0.8 and y > fy:
+                                c = "kt1"
+                            B.px(ox + x, oy + y, c)
+            for (gx, gy) in ((6, 6), (10, 8), (4, 10)):
+                B.px(ox + gx, oy + gy, "ob3")
+            B.px(ox + 8, oy + 5, "w0")
     return s
 
 
