@@ -9495,7 +9495,7 @@
       "width": 14,
       "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaSkandeia",
       "border_filepath": "data/layouts/KytheraSkandeia_AxylosHouse/border.bin",
       "blockdata_filepath": "data/layouts/KytheraSkandeia_AxylosHouse/map.bin",
       "layout_version": "emerald"
@@ -9506,7 +9506,7 @@
       "width": 12,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaSkandeia",
       "border_filepath": "data/layouts/KytheraSkandeia_DiversHouse/border.bin",
       "blockdata_filepath": "data/layouts/KytheraSkandeia_DiversHouse/map.bin",
       "layout_version": "emerald"
@@ -9517,7 +9517,7 @@
       "width": 7,
       "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaSkandeia",
       "border_filepath": "data/layouts/KytheraSkandeia_PerfumersHouse/border.bin",
       "blockdata_filepath": "data/layouts/KytheraSkandeia_PerfumersHouse/map.bin",
       "layout_version": "emerald"
@@ -9528,7 +9528,7 @@
       "width": 10,
       "height": 12,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaSkandeia",
       "border_filepath": "data/layouts/KytheraSkandeia_NikareteHouse/border.bin",
       "blockdata_filepath": "data/layouts/KytheraSkandeia_NikareteHouse/map.bin",
       "layout_version": "emerald"
@@ -9539,7 +9539,7 @@
       "width": 15,
       "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaSkandeia",
       "border_filepath": "data/layouts/KytheraSkandeia_ShipwrightsHouse/border.bin",
       "blockdata_filepath": "data/layouts/KytheraSkandeia_ShipwrightsHouse/map.bin",
       "layout_version": "emerald"
@@ -9550,7 +9550,7 @@
       "width": 19,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_CivicKythera",
       "border_filepath": "data/layouts/KytheraSkandeia_Asclepeion/border.bin",
       "blockdata_filepath": "data/layouts/KytheraSkandeia_Asclepeion/map.bin",
       "layout_version": "emerald"
@@ -9561,7 +9561,7 @@
       "width": 11,
       "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_CivicKythera",
       "border_filepath": "data/layouts/KytheraSkandeia_Agora/border.bin",
       "blockdata_filepath": "data/layouts/KytheraSkandeia_Agora/map.bin",
       "layout_version": "emerald"
@@ -9572,7 +9572,7 @@
       "width": 10,
       "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaPaphia",
       "border_filepath": "data/layouts/KytheraPaphia_Dovecote/border.bin",
       "blockdata_filepath": "data/layouts/KytheraPaphia_Dovecote/map.bin",
       "layout_version": "emerald"
@@ -9583,7 +9583,7 @@
       "width": 12,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaPaphia",
       "border_filepath": "data/layouts/KytheraPaphia_PottersHouse/border.bin",
       "blockdata_filepath": "data/layouts/KytheraPaphia_PottersHouse/map.bin",
       "layout_version": "emerald"
@@ -9594,7 +9594,7 @@
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_CivicKythera",
       "border_filepath": "data/layouts/KytheraPaphia_Asclepeion/border.bin",
       "blockdata_filepath": "data/layouts/KytheraPaphia_Asclepeion/map.bin",
       "layout_version": "emerald"
@@ -9605,7 +9605,7 @@
       "width": 13,
       "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_CivicKythera",
       "border_filepath": "data/layouts/KytheraPaphia_Agora/border.bin",
       "blockdata_filepath": "data/layouts/KytheraPaphia_Agora/map.bin",
       "layout_version": "emerald"
@@ -9616,7 +9616,7 @@
       "width": 13,
       "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_OikiaPaphia",
       "border_filepath": "data/layouts/KytheraPaphia_PygmalionsWorkshop/border.bin",
       "blockdata_filepath": "data/layouts/KytheraPaphia_PygmalionsWorkshop/map.bin",
       "layout_version": "emerald"
@@ -9627,7 +9627,7 @@
       "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_OikiaPaphia",
       "border_filepath": "data/layouts/KytheraPaphia_MirrorHouse/border.bin",
       "blockdata_filepath": "data/layouts/KytheraPaphia_MirrorHouse/map.bin",
       "layout_version": "emerald"
@@ -9638,7 +9638,7 @@
       "width": 13,
       "height": 11,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_OikiaPaphia",
       "border_filepath": "data/layouts/KytheraPaphia_OrchardHouse/border.bin",
       "blockdata_filepath": "data/layouts/KytheraPaphia_OrchardHouse/map.bin",
       "layout_version": "emerald"
@@ -9649,7 +9649,7 @@
       "width": 12,
       "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaMelos",
       "border_filepath": "data/layouts/KytheraNeraidaFalls_Mill/border.bin",
       "blockdata_filepath": "data/layouts/KytheraNeraidaFalls_Mill/map.bin",
       "layout_version": "emerald"
@@ -9660,7 +9660,7 @@
       "width": 13,
       "height": 6,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaMelos",
       "border_filepath": "data/layouts/Melos_Farmhouse/border.bin",
       "blockdata_filepath": "data/layouts/Melos_Farmhouse/map.bin",
       "layout_version": "emerald"
@@ -9671,7 +9671,7 @@
       "width": 9,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaMelos",
       "border_filepath": "data/layouts/Melos_KnappersHouse/border.bin",
       "blockdata_filepath": "data/layouts/Melos_KnappersHouse/map.bin",
       "layout_version": "emerald"
@@ -9682,7 +9682,7 @@
       "width": 12,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaMelos",
       "border_filepath": "data/layouts/Melos_Boathouse/border.bin",
       "blockdata_filepath": "data/layouts/Melos_Boathouse/map.bin",
       "layout_version": "emerald"
@@ -9693,7 +9693,7 @@
       "width": 10,
       "height": 7,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_OikiaMelos",
       "border_filepath": "data/layouts/Melos_BoathouseLoft/border.bin",
       "blockdata_filepath": "data/layouts/Melos_BoathouseLoft/map.bin",
       "layout_version": "emerald"

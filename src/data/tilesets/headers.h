@@ -1812,3 +1812,67 @@ const struct Tileset gTileset_TempleAphrodite =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleAphrodite,
     .callback = NULL,
 };
+
+// Ichor: oikia_skandeia, Skandeia's homes (Kythera): oikia's floors, walls and
+// furniture plus the harbor trades' pieces (tools/ichor/art/aegean_skandeia.py). A
+// region secondary built by tools/ichor/maps/kythera_homes.py with
+// tools/ichor/art/interiors_lib.py: it holds only the cells its rooms use, in its
+// own tiles and palettes 6-12, so it works on any interior primary (oikos).
+const struct Tileset gTileset_OikiaSkandeia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaSkandeia,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaSkandeia,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaSkandeia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaSkandeia,
+    .callback = NULL,
+};
+
+// Ichor: oikia_paphia, Paphia's homes and workshops (Kythera): oikia's pieces plus
+// the temple town's crafts and yards (tools/ichor/art/aegean_paphia.py). A region
+// secondary built by tools/ichor/maps/kythera_homes.py with
+// tools/ichor/art/interiors_lib.py: it holds only the cells its rooms use, in its
+// own tiles and palettes 6-12, so it works on any interior primary (oikos).
+const struct Tileset gTileset_OikiaPaphia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaPaphia,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaPaphia,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaPaphia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaPaphia,
+    .callback = NULL,
+};
+
+// Ichor: oikia_melos, the country houses: Melos's households and Myles's mill at the
+// Neraida falls, oikia's pieces plus tools/ichor/art/aegean_melos.py's. A region
+// secondary built by tools/ichor/maps/kythera_homes.py with
+// tools/ichor/art/interiors_lib.py: it holds only the cells its rooms use, in its
+// own tiles and palettes 6-12, so it works on any interior primary (oikos).
+const struct Tileset gTileset_OikiaMelos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaMelos,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaMelos,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaMelos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaMelos,
+    .callback = NULL,
+};
+
+// Ichor: civic_kythera, Kythera's Asclepeions and Agoras: gTileset_Civic's metatiles
+// they use plus their own (tools/ichor/art/aegean_civic.py). A region secondary
+// built by tools/ichor/maps/kythera_homes.py with tools/ichor/art/interiors_lib.py:
+// it holds only the cells its rooms use, in its own tiles and palettes 6-12, so it
+// works on any interior primary (oikos).
+const struct Tileset gTileset_CivicKythera =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_CivicKythera,
+    .palettes = gTilesetPalettes_PorytilesManaged_CivicKythera,
+    .metatiles = gMetatiles_PorytilesManaged_CivicKythera,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicKythera,
+    .callback = NULL,
+};
