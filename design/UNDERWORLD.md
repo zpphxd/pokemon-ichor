@@ -170,7 +170,7 @@ She has cut every thread in Aethos for a thousand years, knowing each ending bef
 | 23 | Sisyphus's Hill | 20×30 | A side room |
 | 24 | The Chasm | 30×30 | Giratina, upside down |
 | 25 | Elysium | 50×40 | Gold |
-| 26 | The Isles of the Blessed | 30×20 | Elysium's shore |
+| 26 | Elysium's Shore | 30×20 | Looks out across the water to the Isles of the Blessed (`OIKOUMENE.md`, PG-40) |
 | 27 | The Ascent of Tainaron | 20×60 | The Orpheus moment. Shared with Labor 12. |
 | (28) | The House of Night | 24×20 | Stretch: Cresselia and Darkrai |
 
@@ -558,7 +558,7 @@ Back in the hall (scene 13), Hades is angry, then isn't. The Titans have stopped
 3. **Orpheus** plays by the river (scene 16). He teaches the Ascent without meaning to.
 
 **Also here:**
-- **The Isles of the Blessed** (30×20), Elysium's shore: gold sand, rare fishing, and a hidden Ichor Stone in a shell.
+- **Elysium's Shore** (30×20), looking out across the water to the Isles of the Blessed: gold sand, rare fishing, and a hidden Ichor Stone in a shell.
 - **Wild:** the gentlest table in the game, and among its rarest (§6).
 
 **Persephone's return.** Persephone walks with you to the Ascent's foot. Spring can't start until she's in the sun, and Hades, being Hades, sets a condition (scene 13): she follows you up, and **you mustn't look back** until she's out. "That's how it's done. Ask Orpheus. Actually, don't."
@@ -694,7 +694,7 @@ The Underworld ignores time of day. Levels follow BALANCE.md's Aethos post-game 
 | The House of Hades's garden | 66–70 | Persenyx 25%, Rhoaril 20%, Korantha 10%, Plouteras 10%, Spalunk 15%, Narcibulb 10%, Ophidrop 10% |
 | Tartarus | 66–70 | Bouldyphus 15%, Gigantomb 15%, Kapnub 20%, Cairnolith 15%, Laolith 10%, Kolossard 10%, Pyrapod 15% |
 | Elysium | 66–70 | Psychora 15%, Himerow 15%, Korantha 10%, Hymnaria 10%, Kalliglyph 10%, Sophowl 10%, Kerastorm 10%, Melisseer 10%, Chionyad 5%, Aphrogene 5% |
-| The Isles of the Blessed (fishing) | 66–70 | Aphrogene 25%, Narkeray 25%, Galenyon 20%, Kynoketos 15%, Aphrell 10%, Haligeron 5% |
+| Elysium's Shore (fishing) | 66–70 | Aphrogene 25%, Narkeray 25%, Galenyon 20%, Kynoketos 15%, Aphrell 10%, Haligeron 5% |
 
 The existing species the earlier draft used here (Basculegion, Dusknoir, Trevenant, Cofagrigus, Togekiss and others) belong to the Oikoumene's tables. Trainers' teams in the Underworld (Hades, Persephone, the shades) may still use existing species, as the post-game allows.
 
