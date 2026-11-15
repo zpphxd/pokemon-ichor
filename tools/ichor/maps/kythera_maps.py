@@ -218,6 +218,18 @@ class Map:
                 h = "L" if x == x0 else ("R" if x == x1 else "")
                 self.set(x, y, kit[(v + h) or "C"], False)
 
+    def path(self, cells, kit=A.PATCH):
+        """A worn path over any set of cells: each takes the patch kit's edge or
+        corner by which of its four neighbours are path too, so a path can bend,
+        narrow and widen instead of being a rectangle."""
+        cells = set(cells)
+        for (x, y) in cells:
+            n, s_ = (x, y - 1) in cells, (x, y + 1) in cells
+            w, e = (x - 1, y) in cells, (x + 1, y) in cells
+            v = "" if (n and s_) or (not n and not s_) else ("T" if not n else "B")
+            h = "" if (w and e) or (not w and not e) else ("L" if not w else "R")
+            self.set(x, y, kit[(v + h) or "C"], False)
+
     def olive(self, x, y):
         """A 2x2 olive at (x, y); its crown tip pokes into the row above."""
         below = self.ok(x, y + 2) and int(self.mid[y + 2, x]) == A.OLIVE_TOP[0]
@@ -420,8 +432,8 @@ class Map:
         tmp.parent.mkdir(parents=True, exist_ok=True)
         blocks.astype("<u2").tofile(tmp)
         subprocess.run([sys.executable, str(ROOT / "tools/ichor/render_map.py"), "--blockdata", str(tmp),
-                        "--width", str(width), "--primary", PRIMARY_DIR[self.primary], "--secondary",
-                        self.cat["symbol"], "--scale", str(scale), "-o", str(out)], check=True,
+                        "--width", str(width), "--primary", f"data/tilesets/primary/{self.primary}", "--secondary",
+                        f"data/tilesets/secondary/{self.ts}", "--scale", str(scale), "-o", str(out)], check=True,
                        stdout=subprocess.DEVNULL)
 
     def render(self, stem, views=(), people=True):
