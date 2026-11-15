@@ -10,6 +10,21 @@
 
 mapscripts AeginaMountOros_MapScripts {}
 
+text AeginaMountOros_Text_NameAigon { "AIGON" }
+
+// ICHOR_ACT2: GOATHERD Aigon (Theocritus's goatherd, Idyll 4), Kerazap 35 and
+// Melibee 36 (a male: only the females evolve). On the climb, facing west across
+// the band of golden grass (sight 2), the only way up; mandatory for the summit.
+// trainer_type stays NONE until world-act2 registers his party and swaps this
+// for a trainerbattle script.
+script AeginaMountOros_EventScript_Aigon {
+    lock
+    faceplayer
+    setspeaker(AeginaMountOros_Text_NameAigon)
+    msgbox(format("My goats climb Oros every morning. I follow them up and argue them down."))
+    release
+}
+
 // ICHOR_STUB_RITES: ENGINE_API section 3's EventScript_IchorAltar_Zeus isn't on
 // this branch. When it lands, point the altar's bg event straight at it.
 script AeginaMountOros_EventScript_AltarOfZeus {

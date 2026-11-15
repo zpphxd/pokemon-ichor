@@ -747,6 +747,609 @@ IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
 - Fairy Wind
 - Quick Attack
 - Synthesis
+/* The Mystery sanctum under Eleusa (design/phase2/SCRIPT.md Part 3, beat 23; ids 150-154):
+   four Titanborn grunts with their lamps, and Hyperion's first battle. His class, Titan
+   Admin, plays MUS_ICHOR_BATTLE_ADMIN (GetBattleBGM in src/pokemon.c). ICHOR_STUB_ART: he
+   wears the Titan Grunt portrait until his own is drawn. */
+
+=== TRAINER_ICHOR_GRUNT_SANCTUM_KROKALOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Spalunk
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Ergant
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_GRUNT_SANCTUM_BOLOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kaplet
+Level: 23
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_GRUNT_SANCTUM_KONIS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Check Bad Move
+
+Spalunk
+Level: 23
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Cairnolith
+Level: 24
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_GRUNT_SANCTUM_GAIOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Galekit
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Pebblith
+Level: 23
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Hoplomex
+Level: 24
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_HYPERION_1 ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Kapnub
+Level: 23
+Ability: Magma Armor
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Clear Smog
+- Rock Tomb
+- Flame Charge
+- Smokescreen
+
+Kaminoo
+Level: 23
+Ability: Flame Body
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Fire Fang
+- Stomp
+- Flame Charge
+- Work Up
+
+Pebblith @ Sitrus Berry
+Level: 24
+Ability: Sturdy
+IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
+- Rock Slide
+- Bulldoze
+- Stealth Rock
+- Rock Polish
+
+/* Route 4, the Isthmus road (design/phase2/SCRIPT.md Part 3, "Route 2 trainers"), levels
+ * 18-20. Aethos stand-ins (ICHOR_STUB_AETHOS_DEX), so no Ability: lines. The POTTER,
+ * RUNNER and INITIATE classes aren't drawn yet (ICHOR_STUB_SPRITE): they borrow the Hiker,
+ * the running Triathlete and the Psychic, SCRIPT.md's placeholders. */
+=== TRAINER_ICHOR_EXEKIAS ===
+Name: EXEKIAS
+Class: Potter
+Pic: Hiker
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Chelonet
+Level: 18
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Spalunk
+Level: 18
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_MYRRHINE ===
+Name: MYRRHINE
+Class: Initiate
+Pic: Psychic F
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Epopoi
+Level: 18
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Onotis
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_GRUNT_ROUTE4_LAAS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Ergant
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_MENALKAS ===
+Name: MENALKAS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kerazap
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kerazap
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_PHEIDIPPOS ===
+Name: PHEIDIPPOS
+Class: Runner
+Pic: Running Triathlete M
+Gender: Male
+Music: Cool
+AI: Check Bad Move
+
+Galekit
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Lophops
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_KAPELOS ===
+Name: KAPELOS
+Class: Merchant
+Pic: Merchant
+Gender: Male
+Music: Rich
+AI: Check Bad Move
+
+Onotis
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Harpeck
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+/* Hecate's Hollow (design/phase2/SCRIPT.md Part 3, "Hecate's Hollow trainers"; the map is
+ * tools/ichor/maps/hecates_hollow.py). Hekabe and Kallias are SCRIPT.md's; Phaino (fork 2's
+ * dead end, in the dark) and Battos (at the west mouth) are the map's own optional pair.
+ * Levels 18-20, BALANCE.md's Eleusa band. Aethos stand-ins, so no Ability: lines.
+ * ICHOR_STUB_SPRITE: Kallias is an INITIATE, a class not drawn yet (SPRITES.md); he
+ * battles as an Acolyte until it is. */
+
+=== TRAINER_ICHOR_HEKABE ===
+Name: HEKABE
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Suspicious
+AI: Check Bad Move
+
+Galekit
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Gelasable
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_KALLIAS ===
+Name: KALLIAS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Pebblith
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Onotis
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_PHAINO ===
+Name: PHAINO
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Suspicious
+AI: Check Bad Move
+
+Onotis
+Level: 18
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Galekit
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_BATTOS ===
+Name: BATTOS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Pebblith
+Level: 19
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kerazap
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+/* Route 5, the Skironian cliffs (design/phase2/SCRIPT.md Part 3, "Route 3 trainers",
+ * on the road it became; tools/ichor/maps/route5.py). Levels 20-21, BALANCE.md's
+ * Eleusa row. The species are Aethos stand-ins (ICHOR_STUB_AETHOS_DEX), so no
+ * Ability: lines; the dex adds Myrto's Kerazap's Cute Charm. Aristaios is a
+ * BEEKEEPER in the script: that class isn't drawn yet, so he battles as a
+ * Harvester until it is (ICHOR_STUB_SPRITE). Melanthios, Mopsos, Daphnis and Kerdon
+ * are new. */
+
+=== TRAINER_ICHOR_KYNEGEIROS ===
+Name: KYNEGEIROS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Check Bad Move
+
+Eopeep
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Ergant
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_MELANTHIOS ===
+Name: MELANTHIOS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Eripip
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kerazap
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_MYRTO ===
+Name: MYRTO
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Kerazap
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Elaleaf
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_ARISTAIOS ===
+Name: ARISTAIOS
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Melibee
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Melibee
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Melibee
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_MOPSOS ===
+Name: MOPSOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Epopoi
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Harpeck
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Lophops
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_DAPHNIS ===
+Name: DAPHNIS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Onotis
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Galekit
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kerazap
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_KERDON ===
+Name: KERDON
+Class: Merchant
+Pic: Merchant
+Gender: Male
+Music: Rich
+AI: Check Bad Move
+
+Chelonet
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Karkipool
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+/* Eleusa's story (ids 140-149; design/phase2/SCRIPT.md Part 3): the Temple of Demeter's
+ * acolytes and Hierophant, Eubouleus in the fields, and the two Titanborn who climb out
+ * of the Anaktoron on the night of the Mysteries. The species are Aethos stand-ins
+ * (ICHOR_STUB_AETHOS_DEX), so no Ability: lines. The dex adds Chloe's: Rhoaril Leaf Guard,
+ * Stachyss Shed Skin, Elapling Harvest, Korantha Natural Cure, Persenyx Cursed Body.
+ * ICHOR_STUB_SPRITE: Chloe's portrait and the Swineherd aren't drawn, so the Acolyte F
+ * and Goatherd pics stand in. ICHOR_STUB_MUSIC: the Hierophant class plays
+ * MUS_ICHOR_BATTLE_RIVAL (src/pokemon.c) until MUS_ICHOR_BATTLE_HIEROPHANT exists. */
+
+=== TRAINER_ICHOR_KALLIDIKE ===
+Name: KALLIDIKE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Elaleaf
+Level: 22
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+Melibee
+Level: 22
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+=== TRAINER_ICHOR_EUMOLPOS ===
+Name: EUMOLPOS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Spalunk
+Level: 22
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+Stachyss
+Level: 23
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+=== TRAINER_ICHOR_MELISSA ===
+Name: MELISSA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melibee
+Level: 23
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+Rhoaril
+Level: 23
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+/* Hero difficulty. Her ace follows the clock: Korantha by day, Persenyx by night
+ * (the Telesterion picks _NIGHT when gettimeofday says TIME_NIGHT). */
+=== TRAINER_ICHOR_CHLOE_1_DAY ===
+Name: CHLOE
+Class: Hierophant
+Pic: Acolyte F
+Gender: Female
+Music: Female
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Rhoaril
+Level: 24
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Magical Leaf
+- Leech Seed
+- Mega Drain
+- Astonish
+
+Stachyss
+Level: 24
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Seed Bomb
+- Glare
+- Coil
+- Synthesis
+
+Elapling @ Miracle Seed
+Level: 25
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Bullet Seed
+- Rock Smash
+- Leech Seed
+- Worry Seed
+
+Korantha @ Sitrus Berry
+Level: 26
+IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
+- Petal Dance
+- Giga Drain
+- Fairy Wind
+- Leech Seed
+
+=== TRAINER_ICHOR_CHLOE_1_NIGHT ===
+Name: CHLOE
+Class: Hierophant
+Pic: Acolyte F
+Gender: Female
+Music: Female
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Rhoaril
+Level: 24
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Magical Leaf
+- Leech Seed
+- Mega Drain
+- Astonish
+
+Stachyss
+Level: 24
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Seed Bomb
+- Glare
+- Coil
+- Synthesis
+
+Elapling @ Miracle Seed
+Level: 25
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Bullet Seed
+- Rock Smash
+- Leech Seed
+- Worry Seed
+
+Persenyx @ Sitrus Berry
+Level: 26
+IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
+- Hex
+- Giga Drain
+- Leech Seed
+- Magical Leaf
+
+/* The night of the Mysteries: the two who climb out of the Anaktoron (beat 22), fought
+ * as a multi battle beside Kleon (PARTNER_ICHOR_KLEON_ELEUSA_*). */
+=== TRAINER_ICHOR_GRUNT_TELESTERION_PSAMMIS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Check Bad Move
+
+Spalunk
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Pebblith
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_GRUNT_TELESTERION_CHERSOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Galekit
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kaplet
+Level: 23
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+/* Eleusa's fields: the swineherd by the threshing floor (optional). */
+=== TRAINER_ICHOR_EUBOULEUS ===
+Name: EUBOULEUS
+Class: Swineherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Kaplet
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kaplet
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 /* Ichor: world-act2 (ids 160-319) */
 

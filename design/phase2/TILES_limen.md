@@ -86,8 +86,10 @@ oikia's seven, with three purples added to cloth for the Deigma's wool. Every va
 
 | Set | Tiles | Metatiles |
 |---|---|---|
-| limen | 436 of 504 | 192 of 512 |
-| domos | 374 of 504 | 152 of 512 |
+| limen | 494 of 504 | 272 of 512 |
+| domos | 451 of 504 | 224 of 512 |
+
+Batch 4 added Eleusa's households and the stall (`tools/ichor/maps/eleusa_rooms.py`, `ROOMS_eleusa.md`) with no new art: limen took the granary-keeper's house, Euphorion's house and the Agora stall (from 436 tiles), domos the house of Keleos and Dysaules's farmhouse (from 374). Two more oikia pieces (`mortar`, `niche_horse`) are shared, and two stamps are existing pieces with another behavior: `counter_plank` (oikia's table as a counter) and `pit_stairs` (oikia's timber stairwell without its warp). Emporion's rooms rebuild identically. limen is nearly full: put the next rooms in domos, or a new set.
 
 Tiles 504-511 stay free in both, for door animations.
 
@@ -99,7 +101,7 @@ The builder rewrites everything between each pair of markers below.
 
 <!-- limen_build: begin generated -->
 
-Built: **185** metatiles (`0x200`-`0x2b8`) of 512, **436** tiles of 504, palettes 6-12.
+Built: **270** metatiles (`0x200`-`0x30d`) of 512, **494** tiles of 504, palettes 6-12.
 
 | Piece | Metatile |
 |---|---|
@@ -155,7 +157,11 @@ Built: **185** metatiles (`0x200`-`0x2b8`) of 512, **436** tiles of 504, palette
 
 | Stamp | Cells | Palette | From | Metatiles (where) | What it is |
 |---|---|---|---|---|---|
+| `window` | 1x2 | wall | oikia | 2DC / 2E1 (poets) | shuttered window, Aegean-blue shutters open |
+| `niche` | 1x2 | wall | oikia | 2B9 / 2BF (granary) | wall niche with a terracotta goddess and an aryballos |
+| `honey_shelf` | 2x2 | wood | oikia | 2BD 2BE / 2C4 2C5 (granary) | wall shelf of honey jars sealed with wax |
 | `kline` | 2x2 | wood | oikia | 294 295 / 298 299 (widow) | kline (couch-bed): a scrolled headrest with a bronze boss, linen pillow, woven blue coverlet |
+| `klismos_l` | 1x1 | wood | oikia | 2EB (poets) | klismos chair, facing left |
 | `stool` | 1x1 | wood | oikia | 25D (deigma) | diphros: a folding stool with crossed legs and a fleece seat |
 | `table` | 2x1 | wood | oikia | 272 273 (tavern) | trapeza: a low table with bread, a red jug, olives and a cup |
 | `desk` | 2x1 | wood | oikia | 25B 25C (deigma) | writing table: a wax tablet with its stylus, a rolled scroll |
@@ -167,10 +173,13 @@ Built: **185** metatiles (`0x200`-`0x2b8`) of 512, **436** tiles of 504, palette
 | `amphora` | 1x2 | clay | oikia | 233 / 23B (deigma) | amphora with a black-figure band |
 | `amphora_plain` | 1x2 | clay | oikia | 232 / 23A (deigma) | a plain oil amphora |
 | `pithos` | 1x2 | clay | oikia | 239 / 23E (deigma) | pithos: a big storage jar with rope-pattern bands and a stone lid |
+| `pots` | 1x1 | clay | oikia | 300 (agora) | cooking pots: a sooty chytra, a jug and a stack of bowls |
+| `myrtle` | 1x2 | nature | oikia | 2E0 / 2E4 (poets) | potted myrtle, Aphrodite's shrub, in flower |
 | `fish_basket` | 1x1 | nature | oikia | 282 (tavern) | a wicker basket of the morning's catch |
 | `lampstand` | 1x2 | bronze | oikia | 27C / 27F (tavern) | lychnouchos: a bronze lampstand on lion-paw feet, lamp lit |
 | `column` | 1x3 | bronze | oikia | 23F / 246 / 24D (deigma) | a Doric post of whitewashed stone, holding up the beam |
 | `mat` | 2x1 | nature | oikia | 25F 260 (deigma) | woven reed mat at the door; both cells are south-arrow warps |
+| `niche_horse` | 1x2 | wall | oikia | 2DB / 2DF (poets) | wall niche with a clay horse and an oil flask |
 | `bench` | 2x1 | wood | ergasteria | 26E 26F (tavern) | a long wooden bench |
 | `scales` | 1x2 | bronze | ergasteria | 238 / 23D (deigma) | a moneyer's balance: silver in one pan, a bronze weight in the other |
 | `trestle_lamps` | 2x2 | clay | limen | 242 243 / 249 24A (deigma) | Lampis's trestle: a stepped stand of clay oil lamps |
@@ -190,6 +199,7 @@ Built: **185** metatiles (`0x200`-`0x2b8`) of 512, **436** tiles of 504, palette
 | `oar_hung` | 2x1 | wood | limen | 287 288 (widow) | a single oar hung on two pegs under the beam, its blade painted blue: her husband's |
 | `starfish_altar` | 1x1 | bronze | limen | 293 (widow) | a little marble altar of Poseidon: a dried starfish and a shell on it |
 | `loom_shroud` | 2x3 | wood | limen | 283 284 / 28A 28B / 28F 290 (widow) | the upright loom with a half-finished shroud of plain linen on it |
+| `road_map` | 2x2 | wall | limen | 2BB 2BC / 2C2 2C3 (granary) | every road in Aethos scratched into the plaster, the distances in stades tallied beside them |
 | `crate` | 1x1 | wood | limen | 2B4 (hiring_hall) | a plank crate, nailed shut |
 | `crate_shovels` | 1x1 | wood | limen | 2A8 (hiring_hall) | a crate of new shovels, their bronze blades up |
 | `crate_helmets` | 1x1 | wood | limen | 2AB (hiring_hall) | a crate heaped with bronze helmets |
@@ -197,6 +207,8 @@ Built: **185** metatiles (`0x200`-`0x2b8`) of 512, **436** tiles of 504, palette
 | `crate_stack` | 1x2 | wood | limen | 2A3 / 2A7 (hiring_hall) | two crates stacked |
 | `hoist` | 1x3 | nature | limen | 2A0 / 2A4 / 2A9 (hiring_hall) | a rope-and-pulley hoist: the sheave at the beam, the rope, a hook over a coil on the floor |
 | `shed_doors` | 2x2 | wood | limen | 2A1 2A2 / 2A5 2A6 (hiring_hall) | the great double doors out to the shipsheds, barred from inside |
+| `counter_plank` | 2x1 | wood | limen | 2FE 2FF (agora) | the stall's counter, a board on legs with bread, a jug and olives on it; talked across (oikia's table, as MB_COUNTER) |
+| `pit_stairs` | 1x2 | wall | limen | 2BA / 2C1 (granary) | the timber steps down to the grain pit (oikia's stairwell, no warp) |
 
 <!-- limen_build: end generated -->
 
@@ -204,7 +216,7 @@ Built: **185** metatiles (`0x200`-`0x2b8`) of 512, **436** tiles of 504, palette
 
 <!-- domos_build: begin generated -->
 
-Built: **149** metatiles (`0x200`-`0x294`) of 512, **374** tiles of 504, palettes 6-12.
+Built: **234** metatiles (`0x200`-`0x2e9`) of 512, **485** tiles of 504, palettes 6-12.
 
 | Piece | Metatile |
 |---|---|
@@ -262,11 +274,16 @@ Built: **149** metatiles (`0x200`-`0x294`) of 512, **374** tiles of 504, palette
 |---|---|---|---|---|---|
 | `window` | 1x2 | wall | oikia | 230 / 234 (philoxenos) | shuttered window, Aegean-blue shutters open |
 | `niche` | 1x2 | wall | oikia | 231 / 235 (philoxenos) | wall niche with a terracotta goddess and an aryballos |
+| `herbs` | 1x2 | nature | oikia | 2D5 / 2D9 (farmhouse) | bundles of drying herbs hung from pegs in the beam |
 | `kline` | 2x2 | wood | oikia | 238 239 / 23E 23F (philoxenos) | kline (couch-bed): a scrolled headrest with a bronze boss, linen pillow, woven blue coverlet |
 | `stool` | 1x1 | wood | oikia | 272 (runners) | diphros: a folding stool with crossed legs and a fleece seat |
 | `table` | 2x1 | wood | oikia | 273 274 (runners) | trapeza: a low table with bread, a red jug, olives and a cup |
 | `table_round` | 1x1 | wood | oikia | 246 (philoxenos) | a small three-legged table with a jug and bread |
+| `chest` | 2x2 | wood | oikia | 2AD 2AE / 2B4 2B5 (keleos) | kibotos: a wooden chest with bronze straps and painted panels |
+| `loom` | 2x3 | wood | oikia | 2A6 2A7 / 2A9 2AA / 2B0 2B1 (keleos) | warp-weighted loom: a half-woven cloth, the warp, clay loom weights |
+| `altar` | 1x2 | bronze | oikia | 2AB / 2B3 (keleos) | household altar of Hestia: horned marble altar, red fillets, a flame in a bronze bowl |
 | `klepsydra` | 1x2 | bronze | oikia | 263 / 269 (runners) | klepsydra: a bronze bowl drips into a basin past a marble hour scale |
+| `kalathos` | 1x1 | nature | oikia | 2C6 (keleos) | kalathos: the wool basket, heaped with carded fleece |
 | `amphora` | 1x2 | clay | oikia | 23D / 244 (philoxenos) | amphora with a black-figure band |
 | `amphora_plain` | 1x2 | clay | oikia | 275 / 278 (runners) | a plain oil amphora |
 | `pithos` | 1x2 | clay | oikia | 28F / 291 (potter) | pithos: a big storage jar with rope-pattern bands and a stone lid |
@@ -276,8 +293,14 @@ Built: **149** metatiles (`0x200`-`0x294`) of 512, **374** tiles of 504, palette
 | `lampstand` | 1x2 | bronze | oikia | 258 / 25C (philoxenos) | lychnouchos: a bronze lampstand on lion-paw feet, lamp lit |
 | `column` | 1x3 | bronze | oikia | 23A / 240 / 248 (philoxenos) | a Doric post of whitewashed stone, holding up the beam |
 | `mat` | 2x1 | nature | oikia | 25E 25F (philoxenos) | woven reed mat at the door; both cells are south-arrow warps |
+| `mortar` | 1x1 | clay | oikia | 2E4 (farmhouse) | a stone mortar of barley with its pestle |
+| `niche_horse` | 1x2 | wall | oikia | 2A8 / 2AC (keleos) | wall niche with a clay horse and an oil flask |
 | `bench` | 2x1 | wood | ergasteria | 276 277 (runners) | a long wooden bench |
+| `hearth_floor` | 2x2 | clay | ergasteria | 2BB 2BC / 2C4 2C5 (keleos) | the common room's hearth: an open fire in a raised stone curb, where the inn eats |
+| `trestle_grain` | 2x2 | clay | limen | 2E5 2E6 / 2E8 2E9 (farmhouse) | the grain merchant's trestle: open sacks of barley and wheat, a bowl of first fruits |
 | `trestle_cups` | 2x2 | clay | limen | 287 288 / 28B 28C (potter) | Euphronios's paint table: a black amphora with a red figure half done, cups, brushes |
+| `amphora_rack` | 2x2 | clay | limen | 295 296 / 299 29A (rest_house) | a timber rack of wine amphorae laid two high, mouths out |
+| `sack` | 1x1 | nature | limen | 29F (rest_house) | a sack of grain tied at the neck |
 | `louterion` | 1x2 | bronze | limen | 259 / 25D (philoxenos) | a marble washbasin on its pillar by the door, a bronze jug beside it |
 | `krater` | 1x2 | clay | limen | 24B / 251 (philoxenos) | a big black-figure krater on a stone stand, for mixing the wine with water |
 | `kline_side` | 1x2 | wood | limen | 245 / 249 (philoxenos) | a dining couch along the side wall: scrolled headrest, linen bolster, blue coverlet |
@@ -295,5 +318,7 @@ Built: **149** metatiles (`0x200`-`0x294`) of 512, **374** tiles of 504, palette
 | `drying_shelf` | 2x2 | clay | limen | 279 27A / 27F 280 (potter) | long shelves of new cups and jars drying, not yet painted |
 | `scrawl` | 2x1 | wall | limen | 27B 27C (potter) | EUPHRONIOS PAINTED ME, scrawled in black slip on the plaster (here, the first word) |
 | `clay_bin` | 1x1 | clay | limen | 28D (potter) | a stone basin of wet clay, kneaded and waiting |
+| `crate` | 1x1 | wood | limen | 2A5 (rest_house) | a plank crate, nailed shut |
+| `shed_doors` | 2x2 | wood | limen | 297 298 / 29B 29C (rest_house) | the great double doors out to the shipsheds, barred from inside |
 
 <!-- domos_build: end generated -->

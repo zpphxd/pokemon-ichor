@@ -1,0 +1,1210 @@
+{
+  "id": "MAP_HECATES_HOLLOW",
+  "name": "HecatesHollow",
+  "layout": "LAYOUT_HECATES_HOLLOW",
+  "music": "MUS_ICHOR_HOLLOW",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_HECATES_HOLLOW",
+  "requires_flash": true,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_HOLLOW_OLD_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
+      "x": 40,
+      "y": 33,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_OldWoman",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_HEKABE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 8,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "HecatesHollow_EventScript_Hekabe",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_KALLIAS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
+      "x": 8,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "HecatesHollow_EventScript_Kallias",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_PHAINO",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 16,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "HecatesHollow_EventScript_Phaino",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_BATTOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_GOATHERD",
+      "x": 3,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "HecatesHollow_EventScript_Battos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_HOUND",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
+      "x": 24,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_Hound",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_HOUND_W",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
+      "x": 23,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_HoundFading",
+      "flag": "FLAG_TEMP_3"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_HOUND_E",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(LYKOPUP)",
+      "x": 27,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_HoundFading",
+      "flag": "FLAG_TEMP_4"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_RAKNIT",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(RAKNIT)",
+      "x": 7,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_Raknit",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_WEB_WEST_1",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 13,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_Web",
+      "flag": "FLAG_ICHOR_HIDE_HOLLOW_WEB_WEST"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_WEB_WEST_2",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 13,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_Web",
+      "flag": "FLAG_ICHOR_HIDE_HOLLOW_WEB_WEST"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_WEB_CHAMBER_1",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_Web",
+      "flag": "FLAG_ICHOR_HIDE_HOLLOW_WEB_CHAMBER"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_WEB_CHAMBER_2",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 5,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_Web",
+      "flag": "FLAG_ICHOR_HIDE_HOLLOW_WEB_CHAMBER"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_WEB_SHORTCUT_1",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 40,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_Web",
+      "flag": "FLAG_ICHOR_HIDE_HOLLOW_WEB_SHORTCUT"
+    },
+    {
+      "local_id": "LOCALID_HOLLOW_WEB_SHORTCUT_2",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 40,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "HecatesHollow_EventScript_Web",
+      "flag": "FLAG_ICHOR_HIDE_HOLLOW_WEB_SHORTCUT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 14,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_RELIC_COPPER",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_HOLLOW_BRONZE_OBOL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SILK_SCARF",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_HOLLOW_SILK_SCARF"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 8,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ETHER",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_HOLLOW_ETHER"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 38,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_DUSK_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_HOLLOW_DUSK_BALL"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 12,
+      "y": 35,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_REVIVE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_HOLLOW_REVIVE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 47,
+      "y": 34,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE4_ISTHMUS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 47,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE4_ISTHMUS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 47,
+      "y": 35,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE4_ISTHMUS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 0,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 0,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 0,
+      "y": 28,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_BarkLeft"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_BarkLeft"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_TEMP_5",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_BarkLeft"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_6",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_BarkRight"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_6",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_BarkRight"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_6",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_BarkRight"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_7",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_BarkAhead"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_7",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_BarkAhead"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterHekataion"
+    },
+    {
+      "type": "trigger",
+      "x": 34,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "2",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "2",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterHekataion"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterHekataion"
+    },
+    {
+      "type": "trigger",
+      "x": 34,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "2",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "2",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterHekataion"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterHekataion"
+    },
+    {
+      "type": "trigger",
+      "x": 34,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "2",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterHekataion"
+    },
+    {
+      "type": "trigger",
+      "x": 34,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "2",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "3",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "3",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterBrazier1"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterBrazier1"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterHekataion"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterHekataion"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterHekataion"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "2",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "2",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "2",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterBrazier1"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterBrazier1"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "3",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "3",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 21,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 21,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 22,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 22,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "5",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDaylightWest"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "5",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDaylightWest"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "5",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDaylightWest"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "5",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDaylightWest"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "5",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDaylightWest"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "5",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 41,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 43,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 44,
+      "y": 31,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterBrazier2"
+    },
+    {
+      "type": "trigger",
+      "x": 40,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 41,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 43,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 44,
+      "y": 32,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 33,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 33,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 33,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "4",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 41,
+      "y": 33,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 40,
+      "y": 34,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 41,
+      "y": 34,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 40,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 41,
+      "y": 35,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 40,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 41,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 42,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 43,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 44,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "HecatesHollow_EventScript_EnterDaylightEast"
+    },
+    {
+      "type": "trigger",
+      "x": 41,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 42,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 43,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    },
+    {
+      "type": "trigger",
+      "x": 44,
+      "y": 37,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "1",
+      "script": "HecatesHollow_EventScript_EnterDark"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 42,
+      "y": 31,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_SignEast"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_SignWest"
+    },
+    {
+      "type": "sign",
+      "x": 25,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "HecatesHollow_EventScript_Hekataion"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 26,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 26,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 26,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Brazier1"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Brazier1"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Brazier1"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Brazier2"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Brazier2"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 23,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Brazier2"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 23,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "HecatesHollow_EventScript_Brazier2"
+    },
+    {
+      "type": "sign",
+      "x": 22,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "HecatesHollow_EventScript_ChalkWheel"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "HecatesHollow_EventScript_WebPictures"
+    },
+    {
+      "type": "hidden_item",
+      "x": 35,
+      "y": 29,
+      "elevation": 3,
+      "item": "ITEM_ESCAPE_ROPE",
+      "flag": "FLAG_ICHOR_HIDDEN_HOLLOW_ESCAPE_ROPE",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 27,
+      "y": 2,
+      "elevation": 3,
+      "item": "ITEM_HONEY",
+      "flag": "FLAG_ICHOR_HIDDEN_HOLLOW_HONEY",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 19,
+      "y": 18,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_HOLLOW_STARDUST",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 38,
+      "y": 22,
+      "elevation": 3,
+      "item": "ITEM_HARD_STONE",
+      "flag": "FLAG_ICHOR_HIDDEN_HOLLOW_HARD_STONE",
+      "quantity": 1,
+      "underfoot": false
+    }
+  ]
+}

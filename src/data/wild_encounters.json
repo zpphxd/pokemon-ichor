@@ -915,6 +915,91 @@
                 "species": "SPECIES_GALENYON"
               }
             ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
           }
         },
         {
@@ -1053,6 +1138,91 @@
                 "species": "SPECIES_GALENYON"
               }
             ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              }
+            ]
           }
         },
         {
@@ -1189,6 +1359,91 @@
                 "min_level": 16,
                 "max_level": 16,
                 "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KARKITOX"
+              },
+              {
+                "min_level": 35,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
               }
             ]
           }
@@ -1391,6 +1646,1117 @@
                 "min_level": 22,
                 "max_level": 22,
                 "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GALEKIT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE4_ISTHMUS",
+          "base_label": "gRoute4Isthmus_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_EPOPOI"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 18,
+                "species": "SPECIES_NEMECUB"
+              },
+              {
+                "min_level": 19,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 16,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 19,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE4_ISTHMUS",
+          "base_label": "gRoute4Isthmus_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_EPOPOI"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 18,
+                "species": "SPECIES_NEMECUB"
+              },
+              {
+                "min_level": 19,
+                "max_level": 19,
+                "species": "SPECIES_NEMECUB"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE4_ISTHMUS",
+          "base_label": "gRoute4Isthmus_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 16,
+                "max_level": 18,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 18,
+                "max_level": 19,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 18,
+                "species": "SPECIES_OBOLORN"
+              },
+              {
+                "min_level": 18,
+                "max_level": 18,
+                "species": "SPECIES_NEMECUB"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HECATES_HOLLOW",
+          "base_label": "gHecatesHollow_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_CHELONET"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HECATES_HOLLOW",
+          "base_label": "gHecatesHollow_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HECATES_HOLLOW",
+          "base_label": "gHecatesHollow_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+          "base_label": "gRoute5SkironianCliffs_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_EPOPOI"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_NEMECUB"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_KERAZAP"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 18,
+                "max_level": 21,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 19,
+                "max_level": 22,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_NARKERAY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+          "base_label": "gRoute5SkironianCliffs_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_EPOPOI"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_KERAZAP"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+          "base_label": "gRoute5SkironianCliffs_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_GELASABLE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B1F",
+          "base_label": "gEleusaSanctumB1F",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B2F",
+          "base_label": "gEleusaSanctumB2F_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B2F",
+          "base_label": "gEleusaSanctumB2F_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GALEKIT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B3F",
+          "base_label": "gEleusaSanctumB3F_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B3F",
+          "base_label": "gEleusaSanctumB3F_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GALEKIT"
               },
               {
                 "min_level": 22,

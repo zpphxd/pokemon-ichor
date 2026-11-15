@@ -727,10 +727,10 @@
 #define FLAG_ICHOR_HIDDEN_ELEUSA_HONEY 0x2A0 // Ichor: Eleusa: hidden Honey by the beehives
 #define FLAG_ICHOR_HIDDEN_ELEUSA_POMEG_BERRY 0x2A1 // Ichor: Eleusa: hidden Pomeg Berry under the well's tree
 #define FLAG_ICHOR_HIDDEN_ELEUSA_BRONZE_OBOL 0x2A2 // Ichor: Eleusa: hidden Bronze Obol in the Maiden's Well
-#define FLAG_UNUSED_0x2A3  0x2A3 // Unused Flag
-#define FLAG_UNUSED_0x2A4  0x2A4 // Unused Flag
-#define FLAG_UNUSED_0x2A5  0x2A5 // Unused Flag
-#define FLAG_UNUSED_0x2A6  0x2A6 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE4_ETHER 0x2A3 // Ichor: Route 4: hidden Ether in the kiln's ash
+#define FLAG_ICHOR_HIDDEN_ROUTE4_ORAN_BERRY 0x2A4 // Ichor: Route 4: hidden Oran Berry by the terrace milestone
+#define FLAG_ICHOR_HIDDEN_ROUTE4_STARDUST 0x2A5 // Ichor: Route 4: hidden Stardust by the procession's cookfire
+#define FLAG_ICHOR_HIDDEN_ROUTE4_HARD_STONE 0x2A6 // Ichor: Route 4: hidden Hard Stone in the scree under the slide
 #define FLAG_UNUSED_0x2A7  0x2A7 // Unused Flag
 #define FLAG_UNUSED_0x2A8  0x2A8 // Unused Flag
 #define FLAG_UNUSED_0x2A9  0x2A9 // Unused Flag
@@ -740,18 +740,18 @@
 #define FLAG_UNUSED_0x2AD  0x2AD // Unused Flag
 #define FLAG_UNUSED_0x2AE  0x2AE // Unused Flag
 #define FLAG_UNUSED_0x2AF  0x2AF // Unused Flag
-#define FLAG_UNUSED_0x2B0  0x2B0 // Unused Flag
-#define FLAG_UNUSED_0x2B1  0x2B1 // Unused Flag
-#define FLAG_UNUSED_0x2B2  0x2B2 // Unused Flag
-#define FLAG_UNUSED_0x2B3  0x2B3 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_HOLLOW_ESCAPE_ROPE 0x2B0 // Ichor: Hecate's Hollow: hidden Escape Rope on fork 1's loop
+#define FLAG_ICHOR_HIDDEN_HOLLOW_HONEY 0x2B1 // Ichor: Hecate's Hollow: hidden Honey in Hecate's supper niche
+#define FLAG_ICHOR_HIDDEN_HOLLOW_STARDUST 0x2B2 // Ichor: Hecate's Hollow: hidden Stardust on fork 3's loop
+#define FLAG_ICHOR_HIDDEN_HOLLOW_HARD_STONE 0x2B3 // Ichor: Hecate's Hollow: hidden Hard Stone in the shortcut tunnel
 #define FLAG_UNUSED_0x2B4  0x2B4 // Unused Flag
 #define FLAG_UNUSED_0x2B5  0x2B5 // Unused Flag
 #define FLAG_UNUSED_0x2B6  0x2B6 // Unused Flag
 #define FLAG_UNUSED_0x2B7  0x2B7 // Unused Flag
-#define FLAG_UNUSED_0x2B8  0x2B8 // Unused Flag
-#define FLAG_UNUSED_0x2B9  0x2B9 // Unused Flag
-#define FLAG_UNUSED_0x2BA  0x2BA // Unused Flag
-#define FLAG_UNUSED_0x2BB  0x2BB // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE5_HONEY 0x2B8 // Ichor: Route 5: Honey under a beehive in the thyme meadow
+#define FLAG_ICHOR_HIDDEN_ROUTE5_PRETTY_FEATHER 0x2B9 // Ichor: Route 5: a Pretty Feather in a niche of Aphrodite's shrine
+#define FLAG_ICHOR_HIDDEN_ROUTE5_HEART_SCALE 0x2BA // Ichor: Route 5: a Heart Scale at the tip of the shore point
+#define FLAG_ICHOR_HIDDEN_ROUTE5_ORAN_BERRY 0x2BB // Ichor: Route 5: an Oran Berry in the inn's yard
 
 // Event Flags
 #define FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG                      0x2BC
@@ -768,18 +768,18 @@
 #define FLAG_UNUSED_0x2CF                                           0x2CF // Unused Flag
 #define FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE                  0x2D0
 #define FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH                  0x2D1
-#define FLAG_UNUSED_0x2D2                                           0x2D2 // Unused Flag
-#define FLAG_UNUSED_0x2D3                                           0x2D3 // Unused Flag
-#define FLAG_UNUSED_0x2D4                                           0x2D4 // Unused Flag
-#define FLAG_UNUSED_0x2D5                                           0x2D5 // Unused Flag
-#define FLAG_UNUSED_0x2D6                                           0x2D6 // Unused Flag
-#define FLAG_UNUSED_0x2D7                                           0x2D7 // Unused Flag
-#define FLAG_UNUSED_0x2D8                                           0x2D8 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_APHAIA_BIG_PEARL                          0x2D2 // Ichor: Aphaia Road: hidden Big Pearl at the west end of the bay's beach
+#define FLAG_ICHOR_HIDDEN_APHAIA_REVIVE                             0x2D3 // Ichor: Aphaia Road: hidden Revive in the orchard's west corner
+#define FLAG_ICHOR_HIDDEN_APHAIA_NUGGET                             0x2D4 // Ichor: Aphaia Road: hidden Nugget behind the umbrella pine on the meadow terrace
+#define FLAG_ICHOR_HIDDEN_APHAIA_PRETTY_FEATHER                     0x2D5 // Ichor: Aphaia Road: hidden Pretty Feather past the horos, at the cliff edge
+#define FLAG_ICHOR_HIDDEN_APHAIA_MOON_STONE                         0x2D6 // Ichor: Temple of Aphaia: hidden Moon Stone in the cypress nook west of the way
+#define FLAG_ICHOR_HIDDEN_APHAIA_ETHER                              0x2D7 // Ichor: Temple of Aphaia: hidden Ether in the old foundations' far corner
+#define FLAG_ICHOR_HIDDEN_OROS_STAR_PIECE                           0x2D8 // Ichor: Mount Oros: hidden Star Piece behind Zeus's altar
 
-#define FLAG_UNUSED_0x2D9                                           0x2D9 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_OROS_THUNDER_STONE                        0x2D9 // Ichor: Mount Oros: hidden Thunder Stone on the summit's east lip
 
 #define FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER                     0x2DA
-#define FLAG_UNUSED_0x2DB                                           0x2DB // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ELEUSA_GRANARY_REVIVE                     0x2DB // Ichor: Eleusa: the Revive under Sitokles's bed (hidden item)
 #define FLAG_UNUSED_0x2DC                                           0x2DC // Unused Flag
 #define FLAG_UNUSED_0x2DD                                           0x2DD // Unused Flag
 #define FLAG_UNUSED_0x2DE                                           0x2DE // Unused Flag
@@ -804,9 +804,9 @@
 #define FLAG_UNUSED_0x2F1                                           0x2F1 // Unused Flag
 #define FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1          0x2F2
 #define FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2          0x2F3
-#define FLAG_UNUSED_0x2F4                                           0x2F4 // Unused Flag
-#define FLAG_UNUSED_0x2F5                                           0x2F5 // Unused Flag
-#define FLAG_UNUSED_0x2F6                                           0x2F6 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_SANCTUM_B1F_MIRACLE_SEED                  0x2F4 // Ichor: the sanctum, B1F: a Miracle Seed in the sealed granary's dust
+#define FLAG_ICHOR_HIDDEN_SANCTUM_B2F_ETHER                         0x2F5 // Ichor: the sanctum, B2F: an Ether in the spring basin's overflow
+#define FLAG_ICHOR_HIDDEN_SANCTUM_B3F_BRONZE_OBOL                   0x2F6 // Ichor: the sanctum, B3F: a Bronze Obol in the oldest granary's dust
 #define FLAG_UNUSED_0x2F7                                           0x2F7 // Unused Flag
 #define FLAG_UNUSED_0x2F8                                           0x2F8 // Unused Flag
 #define FLAG_UNUSED_0x2F9                                           0x2F9 // Unused Flag
@@ -1738,12 +1738,84 @@
 #define ICHOR_GIFT_HIEROPHANT                   3
 #define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_SAW_ROCKSLIDE                (FLAG_ICHOR_GENERAL_START + 0x000) // Ichor: Route 4: beat 17's first scene played (Alethea at the slide)
+#define FLAG_ICHOR_ROCKSLIDE_CLEARED            (FLAG_ICHOR_GENERAL_START + 0x001) // Ichor: Route 4: beat 17, the three heaps broken, the slide cleared
+#define FLAG_ICHOR_GOT_PROCESSION_BARLEY        (FLAG_ICHOR_GENERAL_START + 0x002) // Ichor: Route 4: beat 17, Eudemos's two Barley Cakes
+#define FLAG_ICHOR_HIDE_ROCKSLIDE_1             (FLAG_ICHOR_GENERAL_START + 0x003) // Ichor: Route 4: the slide's first heap, broken (its object's hide flag)
+#define FLAG_ICHOR_HIDE_ROCKSLIDE_2             (FLAG_ICHOR_GENERAL_START + 0x004) // Ichor: Route 4: the slide's second heap, broken
+#define FLAG_ICHOR_HIDE_ROCKSLIDE_3             (FLAG_ICHOR_GENERAL_START + 0x005) // Ichor: Route 4: the slide's third heap, broken
+#define FLAG_ICHOR_HIDE_PROCESSION_ROUTE4       (FLAG_ICHOR_GENERAL_START + 0x006) // Ichor: Route 4: the procession's camp struck after the slide clears (SCRIPT.md's _ROUTE2; Alethea goes with it)
+#define FLAG_ICHOR_HIDE_GRUNT_LAAS              (FLAG_ICHOR_GENERAL_START + 0x007) // Ichor: Route 4: the herm's Titanborn guard ran off
+#define FLAG_ICHOR_HIDE_THICKET_ROUTE4          (FLAG_ICHOR_GENERAL_START + 0x008) // Ichor: Route 4: the orchard's thorn thicket cut (Demeter's Sickle)
+#define FLAG_ICHOR_ITEM_ROUTE4_POTION           (FLAG_ICHOR_GENERAL_START + 0x009) // Ichor: Route 4: Potion by the kilns
+#define FLAG_ICHOR_ITEM_ROUTE4_REPEL            (FLAG_ICHOR_GENERAL_START + 0x00A) // Ichor: Route 4: Repel in the walled grave plot
+#define FLAG_ICHOR_ITEM_ROUTE4_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x00B) // Ichor: Route 4: Super Potion up the hill spur
+#define FLAG_ICHOR_ITEM_ROUTE4_TM_ROCK_TOMB     (FLAG_ICHOR_GENERAL_START + 0x00C) // Ichor: Route 4: TM39 Rock Tomb under the slide's last heap
+#define FLAG_ICHOR_ITEM_ROUTE4_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x00D) // Ichor: Route 4: Revive in the family tomb (the Girdle)
+#define FLAG_ICHOR_ITEM_ROUTE4_SUN_STONE        (FLAG_ICHOR_GENERAL_START + 0x00E) // Ichor: Route 4: Sun Stone in the terrace orchard (the Sickle)
+#define FLAG_ICHOR_ITEM_ROUTE4_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x00F) // Ichor: Route 4: Great Ball in the woods clearing (the Hammer)
+#define FLAG_ICHOR_ITEM_ROUTE4_SPELL_TAG        (FLAG_ICHOR_GENERAL_START + 0x010) // Ichor: Route 4: Spell Tag at Hecate's crossroads shrine in the glade
+#define FLAG_ICHOR_HECATES_HOUND                (FLAG_ICHOR_GENERAL_START + 0x020) // Ichor: beat 18: Hecate's hound (Lykopup, static, night) at the Hekataion caught or beaten
+#define FLAG_ICHOR_HOLLOW_RAKNIT                (FLAG_ICHOR_GENERAL_START + 0x021) // Ichor: Hecate's Hollow: the web chamber's Raknit (static, after the Arachne amphora) caught or beaten
+#define FLAG_ICHOR_MET_HOLLOW_CRONE             (FLAG_ICHOR_GENERAL_START + 0x022) // Ichor: beat 18: heard the old woman out at Hecate's Hollow's east mouth
+#define FLAG_ICHOR_GOT_HEKABE_SUPPER            (FLAG_ICHOR_GENERAL_START + 0x023) // Ichor: Hecate's Hollow: Hekabe's Barley Cake, after her battle
+#define FLAG_ICHOR_HIDE_HOLLOW_WEB_WEST         (FLAG_ICHOR_GENERAL_START + 0x024) // Ichor: Hecate's Hollow: the cobweb on the road west, burnt (hides its two objects)
+#define FLAG_ICHOR_HIDE_HOLLOW_WEB_CHAMBER      (FLAG_ICHOR_GENERAL_START + 0x025) // Ichor: Hecate's Hollow: the web chamber's cobweb, burnt
+#define FLAG_ICHOR_HIDE_HOLLOW_WEB_SHORTCUT     (FLAG_ICHOR_GENERAL_START + 0x026) // Ichor: Hecate's Hollow: the shortcut's cobweb by the east mouth, burnt
+#define FLAG_ICHOR_ITEM_HOLLOW_BRONZE_OBOL      (FLAG_ICHOR_GENERAL_START + 0x027) // Ichor: Hecate's Hollow: Bronze Obol (Relic Copper) at fork 2's dead end
+#define FLAG_ICHOR_ITEM_HOLLOW_SILK_SCARF       (FLAG_ICHOR_GENERAL_START + 0x028) // Ichor: Hecate's Hollow: Silk Scarf in the web chamber
+#define FLAG_ICHOR_ITEM_HOLLOW_ETHER            (FLAG_ICHOR_GENERAL_START + 0x029) // Ichor: Hecate's Hollow: Ether by the second brazier
+#define FLAG_ICHOR_ITEM_HOLLOW_DUSK_BALL        (FLAG_ICHOR_GENERAL_START + 0x02A) // Ichor: Hecate's Hollow: Dusk Ball in the shortcut tunnel
+#define FLAG_ICHOR_ITEM_HOLLOW_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x02B) // Ichor: Hecate's Hollow: Revive in Kallias's side passage
+#define FLAG_ICHOR_ITEM_ROUTE5_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x040) // Ichor: Route 5: the Super Potion in the pine clearing
+#define FLAG_ICHOR_ITEM_ROUTE5_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x041) // Ichor: Route 5: the Great Ball beside the rock seat
+#define FLAG_ICHOR_ITEM_ROUTE5_PP_UP            (FLAG_ICHOR_GENERAL_START + 0x042) // Ichor: Route 5: the PP Up at the watchtower (the Girdle, Act II)
+#define FLAG_ICHOR_ITEM_ROUTE5_CALCIUM          (FLAG_ICHOR_GENERAL_START + 0x043) // Ichor: Route 5: the Calcium in the pine hollow (Demeter's Sickle)
+#define FLAG_ICHOR_ITEM_ROUTE5_SUPER_REPEL      (FLAG_ICHOR_GENERAL_START + 0x044) // Ichor: Route 5: the Super Repel at the end of the thyme meadow
+#define FLAG_ICHOR_ITEM_ROUTE5_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x045) // Ichor: Route 5: the Revive at the terrace's lookout, behind the rubble
+#define FLAG_ICHOR_ROUTE5_THICKET_CUT           (FLAG_ICHOR_GENERAL_START + 0x046) // Ichor: Route 5: the pine hollow's thorn thicket is cut (its hide flag)
+#define FLAG_ICHOR_ROUTE5_RUBBLE_BROKEN         (FLAG_ICHOR_GENERAL_START + 0x047) // Ichor: Route 5: the lookout's marble rubble is broken (its hide flag)
+#define FLAG_ICHOR_GOT_GOOD_ROD                 (FLAG_ICHOR_GENERAL_START + 0x048) // Ichor: Route 5: Aigialeus gave the Good Rod
+#define FLAG_ICHOR_TRADED_GELASABLE             (FLAG_ICHOR_GENERAL_START + 0x049) // Ichor: Route 5's inn: traded an Onotis for Xenokles's Gelasable GALANTHIS
+#define FLAG_ICHOR_MET_XENOKLES                 (FLAG_ICHOR_GENERAL_START + 0x04A) // Ichor: Route 5's inn: Xenokles's welcome heard
+#define FLAG_ICHOR_ITEM_ROUTE5_ETHER            (FLAG_ICHOR_GENERAL_START + 0x04B) // Ichor: Route 5: the Ether at the terrace's east end, past the shepherd
+#define FLAG_ICHOR_ITEM_APHAIA_HYPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x060) // Ichor: Aphaia Road: item ball, Hyper Potion at the west meadow's end
+#define FLAG_ICHOR_ITEM_APHAIA_LEAF_STONE       (FLAG_ICHOR_GENERAL_START + 0x061) // Ichor: Aphaia Road: item ball, Leaf Stone in the pistachio terrace's far corner
+#define FLAG_ICHOR_ITEM_APHAIA_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x062) // Ichor: Temple of Aphaia: item ball, Great Ball in the cypress nook east of the way
+#define FLAG_ICHOR_SAFFRON_THREAD               (FLAG_ICHOR_GENERAL_START + 0x070) // Ichor: beat 19: Krokis tied the saffron thread at Eleusa's gate, three times, and it slipped off
+#define FLAG_ICHOR_ARRIVED_ELEUSA               (FLAG_ICHOR_GENERAL_START + 0x071) // Ichor: beat 20: first step into Eleusa Village
+#define FLAG_ICHOR_VISITED_ELEUSA               (FLAG_ICHOR_GENERAL_START + 0x072) // Ichor: Eleusa visited (fly target)
+#define FLAG_ICHOR_HIDE_KLEON_ELEUSA            (FLAG_ICHOR_GENERAL_START + 0x073) // Ichor: hide Kleon in Eleusa's square (beats 20-22; set once the Mysteries begin)
+#define FLAG_ICHOR_GOT_TM_GIGA_DRAIN            (FLAG_ICHOR_GENERAL_START + 0x074) // Ichor: beat 21: TM19 Giga Drain from Chloe
+#define FLAG_ICHOR_PROCESSION_ARRIVED           (FLAG_ICHOR_GENERAL_START + 0x075) // Ichor: beat 22: the procession reached Eleusa (out of the Telesterion with the Harvest Laurel)
+#define FLAG_ICHOR_HIDE_PROCESSION_ELEUSA       (FLAG_ICHOR_GENERAL_START + 0x076) // Ichor: hide the procession in Eleusa: Alethea, Kerykos, Eudemos, the initiates (shown from PROCESSION_ARRIVED until the Mysteries begin)
+#define FLAG_ICHOR_MYSTERIES_BEGUN              (FLAG_ICHOR_GENERAL_START + 0x077) // Ichor: beat 22: told Kerykos YES, the doors closed; the night scene plays in the Telesterion
+#define FLAG_ICHOR_HIDE_MYSTERIES_CROWD         (FLAG_ICHOR_GENERAL_START + 0x078) // Ichor: hide the Mysteries' congregation in the Telesterion: Kerykos, Alethea, the initiates (shown during beat 22)
+#define FLAG_ICHOR_HIDE_TELESTERION_GRUNTS      (FLAG_ICHOR_GENERAL_START + 0x079) // Ichor: hide Psammis and Chersos in the Telesterion (shown only while they climb out, beat 22)
+#define FLAG_ICHOR_HIDE_KLEON_TELESTERION       (FLAG_ICHOR_GENERAL_START + 0x07A) // Ichor: hide Kleon in the Telesterion (seated in beat 22, then at the Anaktoron's door until beat 24 sets it)
+#define FLAG_ICHOR_MYSTERIES_NIGHT              (FLAG_ICHOR_GENERAL_START + 0x07B) // Ichor: beat 22: the night of the Mysteries played to the end (the raid, the multi battle, the stair)
+#define FLAG_ICHOR_TELESTERION_MULTI            (FLAG_ICHOR_GENERAL_START + 0x07C) // Ichor: beat 22: fought the Telesterion's grunts beside Kleon (either outcome)
+#define FLAG_ICHOR_TELESTERION_PIT_FALL         (FLAG_ICHOR_GENERAL_START + 0x07D) // Ichor: the Telesterion: fell into a grain pit at least once (Doso's chalk hint)
+#define FLAG_ICHOR_ITEM_AEGINA_NET_BALL         (FLAG_ICHOR_GENERAL_START + 0x07E) // Ichor: Aigina Town: Net Ball on the north-west beach
 #define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
 #define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
 #define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)
 #define FLAG_ICHOR_LESSER_MYSTERIES_DONE        (FLAG_ICHOR_GENERAL_START + 0x083) // Ichor: the Telesterion: the fourth brazier lit, Chloe revealed
 #define FLAG_ICHOR_MET_DOSO                     (FLAG_ICHOR_GENERAL_START + 0x084) // Ichor: the Telesterion: Doso's welcome heard
 #define FLAG_ICHOR_HIDE_CHLOE_TELESTERION       (FLAG_ICHOR_GENERAL_START + 0x085) // Ichor: the Telesterion: Chloe unseen in the Anaktoron's doorway until the fourth brazier
+#define FLAG_ICHOR_GOT_KYKEON                   (FLAG_ICHOR_GENERAL_START + 0x090) // Ichor: Eleusa: Metaneira gave the goddess's drink, Fresh Water and Barley Cakes, after Laurel 3
+#define FLAG_ICHOR_GOT_TM_BULLET_SEED           (FLAG_ICHOR_GENERAL_START + 0x091) // Ichor: Eleusa: Theano gave TM09 Bullet Seed in Dysaules's farmhouse
+#define FLAG_ICHOR_GOT_AMULET_COIN              (FLAG_ICHOR_GENERAL_START + 0x092) // Ichor: Eleusa: Sitokles gave the Amulet Coin his family kept by the cold iron, after the theft
+#define FLAG_ICHOR_TRADED_PITHOUND              (FLAG_ICHOR_GENERAL_START + 0x093) // Ichor: Eleusa: traded Euphorion a Melibee for his Pithound, CRITIC
+#define FLAG_ICHOR_FRAGMENT_STOLEN              (FLAG_ICHOR_GENERAL_START + 0x094) // Ichor: beat 23 (batch 5): the Titans have taken the cold iron from under Eleusa; set by the theft
+#define FLAG_ICHOR_MET_METANEIRA                (FLAG_ICHOR_GENERAL_START + 0x095) // Ichor: Eleusa: Metaneira has told you why her family feeds strangers (she says it once)
+#define FLAG_ICHOR_SANCTUM_ARRIVED              (FLAG_ICHOR_GENERAL_START + 0x086) // Ichor: beat 23A: the granaries' arrival scene played (Chloe holds the stair, Alethea takes a grunt)
+#define FLAG_ICHOR_SANCTUM_VOICE                (FLAG_ICHOR_GENERAL_START + 0x087) // Ichor: beat 23B: Hyperion's voice heard up the Hall of the Kore
+#define FLAG_ICHOR_HIDE_HYPERION_SANCTUM        (FLAG_ICHOR_GENERAL_START + 0x089) // Ichor: beat 23C: Hyperion beaten and gone up his tunnel; it caved in behind him
+#define FLAG_ICHOR_ITEM_SANCTUM_B1F_HYPER_POTION (FLAG_ICHOR_GENERAL_START + 0x08A) // Ichor: the sanctum, B1F: the Hyper Potion in the side pit Bolos guards
+#define FLAG_ICHOR_ITEM_SANCTUM_B2F_TM_DIG      (FLAG_ICHOR_GENERAL_START + 0x08B) // Ichor: the sanctum, B2F: TM28 Dig in Gaios's fresco alcove
+#define FLAG_ICHOR_ITEM_SANCTUM_B2F_SUPER_POTION (FLAG_ICHOR_GENERAL_START + 0x08C) // Ichor: the sanctum, B2F: the Super Potion by the second fresco
+#define FLAG_ICHOR_ITEM_SANCTUM_B3F_SOFT_SAND   (FLAG_ICHOR_GENERAL_START + 0x08D) // Ichor: the sanctum, B3F: the Soft Sand at the tunnel's mouth
 #define FLAG_ICHOR_HERALDS_RUN_DONE             (FLAG_ICHOR_GENERAL_START + 0x0F0) // Ichor: the Herald's Run: the third scroll delivered (beat 15)
 #define FLAG_ICHOR_HERMES_HERM_J1               (FLAG_ICHOR_GENERAL_START + 0x0F1) // Ichor: the Herald's Run: junction herm J1 oiled
 #define FLAG_ICHOR_HERMES_HERM_J2               (FLAG_ICHOR_GENERAL_START + 0x0F2) // Ichor: the Herald's Run: junction herm J2 oiled

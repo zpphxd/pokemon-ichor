@@ -1,0 +1,709 @@
+// Hecate's Hollow: the cave under the pass of Mount Aigaleos, between Route 4 (the
+// Isthmus) and Route 5 (the Skironian cliffs). Beat 18 and Part 5's "Three Roads"
+// in design/phase2/SCRIPT.md; its people are Part 3's "Hecate's Hollow trainers".
+//
+// The cave is laid out by tools/ichor/maps/hecates_hollow.py, which also writes
+// map.json's events and the generated block at the end of this file. It is a dark
+// map ("cave": true): the engine gives the Torch's light (ENGINE_API.md §2).
+//
+// The light: VAR_TEMP_8 is the region the player stands in (0 the dark, 1 the east
+// mouth's daylight, 2 the Hekataion, 3 Hekabe's hall, 4 hall 2, 5 the west mouth's
+// daylight). Every edge cell has a trigger per neighbouring region that runs the new
+// region's Enter script, which sets the light once.
+//
+// Temp vars: VAR_TEMP_0/1 the player's cell on arrival; VAR_TEMP_8 the region;
+// VAR_TEMP_4 the flash level the map last set (0: the torch's own);
+// VAR_TEMP_9 is 0 when the webs need redrawing (a web's script sets it, ON_FRAME
+// redraws); VAR_TEMP_5/6/7 the barks at forks 1/2/3, once a visit.
+// Temp flags: FLAG_TEMP_1 hides Raknit, FLAG_TEMP_2 the hound that stays, FLAG_TEMP_3
+// and _4 the two that fade (all set or cleared in ON_TRANSITION).
+//
+// Stubs:
+//   ICHOR_STUB_DARKNESS  lit places are flash 1, not 0 (HH_LIT, below).
+//   ICHOR_STUB_SFX       SCRIPT.md Part 9 asks for a dog's bark panned left, right and
+//                        centre; until it exists the barks are the hound's own cry.
+//   ICHOR_STUB_AMPHORA   the Arachne amphora's completion flag (SYSTEMS.md §5, the
+//                        third amphora: FLAG_ICHOR_AMPHORAE_START + 2) gates Raknit.
+//   ICHOR_STUB_AETHOS_DEX  Lykopup and Raknit are stand-ins (ichor_species_stubs.h);
+//                        Raknit's "hidden ability" is the stand-in's until the dex lands.
+
+const HH_BRAZIER_1 = FLAG_ICHOR_BRAZIERS_START + 0x14
+const HH_BRAZIER_2 = FLAG_ICHOR_BRAZIERS_START + 0x15
+const HH_ARACHNE_AMPHORA = FLAG_ICHOR_AMPHORAE_START + 2    // ICHOR_STUB_AMPHORA
+const HH_SKYLIGHT = 4          // the Hekataion before the Torch: faint light from above (3 tiles)
+// ICHOR_STUB_DARKNESS: two limits of the engine's flash effect (AnimateFlash and its task
+// in src/field_screen_effect.c, which vanilla only ever used to grow Flash's light):
+//   - light can grow but not shrink: a darker level ends the task after one step, so
+//     the window stays as wide as it was;
+//   - flash 0 ends with ScanlineEffect_Stop (and a map loaded at 0 never starts it), so
+//     after full light the dark never comes back.
+// So a lit place here is flash 1 (four and a half tiles), never 0; and stepping from
+// the light into the dark without the Torch reloads the map where the player stands,
+// which draws the dark afresh (ReloadInTheDark). With the Torch the difference is 72 px
+// against 56, and the map lets the light stay wide until the next load or battle. Once
+// the engine can shrink the light, set HH_LIT to 0 and let EnterDark use
+// EventScript_IchorLeaveLitZone alone.
+const HH_LIT = 1
+
+mapscripts HecatesHollow_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        call(HecatesHollow_EventScript_SetUpCave)
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(HecatesHollow_EventScript_DrawCave)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_9, 0: HecatesHollow_EventScript_RedrawWebs
+    ]
+}
+
+text HecatesHollow_Text_NameOldWoman { "OLD WOMAN" }
+text HecatesHollow_Text_NameHekabe { "HEKABE" }
+text HecatesHollow_Text_NameKallias { "KALLIAS" }
+text HecatesHollow_Text_NamePhaino { "PHAINO" }
+text HecatesHollow_Text_NameBattos { "BATTOS" }
+
+// The statics (the hounds after 20:00, Raknit once the Arachne amphora is done), then
+// the light where the player arrives.
+script HecatesHollow_EventScript_SetUpCave {
+    setflag(FLAG_TEMP_1)
+    if (flag(HH_ARACHNE_AMPHORA) && !flag(FLAG_ICHOR_HOLLOW_RAKNIT)) {
+        clearflag(FLAG_TEMP_1)
+    }
+    setflag(FLAG_TEMP_2)
+    setflag(FLAG_TEMP_3)
+    setflag(FLAG_TEMP_4)
+    gettime
+    if (var(VAR_0x8000) >= 20 || var(VAR_0x8000) < 4) {
+        clearflag(FLAG_TEMP_3)
+        clearflag(FLAG_TEMP_4)
+        if (!flag(FLAG_ICHOR_HECATES_HOUND)) {
+            clearflag(FLAG_TEMP_2)
+        }
+    }
+    setvar(VAR_TEMP_4, 0)
+    call(HecatesHollow_EventScript_FindRegion)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// The light (SYSTEMS.md §2): what each region does when the player arrives in it
+// (Light*, from ON_TRANSITION) or steps into it (Enter*, from its edge triggers).
+//
+// VAR_TEMP_4 is the flash level this map last set (HH_LIT or HH_SKYLIGHT), or 0 when
+// the engine's own torch level holds. ICHOR_STUB_DARKNESS: `animateflash` to the level
+// already set never ends (the flash task waits for a radius it has passed), so the map
+// only animates when the level changes, through FlashToLit and FlashToSkylight.
+// ---------------------------------------------------------------------------
+
+script HecatesHollow_EventScript_LightDaylightEast {
+    setflashlevel(HH_LIT)
+    setvar(VAR_TEMP_4, HH_LIT)
+    return
+}
+
+script HecatesHollow_EventScript_LightDaylightWest {
+    setflashlevel(HH_LIT)
+    setvar(VAR_TEMP_4, HH_LIT)
+    return
+}
+
+script HecatesHollow_EventScript_LightHekataion {
+    if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
+        setflashlevel(HH_LIT)
+        setvar(VAR_TEMP_4, HH_LIT)
+    } else {
+        setflashlevel(HH_SKYLIGHT)
+        setvar(VAR_TEMP_4, HH_SKYLIGHT)
+    }
+    return
+}
+
+script HecatesHollow_EventScript_LightBrazier1 {
+    if (flag(HH_BRAZIER_1)) {
+        setflashlevel(HH_LIT)
+        setvar(VAR_TEMP_4, HH_LIT)
+    }
+    return
+}
+
+script HecatesHollow_EventScript_LightBrazier2 {
+    if (flag(HH_BRAZIER_2)) {
+        setflashlevel(HH_LIT)
+        setvar(VAR_TEMP_4, HH_LIT)
+    }
+    return
+}
+
+// Ease the light up to HH_LIT, unless it's there already: set by this map, or the
+// torch's own light at its brightest (vanilla Flash, or the Three-Flamed Torch with
+// Hecate's blessing on the player).
+script HecatesHollow_EventScript_FlashToLit {
+    if (var(VAR_TEMP_4) != HH_LIT) {
+        setvar(VAR_RESULT, FALSE)
+        if (flag(FLAG_SYS_USE_FLASH)) {
+            setvar(VAR_RESULT, TRUE)
+        } elif (flag(FLAG_ICHOR_GOT_HECATES_TORCH) && flag(FLAG_ICHOR_THREE_FLAMED_TORCH)) {
+            specialvar(VAR_RESULT, Ichor_GetBlessingGod)
+            if (var(VAR_RESULT) == ICHOR_GOD_HECATE) {
+                setvar(VAR_RESULT, TRUE)
+            } else {
+                setvar(VAR_RESULT, FALSE)
+            }
+        }
+        if (var(VAR_RESULT) == FALSE) {
+            animateflash(HH_LIT)
+        }
+    }
+    setflashlevel(HH_LIT)
+    setvar(VAR_TEMP_4, HH_LIT)
+    return
+}
+
+// Only before the Torch, so the light comes from the dark (flash 7) and grows.
+script HecatesHollow_EventScript_FlashToSkylight {
+    if (var(VAR_TEMP_4) != HH_SKYLIGHT) {
+        animateflash(HH_SKYLIGHT)
+    }
+    setflashlevel(HH_SKYLIGHT)
+    setvar(VAR_TEMP_4, HH_SKYLIGHT)
+    return
+}
+
+// Back to the torch's own light. The engine's Ichor_AnimateTorchFlash checks the level
+// itself, so it's safe whatever this map last set.
+script HecatesHollow_EventScript_FlashToTorch {
+    call(EventScript_IchorLeaveLitZone)
+    setvar(VAR_TEMP_4, 0)
+    return
+}
+
+script HecatesHollow_EventScript_EnterDark {
+    setvar(VAR_TEMP_8, 0)
+    if (!flag(FLAG_ICHOR_GOT_HECATES_TORCH) && var(VAR_TEMP_4) != 0) {
+        goto(HecatesHollow_EventScript_ReloadInTheDark)
+    }
+    call(HecatesHollow_EventScript_FlashToTorch)
+    end
+}
+
+// ICHOR_STUB_DARKNESS: the light can't shrink, so reload the map on this very cell; it
+// loads at the dark's own level (flash 7 without the Torch).
+script HecatesHollow_EventScript_ReloadInTheDark {
+    lockall
+    getplayerxy(VAR_0x8008, VAR_0x8009)
+    warpsilent(MAP_HECATES_HOLLOW, VAR_0x8008, VAR_0x8009)
+    waitstate
+    releaseall
+    end
+}
+
+script HecatesHollow_EventScript_EnterDaylightEast {
+    setvar(VAR_TEMP_8, 1)
+    call(HecatesHollow_EventScript_FlashToLit)
+    end
+}
+
+script HecatesHollow_EventScript_EnterDaylightWest {
+    setvar(VAR_TEMP_8, 5)
+    call(HecatesHollow_EventScript_FlashToLit)
+    end
+}
+
+// The round chamber is lit faintly from above until the Hekataion's torches burn.
+script HecatesHollow_EventScript_EnterHekataion {
+    setvar(VAR_TEMP_8, 2)
+    if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
+        call(HecatesHollow_EventScript_FlashToLit)
+    } else {
+        call(HecatesHollow_EventScript_FlashToSkylight)
+    }
+    call(HecatesHollow_EventScript_HoundsFade)
+    end
+}
+
+script HecatesHollow_EventScript_EnterBrazier1 {
+    setvar(VAR_TEMP_8, 3)
+    if (flag(HH_BRAZIER_1)) {
+        call(HecatesHollow_EventScript_FlashToLit)
+    } else {
+        call(HecatesHollow_EventScript_FlashToTorch)
+    }
+    end
+}
+
+script HecatesHollow_EventScript_EnterBrazier2 {
+    setvar(VAR_TEMP_8, 4)
+    if (flag(HH_BRAZIER_2)) {
+        call(HecatesHollow_EventScript_FlashToLit)
+    } else {
+        call(HecatesHollow_EventScript_FlashToTorch)
+    }
+    end
+}
+
+// ---------------------------------------------------------------------------
+// The east mouth
+// ---------------------------------------------------------------------------
+
+script HecatesHollow_EventScript_SignEast {
+    msgbox(format("HECATE'S HOLLOW\n"
+                  "Three roads meet beneath the mountain. Hecate keeps them all."), MSGBOX_SIGN)
+}
+
+script HecatesHollow_EventScript_SignWest {
+    msgbox(format("HECATE'S HOLLOW\n"
+                  "West: Route 5 and the Skironian Cliffs, and on to Eleusa."), MSGBOX_SIGN)
+}
+
+// Beat 18: the old woman by the mouth, her covered dish at her feet.
+script HecatesHollow_EventScript_OldWoman {
+    lock
+    faceplayer
+    setspeaker(HecatesHollow_Text_NameOldWoman)
+    if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
+        msgbox(format("So she gave you her light. She doesn't, often.\p"
+                      "Feed her when you pass. She remembers who does."))
+    } elif (!flag(FLAG_ICHOR_MET_HOLLOW_CRONE)) {
+        msgbox(format("No light? Then you're braver than you look. Or sillier.\p"
+                      "Three roads meet in there. In the dark, every one looks right.\p"
+                      "Listen for the dog. Hecate's dogs always know the way.\p"
+                      "I leave her supper at the crossroads every new moon. She never eats it.\p"
+                      "Somebody does."))
+        setflag(FLAG_ICHOR_MET_HOLLOW_CRONE)
+    } else {
+        msgbox(format("Listen for the dog. Hecate's dogs always know the way."))
+    }
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The dark road: at each fork the dog barks, once a visit, until the Torch
+// ---------------------------------------------------------------------------
+
+script HecatesHollow_EventScript_BarkLeft {
+    setvar(VAR_TEMP_5, 1)
+    if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
+        end
+    }
+    lockall
+    call(HecatesHollow_EventScript_DistantBark)
+    msgbox(format("Somewhere ahead, a dog barks. The barking comes from your left."), MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script HecatesHollow_EventScript_BarkRight {
+    setvar(VAR_TEMP_6, 1)
+    if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
+        end
+    }
+    lockall
+    call(HecatesHollow_EventScript_DistantBark)
+    msgbox(format("Somewhere ahead, a dog barks. The barking comes from your right."), MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script HecatesHollow_EventScript_BarkAhead {
+    setvar(VAR_TEMP_7, 1)
+    if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
+        end
+    }
+    lockall
+    call(HecatesHollow_EventScript_DistantBark)
+    msgbox(format("Somewhere ahead, a dog barks. The barking comes from straight ahead."), MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+// ICHOR_STUB_SFX: the hound's cry, echoing, for the panned bark SCRIPT.md Part 9 wants.
+script HecatesHollow_EventScript_DistantBark {
+    playmoncry(SPECIES_LYKOPUP, CRY_MODE_ECHO_END)
+    waitmoncry
+    delay(20)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// The Hekataion: beat 18's offering, then Hecate's altar; its spring is the
+// midpoint rest (SCRIPT.md Part 5)
+// ---------------------------------------------------------------------------
+
+script HecatesHollow_EventScript_Hekataion {
+    lockall
+    if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
+        goto(EventScript_IchorAltar_Hecate)
+    }
+    msgbox(format("A pillar with three faces, looking down three roads. An altar of Hecate.\p"
+                  "A barley cake sits on the ledge, as if someone left it for you."), MSGBOX_DEFAULT)
+    msgbox(format("Leave Hecate her supper at the crossroads?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("The torches stay cold. Somewhere, very close, a dog sighs."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    msgbox(format("You set the barley cake on the altar."), MSGBOX_DEFAULT)
+    closemessage
+    // a single bark, very close; silence; then the left face's torch, the right's, the middle's
+    playmoncry(SPECIES_LYKOPUP, CRY_MODE_NORMAL)
+    waitmoncry
+    delay(60)
+    call(HecatesHollow_EventScript_LightTorchW)
+    delay(30)
+    call(HecatesHollow_EventScript_LightTorchE)
+    delay(30)
+    call(HecatesHollow_EventScript_LightTorchS)
+    call(HecatesHollow_EventScript_FlashToLit)
+    // Favor: the myth-quest and a loved offering for Hecate; Hestia's share of any offering
+    setvar(VAR_0x8004, ICHOR_GOD_HECATE)
+    setvar(VAR_0x8005, ICHOR_FAVOR_MYTH_QUEST + 5)
+    special(Ichor_AddFavor)
+    setvar(VAR_0x8004, ICHOR_GOD_HESTIA)
+    setvar(VAR_0x8005, 1)
+    special(Ichor_AddFavor)
+    msgbox(format("The middle face's torch comes loose in your hand. It's warm."), MSGBOX_DEFAULT)
+    call(HecatesHollow_EventScript_TakeTorch)
+    giveitem(ITEM_HECATES_TORCH)
+    msgbox(format("Something brushes past your legs. Something warm, with a cold nose.\p"
+                  "Then it's gone."), MSGBOX_DEFAULT)
+    releaseall
+}
+
+script HecatesHollow_EventScript_Spring {
+    lockall
+    msgbox(format("Cold water runs down the pillar's three faces. You feel rested."), MSGBOX_DEFAULT)
+    special(HealPlayerParty)
+    releaseall
+}
+
+script HecatesHollow_EventScript_ChalkWheel {
+    msgbox(format("A wheel is chalked on the rock, a spiral inside it.\p"
+                  "The chalk is faint, but someone keeps renewing it."), MSGBOX_SIGN)
+}
+
+// After 20:00, three black hounds sit at the pillar's feet. Two fade into the walls
+// as the player comes in; the third stays (beat 18, "At night").
+script HecatesHollow_EventScript_HoundsFade {
+    if (flag(FLAG_TEMP_3)) {
+        return
+    }
+    lockall
+    delay(16)
+    msgbox(format("Black hounds sit at the pillar's feet."), MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_HOLLOW_HOUND_W, HecatesHollow_Movement_FadeWest)
+    waitmovement(LOCALID_HOLLOW_HOUND_W)
+    applymovement(LOCALID_HOLLOW_HOUND_E, HecatesHollow_Movement_FadeEast)
+    waitmovement(LOCALID_HOLLOW_HOUND_E)
+    removeobject(LOCALID_HOLLOW_HOUND_W)
+    removeobject(LOCALID_HOLLOW_HOUND_E)
+    if (flag(FLAG_TEMP_2)) {
+        msgbox(format("They walk into the rock as if it were mist."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("Two of them walk into the rock as if it were mist. The third stays."), MSGBOX_DEFAULT)
+    }
+    closemessage
+    releaseall
+    return
+}
+
+movement HecatesHollow_Movement_FadeWest { walk_slow_left * 2 set_invisible }
+movement HecatesHollow_Movement_FadeEast { walk_slow_right * 2 set_invisible }
+
+// The faded hounds can't be spoken to (they're gone); this is for safety only.
+script HecatesHollow_EventScript_HoundFading {
+    end
+}
+
+// The hound that stays: Lykopup, Lv 20, one only (FLAG_ICHOR_HECATES_HOUND once
+// caught or beaten; running leaves it for another night).
+script HecatesHollow_EventScript_Hound {
+    lock
+    faceplayer
+    msgbox(format("The black hound looks at you, then at the dark behind you. It doesn't fade."), MSGBOX_DEFAULT)
+    closemessage
+    setwildbattle(SPECIES_LYKOPUP, 20)
+    playmoncry(SPECIES_LYKOPUP, CRY_MODE_ENCOUNTER)
+    waitmoncry
+    delay(20)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    dowildbattle
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_CAUGHT || var(VAR_RESULT) == B_OUTCOME_WON) {
+        setflag(FLAG_ICHOR_HECATES_HOUND)
+    }
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The webs (SYSTEMS.md §2: webs burn). Each web is two invisible objects that run
+// the engine's cobweb; once it burns, ON_FRAME swaps in the torn web.
+// ---------------------------------------------------------------------------
+
+script HecatesHollow_EventScript_Web {
+    setvar(VAR_TEMP_9, 0)
+    goto(EventScript_IchorCobweb)
+}
+
+script HecatesHollow_EventScript_RedrawWebs {
+    setvar(VAR_TEMP_9, 1)
+    call(HecatesHollow_EventScript_DrawWebs)
+    special(DrawWholeMapView)
+    end
+}
+
+script HecatesHollow_EventScript_WebPictures {
+    msgbox(format("Old webs hang here in sheets, with pictures woven into them.\p"
+                  "A loom. A goddess with a spear. A spider."), MSGBOX_SIGN)
+}
+
+// Raknit hangs from the ceiling once the Arachne amphora is done (SCRIPT.md Part 2):
+// Lv 20, with its hidden ability.
+script HecatesHollow_EventScript_Raknit {
+    lock
+    faceplayer
+    msgbox(format("A small spider hangs from a thread, mid-stitch.\p"
+                  "Its web shows a picture: a goddess, tearing up a tapestry."), MSGBOX_DEFAULT)
+    closemessage
+    setwildbattle(SPECIES_RAKNIT, 20)
+    createmon(1, 0, SPECIES_RAKNIT, 20, abilityNum=2)
+    playmoncry(SPECIES_RAKNIT, CRY_MODE_ENCOUNTER)
+    waitmoncry
+    delay(20)
+    setflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    dowildbattle
+    clearflag(FLAG_SYS_CTRL_OBJ_DELETE)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_CAUGHT || var(VAR_RESULT) == B_OUTCOME_WON) {
+        setflag(FLAG_ICHOR_HOLLOW_RAKNIT)
+    }
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The braziers: each lights its hall for good (ENGINE_API.md §2)
+// ---------------------------------------------------------------------------
+
+script HecatesHollow_EventScript_Brazier1 {
+    setvar(VAR_0x8004, HH_BRAZIER_1)
+    setvar(VAR_0x8005, FALSE)          // ICHOR_STUB_DARKNESS: the hall is lit to HH_LIT here, not 0
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(HecatesHollow_EventScript_DrawBrazier1Lit)
+        special(DrawWholeMapView)
+        call(HecatesHollow_EventScript_FlashToLit)
+        msgbox(format("The brazier catches. Its light reaches every corner of the passage."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
+
+script HecatesHollow_EventScript_Brazier2 {
+    setvar(VAR_0x8004, HH_BRAZIER_2)
+    setvar(VAR_0x8005, FALSE)          // ICHOR_STUB_DARKNESS: the hall is lit to HH_LIT here, not 0
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(HecatesHollow_EventScript_DrawBrazier2Lit)
+        special(DrawWholeMapView)
+        call(HecatesHollow_EventScript_FlashToLit)
+        msgbox(format("The brazier catches. Its light reaches every corner of the passage."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// The people (SCRIPT.md Part 3; Phaino and Battos are the map's own)
+// ---------------------------------------------------------------------------
+
+// HEKABE, by the first brazier; her sight covers the only way west. Pilgrims
+// carry Hecate's suppers, and she gives the player one.
+script HecatesHollow_EventScript_Hekabe {
+    trainerbattle_single(TRAINER_ICHOR_HEKABE,
+        format("Hecate's light is on you, I see. Let's see if it's earned."),
+        format("Earned."),
+        HecatesHollow_EventScript_HekabeSupper)
+    if (!flag(FLAG_ICHOR_GOT_HEKABE_SUPPER)) {
+        goto(HecatesHollow_EventScript_HekabeSupper)
+    }
+    setspeaker(HecatesHollow_Text_NameHekabe)
+    msgbox(format("The weasel was a girl once. She laughed at a goddess.\p"
+                  "Hecate took her in anyway. Hecate takes everyone in."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+script HecatesHollow_EventScript_HekabeSupper {
+    lock
+    faceplayer
+    setspeaker(HecatesHollow_Text_NameHekabe)
+    msgbox(format("Here. Supper for the road.\p"
+                  "Leave it on her ledge as you pass. She'll know whose it was."))
+    giveitem(ITEM_BARLEY_CAKE)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_HEKABE_SUPPER)
+    }
+    release
+    end
+}
+
+// INITIATE KALLIAS sits in the dark of the side passage, so he sees the player only
+// up close. ICHOR_STUB_SPRITE: the initiate's walker and portrait aren't drawn; he
+// is an acolyte until they are.
+script HecatesHollow_EventScript_Kallias {
+    trainerbattle_single(TRAINER_ICHOR_KALLIAS,
+        format("My family carries the Mysteries' torches! I forgot mine. Cheer me up."),
+        format("I feel worse."))
+    setspeaker(HecatesHollow_Text_NameKallias)
+    msgbox(format("Don't tell my father. He's the Torchbearer. Officially. He has a hat."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// PILGRIM PHAINO, lost at fork 2's dead end with her supper dish.
+script HecatesHollow_EventScript_Phaino {
+    trainerbattle_single(TRAINER_ICHOR_PHAINO,
+        format("Oh! I thought you were her dog. I'm not scared. I'm cold."),
+        format("Still cold."))
+    setspeaker(HecatesHollow_Text_NamePhaino)
+    msgbox(format("I bring her supper every new moon. It's always gone by morning.\p"
+                  "I sat up once to see who eats it. I fell asleep. It was gone anyway."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// GOATHERD BATTOS, at the west mouth with his back to the cave. In the myth he saw
+// Hermes steal the cattle, swore to say nothing, told anyway, and was turned to stone.
+script HecatesHollow_EventScript_Battos {
+    trainerbattle_single(TRAINER_ICHOR_BATTOS,
+        format("Goats? What goats? I saw nothing. I always see nothing."),
+        format("Didn't see that either."))
+    setspeaker(HecatesHollow_Text_NameBattos)
+    msgbox(format("A traveler paid me once to keep quiet about what I saw.\p"
+                  "I didn't. My knees have been stiff ever since. Like stone."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// SCRIPT_BEGIN/END: the block below is rewritten by the builder.
+// --- Generated by tools/ichor/maps/hecates_hollow.py from its tables. Do not edit. ---
+
+// The cave as the story has left it: the Hekataion once the Torch is taken,
+// the lit braziers, the burnt webs. ON_LOAD calls it before the map is drawn.
+script HecatesHollow_EventScript_DrawCave {
+    if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
+        call(HecatesHollow_EventScript_DrawHekataionLit)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x14)) {
+        call(HecatesHollow_EventScript_DrawBrazier1Lit)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x15)) {
+        call(HecatesHollow_EventScript_DrawBrazier2Lit)
+    }
+    call(HecatesHollow_EventScript_DrawWebs)
+    return
+}
+
+script HecatesHollow_EventScript_DrawHekataionLit {
+    setmetatile(24, 5, METATILE_CaveDark_Hekataion_TorchW_Lit, FALSE)
+    setmetatile(25, 5, METATILE_CaveDark_Hekataion_TorchS_Gone, FALSE)
+    setmetatile(26, 5, METATILE_CaveDark_Hekataion_TorchE_Lit, FALSE)
+    setmetatile(25, 8, METATILE_CaveDark_Hekataion_NoCake, TRUE)
+    setmetatile(27, 2, METATILE_CaveDark_Niche_Empty_1, TRUE)
+    return
+}
+
+script HecatesHollow_EventScript_LightTorchW {
+    setmetatile(24, 5, METATILE_CaveDark_Hekataion_TorchW_Lit, FALSE)
+    special(DrawWholeMapView)
+    playse(SE_M_FLAME_WHEEL)
+    return
+}
+
+script HecatesHollow_EventScript_LightTorchE {
+    setmetatile(26, 5, METATILE_CaveDark_Hekataion_TorchE_Lit, FALSE)
+    special(DrawWholeMapView)
+    playse(SE_M_FLAME_WHEEL)
+    return
+}
+
+script HecatesHollow_EventScript_LightTorchS {
+    setmetatile(25, 5, METATILE_CaveDark_Hekataion_TorchS_Lit, FALSE)
+    special(DrawWholeMapView)
+    playse(SE_M_FLAME_WHEEL)
+    return
+}
+
+// The middle face's torch comes away in the player's hand; the cake is gone.
+script HecatesHollow_EventScript_TakeTorch {
+    setmetatile(25, 5, METATILE_CaveDark_Hekataion_TorchS_Gone, FALSE)
+    setmetatile(25, 8, METATILE_CaveDark_Hekataion_NoCake, TRUE)
+    setmetatile(27, 2, METATILE_CaveDark_Niche_Empty_1, TRUE)
+    special(DrawWholeMapView)
+    return
+}
+
+script HecatesHollow_EventScript_DrawBrazier1Lit {
+    setmetatile(3, 12, METATILE_CaveDark_Brazier_Lit_00, TRUE)
+    setmetatile(4, 12, METATILE_CaveDark_Brazier_Lit_10, TRUE)
+    setmetatile(3, 13, METATILE_CaveDark_Brazier_Lit_01, TRUE)
+    setmetatile(4, 13, METATILE_CaveDark_Brazier_Lit_11, TRUE)
+    return
+}
+
+script HecatesHollow_EventScript_DrawBrazier2Lit {
+    setmetatile(6, 22, METATILE_CaveDark_Brazier_Lit_00, TRUE)
+    setmetatile(7, 22, METATILE_CaveDark_Brazier_Lit_10, TRUE)
+    setmetatile(6, 23, METATILE_CaveDark_Brazier_Lit_01, TRUE)
+    setmetatile(7, 23, METATILE_CaveDark_Brazier_Lit_11, TRUE)
+    return
+}
+
+// Burnt webs: torn shreds you can walk through. Each web's second object shares
+// its flag, so it goes too.
+script HecatesHollow_EventScript_DrawWebs {
+    if (flag(FLAG_ICHOR_HIDE_HOLLOW_WEB_WEST)) {
+        setmetatile(13, 10, METATILE_CaveDark_Web1_Torn_0, FALSE)
+        setmetatile(13, 11, METATILE_CaveDark_Web1_Torn_1, FALSE)
+        removeobject(LOCALID_HOLLOW_WEB_WEST_1)
+        removeobject(LOCALID_HOLLOW_WEB_WEST_2)
+    }
+    if (flag(FLAG_ICHOR_HIDE_HOLLOW_WEB_CHAMBER)) {
+        setmetatile(5, 8, METATILE_CaveDark_Web1_Torn_0, FALSE)
+        setmetatile(5, 9, METATILE_CaveDark_Web1_Torn_1, FALSE)
+        removeobject(LOCALID_HOLLOW_WEB_CHAMBER_1)
+        removeobject(LOCALID_HOLLOW_WEB_CHAMBER_2)
+    }
+    if (flag(FLAG_ICHOR_HIDE_HOLLOW_WEB_SHORTCUT)) {
+        setmetatile(40, 9, METATILE_CaveDark_Web1_Torn_0, FALSE)
+        setmetatile(40, 10, METATILE_CaveDark_Web1_Torn_1, FALSE)
+        removeobject(LOCALID_HOLLOW_WEB_SHORTCUT_1)
+        removeobject(LOCALID_HOLLOW_WEB_SHORTCUT_2)
+    }
+    return
+}
+
+// ON_TRANSITION: the region the player arrives in (VAR_TEMP_8) and its light.
+script HecatesHollow_EventScript_FindRegion {
+    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+    setvar(VAR_TEMP_8, 0)
+    if (var(VAR_TEMP_0) >= 41 && var(VAR_TEMP_0) <= 47 && var(VAR_TEMP_1) >= 32 && var(VAR_TEMP_1) <= 36) {
+        setvar(VAR_TEMP_8, 1)
+        call(HecatesHollow_EventScript_LightDaylightEast)
+    }
+    elif (var(VAR_TEMP_0) >= 16 && var(VAR_TEMP_0) <= 33 && var(VAR_TEMP_1) >= 2 && var(VAR_TEMP_1) <= 12) {
+        setvar(VAR_TEMP_8, 2)
+        call(HecatesHollow_EventScript_LightHekataion)
+    }
+    elif (var(VAR_TEMP_0) >= 1 && var(VAR_TEMP_0) <= 14 && var(VAR_TEMP_1) >= 12 && var(VAR_TEMP_1) <= 17) {
+        setvar(VAR_TEMP_8, 3)
+        call(HecatesHollow_EventScript_LightBrazier1)
+    }
+    elif (var(VAR_TEMP_0) >= 0 && var(VAR_TEMP_0) <= 3 && var(VAR_TEMP_1) >= 24 && var(VAR_TEMP_1) <= 29) {
+        setvar(VAR_TEMP_8, 5)
+        call(HecatesHollow_EventScript_LightDaylightWest)
+    }
+    elif (var(VAR_TEMP_0) >= 3 && var(VAR_TEMP_0) <= 12 && var(VAR_TEMP_1) >= 22 && var(VAR_TEMP_1) <= 32) {
+        setvar(VAR_TEMP_8, 4)
+        call(HecatesHollow_EventScript_LightBrazier2)
+    }
+    return
+}
+
+// --- End of the generated block. ---

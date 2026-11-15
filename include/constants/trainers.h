@@ -555,6 +555,13 @@ enum TrainerClassID
     TRAINER_CLASS_SCHOLAR,
     TRAINER_CLASS_MERCHANT,
     TRAINER_CLASS_PILGRIM,
+    // Ichor: Route 4's classes (SCRIPT.md Part 3); their portraits are vanilla stand-ins until drawn
+    TRAINER_CLASS_POTTER,
+    TRAINER_CLASS_RUNNER,
+    TRAINER_CLASS_INITIATE,
+    TRAINER_CLASS_SWINEHERD,           // Eubouleus at Eleusa; the Goatherd's pic stands in until the Swineherd is drawn
+    // Ichor: the Titans' admins (Hyperion, Iapetos, Rhea); GetBattleBGM gives them MUS_ICHOR_BATTLE_ADMIN
+    TRAINER_CLASS_TITAN_ADMIN,
 
     TRAINER_CLASS_COUNT,
 };

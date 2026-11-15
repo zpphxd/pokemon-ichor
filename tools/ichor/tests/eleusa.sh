@@ -9,6 +9,8 @@
 # until the sanctum opens, walks through the wheat (the gold rustle, and a wild
 # Pokemon from Eleusa's table), then plays the Lesser Mysteries' braziers in the
 # dark Telesterion: out of turn, in turn, the pits and the chalk path, Chloe.
+# The story's trainers count as beaten and Krokis's gate plays on the way in;
+# tools/ichor/tests/temple_demeter.sh plays the story itself (beats 19-22).
 # Output in build/test_eleusa/ (screenshots in shots/); see eleusa.lua.
 set -u
 cd "$(dirname "$0")/../../.."

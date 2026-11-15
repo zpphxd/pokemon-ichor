@@ -121,31 +121,44 @@ TOWN_CONNECTION = ("up", ROAD.id, ROAD.x - TOWN_X)          # in the town's map.
 # north through the pines to Mount Oros, east and up the marble steps (Euthymia
 # keeps them) to the temple. Terraces east of the road drop back down to the
 # orchard: the quick way home.
+#
+# The route standard (MAP_DESIGN.md section 8; Act II's middle band) wants 8 or
+# more forced grass cells between every pair of ends, so each leg of the walk
+# has its own band: two on the trunk (the golden grass Myrmex watches at the
+# ant hills' corner, 4 deep, and the band under Sostratos, 4 deep), one on
+# each branch past the fork (the pine glade on the Oros path and the golden
+# grass between the herm and the temple steps, 4 each). Town to either end is
+# then 12 and Oros to the temple 8, both ways: tall grass above the terrace wall
+# west of the steps (24-26, 1) charges the hop down into the temple-side band
+# the cell it skips. The rest of the grass is optional: the west meadow under
+# the Oros ledge, the pistachio and meadow terraces on the way home, golden
+# grass on the east plateau, and tall grass under the orchard's pistachios by
+# the gate.
 
 ROAD_PLAN = [
     # 0         1         2         3
     # 0123456789012345678901234567890123456789
-    "~s%%%%%%pp%s~~~~~~~~s%%%...pp...%%%%%s~~",  # 0   seams: Oros (0-15), the temple (16-39)
-    "~s%%%%%%pp%%s~~r~~~s%%%%...pp.S.%%%%%s~~",  # 1
-    "~ss%%%%%pp%%%s~~~~s%%%%%___^^___%%%%%s~~",  # 2   the temple steps
-    "~~s%%%%%ppSddsssssssS.H....ppddo;;dUUs~~",  # 3   the bay's beach; the herm
-    "~~s%%%%%pppppppppppppppppppppdd;;dSUUs~~",  # 4   the fork; the horos on the hill
-    "~~s%%%%%pppppdoddddddppppppppddddddd.s~~",  # 5
-    "~~s%%%doddddd%%%%ooodpp%%%%ddddoodd..s~~",  # 6   Sostratos
-    "~s%%%________%%%%%o;;;,,,%%_______%%%%s~",  # 7   the band
-    "rs%%%...*....%%%%%o;;;,,,%%QQ....QQ...s~",  # 8
-    "~s%%%dddddd..%%%%%o;;;,,,%%QQ....QQ...s~",  # 9
-    "~s%%%%%%%%%pppppppppppp%%%%...QQ.....s~~",  # 10  the upper terrace
-    "~~s%%%%%%%%pppppppppppp%%%%...QQ.....s~~",  # 11
-    "~~s%%%%%%%%pp__________%%%%_______%%%s~r",  # 12
-    "r~s%%%%%%%%ppAtAd;;Ad;d%...,,dddAUU..s~~",  # 13  the ant hills; Myrmex
-    "~~s%%%%%%%%ppddtd;;tA;;%,,,.dAtddUU..s~~",  # 14
-    "~~~s%%%%%%%ppodAdd;dd;o%..,,,dddd...s~r~",  # 15
-    "~~~s%%%%%%%ppppppppppp%%...........s~~~~",  # 16  the lower terrace
+    "~s%%%%%%;;%s~~~~~~~~s%%%...pp...%%%%%s~~",  # 0   seams: Oros (0-15), the temple (16-39)
+    "~s%%%%%;;;%%s~~r~~~s%%%%,,,pp.S.%%%%%s~~",  # 1   the pine glade on the Oros path
+    "~ss%%%%;;;d%%s~~~~s%%%%%___^^___%%%%%s~~",  # 2   Marilades; the temple steps
+    "~~s%%%%%;;SddsssssssS.H;;;dppddo;;dUUs~~",  # 3   the bay's beach; the herm; Euthymia
+    "~~s%%%%%ppppppppppppppp;;;;ppdd;;;SUUs~~",  # 4   the fork; the horos on the hill
+    "~~s%%%%%pppppdod;;;ddp;;;odppd;;;ddd.s~~",  # 5
+    "~~s%%%dod;;dd%%%%ooodpp%%%%ddddoo;d..s~~",  # 6   Sostratos; Nikasia over the way home
+    "~s%%%________%%%%%o;;;,,o%%_______%%%%s~",  # 7   the band
+    "rs%%%.,,*.,,.%%%%%o;;;;,,%%QQ....QQ,,.s~",  # 8
+    "~s%%%d;;ddd,.%%%%%o;;;;;,%%QQ....QQ,,,s~",  # 9
+    "~s%%%%%%%%%ppppppppo;;;;o%%...QQ.,,,.s~~",  # 10  the upper terrace
+    "~~s%%%%%%%%pppppppppppp%%%%...QQ..,,,s~~",  # 11
+    "~~s%%%%%%%%;;__________%%%%_______%%%s~r",  # 12
+    "r~s%%%%%%%%;;AtAd;;Ad;d%,..,,dddAUU..s~~",  # 13  the ant hills; Myrmex
+    "~~s%%%%%%%%;;ddtd;;tA;;%,,,.dAtddUU..s~~",  # 14
+    "~~~s%%%%%%%;;odAdd;dd;o%.,,,,dddd...s~r~",  # 15
+    "~~~s%%%%%%%ppppppppppp%%.....,,,...s~~~~",  # 16  the lower terrace
     "~~~~s%%%%%%ppppppppppp%%%%______%%s~~~~~",  # 17
-    "~~~~~~~s...QQ..QQ..dpp.QQ..*..%%s~~~~~~~",  # 18
-    "~~~~~~~~~s.QQ..QQ..dpp.QQ.....s~~~~~~~~~",  # 19
-    "~~~~~~~~~~~s.QQ....Sppd......s~~~~~~~~~~",  # 20  the south sign
+    "~~~~~~~s...QQ.,QQ..dpp.QQ..*..%%s~~~~~~~",  # 18
+    "~~~~~~~~~s.QQ,,QQ..dpp.QQ,,,..s~~~~~~~~~",  # 19  Opora
+    "~~~~~~~~~~~s.QQ....Sppd.,,,..s~~~~~~~~~~",  # 20  the south sign
     "~~~~~~~~~~~~sQQ..YYoppoYY..s~~~~~~~~~~~~",  # 21
     "~~~~~~~~~~~~~~sssYYoppoYYss~~~~~~~~~~~~~",  # 22
     "~~~~~~~~~~~~~~~~~YYoppoYY~~~~~~~~~~~~~~~",  # 23  the seam with the town's gate
@@ -224,26 +237,62 @@ SET_PIECES = {
 # sight check reads the trainer id from the script, so a placeholder can't be a
 # sighted trainer). TRAINERS gives the facing and sight each is placed for, and
 # whether its line must cut the only path; the checks prove it does.
+#
+# Eight of them (world-act2's batch 4 registers all eight at Astyra levels): the
+# first three are Phase 2's; Opora, Marilades and Nikasia on the road, Hesychia at
+# the temple and Aigon on Oros were added for the route standard. Each one's
+# scripts.pory comment suggests a class, a name and a party.
 
 FACING = {"MOVEMENT_TYPE_FACE_UP": (0, -1), "MOVEMENT_TYPE_FACE_DOWN": (0, 1),
           "MOVEMENT_TYPE_FACE_LEFT": (-1, 0), "MOVEMENT_TYPE_FACE_RIGHT": (1, 0)}
 
 # name: (map, x, y, facing, sight, mandatory on the walk to, gfx)
 TRAINERS = {
+    # the orchard by the gate: the road's first, in plain view across the way up
+    "Opora": (ROAD, 18, 19, "MOVEMENT_TYPE_FACE_RIGHT", 3, (), "OBJ_EVENT_GFX_ICHOR_HARVESTER"),
     "Myrmex": (ROAD, 13, 14, "MOVEMENT_TYPE_FACE_LEFT", 3, ("oros", "temple"), "OBJ_EVENT_GFX_ICHOR_HOPLITE"),
     "Sostratos": (ROAD, 20, 6, "MOVEMENT_TYPE_FACE_RIGHT", 3, ("oros", "temple"), "OBJ_EVENT_GFX_ICHOR_MERCHANT"),
     "Euthymia": (ROAD, 26, 3, "MOVEMENT_TYPE_FACE_RIGHT", 3, ("temple",), "OBJ_EVENT_GFX_ICHOR_PILGRIM"),
+    # the pine glade on the Oros path, stepping out of the trees across it
+    "Marilades": (ROAD, 10, 2, "MOVEMENT_TYPE_FACE_LEFT", 3, ("oros",), "OBJ_EVENT_GFX_ICHOR_MAN"),
+    # the top of the east terraces, watching the hop down: the quick way home
+    "Nikasia": (ROAD, 28, 6, "MOVEMENT_TYPE_FACE_RIGHT", 2, (), "OBJ_EVENT_GFX_ICHOR_YOUTH_F"),
+    # the top of the temple's marble steps
+    "Hesychia": (TEMPLE, 10, 12, "MOVEMENT_TYPE_FACE_RIGHT", 3, ("temple",), "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F"),
+    # Oros's golden band, the only way up to the summit
+    "Aigon": (OROS, 6, 10, "MOVEMENT_TYPE_FACE_LEFT", 2, ("oros",), "OBJ_EVENT_GFX_ICHOR_GOATHERD"),
 }
 PRIESTESS = (TEMPLE, 11, 9, "MOVEMENT_TYPE_FACE_DOWN")
+LOCALID_PREFIX = {ROAD: "APHAIA", TEMPLE: "APHAIA", OROS: "OROS"}
 
 # (map, x, y, item, amount, flag, note)
 ITEMS = [
     (ROAD, 22, 13, "ITEM_SILVER_POWDER", 1, "FLAG_ICHOR_ITEM_APHAIA_SILVER_POWDER", "on the ant hills"),
     (ROAD, 12, 3, "ITEM_SUPER_POTION", 1, "FLAG_ICHOR_ITEM_APHAIA_SUPER_POTION", "at the Oros fork"),
+    (ROAD, 5, 9, "ITEM_HYPER_POTION", 1, "FLAG_ICHOR_ITEM_APHAIA_HYPER_POTION", "the west meadow's end"),
+    (ROAD, 37, 8, "ITEM_LEAF_STONE", 1, "FLAG_ICHOR_ITEM_APHAIA_LEAF_STONE", "the pistachio terrace's far corner"),
     (TEMPLE, 14, 9, "ITEM_PRETTY_FEATHER", 2, "FLAG_ICHOR_ITEM_APHAIA_PRETTY_FEATHER", "on the temple steps"),
+    (TEMPLE, 16, 14, "ITEM_GREAT_BALL", 1, "FLAG_ICHOR_ITEM_APHAIA_GREAT_BALL", "the cypress nook east of the way"),
     # ICHOR_STUB_OFFERINGS: Wine is an engine item still to come; Berry Juice stands in
     (OROS, 8, 4, "ITEM_BERRY_JUICE", 1, "FLAG_ICHOR_ITEM_OROS_WINE", "by Zeus's altar"),
 ]
+
+# Hidden items (map, x, y, item, flag, note). Their flags are vanilla ones, at or
+# above FLAG_HIDDEN_ITEMS_START, which bg_hidden_item_event needs.
+HIDDEN = [
+    (ROAD, 13, 3, "ITEM_BIG_PEARL", "FLAG_ICHOR_HIDDEN_APHAIA_BIG_PEARL", "the west end of the bay's beach"),
+    (ROAD, 15, 21, "ITEM_REVIVE", "FLAG_ICHOR_HIDDEN_APHAIA_REVIVE", "under the pines at the orchard's foot"),
+    (ROAD, 36, 13, "ITEM_NUGGET", "FLAG_ICHOR_HIDDEN_APHAIA_NUGGET", "behind the umbrella pine, meadow terrace"),
+    (ROAD, 36, 6, "ITEM_PRETTY_FEATHER", "FLAG_ICHOR_HIDDEN_APHAIA_PRETTY_FEATHER", "past the horos, at the cliff"),
+    (TEMPLE, 7, 14, "ITEM_MOON_STONE", "FLAG_ICHOR_HIDDEN_APHAIA_MOON_STONE", "the cypress nook west of the way"),
+    (TEMPLE, 20, 13, "ITEM_ETHER", "FLAG_ICHOR_HIDDEN_APHAIA_ETHER", "the old foundations' far corner"),
+    (OROS, 7, 2, "ITEM_STAR_PIECE", "FLAG_ICHOR_HIDDEN_OROS_STAR_PIECE", "behind Zeus's altar"),
+    (OROS, 10, 4, "ITEM_THUNDER_STONE", "FLAG_ICHOR_HIDDEN_OROS_THUNDER_STONE", "the summit's east lip"),
+]
+
+# Temple and Oros are one-floor landmarks off the road, not routes: the route
+# standard judges them as dungeons (MAP_DESIGN.md section 8.4).
+ICHOR_KIND = {TEMPLE: "dungeon", OROS: "dungeon"}
 
 # (map, x, y, script suffix, read from) -- read from: the tile the player stands
 # on to read it, which the checks make sure is reachable
@@ -565,7 +614,7 @@ def events_of(m):
     for name, (tm, x, y, facing, _sight, _must, gfx) in TRAINERS.items():
         if tm is m:
             objects.append(obj(gfx, x, y, facing, f"{m.folder}_EventScript_{name}",
-                               local_id=f"LOCALID_APHAIA_{name.upper()}"))
+                               local_id=f"LOCALID_{LOCALID_PREFIX[m]}_{name.upper()}"))
     if m is PRIESTESS[0]:
         _, x, y, facing = PRIESTESS
         objects.append(obj("OBJ_EVENT_GFX_ICHOR_PRIESTESS", x, y, facing, f"{m.folder}_EventScript_Priestess",
@@ -580,7 +629,10 @@ def events_of(m):
             bgs.append({"type": "sign", "x": x, "y": y, "elevation": 0,
                         "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
                         "script": f"{m.folder}_EventScript_{name}"})
-    conns = [{"map": nid, "offset": off, "direction": d} for d, nid, off in CONNECTIONS[m]]
+    for hm, x, y, item, flag, _note in HIDDEN:
+        if hm is m:
+            bgs.append({"type": "hidden_item", "x": x, "y": y, "elevation": 3, "item": item, "flag": flag})
+    conns =[{"map": nid, "offset": off, "direction": d} for d, nid, off in CONNECTIONS[m]]
     return {"connections": conns, "object_events": objects, "warp_events": [], "coord_events": [],
             "bg_events": bgs}
 
@@ -591,6 +643,8 @@ def write_events():
         data = json.loads(path.read_text())
         data.update({"music": "MUS_ICHOR_ROAD", "region_map_section": "MAPSEC_AIGINA",
                      "map_type": "MAP_TYPE_ROUTE", "weather": "WEATHER_SUNNY"})
+        if m in ICHOR_KIND:
+            data["ichor_kind"] = ICHOR_KIND[m]
         data.update(events_of(m))
         path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     path = ROOT / "data/maps/AeginaTown/map.json"
@@ -847,6 +901,9 @@ def check(wd, verbose=True):
             errors.append(f"{name} at ({x},{y}): its reading tile ({fx},{fy}) can't be reached")
         if w.kind.get(c) != "solid" and name != "DigSpot":
             errors.append(f"{name} at ({x},{y}) should be on its solid sign, herm or altar")
+    for m, x, y, item, _flag, note in HIDDEN:
+        if not any((m.x + x + dx, m.y + y + dy) in reach for dx, dy in STEPS4):
+            errors.append(f"{m.key}: nobody can stand next to the hidden {item} at ({x},{y}), {note}")
     hm, hx, hy = next((m, x, y) for m, x, y, n, _ in BG if n == "GreatHerm")
     if world_xy(hm, hx, hy + 1) not in reach:
         errors.append("the tile south of the great herm (the Wings' landing) can't be reached")

@@ -51,6 +51,12 @@ local function giveLead()
   L.assistLevel100()
   local hp, maxhp = L.partyHp(0)
   expect(L.partyLevel(0) == S.MAX_LEVEL and hp > 0, string.format("a level-100 lead (HP %d/%d)", hp, maxhp))
+  -- Hecate's Torch (the braziers are the engine's, and want it), and the story's
+  -- trainers counted beaten: this walk checks the places; temple_demeter.sh plays the story.
+  L.setFlag(S.FLAG_GOT_HECATES_TORCH, true)
+  for _, t in ipairs({ "TRAINER_EUBOULEUS", "TRAINER_KALLIDIKE", "TRAINER_EUMOLPOS", "TRAINER_MELISSA" }) do
+    L.setFlag(S.TRAINER_FLAGS_START + S[t], true)
+  end
 end
 
 local function paletteTagLoaded(tag)
@@ -73,6 +79,10 @@ local function flash() return emu:read8(L.sb1() + S.OFF_SB1_FLASH) end
 local function village()
   L.setBeat("village", false)
   warpTo(S.MAP_ELEUSA, 1, 25)
+  -- a repel for the walk round the village: the wheat's wild Pokemon are
+  -- wheat()'s to meet, and one jumping out on the way to a person can leave
+  -- the talk that follows pressing A into nothing
+  L.setVar(S.VAR_REPEL_STEP_COUNT, 250)
   expect(L.mapMusic() == S.MUS_ELEUSA, "Eleusa plays MUS_ICHOR_ELEUSA")
   L.shot("west_gate")
   -- everyone in the village
@@ -97,6 +107,7 @@ end
 
 local function doors()
   L.setBeat("doors", false)
+  L.setVar(S.VAR_REPEL_STEP_COUNT, 250)
   for _, m in ipairs({ "MAP_E_ASCLEPEION", "MAP_E_AGORA", "MAP_E_KELEOS", "MAP_E_GRANARY",
                        "MAP_E_POETS", "MAP_E_FARMHOUSE" }) do
     L.useWarp(S[m])
@@ -113,12 +124,16 @@ local function doors()
   expect(L.mapId() == S.MAP_ELEUSA, "the Ploutonion is shut before the sanctum opens")
   L.shot("ploutonion_shut")
   L.setFlag(S.FLAG_SANCTUM_OPEN, true)
+  -- in play the Mysteries bring the player down the Anaktoron's stair first, so
+  -- B1F's arrival scene has played before anyone uses the Ploutonion's gate
+  L.setFlag(S.FLAG_SANCTUM_ARRIVED, true)
   local x, y = L.pos()
   warpTo(S.MAP_ELEUSA, x, y)
   L.useWarp(S.MAP_E_SANCTUM_B1F)
   expect(L.mapId() == S.MAP_E_SANCTUM_B1F, "and open once FLAG_ICHOR_SANCTUM_OPEN is set")
   L.useWarp(S.MAP_ELEUSA)
   L.setFlag(S.FLAG_SANCTUM_OPEN, false)
+  L.setFlag(S.FLAG_SANCTUM_ARRIVED, false)
   local _ = gate
 end
 
@@ -212,7 +227,7 @@ local function temple()
   L.shot("summer_lit")
   local chloe = L.npc(T .. "Chloe")
   expect(chloe.present, "Chloe stands in the Anaktoron's doorway")
-  talk(chloe, "Chloe", opts())
+  -- (her battle and the Laurel are temple_demeter.sh's)
   L.go(13, 24, opts())
   L.shot("hall_lit")
   L.useWarp(S.MAP_ELEUSA)

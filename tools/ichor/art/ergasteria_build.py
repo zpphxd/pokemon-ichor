@@ -103,7 +103,9 @@ def room_modules():
     """The modules whose ROOMS dicts are built from these sets."""
     import aegina_homes
     import emporion_rooms
-    return [aegina_homes, emporion_rooms]
+    import route5_rooms        # Route 5's inn, on domos; after Emporion's, so their ids don't move
+    import eleusa_rooms        # Eleusa's six rooms (batch 4)
+    return [aegina_homes, emporion_rooms, route5_rooms, eleusa_rooms]
 
 
 # --------------------------------------------------------------------------

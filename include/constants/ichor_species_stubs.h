@@ -66,8 +66,20 @@
 #define SPECIES_MELIBEE     SPECIES_COMBEE       // Bug, Demeter's bee
 #define SPECIES_ELALEAF     SPECIES_SEEDOT       // Grass, the olive sprout
 #define SPECIES_RHOARIL     SPECIES_BOUNSWEET    // Grass, Persephone's pomegranate
+// Chloe's team (beat 21): the olive's second stage and the pomegranate's two forms
+#define SPECIES_ELAPLING    SPECIES_BAYLEEF      // Grass, the olive sapling
+#define SPECIES_KORANTHA    SPECIES_WHIMSICOTT   // Grass/Fairy, the Kore by day
+#define SPECIES_PERSENYX    SPECIES_TREVENANT    // Grass/Ghost (Ghost/Grass here), Persephone by night
 // Emporion (batch 2)
 #define SPECIES_PANACOIL    SPECIES_ARBOK        // Poison/Fairy, the healer serpent coiled in every Asclepeion
+// Route 4 (batch 3)
+#define SPECIES_OBOLORN     SPECIES_SHUPPET      // Ghost, the unburied shade among the roadside tombs at night
+// Hecate's Hollow (batch 3): its two statics
+#define SPECIES_LYKOPUP     SPECIES_POOCHYENA    // Dark, Hecate's black hound (the dex: Intimidate, Strong Jaw / Unnerve)
+#define SPECIES_RAKNIT      SPECIES_SPINARAK     // Bug, Arachne's spiderling (the dex: Swarm, Frisk / Defiant)
+// Hyperion's team (the Mystery sanctum, beat 23)
+#define SPECIES_KAPNUB      SPECIES_SLUGMA       // Fire, the smoldering coal
+#define SPECIES_KAMINOO     SPECIES_PONYTA       // Fire, Kaldera's furnace calf
 
 #endif // ICHOR_AETHOS_DEX
 

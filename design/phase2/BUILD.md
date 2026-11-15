@@ -98,7 +98,58 @@ The user's standard for every route (director, 2026-11-14): "Thoughtfully. Engag
 
 **From SCRIPT.md** (by its old route names): Route 4 takes "Route 2, the Sacred Way" and beat 17 (the rockslide, the procession); the Hollow takes "Hecate's Hollow", beat 18 and Part 5's Three Roads; Route 5 takes "Route 3, the Pine Slopes" and beat 19's road (the rock seat over Salamis, Aphrodite's niches, the pines, a roadside rest house in Thria's place). Their trainers and encounter tables are in Parts 3 and 4 under those names; Thria, the Rheitoi and the jesters' bridge are world-act2's.
 
+### Route 4, the Isthmus road (built)
+
+`tools/ichor/maps/route4.py` (60×32, aethos + skiron, one map: the Diolkos stays with Emporion's harbor); passes and renders in `design/phase2/MAPS_route4.md`; check `tools/ichor/tests/route4.sh`.
+
+| From | To | How |
+|---|---|---|
+| `MAP_ROUTE4_ISTHMUS` south edge | `MAP_EMPORION_CITY` north edge (the Isthmus Gate) | map connection, offset **0** both ways (`down` from Route 4, `up` from the city). The road is open at x = 7..9 on both seams and nowhere else; Route 4's rows 26–31 are aethos only. Kleon's beat-16 run up to Route 4's (8, 29..31) stays clear. |
+| `MAP_ROUTE4_ISTHMUS` warp **0**, the Hollow's mouth at **(57, 7)** (a cave door in the cut bank, entered from (57, 8)) | `MAP_HECATES_HOLLOW` warp **0** | The Hollow's east mouth warp 0 should lead back to Route 4's warp 0. Until `MAP_HECATES_HOLLOW` is registered the mouth warps back onto itself (`ICHOR_STUB_HOLLOW`); rerun `route4.py` after the Hollow lands and it points into the Hollow. |
+| the great herm (23, 7), `HERM_AETHOS_ROUTE_4` | landing (23, 8) | `HEAL_LOCATION_HERM_AETHOS_ROUTE_4`, row in `src/data/ichor_herms.h` |
+
+**Desecrated altar index 0** (`FLAG_ICHOR_ALTARS_START + 0`) is Route 4's great herm (Hermes): Laas guards it, a prayer cleanses it, then it takes oil. The next desecrated altar should take index 1.
+
+**Trainers 80–85:** `TRAINER_ICHOR_EXEKIAS` (80, mandatory), `_MYRRHINE` (81, mandatory), `_GRUNT_ROUTE4_LAAS` (82, the herm's guard), `_MENALKAS` (83, optional), `_PHEIDIPPOS` (84, mandatory), `_KAPELOS` (85, optional); `TRAINERS_END_ACT1` 86. New classes `TRAINER_CLASS_POTTER`, `_RUNNER`, `_INITIATE` (appended after PILGRIM), on vanilla portraits until drawn (`ICHOR_STUB_SPRITE`).
+
+**Flags.** Bank 0x000–0x010: `FLAG_ICHOR_SAW_ROCKSLIDE`, `_ROCKSLIDE_CLEARED`, `_GOT_PROCESSION_BARLEY`, `_HIDE_ROCKSLIDE_1`–`_3`, `_HIDE_PROCESSION_ROUTE4` (SCRIPT.md's `_ROUTE2`; Alethea leaves with the camp), `_HIDE_GRUNT_LAAS`, `_HIDE_THICKET_ROUTE4`, `_ITEM_ROUTE4_POTION`, `_REPEL`, `_SUPER_POTION`, `_TM_ROCK_TOMB`, `_REVIVE`, `_SUN_STONE`, `_GREAT_BALL`, `_SPELL_TAG`. Vanilla 0x2A3–0x2A6: `FLAG_ICHOR_HIDDEN_ROUTE4_ETHER`, `_ORAN_BERRY`, `_STARDUST`, `_HARD_STONE`. The woods clearing's rubble uses `FLAG_TEMP_11`, as vanilla's breakable rocks do.
+
+**Wild:** `gRoute4Isthmus_Morning` (dawn and dusk: evening falls back to it), `_Day`, `_Night` land tables at 16–19 and a rock-smash table (`tools/ichor/maps/route4_encounters.py`). Gelasable (evolves at 20) and Cairnolith (at 25) left SCRIPT.md's night table for Galekit and Pebblith; Obolorn is 1% at night (`SPECIES_OBOLORN` stands in as Shuppet).
+
+### Route 5, the Skironian cliffs (the Route 5 agent)
+
+Built by `tools/ichor/maps/route5.py` (68x31) and `tools/ichor/maps/route5_rooms.py` (the inn, on domos); plans, tables and passes in `design/phase2/MAPS_route5.md`; walked by `tools/ichor/tests/route5.sh`.
+
+| From | To | How |
+|---|---|---|
+| `MAP_ROUTE5_SKIRONIAN_CLIFFS` warp **0**, the Hollow's west mouth: the cave door at **(9,8)**, the player steps out to (9,9) | `MAP_HECATES_HOLLOW`, its west-mouth warp | **The Hollow's west mouth should target `MAP_ROUTE5_SKIRONIAN_CLIFFS` warp 0.** Our side is a placeholder until the Hollow merges: `route5.py` points it at `MAP_HECATES_HOLLOW` once that map is registered (set `HOLLOW_WARP_ID` to the mouth's id and re-run it); before then at `MAP_EMPORION_CITY` warp 0, so the ROM builds. |
+| `MAP_ROUTE5_SKIRONIAN_CLIFFS` east edge | `MAP_ELEUSA_VILLAGE` west edge | map connection, `right` offset **-3** / Eleusa's `left` offset **3**. Open on our rows 21-24 at x = 67, Eleusa's 24-27. Our columns 60-67 are aethos only. Note: `eleusa.py` writes `"connections": null`; it needs to keep this entry when it's next run. |
+| Route 5 warp **1**, the inn's door (54,20) | `MAP_ROUTE5_REST_HOUSE` warp 0 | the inn's mat (7-8, 8) is its warp 0, back to Route 5's warp 1 |
+
+Great herm: `HERM_AETHOS_ROUTE_5` at (58,20), `HEAL_LOCATION_HERM_AETHOS_ROUTE_5` at (58,21) (row in `src/data/ichor_herms.h`). Trainers 110-116: `TRAINER_ICHOR_KYNEGEIROS`, `_MELANTHIOS`, `_MYRTO`, `_ARISTAIOS`, `_MOPSOS`, `_DAPHNIS`, `_KERDON` (`TRAINERS_END_ACT1` 117). Bank flags 0x040-0x04B: `FLAG_ICHOR_ITEM_ROUTE5_SUPER_POTION`, `_GREAT_BALL`, `_PP_UP`, `_CALCIUM`, `_SUPER_REPEL`, `_REVIVE`, `_ETHER`, `FLAG_ICHOR_ROUTE5_THICKET_CUT`, `FLAG_ICHOR_ROUTE5_RUBBLE_BROKEN`, `FLAG_ICHOR_GOT_GOOD_ROD`, `FLAG_ICHOR_TRADED_GELASABLE`, `FLAG_ICHOR_MET_XENOKLES`. Vanilla 0x2B8-0x2BB (the only free ones in 0x2B8-0x2C7): `FLAG_ICHOR_HIDDEN_ROUTE5_HONEY`, `_PRETTY_FEATHER`, `_HEART_SCALE`, `_ORAN_BERRY`. In-game trade `INGAME_TRADE_ICHOR_GALANTHIS`. The inn is Thria's Inn of the Plain (Xenokles, his stable boy and his trade), moved to the road; Thria's other two households stay with world-act2.
+
 **Engine APIs now on main** (`design/ENGINE_API.md`): relics by `giveitem` (`ITEM_HECATES_TORCH`); obstacles (`OBJ_EVENT_GFX_BREAKABLE_ROCK` + `EventScript_RockSmash` for marble rubble, needing the Bronze Hammer); darkness (`"cave": true`), braziers (`EventScript_IchorBrazier`, this session's block `FLAG_ICHOR_BRAZIERS_START + 0x14`–`0x1F`) and lit zones; altars (`EventScript_IchorAltar_<God>`, `EventScript_IchorDesecratedAltar`); great herms (`EventScript_IchorGreatHerm`, `HERM_AETHOS_ROUTE_4` / `_5`, with a table row in `src/data/ichor_herms.h` and a heal location each). Use them, not stubs, unless the API isn't built yet.
+
+### Hecate's Hollow (the Hollow agent)
+
+One map, `MAP_HECATES_HOLLOW` (48×40, dark, `MAP_TYPE_UNDERGROUND`, group `gMapGroup_DungeonsAct1`), built by `tools/ichor/maps/hecates_hollow.py`; the plan and passes are in `design/phase2/MAPS_hollow.md`. SCRIPT.md's two halves share it: the cobweb on the Hekataion's west road splits them, so the first half is only ever crossed without the Torch.
+
+| Mouth | Warp cells (the map's edge) | Warp ids | Leads to |
+|---|---|---|---|
+| east | (47, 33), (47, 34), (47, 35), daylight on rows 33–35 | **0** = (47, 34), the middle; 1 = (47, 33); 2 = (47, 35) | `MAP_ROUTE4_ISTHMUS`, warp `ROUTE4_MOUTH_WARP` (placeholder 0, in the builder) |
+| west | (0, 26), (0, 27), (0, 28), daylight on rows 26–28 | **3** = (0, 27), the middle; 4 = (0, 26); 5 = (0, 28) | `MAP_ROUTE5_SKIRONIAN_CLIFFS`, warp `ROUTE5_MOUTH_WARP` (placeholder 0) |
+
+Route 4's mouth tile should target `MAP_HECATES_HOLLOW` warp **0**, Route 5's warp **3**. Neither route is on the Hollow's branch, so until both are, the builder points each mouth at the other (the build needs a map that exists). **After merging:** set `ROUTE4_MOUTH_WARP` and `ROUTE5_MOUTH_WARP` in `hecates_hollow.py` to the routes' mouth warp ids and rerun it; `hollow.sh` then expects to walk out onto Route 5.
+
+- **Trainers 100–103:** `TRAINER_ICHOR_HEKABE`, `_KALLIAS`, `_PHAINO`, `_BATTOS` (`TRAINERS_END_ACT1` 104 on the branch).
+- **Flags:** bank 0x020–0x02B (`FLAG_ICHOR_HECATES_HOUND`, `_HOLLOW_RAKNIT`, `_MET_HOLLOW_CRONE`, `_GOT_HEKABE_SUPPER`, `_HIDE_HOLLOW_WEB_WEST`, `_CHAMBER`, `_SHORTCUT`, `_ITEM_HOLLOW_BRONZE_OBOL`, `_SILK_SCARF`, `_ETHER`, `_DUSK_BALL`, `_REVIVE`); vanilla 0x2B0–0x2B3 (`FLAG_ICHOR_HIDDEN_HOLLOW_ESCAPE_ROPE`, `_HONEY`, `_STARDUST`, `_HARD_STONE`).
+- **Braziers:** the Hollow's two are `FLAG_ICHOR_BRAZIERS_START + 0x14` (Hekabe's hall) and `+ 0x15` (hall 2). The Hekataion's torches go by `FLAG_ICHOR_GOT_HECATES_TORCH`.
+- **Stub tags:** `ICHOR_STUB_DARKNESS` (lit places are flash 1: see below), `ICHOR_STUB_SFX` (the panned bark is the hound's cry), `ICHOR_STUB_AMPHORA` (Raknit waits on `FLAG_ICHOR_AMPHORAE_START + 2`, the third amphora), `ICHOR_STUB_SPRITE` (Kallias battles as an Acolyte), `ICHOR_STUB_AETHOS_DEX` (`SPECIES_LYKOPUP` Poochyena, `SPECIES_RAKNIT` Spinarak, added to `ichor_species_stubs.h`), `ICHOR_STUB_COINS` (the Bronze Obol is `ITEM_RELIC_COPPER`).
+- **For the engine session:** three limits of the flash effect (`AnimateFlash` and `UpdateFlashLevelEffect` in `src/field_screen_effect.c`, which vanilla only used to grow Flash's light), found in game by `hollow.sh`:
+  1. Flash level 0 never lets the dark come back: `AnimateFlash(0)` ends with `ScanlineEffect_Stop`, and a dark map loaded at flash 0 never starts the effect.
+  2. The light can't shrink: a darker level ends the task after one step, so the window stays as wide as it was (the saved level changes, the screen doesn't).
+  3. Animating to the level already set never ends: the task waits for a radius it has passed, the window narrows to a strip, and a script that waits on it softlocks.
+  `EventScript_IchorEnterLitZone`, `EventScript_IchorBrazier` with `VAR_0x8005 = TRUE`, dousing, and the Telesterion's quarters all run into 1 or 2. The Hollow works round them: lit places are flash 1 (`HH_LIT`), it animates only when its own record of the level (`VAR_TEMP_4`) changes, and before the Torch it reloads the map on the cell where the player steps back into the dark.
 
 ## Warps, connections and seams (batch 1)
 
@@ -154,8 +205,27 @@ The Telesterion's warps: 0–2 the stair (13, 12, 14 on row 26) to Eleusa's warp
 
 **Flags claimed** (bank 0x080–0x085, vanilla 0x2A0–0x2A2): `FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION`, `FLAG_ICHOR_ITEM_ELEUSA_AWAKENING`, `FLAG_ICHOR_SANCTUM_OPEN`, `FLAG_ICHOR_LESSER_MYSTERIES_DONE`, `FLAG_ICHOR_MET_DOSO`, `FLAG_ICHOR_HIDE_CHLOE_TELESTERION`; `FLAG_ICHOR_HIDDEN_ELEUSA_HONEY`, `FLAG_ICHOR_HIDDEN_ELEUSA_POMEG_BERRY`, `FLAG_ICHOR_HIDDEN_ELEUSA_BRONZE_OBOL`.
 
+**The six interiors** are built (the Eleusa interiors agent): `tools/ichor/maps/eleusa_rooms.py`, the plans and passes in `design/phase2/ROOMS_eleusa.md`, the check `tools/ichor/tests/eleusa_rooms.sh`. The placeholder copies are gone; each room's mat warps back to the first id of its door. Claimed: bank 0x090–0x095 `FLAG_ICHOR_GOT_KYKEON`, `_GOT_TM_BULLET_SEED`, `_GOT_AMULET_COIN`, `_TRADED_PITHOUND`, `_FRAGMENT_STOLEN`, `_MET_METANEIRA`; vanilla 0x2DB `FLAG_ICHOR_HIDDEN_ELEUSA_GRANARY_REVIVE`; `HEAL_LOCATION_ELEUSA_VILLAGE` (the road below the Asclepeion's door, (10, 24)); the in-game trade `INGAME_TRADE_ICHOR_CRITIC`. **Batch 5 sets `FLAG_ICHOR_FRAGMENT_STOLEN`** at the theft (beat 23): Sitokles gives the Amulet Coin once it is set.
+
 **Braziers.** The Telesterion's four season braziers use `FLAG_ICHOR_BRAZIERS_START + 0x10` (Autumn), `+ 0x11` (Winter), `+ 0x12` (Spring), `+ 0x13` (Summer). The block `+ 0x14`–`+ 0x1F` is left for the sanctum's four and Eleusa's procession torches. Ask before using it for anything else.
 | `MAP_AEGINA_APHAIA_ROAD` | (22, 4), the path south of the great herm at (22, 3) | the herm's Wings landing (ENGINE_API §4's heal location) |
+
+### Batch 4's story: beats 19 (the gate), 20, 21 and 22
+
+Scripted by the Eleusa story agent in `data/maps/EleusaVillage/scripts.pory` and `data/maps/EleusaVillage_TempleOfDemeter/scripts.pory`; the cast's places are in `eleusa.py`'s and `temple_demeter.py`'s object tables. `tools/ichor/tests/temple_demeter.sh` plays it all.
+
+| Beat | Where | What |
+|---|---|---|
+| 19, Krokis's gate | Eleusa, triggers at (6, 24–27) | Once: the player steps up beside Krokis (8, 26) and the thread slips three times. Talking to her first plays it too. |
+| 20 | Eleusa | ON_TRANSITION sets `FLAG_ICHOR_ARRIVED_ELEUSA` and the fly flag `FLAG_ICHOR_VISITED_ELEUSA` (`MAPSEC_ELEUSA_VILLAGE` flies to `HEAL_LOCATION_ELEUSA_VILLAGE`, (10, 24)). Kleon waits in the square at (24, 23). |
+| 21 | the Telesterion | The engine's braziers and lit zones (the `ICHOR_STUB_DARKNESS` stand-ins are gone). The acolytes are trainers; Chloe's battle picks `_NIGHT` when `gettimeofday` says `TIME_NIGHT`; a loss whites out. The Laurel sets `FLAG_BADGE03_GET`, Demeter +15, TM19, a Barley Cake (the engine's Hierophant's-offering flag, `FLAG_ICHOR_GIFTS_START + 15`, is SCRIPT.md's `FLAG_ICHOR_CHLOE_RITE`) and boards the pits. |
+| 22 | Eleusa, then the Telesterion | Out of the hall with the Laurel, the procession arrives (Alethea comes up to the steps). Kerykos's YES warps to (13, 17) in the hall; the raid kicks over the Autumn and Summer braziers (drawn overturned on every load after), the multi battle beside Kleon (`PARTNER_ICHOR_KLEON_ELEUSA_*`, either outcome continues), and the stair: `FLAG_ICHOR_MYSTERIES_NIGHT`, `_TELESTERION_MULTI`, `_SANCTUM_OPEN`, then `warp(MAP_ELEUSA_SANCTUM_B1F, 0)`. Kleon then keeps the Anaktoron's door at (14, 14). |
+
+**Flags claimed** (bank 0x070–0x07D): `FLAG_ICHOR_SAFFRON_THREAD`, `_ARRIVED_ELEUSA`, `_VISITED_ELEUSA`, `_HIDE_KLEON_ELEUSA`, `_GOT_TM_GIGA_DRAIN`, `_PROCESSION_ARRIVED`, `_HIDE_PROCESSION_ELEUSA`, `_MYSTERIES_BEGUN` (Kerykos's YES), `_HIDE_MYSTERIES_CROWD`, `_HIDE_TELESTERION_GRUNTS`, `_HIDE_KLEON_TELESTERION`, `_MYSTERIES_NIGHT`, `_TELESTERION_MULTI`, `_TELESTERION_PIT_FALL`. **Trainers** 140–147: `TRAINER_ICHOR_KALLIDIKE`, `_EUMOLPOS`, `_MELISSA`, `_CHLOE_1_DAY`, `_CHLOE_1_NIGHT`, `_GRUNT_TELESTERION_PSAMMIS`, `_GRUNT_TELESTERION_CHERSOS`, `_EUBOULEUS` (the new `TRAINER_CLASS_SWINEHERD`). Kleon got a battle back pic (`tools/ichor/art/sprites_kleon_back.py`), which a partner needs.
+
+**Temp vars.** The village: `VAR_TEMP_8` (the gate played), `VAR_TEMP_9` (the procession waits). The hall: `VAR_TEMP_8` (the Mysteries wait), `_9` (Doso's chalk hint), `_A` (Doso's talks), `_B` (in a lit quarter), `_C` (the pits boarded). `VAR_TEMP_2` and `_3` are the engine's carried flame.
+
+**For beat 23 (the sanctum).** It begins on `MAP_ELEUSA_SANCTUM_B1F`'s warp 0 with `FLAG_ICHOR_MYSTERIES_NIGHT` and `FLAG_ICHOR_SANCTUM_OPEN` set; Chloe and Alethea came down the stair with the player (the Telesterion hides Chloe while `_MYSTERIES_NIGHT` is set). Beat 24 sets `FLAG_ICHOR_HIDE_KLEON_TELESTERION` when Kleon leaves the door for Thyrsa.
 
 ### Aigina's interior: placed for world-act2 (Act II)
 
@@ -163,12 +233,21 @@ Built by `tools/ichor/maps/aegina_detour.py` (render-and-critique passes in `MAP
 
 | Who | Map | Tile | Facing | Sight | Mandatory for | Local id |
 |---|---|---|---|---|---|---|
+| HARVESTER Opora | the Aphaia Road | (18, 19), in the orchard by the gate | east | 3 | none: the road's first trainer, in plain view; covers the road up at (19-21, 19) | `LOCALID_APHAIA_OPORA` |
 | HOPLITE Myrmex | the Aphaia Road | (13, 14), the ant hills' corner | west | 3 | Oros and the temple: covers the road north at (11-12, 14) | `LOCALID_APHAIA_MYRMEX` |
 | MERCHANT Sostratos | the Aphaia Road | (20, 6), at the fork | east | 3 | both: covers the road at (21-22, 6), between the band and the fork | `LOCALID_APHAIA_SOSTRATOS` |
 | PILGRIM Euthymia | the Aphaia Road | (26, 3), at the foot of the temple steps | east | 3 | the temple: covers (27-29, 3) below the steps | `LOCALID_APHAIA_EUTHYMIA` |
+| CHARCOALER Marilades | the Aphaia Road | (10, 2), in the pine glade on the Oros path | west | 3 | Oros: covers the glade at (7-9, 2) | `LOCALID_APHAIA_MARILADES` |
+| HUNTRESS Nikasia | the Aphaia Road | (28, 6), the top of the east terraces | east | 2 | none: covers (29-30, 6), the only cells the way home hops down from | `LOCALID_APHAIA_NIKASIA` |
+| ACOLYTE Hesychia | the Temple of Aphaia | (10, 12), at the top of the marble steps | east | 3 | the temple: covers (11-13, 12) | `LOCALID_APHAIA_HESYCHIA` |
+| GOATHERD Aigon | Mount Oros | (6, 10), on the climb | west | 2 | the summit: covers the golden band at (4-5, 10) | `LOCALID_OROS_AIGON` |
 | the priestess of Aphaia | the Temple of Aphaia | (11, 9), on the steps before the doorway | south | — | — | `LOCALID_APHAIA_PRIESTESS` |
 
-The forced bands: the road's golden-and-green band at (19-24, 7-9), 3 deep, between Myrmex and Sostratos (both ends cross it); and a golden band on Oros's climb at (4-5, 9-10), 2 deep. Items: Silver Powder on the ant hills (22, 13) and the Super Potion at the Oros fork (12, 3) on the road; two Pretty Feathers (one ball, amount 2) on the temple steps (14, 9); Wine as Berry Juice (`ICHOR_STUB_OFFERINGS`) by Zeus's altar (8, 4) on Oros. Readable spots: the great herm (22, 3) (`ICHOR_STUB_HERM`), signs at the south end (19, 20), the fork (20, 3), the Oros path (10, 3) and the temple steps (30, 1), a horos boundary stone (34, 4); Zeus's altar (6, 4) on Oros and Artemis's altar (15, 11) on the temple hill (`ICHOR_STUB_RITES`, SCRIPT.md's words and no prayer); the dig spot in the old foundations (18, 11) (`ICHOR_STUB_DIG`, no reward). `tools/ichor/tests/aigina_interior.sh` walks it all.
+**For the route standard (MAP_DESIGN.md §8, world-act1, 2026-11-14).** The three maps sit in the Astyra stage of `map_audit.py`; the temple and Oros are `"ichor_kind": "dungeon"`, one-floor landmarks. Opora, Marilades, Nikasia, Myrto and Aigon are new placeholders in the same pattern as Phase 2's three: `trainer_type` NONE, one line, and an `ICHOR_ACT2` comment in `scripts.pory` suggesting a class and an Astyra party (Opora: Kaplet 33, Gelasable 34; Marilades: Cairnolith 34, Plouteras 35; Nikasia: Pithound 34, Harpelle 35; Myrto: Galenyon 35, Basilops 36; Aigon: Kerazap 35, a male Melibee 36). Marilades and Nikasia wear `OBJ_EVENT_GFX_ICHOR_MAN` and `_YOUTH_F` until charcoaler and huntress walkers exist. The audit's trainer minimums (6 on the road, 1 in each dungeon) pass once world-act2's batch 4 registers all eight and sets them to `TRAINER_TYPE_NORMAL`.
+
+The forced bands, 8 or more cells between every pair of the road's ends: on the trunk, golden grass at the ant hills' corner (11-12, 12-15), 4 deep, under Myrmex's line, and the band of golden and green grass at (19-24, 7-10), 4 deep, between Myrmex and Sostratos; past the fork, the pine glade on the Oros path (7-9, 0-3), 4 deep, under Marilades, and golden grass between the herm and the temple steps (22-26, 3-5), 4 across. Town to Oros or the temple crosses 12, Oros to the temple 8 either way (tall grass above the terrace wall at (24-26, 1) stops the hop down from shortcutting the temple-side band). Mount Oros keeps its golden band at (4-5, 9-10), 2 deep, now under Aigon. The rest is optional grass: the west meadow under the Oros ledge, the pistachio and meadow terraces on the way home, the east plateau, and the orchard by the gate (115 grass cells on the road, 18 a screen).
+
+Items: Silver Powder on the ant hills (22, 13), the Super Potion at the Oros fork (12, 3), a Hyper Potion at the west meadow's end (5, 9) and a Leaf Stone in the pistachio terrace's far corner (37, 8) on the road; two Pretty Feathers (one ball, amount 2) on the temple steps (14, 9) and a Great Ball in the cypress nook east of the processional way (16, 14) at the temple; Wine as Berry Juice (`ICHOR_STUB_OFFERINGS`) by Zeus's altar (8, 4) on Oros. Hidden: on the road a Big Pearl at the west end of the bay's beach (13, 3), a Revive under the pines at the orchard's foot (15, 21), a Nugget behind the umbrella pine on the meadow terrace (36, 13) and a Pretty Feather past the horos at the cliff (36, 6); at the temple a Moon Stone in the cypress nook west of the way (7, 14) and an Ether in the old foundations' far corner (20, 13); on Oros a Star Piece behind Zeus's altar (7, 2) and a Thunder Stone on the summit's east lip (10, 4). Surf and fishing tables at Astyra levels (32–35) on all three: Galenyon, Narkeray, Kynoketos and Karkitox (every line evolved, BALANCE.md's late-area rule). The land tables are still Phase 2's (12–16): world-act2 re-levels them. Readable spots: the great herm (22, 3) (`ICHOR_STUB_HERM`), signs at the south end (19, 20), the fork (20, 3), the Oros path (10, 3) and the temple steps (30, 1), a horos boundary stone (34, 4); Zeus's altar (6, 4) on Oros and Artemis's altar (15, 11) on the temple hill (`ICHOR_STUB_RITES`, SCRIPT.md's words and no prayer); the dig spot in the old foundations (18, 11) (`ICHOR_STUB_DIG`, no reward). `tools/ichor/tests/aigina_interior.sh` walks it all.
 | `MAP_EMPORION_HARBOR` | (30, 16), the *Euploia*'s berth | stepping off the *Euploia* (beat 11, the ferry) |
 
 ## Flags claimed for batch 1
@@ -187,6 +266,7 @@ Claimed from this session's range (0x200–0x2FF) in `include/constants/flags.h`
 | `FLAG_ICHOR_ITEM_DECK_SUPER_POTION`, `FLAG_ICHOR_HIDDEN_DECK_HEART_SCALE`, `FLAG_ICHOR_ITEM_HOLD_POTION` | the trireme's items |
 | `FLAG_ICHOR_HIDDEN_AEGINA_BIG_PEARL`, `FLAG_ICHOR_HIDDEN_AEGINA_STARDUST` | Aegina Town's hidden items |
 | `FLAG_ICHOR_HERM_AEGINA`, `FLAG_ICHOR_ITEM_APHAIA_SILVER_POWDER`, `FLAG_ICHOR_ITEM_APHAIA_SUPER_POTION`, `FLAG_ICHOR_ITEM_APHAIA_PRETTY_FEATHER`, `FLAG_ICHOR_ITEM_OROS_WINE` | the detour |
+| `FLAG_ICHOR_HIDDEN_APHAIA_BIG_PEARL`, `_REVIVE`, `_NUGGET`, `_PRETTY_FEATHER`, `_MOON_STONE`, `_ETHER`, `FLAG_ICHOR_HIDDEN_OROS_STAR_PIECE`, `_THUNDER_STONE` (vanilla 0x2D2–0x2D9); bank flags `FLAG_ICHOR_ITEM_APHAIA_HYPER_POTION`, `_LEAF_STONE`, `_GREAT_BALL` (offsets 0x060–0x062) | the detour's route-standard items (2026-11-14) |
 
 IchorSave's flag bank is on main. From batch 2 on, new flags are bank flags in this session's offsets (`tools/ichor/claim_ranges.md`: bankflag 0x000–0x0FF, dailyflag 0x40–0x4B, bankvar 0–5), claimed with `python3 tools/ichor/claim.py --range LO-HI bankflag FLAG_ICHOR_... "comment"`. Hidden items still need vanilla flags at or above `FLAG_HIDDEN_ITEMS_START`, from 0x200–0x2FF. Sub-ranges handed to agents:
 
@@ -199,6 +279,8 @@ IchorSave's flag bank is on main. From batch 2 on, new flags are bank flags in t
 | Temple of Hermes agent | 0x0F0–0x0FF | — |
 | Aigina interior fix (audit) | 0x060–0x06F | 0x2D2–0x2D9 |
 | Eleusa interiors agent (batch 4; trainers 130–139, daily 0x48–0x4B) | 0x090–0x0BF | 0x2DB–0x2E1 |
+| Eleusa story agent (beats 19's gate, 20–22; trainers 140–149; braziers +0x1C–0x1F) | 0x070–0x07F, 0x0D6–0x0DF | 0x2E9–0x2EF |
+| Sanctum agent (beat 23; trainers 150–159; braziers +0x18–0x1B) | 0x086–0x08F, 0x0F8–0x0FF | 0x2F0–0x2F1, 0x2F4–0x2FA |
 
 ## Stubs until other sessions land
 
@@ -219,7 +301,7 @@ Each stub is marked in the code with its tag, so it can be found and replaced wi
 - **Every other Phase 2 area** takes its species and levels from each species' `habitat` field in `design/dex/species/*.yaml` (branch `claude/aethos-dex-a7c73a`).
 
 **Engine notes (ichor-engine, 2026-11-14).**
-- **Braziers:** world-act1 holds `FLAG_ICHOR_BRAZIERS_START + 0x10`–`0x1F`. +0x10–0x13 are the Telesterion's season braziers; +0x14–0x1F are kept for the sanctum, Eleusa's procession torches, the Hollow and the grottos.
+- **Braziers:** world-act1 holds `FLAG_ICHOR_BRAZIERS_START + 0x10`–`0x1F`. +0x10–0x13 are the Telesterion's season braziers; +0x14–0x15 are the Hollow's, +0x18–0x1B the sanctum's, +0x1C–0x1F Eleusa's procession torches; +0x16–0x17 are free.
 - **Darkness:** `EventScript_IchorBrazier` and `EventScript_IchorEnterLitZone` / `EventScript_IchorLeaveLitZone` are built (engine commit c9277243c6). Once they're on main, swap every `ICHOR_STUB_DARKNESS` stand-in for them.
 - **Herms:** ids follow AETHOS_MAP's land routes: `HERM_AETHOS_ROUTE_4`, `_5`, `_6` and on. Routes 2 and 3 are sea, so they have no herm. A great herm's bg event runs `EventScript_IchorGreatHerm`, and only that script sets its flag (`FLAG_ICHOR_HERMS_START + id`). For each herm, send the engine session its map and landing tile (the tile south of it) for the table row and heal location. SCRIPT.md's `FLAG_ICHOR_HERM_ROUTE1`–`6` don't exist. `FLAG_ICHOR_HERM_AEGINA` is only the stub's flag: Aigina's herm needs an id from the engine, which world-act2 asks for with Act II.
 

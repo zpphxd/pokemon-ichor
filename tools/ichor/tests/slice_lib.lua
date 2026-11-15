@@ -339,10 +339,9 @@ function L.battle()
         shotTaken = true
       end
       turns = turns + 1
-      -- a wild battle that can't be run from is fought like a trainer's: running
-      -- barred (FLAG_ICHOR_NO_RUNNING, Phase 2's deck snatchers), or a wild
-      -- Pokémon that won't let the player go (Diglett's Arena Trap on Kronion
-      -- Hill), fought after three tries
+      -- a wild battle that can't be run from (FLAG_ICHOR_NO_RUNNING, Phase 2's
+      -- deck snatchers) is fought like a trainer's, and so is one that won't let
+      -- the player go (Arena Trap, Shadow Tag): after three tries, fight
       if trainer or turns > 3 or (S.FLAG_NO_RUNNING and L.getFlag(S.FLAG_NO_RUNNING)) then
         tap(K.UP); tap(K.LEFT); tap(K.A)     -- FIGHT
       else

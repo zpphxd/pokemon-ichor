@@ -32,6 +32,20 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_APHAIA_OPORA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
+      "x": 18,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AeginaAphaiaRoad_EventScript_Opora",
+      "flag": "0"
+    },
+    {
       "local_id": "LOCALID_APHAIA_MYRMEX",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
       "x": 13,
@@ -74,6 +88,34 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_APHAIA_MARILADES",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AeginaAphaiaRoad_EventScript_Marilades",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_APHAIA_NIKASIA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_F",
+      "x": 28,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AeginaAphaiaRoad_EventScript_Nikasia",
+      "flag": "0"
+    },
+    {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 22,
       "y": 13,
@@ -98,6 +140,32 @@
       "trainer_sight_or_berry_tree_id": "ITEM_SUPER_POTION",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_ITEM_APHAIA_SUPER_POTION"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 5,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HYPER_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_APHAIA_HYPER_POTION"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 37,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_LEAF_STONE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_APHAIA_LEAF_STONE"
     }
   ],
   "warp_events": [],
@@ -150,6 +218,38 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "AeginaAphaiaRoad_EventScript_Horos"
+    },
+    {
+      "type": "hidden_item",
+      "x": 13,
+      "y": 3,
+      "elevation": 3,
+      "item": "ITEM_BIG_PEARL",
+      "flag": "FLAG_ICHOR_HIDDEN_APHAIA_BIG_PEARL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 15,
+      "y": 21,
+      "elevation": 3,
+      "item": "ITEM_REVIVE",
+      "flag": "FLAG_ICHOR_HIDDEN_APHAIA_REVIVE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 36,
+      "y": 13,
+      "elevation": 3,
+      "item": "ITEM_NUGGET",
+      "flag": "FLAG_ICHOR_HIDDEN_APHAIA_NUGGET"
+    },
+    {
+      "type": "hidden_item",
+      "x": 36,
+      "y": 6,
+      "elevation": 3,
+      "item": "ITEM_PRETTY_FEATHER",
+      "flag": "FLAG_ICHOR_HIDDEN_APHAIA_PRETTY_FEATHER"
     }
   ]
 }

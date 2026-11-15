@@ -33,6 +33,28 @@
       "respawn_npc": "LOCALID_EMPORION_HEALER",
       "respawn_x": 8,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_ELEUSA_VILLAGE",
+      "map": "MAP_ELEUSA_VILLAGE",
+      "x": 10,
+      "y": 24,
+      "respawn_map": "MAP_ELEUSA_VILLAGE_ASCLEPEION",
+      "respawn_npc": "LOCALID_ELEUSA_HEALER",
+      "respawn_x": 9,
+      "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_5",
+      "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+      "x": 58,
+      "y": 21
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_4",
+      "map": "MAP_ROUTE4_ISTHMUS",
+      "x": 23,
+      "y": 8
     }
   ]
 }

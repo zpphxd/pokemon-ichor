@@ -1,1 +1,112 @@
-mapscripts EleusaVillage_Asclepeion_MapScripts {}
+// Eleusa's Asclepeion (design/phase2/SCRIPT.md, Part 2, "Eleusa interiors"): a
+// country Asclepeion, low and wide, built round a courtyard herb garden that
+// the counter looks out on. Room: tools/ichor/maps/eleusa_rooms.py
+// (ASCLEPEION), on civic with the slice's counter and Pithos. The door is the
+// threshold mosaic at (9, 9), warp 0, back to MAP_ELEUSA_VILLAGE's warp 0.
+// HEAL_LOCATION_ELEUSA_VILLAGE's map tile is the road below that door, (10, 24).
+//
+// Healing and the Pithos follow AktiTown_Asclepeion: the shared healer script,
+// and the Pithos's own menu, which names the town.
+
+mapscripts EleusaVillage_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_ELEUSA_VILLAGE)
+    }
+}
+
+text EleusaVillage_Asclepeion_Text_NamePanacoil { "PANACOIL" }
+text EleusaVillage_Asclepeion_Text_NamePilgrim { "PILGRIM" }
+text EleusaVillage_Asclepeion_Text_NameFarmer { "FARMER" }
+
+script EleusaVillage_Asclepeion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_ELEUSA_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script EleusaVillage_Asclepeion_EventScript_Panacoil {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PANACOIL, CRY_MODE_NORMAL)
+    setspeaker(EleusaVillage_Asclepeion_Text_NamePanacoil)
+    msgbox(format("Hss."))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("It's wound round the gate post, watching the poppies. Nobody picks one without asking."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The Pithos: Akti's menu (Ichor_EventScript_Pithos), with Eleusa's name.
+// ---------------------------------------------------------------------------
+
+script EleusaVillage_Asclepeion_EventScript_Pithos {
+    lockall
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(Ichor_Text_PithosLook)
+    msgbox(Ichor_Text_PithosLift)
+    goto(EleusaVillage_Asclepeion_EventScript_PithosMenu)
+}
+
+script EleusaVillage_Asclepeion_EventScript_PithosMenu {
+    message(Ichor_Text_PithosReach)
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Ichor_Text_PithosOptionPokemon,
+                   Ichor_Text_PithosOptionThings, Ichor_Text_PithosOptionClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("The Pithos of Eleusa opened."))
+            msgbox(Ichor_Text_PithosPokemonRest)
+            special(ShowPokemonStorageSystemPC)
+            goto(EleusaVillage_Asclepeion_EventScript_PithosMenu)
+        case 1:
+            msgbox(Ichor_Text_PithosThings)
+            special(PlayerPC)
+            goto(EleusaVillage_Asclepeion_EventScript_PithosMenu)
+    }
+    msgbox(Ichor_Text_PithosClose)
+    releaseall
+    end
+}
+
+// ---------------------------------------------------------------------------
+// The people of the Asclepeion
+// ---------------------------------------------------------------------------
+
+script EleusaVillage_Asclepeion_EventScript_Pilgrim {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Asclepeion_Text_NamePilgrim)
+    msgbox(format("I walked from Emporion. Barefoot. For the goddess.\p"
+                  "The goddess did not ask me to walk barefoot. I've checked."))
+    release
+}
+
+script EleusaVillage_Asclepeion_EventScript_Farmer {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Asclepeion_Text_NameFarmer)
+    msgbox(format("Bitten by a Kaplet. On the ankle. It wasn't even angry. It was hungry."))
+    release
+}
+
+script EleusaVillage_Asclepeion_EventScript_Statue {
+    msgbox(format("Asclepius, his snake-wound staff in hand. Someone has tucked an ear of wheat into it."),
+           MSGBOX_SIGN)
+}
+
+script EleusaVillage_Asclepeion_EventScript_Garden {
+    msgbox(format("The herb garden, open to the sky: mint, poppy and fennel in their rows, under the laurel."),
+           MSGBOX_SIGN)
+}
+
+script EleusaVillage_Asclepeion_EventScript_Herbs {
+    msgbox(format("Bundles of herbs, drying from the beam. The whole hall smells of mint."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_Asclepeion_EventScript_Sheaves {
+    msgbox(format("Baskets of barley from the harvest, stacked in the corner. Out here, the healer is paid in grain."),
+           MSGBOX_SIGN)
+}

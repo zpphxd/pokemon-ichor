@@ -67,7 +67,42 @@
 #define TRAINER_ICHOR_EUCHIDAS                66
 #define TRAINER_ICHOR_PHILONIDES              67
 #define TRAINER_ICHOR_KERYKOS_1               68
-#define TRAINERS_END_ACT1                     69
+// Route 4, the Isthmus road (batch 3, ids 80-99)
+#define TRAINER_ICHOR_EXEKIAS                 80
+#define TRAINER_ICHOR_MYRRHINE                81
+#define TRAINER_ICHOR_GRUNT_ROUTE4_LAAS       82
+#define TRAINER_ICHOR_MENALKAS                83
+#define TRAINER_ICHOR_PHEIDIPPOS              84
+#define TRAINER_ICHOR_KAPELOS                 85
+// Hecate's Hollow, ids 100-109 (tools/ichor/maps/hecates_hollow.py)
+#define TRAINER_ICHOR_HEKABE                  100
+#define TRAINER_ICHOR_KALLIAS                 101
+#define TRAINER_ICHOR_PHAINO                  102
+#define TRAINER_ICHOR_BATTOS                  103
+// Route 5, the Skironian cliffs, ids 110-129 (tools/ichor/maps/route5.py)
+#define TRAINER_ICHOR_KYNEGEIROS              110
+#define TRAINER_ICHOR_MELANTHIOS              111
+#define TRAINER_ICHOR_MYRTO                   112
+#define TRAINER_ICHOR_ARISTAIOS               113
+#define TRAINER_ICHOR_MOPSOS                  114
+#define TRAINER_ICHOR_DAPHNIS                 115
+#define TRAINER_ICHOR_KERDON                  116
+// Eleusa's story (ids 140-149): the Temple of Demeter, Eubouleus, the Mysteries' grunts
+#define TRAINER_ICHOR_KALLIDIKE               140
+#define TRAINER_ICHOR_EUMOLPOS                141
+#define TRAINER_ICHOR_MELISSA                 142
+#define TRAINER_ICHOR_CHLOE_1_DAY             143
+#define TRAINER_ICHOR_CHLOE_1_NIGHT           144
+#define TRAINER_ICHOR_GRUNT_TELESTERION_PSAMMIS 145
+#define TRAINER_ICHOR_GRUNT_TELESTERION_CHERSOS 146
+#define TRAINER_ICHOR_EUBOULEUS               147
+// The Mystery sanctum under Eleusa (ids 150-159; tools/ichor/maps/sanctum.py, beat 23)
+#define TRAINER_ICHOR_GRUNT_SANCTUM_KROKALOS  150
+#define TRAINER_ICHOR_GRUNT_SANCTUM_BOLOS     151
+#define TRAINER_ICHOR_GRUNT_SANCTUM_KONIS     152
+#define TRAINER_ICHOR_GRUNT_SANCTUM_GAIOS     153
+#define TRAINER_ICHOR_HYPERION_1              154
+#define TRAINERS_END_ACT1                     155
 
 // world-act2, ids 160-319, 820-849 and 1344-1403: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

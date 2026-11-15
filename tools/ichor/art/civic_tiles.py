@@ -357,6 +357,15 @@ def define():
     obj("asc_bell_rope", "bell_rope", [top, body])
     obj("asc_anchors", "anchors", body)
 
+    # ---- Eleusa's Asclepeion (batch 4) -----------------------------------------
+    # Added after everything else, so no earlier room's ids move. No new art and
+    # no new tiles: the Agora's drying herbs on the Asclepeion's wall, and its
+    # basket of grain on the marble slabs (both on the middle layer, over bases
+    # civic already has). Laid out in tools/ichor/maps/eleusa_rooms.py.
+    obj("asc_herbs", "herbs", [top, body])
+    for suffix, f in (("", fa), ("_b", fb)):
+        mt(f"asc_basket_grain{suffix}", f, middle=C("basket_grain"), solid=True)
+
 
 # --- writing the Porytiles sources ---------------------------------------------
 

@@ -11,6 +11,19 @@
 mapscripts AeginaTempleOfAphaia_MapScripts {}
 
 text AeginaTempleOfAphaia_Text_NamePriestess { "PRIESTESS" }
+text AeginaTempleOfAphaia_Text_NameHesychia { "HESYCHIA" }
+
+// ICHOR_ACT2: ACOLYTE Hesychia, Galenyon 35 and Basilops 36 (feathers for Artemis's
+// altar). At the top of the marble steps, facing east across them (sight 3);
+// mandatory for the temple. trainer_type stays NONE until world-act2 registers
+// her party and swaps this for a trainerbattle script.
+script AeginaTempleOfAphaia_EventScript_Hesychia {
+    lock
+    faceplayer
+    setspeaker(AeginaTempleOfAphaia_Text_NameHesychia)
+    msgbox(format("I sweep these steps all day. The goddess is invisible. The pine needles aren't."))
+    release
+}
 
 // ICHOR_ACT2: the priestess of Aphaia. World-act2 writes her whole scene
 // (SCRIPT.md has her five lines); she stands on the steps before the doorway.

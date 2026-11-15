@@ -1,1 +1,121 @@
-mapscripts EleusaVillage_PoetsHouse_MapScripts {}
+// Euphorion's house (design/phase2/SCRIPT.md, Part 2, "Eleusa interiors"): a
+// playwright writing a tragedy for the Dionysia at Thyrsa, and his Pithound,
+// which reviews his work. Room: tools/ichor/maps/eleusa_rooms.py ("poets"), on
+// limen. The door is the mat at (4..5, 7), warp 0, back to MAP_ELEUSA_VILLAGE's
+// warp 5.
+//
+// The in-game trade INGAME_TRADE_ICHOR_CRITIC: a Melibee for his Pithound,
+// CRITIC, Lv 21, with its hidden ability, holding a Twisted Spoon
+// (FLAG_ICHOR_TRADED_PITHOUND). The Pithound stands on the stage with him
+// (4, 4) until then; afterwards the Melibee hovers there, hidden on FLAG_TEMP_2
+// until the trade, as Thaletas's Onotis is in the Deigma. After Act I
+// (FLAG_ICHOR_ACT1_COMPLETE) he has changed his ending: a seed for Thyrsa.
+
+mapscripts EleusaVillage_PoetsHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_PITHOUND)) {
+            setflag(FLAG_TEMP_2)
+        }
+    }
+}
+
+text EleusaVillage_PoetsHouse_Text_NameEuphorion { "EUPHORION" }
+text EleusaVillage_PoetsHouse_Text_NamePithound { "PITHOUND" }
+text EleusaVillage_PoetsHouse_Text_NameMelibee { "MELIBEE" }
+
+script EleusaVillage_PoetsHouse_EventScript_Euphorion {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_PoetsHouse_Text_NameEuphorion)
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE)) {
+        msgbox(format("I'm changing the ending. Now the youngest is never eaten at all.\p"
+                      "The father swallows a stone instead. I don't know why. It felt right."))
+    } elif (flag(FLAG_ICHOR_TRADED_PITHOUND)) {
+        msgbox(format("Take Critic. He was right about everything. That's the problem."))
+    } else {
+        msgbox(format("I'm writing a tragedy for the Dionysia. At Thyrsa.\p"
+                      "It's about a family where the father eats the children.\p"
+                      "Too much? My mother says it's too much.\p"
+                      "My Pithound says it's too much. He growls at every line.\p"
+                      "I need a gentler audience. Bees, say. Bees only sting at the end."))
+    }
+    if (flag(FLAG_ICHOR_TRADED_PITHOUND)) {
+        release
+        end
+    }
+    // The in-game trade, written out as Thaletas's is (EmporionCity_Deigma) so
+    // each of Euphorion's lines carries his name box.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_CRITIC)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Trade a Melibee for his Pithound?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(EleusaVillage_PoetsHouse_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(EleusaVillage_PoetsHouse_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(EleusaVillage_PoetsHouse_Text_NameEuphorion)
+        msgbox(format("That's no bee. I need an audience that hums, not one that bites."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_PITHOUND)
+    removeobject(LOCALID_ELEUSA_POETS_PITHOUND)
+    clearflag(FLAG_TEMP_2)
+    addobject(LOCALID_ELEUSA_POETS_MELIBEE)
+    setspeaker(EleusaVillage_PoetsHouse_Text_NameEuphorion)
+    msgbox(format("Take Critic. He was right about everything. That's the problem."))
+    release
+}
+
+script EleusaVillage_PoetsHouse_EventScript_NoTrade {
+    setspeaker(EleusaVillage_PoetsHouse_Text_NameEuphorion)
+    msgbox(format("Then I'll read it to the dog again. Pray for me."))
+    release
+    end
+}
+
+script EleusaVillage_PoetsHouse_EventScript_Pithound {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PITHOUND, CRY_MODE_NORMAL)
+    setspeaker(EleusaVillage_PoetsHouse_Text_NamePithound)
+    msgbox(format("Grrr…"))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("It's lying on a wax tablet. Judging by the teeth marks, it has notes."))
+    release
+}
+
+script EleusaVillage_PoetsHouse_EventScript_Melibee {
+    lock
+    faceplayer
+    playmoncry(SPECIES_MELIBEE, CRY_MODE_NORMAL)
+    setspeaker(EleusaVillage_PoetsHouse_Text_NameMelibee)
+    msgbox(format("Bzz."))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("It hums along with the chorus. It hasn't stung anyone yet. The play isn't over."))
+    release
+}
+
+script EleusaVillage_PoetsHouse_EventScript_Desk {
+    msgbox(format("Wax tablets, scraped and rewritten. One says “TOO MUCH?” in big letters."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_PoetsHouse_EventScript_Stage {
+    msgbox(format("Three doors drawn on the floor. Someone has walked through the middle one so often the chalk is gone."),
+           MSGBOX_SIGN)
+}
+
+script EleusaVillage_PoetsHouse_EventScript_Chorus {
+    msgbox(format("A chorus of clay figurines in a row, all facing the stage. They never heckle."), MSGBOX_SIGN)
+}

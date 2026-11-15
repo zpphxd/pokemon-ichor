@@ -42,3 +42,80 @@ EVs: 252 Atk / 252 SpA / 6 SpD
 - Protect
 - Solar Beam
 - Dragon Claw
+
+/* Ichor: Kleon beside you on the night of the Mysteries (design/phase2/SCRIPT.md, beat 22
+ * and Part 3). He leads with the starter that beats yours: VAR_STARTER_MON 0 (Nebrel)
+ * gets _KYNDER, 1 (Kynder) _HIPLING, 2 (Hipling) _NEBREL. Aethos stand-ins, so no
+ * Ability: lines. His back pic is tools/ichor/art/sprites_kleon_back.py's. */
+
+=== PARTNER_ICHOR_KLEON_ELEUSA_KYNDER ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Dikyon
+Level: 23
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Fire Fang
+- Double Hit
+- Flame Charge
+- Thunder Fang
+
+Alekrow
+Level: 22
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack
+
+=== PARTNER_ICHOR_KLEON_ELEUSA_HIPLING ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Thalamare
+Level: 23
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Aqua Jet
+- Flip Turn
+- Bulldoze
+- Rain Dance
+
+Alekrow
+Level: 22
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack
+
+=== PARTNER_ICHOR_KLEON_ELEUSA_NEBREL ===
+Name: KLEON
+Class: Lakonian
+Pic: Kleon
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kladoe
+Level: 23
+IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
+- Magical Leaf
+- Fairy Wind
+- Synthesis
+- Agility
+
+Alekrow
+Level: 22
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Low Sweep
+- Wake-Up Slap
+- Bulk Up
+- Fury Attack

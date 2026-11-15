@@ -18,6 +18,11 @@
       "map": "MAP_EMPORION_HARBOR",
       "offset": 0,
       "direction": "down"
+    },
+    {
+      "map": "MAP_ROUTE4_ISTHMUS",
+      "offset": 0,
+      "direction": "up"
     }
   ],
   "object_events": [

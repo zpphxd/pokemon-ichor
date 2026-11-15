@@ -27,7 +27,7 @@ def graft(path):
         if tag == "equal":
             continue
         if tag != "insert":
-            sys.exit(f"{path}: theirs {tag}s base lines {i1}-{i2}; resolve by hand")
+            raise ValueError(f"{path}: theirs {tag}s base lines {i1}-{i2}; resolve by hand")
         inserts.append((i1, theirs[j1:j2]))
     # map each base index to the ours index of the same line
     base_to_ours = {}
@@ -39,12 +39,18 @@ def graft(path):
     for i, lines in sorted(inserts, reverse=True):
         at = base_to_ours.get(i, len(ours)) if i < len(base) else len(ours)
         if i < len(base) and i not in base_to_ours:
-            sys.exit(f"{path}: ours changed the anchor line {i}; resolve by hand")
+            raise ValueError(f"{path}: ours changed the anchor line {i}; resolve by hand")
         out[at:at] = lines
     with open(path, "w") as f:
         f.writelines(out)
     print(f"{path}: grafted {len(inserts)} block(s), {sum(len(l) for _, l in inserts)} lines")
 
 
+failed = 0
 for p in sys.argv[1:]:
-    graft(p)
+    try:
+        graft(p)
+    except ValueError as e:
+        print(e)
+        failed = 1
+sys.exit(failed)

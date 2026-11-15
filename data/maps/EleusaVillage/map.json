@@ -13,7 +13,13 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": [
+    {
+      "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+      "offset": 3,
+      "direction": "left"
+    }
+  ],
   "object_events": [
     {
       "local_id": "LOCALID_ELEUSA_KROKIS",
@@ -94,8 +100,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "EleusaVillage_EventScript_Eubouleus",
       "flag": "0"
     },
@@ -112,6 +118,146 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EleusaVillage_EventScript_Hoplite",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 24,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Kleon",
+      "flag": "FLAG_ICHOR_HIDE_KLEON_ELEUSA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 24,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Alethea",
+      "flag": "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_KERYKOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KERYKOS",
+      "x": 27,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Kerykos",
+      "flag": "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_EUDEMOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 30,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Eudemos",
+      "flag": "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_INITIATE_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 22,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Initiate1",
+      "flag": "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_INITIATE_2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_F",
+      "x": 28,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Initiate2",
+      "flag": "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_INITIATE_3",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 31,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Initiate3",
+      "flag": "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_INITIATE_4",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM",
+      "x": 32,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Initiate4",
+      "flag": "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_INITIATE_5",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 23,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Initiate5",
+      "flag": "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"
+    },
+    {
+      "local_id": "LOCALID_ELEUSA_INITIATE_6",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_F",
+      "x": 26,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_EventScript_Initiate6",
+      "flag": "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -209,17 +355,54 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ELEUSA_SANCTUM_B1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "2"
     },
     {
       "x": 32,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ELEUSA_SANCTUM_B1F",
-      "dest_warp_id": "0"
+      "dest_warp_id": "3"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "EleusaVillage_EventScript_KrokisGate"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "EleusaVillage_EventScript_KrokisGate"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "EleusaVillage_EventScript_KrokisGate"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_8",
+      "var_value": "0",
+      "script": "EleusaVillage_EventScript_KrokisGate"
+    }
+  ],
   "bg_events": [
     {
       "type": "sign",

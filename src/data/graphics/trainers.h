@@ -533,12 +533,15 @@ const u8 gTrainerBackPic_Pokedude[] = INCGFX_U8("graphics/trainers/back_pics/pok
 const u8 gTrainerBackPic_OldMan[] = INCGFX_U8("graphics/trainers/back_pics/old_man.png", ".4bpp");
 // Ichor: tools/ichor/art/sprites_alethea_back.py
 const u8 gTrainerBackPic_Alethea[] = INCGFX_U8("graphics/trainers/back_pics/alethea.png", ".4bpp");
+// Ichor: tools/ichor/art/sprites_kleon_back.py (he fights beside the player in beat 22)
+const u8 gTrainerBackPic_Kleon[] = INCGFX_U8("graphics/trainers/back_pics/kleon.png", ".4bpp");
 
 const u16 gTrainerBackPicPalette_Red[] = INCGFX_U16("graphics/trainers/back_pics/red.png", ".gbapal");
 const u16 gTrainerBackPicPalette_Leaf[] = INCGFX_U16("graphics/trainers/back_pics/leaf.png", ".gbapal");
 const u16 gTrainerBackPicPalette_Pokedude[] = INCGFX_U16("graphics/trainers/back_pics/pokedude.png", ".gbapal");
 const u16 gTrainerBackPicPalette_OldMan[] = INCGFX_U16("graphics/trainers/back_pics/old_man.png", ".gbapal");
 const u16 gTrainerBackPicPalette_Alethea[] = INCGFX_U16("graphics/trainers/back_pics/alethea.png", ".gbapal");
+const u16 gTrainerBackPicPalette_Kleon[] = INCGFX_U16("graphics/trainers/back_pics/kleon.png", ".gbapal");
 
 
 static const union AnimCmd sAnimCmd_Hoenn[] =
@@ -1280,9 +1283,12 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_PainterFrlg, gTrainerPalette_PainterFrlg),
     },
+    // Ichor: Kleon's back pic is for the night of the Mysteries, when he fights beside
+    // the player (PARTNER_ICHOR_KLEON_ELEUSA_*, a partner slides in from behind).
     [TRAINER_PIC_KLEON] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Kleon, gTrainerPalette_Kleon),
+        .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_Kleon, gTrainerBackPicPalette_Kleon, sBackAnims_Hoenn),
     },
     [TRAINER_PIC_HIEROPHANT_IONE] =
     {

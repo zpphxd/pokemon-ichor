@@ -1,5 +1,6 @@
-// The Temple of Demeter at Eleusa, the Telesterion: the Lesser Mysteries
-// (design/phase2/SCRIPT.md Part 5, beat 21's setting, Part 3's acolytes).
+// The Temple of Demeter at Eleusa, the Telesterion: the Lesser Mysteries and Laurel 3
+// (design/phase2/SCRIPT.md Part 5, beat 21, Part 3's acolytes and Chloe), and the night
+// of the Mysteries (beat 22).
 //
 // The hall is laid out by tools/ichor/maps/temple_demeter.py, which also writes
 // map.json's events and the generated block at the end of this file. The trail runs
@@ -10,45 +11,83 @@
 // down (the seeds and Hecate's chalk are painted in latent colors: they show when
 // the torch is doused).
 //
-// Temp vars: VAR_TEMP_2 is 1 while the player stands in a lit quarter (the lit-zone
-// triggers read it); VAR_TEMP_3 is 1 once the pits are boarded over (it turns the pit
-// triggers off); VAR_TEMP_5 counts talks with Doso this visit.
+// The Torch, the braziers and the lit quarters are the engine's (ENGINE_API.md §2):
+// this is a dark map, the engine sets the Torch's light, EventScript_IchorBrazier
+// lights a brazier, and EventScript_IchorEnterLitZone / _LeaveLitZone brighten and
+// darken the quarters.
 //
-// The story batch adds beat 21's scene (Chloe revealed, her battle, the Harvest
-// Laurel), the acolytes' battles (Part 3), and beats 22 and 25 in this hall.
+// Temp vars: VAR_TEMP_A counts talks with Doso this visit; VAR_TEMP_B is 1 while the
+// player stands in a lit quarter (the lit-zone triggers read it); VAR_TEMP_C is 1 once
+// the pits are boarded over (it turns the pit triggers off); VAR_TEMP_8 is 1 while the
+// night of the Mysteries waits to play (ON_FRAME); VAR_TEMP_9 is 1 once Doso has given
+// her chalk hint this visit (after a fall into a pit, FLAG_ICHOR_TELESTERION_PIT_FALL).
+// VAR_TEMP_2 and _3 are left alone: the engine keeps a carried flame there.
 //
-// Stubs, until the engine session's batches land (design/phase2/BUILD.md):
-//   ICHOR_STUB_DARKNESS  the Torch: the hall opens at the Torch's radius (flash level
-//                        3) instead of the engine's; StubBrazier stands in for
-//                        EventScript_IchorBrazier, and StubEnterLitZone and
-//                        StubLeaveLitZone for EventScript_IchorEnterLitZone and
-//                        EventScript_IchorLeaveLitZone (ENGINE_API.md §2). Dousing
-//                        (the glow palettes, to see the seeds) waits for the engine.
-//   ICHOR_STUB_RITES     Demeter's great altar shows its text only.
+// Beat 22 starts in the village: Kerykos's YES sets FLAG_ICHOR_MYSTERIES_BEGUN and warps
+// the player to (13, 17), the front of the congregation. It ends by opening the stair
+// under the Anaktoron (FLAG_ICHOR_SANCTUM_OPEN) and warping to MAP_ELEUSA_SANCTUM_B1F's
+// warp 0, where beat 23 (the sanctum agent's) begins.
+//
+// Stubs, until other sessions land (design/phase2/BUILD.md):
+//   ICHOR_STUB_RITES   Demeter's great altar shows its text only.
+//   ICHOR_STUB_SPRITE  Chloe's portrait (the Acolyte F pic stands in), the initiates'
+//                      walker (pilgrims and youths stand in).
+//   ICHOR_STUB_MUSIC   the Hierophant class plays MUS_ICHOR_BATTLE_RIVAL, as Kerykos's
+//                      battle does, until MUS_ICHOR_BATTLE_HIEROPHANT exists; the
+//                      Mysteries play MUS_ICHOR_TEMPLE_DEMETER, the hall's own song.
 
 const TD_AUTUMN = FLAG_ICHOR_BRAZIERS_START + 0x10
 const TD_WINTER = FLAG_ICHOR_BRAZIERS_START + 0x11
 const TD_SPRING = FLAG_ICHOR_BRAZIERS_START + 0x12
 const TD_SUMMER = FLAG_ICHOR_BRAZIERS_START + 0x13
-const TD_TORCH_RADIUS = 3       // the flash level SCRIPT.md Part 5 gives the hall with the Torch
+// SCRIPT.md's FLAG_ICHOR_CHLOE_RITE is the engine's Hierophant's-offering flag for Demeter,
+// FLAG_ICHOR_GIFT(ICHOR_GOD_DEMETER, ICHOR_GIFT_HIEROPHANT) = FLAG_ICHOR_GIFTS_START + 4 * 3 + 3,
+// so the engine's rite never gives it twice.
+const TD_CHLOE_RITE = FLAG_ICHOR_GIFTS_START + 15
 
 mapscripts EleusaVillage_TempleOfDemeter_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        // ICHOR_STUB_DARKNESS: the engine will set the Torch's radius itself.
-        setflashlevel(TD_TORCH_RADIUS)
-        setvar(VAR_TEMP_2, 0)
+        // The engine has set the Torch's light already; every way in (the stair, a fall
+        // from a pit, Kerykos's warp) lands outside the lit quarters.
+        setvar(VAR_TEMP_B, 0)
         if (flag(FLAG_BADGE03_GET)) {
-            setvar(VAR_TEMP_3, 1)
+            setvar(VAR_TEMP_C, 1)
         }
-        if (flag(FLAG_ICHOR_LESSER_MYSTERIES_DONE)) {
-            clearflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
-        } else {
-            setflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
-        }
+        call(EleusaVillage_TempleOfDemeter_EventScript_PlaceCast)
     }
     MAP_SCRIPT_ON_LOAD {
         call(EleusaVillage_TempleOfDemeter_EventScript_DrawHall)
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_8, 1: EleusaVillage_TempleOfDemeter_EventScript_TheMysteries
+    ]
+}
+
+// Who is in the hall. Chloe stands unseen in the Anaktoron's doorway until the fourth
+// brazier, and goes below with the player on the night of the Mysteries. The night's
+// congregation is here only for its scene; afterwards Kleon keeps the Anaktoron's door
+// (beat 24 sets FLAG_ICHOR_HIDE_KLEON_TELESTERION when he leaves for Thyrsa).
+script EleusaVillage_TempleOfDemeter_EventScript_PlaceCast {
+    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
+        setflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
+    } elif (flag(FLAG_ICHOR_LESSER_MYSTERIES_DONE)) {
+        clearflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
+    } else {
+        setflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
+    }
+    setflag(FLAG_ICHOR_HIDE_TELESTERION_GRUNTS)
+    setflag(FLAG_ICHOR_HIDE_MYSTERIES_CROWD)
+    if (!flag(FLAG_ICHOR_MYSTERIES_BEGUN)) {
+        setflag(FLAG_ICHOR_HIDE_KLEON_TELESTERION)
+    } elif (!flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
+        clearflag(FLAG_ICHOR_HIDE_MYSTERIES_CROWD)
+        clearflag(FLAG_ICHOR_HIDE_KLEON_TELESTERION)
+        setvar(VAR_TEMP_8, 1)
+    } else {
+        setobjectxyperm(LOCALID_TEMPLE_DEMETER_KLEON, 14, 14)
+        setobjectmovementtype(LOCALID_TEMPLE_DEMETER_KLEON, MOVEMENT_TYPE_FACE_LEFT)
+    }
+    return
 }
 
 text EleusaVillage_TempleOfDemeter_Text_NameDoso { "DOSO" }
@@ -56,13 +95,17 @@ text EleusaVillage_TempleOfDemeter_Text_NameKallidike { "KALLIDIKE" }
 text EleusaVillage_TempleOfDemeter_Text_NameEumolpos { "EUMOLPOS" }
 text EleusaVillage_TempleOfDemeter_Text_NameMelissa { "MELISSA" }
 text EleusaVillage_TempleOfDemeter_Text_NameChloe { "CHLOE" }
+text EleusaVillage_TempleOfDemeter_Text_NameKerykos { "KERYKOS" }
+text EleusaVillage_TempleOfDemeter_Text_NameAlethea { "ALETHEA" }
+text EleusaVillage_TempleOfDemeter_Text_NameKleon { "KLEON" }
+text EleusaVillage_TempleOfDemeter_Text_NameGrunt { "GRUNT" }
 
 // ---------------------------------------------------------------------------
 // The people of the hall
 // ---------------------------------------------------------------------------
 
-// Doso sits on the step inside the door (beat 21). Her welcome once; her name the
-// next time; then the safety valve (Part 5).
+// Doso sits on the step inside the door (beat 21). Her welcome once; then the safety
+// valve (Part 5): after a fall into a pit, the chalk; otherwise her name, then the trail.
 script EleusaVillage_TempleOfDemeter_EventScript_Doso {
     lock
     faceplayer
@@ -78,10 +121,13 @@ script EleusaVillage_TempleOfDemeter_EventScript_Doso {
                       "At each step of her trail, give the goddess a fire.\p"
                       "Somewhere in here is the Mystagogue. You won't see her. She'll see you."))
         setflag(FLAG_ICHOR_MET_DOSO)
-    } elif (var(VAR_TEMP_5) == 0) {
+    } elif (flag(FLAG_ICHOR_TELESTERION_PIT_FALL) && var(VAR_TEMP_9) == 0) {
+        msgbox(format("The chalk marks the stones. Hecate's chalk. It only shows in the dark."))
+        setvar(VAR_TEMP_9, 1)
+    } elif (var(VAR_TEMP_A) == 0) {
         msgbox(format("My name? Doso.\p"
                       "It's a very common name. Around here."))
-        setvar(VAR_TEMP_5, 1)
+        setvar(VAR_TEMP_A, 1)
     } else {
         msgbox(format("Lost? Put your light out and look for the red.\p"
                       "The goddess always leaves a trail."))
@@ -89,43 +135,175 @@ script EleusaVillage_TempleOfDemeter_EventScript_Doso {
     release
 }
 
-// The acolytes stand with their lamps (Part 3). Their battles come with the story
-// batch; until then each gives the hint they give after it.
+// The acolytes, each with a small clay lamp (Part 3).
 script EleusaVillage_TempleOfDemeter_EventScript_Kallidike {
-    lock
-    faceplayer
+    trainerbattle_single(TRAINER_ICHOR_KALLIDIKE,
+        format("Put your torch out. Yes, on purpose. The dark won't bite. I might."),
+        format("Ow. You bit back."))
     setspeaker(EleusaVillage_TempleOfDemeter_Text_NameKallidike)
-    msgbox(format("Put your torch out. Yes, on purpose. The dark won't bite.\p"
-                  "See the seed glowing? That's her trail. Light the brazier beside it."))
-    release
+    msgbox(format("See the seed glowing? That's her trail. Light the brazier beside it."), MSGBOX_AUTOCLOSE)
+    end
 }
 
 script EleusaVillage_TempleOfDemeter_EventScript_Eumolpos {
-    lock
-    faceplayer
+    trainerbattle_single(TRAINER_ICHOR_EUMOLPOS,
+        format("My family's sung here since the first harvest. This hymn is a battle."),
+        format("The shortest hymn in history."))
     setspeaker(EleusaVillage_TempleOfDemeter_Text_NameEumolpos)
-    msgbox(format("My family's sung here since the first harvest.\p"
-                  "The trail goes cold in winter. So does the goddess. Keep walking."))
-    release
+    msgbox(format("The trail goes cold in winter. So does the goddess. Keep walking."), MSGBOX_AUTOCLOSE)
+    end
 }
 
+// Optional: she faces the wall, so she only battles when spoken to.
 script EleusaVillage_TempleOfDemeter_EventScript_Melissa {
-    lock
-    faceplayer
+    trainerbattle_single(TRAINER_ICHOR_MELISSA,
+        format("Her priestesses are called bees. Buzz. That's a joke. We don't buzz."),
+        format("…Bzz."))
     setspeaker(EleusaVillage_TempleOfDemeter_Text_NameMelissa)
-    msgbox(format("Her priestesses are called bees. Buzz. That's a joke. We don't buzz.\p"
-                  "Bees don't sleep through winter. They huddle and wait. Like us."))
-    release
+    msgbox(format("Bees don't sleep through winter. They huddle and wait. Like us."), MSGBOX_AUTOCLOSE)
+    end
 }
 
-// Chloe in the Anaktoron's doorway, seen once the fourth brazier burns. Beat 21's
-// scene and her battle come with the story batch.
+// ---------------------------------------------------------------------------
+// Chloe, the Mystagogue: Laurel 3 (beat 21)
+// ---------------------------------------------------------------------------
+
+// Seen once the fourth brazier burns, in the Anaktoron's doorway. The player finds
+// the way back to her across the hall, and she tests them. Her ace follows the clock:
+// Persenyx at night, Korantha otherwise (SCRIPT.md Part 3).
 script EleusaVillage_TempleOfDemeter_EventScript_Chloe {
     lock
     faceplayer
     setspeaker(EleusaVillage_TempleOfDemeter_Text_NameChloe)
-    msgbox(format("…"))
+    if (flag(FLAG_BADGE03_GET)) {
+        if (!flag(FLAG_ICHOR_GOT_TM_GIGA_DRAIN)) {
+            goto(EleusaVillage_TempleOfDemeter_EventScript_GiveGigaDrain)
+        }
+        if (!flag(TD_CHLOE_RITE)) {
+            goto(EleusaVillage_TempleOfDemeter_EventScript_ChloeRite)
+        }
+        call(EleusaVillage_TempleOfDemeter_EventScript_ChloeGiftI)
+        setspeaker(EleusaVillage_TempleOfDemeter_Text_NameChloe)
+        msgbox(format("My cousin talks. I don't.\p"
+                      "Between us we make one normal person."))
+        release
+        end
+    }
+    msgbox(format("…\p"
+                  "You followed her down. And you brought her back up."))
+    closemessage
+    // She holds up a single ear of wheat. A small bronze blade flicks; the stalk parts
+    // without a sound.
+    delay(20)
+    applymovement(LOCALID_TEMPLE_DEMETER_CHLOE, EleusaVillage_TempleOfDemeter_Movement_ChloeReaps)
+    waitmovement(0)
+    delay(40)
+    msgbox(format("One ear of grain, cut in silence.\p"
+                  "What's reaped grows again. That's the whole secret.\p"
+                  "Don't tell anyone.\p"
+                  "I'm Chloe. I lead the initiates down. And I lead them back up.\p"
+                  "Show me you can find your way back."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    gettimeofday
+    if (var(VAR_0x8000) == TIME_NIGHT) {
+        trainerbattle_no_intro(TRAINER_ICHOR_CHLOE_1_NIGHT, EleusaVillage_TempleOfDemeter_Text_ChloeDefeat)
+    } else {
+        trainerbattle_no_intro(TRAINER_ICHOR_CHLOE_1_DAY, EleusaVillage_TempleOfDemeter_Text_ChloeDefeat)
+    }
+    goto(EleusaVillage_TempleOfDemeter_EventScript_ChloeDefeated)
+}
+
+text EleusaVillage_TempleOfDemeter_Text_ChloeDefeat { format("…Good.") }
+
+movement EleusaVillage_TempleOfDemeter_Movement_ChloeReaps { walk_in_place_slow_down delay_16 walk_in_place_fast_down }
+
+script EleusaVillage_TempleOfDemeter_EventScript_ChloeDefeated {
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameChloe)
+    msgbox(format("Down, and back up. That's the whole of it.\p"
+                  "The Harvest Laurel."))
+    setflag(FLAG_BADGE03_GET)
+    // The temple stays solved: every acolyte counts as beaten (MAP_DESIGN.md §4).
+    settrainerflag(TRAINER_ICHOR_KALLIDIKE)
+    settrainerflag(TRAINER_ICHOR_EUMOLPOS)
+    settrainerflag(TRAINER_ICHOR_MELISSA)
+    // Demeter Favor +15 (ENGINE_API.md §3).
+    setvar(VAR_0x8004, ICHOR_GOD_DEMETER)
+    setvar(VAR_0x8005, ICHOR_FAVOR_LAUREL)
+    special(Ichor_AddFavor)
+    setspeaker(SP_NAME_NONE)
+    message(format("{PLAYER} received the Harvest Laurel from Chloe!"))
+    waitmessage
+    call(Common_EventScript_PlayGymBadgeFanfare)
+    // With the Laurel the pits are boarded over at once.
+    setvar(VAR_TEMP_C, 1)
+    call(EleusaVillage_TempleOfDemeter_EventScript_BoardPits)
+    special(DrawWholeMapView)
+    goto(EleusaVillage_TempleOfDemeter_EventScript_GiveGigaDrain)
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_GiveGigaDrain {
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameChloe)
+    msgbox(format("And Giga Drain. What you take, you keep."))
+    checkitemspace(ITEM_TM19)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(SP_NAME_NONE)
+        goto(Common_EventScript_ShowBagIsFull)
+    }
+    setvar(VAR_0x8006, ITEM_TM19)
+    additem(ITEM_TM19)
+    setflag(FLAG_ICHOR_GOT_TM_GIGA_DRAIN)
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_TMHM)
+    message(format("{PLAYER} received TM19, Giga Drain!"))
+    waitmessage
+    showitemdescription
+    waitfanfare
+    waitbuttonpress
+    hideitemdescription
+    goto(EleusaVillage_TempleOfDemeter_EventScript_ChloeRite)
+}
+
+// Demeter's rite (SYSTEMS.md §3): the Hierophant teaches it with one free loved offering.
+script EleusaVillage_TempleOfDemeter_EventScript_ChloeRite {
+    if (flag(TD_CHLOE_RITE)) {
+        release
+        end
+    }
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameChloe)
+    msgbox(format("Bring the goddess barley. Here's one.\p"
+                  "Never a pomegranate.\p"
+                  "Don't ask."))
+    checkitemspace(ITEM_BARLEY_CAKE)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(SP_NAME_NONE)
+        goto(Common_EventScript_ShowBagIsFull)
+    }
+    setflag(TD_CHLOE_RITE)
+    additem(ITEM_BARLEY_CAKE)
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received a Barley Cake!"))
+    waitmessage
+    waitfanfare
+    waitbuttonpress
     release
+    end
+}
+
+// Gift I, at Demeter Favor 30: "The goddess is pleased. Here." The lesson itself is the
+// engine's (EventScript_IchorHierophantGift teaches the god's move by the tutor menu).
+script EleusaVillage_TempleOfDemeter_EventScript_ChloeGiftI {
+    setvar(VAR_0x8004, ICHOR_GOD_DEMETER)
+    copyvar(VAR_0x800A, VAR_0x8004)
+    specialvar(VAR_RESULT, Ichor_NextGiftDue)
+    if (var(VAR_RESULT) != ICHOR_GIFT_I) {
+        return
+    }
+    msgbox(format("The goddess is pleased. Here."))
+    setvar(VAR_0x8004, ICHOR_GOD_DEMETER)
+    call(EventScript_IchorHierophantGift)
+    return
 }
 
 // ---------------------------------------------------------------------------
@@ -148,16 +326,31 @@ script EleusaVillage_TempleOfDemeter_EventScript_NextBrazier {
     return
 }
 
+// The front two lie on their side once the Titans have been through (beat 22).
+script EleusaVillage_TempleOfDemeter_EventScript_Overturned {
+    msgbox(format("A brazier lies on its side. Its coals are spilled across the floor, cold."), MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_BrazierBurns {
+    msgbox(format("The brazier burns, and its corner of the hall is warm and gold."), MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
 script EleusaVillage_TempleOfDemeter_EventScript_BrazierAutumn {
     lockall
+    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
+        goto(EleusaVillage_TempleOfDemeter_EventScript_Overturned)
+    }
     if (flag(TD_AUTUMN)) {
-        msgbox(format("The brazier burns, and its corner of the hall is warm and gold."), MSGBOX_DEFAULT)
-        releaseall
-        end
+        goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierBurns)
     }
     msgbox(format("A cold bronze brazier. Its plaque shows a falling leaf."), MSGBOX_DEFAULT)
     setvar(VAR_0x8004, TD_AUTUMN)
-    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrazier)
+    setvar(VAR_0x8005, TRUE)
+    call(EventScript_IchorBrazier)
     if (var(VAR_RESULT) == TRUE) {
         call(EleusaVillage_TempleOfDemeter_EventScript_LightAutumn)
         goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierCaught)
@@ -168,9 +361,7 @@ script EleusaVillage_TempleOfDemeter_EventScript_BrazierAutumn {
 script EleusaVillage_TempleOfDemeter_EventScript_BrazierWinter {
     lockall
     if (flag(TD_WINTER)) {
-        msgbox(format("The brazier burns, and its corner of the hall is warm and gold."), MSGBOX_DEFAULT)
-        releaseall
-        end
+        goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierBurns)
     }
     call(EleusaVillage_TempleOfDemeter_EventScript_NextBrazier)
     if (var(VAR_RESULT) != 1) {
@@ -181,7 +372,8 @@ script EleusaVillage_TempleOfDemeter_EventScript_BrazierWinter {
     }
     msgbox(format("A cold bronze brazier. Its plaque shows a bare branch."), MSGBOX_DEFAULT)
     setvar(VAR_0x8004, TD_WINTER)
-    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrazier)
+    setvar(VAR_0x8005, TRUE)
+    call(EventScript_IchorBrazier)
     if (var(VAR_RESULT) == TRUE) {
         call(EleusaVillage_TempleOfDemeter_EventScript_LightWinter)
         goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierCaught)
@@ -192,9 +384,7 @@ script EleusaVillage_TempleOfDemeter_EventScript_BrazierWinter {
 script EleusaVillage_TempleOfDemeter_EventScript_BrazierSpring {
     lockall
     if (flag(TD_SPRING)) {
-        msgbox(format("The brazier burns, and its corner of the hall is warm and gold."), MSGBOX_DEFAULT)
-        releaseall
-        end
+        goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierBurns)
     }
     call(EleusaVillage_TempleOfDemeter_EventScript_NextBrazier)
     if (var(VAR_RESULT) != 2) {
@@ -205,7 +395,8 @@ script EleusaVillage_TempleOfDemeter_EventScript_BrazierSpring {
     }
     msgbox(format("A cold bronze brazier. Its plaque shows a sprout."), MSGBOX_DEFAULT)
     setvar(VAR_0x8004, TD_SPRING)
-    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrazier)
+    setvar(VAR_0x8005, TRUE)
+    call(EventScript_IchorBrazier)
     if (var(VAR_RESULT) == TRUE) {
         call(EleusaVillage_TempleOfDemeter_EventScript_LightSpring)
         goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierCaught)
@@ -215,10 +406,11 @@ script EleusaVillage_TempleOfDemeter_EventScript_BrazierSpring {
 
 script EleusaVillage_TempleOfDemeter_EventScript_BrazierSummer {
     lockall
+    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
+        goto(EleusaVillage_TempleOfDemeter_EventScript_Overturned)
+    }
     if (flag(TD_SUMMER)) {
-        msgbox(format("The brazier burns, and its corner of the hall is warm and gold."), MSGBOX_DEFAULT)
-        releaseall
-        end
+        goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierBurns)
     }
     call(EleusaVillage_TempleOfDemeter_EventScript_NextBrazier)
     if (var(VAR_RESULT) != 3) {
@@ -229,14 +421,16 @@ script EleusaVillage_TempleOfDemeter_EventScript_BrazierSummer {
     }
     msgbox(format("A cold bronze brazier. Its plaque shows a sheaf."), MSGBOX_DEFAULT)
     setvar(VAR_0x8004, TD_SUMMER)
-    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrazier)
+    setvar(VAR_0x8005, TRUE)
+    call(EventScript_IchorBrazier)
     if (var(VAR_RESULT) == TRUE) {
         call(EleusaVillage_TempleOfDemeter_EventScript_LightSummer)
         special(DrawWholeMapView)
+        setvar(VAR_TEMP_B, 1)
         msgbox(format("The brazier catches. Its corner of the hall is suddenly, warmly gold.\p"
                       "Light runs from all four corners to the Anaktoron's door.\p"
                       "Someone has been standing in it the whole time."), MSGBOX_DEFAULT)
-        call(EleusaVillage_TempleOfDemeter_EventScript_StubBrighten)
+        closemessage
         setflag(FLAG_ICHOR_LESSER_MYSTERIES_DONE)
         clearflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
         addobject(LOCALID_TEMPLE_DEMETER_CHLOE)
@@ -244,112 +438,67 @@ script EleusaVillage_TempleOfDemeter_EventScript_BrazierSummer {
     releaseall
 }
 
-// A brazier has just caught: redraw, the seed goes out, the next begins to glow.
+// A brazier has just caught: redraw, the seed goes out, the next begins to glow. The
+// engine has brightened the quarter the player stands in.
 script EleusaVillage_TempleOfDemeter_EventScript_BrazierCaught {
     call(EleusaVillage_TempleOfDemeter_EventScript_DrawSeed)
     special(DrawWholeMapView)
+    setvar(VAR_TEMP_B, 1)
     msgbox(format("The brazier catches. Its corner of the hall is suddenly, warmly gold.\p"
                   "The seed at its foot is gone.\p"
                   "Somewhere else in the dark, another has begun to glow."), MSGBOX_DEFAULT)
-    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrighten)
     releaseall
     end
-}
-
-// ICHOR_STUB_DARKNESS: stands in for EventScript_IchorBrazier (ENGINE_API.md §2):
-// asks, lights, sets the brazier's flag (VAR_0x8004); VAR_RESULT is TRUE only when
-// it was lit just now. The engine's version will check the Torch.
-script EleusaVillage_TempleOfDemeter_EventScript_StubBrazier {
-    msgbox(format("Light it with Hecate's Torch?"), MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        setvar(VAR_RESULT, FALSE)
-        return
-    }
-    switch (var(VAR_0x8004)) {
-        case TD_AUTUMN:
-            setflag(TD_AUTUMN)
-        case TD_WINTER:
-            setflag(TD_WINTER)
-        case TD_SPRING:
-            setflag(TD_SPRING)
-        case TD_SUMMER:
-            setflag(TD_SUMMER)
-    }
-    playse(SE_M_FLAME_WHEEL2)
-    waitse
-    setvar(VAR_RESULT, TRUE)
-    return
-}
-
-// ICHOR_STUB_DARKNESS: the brazier just lit stands in the player's quarter, so the
-// quarter brightens at once.
-script EleusaVillage_TempleOfDemeter_EventScript_StubBrighten {
-    closemessage
-    setvar(VAR_TEMP_2, 1)
-    animateflash(0)
-    setflashlevel(0)
-    return
 }
 
 // ---------------------------------------------------------------------------
 // The lit quarters (lit zones) and the pits
 // ---------------------------------------------------------------------------
 
-// ICHOR_STUB_DARKNESS: EventScript_IchorEnterLitZone. Brightens the hall while the
-// player is in a quarter whose brazier burns.
-script EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone {
+// Going into a quarter whose brazier burns brightens the hall (ENGINE_API.md §2). The
+// front two are dark again once the Titans have kicked them over.
+script EleusaVillage_TempleOfDemeter_EventScript_EnterLitZone {
+    lockall
+    specialvar(VAR_RESULT, Ichor_CheckFlagInVar)
     if (var(VAR_RESULT) == TRUE) {
-        lockall
-        setvar(VAR_TEMP_2, 1)
-        animateflash(0)
-        setflashlevel(0)
-        releaseall
+        setvar(VAR_TEMP_B, 1)
+        call(EventScript_IchorEnterLitZone)
     }
-    return
+    releaseall
+    end
 }
 
 script EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn {
-    setvar(VAR_RESULT, FALSE)
-    if (flag(TD_AUTUMN)) {
-        setvar(VAR_RESULT, TRUE)
+    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
+        end
     }
-    call(EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone)
-    end
+    setvar(VAR_0x8004, TD_AUTUMN)
+    goto(EleusaVillage_TempleOfDemeter_EventScript_EnterLitZone)
 }
 
 script EleusaVillage_TempleOfDemeter_EventScript_EnterWinter {
-    setvar(VAR_RESULT, FALSE)
-    if (flag(TD_WINTER)) {
-        setvar(VAR_RESULT, TRUE)
-    }
-    call(EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone)
-    end
+    setvar(VAR_0x8004, TD_WINTER)
+    goto(EleusaVillage_TempleOfDemeter_EventScript_EnterLitZone)
 }
 
 script EleusaVillage_TempleOfDemeter_EventScript_EnterSpring {
-    setvar(VAR_RESULT, FALSE)
-    if (flag(TD_SPRING)) {
-        setvar(VAR_RESULT, TRUE)
-    }
-    call(EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone)
-    end
+    setvar(VAR_0x8004, TD_SPRING)
+    goto(EleusaVillage_TempleOfDemeter_EventScript_EnterLitZone)
 }
 
 script EleusaVillage_TempleOfDemeter_EventScript_EnterSummer {
-    setvar(VAR_RESULT, FALSE)
-    if (flag(TD_SUMMER)) {
-        setvar(VAR_RESULT, TRUE)
+    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
+        end
     }
-    call(EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone)
-    end
+    setvar(VAR_0x8004, TD_SUMMER)
+    goto(EleusaVillage_TempleOfDemeter_EventScript_EnterLitZone)
 }
 
-// ICHOR_STUB_DARKNESS: EventScript_IchorLeaveLitZone. Back to the Torch's radius.
+// Out of a lit quarter: back to the Torch's radius.
 script EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone {
     lockall
-    setvar(VAR_TEMP_2, 0)
-    animateflash(TD_TORCH_RADIUS)
-    setflashlevel(TD_TORCH_RADIUS)
+    setvar(VAR_TEMP_B, 0)
+    call(EventScript_IchorLeaveLitZone)
     releaseall
     end
 }
@@ -359,6 +508,7 @@ script EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone {
 // chalk between them shows only doused.
 script EleusaVillage_TempleOfDemeter_EventScript_Pit {
     lockall
+    setflag(FLAG_ICHOR_TELESTERION_PIT_FALL)
     playse(SE_FALL)
     msgbox(format("You slide down into a grain pit.\p"
                   "Someone has helpfully left a ladder."), MSGBOX_DEFAULT)
@@ -368,6 +518,258 @@ script EleusaVillage_TempleOfDemeter_EventScript_Pit {
     releaseall
     end
 }
+
+// ---------------------------------------------------------------------------
+// Beat 22: the night of the Mysteries
+// ---------------------------------------------------------------------------
+
+// Kerykos's YES in the village lands the player here, at the front of the congregation,
+// with Alethea beside them and Kleon two places along. The hall's four braziers burn;
+// every other light is out.
+script EleusaVillage_TempleOfDemeter_EventScript_TheMysteries {
+    lockall
+    setvar(VAR_TEMP_8, 2)
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+    delay(40)
+    // Kerykos raps his staff three times.
+    call(EleusaVillage_TempleOfDemeter_EventScript_StaffRap)
+    call(EleusaVillage_TempleOfDemeter_EventScript_StaffRap)
+    call(EleusaVillage_TempleOfDemeter_EventScript_StaffRap)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameKerykos)
+    msgbox(format("EUPHEMEITE!\p"
+                  "Keep holy silence! Silence, all of you!\p"
+                  "…That includes me. Starting now."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    // The song falls away, and total silence: 90 frames, no text. Chloe lifts the cover
+    // from the basket.
+    fadeoutbgm(1)
+    delay(90)
+    applymovement(LOCALID_TEMPLE_DEMETER_CHLOE, EleusaVillage_TempleOfDemeter_Movement_ChloeUncovers)
+    waitmovement(0)
+    delay(20)
+    // A low rumble, felt more than heard. Dust sifts down from the roof beams.
+    playse(SE_M_EARTHQUAKE)
+    call(EleusaVillage_TempleOfDemeter_EventScript_Rumble)
+    msgbox(format("A rumble comes up through the floor. You feel it in your teeth."))
+    closemessage
+    turnobject(LOCALID_TEMPLE_DEMETER_ALETHEA, DIR_EAST)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameAlethea)
+    msgbox(format("The ground's humming. Like Kronion Hill."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    // A crack. The flagstones in the Anaktoron's doorway heave up, and two Titanborn
+    // climb out of the hole into the middle of the hall. The initiates scream.
+    applymovement(LOCALID_TEMPLE_DEMETER_CHLOE, EleusaVillage_TempleOfDemeter_Movement_ChloeStepsAside)
+    playse(SE_M_ROCK_THROW)
+    call(EleusaVillage_TempleOfDemeter_EventScript_Jolt)
+    waitmovement(LOCALID_TEMPLE_DEMETER_CHLOE)
+    clearflag(FLAG_ICHOR_HIDE_TELESTERION_GRUNTS)
+    addobject(LOCALID_TEMPLE_DEMETER_PSAMMIS)
+    applymovement(LOCALID_TEMPLE_DEMETER_PSAMMIS, EleusaVillage_TempleOfDemeter_Movement_PsammisOut)
+    waitmovement(0)
+    addobject(LOCALID_TEMPLE_DEMETER_CHERSOS)
+    applymovement(LOCALID_TEMPLE_DEMETER_CHERSOS, EleusaVillage_TempleOfDemeter_Movement_ChersosOut)
+    applymovement(LOCALID_TEMPLE_DEMETER_INITIATE_1, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_TEMPLE_DEMETER_INITIATE_3, Common_Movement_ExclamationMark)
+    applymovement(LOCALID_TEMPLE_DEMETER_ALETHEA, Common_Movement_ExclamationMark)
+    playse(SE_PIN)
+    waitmovement(LOCALID_TEMPLE_DEMETER_CHERSOS)
+    waitmovement(LOCALID_TEMPLE_DEMETER_ALETHEA)
+    turnobject(LOCALID_TEMPLE_DEMETER_ALETHEA, DIR_NORTH)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameGrunt)
+    msgbox(format("…This isn't the granary.\p"
+                  "It's full of people. Why is it full of people?\p"
+                  "The big man said it'd be empty! “Holy night, nobody about!”"))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameChloe)
+    msgbox(format("It's the Mysteries. Everybody is about."))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameGrunt)
+    msgbox(format("Right. Plan two. Everybody stay calm, and nobody follow us!"))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    // They kick over the nearest braziers: two crashes in the dark, and the front two
+    // corners of the hall go out.
+    applymovement(LOCALID_TEMPLE_DEMETER_PSAMMIS, EleusaVillage_TempleOfDemeter_Movement_KickLeft)
+    playse(SE_M_MEGA_KICK)
+    waitmovement(0)
+    delay(10)
+    applymovement(LOCALID_TEMPLE_DEMETER_CHERSOS, EleusaVillage_TempleOfDemeter_Movement_KickRight)
+    playse(SE_M_MEGA_KICK)
+    waitmovement(0)
+    playse(SE_BANG)
+    call(EleusaVillage_TempleOfDemeter_EventScript_Jolt)
+    call(EleusaVillage_TempleOfDemeter_EventScript_DrawRaid)
+    special(DrawWholeMapView)
+    delay(20)
+    // Kleon vaults down and lands beside the player.
+    applymovement(LOCALID_TEMPLE_DEMETER_KLEON, EleusaVillage_TempleOfDemeter_Movement_KleonVaults)
+    waitmovement(0)
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_EAST)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameKleon)
+    msgbox(format("Titans? Finally! Something I can hit!\p"
+                  "{PLAYER}! You take the loud one. I'll take the other loud one."))
+    closemessage
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameGrunt)
+    msgbox(format("The big man said empty! Holy night! Nobody about!"))
+    msgbox(format("Two kids against two Titanborn? Fine. Fair's fair."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    // Kleon beside you (STORY.md §3, Act I item 5): the one double battle with him.
+    call(EleusaVillage_TempleOfDemeter_EventScript_KleonBesideYou)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameKleon)
+    turnobject(LOCALID_TEMPLE_DEMETER_KLEON, DIR_WEST)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        msgbox(format("Ha! Did you see that? Side by side! Like the old songs!\p"
+                      "…Don't tell anyone I said that."))
+    } else {
+        msgbox(format("Ha! We'll call that a draw."))
+    }
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameGrunt)
+    msgbox(format("Fine! FINE! You can't follow us anyway. Down's dark!"))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    // The grunts drop back into the hole. Another rumble, from far below.
+    applymovement(LOCALID_TEMPLE_DEMETER_CHERSOS, EleusaVillage_TempleOfDemeter_Movement_ChersosBack)
+    waitmovement(0)
+    removeobject(LOCALID_TEMPLE_DEMETER_CHERSOS)
+    applymovement(LOCALID_TEMPLE_DEMETER_PSAMMIS, EleusaVillage_TempleOfDemeter_Movement_PsammisBack)
+    waitmovement(0)
+    removeobject(LOCALID_TEMPLE_DEMETER_PSAMMIS)
+    delay(30)
+    playse(SE_M_EARTHQUAKE)
+    call(EleusaVillage_TempleOfDemeter_EventScript_Rumble)
+    turnobject(LOCALID_TEMPLE_DEMETER_CHLOE, DIR_SOUTH)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameChloe)
+    msgbox(format("Below us. The granaries."))
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameKerykos)
+    msgbox(format("EVERYONE STAY CALM. I AM BEING CALM. LOOK HOW CALM I AM."))
+    closemessage
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_EAST)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameKleon)
+    msgbox(format("The initiates. Someone has to keep them out of that hole.\p"
+                  "Lakonians are good at narrow places. Go on. I've got the door."))
+    closemessage
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_NORTH)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameChloe)
+    msgbox(format("You. Bring that torch. Alethea, too.\p"
+                  "There's a stair under the Anaktoron. No one goes down it.\p"
+                  "Not even me, except once a year. Tonight I'll make an exception."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    // The sanctum opens: the stair under the Anaktoron (warp 3 here) and the
+    // Ploutonion's bronze gate in the village. Beat 23 is the sanctum agent's.
+    setflag(FLAG_ICHOR_MYSTERIES_NIGHT)
+    setflag(FLAG_ICHOR_SANCTUM_OPEN)
+    call(EleusaVillage_TempleOfDemeter_EventScript_DrawHall)
+    special(DrawWholeMapView)
+    // Chloe, Alethea and the player walk into the Anaktoron and down. Kleon keeps the door.
+    applymovement(LOCALID_TEMPLE_DEMETER_CHLOE, EleusaVillage_TempleOfDemeter_Movement_ChloeDown)
+    waitmovement(0)
+    removeobject(LOCALID_TEMPLE_DEMETER_CHLOE)
+    applymovement(LOCALID_TEMPLE_DEMETER_ALETHEA, EleusaVillage_TempleOfDemeter_Movement_AletheaDown)
+    waitmovement(0)
+    removeobject(LOCALID_TEMPLE_DEMETER_ALETHEA)
+    applymovement(OBJ_EVENT_ID_PLAYER, EleusaVillage_TempleOfDemeter_Movement_PlayerDown)
+    waitmovement(0)
+    warp(MAP_ELEUSA_SANCTUM_B1F, 0)
+    waitstate
+    releaseall
+    end
+}
+
+// The multi battle (setmultitrainerbattle, STORY.md §6): the player and Kleon against
+// Psammis and Chersos. Kleon leads with the starter that beats the player's, as at the
+// Isthmus Gate. The player brings their whole party (the expansion's full-team multi
+// battle); Kleon brings two. Either outcome carries the scene on: FLAG_ICHOR_NO_WHITEOUT,
+// and a lost battle heals the party quietly. VAR_RESULT is the battle's outcome.
+script EleusaVillage_TempleOfDemeter_EventScript_KleonBesideYou {
+    setflag(FLAG_ICHOR_NO_WHITEOUT)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            setmultitrainerbattle(TRAINER_ICHOR_GRUNT_TELESTERION_PSAMMIS, EleusaVillage_TempleOfDemeter_Text_PsammisDefeat, TRAINER_ICHOR_GRUNT_TELESTERION_CHERSOS, EleusaVillage_TempleOfDemeter_Text_ChersosDefeat, PARTNER_ICHOR_KLEON_ELEUSA_KYNDER)
+        case 1:
+            setmultitrainerbattle(TRAINER_ICHOR_GRUNT_TELESTERION_PSAMMIS, EleusaVillage_TempleOfDemeter_Text_PsammisDefeat, TRAINER_ICHOR_GRUNT_TELESTERION_CHERSOS, EleusaVillage_TempleOfDemeter_Text_ChersosDefeat, PARTNER_ICHOR_KLEON_ELEUSA_HIPLING)
+        default:
+            setmultitrainerbattle(TRAINER_ICHOR_GRUNT_TELESTERION_PSAMMIS, EleusaVillage_TempleOfDemeter_Text_PsammisDefeat, TRAINER_ICHOR_GRUNT_TELESTERION_CHERSOS, EleusaVillage_TempleOfDemeter_Text_ChersosDefeat, PARTNER_ICHOR_KLEON_ELEUSA_NEBREL)
+    }
+    setvar(VAR_0x8005, MULTI_BATTLE_2_VS_2)
+    callnative(BattleSetup_StartMultiBattle)
+    waitstate
+    clearflag(FLAG_ICHOR_NO_WHITEOUT)
+    setflag(FLAG_ICHOR_TELESTERION_MULTI)
+    if (var(VAR_RESULT) != B_OUTCOME_WON) {
+        special(HealPlayerParty)
+    }
+    return
+}
+
+text EleusaVillage_TempleOfDemeter_Text_PsammisDefeat { format("The big man's going to shout at us. Nicely, but loud.") }
+text EleusaVillage_TempleOfDemeter_Text_ChersosDefeat { format("I only signed on for digging!") }
+
+// Three raps of the herald's staff on the stone.
+script EleusaVillage_TempleOfDemeter_EventScript_StaffRap {
+    applymovement(LOCALID_TEMPLE_DEMETER_KERYKOS, EleusaVillage_TempleOfDemeter_Movement_Rap)
+    playse(SE_WALL_HIT)
+    waitmovement(0)
+    delay(12)
+    return
+}
+
+// The screen shakes for 30 frames.
+script EleusaVillage_TempleOfDemeter_EventScript_Rumble {
+    setvar(VAR_0x8004, 1)
+    setvar(VAR_0x8005, 1)
+    setvar(VAR_0x8006, 6)
+    setvar(VAR_0x8007, 5)
+    special(ShakeCamera)
+    waitstate
+    return
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_Jolt {
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 0)
+    setvar(VAR_0x8006, 3)
+    setvar(VAR_0x8007, 3)
+    special(ShakeCamera)
+    waitstate
+    return
+}
+
+// Kleon at the Anaktoron's door, after the Mysteries (until beat 24).
+script EleusaVillage_TempleOfDemeter_EventScript_Kleon {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameKleon)
+    msgbox(format("The initiates. Someone has to keep them out of that hole.\p"
+                  "Lakonians are good at narrow places. Go on. I've got the door."))
+    release
+}
+
+// The night's congregation keeps holy silence (they're only here for the scene).
+script EleusaVillage_TempleOfDemeter_EventScript_Hush {
+    lock
+    faceplayer
+    msgbox(format("…"))
+    release
+}
+
+movement EleusaVillage_TempleOfDemeter_Movement_Rap { walk_in_place_fast_down }
+movement EleusaVillage_TempleOfDemeter_Movement_ChloeUncovers { walk_in_place_slow_down }
+// Chloe stands back from the doorway as the flagstones heave.
+movement EleusaVillage_TempleOfDemeter_Movement_ChloeStepsAside { lock_facing_direction walk_right unlock_facing_direction face_left }
+// Out of the Anaktoron's door (13, 13) into the middle of the hall.
+movement EleusaVillage_TempleOfDemeter_Movement_PsammisOut { walk_down * 2 walk_left face_down }
+movement EleusaVillage_TempleOfDemeter_Movement_ChersosOut { walk_down * 2 face_down }
+movement EleusaVillage_TempleOfDemeter_Movement_KickLeft { face_left walk_in_place_fast_left face_down }
+movement EleusaVillage_TempleOfDemeter_Movement_KickRight { face_right walk_in_place_fast_right face_down }
+movement EleusaVillage_TempleOfDemeter_Movement_KleonVaults { jump_left face_up }
+movement EleusaVillage_TempleOfDemeter_Movement_ChersosBack { walk_fast_up * 2 }
+movement EleusaVillage_TempleOfDemeter_Movement_PsammisBack { walk_fast_right walk_fast_up * 2 }
+movement EleusaVillage_TempleOfDemeter_Movement_ChloeDown { walk_left walk_up }
+movement EleusaVillage_TempleOfDemeter_Movement_AletheaDown { walk_up * 2 walk_right walk_up * 2 }
+movement EleusaVillage_TempleOfDemeter_Movement_PlayerDown { walk_up * 4 }
 
 // ---------------------------------------------------------------------------
 // Things to look at
@@ -404,6 +806,9 @@ script EleusaVillage_TempleOfDemeter_EventScript_DrawHall {
     call(EleusaVillage_TempleOfDemeter_EventScript_DrawSeed)
     if (flag(FLAG_BADGE03_GET)) {
         call(EleusaVillage_TempleOfDemeter_EventScript_BoardPits)
+    }
+    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_DrawRaid)
     }
     if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {
         setmetatile(13, 13, 0x28A, TRUE)
@@ -562,6 +967,48 @@ script EleusaVillage_TempleOfDemeter_EventScript_BoardPits {
     setmetatile(23, 24, METATILE_TempleDemeter_Floor, FALSE)
     setmetatile(24, 24, METATILE_TempleDemeter_Floor, FALSE)
     setmetatile(25, 24, METATILE_TempleDemeter_Floor, FALSE)
+    return
+}
+
+// The night of the Mysteries (beat 22): the grunts kick over the front braziers,
+// and leave bootprints out of the Anaktoron's door.
+script EleusaVillage_TempleOfDemeter_EventScript_DrawRaid {
+    call(EleusaVillage_TempleOfDemeter_EventScript_KickAutumn)
+    call(EleusaVillage_TempleOfDemeter_EventScript_KickSummer)
+    setmetatile(13, 15, 0x204, FALSE)
+    setmetatile(13, 16, 0x204, FALSE)
+    return
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_KickAutumn {
+    setmetatile(2, 21, 0x200, FALSE)
+    setmetatile(2, 22, 0x214, TRUE)
+    setmetatile(3, 22, 0x215, TRUE)
+    setmetatile(1, 21, 0x200, FALSE)
+    setmetatile(3, 21, 0x200, FALSE)
+    setmetatile(1, 22, 0x200, FALSE)
+    setmetatile(1, 23, 0x201, FALSE)
+    setmetatile(2, 23, 0x200, FALSE)
+    setmetatile(3, 23, 0x200, FALSE)
+    setmetatile(6, 18, 0x200, FALSE)
+    setmetatile(8, 18, 0x200, FALSE)
+    setmetatile(6, 19, 0x201, FALSE)
+    setmetatile(8, 19, 0x200, FALSE)
+    setmetatile(6, 20, 0x202, FALSE)
+    setmetatile(7, 20, 0x200, FALSE)
+    setmetatile(8, 20, 0x200, FALSE)
+    setmetatile(7, 18, 0x24C, TRUE)
+    setmetatile(7, 19, 0x253, TRUE)
+    return
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_KickSummer {
+    setmetatile(24, 21, 0x200, FALSE)
+    setmetatile(24, 22, 0x214, TRUE)
+    setmetatile(25, 22, 0x215, TRUE)
+    setmetatile(24, 23, 0x200, FALSE)
+    setmetatile(19, 18, 0x24C, TRUE)
+    setmetatile(19, 19, 0x253, TRUE)
     return
 }
 
