@@ -69,43 +69,37 @@ def _move(pts, dx=0.0, dy=0.0):
 # Battle front: 3/4 view facing left, hauling itself uphill
 # --------------------------------------------------------------------------
 
-# the boulder: a rough, faceted round, not a ball
+# the boulder: a craggy granite mass, not a ball. A flattened top ledge, a
+# chipped facet at the back, and an overhang leaning forward with the climb.
 BC = (40.2, 22.0)
-BOULDER = [(38, 4.6), (47, 5.0), (53.6, 9.0), (57.8, 15.4), (58.8, 23), (57, 30.6), (52, 36.4), (44.6, 39.6),
-           (35.6, 39.8), (28.4, 37.0), (23.6, 31.0), (22.2, 22.6), (24.6, 14.2), (30.2, 7.8)]
-# the spine ridge: vertebral plates of the same stone, running up out of the
-# nape, over the crown and down the back, biggest where the arch is highest
-# (angle round the stone's centre in degrees, plate length, plate width)
-RIDGE = [(168, 2.6, 5.4), (192, 3.6, 6.4), (216, 4.4, 7.0), (241, 4.6, 7.0), (266, 4.0, 6.4),
-         (290, 3.2, 5.6), (313, 2.4, 4.6)]
-
-
-def _ridge_plate(p, ang, ln, w, dy=0.0, sweep=0.45, **kw):
-    """One plate of the spine ridge: rooted just inside the stone's outline
-    at `ang`, standing out along the normal and swept back toward the tail."""
-    import math
-    t = math.radians(ang)
-    rx, ry = 18.4, 17.6
-    bx, by = BC[0] + rx * math.cos(t), BC[1] + ry * math.sin(t) + dy
-    nx, ny = math.cos(t), math.sin(t)
-    tx, ty = -ny, nx  # along the outline, toward the back
-    a = (bx - nx * 1.6, by - ny * 1.6)
-    b = (bx + nx * ln + tx * ln * sweep, by + ny * ln + ty * ln * sweep)
-    return p.lens(a, b, w, stone, fat=0.42, bend=-0.8, **kw)
+BOULDER = [(28.6, 8.4), (33.0, 7.0), (41.0, 6.8), (47.4, 7.2), (51.6, 8.6), (53.2, 10.8), (56.6, 12.6),
+           (58.4, 17.0), (59.0, 22.0), (57.0, 24.0), (58.0, 28.4), (55.4, 32.8), (50.6, 37.0), (44.4, 39.6),
+           (36.0, 39.8), (29.4, 37.4), (25.6, 33.0), (23.6, 27.4), (21.2, 22.6), (19.8, 18.0), (21.0, 13.6),
+           (24.4, 10.0)]
+# the spine ridge: vertebrae of the same stone, running up out of the nape,
+# over the arch and down the back, biggest at the front of the arch and
+# tapering both ways; drawn back to front so each overlaps the next.
+# (base, tip, width)
+RIDGE = [((56.8, 13.4), (60.0, 11.6), 3.4), ((53.0, 9.8), (56.0, 6.8), 4.6), ((47.6, 7.8), (50.0, 3.6), 5.8),
+         ((41.4, 7.2), (42.8, 2.8), 6.6), ((34.6, 7.6), (33.8, 2.2), 7.4), ((28.2, 9.6), (24.2, 4.0), 7.8),
+         ((22.6, 13.8), (17.4, 10.6), 6.4)]
 
 
 def _front(p, phase):
     h = phase  # frame 2 heaves the stone up a step
     big = p.big
+    ox0 = p.ox
+    # the body sits 2 px back from the near fist, so the reach strains
+    p.ox = ox0 + 2 * p.s
 
     # ---- smoke legs: thighs bent and pushing, dissolving into smoke that
     # streams back down the slope
-    p.limb(_spline([(50, 38), (55.6, 44.6), (58.6, 50.0)]), 8.4, 5.4, smoke, group=2, bias=0.24)
-    p.lens((56.2, 46.4), (62.0, 55.0 + h), 4.6, smoke, bend=-1.0, fat=0.3, group=2, bias=0.26)
-    p.limb(_spline([(43, 41), (47.4, 48.6), (52.0, 52.6)]), 11.4, 7.4, smoke, group=3, bias=0.06)
-    for k, (a, b, w, bend) in enumerate((((48.6, 51.4), (61.6, 59.8 + h), 6.4, -1.8),
-                                         ((52.0, 50.0), (61.8, 53.0 + h), 4.4, -0.8),
-                                         ((46.4, 54.2), (54.0, 61.0), 4.6, 1.2))):
+    p.limb(_spline([(50, 38), (55.0, 44.6), (57.6, 50.0)]), 8.4, 5.4, smoke, group=2, bias=0.24)
+    p.lens((55.4, 46.4), (59.6, 55.0 + h), 4.6, smoke, bend=-1.0, fat=0.3, group=2, bias=0.26)
+    p.limb(_spline([(43, 41), (47.4, 48.6), (51.4, 52.6)]), 11.4, 7.4, smoke, group=3, bias=0.06)
+    for k, (a, b, w, bend) in enumerate((((48.6, 51.4), (59.4, 59.6 + h), 6.4, -1.8),
+                                         ((51.6, 50.0), (59.6, 53.0 + h), 4.4, -0.8),
+                                         ((46.4, 54.2), (53.0, 61.0), 4.6, 1.2))):
         p.lens(a, b, w, smoke, bend=bend, fat=0.28, group=4 + k % 2, bias=0.06 * (k % 2))
 
     # ---- far arm, braced under the body: flesh shoulder, stone forearm, fist
@@ -118,9 +112,10 @@ def _front(p, phase):
            flesh, group=12, bias=0.22)
 
     # ---- the boulder and the ridge of plates running over it
-    for k, (ang, ln, w) in enumerate(RIDGE):
-        _ridge_plate(p, ang, ln, w, dy=-h, group=18 + k % 2, bias=-0.1 + 0.03 * k)
-    p.poly(_closed(_move(BOULDER, dy=-h), 6), stone, group=24)
+    for k, (a, b, w) in enumerate(RIDGE):
+        p.lens(_move([a], dy=-h)[0], _move([b], dy=-h)[0], w, stone, fat=0.4, bend=-0.6, group=60 + k,
+               bias=-0.08)
+    p.poly(_move(BOULDER, dy=-h), stone, group=24)
 
     # ---- the flesh swelling up round the stone's base where they have fused,
     # with roots of it creeping up into the stone's lower curve
@@ -144,13 +139,16 @@ def _front(p, phase):
     # near arm: flesh upper arm, a forearm of the same stone, a fist as big as
     # its head, knuckles dug into the slope ahead
     p.limb([(28.0, 40), (21.6, 46.2)], 9.6, 8.6, flesh, group=38)
-    p.limb([(22.4, 45.0), (15.8, 50.6)], 11.4, 10.0, stone, group=40)
+    p.ox = ox0
+    p.limb([(24.0, 45.4), (15.0, 50.4)], 11.4, 10.2, stone, group=40)
     p.blob(10.6, 54.0, 8.8, 5.8, stone, ang=-12, group=41)
     for cx, cy, r in ((3.4, 53.8, 2.6), (5.4, 50.4, 2.6), (9.0, 48.6, 2.6), (13.0, 48.2, 2.4)):
         p.circle(cx, cy, r, stone, group=41)
 
+    p.ox = ox0 + 2 * p.s
     if big:
         _front_details(p, phase)
+    p.ox = ox0
 
 
 def _front_details(p, phase):
@@ -173,8 +171,9 @@ def _front_details(p, phase):
 # Battle back: over the shoulder, the stone huge on its back
 # --------------------------------------------------------------------------
 
-BBOULDER = [(30, 3.4), (41, 4.4), (50, 10), (54.6, 19), (55, 29), (51, 39), (43, 46), (32, 48),
-            (20, 46), (11, 39.6), (7.6, 30), (8.2, 19), (13.4, 10), (21, 5)]
+BBOULDER = [(22, 5.2), (30, 4.4), (40, 4.6), (46, 6.2), (49.6, 9.4), (53.2, 13.6), (55.0, 19.6), (53.6, 22.0),
+            (55.2, 28.0), (51.4, 38.6), (43, 45.6), (32, 47.6), (20, 45.6), (11.4, 39.4), (7.6, 30), (8.4, 22.6),
+            (6.8, 17.6), (10.4, 11.4), (15.0, 7.4)]
 BBC = (31.2, 25.6)
 # ridge plates seen from behind: down the stone's crown toward the nape at right
 BRIDGE = [(205, 2.6, 4.6), (228, 3.6, 5.8), (252, 4.6, 7.0), (277, 5.0, 7.4), (302, 4.6, 7.0), (326, 3.8, 6.0),
@@ -204,7 +203,7 @@ def _back(p, phase):
         tx, ty = ny, -nx
         p.lens((bx - nx * 1.6, by - ny * 1.6), (bx + nx * ln + tx * ln * 0.45, by + ny * ln + ty * ln * 0.45), w,
                stone, fat=0.42, bend=0.8, group=19 + k % 2, bias=-0.1 + 0.03 * k)
-    p.poly(_closed(_move(BBOULDER, dy=-h), 6), stone, group=24)
+    p.poly(_move(BBOULDER, dy=-h), stone, group=24)
     # flesh swelling up round the stone's base
     p.limb(_spline([(10, 40), (18, 46), (32, 49), (46, 46), (54, 39)], 6), 8, 6, flesh, group=26)
     # the head turned right in profile, low and forward under the stone's lip
