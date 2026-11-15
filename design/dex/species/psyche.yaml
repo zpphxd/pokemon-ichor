@@ -1,0 +1,207 @@
+line: psyche
+species:
+
+- dex: 15
+  concept: Soul caterpillar
+  name: Kampillar
+  etymology: kampe (Greek, caterpillar) + caterpillar
+  category: Soul Worm
+  types: [Bug]
+  abilities: [Shield Dust]
+  hidden_ability: Run Away
+  base_stats: {hp: 45, atk: 28, def: 36, spa: 26, spd: 25, spe: 40}
+  ev_yield: {hp: 1}
+  exp_yield: 50
+  catch_rate: 255
+  gender: {female_pct: 50}
+  egg_groups: [Bug]
+  egg_cycles: 15
+  growth_rate: Medium Fast
+  height_m: 0.3
+  weight_kg: 2.5
+  myth: >-
+    Greek psyche means both soul and butterfly. Aristotle uses it for the
+    winged creature that comes out of the caterpillar, the kampe (History of
+    Animals 5.19).
+  expression: >-
+    A plain green caterpillar with a faint glow under its skin, as if something
+    inside is waiting to get out.
+  art: >-
+    Small: it fills about 32×24 px. A plump caterpillar in three-quarter view
+    facing left, its front end raised and curious. Two big soft eye-spots mark
+    its head segment, and a faint light shows through the middle of its body.
+    Olive segments with silver-leaf bands, marble eye-spots with black-figure
+    ink pupils, a pale Aegean-blue glow, black-figure ink outline. The follower
+    inches along with its glow pulsing.
+  shiny: A pale silver-leaf body with a sun-gold glow inside.
+  dex_entry:
+    - Hold one up to the light and something
+    - flickers inside it. Old women in Elaia
+    - say it is a soul, waiting for wings.
+  habitat: >-
+    Elaia's olive groves and Route 1, in tall grass and on low branches in the
+    morning. Very common.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, String Shot]
+      - [4, Bug Bite]
+      - [8, Struggle Bug]
+      - [11, Confusion]
+      - [15, Infestation]
+      - [19, Safeguard]
+      - [25, Psybeam]
+      - [31, Bug Buzz]
+      - [35, Psychic]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Struggle Bug, Bug Bite,
+      Electroweb, Pounce, Psych Up, Infestation]
+    egg: [Rage Powder, Pollen Puff, Heal Bell, Tailwind, Sweet Kiss]
+  signature: >-
+    It evolves at level 7, sooner than almost anything. An unevolved one picks
+    up Confusion at 11, a hint of the soul inside.
+  new_move: null
+
+- dex: 16
+  concept: Veiled chrysalis
+  name: Nymveil
+  etymology: nymphe (Greek, bride; also chrysalis) + veil
+  category: Chrysalis
+  types: [Bug]
+  abilities: [Shed Skin]
+  hidden_ability: Overcoat
+  base_stats: {hp: 50, atk: 20, def: 60, spa: 25, spd: 40, spe: 20}
+  ev_yield: {def: 2}
+  exp_yield: 80
+  catch_rate: 120
+  gender: {female_pct: 50}
+  egg_groups: [Bug]
+  egg_cycles: 15
+  growth_rate: Medium Fast
+  height_m: 0.6
+  weight_kg: 8.0
+  myth: >-
+    An oracle ordered Psyche dressed as a bride and left on a mountain crag for
+    a monster to marry, and she was led there in a procession that was half
+    wedding, half funeral (Apuleius, Metamorphoses 4.33–35).
+  expression: >-
+    The chrysalis hangs like a veiled bride waiting on her crag. Greek nymphe
+    means both bride and chrysalis.
+  art: >-
+    Small: it fills about 26×40 px. An upright chrysalis in three-quarter view
+    facing left, hanging from a silk thread that runs to the top of the box. Its
+    shell is shaped like a bride under a long veil, with a hooded head, a narrow
+    waist and a hem of folded silk, and two eye-spots peek through a gap in the
+    veil. Silver-leaf and pale olive shell, marble silk veil, a sun-gold glint
+    in the eye-spots, black-figure ink outline. The follower hops along upright
+    with its veil trailing.
+  shiny: A sun-gold shell under a marble veil.
+  dex_entry:
+    - It hangs perfectly still under its veil
+    - of silk. Lift the veil to peek, and it
+    - will not hatch until it forgives you.
+  habitat: >-
+    Elaia's olive groves and Route 1, hanging from olive branches in the
+    morning; uncommon. Evolves from Kampillar at level 7.
+  learnset:
+    level_up:
+      - [0, Harden]
+      - [1, Tackle]
+      - [1, String Shot]
+      - [1, Bug Bite]
+      - [8, Struggle Bug]
+      - [11, Confusion]
+      - [13, Protect]
+      - [15, Infestation]
+      - [19, Safeguard]
+      - [21, Iron Defense]
+      - [25, Psybeam]
+      - [31, Bug Buzz]
+      - [35, Misty Terrain]
+      - [39, Psychic]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Struggle Bug, Bug Bite,
+      Electroweb, Pounce, Psych Up, Infestation, Iron Defense, Safeguard, Misty Terrain]
+    egg: []
+  signature: >-
+    Harden on evolving and little else, like every chrysalis. It evolves again
+    at level 10, so the wait is short.
+  new_move: null
+
+- dex: 17
+  concept: Psyche butterfly
+  name: Psychora
+  etymology: psyche (Greek, soul; butterfly) + kore (Greek, maiden)
+  category: Soulwing
+  types: [Bug, Fairy]
+  abilities: [Compound Eyes]
+  hidden_ability: Sweet Veil
+  base_stats: {hp: 60, atk: 40, def: 55, spa: 95, spd: 85, spe: 70}
+  ev_yield: {spa: 2, spd: 1}
+  exp_yield: 178
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Bug]
+  egg_cycles: 15
+  growth_rate: Medium Fast
+  height_m: 1.1
+  weight_kg: 14.0
+  myth: >-
+    Psyche survived Aphrodite's trials, then opened a box of Persephone's
+    beauty and fell into a deathly sleep until Eros woke her. Zeus gave her
+    ambrosia and made her immortal (Apuleius, Metamorphoses 6.21–24).
+  expression: >-
+    The bride's veil has become wings, soft as cloth, with eye-spots that look
+    straight back at whoever looks at them.
+  art: >-
+    Medium: it fills about 52×46 px. A slender butterfly-maiden hovering in
+    three-quarter view facing left, its small body upright and two pairs of
+    gauzy wings spread wide behind it like a veil. Each upper wing carries a
+    large eye-spot, and fine antennae curl like a bridal circlet. Marble and
+    silver-leaf wings shading to Aegean blue at the edges, sun-gold eye-spots
+    ringed in black-figure ink, a limestone body, black-figure ink outline. The
+    follower flutters in loops, shedding a faint shimmer of scales.
+  shiny: The wings turn soft terracotta, with Aegean-blue eye-spots.
+  dex_entry:
+    - The eye-spots on its wings watch you even
+    - while it sleeps. Its scales bring a sleep
+    - so deep that only a kiss is said to wake
+    - the sleeper.
+  habitat: >-
+    Elaia's olive groves and Route 1 on bright mornings; rare. Evolves from
+    Nymveil at level 10.
+  learnset:
+    level_up:
+      - [0, Fairy Wind]
+      - [1, Harden]
+      - [1, Tackle]
+      - [1, String Shot]
+      - [1, Bug Bite]
+      - [8, Struggle Bug]
+      - [11, Confusion]
+      - [12, Sleep Powder]
+      - [14, Stun Spore]
+      - [15, Infestation]
+      - [16, Draining Kiss]
+      - [19, Safeguard]
+      - [22, Silver Wind]
+      - [25, Psybeam]
+      - [28, Dazzling Gleam]
+      - [31, Bug Buzz]
+      - [34, Quiver Dance]
+      - [37, Tailwind]
+      - [40, Moonblast]
+      - [44, Psychic]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Struggle Bug, Bug Bite,
+      Electroweb, Pounce, Psych Up, Infestation, Iron Defense, Safeguard, Misty Terrain, Psychic,
+      Psyshock, Psychic Noise, Psychic Terrain, Calm Mind, Dream Eater, Skill Swap, Light Screen,
+      Reflect, Dazzling Gleam, Draining Kiss, Alluring Voice, Charm, Bug Buzz, Signal Beam,
+      Pollen Puff, Quiver Dance, U-turn, Air Slash, Ominous Wind, Tailwind, Aerial Ace, Defog,
+      Giga Drain, Energy Ball, Solar Beam, Sunny Day, Rain Dance, Shadow Ball, Swift, Thief,
+      Helping Hand, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Fairy Wind on evolving, then Sleep Powder at 12: the deathly sleep from
+    Persephone's box. Quiver Dance at 34 makes it a real threat.
+  new_move: null

@@ -1,0 +1,82 @@
+line: vixen
+species:
+
+- dex: 69
+  concept: Uncatchable vixen
+  name: Kerdovix
+  etymology: kerdo (Greek, fox, from kerdos, cunning) + vixen
+  category: Uncaught
+  types: [Dark, Fairy]
+  abilities: [Emergency Exit]
+  hidden_ability: Prankster
+  base_stats: {hp: 70, atk: 60, def: 100, spa: 60, spd: 90, spe: 110}
+  ev_yield: {def: 1, spe: 1}
+  exp_yield: 175
+  catch_rate: 25
+  gender: {female_pct: 100}
+  egg_groups: [Field]
+  egg_cycles: 30
+  growth_rate: Slow
+  base_friendship: 35
+  height_m: 1.1
+  weight_kg: 22.0
+  myth: >-
+    The Teumessian vixen ravaged the land around Thebes and was fated never to
+    be caught. The hound Laelaps, which caught everything, was set on it, and
+    Zeus turned both to stone mid-chase (Ovid, Metamorphoses 7; Pausanias
+    9.19.1).
+  expression: >-
+    The half of the paradox that always escapes. It is the hound's mirror
+    image: the same frame in the same stride, dark where he is light, its head
+    turned back to see how close he is.
+  art: >-
+    Large: it fills about 59×60 px, the same frame as Skylaps. A lean,
+    long-legged vixen standing tall in the hound's pose, but with her head
+    turned back over her shoulder and her ears pricked. Her big brush tail is
+    made of starlight and leaves a fading afterimage of itself. Her hind paws
+    are turning to gray stone, just like the hound's. Black-figure ink coat,
+    marble-white starlit tail, cheeks and muzzle, Fairy-pink star glints and
+    eyes as the type accent, black-figure ink outline. Frame 2 flickers the
+    afterimage; the follower flickers, leaving an afterimage a step behind.
+  shiny: The coat pales to marble and pale Aegean-blue with a sun-gold tail, so it matches the hound's normal colors.
+  dex_entry:
+    - It was fated never to be caught, and
+    - its starlit tail leaves afterimages.
+    - One Skylaps has hunted it for an age.
+    - Some say the chase ends only in stone.
+  habitat: >-
+    Roams Arkadia's routes by day and night once the player holds the fifth
+    laurel, and always tries to flee on its first turn. Optional engine idea,
+    flagged in the plan as a cost: it can't be caught until the player owns
+    Skylaps.
+  learnset:
+    level_up:
+      - [1, Fairy Wind]
+      - [1, Tail Whip]
+      - [1, Teleport]
+      - [5, Quick Attack]
+      - [9, Double Team]
+      - [13, Snarl]
+      - [17, U-turn]
+      - [21, Draining Kiss]
+      - [25, Detect]
+      - [29, Fake Tears]
+      - [33, Foul Play]
+      - [37, Dazzling Gleam]
+      - [41, Moonblast]
+      - [45, Parting Shot]
+      - [50, Baton Pass]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Dazzling Gleam,
+      Draining Kiss, Misty Terrain, Alluring Voice, Charm, Fake Tears, Play Rough, Foul Play,
+      Dark Pulse, Snarl, Taunt, Torment, Thief, Knock Off, Sucker Punch, U-turn, Baton Pass,
+      Teleport, Helping Hand, Light Screen, Reflect, Safeguard, Calm Mind, Nasty Plot, Will-O-Wisp,
+      Trick, Psych Up, Shadow Ball, Agility, Iron Tail, Dig, Encore, Role Play, Copycat, Snatch]
+    egg: [Wish, Memento, Fake Out, Sweet Kiss]
+  signature: >-
+    Emergency Exit: once it's hurt past half, it's gone, out of a trainer
+    battle or out of a wild one. Double Team, Detect, U-turn, Parting Shot and
+    Baton Pass all get it away, and Foul Play turns a foe's strength against
+    it. It learns no never-miss moves at all, and its stats are the hound's
+    turned inside out.
+  new_move: null

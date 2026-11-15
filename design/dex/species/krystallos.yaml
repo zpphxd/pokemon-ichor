@@ -1,0 +1,149 @@
+line: krystallos
+species:
+
+- dex: 127
+  concept: Ice shard
+  name: Pagoshard
+  etymology: pagos (Greek, frost, and also a rocky crag) + shard
+  category: Ice Shard
+  types: [Ice]
+  abilities: [Clear Body, Heatproof]
+  hidden_ability: Solid Rock
+  base_stats: {hp: 55, atk: 70, def: 90, spa: 40, spd: 45, spe: 30}
+  ev_yield: {def: 1}
+  exp_yield: 64
+  catch_rate: 120
+  gender: {genderless: true}
+  egg_groups: [Mineral]
+  egg_cycles: 25
+  growth_rate: Medium Fast
+  height_m: 0.6
+  weight_kg: 35.0
+  myth: >-
+    Krystallos is the Greek word for ice. Greek writers held that rock crystal
+    was ice frozen so hard, high in the coldest mountains, that it could never
+    thaw again (Pliny, Natural History 37.9, from Greek sources).
+  expression: >-
+    A splinter of ice with a quartz heart, already harder than ordinary ice and
+    slow to melt even in the hand. It is halfway between frost and stone.
+  art: >-
+    Small: it fills about 30×36 px. A jagged, upright ice shard in
+    three-quarter view facing left, standing on a stubby base like a crystal
+    point growing from rock. A six-sided quartz core shows through inside, with
+    two small square eyes set in its facets, and little frost crystals stud its
+    sides. Pale Aegean blue and marble-white ice, darker Aegean-blue facet
+    edges, a limestone-gray rock base, black-figure ink outline. The follower
+    slides along the ground as if on ice.
+  shiny: Smoky sun-gold quartz, like citrine.
+  dex_entry:
+    - It looks like a splinter of ice, but it
+    - will not melt even in a fire. Miners in
+    - the ice caves say it is ice that froze
+    - so hard it forgot how to thaw.
+  habitat: >-
+    A side grotto off the ice caves of the Ascent, at any time; rare, at level
+    40. It hides among real icicles on the grotto walls.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Harden]
+      - [4, Powder Snow]
+      - [8, Rock Throw]
+      - [12, Ice Shard]
+      - [16, Rock Polish]
+      - [20, Rock Tomb]
+      - [24, Avalanche]
+      - [28, Iron Defense]
+      - [32, Rock Slide]
+      - [36, Icicle Spear]
+      - [40, Body Press]
+      - [44, Stone Edge]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Icy Wind, Avalanche,
+      Icicle Spear, Hail, Snowscape, Rock Tomb, Rock Slide, Rock Polish, Smack Down, Stone Edge,
+      Stealth Rock, Sandstorm, Iron Defense, Body Press, Gyro Ball, Rollout, Self-Destruct, Bulldoze,
+      Reflect, Light Screen, Take Down]
+    egg: [Mirror Coat, Curse, Explosion, Block, Ice Ball, Rapid Spin]
+  signature: >-
+    Clear Body stops its stats being lowered and Heatproof halves Fire damage,
+    so it is slow to melt. Body Press at 40 turns its Defense into damage.
+  new_move: null
+
+- dex: 128
+  concept: Everlasting ice
+  name: Krystolos
+  etymology: krystallos (Greek, ice, rock crystal) + kolossos (Greek, giant statue)
+  category: Rock Crystal
+  types: [Ice, Rock]
+  abilities: [Clear Body, Heatproof]
+  hidden_ability: Solid Rock
+  base_stats: {hp: 95, atk: 115, def: 130, spa: 45, spd: 75, spe: 40}
+  ev_yield: {def: 2}
+  exp_yield: 235
+  catch_rate: 50
+  gender: {genderless: true}
+  egg_groups: [Mineral]
+  egg_cycles: 25
+  growth_rate: Medium Fast
+  height_m: 2.4
+  weight_kg: 420.0
+  myth: >-
+    The ancients said rock crystal formed only in the highest, coldest peaks,
+    from snow frozen for so long and so hard that it turned to stone (Pliny,
+    Natural History 37.9).
+  expression: >-
+    A golem of quartz and ice, clear as glass, that has stood in the ice caves
+    since before anyone climbed the Ascent. It has never melted, and it does
+    not intend to start.
+  art: >-
+    Very large: it fills about 60×60 px. A hulking golem in three-quarter view
+    facing left, built from clear six-sided crystal columns, its two massive
+    crystal fists resting on the ground and a cluster of crystal points jutting
+    from its shoulders and back. Its glassy body is suggested by highlights and
+    a few visible inner edges, with a frosted white core in its chest and two
+    cold eyes deep in a faceted head. Pale Aegean blue and marble-white crystal
+    with darker Aegean-blue edges, a limestone-gray rock base at its feet,
+    black-figure ink outline. The back sprite shows the crystal spires on its
+    back catching the light.
+  shiny: Smoky sun-gold citrine crystal.
+  dex_entry:
+    - It is ice that has frozen so long it
+    - became stone. It has never melted, and
+    - travelers lost in the ice caves peer
+    - through its clear body for the way out.
+  habitat: >-
+    Evolves from Pagoshard at level 42. Uncommon in the ice caves of the
+    Ascent, at any time, at levels 52–58. The largest keep to the deepest
+    caves.
+  learnset:
+    level_up:
+      - [0, Icicle Crash]
+      - [1, Tackle]
+      - [1, Harden]
+      - [1, Powder Snow]
+      - [1, Rock Throw]
+      - [12, Ice Shard]
+      - [16, Rock Polish]
+      - [20, Rock Tomb]
+      - [24, Avalanche]
+      - [28, Iron Defense]
+      - [32, Rock Slide]
+      - [36, Icicle Spear]
+      - [40, Body Press]
+      - [44, Stone Edge]
+      - [48, Heavy Slam]
+      - [52, Ice Hammer]
+      - [57, Earthquake]
+      - [62, Head Smash]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Icy Wind, Avalanche,
+      Icicle Spear, Hail, Snowscape, Rock Tomb, Rock Slide, Rock Polish, Smack Down, Stone Edge,
+      Stealth Rock, Sandstorm, Iron Defense, Body Press, Gyro Ball, Rollout, Self-Destruct, Bulldoze,
+      Reflect, Light Screen, Take Down, Hyper Beam, Giga Impact, Earthquake, Heavy Slam, Ice Punch,
+      Superpower, Brick Break, Rock Smash, Strength, Hammer Arm, Ice Spinner, Explosion]
+    egg: []
+  signature: >-
+    It learns Icicle Crash on evolving. Solid Rock softens its two fourfold
+    weaknesses, and Body Press and Heavy Slam turn its huge Defense and weight
+    into damage.
+  new_move: null

@@ -1,0 +1,75 @@
+line: echo
+species:
+
+- dex: 93
+  concept: Echo
+  name: Echolali
+  etymology: ekho (Greek, echo) + lalia (Greek, speech), as in echolalia
+  category: Echo
+  types: [Normal]
+  abilities: [Trace, Punk Rock]
+  hidden_ability: Infiltrator
+  base_stats: {hp: 105, atk: 55, def: 70, spa: 80, spd: 90, spe: 20}
+  ev_yield: {hp: 2}
+  exp_yield: 150
+  catch_rate: 60
+  gender: {female_pct: 100}
+  egg_groups: [Fairy, Amorphous]
+  egg_cycles: 25
+  growth_rate: Medium Fast
+  height_m: 1.3
+  weight_kg: 0.5
+  myth: >-
+    Hera cursed the nymph Echo to repeat only the last words she heard. Scorned
+    by Narcissus, she pined in the caves until nothing was left of her but her
+    voice (Ovid, Metamorphoses 3).
+  expression: >-
+    Half there, with a ripple where its mouth should be. Every move it learns
+    is someone else's.
+  art: >-
+    Medium: it fills about 36×48 px. A slender nymph in three-quarter view
+    facing left, drawn in so few pale colors that she seems only half there. A
+    smooth face with large eyes and no mouth; where the mouth would be, three
+    thin rings ripple outward. Her hair and dress trail off into more rings of
+    sound. Only marble-white and the two lightest Aegean blues, with gaps of
+    transparency through the body and a thin black-figure ink outline that
+    breaks in places. The follower walks a step behind the player and copies
+    its facing.
+  shiny: Its pale blues turn a faint lilac, the color of dusk in the caves.
+  dex_entry:
+    - It has no mouth and can only repeat the
+    - last words it hears. It lingers in the
+    - caves below a certain spring, saying a
+    - flower's words back to it, unheard.
+  habitat: >-
+    Rare, at any hour, in Kythera's sea caves where the Spring of Kallirhoe runs
+    down to the sea. It is usually found near Narcisheen, and it is heard long
+    before it's seen.
+  learnset:
+    level_up:
+      - [1, Echoed Voice]
+      - [1, Mimic]
+      - [5, Encore]
+      - [9, Copycat]
+      - [13, Round]
+      - [17, Psych Up]
+      - [21, Mirror Move]
+      - [25, Reflect Type]
+      - [29, Role Play]
+      - [33, Me First]
+      - [37, Counter]
+      - [41, Mirror Coat]
+      - [45, Instruct]
+      - [49, Uproar]
+      - [53, Snatch]
+      - [57, Entrainment]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Echoed Voice, Hyper Voice,
+      Uproar, Disarming Voice, Charm, Fake Tears, Helping Hand, Psych Up, Role Play, Skill Swap,
+      Snatch, Ally Switch, Confide, Mimic, Captivate, Light Screen, Safeguard, Encore]
+    egg: [Sing, Perish Song, Heal Bell, Wish]
+  signature: >-
+    Every level-up move copies or repeats someone else: Mimic, Copycat, Mirror
+    Move, Me First and Echoed Voice. Trace copies the foe's ability, and its
+    Speed of 20 means it always has something to repeat.
+  new_move: null

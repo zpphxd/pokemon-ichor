@@ -110,8 +110,14 @@ void Ichor_OnItemAdded(u16 itemId)
         FlagSet(flag);
 }
 
+static bool32 FlameTravels(u32 kind);
+static void PutOutFlame(void);
+static EWRAM_DATA struct { u16 steps; u8 kind; } sCarriedFlame = {0};
+
 void Ichor_OnMapTransition(void)
 {
+    if (!FlameTravels(sCarriedFlame.kind))
+        PutOutFlame();  // the flame dies when you leave, unless its kind travels
     FlagClear(FLAG_ICHOR_NO_RELICS);
     Ichor_FrozenHourOnMapTransition();
     Ichor_LabyrinthOnMapTransition();
@@ -423,17 +429,49 @@ static const u8 *const sFlameNames[FLAME_COUNT] =
     [FLAME_HEARTH]    = COMPOUND_STRING("Hearth fire"),
     [FLAME_SANCTUM]   = COMPOUND_STRING("Sanctum fire"),
     [FLAME_THRESHOLD] = COMPOUND_STRING("Threshold fire"),
+    [FLAME_HESTIA_SHIP] = COMPOUND_STRING("Hestia's fire"),
+    [FLAME_LERNA]     = COMPOUND_STRING("Kleon's fire"),
 };
 
+// Kinds that survive a door or an edge: the rest die when you leave the map.
+static const bool8 sFlameTravels[FLAME_COUNT] =
+{
+    [FLAME_HESTIA_SHIP] = TRUE,  // Akti's temple, its streets, the quay, the Euploia
+};
+
+static bool32 FlameTravels(u32 kind)
+{
+    return kind < FLAME_COUNT && sFlameTravels[kind];
+}
+
+// The carried flame lives here, not in the map's temp vars, which map scripts
+// use for their own ends. EWRAM: a save and CONTINUE puts it out.
 bool32 Ichor_IsCarryingFlame(void)
 {
-    return VarGet(VAR_TEMP_3) != FLAME_NONE && VarGet(VAR_TEMP_2) != 0;
+    return sCarriedFlame.kind != FLAME_NONE && sCarriedFlame.steps != 0;
+}
+
+void Ichor_SetCarriedFlame(u32 kind, u32 steps)
+{
+    sCarriedFlame.kind = steps != 0 ? kind : FLAME_NONE;
+    sCarriedFlame.steps = kind != FLAME_NONE ? steps : 0;
 }
 
 static void PutOutFlame(void)
 {
-    VarSet(VAR_TEMP_2, 0);
-    VarSet(VAR_TEMP_3, FLAME_NONE);
+    Ichor_SetCarriedFlame(FLAME_NONE, 0);
+}
+
+// specialvar Ichor_GetFlameKind: the carried flame's FLAME_* kind, or FLAME_NONE.
+u16 Ichor_GetFlameKind(void)
+{
+    return Ichor_IsCarryingFlame() ? sCarriedFlame.kind : FLAME_NONE;
+}
+
+// specialvar Ichor_GetFlameSteps: its steps left (0 without one).
+u16 Ichor_GetFlameSteps(void)
+{
+    return Ichor_IsCarryingFlame() ? sCarriedFlame.steps : 0;
 }
 
 // special Ichor_TakeFlame: the torch takes fire VAR_0x8004 (FLAME_*) for VAR_0x8005
@@ -443,8 +481,7 @@ void Ichor_TakeFlame(void)
     gSpecialVar_Result = FALSE;
     if (!Ichor_HasRelic(ITEM_HECATES_TORCH) || FlagGet(FLAG_ICHOR_TORCH_DOUSED) || gSpecialVar_0x8005 == 0)
         return;
-    VarSet(VAR_TEMP_2, gSpecialVar_0x8005);
-    VarSet(VAR_TEMP_3, gSpecialVar_0x8004);
+    Ichor_SetCarriedFlame(gSpecialVar_0x8004, gSpecialVar_0x8005);
     gSpecialVar_Result = TRUE;
 }
 
@@ -454,27 +491,40 @@ void Ichor_PutOutFlame(void)
     PutOutFlame();
 }
 
-// Ichor_OnStep: the carried flame burns down a step. Water puts it out. At 5
-// steps it gutters; at 0 it is the torch's ordinary flame again. Scripts only
-// start when `canTalk` (the blessing's step didn't start one).
+// world-postgame's sailing flag, claimed on its branch; its own define wins once merged.
+#ifndef FLAG_ICHOR_ON_SHIP
+#define FLAG_ICHOR_ON_SHIP (FLAG_ICHOR_GENERAL_START + 0x302)
+#endif
+
+static bool32 IsRaining(void)
+{
+    u32 weather = GetCurrentWeather();
+    return weather == WEATHER_RAIN || weather == WEATHER_RAIN_THUNDERSTORM || weather == WEATHER_DOWNPOUR;
+}
+
+// Ichor_OnStep: the carried flame burns down a step, two in the rain (scripts
+// always give the dry count). Water puts it out. Passing 5 steps left it
+// gutters; at 0 it is the torch's ordinary flame again. Scripts only start
+// when `canTalk` (the blessing's step didn't start one).
 bool32 Ichor_CarriedFlameStep(bool32 canTalk)
 {
-    u32 steps;
+    u32 steps, before, cost = IsRaining() ? 2 : 1;
 
     if (!Ichor_IsCarryingFlame())
         return FALSE;
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && !FlagGet(FLAG_ICHOR_ON_SHIP)) // sailing isn't swimming
     {
         PutOutFlame();
         if (canTalk)
             ScriptContext_SetupScript(EventScript_IchorFlameDrowned);
         return canTalk;
     }
-    steps = VarGet(VAR_TEMP_2) - 1;
-    VarSet(VAR_TEMP_2, steps);
+    before = sCarriedFlame.steps;
+    steps = before > cost ? before - cost : 0;
+    sCarriedFlame.steps = steps;
     if (steps == 0)
-        VarSet(VAR_TEMP_3, FLAME_NONE);
-    if (!canTalk || (steps != 0 && steps != ICHOR_FLAME_GUTTER_STEPS))
+        sCarriedFlame.kind = FLAME_NONE;
+    if (!canTalk || (steps != 0 && !(before > ICHOR_FLAME_GUTTER_STEPS && steps <= ICHOR_FLAME_GUTTER_STEPS)))
         return FALSE;
     ScriptContext_SetupScript(steps == 0 ? EventScript_IchorFlameSpent : EventScript_IchorFlameGutters);
     return TRUE;
@@ -483,11 +533,11 @@ bool32 Ichor_CarriedFlameStep(bool32 canTalk)
 // The start menu's panel: "Hearth fire: 12 steps".
 void Ichor_BufferFlamePanel(u8 *dst)
 {
-    u32 kind = VarGet(VAR_TEMP_3);
+    u32 kind = sCarriedFlame.kind;
     dst = StringCopy(dst, kind < FLAME_COUNT && sFlameNames[kind] ? sFlameNames[kind] : COMPOUND_STRING("Carried fire"));
     dst = StringCopy(dst, COMPOUND_STRING(": "));
-    dst = ConvertIntToDecimalStringN(dst, VarGet(VAR_TEMP_2), STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringCopy(dst, VarGet(VAR_TEMP_2) == 1 ? COMPOUND_STRING(" step") : COMPOUND_STRING(" steps"));
+    dst = ConvertIntToDecimalStringN(dst, sCarriedFlame.steps, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringCopy(dst, sCarriedFlame.steps == 1 ? COMPOUND_STRING(" step") : COMPOUND_STRING(" steps"));
 }
 
 void Ichor_SetTorchDoused(void)

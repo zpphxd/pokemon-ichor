@@ -1,0 +1,218 @@
+line: olive
+species:
+
+- dex: 18
+  concept: Olive cutting
+  name: Elaleaf
+  etymology: elaia (Greek, olive) + leaf
+  category: Olive Sprig
+  types: [Grass]
+  abilities: [Harvest, Leaf Guard]
+  hidden_ability: Regenerator
+  base_stats: {hp: 52, atk: 56, def: 58, spa: 40, spd: 50, spe: 34}
+  ev_yield: {def: 1}
+  exp_yield: 58
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.3
+  weight_kg: 3.5
+  myth: >-
+    Athena won Athens from Poseidon by planting the first olive on the
+    Akropolis (Apollodorus, Library 3.14.1). Olives grow from cuttings, so
+    every olive tree is a piece of an older one.
+  expression: >-
+    An olive cutting that pulled itself up and walked off. It has two leaves
+    and no intention of growing slowly.
+  art: >-
+    Small: it fills about 24×32 px. A short olive twig standing on a tuft of
+    roots like little feet, in three-quarter view facing left. Two silver-green
+    leaves sprout from the top like ears, one green olive hangs at its side, and
+    a tiny face sits in the bark under the leaves. Gray-brown limestone bark,
+    olive and silver-leaf leaves, an olive-green fruit, black-figure ink
+    outline. The follower waddles with its leaves twitching.
+  shiny: Sun-gold leaves and a black olive.
+  dex_entry:
+    - Plant a twig cut from it and a new one
+    - stands up the next day. Every one in
+    - Elaia is said to come from a cutting of
+    - Athena's first tree.
+  habitat: >-
+    Elaia's olive groves and the Akademia grove, in tall grass by day; common.
+    It may become the Pokémon Professor Daphne shows in her intro.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Absorb]
+      - [4, Growth]
+      - [7, Leafage]
+      - [10, Mega Drain]
+      - [13, Leech Seed]
+      - [16, Bullet Seed]
+      - [20, Worry Seed]
+      - [24, Seed Bomb]
+      - [28, Strength Sap]
+      - [32, Giga Drain]
+      - [36, Wood Hammer]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Grassy Terrain,
+      Safeguard, Bullet Seed, Seed Bomb, Magical Leaf, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Trailblaze, Worry Seed, Synthesis, Grassy Glide, Leaf Storm, Pollen Puff,
+      Rock Smash, Strength, Mud-Slap, Helping Hand, Reversal, Endeavor, Take Down]
+    egg: [Synthesis, Grassy Glide, Curse, Counter, Ingrain]
+  signature: >-
+    Leech Seed and Strength Sap give it the olive's knack for recovering, and
+    Regenerator lets every stage regrow what it loses.
+  new_move: null
+
+- dex: 19
+  concept: Olive sapling
+  name: Elapling
+  etymology: elaia (Greek, olive) + sapling
+  category: Sapling
+  types: [Grass]
+  abilities: [Harvest, Leaf Guard]
+  hidden_ability: Regenerator
+  base_stats: {hp: 70, atk: 76, def: 80, spa: 52, spd: 70, spe: 44}
+  ev_yield: {def: 2}
+  exp_yield: 135
+  catch_rate: 120
+  gender: {female_pct: 50}
+  egg_groups: [Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.0
+  weight_kg: 32.0
+  myth: >-
+    When the Persians burned the Akropolis, Athena's sacred olive burned with
+    it. The next day the Athenians found a new shoot a cubit long growing from
+    the stump (Herodotus 8.55).
+  expression: >-
+    A sapling that has already survived one fire. A bright new shoot grows from
+    a scorched scar on its trunk.
+  art: >-
+    Medium: it fills about 38×48 px. A young olive tree walking on root-feet in
+    three-quarter view facing left, its trunk slightly twisted and its two
+    branch-arms raised in a boxer's guard. A blackened scar on its side has a
+    fresh green shoot growing out of it, and a small silver-green canopy with a
+    few olives sits on top. Limestone-gray bark with a black-figure ink scorch,
+    olive and silver-leaf foliage, black-figure ink outline. The back sprite
+    shows the scorch on its side.
+  shiny: Sun-gold foliage over pale marble bark.
+  dex_entry:
+    - Burn it to the root and it sprouts again
+    - by morning. It raises its branches like
+    - fists whenever it hears a fight, and it
+    - hears a lot of them.
+  habitat: >-
+    Evolves from Elaleaf at level 17. Rare in the wild, in Elaia's oldest olive
+    groves.
+  learnset:
+    level_up:
+      - [0, Branch Poke]
+      - [1, Tackle]
+      - [1, Absorb]
+      - [1, Growth]
+      - [1, Leafage]
+      - [10, Mega Drain]
+      - [13, Leech Seed]
+      - [16, Bullet Seed]
+      - [20, Worry Seed]
+      - [22, Rock Smash]
+      - [25, Seed Bomb]
+      - [29, Strength Sap]
+      - [33, Giga Drain]
+      - [37, Bulk Up]
+      - [41, Wood Hammer]
+      - [45, Grassy Terrain]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Grassy Terrain,
+      Safeguard, Bullet Seed, Seed Bomb, Magical Leaf, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Trailblaze, Worry Seed, Synthesis, Grassy Glide, Leaf Storm, Pollen Puff,
+      Rock Smash, Strength, Mud-Slap, Helping Hand, Reversal, Endeavor, Take Down, Bulk Up,
+      Brick Break, Low Kick, Iron Defense, Bulldoze, Coaching, Drain Punch, Body Press]
+    egg: []
+  signature: >-
+    It learns Branch Poke on evolving, and Bulk Up at 37 is the olive oil that
+    athletes rubbed on before a bout. Rock Smash shows the Fighting type coming.
+  new_move: null
+
+- dex: 20
+  concept: Sacred olive
+  name: Hierolive
+  etymology: hieros (Greek, sacred) + olive
+  category: Sacred Olive
+  types: [Grass, Fighting]
+  abilities: [Harvest, Sturdy]
+  hidden_ability: Regenerator
+  base_stats: {hp: 95, atk: 120, def: 105, spa: 60, spd: 85, spe: 45}
+  ev_yield: {atk: 2, def: 1}
+  exp_yield: 230
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 2.3
+  weight_kg: 210.0
+  myth: >-
+    Herakles cut his club from a wild olive. When he leaned it against a statue
+    of Hermes at Troizen, it took root and grew into a tree again (Pausanias
+    2.31.10).
+  expression: >-
+    A gnarled ancient trunk whose branch-arms are as heavy as Herakles's club.
+    Break one off and it grows back.
+  art: >-
+    Large: it fills about 56×60 px. A massive, gnarled olive trunk in
+    three-quarter view facing left, twisted and hollowed with age, standing on
+    thick spreading roots. Two great branch-arms end in knotted club-heads, one
+    raised over its shoulder ready to swing, and a stern face looks out from
+    the bark under a wide silver-green canopy ringed with a wild-olive wreath.
+    Gray-brown limestone bark with cypress-dark hollows, olive and silver-leaf
+    canopy, black olives, a sun-gold glint in its eyes, black-figure ink
+    outline. The follower thumps along, dragging its roots.
+  shiny: A sun-gold canopy and pale marble bark, like a tree in a temple painting.
+  dex_entry:
+    - Its arms are as heavy as a hero's club.
+    - Break one off and it grows back by dawn.
+    - Wreaths cut from its branches crowned
+    - the first winners at the Games.
+  habitat: >-
+    Evolves from Elapling with a Leaf Stone. A rare wild one grows on Astyra's
+    Akropolis, beside the old temple.
+  learnset:
+    level_up:
+      - [0, Hammer Arm]
+      - [1, Branch Poke]
+      - [1, Tackle]
+      - [1, Absorb]
+      - [1, Growth]
+      - [1, Leafage]
+      - [10, Mega Drain]
+      - [13, Leech Seed]
+      - [16, Bullet Seed]
+      - [20, Worry Seed]
+      - [22, Rock Smash]
+      - [25, Seed Bomb]
+      - [29, Strength Sap]
+      - [33, Giga Drain]
+      - [37, Bulk Up]
+      - [41, Wood Hammer]
+      - [45, Grassy Terrain]
+      - [49, Drain Punch]
+      - [55, Superpower]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Grassy Terrain,
+      Safeguard, Bullet Seed, Seed Bomb, Magical Leaf, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Trailblaze, Worry Seed, Synthesis, Grassy Glide, Leaf Storm, Pollen Puff,
+      Rock Smash, Strength, Mud-Slap, Helping Hand, Reversal, Endeavor, Take Down, Bulk Up,
+      Brick Break, Low Kick, Iron Defense, Bulldoze, Coaching, Drain Punch, Body Press, Power Whip,
+      Superpower, Focus Punch, Close Combat, Seismic Toss, Low Sweep, Earthquake, Stomping Tantrum,
+      Rock Tomb, Rock Slide, Solar Blade, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Hammer Arm on evolving is the club. Regenerator, its hidden ability, is the
+    burned olive that sprouted again overnight.
+  new_move: null

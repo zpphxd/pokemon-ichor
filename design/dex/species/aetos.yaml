@@ -1,0 +1,153 @@
+line: aetos
+species:
+
+- dex: 121
+  concept: Eaglet
+  name: Aetling
+  etymology: aetos (Greek, eagle) + -ling
+  category: Eaglet
+  types: [Flying]
+  abilities: [Intimidate, Motor Drive]
+  hidden_ability: Reckless
+  base_stats: {hp: 55, atk: 78, def: 50, spa: 50, spd: 45, spe: 62}
+  ev_yield: {atk: 1}
+  exp_yield: 68
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Flying]
+  egg_cycles: 20
+  growth_rate: Slow
+  height_m: 0.6
+  weight_kg: 6.5
+  myth: >-
+    Periphas was a king of Attica so just that his people honored him like
+    Zeus. Zeus turned him into an eagle, made him king of the birds, and let
+    him guard the scepter and carry the thunderbolts (Antoninus Liberalis 6).
+  expression: >-
+    A fierce, scruffy eaglet that already stares down grown birds. It was born
+    to rule the sky, and it is waiting for a ruler just enough to serve.
+  art: >-
+    Small: it fills about 34×38 px. A fluffy eaglet in three-quarter view
+    facing left, perched on a crag with its talons gripping hard, wings half
+    spread and hackles up. An oversized hooked beak and a heavy brow give it a
+    scowl, and two stray feathers stick up from its crown like a tiny crown.
+    Marble-white down, limestone-tan flight feathers, a sun-gold beak, feet and
+    crest, black-figure ink outline. The follower hops with its wings flared,
+    trying to look bigger.
+  shiny: Cypress-dark down with an Aegean-blue crest.
+  dex_entry:
+    - Even as a chick it stares down birds
+    - twice its size. Shepherds on the Ascent
+    - say it is looking for a king worth
+    - serving, and has not found one yet.
+  habitat: >-
+    The nests on the crags of the Ascent, by day; rare, at level 38. It dives
+    at anyone who climbs too near.
+  learnset:
+    level_up:
+      - [1, Peck]
+      - [1, Leer]
+      - [4, Pursuit]
+      - [8, Wing Attack]
+      - [12, Scary Face]
+      - [16, Aerial Ace]
+      - [20, Hone Claws]
+      - [24, Pluck]
+      - [28, Agility]
+      - [32, Drill Peck]
+      - [36, Sky Drop]
+      - [40, Roost]
+      - [44, Brave Bird]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Aerial Ace, Air Cutter,
+      Air Slash, Fly, Pluck, Roost, Tailwind, Defog, U-turn, Acrobatics, Brave Bird, Dual Wingbeat,
+      Steel Wing, Sky Attack, Sky Drop, Agility, Swift, Double-Edge, Take Down, Hone Claws, Thief,
+      Knock Off, Taunt, Rock Smash, Retaliate, Work Up, Whirlwind, Mud-Slap, Rain Dance, Sunny Day]
+    egg: [Mirror Move, Feather Dance, Bulk Up, Crush Claw, Night Slash]
+  signature: >-
+    Sky Drop at 36 lifts a foe off the ground for a turn, the way Ganymede was
+    carried off. Intimidate from the start; Motor Drive waits for the
+    thunderbolt it will one day carry.
+  new_move: null
+
+- dex: 122
+  concept: Eagle of Zeus
+  name: Aetarch
+  etymology: aetos (Greek, eagle) + archos (Greek, ruler), the king of the birds
+  category: Bolt Bearer
+  types: [Electric, Flying]
+  abilities: [Intimidate, Motor Drive]
+  hidden_ability: Reckless
+  base_stats: {hp: 80, atk: 110, def: 75, spa: 95, spd: 70, spe: 100}
+  ev_yield: {atk: 1, spe: 1}
+  exp_yield: 270
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Flying]
+  egg_cycles: 20
+  growth_rate: Slow
+  height_m: 2.0
+  weight_kg: 58.0
+  myth: >-
+    Zeus's eagle carried his thunderbolts and carried off the Trojan boy
+    Ganymede to pour wine on Olympus. Zeus also sent it, day after day, to tear
+    at the chained Titan Prometheus (Hesiod, Theogony 521–525; Apollodorus
+    3.12.2).
+  expression: >-
+    A great golden eagle with a living thunderbolt clutched in its talons,
+    crackling from tip to tip. It bears the god's lightning, and it bears it
+    only for the just.
+  art: >-
+    Large: it fills about 62×58 px. A great golden eagle in three-quarter view
+    facing left, wings raised high and spread in a heraldic pose, talons
+    thrust forward around a jagged, double-ended thunderbolt like the ones on
+    Greek coins. Lightning crackles along the leading edges of its wings and
+    from its crest. A hooked sun-gold beak and a fierce, level stare.
+    Sun-gold and terracotta plumage, a marble-white head and tail, Aegean-blue
+    and white lightning, black-figure ink outline. The back sprite shows the
+    thunderbolt held high as it spreads its wings.
+  shiny: Cypress-dark plumage with a white head and Aegean-blue lightning, a storm eagle.
+  dex_entry:
+    - It carries a thunderbolt in its talons
+    - and serves only the just. It is said
+    - that it once tore at a chained Titan
+    - each day for an age, and never tired.
+  habitat: >-
+    Evolves from Aetling at level 40. Uncommon on the crags of the Ascent and
+    below Olympus's summit, by day, at levels 52–58. Archon Aristeides's ace.
+  learnset:
+    level_up:
+      - [0, Thunderbolt]
+      - [1, Thunder Shock]
+      - [1, Charge]
+      - [1, Peck]
+      - [1, Leer]
+      - [1, Pursuit]
+      - [1, Wing Attack]
+      - [12, Scary Face]
+      - [16, Aerial Ace]
+      - [20, Hone Claws]
+      - [24, Pluck]
+      - [28, Agility]
+      - [32, Drill Peck]
+      - [36, Sky Drop]
+      - [42, Roost]
+      - [46, Wild Charge]
+      - [50, Brave Bird]
+      - [54, Supercell Slam]
+      - [58, Thunder]
+      - [64, Hurricane]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Aerial Ace, Air Cutter,
+      Air Slash, Fly, Pluck, Roost, Tailwind, Defog, U-turn, Acrobatics, Brave Bird, Dual Wingbeat,
+      Steel Wing, Sky Attack, Sky Drop, Agility, Swift, Double-Edge, Take Down, Hone Claws, Thief,
+      Knock Off, Taunt, Rock Smash, Retaliate, Work Up, Whirlwind, Mud-Slap, Rain Dance, Sunny Day,
+      Thunderbolt, Thunder, Thunder Wave, Volt Switch, Wild Charge, Charge Beam, Discharge,
+      Electroweb, Electric Terrain, Rising Voltage, Shock Wave, Eerie Impulse, Supercell Slam,
+      Hurricane, Hyper Beam, Giga Impact, Weather Ball]
+    egg: []
+  signature: >-
+    It learns Thunderbolt on evolving and Supercell Slam at 54, a dive with
+    the bolt in its talons. Its Speed and Motor Drive let it strike first. A fast
+    mixed attacker built to close out the League.
+  new_move: null

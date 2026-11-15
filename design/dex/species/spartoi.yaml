@@ -1,0 +1,154 @@
+line: spartoi
+species:
+
+- dex: 111
+  concept: Dragon's tooth
+  name: Sporadon
+  etymology: spora (Greek, sowing, seed) + odon (Greek, tooth)
+  category: Dragon Tooth
+  types: [Dragon]
+  abilities: [Battle Armor, Defiant]
+  hidden_ability: Moxie
+  base_stats: {hp: 60, atk: 80, def: 90, spa: 30, spd: 50, spe: 25}
+  ev_yield: {def: 1}
+  exp_yield: 64
+  catch_rate: 75
+  gender: {female_pct: 0}
+  egg_groups: [Dragon, Mineral]
+  egg_cycles: 30
+  growth_rate: Slow
+  height_m: 0.4
+  weight_kg: 22.0
+  myth: >-
+    Cadmus killed the serpent of Ares at a spring near the site of Thebes. On
+    Athena's advice he sowed its teeth, and armed men sprang up from the
+    furrows (Ovid, Metamorphoses 3; Apollodorus 3.4.1).
+  expression: >-
+    A single dragon's tooth sown in the earth, already wearing a hoplite's
+    crest. It waits in the furrow for the day it is called up.
+  art: >-
+    Small: it fills about 40×55 px, tall and narrow. A big hooked dragon's fang,
+    pale as marble, standing in a mound of terracotta earth in three-quarter
+    view facing left, its point hooking back at the top. A red horsehair crest
+    runs up its curved back like a hoplite's helmet crest, and two gold slit
+    eyes glow in a dark band across its face like a helmet's eye slot. Marble
+    and limestone tooth, terracotta soil, a red crest as the accent, sun-gold
+    eyes, black-figure ink outline. Frame 2 flicks a clod of earth off the
+    mound; the follower hops along dragging its little mound of earth.
+  shiny: The tooth turns sun-gold and the crest turns Aegean blue.
+  dex_entry:
+    - Farmers who turn one up in a furrow
+    - bury it again at once. Left alone, it
+    - sprouts into a warrior, and warriors
+    - will fight anything, even each other.
+  habitat: >-
+    Half-buried in the training fields of the Lakonian battle school, Lakonia,
+    but only in a swarm. When the day's omen calls one, a crop springs up at
+    level 38. The Augur's Eye finds them in the furrows.
+  learnset:
+    level_up:
+      - [1, Bite]
+      - [1, Harden]
+      - [5, Mud-Slap]
+      - [9, Dragon Rage]
+      - [13, Rock Tomb]
+      - [17, Ingrain]
+      - [21, Dragon Tail]
+      - [25, Crunch]
+      - [29, Iron Defense]
+      - [33, Scale Shot]
+      - [37, Dig]
+      - [41, Dragon Rush]
+      - [45, Outrage]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Rock Tomb,
+      Rock Slide, Smack Down, Stone Edge, Dig, Bulldoze, Earthquake, Sandstorm, Stealth Rock,
+      Iron Defense, Iron Head, Dragon Tail, Scale Shot, Outrage, Crunch, Rollout, Take Down, Endeavor,
+      Scary Face]
+    egg: [Dragon Dance, Counter, Curse, Quick Guard, Superpower, Sucker Punch]
+  signature: >-
+    It learns Ingrain at 17: a sown tooth heals where it is planted. A slow,
+    sturdy wall for now, with Moxie hidden for the last warrior standing.
+  new_move: null
+
+- dex: 112
+  concept: Sown warrior
+  name: Dorydrake
+  etymology: dory (Greek, the hoplite's spear) + drake
+  category: Sown Warrior
+  types: [Dragon, Fighting]
+  abilities: [Battle Armor, Defiant]
+  hidden_ability: Moxie
+  base_stats: {hp: 85, atk: 125, def: 110, spa: 45, spd: 75, spe: 65}
+  ev_yield: {atk: 2}
+  exp_yield: 245
+  catch_rate: 45
+  gender: {female_pct: 0}
+  egg_groups: [Dragon, Mineral]
+  egg_cycles: 30
+  growth_rate: Slow
+  height_m: 1.9
+  weight_kg: 125.0
+  myth: >-
+    The Spartoi rose from the furrows fully armed and shaking their spears.
+    Cadmus threw a stone among them, and they fought one another until only
+    five were left, who helped him build Thebes (Ovid, Metamorphoses 3;
+    Apollodorus 3.4.1).
+  expression: >-
+    The tooth risen as a dragon-scaled hoplite, earth still clinging to its
+    legs, its shield one great scale and its spear a dragon's fang. It will
+    fight in a line or alone, and it doesn't stop until it is the last one
+    standing.
+  art: >-
+    Large: it fills about 54×60 px. A dragon-scaled hoplite in three-quarter
+    view facing left, crouched in a phalanx stance: a round shield made of one
+    huge scale held forward and a long fang-tipped spear raised overhead. Its
+    draconic head has cheek-guard scales and a tall red crest running down its
+    neck, like a helmet that grew. Clods of earth cling to its feet and tail.
+    Cypress-green scales, a marble spear, sun-gold shield rim, red crest,
+    terracotta earth, black-figure ink outline. The back sprite shows a dragon
+    emblem painted on the shield.
+  shiny: Sun-gold scales with a marble-white crest, like a bronze statue of itself.
+  dex_entry:
+    - It rises from the earth already armed,
+    - shaking its tooth-spear. When several
+    - rise at once they fight one another
+    - until only a few are left standing.
+  habitat: >-
+    Evolves from Sporadon at level 40. Uncommon in the training fields of the
+    Lakonian battle school, Lakonia, at any time, at levels 46–50. Pantheon
+    member Olympias fields one at the Dragon seat.
+  learnset:
+    level_up:
+      - [0, Wide Guard]
+      - [1, Rock Smash]
+      - [1, Bite]
+      - [1, Harden]
+      - [1, Mud-Slap]
+      - [1, Dragon Rage]
+      - [13, Rock Tomb]
+      - [17, Ingrain]
+      - [21, Dragon Tail]
+      - [25, Crunch]
+      - [29, Iron Defense]
+      - [33, Scale Shot]
+      - [37, Dig]
+      - [43, Brick Break]
+      - [46, Dragon Rush]
+      - [50, Bulk Up]
+      - [54, Dragon Dance]
+      - [58, Outrage]
+      - [63, Close Combat]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Rock Tomb,
+      Rock Slide, Smack Down, Stone Edge, Dig, Bulldoze, Earthquake, Sandstorm, Stealth Rock,
+      Iron Defense, Iron Head, Dragon Tail, Scale Shot, Outrage, Crunch, Rollout, Take Down, Endeavor,
+      Scary Face, Hyper Beam, Giga Impact, Rock Smash, Brick Break, Low Kick, Low Sweep, Close Combat,
+      Superpower, Bulk Up, Body Press, Reversal, Revenge, Retaliate, Swords Dance, Dragon Claw,
+      Breaking Swipe, Dual Chop, Smart Strike, Poison Jab, Brutal Swing, Helping Hand, Coaching]
+    egg: []
+  signature: >-
+    It learns Wide Guard on evolving, the locked shields of the phalanx, and
+    Dragon Dance at 54. Moxie lets it snowball through a team the way the sown
+    men fought down to five.
+  new_move: null

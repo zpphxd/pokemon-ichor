@@ -1,0 +1,130 @@
+{
+  "id": "MAP_EMPORION_CITY_HIRING_HALL",
+  "name": "EmporionCity_HiringHall",
+  "layout": "LAYOUT_EMPORION_CITY_HIRING_HALL",
+  "music": "MUS_ICHOR_EMPORION",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_EMPORION_CITY",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_EMPORION_HIRING_HALL_CREW_BOSS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 9,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionCity_HiringHall_EventScript_CrewBoss",
+      "flag": "FLAG_ICHOR_ACT1_COMPLETE"
+    },
+    {
+      "local_id": "LOCALID_EMPORION_HIRING_HALL_DOCKHAND",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 6,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionCity_HiringHall_EventScript_Dockhand",
+      "flag": "FLAG_ICHOR_ACT1_COMPLETE"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_EMPORION_HARBOR",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_EMPORION_HARBOR",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_HiringHall_EventScript_Ledger"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_HiringHall_EventScript_SickleCrate"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_HiringHall_EventScript_Crates"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_HiringHall_EventScript_Crates"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_HiringHall_EventScript_Helmets"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_HiringHall_EventScript_Hoist"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_HiringHall_EventScript_ShedDoors"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionCity_HiringHall_EventScript_ShedDoors"
+    }
+  ]
+}

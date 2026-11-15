@@ -92,6 +92,15 @@ struct IchorSave
 
 #define gIchorSave (gSaveBlock3Ptr->ichor)
 
+// A hidden item's flag, from the 13-bit id bg_hidden_item_event packs
+// (asm/macros/map.inc): a vanilla flag's offset, or a bank flag past 0x1000.
+static inline u16 Ichor_GetHiddenItemFlag(u32 hiddenItemId)
+{
+    if (hiddenItemId >= ICHOR_HIDDEN_ITEM_BANK_ID)
+        return ICHOR_FLAGS_START + (hiddenItemId - ICHOR_HIDDEN_ITEM_BANK_ID);
+    return FLAG_HIDDEN_ITEMS_START + hiddenItemId;
+}
+
 void Ichor_InitSave(void);
 void Ichor_OnSaveLoaded(void);
 void Ichor_DoDailyEvents(u32 daysSince);

@@ -1,6 +1,6 @@
 -- The slice playthrough, run by tools/ichor/tests/slice_playthrough.sh (read it first).
 --
--- One continuous run from a fresh cartridge to "Thank you for playing", with key
+-- One continuous run from a fresh cartridge through the slice and into Phase 2, with key
 -- presses only: the title, the OPTION menu, NEW GAME, Daphne's speech and the
 -- naming screen, then every beat of design/phase1/SCRIPT.md in order. Walking
 -- uses slice_lib.lua's breadth-first search over the live map grid. Every
@@ -105,6 +105,14 @@ local function ball(flag) return function() return L.ball(S[flag]) end end
 local function hidden(flag) return function() return L.hidden(S[flag]) end end
 local function sign(script) return function() return L.sign(script) end end
 
+-- Trainer battles so far. A wild one can start on the step back to a trainer who
+-- stands by tall grass, so "doesn't battle again" counts only trainer battles.
+local function trainerBattles()
+  local n = 0
+  for _, b in ipairs(L.battles) do if b.trainer then n = n + 1 end end
+  return n
+end
+
 -- A trainer: talk to them (walking there may get the player spotted first, and
 -- the battle is played out on the way), then talk again for the after-battle line
 -- and make sure it isn't a second battle.
@@ -116,9 +124,9 @@ local function trainer(name, script, song, opts)
   local rec
   for _, b in ipairs(L.battles) do if b.who == name then rec = b end end
   battleCheck(rec, name, song, name)
-  local n1 = #L.battles
+  local n1 = trainerBattles()
   talk(L.npc(script), { shotBefore = string.lower(name) .. "_after" })
-  L.check(#L.battles == n1, name .. " does not battle again")
+  L.check(trainerBattles() == n1, name .. " does not battle again")
 end
 
 -- Visit a list of things in the order the map makes shortest: always the nearest
@@ -223,10 +231,12 @@ end
 -- loads that state and plays on from there: handy while fixing one beat, but the
 -- director's run always starts from the title.
 --
--- Nothing below names a coordinate. People, signs, items, triggers and warps are
--- found on the live map by the script they run or the flag they set (slice_lib's
--- L.npc, L.sign, L.ball, L.hidden, L.triggers, L.useWarp, L.leaveEdge), so moving
--- them on a map never breaks the run; taking one away fails with its name.
+-- Nothing below names a coordinate but the Herald's Run's route (beat 15), the
+-- builder's solving route through the one-way turnstiles. People, signs, items,
+-- triggers and warps are found on the live map by the script they run or the
+-- flag they set (slice_lib's L.npc, L.sign, L.ball, L.hidden, L.triggers,
+-- L.useWarp, L.leaveEdge), so moving them on a map never breaks the run; taking
+-- one away fails with its name.
 
 local BEATS = {}
 local function beat(name, fn) BEATS[#BEATS + 1] = { name = name, fn = fn } end
@@ -709,7 +719,9 @@ beat("08_harbor_part2", function()
   local quay = L.triggers(AK .. "HarborPart2Row9", AK .. "HarborPart2Row10", AK .. "HarborPart2Row11")
   expect(not L.goTrigger(quay), "the quay starts the ending")
   settle({ every = true, answers = { "no" } })
-  flagsSet({ "FLAG_SLICE_COMPLETE", "FLAG_HIDE_KLEON_AKTI", "FLAG_HIDE_ALETHEA_AKTI" }, "the slice is complete")
+  flagsSet({ "FLAG_SLICE_COMPLETE", "FLAG_HIDE_KLEON_AKTI" }, "the slice is complete")
+  -- Phase 2: no farewell card; Alethea stays on the quay with Halia's message
+  flagsClear({ "FLAG_HIDE_ALETHEA_AKTI" }, "Alethea waits on the quay after the slice")
   shot("the_end")
 end)
 
@@ -727,6 +739,714 @@ beat("08_after", function()
   wait(60)
   expect(L.idle(), "Akti after the end is quiet")
   shot("akti_after_the_end")
+end)
+
+-- === Phase 2, Act I on the mainland (design/phase2/SCRIPT.md) ===================================
+
+-- Beat 9A: back down Route 1 to Elaia, where Halia looks at your hand once more.
+beat("09a_halia", function()
+  talk(L.npc(AK .. "Alethea"), { shotBefore = "alethea_pointer" })
+  L.leaveEdge("down", S.MAP_ROUTE1)
+  L.leaveEdge("down", S.MAP_ELAIA)
+  musicIs(S.MUS_ELAIA, "Elaia's theme")
+  local ring = L.triggers("ElaiaVillage_EventScript_HaliaSecondLook")
+  expect(not L.goTrigger(ring), "the square starts Halia's second look")
+  settle({ every = true })
+  flagsSet({ "FLAG_HALIA_SECOND_LOOK", "FLAG_HIDE_MOM_HOME" }, "Halia has looked again; Mom has gone to the harbor")
+  flagsClear({ "FLAG_HIDE_MOM_AKTI", "FLAG_HIDE_KLEON_AKTI_DOOR" }, "Mom and Kleon wait in Akti")
+  shot("halia_after")
+  talk(L.npc("ElaiaVillage_EventScript_Halia"), { shotBefore = "halia_go_on" })
+end)
+
+-- Beat 9B: up to Akti; the wind turns, Kleon has his laurel, Mom brings honey.
+beat("09b_winds", function()
+  L.leaveEdge("up", S.MAP_ROUTE1)
+  L.leaveEdge("up", S.MAP_AKTI, true)
+  settle({ every = true })
+  shot("wind_from_the_south")
+  local honey = L.itemCount(S.ITEM_HONEY)
+  local quay = L.triggers(AK .. "WindsQuayRow9", AK .. "WindsQuayRow10", AK .. "WindsQuayRow11")
+  expect(not L.goTrigger(quay), "the quay starts the winds-turned scene")
+  settle({ every = true })
+  flagsSet({ "FLAG_WINDS_TURNED", "FLAG_MOM_HARBOR", "FLAG_HIDE_ALETHEA_AKTI", "FLAG_HIDE_KLEON_AKTI_DOOR" },
+           "the wind has turned, Mom has been, and the others are aboard")
+  L.check(L.itemCount(S.ITEM_HONEY) == honey + 2, string.format("Mom's two Honey (%d -> %d)", honey,
+                                                                L.itemCount(S.ITEM_HONEY)))
+  talk(L.npc(AK .. "Mom"), { shotBefore = "mom_on_the_quay" })
+  -- re-entering Akti now replays nothing
+  L.useWarp(S.MAP_AGORA)
+  L.useWarp(S.MAP_AKTI)
+  wait(60)
+  expect(L.idle(), "Akti after the wind is quiet")
+end)
+
+beat("09b_board", function()
+  talk(L.npc(AK .. "Nausikles"), { shotBefore = "all_aboard", answers = { "yes" } })
+  L.waitUntil(function() return mapId() == S.MAP_DECK end, 600, "the Euploia's deck")
+  flagsSet({ "FLAG_BOARDED_EUPLOIA", "FLAG_HIDE_MOM_AKTI" }, "aboard, and Mom has gone home")
+  flagsClear({ "FLAG_HIDE_MOM_HOME" }, "Mom is home again")
+  -- "Cast off!" plays on arrival
+  settle({ every = true })
+  musicIs(S.MUS_TRIREME, "the crossing's theme")
+  shot("aboard")
+end)
+
+-- Beat 10: the crossing. The deck's people, trainers and items, and the hold, first;
+-- then Nausikles's steering oar starts the calm, the snatchers and the night leg.
+local TD, TH = "TriremeDeck_EventScript_", "TriremeHold_EventScript_"
+beat("10_deck", function()
+  trainer("ALETHEA_DECK", TD .. "Alethea", S.MUS_BATTLE_TRAINER, { answers = { "yes" } })
+  flagsSet({ "FLAG_BATTLED_ALETHEA_DECK" }, "Alethea's practice battle")
+  talk(L.npc(TD .. "Kleon"), { shotBefore = "kleon_at_the_rail" })
+  talk(L.npc(TD .. "Lookout"), { shotBefore = "lookout" })
+  trainer("LYKON", TD .. "Lykon", S.MUS_BATTLE_TRAINER)
+  trainer("PHORMION", TD .. "Phormion", S.MUS_BATTLE_TRAINER)
+  collect(ball("FLAG_ITEM_DECK_SUPER_POTION"), "FLAG_ITEM_DECK_SUPER_POTION", "ITEM_SUPER_POTION",
+          "the Super Potion among the bow cargo")
+  collect(hidden("FLAG_HIDDEN_DECK_HEART_SCALE"), "FLAG_HIDDEN_DECK_HEART_SCALE", "ITEM_HEART_SCALE",
+          "the Heart Scale in the rope coil")
+  talk(L.sign(TD .. "Klepsydra"), { shotBefore = "klepsydra" })
+  L.useWarp(S.MAP_HOLD)
+  shot("the_hold")
+  for _, who in ipairs({ "LakonianRower", "Rower1", "Rower2", "Rower3" }) do
+    talk(L.npc(TH .. who), { shotBefore = string.lower(who) })
+  end
+  collect(ball("FLAG_ITEM_HOLD_POTION"), "FLAG_ITEM_HOLD_POTION", "ITEM_POTION", "the Potion under the bottom bench")
+  L.useWarp(S.MAP_DECK)
+end)
+
+beat("10_calm", function()
+  -- the steering oar: the calm, the split reed, Kleon's stroke, then a free moment
+  talk(L.npc(TD .. "Nausikles"), { shotBefore = "steering_oar", answers = { "yes" }, every = true })
+  shot("the_calm")
+  talk(L.sign(TD .. "Klepsydra"), { shotBefore = "klepsydra_upward" })
+  -- the lookout's shout: crossing x = 8 walks the player to the bow
+  local bow = L.triggers(TD .. "ToBowRow4", TD .. "ToBowRow5", TD .. "ToBowRow6", TD .. "ToBowRow7",
+                         TD .. "ToBowRow8", TD .. "ToBowRow9")
+  expect(not L.goTrigger(bow), "the bow line starts the nest scene")
+  -- the snatchers (fought: no running), the hatching, the chick (take it, no
+  -- nickname), the night leg, and on to Aigina's quay
+  settle({ every = true, answers = { "yes", "no" } })
+  L.waitUntil(function() return mapId() == S.MAP_AEGINA end, 3000, "Aigina's quay")
+  settle({ every = true })
+  flagsSet({ "FLAG_SAVED_HALCYON_NEST", "FLAG_GOT_HALCYLING" }, "the nest is saved and the chick taken")
+  flagsClear({ "FLAG_NO_WHITEOUT", "FLAG_NO_RUNNING" }, "the snatcher battles' flags are cleared")
+  flagsSet({ "FLAG_ARRIVED_AEGINA", "FLAG_VISITED_AEGINA", "FLAG_HIDE_AEGINA_CAST" }, "the arrival on Aigina")
+  shot("aigina_by_night")
+end)
+
+-- Beat 10B: a night ashore on Aigina.
+local AG = "AeginaTown_EventScript_"
+beat("10b_aigina", function()
+  visitAll({
+    visitTalk("gatekeeper", npc(AG .. "Gatekeeper")),
+    visitTalk("fisherwoman", npc(AG .. "Fisherwoman")),
+    visitTalk("kid", npc(AG .. "Kid")),
+    visitTalk("kolona", sign(AG .. "Kolona")),
+    visitTalk("town_sign", sign(AG .. "TownSign")),
+    visitItem("the Big Pearl at the end of the mole", hidden("FLAG_HIDDEN_AEGINA_BIG_PEARL"),
+              "FLAG_HIDDEN_AEGINA_BIG_PEARL", "ITEM_BIG_PEARL"),
+    visitItem("the Stardust at Kolona's foot", hidden("FLAG_HIDDEN_AEGINA_STARDUST"),
+              "FLAG_HIDDEN_AEGINA_STARDUST", "ITEM_STARDUST"),
+  })
+  L.useWarp(S.MAP_AEGINA_MINT)
+  talk(L.npc("AeginaTown_Mint_EventScript_Pheidon"), { shotBefore = "pheidon", answers = { "no" } })
+  L.useWarp(S.MAP_AEGINA)
+  L.useWarp(S.MAP_AEGINA_AIAKIDES)
+  talk(L.npc("AeginaTown_AiakidesHouse_EventScript_Aiakides"), { shotBefore = "aiakides" })
+  L.useWarp(S.MAP_AEGINA)
+  L.useWarp(S.MAP_AEGINA_INN)
+  -- bed: the night by the hearth, Kleon's question (the second answer), then the
+  -- deck at dawn, where beat 10C plays
+  talk(L.npc("AeginaTown_Inn_EventScript_Endeis"), { shotBefore = "endeis", answers = { "yes", "down" }, every = true,
+                                                      stop = function() return mapId() == S.MAP_DECK and L.inOverworld() end })
+  L.waitUntil(function() return mapId() == S.MAP_DECK end, 3000, "the deck at dawn")
+  flagsSet({ "FLAG_AEGINA_NIGHT" }, "the night at the inn")
+end)
+
+-- Beat 10C: the last leg. The Euploia makes Emporion's quay, where beat 11 plays
+-- on arrival; the next beat starts there.
+beat("10c_last_leg", function()
+  settle({ every = true, stop = function() return mapId() == S.MAP_HARBOR and L.inOverworld() end })
+  mapIs(S.MAP_HARBOR, "the Euploia makes Emporion's quay")
+  flagsSet({ "FLAG_CROSSING_DONE", "FLAG_VISITED_EMPORION" }, "the crossing is done, and Emporion is on the map")
+  flagsClear({ "FLAG_ARRIVED_EMPORION" }, "beat 11 is still to play")
+end)
+
+-- === Phase 2, batch 2: Emporion and the Temple of Hermes (beats 11-16) ============================
+
+local EH, EC = "EmporionHarbor_EventScript_", "EmporionCity_EventScript_"
+local HM = "EmporionCity_TempleOfHermes_EventScript_"
+local KLEON_2 = { [0] = "KLEON_2_KYNDER", [1] = "KLEON_2_HIPLING", [2] = "KLEON_2_NEBREL" }
+
+-- A shop: the BUY list looked at, then out. The shop menus aren't script
+-- prompts, so this is played by hand, as Demeas's is.
+local function shop(target, name)
+  talk(target, { shotBefore = name, noSettle = true })
+  local t0 = now()
+  while not L.taskRunning("Task_ShopMenu") do
+    tap(K.A); wait(20)
+    if now() - t0 > 900 then L.fail(name .. ": the shop menu never opened") end
+  end
+  wait(20); tap(K.A)                                                  -- BUY
+  L.waitUntil(function() return L.taskRunning("Task_BuyMenu") end, 600, name .. "'s item list")
+  wait(40); shot(name .. "_wares")
+  tap(K.B)
+  L.waitUntil(function() return L.taskRunning("Task_ShopMenu") end, 600, name .. "'s menu again")
+  wait(20); tap(K.B)                                                  -- QUIT
+  settle()
+end
+local function visitShop(name, where) return visit(name, where, function() shop(where(), name) end) end
+
+-- The city's scene treads, kept off until the beat that means to step on them:
+-- the temple stair's bottom tread (beat 14) and the Isthmus Gate (beat 16).
+local function holdCity()
+  local hold = L.triggers(EC .. "KleonStepsX21", EC .. "KleonStepsX22", EC .. "KleonStepsX23",
+                          EC .. "KleonStepsX24", EC .. "KleonStepsX25")
+  for k in pairs(L.triggers(EC .. "IsthmusGateX7", EC .. "IsthmusGateX8", EC .. "IsthmusGateX9")) do hold[k] = true end
+  L.keepOff[S.MAP_CITY] = hold
+end
+local function gateTread() return L.triggers(EC .. "IsthmusGateX7", EC .. "IsthmusGateX8", EC .. "IsthmusGateX9") end
+
+-- Beat 11: the herald on the quay.
+beat("11_quay", function()
+  musicIs(S.MUS_EMPORION, "Emporion's theme on the quay")
+  shot("emporion_quay")
+  -- Kleon's sprint; Kerykos and the herm, where MAKE AN OFFERING is sent back to
+  -- PRAY; the oil, the Trowel, the planter's dig, and Alethea off to the Deigma
+  settle({ every = true, answers = { "down", "yes" } })
+  flagsSet({ "FLAG_ARRIVED_EMPORION", "FLAG_RITES_TUTORIAL", "FLAG_GOT_TROWEL", "FLAG_DUG_EMPORION_QUAY",
+             "FLAG_HIDE_KLEON_QUAY", "FLAG_HIDE_KERYKOS_QUAY", "FLAG_HIDE_ALETHEA_QUAY" },
+           "beat 11: arrived, the rites tutorial and oil, the Trowel, the dig")
+  L.check(not (L.npc(EH .. "Kleon").present or L.npc(EH .. "Kerykos").present or L.npc(EH .. "Alethea").present),
+          "Kleon, Kerykos and Alethea have left the quay")
+  shot("quay_after")
+end)
+
+-- The harbor district: its people, signs and items, and the hiring hall.
+beat("11_harbor", function()
+  visitAll({
+    visitTalk("quay_herm", sign(EH .. "QuayHerm")),                     -- an altar now: PRAY
+    visitTalk("planter_dug", sign(EH .. "Planter")),
+    visitTalk("city_sign", sign(EH .. "CitySign")),
+    visitItem("the Heart Scale on the quay steps", hidden("FLAG_HIDDEN_EMPORION_HEART_SCALE"),
+              "FLAG_HIDDEN_EMPORION_HEART_SCALE", "ITEM_HEART_SCALE"),
+    visit("nausikles_stay", npc(EH .. "Nausikles"), function()
+      talk(L.npc(EH .. "Nausikles"), { shotBefore = "nausikles", answers = { "down" } })   -- STAY
+      mapIs(S.MAP_HARBOR, "STAY keeps the player on the quay")
+    end),
+    visitTalk("customs_man", npc(EH .. "CustomsMan")),
+    visit("glykera", npc(EH .. "Glykera"), function()
+      talk(L.npc(EH .. "Glykera"), { shotBefore = "glykera" })           -- YES: oil for the fan
+      flagsSet({ "FLAG_DAEDALUS_PAGE_1" }, "Glykera trades Daedalus's page I for an Olive Oil")
+      talk(L.npc(EH .. "Glykera"), { shotBefore = "glykera_after" })
+    end),
+    visitTalk("wine_seller", npc(EH .. "WineSeller")),
+    visitTalk("harbor_road_sign", sign(EH .. "HarborRoadSign")),
+    visitTalk("stevedore", npc(EH .. "Stevedore")),
+    visitTalk("dockhand", npc(EH .. "Dockhand")),
+    visitTalk("hiring_board", sign(EH .. "HiringBoard")),
+    visitTalk("sailor", npc(EH .. "Sailor")),
+    visitTalk("mother", npc(EH .. "Mother")),
+    visitTalk("son", npc(EH .. "Son")),
+    visitItem("the Super Potion on the ship sheds' slipway", ball("FLAG_ITEM_EMPORION_SUPER_POTION"),
+              "FLAG_ITEM_EMPORION_SUPER_POTION", "ITEM_SUPER_POTION"),
+    visitTalk("dig_sheds", sign(EH .. "DigShipsheds")),
+    visitItem("the Bronze Obol in the harbor wall", hidden("FLAG_HIDDEN_EMPORION_BRONZE_OBOL"),
+              "FLAG_HIDDEN_EMPORION_BRONZE_OBOL", "ITEM_RELIC_COPPER"),
+    visit("halitherses", npc(EH .. "Halitherses"), function()
+      talk(L.npc(EH .. "Halitherses"), { shotBefore = "halitherses" })
+      flagsSet({ "FLAG_MET_HALITHERSES" }, "Halitherses introduces himself")
+      talk(L.npc(EH .. "Halitherses"), { shotBefore = "halitherses_omen" })   -- today's omen
+    end),
+    visitTalk("poseidon_altar", sign(EH .. "PoseidonAltar")),
+    visitTalk("victors_wreath", sign(EH .. "VictorsWreath")),
+    visitTalk("stevedore_2", npc(EH .. "Stevedore2")),
+  })
+  -- the Titans' hiring hall, in the warehouse by the ship sheds
+  local HH = "EmporionCity_HiringHall_EventScript_"
+  L.useWarp(S.MAP_HIRING_HALL)
+  shot("hiring_hall")
+  local n0 = #L.battles
+  collect(npc(HH .. "CrewBoss"), "FLAG_HIRING_HALL", "ITEM_ROCKY_HELMET", "the crew boss's Rocky Helmet",
+          { shotBefore = "crew_boss" })
+  expect(#L.battles == n0 + 1, "one battle with the crew boss, and no second")
+  battleCheck(L.battles[n0 + 1], "CREW_BOSS", S.MUS_TITAN, "the crew boss")
+  visitAll({
+    visitTalk("hall_dockhand", npc(HH .. "Dockhand")),
+    visitTalk("ledger", sign(HH .. "Ledger")),
+    visitTalk("sickle_crate", sign(HH .. "SickleCrate")),
+    visitTalk("crates", sign(HH .. "Crates")),
+    visitTalk("helmets", sign(HH .. "Helmets")),
+    visitTalk("hoist", sign(HH .. "Hoist")),
+    visitTalk("shed_doors", sign(HH .. "ShedDoors")),
+  })
+  L.useWarp(S.MAP_HARBOR)
+end)
+
+-- Up the harbor road into the city: the Agora and its people, the snatcher,
+-- Number Nine, the signs and items. The temple stair and the Isthmus Gate wait.
+beat("11_city", function()
+  L.leaveEdge("up", S.MAP_CITY)
+  musicIs(S.MUS_EMPORION, "Emporion's theme in the city")
+  shot("harbor_road")
+  holdCity()
+  local relics, money = L.itemCount(S.ITEM_RELIC_COPPER), L.money()
+  visitAll({
+    visitTalk("fork_sign", sign(EC .. "ForkSign")),
+    visitTalk("nemea_sign", sign(EC .. "NemeaGateSign")),
+    visitTalk("nemea_hoplite", npc(EC .. "NemeaHoplite")),
+    visitTalk("asclepeion_sign", sign(EC .. "AsclepeionSign")),
+    visitTalk("deigma_sign", sign(EC .. "DeigmaSign")),
+    visitTalk("metic", npc(EC .. "Metic")),
+    visitItem("the Repel behind the Deigma", ball("FLAG_ITEM_EMPORION_REPEL"), "FLAG_ITEM_EMPORION_REPEL", "ITEM_REPEL"),
+    visit("great_herm", sign(EC .. "GreatHerm"), function()
+      talk(L.sign(EC .. "GreatHerm"), { shotBefore = "great_herm" })      -- YES: anoint it
+      flagsSet({ "FLAG_HERM_EMPORION" }, "the crossroads herm is anointed")
+    end),
+    visitShop("general_stall", npc(EC .. "GeneralStallkeeper")),
+    visitShop("kydon", npc(EC .. "Kydon")),
+    visitTalk("offerings_stall", npc(EC .. "OfferingsStallkeeper")),
+    visit("pasion", npc(EC .. "Pasion"), function()
+      talk(L.npc(EC .. "Pasion"), { shotBefore = "pasion" })              -- YES: sell him the obol
+      L.check(L.money() == money + 600, string.format("Pasion pays 600 for a Bronze Obol (money %d -> %d)",
+                                                      money, L.money()))
+      money = L.money()
+    end),
+    visitTalk("elder", npc(EC .. "Elder")),
+    visitItem("the Honey under Kydon's awning", hidden("FLAG_HIDDEN_EMPORION_HONEY"), "FLAG_HIDDEN_EMPORION_HONEY",
+              "ITEM_HONEY"),
+    -- one jar in four holds a Pithound (run from, if one does)
+    visitTalk("stoa_jar", sign(EC .. "Pithos")),
+    visitItem("the X Speed at the end of the stoa", ball("FLAG_ITEM_EMPORION_X_SPEED"), "FLAG_ITEM_EMPORION_X_SPEED",
+              "ITEM_X_SPEED"),
+    visitTalk("spice_seller", npc(EC .. "SpiceSeller")),
+    visitShop("scroll_stall", npc(EC .. "ScrollStallkeeper")),
+    visitTalk("man_with_a_lamp", npc(EC .. "ManWithALamp")),
+    visitTalk("shopper", npc(EC .. "Shopper")),
+    visitTalk("kid", npc(EC .. "Kid")),
+    visitTalk("agora_sign", sign(EC .. "AgoraSign")),
+    visit("sykeas_and_the_snatcher", npc(EC .. "Sykeas"), function()
+      talk(L.npc(EC .. "Sykeas"), { shotBefore = "sykeas_before" })
+      -- the snatcher on his awning: a static battle, gone whatever happens
+      local n0 = #L.battles
+      talk(L.npc(EC .. "Harpeck"), { shotBefore = "harpeck" })
+      expect(#L.battles == n0 + 1 and not L.battles[n0 + 1].trainer, "a wild battle with Sykeas's snatcher")
+      flagsSet({ "FLAG_HIDE_SYKEAS_HARPECK" }, "the snatcher is gone after its battle")
+      L.check(not L.npc(EC .. "Harpeck").present, "the snatcher is off the awning")
+      collect(npc(EC .. "Sykeas"), "FLAG_GOT_SYKEAS_FIGS", "ITEM_FIGY_BERRY", "Sykeas's figs",
+              { shotBefore = "sykeas_after" })
+      L.check(L.itemCount(S.ITEM_PRETTY_FEATHER) >= 1, "and the feather the snatcher dropped")
+    end),
+    visitTalk("fishmonger", npc(EC .. "Fishmonger")),
+    visit("number_nine", npc(EC .. "NumberNine"), function()
+      talk(L.npc(EC .. "NumberNine"), { shotBefore = "number_nine" })     -- YES: untie it
+      flagsSet({ "FLAG_NUMBER_NINE_UNTIED" }, "Number Nine walks off his plinth")
+      L.check(not L.npc(EC .. "NumberNine").present, "Number Nine has gone")
+      talk(L.sign(EC .. "EmptyPlinth"), { shotBefore = "empty_plinth" })
+    end),
+    visitTalk("tavern_sign", sign(EC .. "TavernSign")),
+    visitTalk("pilgrim", npc(EC .. "Pilgrim")),
+    visitTalk("runner", npc(EC .. "Runner")),
+    visitTalk("temple_sign", sign(EC .. "TempleSign")),
+    visitTalk("peirene", sign(EC .. "Peirene")),
+    visitTalk("cistern", sign(EC .. "Cistern")),
+    visitTalk("cistern_sign", sign(EC .. "CisternSign")),
+    visitTalk("hephaisteion_sign", sign(EC .. "HephaisteionSign")),
+    visitTalk("dig_garden", sign(EC .. "DigHephaisteion")),
+    visitTalk("isthmus_gate_sign", sign(EC .. "IsthmusGateSign")),
+    visitItem("the Stardust at the top of Acrocorinth's stair", hidden("FLAG_HIDDEN_EMPORION_STARDUST"),
+              "FLAG_HIDDEN_EMPORION_STARDUST", "ITEM_STARDUST"),
+  })
+  L.check(L.itemCount(S.ITEM_RELIC_COPPER) == relics - 1, "the obol went to Pasion")
+end)
+
+-- The city's rooms, before the temple: the Asclepeion, the Deigma (beat 12), the
+-- Dolphin, the households, the runners, the potter and the Hephaisteion (beat 13).
+local function room(map, fn)
+  holdCity()
+  L.useWarp(map)
+  fn()
+  L.useWarp(S.MAP_CITY)
+end
+
+beat("11_asclepeion", function()
+  local A = "EmporionCity_Asclepeion_EventScript_"
+  room(S.MAP_E_ASCLEPEION, function()
+    shot("asclepeion")
+    talk(L.npc(A .. "Healer"), { shotBefore = "healer" })
+    local hp, maxHp = L.partyHp(0)
+    expect(hp == maxHp and hp > 1, string.format("Emporion's healer restored the party (%d/%d)", hp, maxHp))
+    local hmap = L.lastHeal()
+    expect(hmap == S.MAP_CITY, string.format("the respawn point is Emporion (map %d)", hmap))
+    -- (the Pithos's menu would open the box: the slice's run leaves it shut)
+    visitAll({
+      visitTalk("panacoil", npc(A .. "Panacoil")),
+      visitTalk("asclepeion_sailor", npc(A .. "Sailor")),
+      visitTalk("old_woman", npc(A .. "OldWoman")),
+      visitTalk("young_healer", npc(A .. "YoungHealer")),
+      visitTalk("asclepius", sign(A .. "Statue")),
+      visitTalk("bell_pull", sign(A .. "BellPull")),
+      visitTalk("anchors", sign(A .. "Anchors")),
+      visitTalk("votives", sign(A .. "Votives")),
+    })
+  end)
+end)
+
+-- Beat 12: the Deigma, forty lamps. It plays on the first visit after beat 11.
+beat("12_deigma", function()
+  local D = "EmporionCity_Deigma_EventScript_"
+  holdCity()
+  expect(not getFlag(S.FLAG_DEIGMA_CLUE), "no clue before the Deigma")
+  L.useWarp(S.MAP_DEIGMA, true)
+  shot("deigma_alethea")
+  settle({ every = true })
+  flagsSet({ "FLAG_DEIGMA_CLUE" }, "beat 12: Alethea learns of the forty lamps and sees the hook (FLAG_ICHOR_DEIGMA_CLUE)")
+  L.check(not L.npc(D .. "Alethea").present, "Alethea has left the Deigma")
+  visitAll({
+    visitTalk("lampis", npc(D .. "Lampis")),
+    -- Thaletas wants an Onotis for his Narkeray; the run has none: NO
+    visitTalk("thaletas", npc(D .. "Thaletas"), { shotBefore = "thaletas", answers = { "no" } }),
+    visitTalk("wool_merchant", npc(D .. "WoolMerchant")),
+    visitTalk("grain_trader", npc(D .. "GrainMerchant")),
+    visitTalk("notice", sign(D .. "Notice")),
+    visitTalk("scribes_desk", sign(D .. "ScribesDesk")),
+    visitTalk("register", sign(D .. "Register")),
+    visitTalk("tunny", sign(D .. "Tunny")),
+    visitTalk("lamps", sign(D .. "Lamps")),
+    visitTalk("wool", sign(D .. "Wool")),
+    visitTalk("oil", sign(D .. "Oil")),
+    visitTalk("grain", sign(D .. "Grain")),
+    visitTalk("helmet", sign(D .. "Helmet")),
+    visitTalk("scales", sign(D .. "Scales")),
+  })
+  flagsClear({ "FLAG_TRADED_NARKERAY" }, "no trade without an Onotis")
+  L.finding(L.distanceTo(L.npc(D .. "Narkeray")) ~= nil,
+            "Thaletas's Narkeray can be looked at (Thaletas stands in the only way to the quay edge beside it)")
+  L.useWarp(S.MAP_CITY)
+  -- back in, beat 12 doesn't play again
+  L.useWarp(S.MAP_DEIGMA)
+  expect(L.idle() and not L.npc(D .. "Alethea").present, "beat 12 plays once")
+  L.useWarp(S.MAP_CITY)
+end)
+
+-- The Dolphin: knucklebones with the champion and both regulars, until each is beaten once.
+beat("11_tavern", function()
+  local TV = "EmporionCity_Tavern_EventScript_"
+  local function knucklebones(who, flag, item)
+    local before, tries = item and L.itemCount(S[item]), 0
+    while not getFlag(S[flag]) do
+      tries = tries + 1
+      if tries > 25 then L.check(false, who .. ": never won at knucklebones in 25 games") return end
+      talk(L.npc(TV .. who), { shotBefore = tries == 1 and string.lower(who) or nil })
+    end
+    log(string.format("ok beat %s at knucklebones in %d game(s) (%s)", who, tries, flag))
+    if item then
+      L.check(L.itemCount(S[item]) > before, string.format("%s's prize: %s (%d -> %d)", who, item, before,
+                                                          L.itemCount(S[item])))
+    end
+  end
+  room(S.MAP_TAVERN, function()
+    shot("tavern")
+    knucklebones("Myrtale", "FLAG_KNUCKLEBONES_EMPORION")          -- TM Fling (a flag until the TM exists)
+    knucklebones("Strepsiades", "FLAG_KNUCKLEBONES_STREPSIADES", "ITEM_BERRY_JUICE")
+    knucklebones("Stratyllis", "FLAG_KNUCKLEBONES_STRATYLLIS", "ITEM_BERRY_JUICE")
+    visitAll({
+      visitTalk("bones_table", sign(TV .. "BonesTable")),
+      visitTalk("tavern_mosaic", sign(TV .. "Mosaic")),
+      visitTalk("rack", sign(TV .. "Rack")),
+      visitTalk("krater", sign(TV .. "Krater")),
+      visitTalk("nets", sign(TV .. "Nets")),
+    })
+  end)
+end)
+
+beat("11_households", function()
+  local PX, WD = "EmporionCity_PhiloxenosHouse_EventScript_", "EmporionCity_WidowsHouse_EventScript_"
+  room(S.MAP_PHILOXENOS, function()
+    shot("philoxenos_house")
+    -- he feeds you first (a heal), then offers the guest bed (YES)
+    talk(L.npc(PX .. "Philoxenos"), { shotBefore = "philoxenos" })
+    flagsClear({ "FLAG_PHILOXENOS_LAUREL_2" }, "no laurel story before the Herald Laurel")
+    visitAll({
+      visitTalk("cook", npc(PX .. "Cook")),
+      visitTalk("philoxenos_mosaic", sign(PX .. "Mosaic")),
+      visitTalk("philoxenos_hearth", sign(PX .. "Hearth")),
+      visitTalk("guest_bed", sign(PX .. "GuestBed")),
+      visitTalk("washbasin", sign(PX .. "Washbasin")),
+    })
+  end)
+  room(S.MAP_WIDOW, function()
+    shot("widows_house")
+    collect(npc(WD .. "Penelopeia"), "FLAG_GOT_WIDOWS_GIFT", "ITEM_SEA_INCENSE", "Penelopeia's Sea Incense",
+            { shotBefore = "penelopeia" })
+    L.finding(L.distanceTo(L.sign(WD .. "Loom")) ~= nil,
+              "Penelopeia's loom can be looked at (she stands in the only way to the place in front of it)")
+    visitAll({
+      visitTalk("widow_window", sign(WD .. "Window")),
+      visitTalk("oar", sign(WD .. "Oar")),
+      visitTalk("shrine", sign(WD .. "Shrine")),
+    })
+  end)
+end)
+
+beat("11_workshops", function()
+  local RH, PW = "EmporionCity_RunnersHouse_EventScript_", "EmporionCity_PottersWorkshop_EventScript_"
+  room(S.MAP_RUNNERS, function()
+    shot("runners_house")
+    collect(npc(RH .. "Dromokleia"), "FLAG_GOT_QUICK_CLAW", "ITEM_QUICK_CLAW", "Dromokleia's Quick Claw",
+            { shotBefore = "dromokleia" })
+    flagsClear({ "FLAG_WROTE_TO_MOM" }, "no letter home before the end of Act I")
+    visitAll({
+      visitTalk("stretcher", npc(RH .. "Runner")),
+      visitTalk("young_runner", npc(RH .. "YoungRunner")),
+      visitTalk("road_map", sign(RH .. "RoadMap")),
+      visitTalk("ribbon", sign(RH .. "Ribbon")),
+      visitTalk("water_jar", sign(RH .. "WaterJar")),
+      visitTalk("runners_klepsydra", sign(RH .. "Klepsydra")),
+      visitTalk("sandals", sign(RH .. "Sandals")),
+    })
+  end)
+  room(S.MAP_POTTER, function()
+    shot("potters_workshop")
+    -- Euphronios paints a Harpeck, then a Chelonet, then a Stachyss: the run carries none
+    talk(L.npc(PW .. "Euphronios"), { shotBefore = "euphronios" })
+    flagsClear({ "FLAG_EUPHRONIOS_1" }, "no painting without a Harpeck in the party")
+    note("Euphronios's paintings wait for a Harpeck, a Chelonet and a Stachyss, which the run doesn't catch")
+    visitAll({
+      visitTalk("potter_apprentice", npc(PW .. "Apprentice")),
+      visitTalk("kiln", sign(PW .. "Kiln")),
+      visitTalk("wheel", sign(PW .. "Wheel")),
+      visitTalk("signature", sign(PW .. "Signature")),
+      visitTalk("shelves", sign(PW .. "Shelves")),
+      visitTalk("paint_table", sign(PW .. "PaintTable")),
+      visitTalk("slip_pots", sign(PW .. "SlipPots")),
+      visitTalk("clay_bin", sign(PW .. "ClayBin")),
+    })
+  end)
+end)
+
+-- Beat 13: the cold forge. The slice's Charcoal, from Hestia's own hearth, relights it.
+beat("13_forge", function()
+  local HP = "EmporionCity_Hephaisteion_EventScript_"
+  room(S.MAP_HEPHAISTEION, function()
+    shot("cold_forge")
+    expect(L.itemCount(S.ITEM_CHARCOAL) == 1, "the Charcoal from the Hearth Trial is in the bag")
+    talk(L.npc(HP .. "Kedalion"), { shotBefore = "kedalion", every = true })   -- YES: spare a sliver
+    flagsSet({ "FLAG_FORGE_RELIT", "FLAG_GOT_BRONZE_HAMMER" }, "beat 13: the forge is relit, and the Bronze Hammer")
+    L.check(L.itemCount(S.ITEM_CHARCOAL) == 1, "the Charcoal isn't used up")
+    shot("forge_lit")
+    talk(L.npc(HP .. "Kedalion"), { shotBefore = "kedalion_after" })
+    visitAll({
+      visitTalk("smith_apprentice", npc(HP .. "Apprentice")),
+      visitTalk("forge", sign(HP .. "Forge")),
+      visitTalk("bellows", sign(HP .. "Bellows")),
+      visitTalk("tongs_rack", sign(HP .. "TongsRack")),
+      visitTalk("trough", sign(HP .. "Trough")),
+      visitTalk("workbench", sign(HP .. "Workbench")),
+      visitTalk("smith_votives", sign(HP .. "Votives")),
+    })
+  end)
+end)
+
+-- Beat 14: Kleon on the temple steps, then the Isthmus Gate before the Laurel.
+beat("14_temple_steps", function()
+  holdCity()
+  expect(not getFlag(S.FLAG_KLEON_WON_HERALD), "Kleon hasn't won the Herald Laurel yet")
+  -- Beat 14 waits on the stair's bottom tread: is that the only way up to the door?
+  local door
+  for _, w in ipairs(L.mapEvents().warps) do if w.map == S.MAP_HERMES then door = w end end
+  L.finding(L.distanceTo({ tiles = { { x = door.x, y = door.y } } }) == nil,
+            "the temple door can't be reached without the stair's bottom tread (else beat 14 is skipped, "
+            .. "and beat 16 plays to a hidden Kleon)")
+  local tread = L.triggers(EC .. "KleonStepsX21", EC .. "KleonStepsX22", EC .. "KleonStepsX23",
+                           EC .. "KleonStepsX24", EC .. "KleonStepsX25")
+  expect(not L.goTrigger(tread), "the temple stair's bottom tread starts beat 14")
+  wait(30); shot("kleon_on_the_steps")
+  settle({ every = true })
+  flagsSet({ "FLAG_KLEON_WON_HERALD", "FLAG_HIDE_KLEON_TEMPLE_STEPS" }, "beat 14: Kleon won the Herald Laurel first")
+  flagsClear({ "FLAG_HIDE_KLEON_ISTHMUS_GATE" }, "Kleon waits at the Isthmus Gate")
+  L.check(not L.npc(EC .. "KleonSteps").present, "Kleon has run off from the steps")
+  -- the Isthmus Gate before the Herald Laurel: the hoplites turn the player back
+  local gate = gateTread()
+  expect(not L.goTrigger(gate), "the Isthmus Gate's hoplites stop the player")
+  wait(30); shot("gate_shut")
+  settle()
+  expect(mapId() == S.MAP_CITY and not L.onTile(gate), "turned back from the Isthmus Gate without a laurel")
+  flagsClear({ "FLAG_KLEON_BATTLE_2_DONE" }, "no battle with Kleon before the Laurel")
+end)
+
+-- Beat 15: the Temple of Hermes and the Herald's Run.
+-- The turnstiles turn one way only, so walks in the temple keep off them; the
+-- Run itself is walked by the builder's solving route (temple_hermes.lua), the
+-- one place this run names coordinates.
+local function holdTemple()
+  local step, hold = S.SCRIPTS[HM .. "Step"], {}
+  for _, c in ipairs(L.mapEvents().coords) do
+    if c.script ~= step then hold[c.x .. "," .. c.y] = true end
+  end
+  L.keepOff[S.MAP_HERMES] = hold
+end
+-- Walk the waypoints, each in a straight line from the last (x first). A turnstile
+-- passed the right way carries the player a tile on; a trainer's sight or the
+-- glass speaking at a mark takes control, and the walk plays that out and goes on.
+local function runTo(points)
+  for _, p in ipairs(points) do
+    for _ = 1, 100 do
+      local x, y = pos()
+      if x == p[1] and y == p[2] then break end
+      local key
+      if x < p[1] then key = K.RIGHT elseif x > p[1] then key = K.LEFT
+      elseif y < p[2] then key = K.DOWN else key = K.UP end
+      local r = L.step(key)
+      if r == "blocked" then shot("run_blocked"); L.fail(string.format("the Run's route is blocked at (%d,%d)", x, y)) end
+      if r == "taken" then settle() end
+    end
+    local x, y = pos()
+    if x ~= p[1] or y ~= p[2] then L.fail(string.format("the Run never reached (%d,%d) (at %d,%d)", p[1], p[2], x, y)) end
+  end
+end
+local function glass() return L.getVar(S.VAR_TEMP_2) end
+local function delivered() return L.getVar(S.VAR_TEMP_1) end
+local function running() return L.getVar(S.VAR_TEMP_3) == 1 end
+-- Something by the route, spoken to where the route puts the player (no steps off the glass).
+local function here(target, opts)
+  expect(L.distanceTo(target) == 0, "at " .. target.what .. " without a step off the route")
+  talk(target, opts)
+end
+local function herm(name, flag)
+  local oil = L.getVar(S.VAR_TEMP_5)
+  here(L.sign(HM .. "Herm" .. name), { shotBefore = "oil_" .. string.lower(name) })   -- YES: oil his face
+  L.check(getFlag(S[flag]) and L.getVar(S.VAR_TEMP_5) == oil - 1, name .. " is oiled, and turns to point the way")
+end
+local function deliver(name, n)
+  here(L.sign(HM .. "Herm" .. name), { shotBefore = "deliver_" .. string.lower(name), every = n == 3 })
+  L.check(delivered() == n or (n == 3 and getFlag(S.FLAG_HERALDS_RUN_DONE)),
+          string.format("%s takes scroll %d (glass %d)", name, n, glass()))
+end
+-- An acolyte who stopped the player on the route: the after-battle line, said where they stand.
+local function acolyte(name, script)
+  local id = S["TRAINER_" .. name]
+  expect(L.defeated(id), name .. " is beaten")
+  local rec
+  for _, b in ipairs(L.battles) do if b.who == name then rec = b end end
+  battleCheck(rec, name, S.MUS_BATTLE_TRAINER, name)
+  local n1 = trainerBattles()
+  here(L.npc(script), { shotBefore = string.lower(name) .. "_after" })
+  L.check(trainerBattles() == n1, name .. " does not battle again")
+end
+
+beat("15_temple", function()
+  holdCity()
+  L.useWarp(S.MAP_HERMES)
+  holdTemple()
+  musicIs(S.MUS_TEMPLE_HERMES, "the Temple of Hermes's theme")
+  shot("temple_of_hermes")
+  flagsClear({ "FLAG_HERALDS_RUN_DONE", "FLAG_BADGE02_GET" }, "no run yet")
+  talk(L.npc(HM .. "Angelos"), { shotBefore = "angelos" })
+  talk(L.sign(HM .. "StepGlass"), { shotBefore = "step_glass" })
+  -- three flasks from the jar; J1, by the door, oiled before the glass runs; and the jar again
+  for _ = 1, 3 do talk(L.sign(HM .. "OilJar"), { shotBefore = "oil_jar" }) end
+  expect(L.getVar(S.VAR_TEMP_5) == 3, "three flasks of oil")
+  talk(L.sign(HM .. "HermJ1"), { shotBefore = "oil_j1" })
+  L.check(getFlag(S.FLAG_HERMES_HERM_J1), "J1 is oiled")
+  talk(L.sign(HM .. "OilJar"), { shotBefore = "oil_jar_again" })
+  expect(L.getVar(S.VAR_TEMP_5) == 3, "the flasks are full again")
+  -- Kerykos's rite, YES: the scrolls, and the glass begins
+  talk(L.npc(HM .. "Kerykos"), { shotBefore = "kerykos_rite", every = true })
+  flagsSet({ "FLAG_HERALDS_RUN_TOLD" }, "Kerykos told the rite")
+  expect(running() and glass() == 120 and delivered() == 0, "the Run is on: 120 steps in the glass")
+  L.check(not L.npc(HM .. "Kerykos").present, "Kerykos took the short way")
+  musicIs(S.MUS_TEMPLE_HERMES, "the Herald's Run plays from its first bar")
+end)
+
+beat("15_herald_run", function()
+  holdTemple()
+  expect(running(), "the Run is on")
+  -- Leg 1, the lower gallery: east along the porch, through T1, Podarge, the Threshold herm
+  runTo({ { 14, 21 }, { 16, 21 } })
+  acolyte("PODARGE", HM .. "Podarge")
+  runTo({ { 16, 20 }, { 18, 20 } })
+  deliver("H1", 1)
+  -- Leg 2: back west through T1b, J2, the turnstile stair, J3, T3, the gap and Euchidas, T4, the Road herm
+  runTo({ { 18, 18 }, { 17, 18 }, { 15, 18 }, { 2, 18 } })
+  herm("J2", "FLAG_HERMES_HERM_J2")
+  runTo({ { 2, 16 }, { 2, 14 } })
+  herm("J3", "FLAG_HERMES_HERM_J3")
+  runTo({ { 2, 13 }, { 3, 13 }, { 5, 13 }, { 10, 13 }, { 10, 14 }, { 10, 15 } })
+  acolyte("EUCHIDAS", HM .. "Euchidas")
+  runTo({ { 10, 16 }, { 15, 16 }, { 15, 15 }, { 17, 15 }, { 18, 15 } })
+  deliver("H2", 2)
+  -- Leg 3: the east stair, J4, T5, the Market herm
+  runTo({ { 18, 13 }, { 18, 10 } })
+  herm("J4", "FLAG_HERMES_HERM_J4")
+  runTo({ { 18, 8 }, { 7, 8 }, { 5, 8 }, { 2, 8 } })
+  local left = glass()
+  expect(running() and left > 0, string.format("made the Market herm with sand to spare (%d of 120 steps left)", left))
+  deliver("H3", 3)
+  flagsSet({ "FLAG_HERALDS_RUN_DONE" }, "the Run is done (FLAG_ICHOR_HERALDS_RUN_DONE)")
+  flagsClear({ "FLAG_HERALDS_RUN_FAILED" }, "the glass never ran dry")
+  expect(not running(), "the glass stopped")
+  shot("run_done")
+end)
+
+beat("15_kerykos", function()
+  holdTemple()
+  -- back east through T5 (turned round now), and in through T6b to Philonides, who faces the wall
+  runTo({ { 5, 8 }, { 7, 8 }, { 18, 8 }, { 18, 11 }, { 17, 11 }, { 15, 11 }, { 4, 11 } })
+  expect(not L.defeated(S.TRAINER_PHILONIDES), "Philonides never saw the player")
+  trainer("PHILONIDES", HM .. "Philonides", S.MUS_BATTLE_TRAINER)
+  -- out through T6, up through the open gate to the dais
+  runTo({ { 15, 11 }, { 15, 10 }, { 17, 10 }, { 18, 10 }, { 18, 8 }, { 10, 8 }, { 10, 5 } })
+  shot("the_dais")
+  local honey, n0 = L.itemCount(S.ITEM_HONEY), #L.battles
+  talk(L.npc(HM .. "Kerykos"), { shotBefore = "kerykos_dais", every = true })
+  expect(#L.battles == n0 + 1, "one battle with Kerykos")
+  battleCheck(L.battles[n0 + 1], "KERYKOS", S.MUS_BATTLE_RIVAL, "Kerykos")
+  flagsSet({ "FLAG_BADGE02_GET", "FLAG_GOT_TM_AERIAL_ACE", "FLAG_HERMES_OFFERING" },
+           "the Herald Laurel, TM40 and Kerykos's honey")
+  expect(L.itemCount(S.ITEM_TM40) == 1, "TM40 Aerial Ace in the bag")
+  L.check(L.itemCount(S.ITEM_HONEY) == honey + 1, "a Honey from Kerykos's pockets")
+  for _, n in ipairs({ "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS" }) do
+    L.check(L.defeated(S["TRAINER_" .. n]), n .. " counts as beaten")
+  end
+  -- again: his list, and the short way down (YES)
+  local n1 = #L.battles
+  talk(L.npc(HM .. "Kerykos"), { shotBefore = "kerykos_after" })
+  L.check(#L.battles == n1, "Kerykos does not battle again")
+  mapIs(S.MAP_HERMES, "the short way down stays in the temple")
+  shot("short_way_down")
+  talk(L.npc(HM .. "Angelos"), { shotBefore = "angelos_after" })
+  L.useWarp(S.MAP_CITY)
+  musicIs(S.MUS_EMPORION, "Emporion's theme again")
+end)
+
+-- With the Herald Laurel: Philoxenos trades the story for Wine.
+beat("15_laurel_story", function()
+  local PX = "EmporionCity_PhiloxenosHouse_EventScript_"
+  room(S.MAP_PHILOXENOS, function()
+    collect(npc(PX .. "Philoxenos"), "FLAG_PHILOXENOS_LAUREL_2", "ITEM_BERRY_JUICE",
+            "Philoxenos's Wine for the Herald Laurel's story", { shotBefore = "philoxenos_laurel" })
+  end)
+end)
+
+-- Beat 16: the Isthmus Gate and Kleon's second battle.
+beat("16_isthmus_gate", function()
+  holdCity()
+  flagsClear({ "FLAG_HIDE_KLEON_ISTHMUS_GATE" }, "Kleon waits in the Isthmus Gate")
+  local gate = gateTread()
+  expect(not L.goTrigger(gate), "the Isthmus Gate starts beat 16")
+  wait(30); shot("kleon_at_the_gate")
+  local _, fought = settle({ every = true })
+  expect(#fought == 1, "one battle with Kleon")
+  battleCheck(fought[1], KLEON_2[STARTER], S.MUS_BATTLE_RIVAL, "Kleon at the Isthmus Gate")
+  flagsSet({ "FLAG_KLEON_BATTLE_2_DONE", "FLAG_WON_KLEON_2", "FLAG_HIDE_KLEON_ISTHMUS_GATE" },
+           "beat 16: Kleon's second battle, won")
+  flagsClear({ "FLAG_NO_WHITEOUT" }, "the no-whiteout flag is cleared")
+  L.check(not L.npc(EC .. "KleonGate").present, "Kleon has run through the gate")
+  -- the hoplites step aside: the gate plays nothing now
+  expect(L.goTrigger(gate), "the Isthmus Gate lets the herald through")
+  shot("through_the_gate")
 end)
 
 L.start(function()
@@ -749,13 +1469,14 @@ L.start(function()
   if from then
     log("note a resumed run checks only the beats it played")
   else
-    -- every trainer in the slice
+    -- every trainer in the slice and Phase 2 so far
     for _, n in ipairs({ "TITYROS", "THESTYLIS", "PHYLLIS", "KOMATAS", "AGIS", "POLYEIDOS", "PETROS", "AMATHOS",
-                         "MENALKAS", "THYRSIS", "LYKIDAS", "LAMPON", "PYRRHA", "AITHRA", "IONE",
-                         KLEON_TRAINER[STARTER] }) do
+                         "MENALKAS", "THYRSIS", "LYKIDAS", "LAMPON", "PYRRHA", "AITHRA", "IONE", KLEON_TRAINER[STARTER],
+                         "ALETHEA_DECK", "PHORMION", "LYKON",
+                         "CREW_BOSS", "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS", KLEON_2[STARTER] }) do
       if not L.defeated(S["TRAINER_" .. n]) then L.fail(n .. " was never beaten") end
     end
-    log("ok every trainer in the slice is beaten")
+    log("ok every trainer so far is beaten")
   end
   log(string.format("ok the slice played through in %d frames, %d battles, %d design finding(s)", now(),
                     #L.battles, L.findings))

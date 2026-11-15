@@ -1,0 +1,147 @@
+line: melissa
+species:
+
+- dex: 47
+  concept: Honey bee
+  name: Melibee
+  etymology: meli (Greek, honey) + bee
+  category: Honeybee
+  types: [Bug]
+  abilities: [Honey Gather, Swarm]
+  hidden_ability: Sweet Veil
+  base_stats: {hp: 40, atk: 40, def: 40, spa: 55, spd: 45, spe: 65}
+  ev_yield: {spe: 1}
+  exp_yield: 55
+  catch_rate: 190
+  gender: {female_pct: 87.5}
+  egg_groups: [Bug]
+  egg_cycles: 15
+  growth_rate: Medium Slow
+  height_m: 0.3
+  weight_kg: 1.2
+  myth: >-
+    The Melissai, nymphs whose name means "bees", hid the infant Zeus in a
+    cave on Crete, and the bees of that cave fed him on honey (Antoninus
+    Liberalis, Metamorphoses 19).
+  expression: >-
+    A plump worker that carries honey in its own fuzz. Nearly all are female,
+    and only the females ever grow into the prophetess.
+  art: >-
+    Small: it fills about 28×28 px. A round, fuzzy worker bee in three-quarter
+    view facing left, hovering on blurred wings with its little legs dangling
+    a drop of honey. Sun-gold fuzz banded with black stripes, a pale face with
+    big dark eyes, and short antennae curled at the tips. Its clear wings show
+    a faint hexagon pattern. Sun-gold and black-figure ink body, marble face,
+    Aegean-blue wing glints, black-figure ink outline. The follower bobs from
+    flower to flower.
+  shiny: Its gold bands turn olive green and its wings silver.
+  dex_entry:
+    - It gathers honey from Eleusa's meadows.
+    - Old tales say its honey fed a god when
+    - he was small, hidden in a mountain cave.
+  habitat: >-
+    Common in Eleusa Village's flower meadows by day. Fewer live in the laurel
+    groves of Delphoi.
+  learnset:
+    level_up:
+      - [1, Sweet Scent]
+      - [1, Infestation]
+      - [4, Poison Sting]
+      - [7, Struggle Bug]
+      - [10, Supersonic]
+      - [13, Bug Bite]
+      - [16, Silver Wind]
+      - [19, Helping Hand]
+      - [23, Pollen Puff]
+      - [27, Safeguard]
+      - [31, Bug Buzz]
+      - [35, Defend Order]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Bug Bite, Struggle Bug,
+      Signal Beam, Pollen Puff, Bug Buzz, U-turn, Infestation, Venoshock, Sunny Day, Safeguard,
+      Swift, Air Cutter, Aerial Ace, Helping Hand, Endeavor, Uproar, Charm, Defog, Tailwind,
+      Giga Drain, Agility]
+    egg: [Aromatherapy, Fell Stinger, Rage Powder, Baton Pass, Pin Missile, Sticky Web]
+  signature: >-
+    Honey Gather and Sweet Scent make it a born forager. Only females evolve,
+    at level 21; males stay workers and learn Defend Order to guard the hive.
+  new_move: null
+
+- dex: 48
+  concept: Delphic bee
+  name: Melisseer
+  etymology: melissa (Greek, bee) + seer
+  category: Delphic Bee
+  types: [Bug, Psychic]
+  abilities: [Forewarn, Swarm]
+  hidden_ability: Sweet Veil
+  base_stats: {hp: 65, atk: 45, def: 60, spa: 105, spd: 85, spe: 110}
+  ev_yield: {spa: 1, spe: 1}
+  exp_yield: 168
+  catch_rate: 60
+  gender: {female_pct: 100}
+  egg_groups: [Bug]
+  egg_cycles: 15
+  growth_rate: Medium Slow
+  height_m: 1.1
+  weight_kg: 12.5
+  myth: >-
+    Pindar calls the Pythia, Apollo's prophetess, "the Delphic Bee" (Pythian
+    4). Pausanias records that the second temple at Delphi was said to have
+    been built by bees, out of wax and feathers (Pausanias 10.5).
+  expression: >-
+    The worker becomes the prophetess. The honeycomb on its wings is the
+    knotted net carved on the Omphalos, and it hums each prophecy before it
+    happens.
+  art: >-
+    Medium: it fills about 42×50 px. A slender, upright bee-priestess in
+    three-quarter view facing left, hovering with its lower legs folded like a
+    robe and two forelegs raised, as if speaking an oracle. Four long wings fan
+    out behind it, each patterned with the knotted net of the Omphalos in pale
+    hexagons. A laurel crown sits between curled antennae over calm,
+    half-closed eyes. Sun-gold and black-figure ink banding, a marble
+    robe-like thorax, an olive laurel crown, a violet glint in the wing net,
+    black-figure ink outline. The follower hovers in a slow figure-eight, the
+    dance bees use to show the way.
+  shiny: Its gold bands turn pale silver and its wing net Aegean blue.
+  dex_entry:
+    - It hums in a trance among the laurels.
+    - What it hums today, it is said, will
+    - happen tomorrow. Its wings bear the net
+    - of the Omphalos.
+  habitat: >-
+    Evolves from Melibee at level 21, females only. Rare in the laurel groves
+    of Delphoi in the morning.
+  learnset:
+    level_up:
+      - [0, Confusion]
+      - [1, Sweet Scent]
+      - [1, Infestation]
+      - [1, Poison Sting]
+      - [1, Struggle Bug]
+      - [10, Supersonic]
+      - [13, Bug Bite]
+      - [16, Silver Wind]
+      - [19, Helping Hand]
+      - [24, Psybeam]
+      - [27, Pollen Puff]
+      - [30, Future Sight]
+      - [33, Safeguard]
+      - [36, Bug Buzz]
+      - [39, Calm Mind]
+      - [42, Psychic]
+      - [46, Defend Order]
+      - [50, Quiver Dance]
+      - [55, Expanding Force]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Bug Bite, Struggle Bug,
+      Signal Beam, Pollen Puff, Bug Buzz, U-turn, Infestation, Venoshock, Sunny Day, Safeguard,
+      Swift, Air Cutter, Aerial Ace, Helping Hand, Endeavor, Uproar, Charm, Defog, Tailwind,
+      Giga Drain, Agility, Psychic, Psyshock, Calm Mind, Future Sight, Expanding Force, Stored Power,
+      Light Screen, Reflect, Psych Up, Skill Swap, Magic Coat, Imprison, Ally Switch, Trick Room,
+      Dazzling Gleam, Shadow Ball, Hyper Beam]
+    egg: []
+  signature: >-
+    Future Sight is its prophecy, landing two turns after it hums it. Forewarn
+    reveals the foe's strongest move, and Quiver Dance is the bee's dance.
+  new_move: null

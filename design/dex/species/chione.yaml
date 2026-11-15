@@ -1,0 +1,140 @@
+line: chione
+species:
+
+- dex: 123
+  concept: Snowflake sprite
+  name: Niflake
+  etymology: niphas (Greek, snowflake) + flake
+  category: Snowflake
+  types: [Ice]
+  abilities: [Snow Cloak, Ice Body]
+  hidden_ability: Ice Scales
+  base_stats: {hp: 45, atk: 35, def: 50, spa: 70, spd: 70, spe: 60}
+  ev_yield: {spa: 1}
+  exp_yield: 62
+  catch_rate: 190
+  gender: {female_pct: 75}
+  egg_groups: [Fairy, Amorphous]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.3
+  weight_kg: 0.5
+  myth: >-
+    Chione, whose name means snow, was the daughter of Boreas the North Wind
+    and the Athenian princess Oreithyia, whom he carried off to the cold north
+    (Apollodorus 3.15.2).
+  expression: >-
+    A single snowflake from the North Wind's sky that never melted. It is the
+    first, smallest form of the snow nymph's name.
+  art: >-
+    Tiny: it fills about 28×30 px. A six-armed snowflake sprite drifting in
+    three-quarter view facing left, tilted slightly, with a round, sleepy face
+    at its center and two little crystal arms reaching out. Each of the six
+    arms branches into finer frost, and a few loose flakes trail behind it.
+    Marble-white and pale Aegean blue with a darker Aegean-blue core, and a thin
+    black-figure ink outline. The follower spins slowly as it floats.
+  shiny: Sun-gold frost, like snow at sunrise.
+  dex_entry:
+    - Each one is a single snowflake that
+    - refused to melt. In a snowfall, a
+    - careful eye can pick it out by the
+    - sleepy face at its center.
+  habitat: The snowfields of the Ascent, in falling snow at any time; common.
+  learnset:
+    level_up:
+      - [1, Powder Snow]
+      - [1, Fairy Wind]
+      - [4, Mist]
+      - [8, Icy Wind]
+      - [12, Disarming Voice]
+      - [16, Haze]
+      - [20, Frost Breath]
+      - [24, Draining Kiss]
+      - [28, Aurora Beam]
+      - [32, Snowscape]
+      - [36, Ice Beam]
+      - [40, Blizzard]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Icy Wind, Ice Beam,
+      Blizzard, Frost Breath, Hail, Snowscape, Weather Ball, Rain Dance, Chilling Water, Water Pulse,
+      Light Screen, Reflect, Safeguard, Aurora Veil, Charm, Disarming Voice, Draining Kiss,
+      Dazzling Gleam, Swift, Fake Tears, Helping Hand, Tailwind, Psych Up]
+    egg: [Wish, Sweet Kiss, Misty Terrain, Lucky Chant, Ice Shard, Moonlight]
+  signature: >-
+    Snow Cloak hides it in falling snow, and Haze at 16 wipes out a foe's stat
+    boosts. Its power builds slowly, the way a drift does.
+  new_move: null
+
+- dex: 124
+  concept: Snow nymph
+  name: Chionyad
+  etymology: chiōn (Greek, snow) + naiad (Greek, nymph)
+  category: Snow Nymph
+  types: [Ice, Fairy]
+  abilities: [Snow Cloak, Ice Body]
+  hidden_ability: Ice Scales
+  base_stats: {hp: 70, atk: 50, def: 70, spa: 115, spd: 105, spe: 85}
+  ev_yield: {spa: 2}
+  exp_yield: 185
+  catch_rate: 60
+  gender: {female_pct: 75}
+  egg_groups: [Fairy, Amorphous]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 1.5
+  weight_kg: 24.0
+  myth: >-
+    Chione bore Poseidon a son and, afraid of her father, threw the baby into
+    the sea. Poseidon saved him, and the boy, Eumolpus, grew up to found the
+    Mysteries at Eleusis (Apollodorus 3.15.4).
+  expression: >-
+    The snowflake grown into a nymph whose gown is falling snow, drifting
+    endlessly from her shoulders and never piling up. She is her father's
+    daughter: the cold comes with her.
+  art: >-
+    Medium: it fills about 42×58 px. A slender snow nymph in three-quarter view
+    facing left, floating just above the ground, her long gown made of falling
+    snowflakes that thin into flurries at the hem. Her hair streams back as if
+    in a north wind, under a six-pointed snowflake circlet like the one she
+    grew from, and she cups a small flurry in her hands. A pale, calm face with
+    Aegean-blue eyes. Marble-white and pale Aegean blue, darker Aegean blue for
+    the eyes and folds, a sun-gold glint in the circlet, black-figure ink
+    outline. The follower leaves a short trail of snow that fades.
+  shiny: Her gown and hair turn pale sun-gold, like snow lit by dawn.
+  dex_entry:
+    - Its gown is falling snow that never
+    - settles. Where it walks, the air turns
+    - still and cold, and travelers say they
+    - hear a soft voice in the snowfall.
+  habitat: Evolves from Niflake with an Ice Stone.
+  learnset:
+    level_up:
+      - [0, Aurora Veil]
+      - [1, Powder Snow]
+      - [1, Fairy Wind]
+      - [1, Mist]
+      - [1, Icy Wind]
+      - [1, Disarming Voice]
+      - [1, Haze]
+      - [20, Frost Breath]
+      - [24, Draining Kiss]
+      - [28, Aurora Beam]
+      - [32, Snowscape]
+      - [36, Ice Beam]
+      - [40, Dazzling Gleam]
+      - [44, Calm Mind]
+      - [48, Moonblast]
+      - [52, Blizzard]
+      - [56, Misty Terrain]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Icy Wind, Ice Beam,
+      Blizzard, Frost Breath, Hail, Snowscape, Weather Ball, Rain Dance, Chilling Water, Water Pulse,
+      Light Screen, Reflect, Safeguard, Aurora Veil, Charm, Disarming Voice, Draining Kiss,
+      Dazzling Gleam, Swift, Fake Tears, Helping Hand, Tailwind, Psych Up, Hyper Beam, Moonblast,
+      Misty Terrain, Calm Mind, Alluring Voice, Encore]
+    egg: []
+  signature: >-
+    It learns Aurora Veil on evolving, a gown of snow that softens every blow,
+    and Ice Scales halves special damage again. A bulky special attacker that
+    brings its own snow with Snowscape.
+  new_move: null

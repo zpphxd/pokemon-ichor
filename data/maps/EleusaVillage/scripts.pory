@@ -1,0 +1,172 @@
+// Eleusa Village: the village of the Mysteries. design/phase2/SCRIPT.md, "Eleusa
+// Village" (Part 2), its signs, Part 6's items, and beat 20's setting.
+//
+// The layout and map.json's events come from tools/ichor/maps/eleusa.py, which
+// also writes the generated block at the end of this file. This file holds the
+// village's everyday life: its people, signs and stubs. The story scenes (Krokis's
+// saffron thread, beat 19; arrival and Kleon, beat 20; the procession, beat 22;
+// the morning after, beats 24-25) come with the story batch.
+//
+// Stubs, until the engine session's batches land (design/phase2/BUILD.md):
+//   ICHOR_STUB_RITES  Demeter's field shrine shows its text, nothing about prayer
+//   ICHOR_STUB_DIG    the fields' two daily dig spots show the turned earth only
+
+mapscripts EleusaVillage_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {
+            call(EleusaVillage_EventScript_ShutPloutonion)
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Speakers
+// ---------------------------------------------------------------------------
+
+text EleusaVillage_Text_NameKrokis { "KROKIS" }
+text EleusaVillage_Text_NameDysaules { "DYSAULES" }
+text EleusaVillage_Text_NameEubouleus { "EUBOULEUS" }
+
+// ---------------------------------------------------------------------------
+// The people of Eleusa
+// ---------------------------------------------------------------------------
+
+// Krokis keeps the west gate. Her saffron thread (beat 19) is the story batch's
+// coord trigger; until it plays, this is her everyday line.
+script EleusaVillage_EventScript_Krokis {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameKrokis)
+    msgbox(format("Saffron thread, for the pilgrims. A family trade.\p"
+                  "A thousand years of knots. Not one has ever slipped."))
+    release
+}
+
+script EleusaVillage_EventScript_Dysaules {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameDysaules)
+    msgbox(format("The Rharian field. First ever sown, by the goddess's own hand.\p"
+                  "Every year we sow it by hand. Every year it comes up on the same day.\p"
+                  "This year it came up. Then it went back down. Then it came up again.\p"
+                  "I've stopped telling people. They look at me like I've been at the wine."))
+    release
+}
+
+// A swineherd (Part 3). His battle comes with the story batch; until then he
+// tells the first half of his story and keeps the pigs' side of it.
+script EleusaVillage_EventScript_Eubouleus {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameEubouleus)
+    msgbox(format("When the earth opened for the Kore, my ancestor's pigs fell in too.\p"
+                  "Nobody writes songs about the pigs."))
+    release
+}
+
+script EleusaVillage_EventScript_Kid {
+    msgbox(format("This is Kopros. He's a Kaplet. He's my best friend.\p"
+                  "He found a coin in the well once. Now he won't stop staring into it."), MSGBOX_NPC)
+}
+
+// Kopros the Kaplet points at the well's hidden Bronze Obol.
+script EleusaVillage_EventScript_Kopros {
+    lock
+    playmoncry(SPECIES_KAPLET, CRY_MODE_NORMAL)
+    msgbox(format("Oink.\p"
+                  "It is staring into the well."))
+    waitmoncry
+    release
+}
+
+script EleusaVillage_EventScript_WaterCarrier {
+    msgbox(format("The Maiden's Well. The girls of the house of Keleos drew water here.\p"
+                  "An old woman sat on that bench, they say, and nobody knew who she was.\p"
+                  "They took her in anyway. That was the important part."), MSGBOX_NPC)
+}
+
+// The road of the Mysteries (Route 15) is shut in Act I. The hoplite turns the
+// player back from the line x = 46.
+script EleusaVillage_EventScript_Hoplite {
+    msgbox(format("The road of the Mysteries is shut past the salt streams.\p"
+                  "Orders from Astyra. They didn't say why. They never do."), MSGBOX_NPC)
+}
+
+script EleusaVillage_EventScript_RoadShut {
+    lockall
+    turnobject(LOCALID_ELEUSA_HOPLITE, DIR_WEST)
+    msgbox(format("Halt. The road of the Mysteries is shut past the salt streams.\p"
+                  "Orders from Astyra. Back you go."))
+    closemessage
+    applymovement(LOCALID_PLAYER, EleusaVillage_Movement_StepBack)
+    waitmovement(0)
+    releaseall
+}
+
+movement EleusaVillage_Movement_StepBack {
+    walk_left
+}
+
+// ---------------------------------------------------------------------------
+// Signs and things to look at
+// ---------------------------------------------------------------------------
+
+script EleusaVillage_EventScript_VillageSign {
+    msgbox(format("ELEUSA VILLAGE\nWhere the grain goes down, and comes back up."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_EventScript_NorthRoadSign {
+    msgbox(format("North: the Eleutherai road to Thyrsa."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_EventScript_SanctuarySign {
+    msgbox(format("THE SANCTUARY OF DEMETER AND THE KORE\p"
+                  "Initiates only beyond the Telesterion. Silence, please."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_EventScript_TempleSign {
+    msgbox(format("TEMPLE OF DEMETER (THE TELESTERION)\nHierophant: Chloe, the Mystagogue."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_EventScript_PloutonionSign {
+    msgbox(format("THE PLOUTONION. Closed. Closed. CLOSED.\p"
+                  "The last is in a different hand."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_EventScript_RharianSign {
+    msgbox(format("THE RHARIAN FIELD. The first furrow.\nPlease don't walk on it. Please."), MSGBOX_SIGN)
+}
+
+// A seed for the Demeter theoxenia after Laurel 5 (SYSTEMS.md §10).
+script EleusaVillage_EventScript_WellBench {
+    msgbox(format("A stone bench by the well, worn smooth,\nas if somebody sits here a lot."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_EventScript_Beehives {
+    msgbox(format("Straw beehives. The bees are busy in the poppies."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_RITES: Demeter's field shrine. When the rites land (ENGINE_API.md §3)
+// this becomes EventScript_IchorAltar_Demeter.
+script EleusaVillage_EventScript_FieldShrine {
+    msgbox(format("A little stone altar, heaped with a sheaf, barley cakes and poppies.\p"
+                  "A shrine of Demeter, for the first fruits."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_DIG: the fields' daily dig spots (SYSTEMS.md §5; Persephone's sherds).
+// When the Trowel's dig lands, these take the daily-dig script.
+script EleusaVillage_EventScript_DigSpot {
+    msgbox(format("Turned earth, with a glint of pottery in it."), MSGBOX_SIGN)
+}
+
+// --- Generated by tools/ichor/maps/eleusa.py from the layout. Do not edit. ---
+
+// The Ploutonion's bronze gate: shut (its two door cells block) until
+// FLAG_ICHOR_SANCTUM_OPEN (beat 22).
+script EleusaVillage_EventScript_ShutPloutonion {
+    setmetatile(31, 8, 0x37C, TRUE)
+    setmetatile(32, 8, 0x37D, TRUE)
+    return
+}
+
+// --- End of the generated block. ---

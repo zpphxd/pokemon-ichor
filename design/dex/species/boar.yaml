@@ -1,0 +1,152 @@
+line: boar
+species:
+
+- dex: 55
+  concept: Rooting piglet
+  name: Kaplet
+  etymology: kapros (Greek, wild boar) + piglet
+  category: Piglet
+  types: [Ground]
+  abilities: [Thick Fat, Gluttony]
+  hidden_ability: Earth Eater
+  base_stats: {hp: 65, atk: 62, def: 55, spa: 30, spd: 40, spe: 43}
+  ev_yield: {hp: 1}
+  exp_yield: 58
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.5
+  weight_kg: 21.0
+  myth: >-
+    The piglet was Demeter's animal. Each initiate bought one to offer before
+    the Mysteries at Eleusis (Aristophanes, Peace 374), and at the Thesmophoria
+    piglets were given to the earth in her sacred pits.
+  expression: >-
+    A muddy farm piglet that roots for anything edible and turns more soil
+    than a plow. Under the mud, a faint crescent on its brow hints at whose
+    animal it will become.
+  art: >-
+    Small: it fills about 34×28 px. A round piglet in three-quarter view facing
+    left, snout down in the dirt and rump up, tail curled tight. Its broad,
+    flat snout flicks clods of earth into the air. A faint pale crescent on
+    its brow and two tiny tusk nubs. Limestone-tan hide splashed with
+    terracotta mud, a cypress-dark bristle ridge down its back, a marble
+    crescent, black-figure ink outline. The follower stops to root at every
+    patch of soil.
+  shiny: Its hide turns sun-gold, like a harvest piglet.
+  dex_entry:
+    - It roots through Eleusa's furrows from
+    - dawn to dusk. Farmers say a field it
+    - has turned needs no plow that year.
+  habitat: >-
+    Common on the farms around Eleusa Village, day and night. It evolves only
+    when it levels up in Arkadia.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Tail Whip]
+      - [4, Mud-Slap]
+      - [7, Odor Sleuth]
+      - [10, Rototiller]
+      - [13, Bulldoze]
+      - [16, Rest]
+      - [19, Dig]
+      - [22, Take Down]
+      - [25, Stomping Tantrum]
+      - [28, Amnesia]
+      - [31, Double-Edge]
+      - [34, High Horsepower]
+      - [38, Earthquake]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Mud Shot, Dig,
+      Bulldoze, Earthquake, Stomping Tantrum, High Horsepower, Sandstorm, Sand Tomb, Rock Tomb,
+      Rock Slide, Smack Down, Body Slam, Take Down, Double-Edge, Headbutt, Iron Head, Iron Tail,
+      Charm, Scary Face, Endeavor, Work Up, Amnesia, Trailblaze, Rock Smash, Strength, Sunny Day,
+      Rain Dance]
+    egg: [Belly Drum, Curse, Yawn, Counter, Stuff Cheeks, Superpower]
+  signature: >-
+    Thick Fat and Gluttony make it a cheerful eater, and its hidden Earth
+    Eater lets it heal by eating Ground attacks. It won't evolve until it is
+    leveled up in Arkadia, Artemis's woods.
+  new_move: null
+
+- dex: 56
+  concept: Calydonian boar
+  name: Kaprodon
+  etymology: kapros (Greek, wild boar) + odon, from odous (Greek, tooth)
+  category: Moon Tusk
+  types: [Dark, Ground]
+  abilities: [Thick Fat, Reckless]
+  hidden_ability: Intimidate
+  base_stats: {hp: 105, atk: 125, def: 90, spa: 45, spd: 65, spe: 75}
+  ev_yield: {atk: 2}
+  exp_yield: 182
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 1.9
+  weight_kg: 310.0
+  myth: >-
+    When King Oeneus of Calydon left Artemis out of his harvest offerings, she
+    sent a monstrous boar to ravage his fields. Meleager gathered the heroes of
+    Greece to hunt it, and Atalanta drew its first blood (Homer, Iliad 9; Ovid,
+    Metamorphoses 8).
+  expression: >-
+    The piglet, claimed by Artemis's woods and grown into her punishment. Its
+    tusks curve into a crescent moon, and its bristles stand up like spears.
+  art: >-
+    Large: it fills about 62×52 px, low and massive. A huge bristled boar in
+    three-quarter view facing left, head lowered to charge and one forehoof
+    pawing the ground. Two great tusks curve up and inward until they almost
+    meet in a crescent moon. A ridge of spear-like bristles runs from brow to
+    tail, and its small eyes burn sun-gold. Cypress-dark and black-figure ink
+    hide, limestone tusks with a marble highlight, a moon-silver accent on the
+    crescent, sun-gold eyes, black-figure ink outline. The back sprite shows
+    the bristle ridge raised like a row of spears.
+  shiny: Its dark hide turns terracotta red and its tusks sun-gold.
+  dex_entry:
+    - Its tusks meet in a crescent moon. When
+    - a village forgets its offerings, one of
+    - these comes out of the woods at night.
+  habitat: >-
+    Evolves from Kaplet when it levels up in Arkadia. Rare in Arkadia's
+    moonlit cypress forests at night.
+  learnset:
+    level_up:
+      - [0, Night Slash]
+      - [1, Tackle]
+      - [1, Tail Whip]
+      - [1, Mud-Slap]
+      - [1, Odor Sleuth]
+      - [1, Scary Face]
+      - [10, Rototiller]
+      - [13, Bulldoze]
+      - [16, Rest]
+      - [19, Dig]
+      - [22, Take Down]
+      - [25, Stomping Tantrum]
+      - [28, Amnesia]
+      - [31, Double-Edge]
+      - [35, Payback]
+      - [38, High Horsepower]
+      - [42, Crunch]
+      - [46, Earthquake]
+      - [50, Thrash]
+      - [56, Head Smash]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Mud Shot, Dig,
+      Bulldoze, Earthquake, Stomping Tantrum, High Horsepower, Sandstorm, Sand Tomb, Rock Tomb,
+      Rock Slide, Smack Down, Body Slam, Take Down, Double-Edge, Headbutt, Iron Head, Iron Tail,
+      Charm, Scary Face, Endeavor, Work Up, Amnesia, Trailblaze, Rock Smash, Strength, Sunny Day,
+      Rain Dance, Crunch, Payback, Snarl, Taunt, Throat Chop, Knock Off, Lash Out, Wild Charge,
+      Superpower, Stone Edge, Heavy Slam, Swords Dance, Outrage, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Night Slash on evolving, with Intimidate and Reckless for a head-down
+    charge. A heavy physical attacker with Earthquake, Crunch and, late, Head
+    Smash.
+  new_move: null

@@ -16,7 +16,7 @@ ASM="${LUA%.lua}.s"
 arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -Wno-trigraphs \
   -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -o "$ASM" tools/ichor/tests/slice_consts.c \
   || { echo "could not compile slice_consts.c"; exit 1; }
-SYMS="gMain gSaveBlock1Ptr gSaveBlock2Ptr gObjectEvents gPlayerAvatar gBackupMapLayout gBattleOutcome
+SYMS="gMain gSaveBlock1Ptr gSaveBlock2Ptr gSaveBlock3Ptr gObjectEvents gPlayerAvatar gBackupMapLayout gBattleOutcome
 gBattleMons gParties gTasks gMapHeader gBattleTypeFlags gStringVar4 gSpecialVar_Result gSpecialVar_0x8004
 gSpecialVar_0x8008 gSpecialVar_0x8009 gMPlayInfo_BGM gSongTable gExperienceTables gSpeciesInfo
 sSubstructOffsets sGlobalScriptContextStatus sGlobalScriptContext sLockFieldControls sCurrentMapMusic sFieldMessageBoxMode
@@ -49,10 +49,10 @@ PATTERN="^($(echo $SYMS | tr ' ' '|'))$"
       done
     done | head -1
   done
-  # The slice maps' event scripts, by name: the tests find people, signs and
+  # The slice's and Phase 2's maps' event scripts, by name: the tests find people, signs and
   # triggers on the live map by the script they run, never by coordinates.
   echo "  SCRIPTS = {"
-  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^((ElaiaVillage|KallisteRoute1|AktiTown|Ichor)[A-Za-z0-9_]*_EventScript_[A-Za-z0-9_]+|Common_EventScript_FindItem)$/ && $3 !~ /_[0-9]+$/ { print "    " $3 " = 0x" $1 "," }'
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^((ElaiaVillage|KallisteRoute1|AktiTown|Trireme|Aegina|Emporion|Eleusa|Ichor)[A-Za-z0-9_]*_EventScript_[A-Za-z0-9_]+|Common_EventScript_FindItem)$/ && $3 !~ /_[0-9]+$/ { print "    " $3 " = 0x" $1 "," }'
   echo "  },"
   # Every song's header, by name: several song ids share one header (Ichor
   # re-pointed Hoenn's slots at its own songs), so tests compare headers.

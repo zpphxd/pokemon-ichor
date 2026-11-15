@@ -1028,6 +1028,7 @@ gSpecials::
 	def_special UpdateTrainerCardPhotoIcons
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
+	def_special Ichor_SetHoursOverride
 	@ Ichor: relics (src/ichor_relics.c)
 	def_special Ichor_CanUseRelic
 	def_special Ichor_RelicPromptsAuto
@@ -1077,6 +1078,8 @@ gSpecials::
 	@ Ichor: carried flames (src/ichor_relics.c)
 	def_special Ichor_TakeFlame
 	def_special Ichor_PutOutFlame
+	def_special Ichor_GetFlameKind
+	def_special Ichor_GetFlameSteps
 	def_special Ichor_FrozenGenericLine
 	@ Ichor: the Labyrinth (src/ichor_labyrinth.c)
 	def_special Ichor_AddThreadFloor
@@ -1084,6 +1087,7 @@ gSpecials::
 	def_special Ichor_AddCrackedWall
 	def_special Ichor_DrawThread
 	def_special Ichor_StartAsterion
+	def_special Ichor_AddDrift
 	def_special Ichor_AsterionRest
 	def_special Ichor_AsterionKnockdown
 	def_special Ichor_BuildThreadMenu

@@ -709,6 +709,429 @@
     },
     {
       "type": "trigger",
+      "x": 10,
+      "y": 18,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 18,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 18,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 18,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 18,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 19,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 20,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 21,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 22,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 23,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 24,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 24,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 24,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 24,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 24,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 24,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 24,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 24,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 24,
+      "elevation": 0,
+      "var": "FLAG_ICHOR_HALIA_SECOND_LOOK",
+      "var_value": "0",
+      "script": "ElaiaVillage_EventScript_HaliaSecondLook"
+    },
+    {
+      "type": "trigger",
       "x": 9,
       "y": 26,
       "elevation": 0,

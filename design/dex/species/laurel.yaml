@@ -1,0 +1,218 @@
+line: laurel
+species:
+
+- dex: 1
+  concept: Laurel fawn
+  name: Nebrel
+  etymology: nebros (Greek, fawn) + laurel
+  category: Laurel Fawn
+  types: [Grass]
+  abilities: [Overgrow]
+  hidden_ability: Leaf Guard
+  base_stats: {hp: 45, atk: 45, def: 45, spa: 60, spd: 55, spe: 60}
+  ev_yield: {spa: 1}
+  exp_yield: 62
+  catch_rate: 45
+  gender: {female_pct: 87.5}
+  egg_groups: [Field, Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.6
+  weight_kg: 9.0
+  myth: >-
+    Daphne fled Apollo after Eros's arrows struck them both, running "as the
+    deer runs from the lion", and was changed into the laurel (Ovid,
+    Metamorphoses 1).
+  expression: >-
+    The fawn of Ovid's simile, all legs and nerves, with two laurel leaves for
+    ears. The line is mostly female, as its nymph should be.
+  art: >-
+    Small: it fills about 34×38 px of the box. A slender fawn in three-quarter
+    view facing left, mid-step on thin legs, head up and alert. Two oversized
+    laurel-leaf ears and a stubby sapling tail with two leaves. Limestone-tan
+    coat with a pale belly and white spots in a laurel-leaf pattern along the
+    back. Big dark eyes with a sun-gold glint. Limestone body, olive leaves with
+    a silver-leaf highlight, black-figure ink outline. The follower trots with
+    its ears flicking.
+  shiny: The leaves turn autumn sun-gold and the coat pales to marble.
+  dex_entry:
+    - Its ears are two laurel leaves. When it
+    - senses danger, it bolts, and it is said
+    - that no one has ever caught one that
+    - did not wish to be caught.
+  habitat: >-
+    Given by Professor Daphne at the Akademia grove, Elaia. It isn't found in
+    the wild until the post-game Sanctuary of Firsts.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Growl]
+      - [4, Leafage]
+      - [7, Quick Attack]
+      - [10, Razor Leaf]
+      - [13, Fairy Wind]
+      - [16, Magical Leaf]
+      - [19, Synthesis]
+      - [22, Charm]
+      - [25, Leaf Tornado]
+      - [28, Giga Drain]
+      - [31, Draining Kiss]
+      - [34, Grassy Terrain]
+      - [37, Energy Ball]
+      - [40, Leaf Storm]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Charm, Sunny Day, Grassy Terrain,
+      Misty Terrain, Light Screen, Safeguard, Bullet Seed, Magical Leaf, Seed Bomb, Energy Ball,
+      Giga Drain, Grass Knot, Solar Beam, Grass Pledge, Leaf Storm, Trailblaze, Dazzling Gleam,
+      Draining Kiss, Disarming Voice, Fake Tears, Helping Hand, Covet, Agility, Double Kick, Bounce,
+      Body Slam, Take Down, Weather Ball, Worry Seed]
+    egg: [Leech Seed, Aromatherapy, Grass Whistle, Baton Pass, Wish, Captivate]
+  signature: >-
+    Quick and evasive from the start. Quick Attack and Agility come early,
+    because the whole line is about running.
+  new_move: null
+
+- dex: 2
+  concept: Laurel doe
+  name: Kladoe
+  etymology: klados (Greek, branch) + doe
+  category: Flight
+  types: [Grass]
+  abilities: [Overgrow]
+  hidden_ability: Leaf Guard
+  base_stats: {hp: 58, atk: 55, def: 58, spa: 80, spd: 72, spe: 82}
+  ev_yield: {spa: 1, spe: 1}
+  exp_yield: 142
+  catch_rate: 45
+  gender: {female_pct: 87.5}
+  egg_groups: [Field, Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.2
+  weight_kg: 28.0
+  myth: >-
+    Daphne in flight, with Apollo gaining on her and her prayer to her river
+    father already on her lips (Ovid, Metamorphoses 1).
+  expression: >-
+    It runs on two legs now, mid-flight. Bark creeps up its shins and twigs
+    sprout from its brow like antlers, as if the change has already begun.
+  art: >-
+    Medium: it fills about 44×52 px. A doe-nymph running on two digitigrade legs
+    in three-quarter view facing left, leaning forward with one arm back. Bark
+    texture climbs from hooves to knees. Branching laurel twigs on the brow are
+    antler-like but leafy, and a short cape of leaves trails behind. Limestone
+    coat, cypress-dark bark on the shins, olive leaves, black-figure ink
+    outline. The back sprite shows the leaf cape streaming.
+  shiny: Autumn-gold leaves, with silver-gray bark instead of cypress.
+  dex_entry:
+    - It runs on two legs, faster than any
+    - deer. Bark is creeping up its shins, and
+    - twigs sprout from its brow wherever its
+    - flight takes it.
+  habitat: Evolves from Nebrel at level 16.
+  learnset:
+    level_up:
+      - [0, Agility]
+      - [1, Tackle]
+      - [1, Growl]
+      - [1, Leafage]
+      - [7, Quick Attack]
+      - [10, Razor Leaf]
+      - [13, Fairy Wind]
+      - [16, Magical Leaf]
+      - [20, Synthesis]
+      - [24, Charm]
+      - [28, Leaf Tornado]
+      - [32, Giga Drain]
+      - [36, Draining Kiss]
+      - [40, Grassy Terrain]
+      - [44, Energy Ball]
+      - [48, Leaf Storm]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Charm, Sunny Day, Grassy Terrain,
+      Misty Terrain, Light Screen, Safeguard, Bullet Seed, Magical Leaf, Seed Bomb, Energy Ball,
+      Giga Drain, Grass Knot, Solar Beam, Grass Pledge, Leaf Storm, Trailblaze, Dazzling Gleam,
+      Draining Kiss, Disarming Voice, Fake Tears, Helping Hand, Covet, Agility, Double Kick, Bounce,
+      Body Slam, Take Down, Weather Ball, Worry Seed, Calm Mind, Leaf Blade, Play Rough,
+      Stomping Tantrum, Encore]
+    egg: []
+  signature: >-
+    It learns Agility on evolving: the flight itself. It's the fastest stage of
+    the line relative to its bulk.
+  new_move: null
+
+- dex: 3
+  concept: Laurel dryad
+  name: Daphnyad
+  etymology: daphne (Greek, laurel) + dryad
+  category: Laurel
+  types: [Grass, Fairy]
+  abilities: [Overgrow]
+  hidden_ability: Leaf Guard
+  base_stats: {hp: 72, atk: 65, def: 75, spa: 115, spd: 98, spe: 105}
+  ev_yield: {spa: 2, spe: 1}
+  exp_yield: 265
+  catch_rate: 45
+  gender: {female_pct: 87.5}
+  egg_groups: [Field, Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.7
+  weight_kg: 52.0
+  myth: >-
+    At the river's edge Daphne became the laurel: feet rooted, arms turned to
+    branches, hair to leaves. Apollo made the tree his own, and its wreath
+    crowns every victor (Ovid, Metamorphoses 1).
+  expression: >-
+    The moment of change, held still. It's half nymph and half laurel, rooted
+    by choice, wearing the living crown that the player's laurels imitate.
+  art: >-
+    Large: it fills about 60×62 px. A tall, graceful dryad facing left, her bark
+    gown flaring out and splitting into roots at the hem. One arm lifts into a
+    leafy laurel bough, and long laurel leaves fall from her head like hair
+    under a wreath of sun-gold berries. A clean, calm Pokémon face with sun-gold
+    eyes. Cypress-gray bark, olive and silver-leaf foliage, sun-gold berries,
+    marble skin, black-figure ink outline. Frame 2 sways the leaves and bough;
+    the follower glides with its roots trailing like a hem.
+  shiny: The whole canopy turns autumn sun-gold, with marble-white bark.
+  dex_entry:
+    - When it has run as far as it wishes, it
+    - roots itself and becomes a laurel tree.
+    - Its crown of leaves is the one victors
+    - wear. It gives it only to the worthy.
+  habitat: Evolves from Kladoe at level 34.
+  learnset:
+    level_up:
+      - [0, Ingrain]
+      - [1, Agility]
+      - [1, Tackle]
+      - [1, Growl]
+      - [1, Leafage]
+      - [1, Quick Attack]
+      - [10, Razor Leaf]
+      - [13, Fairy Wind]
+      - [16, Magical Leaf]
+      - [20, Synthesis]
+      - [24, Charm]
+      - [28, Leaf Tornado]
+      - [32, Giga Drain]
+      - [34, Dazzling Gleam]
+      - [38, Draining Kiss]
+      - [42, Grassy Terrain]
+      - [46, Energy Ball]
+      - [51, Petal Blizzard]
+      - [56, Moonblast]
+      - [62, Leaf Storm]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Charm, Sunny Day, Grassy Terrain,
+      Misty Terrain, Light Screen, Safeguard, Bullet Seed, Magical Leaf, Seed Bomb, Energy Ball,
+      Giga Drain, Grass Knot, Solar Beam, Grass Pledge, Leaf Storm, Trailblaze, Dazzling Gleam,
+      Draining Kiss, Disarming Voice, Fake Tears, Helping Hand, Covet, Agility, Double Kick, Bounce,
+      Body Slam, Take Down, Weather Ball, Worry Seed, Calm Mind, Leaf Blade, Play Rough,
+      Stomping Tantrum, Encore, Frenzy Plant, Hyper Beam, Giga Impact, Solar Blade, Pollen Puff,
+      Petal Blizzard, Psych Up]
+    egg: []
+  signature: >-
+    It learns Ingrain on evolving, because Daphne roots herself. A fast special
+    Grass/Fairy attacker that takes Dragon hits for free.
+  new_move: null

@@ -1,0 +1,430 @@
+<meta charset="utf-8">
+<title>Aethos Pokédex Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&family=Pixelify+Sans:wght@500;700&family=Silkscreen&display=swap">
+<style>
+/* Layout: the Ichor pitch page's painted vessel (clay ground, black-figure ink; red-figure in dark mode), turned into a working catalog. Decisions first, then the dex's shape, then every slot by region. */
+:root {
+  --bg: #D2703A;          /* fired clay */
+  --panel: #DC8550;       /* lighter slip */
+  --fg: #1B130E;          /* black glaze */
+  --muted: #3A2010;
+  --rule: #1B130E;
+  --gold: #F3C04A;        /* ichor */
+  --chip-ink: #1B130E;    /* text on light type chips, both themes */
+  --chip-paper: #FFF6EC;  /* text on dark type chips, both themes */
+  --font-display: "Pixelify Sans", "Silkscreen", ui-monospace, monospace;
+  --font-body: "Gentium Book Plus", "Iowan Old Style", Georgia, serif;
+  --font-label: "Silkscreen", "Pixelify Sans", ui-monospace, monospace;
+  --s-2: 11px; --s-1: 13px; --s0: 17px; --s1: 20px; --s2: 25px; --s3: 32px; --s4: clamp(40px, 8vw, 76px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17110D; --panel: #22190F; --fg: #E58C52; --muted: #D49A70; --rule: #E58C52; --gold: #F3C04A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17110D; --panel: #22190F; --fg: #E58C52; --muted: #D49A70; --rule: #E58C52; --gold: #F3C04A;
+  color-scheme: dark;
+}
+
+html { background: var(--bg); }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: var(--s0); line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+a { color: inherit; text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--fg); outline-offset: 2px; }
+
+.meander {
+  height: 20px; background: var(--fg);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M0 1H20M0 19H20M3 19V5H15V15H7V9H11' fill='none' stroke='black' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E") repeat-x left center / 20px 20px;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M0 1H20M0 19H20M3 19V5H15V15H7V9H11' fill='none' stroke='black' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E") repeat-x left center / 20px 20px;
+}
+.label {
+  font-family: var(--font-label); font-size: var(--s-1); letter-spacing: 0.08em;
+  text-transform: uppercase; line-height: 1.3;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.05; text-wrap: balance; margin: 0; }
+h2 { font-size: var(--s3); }
+h3 { font-size: var(--s1); font-weight: 500; }
+p { margin: 0; max-width: 65ch; }
+
+/* Header */
+header { padding-block: 40px 28px; display: grid; gap: 18px; }
+header h1 { font-size: var(--s4); letter-spacing: -0.01em; }
+.intro { font-size: var(--s1); max-width: 60ch; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--rule); border-bottom: 2px solid var(--rule); }
+.facts div { padding: 10px 10px 10px 0; display: grid; gap: 2px; min-width: 0; }
+.facts div + div { padding-left: 10px; border-left: 2px solid var(--rule); }
+.facts strong { font-family: var(--font-display); font-size: var(--s2); font-variant-numeric: tabular-nums; }
+
+section { padding-block: 40px; display: grid; gap: 22px; }
+.head { display: grid; gap: 8px; }
+
+/* Decisions */
+.decisions { display: grid; gap: 0; border-top: 2px solid var(--rule); }
+.decision { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 4px 16px; padding-block: 16px; border-bottom: 1px solid var(--rule); }
+.decision .id { font-family: var(--font-display); font-size: var(--s3); line-height: 1; grid-row: span 4; }
+.decision .ans::before { content: "Answer: "; font-family: var(--font-label); font-size: var(--s-1); letter-spacing: .06em; text-transform: uppercase; }
+.decision h3 { font-size: var(--s1); font-weight: 700; }
+.decision .rec { font-weight: 700; }
+.decision .rec::before { content: "Recommended: "; font-family: var(--font-label); font-weight: 400; font-size: var(--s-1); letter-spacing: .06em; text-transform: uppercase; }
+
+/* Shape */
+.shape { display: grid; gap: 32px; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; }
+.shape > * { min-width: 0; display: grid; gap: 14px; align-content: start; }
+.structure { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; }
+.structure div { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--rule); }
+.structure b { font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+
+.bars { display: grid; gap: 5px; }
+.bar { display: grid; grid-template-columns: 5.6em minmax(0, 1fr) 2em; align-items: center; gap: 8px; }
+.bar .name { font-family: var(--font-label); font-size: var(--s-2); letter-spacing: .05em; text-transform: uppercase; }
+.bar .val { font-family: var(--font-display); font-size: var(--s-1); font-variant-numeric: tabular-nums; text-align: right; }
+.track { position: relative; height: 16px; }
+.fill { position: absolute; inset: 0 auto 0 0; display: flex; border: 1.5px solid var(--rule); }
+.fill .mono { height: 100%; background: var(--t); }
+.fill .dual { height: 100%; background: repeating-linear-gradient(135deg, var(--t) 0 3px, transparent 3px 6px); }
+.fill .mono + .dual { border-left: 1.5px solid var(--rule); }
+.avg { position: absolute; top: -4px; bottom: -4px; width: 0; border-left: 2px dashed var(--rule); }
+.axis { display: grid; grid-template-columns: 5.6em minmax(0, 1fr) 2em; gap: 8px; }
+.ticks { position: relative; height: 16px; font-family: var(--font-label); font-size: var(--s-2); }
+.ticks span { position: absolute; transform: translateX(-50%); }
+.key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--s-1); }
+.key i { display: inline-block; width: 18px; height: 11px; border: 1.5px solid var(--rule); vertical-align: -1px; margin-right: 6px; }
+.key .k-mono { background: var(--fg); }
+.key .k-dual { background: repeating-linear-gradient(135deg, var(--fg) 0 3px, transparent 3px 6px); }
+.key .k-avg { width: 0; height: 14px; border: 0; border-left: 2px dashed var(--rule); }
+
+.table-wrap { overflow-x: auto; border-top: 2px solid var(--rule); border-bottom: 2px solid var(--rule); }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 7px 10px 7px 0; vertical-align: top; border-bottom: 1px solid var(--rule); }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--font-label); font-size: var(--s-1); font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
+td.n { font-family: var(--font-display); font-variant-numeric: tabular-nums; text-align: right; }
+td.who { min-width: 18em; }
+
+/* Type chips: Pokémon's own type colors, outlined in ink so they read on clay and on glaze */
+.chip {
+  display: inline-block; font-family: var(--font-label); font-size: var(--s-2); letter-spacing: .05em;
+  text-transform: uppercase; line-height: 1; padding: 4px 6px 3px; border: 1.5px solid var(--rule);
+  background: var(--t); color: var(--chip-ink); white-space: nowrap;
+}
+.chip.dark-ink { color: var(--chip-paper); }
+
+/* Filters */
+.filters { display: grid; gap: 12px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 12px; border-bottom: 2px solid var(--rule); }
+.filter-row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: end; }
+.filter-row label { display: grid; gap: 4px; }
+input[type="search"], select {
+  font: inherit; font-size: 16px; color: var(--fg); background: var(--panel);
+  border: 2px solid var(--rule); border-radius: 0; padding: 6px 8px; min-width: 0;
+}
+input[type="search"] { width: min(22em, 100%); }
+.typepick { display: flex; flex-wrap: wrap; gap: 6px; }
+.typepick button { cursor: pointer; font: inherit; padding: 0; border: 0; background: none; }
+.typepick button .chip { opacity: .55; }
+.typepick button[aria-pressed="true"] .chip { opacity: 1; outline: 2px solid var(--rule); outline-offset: 1px; }
+.typepick button:hover .chip { opacity: 1; }
+.count { font-size: var(--s-1); }
+.clear { font: inherit; font-size: var(--s-1); background: none; border: 0; color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 0; }
+
+/* Slots */
+.region { display: grid; gap: 0; padding-top: 18px; }
+.region > h3 { font-size: var(--s2); padding-bottom: 10px; border-bottom: 2px solid var(--rule); }
+.line { display: grid; grid-template-columns: 5.2em minmax(0, 1fr); gap: 10px 16px; padding-block: 18px; border-bottom: 1px solid var(--rule); }
+.line .range { font-family: var(--font-display); font-size: var(--s1); font-variant-numeric: tabular-nums; line-height: 1.15; }
+.line .body { display: grid; gap: 10px; min-width: 0; }
+.chain { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.mon { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 5px 6px; background: var(--panel); border: 2px solid var(--rule); padding: 6px 9px; min-width: 0; }
+.mon b { font-weight: 700; }
+.mon .num { font-family: var(--font-label); font-size: var(--s-2); }
+.mon .baby { font-family: var(--font-label); font-size: var(--s-2); border: 1.5px solid var(--rule); padding: 2px 4px; }
+.evo { font-family: var(--font-label); font-size: var(--s-2); letter-spacing: .04em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+.evo::before { content: ""; width: 14px; height: 0; border-top: 2px solid var(--rule); }
+.branchnote { font-size: var(--s-1); }
+.roles { display: flex; flex-wrap: wrap; gap: 6px; }
+.roles span { font-family: var(--font-label); font-size: var(--s-2); letter-spacing: .05em; text-transform: uppercase; border-bottom: 1.5px solid var(--rule); }
+dl { margin: 0; display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: 6px 14px; }
+dt { font-family: var(--font-label); font-size: var(--s-1); letter-spacing: .06em; text-transform: uppercase; padding-top: 3px; }
+dd { margin: 0; max-width: 70ch; }
+.empty { padding-block: 24px; font-size: var(--s1); }
+
+footer { padding-block: 32px 48px; display: grid; gap: 10px; font-size: var(--s-1); }
+footer p { max-width: 70ch; }
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .9em; }
+
+@media (max-width: 760px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .facts div:nth-child(n+3) { border-top: 2px solid var(--rule); }
+  .shape { grid-template-columns: minmax(0, 1fr); }
+  .line { grid-template-columns: minmax(0, 1fr); }
+  dl { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  dd + dt { margin-top: 6px; }
+  .decision { grid-template-columns: 3em minmax(0, 1fr); }
+  .decision .id { font-size: var(--s2); }
+  .filters { position: static; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="label">Pokémon Ichor · Aethos regional dex · Gate 1 of 4</p>
+    <h1>The Aethos Pokédex plan</h1>
+    <p class="intro">One hundred and fifty new Pokémon, each a memory of a Greek myth, laid out as a real region: three starters, route birds and bugs, a mascot, fossils, a pseudo-legendary and the legendaries of the Loom. This is the plan to approve before the full entries and the art.</p>
+    <div class="facts" id="facts"></div>
+  </header>
+</div>
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section aria-labelledby="h-decide">
+    <div class="head">
+      <p class="label">Your call</p>
+      <h2 id="h-decide">Six decisions</h2>
+      <p>These change the bible's story or the Phase 1 slice, so they're yours to make. Reply with the numbers, for example "D1 yes, D5 (b)".</p>
+    </div>
+    <div class="decisions" id="decisions"></div>
+  </section>
+</div>
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section aria-labelledby="h-shape">
+    <div class="head">
+      <p class="label">Shape of the dex</p>
+      <h2 id="h-shape">Every type, every way to evolve</h2>
+    </div>
+    <div class="shape">
+      <div>
+        <h3>How the types are spread</h3>
+        <p>A species counts once for each of its types. Solid is single-type, hatched is half of a dual type. The dashed line is an even share.</p>
+        <div class="bars" id="bars" role="img" aria-label="Bar chart of species per type"></div>
+        <div class="key"><span><i class="k-mono"></i>Single-type</span><span><i class="k-dual"></i>Dual-type</span><span><i class="k-avg"></i>Even share</span></div>
+      </div>
+      <div>
+        <h3>Line structure</h3>
+        <div class="structure" id="structure"></div>
+        <h3>Evolution methods</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Method</th><th>Count</th><th>Who</th></tr></thead>
+          <tbody id="methods"></tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <section aria-labelledby="h-slots">
+    <div class="head">
+      <p class="label">The catalog</p>
+      <h2 id="h-slots">All 152 slots</h2>
+      <p>The labels are working concepts, not names. Names, stats, abilities, moves and Pokédex entries come at Gate 2.</p>
+    </div>
+    <div class="filters">
+      <div class="filter-row">
+        <label><span class="label">Search</span><input type="search" id="q" placeholder="Myth, place, concept…" autocomplete="off"></label>
+        <label><span class="label">Role</span><select id="role"><option value="">Any role</option></select></label>
+        <span class="count" id="count" aria-live="polite"></span>
+        <button class="clear" id="clear" type="button">Clear filters</button>
+      </div>
+      <div class="typepick" id="typepick" role="group" aria-label="Filter by type"></div>
+    </div>
+    <div id="slots"></div>
+  </section>
+</div>
+<div class="meander" role="presentation"></div>
+
+<div class="wrap">
+  <footer>
+    <p>Source: <code>design/dex/plan.yaml</code> on the <code>claude/aethos-dex-a7c73a</code> branch. <code>tools/dex/plan.py</code> checks it and rebuilds this page and <code>design/dex/PLAN.md</code>.</p>
+    <p>Costs to know: 152 species with front, back, shiny, icon, footprint and follower sprites come to roughly 1.2–1.5 MB of ROM if they reuse existing cries, about a quarter of today's headroom. The plan needs no new moves; a few signature moves may be proposed at Gate 2, each flagged as a cost.</p>
+    <p>Next: Gate 2 writes full entries (names, stats, abilities, moves, Pokédex text) for all 152. Gate 3 chooses the art approach. Gate 4 is the browsable Pokédex with art.</p>
+  </footer>
+</div>
+
+<script>
+const DATA = /*PLAN_DATA*/null;
+const TYPE_COLORS = {
+  Normal: "#A8A77A", Fire: "#EE8130", Water: "#6390F0", Grass: "#7AC74C", Electric: "#F7D02C",
+  Ice: "#96D9D6", Fighting: "#C22E28", Poison: "#A33EA1", Ground: "#E2BF65", Flying: "#A98FF3",
+  Psychic: "#F95587", Bug: "#A6B91A", Rock: "#B6A136", Ghost: "#735797", Dragon: "#6F35FC",
+  Dark: "#705746", Steel: "#B7B7CE", Fairy: "#D685AD"
+};
+const DARK_CHIPS = new Set(["Fighting", "Poison", "Ghost", "Dragon", "Dark"]);
+
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v;
+    else if (k === "style") n.style.cssText = v;
+    else n.setAttribute(k, v);
+  }
+  for (const k of kids.flat()) if (k != null) n.append(k);
+  return n;
+};
+const chip = t => el("span", { class: "chip" + (DARK_CHIPS.has(t) ? " dark-ink" : ""), style: `--t:${TYPE_COLORS[t]}` }, t);
+const pad = n => String(n).padStart(3, "0");
+
+function renderFacts() {
+  const spread = Object.values(DATA.typeSpread);
+  const facts = [
+    [DATA.total, "species"],
+    [DATA.lines.length, "lines"],
+    [DATA.types.length, "types, all used"],
+    [DATA.decisions.length, "decisions for you"],
+  ];
+  document.getElementById("facts").append(...facts.map(([n, l]) => el("div", {}, el("strong", {}, String(n)), el("span", { class: "label" }, l))));
+}
+
+function renderDecisions() {
+  document.getElementById("decisions").append(...DATA.decisions.map(d =>
+    el("article", { class: "decision" },
+      el("span", { class: "id" }, d.id),
+      el("h3", {}, d.title),
+      el("p", {}, d.detail),
+      el("p", { class: "rec" }, d.recommend),
+      el("p", { class: "ans" }, d.answer || "Open"))));
+}
+
+function renderShape() {
+  const sp = DATA.typeSpread;
+  const totals = DATA.types.map(t => sp[t].mono + sp[t].dual);
+  const max = Math.max(...totals);
+  const scale = Math.ceil(max / 5) * 5;           // axis runs to the next multiple of 5 above the largest bar
+  const even = totals.reduce((a, b) => a + b, 0) / DATA.types.length;
+  const pct = v => (v / scale * 100) + "%";
+  const bars = document.getElementById("bars");
+  DATA.types.forEach((t, i) => {
+    const fill = el("div", { class: "fill", style: `width:${pct(totals[i])}` },
+      sp[t].mono ? el("div", { class: "mono", style: `--t:${TYPE_COLORS[t]};flex:${sp[t].mono}` }) : null,
+      sp[t].dual ? el("div", { class: "dual", style: `--t:${TYPE_COLORS[t]};flex:${sp[t].dual}` }) : null);
+    bars.append(el("div", { class: "bar", title: `${t}: ${sp[t].mono} single-type, ${sp[t].dual} dual-type` },
+      el("span", { class: "name" }, t),
+      el("div", { class: "track" }, fill, el("span", { class: "avg", style: `left:${pct(even)}` })),
+      el("span", { class: "val" }, String(totals[i]))));
+  });
+  const ticks = el("div", { class: "ticks" });
+  for (let v = 0; v <= scale; v += 5) ticks.append(el("span", { style: `left:${pct(v)}` }, String(v)));
+  bars.append(el("div", { class: "axis" }, el("span"), ticks, el("span")));
+
+  const babies = DATA.lines.flatMap(l => l.members).filter(m => m.baby).length;
+  const rows = [
+    ["Three-stage lines", DATA.shapes["three-stage"] || 0],
+    ["Two-stage lines", DATA.shapes["two-stage"] || 0],
+    ["Branching line", DATA.shapes["branching"] || 0],
+    ["Single-stage species", DATA.shapes["single"] || 0],
+    ["Dual-type species", DATA.dual],
+    ["Babies", babies],
+  ];
+  document.getElementById("structure").append(...rows.map(([k, v]) => el("div", {}, el("span", {}, k), el("b", {}, String(v)))));
+  document.getElementById("methods").append(...DATA.methods.map(m =>
+    el("tr", {}, el("td", {}, m.label), el("td", { class: "n" }, String(m.who.length)),
+      el("td", { class: "who" }, m.who.join(", ")))));
+}
+
+const state = { q: "", role: "", types: new Set() };
+
+function renderFilters() {
+  const roles = [...new Set(DATA.lines.flatMap(l => l.roles))].sort((a, b) => a.localeCompare(b));
+  const sel = document.getElementById("role");
+  sel.append(...roles.map(r => el("option", { value: r }, r)));
+  const pick = document.getElementById("typepick");
+  DATA.types.forEach(t => {
+    const b = el("button", { type: "button", "aria-pressed": "false", "data-type": t, "aria-label": `${t} type` }, chip(t));
+    b.addEventListener("click", () => {
+      state.types.has(t) ? state.types.delete(t) : state.types.add(t);
+      b.setAttribute("aria-pressed", String(state.types.has(t)));
+      renderSlots();
+    });
+    pick.append(b);
+  });
+  document.getElementById("q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); renderSlots(); });
+  sel.addEventListener("change", e => { state.role = e.target.value; renderSlots(); });
+  document.getElementById("clear").addEventListener("click", () => {
+    state.q = ""; state.role = ""; state.types.clear();
+    document.getElementById("q").value = ""; sel.value = "";
+    pick.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", "false"));
+    renderSlots();
+  });
+}
+
+function matches(line) {
+  if (state.role && !line.roles.includes(state.role)) return false;
+  if (state.types.size && !line.members.some(m => m.types.some(t => state.types.has(t)))) return false;
+  if (state.q) {
+    const hay = [line.id, line.section, line.myth, line.design, line.habitat, line.notes, ...line.roles,
+      ...line.members.flatMap(m => [m.concept, ...m.types, m.evolves])].join(" ").toLowerCase();
+    if (!hay.includes(state.q)) return false;
+  }
+  return true;
+}
+
+function lineView(line) {
+  const first = line.members[0].dex, last = line.members[line.members.length - 1].dex;
+  const chain = el("div", { class: "chain" });
+  const branching = line.members.some(m => m.evolves.includes(";"));
+  line.members.forEach((m, i) => {
+    if (i > 0 && !branching && line.members[i - 1].evolves) {
+      chain.append(el("span", { class: "evo" }, line.members[i - 1].evolves.replace(/^→ [^:]+: /, "")));
+    }
+    chain.append(el("span", { class: "mon" },
+      el("span", { class: "num" }, "#" + pad(m.dex)), el("b", {}, m.concept),
+      m.baby ? el("span", { class: "baby" }, "Baby") : null,
+      ...m.types.map(chip)));
+  });
+  const body = el("div", { class: "body" }, chain);
+  if (branching) {
+    line.members.filter(m => m.evolves.includes(";")).forEach(m =>
+      body.append(el("p", { class: "branchnote" }, `${m.concept} branches: ${m.evolves.replace(/→ /g, "")}.`)));
+  }
+  body.append(el("div", { class: "roles" }, line.roles.map(r => el("span", {}, r))));
+  const dl = el("dl", {},
+    el("dt", {}, "Myth"), el("dd", {}, line.myth),
+    el("dt", {}, "Design"), el("dd", {}, line.design),
+    el("dt", {}, "Lives in"), el("dd", {}, line.habitat));
+  if (line.notes) dl.append(el("dt", {}, "Notes"), el("dd", {}, line.notes));
+  body.append(dl);
+  return el("article", { class: "line", id: "line-" + line.id },
+    el("span", { class: "range" }, first === last ? "#" + pad(first) : `#${pad(first)}–${pad(last)}`), body);
+}
+
+function renderSlots() {
+  const root = document.getElementById("slots");
+  root.replaceChildren();
+  const shown = DATA.lines.filter(matches);
+  let section = null, region = null;
+  for (const line of shown) {
+    if (line.section !== section) {
+      section = line.section;
+      region = el("div", { class: "region" }, el("h3", {}, section));
+      root.append(region);
+    }
+    region.append(lineView(line));
+  }
+  if (!shown.length) root.append(el("p", { class: "empty" }, "No lines match these filters. Clear a filter to see more."));
+  const species = shown.reduce((a, l) => a + l.members.length, 0);
+  document.getElementById("count").textContent = `Showing ${shown.length} of ${DATA.lines.length} lines, ${species} species`;
+}
+
+renderFacts();
+renderDecisions();
+renderShape();
+renderFilters();
+renderSlots();
+</script>
