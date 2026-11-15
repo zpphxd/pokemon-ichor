@@ -1176,5 +1176,31 @@
 #define METATILE_KithaironCave_Brazier_LitTop       0x221
 #define METATILE_KithaironCave_Brazier_Lit          0x229
 // end gTileset_Kithairon
+// gTileset_TempleDionysus (Ichor: the Three-Act Play), written by tools/ichor/art/temple_dionysus_build.py
+#define METATILE_TempleDionysus_Peg_Comic              0x260
+#define METATILE_TempleDionysus_Peg_Comic_Empty        0x261
+#define METATILE_TempleDionysus_Peg_Tragic             0x262
+#define METATILE_TempleDionysus_Peg_Tragic_Empty       0x263
+#define METATILE_TempleDionysus_Peg_Satyr              0x264
+#define METATILE_TempleDionysus_Peg_Satyr_Empty        0x265
+#define METATILE_TempleDionysus_CurtainClosed_L        0x290
+#define METATILE_TempleDionysus_CurtainClosed_R        0x291
+#define METATILE_TempleDionysus_CurtainOpen_L          0x298
+#define METATILE_TempleDionysus_CurtainOpen_R          0x299
+#define METATILE_TempleDionysus_MastTop                0x2A0
+#define METATILE_TempleDionysus_MastTop_Lowered        0x2A1
+#define METATILE_TempleDionysus_Mast                   0x2A2
+#define METATILE_TempleDionysus_Mast_Lowered           0x2A3
+#define METATILE_TempleDionysus_Arm                    0x2A4
+#define METATILE_TempleDionysus_Arm_Lowered            0x2A5
+#define METATILE_TempleDionysus_Hook                   0x2A6
+#define METATILE_TempleDionysus_Hook_Lowered           0x2A7
+#define METATILE_TempleDionysus_DeckFaceArm            0x233
+#define METATILE_TempleDionysus_DeckFaceArm_Lowered    0x234
+#define METATILE_TempleDionysus_TierBackArm            0x273
+#define METATILE_TempleDionysus_TierBackArm_Lowered    0x274
+#define METATILE_TempleDionysus_TierFrontArm           0x275
+#define METATILE_TempleDionysus_TierFrontArm_Lowered   0x276
+// end gTileset_TempleDionysus
 
 #endif // GUARD_METATILE_LABELS_H

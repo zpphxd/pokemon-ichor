@@ -3415,4 +3415,48 @@ const u16 gTilesetPalettes_PorytilesManaged_KithaironCave[][16] =
     INCBIN_U16("data/tilesets/secondary/kithairon_cave/porytiles_bin/palettes/13.gbapal"),
     INCBIN_U16("data/tilesets/secondary/kithairon_cave/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/kithairon_cave/porytiles_bin/palettes/15.gbapal")
+// Ichor: thyrsa
+const u32 gTilesetTiles_PorytilesManaged_Thyrsa[] = INCBIN_U32("data/tilesets/secondary/thyrsa/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Thyrsa[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: temple_dionysus
+const u32 gTilesetTiles_PorytilesManaged_TempleDionysus[] = INCBIN_U32("data/tilesets/secondary/temple_dionysus/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_TempleDionysus[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/temple_dionysus/porytiles_bin/palettes/15.gbapal")
 };
