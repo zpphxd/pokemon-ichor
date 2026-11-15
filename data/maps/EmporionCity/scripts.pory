@@ -9,7 +9,8 @@
 //
 // Scene state lives in flags; ON_TRANSITION turns it into temp vars for the
 // coord triggers:
-//   VAR_TEMP_1 == 1  beat 14 waits on the temple stair's bottom tread, (21..25, 16)
+//   VAR_TEMP_1 == 1  beat 14 waits on the temple stair's bottom tread, (21..25, 16),
+//                    and in front of the door, (23,13), for players who come by the terrace
 //   VAR_TEMP_2 == 1  the Isthmus Gate's trigger, (7..9, 4): the hoplites' line
 //                    before the Herald Laurel, Kleon's battle after it
 //   VAR_TEMP_3 == 0  always: the Deigma's door (32,36). The stoa's door bay isn't
@@ -71,6 +72,19 @@ script EmporionCity_EventScript_KleonStepsX25 {
     setvar(VAR_0x8008, 25)
     goto(EmporionCity_EventScript_KleonStepsScene)
 }
+
+// Reaching the door along the upper terrace skips the stair's foot, so the
+// tile in front of the door (23,13) starts the scene too: the door bangs open
+// and the player steps back down to the stair's foot, where Kleon finds them.
+script EmporionCity_EventScript_KleonStepsDoor {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_BackDownTheSteps)
+    waitmovement(0)
+    setvar(VAR_0x8008, 23)
+    goto(EmporionCity_EventScript_KleonStepsScene)
+}
+
+movement EmporionCity_Movement_BackDownTheSteps { face_up delay_16 walk_down * 3 face_up }
 
 script EmporionCity_EventScript_KleonStepsScene {
     lockall

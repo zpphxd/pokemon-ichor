@@ -157,7 +157,7 @@ ROOMS = {
             ("coord", "the player's place in beat 12, beside Alethea", (6, 5)),
             ("coord", "Alethea at the notice board (beat 12)", (1, 8)),
             ("coord", "the player behind her at the notice board (beat 12)", (2, 8)),
-            ("npc", "Thaletas, the trader, by the water with his Narkeray", (14, 5), "west"),
+            ("npc", "Thaletas, the trader, by the water with his Narkeray", (13, 5), "east"),
             ("npc", "the wool merchant, at her bolts", (1, 4), "east"),
             ("npc", "the grain merchant, by his sacks", (7, 7), "west"),
             ("bg", "the public notice, sealed with the Archon's owl", (0, 8), (1, 8, "west")),
@@ -338,7 +338,7 @@ ROOMS = {
         ],
         "spots": [
             ("warp", "the stair door down to the yard (south-arrow mat)", [(3, 7), (4, 7)]),
-            ("npc", "Penelopeia, at her loom", (2, 3), "north"),
+            ("npc", "Penelopeia, beside her loom", (3, 3), "west"),
             ("bg", "the loom and its shroud", (1, 2), (1, 3, "north")),
             ("bg", "the window on the sea", (4, 1), (4, 2, "north")),
             ("bg", "her husband's oar", (6, 1), (6, 2, "north")),
