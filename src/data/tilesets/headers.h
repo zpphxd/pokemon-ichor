@@ -1723,3 +1723,19 @@ const struct Tileset gTileset_TempleHermes =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary built by tools/ichor/art/thyrsa_build.py: Thyrsa City
+// (its Cyclopean walls and gates, streets, houses, the Agora, the Temple of Dionysus's
+// front, the Asclepeion, Semele's chamber and the vineyards). It uses only its own
+// tiles and palettes 6-12; cells on grass borrow aethos's, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_Thyrsa =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Thyrsa,
+    .palettes = gTilesetPalettes_PorytilesManaged_Thyrsa,
+    .metatiles = gMetatiles_PorytilesManaged_Thyrsa,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Thyrsa,
+    .callback = NULL,
+};

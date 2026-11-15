@@ -1701,6 +1701,18 @@
 #ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
+#define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL_START + 0x130) // Ichor: Act II: met Manto the augur on the Kadmeia wall (beat 30); her house opens
+#define FLAG_ICHOR_NEISTAN_DRUM_MOVED           (FLAG_ICHOR_GENERAL_START + 0x131) // Ichor: Act II: pushed the fallen drum out of the Neistan Gate with the Girdle
+#define FLAG_ICHOR_HIDE_NEISTAN_GUARDS          (FLAG_ICHOR_GENERAL_START + 0x132) // Ichor: Act II: hides the festival guard in the Neistan Gate (after the Dionysia)
+#define FLAG_ICHOR_HIDE_NEISTAN_DRUM            (FLAG_ICHOR_GENERAL_START + 0x133) // Ichor: Act II: hides the drum in the Neistan Gate (before the Dionysia; after the push)
+#define FLAG_ICHOR_HIDE_ALETHEA_THYRSA          (FLAG_ICHOR_GENERAL_START + 0x134) // Ichor: Act II: hides Alethea at Semele's chamber (she went west, beat 34)
+#define FLAG_ICHOR_ALETHEA_WENT_WEST            (FLAG_ICHOR_GENERAL_START + 0x135) // Ichor: Act II: Alethea left Thyrsa by the Neistan Gate (beat 34; region B1 reads it)
+#define FLAG_ICHOR_HIDE_OMEN_THYRSIVY           (FLAG_ICHOR_GENERAL_START + 0x136) // Ichor: Act II: hides the Thyrsivy in Thyrsa's old trellises (the omen's visitor)
+#define FLAG_ICHOR_OMEN_THYRSIVY_TOLD           (FLAG_ICHOR_GENERAL_START + 0x137) // Ichor: Act II: Manto told the rare-visitor omen; the Thyrsivy may stand in the vines
+#define FLAG_ICHOR_DECOY_THYRSA                 (FLAG_ICHOR_GENERAL_START + 0x138) // Ichor: Act II: showed Thyrsa's blind beggar the way to Dirke (theoxenia decoy)
+#define FLAG_ICHOR_ITEM_THYRSA_BLACK_SLUDGE     (FLAG_ICHOR_GENERAL_START + 0x139) // Ichor: Act II: Thyrsa, the Black Sludge by the wine press
+#define FLAG_ICHOR_ITEM_THYRSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x13A) // Ichor: Act II: Thyrsa, the Super Potion in the vineyards' last row
+#define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL_START + 0x13B) // Ichor: Act II: Thyrsa, the Big Nugget on the west wall-walk (the Thyrsus)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
