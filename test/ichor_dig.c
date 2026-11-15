@@ -15,6 +15,7 @@ u16 Ichor_DigStart(void);
 u16 Ichor_DigFindKind(void);
 void Ichor_DigFinish(void);
 u16 Ichor_SellToMoneychanger(void);
+u16 Ichor_QuoteToMoneychanger(void);
 
 #define ROLLS 2000
 
@@ -209,5 +210,35 @@ TEST("Ichor: a moneychanger buys a coin at the market's price plus his percent")
     EXPECT_EQ(Ichor_SellToMoneychanger(), TRUE);
     EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), money + 900);
     memset(&gIchorSave.blessing, 0, sizeof(gIchorSave.blessing));
+    SetMoney(&gSaveBlock1Ptr->money, 0);
+}
+
+TEST("Ichor: moneychanger quotes preserve all three coins and reject incomplete payments")
+{
+    static const u16 coins[] = {ITEM_RELIC_COPPER, ITEM_RELIC_SILVER, ITEM_RELIC_GOLD};
+    static const u32 prices[] = {600, 2400, 6000};
+    u32 i;
+
+    memset(&gIchorSave.blessing, 0, sizeof(gIchorSave.blessing));
+    gSpecialVar_0x8005 = 20;
+    for (i = 0; i < ARRAY_COUNT(coins); i++)
+    {
+        EXPECT(AddBagItem(coins[i], 1));
+        gSpecialVar_0x8004 = coins[i];
+        SetMoney(&gSaveBlock1Ptr->money, MAX_MONEY - prices[i] + 1);
+        EXPECT_EQ(Ichor_QuoteToMoneychanger(), FALSE);
+        EXPECT_EQ(Ichor_SellToMoneychanger(), FALSE);
+        EXPECT(CheckBagHasItem(coins[i], 1));
+        EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), MAX_MONEY - prices[i] + 1);
+
+        SetMoney(&gSaveBlock1Ptr->money, MAX_MONEY - prices[i]);
+        EXPECT_EQ(Ichor_QuoteToMoneychanger(), TRUE);
+        EXPECT(CheckBagHasItem(coins[i], 1));
+        EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), MAX_MONEY - prices[i]);
+        EXPECT_EQ(Ichor_SellToMoneychanger(), TRUE);
+        EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), MAX_MONEY);
+        EXPECT(!CheckBagHasItem(coins[i], 1));
+        EXPECT_EQ(Ichor_QuoteToMoneychanger(), FALSE);
+    }
     SetMoney(&gSaveBlock1Ptr->money, 0);
 }

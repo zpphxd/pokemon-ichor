@@ -442,23 +442,42 @@ void Ichor_DigFinish(void)
     }
 }
 
+static u32 MoneychangerPrice(u32 item)
+{
+    return GetItemSellPrice(item) * (100 + gSpecialVar_0x8005) / 100;
+}
+
+// Quote without removing an item; the sale checks capacity again.
+u16 Ichor_QuoteToMoneychanger(void)
+{
+    u32 item = gSpecialVar_0x8004, paid;
+
+    if (item == ITEM_NONE || item >= ITEMS_COUNT || !CheckBagHasItem(item, 1))
+        return FALSE;
+    paid = MoneychangerPrice(item);
+    if (paid == 0 || paid > MAX_MONEY - GetMoney(&gSaveBlock1Ptr->money))
+        return FALSE;
+    ConvertIntToDecimalStringN(gStringVar1, paid, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+    return TRUE;
+}
+
 // specialvar Ichor_SellToMoneychanger: a moneychanger (Pasion in Emporion,
 // Astyra's) buys one VAR_0x8004 (a coin, or anything that sells) for the
 // market's price plus VAR_0x8005 percent; blessings count as at a market.
 // TRUE if sold, with the money paid in STR_VAR_1. FALSE if you have none, or
-// it can't be sold.
+// it can't be sold, or the full payment would exceed the money cap.
 u16 Ichor_SellToMoneychanger(void)
 {
     u32 item = gSpecialVar_0x8004, paid;
 
     if (item == ITEM_NONE || item >= ITEMS_COUNT || !CheckBagHasItem(item, 1))
         return FALSE;
-    paid = GetItemSellPrice(item) * (100 + gSpecialVar_0x8005) / 100;
-    if (paid == 0)
+    paid = MoneychangerPrice(item);
+    if (paid == 0 || paid > MAX_MONEY - GetMoney(&gSaveBlock1Ptr->money))
         return FALSE;
     RemoveBagItem(item, 1);
     AddMoney(&gSaveBlock1Ptr->money, paid);
-    ConvertIntToDecimalStringN(gStringVar1, paid, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar1, paid, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     return TRUE;
 }
 

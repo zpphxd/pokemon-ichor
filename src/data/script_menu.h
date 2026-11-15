@@ -1133,8 +1133,32 @@ struct MultichoiceListStruct
     u8 count;
 };
 
+static const struct MenuAction sMultichoiceList_IchorUnwoven[] =
+{
+    {COMPOUND_STRING("WHY?"), {NULL}},
+    {COMPOUND_STRING("HOW DO YOU KNOW?"), {NULL}},
+};
+
+static const struct MenuAction sMultichoiceList_IchorCoins[] =
+{
+    {COMPOUND_STRING("Bronze Obol"), {NULL}},
+    {COMPOUND_STRING("Silver Owl"), {NULL}},
+    {COMPOUND_STRING("Gold Stater"), {NULL}},
+    {COMPOUND_STRING("EXIT"), {NULL}},
+};
+
+static const struct MenuAction sMultichoiceList_IchorDifficulty[] =
+{
+    {COMPOUND_STRING("Mortal"), {NULL}},
+    {COMPOUND_STRING("Hero"), {NULL}},
+    {COMPOUND_STRING("Spartan"), {NULL}},
+};
+
 static const struct MultichoiceListStruct sMultichoiceLists[] =
 {
+    [MULTI_ICHOR_DIFFICULTY] = MULTICHOICE(sMultichoiceList_IchorDifficulty),
+    [MULTI_ICHOR_COINS] = MULTICHOICE(sMultichoiceList_IchorCoins),
+    [MULTI_ICHOR_UNWOVEN] = MULTICHOICE(sMultichoiceList_IchorUnwoven),
     [MULTI_BRINEY_ON_DEWFORD]          = MULTICHOICE(MultichoiceList_BrineyOnDewford),
     [MULTI_PC]                         = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_ENTERINFO]                  = MULTICHOICE(MultichoiceList_EnterInfo),

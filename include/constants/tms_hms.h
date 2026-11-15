@@ -51,7 +51,10 @@
     F(STEEL_WING) \
     F(SKILL_SWAP) \
     F(SNATCH) \
-    F(OVERHEAT)
+    F(OVERHEAT) \
+    F(FLING) \
+    F(BULLDOZE) \
+    F(ROUND)
 
 #define FOREACH_HM(F) \
     F(CUT) \

@@ -7644,6 +7644,21 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_AphroditeBone,
         .iconPalette = gItemIconPalette_AphroditeBone,
     },
+    [ITEM_STAR_CHART] =
+    {
+        .name = ITEM_NAME("Star Chart"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "When sure of\n"
+            "a story, people put\n"
+            "it in the sky."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_TownMap,
+        .iconPalette = gItemIconPalette_TownMap,
+    },
 
 // Gems
 #if I_PRICE >= GEN_9
@@ -13393,7 +13408,10 @@ const struct ItemInfo gItemsInfo[] =
     {
         .name = ITEM_NAME("TM51"),
         .price = 3000,
-        .description = COMPOUND_STRING("?????"), // Todo
+        .description = COMPOUND_STRING(
+            "Hurls a held item\n"
+            "at the foe. Power\n"
+            "varies by item."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -13404,7 +13422,10 @@ const struct ItemInfo gItemsInfo[] =
     {
         .name = ITEM_NAME("TM52"),
         .price = 3000,
-        .description = COMPOUND_STRING("?????"), // Todo
+        .description = COMPOUND_STRING(
+            "Stomps the ground.\n"
+            "Lowers the SPEED\n"
+            "of those hit."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -13415,7 +13436,10 @@ const struct ItemInfo gItemsInfo[] =
     {
         .name = ITEM_NAME("TM53"),
         .price = 3000,
-        .description = COMPOUND_STRING("?????"), // Todo
+        .description = COMPOUND_STRING(
+            "A song that grows\n"
+            "stronger as allies\n"
+            "join in the round."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,

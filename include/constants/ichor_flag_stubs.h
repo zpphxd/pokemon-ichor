@@ -15,12 +15,4 @@
 #define FLAG_ICHOR_ARRIVED_EMPORION FLAG_ICHOR_CROSSING_DONE
 #endif
 
-// Beat 25 (world-act1, batch 5): Daphne's revelation ends Act I. Read by
-// Emporion's runners (the letter home) and the hiring hall (empty after Act I).
-// Until beat 25 exists it reads the fourth Laurel's flag, which no one can hold
-// before Act II begins.
-#ifndef FLAG_ICHOR_ACT1_COMPLETE
-#define FLAG_ICHOR_ACT1_COMPLETE FLAG_BADGE04_GET
-#endif
-
 #endif // GUARD_CONSTANTS_ICHOR_FLAG_STUBS_H

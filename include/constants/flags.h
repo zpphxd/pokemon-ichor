@@ -1755,6 +1755,21 @@
 #define FLAG_ICHOR_ITEM_ROUTE4_SUN_STONE        (FLAG_ICHOR_GENERAL_START + 0x00E) // Ichor: Route 4: Sun Stone in the terrace orchard (the Sickle)
 #define FLAG_ICHOR_ITEM_ROUTE4_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x00F) // Ichor: Route 4: Great Ball in the woods clearing (the Hammer)
 #define FLAG_ICHOR_ITEM_ROUTE4_SPELL_TAG        (FLAG_ICHOR_GENERAL_START + 0x010) // Ichor: Route 4: Spell Tag at Hecate's crossroads shrine in the glade
+#define FLAG_ICHOR_KLEON_LEFT_FOR_THYRSA        (FLAG_ICHOR_GENERAL_START + 0x011) // Ichor: Kleon left Eleusa after the sanctum theft
+#define FLAG_ICHOR_DAPHNE_REVELATION            (FLAG_ICHOR_GENERAL_START + 0x012) // Ichor: Daphne explained the Unwoven and gave the Star Chart
+#define FLAG_ICHOR_GOT_STAR_CHART               (FLAG_ICHOR_GENERAL_START + 0x013) // Ichor: received the Star Chart at Eleusa
+#define FLAG_ICHOR_ACT1_COMPLETE                (FLAG_ICHOR_GENERAL_START + 0x014) // Ichor: completed the Unwoven act
+#define FLAG_ICHOR_HIDE_DAPHNE_ELEUSA           (FLAG_ICHOR_GENERAL_START + 0x015) // Ichor: Daphne absent from the Telesterion
+#define FLAG_ICHOR_HIDE_ALETHEA_ELEUSA          (FLAG_ICHOR_GENERAL_START + 0x016) // Ichor: Alethea absent from Eleusa village
+#define FLAG_ICHOR_HIDE_ALETHEA_REVELATION      (FLAG_ICHOR_GENERAL_START + 0x017) // Ichor: Alethea absent from the revelation scene
+#define FLAG_ICHOR_ELEUSA_VINES_WEST_CUT        (FLAG_ICHOR_GENERAL_START + 0x018) // Ichor: cut the west vines on the Eleutherai road
+#define FLAG_ICHOR_ELEUSA_VINES_MIDWEST_CUT     (FLAG_ICHOR_GENERAL_START + 0x019) // Ichor: cut the middle-west vines on the Eleutherai road
+#define FLAG_ICHOR_ELEUSA_VINES_MIDEAST_CUT     (FLAG_ICHOR_GENERAL_START + 0x01A) // Ichor: cut the middle-east vines on the Eleutherai road
+#define FLAG_ICHOR_ELEUSA_VINES_EAST_CUT        (FLAG_ICHOR_GENERAL_START + 0x01B) // Ichor: cut the east vines on the Eleutherai road
+#define FLAG_ICHOR_LEFT_ELEUSA_WITH_ALETHEA     (FLAG_ICHOR_GENERAL_START + 0x01C) // Ichor: passed the Eleutherai vines with Alethea after Act I
+#define FLAG_ICHOR_MYRTALE_PRIZE_PENDING        (FLAG_ICHOR_GENERAL_START + 0x01D) // Ichor: Myrtale owes the first-win Fling scroll until the Bag has room
+#define FLAG_ICHOR_HIDE_OMEN_NEMECUB            (FLAG_ICHOR_GENERAL_START + 0x01E) // Ichor: Isthmus hill-spur visitor; hidden after capture or defeat
+#define FLAG_ICHOR_DIFFICULTY_CHOSEN            (FLAG_ICHOR_GENERAL_START + 0x01F) // Ichor: Mortal, Hero or Spartan selected before leaving the bedroom
 #define FLAG_ICHOR_HECATES_HOUND                (FLAG_ICHOR_GENERAL_START + 0x020) // Ichor: beat 18: Hecate's hound (Lykopup, static, night) at the Hekataion caught or beaten
 #define FLAG_ICHOR_HOLLOW_RAKNIT                (FLAG_ICHOR_GENERAL_START + 0x021) // Ichor: Hecate's Hollow: the web chamber's Raknit (static, after the Arachne amphora) caught or beaten
 #define FLAG_ICHOR_MET_HOLLOW_CRONE             (FLAG_ICHOR_GENERAL_START + 0x022) // Ichor: beat 18: heard the old woman out at Hecate's Hollow's east mouth
@@ -1803,6 +1818,8 @@
 #define FLAG_ICHOR_LESSER_MYSTERIES_DONE        (FLAG_ICHOR_GENERAL_START + 0x083) // Ichor: the Telesterion: the fourth brazier lit, Chloe revealed
 #define FLAG_ICHOR_MET_DOSO                     (FLAG_ICHOR_GENERAL_START + 0x084) // Ichor: the Telesterion: Doso's welcome heard
 #define FLAG_ICHOR_HIDE_CHLOE_TELESTERION       (FLAG_ICHOR_GENERAL_START + 0x085) // Ichor: the Telesterion: Chloe unseen in the Anaktoron's doorway until the fourth brazier
+#define FLAG_ICHOR_HIDE_OMEN_KORANTHA           (FLAG_ICHOR_GENERAL_START + 0x08E) // Ichor: Eleusa's daily flower-crowned visitor; hidden after capture or defeat
+#define FLAG_ICHOR_HIDE_OMEN_PITHOUND           (FLAG_ICHOR_GENERAL_START + 0x08F) // Ichor: Emporion's marked-jar visitor; consumed after capture or defeat
 #define FLAG_ICHOR_GOT_KYKEON                   (FLAG_ICHOR_GENERAL_START + 0x090) // Ichor: Eleusa: Metaneira gave the goddess's drink, Fresh Water and Barley Cakes, after Laurel 3
 #define FLAG_ICHOR_GOT_TM_BULLET_SEED           (FLAG_ICHOR_GENERAL_START + 0x091) // Ichor: Eleusa: Theano gave TM09 Bullet Seed in Dysaules's farmhouse
 #define FLAG_ICHOR_GOT_AMULET_COIN              (FLAG_ICHOR_GENERAL_START + 0x092) // Ichor: Eleusa: Sitokles gave the Amulet Coin his family kept by the cold iron, after the theft
@@ -1842,7 +1859,7 @@
 #define FLAG_ICHOR_ARRIVED_EMPORION             (FLAG_ICHOR_GENERAL_START + 0x0C0) // Ichor: beat 11: stepped off the Euploia onto Emporion's quay (the herald's welcome played)
 #define FLAG_ICHOR_VISITED_EMPORION             (FLAG_ICHOR_GENERAL_START + 0x0C1) // Ichor: Emporion visited (fly target)
 #define FLAG_ICHOR_RITES_TUTORIAL               (FLAG_ICHOR_GENERAL_START + 0x0C2) // Ichor: beat 11: prayed at the quay herm with Kerykos; his three Olive Oil (ICHOR_STUB_OFFERINGS until the item exists)
-#define FLAG_ICHOR_GOT_TROWEL                   (FLAG_ICHOR_GENERAL_START + 0x0C3) // Ichor: beat 11: Alethea's Trowel (ICHOR_STUB_OFFERINGS until the item exists)
+#define FLAG_ICHOR_GOT_TROWEL                   (FLAG_ICHOR_GENERAL_START + 0x0C3) // Ichor: beat 11: Alethea gave the Trowel
 #define FLAG_ICHOR_HIDE_KLEON_QUAY              (FLAG_ICHOR_GENERAL_START + 0x0C4) // Ichor: hide beat 11's Kleon on Emporion's quay
 #define FLAG_ICHOR_HIDE_KERYKOS_QUAY            (FLAG_ICHOR_GENERAL_START + 0x0C5) // Ichor: hide beat 11's Kerykos on Emporion's quay
 #define FLAG_ICHOR_HIDE_ALETHEA_QUAY            (FLAG_ICHOR_GENERAL_START + 0x0C6) // Ichor: hide beat 11's Alethea on Emporion's quay
@@ -1851,12 +1868,12 @@
 #define FLAG_ICHOR_HIDE_KLEON_ISTHMUS_GATE      (FLAG_ICHOR_GENERAL_START + 0x0C9) // Ichor: hide Kleon at the Isthmus Gate (SCRIPT.md's _SACRED_GATE)
 #define FLAG_ICHOR_KLEON_BATTLE_2_DONE          (FLAG_ICHOR_GENERAL_START + 0x0CA) // Ichor: beat 16: Kleon's second battle at the Isthmus Gate fought
 #define FLAG_ICHOR_WON_KLEON_2                  (FLAG_ICHOR_GENERAL_START + 0x0CB) // Ichor: beat 16: won Kleon's second battle
-#define FLAG_ICHOR_DAEDALUS_PAGE_1              (FLAG_ICHOR_GENERAL_START + 0x0CC) // Ichor: traded Glykera an Olive Oil for Daedalus's page I (LABYRINTH.md seed; until the page item exists)
+#define FLAG_ICHOR_DAEDALUS_PAGE_1              (FLAG_ICHOR_GENERAL_START + 0x0CC) // Ichor: traded Glykera Olive Oil for page I; also sets FLAG_ICHOR_PAGES_START
 #define FLAG_ICHOR_NUMBER_NINE_UNTIED           (FLAG_ICHOR_GENERAL_START + 0x0CD) // Ichor: untied Number Nine, who walked off his plinth (also hides him)
 #define FLAG_ICHOR_HIDE_SYKEAS_HARPECK          (FLAG_ICHOR_GENERAL_START + 0x0CE) // Ichor: hide the snatcher on Sykeas's awning (beaten, caught or fled)
 #define FLAG_ICHOR_GOT_SYKEAS_FIGS              (FLAG_ICHOR_GENERAL_START + 0x0CF) // Ichor: Sykeas gave his figs and the Pretty Feather
 #define FLAG_ICHOR_MET_HALITHERSES              (FLAG_ICHOR_GENERAL_START + 0x0D0) // Ichor: talked to Halitherses the augur on Emporion's mole once
-#define FLAG_ICHOR_DUG_EMPORION_QUAY            (FLAG_ICHOR_GENERAL_START + 0x0D1) // Ichor: beat 11: dug the Arachne sherd from the planter by the quay herm (ICHOR_STUB_DIG)
+#define FLAG_ICHOR_DUG_EMPORION_QUAY            (FLAG_ICHOR_GENERAL_START + 0x0D1) // Ichor: beat 11: dug the Arachne sherd from the quay planter
 #define FLAG_ICHOR_HERM_EMPORION                (FLAG_ICHOR_GENERAL_START + 0x0D2) // Ichor: anointed the great herm at Emporion's crossroads (ICHOR_STUB_HERM)
 #define FLAG_ICHOR_ITEM_EMPORION_SUPER_POTION   (FLAG_ICHOR_GENERAL_START + 0x0D3) // Ichor: item ball: Super Potion on the ship sheds' slipway
 #define FLAG_ICHOR_ITEM_EMPORION_X_SPEED        (FLAG_ICHOR_GENERAL_START + 0x0D4) // Ichor: item ball: X Speed at the end of the stoa
@@ -1880,6 +1897,7 @@
 #define FLAG_DAILY_ICHOR_GENERAL_COUNT          (ICHOR_DAILY_FLAGS_COUNT - 0x90)
 // Ichor daily bank flags: claim.py dailyflag adds lines here, in order.
 #define FLAG_DAILY_ICHOR_FESTIVAL_JOINED        (FLAG_DAILY_ICHOR_GENERAL_START + 0x000) // Ichor: joined today's festival: its god's +5 Favor is given (engine, ENGINE_API §7)
+#define FLAG_DAILY_ICHOR_AUGURY_READ            (FLAG_DAILY_ICHOR_GENERAL_START + 0x040) // Ichor: heard today's shared omen; prevents repeated augur blessings
 // Ichor daily bank flags: end
 
 // Temp flag aliases

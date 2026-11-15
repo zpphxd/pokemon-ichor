@@ -1083,6 +1083,7 @@ enum __attribute__((packed)) Item
     ITEM_ALETHEAS_TROWEL = 894,
     // Ichor: Mom's lucky knucklebone (design/SYSTEMS.md §9): one extra rethrow a match
     ITEM_APHRODITE_BONE = 895,
+    ITEM_STAR_CHART = 896,
 
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,
