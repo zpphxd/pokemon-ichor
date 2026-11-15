@@ -72,7 +72,7 @@ Native checks, four regressions, helpers, build and smoke pass. Both matching
 galleries cover seventeen cameras across nine maps. The real Merchant is
 mostly occluded by his counter; complete body/motion evidence is on the native
 sheet, not misrepresented as a full-body in-game shot. All local walker
-implementations are now present; these three await creative approval.
+implementations are now present and artistically accepted at checkpoint scope.
 The previous temple/augur checkpoint is accepted. Seven class portraits and local
 healing effects remain.
 
