@@ -57,7 +57,25 @@
 #define TRAINERS_END_POSTGAME                 0
 
 // The Oikoumene, ids 680-819 and 864-1023: the second map.
-#define TRAINERS_END_OIKOUMENE                0
+// Egypt (egypt-towns, batch 1): the Delta Reeds 700-708, Pharos 709-713, Memphis's
+// desert road 935-936.
+#define TRAINER_ICHOR_PA                           700
+#define TRAINER_ICHOR_SOBEKHOTEP                   701
+#define TRAINER_ICHOR_NEBAMUN                      702
+#define TRAINER_ICHOR_MERIT                        703
+#define TRAINER_ICHOR_ANKHU                        704
+#define TRAINER_ICHOR_TIYE                         705
+#define TRAINER_ICHOR_IUNY                         706
+#define TRAINER_ICHOR_KHETY                        707
+#define TRAINER_ICHOR_MENNA                        708
+#define TRAINER_ICHOR_THAIS                        709
+#define TRAINER_ICHOR_HARPALOS                     710
+#define TRAINER_ICHOR_NESO                         711
+#define TRAINER_ICHOR_KALLIAS                      712
+#define TRAINER_ICHOR_ARSINOE                      713
+#define TRAINER_ICHOR_AMENEMOPE                    935
+#define TRAINER_ICHOR_NEFERTARI                    936
+#define TRAINERS_END_OIKOUMENE                937
 
 // Ids 820-863 are the director's reserve. 864-1023 are the Oikoumene's (above).
 

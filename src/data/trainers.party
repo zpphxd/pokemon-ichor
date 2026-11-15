@@ -432,3 +432,329 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 
 /* Ichor: the Oikoumene (ids 680-819) */
+
+/* Ichor: the Oikoumene, Egypt */
+
+/* ICHOR_STUB_CLASS: Nile Boatman (stand-in Sailor) */
+=== TRAINER_ICHOR_PA ===
+Name: PA
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Whiscash
+Level: 70
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Pelipper
+Level: 70
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Nile Boatman (stand-in Sailor) */
+=== TRAINER_ICHOR_SOBEKHOTEP ===
+Name: SOBEKHOTEP
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Quagsire
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Feraligatr
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Barraskewda
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Priest of the Sun (stand-in Augur) */
+=== TRAINER_ICHOR_NEBAMUN ===
+Name: NEBAMUN
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Intense
+Double Battle: No
+AI: Basic Trainer
+
+Solrock
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Torkoal
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Xatu
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Nile Boatman (stand-in Sailor) */
+=== TRAINER_ICHOR_MERIT ===
+Name: MERIT
+Class: Sailor
+Pic: Sailor
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+
+Masquerain
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Araquanid
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Scribe of Thoth (stand-in Psychic) */
+=== TRAINER_ICHOR_ANKHU ===
+Name: ANKHU
+Class: Psychic
+Pic: Psychic M
+Gender: Male
+Music: Intense
+Double Battle: No
+AI: Basic Trainer
+
+Bronzong
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Claydol
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Xatu
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Priest of the Sun (stand-in Augur) */
+=== TRAINER_ICHOR_TIYE ===
+Name: TIYE
+Class: Augur
+Pic: Augur
+Gender: Female
+Music: Intense
+Double Battle: No
+AI: Basic Trainer
+
+Sunflora
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Torkoal
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Espeon
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Nile Boatman (stand-in Fisherman) */
+=== TRAINER_ICHOR_IUNY ===
+Name: IUNY
+Class: Fisherman
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+Double Battle: No
+AI: Basic Trainer
+
+Seaking
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Gyarados
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Lanturn
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Embalmer (stand-in Hex Maniac) */
+=== TRAINER_ICHOR_KHETY ===
+Name: KHETY
+Class: Hex Maniac
+Pic: Hex Maniac
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Basic Trainer
+
+Banette
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Dusknoir
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Phoenician Trader (stand-in Expert) */
+=== TRAINER_ICHOR_MENNA ===
+Name: MENNA
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: No
+AI: Basic Trainer
+
+Sandaconda
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Excadrill
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Krookodile
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Nile Boatman (stand-in Shepherd) */
+=== TRAINER_ICHOR_THAIS ===
+Name: THAIS
+Class: Shepherd
+Pic: Shepherd
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+
+Dewgong
+Level: 70
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Pelipper
+Level: 70
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Nile Boatman (stand-in Sailor) */
+=== TRAINER_ICHOR_HARPALOS ===
+Name: HARPALOS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Lanturn
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Kingdra
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Nile Boatman (stand-in Swimmer F) */
+=== TRAINER_ICHOR_NESO ===
+Name: NESO
+Class: Swimmer F
+Pic: Swimmer F
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+
+Cloyster
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Lumineon
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Phoenician Trader (stand-in Expert) */
+=== TRAINER_ICHOR_KALLIAS ===
+Name: KALLIAS
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: No
+AI: Basic Trainer
+
+Dodrio
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Furfrou
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Probopass
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Priest of the Sun (stand-in Augur) */
+=== TRAINER_ICHOR_ARSINOE ===
+Name: ARSINOE
+Class: Augur
+Pic: Augur
+Gender: Female
+Music: Intense
+Double Battle: No
+AI: Basic Trainer
+
+Solrock
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Starmie
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Priest of the Sun (stand-in Augur) */
+=== TRAINER_ICHOR_AMENEMOPE ===
+Name: AMENEMOPE
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Intense
+Double Battle: No
+AI: Basic Trainer
+
+Ninetales
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Xatu
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Arcanine
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Embalmer (stand-in Hex Maniac) */
+=== TRAINER_ICHOR_NEFERTARI ===
+Name: NEFERTARI
+Class: Hex Maniac
+Pic: Hex Maniac
+Gender: Female
+Music: Suspicious
+Double Battle: No
+AI: Basic Trainer
+
+Sableye
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Mismagius
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Chandelure
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe

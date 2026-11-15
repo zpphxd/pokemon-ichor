@@ -1275,14 +1275,14 @@
 #define FLAG_UNUSED_0x4C5                                           0x4C5 // Unused Flag
 #define FLAG_UNUSED_0x4C6                                           0x4C6 // Unused Flag
 #define FLAG_UNUSED_0x4C7                                           0x4C7 // Unused Flag
-#define FLAG_UNUSED_0x4C8                                           0x4C8 // Unused Flag
-#define FLAG_UNUSED_0x4C9                                           0x4C9 // Unused Flag
-#define FLAG_UNUSED_0x4CA                                           0x4CA // Unused Flag
-#define FLAG_UNUSED_0x4CB                                           0x4CB // Unused Flag
-#define FLAG_UNUSED_0x4CC                                           0x4CC // Unused Flag
-#define FLAG_UNUSED_0x4CD                                           0x4CD // Unused Flag
-#define FLAG_UNUSED_0x4CE                                           0x4CE // Unused Flag
-#define FLAG_UNUSED_0x4CF                                           0x4CF // Unused Flag
+#define FLAG_ICHOR_HIDDEN_DELTA_BIG_ROOT                            0x4C8 // Ichor: hidden item: Delta Reeds, by the fishing pool, Big Root
+#define FLAG_ICHOR_HIDDEN_DELTA_REVIVE                              0x4C9 // Ichor: hidden item: Delta Reeds, the second narrows, Revive
+#define FLAG_ICHOR_HIDDEN_DELTA_HEART_SCALE                         0x4CA // Ichor: hidden item: Delta Reeds, the first tower's foot, Heart Scale
+#define FLAG_ICHOR_HIDDEN_DELTA_SHINY_STONE                         0x4CB // Ichor: hidden item: Delta Reeds, Thoth's pillar, Shiny Stone
+#define FLAG_ICHOR_HIDDEN_PHAROS_BIG_PEARL                          0x4CC // Ichor: hidden item: Pharos's knoll, Big Pearl
+#define FLAG_ICHOR_HIDDEN_PHAROS_STAR_PIECE                         0x4CD // Ichor: hidden item: Pharos's lagoon, Star Piece
+#define FLAG_ICHOR_HIDDEN_NAUKRATIS_PEARL                           0x4CE // Ichor: hidden item: Naukratis's last bollard, Pearl
+#define FLAG_ICHOR_HIDDEN_MEMPHIS_RARE_BONE                         0x4CF // Ichor: hidden item: Memphis's herd pen, Rare Bone
 #define FLAG_UNUSED_0x4D0                                           0x4D0 // Unused Flag
 #define FLAG_UNUSED_0x4D1                                           0x4D1 // Unused Flag
 #define FLAG_UNUSED_0x4D2                                           0x4D2 // Unused Flag
@@ -1756,6 +1756,18 @@
 #define FLAG_ICHOR_SHORTCUT_ROSE                (FLAG_ICHOR_GENERAL_START + 0x3DD) // Ichor: Periodos: tower of Kronos midpoint shortcut open
 #define FLAG_ICHOR_OIKOUMENE_ARRIVED            (FLAG_ICHOR_GENERAL_START + 0x3DE) // Ichor: Oikoumene: first landed at any Oikoumene port (Alethea's quay scene; the AETHOS and THE OIKOUMENE fly targets)
 #define FLAG_ICHOR_SUPER_ROD_GIVEN              (FLAG_ICHOR_GENERAL_START + 0x3DF) // Ichor: Oikoumene: a first-port fisher gave the Super Rod (the others give a Big Pearl)
+#define FLAG_ICHOR_ITEM_PHAROS_MYSTIC_WATER     (FLAG_ICHOR_GENERAL_START + 0x404) // Ichor: item ball: Pharos's headland, Mystic Water
+#define FLAG_ICHOR_ITEM_PHAROS_ULTRA_BALL       (FLAG_ICHOR_GENERAL_START + 0x405) // Ichor: item ball: Pharos's dunes, Ultra Ball
+#define FLAG_ICHOR_ITEM_PHAROS_PEARL_STRING     (FLAG_ICHOR_GENERAL_START + 0x406) // Ichor: item ball: Pharos's sandbar, Pearl String
+#define FLAG_ICHOR_ITEM_DELTA_MIRACLE_SEED      (FLAG_ICHOR_GENERAL_START + 0x407) // Ichor: item ball: Delta Reeds, east reeds, Miracle Seed
+#define FLAG_ICHOR_ITEM_DELTA_DUSK_BALL         (FLAG_ICHOR_GENERAL_START + 0x408) // Ichor: item ball: Delta Reeds, first pool's bank, Dusk Ball
+#define FLAG_ICHOR_ITEM_DELTA_ISLET             (FLAG_ICHOR_GENERAL_START + 0x409) // Ichor: item ball: Delta Reeds, the islet (surf), Mystic Water
+#define FLAG_ICHOR_ITEM_DELTA_FULL_RESTORE      (FLAG_ICHOR_GENERAL_START + 0x40A) // Ichor: item ball: Delta Reeds, the reed corridor's end, Full Restore
+#define FLAG_ICHOR_ITEM_DELTA_ULTRA_BALL        (FLAG_ICHOR_GENERAL_START + 0x40B) // Ichor: item ball: Delta Reeds, third pool's bank, Ultra Ball
+#define FLAG_ICHOR_ITEM_MEMPHIS_SOFT_SAND       (FLAG_ICHOR_GENERAL_START + 0x40C) // Ichor: item ball: Memphis's desert road, Soft Sand
+#define FLAG_ICHOR_ITEM_NAUKRATIS_AMPHORA       (FLAG_ICHOR_GENERAL_START + 0x40D) // Ichor: item ball: Naukratis's quay, Lucky Egg left by a sailor
+#define FLAG_ICHOR_PHAROS_HERDER_GIFT           (FLAG_ICHOR_GENERAL_START + 0x40E) // Ichor: Pharos: the seal-herder gave his herd's Shell Bell
+#define FLAG_ICHOR_DELTA_GNAT_GIFT              (FLAG_ICHOR_GENERAL_START + 0x40F) // Ichor: Delta Reeds: the gnat-tower granny gave Silver Powder
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end

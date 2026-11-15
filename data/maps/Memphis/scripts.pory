@@ -1,1 +1,115 @@
+// Memphis: the old capital inside its White Walls (design/OIKOUMENE.md §4.5;
+// design/oikoumene/PERIODOS.md §4.5). Built by tools/ichor/maps/memphis.py.
+//
+// The pylon of the precinct of Proteus is batch 2's hall: its doors stay shut and a
+// Carian guard turns visitors away (ICHOR_STUB_HALL). The south edge is left open
+// for the Nile and the Pyramid Field (batch 2).
+// ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for The Black Land.
+
 mapscripts Memphis_MapScripts {}
+
+text Memphis_Text_NameHermon { "HERMON" }
+
+// --- the city ----------------------------------------------------------------
+
+script Memphis_EventScript_CitySign {
+    msgbox(format("MEMPHIS\nThe White Walls. Capital of the Black Land since before anyone wrote it down."), MSGBOX_SIGN)
+}
+
+script Memphis_EventScript_SouthSign {
+    msgbox(format("South: the Nile road.\nWest, past the dunes: the pyramids."), MSGBOX_SIGN)
+}
+
+script Memphis_EventScript_Sphinx {
+    msgbox(format("The alabaster sphinx. It wears the face of a pharaoh nobody can name any more."), MSGBOX_SIGN)
+}
+
+script Memphis_EventScript_Obelisk {
+    msgbox(format("An obelisk. Top to bottom, both sides, it says the pharaoh is very great."), MSGBOX_SIGN)
+}
+
+script Memphis_EventScript_SacredWay {
+    msgbox(format("THE PRECINCT OF PROTEUS\nPharaoh receives at the pylon. Strangers welcome. Tyrians especially."), MSGBOX_SIGN)
+}
+
+script Memphis_EventScript_PylonRelief {
+    msgbox(format("Pharaoh smites a kneeling enemy. The enemy looks as if he's heard all this before."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_HALL: batch 2 replaces these with the hall's door.
+script Memphis_EventScript_PylonDoor {
+    msgbox(format("The bronze doors are shut. Behind them, something hisses, then roars, then splashes."), MSGBOX_SIGN)
+}
+
+script Memphis_EventScript_PylonGuard {
+    lock
+    faceplayer
+    setspeaker(Memphis_Text_NameHermon)
+    msgbox(format("Pharaoh isn't receiving challengers yet. The court's rehearsing.\p"
+                  "I'm Carian. We've kept the pharaohs' doors since Psamtik hired us. Pays better than Caria."))
+    release
+}
+
+script Memphis_EventScript_Herd {
+    lock
+    faceplayer
+    playmoncry(SPECIES_TAUROS, CRY_MODE_NORMAL)
+    msgbox(format("A Tauros from the temple herd. It looks at you as if it might be a god."))
+    waitmoncry
+    release
+}
+
+script Memphis_EventScript_Herdsman {
+    msgbox(format("One of these is the true Apis, the keepers say. Black, a white triangle on the brow...\p"
+                  "I just feed them. Ask the keepers, in the byre."), MSGBOX_NPC)
+}
+
+script Memphis_EventScript_Baker {
+    msgbox(format("Bread for the walls! The walls don't eat, but the guards do."), MSGBOX_NPC)
+}
+
+script Memphis_EventScript_PotSeller {
+    msgbox(format("Naukratis ware, up the river this morning. The Greeks paint the people too thin."), MSGBOX_NPC)
+}
+
+script Memphis_EventScript_Greek {
+    msgbox(format("Herodotus came through here asking questions. The priests told him all sorts.\p"
+                  "He wrote every word down. Even the ones they were joking about."), MSGBOX_NPC)
+}
+
+script Memphis_EventScript_Tyrian {
+    msgbox(format("We Tyrians camp round the precinct. Have done for generations.\p"
+                  "The pharaoh calls it our quarter. We call it a very long stopover."), MSGBOX_NPC)
+}
+
+script Memphis_EventScript_SphinxSage {
+    msgbox(format("The sphinx asks nobody riddles. That's the one in Thebes. The Greek one.\p"
+                  "Ours just lies here looking pleased with itself."), MSGBOX_NPC)
+}
+
+script Memphis_EventScript_Kid {
+    msgbox(format("I counted the obelisk's birds. There are eleven ibises and one I think is a duck."), MSGBOX_NPC)
+}
+
+script Memphis_EventScript_Priestess {
+    msgbox(format("They say the Stranger's temple is inside the precinct. A woman lives there.\p"
+                  "Some say she's the most beautiful in the world. She says Sparta's cold."), MSGBOX_NPC)
+}
+
+// --- the desert road ------------------------------------------------------------
+
+script Memphis_EventScript_Amenemope {
+    trainerbattle_single(TRAINER_ICHOR_AMENEMOPE, Memphis_Text_AmenemopeIntro, Memphis_Text_AmenemopeDefeat)
+    msgbox(format("Heliopolis is north and east, across the river. The sun lives there. Mostly."), MSGBOX_AUTOCLOSE)
+}
+
+text Memphis_Text_AmenemopeIntro { format("Facing the sun, I didn't see you. Now that I do, battle!") }
+text Memphis_Text_AmenemopeDefeat { format("Blinding. Truly.") }
+
+script Memphis_EventScript_Nefertari {
+    trainerbattle_single(TRAINER_ICHOR_NEFERTARI, Memphis_Text_NefertariIntro, Memphis_Text_NefertariDefeat)
+    msgbox(format("The tombs out west are quiet. I like quiet. My Pokémon don't."), MSGBOX_AUTOCLOSE)
+}
+
+text Memphis_Text_NefertariIntro { format("Off to the tombs with my linen. You'll do for practice.") }
+text Memphis_Text_NefertariDefeat { format("Wrapped up, and so quickly.") }
