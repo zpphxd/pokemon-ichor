@@ -1,0 +1,417 @@
+// Act III's trainers in Kythera and Melos: their Before, Defeat and After lines
+// (design/phase4/SCRIPT.md Part 3, "Kythera's trainers"), for the outdoor maps
+// to reference while those maps are being built. Parties are in
+// src/data/trainers.party, ids in include/constants/opponents.h (320-347).
+//
+// For each trainer <Name>:
+//   Kythera_Text_Speaker<Name>   the name box
+//   Kythera_Text_<Name>Intro     trainerbattle_single's intro text
+//   Kythera_Text_<Name>Defeat    its defeat text
+//   Kythera_Text_<Name>After     what they say once beaten
+//
+//   trainerbattle_single(TRAINER_ICHOR_<NAME>, Kythera_Text_<Name>Intro, Kythera_Text_<Name>Defeat)
+//   setspeaker(Kythera_Text_Speaker<Name>)
+//   msgbox(Kythera_Text_<Name>After, MSGBOX_AUTOCLOSE)
+//
+// Molybdos's Before and After are beat III-1C's (Skandeia), so he has only a
+// defeat line here. Galatea's intro is her speech before she steps down
+// (Part 1); the Laurel scene after the battle belongs to the temple map.
+// Ochros and Psephos, the bad guests, are fought in
+// data/maps/KytheraSkandeia_AxylosHouse/scripts.pory, with their texts.
+
+// -----------------------------------------------------------------------------
+// The Euploia, the southern voyage
+// -----------------------------------------------------------------------------
+
+text Kythera_Text_SpeakerEudoros { "EUDOROS" }
+
+text Kythera_Text_EudorosIntro {
+    format("Can't sleep. Nobody can. Might as well battle.")
+}
+
+text Kythera_Text_EudorosDefeat {
+    format("There. Now I'm tired. Thank you.")
+}
+
+text Kythera_Text_EudorosAfter {
+    format("Twelve ships, no lamps. Nobody rows dark unless ashamed.")
+}
+
+text Kythera_Text_SpeakerKerdon { "KERDON" }
+
+text Kythera_Text_KerdonIntro {
+    format("I bought forty jars of oil for Kythera. Then the Titans took the boats.")
+}
+
+text Kythera_Text_KerdonDefeat {
+    format("A loss. Another loss. It's a theme.")
+}
+
+text Kythera_Text_KerdonAfter {
+    format("Who needs oil when nobody can sail? Nobody. That's who.")
+}
+
+// -----------------------------------------------------------------------------
+// Melos
+// -----------------------------------------------------------------------------
+
+text Kythera_Text_SpeakerKimolos { "KIMOLOS" }
+
+text Kythera_Text_KimolosIntro {
+    format("Off the trireme? Everyone's off a trireme. Battle while they fill up.")
+}
+
+text Kythera_Text_KimolosDefeat {
+    format("Beaten before the jars are full. A record.")
+}
+
+text Kythera_Text_KimolosAfter {
+    format("The Titans watered here last night. Forty boats. Not one fish bought.")
+}
+
+text Kythera_Text_SpeakerTheion { "THEION" }
+
+text Kythera_Text_TheionIntro {
+    format("The master wants edges. Glass edges. I want my lunch. You'll do.")
+}
+
+text Kythera_Text_TheionDefeat {
+    format("Cut. Should've seen that coming. It's glass.")
+}
+
+text Kythera_Text_TheionAfter {
+    format("The Hand's crews dug all night. I fell asleep. They left me. Again.")
+}
+
+// -----------------------------------------------------------------------------
+// Route 22 (optional, by Surf)
+// -----------------------------------------------------------------------------
+
+text Kythera_Text_SpeakerKymaios { "KYMAIOS" }
+
+text Kythera_Text_KymaiosIntro {
+    format("All the way out here? You're braver than you look. Or wetter.")
+}
+
+text Kythera_Text_KymaiosDefeat {
+    format("Under I go.")
+}
+
+text Kythera_Text_KymaiosAfter {
+    format("Ships pass all night. No lamps. I keep my head down.")
+}
+
+text Kythera_Text_SpeakerAntalkidas { "ANTALKIDAS" }
+
+text Kythera_Text_AntalkidasIntro {
+    format("This channel's mine. Pay the toll. The toll's a battle.")
+}
+
+text Kythera_Text_AntalkidasDefeat {
+    format("Peace, then. On your terms.")
+}
+
+text Kythera_Text_AntalkidasAfter {
+    format("Anydros has no water. Fig tree died of thirst. Nobody lives there.")
+}
+
+text Kythera_Text_SpeakerNikandros { "NIKANDROS" }
+
+text Kythera_Text_NikandrosIntro {
+    format("The Myrtoan's rough. So am I. Battle?")
+}
+
+text Kythera_Text_NikandrosDefeat {
+    format("Rough, but not tough. Noted.")
+}
+
+text Kythera_Text_NikandrosAfter {
+    format("Don't go round Malea. You'll forget your mother's name.")
+}
+
+text Kythera_Text_SpeakerHagne { "HAGNE" }
+
+text Kythera_Text_HagneIntro {
+    format("There's a whole temple under us. One column sticks up. Mine.")
+}
+
+text Kythera_Text_HagneDefeat {
+    format("The column wins. It always does.")
+}
+
+text Kythera_Text_HagneAfter {
+    format("Something shiny at its foot. I'm saving it. Take it. I'll find another.")
+}
+
+// -----------------------------------------------------------------------------
+// Skandeia
+// -----------------------------------------------------------------------------
+
+text Kythera_Text_SpeakerMolybdos { "MOLYBDOS" }
+
+text Kythera_Text_MolybdosDefeat {
+    format("Lead sinks. Should've seen that coming.")
+}
+
+// -----------------------------------------------------------------------------
+// The Foam Road
+// -----------------------------------------------------------------------------
+
+text Kythera_Text_SpeakerAmphitos { "AMPHITOS" }
+
+text Kythera_Text_AmphitosIntro {
+    format("Shh. The fish are thinking. Oh, all right. Battle.")
+}
+
+text Kythera_Text_AmphitosDefeat {
+    format("The fish saw that. They'll never respect me now.")
+}
+
+text Kythera_Text_AmphitosAfter {
+    format("Aphrodite came out of this sea. She could send fish.")
+}
+
+text Kythera_Text_SpeakerSkopas { "SKOPAS" }
+
+text Kythera_Text_SkopasIntro {
+    format("Stand still. No, don't. I need you to move for this.")
+}
+
+text Kythera_Text_SkopasDefeat {
+    format("Wonderful. Do it again. No, don't.")
+}
+
+text Kythera_Text_SkopasAfter {
+    format("I came to carve the goddess. The marble here's pink. She'd look sunburnt.")
+}
+
+text Kythera_Text_SpeakerPontinos { "PONTINOS" }
+
+text Kythera_Text_PontinosIntro {
+    format("You walked out here? On the reef? Brave. Or tide-blind.")
+}
+
+text Kythera_Text_PontinosDefeat {
+    format("Sunk. Like a sponge.")
+}
+
+text Kythera_Text_PontinosAfter {
+    format("The tide comes in at dusk. I won't come for you.")
+}
+
+text Kythera_Text_SpeakerKassiteros { "KASSITEROS" }
+
+text Kythera_Text_KassiterosIntro {
+    format("For Knossa! Everything floats eventually. Help me push.")
+}
+
+text Kythera_Text_KassiterosDefeat {
+    format("You could've just helped me push.")
+}
+
+text Kythera_Text_KassiterosAfter {
+    format("It's not even downhill to Knossa. Why are we pushing it uphill?")
+}
+
+// -----------------------------------------------------------------------------
+// The Spring of Kallirhoe and Echo's caves
+// -----------------------------------------------------------------------------
+
+text Kythera_Text_SpeakerPhilotes { "PHILOTES" }
+
+text Kythera_Text_PhilotesIntro {
+    format("She doesn't know I exist. Battle me. Distract me.")
+}
+
+text Kythera_Text_PhilotesDefeat {
+    format("Even my Pokémon don't love me back.")
+}
+
+text Kythera_Text_PhilotesAfter {
+    format("Look at him, by the pool. That's what love does. I'm going to be like that.")
+}
+
+text Kythera_Text_SpeakerKalamis { "KALAMIS" }
+
+text Kythera_Text_KalamisIntro {
+    format("Quiet. You'll scare the echo.")
+}
+
+text Kythera_Text_KalamisDefeat {
+    format("Beaten.\p"
+           "VOICE: …beaten.\p"
+           "Yes, thank you.")
+}
+
+text Kythera_Text_KalamisAfter {
+    format("I found a pink stone in a fish once. My Aphrell went all beautiful.")
+}
+
+text Kythera_Text_SpeakerKolymbos { "KOLYMBOS" }
+
+text Kythera_Text_KolymbosIntro {
+    format("Who's there? Light, then you. Fine. Battle.")
+}
+
+text Kythera_Text_KolymbosDefeat {
+    format("Down I go.")
+}
+
+text Kythera_Text_KolymbosAfter {
+    format("The voice repeats you. Don't say anything twice.")
+}
+
+// -----------------------------------------------------------------------------
+// The Temple of Aphrodite
+// -----------------------------------------------------------------------------
+
+text Kythera_Text_SpeakerAnthousa { "ANTHOUSA" }
+
+text Kythera_Text_AnthousaIntro {
+    format("You turned round to look at me. Good. Always look at a lady.")
+}
+
+text Kythera_Text_AnthousaDefeat {
+    format("Lovely. Truly lovely.")
+}
+
+text Kythera_Text_AnthousaAfter {
+    format("The stand mirrors turn. Point one down your path.")
+}
+
+text Kythera_Text_SpeakerRhodanthe { "RHODANTHE" }
+
+text Kythera_Text_RhodantheIntro {
+    format("The statues watched you all the way here. So did I.")
+}
+
+text Kythera_Text_RhodantheDefeat {
+    format("You didn't look away once. I'm impressed.")
+}
+
+text Kythera_Text_RhodantheAfter {
+    format("She planted the first pomegranate. Here, we say.")
+}
+
+text Kythera_Text_SpeakerGalatea { "GALATEA" }
+
+text Kythera_Text_GalateaIntro {
+    format("You looked away. Everyone does, in the end.\p"
+           "Don't be embarrassed. I spent a long time being looked at.\p"
+           "I was perfect once. Marble. Then someone loved me, and I cracked.\p"
+           "It's the best thing that ever happened to me.\p"
+           "I've cracked all over since.\p"
+           "My statues are the ones who stayed perfect.\p"
+           "They hate being looked away from.\p"
+           "Show me what you love. And whether you'll let it change.")
+}
+
+text Kythera_Text_GalateaDefeat {
+    format("There. A crack. They always start somewhere.")
+}
+
+// -----------------------------------------------------------------------------
+// The Neraida falls
+// -----------------------------------------------------------------------------
+
+text Kythera_Text_SpeakerLykidas { "LYKIDAS" }
+
+text Kythera_Text_LykidasIntro {
+    format("The falls stopped singing. So I sing to the goats. Battle?")
+}
+
+text Kythera_Text_LykidasDefeat {
+    format("Even the goats looked sorry for me.")
+}
+
+text Kythera_Text_LykidasAfter {
+    format("A poet wrote about a goatherd called Lykidas. A better one.")
+}
+
+text Kythera_Text_SpeakerKerinthos { "KERINTHOS" }
+
+text Kythera_Text_KerinthosIntro {
+    format("Careful! The hives. Battle me over there. No, there.")
+}
+
+text Kythera_Text_KerinthosDefeat {
+    format("The bees saw. They'll talk.")
+}
+
+text Kythera_Text_KerinthosAfter {
+    format("The bees went quiet with the falls. Odd, isn't it?")
+}
+
+text Kythera_Text_SpeakerMopsos { "MOPSOS" }
+
+text Kythera_Text_MopsosIntro {
+    format("The birds told me you'd cross. They didn't say whether you'd win.")
+}
+
+text Kythera_Text_MopsosDefeat {
+    format("The birds never say whether. Only that.")
+}
+
+text Kythera_Text_MopsosAfter {
+    format("Every bird here flew east a week ago. Then back.")
+}
+
+text Kythera_Text_SpeakerThestylis { "THESTYLIS" }
+
+text Kythera_Text_ThestylisIntro {
+    format("You climbed the falls? With a horn? Show me what else you've got.")
+}
+
+text Kythera_Text_ThestylisDefeat {
+    format("Cut down. Like a reed.")
+}
+
+text Kythera_Text_ThestylisAfter {
+    format("Reeds grow back. That's the nice thing about reeds.")
+}
+
+// -----------------------------------------------------------------------------
+// Route 23 and Antikythera (optional)
+// -----------------------------------------------------------------------------
+
+text Kythera_Text_SpeakerBathyllos { "BATHYLLOS" }
+
+text Kythera_Text_BathyllosIntro {
+    format("Out here on purpose? Me too. The sponges are better past the stakes.")
+}
+
+text Kythera_Text_BathyllosDefeat {
+    format("Back to the bottom with me.")
+}
+
+text Kythera_Text_BathyllosAfter {
+    format("Old Skyllias says there's a box of wheels out here. Mad.")
+}
+
+text Kythera_Text_SpeakerEuthykles { "EUTHYKLES" }
+
+text Kythera_Text_EuthyklesIntro {
+    format("They took every boat but mine. Battle, to celebrate.")
+}
+
+text Kythera_Text_EuthyklesDefeat {
+    format("Lost to someone without a boat. Embarrassing.")
+}
+
+text Kythera_Text_EuthyklesAfter {
+    format("I'm not going in till they've gone. I sleep on the islet.")
+}
+
+text Kythera_Text_SpeakerMyrsine { "MYRSINE" }
+
+text Kythera_Text_MyrsineIntro {
+    format("That wreck's mine. I found it. Well. Skyllias found it. I found it second.")
+}
+
+text Kythera_Text_MyrsineDefeat {
+    format("Second again.")
+}
+
+text Kythera_Text_MyrsineAfter {
+    format("Something shiny's in the ribs. You've got longer arms.")
+}

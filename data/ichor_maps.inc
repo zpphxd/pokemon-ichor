@@ -1,5 +1,7 @@
 @ Ichor map scripts, included from data/event_scripts.s.
 @ tools/ichor/new_map.py appends to this file.
+@ Shared trainer texts for maps still being built (Poryscript, data/scripts/):
+	.include "data/scripts/ichor_act3_kythera_trainers.inc"
 	.include "data/maps/ElaiaVillage/scripts.inc"
 	.include "data/maps/KallisteRoute1/scripts.inc"
 	.include "data/maps/AktiTown/scripts.inc"
