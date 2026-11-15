@@ -5,6 +5,8 @@
 #include "constants/ichor.h"
 #include "constants/items.h"
 #include "constants/map_groups.h"
+#include "constants/opponents.h"
+#include "constants/trainer_types.h"
 
 K(MAP_ROUTE1, MAP_KALLISTE_ROUTE1)
 K(ITEM_LABRYS, ITEM_LABRYS)
@@ -42,3 +44,7 @@ K(OFF_SB1_FLASH_LEVEL, offsetof(struct SaveBlock1, flashLevel))
 K(SPRITE_SIZE, sizeof(struct Sprite))
 K(OFF_OBJ_SPRITE_ID, offsetof(struct ObjectEvent, spriteId))
 K(OFF_OBJ_FACING, 0x18)
+K(TRAINER_ICHOR_TITYROS, TRAINER_ICHOR_TITYROS)
+K(TRAINER_TYPE_ICHOR_SENTRY, TRAINER_TYPE_ICHOR_SENTRY)
+K(FLAG_ICHOR_DISGUISE_ON, FLAG_ICHOR_DISGUISE_ON)
+K(FLAG_SYS_B_DASH, FLAG_SYS_B_DASH)

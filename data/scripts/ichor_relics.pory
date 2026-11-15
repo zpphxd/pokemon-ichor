@@ -521,3 +521,45 @@ script EventScript_IchorRelicRing {
         special(Ichor_UseRingChoice)
     }
 }
+
+// ---------------------------------------------------------------------------
+// Carried flames (SYSTEMS §2). A brazier that gives its fire:
+//   setvar(VAR_0x8004, FLAME_HEARTH) setvar(VAR_0x8005, 20) special(Ichor_TakeFlame)
+// A windy doorway's coord event: call(EventScript_IchorDraught)
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorFlameGutters {
+    lockall
+    msgbox(format("The flame gutters."), MSGBOX_DEFAULT)
+    closemessage
+    releaseall
+    end
+}
+
+script EventScript_IchorFlameSpent {
+    lockall
+    msgbox(format("The carried fire dies down to the torch's own flame."), MSGBOX_DEFAULT)
+    closemessage
+    releaseall
+    end
+}
+
+script EventScript_IchorFlameDrowned {
+    lockall
+    msgbox(format("The water puts out the carried fire."), MSGBOX_DEFAULT)
+    closemessage
+    releaseall
+    end
+}
+
+script EventScript_IchorDraught {
+    if (var(VAR_TEMP_3) == FLAME_NONE) {
+        return
+    }
+    lockall
+    special(Ichor_PutOutFlame)
+    msgbox(format("A draught snuffs out the carried fire."), MSGBOX_DEFAULT)
+    closemessage
+    releaseall
+    return
+}
