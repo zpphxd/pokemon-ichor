@@ -48,8 +48,8 @@ species:
     - this one remembers the first. It can take
     - the shape of any Pokémon.
   habitat: >-
-    The Pool of Mnemosyne, Arkadia (post-game). Suggested: it surfaces from the
-    pool as a golden drop once you have seen all 151 other Aethos species
+    The Pool of Mnemosyne, Arkadia (post-game). Suggested: it rises from the
+    pool, haloed in gold, once you have seen all 151 other Aethos species
     (static, level 70, one only).
   learnset:
     level_up:

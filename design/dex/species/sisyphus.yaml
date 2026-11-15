@@ -25,23 +25,27 @@ species:
     to roll a boulder up a hill forever, and it always rolls back down (Odyssey
     11.593–600; Theognis 702–712).
   expression: >-
-    A ghost that has made peace with its punishment. It pushes the boulder
-    because pushing is what it does, and the grin says it still thinks it got
-    the better deal.
+    A ghost that has made peace with its punishment, so long ago that the
+    boulder has grown into its back. It hauls the stone uphill because that is
+    what it does, and the grin says it still thinks it got the better deal.
   art: >-
-    Medium-large: it fills about 52×50 px, mostly boulder. A squat gray ghost in
-    three-quarter view facing left, bent forward with one shoulder and both long
-    arms braced against a round boulder bigger than itself, its legs fading into
-    a wisp that trails downhill. A wide, toothy grin and one eye squeezed shut
-    from effort. Marble-gray boulder with a limestone highlight and one crack,
-    the ghost in dark marble with a pale violet type accent in the wisp and a
-    sun-gold glint in the open eye, black-figure ink outline. The follower
-    pushes its boulder a tile ahead, and every so often the boulder rolls back.
+    Large: it fills about 62×60 px. A ghost hauling itself uphill in
+    three-quarter view facing left, a craggy boulder grown into its back and
+    leaning forward over it, with a ridge of stone spines along the top like
+    vertebrae. Shadow-flesh swells round the base of the stone where they have
+    fused, a violet meander glows around its girth, and a crack of violet light
+    runs down the stone into its arm. Its head has two stone stubs on the brow,
+    one wide gold eye, one eye screwed shut and a wide grin; its forearm ends in
+    a carved stone fist braced on the slope, and its legs are smoke fading into
+    wisps. Marble-gray boulder with flecks of moss, dusk-violet and ink
+    shadow-flesh, a violet glow, a sun-gold eye, black-figure ink outline. Frame
+    2 crackles light along the crack; the follower hauls itself along on its
+    knuckles and now and then slides back a tile.
   shiny: The boulder turns terracotta and the ghost pales to marble white.
   dex_entry:
-    - It rolls its boulder up the slope all day.
-    - At the top the stone slips and rolls back
-    - down. It only grins and starts again. It
+    - It hauls its boulder up the slope all day.
+    - At the top it slips and rolls back down.
+    - It only grins and starts again. It
     - once tied up Death with a chain, they say.
   habitat: >-
     The endless slope in Tartarus, deepest of the post-game Katabasis. Common

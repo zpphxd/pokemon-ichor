@@ -27,13 +27,15 @@ species:
     the next ones are waiting. It hatches only in rain because Lerna's marsh
     was fed by springs that never ran dry.
   art: >-
-    Small: it fills about 32×30 px. A stubby marsh serpent hatchling in
-    three-quarter view facing left, crouched low on four short legs with a
-    curl of tail behind and a scrap of eggshell stuck to it. One big head with a
-    wide mouth and two small knobs on its neck where more heads will grow.
-    Cypress-green and olive scales with a limestone belly, a poison-violet
-    accent in its spots and drool, a sun-gold eye, black-figure ink outline. The
-    follower waddles and snaps at flies.
+    Small: it fills about 42×38 px. A stubby marsh dragon hatchling standing
+    upright in three-quarter view facing left, with a big head under a cap of
+    eggshell, a big sun-gold eye with a gold freckle on its brow, and a wide
+    mouth open on a violet tongue. A forked bud of two knobs sits at the base of
+    its neck where more heads will grow, and its short curled tail ends in a
+    violet tip. Cypress-green and olive scales with a limestone belly,
+    poison-violet spots and tongue, sun-gold eye and freckle, marble eggshell,
+    black-figure ink outline. Frame 2 bobs its head; the follower waddles and
+    snaps at flies.
   shiny: The scales turn Aegean blue and the spots turn sun-gold.
   dex_entry:
     - It hatches only after heavy rain, in the
@@ -97,13 +99,16 @@ species:
     larger, with a bud of gold on its brow that hints at the head that can't
     die.
   art: >-
-    Medium: it fills about 50×50 px. A heavier marsh serpent in three-quarter
-    view facing left, standing on four clawed legs, with three heads on
-    S-curved necks; the middle head is largest and carries a small sun-gold
-    crest. A fresh stump on one shoulder shows two tiny heads budding from it.
-    Cypress-green and olive scales, a limestone belly, poison-violet spines and
-    venom, sun-gold crest and eyes, black-figure ink outline. The back sprite
-    shows the necks splitting from one trunk.
+    Medium-large: it fills about 60×57 px. A heavy marsh dragon standing upright
+    on two thick legs in three-quarter view facing left, clawed hands raised,
+    its single neck forking at a glowing violet regrowth seam into three heads
+    on their own S-curves. The middle head rises highest with a gold bud on its
+    brow, each head wears a violet crest, and violet buds swell on a cut stump
+    below the right neck. Violet spines run down its back to a violet-tipped
+    tail. Cypress-green and olive scales, a limestone throat stripe,
+    poison-violet seams, spines and spots, sun-gold eyes and bud, black-figure
+    ink outline. Frame 2 sways the heads as the seam pulses; the back sprite
+    shows the neck splitting from one trunk.
   shiny: The scales turn Aegean blue and the crest turns marble white.
   dex_entry:
     - Cut off one of its heads and two grow
@@ -171,15 +176,17 @@ species:
     the second Labor of the post-game and the ace of Olympias, the Serpent Queen,
     who holds Hera's Dragon seat because Hera raised it.
   art: >-
-    Largest: it fills the whole 64×64 box. A massive marsh hydra in
-    three-quarter view facing left, crouched in mud on four thick legs with a
-    heavy tail, seven heads rising on long necks in a fan. Six are
-    cypress-green with violet-spined crests, and the seventh, in the middle and
-    raised highest, is solid sun-gold with calm marble eyes. Cypress and olive
-    scales, a limestone belly, poison-violet venom dripping from the jaws,
-    sun-gold center head, black-figure ink outline. The back sprite shows the
-    necks rising from a broad, spined back; the follower's heads look in every
-    direction at once.
+    Largest: it fills the whole 64×64 box. A massive marsh dragon standing
+    upright on thick legs in three-quarter view facing left, its trunk of a neck
+    forking and forking again at glowing violet regrowth seams into five heads.
+    Four cypress-green heads with violet crests branch out in pairs to either
+    side, and the golden immortal head rises highest in the middle on a golden
+    neck, with a long spiked crest and a calm eye. Violet spines and spots run
+    down its back and heavy tail. Cypress and olive scales, a limestone throat
+    stripe, poison-violet seams, spines and venom, a sun-gold head, black-figure
+    ink outline. Frame 2 sways the side heads while the golden head stays still;
+    the back sprite shows the golden head rising from a broad, spined back, and
+    the follower's heads look in every direction at once.
   shiny: The scales turn deep Aegean blue and the golden head turns marble white.
   dex_entry:
     - Of all its heads, the golden one in the
