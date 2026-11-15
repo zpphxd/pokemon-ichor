@@ -35,7 +35,7 @@ text ElaiaVillage_Name_Philon { "PHILON" }
 text ElaiaVillage_Name_Kleon { "KLEON" }
 text ElaiaVillage_Name_Alethea { "ALETHEA" }
 text ElaiaVillage_Name_Gylippos { "GYLIPPOS" }
-text ElaiaVillage_Name_Wooloo { "WOOLOO" }
+text ElaiaVillage_Name_Eripip { "ERIPIP" }
 text ElaiaVillage_Name_Scribe { "SCRIBE" }
 
 // Who stands where depends on how far the story has got.
@@ -313,11 +313,11 @@ script ElaiaVillage_EventScript_KleonTrigger {
     setflag(FLAG_ICHOR_NO_WHITEOUT)
     switch (var(VAR_STARTER_MON)) {
         case 0:
-            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_ELAIA_CYNDAQUIL, ElaiaVillage_Text_KleonDefeat)
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_ELAIA_KYNDER, ElaiaVillage_Text_KleonDefeat)
         case 1:
-            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_ELAIA_PIPLUP, ElaiaVillage_Text_KleonDefeat)
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_ELAIA_HIPLING, ElaiaVillage_Text_KleonDefeat)
         default:
-            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_ELAIA_SNIVY, ElaiaVillage_Text_KleonDefeat)
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_ELAIA_NEBREL, ElaiaVillage_Text_KleonDefeat)
     }
     clearflag(FLAG_ICHOR_NO_WHITEOUT)
     specialvar(VAR_RESULT, GetBattleOutcome)
@@ -326,7 +326,7 @@ script ElaiaVillage_EventScript_KleonTrigger {
         setflag(FLAG_ICHOR_WON_KLEON_1)
         msgbox(format("Huh. …Lucky.\pNo. Fair. You beat me. Remember it. It won't happen twice."))
     } else {
-        msgbox(format("Ha! See? Glory. It follows me around like a hungry Wooloo.\pDon't make that face. You'll get me next time. Probably not."))
+        msgbox(format("Ha! See? Glory. It follows me around like a hungry Galekit.\pDon't make that face. You'll get me next time. Probably not."))
     }
     setspeaker(ElaiaVillage_Name_Kleon)
     msgbox(format("I'm off to Akti. The Hearthkeeper has a laurel with my name on it."))
@@ -461,7 +461,7 @@ script ElaiaVillage_EventScript_Philon {
     faceplayer
     setspeaker(ElaiaVillage_Name_Philon)
     if (flag(FLAG_ICHOR_GOT_STARTER)) {
-        msgbox(format("Daphne gave me a Wooloo. It sat on me. I think that means yes."))
+        msgbox(format("Daphne gave me a Galekit. It bit me. I think that means yes."))
     } elif (flag(FLAG_ICHOR_THREAD_READ)) {
         msgbox(format("A knot near the start. Is the start today? It feels like today."))
     } else {
@@ -506,15 +506,15 @@ script ElaiaVillage_EventScript_Gylippos {
 }
 
 script ElaiaVillage_EventScript_Kid {
-    msgbox(format("My Wooloo ate the festival garland. Don't tell Halia."), MSGBOX_NPC)
+    msgbox(format("My Eripip ate the festival garland. Don't tell Halia."), MSGBOX_NPC)
 }
 
-script ElaiaVillage_EventScript_KidsWooloo {
+script ElaiaVillage_EventScript_KidsEripip {
     lock
     faceplayer
-    playmoncry(SPECIES_WOOLOO, CRY_MODE_NORMAL)
-    setspeaker(ElaiaVillage_Name_Wooloo)
-    msgbox(format("Baa!"))
+    playmoncry(SPECIES_ERIPIP, CRY_MODE_NORMAL)
+    setspeaker(ElaiaVillage_Name_Eripip)
+    msgbox(format("Mee-eh! Its fleece crackles."))
     waitmoncry
     release
 }

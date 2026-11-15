@@ -134,8 +134,8 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_ELAIA_WOOLOO",
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "local_id": "LOCALID_ELAIA_KIDS_ERIPIP",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(ERIPIP)",
       "x": 22,
       "y": 20,
       "elevation": 3,
@@ -144,7 +144,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ElaiaVillage_EventScript_KidsWooloo",
+      "script": "ElaiaVillage_EventScript_KidsEripip",
       "flag": "0"
     },
     {

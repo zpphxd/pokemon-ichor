@@ -4,7 +4,7 @@
 #
 #   tools/ichor/tests/slice_playthrough.sh [rom]     (default: pokeemerald.gba; run make first)
 #
-# Env: SLICE_STARTER 0 Snivy (default) / 1 Cyndaquil / 2 Piplup
+# Env: SLICE_STARTER 0 Nebrel (default) / 1 Kynder / 2 Hipling
 #      SLICE_GENDER  theo (default) / ianthe
 #      SLICE_OUT     output folder (default build/slice/)
 #      SLICE_FROM    a beat name (e.g. 07_temple): resume from the save state an

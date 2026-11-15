@@ -111,9 +111,9 @@ script KallisteRoute1_KronionHill_EventScript_SummitScene {
     setspeaker(KallisteRoute1_KronionHill_Text_SpeakerAmathos)
     msgbox(format("Fine. FINE. There's nothing down there anyway."))
     setspeaker(KallisteRoute1_KronionHill_Text_SpeakerPetros)
-    msgbox(format("Nosepass hasn't twitched once. I told you it was wrong hill."))
+    msgbox(format("Pebblith hasn't twitched once. I told you it was wrong hill."))
     setspeaker(KallisteRoute1_KronionHill_Text_SpeakerAmathos)
-    msgbox(format("Stop talking about the Nosepass."))
+    msgbox(format("Stop talking about the Pebblith."))
     setspeaker(KallisteRoute1_KronionHill_Text_SpeakerPetros)
     msgbox(format("Hyperion's going to roast us."))
     setspeaker(KallisteRoute1_KronionHill_Text_SpeakerAmathos)
@@ -305,7 +305,7 @@ script KallisteRoute1_KronionHill_EventScript_Pit {
 }
 
 // --- the high pastures, the hill's south flank (a branch off the hill foot) ----
-// Herders from Theocritus: Menalkas and Thyrsis keep sheep, Lykidas goats.
+// Herders from Theocritus: Menalkas, Thyrsis and Lykidas keep the hill's goats.
 text KallisteRoute1_KronionHill_Text_SpeakerMenalkas { "MENALKAS" }
 text KallisteRoute1_KronionHill_Text_SpeakerThyrsis { "THYRSIS" }
 text KallisteRoute1_KronionHill_Text_SpeakerLykidas { "LYKIDAS" }
@@ -318,7 +318,7 @@ script KallisteRoute1_KronionHill_EventScript_HermFork {
 script KallisteRoute1_KronionHill_EventScript_Menalkas {
     trainerbattle_single(TRAINER_ICHOR_MENALKAS, KallisteRoute1_KronionHill_Text_MenalkasIntro, KallisteRoute1_KronionHill_Text_MenalkasDefeat)
     setspeaker(KallisteRoute1_KronionHill_Text_SpeakerMenalkas)
-    msgbox(format("The sheep won't graze near the old shrine. They never have."), MSGBOX_AUTOCLOSE)
+    msgbox(format("The goats won't graze near the old shrine. They never have."), MSGBOX_AUTOCLOSE)
 }
 
 text KallisteRoute1_KronionHill_Text_MenalkasIntro {
@@ -363,28 +363,28 @@ script KallisteRoute1_KronionHill_EventScript_PanShrine {
     msgbox(format("A little shrine to Pan, the shepherds' god.\pSomeone left him a cheese. Something has nibbled it."), MSGBOX_SIGN)
 }
 
-script KallisteRoute1_KronionHill_EventScript_FoldWooloo {
+script KallisteRoute1_KronionHill_EventScript_FoldGoat {
     lock
     faceplayer
-    playmoncry(SPECIES_WOOLOO, CRY_MODE_NORMAL)
-    msgbox(format("Baa?"))
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    msgbox(format("Meh-eh?"))
     waitmoncry
     release
 }
 
-script KallisteRoute1_KronionHill_EventScript_FoldMareep {
+script KallisteRoute1_KronionHill_EventScript_FoldKid {
     lock
     faceplayer
-    playmoncry(SPECIES_MAREEP, CRY_MODE_NORMAL)
-    msgbox(format("Mee-eep! Its fleece crackles."))
+    playmoncry(SPECIES_ERIPIP, CRY_MODE_NORMAL)
+    msgbox(format("Mee-eh! Its fleece crackles."))
     waitmoncry
     release
 }
 
-script KallisteRoute1_KronionHill_EventScript_Skiddo {
+script KallisteRoute1_KronionHill_EventScript_Goat {
     lock
     faceplayer
-    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
     msgbox(format("Meh-eh! It's chewing the thyme."))
     waitmoncry
     release

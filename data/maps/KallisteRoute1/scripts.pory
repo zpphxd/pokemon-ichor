@@ -20,7 +20,7 @@ text KallisteRoute1_Text_SpeakerAgis { "AGIS" }
 text KallisteRoute1_Text_SpeakerPolyeidos { "POLYEIDOS" }
 text KallisteRoute1_Text_SpeakerThestylis { "THESTYLIS" }
 
-// --- the carter and her Mudbray (south grove) --------------------------------
+// --- the carter and her Onotis donkey (south grove) ---------------------------
 script KallisteRoute1_EventScript_Carter {
     lock
     faceplayer
@@ -34,18 +34,18 @@ script KallisteRoute1_EventScript_Carter {
     }
     msgbox(format("It's goat's milk. The bottle says Moomoo. Don't ask me why."))
     closemessage
-    call(KallisteRoute1_EventScript_MudbrayBrays)
+    call(KallisteRoute1_EventScript_DonkeyBrays)
     release
 }
 
-script KallisteRoute1_EventScript_Mudbray {
+script KallisteRoute1_EventScript_Donkey {
     lock
-    call(KallisteRoute1_EventScript_MudbrayBrays)
+    call(KallisteRoute1_EventScript_DonkeyBrays)
     release
 }
 
-script KallisteRoute1_EventScript_MudbrayBrays {
-    playmoncry(SPECIES_MUDBRAY, CRY_MODE_NORMAL)
+script KallisteRoute1_EventScript_DonkeyBrays {
+    playmoncry(SPECIES_ONOTIS, CRY_MODE_NORMAL)
     msgbox(format("Hrrrnk!"))
     waitmoncry
     closemessage
@@ -56,21 +56,21 @@ script KallisteRoute1_EventScript_WallYouth {
     msgbox(format("No partner for me. Daphne said “next year.”\pShe said that last year too. I'm starting to see a pattern."), MSGBOX_NPC)
 }
 
-// --- Wooloo -----------------------------------------------------------------
-script KallisteRoute1_EventScript_GrazingWooloo {
+// --- the goats: Kerazap ---------------------------------------------------------
+script KallisteRoute1_EventScript_GrazingGoat {
     lock
     faceplayer
-    playmoncry(SPECIES_WOOLOO, CRY_MODE_NORMAL)
-    msgbox(format("Baa?"))
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    msgbox(format("Meh-eh? Its fleece crackles."))
     waitmoncry
     release
 }
 
 // Amaryllis's flock, planted across the road until the ruins are cleared.
-script KallisteRoute1_EventScript_FlockWooloo {
+script KallisteRoute1_EventScript_FlockGoat {
     lock
-    playmoncry(SPECIES_WOOLOO, CRY_MODE_NORMAL)
-    msgbox(format("Baaa."))
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    msgbox(format("Mehhh."))
     waitmoncry
     release
 }
@@ -78,9 +78,9 @@ script KallisteRoute1_EventScript_FlockWooloo {
 script KallisteRoute1_EventScript_Amaryllis {
     setspeaker(KallisteRoute1_Text_SpeakerAmaryllis)
     if (!flag(FLAG_ICHOR_RUINS_CLEARED)) {
-        msgbox(format("They won't budge. Not one of them. Not since sunrise.\pThe ground's been humming up on Kronion Hill. Feel it?\pSheep know things. Mostly about grass. But they know things."), MSGBOX_NPC)
+        msgbox(format("They won't budge. Not one of them. Not since sunrise.\pThe ground's been humming up on Kronion Hill. Feel it?\pGoats know things. Mostly about grass. But they know things."), MSGBOX_NPC)
     } else {
-        msgbox(format("They're moving! The humming stopped and they just… went.\pWhatever you did up there, the flock thanks you. Baa."), MSGBOX_NPC)
+        msgbox(format("They're moving! The humming stopped and they just… went.\pWhatever you did up there, the flock thanks you. Meh."), MSGBOX_NPC)
     }
 }
 
@@ -104,7 +104,7 @@ script KallisteRoute1_EventScript_OliveFarmer {
 script KallisteRoute1_EventScript_Tityros {
     trainerbattle_single(TRAINER_ICHOR_TITYROS, KallisteRoute1_Text_TityrosIntro, KallisteRoute1_Text_TityrosDefeat)
     setspeaker(KallisteRoute1_Text_SpeakerTityros)
-    msgbox(format("Sheep are easy. Stand still, look like grass."), MSGBOX_AUTOCLOSE)
+    msgbox(format("Goats are easy. Stand still, look like thyme."), MSGBOX_AUTOCLOSE)
 }
 
 text KallisteRoute1_Text_TityrosIntro {
@@ -143,7 +143,7 @@ text KallisteRoute1_Text_PhyllisIntro {
 }
 
 text KallisteRoute1_Text_PhyllisDefeat {
-    format("That's fair. My Smoliv were up since dawn too.")
+    format("That's fair. My Elaleaf were up since dawn too.")
 }
 
 script KallisteRoute1_EventScript_Komatas {

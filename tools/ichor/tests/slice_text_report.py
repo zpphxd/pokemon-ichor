@@ -42,6 +42,8 @@ growlithe geodude drilbur nosepass silicobra machop minccino fletchling lillipup
 horsea krabby finizen corsola wailmer pokédex pokémon poké moomoo hrrrnk baaa baa chaaan whumpf kalliste's
 herm herms halcyon facade tm42 ichor mom hearthkeeper woodsmoke seabed mainland sitrus stardust louder safer
 ooh hm kingfishers healers has glykera kimon arion thranites
+nebrel kynder hipling galekit eripip kerazap onotis elaleaf epopoi kampillar ergant pebblith halcyling ketofry
+karkipool narkeray eopeep narthip melibee harpeck chelonet spalunk nemecub meh mehhh mee hades namesake
 """.split()
 
 

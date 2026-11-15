@@ -449,7 +449,7 @@ script AktiTown_EventScript_FishersHouseSign {
 script AktiTown_EventScript_Goat {
     lock
     faceplayer
-    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
     msgbox(format("Mehhh! It's chewing a clothes peg."))
     waitmoncry
     release
@@ -460,7 +460,7 @@ script AktiTown_EventScript_Goat {
 script AktiTown_EventScript_LooseGoat {
     lock
     faceplayer
-    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
     msgbox(format("Mehhh! It has a wet sock in its mouth.\p"
                   "It looks at you. It looks at the goat pen.\p"
                   "It trots off home, sock and all."))

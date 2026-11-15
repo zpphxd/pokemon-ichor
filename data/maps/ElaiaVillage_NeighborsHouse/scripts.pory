@@ -1,9 +1,10 @@
-// Kydippe's house: the old midwife, her Chansey, and two Oran Berries.
+// Kydippe's house: the old midwife, her Galekit, and two Oran Berries. (Galanthis,
+// the servant who tricked Eileithyia at Herakles's birth, became the first weasel.)
 
 mapscripts ElaiaVillage_NeighborsHouse_MapScripts {}
 
 text ElaiaVillage_NeighborsHouse_Name_Kydippe { "KYDIPPE" }
-text ElaiaVillage_NeighborsHouse_Name_Chansey { "CHANSEY" }
+text ElaiaVillage_NeighborsHouse_Name_Galekit { "GALEKIT" }
 
 script ElaiaVillage_NeighborsHouse_EventScript_Kydippe {
     lock
@@ -21,12 +22,12 @@ script ElaiaVillage_NeighborsHouse_EventScript_Kydippe {
     release
 }
 
-script ElaiaVillage_NeighborsHouse_EventScript_Chansey {
+script ElaiaVillage_NeighborsHouse_EventScript_Galekit {
     lock
     faceplayer
-    playmoncry(SPECIES_CHANSEY, CRY_MODE_NORMAL)
-    setspeaker(ElaiaVillage_NeighborsHouse_Name_Chansey)
-    msgbox(format("Chaaan!"))
+    playmoncry(SPECIES_GALEKIT, CRY_MODE_NORMAL)
+    setspeaker(ElaiaVillage_NeighborsHouse_Name_Galekit)
+    msgbox(format("Hee-hee-hee! It grins at the clay goddess in the niche."))
     waitmoncry
     release
 }

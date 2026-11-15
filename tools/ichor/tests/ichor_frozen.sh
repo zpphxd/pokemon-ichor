@@ -6,7 +6,7 @@
 # On Route 1: a person caught mid-stride; the hour entered by loading the map
 # with its flag set (gray palettes, the player in color, the flock frozen, the
 # music box, no wild battles in tall grass, a trainer who doesn't see you,
-# releaseall not thawing anyone); one Wooloo unfrozen with its color running
+# releaseall not thawing anyone); one Kerazap unfrozen with its color running
 # back in; a sepia memory; the twelve steps of color back; then the gray
 # spreading from a point. Output in build/test_ichor_frozen/.
 set -u

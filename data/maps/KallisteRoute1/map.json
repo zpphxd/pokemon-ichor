@@ -46,7 +46,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(MUDBRAY)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(ONOTIS)",
       "x": 17,
       "y": 54,
       "elevation": 3,
@@ -55,7 +55,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_EventScript_Mudbray",
+      "script": "KallisteRoute1_EventScript_Donkey",
       "flag": "0"
     },
     {
@@ -85,7 +85,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
       "x": 4,
       "y": 44,
       "elevation": 3,
@@ -94,11 +94,11 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_EventScript_GrazingWooloo",
+      "script": "KallisteRoute1_EventScript_GrazingGoat",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
       "x": 3,
       "y": 47,
       "elevation": 3,
@@ -107,7 +107,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_EventScript_GrazingWooloo",
+      "script": "KallisteRoute1_EventScript_GrazingGoat",
       "flag": "0"
     },
     {
@@ -216,7 +216,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
       "x": 11,
       "y": 14,
       "elevation": 3,
@@ -225,11 +225,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_EventScript_FlockWooloo",
+      "script": "KallisteRoute1_EventScript_FlockGoat",
       "flag": "FLAG_ICHOR_HIDE_ROUTE1_FLOCK"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
       "x": 12,
       "y": 14,
       "elevation": 3,
@@ -238,11 +238,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_EventScript_FlockWooloo",
+      "script": "KallisteRoute1_EventScript_FlockGoat",
       "flag": "FLAG_ICHOR_HIDE_ROUTE1_FLOCK"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
       "x": 13,
       "y": 14,
       "elevation": 3,
@@ -251,11 +251,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_EventScript_FlockWooloo",
+      "script": "KallisteRoute1_EventScript_FlockGoat",
       "flag": "FLAG_ICHOR_HIDE_ROUTE1_FLOCK"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
       "x": 12,
       "y": 12,
       "elevation": 3,
@@ -264,7 +264,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "KallisteRoute1_EventScript_FlockWooloo",
+      "script": "KallisteRoute1_EventScript_FlockGoat",
       "flag": "FLAG_ICHOR_HIDE_ROUTE1_FLOCK"
     },
     {

@@ -85,9 +85,12 @@ Gender: Male
 Music: Male
 Double Battle: No
 
-/* Ichor: the slice, Kalliste Isle (ids 1-14) */
+/* Ichor: the slice, Kalliste Isle (ids 1-14), with the Aethos dex's species
+   (BALANCE.md: Aethos's trainers use Aethos's Pokemon). Kleon's three teams are
+   named for his starter, the one that beats yours: VAR_STARTER_MON 0 (Nebrel)
+   faces _KYNDER, 1 (Kynder) faces _HIPLING, 2 (Hipling) faces _NEBREL. */
 
-=== TRAINER_ICHOR_KLEON_ELAIA_SNIVY ===
+=== TRAINER_ICHOR_KLEON_ELAIA_NEBREL ===
 Name: KLEON
 Class: Lakonian
 Pic: Kleon
@@ -96,11 +99,11 @@ Music: Rival
 Double Battle: No
 AI: Basic Trainer
 
-Snivy
+Nebrel
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-=== TRAINER_ICHOR_KLEON_ELAIA_CYNDAQUIL ===
+=== TRAINER_ICHOR_KLEON_ELAIA_KYNDER ===
 Name: KLEON
 Class: Lakonian
 Pic: Kleon
@@ -109,11 +112,11 @@ Music: Rival
 Double Battle: No
 AI: Basic Trainer
 
-Cyndaquil
+Kynder
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-=== TRAINER_ICHOR_KLEON_ELAIA_PIPLUP ===
+=== TRAINER_ICHOR_KLEON_ELAIA_HIPLING ===
 Name: KLEON
 Class: Lakonian
 Pic: Kleon
@@ -122,7 +125,7 @@ Music: Rival
 Double Battle: No
 AI: Basic Trainer
 
-Piplup
+Hipling
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -134,11 +137,11 @@ Gender: Male
 Music: Male
 AI: Check Bad Move
 
-Wooloo
+Galekit
 Level: 3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Mareep
+Eripip
 Level: 4
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -150,11 +153,11 @@ Gender: Female
 Music: Female
 AI: Check Bad Move
 
-Smoliv
+Elaleaf
 Level: 4
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Smoliv
+Elaleaf
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -166,11 +169,11 @@ Gender: Male
 Music: Hiker
 AI: Check Bad Move
 
-Skiddo
+Kerazap
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Combee
+Melibee
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -182,7 +185,7 @@ Gender: Male
 Music: Intense
 AI: Check Bad Move
 
-Machop
+Eopeep
 Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -194,11 +197,11 @@ Gender: Male
 Music: Suspicious
 AI: Check Bad Move
 
-Pidove
+Epopoi
 Level: 6
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Murkrow
+Harpeck
 Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -210,14 +213,14 @@ Gender: Male
 Music: Titan
 AI: Check Bad Move
 
-Geodude
+Spalunk
 Level: 8
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Tackle
-- Defense Curl
-- Rock Throw
+- Scratch
+- Sand Attack
+- Mud-Slap
 
-Drilbur
+Pebblith
 Level: 9
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -229,18 +232,19 @@ Gender: Female
 Music: Titan
 AI: Check Bad Move
 
-Nosepass
+Pebblith
 Level: 8
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Tackle
-- Harden
+- Defense Curl
 - Rock Throw
 
-Silicobra
+Chelonet
 Level: 9
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Sand Attack
-- Wrap
+- Tackle
+- Withdraw
+- Mud-Slap
 
 === TRAINER_ICHOR_LAMPON ===
 Name: LAMPON
@@ -250,11 +254,11 @@ Gender: Male
 Music: Male
 AI: Basic Trainer
 
-Minccino
+Onotis
 Level: 10
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
-Fletchling
+Epopoi
 Level: 10
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
@@ -266,11 +270,11 @@ Gender: Female
 Music: Female
 AI: Basic Trainer
 
-Tandemaus
+Galekit
 Level: 10
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
-Growlithe
+Narthip
 Level: 11
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
@@ -282,11 +286,11 @@ Gender: Female
 Music: Female
 AI: Basic Trainer
 
-Wooloo
+Eripip
 Level: 10
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
-Hoothoot
+Galekit
 Level: 11
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
@@ -299,29 +303,29 @@ Music: Female
 Items: Potion / Potion
 AI: Basic Trainer
 
-Lillipup
+Galekit
 Level: 12
-Ability: Vital Spirit
+Ability: Run Away
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Tackle
-- Leer
-- Work Up
+- Tail Whip
+- Quick Attack
 - Bite
 
-Munchlax @ Oran Berry
+Onotis @ Oran Berry
 Level: 13
-Ability: Thick Fat
+Ability: Own Tempo
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
-- Tackle
-- Lick
-- Defense Curl
-- Recycle
+- Stomp
+- Double Kick
+- Pay Day
+- Growl
 
-Litleo @ Sitrus Berry
+Nemecub @ Sitrus Berry
 Level: 14
-Ability: Unnerve
+Ability: Fur Coat
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
-- Ember
+- Fire Fang
 - Headbutt
 - Work Up
 - Leer
@@ -336,11 +340,11 @@ Gender: Female
 Music: Female
 AI: Check Bad Move
 
-Tandemaus
+Galekit
 Level: 4
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Nincada
+Ergant
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -352,11 +356,11 @@ Gender: Male
 Music: Male
 AI: Check Bad Move
 
-Rockruff
+Pebblith
 Level: 6
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Wooloo
+Eripip
 Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -368,11 +372,11 @@ Gender: Male
 Music: Male
 AI: Check Bad Move
 
-Igglybuff
+Chelonet
 Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Mareep
+Epopoi
 Level: 8
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -384,11 +388,11 @@ Gender: Male
 Music: Hiker
 AI: Check Bad Move
 
-Mudbray
+Onotis
 Level: 8
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Skiddo
+Kerazap
 Level: 9
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -536,9 +540,9 @@ Galekit
 Level: 13
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
-/* The Temple of Hermes (design/phase2/SCRIPT.md Part 3). The species are Aethos
- * stand-ins (ICHOR_STUB_AETHOS_DEX), so no Ability: lines. The dex adds Kerykos's:
- * Lophops Keen Eye, Halcyling Cloud Nine, Harpelle Pickpocket. */
+/* The Temple of Hermes (design/phase2/SCRIPT.md Part 3), with the Aethos dex's
+ * species. Kerykos's abilities are the dex's: Lophops Keen Eye, Halcyling Cloud
+ * Nine, Harpelle Pickpocket. */
 
 === TRAINER_ICHOR_PODARGE ===
 Name: PODARGE
@@ -606,6 +610,7 @@ AI: Basic Trainer
 
 Lophops
 Level: 18
+Ability: Keen Eye
 IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 - Pluck
 - Echoed Voice
@@ -614,6 +619,7 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 
 Halcyling @ Oran Berry
 Level: 19
+Ability: Cloud Nine
 IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 - Water Pulse
 - Pluck
@@ -622,6 +628,7 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 
 Harpelle @ Sitrus Berry
 Level: 20
+Ability: Pickpocket
 IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
 - Pluck
 - Thief
@@ -647,7 +654,7 @@ Level: 16
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 /* Kleon at the Isthmus Gate (SCRIPT.md Part 3, "Kleon, second battle"): his ace is the
    starter that beats yours. VAR_STARTER_MON 0 (Nebrel) faces _KYNDER, 1 (Kynder) faces
-   _HIPLING, 2 (Hipling) faces _NEBREL. No Ability lines while the Aethos stand-ins are in. */
+   _HIPLING, 2 (Hipling) faces _NEBREL. */
 
 === TRAINER_ICHOR_KLEON_2_KYNDER ===
 Name: KLEON

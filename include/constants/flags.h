@@ -76,16 +76,16 @@
 #define FLAG_ICHOR_GOT_MOOMOO_MILK 0x36 // Ichor: gift: Moomoo Milk
 #define FLAG_ICHOR_GOT_MYSTIC_WATER 0x37 // Ichor: gift: Mystic Water
 #define FLAG_ICHOR_GOT_OLD_ROD 0x38 // Ichor: gift: Old Rod
-#define FLAG_ICHOR_HIDE_KRATER_SNIVY 0x39 // Ichor: hide Snivy's krater
-#define FLAG_ICHOR_HIDE_KRATER_CYNDAQUIL 0x3A // Ichor: hide Cyndaquil's krater
-#define FLAG_ICHOR_HIDE_KRATER_PIPLUP 0x3B // Ichor: hide Piplup's krater
+#define FLAG_ICHOR_HIDE_KRATER_NEBREL 0x39 // Ichor: hide Nebrel's krater
+#define FLAG_ICHOR_HIDE_KRATER_KYNDER 0x3A // Ichor: hide Kynder's krater
+#define FLAG_ICHOR_HIDE_KRATER_HIPLING 0x3B // Ichor: hide Hipling's krater
 #define FLAG_ICHOR_HIDE_KLEON_ELAIA 0x3C // Ichor: hide Kleon in Elaia
 #define FLAG_ICHOR_HIDE_ALETHEA_AKADEMIA 0x3D // Ichor: hide Alethea in the Akademia
 #define FLAG_ICHOR_HIDE_ALETHEA_ELAIA 0x3E // Ichor: hide Alethea in Elaia
 #define FLAG_ICHOR_HIDE_ALETHEA_RUINS 0x3F // Ichor: hide Alethea on Kronion Hill
 #define FLAG_ICHOR_HIDE_RUINS_GRUNTS 0x40 // Ichor: hide the Titanborn on Kronion Hill
 #define FLAG_ICHOR_HIDE_TITAN_TABLET 0x41 // Ichor: hide the dropped tablet
-#define FLAG_ICHOR_HIDE_ROUTE1_FLOCK 0x42 // Ichor: hide the Wooloo flock on Route 1
+#define FLAG_ICHOR_HIDE_ROUTE1_FLOCK 0x42 // Ichor: hide the goat flock on Route 1
 #define FLAG_ICHOR_HIDE_KLEON_AKTI 0x43 // Ichor: hide Kleon in Akti
 #define FLAG_ICHOR_HIDE_ALETHEA_AKTI 0x44 // Ichor: hide Alethea in Akti
 #define FLAG_ICHOR_NO_WHITEOUT 0x45 // Ichor: set to make a battle loss continue the story
@@ -96,7 +96,7 @@
 #define FLAG_ICHOR_GOT_ELAIA_RELIC_COPPER 0x4A // Ichor: found the Relic Copper in Elaia's well
 #define FLAG_ICHOR_ITEM_ELAIA_POTION 0x4B // Ichor: item ball: Potion by Elaia's olive press
 #define FLAG_ICHOR_GOT_GLYKERA_CAKES 0x4C // Ichor: Glykera traded honey cakes for Melitta's honey
-#define FLAG_ICHOR_DID_KIMON_TRADE 0x4D // Ichor: traded Kimon a Wooloo for his Finizen, Arion
+#define FLAG_ICHOR_DID_KIMON_TRADE 0x4D // Ichor: traded Kimon a Galekit for his Halcyling, Arion
 #define FLAG_ICHOR_GOT_KIMON_PEARLS 0x4E // Ichor: Kimon's pearls, for the Hearth Laurel
 #define FLAG_ICHOR_HIDE_SCRIBE 0x4F // Ichor: hide the traveling scribe in Elaia's square after beat 4
 

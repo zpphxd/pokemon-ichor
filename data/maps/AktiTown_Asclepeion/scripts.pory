@@ -150,8 +150,8 @@ script AktiTown_Asclepeion_EventScript_Pithos {
 }
 
 script AktiTown_Asclepeion_EventScript_BandagedFisher {
-    msgbox(format("Krabby. Don't ask.\p"
-                  "…It was a big Krabby."), MSGBOX_NPC)
+    msgbox(format("Karkipool. Don't ask.\p"
+                  "…It was a big Karkipool."), MSGBOX_NPC)
 }
 
 script AktiTown_Asclepeion_EventScript_PithosWoman {

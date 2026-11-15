@@ -61,7 +61,7 @@ SECTIONS = [
         (r"05_route1_north_gate$", 1), (r"05_route1_route1_south$", 1), (r"05_route1_carter$", 1),
         (r"05_route1_wall_youth$", 1), (r"05_route1_herm_south$", 1), (r"05_route1_battle$", 4),
         (r"05_route1_olive_farmer$", 1), (r"05_route1_herm_fork$", 1), (r"05_route1_amaryllis_before$", 1),
-        (r"05_route1_flock_wooloo$", 1), (r"05_route1_wild_battle$", 1), (r"05_road_open_battle$", 1),
+        (r"05_route1_flock_goat$", 1), (r"05_route1_wild_battle$", 1), (r"05_road_open_battle$", 1),
         (r"05_road_open_herm_north$", 1)]),
     ("07_kronion_hill", "Beat 5: Kronion Hill", [
         (r"05_kronion_hill_hill_foot$", 1), (r"05_summit_text_\d+$", 6), (r"05_summit_battle$", 2),

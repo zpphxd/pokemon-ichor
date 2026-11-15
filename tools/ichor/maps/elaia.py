@@ -651,7 +651,7 @@ OBJECTS = [
     ("MAN", GFX + "MAN", 16, 24, "RIGHT", "FestivalMan", "0"),
     ("FARMER", GFX + "HARVESTER", 26, 16, "UP", "OliveFarmer", "0"),
     ("KID", GFX + "KID_M", 23, 19, "UP", "Kid", "0"),
-    ("WOOLOO", "OBJ_EVENT_GFX_SPECIES(WOOLOO)", 22, 20, "RIGHT", "KidsWooloo", "0"),
+    ("KIDS_ERIPIP", "OBJ_EVENT_GFX_SPECIES(ERIPIP)", 22, 20, "RIGHT", "KidsEripip", "0"),
     ("SHEPHERD", GFX + "SHEPHERD", 12, 1, "DOWN", "OldShepherd", "0"),
     ("KLEON", GFX + "KLEON", 14, 21, "DOWN", "Kleon", "FLAG_ICHOR_HIDE_KLEON_ELAIA"),
     ("ALETHEA", GFX + "ALETHEA", 5, 33, "DOWN", "0", "FLAG_ICHOR_HIDE_ALETHEA_ELAIA"),

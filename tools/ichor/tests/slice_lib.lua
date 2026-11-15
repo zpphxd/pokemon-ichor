@@ -306,7 +306,7 @@ end
 function L.isTrainerBattle() return emu:read32(S.gBattleTypeFlags) & S.BATTLE_TYPE_TRAINER ~= 0 end
 local function controller(name) return emu:read32(S.gBattlerControllerFuncs) == (S[name] | 1) end
 
-local TRAINERS = { "KLEON_SNIVY", "KLEON_CYNDAQUIL", "KLEON_PIPLUP", "TITYROS", "THESTYLIS", "PHYLLIS", "KOMATAS",
+local TRAINERS = { "KLEON_NEBREL", "KLEON_KYNDER", "KLEON_HIPLING", "TITYROS", "THESTYLIS", "PHYLLIS", "KOMATAS",
                    "AGIS", "POLYEIDOS", "PETROS", "AMATHOS", "MENALKAS", "THYRSIS", "LYKIDAS", "LAMPON", "PYRRHA",
                    "AITHRA", "IONE",
                    -- Phase 2

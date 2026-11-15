@@ -1212,12 +1212,14 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_PONYTA
     },
-    // Ichor: Kimon rowed triremes for forty years. Arion swam beside his ship the
-    // whole way; his knees are done with the sea, and a Wooloo by the fire suits him.
+    // Ichor: Kimon rowed triremes for forty years. Arion, his Halcyling, flew beside
+    // his ship the whole way; his knees are done with the sea, and a Galekit by the
+    // fire suits him (weasels kept the mice out of a Greek house's flour).
+    // abilityNum 0 is Cloud Nine, the halcyon's calm.
     [INGAME_TRADE_ICHOR_ARION] =
     {
         .nickname = _("ARION"),
-        .species = SPECIES_FINIZEN,
+        .species = SPECIES_HALCYLING,
         .ivs = {20, 18, 16, 24, 16, 22},
         .abilityNum = 0,
         .otId = 41372,
@@ -1228,7 +1230,7 @@ static const struct InGameTrade sIngameTrades[] =
         .otName = _("KIMON"),
         .otGender = MALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_WOOLOO
+        .requestedSpecies = SPECIES_GALEKIT
     },
     // Ichor: Pheidon strikes Aegina's turtle coins, and his Chelonet keeps sitting
     // on the stamps. He'd rather have a Karkipool, something with claws, to guard
