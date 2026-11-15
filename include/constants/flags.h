@@ -1714,6 +1714,8 @@
 #define FLAG_ICHOR_ITEM_THYRSA_BLACK_SLUDGE     (FLAG_ICHOR_GENERAL_START + 0x139) // Ichor: Act II: Thyrsa, the Black Sludge by the wine press
 #define FLAG_ICHOR_ITEM_THYRSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x13A) // Ichor: Act II: Thyrsa, the Super Potion in the vineyards' last row
 #define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL_START + 0x13B) // Ichor: Act II: Thyrsa, the Big Nugget on the west wall-walk (the Thyrsus)
+#define FLAG_ICHOR_MET_LASOS                    (FLAG_ICHOR_GENERAL_START + 0x150) // Ichor: Act II: Lasos welcomed the player to the Temple of Dionysus (beat 31)
+#define FLAG_ICHOR_GOT_TM_TOXIC                 (FLAG_ICHOR_GENERAL_START + 0x151) // Ichor: Act II: Thespis gave TM06 Toxic with the Mask Laurel (beat 31)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
