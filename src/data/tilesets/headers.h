@@ -594,6 +594,20 @@ const struct Tileset gTileset_ThyrsaStone =
     .callback = NULL,
 };
 
+// Ichor: parnassos, the road west: Lebadeia and Route 9, the Split Road. Porytiles-managed,
+// built by tools/ichor/art/parnassos_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, road, sea and tall grass, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Parnassos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Parnassos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Parnassos,
+    .metatiles = gMetatiles_PorytilesManaged_Parnassos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Parnassos,
+    .callback = NULL,
+};
+
 // Ichor (Act II batch 3 rooms): Styx Falls's rooms: the Inn at the Falls, Horkia's house of oaths and Kepheus's house. A Porytiles-managed secondary for the oikos
 // primary, built by tools/ichor/maps/arkrooms.py (art in tools/ichor/art/arkrooms_*.py).
 // It uses only its own tiles and palettes 6-12.

@@ -708,10 +708,10 @@
     {
       "id": "LAYOUT_LEBADEIA",
       "name": "Lebadeia_Layout",
-      "width": 28,
+      "width": 32,
       "height": 28,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Parnassos",
       "border_filepath": "data/layouts/Lebadeia/border.bin",
       "blockdata_filepath": "data/layouts/Lebadeia/map.bin",
       "layout_version": "emerald"
@@ -719,10 +719,10 @@
     {
       "id": "LAYOUT_ROUTE9_SCHISTE",
       "name": "Route9_Schiste_Layout",
-      "width": 30,
-      "height": 64,
+      "width": 52,
+      "height": 44,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Agros",
+      "secondary_tileset": "gTileset_Parnassos",
       "border_filepath": "data/layouts/Route9_Schiste/border.bin",
       "blockdata_filepath": "data/layouts/Route9_Schiste/map.bin",
       "layout_version": "emerald"

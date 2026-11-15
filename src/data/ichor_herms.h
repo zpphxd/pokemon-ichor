@@ -17,4 +17,9 @@ const struct IchorHerm gIchorHerms[HERM_MAX] =
         .mapsec = MAPSEC_AETHOS_ROUTE_8,
         .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_8,    // the spur fork, (24,14); land at (24,15)
     },
+    [HERM_AETHOS_ROUTE_9] = {
+        .map = MAP_ROUTE9_SCHISTE,
+        .mapsec = MAPSEC_AETHOS_ROUTE_9,
+        .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_9,  // the Split Road's crossroads, (30,14); land at (30,15)
+    },
 };

@@ -1292,6 +1292,15 @@
 #define METATILE_TempleDionysus_TierFrontArm_Lowered   0x276
 // end gTileset_TempleDionysus
 
+// gTileset_Parnassos (Ichor: Lebadeia and Route 9), written by tools/ichor/art/parnassos_build.py
+#define METATILE_Parnassos_Grille               0x2F8
+#define METATILE_Parnassos_GrilleOpen           0x2F9
+#define METATILE_Parnassos_DrumGully            0x2D0
+#define METATILE_Parnassos_DrumGully_B          0x2D1
+#define METATILE_Parnassos_AltarApollo          0x2CA
+#define METATILE_Parnassos_Drum                 0x2CD
+// end gTileset_Parnassos
+
 // gTileset_Trophonios (Ichor: Trophonios's cave), written by tools/ichor/art/trophonios_build.py
 #define METATILE_Trophonios_Brazier_ColdTop      0x21E
 #define METATILE_Trophonios_Brazier_Cold         0x226

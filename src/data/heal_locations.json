@@ -35,8 +35,8 @@
     {
       "id": "HEAL_LOCATION_LEBADEIA",
       "map": "MAP_LEBADEIA",
-      "x": 16,
-      "y": 14,
+      "x": 17,
+      "y": 10,
       "respawn_map": "MAP_LEBADEIA_PILGRIMS_HALL",
       "respawn_npc": "LOCALID_LEBADEIA_HALL_KEEPER",
       "respawn_x": 7,
@@ -65,6 +65,12 @@
       "y": 6,
       "respawn_map": "MAP_ARKADIA_ASCLEPEION",
       "respawn_npc": "LOCALID_ARKADIA_HEALER"
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_9",
+      "map": "MAP_ROUTE9_SCHISTE",
+      "x": 30,
+      "y": 15
     }
   ]
 }

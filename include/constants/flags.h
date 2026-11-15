@@ -844,14 +844,14 @@
 #define FLAG_ICHOR_HIDDEN_ROUTE8_PEARL                              0x319 // Ichor: Route 8: hidden Pearl at the very end of the dike
 #define FLAG_ICHOR_HIDDEN_ROUTE8_NUGGET                             0x31A // Ichor: Route 8: hidden Nugget in the Treasury of Minyas's wall
 #define FLAG_ICHOR_HIDDEN_ROUTE8_BIG_MUSHROOM                       0x31B // Ichor: Route 8: hidden Big Mushroom under the goat path's last ledge
-#define FLAG_UNUSED_0x31C                                           0x31C // Unused Flag
-#define FLAG_UNUSED_0x31D                                           0x31D // Unused Flag
-#define FLAG_UNUSED_0x31E                                           0x31E // Unused Flag
-#define FLAG_UNUSED_0x31F                                           0x31F // Unused Flag
-#define FLAG_UNUSED_0x320                                           0x320 // Unused Flag
-#define FLAG_UNUSED_0x321                                           0x321 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_LEBADEIA_BRONZE_OBOL                      0x31C // Ichor: Act II: hidden Bronze Obol at the bottom of Lebadeia's Lethe spring
+#define FLAG_ICHOR_HIDDEN_LEBADEIA_CALCIUM                          0x31D // Ichor: Act II: hidden Calcium behind Lebadeia's pilgrims' hall
+#define FLAG_ICHOR_HIDDEN_LEBADEIA_HONEY                            0x31E // Ichor: Act II: hidden Honey in a hollow plane tree in Lebadeia's grove
+#define FLAG_ICHOR_HIDDEN_ROUTE9_ETHER                              0x31F // Ichor: Act II: hidden Ether at the foot of Route 9's pilgrims' cairn
+#define FLAG_ICHOR_HIDDEN_ROUTE9_PRETTY_FEATHER                     0x320 // Ichor: Act II: hidden Pretty Feather on Route 9's Sphinx's seat
+#define FLAG_ICHOR_HIDDEN_ROUTE9_NUGGET                             0x321 // Ichor: Act II: hidden Nugget in the Phokian treasury's floor on Route 9
 #define FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER                    0x322
-#define FLAG_UNUSED_0x323                                           0x323 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE9_REVIVAL_HERB                       0x323 // Ichor: Act II: hidden Revival Herb in Route 9's upper olive terrace
 #define FLAG_HIDE_MAUVILLE_CITY_WALLY                               0x324
 #define FLAG_UNUSED_0x325                                           0x325 // Unused Flag
 #define FLAG_UNUSED_0x326                                           0x326 // Unused Flag
@@ -1851,6 +1851,23 @@
 #define FLAG_ICHOR_GOT_LUCKY_EGG                (FLAG_ICHOR_GENERAL_START + 0x1F7) // Ichor: Act II rooms3: Krotos's Lucky Egg, for his three kids (Arkadia)
 #define FLAG_ICHOR_GOT_BLACK_GLASSES            (FLAG_ICHOR_GENERAL_START + 0x1F8) // Ichor: Act II rooms3: Nyktimos's Black Glasses, after the Moon Laurel (Arkadia)
 #define FLAG_ICHOR_TRADED_ARKOBY                (FLAG_ICHOR_GENERAL_START + 0x1F9) // Ichor: Act II rooms3: traded Hippothoos a Gelasable for ARKAS the Arkoby (Arkadia)
+#define FLAG_ICHOR_SCHISTE_ARRIVED              (FLAG_ICHOR_GENERAL_START + 0x180) // Ichor: Act II: Alethea named the three roads at Route 9's crossroads (beat 36A)
+#define FLAG_ICHOR_HIDE_SCHISTE_DRUMS           (FLAG_ICHOR_GENERAL_START + 0x181) // Ichor: Act II: the treasury ruin's three drums are gone from the path on Route 9 (beat 36C)
+#define FLAG_ICHOR_HIDE_ALETHEA_LEBADEIA        (FLAG_ICHOR_GENERAL_START + 0x182) // Ichor: Act II: hides Alethea at Lebadeia's springs once you head west (beat 36A)
+#define FLAG_ICHOR_HIDE_ALETHEA_ROUTE9          (FLAG_ICHOR_GENERAL_START + 0x183) // Ichor: Act II: hides Alethea at Route 9's crossroads (shown from beat 36A until Kirrha)
+#define FLAG_ICHOR_HIDE_GRUNT_PSEPHOS           (FLAG_ICHOR_GENERAL_START + 0x184) // Ichor: Act II: hides grunt Psephos at Route 9's laurel shrine once beaten
+#define FLAG_ICHOR_HIDE_XENODIKE_LOOKOUT        (FLAG_ICHOR_GENERAL_START + 0x185) // Ichor: Act II: hides Xenodike on Route 9's lookout bench once she came down
+#define FLAG_ICHOR_LEBADEIA_SPRINGS_TALK        (FLAG_ICHOR_GENERAL_START + 0x186) // Ichor: Act II: Alethea explained Lethe and Mnemosyne at Lebadeia's springs (beat 35B)
+#define FLAG_ICHOR_ROUTE9_LOOKOUT_SEEN          (FLAG_ICHOR_GENERAL_START + 0x187) // Ichor: Act II: Alethea saw Delphoi from Route 9's lookout (beat 36B)
+#define FLAG_ICHOR_ITEM_ROUTE9_TM_ROCK_SLIDE    (FLAG_ICHOR_GENERAL_START + 0x188) // Ichor: Act II: item ball, Route 9's treasury ruin
+#define FLAG_ICHOR_ITEM_ROUTE9_HARD_STONE       (FLAG_ICHOR_GENERAL_START + 0x189) // Ichor: Act II: item ball, Route 9's treasury ruin
+#define FLAG_ICHOR_ITEM_ROUTE9_PP_MAX           (FLAG_ICHOR_GENERAL_START + 0x18A) // Ichor: Act II: item ball, across Route 9's broken bridge
+#define FLAG_ICHOR_ITEM_ROUTE9_MAX_REVIVE       (FLAG_ICHOR_GENERAL_START + 0x18B) // Ichor: Act II: item ball, the tip of Route 9's lookout
+#define FLAG_ICHOR_ITEM_ROUTE9_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x18C) // Ichor: Act II: item ball, an olive terrace's end on Route 9
+#define FLAG_ICHOR_OMEN_SCHISTE_ENIGMAW         (FLAG_ICHOR_GENERAL_START + 0x18D) // Ichor: Act II: the omen's Enigmaw on the Split Road's boundary stone is caught or beaten
+#define FLAG_ICHOR_OMEN_SCHISTE_TOLD            (FLAG_ICHOR_GENERAL_START + 0x18E) // Ichor: Act II: an augur told the Split Road's omen; the Enigmaw may sit on the stone (ICHOR_STUB_OMENS)
+#define FLAG_ICHOR_ITEM_ROUTE9_ULTRA_BALL       (FLAG_ICHOR_GENERAL_START + 0x18F) // Ichor: Act II: item ball, the olive grove below Route 9's crossroads
+#define FLAG_ICHOR_ITEM_LEBADEIA_REVIVE         (FLAG_ICHOR_GENERAL_START + 0x190) // Ichor: Act II: item ball, Lebadeia's river bank by the pilgrims' hall
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)
@@ -2668,6 +2685,13 @@
 #define FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL                0
 #define FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY       0
 #define FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR                        0
+
+// ICHOR_STUB_ACT2_FLAGS (parnassos): flags Lebadeia's scripts read that other agents claim.
+// Until they're merged these read as never set (flag 0 is always clear); delete each
+// line once its real claim is in this file above.
+#ifndef FLAG_ICHOR_AKROPOLIS_RAID
+#define FLAG_ICHOR_AKROPOLIS_RAID 0     // batch 5's (beat 55)
+#endif
 
 #endif
 
