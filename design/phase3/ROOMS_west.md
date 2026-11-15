@@ -99,7 +99,16 @@ Every room had at least three: source previews of the whole room (pass 1), the f
 
 Read from `build/test_westrooms/shots/` (a quickstart save, a Halcyling and a Lophops, every room toured with its people, every service played).
 
-<!-- westrooms: pass 3 -->
+| Room | Finding | Change |
+|---|---|---|
+| Pilgrims' hall | the heal ran, then the game hung: `nurse_joy_bow` on the hall-keeper's walker, which has no bow frame | the hall-keeper wears `OBJ_EVENT_GFX_ICHOR_HEALER` (see Healing); heal, respawn at (7,7) and the whiteout heal all pass |
+| Pilgrims' hall | a bed roll on the bottom row, beside the door, read as a second exit mat | moved to the top-left corner, under the tablets |
+| Inn | the same hang waited for Strophios, at his own heal and at every whiteout | he nods; the respawn points at a stand-in that never appears; heal and respawn at (6,4) pass |
+| Inn | Xenodike seemed missing once she came down: people only spawn near the camera, and the check was made from the door | the test checks from beside her place; she stands beside Pylades as she should |
+| Tisamenos's | the numbers read 401, 406, 403, 404, 402…: the near-duplicate merge folded digits a few pixels apart | the frieze and the rubble wall are kept out of the merge; 401 to 407 in order |
+| Tisamenos's | the floor still sparse round the model ship | an old anchor stone and a coil of rope |
+| Hall, inn | the heal photographed mid-way (`*_balls*.png`): the party's balls glow on the hall's fire pit and on the inn's hearth, the healer turned toward them | none |
+| all | every person stands clear of furniture, the real walkers (Strophios, Pylades, Xenodike, the muleteer, Thyia, Tisamenos, Helike, Herkyna, Agamedes, the blanketed pilgrims) read as themselves; Goose sits in the pen, the Kerazap kid in its cradle, the Melisseer by the window until traded; every name fits its box (HALL-KEEPER is 55 of 64 px) | none |
 
 ## Stubs and deviations
 

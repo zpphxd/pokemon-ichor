@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/west_stone/porytiles_bin/metatile_attributes.bin": "2567f5b99e82f40e0ff349b92728dcde",
-  "data/tilesets/secondary/west_stone/porytiles_bin/metatiles.bin": "ca1f53ea202cca851f38d7177f1247ca",
+  "data/tilesets/secondary/west_stone/porytiles_bin/metatile_attributes.bin": "aae108a95fd0f47f76ba79b9f81fb90d",
+  "data/tilesets/secondary/west_stone/porytiles_bin/metatiles.bin": "c68574b1ec1481c1f8d883cdddd6a657",
   "data/tilesets/secondary/west_stone/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/west_stone/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/west_stone/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/west_stone/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/west_stone/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/west_stone/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/west_stone/porytiles_bin/tiles.png": "e616e8e134c5a4f9b9f565488e50c261",
-  "data/tilesets/secondary/west_stone/porytiles_src/attributes.csv": "6606d0ce0d2ecf60e9b6860311b5138e",
-  "data/tilesets/secondary/west_stone/porytiles_src/bottom.png": "650f227782fef029322c93ed09338318",
-  "data/tilesets/secondary/west_stone/porytiles_src/middle.png": "1dba2e211f71189cc6cbee2080a17e50",
-  "data/tilesets/secondary/west_stone/porytiles_src/top.png": "d7a90bfcacd6be574cf2c061a41968fb"
+  "data/tilesets/secondary/west_stone/porytiles_bin/tiles.png": "baa6c9fed3b81f45983373075895e56e",
+  "data/tilesets/secondary/west_stone/porytiles_src/attributes.csv": "fe1c1be87465facb9b64cd0a7e573c45",
+  "data/tilesets/secondary/west_stone/porytiles_src/bottom.png": "0d5ad34a3126d2878c123c5684a7a96b",
+  "data/tilesets/secondary/west_stone/porytiles_src/middle.png": "0821a7b86b6bd12e52288823ce2b5799",
+  "data/tilesets/secondary/west_stone/porytiles_src/top.png": "27dbd1a8b305c93dbfd42c6f1cd4b581"
 }
