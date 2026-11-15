@@ -868,8 +868,8 @@
 #define FLAG_UNUSED_0x331                                           0x331 // Unused Flag
 #define FLAG_UNUSED_0x332                                           0x332 // Unused Flag
 #define FLAG_UNUSED_0x333                                           0x333 // Unused Flag
-#define FLAG_UNUSED_0x334                                           0x334 // Unused Flag
-#define FLAG_UNUSED_0x335                                           0x335 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_KIRRHA_INN_RELIC_COPPER                   0x334 // Ichor: Act II: hidden: a pilgrim's coin down the inn's well
+#define FLAG_ICHOR_HIDDEN_LEBADEIA_MASON_STARDUST                   0x335 // Ichor: Act II: hidden: Stardust in the mason's dust drift
 #define FLAG_UNUSED_0x336                                           0x336 // Unused Flag
 #define FLAG_UNUSED_0x337                                           0x337 // Unused Flag
 #define FLAG_UNUSED_0x338                                           0x338 // Unused Flag
@@ -1837,6 +1837,14 @@
 #define FLAG_ICHOR_AIGION_ARRIVAL_SEEN          (FLAG_ICHOR_GENERAL_START + 0x1A4) // Ichor: Act II: Alethea's lines on Aigion's quay have played (beat 37C)
 #define FLAG_ICHOR_KIRRHA_KRONIST_ALETHEA       (FLAG_ICHOR_GENERAL_START + 0x1A5) // Ichor: Act II: Alethea said her piece about the Kronist's kind lies (beat 37A)
 #define FLAG_ICHOR_ITEM_AIGION_SUPER_REPEL      (FLAG_ICHOR_GENERAL_START + 0x1A6) // Ichor: Act II: item ball: Aigion Super Repel at the quay's east end by the amphorae
+#define FLAG_ICHOR_LEBADEIA_LOOSE_STONE         (FLAG_ICHOR_GENERAL_START + 0x1B0) // Ichor: Act II: found Agamedes's loose stone (Star Piece)
+#define FLAG_ICHOR_GOT_MYSTIC_WATER_HERKYNA     (FLAG_ICHOR_GENERAL_START + 0x1B1) // Ichor: Act II: Herkyna gave the Mystic Water for bringing Goose home
+#define FLAG_ICHOR_GOT_FOCUS_SASH               (FLAG_ICHOR_GENERAL_START + 0x1B2) // Ichor: Act II: Pylades gave his father's Focus Sash
+#define FLAG_ICHOR_TRADED_MELISSEER             (FLAG_ICHOR_GENERAL_START + 0x1B3) // Ichor: Act II: traded the muleteer a Lophops for KASSOTIS the Melisseer
+#define FLAG_ICHOR_HEARD_THYIA                  (FLAG_ICHOR_GENERAL_START + 0x1B4) // Ichor: Act II: Thyia told the player about the Pythia's soon
+#define FLAG_ICHOR_THYIA_LAUREL_TODAY           (FLAG_ICHOR_GENERAL_START + 0x1B5) // Ichor: Act II: ICHOR_STUB_RITES: stands in for Thyia's daily laurel flag (FLAG_DAILY_ICHOR_LAUREL_START + Kirrha's index)
+#define FLAG_ICHOR_TISAMENOS_BIRD               (FLAG_ICHOR_GENERAL_START + 0x1B6) // Ichor: Act II: showed Tisamenos a sea bird (Pretty Feather x2)
+#define FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION       (FLAG_ICHOR_GENERAL_START + 0x1B7) // Ichor: Act II: Helike gave a goat bell (Soothe Bell); Act I's is FLAG_ICHOR_GOT_SOOTHE_BELL
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)

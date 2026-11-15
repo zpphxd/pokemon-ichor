@@ -156,3 +156,15 @@ const u16 gMetatileAttributes_PorytilesManaged_Aigion[] = INCBIN_U16("data/tiles
 // Ichor: gulf_ferry
 const u16 gMetatiles_PorytilesManaged_GulfFerry[] = INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_GulfFerry[] = INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: west_stone
+const u16 gMetatiles_PorytilesManaged_WestStone[] = INCBIN_U16("data/tilesets/secondary/west_stone/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_WestStone[] = INCBIN_U16("data/tilesets/secondary/west_stone/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: west_harbor
+const u16 gMetatiles_PorytilesManaged_WestHarbor[] = INCBIN_U16("data/tilesets/secondary/west_harbor/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_WestHarbor[] = INCBIN_U16("data/tilesets/secondary/west_harbor/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: west_homes
+const u16 gMetatiles_PorytilesManaged_WestHomes[] = INCBIN_U16("data/tilesets/secondary/west_homes/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_WestHomes[] = INCBIN_U16("data/tilesets/secondary/west_homes/porytiles_bin/metatile_attributes.bin");
