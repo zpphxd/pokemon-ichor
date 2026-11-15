@@ -57,11 +57,11 @@ Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 1,024 (raised
 | The Frontier engine | 15–21 | The seven Hoenn Brains (`TRAINER_ANABEL` … `TRAINER_BRANDON`), kept because `gFrontierBrainInfo` reads their pic, class and name. The post-game re-themes them as the Olympiad's Brains. |
 | Reserve | 22–39 | Ask the director |
 | **world-act1** | 40–159 | |
-| **world-act2** | 160–319 | |
+| **world-act2** | 160–319 and 820–849 | 820–849 added from the shared reserve (2026-11-14): Act II's script needs 182 |
 | **world-act3** | 320–499 | Includes the League |
 | **the post-game** | 500–679 | Rematches (the War Horn, the Arena of Champions) need ids of their own |
 | **the Oikoumene** | 680–819 and 864–1023 | 300 in all, for its ten champion halls |
-| Reserve | 820–863 | Shared; ask the director |
+| Reserve | 850–863 | Shared; ask the director |
 
 To add a trainer:
 
