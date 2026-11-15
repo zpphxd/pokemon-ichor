@@ -101,6 +101,14 @@
 // Names for the Thread's RETURN TO… list: the name id a ring's ON_LOAD gives
 // Ichor_AddThreadAnchor. The strings are in src/data/ichor_thread.h; add new
 // ones at the end. 0 shows the map's own name.
+// Ichor_StartAsterion's options (VAR_0x8005), for chargers that aren't
+// Asterion: Labor 4's boar is deaf, wanders off after a stun, and runs its own
+// script when it hits the player.
+#define ICHOR_CHARGER_DEAF        (1 << 0)  // sight only
+#define ICHOR_CHARGER_NO_RETURN   (1 << 1)  // after a stun, back to its movement where it stands
+#define ICHOR_CHARGER_HIT_SCRIPT  (1 << 2)  // a hit runs the object's own script instead of the knockdown
+#define ICHOR_CHARGE_HIT          1         // VAR_0x8005 when that script runs from a hit
+
 #define THREAD_ANCHOR_UNNAMED          0
 #define THREAD_ANCHOR_GRAND_STAIRCASE  1
 
@@ -110,7 +118,9 @@
 #define FLAME_HEARTH     1
 #define FLAME_SANCTUM    2
 #define FLAME_THRESHOLD  3
-#define FLAME_COUNT      4
+#define FLAME_HESTIA_SHIP 4  // Lampon: Hestia's great hearth at Akti to the Euploia's (post-game)
+#define FLAME_LERNA      5   // Kleon's fire at Lerna (Labor 2)
+#define FLAME_COUNT      6
 #define ICHOR_FLAME_GUTTER_STEPS  5  // "The flame gutters."
 
 // Light radius levels for dark maps (SYSTEMS §2; sFlashLevelToRadius)

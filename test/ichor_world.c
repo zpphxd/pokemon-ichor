@@ -3,6 +3,7 @@
 #include "global.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
+#include "field_weather.h"
 #include "ichor_herms.h"
 #include "ichor_relics.h"
 #include "ichor_save.h"
@@ -10,6 +11,7 @@
 #include "test/test.h"
 #include "constants/ichor.h"
 #include "constants/rtc.h"
+#include "constants/weather.h"
 
 u16 Ichor_CountFlagRange(void);
 void Ichor_ForceOmen(void);
@@ -89,4 +91,21 @@ TEST("Ichor: Aethos's herms and the Oikoumene's waystones keep separate flags")
     EXPECT_EQ(Ichor_GetHermFlag(HERM_THE_ASCENT), FLAG_ICHOR_HERMS_START + HERM_THE_ASCENT);
     EXPECT_EQ(Ichor_GetHermFlag(HERM_OIKOUMENE_FIRST), FLAG_ICHOR_WAYSTONES_START);
     EXPECT_EQ(Ichor_GetHermFlag(HERM_MAX - 1), FLAG_ICHOR_WAYSTONES_START + 31);
+}
+
+TEST("Ichor: rain burns a carried flame down two steps at a time, and it still gutters")
+{
+    u8 weather = gWeatherPtr->currWeather;
+    gWeatherPtr->currWeather = WEATHER_RAIN;
+    VarSet(VAR_TEMP_2, 8);
+    VarSet(VAR_TEMP_3, FLAME_LERNA);
+    Ichor_CarriedFlameStep(FALSE);
+    EXPECT_EQ(VarGet(VAR_TEMP_2), 6);
+    Ichor_CarriedFlameStep(FALSE);  // 6 -> 4: past 5, so it guttered (silently here)
+    EXPECT_EQ(VarGet(VAR_TEMP_2), 4);
+    VarSet(VAR_TEMP_2, 1);
+    Ichor_CarriedFlameStep(FALSE);  // never below 0
+    EXPECT_EQ(VarGet(VAR_TEMP_2), 0);
+    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_NONE);
+    gWeatherPtr->currWeather = weather;
 }

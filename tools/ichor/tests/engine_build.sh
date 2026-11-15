@@ -68,7 +68,7 @@ engine_prepare() {
   arm-none-eabi-ld -e 0 -Ttext=$BLOB_ADDR --just-symbols="$ELF" -o "$out/setup.elf" "$out/setup.o" \
     && arm-none-eabi-objcopy -O binary -j .text "$out/setup.elf" "$out/setup.bin" \
     || { echo "$tag FAIL: could not link the setup blob"; exit 1; }
-  arm-none-eabi-nm "$out/setup.elf" | awk '$3 ~ /Header$/ { print $3, $1 }' > "$out/setup.syms"
+  arm-none-eabi-nm "$out/setup.elf" | awk '$3 ~ /(Header|Script)$/ { print $3, $1 }' > "$out/setup.syms"
 }
 
 engine_run() {

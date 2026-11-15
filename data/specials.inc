@@ -1084,6 +1084,7 @@ gSpecials::
 	def_special Ichor_AddCrackedWall
 	def_special Ichor_DrawThread
 	def_special Ichor_StartAsterion
+	def_special Ichor_AddDrift
 	def_special Ichor_AsterionRest
 	def_special Ichor_AsterionKnockdown
 	def_special Ichor_BuildThreadMenu

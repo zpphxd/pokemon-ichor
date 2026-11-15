@@ -423,6 +423,8 @@ static const u8 *const sFlameNames[FLAME_COUNT] =
     [FLAME_HEARTH]    = COMPOUND_STRING("Hearth fire"),
     [FLAME_SANCTUM]   = COMPOUND_STRING("Sanctum fire"),
     [FLAME_THRESHOLD] = COMPOUND_STRING("Threshold fire"),
+    [FLAME_HESTIA_SHIP] = COMPOUND_STRING("Hestia's fire"),
+    [FLAME_LERNA]     = COMPOUND_STRING("Kleon's fire"),
 };
 
 bool32 Ichor_IsCarryingFlame(void)
@@ -454,12 +456,19 @@ void Ichor_PutOutFlame(void)
     PutOutFlame();
 }
 
-// Ichor_OnStep: the carried flame burns down a step. Water puts it out. At 5
-// steps it gutters; at 0 it is the torch's ordinary flame again. Scripts only
-// start when `canTalk` (the blessing's step didn't start one).
+static bool32 IsRaining(void)
+{
+    u32 weather = GetCurrentWeather();
+    return weather == WEATHER_RAIN || weather == WEATHER_RAIN_THUNDERSTORM || weather == WEATHER_DOWNPOUR;
+}
+
+// Ichor_OnStep: the carried flame burns down a step, two in the rain (scripts
+// always give the dry count). Water puts it out. Passing 5 steps left it
+// gutters; at 0 it is the torch's ordinary flame again. Scripts only start
+// when `canTalk` (the blessing's step didn't start one).
 bool32 Ichor_CarriedFlameStep(bool32 canTalk)
 {
-    u32 steps;
+    u32 steps, before, cost = IsRaining() ? 2 : 1;
 
     if (!Ichor_IsCarryingFlame())
         return FALSE;
@@ -470,11 +479,12 @@ bool32 Ichor_CarriedFlameStep(bool32 canTalk)
             ScriptContext_SetupScript(EventScript_IchorFlameDrowned);
         return canTalk;
     }
-    steps = VarGet(VAR_TEMP_2) - 1;
+    before = VarGet(VAR_TEMP_2);
+    steps = before > cost ? before - cost : 0;
     VarSet(VAR_TEMP_2, steps);
     if (steps == 0)
         VarSet(VAR_TEMP_3, FLAME_NONE);
-    if (!canTalk || (steps != 0 && steps != ICHOR_FLAME_GUTTER_STEPS))
+    if (!canTalk || (steps != 0 && !(before > ICHOR_FLAME_GUTTER_STEPS && steps <= ICHOR_FLAME_GUTTER_STEPS)))
         return FALSE;
     ScriptContext_SetupScript(steps == 0 ? EventScript_IchorFlameSpent : EventScript_IchorFlameGutters);
     return TRUE;
