@@ -12,4 +12,14 @@ const struct IchorHerm gIchorHerms[HERM_MAX] =
         .mapsec = MAPSEC_KALLISTE_ROUTE_1,
         .healLocation = HEAL_LOCATION_HERM_KALLISTE_ROUTE_1,  // the spur fork, (14,20); land at (14,21)
     },
+    [HERM_AETHOS_ROUTE_6] = {
+        .map = MAP_ROUTE6_ELEUTHERAI_ROAD,
+        .mapsec = MAPSEC_AETHOS_ROUTE_6,
+        .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_6,  // the spur fork, (34,7); land at (34,8)
+    },
+    [HERM_AETHOS_ROUTE_7] = {
+        .map = MAP_ROUTE7_KRONIA_GROUNDS,
+        .mapsec = MAPSEC_AETHOS_ROUTE_7,
+        .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_7,  // the mountain's foot, (24,15); land at (24,16)
+    },
 };

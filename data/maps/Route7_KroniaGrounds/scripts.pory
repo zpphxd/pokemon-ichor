@@ -83,9 +83,11 @@ script Route7_KroniaGrounds_EventScript_GreeterScene {
     } else {
         msgbox(format("Shy! That's all right. Under Kronos, nobody had to say anything."))
     }
-    // ICHOR_STUB_OFFERINGS: he hands over a Barley Cake, giveitem(ITEM_BARLEY_CAKE),
-    // when the offerings are engine items. Today's loaf counts as the daily one.
-    setflag(FLAG_DAILY_ICHOR_KRONIST_BREAD)
+    // He hands over a Barley Cake: today's loaf counts as the daily one.
+    if (!flag(FLAG_DAILY_ICHOR_KRONIST_BREAD)) {
+        giveitem(ITEM_BARLEY_CAKE)
+        setflag(FLAG_DAILY_ICHOR_KRONIST_BREAD)
+    }
     setflag(FLAG_ICHOR_KRONIA_SEEN)
     setspeaker(Route7_KroniaGrounds_Text_SpeakerKronist)
     msgbox(format("The masters pour the wine today. The servants put their feet up."))
@@ -122,7 +124,7 @@ script Route7_KroniaGrounds_EventScript_Greeter {
     setspeaker(Route7_KroniaGrounds_Text_SpeakerKronist)
     if (!flag(FLAG_DAILY_ICHOR_KRONIST_BREAD)) {
         msgbox(format("Bread! Take it. The golden age pays."))
-        // ICHOR_STUB_OFFERINGS: giveitem(ITEM_BARLEY_CAKE)
+        giveitem(ITEM_BARLEY_CAKE)
         setflag(FLAG_DAILY_ICHOR_KRONIST_BREAD)
     } else {
         msgbox(format("May your thread never be cut!"))
@@ -579,12 +581,19 @@ script Route7_KroniaGrounds_EventScript_Banner {
     msgbox(format("A painted banner: a golden field, people dancing, no one old.\pIn the corner, a water clock lies smashed, its water running into the grass.\pUnder it, in gold letters: NO MORE HOURS."), MSGBOX_SIGN)
 }
 
-// ICHOR_STUB_HERM: becomes EventScript_IchorGreatHerm (FLAG_ICHOR_HERM_ROUTE7).
+// The great herm doubles as the fork's sign; then the engine's anointing
+// (ENGINE_API.md section 4: HERM_AETHOS_ROUTE_7, landing at (24,16)).
 script Route7_KroniaGrounds_EventScript_GreatHerm {
-    msgbox(format("A great herm at the mountain's foot, hung with fresh ivy. Someone left it bread.\pNorth: the feast, and Thyrsa. East: the river. South: up Kithairon."), MSGBOX_SIGN)
+    lockall
+    msgbox(format("A great herm at the mountain's foot, hung with fresh ivy. Someone left it bread.\pNorth: the feast, and Thyrsa. East: the river. South: up Kithairon."))
+    call(EventScript_IchorAnointHerm)
+    releaseall
 }
 
-// ICHOR_STUB_DIG: a daily dig spot on the beach (SYSTEMS.md section 5).
+// ICHOR_STUB_DIG: a daily dig spot by the river (SYSTEMS.md section 5). Its index
+// comes from the ichor-engine session; then this becomes:
+//   setvar(VAR_0x8004, <spot>)  setvar(VAR_0x8005, ICHOR_DIG_ACT_II)
+//   goto(EventScript_IchorDigSpot)
 script Route7_KroniaGrounds_EventScript_DigSpot {
     msgbox(format("The earth here has been turned. Something might be buried."), MSGBOX_SIGN)
 }

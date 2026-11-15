@@ -4,16 +4,29 @@ A map is drawn as a grid of ground characters plus stamped structures, then
 auto-tiled from the tilesets' catalogs (build/kithairon/<dir>/catalog.json):
 
   .  grass (aethos)         ,  tall grass (soft edges)      =  road (soft edges)
-  #  crag (grey rock, with a south face)                    ~  water (pools, the Asopos)
-  F  fir woods: filled with staggered firs (and the odd oak)
+  #  rocky ground: boulder piles, split crags, scree heaps (impassable)
+  ~  water (pools, the Asopos)                              t  the dancing floor (trampled)
+  F  fir woods: filled with staggered firs                  L  deadfall: logs, a stump
   w  dry-stone wall (aethos)  _  terrace ledge, jump south (aethos)
+  ^  rock ledge, jump south   n  rock ledge, jump north (polish pass)
   v  a vine row on its trellis                              p  paving (aethos's patch)
   s  scree (walkable)       b  a boulder                    c  the fort's court
   k  the cave floor         @  under a stamp (set in code)
 
+**Tiers** (the polish pass). Besides its ground, every cell has a height,
+`m.tier[y][x]` (0 by default; `m.raise_(x0, y0, x1, y1, t)` sets a box). A
+raised tier is outlined with the `cliff` pieces: a rocky rim on its north, west
+and east edges, and on its south edge a two-row cliff face, which takes the
+tier's two southmost rows. Those boundary cells block, whatever their ground; the
+tier's inside keeps its ground (grass, firs, the road). Cut a stair through a
+face with `m.stair(x, y, w)` (x, y the face's upper row), and dress a face cell
+with `m.face[(x, y)] = (key, name)`; plain faces get ivy, cracks and ferns
+scattered by hash.
+
 Seam rows: `aethos_rows` may use only aethos metatiles (a neighbor with
 another secondary); `core_rows` only aethos or the core section shared by
-gTileset_Kithairon and gTileset_Kronia. Both are enforced when a map is built.
+gTileset_Kithairon, gTileset_Kronia and gTileset_KithaironPass. Both are
+enforced when a map is built.
 """
 from __future__ import annotations
 
@@ -32,11 +45,13 @@ RENDER = ROOT / "build/render/kithairon"
 SHAPES = ROOT / "tools/ichor/art/kithairon_shapes.json"
 
 SETS = {"kithairon": ("gTileset_Kithairon", "kithairon"), "kronia": ("gTileset_Kronia", "kronia"),
+        "pass": ("gTileset_KithaironPass", "kithairon_pass"),
         "cave": ("gTileset_KithaironCave", "kithairon_cave")}
-CORE = {"tall", "path", "crag", "water", "fir", "fir_b", "fir_stack", "fir_stack_b", "fir_young",
-        "oak", "crag_detail", "markers", "fir_shade", "fir_b_shade", "fir_stack_shade",
-        "fir_stack_b_shade", "fir_young_shade", "oak_shade", "meadow"}
-SHAPE_SETS = ("tall", "path", "crag", "water", "cave")
+CORE = {"tall", "path", "fir", "fir_b", "fir_stack", "fir_stack_b", "fir_young",
+        "oak", "markers", "fir_shade", "fir_b_shade", "fir_stack_shade",
+        "fir_stack_b_shade", "fir_young_shade", "oak_shade", "meadow",
+        "cliff", "cliff_face", "cliff_stair", "ledge", "rocks", "deadfall"}
+SHAPE_SETS = ("tall", "path", "water", "cave", "cliff", "trampled")
 
 # aethos metatiles (General's ids; design/phase1/TILES_aethos.md)
 GRASS, TALL, SHADE = 0x001, 0x00D, 0x01C
@@ -110,6 +125,11 @@ class Map:
         self.water_cells = set()
         self.stamped = set()
         self.seed = sum(map(ord, name))
+        self.tier = [[0] * w for _ in range(h)]
+        self.stairs = {}          # (x, y) -> cliff_stair cell name
+        self.face = {}            # (x, y) -> (structure, name): a dressed cliff face
+        self.cliff_cells = set()
+        self.no_face_decor = set()
 
     # --- drawing the ground grid -----------------------------------------
     def rect(self, x0, y0, x1, y1, c):
@@ -121,6 +141,62 @@ class Map:
         for (x, y) in pts:
             if 0 <= x < self.w and 0 <= y < self.h:
                 self.ch[y][x] = c
+
+    def raise_(self, x0, y0, x1, y1, t=1):
+        """Raise a box of cells to tier t (its south two rows become the face)."""
+        for y in range(max(0, y0), min(self.h - 1, y1) + 1):
+            for x in range(max(0, x0), min(self.w - 1, x1) + 1):
+                self.tier[y][x] = t
+
+    def tiers(self, rows, x0=0, y0=0):
+        """Set tiers from rows of digits ('.' or ' ' leaves a cell as it is)."""
+        for j, r in enumerate(rows):
+            for i, c in enumerate(r):
+                if c.isdigit() and 0 <= x0 + i < self.w and 0 <= y0 + j < self.h:
+                    self.tier[y0 + j][x0 + i] = int(c)
+
+    def stair(self, x, y, w=2):
+        """Rock steps through a face: (x, y) is the face's upper row."""
+        if w == 1:
+            self.stairs[(x, y)] = "T"
+            self.stairs[(x, y + 1)] = "B"
+        else:
+            self.stairs.update({(x, y): "TL", (x + 1, y): "TR", (x, y + 1): "BL", (x + 1, y + 1): "BR"})
+        for (sx, sy) in list(self.stairs):
+            self.pathlike.add((sx, sy))
+
+    def t_at(self, x, y):
+        x = min(max(x, 0), self.w - 1)
+        y = min(max(y, 0), self.h - 1)
+        return self.tier[y][x]
+
+    def cliff_key(self, x, y):
+        """The cliff piece's key for (x, y), or None inside a tier (or at tier 0)."""
+        t = self.tier[y][x]
+        if t == 0:
+            return None
+        inside = lambda xx, yy: self.t_at(xx, yy) >= t
+        b = [1 if inside(x + dx, y + dy) else 0 for dx, dy in NEIGH]
+        for d, (a, c) in ((1, (0, 2)), (3, (2, 4)), (5, (4, 6)), (7, (6, 0))):
+            if not (b[a] and b[c]):
+                b[d] = 0
+        k = "1|" + "".join(str(v) for v in b)
+        s2 = "1" if (b[4] and inside(x, y + 2)) else "0"
+        if k == "1|11111111" and s2 == "1":
+            return None
+        return k + "|" + s2 + ("|b" if (s2 == "0" and x % 2) else "")
+
+    def mark_cliffs(self):
+        """Find every tier's boundary cells before the ground is tiled, so woods
+        and the road stop at them."""
+        self.cliff_cells = set()
+        for y in range(self.h):
+            for x in range(self.w):
+                # firs stand in front of a cliff and hide it; elsewhere it shows
+                if self.cliff_key(x, y) is not None and self.ch[y][x] != "F":
+                    self.cliff_cells.add((x, y))
+                    if (x, y) not in self.stairs and self.ch[y][x] == ",":
+                        self.ch[y][x] = "."
 
     def rows(self, x0, y0, rows, legend=None):
         """Paint an ASCII block; ' ' leaves a cell as it is."""
@@ -205,7 +281,10 @@ class Map:
             return self.cat.named(setkey, key)
         self.missing.append((self.name, setkey, key))
         # stand-in until the art is rebuilt with this shape
-        return self.cat.named(setkey, "1|11111111") if d else (GRASS, ".")
+        if not d:
+            return (GRASS, ".")
+        first = "1|11111111" if "1|11111111" in d["names"] else next(iter(d["names"]))
+        return self.cat.named(setkey, first)
 
     def patch(self, inside, x, y):
         n, s_, w_, e = inside(x, y - 1), inside(x, y + 1), inside(x - 1, y), inside(x + 1, y)
@@ -217,6 +296,7 @@ class Map:
         return PATCH.get(k, PATCH["C"])
 
     def autotile(self):
+        self.mark_cliffs()
         ch = self.ch
         tall = self.region(",")
         road = self.region("=", self.pathlike)
@@ -245,17 +325,32 @@ class Map:
                 elif c == "p":
                     self.set(x, y, self.patch(pave, x, y), ".")
                 elif c == "#":
-                    assert not aeth, (self.name, x, y, "crag in an aethos-only row")
+                    assert not aeth, (self.name, x, y, "rock in an aethos-only row")
                     if self.setname == "cave":
                         self.set(x, y, *self.shape("cave", blob_key(cave, x, y), x, y))
                     else:
-                        k = blob_key(crag, x, y)
-                        if k == "1|11111111" and hsh(x, y, self.seed) < 26:
-                            name = ("crack", "boulders", "tuft", "juniper", "ivy_top")[hsh(x, y, 5) % 5]
-                            self.set(x, y, *self.cat.named("crag_detail", name))
-                            self.shapes_used["crag"].add(k)
-                        else:
-                            self.set(x, y, *self.shape("crag", k, x, y))
+                        name = ("pile", "split", "scree", "pile")[hsh(x, y, self.seed + 5) % 4]
+                        self.set(x, y, *self.cat.named("rocks", name))
+                elif c == "^" or c == "n":
+                    l = x > 0 and ch[y][x - 1] == c
+                    r = x + 1 < self.w and ch[y][x + 1] == c
+                    side = "M" if (l and r) else ("L" if r else ("R" if l else "M"))
+                    self.set(x, y, self.cat.named("ledge", ("S_" if c == "^" else "N_") + side)[0],
+                             "J" if c == "^" else "N")
+                elif c == "L":
+                    l = x > 0 and ch[y][x - 1] == "L" and (x - 1, y) not in self.stamped
+                    r = x + 1 < self.w and ch[y][x + 1] == "L"
+                    shade_ok = self.at(x, y - 1) == "F" or self.at(x, y + 1) == "F"
+                    sfx = "_s" if shade_ok else ""
+                    if r and not l:
+                        self.set(x, y, *self.cat.named("deadfall", "log_W" + sfx))
+                        self.set(x + 1, y, *self.cat.named("deadfall", "log_E" + sfx))
+                        self.stamped.add((x + 1, y))
+                    elif not l:
+                        self.set(x, y, *self.cat.named("deadfall", "stump" + sfx))
+                elif c == "t":
+                    trampled = self.region("t")
+                    self.set(x, y, *self.shape("trampled", blob_key(trampled, x, y), x, y))
                 elif c == "~":
                     assert not aeth
                     self.set(x, y, *self.shape("water", blob_key(water, x, y), x, y))
@@ -307,6 +402,36 @@ class Map:
                     raise ValueError(f"{self.name}: unknown ground {c!r} at {x},{y}")
         self.woods()
         self.decorate()
+        self.cliffs()
+
+    FACE_DECOR = {"u": ("ivy_u", "crack_u", "tuft_u"), "l": ("ivy_l", "seep_l", "fern_l")}
+
+    def cliffs(self):
+        """Overlay every tier's boundary with the cliff pieces, cut the stairs,
+        and dress plain faces with ivy, cracks, tufts and ferns."""
+        for (x, y) in sorted(self.cliff_cells):
+            if (x, y) in self.stairs:
+                self.set(x, y, self.cat.named("cliff_stair", self.stairs[(x, y)])[0], ".")
+                continue
+            k = self.cliff_key(x, y)
+            if (x, y) in self.face:
+                key, name = self.face[(x, y)]
+                self.set(x, y, *self.cat.named(key, name))
+                self.shapes_used["cliff"].add(k)
+                continue
+            parts = k.split("|")
+            row = None
+            if parts[2] == "0":
+                row = "u" if parts[1] == "11111111" else ("l" if parts[1] == "11100011" else None)
+            if row and (x, y) not in self.no_face_decor and hsh(x, y, self.seed + 31) < 14 \
+                    and self.cat.has("cliff_face"):
+                self.set(x, y, *self.cat.named("cliff_face", self.FACE_DECOR[row][hsh(x, y, 7) % 3]))
+                self.shapes_used["cliff"].add(k)
+                continue
+            self.set(x, y, self.shape("cliff", k, x, y)[0], "X")
+        self.force_block |= {(x, y) for (x, y) in self.cliff_cells
+                             if (x, y) not in self.stairs and self.walkc[y][x] != "D"}
+
 
     def decorate(self, rate=7):
         """Scatter wildflowers, tussocks and aethos's red anemones through open
@@ -456,7 +581,7 @@ class Map:
             return 0
         if (x, y) in self.force_block:
             return 1
-        return 1 if self.walkc[y][x] in ("X", "J") else 0
+        return 1 if self.walkc[y][x] in ("X", "J", "N") else 0
 
     def blocks(self):
         b = np.zeros((self.h, self.w), np.uint16)
@@ -490,6 +615,10 @@ def obj(gfx, x, y, script, move="MOVEMENT_TYPE_FACE_DOWN", flag="0", trainer=Fal
 
 def item_ball(x, y, item, flag):
     return obj("OBJ_EVENT_GFX_ITEM_BALL", x, y, "Common_EventScript_FindItem", flag=flag, item=item)
+
+
+def hidden(x, y, item, flag):
+    return {"type": "hidden_item", "x": x, "y": y, "elevation": 3, "item": item, "flag": flag}
 
 
 def sign(x, y, script, facing="BG_EVENT_PLAYER_FACING_ANY"):
@@ -616,7 +745,7 @@ def render(m, events, border, views, tag=""):
 
 
 def reach(m, starts, blocked_extra=()):
-    """Cells reachable on foot from the starts (ledges hop south)."""
+    """Cells reachable on foot from the starts (ledges hop south, or north)."""
     blocked_extra = set(blocked_extra)
     ok = lambda x, y: 0 <= x < m.w and 0 <= y < m.h and not m.collision(x, y) and \
         (x, y) not in m.water_cells and (x, y) not in blocked_extra
@@ -628,6 +757,8 @@ def reach(m, starts, blocked_extra=()):
             nx, ny = x + dx, y + dy
             if 0 <= nx < m.w and 0 <= ny < m.h and m.walkc[ny][nx] == "J" and dy == 1:
                 ny += 1
+            elif 0 <= nx < m.w and 0 <= ny < m.h and m.walkc[ny][nx] == "N" and dy == -1:
+                ny -= 1
             if ok(nx, ny) and (nx, ny) not in seen:
                 seen.add((nx, ny))
                 dq.append((nx, ny))

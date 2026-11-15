@@ -31,6 +31,18 @@
       "y": 32,
       "respawn_map": "MAP_THYRSA_CITY_ASCLEPEION",
       "respawn_npc": "LOCALID_THYRSA_HEALER"
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_6",
+      "map": "MAP_ROUTE6_ELEUTHERAI_ROAD",
+      "x": 34,
+      "y": 8
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_7",
+      "map": "MAP_ROUTE7_KRONIA_GROUNDS",
+      "x": 24,
+      "y": 16
     }
   ]
 }

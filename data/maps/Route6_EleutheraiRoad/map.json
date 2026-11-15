@@ -151,8 +151,22 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route6_EleutheraiRoad_EventScript_Drum",
+      "script": "EventScript_StrengthBoulder",
       "flag": "FLAG_ICHOR_HIDE_ROUTE6_DRUM"
+    },
+    {
+      "local_id": "LOCALID_ROUTE6_VINES",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 46,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_CutTree",
+      "flag": "FLAG_ICHOR_HIDE_ELEUTHERAI_VINES"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -234,6 +248,15 @@
       "var": "VAR_TEMP_1",
       "var_value": "0",
       "script": "Route6_EleutheraiRoad_EventScript_HeraldScene"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 8,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route6_EleutheraiRoad_EventScript_DrumMoved"
     }
   ],
   "bg_events": [
@@ -251,15 +274,15 @@
       "y": 21,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Route6_EleutheraiRoad_EventScript_Vines"
+      "script": "Route6_EleutheraiRoad_EventScript_VineStock"
     },
     {
-      "type": "sign",
-      "x": 46,
-      "y": 21,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "Route6_EleutheraiRoad_EventScript_Vines"
+      "type": "hidden_item",
+      "x": 23,
+      "y": 6,
+      "elevation": 3,
+      "item": "ITEM_WINE",
+      "flag": "FLAG_ICHOR_HIDDEN_ROUTE6_WINE"
     },
     {
       "type": "sign",

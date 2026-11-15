@@ -467,7 +467,7 @@
       "id": "LAYOUT_ELEUTHERAI",
       "name": "Eleutherai_Layout",
       "width": 32,
-      "height": 26,
+      "height": 28,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Kithairon",
       "border_filepath": "data/layouts/Eleutherai/border.bin",
@@ -480,7 +480,7 @@
       "width": 40,
       "height": 56,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Kithairon",
+      "secondary_tileset": "gTileset_KithaironPass",
       "border_filepath": "data/layouts/MtKithairon/border.bin",
       "blockdata_filepath": "data/layouts/MtKithairon/map.bin",
       "layout_version": "emerald"

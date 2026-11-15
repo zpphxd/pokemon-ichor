@@ -56,8 +56,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
-      "x": 21,
-      "y": 12,
+      "x": 22,
+      "y": 16,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -70,7 +70,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
       "x": 15,
-      "y": 16,
+      "y": 20,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -83,7 +83,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
       "x": 14,
-      "y": 16,
+      "y": 20,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -95,8 +95,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
-      "x": 25,
-      "y": 21,
+      "x": 26,
+      "y": 24,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
@@ -108,8 +108,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
-      "x": 27,
-      "y": 18,
+      "x": 28,
+      "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
@@ -122,7 +122,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
       "x": 18,
-      "y": 21,
+      "y": 24,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -136,21 +136,21 @@
   "warp_events": [
     {
       "x": 23,
-      "y": 3,
+      "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ELEUTHERAI_WATCH_HOUSE",
       "dest_warp_id": "0"
     },
     {
       "x": 3,
-      "y": 21,
+      "y": 22,
       "elevation": 0,
       "dest_map": "MAP_ELEUTHERAI_OINOE_HOUSE",
       "dest_warp_id": "0"
     },
     {
       "x": 21,
-      "y": 19,
+      "y": 22,
       "elevation": 0,
       "dest_map": "MAP_ELEUTHERAI_LYSIDIKE_HOUSE",
       "dest_warp_id": "0"
@@ -185,18 +185,18 @@
     {
       "type": "sign",
       "x": 13,
-      "y": 15,
+      "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Eleutherai_EventScript_Trough"
     },
     {
-      "type": "sign",
+      "type": "hidden_item",
       "x": 14,
-      "y": 15,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Eleutherai_EventScript_Trough"
+      "y": 19,
+      "elevation": 3,
+      "item": "ITEM_RELIC_COPPER",
+      "flag": "FLAG_ICHOR_HIDDEN_ELEUTHERAI_BRONZE_OBOL"
     }
   ]
 }
