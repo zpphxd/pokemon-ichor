@@ -1,0 +1,528 @@
+// Below the Euploia's deck: the crew's quarters, refitted for the post-game
+// (ODYSSEY §2, §3). Drawn by tools/ichor/art/euploia_below.py; events placed by
+// tools/ichor/maps/euploia.py, which also writes the setmetatile scripts at the
+// end of this file.
+//
+// Each service works only with its crew member aboard. Their hide flags are temp
+// flags, set here when they're not aboard (temp flags clear on every map load).
+// Phemios wears a stand-in walker until the sprites agent's
+// OBJ_EVENT_GFX_ICHOR_PHEMIOS lands (ICHOR_STUB_PG_SPRITES).
+
+mapscripts EuploiaBelow_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (!flag(FLAG_ICHOR_CREW_LAMPON)) {
+            call(EuploiaBelow_EventScript_HearthCold)
+        }
+        // ICHOR_STUB_ODYSSEY_FLAGS: the trophy shelf. Batch 6 claims the
+        // keepsakes' flags; each puts its keepsake on its spot with the script
+        // generated below (design/postgame/TILES_euploia.md has the table):
+        //   if (flag(<the ram's fleece>)) { call(EuploiaBelow_EventScript_KeepsakeFleece) }
+        //   ...Lotus, Cord, Feather, Tooth, Cup and Oar the same way.
+    }
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_CREW_LAMPON)) {
+            setflag(FLAG_TEMP_1)
+        }
+        if (!flag(FLAG_ICHOR_CREW_KYDON)) {
+            setflag(FLAG_TEMP_2)
+        }
+        if (!flag(FLAG_ICHOR_CREW_PHEMIOS)) {
+            setflag(FLAG_TEMP_3)
+        }
+        if (!flag(FLAG_ICHOR_CREW_IASO)) {
+            setflag(FLAG_TEMP_4)
+        }
+        if (!flag(FLAG_ICHOR_CREW_DIKTYS)) {
+            setflag(FLAG_TEMP_5)
+        }
+    }
+}
+
+text EuploiaBelow_Text_NameLampon { "LAMPON" }
+text EuploiaBelow_Text_NameKydon { "KYDON" }
+text EuploiaBelow_Text_NamePhemios { "PHEMIOS" }
+text EuploiaBelow_Text_NameIaso { "IASO" }
+text EuploiaBelow_Text_NameDiktys { "DIKTYS" }
+
+// ---------------------------------------------------------------------------
+// The bunk: rest to dawn, noon, dusk or night (SYSTEMS §10's xenia rule:
+// forward only, never past midnight). Resting heals the party, and Iaso can
+// tend them again afterwards.
+// ---------------------------------------------------------------------------
+
+text EuploiaBelow_Text_RestDawn { "DAWN" }
+text EuploiaBelow_Text_RestNoon { "NOON" }
+text EuploiaBelow_Text_RestDusk { "DUSK" }
+text EuploiaBelow_Text_RestNight { "NIGHTFALL" }
+text EuploiaBelow_Text_RestWhile { "A WHILE" }
+text EuploiaBelow_Text_RestNotNow { "NOT NOW" }
+
+script EuploiaBelow_EventScript_Bunk {
+    lockall
+    message(format("Your bunk, a fleece over it that smells faintly of goat.\pRest until…"))
+    waitmessage
+    // Only the times still ahead today: dawn 06:00, noon 12:00, dusk 19:00,
+    // night 20:30 (SYSTEMS §10). gettime puts the hour in VAR_0x8000 and the
+    // minute in VAR_0x8001.
+    gettime
+    if (var(VAR_0x8000) < 6) {
+        dynmultipush(EuploiaBelow_Text_RestDawn, 0)
+    }
+    if (var(VAR_0x8000) < 12) {
+        dynmultipush(EuploiaBelow_Text_RestNoon, 1)
+    }
+    if (var(VAR_0x8000) < 19) {
+        dynmultipush(EuploiaBelow_Text_RestDusk, 2)
+    }
+    if (var(VAR_0x8000) < 20 || (var(VAR_0x8000) == 20 && var(VAR_0x8001) < 30)) {
+        dynmultipush(EuploiaBelow_Text_RestNight, 3)
+    }
+    dynmultipush(EuploiaBelow_Text_RestWhile, 4)
+    dynmultipush(EuploiaBelow_Text_RestNotNow, 5)
+    dynmultistack(0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+    if (var(VAR_RESULT) == 5 || var(VAR_RESULT) == MULTI_B_PRESSED) {
+        closemessage
+        releaseall
+        end
+    }
+    copyvar(VAR_0x8004, VAR_RESULT)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    // ICHOR_STUB_XENIA_REST: nothing in the engine moves the clock yet. When the
+    // xenia rest lands, move it forward here to the time in VAR_0x8004 (0 dawn,
+    // 1 noon, 2 dusk, 3 nightfall; 4 is a rest with no hour to wait for).
+    special(HealPlayerParty)
+    clearflag(FLAG_ICHOR_SHIP_IASO_TENDED)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("You wake to the creak of the hull, rested.\pYour Pokémon are rested too."))
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Lampon and the ship's hearth: Hestia's Hearthfire, once a day
+// ---------------------------------------------------------------------------
+
+script EuploiaBelow_EventScript_Hearth {
+    lockall
+    if (!flag(FLAG_ICHOR_CREW_LAMPON)) {
+        msgbox(format("The ship's hearth. The ashes are cold, and the pot is empty.\p"
+                      "Nobody aboard keeps Hestia's fire."))
+        releaseall
+        end
+    }
+    if (flag(FLAG_DAILY_ICHOR_SHIP_HEARTHFIRE)) {
+        // the day's warmth is taken: the hearth is still Hestia's altar
+        goto(EventScript_IchorHearth)
+    }
+    call(EuploiaBelow_EventScript_LamponHearthfire)
+    releaseall
+}
+
+script EuploiaBelow_EventScript_Lampon {
+    lock
+    faceplayer
+    call(EuploiaBelow_EventScript_LamponHearthfire)
+    release
+}
+
+script EuploiaBelow_EventScript_LamponHearthfire {
+    setspeaker(EuploiaBelow_Text_NameLampon)
+    if (flag(FLAG_DAILY_ICHOR_SHIP_HEARTHFIRE)) {
+        msgbox(format("Fire's banked. You've had today's warmth already.\p"
+                      "Come back tomorrow and I'll have it high again."))
+        if (flag(FLAG_ICHOR_CREW_KYDON)) {
+            msgbox(format("Kydon counts my onions every night.\pI let him. It makes him happy."))
+        } else {
+            msgbox(format("Stew's on. It's always on. A ship's a hungry thing."))
+        }
+        return
+    }
+    msgbox(format("Hestia's fire, carried from her temple in Akti to this hearth.\p"
+                  "Sit close a moment. Take a little of it with you."))
+    specialvar(VAR_RESULT, Ichor_GetBlessingGod)
+    if (var(VAR_RESULT) != ICHOR_GOD_NONE && var(VAR_RESULT) != ICHOR_GOD_HESTIA) {
+        msgbox(format("Another god's warmth is on you already.\pTrade it for the hearth's?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            msgbox(format("Suit yourself. The fire will keep."))
+            return
+        }
+    }
+    setvar(VAR_0x8004, ICHOR_GOD_HESTIA)
+    setvar(VAR_0x8005, 500)
+    special(Ichor_GrantBlessing)
+    setflag(FLAG_DAILY_ICHOR_SHIP_HEARTHFIRE)
+    playse(SE_M_HEAL_BELL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The hearth's warmth settles over you.\p"
+                  "Hestia's Hearthfire: use it from the SELECT ring to rest anywhere."))
+    return
+}
+
+// ---------------------------------------------------------------------------
+// Kydon: the Pithos, and the stall
+// ---------------------------------------------------------------------------
+
+text EuploiaBelow_Text_PithosPokemon { "Pokémon" }
+text EuploiaBelow_Text_PithosThings { "Your things" }
+text EuploiaBelow_Text_PithosClose { "Close the lid" }
+
+script EuploiaBelow_EventScript_Pithos {
+    lockall
+    if (!flag(FLAG_ICHOR_CREW_KYDON)) {
+        msgbox(format("A great storage jar, sealed with pitch and roped down hard.\p"
+                      "Only a quartermaster would know how to keep it."))
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(format("Kydon's Pithos: a great clay jar, a ship painted round its belly.\p"
+                  "{PLAYER} lifted the lid."))
+    goto(EuploiaBelow_EventScript_PithosMenu)
+}
+
+script EuploiaBelow_EventScript_PithosMenu {
+    message(format("What will you reach for?"))
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, EuploiaBelow_Text_PithosPokemon,
+                   EuploiaBelow_Text_PithosThings, EuploiaBelow_Text_PithosClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("Pokémon rest safely inside the jar, even at sea."))
+            special(ShowPokemonStorageSystemPC)
+            goto(EuploiaBelow_EventScript_PithosMenu)
+        case 1:
+            msgbox(format("{PLAYER}'s own things are wrapped in oilcloth near the top."))
+            special(PlayerPC)
+            goto(EuploiaBelow_EventScript_PithosMenu)
+    }
+    msgbox(format("{PLAYER} roped the lid back down."))
+    releaseall
+    end
+}
+
+script EuploiaBelow_EventScript_Kydon {
+    lock
+    faceplayer
+    call(EuploiaBelow_EventScript_KydonStall)
+    release
+}
+
+script EuploiaBelow_EventScript_Counter {
+    lockall
+    if (!flag(FLAG_ICHOR_CREW_KYDON)) {
+        msgbox(format("A stall under a striped awning, stocked, with nobody behind it.\p"
+                      "It needs a quartermaster."))
+        releaseall
+        end
+    }
+    call(EuploiaBelow_EventScript_KydonStall)
+    releaseall
+}
+
+script EuploiaBelow_EventScript_KydonStall {
+    setspeaker(EuploiaBelow_Text_NameKydon)
+    msgbox(format("You bought my honey and didn't haggle. I've never trusted anyone more.\p"
+                  "Same prices as Emporion. Well. Nearly."))
+    message(format("What do you need?"))
+    waitmessage
+    pokemart(EuploiaBelow_Mart_Kydon)
+    if (flag(FLAG_ICHOR_CREW_LAMPON)) {
+        msgbox(format("Lampon's stew costs me two jars of oil a week.\pWorth both. Don't tell him."))
+    } else {
+        msgbox(format("Counted, stowed and paid for. Come again."))
+    }
+    return
+}
+
+mart EuploiaBelow_Mart_Kydon {
+    ITEM_POKE_BALL
+    ITEM_GREAT_BALL
+    ITEM_ULTRA_BALL
+    ITEM_NET_BALL
+    ITEM_DIVE_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_ORAN_BERRY
+    ITEM_SITRUS_BERRY
+    ITEM_LUM_BERRY
+    ITEM_OLIVE_OIL
+    ITEM_BARLEY_CAKE
+    ITEM_WINE
+    ITEM_FRANKINCENSE
+    ITEM_LAUREL_SPRIG
+    ITEM_BRONZE_VOTIVE
+}
+
+// ---------------------------------------------------------------------------
+// Diktys and his nets: one haul a day
+// ---------------------------------------------------------------------------
+
+script EuploiaBelow_EventScript_Nets {
+    lockall
+    if (!flag(FLAG_ICHOR_CREW_DIKTYS)) {
+        msgbox(format("Fishing nets in a heap, mended in a hundred places.\p"
+                      "Nobody aboard knows how to cast them."))
+        releaseall
+        end
+    }
+    call(EuploiaBelow_EventScript_DiktysHaul)
+    releaseall
+}
+
+script EuploiaBelow_EventScript_Diktys {
+    lock
+    faceplayer
+    call(EuploiaBelow_EventScript_DiktysHaul)
+    release
+}
+
+script EuploiaBelow_EventScript_DiktysHaul {
+    setspeaker(EuploiaBelow_Text_NameDiktys)
+    if (flag(FLAG_DAILY_ICHOR_SHIP_NETS)) {
+        msgbox(format("Nets are drying. One haul a day.\pThe sea's not a market stall."))
+        if (flag(FLAG_ICHOR_CREW_IASO)) {
+            msgbox(format("The healer keeps looking at my hands.\pThey're fine. They're net hands."))
+        }
+        return
+    }
+    msgbox(format("Haul's in. Let's see what the sea's paying today."))
+    // Pearl 6 in 20, Heart Scale 4, Shoal Salt 3, Shoal Shell 3, Big Pearl 2,
+    // Star Piece 1, Water Stone 1
+    random(20)
+    if (var(VAR_RESULT) < 6) {
+        setvar(VAR_0x8006, ITEM_PEARL)
+    } elif (var(VAR_RESULT) < 10) {
+        setvar(VAR_0x8006, ITEM_HEART_SCALE)
+    } elif (var(VAR_RESULT) < 13) {
+        setvar(VAR_0x8006, ITEM_SHOAL_SALT)
+    } elif (var(VAR_RESULT) < 16) {
+        setvar(VAR_0x8006, ITEM_SHOAL_SHELL)
+    } elif (var(VAR_RESULT) < 18) {
+        setvar(VAR_0x8006, ITEM_BIG_PEARL)
+    } elif (var(VAR_RESULT) < 19) {
+        setvar(VAR_0x8006, ITEM_STAR_PIECE)
+    } else {
+        setvar(VAR_0x8006, ITEM_WATER_STONE)
+    }
+    setspeaker(SP_NAME_NONE)
+    giveitem(VAR_0x8006)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(EuploiaBelow_Text_NameDiktys)
+        msgbox(format("No room in your bag? Then it goes back in the sea.\pTomorrow, then."))
+        return
+    }
+    setflag(FLAG_DAILY_ICHOR_SHIP_NETS)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// Iaso: cures and revives, once between rests
+// ---------------------------------------------------------------------------
+
+script EuploiaBelow_EventScript_Iaso {
+    lock
+    faceplayer
+    setspeaker(EuploiaBelow_Text_NameIaso)
+    if (flag(FLAG_ICHOR_SHIP_IASO_TENDED)) {
+        msgbox(format("I've done what I can until you've slept.\p"
+                      "The bunk first. Then I'll look at them again."))
+        if (flag(FLAG_ICHOR_CREW_DIKTYS)) {
+            msgbox(format("Diktys cuts his hands on those nets every day.\p"
+                          "He won't let me bind them. “They're nets,” he says."))
+        }
+        release
+        end
+    }
+    msgbox(format("Let me see them. Burns, poisons, the ones who fainted.\pLine them up."))
+    // ICHOR_STUB_IASO_CURE: there's no special yet that cures status and
+    // revives without restoring HP, so Iaso restores the party fully.
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    setflag(FLAG_ICHOR_SHIP_IASO_TENDED)
+    msgbox(format("There. Now sleep, all of you. That's not advice."))
+    release
+}
+
+script EuploiaBelow_EventScript_IasoChest {
+    if (flag(FLAG_ICHOR_CREW_IASO)) {
+        msgbox(format("Iaso's chest: dried herbs, linen for binding, a little jar of honey for burns.\p"
+                      "Her staff leans above it, a snake wound round it for Asclepius."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A healer's chest, packed and waiting by the bunk.\p"
+                      "There's no healer aboard to open it."), MSGBOX_SIGN)
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Phemios: plays any song you've heard
+// ---------------------------------------------------------------------------
+
+text EuploiaBelow_Text_SongElaia { "ELAIA" }
+text EuploiaBelow_Text_SongRoute1 { "KALLISTE ROAD" }
+text EuploiaBelow_Text_SongAkti { "AKTI HARBOR" }
+text EuploiaBelow_Text_SongTemple { "HESTIA'S FIRE" }
+text EuploiaBelow_Text_SongAsclepeion { "THE HEALER" }
+text EuploiaBelow_Text_SongAgora { "THE AGORA" }
+text EuploiaBelow_Text_SongAkademia { "THE AKADEMIA" }
+text EuploiaBelow_Text_SongRoad { "THE ROAD" }
+text EuploiaBelow_Text_SongEmporion { "EMPORION" }
+text EuploiaBelow_Text_SongEleusa { "ELEUSA" }
+text EuploiaBelow_Text_SongHollow { "THE HOLLOW" }
+text EuploiaBelow_Text_SongLullaby { "ELPIS'S SONG" }
+text EuploiaBelow_Text_SongEuploia { "THE EUPLOIA" }
+text EuploiaBelow_Text_SongStop { "THAT'S ENOUGH" }
+
+script EuploiaBelow_EventScript_Phemios {
+    lock
+    faceplayer
+    setspeaker(EuploiaBelow_Text_NamePhemios)
+    msgbox(format("Name a song. If you've heard it, I can play it.\p…Better than you heard it, probably."))
+    if (flag(FLAG_ICHOR_CREW_NOLAN)) {
+        msgbox(format("Nolan wants my songs backwards. Backwards!\p…I've been trying it. Don't tell him."))
+    }
+    message(format("Which one?"))
+    waitmessage
+    // ICHOR_STUB_PHEMIOS_SONGS: every song is offered. Once the game records the
+    // songs you've heard, push only those (and the voyage's new ones).
+    dynmultipush(EuploiaBelow_Text_SongElaia, 0)
+    dynmultipush(EuploiaBelow_Text_SongRoute1, 1)
+    dynmultipush(EuploiaBelow_Text_SongAkti, 2)
+    dynmultipush(EuploiaBelow_Text_SongTemple, 3)
+    dynmultipush(EuploiaBelow_Text_SongAsclepeion, 4)
+    dynmultipush(EuploiaBelow_Text_SongAgora, 5)
+    dynmultipush(EuploiaBelow_Text_SongAkademia, 6)
+    dynmultipush(EuploiaBelow_Text_SongRoad, 7)
+    dynmultipush(EuploiaBelow_Text_SongEmporion, 8)
+    dynmultipush(EuploiaBelow_Text_SongEleusa, 9)
+    dynmultipush(EuploiaBelow_Text_SongHollow, 10)
+    dynmultipush(EuploiaBelow_Text_SongLullaby, 11)
+    dynmultipush(EuploiaBelow_Text_SongEuploia, 12)
+    dynmultipush(EuploiaBelow_Text_SongStop, 13)
+    dynmultistack(0, 0, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+    closemessage
+    switch (var(VAR_RESULT)) {
+        case 0: playbgm(MUS_ICHOR_ELAIA, FALSE)
+        case 1: playbgm(MUS_ICHOR_ROUTE1, FALSE)
+        case 2: playbgm(MUS_ICHOR_AKTI, FALSE)
+        case 3: playbgm(MUS_ICHOR_TEMPLE, FALSE)
+        case 4: playbgm(MUS_ICHOR_ASCLEPEION, FALSE)
+        case 5: playbgm(MUS_ICHOR_AGORA, FALSE)
+        case 6: playbgm(MUS_ICHOR_AKADEMIA, FALSE)
+        case 7: playbgm(MUS_ICHOR_ROAD, FALSE)
+        case 8: playbgm(MUS_ICHOR_EMPORION, FALSE)
+        case 9: playbgm(MUS_ICHOR_ELEUSA, FALSE)
+        case 10: playbgm(MUS_ICHOR_HOLLOW, FALSE)
+        case 11: playbgm(MUS_ICHOR_ELPIS_LULLABY, FALSE)
+        case 12: playbgm(MUS_ICHOR_TRIREME, FALSE)
+        default:
+            fadedefaultbgm
+            msgbox(format("Fine. The sea can have a turn."))
+            release
+            end
+    }
+    msgbox(format("Phemios plays. Up on deck, the oarsmen stop talking to listen."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The trophy shelf, the mess, and the chests
+// ---------------------------------------------------------------------------
+
+script EuploiaBelow_EventScript_TrophyShelf {
+    // ICHOR_STUB_ODYSSEY_FLAGS: names the keepsakes on it once batch 6 claims
+    // their flags.
+    msgbox(format("A shelf with seven empty places, each waiting for something from the voyage.\p"
+                  "At the end sits a little painted plaque of the Euploia."), MSGBOX_SIGN)
+}
+
+script EuploiaBelow_EventScript_MessRack {
+    msgbox(format("Bowls, cups and a jug, wedged so they won't slide at sea.\p"
+                  "A string of onions sways with the hull."), MSGBOX_SIGN)
+}
+
+script EuploiaBelow_EventScript_Table {
+    if (flag(FLAG_ICHOR_CREW_LAMPON)) {
+        msgbox(format("The mess table: bread, olives, a cup of watered wine.\p"
+                      "Lampon feeds the crew here twice a day, hungry or not."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("The mess table, scrubbed and bare.\pA ship's galley wants a cook."), MSGBOX_SIGN)
+    }
+}
+
+script EuploiaBelow_EventScript_CrewChest {
+    msgbox(format("An oarsman's sea chest, roped shut.\p"
+                  "Something is carved on the lid in Lakonian. It probably says MINE."), MSGBOX_SIGN)
+}
+
+script EuploiaBelow_EventScript_SeaChest {
+    lockall
+    if (flag(FLAG_ICHOR_SHIP_SEA_CHEST)) {
+        msgbox(format("Your sea chest. Mom's note is still in it, folded small."))
+        releaseall
+        end
+    }
+    msgbox(format("A sea chest with your name scratched into the lid.\p"
+                  "Inside, wrapped in a shawl, there's a note in Mom's hand."))
+    msgbox(format("“Nausikles says you'll be gone a while.\pEat something that isn't fish. Love, Mom.”"))
+    giveitem(ITEM_MOOMOO_MILK, 3)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Your bag is full. You leave the bottles in the chest for now."))
+        releaseall
+        end
+    }
+    setflag(FLAG_ICHOR_SHIP_SEA_CHEST)
+    releaseall
+}
+
+// <generated by tools/ichor/maps/euploia.py: below deck's setmetatile variants>
+// Each sets the cells one state of below deck changes; ON_LOAD runs them
+// before the map draws. From a script, follow with special(DrawWholeMapView).
+// Rebuild with tools/ichor/maps/euploia.py after the tileset changes.
+script EuploiaBelow_EventScript_HearthCold {
+    setmetatile(9, 2, 0x2F4, TRUE)
+    setmetatile(10, 2, 0x2F5, TRUE)
+    setmetatile(9, 3, 0x2F6, TRUE)
+    setmetatile(10, 3, 0x2F7, TRUE)
+    return
+}
+script EuploiaBelow_EventScript_HearthLit {
+    setmetatile(9, 2, 0x2C5, TRUE)
+    setmetatile(10, 2, 0x2C6, TRUE)
+    setmetatile(9, 3, 0x2D4, TRUE)
+    setmetatile(10, 3, 0x2D5, TRUE)
+    return
+}
+script EuploiaBelow_EventScript_KeepsakeFleece {
+    setmetatile(4, 1, 0x2F8, TRUE)
+    return
+}
+script EuploiaBelow_EventScript_KeepsakeLotus {
+    setmetatile(5, 1, 0x2F9, TRUE)
+    return
+}
+script EuploiaBelow_EventScript_KeepsakeCord {
+    setmetatile(6, 1, 0x2FA, TRUE)
+    return
+}
+script EuploiaBelow_EventScript_KeepsakeFeather {
+    setmetatile(7, 1, 0x2FB, TRUE)
+    return
+}
+script EuploiaBelow_EventScript_KeepsakeTooth {
+    setmetatile(4, 2, 0x2FC, TRUE)
+    return
+}
+script EuploiaBelow_EventScript_KeepsakeCup {
+    setmetatile(5, 2, 0x2FD, TRUE)
+    return
+}
+script EuploiaBelow_EventScript_KeepsakeOar {
+    setmetatile(6, 2, 0x2FE, TRUE)
+    return
+}
+// </generated>

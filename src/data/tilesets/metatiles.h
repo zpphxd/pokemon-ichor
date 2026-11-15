@@ -105,3 +105,7 @@ const u16 gMetatileAttributes_PorytilesManaged_TempleHermes[] = INCBIN_U16("data
 // Ichor: labyrinth
 const u16 gMetatiles_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: euploia
+const u16 gMetatiles_PorytilesManaged_Euploia[] = INCBIN_U16("data/tilesets/secondary/euploia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Euploia[] = INCBIN_U16("data/tilesets/secondary/euploia/porytiles_bin/metatile_attributes.bin");

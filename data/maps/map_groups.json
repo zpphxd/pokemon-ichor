@@ -9,7 +9,8 @@
     "ElaiaVillage",
     "KallisteRoute1",
     "AktiTown",
-    "KallisteRoute1_KronionHill"
+    "KallisteRoute1_KronionHill",
+    "EuploiaDeck"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -53,6 +54,7 @@
     "ElaiaVillage_BakersHouse",
     "AktiTown_DiversHouse",
     "AktiTown_GoatherdsHouse",
-    "PgTestDeck"
+    "PgTestDeck",
+    "EuploiaBelow"
   ]
 }

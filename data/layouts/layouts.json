@@ -451,6 +451,28 @@
       "border_filepath": "data/layouts/AktiTown_GoatherdsHouse/border.bin",
       "blockdata_filepath": "data/layouts/AktiTown_GoatherdsHouse/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EUPLOIA_DECK",
+      "name": "EuploiaDeck_Layout",
+      "width": 24,
+      "height": 12,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Euploia",
+      "border_filepath": "data/layouts/EuploiaDeck/border.bin",
+      "blockdata_filepath": "data/layouts/EuploiaDeck/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_EUPLOIA_BELOW",
+      "name": "EuploiaBelow_Layout",
+      "width": 20,
+      "height": 10,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Euploia",
+      "border_filepath": "data/layouts/EuploiaBelow/border.bin",
+      "blockdata_filepath": "data/layouts/EuploiaBelow/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

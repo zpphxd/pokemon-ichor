@@ -16,3 +16,5 @@
 	.include "data/maps/AktiTown_DiversHouse/scripts.inc"
 	.include "data/maps/AktiTown_GoatherdsHouse/scripts.inc"
 	.include "data/maps/PgTestDeck/scripts.inc"
+	.include "data/maps/EuploiaDeck/scripts.inc"
+	.include "data/maps/EuploiaBelow/scripts.inc"
