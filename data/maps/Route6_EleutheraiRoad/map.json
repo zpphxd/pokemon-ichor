@@ -285,6 +285,14 @@
       "flag": "FLAG_ICHOR_HIDDEN_ROUTE6_WINE"
     },
     {
+      "type": "hidden_item",
+      "x": 7,
+      "y": 15,
+      "elevation": 3,
+      "item": "ITEM_REVIVE",
+      "flag": "FLAG_ICHOR_HIDDEN_ROUTE6_REVIVE"
+    },
+    {
       "type": "sign",
       "x": 20,
       "y": 19,

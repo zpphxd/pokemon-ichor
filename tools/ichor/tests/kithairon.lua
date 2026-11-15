@@ -19,6 +19,20 @@ local emu = L.emu
 local R6, EL, MK, R7 = "Route6_EleutheraiRoad_EventScript_", "Eleutherai_EventScript_",
   "MtKithairon_EventScript_", "Route7_KroniaGrounds_EventScript_"
 
+-- The crossing's hide flags live in the Ichor bank (IchorSave), which slice_lib's
+-- walker can't read on its own: teach it, so people hidden by them (the cut
+-- thicket, the herald) stop counting as obstacles.
+local function bankFlag(f)
+  local o = f - S.ICHOR_FLAGS_START
+  local base = emu:read32(S.gSaveBlock3Ptr) + S.OFF_SB3_ICHOR + S.OFF_ICHOR_FLAGS
+  return (emu:read8(base + (o >> 3)) >> (o & 7)) & 1 == 1
+end
+local getFlag1 = L.getFlag
+function L.getFlag(f)
+  if f >= S.ICHOR_FLAGS_START and f <= S.ICHOR_FLAGS_END then return bankFlag(f) end
+  return getFlag1(f)
+end
+
 local function metatile(x, y)
   local width = emu:read32(S.gBackupMapLayout + S.OFF_BACKUP_MAP_WIDTH)
   local map = emu:read32(S.gBackupMapLayout + S.OFF_BACKUP_MAP_MAP)
@@ -71,7 +85,7 @@ local function main()
   expect(L.objectOn(46, 21), "the young vines grow across the road's gap")
   L.talk(L.npc(R6 .. "Alethea"))
   L.talk(46, 21, { shotBefore = "vines" })
-  expect(not L.objectOn(46, 21), "the Sickle cut the thicket")
+  expect(not L.objectOn(46, 21) and L.getFlag(S.FLAG_HIDE_VINES), "the Sickle cut the thicket, for good")
   shot("vines_cut")
   expect(not L.goTrigger(L.triggers(R6 .. "HeraldScene")), "the herald's scene starts two rows below his barrier")
   scene("herald_scene", 120)

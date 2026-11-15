@@ -147,16 +147,19 @@ def route6():
     m.raise_(21, 0, 30, 4, 1)
     m.rect(23, 3, 30, 4, ".")
     m.rect(21, 0, 26, 2, "F")
-    m.rect(27, 0, 30, 2, "#")
+    m.rect(27, 0, 30, 2, "F")
+    m.cells([(28, 1), (30, 2)], "#")
     m.raise_(34, 0, 39, 3, 1)
     m.rect(34, 2, 37, 3, ".")
-    m.rect(34, 0, 37, 1, "#")
+    m.rect(34, 0, 37, 1, "F")
+    m.cells([(35, 0)], "#")
     m.rect(38, 0, 39, 3, "F")
     # Antiope's crag, its cave mouth in the cliff
     m.raise_(48, 0, 55, 7, 1)
     m.rect(48, 6, 55, 7, ".")
     m.rect(48, 0, 55, 3, "F")
-    m.rect(49, 4, 54, 5, "#")
+    m.rect(49, 4, 54, 5, "F")
+    m.cells([(50, 5), (53, 4)], "#")
     m.cells([(48, 4), (48, 5), (55, 4), (55, 5)], "F")
     m.face[(52, 7)] = ("cliff_mouth", "mouth")
     m.no_face_decor |= {(51, 6), (52, 6), (53, 6), (51, 7), (53, 7)}
@@ -240,6 +243,7 @@ def route6():
             sign(43, 25, R6 + "SignSouth"),
             sign(45, 21, R6 + "VineStock", "BG_EVENT_PLAYER_FACING_NORTH"),
             hidden(23, 6, "ITEM_WINE", "FLAG_ICHOR_HIDDEN_ROUTE6_WINE"),
+            hidden(7, 15, "ITEM_REVIVE", "FLAG_ICHOR_HIDDEN_ROUTE6_REVIVE"),
             sign(20, 19, R6 + "SignPress"),
             sign(34, 7, R6 + "GreatHerm"),
             sign(50, 11, R6 + "DigSpot"),
@@ -285,8 +289,7 @@ def eleutherai():
     m.rect(10, 0, 11, 27, "=")
     # the fort's rock: firs and boulders on its top, round the walls
     m.rect(14, 0, 31, 5, "F")
-    m.rect(17, 2, 28, 4, "#")
-    m.cells([(16, 3), (29, 3), (22, 1), (23, 1), (24, 1)], "#")
+    m.cells([(18, 3), (21, 2), (25, 4), (27, 2), (23, 1), (16, 3)], "#")
     m.rect(14, 6, 15, 13, "F")
     m.rect(30, 6, 31, 13, "F")
     m.cells([(14, 14), (15, 14), (14, 15), (15, 15), (30, 14), (31, 14), (30, 15), (31, 15)], "F")
@@ -427,7 +430,7 @@ def kithairon():
     m.rect(3, 44, 9, 52, ".")           # leg 3, north
     m.rect(3, 42, 20, 45, ".")          # leg 4, east under the cliff
     m.rect(10, 46, 17, 48, ".")         # the hollow between the legs
-    m.rect(18, 44, 22, 47, "#")
+    m.cells([(19, 45), (21, 46), (20, 44)], "#")
     m.rect(18, 49, 19, 55, "=")
     m.rect(6, 49, 19, 50, "=")
     m.rect(6, 44, 7, 50, "=")
@@ -454,7 +457,9 @@ def kithairon():
     m.rect(10, 37, 27, 41, ".")
     m.rect(14, 41, 15, 41, "=")
     m.rect(10, 37, 19, 40, ",")         # band 2: 4 deep, firs west, rock east
-    m.rect(20, 37, 22, 40, "#")
+    m.raise_(20, 37, 22, 40, 2)          # a rock pillar walls the band's east side
+    m.rect(20, 37, 22, 40, ".")
+    m.cells([(21, 38)], "#")
     m.rect(23, 37, 27, 37, "^")         # a ledge back down from the glade
     m.cells([(26, 40), (27, 40), (27, 39)], "s")
     m.cells([(27, 41)], "F")
@@ -464,7 +469,8 @@ def kithairon():
         for x in range(11, 21):
             if ((x - 15.5) / 4.3) ** 2 + ((y - 33.6) / 2.2) ** 2 <= 1:
                 m.ch[y][x] = "t"        # the dancing floor, trampled bare
-    m.rect(24, 32, 25, 34, "=")
+    m.rect(24, 32, 25, 36, "=")
+    m.rect(16, 36, 25, 36, "=")         # a goat track round the dancing floor
     m.stair(24, 30)
     m.cells([(10, 36), (33, 36), (33, 35), (10, 30), (10, 31), (33, 30), (33, 31)], "F")
     m.rect(28, 32, 32, 33, ",")         # long grass at the glade's back, by Bromia
@@ -481,17 +487,20 @@ def kithairon():
     m.rect(24, 20, 25, 29, "=")
     m.stair(24, 18)
     m.rect(19, 30, 33, 31, ".")         # the cliff over the glade shows here
-    m.rect(14, 25, 18, 26, "#")
+    m.rect(14, 25, 18, 26, "F")
+    m.cells([(16, 25)], "#")
     m.rect(14, 27, 14, 29, "F")
     m.rect(18, 27, 18, 29, "F")
     m.rect(15, 27, 17, 29, ".")         # the Thyrsus's ledge, over the marked ivy
     m.rect(14, 30, 18, 31, ".")
-    m.rect(19, 27, 22, 29, "#")
+    m.rect(19, 27, 22, 29, "F")
+    m.cells([(20, 28), (22, 27)], "#")
     m.cells([(19, 26), (19, 20), (19, 21), (20, 20)], "F")
     # the drum's path, west to a rocky shelf
     m.rect(9, 24, 23, 24, "=")
-    m.rect(9, 23, 18, 23, "#")
-    m.rect(9, 25, 13, 25, "#")
+    m.rect(9, 23, 18, 23, "F")
+    m.rect(9, 25, 13, 25, "F")
+    m.cells([(10, 23), (14, 23), (11, 25)], "#")
     m.rect(4, 21, 8, 27, ".")
     m.cells([(4, 21), (8, 27), (4, 27)], "F")
     m.cells([(5, 22), (7, 26)], "#")
@@ -518,13 +527,25 @@ def kithairon():
     m.rect(5, 9, 5, 16, "w")
     m.rect(15, 9, 15, 16, "w")
     m.cells([(15, 13), (15, 14)], ".")
-    m.rect(16, 8, 17, 11, "#")
-    m.rect(23, 6, 27, 11, "#")
-    m.cells([(23, 6), (24, 6), (25, 11)], "F")
-    m.rect(18, 9, 24, 11, ",")          # band 3: 3 deep, the fold's wall to the shoulder
+    m.rect(16, 8, 17, 11, "F")
+    m.cells([(17, 9)], "#")
+    m.raise_(23, 6, 27, 11, 4)          # the east shoulder comes down to the meadow
+    m.rect(23, 6, 27, 9, "F")
+    m.rect(23, 10, 27, 11, ".")
+    m.rect(18, 9, 22, 11, ",")          # band 3: 3 deep, the fold's wall to the shoulder's cliff
     m.rect(29, 13, 34, 15, ",")         # long grass on the open meadow
     m.cells([(29, 13), (34, 15)], ".")
     m.cells([(37, 16), (37, 17), (38, 17), (4, 8), (4, 17), (16, 17)], "F")
+    # clearings and deadfall in the west woods
+    m.rect(1, 23, 2, 25, ".")
+    m.cells([(1, 24), (2, 24)], "L")
+    m.rect(1, 38, 2, 40, ".")
+    m.cells([(1, 39)], "#")
+    m.rect(35, 39, 37, 42, ".")
+    m.cells([(35, 40), (36, 40)], "L")
+    m.cells([(37, 42)], "#")
+    m.rect(36, 30, 38, 32, ".")
+    m.cells([(37, 31)], "#")
     m.cells([(31, 16), (36, 13), (27, 16), (18, 16)], "s")
     # the shrine's ledge (tier 4) and its stair
     m.rect(29, 6, 36, 9, ".")
@@ -533,22 +554,26 @@ def kithairon():
     m.rect(19, 0, 22, 7, ".")
     m.rect(20, 0, 21, 7, "=")
     m.rect(0, 0, 17, 5, "F")
-    m.rect(9, 0, 15, 3, "#")
-    m.rect(25, 0, 33, 2, "#")
-    m.cells([(16, 4), (17, 4), (24, 3), (24, 2)], "#")
+    m.cells([(10, 1), (13, 2), (15, 0), (16, 4), (26, 1), (29, 0), (32, 2), (24, 3)], "#")
     m.rect(6, 6, 18, 7, ".")            # the west shoulder's face shows here
     m.rect(23, 4, 27, 5, ".")           # and the east one's
 
     # stamps
     m.stamp("pentheus_fir", 26, 20)
     m.stamp("trough", 7, 10)
-    m.stamp("leanto", 12, 10)
+    m.oak(12, 10)
     m.stamp("pear", 8, 13)
     m.named("markers", "boundary", 26, 27)
     m.named("shrine", "seat", 32, 22)
     m.named("markers", "dig", 31, 21)
     m.named("markers", "dig", 32, 15)
     m.stamp("fir", 37, 23)
+    m.named("markers", "boulder", 28, 16)
+    m.named("markers", "boulder", 36, 14)
+    m.named("markers", "boulder", 3, 49)
+    m.named("markers", "boulder", 21, 22)
+    m.named("markers", "scree", 29, 25) if False else None
+    m.fir(20, 22) if False else None
     m.named("shrine", "drum", 18, 33)
     m.named("shrine", "drum_b", 12, 32)
     m.named("shrine", "drum", 19, 35)
@@ -565,7 +590,7 @@ def kithairon():
             {"map": "MAP_ROUTE7_KRONIA_GROUNDS", "offset": MK_NORTH - R7_SOUTH, "direction": "up"},
         ],
         "object_events": [
-            obj(P + "GOATHERD", 10, 48, MK + "Lykidas", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2),
+            obj(P + "GOATHERD", 10, 48, MK + "Lykidas", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=4),
             obj(P + "MAENAD", 26, 32, MK + "Euia", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2,
                 local_id="LOCALID_KITHAIRON_EUIA"),
             obj(P + "MAENAD", 31, 34, MK + "Bromia", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3,
@@ -699,10 +724,8 @@ def route7():
     m.rect(35, 34, 43, 39, "F")
     m.raise_(11, 29, 18, 37, 1)          # the defile's west wall
     m.raise_(22, 29, 30, 37, 1)          # ... and its east wall
-    m.rect(12, 30, 17, 35, "#")
-    m.cells([(12, 30), (17, 33), (13, 33), (12, 34), (12, 35), (16, 31)], "F")
-    m.rect(23, 30, 28, 35, "#")
-    m.cells([(28, 30), (23, 33), (28, 33), (28, 34), (28, 35), (25, 31)], "F")
+    m.cells([(13, 31), (16, 33), (15, 35), (14, 30)], "#")
+    m.cells([(24, 31), (27, 34), (25, 35), (26, 30)], "#")
     m.rect(13, 36, 18, 37, ".")          # the walls' cliffs show here
     m.rect(22, 36, 28, 37, ".")
     m.rect(13, 38, 28, 39, ".")          # the defile's mouth, at the lip
@@ -710,6 +733,8 @@ def route7():
     m.cells([(15, 38), (25, 39)], "s")
     m.cells([(23, 38), (24, 38)], "L")
     m.rect(19, 29, 21, 37, ".")          # the defile itself, three wide
+    m.rect(18, 29, 18, 37, ".")          # ... between the walls' rocky lips
+    m.rect(22, 29, 22, 37, ".")
     # the slopes: leg A down to the bend, leg B west, the west meadow (leg C),
     # leg D east into the camp
     m.rect(18, 24, 22, 28, ".")
@@ -785,7 +810,7 @@ def route7():
             obj(P + "SATYR", 19, 34, R7 + "Komos", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=2),
             obj(P + "YOUTH_F", 16, 27, R7 + "LostPilgrim", "MOVEMENT_TYPE_FACE_DOWN"),
             item_ball(5, 28, "ITEM_FULL_HEAL", "FLAG_ICHOR_ITEM_ROUTE7_FULL_HEAL"),
-            obj(P + "MAN", 12, 26, R7 + "Hagnon", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=2),
+            obj(P + "MAN", 12, 26, R7 + "Hagnon", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=3),
             # beat 29: the greeter, Kleon and Alethea at the tables, the reader
             obj(P + "KRONIST", 23, 15, R7 + "Greeter", "MOVEMENT_TYPE_FACE_DOWN",
                 local_id="LOCALID_ROUTE7_GREETER"),
@@ -847,10 +872,10 @@ def cave():
         "################",
         "################",
         "####kkkkkkkk####",
-        "###kkkkkkkkkk#k#",
-        "##kkkkkkkkkkk###",
-        "##kkkkkkkkkkkkk#",
-        "##kkkkkkkkkkkk##",
+        "###kk#kkkkkkk#k#",
+        "##kkk#kkkkkkk###",
+        "##kkkkkkkk##kkk#",
+        "##kkkkkkkk##kk##",
         "###kkkkkkkkkkk##",
         "###kkkkkkkkkk###",
         "####kkkkkkkkk###",
@@ -1018,6 +1043,35 @@ EXITS = {"route6": [(32, 0), (33, 0)], "kithairon": [(20, 0), (21, 0)], "route7"
 CHECKS = {k: check_reach(k) for k in ENTRIES}
 
 
+# The crossing stitched as its maps connect, Route 7 on top: (folder, x origin
+# in Route 6's columns, width, height). Eleutherai's origin is Route 6's north
+# offset, Mt. Kithairon's is Eleutherai's plus its own, Route 7 shares
+# Mt. Kithairon's.
+STITCH = [("Route7_KroniaGrounds", R6_NORTH - EL_SOUTH + EL_NORTH - MK_SOUTH + MK_NORTH - R7_SOUTH, 44, 40),
+          ("MtKithairon", R6_NORTH - EL_SOUTH + EL_NORTH - MK_SOUTH, 40, 56),
+          ("Eleutherai", R6_NORTH - EL_SOUTH, 32, 28),
+          ("Route6_EleutheraiRoad", 0, 56, 28)]
+
+
+def stitch(src=None, out=None):
+    """design/phase3/img/kithairon_crossing.png: the whole crossing at 1x, from
+    each map's 2x render."""
+    from PIL import Image
+    src = Path(src or L.RENDER)
+    x0 = min(x for _, x, _, _ in STITCH)
+    w = max(x + mw for _, x, mw, _ in STITCH) - x0
+    h = sum(mh for *_, mh in STITCH)
+    img = Image.new("RGB", (w * 16, h * 16), (24, 24, 32))
+    y = 0
+    for folder, x, mw, mh in STITCH:
+        part = Image.open(src / f"{folder}.png").convert("RGB")
+        part = part.resize((mw * 16, mh * 16), Image.NEAREST)
+        img.paste(part, ((x - x0) * 16, y * 16))
+        y += mh
+    img.save(out or IMG / "kithairon_crossing.png")
+    return img
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--shapes", action="store_true")
@@ -1025,6 +1079,9 @@ def main():
     ap.add_argument("--tag", default="")
     args = ap.parse_args()
     build(args.only.split(",") if args.only else None, args.shapes, args.tag)
+    if not args.shapes and not args.only and not args.tag:
+        stitch()
+        print("kithairon_crossing.png -> " + str((IMG / "kithairon_crossing.png").relative_to(ROOT)))
 
 
 if __name__ == "__main__":

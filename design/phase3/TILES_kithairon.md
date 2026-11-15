@@ -1,72 +1,82 @@
 # The Kithairon crossing's tilesets
 
 The road north from Eleusa over Mt. Kithairon to Thyrsa: vine terraces and dry stone,
-black firs, grey rock, ivy, the border fort of Eleutherai with its Cyclopean walls,
-the god's roofless temple, the maenads' mountain, and on the Asopos plain below, the
-Kronia: red-and-cream awnings, bread, gold cloth. Three secondaries on the `aethos`
-primary, drawn by one set of painters:
+black firs, grey rock and its cliffs, ivy, the border fort of Eleutherai with its
+Cyclopean walls, the god's roofless temple, the maenads' mountain, and on the Asopos
+plain below, the Kronia: red-and-cream awnings, bread, gold cloth. Four secondaries on
+the `aethos` primary, drawn by one set of painters:
 
 | Tileset | Maps |
 |---|---|
-| `gTileset_Kithairon` | Route 6, Eleutherai, Mt. Kithairon |
+| `gTileset_Kithairon` | Route 6, Eleutherai |
+| `gTileset_KithaironPass` | Mt. Kithairon (the polish pass gave the climb its own set) |
 | `gTileset_Kronia` | Route 7 and the Kronia grounds |
 | `gTileset_KithaironCave` | Antiope's cave |
 
 **This catalog is generated** by `tools/ichor/art/kithairon_build.py` (painters:
-`kithairon_ground.py`, `_trees.py`, `_stone.py`, `_vines.py`, `_houses.py`, `_camp.py`;
-palettes and the soft-shape engine in `kithairon_lib.py`). The render-and-critique
-passes at the end are written by hand and kept across rebuilds.
+`kithairon_ground.py`, `_trees.py`, `_stone.py`, `_vines.py`, `_houses.py`, `_camp.py`,
+`_cliffs.py`; palettes and the soft-shape engine in `kithairon_lib.py`). The
+render-and-critique passes at the end are written by hand and kept across rebuilds.
 
 ## How it fits together
 
-**Why three sets, not one.** BUILD.md asked for one `kithairon` secondary for all four
+**Why four sets, not one.** BUILD.md asked for one `kithairon` secondary for all four
 outdoor maps, so their seams need no aethos-only strip. Everything the crossing needs
-came to about 700 tiles against a secondary's 504, so the art is split, and the seam
-still needs no aethos-only strip: Kithairon and Kronia both begin with the same **core**
-section (soft ground, firs and the oak, crag detail, stones and markers), painted from
-the same pixels and packed at the same metatile ids. The game draws a connected
-neighbor with the tilesets of the map the player stands on, and a core metatile looks
-the same in either set. The map builder keeps the six rows either side of the
-Mt. Kithairon / Route 7 seam to core and aethos metatiles. The cave is its own small set.
+is far more than a secondary's 504 tiles, so the art is split, and the seams still need
+no aethos-only strip: Kithairon, KithaironPass and Kronia all begin with the same
+**core** section (soft ground, firs and the oak, the cliffs and their faces, stairs,
+ledges, rocks, deadfall, stones and markers), painted from the same pixels and packed at
+the same metatile ids. The game draws a connected neighbor with the tilesets of the map
+the player stands on, and a core metatile looks the same in any of the three. The map
+builder keeps the six rows either side of the Eleutherai / Mt. Kithairon and
+Mt. Kithairon / Route 7 seams to core and aethos metatiles. The cave is its own small set.
 
 **Place pieces by key and cell name** from `build/kithairon/<dir>/catalog.json`, never by
 raw id (`tools/ichor/maps/kithairon.py` does). Ids below are the current build's.
 
-**Soft ground.** `tall`, `path`, `crag`, `water` and `cave` hold one piece per blob
+**Soft ground.** `tall`, `path`, `water`, `trampled` and `cave` hold one piece per blob
 shape key: `1|` then the cell's neighbors N NE E SE S SW W NW, `1` in the region and `0`
 not, a diagonal counting only when both its sides are in. `kithairon_lib.blob_key`
 computes it. The map builder lists the keys its maps use in
 `tools/ichor/art/kithairon_shapes.json` (`kithairon.py --shapes`), and only those are drawn.
 
-- `crag` is Kithairon's grey limestone: a weathered top, and a 14 px face with strata
-  along every south edge, so a crag reads as a rise with a cliff below it. Scatter
-  `crag_detail`'s interior cells through a big crag; its south-face cells carry ivy,
-  the marked ivy of the Thyrsus walls and a cave mouth.
+**Tiers and cliffs** (the polish pass). The map builder gives every cell a height. A
+raised tier is outlined by `cliff`: a rocky rim along its north, west and east edges,
+and along its south edge a lit lip over a 24 px limestone face of tall slabs that takes
+the tier's two southmost rows and darkens to a shadow at its foot. Its keys are blob keys
+plus `|1` (the tier goes on two rows down) or `|0` (the face's upper row), and `|b` for
+the face's second phase, so the slabs repeat every 32 px, not 16. Firs standing on a
+boundary hide the cliff; elsewhere it shows. `cliff_face` dresses a face (ivy, a crack,
+a tuft, a seep, a fern), `cliff_stair` cuts steps through it, `ledge` gives one-way rock
+drops (south on Mt. Kithairon, north down Route 7's north face).
+
 - `water` is aethos's animated sea under a pebbly bank with reeds: MB_POND_WATER,
-  surfable and fishable.
+  surfable and fishable. It is in the pass and Kronia sets, not the core.
 
 **Walk codes** in the grids: `X` blocks, `.` walkable, `T` walkable and drawn over the
-player, `G` tall grass, `D` a door (MB_NON_ANIMATED_DOOR: put the warp there).
+player, `G` tall grass, `J` a ledge (MB_JUMP_SOUTH), `D` a door (MB_NON_ANIMATED_DOOR: put
+the warp there). The north ledges are `X` cells with MB_JUMP_NORTH.
 
-**Borrowed ground.** Cells marked *grass*, *path*, *sea* or *tall* draw no ground of
-their own: the build points their bottom tiles at aethos's grass (`0x001`), road
-(`0x1D9`), animated sea (`0x170`) or tall grass (`0x00D`). Rebuild these sets whenever
-aethos is repainted.
+**Borrowed ground.** Cells marked *grass*, *path*, *sea*, *shade* or *tall* draw no ground
+of their own: the build points their bottom tiles at aethos's grass (`0x001`), road
+(`0x1D9`), animated sea (`0x170`), deep shade (`0x01C`) or tall grass (`0x00D`). Rebuild
+these sets whenever aethos is repainted.
 
 **Palettes.** Seven groups, one per secondary palette; every 8x8 tile draws from one.
 
 | Group | Use |
 |---|---|
-| field | tall grass, the road, its edges |
-| rock | crags, the cave, boulders, ivy and the marked ivy, shrines, the herm |
-| tree | firs, oaks |
-| vine | trellises, the old vines, the wine-cart |
+| field | tall grass, the road, its edges; the maenads' drums |
+| rock | cliffs, ledges, rocks, the cave, ivy and the marked ivy, shrines, the herm |
+| tree | firs, oaks, deadfall |
+| vine | trellises, the wine-cart |
 | house | Eleusa's house kit, verbatim |
 | stone | Cyclopean walls, the temple, the wine press, troughs |
 | camp | the Kronia's awnings, tables, tents, stage, banner, oven; the brazier |
 
-**Scripted swaps** (`include/constants/metatile_labels.h`): `METATILE_Kithairon_OldVines`,
-`_OldVines_B` and `_OldVines_Stumps` (the vines across Route 6, beat 26), and
+**Scripted swaps** (`include/constants/metatile_labels.h`): `METATILE_Kithairon_Barrier_W`
+and `_E` (the herald's pole, beat 26), `METATILE_KithaironPass_Shrine_Top`, `_Shrine`,
+`_ShrineBad_Top`, `_ShrineBad` (the shrine once cleansed), and
 `METATILE_KithaironCave_Brazier_ColdTop`, `_Cold`, `_LitTop`, `_Lit`.
 
 ## Budget
@@ -78,7 +88,7 @@ aethos is repainted.
 | `gTileset_KithaironPass` | 405 of 504 | 240 of 512 |
 | `gTileset_KithaironCave` | 62 of 504 | 48 of 512 |
 
-## `gTileset_Kithairon`: Route 6, Eleutherai and Mt. Kithairon
+## `gTileset_Kithairon`: Route 6 and Eleutherai
 
 ![sheet](img/tiles_kithairon_sheet.png)
 
@@ -88,13 +98,13 @@ aethos is repainted.
 
 `tall`, 8 wide by 3 tall. Barley tall grass on aethos grass, cut from one field so any outline works (agros's painter, as on Route 1). MB_TALL_GRASS throughout. Names are blob shape keys (`1|NNEESESSWWNW`).
 
-23 shapes, from 0x200; the interior `1|11111111` is 0x200.
+23 shapes, from 0x200; the first, `1|11111111`, is 0x200.
 
 #### The road with soft edges
 
 `path`, 8 wide by 3 tall. The limestone road and its goat-track branches, scalloped where they meet the grass (agros's painter). Names are blob shape keys.
 
-24 shapes, from 0x218; the interior `1|11111111` is 0x218.
+24 shapes, from 0x218; the first, `1|11111111`, is 0x218.
 
 #### Black fir (2 x 3 with its spire)
 
@@ -257,15 +267,7 @@ Borrowed ground: grass at 0,0, 1,0, 2,0.
 
 `cliff`, 8 wide by 3 tall. The boundary of a raised tier, on borrowed grass: a rocky rim on its north, west and east edges, and on its south edge a lit lip over a 24 px limestone face that takes the tier's two southmost rows and darkens to a shadow at its foot. The tier's inside is ordinary ground. Names are blob shape keys plus `|1` (the tier goes on two rows down) or `|0` (this is the face's upper row). Blocks.
 
-```text
-0x270 0x271 0x272 0x273 0x274 0x275 0x276 0x277   X X X X X X X X
-0x278 0x279 0x27A 0x27B 0x27C 0x27D 0x27E 0x27F   X X X X X X X X
-0x280 0x281 0x282 0x283 0x284 0x285 0x286 0x287   X X X X X X X X
-```
-
-Pieces: `1|00001110|1` 0x270, `1|00111000|1` 0x271, `1|00111110|1` 0x272, `1|10000011|0` 0x273, `1|10000011|0|b` 0x274, `1|10001111|0` 0x275, `1|10001111|0|b` 0x276, `1|10001111|1` 0x277, `1|11100000|0` 0x278, `1|11100000|0|b` 0x279, `1|11100011|0` 0x27A, `1|11100011|0|b` 0x27B, `1|11111000|0` 0x27C, `1|11111000|0|b` 0x27D, `1|11111000|1` 0x27E, `1|11111111|0` 0x27F, `1|11111111|0|b` 0x280.
-
-Borrowed ground: grass at 0,0, 0,1, 0,2, 1,0, 1,1, 1,2, 2,0, 2,1, 2,2, 3,0, 3,1, 3,2, 4,0, 4,1, 4,2, 5,0, 5,1, 5,2, 6,0, 6,1, 6,2, 7,0, 7,1, 7,2.
+17 shapes, from 0x270; the first, `1|00001110|1`, is 0x270.
 
 #### Cliff faces: ivy, a crack, a tuft, a seep, a fern
 
@@ -585,260 +587,15 @@ Borrowed ground: sea at 0,0, 1,0.
 
 `water`, 8 wide by 2 tall. Aethos's animated sea under a bank of grey pebbles and reeds. MB_POND_WATER: surf it with the Conch and fish it. Names are blob shape keys; the interior is `1|11111111`.
 
-13 shapes, from 0x2F0; the interior `1|11111111` is 0x2F0.
+13 shapes, from 0x2F0; the first, `1|11111111`, is 0x2F0.
 
 ## `gTileset_KithaironPass`: Mt. Kithairon, the maenads' pass
 
 ![sheet](img/tiles_kithairon_pass_sheet.png)
 
-### Core: shared by Kithairon and Kronia at the same ids
+### Core
 
-#### Tall grass with soft edges
-
-`tall`, 8 wide by 3 tall. Barley tall grass on aethos grass, cut from one field so any outline works (agros's painter, as on Route 1). MB_TALL_GRASS throughout. Names are blob shape keys (`1|NNEESESSWWNW`).
-
-23 shapes, from 0x200; the interior `1|11111111` is 0x200.
-
-#### The road with soft edges
-
-`path`, 8 wide by 3 tall. The limestone road and its goat-track branches, scalloped where they meet the grass (agros's painter). Names are blob shape keys.
-
-24 shapes, from 0x218; the interior `1|11111111` is 0x218.
-
-#### Black fir (2 x 3 with its spire)
-
-`fir`, 2 wide by 3 tall. A black fir. The top row is its spire over the grass of the row above: walkable, drawn over the player. Rows 1-2 block.
-
-```text
-0x230 0x231   T T
-0x238 0x239   X X
-0x240 0x241   X X
-```
-
-Borrowed ground: grass at 0,0, 0,1, 0,2, 1,0, 1,1, 1,2.
-
-#### Slim fir (2 x 3 with its spire)
-
-`fir_b`, 2 wide by 3 tall. A black fir. The top row is its spire over the grass of the row above: walkable, drawn over the player. Rows 1-2 block.
-
-```text
-0x232 0x233   T T
-0x23A 0x23B   X X
-0x242 0x243   X X
-```
-
-Borrowed ground: grass at 0,0, 0,1, 0,2, 1,0, 1,1, 1,2.
-
-#### A fir's base with the next fir's spire over it
-
-`fir_stack`, 2 wide by 1 tall. Between two firs in a column: the upper fir's base row, the lower fir's spire over it. Blocks.
-
-```text
-0x234 0x235   X X
-```
-
-Borrowed ground: grass at 0,0, 1,0.
-
-#### A fir's base with the next fir's spire over it
-
-`fir_stack_b`, 2 wide by 1 tall. Between two firs in a column: the upper fir's base row, the lower fir's spire over it. Blocks.
-
-```text
-0x236 0x237   X X
-```
-
-Borrowed ground: grass at 0,0, 1,0.
-
-#### Young fir (1 x 2)
-
-`fir_young`, 1 wide by 2 tall. A sapling fir for gaps at the woods' edge. Its top half is drawn over the player.
-
-```text
-0x23C   T
-0x244   X
-```
-
-Borrowed ground: grass at 0,0, 0,1.
-
-#### Scrub oak (2 x 2)
-
-`oak`, 2 wide by 2 tall. A low, wide kermes oak of the mountain's lower slopes.
-
-```text
-0x23D 0x23E   X X
-0x245 0x246   X X
-```
-
-Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1.
-
-#### Stones of the road: the herm, boundary stones, scree
-
-`markers`, 4 wide by 2 tall. On borrowed grass. `herm_top` over `herm`: the great herm, hung with ivy. `boundary` a worn boundary stone, `boulder` a grey rock, `scree`/`scree_b` loose stones (walkable), `dig` turned earth on grass (walkable).
-
-```text
-0x248 0x249 0x24A 0x24B   T . . X
-0x250 0x251 0x252 0x253   X X . .
-```
-
-Pieces: `herm_top` 0x248, `dig` 0x249, `scree_b` 0x24A, `boulder` 0x24B, `herm` 0x250, `boundary` 0x251, `scree` 0x252.
-
-Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1, 3,0, 3,1.
-
-#### Black fir (2 x 3 with its spire), in the woods' shade
-
-`fir_shade`, 2 wide by 3 tall. The same as `fir`, on aethos's deep-shade grass, for inside a wood. The spire row stays on plain grass: use `fir`'s top row there.
-
-```text
-0x24C 0x24D   T T
-0x254 0x255   X X
-0x25C 0x25D   X X
-```
-
-Borrowed ground: shade at 0,0, 0,1, 0,2, 1,0, 1,1, 1,2.
-
-#### Slim fir (2 x 3 with its spire), in the woods' shade
-
-`fir_b_shade`, 2 wide by 3 tall. The same as `fir_b`, on aethos's deep-shade grass, for inside a wood. The spire row stays on plain grass: use `fir_b`'s top row there.
-
-```text
-0x24E 0x24F   T T
-0x256 0x257   X X
-0x25E 0x25F   X X
-```
-
-Borrowed ground: shade at 0,0, 0,1, 0,2, 1,0, 1,1, 1,2.
-
-#### A fir's base with the next fir's spire over it, in the woods' shade
-
-`fir_stack_shade`, 2 wide by 1 tall. The same as `fir_stack`, on aethos's deep-shade grass, for inside a wood. The spire row stays on plain grass: use `fir_stack`'s top row there.
-
-```text
-0x258 0x259   X X
-```
-
-Borrowed ground: shade at 0,0, 1,0.
-
-#### A fir's base with the next fir's spire over it, in the woods' shade
-
-`fir_stack_b_shade`, 2 wide by 1 tall. The same as `fir_stack_b`, on aethos's deep-shade grass, for inside a wood. The spire row stays on plain grass: use `fir_stack_b`'s top row there.
-
-```text
-0x25A 0x25B   X X
-```
-
-Borrowed ground: shade at 0,0, 1,0.
-
-#### Young fir (1 x 2), in the woods' shade
-
-`fir_young_shade`, 1 wide by 2 tall. The same as `fir_young`, on aethos's deep-shade grass, for inside a wood. The spire row stays on plain grass: use `fir_young`'s top row there.
-
-```text
-0x23F   T
-0x247   X
-```
-
-Borrowed ground: shade at 0,0, 0,1.
-
-#### Scrub oak (2 x 2), in the woods' shade
-
-`oak_shade`, 2 wide by 2 tall. The same as `oak`, on aethos's deep-shade grass, for inside a wood. The spire row stays on plain grass: use `oak`'s top row there.
-
-```text
-0x260 0x261   X X
-0x268 0x269   X X
-```
-
-Borrowed ground: shade at 0,0, 0,1, 1,0, 1,1.
-
-#### Meadow flowers and a tussock
-
-`meadow`, 3 wide by 1 tall. Walkable. Scatter through open grass with aethos's red anemones (0x004): `white` narcissus, `yellow` mountain crocus, `tuft` a tussock.
-
-```text
-0x262 0x263 0x264   . . .
-```
-
-Pieces: `white` 0x262, `yellow` 0x263, `tuft` 0x264.
-
-Borrowed ground: grass at 0,0, 1,0, 2,0.
-
-#### Cliffs: the edges of a raised tier
-
-`cliff`, 8 wide by 3 tall. The boundary of a raised tier, on borrowed grass: a rocky rim on its north, west and east edges, and on its south edge a lit lip over a 24 px limestone face that takes the tier's two southmost rows and darkens to a shadow at its foot. The tier's inside is ordinary ground. Names are blob shape keys plus `|1` (the tier goes on two rows down) or `|0` (this is the face's upper row). Blocks.
-
-```text
-0x270 0x271 0x272 0x273 0x274 0x275 0x276 0x277   X X X X X X X X
-0x278 0x279 0x27A 0x27B 0x27C 0x27D 0x27E 0x27F   X X X X X X X X
-0x280 0x281 0x282 0x283 0x284 0x285 0x286 0x287   X X X X X X X X
-```
-
-Pieces: `1|00001110|1` 0x270, `1|00111000|1` 0x271, `1|00111110|1` 0x272, `1|10000011|0` 0x273, `1|10000011|0|b` 0x274, `1|10001111|0` 0x275, `1|10001111|0|b` 0x276, `1|10001111|1` 0x277, `1|11100000|0` 0x278, `1|11100000|0|b` 0x279, `1|11100011|0` 0x27A, `1|11100011|0|b` 0x27B, `1|11111000|0` 0x27C, `1|11111000|0|b` 0x27D, `1|11111000|1` 0x27E, `1|11111111|0` 0x27F, `1|11111111|0|b` 0x280.
-
-Borrowed ground: grass at 0,0, 0,1, 0,2, 1,0, 1,1, 1,2, 2,0, 2,1, 2,2, 3,0, 3,1, 3,2, 4,0, 4,1, 4,2, 5,0, 5,1, 5,2, 6,0, 6,1, 6,2, 7,0, 7,1, 7,2.
-
-#### Cliff faces: ivy, a crack, a tuft, a seep, a fern
-
-`cliff_face`, 3 wide by 2 tall. Mid-face cells to scatter along a cliff's south face: `_u` for its upper row, `_l` for its lower row. `ivy` hangs from the lip, `crack_u` splits the face with a fern, `tuft_u` a grass tuft on a ledgelet, `seep_l` a dark wet streak, `fern_l` a fern at the foot.
-
-```text
-0x265 0x266 0x267   X X X
-0x26D 0x26E 0x26F   X X X
-```
-
-Pieces: `ivy_u` 0x265, `crack_u` 0x266, `tuft_u` 0x267, `ivy_l` 0x26D, `seep_l` 0x26E, `fern_l` 0x26F.
-
-Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1.
-
-#### Rock steps cut through a cliff
-
-`cliff_stair`, 3 wide by 2 tall. The road's way up a cliff: a two-row flight of rock steps cut through the face, on borrowed road. 2 wide: `TL`, `TR` over `BL`, `BR`; 1 wide: `T` over `B`. Put them in the face's two rows; the face's own cells either side stay as they are. Walkable.
-
-```text
-0x288 0x289 0x28A   . . .
-0x290 0x291 0x292   . . .
-```
-
-Pieces: `TL` 0x288, `TR` 0x289, `BL` 0x290, `BR` 0x291, `T` 0x28A, `B` 0x292.
-
-Borrowed ground: path at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1.
-
-#### Rock ledges: one way down
-
-`ledge`, 3 wide by 2 tall. `S_*` drop south (MB_JUMP_SOUTH): a knee-high step of grey rock with grass above and its shadow below; the road home on Mt. Kithairon. `N_*` drop north (MB_JUMP_NORTH): the same seen from above, the land falling away beyond a rocky lip; the way down Route 7's north face. L, M, R: the ends taper into the grass.
-
-```text
-0x28B 0x28C 0x28D   J J J
-0x293 0x294 0x295   X X X
-```
-
-Pieces: `S_L` 0x28B, `S_M` 0x28C, `S_R` 0x28D, `N_L` 0x293, `N_M` 0x294, `N_R` 0x295.
-
-Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1.
-
-#### Rocky ground: boulders, a split crag, a scree heap
-
-`rocks`, 3 wide by 1 tall. Impassable rock for a tier's top or a wood's floor: `pile` a heap of boulders, `split` a crag split by a juniper, `scree` a heap of broken stone. On borrowed grass.
-
-```text
-0x26A 0x26B 0x26C   X X X
-```
-
-Pieces: `pile` 0x26A, `split` 0x26B, `scree` 0x26C.
-
-Borrowed ground: grass at 0,0, 1,0, 2,0.
-
-#### Deadfall: a fallen fir, a stump, a dead snag
-
-`deadfall`, 4 wide by 2 tall. `log_W` + `log_E`: a fallen fir lying east-west, its broken top to the west and its root plate to the east, moss along its back. `stump` a fir stump, `snag_top` over `snag` a dead fir standing grey (its top drawn over the player). `_s` copies stand on the woods' deep shade.
-
-```text
-0x298 0x299 0x29A 0x29B   X X X T
-0x2A0 0x2A1 0x2A2 0x2A3   X X X X
-```
-
-Pieces: `log_W` 0x298, `log_E` 0x299, `stump` 0x29A, `snag_top` 0x29B, `snag` 0x2A3, `log_W_s` 0x2A0, `log_E_s` 0x2A1, `stump_s` 0x2A2.
-
-Borrowed ground: grass at 0,0, 1,0, 2,0, 3,0, 3,1; shade at 0,1, 1,1, 2,1.
+The same structures at the same ids as in `gTileset_Kithairon`'s core, above.
 
 ### The maenads' pass: Pentheus's fir, the shrine, the dancing floor
 
@@ -898,18 +655,13 @@ Borrowed ground: sea at 0,0, 1,0.
 
 `water`, 8 wide by 2 tall. Aethos's animated sea under a bank of grey pebbles and reeds. MB_POND_WATER: surf it with the Conch and fish it. Names are blob shape keys; the interior is `1|11111111`.
 
-13 shapes, from 0x2C0; the interior `1|11111111` is 0x2C0.
+13 shapes, from 0x2C0; the first, `1|11111111`, is 0x2C0.
 
 #### The dancing floor: trampled earth with soft edges
 
 `trampled`, 8 wide by 2 tall. Grass beaten to bare earth by dancing feet. Walkable; names are blob shape keys.
 
-```text
-0x2D0 0x2D1 0x2D2 0x2D3 0x2D4 0x2D5 0x2D6 0x2D7   . . . . . . . .
-0x2D8 0x2D9 0x2DA 0x2DB 0x2DC 0x2DD 0x2DE 0x2DF   . . . . . . . .
-```
-
-Pieces: `1|11111111` 0x2D0, `1|00000010` 0x2D1, `1|00001000` 0x2D2, `1|00101110` 0x2D3, `1|00111000` 0x2D4, `1|00111110` 0x2D5, `1|10000010` 0x2D6, `1|10000011` 0x2D7, `1|10001111` 0x2D8, `1|10111111` 0x2D9, `1|11100000` 0x2DA, `1|11100011` 0x2DB, `1|11111011` 0x2DC, `1|11111110` 0x2DD.
+14 shapes, from 0x2D0; the first, `1|11111111`, is 0x2D0.
 
 #### Wild pear in flower (2 x 2)
 
@@ -943,7 +695,7 @@ Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1.
 
 `cave`, 8 wide by 3 tall. The crag's rock as cave walls, on the cave floor. Impassable. Names are blob shape keys; `cave_floor` below is the open floor.
 
-17 shapes, from 0x200; the interior `1|11111111` is 0x200.
+18 shapes, from 0x200; the first, `1|11111111`, is 0x200.
 
 #### Antiope's cave: the floor
 
@@ -997,16 +749,18 @@ final 2x renders are in `img/<Map>.png`; in-game screenshots of every scene are 
 
 | Render | Map |
 |---|---|
-| [`img/kithairon_crossing.png`](img/kithairon_crossing.png) | The whole crossing, 1x, stitched as the maps connect: Route 7 at the top, Route 6 at the bottom |
+| [`img/kithairon_crossing.png`](img/kithairon_crossing.png) | The whole crossing, 1x, stitched as the maps connect: Route 7 at the top, Route 6 at the bottom (`kithairon.py` writes it) |
+| [`img/kithairon_polish_before_after.png`](img/kithairon_polish_before_after.png) | Each map before and after the polish pass (`kithairon_before_after.py`) |
 | [`img/Route6_EleutheraiRoad.png`](img/Route6_EleutheraiRoad.png) | Route 6, the Eleutherai Road (56 x 28) |
 | [`img/Route6_AntiopesCave.png`](img/Route6_AntiopesCave.png) | Antiope's cave (16 x 12) |
-| [`img/Eleutherai.png`](img/Eleutherai.png) | Eleutherai (32 x 26) |
+| [`img/Eleutherai.png`](img/Eleutherai.png) | Eleutherai (32 x 28 since the polish pass) |
 | [`img/MtKithairon.png`](img/MtKithairon.png) | Mt. Kithairon, the maenads' pass (40 x 56) |
 | [`img/Route7_KroniaGrounds.png`](img/Route7_KroniaGrounds.png) | Route 7, the Kronia grounds (44 x 40) |
 
 The builder also checks each map: every person, sign and trigger can be reached from the
-entry (relic-gated items excepted), and which grass bands are forced. Today: Route 6's
-two (3 and 4 deep), Mt. Kithairon's one (4 deep), Route 7's two (4 and 3 deep).
+entry (relic-gated items excepted), and which grass bands are forced. Today, after the
+polish pass: Route 6's three, Mt. Kithairon's three, Route 7's two. The passes below this
+paragraph are batch 1's; the polish pass (batch 2) follows them.
 
 ### The art (all maps)
 
@@ -1093,14 +847,160 @@ two (3 and 4 deep), Mt. Kithairon's one (4 deep), Route 7's two (4 and 3 deep).
 
 ### Deviations
 
-- **Three secondaries, not one** (above, *How it fits together*). The Route 7 seam is
-  covered by the shared core.
+- **Four secondaries, not one** (above, *How it fits together*). The seams are covered by
+  the shared core. Mt. Kithairon's own set (the polish pass) moved Eleutherai's fort four
+  rows south, so the town's six north rows are core.
+- **Eleutherai is 32 x 28**, two rows taller than SCRIPT.md's "about 32 x 26", to keep the
+  pens and both houses under the fort's new rock.
 - **Route 6's zigzag is mirrored** (Eleusa's road arrives at x 44-47, on the east side).
-- **Route 7 has no ledges.** aethos's ledges only jump south (uphill here); SCRIPT.md's
-  open question 1 wanted north-dropping ledges, which would need new ledge art. The
-  descent's shortcut is the road itself.
+- **The vines are one thicket**, in a one-tile gap beside an old vine stock: two thicket
+  objects sharing the one hide flag would leave the second standing until the map reloads.
+- **Route 7's ledges drop north** (SCRIPT.md's open question 1), drawn in the core as rock
+  ledges with MB_JUMP_NORTH. On a descent a north ledge is a shortcut forward, so they sit
+  only in optional ground (the riverside pasture), never past a forced band.
 - **Komos faces across the defile**, not up the road: one trainer facing up a two-wide road
-  covers one column. His sight (4) covers both road columns.
+  covers one column. He stands in the defile's third column, his sight covering the road.
 - **Arimnestos guards the drum's path** at the fork rather than standing west of the fold:
   SCRIPT.md puts the boundary stone at the fork and the drum west of the fold, and he
   stands by both.
+- **Pushed drums stay moved by vanishing.** A column drum is the engine's Strength boulder;
+  vanilla puts a boulder back on reload, so a trigger on the tile where it lay sets its
+  hide flag once the player stands there. On the next load the drum is gone, not where it
+  was pushed.
+
+## Polish pass (batch 2)
+
+Batch 1's crossing worked but read flat. The integrator's critique: Mt. Kithairon was
+large blocks of identical firs and grey slabs that read as floor, not cliffs; the
+maenads' drums read as pale stones; Route 7's west meadow was open and empty. The
+director then asked for far more grass: two or three forced bands per section, optional
+grass with a reason to go in, and every dead end paying. This pass answers all of it,
+then swaps batch 1's stubs for the engine's systems.
+
+![before and after](img/kithairon_polish_before_after.png)
+
+### The art
+
+1. **Cliffs with height** (`kithairon_cliffs.py`). The old `crag` was one soft region with
+   a 14 px face: a grey slab with a lip. It is gone. In its place, the map builder gives
+   every cell a tier (a height), and `cliff` outlines each raised tier: a bevelled rock lip
+   on its north, west and east edges, and on its south edge a lit lip over a 24 px face of
+   limestone slabs that takes the tier's two southmost rows and darkens to a cast shadow.
+   - *First draw:* vertical cracks every few pixels: it read as a picket fence.
+   - *Second:* rounded blocks lit on their upper left: better, but a cobbled wall with a
+     16 px repeat.
+   - *Third:* tall slabs on a 32 px repeat (a face cell's phase, `|b`, picks which half),
+     joints offset course to course, so the face reads as rock and the repeat hides. The
+     rims went from a chain of pebbles to a plain bevel, which reads as an edge.
+   - Firs standing on a tier's boundary hide the cliff, so cliffs emerge from the woods
+     instead of running as walls across the whole map.
+2. **Stairs, ledges, faces.** `cliff_stair` cuts rock steps through a face (2 wide for the
+   road, 1 wide for goat paths); `ledge` gives knee-high rock drops, south (MB_JUMP_SOUTH)
+   and north (MB_JUMP_NORTH, for Route 7's descent); `cliff_face` scatters ivy, a cracked
+   fern, a tuft, a seep and a fern at the foot along plain faces; the cave mouth and the
+   marked ivy are face cells too.
+3. **Rocks and deadfall.** `#` is no longer a crag but rocky ground: a big boulder, a crag
+   split by a juniper, a scree heap. Three small stones a cell read as cobbles in bulk, so
+   each cell now holds one big rock; masses are firs with rocks among them. `deadfall`
+   adds a fallen fir with its root plate, a stump and a dead snag.
+4. **The drums.** Redrawn as frame drums: a pale skin with an ochre ring and an ivy leaf
+   painted on it, a deep dark hoop with bronze jingles; one lying on its back with a
+   ribbon, one stood on its rim with a beater.
+5. **A fourth set.** Kithairon was at 479 of 504 tiles; the cliffs alone needed a hundred.
+   Mt. Kithairon now has `gTileset_KithaironPass` (core, Pentheus's fir, the shrine, the
+   drums, the dancing floor, the marked ivy, the wild pear, water); the old vines, now a
+   thicket object, left Kithairon. Budgets: Kithairon 480, Kronia 480, KithaironPass 405,
+   the cave 62, each of 504.
+
+### Mt. Kithairon
+
+1. **Pass 1.** Redrawn as a climb in five tiers: the foot, the glade, the fork, the high
+   meadow, and the two shoulders of the pass. Each step up is a cliff with a stair cut in
+   it. Three forced bands (the first switchback's leg, the fir clearing below the glade,
+   the high meadow under the shoulders), rock ledges home along the switchbacks. *Critique:*
+   the cliffs ran wall to wall like a stepped pyramid; boulder fields read as cobbles; the
+   shepherds' lean-to was a brown box; the dancing floor's track ended at the trigger.
+2. **Pass 2.** Firs hide the cliffs' ends; rock masses became firs with rocks among them;
+   the lean-to became an oak; a goat track runs round the dancing floor to the glade's
+   stair; the east shoulder comes down to the meadow, so band 3 lies between the fold's
+   wall and its cliff. *Critique:* the rock pillar beside the clearing's band was a framed
+   lawn; the east woods were one block; the fork was bare.
+3. **Pass 3.** The pillar's top is rock; clearings with deadfall and stones break the east
+   and west woods; boulders on the fork and the high meadow. The pass now narrows to four
+   tiles between the shoulders' lips, the meadow opens wide below them, and the climb
+   reads from any screen. Left as is: the drums are small at 1x.
+
+### Route 6, the Eleutherai Road
+
+1. **Pass 1.** The terrace risers were rows of crag: they are dry stone (as SCRIPT.md
+   says, every terrace is walled with dry stone), with rock ledges where the zigzag lets
+   you hop home. Antiope's crag is a tier with the cave mouth in its cliff; the cutting
+   under Eleutherai is two shoulders with cliffs; an outcrop stands in each terrace's
+   vines. The vines are a thorn-thicket object in the road's gap, beside an old stock too
+   thick to cut. *Critique:* only two forced bands; boulder rows on the cutting.
+2. **Pass 2.** A third band across the road under the cutting, Astylos just past it; long
+   grass between the vine rows; a clearing in the west woods with deadfall and a hidden
+   Revive; the boulder rows became firs with rocks.
+3. **Pass 3.** Checked screen by screen against the road's rhythm: the vines and the
+   herald, Ikarios, band 1, the stair, Pythodoros and band 2, the herm, the spur's grass
+   and the cave, band 3 and Astylos, the fort in view. Left as is: the outcrops are
+   small, box-like rises; they read as rock in the vines.
+
+### Eleutherai
+
+1. **Pass 1.** Mt. Kithairon's new set means Eleutherai's six north rows must be core:
+   the fort moved four rows south, onto its own rock, a tier whose cliff rises under the
+   south wall, with a stair cut up to the gate. The map is two rows taller (32 x 28) to
+   keep the pens and both houses. *Critique:* a cobbled boulder field over the fort.
+2. **Pass 2.** Firs with a few rocks on the fort's rock. Oinoe's door had been walled in
+   by woods; opened.
+3. **Pass 3.** The fort on its cliff is the town's landmark from the road; the spring's
+   trough hides a Bronze Obol. Left as is: the parade ground is plain beaten earth.
+
+### Route 7, the Kronia grounds
+
+1. **Pass 1.** The north face redrawn: the defile is two rock walls (tiers) whose cliffs
+   face you as you come over the pass; Komos's band below him; the road winds west past
+   Hagnon, north through the **west meadow**, which now has its purpose: a mountain brook
+   runs down its west side into a pond at the camp's corner (the river's edge, fishable),
+   band 2 forces itself across the road from the brook to the scrub, and the meadow's dead
+   end holds the Full Heal in long grass. East, the riverside pasture has long grass and a
+   north-dropping rock ledge toward the beach. *Critique:* the road was cut in two by a
+   later rectangle; boulder fields on the walls.
+2. **Pass 2.** Roads drawn last, so nothing cuts them; the walls' tops are firs and rocks.
+   Hagnon's sight (3) now covers his whole leg, so he is a real checkpoint.
+3. **Pass 3.** The defile's inner lips show along the road, so it reads as a passage cut
+   between two rocks. Left as is: the camp itself has no grass (SCRIPT.md: nobody stops
+   you at the feast).
+
+### Antiope's cave
+
+1. **Pass 1.** The brazier is the engine's: Hecate's Torch lights it, and the whole cave
+   is its lit zone (FLAG_ICHOR_BRAZIERS_START + 0x20), lit again on every load.
+2. **Pass 2.** The floor was one bare grey blob: two rock pillars now stand in it, one by
+   the carving and one before the shelf, so the room has corners to round.
+3. **Pass 3.** Checked that the carving, the shelf, the brazier and the dig spot are all
+   still reached and seen from the floor. Left as is: the cave's palette and walls.
+
+### Grass and rewards, after the pass
+
+| Map | Forced bands | Optional grass (and its reason) | Items |
+|---|---|---|---|
+| Route 6 | 3: band 1 (3 deep) on the vine terrace, band 2 (4 deep) after Pythodoros, band 3 (3 deep) under the cutting | the spur (the cave, the Super Potion, a dig), the vine rows (a Revive in the west woods' clearing) | Super Repel, Max Ether (the Girdle), Super Potion; hidden Wine, Revive |
+| Mt. Kithairon | 3: the first switchback (3 deep), the fir clearing (4 deep), the high meadow (3 deep) | the foot's east clearing (Hyper Potion), the hidden clearing west of the glade (Ultra Ball), the glade's back (Bromia), the spring path (TM, the spring's finds), the high meadow (a dig) | Revive, Max Elixir (the Thyrsus), Max Revive (the Girdle), TM Venoshock, Hyper Potion, Ultra Ball; hidden Pretty Feather, Honey, Ether, Rare Candy |
+| Route 7 | 2: Komos's (4 deep), the west meadow's (3 deep) | the meadow's dead end (Full Heal), the riverside pasture and bank (a Pearl at the bank's end) | Full Heal, Big Pearl (the Conch); hidden Bronze Obol, Charcoal, Pearl |
+| Eleutherai | none (a town) | none | hidden Bronze Obol |
+
+### The engine swaps
+
+| Was | Now |
+|---|---|
+| The vines: metatiles and a sign | A thorn-thicket object (`OBJ_EVENT_GFX_CUTTABLE_TREE`) running `EventScript_CutTree`, hidden for good by `FLAG_ICHOR_HIDE_ELEUTHERAI_VINES`, in a one-tile gap beside an old vine stock |
+| The column drums: scripted rolls | `OBJ_EVENT_GFX_PUSHABLE_BOULDER` running `EventScript_StrengthBoulder`; a trigger where each drum lay sets its hide flag once it has been pushed away, so it stays moved |
+| The great herms: signs | Their line, then `EventScript_IchorAnointHerm`; rows `HERM_AETHOS_ROUTE_6` and `_7` in `src/data/ichor_herms.h`, landings at Route 6 (34,8) and Route 7 (24,16) |
+| The desecrated shrine | After Ilys, `EventScript_IchorDesecratedAltar` (Dionysus, altar 8); once cleansed, the clean shrine on load |
+| The decoy at Eleutherai | `FLAG_ICHOR_THEOXENIA_START + 0x20`, Zeus +1 Favor through `Ichor_AddFavor`; the old bank flag is gone |
+| Antiope's brazier | `EventScript_IchorBrazier` with `FLAG_ICHOR_BRAZIERS_START + 0x20`; the cave is its lit zone |
+| The Kronist's bread | `giveitem(ITEM_BARLEY_CAKE)` under `FLAG_DAILY_ICHOR_KRONIST_BREAD`, at the greeting and from the greeter |
+| Dig spots | Still stubbed (`ICHOR_STUB_DIG`), each with the call it becomes in a comment |
+

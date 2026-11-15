@@ -518,20 +518,23 @@ def rocks():
         for y, x in np.argwhere(K.halo(K.halo(m) | m)):
             if y > cy + ry - 2 and M.a[oy + y, ox + x, 3] == 0:
                 M.px(ox + x, oy + y, shade(grass_px(x, y), 2))
-    boulder(0, 0, 10.0, 9.5, 5.0, 4.5)
-    boulder(0, 0, 4.5, 5.5, 3.5, 3.0)
-    boulder(0, 0, 12.0, 3.5, 2.5, 2.2)
-    # split crag: two halves with a juniper between
-    boulder(0, 0, 21.0, 8.0, 4.5, 6.0)
-    boulder(0, 0, 28.5, 9.0, 3.8, 5.5)
-    m = K.ellipse_mask(48, 16, 25.0, 6.0, 3.5, 4.0)
+    # pile: one big boulder, a smaller one leaning on it (pass 2: three small
+    # stones a cell read as cobbles in bulk; one big rock a cell reads as rock)
+    boulder(0, 0, 8.0, 8.0, 6.6, 5.6)
+    boulder(0, 0, 12.5, 11.5, 2.6, 2.2)
+    for (x, y) in ((5, 8), (6, 9), (7, 9), (9, 10)):
+        M.px(x, y, "rk2")                      # a crack across the big one
+    # split crag: two halves with a juniper growing between
+    boulder(0, 0, 20.5, 8.5, 4.4, 6.0)
+    boulder(0, 0, 28.5, 9.0, 3.6, 5.6)
+    m = K.ellipse_mask(48, 16, 24.8, 5.5, 3.2, 3.6)
     for y, x in np.argwhere(m):
-        u = (x - 25) / 3.5 + (y - 6) / 4
+        u = (x - 24.8) / 3.2 + (y - 5.5) / 3.6
         M.px(x, y, "iv2" if u < -0.5 else ("iv1" if u < 0.6 else "iv0"))
-    for (x, y) in ((24, 12), (25, 13)):
+    for (x, y) in ((24, 10), (25, 11), (25, 12)):
         M.px(x, y, "rk0")
-    # scree heap
-    for (x, y, r) in ((36, 10, 3), (41, 9, 3), (39, 5, 2), (44, 12, 2), (34, 4, 2), (43, 4, 2), (38, 13, 2)):
+    # scree heap: a slope of broken stone
+    for (x, y, r) in ((40, 10, 4), (36, 6, 2.5), (44, 6, 2.5), (35, 12, 2), (45, 12, 2)):
         boulder(0, 0, float(x), float(y), r + 0.3, r * 0.8)
     return s
 

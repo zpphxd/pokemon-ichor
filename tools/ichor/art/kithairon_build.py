@@ -65,7 +65,7 @@ NEAR_DUPLICATE_PX = 2
 
 SETS = {
     "kithairon": {"symbol": "gTileset_Kithairon", "dir": "kithairon", "label": "Kithairon",
-                  "title": "Route 6, Eleutherai and Mt. Kithairon"},
+                  "title": "Route 6 and Eleutherai"},
     "kronia": {"symbol": "gTileset_Kronia", "dir": "kronia", "label": "Kronia",
                "title": "Route 7 and the Kronia grounds"},
     "pass": {"symbol": "gTileset_KithaironPass", "dir": "kithairon_pass", "label": "KithaironPass",
