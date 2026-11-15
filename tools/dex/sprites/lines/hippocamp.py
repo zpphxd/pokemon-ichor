@@ -72,9 +72,9 @@ def hipling(p, view, phase):
             # the near foreleg kicks: knee forward, hoof tucked under
             near_leg = [(24, 47), (19, 51.5), (21, 55.5 - L)]
 
-        # dorsal fin of the tail, a marble fan behind the rump
-        p.lens((40, 45), (45, 36.5), 5.2, fin, bend=0.8)
-        p.lens((41.5, 46), (49.5, 41), 4.6, fin, bend=0.8, bias=0.1)
+        # Split caudal fan at the tip of a supporting U-coil.
+        p.lens((52, 40), (51 - phase, 29), 6.4, fin, bend=1.1)
+        p.lens((53, 40), (60, 34 - phase), 5.8, fin, bend=-1.1, bias=0.1)
 
         # far foreleg
         p.limb(far_leg, 4, 3, hide, bias=0.35, group=10)
@@ -83,9 +83,8 @@ def hipling(p, view, phase):
 
         # tail: back from the rump and down, curling like a seahorse's into
         # a spiral that props the foal up
-        tail = spiral((43.5, 53.5), (36, 44.5), r0=7.2, r1=2.4, turns=0.95, n=26)
-        p.limb(tail, 8, 2.8, hide, group=5)
-        p.lens(tail[-1], (tail[-1][0] + 0.5, tail[-1][1] - 4), 3.2, fin, bend=0.6)
+        tail = bez3((36, 44.5), (43, 59), (53, 60), (53, 39), n=24)
+        p.limb(tail, 8, 3.2, hide, group=5)
 
         # body: a round foal's chest and a short barrel
         body = p.blob(28.5, 45, 7.6, 6, hide, group=1)
@@ -103,8 +102,8 @@ def hipling(p, view, phase):
         p.lens((29, 26 - L), (32, 17.5 - L), 4.4, hide, bend=-0.3, bias=0.15)
 
         # head: a big foal's cranium and a short soft muzzle
-        p.blob(25, 29.5 - L, 8, 7.4, hide, group=3)
-        p.blob(17.5, 34.5 - L, 4.8, 3.9, hide, ang=10, group=3)
+        p.blob(25, 29.5 - L, 7.4, 7.4, hide, group=3)
+        p.blob(18.5, 33.5 - L, 4.8, 3.4, hide, ang=10, group=3)
         p.blob(16.5, 36 - L, 4.4, 2.6, cream, ang=10, group=4, bias=-0.2)
 
         # near ear and forelock
@@ -119,10 +118,13 @@ def hipling(p, view, phase):
         p.lens((fx + 1, fy - 1), (fx + 4, fy - 3.5), 2.4, fin)
 
         # face
-        p.eye(19, 26 - L, 4, 6, iris="iris", shine="white")
+        p.eye(22, 26 - L, 4, 6, iris="iris", shine="white")
         if p.big:
-            p.px(13, 33 - L, "hide0")
+            p.px(14, 33 - L, "hide0")
             p.stroke([(14, 37 - L), (17, 37 - L)], "hide0")
+            p.stroke([(51, 37), (50 - phase, 32)], "hide1")
+            p.stroke([(54, 38), (58, 35 - phase)], "hide1")
+            p.pxs([(35, 43), (36, 44), (39, 47), (40, 48)], "sheen")
         return
 
     if view == "back":
@@ -156,15 +158,17 @@ def hipling(p, view, phase):
         for i, (y, dx) in enumerate(((20, -1), (26, 1), (32, -1), (38, 1))):
             p.lens((32, y), (32 + 6.5 * dx, y + 4), 5.4, mane, bend=-dx * 0.8)
         p.limb([(32, 19), (32, 41)], 4, 3.4, mane)
-        p.lens((32, 49.5), (23.5, 45.5), 5, fin, bend=0.6)
-        p.lens((32, 49.5), (40.5, 45.5), 5, fin, bend=-0.6)
-        p.limb(spiral((32, 56), (32, 48.5), r0=7, r1=2.4, turns=0.85, n=20), 7.4, 3, hide, group=5)
+        p.limb(bez3((32, 48.5), (30, 60), (48, 62), (47, 40), n=20), 7.4, 3, hide, group=5)
+        p.lens((47, 41), (42 - phase, 30), 6, fin, bend=1.0)
+        p.lens((48, 41), (55, 34 + phase), 5.4, fin, bend=-0.8)
         return
 
     if view == "down":
         # walking toward us: big head, both eyes, cream muzzle and chest
         step = phase
-        p.limb(spiral((42, 55), (36, 50), r0=4.6, r1=1.6, turns=0.8, n=16), 5, 2.4, hide, bias=0.2, group=5)
+        p.limb(bez3((36, 50), (42, 62), (48, 59), (47, 42), n=18), 5, 2.4, hide, bias=0.2, group=5)
+        p.lens((47, 43), (44 - step, 33), 5.4, fin, bend=0.8)
+        p.lens((48, 43), (55, 37 + step), 4.8, fin, bend=-0.8)
         p.blob(32, 47, 8, 7, hide, group=1)
         p.blob(32, 47, 4.6, 5.4, cream, group=1)
         p.limb([(28, 50), (27.5, 60 - 2 * step)], 4, 3.4, hide, group=12)
@@ -216,8 +220,8 @@ def thalamare_parts(p, phase=0):
     R = {}
     # caudal fin, forked, at the top of the S
     # in frame 2 the fin flares wider
-    R["cfin"] = [p.lens((53, 30), (46 - 1.5 * L, 12.5 - L), 9 + L, tfin, bend=1.4, group=40),
-                 p.lens((54.5, 30.5), (61.5 + 0.5 * L, 18.5 - 1.5 * L), 8 + L, tfin, bend=-1.2, group=41)]
+    R["cfin"] = [p.lens((53, 30), (46 - L, 15 - L), 8 + L, tfin, bend=1.4, group=40),
+                 p.lens((54.5, 30.5), (60, 21 - L), 7 + L, tfin, bend=-1.2, group=41)]
     # far foreleg, raised: knee forward, cannon hanging, a webbed flipper
     R["fleg"] = [p.limb([(23, 29.5), (11, 28.5)], 7.2, 6.4, hide, bias=0.3, group=10),
                  p.limb([(10.5, 29), (9, 35)], 5.8, 4.8, hide, bias=0.3, group=11)]
@@ -247,8 +251,8 @@ def thalamare_parts(p, phase=0):
     R["belly"] = p.limb(bez3((15, 24 - L), (17, 33), (26, 43), (39, 49), n=12), 5, 5.6, belly,
                         clip=R["body"] + [R["neck"], R["tail"]], group=1)
     # head: cranium and a long sleek muzzle, nose down
-    R["head"] = [p.blob(18.5, 16.5 - L, 7.4, 6.8, hide, group=3),
-                 p.blob(10.5, 21.5 - L, 6, 4, hide, ang=30, group=3)]
+    R["head"] = [p.blob(19.5, 16.5 - L, 7.2, 6.8, hide, group=3),
+                 p.limb(bez((16, 19 - L), (12, 20 - L), (9, 23 - L)), 7, 5, hide, group=3)]
     R["muzzle"] = p.blob(9.5, 23.6 - L, 4.6, 2.2, belly, ang=30, group=3, clip=R["head"])
     # near ear fin
     R["ear"] = p.lens((17, 11.5 - L), (12, 3 - L), 5.6, mane, bend=0.7, group=36)
@@ -267,12 +271,15 @@ def thalamare_parts(p, phase=0):
 
 def thalamare(p, view, phase):
     if view in ("front", "side", "icon"):
-        L = 1 if (phase == 1 and view != "side") else 0
+        L = phase
         thalamare_parts(p, L)
-        p.eye(14, 14 - L, 4, 5, iris="iris", shine="white")
+        p.eye(16, 14 - L, 4, 5, iris="iris", shine="white")
         if p.big:
             p.px(6, 21 - L, "hide0")
             p.stroke([(8, 25 - L), (11, 25 - L)], "hide0")
+            p.stroke([(50, 26), (47 - L, 18 - L)], "hide1")
+            p.stroke([(55, 28), (58, 23 - L)], "hide1")
+            p.pxs([(28, 29), (29, 30), (34, 38), (35, 39)], "sheen")
         return
 
     if view == "back":
@@ -308,9 +315,9 @@ def thalamare(p, view, phase):
         p.blob(32, 40, 14.5, 9, hide, group=1)
         p.poly([(32, 13), (35, 17), (34, 23), (35.5, 30), (34, 38), (32, 42), (30, 38), (28.5, 30), (30, 23), (29, 17)], mane)
         p.limb([(32, 45), (32, 51)], 8, 5.6, hide, group=5)
-        p.lens((32, 51), (16, 56), 8.6, tfin, bend=-1.2)
-        p.lens((32, 51), (48, 56), 8.6, tfin, bend=1.2)
-        p.lens((32, 51), (32, 61), 6, tfin)
+        p.lens((32, 51), (16, 56 - 2 * phase), 8.6, tfin, bend=-1.2)
+        p.lens((32, 51), (48, 54 + 2 * phase), 8.6, tfin, bend=1.2)
+        p.lens((32, 51), (32 + 2 * phase, 61), 6, tfin)
         return
 
     if view == "down":
@@ -343,9 +350,9 @@ def thalamare(p, view, phase):
 SEISMARE_COLORS = [
     ("ink", INK),
     ("hide0", C.aegean[0]), ("hide1", (64, 120, 192)), ("hide2", C.aegean[2]), ("hide3", C.aegean[3]),
-    ("wave0", (16, 72, 88)), ("wave1", (40, 128, 128)), ("wave2", (96, 184, 160)),
+    ("wave0", (16, 48, 112)), ("wave1", (32, 96, 176)), ("wave2", (96, 168, 224)),
     ("foam", C.marble[1]), ("white", C.white), ("gold", (232, 176, 56)),
-    ("stone0", C.limestone[0]), ("stone1", C.limestone[1]), ("wave3", (176, 232, 208)),
+    ("stone0", C.limestone[0]), ("stone1", C.limestone[1]), ("wave3", (176, 224, 240)),
     ("terra", C.terracotta[1]),
 ]
 SEISMARE_SHINY = {
@@ -380,6 +387,10 @@ def seismare_parts(p, phase=0):
         # frame 2: the wave's lip curls further over and down
         wave_poly[7:9] = [(22, 6.5), (22.5, 11)]
     R["wave"] = p.poly([(x, y - L) for x, y in wave_poly], wave, group=31)
+    p.limb(bez3((24, 7 - L), (30, 0.5), (42, 2), (45, 12), n=18), 4, 2, foam, group=32)
+    p.limb(bez3((44, 15), (37, 11), (35, 21), (43, 23), n=16), 3, 2, foam, group=32)
+    p.limb(bez3((43, 24), (38, 21), (36, 28), (39, 31), n=12), 3, 1.6, foam, group=32)
+    p.limb(bez3((43, 7), (49, 15), (45, 26), (41, 34), n=18), 2, 1.4, Mat(["gold"]), group=33)
     # far foreleg, raised high to strike
     R["fleg"] = [p.limb([(25, 29), (14, 25.5 - L)], 8, 7, hide, bias=0.3, group=10),
                  p.limb([(14, 25.5 - L), (9, 30 - L)], 6.4, 5.6, shin, bias=0.3, group=11)]
@@ -397,9 +408,9 @@ def seismare_parts(p, phase=0):
     R["belly"] = p.limb(bez3((15.5, 25 - L), (16, 38), (27, 47), (42, 49), n=12), 5, 6, foam,
                         clip=R["body"] + [R["neck"], R["tail"]], group=1)
     # head: heavy, nose down, nostrils flared
-    R["head"] = [p.blob(18, 13.5 - L, 9, 8, hide, group=3),
-                 p.blob(19, 18.5 - L, 6.2, 5.2, hide, group=3),
-                 p.blob(9, 20 - L, 7.6, 5.4, hide, ang=32, group=3)]
+    R["head"] = [p.blob(20, 14.5 - L, 7.8, 7.4, hide, group=3),
+                 p.limb(bez((17, 17 - L), (12, 19 - L), (8, 22 - L)), 8, 5.4, hide, group=3)]
+    p.blob(9, 24 - L, 4.2, 1.6, foam, clip=R["head"], group=3)
     R["ear"] = p.lens((23, 8 - L), (26, 2.5 - L), 5, hide, bend=-0.6, group=36)
     # near foreleg: forearm thrust forward, heavy stone hoof
     R["leg"] = [p.limb([(27, 38), (14.5, 37)], 9, 7.6, hide, group=14),
@@ -410,19 +421,24 @@ def seismare_parts(p, phase=0):
 
 def seismare(p, view, phase):
     if view in ("front", "side", "icon"):
-        L = 1 if (phase == 1 and view != "side") else 0
+        L = phase
         seismare_parts(p, L)
-        p.eye(13, 11 - L, 5, 4, iris="gold", shine="white")
+        p.eye(17, 12 - L, 4, 5, iris="gold", shine="white")
         if p.big:
-            p.pxs([(4, 18 - L), (5, 19 - L)], "ink")
-            p.stroke([(5, 23 - L), (11, 24 - L)], "hide0")
+            p.pxs([(5, 20 - L), (6, 21 - L)], "ink")
+            p.stroke([(7, 25 - L), (11, 25 - L)], "hide0")
+            for a, b in (((6, 32 - L), (9, 30 - L)), ((8, 45), (11, 47)), ((34, 59), (41, 57)),
+                         ((46, 60), (49, 57)), ((56, 57), (59, 59))):
+                p.stroke([a, b], "terra")
         return
 
     if view == "back":
-        p.poly([(0, 64), (6, 52), (18, 50), (26, 56), (30, 64)], stone)
-        p.lens((14, 54), (2, 50), 8, sfin, bend=1)
+        p.poly([(2, 64), (7, 54), (18, 52), (26, 57), (30, 64)], stone)
+        p.lens((14, 54), (4, 51), 7, sfin, bend=1)
         p.lens((15, 54), (27, 51), 8, sfin, bend=-1)
         p.poly([(14, 46), (18, 26), (24, 10), (34, 4), (44, 6), (40, 10), (34, 14), (30, 30), (28, 44)], wave)
+        p.limb(bez((24, 12), (30, 3), (42, 7)), 3.6, 2, foam)
+        p.limb(bez3((31, 18), (24, 16), (23, 25), (29, 26)), 3, 2, foam)
         p.blob(28, 62, 24, 16, hide, group=1)
         p.limb([(14, 64), (15, 55)], 12, 9, hide, group=5)
         p.limb([(36, 52), (40, 38), (45, 26)], 17, 14, hide, group=1)
@@ -450,6 +466,8 @@ def seismare(p, view, phase):
         p.limb([(32, 48), (32, 55)], 14, 8, hide, group=5)
         p.lens((32, 57), (18, 55), 7.6, sfin, bend=1)
         p.lens((32, 57), (46, 55), 7.6, sfin, bend=-1)
+        p.circle(17 + phase * 2, 59, 1.5, stone, noline=True)
+        p.circle(48 - phase * 2, 60 - phase * 2, 1.4, stone, noline=True)
         return
 
     if view == "down":
@@ -459,6 +477,7 @@ def seismare(p, view, phase):
         p.poly([(37, 36), (44, 27), (46, 17), (42, 8), (35, 4.5), (27, 5), (21.5, 8.5), (19.5, 13.5), (22, 17.5),
                 (24.5, 12.5), (29, 9.5), (35, 10.5), (38.5, 16), (38, 26)], wave)
         p.poly([(21.5, 8.5), (27, 5), (35, 4.5), (42, 8), (37.5, 8), (30, 7.5), (24, 10.5), (20.5, 13)], foam)
+        p.limb(bez((42, 10), (48, 22), (39, 34)), 2, 1.4, Mat(["gold"]), group=32)
         p.blob(32, 42, 12, 9, hide, group=1)
         p.blob(32, 44, 6, 6.4, foam, group=1)
         p.limb([(26, 47), (25.5, 56 - 2 * step)], 6.4, 5.6, shin, group=12)
@@ -473,11 +492,13 @@ def seismare(p, view, phase):
         p.eye(25, 20, 3, 3, iris="gold", shine="white")
         p.eye(36, 20, 3, 3, iris="gold", shine="white", shine_at=(1, 0))
         p.pxs([(30, 34), (34, 34)], "ink")
+        p.circle(20 + step * 2, 60 - step * 2, 1.6, stone, noline=True)
+        p.circle(44 - step * 2, 60, 1.4, stone, noline=True)
         return
 
 
 MONS = [
-    Mon("Hipling", HIPLING_COLORS, HIPLING_SHINY, hipling, foot="hoof"),
-    Mon("Thalamare", THALAMARE_COLORS, THALAMARE_SHINY, thalamare, foot="hoof"),
-    Mon("Seismare", SEISMARE_COLORS, SEISMARE_SHINY, seismare, foot="hoof"),
+    Mon("Hipling", HIPLING_COLORS, HIPLING_SHINY, hipling, foot="hoof", icon_pal=3),
+    Mon("Thalamare", THALAMARE_COLORS, THALAMARE_SHINY, thalamare, foot="hoof", icon_pal=3),
+    Mon("Seismare", SEISMARE_COLORS, SEISMARE_SHINY, seismare, foot="hoof", icon_pal=3),
 ]

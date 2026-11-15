@@ -142,3 +142,94 @@ Reviews of the starters kept finding the same gaps. Check for each one before yo
 ## Checks
 
 The build fails on errors (a missing view, a palette over 15 colors, a bad footprint, a stray character in an art file). It also warns when a sprite touches the frame edge or declares a color it never draws. Clear every warning.
+
+### Elaia native redraw pass (2026-11-15)
+
+This pass covers **Nebrel, Kladoe, Daphnyad, Kynder, Dikyon, Pylakyon,
+Hipling, Thalamare, Seismare, Eripip and Galekit**. The approved concept sheets
+are references only: no concept image is resized, quantized or used as a battle
+sprite input. The five line modules draw the native views; all 33 editable
+battle grids have localized hand-painted highlight/shadow refinements.
+
+The fire line retains the Ember Dreams progression and Pylakyon's locked
+diagonal, differently angled mastiff heads, lunging arched back and
+serpent-faced S-tail. The water line has a split caudal fan on Hipling's
+supporting coil and a foam-crested blue wave on Seismare. Galekit's battle
+back now includes its ears, mask, muzzle and stolen olive. Party icons keep
+the ROM's existing shared-palette selectors, and every down/up/side pair has
+distinct native pixels. Existing hoof, paw and root footprints remain valid.
+
+Rebuild only this batch, then validate and copy it with the existing ROM
+importer's `copy_sprites` operation:
+
+```bash
+python3 tools/dex/sprites/build.py Nebrel Kladoe Daphnyad Kynder Dikyon Pylakyon Hipling Thalamare Seismare Eripip Galekit --preview build/elaia-sprite-review --sheet build/elaia-sprite-review.png
+python3 tools/dex/sprites/check_elaia.py --import-rom --report build/elaia-sprite-validation.json
+```
+
+`check_elaia.py` checks the 64×128 fronts, 64×64 backs, 32×64 icons,
+192×32 followers and 16×16 footprints; indexed PNG bit depth, transparent
+index 0, BGR555-ready battle/shiny palettes, exact shared icon palettes and
+ROM selectors, unique motion pairs, editable-grid dimensions, localized
+hand finishing, reproducible rendered pixels and byte-identical ROM imports.
+The commands pass with no species errors or warnings. Pillow's API deprecation
+notices are separate from the sprite checks.
+
+These are technical checks, **not user art approval or a completed-town
+claim**. Smoliv, displayed in the shared opening, has a separate native pass
+below rather than a custom dex entry. ROM build and emulator smoke evidence
+are the coordinator's separate responsibility.
+
+### Smoliv shared-opening dependency
+
+Smoliv remains Smoliv: a small, anxious olive baby with a rounded seed body,
+three green leaves, a waxy green-gold fruit, tiny feet and no arms or horns.
+Its shiny darkens the olive to purple-black without recoloring the green body
+or leaves. Frame 2 winks and tilts the olive/rosette; the follower alternates
+its feet and sways its leaves in each direction.
+
+Editable sources are `tools/dex/sprites/lines/smoliv.py` and
+`tools/dex/sprites/art/smoliv_front0.txt`, `_front1.txt`, `_back0.txt`.
+The line deliberately does not export `MONS`, so this vanilla opening asset
+does not enter the Aethos YAML/dex generator. The standalone driver is:
+
+```bash
+python3 tools/dex/sprites/smoliv.py --native-check --preview build/smoliv-review --report build/smoliv-check.json
+```
+
+It builds only `design/dex/sprites/smoliv/` and copies its nine files into
+`graphics/pokemon/smoliv/`. The two-frame `anim_front.png` maps to the
+upstream registration's `front.png` (64×128). The only species-info edit
+selects the existing two-frame animation table; species identity, stats,
+types, story and YAML are unchanged. Icon palette 1 and the existing
+32×32 six-frame follower registration are preserved.
+
+The scoped command passes with no errors or warnings: native editable-grid
+coverage, rendered/indexed-file reproducibility, transparent index 0,
+shared icon palette/ROM selector identity, battle and follower normal/shiny
+palette equality, distinct battle/icon/walk pairs and exact ROM copies.
+`--native-check` also uses the real `gbagfx` helper: front 4096 bytes, back
+2048, icon 1024, follower 3072, footprint 32, and each palette 32 bytes.
+Both converted palettes match the exact little-endian BGR555 words.
+
+### Pylakyon serpent-tail separation refinement
+
+Pylakyon's bronze serpent now has two opposed bends outside the flank,
+transparent space inside the lower coil, a black edge and a pale-lit,
+ghost-eyed serpent head. The back and both down/up/side follower pairs use
+the same tail construction; both shared-palette icon frames match it.
+Normal/shiny palette entries, icon selector 3, footprint, three mastiff
+heads and the arched lunge are retained. Only the tail-side silhouette and
+adjacent material shading were changed in the three battle art grids.
+
+```bash
+python3 tools/dex/sprites/build.py Pylakyon --preview build/pylakyon-refinement/review --grid
+python3 tools/dex/sprites/check_elaia.py Pylakyon --import-rom --native-check --report build/pylakyon-refinement/validation.json
+```
+
+The checker accepts optional species names; without names it still checks
+the original eleven. `--native-check` validates real `gbagfx` output sizes
+and both exact BGR555 palettes. The Pylakyon-only commands pass with no
+errors or warnings, unchanged palettes/footprint and distinct paired
+front/icon/follower motion. Visual evidence includes native normal/shiny
+views rather than treating palette validity as visual approval.

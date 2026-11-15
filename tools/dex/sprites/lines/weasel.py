@@ -35,8 +35,8 @@ def galekit(p, view, phase):
         F = 1 if (phase == 1 and view != "side") else 0     # head bob and tail flick
         W = view == "side" and phase == 1
         # bushy tail plume, raised, its tip in the mask color
-        tail = p.lens((42, 48), (51.5, 36 - F), 7.4, g_tn, bend=-2.2, fat=0.55)
-        p.lens((48.5, 40 - F), (51.5, 36 - F), 6, g_mask, clip=[tail], group=tail)
+        tail = p.lens((42, 48), (51.5 + F, 34 - F), 8.4, g_tn, bend=-2.2, fat=0.55)
+        p.lens((48.5, 40 - F), (51.5 + F, 34 - F), 6, g_mask, clip=[tail], group=tail)
         if W:
             far_f, far_h = [(24, 52), (23, 59)], [(40, 52), (41, 59)]
             near_f, near_h = [(21.5, 52), (20, 59)], [(38.5, 51), (42, 59)]
@@ -51,29 +51,41 @@ def galekit(p, view, phase):
         p.limb(near_h, 4.8, 3.0, g_tn, group=13)
         # big round kit head with round ears
         p.circle(24, 36.5 + F, 2.8, g_tn, bias=0.2, group=5)
-        head = p.blob(17.5, 41.5 + F, 8, 7, g_tn, group=3)
-        p.blob(10.5, 45 + F, 4.6, 2.8, g_tn, group=3)
-        p.blob(13, 47.5 + F, 6.4, 2.6, g_white, clip=[head], group=4)
+        head = p.blob(18.5, 42 + F, 7.8, 7.4, g_tn, group=3)
+        p.blob(11, 45 + F, 4.4, 2.8, g_white, group=3)
+        p.blob(15, 47.5 + F, 5.4, 2.6, g_white, clip=[head], group=4)
         # the mask: a band across the eyes, turned up at the cheek into a grin
-        p.poly([(5.5, 43 + F), (11, 40.5 + F), (17, 39.6 + F), (23, 40.4 + F), (25.5, 38.8 + F), (26, 41 + F),
-                (21, 45 + F), (14, 46 + F), (8, 45.5 + F)], g_mask, clip=[head], group=6)
+        p.limb(bez((10, 43 + F), (16, 38 + F), (24, 41 + F)), 4.4, 3.4, g_mask, clip=[head], group=6)
         p.circle(14, 36.5 + F, 2.9, g_tn, group=7)
         # the stolen olive
-        p.blob(4.5, 48.5 + F, 2.8, 2.2, g_olive, group=8)
+        p.blob(7.5, 48.5 + F, 2.8, 2.2, g_olive, group=8)
         if p.big:
-            p.eye(14, 41 + F, 3, 4, shine="w1", shine_at=(1, 1))
-            p.pxs([(3, 44 + F), (4, 44 + F)], "ink")
-            p.stroke([(8, 47 + F), (15, 47 + F), (17, 46 + F)], "mk0")
+            p.eye(16, 40 + F, 3, 5, shine="w1", shine_at=(1, 1))
+            p.pxs([(7, 44 + F), (8, 44 + F)], "ink")
+            p.stroke([(10, 47 + F), (13, 48 + F), (16, 47 + F)], "mk0")
             p.px(13, 36 + F, "pink")
         else:
             p.pxs([(15, 42 + F), (16, 42 + F)], "w1")
         return
 
     if view == "back":
-        # the hand-finished art replaces this
-        p.limb(bez((10, 66), (26, 50), (40, 40)), 22, 14, g_tn, group=1)
-        p.blob(44, 30, 8, 7, g_tn, group=3)
-        p.blob(56, 34, 2.8, 2.2, g_olive, group=7)
+        tail = p.lens((15, 58), (7, 37), 10, g_tn, bend=2.2, group=9)
+        p.lens((9, 44), (7, 37), 7, g_mask, clip=[tail], group=9)
+        p.blob(26, 64, 21, 15, g_tn, group=1)
+        p.limb(bez((32, 54), (38, 47), (42, 40)), 14, 12, g_tn, group=1)
+        p.circle(38, 28, 3.8, g_tn, group=5)
+        p.circle(49, 29, 3.4, g_tn, group=6)
+        head = p.blob(44, 35, 9, 8, g_tn, group=3)
+        p.blob(52, 39, 5, 3.4, g_white, group=3)
+        p.limb(bez((38, 33), (46, 31), (54, 37)), 4.4, 3, g_mask, clip=[head], group=7)
+        p.eye(47, 32, 3, 5, shine="w1")
+        p.px(56, 37, "ink")
+        p.blob(56, 42, 2.8, 2.2, g_olive, group=8)
+        if p.big:
+            p.px(49, 28, "pink")
+            p.stroke([(52, 41), (50, 42), (48, 41)], "mk0")
+            p.stroke([(23, 50), (29, 52), (33, 55)], "tn3")
+            p.stroke([(36, 48), (33, 53), (34, 57)], "tn0")
         return
 
     if view == "down":
@@ -226,6 +238,6 @@ def gelasable(p, view, phase):
 
 
 MONS = [
-    Mon("Galekit", GALEKIT_COLORS, GALEKIT_SHINY, galekit, foot="paw"),
+    Mon("Galekit", GALEKIT_COLORS, GALEKIT_SHINY, galekit, foot="paw", icon_pal=5),
     Mon("Gelasable", GELASABLE_COLORS, GELASABLE_SHINY, gelasable, foot="paw"),
 ]
