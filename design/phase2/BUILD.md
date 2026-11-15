@@ -86,6 +86,24 @@ Bank flags 0x0C0–0x0D5 of the Emporion city agent's 0x0C0–0x0DF: `FLAG_ICHOR
 
 **Stub tags in Emporion's scripts:** `ICHOR_STUB_RITES` (the quay herm's altar menu, Poseidon's altar), `ICHOR_STUB_HERM` (the crossroads great herm), `ICHOR_STUB_DIG` (the quay planter's sherd, the Hephaisteion's garden, the ship sheds' sand), `ICHOR_STUB_AUGURY` (Halitherses), `ICHOR_STUB_OFFERINGS` (Kerykos's oil, the Trowel, Daedalus's page I, the offerings stall), `ICHOR_STUB_COINS` (Pasion buys the Bronze Obol, Relic Copper, at a fixed ¥600), `ICHOR_STUB_SPRITE` (Kerykos's and Number Nine's walkers).
 
+This is the historical batch's stub inventory, not the current open-work list.
+The harbor's gifts, prayer, excavation and page trade now use real engine state.
+The offerings stall sells its four actual items; the garden has an independent
+daily dig with full-Bag retry. Pasion buys all three coins at blessing-aware
+market prices plus 20%, with cancellation and money-cap protection. Myrtale
+awards Fling; the scroll stall sells Bulldoze and Round. The crossroads herm is
+registered as non-counted city anchor 25, with Oil/Favor and legacy migration.
+Halitherses reads actual saved daily omens and grants a consented, non-repeatable
+blessing; the reachable swarms and Eleusa sun weather are active. Eleusa's
+Korantha visitor is integrated, with its approved rumor and actual encounter.
+Emporion's westernmost stoa jar at (10,24) now has its own Pithound omen,
+level 16, with capture/defeat persistence and loss/escape retry. Its paw-print
+is identified in the jar's description and augury; the other five jars remain
+ordinary random encounters. Off-day and consumed-visit interactions are empty,
+including after a day change without leaving the city.
+Other rare visitors, later omen callers and presentation stand-ins remain unfinished.
+See PITCH.md section 8 for current milestone acceptance.
+
 ## Batch 3 maps: the road from Emporion to Eleusa
 
 The user's standard for every route (director, 2026-11-14): "Thoughtfully. Engaging. Well designed. To Pokémon standards, including plenty of grass and wild encounters etc. Items etc." On top of MAP_DESIGN.md: forced grass bands across the path and plenty of optional grass with a reason to enter; morning, day and night land tables (plus surf, fishing and rock-smash tables where the map has water or breakable rocks), from BALANCE.md's Eleusa band; visible items as lures and hidden items where curiosity leads; trainers as checkpoints; one set piece per route; signs at each end and at forks; three render-and-critique passes. MAP_DESIGN §8 and `tools/ichor/map_audit.py` (coming on main) will measure it.
@@ -208,6 +226,20 @@ The Telesterion's warps: 0–2 the stair (13, 12, 14 on row 26) to Eleusa's warp
 **The six interiors** are built (the Eleusa interiors agent): `tools/ichor/maps/eleusa_rooms.py`, the plans and passes in `design/phase2/ROOMS_eleusa.md`, the check `tools/ichor/tests/eleusa_rooms.sh`. The placeholder copies are gone; each room's mat warps back to the first id of its door. Claimed: bank 0x090–0x095 `FLAG_ICHOR_GOT_KYKEON`, `_GOT_TM_BULLET_SEED`, `_GOT_AMULET_COIN`, `_TRADED_PITHOUND`, `_FRAGMENT_STOLEN`, `_MET_METANEIRA`; vanilla 0x2DB `FLAG_ICHOR_HIDDEN_ELEUSA_GRANARY_REVIVE`; `HEAL_LOCATION_ELEUSA_VILLAGE` (the road below the Asclepeion's door, (10, 24)); the in-game trade `INGAME_TRADE_ICHOR_CRITIC`. **Batch 5 sets `FLAG_ICHOR_FRAGMENT_STOLEN`** at the theft (beat 23): Sitokles gives the Amulet Coin once it is set.
 
 **Braziers.** The Telesterion's four season braziers use `FLAG_ICHOR_BRAZIERS_START + 0x10` (Autumn), `+ 0x11` (Winter), `+ 0x12` (Spring), `+ 0x13` (Summer). The block `+ 0x14`–`+ 0x1F` is left for the sanctum's four and Eleusa's procession torches. Ask before using it for anything else.
+
+**Field services.** The shrine at (18,34) now invokes Demeter's real altar menu.
+The west field (9,36) and east meadow (38,35) use daily dig indices 2 and 3,
+Act I loot and Persephone sherds. Their BG scripts are separate wrappers, so
+one excavation never consumes the other site's day. `eleusa.py` preserves the
+same registrations when rebuilding the map.
+
+**Rare visitor.** Korantha waits in the wheat at (32,35), level 22, only for
+`OMEN_VISITOR_ELEUSA_KORANTHA`. Its hide flag uses general bank offset 0x08E.
+Capture/defeat consumes today's visit; fleeing or losing does not. The next
+matching day's omen clears the hide flag, while same-day reentry preserves it.
+Interaction rejects an expired visitor after an on-map day change. Live
+object/weather refresh still needs a separate day-rollover integration.
+
 | `MAP_AEGINA_APHAIA_ROAD` | (22, 4), the path south of the great herm at (22, 3) | the herm's Wings landing (ENGINE_API §4's heal location) |
 
 ### Batch 4's story: beats 19 (the gate), 20, 21 and 22
@@ -325,6 +357,10 @@ Each agent touches only its own files. Shared registration files (`layouts.json`
 | sprites agent | new files under `graphics/trainers/`, `graphics/object_events/pics/`, their tables, `tools/ichor/art/sprites_phase2*.py`, `design/phase2/SPRITES.md` |
 
 ## Done means (per map)
+
+Current milestone status is tracked in `design/PITCH.md` §8. The batch tables
+above describe their historical construction state; do not infer current engine
+availability or unresolved work from a stub comment alone.
 
 - `make` is green and `tools/ichor/smoke_test.sh` passes.
 - The map follows MAP_DESIGN.md: forced grass on routes, trainer checkpoints, every dead end pays, every house a home, every interior unique, seam strips from the primary only, signs at ends and forks.

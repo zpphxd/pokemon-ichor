@@ -43,6 +43,54 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_... "commen
 
 Hidden items can take these bank flags too (`claim.py hiddenitem`; see `asm/macros/map.inc`), so the vanilla range is no longer the limit on them.
 
+### Act I dig indices
+
+These indices are inside the engine's reserved dig ranges, not the general bank
+offsets above. Do not assign them to another find.
+
+| Kind | Index | Location | Find |
+|---|---|---|---|
+| Fixed (`FLAG_ICHOR_DIG_FIXED_START`) | 0 | Emporion Harbor's quay planter | First available Arachne sherd |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 0 | Emporion Harbor's ship sheds | Act I loot, including Arachne sherds |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 1 | Emporion's Hephaisteion garden | Act I loot, including Arachne sherds |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 2 | Eleusa's west field | Act I loot, including Persephone sherds |
+| Daily (`FLAG_DAILY_ICHOR_DIG_START`) | 3 | Eleusa's east meadow | Act I loot, including Persephone sherds |
+
+Herm id 25 is Emporion's crossroads town anchor. It uses the reserved Aethos
+herm bank but does not count toward the 23-route completion reward. Its Wings
+landing is (26,32); the Asclepeion's existing respawn location is unchanged.
+`FLAG_ICHOR_HERM_EMPORION` is retained as a legacy mirror.
+
+Daily general offset 0x40 is `FLAG_DAILY_ICHOR_AUGURY_READ`: one shared
+reading/blessing entitlement per day, retained across map changes.
+
+General bank offset 0x08E is `FLAG_ICHOR_HIDE_OMEN_KORANTHA`, Eleusa's rare
+visitor at (32,35). Visitor id 2 preserves the reserved Act II visitor ids 0/1.
+The daily omen clears this hide flag only for a matching visit; capture/defeat
+sets it again, while escape/loss leaves it available.
+General bank offset 0x08F is `FLAG_ICHOR_HIDE_OMEN_PITHOUND`, visitor id 3.
+It records consumption of Emporion's marked-jar visitor at (10,24), without
+hiding the jar. Only its matching later omen clears it for another visit.
+General bank offset 0x01E is `FLAG_ICHOR_HIDE_OMEN_NEMECUB`, visitor id 4,
+for the cleared Isthmus hill spur at (28,3). Its capture/defeat state resets
+only with another matching omen, like the Eleusa visitor.
+General offset 0x01F is `FLAG_ICHOR_DIFFICULTY_CHOSEN`; bank var offset 0 is
+`VAR_ICHOR_DIFFICULTY`. An unset confirmation flag means Hero, preserving old
+saves whose new var is zero. The bedroom's confirmed selection is save-fixed.
+Isthmus excavation uses daily dig indices 4 (kilns) and 5 (hill spur), and fixed
+find index 1 (family tomb, Girdle-gated). All belong to the Arachne amphora.
+These are offsets in the reserved dig ranges, not the general flag range.
+Fixed dig index 2 is sanctum B1F's Persephone sherd (bay B's great jar).
+Fixed dig index 3 is sanctum B3F's Daedalus page II, exposed after the cave-in;
+it grants canonical page offset 1 (`FLAG_ICHOR_PAGES_START + 1`).
+
+### Act I technique scrolls
+
+TM51, TM52 and TM53 activate existing reserved item IDs as Fling, Bulldoze
+and Round. Myrtale awards Fling; Emporion sells Bulldoze and Round. Existing
+TM01–50 and HM item IDs are unchanged. The fixed 64-slot TM/HM pocket still
+holds all 53 TMs and eight HMs without a save-layout change.
+
 ## Vars
 
 115 vars are free now that the Hoenn cut has run (`VAR_UNUSED_0x…` in `include/constants/vars.h`; 0x4010–0x401F are the object-graphics vars and stay). Use `VAR_TEMP_*` for state within a single scene, and the Ichor SaveBlock3 struct (`design/ENGINE_API.md`, by ichor-engine) for anything lasting. Claim a real var only with the director's OK.

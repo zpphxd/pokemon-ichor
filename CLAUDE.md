@@ -85,4 +85,10 @@ mgba pokeemerald.gba                   # play it
 | Phase | Status |
 |---|---|
 | 0. Foundation (toolchain, first build, feature config, pipelines) | Done 2026-11-14: builds green, smoke test and `make check` pass |
-| 1. Vertical slice: Kalliste Isle, Temple of Hestia | Next. The user playtests and approves the look before we scale. |
+| 1. Vertical slice: Kalliste Isle, Temple of Hestia | Playable; current natural-level balance and user look/fun approval still gate completion |
+| 2. Act I: voyage, Emporion, Eleusa | Playable through Laurel 3 and the sanctum; closing scenes and complete integrations remain |
+| 3–4. Act II, Act III and League | Next connected chapter builds; story-complete milestone is **0.9** |
+| 5–6. Core post-game and release | **1.0** includes approved core post-game, ten Oikoumene lands and full Periodos halls |
+
+The current status and acceptance matrix is in `design/PITCH.md` §8. Approved
+`design/OIKOUMENE.md` §13 decisions supersede older conflicting release labels.

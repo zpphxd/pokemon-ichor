@@ -138,6 +138,34 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
+### Difficulty selection and challenge rules (PITCH §5)
+
+The bedroom clock calls the confirmed, save-fixed difficulty selector before
+letting a new player downstairs. `VAR_ICHOR_DIFFICULTY` is bank var 0;
+`FLAG_ICHOR_DIFFICULTY_CHOSEN` is general offset 0x01F. Without that flag,
+`GetCurrentDifficultyLevel()` returns Hero even though the new bank var is zero.
+Existing saves therefore do not become Mortal. No save-layout/version change
+is needed.
+
+`specialvar VAR_RESULT, Ichor_ChooseDifficulty` takes `VAR_0x8004` as the
+expansion `DIFFICULTY_EASY`, `_NORMAL` or `_HARD` value. It returns false for an
+invalid or already-confirmed selection; the caller must handle that result.
+The low-level expansion setter remains available for engine/test setup, not a
+player-facing mode-switch menu.
+
+`Ichor_GetStepGlassLimit` returns 150/120/100 for Mortal/Hero/Spartan. Hermes's
+trial and the Labyrinth's thread use the same helper. Spartan's current cap
+mapping is 14/20/26, then the next chapter's 32 after Laurel 3. EXP multipliers
+and candies cannot exceed the cap. Its option menu and battles enforce SET;
+the battle-item rejection gives an explicit message but still permits capture
+balls. Trainer AI is upgraded even when a trainer has no separate Hard party.
+The four Act I Hierophant party variants use the existing trainer ids.
+
+`tools/ichor/tests/difficulty.sh` checks the actual menus, all boss variants,
+confirmation rejection and real save/reset/CONTINUE for all modes.
+`make check -j$(sysctl -n hw.ncpu) TESTS='Ichor:'` also covers caps, EXP Candy and item rejection.
+Oath rules, later chapter cap milestones and natural-level approval remain open.
+
 ## 2. Relics (SYSTEMS §1, §2)
 
 Relics are key items. **No Pokémon ever needs a field move:** the party menu offers none, and every obstacle checks the bag.
@@ -364,6 +392,11 @@ Built in `src/ichor_herms.c`, `src/data/ichor_herms.h` and `data/scripts/ichor_h
 
 - **One great herm per route.** Its bg event runs `EventScript_IchorGreatHerm` directly. A herm that is already a sign with its own line calls `EventScript_IchorAnointHerm` after it, between `lockall` and `releaseall`. The engine knows which herm it is from the map; on a map with no herm row, both scripts do nothing.
 - **Herm ids** (`include/constants/ichor.h`) follow AETHOS_MAP's land routes and their map sections: `HERM_KALLISTE_ROUTE_1`, `HERM_AETHOS_ROUTE_4` … `_18`, `HERM_BULL_ROAD`, `HERM_AETHOS_ROUTE_25` … `_30` and `HERM_THE_ASCENT`. That is 23 before the post-game (`HERM_COUNT`). The post-game's `HERM_AETHOS_ROUTE_31` and `_32` come after them and don't count toward the bonus. Sea routes have no herm. Room is left for 32.
+- **Emporion's city anchor** uses `HERM_EMPORION_CITY` (25), outside the 23-route count.
+  It anoints normally and flies to `HEAL_LOCATION_HERM_EMPORION_CITY` (26,32),
+  south of its stone (26,31). City entry migrates the old
+  `FLAG_ICHOR_HERM_EMPORION`; a new anointing mirrors that flag. Migration
+  neither charges another Oil nor grants another Favor.
 - **The Oikoumene's waystones** (herms, Thoth's ibis pillars, stone babas and cairns of Ammon; OIKOUMENE §4) take ids from `HERM_OIKOUMENE_FIRST` (32) to 63. They anoint the same way and join the Wings' fly map, but never count toward Aethos's herms or the bonus. Their flags are `FLAG_ICHOR_WAYSTONES_START + (id - 32)`; `Ichor_GetHermFlag(id)` gives any herm's flag. The Oikoumene session sends each waystone's map, map section and landing tile, and the engine session adds its row.
 - **Each herm's flag** is `FLAG_ICHOR_HERMS_START + id`. A script that needs to know whether a herm is anointed (the Frozen Hour's turning heads) checks that flag. Nothing else sets it; the herm script does.
 - **Each herm needs one engine table row and one heal location.** Tell the engine session the herm's map and its landing tile (the tile south of it, on the main path), or add both rows yourself:
@@ -672,7 +705,7 @@ A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR
 
 ### Omens (SYSTEMS §6)
 
-- **Today's omen** is `IchorSave.omenKind` (`OMEN_SWARM`, `_VISITOR`, `_WEATHER`, `_GOOD_SIGN`, `_STRANGER`, or `OMEN_NONE`) and `omenEntry`, an entry within that kind. The entries are numbered in `include/constants/ichor.h`: `OMEN_WEATHER_KRYOPUFF` and `OMEN_WEATHER_LERNIP` so far. Add new ones at the end.
+- **Today's omen** is `IchorSave.omenKind` (`OMEN_SWARM`, `_VISITOR`, `_WEATHER`, `_GOOD_SIGN`, `_STRANGER`, or `OMEN_NONE`) and `omenEntry`, an entry within that kind. The entries are numbered in `include/constants/ichor.h`; append new ids without renumbering existing saved entries.
 - **Forcing tomorrow's omen,** as when Akanthis first tells the Lernip rumor: `setvar(VAR_0x8004, OMEN_WEATHER)`, `setvar(VAR_0x8005, OMEN_WEATHER_LERNIP)`, `special(Ichor_ForceOmen)`.
 - **A map that owns an omen's weather** checks it in `ON_TRANSITION`:
   ```
@@ -697,7 +730,35 @@ A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR
   { .kind = OMEN_VISITOR, .entry = OMEN_VISITOR_THYRSIVY, .unlockFlag = FLAG_ICHOR_DIONYSIA_DONE,
     .hideFlag = FLAG_ICHOR_HIDE_OMEN_THYRSIVY },
   ```
-  The table has only the two weather rows so far, both opened by Laurel 7 (`FLAG_BADGE07_GET`) until world-act3 names a better flag. The Act I and II rows belong to world-act1 and world-act2, whose maps and flags aren't on this branch yet. Until rows exist, every day's omen is a good sign.
+  Reachable Act I rows now include Kerazap on the cleared Isthmus (level 18)
+  and Skiron road (19), Melibee (20) and Stachyss (21) in Eleusa, and Eleusa sun
+  weather. The latter four unlock on arrival in Eleusa. Swarm ids 2-5 preserve
+  the reserved Act II entries 0/1. Eleusa's transition clears the previous
+  weather before applying today's sun. Later rows remain progress-gated;
+  Eleusa's `OMEN_VISITOR_ELEUSA_KORANTHA` (2) is registered at (32,35), level 22,
+  with `FLAG_ICHOR_HIDE_OMEN_KORANTHA`. Capture/defeat hides it until another
+  matching omen; escape/loss does not. Map entry hides off-day visitors even
+  on legacy saves with an unset new flag. Interaction also rejects an expired
+  visitor if the day changes while the player stays in the wheat. Daily flags
+  do not refresh live objects or weather by themselves; seamless on-map day
+  rollover and other Act I visitor callers remain open.
+  Emporion's `OMEN_VISITOR_EMPORION_PITHOUND` (3) unlocks on the first city
+  visit. Only the westernmost stoa jar at (10,24), whose description identifies
+  a scratched paw-print, starts this level-16 visitor. Its BG script checks the
+  current omen on every interaction and uses `FLAG_ICHOR_HIDE_OMEN_PITHOUND`
+  as today's consumed state, not as a flag to hide the jar. Capture/defeat
+  consumes the visit; loss/escape keeps it available. The other five jars retain
+  their ordinary one-in-four level-14-16 encounters.
+  `OMEN_VISITOR_ISTHMUS_NEMECUB` (4) unlocks when the Isthmus rockslide is
+  cleared. The level-18 golden cub stands in the hill-spur scrub at (28,3).
+  `FLAG_ICHOR_HIDE_OMEN_NEMECUB` records capture/defeat for that visit; loss and
+  escape preserve it. Entry and interaction reject off-day visitors, including
+  legacy saves and an on-map day change.
+- **Halitherses's reading** uses the actual saved kind/entry and
+  `FLAG_DAILY_ICHOR_AUGURY_READ`. A good-sign blessing asks before replacing
+  the current blessing, grants Hermes 100 steps without Favor, and cannot be
+  refreshed by another conversation or map reentry. Declining keeps the old
+  blessing; an absent omen does not consume the day's reading.
 
 ### Four time-of-day encounter tables on one map
 
@@ -709,6 +770,17 @@ These need no engine change. `OW_TIME_OF_DAY_ENCOUNTERS` is on, and `tools/wild_
 ## 8. Excavation (SYSTEMS §5)
 
 Alethea gives the Trowel with `giveitem(ITEM_ALETHEAS_TROWEL)` (a key item). Every dig spot is a bg event, or an object, whose script sets two vars and goes to one of two scripts:
+
+Act I's integrated daily indices are 0 (Emporion shipsheds), 1 (Hephaisteion
+garden), 2/3 (Eleusa west/east fields), and 4/5 (Isthmus kilns/hill spur).
+The Isthmus pair use the Arachne amphora and independent daily flags. Fixed
+index 0 is Emporion's quay planter; index 1 is the Isthmus family tomb's
+Arachne sherd, behind the existing Act II Girdle gate. Do not reuse these indices.
+Fixed index 2 is the sanctum B1F Persephone sherd behind bay B's great jar;
+it requires the Trowel and stays consumed across reentry and saved games.
+Fixed index 3 is Daedalus's page II in sanctum B3F's exposed foundations.
+The cave-in must have happened before excavation; ownership uses the canonical
+page flag `FLAG_ICHOR_PAGES_START + 1`, with no extra general-bank flag.
 
 ```
 // A daily spot: dug once a day; its find is rolled from the day's seed and the spot
@@ -726,6 +798,11 @@ goto(EventScript_IchorDigFixed)
 **A daily spot's `VAR_0x8005`:**
 - The table: `ICHOR_DIG_ACT_I`, `_ACT_II` or `_ACT_III` (Act III and the post-game). These are SYSTEMS §5's tables.
 - The amphora, if the spot holds sherds: `| ICHOR_DIG_SHERDS(ICHOR_AMPHORA_*)`. The twelve `ICHOR_AMPHORA_*` names follow §5's table (`_KRONOS` is Kalliste, `_PERSEPHONE` Eleusa, `_ARACHNE` Emporion, and so on).
+
+**Registered Act I daily spots:** harbor ship sheds 0, Hephaisteion garden 1
+(Arachne), Eleusa west field 2 and east meadow 3 (Persephone). The village's
+two BG events use separate index-setting wrappers and a shared loot caller;
+never share a daily index between sites. See `tools/ichor/claim_ranges.md`.
 - A spot with no amphora never gives a sherd: the roll goes again. So does a sherd roll once its amphora is whole, and an ostrakon roll once all 30 are found.
 
 **What a dig does:**
@@ -774,9 +851,13 @@ if (var(VAR_RESULT) == TRUE) {
 }
 ```
 
-`VAR_RESULT` is `FALSE` if you have none. With no blessing, +20% is ¥600, ¥2,400 and ¥6,000.
+Call `specialvar(VAR_RESULT, Ichor_QuoteToMoneychanger)` with the same inputs
+before confirmation to buffer the payment in `STR_VAR_1` without removing the
+coin. Both calls return `FALSE` if the item is missing, cannot be sold, or its
+full payment would exceed the money cap. A refused sale leaves the item and
+money unchanged; the sale rechecks capacity. With no blessing, +20% is ¥600,
+¥2,400 and ¥6,000.
 
 **Index blocks** for dig spots are in §1's table. Ask the engine session for more.
 
 **Checks:** `tools/ichor/tests/ichor_dig.sh` (15 checks on Route 1) and `make check TESTS="Ichor:"` (`test/ichor_dig.c`: the rolls, rerolls, act tables and blessings).
-

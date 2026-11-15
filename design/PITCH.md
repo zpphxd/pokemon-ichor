@@ -205,6 +205,10 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
   - **Hero**: standard.
   - **Spartan**: level caps, set mode, no items in battle, smart AI, and competitive boss teams.
   - **Oath of the Styx**: an optional Nuzlocke ruleset you swear to at the start.
+  - **Current selection policy:** confirm Mortal, Hero or Spartan when setting
+    the bedroom water clock. The choice is fixed for that save; existing saves
+    stay Hero. Act I's modes are integrated, but natural-level mode balance and
+    the Oath remain unfinished.
 - **No HM slaves.** Field powers come from relics. Relics are key items you use straight from the field; no Pokémon ever learns a field move. The user approved this mapping on 2026-11-14. Each relic's myth-quest and upgrades are in `design/SYSTEMS.md` §1–3.
 
   | Field power | Relic | Arrives |
@@ -351,9 +355,107 @@ Every phase ends in a playable patch.
 | **1. Vertical slice** | Kalliste Isle: Elaia, Route 1, Akti Town and the Temple of Hestia. First Greek tileset, pottery UI, the main cast's sprites, 3 songs, starters, the rival battle and Laurel 1. About an hour of play. **You playtest and approve the look before we scale.** |
 | **2. Act I** | Emporion and Eleusa, Laurels 2–3 |
 | **3. Act II** | Thyrsa, Arkadia, Astyra and Kaldera, Laurels 4–6 |
-| **4. Act III** | Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour and Olympus. The story is complete (1.0). |
-| **5. Post-game** | Labors, Katabasis, Olympiad, Odyssey, Atlantis, the Prime Mover |
+| **4. Act III** | Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour and Olympus. The story is complete (**0.9**, approved OIKOUMENE PG-1). |
+| **5. Post-game** | Labors, Katabasis, five-facility Olympiad, Odyssey, Atlantis, the Prime Mover, and all ten Oikoumene lands with their full Periodos halls. This is the **1.0 core** (OIKOUMENE PG-1, PG-4, PG-21, PG-33). |
 | **6. Polish and release** | Balance, typo sweep, outside beta testers, release patch |
+
+### Current implementation and acceptance
+
+Use this table for current milestone status, rather than historical batch headers.
+Engine support, reachable content, automated coverage and player approval are separate
+gates. Counts of maps, species or songs are not a completion percentage.
+
+| Goal | Implemented / playable | Remaining acceptance or implementation |
+|---|---|---|
+| Foundation | ROM builds; opening smoke and save/reload exercised; native emulator setup verified | Keep build commands reproducible on the current local toolchain; measure budgets after changes |
+| Kalliste slice | Opening, starter selection, rival, Kronion Hill, Hestia and Laurel 1 | Current natural-level balance and human look/fun approval |
+| Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
+| Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
+| Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, Oath, Scroll, Chart and missing dungeon mechanics |
+| Act II | Story and system designs | Connected Thyrsa → Arkadia → Astyra → Kaldera chapters; Laurels 4–6 |
+| Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
+| Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |
+| Release | Pipelines and some early regression coverage | Full-game natural-level runs, total-conversion audit, save safety, budgets and human acceptance |
+
+The setup run exercised the opening through the Emporion gate continuously, and
+separate area checks through the Mystery sanctum. Its assisted battles are progression
+evidence, **not** natural-level balance evidence. Historical QA and art inventories
+remain evidence of those revisions, not current open-issue counts.
+
+The Hollow night-hound failure was a signed-offset error in the test clock setup,
+not an established encounter bug. The corrected harness checks that the cave
+actually loads at noon and 22:00; its complete 73-check walk passes.
+Philoxenos and Metaneira now use the engine's forward-only rest menu; world tests
+exercise actual NPC conversations, dusk, cancel, late-night behavior and the real
+Wine reward.
+Emporion Harbor now grants real Oil and the Trowel, invokes prayer/Favor and
+fixed/daily excavation, consumes Oil for Daedalus's first page, and recovers the
+missing tool on legacy saves. The Dolphin uses real best-of-five knucklebones
+with cautious/bold opponents and actual Oil/Wine prizes. Myrtale awards a real
+Fling scroll; a full TM pocket preserves the won prize for collection without
+another match, including recovery of old placeholder wins. Reserved TM51–53
+now teach Fling, Bulldoze and Round with species-specific eligibility; the
+scroll stall sells the latter two without changing item IDs or save layout.
+The offerings stall sells Oil, Barley Cake, Wine and Frankincense at their
+specified prices. Pasion buys all three coins at the market's blessed price
+plus 20%; cancellation and the money cap cannot consume an unpaid coin.
+The Hephaisteion garden uses its own daily excavation index, distinct from
+the harbor's ship sheds.
+Emporion's crossroads herm now consumes Oil, grants its one-time Favor and
+registers a Wings landing without counting toward the 23-route reward; legacy
+anointing flags migrate without another charge. Halitherses reads the saved
+daily omen, not a fresh random rumor. His optional blessing cannot be refreshed
+by repeat conversations or map reentry. Reachable Act I omens include actual
+Kerazap, Melibee and Stachyss outbreaks and Eleusa's sun weather. Its rare
+Korantha visitor is a real level-22 encounter: capture or defeat consumes the
+day's visit, while escape or loss leaves it available. An off-day legacy save
+cannot reveal it; reentry cannot respawn a caught visitor. The other rare
+visitors and later omen callers remain unfinished. An expired visitor cannot
+start a battle after a day change in the wheat; seamless live object/weather
+refresh on day rollover remains unfinished.
+Emporion's marked-jar Pithound omen is also integrated: Halitherses names the
+westernmost stoa jar, which holds a real level-16 visitor only on its omen day.
+Capture/defeat consumes that visit; escape/loss keeps it available. The other
+five jars retain their ordinary random encounters.
+The Isthmus hill-spur Nemecub omen is integrated at level 18 after the rockslide
+is cleared, with its approved rumor, real capture/defeat, loss/escape retry and
+same-day persistence. The Halai Harpelle visitor belongs to later geography.
+The Isthmus kilns and spur now have independent daily Arachne excavation.
+The family tomb's fixed Arachne find is wired behind its existing Girdle gate;
+natural acquisition of that relic still belongs to Act II.
+Sanctum B1F's fixed Persephone sherd is also real excavation, with Trowel
+requirement, repeat protection and saved-game persistence. Collecting sherds
+does not itself restore an amphora or unlock its completed-amphora rewards.
+The B3F cave-in exposes a real, Trowel-required fixed find for Daedalus's page II.
+Its page ownership and consumed dig state survive saving and CONTINUE.
+Eleusa's field shrine invokes Demeter's real prayer/offerings/Favor menu. Its
+west and east digs have independent daily indices and actual Act I finds,
+including Persephone sherds, rather than turned-earth placeholder messages.
+The sanctum now continues through Kleon's departure and Daphne's revelation,
+with both dialogue branches, one real Star Chart, and independent saved Act I
+completion flags instead of a fourth-Laurel alias. Full key-item pockets cannot
+skip the Sickle or complete the revelation without its reward; both can be
+retried after making room. The closing run exercises both branches, restored
+braziers, repeat entry and save/CONTINUE. The north vines require the Sickle;
+Alethea leaves after the player passes them, and the herald blocks the next
+chapter until it exists. Gate and companion state persist across saves.
+This is story/state integration, not
+final scene-art acceptance: the lamp, tablet close-up, pottery title card,
+dedicated music and Chart icon/UI remain unfinished.
+
+**Continuation order.** Close and approve Act I first. Integrate shared systems at
+their first story use, then build connected Act II and Act III chapters. For post-game
+implementation, follow approved PG-2: sailing → Olympia → Katabasis → Labors →
+Odyssey → Atlantis → summit, with Oikoumene lands alongside, near lands first.
+This is a build order, not a new forced player quest order. Keep the deferred Astral
+type/species expansion separate from the required 24-constellation collectible chart.
+
+**Every chapter's gate.** Build and opening smoke pass; relevant Lua and continuous
+progression checks pass; loss/reentry/save recovery works; encounters and teams follow
+BALANCE.md; visible scenes and measured text are reviewed; map render/critique passes
+follow phase2/BUILD.md. Obtain human approval before scaling. Run expansion engine
+tests for shared-engine changes and release gates. Preserve the installed player's
+ROM/save; a save-incompatible change needs explicit approval.
 
 ---
 
