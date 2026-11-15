@@ -907,9 +907,9 @@
 #define FLAG_UNUSED_0x358                                           0x358 // Unused Flag
 #define FLAG_UNUSED_0x359                                           0x359 // Unused Flag
 #define FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY                       0x35A
-#define FLAG_UNUSED_0x35B                                           0x35B // Unused Flag
-#define FLAG_UNUSED_0x35C                                           0x35C // Unused Flag
-#define FLAG_UNUSED_0x35D                                           0x35D // Unused Flag
+#define FLAG_ICHOR_HIDDEN_TEMPLE_ARTEMIS_STARDUST                   0x35B // Ichor: Act II: hidden Stardust in the asphodel, Temple of Artemis
+#define FLAG_ICHOR_HIDDEN_TEMPLE_ARTEMIS_DUSK_BALL                  0x35C // Ichor: Act II: hidden Dusk Ball in the garden's dark corner, Temple of Artemis
+#define FLAG_ICHOR_HIDDEN_TEMPLE_ARTEMIS_STAR_PIECE                 0x35D // Ichor: Act II: hidden Star Piece on Kallisto's rock, Temple of Artemis
 #define FLAG_UNUSED_0x35E                                           0x35E // Unused Flag
 #define FLAG_UNUSED_0x35F                                           0x35F // Unused Flag
 #define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1           0x360
@@ -1811,6 +1811,11 @@
 #define FLAG_ICHOR_BOARDED_GULF_FERRY           (FLAG_ICHOR_GENERAL_START + 0x167) // Ichor: Act II: boarded Panopeus's ferry at Kirrha (beat 37B)
 #define FLAG_ICHOR_GULF_CROSSED                 (FLAG_ICHOR_GENERAL_START + 0x168) // Ichor: Act II: crossed the Gulf to Aigion (beat 37B-C)
 #define FLAG_ICHOR_VISITED_AIGION               (FLAG_ICHOR_GENERAL_START + 0x169) // Ichor: Act II: Aigion is a fly target (beat 37C)
+#define FLAG_ICHOR_KALLISTO_RITE                (FLAG_ICHOR_GENERAL_START + 0x1E4) // Ichor: Act II: Kallisto taught Artemis's rite and gave the Moon Laurel (beat 44)
+#define FLAG_ICHOR_GOT_TM_DARK_PULSE            (FLAG_ICHOR_GENERAL_START + 0x1E5) // Ichor: Act II: Kallisto gave TM Dark Pulse with the Moon Laurel (beat 44)
+#define FLAG_ICHOR_HIDE_TEMPLE_HOUNDS_ASLEEP    (FLAG_ICHOR_GENERAL_START + 0x1E6) // Ichor: Act II: hides the Temple of Artemis's sleeping hounds until the Moon Laurel
+#define FLAG_ICHOR_KALLISTO_TABLET              (FLAG_ICHOR_GENERAL_START + 0x1E7) // Ichor: Act II: Kallisto has seen prophecy tablet 5 (beat 44, once)
+#define FLAG_ICHOR_ITEM_TEMPLE_ARTEMIS_PRETTY_FEATHER (FLAG_ICHOR_GENERAL_START + 0x1E8) // Ichor: Act II: the Pretty Feather on Anthia's bench, Temple of Artemis
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)

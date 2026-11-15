@@ -593,3 +593,18 @@ const struct Tileset gTileset_ThyrsaStone =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaStone,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary built by tools/ichor/art/temple_artemis_build.py: the Temple
+// of Artemis at Arkadia, the goddess's night garden and the Hunt for the Hind. It uses only
+// its own tiles and palettes 6-12, with opaque floors, so it works on any primary (drawn for
+// oikos: an indoor map, so the clock's tint never touches its night).
+const struct Tileset gTileset_TempleArtemis =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleArtemis,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleArtemis,
+    .metatiles = gMetatiles_PorytilesManaged_TempleArtemis,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleArtemis,
+    .callback = NULL,
+};

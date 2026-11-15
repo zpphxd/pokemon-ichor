@@ -292,6 +292,7 @@
 #define VAR_ICHOR_DIONYSIA_MASK                 (ICHOR_VARS_START + 0x009) // Ichor: Act II: the mask worn backstage at the Dionysia, 0 none 1 comic 2 tragic 3 satyr
 #define VAR_ICHOR_THREE_ACT_PLAY                (ICHOR_VARS_START + 0x006) // Ichor: Act II: the Three-Act Play (beat 31, Part 5): 0 Act I open, 1 Act I done, 2 Act II done, 3 the play done and the god-machine down, 4 riding to the skene roof, 5 the Mask Laurel given
 #define VAR_ICHOR_PLAY_MISSES                   (ICHOR_VARS_START + 0x007) // Ichor: Act II: wrong entrances in the Three-Act Play's Act III, for the painted audience's hint
+#define VAR_ICHOR_HUNT                          (ICHOR_VARS_START + 0x00A) // Ichor: Act II: the Hunt for the Hind (beat 44, Part 5): tens the stage (10 I, 20 II, 30 III hind at A, 40 at B, 50 at C, 60 hunt won, 70 the Moon Laurel), units the hounds' returns in that stage (0-3)
 #define VAR_ICHOR_PINDAROS_LAURELS              (ICHOR_VARS_START + 0x010) // Ichor: highest laurel Pindaros has remarked on (0: not yet visited)
 // Ichor bank vars: end
 

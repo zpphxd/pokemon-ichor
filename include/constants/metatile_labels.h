@@ -1292,4 +1292,15 @@
 #define METATILE_TempleDionysus_TierFrontArm_Lowered   0x276
 // end gTileset_TempleDionysus
 
+// gTileset_TempleArtemis (Ichor: the Hunt for the Hind), written by tools/ichor/art/temple_artemis_build.py
+#define METATILE_TempleArtemis_StairHedge_L           0x320
+#define METATILE_TempleArtemis_StairHedge_Lowered_L   0x321
+#define METATILE_TempleArtemis_StairHedge_R           0x322
+#define METATILE_TempleArtemis_StairHedge_Lowered_R   0x323
+#define METATILE_TempleArtemis_GateTop                0x324
+#define METATILE_TempleArtemis_GateTop_Open           0x325
+#define METATILE_TempleArtemis_Gate                   0x326
+#define METATILE_TempleArtemis_Gate_Open              0x327
+// end gTileset_TempleArtemis
+
 #endif // GUARD_METATILE_LABELS_H
