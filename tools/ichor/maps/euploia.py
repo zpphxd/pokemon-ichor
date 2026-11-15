@@ -144,6 +144,9 @@ def header(name, type_, weather):
         "show_map_name": False,
         "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
         "connections": None,
+        # a ship's deck and hold are interiors (MAP_DESIGN §8.6); map_audit.py's
+        # name rule wants "_Deck", so say it here. mapjson ignores the key.
+        "ichor_kind": "interior",
     }
 
 

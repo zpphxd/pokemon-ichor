@@ -45,6 +45,8 @@ JARS = (18, 3)
 LAMPS = (18,)             # a hanging lamp (columns)
 RUG = (9 * CELL + 4, 5 * CELL + 2, 14 * CELL - 4, 8 * CELL - 2)    # px: x0, y0, x1, y1
 CHESTS = ((6, 8), (16, 8))   # the crew's sea chests along the starboard side
+COIL = (17, 7)
+WATER_JAR = (18, 6)
 
 # The seven keepsakes and their spots on the shelf (ODYSSEY §2's order),
 # and the ship's own plaque, always there.
@@ -261,23 +263,26 @@ def draw_shelf(s: Scene, filled=()):
     M = s.M
     x0, y0 = SHELF[0] * CELL, SHELF[1] * CELL            # 64, 16
     x1 = x0 + 4 * CELL - 1                                # 127
-    for x in range(x0 + 2, x1 - 1):                       # the back boards
+    # the niche's back, painted Aegean blue, so the keepsakes stand out
+    for x in range(x0 + 2, x1 - 1):
         for y in range(y0 + 3, y0 + 29):
-            c = "wd0" if (x - x0) % 8 else "ink"
+            c = "b1" if (x - x0) % 16 else "ink"
             if y in (y0 + 3, y0 + 16):
                 c = "ink"
+            elif y in (y0 + 4, y0 + 17):
+                c = "b2"
             M.px(x, y, c)
     for x in range(x0, x1 + 1):
         M.px(x, y0, "ink")
-        M.px(x, y0 + 1, "wd1")
-        M.px(x, y0 + 2, "wd0")
+        M.px(x, y0 + 1, "g0")                             # a gilded cap
+        M.px(x, y0 + 2, "br")
         for yp in (y0 + 13, y0 + 29):                     # the two tiers
             M.px(x, yp, "wd1")
-            M.px(x, yp + 1, "wd0")
+            M.px(x, yp + 1, "br")
             M.px(x, yp + 2, "ink")
     for px_ in (x0, x1 - 1):
         for y in range(y0, y0 + 32):
-            M.px(px_, y, "ink" if px_ == x0 else "wd0")
+            M.px(px_, y, "ink" if px_ == x0 else "br")
             M.px(px_ + 1, y, "wd1" if px_ == x0 else "ink")
     # brackets under each tier
     for bx in (x0 + 14, x0 + 46):
@@ -467,10 +472,36 @@ def draw_ladder(s: Scene):
         B.px(x, 55, "ink")
 
 
-def draw_hearth(s: Scene, lit=True):
+# The flames in four phases: euploia_build.py turns phases 1-3 into the frames
+# src/tileset_anims.c copies over phase 0's tiles, so Hestia's fire flickers.
+FLAMES = [
+    ["     f    f     g     f   ",
+     "    fg   fgf   fgf   fg   ",
+     "   fgGf fgGgf fgGgf fgGf  ",
+     "  fgGcgffgGcgfgGcGgffgcgf ",
+     "  fgcccgfgcccgfgcccgfgccgf"],
+    ["    f     g    f     f    ",
+     "    gf   fgf   fg   fgf   ",
+     "   fgGf fgGgf fGgf  fGgf  ",
+     "  fgcGgffgcGgfgGcGgffgGcf ",
+     "  fgcccgfgcccgfgcccgfgccgf"],
+    ["      f   f      f    g   ",
+     "     fg  fgf    fgf  fgf  ",
+     "   fgGf fgGgf  fgGgffgGf  ",
+     "  fgGcgffgGcgffgGcGgfgcgf ",
+     "  fgcccgfgcccgfgcccgfgccgf"],
+    ["   g      f    g      f   ",
+     "   fgf   fg   fgf    fg   ",
+     "   fgGf fgGf  fgGgf fgGf  ",
+     "  fgGcgfgGcgffgGcGgffgcgf ",
+     "  fgcccgfgcccgfgcccgfgccgf"],
+]
+
+
+def draw_hearth(s: Scene, lit=True, phase=0):
     """Lampon's hearth, Hestia's fire aboard: a raised clay hearth, a cooking
     pot on three stones over the flames, a clay hood and flue up through the
-    deck. Cold, it's ash and a dark pot."""
+    deck. Cold, it's ash and a dark pot. `phase` picks the flames' frame."""
     M = s.M
     x0, y0 = HEARTH[0] * CELL, HEARTH[1] * CELL          # 144, 48
     # the flue through the beams and the hood over the hearth
@@ -513,21 +544,14 @@ def draw_hearth(s: Scene, lit=True):
     M.blit(["kkkkkkkk", "kHHHHHHk", "kHkkkkHk"], {"k": "ink", "H": "hd0"}, x0 + 12, y0 + 9)   # the ash door
     if lit:
         for x in range(x0 + 13, x0 + 19):
-            M.px(x, y0 + 10, "fl" if x % 2 else "g1")
+            M.px(x, y0 + 10, "fl" if (x + phase) % 2 else "g1")
             M.px(x, y0 + 11, "fl")
     # the fire bed, with the flames or the ash
     for x in range(x0 + 4, x0 + 28):
         M.px(x, y0 + 5, "hd0")
-        M.px(x, y0 + 6, "fl" if lit and x % 3 else "hd0" if lit else "wd0")
+        M.px(x, y0 + 6, "fl" if lit and (x + phase) % 3 else "hd0" if lit else "wd0")
     if lit:
-        flames = [
-            "     f    f     g     f   ",
-            "    fg   fgf   fgf   fg   ",
-            "   fgGf fgGgf fgGgf fgGf  ",
-            "  fgGcgffgGcgfgGcGgffgcgf ",
-            "  fgcccgfgcccgfgcccgfgccgf",
-        ]
-        M.blit(flames, {"f": "fl", "g": "g1", "G": "fc", "c": "fc"}, x0 + 3, y0 - 1)
+        M.blit(FLAMES[phase % len(FLAMES)], {"f": "fl", "g": "g1", "G": "fc", "c": "fc"}, x0 + 3, y0 - 1)
     else:
         M.blit(["  w  ww  w   ww  w  ww  ", " wHwwHHwwHw wHHwwHwwHHw "], {"w": "wd0", "H": "hd0"},
                x0 + 4, y0 + 2)
@@ -861,6 +885,11 @@ def sea_chest(M, x, y):
 def draw_chests(s: Scene):
     for (cx, cy) in CHESTS:
         sea_chest(s.M, cx * CELL, cy * CELL)
+    # the deck's own rope coil and water jar, stowed in the bow: the same art,
+    # so the same tiles
+    import euploia_deck
+    euploia_deck.rope_coil(s.M, *COIL)
+    euploia_deck.water_jar(s.M, *WATER_JAR)
 
 
 def draw_lamps(s: Scene):
@@ -887,7 +916,7 @@ def draw_lamps(s: Scene):
 VARIANTS = ["hearth_cold"] + [f"keepsake_{k}" for k, _, _ in KEEPSAKES]
 
 
-def draw(variant="base"):
+def draw(variant="base", phase=0):
     s = Scene("below" if variant == "base" else "below_" + variant, W, H)
     beams(s)
     wall(s)
@@ -903,7 +932,7 @@ def draw(variant="base"):
     if variant == "full_shelf":                       # previews only: every keepsake home
         filled = tuple(k for k, _, _ in KEEPSAKES)
     draw_shelf(s, filled)
-    draw_hearth(s, lit=variant != "hearth_cold")
+    draw_hearth(s, lit=variant != "hearth_cold", phase=phase)
     draw_mess(s)
     draw_table(s)
     draw_pithos(s)
@@ -927,7 +956,8 @@ def void():
 SOLID = [BUNK, (BUNK[0] + 1, BUNK[1]), CHEST, HEARTH, (HEARTH[0] + 1, HEARTH[1]),
          (PITHOS[0], PITHOS[1] + 1), (PITHOS[0] + 1, PITHOS[1] + 1), (15, 3), (17, 3), JARS,
          TABLE, (TABLE[0] + 1, TABLE[1]), STOOL,
-         NETS, (NETS[0] + 1, NETS[1]), (NETS[0], NETS[1] + 1), (NETS[0] + 1, NETS[1] + 1)] + list(CHESTS)
+         NETS, (NETS[0] + 1, NETS[1]), (NETS[0], NETS[1] + 1), (NETS[0] + 1, NETS[1] + 1),
+         COIL, WATER_JAR] + list(CHESTS)
 
 
 def walkability(s: Scene):

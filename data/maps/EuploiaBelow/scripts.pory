@@ -484,45 +484,45 @@ script EuploiaBelow_EventScript_SeaChest {
 // before the map draws. From a script, follow with special(DrawWholeMapView).
 // Rebuild with tools/ichor/maps/euploia.py after the tileset changes.
 script EuploiaBelow_EventScript_HearthCold {
-    setmetatile(9, 2, 0x2F1, TRUE)
-    setmetatile(10, 2, 0x2F2, TRUE)
-    setmetatile(9, 3, 0x2F3, TRUE)
-    setmetatile(10, 3, 0x2F4, TRUE)
+    setmetatile(9, 2, 0x2F4, TRUE)
+    setmetatile(10, 2, 0x2F5, TRUE)
+    setmetatile(9, 3, 0x2F6, TRUE)
+    setmetatile(10, 3, 0x2F7, TRUE)
     return
 }
 script EuploiaBelow_EventScript_HearthLit {
-    setmetatile(9, 2, 0x2C4, TRUE)
-    setmetatile(10, 2, 0x2C5, TRUE)
-    setmetatile(9, 3, 0x2D3, TRUE)
-    setmetatile(10, 3, 0x2D4, TRUE)
+    setmetatile(9, 2, 0x2C5, TRUE)
+    setmetatile(10, 2, 0x2C6, TRUE)
+    setmetatile(9, 3, 0x2D4, TRUE)
+    setmetatile(10, 3, 0x2D5, TRUE)
     return
 }
 script EuploiaBelow_EventScript_KeepsakeFleece {
-    setmetatile(4, 1, 0x2F5, TRUE)
+    setmetatile(4, 1, 0x2F8, TRUE)
     return
 }
 script EuploiaBelow_EventScript_KeepsakeLotus {
-    setmetatile(5, 1, 0x2F6, TRUE)
+    setmetatile(5, 1, 0x2F9, TRUE)
     return
 }
 script EuploiaBelow_EventScript_KeepsakeCord {
-    setmetatile(6, 1, 0x2F7, TRUE)
+    setmetatile(6, 1, 0x2FA, TRUE)
     return
 }
 script EuploiaBelow_EventScript_KeepsakeFeather {
-    setmetatile(7, 1, 0x2F8, TRUE)
+    setmetatile(7, 1, 0x2FB, TRUE)
     return
 }
 script EuploiaBelow_EventScript_KeepsakeTooth {
-    setmetatile(4, 2, 0x2F9, TRUE)
+    setmetatile(4, 2, 0x2FC, TRUE)
     return
 }
 script EuploiaBelow_EventScript_KeepsakeCup {
-    setmetatile(5, 2, 0x2FA, TRUE)
+    setmetatile(5, 2, 0x2FD, TRUE)
     return
 }
 script EuploiaBelow_EventScript_KeepsakeOar {
-    setmetatile(6, 2, 0x2FB, TRUE)
+    setmetatile(6, 2, 0x2FE, TRUE)
     return
 }
 // </generated>

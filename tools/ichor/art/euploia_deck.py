@@ -105,9 +105,10 @@ def plank(x, y):
     xx = (x - joint) % 16
     if yy == 3:
         return "wd1"
-    if xx == 0:
+    butt = r in (1, 6)                    # long planks: only two in eight butt here
+    if xx == 0 and butt:
         return "wd1"
-    if xx == 1:
+    if xx == 1 and butt:
         return "pk3"
     base = "pk3" if r in (0, 5) else "pk2"
     if yy == 0:
@@ -710,7 +711,13 @@ def draw_cargo(s: Scene):
     for x in (x0, x0 + 31):
         for y in range(y0, y0 + 16):
             M.px(x, y, "wd1")
-    # the crew's water jar, lashed upright
+    water_jar(M, *WATER_JAR)
+    rope_coil(M, *COIL)
+
+
+def water_jar(M, cx, cy):
+    """The crew's water jar, lashed upright, in cell (cx, cy). Below deck draws
+    the same one, so its tiles are shared."""
     jar = [
         "    kkkkkk    ",
         "   k333333k   ",
@@ -728,9 +735,11 @@ def draw_cargo(s: Scene):
         "    kkkkkk    ",
         "  rrrrrrrrrr  ",
     ]
-    M.blit(jar, {"k": "ink", "3": "tc3", "2": "tc2", "1": "tc1", "r": "rp1"},
-           WATER_JAR[0] * CELL + 1, WATER_JAR[1] * CELL + 1)
-    # a coil of rope
+    M.blit(jar, {"k": "ink", "3": "tc3", "2": "tc2", "1": "tc1", "r": "rp1"}, cx * CELL + 1, cy * CELL + 1)
+
+
+def rope_coil(M, cx, cy):
+    """A coil of rope in cell (cx, cy); shared with below deck."""
     coil = [
         "    kkkkkkk     ",
         "  kkrrRrrrrkk   ",
@@ -745,7 +754,7 @@ def draw_cargo(s: Scene):
         "    kkkkkkkrrrk ",
         "            kkk ",
     ]
-    M.blit(coil, {"k": "ink", "r": "rp", "R": "rp1", "d": "wd0"}, COIL[0] * CELL, COIL[1] * CELL + 2)
+    M.blit(coil, {"k": "ink", "r": "rp", "R": "rp1", "d": "wd0"}, cx * CELL, cy * CELL + 2)
 
 
 def draw_klepsydra(s: Scene):

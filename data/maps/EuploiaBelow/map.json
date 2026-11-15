@@ -14,6 +14,7 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
+  "ichor_kind": "interior",
   "object_events": [
     {
       "local_id": "LOCALID_EUPLOIA_LAMPON",
