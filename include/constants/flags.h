@@ -1688,6 +1688,14 @@
 #define FLAG_ICHOR_LESSER_MYSTERIES_DONE        (FLAG_ICHOR_GENERAL_START + 0x083) // Ichor: the Telesterion: the fourth brazier lit, Chloe revealed
 #define FLAG_ICHOR_MET_DOSO                     (FLAG_ICHOR_GENERAL_START + 0x084) // Ichor: the Telesterion: Doso's welcome heard
 #define FLAG_ICHOR_HIDE_CHLOE_TELESTERION       (FLAG_ICHOR_GENERAL_START + 0x085) // Ichor: the Telesterion: Chloe unseen in the Anaktoron's doorway until the fourth brazier
+#define FLAG_ICHOR_HERALDS_RUN_DONE             (FLAG_ICHOR_GENERAL_START + 0x0F0) // Ichor: the Herald's Run: the third scroll delivered (beat 15)
+#define FLAG_ICHOR_HERMES_HERM_J1               (FLAG_ICHOR_GENERAL_START + 0x0F1) // Ichor: the Herald's Run: junction herm J1 oiled
+#define FLAG_ICHOR_HERMES_HERM_J2               (FLAG_ICHOR_GENERAL_START + 0x0F2) // Ichor: the Herald's Run: junction herm J2 oiled
+#define FLAG_ICHOR_HERMES_HERM_J3               (FLAG_ICHOR_GENERAL_START + 0x0F3) // Ichor: the Herald's Run: junction herm J3 oiled
+#define FLAG_ICHOR_HERMES_HERM_J4               (FLAG_ICHOR_GENERAL_START + 0x0F4) // Ichor: the Herald's Run: junction herm J4 oiled
+#define FLAG_ICHOR_GOT_TM_AERIAL_ACE            (FLAG_ICHOR_GENERAL_START + 0x0F5) // Ichor: TM40 Aerial Ace from Kerykos
+#define FLAG_ICHOR_HERALDS_RUN_FAILED           (FLAG_ICHOR_GENERAL_START + 0x0F6) // Ichor: the step-glass ran dry once (Angelos's hint)
+#define FLAG_ICHOR_HERALDS_RUN_TOLD             (FLAG_ICHOR_GENERAL_START + 0x0F7) // Ichor: Kerykos explained the Herald's Run
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

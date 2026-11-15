@@ -2675,6 +2675,9 @@ static const struct SpriteFrameImage sPicTable_IchorDarkTriremeStern[] = {
     obj_frame_tiles(gObjectEventPic_IchorDarkTriremeStern),
 };
 
+static const struct SpriteFrameImage sPicTable_IchorKerykos[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKerykos, 2, 4),
+};
 // End of Ichor object events
 
 // Ichor: the ground item jar

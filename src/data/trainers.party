@@ -470,6 +470,98 @@ Galekit
 Level: 13
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
+/* The Temple of Hermes (design/phase2/SCRIPT.md Part 3). The species are Aethos
+ * stand-ins (ICHOR_STUB_AETHOS_DEX), so no Ability: lines. The dex adds Kerykos's:
+ * Lophops Keen Eye, Halcyling Cloud Nine, Harpelle Pickpocket. */
+
+=== TRAINER_ICHOR_PODARGE ===
+Name: PODARGE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Harpeck
+Level: 15
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+Epopoi
+Level: 15
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+=== TRAINER_ICHOR_EUCHIDAS ===
+Name: EUCHIDAS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Lophops
+Level: 16
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+Halcyling
+Level: 16
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+- Water Pulse
+- Wing Attack
+- Aqua Jet
+- Quick Attack
+
+=== TRAINER_ICHOR_PHILONIDES ===
+Name: PHILONIDES
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Harpeck
+Level: 16
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+Lophops
+Level: 17
+IVs: 10 HP / 10 Atk / 10 Def / 10 SpA / 10 SpD / 10 Spe
+
+/* Hero difficulty. Spartan needs its own boss team from Balance, as in the slice.
+ * ICHOR_STUB_MUSIC: the Hierophant class plays MUS_ICHOR_BATTLE_RIVAL (src/pokemon.c)
+ * until MUS_ICHOR_BATTLE_HIEROPHANT exists. */
+=== TRAINER_ICHOR_KERYKOS_1 ===
+Name: KERYKOS
+Class: Hierophant
+Pic: Hierophant Kerykos
+Gender: Male
+Music: Male
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Lophops
+Level: 18
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Pluck
+- Echoed Voice
+- Feather Dance
+- Quick Attack
+
+Halcyling @ Oran Berry
+Level: 19
+IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
+- Water Pulse
+- Pluck
+- Aqua Jet
+- Mist
+
+Harpelle @ Sitrus Berry
+Level: 20
+IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
+- Pluck
+- Thief
+- Taunt
+- Tailwind
+
 /* Ichor: world-act2 (ids 160-319) */
 
 

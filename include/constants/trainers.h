@@ -195,6 +195,8 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_MERCHANT,
     TRAINER_PIC_PILGRIM,
     TRAINER_PIC_ICHOR_SAILOR,          // the SAILOR class's Ichor portrait; Hoenn's TRAINER_PIC_SAILOR is untouched
+    // Pokemon Ichor, Phase 2 cast (tools/ichor/art/sprites_kerykos.py)
+    TRAINER_PIC_HIEROPHANT_KERYKOS,
     TRAINER_PIC_COUNT,
 };
 

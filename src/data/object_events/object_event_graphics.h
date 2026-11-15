@@ -684,6 +684,7 @@ const u32 gObjectEventPic_IchorNestHatching[] = INCGFX_U32("graphics/object_even
 const u32 gObjectEventPic_IchorNestEmpty[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/nest_empty.png", ".4bpp");
 const u32 gObjectEventPic_IchorDarkTriremeBow[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/dark_trireme_bow.png", ".4bpp");
 const u32 gObjectEventPic_IchorDarkTriremeStern[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/dark_trireme_stern.png", ".4bpp");
+const u32 gObjectEventPic_IchorKerykos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kerykos.png", ".4bpp", "-mwidth 2 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)

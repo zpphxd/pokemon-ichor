@@ -444,6 +444,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestHa
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEmpty;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeBow;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeStern;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKerykos;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -881,6 +882,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_NEST_EMPTY] = &gObjectEventGraphicsInfo_IchorNestEmpty,
     [OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_BOW] = &gObjectEventGraphicsInfo_IchorDarkTriremeBow,
     [OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_STERN] = &gObjectEventGraphicsInfo_IchorDarkTriremeStern,
+    [OBJ_EVENT_GFX_ICHOR_KERYKOS] =            &gObjectEventGraphicsInfo_IchorKerykos,
     // End of Ichor object events
 };
 

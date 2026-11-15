@@ -26,7 +26,8 @@ def resolve(text):
     for m in CONFLICT.finditer(text):
         ours, theirs = m.group(1), m.group(2)
         out.append(text[pos:m.start()])
-        suffix = suffix_after(text, m.end())
+        # only borrow the shared closing lines when ours leaves a struct open
+        suffix = "" if ours.rstrip().endswith("};") else suffix_after(text, m.end())
         if suffix:
             out.append(ours + suffix + "\n" + theirs)
         else:                               # plain lines (metatiles.h): just both

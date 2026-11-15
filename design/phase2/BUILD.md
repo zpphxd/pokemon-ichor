@@ -73,6 +73,7 @@ Record the warp ids and the arrival tiles you choose in this table, so the scrip
 | `MAP_TRIREME_EUPLOIA_DECK` | (13,4), the starboard entry port where the gangplank comes aboard; warp **0** is there (not a door): `warp(MAP_TRIREME_EUPLOIA_DECK, 0)` | boarding from a quay, the ferry, and the inn's warp for beat 10C. Casting off plays on arrival there while `FLAG_ICHOR_BOARDED_EUPLOIA` is set and `FLAG_ICHOR_SAVED_HALCYON_NEST` clear; beat 10C plays on any arrival while `FLAG_ICHOR_AEGINA_NIGHT` is set and `FLAG_ICHOR_CROSSING_DONE` clear |
 | `MAP_AEGINA_TOWN` | (12,12), the quay below the gangplank; warp 0 is there | stepping off the *Euploia* (beat 10B plays on arrival while `FLAG_ICHOR_ARRIVED_AEGINA` is clear) |
 | `MAP_AKTI_TOWN` | (9, 10), the quay by the gangplank | stepping off the ferry |
+| `MAP_EMPORION_CITY_TEMPLE_OF_HERMES` | (10, 23), warp 0, the middle of the door mat | coming in from the city |
 | `MAP_ELEUSA_VILLAGE` | (25, 12), the Telesterion's steps | beats 22 and 24, outside the hall |
 | `MAP_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER` | (13, 26), the stair; (13, 14), the Anaktoron's doorway | entering; beat 22's scene and beat 25 |
 

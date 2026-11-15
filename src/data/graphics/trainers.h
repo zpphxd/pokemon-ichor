@@ -517,6 +517,9 @@ const u16 gTrainerPalette_Pilgrim[] = INCGFX_U16("graphics/trainers/front_pics/p
 const u32 gTrainerFrontPic_IchorSailor[] = INCGFX_U32("graphics/trainers/front_pics/ichor_sailor.png", ".4bpp.smol");
 const u16 gTrainerPalette_IchorSailor[] = INCGFX_U16("graphics/trainers/front_pics/ichor_sailor.png", ".gbapal");
 
+const u32 gTrainerFrontPic_HierophantKerykos[] = INCGFX_U32("graphics/trainers/front_pics/hierophant_kerykos.png", ".4bpp.smol");
+const u16 gTrainerPalette_HierophantKerykos[] = INCGFX_U16("graphics/trainers/front_pics/hierophant_kerykos.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1339,5 +1342,9 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_ICHOR_SAILOR] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorSailor, gTrainerPalette_IchorSailor),
+    },
+    [TRAINER_PIC_HIEROPHANT_KERYKOS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_HierophantKerykos, gTrainerPalette_HierophantKerykos),
     },
 };
