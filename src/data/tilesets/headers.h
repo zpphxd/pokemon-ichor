@@ -1721,6 +1721,8 @@ const struct Tileset gTileset_TempleHermes =
     .palettes = gTilesetPalettes_PorytilesManaged_TempleHermes,
     .metatiles = gMetatiles_PorytilesManaged_TempleHermes,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
+    .callback = NULL,
+};
 
 // Ichor: kythera, the Foam Road and the Spring of Kallirhoe (Act III). Porytiles-managed, built by
 // tools/ichor/art/kythera_build.py for the aethos primary: its ground cells
