@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "config/save.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
@@ -85,6 +86,7 @@ COMMON_DATA bool8 (*gMenuCallback)(void) = NULL;
 
 // EWRAM
 EWRAM_DATA static u8 sSafariBallsWindowId = 0;
+EWRAM_DATA static u8 sIchorBlessingWindowId = 0; // Ichor: the blessing panel; 0 = none (window ids start past it)
 EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
@@ -144,6 +146,17 @@ static void SaveGameTask(u8 taskId);
 static void Task_SaveAfterLinkBattle(u8 taskId);
 static void Task_WaitForBattleTowerLinkSave(u8 taskId);
 static bool8 FieldCB_ReturnToFieldStartMenu(void);
+
+// Ichor: "BLESSING / Apollo (412)" (SYSTEMS §3), where the Safari panel sits
+static const struct WindowTemplate sWindowTemplate_IchorBlessing = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 12,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x8
+};
 
 static const struct WindowTemplate sWindowTemplate_SafariBalls = {
     .bg = 0,
@@ -257,6 +270,7 @@ static void BuildBattlePikeStartMenu(void);
 static void BuildBattlePyramidStartMenu(void);
 static void BuildMultiPartnerRoomStartMenu(void);
 static void ShowSafariBallsWindow(void);
+static void ShowIchorBlessingWindow(void);
 static void ShowPyramidFloorWindow(void);
 static void RemoveExtraStartMenuWindows(void);
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count);
@@ -428,6 +442,17 @@ static void BuildMultiPartnerRoomStartMenu(void)
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
+static void ShowIchorBlessingWindow(void)
+{
+    sIchorBlessingWindowId = AddWindow(&sWindowTemplate_IchorBlessing);
+    PutWindowTilemap(sIchorBlessingWindowId);
+    DrawStdWindowFrame(sIchorBlessingWindowId, FALSE);
+    StringCopy(gStringVar4, COMPOUND_STRING("BLESSING\n"));
+    Ichor_BufferBlessingPanel(gStringVar4 + StringLength(gStringVar4));
+    AddTextPrinterParameterized(sIchorBlessingWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sIchorBlessingWindowId, COPYWIN_GFX);
+}
+
 static void ShowSafariBallsWindow(void)
 {
     sSafariBallsWindowId = AddWindow(&sWindowTemplate_SafariBalls);
@@ -467,6 +492,13 @@ static void ShowPyramidFloorWindow(void)
 
 static void RemoveExtraStartMenuWindows(void)
 {
+    if (sIchorBlessingWindowId != 0)
+    {
+        ClearStdWindowAndFrameToTransparent(sIchorBlessingWindowId, FALSE);
+        CopyWindowToVram(sIchorBlessingWindowId, COPYWIN_GFX);
+        RemoveWindow(sIchorBlessingWindowId);
+        sIchorBlessingWindowId = 0;
+    }
     if (GetSafariZoneFlag())
     {
         ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
@@ -533,6 +565,8 @@ static bool32 InitStartMenuStep(void)
     case 3:
         if (GetSafariZoneFlag())
             ShowSafariBallsWindow();
+        else if (Ichor_HasBlessing())
+            ShowIchorBlessingWindow();
         if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             ShowPyramidFloorWindow();
         sInitStartMenuData[0]++;
@@ -727,7 +761,11 @@ static bool8 StartMenuPokeNavCallback(void)
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
+#if !ICHOR_CUT_POKENAV // Ichor: the PokéNav is cut
         SetMainCallback2(CB2_InitPokeNav);  // Display PokéNav
+#else
+        SetMainCallback2(CB2_ReturnToField);
+#endif
 
         return TRUE;
     }

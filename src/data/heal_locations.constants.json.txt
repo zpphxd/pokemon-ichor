@@ -11,4 +11,7 @@ enum {
     NUM_HEAL_LOCATIONS
 };
 
+// Ichor: the removed Hoenn heal locations' names
+#include "constants/heal_locations_removed_stub.h"
+
 #endif // GUARD_CONSTANTS_HEAL_LOCATIONS_H

@@ -21,5 +21,7 @@ enum {
 
 // Ichor: the Kanto names that Aethos's routes and islands now use
 #include "constants/region_map_sections_ichor.h"
+// Ichor: the Hoenn names, aliased to the Oikoumene slots that replace them
+#include "constants/region_map_sections_hoenn.h"
 
 #endif // GUARD_CONSTANTS_REGION_MAP_SECTIONS_H

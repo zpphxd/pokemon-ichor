@@ -1,4 +1,6 @@
 #include "global.h"
+#include "ichor_rites.h"
+#include "ichor_relics.h"
 #include "item.h"
 #include "berry.h"
 #include "pokeball.h"
@@ -357,7 +359,11 @@ bool32 AddBagItem(enum Item itemId, u16 count)
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
         return AddPyramidBagItem(itemId, count);
 
-    return BagPocket_AddItem(&gBagPockets[GetItemPocket(itemId)], itemId, count);
+    // Ichor: a relic's flag is set as it enters the bag
+    if (!BagPocket_AddItem(&gBagPockets[GetItemPocket(itemId)], itemId, count))
+        return FALSE;
+    Ichor_OnItemAdded(itemId);
+    return TRUE;
 }
 
 static bool32 NONNULL BagPocket_RemoveItem(struct BagPocket *pocket, enum Item itemId, u16 count)
@@ -957,7 +963,7 @@ u32 GetItemStatus1Mask(enum Item itemId)
 
 u32 GetItemSellPrice(enum Item itemId)
 {
-    return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
+    return Ichor_ModifySellPrice(itemId, GetItemPrice(itemId) / ITEM_SELL_FACTOR); // Ichor: Hermes, Hades
 }
 
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect)

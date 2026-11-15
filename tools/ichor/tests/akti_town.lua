@@ -17,10 +17,12 @@ local L = dofile("tools/ichor/tests/ichor_lib.lua")
 local K = L.K
 local OUT = os.getenv("AKTI_OUT") or "build/akti_test/"
 
-local AKTI, INDOOR = 0, 75            -- map groups (include/constants/map_groups.h)
-local MAP_AKTI = 59
-local MAP_ASCLEPEION, MAP_AGORA, MAP_FISHERS = 4, 5, 6
-local MAP_DIVERS, MAP_GOATHERDS = 9, 10
+local AKTI, MAP_AKTI = L.map("MAP_AKTI_TOWN")   -- read from include/constants/map_groups.h
+local INDOOR, MAP_ASCLEPEION = L.map("MAP_AKTI_TOWN_ASCLEPEION")
+local _, MAP_AGORA = L.map("MAP_AKTI_TOWN_AGORA")
+local _, MAP_FISHERS = L.map("MAP_AKTI_TOWN_FISHERS_HOUSE")
+local _, MAP_DIVERS = L.map("MAP_AKTI_TOWN_DIVERS_HOUSE")
+local _, MAP_GOATHERDS = L.map("MAP_AKTI_TOWN_GOATHERDS_HOUSE")
 local FLAG_BADGE01_GET = L.system_flag(0x7)
 local FLAG_ICHOR_AKTI_GOAT_HOME = 0xE9
 local FLAG_ICHOR_GOT_SOOTHE_BELL = 0x55

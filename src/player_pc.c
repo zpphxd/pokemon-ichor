@@ -484,7 +484,11 @@ static void PlayerPC_Mailbox(u8 taskId)
 
 static void PlayerPC_Decoration(u8 taskId)
 {
+#if !ICHOR_CUT_SECRET_BASES // Ichor: decorations are cut
     DoPlayerRoomDecorationMenu(taskId);
+#else
+    PlayerPC_TurnOff(taskId);
+#endif
 }
 
 static void PlayerPC_TurnOff(u8 taskId)

@@ -91,7 +91,12 @@
 #define MOVEMENT_TYPE_WATCH_PLAYER_OWE                 0x56
 #define MOVEMENT_TYPE_APPROACH_PLAYER_OWE              0x57
 #define MOVEMENT_TYPE_DESPAWN_OWE                      0x58
-#define NUM_MOVEMENT_TYPES                             0x59
+// Ichor: caught mid-stride and held there, for the Frozen Hour (ENGINE_API §5)
+#define MOVEMENT_TYPE_ICHOR_FROZEN_STEP_DOWN           0x59
+#define MOVEMENT_TYPE_ICHOR_FROZEN_STEP_UP             0x5A
+#define MOVEMENT_TYPE_ICHOR_FROZEN_STEP_LEFT           0x5B
+#define MOVEMENT_TYPE_ICHOR_FROZEN_STEP_RIGHT          0x5C
+#define NUM_MOVEMENT_TYPES                             0x5D
 
 #define MOVEMENT_ACTION_FACE_DOWN                       0x0
 #define MOVEMENT_ACTION_FACE_UP                         0x1

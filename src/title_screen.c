@@ -867,7 +867,11 @@ static void CB2_GoToBerryFixScreen(void)
     if (!UpdatePaletteFade())
     {
         m4aMPlayAllStop();
+#if !ICHOR_CUT_MULTIBOOT // Ichor: the Berry Glitch Fix program is cut
         SetMainCallback2(CB2_InitBerryFixProgram);
+#else
+        SetMainCallback2(CB2_InitTitleScreen);
+#endif
     }
 }
 

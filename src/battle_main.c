@@ -5259,7 +5259,9 @@ static void HandleEndTurn_FinishBattle(void)
                     }
                 }
             }
+#if !ICHOR_CUT_TV // Ichor: TV is cut
             TryPutPokemonTodayOnAir();
+#endif
         }
 
         if (gIsFishingEncounter && IsMonShiny(&gParties[B_TRAINER_OPPONENT_A][0]))
@@ -5296,7 +5298,9 @@ static void HandleEndTurn_FinishBattle(void)
                                   | BATTLE_TYPE_CATCH_TUTORIAL))
             && gBattleResults.shinyWildMon)
         {
+#if !ICHOR_CUT_TV // Ichor: TV is cut
             TryPutBreakingNewsOnAir();
+#endif
         }
 
         BeginFastPaletteFade(3);

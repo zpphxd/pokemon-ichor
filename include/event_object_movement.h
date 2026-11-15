@@ -332,6 +332,7 @@ void MovementType_WalkInPlace(struct Sprite *sprite);
 void MovementType_JogInPlace(struct Sprite *sprite);
 void MovementType_RunInPlace(struct Sprite *sprite);
 void MovementType_Invisible(struct Sprite *sprite);
+void MovementType_IchorFrozenStep(struct Sprite *sprite);
 void MovementType_WalkSlowlyInPlace(struct Sprite *sprite);
 void MovementType_FollowPlayer(struct Sprite *sprite);
 u8 GetSlideMovementAction(u32);
@@ -505,6 +506,8 @@ u8 MovementType_MoveInPlace_Step1(struct ObjectEvent *objectEvent, struct Sprite
 u8 MovementType_WalkSlowlyInPlace_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_JogInPlace_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_RunInPlace_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+u8 MovementType_IchorFrozenStep_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+u8 MovementType_IchorFrozenStep_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_Invisible_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_Invisible_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 u8 MovementType_Invisible_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite);

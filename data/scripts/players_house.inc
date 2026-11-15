@@ -207,7 +207,9 @@ PlayersHouse_1F_EventScript_WatchGymBroadcast::
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ReportFromPetalburgGym, MSGBOX_DEFAULT
 	fadedefaultbgm
+#if !ICHOR_CUT_TV // Ichor: TV is cut
 	special TurnOffTVScreen
+#endif
 	setflag FLAG_SYS_TV_HOME
 	delay 35
 	return
@@ -451,7 +453,9 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	msgbox PlayersHouse_1F_Text_DadShouldStayLonger, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_SYS_TV_LATIAS_LATIOS
+#if !ICHOR_CUT_TV // Ichor: TV is cut
 	special TurnOnTVScreen
+#endif
 	delay 60
 	call_if_eq VAR_0x8008, MALE, PlayersHouse_1F_EventScript_MomNoticesLatiBroadcastMale
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_MomNoticesLatiBroadcastFemale
@@ -463,7 +467,9 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	closemessage
 	clearflag FLAG_SYS_TV_LATIAS_LATIOS
 	setflag FLAG_LATIOS_OR_LATIAS_ROAMING
+#if !ICHOR_CUT_TV // Ichor: TV is cut
 	special TurnOffTVScreen
+#endif
 	call_if_eq VAR_0x8008, MALE, PlayersHouse_1F_EventScript_MomApproachPlayerAfterTVMale
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_MomApproachPlayerAfterTVFemale
 	msgbox PlayersHouse_1F_Text_WhatColorDidTheySay, MSGBOX_DEFAULT

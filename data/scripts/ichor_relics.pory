@@ -1,0 +1,523 @@
+// Ichor: the relics in the field (design/SYSTEMS.md §1, §2; design/ENGINE_API.md §2).
+//
+// Every obstacle checks the bag, never the party. Each one asks first ("Cut it
+// with Demeter's Sickle?") unless the "Relic prompts" option is AUTO; water
+// always asks. Without the relic, the text describes the obstacle and hints at
+// a tool, and never mentions a Pokémon. The vanilla entry points
+// (EventScript_CutTree, EventScript_RockSmash, EventScript_StrengthBoulder,
+// EventScript_UseSurf, EventScript_UseWaterfall, EventScript_UseDive) jump here,
+// so maps keep using their names. src/ichor_relics.c has the specials.
+
+// ---------------------------------------------------------------------------
+// Shared steps
+// ---------------------------------------------------------------------------
+
+// The relic in VAR_0x8004 is raised over the player's head, and a follower hops.
+script EventScript_IchorRelicPose {
+    special(Ichor_FollowerHop)
+    special(Ichor_RelicPose)
+    return
+}
+
+script EventScript_IchorForbidden {
+    msgbox(format("This place forbids outside tools."), MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+// After a YES/NO or an AUTO line: VAR_RESULT is YES to go on.
+script EventScript_IchorAskOrAuto {
+    specialvar(VAR_RESULT, Ichor_RelicPromptsAuto)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// Thorn thicket: Demeter's Sickle (vanilla Cut)
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorThicket {
+    lockall
+    setvar(VAR_0x8004, ITEM_DEMETERS_SICKLE)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("A thorn thicket. A good blade would clear it."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        goto(EventScript_IchorForbidden)
+    }
+    call(EventScript_IchorAskOrAuto)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} cut the thicket with Demeter's Sickle."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("A thorn thicket.\pCut it with Demeter's Sickle?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            releaseall
+            end
+        }
+    }
+    closemessage
+    setvar(VAR_0x8004, ITEM_DEMETERS_SICKLE)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_CUT)
+    setvar(VAR_0x8004, FALSE) // no Pokémon used it: EventScript_CutTreeDown skips the follower swap
+    goto(EventScript_CutTreeDown)
+}
+
+// ---------------------------------------------------------------------------
+// Marble rubble: the Bronze Hammer (vanilla Rock Smash)
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorRubble {
+    lockall
+    setvar(VAR_0x8004, ITEM_BRONZE_HAMMER)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("Marble rubble. The blocks won't shift by hand. A good hammer would break them."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        goto(EventScript_IchorForbidden)
+    }
+    call(EventScript_IchorAskOrAuto)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} broke the rubble with the Bronze Hammer."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("Marble rubble.\pBreak it with the Bronze Hammer?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            releaseall
+            end
+        }
+    }
+    closemessage
+    setvar(VAR_0x8004, ITEM_BRONZE_HAMMER)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_ROCK_THROW)
+    setvar(VAR_0x8004, FALSE)
+    goto(EventScript_SmashRock)
+}
+
+// ---------------------------------------------------------------------------
+// Column drum: the Girdle of Herakles (vanilla Strength). One brace lasts the map.
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorColumnDrum {
+    lockall
+    if (flag(FLAG_SYS_USE_STRENGTH)) {
+        msgbox(format("The Girdle of Herakles holds. The drums will move."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, ITEM_GIRDLE_OF_HERAKLES)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("A fallen column drum. It's far too heavy to move by hand."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        goto(EventScript_IchorForbidden)
+    }
+    call(EventScript_IchorAskOrAuto)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("A fallen column drum.\pBrace it with the Girdle of Herakles?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            releaseall
+            end
+        }
+        closemessage
+    }
+    setvar(VAR_0x8004, ITEM_GIRDLE_OF_HERAKLES)
+    call(EventScript_IchorRelicPose)
+    setflag(FLAG_SYS_USE_STRENGTH)
+    msgbox(format("{PLAYER} tightened the Girdle of Herakles. Now the drums can be pushed."), MSGBOX_DEFAULT)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Webs: Hecate's Torch, and thornwebs that need the Three-Flamed Torch
+// ---------------------------------------------------------------------------
+
+// The object the player faces burns away.
+script EventScript_IchorBurnAway {
+    setvar(VAR_0x8004, ITEM_HECATES_TORCH)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_FLAME_WHEEL)
+    removeobject(VAR_LAST_TALKED)
+    releaseall
+}
+
+script EventScript_IchorCobweb {
+    lockall
+    setvar(VAR_0x8004, ITEM_HECATES_TORCH)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("A thick cobweb. Fire would clear it."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        goto(EventScript_IchorForbidden)
+    }
+    call(EventScript_IchorAskOrAuto)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} burned the cobweb away."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("A thick cobweb.\pBurn it with Hecate's Torch?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            releaseall
+            end
+        }
+    }
+    closemessage
+    goto(EventScript_IchorBurnAway)
+}
+
+script EventScript_IchorThornweb {
+    lockall
+    setvar(VAR_0x8004, ITEM_HECATES_TORCH)
+    setvar(VAR_0x8005, FLAG_ICHOR_THREE_FLAMED_TORCH)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("A web of thorns, thick as rope. Fire would clear it."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        goto(EventScript_IchorForbidden)
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_TOO_WEAK) {
+        msgbox(format("A web of thorns, thick as rope.\pThe torch's flame is too small to catch it."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    call(EventScript_IchorAskOrAuto)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} burned the thornweb away."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("A web of thorns.\pBurn it with the Three-Flamed Torch?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            releaseall
+            end
+        }
+    }
+    closemessage
+    goto(EventScript_IchorBurnAway)
+}
+
+// ---------------------------------------------------------------------------
+// Great boulder: Hephaestus's Hammer (the Bronze Hammer's upgrade)
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorGreatBoulder {
+    lockall
+    setvar(VAR_0x8004, ITEM_BRONZE_HAMMER)
+    setvar(VAR_0x8005, FLAG_ICHOR_HEPHAESTUS_HAMMER)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("A great boulder, too big for any hand to move."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        goto(EventScript_IchorForbidden)
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_TOO_WEAK) {
+        msgbox(format("A great boulder.\pThe Bronze Hammer only rings off it."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    call(EventScript_IchorAskOrAuto)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} split the boulder with Hephaestus's Hammer."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("A great boulder.\pSplit it with Hephaestus's Hammer?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            releaseall
+            end
+        }
+    }
+    closemessage
+    setvar(VAR_0x8004, ITEM_BRONZE_HAMMER)
+    call(EventScript_IchorRelicPose)
+    // its own sprite has no breaking animation (EventScript_SmashRock's is the rubble's)
+    playse(SE_M_ROCK_THROW)
+    removeobject(VAR_LAST_TALKED)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Labrys seals and bronze chains
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorLabrysSeal {
+    lockall
+    setvar(VAR_0x8004, ITEM_LABRYS)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("A bronze seal stamped with a double axe. Only that axe could cleave it."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        goto(EventScript_IchorForbidden)
+    }
+    call(EventScript_IchorAskOrAuto)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} cleaved the seal with the Labrys."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("A bronze seal stamped with a double axe.\pCleave it with the Labrys?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            releaseall
+            end
+        }
+    }
+    closemessage
+    setvar(VAR_0x8004, ITEM_LABRYS)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_VICEGRIP)
+    removeobject(VAR_LAST_TALKED)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Water: the Conch (Surf), the Horn (Waterfall), the Pearl (Dive). Always asks.
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorSurf {
+    lockall
+    if (flag(FLAG_ICHOR_NO_RELICS)) {
+        goto(EventScript_IchorForbidden)
+    }
+    msgbox(format("The water is calm and deep.\pBlow Poseidon's Conch?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    msgbox(format("{PLAYER} blew Poseidon's Conch. A dolphin answered!"), MSGBOX_DEFAULT)
+    closemessage
+    setfieldeffectargument(0, ICHOR_FIELD_EFFECT_RELIC | ITEM_POSEIDONS_CONCH)
+    dofieldeffect(FLDEFF_USE_SURF)
+    releaseall
+}
+
+script EventScript_IchorCurrentTooFast {
+    lockall
+    if (flag(FLAG_ICHOR_GOT_POSEIDONS_CONCH)) {
+        playse(SE_SELECT)
+        msgbox(format("The current is much too fast to ride."), MSGBOX_DEFAULT)
+    }
+    releaseall
+}
+
+script EventScript_IchorWaterfall {
+    lockall
+    msgbox(format("A great waterfall.\pClimb it with the Horn of Achelous?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    msgbox(format("{PLAYER} raised the Horn of Achelous."), MSGBOX_DEFAULT)
+    closemessage
+    hidefollowernpc
+    setfieldeffectargument(0, ICHOR_FIELD_EFFECT_RELIC | ITEM_HORN_OF_ACHELOUS)
+    dofieldeffect(FLDEFF_USE_WATERFALL)
+    callnative(FollowerNPC_WarpSetEnd)
+    releaseall
+}
+
+script EventScript_IchorCannotWaterfall {
+    lockall
+    msgbox(format("A wall of water crashes down. Only the river's own could climb it."), MSGBOX_DEFAULT)
+    releaseall
+}
+
+script EventScript_IchorDive {
+    lockall
+    msgbox(format("The sea is deep here.\pDive with the Nereid Pearl?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    closemessage
+    hidefollowernpc
+    setfieldeffectargument(0, ICHOR_FIELD_EFFECT_RELIC | ITEM_NEREID_PEARL)
+    setfieldeffectargument(1, 1)
+    dofieldeffect(FLDEFF_USE_DIVE)
+    releaseall
+}
+
+script EventScript_IchorSurface {
+    lockall
+    msgbox(format("Light filters down from above.\pRise with the Nereid Pearl?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    closemessage
+    hidefollowernpc
+    setfieldeffectargument(0, ICHOR_FIELD_EFFECT_RELIC | ITEM_NEREID_PEARL)
+    setfieldeffectargument(1, 1)
+    dofieldeffect(FLDEFF_USE_DIVE)
+    callnative(SetFollowerNPCSurfSpriteAfterDive)
+    releaseall
+}
+
+// Ivy walls: Dionysus's thyrsus (his gift II) climbs them with the
+// expansion's Rock Climb. Always asks, like water.
+script EventScript_IchorIvyClimb {
+    lockall
+    if (!flag(FLAG_ICHOR_THYRSUS)) {
+        msgbox(format("Thick ivy covers the wall. It would hold a climber who had the god's own staff."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    if (flag(FLAG_ICHOR_NO_RELICS)) {
+        goto(EventScript_IchorForbidden)
+    }
+    msgbox(format("Thick ivy covers the wall.\pClimb it with the thyrsus?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    closemessage
+    setfieldeffectargument(0, ICHOR_FIELD_EFFECT_RELIC)
+    dofieldeffect(FLDEFF_USE_ROCK_CLIMB)
+    waitstate
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Light: braziers, lit zones, and the torch from the bag or the Relic Ring
+// ---------------------------------------------------------------------------
+
+// call it with VAR_0x8004 = the brazier's flag, and VAR_0x8005 = TRUE if
+// lighting it lights the zone the player stands in. VAR_RESULT is TRUE only when
+// the brazier was lit just now, so the caller swaps in its lit metatiles.
+script EventScript_IchorBrazier {
+    lockall
+    copyvar(VAR_0x8006, VAR_0x8004)
+    copyvar(VAR_0x8007, VAR_0x8005)
+    specialvar(VAR_RESULT, Ichor_CheckFlagInVar)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("The brazier burns steadily."), MSGBOX_DEFAULT)
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    setvar(VAR_0x8004, ITEM_HECATES_TORCH)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("A cold bronze brazier. It needs a flame."), MSGBOX_DEFAULT)
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        msgbox(format("This place forbids outside tools."), MSGBOX_DEFAULT)
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    call(EventScript_IchorAskOrAuto)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} lit the brazier with Hecate's Torch."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("A cold bronze brazier.\pLight it with Hecate's Torch?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            setvar(VAR_RESULT, FALSE)
+            return
+        }
+    }
+    closemessage
+    setvar(VAR_0x8004, ITEM_HECATES_TORCH)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_FLAME_WHEEL)
+    copyvar(VAR_0x8004, VAR_0x8006)
+    special(Ichor_SetFlagInVar)
+    if (var(VAR_0x8007) == TRUE) {
+        animateflash(0)
+        setflashlevel(0)
+    }
+    copyvar(VAR_0x8005, VAR_0x8007)
+    setvar(VAR_RESULT, TRUE)
+    return
+}
+
+// A coord event on a lit zone's threshold, going in: VAR_0x8004 = the zone's brazier flag.
+script EventScript_IchorEnterLitZone {
+    specialvar(VAR_RESULT, Ichor_CheckFlagInVar)
+    if (var(VAR_RESULT) == TRUE) {
+        animateflash(0)
+        setflashlevel(0)
+    }
+}
+
+// Going out: back to the torch's light.
+script EventScript_IchorLeaveLitZone {
+    special(Ichor_AnimateTorchFlash)
+}
+
+script EventScript_IchorTorchDoused {
+    lockall
+    setvar(VAR_0x8004, TRUE)
+    special(Ichor_SetTorchDoused)
+    msgbox(format("{PLAYER} doused the torch."), MSGBOX_DEFAULT)
+    closemessage
+    special(Ichor_AnimateTorchFlash)
+    releaseall
+}
+
+script EventScript_IchorTorchRelit {
+    lockall
+    setvar(VAR_0x8004, FALSE)
+    special(Ichor_SetTorchDoused)
+    msgbox(format("{PLAYER} lit the torch again."), MSGBOX_DEFAULT)
+    closemessage
+    special(Ichor_AnimateTorchFlash)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Aeolus's Bag
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorAeolusBag {
+    lockall
+    msgbox(format("{PLAYER} opened Aeolus's Bag.\pThe winds tore the fog away!"), MSGBOX_DEFAULT)
+    closemessage
+    special(Ichor_ClearFog)
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// The Relic Ring: SELECT, once the player owns a free relic
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorRelicRing {
+    lockall
+    special(Ichor_BuildRelicRing)
+    dynmultistack(VAR_0x8001, 0, FALSE, 6, FALSE, VAR_0x8000, DYN_MULTICHOICE_CB_NONE)
+    releaseall
+    if (var(VAR_RESULT) != MULTI_B_PRESSED) {
+        special(Ichor_UseRingChoice)
+    }
+}

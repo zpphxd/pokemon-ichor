@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_anim_scripts.h"
@@ -666,6 +667,10 @@ bool32 TryRunFromBattle(enum BattlerId battler)
     {
         gLastUsedItem = gBattleMons[battler].item;
         gProtectStructs[battler].fleeType = FLEE_ITEM;
+        effect = TRUE;
+    }
+    else if (Ichor_AlwaysEscapes(battler)) // Ichor: Athena's owl
+    {
         effect = TRUE;
     }
     else if (GetConfig(B_GHOSTS_ESCAPE) >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))

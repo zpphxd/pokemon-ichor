@@ -1052,9 +1052,42 @@ enum __attribute__((packed)) Item
     ITEM_TATSUGIRINITE = 872,
     ITEM_GLIMMORANITE = 873,
 
+    // Ichor: the relics, key items used from the field (design/SYSTEMS.md §1).
+    // Keep them in this order: src/ichor_relics.c indexes its tables by
+    // item - ITEM_TALARIA.
+    ITEM_TALARIA = 874,
+    ITEM_BRONZE_HAMMER = 875,
+    ITEM_HECATES_TORCH = 876,
+    ITEM_DEMETERS_SICKLE = 877,
+    ITEM_GIRDLE_OF_HERAKLES = 878,
+    ITEM_POSEIDONS_CONCH = 879,
+    ITEM_DAEDALUS_WINGS = 880,
+    ITEM_HORN_OF_ACHELOUS = 881,
+    ITEM_ARIADNES_THREAD = 882,
+    ITEM_LABRYS = 883,
+    ITEM_HELM_OF_DARKNESS = 884,
+    ITEM_NEREID_PEARL = 885,
+    ITEM_AEOLUS_BAG = 886,
+
+    // Ichor: the offerings (design/SYSTEMS.md §3). Honey, berries, feathers and
+    // sea gifts are offerings too; src/ichor_rites.c lists them all.
+    ITEM_OLIVE_OIL = 887,
+    ITEM_BARLEY_CAKE = 888,
+    ITEM_WINE = 889,
+    ITEM_FRANKINCENSE = 890,
+    ITEM_LAUREL_SPRIG = 891,
+    ITEM_BRONZE_VOTIVE = 892,
+    // Ichor: Aphrodite's gift II, a held item
+    ITEM_MYRTLE_WREATH = 893,
+
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,
 };
+
+// Ichor: the relic block
+#define ICHOR_RELIC_FIRST ITEM_TALARIA
+#define ICHOR_RELIC_LAST  ITEM_AEOLUS_BAG
+#define ICHOR_RELIC_COUNT (ICHOR_RELIC_LAST - ICHOR_RELIC_FIRST + 1)
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
 // Its icon is defined at ITEMS_COUNT as the "return to field" arrow
