@@ -785,10 +785,10 @@
     {
       "id": "LAYOUT_LEBADEIA_PILGRIMS_HALL",
       "name": "Lebadeia_PilgrimsHall_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 14,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_WestStone",
       "border_filepath": "data/layouts/Lebadeia_PilgrimsHall/border.bin",
       "blockdata_filepath": "data/layouts/Lebadeia_PilgrimsHall/map.bin",
       "layout_version": "emerald"
@@ -796,10 +796,10 @@
     {
       "id": "LAYOUT_LEBADEIA_HERKYNA_HOUSE",
       "name": "Lebadeia_HerkynaHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 13,
+      "height": 11,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_WestHomes",
       "border_filepath": "data/layouts/Lebadeia_HerkynaHouse/border.bin",
       "blockdata_filepath": "data/layouts/Lebadeia_HerkynaHouse/map.bin",
       "layout_version": "emerald"
@@ -807,10 +807,10 @@
     {
       "id": "LAYOUT_LEBADEIA_MASONS_HOUSE",
       "name": "Lebadeia_MasonsHouse_Layout",
-      "width": 10,
+      "width": 12,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_WestStone",
       "border_filepath": "data/layouts/Lebadeia_MasonsHouse/border.bin",
       "blockdata_filepath": "data/layouts/Lebadeia_MasonsHouse/map.bin",
       "layout_version": "emerald"
@@ -818,10 +818,10 @@
     {
       "id": "LAYOUT_KIRRHA_INN",
       "name": "Kirrha_Inn_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 15,
+      "height": 12,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_WestHarbor",
       "border_filepath": "data/layouts/Kirrha_Inn/border.bin",
       "blockdata_filepath": "data/layouts/Kirrha_Inn/map.bin",
       "layout_version": "emerald"
@@ -829,10 +829,10 @@
     {
       "id": "LAYOUT_KIRRHA_AGORA",
       "name": "Kirrha_Agora_Layout",
-      "width": 10,
+      "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_WestHarbor",
       "border_filepath": "data/layouts/Kirrha_Agora/border.bin",
       "blockdata_filepath": "data/layouts/Kirrha_Agora/map.bin",
       "layout_version": "emerald"
@@ -840,10 +840,10 @@
     {
       "id": "LAYOUT_KIRRHA_MULETEERS_HOUSE",
       "name": "Kirrha_MuleteersHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 14,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_WestHarbor",
       "border_filepath": "data/layouts/Kirrha_MuleteersHouse/border.bin",
       "blockdata_filepath": "data/layouts/Kirrha_MuleteersHouse/map.bin",
       "layout_version": "emerald"
@@ -851,10 +851,10 @@
     {
       "id": "LAYOUT_KIRRHA_SWEEPERS_HOUSE",
       "name": "Kirrha_SweepersHouse_Layout",
-      "width": 10,
+      "width": 9,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_WestHarbor",
       "border_filepath": "data/layouts/Kirrha_SweepersHouse/border.bin",
       "blockdata_filepath": "data/layouts/Kirrha_SweepersHouse/map.bin",
       "layout_version": "emerald"
@@ -862,10 +862,10 @@
     {
       "id": "LAYOUT_AIGION_ACHAEANS_HOUSE",
       "name": "Aigion_AchaeansHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 14,
+      "height": 7,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_WestHomes",
       "border_filepath": "data/layouts/Aigion_AchaeansHouse/border.bin",
       "blockdata_filepath": "data/layouts/Aigion_AchaeansHouse/map.bin",
       "layout_version": "emerald"
@@ -873,10 +873,10 @@
     {
       "id": "LAYOUT_AIGION_GOATHERDS_HOUSE",
       "name": "Aigion_GoatherdsHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 13,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_WestHomes",
       "border_filepath": "data/layouts/Aigion_GoatherdsHouse/border.bin",
       "blockdata_filepath": "data/layouts/Aigion_GoatherdsHouse/map.bin",
       "layout_version": "emerald"

@@ -1,1 +1,51 @@
+// The Agora stall, Kirrha (SCRIPT.md Part 2, Kirrha interiors; stock: Part 6, Shops).
+// Room: tools/ichor/maps/westrooms.py. A fishing shed on the quay; the counter is an
+// upturned boat, and the stallkeeper (3,2) is talked to across it from (3,4). Prices
+// are the items' own: the expansion's defaults, and SYSTEMS.md's for the offerings.
+
 mapscripts Kirrha_Agora_MapScripts {}
+
+text Kirrha_Agora_Name_Stallkeeper { "STALLKEEPER" }
+
+script Kirrha_Agora_EventScript_Stallkeeper {
+    lock
+    faceplayer
+    setspeaker(Kirrha_Agora_Name_Stallkeeper)
+    msgbox(format("Votives! Wreaths! Little clay feet, if your foot hurts!\p"
+                  "Nobody's buying votives this month. So: potions. Lots of potions."))
+    pokemart(Kirrha_Agora_Mart)
+    release
+}
+
+mart Kirrha_Agora_Mart {
+    ITEM_GREAT_BALL
+    ITEM_ULTRA_BALL
+    ITEM_SUPER_POTION
+    ITEM_HYPER_POTION
+    ITEM_REVIVE
+    ITEM_FULL_HEAL
+    ITEM_SUPER_REPEL
+    ITEM_ESCAPE_ROPE
+    ITEM_OLIVE_OIL
+    ITEM_BARLEY_CAKE
+    ITEM_LAUREL_SPRIG
+}
+
+script Kirrha_Agora_EventScript_Votives {
+    msgbox(format("Votives on strings: laurel wreaths, little clay omphaloi, clay feet and hands."),
+           MSGBOX_SIGN)
+}
+
+script Kirrha_Agora_EventScript_Boat {
+    msgbox(format("The counter is an upturned boat. The eye painted on its bow keeps watch on the till."),
+           MSGBOX_SIGN)
+}
+
+script Kirrha_Agora_EventScript_VotiveTable {
+    msgbox(format("Clay feet, clay hands, clay omphaloi, all waiting for a god who isn't answering."),
+           MSGBOX_SIGN)
+}
+
+script Kirrha_Agora_EventScript_Potions {
+    msgbox(format("A crate of potions. The votives weren't selling."), MSGBOX_SIGN)
+}
