@@ -16,8 +16,9 @@
 // Lamp-trees: every cypress on the main path. Their lamps are row 2 of each tree;
 // ON_LOAD lights them in the evening and at night, once the dusk has played.
 //
-// Not here: Klymene's race (rooms3) needs a coord trigger on the temple stair's
-// first step, (19-21, 33), which this map leaves to the integrator.
+// Klymene's race (rooms3): coord triggers on the temple stair's first step,
+// (19-21, 33), run Arkadia_KlymeneHouse_EventScript_RaceTurn on VAR_TEMP_1, which this
+// map keeps at 0.
 //
 // Stubs: ICHOR_STUB_MUSIC (Arkadia's cues aren't composed; the road's day and night
 // forms stand in), ICHOR_STUB_OMENS (Iamos), ICHOR_STUB_DIG (the dig spots).
@@ -440,43 +441,8 @@ script Arkadia_EventScript_Grazer {
     release
 }
 
-// Krotos's three kids (rooms3's Krotos counts them home).
-script Arkadia_EventScript_Kid1 {
-    lock
-    setvar(VAR_0x8006, LOCALID_ARKADIA_KID_1)
-    call(Arkadia_EventScript_KidGoesHome)
-    setflag(FLAG_ICHOR_KROTOS_KID_1)
-    release
-}
-
-script Arkadia_EventScript_Kid2 {
-    lock
-    setvar(VAR_0x8006, LOCALID_ARKADIA_KID_2)
-    call(Arkadia_EventScript_KidGoesHome)
-    setflag(FLAG_ICHOR_KROTOS_KID_2)
-    release
-}
-
-script Arkadia_EventScript_Kid3 {
-    lock
-    setvar(VAR_0x8006, LOCALID_ARKADIA_KID_3)
-    call(Arkadia_EventScript_KidGoesHome)
-    setflag(FLAG_ICHOR_KROTOS_KID_3)
-    release
-}
-
-script Arkadia_EventScript_KidGoesHome {
-    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
-    setspeaker(SP_NAME_NONE)
-    msgbox(format("A Kerazap kid, trembling. It sees you and bleats, very offended.\p"
-                  "It trots off toward home."))
-    closemessage
-    waitmoncry
-    copyvar(VAR_0x8004, VAR_0x8006)
-    special(Ichor_ObjectFadeOut)
-    delay(18)
-    removeobject(VAR_0x8006)
-}
+// Krotos's three lost kids are objects here with rooms3's scripts
+// (Arkadia_GoatherdHouse_EventScript_LostKid1-3) and hide flags (FLAG_ICHOR_KROTOS_KID_1-3).
 
 // ---------------------------------------------------------------------------
 // Signs, the grotto, the falls, the dig spots

@@ -152,6 +152,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Arkadia[] = INCBIN_U16("data/tile
 // Ichor: arkadia_wood
 const u16 gMetatiles_PorytilesManaged_ArkadiaWood[] = INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_ArkadiaWood[] = INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: styx_rooms
 const u16 gMetatiles_PorytilesManaged_StyxRooms[] = INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_StyxRooms[] = INCBIN_U16("data/tilesets/secondary/styx_rooms/porytiles_bin/metatile_attributes.bin");

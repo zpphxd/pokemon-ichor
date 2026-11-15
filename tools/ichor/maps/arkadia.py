@@ -231,7 +231,7 @@ CYPRESSES = [("cypress_twin", 32, 6), ("cypress_spire", 18, 8), ("cypress_broad"
              ("cypress_old", 11, 23), ("cypress_spire", 11, 27), ("cypress_broad", 38, 13),
              ("cypress_spire", 38, 17)]
 SMALL_CYPRESSES = [(16, 36), (18, 36), (22, 36), (25, 36), (27, 36)]
-STELES = {"SignForestGate": (22, 7), "SignTemple": (22, 34), "SignWoodGate": (11, 17),
+STELES = {"SignForestGate": (22, 7), "SignTemple": (20, 36), "SignWoodGate": (11, 17),
           "SignEastRoad": (39, 22), "SignAlpheios": (8, 35)}
 # boulders on the verges where the closed roads are guarded, so nobody walks round
 VERGE_STONES = [(43, 22), (43, 25), (5, 35), (5, 38), (12, 40), (15, 40)]
@@ -386,7 +386,7 @@ def arkadia_events():
       "MOVEMENT_TYPE_WANDER_AROUND", rx=2, ry=1)
     o("LOCALID_ARKADIA_CHILD_2", "OBJ_EVENT_GFX_ICHOR_KID_F", 15, 17, S + "Child2",
       "MOVEMENT_TYPE_FACE_RIGHT")
-    o("LOCALID_ARKADIA_LOST_GIRL", "OBJ_EVENT_GFX_ICHOR_KID_F", 23, 35, S + "LostGirl",
+    o("LOCALID_ARKADIA_LOST_GIRL", "OBJ_EVENT_GFX_ICHOR_KID_F", 23, 36, S + "LostGirl",
       "MOVEMENT_TYPE_FACE_UP", "FLAG_ICHOR_THEOXENIA_START+0x25")
     o("LOCALID_ARKADIA_CORDON_1", "OBJ_EVENT_GFX_ICHOR_HUNTRESS", 43, 23, S + "Cordon",
       "MOVEMENT_TYPE_FACE_LEFT", "FLAG_BADGE05_GET")
@@ -398,17 +398,21 @@ def arkadia_events():
       "MOVEMENT_TYPE_FACE_RIGHT", "FLAG_ICHOR_POSTGAME")
     o("LOCALID_ARKADIA_WEST_GUARD_2", "OBJ_EVENT_GFX_ICHOR_HOPLITE", 5, 37, S + "WestGuard",
       "MOVEMENT_TYPE_FACE_RIGHT", "FLAG_ICHOR_POSTGAME")
-    o("LOCALID_ARKADIA_KID_1", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 19, 6, S + "Kid1",
+    o("LOCALID_ARKADIA_KID_1", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 19, 6, "Arkadia_GoatherdHouse_EventScript_LostKid1",
       "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_KROTOS_KID_1")
-    o("LOCALID_ARKADIA_KID_2", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 21, 32, S + "Kid2",
+    o("LOCALID_ARKADIA_KID_2", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 21, 32, "Arkadia_GoatherdHouse_EventScript_LostKid2",
       "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_KROTOS_KID_2")
-    o("LOCALID_ARKADIA_KID_3", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 11, 13, S + "Kid3",
+    o("LOCALID_ARKADIA_KID_3", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 11, 13, "Arkadia_GoatherdHouse_EventScript_LostKid3",
       "MOVEMENT_TYPE_FACE_UP", "FLAG_ICHOR_KROTOS_KID_3")
     o("LOCALID_ARKADIA_GRAZER", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 37, 34, S + "Grazer",
       "MOVEMENT_TYPE_WANDER_AROUND", rx=2, ry=1)
     o("LOCALID_ARKADIA_MAX_REPEL", "OBJ_EVENT_GFX_ITEM_BALL", 34, 26, "Common_EventScript_FindItem",
       "MOVEMENT_TYPE_LOOK_AROUND", "FLAG_ICHOR_ITEM_ARKADIA_MAX_REPEL", item="ITEM_MAX_REPEL")
 
+    # Klymene's race (rooms3): the temple stair's first step is the turning point
+    for (x, y) in TEMPLE_STAIR_FOOT:
+        trig.append({"type": "trigger", "x": x, "y": y, "elevation": 3, "var": "VAR_TEMP_1",
+                     "var_value": "0", "script": "Arkadia_KlymeneHouse_EventScript_RaceTurn"})
     for i, (x, y, dest) in enumerate(ARKADIA_DOORS):
         warp.append({"x": x, "y": y, "elevation": 0, "dest_map": dest, "dest_warp_id": "0"})
 

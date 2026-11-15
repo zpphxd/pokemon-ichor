@@ -621,6 +621,9 @@ const struct Tileset gTileset_ArkadiaWood =
     .palettes = gTilesetPalettes_PorytilesManaged_ArkadiaWood,
     .metatiles = gMetatiles_PorytilesManaged_ArkadiaWood,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaWood,
+    .callback = NULL,
+};
+
 // Ichor (Act II batch 3 rooms): Styx Falls's rooms: the Inn at the Falls, Horkia's house of oaths and Kepheus's house. A Porytiles-managed secondary for the oikos
 // primary, built by tools/ichor/maps/arkrooms.py (art in tools/ichor/art/arkrooms_*.py).
 // It uses only its own tiles and palettes 6-12.
