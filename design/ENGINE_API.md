@@ -610,6 +610,25 @@ Nobody breaks up an Aphrodite.
 
 **Left to the map:** prizes, the champions' flags and the lines around the match. There are no wagers.
 
+### Theoxenia's tells (SYSTEMS §10)
+
+A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR_GOD`** (Porymap's trainer type field; give it no sight range). The engine then gives three of §10's tells:
+
+1. **No shadow.** Every other object has one (`OW_OBJECT_VANILLA_SHADOWS` is off).
+2. **The follower bows** once it is within 3 tiles of the god and the player stands still: it turns to the god and dips. It bows again only after leaving that range.
+3. **The Augur's Eye** shows "Something here is watching you." in place of its top line, on any map where a disguised god stands.
+
+**Left to the map:**
+- The detail that doesn't fit (the third tell) is the god's art.
+- The tests and the reveal are scripts.
+- A Stranger omen (§6) is a row in `src/data/ichor_omens.h`.
+
+**Other uses:**
+- **The reveal:** when the god drops the disguise, swap the object's graphics. If you swap it for an ordinary object, the shadow comes back.
+- **Decoys** are ordinary objects: shadows, and no bow.
+- **Phase 4's E18, the shadowless figure,** is a `TRAINER_TYPE_ICHOR_GOD` object as well.
+- **The visit flags** are `FLAG_ICHOR_THEOXENIA_START + ICHOR_GOD_*`, as §1's table gives them.
+
 ### Omens (SYSTEMS §6)
 
 - **Today's omen** is `IchorSave.omenKind` (`OMEN_SWARM`, `_VISITOR`, `_WEATHER`, `_GOOD_SIGN`, `_STRANGER`, or `OMEN_NONE`) and `omenEntry`, an entry within that kind. The entries are numbered in `include/constants/ichor.h`: `OMEN_WEATHER_KRYOPUFF` and `OMEN_WEATHER_LERNIP` so far. Add new ones at the end.

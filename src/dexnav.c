@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_theoxenia.h"
 #include "ichor_rites.h"
 // Ichor: Artemis's blessing lets you creep closer (SYSTEMS §3)
 #define ICHOR_SNEAKING_PROXIMITY (SNEAKING_PROXIMITY + Ichor_DexNavSneakBonus())
@@ -2160,6 +2161,13 @@ static void PrintSearchableSpecies(enum Species species)
 {
     FillWindowPixelBuffer(WINDOW_REGISTERED, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     PutWindowTilemap(WINDOW_REGISTERED);
+    if (Ichor_IsGodOnMap()) // Ichor: a god in disguise is here (SYSTEMS §10's fourth tell)
+    {
+        AddTextPrinterParameterized3(WINDOW_REGISTERED, FONT_NORMAL, 0, 0, sFontColor_White, 0,
+                                     COMPOUND_STRING("Something here is watching you."));
+        CopyWindowToVram(WINDOW_REGISTERED, 3);
+        return;
+    }
     if (species == SPECIES_NONE)
     {
         AddTextPrinterParameterized3(WINDOW_REGISTERED, FONT_NORMAL, 0, 0, sFontColor_White, TEXT_SKIP_DRAW, sText_DexNav_PressRToRegister);

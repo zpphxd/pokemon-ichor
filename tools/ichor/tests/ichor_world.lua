@@ -88,6 +88,46 @@ L.start(function()
   expect(l0 == 212 and w1 + l1 == w0 + l0 + 1 and (result == 1) == (w1 == w0 + 1),
          string.format("a match against Mom goes on her record (%d-%d -> %d-%d)", w0, l0, w1, l1))
 
+  -- Theoxenia's tells: a god in disguise (Route 1's youth, rewritten) casts no
+  -- shadow, and the follower bows once it comes within 3 tiles
+  local GOD, OTHER, GX, GY = 3, 4, 13, 43
+  local function shadows(localId)
+    local n = 0
+    for i = 0, S.MAX_SPRITES - 1 do
+      local sp = S.gSprites + i * S.SPRITE_SIZE
+      if emu:read32(sp + S.OFF_SPRITE_CALLBACK) & ~1 == S.UpdateShadowFieldEffect & ~1
+         and emu:read16(sp + S.OFF_SPRITE_DATA0) == localId then n = n + 1 end
+    end
+    return n
+  end
+  L.setVar(S.VAR_0x8008, GX); L.setVar(S.VAR_0x8009, GY + 5)
+  L.runHeader("WorldTest_WarpHeader", { limit = 4000 })
+  L.waitUntil(function() return L.idle() end, 3000, "the warp")
+  wait(30)
+  local t = L.sb1() + S.OFF_SB1_TEMPLATES
+  for i = 0, 63 do
+    local tpl = t + i * S.TEMPLATE_SIZE
+    if emu:read8(tpl + S.OFF_TPL_LOCAL_ID) == GOD then
+      emu:write16(tpl + S.OFF_TPL_X, GX)
+      emu:write16(tpl + S.OFF_TPL_Y, GY)
+      emu:write8(tpl + S.OFF_TPL_MOVEMENT, S.MOVEMENT_TYPE_FACE_DOWN)
+      emu:write16(tpl + S.OFF_TPL_TRAINER_TYPE, S.TRAINER_TYPE_ICHOR_GOD)
+      break
+    end
+  end
+  L.setVar(S.VAR_0x8008, GOD)
+  L.runHeader("WorldTest_RespawnHeader")
+  wait(30)
+  local hasFollower = L.objectAt(0xFE) ~= nil
+  expect(L.objectAt(GOD) ~= nil and shadows(GOD) == 0 and shadows(OTHER) + shadows(0xFE) >= 1,
+         string.format("a god in disguise casts no shadow (%d), though others do (%d)", shadows(GOD), shadows(OTHER) + shadows(0xFE)))
+  expect(hasFollower and emu:read8(S.sBowedAt) == 0, "the follower is out, 4 or more tiles from the god, and hasn't bowed")
+  L.step(K.UP); L.step(K.UP); L.step(K.UP)
+  wait(40)
+  shot("follower_bows")
+  local fx, fy = L.objectAt(0xFE)
+  expect(emu:read8(S.sBowedAt) == GOD, string.format("within 3 tiles the follower bows to the god (follower at %s,%s)", tostring(fx), tostring(fy)))
+
   -- The party's highest level (the setup's Piplup is level 20)
   L.runHeader("WorldTest_LevelHeader")
   expect(L.getVar(S.VAR_0x8009) == 20, string.format("Ichor_GetHighestPartyLevel reads the party (%d)", L.getVar(S.VAR_0x8009)))

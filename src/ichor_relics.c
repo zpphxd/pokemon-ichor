@@ -20,6 +20,7 @@
 #include "ichor_frozen.h"
 #include "ichor_labyrinth.h"
 #include "ichor_relics.h"
+#include "ichor_theoxenia.h"
 #include "ichor_save.h"
 #include "item.h"
 #include "item_icon.h"
@@ -128,6 +129,7 @@ void Ichor_OnFieldFrame(void)
 {
     Ichor_FrozenHourFrame();
     Ichor_LabyrinthFrame();
+    Ichor_TheoxeniaFrame();
 }
 
 // --- Light (SYSTEMS §2) -------------------------------------------------------

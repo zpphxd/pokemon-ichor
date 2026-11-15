@@ -104,6 +104,25 @@ WorldTest_Bones:
 WorldTest_Text_Glauke:
 	.string "Glauke$"
 
+@ --- Route 1 at (VAR_0x8008, VAR_0x8009); an object respawned from its template ---
+	test_header WorldTest_WarpHeader, WorldTest_Warp
+WorldTest_Warp:
+	lockall
+	setvar VAR_TEMP_F, 1
+	warpsilent MAP_KALLISTE_ROUTE1, VAR_0x8008, VAR_0x8009
+	waitstate
+	releaseall
+	end
+
+	test_header WorldTest_RespawnHeader, WorldTest_Respawn
+WorldTest_Respawn:
+	lockall
+	setvar VAR_TEMP_F, 1
+	removeobject VAR_0x8008
+	addobject VAR_0x8008
+	releaseall
+	end
+
 @ RtcCalcLocalTimeOffset(gLocalTime.days, VAR_0x8004, VAR_0x8005, 0)
 	.thumb
 	.align 2
