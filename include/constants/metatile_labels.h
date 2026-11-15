@@ -1292,4 +1292,11 @@
 #define METATILE_TempleDionysus_TierFrontArm_Lowered   0x276
 // end gTileset_TempleDionysus
 
+// gTileset_Arkadia, gTileset_ArkadiaWood (Ichor: Arkadia), written by tools/ichor/art/arkadia_build.py
+#define METATILE_Arkadia_LampUnlit_L          0x230
+#define METATILE_Arkadia_LampUnlit_R          0x231
+#define METATILE_Arkadia_LampLit_L            0x222
+#define METATILE_Arkadia_LampLit_R            0x223
+// end gTileset_Arkadia
+
 #endif // GUARD_METATILE_LABELS_H

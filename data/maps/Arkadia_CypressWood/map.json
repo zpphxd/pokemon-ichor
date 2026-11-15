@@ -2,7 +2,7 @@
   "id": "MAP_ARKADIA_CYPRESS_WOOD",
   "name": "Arkadia_CypressWood",
   "layout": "LAYOUT_ARKADIA_CYPRESS_WOOD",
-  "music": "MUS_ICHOR_HOLLOW",
+  "music": "MUS_ICHOR_ROAD_NIGHT",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ARKADIA",
   "requires_flash": false,
@@ -13,9 +13,252 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
-  "object_events": [],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+  "connections": [
+    {
+      "map": "MAP_POOL_OF_MNEMOSYNE",
+      "offset": 4,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_WOOD_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_STUMP",
+      "x": 15,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_CypressWood_EventScript_Kleon",
+      "flag": "FLAG_ICHOR_KLEON_JOINED_TITANS"
+    },
+    {
+      "local_id": "LOCALID_WOOD_BALLS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_BALLS",
+      "x": 16,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_CypressWood_EventScript_Kleon",
+      "flag": "FLAG_ICHOR_KLEON_JOINED_TITANS"
+    },
+    {
+      "local_id": "LOCALID_WOOD_IAPETOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_CHORUS_LEADER",
+      "x": 20,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_CypressWood_EventScript_Nothing",
+      "flag": "FLAG_TEMP_11"
+    },
+    {
+      "local_id": "LOCALID_WOOD_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 19,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_CypressWood_EventScript_Nothing",
+      "flag": "FLAG_TEMP_12"
+    },
+    {
+      "local_id": "LOCALID_WOOD_SKYLAPS",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(SKYLAPS)",
+      "x": 11,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_CypressWood_EventScript_Nothing",
+      "flag": "FLAG_TEMP_13"
+    },
+    {
+      "local_id": "LOCALID_WOOD_KERDOVIX",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERDOVIX)",
+      "x": 11,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_CypressWood_EventScript_Nothing",
+      "flag": "FLAG_TEMP_14"
+    },
+    {
+      "local_id": "LOCALID_WOOD_EUADNE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HUNTRESS",
+      "x": 18,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "4",
+      "script": "Arkadia_CypressWood_EventScript_Euadne",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_WOOD_AGAPENOR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_CHARCOALER",
+      "x": 14,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Arkadia_CypressWood_EventScript_Agapenor",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_WOOD_DUSK_BALLS",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 17,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_DUSK_BALL",
+      "script": "Arkadia_CypressWood_EventScript_DuskBalls",
+      "flag": "FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_BALLS"
+    },
+    {
+      "local_id": "LOCALID_WOOD_HEDGE",
+      "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+      "x": 19,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_CypressWood_EventScript_Hedge",
+      "flag": "FLAG_BADGE05_GET"
+    },
+    {
+      "local_id": "LOCALID_WOOD_VIXEN",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERDOVIX)",
+      "x": 22,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_CypressWood_EventScript_SleepingVixen",
+      "flag": "FLAG_TEMP_15"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 32,
+      "y": 29,
+      "elevation": 0,
+      "dest_map": "MAP_ARKADIA",
+      "dest_warp_id": "7"
+    },
+    {
+      "x": 33,
+      "y": 29,
+      "elevation": 0,
+      "dest_map": "MAP_ARKADIA",
+      "dest_warp_id": "7"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Arkadia_CypressWood_EventScript_NewMoon"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 34,
+      "y": 28,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_CypressWood_EventScript_SignGate"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 17,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_CypressWood_EventScript_SignTomb"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_CypressWood_EventScript_Stump"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_CypressWood_EventScript_Shrine"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 23,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_CypressWood_EventScript_TabletEarth"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Arkadia_CypressWood_EventScript_DigSpot"
+    },
+    {
+      "type": "hidden_item",
+      "x": 13,
+      "y": 3,
+      "elevation": 3,
+      "item": "ITEM_CHARCOAL",
+      "flag": "FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_CHARCOAL"
+    }
+  ]
 }

@@ -892,12 +892,12 @@
 #define FLAG_UNUSED_0x349                                           0x349 // Unused Flag
 #define FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO                         0x34A
 #define FLAG_UNUSED_0x34B                                           0x34B // Unused Flag
-#define FLAG_UNUSED_0x34C                                           0x34C // Unused Flag
-#define FLAG_UNUSED_0x34D                                           0x34D // Unused Flag
-#define FLAG_UNUSED_0x34E                                           0x34E // Unused Flag
-#define FLAG_UNUSED_0x34F                                           0x34F // Unused Flag
-#define FLAG_UNUSED_0x350                                           0x350 // Unused Flag
-#define FLAG_UNUSED_0x351                                           0x351 // Unused Flag
+#define FLAG_ICHOR_ITEM_ARKADIA_MAX_REPEL                           0x34C // Ichor: Ichor: Arkadia, the Max Repel behind Krotos's byre
+#define FLAG_ICHOR_HIDDEN_ARKADIA_REVIVE                            0x34D // Ichor: Ichor: hidden item: Arkadia, the Revive in a hollow cypress by the forest gate
+#define FLAG_ICHOR_HIDDEN_ARKADIA_SILVER_POWDER                     0x34E // Ichor: Ichor: hidden item: Arkadia, the Silver Powder in an old web on the Agora's cypress
+#define FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_BALLS                     0x34F // Ichor: Ichor: the Cypress Wood, two Dusk Balls by Agapenor's kiln
+#define FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_CHARCOAL                     0x350 // Ichor: Ichor: hidden item: the Cypress Wood, the Charcoal in the kiln's ash
+#define FLAG_ICHOR_HIDDEN_POOL_MOON_STONE                           0x351 // Ichor: Ichor: hidden item: the Pool of Mnemosyne, the Moon Stone below the stone seat
 #define FLAG_UNUSED_0x352                                           0x352 // Unused Flag
 #define FLAG_UNUSED_0x353                                           0x353 // Unused Flag
 #define FLAG_UNUSED_0x354                                           0x354 // Unused Flag
@@ -1811,6 +1811,13 @@
 #define FLAG_ICHOR_BOARDED_GULF_FERRY           (FLAG_ICHOR_GENERAL_START + 0x167) // Ichor: Act II: boarded Panopeus's ferry at Kirrha (beat 37B)
 #define FLAG_ICHOR_GULF_CROSSED                 (FLAG_ICHOR_GENERAL_START + 0x168) // Ichor: Act II: crossed the Gulf to Aigion (beat 37B-C)
 #define FLAG_ICHOR_VISITED_AIGION               (FLAG_ICHOR_GENERAL_START + 0x169) // Ichor: Act II: Aigion is a fly target (beat 37C)
+#define FLAG_ICHOR_ARRIVED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1D2) // Ichor: Act II: Arkadia's dusk arrival has played (beat 41)
+#define FLAG_ICHOR_KROTOS_KID_1                 (FLAG_ICHOR_GENERAL_START + 0x1D3) // Ichor: Act II: Krotos's kid behind the Asclepeion's rock went home (also its hide flag)
+#define FLAG_ICHOR_KROTOS_KID_2                 (FLAG_ICHOR_GENERAL_START + 0x1D4) // Ichor: Act II: Krotos's kid on the temple stair went home (also its hide flag)
+#define FLAG_ICHOR_KROTOS_KID_3                 (FLAG_ICHOR_GENERAL_START + 0x1D5) // Ichor: Act II: Krotos's kid in Pan's grotto went home (also its hide flag)
+#define FLAG_ICHOR_STATIC_VIXEN_DEN             (FLAG_ICHOR_GENERAL_START + 0x1D6) // Ichor: Act II: the sleeping Kerdovix behind Agapenor's kiln was caught or beaten
+#define FLAG_ICHOR_POOL_VISION                  (FLAG_ICHOR_GENERAL_START + 0x1D7) // Ichor: Act II: the Pool of Mnemosyne showed the tree and the woman (once, at night)
+#define FLAG_ICHOR_MNASEAS_TOLD                 (FLAG_ICHOR_GENERAL_START + 0x1D8) // Ichor: Act II: Mnaseas told the Pool's story at least once
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)

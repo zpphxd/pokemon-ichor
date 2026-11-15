@@ -144,3 +144,11 @@ const u16 gMetatileAttributes_PorytilesManaged_ThyrsaHomes[] = INCBIN_U16("data/
 // Ichor: thyrsa_stone
 const u16 gMetatiles_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: arkadia
+const u16 gMetatiles_PorytilesManaged_Arkadia[] = INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Arkadia[] = INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: arkadia_wood
+const u16 gMetatiles_PorytilesManaged_ArkadiaWood[] = INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_ArkadiaWood[] = INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/metatile_attributes.bin");

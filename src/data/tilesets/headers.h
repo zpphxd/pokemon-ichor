@@ -593,3 +593,33 @@ const struct Tileset gTileset_ThyrsaStone =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaStone,
     .callback = NULL,
 };
+
+// Ichor: arkadia, Arkadia, the hunters' town (Act II, beat 41). Porytiles-managed, built by
+// tools/ichor/art/arkadia_build.py for the aethos primary: its cells on grass borrow
+// aethos's grass, so rebuild it whenever aethos changes. It uses only its own
+// tiles and palettes 6-12.
+const struct Tileset gTileset_Arkadia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Arkadia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Arkadia,
+    .metatiles = gMetatiles_PorytilesManaged_Arkadia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Arkadia,
+    .callback = NULL,
+};
+
+// Ichor: arkadia_wood, the Cypress Wood and the Pool of Mnemosyne (Act II, beats 42-43). Porytiles-managed, built by
+// tools/ichor/art/arkadia_build.py for the aethos primary: its cells on grass borrow
+// aethos's grass, so rebuild it whenever aethos changes. It uses only its own
+// tiles and palettes 6-12.
+const struct Tileset gTileset_ArkadiaWood =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ArkadiaWood,
+    .palettes = gTilesetPalettes_PorytilesManaged_ArkadiaWood,
+    .metatiles = gMetatiles_PorytilesManaged_ArkadiaWood,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaWood,
+    .callback = NULL,
+};
