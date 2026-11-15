@@ -699,11 +699,11 @@ def crag_detail():
             "..3..3..",
             "..3..3..",
         ]
-        K.put(B, ox + 4, 18, fig, {"4": "rk4", "3": "rk1"})
+        K.put(B, ox + 4, 18, fig, {"4": "rk5", "3": "rk4"})
         if which == "lyre":
-            K.put(B, ox + 0, 21, ["3.3", "333", ".3."], {"3": "rk1"})
+            K.put(B, ox + 0, 21, ["3.3", "333", ".3."], {"3": "rk4"})
         else:
-            K.put(B, ox + 12, 19, [".33", "33.", "3..", "3.."], {"3": "rk1"})
+            K.put(B, ox + 12, 19, [".33", "33.", "3..", "3.."], {"3": "rk4"})
     for x in range(14, 18):
         B.px(x, 30, "rk1")
     # a rock shelf: a ledge jutting from the wall

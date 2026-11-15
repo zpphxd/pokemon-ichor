@@ -75,7 +75,7 @@ aethos is repainted.
 |---|---|---|
 | `gTileset_Kithairon` | 479 of 504 | 288 of 512 |
 | `gTileset_Kronia` | 427 of 504 | 256 of 512 |
-| `gTileset_KithaironCave` | 63 of 504 | 48 of 512 |
+| `gTileset_KithaironCave` | 62 of 504 | 48 of 512 |
 
 ## `gTileset_Kithairon`: Route 6, Eleutherai and Mt. Kithairon
 
@@ -592,4 +592,119 @@ Pieces: `dig_cave` 0x222.
 
 ## Render-and-critique passes
 
-(Written by hand; see each map's passes below.)
+Written by hand, kept across rebuilds. Each map was rendered with
+`tools/ichor/maps/kithairon.py` (plain 2x, a review copy with collision and events, and
+15 x 10 GBA screens along the road, in `build/render/kithairon/`), compared with
+MAP_DESIGN.md and Act I's best maps (Route 1's final pass, Eleusa's scene), and fixed. The
+final 2x renders are in `img/<Map>.png`; in-game screenshots of every scene are from
+`tools/ichor/tests/kithairon.sh` (`build/test_kithairon/shots/`).
+
+| Render | Map |
+|---|---|
+| [`img/kithairon_crossing.png`](img/kithairon_crossing.png) | The whole crossing, 1x, stitched as the maps connect: Route 7 at the top, Route 6 at the bottom |
+| [`img/Route6_EleutheraiRoad.png`](img/Route6_EleutheraiRoad.png) | Route 6, the Eleutherai Road (56 x 28) |
+| [`img/Route6_AntiopesCave.png`](img/Route6_AntiopesCave.png) | Antiope's cave (16 x 12) |
+| [`img/Eleutherai.png`](img/Eleutherai.png) | Eleutherai (32 x 26) |
+| [`img/MtKithairon.png`](img/MtKithairon.png) | Mt. Kithairon, the maenads' pass (40 x 56) |
+| [`img/Route7_KroniaGrounds.png`](img/Route7_KroniaGrounds.png) | Route 7, the Kronia grounds (44 x 40) |
+
+The builder also checks each map: every person, sign and trigger can be reached from the
+entry (relic-gated items excepted), and which grass bands are forced. Today: Route 6's
+two (3 and 4 deep), Mt. Kithairon's one (4 deep), Route 7's two (4 and 3 deep).
+
+### The art (all maps)
+
+1. **First paint.** The crag top was a 16 px Voronoi of small plates: it read as cobbled
+   paving, not a mountain, and its 7 px face was too short to read as a cliff. Firs were
+   right; Pentheus's torn branch was a black box. The whole kit came to about 700 tiles
+   against 504.
+2. **Second.** The crag top is now a plain weathered grey with sparse pits, and the detail
+   moved into `crag_detail` cells (a crack, boulders, a tuft, a juniper, ivy) that the
+   builder scatters through any crag; the face is 14 px of columns darkening to the foot,
+   so a one-row crag reads as a retaining wall and a deep one as a cliff. The torn branch is
+   a bitten-out gap with a pale stump. The Cyclopean masonry went from a 32 px to a 16 px
+   repeat (64 tiles instead of 87). Three sets with a shared core replaced one set.
+3. **Third.** Fir woods read as a plantation: identical firs in ranks on bright grass. The
+   woods now stand on aethos's deep-shade grass (new metatiles, no new tiles), every other
+   column pair is a row lower, and two-row runs are young firs, not oaks. Open grass was
+   bare: `meadow` (narcissus, crocus, a tussock) and aethos's red anemones are scattered
+   through it. The wine press was a purple slab; it is now dressed stone with the must's
+   stain in its middle. The cave's walls were lighter than its floor (wrong for a cave):
+   they are dark now, the floor paler, and the twins' carving is cut in light lines.
+
+### Route 6, the Eleutherai Road
+
+1. **Draft** (road at Eleusa's placeholder 26–29). Correct beats but flat: the terraces
+   didn't read as terraces, and a huge flat crag filled the east side.
+2. **Pass 1** (road moved to Eleusa's real 44–47). Redrawn as an exact grid. The terrace
+   risers are one-row crags, so the hillside steps up in three visible terraces: the olive
+   band (aethos only, the Eleusa seam), the vine terrace, terrace 2. The zigzag is mirrored
+   (west along the vine terrace, the stair at the west end, east along terrace 2), because
+   the road now arrives on the east side; the rhythm is SCRIPT.md's.
+3. **Pass 2.** Woods on top of the east crag instead of bare rock, the spur's grass given an
+   irregular edge, the first riser (row 21) made rock so the vines are the only way up.
+4. **Pass 3.** Meadow flowers through the terraces; the press redrawn. Left as is: the
+   aethos dry-stone walls are thin lines next to the crag risers; they mark terrace edges
+   where the risers would be too heavy.
+
+### Antiope's cave
+
+1. **Draft.** Light grey wall tops over a dark floor: the cave looked inverted, and the
+   carving was invisible.
+2. **Pass 1.** Walls darkened, the floor lightened; the carving, the shelf (PP Up) and the
+   marked ivy (Star Piece) each sit on a south face where they can be seen.
+3. **Pass 2.** The exit mat is the floor brightening toward daylight, on the bottom row.
+
+### Eleutherai
+
+1. **Draft.** The road was drawn over by the town's ground and vanished; the temple paving
+   had holes where the columns stood.
+2. **Pass 1.** Exact grid: the road runs straight past the crag's foot, the fort is stamped
+   whole (south wall with towers and the gate, side walls, the north wall with the
+   watch-house door), the temple's paving counts its column cells as paving.
+3. **Pass 2.** The empty plinth and Oinoe's broom were painted a row too high in the
+   temple piece and didn't show; fixed. A row of oaks crowned the fort; the fort now stands
+   on its rock (crag behind and beside it), firs on the rock's flanks. An olive and
+   cypresses break up the open ground; the south side's path round the pens was opened.
+4. **Pass 3.** Flowers through the grass. Left as is: the court is plain beaten earth.
+
+### Mt. Kithairon
+
+1. **Draft.** Mostly open grass with a straight road; the rows of firs looked planted.
+2. **Pass 1.** Exact grid with the switchbacks, the fir clearing's band, the glade, the fork,
+   the fold, the shrine ledge.
+3. **Pass 2.** Woods closed in round the fold and below the shrine ledge; the dancing floor
+   became a ring of trampled earth in the glade instead of a square; scree on the slopes.
+4. **Pass 3.** Woods staggered and on shade; young firs where the woods are two rows
+   deep.
+5. **Pass 4.** The north half's road ran straight for thirty rows: it now bends west round
+   the fold's wall, between the fold and a clump of firs. In game the maenads' ring stood
+   above the camera when the dance began; the ring moved two rows south and the trigger to
+   the glade's first row (37), so the whole dance is on screen. Left as is: the drums read
+   as pale stones, not drums.
+
+### Route 7, the Kronia grounds
+
+1. **Draft.** The camp read as a camp, but sparse; the Asopos was a wide blue block; the
+   defile's two crags were large flat slabs; band 2's walls (aethos's north-south wall)
+   looked like ladders.
+2. **Pass 1.** Exact grid: the north face's defile, switchbacks and pasture; the camp's
+   tables, oven, stage, stewards' tent, banner and tents; the herm at the mountain's foot.
+3. **Pass 2.** The Asopos narrowed, its west bank wandering, the reed islet midstream;
+   band 2 fenced by scrub (firs) instead of walls.
+4. **Pass 3.** The defile's rock narrowed with firs on its shoulders; three more tents in
+   the ring; an olive in the west meadow. Known weakness: the west meadow is still open.
+
+### Deviations
+
+- **Three secondaries, not one** (above, *How it fits together*). The Route 7 seam is
+  covered by the shared core.
+- **Route 6's zigzag is mirrored** (Eleusa's road arrives at x 44-47, on the east side).
+- **Route 7 has no ledges.** aethos's ledges only jump south (uphill here); SCRIPT.md's
+  open question 1 wanted north-dropping ledges, which would need new ledge art. The
+  descent's shortcut is the road itself.
+- **Komos faces across the defile**, not up the road: one trainer facing up a two-wide road
+  covers one column. His sight (4) covers both road columns.
+- **Arimnestos guards the drum's path** at the fork rather than standing west of the fold:
+  SCRIPT.md puts the boundary stone at the fork and the drum west of the fold, and he
+  stands by both.

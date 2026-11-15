@@ -144,7 +144,7 @@ def rock_face(x, y, depth):
     return "rk2" if (xx + depth * 3) % 7 else "rk3"
 
 
-def paint_crag_cell(L, ox, oy, key, floor):
+def paint_crag_cell(L, ox, oy, key, floor, dark=None):
     V, T = _crag_fields(key)
     F = V & ~T
     c = np.s_[16:32, 16:32]
@@ -199,6 +199,19 @@ def paint_crag_cell(L, ox, oy, key, floor):
             L.px(ox + x, oy + y, "rk1")
         elif not (L.get(ox + x, oy + y) in ("rk5",)):
             L.px(ox + x, oy + y, "rk1" if T[y + 16, x + 16] else "rk0")
+    # a cave's walls are dark rock over a paler floor: shift the wall's tones down
+    if dark is None:
+        dark = floor is cave_floor
+    if dark:
+        top = {"rk5": "rk3", "rk4": "rk2", "rk3": "rk1", "rk2": "rk1", "rk1": "rk0"}
+        face = {"rk5": "rk4", "rk4": "rk3", "rk3": "rk2", "rk2": "rk1", "rk1": "rk0"}
+        for y in range(16):
+            for x in range(16):
+                if v[y, x]:
+                    cur = L.get(ox + x, oy + y)
+                    m = face if f[y, x] else top
+                    if cur in m:
+                        L.px(ox + x, oy + y, m[cur])
 
 
 def grass_floor(x, y):
@@ -215,10 +228,10 @@ def cave_floor(x, y):
     xx, yy = x % 16, y % 16
     h = K.hsh(xx, yy, 3) % 100
     if (xx, yy) in ((3, 4), (4, 4), (11, 10), (12, 11), (7, 13)):
-        return "rk3"
+        return "rk4"
     if (xx, yy) in ((3, 5), (4, 5), (11, 11), (8, 13)):
-        return "rk0"
-    return "rk2" if h < 18 else "rk1"
+        return "rk1"
+    return "rk2" if h < 22 else "rk3"
 
 
 def crag():

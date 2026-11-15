@@ -421,6 +421,12 @@ def kithairon():
     m.rect(20, 28, 21, 29, "=")
     m.rect(24, 36, 25, 36, "=")
     m.cells([(16, 29), (30, 29), (15, 36), (31, 36)], "s")
+    # pass 4: the road bends west round the fold's wall, between it and the firs
+    m.rect(20, 7, 22, 11, "F")
+    m.rect(23, 7, 23, 12, ".")
+    m.rect(18, 5, 21, 6, "=")
+    m.rect(18, 6, 19, 13, "=")
+    m.rect(18, 12, 21, 13, "=")
 
     # stamps
     m.stamp("pentheus_fir", 23, 14)
@@ -438,7 +444,7 @@ def kithairon():
     m.named("crag_detail", "ivy_face", 23, 27)
     m.put(22, 1, L.STELE)
     m.put(17, 54, L.STELE)
-    m.put(18, 13, L.STELE)
+    m.put(22, 13, L.STELE)
     m.oak(14, 10)
     m.oak(26, 37)
     E = {
@@ -452,15 +458,15 @@ def kithairon():
                 local_id="LOCALID_KITHAIRON_EUIA"),
             obj(P + "MAENAD", 30, 32, MK + "Bromia", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2,
                 local_id="LOCALID_KITHAIRON_BROMIA"),
-            obj(P + "MAENAD", 22, 31, MK + "Maenad", "MOVEMENT_TYPE_FACE_RIGHT",
+            obj(P + "MAENAD", 22, 33, MK + "Maenad", "MOVEMENT_TYPE_FACE_RIGHT",
                 flag="FLAG_ICHOR_SAW_MAENADS", local_id="LOCALID_KITHAIRON_MAENAD_1"),
-            obj(P + "MAENAD", 24, 30, MK + "Maenad", "MOVEMENT_TYPE_FACE_DOWN",
+            obj(P + "MAENAD", 24, 32, MK + "Maenad", "MOVEMENT_TYPE_FACE_DOWN",
                 flag="FLAG_ICHOR_SAW_MAENADS", local_id="LOCALID_KITHAIRON_MAENAD_2"),
-            obj(P + "MAENAD", 23, 34, MK + "Maenad", "MOVEMENT_TYPE_FACE_UP",
+            obj(P + "MAENAD", 23, 35, MK + "Maenad", "MOVEMENT_TYPE_FACE_UP",
                 flag="FLAG_ICHOR_SAW_MAENADS", local_id="LOCALID_KITHAIRON_MAENAD_3"),
-            obj("OBJ_EVENT_GFX_SPECIES(BOTRYKIT)", 21, 33, MK + "Botrykit", "MOVEMENT_TYPE_FACE_RIGHT",
+            obj("OBJ_EVENT_GFX_SPECIES(BOTRYKIT)", 21, 34, MK + "Botrykit", "MOVEMENT_TYPE_FACE_RIGHT",
                 flag="FLAG_ICHOR_SAW_MAENADS", local_id="LOCALID_KITHAIRON_BOTRYKIT_1"),
-            obj("OBJ_EVENT_GFX_SPECIES(BOTRYKIT)", 25, 33, MK + "Botrykit", "MOVEMENT_TYPE_FACE_LEFT",
+            obj("OBJ_EVENT_GFX_SPECIES(BOTRYKIT)", 25, 34, MK + "Botrykit", "MOVEMENT_TYPE_FACE_LEFT",
                 flag="FLAG_ICHOR_SAW_MAENADS", local_id="LOCALID_KITHAIRON_BOTRYKIT_2"),
             item_ball(15, 30, "ITEM_REVIVE", "FLAG_ICHOR_ITEM_KITHAIRON_REVIVE"),
             item_ball(16, 25, "ITEM_MAX_ELIXIR", "FLAG_ICHOR_ITEM_KITHAIRON_MAX_ELIXIR"),
@@ -475,7 +481,7 @@ def kithairon():
             obj(P + "TITAN_GRUNT", 30, 5, MK + "Ilys", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
         ],
         "warp_events": [],
-        "coord_events": [trigger(x, 38, MK + "DancingFloor") for x in (24, 25)],
+        "coord_events": [trigger(x, 37, MK + "DancingFloor") for x in (24, 25)],
         "bg_events": [
             sign(17, 54, MK + "SignSouth"),
             sign(16, 27, MK + "MarkedIvy"),
@@ -486,13 +492,13 @@ def kithairon():
             sign(37, 16, MK + "Spring"),
             sign(35, 23, MK + "DigSpot"),
             sign(6, 9, MK + "DigSpot"),
-            sign(18, 13, MK + "SignFold"),
+            sign(22, 13, MK + "SignFold"),
             sign(31, 5, MK + "Shrine"),
             sign(22, 1, MK + "SignNorth"),
         ],
     }
     views = [(18, 54), (12, 49), (9, 45), (16, 43), (24, 40), (23, 33), (20, 25), (28, 21), (35, 20),
-             (14, 21), (21, 16), (14, 11), (26, 5), (20, 1)]
+             (14, 21), (21, 16), (18, 10), (26, 5), (20, 1)]
     return m, E, views
 
 
@@ -806,7 +812,37 @@ def check_reach(key):
             if (e["x"], e["y"]) not in seen and not ({(e["x"], e["y"] + 1), (e["x"], e["y"] - 1)} & seen):
                 bad.append(f"event@{e['x']},{e['y']}")
         print(f"  {m.name}: {len(seen)} cells reachable" + (f"; OUT OF REACH: {', '.join(bad)}" if bad else ""))
+        # forced grass (MAP_DESIGN section 1): the grass patches every walk from the
+        # entry to the far exit must cross
+        if key in EXITS:
+            grass = L.grass_cells(m)
+            parts, left = [], set(grass)
+            while left:
+                c = left.pop()
+                part, todo = {c}, [c]
+                while todo:
+                    x, y = todo.pop()
+                    for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+                        n = (x + dx, y + dy)
+                        if n in left:
+                            left.discard(n)
+                            part.add(n)
+                            todo.append(n)
+                parts.append(part)
+            m.force_open |= opens
+            forced = []
+            for part in parts:
+                r = L.reach(m, ENTRIES[key], blocked_extra=(people - opens) | part)
+                if not (set(EXITS[key]) & r):
+                    xs = sorted({x for x, _ in part}); ys = sorted({y for _, y in part})
+                    forced.append(f"x {xs[0]}-{xs[-1]}, y {ys[0]}-{ys[-1]}")
+            m.force_open -= opens
+            print(f"  {m.name}: forced grass bands: {'; '.join(forced) if forced else 'NONE'}")
     return run
+
+
+# The far exit of each route, for the forced-grass check.
+EXITS = {"route6": [(32, 0), (33, 0)], "kithairon": [(20, 0), (21, 0)], "route7": [(20, 0), (21, 0)]}
 
 
 CHECKS = {k: check_reach(k) for k in ENTRIES}
