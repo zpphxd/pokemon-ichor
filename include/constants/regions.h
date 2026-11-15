@@ -18,6 +18,11 @@ enum Region
     REGIONS_COUNT,
 };
 
+// Ichor: the Oikoumene, the post-game's second chart, takes Kanto's chart slot
+// (gRegionMapInfos[REGION_MAP_KANTO], the Kanto grid, Kanto's fly targets).
+// Only an FRLG build has a Kanto of its own (design/oikoumene/BUILD.md §3).
+#define REGION_OIKOUMENE REGION_KANTO
+
 enum KantoSubRegion
 {
     KANTO_SUBREGION_KANTO,

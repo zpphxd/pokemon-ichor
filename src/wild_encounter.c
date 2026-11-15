@@ -419,6 +419,60 @@ u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon, u8 wildMonIndex, en
     }
 }
 
+// Ichor: the Nurseries (design/OIKOUMENE.md §8; design/oikoumene/BUILD.md §5,
+// "The Nurseries' monthly tables"). A Nursery map keeps one wild_encounters.json
+// entry per Aethos month, twelve in a row, and reads this month's, the way
+// Altering Cave reads VAR_ALTERING_CAVE_WILD_SET. Add each Nursery map here.
+static const u16 sIchorNurseryMaps[] =
+{
+    MAP_UNDEFINED, // the end; batch 2 adds the Nursery maps above this line
+};
+
+// The Aethos month, 0-11: twelve months of three days on the RTC day count
+// (SYSTEMS §7). src/ichor_calendar.c's Ichor_GetMonth, when it lands, is the same.
+u32 Ichor_GetAethosMonth(void)
+{
+    return (VarGet(VAR_DAYS) / 3) % 12;
+}
+
+static bool32 IsIchorNurseryMap(u32 mapGroup, u32 mapNum)
+{
+    for (u32 i = 0; sIchorNurseryMaps[i] != MAP_UNDEFINED; i++)
+    {
+        if (MAP_GROUP(sIchorNurseryMaps[i]) == mapGroup && MAP_NUM(sIchorNurseryMaps[i]) == mapNum)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// The offset of month's table from a map's first header: the month, wrapped
+// to the number of consecutive entries the map actually has (so a Nursery
+// with fewer than twelve still works, and a map with one table reads it).
+u32 Ichor_GetNurseryHeaderOffset(const struct WildPokemonHeader *headers, u32 first, u32 month)
+{
+    u32 count = 1;
+    while (count < 12
+        && headers[first + count].mapGroup == headers[first].mapGroup
+        && headers[first + count].mapNum == headers[first].mapNum)
+        count++;
+    return month % count;
+}
+
+// Whether a header is the one its map reads now: FALSE for a Nursery's other
+// months, so the Pokedex area view shows only this month's young.
+bool32 Ichor_IsWildHeaderCurrent(u32 headerId)
+{
+    u32 first = headerId;
+    const struct WildPokemonHeader *h = &gWildMonHeaders[headerId];
+
+    if (!IsIchorNurseryMap(h->mapGroup, h->mapNum))
+        return TRUE;
+    while (first > 0 && gWildMonHeaders[first - 1].mapGroup == h->mapGroup
+                     && gWildMonHeaders[first - 1].mapNum == h->mapNum)
+        first--;
+    return headerId == first + Ichor_GetNurseryHeaderOffset(gWildMonHeaders, first, Ichor_GetAethosMonth());
+}
+
 u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
@@ -440,6 +494,10 @@ u16 GetCurrentMapWildMonHeaderId(void)
                     alteringCaveId = 0;
 
                 i += alteringCaveId;
+            }
+            else if (IsIchorNurseryMap(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
+            {
+                i += Ichor_GetNurseryHeaderOffset(gWildMonHeaders, i, Ichor_GetAethosMonth()); // Ichor
             }
 
             return i;

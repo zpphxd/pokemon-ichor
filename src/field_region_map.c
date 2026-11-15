@@ -10,6 +10,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "region_map.h"
+#include "regions.h"
 #include "sound.h"
 #include "strings.h"
 #include "text.h"
@@ -234,6 +235,8 @@ static void PrintTitleWindowText(void)
     const u8 *region;
     if (IS_FRLG)
         region = gText_Kanto;
+    else if (GetCurrentRegion() == REGION_OIKOUMENE) // Ichor: the second chart's own title
+        region = COMPOUND_STRING("OIKOUMENE");
     else
         region = gText_Hoenn;
     u32 hoennOffset = GetStringCenterAlignXOffset(FONT_NORMAL, region, 0x38);

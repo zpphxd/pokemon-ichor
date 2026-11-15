@@ -11,7 +11,9 @@ its place, and puts the lands that don't fit into the Kanto block's spare tail
 It rewrites the slot ids and names in src/data/region_map/region_map_sections.json,
 the Hoenn alias lines in include/constants/region_map_sections_hoenn.h, and writes
 include/constants/region_map_sections_oikoumene.h (the Kanto tail's aliases and the
-two range markers). Positions on the chart are the chart builder's job.
+two range markers). Positions on the chart are tools/ichor/art/ui_oikoumene_map.py's;
+this keeps each section's position with it when the tables move it to another id.
+Everything names sections, never numbers, so renumbering before release is safe.
 """
 import json
 import re
@@ -25,8 +27,16 @@ OIK_H = ROOT / "include/constants/region_map_sections_oikoumene.h"
 
 # Hoenn slots upstream code still treats specially (weather, battle tent, Safari
 # Zone, underwater and dive, follower messages, the dex area screen, Mirage
-# Island, the truck). Left unnamed until the chart's audit clears them.
+# Island, the truck). The chart's audit (design/oikoumene/MAPS_chart.md) kept
+# them unnamed: there's room without them, and 58 is the kept Battle Frontier.
 SKIP_HOENN = {2, 8, 50, 51, 52, 53, 54, 57, 58, 59, 65, 66, 68, 69, 71, 79, 84, 85}
+
+# Sections pinned to a particular slot, swapped with whoever would have had it.
+# 62 was New Mauville: the expansion evolves Magneton, Nosepass and Charjabug
+# by level in MAPSEC_NEW_MAUVILLE (IF_IN_MAPSEC, gen_1/3/7_families.h), so that
+# slot is the Oikoumene's magnetic place. Gargaros, Ida's summit, where Pliny's
+# shepherd Magnes found the lodestone held his iron-nailed sandals (NH 36.127).
+PINNED = {"GARGAROS_PEAK": 62}
 
 # (constant suffix, display name). Grouped by land, in OIKOUMENE.md's order.
 # (L) = LABORS's map and (O) = ODYSSEY's, built by world-postgame on this chart.
@@ -170,24 +180,53 @@ SCUFIB_CHAMBER RIXY_CHAMBER VIAPOIS_CHAMBER EMBER_SPA""".split()
 KANTO_TAIL_UPSTREAM = ["MAPSEC_" + n for n in KANTO_TAIL_UPSTREAM]
 
 
+POSITION_KEYS = ("x", "y", "width", "height")
+
+
+def hoenn_slots():
+    """{slot: (suffix, display)} for the Hoenn block: the names in order over
+    the usable slots, then PINNED swaps."""
+    usable = [i for i in range(86) if i not in SKIP_HOENN]
+    if len(HOENN_BLOCK) > len(usable):
+        raise SystemExit(f"{len(HOENN_BLOCK)} names for {len(usable)} Hoenn slots")
+    slots = dict(zip(usable, HOENN_BLOCK))
+    for suffix, want in PINNED.items():
+        have = next(s for s, (n, _) in slots.items() if n == suffix)
+        if want not in slots:
+            raise SystemExit(f"PINNED {suffix} to {want}, which is skipped or unused")
+        slots[have], slots[want] = slots[want], slots[have]
+    return slots
+
+
 def main():
     data = json.loads(JSON.read_text())
     secs = data["map_sections"]
     ids = [s["id"] for s in secs]
+    # the chart builder's positions, kept with their section across a renumbering
+    positions = {s["id"]: {k: s[k] for k in POSITION_KEYS if k in s} for s in secs}
 
-    # Hoenn block: slots 0-85 in json order are ids 0-85.
-    usable = [i for i in range(86) if i not in SKIP_HOENN]
-    if len(HOENN_BLOCK) > len(usable):
-        raise SystemExit(f"{len(HOENN_BLOCK)} names for {len(usable)} Hoenn slots")
-    hoenn_map = {}  # old id string -> new constant
-    for (suffix, display), slot in zip(HOENN_BLOCK, usable):
-        new = "MAPSEC_" + suffix
-        cur = secs[slot]
-        old = f"MAPSEC_OIKOUMENE_{slot:02d}"
-        if cur["id"] not in (old, new):
-            raise SystemExit(f"slot {slot} is {cur['id']}, expected {old}")
-        hoenn_map[old] = new
-        secs[slot] = {"id": new, "name": display}
+    # Hoenn block: slots 0-85 in json order are ids 0-85. A slot may hold its
+    # MAPSEC_OIKOUMENE_<id> placeholder or any Oikoumene name (renumbering).
+    ours = {"MAPSEC_" + n for n, _ in HOENN_BLOCK} | {f"MAPSEC_OIKOUMENE_{i:02d}" for i in range(86)}
+    slots = hoenn_slots()
+    slot_of = {}  # current id string -> slot
+    for slot in range(86):
+        cur = secs[slot]["id"]
+        if slot in SKIP_HOENN and cur == "MAPSEC_BATTLE_FRONTIER":
+            continue
+        if cur not in ours:
+            raise SystemExit(f"slot {slot} is {cur}, which isn't the Oikoumene's")
+        slot_of[cur] = slot
+    for slot in range(86):
+        if secs[slot]["id"] == "MAPSEC_BATTLE_FRONTIER":
+            continue
+        if slot in slots:
+            suffix, display = slots[slot]
+            new = "MAPSEC_" + suffix
+            secs[slot] = {"id": new, "name": display, **positions.get(new, {})}
+        else:
+            secs[slot] = {"id": f"MAPSEC_OIKOUMENE_{slot:02d}"}
+    new_at = {slot: secs[slot]["id"] for slot in range(86)}
 
     # Kanto tail: the spare ids after MAPSEC_RHODOS, before MAPSEC_SPECIAL_AREA.
     start = ids.index("MAPSEC_RHODOS") + 1
@@ -202,7 +241,7 @@ def main():
         if secs[slot]["id"] not in (upstream, new):
             raise SystemExit(f"tail slot {slot} is {secs[slot]['id']}, expected {upstream}")
         kanto_aliases.append((upstream, new))
-        secs[slot] = {"id": new, "name": display}
+        secs[slot] = {"id": new, "name": display, **positions.get(new, {})}
 
     if "--list" in sys.argv:
         for i, s in enumerate(secs):
@@ -212,10 +251,13 @@ def main():
 
     JSON.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
 
-    text = HOENN.read_text()
-    for old, new in hoenn_map.items():
-        text = re.sub(rf"\b{old}\b", new, text)
-    HOENN.write_text(text)
+    # each Hoenn alias points at whatever its slot holds now
+    lines = HOENN.read_text().split("\n")
+    for k, line in enumerate(lines):
+        m = re.match(r"^#define (MAPSEC_\w+) (MAPSEC_\w+)$", line)
+        if m and m.group(2) in slot_of:
+            lines[k] = f"#define {m.group(1)} {new_at[slot_of[m.group(2)]]}"
+    HOENN.write_text("\n".join(lines))
 
     first_tail = "MAPSEC_" + KANTO_TAIL[0][0]
     last_tail = "MAPSEC_" + KANTO_TAIL[-1][0]
@@ -240,7 +282,7 @@ def main():
             lines.append(f"#define {upstream} {new}")
     lines += ["", "#endif // GUARD_CONSTANTS_REGION_MAP_SECTIONS_OIKOUMENE_H", ""]
     OIK_H.write_text("\n".join(lines))
-    print(f"named {len(hoenn_map)} Hoenn slots and {len(tail_names)} Kanto-tail slots")
+    print(f"named {len(slots)} Hoenn slots and {len(tail_names)} Kanto-tail slots")
 
 
 if __name__ == "__main__":

@@ -23,6 +23,42 @@
       "map": "MAP_KALLISTE_ROUTE1",
       "x": 14,
       "y": 21
+    },
+    {
+      "id": "HEAL_LOCATION_SESTOS",
+      "map": "MAP_SESTOS",
+      "x": 3,
+      "y": 23
+    },
+    {
+      "id": "HEAL_LOCATION_ILION",
+      "map": "MAP_ILION",
+      "x": 3,
+      "y": 23
+    },
+    {
+      "id": "HEAL_LOCATION_NAUKRATIS",
+      "map": "MAP_NAUKRATIS",
+      "x": 3,
+      "y": 23
+    },
+    {
+      "id": "HEAL_LOCATION_MEMPHIS",
+      "map": "MAP_MEMPHIS",
+      "x": 3,
+      "y": 23
+    },
+    {
+      "id": "HEAL_LOCATION_SALMYDESSOS",
+      "map": "MAP_SALMYDESSOS",
+      "x": 3,
+      "y": 23
+    },
+    {
+      "id": "HEAL_LOCATION_AIA",
+      "map": "MAP_AIA",
+      "x": 3,
+      "y": 23
     }
   ]
 }

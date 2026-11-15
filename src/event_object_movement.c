@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ichor_frozen.h"
+#include "regions.h"
 #include "malloc.h"
 #include "battle_anim.h"
 #include "battle_pyramid.h"
@@ -2636,7 +2637,8 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
         condEmotes[condCount++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_SAD, .index = 6};
     }
     // Gym type advantage/disadvantage
-    if (GetCurrentMapMusic() == MUS_GYM || GetCurrentMapMusic() == MUS_RG_GYM)
+    // Ichor: the Hoenn gym towns' ids below are Oikoumene places now
+    if ((GetCurrentMapMusic() == MUS_GYM || GetCurrentMapMusic() == MUS_RG_GYM) && GetCurrentRegion() != REGION_OIKOUMENE)
     {
         switch (gMapHeader.regionMapSectionId)
         {
