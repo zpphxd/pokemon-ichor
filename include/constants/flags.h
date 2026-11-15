@@ -1691,6 +1691,11 @@
 #define FLAG_ICHOR_GENERAL2_COUNT               0x5E0
 #define FLAG_ICHOR_WAYSTONES_START              (ICHOR_FLAGS2_START + 0x5E0) // 32: the Oikoumene's waystones (herms beyond Aethos)
 
+// Hidden items with bank flags: their 13-bit flag field (asm/macros/map.inc)
+// holds 0x1000 + (flag - ICHOR_FLAGS_START); below 0x1000 it is a vanilla flag's
+// offset from FLAG_HIDDEN_ITEMS_START.
+#define ICHOR_HIDDEN_ITEM_BANK_ID               0x1000
+
 // The relics (SYSTEMS §1). Each FLAG_ICHOR_GOT_* is set whenever its item
 // enters the bag. They sit at FLAG_ICHOR_RELICS_START + (item - ITEM_TALARIA);
 // the Talaria's is the slice's FLAG_SYS_B_DASH instead.

@@ -20,7 +20,7 @@ The director assigns the ranges. Ask in your report if your range runs low.
 
 The Hoenn cut freed 700 vanilla flags: every Hoenn story, item and hide flag that nothing left in the build names. The "Free now" counts are the `FLAG_UNUSED_0x…` lines in each range.
 
-- **Hidden items need these vanilla flags.** `bg_hidden_item_event` (asm/macros/map.inc) stores the flag as an offset from `FLAG_HIDDEN_ITEMS_START` (0x1F4), so a hidden item's flag must be a vanilla flag at 0x1F4 or above. Spend your range's flags from 0x1F4 up on hidden items. Put story and other state in the Ichor bank flags (`claim.py bankflag`) instead.
+- **Hidden items can use bank flags.** `bg_hidden_item_event` (asm/macros/map.inc) takes a vanilla flag at 0x1F4 or above, or any Ichor bank flag (both general banks, 0x2000–0x2EFF). Claim one from your bank range with `python3 tools/ichor/claim.py --range LO-HI hiddenitem FLAG_ICHOR_HIDDEN_ITEM_<NAME> "comment"`. It takes a flag from the same lines as `bankflag`, so it counts against your bank range. Vanilla flags still work for hidden items that already use them.
 - Hoenn flags that upstream C or a kept script still names stay defined until batch 3 cuts those systems: the decorations (0x0AE–0x0BB, reached by arithmetic), the Battle Frontier's, and a few dozen story flags.
 
 ## Ichor bank flags and vars (in IchorSave)
@@ -41,7 +41,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_... "commen
 | **ichor-engine** | 0x480–0x4BF | 0x00–0x3F | 28–31 |
 | Reserve | 0x900–0xADF (480); ask the director. The second bank's last 32 flags sit outside these offsets as `FLAG_ICHOR_WAYSTONES_START`, for the Oikoumene's herm run | — | — |
 
-Hidden items still need vanilla flags at or above `FLAG_HIDDEN_ITEMS_START` (see `asm/macros/map.inc`), so claim those from your vanilla flag range.
+Hidden items can take these bank flags too (`claim.py hiddenitem`; see `asm/macros/map.inc`), so the vanilla range is no longer the limit on them.
 
 ## Vars
 

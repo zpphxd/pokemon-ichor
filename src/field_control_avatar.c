@@ -459,7 +459,7 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     case BG_EVENT_HIDDEN_ITEM:
         if (bgEvent->bgUnion.hiddenItem.underfoot == TRUE)
             return NULL;
-        gSpecialVar_0x8004 = bgEvent->bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START;
+        gSpecialVar_0x8004 = Ichor_GetHiddenItemFlag(bgEvent->bgUnion.hiddenItem.hiddenItemId); // Ichor: bank flags too
         gSpecialVar_0x8005 = bgEvent->bgUnion.hiddenItem.item;
         gSpecialVar_0x8009 = bgEvent->bgUnion.hiddenItem.quantity;
         if (FlagGet(gSpecialVar_0x8004) == TRUE)

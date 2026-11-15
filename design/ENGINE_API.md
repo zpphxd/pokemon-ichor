@@ -54,7 +54,7 @@ Only 26 vanilla vars and 322 vanilla flags were left, so IchorSave carries its o
 | Daily flags | `0x2800`–`0x28FF` | 256, cleared each day | `python3 tools/ichor/claim.py dailyflag FLAG_DAILY_ICHOR_<NAME> "comment"` |
 | Vars | `0x4100`–`0x411F` | 32 | `python3 tools/ichor/claim.py bankvar VAR_ICHOR_<NAME> "comment"` |
 
-**Use the banks for all new Ichor content,** including story flags, item balls, hidden items and hide flags. Keep the remaining vanilla flags and vars for anything that has to sit in SaveBlock1. A claim adds a named line to `include/constants/flags.h` or `vars.h`, in the bank's "general" range.
+**Use the banks for all new Ichor content,** including story flags, item balls, hidden items and hide flags. Hidden items take any flag in either general bank: `bg_hidden_item_event` packs it as `0x1000 + (flag - ICHOR_FLAGS_START)` in its 13-bit field, below which vanilla flags keep their old offsets, and `Ichor_GetHiddenItemFlag` (`include/ichor_save.h`) decodes it. Claim one with `claim.py hiddenitem FLAG_ICHOR_HIDDEN_ITEM_<NAME>`. Keep the remaining vanilla flags and vars for anything that has to sit in SaveBlock1. A claim adds a named line to `include/constants/flags.h` or `vars.h`, in the bank's "general" range.
 
 **Parallel sessions** pass `--range LO-HI` first, as with vanilla flags (`tools/ichor/claim_ranges.md`). For a bank, LO and HI are offsets into its general range (`0x000`–`0xADF` for flags, where `0x500` and up is the second bank; `0x00`–`0x6F` for daily flags; `0x00`–`0x1F` for vars). Each claim takes the lowest free offset in the range, and lines stay sorted by offset, so separate ranges merge cleanly.
 
