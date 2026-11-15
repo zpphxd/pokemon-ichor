@@ -49,8 +49,12 @@ local function into(map, x, y, opts)
                        S.SCR_OP_WAITSTATE, S.SCR_OP_END }) do
     s[#s + 1] = b
   end
+  -- the ON_FRAME header runs while VAR_TEMP_0 is 0: zero it (an earlier one-off left it 1)
+  emu:write16(L.sb1() + S.OFF_SB1_VARS + (S.VAR_TEMP_0 - S.VARS_START) * 2, 0)
   L.runRamScript(s)
-  waitUntil(function() return L.mapId() == map end, 4000, string.format("map %d", map))
+  -- wait for the warp to start (the map may be the one we're on), then to land
+  waitUntil(function() return not L.inOverworld() end, 600, string.format("the warp to map %d", map))
+  waitUntil(function() return L.mapId() == map and L.inOverworld() end, 4000, string.format("map %d", map))
   if opts.scene then
     wait(40)
     L.settle(opts.scene)
@@ -105,7 +109,7 @@ local function main()
   into(S.MAP_INN, 8, 8, { flags = { S.FLAG_SYS_POKEMON_GET, S.FLAG_ACT2_BEGUN }, extra = team })
   expect(partyCount() == 2, "the test team: a Gelasable and a test Pokémon")
   shot("StyxFalls_Inn")
-  expect(L.objectOn(4, 7) ~= nil, "Alethea waits at the long table on the first visit")
+  expect(L.objectOn(4, 7), "Alethea waits at the long table on the first visit")
   expect(bankFlag(S.FLAG_HIDE_ALETHEA_STYX), "and she's set to be gone once you leave")
   L.talk(L.npc("StyxFalls_Inn_EventScript_Alethea"), { shots = { [1] = "inn_alethea" } })
   L.talk(L.npc("StyxFalls_Inn_EventScript_Aroanios"), { answers = { "yes" },
@@ -116,12 +120,12 @@ local function main()
                                                         shots = { [1] = "inn_eubouleus", [7] = "inn_gryllos_given" } })
   expect(bankFlag(S.FLAG_GOT_GRYLLOS), "Eubouleus gave Gryllos")
   expect(partyCount() == 3 and hasSpecies(S.SPECIES_KAPLET), "Gryllos the Kaplet is in the party")
-  expect(L.objectOn(15, 6) == nil, "the basket is empty")
+  expect(not L.objectOn(15, 6), "the basket is empty")
   L.talk(L.sign("StyxFalls_Inn_EventScript_Hoof"), { shots = { [1] = "inn_hoof" } })
   L.talk(L.sign("StyxFalls_Inn_EventScript_Window"), { shots = { [1] = "inn_window" } })
   shot("StyxFalls_Inn_after")
   into(S.MAP_INN, 8, 8)
-  expect(L.objectOn(4, 7) == nil, "back in the inn, Alethea has gone on (to the Cave of Maia)")
+  expect(not L.objectOn(4, 7), "back in the inn, Alethea has gone on (to the Cave of Maia)")
   shot("StyxFalls_Inn_again")
 
   L.setBeat("oath_house", false)
@@ -164,16 +168,17 @@ local function main()
   L.setBeat("agora", false)
   into(S.MAP_AGORA, 6, 8)
   shot("Arkadia_Agora")
+  -- Across the counter: her greeting, then the stall's menu (BUY / SELL / SEE YA);
+  -- B leaves it, and she says her piece about the arrows.
   L.go(2, 5)
   L.face(K.UP)
   L.tap(K.A)
-  wait(90)
+  wait(60)
   shot("agora_stallkeeper")
-  L.tap(K.A)
   wait(60)
   shot("agora_menu")
   L.tap(K.B)
-  wait(30)
+  wait(40)
   L.settle({ shots = { [1] = "agora_arrows" } })
   L.talk(L.sign("Arkadia_Agora_EventScript_Cypress"), { shots = { [1] = "agora_cypress" } })
   L.go(6, 3)
@@ -218,24 +223,41 @@ local function main()
   L.setBeat("charcoal_hut", false)
   into(S.MAP_CHARCOAL_HUT, 4, 6)
   shot("Arkadia_CharcoalHut")
-  expect(L.objectOn(2, 6) ~= nil, "Arkas sits by the door before the trade")
+  expect(L.objectOn(2, 6), "Arkas sits by the door before the trade")
+  -- The trade's chooser is the Pithos's screen (OW_CHOOSE_FROM_PC_AND_PARTY): the cursor
+  -- starts in the jar; five DOWNs reach the buttons, A on YOUR PARTY opens the party,
+  -- and A picks the Gelasable in slot 0 (and SELECT in its menu).
+  local chooser = 0
+  local function choose()
+    chooser = chooser + 1
+    if chooser == 1 then
+      wait(60)
+      shot("trade_pithos")
+      for _ = 1, 5 do L.tap(K.DOWN); wait(12) end
+      L.tap(K.A); wait(60)
+      shot("trade_party")
+    end
+    L.tap(K.A); wait(40)
+    if chooser > 12 then L.fail("the trade's chooser never closed") end
+  end
   L.talk(L.npc("Arkadia_CharcoalHut_EventScript_Hippothoos"),
-         { answers = { "yes" }, limit = 30000, shots = { [1] = "hippothoos_rats", [4] = "hippothoos_arkas" } })
+         { answers = { "yes" }, limit = 30000, hooks = { CB2_PokeStorage = choose },
+           shots = { [1] = "hippothoos_rats", [5] = "hippothoos_arkas" } })
   expect(bankFlag(S.FLAG_TRADED_ARKOBY), "traded the Gelasable for Arkas")
   expect(hasSpecies(S.SPECIES_ARKOBY) and not hasSpecies(S.SPECIES_GELASABLE), "Arkas the Arkoby is in the party")
-  expect(L.objectOn(2, 6) == nil, "the little bear has gone from the door")
+  expect(not L.objectOn(2, 6), "the little bear has gone from the door")
   L.talk(L.npc("Arkadia_CharcoalHut_EventScript_Hippothoos"), { shots = { [2] = "hippothoos_shadow" } })
   L.talk(L.sign("Arkadia_CharcoalHut_EventScript_Drawing"), { shots = { [1] = "hippothoos_drawing" } })
 
   L.setBeat("goatherd", false)
   into(S.MAP_GOATHERD, 2, 7)
   shot("Arkadia_GoatherdHouse")
-  expect(L.objectOn(10, 3) == nil and L.objectOn(12, 3) == nil and L.objectOn(9, 8) == nil,
+  expect(not L.objectOn(10, 3) and not L.objectOn(12, 3) and not L.objectOn(9, 8),
          "no lost kid is home yet")
   L.talk(L.npc("Arkadia_GoatherdHouse_EventScript_Krotos"), { shots = { [1] = "krotos_panic" } })
   expect(not bankFlag(S.FLAG_GOT_LUCKY_EGG), "no egg before the kids are home")
   into(S.MAP_GOATHERD, 2, 7, { flags = { S.FLAG_KID_1, S.FLAG_KID_2, S.FLAG_KID_3 } })
-  expect(L.objectOn(10, 3) ~= nil and L.objectOn(12, 3) ~= nil and L.objectOn(9, 8) ~= nil,
+  expect(L.objectOn(10, 3) and L.objectOn(12, 3) and L.objectOn(9, 8),
          "the three kids are home in the pen")
   shot("Arkadia_GoatherdHouse_kids_home")
   L.talk(L.npc("Arkadia_GoatherdHouse_EventScript_Krotos"), { shots = { [1] = "krotos_all_three" } })

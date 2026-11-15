@@ -61,6 +61,114 @@ Seven, shared by the three sets, all multiples of 8 and none an aethos color. Fo
 - **Arkadia:** a town in a cypress forest. Timber the red of cypress heartwood, grey limestone with moss in it, hunters' herbs and nets and hides. Klymene's upper room is the bright one: whitewash between red posts.
 - **The homes:** Nyktimos's hall of squared logs smoked nearly black; Hippothoos's hut, half of it earth held back by logs, the floor trodden black with charcoal dust; Krotos's daub-and-wattle byre on a footing of field stones, straw on the byre side.
 
+## Render-and-critique passes
+
+Every room had three passes: the pieces and the first composed rooms from source (pass 1), the fixes re-rendered (pass 2), and the rooms in the game with their people, from `tools/ichor/tests/act2_arkrooms.sh` (pass 3).
+
+### Pass 0: the walls and floors, before any room
+
+| Piece | What was wrong | What changed |
+|---|---|---|
+| the black cliff | first as Voronoi facets: it read as stained glass, then as rounded masses: a pile of black eggs | a sheer face split into tall slabs, each lit down its left edge, broken across at its own heights, wet streaks running down with a glint at their heads |
+| slate floor | stones in even courses: a brick floor | two slabs a cell, the joint stepped, one vertical joint per course at a different x, a worn edge under each joint |
+| the hall's dark planks | the wood palette's dark browns with black seams: busy, like brickwork | the floor palette's darkest browns, long planks, low seams, butt joints in only some planks |
+| the outcrop | its beam was a 6 px band over rock, so two 8x8 rows mixed palettes and Porytiles refused it | an 8 px beam band, every tile one palette |
+| charcoal earth | specks everywhere: noise | soft patches where neighbours agree, a few lumps |
+
+### Pass 1: the rooms from source
+
+| Room | What was wrong |
+|---|---|
+| the inn | the lower half empty; the hoof over the door too small to see; the window a dark box; the pots floating |
+| Horkia's | the ledges in the cliff read as lit windows, the cups too small and dark to see; the lower half bare |
+| Kepheus's | read as intended; the lean-to's post stood alone mid-floor like a stick |
+| the Asclepeion | the floor between the channel and the door empty; the pallets small |
+| the Agora | the boughs as separate tiles read as floating bushes; the nets invisible; the lower half empty; the stallkeeper two cells behind her counter, so no one could talk to her |
+| Nyktimos's | the floor (above); the room's ends empty |
+| Klymene's | the track window read as a tent (the track narrowing to a point); the sandals read as beetles |
+| the charcoal hut | the sacks were the yellow of bread; the cot read as a radiator; the middle empty |
+| Krotos's | the fleece bed a white disc |
+
+### Pass 2: fixes, re-rendered
+
+| Room | Change |
+|---|---|
+| the inn | firewood by the hearth, pilgrims' cloaks and a straw hat on pegs by the window, puddles where the cliff weeps onto the slate, a small table and stools by the window, a wool basket; the hoof redrawn twice the size; the window given a strip of sky, mist on the cliff's top, and the falls thinning into mist above the sill |
+| Horkia's | the ledges redrawn as shelves cut in the rock with a lit lip, the cups bigger and lighter, every one with its linen tag hanging over the edge; puddles at the cliff's foot; a bench for the swearers, a basket of linen scraps |
+| Kepheus's | the lone post replaced by a squared post standing in the corner where the lean-to meets the house, on its footing stone |
+| the Asclepeion | a table of clay thank-offerings (an arm, a leg, eyes, a hand), a waiting bench |
+| the Agora | one canopy across the stall, a dark mass thinning into hanging sprays, two nets looped under it; shelves built against both sides of the trunk; a table of furs; the counter redrawn so the stallkeeper stands in it (her cell on the top layer) and is talked to across its front |
+| Nyktimos's | an old bearskin before the hearth, the shelf of cups and jugs, firewood, a lampstand |
+| Klymene's | the window redrawn from above: dusk sky, a row of cypresses, the flat track across the whole view, the stone starting line, a runner; the sandals redrawn as soles hung by their straps; a woven red rug; a runner's strigil and oil flask on a peg |
+| the charcoal hut | the sacking grey-brown with black dust in the weave; the cot with a straw pillow and a dark blanket; a stack of logs waiting for the kiln |
+| Krotos's | the bed redrawn as rough poles under two goatskins, a rolled blanket; milk pails |
+
+### Pass 3: in the game
+
+Read from `build/test_arkrooms/shots/` (a quickstart save, a team with a Gelasable, every room toured with its people, then the services played).
+
+| Room | Finding | Change |
+|---|---|---|
+| all | rooms load and render over oikos as composed; people stand clear of furniture; the follower walks with the player; every name fits the name box (PARTHENOPAIOS is 63 of 64 px) | none |
+| the Asclepeion | the heal plays (the follower is called back, the healer bows: she is `OBJ_EVENT_GFX_ICHOR_HEALER`, the nurse-anim walker); the respawn is set to Arkadia | none |
+| the inn | Alethea at the table's end, Eubouleus and Gryllos (in his basket) by the window, Aroanios by his cup shelf: the room fills; the basket empties once Gryllos is given; on the next visit Alethea is gone | none |
+| the inn, Horkia's | the puddles (pass 2) read as dark holes in the slate | redrawn as a dither of darker stone with two glints, so the floor looks wet, not broken |
+| Kepheus's | the corner post (pass 2) reads as structure; the hidden Everstone is found from the lean-to's floor | none |
+| the Agora | the stallkeeper stands in her counter and is reached across its front; the canopy and its nets read overhead; the shop's script test pressed into BUY and looped | the test fixed: it lets the menu open and leaves it with B |
+| Klymene's | from the stair the camera shows the rug, the table and Parthenopaios; the race's three finishes (over the count, no stair, inside the count) all play | none |
+| the charcoal hut | Arkas sits by the door, out of the smoke; the trade's chooser is the Pithos's screen (`OW_CHOOSE_FROM_PC_AND_PARTY`), so the test walks to YOUR PARTY; after the trade the little bear is gone from the door | none |
+| Krotos's | the kids found turn up in the pen, one per flag | none |
+
+## People and services
+
+| Room | Who | What happens | Flags |
+|---|---|---|---|
+| the inn | Aroanios; Eubouleus and Gryllos; Alethea (first visit) | heal and the rest menu (DAWN / NOON / DUSK / NIGHT, only the hours still ahead); Gryllos the Kaplet, Lv 28, Oran Berry, Take Down / Stomping Tantrum / Amnesia / Rest; show him a Kaprodon for a Balm Mushroom | `FLAG_ICHOR_VISITED_STYX_FALLS` (set by resting), `_GOT_GRYLLOS`, `_GRYLLOS_SHOWN`, `_HIDE_ALETHEA_STYX_FALLS` |
+| Horkia's | Horkia | lore and a Cleanse Tag; after the Moon Laurel, Kallisto's cup | `_GOT_CLEANSE_TAG` |
+| Kepheus's | Kepheus | TM Bulldoze; a hidden Everstone in the lean-to's rubble | `_GOT_TM_BULLDOZE`, `FLAG_ICHOR_HIDDEN_STYX_KEPHEUS_EVERSTONE` (vanilla 0x35E) |
+| the Asclepeion | the healer, Panacoil, a bitten huntress, an old charcoal-burner, the young healer | heal (the shared healer script), the Pithos, the respawn | `HEAL_LOCATION_ARKADIA` |
+| the Agora | the stallkeeper | Part 6's stall: Ultra, Great and Dusk Balls, Hyper and Super Potions, Full Heal, Revive, Super Repel, Escape Rope, Olive Oil, Barley Cake | |
+| Nyktimos's hall | Nyktimos, his mother | heal and the rest menu every visit; the Lykaon story once; Black Glasses after the Moon Laurel | `_NYKTIMOS_STORY`, `_GOT_BLACK_GLASSES` |
+| Klymene's | Klymene, Parthenopaios | the race: the Choice Scarf | `_KLYMENE_STORY`, `_KLYMENE_RACE`, `_KLYMENE_RACE_TURNED`, `_GOT_CHOICE_SCARF` |
+| the charcoal hut | Hippothoos, Arkas | the in-game trade: a Gelasable for ARKAS the Arkoby, holding a Smoke Ball (`INGAME_TRADE_ICHOR_ARKAS`); then the Wolf Mountain's shadowless ground | `_TRADED_ARKOBY` |
+| Krotos's | Krotos; the kids, once home | find his three lost kids in town for the Lucky Egg; each kid found turns up in the pen | `_KROTOS_KID_1`–`_3`, `_GOT_LUCKY_EGG` |
+
+**The race.** YES zeroes `VAR_FRIENDSHIP_STEP_COUNTER`, sets `FLAG_ICHOR_KLYMENE_RACE` and warps the player out of Klymene's door (`MAP_ARKADIA` warp 3). The vanilla friendship counter rises by one on every ordinary step, across maps, wraps at 128 and otherwise only ticks friendship once per 128 steps, so zeroing it costs at most one tick. The first temple step's trigger (on `MAP_ARKADIA`) runs `Arkadia_KlymeneHouse_EventScript_RaceTurn`: over the count there and the race is lost; otherwise it sets `FLAG_ICHOR_KLYMENE_RACE_TURNED`. Coming back in through her door runs the finish (ON_FRAME): within the count wins. The count is SCRIPT.md's 44 on Hero, 50 on Mortal, 40 on Spartan; steps onto a warp or a trigger don't count, so it runs about two short. Tune it on the built town (SCRIPT.md: the best route is 38, the lamp-tree and pasture route 52). Because the counter wraps, a race abandoned and finished 128 or more steps later could read short; the turn's check keeps that to a return leg of ninety-odd steps.
+
+## Stubs and deviations
+
+| Tag | Where | What waits |
+|---|---|---|
+| `ICHOR_STUB_GIFT_NAME` (new) | Gryllos, the inn | no script call sets a gift Pokémon's nickname and OT; SCRIPT.md asks for GRYLLOS, OT EUBOULEUS. Everything else (level, item, moves) is set |
+| `ICHOR_STUB_TMS` | Kepheus's TM Bulldoze | a TM number from Balance; the flag and his lines run now |
+| `ICHOR_STUB_XENIA_REST` | the inn's and Nyktimos's rest menus | the engine's same-day clock move (SYSTEMS.md §10); the menu offers only the hours still ahead, fades, and leaves the clock |
+| `ICHOR_STUB_KEY_ITEMS` | the Split Coin's link 3, Nyktimos | `ITEM_HALF_COIN` and the xenia chain's flag in the engine's xenia range; SCRIPT.md's lines wait in its header |
+| `ICHOR_STUB_DIG` | Klymene's Atalanta potsherd lines | the sherd flags of amphora #9, taken as `FLAG_ICHOR_SHERDS_START` +32..35 (#n at +4(n-1)); confirm when digs land |
+| `ICHOR_STUB_AETHOS_DEX` | Kaplet, Kaprodon, Arkoby, Gelasable, Kerazap, Panacoil | the dex |
+| `ICHOR_STUB_MUSIC` | every room but the Asclepeion and the Agora | Styx Falls's and Arkadia's own cues |
+
+Deviations, closest reading taken:
+- **ARKAS's level** follows the Gelasable given, as every in-game trade does; SCRIPT.md says Lv 32. Her OT is `HIPPOTH`: the OT field holds seven letters.
+- **The Agora's prices** are the items' own: a mart takes each price from the item table, so Part 6's prices are Balance's to set there.
+- **Eubouleus's walker** is `OBJ_EVENT_GFX_ICHOR_SHEPHERD`: Phase 2's swineherd walker isn't in this tree.
+- **Alethea at the inn** shows on the first visit after you've passed the Oath Stone (the heights agent's beat 39 trigger sets `FLAG_ICHOR_SAW_STYX`, which isn't on this branch), and goes once you leave.
+- **Two story flags** (`_NYKTIMOS_STORY`, `_KLYMENE_STORY`, from the second bank) keep the long stories to one telling; SCRIPT.md doesn't ask for them.
+- **Hidden item:** the Everstone in Kepheus's rubble is this agent's addition ("patient water"). 0x35F and 0x362 of the vanilla range are still free; 0x360, 0x361 and 0x363 are vanilla's and in use.
+- The healer's and the Pithos's texts are Akti's shared ones; the Pithos's menu is written out locally because the shared one names Akti's jar.
+
+## For the integrator
+
+- **Doors.** Each room's warp 0 (and 1) leads to `MAP_STYX_FALLS` warps 0–2 or `MAP_ARKADIA` warps 0–5, per BUILD.md; those maps carry no warps on this branch, so `map_audit.py` reports each room's exit as broken until the heights and arkadia agents' maps are merged.
+- **`HEAL_LOCATION_ARKADIA`** is appended to `src/data/heal_locations.json` with a placeholder outdoor tile, (24,6): set it to the tile in front of the Asclepeion's door. Its `respawn_npc` is the healer, `LOCALID_ARKADIA_HEALER`, an `OBJ_EVENT_GFX_ICHOR_HEALER` (the nurse-anim walker, so the bow can't hang).
+- **On `MAP_ARKADIA`** (the arkadia agent's map):
+  - the three lost kids: `OBJ_EVENT_GFX_SPECIES(KERAZAP)` objects behind the Asclepeion's rock, on the temple stair and asleep in Pan's grotto's mouth, hide flags `FLAG_ICHOR_KROTOS_KID_1`, `_2`, `_3`, scripts `Arkadia_GoatherdHouse_EventScript_LostKid1`, `…LostKid2`, `…LostKid3` (in `data/maps/Arkadia_GoatherdHouse/scripts.pory`);
+  - the race's turn: a coord trigger on the first step of the temple stair (both cells, if two wide) running `Arkadia_KlymeneHouse_EventScript_RaceTurn`, on any var the map keeps at 0 (it checks the race flag itself);
+  - then tune the race's three counts in `Arkadia_KlymeneHouse_EventScript_RaceLimit` against the built route.
+- **On `MAP_STYX_FALLS` and the Cave of Maia** (the heights agent's): Maia's Alethea should show once `FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS` is set (this agent claimed it; if heights claimed the same name, keep one).
+- **Eleusa** (world-act1's): Eubouleus's Phase 2 object wants `FLAG_ICHOR_HIDE_EUBOULEUS_ELEUSA` while he's at Styx Falls (open question 5); not claimed here.
+- **Shared files** touched with appended entries only: `src/data/tilesets/{headers,graphics,metatiles}.h` (three secondaries), `data/layouts/layouts.json` (the nine layouts' size and tilesets), `src/data/heal_locations.json`, `include/constants/trade.h` and `src/data/trade.h` (`INGAME_TRADE_ICHOR_ARKAS`), `include/constants/flags.h` (the claims below).
+- **Flags claimed:** bank 0x1EC–0x1F9 (all fourteen: `FLAG_ICHOR_GOT_GRYLLOS`, `_GRYLLOS_SHOWN`, `_HIDE_ALETHEA_STYX_FALLS`, `_GOT_CLEANSE_TAG`, `_GOT_TM_BULLDOZE`, `_GOT_CHOICE_SCARF`, `_KLYMENE_RACE`, `_KLYMENE_RACE_TURNED`, `_KROTOS_KID_1`–`_3`, `_GOT_LUCKY_EGG`, `_GOT_BLACK_GLASSES`, `_TRADED_ARKOBY`); second bank 0x550–0x551 (`_NYKTIMOS_STORY`, `_KLYMENE_STORY`); vanilla 0x35E (`FLAG_ICHOR_HIDDEN_STYX_KEPHEUS_EVERSTONE`).
+
 <!-- arkrooms: begin generated -->
 
 - `gTileset_StyxRooms` (`data/tilesets/secondary/styx_rooms`): **136** metatiles of 512, **404** tiles of 504, palettes 6-12. Sheet: `design/phase3/img/styx_rooms_sheet.png`.
@@ -153,9 +261,9 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
     01234567890123
   0 ##############
   1 ####4#########
-  2 ##.....##.6#.#
+  2 ##.....###6#.#
   3 ##.##..##.....
-  4 ..###2...#.##.
+  4 ..###2.....##.
   5 ##..3......5#.
   6 ##......#....7
   7 ....11..#.....

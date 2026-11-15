@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/styx_rooms/porytiles_bin/metatile_attributes.bin": "ff9b4c91c279364918cae95b1c967444",
-  "data/tilesets/secondary/styx_rooms/porytiles_bin/metatiles.bin": "45e4ffa7f721819adbf9146686846a64",
+  "data/tilesets/secondary/styx_rooms/porytiles_bin/metatile_attributes.bin": "447fb72630c5150b407b13f3c20e14c6",
+  "data/tilesets/secondary/styx_rooms/porytiles_bin/metatiles.bin": "0cf190e1093696f62d2b213b14aac48f",
   "data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/styx_rooms/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/styx_rooms/porytiles_bin/tiles.png": "c17faa08d53189a930499b805f37a199",
+  "data/tilesets/secondary/styx_rooms/porytiles_bin/tiles.png": "9753bc1ec1904bda6bf6841470399fd7",
   "data/tilesets/secondary/styx_rooms/porytiles_src/attributes.csv": "eafe5e51bacb957ae58d8732aeaec14f",
-  "data/tilesets/secondary/styx_rooms/porytiles_src/bottom.png": "f568cb67ff3318057c46c3190ab9cf6b",
-  "data/tilesets/secondary/styx_rooms/porytiles_src/middle.png": "e639a6430576782f96c51c9521724655",
-  "data/tilesets/secondary/styx_rooms/porytiles_src/top.png": "3eb31bc74626eb84997ffe619a0ac63c"
+  "data/tilesets/secondary/styx_rooms/porytiles_src/bottom.png": "f3bbe8dff8c65a4777a4b951934265ee",
+  "data/tilesets/secondary/styx_rooms/porytiles_src/middle.png": "7a3e916364a3a3e1b488cdeafade928f",
+  "data/tilesets/secondary/styx_rooms/porytiles_src/top.png": "fd28152ac604b937869c194663244452"
 }

@@ -38,7 +38,7 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
   awk '/^k_[A-Za-z0-9_]+:/ { n = substr($1, 3, length($1) - 3); next }
        n && /\.word/  { print "  " n " = " $2 ","; n = "" }
        n && /\.space/ { print "  " n " = 0,"; n = "" }' "${OUT}consts.s"
-  arm-none-eabi-nm "$ELF" | awk '$3 == "gSaveBlock3Ptr" || $3 == "Scrcmd_checkspecies" || $3 == "gPartiesCount" \
+  arm-none-eabi-nm "$ELF" | awk '$3 == "gSaveBlock3Ptr" || $3 == "Scrcmd_checkspecies" || $3 == "gPartiesCount" || $3 == "CB2_PokeStorage" \
     { print "  " $3 " = 0x" $1 "," }'
   echo "  SCRIPTS = {"
   arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(StyxFalls|Arkadia)_[A-Za-z]+_EventScript_[A-Za-z0-9_]+$/ && $3 !~ /_[0-9]+$/ \

@@ -361,8 +361,9 @@ def _puddle(seed):
             r = ((x - 7.5) / (6.5 + seed)) ** 2 + ((y - 7 - seed) / 3.5) ** 2
             r += 0.25 * math.sin(x * 0.9 + seed)
             if r < 1.0:
-                # wet slate: just darker stone, a sheen of the cliff's blue in it
-                c.put(x, y, "6" if r > 0.5 else ("e" if (x + y) % 3 else "3"))
+                # wet slate: the stone darkened by a dither, not a hole
+                if r > 0.55 or (x + y) % 2 == 0:
+                    c.put(x, y, "6")
     c.put(5, 6 + seed, "4")
     c.put(6, 6 + seed, "5")
     c.put(10, 8 + seed, "4")
@@ -690,3 +691,23 @@ def _post():
 _m, _t = _post()
 stamp("lean_post", 1, 2, art=[("wood", _m)], top=[("wood", _t)], walk={(0, 0)},
       note="a timber post holding up the lean-to's roof")
+
+
+def _corner_post():
+    """1x2: the squared post where the lean-to meets the house, standing in the
+    wall's corner (upper cell over the wall, lower on the floor), on a stone."""
+    c = Canvas(16, 32)
+    for y in range(0, 28):
+        for (x, col) in ((4, "k"), (5, "h"), (6, "l"), (7, "l"), (8, "m"), (9, "m"), (10, "d"), (11, "k")):
+            c.put(x, y, col)
+        if y % 9 == 4:
+            c.put(8, y, "d")
+    c.hline(4, 11, 0, "k")
+    c.box(2, 27, 13, 31, "C")
+    c.hline(3, 12, 28, "c")
+    c.hline(2, 13, 31, "k")
+    return c
+
+
+stamp("corner_post", 1, 2, art=[("wood", _corner_post())],
+      note="the squared post where the lean-to meets the house, on its footing stone")

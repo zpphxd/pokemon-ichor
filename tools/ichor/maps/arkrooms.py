@@ -170,7 +170,7 @@ ROOMS = {
         "stamps": [("soot", 0, 0), ("hearth", 0, 2), ("window", 6, 0), ("holed_stone", 4, 0),
                    ("kline", 7, 2), ("cirque_model", 3, 3), ("stool", 2, 4), ("chest", 0, 5),
                    ("crowbars", 10, 1), ("mattocks", 11, 1), ("rubble", 13, 2),
-                   ("lean_post", 9, 3), ("sledge", 11, 4), ("rubble", 13, 6), ("amphora_plain", 8, 6), ("threshold", 4, 7)],
+                   ("corner_post", 9, 1), ("sledge", 11, 4), ("rubble", 13, 6), ("amphora_plain", 8, 6), ("threshold", 4, 7)],
         "spots": [
             warp([(4, 7), (5, 7)], "MAP_STYX_FALLS", 2),
             npc("Kepheus, at his model", (5, 4), "west", G + "MAN",
