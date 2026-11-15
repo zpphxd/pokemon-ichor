@@ -9410,7 +9410,7 @@ No NPCs but the scene's (Part 1). The Loom, after the climax, belongs to the pos
 
 In the Frozen Hour no one can speak but the Fates, Phaedon, Hyperion and, at the end, Kleon. A "roster" here is what each frozen person or thing says when the player looks at it: a narrator's box or two, in STORY's tone. Every box marked *(added)* is this file's; the rest are §7.7's tables, reproduced in P1.
 
-**The generic rule.** Any object on any map that has no frozen-specific line answers with one of these, chosen by the object's local id modulo 3 (`Ichor_EventScript_FrozenGeneric`, P5):
+**The generic rule.** Any object on any map that has no frozen-specific line answers with one of these, chosen by the object's local id modulo 3 (`EventScript_IchorFrozenGeneric`, ichor-engine's, ENGINE_API §5; the engine routes any frozen object's talk there unless the map calls `special(Ichor_FrozenScriptsHere)` in its ON_TRANSITION, in which case each object's own script checks `FLAG_ICHOR_FROZEN_HOUR` first):
 - "They don't move. They don't blink."
 - "Frozen mid-step, one foot off the ground."
 - "Caught halfway through a word."
@@ -16681,7 +16681,7 @@ The Loom map's construction is Part 1's III-9 staging and Part 10's tileset list
 | Frozen-only objects | Every map's Frozen Hour objects (the Fates, Phaedon in Elpis's room, the posed people at Delphoi, the cloak) use the hide flag `FLAG_ICHOR_HIDE_FROZEN_ONLY`. It is set on a new game, cleared at the Loom, and set again on the twelfth chime. |
 | Objects hidden during the hour | Ordinary objects that must not be in a frozen scene (for example Delphoi's daytime Titan muster, which the court's posed objects replace) use their map's own hide flags, set at the Loom and cleared at dawn. |
 | Unfrozen objects | E3, by the `ichor_unfrozen` field on the object or by `special Ichor_UnfreezeObject`: the Fates, Phaedon, Hyperion, Kleon after he wakes, the music box, the shadowless figure, the Lord of Time, the Moment, the falling Harpe |
-| Talking to frozen people | E1 routes any frozen object's talk to its map's frozen script if it has one (P1 and P2's tables), else to `Ichor_EventScript_FrozenGeneric` (P2's three lines). |
+| Talking to frozen people | E1 routes any frozen object's talk to its map's frozen script if it has one (P1 and P2's tables), else to `EventScript_IchorFrozenGeneric` (P2's three lines). |
 | Herms | E12: `Ichor_EventScript_FrozenHerm` swaps every anointed great herm's head on map load and answers its talk |
 | The heal and whiteout point | The Omphalos court in Delphoi, from the Loom until dawn. There are no fights before the Stair, so it matters only there, where the Fates' sparks heal instead (below). |
 | The Pithos | Works. "The Pithos still opens. Jars don't need time." (on the first use in the hour) |
@@ -18948,7 +18948,7 @@ Each region's questions, in story order. The ones that need the director or the 
 81. Frozen Hour: Phaedon's trainer class is written "Kronos" (battle intro "KRONOS PHAEDON"). Alternatives: TITAN MASTER, or HEALER.
 82. Frozen Hour: Kleon follows as an NPC follower (`setfollowernpc`, which exists behind `FNPC_ENABLE_NPC_FOLLOWERS`) if that config is on; otherwise he waits on landings.
 83. Frozen Hour: the crumble keeps the twelve landings hanging as hour-stones, so STORY's "the Harpe strikes the eleventh landing … a chime on every landing below" still has landings to strike after the steps fall.
-84. Frozen Hour: E1 needs a default talk route for frozen objects (`Ichor_EventScript_FrozenGeneric`) and a way to exempt one palette slot per map (the Pool's ripple, Elaia's gold thread); both are small additions to E1.
+84. Frozen Hour: E1 needs a default talk route for frozen objects (`EventScript_IchorFrozenGeneric`) and a way to exempt one palette slot per map (the Pool's ripple, Elaia's gold thread); both are small additions to E1.
 85. Frozen Hour: Elpis's room, the Stoa, the Pool and the forge are Act II's maps; their frozen objects and frozen scripts need adding to those maps' scripts, so Act II's builder and this session share them.
 86. Frozen Hour: `FLAG_ICHOR_HIDE_FROZEN_ONLY` and the three Fates' hide flags must be set on a new game; that needs a line in the new-game flag setup.
 87. Frozen Hour: the four-voice music box tracks (`MUS_ICHOR_ELPIS_LULLABY_BOX_DRUM`, `_AULOS`, `_LYRE`, `_FATES`) are added cues beyond 00_front's list, unless the music engine can layer `MUS_ICHOR_FATES` over the box.
