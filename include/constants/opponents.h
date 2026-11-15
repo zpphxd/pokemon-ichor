@@ -56,7 +56,8 @@
 // Kythera and Melos, ids 320-347 (Part 3, "Kythera's trainers"): the Euploia's
 // voyage, Melos, Route 22, Skandeia, the Foam Road, the spring and Echo's caves,
 // the Temple of Aphrodite, the Neraida falls, Route 23 and Antikythera.
-// Knossa continues at 348.
+// The sea routes' extra swimmers, divers and sailors (MAP_DESIGN.md §8.2's
+// sea-route minimum) follow at 348-358. Knossa continues at 359.
 #define TRAINER_ICHOR_EUDOROS                 320
 #define TRAINER_ICHOR_KERDON                  321
 #define TRAINER_ICHOR_KIMOLOS                 322
@@ -85,8 +86,19 @@
 #define TRAINER_ICHOR_BATHYLLOS               345
 #define TRAINER_ICHOR_EUTHYKLES               346
 #define TRAINER_ICHOR_MYRSINE                 347
+#define TRAINER_ICHOR_AKTAIOS                 348
+#define TRAINER_ICHOR_NERINE                  349
+#define TRAINER_ICHOR_PHORBAS                 350
+#define TRAINER_ICHOR_LAMPROS                 351
+#define TRAINER_ICHOR_PSAMATHE                352
+#define TRAINER_ICHOR_PELAGON                 353
+#define TRAINER_ICHOR_KLEITOS                 354
+#define TRAINER_ICHOR_DOROS                   355
+#define TRAINER_ICHOR_AKAMAS                  356
+#define TRAINER_ICHOR_EIONE                   357
+#define TRAINER_ICHOR_NAUPLIOS                358
 
-#define TRAINERS_END_ACT3                     348
+#define TRAINERS_END_ACT3                     359
 
 // The post-game, ids 500-679: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
 #define TRAINERS_END_POSTGAME                 0

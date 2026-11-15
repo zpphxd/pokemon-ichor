@@ -166,8 +166,26 @@ script Melos_EventScript_Statue {
         setflag(FLAG_ICHOR_MELOS_RITE)
         setspeaker(Melos_Text_NameKentrios)
         msgbox(format("Ha. She liked that. I can tell. She's facing the sea again."))
+        closemessage
+        msgbox(format("Something glints at the foot of the niche."))
     }
     release
+}
+
+// The niche's foot, beside the goddess (west of her): a Heart Scale that shows
+// only after the rite (SCRIPT.md Part 2, Melos's hidden items). A scripted
+// find rather than a hidden_item event, so it can wait for the rite.
+script Melos_EventScript_NicheFoot {
+    if (!flag(FLAG_ICHOR_MELOS_RITE) || flag(FLAG_ICHOR_HIDDEN_MELOS_HEART_SCALE)) {
+        end
+    }
+    lockall
+    msgbox(format("Something glints at the foot of the niche, where the offering lay."))
+    giveitem(ITEM_HEART_SCALE)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_HIDDEN_MELOS_HEART_SCALE)
+    }
+    releaseall
 }
 
 script Melos_EventScript_Mirror {

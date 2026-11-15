@@ -5,8 +5,8 @@
 // TODO(act3, Knossa): the east edge is open water where the lane goes on along
 // Knossa's coast to Amnisos (Open questions 16); its 8 columns nearest the seam
 // are aethos-only, ready for the Knossa writer's eastern map.
-// Hidden item (not placed: hidden items need vanilla flags not yet available):
-// a Star Piece in the wreck's ribs (45-47,34-35).
+// Hidden items: a Star Piece in the wreck's ribs (47,34); a Pearl at the tip
+// of Bathyllos's sandbar (16,6).
 // Music: MUS_ICHOR_FOAM_ROAD isn't written yet; Act I's road theme stands in.
 
 mapscripts Route23_CretanSea_MapScripts {}
@@ -29,6 +29,24 @@ script Route23_CretanSea_EventScript_Myrsine {
     msgbox(Kythera_Text_MyrsineAfter, MSGBOX_AUTOCLOSE)
 }
 
+script Route23_CretanSea_EventScript_Akamas {
+    trainerbattle_single(TRAINER_ICHOR_AKAMAS, Kythera_Text_AkamasIntro, Kythera_Text_AkamasDefeat)
+    setspeaker(Kythera_Text_SpeakerAkamas)
+    msgbox(Kythera_Text_AkamasAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route23_CretanSea_EventScript_Eione {
+    trainerbattle_single(TRAINER_ICHOR_EIONE, Kythera_Text_EioneIntro, Kythera_Text_EioneDefeat)
+    setspeaker(Kythera_Text_SpeakerEione)
+    msgbox(Kythera_Text_EioneAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route23_CretanSea_EventScript_Nauplios {
+    trainerbattle_single(TRAINER_ICHOR_NAUPLIOS, Kythera_Text_NaupliosIntro, Kythera_Text_NaupliosDefeat)
+    setspeaker(Kythera_Text_SpeakerNauplios)
+    msgbox(Kythera_Text_NaupliosAfter, MSGBOX_AUTOCLOSE)
+}
+
 script Route23_CretanSea_EventScript_Wreck {
     msgbox(format("The ribs of an old ship, sticking out of the reef like a fish's bones.\p"
                   "Somebody's ship. Somebody's cargo. Somebody's very bad afternoon."), MSGBOX_SIGN)
@@ -46,6 +64,11 @@ script Route23_CretanSea_EventScript_GearBox {
                   "The sea got into it. It's stopped."))
     setflag(FLAG_ICHOR_SAW_GEAR_BOX)
     release
+}
+
+script Route23_CretanSea_EventScript_SignAntikythera {
+    msgbox(format("ANTIKYTHERA. Kythera's little sister, the sailors call her.\p"
+                  "Mind the reef. It's had a ship already."), MSGBOX_SIGN)
 }
 
 script Route23_CretanSea_EventScript_SignSkandeia {

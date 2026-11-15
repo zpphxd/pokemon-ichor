@@ -2,8 +2,8 @@
 // Cape Malea's gray cliffs; optional, by Surf (design/phase4/SCRIPT.md Part 2).
 // The story crosses it on the Euploia's deck. Layout: tools/ichor/maps/kythera_seas.py.
 //
-// Hidden item (not placed: hidden items need vanilla flags not yet available):
-// a Big Pearl at the foot of Hagne's sunken column (55,25).
+// Hidden items: a Big Pearl at Hagne's sunken column (55,25), in the drowned
+// temple; a Heart Scale under the rock on Myrtilos's islet (15,22).
 // Music: MUS_ICHOR_FOAM_ROAD isn't written yet; Act I's road theme stands in.
 
 mapscripts Route22_MyrtoanSea_MapScripts {}
@@ -20,6 +20,30 @@ script Route22_MyrtoanSea_EventScript_Hagne {
     msgbox(Kythera_Text_HagneAfter, MSGBOX_AUTOCLOSE)
 }
 
+script Route22_MyrtoanSea_EventScript_Psamathe {
+    trainerbattle_single(TRAINER_ICHOR_PSAMATHE, Kythera_Text_PsamatheIntro, Kythera_Text_PsamatheDefeat)
+    setspeaker(Kythera_Text_SpeakerPsamathe)
+    msgbox(Kythera_Text_PsamatheAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_MyrtoanSea_EventScript_Pelagon {
+    trainerbattle_single(TRAINER_ICHOR_PELAGON, Kythera_Text_PelagonIntro, Kythera_Text_PelagonDefeat)
+    setspeaker(Kythera_Text_SpeakerPelagon)
+    msgbox(Kythera_Text_PelagonAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_MyrtoanSea_EventScript_Kleitos {
+    trainerbattle_single(TRAINER_ICHOR_KLEITOS, Kythera_Text_KleitosIntro, Kythera_Text_KleitosDefeat)
+    setspeaker(Kythera_Text_SpeakerKleitos)
+    msgbox(Kythera_Text_KleitosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_MyrtoanSea_EventScript_Doros {
+    trainerbattle_single(TRAINER_ICHOR_DOROS, Kythera_Text_DorosIntro, Kythera_Text_DorosDefeat)
+    setspeaker(Kythera_Text_SpeakerDoros)
+    msgbox(Kythera_Text_DorosAfter, MSGBOX_AUTOCLOSE)
+}
+
 script Route22_MyrtoanSea_EventScript_SignMalea {
     msgbox(format("CAPE MALEA. Round it and forget your home, the sailors say.\p"
                   "Someone has scratched underneath: NOT TRUE. I REMEMBERED. MOSTLY."), MSGBOX_SIGN)
@@ -27,6 +51,16 @@ script Route22_MyrtoanSea_EventScript_SignMalea {
 
 script Route22_MyrtoanSea_EventScript_SignMelos {
     msgbox(format("ROUTE 22\pEast: Melos. West: Kythera."), MSGBOX_SIGN)
+}
+
+script Route22_MyrtoanSea_EventScript_SignSkandeia {
+    msgbox(format("ROUTE 22\pWest: Skandeia, Kythera's harbor. East: Melos."), MSGBOX_SIGN)
+}
+
+// Myrtilos's islet: the charioteer Pelops threw into this sea, who gave it his name.
+script Route22_MyrtoanSea_EventScript_Grave {
+    msgbox(format("MYRTILOS. He drove the winning chariot. The winner threw him in the sea.\p"
+                  "The sea kept him, and took his name."), MSGBOX_SIGN)
 }
 
 script Route22_MyrtoanSea_EventScript_SunkenColumn {

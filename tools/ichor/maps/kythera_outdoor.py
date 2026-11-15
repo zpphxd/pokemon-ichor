@@ -457,7 +457,14 @@ def trigger(x, y, script, var="VAR_TEMP_0", value=0, elevation=3):
 
 
 def sign(x, y, script, facing="any"):
-    return {"x": x, "y": y, "script": script, "facing": facing}
+    return {"type": "sign", "x": x, "y": y, "script": script, "facing": facing}
+
+
+def hidden(x, y, item, flag):
+    """A hidden item. Elevation 0, so it answers from land or from the sea
+    (a surfer's elevation is the water's). Its flag must be a vanilla flag at
+    or above FLAG_HIDDEN_ITEMS_START (tools/ichor/claim_ranges.md)."""
+    return {"type": "hidden_item", "x": x, "y": y, "item": item, "flag": flag, "facing": "any"}
 
 
 class Spec:
@@ -497,6 +504,14 @@ def encode(g):
 
 def write_json(path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+
+
+def bg_json(b):
+    if b.get("type") == "hidden_item":
+        return {"type": "hidden_item", "x": b["x"], "y": b["y"], "elevation": 0,
+                "item": b["item"], "flag": b["flag"]}
+    return {"type": "sign", "x": b["x"], "y": b["y"], "elevation": 0,
+            "player_facing_dir": FACING[b["facing"]], "script": b["script"]}
 
 
 def emit(spec):
@@ -547,8 +562,7 @@ def emit(spec):
         "coord_events": [{"type": "trigger", "x": c["x"], "y": c["y"], "elevation": c["elevation"],
                           "var": c["var"], "var_value": str(c["value"]), "script": c["script"]}
                          for c in spec.coords],
-        "bg_events": [{"type": "sign", "x": b["x"], "y": b["y"], "elevation": 0,
-                       "player_facing_dir": FACING[b["facing"]], "script": b["script"]} for b in spec.bgs],
+        "bg_events": [bg_json(b) for b in spec.bgs],
     }
     write_json(ROOT / "data/maps" / spec.name / "map.json", data)
     return blocks
@@ -605,12 +619,21 @@ def check(spec, blocks):
     for c in spec.coords:
         if (c["x"], c["y"]) not in reach:
             errors.append(f"{spec.name}: trigger at ({c['x']},{c['y']}) is unreachable")
+    seen_bg = {}
+    taken = {(o["x"], o["y"]) for o in spec.objects}
     for b in spec.bgs:
         x, y = b["x"], b["y"]
         fronts = {"north": [(x, y + 1)], "south": [(x, y - 1)], "east": [(x - 1, y)], "west": [(x + 1, y)]}
-        cand = fronts.get(b["facing"], [(x, y + 1), (x, y - 1), (x - 1, y), (x + 1, y), (x, y)])
+        cand = fronts.get(b["facing"], [(x, y + 1), (x, y - 1), (x - 1, y), (x + 1, y)]
+                          + ([] if b.get("type") == "hidden_item" else [(x, y)]))
         if not any(p in reach for p in cand):
             errors.append(f"{spec.name}: bg event at ({x},{y}) can't be read")
+        # the first bg event on a cell wins, and a taken hidden item answers nothing
+        if (x, y) in seen_bg:
+            errors.append(f"{spec.name}: two bg events share ({x},{y})")
+        seen_bg[(x, y)] = b
+        if b.get("type") == "hidden_item" and (x, y) in taken:
+            errors.append(f"{spec.name}: hidden item at ({x},{y}) is under an object")
     mids = blocks & 0x3FF
     for side, width in spec.seams.items():
         if side == "west":
@@ -716,8 +739,9 @@ def overlay(im, spec, blocks):
     for t in spec.coords:
         d.rectangle([t["x"] * c + 5, t["y"] * c + 5, t["x"] * c + c - 6, t["y"] * c + c - 6], fill=(255, 0, 255, 170))
     for b in spec.bgs:
-        d.line([b["x"] * c + 3, b["y"] * c + 3, b["x"] * c + c - 4, b["y"] * c + c - 4], fill=(255, 255, 255, 255), width=2)
-        d.line([b["x"] * c + c - 4, b["y"] * c + 3, b["x"] * c + 3, b["y"] * c + c - 4], fill=(255, 255, 255, 255), width=2)
+        col = (0, 230, 120, 255) if b.get("type") == "hidden_item" else (255, 255, 255, 255)
+        d.line([b["x"] * c + 3, b["y"] * c + 3, b["x"] * c + c - 4, b["y"] * c + c - 4], fill=col, width=2)
+        d.line([b["x"] * c + c - 4, b["y"] * c + 3, b["x"] * c + 3, b["y"] * c + c - 4], fill=col, width=2)
     for x in range(0, out.size[0], c * 5):
         d.line([x, 0, x, out.size[1]], fill=(255, 255, 255, 40))
     for y in range(0, out.size[1], c * 5):

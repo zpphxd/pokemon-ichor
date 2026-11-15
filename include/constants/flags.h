@@ -1008,17 +1008,17 @@
 #define FLAG_UNUSED_0x3BD                                           0x3BD // Unused Flag
 #define FLAG_UNUSED_0x3BE                                           0x3BE // Unused Flag
 #define FLAG_UNUSED_0x3BF                                           0x3BF // Unused Flag
-#define FLAG_UNUSED_0x3C0                                           0x3C0 // Unused Flag
-#define FLAG_UNUSED_0x3C1                                           0x3C1 // Unused Flag
-#define FLAG_UNUSED_0x3C2                                           0x3C2 // Unused Flag
-#define FLAG_UNUSED_0x3C3                                           0x3C3 // Unused Flag
-#define FLAG_UNUSED_0x3C4                                           0x3C4 // Unused Flag
-#define FLAG_UNUSED_0x3C5                                           0x3C5 // Unused Flag
-#define FLAG_UNUSED_0x3C6                                           0x3C6 // Unused Flag
-#define FLAG_UNUSED_0x3C7                                           0x3C7 // Unused Flag
-#define FLAG_UNUSED_0x3C8                                           0x3C8 // Unused Flag
-#define FLAG_UNUSED_0x3C9                                           0x3C9 // Unused Flag
-#define FLAG_UNUSED_0x3CA                                           0x3CA // Unused Flag
+#define FLAG_ICHOR_HIDDEN_MELOS_ULTRA_BALL                          0x3C0 // Ichor: Melos hidden item: Ultra Ball under the jetty's last stone
+#define FLAG_ICHOR_HIDDEN_MELOS_PEARL                               0x3C1 // Ichor: Melos hidden item: Pearl in the pumice hollow, reached by sea
+#define FLAG_ICHOR_HIDDEN_MELOS_HEART_SCALE                         0x3C2 // Ichor: Melos: the Heart Scale at the foot of the niche, after the rite (scripted, so it waits for the rite)
+#define FLAG_ICHOR_HIDDEN_ROUTE22_STARDUST                          0x3C3 // Ichor: Route 22 hidden item: Stardust in the roots of Anydros's dead fig
+#define FLAG_ICHOR_HIDDEN_ROUTE22_ELIXIR                            0x3C4 // Ichor: Route 22 hidden item: Elixir under Polyaigos's beach boulder
+#define FLAG_ICHOR_HIDDEN_ROUTE22_BIG_PEARL                         0x3C5 // Ichor: Route 22 hidden item: Big Pearl at Hagne's column in the drowned temple
+#define FLAG_ICHOR_HIDDEN_ROUTE22_HEART_SCALE                       0x3C6 // Ichor: Route 22 hidden item: Heart Scale under the rock on Myrtilos's islet
+#define FLAG_ICHOR_HIDDEN_SKANDEIA_BIG_PEARL                        0x3C7 // Ichor: Skandeia hidden item: Big Pearl in the harbor shrine's niche, among the shells
+#define FLAG_ICHOR_HIDDEN_SKANDEIA_HEART_SCALE                      0x3C8 // Ichor: Skandeia hidden item: Heart Scale at the north slip's end
+#define FLAG_ICHOR_HIDDEN_ROUTE23_STAR_PIECE                        0x3C9 // Ichor: Route 23 hidden item: Star Piece in the wreck's ribs
+#define FLAG_ICHOR_HIDDEN_ROUTE23_PEARL                             0x3CA // Ichor: Route 23 hidden item: Pearl at the tip of Bathyllos's sandbar
 #define FLAG_UNUSED_0x3CB                                           0x3CB // Unused Flag
 #define FLAG_UNUSED_0x3CC                                           0x3CC // Unused Flag
 #define FLAG_UNUSED_0x3CD                                           0x3CD // Unused Flag
@@ -1772,6 +1772,17 @@
 #define FLAG_ICHOR_ITEM_MELOS_STAR_PIECE        (FLAG_ICHOR_GENERAL_START + 0x224) // Ichor: Act III item ball: Melos's Star Piece on the pumice cliffs' lip
 #define FLAG_ICHOR_ITEM_ROUTE22_MAX_ETHER       (FLAG_ICHOR_GENERAL_START + 0x225) // Ichor: Act III item ball: Route 22's Max Ether on Anydros's ledge
 #define FLAG_ICHOR_ITEM_ROUTE23_BIG_PEARL       (FLAG_ICHOR_GENERAL_START + 0x226) // Ichor: Act III item ball: Route 23's Big Pearl on Antikythera's beach
+#define FLAG_ICHOR_ITEM_MELOS_BLACK_GLASSES     (FLAG_ICHOR_GENERAL_START + 0x227) // Ichor: Act III item ball: Melos's Black Glasses at the obsidian slope's east end, past Theion
+#define FLAG_ICHOR_ITEM_MELOS_REVIVE            (FLAG_ICHOR_GENERAL_START + 0x228) // Ichor: Act III item ball: Melos's Revive in the wild grass under wall B's east step
+#define FLAG_ICHOR_ITEM_ROUTE22_NET_BALL        (FLAG_ICHOR_GENERAL_START + 0x229) // Ichor: Act III item ball: Route 22's Net Ball under Polyaigos's pine, in the grass
+#define FLAG_ICHOR_ITEM_ROUTE22_MYSTIC_WATER    (FLAG_ICHOR_GENERAL_START + 0x22A) // Ichor: Act III item ball: Route 22's Mystic Water in the clearing on Melos's east cape
+#define FLAG_ICHOR_ITEM_ROUTE22_HYPER_POTION    (FLAG_ICHOR_GENERAL_START + 0x22B) // Ichor: Act III item ball: Route 22's Hyper Potion on the sandbar off Kaldera
+#define FLAG_ICHOR_ITEM_ROUTE22_PP_UP           (FLAG_ICHOR_GENERAL_START + 0x22C) // Ichor: Act III item ball: Route 22's PP Up behind Myrtilos's grave
+#define FLAG_ICHOR_ITEM_ROUTE22_DIVE_BALL       (FLAG_ICHOR_GENERAL_START + 0x22D) // Ichor: Act III item ball: Route 22's Dive Ball on the shingle bank where Malea's cliffs end
+#define FLAG_ICHOR_ITEM_ROUTE22_FULL_HEAL       (FLAG_ICHOR_GENERAL_START + 0x22E) // Ichor: Act III item ball: Route 22's Full Heal on the Myrtoan sandbar
+#define FLAG_ICHOR_ITEM_SKANDEIA_SEA_INCENSE    (FLAG_ICHOR_GENERAL_START + 0x22F) // Ichor: Act III item ball: Skandeia's Sea Incense at the pocket beach's end
+#define FLAG_ICHOR_ITEM_ROUTE23_ULTRA_BALL      (FLAG_ICHOR_GENERAL_START + 0x230) // Ichor: Act III item ball: Route 23's Ultra Ball on the second sandbar
+#define FLAG_ICHOR_ITEM_ROUTE23_HP_UP           (FLAG_ICHOR_GENERAL_START + 0x231) // Ichor: Act III item ball: Route 23's HP Up behind Antikythera's grass
 #define FLAG_ICHOR_HIDE_ALETHEA_FOAM_ROAD       (FLAG_ICHOR_GENERAL_START + 0x240) // Ichor: Foam Road: hides Alethea at Aphrodite's rock once her scene is done (beat III-1D)
 #define FLAG_ICHOR_HIDE_KASSITEROS              (FLAG_ICHOR_GENERAL_START + 0x241) // Ichor: Foam Road: hides Kassiteros after Knossa (VAR_ICHOR_ACT3 >= 6)
 #define FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD     (FLAG_ICHOR_GENERAL_START + 0x242) // Ichor: Foam Road: hides Hermes the messenger at the great herm (theoxenia E1; move to the theoxenia range with ichor-engine)

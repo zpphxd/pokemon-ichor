@@ -951,6 +951,199 @@ Aphrogene
 Level: 44
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
+/*
+The sea routes' swimmers, divers and sailors (ids 348-358), from SCRIPT.md
+Part 3's Route 22 and Route 23 sections: the route standard's sea minimum.
+*/
+
+=== TRAINER_ICHOR_AKTAIOS ===
+Name: AKTAIOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_NERINE ===
+Name: NERINE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PHORBAS ===
+Name: PHORBAS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_LAMPROS ===
+Name: LAMPROS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PSAMATHE ===
+Name: PSAMATHE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PELAGON ===
+Name: PELAGON
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KLEITOS ===
+Name: KLEITOS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_DOROS ===
+Name: DOROS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_AKAMAS ===
+Name: AKAMAS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_EIONE ===
+Name: EIONE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrogene
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_NAUPLIOS ===
+Name: NAUPLIOS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Narkeray
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kynoketos
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
 
 /* Ichor: the post-game (ids 500-679) */
 
