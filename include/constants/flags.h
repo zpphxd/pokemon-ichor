@@ -1729,7 +1729,6 @@
 #define FLAG_ICHOR_HIDE_KLEON_KRONIA            (FLAG_ICHOR_GENERAL_START + 0x123) // Ichor: Act II: hide Kleon at the Kronia's tables (beat 29)
 #define FLAG_ICHOR_HIDE_ALETHEA_KRONIA          (FLAG_ICHOR_GENERAL_START + 0x124) // Ichor: Act II: hide Alethea at the Kronia's tables (beat 29)
 #define FLAG_ICHOR_GYPSOS_WENT_HOME             (FLAG_ICHOR_GENERAL_START + 0x125) // Ichor: Act II: Gypsos read tablet 3 and went home to Eudora's house
-#define FLAG_ICHOR_PROPHECY_3_READ              (FLAG_ICHOR_GENERAL_START + 0x126) // Ichor: Act II: Alethea has read prophecy tablet 3 (Gypsos's homecoming needs it)
 #define FLAG_ICHOR_ITEM_ROUTE7_FULL_HEAL        (FLAG_ICHOR_GENERAL_START + 0x127) // Ichor: Act II: item ball: Route 7 Full Heal at a switchback's dead end
 #define FLAG_ICHOR_ITEM_ROUTE7_BIG_PEARL        (FLAG_ICHOR_GENERAL_START + 0x128) // Ichor: Act II: item ball: Route 7 Big Pearl on the Asopos's reed islet (the Conch)
 #define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL_START + 0x130) // Ichor: Act II: met Manto the augur on the Kadmeia wall (beat 30); her house opens
@@ -1758,7 +1757,6 @@
 #define FLAG_ICHOR_TRADED_PROSOMIME             (FLAG_ICHOR_GENERAL_START + 0x14B) // Ichor: Act II rooms: traded Euthykles a Gelasable for PATHOS the Prosomime
 #define FLAG_ICHOR_GARLAND_LAID                 (FLAG_ICHOR_GENERAL_START + 0x14C) // Ichor: Act II (cross-map; set by the Temple of Dionysus's wooden image): laid Oinoe's garland
 #define FLAG_ICHOR_SAW_CROWS                    (FLAG_ICHOR_GENERAL_START + 0x14D) // Ichor: Act II (cross-map; set by Thyrsa City's crows at the Elektran Gate): saw which way they flew
-#define FLAG_ICHOR_GYPSOS_WENT_HOME             (FLAG_ICHOR_GENERAL_START + 0x14F) // Ichor: Act II (cross-map; set at the Kronia, Route 7): Gypsos went home to his mother as Hippias
 #define FLAG_ICHOR_MET_LASOS                    (FLAG_ICHOR_GENERAL_START + 0x150) // Ichor: Act II: Lasos welcomed the player to the Temple of Dionysus (beat 31)
 #define FLAG_ICHOR_GOT_TM_TOXIC                 (FLAG_ICHOR_GENERAL_START + 0x151) // Ichor: Act II: Thespis gave TM06 Toxic with the Mask Laurel (beat 31)
 // Ichor bank flags: end
