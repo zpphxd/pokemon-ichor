@@ -9778,8 +9778,8 @@
     {
       "id": "LAYOUT_KYTHERA_SPRING_OF_KALLIRHOE",
       "name": "KytheraSpringOfKallirhoe_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 26,
+      "height": 22,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Kythera",
       "border_filepath": "data/layouts/KytheraSpringOfKallirhoe/border.bin",
@@ -9811,8 +9811,8 @@
     {
       "id": "LAYOUT_KYTHERA_ECHO_CAVES",
       "name": "KytheraEchoCaves_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 32,
+      "height": 26,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Melos",
       "border_filepath": "data/layouts/KytheraEchoCaves/border.bin",

@@ -1,1 +1,103 @@
+// Echo's sea caves (design/phase4/SCRIPT.md Part 2 and Part 5): under the
+// Spring of Kallirhoe, where the spring runs down to the sea. Optional.
+// Layout and events: tools/ichor/maps/kythera_echo_caves.py.
+//
+// The echo: on this map every person's box is followed by a short, quieter box
+// repeating its last words ("VOICE: …last words."). Echo is never seen.
+//   - the Speaking Hall teaches it, lit by the crack in the roof: Kalamis fishes
+//     its pool, and the Echo in the wall answers when called;
+//   - the dark gallery tests it: Kolymbos waits by the lamp where it narrows;
+//   - the sea mouth pays: a rock in the water, and the way out by Surf.
+//
+// TODO(engine §2): the dark gallery should be dark until the player lights the
+// brazier at its mouth with Hecate's Torch (FLAG_ICHOR_BRAZIERS_START + n, its
+// metatile swapped to brazier_lit). Until the brazier engine exists the gallery
+// is lit and the brazier only describes itself.
+// TODO(balance): TM Hyper Voice isn't a TM yet. When it is, an item ball on the
+// rock in the sea mouth (23,21), reached by Surf, with
+// FLAG_ICHOR_ITEM_ECHO_CAVES_TM_HYPER_VOICE.
+// TODO(world): Route 23 doesn't exist; once it does, surfing out through the
+// sea mouth's arch (15..16,25) leads onto it.
+// TODO(art): the cave floor (melos floor, floor_b, floor_pebbles, light_L/R) is
+// MB_NORMAL, so the land table (wild_encounters.json) never fires here; it needs
+// MB_CAVE. Surfing encounters work.
+// TODO(audio): MUS_ICHOR_KALLIRHOE; MUS_ICHOR_HOLLOW stands in.
+
 mapscripts KytheraEchoCaves_MapScripts {}
+
+text KytheraEchoCaves_Name_Voice { "VOICE" }
+
+// The echo's box: the speaker set, a breath's pause. Callers print the words.
+script KytheraEchoCaves_EventScript_EchoBeat {
+    delay(12)
+    setspeaker(KytheraEchoCaves_Name_Voice)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// FISHER Kalamis, at the Speaking Hall's pool
+// ---------------------------------------------------------------------------
+
+script KytheraEchoCaves_EventScript_Kalamis {
+    trainerbattle_single(TRAINER_ICHOR_KALAMIS, Kythera_Text_KalamisIntro, Kythera_Text_KalamisDefeat)
+    lock
+    faceplayer
+    setspeaker(Kythera_Text_SpeakerKalamis)
+    msgbox(Kythera_Text_KalamisAfter)
+    call(KytheraEchoCaves_EventScript_EchoBeat)
+    msgbox(format("…all beautiful."))
+    setspeaker(SP_NAME_NONE)
+    release
+}
+
+// ---------------------------------------------------------------------------
+// DIVER Kolymbos, by the lamp at the dark gallery's far end
+// ---------------------------------------------------------------------------
+
+script KytheraEchoCaves_EventScript_Kolymbos {
+    trainerbattle_single(TRAINER_ICHOR_KOLYMBOS, Kythera_Text_KolymbosIntro, Kythera_Text_KolymbosDefeat)
+    lock
+    faceplayer
+    setspeaker(Kythera_Text_SpeakerKolymbos)
+    msgbox(Kythera_Text_KolymbosAfter)
+    call(KytheraEchoCaves_EventScript_EchoBeat)
+    msgbox(format("…anything twice."))
+    setspeaker(SP_NAME_NONE)
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The Echo in the Speaking Hall's wall
+// ---------------------------------------------------------------------------
+
+script KytheraEchoCaves_EventScript_Echo {
+    lockall
+    msgbox(format("A dark crack in the rock. Cool air breathes out of it.\p"
+                  "Call out?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("You call out."))
+        call(KytheraEchoCaves_EventScript_EchoBeat)
+        msgbox(format("…out."))
+        call(KytheraEchoCaves_EventScript_EchoBeat)
+        msgbox(format("…out."))
+        setspeaker(SP_NAME_NONE)
+        delay(30)
+        msgbox(format("No one is there."))
+    }
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Things to read
+// ---------------------------------------------------------------------------
+
+// TODO(engine §2): Hecate's Torch lights it (see the header).
+script KytheraEchoCaves_EventScript_Brazier {
+    msgbox(format("A bronze brazier, cold. Old ash in the bowl.\p"
+                  "Past it the passage runs on into the dark."), MSGBOX_SIGN)
+}
+
+script KytheraEchoCaves_EventScript_SeaMouth {
+    msgbox(format("The cave opens on the sea under a low arch.\p"
+                  "Daylight comes in off the water, green and moving."), MSGBOX_SIGN)
+}
