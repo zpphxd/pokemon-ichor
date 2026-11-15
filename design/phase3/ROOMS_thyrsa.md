@@ -119,10 +119,9 @@ Read from `build/test_thyrsa_rooms/` (a quickstart save, every room toured with 
 | Tag | Where | What waits |
 |---|---|---|
 | `ICHOR_STUB_KNUCKLEBONES` | the Kantharos | each match is one scripted throw with SCRIPT.md's lines: regulars lose two in three, the champion one in three |
-| `ICHOR_STUB_OFFERINGS` | the Agora's wine counter (sells Berry Juice), Staphylos's two Wine, Pindaros's Laurel Sprig, the regulars' prizes | the offering items |
 | `ICHOR_STUB_TMS` | Aristomache's TM Encore, Polos's TM Fake Tears | TM numbers from Balance (SCRIPT.md open question 17) |
 | `ICHOR_STUB_XENIA_REST` | Pindaros's rest menu | the engine's same-day clock move (SYSTEMS.md §10); the menu offers only times still ahead today, fades, and leaves the clock |
-| `ICHOR_STUB_DIG` | the turned earth under Eudora's fig | the dig API's fixed find, prophecy tablet #3 |
+| `ICHOR_STUB_DIG` | the turned earth under Eudora's fig | excavation (ENGINE_API §8): fixed find +0x14 in world-act2's block, prophecy tablet #3 |
 | `ICHOR_STUB_GARLAND` | Oinoe's ivy garland (the temple's scene uses the same tag) | `ITEM_IVY_GARLAND`; the flag carries the errand |
 | `ICHOR_STUB_LEVEL_CHECK` | Zetes | a script check for a party Pokémon at level 30; the Mask Laurel stands in |
 | `ICHOR_STUB_MUSIC` | every room but the Asclepeion and the Agora | Thyrsa's and Eleutherai's own cues |
@@ -138,14 +137,56 @@ Deviations, closest reading taken:
 - **PATHOS's OT** is `EUTHYKL`: the OT field holds seven letters.
 - The healer and the Pithos reuse Akti's shared texts; the Pithos's menu is written out locally because the shared one names Akti's jar.
 
+## Polish pass (Act II batch 2)
+
+The integrator's critique: Manto's room was sparse (SCRIPT.md wants birdcages hanging from every beam, a
+tripod over a cold brazier, the cornel staff, feathers sorted into pots), and so was Polos's. The new
+pieces are in `tools/ichor/art/thyrsa_rooms_polish.py`; the rooms' grids, spots and bg events are as
+they were.
+
+**Manto's house** (`gTileset_ThyrsaHomes`, now 367 tiles):
+- *Pass 1* (source preview): six birdcages hung on cords from the roof beam along the back wall, each at
+  its own height (`beam_cage_a`–`_d`), one more over the floor; a sleeping crow on an olive-wood perch in
+  the north-east corner; feathers underfoot. The back wall now reads as cages from every beam, and the
+  floor cages as hung from the same beams. *Wrong:* the room's south half still empty dark flags.
+- *Pass 2:* a round table with a water bowl for the birds, a cluster of pots by the pallet, a mortar
+  for the seed. *Wrong:* nothing left that reads as wrong at 2x.
+- *Pass 3* (in game, `thyrsa_rooms.sh`): the cages fill the wall behind Manto, the perch and pots frame
+  the room's corners; every spot and bg event is where it was.
+
+**Polos's house** (`gTileset_ThyrsaRooms`, now 390 tiles):
+- *Pass 1:* a rack of tragic robes (a king's red, a god's blue, a queen's saffron) on the east wall, a
+  reading stand with his part copied out on a scroll by the west wall, the dried ivy crown he was given
+  for Elektra on its own peg by the window, a red rug worn pale down the middle. *Wrong:* the rug was
+  drawn on the floor's own layer and mixed its palette with the boards' (the build refused it).
+- *Pass 2:* the rug and Manto's feathers moved to the middle layer (walkable, as the doormat is); a stool
+  before the bronze mirror, where he sits to paint.
+- *Pass 3* (in game): masks, boots and mirror along the back wall, the robes and trunk east, his lines
+  west, the urn alone on its table, the rug where he paces; Polos stands in the middle of it.
+
+**The engine in the rooms** (batch 1's stubs, swapped):
+- *Offerings are real items:* the Agora's wine counter sells Wine, Olive Oil and Barley Cake (SCRIPT.md
+  Part 6's prices); treading Staphylos's vat gives two Wine; Pindaros gives a Laurel Sprig with each new
+  laurel's line; the Kantharos's regulars give their first-win prizes (Phaidimos Olive Oil ×2, Glauke a
+  Wine), on two flags claimed for them, `FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS` and `_GLAUKE` (rooms range
+  0x14E–0x14F).
+- *Rites:* the household hearths are Hestia's altars (`EventScript_IchorHearth`) in the watch-house
+  (the soup cauldron), Lysidike's house and Chthonia's (under the dragon's tooth); Staphylos's family
+  shrine is `EventScript_IchorAltar_Dionysus`. Each keeps its own line first.
+- *Kept:* `ICHOR_STUB_KNUCKLEBONES`, `_TMS`, `_XENIA_REST`, `_LEVEL_CHECK`, `_AETHOS_DEX`, `_MUSIC`, and
+  Oinoe's `ICHOR_STUB_GARLAND` (the garland is a key item that doesn't exist).
+
+The before and after for both rooms are on
+[img/thyrsa_polish_before_after.png](img/thyrsa_polish_before_after.png).
+
 ## The rooms
 
 The budgets, then each room: its idea, its walk map and its events. `tools/ichor/maps/thyrsa_rooms.py` rewrites everything between the markers below.
 
 <!-- thyrsa_rooms: begin generated -->
 
-- `gTileset_ThyrsaRooms` (`data/tilesets/secondary/thyrsa_rooms`): **144** metatiles of 512, **354** tiles of 504, palettes 6-11. Sheet: `design/phase3/img/thyrsa_rooms_sheet.png`.
-- `gTileset_ThyrsaHomes` (`data/tilesets/secondary/thyrsa_homes`): **136** metatiles of 512, **335** tiles of 504, palettes 6-12. Sheet: `design/phase3/img/thyrsa_homes_sheet.png`.
+- `gTileset_ThyrsaRooms` (`data/tilesets/secondary/thyrsa_rooms`): **152** metatiles of 512, **387** tiles of 504, palettes 6-11. Sheet: `design/phase3/img/thyrsa_rooms_sheet.png`.
+- `gTileset_ThyrsaHomes` (`data/tilesets/secondary/thyrsa_homes`): **144** metatiles of 512, **368** tiles of 504, palettes 6-12. Sheet: `design/phase3/img/thyrsa_homes_sheet.png`.
 - `gTileset_ThyrsaStone` (`data/tilesets/secondary/thyrsa_stone`): **184** metatiles of 512, **461** tiles of 504, palettes 6-12. Sheet: `design/phase3/img/thyrsa_stone_sheet.png`.
 
 ### The watch-house, Eleutherai
@@ -405,11 +446,11 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
   0 ##########
   1 ##5##3####
   2 #..#...6#.
-  3 ...4.2....
+  3 ...4.2...#
   4 ......#..#
   5 .........#
-  6 ##........
-  7 ....11....
+  6 ##....#...
+  7 .#..11.#..
 ```
 
 | # | Kind | Tile | Detail | What |
@@ -472,9 +513,9 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
     0123456
   0 #######
   1 4#3####
-  2 ...5.6#
-  3 .......
-  4 ....2..
+  2 ...5#6#
+  3 #.....#
+  4 #...2.#
   5 .7#....
   6 ......#
   7 #.....#

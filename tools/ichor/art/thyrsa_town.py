@@ -502,17 +502,6 @@ def stalls():
         E.amphora(M, x0, 16, body="tc1", lit="tc2", shade="tc0", dark="tc0", small=True)
     M.blit([" kkkkk ", "k22222k", " k222k ", "  k2k  ", " kkkkk "],
            {"k": "ink", "2": "tc2"}, 23, 17)
-    masks = struct("stall_masks", "Market stall: festival masks", 2, 2, walk=["XX", "XX"],
-                   ground="pave", section="civic",
-                   notes="The mask-seller's stall for the Dionysia, under a green-and-white "
-                         "awning: comic, tragic and satyr masks on pegs and on the counter. "
-                         "Free-standing on the flags.")
-    M = masks.M
-    _stall_awning(M, "iv2", "iv1")
-    _stall_frame(M)
-    for i, x0 in enumerate((3, 12, 21)):
-        M.blit([" kkkkk ", "kwwwwwk", "kwkwkwk", "kwwwwwk", " k3k3k ", "  kkk  "],
-               {"k": "ink", "w": "w0" if i != 1 else "wd3", "3": "tc1"}, x0, 16)
     return [finish(wine)]
 
 

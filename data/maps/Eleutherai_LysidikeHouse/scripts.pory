@@ -98,6 +98,9 @@ script Eleutherai_LysidikeHouse_EventScript_Cheeses {
     msgbox(format("New cheeses, drying on a board. They smell of the mountain."), MSGBOX_SIGN)
 }
 
+// The middle of the house, and Hestia's altar in it (ENGINE_API §3).
 script Eleutherai_LysidikeHouse_EventScript_Hearth {
-    msgbox(format("A pot of milk warms over the coals. Something to make cheese of tomorrow."), MSGBOX_SIGN)
+    lockall
+    msgbox(format("A pot of milk warms over the coals. Something to make cheese of tomorrow."))
+    goto(EventScript_IchorHearth)
 }

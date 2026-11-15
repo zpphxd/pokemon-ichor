@@ -1029,12 +1029,15 @@ script ThyrsaTheater_EventScript_KleonSeat {
     end
 }
 
+// The thymele is the god's altar (ENGINE_API §3): its line, then the rite's menu.
 script ThyrsaTheater_EventScript_Thymele {
+    lockall
     if (flag(FLAG_ICHOR_SAW_PROGRAM_HOOK)) {
-        msgbox(format("Black ink on the altar's lip, in the shape of a hand. Four fingers and a thumb.\pSomeone was holding on very hard."), MSGBOX_SIGN)
+        msgbox(format("Black ink on the altar's lip, in the shape of a hand. Four fingers and a thumb.\pSomeone was holding on very hard."))
     } else {
-        msgbox(format("The thymele, the god's altar. A little fire burns on it, play or no play."), MSGBOX_SIGN)
+        msgbox(format("The thymele, the god's altar. A little fire burns on it, play or no play."))
     }
+    goto(EventScript_IchorAltar_Dionysus)
 }
 
 script ThyrsaTheater_EventScript_StageDoor {

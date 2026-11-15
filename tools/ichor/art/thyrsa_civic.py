@@ -13,6 +13,8 @@
 """
 from __future__ import annotations
 
+import math
+
 import emporion_lib as E
 import thyrsa_lib as T
 from thyrsa_lib import finish, struct
@@ -307,7 +309,26 @@ def fountain():
 # Semele's chamber
 # ==========================================================================
 
-def semele():
+# Semele's smoke: two wisps curling up from the crack, over the back wall (top layer).
+# The tileset animates it (SCRIPT.md Part 10: a 2-frame smoke): frame 1 is the same
+# wisps risen two pixels, so the pair loops as a slow climb. The animated tiles are the
+# smoke's own (SMOKE_BOX, in the struct's pixels); thyrsa_build.py moves them to fixed
+# tile slots and writes the frames for src/tileset_anims.c.
+SMOKE_BOX = (16, 0, 32, 24)      # x0, y0, x1, y1: the top layer's tiles the smoke lives in
+SMOKE_FRAMES = 2
+
+
+def smoke(L, frame=0):
+    rise = 2 * frame
+    for x0, ph in ((22, 0), (26, 3)):
+        for y in range(1, 22):
+            x = x0 + int(round(1.6 * math.sin((y + ph + rise) / 3.0)))
+            L.px(x, y, "w0" if (y + rise) % 4 else "cg5")
+            if (y + rise) % 3 == 0:
+                L.px(x + 1, y, "cg5")
+
+
+def semele(frame=0):
     s = struct("semele", "Semele's chamber", 3, 2, walk=["XXX", "XXX"], ground="none",
                section="civic",
                notes="On the Kadmeia: the room where Zeus came to Semele as lightning, a "
@@ -347,13 +368,8 @@ def semele():
         L.px(x, y, "ink")
         L.px(x + 1, y, "cg0")
         L.px(x - 1, y, "e1")
-    # smoke, rising over the back wall (top layer)
-    for x0, ph in ((23, 0), (26, 3)):
-        for y in range(1, 22):
-            x = x0 + int(round(1.6 * math.sin((y + ph) / 3.0)))
-            Tl.px(x, y, "w0" if y % 4 else "cg5")
-            if y % 3 == 0:
-                Tl.px(x + 1, y, "cg5")
+    # smoke, rising over the back wall (top layer); animated in two frames
+    smoke(Tl, frame)
     # ivy over the back wall's corners
     T.ivy_drape(Tl, 0, 0, 13, 20, seed=17, top_full=5)
     T.ivy_drape(Tl, W - 12, 0, 12, 12, seed=19, top_full=4)

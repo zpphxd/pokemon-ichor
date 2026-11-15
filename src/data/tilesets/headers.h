@@ -535,7 +535,7 @@ const struct Tileset gTileset_Thyrsa =
     .palettes = gTilesetPalettes_PorytilesManaged_Thyrsa,
     .metatiles = gMetatiles_PorytilesManaged_Thyrsa,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Thyrsa,
-    .callback = NULL,
+    .callback = InitTilesetAnim_Thyrsa,     // Semele's smoke (src/tileset_anims.c)
 };
 
 // Porytiles-managed secondary built by tools/ichor/art/temple_dionysus_build.py: the Temple

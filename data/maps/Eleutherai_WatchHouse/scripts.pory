@@ -93,6 +93,9 @@ script Eleutherai_WatchHouse_EventScript_DiceTable {
                   "It's mostly one name."), MSGBOX_SIGN)
 }
 
+// The barrack's open hearth: Hestia's altar for the garrison (ENGINE_API §3).
 script Eleutherai_WatchHouse_EventScript_Cauldron {
-    msgbox(format("Barley soup, on a chain over the fire. It smells of ninety years."), MSGBOX_SIGN)
+    lockall
+    msgbox(format("Barley soup, on a chain over the fire. It smells of ninety years."))
+    goto(EventScript_IchorHearth)
 }

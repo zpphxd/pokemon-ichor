@@ -6,7 +6,7 @@
 // events), which counts in VAR_TEMP_1. Thirty steps fill the vat. Stepping off the floor
 // onto any cell round it (TreadOff) ends it early, once you've trodden at all; talk to
 // Staphylos again to start over.
-// ICHOR_STUB_OFFERINGS: the two jars of Wine wait for the item.
+// The vat's reward is two jars of Wine, the engine's offering (one for the god).
 // ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
 
 mapscripts ThyrsaCity_VintnerHouse_MapScripts {
@@ -93,7 +93,8 @@ script ThyrsaCity_VintnerHouse_EventScript_TreadDone {
     setspeaker(ThyrsaCity_VintnerHouse_Name_Staphylos)
     msgbox(format("Good vintage. Here, two jars. One for the god, one for you.\p"
                   "Don't drink yours before you pour his. He notices."))
-    // ICHOR_STUB_OFFERINGS: giveitem(ITEM_WINE, 2) when the offering exists.
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_WINE, 2)
     setflag(FLAG_DAILY_ICHOR_TREADING)
     releaseall
     end
@@ -111,9 +112,12 @@ script ThyrsaCity_VintnerHouse_EventScript_Erigone {
     release
 }
 
+// The family's altar of Dionysus (ENGINE_API §3): pray here, or pour him a jar.
 script ThyrsaCity_VintnerHouse_EventScript_Shrine {
+    lockall
     msgbox(format("The family shrine of Dionysus: a little bronze panther on a marble altar,\l"
-                  "a cup of this year's wine in front of it."), MSGBOX_SIGN)
+                  "a cup of this year's wine in front of it."))
+    goto(EventScript_IchorAltar_Dionysus)
 }
 
 script ThyrsaCity_VintnerHouse_EventScript_Press {

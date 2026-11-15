@@ -3,18 +3,12 @@
 // land: receiving the act's relics and pages, so the obtain text and the flags
 // they set live in one place.
 
-// ICHOR_STUB_RELICS: the relics are engine batch 2. Until ITEM_GIRDLE_OF_HERAKLES
-// exists, receiving the Girdle sets its flag (FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES,
-// aliased in flags.h) and plays the key item's fanfare. When the item lands,
-// replace the setflag with giveitem(ITEM_GIRDLE_OF_HERAKLES): the engine sets the
-// flag whenever the item enters the bag (ENGINE_API.md, "Giving a relic").
+// The Girdle of Herakles (beat 34, Silenos's contest): a relic, so it is the engine's
+// item. The engine sets FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES whenever it enters the bag
+// (ENGINE_API.md §2, "Giving a relic"), and the drum in the Neistan Gate checks it.
 script EventScript_IchorAct2_ReceiveGirdle {
-    setflag(FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES)
     setspeaker(SP_NAME_NONE)
-    playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
-    message(format("{PLAYER} received the Girdle of Herakles!"))
-    waitmessage
-    waitfanfare
+    giveitem(ITEM_GIRDLE_OF_HERAKLES)
     closemessage
 }
 
@@ -28,4 +22,17 @@ script EventScript_IchorAct2_ReceiveDaedalusPage3 {
     waitmessage
     waitfanfare
     closemessage
+}
+
+// ICHOR_STUB_DIG: excavation isn't built, but its names are fixed (ENGINE_API §8):
+//   a daily spot:    setvar(VAR_0x8004, <spot>), setvar(VAR_0x8005, ICHOR_DIG_ACT_II),
+//                    goto(EventScript_IchorDigSpot)
+//   a one-time find: setvar(VAR_0x8004, <find>), setvar(VAR_0x8005, ITEM_...),
+//                    goto(EventScript_IchorDigFixed)
+// Act II's dig sites set what they can of that now and go here instead, which plays
+// what §8 says both do without the Trowel (nobody has one yet). When excavation lands,
+// each site's goto becomes the engine's name.
+script EventScript_IchorAct2_DigStub {
+    msgbox(format("The ground here has been turned. Something might be buried."), MSGBOX_SIGN)
+    end
 }

@@ -32,6 +32,7 @@ local function mt(x, y) return (L.grid().tile(x, y)) end
 local function play() return L.getVar(S.VAR_PLAY) end
 local function mask() return L.getVar(S.VAR_MASK) end
 local function at(x, y) local px, py = L.pos() return px == x and py == y end
+local function favor() return emu:read8(L.ichor() + S.OFF_ICHOR_FAVOR + S.ICHOR_GOD_DIONYSUS) end
 
 local function pegsFull(act, except)
   for m, xy in pairs(PEGS[act]) do
@@ -94,7 +95,10 @@ L.start(function()
   settle({ every = true })
   expect(L.getFlag(S.FLAG_MET_LASOS), "Lasos welcomed the player")
   L.talk(L.npc(P .. "Lasos"), { shots = { [1] = "lasos_again" }, answers = { "yes" } })
-  L.talk(L.sign(P .. "Altar"), { shots = { [1] = "altar" } })
+  -- The great altar is the engine's (EventScript_IchorTempleAltar_Dionysus): its line,
+  -- then the rite's menu; the first choice, PRAY, gives the first Favor of the day.
+  L.talk(L.sign(P .. "Altar"), { shots = { [1] = "altar", [2] = "altar_rite" } })
+  expect(favor() == 1, "prayed at the great altar: Dionysus Favor 1")
   L.talk(L.npc(P .. "Image"), { shots = { [1] = "image" } })
 
   -- Act I: the program; a wrong entrance with no mask (Mynniskos stops the player
@@ -170,6 +174,9 @@ L.start(function()
   expect(L.getFlag(S.FLAG_BADGE04_GET), "the Mask Laurel")
   expect(L.getFlag(S.FLAG_GOT_TM_TOXIC) and L.itemCount(S.ITEM_TM_TOXIC) == 1, "TM06 Toxic")
   expect(L.getFlag(S.FLAG_CRATER), "the Crater on the Star Chart")
+  expect(favor() == 16, "the laurel: Dionysus Favor +15 (16 with the prayer)")
+  expect(L.itemCount(S.ITEM_WINE) == 1 and L.getFlag(S.FLAG_HIEROPHANT_OFFERING),
+         "the Hierophant's rite: one Wine, his offering's flag set")
   expect(play() == 5, "the play's state is the laurel given")
   expect(L.mapId() == S.MAP_TEMPLE and at(10, 46), "set down inside the door")
   local t = L.npc(P .. "Thespis")
