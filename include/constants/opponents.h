@@ -79,7 +79,16 @@
 #define TRAINER_ICHOR_MOPSOS                  114
 #define TRAINER_ICHOR_DAPHNIS                 115
 #define TRAINER_ICHOR_KERDON                  116
-#define TRAINERS_END_ACT1                     117
+// Eleusa's story (ids 140-149): the Temple of Demeter, Eubouleus, the Mysteries' grunts
+#define TRAINER_ICHOR_KALLIDIKE               140
+#define TRAINER_ICHOR_EUMOLPOS                141
+#define TRAINER_ICHOR_MELISSA                 142
+#define TRAINER_ICHOR_CHLOE_1_DAY             143
+#define TRAINER_ICHOR_CHLOE_1_NIGHT           144
+#define TRAINER_ICHOR_GRUNT_TELESTERION_PSAMMIS 145
+#define TRAINER_ICHOR_GRUNT_TELESTERION_CHERSOS 146
+#define TRAINER_ICHOR_EUBOULEUS               147
+#define TRAINERS_END_ACT1                     148
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

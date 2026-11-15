@@ -201,7 +201,8 @@ The brief rules out editing maps and parties, and the permission system refused 
 
 ## Still open
 
-- **Phase 2's other classes:** Potter, Runner, Initiate, Jester, Beekeeper, Swineherd and the Titan Admin aren't drawn. Nor are Kerykos, Chloe, Hyperion, Daphne's sandals or the walkers for batch 2 and later.
+- **Phase 2's other classes:** Potter, Runner, Initiate, Jester, Beekeeper, Swineherd and the Titan Admin aren't drawn. Nor are Kerykos, Chloe, Hyperion, Daphne's sandals or the walkers for batch 2 and later. Until they are, Eleusa's story borrows: `TRAINER_CLASS_SWINEHERD` exists with the Goatherd's pic, Chloe battles with the Acolyte F pic, and the initiates walk as pilgrims and youths.
+- **Kleon's back pic** is drawn (`tools/ichor/art/sprites_kleon_back.py`, his front pic's palette, Theo's throw): a battle partner slides in from behind, and he is one on the night of the Mysteries.
 - **The initiate walker:** it can reuse the pilgrim's white midi chiton without the cloak.
 - **Kleon's sitting pose:** it waits for the Telesterion's batch.
 - **The test harness:** the runtime-patch scripts (Lua plus an assembled script blob) live outside the repo. They could become a `tools/ichor/tests/` check if the session wants one.

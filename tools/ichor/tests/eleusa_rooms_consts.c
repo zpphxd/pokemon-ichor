@@ -6,7 +6,11 @@
 #include "constants/items.h"
 #include "constants/map_groups.h"
 #include "constants/map_event_ids.h"
+#include "constants/opponents.h"
 #include "constants/species.h"
+
+// the swineherd in the fields is a trainer now (Eleusa's story); this walk counts him beaten
+K(TRAINER_EUBOULEUS, TRAINER_ICHOR_EUBOULEUS)
 
 // maps
 K(MAP_ELEUSA, MAP_ELEUSA_VILLAGE)

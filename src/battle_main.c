@@ -432,6 +432,8 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_POTTER] = { _("POTTER"), 6 },
     [TRAINER_CLASS_RUNNER] = { _("RUNNER"), 5 },
     [TRAINER_CLASS_INITIATE] = { _("INITIATE"), 3 },
+    // Ichor: Eleusa's fields (SCRIPT.md Part 3). Pays like the other farm hands.
+    [TRAINER_CLASS_SWINEHERD] = { _("SWINEHERD"), 4 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =

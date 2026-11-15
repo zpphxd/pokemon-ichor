@@ -600,16 +600,37 @@ def compose():
 # ---------------------------------------------------------------------------
 GFX = "OBJ_EVENT_GFX_ICHOR_"
 PX = "EleusaVillage_EventScript_"
-# local id, graphics, x, y, facing, script, hide flag
+PROCESSION = "FLAG_ICHOR_HIDE_PROCESSION_ELEUSA"     # shown from the Harvest Laurel to the Mysteries
+# local id, graphics, x, y, facing, script, hide flag[, trainer sight]
 OBJECTS = [
     ("KROKIS", GFX + "ELDER_F", 8, 27, "UP", "Krokis", "0"),
     ("WATER_CARRIER", GFX + "WOMAN", 30, 22, "RIGHT", "WaterCarrier", "0"),
     ("KID", GFX + "KID_M", 33, 21, "LEFT", "Kid", "0"),
     ("KOPROS", "OBJ_EVENT_GFX_SPECIES(KAPLET)", 32, 21, "DOWN", "Kopros", "0"),
     ("DYSAULES", GFX + "HARVESTER", 28, 34, "RIGHT", "Dysaules", "0"),
-    ("EUBOULEUS", GFX + "GOATHERD", 14, 28, "RIGHT", "Eubouleus", "0"),
+    # a swineherd, optional: he watches the threshing floor (SCRIPT.md Part 3)
+    ("EUBOULEUS", GFX + "GOATHERD", 14, 28, "RIGHT", "Eubouleus", "0", 3),
     ("HOPLITE", GFX + "HOPLITE", 48, 25, "LEFT", "Hoplite", "0"),
+    # beat 20: Kleon in the square, waiting for the procession (gone once the Mysteries begin)
+    ("KLEON", GFX + "KLEON", 24, 23, "DOWN", "Kleon", "FLAG_ICHOR_HIDE_KLEON_ELEUSA"),
+    # beat 22: the procession, in the sanctuary's court and the square. Alethea comes up to
+    # the Telesterion's steps (25, 12) as the player walks out with the Harvest Laurel, and
+    # Kerykos stands on them with his staff. ICHOR_STUB_SPRITE: the initiates are drawn
+    # as pilgrims and youths until the Initiate walker exists; Eudemos as an elder.
+    ("ALETHEA", GFX + "ALETHEA", 24, 14, "UP", "Alethea", PROCESSION),
+    ("KERYKOS", GFX + "KERYKOS", 27, 12, "LEFT", "Kerykos", PROCESSION),
+    ("EUDEMOS", GFX + "ELDER_M", 30, 14, "LEFT", "Eudemos", PROCESSION),
+    ("INITIATE_1", GFX + "PILGRIM", 22, 14, "UP", "Initiate1", PROCESSION),
+    ("INITIATE_2", GFX + "YOUTH_F", 28, 13, "UP", "Initiate2", PROCESSION),
+    ("INITIATE_3", GFX + "YOUTH_M", 31, 13, "LEFT", "Initiate3", PROCESSION),
+    ("INITIATE_4", GFX + "PILGRIM", 32, 15, "UP", "Initiate4", PROCESSION),
+    ("INITIATE_5", GFX + "YOUTH_M", 23, 22, "DOWN", "Initiate5", PROCESSION),
+    ("INITIATE_6", GFX + "YOUTH_F", 26, 23, "LEFT", "Initiate6", PROCESSION),
 ]
+# Krokis's gate (beat 19): a coord trigger across the Sacred Way just inside the west
+# entrance, two steps short of her stool. It plays once (VAR_TEMP_8 is 1 once the
+# saffron thread is tied; the map's ON_TRANSITION sets it from FLAG_ICHOR_SAFFRON_THREAD).
+KROKIS_GATE = [(6, y) for y in WEST_SEAM]
 ITEMS = [
     ("ITEM_SUPER_POTION", 18, 30, "FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION"),
     ("ITEM_AWAKENING", 39, 32, "FLAG_ICHOR_ITEM_ELEUSA_AWAKENING"),
@@ -666,11 +687,12 @@ def write_events(g):
     # 15 (world-act2) add theirs on their own branch. BUILD.md has the seams.
     m["connections"] = [{"map": "MAP_ROUTE5_SKIRONIAN_CLIFFS", "offset": 3, "direction": "left"}]
     objs = []
-    for lid, gfx, x, y, facing, script, flag in OBJECTS:
+    for lid, gfx, x, y, facing, script, flag, *sight in OBJECTS:
         objs.append({
             "local_id": f"LOCALID_ELEUSA_{lid}", "graphics_id": gfx, "x": x, "y": y, "elevation": 3,
             "movement_type": f"MOVEMENT_TYPE_FACE_{facing}", "movement_range_x": 0, "movement_range_y": 0,
-            "trainer_type": "TRAINER_TYPE_NONE", "trainer_sight_or_berry_tree_id": "0",
+            "trainer_type": "TRAINER_TYPE_NORMAL" if sight else "TRAINER_TYPE_NONE",
+            "trainer_sight_or_berry_tree_id": str(sight[0]) if sight else "0",
             "script": PX + script, "flag": flag})
     for item, x, y, flag in ITEMS:
         objs.append({
@@ -683,6 +705,8 @@ def write_events(g):
                         for x, y, d, i in warps(g)]
     m["coord_events"] = [{"type": "trigger", "x": x, "y": y, "elevation": 0, "var": "VAR_TEMP_1",
                           "var_value": "0", "script": PX + "RoadShut"} for x, y in EAST_GUARD_LINE]
+    m["coord_events"] += [{"type": "trigger", "x": x, "y": y, "elevation": 0, "var": "VAR_TEMP_8",
+                           "var_value": "0", "script": PX + "KrokisGate"} for x, y in KROKIS_GATE]
     bgs = [{"type": "sign", "x": x, "y": y, "elevation": 0,
             "player_facing_dir": f"BG_EVENT_PLAYER_FACING_{f}", "script": PX + s} for x, y, f, s in SIGNS]
     bgs += [{"type": "sign", "x": x, "y": y, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -706,17 +730,28 @@ MAT = [(4, 7), (5, 7)]   # the Fisher's house mat the placeholder rooms copy
 
 
 def write_room_warps(g):
-    """Point each placeholder room's mat at its village door (the first, for a
-    double door). The Temple of Demeter's own builder writes its stair warps."""
+    """Point each room's way out at its village door (the first, for a double door).
+    A room still on the placeholder (no warp back to the village yet) gets the Fisher's
+    house mat; a room its own builder has drawn keeps its warps' places, and only their
+    destination id is kept in step with the village's door list. The Temple of Demeter's
+    own builder writes its stair warps."""
     first = {}
     for i, (x, y, dest, _) in enumerate(warps(g)):
         first.setdefault(dest, i)
     for dest, name in ROOMS.items():
         path = ROOT / "data/maps" / name / "map.json"
         m = json.loads(path.read_text())
-        m["warp_events"] = [{"x": x, "y": y, "elevation": 0, "dest_map": "MAP_ELEUSA_VILLAGE",
-                             "dest_warp_id": str(first[dest])} for x, y in MAT]
-        path.write_text(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
+        out = [w for w in m.get("warp_events") or [] if w.get("dest_map") == "MAP_ELEUSA_VILLAGE"]
+        if out:
+            for w in out:
+                w["dest_warp_id"] = str(first[dest])
+        else:
+            m["warp_events"] = (m.get("warp_events") or []) + [
+                {"x": x, "y": y, "elevation": 0, "dest_map": "MAP_ELEUSA_VILLAGE",
+                 "dest_warp_id": str(first[dest])} for x, y in MAT]
+        text = json.dumps(m, indent=2, ensure_ascii=False) + "\n"
+        if text != path.read_text():
+            path.write_text(text)
     return first
 
 
@@ -864,6 +899,12 @@ def check(g):
     # every building's door must be reachable, and the doors are what map.json says
     if len(m["warp_events"]) != len(warps(g)):
         problems.append("map.json's warps differ from the layout's doors")
+    # Krokis's gate spans the whole road in from Route 5, on open ground
+    for (x, y) in KROKIS_GATE:
+        if g.solid[y, x] or (x, y) not in reach:
+            problems.append(f"Krokis's gate trigger ({x},{y}) isn't on the open road")
+    if {y for _, y in KROKIS_GATE} != set(WEST_SEAM):
+        problems.append("Krokis's gate doesn't span every row of the west road")
     return problems, reach
 
 
@@ -923,8 +964,10 @@ def sprite(gfx, facing):
     return spr, fw, fh
 
 
-def people(im, pad=0):
-    for lid, gfx, x, y, facing, script, flag in OBJECTS:
+def people(im, pad=0, everyone=False):
+    for lid, gfx, x, y, facing, script, flag, *_ in OBJECTS:
+        if flag != "0" and not everyone:
+            continue                 # the story cast comes and goes; the renders show the everyday village
         try:
             spr, fw, fh = sprite(gfx, facing)
         except FileNotFoundError:

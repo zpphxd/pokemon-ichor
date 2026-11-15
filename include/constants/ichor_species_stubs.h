@@ -66,6 +66,10 @@
 #define SPECIES_MELIBEE     SPECIES_COMBEE       // Bug, Demeter's bee
 #define SPECIES_ELALEAF     SPECIES_SEEDOT       // Grass, the olive sprout
 #define SPECIES_RHOARIL     SPECIES_BOUNSWEET    // Grass, Persephone's pomegranate
+// Chloe's team (beat 21): the olive's second stage and the pomegranate's two forms
+#define SPECIES_ELAPLING    SPECIES_BAYLEEF      // Grass, the olive sapling
+#define SPECIES_KORANTHA    SPECIES_WHIMSICOTT   // Grass/Fairy, the Kore by day
+#define SPECIES_PERSENYX    SPECIES_TREVENANT    // Grass/Ghost (Ghost/Grass here), Persephone by night
 // Emporion (batch 2)
 #define SPECIES_PANACOIL    SPECIES_ARBOK        // Poison/Fairy, the healer serpent coiled in every Asclepeion
 // Route 4 (batch 3)

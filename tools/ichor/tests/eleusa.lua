@@ -51,6 +51,12 @@ local function giveLead()
   L.assistLevel100()
   local hp, maxhp = L.partyHp(0)
   expect(L.partyLevel(0) == S.MAX_LEVEL and hp > 0, string.format("a level-100 lead (HP %d/%d)", hp, maxhp))
+  -- Hecate's Torch (the braziers are the engine's, and want it), and the story's
+  -- trainers counted beaten: this walk checks the places; temple_demeter.sh plays the story.
+  L.setFlag(S.FLAG_GOT_HECATES_TORCH, true)
+  for _, t in ipairs({ "TRAINER_EUBOULEUS", "TRAINER_KALLIDIKE", "TRAINER_EUMOLPOS", "TRAINER_MELISSA" }) do
+    L.setFlag(S.TRAINER_FLAGS_START + S[t], true)
+  end
 end
 
 local function paletteTagLoaded(tag)
@@ -217,7 +223,7 @@ local function temple()
   L.shot("summer_lit")
   local chloe = L.npc(T .. "Chloe")
   expect(chloe.present, "Chloe stands in the Anaktoron's doorway")
-  talk(chloe, "Chloe", opts())
+  -- (her battle and the Laurel are temple_demeter.sh's)
   L.go(13, 24, opts())
   L.shot("hall_lit")
   L.useWarp(S.MAP_ELEUSA)

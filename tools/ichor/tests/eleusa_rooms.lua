@@ -52,6 +52,9 @@ end
 
 local function setup()
   L.setFlag(S.FLAG_SYS_POKEMON_GET_E, true)
+  -- Eubouleus watches the threshing floor, on the way to Euphorion's door: his battle is
+  -- temple_demeter.sh's, so this walk counts him beaten
+  L.setFlag(S.TRAINER_FLAGS_START + S.TRAINER_EUBOULEUS, true)
   local body = {}
   createMon(body, S.SPECIES_LEAD_E, 20)
   createMon(body, S.SPECIES_MELIBEE, 20)
