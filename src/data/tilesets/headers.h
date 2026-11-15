@@ -1753,5 +1753,32 @@ const struct Tileset gTileset_Skene =
     .palettes = gTilesetPalettes_PorytilesManaged_Skene,
     .metatiles = gMetatiles_PorytilesManaged_Skene,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Skene,
+// Porytiles-managed secondary built by tools/ichor/art/thyrsa_build.py: Thyrsa City
+// (its Cyclopean walls and gates, streets, houses, the Agora, the Temple of Dionysus's
+// front, the Asclepeion, Semele's chamber and the vineyards). It uses only its own
+// tiles and palettes 6-12; cells on grass borrow aethos's, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_Thyrsa =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Thyrsa,
+    .palettes = gTilesetPalettes_PorytilesManaged_Thyrsa,
+    .metatiles = gMetatiles_PorytilesManaged_Thyrsa,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Thyrsa,
+    .callback = NULL,
+};
+
+// Porytiles-managed secondary built by tools/ichor/art/temple_dionysus_build.py: the Temple
+// of Dionysus at Thyrsa and the Three-Act Play. It uses only its own tiles and palettes
+// 6-12, with opaque floors, so it works on any primary (drawn for oikos).
+const struct Tileset gTileset_TempleDionysus =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleDionysus,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleDionysus,
+    .metatiles = gMetatiles_PorytilesManaged_TempleDionysus,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleDionysus,
     .callback = NULL,
 };
