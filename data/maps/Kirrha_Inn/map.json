@@ -17,7 +17,7 @@
   "object_events": [
     {
       "local_id": "LOCALID_KIRRHA_INN_STROPHIOS",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_STROPHIOS",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -31,7 +31,7 @@
     },
     {
       "local_id": "LOCALID_KIRRHA_INN_PYLADES",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PYLADES",
       "x": 11,
       "y": 2,
       "elevation": 3,
@@ -58,7 +58,7 @@
       "flag": "FLAG_TEMP_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_3",
       "x": 9,
       "y": 6,
       "elevation": 3,
@@ -136,6 +136,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_WEST",
       "script": "Kirrha_Inn_EventScript_Alcove"
+    },
+    {
+      "type": "hidden_item",
+      "x": 7,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_RELIC_COPPER",
+      "flag": "FLAG_ICHOR_HIDDEN_KIRRHA_INN_RELIC_COPPER"
     }
   ]
 }

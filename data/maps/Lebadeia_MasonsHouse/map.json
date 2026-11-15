@@ -73,6 +73,14 @@
       "script": "Lebadeia_MasonsHouse_EventScript_Bench"
     },
     {
+      "type": "hidden_item",
+      "x": 0,
+      "y": 7,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_LEBADEIA_MASON_STARDUST"
+    },
+    {
       "type": "sign",
       "x": 0,
       "y": 1,

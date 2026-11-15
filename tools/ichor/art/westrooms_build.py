@@ -337,15 +337,22 @@ def _norm(t):
     return t
 
 
+NO_MERGE = ("ships", "rubble")
+
+
 def merge_near_duplicates(layouts, limit=2):
     """Redraw each 8x8 tile within `limit` pixels of another as that other
     tile, flips included (as emporion_build.py does), so it is stored once.
     Works on the composed cells in place; returns how many tiles it merged.
-    Never merges across a change in a tile's transparent shape or palette."""
+    Never merges across a change in a tile's transparent shape or palette, and
+    never touches the walls whose small differences are the point: the ship
+    frieze's numbers and the mason's loose stone (NO_MERGE)."""
     occ = {}
     for cells in layouts.values():
         for row in cells:
             for c in row:
+                if any(c.kind.startswith(f"wall:{w}:") for w in NO_MERGE):
+                    continue
                 for ln in ("bottom", "middle", "top"):
                     layer = getattr(c, ln)
                     if layer is None:

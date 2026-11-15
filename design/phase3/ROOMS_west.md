@@ -58,7 +58,7 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
 | 1 | warp | (6,8), (7,8) | to `MAP_LEBADEIA` warp 0 | the exit |
 | 2 | npc | (7,5) | faces south, `OBJ_EVENT_GFX_ICHOR_WOMAN` | the hall-keeper, at the fire (heals) |
 | 3 | npc | (0,3) | faces east, `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET` | a pilgrim on a bench, under a blanket |
-| 4 | npc | (3,5) | faces east, `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET` | a pilgrim drying out by the fire |
+| 4 | npc | (3,5) | faces east, `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_2` | a pilgrim drying out by the fire |
 | 5 | bg | (2,1) | read from (2,2) facing north | the votive wall |
 | 6 | bg | (6,1) | read from (6,2) facing north | the votive wall (the newest tablets) |
 | 7 | bg | (7,1) | read from (7,2) facing north | the votive wall (the newest tablets) |
@@ -118,13 +118,13 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
 ```
     012345678901
   0 ############
-  1 6789abcd4###
+  1 789abcde4###
   2 ............
   3 ...##...#5##
   4 #..3#2.#....
   5 ##.....#.###
   6 ##........##
-  7 ....11....##
+  7 6...11....##
 ```
 
 | # | Kind | Tile | Detail | What |
@@ -134,14 +134,15 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
 | 3 | bg | (3,4) | read from (3,5) facing north | the snake relief |
 | 4 | bg | (8,1) | read from (8,2) facing north | the chisels |
 | 5 | bg | (9,3) | read from (9,4) facing north | the workbench |
-| 6 | bg | (0,1) | read from (0,2) facing north | a rough stone |
-| 7 | bg | (1,1) | read from (1,2) facing north | a rough stone |
-| 8 | bg | (2,1) | read from (2,2) facing north | the loose stone (third from the left, bottom course) |
-| 9 | bg | (3,1) | read from (3,2) facing north | a rough stone |
-| a | bg | (4,1) | read from (4,2) facing north | a rough stone |
-| b | bg | (5,1) | read from (5,2) facing north | a rough stone |
-| c | bg | (6,1) | read from (6,2) facing north | a rough stone |
-| d | bg | (7,1) | read from (7,2) facing north | a rough stone |
+| 6 | hidden | (0,7) | `ITEM_STARDUST`, `FLAG_ICHOR_HIDDEN_LEBADEIA_MASON_STARDUST` | Stardust, glittering in the drift of stone dust in the corner |
+| 7 | bg | (0,1) | read from (0,2) facing north | a rough stone |
+| 8 | bg | (1,1) | read from (1,2) facing north | a rough stone |
+| 9 | bg | (2,1) | read from (2,2) facing north | the loose stone (third from the left, bottom course) |
+| a | bg | (3,1) | read from (3,2) facing north | a rough stone |
+| b | bg | (4,1) | read from (4,2) facing north | a rough stone |
+| c | bg | (5,1) | read from (5,2) facing north | a rough stone |
+| d | bg | (6,1) | read from (6,2) facing north | a rough stone |
+| e | bg | (7,1) | read from (7,2) facing north | a rough stone |
 
 ### The pilgrims' inn, Kirrha
 
@@ -161,7 +162,7 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
   2 ...###2#...34..
   3 ##...6####...##
   4 #b........#..##
-  5 ##....##.....##
+  5 ##....#c.....##
   6 ##....9a.5...##
   7 ##...........##
   8 ##...........##
@@ -173,16 +174,17 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
 | # | Kind | Tile | Detail | What |
 |---|---|---|---|---|
 | 1 | warp | (6,11), (7,11) | to `MAP_KIRRHA` warp 0 | the exit |
-| 2 | npc | (6,2) | faces south, `OBJ_EVENT_GFX_ICHOR_MAN` | Strophios, behind the long table (heals) |
-| 3 | npc | (11,2) | faces south, `OBJ_EVENT_GFX_ICHOR_YOUTH_M` | Pylades, by the bundles |
+| 2 | npc | (6,2) | faces south, `OBJ_EVENT_GFX_ICHOR_STROPHIOS` | Strophios, behind the long table (heals) |
+| 3 | npc | (11,2) | faces south, `OBJ_EVENT_GFX_ICHOR_PYLADES` | Pylades, by the bundles |
 | 4 | npc | (12,2) | faces west, `OBJ_EVENT_GFX_ICHOR_XENODIKE` | Xenodike, beside Pylades (after FLAG_ICHOR_XENODIKE_CAME_DOWN) |
-| 5 | npc | (9,6) | faces west, `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET` | a pilgrim sitting by the well, waiting |
+| 5 | npc | (9,6) | faces west, `OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_3` | a pilgrim sitting by the well, waiting |
 | 6 | bg | (5,3) | read from (5,4) facing north | the painted sign, over the hearth (read across the table) |
 | 7 | bg | (9,1) | read from (9,2) facing north | the bundles with their name tags |
 | 8 | bg | (10,1) | read from (10,2) facing north | the bundles with their name tags |
 | 9 | bg | (6,6) | read from (6,7) facing north | the well |
 | a | bg | (7,6) | read from (7,7) facing north | the well |
 | b | bg | (1,4) | read from (2,4) facing west | an alcove |
+| c | hidden | (7,5) | `ITEM_RELIC_COPPER`, `FLAG_ICHOR_HIDDEN_KIRRHA_INN_RELIC_COPPER` | a pilgrim's coin down the well, asked of the well instead of the god |
 
 ### The Agora stall, Kirrha
 
@@ -244,7 +246,7 @@ Walk map: `#` blocked, `.` open; digits and letters are the spots below (a bg ev
 | # | Kind | Tile | Detail | What |
 |---|---|---|---|---|
 | 1 | warp | (7,9), (8,9) | to `MAP_KIRRHA` warp 2 | the exit |
-| 2 | npc | (10,4) | faces south, `OBJ_EVENT_GFX_ICHOR_MAN` | the muleteer, by his hearth |
+| 2 | npc | (10,4) | faces south, `OBJ_EVENT_GFX_ICHOR_MULETEER` | the muleteer, by his hearth |
 | 3 | npc | (13,4) | faces west, `OBJ_EVENT_GFX_SPECIES(MELISSEER)` | the Melisseer from the beehive (until it is traded) |
 | 4 | bg | (7,4) | read from (7,5) facing north | the sleeping mule |
 | 5 | bg | (12,3) | read from (12,4) facing north | the bed, under the beehive on the sill |
