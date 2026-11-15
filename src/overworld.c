@@ -1209,6 +1209,7 @@ static bool16 IsInfiltratedSpaceCenter(struct WarpData *warp)
 static const u16 sNightMusicTable[END_MUS - START_MUS + 1] = // Ichor: + 1 so END_MUS itself is in bounds
 {
     // example usage: [MUS_SOOTOPOLIS - START_MUS] = MUS_LITTLEROOT,
+    [MUS_ICHOR_ROAD - START_MUS] = MUS_ICHOR_ROAD_NIGHT, // Ichor: the road's tune in its night mode
 };
 
 static u16 GetNightMusicFromTrack(u16 track)

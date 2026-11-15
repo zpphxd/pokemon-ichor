@@ -1286,7 +1286,7 @@ As approved in LABYRINTH.md §6 and §8, Scene J, with three small additions (§
 7. **The music box's source.** In Elpis's room the box sits on her shelf, a small object with a 2-frame tick animation: the only animated object in the frozen world.
 8. **A god, optional.** On one Astyra rooftop, a shadowless figure moves at the edge of the screen and is gone. Players who learned Hermes's tells will know.
 
-**Music.** The music box only. When each Fate wakes, her voice from the Fates' theme joins the music box for the rest of that sanctuary.
+**Music.** The music box only. When each Fate wakes, her voice from the Fates' theme joins the music box for the rest of that sanctuary. Once Kleon breaks free, Kleos joins it on a single aulos. In the sepia memory at the Pool of Mnemosyne the box stops, and one held aulos note plays instead (MUSIC.md §2, §5).
 
 ### 6.13 The Stair of Hours
 
@@ -1376,7 +1376,7 @@ As approved in LABYRINTH.md §6 and §8, Scene J, with three small additions (§
 **Music.**
 - **The Archon's theme** is Mixolydian, stately, on kithara and drum. It stops when he says "Gods help you."
 - Untying the knot has no music: rope and wind.
-- **The credits** play the main Ichor theme and, under it in the second half, Elaia's home theme with its countermelody from the spring scene.
+- **The credits** play the main Ichor theme, then, in the second half, Elaia's home theme with its countermelody from the spring scene. The two follow each other: the main theme ends in Lydian and Elaia's is Dorian, so they never layer (MUSIC.md).
 
 ---
 
@@ -1388,7 +1388,7 @@ One melody carries the story's heart, and the score withholds its resolution unt
 |---|---|---|---|
 | **The lullaby** | Dorian, a simple eight-bar tune Elpis hums | Elpis's hum (Astyra); **Phaedon's theme**, in minor at the unmasking [LABYRINTH]; **the music box** (Elpis's shelf, Daedalus's workshop, the whole Frozen Hour); **Kronos's theme** (the Stair, enormous); the twelve chimes | **It never resolves.** Every version stops on the half cadence (Elpis always falls asleep first) until she finishes it at the resolution. |
 | **The Labyrinth motif** | D E F G E F G E A, the crane dance [LABYRINTH] | Knossa | As approved |
-| **Elaia, home** | Lydian, lyre | Elaia, Mom's scenes | The countermelody is withheld until the Kastalian spring. Afterward the town theme always has it. |
+| **Elaia, home** | Dorian, lyre (see MUSIC.md) | Elaia, Mom's scenes | The countermelody is withheld until the Kastalian spring. Afterward the town theme always has it. |
 | **The Fates** | Three voices: lyre (Nemira), aulos (Lotira), frame drum (Thanira) | The intro's loom (already scored); the Loom; one voice per sanctuary in the Frozen Hour | All three play together only at the Loom, and on the Stair once all three are roused. |
 | **Team Titan** | 9/8 zeibekiko, heavy (`mus_ichor_titan` exists) | Grunts, bases | Slowed into a processional for Iapetos's play |
 | **The admins** | A shared battle theme, each with its own top layer | Hyperion (forge hammers), Iapetos (a chorus of aulos), Rhea (a slow 7/8 Lakonian frame drum) | Needed (INVENTORY §8) |
@@ -1396,7 +1396,7 @@ One melody carries the story's heart, and the score withholds its resolution unt
 | **The Lord of Time** | Meter changes every phrase | The Stair, the post-game rematch | — |
 | **The Moment** | Silence: the tick stops | The instant you seize it on the Stair; at Olympia in the post-game, a fast bright phrase that's over before it starts | Never more than two bars |
 | **The Archon** | Mixolydian, kithara and drum | Olympus | Stops on "Gods help you" |
-| **The main Ichor theme** | Lydian, rising | The title, the Icarus Shaft [LABYRINTH], the end of the Stair, the credits | — |
+| **The main Ichor theme** | Dorian, turning Lydian at the end (see MUSIC.md) | The title, the Icarus Shaft [LABYRINTH], the end of the Stair, the credits | — |
 
 ---
 

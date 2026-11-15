@@ -1,5 +1,6 @@
 GAME_VERSION ?= EMERALD
-TITLE        ?= POKEMON EMER
+# Ichor: the cartridge title. GAME_CODE stays BPEE, because emulators pick the save type by it.
+TITLE        ?= POKEMONICHOR
 GAME_CODE    ?= BPEE
 BUILD_NAME   ?= emerald
 MAP_VERSION  ?= emerald
