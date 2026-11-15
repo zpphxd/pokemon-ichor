@@ -1,1 +1,66 @@
+// The mason's house, Ilion. Room: troad_rooms.py.
+// Laodokos (8,2), the old mason, by the window; his daughter Kallia at the
+// workbench (3,3). His father cut stone for the god-built walls, and Laodokos
+// lost the family chisel in the Walls of Laomedon's undercroft. Bring it back for
+// Hard Stone, and the undercroft's deep door, which carries the family's mark.
+//
+// ICHOR_STUB_LEGEND: the Walls of Laomedon are batch 2. Their chisel find sets
+// FLAG_ICHOR_FOUND_MASONS_CHISEL; this room gives the Hard Stone and sets
+// FLAG_ICHOR_MASON_CHISEL_RETURNED, which the undercroft's deep door checks.
+// The door mat (6,8) is warp 0, back to MAP_ILION warp 6.
+
 mapscripts Ilion_MasonsHouse_MapScripts {}
+
+text Ilion_MasonsHouse_Text_NameLaodokos { "LAODOKOS" }
+text Ilion_MasonsHouse_Text_NameKallia { "KALLIA" }
+
+script Ilion_MasonsHouse_EventScript_Laodokos {
+    lock
+    faceplayer
+    setspeaker(Ilion_MasonsHouse_Text_NameLaodokos)
+    if (flag(FLAG_ICHOR_MASON_CHISEL_RETURNED)) {
+        msgbox(format("I've cut more stone this month than in ten years. Kallia says slow down.\p"
+                      "I say the stone's been waiting long enough."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_FOUND_MASONS_CHISEL)) {
+        msgbox(format("That's it. That's my chisel! Look at the edge on it, after all these years.\p"
+                      "Here. Hard Stone, from the lowest course of the walls. It makes a hard Pokémon harder.\p"
+                      "And the door at the bottom of the undercroft, with the mark like a bent nail?\p"
+                      "That's ours. Tell it Laodokos sent you."))
+        giveitem(ITEM_HARD_STONE)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_MASON_CHISEL_RETURNED)
+        }
+        release
+        end
+    }
+    msgbox(format("Poseidon and Apollo built Troy's walls, they say. They had help. My father's chisel is on half of them.\p"
+                  "And I lost it, down in the undercroft under the walls, the year the stair fell in.\p"
+                  "I won't carve with another. A chisel learns your hand, the way a horse does."))
+    release
+}
+
+script Ilion_MasonsHouse_EventScript_Kallia {
+    lock
+    faceplayer
+    setspeaker(Ilion_MasonsHouse_Text_NameKallia)
+    if (flag(FLAG_ICHOR_MASON_CHISEL_RETURNED)) {
+        msgbox(format("He sings while he carves now. Badly. I've never been so happy to hear anything."))
+        release
+        end
+    }
+    msgbox(format("Father sits by the window and tells that capital what he'd do to it, if he had his chisel.\p"
+                  "It's down in the Walls of Laomedon somewhere, under the city. He's too old for the climb."))
+    release
+}
+
+script Ilion_MasonsHouse_EventScript_ToolRack {
+    msgbox(format("The mason's tools on their pegs. One peg is empty, worn smooth in the shape of a chisel."),
+           MSGBOX_SIGN)
+}
+
+script Ilion_MasonsHouse_EventScript_Capital {
+    msgbox(format("A capital half carved. Someone has chalked on it: NOT WITH THAT CHISEL."), MSGBOX_SIGN)
+}

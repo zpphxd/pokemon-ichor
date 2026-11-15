@@ -1,1 +1,95 @@
-mapscripts Ilion_HorseStable_MapScripts {}
+// The horse-breeder's stable, Ilion: Troy "of the fine horses". Room: troad_rooms.py.
+// Idaios (8,5) trades his Rapidash, Aithon, for your Mudsdale
+// (INGAME_TRADE_ICHOR_AITHON): a horse that pulls for a horse that runs. Aithon
+// stands in the first stall (1,2) and hides on FLAG_ICHOR_TRADED_IDAIOS_RAPIDASH;
+// your Mudsdale takes the empty third stall (7,2) after the trade, hidden until
+// then on FLAG_TEMP_1, which ON_TRANSITION sets. A Ponyta foal in the second
+// stall. The door mat (9,8) is warp 0, back to MAP_ILION warp 5.
+
+mapscripts Ilion_HorseStable_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_IDAIOS_RAPIDASH)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Ilion_HorseStable_Text_NameIdaios { "IDAIOS" }
+
+script Ilion_HorseStable_EventScript_Idaios {
+    lock
+    faceplayer
+    setspeaker(Ilion_HorseStable_Text_NameIdaios)
+    if (flag(FLAG_ICHOR_TRADED_IDAIOS_RAPIDASH)) {
+        msgbox(format("Look at that Mudsdale. That's a horse that'll still be standing when the plough breaks.\p"
+                      "Aithon would have set the plough on fire. Mind you don't stable him near the hay."))
+        release
+        end
+    }
+    msgbox(format("Troy of the fine horses, the songs say. They're right about that much.\p"
+                  "That's Aithon in the first stall. Fastest thing on the plain, and he knows it.\p"
+                  "He's burned through two stall doors this spring. What I need is a horse that pulls."))
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_AITHON)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(Ilion_HorseStable_Text_NameIdaios)
+    msgbox(format("A Mudsdale. Ploughs all day, never sulks, never sets anything alight.\p"
+                  "Bring me one and Aithon's yours. Deal?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Ilion_HorseStable_Text_NameIdaios)
+        msgbox(format("Mudsdale come down to the shore across the strait, by the Hebros. Bring me one."))
+        release
+        end
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        setspeaker(Ilion_HorseStable_Text_NameIdaios)
+        msgbox(format("Mudsdale come down to the shore across the strait, by the Hebros. Bring me one."))
+        release
+        end
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Ilion_HorseStable_Text_NameIdaios)
+        msgbox(format("That's no Mudsdale. I know a horse when I see one, and I know when I don't."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    setflag(FLAG_ICHOR_TRADED_IDAIOS_RAPIDASH)
+    setspeaker(Ilion_HorseStable_Text_NameIdaios)
+    msgbox(format("Aithon's yours. Feed him well and keep him off the thatch."))
+    release
+}
+
+script Ilion_HorseStable_EventScript_Rapidash {
+    lock
+    faceplayer
+    playmoncry(SPECIES_RAPIDASH, CRY_MODE_NORMAL)
+    msgbox(format("Aithon tosses a mane of fire. The straw at his feet is scorched in a neat ring."))
+    waitmoncry
+    release
+}
+
+script Ilion_HorseStable_EventScript_Ponyta {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PONYTA, CRY_MODE_NORMAL)
+    msgbox(format("A Ponyta foal. Its mane is barely a candle, and it's very proud of it."))
+    waitmoncry
+    release
+}
+
+script Ilion_HorseStable_EventScript_Mudsdale {
+    lock
+    faceplayer
+    playmoncry(SPECIES_MUDSDALE, CRY_MODE_NORMAL)
+    msgbox(format("Your old Mudsdale is eating the hay rack. Idaios is pretending not to see."))
+    waitmoncry
+    release
+}
+
+script Ilion_HorseStable_EventScript_Trough {
+    msgbox(format("A stone trough of water. Something has steamed half of it away."), MSGBOX_SIGN)
+}

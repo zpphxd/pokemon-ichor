@@ -488,10 +488,10 @@
     {
       "id": "LAYOUT_SESTOS_ASCLEPEION",
       "name": "Sestos_Asclepeion_Layout",
-      "width": 15,
-      "height": 11,
+      "width": 13,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Sestos_Asclepeion/border.bin",
       "blockdata_filepath": "data/layouts/Sestos_Asclepeion/map.bin",
       "layout_version": "emerald"
@@ -499,10 +499,10 @@
     {
       "id": "LAYOUT_SESTOS_AGORA",
       "name": "Sestos_Agora_Layout",
-      "width": 15,
-      "height": 11,
+      "width": 11,
+      "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Sestos_Agora/border.bin",
       "blockdata_filepath": "data/layouts/Sestos_Agora/map.bin",
       "layout_version": "emerald"
@@ -510,10 +510,10 @@
     {
       "id": "LAYOUT_SESTOS_HEROS_TOWER",
       "name": "Sestos_HerosTower_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 11,
+      "height": 19,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Sestos_HerosTower/border.bin",
       "blockdata_filepath": "data/layouts/Sestos_HerosTower/map.bin",
       "layout_version": "emerald"
@@ -524,7 +524,7 @@
       "width": 10,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Sestos_FerryHouse/border.bin",
       "blockdata_filepath": "data/layouts/Sestos_FerryHouse/map.bin",
       "layout_version": "emerald"
@@ -532,10 +532,10 @@
     {
       "id": "LAYOUT_SESTOS_NET_LOFT",
       "name": "Sestos_NetLoft_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 12,
+      "height": 7,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Sestos_NetLoft/border.bin",
       "blockdata_filepath": "data/layouts/Sestos_NetLoft/map.bin",
       "layout_version": "emerald"
@@ -546,7 +546,7 @@
       "width": 15,
       "height": 11,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Ilion_Asclepeion/border.bin",
       "blockdata_filepath": "data/layouts/Ilion_Asclepeion/map.bin",
       "layout_version": "emerald"
@@ -554,10 +554,10 @@
     {
       "id": "LAYOUT_ILION_AGORA",
       "name": "Ilion_Agora_Layout",
-      "width": 15,
-      "height": 11,
+      "width": 14,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Ilion_Agora/border.bin",
       "blockdata_filepath": "data/layouts/Ilion_Agora/map.bin",
       "layout_version": "emerald"
@@ -565,10 +565,10 @@
     {
       "id": "LAYOUT_ILION_PRIAMS_PALACE",
       "name": "Ilion_PriamsPalace_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 16,
+      "height": 13,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Ilion_PriamsPalace/border.bin",
       "blockdata_filepath": "data/layouts/Ilion_PriamsPalace/map.bin",
       "layout_version": "emerald"
@@ -576,10 +576,10 @@
     {
       "id": "LAYOUT_ILION_CASSANDRAS_ROOM",
       "name": "Ilion_CassandrasRoom_Layout",
-      "width": 10,
+      "width": 9,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Ilion_CassandrasRoom/border.bin",
       "blockdata_filepath": "data/layouts/Ilion_CassandrasRoom/map.bin",
       "layout_version": "emerald"
@@ -587,10 +587,10 @@
     {
       "id": "LAYOUT_ILION_GUEST_ROOM",
       "name": "Ilion_GuestRoom_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 12,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Ilion_GuestRoom/border.bin",
       "blockdata_filepath": "data/layouts/Ilion_GuestRoom/map.bin",
       "layout_version": "emerald"
@@ -598,10 +598,10 @@
     {
       "id": "LAYOUT_ILION_HORSE_STABLE",
       "name": "Ilion_HorseStable_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 14,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Ilion_HorseStable/border.bin",
       "blockdata_filepath": "data/layouts/Ilion_HorseStable/map.bin",
       "layout_version": "emerald"
@@ -609,10 +609,10 @@
     {
       "id": "LAYOUT_ILION_MASONS_HOUSE",
       "name": "Ilion_MasonsHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 12,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Ilion_MasonsHouse/border.bin",
       "blockdata_filepath": "data/layouts/Ilion_MasonsHouse/map.bin",
       "layout_version": "emerald"
@@ -623,7 +623,7 @@
       "width": 10,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Ilion_WeaversHouse/border.bin",
       "blockdata_filepath": "data/layouts/Ilion_WeaversHouse/map.bin",
       "layout_version": "emerald"
@@ -631,10 +631,10 @@
     {
       "id": "LAYOUT_ILION_TEMPLE_OF_ATHENA",
       "name": "Ilion_TempleOfAthena_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 11,
+      "height": 12,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Megaron",
       "border_filepath": "data/layouts/Ilion_TempleOfAthena/border.bin",
       "blockdata_filepath": "data/layouts/Ilion_TempleOfAthena/map.bin",
       "layout_version": "emerald"

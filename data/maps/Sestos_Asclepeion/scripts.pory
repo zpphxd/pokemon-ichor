@@ -1,1 +1,35 @@
+// The Sestos Asclepeion: the harbor's, with a window on the strait.
+// Room: tools/ichor/maps/troad_rooms.py. The healer stands at (3,2) behind the
+// counter, the spring two cells to her left, as the heal animation needs; the
+// Pithos is at (6..7,1..2); couches under the window for the sick to watch the
+// boats. The door mat (6,8) is warp 0, back to MAP_SESTOS warp 0.
+//
+// No setrespawn yet: HEAL_LOCATION_SESTOS is the chart agent's (BUILD.md §5,
+// "fly targets for batch 1's towns"). Its respawn_npc is LOCALID_SESTOS_HEALER.
+
 mapscripts Sestos_Asclepeion_MapScripts {}
+
+script Sestos_Asclepeion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_SESTOS_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script Sestos_Asclepeion_EventScript_OldWoman {
+    msgbox(format("My grandson takes the ferry to Abydos every market day.\p"
+                  "I sit by this window and count him there and back.\p"
+                  "The healer says it's good for my heart. I think she likes the company."), MSGBOX_NPC)
+}
+
+script Sestos_Asclepeion_EventScript_Sailor {
+    msgbox(format("Rope burn. The current off Sestos runs east like a river in flood.\p"
+                  "It took the anchor cable right through my hands.\p"
+                  "My mate on that couch held on longer. Don't hold on longer."), MSGBOX_NPC)
+}
+
+script Sestos_Asclepeion_EventScript_Window {
+    msgbox(format("The Hellespont, narrow as a river. Across it, the shore of Asia and the roofs of Abydos."),
+           MSGBOX_SIGN)
+}

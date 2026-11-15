@@ -1,1 +1,88 @@
-mapscripts Ilion_GuestRoom_MapScripts {}
+// The pilgrims' guest-room, Ilion. Room: troad_rooms.py.
+// The city keeps it for strangers: the host by the basin (3,7), where guests'
+// feet are washed first, beds along the far wall. Odysseus has the corner bed
+// (8,3), as every year he comes to see how wrong the songs were. He gives the
+// Xenion (ITEM_LINKING_CORD, renamed, decision PG-14) with the story of Glaukos's
+// gold armor (Iliad 6.234-236): FLAG_ICHOR_ODYSSEUS_XENION. Then he'll battle,
+// Lv 76-78 (TRAINER_ICHOR_ODYSSEUS). Beaten, he goes up to Athena's temple: here
+// he hides on FLAG_TEMP_1, which ON_TRANSITION sets once he's defeated, and the
+// temple shows him by the same rule in reverse. The door mat (4,8) is warp 0,
+// back to MAP_ILION warp 4.
+
+mapscripts Ilion_GuestRoom_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (defeated(TRAINER_ICHOR_ODYSSEUS)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Ilion_GuestRoom_Text_NameOdysseus { "ODYSSEUS" }
+
+script Ilion_GuestRoom_EventScript_Odysseus {
+    lock
+    faceplayer
+    setspeaker(Ilion_GuestRoom_Text_NameOdysseus)
+    if (!flag(FLAG_ICHOR_ODYSSEUS_XENION)) {
+        msgbox(format("Sit. You've the look of someone who walks too far for other people.\p"
+                      "Every year I come back to this plain to see how wrong the songs have got. In the new one I'm taller.\p"
+                      "Here's a true one. Two men met on this plain, a Greek and a Lycian, spears up.\p"
+                      "They found their grandfathers had been guest-friends. So they swapped armor instead.\p"
+                      "Glaukos gave gold for bronze. A hundred oxen's worth for nine. Worst bargain in Homer. Take it."))
+        giveitem(ITEM_LINKING_CORD)
+        if (var(VAR_RESULT) == FALSE) {
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_ODYSSEUS_XENION)
+        setspeaker(Ilion_GuestRoom_Text_NameOdysseus)
+        msgbox(format("A Xenion. A guest-gift. Some Pokémon only change when they change hands.\p"
+                      "Give one that, and it'll think it has. Glaukos would have liked it. He liked to be fooled."))
+    }
+    if (defeated(TRAINER_ICHOR_ODYSSEUS)) {
+        msgbox(format("I'll go up to Athena's temple before I sail. I owe her an apology. I owe her several."))
+        release
+        end
+    }
+    msgbox(format("Now. I've sat on that bed a week whittling a horse.\p"
+                  "Shall we see what else my hands remember?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Ilion_GuestRoom_Text_NameOdysseus)
+        msgbox(format("Wise. Or tired. Come back when you're the other one."))
+        release
+        end
+    }
+    setspeaker(Ilion_GuestRoom_Text_NameOdysseus)
+    msgbox(format("Good. I never fight fair, so you needn't either."))
+    closemessage
+    trainerbattle_no_intro(TRAINER_ICHOR_ODYSSEUS, Ilion_GuestRoom_Text_OdysseusDefeat)
+    setspeaker(Ilion_GuestRoom_Text_NameOdysseus)
+    msgbox(format("Athena would have told me to stop two turns sooner. She usually does.\p"
+                  "I'll go up to her temple before I sail. I owe her an apology. I owe her several."))
+    release
+}
+
+text Ilion_GuestRoom_Text_OdysseusDefeat {
+    format("A man of many turns, and I turned the wrong way. Well fought.")
+}
+
+script Ilion_GuestRoom_EventScript_Host {
+    if (defeated(TRAINER_ICHOR_ODYSSEUS)) {
+        msgbox(format("He's gone up to Athena's temple. He does, the last day of every visit.\p"
+                      "He comes back quiet and leaves before dawn. Next year he'll be taller again."), MSGBOX_NPC)
+        end
+    }
+    msgbox(format("Feet first. Wash, eat, then tell us who you are. That's the order in this house.\p"
+                  "The one in the corner has told us who he is every night for a week. A different man each time."),
+           MSGBOX_NPC)
+}
+
+script Ilion_GuestRoom_EventScript_WoodenHorse {
+    msgbox(format("A little wooden horse on wheels, half whittled. There's a hatch in its side.\p"
+                  "It's empty. You check twice."), MSGBOX_SIGN)
+}
+
+script Ilion_GuestRoom_EventScript_Basin {
+    msgbox(format("A bronze basin of clean water on a marble stand, for the feet of whoever comes in from the road."),
+           MSGBOX_SIGN)
+}

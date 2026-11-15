@@ -1,1 +1,34 @@
+// The net-loft, Sestos. Room: troad_rooms.py. Diktys mends nets at (10,4).
+// Sestos is a first port (BUILD.md §5): its fisher calls the shared
+// Oik_EventScript_FisherGift, which gives the Super Rod at whichever first port
+// gets there first and a Big Pearl at every other. This household's own flag is
+// FLAG_ICHOR_SESTOS_FISHER_GIFT. The door mat (5,6) is warp 0, back to
+// MAP_SESTOS warp 4.
+
 mapscripts Sestos_NetLoft_MapScripts {}
+
+text Sestos_NetLoft_Text_NameDiktys { "DIKTYS" }
+
+script Sestos_NetLoft_EventScript_Fisher {
+    lock
+    faceplayer
+    setspeaker(Sestos_NetLoft_Text_NameDiktys)
+    if (flag(FLAG_ICHOR_SESTOS_FISHER_GIFT)) {
+        msgbox(format("Mind the racks. Half the harbor's nets hang in here, and every one has a hole.\p"
+                      "My grandfather pulled a chest out of the sea once, with a mother and a baby in it.\p"
+                      "He never caught anything that good again. Neither have I."))
+        release
+        end
+    }
+    msgbox(format("You've come a long way to stand in a loft full of nets. Sit. Mind the hooks."))
+    call(Oik_EventScript_FisherGift)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_SESTOS_FISHER_GIFT)
+    }
+    release
+}
+
+script Sestos_NetLoft_EventScript_Rack {
+    msgbox(format("Nets drying over the pole. A sardine is still caught in the mesh. It looks embarrassed."),
+           MSGBOX_SIGN)
+}

@@ -57,7 +57,9 @@
 #define TRAINERS_END_POSTGAME                 0
 
 // The Oikoumene, ids 680-819 and 864-1023: the second map.
-#define TRAINERS_END_OIKOUMENE                0
+// The Troad's rooms, 692-699 (troad-rooms).
+#define TRAINER_ICHOR_ODYSSEUS                692 // the pilgrims' guest-room, Ilion
+#define TRAINERS_END_OIKOUMENE                693
 
 // Ids 820-863 are the director's reserve. 864-1023 are the Oikoumene's (above).
 

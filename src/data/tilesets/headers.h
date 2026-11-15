@@ -430,3 +430,17 @@ const struct Tileset gTileset_TempleHermes =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
     .callback = NULL,
 };
+
+// Ichor: megaron, the Troad's interiors (Sestos and Ilion, the Oikoumene). A
+// Porytiles-managed secondary built by tools/ichor/art/megaron_build.py; it uses
+// only its own tiles and palettes 6-12, so it works on any primary (drawn for oikos).
+const struct Tileset gTileset_Megaron =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Megaron,
+    .palettes = gTilesetPalettes_PorytilesManaged_Megaron,
+    .metatiles = gMetatiles_PorytilesManaged_Megaron,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Megaron,
+    .callback = NULL,
+};

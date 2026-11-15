@@ -1,1 +1,182 @@
-mapscripts Sestos_HerosTower_MapScripts {}
+// Hero's tower, Sestos. Room: tools/ichor/maps/troad_rooms.py.
+//
+// One tall room: Hero's rooms at the bottom (her bed, her oil, her hearth at
+// (3,15)), the windy stair in the middle, the lamp room at the top, where Hero
+// keeps the great lamp (4..5,2..3) that Leander swims to every night.
+//
+// The carried flame (SYSTEMS §2, the wind verb). Take a flame at the hearth and
+// carry it up: VAR_TEMP_3 is 1 while you carry it, and the map change that ends
+// the visit puts it out, as the rule says ("the flame dies when you leave"). The
+// draughty slits are marked by red ribbons and the draught's breath on the floor;
+// their coord events fire only while VAR_TEMP_3 is 1. The lower landing teaches it
+// (one draught, room to step round); the upper one weaves between two draughts
+// and an oil jar. The stair is one map, so the flame survives the climb.
+//
+// "Before dusk": by day the lamp is cold until you light it; in the evening and
+// at night Hero has already carried it up herself, and asks you back in daylight.
+// GetTimeOfDay's values are an enum the assembler can't see: 2 is TIME_EVENING,
+// 3 is TIME_NIGHT (include/constants/rtc.h).
+//
+// FLAG_ICHOR_HERO_FIRE_STONE: the lamp lit and the Fire Stone given. After it the
+// lamp burns by day too. The door mat (5,18) is warp 0, back to MAP_SESTOS warp 2.
+
+mapscripts Sestos_HerosTower_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        call(Sestos_HerosTower_EventScript_LampState)
+    }
+}
+
+text Sestos_HerosTower_Text_NameHero { "HERO" }
+
+// Lights the lamp's metatiles when it burns: after the quest, or after dusk.
+script Sestos_HerosTower_EventScript_LampState {
+    if (flag(FLAG_ICHOR_HERO_FIRE_STONE)) {
+        call(Sestos_HerosTower_EventScript_LightLampTiles)
+        return
+    }
+    gettimeofday
+    if (var(VAR_0x8000) >= 2) {
+        call(Sestos_HerosTower_EventScript_LightLampTiles)
+    }
+    return
+}
+
+script Sestos_HerosTower_EventScript_Hero {
+    lock
+    faceplayer
+    setspeaker(Sestos_HerosTower_Text_NameHero)
+    if (flag(FLAG_ICHOR_HERO_FIRE_STONE)) {
+        msgbox(format("Forty years he's swum over by that light. Leander. We married, and he still swims.\p"
+                      "He says the ferry is for people who don't mean it."))
+        call(Sestos_HerosTower_EventScript_KubfuStrait)
+        release
+        end
+    }
+    gettimeofday
+    if (var(VAR_0x8000) >= 2) {
+        msgbox(format("Dusk already. I carried the flame up myself tonight. Three tries; the wind's in a mood.\p"
+                      "Come by in daylight, would you? Before dusk. My knees will thank you."))
+        release
+        end
+    }
+    if (var(VAR_TEMP_3) == 1) {
+        msgbox(format("You've got a flame! Don't stand there talking. The lamp, the lamp!"))
+        release
+        end
+    }
+    msgbox(format("Every night at dusk my husband swims the strait from Abydos, and this lamp brings him in.\p"
+                  "And every day this week the wind on that stair has put my flame out before I got it here.\p"
+                  "I can't leave the lamp. Would you go? There's fire on the hearth at the bottom.\p"
+                  "Mind the slits with the ribbons on them. That's where the wind gets in."))
+    release
+}
+
+script Sestos_HerosTower_EventScript_Hearth {
+    lockall
+    if (flag(FLAG_ICHOR_HERO_FIRE_STONE)) {
+        msgbox(format("Hero's hearth, banked low. The lamp upstairs keeps its own fire now."))
+        releaseall
+        end
+    }
+    gettimeofday
+    if (var(VAR_0x8000) >= 2) {
+        msgbox(format("The coals are banked for the night. The lamp upstairs is already burning."))
+        releaseall
+        end
+    }
+    if (var(VAR_TEMP_3) == 1) {
+        msgbox(format("You're carrying a flame already. Up the stair with it!"))
+        releaseall
+        end
+    }
+    msgbox(format("Hero's hearth. A little clay lamp waits by the coals.\p"
+                  "Light it and carry the flame up?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        playse(SE_M_EMBER)
+        setvar(VAR_TEMP_3, 1)
+        msgbox(format("{PLAYER} lit the clay lamp. Cup the flame, and keep out of the draughts!"))
+    }
+    releaseall
+}
+
+script Sestos_HerosTower_EventScript_Draught {
+    lockall
+    playse(SE_M_GUST)
+    setvar(VAR_TEMP_3, 0)
+    msgbox(format("A gust through the slit! The flame's out.\p"
+                  "Back down to the hearth for another."))
+    releaseall
+}
+
+script Sestos_HerosTower_EventScript_FlameArrives {
+    lockall
+    applymovement(LOCALID_SESTOS_HERO, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(Sestos_HerosTower_Text_NameHero)
+    msgbox(format("There it is! Bring it here, before it gutters!"))
+    releaseall
+}
+
+script Sestos_HerosTower_EventScript_Lamp {
+    lockall
+    if (flag(FLAG_ICHOR_HERO_FIRE_STONE)) {
+        msgbox(format("The great lamp burns. Its mirror throws the light far out over the water."))
+        releaseall
+        end
+    }
+    gettimeofday
+    if (var(VAR_0x8000) >= 2) {
+        msgbox(format("The great lamp burns. Its mirror throws the light far out over the water."))
+        releaseall
+        end
+    }
+    if (var(VAR_TEMP_3) != 1) {
+        msgbox(format("The great lamp, cold. Its bronze mirror throws the daylight back at you.\p"
+                      "It wants a flame."))
+        releaseall
+        end
+    }
+    setvar(VAR_TEMP_3, 0)
+    playse(SE_M_FLAME_WHEEL)
+    call(Sestos_HerosTower_EventScript_LightLampTiles)
+    special(DrawWholeMapView)
+    msgbox(format("{PLAYER} touched the flame to the wick. The great lamp caught!"))
+    applymovement(LOCALID_SESTOS_HERO, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(Sestos_HerosTower_Text_NameHero)
+    msgbox(format("Look at it go! He'll see that from the far shore before he's wet his ankles.\p"
+                  "Here. A Fire Stone. My father found it in the ash of the old lamp, the one that went out.\p"
+                  "It's been waiting for someone who could carry a flame up that stair."))
+    giveitem(ITEM_FIRE_STONE)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_HERO_FIRE_STONE)
+        setspeaker(Sestos_HerosTower_Text_NameHero)
+        msgbox(format("Come back at dusk some night and watch him swim in. It's worth the stairs."))
+    }
+    releaseall
+}
+
+// ICHOR_STUB_LEGEND: Kubfu (design/LEGENDS.md §4.16, Milo's Calf). Milo sends the
+// player here, where Leander swam to Hero's lamp. Once that quest's flags exist:
+// with Kubfu leading and Milo's errand given, Hero lights the strait for the
+// Rapid Strike path (swim the Hellespont by night toward the lamp, to the scroll
+// Leander's Strait); the night the lamp is out, the unlit tower climbed in the
+// dark is the Single Strike path (the scroll Hero's Lamp). Hero has lit the lamp
+// with the player once already (FLAG_ICHOR_HERO_FIRE_STONE), which gates this.
+script Sestos_HerosTower_EventScript_KubfuStrait {
+    return
+}
+
+// megaron_build: begin generated
+
+// Written by tools/ichor/art/megaron_build.py; don't edit by hand.
+
+script Sestos_HerosTower_EventScript_LightLampTiles {
+    setmetatile(4, 2, 0x38D, TRUE)
+    setmetatile(5, 2, 0x38E, TRUE)
+    setmetatile(4, 3, 0x38F, TRUE)
+    setmetatile(5, 3, 0x390, TRUE)
+    return
+}
+
+// megaron_build: end generated

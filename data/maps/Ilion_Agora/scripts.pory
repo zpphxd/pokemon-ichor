@@ -1,1 +1,47 @@
+// The Ilion Agora: a market hall on the citadel road. Room: troad_rooms.py.
+// Thymbra keeps the stall at (10,2), backed by Trojan cloth; a horse-trader at the
+// bridles (2,3), a woman choosing cloth (13,6). Late-game stock, a city's: more
+// balls than Sestos, fewer nets. The door mat (7,8) is warp 0, back to MAP_ILION
+// warp 1.
+
 mapscripts Ilion_Agora_MapScripts {}
+
+text Ilion_Agora_Text_NameThymbra { "THYMBRA" }
+
+script Ilion_Agora_EventScript_Thymbra {
+    lock
+    faceplayer
+    setspeaker(Ilion_Agora_Text_NameThymbra)
+    msgbox(format("Cloth from Ilion's looms, cups from Ilion's kilns, and whatever comes up the Skamander."))
+    pokemart(Ilion_Agora_Mart)
+    setspeaker(Ilion_Agora_Text_NameThymbra)
+    msgbox(format("Come again. Bring a horse. Everyone else does."))
+    release
+}
+
+mart Ilion_Agora_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_TIMER_BALL
+    ITEM_QUICK_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_RESTORE
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+}
+
+script Ilion_Agora_EventScript_HorseTrader {
+    msgbox(format("Every bridle on that wall has a story. That one came off a horse that threw a king.\p"
+                  "I'm asking extra for that one."), MSGBOX_NPC)
+}
+
+script Ilion_Agora_EventScript_ClothBuyer {
+    msgbox(format("Purple from Tyre or saffron from the plain? My daughter marries at midsummer.\p"
+                  "I'll buy both and we'll argue about it at home."), MSGBOX_NPC)
+}
+
+script Ilion_Agora_EventScript_Bridles {
+    msgbox(format("Bridles of red leather with bronze bits. One tag says: NOT FOR SALE. SERIOUSLY."),
+           MSGBOX_SIGN)
+}

@@ -23,6 +23,9 @@ enum InGameTradeID
     INGAME_TRADE_SEEL,
     // Ichor
     INGAME_TRADE_ICHOR_ARION, // Kimon's Finizen, for a Wooloo (Elaia, Glykera's house)
+    // Ichor: the Oikoumene, Troad rooms (troad-rooms)
+    INGAME_TRADE_ICHOR_AITHYIA, // Kymon's Cramorant, for a Pelipper (Sestos, the ferry house)
+    INGAME_TRADE_ICHOR_AITHON,  // Idaios's Rapidash, for a Mudsdale (Ilion, the stable)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

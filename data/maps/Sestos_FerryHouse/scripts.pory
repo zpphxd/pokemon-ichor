@@ -1,1 +1,86 @@
-mapscripts Sestos_FerryHouse_MapScripts {}
+// The ferry house, Sestos: Kymon the ferryman's. Room: troad_rooms.py.
+// Kymon (4,2) under his wreath; his Cramorant, Aithyia, by the fire at (6,3).
+// He swam the strait as a boy, and now rows people over it for an obol. In-game
+// trade INGAME_TRADE_ICHOR_AITHYIA: his Cramorant for your Pelipper. After it the
+// Cramorant hides (FLAG_ICHOR_TRADED_KYMON_CRAMORANT) and your Pelipper takes its
+// place on the same tile: it hides on FLAG_TEMP_1, which ON_TRANSITION sets until
+// the trade. The door mat (4,7) is warp 0, back to MAP_SESTOS warp 3.
+
+mapscripts Sestos_FerryHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_KYMON_CRAMORANT)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Sestos_FerryHouse_Text_NameKymon { "KYMON" }
+
+script Sestos_FerryHouse_EventScript_Kymon {
+    lock
+    faceplayer
+    setspeaker(Sestos_FerryHouse_Text_NameKymon)
+    if (flag(FLAG_ICHOR_TRADED_KYMON_CRAMORANT)) {
+        msgbox(format("Look at that Pelipper on my oar, like it owns the boat. Good.\p"
+                      "Carries the passengers' bags in its beak. They tip double."))
+        release
+        end
+    }
+    msgbox(format("I swam that strait when I was twelve. Sestos to Abydos and back, for a bet and a wreath.\p"
+                  "Now I row people over it for an obol. The strait laughs at me twice a day."))
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_AITHYIA)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(Sestos_FerryHouse_Text_NameKymon)
+    msgbox(format("That's Aithyia, my Cramorant. She dives for her supper and comes up with other people's.\p"
+                  "I want a bird that carries things where it's told. A Pelipper.\p"
+                  "Aithyia for your Pelipper. Deal?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Sestos_FerryHouse_Text_NameKymon)
+        msgbox(format("Suit yourself. Pelipper fish the streams up the Ida Road."))
+        release
+        end
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        setspeaker(Sestos_FerryHouse_Text_NameKymon)
+        msgbox(format("Suit yourself. Pelipper fish the streams up the Ida Road."))
+        release
+        end
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Sestos_FerryHouse_Text_NameKymon)
+        msgbox(format("That's no Pelipper. Aithyia would eat it for breakfast."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    setflag(FLAG_ICHOR_TRADED_KYMON_CRAMORANT)
+    setspeaker(Sestos_FerryHouse_Text_NameKymon)
+    msgbox(format("She'll bring you pearls if you let her. Mostly other people's."))
+    release
+}
+
+script Sestos_FerryHouse_EventScript_Cramorant {
+    lock
+    faceplayer
+    playmoncry(SPECIES_CRAMORANT, CRY_MODE_NORMAL)
+    msgbox(format("Aithyia: Gwarrk!\pShe has a whole fish in her throat and no plans to do anything about it."))
+    waitmoncry
+    release
+}
+
+script Sestos_FerryHouse_EventScript_Pelipper {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PELIPPER, CRY_MODE_NORMAL)
+    msgbox(format("Your old Pelipper is guarding a passenger's bag. It won't give it back."))
+    waitmoncry
+    release
+}
+
+script Sestos_FerryHouse_EventScript_Wreath {
+    msgbox(format("An olive wreath gone brown and brittle. A tag reads: KYMON, ACROSS AND BACK."), MSGBOX_SIGN)
+}

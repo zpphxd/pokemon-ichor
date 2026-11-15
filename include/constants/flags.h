@@ -1756,6 +1756,16 @@
 #define FLAG_ICHOR_SHORTCUT_ROSE                (FLAG_ICHOR_GENERAL_START + 0x3DD) // Ichor: Periodos: tower of Kronos midpoint shortcut open
 #define FLAG_ICHOR_OIKOUMENE_ARRIVED            (FLAG_ICHOR_GENERAL_START + 0x3DE) // Ichor: Oikoumene: first landed at any Oikoumene port (Alethea's quay scene; the AETHOS and THE OIKOUMENE fly targets)
 #define FLAG_ICHOR_SUPER_ROD_GIVEN              (FLAG_ICHOR_GENERAL_START + 0x3DF) // Ichor: Oikoumene: a first-port fisher gave the Super Rod (the others give a Big Pearl)
+#define FLAG_ICHOR_HERO_FIRE_STONE              (FLAG_ICHOR_GENERAL_START + 0x3F4) // Ichor: Oikoumene: Sestos, Hero's tower: a flame carried up the windy stair; the Fire Stone given (the lamp then burns by day too)
+#define FLAG_ICHOR_TRADED_KYMON_CRAMORANT       (FLAG_ICHOR_GENERAL_START + 0x3F5) // Ichor: Oikoumene: Sestos, the ferry house: Kymon's Cramorant traded for a Pelipper
+#define FLAG_ICHOR_SESTOS_FISHER_GIFT           (FLAG_ICHOR_GENERAL_START + 0x3F6) // Ichor: Oikoumene: Sestos, the net-loft: the fisher's gift given (Oik_EventScript_FisherGift)
+#define FLAG_ICHOR_PRIAM_SOOTHE_BELL            (FLAG_ICHOR_GENERAL_START + 0x3F7) // Ichor: Oikoumene: Ilion, Priam's palace: the Soothe Bell, after the Gate Emblem
+#define FLAG_ICHOR_CASSANDRA_LAURELS            (FLAG_ICHOR_GENERAL_START + 0x3F8) // Ichor: Oikoumene: Ilion, Cassandra's room: three wrong predictions, three Pythian Laurels
+#define FLAG_ICHOR_ODYSSEUS_XENION              (FLAG_ICHOR_GENERAL_START + 0x3F9) // Ichor: Oikoumene: Ilion, the guest-room: Odysseus gave the Xenion
+#define FLAG_ICHOR_TRADED_IDAIOS_RAPIDASH       (FLAG_ICHOR_GENERAL_START + 0x3FA) // Ichor: Oikoumene: Ilion, the stable: Idaios's Rapidash traded for a Mudsdale
+#define FLAG_ICHOR_FOUND_MASONS_CHISEL          (FLAG_ICHOR_GENERAL_START + 0x3FB) // Ichor: Oikoumene: the Walls of Laomedon: the mason's lost chisel found (set by batch 2's find)
+#define FLAG_ICHOR_MASON_CHISEL_RETURNED        (FLAG_ICHOR_GENERAL_START + 0x3FC) // Ichor: Oikoumene: Ilion, the mason's house: the chisel returned, Hard Stone given; opens the undercroft's deep door
+#define FLAG_ICHOR_WEAVER_SILK_SCARF            (FLAG_ICHOR_GENERAL_START + 0x3FD) // Ichor: Oikoumene: Ilion, the weaver's: three berries for dye, the Silk Scarf given
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end

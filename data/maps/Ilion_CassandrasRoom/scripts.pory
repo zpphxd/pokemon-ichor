@@ -1,1 +1,65 @@
+// Cassandra's room, Ilion. Room: troad_rooms.py.
+// Cassandra (2,3), by the painting she's whitewashing over. For years every
+// prophecy came true and nobody believed her; now the visions have stopped. She
+// makes three confident predictions, all wrong, and is thrilled each time; then
+// gives away Apollo's laurels: three Pythian Laurels (ITEM_BOTTLE_CAP until the
+// item pass renames it, SYSTEMS.md). FLAG_ICHOR_CASSANDRA_LAURELS. Alethea's scene
+// with her is OIKOUMENE.md §5's, not this room's. The door mat (4,7) is warp 0,
+// back to MAP_ILION warp 3.
+
 mapscripts Ilion_CassandrasRoom_MapScripts {}
+
+text Ilion_CassandrasRoom_Text_NameCassandra { "CASSANDRA" }
+
+script Ilion_CassandrasRoom_EventScript_Cassandra {
+    lock
+    faceplayer
+    setspeaker(Ilion_CassandrasRoom_Text_NameCassandra)
+    if (flag(FLAG_ICHOR_CASSANDRA_LAURELS)) {
+        msgbox(format("I said it would rain today. Look at it! Not a cloud!\p"
+                      "I've been wrong eleven times since breakfast. I'm keeping count. It's wonderful."))
+        release
+        end
+    }
+    msgbox(format("Oh! A visitor. Sit, sit. No, wait. I see something.\p"
+                  "That lamp. It's going to fall over and break. Any moment. Watch."))
+    closemessage
+    delay(60)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Nothing happened."))
+    setspeaker(Ilion_CassandrasRoom_Text_NameCassandra)
+    msgbox(format("It didn't fall! It didn't fall! Did you see that?\p"
+                  "Again. I've written down what you'll say next. Don't look.\p"
+                  "Do you want to hear another?"), MSGBOX_YESNO)
+    setspeaker(Ilion_CassandrasRoom_Text_NameCassandra)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("The tablet says “no”! Wrong! I'm wrong!"))
+    } else {
+        msgbox(format("The tablet says “yes”! Wrong again! Oh, this is marvelous."))
+    }
+    msgbox(format("Last one. A big one. Before you're out of this room, a crow will fly in at that window and sit on my head."))
+    closemessage
+    applymovement(LOCALID_ILION_CASSANDRA, Common_Movement_FaceRight)
+    waitmovement(0)
+    delay(60)
+    applymovement(LOCALID_ILION_CASSANDRA, Common_Movement_FaceDown)
+    waitmovement(0)
+    msgbox(format("No crow! Not a feather!\p"
+                  "For years every one came true. Troy burned every night behind my eyes, and nobody listened.\p"
+                  "I painted it so I'd stop seeing it. Now I'm painting over it, and I'm wrong about everything.\p"
+                  "Here. Apollo's laurels, from Delphi. He gave me the gift. I've no use for them."))
+    giveitem(ITEM_BOTTLE_CAP, 3)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_CASSANDRA_LAURELS)
+    }
+    release
+}
+
+script Ilion_CassandrasRoom_EventScript_Painting {
+    msgbox(format("A city on fire at night, painted in quick hard strokes.\p"
+                  "The right half is whitewashed over, fresh and uneven, as if in a hurry."), MSGBOX_SIGN)
+}
+
+script Ilion_CassandrasRoom_EventScript_Laurel {
+    msgbox(format("A laurel in a pot: Apollo's tree. Nobody has watered it in a while."), MSGBOX_SIGN)
+}
