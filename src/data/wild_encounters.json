@@ -623,6 +623,61 @@
                 "species": "SPECIES_KYNOKETOS"
               }
             ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 39,
+                "max_level": 42,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 42,
+                "max_level": 42,
+                "species": "SPECIES_TELKANVIL"
+              },
+              {
+                "min_level": 42,
+                "max_level": 42,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
           }
         },
         {
@@ -1030,6 +1085,61 @@
                 "species": "SPECIES_KYNOKETOS"
               }
             ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 41,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 41,
+                "max_level": 41,
+                "species": "SPECIES_TELKANVIL"
+              },
+              {
+                "min_level": 42,
+                "max_level": 42,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
           }
         },
         {
@@ -1384,7 +1494,7 @@
               {
                 "min_level": 41,
                 "max_level": 42,
-                "species": "SPECIES_HIMEROW"
+                "species": "SPECIES_GLYPHLET"
               },
               {
                 "min_level": 42,
@@ -1437,6 +1547,61 @@
                 "species": "SPECIES_TELKANVIL"
               }
             ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 39,
+                "max_level": 42,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 42,
+                "max_level": 42,
+                "species": "SPECIES_TELKANVIL"
+              },
+              {
+                "min_level": 43,
+                "max_level": 43,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
           }
         },
         {
@@ -1473,7 +1638,7 @@
               {
                 "min_level": 40,
                 "max_level": 42,
-                "species": "SPECIES_GELASABLE"
+                "species": "SPECIES_GALENYON"
               },
               {
                 "min_level": 41,
@@ -1684,6 +1849,95 @@
         },
         {
           "map": "MAP_KYTHERA_SKANDEIA",
+          "base_label": "gKytheraSkandeia_Day",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 38,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 42,
+                "max_level": 42,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 38,
+                "max_level": 40,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 39,
+                "max_level": 42,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 42,
+                "max_level": 42,
+                "species": "SPECIES_TELKANVIL"
+              },
+              {
+                "min_level": 42,
+                "max_level": 42,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_KYTHERA_SKANDEIA",
           "base_label": "gKytheraSkandeia_Night",
           "water_mons": {
             "encounter_rate": 4,
@@ -1800,7 +2054,7 @@
               {
                 "min_level": 41,
                 "max_level": 43,
-                "species": "SPECIES_GALENYON"
+                "species": "SPECIES_CHELYRA"
               },
               {
                 "min_level": 41,
@@ -1815,7 +2069,7 @@
               {
                 "min_level": 42,
                 "max_level": 43,
-                "species": "SPECIES_GLYPHLET"
+                "species": "SPECIES_PSYCHORA"
               },
               {
                 "min_level": 43,
@@ -1835,7 +2089,7 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_APHRELL"
+                "species": "SPECIES_GLYPHLET"
               }
             ]
           },
@@ -1949,7 +2203,7 @@
               {
                 "min_level": 41,
                 "max_level": 43,
-                "species": "SPECIES_HARPELLE"
+                "species": "SPECIES_PSYCHORA"
               },
               {
                 "min_level": 41,
@@ -1964,12 +2218,12 @@
               {
                 "min_level": 42,
                 "max_level": 43,
-                "species": "SPECIES_HIMEROW"
+                "species": "SPECIES_CHELYRA"
               },
               {
                 "min_level": 42,
                 "max_level": 43,
-                "species": "SPECIES_APHRELL"
+                "species": "SPECIES_HARPELLE"
               },
               {
                 "min_level": 43,
@@ -1979,7 +2233,7 @@
               {
                 "min_level": 43,
                 "max_level": 44,
-                "species": "SPECIES_HARPELLE"
+                "species": "SPECIES_PSYCHORA"
               },
               {
                 "min_level": 44,
@@ -1989,7 +2243,7 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_GLYPHLET"
+                "species": "SPECIES_CHELYRA"
               }
             ]
           },
@@ -2020,6 +2274,61 @@
                 "min_level": 45,
                 "max_level": 45,
                 "species": "SPECIES_TELKANVIL"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 41,
+                "max_level": 44,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 44,
+                "max_level": 44,
+                "species": "SPECIES_TELKANVIL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 45,
+                "species": "SPECIES_KYNOKETOS"
               }
             ]
           }
@@ -2058,7 +2367,7 @@
               {
                 "min_level": 41,
                 "max_level": 43,
-                "species": "SPECIES_APHRELL"
+                "species": "SPECIES_GELASABLE"
               },
               {
                 "min_level": 42,
@@ -2068,7 +2377,7 @@
               {
                 "min_level": 42,
                 "max_level": 43,
-                "species": "SPECIES_GALENYON"
+                "species": "SPECIES_CHELYRA"
               },
               {
                 "min_level": 43,
@@ -2078,7 +2387,7 @@
               {
                 "min_level": 43,
                 "max_level": 44,
-                "species": "SPECIES_APHRELL"
+                "species": "SPECIES_GELASABLE"
               },
               {
                 "min_level": 44,

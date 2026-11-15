@@ -29,6 +29,24 @@ script Route23_CretanSea_EventScript_Myrsine {
     msgbox(Kythera_Text_MyrsineAfter, MSGBOX_AUTOCLOSE)
 }
 
+script Route23_CretanSea_EventScript_Akamas {
+    trainerbattle_single(TRAINER_ICHOR_AKAMAS, Kythera_Text_AkamasIntro, Kythera_Text_AkamasDefeat)
+    setspeaker(Kythera_Text_SpeakerAkamas)
+    msgbox(Kythera_Text_AkamasAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route23_CretanSea_EventScript_Eione {
+    trainerbattle_single(TRAINER_ICHOR_EIONE, Kythera_Text_EioneIntro, Kythera_Text_EioneDefeat)
+    setspeaker(Kythera_Text_SpeakerEione)
+    msgbox(Kythera_Text_EioneAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route23_CretanSea_EventScript_Nauplios {
+    trainerbattle_single(TRAINER_ICHOR_NAUPLIOS, Kythera_Text_NaupliosIntro, Kythera_Text_NaupliosDefeat)
+    setspeaker(Kythera_Text_SpeakerNauplios)
+    msgbox(Kythera_Text_NaupliosAfter, MSGBOX_AUTOCLOSE)
+}
+
 script Route23_CretanSea_EventScript_Wreck {
     msgbox(format("The ribs of an old ship, sticking out of the reef like a fish's bones.\p"
                   "Somebody's ship. Somebody's cargo. Somebody's very bad afternoon."), MSGBOX_SIGN)

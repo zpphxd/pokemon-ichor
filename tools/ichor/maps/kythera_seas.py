@@ -187,6 +187,13 @@ def cretan():
         obj("ICHOR_DIVER", 67, 13, "left", P + "Kymaios", "LOCALID_R22C_KYMAIOS", trainer=4),
         obj("ICHOR_SAILOR", 50, 15, "left", P + "Antalkidas", "LOCALID_R22C_ANTALKIDAS", trainer=3,
             solid_ok=True),
+        # the other swimmers: a diver in plain view off the stakes, one in the
+        # southern line's gap, a castaway sailor on the Kaldera sandbar, and a
+        # fisher on Polyaigos's south beach
+        obj("ICHOR_DIVER", 26, 18, "down", P + "Aktaios", "LOCALID_R22C_AKTAIOS", trainer=4),
+        obj("ICHOR_DIVER", 41, 22, "down", P + "Nerine", "LOCALID_R22C_NERINE", trainer=4),
+        obj("ICHOR_SAILOR", 58, 13, "left", P + "Phorbas", "LOCALID_R22C_PHORBAS", trainer=3),
+        obj("ICHOR_FISHER", 34, 15, "down", P + "Lampros", "LOCALID_R22C_LAMPROS", trainer=3),
         item_ball(49, 10, "ITEM_MAX_ETHER", "FLAG_ICHOR_ITEM_ROUTE22_MAX_ETHER"),
         item_ball(33, 11, "ITEM_NET_BALL", "FLAG_ICHOR_ITEM_ROUTE22_NET_BALL"),         # under Polyaigos's pine
         item_ball(2, 11, "ITEM_MYSTIC_WATER", "FLAG_ICHOR_ITEM_ROUTE22_MYSTIC_WATER"),  # the cape's spring
@@ -276,6 +283,7 @@ def myrtoan():
     rock2(g, 26, 13, "stack")
     rock2(g, 62, 14, "stack")
     g.piece("rocks", "rock_sand", 38, 14)                     # Nikandros's fishing rock
+    g.put("kaiki", 64, 6, cx=0, w=3, h=2)                    # Kleitos's boat, under the cliffs
     # Myrtilos's islet: the grave between its cypresses, a rock on the west
     # beach, shells
     g.cypress(20, 23)
@@ -296,6 +304,12 @@ def myrtoan():
         obj("ICHOR_FISHER", 38, 14, "down", P + "Nikandros", "LOCALID_R22M_NIKANDROS", trainer=3,
             solid_ok=True),
         obj("ICHOR_DIVER", 54, 25, "right", P + "Hagne", "LOCALID_R22M_HAGNE", trainer=1),
+        # the other swimmers: divers watching the two lines' gaps, a sailor
+        # in his boat under Malea, a fisher on Myrtilos's east beach
+        obj("ICHOR_DIVER", 19, 9, "down", P + "Psamathe", "LOCALID_R22M_PSAMATHE", trainer=4),
+        obj("ICHOR_DIVER", 45, 20, "down", P + "Pelagon", "LOCALID_R22M_PELAGON", trainer=4),
+        obj("ICHOR_SAILOR", 64, 6, "left", P + "Kleitos", "LOCALID_R22M_KLEITOS", trainer=4, solid_ok=True),
+        obj("ICHOR_FISHER", 26, 24, "right", P + "Doros", "LOCALID_R22M_DOROS", trainer=3),
         item_ball(21, 23, "ITEM_PP_UP", "FLAG_ICHOR_ITEM_ROUTE22_PP_UP"),          # behind the grave
         item_ball(67, 2, "ITEM_DIVE_BALL", "FLAG_ICHOR_ITEM_ROUTE22_DIVE_BALL"),   # Malea's shingle bank
         item_ball(48, 14, "ITEM_FULL_HEAL", "FLAG_ICHOR_ITEM_ROUTE22_FULL_HEAL"),  # the sandbar
@@ -330,6 +344,8 @@ def route23():
         s.land(x, 19, "s")
     for x in range(34, 37):
         s.land(x, 20, "s")
+    # a third, small one out past the islet, where Nauplios waits out the Titans
+    islet(s, 46, [(22, "ssss"), (23, " ss ")])
     # Antikythera: a beach all round, an old olive on its hump with wild grass
     # round it (the HP Up in a hollow of it), a cypress, the marker stone
     islet(s, 36, [
@@ -399,6 +415,12 @@ def route23():
         obj("ICHOR_DIVER", 14, 6, "down", P + "Bathyllos", "LOCALID_R23_BATHYLLOS", trainer=3),
         obj("ICHOR_SAILOR", 27, 14, "up", P + "Euthykles", "LOCALID_R23_EUTHYKLES", trainer=3, solid_ok=True),
         obj("ICHOR_DIVER", 44, 35, "right", P + "Myrsine", "LOCALID_R23_MYRSINE", trainer=1),
+        # the other swimmers: a diver on the way in to the channel, one
+        # keeping lookout off the second sandbar, a sailor in his boat on the
+        # open water past the islet
+        obj("ICHOR_DIVER", 24, 8, "down", P + "Akamas", "LOCALID_R23_AKAMAS", trainer=4),
+        obj("ICHOR_DIVER", 38, 19, "left", P + "Eione", "LOCALID_R23_EIONE", trainer=4),
+        obj("ICHOR_SAILOR", 46, 22, "left", P + "Nauplios", "LOCALID_R23_NAUPLIOS", trainer=4),
         item_ball(44, 26, "ITEM_BIG_PEARL", "FLAG_ICHOR_ITEM_ROUTE23_BIG_PEARL"),     # on the beach
         item_ball(40, 29, "ITEM_HP_UP", "FLAG_ICHOR_ITEM_ROUTE23_HP_UP"),             # in the grass, by the olive
         item_ball(35, 19, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_ROUTE23_ULTRA_BALL"),    # the second sandbar

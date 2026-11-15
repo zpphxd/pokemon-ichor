@@ -11025,6 +11025,292 @@ Level: 44
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 ```
 
+## The sea routes' other swimmers (ids 348–358)
+
+The route standard (MAP_DESIGN.md §8.2) wants at least 0.35 trainers a screen on a sea route, so 6 on each of Route 22's two maps and on Route 23. These eleven join the seven above: divers in the rock lines' gaps and in plain view, sailors in a boat or stranded on a sandbar, fishers on the islets' beaches. All optional; levels 42–43 on Route 22 and 43–45 on Route 23.
+
+**Route 22, the Cretan Sea.**
+
+**1. DIVER Aktaios** ("of the shore"). Off the trireme lane's stakes near the Melos end, in plain view.
+```text
+Before: AKTAIOS: Swam out from Melos for sponges. Found you instead.
+Defeat: AKTAIOS: Back to the sponges, then.
+After:  AKTAIOS: The stakes mark the trireme lane. Deep water. Keep this side of them.
+```
+```
+=== TRAINER_ICHOR_AKTAIOS ===
+Name: AKTAIOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. DIVER Nerine** ("of Nereus"). Watching the southern rock line's middle gap.
+```text
+Before: NERINE: You came through the gap? That's my gap. Battle for it.
+Defeat: NERINE: Fine. We'll share it.
+After:  NERINE: The rocks make lanes. Swim the lanes and you never get lost. Mostly.
+```
+```
+=== TRAINER_ICHOR_NERINE ===
+Name: NERINE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Swimmer
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**3. SAILOR Phorbas.** Stranded on the sandbar off the Kaldera end, by its jar.
+```text
+Before: PHORBAS: I pulled my boat up here to sleep. The tide took the boat. I kept the sandbar.
+Defeat: PHORBAS: I'm losing everything today.
+After:  PHORBAS: If you see a boat with an eye painted on the bow, it's mine. Push it this way.
+```
+```
+=== TRAINER_ICHOR_PHORBAS ===
+Name: PHORBAS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**4. FISHER Lampros.** On Polyaigos's south beach, where the player lands.
+```text
+Before: LAMPROS: One goat on this whole island, and he eats my bait. Battle.
+Defeat: LAMPROS: Even the goat beats me.
+After:  LAMPROS: A hundred goats here once. The Titans took ninety-nine. They left the rude one.
+```
+```
+=== TRAINER_ICHOR_LAMPROS ===
+Name: LAMPROS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**Route 22, the Myrtoan Sea.**
+
+**5. DIVER Psamathe** (a Nereid, "sand"). Watching the northern rock line's western gap.
+```text
+Before: PSAMATHE: I was counting the rocks in this line. You made me lose count.
+Defeat: PSAMATHE: Forty-one. Or forty. Start again.
+After:  PSAMATHE: Malea's cliffs make the swell. Ride it. Don't fight it.
+```
+```
+=== TRAINER_ICHOR_PSAMATHE ===
+Name: PSAMATHE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Swimmer
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**6. DIVER Pelagon** ("of the open sea"). Watching the southern line's gap, west of the drowned temple.
+```text
+Before: PELAGON: Open sea, open water, open battle. Ready?
+Defeat: PELAGON: Closed. Battle closed.
+After:  PELAGON: There's a drowned temple east of here. Hagne says it's hers. Everything's Hagne's.
+```
+```
+=== TRAINER_ICHOR_PELAGON ===
+Name: PELAGON
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**7. SAILOR Kleitos.** In his boat under Malea's cliffs, where the Titans won't row.
+```text
+Before: KLEITOS: I fish under Malea. The Titans won't row this close. Scared of the cliffs.
+Defeat: KLEITOS: Braver than a Titan. Not hard.
+After:  KLEITOS: Round Malea and you forget your home, they say. I've been round a hundred times. Where do I live?
+```
+```
+=== TRAINER_ICHOR_KLEITOS ===
+Name: KLEITOS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**8. FISHER Doros.** On the east beach of Myrtilos's islet, below the grave.
+```text
+Before: DOROS: Quiet. I'm fishing by a grave. It's respectful fishing.
+Defeat: DOROS: Very respectful. Very beaten.
+After:  DOROS: Myrtilos is buried up there. Or his name is. The sea kept the rest.
+```
+```
+=== TRAINER_ICHOR_DOROS ===
+Name: DOROS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**Route 23.**
+
+**9. DIVER Akamas.** On the way in to Euthykles's channel, from the north.
+```text
+Before: AKAMAS: Making for the islet? You'll have to get past Euthykles. And me.
+Defeat: AKAMAS: Just Euthykles, then.
+After:  AKAMAS: Euthykles rows that gap all day. He's lonely. Talk to him after.
+```
+```
+=== TRAINER_ICHOR_AKAMAS ===
+Name: AKAMAS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**10. DIVER Eione** (a Nereid, "of the beach"). Keeping lookout off the second sandbar, facing its jar.
+```text
+Before: EIONE: This sandbar's my lookout. I saw you coming a long way off.
+Defeat: EIONE: Saw you coming. Didn't see that.
+After:  EIONE: At low water you can see the wreck's ribs from here. Like a fish on a plate.
+```
+```
+=== TRAINER_ICHOR_EIONE ===
+Name: EIONE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Swimmer
+AI: Basic Trainer
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrogene
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**11. SAILOR Nauplios.** On a little sandbar out past the islet, waiting out the Titans. Named for the wrecker of Euboea's coast.
+```text
+Before: NAUPLIOS: My great-grandfather lit fires on the cliffs to bring ships onto the rocks. I just battle.
+Defeat: NAUPLIOS: He'd be ashamed. Or proud. Hard to say.
+After:  NAUPLIOS: That wreck on the reef? Not one of ours. Probably.
+```
+```
+=== TRAINER_ICHOR_NAUPLIOS ===
+Name: NAUPLIOS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Narkeray
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kynoketos
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
 ## Every species in Kythera's teams and tables, with its link
 
 | Species | Where | Link |

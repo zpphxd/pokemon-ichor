@@ -20,6 +20,30 @@ script Route22_CretanSea_EventScript_Antalkidas {
     msgbox(Kythera_Text_AntalkidasAfter, MSGBOX_AUTOCLOSE)
 }
 
+script Route22_CretanSea_EventScript_Aktaios {
+    trainerbattle_single(TRAINER_ICHOR_AKTAIOS, Kythera_Text_AktaiosIntro, Kythera_Text_AktaiosDefeat)
+    setspeaker(Kythera_Text_SpeakerAktaios)
+    msgbox(Kythera_Text_AktaiosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_CretanSea_EventScript_Nerine {
+    trainerbattle_single(TRAINER_ICHOR_NERINE, Kythera_Text_NerineIntro, Kythera_Text_NerineDefeat)
+    setspeaker(Kythera_Text_SpeakerNerine)
+    msgbox(Kythera_Text_NerineAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_CretanSea_EventScript_Phorbas {
+    trainerbattle_single(TRAINER_ICHOR_PHORBAS, Kythera_Text_PhorbasIntro, Kythera_Text_PhorbasDefeat)
+    setspeaker(Kythera_Text_SpeakerPhorbas)
+    msgbox(Kythera_Text_PhorbasAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_CretanSea_EventScript_Lampros {
+    trainerbattle_single(TRAINER_ICHOR_LAMPROS, Kythera_Text_LamprosIntro, Kythera_Text_LamprosDefeat)
+    setspeaker(Kythera_Text_SpeakerLampros)
+    msgbox(Kythera_Text_LamprosAfter, MSGBOX_AUTOCLOSE)
+}
+
 script Route22_CretanSea_EventScript_Anydros {
     msgbox(format("Anydros, the waterless. A bare rock and one fig tree, dead of thirst."), MSGBOX_SIGN)
 }

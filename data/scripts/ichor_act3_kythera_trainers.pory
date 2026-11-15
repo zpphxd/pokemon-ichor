@@ -1,7 +1,7 @@
 // Act III's trainers in Kythera and Melos: their Before, Defeat and After lines
 // (design/phase4/SCRIPT.md Part 3, "Kythera's trainers"), for the outdoor maps
 // to reference while those maps are being built. Parties are in
-// src/data/trainers.party, ids in include/constants/opponents.h (320-347).
+// src/data/trainers.party, ids in include/constants/opponents.h (320-358).
 //
 // For each trainer <Name>:
 //   Kythera_Text_Speaker<Name>   the name box
@@ -141,6 +141,120 @@ text Kythera_Text_HagneDefeat {
 
 text Kythera_Text_HagneAfter {
     format("Something shiny at its foot. I'm saving it. Take it. I'll find another.")
+}
+
+// Route 22's other swimmers (ids 348-355): the Cretan Sea, then the Myrtoan.
+
+text Kythera_Text_SpeakerAktaios { "AKTAIOS" }
+
+text Kythera_Text_AktaiosIntro {
+    format("Swam out from Melos for sponges. Found you instead.")
+}
+
+text Kythera_Text_AktaiosDefeat {
+    format("Back to the sponges, then.")
+}
+
+text Kythera_Text_AktaiosAfter {
+    format("The stakes mark the trireme lane. Deep water. Keep this side of them.")
+}
+
+text Kythera_Text_SpeakerNerine { "NERINE" }
+
+text Kythera_Text_NerineIntro {
+    format("You came through the gap? That's my gap. Battle for it.")
+}
+
+text Kythera_Text_NerineDefeat {
+    format("Fine. We'll share it.")
+}
+
+text Kythera_Text_NerineAfter {
+    format("The rocks make lanes. Swim the lanes and you never get lost. Mostly.")
+}
+
+text Kythera_Text_SpeakerPhorbas { "PHORBAS" }
+
+text Kythera_Text_PhorbasIntro {
+    format("I pulled my boat up here to sleep. The tide took the boat. I kept the sandbar.")
+}
+
+text Kythera_Text_PhorbasDefeat {
+    format("I'm losing everything today.")
+}
+
+text Kythera_Text_PhorbasAfter {
+    format("If you see a boat with an eye painted on the bow, it's mine. Push it this way.")
+}
+
+text Kythera_Text_SpeakerLampros { "LAMPROS" }
+
+text Kythera_Text_LamprosIntro {
+    format("One goat on this whole island, and he eats my bait. Battle.")
+}
+
+text Kythera_Text_LamprosDefeat {
+    format("Even the goat beats me.")
+}
+
+text Kythera_Text_LamprosAfter {
+    format("A hundred goats here once. The Titans took ninety-nine. They left the rude one.")
+}
+
+text Kythera_Text_SpeakerPsamathe { "PSAMATHE" }
+
+text Kythera_Text_PsamatheIntro {
+    format("I was counting the rocks in this line. You made me lose count.")
+}
+
+text Kythera_Text_PsamatheDefeat {
+    format("Forty-one. Or forty. Start again.")
+}
+
+text Kythera_Text_PsamatheAfter {
+    format("Malea's cliffs make the swell. Ride it. Don't fight it.")
+}
+
+text Kythera_Text_SpeakerPelagon { "PELAGON" }
+
+text Kythera_Text_PelagonIntro {
+    format("Open sea, open water, open battle. Ready?")
+}
+
+text Kythera_Text_PelagonDefeat {
+    format("Closed. Battle closed.")
+}
+
+text Kythera_Text_PelagonAfter {
+    format("There's a drowned temple east of here. Hagne says it's hers. Everything's Hagne's.")
+}
+
+text Kythera_Text_SpeakerKleitos { "KLEITOS" }
+
+text Kythera_Text_KleitosIntro {
+    format("I fish under Malea. The Titans won't row this close. Scared of the cliffs.")
+}
+
+text Kythera_Text_KleitosDefeat {
+    format("Braver than a Titan. Not hard.")
+}
+
+text Kythera_Text_KleitosAfter {
+    format("Round Malea and you forget your home, they say. I've been round a hundred times. Where do I live?")
+}
+
+text Kythera_Text_SpeakerDoros { "DOROS" }
+
+text Kythera_Text_DorosIntro {
+    format("Quiet. I'm fishing by a grave. It's respectful fishing.")
+}
+
+text Kythera_Text_DorosDefeat {
+    format("Very respectful. Very beaten.")
+}
+
+text Kythera_Text_DorosAfter {
+    format("Myrtilos is buried up there. Or his name is. The sea kept the rest.")
 }
 
 // -----------------------------------------------------------------------------
@@ -414,4 +528,48 @@ text Kythera_Text_MyrsineDefeat {
 
 text Kythera_Text_MyrsineAfter {
     format("Something shiny's in the ribs. You've got longer arms.")
+}
+
+// Route 23's other swimmers (ids 356-358).
+
+text Kythera_Text_SpeakerAkamas { "AKAMAS" }
+
+text Kythera_Text_AkamasIntro {
+    format("Making for the islet? You'll have to get past Euthykles. And me.")
+}
+
+text Kythera_Text_AkamasDefeat {
+    format("Just Euthykles, then.")
+}
+
+text Kythera_Text_AkamasAfter {
+    format("Euthykles rows that gap all day. He's lonely. Talk to him after.")
+}
+
+text Kythera_Text_SpeakerEione { "EIONE" }
+
+text Kythera_Text_EioneIntro {
+    format("This sandbar's my lookout. I saw you coming a long way off.")
+}
+
+text Kythera_Text_EioneDefeat {
+    format("Saw you coming. Didn't see that.")
+}
+
+text Kythera_Text_EioneAfter {
+    format("At low water you can see the wreck's ribs from here. Like a fish on a plate.")
+}
+
+text Kythera_Text_SpeakerNauplios { "NAUPLIOS" }
+
+text Kythera_Text_NaupliosIntro {
+    format("My great-grandfather lit fires on the cliffs to bring ships onto the rocks. I just battle.")
+}
+
+text Kythera_Text_NaupliosDefeat {
+    format("He'd be ashamed. Or proud. Hard to say.")
+}
+
+text Kythera_Text_NaupliosAfter {
+    format("That wreck on the reef? Not one of ours. Probably.")
 }

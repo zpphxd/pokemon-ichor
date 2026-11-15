@@ -17,6 +17,10 @@ Identity: the shipyard with no ships. North to south:
   terrace wall with a stair and a spring spout drops to the lower lane, the
   perfumer's and the divers' houses, and a pocket beach.
 
+Finds: a Sea Incense in the pocket beach's far corner; hidden, a Big Pearl in
+the harbor shrine's niche among the shells and a Heart Scale at the foot of
+the boat's slip.
+
 The main street's head (x = 19, rows 16-17) is the only way from the quay
 into the town, so III-1C2's trigger there always runs before Axylos's door.
 
