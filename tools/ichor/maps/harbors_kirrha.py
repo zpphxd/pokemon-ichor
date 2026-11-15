@@ -221,7 +221,7 @@ def compose():
     for y in range(13, 20):
         for x in range(4, 9):
             if g.free(x, y):
-                g.set(x, y, FLOWERS if hashed(x, y, 3) < 0.25 else GRASS, True)
+                g.set(x, y, FLOWERS if hashed(x, y, 3) < 0.25 else GRASS, False)  # fenced off
 
     # --- the waterfront ---------------------------------------------------
     g.put("fish_market", 14, 18)

@@ -146,7 +146,9 @@ def events():
             flag="FLAG_TEMP_2", move="MOVEMENT_TYPE_FACE_DOWN"),
         obj("LOCALID_AIGION_ALETHEA", "OBJ_EVENT_GFX_ICHOR_ALETHEA", *ALETHEA_ROAD, S + "AletheaRoad",
             flag="FLAG_ICHOR_HIDE_ALETHEA_AIGION", move="MOVEMENT_TYPE_FACE_UP"),
-        obj("LOCALID_AIGION_GROVE_KEEPER", "OBJ_EVENT_GFX_ICHOR_PRIESTESS", *KEEPER, S + "GroveKeeper",
+        # the healer's walker: EventScript_AfterWhiteOutHeal bows the respawn NPC with
+        # nurse_joy_bow, which only the healer's animation table can do
+        obj("LOCALID_AIGION_GROVE_KEEPER", "OBJ_EVENT_GFX_ICHOR_HEALER", *KEEPER, S + "GroveKeeper",
             move="MOVEMENT_TYPE_FACE_DOWN"),
         obj("LOCALID_AIGION_FISHER", "OBJ_EVENT_GFX_ICHOR_FISHER", 4, 3, S + "Fisher",
             move="MOVEMENT_TYPE_FACE_UP"),

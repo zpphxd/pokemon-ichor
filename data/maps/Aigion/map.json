@@ -59,7 +59,7 @@
     },
     {
       "local_id": "LOCALID_AIGION_GROVE_KEEPER",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HEALER",
       "x": 12,
       "y": 13,
       "elevation": 3,

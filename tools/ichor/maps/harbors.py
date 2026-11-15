@@ -50,6 +50,7 @@ ROOT = Path(__file__).resolve().parents[3]
 # ---------------------------------------------------------------------------
 GRASS = 0x001
 GRASS_LEDGE = 0x002
+GRASS_SHADE = 0x01C      # grass in deep shade: the closed ground under the trees
 FLOWERS = 0x004
 STELE = 0x003
 HERM = 0x01B
@@ -310,9 +311,18 @@ def fill_trees(g, zone, salt=21, pines=0.12, olives=0.62):
     for (x, y) in cands:
         if (x, y + 1) in zs and g.free(x, y, 1, 2) and hashed(x, y, salt + 5) < 0.75:
             g.cypress(x, y)
+    # what's left: a rock where the grove meets open ground (so a gap never reads as
+    # a way in), open grass inside it, sealed off by the trees and rocks round it
     for (x, y) in cands:
-        if g.free(x, y):
-            g.set(x, y, BOULDER if hashed(x, y, salt + 9) < 0.3 else GRASS, True)
+        if not g.free(x, y):
+            continue
+        rim = any(not g.inside(x + dx, y + dy) or ((x + dx, y + dy) not in zs and
+                                                   not g.solid[y + dy, x + dx])
+                  for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+        if rim:
+            g.set(x, y, BOULDER, True)
+        else:
+            g.set(x, y, GRASS, False)
 
 
 def encode(g):
