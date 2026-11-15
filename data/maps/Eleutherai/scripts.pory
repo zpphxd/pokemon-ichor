@@ -162,7 +162,7 @@ script Eleutherai_EventScript_OldMan {
 script Eleutherai_EventScript_Sheep {
     lock
     faceplayer
-    playmoncry(SPECIES_WOOLOO, CRY_MODE_NORMAL)
+    playmoncry(SPECIES_AMNOZE, CRY_MODE_NORMAL)
     msgbox(format("Baa."))
     waitmoncry
     release

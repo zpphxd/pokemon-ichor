@@ -1405,14 +1405,6 @@
 #define METATILE_Parnassos_Drum                 0x2CD
 // end gTileset_Parnassos
 
-// gTileset_Trophonios (Ichor: Trophonios's cave), written by tools/ichor/art/trophonios_build.py
-#define METATILE_Trophonios_Brazier_ColdTop      0x21E
-#define METATILE_Trophonios_Brazier_Cold         0x226
-#define METATILE_Trophonios_Brazier_LitTop       0x21F
-#define METATILE_Trophonios_Brazier_Lit          0x227
-#define METATILE_Trophonios_Cleft_Coils          0x278
-#define METATILE_Trophonios_Cleft_Empty          0x279
-// end gTileset_Trophonios
 // gTileset_TempleArtemis (Ichor: the Hunt for the Hind), written by tools/ichor/art/temple_artemis_build.py
 #define METATILE_TempleArtemis_StairHedge_L           0x320
 #define METATILE_TempleArtemis_StairHedge_Lowered_L   0x321

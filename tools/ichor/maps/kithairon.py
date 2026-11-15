@@ -397,9 +397,9 @@ def eleutherai():
             obj(P + "HOPLITE", 22, 16, EL + "Sentry", "MOVEMENT_TYPE_FACE_DOWN"),
             obj(P + "KID_M", 15, 20, EL + "ShepherdBoy", "MOVEMENT_TYPE_FACE_LEFT"),
             obj(P + "ELDER_M", 14, 20, EL + "OldMan", "MOVEMENT_TYPE_FACE_UP"),
-            obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 26, 24, EL + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
-            obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 28, 21, EL + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
-            obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 18, 24, EL + "Sheep", "MOVEMENT_TYPE_FACE_RIGHT"),
+            obj("OBJ_EVENT_GFX_SPECIES(AMNOZE)", 26, 24, EL + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+            obj("OBJ_EVENT_GFX_SPECIES(AMNOZE)", 28, 21, EL + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+            obj("OBJ_EVENT_GFX_SPECIES(AMNOZE)", 18, 24, EL + "Sheep", "MOVEMENT_TYPE_FACE_RIGHT"),
             # the dead end east of the fort's stair: a jar left by the wall
             item_ball(30, 17, "ITEM_FRESH_WATER", "FLAG_ICHOR_ITEM_ELEUTHERAI_FRESH_WATER"),
         ],
@@ -612,7 +612,7 @@ def kithairon():
             {"map": "MAP_ROUTE7_KRONIA_GROUNDS", "offset": MK_NORTH - R7_SOUTH, "direction": "up"},
         ],
         "object_events": [
-            obj(P + "GOATHERD", 10, 48, MK + "Lykidas", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=4),
+            obj(P + "GOATHERD", 10, 48, MK + "Korydon", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=4),
             obj(P + "MAENAD", 26, 32, MK + "Euia", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2,
                 local_id="LOCALID_KITHAIRON_EUIA"),
             obj(P + "MAENAD", 31, 34, MK + "Bromia", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3,
@@ -639,8 +639,8 @@ def kithairon():
             item_ball(31, 48, "ITEM_HYPER_POTION", "FLAG_ICHOR_ITEM_KITHAIRON_HYPER_POTION"),
             item_ball(5, 35, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_KITHAIRON_ULTRA_BALL"),
             obj(P + "SHEPHERD", 16, 13, MK + "Phorbas", "MOVEMENT_TYPE_FACE_RIGHT"),
-            obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 10, 14, MK + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
-            obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 7, 13, MK + "Sheep", "MOVEMENT_TYPE_FACE_RIGHT"),
+            obj("OBJ_EVENT_GFX_SPECIES(AMNOZE)", 10, 14, MK + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+            obj("OBJ_EVENT_GFX_SPECIES(AMNOZE)", 7, 13, MK + "Sheep", "MOVEMENT_TYPE_FACE_RIGHT"),
             obj(P + "TITAN_GRUNT", 33, 8, MK + "Ilys", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
             # the route standard's four more, at the bands and narrows
             obj(P + "SHEPHERD", 4, 45, MK + "Damoitas", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=5),

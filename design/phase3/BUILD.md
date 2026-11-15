@@ -566,6 +566,14 @@ The report gives the ROM delta. Batch 5 is five outdoor sets, three or four room
 - **Renames:** Tyrtamos, Krates and Archytas are approved.
 - **Phaleron's south edge:** open water with no connection for now. Batch 7 (the open Aegean) or world-act1 joins it later; leave the 8-column aethos-only strip clear.
 
+## Waiting on the engine branch
+
+These are built on `claude/ichor-engine-systems-5a55eb` but not yet on main. Wire each one up here once main has it and main is merged:
+- **Glow-paint** (ENGINE_API §2, 4e23d97d94). Declare `gTilesetPalettes_TrophoniosGlow` (from `data/tilesets/secondary/trophonios/glow/00.pal`–`15.pal`) and `gTilesetPalettes_KithaironCaveGlow` (from `cave_dark/glow/`) in `src/data/tilesets/graphics.h`. Add `{ &gTileset_<set>, <glow palettes> }` rows to `src/data/ichor_glow.h`. Then remove the chalk's "read by torchlight" fallback from TILES_trophonios.md.
+- **Digs, decoys, xenia, knucklebones, the moneychanger, omens and the level check** (4c11c5e57f; see Batch 5's "The engine's answers"). Swap the `ICHOR_STUB_DIG`, `_XENIA_REST`, `_KNUCKLEBONES`, `_OMENS` and `_LEVEL_CHECK` stubs in batches 1–3 for the real calls. Daily-dig indices: batch 5 takes +0x20–0x26, then batches 1–3 from +0x27 (Thyrsa 2, Route 8 4, Route 9 2, Kithairon 3, Arkadia and the Wood 9, the heights 5: 25 spots, so +0x27–0x3F holds them all).
+- **`FLAME_PANATHENAIA`** (4e23d97d94). The flame travels through warps and map edges. Start the race with `setvar(VAR_0x8004, FLAME_PANATHENAIA); setvar(VAR_0x8005, <steps>); special(Ichor_TakeFlame)`. The festival-day check is still unbuilt.
+- **The lit-zone fixes** (4b28898830): Trophonios's `VAR_TEMP_6` guard can go.
+
 ## Handovers waiting for later batches
 
 **Batch 4, Aigina's interior** (from world-act1, 2026-11-14; maps on `claude/world-act1-6d11b7` at 1090709095, seams and spots in `design/phase2/BUILD.md`, the island stitched in `design/phase2/img/aigina_island.png`). `MAP_AEGINA_APHAIA_ROAD`, `MAP_AEGINA_TEMPLE_OF_APHAIA` and `MAP_AEGINA_MOUNT_OROS` are connected to the town and each other. The town's north gate opens on `FLAG_ICHOR_FERRY_TO_AEGINA`. Placeholders for us to replace, each with a script tagged `ICHOR_ACT2`:
@@ -701,7 +709,7 @@ The theater's warp 0 is its gate back to the city's warp 11.
 
 | Ids | Agent | Trainers |
 |---|---|---|
-| 160–175 | kithairon | Route 6: Ikarios, Pythodoros, Botrys, Astylos. Eleutherai: Timolaos. Kithairon: Lykidas, Euia, Bromia, Arimnestos, grunt Ilys. Route 7: Komos, Hagnon; the Kronia: grunts Argillos, Keramos, Plinthos, Gypsos |
+| 160–175 | kithairon | Route 6: Ikarios, Pythodoros, Botrys, Astylos. Eleutherai: Timolaos. Kithairon: Korydon, Euia, Bromia, Arimnestos, grunt Ilys. Route 7: Komos, Hagnon; the Kronia: grunts Argillos, Keramos, Plinthos, Gypsos |
 | 176–178 | thyrsa | Thyrsa City: Oinopion, Lenaia, Hegelochos |
 | 179–182 | temple | Mynniskos, Thettalos, Theodoros; Thespis |
 | 183–187 | scenes | Borboros (the actor); Kleon's three (`_3_KYNDER`, `_3_HIPLING`, `_3_NEBREL`); Silenos |

@@ -205,6 +205,8 @@ L.start(function()
     if mid and not blocked and e == 3 then open = open + 1 end
   end
   if open > 0 then
+    -- Beat 41's arrival is act2_arkadia's to test; here only the seam is.
+    L.setFlag(S.FLAG_ARRIVED_ARKADIA, true)
     L.leaveEdge("down", S.MAP_ARKADIA)
     expect(L.mapId() == S.MAP_ARKADIA, "down the Cypress Road into Arkadia")
     shot("arkadia_arrival")

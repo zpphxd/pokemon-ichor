@@ -28,7 +28,7 @@ mapscripts MtKithairon_MapScripts {
 
 text MtKithairon_Text_SpeakerMaenad { "MAENAD" }
 text MtKithairon_Text_SpeakerPhorbas { "PHORBAS" }
-text MtKithairon_Text_SpeakerLykidas { "LYKIDAS" }
+text MtKithairon_Text_SpeakerKorydon { "KORYDON" }
 text MtKithairon_Text_SpeakerEuia { "EUIA" }
 text MtKithairon_Text_SpeakerBromia { "BROMIA" }
 text MtKithairon_Text_SpeakerArimnestos { "ARIMNESTOS" }
@@ -194,24 +194,24 @@ script MtKithairon_EventScript_Heal {
 script MtKithairon_EventScript_Sheep {
     lock
     faceplayer
-    playmoncry(SPECIES_WOOLOO, CRY_MODE_NORMAL)
+    playmoncry(SPECIES_AMNOZE, CRY_MODE_NORMAL)
     msgbox(format("Baa."))
     waitmoncry
     release
 }
 
 // --- trainers -----------------------------------------------------------------------------------
-script MtKithairon_EventScript_Lykidas {
-    trainerbattle_single(TRAINER_ICHOR_LYKIDAS, MtKithairon_Text_LykidasIntro, MtKithairon_Text_LykidasDefeat)
-    setspeaker(MtKithairon_Text_SpeakerLykidas)
+script MtKithairon_EventScript_Korydon {
+    trainerbattle_single(TRAINER_ICHOR_KORYDON, MtKithairon_Text_KorydonIntro, MtKithairon_Text_KorydonDefeat)
+    setspeaker(MtKithairon_Text_SpeakerKorydon)
     msgbox(format("Kithairon eats people, they say. It's never eaten me. I taste of goat."), MSGBOX_AUTOCLOSE)
 }
 
-text MtKithairon_Text_LykidasIntro {
+text MtKithairon_Text_KorydonIntro {
     format("My goats climbed this mountain before your grandmother did. So did I. Battle!")
 }
 
-text MtKithairon_Text_LykidasDefeat {
+text MtKithairon_Text_KorydonDefeat {
     format("Beaten by a lowlander! Don't tell the goats.")
 }
 
@@ -361,7 +361,7 @@ script MtKithairon_EventScript_Damoitas {
 }
 
 text MtKithairon_Text_DamoitasIntro {
-    format("Lykidas's goats ate my hat. I'm in a fighting mood.")
+    format("Korydon's goats ate my hat. I'm in a fighting mood.")
 }
 
 text MtKithairon_Text_DamoitasDefeat {

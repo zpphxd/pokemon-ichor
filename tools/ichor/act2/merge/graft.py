@@ -17,7 +17,13 @@ for f in sys.argv[3:]:
             cur = [a, []]; hunks.append(cur)
         elif cur is not None and line.startswith('+') and not line.startswith('+++'):
             cur[1].append(line[1:])
+    skipped = 0
     for a, added in hunks:
+        # theirs may re-add a block ours already has (a branch that merged us and moved it):
+        # skip any added block whose definition lines are all in ours already
+        defs = [l for l in added if l.strip() and not l.strip().startswith('//')]
+        if defs and all(l in ours for l in defs):
+            skipped += 1; continue
         for k in range(40, 0, -1):
             ctx = b[max(0, a - k):a]
             hits = [i for i in range(len(ours) - len(ctx) + 1) if ours[i:i + len(ctx)] == ctx]
@@ -27,4 +33,4 @@ for f in sys.argv[3:]:
             sys.exit(f'{f}: no unique anchor for hunk at base line {a}')
         ours[at:at] = added
     open(f, 'w').write('\n'.join(ours))
-    print(f, len(hunks), 'hunks grafted')
+    print(f, len(hunks) - skipped, 'hunks grafted', f'({skipped} already here)' if skipped else '')

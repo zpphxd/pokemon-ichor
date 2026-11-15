@@ -106,7 +106,8 @@ local function main()
 
   -- ==================================================================== Styx Falls
   L.setBeat("inn", false)
-  into(S.MAP_INN, 8, 8, { flags = { S.FLAG_SYS_POKEMON_GET, S.FLAG_ACT2_BEGUN }, extra = team })
+  -- FLAG_SAW_STYX: beat 39 (the Oath Stone) has played, so Alethea has walked to the inn.
+  into(S.MAP_INN, 8, 8, { flags = { S.FLAG_SYS_POKEMON_GET, S.FLAG_ACT2_BEGUN, S.FLAG_SAW_STYX }, extra = team })
   expect(partyCount() == 2, "the test team: a Gelasable and a test Pokémon")
   shot("StyxFalls_Inn")
   expect(L.objectOn(4, 7), "Alethea waits at the long table on the first visit")

@@ -4915,7 +4915,7 @@ Mt. Kithairon is a waypoint, not a route (`MAPSEC_MT_KITHAIRON`, per the revised
 
 **Layout.** About 40×44, climbing north. The road leaves Eleutherai, switchbacks up through fir forest to a pass between two rocky shoulders, and crosses a high meadow with the shepherds' fold. At the north edge the pass opens onto the mountain's north face, which is Route 7. Tree lines are thick black firs mixed with oak and wild pear, staggered 3–4 deep, with grey rock showing through. Ivy over everything near the top.
 
-**Rhythm:** the first switchbacks (calm, a view south over the vine terraces); Lykidas the goatherd in plain view on the bend; a forced band in a fir clearing, 4 deep, walled by fir trunks and a rock face; the maenads' dancing floor (beat 28) with Euia across its only exit and Bromia off to one side; the pass fork, with the boundary stone as its sign; Pentheus's fir; the shepherds' fold (the rest point); the ivy shrine, desecrated, with its guard, Ilys, on a side ledge; the pass's north lip, with Thyrsa's walls and the camp's smoke in view far below.
+**Rhythm:** the first switchbacks (calm, a view south over the vine terraces); Korydon the goatherd in plain view on the bend; a forced band in a fir clearing, 4 deep, walled by fir trunks and a rock face; the maenads' dancing floor (beat 28) with Euia across its only exit and Bromia off to one side; the pass fork, with the boundary stone as its sign; Pentheus's fir; the shepherds' fold (the rest point); the ivy shrine, desecrated, with its guard, Ilys, on a side ledge; the pass's north lip, with Thyrsa's walls and the camp's smoke in view far below.
 
 **Ledges.** The road climbs, so the ledges along the switchbacks drop south toward Eleutherai: the way home is quick.
 
@@ -4958,7 +4958,7 @@ North: down to Thyrsa. East: the spring. South: Eleutherai.
 |---|---|---|
 | Phorbas | the shepherds' fold | rest point and lore (beat 28) |
 | Maenads (5, then 2) | the dancing floor | beat 28; Euia and Bromia battle |
-| Lykidas, Euia, Bromia, Arimnestos, Ilys | along the road | trainers (Part 3) |
+| Korydon, Euia, Bromia, Arimnestos, Ilys | along the road | trainers (Part 3) |
 
 **The ivy shrine, desecrated** (per SYSTEMS.md §3, desecrated altars). A small rock shrine of Dionysus, ivy carved round a niche with a cup in it. A sickle is scratched across the cup. Ilys stands beside it (Part 3). Before Ilys is beaten:
 ```text
@@ -12502,15 +12502,15 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 ## Mt. Kithairon trainers, levels 25–27
 
-**1. GOATHERD Lykidas.** On the first switchback, in plain view, facing down the road. Sight 3.
+**1. GOATHERD Korydon.** On the first switchback, in plain view, facing down the road. Sight 3.
 ```text
-Before: LYKIDAS: My goats climbed this mountain before your grandmother did. So did I. Battle!
-Defeat: LYKIDAS: Beaten by a lowlander! Don't tell the goats.
-After:  LYKIDAS: Kithairon eats people, they say. It's never eaten me. I taste of goat.
+Before: KORYDON: My goats climbed this mountain before your grandmother did. So did I. Battle!
+Defeat: KORYDON: Beaten by a lowlander! Don't tell the goats.
+After:  KORYDON: Kithairon eats people, they say. It's never eaten me. I taste of goat.
 ```
 ```
-=== TRAINER_ICHOR_LYKIDAS ===
-Name: LYKIDAS
+=== TRAINER_ICHOR_KORYDON ===
+Name: KORYDON
 Class: Goatherd
 Pic: Goatherd
 Gender: Male
@@ -20886,7 +20886,7 @@ All names are Greek-rooted and clear of the Lazarus avoid-list (no Muse names, n
 | Pythodoros | PILGRIM, Route 6 | classical name |
 | Botrys | HARVESTER, Route 6 | "a bunch of grapes" |
 | Astylos | RUNNER, Route 6 | a famous sprinter of the old games, from Kroton |
-| Lykidas | GOATHERD, Mt. Kithairon | Theocritus's goatherd |
+| Korydon | GOATHERD, Mt. Kithairon | Theocritus's goatherd |
 | Euia, Bromia | MAENADS, Mt. Kithairon | the bacchants' cry, *euoi*; Bromios, the god's "roaring" name |
 | Arimnestos | HOPLITE, Mt. Kithairon | the Plataean commander at Marathon |
 | Komos | SATYR, Route 7 | the revel, which gave comedy its name |
