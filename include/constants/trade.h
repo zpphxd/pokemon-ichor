@@ -23,6 +23,8 @@ enum InGameTradeID
     INGAME_TRADE_SEEL,
     // Ichor
     INGAME_TRADE_ICHOR_ARION, // Kimon's Finizen, for a Wooloo (Elaia, Glykera's house)
+    // Ichor, the Oikoumene: Egypt's rooms (tools/ichor/maps/egypt_rooms.py)
+    INGAME_TRADE_ICHOR_POIKILOS, // Lykos's Kecleon, for a Smeargle (Naukratis, the potter's house)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

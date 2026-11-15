@@ -1,1 +1,91 @@
-mapscripts Naukratis_PottersHouse_MapScripts {}
+// The potter's house, Naukratis. Room: tools/ichor/maps/egypt_rooms.py.
+//
+// Lykos throws Naukratis's white-slipped chalices for the temples. His
+// Kecleon turns the colour of whatever pot it sits by, and he can never find
+// it; a Smeargle would put the colour on the pots instead. In-game trade
+// INGAME_TRADE_ICHOR_POIKILOS: your Smeargle for his Kecleon, POIKILOS
+// ("many-coloured"). After the trade the Smeargle sits where the Kecleon did,
+// painting; it hides on FLAG_TEMP_1, set on entry until the trade is done.
+
+mapscripts Naukratis_PottersHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_KECLEON)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Naukratis_PottersHouse_Name_Lykos { "LYKOS" }
+
+script Naukratis_PottersHouse_EventScript_Lykos {
+    lock
+    faceplayer
+    setspeaker(Naukratis_PottersHouse_Name_Lykos)
+    if (flag(FLAG_ICHOR_TRADED_KECLEON)) {
+        msgbox(format("Look at it go. Black-figure, red-figure, and something in between.\p"
+                      "The temple of Apollo ordered thirty cups. It's done twelve and eaten the brush twice."))
+        release
+        end
+    }
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_POIKILOS)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    msgbox(format("Mind the wet ones. My Kecleon's in here somewhere.\p"
+                  "It turns the colour of whatever pot it sits by. I lost it for three days once. It was on the kiln.\p"
+                  "What I need is a Smeargle. Something that puts colour on a pot, not the other way round.\p"
+                  "Bring me one and you can have Poikilos. Deal?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Naukratis_PottersHouse_Name_Lykos)
+        msgbox(format("If you meet a Smeargle with paint on its tail, you know where I am."))
+        release
+        end
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        setspeaker(Naukratis_PottersHouse_Name_Lykos)
+        msgbox(format("If you meet a Smeargle with paint on its tail, you know where I am."))
+        release
+        end
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Naukratis_PottersHouse_Name_Lykos)
+        msgbox(format("That's no Smeargle. Smeargle have paint on their tails. Usually mine."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    setflag(FLAG_ICHOR_TRADED_KECLEON)
+    removeobject(LOCALID_POTTER_KECLEON)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_POTTER_SMEARGLE)
+    setspeaker(Naukratis_PottersHouse_Name_Lykos)
+    msgbox(format("Poikilos, be good. And don't turn the colour of their Bag. They'll never find you."))
+    release
+}
+
+script Naukratis_PottersHouse_EventScript_Kecleon {
+    lock
+    playmoncry(SPECIES_KECLEON, CRY_MODE_NORMAL)
+    msgbox(format("Kecleon is exactly the colour of the chalice beside it. You only found it by its eyes."))
+    waitmoncry
+    release
+}
+
+script Naukratis_PottersHouse_EventScript_Smeargle {
+    lock
+    playmoncry(SPECIES_SMEARGLE, CRY_MODE_NORMAL)
+    msgbox(format("The Smeargle is painting a dolphin on a cup. It's mostly a dolphin."))
+    waitmoncry
+    release
+}
+
+script Naukratis_PottersHouse_EventScript_Shelf {
+    msgbox(format("White-slipped chalices with painted bands: Naukratis ware. By spring they'll be in temples all over Greece."),
+           MSGBOX_SIGN)
+}
+
+script Naukratis_PottersHouse_EventScript_Kiln {
+    msgbox(format("The kiln roars. Through the fire-mouth you can see a stack of pots going red."), MSGBOX_SIGN)
+}

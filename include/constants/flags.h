@@ -1756,6 +1756,13 @@
 #define FLAG_ICHOR_SHORTCUT_ROSE                (FLAG_ICHOR_GENERAL_START + 0x3DD) // Ichor: Periodos: tower of Kronos midpoint shortcut open
 #define FLAG_ICHOR_OIKOUMENE_ARRIVED            (FLAG_ICHOR_GENERAL_START + 0x3DE) // Ichor: Oikoumene: first landed at any Oikoumene port (Alethea's quay scene; the AETHOS and THE OIKOUMENE fly targets)
 #define FLAG_ICHOR_SUPER_ROD_GIVEN              (FLAG_ICHOR_GENERAL_START + 0x3DF) // Ichor: Oikoumene: a first-port fisher gave the Super Rod (the others give a Big Pearl)
+#define FLAG_ICHOR_NAUKRATIS_FISHER_GIFT        (FLAG_ICHOR_GENERAL_START + 0x414) // Ichor: Naukratis net-loft: Ipy's gift (the Super Rod or a Big Pearl)
+#define FLAG_ICHOR_MET_DAPHNE_NAUKRATIS         (FLAG_ICHOR_GENERAL_START + 0x415) // Ichor: Naukratis field station: Daphne's welcome
+#define FLAG_ICHOR_TRADED_KECLEON               (FLAG_ICHOR_GENERAL_START + 0x416) // Ichor: Naukratis potter's: Lykos's Kecleon traded for a Smeargle; hides the Kecleon
+#define FLAG_ICHOR_GOT_LINEN                    (FLAG_ICHOR_GENERAL_START + 0x417) // Ichor: Naukratis net-loft: Merit's bolt of linen, carried to her brother in Memphis
+#define FLAG_ICHOR_GOT_REAPER_CLOTH             (FLAG_ICHOR_GENERAL_START + 0x418) // Ichor: Memphis embalmer's: the linen delivered, Khay's Reaper Cloth
+#define FLAG_ICHOR_FOUND_APIS                   (FLAG_ICHOR_GENERAL_START + 0x419) // Ichor: Memphis Apis keepers': the true Apis found and given; hides its bull
+#define FLAG_ICHOR_GOT_TWISTED_SPOON            (FLAG_ICHOR_GENERAL_START + 0x41A) // Ichor: Memphis scribe of Thoth: his riddles solved, the Twisted Spoon
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end

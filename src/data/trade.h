@@ -1229,6 +1229,26 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_WOOLOO
+    },
+    // Ichor, the Oikoumene (egypt-rooms): Lykos throws white-slipped chalices
+    // at Naukratis. His Kecleon, Poikilos ("many-coloured"), turns the colour
+    // of whatever pot it sits by and he can never find it; a Smeargle puts the
+    // colour on the pots instead.
+    [INGAME_TRADE_ICHOR_POIKILOS] =
+    {
+        .nickname = _("POIKILOS"),
+        .species = SPECIES_KECLEON,
+        .ivs = {22, 18, 20, 16, 24, 20},
+        .abilityNum = 0,
+        .otId = 52417,
+        .conditions = {5, 30, 5, 5, 5},
+        .personality = 0x5B,
+        .heldItem = ITEM_SITRUS_BERRY,
+        .mailNum = -1,
+        .otName = _("LYKOS"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_SMEARGLE
     }
 };
 

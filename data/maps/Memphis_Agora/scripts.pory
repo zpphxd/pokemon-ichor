@@ -1,1 +1,44 @@
+// The Agora of Memphis: the market hall of the old capital. Room:
+// tools/ichor/maps/egypt_rooms.py. Senbi keeps the stall.
+
 mapscripts Memphis_Agora_MapScripts {}
+
+text Memphis_Agora_Name_Senbi { "SENBI" }
+
+script Memphis_Agora_EventScript_Stallkeeper {
+    lock
+    faceplayer
+    setspeaker(Memphis_Agora_Name_Senbi)
+    msgbox(format("Bread, beer, onions, Balls. Everything a body needs, and a few things a Trainer does."))
+    pokemart(Memphis_Agora_Mart)
+    setspeaker(Memphis_Agora_Name_Senbi)
+    msgbox(format("May Ptah keep your hands steady and your purse heavy."))
+    release
+}
+
+mart Memphis_Agora_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_DUSK_BALL
+    ITEM_TIMER_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_RESTORE
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+}
+
+script Memphis_Agora_EventScript_LinenSeller {
+    msgbox(format("Royal linen. So fine you could pull a whole bolt through a finger-ring.\p"
+                  "Merit's in Naukratis is good too. Don't tell her I said so."), MSGBOX_NPC)
+}
+
+script Memphis_Agora_EventScript_Girl {
+    msgbox(format("Dates are a whole deben a basket. I have half a deben.\p"
+                  "So I'm going to look at them very hard."), MSGBOX_NPC)
+}
+
+script Memphis_Agora_EventScript_Amulets {
+    msgbox(format("Faience scarabs and eyes of Horus, blue-green and glossy.\p"
+                  "A sign says: “KEEPS OFF SCORPIONS. MOSTLY.”"), MSGBOX_SIGN)
+}
