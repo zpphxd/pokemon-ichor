@@ -360,11 +360,36 @@ swimmers' and Trojans' objects, in the builders), `ICHOR_STUB_CLASS` (every part
 ## Tests
 
 `tools/ichor/tests/troad_towns.sh` (with `troad_towns.lua`, `troad_towns.py` and
-`troad_towns_setup.s`): see the results below.
+`troad_towns_setup.s`): written, **not yet run** (see "Stopped at").
 
 ## The audit
 
-`map_audit.py --root . Sestos Hellespont Ilion` (the lead's script): see below.
+`map_audit.py --root . Sestos Hellespont Ilion` (the lead's script), run before the last
+fixes: the Hellespont had no FAILs (warnings: olive crown tips open in one place and solid
+in others; no set piece recognised, since fixed with the beach elder's gift). Sestos's and
+Ilion's FAILs were all the rooms (placeholder interiors with no warp 0 and nobody living
+there: the troad-rooms agent's), plus Ilion's wheat needing a land table (since fixed: the
+town's wheat is an impassable crop) and one empty dead end behind the palace (since fixed:
+the Elixir). Not re-run after those fixes.
+
+## Stopped at
+
+Paused by the director (2026-11-14) before the end of the task.
+
+- **Done:** the `troas` tileset (476/504 tiles, compiled, registered, catalogued); the three
+  maps built by code with their checks passing (seams, edges, the current, checkpoints,
+  triggers, readability); events, scripts and text (every line measured, none over 216 px);
+  trainers 680-691 and parties; flags (8 bank, 8 vanilla); wild tables for the Hellespont
+  and Sestos with three time sets and the Augur's Eye field; three render-and-critique
+  passes per map (above); 2x renders in `img/`.
+- **Partial:** the headless test (`troad_towns.sh`/`.lua`) is written but has never run, so
+  it may need fixes (facing after a warp, the surf-from-warp start, the current's
+  forced-movement timing). The audit wasn't re-run after the last fixes. Ilion's lower town
+  east side and the Hellespont's south beach could take one more visual pass.
+- **Not started:** the smoke test and `slice_playthrough.sh` on this branch; "ROM before"
+  (no baseline build of c6ce58db50; ROM after is about 21.8 MB, 66.55%).
+- **make:** green at 9d99f82b0e (the WIP commit; this note changes nothing it builds).
+  ROM 21,806 KB, 66.55%.
 
 ## Open questions
 
