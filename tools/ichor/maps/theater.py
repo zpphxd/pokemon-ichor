@@ -95,6 +95,7 @@ SEAT_PLAYER = (18, 18)      # the front row, center: the player's seat
 SEAT_ALETHEA = (17, 18)     # ... and Alethea beside them
 SEAT_KLEON = (16, 17)       # Kleon, the front row to the left (the diagonal's first seat)
 RESERVED = {SEAT_PLAYER, SEAT_ALETHEA, SEAT_KLEON}
+HONEY = (22, 18)            # a front-row seat with a jar of Honey under it (hidden item)
 
 DOOR_IVY, DOOR_CROWN, DOOR_GOAT = (14, 5), (19, 5), (25, 5)   # each door's lower cell
 BACK_DOOR = (30, 7)         # the skene's back door, in the east wing (warp 1)
@@ -364,6 +365,10 @@ def theater_events(g):
             sign(DOOR_CROWN[0] + 1, DOOR_CROWN[1], TH + "StageDoor", "BG_EVENT_PLAYER_FACING_NORTH"),
             sign(DOOR_GOAT[0], DOOR_GOAT[1], TH + "StageDoor", "BG_EVENT_PLAYER_FACING_NORTH"),
             sign(9, 7, TH + "WingWindow", "BG_EVENT_PLAYER_FACING_NORTH"),
+            # the Honey under the front row (Part 2), on a seat off the reserved three,
+            # read from the orchestra's edge; the seat's cell has elevation 0
+            {"type": "hidden_item", "x": HONEY[0], "y": HONEY[1], "elevation": 0,
+             "item": "ITEM_HONEY", "flag": "FLAG_ICHOR_HIDDEN_THEATER_HONEY"},
         ],
     }
     return ev

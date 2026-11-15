@@ -7,6 +7,7 @@ their section. thyrsa_build.py draws, compiles and catalogs it.
 from __future__ import annotations
 
 import thyrsa_civic
+import thyrsa_polish
 import thyrsa_town
 import thyrsa_vines
 import thyrsa_walls
@@ -30,7 +31,9 @@ SECTIONS = [
      "Also Chthonia's house of rough stones, and a yard wall with a fig."),
     (38, "civic", "The Agora, the temple and the sacred places",
      "The Agora and the market stalls, the festival garlands, the Temple of Dionysus, the "
-     "Asclepeion and the fountain house of Dirke, and Semele's chamber."),
+     "Asclepeion and the fountain house of Dirke, and Semele's chamber; then the polish "
+     "pass's pieces for the square and the yards: the god's fountain, the mask stall, the "
+     "festival's litter, a washing line and a stone bench."),
     (56, "vines", "The vineyards",
      "Vine rows (the city's tall grass), the old trellises, the wine press, the marked ivy, "
      "and wine jars."),
@@ -42,7 +45,7 @@ def build():
         "streets": thyrsa_walls.build_streets(),
         "walls": thyrsa_walls.build_walls(),
         "houses": thyrsa_town.build_houses(),
-        "civic": thyrsa_town.build_market() + thyrsa_civic.build(),
+        "civic": thyrsa_town.build_market() + thyrsa_civic.build() + thyrsa_polish.build(),
         "vines": thyrsa_vines.build(),
     }
     for key, ss in parts.items():

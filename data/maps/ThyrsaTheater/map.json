@@ -515,6 +515,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ThyrsaTheater_EventScript_WingWindow"
+    },
+    {
+      "type": "hidden_item",
+      "x": 22,
+      "y": 18,
+      "elevation": 0,
+      "item": "ITEM_HONEY",
+      "flag": "FLAG_ICHOR_HIDDEN_THEATER_HONEY"
     }
   ]
 }

@@ -108,7 +108,7 @@ for _ = 1, 29 do
   x = x + (dir == K.RIGHT and 1 or -1)
   table.insert(treads, { hold = dir, frames = 16, wait = 26 })
 end
-steps = L.seq(steps, treads, { { shot = "tread_done_1.png" } }, shots("tread_done", K.A, 4, 40),
+steps = L.seq(steps, treads, { { shot = "tread_done_1.png" } }, shots("tread_done", K.A, 6, 40),
   { { log = "tour and services played" } })
 
 L.run("ROOMS", OUT, steps)

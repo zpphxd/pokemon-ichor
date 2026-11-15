@@ -11,6 +11,11 @@ local S, K = L.S, L.K
 local emu = L.emu
 local log, expect, wait, waitUntil, shot = L.log, L.expect, L.wait, L.waitUntil, L.shot
 
+local function favor(god)
+  local base = emu:read32(S.gSaveBlock3Ptr) + S.OFF_SB3_ICHOR + S.OFF_ICHOR_FAVOR
+  return emu:read8(base + god)
+end
+
 local function bankFlag(f)
   local o = f - S.ICHOR_FLAGS_START
   local base = emu:read32(S.gSaveBlock3Ptr) + S.OFF_SB3_ICHOR + S.OFF_ICHOR_FLAGS
@@ -77,20 +82,35 @@ local function main()
   L.setBeat("tour", false)
   L.go(25, 32); shot("lower_town")
   L.talk(L.npc("ThyrsaCity_EventScript_Beggar"), { shots = { [1] = "beggar" } })
-  expect(bankFlag(S.FLAG_DECOY), "the beggar's spring: a Pecha Berry")
+  expect(bankFlag(S.FLAG_DECOY), "the beggar's spring: a Pecha Berry, his theoxenia decoy flag (+0x21)")
+  expect(favor(S.ICHOR_GOD_ZEUS) == 1, "kindness to a stranger: Zeus Xenios +1 Favor")
+  L.talk(L.hidden(S.FLAG_HIDDEN_HEART_SCALE), { shots = { [1] = "heart_scale" } })
+  expect(L.getFlag(S.FLAG_HIDDEN_HEART_SCALE), "the Heart Scale hidden in Dirke's basin")
   L.go(21, 32); shot("asclepeion")
   L.go(27, 24); shot("the_square")
+  L.talk(L.npc("ThyrsaCity_EventScript_WineSeller"), { shots = { [1] = "wine_seller" } })
+  L.talk(L.npc("ThyrsaCity_EventScript_MaskSeller"), { shots = { [1] = "mask_seller" } })
+  L.talk(L.sign("ThyrsaCity_EventScript_Fountain"), { shots = { [1] = "the_gods_fountain" } })
+  L.go(31, 18); shot("fountain_court")
   L.talk(L.npc("ThyrsaCity_EventScript_Herald"), { shots = { [1] = "herald" } })
   L.go(27, 15); shot("the_kadmeia_stair")
   L.go(27, 10); shot("temple_of_dionysus")
   L.go(15, 8); shot("semele")
+  wait(20); shot("semele_smoke_b")         -- the smoke's other frame (20 frames apart)
+  L.talk(L.hidden(S.FLAG_HIDDEN_CELL_BATTERY), { shots = { [1] = "cell_battery" } })
+  expect(L.getFlag(S.FLAG_HIDDEN_CELL_BATTERY), "the Cell Battery in Semele's ash")
   L.talk(L.npc("ThyrsaCity_EventScript_Alethea"), { shots = { [1] = "alethea_semele" } })
   L.talk(L.sign("ThyrsaCity_EventScript_SemeleCrack"), { shots = { [1] = "semele_crack" } })
+  L.talk(L.hidden(S.FLAG_HIDDEN_RARE_CANDY), { shots = { [1] = "rare_candy" } })
+  expect(L.getFlag(S.FLAG_HIDDEN_RARE_CANDY), "the Rare Candy in the seventh gate's niche")
   L.talk(L.npc("ThyrsaCity_EventScript_Manto"), { shots = { [1] = "manto_footsteps", [7] = "manto_listens",
                                                              [11] = "manto_omen" } })
   expect(bankFlag(S.FLAG_MET_MANTO), "met Manto on the wall")
   L.go(39, 11); shot("manto_house")
+  L.talk(L.hidden(S.FLAG_HIDDEN_PRETTY_FEATHER), { shots = { [1] = "pretty_feather" } })
+  expect(L.getFlag(S.FLAG_HIDDEN_PRETTY_FEATHER), "the Pretty Feather in the nook behind Manto's house")
   L.go(38, 17); shot("theater_terrace")
+  L.talk(L.sign("ThyrsaCity_EventScript_Tripod"), { shots = { [1] = "tripod" } })
   local stopped = not L.goTrigger(L.triggers("ThyrsaCity_EventScript_TheaterKeeperStop"))
   expect(stopped, "the theater keeper turns a player without a laurel away")
   L.settle({ shots = { [1] = "theater_keeper" } })
@@ -99,6 +119,7 @@ local function main()
   L.go(44, 31); shot("proitid_gate")
   L.talk(L.npc("ThyrsaCity_EventScript_ProitidGuard"), { shots = { [1] = "proitid_guard" } })
   L.go(39, 36); shot("eudora")
+  L.talk(L.sign("ThyrsaCity_EventScript_YardGate"), { shots = { [1] = "eudora_yard_gate" } })
   L.go(19, 24); shot("vineyards")
   L.go(12, 24); shot("neistan_lane")
   L.talk(L.npc("ThyrsaCity_EventScript_NeistanGuard"), { shots = { [1] = "neistan_festival" } })
@@ -109,8 +130,17 @@ local function main()
   warpIn(14, 24, { S.FLAG_DIONYSIA_DONE, S.FLAG_GIRDLE, S.FLAG_BADGE04_GET })
   shot("the_fallen_drum")
   L.talk(L.npc("ThyrsaCity_EventScript_NeistanGuard", 2), { shots = { [1] = "guards_drum" } })
-  L.talk(L.npc("ThyrsaCity_EventScript_NeistanDrum"),
-         { answers = { "yes" }, shots = { [2] = "drum_pushed", [6] = "alethea_west", [14] = "alethea_cursed" } })
+  -- The engine's column drum (EventScript_StrengthBoulder): brace the Girdle, then push
+  -- it west out of the arch and step into its cell, which plays the gate's opening.
+  L.talk(9, 24, { answers = { "yes" }, shots = { [1] = "drum_brace" } })
+  expect(not bankFlag(S.FLAG_DRUM_MOVED), "bracing the Girdle doesn't move the drum")
+  for _ = 1, 6 do
+    if L.scriptRunning() then break end
+    emu:addKey(K.LEFT); wait(24); emu:clearKey(K.LEFT); wait(16)
+    if not L.scriptRunning() then shot("drum_pushing") end
+  end
+  expect(L.scriptRunning(), "the push frees the arch and the gate's scene starts")
+  L.settle({ shots = { [1] = "drum_pushed", [5] = "alethea_west", [13] = "alethea_cursed" } })
   expect(bankFlag(S.FLAG_DRUM_MOVED), "the drum is out of the gate")
   expect(bankFlag(S.FLAG_ALETHEA_WENT_WEST), "Alethea went west")
   shot("gate_open")

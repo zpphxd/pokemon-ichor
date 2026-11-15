@@ -4,9 +4,8 @@
 // the north wall (her stallkeeper at (4,2), from (4,4)), festival masks over it. The
 // mask-seller stands in the hall until the Dionysia is done.
 //
-// ICHOR_STUB_OFFERINGS: Olive Oil, Barley Cake and Wine are engine items that don't
-// exist yet. The wine counter sells Berry Juice in their place; swap in
-// ITEM_OLIVE_OIL (200), ITEM_BARLEY_CAKE (150) and ITEM_WINE (300) when they land.
+// The wine counter sells the offerings (SCRIPT.md Part 6): Olive Oil 200, Barley Cake
+// 150 and Wine 300, the engine's items at SYSTEMS.md §3's prices.
 
 mapscripts ThyrsaCity_Agora_MapScripts {}
 
@@ -60,13 +59,14 @@ script ThyrsaCity_Agora_EventScript_WineKeeper {
     lock
     faceplayer
     msgbox(format("Wine for the god? Wine for you? It's the same wine."))
-    // ICHOR_STUB_OFFERINGS: Berry Juice until the offerings exist (see the top of the file).
     pokemart(ThyrsaCity_Agora_Mart_Offerings)
     release
 }
 
 mart ThyrsaCity_Agora_Mart_Offerings {
-    ITEM_BERRY_JUICE
+    ITEM_WINE
+    ITEM_OLIVE_OIL
+    ITEM_BARLEY_CAKE
 }
 
 script ThyrsaCity_Agora_EventScript_MaskSeller {

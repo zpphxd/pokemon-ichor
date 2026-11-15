@@ -12,6 +12,8 @@
 //   FLAG_TEMP_12     hides Alethea at the Neistan Gate until her scene
 //   VAR_TEMP_3 == 0  Manto's crows wait over the road outside the Elektran Gate
 //   FLAG_TEMP_13     hides the crows until their scene
+//   VAR_TEMP_4 == 0  the drum still fills the Neistan Gate: stepping into its cell
+//                    (9,24), once it has been pushed, plays the gate's opening
 
 mapscripts ThyrsaCity_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
@@ -31,6 +33,7 @@ mapscripts ThyrsaCity_MapScripts {
         }
         if (!flag(FLAG_ICHOR_DIONYSIA_DONE) || flag(FLAG_ICHOR_NEISTAN_DRUM_MOVED)) {
             setflag(FLAG_ICHOR_HIDE_NEISTAN_DRUM)
+            setvar(VAR_TEMP_4, 1)
         } else {
             clearflag(FLAG_ICHOR_HIDE_NEISTAN_DRUM)
         }
@@ -64,6 +67,8 @@ text ThyrsaCity_Name_Child { "CHILD" }
 text ThyrsaCity_Name_Oinopion { "OINOPION" }
 text ThyrsaCity_Name_Lenaia { "LENAIA" }
 text ThyrsaCity_Name_Hegelochos { "HEGELOCHOS" }
+text ThyrsaCity_Name_WineSeller { "MERCHANT" }
+text ThyrsaCity_Name_MaskSeller { "VENDOR" }
 
 // ---------------------------------------------------------------------------
 // Beat 30: the Elektran Gate. The first step inside sets the arrival flags and
@@ -265,26 +270,19 @@ script ThyrsaCity_EventScript_NeistanGuard {
     release
 }
 
-// ICHOR_STUB_RELICS: the drum checks the Girdle's flag (FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES,
-// aliased to the world session's stub) and moves by script, until the engine's
-// EventScript_StrengthBoulder checks the bag.
-script ThyrsaCity_EventScript_NeistanDrum {
+// The drum is the engine's column drum (ENGINE_API §2): its object runs
+// EventScript_StrengthBoulder, which braces the Girdle of Herakles, and then the
+// player pushes it west out of (9,24). Stepping into the cell it filled is the push
+// that frees the gate (coord event at (9,24), VAR_TEMP_4 == 0): the drum, rolling now,
+// goes on out of the arch and onto the verge, and the scene plays.
+script ThyrsaCity_EventScript_DrumPushed {
     lockall
-    if (!flag(FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES)) {
-        msgbox(format("A fallen column drum, wedged in the gateway. A strong back would shift it."))
-        releaseall
-        end
-    }
-    msgbox(format("A fallen column drum, wedged in the gateway.\pPush it with the Girdle of Herakles?"),
-           MSGBOX_YESNO)
-    if (var(VAR_RESULT) == NO) {
-        releaseall
-        end
-    }
-    closemessage
+    setvar(VAR_TEMP_4, 1)
     playse(SE_M_STRENGTH)
     applymovement(LOCALID_THYRSA_NEISTAN_DRUM, ThyrsaCity_Movement_DrumRolls)
-    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, ThyrsaCity_Movement_PlayerStepsBack)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    waitmovement(LOCALID_THYRSA_NEISTAN_DRUM)
     waitse
     setflag(FLAG_ICHOR_NEISTAN_DRUM_MOVED)
     setflag(FLAG_ICHOR_HIDE_NEISTAN_DRUM)
@@ -302,8 +300,10 @@ script ThyrsaCity_EventScript_NeistanDrum {
     releaseall
 }
 
-// Out of the arch, and two cells aside, off the road.
-movement ThyrsaCity_Movement_DrumRolls { walk_slow_left * 2 walk_slow_up }
+// From (8,24), where the push left it: out of the arch and up onto the verge.
+movement ThyrsaCity_Movement_DrumRolls { walk_slow_left walk_slow_up * 2 }
+// The player steps back out of the arch to watch it go.
+movement ThyrsaCity_Movement_PlayerStepsBack { delay_16 walk_right face_left }
 
 // Beat 34: she runs up under the arch, once, and goes on ahead to Lebadeia.
 script ThyrsaCity_EventScript_AletheaGoesWest {
@@ -421,12 +421,14 @@ script ThyrsaCity_EventScript_Kronist {
     release
 }
 
-// The blind beggar by the fountain house: a theoxenia decoy (SYSTEMS.md §10).
+// The blind beggar by the fountain house: a theoxenia decoy (SYSTEMS.md §10). His flag
+// is in the engine's theoxenia block, decoys +0x20-0x27 (ENGINE_API §1): +0x21 is his.
+// Kindness to a stranger is Zeus Xenios's: +1 Favor.
 script ThyrsaCity_EventScript_Beggar {
     lock
     faceplayer
     setspeaker(ThyrsaCity_Name_Beggar)
-    if (flag(FLAG_ICHOR_DECOY_THYRSA)) {
+    if (flag(FLAG_ICHOR_THEOXENIA_START + 0x21)) {
         msgbox(format("I can hear the spring. Sweetest sound in Thyrsa."))
         release
         end
@@ -444,8 +446,10 @@ script ThyrsaCity_EventScript_Beggar {
             release
             end
         }
-        // ICHOR_STUB_RITES: Zeus Xenios +1 Favor (Ichor_AddFavor) when the rites land.
-        setflag(FLAG_ICHOR_DECOY_THYRSA)
+        setvar(VAR_0x8004, ICHOR_GOD_ZEUS)
+        setvar(VAR_0x8005, 1)
+        special(Ichor_AddFavor)
+        setflag(FLAG_ICHOR_THEOXENIA_START + 0x21)
     } else {
         msgbox(format("…That's not water I hear. That's an actor. Never mind, I'll ask again."))
     }
@@ -652,6 +656,50 @@ script ThyrsaCity_EventScript_Statue {
                   "Somebody has tied a ribbon round his ankle for the festival."), MSGBOX_SIGN)
 }
 
+// The square's polish pass: the god's fountain, the tripods, the market, Eudora's gate.
+script ThyrsaCity_EventScript_Fountain {
+    msgbox(format("The god's fountain. Two bronze lions pour into the basin.\p"
+                  "At the Dionysia, they say, it runs with wine. Today it's water. Mostly."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_Tripod {
+    msgbox(format("A bronze tripod on a marble base: a prize for a play that won.\p"
+                  "The base names the poet, the year and the chorus. The year is very old."),
+           MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_YardGate {
+    msgbox(format("A yard gate, barred from inside.\p"
+                  "Over the wall: an old fig, and a red cloak on the washing line."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EventScript_WineSeller {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_WineSeller)
+    if (!flag(FLAG_ICHOR_DIONYSIA_DONE)) {
+        msgbox(format("New wine! Three days old! The god's own vintage!\p"
+                      "Well. His neighbor's. The Agora sells it by the jar."))
+    } else {
+        msgbox(format("Sold out the night of the play. Every jar.\p"
+                      "Nobody remembers drinking it. That's how you know it was good."))
+    }
+    release
+}
+
+script ThyrsaCity_EventScript_MaskSeller {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_Name_MaskSeller)
+    if (!flag(FLAG_ICHOR_DIONYSIA_DONE)) {
+        msgbox(format("Masks for the play! Wear one tonight and nobody can say it was you."))
+    } else {
+        msgbox(format("Half price. Since the play, nobody wants another face."))
+    }
+    release
+}
+
 script ThyrsaCity_EventScript_Grave {
     msgbox(format("An old grave by the road. Thyrsa buries its dead outside the gates."),
            MSGBOX_SIGN)
@@ -662,14 +710,18 @@ script ThyrsaCity_EventScript_Herm {
            MSGBOX_SIGN)
 }
 
-// ICHOR_STUB_DIG: Thyrsa's two daily dig spots (Part 6: beside Semele's chamber and at
-// the vineyards' edge) roll the Persephone amphora's sherds once the dig API lands.
+// Thyrsa's two daily dig spots (Part 6: beside Semele's chamber and at the vineyards'
+// edge), on Act II's table: the Persephone amphora's sherds. ICHOR_STUB_DIG: excavation
+// isn't built (ENGINE_API §8) and the daily spot indices are the engine session's to
+// give, so each goes to Act II's stand-in, which reads as §8 does without the Trowel.
+// When it lands: setvar(VAR_0x8004, <spot>), setvar(VAR_0x8005, ICHOR_DIG_ACT_II),
+// goto(EventScript_IchorDigSpot).
 script ThyrsaCity_EventScript_DigSemele {
-    msgbox(format("The earth here has been turned. Something might be buried."), MSGBOX_SIGN)
+    goto(EventScript_IchorAct2_DigStub)
 }
 
 script ThyrsaCity_EventScript_DigVineyard {
-    msgbox(format("The earth here has been turned. Something might be buried."), MSGBOX_SIGN)
+    goto(EventScript_IchorAct2_DigStub)
 }
 
 // ---------------------------------------------------------------------------

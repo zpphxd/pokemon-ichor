@@ -828,12 +828,12 @@
 #define FLAG_UNUSED_0x309                                           0x309 // Unused Flag
 #define FLAG_UNUSED_0x30A                                           0x30A // Unused Flag
 #define FLAG_UNUSED_0x30B                                           0x30B // Unused Flag
-#define FLAG_UNUSED_0x30C                                           0x30C // Unused Flag
+#define FLAG_ICHOR_HIDDEN_THYRSA_CELL_BATTERY                       0x30C // Ichor: Thyrsa City: hidden Cell Battery in the ash of Semele's chamber (16,7)
 #define FLAG_HIDE_PETALBURG_GYM_GREETER                             0x30D
-#define FLAG_UNUSED_0x30E                                           0x30E // Unused Flag
-#define FLAG_UNUSED_0x30F                                           0x30F // Unused Flag
-#define FLAG_UNUSED_0x310                                           0x310 // Unused Flag
-#define FLAG_UNUSED_0x311                                           0x311 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_THYRSA_HEART_SCALE                        0x30E // Ichor: Thyrsa City: hidden Heart Scale in the fountain house of Dirke (22,34)
+#define FLAG_ICHOR_HIDDEN_THYRSA_RARE_CANDY                         0x30F // Ichor: Thyrsa City: hidden Rare Candy in the niche of the bricked-up seventh gate (12,2)
+#define FLAG_ICHOR_HIDDEN_THEATER_HONEY                             0x310 // Ichor: Thyrsa's theater: hidden Honey under the front row
+#define FLAG_ICHOR_HIDDEN_THYRSA_PRETTY_FEATHER                     0x311 // Ichor: Thyrsa City: hidden Pretty Feather in the nook behind Manto's house, where her birds come and go (45,7)
 #define FLAG_UNUSED_0x312                                           0x312 // Unused Flag
 #define FLAG_UNUSED_0x313                                           0x313 // Unused Flag
 #define FLAG_UNUSED_0x314                                           0x314 // Unused Flag
@@ -1763,6 +1763,8 @@
 #define FLAG_ICHOR_GYPSOS_WENT_HOME             (FLAG_ICHOR_GENERAL_START + 0x125) // Ichor: Act II: Gypsos read tablet 3 and went home to Eudora's house
 #define FLAG_ICHOR_ITEM_ROUTE7_FULL_HEAL        (FLAG_ICHOR_GENERAL_START + 0x127) // Ichor: Act II: item ball: Route 7 Full Heal at a switchback's dead end
 #define FLAG_ICHOR_ITEM_ROUTE7_BIG_PEARL        (FLAG_ICHOR_GENERAL_START + 0x128) // Ichor: Act II: item ball: Route 7 Big Pearl on the Asopos's reed islet (the Conch)
+#define FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS       (FLAG_ICHOR_GENERAL_START + 0x14E) // Ichor: Act II rooms: beat Phaidimos at the Kantharos the first time (Olive Oil x2)
+#define FLAG_ICHOR_KNUCKLEBONES_GLAUKE          (FLAG_ICHOR_GENERAL_START + 0x14F) // Ichor: Act II rooms: beat Glauke at the Kantharos the first time (Wine)
 #define FLAG_ICHOR_HIDE_DIONYSIA_CAST           (FLAG_ICHOR_GENERAL_START + 0x154) // Ichor: Act II: hides the Dionysia's cast, herald and seated Kleon outside the play (beat 32)
 #define FLAG_ICHOR_HIDE_THESPIS_SKENE           (FLAG_ICHOR_GENERAL_START + 0x155) // Ichor: Act II: hides Thespis backstage once the masks let go (beat 32)
 #define FLAG_ICHOR_HIDE_KLEON_THEATER           (FLAG_ICHOR_GENERAL_START + 0x156) // Ichor: Act II: hides Kleon on the stage's edge after his third battle (beat 33)
@@ -1781,7 +1783,6 @@
 #define FLAG_ICHOR_ALETHEA_WENT_WEST            (FLAG_ICHOR_GENERAL_START + 0x135) // Ichor: Act II: Alethea left Thyrsa by the Neistan Gate (beat 34; region B1 reads it)
 #define FLAG_ICHOR_HIDE_OMEN_THYRSIVY           (FLAG_ICHOR_GENERAL_START + 0x136) // Ichor: Act II: hides the Thyrsivy in Thyrsa's old trellises (the omen's visitor)
 #define FLAG_ICHOR_OMEN_THYRSIVY_TOLD           (FLAG_ICHOR_GENERAL_START + 0x137) // Ichor: Act II: Manto told the rare-visitor omen; the Thyrsivy may stand in the vines
-#define FLAG_ICHOR_DECOY_THYRSA                 (FLAG_ICHOR_GENERAL_START + 0x138) // Ichor: Act II: showed Thyrsa's blind beggar the way to Dirke (theoxenia decoy)
 #define FLAG_ICHOR_ITEM_THYRSA_BLACK_SLUDGE     (FLAG_ICHOR_GENERAL_START + 0x139) // Ichor: Act II: Thyrsa, the Black Sludge by the wine press
 #define FLAG_ICHOR_ITEM_THYRSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x13A) // Ichor: Act II: Thyrsa, the Super Potion in the vineyards' last row
 #define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL_START + 0x13B) // Ichor: Act II: Thyrsa, the Big Nugget on the west wall-walk (the Thyrsus)

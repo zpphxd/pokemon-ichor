@@ -57,11 +57,16 @@ strips; the hillside outside them is aethos.
 | vine | The vineyards: vines, grapes, trellises, tilled earth; the fig |
 | wood | The press, jars, barrels and stalls: timber, warm limestone, terracotta |
 
-**Tile budget.** 497 of 504 tiles are used. The door animations copy their frames into
-tiles 504-511, so the build fails past 504. Symmetric fronts are mirrored about a tile
-edge, the walls and flags repeat on the 16 or 32 px grid, ivy is an overlay on the wall's
-own tiles, the limewashed houses are free recolors, and tiles within two pixels of
-another are redrawn as that tile.
+**Tile budget.** 507 of 512 tiles are used. Thyrsa has no animated door (every door is
+`MB_NON_ANIMATED_DOOR`, and the build asserts it), so nothing writes tiles 504-511 and the
+set may use all 512. Symmetric fronts are mirrored about a tile edge, the walls and flags
+repeat on the 16 or 32 px grid, ivy is an overlay on the wall's own tiles, the limewashed
+houses are free recolors, tiles within four pixels of another are redrawn as that tile,
+and opaque masonry and vine-leaf tiles within six.
+
+**Animation.** Semele's smoke has two frames. The build moves its six tiles to the
+secondary's tiles 1-6 and writes the frames to `data/tilesets/secondary/thyrsa/anim/smoke/`;
+`InitTilesetAnim_Thyrsa` in `src/tileset_anims.c` swaps them every 20 frames.
 
 ## Streets
 
@@ -107,14 +112,14 @@ Parts: `W` 0x20D, `run` 0x20E, `E` 0x20F, `W2` 0x215, `run2` 0x216, `E2` 0x217.
 
 ### Cyclopean terrace wall
 
-`terrace`, 5 wide by 1 tall. A retaining wall one cell tall, the upper level to the north, in the city wall's masonry under a dressed coping: (0) west end, (1)-(2) the run, an even/odd pair (put (1) on even map columns), (3) east end, (4) a narrow stair up through the wall (walkable).
+`terrace`, 4 wide by 1 tall. A retaining wall one cell tall, the upper level to the north, in the city wall's masonry under a dressed coping: (0) west end, (1)-(2) the run, an even/odd pair (put (1) on even map columns), (3) east end. (The narrow stair batch 1 drew here was never laid, and its tiles went to the polish pass.)
 
 ```text
-ids                             walk
-0x220 0x221 0x222 0x223 0x224   X X X X .
+ids                       walk
+0x220 0x221 0x222 0x223   X X X X
 ```
 
-Parts: `W` 0x220, `run` 0x221, `run_odd` 0x222, `E` 0x223, `stair` 0x224.
+Parts: `W` 0x220, `run` 0x221, `run_odd` 0x222, `E` 0x223.
 
 ### The Kadmeia's parapet
 
@@ -122,10 +127,10 @@ Parts: `W` 0x220, `run` 0x221, `run_odd` 0x222, `E` 0x223, `stair` 0x224.
 
 ```text
 ids                       walk
-0x228 0x229 0x22A 0x22B   X X X X
+0x224 0x225 0x226 0x227   X X X X
 ```
 
-Parts: `W` 0x228, `run` 0x229, `E` 0x22A, `seat` 0x22B.
+Parts: `W` 0x224, `run` 0x225, `E` 0x226, `seat` 0x227.
 
 ### A stone stele on the flags
 
@@ -133,12 +138,12 @@ Parts: `W` 0x228, `run` 0x229, `E` 0x22A, `seat` 0x22B.
 
 ```text
 ids     walk
-0x22C   X
+0x228   X
 ```
 
 Ground: all on the street flags.
 
-Parts: `sign` 0x22C.
+Parts: `sign` 0x228.
 
 ## The city walls and gates
 
@@ -419,7 +424,7 @@ Houses from the kit, as id grids (top row first). The city map builds each of it
 
 ## The Agora, the temple and the sacred places
 
-The Agora and the market stalls, the festival garlands, the Temple of Dionysus, the Asclepeion and the fountain house of Dirke, and Semele's chamber.
+The Agora and the market stalls, the festival garlands, the Temple of Dionysus, the Asclepeion and the fountain house of Dirke, and Semele's chamber; then the polish pass's pieces for the square and the yards: the god's fountain, the mask stall, the festival's litter, a washing line and a stone bench.
 
 ### Thyrsa's Agora
 
@@ -534,6 +539,67 @@ ids                 walk
 
 Parts: `crack` 0x3A9.
 
+### The god's fountain
+
+`fountain`, 3 wide by 2 tall. The fountain at the heart of the square: a marble basin, its water fed by two bronze lion heads on the plinth in the middle, where the god in bronze stands. Lay the statue's top cell (statue, row 0) in the row above the fountain's middle cell: his legs continue on the plinth. Give the basin a bg event.
+
+```text
+ids                 walk
+0x3A3 0x3A4 0x3A5   X X X
+0x3AB 0x3AC 0x3AD   X X X
+```
+
+Ground: all on the street flags.
+
+Parts: `W` 0x3A3, `god` 0x3A4, `E` 0x3A5, `basin` 0x3AC.
+
+### Market stall: festival masks
+
+`stall_masks`, 2 wide by 2 tall. The mask-seller's stall for the Dionysia, under an ivy-green and white awning: comic, tragic and satyr masks on pegs and on the counter. Free-standing on the flags; the seller stands beside it.
+
+```text
+ids           walk
+0x3A6 0x3A7   X X
+0x3AE 0x3AF   X X
+```
+
+Ground: all on the street flags.
+
+### The festival's traces on the flags
+
+`litter`, 3 wide by 1 tall. What the god's festival leaves on the street, one cell each, all walkable: (0) a trampled ivy wreath with its red ribbon, (1) a comic mask somebody dropped, (2) a spilled cup in a puddle of wine. Scatter them thinly along the procession's way and round the stalls; each fills one or two of its cell's tiles, the rest is plain flags.
+
+```text
+ids                 walk
+0x3B0 0x3B1 0x3B2   . . .
+```
+
+Ground: all on the street flags.
+
+Parts: `ivy` 0x3B0, `mask` 0x3B1, `cup` 0x3B2.
+
+### A washing line
+
+`laundry`, 2 wide by 1 tall. Eudora's washing line across her yard: two posts, a soldier's red cloak, half-mended, and a white chiton. On the flags of a courtyard. Drawn low in the cell, so most of it is the line's posts over the flags.
+
+```text
+ids           walk
+0x3B3 0x3B4   X X
+```
+
+Ground: all on the street flags.
+
+### A courtyard wall: gate and ivy
+
+`court_extras`, 2 wide by 1 tall. Drop-ins for court_wall's run: (0) the yard's gate, a plank door under a little tiled lintel, barred from inside; (1) the wall with ivy spilling over its coping from the yard.
+
+```text
+ids           walk
+0x3B5 0x3B6   X X
+```
+
+Parts: `gate` 0x3B5, `ivy` 0x3B6.
+
 ## The vineyards
 
 Vine rows (the city's tall grass), the old trellises, the wine press, the marked ivy, and wine jars.
@@ -625,11 +691,15 @@ the map is aethos hillside: olives, pines, cypresses and rock, open only along t
   (27–28,7)), framed by the street all the way from the gate; Semele's chamber and Chthonia's house of
   rough stones in the west garden; Manto's house on the citadel's east edge, her seat on the parapet at
   (35,12) and Manto on the wall-walk above it at (35,11).
-- **The square** at the city's heart (21–34, 14–24): the wine stall, the bronze god, a garland across the
-  main street, garden plots with an olive and cypresses, the herald, the Kronist by the Agora.
+- **The square** at the city's heart (21–34, 14–24), rebuilt in the polish pass (below): the market west
+  of the processional way (the wine stall, the jars, the mask stall and their sellers), the god's fountain
+  east of it in a court of cypress beds and an anemone trough, garlands across the way at rows 17, 21 and
+  25, the festival's litter on the flags, the herald, the Kronist by the Agora; the street of tripods runs
+  east to the theater.
 - **The lower town** inside the gate: the Asclepeion (19–23, 28–31) with the fountain house of Dirke in
   front of it, the Agora (31–35, 28–31) under its striped awning, the Kantharos and Pindaros on the lane to
-  the Proitid Gate, Eudora's house beside her walled yard with its old tree.
+  the Proitid Gate, Eudora's house beside her walled yard (a flagged court with its fig, the washing
+  line and the barred gate), a garden bed with an olive inside the gate before her house.
 - **The east hill**: the theater's high gate (42–44, 14–17) on the upper terrace among cypresses, the
   terrace wall at row 19, Polos and Euthykles on the terrace below.
 - **The vineyards** along the west wall: two blocks of vine rows (the city's tall grass) either side of
@@ -703,8 +773,11 @@ animation, which needs a tileset callback in `src/tileset_anims.c`).
   agent starts the Dionysia from a trigger inside rather than on entry. His name box reads KEEPER: "THEATER
   KEEPER" is 66 px in the name box's font, over its 64.
 - **The Proitid Gate** is drawn open but its guard sits in the arch, so it is shut until batch 7.
-- **The Neistan Gate's drum** rolls out of the arch and one cell aside onto the hillside, and is gone
-  the next time the map loads (it carries its hide flag).
+- **The Neistan Gate's drum** is the engine's column drum (`EventScript_StrengthBoulder`, ENGINE_API §2).
+  The player braces the Girdle and pushes it west out of (9,24); stepping into the cell it filled (a coord
+  event, `VAR_TEMP_4` 0) is the push that frees the gate, so the drum, rolling now, goes on out of the arch
+  and onto the verge at (7,22), the player steps back, and the guard's line and Alethea's scene play. It
+  carries its hide flag, so it's gone the next time the map loads.
 - **The Neistan road leaves on two rows** (23–24) through a one-cell gate: a Cyclopean gate is narrow.
 - **Manto's omens** (ICHOR_STUB_OMENS): she gives the rare visitor once the Dionysia is over until it is
   met, otherwise the swarm or the fog at random; only the visitor has an effect here.
@@ -713,3 +786,100 @@ animation, which needs a tileset callback in `src/tileset_anims.c`).
 - **One line of my own each** for the gatekeeper after the welcome, the theater keeper after the laurel and
   after the play, the beggar after he's helped, a fifth citizen ("Laurel-holders sit at the front. I've no
   laurel. I've a cushion."), the wine press, the bronze god, the temple front, the graves and the herm.
+- **The square's sellers, the fountain, the tripods and Eudora's gate** (polish pass) have one line of my
+  own each; the sellers' name boxes read MERCHANT and VENDOR ("WINE-SELLER" is 66 px, over 64).
+
+## Polish pass (Act II batch 2)
+
+The integrator's critique of batch 1: the central plaza was a wide bare cobble field; Eudora's yard read as
+two plain walls and a tree; Semele's smoke didn't animate. The polish pass fixed those, swapped the city's
+stubs for the engine (the drum, the beggar, the digs), and placed the hidden items.
+
+**The budget first.** The set was at 497 of 504 tiles with seven free, and the square alone wanted about
+forty. Where the room came from:
+- **512, not 504.** Thyrsa has no animated door, so tiles 504–511 are never written; the build now
+  asserts that no metatile is `MB_ANIMATED_DOOR` and allows 512.
+- **Merging at 4 px** (was 3): sixteen more tiles. Every one was checked by eye before and after: masonry
+  speckle, a pixel or two on house storeys, vine leaves. At 5 px the masks on the house plaques and the
+  temple's doors started to merge, so 4 is the limit.
+- **A looser 6 px merge for opaque masonry and vine-leaf tiles only** (`merge_noise`): ten more, all
+  wall speckle and leaf noise. Masks, signs, doors and figures are never touched.
+- **Unlaid cells folded into their neighbors:** the terrace wall's narrow stair (removed in batch 1's
+  pass 2, never laid) is gone, and the city wall's battlement corners (the strips cover them) draw as the
+  run. Seven tiles.
+
+**The new pieces** (`tools/ichor/art/thyrsa_polish.py`, appended at the end of the civic section so no
+batch 1 id moved): the god's fountain (15 tiles), the mask stall batch 1 drew and cut (its masks redrawn
+in the festival group, so the stall fits one palette; 8), the festival's litter (4), the washing line
+(5) and the yard wall's gate and ivy (4). **507 of 512 tiles.**
+
+### The tileset
+
+**Pass P1** (the pieces on their own, [img/thyrsa_pieces.png](img/thyrsa_pieces.png)): the fountain's
+basin and plinth read; the bronze god's legs continue from the statue's top cell. The first litter
+(ivy leaves, petals and a grape, a small cup) was correct but read as specks at 1x; a stone bench for
+the square's shade drew as a flat grey block.
+
+**Pass P2:** the litter redrawn bolder and fewer: a trampled ivy wreath trailing its red ribbon, a comic
+mask somebody dropped, a spilled cup in a puddle of wine, each in one or two of its cell's tiles. The
+bench was cut (three tiles better spent on the yard's gate).
+
+**Pass P3:** Eudora's yard wall got its gate (plank door in wine-purple paint under a tiled lintel, the
+latch) and a run with ivy over the coping, drawn on the wall's own stucco so only the gate and the ivy
+cost tiles. The washing line was redrawn low in its cells (the soldier's red cloak, darned, and a white
+chiton), from eight tiles to five.
+
+**Semele's smoke** now has two frames: the same two wisps risen two pixels. `thyrsa_build.py` checks
+that each of the six smoke tiles is the smoke's own (no other metatile uses it, or the walls would
+smoke), moves them to the secondary's tiles 1–6, re-palettes any whose second frame needs a color its
+first-frame palette lacks, and writes both frames to `data/tilesets/secondary/thyrsa/anim/smoke/` as
+indexed strips. `InitTilesetAnim_Thyrsa` (`src/tileset_anims.c`, the tileset's `.callback`) swaps them
+every 20 frames.
+
+### The map
+
+**Pass 1** ([img/thyrsa_polish_pass1.png](img/thyrsa_polish_pass1.png), the square with its people
+marked): the god's fountain east of the way at
+(31–33, 21–22) with the bronze god over it, the market row west of it (the wine stall, the jars, the mask
+stall, a seller at each), a bench under the west plot's olive, an anemone trough below the fountain, two
+bronze tripods in the theater's grove (the street of tripods, aethos's own), litter strewn on the way;
+Eudora's yard a flagged court with the fig in its bed, the washing line and the jars. *Wrong:* the middle
+of the square still read as a field between the market and the fountain; the litter was specks; the
+fountain sat alone against the east edge with the trough floating a row below it; the bench was a grey
+block.
+
+**Pass 2** ([img/thyrsa_polish_pass2.png](img/thyrsa_polish_pass2.png)): three more garlands across the processional way (rows 17, 21, 25, and 33 by the gate), so
+the way through the square reads as the festival's street rather than empty paving; the bolder litter;
+cypress beds either side of the fountain; the bench cut. *Still wrong:* the trough a row below the basin
+read as unrelated; Eudora's yard walls were still plain stucco; the lower town inside the gate was bare
+east of the street; the Kadmeia's east grove was mostly grass.
+
+**Pass 3** (the final, [img/ThyrsaCity.png](img/ThyrsaCity.png), and in game,
+[img/ThyrsaCity_ingame.png](img/ThyrsaCity_ingame.png)): the trough moved to the basin's foot, so the
+cypress beds, the basin and the anemones are one fountain court; Eudora's gate and the ivy on her walls; a
+garden bed with an olive inside the gate before her house; three more olives in the Kadmeia's groves. In
+game (`thyrsa_city.sh`) the square is full of people, stalls and garlands at 1x, the litter reads as the
+morning after a festival, the sellers and the fountain talk, and the smoke climbs. The before and after are
+[img/thyrsa_polish_before_after.png](img/thyrsa_polish_before_after.png).
+
+![Before and after](img/thyrsa_polish_before_after.png)
+
+### The engine, on the city's map
+
+- **The Neistan drum** is the engine's column drum (Deviations, above). Its three states hold: guards in
+  the gate for the festival; after the Dionysia the drum in the arch with the guards beside it; then open.
+- **The blind beggar** is a theoxenia decoy at `FLAG_ICHOR_THEOXENIA_START + 0x21`, and his kindness is
+  Zeus Xenios's: +1 Favor through `special(Ichor_AddFavor)`. The bank flag he used,
+  `FLAG_ICHOR_DECOY_THYRSA`, is deleted.
+- **The digs** (`ICHOR_STUB_DIG`): beside Semele's chamber and at the vineyards' edge they go to
+  `EventScript_IchorAct2_DigStub` (`data/scripts/ichor_act2.pory`), which reads as ENGINE_API §8 says both
+  kinds do without the Trowel; the §8 calls are written at each site for the swap. Their daily spot
+  indices are the engine session's to give.
+- **Hidden items** (vanilla flags 0x30C–0x313): the Cell Battery in Semele's ash (16,7), the Heart Scale
+  in Dirke's basin (22,34), the Rare Candy in the seventh gate's niche (12,2), and one of my own, a Pretty
+  Feather in the dead-end nook behind Manto's house (45,7), where her birds come and go; in the theater,
+  the Honey under a front-row seat (22,18).
+- **Kept:** the marked ivy (`ICHOR_STUB_RELICS`). The thyrsus exists now (Dionysus's gift II,
+  `EventScript_IchorIvyClimb` on `MB_ROCK_CLIMB`), but a climb to the wall-walk needs the strip's
+  wall-walk at a second elevation with a way back down, which is a map change of its own; the Big Nugget
+  stays a lure seen from below. Manto's omens (`ICHOR_STUB_OMENS`): the engine's daily draw isn't built.

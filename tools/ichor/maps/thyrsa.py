@@ -61,6 +61,8 @@ CYPRESS_TOP = 0x00E
 CYPRESS_BOT = 0x016
 PINE = ((0x01E, 0x01F), (0x026, 0x027))
 BOULDER = 0x0E0
+TRIPOD = (0x130, 0x131)          # a bronze tripod on a marble plinth (top over grass, plinth)
+TROUGH = (0x005, 0x006, 0x007)   # a stone trough of red anemones: west end, run, east end
 PATH = {"tl": 0x1D0, "t": 0x1D1, "tr": 0x1D2, "l": 0x1D8, "c": 0x1D9, "r": 0x1DA,
         "bl": 0x1E0, "b": 0x1E1, "br": 0x1E2}
 LEDGE = {"s": 0x087, "w": 0x085, "e": 0x086, "sw": 0x08D, "se": 0x08E}
@@ -227,13 +229,18 @@ def plan():
     box(11, 27, 18, 33, "v")
     box(19, 32, 20, 37, "p")
     # gardens in the square's corners and the theater's grove on the east hill
-    box(21, 15, 23, 17, "g")
+    box(21, 15, 23, 16, "g")
     box(32, 15, 34, 16, "g")
     box(35, 14, 45, 16, "g")
     box(34, 19, 45, 19, "B")
     # the Asclepeion's grove, the garden behind the Agora
     box(21, 25, 24, 27, "g")
     box(31, 26, 35, 27, "g")
+    # a garden bed inside the gate, before Eudora's house (polish pass)
+    box(33, 32, 35, 34, "g")
+    # the god's fountain court (polish pass): cypress beds either side of it
+    box(30, 19, 30, 20, "g")
+    box(34, 21, 34, 22, "g")
     # footprints: the Asclepeion, the Agora, the Kantharos and Pindaros, Eudora and
     # her yard, Dirke, the gate's towers
     box(19, 28, 23, 31, "B")
@@ -460,7 +467,9 @@ def town(g):
     g.put("jars", 36, 30)
     DOORS["eudora"] = house(g, 37, 33, ridge=["chimney", None], eaves=[None, "eaves_mask"],
                             uppers=[], lower=["window", "door_arched"])
-    # her walled yard, an old tree over it
+    # her walled yard (polish pass): a flagged court with the old fig in its bed, the
+    # washing line with her son's red cloak, the jars by the kitchen door; Eudora's
+    # courtyard inside (thyrsa_rooms.py) is the same yard
     for y in (32, 35):
         g.put_part("court_wall", "W", 41, y)
         for x in range(42, 45):
@@ -468,16 +477,35 @@ def town(g):
         g.put_part("court_wall", "E", 45, y)
     for y in (33, 34):
         for x in range(41, 46):
-            g.set(x, y, GRASS, True, built=True)
-    g.olive(42, 33)
+            g.put_part("paving", "shade_n" if y == 33 else "flag", x, y)
+            g.solid[y, x] = True
+    g.put_part("court_extras", "gate", 43, 35)
+    g.put_part("court_extras", "ivy", 42, 35)
+    g.put_part("court_extras", "ivy", 44, 32)
+    g.olive(41, 33)
+    g.put("laundry", 43, 33)
+    g.put("jars", 44, 34)
+    g.put_part("litter", "ivy", 43, 34)
+    g.solid[34, 43] = True
     # ---- the lower town: the Asclepeion and Dirke, the Agora -------------------
     g.put("asclepeion", 19, 28)
     g.put("dirke", 22, 33)
     g.put("agora", 31, 28)
-    # ---- the square: a wine stall, garlands across the main street --------------
+    # ---- the square (polish pass): the market west of the processional way, the god's
+    # fountain east of it, garlands across the street, a bench under the olive -------
     g.put("stall_wine", 22, 19)
-    g.put("statue", 32, 18)                    # the god in bronze
-    for y in (21, 33):
+    g.put("jars", 22, 21)
+    g.put("stall_masks", 22, 22)
+    g.put("statue", 32, 20, h=1)               # the god in bronze, over his fountain
+    g.put("fountain", 31, 21)
+    g.set(31, 23, TROUGH[0], True, built=True)  # anemones in a trough at the basin's foot
+    g.set(32, 23, TROUGH[1], True, built=True)
+    g.set(33, 23, TROUGH[2], True, built=True)
+    # the street of tripods: choregic prizes in the theater's grove
+    for x in (36, 40):
+        g.set(x, 15, TRIPOD[0], True, built=True)
+        g.set(x, 16, TRIPOD[1], True, built=True)
+    for y in (17, 21, 25, 33):
         g.put_part("garland", "post_W", 25, y)
         for x in range(26, 30):
             g.put_part("garland", "swag", x, y)
@@ -486,6 +514,16 @@ def town(g):
     for (x, y) in SIGNS.values():
         g.put_part("stele", "sign", x, y)
 
+
+# Hidden items: where curiosity leads (MAP_DESIGN §1). Each is read from a walkable
+# neighbor; the cells were kept free of signs for them in batch 1.
+HIDDEN = [
+    ((16, 7), "ITEM_CELL_BATTERY", "FLAG_ICHOR_HIDDEN_THYRSA_CELL_BATTERY"),   # Semele's ash
+    ((22, 34), "ITEM_HEART_SCALE", "FLAG_ICHOR_HIDDEN_THYRSA_HEART_SCALE"),    # Dirke's basin
+    ((12, 2), "ITEM_RARE_CANDY", "FLAG_ICHOR_HIDDEN_THYRSA_RARE_CANDY"),       # the seventh gate
+    # polish pass: the dead-end nook behind Manto's house, where her birds come and go
+    ((45, 7), "ITEM_PRETTY_FEATHER", "FLAG_ICHOR_HIDDEN_THYRSA_PRETTY_FEATHER"),
+]
 
 # Signs on the flags (stele cells); their bg events are written with the events.
 SIGNS = {
@@ -544,12 +582,17 @@ def inside_greenery(g):
                    (21, 25), (24, 25),    # the Asclepeion's grove
                    (32, 26), (34, 26),    # behind the Agora
                    (35, 14), (39, 14), (41, 14), (45, 14),   # the theater's grove
+                   (30, 19), (34, 21),                       # the fountain's beds
                    (10, 14), (16, 17), (20, 14)):            # the vineyards' head
         if g.free(x, y, 1, 2):
             g.cypress(x, y)
     g.olive(37, 15)
     g.olive(15, 35)
     g.olive(18, 35)
+    g.olive(34, 33)                       # the bed inside the gate (polish pass)
+    for (x, y) in ((19, 10), (42, 9), (35, 9)):    # the Kadmeia's groves, filled out
+        if g.free(x, y, 2, 2):
+            g.olive(x, y)
     for y in range(H):
         for x in range(W):
             if g.free(x, y) and 10 <= x < 46 and 3 <= y < 38 and hashed(x, y, 17) < 0.14:
@@ -566,7 +609,26 @@ def compose():
     inside_greenery(g)
     outside(g, P)
     shade(g, P)
+    litter(g)
     return g, P
+
+
+def litter(g):
+    """The festival's traces on the flags: ivy, petals, a spilled cup. Thickest on the
+    processional way from the gate to the stair and round the stalls and the fountain."""
+    plain = {g.part("paving", "flag")[0]}
+    kinds = ("ivy", "mask", "cup")
+    keep_clear = {(27, 37), (28, 37), (26, 37), (29, 37)}      # the welcome's triggers
+    for y in range(14, 38):
+        for x in range(10, 46):
+            if int(g.mid[y, x]) not in plain or g.built[y, x] or (x, y) in keep_clear:
+                continue
+            way = 25 <= x <= 30
+            market = 20 <= x <= 25 and 17 <= y <= 25 or 29 <= x <= 35 and 19 <= y <= 25
+            chance = 0.14 if way else 0.12 if market else 0.03
+            r = hashed(x, y, 41)
+            if r < chance:
+                g.put_part("litter", kinds[int(hashed(x, y, 43) * 3) % 3], x, y)
 
 
 def border():
@@ -631,8 +693,9 @@ def events():
             move="MOVEMENT_TYPE_FACE_UP"),
         obj("LOCALID_THYRSA_NEISTAN_GUARD_ASIDE", "OBJ_EVENT_GFX_ICHOR_HOPLITE", 11, 22,
             S + "NeistanGuard", flag="FLAG_TEMP_11", move="MOVEMENT_TYPE_FACE_DOWN"),
-        obj("LOCALID_THYRSA_NEISTAN_DRUM", "OBJ_EVENT_GFX_PUSHABLE_BOULDER", 9, 24, S + "NeistanDrum",
-            flag="FLAG_ICHOR_HIDE_NEISTAN_DRUM"),
+        # the engine's column drum (ENGINE_API §2): the Girdle braces, the player pushes
+        obj("LOCALID_THYRSA_NEISTAN_DRUM", "OBJ_EVENT_GFX_PUSHABLE_BOULDER", 9, 24,
+            "EventScript_StrengthBoulder", flag="FLAG_ICHOR_HIDE_NEISTAN_DRUM"),
         obj("LOCALID_THYRSA_PROITID_GUARD", "OBJ_EVENT_GFX_ICHOR_HOPLITE", 46, 31, S + "ProitidGuard",
             move="MOVEMENT_TYPE_FACE_LEFT"),
         obj("LOCALID_THYRSA_THEATER_KEEPER", "OBJ_EVENT_GFX_ICHOR_HARVESTER_THYRSA", 44, 18, S + "TheaterKeeper",
@@ -647,8 +710,13 @@ def events():
             S + "CitizenKadmos", move="MOVEMENT_TYPE_FACE_DOWN"),
         obj("LOCALID_THYRSA_CITIZEN_IVY", "OBJ_EVENT_GFX_ICHOR_MOM_THYRSA", 34, 36, S + "CitizenIvy",
             move="MOVEMENT_TYPE_FACE_UP"),
-        obj("LOCALID_THYRSA_CITIZEN_CUSHION", "OBJ_EVENT_GFX_ICHOR_YOUTH_M", 21, 20,
+        obj("LOCALID_THYRSA_CITIZEN_CUSHION", "OBJ_EVENT_GFX_ICHOR_YOUTH_M", 21, 23,
             S + "CitizenCushion", move="MOVEMENT_TYPE_WANDER_UP_AND_DOWN", ry=1),
+        # the market (polish pass): the wine-seller and the mask-seller at their stalls
+        obj("LOCALID_THYRSA_WINE_SELLER", "OBJ_EVENT_GFX_ICHOR_MERCHANT", 24, 19, S + "WineSeller",
+            move="MOVEMENT_TYPE_FACE_RIGHT"),
+        obj("LOCALID_THYRSA_MASK_SELLER", "OBJ_EVENT_GFX_ICHOR_YOUTH_F_THYRSA", 24, 22,
+            S + "MaskSeller", move="MOVEMENT_TYPE_FACE_RIGHT"),
         obj("LOCALID_THYRSA_CHILD_1", "OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA", 24, 15, S + "Child",
             move="MOVEMENT_TYPE_FACE_RIGHT"),
         obj("LOCALID_THYRSA_CHILD_2", "OBJ_EVENT_GFX_ICHOR_KID_F", 30, 15, S + "Child2",
@@ -700,6 +768,9 @@ def events():
                       "var_value": "0", "script": S + "Crows"})
     coord.append({"type": "trigger", "x": 43, "y": 18, "elevation": 3, "var": "VAR_TEMP_2",
                   "var_value": "0", "script": S + "TheaterKeeperStop"})
+    # the drum's cell in the Neistan Gate: stepping into it once it's been pushed
+    coord.append({"type": "trigger", "x": 9, "y": 24, "elevation": 3, "var": "VAR_TEMP_4",
+                  "var_value": "0", "script": S + "DrumPushed"})
     signs = [
         (SIGNS["town"], "TownSign"), (SIGNS["kadmeia"], "KadmeiaSign"),
         (SIGNS["theater"], "TheaterSign"), (SIGNS["neistan"], "NeistanSign"),
@@ -713,11 +784,17 @@ def events():
         ((18, 16), "WinePress"),
         ((13, 7), "DigSemele"), ((10, 33), "DigVineyard"),
         ((27, 4), "TempleFront"), ((28, 4), "TempleFront"),
-        ((22, 42), "Grave"), ((33, 42), "Grave"), ((31, 44), "Herm"), ((32, 19), "Statue"),
+        ((22, 42), "Grave"), ((33, 42), "Grave"), ((31, 44), "Herm"),
+        # the square (polish pass): the god over his fountain, the basin, the tripods
+        ((32, 21), "Statue"), ((31, 22), "Fountain"), ((43, 35), "YardGate"), ((36, 16), "Tripod"), ((40, 16), "Tripod"),
     ]
     bg = [{"type": "sign", "x": x, "y": y, "elevation": 0,
            "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": S + name}
           for (x, y), name in signs]
+    # hidden items (BUILD.md, Thyrsa; flags from the vanilla range, 0x30C-0x313)
+    for (x, y), item, flag in HIDDEN:
+        bg.append({"type": "hidden_item", "x": x, "y": y, "elevation": 3, "item": item,
+                   "flag": flag})
     return objects, warp_events, coord, bg
 
 
@@ -919,8 +996,9 @@ def check():
     for b in ev["bg_events"]:
         x, y = b["x"], b["y"]
         fronts = [(x, y + 1), (x, y - 1), (x - 1, y), (x + 1, y)]
+        what = b.get("script") or b.get("item")
         if not any(p in reach and p not in objects for p in fronts):
-            errors.append(f"bg event {b['script']} at ({x},{y}) can't be read from a walkable tile")
+            errors.append(f"bg event {what} at ({x},{y}) can't be read from a walkable tile")
     # the seams: aethos only, and open exactly where the roads run
     for y in range(H):
         for x in range(W):

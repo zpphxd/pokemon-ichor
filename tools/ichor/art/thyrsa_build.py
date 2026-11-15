@@ -34,8 +34,14 @@ from kalliste_lib import pack, write_sources  # noqa: E402
 ROOT = T.ROOT
 IMG = ROOT / "design/phase3/img"
 DOC = ROOT / "design/phase3/TILES_thyrsa.md"
-# Thyrsa merges tiles within 3 px (Emporion's 2): the masonry's speckle is noise anyway
-NEAR_DUPLICATE_PX = 3
+# Thyrsa merges tiles within 4 px (Emporion's 2): the masonry's speckle is noise anyway,
+# and the polish pass checked every 4 px merge by eye (TILES_thyrsa.md, "Polish pass")
+NEAR_DUPLICATE_PX = 4
+# Thyrsa City uses no animated door (every door is MB_NON_ANIMATED_DOOR, asserted in
+# main()), so nothing ever writes tiles 504-511: the set may use all 512.
+EB.TILE_LIMIT = 512
+# A second, looser merge for opaque masonry and vine-leaf tiles only (merge_noise)
+NOISE_PX = 6
 PASSES_MARK = "<!-- passes: hand-written below this line; thyrsa_build.py keeps it -->"
 
 
@@ -117,11 +123,16 @@ strips; the hillside outside them is aethos.
 | vine | The vineyards: vines, grapes, trellises, tilled earth; the fig |
 | wood | The press, jars, barrels and stalls: timber, warm limestone, terracotta |
 
-**Tile budget.** {tiles} of 504 tiles are used. The door animations copy their frames into
-tiles 504-511, so the build fails past 504. Symmetric fronts are mirrored about a tile
-edge, the walls and flags repeat on the 16 or 32 px grid, ivy is an overlay on the wall's
-own tiles, the limewashed houses are free recolors, and tiles within two pixels of
-another are redrawn as that tile.
+**Tile budget.** {tiles} of 512 tiles are used. Thyrsa has no animated door (every door is
+`MB_NON_ANIMATED_DOOR`, and the build asserts it), so nothing writes tiles 504-511 and the
+set may use all 512. Symmetric fronts are mirrored about a tile edge, the walls and flags
+repeat on the 16 or 32 px grid, ivy is an overlay on the wall's own tiles, the limewashed
+houses are free recolors, tiles within four pixels of another are redrawn as that tile,
+and opaque masonry and vine-leaf tiles within six.
+
+**Animation.** Semele's smoke has two frames. The build moves its six tiles to the
+secondary's tiles 1-6 and writes the frames to `data/tilesets/secondary/thyrsa/anim/smoke/`;
+`InitTilesetAnim_Thyrsa` in `src/tileset_anims.c` swaps them every 20 frames.
 """
 
 
@@ -202,6 +213,208 @@ def write_catalog(used):
     print(DOC)
 
 
+def merge_noise(structs, limit=NOISE_PX):
+    """A second, looser merge for opaque tiles drawn only in the stone or vine groups:
+    the Cyclopean masonry's speckle and the vine rows' leaves, where a few pixels'
+    difference is noise. Masks, signs, doors and figures are never touched."""
+    import numpy as np
+    groups = [T.GROUP_RGB["stone"], T.GROUP_RGB["vine"]]
+    occ = EB._tiles(structs)
+
+    def noisy(k):
+        a = np.frombuffer(k, np.uint8).reshape(8, 8, 4)
+        cols = {tuple(int(c) for c in p[:3]) for p in a.reshape(64, 4)}
+        return (a[..., 3] > 0).all() and any(cols <= g for g in groups)
+    keys = [k for k in occ if noisy(k)]
+    arr = {k: np.frombuffer(k, np.uint8).reshape(8, 8, 4) for k in keys}
+    flat = np.stack([arr[k].reshape(64, 4) for k in keys])
+    pairs = []
+    for i, k in enumerate(keys):
+        best = None
+        for v in EB._flips(arr[k]):
+            d = (flat != v.reshape(1, 64, 4)).any(-1).sum(-1)
+            best = d if best is None else np.minimum(best, d)
+        for j in np.nonzero(best <= limit)[0]:
+            if j > i:
+                pairs.append((int(best[j]), i, int(j)))
+    pairs.sort()
+    dropped, kept, merges = set(), set(), 0
+    for d, i, j in pairs:
+        a, b = keys[i], keys[j]
+        if a in dropped or b in dropped:
+            continue
+        keep, drop = (a, b) if len(occ[a]) >= len(occ[b]) else (b, a)
+        if drop in kept:
+            keep, drop = drop, keep
+            if drop in kept:
+                continue
+        for (layer, tx, ty) in occ[drop]:
+            cur = layer.a[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8]
+            layer.a[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8] = min(
+                EB._flips(arr[keep]), key=lambda v: int((cur != v).any(-1).sum()))
+        dropped.add(drop)
+        kept.add(keep)
+        merges += 1
+    return merges
+
+
+# --------------------------------------------------------------------------
+# Semele's smoke: the tileset's one animation
+# --------------------------------------------------------------------------
+
+ANIM_DIR = ROOT / "data/tilesets/secondary/thyrsa/anim/smoke"
+SMOKE_FIRST_TILE = 1        # the frames land on tiles 1.. of the secondary (tile 0 is clear)
+SMOKE_TILES = 6             # THYRSA_SMOKE_FIRST_TILE and _TILES in src/tileset_anims.c
+
+
+def _read_pal(path):
+    lines = path.read_text().split()
+    n = int(lines[2])
+    vals = [int(v) for v in lines[3:3 + 3 * n]]
+    return [tuple(vals[i:i + 3]) for i in range(0, 3 * n, 3)]
+
+
+def _flip(t, hf, vf):
+    if hf:
+        t = t[:, ::-1]
+    if vf:
+        t = t[::-1, :]
+    return t
+
+
+def animate_smoke(sp, structs):
+    """Move Semele's smoke tiles to fixed slots (SMOKE_FIRST_TILE..) and write each
+    frame's tiles as an indexed strip for src/tileset_anims.c. Every smoke tile must be
+    the smoke's own (no other metatile uses it), or the walls would smoke too."""
+    import numpy as np
+    from PIL import Image
+    import thyrsa_civic as TC
+    sem = next(s for s in structs if s.key == "semele")
+    frames = [None] + [finish_struct(TC.semele(frame=f)) for f in range(1, TC.SMOKE_FRAMES)]
+    meta = np.fromfile(sp.bin / "metatiles.bin", "<u2").reshape(-1, 8)
+    img = Image.open(sp.bin / "tiles.png")
+    pal_img = img.getpalette()
+    tiles_a = np.array(img)
+    tiles = [tiles_a[y:y + 8, x:x + 8].copy() for y in range(0, tiles_a.shape[0], 8)
+             for x in range(0, tiles_a.shape[1], 8)]
+    pals = {p: _read_pal(sp.bin / f"palettes/{p:02d}.pal") for p in range(6, 13)}
+    x0, y0, x1, y1 = TC.SMOKE_BOX
+    slots = []          # (metatile index, entry, tx, ty)
+    for ty in range(y0 // 8, y1 // 8):
+        for tx in range(x0 // 8, x1 // 8):
+            px = sem.T.a[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8]
+            if not (px[..., 3] > 0).any():
+                continue
+            cx, cy = tx // 2, ty // 2
+            q = (ty % 2) * 2 + (tx % 2)
+            m = sem.ids[cy][cx] - 0x200
+            slots.append((m, 4 + q, tx, ty))
+    # entries count tiles from the primary's start: the secondary's own are 512 and up
+    SEC = 512
+    used_by = {}
+    for i, row in enumerate(meta):
+        for j, e in enumerate(row):
+            t = int(e) & 0x3FF
+            if t >= SEC:
+                used_by.setdefault(t - SEC, set()).add((i, j))
+    assert len(slots) == SMOKE_TILES,         f"{len(slots)} smoke tiles: src/tileset_anims.c's THYRSA_SMOKE_TILES says {SMOKE_TILES}"
+    smoke_tiles = []
+    for (m, j, tx, ty) in slots:
+        e = int(meta[m, j])
+        t = (e & 0x3FF) - SEC
+        assert t > 0, f"semele's smoke tile ({tx},{ty}) is empty in the compiled set"
+        assert used_by[t] == {(m, j)}, \
+            f"smoke tile {t} at ({tx},{ty}) is shared with {used_by[t]}: it would animate elsewhere"
+        smoke_tiles.append(t)
+    assert len(set(smoke_tiles)) == len(smoke_tiles)
+    # swap each smoke tile into its slot, renumbering every entry that points at either
+    order = list(range(len(tiles)))
+    for k, t in enumerate(smoke_tiles):
+        dst = SMOKE_FIRST_TILE + k
+        cur = order.index(t)
+        order[cur], order[dst] = order[dst], order[cur]
+    new_index = {old: new for new, old in enumerate(order)}
+    tiles = [tiles[old] for old in order]
+    for i in range(len(meta)):
+        for j in range(8):
+            e = int(meta[i, j])
+            t = e & 0x3FF
+            if t >= SEC:
+                meta[i, j] = (e & ~0x3FF) | (SEC + new_index[t - SEC])
+    # Porytiles picks each tile's palette from frame 0's colors alone; a later frame may
+    # need a color that palette lacks (smoke white beside a pale stone). Move each smoke
+    # tile to a palette that holds every frame's colors, re-indexing frame 0 to match.
+    for k, (m, j, tx, ty) in enumerate(slots):
+        e = int(meta[m, j])
+        old = pals[e >> 12]
+        # tiles.png holds palette * 16 + color (Porytiles' debug layout; gbagfx keeps
+        # the low nibble), color 0 clear
+        rgb0 = [[old[v & 15] if v & 15 else None for v in row] for row in tiles[SMOKE_FIRST_TILE + k]]
+        need = {c for row in rgb0 for c in row if c}
+        for f in range(1, TC.SMOKE_FRAMES):
+            px = frames[f].T.a[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8]
+            need |= {tuple(int(v) for v in p[:3]) for p in px.reshape(64, 4) if p[3]}
+        fits = [p for p in range(6, 13) if need <= set(pals[p][1:])]
+        assert fits, f"no palette holds smoke tile ({tx},{ty})'s colors {need}"
+        p = (e >> 12) if (e >> 12) in fits else fits[0]
+        tiles[SMOKE_FIRST_TILE + k] = np.array(
+            [[p * 16 + pals[p].index(c, 1) if c else 0 for c in row] for row in rgb0], np.uint8)
+        meta[m, j] = (e & 0x0FFF) | (p << 12)
+    meta.astype("<u2").tofile(sp.bin / "metatiles.bin")
+    cols = 16
+    out = np.zeros_like(tiles_a)
+    for n, tl in enumerate(tiles):
+        out[(n // cols) * 8:(n // cols) * 8 + 8, (n % cols) * 8:(n % cols) * 8 + 8] = tl
+    im = Image.fromarray(out, "P")
+    im.putpalette(pal_img)
+    im.save(sp.bin / "tiles.png")
+    # the frames: frame 0 is the compiled tiles themselves; later frames are drawn
+    # with the same palette and flips as the entries that show them
+    ANIM_DIR.mkdir(parents=True, exist_ok=True)
+    for f in range(TC.SMOKE_FRAMES):
+        strip = np.zeros((8 * len(slots), 8), np.uint8)
+        for k, (m, j, tx, ty) in enumerate(slots):
+            e = int(meta[m, j])
+            if f == 0:
+                ind = tiles[SMOKE_FIRST_TILE + k]
+            else:
+                p = e >> 12
+                pal = pals[p]
+                px = frames[f].T.a[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8]
+                ind = np.zeros((8, 8), np.uint8)
+                for yy in range(8):
+                    for xx in range(8):
+                        if px[yy, xx, 3]:
+                            rgb = tuple(int(v) for v in px[yy, xx, :3])
+                            assert rgb in pal[1:], f"smoke frame {f}: {rgb} isn't in palette {p}"
+                            ind[yy, xx] = p * 16 + pal.index(rgb, 1)
+                ind = _flip(ind, (e >> 10) & 1, (e >> 11) & 1)
+            strip[k * 8:k * 8 + 8] = ind
+        im = Image.fromarray(strip, "P")
+        im.putpalette(pal_img)
+        im.save(ANIM_DIR / f"{f}.png")
+    x0, y0, x1, y1 = TC.SMOKE_BOX
+    for f in range(1, TC.SMOKE_FRAMES):
+        a = frames[f].T.a
+        outside = a[..., 3].copy()
+        for (m, j, tx, ty) in slots:
+            outside[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8] = 0
+        outside[:, :x0] = 0
+        outside[:, x1:] = 0
+        outside[y1:, :] = 0
+        assert not outside.any(), f"smoke frame {f} draws outside frame 0's tiles"
+    print(f"semele's smoke: {len(slots)} tiles at {SMOKE_FIRST_TILE}-"
+          f"{SMOKE_FIRST_TILE + len(slots) - 1}, {TC.SMOKE_FRAMES} frames in "
+          f"{ANIM_DIR.relative_to(ROOT)}")
+    return len(slots)
+
+
+def finish_struct(s):
+    """A later frame of Semele's chamber, drawn fresh (thyrsa_civic.semele(frame=n));
+    only the smoke's own tiles are read from it."""
+    return s
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-compile", action="store_true")
@@ -217,8 +430,9 @@ def main():
     if not probs:
         before = len(EB._tiles(structs))
         merges = EB.merge_near_duplicates(structs, limit=NEAR_DUPLICATE_PX)
-        print(f"merged {len(merges)} near-duplicate tiles: {before} -> "
-              f"{len(EB._tiles(structs))} distinct tiles before palette sharing")
+        noise = merge_noise(structs)
+        print(f"merged {len(merges)} near-duplicate tiles and {noise} masonry and leaf tiles: "
+              f"{before} -> {len(EB._tiles(structs))} distinct tiles before palette sharing")
         probs = T.validate(structs)
     for p in probs:
         print("PROBLEM:", p)
@@ -227,6 +441,8 @@ def main():
         print(args.preview)
     if probs:
         sys.exit(1)
+    doors = [(s.key, c) for s in structs for c, b in s.behaviors.items() if b == "MB_ANIMATED_DOOR"]
+    assert not doors, f"animated doors {doors}: they would overwrite tiles 504-511"
     rows = pack(sections)
     assert rows <= 64, f"{rows} sheet rows: more than 512 metatiles"
     write_sources(structs, rows, sp.src)
@@ -235,6 +451,7 @@ def main():
         return
     EB.compile_tileset(sp)
     patched = EB.borrow_ground(sp, structs)
+    animate_smoke(sp, structs)
     used = EB.verify(sp, rows, patched)
     print("colors per palette 6-12:", EB.palette_report(sp))
     IMG.mkdir(parents=True, exist_ok=True)
