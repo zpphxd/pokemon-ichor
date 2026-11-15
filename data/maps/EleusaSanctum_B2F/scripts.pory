@@ -1,1 +1,120 @@
-mapscripts EleusaSanctum_B2F_MapScripts {}
+// The Mystery sanctum, B2F: the Hall of the Kore (design/phase2/SCRIPT.md, beat 23B;
+// Part 5, "The Mystery sanctum": Test). Layout and events come from
+// tools/ichor/maps/sanctum.py (design/phase2/MAPS_sanctum.md).
+//
+// A long frescoed hall, a chasm down its middle. The four panels of the Kore's story are
+// read south to north, one on each wall the walk turns at. The near half is a field of
+// grain pits crossed on Hecate's chalk (latent: it shows when the torch is doused; the
+// Titans' bootprints mark the same way by torchlight). A pit drops you back in the court.
+// The iron-tasting spring is the midpoint rest. Konis holds the doorway to the far stair;
+// Gaios waits in the fresco alcove with the TM Dig the Titans left behind.
+//
+// Warps: 0-1 the stair up to the granaries (B1F's warp 4), 2-3 the stair down to the
+// deepest granary (B3F's warps 0-1).
+//
+// Temp vars: VAR_TEMP_A is 1 once Hyperion's voice has come up the hall; VAR_TEMP_9
+// keeps the pits' triggers on (always 0).
+
+mapscripts EleusaSanctum_B2F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_ELEUSA_VILLAGE)
+        setvar(VAR_TEMP_9, 0)
+        if (flag(FLAG_ICHOR_SANCTUM_VOICE)) {
+            setvar(VAR_TEMP_A, 1)
+        } else {
+            setvar(VAR_TEMP_A, 0)
+        }
+    }
+}
+
+text EleusaSanctum_B2F_Text_NameVoice { "VOICE" }
+text EleusaSanctum_B2F_Text_NameKonis { "KONIS" }
+text EleusaSanctum_B2F_Text_NameGaios { "GAIOS" }
+
+// ---------------------------------------------------------------------------
+// Beat 23B: the hall's head
+// ---------------------------------------------------------------------------
+
+// A big voice echoes up from the far stair.
+script EleusaSanctum_B2F_EventScript_Voice {
+    lockall
+    setvar(VAR_TEMP_A, 1)
+    setflag(FLAG_ICHOR_SANCTUM_VOICE)
+    delay(16)
+    setspeaker(EleusaSanctum_B2F_Text_NameVoice)
+    msgbox(format("EASY! EASY. It's older than your grandmother!"))
+    msgbox(format("Lift with your knees! Who taught you to lift?"))
+    closemessage
+    releaseall
+}
+
+// The iron-tasting spring: the midpoint rest.
+script EleusaSanctum_B2F_EventScript_Spring {
+    lockall
+    msgbox(format("The water's cold and tastes of iron. You feel rested."), MSGBOX_DEFAULT)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    releaseall
+}
+
+// Off the chalk and into a grain pit, as in the Telesterion's Summer quarter.
+script EleusaSanctum_B2F_EventScript_Pit {
+    lockall
+    playse(SE_FALL)
+    msgbox(format("You slide down into a grain pit.\p"
+                  "Someone has helpfully left a ladder."), MSGBOX_DEFAULT)
+    closemessage
+    warpsilent(MAP_ELEUSA_SANCTUM_B2F, 12, 34)
+    waitstate
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// The four frescoes, south to north (SCRIPT.md Part 5)
+// ---------------------------------------------------------------------------
+
+script EleusaSanctum_B2F_EventScript_Fresco1 {
+    msgbox(format("A girl picking flowers in a meadow.\p"
+                  "Behind her the ground is splitting open."), MSGBOX_SIGN)
+}
+
+script EleusaSanctum_B2F_EventScript_Fresco2 {
+    msgbox(format("A chariot of black horses, going down. The girl's arms reach back."), MSGBOX_SIGN)
+}
+
+script EleusaSanctum_B2F_EventScript_Fresco3 {
+    msgbox(format("A woman with a torch, searching.\p"
+                  "Beside her, a smaller figure with two torches."), MSGBOX_SIGN)
+}
+
+script EleusaSanctum_B2F_EventScript_Fresco4 {
+    msgbox(format("The girl again, coming up a stair into the light. The flowers are open."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// The Titanborn (SCRIPT.md Part 3)
+// ---------------------------------------------------------------------------
+
+// Mandatory: she holds the doorway through the low wall before the far stair.
+script EleusaSanctum_B2F_EventScript_Konis {
+    trainerbattle_single(TRAINER_ICHOR_GRUNT_SANCTUM_KONIS,
+        format("You got past the lamps? Then you'll get past me. No. Wait. That's wrong."),
+        format("That's what I meant, though."))
+    setspeaker(EleusaSanctum_B2F_Text_NameKonis)
+    msgbox(format("That's what I meant, though."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// Optional: in the fresco alcove, with the TM Dig the Titans left behind.
+script EleusaSanctum_B2F_EventScript_Gaios {
+    trainerbattle_single(TRAINER_ICHOR_GRUNT_SANCTUM_GAIOS,
+        format("The frescoes down here show a girl dragged under the earth. Cheerful."),
+        format("She comes back in the last picture. I checked. That's something."))
+    setspeaker(EleusaSanctum_B2F_Text_NameGaios)
+    msgbox(format("She comes back in the last picture. I checked. That's something."), MSGBOX_AUTOCLOSE)
+    end
+}

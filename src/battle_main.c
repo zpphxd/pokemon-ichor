@@ -434,6 +434,8 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_INITIATE] = { _("INITIATE"), 3 },
     // Ichor: Eleusa's fields (SCRIPT.md Part 3). Pays like the other farm hands.
     [TRAINER_CLASS_SWINEHERD] = { _("SWINEHERD"), 4 },
+    // Ichor: the Titans' admins pay like Emerald's (Aqua and Magma admins, 10)
+    [TRAINER_CLASS_TITAN_ADMIN] = { _("TITAN ADMIN"), 10 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =
@@ -5118,6 +5120,7 @@ static void HandleEndTurn_BattleWon(void)
         case TRAINER_CLASS_MAGMA_ADMIN:
         case TRAINER_CLASS_MAGMA_LEADER:
         case TRAINER_CLASS_TITANBORN: // Ichor
+        case TRAINER_CLASS_TITAN_ADMIN: // Ichor
             PlayBGM(MUS_VICTORY_AQUA_MAGMA);
             break;
         case TRAINER_CLASS_LEADER:

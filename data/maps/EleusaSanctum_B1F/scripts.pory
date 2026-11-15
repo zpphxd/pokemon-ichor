@@ -1,1 +1,367 @@
-mapscripts EleusaSanctum_B1F_MapScripts {}
+// The Mystery sanctum, B1F: the granaries under the Telesterion (design/phase2/SCRIPT.md,
+// beat 23A; Part 5, "The Mystery sanctum": Teach). Layout, events and the generated block
+// at the end of this file come from tools/ichor/maps/sanctum.py
+// (design/phase2/MAPS_sanctum.md).
+//
+// Warps: 0-1 the Anaktoron's stair up to the Telesterion (its warp 3; warp 0 is where
+// beat 22 lands the player), 2-3 the Ploutonion's stair up to Eleusa Village (its warps
+// 9 and 10), 4 the steps down to the Hall of the Kore.
+//
+// Beat 23A plays on the first arrival (FLAG_ICHOR_SANCTUM_ARRIVED): Chloe holds the
+// stair and heals from then on, until she gives the Sickle on B3F; a grunt with a lamp
+// comes out of the dark, and Alethea takes him on behind the column. Krokalos (across the
+// narrow way down) and Bolos (Bolos's side pit, its Hyper Potion) wait ahead, and stay
+// until the theft is over (FLAG_ICHOR_HIDE_HYPERION_SANCTUM).
+//
+// Temp vars: VAR_TEMP_A is 1 while beat 23A waits to play; VAR_TEMP_8 is 1 while the
+// player stands in a lit zone; VAR_TEMP_B is 1 until Alethea's fight is out of sight.
+//
+// ICHOR_STUB_DIG: the Persephone sherd's fixed dig (SCRIPT.md Part 6) shows the turned
+// earth only, until the engine's excavation (ENGINE_API.md §8) lands.
+
+mapscripts EleusaSanctum_B1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // A loss down here wakes the player at Eleusa's Asclepeion (SCRIPT.md, Hyperion).
+        setrespawn(HEAL_LOCATION_ELEUSA_VILLAGE)
+        setvar(VAR_TEMP_8, 0)
+        setvar(VAR_TEMP_B, 0)
+        call(EleusaSanctum_B1F_EventScript_LightOnArrival)
+        if (!flag(FLAG_ICHOR_SANCTUM_ARRIVED)) {
+            setvar(VAR_TEMP_A, 1)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(EleusaSanctum_B1F_EventScript_DrawBraziers)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_A, 1: EleusaSanctum_B1F_EventScript_Arrival
+    ]
+}
+
+text EleusaSanctum_B1F_Text_NameChloe { "CHLOE" }
+text EleusaSanctum_B1F_Text_NameAlethea { "ALETHEA" }
+text EleusaSanctum_B1F_Text_NameGrunt { "GRUNT" }
+text EleusaSanctum_B1F_Text_NameKrokalos { "KROKALOS" }
+text EleusaSanctum_B1F_Text_NameBolos { "BOLOS" }
+
+// ---------------------------------------------------------------------------
+// Beat 23A: the granaries
+// ---------------------------------------------------------------------------
+
+// The player lands on the Anaktoron's stair at (5,3), Chloe on the step beside them,
+// Alethea at the stair's foot. The lamp grunt comes up out of the gallery.
+script EleusaSanctum_B1F_EventScript_Arrival {
+    lockall
+    setvar(VAR_TEMP_A, 0)
+    hidefollower
+    delay(30)
+    setspeaker(EleusaSanctum_B1F_Text_NameChloe)
+    msgbox(format("The granaries. Every first fruit in Aethos ends up down here."))
+    msgbox(format("“Where the grain goes underground.”"))
+    applymovement(LOCALID_SANCTUM_ALETHEA, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(EleusaSanctum_B1F_Text_NameAlethea)
+    msgbox(format("The tablet. It meant here. It meant this exact room."))
+    setspeaker(EleusaSanctum_B1F_Text_NameChloe)
+    msgbox(format("I'll hold the stair. Nobody comes up it while I'm standing on it."))
+    msgbox(format("I've held worse. I've held a harvest."))
+    closemessage
+    // A grunt walks out of the dark toward them, lamp swinging.
+    applymovement(LOCALID_SANCTUM_ALETHEA, Common_Movement_FaceDown)
+    applymovement(LOCALID_SANCTUM_LAMP_GRUNT, EleusaSanctum_B1F_Movement_GruntComes)
+    waitmovement(0)
+    setspeaker(EleusaSanctum_B1F_Text_NameGrunt)
+    msgbox(format("Oi! The priestess! Get her!"))
+    closemessage
+    applymovement(LOCALID_SANCTUM_ALETHEA, EleusaSanctum_B1F_Movement_AletheaSteps)
+    waitmovement(0)
+    setspeaker(EleusaSanctum_B1F_Text_NameAlethea)
+    msgbox(format("Oh no you don't. Spalunk, go!"))
+    applymovement(LOCALID_SANCTUM_ALETHEA, Common_Movement_FaceUp)
+    waitmovement(0)
+    msgbox(format("{PLAYER}, I've got this one. Mostly. Go on!"))
+    closemessage
+    // Behind the column, out of the way: the fight goes on offscreen.
+    applymovement(LOCALID_SANCTUM_LAMP_GRUNT, EleusaSanctum_B1F_Movement_GruntBehindColumn)
+    applymovement(LOCALID_SANCTUM_ALETHEA, EleusaSanctum_B1F_Movement_AletheaBehindColumn)
+    waitmovement(0)
+    playse(SE_M_DIG)
+    delay(24)
+    playse(SE_M_TAKE_DOWN)
+    delay(20)
+    playse(SE_M_VITAL_THROW)
+    waitse
+    setflag(FLAG_ICHOR_SANCTUM_ARRIVED)
+    setvar(VAR_TEMP_B, 1)
+    releaseall
+}
+
+movement EleusaSanctum_B1F_Movement_GruntComes {
+    walk_up * 3
+}
+
+movement EleusaSanctum_B1F_Movement_AletheaSteps {
+    walk_down
+}
+
+movement EleusaSanctum_B1F_Movement_GruntBehindColumn {
+    walk_down
+    walk_right * 2
+    walk_up
+    face_down
+}
+
+movement EleusaSanctum_B1F_Movement_AletheaBehindColumn {
+    delay_16
+    walk_down
+    walk_down
+    walk_right * 2
+    face_up
+}
+
+// Out of sight of the stair hall: Alethea and her grunt are gone from the screen.
+script EleusaSanctum_B1F_EventScript_AletheaOutOfSight {
+    lockall
+    removeobject(LOCALID_SANCTUM_ALETHEA)
+    removeobject(LOCALID_SANCTUM_LAMP_GRUNT)
+    setvar(VAR_TEMP_B, 0)
+    releaseall
+}
+
+script EleusaSanctum_B1F_EventScript_Alethea {
+    lock
+    setspeaker(EleusaSanctum_B1F_Text_NameAlethea)
+    msgbox(format("{PLAYER}, I've got this one. Mostly. Go on!"))
+    release
+}
+
+script EleusaSanctum_B1F_EventScript_LampGrunt {
+    lock
+    setspeaker(EleusaSanctum_B1F_Text_NameGrunt)
+    msgbox(format("Oi! The priestess! Get her!"))
+    release
+}
+
+// Chloe holds the stair, and heals the party if spoken to (beat 23A).
+script EleusaSanctum_B1F_EventScript_Chloe {
+    lock
+    faceplayer
+    setspeaker(EleusaSanctum_B1F_Text_NameChloe)
+    msgbox(format("Hold still."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The Titanborn (SCRIPT.md Part 3)
+// ---------------------------------------------------------------------------
+
+// Mandatory: he watches the narrow way down to the apse.
+script EleusaSanctum_B1F_EventScript_Krokalos {
+    trainerbattle_single(TRAINER_ICHOR_GRUNT_SANCTUM_KROKALOS,
+        format("Forty lamps. Do you know what forty lamps cost?\p"
+               "The big man paid for every one. In silver. Shouting."),
+        format("I'm docking this from my own lamp."))
+    setspeaker(EleusaSanctum_B1F_Text_NameKrokalos)
+    msgbox(format("I'm docking this from my own lamp."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// Optional: he guards the side pit and its Hyper Potion.
+script EleusaSanctum_B1F_EventScript_Bolos {
+    trainerbattle_single(TRAINER_ICHOR_GRUNT_SANCTUM_BOLOS,
+        format("Kalliste was the wrong hill. This is the right one. The boss says so.\p"
+               "Loudly."),
+        format("He brings snacks, the boss. Remember that when you're winning."))
+    setspeaker(EleusaSanctum_B1F_Text_NameBolos)
+    msgbox(format("He brings snacks, the boss. Remember that when you're winning."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// ---------------------------------------------------------------------------
+// Things
+// ---------------------------------------------------------------------------
+
+// ICHOR_STUB_DIG: the Persephone amphora's sherd, behind the great jar in bay B.
+script EleusaSanctum_B1F_EventScript_DigSpot {
+    msgbox(format("Turned earth behind the great jar, and a glint of pottery.\p"
+                  "It won't come up by hand."), MSGBOX_SIGN)
+}
+
+// --- Generated by tools/ichor/maps/sanctum.py from the layout. Do not edit. ---
+
+// The four braziers (FLAG_ICHOR_BRAZIERS_START + 0x18..0x1B), each lighting its stretch
+// of the granaries: a lit zone (ENGINE_API.md §2). VAR_TEMP_8 is 1 while the player
+// stands in a lit zone.
+script EleusaSanctum_B1F_EventScript_DrawBraziers {
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x18)) {
+        call(EleusaSanctum_B1F_EventScript_Light0)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x19)) {
+        call(EleusaSanctum_B1F_EventScript_Light1)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x1A)) {
+        call(EleusaSanctum_B1F_EventScript_Light2)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x1B)) {
+        call(EleusaSanctum_B1F_EventScript_Light3)
+    }
+    return
+}
+
+script EleusaSanctum_B1F_EventScript_Light0 {
+    setmetatile(9, 5, METATILE_EleusaSanctumRock_BrazierLit_00, TRUE)
+    setmetatile(10, 5, METATILE_EleusaSanctumRock_BrazierLit_10, TRUE)
+    setmetatile(9, 6, METATILE_EleusaSanctumRock_BrazierLit_01, TRUE)
+    setmetatile(10, 6, METATILE_EleusaSanctumRock_BrazierLit_11, TRUE)
+    return
+}
+
+script EleusaSanctum_B1F_EventScript_Brazier0 {
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x18)
+    setvar(VAR_0x8005, TRUE)      // the brazier stands in its own stretch
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(EleusaSanctum_B1F_EventScript_Light0)
+        special(DrawWholeMapView)
+        setvar(VAR_TEMP_8, 1)
+    }
+    releaseall
+}
+
+script EleusaSanctum_B1F_EventScript_EnterZone0 {
+    lockall
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x18)
+    call(EventScript_IchorEnterLitZone)
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x18)) {
+        setvar(VAR_TEMP_8, 1)
+    }
+    releaseall
+}
+
+script EleusaSanctum_B1F_EventScript_Light1 {
+    setmetatile(21, 4, METATILE_EleusaSanctumRock_BrazierLit_00, TRUE)
+    setmetatile(22, 4, METATILE_EleusaSanctumRock_BrazierLit_10, TRUE)
+    setmetatile(21, 5, METATILE_EleusaSanctumRock_BrazierLit_01, TRUE)
+    setmetatile(22, 5, METATILE_EleusaSanctumRock_BrazierLit_11, TRUE)
+    return
+}
+
+script EleusaSanctum_B1F_EventScript_Brazier1 {
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x19)
+    setvar(VAR_0x8005, TRUE)      // the brazier stands in its own stretch
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(EleusaSanctum_B1F_EventScript_Light1)
+        special(DrawWholeMapView)
+        setvar(VAR_TEMP_8, 1)
+    }
+    releaseall
+}
+
+script EleusaSanctum_B1F_EventScript_EnterZone1 {
+    lockall
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x19)
+    call(EventScript_IchorEnterLitZone)
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x19)) {
+        setvar(VAR_TEMP_8, 1)
+    }
+    releaseall
+}
+
+script EleusaSanctum_B1F_EventScript_Light2 {
+    setmetatile(26, 5, METATILE_EleusaSanctumRock_BrazierLit_00, TRUE)
+    setmetatile(27, 5, METATILE_EleusaSanctumRock_BrazierLit_10, TRUE)
+    setmetatile(26, 6, METATILE_EleusaSanctumRock_BrazierLit_01, TRUE)
+    setmetatile(27, 6, METATILE_EleusaSanctumRock_BrazierLit_11, TRUE)
+    return
+}
+
+script EleusaSanctum_B1F_EventScript_Brazier2 {
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x1A)
+    setvar(VAR_0x8005, TRUE)      // the brazier stands in its own stretch
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(EleusaSanctum_B1F_EventScript_Light2)
+        special(DrawWholeMapView)
+        setvar(VAR_TEMP_8, 1)
+    }
+    releaseall
+}
+
+script EleusaSanctum_B1F_EventScript_EnterZone2 {
+    lockall
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x1A)
+    call(EventScript_IchorEnterLitZone)
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x1A)) {
+        setvar(VAR_TEMP_8, 1)
+    }
+    releaseall
+}
+
+script EleusaSanctum_B1F_EventScript_Light3 {
+    setmetatile(26, 22, METATILE_EleusaSanctumRock_BrazierLit_00, TRUE)
+    setmetatile(27, 22, METATILE_EleusaSanctumRock_BrazierLit_10, TRUE)
+    setmetatile(26, 23, METATILE_EleusaSanctumRock_BrazierLit_01, TRUE)
+    setmetatile(27, 23, METATILE_EleusaSanctumRock_BrazierLit_11, TRUE)
+    return
+}
+
+script EleusaSanctum_B1F_EventScript_Brazier3 {
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x1B)
+    setvar(VAR_0x8005, TRUE)      // the brazier stands in its own stretch
+    call(EventScript_IchorBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(EleusaSanctum_B1F_EventScript_Light3)
+        special(DrawWholeMapView)
+        setvar(VAR_TEMP_8, 1)
+    }
+    releaseall
+}
+
+script EleusaSanctum_B1F_EventScript_EnterZone3 {
+    lockall
+    setvar(VAR_0x8004, FLAG_ICHOR_BRAZIERS_START + 0x1B)
+    call(EventScript_IchorEnterLitZone)
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x1B)) {
+        setvar(VAR_TEMP_8, 1)
+    }
+    releaseall
+}
+
+script EleusaSanctum_B1F_EventScript_LeaveLitZone {
+    lockall
+    call(EventScript_IchorLeaveLitZone)
+    setvar(VAR_TEMP_8, 0)
+    releaseall
+}
+
+// On arrival in a lit stretch (the stair hall, the Ploutonion's landing, the apse):
+// full light at once, as ENGINE_API.md §2 asks of ON_TRANSITION.
+script EleusaSanctum_B1F_EventScript_LightOnArrival {
+    getplayerxy(VAR_TEMP_C, VAR_TEMP_D)
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x18) && var(VAR_TEMP_C) >= 2 && var(VAR_TEMP_C) <= 10 && var(VAR_TEMP_D) >= 3 && var(VAR_TEMP_D) <= 7) {
+        setflashlevel(0)
+        setvar(VAR_TEMP_8, 1)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x19) && var(VAR_TEMP_C) >= 13 && var(VAR_TEMP_C) <= 23 && var(VAR_TEMP_D) >= 4 && var(VAR_TEMP_D) <= 9) {
+        setflashlevel(0)
+        setvar(VAR_TEMP_8, 1)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x1A) && var(VAR_TEMP_C) >= 26 && var(VAR_TEMP_C) <= 33 && var(VAR_TEMP_D) >= 3 && var(VAR_TEMP_D) <= 16) {
+        setflashlevel(0)
+        setvar(VAR_TEMP_8, 1)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x1B) && var(VAR_TEMP_C) >= 26 && var(VAR_TEMP_C) <= 32 && var(VAR_TEMP_D) >= 22 && var(VAR_TEMP_D) <= 24) {
+        setflashlevel(0)
+        setvar(VAR_TEMP_8, 1)
+    }
+    return
+}
+
+// --- End of the generated block. ---

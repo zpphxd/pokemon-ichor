@@ -1241,4 +1241,20 @@
 #define METATILE_TempleHermes_Lane_ArrowW                0x213
 // end gTileset_TempleHermes
 
+// --- EleusaSanctum: written by tools/ichor/maps/sanctum.py ---
+#define METATILE_EleusaSanctumRock_Boulder                    0x2CB
+#define METATILE_EleusaSanctumRock_RockPile                   0x2CC
+#define METATILE_EleusaSanctumRock_DigCrypt                   0x3C2
+#define METATILE_EleusaSanctumRock_BrazierCold_00             0x3E9
+#define METATILE_EleusaSanctumRock_BrazierCold_10             0x3EA
+#define METATILE_EleusaSanctumRock_BrazierCold_01             0x3EB
+#define METATILE_EleusaSanctumRock_BrazierCold_11             0x3EC
+#define METATILE_EleusaSanctumRock_BrazierLit_00              0x3F1
+#define METATILE_EleusaSanctumRock_BrazierLit_10              0x3F2
+#define METATILE_EleusaSanctumRock_BrazierLit_01              0x3F3
+#define METATILE_EleusaSanctumRock_BrazierLit_11              0x3F4
+#define METATILE_EleusaSanctumHall_Basin_0                    0x2B0
+#define METATILE_EleusaSanctumHall_Basin_1                    0x2B1
+// --- EleusaSanctum: end ---
+
 #endif // GUARD_METATILE_LABELS_H

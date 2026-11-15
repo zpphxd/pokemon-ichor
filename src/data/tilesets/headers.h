@@ -551,3 +551,31 @@ const struct Tileset gTileset_Labyrinth =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
     .callback = NULL,
 };
+
+// Ichor: the Mystery sanctum under Eleusa (tools/ichor/maps/sanctum.py). Two derived
+// secondaries, drawn from nothing new: each shares a base set's tiles, palettes and
+// animation, and has its own metatiles: the base set's, then a few composed from
+// existing tiles (braziers, pithoi and lamps on the crypt's flagstones, grain pits, the
+// spring basin, the hall's rimmed pits and glowing chasm). Re-run the builder after
+// cave_dark or temple_demeter is rebuilt.
+const struct Tileset gTileset_EleusaSanctumRock =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_CaveDark,
+    .palettes = gTilesetPalettes_PorytilesManaged_CaveDark,
+    .metatiles = gMetatiles_EleusaSanctumRock,
+    .metatileAttributes = gMetatileAttributes_EleusaSanctumRock,
+    .callback = InitTilesetAnim_PorytilesManaged_CaveDark,
+};
+
+const struct Tileset gTileset_EleusaSanctumHall =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleDemeter,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleDemeter,
+    .metatiles = gMetatiles_EleusaSanctumHall,
+    .metatileAttributes = gMetatileAttributes_EleusaSanctumHall,
+    .callback = NULL,
+};

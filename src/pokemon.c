@@ -5138,6 +5138,8 @@ u16 GetBattleBGM(void)
             return MUS_VS_AQUA_MAGMA;
         case TRAINER_CLASS_TITANBORN: // Ichor
             return MUS_ICHOR_TITAN;
+        case TRAINER_CLASS_TITAN_ADMIN: // Ichor: Hyperion, Iapetos and Rhea share the admins' theme
+            return MUS_ICHOR_BATTLE_ADMIN;
         // Ichor: Kleon and the Hierophants share the Ichor rival theme
         case TRAINER_CLASS_LAKONIAN:
         case TRAINER_CLASS_HIEROPHANT:

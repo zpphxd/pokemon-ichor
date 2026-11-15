@@ -2181,6 +2181,351 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B1F",
+          "base_label": "gEleusaSanctumB1F",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B2F",
+          "base_label": "gEleusaSanctumB2F_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B2F",
+          "base_label": "gEleusaSanctumB2F_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GALEKIT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B3F",
+          "base_label": "gEleusaSanctumB3F_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ELEUSA_SANCTUM_B3F",
+          "base_label": "gEleusaSanctumB3F_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_KAPLET"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_RHOARIL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_GALEKIT"
+              }
+            ]
+          }
         }
       ]
     },

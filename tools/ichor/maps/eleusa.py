@@ -675,7 +675,11 @@ def warps(g):
     door(EUPHORION, 4, 4, "MAP_ELEUSA_VILLAGE_POETS_HOUSE")
     door(DYSAULES, 5, 4, "MAP_ELEUSA_VILLAGE_FARMHOUSE")
     door(TELESTERION, 9, 7, "MAP_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER")
-    door(PLOUTONION, 4, 3, "MAP_ELEUSA_SANCTUM_B1F")
+    # The Ploutonion's bronze gate opens onto B1F's own landing, its warps 2 and 3
+    # (tools/ichor/maps/sanctum.py), west cell first; B1F's warp 0 is the Anaktoron stair.
+    gate = sorted(g.doors(PLOUTONION[0], PLOUTONION[1], PLOUTONION[0] + 3, PLOUTONION[1] + 2))
+    for i, (dx, dy) in enumerate(gate):
+        out.append((dx, dy, "MAP_ELEUSA_SANCTUM_B1F", 2 + i))
     return out
 
 
@@ -724,7 +728,6 @@ ROOMS = {   # placeholder interiors: their mat warps back to the village
     "MAP_ELEUSA_VILLAGE_GRANARY_HOUSE": "EleusaVillage_GranaryHouse",
     "MAP_ELEUSA_VILLAGE_POETS_HOUSE": "EleusaVillage_PoetsHouse",
     "MAP_ELEUSA_VILLAGE_FARMHOUSE": "EleusaVillage_Farmhouse",
-    "MAP_ELEUSA_SANCTUM_B1F": "EleusaSanctum_B1F",
 }
 MAT = [(4, 7), (5, 7)]   # the Fisher's house mat the placeholder rooms copy
 

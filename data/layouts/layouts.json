@@ -774,10 +774,10 @@
     {
       "id": "LAYOUT_ELEUSA_SANCTUM_B1F",
       "name": "EleusaSanctum_B1F_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 36,
+      "height": 28,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_EleusaSanctumRock",
       "border_filepath": "data/layouts/EleusaSanctum_B1F/border.bin",
       "blockdata_filepath": "data/layouts/EleusaSanctum_B1F/map.bin",
       "layout_version": "emerald"
@@ -785,10 +785,10 @@
     {
       "id": "LAYOUT_ELEUSA_SANCTUM_B2F",
       "name": "EleusaSanctum_B2F_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 20,
+      "height": 40,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_EleusaSanctumHall",
       "border_filepath": "data/layouts/EleusaSanctum_B2F/border.bin",
       "blockdata_filepath": "data/layouts/EleusaSanctum_B2F/map.bin",
       "layout_version": "emerald"
@@ -796,10 +796,10 @@
     {
       "id": "LAYOUT_ELEUSA_SANCTUM_B3F",
       "name": "EleusaSanctum_B3F_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 18,
+      "height": 18,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_EleusaSanctumRock",
       "border_filepath": "data/layouts/EleusaSanctum_B3F/border.bin",
       "blockdata_filepath": "data/layouts/EleusaSanctum_B3F/map.bin",
       "layout_version": "emerald"

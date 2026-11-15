@@ -77,6 +77,9 @@
 // Hecate's Hollow (batch 3): its two statics
 #define SPECIES_LYKOPUP     SPECIES_POOCHYENA    // Dark, Hecate's black hound (the dex: Intimidate, Strong Jaw / Unnerve)
 #define SPECIES_RAKNIT      SPECIES_SPINARAK     // Bug, Arachne's spiderling (the dex: Swarm, Frisk / Defiant)
+// Hyperion's team (the Mystery sanctum, beat 23)
+#define SPECIES_KAPNUB      SPECIES_SLUGMA       // Fire, the smoldering coal
+#define SPECIES_KAMINOO     SPECIES_PONYTA       // Fire, Kaldera's furnace calf
 
 #endif // ICHOR_AETHOS_DEX
 

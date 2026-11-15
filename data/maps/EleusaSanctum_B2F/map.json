@@ -5,17 +5,1219 @@
   "music": "MUS_ICHOR_TEMPLE_DEMETER",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ELEUSA_VILLAGE",
-  "requires_flash": false,
+  "requires_flash": true,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_cycling": false,
-  "allow_escaping": false,
+  "allow_escaping": true,
   "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+  "object_events": [
+    {
+      "local_id": "LOCALID_SANCTUM_KONIS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 14,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "EleusaSanctum_B2F_EventScript_Konis",
+      "flag": "FLAG_ICHOR_HIDE_HYPERION_SANCTUM"
+    },
+    {
+      "local_id": "LOCALID_SANCTUM_GAIOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 4,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "EleusaSanctum_B2F_EventScript_Gaios",
+      "flag": "FLAG_ICHOR_HIDE_HYPERION_SANCTUM"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 2,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_TM28",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_SANCTUM_B2F_TM_DIG"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 18,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SUPER_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_SANCTUM_B2F_SUPER_POTION"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 9,
+      "y": 39,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUSA_SANCTUM_B1F",
+      "dest_warp_id": "4"
+    },
+    {
+      "x": 10,
+      "y": 39,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUSA_SANCTUM_B1F",
+      "dest_warp_id": "4"
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUSA_SANCTUM_B3F",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUSA_SANCTUM_B3F",
+      "dest_warp_id": "1"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 36,
+      "elevation": 0,
+      "var": "VAR_TEMP_A",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Voice"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 27,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 28,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 29,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 30,
+      "elevation": 0,
+      "var": "VAR_TEMP_9",
+      "var_value": "0",
+      "script": "EleusaSanctum_B2F_EventScript_Pit"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 4,
+      "y": 19,
+      "elevation": 3,
+      "item": "ITEM_ETHER",
+      "flag": "FLAG_ICHOR_HIDDEN_SANCTUM_B2F_ETHER",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 33,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EleusaSanctum_B2F_EventScript_Fresco1"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 33,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EleusaSanctum_B2F_EventScript_Fresco1"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EleusaSanctum_B2F_EventScript_Fresco2"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EleusaSanctum_B2F_EventScript_Fresco2"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EleusaSanctum_B2F_EventScript_Fresco2"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EleusaSanctum_B2F_EventScript_Fresco3"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EleusaSanctum_B2F_EventScript_Fresco3"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EleusaSanctum_B2F_EventScript_Fresco4"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EleusaSanctum_B2F_EventScript_Fresco4"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 19,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaSanctum_B2F_EventScript_Spring"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 19,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaSanctum_B2F_EventScript_Spring"
+    }
+  ],
+  "ichor_kind": "dungeon"
 }
