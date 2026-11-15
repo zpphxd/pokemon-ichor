@@ -102,6 +102,8 @@ build/tools/ichor-mgba-headless --script tools/ichor/tests/akti_sprites.lua \
 `SPRITE_OUT` selects an existing screenshot directory. This review test checks
 each loaded map and records a fixed camera; it does not assert artistic quality
 or replace the Route 1 and temple gameplay tests.
+For a historical ROM, set `ICHOR_ROM_MAP` to its matching linker map rather than
+using the current build's symbol addresses.
 
 This is a validated implementation checkpoint, not director approval or
 completion of every Route 1/Akti sprite. Exact coverage and retained assets

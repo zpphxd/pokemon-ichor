@@ -24,8 +24,10 @@
 local M = {}
 M.K = C.GBA_KEY
 
+M.ROM_MAP = os.getenv("ICHOR_ROM_MAP") or "pokeemerald.map"
+
 function M.sym(name)
-  local f = io.open("pokeemerald.map", "r")
+  local f = io.open(M.ROM_MAP, "r")
   if not f then return nil end
   local addr
   for line in f:lines() do
@@ -138,7 +140,7 @@ function M.run(tag, out, steps)
   local i, waitUntil, released = 1, 0, {}
   local failures = 0
   if not (M.SB1 and M.MAIN and M.CB2_LOADMAP) then
-    console:log(tag .. " FAIL: symbols missing from pokeemerald.map")
+    console:log(tag .. " FAIL: symbols missing from " .. M.ROM_MAP)
   end
   local function fail(msg)
     failures = failures + 1
