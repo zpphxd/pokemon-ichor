@@ -2678,6 +2678,114 @@ static const struct SpriteFrameImage sPicTable_IchorCami[] = {
 static const struct SpriteFrameImage sPicTable_IchorDemeter[] = {
     overworld_ascending_frames(gObjectEventPic_IchorDemeter, 2, 4),
 };
+static const struct SpriteFrameImage sPicTable_IchorHeroLampkeeper[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHeroLampkeeper, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPriam[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPriam, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorCassandra[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorCassandra, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorHektor[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHektor, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorOdysseus[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorOdysseus, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorTrojanM[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorTrojanM, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorTrojanF[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorTrojanF, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorTrojanHoplite[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorTrojanHoplite, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorCharioteer[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorCharioteer, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorShepherdIda[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorShepherdIda, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorProteus[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorProteus, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorHelen[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHelen, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorEgyptianM[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorEgyptianM, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorEgyptianF[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorEgyptianF, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorSunPriest[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorSunPriest, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorScribe[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorScribe, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorEmbalmer[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorEmbalmer, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorNileBoatman[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorNileBoatman, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPhoenician[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPhoenician, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAietes[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAietes, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorMedea[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMedea, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPhineus[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPhineus, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorColchianM[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorColchianM, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorColchianF[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorColchianF, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorArgonaut[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorArgonaut, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorSorceress[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorSorceress, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorChalybesSmith[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorChalybesSmith, 2, 4),
+};
+
 // End of Ichor object events
 
 // Ichor: the ground item jar
