@@ -562,7 +562,7 @@ def events(m):
                 sight=3, local_id="LOCALID_ROUTE8_GORGIDAS"),
             note(1, 54, 13),
             # the eel-smoker at his fire (the rest point)
-            obj(P + "ELDER_M", 43, 12, S8 + "EelSmoker", "MOVEMENT_TYPE_FACE_DOWN",
+            obj(P + "EEL_SMOKER", 43, 12, S8 + "EelSmoker", "MOVEMENT_TYPE_FACE_DOWN",
                 local_id="LOCALID_ROUTE8_EEL_SMOKER"),
             # the dike: Ismenias on his fishing step, the note, the jetty's Super Repel
             obj(P + "FISHER", 33, 11, S8 + "Ismenias", "MOVEMENT_TYPE_FACE_DOWN", trainer=True,
