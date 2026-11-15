@@ -27,8 +27,9 @@ against that ROM's trainer palette table. The EWRAM-only fixture also reviews
 Nemecub/Nemeleon fronts, backs and normal/shiny palettes. Both matching
 baseline/current runs pass 37 checks with 15 captures. These are genuine
 engine-loader views, not a claim of seven completed trainer battle playthroughs.
-Native checks, helper compilation, build and smoke pass; creative approval
-and whole-town acceptance remain pending.
+Native checks, helper compilation, build and smoke pass. The seven portraits
+and Nemean family are artistically accepted at scoped checkpoint `1a111f80fc`;
+whole-town acceptance remains pending.
 
 ## Catalog
 

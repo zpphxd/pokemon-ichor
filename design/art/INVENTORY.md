@@ -285,7 +285,7 @@ Elaia owns the polished **Eripip** and **Galekit**, not their later stages.
 | Augur and Acolyte M/F walkers | Native directional heads, longer indigo/linen robes, distinct strides and all 27 states implemented. Gold band/feather, sparse bird hem, planted staff, saffron cloth, soot/ash, tongs/coal and attached raised lamp preserved. Cast palette unchanged and verified in the ROM. Complete colored sheets and matched Route 1/Temple captures pass technical checks; artistically accepted at checkpoint scope. |
 | Goatherd, Hoplite and Merchant walkers | Native directional heads, longer bodies and all 27 states implemented. Gray curls/beard, syrinx, goat-hair mantle, bell/thongs; raised Corinthian helmet, crimson crest/chiton, linen corselet, bronze greaves, spear/lambda shield; bald/full beard, blue/gold himation over linen and purse retained. Both shared palettes unchanged and verified in the ROM. Complete native sheets and actual placed/counter-occluded captures artistically accepted at checkpoint scope. Pilgrim is absent from these nine maps and belongs to the voyage/Aegina batch. |
 | Shepherd, Harvester, Goatherd, Hoplite, Augur and Acolyte M/F portraits | All seven native 64x64 poses, directional faces, hands and equipment refined in `sprites_classes.py`; embedded palettes and class identities retained. Source/palette reproduction, connected lamp/arm and actual ROM-loader palette checks pass. Complete colored native and matching engine views preserved; artistically accepted at checkpoint scope. Merchant, Sailor and Pilgrim portraits are not used by those local trainers and belong to the voyage/Aegina batch. |
-| Local healing effects | Existing relief glow and healing-orb sheets still await native polish. Shared emotes/contact effects are preserved above; dolphin/underwater continuation belongs to Elaia. |
+| Local healing effects | Both registered 24x16 relief states and the neutral 8x8 healing orb are refined with connected lighting and an unflashed blue lower waterline. Three source/format regressions and both real heal paths pass; live palettes, all eight relief commands, cleanup, exact 32-frame bows and restored movement verified. Artistically accepted at scoped checkpoint `975b2d610f`. Only these three sheets were regenerated; shared effects, palettes and Elaia's dolphin source remain unchanged. |
 | Tiles, animated metatiles, battle backgrounds, UI, weather and move animations | Retained explicitly; not part of a native creature/character/object sprite redraw claim. Temple braziers and hearth-trial changes are metatiles, not object sprites. |
 
 The town batch is **not complete**. Full shared regeneration and final ROM
@@ -303,8 +303,8 @@ checks source reproduction, complete distinct states, the planted rod and
 uncropped tenth-frame preview. The walker ROM used 23,040,960 bytes (68.67%).
 All local walkers are implemented and accepted at checkpoint scope.
 The seven portraits and Nemean family are artistically accepted at scoped
-checkpoint `1a111f80fc`. This does not mark the remaining
-37 owned species or healing effects finished.
+checkpoint `1a111f80fc`, and local healing at `975b2d610f`.
+This does not mark the remaining 37 owned species finished.
 
 The seven-portrait/Nemean checkpoint passes six human-source regressions,
 seven portrait native audits, both species native/import checks, helpers,
@@ -312,6 +312,12 @@ build and smoke. Both exact matching engine galleries pass 37 checks and
 15 captures, including all 16 real portrait palette colors. Its ROM uses
 23,039,520 bytes (68.66%); no production test fixture or new palette bank
 was added.
+
+The local healing refinement passes helpers, build, smoke, nine combined
+human/healing source regressions and all three native image checks. Both
+exact before/current talk and whiteout runs pass six script checks and
+capture 16 relief pulse states each. All 16 accepted shared effect sheets
+still pass their source-exact checker. Its ROM uses 23,039,232 bytes (68.66%).
 
 The effects integration also passes helper compilation, build, smoke, the
 four folk regressions and `tools/ichor/art/check_elaia_effects.py`. Both
@@ -369,6 +375,34 @@ reconciliation reports 175 changed, no added/removed and 19,974 unchanged
 image/palette sources, not a completion percentage. The 37 owned species,
 local healing and retained terrain/UI/global groups remain pending.
 
+**Coordinator local healing integration verification:** accepted source
+`975b2d610f` is integrated after water checkpoint `c6b66c5daa`, preserving
+the landed dolphin/underwater and four unused-player sheets. Only the two
+24x16 relief PNGs and neutral 8x8 orb change; every shared palette, other
+human/effect sheet and ball-owned asset remains unchanged. Helpers, build,
+original smoke (9 inspected captures), 31 human/healing/player/audit source
+regressions, three healing image gates and retained water/effect/player
+source gates pass.
+
+The exact water-baseline and combined ROM each pass seven script checks and
+37 captures, including all eight relief commands on both heal paths, live
+palette equality, unflashed waterlines, cleanup, exact 32-frame bows and
+restored player movement. Quickstart's random name/gender is pinned to Theo
+in test RAM before the clinic warp: only the 16 pulse screenshots differ;
+the other 21 paired screenshots are pixel-identical. Initial unmatched-player
+runs are preserved as discarded evidence, not comparison proof. These are
+Quickstart-assisted talk and forced-whiteout checks, not an unassisted
+natural-save playthrough. The retained water and unused-player fixtures pass
+13,448 checks/320 captures and 242 checks/34 captures respectively.
+
+ROM use is 23,039,520 bytes (68.66%), SHA256
+`55f7314b9a3862c216e7089a60d2c29fd9d23ed7b035556a2de84b550cbf147d`.
+Matching ROM/ELF/map, logs, all raw captures and complete native/engine
+comparisons are preserved in `akti-healing-integrated`. Original-source
+reconciliation reports 181 changed, no added/removed and 19,968 unchanged
+image/palette sources. This accepts local healing only; the 37 owned species
+and remaining terrain/UI/global groups are not complete.
+
 | Item | Where | Status | Phase | Notes |
 |---|---|---|---|---|
 | Outdoor primary tileset `aethos` | `data/tilesets/primary/aethos/`, `porytiles/tilesets/gTileset_Aethos/`, `tools/ichor/art/aethos_*.py`, `design/phase1/TILES_aethos.md` | Greek | 1 | Replaces `general`: olives, cypress, limestone, Aegean, Asclepeion and Agora exteriors. Elaia, Route 1, Kronion Hill and Akti use it. 18 free tile slots. |
@@ -407,7 +441,7 @@ local healing and retained terrain/UI/global groups remain pending.
 |---|---|---|---|---|
 | Theo and Ianthe: walking, running (Talaria wings), fishing (Old Rod), field-move (relic raise) | `graphics/object_events/pics/people/brendan/`, `.../may/`, `tools/ichor/art/sprites_player_ow.py`, `design/phase1/SPRITES_player_ow.md` | Greek | 1 | 4 of the 10 sheets each, and the surfing sheet below. The folders keep Brendan's and May's names and palettes (`brendan.pal`, `may.pal`), which also color the rival and link-player sprites. |
 | Theo and Ianthe: surfing | `.../brendan/surfing.png`, `.../may/surfing.png` | Greek | 1 | Theo and Ianthe ride a Minoan dolphin (`surf_poses.py`, `surf_blob.png`, `FIELD_EFFECTS.md`). Poseidon's Conch, the relic that grants it, does not exist yet (§6). |
-| Theo and Ianthe: underwater (Dive) | `.../underwater.png` | Hoenn | 5 | Atlantis and the Nereid Pearl. |
+| Theo and Ianthe: underwater (Dive) | `.../underwater.png`, `tools/ichor/art/player_underwater.py` | Greek art / late state | 5 | Native swimming bodies landed at `c6b66c5daa`; all four source frames and the existing three-frame engine aliases/palette retained. Forced renderer evidence is not Atlantis traversal or Nereid Pearl eligibility. |
 | Mach Bike and Acro Bike | `.../mach_bike.png`, `.../acro_bike.png`, `graphics/field_effects/pics/bike_tire_tracks.png`, `bike_shop` tileset | Cut | 6 | `SPRITES_player_ow.md` says Aethos has no bikes. The bible does not list a bike. Needs a director decision, including the three bike key items and the `bike_shop` maps. |
 | Watering and decorating poses | `.../watering.png`, `.../decorating.png` | Greek art / unused | 6 | Four native Theo/Ianthe sheets implemented at `4133f17748`; systems remain unavailable. Earlier retirement proposal is still tied to the berry/secret-base decisions, not enacted by this art checkpoint. |
 | Ruby/Sapphire and FRLG player sheets | `.../people/ruby_sapphire_brendan/`, `ruby_sapphire_may/`, `rs_brendan.png`, `rs_may.png`, `leaf/`, `red/` | Cut | 6 | Never used by Aethos. |

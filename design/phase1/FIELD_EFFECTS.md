@@ -31,6 +31,13 @@ The accepted rider sheets, shared palettes and other field effects are
 unchanged. There are no added mount animation frames: the native engine
 bobs its three direction frames.
 
+**Native Akti healing pass:** the two 24x16 relief states now share one
+registered, connected serpent/rod silhouette. White/gold lighting replaces
+detached sparkles without repainting the relief metatiles. The 8x8 neutral
+healing orb has a narrower rounded body and an entirely blue lower waterline;
+only the original body slots flash. `GENERAL_0`, the healing palette,
+all shared effects and the reserved dolphin source remain unchanged.
+
 **Sources:**
 - `tools/ichor/art/field_effects.py`: every effect and the two shared effect palettes. `--write --only PNG ...` regenerates selected sheets **without writing shared palettes**. The full `--write` also rewrites shared effect palettes. `--preview DIR` writes the 6× art sheet.
 - `tools/ichor/art/follower_icons.py --write --emotes-only`: regenerates the 23-frame emotion sheet and its own palette **without writing follower balls**. Its pottery outline and punctuation reuse the field source.
@@ -61,7 +68,7 @@ bobs its three direction frames.
 | Shadows | `shadow_small.png`, `shadow_medium.png`, `shadow_large.png`, `shadow_extra_large.png` | weather, index 9 | Flat native contact ellipses, keeping the original four size contracts and hardware OBJ blend. XL is not selected by current overworld object graphics. | Object shadows; XL forced-template fixture only |
 | Surf mount | `surf_blob.png` | the player's palette | A Minoan dolphin for Poseidon's Conch, after the Knossos fresco: an Aegean-blue back, a saffron stripe down the flank, a cream belly. Facing south, its head comes up between the rider's shins. Facing north, the tail flukes show. In profile, the snout, dorsal fin and raised tail show past the rider. | Surfing |
 | Riders | `people/brendan/surfing.png`, `people/may/surfing.png` | brendan, may | Theo and Ianthe astride, in their petasos and chlamys, shins down the dolphin's flanks, plus a hop pose for mounting and dismounting. They replace Emerald's recolored Brendan and May. | Surfing |
-| Heal: the "monitor" | `pokecenter_monitor/0.png`, `1.png` | general_0 | The Asclepeion's rod-of-Asclepius relief lighting up during the heal: the serpent white and gold, the rod gold, flickering bright and dim. The pixels are traced from the relief in `rooms/akti_asclepeion.bin` (map pixels x 112–135, y 8–23), so the glow lands on it. Before, a pale rectangle flashed beside the relief. | `FLDEFF_POKECENTER_HEAL` |
+| Heal: the "monitor" | `pokecenter_monitor/0.png`, `1.png` | general_0 | Connected white/gold and ochre/gold pulse states, registered to the rod/serpent relief without detached sparkle pixels. Source masks match; the existing monitor center (124,24), subsprites and animation remain unchanged. | `FLDEFF_POKECENTER_HEAL` |
 | Heal: the balls | `pokeball_glow.png` | pokeball_glow | Each ball floats in the spring with a ripple ring at its waterline. The ball keeps the slots the heal flashes (2, 3, 5, 6, 8); the ring uses the palette's untouched blues (12, 13). | The spring basin |
 
 ## Palettes
@@ -144,6 +151,22 @@ accepted riders and shared palettes unchanged. The submitted water ROM,
 landed `4133f17748` main baseline and refined ROM each pass the same
 13,448-assertion/320-capture fixture; separate complete comparisons preserve
 both the pose-only delta and full main-to-water rollout.
+
+### Native Asclepeion healing follow-on
+
+`bash tools/ichor/tests/asclepeion_healing.sh` runs actual talk-heal and
+whiteout scripts, with matching ROM/ELF/map files. Both paths verify all eight
+relief commands, every live palette color, unflashed waterline slots and
+sprite cleanup; each healer bow must hold exactly 32 frames and release
+player movement. Set `ROM` and `OUT` to preserve a matching baseline.
+The fixture pins Theo's name/gender after randomized Quickstart and before the
+clinic warp, so paired captures do not compare different player identities.
+Seven script checks pass on both builds, with 16 pulse captures per build
+alongside the normal bow/text screenshots. Three native healing regressions
+check source reproduction, connected registered masks and flash-slot roles.
+The three selected PNGs alone are regenerated with:
+`python3 tools/ichor/art/field_effects.py --write --only pokecenter_monitor/0.png pokecenter_monitor/1.png pokeball_glow.png`.
+This deliberately leaves other sheets and palettes unwritten.
 
 ## Historical testing
 

@@ -28,6 +28,7 @@ local ANIM_NURSE_BOW = 20                -- ANIM_STD_COUNT + 0
 local OBJ_EVENTS, OBJ_SIZE = L.sym("gObjectEvents"), 0x24
 local SPRITES, SPRITE_SIZE = L.sym("gSprites"), 0x44
 local CB2_WHITEOUT = L.sym("CB2_WhiteOut")
+local healing = os.getenv("HEAL_SYMBOLS") and dofile("tools/ichor/tests/asclepeion_healing.lua")
 
 local function obj_where(pred)
   for i = 0, 15 do
@@ -69,7 +70,8 @@ local function expect_bow(phase)
     local n = bowFrames
     bowFrames = 0
     -- FRAME(9, 32): a stuck animation runs long, a missing one never starts
-    return n >= 28 and n <= 36,
+    local healed = not healing or healing.validate(phase)
+    return n == 32 and healed,
            string.format("%s: healer held the bow frame for %d frames; want 32", phase, n)
   end }
 end
@@ -96,6 +98,7 @@ end
 
 local steps = L.seq(
   L.quickstart(),
+  healing and { { check = healing.prepare_player } } or {},
   { { instant_text = true },
     { give_mon = 7, wait = 2 } },
 
