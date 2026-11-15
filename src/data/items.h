@@ -7512,9 +7512,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Olive Oil"),
         .price = 200,
         .description = COMPOUND_STRING(
-            "Oil pressed from\n"
-            "Kalliste olives. An\n"
-            "offering; anoints herms."),
+            "Kalliste olive oil.\n"
+            "An offering, and it\n"
+            "anoints the herms."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
@@ -7557,9 +7557,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Frankincense"),
         .price = 500,
         .description = COMPOUND_STRING(
-            "Tears of resin\n"
-            "from the far east.\n"
-            "Burned for the gods."),
+            "Resin from the far\n"
+            "east, burned for\n"
+            "the gods."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_SELLABLE,
         .type = ITEM_USE_BAG_MENU,
