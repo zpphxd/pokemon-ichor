@@ -713,6 +713,64 @@ const struct Tileset gTileset_ThyrsaStone =
     .callback = NULL,
 };
 
+// Ichor: arkadia_heights, the Arkadian climb: Route 11, Styx Falls and Route 12. Porytiles-managed, built by
+// tools/ichor/art/heights_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, road, sea, tall grass, shade and waterfall, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_ArkadiaHeights =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ArkadiaHeights,
+    .palettes = gTilesetPalettes_PorytilesManaged_ArkadiaHeights,
+    .metatiles = gMetatiles_PorytilesManaged_ArkadiaHeights,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaHeights,
+    .callback = NULL,
+};
+
+// Ichor: maia_cave, the Arkadian climb: the Cave of Maia on Route 12. Porytiles-managed, built by
+// tools/ichor/art/heights_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, road, sea, tall grass, shade and waterfall, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_MaiaCave =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_MaiaCave,
+    .palettes = gTilesetPalettes_PorytilesManaged_MaiaCave,
+    .metatiles = gMetatiles_PorytilesManaged_MaiaCave,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_MaiaCave,
+    .callback = NULL,
+};
+
+// Ichor: styx_falls, the Arkadian climb: Styx Falls and Nonakris. Porytiles-managed, built by
+// tools/ichor/art/heights_build.py for the aethos primary; it shares its core section
+// with gTileset_ArkadiaHeights at the same ids. Its ground cells borrow aethos's, so
+// rebuild it whenever aethos changes.
+const struct Tileset gTileset_StyxFalls =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_StyxFalls,
+    .palettes = gTilesetPalettes_PorytilesManaged_StyxFalls,
+    .metatiles = gMetatiles_PorytilesManaged_StyxFalls,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_StyxFalls,
+    .callback = NULL,
+};
+
+// Ichor: kyllene, the Arkadian climb: Route 12, the cypress road over Kyllene. Porytiles-managed, built by
+// tools/ichor/art/heights_build.py for the aethos primary; it shares its core section
+// with gTileset_ArkadiaHeights at the same ids. Its ground cells borrow aethos's, so
+// rebuild it whenever aethos changes.
+const struct Tileset gTileset_Kyllene =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kyllene,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kyllene,
+    .metatiles = gMetatiles_PorytilesManaged_Kyllene,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kyllene,
+    .callback = NULL,
+};
+
 // Ichor (Act II): Kirrha, Delphoi's harbor (the harbors agent): the quay, the fish market, Parnassos's crags and the Phaidriades, the pilgrims' gate, the houses. A Porytiles-managed secondary for the aethos primary,
 // built by tools/ichor/art/kirrha_build.py. It uses only its own tiles and palettes 6-12.
 const struct Tileset gTileset_Kirrha =

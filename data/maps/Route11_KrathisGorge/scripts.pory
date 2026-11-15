@@ -1,1 +1,442 @@
-mapscripts Route11_KrathisGorge_MapScripts {}
+// Route 11, the Krathis Gorge: beat 38 (the drums, the Girdle's main-path gate)
+// and the gorge's roster. Text from design/phase3/SCRIPT.md: beat 38, Part 2
+// (Route 11) and Part 3 (Route 11 trainers); the five trainers SCRIPT.md doesn't
+// name (Maira, Dryops, Psophis, Amphidamas, Phylas) meet the route standard
+// (MAP_DESIGN §8). Layout and events: tools/ichor/maps/heights.py.
+//
+// The drums. Three column drums lie in the narrows between the fallen temple's
+// tumbled slope and the drop to the Krathis. Each is an EventScript_StrengthBoulder
+// object (the Girdle of Herakles), and each teaches one rule by its button, a
+// coord event on an MB_STRENGTH_BUTTON tile that only a drum sets off:
+//   drum 1 (20,15) rolls east onto the lip (21,15) and over the edge;
+//   drum 2 (20,16) drops south into the gap (20,17) and becomes road;
+//   drum 3 (19,18) rolls west along the lane and stops at the cliff (16,18).
+// Drums 1 and 2 open the road (the muleteer's thanks); drum 3, off to the side
+// of the road below, is the third rule for anyone who tries it. Drums 1 and 2
+// stand on transition tiles (elevation 0), so they can roll onto the lip and
+// into the gap (elevation 1); once drum 1 has gone over, the lip is shut. A drum
+// in its place keeps its hide flag; any other drum resets when the map reloads.
+
+mapscripts Route11_KrathisGorge_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_ROUTE11_DRUM_1)) {
+            setmetatile(21, 15, METATILE_ArkadiaHeights_Lip, TRUE)
+        }
+        if (flag(FLAG_ICHOR_ROUTE11_DRUM_2)) {
+            setmetatile(20, 17, METATILE_ArkadiaHeights_DrumWedged, FALSE)
+        }
+        if (flag(FLAG_ICHOR_ROUTE11_DRUM_3)) {
+            setmetatile(16, 18, METATILE_ArkadiaHeights_DrumRest, TRUE)
+        }
+        if (flag(FLAG_ICHOR_ROUTE11_CAVE_DRUM)) {
+            setmetatile(2, 11, METATILE_ArkadiaHeights_DrumRest, TRUE)
+        }
+    }
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_ROUTE11_DRUMS_SEEN)) {
+            setvar(VAR_TEMP_1, 1)
+        } else {
+            setvar(VAR_TEMP_1, 0)
+        }
+    }
+}
+
+text Route11_KrathisGorge_Text_SpeakerMuleteer { "MULETEER" }
+text Route11_KrathisGorge_Text_SpeakerAlethea { "ALETHEA" }
+text Route11_KrathisGorge_Text_SpeakerPelasgos { "PELASGOS" }
+text Route11_KrathisGorge_Text_SpeakerTraveler { "TRAVELER" }
+text Route11_KrathisGorge_Text_SpeakerApheidas { "APHEIDAS" }
+text Route11_KrathisGorge_Text_SpeakerAuge { "AUGE" }
+text Route11_KrathisGorge_Text_SpeakerEchemos { "ECHEMOS" }
+text Route11_KrathisGorge_Text_SpeakerAzan { "AZAN" }
+text Route11_KrathisGorge_Text_SpeakerMaira { "MAIRA" }
+text Route11_KrathisGorge_Text_SpeakerDryops { "DRYOPS" }
+text Route11_KrathisGorge_Text_SpeakerPsophis { "PSOPHIS" }
+text Route11_KrathisGorge_Text_SpeakerAmphidamas { "AMPHIDAMAS" }
+text Route11_KrathisGorge_Text_SpeakerPhylas { "PHYLAS" }
+
+// --- beat 38: the drums -----------------------------------------------------------------
+script Route11_KrathisGorge_EventScript_DrumsScene {
+    lockall
+    applymovement(LOCALID_ROUTE11_ALETHEA, Common_Movement_FaceLeft)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
+    waitmovement(0)
+    call(Route11_KrathisGorge_EventScript_RoadShut)
+    setflag(FLAG_ICHOR_ROUTE11_DRUMS_SEEN)
+    setvar(VAR_TEMP_1, 1)
+    releaseall
+}
+
+script Route11_KrathisGorge_EventScript_RoadShut {
+    setspeaker(Route11_KrathisGorge_Text_SpeakerMuleteer)
+    msgbox(format("Road's shut. Has been since the snows. The old temple came down on it."))
+    msgbox(format("I've been waiting for it to move itself. It hasn't."))
+    setspeaker(Route11_KrathisGorge_Text_SpeakerAlethea)
+    msgbox(format("{PLAYER}. The belt. Silenos's belt."))
+    msgbox(format("Herakles moved whole mountains in that. Truthfully, a mountain. Allegedly."))
+    closemessage
+    return
+}
+
+script Route11_KrathisGorge_EventScript_Muleteer {
+    lock
+    faceplayer
+    setspeaker(Route11_KrathisGorge_Text_SpeakerMuleteer)
+    msgbox(format("Road's shut. Has been since the snows. The old temple came down on it."))
+    msgbox(format("I've been waiting for it to move itself. It hasn't."))
+    release
+}
+
+script Route11_KrathisGorge_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(Route11_KrathisGorge_Text_SpeakerAlethea)
+    msgbox(format("Herakles moved whole mountains in that. Truthfully, a mountain. Allegedly."))
+    release
+}
+
+script Route11_KrathisGorge_EventScript_Mule {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ONOTIS, CRY_MODE_NORMAL)
+    msgbox(format("A mule, loaded with empty clay jars. It looks at you as if you owe it money."))
+    waitmoncry
+    release
+}
+
+// Drum 1 rolls over the edge.
+script Route11_KrathisGorge_EventScript_DrumEdge {
+    lockall
+    playse(SE_M_ROCK_THROW)
+    removeobject(LOCALID_ROUTE11_DRUM_1)
+    // the lip took the drum's weight once: nobody stands on it after
+    setmetatile(21, 15, METATILE_ArkadiaHeights_Lip, TRUE)
+    setvar(VAR_0x8004, 1)
+    setvar(VAR_0x8005, 1)
+    setvar(VAR_0x8006, 10)
+    setvar(VAR_0x8007, 4)
+    special(ShakeCamera)
+    playse(SE_M_EARTHQUAKE)
+    waitstate
+    msgbox(format("The drum goes over the edge. You hear it hit the river.\pThen the river carries it off."))
+    releaseall
+}
+
+// Drum 2 drops into the gap and becomes road.
+script Route11_KrathisGorge_EventScript_DrumGap {
+    lockall
+    playse(SE_M_STRENGTH)
+    removeobject(LOCALID_ROUTE11_DRUM_2)
+    setmetatile(20, 17, METATILE_ArkadiaHeights_DrumWedged, FALSE)
+    special(DrawWholeMapView)
+    msgbox(format("The drum drops into the gap and wedges there. You could walk on it."))
+    call(Route11_KrathisGorge_EventScript_DrumsDone)
+    releaseall
+}
+
+// Drum 3 rolls along the lane until the cliff stops it.
+script Route11_KrathisGorge_EventScript_DrumRoll {
+    lockall
+    applymovement(LOCALID_ROUTE11_DRUM_3, Route11_KrathisGorge_Movement_DrumRoll)
+    waitmovement(0)
+    playse(SE_M_STRENGTH)
+    removeobject(LOCALID_ROUTE11_DRUM_3)
+    setmetatile(16, 18, METATILE_ArkadiaHeights_DrumRest, TRUE)
+    special(DrawWholeMapView)
+    msgbox(format("The drum rolls until the cliff stops it."))
+    call(Route11_KrathisGorge_EventScript_DrumsDone)
+    releaseall
+}
+
+movement Route11_KrathisGorge_Movement_DrumRoll {
+    walk_left * 2
+}
+
+// The road is open: the muleteer's gift, and Alethea goes on up the gorge.
+script Route11_KrathisGorge_EventScript_DrumsDone {
+    if (!flag(FLAG_ICHOR_ROUTE11_DRUM_1) || !flag(FLAG_ICHOR_ROUTE11_DRUM_2)) {
+        return
+    }
+    if (flag(FLAG_ICHOR_HIDE_ROUTE11_DRUMS)) {
+        return
+    }
+    setflag(FLAG_ICHOR_HIDE_ROUTE11_DRUMS)
+    setflag(FLAG_ICHOR_ROUTE11_DRUMS_SEEN)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerMuleteer)
+    msgbox(format("Ha! Herakles's belt, on a kid. I've seen everything now."))
+    msgbox(format("Here. I was keeping it for whoever moved the road."))
+    giveitem(ITEM_HARD_STONE)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerMuleteer)
+    msgbox(format("Mules, jars and a hoof-cup. I carry the black water down for oaths."))
+    msgbox(format("Only a hoof holds it. It eats clay. It eats bronze. It ate my last jar."))
+    setspeaker(Route11_KrathisGorge_Text_SpeakerAlethea)
+    msgbox(format("Black water. He means the Styx."))
+    msgbox(format("It's at the top of this gorge. Come on. I want to see it up close."))
+    closemessage
+    // The muleteer leads his mules on up the gorge; Alethea walks on to the falls.
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_ROUTE11_MULETEER)
+    removeobject(LOCALID_ROUTE11_MULE_1)
+    removeobject(LOCALID_ROUTE11_MULE_2)
+    removeobject(LOCALID_ROUTE11_MULE_3)
+    removeobject(LOCALID_ROUTE11_ALETHEA)
+    setflag(FLAG_ICHOR_ROUTE11_MULETEER)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_ROUTE11)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+// The fourth drum, across the shepherd's cave: it rolls aside along the ledge.
+script Route11_KrathisGorge_EventScript_CaveDrumRoll {
+    lockall
+    applymovement(LOCALID_ROUTE11_CAVE_DRUM, Route11_KrathisGorge_Movement_CaveDrumRoll)
+    waitmovement(0)
+    playse(SE_M_STRENGTH)
+    removeobject(LOCALID_ROUTE11_CAVE_DRUM)
+    setmetatile(2, 11, METATILE_ArkadiaHeights_DrumRest, TRUE)
+    special(DrawWholeMapView)
+    msgbox(format("The drum rolls along the ledge and stops at its end. The cave's mouth is open."))
+    releaseall
+}
+
+movement Route11_KrathisGorge_Movement_CaveDrumRoll {
+    walk_left * 3
+}
+
+// --- the roster ---------------------------------------------------------------------
+script Route11_KrathisGorge_EventScript_Pelasgos {
+    lock
+    faceplayer
+    setspeaker(Route11_KrathisGorge_Text_SpeakerPelasgos)
+    msgbox(format("Sit. The spring's cold enough to crack teeth. That's how you know it's good."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerPelasgos)
+    msgbox(format("There. The first Arkadian was a man called Pelasgos. Same as me."))
+    msgbox(format("He taught people to eat acorns instead of grass. A real hero."))
+    msgbox(format("My mother said I'd take after him. I eat a great many acorns."))
+    release
+}
+
+// A theoxenia decoy (SYSTEMS.md §10): an ordinary stranger, with a shadow.
+script Route11_KrathisGorge_EventScript_Traveler {
+    lock
+    faceplayer
+    setspeaker(Route11_KrathisGorge_Text_SpeakerTraveler)
+    msgbox(format("Is that water you've got? I've been climbing since dawn."))
+    msgbox(format("I'd give a lot for a mouthful. I haven't got a lot. I'd give a little."))
+    checkitem(ITEM_FRESH_WATER)
+    if (var(VAR_RESULT) == FALSE) {
+        release
+        end
+    }
+    msgbox(format("Give him Fresh Water?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Route11_KrathisGorge_Text_SpeakerTraveler)
+        msgbox(format("No, no. You'll need it. Arkadia's a long way up."))
+        release
+        end
+    }
+    removeitem(ITEM_FRESH_WATER)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerTraveler)
+    msgbox(format("Gods bless you. Here. I found it on the road. It's more use to you."))
+    giveitem(ITEM_SITRUS_BERRY)
+    setvar(VAR_0x8004, ICHOR_GOD_ZEUS)
+    setvar(VAR_0x8005, 1)
+    special(Ichor_AddFavor)
+    setflag(FLAG_ICHOR_DECOY_ROUTE11)
+    release
+}
+
+script Route11_KrathisGorge_EventScript_Apheidas {
+    trainerbattle_single(TRAINER_ICHOR_APHEIDAS, Route11_KrathisGorge_Text_ApheidasIntro, Route11_KrathisGorge_Text_ApheidasDefeat)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerApheidas)
+    msgbox(format("Fire's easy. Getting it to burn slow is the trick. Charcoal's patience."), MSGBOX_AUTOCLOSE)
+}
+
+text Route11_KrathisGorge_Text_ApheidasIntro {
+    format("Mind the smoke! …No, come in. Battle me. I've been bored since dawn.")
+}
+
+text Route11_KrathisGorge_Text_ApheidasDefeat {
+    format("Smothered. That's what we do to the fire, see. Same thing.")
+}
+
+script Route11_KrathisGorge_EventScript_Auge {
+    trainerbattle_single(TRAINER_ICHOR_AUGE, Route11_KrathisGorge_Text_AugeIntro, Route11_KrathisGorge_Text_AugeDefeat)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerAuge)
+    msgbox(format("Everything leaves tracks. Water. Wind. Even the Styx leaves a mark on the cliff."), MSGBOX_AUTOCLOSE)
+}
+
+text Route11_KrathisGorge_Text_AugeIntro {
+    format("Tracks! Fresh ones. Oh. They're yours. Well, you're caught.")
+}
+
+text Route11_KrathisGorge_Text_AugeDefeat {
+    format("Lost the scent. That's never happened on my own mountain.")
+}
+
+script Route11_KrathisGorge_EventScript_Echemos {
+    trainerbattle_single(TRAINER_ICHOR_ECHEMOS, Route11_KrathisGorge_Text_EchemosIntro, Route11_KrathisGorge_Text_EchemosDefeat)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerEchemos)
+    msgbox(format("My brother and I swore never to speak again. That was ten years ago."))
+    msgbox(format("I came to swear we'd make up. But what if I break it? A year without breath."), MSGBOX_AUTOCLOSE)
+}
+
+text Route11_KrathisGorge_Text_EchemosIntro {
+    format("I came up to swear something. I haven't decided what. Battle me while I think.")
+}
+
+text Route11_KrathisGorge_Text_EchemosDefeat {
+    format("I swear I'll get better at this. …No. Too risky. Not on the Styx.")
+}
+
+script Route11_KrathisGorge_EventScript_Azan {
+    trainerbattle_single(TRAINER_ICHOR_AZAN, Route11_KrathisGorge_Text_AzanIntro, Route11_KrathisGorge_Text_AzanDefeat)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerAzan)
+    msgbox(format("There's a wolf in these hills that walks on two legs at the new moon."))
+    msgbox(format("My grandfather saw it. Wore a crown, he said. A crown of fur."), MSGBOX_AUTOCLOSE)
+}
+
+text Route11_KrathisGorge_Text_AzanIntro {
+    format("Up here, everything wants my sheep. Wolves, eagles. Now you. Prove you don't.")
+}
+
+text Route11_KrathisGorge_Text_AzanDefeat {
+    format("You don't. Good. Go on up, then. Mind the black water.")
+}
+
+script Route11_KrathisGorge_EventScript_Maira {
+    trainerbattle_single(TRAINER_ICHOR_MAIRA, Route11_KrathisGorge_Text_MairaIntro, Route11_KrathisGorge_Text_MairaDefeat)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerMaira)
+    msgbox(format("The goddess's hounds hunt this gorge. You won't see them. They see you."), MSGBOX_AUTOCLOSE)
+}
+
+text Route11_KrathisGorge_Text_MairaIntro {
+    format("Shh. Something's in the grass. …It's you. That'll do.")
+}
+
+text Route11_KrathisGorge_Text_MairaDefeat {
+    format("Flushed out and beaten. The hounds would laugh, if hounds laughed.")
+}
+
+script Route11_KrathisGorge_EventScript_Dryops {
+    trainerbattle_single(TRAINER_ICHOR_DRYOPS, Route11_KrathisGorge_Text_DryopsIntro, Route11_KrathisGorge_Text_DryopsDefeat)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerDryops)
+    msgbox(format("Pelasgos's spring is just there. Drink before the last climb. I didn't."), MSGBOX_AUTOCLOSE)
+}
+
+text Route11_KrathisGorge_Text_DryopsIntro {
+    format("Pilgrims battle on the road. It's tradition. I just made it up.")
+}
+
+text Route11_KrathisGorge_Text_DryopsDefeat {
+    format("A good tradition. Badly kept.")
+}
+
+script Route11_KrathisGorge_EventScript_Psophis {
+    trainerbattle_single(TRAINER_ICHOR_PSOPHIS, Route11_KrathisGorge_Text_PsophisIntro, Route11_KrathisGorge_Text_PsophisDefeat)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerPsophis)
+    msgbox(format("The fish rise in that pool. Below the rapid, where the water rests."), MSGBOX_AUTOCLOSE)
+}
+
+text Route11_KrathisGorge_Text_PsophisIntro {
+    format("My flock drinks here. You're standing in their water. Battle for it.")
+}
+
+text Route11_KrathisGorge_Text_PsophisDefeat {
+    format("Fine. Stand in it. The sheep won't mind. They mind everything.")
+}
+
+script Route11_KrathisGorge_EventScript_Amphidamas {
+    trainerbattle_single(TRAINER_ICHOR_AMPHIDAMAS, Route11_KrathisGorge_Text_AmphidamasIntro, Route11_KrathisGorge_Text_AmphidamasDefeat)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerAmphidamas)
+    msgbox(format("Fir makes poor charcoal. Too much pitch. Kermes oak, now. That burns honest."), MSGBOX_AUTOCLOSE)
+}
+
+text Route11_KrathisGorge_Text_AmphidamasIntro {
+    format("I'm cutting wood for Apheidas. He owes me a battle. You'll do instead.")
+}
+
+text Route11_KrathisGorge_Text_AmphidamasDefeat {
+    format("Split like kindling.")
+}
+
+script Route11_KrathisGorge_EventScript_Phylas {
+    trainerbattle_single(TRAINER_ICHOR_PHYLAS, Route11_KrathisGorge_Text_PhylasIntro, Route11_KrathisGorge_Text_PhylasDefeat)
+    setspeaker(Route11_KrathisGorge_Text_SpeakerPhylas)
+    msgbox(format("Goats won't drink below the black cliff. They know something. I trust goats."), MSGBOX_AUTOCLOSE)
+}
+
+text Route11_KrathisGorge_Text_PhylasIntro {
+    format("You climbed the whole gorge? My goats do it twice before breakfast.")
+}
+
+text Route11_KrathisGorge_Text_PhylasDefeat {
+    format("My goats would have won. I'm not my goats.")
+}
+
+// --- signs and landmarks ---------------------------------------------------------------
+script Route11_KrathisGorge_EventScript_SignNorth {
+    msgbox(format("ROUTE 11 · THE KRATHIS GORGE\pNorth: Aigion. South: Styx Falls and the Arkadian mountains."), MSGBOX_SIGN)
+}
+
+script Route11_KrathisGorge_EventScript_SignDrums {
+    if (flag(FLAG_ICHOR_HIDE_ROUTE11_DRUMS)) {
+        msgbox(format("ROAD CLOSED. The temple fell. The gods are aware.\pSomeone has scratched out CLOSED."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("ROAD CLOSED. The temple fell. The gods are aware."), MSGBOX_SIGN)
+    }
+}
+
+script Route11_KrathisGorge_EventScript_GreatHerm {
+    lockall
+    msgbox(format("South: Styx Falls. East: the river. Mind the edge."))
+    call(EventScript_IchorAnointHerm)
+    releaseall
+}
+
+script Route11_KrathisGorge_EventScript_SignSpur {
+    msgbox(format("The Krathis. Do not drink upstream of the black cliff."), MSGBOX_SIGN)
+}
+
+script Route11_KrathisGorge_EventScript_SignSouth {
+    msgbox(format("STYX FALLS. The water the gods swear by."), MSGBOX_SIGN)
+}
+
+script Route11_KrathisGorge_EventScript_Column {
+    msgbox(format("The one column of Artemis's temple still standing. Its drums are everywhere else."), MSGBOX_SIGN)
+}
+
+script Route11_KrathisGorge_EventScript_Spring {
+    msgbox(format("A stone trough fed by a spout. The water is so cold it aches."), MSGBOX_SIGN)
+}
+
+// The Winged Talaria (Hermes Favor 60) leap the gap; nothing else crosses it.
+script Route11_KrathisGorge_EventScript_BrokenBridge {
+    msgbox(format("A plank bridge over a side ravine. The middle planks have fallen in.\pOn the far ledge, something glints."), MSGBOX_SIGN)
+}
+
+// The Horn of Achelous climbs it (Act III).
+script Route11_KrathisGorge_EventScript_SideFall {
+    msgbox(format("A waterfall pours down the gorge wall. Halfway up, on a ledge, something glints."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_DIG: a daily dig spot (the river spur) until the dig API lands:
+// setvar(VAR_0x8004, <spot>), setvar(VAR_0x8005, ICHOR_DIG_ACT_II),
+// goto(EventScript_IchorDigSpot).
+script Route11_KrathisGorge_EventScript_DigSpot {
+    msgbox(format("The gravel here has been turned. Something might be buried."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_DIG: the fixed dig above the side waterfall (the Star Piece; Part 6),
+// out of reach until the Horn of Achelous. When the dig API lands:
+// setvar(VAR_0x8004, <fixed index, from world-act2>), setvar(VAR_0x8005, ITEM_STAR_PIECE),
+// goto(EventScript_IchorDigFixed).
+script Route11_KrathisGorge_EventScript_DigFixedStarPiece {
+    msgbox(format("The earth on the ledge has been turned. Something might be buried."), MSGBOX_SIGN)
+}

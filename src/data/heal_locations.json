@@ -103,6 +103,18 @@
       "respawn_npc": "LOCALID_EMPORION_HEALER",
       "respawn_x": 8,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_11",
+      "map": "MAP_ROUTE11_KRATHIS_GORGE",
+      "x": 26,
+      "y": 36
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_12",
+      "map": "MAP_ROUTE12_CYPRESS_ROAD",
+      "x": 23,
+      "y": 12
     }
   ]
 }

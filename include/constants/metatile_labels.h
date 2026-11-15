@@ -1369,6 +1369,18 @@
 #define METATILE_TempleDionysus_TierFrontArm_Lowered   0x276
 // end gTileset_TempleDionysus
 
+// gTileset_ArkadiaHeights, gTileset_MaiaCave (Ichor: the Arkadian climb), written by tools/ichor/art/heights_build.py
+#define METATILE_ArkadiaHeights_DrumWedged           0x2D9
+#define METATILE_ArkadiaHeights_DrumRest             0x2D8
+#define METATILE_ArkadiaHeights_Gap                  0x2DB
+#define METATILE_ArkadiaHeights_Lip                  0x2DA
+#define METATILE_Kyllene_DrumWedged           0x286
+#define METATILE_Kyllene_Shrine_Top           0x2F0
+#define METATILE_Kyllene_Shrine_TopR          0x2F1
+#define METATILE_Kyllene_ShrineBad_Top        0x2F2
+#define METATILE_Kyllene_ShrineBad_TopR       0x2F3
+// end gTileset_ArkadiaHeights
+
 // gTileset_Parnassos (Ichor: Lebadeia and Route 9), written by tools/ichor/art/parnassos_build.py
 #define METATILE_Parnassos_Grille               0x2F8
 #define METATILE_Parnassos_GrilleOpen           0x2F9

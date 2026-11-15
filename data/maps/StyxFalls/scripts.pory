@@ -1,1 +1,167 @@
-mapscripts StyxFalls_MapScripts {}
+// Styx Falls and Nonakris: beat 39 (the water the gods swear by) and the
+// waypoint's roster. Text from design/phase3/SCRIPT.md: beat 39 and Part 2
+// (Styx Falls). Layout and events: tools/ichor/maps/heights.py.
+//
+// The cleft from Route 11 comes down through the black cliff at x 12-13; the
+// scene's trigger is its foot (12-13, 12). Alethea waits at the Oath Stone
+// (17,16), then walks to the inn (its door at (9,17), warp 0). Horkia's house is
+// warp 1 (3,13), Kepheus's warp 2 (4,21). The black pool has no wild table, so a
+// rod gets the engine's "Not even a nibble"; its edge answers the Conch instead
+// of letting it surf (SCRIPT.md Part 4).
+
+mapscripts StyxFalls_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_VISITED_STYX_FALLS)
+        // the muleteer fills hoof-cups at the pool once he's left Route 11 (beat 38)
+        if (flag(FLAG_ICHOR_ROUTE11_MULETEER)) {
+            clearflag(FLAG_TEMP_1)
+        } else {
+            setflag(FLAG_TEMP_1)
+        }
+        if (flag(FLAG_ICHOR_SAW_STYX)) {
+            setvar(VAR_TEMP_1, 1)
+        } else {
+            setvar(VAR_TEMP_1, 0)
+        }
+    }
+}
+
+text StyxFalls_Text_SpeakerAlethea { "ALETHEA" }
+text StyxFalls_Text_SpeakerMuleteer { "MULETEER" }
+text StyxFalls_Text_SpeakerOldMan { "OLD MAN" }
+text StyxFalls_Text_SpeakerGirl { "GIRL" }
+
+// --- beat 39: the Styx ------------------------------------------------------------------
+script StyxFalls_EventScript_StyxScene {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, StyxFalls_Movement_ToTheStone)
+    waitmovement(0)
+    call(StyxFalls_EventScript_AletheaLooksUp)
+    releaseall
+}
+
+script StyxFalls_EventScript_Alethea {
+    lockall
+    call(StyxFalls_EventScript_AletheaLooksUp)
+    releaseall
+}
+
+script StyxFalls_EventScript_AletheaLooksUp {
+    applymovement(LOCALID_STYX_ALETHEA, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(StyxFalls_Text_SpeakerAlethea)
+    msgbox(format("There. All that way down, and it never makes a sound."))
+    msgbox(format("That's the Styx. The real one. The world's end of it, anyway."))
+    msgbox(format("The gods swear by it. Even Zeus."))
+    msgbox(format("Break an oath on the Styx, and you lie a whole year without breath."))
+    msgbox(format("Truthfully, I'd love to watch a god try lying to it. Once. For the record."))
+    closemessage
+    applymovement(LOCALID_STYX_ALETHEA, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(StyxFalls_Text_SpeakerAlethea)
+    msgbox(format("People climb all the way up here to swear on it. Arkadians, mostly."))
+    msgbox(format("Promises they're scared they won't keep."))
+    applymovement(LOCALID_STYX_ALETHEA, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(StyxFalls_Text_SpeakerAlethea)
+    msgbox(format("There's an inn. The innkeeper owes my teacher a meal."))
+    msgbox(format("He doesn't know that yet."))
+    closemessage
+    applymovement(LOCALID_STYX_ALETHEA, StyxFalls_Movement_AletheaToTheInn)
+    waitmovement(0)
+    removeobject(LOCALID_STYX_ALETHEA)
+    setflag(FLAG_ICHOR_SAW_STYX)
+    setvar(VAR_TEMP_1, 1)
+    return
+}
+
+movement StyxFalls_Movement_ToTheStone {
+    walk_down * 2
+    walk_right
+    walk_down
+    face_down
+}
+
+movement StyxFalls_Movement_AletheaToTheInn {
+    walk_down * 2
+    walk_left * 7
+    walk_up
+}
+
+// The Oath Stone: YES sets nothing and gives nothing (beat 39's design note).
+script StyxFalls_EventScript_OathStone {
+    lockall
+    msgbox(format("A boulder worn smooth by hands. Above it, the Styx falls without a sound.\pSwear by the Styx to finish what you started?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("You lay your hand on the stone. Nothing happens. The water keeps falling.\pIt doesn't care. It will remember anyway."))
+    } else {
+        msgbox(format("Probably wise. The water remembers everything."))
+    }
+    releaseall
+}
+
+script StyxFalls_EventScript_Muleteer {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Text_SpeakerMuleteer)
+    msgbox(format("Watch. A hoof-cup. Off a mule that died of old age, mind. Very respectful."))
+    msgbox(format("Clay cracks. Bronze rots. Glass, gone. A hoof holds it. Nobody knows why."))
+    msgbox(format("The rich send for it, down in the cities. For oaths. For a little drop of terror."))
+    release
+}
+
+script StyxFalls_EventScript_Mule {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ONOTIS, CRY_MODE_NORMAL)
+    msgbox(format("The mule won't go near the water's edge. It knows."))
+    waitmoncry
+    release
+}
+
+script StyxFalls_EventScript_OldMan {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Text_SpeakerOldMan)
+    msgbox(format("Nothing lives in that water. Not a fish. Not a weed. Not a fly on it."))
+    msgbox(format("Throw a stick in, it doesn't float. It goes down."))
+    msgbox(format("People drop a coin in, for the ferryman. In case. Look. You can see them."))
+    release
+}
+
+// Her hint: the hidden Bronze Obol on the pool's lip (18,17).
+script StyxFalls_EventScript_Girl {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Text_SpeakerGirl)
+    msgbox(format("I dropped my sandal in the pool. It's gone. It just went."))
+    msgbox(format("Grandma says the water eats everything. Except hooves. And some coins."))
+    msgbox(format("One came back up once. A coin. It's still lying on the edge. Nobody'll touch it."))
+    release
+}
+
+script StyxFalls_EventScript_Pool {
+    lockall
+    msgbox(format("Black water, perfectly still. On the bottom, coins: small bronze obols, dozens.\pFor the ferryman, people say. In case."))
+    if (flag(FLAG_ICHOR_GOT_POSEIDONS_CONCH)) {
+        msgbox(format("The water won't hold you up. Nothing floats on the Styx."))
+    }
+    releaseall
+}
+
+script StyxFalls_EventScript_SignNorth {
+    msgbox(format("STYX FALLS · NONAKRIS\pSwear carefully."), MSGBOX_SIGN)
+}
+
+script StyxFalls_EventScript_SignOathStone {
+    msgbox(format("THE OATH STONE. Hands only. No feet. No promises you mean to break."), MSGBOX_SIGN)
+}
+
+script StyxFalls_EventScript_SignSouth {
+    msgbox(format("South: Route 12, the Cypress Road over Kyllene to Arkadia."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_DIG: the terrace's daily dig spot until the dig API lands.
+script StyxFalls_EventScript_DigSpot {
+    msgbox(format("The earth here has been turned. Something might be buried."), MSGBOX_SIGN)
+}

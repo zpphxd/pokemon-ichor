@@ -1,1 +1,143 @@
-mapscripts Route12_CaveOfMaia_MapScripts {}
+// The Cave of Maia, where Hermes was born: beat 40 and the cave's roster. Text
+// from design/phase3/SCRIPT.md: beat 40 and Part 2 (the Cave of Maia). The
+// pilgrim Euandros meets the route standard's one trainer (MAP_DESIGN §8).
+// Layout and events: tools/ichor/maps/heights.py.
+//
+// Alethea is here from the time she leaves Styx Falls until beat 40 is told
+// (FLAG_ICHOR_HIDE_ALETHEA_MAIA). The scene runs as the player walks in (the
+// trigger row above the way out) or when spoken to.
+
+mapscripts Route12_CaveOfMaia_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_HIDE_ALETHEA_MAIA)) {
+            setvar(VAR_TEMP_1, 1)
+        } else {
+            setvar(VAR_TEMP_1, 0)
+        }
+    }
+}
+
+text Route12_CaveOfMaia_Text_SpeakerAlethea { "ALETHEA" }
+text Route12_CaveOfMaia_Text_SpeakerPriestess { "PRIESTESS" }
+text Route12_CaveOfMaia_Text_SpeakerEuandros { "EUANDROS" }
+
+// --- beat 40: where the lyre was born ----------------------------------------------------
+script Route12_CaveOfMaia_EventScript_AletheaScene {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Route12_CaveOfMaia_Movement_WalkIn)
+    waitmovement(0)
+    call(Route12_CaveOfMaia_EventScript_TheLyre)
+    releaseall
+}
+
+script Route12_CaveOfMaia_EventScript_Alethea {
+    lockall
+    call(Route12_CaveOfMaia_EventScript_TheLyre)
+    releaseall
+}
+
+script Route12_CaveOfMaia_EventScript_TheLyre {
+    applymovement(LOCALID_MAIA_ALETHEA, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Route12_CaveOfMaia_Text_SpeakerAlethea)
+    msgbox(format("This is where Hermes was born. The god of roads. And thieves."))
+    msgbox(format("The morning he was born, he climbed out of his cradle."))
+    msgbox(format("He found a tortoise, scooped it out, and strung its shell. The first lyre."))
+    msgbox(format("By lunch he'd stolen Apollo's cattle. By supper he'd talked his way out of it."))
+    msgbox(format("Some people do more before lunch than I do in a year."))
+    applymovement(LOCALID_MAIA_PRIESTESS, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(Route12_CaveOfMaia_Text_SpeakerPriestess)
+    msgbox(format("He traded the lyre to Apollo for the cattle, in the end."))
+    msgbox(format("Apollo got the music. Hermes got the herd. Both thought they'd won."))
+    msgbox(format("That's the trick of a good trade, child."))
+    setspeaker(Route12_CaveOfMaia_Text_SpeakerAlethea)
+    msgbox(format("The road's all downhill from here. Into the cypresses."))
+    msgbox(format("Arkadia. Kleon's there. I can feel it. Truthfully, I can hear it."))
+    closemessage
+    applymovement(LOCALID_MAIA_ALETHEA, Route12_CaveOfMaia_Movement_AletheaOut)
+    waitmovement(0)
+    removeobject(LOCALID_MAIA_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_MAIA)
+    setvar(VAR_TEMP_1, 1)
+    applymovement(LOCALID_MAIA_PRIESTESS, Common_Movement_FaceDown)
+    waitmovement(0)
+    return
+}
+
+movement Route12_CaveOfMaia_Movement_WalkIn {
+    walk_up * 2
+    face_up
+}
+
+movement Route12_CaveOfMaia_Movement_AletheaOut {
+    walk_right
+    walk_down * 4
+}
+
+// --- the priestess: the rest point, and the singer --------------------------------------
+script Route12_CaveOfMaia_EventScript_Priestess {
+    lock
+    faceplayer
+    setspeaker(Route12_CaveOfMaia_Text_SpeakerPriestess)
+    if (!flag(FLAG_ICHOR_MAIA_SINGER)) {
+        checkspecies(SPECIES_CHELYRA)
+        if (var(VAR_RESULT) == TRUE) {
+            msgbox(format("Oh. Oh, you've brought a lyre. A living one."))
+            msgbox(format("Hold still, little one. I know the tune he played. Everyone up here does."))
+            closemessage
+            playmoncry(SPECIES_CHELYRA, CRY_MODE_NORMAL)
+            waitmoncry
+            setspeaker(Route12_CaveOfMaia_Text_SpeakerPriestess)
+            msgbox(format("Hermes played that the morning he was born. To his mother."))
+            msgbox(format("Then he went out stealing."))
+            msgbox(format("Take this. Honey and thyme, for the throat."))
+            msgbox(format("Every singer on Kyllene keeps some."))
+            giveitem(ITEM_THROAT_SPRAY)
+            setflag(FLAG_ICHOR_MAIA_SINGER)
+            release
+            end
+        }
+    }
+    msgbox(format("Maia nursed a god in this cave. I can manage your Pokémon."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(Route12_CaveOfMaia_Text_SpeakerPriestess)
+    msgbox(format("There. Tell nobody I'm good at it. They'll all come up the mountain."))
+    release
+}
+
+script Route12_CaveOfMaia_EventScript_Euandros {
+    trainerbattle_single(TRAINER_ICHOR_EUANDROS, Route12_CaveOfMaia_Text_EuandrosIntro, Route12_CaveOfMaia_Text_EuandrosDefeat)
+    setspeaker(Route12_CaveOfMaia_Text_SpeakerEuandros)
+    msgbox(format("I walked here from the far west to see a cradle. It's very small. Worth it."), MSGBOX_AUTOCLOSE)
+}
+
+text Route12_CaveOfMaia_Text_EuandrosIntro {
+    format("Quiet, please. This is a holy cave. …Battles are quiet if you're good at them.")
+}
+
+text Route12_CaveOfMaia_Text_EuandrosDefeat {
+    format("That was loud.")
+}
+
+// --- the cave's things -----------------------------------------------------------------------
+script Route12_CaveOfMaia_EventScript_Cradle {
+    msgbox(format("A cradle cut in the rock. A scrap of old cloth folded in it. It's very small."), MSGBOX_SIGN)
+}
+
+script Route12_CaveOfMaia_EventScript_Lyre {
+    msgbox(format("A tortoise shell strung with gut. It has a crack in it, mended with pitch."), MSGBOX_SIGN)
+}
+
+script Route12_CaveOfMaia_EventScript_HermFace {
+    msgbox(format("Hermes's face, carved straight out of the rock. Somebody has polished his nose."), MSGBOX_SIGN)
+}
+
+script Route12_CaveOfMaia_EventScript_Lamp {
+    msgbox(format("A clay lamp on a bronze stand. The priestess never lets it go out."), MSGBOX_SIGN)
+}

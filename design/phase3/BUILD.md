@@ -150,8 +150,8 @@ All 17 maps are registered. Outdoor maps are in `gMapGroup_TownsAndRoutes`; Arka
 
 | Seam | Columns or rows | Owner |
 |---|---|---|
-| Aigion's south edge → Route 11's north edge | the harbors agent records Aigion's columns; the heights agent draws Route 11's road and records its columns; this session sets both offsets at integration. Seam rows aethos-only. | harbors, heights |
-| Route 11 ↔ Styx Falls ↔ Route 12 | the heights agent's (one tileset) | heights |
+| Aigion's south edge → Route 11's north edge | the harbors agent records Aigion's columns; the heights agent draws Route 11's road and records its columns; this session sets both offsets at integration. Seam rows aethos-only. **Route 11 (heights):** the road at columns 19–20 (verges 18, 21); rows 0–5 aethos-only meadow, open along row 0 except trees at 0–1, 8–9, 28–29, 36–37. Align Aigion's road over 19–20; no `up` connection on Route 11 yet. | harbors, heights |
+| Route 11 ↔ Styx Falls ↔ Route 12 | the heights agent's: three secondaries sharing a core (`TILES_heights.md`); Route 11 `down` offset 0 to Styx Falls through the cleft at 12–13 (core-only rows 50–55 and 0–5); Styx Falls `right` offset 0 to Route 12 on rows 22–23 (core-only columns 28–35 and 0–7) | heights |
 | Route 12's south edge ↔ Arkadia's north edge | **fixed:** Route 12's road at columns 28–31 (verges 28, 31), Arkadia's at 22–25; Route 12 `down` offset +6, Arkadia `up` offset −6; seam rows aethos-only | heights, arkadia |
 | Arkadia ↔ the Cypress Wood ↔ the Pool | the arkadia agent's | arkadia |
 | Arkadia's east edge → Route 13 (batch 4) | the huntresses' cordon until `FLAG_BADGE05_GET`; record the rows | arkadia |
