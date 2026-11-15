@@ -296,6 +296,28 @@ L.start(function()
   settle()
   L.waitUntil(function() return flashLevel() == S.ICHOR_FLASH_TORCH and L.idle() end, 400, "the torch to light")
   expect(not L.getFlag(S.FLAG_ICHOR_TORCH_DOUSED), "... and lights it again, on the same entry")
+
+  -- A lit zone: in to full light, in again (already lit), and out to the
+  -- Torch's light. The picture must darken again: the flash's scanline effect
+  -- runs, and the screen's top line is outside the light.
+  local litFlag = S.FLAG_ICHOR_BRAZIERS_START_R + 0x0F
+  L.setFlag(litFlag, true)
+  L.setVar(S.VAR_0x8004, litFlag)
+  L.runHeader("RelicTest_EnterLitHeader")
+  expect(flashLevel() == 0, string.format("entering a lit zone lights the map fully (level %d)", flashLevel()))
+  L.setVar(S.VAR_0x8004, litFlag)
+  L.runHeader("RelicTest_EnterLitHeader", { limit = 300 })
+  expect(flashLevel() == 0 and L.idle(), "entering again while fully lit returns at once")
+  L.runHeader("RelicTest_LeaveLitHeader", { limit = 600 })
+  wait(4)
+  local topLine = emu:read16(S.gScanlineEffectRegBuffers)
+  local midLine = emu:read16(S.gScanlineEffectRegBuffers + 80 * 2)
+  expect(flashLevel() == S.ICHOR_FLASH_TORCH and emu:read8(S.gScanlineEffect + S.OFF_SCANLINE_STATE) ~= 0
+         and topLine & 0xFF == 0 and midLine & 0xFF > 120,
+         string.format("leaving it darkens the picture to the Torch's light (level %d, top line %04X, middle %04X)",
+                       flashLevel(), topLine, midLine))
+  shot("lit_zone_left")
+  L.setFlag(litFlag, false)
   setCave(false)
   L.runHeader("RelicTest_FlashHeader")
   bagAndBack()

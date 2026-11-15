@@ -229,6 +229,8 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
   - going in: `setvar(VAR_0x8004, <brazier flag>)`, then `call(EventScript_IchorEnterLitZone)`. It brightens the map fully if that brazier is lit.
   - going out: `call(EventScript_IchorLeaveLitZone)`, which eases back to the torch's radius.
 - **A map that loads with the player inside a lit zone** sets `setflashlevel(0)` in its ON_TRANSITION when the zone's flag is set.
+- **The light eases both ways.** `animateflash` (and so the lit zones, braziers, dousing and relighting) darkens as well as brightens, even from a fully lit map. Asking for the level the map already has returns at once. These were fixed 2026-11-14, from world-act2's report: entering a lit zone that was already fully lit used to hang, and nothing could darken a map once it was fully lit. A map's own guard against either (Trophonios's cave's `VAR_TEMP_6`) can go.
+- **The light moves 2 px a frame** and only inside the screen, so crossing a threshold takes under a second.
 
 ### Carried flames (SYSTEMS §2)
 

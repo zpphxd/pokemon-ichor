@@ -163,6 +163,17 @@ RelicTest_CallR3:
 @ --- Carried flames: take one (VAR_0x8004 kind, VAR_0x8005 steps), a draught, a douse
 	.arm
 	.align 2
+@ --- A lit zone's threshold, going in (VAR_0x8004 = the zone's brazier flag) and out
+	test_header RelicTest_EnterLitHeader, RelicTest_EnterLit
+RelicTest_EnterLit:
+	setvar VAR_TEMP_F, 1
+	goto EventScript_IchorEnterLitZone
+
+	test_header RelicTest_LeaveLitHeader, RelicTest_LeaveLit
+RelicTest_LeaveLit:
+	setvar VAR_TEMP_F, 1
+	goto EventScript_IchorLeaveLitZone
+
 	test_header RelicTest_TakeFlameHeader, RelicTest_TakeFlame
 RelicTest_TakeFlame:
 	setvar VAR_TEMP_F, 1
