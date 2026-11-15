@@ -202,16 +202,18 @@ Elaia owns the polished **Eripip** and **Galekit**, not their later stages.
 | Coverage | Native redraw status |
 |---|---|
 | Halcyling, Galenyon | New matched native battle fronts, backs, six follower frames and two menu-icon frames implemented from `tools/dex/sprites/lines/halcyon.py` and its six hand-finished art grids. Existing normal/shiny color identities, palette files and bird footprints retained deliberately. Artistically accepted at checkpoint scope; final whole-town matched in-game review still pending. |
+| Nemecub, Nemeleon | Native lion-family battle fronts/back grids, two icon frames and all six follower frames implemented in `lines/nemean.py` and six art grids. Animal muzzles, cub forelock/paws/tufted tail and mature mane/claws/armor retained. Normal palettes, exact shared icon palette3 and paw footprints retained; Nemeleon's blue-black shiny mane matches the ink-dark identity in `design/dex/species/nemean.yaml` in both battle/follower palettes. Scoped generation, native conversion/source checks and matching real-engine normal/shiny/front0/front1/back views pass. Artistically accepted at checkpoint scope. |
 | Ione, Titan Grunt | Native three-quarter portraits and all nine walker states redrawn in `sprites_trainers.py` and `sprites_npc.py`. Their existing portrait and shared cast palettes retained unchanged; palette-correct native comparisons and genuine ROM portraits verified. Artistically accepted at checkpoint scope, not whole-town approval. |
-| Eopeep, Alekrow, Hoplektor; Kerazap, Kerastorm; Harpeck, Harpelle; Epopoi, Lophops, Basilops; Karkipool, Karkitox; Ketofry, Kynoketos; Melibee, Melisseer; Onotis, Midonos; Ergant, Hoplomex; Narthip, Promethex; Nemecub, Nemeleon; Elaleaf, Elapling, Hierolive; Spalunk, Plouteras; Kampillar, Nymveil, Psychora; Pebblith, Cairnolith, Laolith; Narkeray; Chelonet, Chelyra; Gelasable | Still awaiting this batch's native polish; existing sprites retained, not claimed redrawn. This includes species used only by the local trainers. |
+| Eopeep, Alekrow, Hoplektor; Kerazap, Kerastorm; Harpeck, Harpelle; Epopoi, Lophops, Basilops; Karkipool, Karkitox; Ketofry, Kynoketos; Melibee, Melisseer; Onotis, Midonos; Ergant, Hoplomex; Narthip, Promethex; Elaleaf, Elapling, Hierolive; Spalunk, Plouteras; Kampillar, Nymveil, Psychora; Pebblith, Cairnolith, Laolith; Narkeray; Chelonet, Chelyra; Gelasable | Still awaiting this batch's native polish; existing sprites retained, not claimed redrawn. This includes species used only by the local trainers. |
 | Theo, Ianthe, Kleon, Alethea, Melitta; shared folk already polished in Elaia; pickups and starter kraters; Elaia's contact/shared effects | Elaia's human/opening-object checkpoint `dfb7974fbc`, twelve-species checkpoint `9ae5aff4af` and shared-effects checkpoint `70ff39b430` on main `840dbefb8624` are integrated. All 16 new effects/emotion sheets and the emote palette match that landed base; accepted local human sheets remain unchanged. Further supported-player-state evidence belongs to Elaia's continuation, not this batch. |
 | Kronion tablet | Markings and lighting refined at native 16x16 resolution, preserving the cast palette and wiring. Captured during the Route 1 review's real cutscene drop, not an ordinary summit visit. Artistically accepted at checkpoint scope. |
 | Two upturned-boat halves | Direct native 32x16 drawing split into matched halves, replacing tileset extraction. Restrained plank seam and keel clusters use the existing cast palette. Native and real harbor evidence artistically accepted at checkpoint scope. |
 | Sailor and Diver walkers | Eight-row native directional heads, longer cloth bodies, distinct strides and all nine engine frames implemented in `sprites_folk.py`. Costumes and folk palette preserved; Sailor's shoulder rope matches the existing portrait identity. Palette-correct complete sheets and real harbor before/after captured against the exact post-Elaia ROM. Artistically accepted at checkpoint scope. |
 | Healer and Kid F walkers | Native eight-row directional heads, folded chiton and child-sized saffron tunic with complete strides. Healer's tenth bow frame retains closed eyes, head dip, hand over heart and planted serpent rod. All 19 states reproduce, and the preview now includes the full tenth frame. Both real heal paths hold the bow for exactly 32 frames and restore player control. Existing palette, costumes and animation wiring preserved; artistically accepted at checkpoint scope. |
 | Augur and Acolyte M/F walkers | Native directional heads, longer indigo/linen robes, distinct strides and all 27 states implemented. Gold band/feather, sparse bird hem, planted staff, saffron cloth, soot/ash, tongs/coal and attached raised lamp preserved. Cast palette unchanged and verified in the ROM. Complete colored sheets and matched Route 1/Temple captures pass technical checks; artistically accepted at checkpoint scope. |
-| Goatherd, Hoplite and Merchant walkers | Native directional heads, longer bodies and all 27 states implemented. Gray curls/beard, syrinx, goat-hair mantle, bell/thongs; raised Corinthian helmet, crimson crest/chiton, linen corselet, bronze greaves, spear/lambda shield; bald/full beard, blue/gold himation over linen and purse retained. Both shared palettes unchanged and verified in the ROM. Complete native sheets and actual placed/counter-occluded captures pass technical checks; artistically accepted at checkpoint scope. Pilgrim is absent from these nine maps and belongs to the voyage/Aegina batch. |
-| Remaining local class portraits: Shepherd, Harvester, Goatherd, Hoplite, Augur and Acolyte M/F; local healing effects | Existing assets retained for now; these seven portraits are the local trainer-pic union beyond the already polished cast. Merchant, Sailor and Pilgrim portraits are not used by those local trainers and belong to the voyage/Aegina batch. Shared emotes and related effects are assigned to Elaia's continuation above. |
+| Goatherd, Hoplite and Merchant walkers | Native directional heads, longer bodies and all 27 states implemented. Gray curls/beard, syrinx, goat-hair mantle, bell/thongs; raised Corinthian helmet, crimson crest/chiton, linen corselet, bronze greaves, spear/lambda shield; bald/full beard, blue/gold himation over linen and purse retained. Both shared palettes unchanged and verified in the ROM. Complete native sheets and actual placed/counter-occluded captures artistically accepted at checkpoint scope. Pilgrim is absent from these nine maps and belongs to the voyage/Aegina batch. |
+| Shepherd, Harvester, Goatherd, Hoplite, Augur and Acolyte M/F portraits | All seven native 64x64 poses, directional faces, hands and equipment refined in `sprites_classes.py`; embedded palettes and class identities retained. Source/palette reproduction, connected lamp/arm and actual ROM-loader palette checks pass. Complete colored native and matching engine views preserved; artistically accepted at checkpoint scope. Merchant, Sailor and Pilgrim portraits are not used by those local trainers and belong to the voyage/Aegina batch. |
+| Local healing effects | Existing relief glow and healing-orb sheets still await native polish. Shared emotes/contact effects are preserved above; dolphin/underwater continuation belongs to Elaia. |
 | Tiles, animated metatiles, battle backgrounds, UI, weather and move animations | Retained explicitly; not part of a native creature/character/object sprite redraw claim. Temple braziers and hearth-trial changes are metatiles, not object sprites. |
 
 The town batch is **not complete**. Full shared regeneration and final ROM
@@ -226,10 +228,18 @@ map identity and the overworld callback. The healer's talk
 and whiteout regressions pass against both exact before and current ROMs.
 `python3 -m unittest discover -s tools/ichor/tests -p test_folk_sprites.py`
 checks source reproduction, complete distinct states, the planted rod and
-uncropped tenth-frame preview. ROM usage remains 23,040,960 bytes (68.67%).
-All local walkers are implemented and artistically accepted at checkpoint scope.
-This does not mark the remaining 39 owned species, seven portraits or
-healing effects finished.
+uncropped tenth-frame preview. The walker ROM used 23,040,960 bytes (68.67%).
+All local walkers are implemented and accepted at checkpoint scope.
+The seven portraits and Nemean family are artistically accepted at scoped
+checkpoint `1a111f80fc`. This does not mark the remaining
+37 owned species or healing effects finished.
+
+The seven-portrait/Nemean checkpoint passes six human-source regressions,
+seven portrait native audits, both species native/import checks, helpers,
+build and smoke. Both exact matching engine galleries pass 37 checks and
+15 captures, including all 16 real portrait palette colors. Its ROM uses
+23,039,520 bytes (68.66%); no production test fixture or new palette bank
+was added.
 
 The effects integration also passes helper compilation, build, smoke, the
 four folk regressions and `tools/ichor/art/check_elaia_effects.py`. Both
@@ -237,7 +247,7 @@ fourteen-camera galleries pass against the exact new main ROM and the
 combined Akti ROM. The earlier post-Elaia Pokemon baseline and comparisons
 remain preserved separately; no equivalent Elaia child commits were reapplied.
 
-**Coordinator partial Akti integration verification:** accepted source snapshot
+**Coordinator partial Akti walker integration verification:** accepted source snapshot
 `2d1a23993f` includes the earlier accepted Ione/Titan, Halcyling/Galenyon,
 tablet/boat and ten shared-walker checkpoints. Its existing merge of effects
 main `840dbefb86` permits a fast-forward without reapplying Elaia equivalents.
@@ -258,8 +268,34 @@ inspected. The ROM uses 23,040,960 bytes (68.67%); SHA256 is
 Matching GBA/ELF/map and before/current captures are preserved as a partial
 Akti checkpoint, not the eventual completed-town baseline. Original source
 reconciliation reports 154 changed, no added/removed and 19,995 unchanged
-image/palette sources. Seven local portraits, healing effects and 39 owned
-species remain pending; retained global groups remain in scope.
+image/palette sources. At that snapshot, seven local portraits, healing effects
+and 39 owned species remained pending; subsequent acceptance above covers the
+portraits and two Nemean species. Retained global groups remain in scope.
+
+**Coordinator portrait/Nemean integration verification:** source `1a111f80fc`
+is integrated through its clean `6798daf781` boundary, without reapplying the
+earlier town/effects equivalents. The combined snapshot also preserves the four
+unused-player sheets landed in `4133f17748`. Helpers, build and original smoke
+(9 captures) pass; six human-source regressions and three unused-player
+regressions pass. All 15 accepted regional species pass native checks; the
+four Halcyon/Nemean species additionally match their generated views, all nine
+design/game imports and exact source normal/shiny colors. All seven portraits
+pass native/palette reproduction checks. Both matching before/current ROM
+loader galleries pass 37 checks and 15 captures; the current unused-player
+fixture still passes 242 checks and 34 captures. Route 1 and Temple sprite
+reviews pass with 81 and 39 captures respectively; actual trainer portraits,
+normal/shiny loader views and smoke are inspected. Loader galleries are
+test-only, and these Quickstart-based scene checks are not a natural-save
+playthrough. Shared effects, palettes, icon palettes, player sheets and
+protected follower-ball paths remain unchanged from `4133f17748`.
+
+ROM use is 23,039,520 bytes (68.66%), SHA256
+`bc616c533d3737db3800fe0a20e0ffd07be3120e0704c4453ef9114a1db2da2f`.
+Matching GBA/ELF/map, logs and paired captures are preserved in the
+coordinator's `akti-classes-nemean-integrated` evidence package. Original source
+reconciliation reports 175 changed, no added/removed and 19,974 unchanged
+image/palette sources, not a completion percentage. The 37 owned species,
+local healing and retained terrain/UI/global groups remain pending.
 
 | Item | Where | Status | Phase | Notes |
 |---|---|---|---|---|
@@ -301,7 +337,7 @@ species remain pending; retained global groups remain in scope.
 | Theo and Ianthe: surfing | `.../brendan/surfing.png`, `.../may/surfing.png` | Greek | 1 | Theo and Ianthe ride a Minoan dolphin (`surf_poses.py`, `surf_blob.png`, `FIELD_EFFECTS.md`). Poseidon's Conch, the relic that grants it, does not exist yet (§6). |
 | Theo and Ianthe: underwater (Dive) | `.../underwater.png` | Hoenn | 5 | Atlantis and the Nereid Pearl. |
 | Mach Bike and Acro Bike | `.../mach_bike.png`, `.../acro_bike.png`, `graphics/field_effects/pics/bike_tire_tracks.png`, `bike_shop` tileset | Cut | 6 | `SPRITES_player_ow.md` says Aethos has no bikes. The bible does not list a bike. Needs a director decision, including the three bike key items and the `bike_shop` maps. |
-| Watering and decorating poses | `.../watering.png`, `.../decorating.png` | Cut | 6 | `SPRITES_player_ow.md`: no watering cans or secret bases. Tied to the berry decision (§1) for watering. |
+| Watering and decorating poses | `.../watering.png`, `.../decorating.png` | Greek art / unused | 6 | Four native Theo/Ianthe sheets implemented at `4133f17748`; systems remain unavailable. Earlier retirement proposal is still tied to the berry/secret-base decisions, not enacted by this art checkpoint. |
 | Ruby/Sapphire and FRLG player sheets | `.../people/ruby_sapphire_brendan/`, `ruby_sapphire_may/`, `rs_brendan.png`, `rs_may.png`, `leaf/`, `red/` | Cut | 6 | Never used by Aethos. |
 | Player battle back pics | `graphics/trainers/back_pics/brendan.png`, `may.png`, `graphics/trainers/palettes/brendan.pal`, `may.pal`, `design/phase1/SPRITES_player.md` | Greek | 1 | Theo and Ianthe with throw animation. |
 | Player front pics | `graphics/trainers/front_pics/brendan.png`, `may.png` | Greek | 1 | The boy-or-girl choice, the trainer card and the Birch speech use them. Ianthe's side of the choice was not captured in-game. |

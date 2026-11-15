@@ -6,6 +6,30 @@ Sources live in `tools/ichor/art/sprites_classes.py`:
 - Rebuild the PNGs and the preview sheet with `python3 tools/ichor/art/sprites_classes.py --write`.
 - Preview with `--preview DIR`, which writes the 3× sheet, 6× singles and pixel grids.
 
+## Native Akti checkpoint
+
+All seven portraits now use smaller hand-drawn directional faces, cleaner
+cloth/fleece clusters, selective outlines and lighter, attached hands/props.
+Their full native 64x64 poses and existing embedded palettes are preserved.
+The Shepherd waves beside his crook; the Harvester raises an olive sprig and
+supports a smaller woven basket; the Goatherd holds bound reeds to his lips
+under a gray beard and goat-hair mantle. The Hoplite retains his raised
+Corinthian helmet, crimson crest, linen armor, bronze greaves and lambda shield.
+The Augur points upward with his feather/fillet, white beard and two restrained
+black-figure birds at the hem. Both acolytes keep soot and saffron; Lampon's
+slim tongs clasp a glowing coal, and Pyrrha's raised lamp joins her hand/arm.
+
+`python3 -m unittest discover -s tools/ichor/tests -p 'test_*sprites.py'`
+checks all source pixels/palettes and the connected lamp/arm, alongside the
+accepted walker/bow protections. `tools/ichor/tests/akti_art.sh` loads the
+actual ROM portraits through `CreateTrainerPicSprite` and checks every color
+against that ROM's trainer palette table. The EWRAM-only fixture also reviews
+Nemecub/Nemeleon fronts, backs and normal/shiny palettes. Both matching
+baseline/current runs pass 37 checks with 15 captures. These are genuine
+engine-loader views, not a claim of seven completed trainer battle playthroughs.
+Native checks, helper compilation, build and smoke pass; creative approval
+and whole-town acceptance remain pending.
+
 ## Catalog
 
 | Constant | Party-file name | Look | File |
