@@ -303,7 +303,7 @@ def temple():
             if x % 2:
                 M.px(x, 27, "gd" if base else "p2")
     # the plinth: a stepped block, swept clean, the dedication cut in its face
-    K.put(s.M, 48 + 1, 3, [
+    K.put(s.M, 48 + 1, 16 + 1, [
         ".KKKKKKKKKKKK.",
         "K444444444443K",
         "K433333333331K",
@@ -322,10 +322,10 @@ def temple():
     # Oinoe's broom against the step (on grass: the step's edge)
     M = s.M
     for y in range(3, 15):
-        M.px(112 + 10 - y // 3, y, "l0")
-    K.put(M, 112 + 3, 11, [".pp.", "pppp", "p.pp", ".p.p"], {"p": "p2"})
+        M.px(112 + 10 - y // 3, 16 + y, "l0")
+    K.put(M, 112 + 3, 16 + 11, [".33.", "3333", "3.33", ".3.3"], {"3": "cy3"})
     for x in range(112 + 1, 112 + 15):
-        M.px(x, 15, "cy1")
+        M.px(x, 16 + 15, "cy1")
     return s
 
 

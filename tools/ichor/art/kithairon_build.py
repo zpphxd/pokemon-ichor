@@ -132,7 +132,7 @@ def painted():
 
 CORE = ["tall", "path", "crag", "water", "fir", "fir_b", "fir_stack", "fir_stack_b", "fir_young",
         "oak", "crag_detail", "markers", "fir_shade", "fir_b_shade", "fir_stack_shade",
-        "fir_stack_b_shade", "fir_young_shade", "oak_shade"]
+        "fir_stack_b_shade", "fir_young_shade", "oak_shade", "meadow"]
 EXTRAS = {
     "kithairon": [("vines", ["trellis", "old_vines", "press", "cart", "barrier"]),
                   ("stone", ["fort", "temple", "trough", "pentheus_fir"]),

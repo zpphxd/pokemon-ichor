@@ -127,16 +127,20 @@ def press():
                        "draining through a spout into a sunken vat. Its sign is the press "
                        "(\"Tread barefoot...\").")
     M = s.M
-    # the floor: a stone basin, 40 x 22, raised on a plinth
+    # the floor: dressed stone slabs in a raised kerb, the middle stained with must
     for y in range(2, 26):
         for x in range(3, 45):
             edge = x in (3, 4, 43, 44) or y in (2, 3, 24, 25)
             if edge:
                 c = "cy4" if (y in (2, 3) or x in (3, 4)) else "cy1"
             else:
-                c = "gp1" if (K.hsh(x, y, 1) % 5) else "gp0"
-                if (x - 24) ** 2 / 90 + (y - 13) ** 2 / 40 < 1 and K.hsh(x, y, 2) % 3 == 0:
-                    c = "gp0"
+                slab = (x - 5) % 10 == 0 or (y - 4) % 7 == 0
+                c = "cy1" if slab else ("cy3" if K.hsh(x, y, 1) % 4 else "cy2")
+                stain = (x - 24) ** 2 / 160 + (y - 14) ** 2 / 52
+                if stain < 1:
+                    c = "gp0" if (slab or K.hsh(x, y, 2) % 4 == 0) else "gp1"
+                elif stain < 1.35 and K.hsh(x, y, 3) % 3 == 0:
+                    c = "gp1"
             M.px(x, y, c)
     for x in range(3, 45):
         M.px(x, 1, "ink")

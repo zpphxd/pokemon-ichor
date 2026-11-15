@@ -237,10 +237,14 @@ def eleutherai():
         .10 =2 .5 w1 .5 w1 .5 w1 .2
         .10 =2 .5 w1 .5 w1 .5 w1 .2
         F5 .5 =2 .5 w5 .3 w5 .2
-        F5 .4 .1 =2 .2 F3 .9 F6
-        F5 .4 .1 =2 .2 F3 .9 F6
+        F5 .4 .1 =2 .2 .3 .9 F6
+        F5 .4 .1 =2 .2 .3 .9 F6
     """, 32))
     m.cells([(30, 12), (31, 12), (31, 13), (30, 14), (31, 14), (31, 15), (30, 16), (31, 16)], "F")
+    m.rect(14, 0, 31, 1, "#")                # the fort's rock rises behind it
+    m.cells([(14, 0), (15, 0), (30, 0), (31, 0)], "F")
+    m.rect(15, 2, 16, 4, "F")                # firs on the rock's flanks
+    m.rect(30, 3, 31, 6, "F")
     m.cells([(0, 17), (0, 18)], "F")
     m.cells([(13, 24), (12, 24)], ".")
     m.pavelike |= {(2, 15), (2, 16), (8, 16), (4, 12), (6, 11), (5, 13), (4, 16), (2, 11), (8, 11)}
@@ -293,6 +297,10 @@ def eleutherai():
     m.cypress(9, 8)
     m.cypress(13, 9)
     m.cypress(25, 12)
+    m.cypress(15, 24)
+    m.olive(27, 13)
+    m.olive(2, 8) if False else None
+    m.pine(28, 24) if False else None
     E = {
         "connections": [
             {"map": "MAP_ROUTE6_ELEUTHERAI_ROAD", "offset": EL_SOUTH - R6_NORTH, "direction": "down"},
@@ -399,6 +407,20 @@ def kithairon():
         F10 .7 .1 =2 .1 F19
     """, 40))
     m.pathlike |= {(13, 21)}
+    # pass 2: close in the open ground; the dancing floor a ring, not a square
+    m.rect(11, 15, 16, 18, "F")              # firs between the fold and the fork
+    m.cells([(17, 15), (17, 16)], "F")
+    m.rect(23, 9, 26, 12, "F")               # firs east of the road below the shrine ledge
+    m.cells([(27, 3), (28, 3), (33, 6), (34, 6), (24, 6)], "s")
+    m.rect(2, 51, 5, 53, "F")
+    m.rect(14, 45, 17, 46, "F")
+    m.cells([(6, 45), (7, 52), (13, 52), (21, 51), (22, 53)], "s")
+    m.rect(17, 29, 28, 36, ".")
+    m.rect(19, 30, 26, 35, "=")
+    m.cells([(19, 30), (26, 30), (19, 35), (26, 35)], ".")
+    m.rect(20, 28, 21, 29, "=")
+    m.rect(24, 36, 25, 36, "=")
+    m.cells([(16, 29), (30, 29), (15, 36), (31, 36)], "s")
 
     # stamps
     m.stamp("pentheus_fir", 23, 14)
@@ -460,7 +482,7 @@ def kithairon():
             sign(22, 20, MK + "BoundaryStone"),
             sign(24, 17, MK + "PentheusFir"),
             sign(34, 18, MK + "SpringSeat"),
-            sign(36, 17, MK + "Spring"),
+            sign(35, 16, MK + "Spring"),
             sign(37, 16, MK + "Spring"),
             sign(35, 23, MK + "DigSpot"),
             sign(6, 9, MK + "DigSpot"),
@@ -529,6 +551,23 @@ def route7():
         F14 #6 =2 #6 F16
         F14 .5 .1 =2 .1 .4 F17
     """, 44))
+    # pass 2: the Asopos narrower, its west bank wandering; the reed islet midstream;
+    # band 2 fenced by scrub (firs) instead of walls
+    bank = [0, 0, -1, -1, -1, 0, 0, 1, 1, 0, 0, -1, -2, -2, -1, -1, 0, 0, 0, 1, 1, 1, 0, 0, -1, -1, 0, 0]
+    for y in range(6, 34):
+        xw = 38 + bank[y - 6]
+        for x in range(35, 44):
+            if x >= xw:
+                m.ch[y][x] = "~"
+            elif m.ch[y][x] == "~":
+                m.ch[y][x] = "," if 17 <= y <= 30 else "."
+    m.rect(40, 19, 41, 20, ".")
+    m.rect(19, 17, 19, 20, "F")
+    m.rect(22, 17, 22, 20, "F")
+    m.cells([(19, 20), (22, 20)], "F")
+    # pass 3: the defile's rock narrower, firs on its shoulders
+    m.rect(12, 33, 15, 38, "F")
+    m.rect(26, 33, 29, 38, "F")
     # stamps: the camp ------------------------------------------------------------
     def table(x, y, w, foods=("T_bread", "T_figs", "T_jars")):
         for i in range(w):
@@ -544,8 +583,10 @@ def route7():
     m.stamp("oven", 13, 6)
     m.stamp("stage", 24, 6)
     m.stamp("big_tent", 30, 6)
-    for (x, y) in ((11, 11), (14, 11), (33, 10)):
+    for (x, y) in ((11, 11), (14, 11), (33, 10), (10, 7), (17, 10), (34, 6)):
         m.stamp("tent", x, y)
+    m.olive(11, 14)
+    m.olive(2, 2) if False else None
     m.stamp("banner", 15, 13)
     m.named("camp_small", "board", 19, 15)
     m.named("camp_small", "hoop", 4, 14)
@@ -582,10 +623,10 @@ def route7():
             obj(P + "ALETHEA", 28, 13, R7 + "Alethea", "MOVEMENT_TYPE_FACE_UP",
                 flag="FLAG_ICHOR_HIDE_ALETHEA_KRONIA", local_id="LOCALID_ROUTE7_ALETHEA"),
             obj(P + "KRONIST", 31, 15, R7 + "Reader", "MOVEMENT_TYPE_FACE_LEFT",
-                flag="FLAG_ICHOR_KRONIA_READER_GONE", local_id="LOCALID_ROUTE7_READER"),
+                flag="FLAG_TEMP_4", local_id="LOCALID_ROUTE7_READER"),
             obj(P + "KRONIST", 31, 15, R7 + "ReaderAfter", "MOVEMENT_TYPE_FACE_LEFT",
                 flag="FLAG_TEMP_5", local_id="LOCALID_ROUTE7_READER_AFTER"),
-            obj(P + "KRONIST", 26, 7, R7 + "StageKronist", "MOVEMENT_TYPE_FACE_DOWN"),
+            obj(P + "KRONIST", 26, 8, R7 + "StageKronist", "MOVEMENT_TYPE_FACE_DOWN"),
             obj(P + "TITAN_GRUNT", 32, 9, R7 + "TentGuard", "MOVEMENT_TYPE_FACE_DOWN"),
             obj(P + "MAN", 16, 8, R7 + "Baker", "MOVEMENT_TYPE_FACE_LEFT"),
             obj(P + "ELDER_M", 5, 8, R7 + "Master", "MOVEMENT_TYPE_FACE_UP"),
@@ -600,7 +641,7 @@ def route7():
             obj(P + "TITAN_GRUNT", 29, 13, R7 + "Gypsos", "MOVEMENT_TYPE_FACE_UP",
                 flag="FLAG_ICHOR_GYPSOS_WENT_HOME", local_id="LOCALID_ROUTE7_GYPSOS"),
             # the reed islet (the Conch)
-            item_ball(39, 19, "ITEM_BIG_PEARL", "FLAG_ICHOR_ITEM_ROUTE7_BIG_PEARL"),
+            item_ball(40, 19, "ITEM_BIG_PEARL", "FLAG_ICHOR_ITEM_ROUTE7_BIG_PEARL"),
         ],
         "warp_events": [],
         "coord_events": [trigger(x, 16, R7 + "GreeterScene") for x in (20, 21)]
@@ -613,7 +654,6 @@ def route7():
             sign(29, 15, R7 + "ReaderTable"),
             sign(30, 15, R7 + "ReaderTable"),
             sign(31, 8, R7 + "StewardsTent"),
-            sign(32, 8, R7 + "StewardsTent"),
             sign(33, 15, R7 + "DigSpot"),
             sign(19, 1, R7 + "SignNorth"),
         ],
@@ -724,7 +764,52 @@ def build(only=None, shapes_only=False, tag=""):
 
 
 BORDERS = {"cave": lambda c: [c.named("cave", "1|11111111")[0]] * 4}
-CHECKS = {}
+
+# Where the player enters each map, and what is meant to be out of reach on foot
+# today (relic gates, the reed islet), for the reachability check below.
+ENTRIES = {
+    "route6": [(45, 27), (46, 27)],
+    "cave": [(7, 11)],
+    "eleutherai": [(10, 25), (11, 25)],
+    "kithairon": [(18, 55), (19, 55)],
+    "route7": [(20, 39), (21, 39)],
+}
+UNREACHABLE_OK = {
+    "route6": {(5, 8)},                        # the Max Ether, behind the drum (the Girdle)
+    "eleutherai": {(27, 18)},                  # a sheep in the closed fold
+    "kithairon": {(10, 21), (16, 25)},         # the Max Revive (the Girdle), the Max Elixir (the Thyrsus)
+    "route7": {(40, 19)},                      # the Big Pearl on the reed islet (the Conch)
+    "cave": {(14, 3)},                         # the Star Piece on the ivy ledge (the Thyrsus)
+}
+
+
+# Cells scripts open: the vines and the barrier (and the herald, who leaves).
+OPENS = {"route6": {(45, 21), (46, 21), (45, 18), (46, 18), (45, 17)}}
+
+
+def check_reach(key):
+    def run(m, E):
+        # people stand on tiles: treat their tiles as blocked while walking
+        people = {(o["x"], o["y"]) for o in E.get("object_events", [])}
+        opens = OPENS.get(key, set())
+        m.force_open |= opens
+        seen = L.reach(m, ENTRIES[key], blocked_extra=people - opens)
+        m.force_open -= opens
+        bad = []
+        targets = [(o["x"], o["y"], o["script"].split("_")[-1]) for o in E.get("object_events", [])]
+        targets += [(b["x"], b["y"], b["script"].split("_")[-1]) for b in E.get("bg_events", [])]
+        for (x, y, what) in targets:
+            near = {(x + dx, y + dy) for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0))}
+            if not (near & seen) and (x, y) not in UNREACHABLE_OK.get(key, ()):
+                bad.append(f"{what}@{x},{y}")
+        for e in E.get("coord_events", []) + E.get("warp_events", []):
+            if (e["x"], e["y"]) not in seen and not ({(e["x"], e["y"] + 1), (e["x"], e["y"] - 1)} & seen):
+                bad.append(f"event@{e['x']},{e['y']}")
+        print(f"  {m.name}: {len(seen)} cells reachable" + (f"; OUT OF REACH: {', '.join(bad)}" if bad else ""))
+    return run
+
+
+CHECKS = {k: check_reach(k) for k in ENTRIES}
 
 
 def main():

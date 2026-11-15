@@ -233,5 +233,24 @@ def pentheus_fir():
     return s
 
 
+def meadow():
+    """Small walkable details for the mountain's open grass: white narcissus,
+    yellow mountain crocus, and a tussock. On borrowed grass."""
+    s = K.struct("meadow", "Meadow flowers and a tussock", 3, 1, SEC, walk=["..."], on="grass",
+                 names={"white": (0, 0), "yellow": (1, 0), "tuft": (2, 0)},
+                 notes="Walkable. Scatter through open grass with aethos's red anemones "
+                       "(0x004): `white` narcissus, `yellow` mountain crocus, `tuft` a tussock.")
+    M = s.M
+    for (x, y) in ((3, 4), (10, 2), (7, 9), (13, 11), (2, 12)):
+        K.put(M, x, y, [".w.", "wkw", ".w.", ".o."], {"w": "w0", "k": "k2", "o": "oa1"})
+    for (x, y) in ((4, 3), (11, 6), (6, 11), (13, 13)):
+        K.put(s.layers["middle"], 16 + x, y, [".y.", "yKy", ".i."],
+              {"y": "mk", "K": "rk4", "i": "iv1"})
+    for (x, y) in ((3, 6), (9, 3), (10, 10)):
+        K.put(M, 32 + x, y, ["3.3.3", "13131", "11111", ".t.t."],
+              {"3": "t3", "1": "t1", "t": "t0"})
+    return s
+
+
 def build():
-    return firs() + broadleaves() + [pentheus_fir()]
+    return firs() + broadleaves() + [pentheus_fir(), meadow()]

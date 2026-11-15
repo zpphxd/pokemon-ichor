@@ -35,7 +35,7 @@ SETS = {"kithairon": ("gTileset_Kithairon", "kithairon"), "kronia": ("gTileset_K
         "cave": ("gTileset_KithaironCave", "kithairon_cave")}
 CORE = {"tall", "path", "crag", "water", "fir", "fir_b", "fir_stack", "fir_stack_b", "fir_young",
         "oak", "crag_detail", "markers", "fir_shade", "fir_b_shade", "fir_stack_shade",
-        "fir_stack_b_shade", "fir_young_shade", "oak_shade"}
+        "fir_stack_b_shade", "fir_young_shade", "oak_shade", "meadow"}
 SHAPE_SETS = ("tall", "path", "crag", "water", "cave")
 
 # aethos metatiles (General's ids; design/phase1/TILES_aethos.md)
@@ -104,6 +104,7 @@ class Map:
         self.aethos_rows, self.core_rows = set(), set()
         self.pathlike = set()
         self.pavelike = set()
+        self.no_decor = set()
         self.shapes_used = {k: set() for k in SHAPE_SETS}
         self.missing = missing_shapes if missing_shapes is not None else []
         self.water_cells = set()
@@ -249,7 +250,7 @@ class Map:
                         self.set(x, y, *self.shape("cave", blob_key(cave, x, y), x, y))
                     else:
                         k = blob_key(crag, x, y)
-                        if k == "1|11111111" and hsh(x, y, self.seed) < 16:
+                        if k == "1|11111111" and hsh(x, y, self.seed) < 26:
                             name = ("crack", "boulders", "tuft", "juniper", "ivy_top")[hsh(x, y, 5) % 5]
                             self.set(x, y, *self.cat.named("crag_detail", name))
                             self.shapes_used["crag"].add(k)
@@ -298,11 +299,37 @@ class Map:
                                                    "pebbles" if hsh(x, y, 3) < 12 else "plain"))
                 elif c == "F":
                     pass   # woods: filled below
+                elif c == "*":
+                    self.set(x, y, *self.cat.named("meadow", ("white", "yellow")[hsh(x, y, 2) % 2]))
                 elif c == "@":
                     self.set(x, y, GRASS, ".")
                 else:
                     raise ValueError(f"{self.name}: unknown ground {c!r} at {x},{y}")
         self.woods()
+        self.decorate()
+
+    def decorate(self, rate=7):
+        """Scatter wildflowers, tussocks and aethos's red anemones through open
+        grass, so no stretch of it is bare."""
+        if not self.cat.has("meadow"):
+            return
+        for y in range(self.h):
+            for x in range(self.w):
+                if self.mt[y][x] != GRASS or (x, y) in self.stamped or self.ch[y][x] != ".":
+                    continue
+                if (x, y) in self.no_decor:
+                    continue
+                h = hsh(x, y, self.seed + 17)
+                if h >= rate:
+                    continue
+                if y in self.aethos_rows:
+                    self.set(x, y, 0x004, ".")
+                    continue
+                pick = hsh(x, y, 23) % 4
+                if pick == 3:
+                    self.set(x, y, 0x004, ".")
+                else:
+                    self.set(x, y, *self.cat.named("meadow", ("white", "yellow", "tuft")[pick]))
 
     def set(self, x, y, mid, walk):
         self.mt[y][x] = mid
@@ -371,22 +398,37 @@ class Map:
                 self.set(xx, y0, SHADE, "X")
             return
         if n == 2:
-            for cy in range(2):
+            # two young firs side by side (an oak, now and then)
+            if False:
+                for cy in range(2):
+                    for i in range(2):
+                        self.set(x + i, y0 + cy, *self.cat.cell("oak_shade", i, cy))
+            else:
                 for i in range(2):
-                    self.set(x + i, y0 + cy, *self.cat.cell("oak_shade", i, cy))
+                    self.set(x + i, y0, *self.cat.cell("fir_young_shade", 0, 0))
+                    self.set(x + i, y0 + 1, *self.cat.cell("fir_young_shade", 0, 1))
             return
         kind = "fir" if hsh(x, y0, self.seed + 1) < 62 else "fir_b"
         stack = "fir_stack" if kind == "fir" else "fir_stack_b"
         # the first spire goes on the grass above the woods when it can
         above_ok = self._spire_ok(x, y0, 2)
         t = y0 - 1 if (above_ok and (y1 - (y0 - 1)) % 2 == 0) else (y0 if (y1 - y0) % 2 == 0 else y0 + 1)
+        end = y1
+        # Every other column pair stands a row lower, so the woods don't line up
+        # in ranks: its last base ends a row early and the shade shows below it.
+        if (x // 2) % 2 == 1 and n >= 5:
+            t, end = t + 1, y1 - 1
         for yy in range(y0, t):
             for xx in (x, x + 1):          # a leftover row on top: the woods' shade
+                self.set(xx, yy, SHADE, "X")
+        for yy in range(end + 1, y1 + 1):
+            for xx in (x, x + 1):          # ... and below
                 self.set(xx, yy, SHADE, "X")
         if t >= 0:
             for i, xx in enumerate((x, x + 1)):
                 self.set(xx, t, *self.cat.cell(kind if t < y0 else kind + "_shade", i, 0))
         r = t + 1
+        y1 = end
         while r + 1 <= y1:
             for i, xx in enumerate((x, x + 1)):
                 self.set(xx, r, *self.cat.cell(kind + "_shade", i, 1))

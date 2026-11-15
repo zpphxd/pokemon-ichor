@@ -1166,9 +1166,9 @@
 // end gTileset_TempleDemeter
 
 // gTileset_Kithairon, gTileset_Kronia, gTileset_KithaironCave (Ichor: the Kithairon crossing), written by tools/ichor/art/kithairon_build.py
-#define METATILE_Kithairon_OldVines             0x2B4
-#define METATILE_Kithairon_OldVines_B           0x2B5
-#define METATILE_Kithairon_OldVines_Stumps      0x2B6
+#define METATILE_Kithairon_OldVines             0x2B8
+#define METATILE_Kithairon_OldVines_B           0x2B9
+#define METATILE_Kithairon_OldVines_Stumps      0x2BA
 #define METATILE_Kithairon_Barrier_W            0x2A6
 #define METATILE_Kithairon_Barrier_E            0x2A7
 #define METATILE_KithaironCave_Brazier_ColdTop      0x220

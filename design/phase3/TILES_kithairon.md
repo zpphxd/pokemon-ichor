@@ -73,8 +73,8 @@ aethos is repainted.
 
 | Tileset | Tiles | Metatiles |
 |---|---|---|
-| `gTileset_Kithairon` | 468 of 504 | 280 of 512 |
-| `gTileset_Kronia` | 415 of 504 | 248 of 512 |
+| `gTileset_Kithairon` | 479 of 504 | 288 of 512 |
+| `gTileset_Kronia` | 427 of 504 | 256 of 512 |
 | `gTileset_KithaironCave` | 63 of 504 | 48 of 512 |
 
 ## `gTileset_Kithairon`: Route 6, Eleutherai and Mt. Kithairon
@@ -93,13 +93,13 @@ aethos is repainted.
 
 `path`, 8 wide by 3 tall. The limestone road and its goat-track branches, scalloped where they meet the grass (agros's painter). Names are blob shape keys.
 
-23 shapes, from 0x218; the interior `1|11111111` is 0x218.
+19 shapes, from 0x218; the interior `1|11111111` is 0x218.
 
 #### Crags: grey rock with a south face
 
 `crag`, 8 wide by 5 tall. Kithairon's grey limestone, seen from above with its south face showing, on aethos grass. Fill any region with it: the face appears along every south edge and the rock casts a shadow on the grass. Impassable. Names are blob shape keys.
 
-34 shapes, from 0x230; the interior `1|11111111` is 0x230.
+35 shapes, from 0x230; the interior `1|11111111` is 0x230.
 
 #### Water with a pebbly bank (pools, the Asopos)
 
@@ -262,6 +262,18 @@ Borrowed ground: shade at 0,0, 0,1.
 
 Borrowed ground: shade at 0,0, 0,1, 1,0, 1,1.
 
+#### Meadow flowers and a tussock
+
+`meadow`, 3 wide by 1 tall. Walkable. Scatter through open grass with aethos's red anemones (0x004): `white` narcissus, `yellow` mountain crocus, `tuft` a tussock.
+
+```text
+0x2B0 0x2B1 0x2B2   . . .
+```
+
+Pieces: `white` 0x2B0, `yellow` 0x2B1, `tuft` 0x2B2.
+
+Borrowed ground: grass at 0,0, 1,0, 2,0.
+
 ### The god's vines: trellises, the old vines, the press, the cart
 
 #### Vine row on a trellis (east-west)
@@ -269,10 +281,10 @@ Borrowed ground: shade at 0,0, 0,1, 1,0, 1,1.
 `trellis`, 4 wide by 1 tall. A row of the god's vines. `W` and `E` end the row with a post; `M` and `grapes` repeat between (mix them). Rows block: leave a lane between rows, or plant tall grass there.
 
 ```text
-0x2B0 0x2B1 0x2B2 0x2B3   X X X X
+0x2B3 0x2B4 0x2B5 0x2B6   X X X X
 ```
 
-Pieces: `W` 0x2B0, `M` 0x2B1, `grapes` 0x2B2, `E` 0x2B3.
+Pieces: `W` 0x2B3, `M` 0x2B4, `grapes` 0x2B5, `E` 0x2B6.
 
 Borrowed ground: grass at 0,0, 1,0, 2,0, 3,0.
 
@@ -281,10 +293,10 @@ Borrowed ground: grass at 0,0, 1,0, 2,0, 3,0.
 `old_vines`, 3 wide by 1 tall. On borrowed road. `vines` and `vines_b` alternate across the road and block; when Demeter's Sickle cuts them, swap each for `stumps` (walkable): METATILE_Kithairon_OldVines_* and _Stumps.
 
 ```text
-0x2B4 0x2B5 0x2B6   X X .
+0x2B8 0x2B9 0x2BA   X X .
 ```
 
-Pieces: `vines` 0x2B4, `vines_b` 0x2B5, `stumps` 0x2B6.
+Pieces: `vines` 0x2B8, `vines_b` 0x2B9, `stumps` 0x2BA.
 
 Borrowed ground: path at 0,0, 1,0, 2,0.
 
@@ -293,8 +305,8 @@ Borrowed ground: path at 0,0, 1,0, 2,0.
 `press`, 3 wide by 2 tall. A treading floor of dressed stone, purple with years of must, draining through a spout into a sunken vat. Its sign is the press ("Tread barefoot...").
 
 ```text
-0x2B8 0x2B9 0x2BA   X X X
-0x2C0 0x2C1 0x2C2   X X X
+0x2BB 0x2BC 0x2BD   X X X
+0x2C3 0x2C4 0x2C5   X X X
 ```
 
 Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1.
@@ -304,8 +316,8 @@ Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1.
 `cart`, 3 wide by 2 tall. Tipped onto its axle on the third terrace: a cart of amphorae for the Dionysia, its east wheel off and lying flat. The driver stands beside it.
 
 ```text
-0x2BB 0x2BC 0x2BD   X X X
-0x2C3 0x2C4 0x2C5   X X X
+0x2C0 0x2C1 0x2C2   X X X
+0x2C8 0x2C9 0x2CA   X X X
 ```
 
 Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1.
@@ -329,24 +341,24 @@ Borrowed ground: path at 0,0, 1,0.
 `fort`, 7 wide by 4 tall. A wall run is W0 over W1: L, then M repeated, then R. A tower (T0 over T1 over T2, 2 wide) stands in a run's place with its T0 row above the coping. The gate is gate_* over gateF_* (3 wide): the passage is the middle column, its lintel drawn over the player. `side` is a wall seen from above, running north; `side_foot` ends it. `door` (a W1 cell) is the watch-house's door; `slit` an arrow slit for W0. `court` is the parade ground's beaten earth (walkable).
 
 ```text
-0x2C8 0x2C9 0x2CA 0x2CB 0x2CC 0x2CD 0x2CE   X X X X X X X
-0x2D0 0x2D1 0x2D2 0x2D3 0x2D4 0x2D5 0x2D6   X X X D X X X
-0x2D8 0x2D9 0x2DA 0x2DB 0x2DC 0x2DD 0x2DE   X T X . X X X
-0x2E0 0x2E1 0x2E2 0x2E3 0x2E4 0x2E5 0x2E6   X . X X X X X
+0x2D0 0x2D1 0x2D2 0x2D3 0x2D4 0x2D5 0x2D6   X X X X X X X
+0x2D8 0x2D9 0x2DA 0x2DB 0x2DC 0x2DD 0x2DE   X X X D X X X
+0x2E0 0x2E1 0x2E2 0x2E3 0x2E4 0x2E5 0x2E6   X T X . X X X
+0x2E8 0x2E9 0x2EA 0x2EB 0x2EC 0x2ED 0x2EE   X . X X X X X
 ```
 
-Pieces: `W0_L` 0x2C8, `W0_M` 0x2C9, `W0_R` 0x2CA, `slit` 0x2CB, `W1_L` 0x2D0, `W1_M` 0x2D1, `W1_R` 0x2D2, `door` 0x2D3, `side` 0x2CC, `side_foot` 0x2D4, `T0_L` 0x2CD, `T0_R` 0x2CE, `T1_L` 0x2D5, `T1_R` 0x2D6, `T2_L` 0x2DD, `T2_R` 0x2DE, `gate_L` 0x2D8, `gate_M` 0x2D9, `gate_R` 0x2DA, `gateF_L` 0x2E0, `gateF_M` 0x2E1, `gateF_R` 0x2E2, `court` 0x2DB.
+Pieces: `W0_L` 0x2D0, `W0_M` 0x2D1, `W0_R` 0x2D2, `slit` 0x2D3, `W1_L` 0x2D8, `W1_M` 0x2D9, `W1_R` 0x2DA, `door` 0x2DB, `side` 0x2D4, `side_foot` 0x2DC, `T0_L` 0x2D5, `T0_R` 0x2D6, `T1_L` 0x2DD, `T1_R` 0x2DE, `T2_L` 0x2E5, `T2_R` 0x2E6, `gate_L` 0x2E0, `gate_M` 0x2E1, `gate_R` 0x2E2, `gateF_L` 0x2E8, `gateF_M` 0x2E9, `gateF_R` 0x2EA, `court` 0x2E3.
 
 #### The god's roofless temple: columns and the empty plinth
 
 `temple`, 8 wide by 2 tall. On borrowed road paving (the floor is aethos's limestone patch), with `_g` copies on grass for the columns that stand outside it. A standing column is `col_top` over `col` (its capital drawn over the player). `plinth` is the empty plinth (beat 27): put its sign there. `broom` is Oinoe's swept step with her broom leaning on it.
 
 ```text
-0x2E8 0x2E9 0x2EA 0x2EB 0x2EC 0x2ED 0x2EE 0x2EF   T . . . T . . .
-0x2F0 0x2F1 0x2F2 0x2F3 0x2F4 0x2F5 0x2F6 0x2F7   X X X X X X X .
+0x2F0 0x2F1 0x2F2 0x2F3 0x2F4 0x2F5 0x2F6 0x2F7   T . . . T . . .
+0x2F8 0x2F9 0x2FA 0x2FB 0x2FC 0x2FD 0x2FE 0x2FF   X X X X X X X .
 ```
 
-Pieces: `col_top` 0x2E8, `col` 0x2F0, `stump` 0x2F1, `drum` 0x2F2, `plinth` 0x2F3, `col_top_g` 0x2EC, `col_g` 0x2F4, `stump_g` 0x2F5, `drum_g` 0x2F6, `broom` 0x2F7.
+Pieces: `col_top` 0x2F0, `col` 0x2F8, `stump` 0x2F9, `drum` 0x2FA, `plinth` 0x2FB, `col_top_g` 0x2F4, `col_g` 0x2FC, `stump_g` 0x2FD, `drum_g` 0x2FE, `broom` 0x2FF.
 
 Borrowed ground: grass at 4,0, 4,1, 5,0, 5,1, 6,0, 6,1, 7,0; path at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1, 3,0, 3,1, 7,1.
 
@@ -367,10 +379,10 @@ Borrowed ground: sea at 0,0, 1,0.
 `pentheus_fir`, 3 wide by 4 tall. An enormous old fir, one great branch torn away high up (beat 28). The top row is its spire, drawn over the player. Put the landmark's sign on its bottom middle cell.
 
 ```text
-0x2F8 0x2F9 0x2FA   T T T
-0x300 0x301 0x302   X X X
+0x300 0x301 0x302   T T T
 0x308 0x309 0x30A   X X X
 0x310 0x311 0x312   X X X
+0x318 0x319 0x31A   X X X
 ```
 
 Borrowed ground: grass at 0,0, 0,1, 0,2, 0,3, 1,0, 1,1, 1,2, 1,3, 2,0, 2,1, 2,2, 2,3.
@@ -382,22 +394,22 @@ Borrowed ground: grass at 0,0, 0,1, 0,2, 0,3, 1,0, 1,1, 1,2, 1,3, 2,0, 2,1, 2,2,
 `roof_tile`, 3 wide by 2 tall. Red Laconian tiles. Repeat the middle column for a wider house.
 
 ```text
-0x2FB 0x2FC 0x2FD   X X X
 0x303 0x304 0x305   X X X
+0x30B 0x30C 0x30D   X X X
 ```
 
-Pieces: `R0_L` 0x2FB, `R0_M` 0x2FC, `R0_R` 0x2FD, `R1_L` 0x303, `R1_M` 0x304, `R1_R` 0x305.
+Pieces: `R0_L` 0x303, `R0_M` 0x304, `R0_R` 0x305, `R1_L` 0x30B, `R1_M` 0x30C, `R1_R` 0x30D.
 
 #### Wall rows: upper and lower (on the socle)
 
 `wall`, 3 wide by 2 tall. Plain plaster. Every window, door and extra below is a W0 or W1 M cell, so it can stand anywhere between the corners.
 
 ```text
-0x30B 0x30C 0x30D   X X X
 0x313 0x314 0x315   X X X
+0x31B 0x31C 0x31D   X X X
 ```
 
-Pieces: `W0_L` 0x30B, `W0_M` 0x30C, `W0_R` 0x30D, `W1_L` 0x313, `W1_M` 0x314, `W1_R` 0x315.
+Pieces: `W0_L` 0x313, `W0_M` 0x314, `W0_R` 0x315, `W1_L` 0x31B, `W1_M` 0x31C, `W1_R` 0x31D.
 
 #### Upper-wall cells: windows and garlic
 
@@ -434,12 +446,12 @@ The same structures at the same ids as in `gTileset_Kithairon`'s core, above.
 `feast_table`, 5 wide by 3 tall. Row 0, the awning: C_L, C_M (repeat, mixing C_M2 and C_M3 for the poles' sag), C_R. Row 1, the table under its hem: T_L, then any mix of T_bread, T_figs and T_jars, then T_R. Row 2 holds benches for the row below a table: B_L, B_M..., B_R, or B_one alone. Everything blocks; people sit on the benches (put the objects there).
 
 ```text
-0x2B0 0x2B1 0x2B2 0x2B3 0x2B4   X X X X X
-0x2B8 0x2B9 0x2BA 0x2BB 0x2BC   X X X X X
-0x2C0 0x2C1 0x2C2 0x2C3 0x2C4   X X X X .
+0x2B3 0x2B4 0x2B5 0x2B6 0x2B7   X X X X X
+0x2BB 0x2BC 0x2BD 0x2BE 0x2BF   X X X X X
+0x2C3 0x2C4 0x2C5 0x2C6 0x2C7   X X X X .
 ```
 
-Pieces: `C_L` 0x2B0, `C_M` 0x2B1, `C_M2` 0x2B2, `C_M3` 0x2B3, `C_R` 0x2B4, `T_L` 0x2B8, `T_bread` 0x2B9, `T_figs` 0x2BA, `T_jars` 0x2BB, `T_R` 0x2BC, `B_L` 0x2C0, `B_M` 0x2C1, `B_R` 0x2C2, `B_one` 0x2C3.
+Pieces: `C_L` 0x2B3, `C_M` 0x2B4, `C_M2` 0x2B5, `C_M3` 0x2B6, `C_R` 0x2B7, `T_L` 0x2BB, `T_bread` 0x2BC, `T_figs` 0x2BD, `T_jars` 0x2BE, `T_R` 0x2BF, `B_L` 0x2C3, `B_M` 0x2C4, `B_R` 0x2C5, `B_one` 0x2C6.
 
 Borrowed ground: grass at 0,0, 0,2, 1,0, 1,2, 2,0, 2,2, 3,0, 3,2, 4,0, 4,2.
 
@@ -448,9 +460,9 @@ Borrowed ground: grass at 0,0, 0,2, 1,0, 1,2, 2,0, 2,2, 3,0, 3,2, 4,0, 4,2.
 `oven`, 3 wide by 3 tall. A beehive oven of whitewashed daub on a stone ring, its mouth glowing, loaves on a board beside it. The baker stands by it. Its ash holds a hidden Charcoal ("still warm").
 
 ```text
-0x2B5 0x2B6 0x2B7   X X X
-0x2BD 0x2BE 0x2BF   X X X
-0x2C5 0x2C6 0x2C7   X X X
+0x2B8 0x2B9 0x2BA   X X X
+0x2C0 0x2C1 0x2C2   X X X
+0x2C8 0x2C9 0x2CA   X X X
 ```
 
 Borrowed ground: grass at 0,0, 0,1, 0,2, 1,0, 1,1, 1,2, 2,0, 2,1, 2,2.
@@ -471,9 +483,9 @@ Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1.
 `big_tent`, 4 wide by 3 tall. The stewards' tent behind the stage: wide cream canvas trimmed in gold, a gold sickle painted over the flap, which is shut. "Nobody goes in." The flap (bottom row, middle) is never a door.
 
 ```text
-0x2C8 0x2C9 0x2CA 0x2CB   X X X X
-0x2D0 0x2D1 0x2D2 0x2D3   X X X X
-0x2D8 0x2D9 0x2DA 0x2DB   X X X X
+0x2CB 0x2CC 0x2CD 0x2CE   X X X X
+0x2D3 0x2D4 0x2D5 0x2D6   X X X X
+0x2DB 0x2DC 0x2DD 0x2DE   X X X X
 ```
 
 Borrowed ground: grass at 0,0, 0,1, 0,2, 1,0, 1,1, 1,2, 2,0, 2,1, 2,2, 3,0, 3,1, 3,2.
@@ -495,8 +507,8 @@ Borrowed ground: grass at 0,0, 0,1, 0,2, 1,0, 1,1, 1,2, 2,0, 2,1, 2,2, 3,0, 3,1,
 `banner`, 3 wide by 2 tall. A big banner on two poles: a golden field, people dancing, no one old, a smashed water clock in the corner and gold letters along the foot (beat 29). Its sign is on the bottom middle cell.
 
 ```text
-0x2CC 0x2CD 0x2CE   X X X
-0x2D4 0x2D5 0x2D6   X X X
+0x2D0 0x2D1 0x2D2   X X X
+0x2D8 0x2D9 0x2DA   X X X
 ```
 
 Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1.
@@ -506,10 +518,10 @@ Borrowed ground: grass at 0,0, 0,1, 1,0, 1,1, 2,0, 2,1.
 `camp_small`, 4 wide by 1 tall. `hoop` a child's hoop and stick lying in the grass (it blocks; put them out of the road), `board` the gold-painted sign on its post, `reader_L` + `reader_R` the reader's little table with wax tablets and his painted sign (TRUE READINGS. FREE.).
 
 ```text
-0x2DC 0x2DD 0x2DE 0x2DF   X X X X
+0x2F8 0x2F9 0x2FA 0x2FB   X X X X
 ```
 
-Pieces: `hoop` 0x2DC, `board` 0x2DD, `reader_L` 0x2DE, `reader_R` 0x2DF.
+Pieces: `hoop` 0x2F8, `board` 0x2F9, `reader_L` 0x2FA, `reader_R` 0x2FB.
 
 Borrowed ground: grass at 0,0, 1,0, 2,0, 3,0.
 

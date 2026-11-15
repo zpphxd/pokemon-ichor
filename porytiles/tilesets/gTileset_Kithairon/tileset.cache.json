@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/kithairon/porytiles_bin/metatile_attributes.bin": "ed254acd935b22814d3de0d8a399b89b",
-  "data/tilesets/secondary/kithairon/porytiles_bin/metatiles.bin": "7a2e6b3e95638b8de6d50df6a87f9e47",
+  "data/tilesets/secondary/kithairon/porytiles_bin/metatile_attributes.bin": "0def19244a0981a20137d24bccb3f81c",
+  "data/tilesets/secondary/kithairon/porytiles_bin/metatiles.bin": "994f93f80cc4e6f469f913d67631e72c",
   "data/tilesets/secondary/kithairon/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/kithairon/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/kithairon/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/kithairon/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/kithairon/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/kithairon/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/kithairon/porytiles_bin/tiles.png": "85021569519367e4a49573f824ab67ae",
-  "data/tilesets/secondary/kithairon/porytiles_src/attributes.csv": "1953389d296ca2c356042170a05b0321",
-  "data/tilesets/secondary/kithairon/porytiles_src/bottom.png": "2f7d6952774652abbbaa47d9a55f7eea",
-  "data/tilesets/secondary/kithairon/porytiles_src/middle.png": "823f5f01ba68520861bad911dc6d321c",
-  "data/tilesets/secondary/kithairon/porytiles_src/top.png": "192d07282d3750e4df62bde8542d9acf"
+  "data/tilesets/secondary/kithairon/porytiles_bin/tiles.png": "9f7093433fb4536f8afd803dcb3573b0",
+  "data/tilesets/secondary/kithairon/porytiles_src/attributes.csv": "b22158512429532aab3c02dbcf7469dc",
+  "data/tilesets/secondary/kithairon/porytiles_src/bottom.png": "ab9c4a0694e63b5ff7f643786d710fee",
+  "data/tilesets/secondary/kithairon/porytiles_src/middle.png": "a2141bb7b3253eda54bbed2b8235f31d",
+  "data/tilesets/secondary/kithairon/porytiles_src/top.png": "4e02cc32844436441b748ab3d6796ca5"
 }

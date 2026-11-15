@@ -159,7 +159,6 @@ script Route6_EleutheraiRoad_EventScript_HeraldScene {
     setflag(FLAG_ICHOR_HIDE_ALETHEA_ROUTE6)
     setflag(FLAG_ICHOR_ACT2_BEGUN)
     setvar(VAR_TEMP_1, 1)
-    showfollower
     releaseall
 }
 

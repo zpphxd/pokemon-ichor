@@ -94,7 +94,7 @@
     },
     {
       "local_id": "LOCALID_ROUTE7_KLEON",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_SEATED",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON_FEAST",
       "x": 26,
       "y": 13,
       "elevation": 3,
@@ -132,7 +132,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route7_KroniaGrounds_EventScript_Reader",
-      "flag": "FLAG_ICHOR_KRONIA_READER_GONE"
+      "flag": "FLAG_TEMP_4"
     },
     {
       "local_id": "LOCALID_ROUTE7_READER_AFTER",
@@ -151,7 +151,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_KRONIST",
       "x": 26,
-      "y": 7,
+      "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -307,7 +307,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 39,
+      "x": 40,
       "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -428,14 +428,6 @@
     {
       "type": "sign",
       "x": 31,
-      "y": 8,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route7_KroniaGrounds_EventScript_StewardsTent"
-    },
-    {
-      "type": "sign",
-      "x": 32,
       "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
