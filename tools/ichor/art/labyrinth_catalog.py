@@ -128,21 +128,31 @@ def thread_table(data):
 
 
 def behavior_rows(data):
+    """One row per behavior: where it is, as runs of consecutive ids per piece."""
     seen = {}
     for ts, d in data.items():
         for s in d:
+            ids = []
             for c, mb in (s.get("behaviors") or {}).items():
                 if mb == "MB_NORMAL":
                     continue
                 x, y = map(int, c.split(","))
-                seen.setdefault(mb, []).append(f"{ts} `{s['key']}` 0x{s['ids'][y][x]:03X}")
+                seen.setdefault(mb, {}).setdefault(f"{ts} `{s['key']}`", []).append(s["ids"][y][x])
     rows = []
-    for mb, where in sorted(seen.items()):
-        if len(where) > 8:
-            keys = sorted({w.rsplit(" ", 1)[0] for w in where})
-            rows.append(f"| `{mb}` | every cell of " + ", ".join(keys) + " |")
-        else:
-            rows.append(f"| `{mb}` | " + ", ".join(where) + " |")
+    for mb, pieces in sorted(seen.items()):
+        parts = []
+        for piece, ids in pieces.items():
+            ids = sorted(ids)
+            runs, start, prev = [], ids[0], ids[0]
+            for v in ids[1:] + [None]:
+                if v is not None and v == prev + 1:
+                    prev = v
+                    continue
+                runs.append(f"0x{start:03X}" if start == prev else f"0x{start:03X}-0x{prev:03X}")
+                if v is not None:
+                    start = prev = v
+            parts.append(f"{piece} {', '.join(runs)}")
+        rows.append(f"| `{mb}` | " + "; ".join(parts) + " |")
     return "\n".join(rows)
 
 
@@ -228,6 +238,9 @@ tileset's catalog and the plan for both; `TILES_mychos.md` is its sister's catal
 | `img/labyrinth_scene_ring.png` | One 15 x 10 screen of a ring: corridors walled with the autotile, the thread laid from a bronze anchor ring to the player, a brazier lit in its alcove, the stair down, a cracked face, webs, glow-marks (by torchlight, the stone) |
 | `img/labyrinth_scene_ring_dark.png` | The same as the player sees it: the torch's 3.5-tile radius (flash level 3) and the brazier's zone, lit for good |
 | `img/labyrinth_scene_ring_doused.png` | The same with the torch doused (the `glow/` set): the flames, the thread faintly, Daedalus's labrys signs |
+| `img/labyrinth_scene_hunt.png`, `_hunt_night.png` | Ring V by day and by night: the loop's corridor, a skylight pool across it (sun, then moon) with the thread through it, niches and the niche shrine, a cracked wall, the fresco of steps 4-6 in a bay |
+| `img/labyrinth_scene_tomb.png` | Minos's tomb (scene F): the bier and the cap on it, the inscription, labrys stands, painted pillars, jars, dust and old footprints |
+| `img/labyrinth_scene_shaft.png` | The top of the Icarus Shaft with the `dawn/` set (scene L): the courses brightening to the lip and the morning sky |
 | `img/labyrinth_scene_workshop.png`, `_dawn.png` | Daedalus's workshop, scenes D and L (the first batch) |
 | `img/labyrinth_scene_*_pass1.png`, `_pass2` | The earlier render-and-critique passes; the unsuffixed images are the last |
 | `img/labyrinth_pieces.png`, `img/labyrinth_sheet.png` | Every structure as drawn; every metatile with its id, from the compiled tileset, on `oikos` |
@@ -323,6 +336,10 @@ How they keep to it:
   VII's antechamber until the player steps back; the antechamber can stay unthreaded.
 - **Darkness.** Rims mark every wall in the torch's radius; every brazier, the hearth, the
   pools and the lamps are landmarks. A lit brazier's zone is a lit zone (SYSTEMS.md §2).
+  The GBA's flash window shows one circle, so on a dark ("cave") map a skylight pool
+  outside the torch's radius is black like the rest: for Ring V's pools to read as light
+  from across the dark (LABYRINTH.md §5.2), make each pool's surround a lit zone, as the
+  mock `hunt_night` shows it, or give the ring a lit header with the darkness in its art.
 
 ## Weak spots and open questions
 

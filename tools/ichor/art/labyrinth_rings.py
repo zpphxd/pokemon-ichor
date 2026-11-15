@@ -29,61 +29,16 @@ ST = {"k": "lk", "1": "ls1", "2": "ls2", "3": "ls3", "4": "ls4", "5": "ls5", "6"
       "j": "lj", "w": "lw1", "d": "ld0", "D": "ld1", "g": "lg"}
 
 
-def warm_floor(cx0, cy0, r0, r1):
-    """A floor effect: lamplight round (cx0, cy0) in the cells' pixels, warm
-    within r0 and fading out by r1 (applied by on_ring_floor to both twins)."""
-    warm = {"ls4": "lj", "ls5": "lw1", "ls3": "ls4", "ls2": "ls3"}
-    half = {"ls4": "ls5", "ls3": "ls4"}
-
-    def fx(s):
-        L = s.B
-        for y in range(s.h * 16):
-            for x in range(s.w * 16):
-                d = math.hypot((x - cx0) * 0.8, y - cy0)
-                c = L.get(x, y)
-                if c is None:
-                    continue
-                if d < r0 and c in warm:
-                    L.px(x, y, warm[c])
-                elif d < r1 and c in half and (x + y) % 2 == 0:
-                    L.px(x, y, half[c])
-    return fx
-
-
-def shadow_floor(boxes):
-    """A floor effect: the shade under something standing on it."""
-    dark = {"ls4": "ls3", "ls5": "ls4", "ls3": "ls2", "lj": "ls4", "lw1": "ls5"}
-
-    def fx(s):
-        for (x0, y0, x1, y1) in boxes:
-            for y in range(y0, y1):
-                for x in range(x0, x1):
-                    c = s.B.get(x, y)
-                    if c in dark:
-                        s.B.px(x, y, dark[c])
-    return fx
-
-
-def with_fx(s, *fxs):
-    s.floor_fx = list(fxs)
-    return s
-
-
 def lay(s, odd=False):
-    """on_ring_floor plus the struct's floor effects."""
-    KIT.on_ring_floor(s, getattr(s, "floor_cells", None), odd=odd,
-                      kind=getattr(s, "floor_kind", "dark"))
-    for fx in getattr(s, "floor_fx", []):
-        fx(s)
-    return s
+    """Lay the rings' floor under a piece (its floor_cells, default all). The
+    piece itself goes in the middle layer, so its odd twin costs no tiles: no
+    light or shadow is painted into the floor under it."""
+    return KIT.on_ring_floor(s, getattr(s, "floor_cells", None), odd=odd,
+                             kind=getattr(s, "floor_kind", "dark"))
 
 
 def twins(s):
-    """ring_twins, with the floor effects redrawn on the odd twin."""
-    a, b = KIT.ring_twins(s)
-    for fx in getattr(b, "floor_fx", []):
-        fx(b)
-    return [a, b]
+    return KIT.ring_twins(s)
 
 
 # --------------------------------------------------------------------------
@@ -743,7 +698,7 @@ FR = {"k": "ink", "w": "fw", "0": "fb0", "1": "fb1", "2": "fb2", "3": "fb3", "y"
 # the five symbols of the dancing floor (LABYRINTH.md §5.7), 7 x 6, held aloft
 SYMBOLS = {
     "X": [".......", "Y.....Y", "YY.k.YY", "YYYkYYY", "YY.k.YY", "Y..k..Y"],   # double axe
-    "W": [".......", "..ww...", ".w..w..", "w....w.", "......w", "......."],   # wave
+    "W": [".www...", "w...w..", "w.ww.w.", "w..w..w", ".w....3", "..www3."],   # a curling wave
     "L": ["...w...", ".w.w.w.", ".wwwww.", "..www..", "...g...", "...g..."],   # lily
     "R": ["..rrr..", ".rYYYr.", "rYyrYYr", "rYrYrYr", ".rYYYr.", "..rrr.."],   # rosette
     "S": ["...Y...", "...Y...", "YYYwYYY", "...Y...", "...Y...", "......."],   # star

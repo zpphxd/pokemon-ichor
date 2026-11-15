@@ -118,10 +118,13 @@ class Room:
                     self.cell("marble", x, y, "marble")
         return grid
 
-    def thread(self, path, kind="dark"):
+    def thread(self, path, kind="dark", from_anchor=False):
         """Lay Ariadne's thread along a path of cells (each next to the last),
-        with the shapes the engine would draw."""
+        with the shapes the engine would draw. from_anchor: the path starts on a
+        bronze ring, which the engine never draws thread over."""
         for i, (x, y) in enumerate(path):
+            if from_anchor and i == 0:
+                continue
             conn = set()
             for j in (i - 1, i + 1):
                 if 0 <= j < len(path):
@@ -265,7 +268,7 @@ RING = ["###############",
 
 def ring(state="lit"):
     r = Room(15, 10, "labyrinth")
-    grid = r.walls(RING)
+    r.walls(RING)
     # the brazier, lit, in the alcove at the west end of the north hall
     r.floor_piece("brazier", 1, 2, cx=2, w=2)
     # the stair down, in the north hall's wall
@@ -281,10 +284,117 @@ def ring(state="lit"):
     # the anchor ring at the junction, and the thread laid from it: west along
     # the hall, down the passage, east along the corridor to the player
     r.floor_piece("anchor", 7, 3)
-    path = [(6, 3), (5, 3), (4, 3), (4, 4), (4, 5), (4, 6), (5, 6), (6, 6), (7, 6), (8, 6),
-            (9, 6), (10, 6), (11, 6)]
-    r.thread(path)
+    path = [(7, 3), (6, 3), (5, 3), (4, 3), (4, 4), (4, 5), (4, 6), (5, 6), (6, 6), (7, 6),
+            (8, 6), (9, 6), (10, 6), (11, 6)]
+    r.thread(path, from_anchor=True)
     r.sprites.append((*PLAYER, FACING["east"], True, 11, 6))
+    return r
+
+
+HUNT = ["###############",
+        "###############",
+        "###############",
+        "...............",
+        "...............",
+        "###.#####.###.#",
+        "###############",
+        "###############",
+        "###############",
+        "###############"]
+
+
+def hunt(state="day"):
+    """Ring V: the loop's north corridor, a skylight pool across it, niches to
+    duck into, a cracked wall (Minos's tomb behind it), the fresco niche."""
+    r = Room(15, 10, "labyrinth")
+    grid = r.walls(HUNT)
+    kind = "sun" if state == "day" else "moon"
+    for y in (3, 4):
+        for x in (6, 7, 8):
+            r.cell("pools", x, y, f"{kind}_{half(x, y)}")
+    # niches off the corridor's south side: their floor is ring floor, the
+    # autotiled face behind them swapped for a niche back
+    for x in (3, 9, 13):
+        r.dark(x, 5)
+        r.cell("niche", x, 6, "shrine" if x == 9 else "back")
+    # walls fix-ups: the cells either side of each niche are faces with open
+    # ends, which the autotile gives once the niche is floor
+    g2 = [list(row) for row in HUNT]
+    for x in (3, 9, 13):
+        g2[5][x] = "."
+    grid = [[ch == "#" for ch in row] for row in g2]
+    for y in range(10):
+        for x in range(15):
+            if grid[y][x] and (x, y) not in ((3, 6), (9, 6), (13, 6)):
+                r.cell("walls", x, y, KIT.classify(grid, x, y))
+    # the fresco niche in the north wall: a bay of the arcade with steps 4-6
+    for y in range(3):
+        r.put("arcade", 0, y, cx=0, cy=y, w=1)
+        r.put("arcade", 4, y, cx=0, cy=y, w=1)
+    r.put("fresco_v", 1, 0)
+    # %1, the cracked wall, at the corridor's east end... seen as a face here
+    r.cell("cracked", 11, 2, "face")
+    # the thread along the corridor, through the pool
+    path = [(x, 4) for x in range(0, 12)]
+    r.thread(path)
+    for (x, y) in path:
+        if 6 <= x <= 8:
+            r.cell("pools", x, y, f"{kind}_{half(x, y)}_" + ("h" if x < 11 else "cap_w"))
+    r.sprites.append((*PLAYER, FACING["east"], True, 11, 4))
+    return r
+
+
+def tomb():
+    """Minos's tomb (scene F): low, painted pillars, dust, the bier and the cap."""
+    r = Room(15, 10, "labyrinth")
+    rows = ["###############",
+            "###############",
+            "##...........##",
+            "##...........##",
+            "##...........##",
+            "##...........##",
+            "##...........##",
+            "##...........##",
+            "##...........##",
+            "######...######"]
+    r.walls(rows)
+    # the inscription over the bier, in the north face
+    for i, n in enumerate("lmr"):
+        r.cell("tomb_inscription", 6 + i, 1, n)
+    r.floor_piece("tomb_bier", 6, 2, w=3)
+    for x in (3, 11):
+        r.floor_piece("tomb_pillar", x, 3)
+        r.floor_piece("tomb_pillar", x, 6)
+    r.floor_cell("tomb_goods", 5, 2, "labrys_top")
+    r.floor_cell("tomb_goods", 5, 3, "labrys_base")
+    r.floor_cell("tomb_goods", 9, 2, "labrys_top")
+    r.floor_cell("tomb_goods", 9, 3, "labrys_base")
+    r.floor_cell("tomb_goods", 2, 2, "jar")
+    r.floor_cell("tomb_goods", 12, 2, "jar")
+    for (x, y, n) in ((2, 3, "drift"), (12, 3, "drift"), (4, 5, "dust"), (9, 7, "dust"),
+                      (7, 6, "prints"), (7, 8, "prints"), (2, 8, "dust"), (12, 6, "dust")):
+        r.floor_cell("tomb_goods", x, y, n)
+    # the breach the player came in by, Ring V's cracked wall broken
+    r.dark(6, 9)
+    r.dark(7, 9)
+    r.dark(8, 9)
+    r.sprites.append((*PLAYER, FACING["north"], False, 7, 7))
+    return r
+
+
+def shaft():
+    """The top of the Icarus Shaft (scene L): ten wide, the light growing."""
+    r = Room(10, 10, "labyrinth")
+    rows = ["sky", "lip", "band4", "band4", "fade4", "band3", "band3", "fade3", "band2",
+            "fade2"]
+    for y, row in enumerate(rows):
+        r.cell("icarus", 0, y, f"{row}_w")
+        for x in range(1, 9):
+            name = f"{row}_m"
+            if row == "sky" and x in (3, 7):
+                name = "sky_e"
+            r.cell("icarus", x, y, name)
+        r.cell("icarus", 9, y, f"{row}_e")
     return r
 
 
@@ -510,6 +620,12 @@ SCENES = {
                   lambda img: darkness(img, [(11 * 16 + 8, 6 * 16 - 0, 56)],
                                        [(0, 0, 9 * 16, 4 * 16)])),
     "ring_doused": (ring, "labyrinth", "glow", "black"),
+    "hunt": (lambda: hunt("day"), "labyrinth", None, None),
+    "hunt_night": (lambda: hunt("night"), "labyrinth", None,
+                   lambda img: darkness(img, [(11 * 16 + 8, 4 * 16, 56)],
+                                        [(6 * 16, 3 * 16, 9 * 16, 5 * 16)])),
+    "tomb": (tomb, "labyrinth", None, None),
+    "shaft": (shaft, "labyrinth", "dawn", None),
     "forge": (forge_scene, "mychos", None, None),
     "choros": (choros_scene, "mychos", None, None),
     "starry": (starry_scene, "mychos", None, None),

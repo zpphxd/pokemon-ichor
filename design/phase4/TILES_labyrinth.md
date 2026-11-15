@@ -23,6 +23,9 @@ tileset's catalog and the plan for both; `TILES_mychos.md` is its sister's catal
 | `img/labyrinth_scene_ring.png` | One 15 x 10 screen of a ring: corridors walled with the autotile, the thread laid from a bronze anchor ring to the player, a brazier lit in its alcove, the stair down, a cracked face, webs, glow-marks (by torchlight, the stone) |
 | `img/labyrinth_scene_ring_dark.png` | The same as the player sees it: the torch's 3.5-tile radius (flash level 3) and the brazier's zone, lit for good |
 | `img/labyrinth_scene_ring_doused.png` | The same with the torch doused (the `glow/` set): the flames, the thread faintly, Daedalus's labrys signs |
+| `img/labyrinth_scene_hunt.png`, `_hunt_night.png` | Ring V by day and by night: the loop's corridor, a skylight pool across it (sun, then moon) with the thread through it, niches and the niche shrine, a cracked wall, the fresco of steps 4-6 in a bay |
+| `img/labyrinth_scene_tomb.png` | Minos's tomb (scene F): the bier and the cap on it, the inscription, labrys stands, painted pillars, jars, dust and old footprints |
+| `img/labyrinth_scene_shaft.png` | The top of the Icarus Shaft with the `dawn/` set (scene L): the courses brightening to the lip and the morning sky |
 | `img/labyrinth_scene_workshop.png`, `_dawn.png` | Daedalus's workshop, scenes D and L (the first batch) |
 | `img/labyrinth_scene_*_pass1.png`, `_pass2` | The earlier render-and-critique passes; the unsuffixed images are the last |
 | `img/labyrinth_pieces.png`, `img/labyrinth_sheet.png` | Every structure as drawn; every metatile with its id, from the compiled tileset, on `oikos` |
@@ -121,11 +124,11 @@ Behaviors other than `MB_NORMAL`:
 
 | Behavior | On |
 |---|---|
-| `MB_ICHOR_LIGHT_POOL` | every cell of labyrinth `pools` |
-| `MB_NON_ANIMATED_DOOR` | labyrinth `arcade` 0x21C, mychos `arcade` 0x21C, mychos `dance` 0x378 |
-| `MB_NORTH_ARROW_WARP` | labyrinth `stairs` 0x234, labyrinth `stairs` 0x235, labyrinth `stairs` 0x236, labyrinth `stairs` 0x237, mychos `stairs` 0x234, mychos `stairs` 0x235, mychos `stairs` 0x236, mychos `stairs` 0x237 |
-| `MB_PC` | labyrinth `pithos` 0x2C8, labyrinth `pithos` 0x2C9, labyrinth `pithos_odd` 0x2CA, labyrinth `pithos_odd` 0x2CB |
-| `MB_SOUTH_ARROW_WARP` | labyrinth `edge` 0x225, labyrinth `edge` 0x226, mychos `edge` 0x225, mychos `edge` 0x226 |
+| `MB_ICHOR_LIGHT_POOL` | labyrinth `pools` 0x338-0x363 |
+| `MB_NON_ANIMATED_DOOR` | labyrinth `arcade` 0x21C; mychos `arcade` 0x21C; mychos `dance` 0x378 |
+| `MB_NORTH_ARROW_WARP` | labyrinth `stairs` 0x234-0x237; mychos `stairs` 0x234-0x237 |
+| `MB_PC` | labyrinth `pithos` 0x2C8-0x2C9; labyrinth `pithos_odd` 0x2CA-0x2CB |
+| `MB_SOUTH_ARROW_WARP` | labyrinth `edge` 0x225-0x226; mychos `edge` 0x225-0x226 |
 
 Braziers, the hearth, dials, seals, gates, the bell, the lift, the heal bed and the shrine
 are scripts on their cells (bg events); the beam is `Ichor_TraceBeam` (mychos).
@@ -169,8 +172,8 @@ in `src/tileset_anims.c`):
 
 | Tileset | Tiles used | Of 504 | Left |
 |---|---|---|---|
-| labyrinth | 493 | 504 | 11 |
-| mychos | 492 | 504 | 12 |
+| labyrinth | 492 | 504 | 12 |
+| mychos | 495 | 504 | 9 |
 
 The door animations own tiles 504-511, and the build fails past 504. By section (distinct
 tiles a section adds, before Porytiles packs palettes; animated tiles counted once):
@@ -181,9 +184,9 @@ tiles a section adds, before Porytiles packs palettes; animated tiles counted on
 | labyrinth | workshop | 192 |
 | labyrinth | thread | 10 |
 | labyrinth | rings | 109 |
-| labyrinth | deep | 76 |
+| labyrinth | deep | 75 |
 | mychos | house | 105 |
-| mychos | titans | 262 |
+| mychos | titans | 265 |
 | mychos | thread | 10 |
 | mychos | choros | 57 |
 | mychos | heart | 57 |
@@ -218,6 +221,10 @@ How they keep to it:
   VII's antechamber until the player steps back; the antechamber can stay unthreaded.
 - **Darkness.** Rims mark every wall in the torch's radius; every brazier, the hearth, the
   pools and the lamps are landmarks. A lit brazier's zone is a lit zone (SYSTEMS.md §2).
+  The GBA's flash window shows one circle, so on a dark ("cave") map a skylight pool
+  outside the torch's radius is black like the rest: for Ring V's pools to read as light
+  from across the dark (LABYRINTH.md §5.2), make each pool's surround a lit zone, as the
+  mock `hunt_night` shows it, or give the ring a lit header with the darkness in its art.
 
 ## Weak spots and open questions
 

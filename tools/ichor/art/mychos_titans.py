@@ -217,15 +217,16 @@ def banners():
             M.px(x0 + x, 4, "bz1")
         M.px(x0 + 1, 3, "ink")
         M.px(x0 + 14, 3, "ink")
+        # the sickle: a hooked blade on a short haft
         cloth = ["kSSSSSSSSk",
-                 "kSssssssSk",
+                 "kSss444ssk",
+                 "kss4sss4sk",
+                 "ks4ssssssk",
+                 "ks4ssssssk",
+                 "kss4sssssk",
                  "ksss44sssk",
-                 "kss4ss4ssk",
-                 "ks4ssssssk",
-                 "ks4ssssssk",
-                 "kss44ssssk",
-                 "kssss4sssk",
-                 "kssssssssk",
+                 "kssss1sssk",
+                 "kssss1sssk",
                  "kekekekekk"]
         if i == 1:
             cloth = ["kSSSSSSSSk",
@@ -335,29 +336,6 @@ def grates():
 # Ring VI: the forge
 # --------------------------------------------------------------------------
 
-def _fire_box(L, x0, y0, w, h, frame):
-    """Fire filling a box: white-hot at the bottom middle, flames licking up."""
-    for y in range(h):
-        for x in range(w):
-            t = y / max(1, h - 1)
-            cx = abs(x - (w - 1) / 2) / ((w - 1) / 2)
-            wob = math.sin((x * 1.7 + frame * 2.1)) * 0.18 + math.sin(x * 0.6 - frame * 1.3) * 0.12
-            heat = t * 1.15 - cx * 0.45 + wob
-            if heat > 0.95:
-                c = "ff3"
-            elif heat > 0.75:
-                c = "ff2"
-            elif heat > 0.5:
-                c = "ff1"
-            elif heat > 0.25:
-                c = "ff0"
-            elif heat > 0.05:
-                c = "fe1"
-            else:
-                c = "fe0"
-            L.px(x0 + x, y0 + y, c)
-
-
 def forge():
     """Hephaestus's forge, the Titans' now: a great furnace in a north wall, its
     mouth roaring (animated), bellows, coal."""
@@ -381,10 +359,10 @@ def forge():
             dome = y > 6 + 14 * (dx * dx) ** 1.2
             if not dome:
                 continue
-            brick = ((y - 6) // 3 + (x // 6)) % 2
+            # brick courses, lit from the west
             c = "fc0" if (y - 6) % 3 == 0 or (x + ((y - 6) // 3) * 3) % 6 == 0 else "fc1"
             if x < 7:
-                c = "fc1" if c == "fc0" else "fc1"
+                c = "fc1"
             if x > 40:
                 c = "fc0"
             L.px(x, y, c)
@@ -503,11 +481,11 @@ def forge_kit():
     blit(M, ["....kkkkkkkk....",
              "..kkbabababakk..",
              ".kbkkkkkkkkkkbk.",
-             "kbkiiIiiiiiiikak",
-             "kaiiiiiiiiiiiiak",
+             "kbkiiJJJJiiiikak",
+             "kaiJIiiiiIJiiiak",
              "kJkiiiiiiiiiikJk",
-             "kaiiiiiiIiiiiiak",
-             "kbkiiiiiiiiiikbk",
+             "kaiiiiIIIiiiiiak",
+             "kbkiiiiiiiiIikbk",
              ".kakiiiiiiiikak.",
              "..kkbJbbbbJbkk..",
              "....kkkkkkkk...."], {**FI, "a": "fc0", "b": "fc1", "J": "fi2"}, 32, 4)

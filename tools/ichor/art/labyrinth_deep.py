@@ -10,10 +10,7 @@
 """
 from __future__ import annotations
 
-import math
-
 import labyrinth_art as A
-import labyrinth_kit as KIT
 import labyrinth_rings as R
 from labyrinth_art import Struct, blit
 
@@ -279,29 +276,28 @@ def grave_goods():
 def _dust(M):
     """Dust as an overlay (the same on either parity): soft drifts, a heap against
     a wall, footprints."""
-    def blob(x, y, k, heavy=0.0):
-        v = (math.sin(x * 0.9 + k) + math.sin(y * 1.1 + 2 * k) +
-             math.sin((x + y) * 0.55 + 3 * k)) / 3 + heavy * (5 - y) * 0.16
-        if v > 0.55:
-            return "ls6"
-        if v > 0.2 or (v > 0.05 and (x + y) % 2 == 0):
+    # soft drifts that thin out toward the cell's edges, so a dusty cell reads
+    # as a patch of dust and not a square; mirror-symmetric, so each is one or
+    # two tiles flipped
+    def soft(x, y, cx, cy, rx, ry):
+        d = ((abs(x - 7.5) - cx) / rx) ** 2 + ((y - cy) / ry) ** 2
+        if d < 0.35:
+            return "ls6" if (int(abs(x - 7.5)) + y) % 3 == 0 else "ls5"
+        if d < 0.75:
+            return "ls5"
+        if d < 1.0 and (int(abs(x - 7.5)) + y) % 2 == 0:
             return "ls5"
         return None
-    # three dust tiles, shared by the three cells (light, light, heaped)
-    tiles = {k: [[blob(x, y, s, h) for x in range(8)] for y in range(8)]
-             for k, s, h in (("a", 1, 0), ("b", 4, 0), ("h", 2, 1))}
-    lay_out = {(2, 0): ("a", "b", "b", "a"), (1, 1): ("h", "h", "a", "b"),
-               (2, 1): ("b", "a", "a", "b")}
-    for (cx, cy), quads in lay_out.items():
-        for q, k in enumerate(quads):
-            ox, oy = cx * 16 + (q % 2) * 8, cy * 16 + (q // 2) * 8
-            t = tiles[k]
-            for y in range(8):
-                for x in range(8):
-                    c = t[y][7 - x] if (k == "h" and q == 1) else t[y][x]
-                    if c:
-                        M.px(ox + x, oy + y, c)
-    for (cx, cy, kind) in ((2, 1, "prints"),):
+    for (cx, cy, kind) in ((2, 0, "dust"), (1, 1, "drift"), (2, 1, "prints")):
+        for y in range(16):
+            for x in range(16):
+                if kind == "drift":
+                    # heaped along the wall to the north, in a long low bank
+                    c = soft(x, y, 3.0, -1.0, 6.5, 6.0)
+                else:
+                    c = soft(x, y, 1.0, 7.5, 6.0, 6.0)
+                if c:
+                    M.px(cx * 16 + x, cy * 16 + y, c)
         if kind == "prints":
             # two bare footprints walking north through it
             for (fx, fy) in ((4, 9), (9, 2)):
@@ -431,14 +427,15 @@ def icarus():
 
 
 def _sky(x, y):
-    """Dawn straight up the shaft: pale blue; `sky_e` carries a pink streak of
-    cloud (lay it wherever a cloud should be)."""
+    """Dawn straight up the shaft, in the dawn light's own colors (ld1, lw1,
+    ld0: the ones the `dawn/` set keeps bright): a pale morning; `sky_e`
+    carries a streak of gold-lit cloud (lay it wherever a cloud should be)."""
     for (cy, a, b) in ((4, 34, 45), (10, 37, 42)):
         if y == cy and a <= x <= b:
-            return "fp"
+            return "lw1"
         if y == cy + 1 and a + 2 <= x <= b - 1:
-            return "fw"
-    return "fb3"
+            return "ld0"
+    return "ld1"
 
 
 def build():

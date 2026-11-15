@@ -207,33 +207,11 @@ def draw_thread(L, x0, y0, shape):
             L.px(x0 + x, y0 + y, "lt1")
 
 
-def floor_with_twins(key, title, kind, half, behavior=None, notes=""):
-    """A threadable floor cell and its ten thread twins, in a row of 11 cells
-    (the struct is packed 8 wide by the caller, so ids run on)."""
-    s = Struct(key, title, 11, 1, walk=["." * 11], section="thread", notes=notes)
-    for i in range(11):
-        if kind == "marble":
-            marble_slab(s.B, i * 16, 0)
-        else:
-            dark_slab(s.B, i * 16, 0, half, kind)
-        if i:
-            draw_thread(s.M, i * 16, 0, SHAPES[i - 1])
-        if behavior:
-            s.behaviors[(i, 0)] = behavior
-    s.names = {"floor": (0, 0)}
-    for i, sh in enumerate(SHAPES, 1):
-        s.names[sh] = (i, 0)
-    return s
-
-
-class Run:
-    """Several floors with their twins, laid as one 8-wide block so each floor's
-    ids run on: the floor at n, its ten twins at n + 1 ... n + 10."""
-
-
 def thread_block(key, title, floors, notes="", section="thread"):
-    """floors: [(name, kind, half, behavior)]. One struct 8 wide, the runs of 11
-    one after another in reading order."""
+    """Several floors with their twins as one struct 8 wide, so each floor's ids
+    run on: the floor at n, its ten twins at n + 1 ... n + 10. floors: [(name,
+    kind, half, behavior)], kind a FLOORS name, "marble", or a painter
+    f(layer, x0, y0) for a floor that covers its cell (no parity)."""
     n = len(floors) * 11
     h = (n + 7) // 8
     s = Struct(key, title, 8, h, walk=["." * 8] * h, section=section, notes=notes)
@@ -480,24 +458,24 @@ def anchor():
                      "its cell with `Ichor_AddThreadAnchor`. Walkable; thread is never drawn "
                      "over it. `anchor_odd` where x + y is odd.")
     on_ring_floor(s)
-    blit(s.M, ["....kkkkkkk.....",
-               "...k1111111k....",
-               "..k100000001k...",
-               ".k10kk222kk01k..",
-               ".k1k2334332k1k..",
-               ".k1k34kkk43k1k..",
-               ".k1k3k111k3k1k..",
-               ".k1k2k111k2k1k..",
-               ".k1k2kk1kk2k1k..",
-               ".k1kk22222kk1k..",
-               "..k1kkkkkkk1k...",
-               "...k1111111k....",
-               "....kkkkkkk.....",
+    # a heavy bronze ring lying flat, the floor showing through it, hung from
+    # a staple let into the stone
+    blit(s.M, ["......kkkk......",
+               ".....k4432k.....",
+               "......kkkk......",
+               "....kkk33kkk....",
+               "...k44333221k...",
+               "..k43kk..kk21k..",
+               ".k43k......k21k.",
+               ".k4k........k1k.",
+               ".k3k........k1k.",
+               ".k3k........k0k.",
+               ".k32k......k10k.",
+               "..k21kk..kk10k..",
+               "...k21111100k...",
+               "....kkkkkkkk....",
                "................",
-               "................",
-               "................"], BZ, 1, 2)
-    # the staple, across the ring's top
-    blit(s.M, ["k44k", "k22k"], BZ, 6, 2)
+               "................"], BZ, 0, 1)
     s.names = {"ring": (0, 0)}
     return ring_twins(s)
 
@@ -537,9 +515,10 @@ def stairs():
                     nose = (y - 5) % 2 == 1
                     if down:
                         # steps dropping away: the nearest (lowest row) lit,
-                        # each farther one darker
-                        shade = ["lk", "lk", "ls1", "ls1", "ls2"][min(step, 4)]
-                        c = {"lk": "ls1", "ls1": "ls2", "ls2": "ls3"}[shade] if nose else shade
+                        # each farther one darker, into the black
+                        shade = ["lk", "lk", "ls1", "ls2", "ls3"][min(step, 4)]
+                        c = {"lk": "ls1", "ls1": "ls2", "ls2": "ls3", "ls3": "ls5"}[shade] \
+                            if nose else shade
                     else:
                         # steps climbing: each nosing lit from the lamps above
                         shade = ["ls3", "ls3", "ls4", "ls4", "ls5"][min(step, 4)]

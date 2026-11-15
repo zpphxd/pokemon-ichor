@@ -19,8 +19,6 @@ The house (rows 0-12) and the thread section (rows 36-38) are the same ids in
 both tilesets.
 """
 
-FLOOR_FACE_KINDS = ("open", "cont", "inner")
-
 
 def top_name(n, w, e, inner):
     sides = "".join(c for c, v in (("n", n), ("w", w), ("e", e)) if v)
