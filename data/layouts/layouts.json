@@ -9697,6 +9697,72 @@
       "border_filepath": "data/layouts/Melos_BoathouseLoft/border.bin",
       "blockdata_filepath": "data/layouts/Melos_BoathouseLoft/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MELOS",
+      "name": "Melos_Layout",
+      "width": 32,
+      "height": 34,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Melos",
+      "border_filepath": "data/layouts/Melos/border.bin",
+      "blockdata_filepath": "data/layouts/Melos/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE22_CRETAN_SEA",
+      "name": "Route22_CretanSea_Layout",
+      "width": 80,
+      "height": 30,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Melos",
+      "border_filepath": "data/layouts/Route22_CretanSea/border.bin",
+      "blockdata_filepath": "data/layouts/Route22_CretanSea/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE22_MYRTOAN_SEA",
+      "name": "Route22_MyrtoanSea_Layout",
+      "width": 80,
+      "height": 30,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Melos",
+      "border_filepath": "data/layouts/Route22_MyrtoanSea/border.bin",
+      "blockdata_filepath": "data/layouts/Route22_MyrtoanSea/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_KYTHERA_SKANDEIA",
+      "name": "KytheraSkandeia_Layout",
+      "width": 40,
+      "height": 30,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Skandeia",
+      "border_filepath": "data/layouts/KytheraSkandeia/border.bin",
+      "blockdata_filepath": "data/layouts/KytheraSkandeia/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE23_CRETAN_SEA",
+      "name": "Route23_CretanSea_Layout",
+      "width": 60,
+      "height": 40,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Melos",
+      "border_filepath": "data/layouts/Route23_CretanSea/border.bin",
+      "blockdata_filepath": "data/layouts/Route23_CretanSea/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_TRIREME_EUPLOIA_DECK_SOUTH",
+      "name": "TriremeEuploia_DeckSouth_Layout",
+      "width": 24,
+      "height": 16,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Trireme",
+      "border_filepath": "data/layouts/TriremeEuploia_DeckSouth/border.bin",
+      "blockdata_filepath": "data/layouts/TriremeEuploia_DeckSouth/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

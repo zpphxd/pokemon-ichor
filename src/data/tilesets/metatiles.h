@@ -496,3 +496,7 @@ const u16 gMetatileAttributes_PorytilesManaged_OikiaMelos[] = INCBIN_U16("data/t
 // Ichor: civic_kythera
 const u16 gMetatiles_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: trireme
+const u16 gMetatiles_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatile_attributes.bin");

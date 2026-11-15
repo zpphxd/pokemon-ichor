@@ -544,6 +544,8 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_ELAIA_VILLAGE] = {MAP_GROUP(MAP_ELAIA_VILLAGE), MAP_NUM(MAP_ELAIA_VILLAGE), HEAL_LOCATION_ELAIA_VILLAGE},
     [MAPSEC_KALLISTE_ROUTE_1] = {MAP_GROUP(MAP_KALLISTE_ROUTE1), MAP_NUM(MAP_KALLISTE_ROUTE1), HEAL_LOCATION_NONE},
     [MAPSEC_AKTI_TOWN] = {MAP_GROUP(MAP_AKTI_TOWN), MAP_NUM(MAP_AKTI_TOWN), HEAL_LOCATION_AKTI_TOWN},
+    // Ichor: Kythera Isle's one fly target is Skandeia, its harbor (SCRIPT.md Open questions 2).
+    [MAPSEC_KYTHERA_ISLE] = {MAP_GROUP(MAP_KYTHERA_SKANDEIA), MAP_NUM(MAP_KYTHERA_SKANDEIA), HEAL_LOCATION_KYTHERA_SKANDEIA},
 };
 
 static const u8 *const sEverGrandeCityNames[] =
@@ -1548,6 +1550,8 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
         return FlagGet(FLAG_SYS_POKEMON_GET) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_AKTI_TOWN:
         return FlagGet(FLAG_ICHOR_VISITED_AKTI) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+    case MAPSEC_KYTHERA_ISLE:
+        return FlagGet(FLAG_ICHOR_VISITED_SKANDEIA) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_EMPORION_CITY:
     case MAPSEC_ELEUSA_VILLAGE:
     case MAPSEC_THYRSA_CITY:
@@ -1557,7 +1561,6 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
     case MAPSEC_ARKADIA:
     case MAPSEC_ASTYRA:
     case MAPSEC_KALDERA:
-    case MAPSEC_KYTHERA_ISLE:
     case MAPSEC_AMNISOS:
     case MAPSEC_GYTHEION:
     case MAPSEC_LAKONIA:
@@ -2215,6 +2218,11 @@ static const struct FlyLocation sFlyLocations[] =
         .regionMapType = REGION_MAP_HOENN,
         .mapsec = MAPSEC_AKTI_TOWN,
         .flag = FLAG_ICHOR_VISITED_AKTI,
+    },
+    {
+        .regionMapType = REGION_MAP_HOENN,
+        .mapsec = MAPSEC_KYTHERA_ISLE,
+        .flag = FLAG_ICHOR_VISITED_SKANDEIA,
     },
     {
         .regionMapType = REGION_MAP_HOENN,

@@ -1876,3 +1876,19 @@ const struct Tileset gTileset_CivicKythera =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicKythera,
     .callback = NULL,
 };
+
+// Ichor: trireme, the Euploia's deck and hold. A Porytiles-managed secondary
+// built by tools/ichor/art/trireme_build.py for the aethos primary: its sea
+// cells borrow aethos's animated sea, so rebuild it whenever aethos changes.
+// (Copied byte for byte from world-act1, where the deck was built, so Act III's
+// MAP_TRIREME_EUPLOIA_DECK_SOUTH has its ship; keep one copy when both merge.)
+const struct Tileset gTileset_Trireme =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Trireme,
+    .palettes = gTilesetPalettes_PorytilesManaged_Trireme,
+    .metatiles = gMetatiles_PorytilesManaged_Trireme,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Trireme,
+    .callback = NULL,
+};

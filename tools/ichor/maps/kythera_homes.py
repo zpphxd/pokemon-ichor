@@ -86,7 +86,20 @@ OUTDOOR = {
     "falls": "MAP_KYTHERA_NERAIDA_FALLS",
     "melos": "MAP_MELOS",
 }
-DOORS = {}
+DOORS = {
+    # MAP_KYTHERA_SKANDEIA's warps (tools/ichor/maps/skandeia.py)
+    "KytheraSkandeia_Asclepeion": 0,
+    "KytheraSkandeia_Agora": 1,
+    "KytheraSkandeia_AxylosHouse": 2,
+    "KytheraSkandeia_NikareteHouse": 3,
+    "KytheraSkandeia_PerfumersHouse": 4,
+    "KytheraSkandeia_DiversHouse": 5,
+    "KytheraSkandeia_ShipwrightsHouse": 6,
+    # MAP_MELOS's warps (tools/ichor/maps/melos.py)
+    "Melos_Farmhouse": 0,
+    "Melos_KnappersHouse": 1,
+    "Melos_Boathouse": 2,
+}
 
 GROUPS = {
     "skandeia": "gMapGroup_IndoorKythera",

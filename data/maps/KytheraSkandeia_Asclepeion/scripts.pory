@@ -6,12 +6,14 @@
 // spring basin at (3..4,1..2), as the Akti Asclepeion has it for the heal
 // animation; the player talks from (5,4). The mat is (9,7).
 //
-// TODO(act3): exit to MAP_KYTHERA_SKANDEIA.
-// TODO(act3): setrespawn(HEAL_LOCATION_KYTHERA_SKANDEIA) in ON_TRANSITION, once
-// the outdoor builder adds the heal location (respawn_map this map,
-// respawn_npc LOCALID_SKANDEIA_HEALER) to src/data/heal_locations.json.
+// Entering makes Skandeia the respawn point (HEAL_LOCATION_KYTHERA_SKANDEIA,
+// in front of the door on MAP_KYTHERA_SKANDEIA; the healer is the respawn NPC).
 
-mapscripts KytheraSkandeia_Asclepeion_MapScripts {}
+mapscripts KytheraSkandeia_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_KYTHERA_SKANDEIA)
+    }
+}
 
 text KytheraSkandeia_Asclepeion_Name_Healer { "HEALER" }
 
