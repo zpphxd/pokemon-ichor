@@ -545,5 +545,59 @@ def gear():
     return s
 
 
+def flags():
+    """Dressed limestone flags for the quay's top, so the harbor reads as paved
+    stone and not as more beach (a critique pass on Skandeia). Drawn in the
+    path's own colors, so lanes and the quay edges' coping meet them softly."""
+    names = {"A": (0, 0), "B": (1, 0), "C": (2, 0), "drain": (3, 0), "ring": (4, 0),
+             "worn": (5, 0)}
+    s = struct("flags", "Quay flagstones", 6, 1, SEC, walk=["......"], names=names,
+               notes="The quay's paving: lay `A`, `B` and `C` in a staggered mix (no two of a kind "
+                     "side by side reads best), with a `drain` grate, an iron mooring `ring` let "
+                     "into a slab, and a `worn` cracked slab here and there. Walkable.")
+    B = s.B
+    # slab layouts, (x0, y0, w, h) in a 16x16 cell; joints are the gaps
+    layouts = {
+        "A": [(0, 0, 9, 7), (9, 0, 7, 7), (0, 7, 5, 9), (5, 7, 11, 9)],
+        "B": [(0, 0, 6, 8), (6, 0, 10, 8), (0, 8, 11, 8), (11, 8, 5, 8)],
+        "C": [(0, 0, 12, 6), (12, 0, 4, 6), (0, 6, 7, 10), (7, 6, 9, 10)],
+    }
+    for name, (cx, cy) in names.items():
+        ox, oy = cx * 16, cy * 16
+        lay = layouts.get(name, layouts["A" if name != "worn" else "B"])
+        for i, (x0, y0, w, h_) in enumerate(lay):
+            gray = K.h(cx * 5 + i, cy + i, 23) % 4 == 0
+            for y in range(y0, y0 + h_):
+                for x in range(x0, x0 + w):
+                    X, Y = ox + x, oy + y
+                    edge_l, edge_t = x == x0, y == y0
+                    edge_r, edge_b = x == x0 + w - 1, y == y0 + h_ - 1
+                    if edge_r or edge_b:
+                        c = "l1" if not gray else "kr1"
+                    elif edge_l or edge_t:
+                        c = "p3" if not gray else "kr3"
+                    else:
+                        k = K.h(X, Y, 29 + i) % 9
+                        c = ("kr2" if k < 2 else "kr3") if gray else ("p1" if k < 2 else "p2")
+                    B.px(X, Y, c)
+        if name == "drain":
+            put(B, ox + 4, oy + 5, [
+                "kkkkkkkk",
+                "k0k0k0kk",
+                "k0k0k0kk",
+                "k0k0k0kk",
+                "kkkkkkkk",
+            ], {"k": "kr0", "0": "kr1"})
+        elif name == "ring":
+            for a_ in range(32):
+                th = 2 * math.pi * a_ / 32
+                B.px(ox + 8 + int(round(3 * math.cos(th))), oy + 10 + int(round(2.2 * math.sin(th))), "kr0")
+            put(B, ox + 7, oy + 6, ["kk", "kk"], {"k": "kr0"})
+        elif name == "worn":
+            for (x, y) in ((3, 2), (4, 3), (4, 4), (5, 5), (6, 5), (7, 6), (11, 10), (12, 11), (12, 12)):
+                B.px(ox + x, oy + y, "l1")
+    return s
+
+
 def build():
-    return [quay(), slips(), kaiki(), rollers(), honey_boat(), trireme(), gear()]
+    return [quay(), slips(), kaiki(), rollers(), honey_boat(), trireme(), gear(), flags()]

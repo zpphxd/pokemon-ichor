@@ -93,23 +93,48 @@ STAIR_B = 13            # wall B's stair column, row 19
 THEION = (14, 10)
 
 
-def terrace(g, y_top, x0, x1, steps=(), niche=None, skip=()):
+def terrace(g, y_top, x0, x1, steps=(), niche=None, skip=(), rise=None):
     """A melos tuff terrace wall: the upper level's top row at y_top, the wall
-    one cell high below it, from x0 to x1, with stairs and a niche."""
-    for x in range(x0, x1 + 1):
-        if x in skip:
-            continue
+    one cell high below it, from x0 to x1, with stairs and a niche. `rise`
+    maps x to a row offset, so the wall steps up or down a row and follows the
+    hill instead of a ruler line: a step between two columns is sealed by the
+    walls themselves (the lower run's wall meets the higher run's), and each run
+    ends in its own corner stones."""
+    rise = rise or (lambda x: 0)
+    cols = [x for x in range(x0, x1 + 1) if x not in skip]
+    for x in cols:
+        y = y_top + rise(x)
+        left_end = x == x0 or (x - 1 in skip) or rise(x - 1) != rise(x)
+        right_end = x == x1 or (x + 1 in skip) or rise(x + 1) != rise(x)
         if x in steps:
-            g.piece("village", "top_steps", x, y_top)
-            g.piece("village", "wall_steps", x, y_top + 1)
+            g.piece("village", "top_steps", x, y)
+            g.piece("village", "wall_steps", x, y + 1)
         elif x == niche:
-            g.piece("village", "top_niche", x, y_top)
-            g.piece("village", "niche", x, y_top + 1)
+            g.piece("village", "top_niche", x, y)
+            g.piece("village", "niche", x, y + 1)
         else:
-            top = "top_L" if x == x0 else "top_R" if x == x1 else "top"
-            wall = "wall_L" if x == x0 else "wall_R" if x == x1 else "wall"
-            g.piece("village", top, x, y_top)
-            g.piece("village", wall, x, y_top + 1)
+            g.piece("village", "top_L" if left_end else "top_R" if right_end else "top", x, y)
+            g.piece("village", "wall_L" if left_end else "wall_R" if right_end else "wall", x, y + 1)
+
+
+def veins(g):
+    """Black glass veins through the scree, and the knappers' spoil heaps.
+    Each chain runs end_E, then joints, then end_W (the pieces name the sides
+    they join); only cells deep inside the slope take a vein."""
+    region = [[c == "o" for c in row] for row in PLAN]
+    chains = [
+        [(17, 5, "end_E"), (18, 5, "WE"), (19, 5, "SW"), (19, 6, "NE"), (20, 6, "WE"), (21, 6, "end_W")],
+        [(10, 5, "end_E"), (11, 5, "SW"), (11, 6, "NE"), (12, 6, "end_W")],
+        [(23, 6, "end_E"), (24, 6, "NW"), (24, 5, "SE"), (25, 5, "end_W")],
+    ]
+    for chain in chains:
+        for (x, y, name) in chain:
+            if K.blob_key(region, x, y) == "1|11111111":
+                g.piece("obsidian_veins", name, x, y)
+    for (x, y, name) in ((8, 6, "spoil"), (22, 5, "spoil"), (14, 6, "lens"), (26, 6, "lens"),
+                         (15, 5, "spoil")):
+        if K.blob_key(region, x, y) == "1|11111111":
+            g.piece("obsidian_veins", name, x, y)
 
 
 def obsidian(g):
@@ -126,22 +151,36 @@ def compose():
     K.lay_ground(g, PLAN, LEGEND)
     obsidian(g)
 
-    # ---- the slope's things: pits (the daily digs), the seam, flakes, a core
-    for (x, y, name) in ((9, 6, "pit"), (23, 5, "pit_b"), (16, 4, "pit_b"), (12, 5, "flakes"),
-                         (20, 7, "flakes"), (25, 6, "core"), (13, 7, "sacks"), (18, 5, "flakes")):
+    # ---- the slope's things: pits (the daily digs), the seam, a core, Theion's
+    # sacks, and the veins of glass with the knappers' spoil heaps
+    veins(g)
+    for (x, y, name) in ((9, 6, "pit"), (23, 5, "pit_b"), (16, 4, "pit_b"), (20, 7, "flakes"),
+                         (6, 6, "flakes"), (25, 6, "core"), (13, 7, "sacks")):
         g.piece("obsidian_bits", name, x, y)
 
-    # ---- the terraces, top down
-    terrace(g, 8, 5, 28, steps=STAIR_C)
-    terrace(g, 14, 3, 30, steps=(STAIR_A,), niche=NICHE[0])
-    terrace(g, 18, 2, 29, steps=(STAIR_B,), skip=range(FARM[0], FARM[0] + 3))
-    # Theion's sacks by wall C's stair; vines along the middle terrace's back
+    # ---- the terraces, top down. Each wall follows the hill, stepping a row up
+    # or down along its length, and each terrace grows its own crop: barley on
+    # the upper, Kentrios's field and vines on the middle, gardens below.
+    terrace(g, 8, 5, 28, steps=STAIR_C,
+            rise=lambda x: 1 if x <= 8 else -1 if 20 <= x <= 24 else 0)
+    terrace(g, 14, 3, 30, steps=(STAIR_A,), niche=NICHE[0],
+            rise=lambda x: -1 if 9 <= x <= 13 else 1 if x >= 24 else 0)
+    terrace(g, 18, 2, 29, steps=(STAIR_B,), skip=range(FARM[0], FARM[0] + 3),
+            rise=lambda x: 1 if x >= 24 else 0)
+    # Theion's sacks by wall C's stair
     g.piece("obsidian_bits", "sacks", THEION[0] - 1, THEION[1])
+    # vines on the middle terrace: a trellis by the field, and a row on the east
+    # step where the terrace widens (row 17 stays open for the path)
     for x in (9, 10, 11):
         g.piece("village", "vine" if x != 11 else "vine_end", x, 16)
-    # the barley's ragged ends: a few vines at the band's edges
-    for (x, y) in ((4, 11), (3, 12), (29, 13)):
+    for x in (23, 24, 25):
+        g.piece("village", "vine" if x != 25 else "vine_end", x, 18)
+    # the barley's ragged ends: vines at the band's edges
+    for (x, y) in ((4, 11), (3, 12), (29, 13), (28, 11)):
         g.piece("village", "vine_end", x, y)
+    # a kitchen garden below the farmhouse's terrace
+    for (x, y, k) in ((3, 20, "tl"), (4, 20, "tr"), (3, 21, "bl"), (4, 21, "br")):
+        g.set(x, y, K.TILLED[k])
 
     # ---- the houses
     g.block(K.FARMHOUSE, FARM[0], FARM[1])
@@ -192,7 +231,13 @@ def compose():
 
     # ---- greenery: the crest and the flanks
     woods = [(x, y) for y, row in enumerate(PLAN) for x, c in enumerate(row) if c == "T"]
-    g.woods(woods, seed=3, pines=0.3, cypresses=0.6)
+    def shrub(x, y):
+        # wild roses and lichened rocks between the trees
+        if K.hashed(x, y, 17) < 0.6:
+            g.piece("flowers", "briar", x, y)
+        else:
+            g.piece("rocks", "rock_grass", x, y)
+    g.woods(woods, seed=3, pines=0.3, cypresses=0.7, skip=0.15, shrubs=shrub)
     for (x, y) in ((2, 20), (6, 19), (12, 20), (21, 19), (26, 20), (24, 17)):
         if g.free(x, y):
             g.set(x, y, K.FLOWERS)

@@ -128,16 +128,31 @@ def compose():
     g.put("trireme", TRIREME[0], TRIREME[1])
     quay(g)
 
-    # ---- buildings
+    # ---- buildings: each house its own front (roofs, doves, a chimney, a vine,
+    # an outside stair, pots on the step), and Nikarete's under a tiled roof
     g.block(K.ASCLEPEION, *ASCLEPEION)
     g.block(K.AGORA, *AGORA)
     g.set(ASCLEPEION[0] + 1, ASCLEPEION[1] + 3, K.ASCLEPEION[3][1], False)
     g.set(AGORA[0] + 1, AGORA[1] + 3, K.AGORA[3][1], False)
-    g.front("long_house", *AXYLOS)
-    g.front("cube_pot", *NIKARETE)
-    g.front("cube", *PERFUMER)
-    g.front("stair_house", *DIVERS)
-    g.front("long_house", *PHEREKLOS)
+
+    def facade(x, y, rows):
+        for j, row in enumerate(rows):
+            for i, name in enumerate(row):
+                g.piece("house", name, x + i, y + j)
+    facade(*AXYLOS, [["R_L", "R_doves", "R_jar", "R_M", "R_R"],
+                     ["U_L", "U_window", "U_M", "U_vine", "U_R"],
+                     ["G_L", "pot_basil", "door_white", "G_bench", "G_R"]])
+    g.block(K.FARMHOUSE, NIKARETE[0], NIKARETE[1] - 1)          # door (16,15)
+    g.set(NIKARETE[0] + 1, NIKARETE[1] + 2, K.FARMHOUSE[3][1], False)
+    facade(*PERFUMER, [["R_L", "R_chimney", "R_R"],
+                       ["U_L", "U_window_pink", "U_R"],
+                       ["G_L", "door", "G_R"]])
+    facade(*DIVERS, [["R_L", "R_jar", "R_R"],
+                     ["U_L", "U_window", "U_R"],
+                     ["G_steps", "door_white", "G_R"]])
+    facade(*PHEREKLOS, [["R_L", "R_M", "R_chimney", "R_dove", "R_R"],
+                        ["U_L", "U_niche", "U_M", "U_window", "U_R"],
+                        ["G_L", "G_bench", "door_white", "G_shell", "G_R"]])
 
     # ---- the terrace between the street and the lower lane: its stair at 13, a spout
     for x in range(8, 20):
@@ -154,25 +169,63 @@ def compose():
             g.piece("terrace", wall, x, 19)
 
     # ---- hedges: myrtle along the gardens and the town's east side
+    # (clipped runs broken by single bushes and wild roses, so no hedge reads
+    # as a ruler line)
+    kind = {}
     for y, row in enumerate(PLAN):
         for x, c in enumerate(row):
             if c == "h":
-                left = x > 0 and PLAN[y][x - 1] == "h"
-                right = x + 1 < W and PLAN[y][x + 1] == "h"
-                name = "M" if left and right else "L" if right else "R" if left else (
-                    "bush" if (x + y) % 2 else "single")
-                g.piece("myrtle", name, x, y)
+                r = K.hashed(x, y, 51)
+                kind[(x, y)] = "briar" if r < 0.18 else "bush" if r < 0.36 else "run"
+    for (x, y), k in kind.items():
+        if k == "briar":
+            g.piece("flowers", "briar", x, y)
+        elif k == "bush":
+            g.piece("myrtle", "bush", x, y)
+        else:
+            left = kind.get((x - 1, y)) == "run"
+            right = kind.get((x + 1, y)) == "run"
+            g.piece("myrtle", "M" if left and right else "L" if right else "R" if left else "single", x, y)
 
-    # ---- the harbor: gear on the quay and the promenade
-    for (x, y, name) in ((30, 11, "bollard"), (30, 17, "bollard"), (30, 22, "bollard"),
-                         (27, 20, "nets"), (29, 12, "amphorae"), (30, 12, "crate"),
-                         (15, 10, "oars"), (21, 11, "oars"), (12, 11, "rope"),
-                         (29, 19, "rope"), (25, 21, "crate"), (28, 24, "rope"),
-                         (28, 10, "bollard"), (25, 24, "amphorae"),
-                         (26, 24, "crate"), (29, 15, "nets"), (17, 11, "oars"),
-                         (27, 17, "amphorae"), (28, 17, "crate"), (26, 18, "rope")):
+    # Nikarete's tiled roof sits where the hedge line runs
+    g.block(K.FARMHOUSE, NIKARETE[0], NIKARETE[1] - 1)
+    g.set(NIKARETE[0] + 1, NIKARETE[1] + 2, K.FARMHOUSE[3][1], False)
+
+    # ---- the quay's paving: dressed flags wherever the harbor is stone, so the
+    # quay reads at a glance; the town's lanes stay limestone path
+    for y in range(9, 26):
+        for x in range(13, 31):
+            if PLAN[y][x] not in "pB" or g.get(x, y) not in (K.PATH["c"],) + tuple(K.PATH.values()):
+                continue
+            if x < 20 and y > 11:
+                continue                          # the main street and the town
+            r = K.hashed(x, y, 31)
+            name = "A" if r < 0.36 else "B" if r < 0.7 else "C"
+            if g.get(x - 1, y) == g.m("flags", name):
+                name = {"A": "B", "B": "C", "C": "A"}[name]
+            if x == 30 and y % 5 == 1:
+                name = "ring"
+            elif K.hashed(x, y, 33) < 0.05:
+                name = "drain" if y % 2 else "worn"
+            g.piece("flags", name, x, y)
+
+    # ---- the harbor at work. The requisition: oars, crates and amphorae stacked
+    # either side of the Euploia's plank, a Titanborn on guard, the requisitioned
+    # hulls moored along the quay's south face. Bollards down the edge, nets
+    # drying where the old sailor mends them, a fish corner by the Agora with
+    # nothing to sell, and Aphrodite's shrine at the end.
+    for (x, y, name) in ((19, 10, "oars"), (20, 10, "oars"), (21, 10, "crate"), (22, 10, "amphorae"),
+                         (23, 10, "rope"), (27, 10, "crate"), (28, 10, "bollard"), (29, 10, "amphorae"),
+                         (30, 10, "oars"), (29, 12, "amphorae"), (30, 12, "crate"),
+                         (15, 10, "oars"), (12, 11, "rope"),
+                         (30, 13, "bollard"), (30, 17, "bollard"), (30, 21, "bollard"),
+                         (29, 15, "nets"), (27, 19, "nets"), (27, 20, "nets"), (29, 19, "rope"),
+                         (25, 21, "crate"), (27, 22, "crate"), (26, 22, "crate"), (25, 23, "amphorae"),
+                         (28, 24, "rope"), (26, 16, "rope"), (27, 17, "amphorae"), (28, 17, "crate")):
         g.piece("gear", name, x, y)
     g.put("shrine", 30, 24)                       # Aphrodite of the Harbor
+    for x in (21, 25, 29):
+        g.put("kaiki", x, 27, cx=0, w=3, h=2)    # requisitioned, waiting for their oars
 
     # ---- the lower town's gardens
     for (x, y, k, n) in ((8, 20, "flowers", "thrift"), (19, 21, "flowers", "petals"),
@@ -187,12 +240,12 @@ def compose():
         g.set(7, y, K.WALL["e"], True)
     g.set(5, 15, K.STELE, True)                  # THE FOAM ROAD
     g.set(6, 15, K.GRASS)
-    g.set(23, 11, K.STELE, True)                 # SKANDEIA
+    g.set(24, 11, K.STELE, True)                 # SKANDEIA
 
     # ---- the pocket beach: shells and wrack; tide rocks off the quay
     for (x, y, n) in ((13, 25, "shells"), (16, 26, "scallop"), (18, 25, "wrack")):
         g.piece("sand_decor", n, x, y)
-    for (x, y) in ((21, 28), (36, 12), (35, 24), (38, 3), (33, 18), (26, 4)):
+    for (x, y) in ((36, 12), (35, 24), (38, 3), (33, 18), (26, 4)):
         g.set(x, y, K.SEA_ROCK, True)
 
     # ---- the north bay's beach: sand under the woods, aethos's own surf edge
@@ -201,16 +254,24 @@ def compose():
         g.set(21, y, K.SAND)
         g.set(22, y, 0x125)                      # aethos beach, sea to the east
 
-    # ---- greenery: olive groves on the slopes above the town, wild woods at
-    # their edges and along the seams
+    # ---- greenery: wild olive woods on the slopes above the town, staggered,
+    # with glades, pines and cypresses; myrtle and briar where the tileset may go
+    def shrub(x, y):
+        if x >= 8 and y >= 6:
+            g.piece("myrtle" if K.hashed(x, y, 41) < 0.6 else "flowers",
+                    ("bush" if K.hashed(x, y, 43) < 0.5 else "single") if K.hashed(x, y, 41) < 0.6 else "briar",
+                    x, y)
     trees = [(x, y) for y, row in enumerate(PLAN) for x, c in enumerate(row) if c == "T"]
-    grove = {(x, y) for (x, y) in trees if (2 <= x <= 18 and y <= 4) or (1 <= x <= 10 and y >= 20)}
-    g.orchard(grove, seed=5)
-    g.woods([p for p in trees if p not in grove], seed=11, pines=0.25, cypresses=0.55)
-    # the groves are walled, so their open grass never reads as a way in
-    g.wall_h(8, 19, 5)
-    g.wall_v(7, 20, 24)
-    g.wall_h(8, 11, 25)
+    g.woods(trees, seed=11, pines=0.25, cypresses=0.7, shrubs=shrub, skip=0.16)
+    # the little garden between Axylos's and Nikarete's: myrtle, a rose, thrift
+    g.piece("myrtle", "L", 13, 13)
+    g.piece("myrtle", "R", 14, 13)
+    g.piece("flowers", "thrift", 13, 14)
+    g.piece("myrtle", "single", 14, 14)
+    g.piece("flowers", "briar", 13, 15)
+    g.piece("myrtle", "bush", 14, 15)
+    g.cypress(18, 13)
+    g.piece("flowers", "briar", 18, 15)
     return g
 
 
@@ -247,7 +308,7 @@ def specs():
         sign(SLIPS, 7, P + "Slips", "east"), sign(SLIPS, 6, P + "Slips", "east"),
         sign(30, 25, P + "HarborShrine"),
         sign(5, 15, P + "SignFoamRoad"),
-        sign(23, 11, P + "SignSkandeia"),
+        sign(24, 11, P + "SignSkandeia"),
         sign(17, 19, P + "Spout", "south"),
     ]
     coords = [trigger(STREET_HEAD, y, P + "AletheaRejoins", "VAR_TEMP_1", 1) for y in (16, 17)]
