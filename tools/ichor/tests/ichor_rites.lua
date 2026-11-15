@@ -126,8 +126,10 @@ L.start(function()
   altar("RitesTest_DemeterHeader", 1, "pomegranate", { offer = laurels > 0 and 1 or 0 })
   expect(L.itemCount(S.ITEM_POMEG_BERRY) == 1 and favor(S.ICHOR_GOD_DEMETER) == 0, "Demeter does not take the pomegranate")
 
-  -- A desecrated altar, cleansed
+  -- A desecrated altar, cleansed, though a battle just left VAR_RESULT TRUE
   local before = favor(S.ICHOR_GOD_APOLLO)
+  L.setFlag(S.FLAG_ICHOR_ALTARS_START, false)
+  L.setVar(S.VAR_RESULT, 1)
   L.runHeader("RitesTest_DesecratedHeader", { answers = { "yes" } })
   expect(L.getFlag(S.FLAG_ICHOR_ALTARS_START) and favor(S.ICHOR_GOD_APOLLO) == math.min(before + 3, 100),
          "cleansing a desecrated altar marks it and gives its god +3 Favor")
