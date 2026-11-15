@@ -51,6 +51,8 @@
 
 ## 2. Batches
 
+**On hold after batch 1** (the director, 2026-11-14): the user wants the main story finished first, through the eight Laurels and the League. Batch 1 and the far-lands tilesets already running are finished, merged and reported; batch 2 waits for the director's restart. Planning, design docs and engine asks continue meanwhile.
+
 PG-2's order: the sailing layer first, then Olympia, the Katabasis, the Labors, the Odyssey, Atlantis and the summit. The theoxenia and the legends ride along with the epics whose maps they use.
 
 | # | Batch | Maps | Engine it needs | Status |
