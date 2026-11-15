@@ -274,8 +274,9 @@ end
 function L.isTrainerBattle() return emu:read32(S.gBattleTypeFlags) & S.BATTLE_TYPE_TRAINER ~= 0 end
 local function controller(name) return emu:read32(S.gBattlerControllerFuncs) == (S[name] | 1) end
 
-local TRAINERS = { "KLEON_SNIVY", "KLEON_CYNDAQUIL", "KLEON_PIPLUP", "TITYROS", "PHYLLIS", "KOMATAS", "AGIS",
-                   "POLYEIDOS", "PETROS", "AMATHOS", "LAMPON", "PYRRHA", "AITHRA", "IONE" }
+local TRAINERS = { "KLEON_SNIVY", "KLEON_CYNDAQUIL", "KLEON_PIPLUP", "TITYROS", "THESTYLIS", "PHYLLIS", "KOMATAS",
+                   "AGIS", "POLYEIDOS", "PETROS", "AMATHOS", "MENALKAS", "THYRSIS", "LYKIDAS", "LAMPON", "PYRRHA",
+                   "AITHRA", "IONE" }
 local function defeatedSet()
   local t = {}
   for _, n in ipairs(TRAINERS) do t[n] = L.defeated(S["TRAINER_" .. n]) end
@@ -301,7 +302,9 @@ function L.battle()
         shotTaken = true
       end
       turns = turns + 1
-      if trainer then
+      -- a wild Pokémon is fled from; one that won't let the player go (Diglett's
+      -- Arena Trap on Kronion Hill) is fought after three tries
+      if trainer or turns > 3 then
         tap(K.UP); tap(K.LEFT); tap(K.A)     -- FIGHT
       else
         tap(K.DOWN); tap(K.RIGHT); tap(K.A)  -- RUN

@@ -10,7 +10,7 @@ The director assigns the ranges. Ask in your report if your range runs low.
 
 | Owner | Flags (hex) | Free now | Notes |
 |---|---|---|---|
-| The slice (director and area agents: Elaia, Route 1, Akti, the temple) | 0x020–0x1FF | 201 | |
+| The slice (director and area agents: Elaia, Route 1, Akti, the temple) | 0x020–0x1FF | 197 | 9 of them can hold a hidden item: 0x1F7–0x1FF |
 | **world-act1** (Phase 2: the crossing, Aegina, Emporion, the Sacred Way, Eleusa) | 0x200–0x2FF | 214 | |
 | **world-act2** | 0x300–0x37F | 110 | |
 | **world-act3** | 0x380–0x3FF | 121 | |
@@ -54,8 +54,9 @@ Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 1,024 (raised
 | Owner | Trainer ids | Notes |
 |---|---|---|
 | The slice | 1–14 | Full |
+| The slice, from the reserve | 22–25 | Route 1's Thestylis and Kronion Hill's three herders (MAP_DESIGN §8; director's go-ahead, 2026-11-14). Full |
 | The Frontier engine | 15–21 | The seven Hoenn Brains (`TRAINER_ANABEL` … `TRAINER_BRANDON`), kept because `gFrontierBrainInfo` reads their pic, class and name. The post-game re-themes them as the Olympiad's Brains. |
-| Reserve | 22–39 | Ask the director |
+| Reserve | 26–39 | Ask the director |
 | **world-act1** | 40–159 | |
 | **world-act2** | 160–319 and 820–849 | 820–849 added from the shared reserve (2026-11-14): Act II's script needs 182 |
 | **world-act3** | 320–499 | Includes the League |

@@ -1100,7 +1100,9 @@ ALETHEA: Don't touch that scroll. Or that one. Actually, don't touch scrolls.
 
 ## Route 1 (`MAP_KALLISTE_ROUTE1`)
 
-The road runs north from Elaia through olive groves and terraced hillside to Akti. The Kronion Hill spur branches off to the east about two-thirds of the way up. Trainer placement, south to north: Tityros (at the meadow wall's only gap, the first and easy one), Phyllis (optional, on her grove lane), Komatas (optional, on the bee terraces), Polyeidos (on the spur, guarding the way to the hill), Agis (holding the pass just north of the flock's wall gap). Three bands of tall grass cross the road and can't be walked around: just out of Elaia, in the grove narrows, and on the cove shore before the climb to Akti (tools/ichor/maps/route1.py proves it).
+The road runs north from Elaia through olive groves and terraced hillside to Akti. The Kronion Hill spur branches off to the east about two-thirds of the way up. Trainer placement, south to north: Tityros (at the meadow wall's only gap, the first and easy one), Thestylis (at the grove narrows' south mouth, her line across its narrowest row), Phyllis (optional, on her grove lane), Komatas (optional, on the bee terraces), Polyeidos (on the spur, guarding the way to the hill), Agis (holding the pass just north of the flock's wall gap). Three bands of tall grass cross the road and can't be walked around: just out of Elaia, in the grove narrows, and on the cove shore before the climb to Akti (tools/ichor/maps/route1.py proves it).
+
+The cove below the climb to Akti is the only water: its surf and fishing tables are in Part 4.
 
 | NPC | Where | Role |
 |---|---|---|
@@ -1175,6 +1177,26 @@ A hilltop sanctuary of tumbled Doric drums around a broken altar. The dig pit si
 | Dig pit, after it is cleared | The pit's floor now shows cut stone steps going down into the dark: Hecate's Torch's second gate, to the Kronion crypt (SYSTEMS.md, relic gates; D10). "Stone steps go down into the dark. You can't see a thing." / "…It still feels like something's looking up." |
 
 Post-scene NPCs: none. The grunts and Alethea are hidden.
+
+### The high pastures (the hill's south flank)
+
+Added under MAP_DESIGN.md §8 (2026-11-14). Kronion Hill is classed a dungeon (`"ichor_kind": "dungeon"` in its map.json): the summit is beat 5's story place, the flock holds the Akti road until its scene has played, and the dark stair leads down to the Kronion crypt, whose floors will join it. The rows south of the summit were only woods, kept so Route 1 sees the hill past its east edge. They are now a branch off the hill foot: three terraces stepping down to the sea cliffs, with steps both ways and a lip down beside each set.
+
+| Where | What |
+|---|---|
+| The fork at the hill foot | A herm: "Up: the old shrine. Down: the high pastures." |
+| The goat path's foot | Menalkas the shepherd, in plain view; his line closes the path |
+| The upper pasture | The shepherds' fold, with a Wooloo and a Mareep; a meadow of tall grass |
+| The spring terrace | Thyrsis sings to the spring with his back to the path (optional); Pan's shrine; olive terraces, with a Burn Heal |
+| The goat terraces | A Skiddo in the thyme; Lykidas above the only stair down through the rock band |
+| The lookout shelf | The Everstone; a Pretty Feather hidden on the tip of the point |
+
+| Object | Text |
+|---|---|
+| Pan's shrine | "A little shrine to Pan, the shepherds' god." / "Someone left him a cheese. Something has nibbled it." |
+| Fold Wooloo | "Baa?" |
+| Fold Mareep | "Mee-eep! Its fleece crackles." |
+| Skiddo | "Meh-eh! It's chewing the thyme." |
 
 ## Akti Town (`MAP_AKTI_TOWN`)
 
@@ -1695,6 +1717,60 @@ Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 ```
 
+**6. HARVESTER Thestylis.** Taking lunch up to the pickers in Phyllis's grove (Virgil's Thestylis pounds garlic and thyme for the reapers). She stands at the grove narrows' south mouth, the second checkpoint after Tityros; her line covers the narrows' narrowest row. Trainer id 22, from the director's reserve.
+```text
+Before: THESTYLIS: Lunch for the pickers! Garlic, thyme, bread. Don't even look at it.
+Defeat: THESTYLIS: You win. The bread's still mine, though. They count it.
+After:  THESTYLIS: Hear the cicadas? That means noon. That means I'm late.
+```
+```
+=== TRAINER_ICHOR_THESTYLIS ===
+Name: THESTYLIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Tandemaus
+Level: 4
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Nincada
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+```
+
+## Kronion Hill's herders, levels 6–9
+
+The high pastures' trainers, from Theocritus: Menalkas and Thyrsis keep sheep, Lykidas goats. Trainer ids 23–25, from the director's reserve. The pastures are a branch, so none of them stands on the climb to the summit.
+
+**MENALKAS the shepherd.** At the foot of the goat path, in plain view. His line closes the path.
+```text
+Before: MENALKAS: These are the high pastures. There's a toll. It's a battle.
+Defeat: MENALKAS: Toll paid. Mind the fold gate, it sticks.
+After:  MENALKAS: The sheep won't graze near the old shrine. They never have.
+```
+Rockruff Lv 6, Wooloo Lv 7 (`TRAINER_ICHOR_MENALKAS`, Shepherd, AI Check Bad Move, IVs 0).
+
+**THYRSIS the shepherd.** Singing to the spring, his back to the path (Idyll 1's singer of the sorrows of Daphnis). Optional.
+```text
+Before: THYRSIS: Shh. I'm singing to the spring. …It says it wants a battle.
+Defeat: THYRSIS: The spring liked that better than my song. Rude.
+After:  THYRSIS: I know one song. It's about Daphnis, who died of love.
+        THYRSIS: It's very long. You're lucky you won.
+```
+Igglybuff Lv 7, Mareep Lv 8 (`TRAINER_ICHOR_THYRSIS`, Shepherd, AI Check Bad Move, IVs 0).
+
+**LYKIDAS the goatherd.** Above the only stair down to the lookout shelf (Idyll 7's goatherd). His line closes the stair.
+```text
+Before: LYKIDAS: My goats found the best rock on the hill. Want it? Get past me.
+Defeat: LYKIDAS: Ha! Go on, then. Mind the edge.
+After:  LYKIDAS: Kronos swallowed a stone instead of his son, they say.
+        LYKIDAS: My goats keep finding stones like that. Down by the edge.
+```
+Mudbray Lv 8, Skiddo Lv 9 (`TRAINER_ICHOR_LYKIDAS`, Goatherd, Music Hiker, AI Check Bad Move, IVs 0).
+
 ## Titanborn grunts (Kronion Hill), levels 8–9
 
 These are earth-born types. Both grunts are scripted (`trainerbattle_no_intro`). Snivy and Piplup have the edge here. Cyndaquil players are pushed to use their Route 1 catches: Smoliv, Skiddo and Mudbray. That is deliberate.
@@ -1893,28 +1969,32 @@ Her dialogue is in beat 7. Defeat text: "There. Warm all the way through."
 | Cyndaquil (2) | starter | Typhlosion is Typhon, father of monsters |
 | Piplup (4) | starter | Empoleon wears Poseidon's trident |
 | Smoliv (9) | intro, Route 1, Phyllis | Athena's gift of the first olive tree; Elaia means "olive" |
-| Wooloo (8) | Route 1, Tityros, Aithra | Island sheep; counting sheep on the night watch |
-| Mareep (2) | Route 1, Tityros | Its line ends in Ampharos, the Golden Fleece |
-| Skiddo (6) | Route 1, hill, Komatas | Amalthea, the goat that nursed infant Zeus |
+| Wooloo (8) | Route 1, Tityros, Aithra, Menalkas, the fold | Island sheep; counting sheep on the night watch |
+| Mareep (2) | Route 1, hill, Tityros, Thyrsis, the fold | Its line ends in Ampharos, the Golden Fleece |
+| Skiddo (6) | Route 1, hill, Komatas, Lykidas | Amalthea, the goat that nursed infant Zeus |
 | Combee (4) | Route 1, Komatas | Melissa and the bees that fed Zeus honey; Komatas fed by bees |
 | Pidove (5) | Route 1, Polyeidos | Doves sacred to Aphrodite; augury birds |
-| Nincada (3) | Route 1 | Tithonus, given eternal life without youth, shrivelled to a cicada; Shedinja is the husk |
+| Nincada (3) | Route 1, Thestylis | Tithonus, given eternal life without youth, shrivelled to a cicada; Shedinja is the husk |
 | Ekans (1) | Route 1 | The guardian house-snake (oikouros ophis) of Greek homes |
-| Mudbray (7) | Route 1, hill, Kanthos | The donkey sacred to Hestia, whose bray saved her |
-| Tandemaus (9) | Route 1, Pyrrha | Apollo Smintheus, the mouse-lord |
+| Mudbray (7) | Route 1, hill, Kanthos, Lykidas | The donkey sacred to Hestia, whose bray saved her |
+| Tandemaus (9) | Route 1, Pyrrha, Thestylis | Apollo Smintheus, the mouse-lord |
 | Ponyta (1) | Route 1 (rare) | The sun-horses of Helios's chariot |
-| Hoothoot (2) | Route 1 night, Aithra | Athena's owl, the night watch |
+| Hoothoot (2) | Route 1 and hill at night, Aithra | Athena's owl, the night watch |
 | Spinarak (2) | Route 1 night, hill | Arachne the weaver, turned spider; thread motif |
-| Murkrow (2) | Route 1 night, Polyeidos | Apollo's white crow, turned black for bad news |
+| Murkrow (2) | Route 1 and hill at night, Polyeidos | Apollo's white crow, turned black for bad news |
 | Cleffa (2) | Route 1 night (rare) | Selene's moon-child |
-| Nickit (8) | Route 1 night (rare) | The Teumessian fox, fated never to be caught |
+| Nickit (8) | Route 1 and hill at night (rare) | The Teumessian fox, fated never to be caught |
 | Roggenrola (5) | hill | The stones Deucalion and Pyrrha threw, which became people |
 | Baltoy (3) | hill | Cycladic clay idols, Kalliste's own past |
 | Timburr (5) | hill | The beam-carriers who raised the old temples |
 | Diglett (1) | hill | The Spartoi, men sown from the earth |
-| Rockruff (7) | hill | Stone guard-dogs of the sanctuary |
+| Rockruff (7) | hill, Menalkas | Stone guard-dogs of the sanctuary |
 | Bronzor (4) | hill | Bronze votive mirrors buried in shrines |
 | Growlithe, Hisuian form (1/8) | hill (rare) | Laelaps, the hound fated to catch everything, turned to stone with the fox |
+| Igglybuff (2) | Thyrsis | Hypnos's lullaby: the shepherd's song that puts the flock to sleep |
+| Woobat (5) | hill at night | The daughters of Minyas, turned to bats for scorning Dionysus |
+| Gastly (1) | hill at night | Shades at the old shrine, risen from the crypt's dark |
+| Litwick (5) | hill at night (rare) | A votive lamp still burning in the ruins (setting) |
 | Geodude (1) | Petros | Earth-born stone; Gaia's children |
 | Drilbur (5) | Petros | The Titanborn dig crew |
 | Nosepass (3) | Amathos | Magnes the shepherd's lodestone, used as a fragment-finder |
@@ -1927,7 +2007,7 @@ Her dialogue is in beat 7. Defeat text: "There. Warm all the way through."
 | Munchlax (4) | Ione | Hestia takes the first and last share of the feast; Munchlax takes the rest |
 | Litleo (6) | Ione | A walking hearth-flame; a lion cub before any Nemean Lion |
 | Chansey (1) | Kydippe | The midwife's helper (setting) |
-| Magikarp (1) | fishing | Gyarados as Cetus, the sea monster Perseus slew |
+| Magikarp (1) | fishing, Akti and Route 1's cove | Gyarados as Cetus, the sea monster Perseus slew |
 | Horsea (1) | fishing | The hippocampi drawing Poseidon's chariot |
 | Krabby (1) | fishing | Karkinos, the crab Hera sent against Herakles |
 | Finizen (9) | fishing | Arion's dolphin; the pirates Dionysus turned to dolphins |
@@ -1936,6 +2016,14 @@ Her dialogue is in beat 7. Defeat text: "There. Warm all the way through."
 | Seadra, Kingler (1) | super rod | Grown hippocampus and Karkinos |
 | Dhelmise (7) | super rod (rare) | Anchors of a thousand wrecks on the wine-dark sea |
 | Tentacool (1), Wingull (3), Pelipper (3), Mantyke (4) | surfing (later) | Harbor life (setting) |
+| Wooper (2), Marill (2) | Route 1's cove, surfing (later) | Naiads of the spring where it meets the sea (setting) |
+| Psyduck (1) | Route 1's cove, surfing (later) | Zeus's headache, before Athena sprang from it |
+| Shellos (4) | Route 1's cove, surfing (later) | Proteus, who takes a new shape on every shore |
+| Tympole (5) | Route 1's cove at night (rare) | Aristophanes's Frogs: brekekekex koax koax |
+| Goldeen (1) | Route 1's cove, fishing | The spring's fish (setting) |
+| Barboach (3) | Route 1's cove, fishing | Whiscash feels earthquakes coming: Poseidon the Earth-shaker's warning |
+| Corphish (3) | Route 1's cove, fishing | Karkinos's small cousin in the stream's mouth |
+| Basculin (5) | Route 1's cove, super rod | Achelous, the river-god who wrestled Herakles |
 
 ---
 
@@ -1996,9 +2084,20 @@ Example JSON shape (slots 0–1 shown; the rest follow the same pattern):
 }
 ```
 
+## Route 1's cove (surf and fishing)
+
+The cove below the climb to Akti, where the hill's spring runs out to the sea, holds 43 reachable water cells, so it needs surf and fishing tables (MAP_DESIGN.md §8.5). Stream fish and shore birds share it. Levels stay in Kalliste's band (BALANCE.md: wild 2–9); the rods' slots rise inside it. Surf is reachable once Poseidon's Conch arrives. Both `gKallisteRoute1_Morning` and `gKallisteRoute1_Night` carry `water_mons` (`encounter_rate: 4`, slots 60/30/5/4/1) and `fishing_mons` (`encounter_rate: 30`).
+
+| Table | Morning | Night |
+|---|---|---|
+| Surf | Wooper 5–8, Wingull 5–8, Psyduck 6–9, Shellos 6–9, Marill 8–9 | Wooper 5–8, Psyduck 5–8, Shellos 6–9, Marill 6–9, Tympole 8–9 |
+| Old Rod (70/30) | Magikarp 4–7, Goldeen 4–7 | Magikarp 4–7, Barboach 4–7 |
+| Good Rod (60/20/20) | Goldeen 6–9, Barboach 6–9, Magikarp 6–9 | Barboach 6–9, Goldeen 6–9, Corphish 6–9 |
+| Super Rod (40/40/15/4/1) | Barboach 7–9, Corphish 7–9, Goldeen 8–9, Basculin 8–9, Basculin 9 | Corphish 7–9, Barboach 7–9, Basculin 8–9, Goldeen 8–9, Basculin 9 |
+
 ## Kronion Hill (the ruins summit)
 
-This needs the summit to be its own map: `MAP_KALLISTE_ROUTE1_KRONION_HILL`, base label `gKallisteRoute1KronionHill_Morning`, a single table at all hours, land `encounter_rate: 15`. The grass is patchy, among the column drums.
+This needs the summit to be its own map: `MAP_KALLISTE_ROUTE1_KRONION_HILL`, base label `gKallisteRoute1KronionHill_Morning`, land `encounter_rate: 15`. The grass is patchy, among the column drums, and in the high pastures' meadows. The Morning table serves morning, day and evening, and a Night table (`gKallisteRoute1KronionHill_Night`) was added under MAP_DESIGN.md §8.5. Slot 7 was Spinarak until the pastures were built; it moved to the night table, and Mareep from the fold took its slot.
 
 | Slot | Rate | Species | Levels |
 |---|---|---|---|
@@ -2009,10 +2108,27 @@ This needs the summit to be its own map: `MAP_KALLISTE_ROUTE1_KRONION_HILL`, bas
 | 4 | 10% | Diglett | 5–7 |
 | 5 | 10% | Smoliv | 5–7 |
 | 6 | 5% | Rockruff | 6–7 |
-| 7 | 5% | Spinarak | 5–7 |
+| 7 | 5% | Mareep | 5–7 |
 | 8 | 4% | Bronzor | 6–7 |
 | 9 | 4% | Mudbray | 6–7 |
 | 10 | 1% | Growlithe (`SPECIES_GROWLITHE_HISUI`) | 6–6 |
+| 11 | 1% | Growlithe (`SPECIES_GROWLITHE_HISUI`) | 7–7 |
+
+At night: Athena's owl, bats and a ghost out of the crypt's dark, and the augur's crows.
+
+| Slot | Rate | Species | Levels |
+|---|---|---|---|
+| 0 | 20% | Hoothoot | 5–7 |
+| 1 | 20% | Woobat | 5–7 |
+| 2 | 10% | Roggenrola | 5–7 |
+| 3 | 10% | Spinarak | 5–7 |
+| 4 | 10% | Gastly | 5–7 |
+| 5 | 10% | Baltoy | 5–7 |
+| 6 | 5% | Nickit | 6–7 |
+| 7 | 5% | Bronzor | 6–7 |
+| 8 | 4% | Diglett | 6–7 |
+| 9 | 4% | Murkrow | 6–7 |
+| 10 | 1% | Litwick | 7–7 |
 | 11 | 1% | Growlithe (`SPECIES_GROWLITHE_HISUI`) | 7–7 |
 
 **If the hill stays on the Route 1 map**, put these in Route 1's `_Morning` slots 8–11 instead: Timburr 4%, Roggenrola 4%, Baltoy 1%, Hisuian Growlithe 1%. Drop Mudbray and Tandemaus to night only. This keeps Fighting and Rock options for Snivy and Cyndaquil players before Ione.
@@ -2158,6 +2274,7 @@ Flag naming: visible item balls use `FLAG_ITEM_ICHOR_<MAP>_<ITEM>`, hidden items
 | Elaia | Potion | visible | beside the olive press |
 | Elaia | Honey | hidden | at Mom's beehives behind the house; Glykera swaps her honey cakes for it |
 | Elaia | Relic Copper | hidden | in the well ("a coin someone wished on") |
+| Elaia | X Speed | hidden | in the dead-end corner past the race start |
 | Elaia, Kydippe's house | Oran Berry ×2 | gift | — |
 | Elaia, Glykera's house | Old Gateau ×2 (honey cakes) | swap, for the Honey from Melitta's hives | — |
 | Elaia, Glykera's house | Finizen "Arion" | in-game trade with Kimon, for a Wooloo; after beat 4 | — |
@@ -2176,6 +2293,9 @@ Flag naming: visible item balls use `FLAG_ITEM_ICHOR_<MAP>_<ITEM>`, hidden items
 | Kronion Hill | Hard Stone | hidden | in the rubble by the column drums |
 | Kronion Hill | Stardust | hidden | behind the broken altar |
 | Kronion Hill | Augur's Eye | gift, Alethea (`FLAG_ICHOR_DEXNAV_GET`) | — |
+| Kronion Hill | Burn Heal | visible | on the olive terraces of the high pastures, past optional grass |
+| Kronion Hill | Everstone | visible | on the lookout shelf, past Lykidas: the stone Kronos swallowed |
+| Kronion Hill | Pretty Feather | hidden | on the tip of the point below the lookout |
 | Akti | Potion | visible | among the crates on the quay |
 | Akti | Paralyze Heal | visible | by the fish stall |
 | Akti | Super Potion | hidden | behind Diktys's drying nets |
@@ -2210,9 +2330,13 @@ All names are Greek-rooted and clear of the Lazarus avoid-list.
 | Amaryllis | the shepherdess with the flock | Theocritus |
 | Tityros | Shepherd | Theocritus |
 | Phyllis | Harvester | "leafy"; turned into a tree in myth |
+| Thestylis | Harvester | Virgil's Thestylis, who pounds garlic and thyme for the reapers |
 | Komatas | Goatherd | Theocritus's goatherd, fed by bees |
 | Agis | Hoplite | Spartan kings' name |
 | Polyeidos | Augur | the seer Polyidus |
+| Menalkas | Shepherd, Kronion Hill | Theocritus's shepherd-singer |
+| Thyrsis | Shepherd, Kronion Hill | Theocritus's singer of the sorrows of Daphnis |
+| Lykidas | Goatherd, Kronion Hill | Theocritus's goatherd, Idyll 7 |
 | Petros, Amathos | Titanborn grunts | "rock", "sand" |
 | Lampon, Pyrrha, Aithra | acolytes | "lamp", "flame-colored", "bright sky" |
 | Euboulos | temple guide | "good counsel" |

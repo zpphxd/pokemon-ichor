@@ -42,7 +42,15 @@
 #define TRAINER_BRANDON                       21
 #define TRAINERS_END_FRONTIER                 22
 
-// Ids 22-39 are the director's reserve.
+// The slice again, ids 22-25, from the director's reserve: Route 1's sixth
+// trainer and the herders of Kronion Hill's high pastures (MAP_DESIGN.md §8).
+#define TRAINER_ICHOR_THESTYLIS               22
+#define TRAINER_ICHOR_MENALKAS                23
+#define TRAINER_ICHOR_THYRSIS                 24
+#define TRAINER_ICHOR_LYKIDAS                 25
+#define TRAINERS_END_SLICE2                   26
+
+// Ids 26-39 are the director's reserve.
 
 // world-act1, ids 40-159: the crossing, Aegina, Emporion, the Sacred Way, Eleusa.
 #define TRAINERS_END_ACT1                     0
@@ -62,7 +70,8 @@
 // Ids 820-863 are the director's reserve. 864-1023 are the Oikoumene's (above).
 
 #define ICHOR_TRAINERS_MAX(a, b) ((a) > (b) ? (a) : (b))
-#define TRAINERS_COUNT_EMERALD ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(TRAINERS_END_SLICE, TRAINERS_END_FRONTIER), \
+#define TRAINERS_COUNT_EMERALD ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(TRAINERS_END_SLICE, TRAINERS_END_FRONTIER), \
+                                                                                        TRAINERS_END_SLICE2), \
                                                                      ICHOR_TRAINERS_MAX(TRAINERS_END_ACT1, TRAINERS_END_ACT2)), \
                                                   ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(TRAINERS_END_ACT3, TRAINERS_END_POSTGAME), \
                                                                      TRAINERS_END_OIKOUMENE))

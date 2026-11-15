@@ -17,8 +17,8 @@
 # Daphne's speech and naming; the bedroom, the water clock, Mom and the Talaria,
 # Kydippe, the Akademia note and the shepherd's gate, Halia's reading, the
 # Akademia and the starter, Kleon's battle, Alethea; every item and gift in
-# Elaia; Route 1's five trainers, items and gifts; the flock; Kronion Hill's
-# summit scene and both grunts; Akti's arrival, the Asclepeion heal, a SAVE,
+# Elaia; Route 1's six trainers, items and gifts; the flock; Kronion Hill's
+# summit scene and both grunts, and its high pastures' three herders and items; Akti's arrival, the Asclepeion heal, a SAVE,
 # a reset and CONTINUE; the Agora, the Fisher's house, the harbor's people and
 # items; the Hearth Trial with all three acolytes; Ione, the Hearth Laurel and
 # TM42; the harbor ending; and Akti after the end.

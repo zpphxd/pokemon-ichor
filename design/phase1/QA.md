@@ -367,7 +367,6 @@ Frames are picked by the names the playthrough gives them, so a rerun after an a
 - The side checks' `text.txt` marks the two whiteout lines ("THEO hurried back home..." and "THEO hurried to the Asclepeion...") as TALL. That is a false positive: they appear in the full-screen whiteout window, which holds more lines than the text box.
 
 **The static audit's remaining REACH lines are expected:**
-- the olive press tile behind the farmer
 - a Halia trigger under the festival-goer
 - the scroll shelf tile behind Daphne
 - Ione and the hearth before the trial opens the dais
