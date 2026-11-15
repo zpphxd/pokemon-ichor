@@ -174,6 +174,17 @@ RelicTest_LeaveLit:
 	setvar VAR_TEMP_F, 1
 	goto EventScript_IchorLeaveLitZone
 
+@ --- The torch doused and relit, as the Relic Ring does it -------------------------
+	test_header RelicTest_DouseOnHeader, RelicTest_DouseOn
+RelicTest_DouseOn:
+	setvar VAR_TEMP_F, 1
+	goto EventScript_IchorTorchDoused
+
+	test_header RelicTest_RelightHeader, RelicTest_Relight
+RelicTest_Relight:
+	setvar VAR_TEMP_F, 1
+	goto EventScript_IchorTorchRelit
+
 	test_header RelicTest_TakeFlameHeader, RelicTest_TakeFlame
 RelicTest_TakeFlame:
 	setvar VAR_TEMP_F, 1

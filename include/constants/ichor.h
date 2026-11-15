@@ -138,7 +138,8 @@
 #define FLAME_THRESHOLD  3
 #define FLAME_HESTIA_SHIP 4  // Lampon: Hestia's great hearth at Akti to the Euploia's (post-game)
 #define FLAME_LERNA      5   // Kleon's fire at Lerna (Labor 2)
-#define FLAME_COUNT      6
+#define FLAME_PANATHENAIA 6  // the Panathenaia's torch race: the Dipylon to the Akropolis (SYSTEMS §7)
+#define FLAME_COUNT      7
 #define ICHOR_FLAME_GUTTER_STEPS  5  // "The flame gutters."
 
 // Light radius levels for dark maps (SYSTEMS §2; sFlashLevelToRadius)

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_relics.h"
 #include "battle_pyramid.h"
 #include "bg.h"
 #include "fieldmap.h"
@@ -1032,6 +1033,7 @@ static void LoadPrimaryTilesetPalette(struct MapLayout const *mapLayout)
 void LoadSecondaryTilesetPalette(struct MapLayout const *mapLayout, bool8 skipFaded)
 {
     LoadTilesetPalette(mapLayout->secondaryTileset, GetNumPalsInPrimary(mapLayout) * 16, (NUM_PALS_TOTAL - GetNumPalsInPrimary(mapLayout)) * PLTT_SIZE_4BPP, skipFaded, GetNumPalsInPrimary(mapLayout));
+    Ichor_UpdateGlow(mapLayout, skipFaded); // Ichor: glow-paint on a doused dark map
 }
 
 void CopyMapTilesetsToVram(struct MapLayout const *mapLayout)
