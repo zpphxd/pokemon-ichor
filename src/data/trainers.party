@@ -692,6 +692,11 @@ Hoplomex
 Level: 27
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
+
+/* The polish pass's trainers (MAP_DESIGN §8, the route standard: 0.6 a screen).
+   Levels from BALANCE.md's Thyrsa stage: Route 6 24-25, Mt. Kithairon 25-27,
+   Route 7 26-27, Antiope's cave 25. */
+
 === TRAINER_ICHOR_OINOPION ===
 Name: OINOPION
 Class: Vintner
@@ -1573,6 +1578,142 @@ IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 - Crunch
 - Moonlight
 - Charm
+
+=== TRAINER_ICHOR_DORKIS ===
+Name: DORKIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Stachyss
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Ampelix
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_PHILINNA ===
+Name: PHILINNA
+Class: Shepherd
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Melibee
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Chelonet
+Level: 24
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Elaleaf
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_IANTHOS ===
+Name: IANTHOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Kerazap
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Pebblith
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_DAMOITAS ===
+Name: DAMOITAS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Pebblith
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 25
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_SKIRTOS ===
+Name: SKIRTOS
+Class: Satyr
+Pic: Satyr
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Gelasable
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Botrykit
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_EUPHRON ===
+Name: EUPHRON
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Lophops
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Epopoi
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Harpeck
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_KISSIA ===
+Name: KISSIA
+Class: Maenad
+Pic: Maenad
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Ampelix
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Raknit
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_SIMOS ===
+Name: SIMOS
+Class: Satyr
+Pic: Satyr
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Gelasable
+Level: 26
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Galekit
+Level: 27
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 
 /* Ichor: world-act3 (ids 320-499) */

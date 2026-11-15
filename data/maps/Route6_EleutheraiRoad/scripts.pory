@@ -274,3 +274,36 @@ script Route6_EleutheraiRoad_EventScript_SignPress {
 script Route6_EleutheraiRoad_EventScript_SignNorth {
     msgbox(format("ELEUTHERAI. The free town. Water, a cook, and a view."), MSGBOX_SIGN)
 }
+
+// --- the route standard's trainers (MAP_DESIGN section 8) ----------------------
+text Route6_EleutheraiRoad_Text_SpeakerDorkis { "DORKIS" }
+
+script Route6_EleutheraiRoad_EventScript_Dorkis {
+    trainerbattle_single(TRAINER_ICHOR_DORKIS, Route6_EleutheraiRoad_Text_DorkisIntro, Route6_EleutheraiRoad_Text_DorkisDefeat)
+    setspeaker(Route6_EleutheraiRoad_Text_SpeakerDorkis)
+    msgbox(format("Ikarios says the good grapes are at the top. Ikarios is short."), MSGBOX_AUTOCLOSE)
+}
+
+text Route6_EleutheraiRoad_Text_DorkisIntro {
+    format("You walked through my row! Grape juice on your sandals. Battle!")
+}
+
+text Route6_EleutheraiRoad_Text_DorkisDefeat {
+    format("Ah. Squashed like the rest of them.")
+}
+
+text Route6_EleutheraiRoad_Text_SpeakerPhilinna { "PHILINNA" }
+
+script Route6_EleutheraiRoad_EventScript_Philinna {
+    trainerbattle_single(TRAINER_ICHOR_PHILINNA, Route6_EleutheraiRoad_Text_PhilinnaIntro, Route6_EleutheraiRoad_Text_PhilinnaDefeat)
+    setspeaker(Route6_EleutheraiRoad_Text_SpeakerPhilinna)
+    msgbox(format("Two boys were born in that cave. One built a wall by singing. Imagine."), MSGBOX_AUTOCLOSE)
+}
+
+text Route6_EleutheraiRoad_Text_PhilinnaIntro {
+    format("I came to see Antiope's cave before the festival. You too? Battle first!")
+}
+
+text Route6_EleutheraiRoad_Text_PhilinnaDefeat {
+    format("The cave will wait. It's waited this long.")
+}

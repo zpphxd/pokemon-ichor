@@ -293,6 +293,58 @@
       "trainer_sight_or_berry_tree_id": "2",
       "script": "MtKithairon_EventScript_Ilys",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
+      "x": 4,
+      "y": 45,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "5",
+      "script": "MtKithairon_EventScript_Damoitas",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SATYR",
+      "x": 33,
+      "y": 27,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "MtKithairon_EventScript_Skirtos",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "x": 26,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "MtKithairon_EventScript_Euphron",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAENAD",
+      "x": 19,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "MtKithairon_EventScript_Kissia",
+      "flag": "0"
     }
   ],
   "warp_events": [],
@@ -453,14 +505,6 @@
       "elevation": 3,
       "item": "ITEM_ETHER",
       "flag": "FLAG_ICHOR_HIDDEN_KITHAIRON_ETHER"
-    },
-    {
-      "type": "hidden_item",
-      "x": 36,
-      "y": 6,
-      "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_ICHOR_HIDDEN_KITHAIRON_RARE_CANDY"
     }
   ]
 }

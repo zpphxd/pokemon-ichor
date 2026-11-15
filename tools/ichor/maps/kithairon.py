@@ -169,9 +169,16 @@ def route6():
     m.rect(34, 4, 37, 5, "#")
     m.cells([(37, 4), (37, 5)], "F")
     # long grass between the vine rows on both terraces, with a reason to go in
+    # (the route standard: 15 grass cells a screen)
     m.rect(32, 17, 43, 18, ",")
     m.cells([(32, 17), (43, 18), (38, 18)], ".")
+    m.rect(32, 19, 38, 20, ",")
+    m.rect(22, 19, 26, 20, ",")
     m.rect(9, 7, 12, 7, ",")
+    m.rect(23, 10, 31, 10, ",")          # the terrace-2 verge above the vines
+    m.rect(39, 19, 43, 20, ",")
+    m.rect(40, 5, 47, 6, ",")            # the spur's upper meadow
+    m.cells([(40, 5), (47, 6)], ".")
     # a clearing in the west woods: deadfall and a hidden find
     m.rect(3, 13, 8, 17, ".")
     m.rect(4, 14, 7, 16, ",")
@@ -235,6 +242,10 @@ def route6():
             item_ball(44, 11, "ITEM_SUPER_POTION", "FLAG_ICHOR_ITEM_ROUTE6_SUPER_POTION"),
             # leg D: Astylos in the cutting
             obj(P + "YOUTH_M", 31, 3, R6 + "Astylos", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=3),
+            # the route standard's two more: Dorkis in the vines on the terrace road,
+            # Philinna on the spur's way to the cave
+            obj(P + "HARVESTER", 24, 17, R6 + "Dorkis", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=2),
+            obj(P + "WOMAN", 48, 10, R6 + "Philinna", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=2),
         ],
         "warp_events": [warp(52, 7, "MAP_ROUTE6_ANTIOPES_CAVE", 0)],
         "coord_events": [trigger(45, 20, R6 + "HeraldScene"), trigger(46, 20, R6 + "HeraldScene"),
@@ -244,6 +255,7 @@ def route6():
             sign(45, 21, R6 + "VineStock", "BG_EVENT_PLAYER_FACING_NORTH"),
             hidden(23, 6, "ITEM_WINE", "FLAG_ICHOR_HIDDEN_ROUTE6_WINE"),
             hidden(7, 15, "ITEM_REVIVE", "FLAG_ICHOR_HIDDEN_ROUTE6_REVIVE"),
+            hidden(21, 18, "ITEM_STARDUST", "FLAG_ICHOR_HIDDEN_ROUTE6_STARDUST"),
             sign(20, 19, R6 + "SignPress"),
             sign(34, 7, R6 + "GreatHerm"),
             sign(50, 11, R6 + "DigSpot"),
@@ -307,10 +319,14 @@ def eleutherai():
     m.rect(16, 26, 30, 26, "w")
     m.rect(16, 19, 16, 26, "w")
     m.rect(30, 19, 30, 26, "w")
-    m.rect(22, 26, 24, 26, ".")
+    m.cells([(16, 24), (16, 25)], ".")   # the pens' gate, off the road (the seam row stays shut)
     m.rect(17, 20, 29, 25, ".")
     m.rect(0, 24, 3, 27, "F")
     m.rect(26, 27, 31, 27, "F")
+    # the edges meet only open ground across the seams (the road and its verge)
+    m.rect(0, 27, 8, 27, "F")
+    m.rect(12, 27, 31, 27, "F")
+    m.cells([(13, 0)], "F")
     m.cells([(0, 22), (1, 22), (6, 27), (7, 27), (31, 16), (31, 17), (31, 18)], "F")
 
     # the fort, on its rock: the north wall with the watch-house door, side
@@ -384,6 +400,8 @@ def eleutherai():
             obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 26, 24, EL + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
             obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 28, 21, EL + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
             obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 18, 24, EL + "Sheep", "MOVEMENT_TYPE_FACE_RIGHT"),
+            # the dead end east of the fort's stair: a jar left by the wall
+            item_ball(30, 17, "ITEM_FRESH_WATER", "FLAG_ICHOR_ITEM_ELEUTHERAI_FRESH_WATER"),
         ],
         "warp_events": [
             warp(23, 3 + F0, "MAP_ELEUTHERAI_WATCH_HOUSE", 0),
@@ -397,6 +415,7 @@ def eleutherai():
             sign(12, 1, EL + "SignNorth"),
             sign(13, 19, EL + "Trough"),
             hidden(14, 19, "ITEM_RELIC_COPPER", "FLAG_ICHOR_HIDDEN_ELEUTHERAI_BRONZE_OBOL"),
+            hidden(6, 13, "ITEM_STARDUST", "FLAG_ICHOR_HIDDEN_ELEUTHERAI_STARDUST"),
             hidden(30, 0, "ITEM_STARDUST", "FLAG_ICHOR_HIDDEN_ELEUTHERAI_STARDUST") if False else None,
         ],
     }
@@ -439,13 +458,15 @@ def kithairon():
     m.rect(3, 46, 9, 48, ",")           # band 1: across leg 3, 3 deep
     m.rect(10, 46, 17, 46, "^")         # the ledge home, over the hollow
     m.cells([(3, 44), (3, 45), (20, 42), (20, 43), (3, 52), (22, 52), (15, 55), (15, 54)], "F")
+    # Eleutherai's seam: only the road and its verges stay open
+    m.cells([(16, 55), (21, 55), (22, 55)], "F")
     m.cells([(13, 48), (16, 48)], "s")
     m.cells([(10, 47), (11, 47)], "L")
     # a clearing east of leg 1: optional grass, a goat track in, a Hyper Potion
     m.rect(20, 52, 24, 53, ".")
     m.rect(23, 46, 33, 53, ".")
-    m.rect(25, 47, 32, 51, ",")
-    m.cells([(25, 47), (26, 47), (32, 51), (31, 51), (25, 51)], ".")
+    m.rect(24, 47, 32, 52, ",")
+    m.cells([(25, 47), (26, 47), (32, 52), (31, 52), (24, 52)], ".")
     m.cells([(33, 46), (33, 47), (23, 46), (23, 47), (24, 46)], "F")
     m.cells([(29, 52), (30, 52)], "L")
     m.cells([(28, 46), (33, 52), (23, 53)], "#")
@@ -478,7 +499,7 @@ def kithairon():
     # west of the band: a hidden clearing in the firs, through a gap
     m.rect(3, 33, 8, 37, ".")
     m.rect(9, 34, 9, 34, ".")
-    m.rect(4, 34, 7, 36, ",")
+    m.rect(3, 34, 8, 37, ",")
     m.cells([(3, 33), (8, 37), (3, 37)], "F")
     m.cells([(5, 33), (6, 33)], "L")
 
@@ -533,8 +554,9 @@ def kithairon():
     m.rect(23, 6, 27, 9, "F")
     m.rect(23, 10, 27, 11, ".")
     m.rect(18, 9, 22, 11, ",")          # band 3: 3 deep, the fold's wall to the shoulder's cliff
-    m.rect(29, 13, 34, 15, ",")         # long grass on the open meadow
-    m.cells([(29, 13), (34, 15)], ".")
+    m.rect(28, 12, 35, 16, ",")         # long grass on the open meadow
+    m.cells([(28, 12), (35, 16), (35, 12), (28, 16)], ".")
+    m.rect(5, 17, 15, 17, ",")          # long grass under the fold's south wall
     m.cells([(37, 16), (37, 17), (38, 17), (4, 8), (4, 17), (16, 17)], "F")
     # clearings and deadfall in the west woods
     m.rect(1, 23, 2, 25, ".")
@@ -620,6 +642,11 @@ def kithairon():
             obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 10, 14, MK + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
             obj("OBJ_EVENT_GFX_SPECIES(WOOLOO)", 7, 13, MK + "Sheep", "MOVEMENT_TYPE_FACE_RIGHT"),
             obj(P + "TITAN_GRUNT", 33, 8, MK + "Ilys", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
+            # the route standard's four more, at the bands and narrows
+            obj(P + "SHEPHERD", 4, 45, MK + "Damoitas", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=5),
+            obj(P + "SATYR", 33, 27, MK + "Skirtos", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3),
+            obj(P + "MAN", 26, 15, MK + "Euphron", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
+            obj(P + "MAENAD", 19, 5, MK + "Kissia", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=3),
         ],
         "warp_events": [],
         "coord_events": [trigger(x, 36, MK + "DancingFloor") for x in (14, 15)]
@@ -641,7 +668,6 @@ def kithairon():
             hidden(36, 23, "ITEM_PRETTY_FEATHER", "FLAG_ICHOR_HIDDEN_KITHAIRON_PRETTY_FEATHER"),
             hidden(26, 23, "ITEM_HONEY", "FLAG_ICHOR_HIDDEN_KITHAIRON_HONEY"),
             hidden(2, 55, "ITEM_ETHER", "FLAG_ICHOR_HIDDEN_KITHAIRON_ETHER"),
-            hidden(36, 6, "ITEM_RARE_CANDY", "FLAG_ICHOR_HIDDEN_KITHAIRON_RARE_CANDY"),
         ],
     }
     views = [(18, 54), (10, 50), (7, 46), (13, 44), (15, 39), (15, 35), (25, 33), (24, 25), (12, 24),
@@ -756,13 +782,21 @@ def route7():
     m.rect(9, 17, 21, 18, "=")
     # grass: the two bands, and long grass at the meadow's dead end
     m.rect(19, 29, 21, 32, ",")          # band 1: 4 deep, below Komos, walled by the rock
-    m.rect(5, 19, 12, 21, ",")           # band 2: 3 deep, from the brook to the scrub
-    m.rect(6, 26, 8, 28, ",")
-    m.cells([(12, 22), (11, 22)], "s")
+    m.rect(5, 19, 12, 22, ",")           # band 2: 4 deep, from the brook to the scrub
+    m.rect(5, 26, 10, 28, ",")
+    m.rect(14, 27, 16, 28, ",")
+    m.rect(19, 26, 22, 28, ",")          # long grass at the bend below the defile
+    # the defile's mouth: only the road and its verges meet Kithairon's pass
+    m.rect(13, 39, 18, 39, "F")
+    m.rect(23, 39, 28, 39, "F")
+    m.rect(15, 38, 17, 38, ",")
+    m.rect(25, 38, 26, 38, ",")
+    m.rect(5, 23, 8, 23, ",")
     # the riverside pasture, east, off the herm's side path: long grass, a rock
     # ledge down toward the beach
     m.rect(24, 17, 34, 23, ".")
-    m.rect(28, 18, 34, 22, ",")
+    m.rect(25, 18, 34, 23, ",")
+    m.cells([(25, 18), (26, 18)], ".")
     m.rect(24, 20, 27, 20, "n")
     m.cells([(24, 23), (25, 23), (34, 23)], "F")
     m.cells([(26, 22)], "s")
@@ -792,12 +826,15 @@ def route7():
     m.named("camp_small", "reader_R", 30, 15)
     m.stamp("markers", 24, 14, names={(0, 0): "herm_top", (0, 1): "herm"})
     m.named("markers", "dig", 33, 15)
-    # the north band (aethos only): an avenue of cypresses and olives to the gate
-    for (x, y) in ((18, 1), (25, 1), (18, 4), (25, 4)):
+    # the north band (aethos only): olives and pines along Thyrsa's wall, so only
+    # the road (x 20-23) meets the Elektran Gate; cypresses and olives to the gate
+    for x in list(range(0, 19, 2)) + list(range(24, 43, 2)):
+        m.pine(x, 0) if x in (6, 14, 30, 38) else m.olive(x, 0)
+    for (x, y) in ((18, 4), (25, 4)):
         m.cypress(x, y)
-    for (x, y) in ((3, 2), (9, 1), (13, 3), (30, 2), (36, 1), (40, 3)):
+    for (x, y) in ((3, 3), (13, 3), (30, 3), (40, 3)):
         m.olive(x, y)
-    m.put(19, 1, L.STELE)
+    m.put(19, 2, L.STELE)
     m.put(18, 38, L.STELE)
     m.oak(7, 13) if False else None
     E = {
@@ -811,6 +848,8 @@ def route7():
             obj(P + "YOUTH_F", 16, 27, R7 + "LostPilgrim", "MOVEMENT_TYPE_FACE_DOWN"),
             item_ball(5, 28, "ITEM_FULL_HEAL", "FLAG_ICHOR_ITEM_ROUTE7_FULL_HEAL"),
             obj(P + "MAN", 12, 26, R7 + "Hagnon", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=3),
+            obj(P + "SATYR", 13, 16, R7 + "Simos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2),
+            item_ball(33, 19, "ITEM_NET_BALL", "FLAG_ICHOR_ITEM_ROUTE7_NET_BALL"),
             # beat 29: the greeter, Kleon and Alethea at the tables, the reader
             obj(P + "KRONIST", 23, 15, R7 + "Greeter", "MOVEMENT_TYPE_FACE_DOWN",
                 local_id="LOCALID_ROUTE7_GREETER"),
@@ -831,10 +870,10 @@ def route7():
             obj(P + "KID_F", 5, 15, R7 + "Child", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
             obj(P + "KID_M", 7, 14, R7 + "ChildB", "MOVEMENT_TYPE_FACE_LEFT"),
             # the Titanborn at the tables: they battle only if asked
-            obj(P + "TITAN_GRUNT", 3, 8, R7 + "Argillos", "MOVEMENT_TYPE_FACE_UP"),
-            obj(P + "TITAN_GRUNT", 4, 12, R7 + "Keramos", "MOVEMENT_TYPE_FACE_UP"),
-            obj(P + "TITAN_GRUNT", 7, 12, R7 + "Plinthos", "MOVEMENT_TYPE_FACE_UP"),
-            obj(P + "TITAN_GRUNT", 29, 13, R7 + "Gypsos", "MOVEMENT_TYPE_FACE_UP",
+            obj(P + "TITAN_GRUNT", 3, 8, R7 + "Argillos", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=0),
+            obj(P + "TITAN_GRUNT", 4, 12, R7 + "Keramos", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=0),
+            obj(P + "TITAN_GRUNT", 7, 12, R7 + "Plinthos", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=0),
+            obj(P + "TITAN_GRUNT", 29, 13, R7 + "Gypsos", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=0,
                 flag="FLAG_ICHOR_GYPSOS_WENT_HOME", local_id="LOCALID_ROUTE7_GYPSOS"),
             # the reed islet (the Conch)
             item_ball(40, 19, "ITEM_BIG_PEARL", "FLAG_ICHOR_ITEM_ROUTE7_BIG_PEARL"),
@@ -854,7 +893,7 @@ def route7():
             sign(30, 15, R7 + "ReaderTable"),
             sign(31, 8, R7 + "StewardsTent"),
             sign(33, 15, R7 + "DigSpot"),
-            sign(19, 1, R7 + "SignNorth"),
+            sign(19, 2, R7 + "SignNorth"),
         ],
     }
     views = [(20, 38), (20, 35), (20, 30), (14, 27), (10, 23), (16, 21), (20, 18), (21, 15), (12, 11),
@@ -894,7 +933,8 @@ def cave():
     m.named("brazier", "cold", 4, 9)
     E = {
         "object_events": [
-            item_ball(12, 2, "ITEM_PP_UP", "FLAG_ICHOR_ITEM_ANTIOPE_PP_UP"),
+            item_ball(12, 3, "ITEM_PP_UP", "FLAG_ICHOR_ITEM_ANTIOPE_PP_UP"),
+            obj(P + "AUGUR", 9, 7, AC + "Ianthos", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=4),
             item_ball(14, 3, "ITEM_STAR_PIECE", "FLAG_ICHOR_ITEM_ANTIOPE_STAR_PIECE"),
         ],
         "warp_events": [warp(7, 11, "MAP_ROUTE6_ELEUTHERAI_ROAD", 0), warp(8, 11, "MAP_ROUTE6_ELEUTHERAI_ROAD", 0)],
@@ -903,6 +943,10 @@ def cave():
             sign(7, 1, AC + "Carving"), sign(8, 1, AC + "Carving"),
             sign(4, 8, AC + "Brazier"), sign(4, 9, AC + "Brazier"),
             sign(4, 6, AC + "DigSpot"),
+            hidden(3, 5, "ITEM_HARD_STONE", "FLAG_ICHOR_HIDDEN_ANTIOPE_HARD_STONE"),
+            # ICHOR_STUB_FLAGS: the cave's second hidden item (MAP_DESIGN section 8 wants
+            # two) waits for a 13th vanilla flag; polish-kithairon's 0x300-0x30B are spent:
+            # hidden(11, 9, "ITEM_ETHER", "FLAG_ICHOR_HIDDEN_ANTIOPE_ETHER"),
             sign(14, 4, AC + "MarkedIvy"),
         ],
     }

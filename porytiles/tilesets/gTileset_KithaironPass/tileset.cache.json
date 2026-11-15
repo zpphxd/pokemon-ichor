@@ -1,6 +1,6 @@
 {
   "data/tilesets/secondary/kithairon_pass/porytiles_bin/metatile_attributes.bin": "7ed2e180eb4371cbd99987cccafcb15f",
-  "data/tilesets/secondary/kithairon_pass/porytiles_bin/metatiles.bin": "b9e1b5edbe51187b834c6d6ec814bd85",
+  "data/tilesets/secondary/kithairon_pass/porytiles_bin/metatiles.bin": "5231aeaee0327bb707200bd0b4947172",
   "data/tilesets/secondary/kithairon_pass/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/kithairon_pass/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/kithairon_pass/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/kithairon_pass/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/kithairon_pass/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/kithairon_pass/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/kithairon_pass/porytiles_bin/tiles.png": "c95ab891bc275139b6015cc57406ea35",
+  "data/tilesets/secondary/kithairon_pass/porytiles_bin/tiles.png": "3abe13cd65dec7553992ba05f9b2fd38",
   "data/tilesets/secondary/kithairon_pass/porytiles_src/attributes.csv": "dac80c88349624a0237c971ea0c78a48",
-  "data/tilesets/secondary/kithairon_pass/porytiles_src/bottom.png": "c6875c12f886447cee8ec91f80fce545",
+  "data/tilesets/secondary/kithairon_pass/porytiles_src/bottom.png": "7b5e90b9f864f37e712f7fd698e62ebb",
   "data/tilesets/secondary/kithairon_pass/porytiles_src/middle.png": "3e0668945fa688dc727d390d274a2005",
   "data/tilesets/secondary/kithairon_pass/porytiles_src/top.png": "c46835bde700f9e6fa100f14d4275844"
 }

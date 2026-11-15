@@ -350,3 +350,68 @@ script MtKithairon_EventScript_SignFold {
 script MtKithairon_EventScript_SignNorth {
     msgbox(format("Below: Route 7, the Asopos plain, and Thyrsa beyond the feast."), MSGBOX_SIGN)
 }
+
+// --- the route standard's trainers (MAP_DESIGN section 8) ----------------------
+text MtKithairon_Text_SpeakerDamoitas { "DAMOITAS" }
+
+script MtKithairon_EventScript_Damoitas {
+    trainerbattle_single(TRAINER_ICHOR_DAMOITAS, MtKithairon_Text_DamoitasIntro, MtKithairon_Text_DamoitasDefeat)
+    setspeaker(MtKithairon_Text_SpeakerDamoitas)
+    msgbox(format("Shepherds pipe, goatherds shout. That's the whole difference."), MSGBOX_AUTOCLOSE)
+}
+
+text MtKithairon_Text_DamoitasIntro {
+    format("Lykidas's goats ate my hat. I'm in a fighting mood.")
+}
+
+text MtKithairon_Text_DamoitasDefeat {
+    format("Now I've lost the hat and the battle.")
+}
+
+text MtKithairon_Text_SpeakerSkirtos { "SKIRTOS" }
+
+script MtKithairon_EventScript_Skirtos {
+    trainerbattle_single(TRAINER_ICHOR_SKIRTOS, MtKithairon_Text_SkirtosIntro, MtKithairon_Text_SkirtosDefeat)
+    setspeaker(MtKithairon_Text_SpeakerSkirtos)
+    msgbox(format("Aktaion looked. He went home as a stag. I'll keep my eyes on you."), MSGBOX_AUTOCLOSE)
+}
+
+text MtKithairon_Text_SkirtosIntro {
+    format("Shh! She bathes here, they say. I'm not looking. Battle me!")
+}
+
+text MtKithairon_Text_SkirtosDefeat {
+    format("I wasn't looking. Honestly.")
+}
+
+text MtKithairon_Text_SpeakerEuphron { "EUPHRON" }
+
+script MtKithairon_EventScript_Euphron {
+    trainerbattle_single(TRAINER_ICHOR_EUPHRON, MtKithairon_Text_EuphronIntro, MtKithairon_Text_EuphronDefeat)
+    setspeaker(MtKithairon_Text_SpeakerEuphron)
+    msgbox(format("On a clear day you can see Thyrsa's seven gates. Three of them open."), MSGBOX_AUTOCLOSE)
+}
+
+text MtKithairon_Text_EuphronIntro {
+    format("The view from up here! Battle me while I catch my breath.")
+}
+
+text MtKithairon_Text_EuphronDefeat {
+    format("Lost my breath again.")
+}
+
+text MtKithairon_Text_SpeakerKissia { "KISSIA" }
+
+script MtKithairon_EventScript_Kissia {
+    trainerbattle_single(TRAINER_ICHOR_KISSIA, MtKithairon_Text_KissiaIntro, MtKithairon_Text_KissiaDefeat)
+    setspeaker(MtKithairon_Text_SpeakerKissia)
+    msgbox(format("Down the north face, they're feasting. We don't eat with them."), MSGBOX_AUTOCLOSE)
+}
+
+text MtKithairon_Text_KissiaIntro {
+    format("Euoi! The pass is ours tonight. Dance through, or fight through!")
+}
+
+text MtKithairon_Text_KissiaDefeat {
+    format("Euoi… you dance badly, but you fight well.")
+}

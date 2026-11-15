@@ -1,6 +1,6 @@
 {
   "data/tilesets/secondary/kronia/porytiles_bin/metatile_attributes.bin": "392a8c985040529ec34af2107b7f355c",
-  "data/tilesets/secondary/kronia/porytiles_bin/metatiles.bin": "70412e753c10af8f2590262081774b19",
+  "data/tilesets/secondary/kronia/porytiles_bin/metatiles.bin": "b041b0276557783f8b0a6e85e906f01a",
   "data/tilesets/secondary/kronia/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/kronia/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/kronia/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/kronia/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/kronia/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/kronia/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/kronia/porytiles_bin/tiles.png": "ab76cf866fd3b932245aaa06b3340238",
+  "data/tilesets/secondary/kronia/porytiles_bin/tiles.png": "dd8dc574fa9445445b26cb1511df69e5",
   "data/tilesets/secondary/kronia/porytiles_src/attributes.csv": "91c2fd1fed2bb2a06cc2f5811399f153",
-  "data/tilesets/secondary/kronia/porytiles_src/bottom.png": "f8482adc894000a8961f3b91b2c53036",
+  "data/tilesets/secondary/kronia/porytiles_src/bottom.png": "736139054fe25f6cc3aab165d9f55ca9",
   "data/tilesets/secondary/kronia/porytiles_src/middle.png": "501a390211548c098a7530989b8de544",
   "data/tilesets/secondary/kronia/porytiles_src/top.png": "1d26a9eaea2e0747eff0cdd5d00255d2"
 }

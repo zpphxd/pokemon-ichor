@@ -219,6 +219,32 @@
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Route6_EleutheraiRoad_EventScript_Astylos",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
+      "x": 24,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route6_EleutheraiRoad_EventScript_Dorkis",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 48,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route6_EleutheraiRoad_EventScript_Philinna",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -291,6 +317,14 @@
       "elevation": 3,
       "item": "ITEM_REVIVE",
       "flag": "FLAG_ICHOR_HIDDEN_ROUTE6_REVIVE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 21,
+      "y": 18,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_ROUTE6_STARDUST"
     },
     {
       "type": "sign",

@@ -609,3 +609,20 @@ script Route7_KroniaGrounds_EventScript_SignKronia {
 script Route7_KroniaGrounds_EventScript_SignNorth {
     msgbox(format("THYRSA. THE ELEKTRAN GATE. One of seven."), MSGBOX_SIGN)
 }
+
+// --- the route standard's trainers (MAP_DESIGN section 8) ----------------------
+text Route7_KroniaGrounds_Text_SpeakerSimos { "SIMOS" }
+
+script Route7_KroniaGrounds_EventScript_Simos {
+    trainerbattle_single(TRAINER_ICHOR_SIMOS, Route7_KroniaGrounds_Text_SimosIntro, Route7_KroniaGrounds_Text_SimosDefeat)
+    setspeaker(Route7_KroniaGrounds_Text_SpeakerSimos)
+    msgbox(format("The Kronists say there were no satyrs in the golden age. Rude."), MSGBOX_AUTOCLOSE)
+}
+
+text Route7_KroniaGrounds_Text_SimosIntro {
+    format("Free bread! Free wine! Free battles! I made the last one up.")
+}
+
+text Route7_KroniaGrounds_Text_SimosDefeat {
+    format("I should have stayed at the tables.")
+}

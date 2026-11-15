@@ -50,3 +50,20 @@ script Route6_AntiopesCave_EventScript_DigSpot {
 script Route6_AntiopesCave_EventScript_MarkedIvy {
     msgbox(format("Ivy climbs the rock here, its leaves marked with gold.\pAbove, on a ledge, something glints."), MSGBOX_SIGN)
 }
+
+// --- the route standard's trainer: the cave's one (MAP_DESIGN section 8) ------
+text Route6_AntiopesCave_Text_SpeakerIanthos { "IANTHOS" }
+
+script Route6_AntiopesCave_EventScript_Ianthos {
+    trainerbattle_single(TRAINER_ICHOR_IANTHOS, Route6_AntiopesCave_Text_IanthosIntro, Route6_AntiopesCave_Text_IanthosDefeat)
+    setspeaker(Route6_AntiopesCave_Text_SpeakerIanthos)
+    msgbox(format("Born here, the carving says. The rock still remembers two cries."), MSGBOX_AUTOCLOSE)
+}
+
+text Route6_AntiopesCave_Text_IanthosIntro {
+    format("I read the stones here. They say you'll lose. Let's see.")
+}
+
+text Route6_AntiopesCave_Text_IanthosDefeat {
+    format("The stones were wrong. That's new.")
+}

@@ -98,7 +98,7 @@ and `_E` (the herald's pole, beat 26), `METATILE_KithaironPass_Shrine_Top`, `_Sh
 
 `tall`, 8 wide by 3 tall. Barley tall grass on aethos grass, cut from one field so any outline works (agros's painter, as on Route 1). MB_TALL_GRASS throughout. Names are blob shape keys (`1|NNEESESSWWNW`).
 
-23 shapes, from 0x200; the first, `1|11111111`, is 0x200.
+24 shapes, from 0x200; the first, `1|11111111`, is 0x200.
 
 #### The road with soft edges
 
@@ -982,14 +982,75 @@ then swaps batch 1's stubs for the engine's systems.
 3. **Pass 3.** Checked that the carving, the shelf, the brazier and the dig spot are all
    still reached and seen from the floor. Left as is: the cave's palette and walls.
 
-### Grass and rewards, after the pass
+### Pass 4: the route standard (MAP_DESIGN section 8)
+
+`tools/ichor/map_audit.py` measures every route against Emerald's numbers for the middle
+band: 15 grass cells a screen, 8 forced grass cells between the ends, 0.6 trainers a
+screen (at least 6), 0.2 item balls a screen (at least 3), 3 hidden items; a town 2 hidden
+and 1 ball; a one-floor cave 1 trainer and 2 hidden. Its first run on the polished
+crossing failed 13 ways. What changed:
+
+- **Grass.** Long grass between the vine rows and on the spur's upper meadow (Route 6),
+  a wider clearing at the foot, the hidden clearing, the high meadow and the fold's south
+  wall (Mt. Kithairon), the riverside pasture, the meadow's dead end and the bend below the
+  defile (Route 7). Band 2 on Route 7 is 4 deep now. A first try on Route 6 laid grass over
+  a vine row and a wall cell and opened a way round band 2; the forced-band check caught it.
+- **Trainers SCRIPT.md doesn't name**, eight of them, at the bands and narrows, in
+  `design/phase3/parties/kithairon.party` and at the end of `ORDER.txt`: Route 6, HARVESTER
+  Dorkis on the vine terrace's road and PILGRIM Philinna on the spur; Mt. Kithairon,
+  SHEPHERD Damoitas at band 1's top (sight 5, the whole leg), SATYR Skirtos at Aktaion's
+  spring, PILGRIM Euphron at the high meadow's bend, MAENAD Kissia in the pass between the
+  shoulders; Route 7, SATYR Simos where the road enters the camp; Antiope's cave, AUGUR
+  Ianthos reading the stones. Route 7's four Titanborn at the tables count too: they are
+  trainers now with sight 0, so they still fight only when asked.
+- **Items.** A Net Ball in the riverside pasture (Route 7), Fresh Water in the dead end by
+  Eleutherai's fort stair (the old man at the trough wants some), hidden Stardust in Route
+  6's vines and at Eleutherai's plinth, a hidden Hard Stone in the cave. The cave's PP Up
+  sits on the floor below its shelf now (it was on a solid cell).
+- **Edges.** Each map's edge is open only where its neighbor's is: Eleutherai's south row
+  and north corner, Mt. Kithairon's south row and Route 7's south row close round the
+  roads; Route 7's north edge, which walked into Thyrsa's wall along its whole width, is a
+  hedge of olives and pines but for the road (x 20-23). Eleutherai's pens open west now,
+  since their south gate faced the seam row.
+
+**`map_audit.py Route6_EleutheraiRoad Route6_AntiopesCave Eleutherai MtKithairon Route7_KroniaGrounds`**
+(2026-11-14, `NOTE` lines about `_Day` tables left out):
+
+```text
+Route6_EleutheraiRoad  [route, Thyrsa, middle]
+  56x28 = 10.5 screens; grass 159 (15/screen, 10%); forced grass 8; trainers 6; items 3 + 3 hidden; signs 6; NPCs 6; wild: land MN (11/10 spp), Lv 21–24
+Route6_AntiopesCave  [dungeon, Thyrsa, middle]
+  16x12 = 1.3 screens; grass 0 (0/screen, 0%); trainers 1; items 2 + 1 hidden; signs 6; NPCs 0; wild: none
+  WARN  reach: can't stand next to OBJ_EVENT_GFX_ITEM_BALL at (14,3) (Common_EventScript_FindItem)
+Eleutherai  [town, Thyrsa, middle]
+  32x28 = 6.0 screens; grass 0 (0/screen, 0%); trainers 0; items 1 + 2 hidden; signs 4; NPCs 8; wild: none
+MtKithairon  [route, Thyrsa, middle]
+  40x56 = 14.9 screens; grass 241 (16/screen, 11%); water 0%; forced grass 10; trainers 9; items 6 + 3 hidden; signs 13; NPCs 8; wild: land MN (10/9 spp), Lv 22–26
+  WARN  reach: can't stand next to OBJ_EVENT_GFX_ITEM_BALL at (16,28) (Common_EventScript_FindItem)
+Route7_KroniaGrounds  [route, Thyrsa, middle]
+  44x40 = 11.7 screens; grass 178 (15/screen, 10%); water 12%; forced grass 9; trainers 7; items 3 + 3 hidden; signs 9; NPCs 14; wild: land MN (12/8 spp), surf M (5 spp), fish M (4 spp), Lv 23–27
+Route6_AntiopesCave  [whole dungeon, 1 floor(s)]
+  FAIL  hidden items in the whole dungeon: 1 < 2
+
+5 map(s): 1 hard shortfall(s) in 0 map(s), 2 warning(s)
+```
+
+- **The two reach warnings are relic gates**, as SCRIPT.md wants: the Star Piece on the
+  cave's ivy ledge and the Max Elixir above the dancing floor wait for Dionysus's Thyrsus.
+- **The one FAIL is a flag, not the map.** The cave's second hidden item (an Ether at
+  (11,9), `FLAG_ICHOR_HIDDEN_ANTIOPE_ETHER`) needs a 13th vanilla flag; this agent's twelve
+  (0x300-0x30B) all hold hidden items the standard requires elsewhere. It is written,
+  commented out, in `kithairon.py`'s `cave()`, behind `ICHOR_STUB_FLAGS`.
+
+### Grass and rewards, after the passes
 
 | Map | Forced bands | Optional grass (and its reason) | Items |
 |---|---|---|---|
-| Route 6 | 3: band 1 (3 deep) on the vine terrace, band 2 (4 deep) after Pythodoros, band 3 (3 deep) under the cutting | the spur (the cave, the Super Potion, a dig), the vine rows (a Revive in the west woods' clearing) | Super Repel, Max Ether (the Girdle), Super Potion; hidden Wine, Revive |
-| Mt. Kithairon | 3: the first switchback (3 deep), the fir clearing (4 deep), the high meadow (3 deep) | the foot's east clearing (Hyper Potion), the hidden clearing west of the glade (Ultra Ball), the glade's back (Bromia), the spring path (TM, the spring's finds), the high meadow (a dig) | Revive, Max Elixir (the Thyrsus), Max Revive (the Girdle), TM Venoshock, Hyper Potion, Ultra Ball; hidden Pretty Feather, Honey, Ether, Rare Candy |
-| Route 7 | 2: Komos's (4 deep), the west meadow's (3 deep) | the meadow's dead end (Full Heal), the riverside pasture and bank (a Pearl at the bank's end) | Full Heal, Big Pearl (the Conch); hidden Bronze Obol, Charcoal, Pearl |
-| Eleutherai | none (a town) | none | hidden Bronze Obol |
+| Route 6 | 3: band 1 (3 deep) on the vine terrace, band 2 (4 deep) after Pythodoros, band 3 (3 deep) under the cutting | the spur and its upper meadow (the cave, the Super Potion, a dig, Philinna), the vine rows (Stardust; a Revive in the west woods' clearing) | Super Repel, Max Ether (the Girdle), Super Potion; hidden Wine, Revive, Stardust |
+| Mt. Kithairon | 3: the first switchback (3 deep), the fir clearing (4 deep), the high meadow (3 deep) | the foot's east clearing (Hyper Potion), the hidden clearing west of the glade (Ultra Ball), the glade's back (Bromia), the spring meadow (Skirtos, the TM, the spring's finds), the high meadow (a dig) | Revive, Max Elixir (the Thyrsus), Max Revive (the Girdle), TM Venoshock, Hyper Potion, Ultra Ball; hidden Pretty Feather, Honey, Ether |
+| Route 7 | 2: Komos's (4 deep, with the bend below it), the west meadow's (4 deep) | the meadow's dead end (Full Heal), the riverside pasture and bank (Net Ball; a Pearl at the bank's end), the defile's mouth | Full Heal, Big Pearl (the Conch), Net Ball; hidden Bronze Obol, Charcoal, Pearl |
+| Eleutherai | none (a town) | none | Fresh Water; hidden Bronze Obol, Stardust |
+| Antiope's cave | none | none | PP Up, Star Piece (the Thyrsus); hidden Hard Stone |
 
 ### The engine swaps
 
