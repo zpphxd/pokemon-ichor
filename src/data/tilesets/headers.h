@@ -616,3 +616,18 @@ const struct Tileset gTileset_Labyrinth =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
     .callback = NULL,
 };
+
+// Ichor: amnisos, Amnisos, the harbor of Knossa (Act III, Knossa). Porytiles-managed, built by
+// tools/ichor/art/knossa_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea and shallows, so rebuild it whenever
+// aethos changes.
+const struct Tileset gTileset_Amnisos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Amnisos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Amnisos,
+    .metatiles = gMetatiles_PorytilesManaged_Amnisos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Amnisos,
+    .callback = InitTilesetAnim_PorytilesManaged_Amnisos,
+};
