@@ -18,7 +18,7 @@ new higher-quality art direction.
 | Player bikes, watering and decorating | Unchanged | Unused by current Aethos design; retain in the full-rollout inventory rather than silently deleting |
 | Kleon, Daphne, Alethea walkers | Native hair/headband/eye details; nine existing engine frames each | Native checks and current Elaia/Akademia captures pass |
 | Halia, Korinna, Philon, Gylippos, woman, man/scribe, harvester, kid, shepherd, fisher, Kydippe and Melitta | Twelve shared sheets get native shoulder/waist/hem construction and Kydippe's shawl folds; costumes, props, frame indices and folk/cast palette budgets preserved | Native checks and current opening/interior captures pass; this is a polish pass, not twelve wholly new character concepts |
-| Nine regional starter stages, Eripip and Galekit | Matched native battle/icon/follower/footprint pass, tracked in `design/dex/SPRITES.md`; native and rollout checks pass | Director review; current opening battles cover the first stages, the engine gallery covers every stage |
+| Nine regional starter stages, Eripip and Galekit | Matched native battle/icon/follower/footprint pass, tracked in `design/dex/SPRITES.md`; native and rollout checks pass | Native artistic review accepted; current opening battles cover the first stages, the engine gallery covers every stage |
 | Daphne's introductory Smoliv | Matched native olive-baby views and reproducible source; two-frame animation metadata updated without changing species/story/stats | Native checks, final rebuilt introduction and engine gallery pass |
 | Ground item jar | New hand-painted handled/clay jar, still 16x16 on the existing folk palette | Current in-game pickup capture |
 | Three starter kraters and their rocking views | Native contour/rim/clay highlight polish; existing starter palettes, motifs and engine frame order preserved | Current selection/rocking capture |
@@ -30,7 +30,7 @@ new higher-quality art direction.
 | Battle/Bag/follower balls | No edits by this batch | Separate Greek-god-ball owner |
 | Ione and Titan grunt | No edits | Akti/Route 1 batch |
 
-**Current verification:** native helper compilation and
+**Artist checkpoint verification:** native helper compilation and
 `make -j$(sysctl -n hw.ncpu)` pass using an isolated Arm GNU 15.3.Rel1,
 libpng and Poryscript toolchain. After the Smoliv pass the ROM uses
 23,027,752 bytes of 33,554,432 (68.63%), leaving 10,526,680 bytes.
@@ -57,8 +57,21 @@ native and real-engine before/after captures are retained with this handoff.
 The old missing-toolchain failure is resolved. Retained groups above,
 unexercised supported states and final artistic approval remain explicit;
 this is not a finished-every-sprite town declaration. The human/opening-object
-checkpoint was landed separately on `main`; apply the Pokemon checkpoint
-without reapplying that equivalent human commit.
+checkpoint was landed separately on `main`; the Pokemon checkpoint does
+not require reapplying that equivalent human commit.
+
+**Coordinator integration verification:** Pokemon source checkpoint
+`f247d1e645` was applied as `9ae5aff4af` on top of the landed human checkpoint
+`dfb7974fbc`. The integrated `make -j$(sysctl -n hw.ncpu)` and original smoke
+test pass; the ROM uses 23,041,920 bytes (68.67%), leaving 10,512,512 bytes.
+The eleven-species native/import checks, separate Smoliv check, 96-check
+real-engine gallery, all three full opening runs and 19 sprite-audit
+regressions pass. Final introduction, Kleon/player portraits, starter battle
+and Pylakyon gallery captures were visually inspected. Source reconciliation
+against the original 20,149-image/palette baseline reports 112 changed
+sources, no additions or removals and 20,037 unchanged sources. These are
+coverage counts, not a declaration that the unchanged sprites are finished;
+the ball owner's assets remain untouched.
 
 - **Audited against:** the remnants branch, which is `main` at `25526ae5dc` plus that pass's fixes (`design/phase1/UI_remnants.md`), with a clean `make` (devkitARM 16.1, Emerald build). Each row was checked by looking: in game for the screens (the slice playthrough, its side checks and gallery, and a screen harness), and in the repo for the rest.
 - **Sizes** were measured at `c82f1634f7` from the linker map, `pokeemerald.map`, and `nm -S` on `pokeemerald.elf`, and have not been re-measured; only the ROM total below is current. Unsized assembly labels are sized by the gap to the next symbol. KiB means 1024 bytes. Sizes are good to a few percent, and the groupings are by symbol name and source file.
