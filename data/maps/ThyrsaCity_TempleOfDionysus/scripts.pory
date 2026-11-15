@@ -30,10 +30,14 @@
 
 mapscripts ThyrsaCity_TempleOfDionysus_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        // After the laurel Thespis comes down from the roof and stands by the altar.
+        // Thespis waits on the roof in the tragic mask. After the laurel he comes down
+        // and stands by the altar in the comic one ("Today I'm both").
         if (flag(FLAG_BADGE04_GET)) {
+            setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ICHOR_THESPIS_COMIC)
             setobjectxyperm(LOCALID_DIONYSUS_THESPIS, 13, 44)
             setobjectmovementtype(LOCALID_DIONYSUS_THESPIS, MOVEMENT_TYPE_FACE_LEFT)
+        } else {
+            setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ICHOR_THESPIS)
         }
     }
     MAP_SCRIPT_ON_LOAD {
@@ -707,12 +711,19 @@ script ThyrsaCity_TempleOfDionysus_EventScript_ThespisScene {
     setspeaker(ThyrsaCity_TempleOfDionysus_Text_NameThespis)
     msgbox(format("An entrance from the machine! Like a god! The audience loves that."))
     closemessage
-    // He stands, turns his back a moment, and turns round in the comic mask.
-    // ICHOR_STUB_TRAINER_ART: swap his walker's tragic face for the comic one while his
-    // back is turned, once the sprites agent's Thespis has both masks.
+    // He turns his back a moment and turns round in the comic mask: the two sheets share
+    // their back frames, so the swap happens while he faces away (SPRITES.md).
     applymovement(LOCALID_DIONYSUS_THESPIS, ThyrsaCity_TempleOfDionysus_Movement_ThespisTurns)
     waitmovement(0)
+    copyobjectxytoperm(LOCALID_DIONYSUS_THESPIS)
+    setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_ICHOR_THESPIS_COMIC)
+    setobjectmovementtype(LOCALID_DIONYSUS_THESPIS, MOVEMENT_TYPE_FACE_UP)
+    removeobject(LOCALID_DIONYSUS_THESPIS)
+    addobject(LOCALID_DIONYSUS_THESPIS)
+    delay(20)
     playse(SE_CLICK)
+    applymovement(LOCALID_DIONYSUS_THESPIS, Common_Movement_FaceRight)
+    waitmovement(0)
     waitse
     msgbox(format(
         "I'm Thespis. The first fool who stepped out of the chorus and spoke alone.\p"
@@ -848,8 +859,7 @@ movement ThyrsaCity_TempleOfDionysus_Movement_CameraUp4 { walk_up * 4 }
 movement ThyrsaCity_TempleOfDionysus_Movement_CameraDown4 { walk_down * 4 }
 movement ThyrsaCity_TempleOfDionysus_Movement_ThespisTurns {
     face_up
-    delay_16 * 3
-    face_right
+    delay_16 * 2
 }
 movement ThyrsaCity_TempleOfDionysus_Movement_ThespisToHook { walk_right * 3 face_down }
 movement ThyrsaCity_TempleOfDionysus_Movement_ThespisLowered { delay_16 set_invisible }

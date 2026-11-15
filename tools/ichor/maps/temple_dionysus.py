@@ -120,7 +120,7 @@ SL 3u 3u 3u 3U Iu 3u 3U 3u 3u Cu 3u 3u 3U 3u Gu 3u 3U 3u 3u SR
 SL Rc Rt Rs 3L Id 3l 3L 3l 3l Cd 3l 3l 3L 3l Gd 3l 3L 3l 3l SR
 SL .. .. pk .. .. .. .. .. p2 .. .. .. p2 .. .. .. .. pk Zb SR
 SL .. p2 .. .. pw pw pk pw pw pw pw pw pw pw pw p2 .. .. Zw SR
-SL .. .. Pt .. .. .. Zl .. .. .. Ya Yb .. .. .. Xa Xb .. Zs SR
+SL .. .. Pt .. .. .. Zl .. .. .. Ya Yb .. Zb .. Xa Xb .. Zs SR
 SL Tl Tr We WT WT WT WT WT WT WT WT WT WT WT WT WT WT WT WT SR
 SL Hl Hr B2 Bm B2 Bn B2 Bm B2 Bn B2 Bm B2 Bn B2 Bm B2 Bn B2 SR
 SL Kl Kr bl ba bb bc ba bb bc ba bb bc ba bb bc ba bb bc ba SR
@@ -132,7 +132,7 @@ SL 2u 2u 2u 2U Iu 2u 2U 2u 2u Cu 2u 2u 2U 2u Gu 2e Gl Gs Gr SR
 SL Rc Rt Rs 2L Id 2l 2L 2l 2l Cd 2l 2l 2L 2l Gd 2E Zp Zp Zh SR
 SL .. .. .. .. .. pk .. .. .. .. .. .. p2 .. .. .. .. .. .. SR
 SL .. .. p2 Pp pw pw pw Zf pw pw pw pw pw Zs pw pw pw pw .. SR
-SL Zw .. .. .. .. .. Xa Xb .. .. .. Zl .. .. .. pk .. .. .. SR
+SL Zw .. .. .. .. .. Xa Xb .. Zb .. Zl .. .. Ya Yb .. .. .. SR
 SL WT WT WT WT WT WT WT WT WT WT WT WT WT WT WT WT Wf Tl Tr SR
 SL B1 Bg B1 B1 Bg B1 B1 Bg B1 B1 Bg B1 B1 Bg B1 B1 Bg Hl Hr SR
 SL ba bb bc ba bb bc ba bb bc ba bb bc ba bb bc ba br Kl Kr SR
@@ -144,7 +144,7 @@ SL 1u 1U 1u 1u Iu 1u 1U 1u 1u cu 1u 1u 1U 1u gu 1u 1U 1u 1u SR
 SL 1l 1L 1l 1l Id 1l 1L 1l 1l cd 1l 1l Rc 1l gd 1l 1L 1l 1l SR
 SL .. p2 .. pk .. .. .. .. .. .. .. .. p2 .. .. .. .. p2 .. SR
 SL .. .. Zf .. pw pw pk pw pw pw pw Pp .. .. .. .. Ya Yb .. SR
-SL Zs .. .. .. .. Zl .. .. .. pw .. .. .. p2 Xa Xb .. .. .. SR
+SL Zs .. .. Zw .. Zl .. .. .. pw .. .. Zb p2 Xa Xb .. .. .. SR
 SL WT WT WT WT WT WT WT Wf Wg Wg Wg We WT WT WT WT WT WT WT SR
 SL Fg Fi Fp Fi Fs Fi Fk Jr ff ff ff Jl Fk Fi Fm Fi Fp Fi Fg SR
 SL Ev ff f2 ff ff Et ff OO OO OO OO OO ff Et ff ff Ey ff Ev SR
@@ -188,7 +188,8 @@ PEOPLE = [
     ("LOCALID_DIONYSUS_MYNNISKOS", "OBJ_EVENT_GFX_ICHOR_ACTOR", 8, 39, "UP", 3, "Mynniskos"),
     ("LOCALID_DIONYSUS_THETTALOS", "OBJ_EVENT_GFX_ICHOR_ACTOR", 18, 24, "UP", 1, "Thettalos"),
     ("LOCALID_DIONYSUS_THEODOROS", "OBJ_EVENT_GFX_ICHOR_ACTOR", 4, 15, "UP", 3, "Theodoros"),
-    ("LOCALID_DIONYSUS_THESPIS", "OBJ_EVENT_GFX_ICHOR_THESPIS", 7, 4, "DOWN", None, "Thespis"),
+    # Thespis wears the tragic or the comic mask: VAR_OBJ_GFX_ID_0, set in ON_TRANSITION
+    ("LOCALID_DIONYSUS_THESPIS", "OBJ_EVENT_GFX_VAR_0", 7, 4, "DOWN", None, "Thespis"),
 ]
 THESPIS_AT_ALTAR = (13, 44)
 

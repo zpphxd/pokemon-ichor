@@ -187,7 +187,7 @@ def floor_pieces():
                      "`_worn` to break a run). `stage` is the stage's wide honey-coloured "
                      "boards (`stage_gilt` has a gilt inlay, for Act III; `stage_mark` a chalk "
                      "cross where an actor stands); `stage_lamp` is a footlight, a clay lamp "
-                     "burning at the stage's front edge (blocks; `_gilt` for Act III). `deck` "
+                     "burning at the stage's front edge (blocks). `deck` "
                      "is the skene roof's weathered planks, laid north-south; `deck_edge` is "
                      "the roof's front row, its lip dropping to the audience; `deck_ivy` a "
                      "pot of ivy and `deck_crate` Thespis's empty mask crate on the roof. "
@@ -1947,20 +1947,30 @@ def props_pieces():
             for y in range(16):
                 for x in range(13, 16):
                     L.px(ox + x, oy + y, ("yw1", "yw2", "yw0")[x - 13])
+        # a white goat's pelt stretched on pegs, legs splayed, with a satyr's tail;
+        # the middle one hangs under a pair of horns
         skin = [
-            "a..aa..a",
-            "aaAAAAaa",
-            ".aAAAAa.",
-            ".aAaAAa.",
-            ".aAAAaa.",
-            ".aAAAAa.",
-            "aaAaAAaa",
-            "a.aAAa.a",
-            "...aa...",
+            ".....kk.....",
+            "...WWWWWW...",
+            "..WWaaWWWW..",
+            ".WWaaaWWWwW.",
+            ".WWWaWWWWWW.",
+            "..WWWWWaaW..",
+            "..WWWWaaaW..",
+            "..WwWWWaWW..",
+            ".WWW.WW.WWW.",
+            ".Ww..WW..wW.",
+            "..W..Ww..W..",
+            "......W.....",
         ]
-        put(M, ox + 4, oy + 2, skin, {"a": "ya0", "A": "ya1"})
+        put(M, ox + 2, oy + (3 if k == "goatskins" else 1), skin,
+            {"W": "ym0", "w": "ym1", "a": "ya1", "k": "yk"})
         if k == "goatskins":
-            put(M, ox + 1, oy + 1, ["E..E", ".EE."], {"E": "ycr"} if False else {"E": "ym1"})
+            put(M, ox + 2, oy + 0, [
+                "dd........dd",
+                ".dd......dd.",
+                "...d....d...",
+            ], {"d": "ym2"})
     cx, cy = pos["hay"]
     put(M, cx * 16 + 1, cy * 16 + 3, [
         "..wwWwwWwwWw..",

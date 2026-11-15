@@ -87,7 +87,7 @@
     },
     {
       "local_id": "LOCALID_DIONYSUS_THESPIS",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_THESPIS",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 7,
       "y": 4,
       "elevation": 3,
