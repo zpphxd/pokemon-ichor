@@ -18,6 +18,19 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 
 Each batch ends with a report to the director: the branch and commit, what's playable, the map renders, the test results and the ROM delta.
 
+## Handovers waiting for later batches
+
+**Batch 4, Aigina's interior** (from world-act1, 2026-11-14; maps on `claude/world-act1-6d11b7` at 1090709095, seams and spots in `design/phase2/BUILD.md`, the island stitched in `design/phase2/img/aigina_island.png`). `MAP_AEGINA_APHAIA_ROAD`, `MAP_AEGINA_TEMPLE_OF_APHAIA` and `MAP_AEGINA_MOUNT_OROS` are connected to the town and each other. The town's north gate opens on `FLAG_ICHOR_FERRY_TO_AEGINA`. Placeholders for us to replace, each with a script tagged `ICHOR_ACT2`:
+
+| Who | Where | Notes |
+|---|---|---|
+| Myrmex | road (13,14), facing west | trainer, sight 3, mandatory sight line proven by world-act1's builder |
+| Sostratos | road (20,6), facing east | trainer, sight 3 |
+| Euthymia | road (26,3), facing east | trainer, sight 3 |
+| The priestess | temple (11,9) | |
+
+Set the three to `TRAINER_TYPE_NORMAL` once their `trainerbattle` scripts exist (the game reads the id from the script). Stubs already on their maps: the herm at road (22,3), landing (22,4), sets `FLAG_ICHOR_HERM_AEGINA` behind `ICHOR_STUB_HERM` (the engine still has to give Aigina's herm an id); altars behind `ICHOR_STUB_RITES`, Zeus on Oros (6,4) and Artemis at the temple (15,11); a dig spot at temple (18,11). The encounter tables are still Phase 2's levels 12–16: re-level them to BALANCE.md's Astyra row.
+
 ## Batch 1
 
 ### Who builds what
@@ -69,10 +82,11 @@ This session has registered every batch 1 map with `tools/ichor/new_map.py`, so 
 
 | Seam | Columns or rows | Agreed with |
 |---|---|---|
-| Eleusa's north edge → Route 6's south edge | world-act1 keeps Eleusa's north road open to the seam, at least 2 columns wide, aethos-only, and sends the exact columns when its layout lands. Until then Route 6's road meets the seam at columns 26–29, and the connection is left out of `map.json`. The vines are on Route 6, just past the seam. | world-act1 |
+| Eleusa's north edge → Route 6's south edge | `MAP_ELEUSA_VILLAGE` (50×40, aethos + eleusa, world-act1's commit 0284b88d32) is open at y = 0 in columns 44–47: the road is 45–46, grass verges at 44 and 47. Eleusa's six rows nearest the seam are aethos-only and have no vines; the vines are on Route 6, just past the seam. Route 6's road meets its south edge in the kithairon agent's choice of four columns *r*…*r*+3 (verge, road, road, verge), with Route 6's own seam rows aethos-only. Offsets follow from *r*: Eleusa `up` to Route 6 with offset 44 − *r*; Route 6 `down` to Eleusa with offset *r* − 44. This session adds both connections at integration, once Eleusa and Route 6 are on one branch. | world-act1 (columns), kithairon (*r*) |
 | Route 6 ↔ Eleutherai ↔ Mt. Kithairon ↔ Route 7 | the kithairon agent's choice, recorded here | — |
 | Route 7's north edge → Thyrsa's Elektran Gate | Route 7's road leaves its north edge at columns 20–23; Thyrsa's Elektran Gate opens on its south edge at columns 26–29. The connection is `up` from Route 7 with offset −6 (Thyrsa's `down` with offset +6). Both rows at the seam are aethos-only. The kithairon and thyrsa agents may move it together, and record the change here. | kithairon, thyrsa |
 | Thyrsa's west edge (the Neistan Gate) → Route 8 | batch 2. Draw the gate and the road's first columns; record them here | — |
+| Eleusa's east edge → Route 15 | batch 4. Eleusa is open at x = 49 in rows 24–27; a wall runs down x = 48 with its gap at (48,25), where a hoplite stands in Act I. This session claimed his hide flag, `FLAG_ICHOR_HIDE_ELEUSA_EAST_HOPLITE` (bank 0x10C), and puts it on his object in batch 4, once Eleusa is on main | world-act1 |
 | Thyrsa's east edge (the Proitid Gate) → Euboia | batch 7. Draw the gate shut, with its guard | — |
 
 Record arrival tiles for scripted warps here as you choose them.
@@ -95,12 +109,19 @@ The theater's warp 0 is its gate back to the city's warp 11.
 
 **Trainer names** fit `TRAINER_NAME_LENGTH`, 10 characters. Batch 1's three long ones are now Astylos (Route 6's runner, was Thersandros), Mynniskos and Thettalos (the temple's actors, were Kallippides and Nikostratos); SCRIPT.md is updated. Eight later trainers' names are too long too and get renamed in their batches.
 
-The sprites agent makes these, under these names, so everyone else can use them now:
+**The sprites have landed** (merged from `act2-b1-sprites`; `design/phase3/SPRITES.md` is the catalog, `design/phase3/img/sprites_batch1.png` the contact sheet). Every name below is real. `include/constants/ichor_gfx_stubs_act2.h` is empty now and stays as the place for the next batch's not-yet-drawn names.
 
-- **Classes** (`Class:` in a party): `Maenad`, `Satyr`, `Actor`, `Vintner`. Until they exist, `tools/ichor/act2/fold_parties.py` folds them in as Harvester, Goatherd, Acolyte and Harvester.
-- **Pics** (`Pic:`): `Maenad`, `Satyr`, `Actor`, `Vintner`, `Hierophant Thespis`, `Silenos`. Until they exist, the fold uses Hierophant Ione's pic for Thespis and the Shepherd's for the rest.
-- **Walkers and objects** (`graphics_id` in `map.json`, `setobjectgraphics` in scripts): `include/constants/ichor_gfx_stubs_act2.h` names each one and points it at a stand-in walker. Use the names there. When the sprites agent adds a real one to `event_objects.h`, it deletes that name's line from the stub header in the same commit.
-- Named townsfolk (Pindaros, Staphylos, Oinoe and the rest) use the existing folk walkers in batch 1. The sprites agent may add palette variants and list them in its report; this session swaps them in.
+- **Classes:** `Maenad`, `Satyr`, `Actor`, `Vintner`. **Pics:** `Maenad`, `Satyr`, `Actor`, `Vintner`, `Hierophant Thespis` (Thespis stays `Class: Hierophant`), `Silenos` (`Class: Satyr`). `fold_parties.py` now folds them as written.
+- **Walkers and objects** (`OBJ_EVENT_GFX_ICHOR_…`): `MAENAD`, `SATYR`, `ACTOR`, `VINTNER`, `THESPIS`, `SILENOS`, `MANTO`, `HERALD`, `KRONIST`, `CHORUS_LEADER`, `BEE_WOMAN`, `FATE_SPINNER`, `FATE_MEASURER`, `FATE_CUTTER`, `GOLD_MASK_KING`, `UNWOVEN_ACTOR`, `KLEON_SEATED`, `ALETHEA_KNEEL`, `WOODEN_IMAGE`, `MASK`, `CROWS`, and these extras:
+  - `THESPIS_COMIC`: Thespis in the comic mask; his back frames match `THESPIS`, so swap while he faces away.
+  - `KLEON_FEAST`: Kleon at the Kronia's bench, a loaf in each hand (bites when walking in place facing down). **Use this at the Kronia tables.** `KLEON_SEATED` is the theater pose: the stage's edge with his hat (beat 33) and the front row (beat 32).
+  - `ALETHEA_SEATED`: her theater seat with the program. `ALETHEA_KNEEL` is the trowel.
+  - `GOLD_MASK_KING_KNEEL`: the king on his knees.
+  - `MAENAD_THYRSA`: the city maenad in wine-red (Lenaia).
+  - `WOODEN_IMAGE_GARLAND`: Eleutherai's image after Oinoe's ivy garland is laid.
+  - Thyrsa folk variants: `MOM_THYRSA` (Chthonia), `WOMAN_THYRSA` (Eudora), `YOUTH_F_THYRSA` (Erigone), `KID_M_THYRSA`, `MERCHANT_THYRSA` (Euthykles), `HARVESTER_THYRSA`; Staphylos is `VINTNER` and Polos is `ACTOR`.
+- **There is no `setobjectgraphics` command in this tree.** To change a person's look in a scene (a mask, a pose), either keep two objects and swap their hide flags, or give the object a `OBJ_EVENT_GFX_VAR_n` graphics id, set `VAR_OBJ_GFX_ID_n`, and respawn it (`copyobjectxytoperm`, `removeobject`, `addobject`). SPRITES.md has the recipe.
+- New palette tag `OBJ_EVENT_PAL_TAG_ICHOR_WINE` (0x1136) joins the folk and cast tags; a map shows at most those three.
 
 ### Ids
 
@@ -128,7 +149,7 @@ The sprites agent makes these, under these names, so everyone else can use them 
 
 Story flags this session has already claimed, for everyone to use: `FLAG_ICHOR_ACT2_BEGUN`, `_VISITED_ELEUTHERAI`, `_KRONIA_SEEN`, `_ARRIVED_THYRSA`, `_VISITED_THYRSA`, `_THREE_ACT_PLAY_DONE`, `_DIONYSIA_BEGUN`, `_DIONYSIA_DONE`, `_SAW_PROGRAM_HOOK`, `_KLEON_BATTLE_3_DONE` (all `FLAG_ICHOR_…`).
 
-Daily flags (this session claims them): `FLAG_DAILY_ICHOR_KRONIST_BREAD`, `_SKENE_MASK`, `_TREADING`, from 0x4C. **Hidden items** need vanilla flags, which arrive with the Hoenn cut's batch 2: until then, list each hidden item in your map's section of this file and don't place it.
+Daily flags (this session claims them): `FLAG_DAILY_ICHOR_KRONIST_BREAD`, `_SKENE_MASK`, `_TREADING`, from 0x4C. **Hidden items** need vanilla flags (0x1F4 or above). Act II's range is vanilla flags 0x300–0x37F, 110 of them free, from the Hoenn cut's batch 2 (commit aae327b35e on `claude/hoenn-cut-db6209`, not yet on main). Until it is on main, list each hidden item in your map's section of this file and don't place it; this session claims the flags (`claim.py --range 300-37F flag …`) and places them once the cut lands. Story state stays in the Ichor bank flags. Vars beyond the bank vars above need the director's OK. The cut removes every Hoenn and FRLG map: never use a Hoenn or FRLG `MAP_`, `LAYOUT_` or `HEAL_LOCATION_` name (warps, heal points, copied layouts), since after the cut they compile only as stubs.
 
 Batch 1 alone wants about 80 bank flags, and Act II about 430 before item balls; the 256 in 0x100–0x1FF won't hold the act. The director has the ask.
 

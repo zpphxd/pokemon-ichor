@@ -1701,6 +1701,7 @@
 #ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
+#define FLAG_ICHOR_HIDE_ELEUSA_EAST_HOPLITE     (FLAG_ICHOR_GENERAL_START + 0x10C) // Ichor: the hoplite in Eleusa's east wall gap (48,25), hidden when Route 15 opens in Act II (batch 4)
 #define FLAG_ICHOR_HIDE_DIONYSIA_CAST           (FLAG_ICHOR_GENERAL_START + 0x154) // Ichor: Act II: hides the Dionysia's cast, herald and seated Kleon outside the play (beat 32)
 #define FLAG_ICHOR_HIDE_THESPIS_SKENE           (FLAG_ICHOR_GENERAL_START + 0x155) // Ichor: Act II: hides Thespis backstage once the masks let go (beat 32)
 #define FLAG_ICHOR_HIDE_KLEON_THEATER           (FLAG_ICHOR_GENERAL_START + 0x156) // Ichor: Act II: hides Kleon on the stage's edge after his third battle (beat 33)

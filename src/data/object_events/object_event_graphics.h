@@ -667,6 +667,36 @@ const u32 gObjectEventPic_IchorAcolyteF[] = INCGFX_U32("graphics/object_events/p
 const u32 gObjectEventPic_IchorTablet[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/tablet.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatL[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_l.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatR[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_r.png", ".4bpp");
+// Act II batch 1 (tools/ichor/art/sprites_act2.py). The wine palette is the folk
+// palette index for index, with its blues turned to grape and its terracotta to wine.
+const u16 gObjectEventPal_IchorWine[] = INCGFX_U16("graphics/object_events/palettes/ichor_wine.pal", ".gbapal");
+const u32 gObjectEventPic_IchorMaenad[] = INCGFX_U32("graphics/object_events/pics/people/ichor/maenad.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorMaenadThyrsa[] = INCGFX_U32("graphics/object_events/pics/people/ichor/maenad_thyrsa.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorSatyr[] = INCGFX_U32("graphics/object_events/pics/people/ichor/satyr.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorSilenos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/silenos.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorManto[] = INCGFX_U32("graphics/object_events/pics/people/ichor/manto.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKronist[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kronist.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorHerald[] = INCGFX_U32("graphics/object_events/pics/people/ichor/herald.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorVintner[] = INCGFX_U32("graphics/object_events/pics/people/ichor/vintner.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorActor[] = INCGFX_U32("graphics/object_events/pics/people/ichor/actor.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorThespis[] = INCGFX_U32("graphics/object_events/pics/people/ichor/thespis.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorThespisComic[] = INCGFX_U32("graphics/object_events/pics/people/ichor/thespis_comic.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorChorusLeader[] = INCGFX_U32("graphics/object_events/pics/people/ichor/chorus_leader.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorBeeWoman[] = INCGFX_U32("graphics/object_events/pics/people/ichor/bee_woman.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorFateSpinner[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fate_spinner.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorFateMeasurer[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fate_measurer.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorFateCutter[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fate_cutter.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorGoldMaskKing[] = INCGFX_U32("graphics/object_events/pics/people/ichor/gold_mask_king.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorGoldMaskKingKneel[] = INCGFX_U32("graphics/object_events/pics/people/ichor/gold_mask_king_kneel.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorUnwovenActor[] = INCGFX_U32("graphics/object_events/pics/people/ichor/unwoven_actor.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKleonSeated[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_seated.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKleonFeast[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_feast.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAletheaKneel[] = INCGFX_U32("graphics/object_events/pics/people/ichor/alethea_kneel.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAletheaSeated[] = INCGFX_U32("graphics/object_events/pics/people/ichor/alethea_seated.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorWoodenImage[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/wooden_image.png", ".4bpp");
+const u32 gObjectEventPic_IchorWoodenImageGarland[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/wooden_image_garland.png", ".4bpp");
+const u32 gObjectEventPic_IchorMask[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mask.png", ".4bpp", "-mwidth 2 -mheight 2");
+const u32 gObjectEventPic_IchorCrows[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/crows.png", ".4bpp", "-mwidth 4 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)
