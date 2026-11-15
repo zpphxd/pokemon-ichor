@@ -173,3 +173,19 @@ const u16 gMetatileAttributes_PorytilesManaged_Ida[] = INCBIN_U16("data/tilesets
 // Ichor: mychos
 const u16 gMetatiles_PorytilesManaged_Mychos[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Mychos[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: lakonia
+const u16 gMetatiles_PorytilesManaged_Lakonia[] = INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Lakonia[] = INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: gytheion
+const u16 gMetatiles_PorytilesManaged_Gytheion[] = INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Gytheion[] = INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: eurotas
+const u16 gMetatiles_PorytilesManaged_Eurotas[] = INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Eurotas[] = INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: stymphalia
+const u16 gMetatiles_PorytilesManaged_Stymphalia[] = INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Stymphalia[] = INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/metatile_attributes.bin");

@@ -1145,3 +1145,95 @@ const u16 gTilesetPalettes_MychosGlow[][16] =
     INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/glow/11.gbapal"),
     INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/glow/12.gbapal")
 };
+
+// Ichor: lakonia (Lakonia, the town with no walls), written by tools/ichor/art/lakonia_build.py
+const u32 gTilesetTiles_PorytilesManaged_Lakonia[] = INCBIN_U32("data/tilesets/secondary/lakonia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Lakonia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/lakonia/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: gytheion (Gytheion and the strait off Malea), written by tools/ichor/art/lakonia_build.py
+const u32 gTilesetTiles_PorytilesManaged_Gytheion[] = INCBIN_U32("data/tilesets/secondary/gytheion/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Gytheion[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gytheion/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: eurotas (Route 25, up the Eurotas), written by tools/ichor/art/lakonia_build.py
+const u32 gTilesetTiles_PorytilesManaged_Eurotas[] = INCBIN_U32("data/tilesets/secondary/eurotas/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Eurotas[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/eurotas/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: stymphalia (Route 26, Lake Stymphalia and Route 27), written by tools/ichor/art/lakonia_build.py
+const u32 gTilesetTiles_PorytilesManaged_Stymphalia[] = INCBIN_U32("data/tilesets/secondary/stymphalia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Stymphalia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/stymphalia/porytiles_bin/palettes/15.gbapal")
+};
