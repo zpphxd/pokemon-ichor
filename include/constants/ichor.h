@@ -80,6 +80,13 @@
 #define ICHOR_RELIC_FORBIDDEN  2  // FLAG_ICHOR_NO_RELICS: this place forbids outside tools
 #define ICHOR_RELIC_TOO_WEAK   3  // it needs the relic's upgrade
 
+// --- The Labyrinth (LABYRINTH.md §5) --------------------------------------------
+// Names for the Thread's RETURN TO… list: the name id a ring's ON_LOAD gives
+// Ichor_AddThreadAnchor. The strings are in src/data/ichor_thread.h; add new
+// ones at the end. 0 shows the map's own name.
+#define THREAD_ANCHOR_UNNAMED          0
+#define THREAD_ANCHOR_GRAND_STAIRCASE  1
+
 // Light radius levels for dark maps (SYSTEMS §2; sFlashLevelToRadius)
 #define ICHOR_FLASH_NO_TORCH      7  // 24 px
 #define ICHOR_FLASH_TORCH         3  // 56 px

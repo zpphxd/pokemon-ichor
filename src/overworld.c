@@ -1862,7 +1862,7 @@ static void OverworldBasic(void)
     CameraUpdate();
     UpdateCameraPanning();
     BuildOamBuffer();
-    Ichor_FrozenHourFrame(); // Ichor: gray palettes and still people
+    Ichor_OnFieldFrame(); // Ichor: the Frozen Hour, the Thread, Asterion
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();

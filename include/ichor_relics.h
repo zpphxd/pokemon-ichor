@@ -15,7 +15,8 @@ bool32 Ichor_IsBlessed(u32 god);
 
 // Engine hooks, one call each in vanilla code
 void Ichor_OnItemAdded(u16 itemId);             // item.c, AddBagItem
-void Ichor_OnMapTransition(void);               // event_data.c, ClearTempFieldEventData
+void Ichor_OnMapTransition(void);
+void Ichor_OnFieldFrame(void);               // event_data.c, ClearTempFieldEventData
 u8 Ichor_GetTorchFlashLevel(void);              // overworld.c, SetDefaultFlashLevel
 bool32 Ichor_IsRelicShowArg(u32 arg);           // field_effect.c, FldEff_FieldMoveShowMonInit
 void Ichor_StartRelicShow(u16 itemId);

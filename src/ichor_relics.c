@@ -18,6 +18,7 @@
 #include "fldeff.h"
 #include "follower_npc.h"
 #include "ichor_frozen.h"
+#include "ichor_labyrinth.h"
 #include "ichor_relics.h"
 #include "ichor_save.h"
 #include "item.h"
@@ -56,6 +57,7 @@ extern const u8 EventScript_IchorCobweb[];
 extern const u8 EventScript_IchorThornweb[];
 extern const u8 EventScript_IchorGreatBoulder[];
 extern const u8 EventScript_IchorLabrysSeal[];
+extern const u8 EventScript_IchorThreadMenu[];
 extern const u8 EventScript_IchorRelicRing[];
 extern const u8 EventScript_IchorTorchDoused[];
 extern const u8 EventScript_IchorTorchRelit[];
@@ -109,6 +111,14 @@ void Ichor_OnMapTransition(void)
 {
     FlagClear(FLAG_ICHOR_NO_RELICS);
     Ichor_FrozenHourOnMapTransition();
+    Ichor_LabyrinthOnMapTransition();
+}
+
+// overworld.c, OverworldBasic: once a field frame, before the palette fade.
+void Ichor_OnFieldFrame(void)
+{
+    Ichor_FrozenHourFrame();
+    Ichor_LabyrinthFrame();
 }
 
 // --- Light (SYSTEMS §2) -------------------------------------------------------
@@ -457,9 +467,12 @@ void ItemUseOutOfBattle_IchorWings(u8 taskId)
 
 void ItemUseOutOfBattle_IchorThread(u8 taskId)
 {
-    // Outside the Labyrinth the Thread leads back to a dungeon's entrance,
-    // like the Escape Rope. LABYRINTH.md's thread menu hooks in here.
-    ItemUseOutOfBattle_EscapeRope(taskId);
+    // In the Labyrinth: TIE OFF, RETURN TO…, WIND IN (src/ichor_labyrinth.c).
+    // Elsewhere the Thread leads back to a dungeon's entrance, like the Escape Rope.
+    if (Ichor_IsThreadedMap())
+        ItemUse_IchorRunFieldScript(taskId, EventScript_IchorThreadMenu);
+    else
+        ItemUseOutOfBattle_EscapeRope(taskId);
 }
 
 void ItemUseOutOfBattle_IchorHelm(u8 taskId)

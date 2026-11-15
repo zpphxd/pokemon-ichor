@@ -94,7 +94,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 ## Status of the rest of this file
 
-§1–§5 are built. **§6 is the planned API, published early so world-act3 can write its scripts against it now.** The names in it are fixed: build against them, and stub what isn't there yet.
+§1–§6 are built. What each section leaves for later is listed at its end.
 
 | § | System | Batch | State |
 |---|---|---|---|
@@ -103,7 +103,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 3 | Rites: altars, Favor, blessings, gifts | 3 | **Built** |
 | 4 | Herm waystones and the Wings | 4 | **Built** |
 | 5 | The Frozen Hour (SCRIPT.md Phase 4, E1–E6) | 5 | **Built** |
-| 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials | 5 | Planned, names fixed |
+| 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials | 5 | **Built** |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
@@ -123,9 +123,9 @@ Relics are key items. **No Pokémon ever needs a field move:** the party menu of
 | `ITEM_POSEIDONS_CONCH` | Poseidon's Conch | Surf | A on water (always asks) |
 | `ITEM_DAEDALUS_WINGS` | Daedalus's Wings | Fly | From the bag or the Relic Ring |
 | `ITEM_HORN_OF_ACHELOUS` | Horn of Achelous | Waterfall | A at a waterfall while surfing (always asks) |
-| `ITEM_ARIADNES_THREAD` | Ariadne's Thread | Outside the Labyrinth, an escape to the dungeon's entrance | Relic Ring |
+| `ITEM_ARIADNES_THREAD` | Ariadne's Thread | In the Labyrinth, laid on the floor as you walk, with TIE OFF, RETURN TO… and WIND IN (§6); elsewhere an escape to the dungeon's entrance | Relic Ring |
 | `ITEM_LABRYS` | Labrys | Cleaves labrys seals and bronze chains | A |
-| `ITEM_HELM_OF_DARKNESS` | Helm of Darkness | On or off; hook for unseen-in-the-dark (§5) | Relic Ring |
+| `ITEM_HELM_OF_DARKNESS` | Helm of Darkness | On or off; unseen in the dark, by trainers and Asterion (§6) | Relic Ring |
 | `ITEM_NEREID_PEARL` | Nereid Pearl | Dive | A on deep water |
 | `ITEM_AEOLUS_BAG` | Aeolus's Bag | Defog | From the bag |
 
@@ -375,8 +375,96 @@ E7–E18 are not in this batch: the bull-leap timing, statues, beams, large obje
 
 ## 6. The Labyrinth (LABYRINTH.md §5, §12)
 
-Being built in batch 5, after the Frozen Hour. IchorSave already holds Ariadne's Thread (§1). The planned pieces:
-- **Ariadne's Thread on the floor:** the per-step callback, the drawing and winding, tying off, and RETURN TO… (LABYRINTH.md §5.1).
-- **Asterion:** patrol, sight and charge AI (§5.3).
-- **The Helm of Darkness:** stealth in the dark, through the trainer-sight light test and Asterion's sight.
-- **Daedalus's wall dials,** turned with the Labrys.
+Built in `src/ichor_labyrinth.c` and `data/scripts/ichor_labyrinth.pory`. Tested by `tools/ichor/tests/ichor_labyrinth.sh` (30 checks). The test uses Route 1 as a stand-in ring and borrows ordinary metatiles as the thread's twins.
+
+### A ring's map scripts
+
+```
+// ON_LOAD
+setvar(VAR_0x8004, <floor metatile>)          // a floor that takes thread (up to 4)
+setvar(VAR_0x8005, <its first twin>)          // ten twins in a row, in the order below
+special(Ichor_AddThreadFloor)
+
+setvar(VAR_0x8004, <x>)                       // a bronze ring (up to 8)
+setvar(VAR_0x8005, <y>)
+setvar(VAR_0x8006, THREAD_ANCHOR_...)         // its name in RETURN TO…
+special(Ichor_AddThreadAnchor)
+
+setvar(VAR_0x8004, <x>)                       // a cracked wall Asterion can break (up to 8)
+setvar(VAR_0x8005, <y>)
+setvar(VAR_0x8006, FLAG_ICHOR_...)            // set when it breaks; 0 for none
+setvar(VAR_0x8007, <broken metatile>)
+special(Ichor_AddCrackedWall)
+
+// ...draw broken walls (by their flags), dials, the Turning's layout...
+special(Ichor_DrawThread)                     // last
+
+// ON_TRANSITION (or ON_LOAD)
+setvar(VAR_0x8004, LOCALID_...)
+special(Ichor_StartAsterion)
+```
+
+- **The twins of each floor** are ten metatiles in a row: the straights H and V; the corners NE, NW, SE, SW (named for the two sides they join); and the end caps N, S, W, E (named for the one side they join). With two floors that is 20 twins, the art list's count.
+- **Anchor names** are `THREAD_ANCHOR_*` in `include/constants/ichor.h`, with their strings in `src/data/ichor_thread.h`. Add Ring I–VII's names there. `THREAD_ANCHOR_UNNAMED` shows the map's name.
+- **`MB_ICHOR_LIGHT_POOL`** is the metatile behavior for skylight pools (Ring V).
+
+### Ariadne's Thread, as built
+
+- **Laying is automatic** on a map that registered floors, while the Thread is in the bag. Floors and bronze rings take thread. On anything else (stairs, doorways) the thread waits at its end.
+- **Stepping back onto the thread's last tile winds it up.**
+- **The spool** is 150, 120 or 100 tiles: Mortal, Hero and Spartan are `DIFFICULTY_EASY`, `_NORMAL` and `_HARD`. "The spool is nearly empty." shows at 10 left.
+- **Segments.**
+  - Each map's segment starts where the player enters. On a bronze ring it starts tied, so each ring's entrance ties itself.
+  - Leaving the map commits the segment.
+  - Thread is redrawn over whatever is there, except bronze rings, so a wall from the Turning or a dial on a committed tile is drawn open again. That's why `Ichor_DrawThread` goes last.
+- **The Relic Ring's THREAD** (or the bag), on a threaded map:
+  - TIE OFF, on a bronze ring: commits the thread, refills the spool, and makes this the ring a knockdown returns to.
+  - RETURN TO…: tied rings, newest first. It fades and warps there, and the live thread winds in. The Grand Staircase is listed once it's registered as a ring named `THREAD_ANCHOR_GRAND_STAIRCASE`.
+  - WIND IN and LEAVE.
+  - Off the Labyrinth, the Thread is the Escape Rope.
+- **The Turning:** set `FLAG_ICHOR_THREAD_NO_RETURN`. RETURN TO… then says "The thread shakes in your hand. Walk it."
+- **Saved** in `IchorSave.thread`: 24 anchors and 1,792 committed steps. The oldest segments are dropped when it fills.
+
+### Asterion, as built
+
+His own movement type is his patrol: `FACE_*` or `WALK_SEQUENCE_*`, set in Porymap. He does nothing while any script runs.
+
+| | |
+|---|---|
+| **Sight** | Along his facing, stopped by walls. Its range comes from the player's tile: 3 on a dark tile; 7 in a skylight pool by day, 5 at night; 7 on a lit map or in a lit zone. With the Helm: 0 in the dark, 2 elsewhere. |
+| **Hearing** | The player's steps, counted in tiles: walking 2, running 5. With the Helm: walking 0, running 3. |
+| **Difficulty** | Mortal is 1 shorter and Spartan 1 longer, except the Helm's zeros. |
+| **Listen** | He turns toward a step for 60 frames, then goes back to his patrol, facing as before. |
+| **Alert** | "!" and a scrape. The player keeps control for 60, 40 or 30 frames, then he charges along that line at 4 frames per tile. |
+| **Hitting the player** | Even half a step out of the way: "Asterion's charge sends you sprawling!" They wake at their current ring (or where they entered the map) with the live thread wound in. |
+| **Hitting a wall** | Stunned for 120 frames (a "?" stands in for the stars), then he walks back to where the charge began. |
+| **Hitting a registered cracked wall** | It becomes its broken metatile (passable), its flag is set, and the camera shakes. He stumbles into the gap, stunned for 60 frames. |
+| **The bronze bell** | `setvar(VAR_0x8004, 30)`, then `special(Ichor_AsterionRest)`. He lies still (facing south) for that many of the player's steps, and wakes early if the player comes next to him. |
+
+### The Helm of Darkness, as built
+
+- **Wearing it** (`FLAG_ICHOR_HELM_ON`, the Ring's WEAR HELM) makes the player's sprite translucent.
+- **Trainers can't see the player** on a dark tile: a dark map, outside lit zones and light pools. Elsewhere they see 2 tiles at most. Talking to them still starts the battle.
+- **Asterion** follows the table above.
+
+### Dials
+
+```
+copyvar(VAR_0x8004, VAR_ICHOR_LABYRINTH)   // the dials' positions
+setvar(VAR_0x8005, <this dial's bit>)
+call(EventScript_IchorDial)                // needs the Labrys; asks, or AUTO
+copyvar(VAR_ICHOR_LABYRINTH, VAR_0x8004)   // saved back, turned or not
+// VAR_RESULT: the wall's new position, 0 (A) or 1 (B); 0xFF if nothing turned.
+// Swap the wall's metatiles, special(DrawWholeMapView), releaseall.
+```
+
+### Not built yet
+
+- **Art:** the thread's twins, the skylight pools, Asterion's stars and lying-down frame, and the dust puff on his scrape.
+- **Engine:**
+  - the waypoint patrol for wall %2 (`MOVEMENT_TYPE_ICHOR_PATROL`);
+  - sentries' sight bands and the disguise (§5.6);
+  - the bull-leap (E7);
+  - the mirrors and beam (E9);
+  - the Endless Labyrinth.
+- **Script-only, for world-act3:** the sun and moon gates, the dancing floor, the lift, the sunken floor and the alarms.

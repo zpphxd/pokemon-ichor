@@ -243,6 +243,7 @@ enum {
     MB_DOWN_LEFT_STAIR_WARP,
     MB_ROCK_CLIMB,
     MB_ICHOR_GAP, // Ichor: a one-tile gap the Winged Talaria leap while running (SYSTEMS §1)
+    MB_ICHOR_LIGHT_POOL, // Ichor: a pool of sun or moonlight on a dark floor; Asterion sees farther into it (LABYRINTH §5.3)
     NUM_METATILE_BEHAVIORS
 };
 

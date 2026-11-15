@@ -683,3 +683,17 @@ gSpecials::
 	def_special Ichor_SepiaMemoryBegin
 	def_special Ichor_SepiaMemoryEnd
 	def_special Ichor_ColorReturnStep
+	@ Ichor: the Labyrinth (src/ichor_labyrinth.c)
+	def_special Ichor_AddThreadFloor
+	def_special Ichor_AddThreadAnchor
+	def_special Ichor_AddCrackedWall
+	def_special Ichor_DrawThread
+	def_special Ichor_StartAsterion
+	def_special Ichor_AsterionRest
+	def_special Ichor_AsterionKnockdown
+	def_special Ichor_BuildThreadMenu
+	def_special Ichor_ThreadTieOff
+	def_special Ichor_ThreadWindIn
+	def_special Ichor_BuildThreadReturnMenu
+	def_special Ichor_ThreadReturnTo
+	def_special Ichor_TurnDial
