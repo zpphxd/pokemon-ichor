@@ -9514,10 +9514,10 @@
     {
       "id": "LAYOUT_AEGINA_APHAIA_ROAD",
       "name": "AeginaAphaiaRoad_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 40,
+      "height": 24,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Aegina",
       "border_filepath": "data/layouts/AeginaAphaiaRoad/border.bin",
       "blockdata_filepath": "data/layouts/AeginaAphaiaRoad/map.bin",
       "layout_version": "emerald"
@@ -9525,10 +9525,10 @@
     {
       "id": "LAYOUT_AEGINA_TEMPLE_OF_APHAIA",
       "name": "AeginaTempleOfAphaia_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 24,
+      "height": 20,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Aegina",
       "border_filepath": "data/layouts/AeginaTempleOfAphaia/border.bin",
       "blockdata_filepath": "data/layouts/AeginaTempleOfAphaia/map.bin",
       "layout_version": "emerald"
@@ -9536,10 +9536,10 @@
     {
       "id": "LAYOUT_AEGINA_MOUNT_OROS",
       "name": "AeginaMountOros_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 16,
+      "height": 16,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Aegina",
       "border_filepath": "data/layouts/AeginaMountOros/border.bin",
       "blockdata_filepath": "data/layouts/AeginaMountOros/map.bin",
       "layout_version": "emerald"
