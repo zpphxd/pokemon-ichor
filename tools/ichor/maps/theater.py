@@ -291,9 +291,9 @@ CAST = "FLAG_ICHOR_HIDE_DIONYSIA_CAST"
 
 
 def theater_events(g):
-    # stair tops and walkway ends where the keeper turns the player back
-    # before the laurel: computed from the cavea (the cells on the promenade's
-    # inner edge that lead down a stair, and the promenade's ends at the parodoi)
+    # where the play begins: the first step down from the promenade, at every
+    # stair's top and at the promenade's ends by the parodoi (computed from the
+    # cavea), so the workers sweeping inside are seen first
     stops = []
     for (cx, cy) in V.cavea_cells():
         if T.stair_cell(cx, cy) and T.cell_tier(cx, cy) == T.PROMENADE[0] - 1:
@@ -309,13 +309,12 @@ def theater_events(g):
             {"x": GATE[1][0], "y": GATE[1][1], "elevation": 3, "dest_map": "MAP_THYRSA_CITY", "dest_warp_id": "11"},
         ],
         "object_events": [
-            # before the laurel: the keeper at the central stair, workers on the tiers
-            obj(P + "MAN", 19, 30, TH + "Keeper", "MOVEMENT_TYPE_FACE_DOWN", "FLAG_BADGE04_GET",
-                "LOCALID_THEATER_KEEPER"),
-            obj(P + "HARVESTER", 12, 31, TH + "Worker", "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT", "FLAG_BADGE04_GET",
+            # before the play: workers sweep the tiers and hang garlands (the city's
+            # keeper turns the player away at the gate until the Mask Laurel)
+            obj(P + "HARVESTER", 12, 31, TH + "Worker", "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT", "FLAG_TEMP_1B",
                 "LOCALID_THEATER_WORKER"),
-            obj(P + "YOUTH_M", 8, 21, TH + "WorkerTiers", "MOVEMENT_TYPE_FACE_UP", "FLAG_BADGE04_GET"),
-            obj(P + "YOUTH_F", 30, 26, TH + "WorkerTiers", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_BADGE04_GET"),
+            obj(P + "YOUTH_M", 8, 21, TH + "WorkerTiers", "MOVEMENT_TYPE_FACE_UP", "FLAG_TEMP_1B"),
+            obj(P + "YOUTH_F", 30, 26, TH + "WorkerTiers", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_TEMP_1B"),
             # the Dionysia's cast (beat 32): on stage and in the orchestra. The ones who
             # make an entrance during the play hide behind temp flags the map's
             # ON_TRANSITION sets; objects that change their look use OBJ_EVENT_GFX_VAR_n.
@@ -355,7 +354,7 @@ def theater_events(g):
             obj(P + "ELDER_F", 10, 24, TH + "Cleaner", "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
                 "FLAG_ICHOR_HIDE_THEATER_CLEANER", "LOCALID_THEATER_CLEANER"),
         ],
-        "coord_events": [trigger(x, y, TH + "KeeperStop", "VAR_ICHOR_DIONYSIA", "0") for (x, y) in stops]
+        "coord_events": [trigger(x, y, TH + "TakeYourSeat", "VAR_ICHOR_DIONYSIA", "0") for (x, y) in stops]
         + [trigger(x, 8, TH + "KleonApproach", "VAR_TEMP_2", "1") for x in (19, 20)],
         "bg_events": [
             sign(THYMELE[0], THYMELE[1] + 1, TH + "Thymele", "BG_EVENT_PLAYER_FACING_NORTH"),
@@ -386,13 +385,14 @@ SK_DOOR = (14, 7)           # the vestibule's doorway (2 wide, rows 7-8)
 SK_SILENOS = (2, 9)         # Silenos's chest, in front of the girdle's peg
 SK_GIRDLE = (2, 7)
 SK_WINCH = (7, 7)
-# oikos (primary)
-OK_VOID, OK_EXIT, OK_TERRA, OK_TERRA_CRACK, OK_TERRA_SHADE = 0x000, 0x006, 0x008, 0x009, 0x00A
+# oikos (primary); the void above the walls is the skene's own (oikos 0x000 is not drawn black)
+OK_EXIT, OK_TERRA, OK_TERRA_CRACK, OK_TERRA_SHADE = 0x006, 0x008, 0x009, 0x00A
 OK_AMPHORA, OK_CHEST, OK_STOOL, OK_LAMP_TOP, OK_LAMP_BASE = 0x043, 0x041, 0x040, 0x027, 0x02F
 
 
 def build_skene(cat):
     g = Grid(SK_W, SK_H)
+    OK_VOID = cat.id("void")
     for y in range(SK_H):
         g.put(0, y, block(OK_VOID))
         g.put(SK_W - 1, y, block(OK_VOID))
@@ -423,6 +423,8 @@ def build_skene(cat):
             ph = "a" if x % 2 else "b"
             g.put(x, y, walk(cat.id("floor", ph if y > 3 else f"shade_{ph}")), force=False)
     g.place(cat, "rail", 1, 4)
+    g.place(cat, "chest_1", 3, 5)
+    g.place(cat, "rail", 16, 4)
     g.place(cat, "barrel", 18, 4)
     # the inner wall: its top, its face, the arch and the doorway
     for x in range(1, SK_W - 1):
@@ -514,7 +516,8 @@ def skene_events():
     }
 
 
-BORDER_SKENE = [OK_VOID, OK_VOID, OK_VOID, OK_VOID]
+def border_skene(cat):
+    return [cat.id("void")] * 4
 
 
 # ---------------------------------------------------------------------------
@@ -667,14 +670,14 @@ def main():
     kat = Catalog("skene")
     k = build_skene(kat)
     kev = skene_events()
-    write_layout("LAYOUT_THYRSA_THEATER_SKENE", "ThyrsaTheater_Skene", k, BORDER_SKENE, "gTileset_Oikos",
+    write_layout("LAYOUT_THYRSA_THEATER_SKENE", "ThyrsaTheater_Skene", k, border_skene(kat), "gTileset_Oikos",
                  "gTileset_Skene")
     # ICHOR_STUB_MUSIC: as the theater
     write_events("ThyrsaTheater_Skene", kev, "MUS_ICHOR_EMPORION",
                  {"map_type": "MAP_TYPE_INDOOR", "weather": "WEATHER_NONE", "show_map_name": False,
                   "allow_cycling": False})
     if not args.no_render:
-        render("skene", k, "gTileset_Oikos", "gTileset_Skene", kev, BORDER_SKENE,
+        render("skene", k, "gTileset_Oikos", "gTileset_Skene", kev, border_skene(kat),
                [(9, 4), (5, 10), (15, 10)], IMG / "ThyrsaTheater_Skene.png", scale=2)
         views = [(19, 32), (19, 26), (19, 19), (19, 12), (19, 7), (5, 9), (30, 9), (6, 24), (33, 24)]
         render("theater", g, "gTileset_Aethos", "gTileset_Theater", ev, BORDER_THEATER, views,

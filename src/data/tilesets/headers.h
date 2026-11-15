@@ -1753,6 +1753,9 @@ const struct Tileset gTileset_Skene =
     .palettes = gTilesetPalettes_PorytilesManaged_Skene,
     .metatiles = gMetatiles_PorytilesManaged_Skene,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Skene,
+    .callback = NULL,
+};
+
 // Porytiles-managed secondary built by tools/ichor/art/thyrsa_build.py: Thyrsa City
 // (its Cyclopean walls and gates, streets, houses, the Agora, the Temple of Dionysus's
 // front, the Asclepeion, Semele's chamber and the vineyards). It uses only its own

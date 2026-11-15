@@ -58,7 +58,7 @@ for _g, _names in GROUPS.items():
 
 SECTION_ROWS = {"room": 0, "backstage": 12, "props": 30}
 
-OIKOS_VOID, OIKOS_EXIT = 0x000, 0x006
+OIKOS_EXIT = 0x006
 
 
 def struct(key, title, w, h, section, walk=None, notes="", names=None):
@@ -107,6 +107,10 @@ def wall_px(x, y, row):
 
 def room():
     out = []
+    v = struct("void", "The dark above the walls", 1, 1, "room", walk=["X"],
+               notes="Wall tops and the space outside the rooms, and the map's border.")
+    v.B.rect(0, 0, 16, 16, "kd")
+    out.append(v)
     s = struct("floor", "Planking", 2, 2, "room", walk=["..", ".."],
                notes="`a` `b` alternate along a row; `shade_*` is the row under a wall.",
                names={"a": (0, 0), "b": (1, 0), "shade_a": (0, 1), "shade_b": (1, 1)})

@@ -36,7 +36,6 @@ mapscripts ThyrsaTheater_MapScripts {
     ]
 }
 
-text ThyrsaTheater_Name_Keeper { "KEEPER" }
 text ThyrsaTheater_Name_Worker { "WORKER" }
 text ThyrsaTheater_Name_Cleaner { "CLEANER" }
 text ThyrsaTheater_Name_Herald { "HERALD" }
@@ -61,6 +60,10 @@ script ThyrsaTheater_EventScript_Setup {
     setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_ICHOR_GOLD_MASK_KING_KNEEL)
     setvar(VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_ICHOR_KLEON_SEATED)
     setvar(VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_ICHOR_KLEON_SEATED)
+    // the workers only sweep before the play
+    if (var(VAR_ICHOR_DIONYSIA) != DIONYSIA_NONE) {
+        setflag(FLAG_TEMP_1B)
+    }
     // the masks, Thespis and Silenos only appear mid-scene
     setflag(FLAG_TEMP_11)
     setflag(FLAG_TEMP_12)
@@ -229,10 +232,6 @@ script ThyrsaTheater_EventScript_CloseGoat {
 script ThyrsaTheater_EventScript_OnFrame {
     setvar(VAR_TEMP_0, 1)
     switch (var(VAR_ICHOR_DIONYSIA)) {
-        case DIONYSIA_NONE:
-            if (flag(FLAG_BADGE04_GET) && !flag(FLAG_ICHOR_DIONYSIA_DONE)) {
-                goto(ThyrsaTheater_EventScript_TakeYourSeat)
-            }
         case DIONYSIA_PLAY:
             goto(ThyrsaTheater_EventScript_ThePlay)
         case DIONYSIA_ENTRANCE_1:
@@ -248,9 +247,17 @@ script ThyrsaTheater_EventScript_OnFrame {
     }
 }
 
-// Beat 32's setup: entering with the Mask Laurel, the play begins.
+// Beat 32's setup: with the Mask Laurel (the city's keeper lets the player in
+// once it's won), the first step down into the cavea begins the play.
 script ThyrsaTheater_EventScript_TakeYourSeat {
+    if (!flag(FLAG_BADGE04_GET)) {
+        end
+    }
     lockall
+    playse(SE_APPLAUSE)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Dusk. The torches are lit, and the whole city pours in."))
+    closemessage
     setflag(FLAG_ICHOR_DIONYSIA_BEGUN)
     setvar(VAR_ICHOR_DIONYSIA, DIONYSIA_PLAY)
     playse(SE_APPLAUSE)
@@ -866,6 +873,10 @@ text ThyrsaTheater_Text_BorborosDefeat {
 // ---------------------------------------------------------------------------
 
 script ThyrsaTheater_EventScript_KleonApproach {
+    if (flag(FLAG_ICHOR_KLEON_BATTLE_3_DONE)) {
+        setvar(VAR_TEMP_2, 0)
+        end
+    }
     lockall
     getplayerxy(VAR_0x8004, VAR_0x8005)
     if (var(VAR_0x8004) == 19) {
@@ -878,6 +889,9 @@ script ThyrsaTheater_EventScript_KleonApproach {
 }
 
 script ThyrsaTheater_EventScript_KleonEmpty {
+    if (flag(FLAG_ICHOR_KLEON_BATTLE_3_DONE)) {
+        end
+    }
     lockall
     goto(ThyrsaTheater_EventScript_KleonScene)
 }
@@ -959,6 +973,7 @@ script ThyrsaTheater_EventScript_KleonScene {
     setflag(FLAG_ICHOR_HIDE_KLEON_THEATER)
     setflag(FLAG_ICHOR_KLEON_BATTLE_3_DONE)
     setvar(VAR_ICHOR_DIONYSIA, DIONYSIA_EMPTY)
+    setvar(VAR_TEMP_2, 0)
     fadedefaultbgm
     releaseall
 }
@@ -970,36 +985,6 @@ text ThyrsaTheater_Text_KleonDefeat {
 // ---------------------------------------------------------------------------
 // The theater's people and things (Part 2)
 // ---------------------------------------------------------------------------
-
-script ThyrsaTheater_EventScript_KeeperStop {
-    lockall
-    setspeaker(ThyrsaTheater_Name_Keeper)
-    msgbox(format("Seats open for the play, and not before. Win your laurel."))
-    setspeaker(ThyrsaTheater_Name_Keeper)
-    msgbox(format("The Masked Player likes his audience educated."))
-    closemessage
-    // back the way the player came
-    specialvar(VAR_RESULT, GetPlayerFacingDirection)
-    switch (var(VAR_RESULT)) {
-        case DIR_SOUTH:
-            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp)
-        case DIR_NORTH:
-            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown)
-        case DIR_WEST:
-            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkRight)
-        default:
-            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft)
-    }
-    waitmovement(0)
-    releaseall
-}
-
-script ThyrsaTheater_EventScript_Keeper {
-    setspeaker(ThyrsaTheater_Name_Keeper)
-    msgbox(format("Seats open for the play, and not before. Win your laurel."), MSGBOX_NPC)
-    setspeaker(ThyrsaTheater_Name_Keeper)
-    msgbox(format("The Masked Player likes his audience educated."))
-}
 
 script ThyrsaTheater_EventScript_Worker {
     setspeaker(ThyrsaTheater_Name_Worker)
