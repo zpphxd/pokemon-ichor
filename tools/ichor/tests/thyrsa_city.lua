@@ -140,7 +140,7 @@ local function main()
     if not L.scriptRunning() then shot("drum_pushing") end
   end
   expect(L.scriptRunning(), "the push frees the arch and the gate's scene starts")
-  L.settle({ shots = { [1] = "drum_pushed", [5] = "alethea_west", [13] = "alethea_cursed" } })
+  L.settle({ shots = { [1] = "drum_pushed", [9] = "alethea_west", [23] = "alethea_cursed" } })
   expect(bankFlag(S.FLAG_DRUM_MOVED), "the drum is out of the gate")
   expect(bankFlag(S.FLAG_ALETHEA_WENT_WEST), "Alethea went west")
   shot("gate_open")

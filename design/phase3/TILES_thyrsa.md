@@ -857,7 +857,7 @@ east of the street; the Kadmeia's east grove was mostly grass.
 **Pass 3** (the final, [img/ThyrsaCity.png](img/ThyrsaCity.png), and in game,
 [img/ThyrsaCity_ingame.png](img/ThyrsaCity_ingame.png)): the trough moved to the basin's foot, so the
 cypress beds, the basin and the anemones are one fountain court; Eudora's gate and the ivy on her walls; a
-garden bed with an olive inside the gate before her house; three more olives in the Kadmeia's groves. In
+garden bed with an olive inside the gate before her house; two more olives in the Kadmeia's groves. In
 game (`thyrsa_city.sh`) the square is full of people, stalls and garlands at 1x, the litter reads as the
 morning after a festival, the sellers and the fountain talk, and the smoke climbs. The before and after are
 [img/thyrsa_polish_before_after.png](img/thyrsa_polish_before_after.png).

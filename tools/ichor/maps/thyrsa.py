@@ -590,7 +590,7 @@ def inside_greenery(g):
     g.olive(15, 35)
     g.olive(18, 35)
     g.olive(34, 33)                       # the bed inside the gate (polish pass)
-    for (x, y) in ((19, 10), (42, 9), (35, 9)):    # the Kadmeia's groves, filled out
+    for (x, y) in ((19, 10), (35, 9)):    # the Kadmeia's groves, filled out
         if g.free(x, y, 2, 2):
             g.olive(x, y)
     for y in range(H):

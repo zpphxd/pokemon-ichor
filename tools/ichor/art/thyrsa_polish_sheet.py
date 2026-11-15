@@ -93,15 +93,19 @@ def overview():
     print(IMG / "thyrsa_interiors_overview.png", out.size)
 
 
-INGAME = ["0005_arrival_after_the_welcome", "0010_tour_the_square", "0011_tour_wine_seller",
-          "0014_tour_fountain_court", "0013_tour_the_gods_fountain", "0018_tour_semele",
-          "0028_tour_theater_terrace", "0035_tour_eudora", "0036_tour_eudora_yard_gate",
-          "0043_west_gate_drum_brace", "0046_west_gate_drum_pushed", "0047_west_gate_alethea_west"]
+INGAME = ["arrival_after_the_welcome", "tour_the_square", "tour_wine_seller",
+          "tour_fountain_court", "tour_the_gods_fountain", "tour_semele",
+          "tour_theater_terrace", "tour_eudora", "tour_eudora_yard_gate",
+          "west_gate_drum_brace", "west_gate_drum_pushed", "west_gate_alethea_west"]
 
 
 def ingame(shots):
     """design/phase3/img/ThyrsaCity_ingame.png: a dozen of thyrsa_city.sh's screenshots, 2x."""
-    ims = [Image.open(Path(shots) / f"{n}.png").convert("RGB") for n in INGAME]
+    def find(name):        # shots are numbered in order: match the name after the number
+        hits = sorted(Path(shots).glob(f"[0-9][0-9][0-9][0-9]_{name}.png"))
+        assert hits, f"no screenshot named {name} in {shots}"
+        return hits[0]
+    ims = [Image.open(find(n)).convert("RGB") for n in INGAME]
     w, h = ims[0].size
     out = Image.new("RGB", (3 * w + 2 * 8, 4 * h + 3 * 8), (24, 24, 32))
     for i, im in enumerate(ims):
