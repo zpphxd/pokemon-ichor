@@ -6,10 +6,14 @@
 #include "fieldmap.h"
 #include "task.h"
 #include "pokemon.h"
+#include "money.h"
+#include "random.h"
 #include "ichor_save.h"
+#include "item_menu.h"
 #include "constants/battle.h"
 #include "constants/flags.h"
 #include "constants/items.h"
+#include "constants/ichor.h"
 #include "constants/map_groups.h"
 #include "constants/map_event_ids.h"
 #include "constants/map_scripts.h"
@@ -18,6 +22,7 @@
 #include "constants/script_commands.h"
 #include "constants/species.h"
 #include "constants/vars.h"
+#include "constants/weather.h"
 
 #define K(name, value) const int k_##name = (value);
 
@@ -36,6 +41,7 @@ K(MAP_RUNNERS, MAP_EMPORION_CITY_RUNNERS_HOUSE)
 K(MAP_POTTER, MAP_EMPORION_CITY_POTTERS_WORKSHOP)
 K(MAP_HIRING_HALL, MAP_EMPORION_CITY_HIRING_HALL)
 K(MAP_TEMPLE, MAP_EMPORION_CITY_TEMPLE_OF_HERMES)
+K(MAP_ELEUSA, MAP_ELEUSA_VILLAGE)
 
 // Story and item flags (bank flags are routed into IchorSave)
 K(FLAG_SYS_POKEMON_GET, FLAG_SYS_POKEMON_GET)
@@ -49,6 +55,33 @@ K(FLAG_VISITED, FLAG_ICHOR_VISITED_EMPORION)
 K(FLAG_RITES_TUTORIAL, FLAG_ICHOR_RITES_TUTORIAL)
 K(FLAG_GOT_TROWEL, FLAG_ICHOR_GOT_TROWEL)
 K(FLAG_DUG_QUAY, FLAG_ICHOR_DUG_EMPORION_QUAY)
+K(FLAG_QUAY_FIXED, FLAG_ICHOR_DIG_FIXED_START)
+K(FLAG_ARACHNE_SHERD, FLAG_ICHOR_SHERDS_START + 4 * ICHOR_AMPHORA_ARACHNE)
+K(FLAG_ENGINE_PAGE_1, FLAG_ICHOR_PAGES_START)
+K(FLAG_DAILY_SHIPSHEDS, FLAG_DAILY_ICHOR_DIG_START)
+K(ICHOR_DAILY_FLAGS_START, ICHOR_DAILY_FLAGS_START)
+K(ICHOR_DAILY_FLAGS_END, ICHOR_DAILY_FLAGS_END)
+K(OFF_ICHOR_DAILY_FLAGS, offsetof(struct IchorSave, dailyFlags))
+K(OFF_ICHOR_FAVOR, offsetof(struct IchorSave, favor))
+K(OFF_ICHOR_OMEN_KIND, offsetof(struct IchorSave, omenKind))
+K(OFF_ICHOR_OMEN_ENTRY, offsetof(struct IchorSave, omenEntry))
+K(OFF_ICHOR_BLESSING, offsetof(struct IchorSave, blessing))
+K(BLESSING_SIZE, sizeof(struct IchorBlessing))
+K(OFF_BLESSING_STEPS, offsetof(struct IchorBlessing, steps))
+K(OMEN_GOOD_SIGN, OMEN_GOOD_SIGN)
+K(OMEN_WEATHER, OMEN_WEATHER)
+K(OMEN_WEATHER_ELEUSA_SUN, OMEN_WEATHER_ELEUSA_SUN)
+K(WEATHER_DROUGHT, WEATHER_DROUGHT)
+K(WEATHER_NONE, WEATHER_NONE)
+K(FLAG_AUGURY_READ, FLAG_DAILY_ICHOR_AUGURY_READ)
+K(GOD_HERMES, ICHOR_GOD_HERMES)
+K(ITEM_TROWEL, ITEM_ALETHEAS_TROWEL)
+K(ITEM_OLIVE_OIL, ITEM_OLIVE_OIL)
+K(ITEM_BARLEY_CAKE, ITEM_BARLEY_CAKE)
+K(ITEM_WINE, ITEM_WINE)
+K(ITEM_FRANKINCENSE, ITEM_FRANKINCENSE)
+K(OFF_SB1_MONEY, offsetof(struct SaveBlock1, money))
+K(FLAG_DAILY_HEPHAISTEION, FLAG_DAILY_ICHOR_DIG_START + 1)
 K(FLAG_KLEON_WON_HERALD, FLAG_ICHOR_KLEON_WON_HERALD)
 K(FLAG_KLEON_BATTLE_2_DONE, FLAG_ICHOR_KLEON_BATTLE_2_DONE)
 K(FLAG_WON_KLEON_2, FLAG_ICHOR_WON_KLEON_2)
@@ -58,6 +91,7 @@ K(FLAG_HIDE_HARPECK, FLAG_ICHOR_HIDE_SYKEAS_HARPECK)
 K(FLAG_GOT_FIGS, FLAG_ICHOR_GOT_SYKEAS_FIGS)
 K(FLAG_MET_HALITHERSES, FLAG_ICHOR_MET_HALITHERSES)
 K(FLAG_HERM, FLAG_ICHOR_HERM_EMPORION)
+K(FLAG_ENGINE_HERM, FLAG_ICHOR_HERMS_START + HERM_EMPORION_CITY)
 K(FLAG_ITEM_SUPER_POTION, FLAG_ICHOR_ITEM_EMPORION_SUPER_POTION)
 K(FLAG_ITEM_X_SPEED, FLAG_ICHOR_ITEM_EMPORION_X_SPEED)
 K(FLAG_ITEM_REPEL, FLAG_ICHOR_ITEM_EMPORION_REPEL)
@@ -85,6 +119,44 @@ K(LOCALID_HARPECK, LOCALID_EMPORION_HARPECK_PERCH)
 K(SPECIES_TEST, SPECIES_SEISMARE)
 K(PARTY_SIZE, PARTY_SIZE)
 K(ITEM_RELIC_COPPER, ITEM_RELIC_COPPER)
+K(ITEM_RELIC_SILVER, ITEM_RELIC_SILVER)
+K(ITEM_RELIC_GOLD, ITEM_RELIC_GOLD)
+K(MAX_MONEY, MAX_MONEY)
+K(BAG_ITEMS_COUNT, BAG_ITEMS_COUNT)
+K(MAX_BAG_ITEM_CAPACITY, MAX_BAG_ITEM_CAPACITY)
+K(ITEM_POTION, ITEM_POTION)
+K(ITEMS_COUNT, ITEMS_COUNT)
+K(OMEN_VISITOR, OMEN_VISITOR)
+K(OMEN_KORANTHA, OMEN_VISITOR_ELEUSA_KORANTHA)
+K(OMEN_PITHOUND, OMEN_VISITOR_EMPORION_PITHOUND)
+K(OMEN_NEMECUB, OMEN_VISITOR_ISTHMUS_NEMECUB)
+K(FLAG_OMEN_PITHOUND, FLAG_ICHOR_HIDE_OMEN_PITHOUND)
+K(SPECIES_PITHOUND, SPECIES_PITHOUND)
+K(BATTLE_MON_SIZE, sizeof(struct BattlePokemon))
+K(OFF_BATTLE_MON_SPECIES, offsetof(struct BattlePokemon, species))
+K(OFF_BATTLE_MON_LEVEL, offsetof(struct BattlePokemon, level))
+K(POKEMON_SIZE, sizeof(struct Pokemon))
+K(B_OUTCOME_RAN, B_OUTCOME_RAN)
+K(B_OUTCOME_LOST, B_OUTCOME_LOST)
+K(B_OUTCOME_CAUGHT, B_OUTCOME_CAUGHT)
+K(ITEM_MASTER_BALL, ITEM_MASTER_BALL)
+K(OFF_SB1_POKEBALLS, offsetof(struct SaveBlock1, bag.pokeBalls))
+K(BAG_POKEBALLS_COUNT, BAG_POKEBALLS_COUNT)
+K(POCKET_POKE_BALLS, POCKET_POKE_BALLS)
+K(POCKETS_COUNT, POCKETS_COUNT)
+K(OFF_BAG_POSITION_POCKET, offsetof(struct BagPosition, pocket))
+K(SCR_OP_REMOVEITEM, SCR_OP_REMOVEITEM)
+K(SCR_OP_ADDITEM, SCR_OP_ADDITEM)
+K(RNG_STATE_SIZE, sizeof(struct Sfc32State))
+K(OFF_RNG_A, offsetof(struct Sfc32State, a))
+K(OFF_RNG_B, offsetof(struct Sfc32State, b))
+K(OFF_RNG_C, offsetof(struct Sfc32State, c))
+K(OFF_RNG_COUNTER, offsetof(struct Sfc32State, ctr))
+K(OFF_SB1_DAILY_SEED, offsetof(struct SaveBlock1, dailySeed))
+K(OFF_SB1_WEATHER, offsetof(struct SaveBlock1, weather))
+// sDig in src/ichor_dig.c: flag, find, findFlag, quantity.
+K(OFF_DIG_FIND, 2)
+K(OFF_DIG_QUANTITY, 6)
 K(B_OUTCOME_WON, B_OUTCOME_WON)
 
 // Script bytecode for the setup scripts the test writes into spare EWRAM.
@@ -105,7 +177,14 @@ K(OFF_MAIN_CALLBACK2, offsetof(struct Main, callback2))
 K(OFF_MAPHEADER_MAPSCRIPTS, offsetof(struct MapHeader, mapScripts))
 K(OFF_SB1_LOCATION, offsetof(struct SaveBlock1, location))
 K(OFF_SB1_FLAGS, offsetof(struct SaveBlock1, flags))
+K(OFF_SB1_VARS, offsetof(struct SaveBlock1, vars))
+K(VARS_START, VARS_START)
 K(OFF_SB2_OPTIONS, offsetof(struct SaveBlock2, optionsButtonMode) + 1) // the options bitfield follows
+K(OFF_SB1_BAG, offsetof(struct SaveBlock1, bag))
+K(OFF_SB2_ENCRYPTION_KEY, offsetof(struct SaveBlock2, encryptionKey))
+K(BAG_SLOTS, sizeof(struct Bag) / sizeof(struct ItemSlot))
+K(ITEM_SLOT_SIZE, sizeof(struct ItemSlot))
+K(OFF_ITEM_SLOT_QUANTITY, offsetof(struct ItemSlot, quantity))
 K(OBJECT_EVENT_SIZE, sizeof(struct ObjectEvent))
 K(NUM_OBJECT_EVENTS, OBJECT_EVENTS_COUNT)
 K(OFF_OBJ_CURRENT_COORDS, offsetof(struct ObjectEvent, currentCoords))

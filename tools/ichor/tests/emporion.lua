@@ -9,6 +9,7 @@
 -- with "EMPORION done"; any failure prints "EMPORION FAIL: ..." first.
 
 local S = dofile("build/emporion_test/symbols.lua")
+S.HandleInputChooseAction = dofile("build/emporion_test/battle_symbols.lua").HandleInputChooseAction
 local OUT = "build/emporion_test/"
 local K = { A = C.GBA_KEY.A, B = C.GBA_KEY.B, START = C.GBA_KEY.START, SELECT = C.GBA_KEY.SELECT,
             UP = C.GBA_KEY.UP, DOWN = C.GBA_KEY.DOWN, LEFT = C.GBA_KEY.LEFT, RIGHT = C.GBA_KEY.RIGHT }
@@ -34,11 +35,79 @@ local function getFlag(f)
     local o = f - S.ICHOR_FLAGS_START
     return (emu:read8(ichor() + S.OFF_ICHOR_FLAGS + (o >> 3)) >> (o & 7)) & 1 == 1
   end
+  if f >= S.ICHOR_DAILY_FLAGS_START and f <= S.ICHOR_DAILY_FLAGS_END then
+    local o = f - S.ICHOR_DAILY_FLAGS_START
+    return (emu:read8(ichor() + S.OFF_ICHOR_DAILY_FLAGS + (o >> 3)) >> (o & 7)) & 1 == 1
+  end
   return (emu:read8(sb1() + S.OFF_SB1_FLAGS + (f >> 3)) >> (f & 7)) & 1 == 1
 end
+
+local function writeFlag(f, value)
+  local offset, base
+  if f >= S.ICHOR_FLAGS_START and f <= S.ICHOR_FLAGS_END then
+    offset, base = f - S.ICHOR_FLAGS_START, ichor() + S.OFF_ICHOR_FLAGS
+  elseif f >= S.ICHOR_DAILY_FLAGS_START and f <= S.ICHOR_DAILY_FLAGS_END then
+    offset, base = f - S.ICHOR_DAILY_FLAGS_START, ichor() + S.OFF_ICHOR_DAILY_FLAGS
+  else
+    offset, base = f, sb1() + S.OFF_SB1_FLAGS
+  end
+  local address = base + (offset >> 3)
+  local mask = 1 << (offset & 7)
+  local byte = emu:read8(address)
+  emu:write8(address, value and (byte | mask) or (byte & ~mask))
+end
+
+local function itemCount(item)
+  local key = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  local count = 0
+  for i = 0, S.BAG_SLOTS - 1 do
+    local slot = sb1() + S.OFF_SB1_BAG + i * S.ITEM_SLOT_SIZE
+    if emu:read16(slot) == item then
+      count = count + (emu:read16(slot + S.OFF_ITEM_SLOT_QUANTITY) ~ key)
+    end
+  end
+  return count
+end
+
+local function money()
+  return emu:read32(sb1() + S.OFF_SB1_MONEY) ~ emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY)
+end
+local function setMoney(amount)
+  emu:write32(sb1() + S.OFF_SB1_MONEY, amount ~ emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY))
+end
+local function addCoinFixture(item)
+  local encryptionKey = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  for i = 0, S.BAG_ITEMS_COUNT - 1 do
+    local slot = sb1() + S.OFF_SB1_BAG + i * S.ITEM_SLOT_SIZE
+    if emu:read16(slot) == 0 then
+      emu:write16(slot, item)
+      emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, 1 ~ encryptionKey)
+      return
+    end
+  end
+  fail("no empty item slot for the coin fixture")
+end
+
 local function mapId()
   local loc = sb1() + S.OFF_SB1_LOCATION
   return emu:read8(loc) * 256 + emu:read8(loc + 1)
+end
+
+local function saveBag()
+  local slots = {}
+  local encryptionKey = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  for i = 0, S.BAG_SLOTS - 1 do
+    local slot = sb1() + S.OFF_SB1_BAG + i * S.ITEM_SLOT_SIZE
+    slots[i] = { emu:read16(slot), emu:read16(slot + S.OFF_ITEM_SLOT_QUANTITY) ~ encryptionKey }
+  end
+  return slots, function()
+    local currentKey = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+    for i = 0, S.BAG_SLOTS - 1 do
+      local slot = sb1() + S.OFF_SB1_BAG + i * S.ITEM_SLOT_SIZE
+      emu:write16(slot, slots[i][1])
+      emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, slots[i][2] ~ currentKey)
+    end
+  end
 end
 local function playerObject()
   return S.gObjectEvents + emu:read8(S.gPlayerAvatar + S.OFF_AVATAR_OBJECT_EVENT_ID) * S.OBJECT_EVENT_SIZE
@@ -160,13 +229,13 @@ local function tryStep(key)
   repeat
     frame()
     local x, y = pos()
-    if x ~= x0 or y ~= y0 then break end
+    if x ~= x0 or y ~= y0 or boxUp() then break end
   until now() - t0 > 40
   emu:clearKey(key)
+  waitUntil(function() return idle() or boxUp() end, 300, "the step or field message")
+  if boxUp() then playThrough("walking_message") end
   local x, y = pos()
-  if x == x0 and y == y0 then waitUntil(idle, 300, "the bump to end"); return false end
-  waitUntil(idle, 300, "the step to end")
-  return true
+  return x ~= x0 or y ~= y0
 end
 local function step(key)
   if not tryStep(key) then
@@ -221,18 +290,29 @@ local function goTo(tx, ty)
   for try = 1, 10 do
     local x, y = pos()
     if x == tx and y == ty then return end
-    local blocked = false
+    local blocked, destinationBlocked = false, false
     local steps = path(tx, ty, try % 3 ~= 0 and avoid or {}) or path(tx, ty, {})
     for _, k in ipairs(steps) do
       if not tryStep(k) then
         blocked = true
         local bx, by = pos()
         local d = STEP[k]
-        if not (bx + d[1] == tx and by + d[2] == ty) then avoid[key(bx + d[1], by + d[2])] = true end
+        destinationBlocked = bx + d[1] == tx and by + d[2] == ty
+        if not destinationBlocked then avoid[key(bx + d[1], by + d[2])] = true end
         break
       end
     end
     if not blocked then return end
+    if destinationBlocked then
+      -- Give a walker room to leave the destination instead of pinning it there.
+      for _, k in ipairs({ K.DOWN, K.RIGHT, K.LEFT, K.UP }) do
+        local bx, by = pos()
+        local d = STEP[k]
+        if isOpen(gridFor(), bx + d[1], by + d[2])
+           and not (bx + d[1] == tx and by + d[2] == ty)
+           and tryStep(k) then break end
+      end
+    end
     wait(30)
   end
   local x, y = pos()
@@ -314,6 +394,7 @@ local function runRamScript(script, noEnd)
   poke(code, flat)
   poke(frameTable, { { S.VAR_TEMP_0, 2 }, { 0, 2 }, { code, 4 }, { 0, 2 } })
   poke(tableAddr, { S.MAP_SCRIPT_ON_FRAME_TABLE, { frameTable, 4 }, 0 })
+  emu:write16(sb1() + S.OFF_SB1_VARS + (S.VAR_TEMP_0 - S.VARS_START) * 2, 0)
   emu:write32(S.gMapHeader + S.OFF_MAPHEADER_MAPSCRIPTS, tableAddr)
 end
 local function add(script, t) for _, b in ipairs(t) do script[#script + 1] = b end end
@@ -396,7 +477,13 @@ local function arrival()
   expect(getFlag(S.FLAG_VISITED), "Emporion is a fly target (FLAG_ICHOR_VISITED_EMPORION)")
   expect(getFlag(S.FLAG_RITES_TUTORIAL), "Kerykos's rites tutorial and oil (FLAG_ICHOR_RITES_TUTORIAL)")
   expect(getFlag(S.FLAG_GOT_TROWEL), "Alethea's Trowel (FLAG_ICHOR_GOT_TROWEL)")
+  expect(itemCount(S.ITEM_TROWEL) == 1 and itemCount(S.ITEM_OLIVE_OIL) == 3,
+         "the actual Trowel and three Olive Oil are in the Bag")
   expect(getFlag(S.FLAG_DUG_QUAY), "the planter's sherd is dug (FLAG_ICHOR_DUG_EMPORION_QUAY)")
+  expect(getFlag(S.FLAG_QUAY_FIXED) and getFlag(S.FLAG_ARACHNE_SHERD),
+         "the fixed dig records an actual Arachne sherd in engine state")
+  expect(emu:read8(ichor() + S.OFF_ICHOR_FAVOR + S.GOD_HERMES) == 1,
+         "the tutorial prayer earns one Hermes Favor")
   expect(not objectPresent(S.LOCALID_HARBOR_KLEON) and not objectPresent(S.LOCALID_HARBOR_ALETHEA)
          and not objectPresent(S.LOCALID_HARBOR_KERYKOS), "the cast has left the quay")
   local px, py = pos()
@@ -409,6 +496,7 @@ local function harbor()
   walkTo({ { 30, 14 } }); face(K.UP); interact()
   playThrough("h_herm", multichoice); tap(K.A); wait(10); playThrough("h_herm_pray")
   talk({ { 31, 14 } }, K.UP, "h_planter")
+  expect(not getFlag(S.FLAG_ARACHNE_SHERD + 1), "revisiting the planter does not grant a second sherd")
   talk({ { 29, 14 } }, K.UP, "h_city_sign")
   -- the landing steps' Heart Scale; Nausikles's ferry: STAY
   talk({ { 29, 15 }, { 25, 15 } }, K.DOWN, "h_heart_scale")
@@ -424,6 +512,8 @@ local function harbor()
   -- the forum: Glykera and Daedalus's page I, the wine-seller
   talk({ { 33, 15 }, { 33, 8 }, { 29, 8 } }, K.LEFT, "h_glykera")
   expect(getFlag(S.FLAG_PAGE_1), "Glykera trades Daedalus's page I for an Olive Oil")
+  expect(itemCount(S.ITEM_OLIVE_OIL) == 2 and getFlag(S.FLAG_ENGINE_PAGE_1),
+         "Glykera consumes one real Olive Oil and records page I in engine state")
   talk({ { 29, 6 }, { 21, 6 }, { 21, 8 } }, K.LEFT, "h_wine")
   -- the road's sign; the yard: the dockhand, the hiring board, the hiring hall
   talk({ { 21, 4 } }, K.LEFT, "h_road_sign")
@@ -436,13 +526,70 @@ local function harbor()
   talk({ { 6, 15 }, { 2, 15 } }, K.UP, "h_super_potion")
   expect(getFlag(S.FLAG_ITEM_SUPER_POTION), "the Super Potion on the ship sheds' slipway")
   talk({ { 11, 15 } }, K.UP, "h_dig_sheds")
+  expect(getFlag(S.FLAG_DAILY_SHIPSHEDS), "the ship sheds record today's real dig")
+  talk({ { 11, 15 } }, K.UP, "h_dig_sheds_again")
   -- the mole: the Bronze Obol in the wall, Halitherses twice
   talk({ { 16, 15 }, { 33, 15 }, { 33, 11 }, { 43, 11 }, { 43, 18 } }, K.RIGHT, "h_obol")
   expect(getFlag(S.FLAG_HIDDEN_OBOL), "the Bronze Obol in the harbor wall")
   talk({ { 43, 22 } }, K.DOWN, "h_halitherses_1")
   expect(getFlag(S.FLAG_MET_HALITHERSES), "Halitherses introduces himself")
+  local oldKind = emu:read8(ichor() + S.OFF_ICHOR_OMEN_KIND)
+  local oldEntry = emu:read16(ichor() + S.OFF_ICHOR_OMEN_ENTRY)
+  emu:write8(ichor() + S.OFF_ICHOR_OMEN_KIND, S.OMEN_GOOD_SIGN)
+  emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, 3)
   tap(K.A); wait(10); playThrough("h_halitherses_2")
+  expect(getFlag(S.FLAG_AUGURY_READ), "Halitherses records the actual daily omen")
+  expect(emu:read8(ichor() + S.OFF_ICHOR_OMEN_KIND) == S.OMEN_GOOD_SIGN
+         and emu:read16(ichor() + S.OFF_ICHOR_OMEN_ENTRY) == 3,
+         "reading the lucky-three omen does not reroll the sky")
   tap(K.A); wait(10); playThrough("h_halitherses_3")
+  warpTo({}, S.MAP_HARBOR, 43, 22)
+  face(K.DOWN); interact(); playThrough("h_halitherses_reentry")
+  expect(getFlag(S.FLAG_AUGURY_READ), "the daily augury limit survives leaving and reentering the harbor")
+  local blessing = {}
+  for i = 0, S.BLESSING_SIZE - 1 do blessing[i] = emu:read8(ichor() + S.OFF_ICHOR_BLESSING + i) end
+  emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, 0)
+  writeFlag(S.FLAG_AUGURY_READ, false)
+  interact()
+  playThrough("h_halitherses_blessing_no", function() return taskRunning("Task_HandleYesNoInput") end)
+  wait(20); tap(K.B); playThrough("h_halitherses_blessing_declined")
+  for i = 0, S.BLESSING_SIZE - 1 do
+    expect(emu:read8(ichor() + S.OFF_ICHOR_BLESSING + i) == blessing[i], "declining augury preserves blessing byte " .. i)
+  end
+  writeFlag(S.FLAG_AUGURY_READ, false)
+  interact(); playThrough("h_halitherses_blessing_yes")
+  expect(getFlag(S.FLAG_AUGURY_READ) and emu:read8(ichor() + S.OFF_ICHOR_BLESSING) == S.GOD_HERMES
+         and emu:read16(ichor() + S.OFF_ICHOR_BLESSING + S.OFF_BLESSING_STEPS) == 100,
+         "accepting the good sign grants Hermes's real hundred-step blessing")
+  emu:write16(ichor() + S.OFF_ICHOR_BLESSING + S.OFF_BLESSING_STEPS, 37)
+  interact(); playThrough("h_halitherses_blessing_again")
+  expect(emu:read16(ichor() + S.OFF_ICHOR_BLESSING + S.OFF_BLESSING_STEPS) == 37,
+         "repeated augury cannot refresh the day's blessing")
+  writeFlag(S.FLAG_AUGURY_READ, false)
+  emu:write8(ichor() + S.OFF_ICHOR_OMEN_KIND, S.OMEN_VISITOR)
+  emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, S.OMEN_KORANTHA)
+  interact(); playThrough("h_halitherses_korantha")
+  expect(getFlag(S.FLAG_AUGURY_READ)
+         and emu:read8(ichor() + S.OFF_ICHOR_OMEN_KIND) == S.OMEN_VISITOR
+         and emu:read16(ichor() + S.OFF_ICHOR_OMEN_ENTRY) == S.OMEN_KORANTHA,
+         "Halitherses reports the saved Korantha visitor without rerolling it")
+  writeFlag(S.FLAG_AUGURY_READ, false)
+  emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, S.OMEN_PITHOUND)
+  interact(); playThrough("h_halitherses_pithound")
+  expect(getFlag(S.FLAG_AUGURY_READ)
+         and emu:read8(ichor() + S.OFF_ICHOR_OMEN_KIND) == S.OMEN_VISITOR
+         and emu:read16(ichor() + S.OFF_ICHOR_OMEN_ENTRY) == S.OMEN_PITHOUND,
+         "Halitherses reports the saved marked-jar visitor and its location")
+  writeFlag(S.FLAG_AUGURY_READ, false)
+  emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, S.OMEN_NEMECUB)
+  interact(); playThrough("h_halitherses_nemecub")
+  expect(getFlag(S.FLAG_AUGURY_READ)
+         and emu:read8(ichor() + S.OFF_ICHOR_OMEN_KIND) == S.OMEN_VISITOR
+         and emu:read16(ichor() + S.OFF_ICHOR_OMEN_ENTRY) == S.OMEN_NEMECUB,
+         "Halitherses reports the saved golden cub and the Isthmus hill spur")
+  for i = 0, S.BLESSING_SIZE - 1 do emu:write8(ichor() + S.OFF_ICHOR_BLESSING + i, blessing[i]) end
+  emu:write8(ichor() + S.OFF_ICHOR_OMEN_KIND, oldKind)
+  emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, oldEntry)
   -- Poseidon's sanctuary and the stevedore at the quay's east end
   talk({ { 43, 11 }, { 36, 14 } }, K.UP, "h_poseidon_altar")
   talk({ { 37, 14 } }, K.UP, "h_victors_wreath")
@@ -471,6 +618,122 @@ local function intoCity()
   shot("c_00_harbor_road.png")
 end
 
+local function markedPithos()
+  local oldKind = emu:read8(ichor() + S.OFF_ICHOR_OMEN_KIND)
+  local oldEntry = emu:read16(ichor() + S.OFF_ICHOR_OMEN_ENTRY)
+  local oldConsumed = getFlag(S.FLAG_OMEN_PITHOUND)
+  local function setOmen(kind, entry)
+    emu:write8(ichor() + S.OFF_ICHOR_OMEN_KIND, kind)
+    emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, entry)
+  end
+  local function reload()
+    warpTo({}, S.MAP_HARBOR, 23, 1)
+    warpTo({}, S.MAP_CITY, 10, 23)
+    face(K.DOWN)
+  end
+  local function empty(prefix)
+    interact()
+    playThrough(prefix, function() return inBattle() or idle() end)
+    expect(not inBattle(), prefix .. " cannot start a visitor battle")
+  end
+  local function encounter(prefix)
+    interact()
+    playThrough(prefix, inBattle)
+    local t0 = now()
+    while emu:read32(S.gBattlerControllerFuncs) ~= (S.HandleInputChooseAction | 1) do
+      tap(K.A); wait(4)
+      if now() - t0 > 1500 then fail("no marked-jar battle action menu") end
+    end
+    expect(emu:read16(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_SPECIES) == S.SPECIES_PITHOUND
+           and emu:read8(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_LEVEL) == 16,
+           prefix .. " starts the actual level-16 Pithound")
+  end
+
+  setOmen(S.OMEN_GOOD_SIGN, oldEntry)
+  writeFlag(S.FLAG_OMEN_PITHOUND, false)
+  reload()
+  empty("c_marked_jar_legacy_off_day")
+  setOmen(S.OMEN_VISITOR, S.OMEN_PITHOUND)
+  expect(emu:saveStateFile(OUT .. "before_pithound.ss", 31), "saved the unused marked-jar state")
+  for i = 0, S.PARTY_SIZE * S.POKEMON_SIZE - 1 do emu:write8(S.gParties + i, 0) end
+  emu:write8(S.gPartiesCount, 0)
+  local weak = {}
+  giveMon(weak, S.SPECIES_TEST, 5)
+  add(weak, { S.SCR_OP_SETMONMOVE, 0, 0, { S.MOVE_SURF, 2 } })
+  runRamScript(weak)
+  wait(60); waitUntil(idle, 1200, "the weak visitor fixture")
+  encounter("c_marked_jar_loss")
+  expect(playBattle("c_marked_jar_loss_battle.png") == S.B_OUTCOME_LOST
+         and not getFlag(S.FLAG_OMEN_PITHOUND), "losing leaves the marked-jar visitor available")
+  playThrough("c_marked_jar_whiteout")
+  expect(emu:loadStateFile(OUT .. "before_pithound.ss", 31), "restored the unused marked-jar state")
+  wait(20)
+  encounter("c_marked_jar_run")
+  tap(K.DOWN); tap(K.RIGHT); tap(K.A)
+  playThrough("c_marked_jar_ran")
+  expect(emu:read8(S.gBattleOutcome) == S.B_OUTCOME_RAN and not getFlag(S.FLAG_OMEN_PITHOUND),
+         "running leaves the marked-jar visitor available")
+  reload()
+  encounter("c_marked_jar_defeat")
+  tap(K.UP); tap(K.LEFT)
+  expect(playBattle("c_marked_jar_defeat_battle.png") == S.B_OUTCOME_WON,
+         "the marked-jar visitor can actually be defeated")
+  playThrough("c_marked_jar_defeated")
+  expect(getFlag(S.FLAG_OMEN_PITHOUND), "defeat consumes only today's marked-jar visit")
+  empty("c_marked_jar_repeat")
+  reload()
+  empty("c_marked_jar_reentry")
+  writeFlag(S.FLAG_OMEN_PITHOUND, false)
+  setOmen(S.OMEN_VISITOR, S.OMEN_KORANTHA)
+  empty("c_marked_jar_expired")
+  expect(not getFlag(S.FLAG_OMEN_PITHOUND), "an expired jar does not consume a later visitor")
+  setOmen(S.OMEN_VISITOR, S.OMEN_PITHOUND)
+  reload()
+  local balls = {}
+  local key = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  for i = 0, S.BAG_POKEBALLS_COUNT - 1 do
+    local slot = sb1() + S.OFF_SB1_POKEBALLS + i * S.ITEM_SLOT_SIZE
+    local item = emu:read16(slot)
+    if item ~= 0 then
+      add(balls, { S.SCR_OP_REMOVEITEM, { item, 2 }, { emu:read16(slot + S.OFF_ITEM_SLOT_QUANTITY) ~ key, 2 } })
+    end
+  end
+  add(balls, { S.SCR_OP_ADDITEM, { S.ITEM_MASTER_BALL, 2 }, { 1, 2 } })
+  runRamScript(balls)
+  wait(60); waitUntil(idle, 1200, "the marked-jar capture fixture")
+  expect(itemCount(S.ITEM_MASTER_BALL) == 1, "the marked-jar capture has one real Master Ball")
+  encounter("c_marked_jar_capture")
+  tap(K.UP); tap(K.RIGHT); tap(K.A)
+  waitUntil(function() return taskRunning("Task_BagMenu_HandleInput") end, 1200, "the marked-jar battle Bag")
+  wait(30)
+  for i = 1, S.POCKETS_COUNT do
+    if emu:read8(S.gBagPosition + S.OFF_BAG_POSITION_POCKET) == S.POCKET_POKE_BALLS then break end
+    tap(K.RIGHT); wait(50)
+  end
+  expect(emu:read8(S.gBagPosition + S.OFF_BAG_POSITION_POCKET) == S.POCKET_POKE_BALLS,
+         "the marked-jar battle Bag selects the Poke Ball pocket")
+  tap(K.UP); tap(K.UP); tap(K.A); wait(20); tap(K.A)
+  local t0 = now()
+  while not idle() do
+    if on("CB2_NamingScreen") then
+      wait(40); shot("c_marked_jar_caught.png")
+      tap(K.START); wait(20); tap(K.A); wait(40)
+    else
+      tap(K.A); wait(4)
+    end
+    if now() - t0 > 12000 then fail("the marked-jar capture never returned to the field") end
+  end
+  expect(emu:read8(S.gBattleOutcome) == S.B_OUTCOME_CAUGHT
+         and emu:read8(S.gPartiesCount) == 2 and itemCount(S.ITEM_MASTER_BALL) == 0
+         and getFlag(S.FLAG_OMEN_PITHOUND),
+         "an actual marked-jar capture adds Pithound, consumes the ball and saves the visit")
+  reload()
+  empty("c_marked_jar_caught_reentry")
+  setOmen(oldKind, oldEntry)
+  writeFlag(S.FLAG_OMEN_PITHOUND, oldConsumed)
+  walkTo({ { 12, 23 } })
+end
+
 local function city()
   -- the fork sign and the Nemea gate
   talk({ { 23, 42 }, { 21, 42 } }, K.LEFT, "c_fork_sign")
@@ -486,8 +749,36 @@ local function city()
   talk({ { 39, 37 }, { 39, 33 } }, K.LEFT, "c_repel")
   expect(getFlag(S.FLAG_ITEM_REPEL), "the Repel behind the Deigma")
   -- the Agora: the herm, the stalls, the stoa
+  walkTo({ { 27, 31 } })
+  local bag, restoreBag = saveBag()
+  local favorBefore = emu:read8(ichor() + S.OFF_ICHOR_FAVOR + S.GOD_HERMES)
+  for i, slot in pairs(bag) do
+    if slot[1] == S.ITEM_OLIVE_OIL then emu:write16(sb1() + S.OFF_SB1_BAG + i * S.ITEM_SLOT_SIZE, 0) end
+  end
+  talk({ { 27, 31 } }, K.LEFT, "c_herm_no_oil")
+  expect(not getFlag(S.FLAG_ENGINE_HERM) and not getFlag(S.FLAG_HERM),
+         "tutorial completion cannot anoint the herm without actual Oil")
+  restoreBag()
+  local oilBefore = itemCount(S.ITEM_OLIVE_OIL)
+  interact()
+  playThrough("c_herm_decline", function() return taskRunning("Task_HandleYesNoInput") end)
+  wait(20); tap(K.B); playThrough("c_herm_declined")
+  expect(not getFlag(S.FLAG_ENGINE_HERM) and itemCount(S.ITEM_OLIVE_OIL) == oilBefore,
+         "declining the herm keeps its Oil and dry state")
   talk({ { 27, 31 } }, K.LEFT, "c_herm")
-  expect(getFlag(S.FLAG_HERM), "the crossroads herm is anointed")
+  expect(getFlag(S.FLAG_ENGINE_HERM) and getFlag(S.FLAG_HERM) and itemCount(S.ITEM_OLIVE_OIL) == oilBefore - 1,
+         "the crossroads herm registers its real anchor and consumes one Oil")
+  expect(emu:read8(ichor() + S.OFF_ICHOR_FAVOR + S.GOD_HERMES) == favorBefore + 1,
+         "the crossroads herm grants Hermes one Favor")
+  talk({ { 27, 31 } }, K.LEFT, "c_herm_again")
+  expect(itemCount(S.ITEM_OLIVE_OIL) == oilBefore - 1
+         and emu:read8(ichor() + S.OFF_ICHOR_FAVOR + S.GOD_HERMES) == favorBefore + 1,
+         "revisiting the herm neither consumes Oil nor repeats Favor")
+  writeFlag(S.FLAG_ENGINE_HERM, false)
+  warpTo({}, S.MAP_CITY, 27, 31)
+  expect(getFlag(S.FLAG_ENGINE_HERM) and itemCount(S.ITEM_OLIVE_OIL) == oilBefore - 1
+         and emu:read8(ichor() + S.OFF_ICHOR_FAVOR + S.GOD_HERMES) == favorBefore + 1,
+         "legacy city anointing registers the anchor on reentry without another charge or reward")
   walkTo({ { 27, 30 }, { 20, 30 }, { 20, 26 } }); face(K.LEFT); interact()
   playThrough("c_general", function() return taskRunning("Task_ShopMenu") end)
   wait(20); shot("c_general_mart.png")
@@ -496,13 +787,81 @@ local function city()
   playThrough("c_kydon", function() return taskRunning("Task_ShopMenu") end)
   wait(20); shot("c_kydon_mart.png")
   tap(K.B); wait(20); playThrough("c_kydon_bye")
-  talk({ { 15, 30 } }, K.UP, "c_offerings")
-  talk({ { 12, 30 } }, K.UP, "c_pasion")
+  walkTo({ { 15, 30 } }); face(K.UP); interact()
+  playThrough("c_offerings", function() return taskRunning("Task_ShopMenu") end)
+  for i, item in ipairs({ S.ITEM_OLIVE_OIL, S.ITEM_BARLEY_CAKE, S.ITEM_WINE, S.ITEM_FRANKINCENSE, 0 }) do
+    expect(emu:read16(S.EmporionCity_Mart_Offerings + (i - 1) * 2) == item,
+           "the offering stall stocks its specified item " .. i)
+  end
+  tap(K.A)
+  waitUntil(function() return taskRunning("Task_BuyMenu") end, 900, "the offering stall's item list")
+  wait(20); shot("c_offerings_stock.png")
+  for i, item in ipairs({ S.ITEM_OLIVE_OIL, S.ITEM_BARLEY_CAKE, S.ITEM_WINE, S.ITEM_FRANKINCENSE }) do
+    local beforeItem, beforeMoney = itemCount(item), money()
+    if i > 1 then tap(K.DOWN); wait(12) end
+    tap(K.A)
+    playThrough("c_offerings_quantity_" .. i, function() return taskRunning("Task_BuyHowManyDialogueHandleInput") end)
+    tap(K.A)
+    playThrough("c_offerings_confirm_" .. i, function() return taskRunning("Task_CallYesOrNoCallback") end)
+    tap(K.A)
+    playThrough("c_offerings_bought_" .. i, function() return taskRunning("Task_BuyMenu") end)
+    expect(itemCount(item) == beforeItem + 1 and money() == beforeMoney - ({ 200, 150, 300, 500 })[i],
+           "the offering stall sells real offering " .. i .. " at its specified price")
+  end
+  tap(K.B)
+  waitUntil(function() return taskRunning("Task_ShopMenu") end, 900, "the offering stall's menu again")
+  wait(20); tap(K.B); playThrough("c_offerings_bye")
+  walkTo({ { 12, 30 } }); face(K.UP)
+  local function pasion(row, answer, prefix)
+    interact()
+    playThrough(prefix, function() return taskRunning("Task_HandleMultichoiceInput") end)
+    wait(20)
+    if row == nil then tap(K.B) else
+      for _ = 1, row do tap(K.DOWN); wait(8) end
+      tap(K.A)
+    end
+    if answer then
+      playThrough(prefix .. "_quote", function() return taskRunning("Task_HandleYesNoInput") end)
+      wait(20); shot(prefix .. "_price.png"); tap(answer)
+    end
+    playThrough(prefix .. "_done")
+  end
+  local originalMoney = money()
+  addCoinFixture(S.ITEM_RELIC_SILVER)
+  pasion(nil, nil, "c_pasion_cancel")
+  pasion(1, K.B, "c_pasion_decline")
+  expect(itemCount(S.ITEM_RELIC_SILVER) == 1 and money() == originalMoney,
+         "Pasion's menu cancellation and declined quote keep coin and money")
+  for row, coin in ipairs({ S.ITEM_RELIC_COPPER, S.ITEM_RELIC_SILVER, S.ITEM_RELIC_GOLD }) do
+    if coin ~= S.ITEM_RELIC_SILVER then addCoinFixture(coin) end
+    local beforeCoin, beforeMoney = itemCount(coin), money()
+    pasion(row - 1, K.A, "c_pasion_sale_" .. row)
+    expect(itemCount(coin) == beforeCoin - 1 and money() == beforeMoney + ({ 600, 2400, 6000 })[row],
+           "Pasion buys coin " .. row .. " at the market price plus twenty percent")
+  end
+  pasion(1, nil, "c_pasion_no_coin")
+  expect(itemCount(S.ITEM_RELIC_SILVER) == 0, "Pasion cannot sell a missing coin")
+  addCoinFixture(S.ITEM_RELIC_SILVER)
+  setMoney(S.MAX_MONEY)
+  pasion(1, nil, "c_pasion_money_cap")
+  expect(itemCount(S.ITEM_RELIC_SILVER) == 1 and money() == S.MAX_MONEY,
+         "Pasion refuses a capped payment without taking the coin")
+  setMoney(originalMoney)
+  pasion(1, K.A, "c_pasion_cap_retry")
+  expect(itemCount(S.ITEM_RELIC_SILVER) == 0 and money() == originalMoney + 2400,
+         "Pasion pays the retained coin after there is room for its full value")
   talk({ { 14, 30 }, { 14, 31 } }, K.LEFT, "c_elder")
   talk({ { 14, 30 }, { 16, 30 }, { 16, 27 } }, K.DOWN, "c_honey")
   expect(getFlag(S.FLAG_HIDDEN_HONEY), "the Honey under Kydon's awning")
   -- the jars: try until one holds a Pithound (one in four), then fight it
   walkTo({ { 12, 23 } }); face(K.DOWN)
+  local originalRng = {}
+  for i = 0, S.RNG_STATE_SIZE - 1 do originalRng[i] = emu:read8(S.gRngValue + i) end
+  -- SeedRng(0xC0FFEE)'s warmed state: earlier conversations must not make this flaky.
+  emu:write32(S.gRngValue + S.OFF_RNG_A, 0xC6B1859D)
+  emu:write32(S.gRngValue + S.OFF_RNG_B, 0x18DF44C1)
+  emu:write32(S.gRngValue + S.OFF_RNG_C, 0x5E0062DC)
+  emu:write32(S.gRngValue + S.OFF_RNG_COUNTER, 0x11)
   local found = false
   for i = 1, 16 do
     interact()
@@ -521,7 +880,9 @@ local function city()
     end
     wait(10)
   end
+  for i = 0, S.RNG_STATE_SIZE - 1 do emu:write8(S.gRngValue + i, originalRng[i]) end
   expect(found, "a jar by the stoa holds a Pithound")
+  markedPithos()
   talk({ { 11, 22 } }, K.LEFT, "c_x_speed")
   expect(getFlag(S.FLAG_ITEM_X_SPEED), "the X Speed at the end of the stoa")
   walkTo({ { 13, 22 } }); face(K.UP); interact(); playThrough("c_spice_seller")
@@ -581,7 +942,45 @@ local function city2()
   door({ 12, 10 }, K.UP, S.MAP_RUNNERS, "runners_house", S.MAP_CITY, { 12, 10 })
   talk({ { 12, 13 }, { 2, 13 }, { 2, 12 } }, K.UP, "c_hephaisteion_sign")
   door({ 3, 12 }, K.UP, S.MAP_HEPHAISTEION, "hephaisteion", S.MAP_CITY, { 3, 12 })
-  talk({ { 1, 12 }, { 1, 9 } }, K.LEFT, "c_dig_garden")
+  walkTo({ { 1, 12 }, { 1, 9 } })
+  local bag, restoreBag = saveBag()
+  for i, slot in pairs(bag) do
+    if slot[1] == S.ITEM_TROWEL then
+      emu:write16(sb1() + S.OFF_SB1_BAG + i * S.ITEM_SLOT_SIZE, 0)
+    end
+  end
+  talk({ { 1, 9 } }, K.LEFT, "c_dig_garden_no_trowel")
+  expect(not getFlag(S.FLAG_DAILY_HEPHAISTEION), "the garden stays undug without the actual Trowel")
+  restoreBag()
+
+  local originalSeed = emu:read32(sb1() + S.OFF_SB1_DAILY_SEED)
+  emu:write32(sb1() + S.OFF_SB1_DAILY_SEED, 0x5EED)
+  local encryptionKey = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  for i = 0, S.BAG_ITEMS_COUNT - 1 do
+    local slot = sb1() + S.OFF_SB1_BAG + i * S.ITEM_SLOT_SIZE
+    emu:write16(slot, S.ITEM_POTION)
+    emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, S.MAX_BAG_ITEM_CAPACITY ~ encryptionKey)
+  end
+  talk({ { 1, 9 } }, K.LEFT, "c_dig_garden_full_bag")
+  local gardenFind = emu:read16(S.sDig + S.OFF_DIG_FIND)
+  local gardenQuantity = emu:read8(S.sDig + S.OFF_DIG_QUANTITY)
+  expect(gardenFind < S.ITEMS_COUNT, "the garden's full-Bag fixture rolls an actual item")
+  expect(not getFlag(S.FLAG_DAILY_HEPHAISTEION), "a full Bag leaves the garden's find buried for retry")
+  restoreBag()
+  local gardenCount = itemCount(gardenFind)
+  talk({ { 1, 9 } }, K.LEFT, "c_dig_garden")
+  expect(getFlag(S.FLAG_DAILY_HEPHAISTEION), "the Hephaisteion garden records its own daily dig")
+  expect(emu:read16(S.sDig + S.OFF_DIG_FIND) == gardenFind and itemCount(gardenFind) == gardenCount + gardenQuantity,
+         "making room receives the same garden find in its exact quantity")
+  emu:write32(sb1() + S.OFF_SB1_DAILY_SEED, originalSeed)
+  local gardenBag = {}
+  for i = 0, S.BAG_SLOTS * S.ITEM_SLOT_SIZE - 1 do gardenBag[i] = emu:read8(sb1() + S.OFF_SB1_BAG + i) end
+  talk({ { 1, 9 } }, K.LEFT, "c_dig_garden_again")
+  local unchanged = true
+  for i = 0, S.BAG_SLOTS * S.ITEM_SLOT_SIZE - 1 do
+    if emu:read8(sb1() + S.OFF_SB1_BAG + i) ~= gardenBag[i] then unchanged = false; break end
+  end
+  expect(unchanged, "the same day's repeat garden dig leaves the entire Bag unchanged")
   walkTo({ { 1, 13 }, { 8, 13 }, { 8, 20 }, { 3, 20 } })
   door({ 3, 20 }, K.UP, S.MAP_POTTER, "potters_workshop", S.MAP_CITY, { 3, 20 })
   -- the Isthmus Gate before the Herald Laurel: the hoplites turn the player back
@@ -627,6 +1026,47 @@ local function backToTheQuay()
   shot("h_99_back_on_the_quay.png")
 end
 
+local function recoverLegacyTrowel()
+  for i = 0, S.BAG_SLOTS - 1 do
+    local slot = sb1() + S.OFF_SB1_BAG + i * S.ITEM_SLOT_SIZE
+    if emu:read16(slot) == S.ITEM_TROWEL then
+      emu:write16(slot, 0)
+      emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, 0)
+    end
+  end
+  expect(getFlag(S.FLAG_GOT_TROWEL) and itemCount(S.ITEM_TROWEL) == 0,
+         "simulate the old arrival's Trowel flag without an actual item")
+  warpTo({}, S.MAP_CITY, 23, 39)
+  warpTo({}, S.MAP_HARBOR, 30, 16)
+  expect(objectPresent(S.LOCALID_HARBOR_ALETHEA), "Alethea returns for an unfulfilled Trowel gift")
+  talk({ { 30, 16 } }, K.LEFT, "legacy_trowel")
+  expect(itemCount(S.ITEM_TROWEL) == 1 and not objectPresent(S.LOCALID_HARBOR_ALETHEA),
+         "Alethea grants the missing Trowel and leaves")
+  warpTo({}, S.MAP_CITY, 23, 39)
+  warpTo({}, S.MAP_HARBOR, 30, 16)
+  expect(itemCount(S.ITEM_TROWEL) == 1 and not objectPresent(S.LOCALID_HARBOR_ALETHEA),
+         "the recovered Trowel is not given twice")
+end
+
+local function eleusaWeather()
+  local oldKind = emu:read8(ichor() + S.OFF_ICHOR_OMEN_KIND)
+  local oldEntry = emu:read16(ichor() + S.OFF_ICHOR_OMEN_ENTRY)
+  emu:write8(ichor() + S.OFF_ICHOR_OMEN_KIND, S.OMEN_WEATHER)
+  emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, S.OMEN_WEATHER_ELEUSA_SUN)
+  warpTo({}, S.MAP_ELEUSA, 25, 12)
+  expect(emu:read8(sb1() + S.OFF_SB1_WEATHER) == S.WEATHER_DROUGHT,
+         "Eleusa's actual transition applies today's sun omen")
+  wait(60); shot("eleusa_omen_sun.png")
+  emu:write8(ichor() + S.OFF_ICHOR_OMEN_KIND, S.OMEN_GOOD_SIGN)
+  emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, 3)
+  warpTo({}, S.MAP_ELEUSA, 25, 12)
+  expect(emu:read8(sb1() + S.OFF_SB1_WEATHER) == S.WEATHER_NONE,
+         "Eleusa restores normal weather when the sun omen no longer applies")
+  wait(60); shot("eleusa_omen_clear.png")
+  emu:write8(ichor() + S.OFF_ICHOR_OMEN_KIND, oldKind)
+  emu:write16(ichor() + S.OFF_ICHOR_OMEN_ENTRY, oldEntry)
+end
+
 local co = coroutine.create(function()
   boot()
   arrival()
@@ -638,6 +1078,8 @@ local co = coroutine.create(function()
   gateBeforeLaurel()
   gateAfterLaurel()
   backToTheQuay()
+  recoverLegacyTrowel()
+  eleusaWeather()
 end)
 
 local realEmu = _G.emu

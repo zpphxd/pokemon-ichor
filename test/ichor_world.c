@@ -10,12 +10,16 @@
 #include "ichor_relics.h"
 #include "ichor_rites.h"
 #include "ichor_save.h"
+#include "item.h"
 #include "rtc.h"
 #include "pokemon.h"
 #include "wild_encounter.h"
 #include "test/overworld_script.h"
 #include "test/test.h"
 #include "constants/ichor.h"
+#include "constants/heal_locations.h"
+#include "constants/items.h"
+#include "constants/region_map_sections.h"
 #include "constants/map_groups.h"
 #include "constants/rtc.h"
 #include "constants/weather.h"
@@ -28,6 +32,8 @@ void Ichor_HoldTimeOfDay(void);
 void Ichor_ReleaseTimeOfDay(void);
 u16 Ichor_GetHighestPartyLevel(void);
 void Ichor_RestUntil(void);
+u16 Ichor_GetHermState(void);
+void Ichor_AnointHerm(void);
 
 TEST("Ichor: Ichor_CountFlagRange counts the set flags in a range")
 {
@@ -99,6 +105,37 @@ TEST("Ichor: Aethos's herms and the Oikoumene's waystones keep separate flags")
     EXPECT_EQ(Ichor_GetHermFlag(HERM_THE_ASCENT), FLAG_ICHOR_HERMS_START + HERM_THE_ASCENT);
     EXPECT_EQ(Ichor_GetHermFlag(HERM_OIKOUMENE_FIRST), FLAG_ICHOR_WAYSTONES_START);
     EXPECT_EQ(Ichor_GetHermFlag(HERM_MAX - 1), FLAG_ICHOR_WAYSTONES_START + 31);
+}
+
+TEST("Ichor: Emporion's town herm consumes one Oil without changing route completion")
+{
+    u8 oldGroup = gSaveBlock1Ptr->location.mapGroup;
+    u8 oldNum = gSaveBlock1Ptr->location.mapNum;
+    u32 routes = Ichor_CountAnointedHerms();
+    u32 favor = Ichor_GetFavor(ICHOR_GOD_HERMES);
+
+    FlagClear(Ichor_GetHermFlag(HERM_EMPORION_CITY));
+    gSaveBlock1Ptr->location.mapGroup = MAP_EMPORION_CITY >> 8;
+    gSaveBlock1Ptr->location.mapNum = MAP_EMPORION_CITY & 0xFF;
+    EXPECT_EQ(HERM_COUNT, 23);
+    EXPECT_EQ(Ichor_GetHermState(), 2);
+    EXPECT(!Ichor_IsHermFlyTarget(MAPSEC_EMPORION_CITY));
+    EXPECT(AddBagItem(ITEM_OLIVE_OIL, 2));
+    Ichor_AnointHerm();
+    EXPECT(FlagGet(Ichor_GetHermFlag(HERM_EMPORION_CITY)));
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_OLIVE_OIL), 1);
+    EXPECT_EQ(Ichor_GetFavor(ICHOR_GOD_HERMES), favor + 1);
+    EXPECT_EQ(Ichor_CountAnointedHerms(), routes);
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    EXPECT(Ichor_IsHermFlyTarget(MAPSEC_EMPORION_CITY));
+    EXPECT_EQ(Ichor_GetHermHealLocation(MAPSEC_EMPORION_CITY), HEAL_LOCATION_HERM_EMPORION_CITY);
+    Ichor_AnointHerm();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_OLIVE_OIL), 1);
+    EXPECT_EQ(Ichor_GetFavor(ICHOR_GOD_HERMES), favor + 1);
+    FlagClear(Ichor_GetHermFlag(HERM_EMPORION_CITY));
+    RemoveBagItem(ITEM_OLIVE_OIL, 1);
+    gSaveBlock1Ptr->location.mapGroup = oldGroup;
+    gSaveBlock1Ptr->location.mapNum = oldNum;
 }
 
 TEST("Ichor: rain burns a carried flame down two steps at a time, and it still gutters")
@@ -249,6 +286,175 @@ TEST("Ichor: an omen's swarm starts today's outbreak, and only today's visitor s
     EXPECT(FlagGet(FLAG_TEMP_1));
     EXPECT(!FlagGet(FLAG_TEMP_2));
     FlagClear(FLAG_BADGE08_GET);
+}
+
+TEST("Ichor: Act I omens only name reached roads and fields")
+{
+    u32 seed, seen = 0;
+    bool32 sun = FALSE;
+    u32 visitors = 0;
+
+    FlagClear(FLAG_BADGE07_GET);
+    FlagClear(FLAG_BADGE08_GET);
+    FlagClear(FLAG_ICHOR_ROCKSLIDE_CLEARED);
+    FlagClear(FLAG_ICHOR_ARRIVED_ELEUSA);
+    for (seed = 0; seed < 100; seed++)
+    {
+        Ichor_DrawOmen(seed * 2654435761u);
+        EXPECT_EQ(gIchorSave.omenKind, OMEN_GOOD_SIGN);
+    }
+    FlagSet(FLAG_ICHOR_ROCKSLIDE_CLEARED);
+    for (seed = 0; seed < 100; seed++)
+    {
+        Ichor_DrawOmen(seed * 2654435761u);
+        EXPECT(gIchorSave.omenKind == OMEN_GOOD_SIGN || gIchorSave.omenKind == OMEN_SWARM || gIchorSave.omenKind == OMEN_VISITOR);
+        if (gIchorSave.omenKind == OMEN_SWARM)
+            EXPECT_EQ(gIchorSave.omenEntry, OMEN_SWARM_ISTHMUS_KERAZAP);
+        if (gIchorSave.omenKind == OMEN_VISITOR)
+            EXPECT_EQ(gIchorSave.omenEntry, OMEN_VISITOR_ISTHMUS_NEMECUB);
+    }
+    FlagSet(FLAG_ICHOR_ARRIVED_ELEUSA);
+    for (seed = 0; seed < 500; seed++)
+    {
+        Ichor_DrawOmen(seed * 2654435761u);
+        if (gIchorSave.omenKind == OMEN_SWARM)
+        {
+            EXPECT_GE(gIchorSave.omenEntry, OMEN_SWARM_ISTHMUS_KERAZAP);
+            EXPECT_LE(gIchorSave.omenEntry, OMEN_SWARM_ELEUSA_STACHYSS);
+            seen |= 1 << (gIchorSave.omenEntry - OMEN_SWARM_ISTHMUS_KERAZAP);
+        }
+        else if (gIchorSave.omenKind == OMEN_WEATHER)
+        {
+            EXPECT_EQ(gIchorSave.omenEntry, OMEN_WEATHER_ELEUSA_SUN);
+            sun = TRUE;
+        }
+        else if (gIchorSave.omenKind == OMEN_VISITOR)
+        {
+            EXPECT(gIchorSave.omenEntry == OMEN_VISITOR_ELEUSA_KORANTHA || gIchorSave.omenEntry == OMEN_VISITOR_ISTHMUS_NEMECUB);
+            visitors |= gIchorSave.omenEntry == OMEN_VISITOR_ISTHMUS_NEMECUB ? 1 : 2;
+        }
+        else
+        {
+            EXPECT_EQ(gIchorSave.omenKind, OMEN_GOOD_SIGN);
+        }
+    }
+    EXPECT_EQ(seen, 0xF);
+    EXPECT(sun);
+    EXPECT_EQ(visitors, 3);
+    FlagClear(FLAG_ICHOR_ROCKSLIDE_CLEARED);
+    FlagClear(FLAG_ICHOR_ARRIVED_ELEUSA);
+    FlagClear(FLAG_ICHOR_VISITED_EMPORION);
+}
+
+TEST("Ichor: Eleusa's rare visitor stays hidden except on its omen day")
+{
+    FlagSet(FLAG_ICHOR_ARRIVED_ELEUSA);
+    gIchorSave.forcedOmenKind = OMEN_VISITOR;
+    gIchorSave.forcedOmenEntry = OMEN_VISITOR_ELEUSA_KORANTHA;
+    Ichor_DoDailyEvents(1);
+    EXPECT(!FlagGet(FLAG_ICHOR_HIDE_OMEN_KORANTHA));
+    FlagSet(FLAG_ICHOR_HIDE_OMEN_KORANTHA); // caught or defeated today
+    EXPECT(FlagGet(FLAG_ICHOR_HIDE_OMEN_KORANTHA));
+    gIchorSave.forcedOmenKind = OMEN_VISITOR;
+    gIchorSave.forcedOmenEntry = OMEN_VISITOR_ELEUSA_KORANTHA;
+    Ichor_DoDailyEvents(1);
+    EXPECT(!FlagGet(FLAG_ICHOR_HIDE_OMEN_KORANTHA)); // a later visitor, not the caught one
+    gIchorSave.forcedOmenKind = OMEN_GOOD_SIGN;
+    gIchorSave.forcedOmenEntry = OMEN_SIGN_LUCKY(3);
+    Ichor_DoDailyEvents(1);
+    EXPECT(FlagGet(FLAG_ICHOR_HIDE_OMEN_KORANTHA));
+    FlagClear(FLAG_ICHOR_ARRIVED_ELEUSA);
+}
+
+TEST("Ichor: the Isthmus golden cub returns only on another matching omen day")
+{
+    FlagSet(FLAG_ICHOR_ROCKSLIDE_CLEARED);
+    gIchorSave.forcedOmenKind = OMEN_VISITOR;
+    gIchorSave.forcedOmenEntry = OMEN_VISITOR_ISTHMUS_NEMECUB;
+    Ichor_DoDailyEvents(1);
+    EXPECT(!FlagGet(FLAG_ICHOR_HIDE_OMEN_NEMECUB));
+    EXPECT(FlagGet(FLAG_ICHOR_HIDE_OMEN_KORANTHA));
+    EXPECT(FlagGet(FLAG_ICHOR_HIDE_OMEN_PITHOUND));
+    FlagSet(FLAG_ICHOR_HIDE_OMEN_NEMECUB);
+    gIchorSave.forcedOmenKind = OMEN_GOOD_SIGN;
+    gIchorSave.forcedOmenEntry = OMEN_SIGN_LUCKY(3);
+    Ichor_DoDailyEvents(1);
+    EXPECT(FlagGet(FLAG_ICHOR_HIDE_OMEN_NEMECUB));
+    gIchorSave.forcedOmenKind = OMEN_VISITOR;
+    gIchorSave.forcedOmenEntry = OMEN_VISITOR_ISTHMUS_NEMECUB;
+    Ichor_DoDailyEvents(1);
+    EXPECT(!FlagGet(FLAG_ICHOR_HIDE_OMEN_NEMECUB));
+    FlagClear(FLAG_ICHOR_ROCKSLIDE_CLEARED);
+}
+
+TEST("Ichor: Emporion's marked-jar visitor opens on arrival and resets with a new omen")
+{
+    u32 seed;
+    bool32 visitor = FALSE;
+
+    FlagClear(FLAG_BADGE07_GET);
+    FlagClear(FLAG_BADGE08_GET);
+    FlagClear(FLAG_ICHOR_ROCKSLIDE_CLEARED);
+    FlagClear(FLAG_ICHOR_ARRIVED_ELEUSA);
+    FlagClear(FLAG_ICHOR_VISITED_EMPORION);
+    for (seed = 0; seed < 100; seed++)
+    {
+        Ichor_DrawOmen(seed * 2654435761u);
+        EXPECT_EQ(gIchorSave.omenKind, OMEN_GOOD_SIGN);
+    }
+    FlagSet(FLAG_ICHOR_VISITED_EMPORION);
+    for (seed = 0; seed < 100; seed++)
+    {
+        Ichor_DrawOmen(seed * 2654435761u);
+        if (gIchorSave.omenKind == OMEN_VISITOR)
+        {
+            EXPECT_EQ(gIchorSave.omenEntry, OMEN_VISITOR_EMPORION_PITHOUND);
+            visitor = TRUE;
+        }
+        else
+        {
+            EXPECT_EQ(gIchorSave.omenKind, OMEN_GOOD_SIGN);
+        }
+    }
+    EXPECT(visitor);
+    gIchorSave.forcedOmenKind = OMEN_VISITOR;
+    gIchorSave.forcedOmenEntry = OMEN_VISITOR_EMPORION_PITHOUND;
+    Ichor_DoDailyEvents(1);
+    EXPECT(!FlagGet(FLAG_ICHOR_HIDE_OMEN_PITHOUND));
+    EXPECT(FlagGet(FLAG_ICHOR_HIDE_OMEN_KORANTHA));
+    FlagSet(FLAG_ICHOR_HIDE_OMEN_PITHOUND); // caught or defeated today
+    gIchorSave.forcedOmenKind = OMEN_VISITOR;
+    gIchorSave.forcedOmenEntry = OMEN_VISITOR_EMPORION_PITHOUND;
+    Ichor_DoDailyEvents(1);
+    EXPECT(!FlagGet(FLAG_ICHOR_HIDE_OMEN_PITHOUND));
+    gIchorSave.forcedOmenKind = OMEN_GOOD_SIGN;
+    gIchorSave.forcedOmenEntry = OMEN_SIGN_LUCKY(3);
+    Ichor_DoDailyEvents(1);
+    EXPECT(FlagGet(FLAG_ICHOR_HIDE_OMEN_PITHOUND));
+    FlagClear(FLAG_ICHOR_VISITED_EMPORION);
+}
+
+TEST("Ichor: Act I swarm omens create the specified outbreaks and reset daily augury")
+{
+    static const u16 species[] = {SPECIES_KERAZAP, SPECIES_KERAZAP, SPECIES_MELIBEE, SPECIES_STACHYSS};
+    static const u16 maps[] = {MAP_ROUTE4_ISTHMUS, MAP_ROUTE5_SKIRONIAN_CLIFFS, MAP_ELEUSA_VILLAGE, MAP_ELEUSA_VILLAGE};
+    static const u8 levels[] = {18, 19, 20, 21};
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(species); i++)
+    {
+        FlagSet(FLAG_DAILY_ICHOR_AUGURY_READ);
+        gIchorSave.forcedOmenKind = OMEN_SWARM;
+        gIchorSave.forcedOmenEntry = OMEN_SWARM_ISTHMUS_KERAZAP + i;
+        Ichor_DoDailyEvents(1);
+        EXPECT(!FlagGet(FLAG_DAILY_ICHOR_AUGURY_READ));
+        EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonSpecies, species[i]);
+        EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonLevel, levels[i]);
+        EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapGroup, MAP_GROUP(maps[i]));
+        EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapNum, MAP_NUM(maps[i]));
+        EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonProbability, 50);
+        EXPECT_EQ(gSaveBlock1Ptr->outbreakDaysLeft, 1);
+    }
 }
 
 u16 Ichor_GetMonth(void);

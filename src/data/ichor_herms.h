@@ -23,4 +23,9 @@ const struct IchorHerm gIchorHerms[HERM_MAX] =
         .mapsec = MAPSEC_AETHOS_ROUTE_5,
         .healLocation = HEAL_LOCATION_HERM_AETHOS_ROUTE_5,    // by the inn, (58,20); land at (58,21)
     },
+    [HERM_EMPORION_CITY] = {
+        .map = MAP_EMPORION_CITY,
+        .mapsec = MAPSEC_EMPORION_CITY,
+        .healLocation = HEAL_LOCATION_HERM_EMPORION_CITY,
+    },
 };

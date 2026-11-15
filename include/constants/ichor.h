@@ -62,6 +62,7 @@
 // the post-game's land routes, after HERM_COUNT
 #define HERM_AETHOS_ROUTE_31        23
 #define HERM_AETHOS_ROUTE_32        24
+#define HERM_EMPORION_CITY          25  // town anchor, outside the 23-route completion count
 #define HERM_AETHOS_MAX             32  // FLAG_ICHOR_HERMS_START's range
 // The Oikoumene's waystones (OIKOUMENE §4): herms, Thoth's ibis pillars, stone
 // babas and cairns of Ammon. Ids 32-63, flagged in FLAG_ICHOR_WAYSTONES_START's
@@ -99,12 +100,20 @@
 #define OMEN_WEATHER_LERNIP    1  // rain over Lake Stymphalia (Phase 4 SCRIPT.md, the Lernip hunt)
 #define OMEN_WEATHER_KERAMEIKOS_FOG  2  // world-act2: fog over Astyra's Kerameikos
 #define OMEN_WEATHER_KITHAIRON_FOG   3  // world-act2: fog on Mt. Kithairon
+#define OMEN_WEATHER_ELEUSA_SUN     4
 // Swarm entries (add new ones at the end)
 #define OMEN_SWARM_GLAUKOIN    0  // world-act2: Astyra
 #define OMEN_SWARM_ROUTE_6     1  // world-act2: the Eleutherai road
+#define OMEN_SWARM_ISTHMUS_KERAZAP  2
+#define OMEN_SWARM_SKIRON_KERAZAP   3
+#define OMEN_SWARM_ELEUSA_MELIBEE   4
+#define OMEN_SWARM_ELEUSA_STACHYSS  5
 // Visitor entries (add new ones at the end)
 #define OMEN_VISITOR_HIEROLIVE 0  // world-act2: Astyra
 #define OMEN_VISITOR_THYRSIVY  1  // world-act2: Thyrsa's old trellises, after the Dionysia
+#define OMEN_VISITOR_ELEUSA_KORANTHA 2
+#define OMEN_VISITOR_EMPORION_PITHOUND 3
+#define OMEN_VISITOR_ISTHMUS_NEMECUB 4
 // Good-sign entries: the augur's blessing, or today's lucky number (1-6)
 #define OMEN_SIGN_BLESSING     0
 #define OMEN_SIGN_LUCKY(n)     (n)   // "Today, threes are lucky." is OMEN_SIGN_LUCKY(3)

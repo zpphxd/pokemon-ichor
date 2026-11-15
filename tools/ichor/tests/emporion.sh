@@ -48,10 +48,13 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
   awk '/^k_[A-Za-z0-9_]+:/ { n = substr($1, 3, length($1) - 3); next }
        n && /\.word/  { print "  " n " = " $2 ","; n = "" }
        n && /\.space/ { print "  " n " = 0,"; n = "" }' "$OUT/consts.s"
-  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gMain|gSaveBlock1Ptr|gSaveBlock2Ptr|gSaveBlock3Ptr|gMapHeader|gObjectEvents|gPlayerAvatar|gTasks|gBattleOutcome|CB2_Overworld|BattleMainCB2|ScrCmd_createmon|sGlobalScriptContextStatus|sLockFieldControls|sFieldMessageBoxMode|Task_HandleScrollingMultichoiceInput|Task_ShopMenu|Ichor_EventScript_EuploiaMakesEmporion|Ichor_EventScript_FerryDeck)$/ \
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gMain|gSaveBlock1Ptr|gSaveBlock2Ptr|gSaveBlock3Ptr|gMapHeader|gObjectEvents|gPlayerAvatar|gTasks|gBattleOutcome|CB2_Overworld|BattleMainCB2|ScrCmd_createmon|sGlobalScriptContextStatus|sLockFieldControls|sFieldMessageBoxMode|Task_HandleScrollingMultichoiceInput|Task_HandleMultichoiceInput|Task_HandleYesNoInput|Task_ShopMenu|Task_BuyMenu|Task_BuyHowManyDialogueHandleInput|Task_CallYesOrNoCallback|EmporionCity_Mart_Offerings|Ichor_EventScript_EuploiaMakesEmporion|Ichor_EventScript_FerryDeck)$/ \
     { print "  " $3 " = 0x" $1 "," }'
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(sDig|gRngValue|gParties|gPartiesCount|gBattleMons|gBattlerControllerFuncs|gBagPosition|Task_BagMenu_HandleInput|CB2_NamingScreen)$/ && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
   echo "}"
 } > "$LUA"
+tools/ichor/tests/slice_symbols.sh "$ELF" "$OUT/battle_symbols.lua" \
+  || { echo "EMPORION FAIL: could not resolve the player battle controller"; exit 1; }
 
 /usr/bin/python3 tools/ichor/tests/emporion_grids.py > "$OUT/grids.lua" \
   || { echo "EMPORION FAIL: could not write the walk grids"; exit 1; }

@@ -6,12 +6,10 @@
 // the player on her berth at (30,16). While FLAG_ICHOR_ARRIVED_EMPORION is clear,
 // ON_TRANSITION sets VAR_TEMP_1 = 1 and beat 11 plays on the first frame.
 //
-// Stubs (design/phase2/BUILD.md):
-//   ICHOR_STUB_RITES      the quay herm's altar menu (SYSTEMS.md §3)
-//   ICHOR_STUB_OFFERINGS  Kerykos's Olive Oil, Alethea's Trowel, Daedalus's page I
-//   ICHOR_STUB_DIG        the planter's sherd and the ship sheds' daily spot (§5)
-//   ICHOR_STUB_AUGURY     Halitherses's daily omen (§6)
-//   (Kerykos uses his own walker, OBJ_EVENT_GFX_ICHOR_KERYKOS, from the temple work.)
+// Kerykos uses his own walker, OBJ_EVENT_GFX_ICHOR_KERYKOS, from the temple work.
+
+const EH_QUAY_DIG = 0
+const EH_SHIPSHEDS_DIG = 0
 
 mapscripts EmporionHarbor_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
@@ -20,6 +18,10 @@ mapscripts EmporionHarbor_MapScripts {
             setflag(FLAG_ICHOR_HIDE_KLEON_QUAY)
             setflag(FLAG_ICHOR_HIDE_ALETHEA_QUAY)
             setflag(FLAG_ICHOR_HIDE_KERYKOS_QUAY)
+            checkitem(ITEM_ALETHEAS_TROWEL)
+            if (flag(FLAG_ICHOR_GOT_TROWEL) && var(VAR_RESULT) == FALSE) {
+                clearflag(FLAG_ICHOR_HIDE_ALETHEA_QUAY)
+            }
         } else {
             clearflag(FLAG_ICHOR_HIDE_KLEON_QUAY)
             clearflag(FLAG_ICHOR_HIDE_ALETHEA_QUAY)
@@ -47,6 +49,14 @@ text EmporionHarbor_Text_NameSon { "SON" }
 script EmporionHarbor_EventScript_Arrival {
     lockall
     setvar(VAR_TEMP_1, 2)
+    checkitemspace(ITEM_OLIVE_OIL, 3)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EmporionHarbor_EventScript_MakeRoom)
+    }
+    checkitemspace(ITEM_ALETHEAS_TROWEL)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EmporionHarbor_EventScript_MakeRoom)
+    }
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
     waitmovement(0)
     delay(30)
@@ -118,15 +128,8 @@ script EmporionHarbor_EventScript_Arrival {
                   "Then I sell it.\p"
                   "Here. Three flasks of oil. The first ones are free.\p"
                   "That's how they get you."))
-    // ICHOR_STUB_OFFERINGS: ITEM_OLIVE_OIL doesn't exist yet; when it does,
-    // giveitem(ITEM_OLIVE_OIL, 3) replaces the fanfare and the line below.
-    // ICHOR_STUB_RITES: and special(Ichor_AddFavor) gives Hermes his +1.
     setspeaker(SP_NAME_NONE)
-    playfanfare(MUS_OBTAIN_ITEM)
-    message(format("{PLAYER} received 3 Olive Oil!"))
-    waitfanfare
-    waitmessage
-    waitbuttonpress
+    giveitem(ITEM_OLIVE_OIL, 3)
     setflag(FLAG_ICHOR_RITES_TUTORIAL)
     setspeaker(EmporionHarbor_Text_NameKerykos)
     msgbox(format("Come up to the temple when you want a laurel. Ask for the herald.\p"
@@ -145,13 +148,8 @@ script EmporionHarbor_EventScript_Arrival {
     msgbox(format("He talks the way Kleon runs.\p"
                   "Here, before I forget. I brought two trowels. I always bring two.\p"
                   "Truthfully, I bring three."))
-    // ICHOR_STUB_OFFERINGS: giveitem(ITEM_ALETHEAS_TROWEL) when the tool exists.
     setspeaker(SP_NAME_NONE)
-    playfanfare(MUS_OBTAIN_ITEM)
-    message(format("{PLAYER} received Alethea's Trowel!"))
-    waitfanfare
-    waitmessage
-    waitbuttonpress
+    giveitem(ITEM_ALETHEAS_TROWEL)
     setflag(FLAG_ICHOR_GOT_TROWEL)
     setspeaker(EmporionHarbor_Text_NameAlethea)
     msgbox(format("See that planter? Turned earth and a glint. That's a dig spot.\p"
@@ -160,6 +158,7 @@ script EmporionHarbor_EventScript_Arrival {
     applymovement(OBJ_EVENT_ID_PLAYER, EmporionHarbor_Movement_PlayerToPlanter)
     waitmovement(0)
     call(EmporionHarbor_EventScript_DigPlanter)
+    lockall
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     waitmovement(0)
     setspeaker(EmporionHarbor_Text_NameAlethea)
@@ -176,9 +175,15 @@ script EmporionHarbor_EventScript_Arrival {
     releaseall
 }
 
-// ICHOR_STUB_RITES: the altar menu, as the tutorial needs it. Until the engine's
-// EventScript_IchorAltar_Hermes lands, only PRAY does anything, and Kerykos sends
-// every other choice back to the menu, as beat 11 has him do.
+script EmporionHarbor_EventScript_MakeRoom {
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Make room in your Bag, then return to the quay. Kerykos and Alethea have gifts for you."))
+    closemessage
+    releaseall
+    end
+}
+
+// The tutorial requires a prayer before the full altar becomes available.
 script EmporionHarbor_EventScript_TutorialAltar {
     setspeaker(SP_NAME_NONE)
     message(format("A herm of Hermes, hung with garlands."))
@@ -194,24 +199,24 @@ script EmporionHarbor_EventScript_TutorialAltar {
         dynmultichoice(0, 0, TRUE, 4, 0, DYN_MULTICHOICE_CB_NONE,
                        "PRAY", "MAKE AN OFFERING", "FAVOR", "LEAVE")
     }
-    msgbox(format("You pray to Hermes.\p"
-                  "Your purse feels lighter. Then heavier. Then exactly the same."))
+    setvar(VAR_0x800A, ICHOR_GOD_HERMES)
+    setvar(VAR_0x800B, FALSE)
+    special(Ichor_Pray)
+    playse(SE_M_HEAL_BELL)
+    msgbox(gStringVar4)
     closemessage
 }
 
-// ICHOR_STUB_DIG: the field-move pose and the dust puff come with the Trowel.
 // The sherd is the Arachne amphora's (SCRIPT.md Part 6), a fixed find.
 script EmporionHarbor_EventScript_DigPlanter {
     setspeaker(SP_NAME_NONE)
-    playse(SE_M_DIG)
-    delay(60)
-    setflag(FLAG_ICHOR_DUG_EMPORION_QUAY)
-    playfanfare(MUS_OBTAIN_ITEM)
-    message(format("{PLAYER} dug up a Potsherd!"))
-    waitfanfare
-    waitmessage
-    waitbuttonpress
-    closemessage
+    setvar(VAR_0x8004, EH_QUAY_DIG)
+    setvar(VAR_0x8005, ICHOR_FIND_SHERD(ICHOR_AMPHORA_ARACHNE))
+    call(EventScript_IchorDigFixed)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_DUG_EMPORION_QUAY)
+    }
+    return
 }
 
 // Kleon from (31,16): along the berth and up the quay, out of sight.
@@ -247,7 +252,6 @@ movement EmporionHarbor_Movement_AletheaLeaves {
 // ---------------------------------------------------------------------------
 
 // After beat 11 the quay herm is an altar of Hermes like any other.
-// ICHOR_STUB_RITES: goto(EventScript_IchorAltar_Hermes) when it exists.
 script EmporionHarbor_EventScript_QuayHerm {
     lockall
     if (!flag(FLAG_ICHOR_RITES_TUTORIAL)) {
@@ -255,47 +259,25 @@ script EmporionHarbor_EventScript_QuayHerm {
         releaseall
         end
     }
-    call(EmporionHarbor_EventScript_QuayHermMenu)
-    releaseall
-}
-
-script EmporionHarbor_EventScript_QuayHermMenu {
     setspeaker(SP_NAME_NONE)
-    message(format("A herm of Hermes, hung with garlands."))
-    waitmessage
-    dynmultichoice(0, 0, TRUE, 4, 0, DYN_MULTICHOICE_CB_NONE,
-                   "PRAY", "MAKE AN OFFERING", "FAVOR", "LEAVE")
-    switch (var(VAR_RESULT)) {
-        case 0:
-            msgbox(format("You pray to Hermes.\p"
-                          "Somewhere a door you didn't knock on swings open."))
-        case 1:
-            msgbox(format("You have nothing Hermes would take. Yet."))
-        case 2:
-            msgbox(format("Hermes knows your name."))
-    }
-    closemessage
+    goto(EventScript_IchorAltar_Hermes)
 }
 
 script EmporionHarbor_EventScript_Planter {
-    if (flag(FLAG_ICHOR_DUG_EMPORION_QUAY)) {
-        msgbox(format("The planter's earth has been turned over. Someone dug here."), MSGBOX_SIGN)
-    } else {
-        msgbox(format("Turned earth, and a glint of pottery."), MSGBOX_SIGN)
-    }
+    goto(EmporionHarbor_EventScript_DigPlanter)
 }
 
-// ICHOR_STUB_DIG: a daily dig spot (the Arachne amphora's, SCRIPT.md Part 6).
 script EmporionHarbor_EventScript_DigShipsheds {
-    msgbox(format("The sand under the slipways has been turned over.\p"
-                  "Nothing glints today."), MSGBOX_SIGN)
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x8004, EH_SHIPSHEDS_DIG)
+    setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_ARACHNE))
+    goto(EventScript_IchorDigSpot)
 }
 
-// Isthmian Poseidon's sanctuary at the root of the mole. ICHOR_STUB_RITES: it
-// becomes EventScript_IchorAltar_Poseidon (SYSTEMS.md §3) when the rites land.
+// Isthmian Poseidon's sanctuary at the root of the mole.
 script EmporionHarbor_EventScript_PoseidonAltar {
-    msgbox(format("An altar of Poseidon, the Earth-Shaker. Salt has crusted on the stone.\p"
-                  "Sailors leave a pinch of barley here before they put to sea."), MSGBOX_SIGN)
+    setspeaker(SP_NAME_NONE)
+    goto(EventScript_IchorAltar_Poseidon)
 }
 
 script EmporionHarbor_EventScript_VictorsWreath {
@@ -333,6 +315,21 @@ script EmporionHarbor_EventScript_Alethea {
     lock
     faceplayer
     setspeaker(EmporionHarbor_Text_NameAlethea)
+    if (flag(FLAG_ICHOR_ARRIVED_EMPORION) && flag(FLAG_ICHOR_GOT_TROWEL)) {
+        checkitem(ITEM_ALETHEAS_TROWEL)
+        if (var(VAR_RESULT) == FALSE) {
+            msgbox(format("I still have your trowel. Here. Now the buried things won't have to wait."))
+            setspeaker(SP_NAME_NONE)
+            giveitem(ITEM_ALETHEAS_TROWEL)
+            if (var(VAR_RESULT) == TRUE) {
+                setflag(FLAG_ICHOR_HIDE_ALETHEA_QUAY)
+                closemessage
+                removeobject(LOCALID_HARBOR_ALETHEA)
+            }
+            release
+            end
+        }
+    }
     msgbox(format("Merchants show samples at the Deigma. I'll start there."))
     release
 }
@@ -351,11 +348,7 @@ script EmporionHarbor_EventScript_Nausikles {
     goto(Ichor_EventScript_FerryQuay)
 }
 
-// Halitherses, the augur (SYSTEMS.md §6). ICHOR_STUB_AUGURY: the engine draws one
-// omen a day from the five kinds and makes it happen (src/ichor_omen.c). Until it
-// lands he reads the sky from the day of the week, over the Act I lines that
-// still fit the revised map (the Halai Shore and Aigina's interior are Act II),
-// and remembers he told you only until you leave the harbor.
+// Halitherses reads the shared daily omen, not a separately rolled rumor.
 script EmporionHarbor_EventScript_Halitherses {
     lock
     faceplayer
@@ -368,36 +361,76 @@ script EmporionHarbor_EventScript_Halitherses {
         release
         end
     }
-    if (flag(FLAG_TEMP_1)) {
+    if (flag(FLAG_DAILY_ICHOR_AUGURY_READ)) {
         msgbox(format("That's today's. The sky doesn't repeat itself. Come back tomorrow."))
         release
         end
     }
-    msgbox(format("The gulls came in low this morning. Here's what they said."))
-    random(9)
-    switch (var(VAR_RESULT)) {
-        case 0: msgbox(format("Goats on every hill along the Isthmus road. Sparks in their wool."))
-        case 1: msgbox(format("The bees are restless in Eleusa's meadows."))
-        case 2: msgbox(format("Snatchers over the Agora. Hold onto your figs."))
-        case 3: msgbox(format("The fields at Eleusa are crawling with wheat. With serpents, I mean."))
-        case 4: msgbox(format("A golden cub was seen in the scrub above the tombs."))
-        case 5: msgbox(format("Someone saw a flower-crowned girl walking in the wheat. Then she wasn't there."))
-        case 6: msgbox(format("A jar in the Agora barked at a priest."))
-        case 7: msgbox(format("Hard sun over Eleusa. Good day to be wheat."))
-        default: msgbox(format("Today, threes are lucky."))
+    specialvar(VAR_RESULT, Ichor_GetOmen)
+    if (var(VAR_RESULT) == OMEN_NONE) {
+        msgbox(format("The gulls are quiet. No sign yet."))
+        release
+        end
     }
-    setflag(FLAG_TEMP_1)
+    msgbox(format("The gulls came in low this morning. Here's what they said."))
+    switch (var(VAR_RESULT)) {
+        case OMEN_SWARM:
+            switch (var(VAR_0x8004)) {
+                case OMEN_SWARM_ISTHMUS_KERAZAP: msgbox(format("Goats on every hill along the Isthmus road. Sparks in their wool."))
+                case OMEN_SWARM_SKIRON_KERAZAP: msgbox(format("Goats on the pine slopes. The pitch-gatherers are furious."))
+                case OMEN_SWARM_ELEUSA_MELIBEE: msgbox(format("The bees are restless in Eleusa's meadows."))
+                case OMEN_SWARM_ELEUSA_STACHYSS: msgbox(format("The fields at Eleusa are crawling with wheat. With serpents, I mean."))
+                default: msgbox(format("The birds point down a road I haven't walked. Ask the augur there."))
+            }
+        case OMEN_WEATHER:
+            switch (var(VAR_0x8004)) {
+                case OMEN_WEATHER_ELEUSA_SUN: msgbox(format("Hard sun over Eleusa. Good day to be wheat."))
+                case OMEN_WEATHER_KRYOPUFF: msgbox(format("Snow on the Ascent's lower slopes."))
+                case OMEN_WEATHER_LERNIP: msgbox(format("Rain over Lake Stymphalia. Watch the water."))
+                default: msgbox(format("A cloud is sitting over a road I haven't walked. Ask the augur there."))
+            }
+        case OMEN_GOOD_SIGN:
+            switch (var(VAR_0x8004)) {
+                case OMEN_SIGN_BLESSING:
+                    msgbox(format("The gulls bring Hermes's blessing. Accept it?"), MSGBOX_YESNO)
+                    if (var(VAR_RESULT) == YES) {
+                        setvar(VAR_0x8004, ICHOR_GOD_HERMES)
+                        setvar(VAR_0x8005, 100)
+                        special(Ichor_GrantBlessing)
+                        msgbox(format("A breeze at your back. The road feels shorter."))
+                    }
+                case OMEN_SIGN_LUCKY(1): msgbox(format("Today, ones are lucky."))
+                case OMEN_SIGN_LUCKY(2): msgbox(format("Today, twos are lucky."))
+                case OMEN_SIGN_LUCKY(3): msgbox(format("Today, threes are lucky."))
+                case OMEN_SIGN_LUCKY(4): msgbox(format("Today, fours are lucky."))
+                case OMEN_SIGN_LUCKY(5): msgbox(format("Today, fives are lucky."))
+                case OMEN_SIGN_LUCKY(6): msgbox(format("Today, sixes are lucky."))
+            }
+        case OMEN_VISITOR:
+            switch (var(VAR_0x8004)) {
+                case OMEN_VISITOR_ELEUSA_KORANTHA:
+                    msgbox(format("Someone saw a flower-crowned girl walking in the wheat. Then she wasn't there."))
+                case OMEN_VISITOR_EMPORION_PITHOUND:
+                    msgbox(format("A jar in the Agora barked at a priest.\p"
+                                  "The westmost jar by the stoa. Look for the paw-print."))
+                case OMEN_VISITOR_ISTHMUS_NEMECUB:
+                    msgbox(format("A golden cub was seen in the scrub above the tombs.\p"
+                                  "Take the Isthmus road's hill spur."))
+                default: msgbox(format("Something unusual walks the roads today. Keep your eyes open."))
+            }
+        case OMEN_STRANGER: msgbox(format("Someone travels under another face. Be kind to strangers."))
+    }
+    setflag(FLAG_DAILY_ICHOR_AUGURY_READ)
     release
 }
 
 // Glykera and Daedalus's page I (LABYRINTH.md §1).
-// ICHOR_STUB_OFFERINGS: until the Olive Oil item exists, "has an Olive Oil" means
-// Kerykos's flasks (FLAG_ICHOR_RITES_TUTORIAL), and the page is a flag.
 script EmporionHarbor_EventScript_Glykera {
     lock
     faceplayer
     setspeaker(EmporionHarbor_Text_NameGlykera)
     if (flag(FLAG_ICHOR_DAEDALUS_PAGE_1)) {
+        setflag(FLAG_ICHOR_PAGES_START)
         msgbox(format("Sardines! Tuna! Oil, if you've got more of it."))
         release
         end
@@ -407,7 +440,10 @@ script EmporionHarbor_EventScript_Glykera {
     setspeaker(SP_NAME_NONE)
     msgbox(format("That fan's an old sheet covered in drawings.\p"
                   "Doors. Wheels. A bird with a man's legs."))
-    if (!flag(FLAG_ICHOR_RITES_TUTORIAL)) {
+    checkitem(ITEM_OLIVE_OIL)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(EmporionHarbor_Text_NameGlykera)
+        msgbox(format("Bring a flask of Olive Oil, and you can have it."))
         release
         end
     }
@@ -419,6 +455,7 @@ script EmporionHarbor_EventScript_Glykera {
         end
     }
     msgbox(format("For oil? Done! It's only some old scribble. Came up in a net."))
+    removeitem(ITEM_OLIVE_OIL)
     setspeaker(SP_NAME_NONE)
     playfanfare(MUS_OBTAIN_ITEM)
     message(format("{PLAYER} received Daedalus's page I!"))
@@ -426,6 +463,7 @@ script EmporionHarbor_EventScript_Glykera {
     waitmessage
     waitbuttonpress
     setflag(FLAG_ICHOR_DAEDALUS_PAGE_1)
+    setflag(FLAG_ICHOR_PAGES_START)
     release
 }
 

@@ -16,13 +16,14 @@
 //   VAR_TEMP_3 == 0  always: the Deigma's door (32,36). The stoa's door bay isn't
 //                    MB_NON_ANIMATED_DOOR in the tileset, so a trigger does the warp.
 //
-// Stubs (design/phase2/BUILD.md): ICHOR_STUB_HERM (the crossroads herm),
-// ICHOR_STUB_DIG (the Hephaisteion's garden), ICHOR_STUB_OFFERINGS (the offerings
-// stall), ICHOR_STUB_COINS (Pasion), ICHOR_STUB_SPRITE (Number Nine, map.json).
+// Remaining presentation stub: ICHOR_STUB_SPRITE (Number Nine, map.json).
 
 mapscripts EmporionCity_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setflag(FLAG_ICHOR_VISITED_EMPORION)
+        if (flag(FLAG_ICHOR_HERM_EMPORION)) {
+            setflag(FLAG_ICHOR_HERMS_START + HERM_EMPORION_CITY)
+        }
         // Kleon only stands at the temple door while beat 14 plays.
         setflag(FLAG_ICHOR_HIDE_KLEON_TEMPLE_STEPS)
         if (!flag(FLAG_ICHOR_KLEON_WON_HERALD)) {
@@ -326,20 +327,26 @@ mart EmporionCity_Mart_GeneralAfterLaurel {
     ITEM_ESCAPE_ROPE
 }
 
-// ICHOR_STUB_OFFERINGS: Olive Oil 200, Barley Cake 150, Wine 300, Frankincense 500
-// (SYSTEMS.md §3) are new items; the stall opens its mart when they exist.
 script EmporionCity_EventScript_OfferingsStallkeeper {
-    msgbox(format("Oil, barley, wine, frankincense. Whatever your god's fussy about.\p"
-                  "Sold out till the next ship. The gods are thirsty this year."), MSGBOX_NPC)
+    lock
+    faceplayer
+    msgbox(format("Oil, barley, wine, frankincense. Whatever your god's fussy about."))
+    pokemart(EmporionCity_Mart_Offerings)
+    msgbox(format("The gods are thirsty this year."))
+    release
 }
 
-// SCRIPT.md Part 6 also lists Bulldoze and Round, which have no TM in this build
-// yet; Balance assigns their numbers.
+mart EmporionCity_Mart_Offerings {
+    ITEM_OLIVE_OIL
+    ITEM_BARLEY_CAKE
+    ITEM_WINE
+    ITEM_FRANKINCENSE
+}
+
 script EmporionCity_EventScript_ScrollStallkeeper {
     lock
     faceplayer
-    message(format("Techniques, written down. Teach your Pokémon. Use it again and again."))
-    waitmessage
+    msgbox(format("Techniques, written down. Teach your Pokémon. Use it again and again."))
     pokemart(EmporionCity_Mart_Scrolls)
     msgbox(format("A scroll never forgets. Unlike its owner."))
     release
@@ -349,6 +356,8 @@ mart EmporionCity_Mart_Scrolls {
     ITEM_TM17
     ITEM_TM34
     ITEM_TM44
+    ITEM_TM_BULLDOZE
+    ITEM_TM_ROUND
 }
 
 // Kydon, the Knossan honey-seller (LABYRINTH.md seed 3). The mart sells Honey,
@@ -368,30 +377,56 @@ mart EmporionCity_Mart_Kydon {
     ITEM_HONEY
 }
 
-// Pasion, the moneychanger, at his table with his scales. ICHOR_STUB_COINS: he
-// buys the three coins at +20% when they exist (the Bronze Obol is Relic Copper,
-// SYSTEMS.md §5); until then he buys the obol at a fixed ¥600.
+// Pasion buys the three coins at +20%, including the market's blessings.
 script EmporionCity_EventScript_Pasion {
     lock
     faceplayer
     setspeaker(EmporionCity_Text_NamePasion)
     msgbox(format("Old coins? I buy old coins. Fair weight, fair price."))
-    checkitem(ITEM_RELIC_COPPER)
-    if (var(VAR_RESULT) == FALSE) {
+    multichoice(0, 0, MULTI_ICHOR_COINS, FALSE)
+    if (var(VAR_RESULT) == 0) {
+        setvar(VAR_0x8004, ITEM_RELIC_COPPER)
+    } elif (var(VAR_RESULT) == 1) {
+        setvar(VAR_0x8004, ITEM_RELIC_SILVER)
+    } elif (var(VAR_RESULT) == 2) {
+        setvar(VAR_0x8004, ITEM_RELIC_GOLD)
+    } else {
+        closemessage
         release
         end
     }
-    msgbox(format("A Bronze Obol! The ferryman's fare, they say.\p"
-                  "Put one in the mouth of the dead.\p"
-                  "I'll give you a good price for it. The ferryman won't."))
-    setspeaker(SP_NAME_NONE)
-    msgbox(format("Sell Pasion the Bronze Obol for ¥600?"), MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        removeitem(ITEM_RELIC_COPPER)
-        addmoney(600)
-        playse(SE_SHOP)
-        msgbox(format("Pasion weighs the coin twice and pays in silver."))
+    checkitem(VAR_0x8004)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Nothing on the scales. Come back when you find an old coin."))
+        release
+        end
     }
+    if (var(VAR_0x8004) == ITEM_RELIC_COPPER) {
+        msgbox(format("A Bronze Obol! The ferryman's fare, they say.\p"
+                      "Put one in the mouth of the dead.\p"
+                      "I'll give you a good price for it. The ferryman won't."))
+    }
+    setvar(VAR_0x8005, 20)
+    specialvar(VAR_RESULT, Ichor_QuoteToMoneychanger)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EmporionCity_EventScript_PasionCannotPay)
+    }
+    bufferitemname(STR_VAR_2, VAR_0x8004)
+    setspeaker(SP_NAME_NONE)
+    msgbox("Sell the {STR_VAR_2}\nfor ¥{STR_VAR_1}?", MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        specialvar(VAR_RESULT, Ichor_SellToMoneychanger)
+        if (var(VAR_RESULT) == FALSE) {
+            goto(EmporionCity_EventScript_PasionCannotPay)
+        }
+        playse(SE_SHOP)
+        msgbox(format("Pasion weighs the coin twice.\nHe pays you ¥{STR_VAR_1}."))
+    }
+    release
+}
+
+script EmporionCity_EventScript_PasionCannotPay {
+    msgbox(format("You can't carry the full payment. Spend some silver first."))
     release
 }
 
@@ -504,7 +539,34 @@ script EmporionCity_EventScript_Metic {
                   "In Emporion everyone's a stranger. That's why it works."), MSGBOX_NPC)
 }
 
-// The empty jars by the stoa: one in four holds a Pithound.
+// The marked jar is a daily visitor; the other jars keep their random encounters.
+script EmporionCity_EventScript_MarkedPithos {
+    lockall
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A paw-print is scratched under this jar's rim."))
+    setvar(VAR_0x8004, OMEN_VISITOR)
+    setvar(VAR_0x8005, OMEN_VISITOR_EMPORION_PITHOUND)
+    specialvar(VAR_RESULT, Ichor_CheckOmen)
+    if (var(VAR_RESULT) == FALSE || flag(FLAG_ICHOR_HIDE_OMEN_PITHOUND)) {
+        msgbox(format("Nothing inside but dust."))
+        releaseall
+        end
+    }
+    playmoncry(SPECIES_PITHOUND, CRY_MODE_ENCOUNTER)
+    msgbox(format("Something in the jar growls.\p"
+                  "A scruffy face looks up at you, deeply unimpressed."))
+    waitmoncry
+    closemessage
+    setwildbattle(SPECIES_PITHOUND, 16)
+    dowildbattle
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_CAUGHT || var(VAR_RESULT) == B_OUTCOME_WON) {
+        setflag(FLAG_ICHOR_HIDE_OMEN_PITHOUND)
+    }
+    releaseall
+}
+
+// The ordinary jars by the stoa: one in four holds a Pithound.
 script EmporionCity_EventScript_Pithos {
     lockall
     random(4)
@@ -618,32 +680,19 @@ script EmporionCity_EventScript_CisternSign {
     msgbox(format("A painted board: NO LIGHT, NO ENTRY."), MSGBOX_SIGN)
 }
 
-// ICHOR_STUB_HERM: SYSTEMS.md §4's great herm. EventScript_IchorGreatHerm (ENGINE_API
-// §4) replaces this when it lands; until the Olive Oil item exists, Kerykos's
-// flasks (FLAG_ICHOR_RITES_TUTORIAL) are the oil.
 script EmporionCity_EventScript_GreatHerm {
     lockall
-    msgbox(format("A great herm, hung with old garlands. Hermes's face, worn smooth."))
-    if (flag(FLAG_ICHOR_HERM_EMPORION)) {
-        msgbox(format("The old stone face still shines with oil."))
-        releaseall
-        end
-    }
-    if (!flag(FLAG_ICHOR_RITES_TUTORIAL)) {
-        releaseall
-        end
-    }
-    msgbox(format("Anoint it with olive oil?"), MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        msgbox(format("The oil runs down the old stone face.\p"
-                      "Somewhere, Hermes makes a note."))
+    setspeaker(SP_NAME_NONE)
+    call(EventScript_IchorAnointHerm)
+    if (flag(FLAG_ICHOR_HERMS_START + HERM_EMPORION_CITY)) {
         setflag(FLAG_ICHOR_HERM_EMPORION)
     }
     releaseall
 }
 
-// ICHOR_STUB_DIG: a daily dig spot (the Arachne amphora's, SCRIPT.md Part 6).
 script EmporionCity_EventScript_DigHephaisteion {
-    msgbox(format("The earth in Hephaestus's garden has been turned over.\p"
-                  "Nothing glints today."), MSGBOX_SIGN)
+    setspeaker(SP_NAME_NONE)
+    setvar(VAR_0x8004, 1)
+    setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_ARACHNE))
+    goto(EventScript_IchorDigSpot)
 }

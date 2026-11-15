@@ -55,6 +55,12 @@
       "map": "MAP_ROUTE4_ISTHMUS",
       "x": 23,
       "y": 8
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_EMPORION_CITY",
+      "map": "MAP_EMPORION_CITY",
+      "x": 26,
+      "y": 32
     }
   ]
 }

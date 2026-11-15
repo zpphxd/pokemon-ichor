@@ -660,7 +660,7 @@
       "y": 24,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EmporionCity_EventScript_Pithos"
+      "script": "EmporionCity_EventScript_MarkedPithos"
     },
     {
       "type": "sign",
