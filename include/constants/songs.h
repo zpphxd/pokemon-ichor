@@ -493,7 +493,7 @@
 
 // Ichor: our songs are appended after the phonemes (see below), so END_MUS covers
 // them; overworld.c sizes its night-music table from it.
-#define END_MUS                     MUS_ICHOR_HOLLOW
+#define END_MUS                     MUS_ICHOR_PERIODOS_PONTOS
 
 // These PH_* constants are phoneme sounds used by the "bard" NPC (see src/bard_music.c and src/mauville_old_man.c).
 // Each comes in a triplet of PH_*_BLEND, PH_*_HELD, and PH_*_SOLO, and the name of each triplet incorporates the English phonetic sound it represents.
@@ -580,6 +580,17 @@
 #define MUS_ICHOR_BATTLE_ADMIN      636 // Titan admins: Hyperion, Iapetos, Rhea
 #define MUS_ICHOR_REVELATION        637 // Daphne's revelation, the end of Act I
 #define MUS_ICHOR_HOLLOW            638 // caves and woods, from Hecate's Hollow on
+// The Oikoumene, batch 1 (design/oikoumene/MUSIC_cues.md)
+#define MUS_ICHOR_WIDER_WORLD       639 // the Oikoumene chart and the sea lanes
+#define MUS_ICHOR_PLAIN_OF_TROY     640 // the Troad: Sestos, Ilion, its roads
+#define MUS_ICHOR_BLACK_LAND        641 // Egypt by day
+#define MUS_ICHOR_NECROPOLIS        642 // Egypt by night: the outdoor maps' night_music
+#define MUS_ICHOR_BLACK_SEA         643 // the Black Sea: towns and lanes
+#define MUS_ICHOR_BATTLE_OIKOUMENE  644 // every Oikoumene trainer (pokemon.c's region branch)
+#define MUS_ICHOR_BATTLE_PERIODOS   645 // the ten champions of the Periodos, and Helen
+#define MUS_ICHOR_PERIODOS_TROAD    646 // the Periodos in the Troad's hall, the Skaian Gate
+#define MUS_ICHOR_PERIODOS_EGYPT    647 // the Periodos in Egypt's hall, Proteus's precinct
+#define MUS_ICHOR_PERIODOS_PONTOS   648 // the Periodos in the Black Sea's hall, Aietes's palace
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 
