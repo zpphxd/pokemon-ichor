@@ -1,0 +1,604 @@
+// The post-game's opening on Kalliste (design/POSTGAME.md §1; design/postgame/BUILD.md,
+// batch 1, the akti row): the heralds of the Olympic truce everywhere, Kleon at Elaia's
+// well (LABORS.md scene 0, its Elaia half), Elaia's people after the epilogue, and at
+// Akti the Euploia given (ODYSSEY.md scene 1), Phaedon healing and Elpis.
+//
+// Everything here waits for FLAG_ICHOR_POSTGAME, which world-act3's epilogue sets last.
+// The slice's maps call in with one line each: their ON_TRANSITION calls the map's
+// set-up below, and an NPC's script hands over to this file with
+//     if (flag(FLAG_ICHOR_POSTGAME)) { goto(EventScript_IchorPg_...) }
+// People who exist only in the post-game hide behind FLAG_TEMP_18 and up, set in
+// ON_TRANSITION while the post-game is off, so no permanent hide flag is spent.
+//
+// The crew's recruitment scenes are in ichor_postgame_crew.pory.
+
+text IchorPg_Name_Kleon { "KLEON" }
+text IchorPg_Name_Nausikles { "NAUSIKLES" }
+text IchorPg_Name_Alethea { "ALETHEA" }
+text IchorPg_Name_Phaedon { "PHAEDON" }
+text IchorPg_Name_Elpis { "ELPIS" }
+text IchorPg_Name_Halia { "HALIA" }
+text IchorPg_Name_Korinna { "KORINNA" }
+text IchorPg_Name_Philon { "PHILON" }
+text IchorPg_Name_Gylippos { "GYLIPPOS" }
+text IchorPg_Name_Kydippe { "KYDIPPE" }
+text IchorPg_Name_Glykera { "GLYKERA" }
+text IchorPg_Name_Kimon { "KIMON" }
+text IchorPg_Name_Daphne { "DAPHNE" }
+text IchorPg_Name_Hydna { "HYDNA" }
+
+// ===========================================================================
+// The heralds of the truce (spondophoroi). VAR_0x8004 is the town, an
+// ICHOR_HERALD_* id (include/constants/ichor_postgame.h). Each town's herald
+// object runs its wrapper below; design/postgame/PLACEMENTS.md places them.
+// ===========================================================================
+
+script EventScript_IchorHerald {
+    lock
+    faceplayer
+    msgbox(format("The truce is declared. Every road to Olympia is safe."))
+    switch (var(VAR_0x8004)) {
+        case ICHOR_HERALD_ELAIA:
+            msgbox(format("From Kalliste? Take ship at Akti for the mainland first.\p"
+                          "Then west, and over the Alpheios. Olympia's on the far bank."))
+        case ICHOR_HERALD_AKTI:
+            msgbox(format("The Euploia will carry you to the mainland.\p"
+                          "From Emporion, west by Nemea to Arkadia, then down the Alpheios."))
+        case ICHOR_HERALD_EMPORION:
+            msgbox(format("West by Nemea, and up into Arkadia.\p"
+                          "Then follow the Alpheios down. It runs right past the games."))
+        case ICHOR_HERALD_ELEUSA:
+            msgbox(format("West to Emporion, then Nemea and Arkadia.\p"
+                          "The Alpheios carries you the rest of the way."))
+        case ICHOR_HERALD_THYRSA:
+            msgbox(format("Down to Kirrha, and the ferry over to Aigion.\p"
+                          "Up the gorge into Arkadia, then west down the Alpheios."))
+        case ICHOR_HERALD_ARKADIA:
+            msgbox(format("You're nearly there. Take the road west, down the Alpheios.\p"
+                          "When you hear the crowd, you've arrived."))
+        case ICHOR_HERALD_ASTYRA:
+            msgbox(format("Out by Daphni to Eleusa, then west to Emporion.\p"
+                          "Nemea, Arkadia, and the Alpheios after that."))
+        case ICHOR_HERALD_KALDERA:
+            msgbox(format("Ships go west to Kythera. Cross to Gytheion from there.\p"
+                          "Up through Lakonia to Arkadia, then down the Alpheios."))
+        case ICHOR_HERALD_KYTHERA:
+            msgbox(format("Cross to Gytheion and walk up the Eurotas to Lakonia.\p"
+                          "North to Arkadia, then west along the Alpheios."))
+        case ICHOR_HERALD_AMNISOS:
+            msgbox(format("Sail for Kythera, then cross to Gytheion.\p"
+                          "Lakonia, Arkadia, the Alpheios. A long road. A safe one."))
+        case ICHOR_HERALD_LAKONIA:
+            msgbox(format("North past Stymphalia to Arkadia, then west down the Alpheios.\p"
+                          "Even Lakonians walk it unarmed this month. They hate it."))
+        case ICHOR_HERALD_DELPHOI:
+            msgbox(format("Down to Kirrha, and the ferry to Aigion.\p"
+                          "Up through the gorge into Arkadia, and down the Alpheios."))
+        case ICHOR_HERALD_OLYMPUS:
+            msgbox(format("Every road runs downhill from here. Take the one with the crowd.\p"
+                          "Back to Delphoi, the ferry, Arkadia. Then down the Alpheios."))
+        case ICHOR_HERALD_TAINARON:
+            msgbox(format("Back up the Mani to Lakonia, then north to Arkadia.\p"
+                          "The Alpheios takes you west from there."))
+        case ICHOR_HERALD_OLYMPIA:
+            msgbox(format("You've walked one of them. Welcome to Olympia.\p"
+                          "Leave your quarrels on the far bank. Zeus is watching."))
+    }
+    release
+}
+
+script EventScript_IchorHerald_Elaia {
+    setvar(VAR_0x8004, ICHOR_HERALD_ELAIA)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Akti {
+    setvar(VAR_0x8004, ICHOR_HERALD_AKTI)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Emporion {
+    setvar(VAR_0x8004, ICHOR_HERALD_EMPORION)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Eleusa {
+    setvar(VAR_0x8004, ICHOR_HERALD_ELEUSA)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Thyrsa {
+    setvar(VAR_0x8004, ICHOR_HERALD_THYRSA)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Arkadia {
+    setvar(VAR_0x8004, ICHOR_HERALD_ARKADIA)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Astyra {
+    setvar(VAR_0x8004, ICHOR_HERALD_ASTYRA)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Kaldera {
+    setvar(VAR_0x8004, ICHOR_HERALD_KALDERA)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Kythera {
+    setvar(VAR_0x8004, ICHOR_HERALD_KYTHERA)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Amnisos {
+    setvar(VAR_0x8004, ICHOR_HERALD_AMNISOS)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Lakonia {
+    setvar(VAR_0x8004, ICHOR_HERALD_LAKONIA)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Delphoi {
+    setvar(VAR_0x8004, ICHOR_HERALD_DELPHOI)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Olympus {
+    setvar(VAR_0x8004, ICHOR_HERALD_OLYMPUS)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Tainaron {
+    setvar(VAR_0x8004, ICHOR_HERALD_TAINARON)
+    goto(EventScript_IchorHerald)
+}
+
+script EventScript_IchorHerald_Olympia {
+    setvar(VAR_0x8004, ICHOR_HERALD_OLYMPIA)
+    goto(EventScript_IchorHerald)
+}
+
+// ===========================================================================
+// Elaia: the evening after the Klotheia
+// ===========================================================================
+
+// From ElaiaVillage's ON_TRANSITION. FLAG_TEMP_18 hides Kleon at the well (24,18),
+// FLAG_TEMP_19 the herald in the square (15,23).
+script EventScript_IchorPg_ElaiaSetUp {
+    if (!flag(FLAG_ICHOR_POSTGAME)) {
+        setflag(FLAG_TEMP_18)
+        setflag(FLAG_TEMP_19)
+        return
+    }
+    if (flag(FLAG_ICHOR_PG_KLEON_AT_WELL)) {
+        setflag(FLAG_TEMP_18)
+    }
+    return
+}
+
+// LABORS.md scene 0, Elaia: Kleon on the edge of the well with Daphne's scroll. Once.
+script EventScript_IchorPg_KleonWell {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Kleon)
+    msgbox(format("Second. To a Wooloo. In front of my mother.\p"
+                  "She said “Good.” I don't know what to do with “Good.”\p"
+                  "I've been reading. Daphne lent me this. It's about Herakles.\p"
+                  "Nobody told him he'd be glorious. They told him to clean a stable.\p"
+                  "Herakles had twelve. Let's see about us.\p"
+                  "…You're Archon now. You probably have Archon things to do.\p"
+                  "Do them after. Olympia. The Serpent Queen still sets labors. Come on."))
+    closemessage
+    setflag(FLAG_ICHOR_PG_KLEON_AT_WELL)
+    // Off he goes, the way the player isn't standing: down the lane if they came
+    // from above (24,17), otherwise up past the press and away north.
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8005) == 17) {
+        applymovement(LOCALID_ELAIA_PG_KLEON, IchorPg_Movement_KleonLeavesDown)
+    } else {
+        applymovement(LOCALID_ELAIA_PG_KLEON, IchorPg_Movement_KleonLeavesUp)
+    }
+    waitmovement(0)
+    removeobject(LOCALID_ELAIA_PG_KLEON)
+    release
+}
+
+// From the well's edge (24,18): up and round the olive press, north out of sight.
+movement IchorPg_Movement_KleonLeavesUp {
+    walk_fast_up
+    walk_fast_left
+    walk_fast_up * 4
+    walk_fast_left * 3
+}
+
+// From (24,18) down the lane past the stall, out of sight to the south.
+movement IchorPg_Movement_KleonLeavesDown {
+    walk_fast_down * 5
+}
+
+// --- Elaia's people, after the epilogue -------------------------------------
+
+script EventScript_IchorPg_Halia {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Halia)
+    msgbox(format("Hold out your hand. …Nothing! Not a scrap. Isn't it grand?\p"
+                  "Forty years I read threads. Now I just hold hands. I like it better."))
+    release
+}
+
+script EventScript_IchorPg_Korinna {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Korinna)
+    msgbox(format("Halia read my little brother this morning. Nothing at all!\p"
+                  "He cried. Then he laughed. Then he told everyone his thread's his business."))
+    release
+}
+
+script EventScript_IchorPg_Philon {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Philon)
+    msgbox(format("My Wooloo won the footrace! She beat the Lakonian by a nose.\p"
+                  "She's never run in her life. I think she just wanted the garland."))
+    release
+}
+
+// The neighbour who says where Kleon went.
+script EventScript_IchorPg_Gylippos {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Gylippos)
+    if (flag(FLAG_ICHOR_PG_KLEON_AT_WELL)) {
+        msgbox(format("Kleon. Olympia. Running.\p"
+                      "…Fewer words. He is learning from me."))
+    } else {
+        msgbox(format("The boy is at the well. Reading.\p"
+                      "…I did not know he could."))
+    }
+    release
+}
+
+script EventScript_IchorPg_FestivalMan {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_PG_KLEON_AT_WELL)) {
+        msgbox(format("The Lakonian boy ran off west with a scroll under his arm.\p"
+                      "Shouted “Olympia!” over his shoulder. Tripped. Kept going."))
+    } else {
+        msgbox(format("Second in the footrace! To a Wooloo!\p"
+                      "I'll be telling that one at every festival till I die."))
+    }
+    release
+}
+
+script EventScript_IchorPg_FestivalWoman {
+    msgbox(format("My sister sailed to Delphoi again, about her twins' futures.\p"
+                  "The Pythia said “Know thyself” and shut the door. My sister's furious."), MSGBOX_NPC)
+}
+
+// Melitta at home: a line, then her table, as before.
+script EventScript_IchorPg_Mom {
+    lock
+    faceplayer
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("Archon of Aethos. I told the bees. They weren't impressed.\p"
+                  "That man from Akti left his honey. I'm keeping it for guests I don't like."))
+    setspeaker(SP_NAME_MOM)
+    msgbox(format("You look worn out. Sit. Eat something?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        call(Common_EventScript_OutOfCenterPartyHeal)
+        setspeaker(SP_NAME_MOM)
+        msgbox(format("Bread, honey, and a nap. Works on Archons and children both."))
+    } else {
+        setspeaker(SP_NAME_MOM)
+        msgbox(format("Stubborn. You get that from me."))
+    }
+    release
+}
+
+// Kydippe, Glykera and Kimon: only their after-the-errand lines change, so their
+// gifts and Kimon's trade still wait for anyone who missed them.
+script EventScript_IchorPg_Kydippe {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Kydippe)
+    msgbox(format("I delivered the Archon of Aethos, you know. I tell everyone.\p"
+                  "Twice, if they're slow. You still look around like you've lost something."))
+    release
+}
+
+script EventScript_IchorPg_Glykera {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Glykera)
+    msgbox(format("That little girl from Akti ate four of my honey cakes.\p"
+                  "Nobody knows how long they've got, she said, so best have four."))
+    release
+}
+
+script EventScript_IchorPg_Kimon {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Kimon)
+    msgbox(format("Islands past Maleia now, the fishermen say. I rowed to Maleia once.\p"
+                  "We turned back, like everyone. I'd go now. If my knees would."))
+    release
+}
+
+script EventScript_IchorPg_Daphne {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Daphne)
+    msgbox(format("{PLAYER}! Mind the scrolls. They still bite.\p"
+                  "Every myth is a memory of a Pokémon. I'd stake my grove on it.\p"
+                  "Every myth but one. Atlantis. Plato made that up to scold Athens."))
+    release
+}
+
+// All three kraters are empty now: Elpis took the last at the Klotheia.
+script EventScript_IchorPg_Krater {
+    msgbox(format("A painted krater. Empty now. Elpis carried the last one home."), MSGBOX_SIGN)
+}
+
+// From the Akademia's ON_LOAD: the third krater's cell is bare table too.
+script EventScript_IchorPg_AkademiaKraters {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        setmetatile(9, 3, 0x2AA, TRUE)
+        setmetatile(10, 3, 0x2AA, TRUE)
+        setmetatile(11, 3, 0x2AA, TRUE)
+    }
+    return
+}
+
+// ===========================================================================
+// Akti: the Euploia, Phaedon and Elpis, the fishermen
+// ===========================================================================
+
+// From AktiTown's ON_TRANSITION.
+//   FLAG_TEMP_18  the herald in the square (14,20)
+//   FLAG_TEMP_19  Alethea on the Euploia's deck (6,8), until the ship is yours
+//   FLAG_TEMP_1A  Lampon at the gangplank (8,10), only while Hestia's fire is coming
+//   FLAG_TEMP_1B  Diktys, once he's crew (ichor_postgame_crew.pory)
+//   VAR_TEMP_5    1: scene 1 waits on the line x = 10 (rows 9-11); 2: the gangplank boards
+//   VAR_TEMP_6    1: Hestia's fire came out of the temple alive (ICHOR_STUB_CARRIED_FLAME)
+script EventScript_IchorPg_AktiSetUp {
+    if (!flag(FLAG_ICHOR_POSTGAME)) {
+        setflag(FLAG_TEMP_18)
+        setflag(FLAG_TEMP_19)
+        setflag(FLAG_TEMP_1A)
+        return
+    }
+    // The slice's quay is long over.
+    setflag(FLAG_ICHOR_HIDE_KLEON_AKTI)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
+    // Nausikles sits on the bollard at the quay's west end, coiling a rope.
+    setobjectxyperm(LOCALID_AKTI_NAUSIKLES, 5, 9)
+    setobjectmovementtype(LOCALID_AKTI_NAUSIKLES, MOVEMENT_TYPE_FACE_RIGHT)
+    if (flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        setflag(FLAG_TEMP_19)
+        setvar(VAR_TEMP_5, 2)
+    } else {
+        setvar(VAR_TEMP_5, 1)
+    }
+    call(EventScript_IchorPgStub_HearthFireArrives)
+    if (var(VAR_TEMP_6) != 1) {
+        setflag(FLAG_TEMP_1A)
+    }
+    if (flag(FLAG_ICHOR_CREW_DIKTYS)) {
+        setflag(FLAG_TEMP_1B)
+    }
+    return
+}
+
+// --- ODYSSEY.md scene 1: the ship -------------------------------------------
+
+script EventScript_IchorPg_AktiShipRow9 {
+    setvar(VAR_0x8008, 9)
+    goto(EventScript_IchorPg_AktiShip)
+}
+
+script EventScript_IchorPg_AktiShipRow10 {
+    setvar(VAR_0x8008, 10)
+    goto(EventScript_IchorPg_AktiShip)
+}
+
+script EventScript_IchorPg_AktiShipRow11 {
+    setvar(VAR_0x8008, 11)
+    goto(EventScript_IchorPg_AktiShip)
+}
+
+// Talking to Nausikles or Alethea first: the player is beside them already.
+script EventScript_IchorPg_AktiShipTalk {
+    setvar(VAR_0x8008, 0)
+    goto(EventScript_IchorPg_AktiShip)
+}
+
+// Nausikles on his bollard (5,9), Alethea on deck (6,8). The player crosses x = 10
+// and is walked to (6,9), between them, below the deck.
+script EventScript_IchorPg_AktiShip {
+    lockall
+    setvar(VAR_TEMP_5, 0)
+    playse(SE_PIN)
+    applymovement(LOCALID_AKTI_NAUSIKLES, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    switch (var(VAR_0x8008)) {
+        case 9: applymovement(OBJ_EVENT_ID_PLAYER, IchorPg_Movement_ShipFrom9)
+        case 10: applymovement(OBJ_EVENT_ID_PLAYER, IchorPg_Movement_ShipFrom10)
+        case 11: applymovement(OBJ_EVENT_ID_PLAYER, IchorPg_Movement_ShipFrom11)
+    }
+    waitmovement(0)
+    setspeaker(IchorPg_Name_Nausikles)
+    msgbox(format("There you are. The Archon. I carried you off this island once.\p"
+                  "You were seasick the whole way. Don't deny it.\p"
+                  "The fishermen say there are islands past Maleia now. New ones."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(IchorPg_Name_Alethea)
+    msgbox(format("Not new. Just reachable. The map stopped at Maleia for a reason.\p"
+                  "Nobody was fated to go past it. Now nobody's fated not to."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(IchorPg_Name_Nausikles)
+    msgbox(format("I'm too old to sail off the edge of the world.\p"
+                  "So she's yours. The Euploia. I'll come as far as the edge.\p"
+                  "…And then a bit further, probably. One more voyage. Then I'm done."))
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
+    message(format("Nausikles gave {PLAYER} the Euploia!"))
+    waitmessage
+    waitfanfare
+    setflag(FLAG_ICHOR_GOT_EUPLOIA)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(IchorPg_Name_Alethea)
+    msgbox(format("I'm coming too. Truthfully, you'd get lost."))
+    closemessage
+    // She goes below with her satchel; the euploia agent has her on the ship's maps.
+    applymovement(LOCALID_AKTI_PG_ALETHEA, IchorPg_Movement_AletheaGoesBelow)
+    waitmovement(0)
+    removeobject(LOCALID_AKTI_PG_ALETHEA)
+    setvar(VAR_TEMP_5, 2)
+    releaseall
+}
+
+movement IchorPg_Movement_ShipFrom9 { walk_down walk_left * 4 walk_up face_left }
+movement IchorPg_Movement_ShipFrom10 { walk_left * 4 walk_up face_left }
+movement IchorPg_Movement_ShipFrom11 { walk_up walk_left * 4 walk_up face_left }
+movement IchorPg_Movement_AletheaGoesBelow { face_right delay_16 walk_right walk_up }
+
+script EventScript_IchorPg_Nausikles {
+    if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        goto(EventScript_IchorPg_AktiShipTalk)
+    }
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Nausikles)
+    msgbox(format("She's yours. Up the gangplank whenever you're ready.\p"
+                  "I'll be along. My knees take the long way round."))
+    release
+}
+
+script EventScript_IchorPg_AletheaOnDeck {
+    goto(EventScript_IchorPg_AktiShipTalk)
+}
+
+// The gangplank's foot (7,9), once the ship is yours.
+script EventScript_IchorPg_AktiGangplank {
+    setvar(VAR_0x8004, VOYAGE_AKTI)
+    goto(EventScript_IchorBoardShip)
+}
+
+script EventScript_IchorPg_QuaySign {
+    if (flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        msgbox(format("THE QUAY\nThe Euploia. Board by the gangplank."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("THE QUAY\nThe Euploia, moored. Ask the captain."), MSGBOX_SIGN)
+    }
+}
+
+// --- Phaedon and Elpis, under Ione's roof (the Asclepeion) ------------------
+
+// From AktiTown_Asclepeion's ON_TRANSITION. Phaedon takes the counter (7,2); the
+// healer steps along to the Pithos (11,3), where she still answers a whiteout.
+//   FLAG_TEMP_18  Phaedon      FLAG_TEMP_19  Elpis, by the cots (0,9), watching the floor snake
+script EventScript_IchorPg_AsclepeionSetUp {
+    if (!flag(FLAG_ICHOR_POSTGAME)) {
+        setflag(FLAG_TEMP_18)
+        setflag(FLAG_TEMP_19)
+        return
+    }
+    setobjectxyperm(LOCALID_AKTI_HEALER, 11, 3)
+    setobjectmovementtype(LOCALID_AKTI_HEALER, MOVEMENT_TYPE_FACE_DOWN)
+    return
+}
+
+// Every heal in Akti is his (STORY.md §2, Phaedon, arc 8). No bow: that's the
+// healer's sheet. Batch 3 adds his message for Theano here (UNDERWORLD scenes 2, 19).
+script EventScript_IchorPg_Phaedon {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Phaedon)
+    msgbox(format("Easy now. Let me see them."))
+    closemessage
+    incrementgamestat(GAME_STAT_USED_POKECENTER)
+    setvar(VAR_0x800B, LOCALID_AKTI_PG_PHAEDON)
+    call(EventScript_PkmnCenterNurse_TakeAndHealPkmn)
+    setspeaker(IchorPg_Name_Phaedon)
+    msgbox(format("There. Every hurt closes, if you let it."))
+    release
+}
+
+script EventScript_IchorPg_AktiHealer {
+    lock
+    faceplayer
+    msgbox(format("Phaedon tends them all now. He won't let me near the basin.\p"
+                  "I fold the towels. I've never folded so many towels."))
+    release
+}
+
+script EventScript_IchorPg_Elpis {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Elpis)
+    msgbox(format("I'm not napping. I'm resting my eyes. Papa says that's different.\p"
+                  "My Pokémon from the krater sleeps more than me. We take turns."))
+    if (flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        call(EventScript_IchorPg_ElpisKnossa)
+    } else {
+        setspeaker(IchorPg_Name_Elpis)
+        msgbox(format("Papa says Starry lives on an island. A real bull. A real one."))
+    }
+    release
+}
+
+// ICHOR_STUB_PG_KNOSSA: batch 5 builds the escort (POSTGAME.md §3.4). Phaedon can't
+// leave Kalliste, so the player takes Elpis on the Euploia to Knossa to meet Asterion,
+// the real Starry; Ariadne answers her question: "He's not sad today." Until then she
+// only asks, and Phaedon says not yet.
+script EventScript_IchorPg_ElpisKnossa {
+    setspeaker(IchorPg_Name_Elpis)
+    msgbox(format("You've got a ship now. Papa can't go anywhere. He's not allowed.\p"
+                  "Could you take me to see Starry? The real one? Is he still sad?"))
+    setspeaker(IchorPg_Name_Phaedon)
+    msgbox(format("…Not yet, little one. When the sea's calm. Soon."))
+    return
+}
+
+// --- The fishermen, and the town after the epilogue ---------------------------
+
+script EventScript_IchorPg_IsletFisher {
+    msgbox(format("Saw an island past Maleia at dawn. Green, with smoke on it.\p"
+                  "Gone by noon. Thirty years I've fished here. Never seen it before."), MSGBOX_NPC)
+}
+
+script EventScript_IchorPg_Hydna {
+    lock
+    faceplayer
+    setspeaker(IchorPg_Name_Hydna)
+    msgbox(format("The fishermen say there are islands past Maleia now.\p"
+                  "I'd dive there. Nobody's ever dived there. Think what's lying about."))
+    release
+}
+
+script EventScript_IchorPg_Fishwife {
+    msgbox(format("Octopus! Fresh from past Maleia!\p"
+                  "…No, from here. But it's been thinking about Maleia."), MSGBOX_NPC)
+}
+
+script EventScript_IchorPg_Pilgrim {
+    msgbox(format("Back from Delphoi again. The Pythia doesn't give verses now.\p"
+                  "Not even “soon.” You ask, she says “Know thyself.” Then the door."), MSGBOX_NPC)
+}
+
+script EventScript_IchorPg_FishersHouseSign {
+    msgbox(format("GLAUKOS. Gone fishing.\n(Really, this time. Knock anyway.)"), MSGBOX_SIGN)
+}

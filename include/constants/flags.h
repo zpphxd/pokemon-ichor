@@ -1740,6 +1740,21 @@
 #define FLAG_ICHOR_SHIP_RAM                     (FLAG_ICHOR_GENERAL_START + 0x30D) // Ichor: post-game ship upgrade: Talos's bronze ram breaks sea rocks (ODYSSEY §2)
 #define FLAG_ICHOR_SHIP_SAIL                    (FLAG_ICHOR_GENERAL_START + 0x30E) // Ichor: post-game ship upgrade: Aeolus's new sail, one more step downwind
 #define FLAG_ICHOR_SHIP_KEEL                    (FLAG_ICHOR_GENERAL_START + 0x30F) // Ichor: post-game ship upgrade: the Phaeacian keel, the Outer Sea no longer loops
+#define FLAG_ICHOR_PG_KLEON_AT_WELL             (FLAG_ICHOR_GENERAL_START + 0x310) // Ichor: post-game: Kleon's 'Let's see about us' at Elaia's well has played (LABORS scene 0)
+#define FLAG_ICHOR_PG_LAMPON_ASKED              (FLAG_ICHOR_GENERAL_START + 0x311) // Ichor: post-game crew: Lampon asked you to carry Hestia's fire to the Euploia's hearth
+#define FLAG_ICHOR_PG_HEARTH_FIRE               (FLAG_ICHOR_GENERAL_START + 0x312) // Ichor: post-game crew: Hestia's fire is lit for the ship; it lives one door past the temple (ICHOR_STUB_CARRIED_FLAME)
+#define FLAG_ICHOR_PG_DIKTYS_ASKED              (FLAG_ICHOR_GENERAL_START + 0x313) // Ichor: post-game crew: Diktys asked for a Big Root and a coil of rope to mend his boat
+#define FLAG_ICHOR_PG_GOT_ROPE                  (FLAG_ICHOR_GENERAL_START + 0x314) // Ichor: post-game crew: Demeas put a coil of rope on Diktys's tab (Akti's Agora)
+#define FLAG_ICHOR_PG_GOT_BIG_ROOT              (FLAG_ICHOR_GENERAL_START + 0x315) // Ichor: post-game crew: the Route 1 olive farmer gave you a root for Diktys's boat
+#define FLAG_ICHOR_PG_LYNKEUS_ASKED             (FLAG_ICHOR_GENERAL_START + 0x316) // Ichor: post-game crew: Lynkeus named three things in Astyra's harbor you can't see
+#define FLAG_ICHOR_PG_LYNKEUS_FOUND_1           (FLAG_ICHOR_GENERAL_START + 0x317) // Ichor: post-game crew: Lynkeus's first hidden thing found
+#define FLAG_ICHOR_PG_LYNKEUS_FOUND_2           (FLAG_ICHOR_GENERAL_START + 0x318) // Ichor: post-game crew: Lynkeus's second hidden thing found
+#define FLAG_ICHOR_PG_LYNKEUS_FOUND_3           (FLAG_ICHOR_GENERAL_START + 0x319) // Ichor: post-game crew: Lynkeus's third hidden thing found
+#define FLAG_ICHOR_PG_IASO_ASKED                (FLAG_ICHOR_GENERAL_START + 0x31A) // Ichor: post-game crew: Iaso asked for help with three patients (Astyra's Asclepeion)
+#define FLAG_ICHOR_PG_IASO_PATIENT_1            (FLAG_ICHOR_GENERAL_START + 0x31B) // Ichor: post-game crew: Iaso's first patient helped
+#define FLAG_ICHOR_PG_IASO_PATIENT_2            (FLAG_ICHOR_GENERAL_START + 0x31C) // Ichor: post-game crew: Iaso's second patient helped
+#define FLAG_ICHOR_PG_IASO_PATIENT_3            (FLAG_ICHOR_GENERAL_START + 0x31D) // Ichor: post-game crew: Iaso's third patient helped
+#define FLAG_ICHOR_PG_MET_NOLAN                 (FLAG_ICHOR_GENERAL_START + 0x31E) // Ichor: post-game crew: Christopher Nolan has introduced himself at Lechaion
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end

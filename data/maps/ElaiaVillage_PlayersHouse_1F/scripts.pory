@@ -52,6 +52,9 @@ movement ElaiaVillage_PlayersHouse_1F_Movement_MomToHearth {
 }
 
 script ElaiaVillage_PlayersHouse_1F_EventScript_Mom {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Mom)
+    }
     lock
     faceplayer
     setspeaker(SP_NAME_MOM)

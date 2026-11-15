@@ -12,6 +12,7 @@
 mapscripts ElaiaVillage_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         call(ElaiaVillage_EventScript_SetUpVillage)
+        call(EventScript_IchorPg_ElaiaSetUp)   // the post-game's people
     }
     MAP_SCRIPT_ON_LOAD {
         if (flag(FLAG_ICHOR_HIDE_SCRIBE)) {
@@ -225,6 +226,9 @@ movement ElaiaVillage_Movement_TurnAround {
 }
 
 script ElaiaVillage_EventScript_Halia {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Halia)
+    }
     lock
     if (!flag(FLAG_ICHOR_THREAD_READ)) {
         call(ElaiaVillage_EventScript_ThreadReading)
@@ -435,6 +439,9 @@ script ElaiaVillage_EventScript_Kleon {
 // ---------------------------------------------------------------------------
 
 script ElaiaVillage_EventScript_Korinna {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Korinna)
+    }
     lock
     faceplayer
     setspeaker(ElaiaVillage_Name_Korinna)
@@ -447,6 +454,9 @@ script ElaiaVillage_EventScript_Korinna {
 }
 
 script ElaiaVillage_EventScript_Philon {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Philon)
+    }
     lock
     faceplayer
     setspeaker(ElaiaVillage_Name_Philon)
@@ -465,10 +475,16 @@ script ElaiaVillage_EventScript_OliveFarmer {
 }
 
 script ElaiaVillage_EventScript_FestivalWoman {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_FestivalWoman)
+    }
     msgbox(format("My sister sailed all the way to Delphoi to ask the Oracle.\p“Will my baby be a boy?” The Oracle said, “Yes and no.”\pTwins. One of each. The Oracle's never wrong. Just rude."), MSGBOX_NPC)
 }
 
 script ElaiaVillage_EventScript_FestivalMan {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_FestivalMan)
+    }
     lock
     faceplayer
     if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
@@ -480,6 +496,9 @@ script ElaiaVillage_EventScript_FestivalMan {
 }
 
 script ElaiaVillage_EventScript_Gylippos {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Gylippos)
+    }
     lock
     faceplayer
     setspeaker(ElaiaVillage_Name_Gylippos)

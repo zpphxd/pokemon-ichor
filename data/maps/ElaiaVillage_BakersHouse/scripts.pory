@@ -15,6 +15,9 @@ text ElaiaVillage_BakersHouse_Name_Glykera { "GLYKERA" }
 text ElaiaVillage_BakersHouse_Name_Kimon { "KIMON" }
 
 script ElaiaVillage_BakersHouse_EventScript_Glykera {
+    if (flag(FLAG_ICHOR_POSTGAME) && flag(FLAG_ICHOR_GOT_GLYKERA_CAKES)) {
+        goto(EventScript_IchorPg_Glykera)
+    }
     lock
     faceplayer
     setspeaker(ElaiaVillage_BakersHouse_Name_Glykera)
@@ -48,6 +51,9 @@ script ElaiaVillage_BakersHouse_EventScript_Glykera {
 }
 
 script ElaiaVillage_BakersHouse_EventScript_Kimon {
+    if (flag(FLAG_ICHOR_POSTGAME) && flag(FLAG_ICHOR_DID_KIMON_TRADE) && flag(FLAG_ICHOR_GOT_KIMON_PEARLS)) {
+        goto(EventScript_IchorPg_Kimon)
+    }
     lock
     faceplayer
     setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)

@@ -32,6 +32,9 @@ mapscripts AktiTown_MapScripts {
         } else {
             setvar(VAR_TEMP_3, 1)
         }
+        // The post-game (data/scripts/ichor_postgame_opening.pory): the herald, the
+        // Euploia's quay, Hestia's fire. VAR_TEMP_5, VAR_TEMP_6 and FLAG_TEMP_18-1B.
+        call(EventScript_IchorPg_AktiSetUp)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_2, 1: AktiTown_EventScript_HarborPart1Check
@@ -289,6 +292,9 @@ movement AktiTown_Movement_KleonLeaves {
 // ---------------------------------------------------------------------------
 
 script AktiTown_EventScript_Diktys {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPgCrew_Diktys)
+    }
     lock
     faceplayer
     setspeaker(AktiTown_Text_NameDiktys)
@@ -299,6 +305,9 @@ script AktiTown_EventScript_Diktys {
 }
 
 script AktiTown_EventScript_Nausikles {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Nausikles)
+    }
     if (flag(FLAG_BADGE01_GET) && !flag(FLAG_ICHOR_SLICE_COMPLETE) && !flag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)) {
         goto(AktiTown_EventScript_HarborPart2Talk)
     }
@@ -345,6 +354,9 @@ script AktiTown_EventScript_Rower {
 }
 
 script AktiTown_EventScript_Hydna {
+    if (flag(FLAG_ICHOR_POSTGAME) && flag(FLAG_ICHOR_GOT_MYSTIC_WATER)) {
+        goto(EventScript_IchorPg_Hydna)
+    }
     lock
     faceplayer
     setspeaker(AktiTown_Text_NameHydna)
@@ -369,6 +381,9 @@ script AktiTown_EventScript_Hydna {
 }
 
 script AktiTown_EventScript_Fishwife {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Fishwife)
+    }
     msgbox(format("Octopus! Fresh octopus! Still arguing!"), MSGBOX_NPC)
 }
 
@@ -379,6 +394,9 @@ script AktiTown_EventScript_OldWoman {
 }
 
 script AktiTown_EventScript_Pilgrim {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Pilgrim)
+    }
     msgbox(format("I'm just back from Delphoi. Long way to go for so little.\p"
                   "The Pythia used to give whole verses. Riddles, rhymes.\p"
                   "Now it's one word. Sometimes only “soon.”"), MSGBOX_NPC)
@@ -411,10 +429,16 @@ script AktiTown_EventScript_AgoraSign {
 }
 
 script AktiTown_EventScript_QuaySign {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_QuaySign)
+    }
     msgbox(format("THE QUAY\nTrireme to the mainland sails when the winds turn."), MSGBOX_SIGN)
 }
 
 script AktiTown_EventScript_FishersHouseSign {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_FishersHouseSign)
+    }
     msgbox(format("GLAUKOS. Gone fishing.\n(Not really. Knock.)"), MSGBOX_SIGN)
 }
 
@@ -462,6 +486,9 @@ script AktiTown_EventScript_GrottoRubble {
 }
 
 script AktiTown_EventScript_IsletFisher {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_IsletFisher)
+    }
     msgbox(format("That white shrine out on the islet is Poseidon's.\p"
                   "No one's set foot on it since the storm.\p"
                   "Row for it, and the current turns you right round.\p"

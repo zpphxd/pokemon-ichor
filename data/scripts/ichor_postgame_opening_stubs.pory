@@ -1,0 +1,24 @@
+// ICHOR_STUB_SAILING: stand-ins for the sail-engine agent's scripts, so the akti
+// branch links and plays on its own (design/postgame/BUILD.md, batch 1, "Interfaces
+// fixed now"). The build lead deletes this file, include/constants/ichor_postgame_stubs.h
+// and their two lines in data/event_scripts.s when pg-b1-sail-engine merges, then
+// replaces each `call(EventScript_IchorStub_GetShipPort)` in ichor_postgame_crew.pory
+// with `specialvar(VAR_RESULT, Ichor_GetShipPort)`.
+
+// The gangplank. The real one asks, then puts you on the sea map named by the
+// landing's row in src/data/ichor_voyages.h (VAR_0x8004 is the port).
+script EventScript_IchorBoardShip {
+    lockall
+    msgbox(format("Board the Euploia?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("The crew are still stowing the hold. She isn't ready to sail yet."))
+    }
+    releaseall
+}
+
+// Where the Euploia is moored, as a VOYAGE_* id in VAR_RESULT. Until the sail engine
+// lands she never leaves her home berth.
+script EventScript_IchorStub_GetShipPort {
+    setvar(VAR_RESULT, VOYAGE_AKTI)
+    return
+}

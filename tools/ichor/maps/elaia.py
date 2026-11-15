@@ -695,6 +695,16 @@ SIGNS = [   # x, y, facing, script
     (6, 21, "ANY", "ScribesStool"),
 ]
 HIDDEN = [("ITEM_HONEY", 5, 7, "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY")]
+# The post-game's people (data/scripts/ichor_postgame_opening.pory). They hide behind
+# FLAG_TEMP flags that ON_TRANSITION sets until FLAG_ICHOR_POSTGAME, and come after the
+# item ball so the slice's object ids never move. Kleon sits on the well's edge; the
+# herald of the truce stands at the square's south end, clear of every cutscene walk.
+PG_OBJECTS = [
+    # local id, gfx, x, y, facing, full script name, hide flag
+    ("PG_KLEON", GFX + "KLEON", 24, 18, "DOWN", "EventScript_IchorPg_KleonWell", "FLAG_TEMP_18"),
+    # ICHOR_STUB_PG_SPRITES: the herald wears OBJ_EVENT_GFX_ICHOR_HERALD once the sprites merge
+    ("PG_HERALD", GFX + "AUGUR", 15, 23, "DOWN", "EventScript_IchorHerald_Elaia", "FLAG_TEMP_19"),
+]
 
 
 def halia_ring(g):
@@ -724,6 +734,12 @@ def write_events(g):
             "movement_type": "MOVEMENT_TYPE_LOOK_AROUND", "movement_range_x": 0, "movement_range_y": 0,
             "trainer_type": "TRAINER_TYPE_NONE", "trainer_sight_or_berry_tree_id": item,
             "script": "Common_EventScript_FindItem", "flag": flag})
+    for lid, gfx, x, y, facing, script, flag in PG_OBJECTS:
+        objs.append({
+            "local_id": f"LOCALID_ELAIA_{lid}", "graphics_id": gfx, "x": x, "y": y, "elevation": 3,
+            "movement_type": f"MOVEMENT_TYPE_FACE_{facing}", "movement_range_x": 0, "movement_range_y": 0,
+            "trainer_type": "TRAINER_TYPE_NONE", "trainer_sight_or_berry_tree_id": "0",
+            "script": script, "flag": flag})
     m["object_events"] = objs
     m["warp_events"] = [{"x": x, "y": y, "elevation": 0, "dest_map": d, "dest_warp_id": str(i)}
                         for x, y, d, i in WARPS]

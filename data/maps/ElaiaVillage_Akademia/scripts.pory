@@ -27,6 +27,7 @@ mapscripts ElaiaVillage_Akademia_MapScripts {
     }
     MAP_SCRIPT_ON_LOAD {
         call(ElaiaVillage_Akademia_EventScript_HideTakenKraters)
+        call(EventScript_IchorPg_AkademiaKraters)   // post-game: Elpis took the last
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_1, 1: ElaiaVillage_Akademia_EventScript_Welcome
@@ -284,6 +285,9 @@ movement ElaiaVillage_Akademia_Movement_KleonLeavesFromRight {
 }
 
 script ElaiaVillage_Akademia_EventScript_Daphne {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Daphne)
+    }
     lock
     faceplayer
     setspeaker(ElaiaVillage_Akademia_Name_Daphne)
@@ -304,6 +308,9 @@ script ElaiaVillage_Akademia_EventScript_Alethea {
 
 // One script for all three krater cells: is this one still on the table?
 script ElaiaVillage_Akademia_EventScript_Krater {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_Krater)
+    }
     getplayerxy(VAR_0x8004, VAR_0x8005)
     switch (var(VAR_0x8004)) {
         case 9:

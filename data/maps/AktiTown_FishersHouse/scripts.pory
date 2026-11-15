@@ -1,6 +1,12 @@
 // Glaukos the old fisher's house, where the player gets the Old Rod.
 
-mapscripts AktiTown_FishersHouse_MapScripts {}
+mapscripts AktiTown_FishersHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // The post-game: the sea has kept Glaukos, and Glaukias begs to sail
+        // (data/scripts/ichor_postgame_crew.pory). FLAG_TEMP_18 and FLAG_TEMP_19.
+        call(EventScript_IchorPgCrew_FishersHouseSetUp)
+    }
+}
 
 text AktiTown_FishersHouse_Text_NameGlaukos { "GLAUKOS" }
 
@@ -34,6 +40,9 @@ script AktiTown_FishersHouse_EventScript_Glaukos {
 }
 
 script AktiTown_FishersHouse_EventScript_Grandson {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPgCrew_Glaukias)
+    }
     msgbox(format("Grandpa says he used to be a sea-god.\p"
                   "Grandpa says a lot of things."), MSGBOX_NPC)
 }

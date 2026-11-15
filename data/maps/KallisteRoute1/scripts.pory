@@ -85,6 +85,10 @@ script KallisteRoute1_EventScript_Amaryllis {
 
 // --- the olive farmer under the big olive -----------------------------------
 script KallisteRoute1_EventScript_OliveFarmer {
+    // The post-game: a bent olive root for Diktys's boat (data/scripts/ichor_postgame_crew.pory)
+    if (flag(FLAG_ICHOR_POSTGAME) && flag(FLAG_ICHOR_PG_DIKTYS_ASKED) && !flag(FLAG_ICHOR_PG_GOT_BIG_ROOT)) {
+        goto(EventScript_IchorPgCrew_OliveFarmerRoot)
+    }
     lock
     faceplayer
     if (!flag(FLAG_ICHOR_GOT_ROUTE1_SITRUS)) {

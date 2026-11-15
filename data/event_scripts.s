@@ -35,6 +35,8 @@
 #include "constants/field_weather.h"
 #include "constants/flags.h"
 #include "constants/ichor.h"
+#include "constants/ichor_postgame.h"
+#include "constants/ichor_postgame_stubs.h" // ICHOR_STUB_SAILING: the build lead deletes this line at merge
 #include "constants/follower_npc.h"
 #include "constants/frontier_util.h"
 #include "constants/game_stat.h"
@@ -798,6 +800,9 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/ichor_rites.inc" @ Ichor: rites
 	.include "data/scripts/ichor_herms.inc" @ Ichor: herm waystones
 	.include "data/scripts/ichor_labyrinth.inc" @ Ichor: the Labyrinth
+	.include "data/scripts/ichor_postgame_opening.inc" @ Ichor: the post-game's opening
+	.include "data/scripts/ichor_postgame_crew.inc" @ Ichor: the Euploia's crew
+	.include "data/scripts/ichor_postgame_opening_stubs.inc" @ ICHOR_STUB_SAILING: the build lead deletes this line at merge
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"

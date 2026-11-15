@@ -41,7 +41,7 @@
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "AktiTown_TempleOfHestia_EventScript_Lampon",
-      "flag": "0"
+      "flag": "FLAG_TEMP_18"
     },
     {
       "local_id": "LOCALID_TEMPLE_PYRRHA",
