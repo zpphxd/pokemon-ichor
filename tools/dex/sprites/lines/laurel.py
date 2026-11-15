@@ -82,7 +82,7 @@ def nebrel(p, view, phase):
         _leaf(p, (50.5, 35), (53, 27.5), 4.2, bend=0.8, bias=0.1)
 
         # far ear, behind the head
-        _leaf(p, (30.5, 21.5 - lift), (43, 11 - ear_up), 7.4, bend=1.3, bias=0.18)
+        _leaf(p, (30.5, 21.5 - lift), (39, 12 - ear_up), 6.8, bend=1.3, bias=0.18)
 
         # body: chest, barrel and rump shaded as one form
         body = p.blob(38.5, 45.5, 9, 5.8, coat, ang=-5, group=1)
@@ -92,9 +92,9 @@ def nebrel(p, view, phase):
 
         # neck, short and thick, then the big round head
         p.limb([(32.5, 43), (30.5, 37.5), (28, 33)], 8, 7.4, coat, group=1)
-        p.blob(26, 27 - lift, 7.6, 7, coat, group=3)
-        p.blob(18.5, 30.5 - lift, 5.2, 3.3, coat, ang=8, group=3)
-        p.blob(19.5, 32.4 - lift, 4.2, 1.6, pale, ang=8, group=4)
+        p.blob(26, 27 - lift, 7.2, 7.4, coat, group=3)
+        p.blob(19.5, 30 - lift, 4.8, 3.1, coat, ang=8, group=3)
+        p.blob(20, 32 - lift, 4, 1.8, pale, ang=8, group=4)
 
         # near legs, over the body
         p.limb(near_front, 4.8, 3.8, coat, group=12)
@@ -104,17 +104,15 @@ def nebrel(p, view, phase):
         _hoof(p, int(near_hind[-1][0]) - 1, 59)
 
         # near ear, in front of the head
-        _leaf(p, (25, 21 - lift), (8.5, 12 - ear_up - lift), 7.6, bend=-1.4)
+        _leaf(p, (25, 21 - lift), (13, 13 - ear_up - lift), 6.8, bend=-1.4)
 
         # face
         L = lift
-        p.eye(20, 24 - L, 4, 6, shine="white")
+        p.eye(22, 24 - L, 4, 6, shine="white")
         if p.big:
-            p.px(21, 28 - L, "gold")              # sun-gold glint
-            p.pxs([(13, 29 - L), (14, 29 - L)], "ink")      # nose
-            p.px(14, 30 - L, "ink")
-            p.stroke([(15, 32 - L), (17, 32 - L)], "coat0")  # mouth
-            p.px(23, 24 - L, "coat1")              # brow
+            p.px(23, 28 - L, "gold")
+            p.pxs([(15, 29 - L), (16, 29 - L), (15, 30 - L)], "ink")
+            p.stroke([(17, 32 - L), (19, 33 - L), (21, 32 - L)], "coat0")
             # chest tuft
             p.patch(28, 39, ["..w.", ".ww.", "wwwp", ".wwp", "..wp"],
                     {"w": "pale", "p": "coat3"})
@@ -122,16 +120,16 @@ def nebrel(p, view, phase):
             for x, y in ((35, 41), (39, 40), (43, 40), (37, 44), (42, 44)):
                 _spot(p, x, y)
             # leaf sheen along the upper edges
-            p.pxs([(12, 14 - ear_up - L), (14, 15 - ear_up - L), (16, 16 - L)], "silver")
-            p.pxs([(34, 17 - ear_up), (36, 15 - ear_up)], "silver")
+            p.pxs([(16, 15 - ear_up - L), (18, 16 - ear_up - L), (20, 17 - L)], "silver")
+            p.pxs([(33, 17 - ear_up), (35, 15 - ear_up)], "silver")
         else:
-            p.px(13, 29 - L, "ink")
+            p.px(15, 29 - L, "ink")
         return
 
     if view == "back":
         # battle back: over the shoulder, head turned right in profile,
         # cropped by the bottom of the frame
-        _leaf(p, (46, 15), (56, 2), 8.4, bend=-1.2, bias=0.2)
+        _leaf(p, (46, 15), (54, 6), 7.4, bend=-1.2, bias=0.2)
         p.blob(24, 59, 20, 14, coat, group=1)
         p.blob(34, 48, 10, 8, coat, group=1)
         p.limb([(34, 46), (37, 38), (40, 31)], 11.5, 10, coat, group=1)
@@ -141,7 +139,7 @@ def nebrel(p, view, phase):
         p.limb([(12, 48), (10, 43), (9.5, 38)], 3.4, 2.4, twig)
         _leaf(p, (9.5, 38.5), (2, 34), 5.4, bend=-0.8)
         _leaf(p, (9.5, 38), (12, 29), 5.4, bend=0.8)
-        _leaf(p, (38, 16), (22, 5), 9.4, bend=1.4)
+        _leaf(p, (38, 16), (26, 7), 8, bend=1.4)
         p.eye(47, 18, 4, 6, shine="white", shine_at=(1, 1))
         if p.big:
             p.px(48, 22, "gold")
@@ -153,15 +151,15 @@ def nebrel(p, view, phase):
 
     if view == "up":
         # follower walking away: the whole fawn from behind
-        p.limb([(35, 54), (37, 59), (37, 63)], 5, 4, coat, bias=0.4, group=10)
-        p.limb([(46, 46), (48, 55), (48, 63)], 4.4, 3.4, coat, bias=0.45, group=11)
-        _leaf(p, (44, 24), (32, 15), 8.5, bend=1.2)
-        _leaf(p, (52, 23), (61, 13), 8.5, bend=-1.2, bias=0.1)
+        p.limb([(35, 54), (37 - phase * 2, 59), (37 - phase * 2, 61)], 5, 4, coat, bias=0.4, group=10)
+        p.limb([(46, 46), (48, 55), (48, 61 - phase * 3)], 4.4, 3.4, coat, bias=0.45, group=11)
+        _leaf(p, (44, 24), (35, 16), 7.2, bend=1.2)
+        _leaf(p, (52, 23), (59, 15), 7.2, bend=-1.2, bias=0.1)
         p.limb([(43, 40), (46, 34), (47, 30)], 8.5, 8, coat, group=1)
         p.blob(48, 27, 7.2, 6.6, coat, group=3)
         p.blob(39, 43, 11.5, 8, coat, ang=-24, group=1)
         p.blob(29, 49, 11, 10, coat, group=1)
-        p.limb([(24, 55), (22, 59), (22, 63)], 6, 5, coat, group=12)
+        p.limb([(24, 55), (22 + phase * 2, 58), (22 + phase * 2, 60 - 2 * (1 - phase))], 6, 5, coat, group=12)
         p.limb([(25, 41), (22, 36), (21, 32)], 3, 2, twig)
         _leaf(p, (21, 32), (12, 27), 5.5, bend=-0.8)
         _leaf(p, (21, 32), (22, 21), 5.5, bend=0.8)
@@ -242,7 +240,7 @@ def _khoof(p, x, y):
 
 def kladoe(p, view, phase):
     if view in ("front", "side", "icon"):
-        L = 1 if (phase == 1 and view == "front") else 0
+        L = 1 if (phase == 1 and view != "side") else 0
         stride = view == "side" and phase == 1
 
         # far arm, the back arm of the stride: elbow thrown back
@@ -250,13 +248,13 @@ def kladoe(p, view, phase):
         p.limb([(46, 37.5), (48.5, 42)], 3.6, 3.0, k_coat, bias=0.3, group=20)
         # leaf mantle hanging from a twig collar and streaming back: a long
         # leaf behind, one hanging down the back, a lifted one on top
-        _kleaf(p, (38, 28.5), (57, 28.5 - L), 6.6, bend=0.6, bias=0.2)
-        _kleaf(p, (37.5, 31), (49, 38.5 - L), 5.6, bend=-0.8, bias=0.12)
-        _kleaf(p, (35, 23.5), (48.5, 22.5 - L), 6.4, bend=0.8, bias=0.05)
-        _kleaf(p, (33, 27), (42, 27.5), 4.6, bend=0.3)
+        _kleaf(p, (38, 28.5), (54, 32.5 - L), 6.6, bend=-1.4, bias=0.2)
+        _kleaf(p, (37.5, 31), (49, 41.5 - L), 5.6, bend=-1.2, bias=0.12)
+        _kleaf(p, (35, 23.5), (48.5, 25.5 - L), 6.4, bend=1.2, bias=0.05)
+        _kleaf(p, (33, 27), (44, 29.5), 4.6, bend=0.8)
 
         # far ear, raised behind the head
-        _kleaf(p, (29, 12 - L), (39.5, 2.5 - L), 6.2, bend=1.0, bias=0.2)
+        _kleaf(p, (29, 12 - L), (39.5, 4 - L), 6.2, bend=1.0, bias=0.2)
         # far leg: forward and planted (back on the passing step)
         if stride:
             far_leg = [(37, 43), (38, 48.5), (42, 54), (41.5, 59)]
@@ -274,13 +272,13 @@ def kladoe(p, view, phase):
         p.limb([(30, 37.5), (35.5, 42.5)], 3.4, 2.2, k_pale, clip=[body], group=2)
         # neck and head
         p.limb([(30, 31), (27, 25)], 7, 6.4, k_coat, group=1)
-        p.blob(23.5, 18.5 - L, 7.2, 6.6, k_coat, group=3)
-        p.limb([(19, 21 - L), (13.5, 22.5 - L)], 6.4, 5.0, k_coat, group=3)
-        p.blob(17.5, 24.6 - L, 3.8, 1.4, k_pale, ang=10, group=4)
+        p.blob(23.5, 19 - L, 7, 7, k_coat, group=3)
+        p.limb(bez((20, 21 - L), (17, 20.5 - L), (14, 23 - L)), 6.4, 4.6, k_coat, group=3)
+        p.blob(17.5, 24.6 - L, 3.8, 1.8, k_pale, ang=10, group=4)
         # near ear, a big leaf swept back
-        _kleaf(p, (27, 15 - L), (46.5, 15 - L), 8.6, bend=0.6)
+        _kleaf(p, (27, 15 - L), (43.5, 14 - L), 7.4, bend=1.4)
         # brow twigs
-        _brow_twigs(p, 19, 11.5 - L, L)
+        _brow_twigs(p, 19, 12.5 - L, 0)
 
         # near leg: pushing off behind (forward on the passing step)
         if stride:
@@ -318,10 +316,14 @@ def kladoe(p, view, phase):
         p.blob(43, 21, 9, 8.5, k_coat, group=3)
         p.limb([(49, 24), (56.5, 26)], 9, 7.5, k_coat, group=3)
         _brow_twigs(p, 47, 13)
-        _kleaf(p, (36, 44), (4, 34), 9, bend=1.0)
-        _kleaf(p, (35, 48), (3, 47), 8, bend=0.2)
-        _kleaf(p, (34, 51), (8, 59), 7, bend=-0.6)
+        _kleaf(p, (36, 44), (10, 37), 8, bend=1.0)
+        _kleaf(p, (35, 48), (9, 47), 7, bend=0.2)
+        _kleaf(p, (34, 51), (16, 58), 6, bend=-0.6)
         p.eye(46, 17, 4, 6, shine="white", shine_at=(1, 1))
+        if p.big:
+            p.pxs([(60, 25), (60, 26)], "ink")
+            p.stroke([(54, 29), (58, 29)], "coat0")
+            p.px(47, 21, "gold")
         return
 
     if view == "down":
@@ -468,8 +470,8 @@ def daphnyad(p, view, phase):
         p.poly([(29, 40), (39, 40), (44, 47), (52, 56), (16, 56), (24, 47)], d_bark, group=30)
         for path in ([(20, 55), (14, 60)], [(31, 56), (30, 61)], [(42, 56), (48, 60)]):
             p.limb(path, 4.6, 2.4, d_bark, group=31)
-        p.limb([(39, 33), (47, 27), (50, 18)], 5, 4, d_skin, bias=0.3, group=20)
-        _dleaves(p, [(50, 18, 44, 8, 9, 0.8, 2), (50, 18, 58, 10, 9, -0.8, 2), (50, 18, 52, 6, 8, 0, 1)])
+        p.limb(bez((39, 33), (43, 39), (47, 43)), 5, 4, d_skin, bias=0.3, group=20)
+        _dleaf(p, (47, 43), (52, 47), 4, depth=2)
         _dleaf(p, (38, 20), (48, 38), 10, bend=-1.4, depth=2)
         p.limb([(33, 32), (34.5, 41)], 11, 8, d_skin, group=1)
         p.blob(33, 20, 12.5, 11, d_leaf, group=40, flat=1)
@@ -489,27 +491,28 @@ def daphnyad(p, view, phase):
         # laurel bough, the far arm reaching up and back, the body in an S
         # curve sinking into a flared bark gown that roots into the ground,
         # the head tilted back under a helmet of laurel-leaf hair
-        sw = 1 if (phase == 1 and view == "front") else 0     # boughs and hair sway
+        sw = phase
         L = sw                                                 # head tilt
 
-        # far arm and its bough, behind everything and in shade
+        # The far arm trails below the canopy; only the near arm is a bough.
         p.limb([(49, 13.5), (51.5, 8), (54, 3.8)], 3.0, 1.8, d_twig, bias=0.28)
         p.limb([(51, 10.5), (56 - sw, 10.5)], 2.4, 1.4, d_twig, bias=0.28)
         _dleaves(p, [(50, 12.5, 44.5, 12, 5.2, 0.6, 2), (50.6, 10, 45, 5, 5.6, 0.7, 2),
                      (53.5, 5, 50.8, 1.8, 5.0, 0.5, 2), (54, 11, 57.5, 16.5, 5.4, 0.6, 2),
                      (55.5, 10.5, 61.5, 9, 5.4, -0.6, 2), (52.2, 7, 58.5, 4.2, 5.6, -0.7, 1),
                      (54, 4, 56.5, 1.6, 4.6, -0.3, 1)], -sw)
-        p.limb(bez((38, 30.5), (43.5, 28.5), (46, 22.5)), 5.2, 4.4, d_skin, bias=0.32, group=20)
-        p.limb(bez((46, 22.5), (48, 18), (49, 13.5)), 4.4, 3.4, d_bark, bias=0.25, group=21)
+        p.limb(bez((38, 30.5), (43.5, 35), (46, 39)), 5.2, 4.4, d_skin, bias=0.32, group=20)
+        p.limb(bez((46, 39), (48, 41), (50, 43)), 4.4, 3.4, d_bark, bias=0.25, group=21)
+        _dleaf(p, (50, 43), (54, 46 + sw), 4, bend=-0.6, depth=2)
 
         # far leaf-ear, raised behind the head
         _dleaf(p, (34, 10.5 - L), (46, 2.2 - L), 5.8, bend=1.2, depth=2)
 
         # laurel-leaf hair falling down her back, behind the shoulders
-        _dleaf(p, (36, 10 - L), (52, 19 + sw), 7.4, bend=-1.6, group=50)
-        _dleaf(p, (36, 14 - L), (50, 28 + sw), 7.4, bend=-1.4, group=51)
-        _dleaf(p, (35, 18 - L), (46, 35 + sw), 7.0, bend=-1.0, depth=2, group=52)
-        _dleaf(p, (34, 22 - L), (40.5, 39 + sw), 6.0, bend=-0.6, depth=2, group=53)
+        _dleaf(p, (36, 10 - L), (56, 19 + sw), 7.4, bend=-1.6, group=50)
+        _dleaf(p, (36, 14 - L), (53, 29 + sw), 7.4, bend=-1.4, group=51)
+        _dleaf(p, (35, 18 - L), (48, 37 + sw), 7.0, bend=-1.0, depth=2, group=52)
+        _dleaf(p, (34, 22 - L), (42.5, 40 + sw), 6.0, bend=-0.6, depth=2, group=53)
 
         # the gown: bark flaring from the waist like a bell to a hem that
         # splits into roots gripping the ground
@@ -663,7 +666,7 @@ def daphnyad(p, view, phase):
 
 
 MONS = [
-    Mon("Nebrel", NEBREL_COLORS, NEBREL_SHINY, nebrel, foot="hoof"),
+    Mon("Nebrel", NEBREL_COLORS, NEBREL_SHINY, nebrel, foot="hoof", icon_pal=5),
     # icon palette 5 keeps both the greens and the tan coat
     Mon("Kladoe", KLADOE_COLORS, KLADOE_SHINY, kladoe, foot="hoof", icon_pal=5),
     Mon("Daphnyad", DAPHNYAD_COLORS, DAPHNYAD_SHINY, daphnyad, foot="root", icon_pal=5),

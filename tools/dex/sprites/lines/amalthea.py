@@ -82,12 +82,11 @@ def eripip(p, view, phase):
             fy = (57 if hop else 59) + (0 if far else 1)
             p.rect(int(x0) - 1, int(fy), int(x0) + 1, int(fy) + 1, e_hoof, bias=0.3 if far else 0)
         p.lens((41.5, 39 + dy), (45, 33.5 + dy), 4, fleece, bend=-0.5, group=19)            # tail
-        g = 1
-        for x, y, r in ((36.5, 46.5, 7.2), (42.6, 40.6, 3.8), (37.2, 38.8, 4.2), (31.6, 40.2, 3.8),
-                        (45.2, 46.6, 3.6), (41.2, 52.8, 3.6), (35, 53.8, 3.6), (29.6, 52.4, 3.4),
-                        (28.6, 47, 4.3)):
-            p.circle(x, y + dy, r, fleece, group=g)
-            g += 1
+        _cloud(p, [(36.5, 46.5 + dy, 9, 0.85), (42.6, 40.6 + dy, 3.8, 1),
+                   (37.2, 38.8 + dy, 4.2, 1), (31.6, 40.2 + dy, 3.8, 1),
+                   (45.2, 46.6 + dy, 3.6, 1), (41.2, 52.8 + dy, 3.6, 1),
+                   (35, 53.8 + dy, 3.6, 1), (29.6, 52.4 + dy, 3.4, 1),
+                   (28.6, 47 + dy, 4.3, 1)], fleece, 1)
         # ears stick out sideways (flicked up in frame 2)
         p.lens((17, 41 + dy), (11, 41.5 - 4 * E + dy), 3.4, e_ear, bend=0.3, bias=0.2, group=30)
         p.lens((30, 41 + dy), (37, 42 - 6 * E + dy), 3.6, e_ear, bend=-0.4, group=31)
@@ -96,12 +95,15 @@ def eripip(p, view, phase):
         _cloud(p, [(24.6, 36.9 + dy, 3.4, 0.85), (29, 38.3 + dy, 2.8, 0.93), (20.6, 38.6 + dy, 2.2, 0.95)],
                fleece, 33)
         if p.big:
-            p.eye(23, 40 + dy, 4, 6, iris="iris", shine="fl3", shine_at=(1, 1))
-            p.eye(18, 41 + dy, 3, 4, shine="fl3", shine_at=(1, 1))
+            p.eye(24, 40 + dy, 4, 6, iris="iris", shine="fl3", shine_at=(1, 1))
+            p.eye(18, 41 + dy, 2, 4, shine="fl3", shine_at=(0, 1))
             p.pxs([(15, 45 + dy), (16, 45 + dy)], "ink")
             p.stroke([(17, 47 + dy), (19, 48 + dy)], "lm0")
             _zig(p, [(36, 33), (37, 31), (38, 31), (40, 29)], "gold1", "gold0")
             p.px(38, 31, "sky")
+            _zig(p, [(46, 41), (49, 38), (47, 38), (50, 35 - E)], "gold2", "gold0")
+            p.stroke([(33, 41 + dy), (35, 40 + dy), (38, 41 + dy)], "fl3")
+            p.stroke([(38, 48 + dy), (40, 50 + dy), (42, 49 + dy)], "fl1")
         else:
             p.pxs([(19, 42 + dy), (24, 42 + dy)], "ink")
             p.px(37, 33, "gold1")
@@ -111,16 +113,20 @@ def eripip(p, view, phase):
         # (the hand-finished art replaces this) over the shoulder, the head
         # turned right in profile on the fleece
         p.lens((9, 40), (8, 35.5), 4.4, e_fleece, group=19)
-        g = 1
-        for x, y, r, k in ((28, 58, 19, 0.53), (12, 50, 5.4, 1), (19, 45, 6, 0.93), (28, 43, 6.2, 0.94),
-                           (36.5, 45, 5.6, 0.96), (38.5, 41, 6, 0.9), (46, 46, 5.4, 1.04)):
-            p.blob(x, y, r, r * k, e_fleece, group=g)
-            g += 1
+        _cloud(p, [(28, 58, 19, 0.53), (12, 50, 5.4, 1), (19, 45, 6, 0.93), (28, 43, 6.2, 0.94),
+                   (36.5, 45, 5.6, 0.96), (38.5, 41, 6, 0.9), (46, 46, 5.4, 1.04)], e_fleece, 1)
         p.lens((36, 31), (30, 34), 4.4, e_ear, bend=-0.5, group=30)
         p.blob(44, 33, 8.6, 8.2, e_face, group=32)
         p.blob(52.6, 37.6, 4.6, 3.3, e_muzzle, ang=-8, group=32)
         _cloud(p, [(42, 25, 4.2, 0.76), (37.3, 27, 2.8, 0.96), (46.8, 25.8, 2.8, 0.9)], e_fleece, 33)
         p.eye(44, 28, 4, 6, iris="iris", shine="fl3", shine_at=(1, 1))
+        if p.big:
+            p.px(56, 36, "ink")
+            p.stroke([(51, 39), (54, 39)], "lm0")
+            _zig(p, [(17, 40), (19, 37), (17, 37), (20, 34)], "gold1", "gold0")
+            p.px(20, 34, "sky")
+            p.stroke([(19, 48), (22, 46), (25, 47)], "fl3")
+            p.stroke([(30, 52), (33, 54), (36, 53)], "fl1")
         return
 
     if view in ("down", "up"):

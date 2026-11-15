@@ -50,11 +50,11 @@ def _dream(p, cx, cy, s=1.0, f=-1, g=60, licks=((2, -2, 9, -10, 5, -1.6), (4, 1,
     p.lens((X(1.6), Y(-3)), (X(2.6), Y(-9.4)), 4.4 * s, mat, bend=-0.8 * s * -f, fat=0.4, group=g + 1)
     p.circle(X(0), Y(0), 4.6 * s, mat, group=g + 2)
     p.blob(X(-5.0), Y(1.8), 3.2 * s, 2.2 * s, mat, ang=8 * -f, group=g + 2)
+    ex, ey = X(-2.6), Y(-0.6)
+    if f > 0:
+        ex -= 3 * s
+    p.stroke([(ex, ey), (ex + s, ey + s), (ex + 2 * s, ey + s), (ex + 3 * s, ey)], eye)
     if p.big:
-        ex, ey = X(-2.6), Y(-0.6)
-        if f > 0:
-            ex -= 3
-        p.pxs([(ex, ey), (ex + 1, ey + 1), (ex + 2, ey + 1), (ex + 3, ey)], eye)
         p.pxs([(X(-8.0), Y(0.9)), (X(-7.0), Y(0.9))], eye)
 
 
@@ -208,27 +208,30 @@ def _khead(p, cx, cy, s=1.0, f=-1, face=True, g=40, tongue=True):
     Y = lambda d: cy + d * s
     p.lens((X(-4.0), Y(-5.6)), (X(-8.0), Y(-13.0)), 6.2 * s, coatI, bend=0.8 * s * -f, fat=0.36,
            group=g, bias=0.12)
-    p.circle(X(0), Y(0), 9.2 * s, coatI, group=g + 1)
+    skull = p.circle(X(0), Y(0), 9.2 * s, coatI, group=g + 1)
     for (ax, ay), (bx, by) in (((5.5, 4.4), (10.6, 7.4)), ((3, 6.4), (6.2, 10.6))):
         p.lens((X(ax), Y(ay)), (X(bx), Y(by)), 4.4 * s, coatI, bend=0.6 * s * f, fat=0.35, group=g + 1)
-    p.blob(X(-8.3), Y(3.8), 5.2 * s, 3.5 * s, pale, ang=10 * -f, group=g + 2)
+    p.blob(X(-7.3), Y(3.8), 4.4 * s, 3.5 * s, pale, ang=10 * -f, group=g + 2)
     p.blob(X(-6.5), Y(7.0), 3.7 * s, 1.9 * s, pale, group=g + 2)
+    p.blob(X(-3), Y(5), 4.6 * s, 3 * s, pale, clip=[skull], group=g + 2)
     p.lens((X(2.8), Y(-6.4)), (X(6.0), Y(-13.6)), 7.0 * s, coatI, bend=-0.9 * s * -f, fat=0.36, group=g + 3)
+    p.lens((X(3.4), Y(-8)), (X(5.8), Y(-12)), 2.4 * s, Mat(["coat0", "coat2"]), fat=0.35,
+           noline=True, nooutline=True, group=g + 4)
     if not face:
         return
     if not p.big:
-        p.px(X(-3.2), Y(-0.6), "ink")
-        p.px(X(-13), Y(1.6), "ink")
+        p.eye(X(-4), Y(-2), 3 * s, 4 * s, shine="white")
+        p.px(X(-11), Y(1.6), "ink")
         return
     # the big eye with its shine and gold glint, the nose pad, the smile
     ex = int(round(X(-3.2) - 2))
     ey = int(round(Y(-2.6)))
     p.eye(ex, ey, 4, 6, iris="fire2", shine_at=(1 if f < 0 else 2, 1))
     p.px(ex + (1 if f < 0 else 2), ey + 2, "white")
-    nx = int(round(X(-13.2)))
+    nx = int(round(X(-11.2)))
     ny = int(round(Y(1.2)))
     p.pxs([(nx, ny), (nx + 1, ny), (nx, ny + 1), (nx + 1, ny + 1), (nx - f, ny - 1)], "ink")
-    p.stroke([(X(-12.2), Y(5.0)), (X(-6.5), Y(5.6))], "ink")
+    p.stroke([(X(-10.2), Y(5.0)), (X(-8), Y(5.6)), (X(-6.5), Y(5.0))], "coat0")
     if tongue:
         tx = int(round(X(-9.5)))
         p.pxs([(tx, int(Y(6.6))), (tx - f, int(Y(6.6))), (tx, int(Y(6.6)) + 1)], "tongue")
@@ -249,16 +252,14 @@ def kynder(p, view, phase):
         _flame(p, (45.5, 49), (46.5, 34 + pant), 5.6, bend=-1.4, hot=2)
         # far shoulder: a flame face curled the other way, looking back over
         # the shoulder in its sleep (the head that wakes first, on Dikyon)
-        if not p.big:
-            _dream(p, 39.5, 29.5 + pant, 1.0, f=1, g=60, licks=(), mat=DREAM_FAR)
+        _dream(p, 41, 30 + pant, 0.95, f=1, g=60, licks=((2, -2, 5, -10, 4, -1.0),), mat=DREAM_FAR)
         # far front leg and the shoulder
         far = [(29.5, 53), (30, 56), (30.5, 58.5)] if not walk else [(29.5, 53), (31.5, 56), (32.5, 58.5)]
         p.limb(far, 5.2, 4.8, coat, group=23, bias=0.25)
         p.blob(far[-1][0] + 0.5, 59.6, 3.8, 2.0, coat, group=23, bias=0.2)
         p.blob(34, 50.5, 7.5, 5, coat, group=26)
         # near shoulder: a flame face dozing with its chin on the collar
-        if not p.big:
-            _dream(p, 39.5, 44, 1.1, g=70, licks=())
+        _dream(p, 42, 44 - pant, 1.0, g=70, licks=((3, -2, 7, -10 + pant, 4, -1.0),))
         # chest bib, scalloped
         p.blob(24.5, 51.5, 7, 5.2, pale, group=24)
         for a, b in (((19, 51), (18.5, 55.5)), ((23, 53), (23, 57)), ((27.5, 53), (28, 57))):
@@ -269,13 +270,11 @@ def kynder(p, view, phase):
         p.blob(near[-1][0] - 0.5, 59.4, 4.8, 2.5, coat, group=25)
         # the bronze collar
         p.limb(bez((16.5, 47.5), (24, 51.5), (31.5, 48)), 3.6, 3.4, bronze, group=34)
+        _khead(p, 24, 36 - pant, 0.9, tongue=True)
+        _meander(p, (16.5, 47.5), (24, 51.5), (31.5, 48), range(17, 31))
         if p.big:
-            p.patch(33, 23 + pant, KDREAM_FAR, KL)
-            p.patch(HX, HY, KHEAD, KL)
-            _meander(p, (16.5, 47.5), (24, 51.5), (31.5, 48), range(17, 31))
-            p.patch(31, 37, KDREAM_NEAR, KL)
-        else:
-            _khead(p, HX + 14.5, HY + 13.5)
+            p.pxs([(18, 58), (22, 59), (29, 59), (33, 59)], "pale2")
+            p.px(28, 27 - pant, "pink")
         return
 
     if view == "back":
@@ -289,10 +288,7 @@ def kynder(p, view, phase):
         _dream(p, 20, 43.5, 1.4, f=-1, g=60, licks=((3, 1, 8, -5, 5, -1.0),), mat=DREAM_FAR)
         p.limb([(38, 56), (40, 46), (41, 40)], 18, 16, coat, group=1)
         p.limb(bez((27, 45), (39, 51.5), (51, 44.5)), 4.4, 4.2, bronze, group=34)
-        if p.big:
-            p.patch(27, 9, KBACKHEAD, KL)
-        else:
-            _khead(p, 41.5, 25, 1.25, f=1)
+        _khead(p, 41, 28, 1.1, f=1)
         _dream(p, 50.5, 53, 1.35, f=1, g=70, licks=((3, 1, 7.5, -4.5, 4.6, -1.0),))
         _meander(p, (27, 45), (39, 51.5), (51, 44.5), range(28, 49))
         return
@@ -474,17 +470,11 @@ def dikyon(p, view, phase):
         # dozing flame face its own place on the shoulder
         for a, b, w, bd in (((47.5, 42), (50, 32), 5.4, -1.2),):
             _flame(p, a, b, w, bend=bd, group=30)
-        if not p.big:
-            _dream(p, 33, 36, 1.0, f=-1, g=60, licks=())
+        _dream(p, 34, 36, 0.95, f=-1, g=60, licks=((4, -2, 7, -9 - snap, 4, -1.0),))
         p.limb(bez((19, 39.5), (24.5, 43), (30.5, 39.5)), 3.8, 3.6, bronze, group=34)
-        if p.big:
-            p.patch(32, 15 - snap, DHEAD_BACK, DL)
-            p.patch(26, 30, KDREAM_NEAR, DL)
-            p.patch(7, 21, DHEAD, DL)
-            _meander(p, (19, 39.5), (24.5, 43), (30.5, 39.5), range(19, 31))
-        else:
-            _khead(p, 42, 22 - snap, 0.9, f=1, face=True)
-            _khead(p, 18, 29, 0.9, f=-1, face=True)
+        _khead(p, 42, 23 - snap, 0.8, f=1, tongue=bool(snap), g=40)
+        _khead(p, 21, 30, 0.85, f=-1, tongue=False, g=50)
+        _meander(p, (19, 39.5), (24.5, 43), (30.5, 39.5), range(19, 31))
         return
 
     if view == "back":
@@ -501,15 +491,10 @@ def dikyon(p, view, phase):
                             ((48, 50), (56, 39), 7, -1.4), ((15, 47), (8, 37), 6, 1.2)):
             _flame(p, a, b, w, bend=bd, group=30)
         p.limb(bez((33, 39.5), (43, 46), (54, 39)), 4.6, 4.4, bronze, group=34)
-        if p.big:
-            p.patch(3, 17, DHEAD, DL)
-            p.patch(19, 33, KDREAM_NEAR, DL)
-            p.patch(32, 11, DBACKHEAD, DL)
-            _meander(p, (33, 39.5), (43, 46), (54, 39), range(34, 53))
-        else:
-            _khead(p, 15, 24, 0.9, f=-1)
-            _dream(p, 28, 38, 1.0, g=60, licks=())
-            _khead(p, 46, 20, 1.15, f=1)
+        _khead(p, 17, 28, 0.85, f=-1, g=40)
+        _dream(p, 29, 40, 1.0, g=60, licks=())
+        _khead(p, 45, 24, 1.0, f=1, g=50)
+        _meander(p, (33, 39.5), (43, 46), (54, 39), range(34, 53))
         return
 
     if view == "icon":
@@ -580,7 +565,7 @@ pdark = Mat(["dusk", "coat0", "coat1", "coat2"], line="dusk", cuts=[0.2, 0.46, 0
 pleg = Mat(["ink", "dusk", "coat0", "coat1", "coat2"], line="dusk", cuts=[0.12, 0.3, 0.52, 0.76], wy=0.75)
 ppale = Mat(["pale1", "pale2"], line="pale1", cuts=[0.55])
 pbronze = Mat(["coat0", "bronze", "fire2"], line="coat0", cuts=[0.3, 0.62])
-serpent = Mat(["dusk", "coat0", "bronze", "fire2"], line="dusk", cuts=[0.24, 0.5, 0.8])
+serpent_edge = Mat(["dusk", "bronze", "pale2"], line="ink", cuts=[0.28, 0.82])
 PFIRE = Mat(["fire0", "fire1", "fire2", "pale2"], line="fire0", outline="fire0")
 PGHOST = Mat(["blue0", "blue1", "blue2"], line="blue0", outline="blue0")
 
@@ -724,19 +709,19 @@ def _hound(p, cx, cy, s=1.0, f=-1, ang=0.0, mouth=0.8, mat=None, g=80, pinned=0.
     def TP(pts):
         return [T(x, y) for x, y in pts]
     m = mouth
-    ex1 = lerp((6.6, -14.0), (12.0, -6.5), pinned)
-    ex2 = lerp((0.4, -15.0), (8.0, -9.5), pinned)
+    ex1 = lerp((6.6, -11.0), (10.0, -5.5), pinned)
+    ex2 = lerp((0.4, -12.0), (7.0, -8.5), pinned)
     p.poly(TP(lens_pts((1.0, -3.0), ex1, 5.4, bend=-1.2, fat=0.32)), mat, group=g, bias=0.2)
     p.poly(TP([(-1.5, 3.2), (-13.5, 3.0), (-12.5, 5.0 + 3.4 * m), (-6, 6.8 + 1.6 * m), (-1.5, 6.4)]), HMOUTH,
            group=g + 1, flat=0)
     p.poly(TP(ribbon(bez((-3, 6.0 + 0.6 * m), (-7, 7.4 + 1.4 * m), (-11.8, 6.4 + 3.2 * m), n=10),
                      lambda t: 3.8 - 1.6 * t)), HJAW, group=g + 2)
-    p.poly(TP(ellipse_pts(0, 0, 6.6, 6.0)), mat, group=g + 3)
-    p.poly(TP(ellipse_pts(2.4, 3.6, 4.8, 4.0)), mat, group=g + 3)
-    p.poly(TP(ribbon(bez((-2.5, 0.6), (-8.5, -0.8), (-14.0, 1.2), n=12), lambda t: 7.8 - 3.6 * t)), mat,
+    p.poly(TP(ellipse_pts(0, 0, 7.2, 6.6)), mat, group=g + 3)
+    p.poly(TP(ellipse_pts(2.4, 3.6, 5.2, 4.4)), mat, group=g + 3)
+    p.poly(TP(ribbon(bez((-2.5, 0.6), (-7.5, -0.8), (-11.5, 1.2), n=12), lambda t: 8.8 - 3.2 * t)), HJAW,
            group=g + 4)
-    p.poly(TP(ellipse_pts(-13.6, 1.5, 2.0, 1.9)), mat, group=g + 4)
-    p.poly(TP(ribbon(bez((-4, 3.0), (-9, 3.3), (-13.4, 2.8), n=8), lambda t: 2.4 - 0.8 * t)), HJAW,
+    p.poly(TP(ellipse_pts(-11, 1.5, 2.2, 2.2)), HJAW, group=g + 4)
+    p.poly(TP(ribbon(bez((-4, 3.0), (-8, 3.3), (-11.4, 2.8), n=8), lambda t: 2.4 - 0.8 * t)), HJAW,
            group=g + 4, noline=True, nooutline=True)
     p.poly(TP(lens_pts((-2.4, -3.6), ex2, 6.0, bend=-1.4, fat=0.32)), mat, group=g + 5)
     if not p.big:
@@ -748,7 +733,7 @@ def _hound(p, cx, cy, s=1.0, f=-1, ang=0.0, mouth=0.8, mat=None, g=80, pinned=0.
         X, Y = T(lx, ly)
         return int(math.floor(X)), int(math.floor(Y))
     d = 1 if f < 0 else -1
-    nx, ny = at(-14.4, 0.4)
+    nx, ny = at(-12, 0.4)
     for dx, dy in ((0, 0), (1, 0), (0, 1), (1, 1), (-1, 1)):
         p.fig.px(nx + dx * d, ny + dy, "ink")
     fx, fy = at(-10.6, 3.9)
@@ -761,7 +746,7 @@ def _hound(p, cx, cy, s=1.0, f=-1, ang=0.0, mouth=0.8, mat=None, g=80, pinned=0.
     p.fig.px(tx, ty, "fire0")
     p.fig.px(tx - d, ty, "fire0")
     ex, ey = at(-4.6, -2.2)
-    rows = ["..111", "11ee1", "1e8e1", ".111."]
+    rows = [".11.", "18e1", "1ee1", ".11."]
     for j, r in enumerate(rows):
         r = r if f < 0 else r[::-1]
         for i, c in enumerate(r):
@@ -790,6 +775,17 @@ PHEAD_REAR = [
     ".......###.........",
 ]
 
+def _serpent_s(p, lower, upper, head, facing=1, g=9):
+    """Two opposed bends leave air inside the coil, outside the hound's flank."""
+    p.limb(bez3(*lower), 4.2, 3.4, serpent_edge, group=g)
+    p.limb(bez3(*upper), 3.4, 3.0, serpent_edge, group=g)
+    x, y = head
+    p.blob(x, y, 2.8, 2.0, serpent_edge, ang=-15 * facing, group=g)
+    p.px(x - facing, y - 0.5, "blue2")
+    p.px(x + facing, y + 0.5, "ink")
+    p.stroke([(x + 2 * facing, y + 1), (x + facing, y + 2)], "dusk")
+
+
 def pylakyon(p, view, phase):
     if view in ("front", "side"):
         # weight thrown forward over a braced near foreleg: the near head
@@ -797,12 +793,13 @@ def pylakyon(p, view, phase):
         rear = phase if view == "front" else 0
         walk = phase if view == "side" else 0
         # the burning mane behind the heads, streaming back and cooling to blue
-        for a, b, w, bd in (((22, 32), (8, 12 - rear), 8, 2.4), ((40, 24), (42, 2 + rear), 8, -1.2),
+        for a, b, w, bd in (((22, 32), (8, 12 - rear), 8, 2.4), ((40, 24), (42, 4 + rear), 8, -1.2),
                             ((44, 30), (56, 26), 6, -2.0)):
             _gflame(p, a, b, w, bend=bd, group=20)
         # the serpent tail rising in an S behind the body, its head reared to hiss
-        p.limb(bez3((52, 41), (66, 38), (50, 32), (59, 26.5 - rear)), 7.4, 4.4, serpent, group=9)
-        p.blob(58.5, 25 - rear, 4.2, 3.0, serpent, ang=-15, group=9)
+        _serpent_s(p, ((54, 47), (60, 50), (61, 43), (60.5, 37)),
+                   ((60.5, 37), (55, 34), (56, 29 - rear), (59, 29 - rear)),
+                   (59.5, 28 - rear))
         # far legs, darker, under the body
         fh = [(46, 45), (43, 51), (48, 55), (46, 59)]
         ff = [(31, 45), (32, 51), (30, 56), (29, 59)]
@@ -817,7 +814,7 @@ def pylakyon(p, view, phase):
         p.limb(bez((30, 40), (42, 30), (54, 38)), 12, 11, pcoat, group=1)
         p.limb(bez((27, 45), (38, 48.5), (48, 44)), 15, 12, pcoat, group=1)
         p.blob(25, 43.5, 10.5, 10, pcoat, group=1)
-        p.blob(50, 42.5, 8.5, 8.5, pcoat, group=2)
+        p.blob(50, 42.5, 6.5, 8.5, pcoat, group=2)
         # near hind leg driving back: stifle, hock, a big paw
         nh = [(51, 45), (50, 51), (56.5, 55), (55, 59)] if not walk else [(51, 45), (48, 51), (52, 55), (50, 59)]
         p.limb(nh, 11, 5.2, pleg, group=12)
@@ -838,15 +835,10 @@ def pylakyon(p, view, phase):
         # the bronze gorget across the chest
         p.limb(bez((14, 41), (25, 50), (36, 41)), 5, 5, pbronze, group=60, cap=False)
         # the heads: far reared back, middle raised, near lowered over the paw
-        if p.big:
-            p.patch(36, 1, PHEAD_FAR, PL)
-            p.patch(12, 7 - rear, PHEAD_MID, PL)
-            _meander(p, (14, 41), (25, 50), (36, 41), range(15, 36))
-            p.patch(1, 27 + rear, PHEAD_NEAR, PL)
-        else:
-            _hound(p, 51, 13.5 - rear, 0.78, f=1, ang=26, mouth=0.9, mat=pdark, g=80)
-            _hound(p, 31, 18 - rear, 1.0, f=-1, ang=12, mouth=1.0, g=90)
-            _hound(p, 20, 37, 1.16, f=-1, ang=-10, mouth=0.9, g=100, pinned=0.85)
+        _hound(p, 49, 16 - rear, 0.78, f=1, ang=26, mouth=0.9, mat=pdark, g=80)
+        _hound(p, 31, 23 - rear, 0.95, f=-1, ang=8, mouth=0.7, g=90)
+        _hound(p, 20, 38 + rear, 1.08, f=-1, ang=-10, mouth=0.9, g=100, pinned=0.85)
+        _meander(p, (14, 41), (25, 50), (36, 41), range(15, 36))
         return
 
     if view == "back":
@@ -854,10 +846,11 @@ def pylakyon(p, view, phase):
         # shoulder blades, three necks rising from it into their heads, the
         # mane burning along the neck bases. The near head turns right in
         # profile, the middle one rears up behind it, the far one looks back.
-        p.limb(bez3((11, 64), (2, 58), (10, 51), (4.5, 44)), 6.4, 4, serpent, group=9)
-        p.blob(5, 42, 3.8, 2.8, serpent, ang=20, group=9)
-        p.blob(31.5, 71, 30, 25, pcoat, group=1)
-        p.blob(18, 53, 12, 9, pcoat, group=2)
+        _serpent_s(p, ((12, 63), (3, 64), (2.5, 58), (5, 56)),
+                   ((5, 56), (8, 54), (5, 51), (4, 50)),
+                   (4, 49.5), facing=-1)
+        p.blob(31.5, 71, 28, 25, pcoat, group=1)
+        p.blob(18, 53, 10.5, 9, pcoat, group=2)
         p.blob(46, 53, 13.5, 9.5, pcoat, group=3)
         # the necks, thick at the shoulders and running up into each head
         p.limb(bez((31, 49), (30, 33), (29, 18)), 16, 12, pcoat, group=5)
@@ -867,15 +860,12 @@ def pylakyon(p, view, phase):
                             ((54, 47), (59, 36), 8, -1.4)):
             _gflame(p, a, b, w, bend=bd, group=30, cool=0.6)
         p.limb(bez((8, 47), (31, 55), (56, 46)), 5, 5, pbronze, group=34)
-        if p.big:
-            p.patch(20, 4, PHEAD_REAR, PL)
-            p.patch(1, 23, [r[::-1] for r in PHEAD_FAR], PL)
-            p.patch(33, 10, PHEAD_BACK, PL)
-            _meander(p, (8, 47), (31, 55), (56, 46), range(9, 56))
-        else:
-            _hound(p, 14, 28, 0.8, f=-1, ang=30, mat=pdark)
-            p.blob(28, 9, 7, 6.5, pdark)
-            _hound(p, 46, 21, 1.1, f=1, ang=-8, pinned=0.85)
+        _hound(p, 15, 33, 0.8, f=-1, ang=25, mat=pdark, g=80)
+        p.lens((24, 15), (22, 6), 5, pdark, fat=0.35)
+        p.lens((32, 15), (35, 7), 5, pdark, fat=0.35)
+        p.blob(28, 18, 7, 6.5, pdark, group=90)
+        _hound(p, 46, 27, 1.0, f=1, ang=-8, pinned=0.65, g=100)
+        _meander(p, (8, 47), (31, 55), (56, 46), range(9, 56))
         return
 
     if view == "down":
@@ -883,8 +873,9 @@ def pylakyon(p, view, phase):
         # lowered to one side, the far head reared up on the other, the mane
         # burning between, the serpent rising behind
         step = phase
-        p.limb(bez3((40, 44), (50, 40), (44, 30), (50, 22)), 5, 3.2, serpent, group=9)
-        p.blob(50, 20.5, 3, 2.2, serpent, group=9)
+        _serpent_s(p, ((42, 49), (57, 53), (60, 44), (54, 41)),
+                   ((54, 41), (49, 38), (50, 33 + step), (55, 34 + step)),
+                   (56, 33.5 + step))
         for a, b, w, bd in (((24, 34), (14, 16), 7, 2.0), ((40, 32), (49, 13), 7, -2.0),
                             ((32, 30), (32, 12), 7, 0.0)):
             _gflame(p, a, b, w, bend=bd, group=20)
@@ -936,8 +927,9 @@ def pylakyon(p, view, phase):
         for a, b, w, bd in (((24, 40), (21, 31), 6, 1.0), ((32, 39), (32, 30), 6, 0.0),
                             ((40, 40), (43, 31), 6, -1.0)):
             _gflame(p, a, b, w, bend=bd, group=30, cool=0.65)
-        p.limb(bez3((32, 50), (40, 44), (26, 38), (33, 30 + step)), 5, 3.2, serpent, group=40)
-        p.blob(33.5, 28.5 + step, 3, 2.2, serpent, group=40)
+        _serpent_s(p, ((43, 50), (57, 53), (60, 44), (54, 41)),
+                   ((54, 41), (49, 38), (50, 33 + step), (55, 34 + step)),
+                   (56, 33.5 + step), g=40)
         return
 
 
