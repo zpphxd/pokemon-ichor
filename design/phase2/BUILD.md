@@ -197,6 +197,8 @@ IchorSave's flag bank is on main. From batch 2 on, new flags are bank flags in t
 | Emporion city agent | 0x0C0–0x0DF | 0x28A–0x293 |
 | Emporion interiors agent | 0x0E0–0x0EF | 0x294–0x297 |
 | Temple of Hermes agent | 0x0F0–0x0FF | — |
+| Aigina interior fix (audit) | 0x060–0x06F | 0x2D2–0x2D9 |
+| Eleusa interiors agent (batch 4; trainers 130–139, daily 0x48–0x4B) | 0x090–0x0BF | 0x2DB–0x2E1 |
 
 ## Stubs until other sessions land
 
