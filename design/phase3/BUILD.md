@@ -128,7 +128,8 @@ All 17 maps are registered. Outdoor maps are in `gMapGroup_TownsAndRoutes`; Arka
 | Route 12's south edge ↔ Arkadia's north edge | **fixed:** Route 12's road at columns 28–31 (verges 28, 31), Arkadia's at 22–25; Route 12 `down` offset +6, Arkadia `up` offset −6; seam rows aethos-only | heights, arkadia |
 | Arkadia ↔ the Cypress Wood ↔ the Pool | the arkadia agent's | arkadia |
 | Arkadia's east edge → Route 13 (batch 4) | the huntresses' cordon until `FLAG_BADGE05_GET`; record the rows | arkadia |
-| Arkadia's south (Route 27) and west (Route 32) roads | drawn, closed (Act III, post-game) | arkadia |
+| Arkadia's west edge → Route 32, the Sacred Way (post-game) | **fixed with the world-postgame session:** road on rows 36–37 (verges 35, 38), 8 aethos-only columns; closed by a barrier or guard hidden by `FLAG_SYS_GAME_CLEAR` (or the post-game's own flag when it names one); no connection on our side, the director joins it when the branches meet. The Cypress Wood's west-edge seam stays clear of rows 32–40. | arkadia |
+| Arkadia's south road (Route 27, Act III) | drawn, closed | arkadia |
 
 **Door warps, fixed:** `MAP_ARKADIA` warps 0–6: Asclepeion, Agora, Nyktimos's hall, Klymene's house, the charcoal hut, Krotos's house, the Temple of Artemis. `MAP_STYX_FALLS` warps 0–2: the inn, Horkia's house, Kepheus's house. `MAP_ROUTE12_CYPRESS_ROAD` warp 0: the Cave of Maia. Each interior's warp 0 (and 1) leads back.
 
@@ -156,6 +157,8 @@ Parties: `design/phase3/parties/{heights,arkadia,artemis}.party`. Wild tables: `
 | The priestess | temple (11,9) | |
 
 Set the three to `TRAINER_TYPE_NORMAL` once their `trainerbattle` scripts exist (the game reads the id from the script). Stubs already on their maps: the herm at road (22,3), landing (22,4), sets `FLAG_ICHOR_HERM_AEGINA` behind `ICHOR_STUB_HERM` (the engine still has to give Aigina's herm an id); altars behind `ICHOR_STUB_RITES`, Zeus on Oros (6,4) and Artemis at the temple (15,11); a dig spot at temple (18,11). The encounter tables are still Phase 2's levels 12–16: re-level them to BALANCE.md's Astyra row.
+
+**Batch 6, Route 34 (post-game) → Kaldera's old port** (the world-postgame session, 2026-11-14): proposed and provisional, Route 34 joins `MAP_KALDERA_CALDERA_ROAD`'s east edge as open water on rows 46–51 beside the old port, with an 8-column aethos-only strip, closed until the post-game (whirlpools or a gate, the post-game session's choice). Tell that session (`local_aa883887-f146-4c32-aaad-5501bc2f5fec`) before moving it. Its post-game scenes on Act II maps (Thyrsa's vineyards and theater, Astyra's watchtower and Asclepeion) live in `design/postgame/PLACEMENTS.md`; keep any tiles it asks for free.
 
 **Batch 7, Route 20 (the north Aegean) → the Hellespont lane** (the director, 2026-11-14). Route 20 connects to the Oikoumene's sea route to Troy; the Oikoumene session (`local_6299f81d-90ba-46ac-8818-db27daa8abee`) owns that side and leaves the edge open. Before drawing Route 20, agree the edge and its columns or rows with that session directly, keep the seam strip primary-only, and gate the passage on the post-game flag or the Odyssey's ship (PG-8: the ship opens the near lands), as the Oikoumene session proposes.
 
