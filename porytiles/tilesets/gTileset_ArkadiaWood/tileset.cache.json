@@ -1,6 +1,6 @@
 {
   "data/tilesets/secondary/arkadia_wood/porytiles_bin/metatile_attributes.bin": "9aa96217996986e641b0fa07518cc214",
-  "data/tilesets/secondary/arkadia_wood/porytiles_bin/metatiles.bin": "ba8d563f6e84afaabf80ed9ebe65fd46",
+  "data/tilesets/secondary/arkadia_wood/porytiles_bin/metatiles.bin": "5a4951642cf740a3c4ff3f7e9a045f31",
   "data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/arkadia_wood/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/arkadia_wood/porytiles_bin/tiles.png": "ca0fd3dd1f7935f97bfa318eb90a0c38",
+  "data/tilesets/secondary/arkadia_wood/porytiles_bin/tiles.png": "1d0ac6b69326fe62824602398e177d2d",
   "data/tilesets/secondary/arkadia_wood/porytiles_src/attributes.csv": "a8a684cb36627e3ecd8fef3132c98c45",
   "data/tilesets/secondary/arkadia_wood/porytiles_src/bottom.png": "94080e2b99cbc1579e55bb3e59d59e8a",
-  "data/tilesets/secondary/arkadia_wood/porytiles_src/middle.png": "b442afa65074eb17cc3269f0f19a83ce",
+  "data/tilesets/secondary/arkadia_wood/porytiles_src/middle.png": "7d5bde94165e8e1459a9e0ded8960b8d",
   "data/tilesets/secondary/arkadia_wood/porytiles_src/top.png": "eceb66b2f3ae70a47a9f2c89a0d16681"
 }

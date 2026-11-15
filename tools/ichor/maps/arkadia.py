@@ -339,7 +339,7 @@ def arkadia():
     m.part("track", "post", 35, 20)
     # small aethos cypresses below the hill (rows 36-37, so nothing crosses the strip)
     for (x, y) in SMALL_CYPRESSES:
-        m.put(x, y, CYP_TOP, "T")
+        m.put(x, y, CYP_TOP)
         m.put(x, y + 1, CYP_BOT)
     # signs and markers
     for (x, y) in STELES.values():
@@ -374,6 +374,8 @@ def arkadia_events():
       "MOVEMENT_TYPE_FACE_RIGHT")
     o("LOCALID_ARKADIA_HUNTRESS_2", "OBJ_EVENT_GFX_ICHOR_HUNTRESS", 22, 19, S + "Huntress2",
       "MOVEMENT_TYPE_FACE_LEFT")
+    o("LOCALID_ARKADIA_TEMPLE_GUARD", "OBJ_EVENT_GFX_ICHOR_HUNTRESS", 20, 31, S + "TempleClosed",
+      "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_KLEON_JOINED_TITANS")
     o("LOCALID_ARKADIA_IAMOS", "OBJ_EVENT_GFX_ICHOR_AUGUR", 17, 18, S + "Iamos",
       "MOVEMENT_TYPE_FACE_DOWN")
     o("LOCALID_ARKADIA_KRONIST", "OBJ_EVENT_GFX_ICHOR_KRONIST", 28, 14, S + "Kronist",
@@ -402,6 +404,8 @@ def arkadia_events():
       "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_KROTOS_KID_2")
     o("LOCALID_ARKADIA_KID_3", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 11, 13, S + "Kid3",
       "MOVEMENT_TYPE_FACE_UP", "FLAG_ICHOR_KROTOS_KID_3")
+    o("LOCALID_ARKADIA_GRAZER", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 37, 34, S + "Grazer",
+      "MOVEMENT_TYPE_WANDER_AROUND", rx=2, ry=1)
     o("LOCALID_ARKADIA_MAX_REPEL", "OBJ_EVENT_GFX_ITEM_BALL", 34, 26, "Common_EventScript_FindItem",
       "MOVEMENT_TYPE_LOOK_AROUND", "FLAG_ICHOR_ITEM_ARKADIA_MAX_REPEL", item="ITEM_MAX_REPEL")
 
@@ -436,16 +440,19 @@ def wood():
     m = Map("Arkadia_CypressWood", "Arkadia_CypressWood", "LAYOUT_ARKADIA_CYPRESS_WOOD", P.wood(), "wood")
     m.stamp("tomb", 2, 21)
     m.stamp("kiln_wood", 12, 2)
-    for (x, y) in ((18, 20), (20, 20), (8, 20), (1, 26), (8, 26)):
+    for (x, y) in ((18, 20), (20, 20), (8, 20), (1, 20), (1, 24)):
         m.stamp("great_trunk", x, y)
     m.stamp("stump", 15, 13)
-    for (x, y) in ((34, 28), (5, 17)):
+    for (x, y) in WOOD_STELES.values():
         m.stamp("stele", x, y)
     m.part("floor", "mats", 32, 29)
     m.part("floor", "mats", 33, 29)
-    m.part("floor", "dig", 1, 25)
+    m.part("floor", "dig", 7, 24)
     ground(m)
     return m
+
+
+WOOD_STELES = {"SignGate": (34, 28), "SignTomb": (5, 17), "SignPool": (4, 12)}
 
 
 def wood_events():
@@ -460,13 +467,15 @@ def wood_events():
                     "trainer_sight_or_berry_tree_id": item or str(sight), "script": script,
                     "flag": flag})
 
-    o("LOCALID_WOOD_KLEON", "OBJ_EVENT_GFX_ICHOR_KLEON_STUMP", 15, 13, S + "Kleon",
-      "MOVEMENT_TYPE_FACE_UP", "FLAG_ICHOR_KLEON_JOINED_TITANS")
+    # Kleon on the stump: his look is a var (stump, then standing); MOVEMENT_TYPE_NONE
+    # keeps the seated pose (SPRITES.md, batch 3). His balls run away from him.
+    o("LOCALID_WOOD_KLEON", "OBJ_EVENT_GFX_VAR_0", 15, 13, S + "Kleon",
+      "MOVEMENT_TYPE_NONE", "FLAG_ICHOR_KLEON_JOINED_TITANS")
     o("LOCALID_WOOD_BALLS", "OBJ_EVENT_GFX_ICHOR_KLEON_BALLS", 16, 13, S + "Kleon",
-      "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_KLEON_JOINED_TITANS")
+      "MOVEMENT_TYPE_FACE_RIGHT", "FLAG_ICHOR_KLEON_JOINED_TITANS")
     o("LOCALID_WOOD_IAPETOS", "OBJ_EVENT_GFX_ICHOR_CHORUS_LEADER", 20, 10, S + "Nothing",
       "MOVEMENT_TYPE_FACE_LEFT", "FLAG_TEMP_11")
-    o("LOCALID_WOOD_ALETHEA", "OBJ_EVENT_GFX_ICHOR_ALETHEA", 19, 21, S + "Nothing",
+    o("LOCALID_WOOD_ALETHEA", "OBJ_EVENT_GFX_VAR_1", 19, 21, S + "Nothing",
       "MOVEMENT_TYPE_FACE_UP", "FLAG_TEMP_12")
     o("LOCALID_WOOD_SKYLAPS", "OBJ_EVENT_GFX_SPECIES(SKYLAPS)", 11, 14, S + "Nothing",
       "MOVEMENT_TYPE_FACE_RIGHT", "FLAG_TEMP_13")
@@ -476,8 +485,20 @@ def wood_events():
       "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=4)
     o("LOCALID_WOOD_AGAPENOR", "OBJ_EVENT_GFX_ICHOR_CHARCOALER", 14, 4, S + "Agapenor",
       "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2)
+    o("LOCALID_WOOD_HEKAERGE", "OBJ_EVENT_GFX_ICHOR_HUNTRESS", 30, 9, S + "Hekaerge",
+      "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=3)
+    o("LOCALID_WOOD_MAINALOS", "OBJ_EVENT_GFX_ICHOR_CHARCOALER", 26, 26, S + "Mainalos",
+      "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3)
+    o("LOCALID_WOOD_LYSIPPE", "OBJ_EVENT_GFX_ICHOR_HUNTRESS", 3, 12, S + "Lysippe",
+      "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=3)
+    o("LOCALID_WOOD_MELANIPPE", "OBJ_EVENT_GFX_ICHOR_HUNTRESS", 7, 19, S + "Melanippe",
+      "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=4)
     o("LOCALID_WOOD_DUSK_BALLS", "OBJ_EVENT_GFX_ITEM_BALL", 17, 3, S + "DuskBalls",
       "MOVEMENT_TYPE_LOOK_AROUND", "FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_BALLS", item="ITEM_DUSK_BALL")
+    o("LOCALID_WOOD_DUSK_STONE", "OBJ_EVENT_GFX_ITEM_BALL", 33, 12, "Common_EventScript_FindItem",
+      "MOVEMENT_TYPE_LOOK_AROUND", "FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_STONE", item="ITEM_DUSK_STONE")
+    o("LOCALID_WOOD_HYPER_POTION", "OBJ_EVENT_GFX_ITEM_BALL", 21, 27, "Common_EventScript_FindItem",
+      "MOVEMENT_TYPE_LOOK_AROUND", "FLAG_ICHOR_ITEM_CYPRESS_WOOD_HYPER_POTION", item="ITEM_HYPER_POTION")
     o("LOCALID_WOOD_HEDGE", "OBJ_EVENT_GFX_CUTTABLE_TREE", 19, 3, S + "Hedge",
       "MOVEMENT_TYPE_FACE_DOWN", "FLAG_BADGE05_GET")
     o("LOCALID_WOOD_VIXEN", "OBJ_EVENT_GFX_SPECIES(KERDOVIX)", 22, 2, S + "SleepingVixen",
@@ -492,14 +513,16 @@ def wood_events():
         sign.append({"type": "sign", "x": x, "y": y, "elevation": 0,
                      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": script})
 
-    b(34, 28, S + "SignGate")
-    b(5, 17, S + "SignTomb")
+    for name, (x, y) in WOOD_STELES.items():
+        b(x, y, S + name)
     b(15, 13, S + "Stump")
-    b(4, 22, S + "Shrine")
+    b(4, 22, "EventScript_IchorAltar_Artemis")
     b(4, 23, S + "TabletEarth")
-    b(1, 25, S + "DigSpot")
-    sign.append({"type": "hidden_item", "x": 13, "y": 3, "elevation": 3, "item": "ITEM_CHARCOAL",
-                 "flag": "FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_CHARCOAL"})
+    b(7, 24, S + "DigSpot")
+    for (x, y, item, flag) in ((13, 3, "ITEM_CHARCOAL", "FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_CHARCOAL"),
+                               (24, 7, "ITEM_BIG_MUSHROOM", "FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_BIG_MUSHROOM"),
+                               (3, 22, "ITEM_STAR_PIECE", "FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_STAR_PIECE")):
+        sign.append({"type": "hidden_item", "x": x, "y": y, "elevation": 3, "item": item, "flag": flag})
     return {"object_events": obj, "warp_events": warp, "coord_events": trig, "bg_events": sign}
 
 
@@ -517,7 +540,6 @@ def pool():
         m.stamp(k, x, y)
     m.put(21, 8, STELE)
     ground(m)
-    decorate(m, rate=4)
     return m
 
 
@@ -527,6 +549,14 @@ def pool_events():
             "y": 9, "elevation": 3, "movement_type": "MOVEMENT_TYPE_FACE_RIGHT", "movement_range_x": 0,
             "movement_range_y": 0, "trainer_type": "TRAINER_TYPE_NONE",
             "trainer_sight_or_berry_tree_id": "0", "script": S + "Mnaseas", "flag": "0"}]
+    for (lid, x, y, item, flag) in (("LOCALID_POOL_ULTRA_BALL", 3, 11, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_POOL_ULTRA_BALL"),
+                                    ("LOCALID_POOL_PP_UP", 19, 15, "ITEM_PP_UP", "FLAG_ICHOR_ITEM_POOL_PP_UP"),
+                                    ("LOCALID_POOL_ETHER", 13, 2, "ITEM_ETHER", "FLAG_ICHOR_ITEM_POOL_ETHER")):
+        obj.append({"local_id": lid, "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL", "x": x, "y": y,
+                    "elevation": 3, "movement_type": "MOVEMENT_TYPE_LOOK_AROUND", "movement_range_x": 0,
+                    "movement_range_y": 0, "trainer_type": "TRAINER_TYPE_NONE",
+                    "trainer_sight_or_berry_tree_id": item, "script": "Common_EventScript_FindItem",
+                    "flag": flag})
     bg = []
     for (x, y) in ((10, 9), (13, 9), (11, 8), (12, 8), (11, 10), (12, 10), (10, 10), (13, 10)):
         bg.append({"type": "sign", "x": x, "y": y, "elevation": 0,
@@ -536,6 +566,10 @@ def pool_events():
                    "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": S + s})
     bg.append({"type": "hidden_item", "x": 9, "y": 10, "elevation": 3, "item": "ITEM_MOON_STONE",
                "flag": "FLAG_ICHOR_HIDDEN_POOL_MOON_STONE"})
+    bg.append({"type": "hidden_item", "x": 14, "y": 10, "elevation": 3, "item": "ITEM_STARDUST",
+               "flag": "FLAG_ICHOR_HIDDEN_POOL_STARDUST"})
+    bg.append({"type": "hidden_item", "x": 4, "y": 15, "elevation": 3, "item": "ITEM_PRETTY_FEATHER",
+               "flag": "FLAG_ICHOR_HIDDEN_POOL_PRETTY_FEATHER"})
     return {"object_events": obj, "warp_events": [], "coord_events": [], "bg_events": bg}
 
 

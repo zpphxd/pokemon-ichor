@@ -139,32 +139,32 @@ WOOD_ROWS = [
     "KKKKKKKKKKKKKKKKKKKK::::KKKKKKKKKKKK",  # 1  the vixen's hollow
     "KKKKKKKKKKKK:::::::K:::::KKKKKKKKKKK",  # 2
     "KKKKKKKKKKK:::::::::::::KKKKKKKKKKKK",  # 3  the hedge gap at (19,3)
-    "KKKKKKKKKKK::::::::KKKKKKKKKKKKKKKKK",  # 4  Agapenor's kiln
-    "KKKKKKKKKKKK::::::KKKKKKKKKKKKKKKKKK",  # 5
-    "KKKKKKKKKKKKKK::KKKKKKKKKKKKKKKKKKKK",  # 6  the north spur
-    "KKKKKKKKKKKKKK::KKKKKKKKKKKKKKKKKKKK",  # 7
-    "KKKKKKKKKKKKKsssssKKKKKKKKKKKKKKKKKK",  # 8  the stump clearing
-    "KKKKKKKKKKKsssssssssKKKKKKKKKKKKKKKK",  # 9
-    "KKKKKKKKKKsssssssssssKKKKKKKKKKKKKKK",  # 10
-    "KKKKKKKKKKsssssssssssKKKKKKKKKKKKKKK",  # 11
-    "KKK:::,,,:ssssssssssssKKKKKKKKKKKKKK",  # 12 band 2
-    "::::::,,,:ssssssssssssKKKKKKKKKKKKKK",  # 13 to the Pool
-    "::::::,,,:ssssssssssssKKKKKKKKKKKKKK",  # 14
-    "::::::,,,:sssssssssssKKKKKKKKKKKKKKK",  # 15
-    "KK::::KKKKKsssssssssssKKKKKKKKKKKKKK",  # 16
-    "KK::::KKKKKKssssssssssKKKKKKKKKKKKKK",  # 17
-    "KK:::::KKKKKKKsssssssKKKKKKKKKKKKKKK",  # 18
-    "KK::::::KKKKKKKKKKK:KKKKKKKKKKKKKKKK",  # 19 the narrow, column 19
-    "K::::::::KKKKKKKKKK:KKKKKKKKKKKKKKKK",  # 20
-    "K::::::::KKKKKKKKK::KKKKKKKKKKKKKKKK",  # 21 Euadne at (18,21)
-    "K::::::::KKKKKKKKKK:::::::::::::::KK",  # 22
+    "KKKKKKKKKKK::::::::KKKKKKK,,,,,,KKKK",  # 4  Agapenor's kiln; the north-east glade
+    "KKKKKKKKKKKK::::::KKKKKKK,,,,,,,,KKK",  # 5
+    "KKKKKKKKKKKKKK::KKKKKKKK::::,,,,,KKK",  # 6  the north spur
+    "KKKKKKKKKKKKKK::KKKKKKKK:::::::::KKK",  # 7
+    "KKKKKKKKKKKKKsssssKKKKKK,,::::::,KKK",  # 8  the stump clearing
+    "KKKKKKKKKKKsssssssssKKKK,,,::::::KKK",  # 9
+    "KKKKKKKKKKsssssssssssKKK,,,,::::::KK",  # 10
+    "KKKKKKKKKKsssssssssssKKKK,,,,:::::KK",  # 11
+    "KKK::,,,,:ssssssssssssKKK:::::::::KK",  # 12  band 2, four deep
+    ":::::,,,,:ssssssssssssKKK::::,,,,KKK",  # 13  to the Pool
+    ":::::,,,,:ssssssssssssKKK::::,,,,KKK",  # 14
+    ":::::,,,,:sssssssssssKKKKK:::::::KKK",  # 15
+    "KK::::KKKKKsssssssssssKKKKK:::::::KK",  # 16
+    "KK::::KKKKKKssssssssssKKKKKKK:::::KK",  # 17
+    "KK:::::KKKKKKKsssssssKKKKKKKK:::::KK",  # 18
+    "KK::::::KKKKKKKKKKK:KKKKKKKKK::::::K",  # 19  the narrow, column 19
+    "K::::::::KKKKKKKKKK:KKKKKKKKK::::::K",  # 20
+    "K::::::::KKKKKKKKK::KKKKKKKKK::::::K",  # 21  Euadne at (18,21)
+    "K::::::::KKKKKKKKKK::::::::::::::::K",  # 22
     "K::::::::KKKKKKKKKK::::::::::::::::K",  # 23
-    "K::::::::KKKKKKKKKKKKKKKKKKKK::::::K",  # 24
-    "K::::::::KKKKKKKKKKKKKKKKKKKK,,,,,,K",  # 25 band 1
-    "K::::::::KKKKKKKKKKKKKKKKKKKK,,,,,,K",  # 26
-    "KK::::::KKKKKKKKKKKKKKKKKKKKK,,,,,,K",  # 27
-    "KKK::::KKKKKKKKKKKKKKKKKKKKKK::::::K",  # 28
-    "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK::KK",  # 29 the gate's mats (32-33, 29)
+    "K::::::::KKKKKKKKKKK,,,,,,,,K,,,,,,K",  # 24  band 1, four deep; the south-east glade
+    "K,,,,,,,,KKKKKKKKKKK,,,,,,,,K,,,,,,K",  # 25
+    "K,,,,,,,,KKKKKKKKKKK::::::::K,,,,,,K",  # 26
+    "KK,,,,,,KKKKKKKKKKKKK::::::KK,,,,,,K",  # 27
+    "KKK::::KKKKKKKKKKKKKKK::::KKK::::::K",  # 28
+    "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK::KK",  # 29  the gate's mats (32-33, 29)
 ]
 
 

@@ -78,6 +78,20 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ARKADIA_TEMPLE_GUARD",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HUNTRESS",
+      "x": 20,
+      "y": 31,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_EventScript_TempleClosed",
+      "flag": "FLAG_ICHOR_KLEON_JOINED_TITANS"
+    },
+    {
       "local_id": "LOCALID_ARKADIA_IAMOS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_AUGUR",
       "x": 17,
@@ -272,6 +286,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Arkadia_EventScript_Kid3",
       "flag": "FLAG_ICHOR_KROTOS_KID_3"
+    },
+    {
+      "local_id": "LOCALID_ARKADIA_GRAZER",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(KERAZAP)",
+      "x": 37,
+      "y": 34,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Arkadia_EventScript_Grazer",
+      "flag": "0"
     },
     {
       "local_id": "LOCALID_ARKADIA_MAX_REPEL",

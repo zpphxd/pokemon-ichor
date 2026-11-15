@@ -898,10 +898,10 @@
 #define FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_BALLS                     0x34F // Ichor: Ichor: the Cypress Wood, two Dusk Balls by Agapenor's kiln
 #define FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_CHARCOAL                     0x350 // Ichor: Ichor: hidden item: the Cypress Wood, the Charcoal in the kiln's ash
 #define FLAG_ICHOR_HIDDEN_POOL_MOON_STONE                           0x351 // Ichor: Ichor: hidden item: the Pool of Mnemosyne, the Moon Stone below the stone seat
-#define FLAG_UNUSED_0x352                                           0x352 // Unused Flag
-#define FLAG_UNUSED_0x353                                           0x353 // Unused Flag
-#define FLAG_UNUSED_0x354                                           0x354 // Unused Flag
-#define FLAG_UNUSED_0x355                                           0x355 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_BIG_MUSHROOM                 0x352 // Ichor: Ichor: hidden item: the Cypress Wood, a Big Mushroom in a hollow trunk (north-east glade)
+#define FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_STAR_PIECE                   0x353 // Ichor: Ichor: hidden item: the Cypress Wood, the Star Piece on the Tomb of Kallisto
+#define FLAG_ICHOR_HIDDEN_POOL_STARDUST                             0x354 // Ichor: Ichor: hidden item: the Pool of Mnemosyne, Stardust at the water's far edge
+#define FLAG_ICHOR_HIDDEN_POOL_PRETTY_FEATHER                       0x355 // Ichor: Ichor: hidden item: the Pool of Mnemosyne, a white feather in the asphodel
 #define FLAG_UNUSED_0x356                                           0x356 // Unused Flag
 #define FLAG_UNUSED_0x357                                           0x357 // Unused Flag
 #define FLAG_UNUSED_0x358                                           0x358 // Unused Flag
@@ -1835,6 +1835,11 @@
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
+#define FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_STONE (FLAG_ICHOR_GENERAL2_START + 0x020) // Ichor: Act II: the Cypress Wood, the Dusk Stone in the north-east glade
+#define FLAG_ICHOR_ITEM_CYPRESS_WOOD_HYPER_POTION (FLAG_ICHOR_GENERAL2_START + 0x021) // Ichor: Act II: the Cypress Wood, the Hyper Potion in the south-east glade
+#define FLAG_ICHOR_ITEM_POOL_ULTRA_BALL         (FLAG_ICHOR_GENERAL2_START + 0x022) // Ichor: Act II: the Pool of Mnemosyne, the Ultra Ball under the poplars
+#define FLAG_ICHOR_ITEM_POOL_PP_UP              (FLAG_ICHOR_GENERAL2_START + 0x023) // Ichor: Act II: the Pool of Mnemosyne, the PP Up in the asphodel
+#define FLAG_ICHOR_ITEM_POOL_ETHER              (FLAG_ICHOR_GENERAL2_START + 0x024) // Ichor: Act II: the Pool of Mnemosyne, the Ether by the north poplars
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

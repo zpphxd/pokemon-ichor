@@ -1457,6 +1457,9 @@ Cairnolith
 Level: 34
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
+/* Added by the arkadia agent for the route standard (MAP_DESIGN §8): the Wood is 7.2 screens
+   and needs six trainers. Levels follow the Wood's (33-34, BALANCE.md's Arkadia row). */
+
 === TRAINER_ICHOR_KYRENE ===
 Name: KYRENE
 Class: Hoplite
@@ -1573,6 +1576,74 @@ IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 - Crunch
 - Moonlight
 - Charm
+
+=== TRAINER_ICHOR_HEKAERGE ===
+Name: HEKAERGE
+Class: Hoplite
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Raknit
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lykopup
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_MAINALOS ===
+Name: MAINALOS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Cairnolith
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_LYSIPPE ===
+Name: LYSIPPE
+Class: Hoplite
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Arkoby
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kaprodon
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_MELANIPPE ===
+Name: MELANIPPE
+Class: Hoplite
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Lophops
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Amnoze
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lykopup
+Level: 34
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 
 /* Ichor: world-act3 (ids 320-499) */

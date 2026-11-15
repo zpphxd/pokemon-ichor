@@ -1109,3 +1109,8 @@ gSpecials::
 	def_special Ichor_ForceOmen
 	def_special Ichor_CheckOmen
 	def_special Ichor_GetOmen
+	@ Ichor: Arkadia (src/ichor_arkadia.c)
+	def_special Ichor_ObjectFadeIn
+	def_special Ichor_ObjectFadeOut
+	def_special Ichor_ShowKleonTablet
+	def_special Ichor_HideKleonTablet
