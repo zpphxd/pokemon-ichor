@@ -72,6 +72,7 @@ From `tools/ichor/claim_ranges.md`: trainer ids **500–679**; bank flags **0x30
 | `FLAG_ICHOR_ON_SHIP` | You're sailing the *Euploia*: the ship avatar is on (ENGINE.md) |
 | `FLAG_ICHOR_AT_SEA` | You've rounded Maleia: the Wings don't work until you're home (ODYSSEY O1) |
 | `FLAG_ICHOR_CREW_LAMPON`, `_DIKTYS`, `_KYDON`, `_PHEMIOS`, `_LYNKEUS`, `_IASO`, `_GLAUKIAS`, `_NOLAN`, `_OARSMEN` | The crew aboard (ODYSSEY §3). Nausikles and Alethea come with the ship. |
+| `FLAG_ICHOR_SHIP_RAM`, `_SHIP_SAIL`, `_SHIP_KEEL` | The ship's upgrades (ODYSSEY §2): the bronze ram breaks sea rocks; the new sail adds a step downwind; the Phaeacian keel stops the Outer Sea's loop. Flags, not `IchorEpics.shipUpgrades` bits. |
 | `FLAG_DAILY_ICHOR_SHIP_HEARTHFIRE`, `FLAG_DAILY_ICHOR_SHIP_NETS` | Lampon's daily Hearthfire, Diktys's daily haul |
 | `VAR_ICHOR_POSTGAME` | The frame's state, 0–20: the opening, Atlantis, the summit (POSTGAME §6) |
 | `VAR_ICHOR_ODYSSEY` | The Odyssey, 0–30 (ODYSSEY §15) |
@@ -172,6 +173,8 @@ At the end of every batch, this session:
 
 ### Ids
 
+**Species:** until the dex is on main, `include/constants/ichor_species_stubs_postgame.h` defines every Aethos species by its dex name (`SPECIES_OBOLORN` and the rest) as a same-type vanilla stand-in, so parties and tables use the real names now.
+
 **Bank flags:** this session 0x300–0x30F (claimed above); akti 0x310–0x31F; euploia 0x320–0x324; westsea 0x325–0x32D; sail-engine 0x32E–0x32F. **Vanilla flags (hidden items):** westsea 0x480–0x485, akti 0x486–0x487. **Trainer ids:** westsea 500–505; 506–509 spare. **Daily flags:** the two above; akti may take one more.
 
 ### Interfaces fixed now
@@ -182,7 +185,11 @@ So the five agents can build at once:
 |---|---|---|
 | `MAP_EUPLOIA_DECK`, `MAP_EUPLOIA_BELOW` | euploia | Deck warp 0 is the hatch down (below's warp 0 is the ladder up). The deck's steering oars at the stern, Nausikles beside them, run `EventScript_IchorHelm`. |
 | `EventScript_IchorBoardShip` | sail-engine | A landing's gangplank (a coord or bg event on the quay tile). Asks "Board the Euploia?"; YES puts you on the sea map named by the landing's row in `src/data/ichor_voyages.h`, in the ship, or onto the deck when the landing has no sea map. |
-| `EventScript_IchorHelm` | sail-engine | Nausikles at the helm: "TAKE HER OUT" (back to the sea where you went below), "SET A COURSE" (the ports list), "THE WIND?" and "STAY". |
+| `EventScript_IchorLand` | sail-engine | A bg event on a sea map's landing tile, `VAR_0x8004` = the port: "Go ashore at …?", then the port's quay, ship mode off |
+| `EventScript_IchorLeaveShip` | sail-engine | The deck's gangplank: back to the quay of the port where she's moored |
+| `EventScript_IchorHelm` | sail-engine | Nausikles at the helm: "TAKE HER OUT" (back to the sea where you went below), "CAST OFF" (moored at a port with a sea map), "SET A COURSE" (the ports list), "THE WIND?" and "STAY". |
+| `specialvar(VAR_RESULT, Ichor_IsStarsOut)` | sail-engine | Night, at sea, in the ship: the Great Bear is up |
+| `ICHOR_SHIP_GFX`, `ICHOR_SHIP_GFX_SLACK` | sail-engine | The avatar's graphics, defined to a stand-in until the sprites agent's `OBJ_EVENT_GFX_ICHOR_EUPLOIA`/`_SLACK` merge |
 | `special(Ichor_GoBelowDeck)`, `special(Ichor_ReturnToSea)` | sail-engine | At sea, the Relic Ring's DECK entry saves your position and warps to `MAP_EUPLOIA_DECK`; the helm's TAKE HER OUT brings you back. |
 | `specialvar(VAR_RESULT, Ichor_GetWind)`, `special(Ichor_SetWind)` | sail-engine | Wind as `ICHOR_WIND_*` direction and strength (`include/constants/ichor_sailing.h`) |
 | `VOYAGE_*` ids | sail-engine | One per port: `VOYAGE_AKTI`, `VOYAGE_ROUTE33`, `VOYAGE_CAPE_TAINARON`, `VOYAGE_KNOSSA`, `VOYAGE_LECHAION`, `VOYAGE_KALDERA`, then the Labors' and the Oikoumene's as they're built |

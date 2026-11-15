@@ -1700,4 +1700,7 @@ enum __attribute__((packed)) Species
 
 #define SPECIES_SHINY_TAG 5000
 
+// Ichor (world-postgame): the Aethos species by name, as stand-ins until the dex lands.
+#include "constants/ichor_species_stubs_postgame.h"
+
 #endif  // GUARD_CONSTANTS_SPECIES_H

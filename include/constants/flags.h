@@ -1737,6 +1737,9 @@
 #define FLAG_ICHOR_CREW_GLAUKIAS                (FLAG_ICHOR_GENERAL_START + 0x30A) // Ichor: post-game crew: Glaukias, deckhand
 #define FLAG_ICHOR_CREW_NOLAN                   (FLAG_ICHOR_GENERAL_START + 0x30B) // Ichor: post-game crew: Christopher Nolan, dramatist
 #define FLAG_ICHOR_CREW_OARSMEN                 (FLAG_ICHOR_GENERAL_START + 0x30C) // Ichor: post-game crew: the twelve Lakonian oarsmen, lent by Kleon
+#define FLAG_ICHOR_SHIP_RAM                     (FLAG_ICHOR_GENERAL_START + 0x30D) // Ichor: post-game ship upgrade: Talos's bronze ram breaks sea rocks (ODYSSEY §2)
+#define FLAG_ICHOR_SHIP_SAIL                    (FLAG_ICHOR_GENERAL_START + 0x30E) // Ichor: post-game ship upgrade: Aeolus's new sail, one more step downwind
+#define FLAG_ICHOR_SHIP_KEEL                    (FLAG_ICHOR_GENERAL_START + 0x30F) // Ichor: post-game ship upgrade: the Phaeacian keel, the Outer Sea no longer loops
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end
