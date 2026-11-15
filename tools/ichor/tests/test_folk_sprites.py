@@ -18,7 +18,8 @@ class FolkSpriteTests(unittest.TestCase):
                     np.testing.assert_array_equal(folk.build_sheet(spec), np.array(image))
 
     def test_akti_states_are_complete_and_distinct(self):
-        for name in ("sailor", "diver", "healer", "kid_f", "augur", "acolyte_m", "acolyte_f"):
+        for name in ("sailor", "diver", "healer", "kid_f", "augur", "acolyte_m",
+                     "acolyte_f", "merchant", "goatherd", "hoplite"):
             with self.subTest(walker=name):
                 count = 10 if name == "healer" else 9
                 sheet = folk.build_sheet(folk.BY_NAME[name])

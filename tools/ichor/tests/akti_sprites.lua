@@ -9,6 +9,8 @@ local OVERWORLD = L.sym("CB2_Overworld")
 local places = {
     {"MAP_KALLISTE_ROUTE1", "route1", 12, 2},
     {"MAP_KALLISTE_ROUTE1", "route1_augur", 22, 17},
+    {"MAP_KALLISTE_ROUTE1", "route1_hoplite", 7, 13},
+    {"MAP_KALLISTE_ROUTE1", "route1_goatherd", 16, 25},
     {"MAP_KALLISTE_ROUTE1_KRONION_HILL", "kronion_cast", 9, 10},
     {"MAP_AKTI_TOWN", "akti_boat", 8, 27},
     {"MAP_AKTI_TOWN", "akti_sailor", 7, 11},
@@ -18,6 +20,7 @@ local places = {
     {"MAP_AKTI_TOWN_TEMPLE_OF_HESTIA", "temple_pyrrha", 4, 10},
     {"MAP_AKTI_TOWN_ASCLEPEION", "asclepeion", 6, 5},
     {"MAP_AKTI_TOWN_AGORA", "agora", 5, 5},
+    {"MAP_AKTI_TOWN_AGORA", "agora_merchant", 3, 4},
     {"MAP_AKTI_TOWN_FISHERS_HOUSE", "fishers_house", 4, 5},
     {"MAP_AKTI_TOWN_DIVERS_HOUSE", "divers_house", 4, 5},
     {"MAP_AKTI_TOWN_GOATHERDS_HOUSE", "goatherds_house", 4, 5},

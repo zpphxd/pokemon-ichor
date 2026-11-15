@@ -52,8 +52,29 @@ PNG palette. Native checks, four folk regressions, helper compilation, build
 and smoke pass. The historical/current gallery now covers fourteen cameras
 across nine maps and checks the overworld callback as well as the map before
 each capture. Complete colored 1x/4x sheets and actual field captures are
-preserved outside git. These three sheets await artistic approval; Goatherd,
-Hoplite and Merchant walkers, seven class portraits and healing effects remain.
+preserved outside git. This checkpoint is artistically accepted; Goatherd,
+Hoplite and Merchant walkers, seven class portraits and healing effects
+remained at that point.
+
+**Hill/market checkpoint:** `goatherd`, `hoplite` and `merchant` now have
+eight/nine-row directional heads, longer native bodies and all 27 distinct
+states. Gray curls/beard, syrinx, goat-hair mantle, belt bell and leg thongs
+remain on the Goatherd. The Hoplite keeps his raised Corinthian helmet,
+crimson crest/chiton, linen corselet, bronze greaves, spear and lambda-marked
+hoplon; the narrower side shield and single-column spear leave the face and
+stride readable. The bald, full-bearded Merchant uses the confirmed blue/gold
+himation over linen with his belt purse, matching the voyage portrait identity.
+No shared palettes or sibling-owned portraits changed.
+
+All 22 sources reproduce, the other 19 folk sheets are unchanged from the
+preceding checkpoint, and both compiled palettes match every source role.
+Native checks, four regressions, helpers, build and smoke pass. Both matching
+galleries cover seventeen cameras across nine maps. The real Merchant is
+mostly occluded by his counter; complete body/motion evidence is on the native
+sheet, not misrepresented as a full-body in-game shot. All local walker
+implementations are now present; these three await creative approval.
+The previous temple/augur checkpoint is accepted. Seven class portraits and local
+healing effects remain.
 
 - **Source:** `tools/ichor/art/sprites_folk.py`. Every head, body and prop is ASCII art in that file, one character per pixel.
 - **Rebuild the PNGs and the folk palette:** `python3 tools/ichor/art/sprites_folk.py --write`
@@ -84,7 +105,7 @@ All sheets are in `graphics/object_events/pics/people/ichor/`. The names match t
 | `OBJ_EVENT_GFX_ICHOR_SAILOR` | `sailor.png` | folk | Tousled hair under a terracotta headband with tails, a short jaw beard, bare-chested above an undyed linen kilt with a blue sash, a shoulder rope | the Lakonian rower, Nausikles |
 | `OBJ_EVENT_GFX_ICHOR_DIVER` | `diver.png` | folk | Wet black hair to the shoulders with a blue sheen, a short sea-blue wrap tied with linen, barefoot, a net bag of sponges at her hip | Hydna |
 | `OBJ_EVENT_GFX_ICHOR_HEALER` | `healer.png` | folk | Long brown hair to her shoulders under an olive-green fillet, a white chiton to the floor with a green sash, a gold serpent armlet, and the rod of Asclepius (a green serpent coiled on a staff) in her right hand | the Asclepeion healer |
-| `OBJ_EVENT_GFX_ICHOR_MERCHANT` | `merchant.png` | folk | Balding, with a brown beard, a blue chiton with a leather belt, a linen apron, a coin purse | Demeas |
+| `OBJ_EVENT_GFX_ICHOR_MERCHANT` | `merchant.png` | folk | Bald with a full brown beard, blue/gold himation over linen, belt purse | Demeas |
 | `OBJ_EVENT_GFX_ICHOR_SHEPHERD` | `shepherd.png` | cast | A bronze felt pilos, a sheepskin mantle over a blue tunic, a crook in his right hand | Tityros |
 | `OBJ_EVENT_GFX_ICHOR_HARVESTER` | `harvester.png` | folk | A terracotta headscarf knotted at the side, an olive-green dress, a linen apron, a wicker basket of olives on her left hip | Phyllis |
 | `OBJ_EVENT_GFX_ICHOR_GOATHERD` | `goatherd.png` | folk | Wild graying curls and beard, a syrinx at his lips, a shaggy goat-hair cloak over an undyed tunic, a bronze bell on a rope belt, leg thongs | Komatas |
