@@ -1701,6 +1701,8 @@
 #ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
+#define FLAG_ICHOR_MET_LASOS                    (FLAG_ICHOR_GENERAL_START + 0x150) // Ichor: Act II: Lasos welcomed the player to the Temple of Dionysus (beat 31)
+#define FLAG_ICHOR_GOT_TM_TOXIC                 (FLAG_ICHOR_GENERAL_START + 0x151) // Ichor: Act II: Thespis gave TM06 Toxic with the Mask Laurel (beat 31)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

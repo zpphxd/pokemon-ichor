@@ -2,7 +2,7 @@
   "id": "MAP_THYRSA_CITY_TEMPLE_OF_DIONYSUS",
   "name": "ThyrsaCity_TempleOfDionysus",
   "layout": "LAYOUT_THYRSA_CITY_TEMPLE_OF_DIONYSUS",
-  "music": "MUS_ICHOR_TEMPLE",
+  "music": "MUS_ICHOR_TEMPLE_HERMES",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_THYRSA_CITY",
   "requires_flash": false,
@@ -14,8 +14,431 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+  "object_events": [
+    {
+      "local_id": "LOCALID_DIONYSUS_LASOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 13,
+      "y": 46,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Lasos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_DIONYSUS_IMAGE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE",
+      "x": 7,
+      "y": 46,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Image",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_DIONYSUS_MYNNISKOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACTOR",
+      "x": 8,
+      "y": 39,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Mynniskos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_DIONYSUS_THETTALOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACTOR",
+      "x": 18,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Thettalos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_DIONYSUS_THEODOROS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACTOR",
+      "x": 4,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Theodoros",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_DIONYSUS_THESPIS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_THESPIS",
+      "x": 7,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Thespis",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
+      "y": 47,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 9,
+      "y": 47,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY",
+      "dest_warp_id": "3"
+    },
+    {
+      "x": 11,
+      "y": 47,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY",
+      "dest_warp_id": "3"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 36,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "0",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door_Act1_Ivy"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 24,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "1",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door_Act2_Ivy"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 24,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "1",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door_Act2_Crown"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 24,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "1",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door_Act2_Goat"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "2",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door_Act3_Ivy"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "2",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door_Act3_Crown"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 12,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "2",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Door_Act3_Goat"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 46,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "0",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_LasosWelcome"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 46,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "0",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_LasosWelcome"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 46,
+      "elevation": 3,
+      "var": "VAR_ICHOR_THREE_ACT_PLAY",
+      "var_value": "0",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_LasosWelcome"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 38,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Program_Act1"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 26,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Program_Act2"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Program_Act3"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 36,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Rack_Act1"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Rack_Act2"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Rack_Act2"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 24,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Rack_Act2"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Rack_Act3"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Rack_Act3"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 12,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Rack_Act3"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 36,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PaintedCrownDoor"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 36,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_PaintedGoatDoor"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 31,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Curtain_Act1"
+    },
+    {
+      "type": "sign",
+      "x": 19,
+      "y": 31,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Curtain_Act1"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 19,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Curtain_Act2"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 19,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Curtain_Act2"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Hook"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 43,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 43,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 43,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 44,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 44,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 44,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Altar"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Thunder"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Thunder"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 43,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Krater"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 42,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Thyrsoi"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 43,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_TempleOfDionysus_EventScript_Thyrsoi"
+    }
+  ]
 }

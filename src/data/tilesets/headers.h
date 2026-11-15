@@ -1723,3 +1723,17 @@ const struct Tileset gTileset_TempleHermes =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary built by tools/ichor/art/temple_dionysus_build.py: the Temple
+// of Dionysus at Thyrsa and the Three-Act Play. It uses only its own tiles and palettes
+// 6-12, with opaque floors, so it works on any primary (drawn for oikos).
+const struct Tileset gTileset_TempleDionysus =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleDionysus,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleDionysus,
+    .metatiles = gMetatiles_PorytilesManaged_TempleDionysus,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleDionysus,
+    .callback = NULL,
+};

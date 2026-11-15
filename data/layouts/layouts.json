@@ -9624,10 +9624,10 @@
     {
       "id": "LAYOUT_THYRSA_CITY_TEMPLE_OF_DIONYSUS",
       "name": "ThyrsaCity_TempleOfDionysus_Layout",
-      "width": 17,
-      "height": 24,
+      "width": 21,
+      "height": 48,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_TempleHestia",
+      "secondary_tileset": "gTileset_TempleDionysus",
       "border_filepath": "data/layouts/ThyrsaCity_TempleOfDionysus/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaCity_TempleOfDionysus/map.bin",
       "layout_version": "emerald"
