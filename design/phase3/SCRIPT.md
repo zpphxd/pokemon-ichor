@@ -17790,8 +17790,8 @@ Fishing `encounter_rate: 30`; water `encounter_rate: 4`, slots 60/30/5/4/1. The 
 
 | Map | Old Rod (70 / 30) | Good Rod (60 / 20 / 20) | Super Rod (40 / 40 / 15 / 4 / 1), placeholder |
 |---|---|---|---|
-| `MAP_ROUTE11_KRATHIS_GORGE` (the river spur's pool) | Ketofry 18–20 / Karkipool 25–27 | Karkipool 27–28 / Ketofry 19–20 / Karkipool 28–28 | Kynoketos / Karkipool / Kynoketos / Karkipool / Kynoketos |
-| `MAP_ARKADIA` (the temple's waterfall pool) | Ketofry 18–20 / Karkipool 25–27 | Karkipool 27–28 / Ketofry 19–20 / Karkipool 28–28 | as Route 11 |
+| `MAP_ROUTE11_KRATHIS_GORGE` (the river spur's pool) | Ketofry 18–20 / Karkipool 25–27 | Karkipool 27–28 / Ketofry 19–20 / Karkitox † 27–28 | Kynoketos / Karkipool / Kynoketos / Karkipool / Kynoketos |
+| `MAP_ARKADIA` (the temple's waterfall pool) | Ketofry 18–20 / Karkipool 25–27 | Karkipool 27–28 / Ketofry 19–20 / Karkitox † 27–28 | as Route 11 |
 
 **Styx Falls's black pool has no table at all:** nothing lives in it. A rod cast there gets the engine's own "Not even a nibble…", and its surfable water is drawn as still black water that the Conch refuses later: "The water won't hold you up. Nothing floats on the Styx." There is no surfable water anywhere in this region.
 
