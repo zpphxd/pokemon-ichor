@@ -1,0 +1,124 @@
+/* Staged by world-act2 from design/phase3/SCRIPT.md Part 3 (Arkadia). The artemis agent owns these. */
+
+=== TRAINER_ICHOR_KYRENE ===
+Name: KYRENE
+Class: Huntress
+Pic: Huntress
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Arkoby
+Level: 33
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Crunch
+- Slash
+- Moonlight
+- Fake Tears
+
+Lykanax
+Level: 33
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+=== TRAINER_ICHOR_ANTHIA ===
+Name: ANTHIA
+Class: Huntress
+Pic: Huntress
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Harpelle
+Level: 34
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Acrobatics
+- Feint Attack
+- Pluck
+- Taunt
+
+Oinopard
+Level: 34
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+=== TRAINER_ICHOR_PROKRIS ===
+Name: PROKRIS
+Class: Huntress
+Pic: Huntress
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Lykanax
+Level: 34
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+
+Harpelle
+Level: 35
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Acrobatics
+- Night Slash
+- Feint Attack
+- Taunt
+
+Arkoby
+Level: 35
+IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+- Crunch
+- Slash
+- Moonlight
+- Fake Tears
+
+=== TRAINER_ICHOR_KALLISTO_1 ===
+Name: KALLISTO
+Class: Hierophant
+Pic: Hierophant Kallisto
+Gender: Female
+Music: Female
+Items: Hyper Potion / Hyper Potion
+AI: Basic Trainer
+
+Harpelle
+Level: 35
+Ability: Unnerve
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Tailwind
+- Acrobatics
+- Night Slash
+- Taunt
+
+Lykanax
+Level: 35
+Ability: Intimidate
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Crunch
+- Sucker Punch
+- Hone Claws
+- Noble Roar
+
+Oinopard
+Level: 35
+Ability: Poison Touch
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Night Slash
+- Poison Jab
+- Crunch
+- Hone Claws
+
+Kaprodon
+Level: 36
+Ability: Reckless
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Double-Edge
+- Payback
+- Stomping Tantrum
+- Amnesia
+
+Starkos @ Sitrus Berry
+Level: 37
+Ability: Thick Fat
+IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
+- Play Rough
+- Crunch
+- Moonlight
+- Charm
+
