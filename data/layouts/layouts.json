@@ -730,10 +730,10 @@
     {
       "id": "LAYOUT_KIRRHA",
       "name": "Kirrha_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 36,
+      "height": 30,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Kirrha",
       "border_filepath": "data/layouts/Kirrha/border.bin",
       "blockdata_filepath": "data/layouts/Kirrha/map.bin",
       "layout_version": "emerald"
@@ -741,10 +741,10 @@
     {
       "id": "LAYOUT_GULF_FERRY_DECK",
       "name": "GulfFerry_Deck_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 20,
+      "height": 12,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_GulfFerry",
       "border_filepath": "data/layouts/GulfFerry_Deck/border.bin",
       "blockdata_filepath": "data/layouts/GulfFerry_Deck/map.bin",
       "layout_version": "emerald"
@@ -753,9 +753,9 @@
       "id": "LAYOUT_AIGION",
       "name": "Aigion_Layout",
       "width": 28,
-      "height": 28,
+      "height": 24,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Aigion",
       "border_filepath": "data/layouts/Aigion/border.bin",
       "blockdata_filepath": "data/layouts/Aigion/map.bin",
       "layout_version": "emerald"

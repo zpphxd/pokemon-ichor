@@ -94,7 +94,7 @@ Parties are staged in `design/phase3/parties/{kopais,trophonios,parnassos,harbor
 | Lebadeia's west edge ↔ Route 9's east edge | **chosen:** Lebadeia's road on rows 12-13 (verges 11, 14), Route 9's on rows 20-21 (verges 19, 22). Lebadeia `left` offset −8, Route 9 `right` offset +8. Both on `gTileset_Parnassos`, so no strip | parnassos |
 | Route 9's south edge ↔ Kirrha's north edge | **fixed now**: Route 9's road at columns 8–11 (verges 8 and 11), Kirrha's at 26–29; Route 9 `down` offset −18, Kirrha `up` offset +18; seam strips aethos-only | parnassos, harbors |
 | Kirrha's north road to Delphoi (Route 28, Act III) | drawn closed, with Delphoi's temple guards (beat 37A); not a connection yet | harbors |
-| Aigion's south edge → Route 11 (batch 3) | draw the road's first rows; record the columns here | harbors |
+| Aigion's south edge → Route 11 (batch 3) | **drawn**: Aigion's road leaves its south edge at columns 13–14, verges 12 and 15 (columns 12–15 walkable at row 23, nothing else). Its six southern rows (18–23) are aethos-only (path, olives, pines, cypresses, rocks, the stele at (16,19)). For Route 11's road at its north edge on columns *s*…*s*+3 (verge, road, road, verge): Aigion `down` offset *s* − 12, Route 11 `up` offset 12 − *s*. Alethea waits on the road at (14,22) (`FLAG_ICHOR_HIDE_ALETHEA_AIGION`: batch 3 sets it when she goes on with the player). | harbors |
 
 **Door warps, fixed now** (outdoor warp *N* → the interior's warp 0, which leads back):
 
@@ -107,6 +107,12 @@ Parties are staged in `design/phase3/parties/{kopais,trophonios,parnassos,harbor
 | `MAP_TROPHONIOS_CAVE_B1F` | 1 | `MAP_TROPHONIOS_CAVE_B2F`'s warp 0 (the stair down) |
 
 The oracle's way out (beat 35C, "the hole is the way out") is a scripted warp to Lebadeia, in front of warp 3.
+
+**The Gulf crossing, as built** (harbors, `tools/ichor/maps/harbors*.py`):
+- Kirrha's doors: warp 0, the inn, at (23,9), its doorstep (23,10) on the road (the spot for `HEAL_LOCATION_KIRRHA`, rooms2's); warp 1, the Agora's shed, at (21,20) onto the quay (21,21); warp 2, the muleteer's, at (15,15), doorstep (15,16); warp 3, the old sweeper's, at (21,15), doorstep (21,16). Kirrha `up` to Route 9 with offset +18 is in its map.json.
+- Aigion's doors: warp 0, the old Achaean's, at (8,8), doorstep (8,9); warp 1, the goatherd's, at (19,8), doorstep (19,9). `HEAL_LOCATION_AIGION` (added): Aigion (12,13), in front of the grove-keeper (12,12), who heals.
+- The ferry is scripted warps only: Kirrha's quay (Panopeus at (23,23)) → the deck at (11,6); the deck → Aigion's quay at (17,4) (beat 37C the first time); Aigion's quay (Panopeus at (18,3)) → the deck, `FLAG_ICHOR_FERRY_TO_KIRRHA` set; the deck → Kirrha's quay at (22,23).
+- Tilesets: three, not one. A single `kirrha` set for both towns came to some 610 tiles against the 504 the door animations leave, so Aigion has `gTileset_Aigion` and the deck `gTileset_GulfFerry`, all drawn by the same painters (`tools/ichor/art/kirrha_*.py`, catalog `design/phase3/TILES_kirrha.md`).
 
 ### Ids
 

@@ -33,6 +33,16 @@
       "respawn_npc": "LOCALID_THYRSA_HEALER"
     },
     {
+      "id": "HEAL_LOCATION_AIGION",
+      "map": "MAP_AIGION",
+      "x": 12,
+      "y": 13,
+      "respawn_map": "MAP_AIGION",
+      "respawn_npc": "LOCALID_AIGION_GROVE_KEEPER",
+      "respawn_x": 12,
+      "respawn_y": 13
+    },
+    {
       "id": "HEAL_LOCATION_LEBADEIA",
       "map": "MAP_LEBADEIA",
       "x": 17,
@@ -45,8 +55,8 @@
     {
       "id": "HEAL_LOCATION_KIRRHA",
       "map": "MAP_KIRRHA",
-      "x": 18,
-      "y": 15,
+      "x": 23,
+      "y": 10,
       "respawn_map": "MAP_KIRRHA_INN",
       "respawn_npc": "LOCALID_KIRRHA_INN_RESPAWN",
       "respawn_x": 6,

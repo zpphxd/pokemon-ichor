@@ -149,6 +149,18 @@ const u16 gMetatileAttributes_PorytilesManaged_ThyrsaHomes[] = INCBIN_U16("data/
 const u16 gMetatiles_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatile_attributes.bin");
 
+// Ichor: kirrha
+const u16 gMetatiles_PorytilesManaged_Kirrha[] = INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Kirrha[] = INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: aigion
+const u16 gMetatiles_PorytilesManaged_Aigion[] = INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Aigion[] = INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: gulf_ferry
+const u16 gMetatiles_PorytilesManaged_GulfFerry[] = INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_GulfFerry[] = INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: parnassos
 const u16 gMetatiles_PorytilesManaged_Parnassos[] = INCBIN_U16("data/tilesets/secondary/parnassos/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Parnassos[] = INCBIN_U16("data/tilesets/secondary/parnassos/porytiles_bin/metatile_attributes.bin");
