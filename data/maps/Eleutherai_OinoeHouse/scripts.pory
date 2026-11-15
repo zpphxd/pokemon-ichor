@@ -47,8 +47,9 @@ script Eleutherai_OinoeHouse_EventScript_Oinoe {
     msgbox(format("You're going to Thyrsa? Then take this to him.\p"
                   "The god's image. It's in their temple. They keep it inside the door.\p"
                   "Lay it at his feet and say it's from Eleutherai. He'll know."))
-    // ICHOR_STUB_KEY_ITEMS: ITEM_IVY_GARLAND (a temporary key item) isn't in the game yet;
-    // the flag carries the errand, and this line stands in for giveitem.
+    // ICHOR_STUB_GARLAND: ITEM_IVY_GARLAND (a temporary key item) isn't in the game yet;
+    // the flag carries the errand, and this line stands in for giveitem(ITEM_IVY_GARLAND).
+    // The temple's image checks OINOE_GARLAND && !GARLAND_LAID and sets GARLAND_LAID.
     setspeaker(SP_NAME_NONE)
     playfanfare(MUS_OBTAIN_ITEM)
     message(format("{PLAYER} received an ivy garland."))

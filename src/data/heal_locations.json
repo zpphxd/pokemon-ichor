@@ -371,8 +371,8 @@
     {
       "id": "HEAL_LOCATION_THYRSA_CITY",
       "map": "MAP_THYRSA_CITY",
-      "x": 24,
-      "y": 41,
+      "x": 21,
+      "y": 32,
       "respawn_map": "MAP_THYRSA_CITY_ASCLEPEION",
       "respawn_npc": "LOCALID_THYRSA_HEALER"
     }

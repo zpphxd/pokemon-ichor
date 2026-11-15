@@ -288,6 +288,9 @@
 #define ICHOR_VARS_COUNT                                 32
 #define ICHOR_VARS_END                                   (ICHOR_VARS_START + ICHOR_VARS_COUNT - 1)
 // Ichor bank vars: claim.py bankvar adds lines here, in order.
+#define VAR_ICHOR_THREE_ACT_PLAY                (ICHOR_VARS_START + 0x006) // Ichor: Act II: the Three-Act Play (beat 31, Part 5): 0 Act I open, 1 Act I done, 2 Act II done, 3 the play done and the god-machine down, 4 riding to the skene roof, 5 the Mask Laurel given
+#define VAR_ICHOR_PLAY_MISSES                   (ICHOR_VARS_START + 0x007) // Ichor: Act II: wrong entrances in the Three-Act Play's Act III, for the painted audience's hint
+#define VAR_ICHOR_PINDAROS_LAURELS              (ICHOR_VARS_START + 0x010) // Ichor: highest laurel Pindaros has remarked on (0: not yet visited)
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000

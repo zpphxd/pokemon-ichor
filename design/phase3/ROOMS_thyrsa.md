@@ -123,13 +123,14 @@ Read from `build/test_thyrsa_rooms/` (a quickstart save, every room toured with 
 | `ICHOR_STUB_TMS` | Aristomache's TM Encore, Polos's TM Fake Tears | TM numbers from Balance (SCRIPT.md open question 17) |
 | `ICHOR_STUB_XENIA_REST` | Pindaros's rest menu | the engine's same-day clock move (SYSTEMS.md §10); the menu offers only times still ahead today, fades, and leaves the clock |
 | `ICHOR_STUB_DIG` | the turned earth under Eudora's fig | the dig API's fixed find, prophecy tablet #3 |
-| `ICHOR_STUB_KEY_ITEMS` | Oinoe's ivy garland | `ITEM_IVY_GARLAND`; the flag carries the errand |
+| `ICHOR_STUB_GARLAND` | Oinoe's ivy garland (the temple's scene uses the same tag) | `ITEM_IVY_GARLAND`; the flag carries the errand |
 | `ICHOR_STUB_LEVEL_CHECK` | Zetes | a script check for a party Pokémon at level 30; the Mask Laurel stands in |
 | `ICHOR_STUB_MUSIC` | every room but the Asclepeion and the Agora | Thyrsa's and Eleutherai's own cues |
 | `ICHOR_STUB_AETHOS_DEX` | Panacoil, Prosomime, Gelasable, Chelonet, Chelyra | the dex |
 
 Deviations, closest reading taken:
 - **The xenia host is Pindaros**, per SCRIPT.md's Thyrsa roster; the watch-house's cook heals every visit as the rest point (Part 2, Eleutherai).
+- **Pindaros's laurel lines** run on one bank var, `VAR_ICHOR_PINDAROS_LAURELS`: the highest laurel he has remarked on, 0 until the first visit.
 - **Oinoe's Big Root has no flag of its own:** the errand runs on `FLAG_ICHOR_OINOE_GARLAND` and `FLAG_ICHOR_GARLAND_LAID` (see the script's header), to fit sixteen flags.
 - **The Potter's Knucklebone, link 3** (Polos; a stretch) is not built: links 1 and 2 and their flags don't exist yet.
 - **Kleon's later line** at Pindaros's waits for `FLAG_ICHOR_KLEON_JOINED_TITANS` (region B2).

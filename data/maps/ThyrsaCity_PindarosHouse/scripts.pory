@@ -3,8 +3,9 @@
 // he heals the party every visit, offers a bed till a time you choose, and gives a line
 // (and a laurel sprig) for every laurel he hasn't heard about.
 //
-// Laurel lines: FLAG_ICHOR_PINDAROS_LAUREL_FIRST covers the laurels you already hold on
-// the first visit; _4.._8 each new one after (flags.h names them in the xenia range).
+// Laurel lines: VAR_ICHOR_PINDAROS_LAURELS holds the highest laurel he has remarked on (0
+// until the first visit). On the first visit he hears about every laurel you hold at once;
+// after that, about each new one.
 // ICHOR_STUB_XENIA_REST: resting moves the clock forward (SYSTEMS.md §10), which needs the
 // engine's rest call; until then the menu is offered, the screen fades and the clock stays.
 // ICHOR_STUB_OFFERINGS: the Laurel Sprig is an offering and waits for the item.
@@ -25,52 +26,48 @@ script ThyrsaCity_PindarosHouse_EventScript_Pindaros {
     playfanfare(MUS_HEAL)
     waitfanfare
     setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
-    if (!flag(FLAG_ICHOR_PINDAROS_LAUREL_FIRST)) {
+    copyvar(VAR_0x8007, VAR_ICHOR_PINDAROS_LAURELS)     // 0: the first visit
+    if (var(VAR_0x8007) == 0) {
         msgbox(format("Bread, honey, figs. A poet's table. Light on meat, heavy on adjectives."))
         msgbox(format("A Lakonian boy came by. Loud. Hungry. Three laurels in his belt.\p"
                       "He wanted me to write him an ode. Now. In advance.\p"
                       "I don't write in advance. Nobody should. It's bad luck, and worse poetry."))
     }
     call(ThyrsaCity_PindarosHouse_EventScript_LaurelLines)
-    if (var(VAR_RESULT) == FALSE && flag(FLAG_ICHOR_PINDAROS_LAUREL_FIRST)) {
+    if (var(VAR_RESULT) == FALSE && var(VAR_0x8007) != 0) {
         setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
         msgbox(format("An ode isn't for the winner. It's for the people who weren't there.\p"
                       "So they know. So it isn't forgotten. That's all glory is. Remembering."))
     }
-    setflag(FLAG_ICHOR_PINDAROS_LAUREL_FIRST)
     goto(ThyrsaCity_PindarosHouse_EventScript_Rest)
 }
 
 // VAR_RESULT TRUE if he heard about a laurel this time.
 script ThyrsaCity_PindarosHouse_EventScript_LaurelLines {
-    setvar(VAR_0x8005, FALSE)
-    if (!flag(FLAG_ICHOR_PINDAROS_LAUREL_FIRST) && flag(FLAG_BADGE01_GET)) {
-        setvar(VAR_0x8005, TRUE)
+    // VAR_0x8006: the highest laurel the player holds
+    setvar(VAR_0x8006, 0)
+    if (flag(FLAG_BADGE08_GET)) {
+        setvar(VAR_0x8006, 8)
+    } elif (flag(FLAG_BADGE07_GET)) {
+        setvar(VAR_0x8006, 7)
+    } elif (flag(FLAG_BADGE06_GET)) {
+        setvar(VAR_0x8006, 6)
+    } elif (flag(FLAG_BADGE05_GET)) {
+        setvar(VAR_0x8006, 5)
+    } elif (flag(FLAG_BADGE04_GET)) {
+        setvar(VAR_0x8006, 4)
+    } elif (flag(FLAG_BADGE03_GET)) {
+        setvar(VAR_0x8006, 3)
+    } elif (flag(FLAG_BADGE02_GET)) {
+        setvar(VAR_0x8006, 2)
+    } elif (flag(FLAG_BADGE01_GET)) {
+        setvar(VAR_0x8006, 1)
     }
-    if (flag(FLAG_BADGE04_GET) && !flag(FLAG_ICHOR_PINDAROS_LAUREL_4)) {
-        setflag(FLAG_ICHOR_PINDAROS_LAUREL_4)
-        setvar(VAR_0x8005, TRUE)
-    }
-    if (flag(FLAG_BADGE05_GET) && !flag(FLAG_ICHOR_PINDAROS_LAUREL_5)) {
-        setflag(FLAG_ICHOR_PINDAROS_LAUREL_5)
-        setvar(VAR_0x8005, TRUE)
-    }
-    if (flag(FLAG_BADGE06_GET) && !flag(FLAG_ICHOR_PINDAROS_LAUREL_6)) {
-        setflag(FLAG_ICHOR_PINDAROS_LAUREL_6)
-        setvar(VAR_0x8005, TRUE)
-    }
-    if (flag(FLAG_BADGE07_GET) && !flag(FLAG_ICHOR_PINDAROS_LAUREL_7)) {
-        setflag(FLAG_ICHOR_PINDAROS_LAUREL_7)
-        setvar(VAR_0x8005, TRUE)
-    }
-    if (flag(FLAG_BADGE08_GET) && !flag(FLAG_ICHOR_PINDAROS_LAUREL_8)) {
-        setflag(FLAG_ICHOR_PINDAROS_LAUREL_8)
-        setvar(VAR_0x8005, TRUE)
-    }
-    if (var(VAR_0x8005) == FALSE) {
+    if (var(VAR_0x8006) <= VAR_ICHOR_PINDAROS_LAURELS) {
         setvar(VAR_RESULT, FALSE)
         return
     }
+    copyvar(VAR_ICHOR_PINDAROS_LAURELS, VAR_0x8006)
     setspeaker(ThyrsaCity_PindarosHouse_Name_Pindaros)
     msgbox(format("A new leaf! Sit. Tell me how it went. Every blow."))
     fadescreen(FADE_TO_BLACK)

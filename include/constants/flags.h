@@ -1682,17 +1682,10 @@
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
 
-// Named bits in the reserved ranges, until the engine names them (world-act2's rooms agent;
-// the offsets are a proposal: prophecy tablet n is found at +n-1 and read at +8+n-1; xenia
-// keeps 0x00-0x0F for the three token chains and hosts, and Pindaros's laurel lines take 0x10-0x15).
+// Named bits in the prophecy range, until the engine names them (world-act2's rooms agent):
+// tablets are 1-8, found at START+n-1 and read at START+8+n-1.
 #define FLAG_ICHOR_PROPHECY_3                   (FLAG_ICHOR_PROPHECY_START + 0x02) // tablet #3 dug up under Eudora's fig (ICHOR_STUB_DIG: not yet)
 #define FLAG_ICHOR_PROPHECY_3_READ              (FLAG_ICHOR_PROPHECY_START + 0x0A) // Alethea read tablet #3 (beat 30)
-#define FLAG_ICHOR_PINDAROS_LAUREL_FIRST        (FLAG_ICHOR_XENIA_START + 0x10)    // Pindaros heard of your laurels on your first visit
-#define FLAG_ICHOR_PINDAROS_LAUREL_4            (FLAG_ICHOR_XENIA_START + 0x11)    // ...and of the Mask Laurel
-#define FLAG_ICHOR_PINDAROS_LAUREL_5            (FLAG_ICHOR_XENIA_START + 0x12)
-#define FLAG_ICHOR_PINDAROS_LAUREL_6            (FLAG_ICHOR_XENIA_START + 0x13)
-#define FLAG_ICHOR_PINDAROS_LAUREL_7            (FLAG_ICHOR_XENIA_START + 0x14)
-#define FLAG_ICHOR_PINDAROS_LAUREL_8            (FLAG_ICHOR_XENIA_START + 0x15)
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
 #define FLAG_ICHOR_ACT2_BEGUN                   (FLAG_ICHOR_GENERAL_START + 0x100) // Ichor: Act II: the vines are cut and Route 6 opens (beat 26)
 #define FLAG_ICHOR_VISITED_ELEUTHERAI           (FLAG_ICHOR_GENERAL_START + 0x101) // Ichor: Act II: reached Eleutherai on Mt. Kithairon (beat 27)
@@ -1714,6 +1707,18 @@
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
 #define FLAG_ICHOR_HIDE_ELEUSA_EAST_HOPLITE     (FLAG_ICHOR_GENERAL_START + 0x10C) // Ichor: the hoplite in Eleusa's east wall gap (48,25), hidden when Route 15 opens in Act II (batch 4)
+#define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL_START + 0x130) // Ichor: Act II: met Manto the augur on the Kadmeia wall (beat 30); her house opens
+#define FLAG_ICHOR_NEISTAN_DRUM_MOVED           (FLAG_ICHOR_GENERAL_START + 0x131) // Ichor: Act II: pushed the fallen drum out of the Neistan Gate with the Girdle
+#define FLAG_ICHOR_HIDE_NEISTAN_GUARDS          (FLAG_ICHOR_GENERAL_START + 0x132) // Ichor: Act II: hides the festival guard in the Neistan Gate (after the Dionysia)
+#define FLAG_ICHOR_HIDE_NEISTAN_DRUM            (FLAG_ICHOR_GENERAL_START + 0x133) // Ichor: Act II: hides the drum in the Neistan Gate (before the Dionysia; after the push)
+#define FLAG_ICHOR_HIDE_ALETHEA_THYRSA          (FLAG_ICHOR_GENERAL_START + 0x134) // Ichor: Act II: hides Alethea at Semele's chamber (she went west, beat 34)
+#define FLAG_ICHOR_ALETHEA_WENT_WEST            (FLAG_ICHOR_GENERAL_START + 0x135) // Ichor: Act II: Alethea left Thyrsa by the Neistan Gate (beat 34; region B1 reads it)
+#define FLAG_ICHOR_HIDE_OMEN_THYRSIVY           (FLAG_ICHOR_GENERAL_START + 0x136) // Ichor: Act II: hides the Thyrsivy in Thyrsa's old trellises (the omen's visitor)
+#define FLAG_ICHOR_OMEN_THYRSIVY_TOLD           (FLAG_ICHOR_GENERAL_START + 0x137) // Ichor: Act II: Manto told the rare-visitor omen; the Thyrsivy may stand in the vines
+#define FLAG_ICHOR_DECOY_THYRSA                 (FLAG_ICHOR_GENERAL_START + 0x138) // Ichor: Act II: showed Thyrsa's blind beggar the way to Dirke (theoxenia decoy)
+#define FLAG_ICHOR_ITEM_THYRSA_BLACK_SLUDGE     (FLAG_ICHOR_GENERAL_START + 0x139) // Ichor: Act II: Thyrsa, the Black Sludge by the wine press
+#define FLAG_ICHOR_ITEM_THYRSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x13A) // Ichor: Act II: Thyrsa, the Super Potion in the vineyards' last row
+#define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL_START + 0x13B) // Ichor: Act II: Thyrsa, the Big Nugget on the west wall-walk (the Thyrsus)
 #define FLAG_ICHOR_GOT_PROTECTIVE_PADS          (FLAG_ICHOR_GENERAL_START + 0x140) // Ichor: Act II rooms: Peneleos's gift after the recruit's sparring match (Eleutherai)
 #define FLAG_ICHOR_OINOE_GARLAND                (FLAG_ICHOR_GENERAL_START + 0x141) // Ichor: Act II rooms: Oinoe's ivy garland errand is open; cleared when she gives the Big Root (Eleutherai)
 #define FLAG_ICHOR_TWINS_AMPHIS                 (FLAG_ICHOR_GENERAL_START + 0x142) // Ichor: Act II rooms: showed Amphis a Chelonet or Chelyra; got the Metronome (Eleutherai)
@@ -1728,8 +1733,9 @@
 #define FLAG_ICHOR_TRADED_PROSOMIME             (FLAG_ICHOR_GENERAL_START + 0x14B) // Ichor: Act II rooms: traded Euthykles a Gelasable for PATHOS the Prosomime
 #define FLAG_ICHOR_GARLAND_LAID                 (FLAG_ICHOR_GENERAL_START + 0x14C) // Ichor: Act II (cross-map; set by the Temple of Dionysus's wooden image): laid Oinoe's garland
 #define FLAG_ICHOR_SAW_CROWS                    (FLAG_ICHOR_GENERAL_START + 0x14D) // Ichor: Act II (cross-map; set by Thyrsa City's crows at the Elektran Gate): saw which way they flew
-#define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL_START + 0x14E) // Ichor: Act II (cross-map; set by Thyrsa City, beat 30): met Manto on the Kadmeia wall
 #define FLAG_ICHOR_GYPSOS_WENT_HOME             (FLAG_ICHOR_GENERAL_START + 0x14F) // Ichor: Act II (cross-map; set at the Kronia, Route 7): Gypsos went home to his mother as Hippias
+#define FLAG_ICHOR_MET_LASOS                    (FLAG_ICHOR_GENERAL_START + 0x150) // Ichor: Act II: Lasos welcomed the player to the Temple of Dionysus (beat 31)
+#define FLAG_ICHOR_GOT_TM_TOXIC                 (FLAG_ICHOR_GENERAL_START + 0x151) // Ichor: Act II: Thespis gave TM06 Toxic with the Mask Laurel (beat 31)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
