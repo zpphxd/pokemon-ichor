@@ -16,7 +16,7 @@ import numpy as np
 RELIC_PICS = [
     "ichor_talaria", "bronze_hammer", "hecates_torch", "demeters_sickle", "girdle_of_herakles",
     "poseidons_conch", "daedalus_wings", "horn_of_achelous", "labrys", "helm_of_darkness",
-    "nereid_pearl", "aeolus_bag",
+    "nereid_pearl", "aeolus_bag", "aletheas_trowel",
 ]
 
 
@@ -295,6 +295,26 @@ def register(icon, pal, ramp_roles, C, Icon):
         ], {"w": "w1", "W": "w2"})
         return ic
 
+
+    # ----------------------------------------------------------------------
+    # Alethea's Trowel (§5, a tool beside the relics): a pointed bronze blade,
+    # worn bright at the tip, on a short olive-wood handle, held on the diagonal.
+    @icon("aletheas_trowel", {
+        "aletheas_trowel": pal(ramp_roles("b", BRONZE), **ramp_roles("w", WOOD), e=C["tc_l"]),
+    }, labels={"aletheas_trowel": "Alethea's Trowel"})
+    def _trowel():
+        ic = Icon("K b1 b2 b3 b4 w1 w2 w3 e")
+        handle = ic.tube((15, 9), (21, 3), 1.8, ["w1", "w2", "w3"], caps=True)
+        tang = ic.tube((12, 12), (15.5, 8.5), 0.7)
+        blade = ic.poly([(13, 10.5), (9, 7), (2.5, 21.5), (16.5, 15)])
+        ic.shade(tang, ["b1", "b2"])
+        ic.shade(blade, ["b1", "b2", "b3", "b4"])
+        ic.outline(handle | tang | blade)
+        # the spine down the blade, the worn tip and a smear of earth
+        ic.line(12, 11, 5, 19, "b4")
+        ic.pxs([(3, 21), (4, 20)], "b4")
+        ic.pxs([(13, 15), (14, 14), (12, 16)], "e")
+        return ic
 
 def preview(outdir):
     """The relics alone, at 4x on the bag's parchment and at 1x on clay."""

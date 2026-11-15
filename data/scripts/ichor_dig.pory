@@ -1,0 +1,87 @@
+// Ichor: excavation with Alethea's Trowel (design/ENGINE_API.md §8;
+// src/ichor_dig.c).
+//
+// A daily dig spot: VAR_0x8004 the spot (FLAG_DAILY_ICHOR_DIG_START + spot),
+// VAR_0x8005 the act's table and the amphora, if any:
+//     setvar(VAR_0x8004, 3)
+//     setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_ARACHNE))
+//     goto(EventScript_IchorDigSpot)
+// A fixed find: VAR_0x8004 the index (FLAG_ICHOR_DIG_FIXED_START + index),
+// VAR_0x8005 an item or an ICHOR_FIND_* code.
+// Either can be a goto or a call. After a call, VAR_RESULT is TRUE if
+// something was dug up just now.
+
+script EventScript_IchorDigSpot {
+    lockall
+    setvar(VAR_0x8006, ICHOR_DIG_MODE_SPOT)
+    goto(EventScript_IchorDig)
+}
+
+script EventScript_IchorDigFixed {
+    lockall
+    setvar(VAR_0x8006, ICHOR_DIG_MODE_FIXED)
+    goto(EventScript_IchorDig)
+}
+
+script EventScript_IchorDig {
+    specialvar(VAR_RESULT, Ichor_DigStart)
+    if (var(VAR_RESULT) == ICHOR_DIG_NO_TROWEL) {
+        msgbox(format("The earth here has been turned over. Something glints in it, too deep to reach by hand."))
+        goto(EventScript_IchorDigNothing)
+    } elif (var(VAR_RESULT) == ICHOR_DIG_DUG_TODAY) {
+        msgbox(format("This earth was dug today. It needs a night to settle."))
+        goto(EventScript_IchorDigNothing)
+    } elif (var(VAR_RESULT) == ICHOR_DIG_BARE) {
+        msgbox(format("The earth here has been dug over. Nothing else is buried here."))
+        goto(EventScript_IchorDigNothing)
+    }
+    setvar(VAR_0x8004, ITEM_ALETHEAS_TROWEL)
+    special(Ichor_RelicPose)
+    waitstate
+    special(Ichor_DigPuff)
+    delay(30)
+    specialvar(VAR_RESULT, Ichor_DigFindKind)
+    if (var(VAR_RESULT) == ICHOR_FIND_KIND_ITEM) {
+        giveitem(VAR_0x8006, VAR_0x8007)
+        if (var(VAR_RESULT) == FALSE) {
+            msgbox(format("Your Bag is full. The find goes back in the ground for now."))
+            goto(EventScript_IchorDigNothing)
+        }
+    } elif (var(VAR_RESULT) == ICHOR_FIND_KIND_SHERD) {
+        playfanfare(MUS_OBTAIN_ITEM)
+        message(format("A potsherd! Black figures on red clay."))
+        waitmessage
+        waitfanfare
+        msgbox("It's part of a painting:\n{STR_VAR_1}.\pThat's {STR_VAR_2} of its 4 pieces.")
+    } elif (var(VAR_RESULT) == ICHOR_FIND_KIND_OSTRAKON) {
+        playfanfare(MUS_OBTAIN_ITEM)
+        message(format("An ostrakon! A broken bit of pot with a name scratched on it."))
+        waitmessage
+        waitfanfare
+        msgbox("“{STR_VAR_1}”")
+    } elif (var(VAR_RESULT) == ICHOR_FIND_KIND_PROPHECY) {
+        playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
+        message(format("A lead tablet, scratched all over with someone's question for an oracle."))
+        waitmessage
+        waitfanfare
+        waitbuttonpress
+    } else {
+        playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
+        message("A folded page, the ink still sharp:\nDaedalus's page {STR_VAR_1}!")
+        waitmessage
+        waitfanfare
+        waitbuttonpress
+    }
+    special(Ichor_DigFinish)
+    closemessage
+    releaseall
+    setvar(VAR_RESULT, TRUE)
+    return
+}
+
+script EventScript_IchorDigNothing {
+    closemessage
+    releaseall
+    setvar(VAR_RESULT, FALSE)
+    return
+}

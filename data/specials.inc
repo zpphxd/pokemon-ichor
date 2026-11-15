@@ -1102,3 +1102,7 @@ gSpecials::
 	def_special Ichor_ForceOmen
 	def_special Ichor_CheckOmen
 	def_special Ichor_GetOmen
+	def_special Ichor_DigStart
+	def_special Ichor_DigPuff
+	def_special Ichor_DigFindKind
+	def_special Ichor_DigFinish

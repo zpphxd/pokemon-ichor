@@ -99,8 +99,14 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | Desecrated altars | 8–15 | world-act2 | the Kithairon shrine, Route 9's altar, and more |
 | Theoxenia | +0x00–0x0F | engine | one visit flag per god (`+ICHOR_GOD_*`), when theoxenia is built |
 | Theoxenia | +0x20–0x27 | world-act2 | decoys: Eleutherai, Thyrsa, Route 8, Kirrha, and more |
-| Fixed digs | +0x00–0x0F | Act I (not yet claimed) | Kalliste, Route 1, Kronion Hill, Emporion |
+| Fixed digs | +0x00–0x0F | world-act1 | Kalliste, Route 1, Kronion Hill, Emporion, Aigina |
 | Fixed digs | +0x10–0x1B | world-act2 | the Treasury of Minyas, Gla, Trophonios's great boulder, Route 9's gully, and more |
+| Fixed digs | +0x20–0x2F | world-act3 | Act III's finds, its prophecy tablets and Daedalus's pages |
+| Fixed digs | +0x30–0x3F | post-game | |
+| Daily dig spots | +0x00–0x1F | world-act1 | Act I: Kalliste, Emporion, Eleusa |
+| Daily dig spots | +0x20–0x3F | world-act2 | Act II |
+| Daily dig spots | +0x40–0x4F | world-act3 | Act III |
+| Daily dig spots | +0x50–0x5F | post-game | |
 
 **One assembler caveat.** The `compare` macro (and the `goto_if_eq`-style macros built on it) treats a second argument in `0x4000`–`0x40FF` as a var and anything else as a number. So comparing a var *against a bank var* needs `compare_var_to_var` explicitly. Comparing a bank var against a number works as usual.
 
@@ -112,7 +118,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 ## Status of the rest of this file
 
-§1–§7 are built; §8 is planned, with its names fixed. What each section leaves for later is listed at its end.
+§1–§8 are built. What each section leaves for later is listed at its end.
 
 | § | System | Batch | State |
 |---|---|---|---|
@@ -123,7 +129,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 5 | The Frozen Hour (SCRIPT.md Phase 4, E1–E6) | 5 | **Built** |
 | 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials, sentries, the disguise | 5 | **Built** |
 | 7 | Scripts' small needs: flag counts, a held tint, omens, time-of-day tables | 5 | **Built** |
-| 8 | Excavation: the Trowel, dig spots, fixed finds | not yet assigned | Planned, names fixed |
+| 8 | Excavation: the Trowel, dig spots, fixed finds | 6 | **Built** |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
@@ -568,23 +574,65 @@ These need no engine change. `OW_TIME_OF_DAY_ENCOUNTERS` is on, and `tools/wild_
 - **The hours** (`OW_TIMES_OF_DAY`, latest generation): morning 6–10, day 10–19, evening 19–20, night 20–6.
 - **A time with no table of its own falls back to `_Morning`** (`OW_TIME_OF_DAY_FALLBACK`). With all four defined, Lakonia's Chalkip can sit in `_Morning` and `_Evening` only.
 
-## 8. Excavation (SYSTEMS §5): planned, names fixed
+## 8. Excavation (SYSTEMS §5)
 
-Not built. These names are fixed so map scripts can be written against them now; until it lands, keep a stub like `ICHOR_STUB_DIG`. Alethea's Trowel itself (`ITEM_ALETHEAS_TROWEL`) comes with it.
+Alethea gives the Trowel with `giveitem(ITEM_ALETHEAS_TROWEL)` (a key item). Every dig spot is a bg event, or an object, whose script sets two vars and goes to one of two scripts:
 
 ```
-// A daily dig spot's bg event (its find is rolled once a day, by spot and day)
-setvar(VAR_0x8004, <spot index>)        // FLAG_DAILY_ICHOR_DIG_START + index: dug today
-setvar(VAR_0x8005, ICHOR_DIG_ACT_II)    // the loot table: ICHOR_DIG_ACT_I, _ACT_II or _ACT_III
+// A daily spot: dug once a day; its find is rolled from the day's seed and the spot
+setvar(VAR_0x8004, <spot index>)       // FLAG_DAILY_ICHOR_DIG_START + index: dug today
+setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_ARACHNE))
 goto(EventScript_IchorDigSpot)
 
-// A one-time find (a fixed dig)
-setvar(VAR_0x8004, <find index>)        // FLAG_ICHOR_DIG_FIXED_START + index: found
-setvar(VAR_0x8005, ITEM_RARE_BONE)      // what's buried there
+// A fixed find: dug once, ever
+setvar(VAR_0x8004, <find index>)       // FLAG_ICHOR_DIG_FIXED_START + index: dug
+setvar(VAR_0x8005, ITEM_RARE_BONE)     // an item, or ICHOR_FIND_SHERD(ICHOR_AMPHORA_*),
+                                       // ICHOR_FIND_PROPHECY(1-8), ICHOR_FIND_PAGE(1-7), ICHOR_FIND_OSTRAKON
 goto(EventScript_IchorDigFixed)
 ```
 
-- **Without the Trowel,** both say the ground has been turned here. Once a fixed find is dug, the spot is bare.
-- Hide a dig-spot object with the same flag as its find.
-- **Daily spot indices** are given out in blocks like the fixed ones; ask the engine session.
+**A daily spot's `VAR_0x8005`:**
+- The table: `ICHOR_DIG_ACT_I`, `_ACT_II` or `_ACT_III` (Act III and the post-game). These are SYSTEMS §5's tables.
+- The amphora, if the spot holds sherds: `| ICHOR_DIG_SHERDS(ICHOR_AMPHORA_*)`. The twelve `ICHOR_AMPHORA_*` names follow §5's table (`_KRONOS` is Kalliste, `_PERSEPHONE` Eleusa, `_ARACHNE` Emporion, and so on).
+- A spot with no amphora never gives a sherd: the roll goes again. So does a sherd roll once its amphora is whole, and an ostrakon roll once all 30 are found.
+
+**What a dig does:**
+- **Without the Trowel,** it says the earth has been turned and something glints in it.
+- **With it,** the player raises the Trowel (the relic pose), dust puffs on the tile and the find comes up.
+  - Items go in the Bag. If it's full, nothing is dug, and the spot stays.
+  - A sherd sets the amphora's next flag (`FLAG_ICHOR_SHERDS_START + 4 × amphora + n`) and says "*n* of its 4 pieces".
+  - An ostrakon sets the next of `FLAG_ICHOR_OSTRAKA_START + 0–29`, in order, and shows its words. The 30 are in `src/ichor_dig.c` (`sOstraka`). Nine name Aristeides, for Lysimachos, and the last is the player's. Writers may rewrite any of them.
+  - Tablet *n* sets `FLAG_ICHOR_PROPHECY_START + n − 1`, and page *n* sets `FLAG_ICHOR_PAGES_START + n − 1`. Alethea's reading, or the page's text, is the map's own script (see below).
+- **Afterwards,** a daily spot says "dug today" until tomorrow, and a fixed find says "nothing else is buried here".
+- **A fixed find with nothing left to give** (a sherd of a whole amphora) gives Stardust instead.
+- **Rolls are seeded by the day's seed and the spot,** so reloading a save digs up the same thing.
+- **Blessings:** Demeter's rolls twice and keeps the rarer find. Hades's doubles an item from a daily spot.
+- **Loot that waits on other work:** the fossils are Kanto's and Hoenn's until the dex adds the Aethos fossils. The 1% Ichor Stone is one of ten Mega Stones; Balance may change the list in `sIchorStones`.
+
+**A dig-spot object** (turned earth drawn as an object) takes the dig's flag as its own (`FLAG_DAILY_ICHOR_DIG_START + spot` or `FLAG_ICHOR_DIG_FIXED_START + index`). The dig removes it. A daily spot's object comes back the next day.
+
+**After the dig.** Both scripts work as a `goto` or a `call`. After a `call`, `VAR_RESULT` is `TRUE` if something was dug up just now, so a map can follow a tablet with Alethea's reading:
+
+```
+setvar(VAR_0x8004, 0x12)
+setvar(VAR_0x8005, ICHOR_FIND_PROPHECY(3))
+call(EventScript_IchorDigFixed)
+if (var(VAR_RESULT) == TRUE) {
+    // Alethea reads tablet 3
+}
+```
+
+**The coins** are renamed, and sell for half their price at any market (Hades's blessing +50%):
+
+| Item | Name | Sells for |
+|---|---|---|
+| `ITEM_RELIC_COPPER` | Bronze Obol | ¥500 |
+| `ITEM_RELIC_SILVER` | Silver Owl | ¥2,000 |
+| `ITEM_RELIC_GOLD` | Gold Stater | ¥5,000 |
+
+Pasion's "+20%" in Emporion is then ¥600, ¥2,400 and ¥6,000, which his script can write as numbers.
+
+**Index blocks** for dig spots are in §1's table. Ask the engine session for more.
+
+**Checks:** `tools/ichor/tests/ichor_dig.sh` (15 checks on Route 1) and `make check TESTS="Ichor:"` (`test/ichor_dig.c`: the rolls, rerolls, act tables and blessings).
 

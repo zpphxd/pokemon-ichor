@@ -130,4 +130,50 @@
 #define ICHOR_FLASH_TORCH_BOTH    1  // 72 px: both
 #define ICHOR_FLASH_DOUSED        8  // dark: glow-paint only
 
+// --- Excavation (SYSTEMS §5; ENGINE_API §8) -----------------------------------
+// A daily dig spot's VAR_0x8005: the act's loot table, and the amphora whose
+// sherds the spot holds, if any:
+//   setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_ARACHNE))
+#define ICHOR_DIG_ACT_I    1
+#define ICHOR_DIG_ACT_II   2
+#define ICHOR_DIG_ACT_III  3   // Act III and the post-game
+#define ICHOR_DIG_SHERDS(amphora)  (((amphora) + 1) << 4)
+
+// The 12 amphorae: sherds at FLAG_ICHOR_SHERDS_START + 4 * amphora (§5's table)
+#define ICHOR_AMPHORA_KRONOS      0   // Kalliste
+#define ICHOR_AMPHORA_PERSEPHONE  1   // Eleusa
+#define ICHOR_AMPHORA_ARACHNE     2   // Emporion
+#define ICHOR_AMPHORA_HERMES      3   // Emporion's coast
+#define ICHOR_AMPHORA_HEPHAESTUS  4   // Kaldera
+#define ICHOR_AMPHORA_ICARUS      5   // the Ikarian coasts
+#define ICHOR_AMPHORA_PANDORA     6   // Astyra
+#define ICHOR_AMPHORA_ORPHEUS     7   // Arkadia
+#define ICHOR_AMPHORA_ATALANTA    8   // Arkadia
+#define ICHOR_AMPHORA_PHAETHON    9   // Kaldera
+#define ICHOR_AMPHORA_PARIS      10   // Kythera
+#define ICHOR_AMPHORA_THESEUS    11   // Knossa
+#define ICHOR_AMPHORA_COUNT      12
+#define ICHOR_SHERDS_PER_AMPHORA  4
+#define ICHOR_OSTRAKA_COUNT      30
+
+// A fixed find's VAR_0x8005 is an item, or one of these
+#define ICHOR_FIND_SHERD(amphora)  (0xF000 + (amphora))  // the amphora's next sherd
+#define ICHOR_FIND_PROPHECY(n)     (0xF100 + (n))        // tablet n (1-8): FLAG_ICHOR_PROPHECY_START + n - 1
+#define ICHOR_FIND_PAGE(n)         (0xF200 + (n))        // Daedalus's page n (1-7): FLAG_ICHOR_PAGES_START + n - 1
+#define ICHOR_FIND_OSTRAKON        0xF300                // the next ostrakon
+
+// Ichor_DigStart's answer (internal to data/scripts/ichor_dig.pory)
+#define ICHOR_DIG_READY      0
+#define ICHOR_DIG_NO_TROWEL  1
+#define ICHOR_DIG_DUG_TODAY  2   // a daily spot, already dug today
+#define ICHOR_DIG_BARE       3   // a fixed find, already dug
+#define ICHOR_DIG_MODE_SPOT   0
+#define ICHOR_DIG_MODE_FIXED  1
+// Ichor_DigFindKind's answer
+#define ICHOR_FIND_KIND_ITEM      0
+#define ICHOR_FIND_KIND_SHERD     1
+#define ICHOR_FIND_KIND_OSTRAKON  2
+#define ICHOR_FIND_KIND_PROPHECY  3
+#define ICHOR_FIND_KIND_PAGE      4
+
 #endif // GUARD_CONSTANTS_ICHOR_H
