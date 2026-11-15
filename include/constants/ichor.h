@@ -80,6 +80,18 @@
 #define ICHOR_RELIC_FORBIDDEN  2  // FLAG_ICHOR_NO_RELICS: this place forbids outside tools
 #define ICHOR_RELIC_TOO_WEAK   3  // it needs the relic's upgrade
 
+// --- Omens (SYSTEMS §6) ------------------------------------------------------
+// IchorSave.omenKind: today's omen. omenEntry numbers the entries within a kind.
+#define OMEN_NONE       0
+#define OMEN_SWARM      1
+#define OMEN_VISITOR    2
+#define OMEN_WEATHER    3
+#define OMEN_GOOD_SIGN  4
+#define OMEN_STRANGER   5
+// Weather entries (SYSTEMS §6; add new ones at the end)
+#define OMEN_WEATHER_KRYOPUFF  0  // snow on the Ascent's lowest slopes
+#define OMEN_WEATHER_LERNIP    1  // rain over Lake Stymphalia (Phase 4 SCRIPT.md, the Lernip hunt)
+
 // --- The Labyrinth (LABYRINTH.md §5) --------------------------------------------
 // Names for the Thread's RETURN TO… list: the name id a ring's ON_LOAD gives
 // Ichor_AddThreadAnchor. The strings are in src/data/ichor_thread.h; add new

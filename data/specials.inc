@@ -697,3 +697,10 @@ gSpecials::
 	def_special Ichor_BuildThreadReturnMenu
 	def_special Ichor_ThreadReturnTo
 	def_special Ichor_TurnDial
+	@ Ichor: scripts' small needs (src/ichor_save.c, ichor_time.c, ichor_omen.c)
+	def_special Ichor_CountFlagRange
+	def_special Ichor_HoldTimeOfDay
+	def_special Ichor_ReleaseTimeOfDay
+	def_special Ichor_ForceOmen
+	def_special Ichor_CheckOmen
+	def_special Ichor_GetOmen

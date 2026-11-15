@@ -103,7 +103,8 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 3 | Rites: altars, Favor, blessings, gifts | 3 | **Built** |
 | 4 | Herm waystones and the Wings | 4 | **Built** |
 | 5 | The Frozen Hour (SCRIPT.md Phase 4, E1–E6) | 5 | **Built** |
-| 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials | 5 | **Built** |
+| 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials, sentries, the disguise | 5 | **Built** |
+| 7 | Scripts' small needs: flag counts, a held tint, omens, time-of-day tables | 5 | **Built** |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
@@ -447,6 +448,18 @@ His own movement type is his patrol: `FACE_*` or `WALK_SEQUENCE_*`, set in Porym
 - **Trainers can't see the player** on a dark tile: a dark map, outside lit zones and light pools. Elsewhere they see 2 tiles at most. Talking to them still starts the battle.
 - **Asterion** follows the table above.
 
+### Sentries and the disguise (§5.6)
+
+- **Trainer types** (`include/constants/trainer_types.h`), set in Porymap:
+  - `TRAINER_TYPE_ICHOR_TITANBORN`: sees in a line, as `TRAINER_TYPE_NORMAL` does.
+  - `TRAINER_TYPE_ICHOR_SENTRY`: sees its own line, plus the lines either side of it from 2 tiles out, to its sight range (give sentries 5). Seen in a side lane, the sentry calls out from its post instead of walking over.
+- **The disguise.** While `FLAG_ICHOR_DISGUISE_ON` is set, both types take the player for a recruit. They see nothing, unless the player runs within 3 tiles; then they see as usual.
+  - Walking into one shows "Watch it, recruit." (`EventScript_IchorRecruitBump`), once until the player steps away.
+  - Talking to one runs its own script, as always. Gigas elites, who question you instead, are script.
+  - `FLAG_ICHOR_DISGUISE_ON` is the engine's: set it when the helmet goes on and clear it when it comes off. Having the helmet (`TITAN_DISGUISE` in LABYRINTH §13) is world-act3's flag.
+  - **The sprite is not swapped yet.** The two helmeted walking sheets (decision L9) don't exist; this is LABYRINTH's "keep the mechanic, skip the sprite". When they land, the swap goes in `GetPlayerAvatarGraphicsIdByStateIdAndGender`, and the sheets need the player's animation table, running frames included.
+- **The Helm** stacks with the disguise.
+
 ### Dials
 
 ```
@@ -463,8 +476,45 @@ copyvar(VAR_ICHOR_LABYRINTH, VAR_0x8004)   // saved back, turned or not
 - **Art:** the thread's twins, the skylight pools, Asterion's stars and lying-down frame, and the dust puff on his scrape.
 - **Engine:**
   - the waypoint patrol for wall %2 (`MOVEMENT_TYPE_ICHOR_PATROL`);
-  - sentries' sight bands and the disguise (§5.6);
+  - the disguise's sprite (above);
   - the bull-leap (E7);
   - the mirrors and beam (E9);
   - the Endless Labyrinth.
 - **Script-only, for world-act3:** the sun and moon gates, the dancing floor, the lift, the sunken floor and the alarms.
+
+## 7. Scripts' small needs
+
+Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested by `make check TESTS="Ichor:"`.
+
+### Counting flags
+
+`setvar(VAR_0x8004, FLAG_ICHOR_PROPHECY_START)`, `setvar(VAR_0x8005, 8)`, `specialvar(VAR_RESULT, Ichor_CountFlagRange)`: how many of those flags are set. It works on any flag range: a bank, a vanilla range or the daily flags.
+
+### Holding the day-and-night tint
+
+- **`setvar(VAR_0x8004, TIME_EVENING)`, then `special(Ichor_HoldTimeOfDay)`.** The tint holds at that time of day, whatever the clock says. The hold lasts through warps and saves until `special(Ichor_ReleaseTimeOfDay)`. It takes `TIME_MORNING`, `TIME_DAY`, `TIME_EVENING` or `TIME_NIGHT`, each at full strength.
+- **It's the game's time of day while held,** not just the colors. Encounter tables and time-based evolutions follow it, so night falls at Delphoi for the Pokémon too.
+- The tint only shows on maps with natural light (towns, routes and the sea), so interiors look the same either way.
+- The expansion's own `SetTimeOfDay` hour override still works, but it resets on every warp. Use the hold for anything that spans maps.
+
+### Omens (SYSTEMS §6)
+
+- **Today's omen** is `IchorSave.omenKind` (`OMEN_SWARM`, `_VISITOR`, `_WEATHER`, `_GOOD_SIGN`, `_STRANGER`, or `OMEN_NONE`) and `omenEntry`, an entry within that kind. The entries are numbered in `include/constants/ichor.h`: `OMEN_WEATHER_KRYOPUFF` and `OMEN_WEATHER_LERNIP` so far. Add new ones at the end.
+- **Forcing tomorrow's omen,** as when Akanthis first tells the Lernip rumor: `setvar(VAR_0x8004, OMEN_WEATHER)`, `setvar(VAR_0x8005, OMEN_WEATHER_LERNIP)`, `special(Ichor_ForceOmen)`.
+- **A map that owns an omen's weather** checks it in `ON_TRANSITION`:
+  ```
+  setvar(VAR_0x8004, OMEN_WEATHER)
+  setvar(VAR_0x8005, OMEN_WEATHER_LERNIP)
+  specialvar(VAR_RESULT, Ichor_CheckOmen)
+  if (var(VAR_RESULT) == TRUE) { setweather(WEATHER_RAIN) }
+  ```
+- `specialvar(VAR_RESULT, Ichor_GetOmen)` gives the kind, with the entry in `VAR_0x8004`. The augurs use it.
+- **Not built yet:** SYSTEMS §6's daily draw from the entry table (swarms through `StartMassOutbreak`, visitors' hide flags, the story filter). Until it lands, a day without a forced omen has none.
+
+### Four time-of-day encounter tables on one map
+
+These need no engine change. `OW_TIME_OF_DAY_ENCOUNTERS` is on, and `tools/wild_encounters/wild_encounters_to_header.py` builds one table per time of day.
+- **In `src/data/wild_encounters.json`,** give the map up to four entries with the same `map` and `base_label`s ending `_Morning`, `_Day`, `_Evening` and `_Night`. Route 1 already has `gKallisteRoute1_Morning` and `_Night`.
+- **The hours** (`OW_TIMES_OF_DAY`, latest generation): morning 6–10, day 10–19, evening 19–20, night 20–6.
+- **A time with no table of its own falls back to `_Morning`** (`OW_TIME_OF_DAY_FALLBACK`). With all four defined, Lakonia's Chalkip can sit in `_Morning` and `_Evening` only.
+

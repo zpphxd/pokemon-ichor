@@ -1,5 +1,6 @@
 // Ichor: IchorSave, the one block of Ichor state in SaveBlock3, and its flag
 // and var banks. See include/ichor_save.h and design/ENGINE_API.md.
+#include "ichor_omen.h"
 #include "global.h"
 #include "event_data.h"
 #include "ichor_save.h"
@@ -49,15 +50,20 @@ void Ichor_OnSaveLoaded(void)
         return;
     }
     if (gIchorSave.version < 2)
-    {
         gIchorSave.frozenHourStep = 0;
-        gIchorSave.version = 2;
+    if (gIchorSave.version < 3)
+    {
+        gIchorSave.forcedOmenKind = 0;
+        gIchorSave.forcedOmenEntry = 0;
+        gIchorSave.heldTimeOfDay = 0;
     }
+    gIchorSave.version = ICHOR_SAVE_VERSION;
 }
 
 void Ichor_DoDailyEvents(u32 daysSince)
 {
     memset(gIchorSave.dailyFlags, 0, sizeof(gIchorSave.dailyFlags));
+    Ichor_OmenNewDay();
 }
 
 u8 *Ichor_GetFlagPointer(u16 id)
@@ -88,4 +94,11 @@ u32 Ichor_CountFlags(u16 firstFlag, u16 count)
             n++;
     }
     return n;
+}
+
+// specialvar Ichor_CountFlagRange: how many of the VAR_0x8005 flags from
+// VAR_0x8004 on are set (Ichor_CountFlags, for scripts).
+u16 Ichor_CountFlagRange(void)
+{
+    return Ichor_CountFlags(gSpecialVar_0x8004, gSpecialVar_0x8005);
 }

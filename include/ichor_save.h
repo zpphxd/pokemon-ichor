@@ -18,7 +18,7 @@
 #include "constants/flags.h"
 #include "constants/vars.h"
 
-#define ICHOR_SAVE_VERSION  2
+#define ICHOR_SAVE_VERSION  3
 #define ICHOR_SAVE_SIZE     1280
 
 #define ICHOR_GOD_SLOTS     16  // the 15 gods of design/SYSTEMS.md §3, and one spare
@@ -75,7 +75,10 @@ struct IchorSave
     /*0x010*/ u8 favor[ICHOR_GOD_SLOTS];        // §3: 0-100 per god, never decreases
     /*0x020*/ u8 xenia[ICHOR_XENIA_CHAINS];     // §10: links done per token chain
     /*0x028*/ u8 frozenHourStep;        // the Frozen Hour: steps of the Stair climbed, 0-11 (version 2)
-    /*0x029*/ u8 headerReserved[23];
+    /*0x029*/ u8 forcedOmenKind;        // §6: tomorrow's omen, forced by a script; OMEN_NONE if not (version 3)
+    /*0x02A*/ u8 forcedOmenEntry;
+    /*0x02B*/ u8 heldTimeOfDay;         // a script holds the day-and-night tint: TIME_* + 1, or 0 (version 3)
+    /*0x02C*/ u8 headerReserved[20];
     /*0x040*/ u16 vars[ICHOR_VARS_COUNT];
     /*0x080*/ u8 flags[ICHOR_FLAGS_COUNT / 8];
     /*0x180*/ u8 dailyFlags[ICHOR_DAILY_FLAGS_COUNT / 8];  // cleared each day
