@@ -55,13 +55,22 @@ ICON_W, ICON_H = 30, 27
 # Loading
 # --------------------------------------------------------------------------
 
-def load_mons():
+def load_mons(broken=None):
+    """Load every line file's MONS. With broken={} (a build of named species),
+    a line file that fails to import is recorded there instead of stopping the
+    build, so one artist's half-saved file doesn't block the others."""
     mons = {}
     for path in sorted(glob.glob(os.path.join(HERE, "lines", "*.py"))):
         mod_name = "dexline_" + os.path.splitext(os.path.basename(path))[0]
         spec = importlib.util.spec_from_file_location(mod_name, path)
         mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
+        try:
+            spec.loader.exec_module(mod)
+        except Exception as e:  # noqa: BLE001
+            if broken is None:
+                raise
+            broken[os.path.relpath(path, ROOT)] = f"{type(e).__name__}: {e}"
+            continue
         for m in getattr(mod, "MONS", []):
             if m.name in mons:
                 raise SystemExit(f"duplicate species {m.name} in {path}")
@@ -459,11 +468,15 @@ def main():
                     help="with --dump, write the draft to tools/dex/sprites/art/ as the start of a hand-finished file")
     a = ap.parse_args()
 
-    mons = load_mons()
+    broken = {} if a.names else None
+    mons = load_mons(broken)
     numbers = dex_numbers()
+    for path, err in (broken or {}).items():
+        print(f"skipped {path}, which failed to load ({err})", file=sys.stderr)
     for n in a.names:
         if n not in mons:
-            raise SystemExit(f"no sprite source for {n}")
+            hint = f"; these line files failed to load: {', '.join(broken)}" if broken else ""
+            raise SystemExit(f"no sprite source for {n}{hint}")
     if a.dump:
         view = a.dump[0]
         phase = int(a.dump[1]) if len(a.dump) > 1 else 0
