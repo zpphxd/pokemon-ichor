@@ -1721,5 +1721,92 @@ const struct Tileset gTileset_TempleHermes =
     .palettes = gTilesetPalettes_PorytilesManaged_TempleHermes,
     .metatiles = gMetatiles_PorytilesManaged_TempleHermes,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
+
+// Ichor: kythera, the Foam Road and the Spring of Kallirhoe (Act III). Porytiles-managed, built by
+// tools/ichor/art/kythera_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Kythera =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kythera,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kythera,
+    .metatiles = gMetatiles_PorytilesManaged_Kythera,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kythera,
+    .callback = InitTilesetAnim_PorytilesManaged_Kythera,
+};
+
+// Ichor: skandeia, Skandeia, Kythera's harbor town (Act III). Porytiles-managed, built by
+// tools/ichor/art/kythera_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Skandeia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Skandeia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Skandeia,
+    .metatiles = gMetatiles_PorytilesManaged_Skandeia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Skandeia,
+    .callback = InitTilesetAnim_PorytilesManaged_Skandeia,
+};
+
+// Ichor: paphia, Paphia, the temple town (Act III). Porytiles-managed, built by
+// tools/ichor/art/kythera_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Paphia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Paphia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Paphia,
+    .metatiles = gMetatiles_PorytilesManaged_Paphia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Paphia,
+    .callback = InitTilesetAnim_PorytilesManaged_Paphia,
+};
+
+// Ichor: neraida, the Neraida falls (Act III). Porytiles-managed, built by
+// tools/ichor/art/kythera_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Neraida =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Neraida,
+    .palettes = gTilesetPalettes_PorytilesManaged_Neraida,
+    .metatiles = gMetatiles_PorytilesManaged_Neraida,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Neraida,
+    .callback = InitTilesetAnim_PorytilesManaged_Neraida,
+};
+
+// Ichor: melos, Melos, the sea of Routes 22 and 23, and Echo's sea caves (Act III). Porytiles-managed, built by
+// tools/ichor/art/kythera_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Melos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Melos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Melos,
+    .metatiles = gMetatiles_PorytilesManaged_Melos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Melos,
+    .callback = InitTilesetAnim_PorytilesManaged_Melos,
+};
+
+// Ichor: temple_aphrodite, the Temple of Aphrodite, Galatea's Gallery (Act III). Porytiles-managed, built by
+// tools/ichor/art/kythera_build.py; it uses only its own tiles and palettes
+// 6-12, so it works on any interior primary (it is meant for oikos).
+const struct Tileset gTileset_TempleAphrodite =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_TempleAphrodite,
+    .palettes = gTilesetPalettes_PorytilesManaged_TempleAphrodite,
+    .metatiles = gMetatiles_PorytilesManaged_TempleAphrodite,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleAphrodite,
     .callback = NULL,
 };
