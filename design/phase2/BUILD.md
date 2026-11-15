@@ -199,6 +199,8 @@ IchorSave's flag bank is on main. From batch 2 on, new flags are bank flags in t
 | Temple of Hermes agent | 0x0F0–0x0FF | — |
 | Aigina interior fix (audit) | 0x060–0x06F | 0x2D2–0x2D9 |
 | Eleusa interiors agent (batch 4; trainers 130–139, daily 0x48–0x4B) | 0x090–0x0BF | 0x2DB–0x2E1 |
+| Eleusa story agent (beats 19's gate, 20–22; trainers 140–149; braziers +0x1C–0x1F) | 0x070–0x07F, 0x0D6–0x0DF | 0x2E9–0x2EF |
+| Sanctum agent (beat 23; trainers 150–159; braziers +0x18–0x1B) | 0x086–0x08F, 0x0F8–0x0FF | 0x2F0–0x2F1, 0x2F4–0x2FA |
 
 ## Stubs until other sessions land
 
@@ -219,7 +221,7 @@ Each stub is marked in the code with its tag, so it can be found and replaced wi
 - **Every other Phase 2 area** takes its species and levels from each species' `habitat` field in `design/dex/species/*.yaml` (branch `claude/aethos-dex-a7c73a`).
 
 **Engine notes (ichor-engine, 2026-11-14).**
-- **Braziers:** world-act1 holds `FLAG_ICHOR_BRAZIERS_START + 0x10`–`0x1F`. +0x10–0x13 are the Telesterion's season braziers; +0x14–0x1F are kept for the sanctum, Eleusa's procession torches, the Hollow and the grottos.
+- **Braziers:** world-act1 holds `FLAG_ICHOR_BRAZIERS_START + 0x10`–`0x1F`. +0x10–0x13 are the Telesterion's season braziers; +0x14–0x15 are the Hollow's, +0x18–0x1B the sanctum's, +0x1C–0x1F Eleusa's procession torches; +0x16–0x17 are free.
 - **Darkness:** `EventScript_IchorBrazier` and `EventScript_IchorEnterLitZone` / `EventScript_IchorLeaveLitZone` are built (engine commit c9277243c6). Once they're on main, swap every `ICHOR_STUB_DARKNESS` stand-in for them.
 - **Herms:** ids follow AETHOS_MAP's land routes: `HERM_AETHOS_ROUTE_4`, `_5`, `_6` and on. Routes 2 and 3 are sea, so they have no herm. A great herm's bg event runs `EventScript_IchorGreatHerm`, and only that script sets its flag (`FLAG_ICHOR_HERMS_START + id`). For each herm, send the engine session its map and landing tile (the tile south of it) for the table row and heal location. SCRIPT.md's `FLAG_ICHOR_HERM_ROUTE1`–`6` don't exist. `FLAG_ICHOR_HERM_AEGINA` is only the stub's flag: Aigina's herm needs an id from the engine, which world-act2 asks for with Act II.
 
