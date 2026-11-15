@@ -125,7 +125,7 @@ Until the Aethos routes exist, our lanes' Aethos-side edges are left open and te
 | Black Sea interiors | 0x434–0x443 | — |
 | unassigned | 0x444–0x47F (60) | 0x4D8–0x4FF |
 
-**The range is short.** Each land at core wants about 28 flags (a reward per household, item balls, quest steps, hide flags), so about 280 for ten lands plus the halls' 30, against 192. The director has granted 256 more from ichor-engine's second bank (commit a4a9de3d6e on `claude/ichor-engine-systems-5a55eb`): **bankflag offsets 0x800–0x8FF**, which exist only once that branch is merged to main and into ours, and which the director confirms in claim_ranges.md. Until then, agents spend only their sub-range, reuse a quest's own flag as its NPC's hide flag, and put hidden items on the vanilla flags above. Claim with `python3 tools/ichor/claim.py --range LO-HI bankflag FLAG_ICHOR_<NAME> "comment"`.
+**The range was short.** Each land at core wants about 28 flags (a reward per household, item balls, quest steps, hide flags), so about 280 for ten lands plus the halls' 30, against 192. The director has granted 256 more from ichor-engine's second bank (commit a4a9de3d6e on `claude/ichor-engine-systems-5a55eb`): **bankflag offsets 0x800–0x8FF**, on main since a5de99c630 and merged into this branch (488242c6b6). About 448 in all. Batch 2 onward gets sub-ranges there; batch 1's agents, whose worktrees predate it, spend only their sub-range, reuse a quest's own flag as its NPC's hide flag, and put hidden items on the vanilla flags above. Claim with `python3 tools/ichor/claim.py --range LO-HI bankflag FLAG_ICHOR_<NAME> "comment"`.
 
 **Bank vars** 24–27: unassigned. Puzzle state lives in `VAR_TEMP_*` for the length of a map (PERIODOS §7).
 
@@ -199,7 +199,7 @@ The precinct of Proteus, the Skaian Gate and Aietes's palace are batch 2's halls
 | Ask | For | To | Status |
 |---|---|---|---|
 | An Oikoumene herm run and their heal locations, so waystones join the Wings' fly map (OIKOUMENE §4) | every land | ichor-engine | **agreed:** ids 32–63, `HERM_OIKOUMENE_*`; send each waystone's map, section and landing tile, and any own anointing lines |
-| A second bank-flag range for the Oikoumene, about 256 flags | every land | the director, then ichor-engine | **granted:** bankflag 0x800–0x8FF, once ichor-engine's a4a9de3d6e is merged |
+| A second bank-flag range for the Oikoumene, about 256 flags | every land | the director, then ichor-engine | **granted and merged:** bankflag 0x800–0x8FF (main a5de99c630) |
 | The chariot (PERIODOS §4.7; OIKOUMENE §13), Medium: a player state like the *Euploia*'s that always moves, two strides between turns | Kyrene's hall, batch 3 | **this branch** (ichor-engine's answer): a new `src/ichor_chariot.c`, its state behind a flag or var we claim, small `// Ichor oikoumene:` hooks in `field_player_avatar.c`; ask ichor-engine for any hook point it owns | batch 3 |
 | A creature changing form on a step count (the Black Sea's brew, Egypt's shapes), Low–Medium | batch 2's halls | built on this branch by the hall agents, in ENGINE_API's conventions | — |
 | The Song and the Wall: warp to the same tile on a twin map, and back unless it's a wall, Low | the Skaian Gate | built on this branch | — |
