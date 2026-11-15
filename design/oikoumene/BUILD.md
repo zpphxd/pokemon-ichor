@@ -225,7 +225,7 @@ Each batch's result goes here when it's merged: what was built, its renders, its
 
 ### Batch 1: paused 2026-11-14, mid-batch
 
-**Why.** The director paused the Oikoumene to save usage for the main story ("everything up unto the post game", the user). Each agent committed its work in progress and stopped. Everything that builds green is merged into `claude/world-oikoumene-950021`; `make` and the smoke test pass there (ROM 22,602,916 B, 67.36%), and the slice playthrough was run at the pause (§8's last line).
+**Why.** The director paused the Oikoumene to save usage for the main story ("everything up unto the post game", the user). Each agent committed its work in progress and stopped. Everything that builds green is merged into `claude/world-oikoumene-950021`; `make` and the smoke test pass there (ROM 22,602,916 B, 67.36%), and the slice playthrough passes (17 battles, 0 findings, at e1a28a36fa).
 
 **Where each agent stopped.** Branches are local (`worktree-agent-…`); their worktrees are under `.claude/worktrees/agent-…`. Each one's own doc has a "Stopped at" section with the detail.
 
