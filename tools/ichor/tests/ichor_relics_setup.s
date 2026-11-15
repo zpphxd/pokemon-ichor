@@ -109,7 +109,7 @@ RelicTest_Spawn:
 RelicTest_Flash:
 	lockall
 	setvar VAR_TEMP_F, 1
-	callnative SetDefaultFlashLevel
+	callnative RelicTest_DefaultFlashLevel
 	releaseall
 	end
 
@@ -132,3 +132,30 @@ RelicTest_Warp:
 	waitstate
 	releaseall
 	end
+
+@ --- SetDefaultFlashLevel, rebuilt here: LTO inlines the game's own copy away ----
+@ The light on a map load: none on a lit map, else the Torch's radius.
+	.thumb
+	.align 2
+	.thumb_func
+	.global RelicTest_DefaultFlashLevel
+RelicTest_DefaultFlashLevel:
+	push {lr}
+	ldr r0, =gMapHeader
+	ldrb r0, [r0, #0x1A]          @ the cave bit is bit 5 of this byte
+	lsl r0, r0, #26
+	bpl RelicTest_DefaultFlashLevel_Lit
+	ldr r3, =Ichor_GetTorchFlashLevel
+	bl RelicTest_CallR3
+	b RelicTest_DefaultFlashLevel_Set
+RelicTest_DefaultFlashLevel_Lit:
+	mov r0, #0
+RelicTest_DefaultFlashLevel_Set:
+	ldr r3, =SetFlashLevel
+	bl RelicTest_CallR3
+	pop {r0}
+	bx r0
+RelicTest_CallR3:
+	bx r3
+	.pool
+
