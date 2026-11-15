@@ -1,1 +1,56 @@
+// The Asclepeion of Naukratis: the Greeks' healing house in the Hellenion,
+// built of the town's mud brick. Room: tools/ichor/maps/egypt_rooms.py.
+// The healer and the Pithos call the slice's shared scripts (Akti's
+// Asclepeion). The heal location waits on the chart agent, who gives batch
+// 1's towns their fly targets (HEAL_LOCATION_NAUKRATIS); until then this
+// map sets no respawn.
+
 mapscripts Naukratis_Asclepeion_MapScripts {}
+
+text Naukratis_Asclepeion_Name_Miu { "MIU" }
+
+script Naukratis_Asclepeion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_NAUKRATIS_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script Naukratis_Asclepeion_EventScript_Pithos {
+    goto(Ichor_EventScript_Pithos)
+}
+
+script Naukratis_Asclepeion_EventScript_Sailor {
+    msgbox(format("Rope burn. Hauling Samian amphorae off the ship all morning.\p"
+                  "The healer says Nile water and honey. My mother says the same, and she's never left Samos."),
+           MSGBOX_NPC)
+}
+
+script Naukratis_Asclepeion_EventScript_CatWoman {
+    msgbox(format("When a house cat dies here, the whole family shaves off its eyebrows.\p"
+                  "So when Miu sneezed, I came straight in. I'm fond of my eyebrows."),
+           MSGBOX_NPC)
+}
+
+script Naukratis_Asclepeion_EventScript_Espurr {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ESPURR, CRY_MODE_NORMAL)
+    setspeaker(Naukratis_Asclepeion_Name_Miu)
+    msgbox(format("Mew…"))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Miu stares at a spot just behind your head."))
+    release
+}
+
+script Naukratis_Asclepeion_EventScript_EarStele {
+    msgbox(format("A little stele carved with two ears, so the god will hear whoever set it up.\p"
+                  "The Greeks here learned that from their neighbors."), MSGBOX_SIGN)
+}
+
+script Naukratis_Asclepeion_EventScript_Window {
+    msgbox(format("The river harbor: Samian ships, Egyptian barges, and a papyrus skiff weaving between them."),
+           MSGBOX_SIGN)
+}

@@ -1,1 +1,76 @@
+// The net-loft, Naukratis. Room: tools/ichor/maps/egypt_rooms.py.
+//
+// Ipy the fisher gives Naukratis's net-loft gift through the ports' shared
+// Oik_EventScript_FisherGift (the Super Rod at the first port, else a Big
+// Pearl), keeping his own flag. His wife Merit weaves linen; her brother
+// Khay is the embalmer in Memphis and has run out of it. She sends a bolt
+// upriver with you (FLAG_ICHOR_GOT_LINEN; it is carried, not a Bag item).
+
 mapscripts Naukratis_NetLoft_MapScripts {}
+
+text Naukratis_NetLoft_Name_Ipy { "IPY" }
+text Naukratis_NetLoft_Name_Merit { "MERIT" }
+
+script Naukratis_NetLoft_EventScript_Ipy {
+    lock
+    faceplayer
+    setspeaker(Naukratis_NetLoft_Name_Ipy)
+    if (flag(FLAG_ICHOR_NAUKRATIS_FISHER_GIFT)) {
+        msgbox(format("Nile perch, catfish, and once a crocodile. I let the crocodile keep the net."))
+        release
+        end
+    }
+    msgbox(format("A Greek! You've the look of someone who fishes. Or wants to."))
+    call(Oik_EventScript_FisherGift)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_NAUKRATIS_FISHER_GIFT)
+    }
+    release
+}
+
+script Naukratis_NetLoft_EventScript_Merit {
+    lock
+    faceplayer
+    setspeaker(Naukratis_NetLoft_Name_Merit)
+    if (flag(FLAG_ICHOR_GOT_REAPER_CLOTH)) {
+        msgbox(format("Khay sent word down by boat. He says it's the good weave.\p"
+                      "He has never once said that. I'm having it carved over the door."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_GOT_LINEN)) {
+        msgbox(format("Memphis is upriver. Follow the Nile till you see the big white walls.\p"
+                      "Khay's house smells of natron. You can't miss it."))
+        release
+        end
+    }
+    msgbox(format("Mind the warp, I've only just strung it.\p"
+                  "My brother Khay is an embalmer in Memphis. He wraps the dead in my linen, and he's run out again.\p"
+                  "If you're going upriver, would you take him a bolt?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Naukratis_NetLoft_Name_Merit)
+        msgbox(format("Then he'll wait. He's good at waiting. It's his whole trade."))
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_LINEN)
+    playfanfare(MUS_OBTAIN_ITEM)
+    setspeaker(SP_NAME_NONE)
+    message(format("{PLAYER} took the bolt of linen to carry to Memphis."))
+    waitmessage
+    waitfanfare
+    setspeaker(Naukratis_NetLoft_Name_Merit)
+    msgbox(format("Tell him it's the good weave, so he stops complaining. He won't, but tell him."))
+    release
+}
+
+script Naukratis_NetLoft_EventScript_Loom {
+    msgbox(format("A ground loom pegged to the floor. Merit weaves sitting on her heels.\p"
+                  "The linen is so fine you could read through it."), MSGBOX_SIGN)
+}
+
+script Naukratis_NetLoft_EventScript_Skiff {
+    msgbox(format("A papyrus skiff waiting for new bindings.\p"
+                  "Crocodiles leave papyrus boats alone, Ipy says, out of respect for Isis, who sailed one."),
+           MSGBOX_SIGN)
+}

@@ -492,3 +492,18 @@ const struct Tileset gTileset_Megaron =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Megaron,
     .callback = NULL,
 };
+
+// Ichor: per, the Oikoumene's Egyptian mud-brick interiors (Naukratis's and
+// Memphis's rooms). A secondary that uses only its own tiles and palettes
+// 6-12, so it works on any primary; the rooms pair it with oikos. Built by
+// tools/ichor/art/per_build.py.
+const struct Tileset gTileset_Per =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Per,
+    .palettes = gTilesetPalettes_PorytilesManaged_Per,
+    .metatiles = gMetatiles_PorytilesManaged_Per,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Per,
+    .callback = NULL,
+};

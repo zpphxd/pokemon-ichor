@@ -1,1 +1,54 @@
+// The incense merchant from Arabia, Naukratis. Room: tools/ichor/maps/egypt_rooms.py.
+//
+// Yada'il comes from Saba with frankincense and myrrh (Herodotus 3.107: the
+// trees are guarded by small winged serpents, driven off with styrax smoke).
+// He sells the nine incenses that, held at the egg-ovens, give the nine
+// babies (design/OIKOUMENE.md section 8). Myrrh is the Phoenix's
+// (Herodotus 2.73: it carries its father to Heliopolis in an egg of myrrh);
+// there is no myrrh item yet, so he keeps it back.
+// ICHOR_STUB_LEGEND: Ho-Oh's myrrh, for LEGENDS (batch 2, Heliopolis).
+
 mapscripts Naukratis_IncenseShop_MapScripts {}
+
+text Naukratis_IncenseShop_Name_Yadail { "YADA'IL" }
+
+script Naukratis_IncenseShop_EventScript_Merchant {
+    lock
+    faceplayer
+    setspeaker(Naukratis_IncenseShop_Name_Yadail)
+    msgbox(format("Peace on your house. Frankincense from the hills of Saba, and nine incenses for nine nests.\p"
+                  "Leave one with a pair at the egg-ovens, and what hatches comes out… different."))
+    pokemart(Naukratis_IncenseShop_Mart)
+    setspeaker(Naukratis_IncenseShop_Name_Yadail)
+    msgbox(format("The myrrh? That one isn't for sale.\p"
+                  "When the Phoenix comes to Heliopolis, it carries its father there in an egg of myrrh.\p"
+                  "Someone has to have the myrrh ready. I've waited forty years. I can wait longer."))
+    release
+}
+
+mart Naukratis_IncenseShop_Mart {
+    ITEM_SEA_INCENSE
+    ITEM_LAX_INCENSE
+    ITEM_ROSE_INCENSE
+    ITEM_PURE_INCENSE
+    ITEM_ROCK_INCENSE
+    ITEM_ODD_INCENSE
+    ITEM_LUCK_INCENSE
+    ITEM_FULL_INCENSE
+    ITEM_WAVE_INCENSE
+}
+
+script Naukratis_IncenseShop_EventScript_Customer {
+    msgbox(format("Myrrh for my husband's tomb. He'd have complained about the price.\p"
+                  "I'm buying the good kind anyway."), MSGBOX_NPC)
+}
+
+script Naukratis_IncenseShop_EventScript_Frankincense {
+    msgbox(format("Sacks of frankincense, pale gold tears of resin. It smells like the inside of a temple."),
+           MSGBOX_SIGN)
+}
+
+script Naukratis_IncenseShop_EventScript_Myrrh {
+    msgbox(format("Sacks of myrrh, dark red and bitter-sweet. A tag in Yada'il's hand says “NOT FOR SALE”."),
+           MSGBOX_SIGN)
+}

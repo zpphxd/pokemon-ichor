@@ -1,1 +1,44 @@
+// The Asclepeion of Memphis: the shrine of Imhotep, the old king's architect
+// and healer, whom the Greeks call Asclepius. Room: tools/ichor/maps/egypt_rooms.py.
+// The healer and the Pithos call the slice's shared scripts. The heal
+// location waits on the chart agent (HEAL_LOCATION_MEMPHIS); until then this
+// map sets no respawn.
+
 mapscripts Memphis_Asclepeion_MapScripts {}
+
+script Memphis_Asclepeion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_MEMPHIS_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script Memphis_Asclepeion_EventScript_Pithos {
+    goto(Ichor_EventScript_Pithos)
+}
+
+script Memphis_Asclepeion_EventScript_Lector {
+    msgbox(format("Imhotep built King Djoser the first pyramid of stone, and healed the sick besides.\p"
+                  "The Greeks call him Asclepius. He doesn't seem to mind."), MSGBOX_NPC)
+}
+
+script Memphis_Asclepeion_EventScript_Scribe {
+    msgbox(format("Every scribe pours a drop of water for Imhotep before he writes.\p"
+                  "He was one of us first. Then he was a god. It's a good career."), MSGBOX_NPC)
+}
+
+script Memphis_Asclepeion_EventScript_Boy {
+    msgbox(format("A scorpion stung me. The priest read a spell over it and gave me an onion.\p"
+                  "…I think the onion was for eating."), MSGBOX_NPC)
+}
+
+script Memphis_Asclepeion_EventScript_Imhotep {
+    msgbox(format("Imhotep, seated, a papyrus open on his knees. Someone has left him a fresh loaf."),
+           MSGBOX_SIGN)
+}
+
+script Memphis_Asclepeion_EventScript_EarStele {
+    msgbox(format("A stele carved with ears, for a god who listens. There are dozens like it along the wall."),
+           MSGBOX_SIGN)
+}

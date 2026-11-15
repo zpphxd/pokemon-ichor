@@ -1,1 +1,113 @@
+// The scribe of Thoth's house, Memphis. Room: tools/ichor/maps/egypt_rooms.py.
+//
+// Amenemope sets three riddles from the painted panel: each glyph is a sound
+// (the owl m, water n, the mouth r). Answered, they spell a word with no
+// vowels, the way the old kings wrote on the walls of the Great Pyramid's
+// lowest chambers, where shapes that are not letters look back at you: the
+// Unown (ICHOR_STUB_LEGEND: their chambers are batch 2's Great Pyramid).
+// The reward is a Twisted Spoon. A wrong answer ends the try; the riddles
+// can be asked again at once.
+
 mapscripts Memphis_ScribesHouse_MapScripts {}
+
+text Memphis_ScribesHouse_Name_Amenemope { "AMENEMOPE" }
+
+script Memphis_ScribesHouse_EventScript_Scribe {
+    lock
+    faceplayer
+    setspeaker(Memphis_ScribesHouse_Name_Amenemope)
+    if (flag(FLAG_ICHOR_GOT_TWISTED_SPOON)) {
+        msgbox(format("Owl, water, mouth. Remember them in the dark down there.\p"
+                      "And if a wall looks back at you, don't stare. It's rude, and they don't blink."))
+        release
+        end
+    }
+    msgbox(format("A visitor! Sit. Mind my pens.\p"
+                  "Every picture on that panel is a sound. That's the whole secret of writing.\p"
+                  "Three riddles. Answer all three and I'll tell you where the pictures go when no one reads them."),
+           MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Memphis_ScribesHouse_Name_Amenemope)
+        msgbox(format("Another day. Thoth is patient. I'm patient because Thoth is."))
+        release
+        end
+    }
+    setspeaker(Memphis_ScribesHouse_Name_Amenemope)
+    message(format("First. I am the sound “m”. I hunt by night and turn my head right round. What am I?"))
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Memphis_ScribesHouse_Text_Vulture,
+                   Memphis_ScribesHouse_Text_Owl, Memphis_ScribesHouse_Text_Ibis)
+    if (var(VAR_RESULT) != 1) {
+        goto(Memphis_ScribesHouse_EventScript_Wrong)
+    }
+    setspeaker(Memphis_ScribesHouse_Name_Amenemope)
+    message(format("The owl. Second. I am the sound “n”. I'm never still, and you drink me. What am I?"))
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Memphis_ScribesHouse_Text_Water,
+                   Memphis_ScribesHouse_Text_Bread, Memphis_ScribesHouse_Text_Reed)
+    if (var(VAR_RESULT) != 0) {
+        goto(Memphis_ScribesHouse_EventScript_Wrong)
+    }
+    setspeaker(Memphis_ScribesHouse_Name_Amenemope)
+    message(format("Water. Last. I am the sound “r”. I eat, I speak, and I tell lies. What am I?"))
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Memphis_ScribesHouse_Text_Hand,
+                   Memphis_ScribesHouse_Text_Eye, Memphis_ScribesHouse_Text_Mouth)
+    if (var(VAR_RESULT) != 2) {
+        goto(Memphis_ScribesHouse_EventScript_Wrong)
+    }
+    setspeaker(Memphis_ScribesHouse_Name_Amenemope)
+    msgbox(format("The mouth. Owl, water, mouth: m, n, r. Put them together and you have…\p"
+                  "…nothing you can say. We never write the vowels. That's the trick of it.\p"
+                  "The old kings wrote whole spells like that on the walls of the Great Pyramid's lowest rooms.\p"
+                  "Down there are shapes that aren't letters at all. They look back at you.\p"
+                  "Go down one day and read them. Before they read you."))
+    msgbox(format("Here. My pupil bent this staring at it during a lesson. It helps with focus, apparently."))
+    giveitem(ITEM_TWISTED_SPOON)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_TWISTED_SPOON)
+    }
+    release
+}
+
+script Memphis_ScribesHouse_EventScript_Wrong {
+    setspeaker(Memphis_ScribesHouse_Name_Amenemope)
+    msgbox(format("No. Look at the panel again. The answer's been on my wall the whole time."))
+    release
+    end
+}
+
+text Memphis_ScribesHouse_Text_Vulture { "A vulture" }
+text Memphis_ScribesHouse_Text_Owl { "An owl" }
+text Memphis_ScribesHouse_Text_Ibis { "An ibis" }
+text Memphis_ScribesHouse_Text_Water { "Water" }
+text Memphis_ScribesHouse_Text_Bread { "Bread" }
+text Memphis_ScribesHouse_Text_Reed { "A reed" }
+text Memphis_ScribesHouse_Text_Hand { "A hand" }
+text Memphis_ScribesHouse_Text_Eye { "An eye" }
+text Memphis_ScribesHouse_Text_Mouth { "A mouth" }
+
+script Memphis_ScribesHouse_EventScript_Apprentice {
+    msgbox(format("A scribe never carries anything heavier than a pen, Amenemope says.\p"
+                  "So I carry his pens. And his papyrus. And his lunch."), MSGBOX_NPC)
+}
+
+script Memphis_ScribesHouse_EventScript_Glyphs {
+    if (flag(FLAG_ICHOR_GOT_TWISTED_SPOON)) {
+        msgbox(format("Painted glyphs: an owl, water, a mouth, an eye, the sun, a basket.\p"
+                      "Now you can read three of them. The owl looks smug about it."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Painted glyphs: an owl, water, a mouth, an eye, the sun, a basket.\p"
+                      "Amenemope sets his riddles from these."), MSGBOX_SIGN)
+    }
+}
+
+script Memphis_ScribesHouse_EventScript_Ibis {
+    msgbox(format("Thoth as an ibis, white and black, on a gilt pedestal. Its beak shines where scribes touch it for luck."),
+           MSGBOX_SIGN)
+}
+
+script Memphis_ScribesHouse_EventScript_Niches {
+    msgbox(format("Papyrus rolls stacked end-on, each one tied and labelled. One label just says “DO NOT”."),
+           MSGBOX_SIGN)
+}

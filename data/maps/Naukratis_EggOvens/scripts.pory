@@ -1,1 +1,296 @@
+// The egg-ovens of Naukratis: the Oikoumene's day care. Room:
+// tools/ichor/maps/egypt_rooms.py.
+//
+// Diodorus (1.74) says the Egyptians hatched eggs in heated ovens, by hand
+// and skill, better than any hen. Neferu keeps the fires and the eggs: he is
+// vanilla's day-care man (the egg). His wife Tiy takes the Pokémon in and
+// gives them back: vanilla's day-care lady. Both run the vanilla specials,
+// as Route 117's scripts did (data/scripts/day_care.inc), with their own
+// words. Hera's blessing doubling the eggs (SYSTEMS section 3) is the egg
+// step counter's business, not this room's.
+
 mapscripts Naukratis_EggOvens_MapScripts {}
+
+text Naukratis_EggOvens_Name_Neferu { "NEFERU" }
+text Naukratis_EggOvens_Name_Tiy { "TIY" }
+
+// ---------------------------------------------------------------------------
+// Neferu: the eggs
+// ---------------------------------------------------------------------------
+
+script Naukratis_EggOvens_EventScript_Neferu {
+    lock
+    faceplayer
+    setspeaker(Naukratis_EggOvens_Name_Neferu)
+    special(GetDaycareMonNicknames)
+    specialvar(VAR_RESULT, GetDaycareState)
+    switch (var(VAR_RESULT)) {
+        case DAYCARE_EGG_WAITING:
+            goto(Naukratis_EggOvens_EventScript_EggWaiting)
+        case DAYCARE_ONE_MON:
+            msgbox(format("Your {STR_VAR_1} sleeps by the third oven. Warmest spot in Egypt.\p"
+                          "It's earned it."))
+            release
+            end
+        case DAYCARE_TWO_MONS:
+            msgbox(format("Your {STR_VAR_1} and {STR_VAR_2} are both well. I watch them the way I watch the eggs."))
+            special(SetDaycareCompatibilityString)
+            special(ShowFieldMessageStringVar4)
+            waitmessage
+            waitbuttonpress
+            release
+            end
+    }
+    msgbox(format("I'm Neferu. I keep the fires, and I turn every egg by hand.\p"
+                  "My father tested eggs against his eyelid. Too cold, too hot. I can feel it too.\p"
+                  "Tiy minds the Pokémon. Leave her two, and if they like each other, I'll have an egg for you."))
+    release
+    end
+}
+
+script Naukratis_EggOvens_EventScript_EggWaiting {
+    setspeaker(Naukratis_EggOvens_Name_Neferu)
+    msgbox(format("There you are! Your two gave us an egg. I've had it in the second oven since.\p"
+                  "You'll want it, yes?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        goto(Naukratis_EggOvens_EventScript_AcceptEgg)
+    }
+    setspeaker(Naukratis_EggOvens_Name_Neferu)
+    msgbox(format("Truly? Then I'll keep it. Last chance. Do you want it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        goto(Naukratis_EggOvens_EventScript_AcceptEgg)
+    }
+    setspeaker(Naukratis_EggOvens_Name_Neferu)
+    msgbox(format("Then it stays in the warm. Tiy will find it a home."))
+    special(RejectEggFromDayCare)
+    release
+    end
+}
+
+script Naukratis_EggOvens_EventScript_AcceptEgg {
+    specialvar(VAR_RESULT, CalculatePlayerPartyCount)
+    if (var(VAR_RESULT) == PARTY_SIZE) {
+        setspeaker(Naukratis_EggOvens_Name_Neferu)
+        msgbox(format("Your arms are full. Make room in your party and come back for it."))
+        release
+        end
+    }
+    setspeaker(SP_NAME_NONE)
+    message(format("{PLAYER} received the Egg from Neferu."))
+    playfanfare(MUS_LEVEL_UP)
+    waitfanfare
+    waitbuttonpress
+    setspeaker(Naukratis_EggOvens_Name_Neferu)
+    msgbox(format("Keep it close when you walk. It hatches faster against someone warm."))
+    special(GiveEggFromDaycare)
+    release
+    end
+}
+
+// ---------------------------------------------------------------------------
+// Tiy: the Pokémon
+// ---------------------------------------------------------------------------
+
+script Naukratis_EggOvens_EventScript_Tiy {
+    lock
+    faceplayer
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    specialvar(VAR_RESULT, GetDaycareState)
+    switch (var(VAR_RESULT)) {
+        case DAYCARE_EGG_WAITING:
+            msgbox(format("Neferu's been looking for you. Go and see him. He's grinning."))
+            release
+            end
+        case DAYCARE_ONE_MON:
+            goto(Naukratis_EggOvens_EventScript_OneMon)
+        case DAYCARE_TWO_MONS:
+            goto(Naukratis_EggOvens_EventScript_TwoMons)
+    }
+    msgbox(format("I'm Tiy. Neferu minds the eggs, and I mind everything else.\p"
+                  "Shall we keep one of your Pokémon warm for a while?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        goto(Naukratis_EggOvens_EventScript_GiveMon)
+    }
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Come back when you've a tired one."))
+    release
+    end
+}
+
+script Naukratis_EggOvens_EventScript_GiveMon {
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    specialvar(VAR_RESULT, CountPartyNonEggMons)
+    if (var(VAR_RESULT) == 1) {
+        msgbox(format("Only the one? Then it stays with you. Come back with more."))
+        release
+        end
+    }
+    specialvar(VAR_RESULT, CountPartyAliveNonEggMons)
+    if (var(VAR_RESULT) == 2) {
+        msgbox(format("Take one of those and you'd have one left standing. Catch a few more first."))
+        release
+        end
+    }
+    msgbox(format("Which one shall we keep?"))
+    chooseboxmon(SELECT_PC_MON_DAYCARE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        setspeaker(Naukratis_EggOvens_Name_Tiy)
+        msgbox(format("Another time, then."))
+        release
+        end
+    }
+    specialvar(VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot)
+    if (var(VAR_RESULT) == 0) {
+        setspeaker(Naukratis_EggOvens_Name_Tiy)
+        msgbox(format("Leave me that one, and what would you battle with? Keep it."))
+        release
+        end
+    }
+    specialvar(VAR_0x8005, GetSelectedMonNicknameAndSpecies)
+    waitse
+    playmoncry(VAR_0x8005, CRY_MODE_NORMAL)
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Your {STR_VAR_1} can sleep by the third oven. Come back for it whenever you like."))
+    waitmoncry
+    special(StoreSelectedPokemonInDaycare)
+    callnative(UpdateFollowingPokemon)
+    incrementgamestat(GAME_STAT_USED_DAYCARE)
+    specialvar(VAR_RESULT, GetDaycareState)
+    if (var(VAR_RESULT) == DAYCARE_ONE_MON) {
+        setspeaker(Naukratis_EggOvens_Name_Tiy)
+        msgbox(format("There's room by the fire for one more. Another?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            goto(Naukratis_EggOvens_EventScript_GiveMon)
+        }
+    }
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Come again."))
+    release
+    end
+}
+
+script Naukratis_EggOvens_EventScript_OneMon {
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Good to see you. Yours is eating well. Too well."))
+    setvar(VAR_0x8004, 0)
+    call(Naukratis_EggOvens_EventScript_LevelsGained)
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("There's room for one more. Another?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        goto(Naukratis_EggOvens_EventScript_GiveMon)
+    }
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Do you want yours back?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        goto(Naukratis_EggOvens_EventScript_TryRetrieve)
+    }
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Come again."))
+    release
+    end
+}
+
+script Naukratis_EggOvens_EventScript_TwoMons {
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Good to see you. Both of yours are doing well."))
+    setvar(VAR_0x8004, 0)
+    call(Naukratis_EggOvens_EventScript_LevelsGained)
+    setvar(VAR_0x8004, 1)
+    call(Naukratis_EggOvens_EventScript_LevelsGained)
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Do you want one back?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        goto(Naukratis_EggOvens_EventScript_TryRetrieve)
+    }
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Come again."))
+    release
+    end
+}
+
+script Naukratis_EggOvens_EventScript_LevelsGained {
+    specialvar(VAR_RESULT, GetNumLevelsGainedFromDaycare)
+    if (var(VAR_RESULT) != 0) {
+        setspeaker(Naukratis_EggOvens_Name_Tiy)
+        msgbox(format("Your {STR_VAR_1} has grown by {STR_VAR_2} levels while you were away."))
+    }
+    return
+}
+
+script Naukratis_EggOvens_EventScript_TryRetrieve {
+    specialvar(VAR_RESULT, CalculatePlayerPartyCount)
+    if (var(VAR_RESULT) == PARTY_SIZE) {
+        setspeaker(Naukratis_EggOvens_Name_Tiy)
+        msgbox(format("Your team is full. Make room, then come and see me."))
+        release
+        end
+    }
+    specialvar(VAR_RESULT, GetDaycareState)
+    setvar(VAR_0x8004, 0)
+    if (var(VAR_RESULT) != DAYCARE_ONE_MON) {
+        special(ShowDaycareLevelMenu)
+        copyvar(VAR_0x8004, VAR_RESULT)
+        if (var(VAR_RESULT) == DAYCARE_EXITED_LEVEL_MENU) {
+            setspeaker(Naukratis_EggOvens_Name_Tiy)
+            msgbox(format("Come again."))
+            release
+            end
+        }
+    }
+    special(GetDaycareCostAndPrepareString)
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Your {STR_VAR_1}? That'll be ¥{STR_VAR_2}, for the fuel and the feeding."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Naukratis_EggOvens_Name_Tiy)
+        msgbox(format("Come again."))
+        release
+        end
+    }
+    specialvar(VAR_RESULT, IsEnoughForCostInVar0x8005)
+    if (var(VAR_RESULT) != 1) {
+        setspeaker(Naukratis_EggOvens_Name_Tiy)
+        msgbox(format("You haven't enough. It keeps a while longer, then."))
+        release
+        end
+    }
+    applymovement(LOCALID_EGG_OVENS_TIY, Naukratis_EggOvens_Movement_Fetch)
+    waitmovement(0)
+    faceplayer
+    specialvar(VAR_RESULT, TakePokemonFromDaycare)
+    special(SubtractMoneyFromVar0x8005)
+    playse(SE_SHOP)
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Here you are. Warm as new bread."))
+    waitse
+    playmoncry(VAR_RESULT, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("{PLAYER} took back {STR_VAR_1} from Tiy."))
+    waitmoncry
+    specialvar(VAR_RESULT, GetDaycareState)
+    if (var(VAR_RESULT) == DAYCARE_ONE_MON) {
+        setspeaker(Naukratis_EggOvens_Name_Tiy)
+        msgbox(format("The other one as well?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            goto(Naukratis_EggOvens_EventScript_TryRetrieve)
+        }
+    }
+    setspeaker(Naukratis_EggOvens_Name_Tiy)
+    msgbox(format("Come again."))
+    release
+    end
+}
+
+// Tiy goes up to the ovens for it and comes back.
+movement Naukratis_EggOvens_Movement_Fetch {
+    face_up
+    walk_up * 2
+    delay_16 * 3
+    face_down
+    walk_down * 2
+}
+
+script Naukratis_EggOvens_EventScript_Oven {
+    msgbox(format("Eggs on warm straw in a mud-brick vault. Through the slot above, the fire-trough glows.\p"
+                  "It's as warm as a hen in here, and nobody has to sit on anything."), MSGBOX_SIGN)
+}

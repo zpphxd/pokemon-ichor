@@ -116,3 +116,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Troas[] = INCBIN_U16("data/tilese
 // Ichor: megaron
 const u16 gMetatiles_PorytilesManaged_Megaron[] = INCBIN_U16("data/tilesets/secondary/megaron/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Megaron[] = INCBIN_U16("data/tilesets/secondary/megaron/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: per
+const u16 gMetatiles_PorytilesManaged_Per[] = INCBIN_U16("data/tilesets/secondary/per/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Per[] = INCBIN_U16("data/tilesets/secondary/per/porytiles_bin/metatile_attributes.bin");

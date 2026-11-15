@@ -29,6 +29,8 @@ enum InGameTradeID
     // Ichor: the Oikoumene, Troad rooms (troad-rooms)
     INGAME_TRADE_ICHOR_AITHYIA, // Kymon's Cramorant, for a Pelipper (Sestos, the ferry house)
     INGAME_TRADE_ICHOR_AITHON,  // Idaios's Rapidash, for a Mudsdale (Ilion, the stable)
+    // Ichor, the Oikoumene: Egypt's rooms (tools/ichor/maps/egypt_rooms.py)
+    INGAME_TRADE_ICHOR_POIKILOS, // Lykos's Kecleon, for a Smeargle (Naukratis, the potter's house)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

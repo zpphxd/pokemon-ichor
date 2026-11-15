@@ -1,1 +1,281 @@
+// Daphne's field station, Naukratis. Room: tools/ichor/maps/egypt_rooms.py.
+//
+// Between Atlantis voyages, Daphne has rented a mud-brick house off the quay
+// (design/OIKOUMENE.md section 4.5). She wakes fossils from their items in a
+// trough of Nile silt (Diodorus 1.10: after the flood the mud makes mice by
+// itself, half-formed), and rates your Oikoumene Dex.
+//
+// Revival: givemon at level 20 (design/oikoumene/COVERAGE.md), the species
+// from the fossil; the four Galar halves revive in pairs. Nothing in the
+// vanilla scripts survives the Hoenn cut for this, so it is all here.
+
 mapscripts Naukratis_FieldStation_MapScripts {}
+
+text Naukratis_FieldStation_Name_Daphne { "DAPHNE" }
+
+script Naukratis_FieldStation_EventScript_Daphne {
+    lock
+    faceplayer
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    if (!flag(FLAG_ICHOR_MET_DAPHNE_NAUKRATIS)) {
+        msgbox(format("{PLAYER}! You found me. Mind the silt, it gets into everything.\p"
+                      "I've wanted to see Egypt since I was nine. My father kept a scarab on his desk.\p"
+                      "I used to ask it questions. Now I'm here, and everything answers back."))
+        msgbox(format("Diodorus says that after the flood, the Nile's mud makes mice all by itself.\p"
+                      "Half a mouse, still mud at the back end. I didn't believe it either.\p"
+                      "Then I put a Helix Fossil in a trough of it, kept it warm, and waited."))
+        msgbox(format("So. Bring me fossils from any dig in the Oikoumene and I'll wake them.\p"
+                      "And show me your Pokédex now and then. Out here it's the Oikoumene Dex."))
+        setflag(FLAG_ICHOR_MET_DAPHNE_NAUKRATIS)
+    }
+    goto(Naukratis_FieldStation_EventScript_DaphneMenu)
+}
+
+script Naukratis_FieldStation_EventScript_DaphneMenu {
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    message(format("What have you brought me?"))
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Naukratis_FieldStation_Text_OptionFossil,
+                   Naukratis_FieldStation_Text_OptionDex, Naukratis_FieldStation_Text_OptionNothing)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            goto(Naukratis_FieldStation_EventScript_Revive)
+        case 1:
+            goto(Naukratis_FieldStation_EventScript_RateDex)
+    }
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    msgbox(format("Just visiting? Good. Everyone should visit Egypt."))
+    release
+    end
+}
+
+text Naukratis_FieldStation_Text_OptionFossil { "A fossil" }
+text Naukratis_FieldStation_Text_OptionDex { "My Pokédex" }
+text Naukratis_FieldStation_Text_OptionNothing { "Nothing" }
+
+// ---------------------------------------------------------------------------
+// Waking a fossil. Each one in the Bag is offered in turn; YES wakes it.
+// VAR_0x8004: the fossil (VAR_0x8006 its other half, for the Galar pairs),
+// VAR_0x8005: the species it wakes as.
+// ---------------------------------------------------------------------------
+
+script Naukratis_FieldStation_EventScript_Revive {
+    setvar(VAR_0x8006, ITEM_NONE)
+    checkitem(ITEM_HELIX_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_HELIX_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_OMANYTE)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_DOME_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_DOME_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_KABUTO)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_OLD_AMBER)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_OLD_AMBER)
+        setvar(VAR_0x8005, SPECIES_AERODACTYL)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_ROOT_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_ROOT_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_LILEEP)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_CLAW_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_CLAW_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_ANORITH)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_SKULL_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_SKULL_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_CRANIDOS)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_ARMOR_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_ARMOR_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_SHIELDON)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_COVER_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_COVER_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_TIRTOUGA)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_PLUME_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_PLUME_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_ARCHEN)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_JAW_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_JAW_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_TYRUNT)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    checkitem(ITEM_SAIL_FOSSIL)
+    if (var(VAR_RESULT) == TRUE) {
+        setvar(VAR_0x8004, ITEM_SAIL_FOSSIL)
+        setvar(VAR_0x8005, SPECIES_AMAURA)
+        call(Naukratis_FieldStation_EventScript_Offer)
+    }
+    // the Galar halves, in pairs: bird or fish in front, drake or dino behind
+    setvar(VAR_0x8004, ITEM_FOSSILIZED_BIRD)
+    setvar(VAR_0x8006, ITEM_FOSSILIZED_DRAKE)
+    setvar(VAR_0x8005, SPECIES_DRACOZOLT)
+    call(Naukratis_FieldStation_EventScript_OfferPair)
+    setvar(VAR_0x8004, ITEM_FOSSILIZED_BIRD)
+    setvar(VAR_0x8006, ITEM_FOSSILIZED_DINO)
+    setvar(VAR_0x8005, SPECIES_ARCTOZOLT)
+    call(Naukratis_FieldStation_EventScript_OfferPair)
+    setvar(VAR_0x8004, ITEM_FOSSILIZED_FISH)
+    setvar(VAR_0x8006, ITEM_FOSSILIZED_DRAKE)
+    setvar(VAR_0x8005, SPECIES_DRACOVISH)
+    call(Naukratis_FieldStation_EventScript_OfferPair)
+    setvar(VAR_0x8004, ITEM_FOSSILIZED_FISH)
+    setvar(VAR_0x8006, ITEM_FOSSILIZED_DINO)
+    setvar(VAR_0x8005, SPECIES_ARCTOVISH)
+    call(Naukratis_FieldStation_EventScript_OfferPair)
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    msgbox(format("Nothing else that's old enough to wake. Alethea's Trowel will find you more.\p"
+                  "Dig wherever the ground looks turned. Fossils hide in plain sight."))
+    release
+    end
+}
+
+// One fossil in the Bag: offer it. YES wakes it and ends the script.
+script Naukratis_FieldStation_EventScript_Offer {
+    bufferitemname(STR_VAR_1, VAR_0x8004)
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    msgbox(format("Your {STR_VAR_1}? Shall I put it in the silt?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        goto(Naukratis_FieldStation_EventScript_Wake)
+    }
+    return
+}
+
+// A Galar pair: both halves must be in the Bag.
+script Naukratis_FieldStation_EventScript_OfferPair {
+    checkitem(VAR_0x8004)
+    if (var(VAR_RESULT) == FALSE) {
+        return
+    }
+    checkitem(VAR_0x8006)
+    if (var(VAR_RESULT) == FALSE) {
+        return
+    }
+    bufferitemname(STR_VAR_1, VAR_0x8004)
+    bufferitemname(STR_VAR_2, VAR_0x8006)
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    msgbox(format("A {STR_VAR_1} and a {STR_VAR_2}. They're from two different animals.\p"
+                  "The silt won't care. Shall I put them in together?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        goto(Naukratis_FieldStation_EventScript_Wake)
+    }
+    return
+}
+
+script Naukratis_FieldStation_EventScript_Wake {
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    msgbox(format("In it goes. Now we keep it warm and don't stare. It hates being stared at."))
+    closemessage
+    applymovement(LOCALID_NAUKRATIS_DAPHNE, Common_Movement_FaceLeft)
+    waitmovement(0)
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_MUD_BALL)
+    waitse
+    delay(30)
+    fadescreen(FADE_FROM_BLACK)
+    applymovement(LOCALID_NAUKRATIS_DAPHNE, Common_Movement_FaceDown)
+    waitmovement(0)
+    givemon(VAR_0x8005, 20)
+    if (var(VAR_RESULT) == MON_CANT_GIVE) {
+        setspeaker(Naukratis_FieldStation_Name_Daphne)
+        msgbox(format("It's awake, and you've nowhere to put it. Not even the Pithos.\p"
+                      "Make some room and come back. I'll keep it in the silt."))
+        release
+        end
+    }
+    copyvar(VAR_0x8007, VAR_RESULT)
+    removeitem(VAR_0x8004)
+    if (var(VAR_0x8006) != ITEM_NONE) {
+        removeitem(VAR_0x8006)
+    }
+    bufferspeciesname(STR_VAR_1, VAR_0x8005)
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    msgbox(format("There! A {STR_VAR_1}, all of it. Even the back end."))
+    playfanfare(MUS_ICHOR_OBTAIN_MON)
+    message(format("{PLAYER} received {STR_VAR_1}!"))
+    waitmessage
+    waitfanfare
+    msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        if (var(VAR_0x8007) == MON_GIVEN_TO_PARTY) {
+            call(Common_EventScript_GetGiftMonPartySlot)
+            call(Common_EventScript_NameReceivedPartyMon)
+        } else {
+            call(Common_EventScript_NameReceivedBoxMon)
+        }
+    }
+    if (var(VAR_0x8007) == MON_GIVEN_TO_PC) {
+        call(Common_EventScript_TransferredToPC)
+    }
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    msgbox(format("Twenty million years asleep. Be gentle with it for a day or two."))
+    release
+    end
+}
+
+// ---------------------------------------------------------------------------
+// The Oikoumene Dex: Daphne counts what you've caught, out of all 1,025.
+// ---------------------------------------------------------------------------
+
+script Naukratis_FieldStation_EventScript_RateDex {
+    setvar(VAR_0x8004, 1)
+    specialvar(VAR_RESULT, ScriptGetPokedexInfo)
+    buffernumberstring(STR_VAR_1, VAR_0x8006)
+    setspeaker(Naukratis_FieldStation_Name_Daphne)
+    msgbox(format("Let's see. {STR_VAR_1} kinds caught, out of every one there is."))
+    if (var(VAR_0x8006) < 200) {
+        msgbox(format("That's the Aethos Dex with a little sand on it. The Oikoumene is waiting."))
+    } elif (var(VAR_0x8006) < 400) {
+        msgbox(format("You've been ashore. Now go inland. The good ones never live near the harbor."))
+    } elif (var(VAR_0x8006) < 600) {
+        msgbox(format("More than half of my old notes are filled in already. I'm a little jealous."))
+    } elif (var(VAR_0x8006) < 800) {
+        msgbox(format("Herodotus walked half this world and wrote it all down. You're catching up."))
+    } elif (var(VAR_0x8006) < 1000) {
+        msgbox(format("At this rate the edge of the map will have to move."))
+    } elif (var(VAR_0x8006) < 1025) {
+        msgbox(format("A handful left. They're out there. Probably laughing at us."))
+    } else {
+        msgbox(format("Every one. All of them, from Aethos to Okeanos.\p"
+                      "I need to sit down. No, I need to write this down. Then sit down."))
+    }
+    release
+    end
+}
+
+script Naukratis_FieldStation_EventScript_Trough {
+    msgbox(format("A trough of black Nile silt, warm from two lamps. Something in it is coiled, and very old."),
+           MSGBOX_SIGN)
+}
+
+script Naukratis_FieldStation_EventScript_Notes {
+    msgbox(format("Daphne's notes: drawings of shells, with arrows. One says “BREATHING???”, underlined three times.\p"
+                  "Above them hangs her chart of the Oikoumene, the Nile drawn in one long hopeful line."),
+           MSGBOX_SIGN)
+}
+
+script Naukratis_FieldStation_EventScript_Crates {
+    msgbox(format("Crates of fossils, each labelled with where it was dug. Most of the labels say “OUT THERE”."),
+           MSGBOX_SIGN)
+}

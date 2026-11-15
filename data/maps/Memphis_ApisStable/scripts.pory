@@ -1,1 +1,205 @@
+// The Apis keepers', Memphis. Room: tools/ichor/maps/egypt_rooms.py.
+//
+// The Apis has died, and the god has been born again somewhere in the
+// temple herd. Herodotus (3.28) gives his marks: black, a white triangle on
+// the brow, the likeness of an eagle on the back, the hairs of the tail
+// double, and a beetle under the tongue. Six bulls stand in the stable; each
+// false one fails exactly one mark (the brown one, the first). Look them
+// over, name the god, and Pakhom checks under its tongue. The true Apis
+// (LOCALID_APIS_BULL_3) is given to you: a black Tauros (the Paldean Combat
+// breed, the herd's black bulls) with its hidden ability, and its object
+// hides on FLAG_ICHOR_FOUND_APIS.
+
 mapscripts Memphis_ApisStable_MapScripts {}
+
+text Memphis_ApisStable_Name_Pakhom { "PAKHOM" }
+
+script Memphis_ApisStable_EventScript_Keeper {
+    lock
+    faceplayer
+    setspeaker(Memphis_ApisStable_Name_Pakhom)
+    if (flag(FLAG_ICHOR_FOUND_APIS)) {
+        msgbox(format("Look after him. And if he ever stops eating, look under his tongue."))
+        release
+        end
+    }
+    msgbox(format("The Apis is dead, and the god has been born again. Somewhere in this herd.\p"
+                  "The priests know the marks. So did Herodotus, for a Greek.\p"
+                  "Black all over. A white triangle on the brow. The shape of an eagle on the back.\p"
+                  "The hairs of the tail grow double. And a beetle under the tongue, but I'll check that one.\p"
+                  "Look them over. Tell me which is the god."))
+    release
+}
+
+script Memphis_ApisStable_EventScript_Herdsman {
+    msgbox(format("Six bulls, one god, and I sweep up after all of them the same."), MSGBOX_NPC)
+}
+
+script Memphis_ApisStable_EventScript_Hesat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_MILTANK, CRY_MODE_NORMAL)
+    msgbox(format("Hesat, the cow who bore the last Apis. Herodotus says a light came down from heaven on her.\p"
+                  "She looks as if she's heard that one before."))
+    waitmoncry
+    release
+}
+
+script Memphis_ApisStable_EventScript_Window {
+    if (flag(FLAG_ICHOR_FOUND_APIS)) {
+        msgbox(format("The window of appearances stands open. Outside, Memphis is still arguing about which bull it was."),
+               MSGBOX_SIGN)
+    } else {
+        msgbox(format("The window of appearances. On feast days the Apis stands here and Memphis looks at him.\p"
+                      "It's shuttered today. Nobody knows which bull to show."), MSGBOX_SIGN)
+    }
+}
+
+// --- the herd ---------------------------------------------------------------
+
+// Describe a bull, then ask. VAR_RESULT is YES if the player names it.
+script Memphis_ApisStable_EventScript_AskApis {
+    msgbox(format("Is this the Apis?"), MSGBOX_YESNO)
+    return
+}
+
+script Memphis_ApisStable_EventScript_NotHim {
+    setspeaker(Memphis_ApisStable_Name_Pakhom)
+    msgbox(format("A fine bull. Not a god. Look again."))
+    release
+    end
+}
+
+script Memphis_ApisStable_EventScript_Bull1 {
+    lock
+    faceplayer
+    playmoncry(SPECIES_TAUROS_PALDEA_COMBAT, CRY_MODE_NORMAL)
+    msgbox(format("A black bull. On its brow, a white star with five points.\p"
+                  "On its back, a patch like an eagle. Its tail hairs grow double."))
+    waitmoncry
+    call(Memphis_ApisStable_EventScript_AskApis)
+    if (var(VAR_RESULT) == YES) {
+        setspeaker(Memphis_ApisStable_Name_Pakhom)
+        msgbox(format("A star? Count its points. The god wears a triangle."))
+        goto(Memphis_ApisStable_EventScript_NotHim)
+    }
+    release
+}
+
+script Memphis_ApisStable_EventScript_Bull2 {
+    lock
+    faceplayer
+    playmoncry(SPECIES_TAUROS_PALDEA_COMBAT, CRY_MODE_NORMAL)
+    msgbox(format("A black bull. A white triangle on its brow, an eagle on its back.\p"
+                  "Its tail hairs grow singly, one to a root."))
+    waitmoncry
+    call(Memphis_ApisStable_EventScript_AskApis)
+    if (var(VAR_RESULT) == YES) {
+        setspeaker(Memphis_ApisStable_Name_Pakhom)
+        msgbox(format("Look at its tail. One hair to a root."))
+        goto(Memphis_ApisStable_EventScript_NotHim)
+    }
+    release
+}
+
+script Memphis_ApisStable_EventScript_Bull3 {
+    lock
+    faceplayer
+    playmoncry(SPECIES_TAUROS_PALDEA_COMBAT, CRY_MODE_NORMAL)
+    msgbox(format("A black bull. A white triangle on its brow.\p"
+                  "On its back, a patch like an eagle with its wings spread. Its tail hairs grow double."))
+    waitmoncry
+    call(Memphis_ApisStable_EventScript_AskApis)
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    setspeaker(Memphis_ApisStable_Name_Pakhom)
+    msgbox(format("Hold its head. Let me see under its tongue…\p"
+                  "…A beetle. A scarab, right under the tongue.\p"
+                  "It's him. Ptah's living image, in my stable, eating my hay."))
+    msgbox(format("Twenty-five years is all the law gives an Apis. Then the priests drown him in the sacred spring.\p"
+                  "I've buried four. I won't bury this one.\p"
+                  "You found him. Take him out into the world, where the law can't follow."))
+    givemon(SPECIES_TAUROS_PALDEA_COMBAT, 60, abilityNum=2)
+    if (var(VAR_RESULT) == MON_CANT_GIVE) {
+        setspeaker(Memphis_ApisStable_Name_Pakhom)
+        msgbox(format("You've no room for a god. Make some, and come back. He'll wait."))
+        release
+        end
+    }
+    copyvar(VAR_0x8007, VAR_RESULT)
+    setflag(FLAG_ICHOR_FOUND_APIS)
+    playfanfare(MUS_ICHOR_OBTAIN_MON)
+    setspeaker(SP_NAME_NONE)
+    message(format("{PLAYER} received the Apis!"))
+    waitmessage
+    waitfanfare
+    msgbox(gText_NicknameThisPokemon, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        if (var(VAR_0x8007) == MON_GIVEN_TO_PARTY) {
+            call(Common_EventScript_GetGiftMonPartySlot)
+            call(Common_EventScript_NameReceivedPartyMon)
+        } else {
+            call(Common_EventScript_NameReceivedBoxMon)
+        }
+    }
+    if (var(VAR_0x8007) == MON_GIVEN_TO_PC) {
+        bufferspeciesname(STR_VAR_2, SPECIES_TAUROS_PALDEA_COMBAT)
+        call(Common_EventScript_TransferredToPC)
+    }
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_APIS_BULL_3)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(Memphis_ApisStable_Name_Pakhom)
+    msgbox(format("Go on, before the priests come back from lunch."))
+    release
+}
+
+script Memphis_ApisStable_EventScript_Bull4 {
+    lock
+    faceplayer
+    playmoncry(SPECIES_TAUROS, CRY_MODE_NORMAL)
+    msgbox(format("A brown bull. A white triangle on its brow, an eagle on its back, the tail hairs double.\p"
+                  "Every mark but one."))
+    waitmoncry
+    call(Memphis_ApisStable_EventScript_AskApis)
+    if (var(VAR_RESULT) == YES) {
+        setspeaker(Memphis_ApisStable_Name_Pakhom)
+        msgbox(format("Brown. The god is black. That's the first mark, and the easiest."))
+        goto(Memphis_ApisStable_EventScript_NotHim)
+    }
+    release
+}
+
+script Memphis_ApisStable_EventScript_Bull5 {
+    lock
+    faceplayer
+    playmoncry(SPECIES_TAUROS_PALDEA_COMBAT, CRY_MODE_NORMAL)
+    msgbox(format("A black bull. A white triangle on its brow, its tail hairs double.\p"
+                  "Its back is plain black, from shoulder to tail."))
+    waitmoncry
+    call(Memphis_ApisStable_EventScript_AskApis)
+    if (var(VAR_RESULT) == YES) {
+        setspeaker(Memphis_ApisStable_Name_Pakhom)
+        msgbox(format("And where's the eagle? Plain black, all down its back."))
+        goto(Memphis_ApisStable_EventScript_NotHim)
+    }
+    release
+}
+
+script Memphis_ApisStable_EventScript_Bull6 {
+    lock
+    faceplayer
+    playmoncry(SPECIES_TAUROS_PALDEA_COMBAT, CRY_MODE_NORMAL)
+    msgbox(format("A black bull. A white crescent on its brow, like a new moon.\p"
+                  "An eagle on its back, its tail hairs double."))
+    waitmoncry
+    call(Memphis_ApisStable_EventScript_AskApis)
+    if (var(VAR_RESULT) == YES) {
+        setspeaker(Memphis_ApisStable_Name_Pakhom)
+        msgbox(format("A crescent. Pretty, but the moon's bull is in another temple."))
+        goto(Memphis_ApisStable_EventScript_NotHim)
+    }
+    release
+}

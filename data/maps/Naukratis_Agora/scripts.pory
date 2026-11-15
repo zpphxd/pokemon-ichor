@@ -1,1 +1,46 @@
+// The Agora of Naukratis: the emporion's hall, where Greek wine and oil come
+// in and Egyptian grain and linen go out. Room: tools/ichor/maps/egypt_rooms.py.
+// Charaxos of Lesbos keeps the stall (Herodotus 2.135 has him trading wine
+// here; his sister Sappho wrote poems about how he spent it).
+
 mapscripts Naukratis_Agora_MapScripts {}
+
+text Naukratis_Agora_Name_Charaxos { "CHARAXOS" }
+
+script Naukratis_Agora_EventScript_Stallkeeper {
+    lock
+    faceplayer
+    setspeaker(Naukratis_Agora_Name_Charaxos)
+    msgbox(format("Lesbian wine, Chian wine, Egyptian beer. And everything a Trainer needs, at harbor prices."))
+    pokemart(Naukratis_Agora_Mart)
+    setspeaker(Naukratis_Agora_Name_Charaxos)
+    msgbox(format("My sister writes poems about how I spend my money. Don't end up in one."))
+    release
+}
+
+mart Naukratis_Agora_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_NET_BALL
+    ITEM_DIVE_BALL
+    ITEM_HYPER_POTION
+    ITEM_MAX_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_ESCAPE_ROPE
+}
+
+script Naukratis_Agora_EventScript_Trader {
+    msgbox(format("Chios sends wine, Egypt sends grain, and everyone sails home thinking they won.\p"
+                  "That's trade."), MSGBOX_NPC)
+}
+
+script Naukratis_Agora_EventScript_Porter {
+    msgbox(format("Every sack of emmer goes onto a Greek ship. Every Greek ship comes back with silver.\p"
+                  "I just carry the sacks."), MSGBOX_NPC)
+}
+
+script Naukratis_Agora_EventScript_Amphorae {
+    msgbox(format("Wine amphorae from Chios, each stamped with a sphinx. That's Chios's mark, not Egypt's."),
+           MSGBOX_SIGN)
+}

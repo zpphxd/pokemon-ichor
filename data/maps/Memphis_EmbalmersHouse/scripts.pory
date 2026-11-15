@@ -1,1 +1,61 @@
+// The embalmer's house, Memphis. Room: tools/ichor/maps/egypt_rooms.py.
+//
+// Khay is out of linen. His sister Merit weaves it at the Naukratis net-loft
+// and sends a bolt upriver with you (FLAG_ICHOR_GOT_LINEN); delivered, he
+// gives you a Reaper Cloth (FLAG_ICHOR_GOT_REAPER_CLOTH).
+
 mapscripts Memphis_EmbalmersHouse_MapScripts {}
+
+text Memphis_EmbalmersHouse_Name_Khay { "KHAY" }
+
+script Memphis_EmbalmersHouse_EventScript_Khay {
+    lock
+    faceplayer
+    setspeaker(Memphis_EmbalmersHouse_Name_Khay)
+    if (flag(FLAG_ICHOR_GOT_REAPER_CLOTH)) {
+        msgbox(format("Seventy days, a proper burial takes. Forty of them in natron.\p"
+                      "Thirty years at this, and I still count every one."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_GOT_LINEN)) {
+        msgbox(format("Mind the natron. It gets everywhere, and it dries you out.\p"
+                      "I'm out of linen. A proper wrapping takes a whole field of flax.\p"
+                      "My sister weaves the best in Naukratis, and she's slower than the flood."))
+        release
+        end
+    }
+    msgbox(format("Is that Merit's weave? Give it here.\p"
+                  "…She says it's the good weave. She always says that.\p"
+                  "…It is the good weave. Don't tell her."))
+    msgbox(format("Here. This came off an old priest's Dusclops. It wouldn't stay buried.\p"
+                  "Take it. It gives me the shivers, and I work with the dead."))
+    giveitem(ITEM_REAPER_CLOTH)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_REAPER_CLOTH)
+    }
+    release
+}
+
+script Memphis_EmbalmersHouse_EventScript_Bundle {
+    msgbox(format("A small bundle wrapped in fine linen, a cat's face painted on it.\p"
+                  "The family paid extra for the whiskers."), MSGBOX_SIGN)
+}
+
+script Memphis_EmbalmersHouse_EventScript_Canopic {
+    msgbox(format("Canopic jars. Their lids are the four sons of Horus: a man, a baboon, a jackal and a falcon."),
+           MSGBOX_SIGN)
+}
+
+script Memphis_EmbalmersHouse_EventScript_Anubis {
+    msgbox(format("The jackal mask of Anubis. Khay wears it for the rites, when the family is watching."),
+           MSGBOX_SIGN)
+}
+
+script Memphis_EmbalmersHouse_EventScript_Linen {
+    if (flag(FLAG_ICHOR_GOT_REAPER_CLOTH)) {
+        msgbox(format("Rolls of bandage linen, with a fresh bolt of Merit's on top."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Rolls of bandage linen. There aren't many left."), MSGBOX_SIGN)
+    }
+}
