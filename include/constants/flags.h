@@ -944,16 +944,16 @@
 #define FLAG_UNUSED_0x37D                                           0x37D // Unused Flag
 #define FLAG_UNUSED_0x37E                                           0x37E // Unused Flag
 #define FLAG_UNUSED_0x37F                                           0x37F // Unused Flag
-#define FLAG_UNUSED_0x380                                           0x380 // Unused Flag
-#define FLAG_UNUSED_0x381                                           0x381 // Unused Flag
-#define FLAG_UNUSED_0x382                                           0x382 // Unused Flag
-#define FLAG_UNUSED_0x383                                           0x383 // Unused Flag
-#define FLAG_UNUSED_0x384                                           0x384 // Unused Flag
-#define FLAG_UNUSED_0x385                                           0x385 // Unused Flag
-#define FLAG_UNUSED_0x386                                           0x386 // Unused Flag
-#define FLAG_UNUSED_0x387                                           0x387 // Unused Flag
-#define FLAG_UNUSED_0x388                                           0x388 // Unused Flag
-#define FLAG_UNUSED_0x389                                           0x389 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_FOAM_ROAD_ETHER                           0x380 // Ichor: Foam Road hidden item: Ether behind the great herm
+#define FLAG_ICHOR_HIDDEN_FOAM_ROAD_HEART_SCALE                     0x381 // Ichor: Foam Road hidden item: Heart Scale in the Horn's cliff-top meadow
+#define FLAG_ICHOR_HIDDEN_FOAM_ROAD_NET_BALL                        0x382 // Ichor: Foam Road hidden item: Net Ball on the rock past Amphitos's jetty
+#define FLAG_ICHOR_HIDDEN_FOAM_ROAD_STARDUST                        0x383 // Ichor: Foam Road hidden item: Stardust in the cove under the east wood
+#define FLAG_ICHOR_HIDDEN_ECHO_CAVES_HEART_SCALE                    0x384 // Ichor: Echo's caves hidden item: Heart Scale at the dark gallery's end
+#define FLAG_ICHOR_HIDDEN_PAPHIA_ULTRA_BALL                         0x385 // Ichor: Paphia hidden item: Ultra Ball behind the dovecote
+#define FLAG_ICHOR_HIDDEN_PAPHIA_PEARL                              0x386 // Ichor: Paphia hidden item: Pearl under the mirror by the jetty
+#define FLAG_ICHOR_HIDDEN_NERAIDA_MYSTIC_WATER                      0x387 // Ichor: Neraida falls hidden item: Mystic Water in the mill-race
+#define FLAG_ICHOR_HIDDEN_NERAIDA_PEARL                             0x388 // Ichor: Neraida falls hidden item: Pearl behind the shrine's basin
+#define FLAG_ICHOR_HIDDEN_KALLIRHOE_REVIVE                          0x389 // Ichor: Spring of Kallirhoe hidden item: Revive in the nook under the cave rock
 #define FLAG_UNUSED_0x38A                                           0x38A // Unused Flag
 #define FLAG_UNUSED_0x38B                                           0x38B // Unused Flag
 #define FLAG_UNUSED_0x38C                                           0x38C // Unused Flag
@@ -1793,6 +1793,7 @@
 #define FLAG_ICHOR_ITEM_NERAIDA_MAX_REPEL       (FLAG_ICHOR_GENERAL_START + 0x25C) // Ichor: Neraida falls: the jar on the top terrace
 #define FLAG_ICHOR_ITEM_NERAIDA_PROTEIN         (FLAG_ICHOR_GENERAL_START + 0x25D) // Ichor: Neraida falls: the Protein on a rock in the upper pool
 #define FLAG_ICHOR_KRENAIA_TOLD                 (FLAG_ICHOR_GENERAL_START + 0x25E) // Ichor: Neraida falls: Krenaia told the laureled player about the silent falls and the horn (beat III-1H)
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_PEARL_STRING  (FLAG_ICHOR_GENERAL_START + 0x260) // Ichor: Foam Road item ball: Pearl String on the islet
 #define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL_START + 0x280) // Ichor: world-act3: Daedalus gives the Master Ball in the workshop, Labyrinth Scene D
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)

@@ -4355,6 +4355,41 @@ TILESETS = {
      "XD"
     ]
    },
+   "flags": {
+    "ground": {},
+    "h": 1,
+    "ids": [
+     [
+      824,
+      825,
+      826,
+      827
+     ]
+    ],
+    "names": {
+     "A": [
+      0,
+      0
+     ],
+     "B": [
+      1,
+      0
+     ],
+     "C": [
+      2,
+      0
+     ],
+     "worn": [
+      3,
+      0
+     ]
+    },
+    "section": "harbor",
+    "w": 4,
+    "walk": [
+     "...."
+    ]
+   },
    "flowers": {
     "ground": {
      "0,0": "grass",
@@ -4399,6 +4434,40 @@ TILESETS = {
     "w": 5,
     "walk": [
      "XXX.."
+    ]
+   },
+   "gear": {
+    "ground": {
+     "0,0": "path",
+     "1,0": "path",
+     "2,0": "path"
+    },
+    "h": 1,
+    "ids": [
+     [
+      818,
+      819,
+      820
+     ]
+    ],
+    "names": {
+     "amphorae": [
+      1,
+      0
+     ],
+     "crate": [
+      2,
+      0
+     ],
+     "nets": [
+      0,
+      0
+     ]
+    },
+    "section": "harbor",
+    "w": 3,
+    "walk": [
+     "XXX"
     ]
    },
    "great_stair": {
@@ -4717,6 +4786,58 @@ TILESETS = {
      "XXXXXX"
     ]
    },
+   "marble": {
+    "ground": {
+     "0,0": "path",
+     "1,0": "path",
+     "2,0": "path",
+     "3,0": "path",
+     "4,0": "path",
+     "5,0": "grass"
+    },
+    "h": 1,
+    "ids": [
+     [
+      736,
+      737,
+      738,
+      739,
+      740,
+      741
+     ]
+    ],
+    "names": {
+     "block": [
+      0,
+      0
+     ],
+     "blocks": [
+      1,
+      0
+     ],
+     "chips_grass": [
+      5,
+      0
+     ],
+     "drum_fallen": [
+      3,
+      0
+     ],
+     "drum_fallen_R": [
+      4,
+      0
+     ],
+     "drum_up": [
+      2,
+      0
+     ]
+    },
+    "section": "land",
+    "w": 6,
+    "walk": [
+     "XX.XX."
+    ]
+   },
    "myrtle": {
     "ground": {
      "0,0": "grass",
@@ -4779,6 +4900,73 @@ TILESETS = {
     "w": 8,
     "walk": [
      "XXXXXXXX"
+    ]
+   },
+   "props": {
+    "ground": {
+     "0,0": "path",
+     "0,1": "path",
+     "1,0": "grass",
+     "1,1": "grass",
+     "2,0": "path",
+     "2,1": "path",
+     "3,0": "path",
+     "3,1": "path"
+    },
+    "h": 2,
+    "ids": [
+     [
+      555,
+      556,
+      557,
+      558
+     ],
+     [
+      563,
+      564,
+      565,
+      566
+     ]
+    ],
+    "names": {
+     "stall_BL": [
+      2,
+      1
+     ],
+     "stall_BR": [
+      3,
+      1
+     ],
+     "stall_TL": [
+      2,
+      0
+     ],
+     "stall_TR": [
+      3,
+      0
+     ],
+     "statue": [
+      0,
+      0
+     ],
+     "statue_base": [
+      0,
+      1
+     ],
+     "statue_g": [
+      1,
+      0
+     ],
+     "statue_g_base": [
+      1,
+      1
+     ]
+    },
+    "section": "town",
+    "w": 4,
+    "walk": [
+     "TTXX",
+     "XXXX"
     ]
    },
    "quay": {

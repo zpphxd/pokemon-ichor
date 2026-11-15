@@ -65,7 +65,7 @@ hints.
 | bronze | Bronze mirrors, the harbor shrine's dove, the great herm, the Minoan vault door |
 | melos | Melos's obsidian slope on its earth and grass |
 
-**Tile budget.** 414 of 504 tiles (376 metatiles). The door animations copy their
+**Tile budget.** 488 of 504 tiles (376 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 
@@ -231,6 +231,27 @@ ids                                      walk
 | 0x26C | `chips` | `.` | `MB_NORMAL` | COVERED | path |
 | 0x26D | `hoist_foot` | `X` | `MB_NORMAL` | COVERED | path |
 
+### Statues and a market stall
+
+`props`, 4 wide by 2 tall. Paphia's agora and gardens. `statue` over `statue_base`: the goddess in white marble on a square plinth, her top drawn over the player (on borrowed path; `statue_g` / `statue_g_base` stand on grass). `stall_TL` `stall_TR` over `stall_BL` `stall_BR`: a market stall, a striped awning on poles over a counter of amphorae, fish and apples (on borrowed path). All impassable but the statues' tops.
+
+```text
+ids                          walk
+0x22B 0x22C 0x22D 0x22E   T T X X
+0x233 0x234 0x235 0x236   X X X X
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x22B | `statue` | `T` | `MB_NORMAL` | SPLIT | path |
+| 0x22C | `statue_g` | `T` | `MB_NORMAL` | SPLIT | grass |
+| 0x22D | `stall_TL` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x22E | `stall_TR` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x233 | `statue_base` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x234 | `statue_g_base` | `X` | `MB_NORMAL` | COVERED | grass |
+| 0x235 | `stall_BL` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x236 | `stall_BR` | `X` | `MB_NORMAL` | COVERED | path |
+
 ### House fronts
 
 Every house is a home (MAP_DESIGN.md §2), so each front has a door. These are arrangements of the `house` kit's parts and cost no metatiles of their own; mix the parts for more. Walk: every house cell is `X` except its door (`D`).
@@ -357,6 +378,24 @@ ids                                            walk
 | 0x2DD | `top_niche` | `.` | `MB_NORMAL` | COVERED | grass |
 | 0x2DE | `top_spout` | `.` | `MB_NORMAL` | COVERED | grass |
 
+### The rose-marble quarry and the column drums
+
+`marble`, 6 wide by 1 tall. Marble for the sculptors' yard (the quarry's pieces, see `TILES_kythera.md`): `block` and `blocks` (on borrowed path), a column `drum_up` (walkable) and a fallen one, `drum_fallen` + `drum_fallen_R`, and `chips_grass` (chips on grass, walkable).
+
+```text
+ids                                      walk
+0x2E0 0x2E1 0x2E2 0x2E3 0x2E4 0x2E5   X X . X X .
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x2E0 | `block` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x2E1 | `blocks` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x2E2 | `drum_up` | `.` | `MB_NORMAL` | COVERED | path |
+| 0x2E3 | `drum_fallen` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x2E4 | `drum_fallen_R` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x2E5 | `chips_grass` | `.` | `MB_NORMAL` | COVERED | grass |
+
 ## The harbor
 
 ### The curved stone quay
@@ -432,6 +471,37 @@ ids                                      walk
 | 0x32D | (3, 1) | `X` | `MB_NORMAL` | COVERED | sand |
 | 0x32E | (4, 1) | `X` | `MB_NORMAL` | COVERED | sand |
 | 0x32F | (5, 1) | `X` | `MB_NORMAL` | COVERED | sand |
+
+### The harbor's gear
+
+`gear`, 3 wide by 1 tall. The fishers' gear, on borrowed path (see `TILES_skandeia.md`): `nets` with floats, a rack of `amphorae`, a fish `crate`.
+
+```text
+ids                    walk
+0x332 0x333 0x334   X X X
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x332 | `nets` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x333 | `amphorae` | `X` | `MB_NORMAL` | COVERED | path |
+| 0x334 | `crate` | `X` | `MB_NORMAL` | COVERED | path |
+
+### Quay flagstones
+
+`flags`, 4 wide by 1 tall. Dressed limestone flags for Paphia's main street and the temple's forecourt (Skandeia's quay paving): lay `A`, `B` and `C` in a staggered mix, with a `worn` slab here and there. Walkable; they meet aethos's limestone path softly.
+
+```text
+ids                          walk
+0x338 0x339 0x33A 0x33B   . . . .
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x338 | `A` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x339 | `B` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x33A | `C` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x33B | `worn` | `.` | `MB_NORMAL` | COVERED |  |
 
 ## The coast
 

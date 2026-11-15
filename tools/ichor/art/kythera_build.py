@@ -196,7 +196,8 @@ def spec(name):
                                          "door_arch", "door_white", "mirror", "mirror_dim",
                                          "G_shell", "pot_rose", "G_bench", "G_window"],
                                  w=6, key="house", notes=house.notes),
-                          by["dovecote"], by["great_stair"], by["temple_front"], by["sculptors"]]),
+                          by["dovecote"], by["great_stair"], by["temple_front"], by["sculptors"],
+                          by["props"]]),
                 ("land", [K.pick(hedge, ["L", "M", "R", "single", "bush", "T", "V", "B"], key="myrtle",
                                  notes="Myrtle on borrowed grass: a run `L` `M` `R`, north-south `T` "
                                        "`V` `B`, a `single` clump and a smaller round `bush`. "
@@ -212,12 +213,28 @@ def spec(name):
                                        "player, over `apple_BL` `apple_BR`, impassable), hung with "
                                        "red apples. `gold_L` `gold_R` are the crown's top row in "
                                        "golden blossom, to swap over an apple's top row."),
-                          by["terrace"]]),
+                          by["terrace"],
+                          K.pick(by["_quarry_all"], ["block", "blocks", "drum_up", "drum_fallen",
+                                                     "drum_fallen_R", "chips_grass"],
+                                 w=6, key="marble",
+                                 notes="Marble for the sculptors' yard (the quarry's pieces, see "
+                                       "`TILES_kythera.md`): `block` and `blocks` (on borrowed path), "
+                                       "a column `drum_up` (walkable) and a fallen one, `drum_fallen` + "
+                                       "`drum_fallen_R`, and `chips_grass` (chips on grass, walkable).")]),
                 ("harbor", [K.pick(by["quay"], ["S", "N", "E", "W", "out_SE", "out_SW", "out_NE",
                                                 "out_NW", "in_SE", "in_SW", "in_NE", "in_NW",
                                                 "steps_S", "steps_E", "S_plank"], w=8, key="quay",
                                    notes=by["quay"].notes),
-                            by["honey_boat"], by["kaiki"]]),
+                            by["honey_boat"], by["kaiki"],
+                            K.pick(by["gear"], ["nets", "amphorae", "crate"],
+                                   key="gear",
+                                   notes="The fishers' gear, on borrowed path (see `TILES_skandeia.md`): "
+                                         "`nets` with floats, a rack of `amphorae`, a fish `crate`."),
+                            K.pick(by["flags"], ["A", "B", "C", "worn"], key="flags",
+                                   notes="Dressed limestone flags for Paphia's main street and the "
+                                         "temple's forecourt (Skandeia's quay paving): lay `A`, `B` and "
+                                         "`C` in a staggered mix, with a `worn` slab here and there. Walkable; they meet aethos's limestone path "
+                                         "softly.")]),
                 ("coast", [K.pick(by["surf"], ["S", "S2", "N", "E", "W", "out_NW", "out_NE",
                                                "out_SW", "out_SE", "in_SE", "in_SW", "in_NE",
                                                "in_NW"], w=8, key="surf", notes=by["surf"].notes),

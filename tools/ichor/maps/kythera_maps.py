@@ -90,6 +90,12 @@ LEDGES = {"MB_JUMP_SOUTH": (0, 1), "MB_JUMP_NORTH": (0, -1), "MB_JUMP_EAST": (1,
 DIRS4 = ((0, -1), (1, 0), (0, 1), (-1, 0))
 
 
+def _hash(x, y, salt=0):
+    h = (x * 73856093) ^ (y * 19349663) ^ (salt * 83492791)
+    h = (h ^ (h >> 13)) * 1274126177 & 0xFFFFFFFF
+    return (h ^ (h >> 16)) % 1000
+
+
 def _attrs(path):
     return np.fromfile(ROOT / path, "<u2")
 
@@ -218,14 +224,16 @@ class Map:
                 h = "L" if x == x0 else ("R" if x == x1 else "")
                 self.set(x, y, kit[(v + h) or "C"], False)
 
-    def path(self, cells, kit=A.PATCH):
+    def path(self, cells, kit=A.PATCH, context=()):
         """A worn path over any set of cells: each takes the patch kit's edge or
         corner by which of its four neighbours are path too, so a path can bend,
-        narrow and widen instead of being a rectangle."""
+        narrow and widen instead of being a rectangle. Cells in `context` (paving,
+        a stall standing in a square) count as path for the edges but aren't drawn."""
         cells = set(cells)
+        near = cells | set(context)
         for (x, y) in cells:
-            n, s_ = (x, y - 1) in cells, (x, y + 1) in cells
-            w, e = (x - 1, y) in cells, (x + 1, y) in cells
+            n, s_ = (x, y - 1) in near, (x, y + 1) in near
+            w, e = (x - 1, y) in near, (x + 1, y) in near
             v = "" if (n and s_) or (not n and not s_) else ("T" if not n else "B")
             h = "" if (w and e) or (not w and not e) else ("L" if not w else "R")
             self.set(x, y, kit[(v + h) or "C"], False)
@@ -264,6 +272,183 @@ class Map:
             for i, m in enumerate(r):
                 if m is not None:
                     self.set(x + i, y + j, m, solid)
+
+    # --- shaped ground (the critique passes' tools) ---------------------------------------
+    @staticmethod
+    def shape_key(inside, x, y):
+        """The soft-edge kit's key for (x, y): '1|' then N NE E SE S SW W NW, a
+        diagonal counting only when both of its sides are in (kythera_lib.blob_key)."""
+        b = [int(bool(inside(x + dx, y + dy))) for dx, dy in
+             ((0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1))]
+        for d, (a, c) in ((1, (0, 2)), (3, (2, 4)), (5, (4, 6)), (7, (6, 0))):
+            if not (b[a] and b[c]):
+                b[d] = 0
+        return "1|" + "".join(str(v) for v in b)
+
+    def tallgrass(self, cells, key="seagrass", walls_in=True):
+        """Tall grass over a set of cells with a soft outline. Where the patch
+        meets a wall (anything already solid, or the map's edge) it runs full to
+        it, the way grass grows into a hedge's foot; on open ground it rounds off."""
+        cells = set(cells)
+        solid_before = self.solid.copy()
+
+        def inside(x, y):
+            if (x, y) in cells:
+                return True
+            if not self.ok(x, y):
+                return walls_in
+            return walls_in and bool(solid_before[y, x])
+        s = self.s(key)
+        for (x, y) in cells:
+            cx, cy = s["names"][self.shape_key(inside, x, y)]
+            self.set(x, y, s["ids"][cy][cx], False)
+
+    def coast(self, sea, key="surf", edge_sea=True, draw=None):
+        """The waterline round a set of sea cells: every sea cell beside land (any
+        cell not in `sea`) takes the surf kit's piece for where the land is, so
+        grass, path or sand all meet the foam. Off-map counts as sea if edge_sea.
+        Only the cells in `draw` (default: all of `sea`) are drawn."""
+        sea = set(sea)
+        draw = sea if draw is None else set(draw) & sea
+
+        def land(x, y):
+            if not self.ok(x, y):
+                return not edge_sea
+            return (x, y) not in sea
+        names = self.s(key)["names"]
+        for (x, y) in draw:
+            n, s_, e, w = land(x, y - 1), land(x, y + 1), land(x + 1, y), land(x - 1, y)
+            ne, nw, se, sw = land(x + 1, y - 1), land(x - 1, y - 1), land(x + 1, y + 1), land(x - 1, y + 1)
+            name = ("in_SE" if n and w else "in_SW" if n and e else "in_NE" if s_ and w else
+                    "in_NW" if s_ and e else "S" if n else "N" if s_ else "E" if w else "W" if e else
+                    "out_NW" if nw else "out_NE" if ne else "out_SW" if sw else "out_SE" if se else None)
+            if name == "S" and (x * 7 + y * 3) % 5 == 0 and "S2" in names:
+                name = "S2"
+            if name:
+                self.piece(key, name, x, y)
+            else:
+                self.set(x, y, A.SEA, False)
+
+    def hedge(self, cells, key="myrtle"):
+        """A myrtle hedge over any set of cells, each piece chosen by which of its
+        four neighbours are hedge too (runs, turns, ends, lone clumps)."""
+        cells = set(cells)
+        names = self.s(key)["names"]
+        piece = {(0, 1, 0, 1): "M", (1, 0, 1, 0): "V", (0, 1, 0, 0): "L", (0, 0, 0, 1): "R",
+                 (0, 0, 1, 0): "T", (1, 0, 0, 0): "B", (0, 1, 1, 0): "NW", (0, 0, 1, 1): "NE",
+                 (1, 1, 0, 0): "SW", (1, 0, 0, 1): "SE", (0, 0, 0, 0): "single"}
+        for (x, y) in cells:
+            k = tuple(int(c in cells) for c in ((x, y - 1), (x + 1, y), (x, y + 1), (x - 1, y)))
+            name = piece.get(k) or ("M" if k[1] and k[3] else "V")
+            if name not in names:
+                name = {"NW": "L", "SW": "L", "NE": "R", "SE": "R", "T": "single", "B": "single"}.get(name, "M")
+                if name not in names:
+                    name = "M"
+            if name == "M" and "M2" in names and (x * 7 + y) % 5 == 0:
+                name = "M2"
+            self.piece(key, name, x, y)
+
+    def woods(self, free, salt=0, aethos_only=lambda x, y: False, singles=None, big=(), from_bottom=False):
+        """Fill `free` with an uneven wood: 2x2 trees (olives, the odd stone pine,
+        and any `big` (key, w, h, chance) pieces) placed in a shuffled order so no
+        two rows line up, cypresses in the gaps they leave, then the last single
+        cells from `singles` (kythera pieces; shaded grass, blocked, in aethos-only
+        strips). Returns the cells it filled."""
+        free = set(free)
+        filled = set(free)
+        # top-down, west to east, so crowns stack; now and then a spot is skipped so
+        # the next tree lands a cell over and the rows never settle into a grid
+        # (from_bottom: bottom-up instead, so a wood against the map's top edge ends
+        # in whole trees along its foot and leaves its odd cells along the edge)
+        order = sorted(free, key=lambda c: ((-c[1] if from_bottom else c[1]), c[0]))
+        for (x, y) in order:
+            if (x, y) not in free:
+                continue
+            if from_bottom:
+                y -= 1
+                if not all(c in free for c in ((x, y), (x + 1, y), (x, y + 1), (x + 1, y + 1))):
+                    continue
+            placed = False
+            for (bk, bw, bh, chance) in big:
+                cells = {(x + i, y + j) for i in range(bw) for j in range(bh)}
+                if cells <= free and _hash(x, y, salt + 9) < chance and not any(aethos_only(*c) for c in cells):
+                    self.put(bk, x, y)
+                    free -= cells
+                    placed = True
+                    break
+            if placed:
+                continue
+            cells = [(x, y), (x + 1, y), (x, y + 1), (x + 1, y + 1)]
+            if not all(c in free for c in cells) or _hash(x, y, salt + 5) < 110:
+                continue
+            r = _hash(x, y, salt + 1)
+            if r < 150:
+                self.pine(x, y)
+            elif r < 230:
+                self.cypress(x, y)
+                self.cypress(x + 1, y)
+            else:
+                self.olive(x, y)
+            free -= set(cells)
+        for (x, y) in sorted(free, key=lambda c: (c[1], c[0])):
+            if (x, y) in free and (x, y + 1) in free:
+                self.cypress(x, y)
+                free -= {(x, y), (x, y + 1)}
+        singles = singles if singles is not None else [("myrtle", "bush"), ("myrtle", "bush"), ("flowers", "briar"),
+                                                        ("myrtle", "single")]
+        for (x, y) in sorted(free):
+            if aethos_only(x, y) or not singles:
+                # a gap between the trunks, closed
+                self.set(x, y, A.GRASS, True)
+                continue
+            k, n = singles[_hash(x, y, salt + 3) % len(singles)]
+            self.piece(k, n, x, y, solid=True)
+        return filled
+
+    def sand_rim(self, cells, grassy):
+        """Soften where sand meets grass: each sand cell in `cells` with grass
+        (`grassy(x, y)`) beside it takes aethos's sand-pit rim on those sides."""
+        for (x, y) in cells:
+            n, s_, w, e = grassy(x, y - 1), grassy(x, y + 1), grassy(x - 1, y), grassy(x + 1, y)
+            v = "T" if n and not s_ else ("B" if s_ and not n else "")
+            h = "L" if w and not e else ("R" if e and not w else "")
+            if v or h:
+                self.set(x, y, A.SAND_GRASS[v + h], False)
+
+    def hidden(self, x, y, item, flag):
+        self.bgs.append({"type": "hidden_item", "x": x, "y": y, "elevation": 3, "item": item, "flag": flag})
+
+    def min_grass(self, starts, goals, extra=()):
+        """The fewest tall-grass steps on any walk from `starts` to any of `goals`
+        (0-1 BFS, ledges one way): a forced band of depth n needs this >= n."""
+        goals = set(goals)
+        best = {s: 0 for s in starts}
+        dq = deque((0, s) for s in starts)
+        while dq:
+            d, (x, y) = dq.popleft()
+            if d > best.get((x, y), 1 << 30):
+                continue
+            if (x, y) in goals:
+                return d
+            for dx, dy in DIRS4:
+                nx, ny = x + dx, y + dy
+                if not self.ok(nx, ny):
+                    continue
+                b = self.behavior(int(self.mid[ny, nx]))
+                if b in LEDGES:
+                    lx, ly = LEDGES[b]
+                    if (lx, ly) != (dx, dy) and not (ly == 1 and (dx, dy) == (0, 1)):
+                        continue
+                    nx, ny = nx + dx, ny + dy
+                    if not self.walkable(nx, ny, extra):
+                        continue
+                elif not self.walkable(nx, ny, extra):
+                    continue
+                nd = d + (self.behavior(int(self.mid[ny, nx])) == "MB_TALL_GRASS")
+                if nd < best.get((nx, ny), 1 << 30):
+                    best[(nx, ny)] = nd
+                    (dq.appendleft if nd == d else dq.append)((nd, (nx, ny)))
+        return None
 
     # --- events ---------------------------------------------------------------------------
     def obj(self, gfx, x, y, script, move="MOVEMENT_TYPE_FACE_DOWN", flag="0", trainer=False, sight=0,
