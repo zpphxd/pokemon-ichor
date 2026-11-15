@@ -381,6 +381,20 @@
       "map": "MAP_KALLISTE_ROUTE1",
       "x": 14,
       "y": 21
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_KYTHERA_FOAM_ROAD",
+      "map": "MAP_KYTHERA_FOAM_ROAD",
+      "x": 43,
+      "y": 7
+    },
+    {
+      "id": "HEAL_LOCATION_KYTHERA_PAPHIA",
+      "map": "MAP_KYTHERA_PAPHIA",
+      "x": 0,
+      "y": 0,
+      "respawn_map": "MAP_KYTHERA_PAPHIA_ASCLEPEION",
+      "respawn_npc": "LOCALID_PAPHIA_HEALER"
     }
   ]
 }

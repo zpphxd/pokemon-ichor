@@ -9789,8 +9789,8 @@
     {
       "id": "LAYOUT_KYTHERA_PAPHIA",
       "name": "KytheraPaphia_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 44,
+      "height": 34,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Paphia",
       "border_filepath": "data/layouts/KytheraPaphia/border.bin",

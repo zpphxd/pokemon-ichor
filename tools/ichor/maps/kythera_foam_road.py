@@ -299,7 +299,7 @@ def events(m):
 
     # Aphrodite's rock: Alethea's scene, where the cutting opens onto the beach
     for x, y in ROCK_TRIGGER:
-        m.trigger(x, y, P + "AletheaRock")
+        m.trigger(x, y, P + "AletheaRock", var="VAR_TEMP_0", value=1)
 
     # connections
     m.connect("up", STAIR[0] - SPRING_OPENING_X, "MAP_KYTHERA_SPRING_OF_KALLIRHOE")

@@ -62,7 +62,12 @@
 // the post-game's land routes, after HERM_COUNT
 #define HERM_AETHOS_ROUTE_31        23
 #define HERM_AETHOS_ROUTE_32        24
-#define HERM_MAX                    32  // the flag range's size
+// Ichor: world-act3: Kythera's great herm at the Foam Road's fork (SCRIPT.md
+// III-1D, FLAG_ICHOR_HERM_KYTHERA). Kythera isn't an AETHOS_MAP route, so it sits
+// outside HERM_COUNT, and its row has no map section: Skandeia stays the
+// island's one fly target.
+#define HERM_KYTHERA_FOAM_ROAD      25
+#define HERM_MAX                   32  // the flag range's size
 
 // --- Relics (SYSTEMS §1) ----------------------------------------------------
 // IchorSave.options bits
