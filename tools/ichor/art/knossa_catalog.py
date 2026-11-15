@@ -69,6 +69,7 @@ and `build/{dir}/catalog.json` is the same as JSON.
 | `W` | Sea: `MB_OCEAN_WATER`, surfable (collision 0). |
 | `P` | Fresh water: `MB_POND_WATER`, surfable. |
 | `J` | Ledge: `MB_JUMP_SOUTH`. |
+| `^` | Ledge down to the north: `MB_JUMP_NORTH`. |
 | `S` | Sand: `MB_SAND`. |
 
 {ground}

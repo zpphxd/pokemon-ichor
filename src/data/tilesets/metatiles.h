@@ -153,3 +153,11 @@ const u16 gMetatileAttributes_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/ti
 // Ichor: amnisos
 const u16 gMetatiles_PorytilesManaged_Amnisos[] = INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Amnisos[] = INCBIN_U16("data/tilesets/secondary/amnisos/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: bull_road
+const u16 gMetatiles_PorytilesManaged_BullRoad[] = INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_BullRoad[] = INCBIN_U16("data/tilesets/secondary/bull_road/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: palace_minos
+const u16 gMetatiles_PorytilesManaged_PalaceMinos[] = INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_PalaceMinos[] = INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/metatile_attributes.bin");

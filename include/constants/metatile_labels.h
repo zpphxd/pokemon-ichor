@@ -1204,4 +1204,31 @@
 #define METATILE_TempleAphrodite_Mirror_Dim               0x22F
 // end gTileset_TempleAphrodite
 
+// gTileset_BullRoad (Ichor: the Bull Road, its vineyard terraces and the Bronze Heel), written by tools/ichor/art/knossa_build.py
+#define METATILE_BullRoad_VaultDoor_TL             0x230
+#define METATILE_BullRoad_VaultDoor_T              0x231
+#define METATILE_BullRoad_VaultDoor_TR             0x232
+#define METATILE_BullRoad_VaultDoor_BL             0x238
+#define METATILE_BullRoad_VaultDoor_B              0x239
+#define METATILE_BullRoad_VaultDoor_BR             0x23A
+#define METATILE_BullRoad_VaultOpen_TL             0x233
+#define METATILE_BullRoad_VaultOpen_T              0x234
+#define METATILE_BullRoad_VaultOpen_TR             0x235
+#define METATILE_BullRoad_VaultOpen_BL             0x23B
+#define METATILE_BullRoad_VaultOpen_B              0x23C
+#define METATILE_BullRoad_VaultOpen_BR             0x23D
+#define METATILE_BullRoad_IdaGate_Top              0x241
+#define METATILE_BullRoad_IdaGate                  0x249
+#define METATILE_BullRoad_IdaGate_OpenTop          0x243
+#define METATILE_BullRoad_IdaGate_Open             0x24B
+#define METATILE_BullRoad_FossilLedge_L            0x2F8
+#define METATILE_BullRoad_FossilLedge_R            0x2F9
+#define METATILE_BullRoad_FossilLedge_Gone_L       0x2FA
+#define METATILE_BullRoad_FossilLedge_Gone_R       0x2FB
+// end gTileset_BullRoad
+
+// gTileset_PalaceMinos (Ichor: the Palace of Minos above ground), written by tools/ichor/art/knossa_build.py
+#define METATILE_PalaceMinos_PenGate                  0x22C
+// end gTileset_PalaceMinos
+
 #endif // GUARD_METATILE_LABELS_H

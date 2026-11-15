@@ -79,6 +79,9 @@ for _n, _c in NEW.items():
 
 GRASS4 = ["g1", "g2", "g3", "gd"]
 
+# a ledge you hop down northward (the Bull Road's terraces drop toward Amnisos)
+K.WALK_BEHAVIOR["^"] = "MB_JUMP_NORTH"
+
 GROUPS = {
     # labyrinth_art.GROUPS["minoan"], verbatim: red columns and black capitals,
     # gypsum, ochre plaster, horns of consecration, labrys marks, pithoi, the
