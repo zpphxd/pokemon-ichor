@@ -288,6 +288,9 @@
 #define ICHOR_VARS_COUNT                                 32
 #define ICHOR_VARS_END                                   (ICHOR_VARS_START + ICHOR_VARS_COUNT - 1)
 // Ichor bank vars: claim.py bankvar adds lines here, in order.
+#define VAR_ICHOR_POSTGAME                      (ICHOR_VARS_START + 0x012) // Ichor: post-game frame state 0-20 (POSTGAME §6)
+#define VAR_ICHOR_ODYSSEY                       (ICHOR_VARS_START + 0x013) // Ichor: the Odyssey 0-30 (ODYSSEY §15)
+#define VAR_ICHOR_KATABASIS                     (ICHOR_VARS_START + 0x014) // Ichor: the Katabasis (UNDERWORLD §13)
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000

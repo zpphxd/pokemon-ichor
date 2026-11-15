@@ -1724,6 +1724,19 @@
 #define ICHOR_GIFT_HIEROPHANT                   3
 #define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_POSTGAME                     (FLAG_ICHOR_GENERAL_START + 0x300) // Ichor: post-game: live; world-act3's epilogue sets it last (POSTGAME §1)
+#define FLAG_ICHOR_GOT_EUPLOIA                  (FLAG_ICHOR_GENERAL_START + 0x301) // Ichor: post-game: Nausikles gave you the Euploia (ODYSSEY scene 1)
+#define FLAG_ICHOR_ON_SHIP                      (FLAG_ICHOR_GENERAL_START + 0x302) // Ichor: post-game: sailing the Euploia, the ship avatar is on
+#define FLAG_ICHOR_AT_SEA                       (FLAG_ICHOR_GENERAL_START + 0x303) // Ichor: post-game: rounded Maleia, Wings off until home (ODYSSEY O1)
+#define FLAG_ICHOR_CREW_LAMPON                  (FLAG_ICHOR_GENERAL_START + 0x304) // Ichor: post-game crew: Lampon, cook and hearth
+#define FLAG_ICHOR_CREW_DIKTYS                  (FLAG_ICHOR_GENERAL_START + 0x305) // Ichor: post-game crew: Diktys, carpenter and nets
+#define FLAG_ICHOR_CREW_KYDON                   (FLAG_ICHOR_GENERAL_START + 0x306) // Ichor: post-game crew: Kydon, quartermaster
+#define FLAG_ICHOR_CREW_PHEMIOS                 (FLAG_ICHOR_GENERAL_START + 0x307) // Ichor: post-game crew: Phemios, bard
+#define FLAG_ICHOR_CREW_LYNKEUS                 (FLAG_ICHOR_GENERAL_START + 0x308) // Ichor: post-game crew: Lynkeus, lookout
+#define FLAG_ICHOR_CREW_IASO                    (FLAG_ICHOR_GENERAL_START + 0x309) // Ichor: post-game crew: Iaso, healer
+#define FLAG_ICHOR_CREW_GLAUKIAS                (FLAG_ICHOR_GENERAL_START + 0x30A) // Ichor: post-game crew: Glaukias, deckhand
+#define FLAG_ICHOR_CREW_NOLAN                   (FLAG_ICHOR_GENERAL_START + 0x30B) // Ichor: post-game crew: Christopher Nolan, dramatist
+#define FLAG_ICHOR_CREW_OARSMEN                 (FLAG_ICHOR_GENERAL_START + 0x30C) // Ichor: post-game crew: the twelve Lakonian oarsmen, lent by Kleon
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end
@@ -1740,6 +1753,8 @@
 #define FLAG_DAILY_ICHOR_GENERAL_START          (ICHOR_DAILY_FLAGS_START + 0x90) // 112 claimed by name, below
 #define FLAG_DAILY_ICHOR_GENERAL_COUNT          (ICHOR_DAILY_FLAGS_COUNT - 0x90)
 // Ichor daily bank flags: claim.py dailyflag adds lines here, in order.
+#define FLAG_DAILY_ICHOR_SHIP_HEARTHFIRE        (FLAG_DAILY_ICHOR_GENERAL_START + 0x064) // Ichor: post-game: Lampon's Hearthfire aboard, once a day
+#define FLAG_DAILY_ICHOR_SHIP_NETS              (FLAG_DAILY_ICHOR_GENERAL_START + 0x065) // Ichor: post-game: Diktys's nets, one haul a day
 // Ichor daily bank flags: end
 
 // Temp flag aliases
