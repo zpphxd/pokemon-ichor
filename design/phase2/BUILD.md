@@ -152,6 +152,11 @@ Each stub is marked in the code with its tag, so it can be found and replaced wi
 - **Placements the dex adopted, built as scripted:** Lykopup (static, Lv 20) at Hecate's Hollow; Raknit (static, Lv 20) in the web chamber; Obolorn at 1% at night on Route 2's tombs (Lv 15–20); Pebblith on the Halai cliffs (Lv 10–16); Ergant on Aegina's ant hills (Lv 12–16); Spalunk is Alethea's partner only, never wild on Kalliste.
 - **Every other Phase 2 area** takes its species and levels from each species' `habitat` field in `design/dex/species/*.yaml` (branch `claude/aethos-dex-a7c73a`).
 
+**Engine notes (ichor-engine, 2026-11-14).**
+- **Braziers:** world-act1 holds `FLAG_ICHOR_BRAZIERS_START + 0x10`–`0x1F`. +0x10–0x13 are the Telesterion's season braziers; +0x14–0x1F are kept for the sanctum, Eleusa's procession torches, the Hollow and the grottos.
+- **Darkness:** `EventScript_IchorBrazier` and `EventScript_IchorEnterLitZone` / `EventScript_IchorLeaveLitZone` are built (engine commit c9277243c6). Once they're on main, swap every `ICHOR_STUB_DARKNESS` stand-in for them.
+- **Herms:** ids follow AETHOS_MAP's land routes: `HERM_AETHOS_ROUTE_4`, `_5`, `_6` and on. Routes 2 and 3 are sea, so they have no herm. A great herm's bg event runs `EventScript_IchorGreatHerm`, and only that script sets its flag (`FLAG_ICHOR_HERMS_START + id`). For each herm, send the engine session its map and landing tile (the tile south of it) for the table row and heal location. SCRIPT.md's `FLAG_ICHOR_HERM_ROUTE1`–`6` don't exist. `FLAG_ICHOR_HERM_AEGINA` is only the stub's flag: Aigina's herm needs an id from the engine, which world-act2 asks for with Act II.
+
 ## Scene helpers this session provides
 
 - `special(Ichor_SetHoursOverride)` with `VAR_0x8004` = an hour (1–23) forces the day-night tint; 0 hands it back to the clock. The voyage night: 22 from the night leg until the inn's fade, re-applied in Aegina Town's and the inn's `MAP_SCRIPT_ON_TRANSITION` while `FLAG_ICHOR_ARRIVED_AEGINA` is set and `FLAG_ICHOR_AEGINA_NIGHT` is clear (the override isn't saved).
