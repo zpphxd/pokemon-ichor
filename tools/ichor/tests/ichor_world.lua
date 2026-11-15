@@ -3,6 +3,9 @@
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, K, emu = L.S, L.K, L.emu
 local log, expect, wait, shot, tap, settle = L.log, L.expect, L.wait, L.shot, L.tap, L.settle
+for name, address in pairs(dofile(L.OUT .. "host_symbols.lua")) do
+  S.SCRIPTS[name] = address
+end
 
 local function clock(h, m)
   L.setVar(S.VAR_0x8004, h); L.setVar(S.VAR_0x8005, m)
@@ -12,6 +15,58 @@ local function hours() return emu:read8(S.gLocalTime + S.OFF_TIME_HOURS) end
 local function minutes() return emu:read8(S.gLocalTime + S.OFF_TIME_MINUTES) end
 local function menuUp()
   return L.taskRunning("Task_HandleScrollingMultichoiceInput") or L.taskRunning("Task_HandleMultichoiceInput")
+end
+
+local function hospitality()
+  local hosts = {
+    { id = 0, map = S.MAP_PHILOXENOS, script = "EmporionCity_PhiloxenosHouse_EventScript_Philoxenos", name = "Philoxenos" },
+    { id = 1, map = S.MAP_KELEOS, script = "EleusaVillage_HouseOfKeleos_EventScript_Metaneira", name = "Metaneira" },
+  }
+  local function talkUntilRest(host, choice)
+    local menus = 0
+    L.talk(L.npc(host.script), { noSettle = true })
+    L.waitUntil(function()
+      if menuUp() then
+        menus = menus + 1
+        wait(20)
+        shot(host.name .. "_rest_" .. choice)
+        if choice == "dusk" then
+          tap(K.DOWN); wait(8); tap(K.A)
+        else
+          tap(K.B)
+        end
+        wait(20)
+      elseif not L.idle() then
+        tap(K.A); wait(6)
+      end
+      return L.idle()
+    end, 12000, host.name .. "'s hospitality")
+    return menus
+  end
+  L.setFlag(S.FLAG_BADGE02)
+  local wine = L.itemCount(S.ITEM_WINE)
+  for _, host in ipairs(hosts) do
+    clock(8, 0)
+    L.setVar(S.VAR_0x8006, host.id)
+    L.runHeader("WorldTest_HostHeader")
+    expect(L.mapId() == host.map, "enter " .. host.name .. "'s house")
+    emu:write16(L.partyMon(0) + S.OFF_MON_HP, 1)
+    expect(talkUntilRest(host, "dusk") == 1, host.name .. " offers the real rest menu")
+    local hp, maxHp = L.partyHp(0)
+    expect(hp == maxHp and hours() == 19, host.name .. " heals and advances the clock to dusk")
+    if host.id == 0 then
+      expect(L.itemCount(S.ITEM_WINE) == wine + 1 and L.getFlag(S.FLAG_PHILOXENOS_STORY),
+             "the Herald Laurel story grants real Wine once")
+    end
+    expect(talkUntilRest(host, "cancel") == 1 and hours() == 19,
+           host.name .. "'s canceled rest leaves the clock unchanged")
+    clock(20, 45)
+    expect(talkUntilRest(host, "late") == 0 and hours() == 20,
+           host.name .. " offers no rest after the last waking time")
+    if host.id == 0 then
+      expect(L.itemCount(S.ITEM_WINE) == wine + 1, "revisiting Philoxenos does not repeat the story reward")
+    end
+  end
 end
 
 L.start(function()
@@ -178,4 +233,6 @@ L.start(function()
   toggleTint("options_tint_on")
   expect(not tintOff() and faded() == night, string.format("ON brings the night's colors back (%04X)", faded()))
   shot("night_tint_on")
+  L.loadBlob()
+  hospitality()
 end)

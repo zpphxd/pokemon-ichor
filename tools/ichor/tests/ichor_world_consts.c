@@ -6,8 +6,14 @@
 #include "constants/trainer_types.h"
 #include "sprite.h"
 #include "constants/map_groups.h"
+#include "constants/items.h"
 
 K(MAP_ROUTE1, MAP_KALLISTE_ROUTE1)
+K(MAP_PHILOXENOS, MAP_EMPORION_CITY_PHILOXENOS_HOUSE)
+K(MAP_KELEOS, MAP_ELEUSA_VILLAGE_HOUSE_OF_KELEOS)
+K(FLAG_BADGE02, FLAG_BADGE02_GET)
+K(FLAG_PHILOXENOS_STORY, FLAG_ICHOR_PHILOXENOS_LAUREL_2)
+K(ITEM_WINE, ITEM_WINE)
 K(OFF_TIME_HOURS, offsetof(struct Time, hours))
 K(OFF_TIME_MINUTES, offsetof(struct Time, minutes))
 K(ICHOR_BONES_CAUTIOUS, ICHOR_BONES_CAUTIOUS)

@@ -14,4 +14,9 @@ ROM="${1:-pokeemerald.gba}"
 . tools/ichor/tests/engine_build.sh
 OUT=build/test_ichor_world
 engine_prepare WORLD "$OUT" tools/ichor/tests/ichor_world_consts.c tools/ichor/tests/ichor_world_setup.s
-engine_run WORLD "$OUT" tools/ichor/tests/ichor_world.lua 90000 700
+{
+  echo "return {"
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(EmporionCity_PhiloxenosHouse_EventScript_Philoxenos|EleusaVillage_HouseOfKeleos_EventScript_Metaneira)$/ { print "  " $3 " = 0x" $1 "," }'
+  echo "}"
+} > "$OUT/host_symbols.lua"
+engine_run WORLD "$OUT" tools/ichor/tests/ichor_world.lua 140000 900

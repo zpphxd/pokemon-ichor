@@ -388,6 +388,7 @@ end
 --   answers = { "yes", "no", "down", ... } for successive YES/NO prompts and
 --             multichoice menus (default: YES / the first choice)
 --   every   = true              screenshot every message box (beat_text_NN)
+--   menuChoice = n              zero-based choice for every multichoice menu
 --   limit   = frames before giving up
 --   stop    = function() -> bool  return as soon as it holds (a warp landing
 --             on a map whose scene the next beat plays)
@@ -461,9 +462,13 @@ function L.settle(opts)
         L.waitUntil(function() return not L.taskRunning("Task_HandleYesNoInput") end, 120, "the YES/NO to close")
       elseif L.taskRunning("Task_HandleMultichoiceInput") or L.taskRunning("Task_HandleScrollingMultichoiceInput") then
         wait(10)
-        local a = nextAnswer()
+        local a = opts.menuChoice or nextAnswer()
         L.shot(string.format("menu_%s", a))
-        if a == "down" or a == "no" then tap(K.DOWN) end
+        if type(a) == "number" then
+          for _ = 1, a do tap(K.DOWN) end
+        elseif a == "down" or a == "no" then
+          tap(K.DOWN)
+        end
         tap(K.A)
         L.waitUntil(function() return not (L.taskRunning("Task_HandleMultichoiceInput")
                                            or L.taskRunning("Task_HandleScrollingMultichoiceInput")) end,
@@ -472,7 +477,9 @@ function L.settle(opts)
         -- (a reply right after a YES/NO prints with the box mode already cleared,
         -- so a new message in gStringVar4 counts as a box too)
         wait(34)                                 -- fast text: a full box prints in this
-        if not L.taskRunning("Task_HandleYesNoInput") then
+        if not (L.taskRunning("Task_HandleYesNoInput")
+                or L.taskRunning("Task_HandleMultichoiceInput")
+                or L.taskRunning("Task_HandleScrollingMultichoiceInput")) then
           boxes = boxes + 1
           L.logText()
           if at[boxes] then L.shot(at[boxes])

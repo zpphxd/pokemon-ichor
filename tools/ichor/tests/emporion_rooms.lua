@@ -66,6 +66,26 @@ local function idle()
      and emu:read8(S.gPlayerAvatar + S.OFF_AVATAR_TILE_TRANSITION) == 0
 end
 local function boxUp() return emu:read8(S.sFieldMessageBoxMode) ~= 0 end
+local function taskRunning(name)
+  for i = 0, S.NUM_TASKS - 1 do
+    local task = S.gTasks + i * S.TASK_SIZE
+    if emu:read8(task + S.OFF_TASK_ACTIVE) ~= 0
+       and emu:read32(task + S.OFF_TASK_FUNC) == (S[name] | 1) then return true end
+  end
+  return false
+end
+local function itemCount(item)
+  local bag = sb1() + S.OFF_SB1_BAG
+  local encryptionKey = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  local n = 0
+  for i = 0, S.BAG_SLOTS - 1 do
+    local slot = bag + i * S.ITEM_SLOT_SIZE
+    if emu:read16(slot) == item then
+      n = n + (emu:read16(slot + S.OFF_ITEM_SLOT_QUANTITY) ~ encryptionKey)
+    end
+  end
+  return n
+end
 local function partyMon(slot) return S.gParties + slot * S.POKEMON_SIZE end
 local function partyHp(slot)
   local m = partyMon(slot)
@@ -120,7 +140,8 @@ end
 -- Press through a script, screenshotting every message box as prefix_NN.png, A on
 -- every box and through fades, fanfares and battles, until stop() holds (default:
 -- the player is free again for 20 frames). A on a YES/NO prompt answers YES.
-local function playThrough(prefix, stop, limit, shots)
+local function playThrough(prefix, stop, limit, shots, opts)
+  opts = opts or {}
   local t0, calm, boxes = now(), 0, 0
   while true do
     if stop and stop() then return boxes end
@@ -130,10 +151,23 @@ local function playThrough(prefix, stop, limit, shots)
       frame()
     else
       calm = 0
-      if boxUp() then
+      if opts.menuChoice and taskRunning("Task_HandleScrollingMultichoiceInput") then
+        wait(20)
+        opts.menus = (opts.menus or 0) + 1
+        if opts.menus == 1 then shot(prefix .. "_bones_menu.png") end
+        for _ = 1, opts.menuChoice do tap(K.DOWN) end
+        tap(K.A)
+        waitUntil(function() return not taskRunning("Task_HandleScrollingMultichoiceInput") end,
+                  120, "the bones menu to close")
+      elseif opts.decline and taskRunning("Task_HandleYesNoInput") then
+        wait(10); tap(K.B)
+        waitUntil(function() return not taskRunning("Task_HandleYesNoInput") end,
+                  120, "the declined match prompt to close")
+      elseif boxUp() then
         wait(34)
         if stop and stop() then return boxes end
-        if boxUp() then
+        if boxUp() and not (opts.menuChoice and taskRunning("Task_HandleScrollingMultichoiceInput"))
+                   and not (opts.decline and taskRunning("Task_HandleYesNoInput")) then
           boxes = boxes + 1
           if shots ~= false and boxes <= 40 then shot(string.format("%s_%02d.png", prefix, boxes)) end
           tap(K.A)
@@ -185,10 +219,10 @@ local function face(key)
   local facing = emu:read8(playerObject() + 0x18) & 0xF
   if facing ~= FACING[key] then fail(string.format("face() did not turn (facing %d, wanted %d)", facing, FACING[key])) end
 end
-local function talk(key, prefix, stop)
+local function talk(key, prefix, stop, opts)
   face(key)
   tap(K.A); wait(10)
-  return playThrough(prefix, stop)
+  return playThrough(prefix, stop, nil, nil, opts)
 end
 
 -- --- Setup scripts in EWRAM ---------------------------------------------------------------
@@ -366,20 +400,103 @@ local function tavern()
   warpInto({}, S.MAP_TAVERN)
   shot("tavern_01_room.png")
   walkTo({ { 6, 6 }, { 2, 6 } })
-  local tries = 0
-  while not getFlag(S.FLAG_KNUCKLEBONES_EMPORION) do
-    tries = tries + 1
-    if tries > 25 then fail("never beat Myrtale in 25 games") end
-    talk(K.LEFT, string.format("tavern_02_myrtale_%02d", tries))
+  local juice = itemCount(S.ITEM_BERRY_JUICE)
+  local function opponent(key, name, flag, item, quantity)
+    local before = item and itemCount(item)
+    expect(not getFlag(flag), name .. "'s first-win flag starts clear")
+    talk(key, name .. "_decline", nil, { decline = true })
+    expect(not getFlag(flag) and (not item or itemCount(item) == before),
+           "declining " .. name .. "'s match grants no prize")
+    if item == S.ITEM_TM_FLING then
+      local bag, saved = sb1() + S.OFF_SB1_BAG + S.OFF_BAG_TMS, {}
+      local encryptionKey = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+      for i = 0, S.BAG_TMHM_COUNT * S.ITEM_SLOT_SIZE - 1 do saved[i] = emu:read8(bag + i) end
+      for i = 0, S.BAG_TMHM_COUNT - 1 do
+        local slot = bag + i * S.ITEM_SLOT_SIZE
+        emu:write16(slot, S.ITEM_TM17)
+        emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, S.MAX_BAG_ITEM_CAPACITY ~ encryptionKey)
+      end
+      local attempts = 0
+      while not getFlag(S.FLAG_MYRTALE_PRIZE_PENDING) do
+        attempts = attempts + 1
+        if attempts > 25 then fail("never won Myrtale's full-Bag match in 25 games") end
+        local opts = { menuChoice = 4 }
+        talk(key, "Myrtale_full_bag_" .. attempts, nil, opts)
+        expect((opts.menus or 0) >= 3, "Myrtale's full-Bag test plays real best-of-five matches")
+      end
+      expect(not getFlag(flag) and itemCount(item) == 0,
+             "Myrtale saves the owed scroll but does not award a missing prize")
+      for i = 0, S.BAG_TMHM_COUNT * S.ITEM_SLOT_SIZE - 1 do emu:write8(bag + i, saved[i]) end
+      expect(itemCount(item) == before, "the TM pocket is restored before collecting the owed prize")
+    end
+    if item == S.ITEM_OLIVE_OIL then
+      local bag, saved = sb1() + S.OFF_SB1_BAG, {}
+      local encryptionKey = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+      for i = 0, S.BAG_ITEMS_COUNT * S.ITEM_SLOT_SIZE - 1 do saved[i] = emu:read8(bag + i) end
+      -- Leave exactly one space for a two-Oil prize: it must not be partly paid.
+      for i = 0, S.BAG_ITEMS_COUNT - 1 do
+        local slot = bag + i * S.ITEM_SLOT_SIZE
+        emu:write16(slot, item)
+        emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, (S.MAX_BAG_ITEM_CAPACITY - (i == 0 and 1 or 0)) ~ encryptionKey)
+      end
+      local fullCount = itemCount(item)
+      local function fullBagMessage()
+        local text = S.EmporionCity_Tavern_EventScript_Strepsiades_Text_2
+        for i = 0, 1023 do
+          local b = emu:read8(text + i)
+          if emu:read8(S.gStringVar4 + i) ~= b then return false end
+          if b == 0xFF then return true end
+        end
+        return false
+      end
+      local attempts = 0
+      repeat
+        attempts = attempts + 1
+        if attempts > 25 then fail("never reached Strepsiades's full-Bag prize in 25 games") end
+        talk(key, "Strepsiades_full_bag_" .. attempts, nil, { menuChoice = 4 })
+      until fullBagMessage()
+      expect(not getFlag(flag) and itemCount(item) == fullCount,
+             "a won match with one Oil space grants no partial prize or reward flag")
+      for i = 0, S.BAG_ITEMS_COUNT * S.ITEM_SLOT_SIZE - 1 do emu:write8(bag + i, saved[i]) end
+      expect(itemCount(item) == before, "the player's Bag is restored before retrying the prize")
+    end
+    local tries = 0
+    while not getFlag(flag) do
+      tries = tries + 1
+      if tries > 25 then fail("never beat " .. name .. " in 25 games") end
+      local opts = { menuChoice = 4 }
+      local owed = getFlag(S.FLAG_MYRTALE_PRIZE_PENDING) and item == S.ITEM_TM_FLING
+      talk(key, string.format("%s_%02d", name, tries), nil, opts)
+      expect((opts.menus or 0) >= 3 or (owed and (opts.menus or 0) == 0),
+             name .. (owed and " gives the owed prize without another match" or " plays a real best-of-five match"))
+    end
+    expect(true, string.format("beat %s in %d game(s)", name, tries))
+    if item then
+      expect(itemCount(item) == before + quantity, name .. " grants the actual prize")
+      talk(key, name .. "_repeat", nil, { menuChoice = 4 })
+      expect(itemCount(item) == before + quantity, name .. " grants no duplicate prize")
+    end
   end
-  expect(true, string.format("beat Myrtale at knucklebones in %d game(s): FLAG_ICHOR_KNUCKLEBONES_EMPORION", tries))
-  tries = 0
-  while not getFlag(S.FLAG_KNUCKLEBONES_STREPSIADES) do
-    tries = tries + 1
-    if tries > 25 then fail("never beat Strepsiades in 25 games") end
-    talk(K.UP, string.format("tavern_03_strepsiades_%02d", tries))
+  opponent(K.LEFT, "Myrtale", S.FLAG_KNUCKLEBONES_EMPORION, S.ITEM_TM_FLING, 1)
+  expect(not getFlag(S.FLAG_MYRTALE_PRIZE_PENDING), "collecting Myrtale's scroll clears the owed-prize flag")
+  -- The previous build recorded a win without giving a TM. Restore that save state.
+  local bag = sb1() + S.OFF_SB1_BAG + S.OFF_BAG_TMS
+  local key = emu:read32(sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  for i = 0, S.BAG_TMHM_COUNT - 1 do
+    local slot = bag + i * S.ITEM_SLOT_SIZE
+    if emu:read16(slot) == S.ITEM_TM_FLING then
+      emu:write16(slot, 0)
+      emu:write16(slot + S.OFF_ITEM_SLOT_QUANTITY, key)
+    end
   end
-  expect(true, string.format("beat Strepsiades in %d game(s) and took his prize", tries))
+  local legacyOpts = { menuChoice = 4 }
+  talk(K.LEFT, "Myrtale_legacy_prize", nil, legacyOpts)
+  expect(itemCount(S.ITEM_TM_FLING) == 1 and (legacyOpts.menus or 0) == 0,
+         "a legacy champion win recovers the real scroll without another match")
+  opponent(K.UP, "Strepsiades", S.FLAG_KNUCKLEBONES_STREPSIADES, S.ITEM_OLIVE_OIL, 2)
+  walkTo({ { 6, 6 }, { 10, 6 }, { 10, 4 } })
+  opponent(K.UP, "Stratyllis", S.FLAG_KNUCKLEBONES_STRATYLLIS, S.ITEM_WINE, 1)
+  expect(itemCount(S.ITEM_BERRY_JUICE) == juice, "the tavern grants no substitute Berry Juice")
 end
 
 local function philoxenos()

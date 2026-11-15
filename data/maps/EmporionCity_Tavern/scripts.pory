@@ -9,11 +9,7 @@
 // x2 and Stratyllis (10,3, bold) Wine for a first win
 // (FLAG_ICHOR_KNUCKLEBONES_STREPSIADES, _STRATYLLIS).
 //
-// ICHOR_STUB_KNUCKLEBONES: SYSTEMS.md §9's game (four bones, one rethrow, the
-// named throws, best of five) isn't built yet. Until it is, a match is one throw
-// each of four bones, the higher total winning and a tie thrown again; the
-// champion's bones run a little higher. The prizes are paid as SCRIPT.md gives
-// them.
+// Matches use the shared best-of-five engine (design/ENGINE_API.md §7).
 
 mapscripts EmporionCity_Tavern_MapScripts {}
 
@@ -25,34 +21,51 @@ script EmporionCity_Tavern_EventScript_Myrtale {
     lock
     faceplayer
     setspeaker(EmporionCity_Tavern_Text_NameMyrtale)
+    if (flag(FLAG_ICHOR_KNUCKLEBONES_EMPORION) || flag(FLAG_ICHOR_MYRTALE_PRIZE_PENDING)) {
+        checkitem(ITEM_TM_FLING)
+        if (var(VAR_RESULT) == FALSE || flag(FLAG_ICHOR_MYRTALE_PRIZE_PENDING)) {
+            call(EmporionCity_Tavern_EventScript_MyrtalePrize)
+            release
+            end
+        }
+    }
     if (flag(FLAG_ICHOR_KNUCKLEBONES_EMPORION)) {
         msgbox(format("Come back any time. I like losing to people who'll come back."))
     } else {
         msgbox(format("Forty years at sea. Thirty-nine at this table. Sit.\p"
                       "Throw."))
     }
-    setvar(VAR_0x8006, 1)
+    bufferstring(STR_VAR_3, EmporionCity_Tavern_Text_NameMyrtale)
+    setvar(VAR_0x8004, ICHOR_BONES_BOLD)
     call(EmporionCity_Tavern_EventScript_Match)
     if (var(VAR_RESULT) == TRUE && !flag(FLAG_ICHOR_KNUCKLEBONES_EMPORION)) {
-        setspeaker(EmporionCity_Tavern_Text_NameMyrtale)
-        msgbox(format("Huh. Thirty-nine years.\p"
-                      "Here. Fling. It's how you throw a thing so it counts."))
-        // ICHOR_STUB_TM_FLING: Fling isn't a TM in the vanilla fifty, and Balance
-        // assigns new TM numbers (SCRIPT.md Part 6). Until it has one, the flag
-        // and the receive message.
-        setspeaker(SP_NAME_NONE)
-        playfanfare(MUS_OBTAIN_TMHM)
-        message(format("{PLAYER} received TM Fling!"))
-        waitmessage
-        waitfanfare
-        setflag(FLAG_ICHOR_KNUCKLEBONES_EMPORION)
-        setspeaker(EmporionCity_Tavern_Text_NameMyrtale)
-        msgbox(format("Come back any time. I like losing to people who'll come back."))
+        setflag(FLAG_ICHOR_MYRTALE_PRIZE_PENDING)
+        call(EmporionCity_Tavern_EventScript_MyrtalePrize)
     } elif (var(VAR_RESULT) == FALSE) {
         setspeaker(EmporionCity_Tavern_Text_NameMyrtale)
         msgbox(format("Thirty-nine years. Sit again when you like."))
     }
     release
+}
+
+script EmporionCity_Tavern_EventScript_MyrtalePrize {
+    setspeaker(EmporionCity_Tavern_Text_NameMyrtale)
+    msgbox(format("Huh. Thirty-nine years.\p"
+                  "Here. Fling. It's how you throw a thing so it counts."))
+    setspeaker(SP_NAME_NONE)
+    checkitem(ITEM_TM_FLING)
+    if (var(VAR_RESULT) == FALSE) {
+        giveitem(ITEM_TM_FLING)
+        if (var(VAR_RESULT) == FALSE) {
+            msgbox(format("Make room in your Bag, then come back for your scroll."))
+            return
+        }
+    }
+    setflag(FLAG_ICHOR_KNUCKLEBONES_EMPORION)
+    clearflag(FLAG_ICHOR_MYRTALE_PRIZE_PENDING)
+    setspeaker(EmporionCity_Tavern_Text_NameMyrtale)
+    msgbox(format("Come back any time. I like losing to people who'll come back."))
+    return
 }
 
 script EmporionCity_Tavern_EventScript_Strepsiades {
@@ -61,17 +74,21 @@ script EmporionCity_Tavern_EventScript_Strepsiades {
     setspeaker(EmporionCity_Tavern_Text_NameStrepsiades)
     msgbox(format("I only rethrow the ones. That's my system.\p"
                   "My son says it's not a system. My son owes me money."))
-    setvar(VAR_0x8006, 0)
+    bufferstring(STR_VAR_3, EmporionCity_Tavern_Text_NameStrepsiades)
+    setvar(VAR_0x8004, ICHOR_BONES_CAUTIOUS)
     call(EmporionCity_Tavern_EventScript_Match)
     if (var(VAR_RESULT) == TRUE && !flag(FLAG_ICHOR_KNUCKLEBONES_STREPSIADES)) {
         setspeaker(EmporionCity_Tavern_Text_NameStrepsiades)
         msgbox(format("Bah. The system needs work. Here, for the gods."))
-        // ICHOR_STUB_OFFERINGS: Olive Oil x2 once the offerings are items; Berry
-        // Juice stands in, as for Wine (design/phase2/BUILD.md).
         setspeaker(SP_NAME_NONE)
-        giveitem(ITEM_BERRY_JUICE, 2)
+        checkitemspace(ITEM_OLIVE_OIL, 2)
         if (var(VAR_RESULT) == TRUE) {
-            setflag(FLAG_ICHOR_KNUCKLEBONES_STREPSIADES)
+            giveitem(ITEM_OLIVE_OIL, 2)
+            if (var(VAR_RESULT) == TRUE) {
+                setflag(FLAG_ICHOR_KNUCKLEBONES_STREPSIADES)
+            }
+        } else {
+            msgbox(format("Make room in your Bag, then play again for the oil."))
         }
     }
     release
@@ -83,15 +100,14 @@ script EmporionCity_Tavern_EventScript_Stratyllis {
     setspeaker(EmporionCity_Tavern_Text_NameStratyllis)
     msgbox(format("Aphrodite or nothing, dear. Aphrodite or nothing.\p"
                   "Mostly it's nothing. But oh, when it's Aphrodite."))
-    setvar(VAR_0x8006, 0)
+    bufferstring(STR_VAR_3, EmporionCity_Tavern_Text_NameStratyllis)
+    setvar(VAR_0x8004, ICHOR_BONES_BOLD)
     call(EmporionCity_Tavern_EventScript_Match)
     if (var(VAR_RESULT) == TRUE && !flag(FLAG_ICHOR_KNUCKLEBONES_STRATYLLIS)) {
         setspeaker(EmporionCity_Tavern_Text_NameStratyllis)
         msgbox(format("Nothing again! Well. Take a cup to Dionysus for me."))
-        // ICHOR_STUB_OFFERINGS: Wine, once the offerings are items; Berry Juice
-        // stands in (design/phase2/BUILD.md).
         setspeaker(SP_NAME_NONE)
-        giveitem(ITEM_BERRY_JUICE, 1)
+        giveitem(ITEM_WINE, 1)
         if (var(VAR_RESULT) == TRUE) {
             setflag(FLAG_ICHOR_KNUCKLEBONES_STRATYLLIS)
         }
@@ -99,8 +115,8 @@ script EmporionCity_Tavern_EventScript_Stratyllis {
     release
 }
 
-// ICHOR_STUB_KNUCKLEBONES: a stand-in match (see the header). In: VAR_0x8006,
-// 1 for a champion. Out: VAR_RESULT TRUE (won), FALSE (lost) or 2 (declined).
+// In: VAR_0x8004 opponent, STR_VAR_3 name.
+// Out: VAR_RESULT TRUE (won), FALSE (lost) or 2 (declined).
 script EmporionCity_Tavern_EventScript_Match {
     setspeaker(SP_NAME_NONE)
     msgbox(format("Play a game of knucklebones?"), MSGBOX_YESNO)
@@ -108,34 +124,9 @@ script EmporionCity_Tavern_EventScript_Match {
         setvar(VAR_RESULT, 2)
         return
     }
-    do {
-        closemessage
-        playse(SE_BALL_BOUNCE_1)
-        delay(20)
-        playse(SE_BALL_BOUNCE_2)
-        // Four bones score 4 to 24; a stand-in total is 4 + random(21).
-        random(21)
-        addvar(VAR_RESULT, 4)
-        copyvar(VAR_0x8007, VAR_RESULT)
-        random(21)
-        addvar(VAR_RESULT, 4)
-        copyvar(VAR_0x8008, VAR_RESULT)
-        // The champion keeps the better of two throws.
-        if (var(VAR_0x8006) == 1) {
-            random(21)
-            addvar(VAR_RESULT, 4)
-            if (var(VAR_RESULT) > VAR_0x8008) {
-                copyvar(VAR_0x8008, VAR_RESULT)
-            }
-        }
-        buffernumberstring(STR_VAR_1, VAR_0x8007)
-        buffernumberstring(STR_VAR_2, VAR_0x8008)
-        msgbox(format("You throw the four bones: {STR_VAR_1}.\pYour opponent throws: {STR_VAR_2}."))
-        if (var(VAR_0x8007) == VAR_0x8008) {
-            msgbox(format("A tie. Throw again."))
-        }
-    } while (var(VAR_0x8007) == VAR_0x8008)
-    if (var(VAR_0x8007) > VAR_0x8008) {
+    closemessage
+    call(EventScript_IchorKnucklebones)
+    if (var(VAR_RESULT) == TRUE) {
         msgbox(format("You win the game!"))
         setvar(VAR_RESULT, TRUE)
     } else {

@@ -12,8 +12,7 @@
 // FLAG_ICHOR_GOT_KYKEON. Her welcome is told in full once
 // (FLAG_ICHOR_MET_METANEIRA); after that she just sits you down.
 //
-// ICHOR_STUB_XENIA: the rest menu (DAWN / NOON / DUSK / NIGHT) waits on
-// SYSTEMS.md §10's clock, as Philoxenos's does; the rest is a fade and a heal.
+// Rest uses the engine's forward-only clock menu (ENGINE_API.md §7).
 // The Split Coin's second link (ITEM_HALF_COIN, the Big Pearl,
 // FLAG_ICHOR_SPLIT_COIN_2), a stretch feature, waits for the item and a flag.
 
@@ -40,18 +39,13 @@ script EleusaVillage_HouseOfKeleos_EventScript_Metaneira {
     if (flag(FLAG_BADGE03_GET) && !flag(FLAG_ICHOR_GOT_KYKEON)) {
         call(EleusaVillage_HouseOfKeleos_EventScript_Kykeon)
     }
-    // ICHOR_STUB_XENIA: the rest menu (see the header).
     setspeaker(SP_NAME_NONE)
-    msgbox(format("Rest by the great hearth?"), MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        closemessage
-        fadescreen(FADE_TO_BLACK)
+    msgbox(format("Stay, if you like. There's room by the great hearth."))
+    call(EventScript_IchorXeniaRest)
+    if (var(VAR_RESULT) == TRUE) {
         playfanfare(MUS_HEAL)
         waitfanfare
         special(HealPlayerParty)
-        delay(30)
-        fadescreen(FADE_FROM_BLACK)
-        setspeaker(SP_NAME_NONE)
         msgbox(format("{PLAYER} slept by the fire, as the goddess once did, and woke well rested."))
     }
     release

@@ -60,6 +60,23 @@ WorldTest_Setup:
 	releaseall
 	end
 
+@ --- The hosts' actual maps ---------------------------------------------------
+	test_header WorldTest_HostHeader, WorldTest_Host
+WorldTest_Host:
+	lockall
+	setvar VAR_TEMP_F, 1
+	compare VAR_0x8006, 0
+	goto_if_eq WorldTest_Philoxenos
+	warp MAP_ELEUSA_VILLAGE_HOUSE_OF_KELEOS, 7, 8
+	waitstate
+	releaseall
+	end
+WorldTest_Philoxenos:
+	warp MAP_EMPORION_CITY_PHILOXENOS_HOUSE, 6, 9
+	waitstate
+	releaseall
+	end
+
 @ --- The clock: VAR_0x8004 hours, VAR_0x8005 minutes, today ----------------------
 	test_header WorldTest_ClockHeader, WorldTest_Clock
 WorldTest_Clock:

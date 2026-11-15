@@ -9,10 +9,8 @@
 // about (the Herald Laurel, then the Harvest Laurel), he trades the story for
 // Wine: FLAG_ICHOR_PHILOXENOS_LAUREL_2, _3.
 //
-// ICHOR_STUB_XENIA: two parts wait on the engine. The rest menu (DAWN / NOON /
-// DUSK / NIGHT, each shown only if that hour is still ahead today) moves the
-// clock when SYSTEMS.md §10's rest lands; until then the bed is a fade and a
-// heal. The Split Coin (ITEM_HALF_COIN, FLAG_ICHOR_SPLIT_COIN_1), a stretch
+// Rest uses the engine's forward-only clock menu (ENGINE_API.md §7).
+// The Split Coin (ITEM_HALF_COIN, FLAG_ICHOR_SPLIT_COIN_1), a stretch
 // feature, is left out until the item and a flag exist.
 
 mapscripts EmporionCity_PhiloxenosHouse_MapScripts {}
@@ -50,18 +48,12 @@ script EmporionCity_PhiloxenosHouse_EventScript_Philoxenos {
     }
     setspeaker(EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos)
     msgbox(format("Stay, if you like. Rest till you want to wake."))
-    // ICHOR_STUB_XENIA: the rest menu (see the header).
     setspeaker(SP_NAME_NONE)
-    msgbox(format("Rest in the guest bed?"), MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES) {
-        closemessage
-        fadescreen(FADE_TO_BLACK)
+    call(EventScript_IchorXeniaRest)
+    if (var(VAR_RESULT) == TRUE) {
         playfanfare(MUS_HEAL)
         waitfanfare
         special(HealPlayerParty)
-        delay(30)
-        fadescreen(FADE_FROM_BLACK)
-        setspeaker(SP_NAME_NONE)
         msgbox(format("{PLAYER} slept behind the striped curtain and woke well rested."))
     }
     release
@@ -90,10 +82,8 @@ script EmporionCity_PhiloxenosHouse_EventScript_LaurelStory {
 script EmporionCity_PhiloxenosHouse_EventScript_GiveWine {
     setspeaker(EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos)
     msgbox(format("Here. Wine, for Zeus of Strangers. He likes a story with his cup."))
-    // ICHOR_STUB_OFFERINGS: ITEM_WINE once the offerings are items; Berry Juice
-    // stands in (design/phase2/BUILD.md).
     setspeaker(SP_NAME_NONE)
-    giveitem(ITEM_BERRY_JUICE, 1)
+    giveitem(ITEM_WINE, 1)
     return
 }
 
