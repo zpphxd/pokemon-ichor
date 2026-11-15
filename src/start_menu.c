@@ -761,7 +761,11 @@ static bool8 StartMenuPokeNavCallback(void)
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
+#if !ICHOR_CUT_POKENAV // Ichor: the PokéNav is cut
         SetMainCallback2(CB2_InitPokeNav);  // Display PokéNav
+#else
+        SetMainCallback2(CB2_ReturnToField);
+#endif
 
         return TRUE;
     }

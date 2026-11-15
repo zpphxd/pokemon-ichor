@@ -384,7 +384,9 @@ static void Task_EReader(u8 taskId)
     case ER_STATE_CONNECTING:
         MG_AddMessageTextPrinter(gJPText_Connecting);
         // XXX: This (u32 *) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
+#if !ICHOR_CUT_MULTIBOOT // Ichor: the e-Reader program is cut
         EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32 *)gMultiBootProgram_EReader_Start);
+#endif
         data->state = ER_STATE_TRANSFER;
         break;
     case ER_STATE_TRANSFER:

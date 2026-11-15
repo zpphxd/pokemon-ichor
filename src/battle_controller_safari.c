@@ -210,7 +210,9 @@ static void SafariOpenPokeblockCase(enum BattlerId battler)
     {
         gBattlerControllerFuncs[battler] = CompleteWhenChosePokeblock;
         CloseMainBattleScreen();
+#if !ICHOR_CUT_CONTESTS // Ichor: Pokéblocks are cut
         OpenPokeblockCaseInBattle();
+#endif
     }
 }
 

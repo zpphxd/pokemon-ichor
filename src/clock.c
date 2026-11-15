@@ -50,7 +50,9 @@ void DoDailyEvents(u32 daysSince)
     UpdateDailySeed();
     UpdateMassOutbreakDaysLeft(daysSince);
     UpdateDewfordTrendPerDay(daysSince);
+#if !ICHOR_CUT_TV // Ichor: TV is cut
     UpdateTVShowsPerDay(daysSince);
+#endif
     UpdateWeatherPerDay(daysSince);
     UpdatePartyPokerusTime(daysSince);
     UpdateBirchState(daysSince);
@@ -60,7 +62,9 @@ void DoDailyEvents(u32 daysSince)
     if (!OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES)
     {
         UpdateMirageRnd(daysSince);
+#if !ICHOR_CUT_MINIGAMES // Ichor: the minigames are cut
         SetRandomLotteryNumber(daysSince);
+#endif
     }
     UpdateDaysPassedSinceFormChange(daysSince);
     DailyResetApricornTrees();

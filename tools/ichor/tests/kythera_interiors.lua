@@ -9,8 +9,8 @@
 -- Soothe Bell, a heal at each Asclepeion, Teukros's stall, Phereklos's
 -- knucklebones, Peristera's Egg, Lysis's trade (refused), Myles's bread and
 -- Metronome, Kentrios, and the boathouse's stair up to Myrtis's soup and
--- Kalchedon's Damp Rock. The map groups are gMapGroup_IndoorKythera (76) and
--- gMapGroup_IndoorMelos (77), in kythera_homes.py's order.
+-- Kalchedon's Damp Rock. The map groups are gMapGroup_IndoorKythera and
+-- gMapGroup_IndoorMelos; the .sh reads their numbers from map_groups.json.
 --
 -- The runner loads maps directly, so every conversation is closed before the
 -- next warp: B advances a box, and answers NO. A is pressed only an exact number
@@ -21,7 +21,8 @@ local L = dofile("tools/ichor/tests/ichor_lib.lua")
 local K = L.K
 local OUT = os.getenv("KYTHERA_OUT") or "build/test_kythera/"
 
-local KY, ME = 76, 77
+local KY = tonumber(os.getenv("KYTHERA_GROUP_KY") or "") or 4
+local ME = tonumber(os.getenv("KYTHERA_GROUP_ME") or "") or 5
 local AXYLOS, DIVERS, PERFUMER, NIKARETE, SHIPWRIGHT, SK_ASCLEPEION, SK_AGORA = 0, 1, 2, 3, 4, 5, 6
 local DOVECOTE, POTTER, PA_ASCLEPEION, PA_AGORA, PYGMALION, MIRROR, ORCHARD = 7, 8, 9, 10, 11, 12, 13
 local MILL = 14

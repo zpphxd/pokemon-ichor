@@ -216,7 +216,9 @@ void NewGameInitData(void)
     SetMauvilleOldMan();
     InitDewfordTrend();
     ResetFanClub();
+#if !ICHOR_CUT_MINIGAMES // Ichor: the minigames are cut
     ResetLotteryCorner();
+#endif
     UpdateDailySeed();
     WarpToTruck();
     if (IS_FRLG)
@@ -248,7 +250,9 @@ static void ResetMiniGamesRecords(void)
 {
     CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
     SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
+#if !ICHOR_CUT_MINIGAMES // Ichor: the minigames are cut
     ResetPokemonJumpRecords();
+#endif
     CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }
 
