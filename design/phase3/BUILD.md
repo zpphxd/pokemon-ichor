@@ -18,6 +18,19 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 
 Each batch ends with a report to the director: the branch and commit, what's playable, the map renders, the test results and the ROM delta.
 
+## Handovers waiting for later batches
+
+**Batch 4, Aigina's interior** (from world-act1, 2026-11-14; maps on `claude/world-act1-6d11b7` at 1090709095, seams and spots in `design/phase2/BUILD.md`, the island stitched in `design/phase2/img/aigina_island.png`). `MAP_AEGINA_APHAIA_ROAD`, `MAP_AEGINA_TEMPLE_OF_APHAIA` and `MAP_AEGINA_MOUNT_OROS` are connected to the town and each other. The town's north gate opens on `FLAG_ICHOR_FERRY_TO_AEGINA`. Placeholders for us to replace, each with a script tagged `ICHOR_ACT2`:
+
+| Who | Where | Notes |
+|---|---|---|
+| Myrmex | road (13,14), facing west | trainer, sight 3, mandatory sight line proven by world-act1's builder |
+| Sostratos | road (20,6), facing east | trainer, sight 3 |
+| Euthymia | road (26,3), facing east | trainer, sight 3 |
+| The priestess | temple (11,9) | |
+
+Set the three to `TRAINER_TYPE_NORMAL` once their `trainerbattle` scripts exist (the game reads the id from the script). Stubs already on their maps: the herm at road (22,3), landing (22,4), sets `FLAG_ICHOR_HERM_AEGINA` behind `ICHOR_STUB_HERM` (the engine still has to give Aigina's herm an id); altars behind `ICHOR_STUB_RITES`, Zeus on Oros (6,4) and Artemis at the temple (15,11); a dig spot at temple (18,11). The encounter tables are still Phase 2's levels 12–16: re-level them to BALANCE.md's Astyra row.
+
 ## Batch 1
 
 ### Who builds what
