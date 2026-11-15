@@ -1,6 +1,7 @@
 #include "global.h"
 #include "ichor_relics.h"
 #include "ichor_frozen.h"
+#include "ichor_time.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -1710,6 +1711,7 @@ void UpdateTimeOfDay(bool32 updateBlend)
     RtcCalcLocalTime();
     hours = sHoursOverride ? sHoursOverride : gLocalTime.hours;
     minutes = sHoursOverride ? 0 : gLocalTime.minutes;
+    Ichor_ApplyHeldTime(&hours, &minutes); // Ichor: a script holds the tint (ENGINE_API §7)
 
     if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
     {

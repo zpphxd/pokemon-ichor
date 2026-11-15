@@ -198,6 +198,9 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_VINTNER,
     TRAINER_PIC_HIEROPHANT_THESPIS,
     TRAINER_PIC_SILENOS,
+    // Pokemon Ichor, Act II batch 2 (see design/phase3/SPRITES.md)
+    TRAINER_PIC_FOWLER_M,
+    TRAINER_PIC_FOWLER_F,
     TRAINER_PIC_COUNT,
 };
 
@@ -557,6 +560,8 @@ enum TrainerClassID
     TRAINER_CLASS_SATYR,
     TRAINER_CLASS_ACTOR,
     TRAINER_CLASS_VINTNER,
+    // Ichor: Act II batch 2 trainer classes (design/phase3/SPRITES.md)
+    TRAINER_CLASS_FOWLER,
 
     TRAINER_CLASS_COUNT,
 };

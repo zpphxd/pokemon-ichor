@@ -430,6 +430,9 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SATYR] = { _("SATYR"), 5 },
     [TRAINER_CLASS_ACTOR] = { _("ACTOR"), 7 },
     [TRAINER_CLASS_VINTNER] = { _("VINTNER"), 6 },
+    // Ichor: Act II batch 2 (design/phase3/SPRITES.md). The Kopais's
+    // bird-catchers are poor marsh folk; they pay like the mountain's bacchants.
+    [TRAINER_CLASS_FOWLER] = { _("FOWLER"), 5 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =
