@@ -100,4 +100,4 @@ Paused by the coordinator on 2026-11-14 (usage limit; the main story first).
 - 2x renders in `design/oikoumene/img/` (renders so far are in the scratchpad only).
 - The smoke test.
 
-**make:** see the commit that adds this section.
+**make:** green at the WIP commit (exit 0; ROM 22,367,656 B of 32 MB, 66.66%). Smoke and slice tests not run.
