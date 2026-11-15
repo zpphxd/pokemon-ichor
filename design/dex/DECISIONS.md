@@ -70,8 +70,8 @@ Waiting on the user:
 | # | Question | Recommendation | Answer |
 |---|---|---|---|
 | — | Approve the 150 entries, or name the ones to change | — | pending |
-| D7 | New move **Harpe** for Kronolith: Ground, physical, 100 power, hits through Protect and Substitute. It costs one new move and an animation. | Yes: the story spends two acts rebuilding the Harpe | pending |
-| D8 | New move **Shield Clash** for the Kouretes line: Steel, special sound move, 80 power, stops the target using sound moves for two turns. It costs one new move and an animation. | Optional: Steel moves already cover the role | pending |
+| D7 | New move **Harpe** for Kronolith: Ground, physical, 100 power, hits through Protect and Substitute. It costs one new move and an animation. | Yes: the story spends two acts rebuilding the Harpe | **Approved** 2026-11-14 by the main session as creative director: "the sickle that cut Ouranos, which nothing can stop". It is in the ROM (2a5772aad3). |
+| D8 | New move **Shield Clash** for the Kouretes line: Steel, special sound move, 80 power, stops the target using sound moves for two turns. It costs one new move and an animation. | Optional: Steel moves already cover the role | **Approved** 2026-11-14 by the main session as creative director: the Kouretes clashed their shields so Kronos couldn't hear the infant Zeus. It is in the ROM (2a5772aad3). |
 | D9 | Call the title mythical **Ichorin** (coined) or plain **Ichor** | Ichorin, matching the other coined names | Ichorin (2026-11-14): kept under that name as #152, from the user's "Keep it as #152" reply to a question that named it Ichorin. |
 
 ## Gate 3: sprites
