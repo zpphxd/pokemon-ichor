@@ -449,6 +449,41 @@ enum
     // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
+    // Act II batch 1 (tools/ichor/art/sprites_act2.py, design/phase3/SPRITES.md)
+    OBJ_EVENT_GFX_ICHOR_MAENAD,
+    OBJ_EVENT_GFX_ICHOR_MAENAD_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_SATYR,
+    OBJ_EVENT_GFX_ICHOR_SILENOS,
+    OBJ_EVENT_GFX_ICHOR_MANTO,
+    OBJ_EVENT_GFX_ICHOR_KRONIST,
+    OBJ_EVENT_GFX_ICHOR_HERALD,
+    OBJ_EVENT_GFX_ICHOR_VINTNER,
+    OBJ_EVENT_GFX_ICHOR_ACTOR,
+    OBJ_EVENT_GFX_ICHOR_THESPIS,
+    OBJ_EVENT_GFX_ICHOR_THESPIS_COMIC,
+    OBJ_EVENT_GFX_ICHOR_CHORUS_LEADER,
+    OBJ_EVENT_GFX_ICHOR_BEE_WOMAN,
+    OBJ_EVENT_GFX_ICHOR_FATE_SPINNER,
+    OBJ_EVENT_GFX_ICHOR_FATE_MEASURER,
+    OBJ_EVENT_GFX_ICHOR_FATE_CUTTER,
+    OBJ_EVENT_GFX_ICHOR_GOLD_MASK_KING,
+    OBJ_EVENT_GFX_ICHOR_GOLD_MASK_KING_KNEEL,
+    OBJ_EVENT_GFX_ICHOR_UNWOVEN_ACTOR,
+    OBJ_EVENT_GFX_ICHOR_KLEON_SEATED,
+    OBJ_EVENT_GFX_ICHOR_KLEON_FEAST,
+    OBJ_EVENT_GFX_ICHOR_ALETHEA_KNEEL,
+    OBJ_EVENT_GFX_ICHOR_ALETHEA_SEATED,
+    OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE,
+    OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE_GARLAND,
+    OBJ_EVENT_GFX_ICHOR_MASK,
+    OBJ_EVENT_GFX_ICHOR_CROWS,
+    // Thyrsa's townsfolk: folk walkers in the wine palette (design/phase3/SPRITES.md)
+    OBJ_EVENT_GFX_ICHOR_MOM_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_WOMAN_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_YOUTH_F_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA,
+    OBJ_EVENT_GFX_ICHOR_HARVESTER_THYRSA,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
@@ -614,6 +649,7 @@ enum
 // Claim the next free one at the end of this block.
 #define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // the cast, plus the Shepherd, Hoplite, Augur and Acolyte walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
+#define OBJ_EVENT_PAL_TAG_ICHOR_WINE              0x1136 // Thyrsa: the folk palette with grape purples and wine red (Act II)
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS
