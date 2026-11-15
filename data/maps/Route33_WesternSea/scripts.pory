@@ -1,0 +1,311 @@
+// Route 33, the western sea (post-game, batch 1). Built by tools/ichor/maps/westsea.py:
+// its cells and metatile ids are #defines in include/constants/ichor_postgame_sea.h.
+
+mapscripts Route33_WesternSea_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // the way through the fog opens once Labor 10's Pillars stand
+        if (flag(FLAG_ICHOR_L10_PILLARS)) {
+            setflag(FLAG_TEMP_1)
+        }
+        // load into the fog's approach in fog
+        getplayerxy(VAR_TEMP_3, VAR_TEMP_4)
+        if (var(VAR_TEMP_3) < R33_FOG_ON_X + 1 && var(VAR_TEMP_4) >= R33_FOG_TOP_Y) {
+            setweather(WEATHER_FOG_HORIZONTAL)
+            setvar(VAR_TEMP_2, 1)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_R33_WHIRLPOOL_ECHINADES)) {
+            call(Route33_WesternSea_EventScript_DrawEchinadesCalm)
+        }
+        if (flag(FLAG_ICHOR_R33_WHIRLPOOL_LAGOON)) {
+            call(Route33_WesternSea_EventScript_DrawLagoonCalm)
+        }
+        if (flag(FLAG_ICHOR_R33_ROCKS_COVE)) {
+            call(Route33_WesternSea_EventScript_DrawCoveOpen)
+        }
+        if (flag(FLAG_ICHOR_R33_ROCKS_CHANNEL)) {
+            call(Route33_WesternSea_EventScript_DrawCurrentOpen)
+        }
+        if (flag(FLAG_ICHOR_R33_KYMON_HOME)) {
+            call(Route33_WesternSea_EventScript_DrawRaftHome)
+        }
+    }
+}
+
+// --- named speakers (name box) ---------------------------------------------------
+text Route33_WesternSea_Text_SpeakerGlaukon { "GLAUKON" }
+text Route33_WesternSea_Text_SpeakerPontia { "PONTIA" }
+text Route33_WesternSea_Text_SpeakerAktaios { "AKTAIOS" }
+text Route33_WesternSea_Text_SpeakerHalieus { "HALIEUS" }
+text Route33_WesternSea_Text_SpeakerNerites { "NERITES" }
+text Route33_WesternSea_Text_SpeakerDamon { "DAMON" }
+text Route33_WesternSea_Text_SpeakerKymon { "KYMON" }
+
+// --- trainers, from Tainaron west and north ----------------------------------------
+script Route33_WesternSea_EventScript_Glaukon {
+    trainerbattle_single(TRAINER_ICHOR_GLAUKON, Route33_WesternSea_Text_GlaukonIntro, Route33_WesternSea_Text_GlaukonDefeat)
+    setspeaker(Route33_WesternSea_Text_SpeakerGlaukon)
+    msgbox(format("West of here the sea runs fast, right to the fog.\pThere's loose rock where it cuts the reef. Ram it and ride."), MSGBOX_AUTOCLOSE)
+}
+
+text Route33_WesternSea_Text_GlaukonIntro {
+    format("You came round Tainaron? Then you've got sea legs. Let's see your Pokémon's!")
+}
+
+text Route33_WesternSea_Text_GlaukonDefeat {
+    format("Blown clean off course!")
+}
+
+script Route33_WesternSea_EventScript_Pontia {
+    trainerbattle_single(TRAINER_ICHOR_PONTIA, Route33_WesternSea_Text_PontiaIntro, Route33_WesternSea_Text_PontiaDefeat)
+    setspeaker(Route33_WesternSea_Text_SpeakerPontia)
+    msgbox(format("The reef runs down to the seabed. Nothing gets through but the gaps.\pAnd the current, if somebody broke the rock."), MSGBOX_AUTOCLOSE)
+}
+
+text Route33_WesternSea_Text_PontiaIntro {
+    format("This gap's mine. Every boat that slips through pays a battle!")
+}
+
+text Route33_WesternSea_Text_PontiaDefeat {
+    format("Fine, fine. Pass.")
+}
+
+script Route33_WesternSea_EventScript_Aktaios {
+    trainerbattle_single(TRAINER_ICHOR_AKTAIOS, Route33_WesternSea_Text_AktaiosIntro, Route33_WesternSea_Text_AktaiosDefeat)
+    setspeaker(Route33_WesternSea_Text_SpeakerAktaios)
+    msgbox(format("There's a wreck west of here, on a shoal.\pSomething still glints on her deck. I'm not going up there."), MSGBOX_AUTOCLOSE)
+}
+
+text Route33_WesternSea_Text_AktaiosIntro {
+    format("I dive this reef for sponges, and you're scaring them!")
+}
+
+text Route33_WesternSea_Text_AktaiosDefeat {
+    format("The sponges don't care who won.")
+}
+
+script Route33_WesternSea_EventScript_Halieus {
+    trainerbattle_single(TRAINER_ICHOR_HALIEUS, Route33_WesternSea_Text_HalieusIntro, Route33_WesternSea_Text_HalieusDefeat)
+    setspeaker(Route33_WesternSea_Text_SpeakerHalieus)
+    msgbox(format("She was a grain ship out of Kyrene, they say.\pThe grain fed the fish, and the fish feed me."), MSGBOX_AUTOCLOSE)
+}
+
+text Route33_WesternSea_Text_HalieusIntro {
+    format("Fish love a wreck. So do I. Off my deck!")
+}
+
+text Route33_WesternSea_Text_HalieusDefeat {
+    format("Lost my bait and the battle.")
+}
+
+script Route33_WesternSea_EventScript_Nerites {
+    trainerbattle_single(TRAINER_ICHOR_NERITES, Route33_WesternSea_Text_NeritesIntro, Route33_WesternSea_Text_NeritesDefeat)
+    setspeaker(Route33_WesternSea_Text_SpeakerNerites)
+    msgbox(format("Those rocks were nymphs once. They forgot to pour for the river,\pso Achelous made them islands. Now they don't forget anything."), MSGBOX_AUTOCLOSE)
+}
+
+text Route33_WesternSea_Text_NeritesIntro {
+    format("You stilled the whirlpool? Then you can face me.")
+}
+
+text Route33_WesternSea_Text_NeritesDefeat {
+    format("Flat as the sea you left behind.")
+}
+
+script Route33_WesternSea_EventScript_Damon {
+    trainerbattle_single(TRAINER_ICHOR_DAMON, Route33_WesternSea_Text_DamonIntro, Route33_WesternSea_Text_DamonDefeat)
+    setspeaker(Route33_WesternSea_Text_SpeakerDamon)
+    msgbox(format("The Phaeacians sailed Odysseus home in one night. Fastest ship there ever was.\pComing back, Poseidon struck her with the flat of his hand. Here she stays."), MSGBOX_AUTOCLOSE)
+}
+
+text Route33_WesternSea_Text_DamonIntro {
+    format("Mind your step. This deck's been stone a long time.")
+}
+
+text Route33_WesternSea_Text_DamonDefeat {
+    format("Ha! Like kicking a rock.")
+}
+
+// --- Kymon, becalmed: tow him home ------------------------------------------------
+script Route33_WesternSea_EventScript_KymonAtSea {
+    lock
+    faceplayer
+    setspeaker(Route33_WesternSea_Text_SpeakerKymon)
+    msgbox(format("No wind. Not a breath since dawn. And my oars floated off while I napped."), MSGBOX_DEFAULT)
+    setspeaker(Route33_WesternSea_Text_SpeakerKymon)
+    msgbox(format("Could you tow me home? Gran's islet, by the reef in the west."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Route33_WesternSea_Text_SpeakerKymon)
+        msgbox(format("Right. I'll just drift, then. Gracefully."), MSGBOX_DEFAULT)
+        release
+        end
+    }
+    setspeaker(Route33_WesternSea_Text_SpeakerKymon)
+    msgbox(format("Gods bless you! Here, for your trouble. Don't tell Gran."), MSGBOX_DEFAULT)
+    giveitem(ITEM_PEARL_STRING)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
+    setspeaker(Route33_WesternSea_Text_SpeakerKymon)
+    msgbox(format("Throw me a line! She's going to kill me."), MSGBOX_DEFAULT)
+    closemessage
+    playse(SE_M_SURF)
+    fadescreen(FADE_TO_BLACK)
+    setflag(FLAG_ICHOR_R33_KYMON_HOME)
+    warpsilent(MAP_ROUTE33_WESTERN_SEA, R33_TOW_X, R33_TOW_Y)
+    waitstate
+    release
+    end
+}
+
+// --- the whirlpools (Triton's Conch) -----------------------------------------------
+script Route33_WesternSea_EventScript_WhirlpoolEchinades {
+    lockall
+    call(EventScript_IchorWhirlpool)
+    if (var(VAR_RESULT) == TRUE) {
+        removeobject(LOCALID_R33_WHIRL_E1)
+        removeobject(LOCALID_R33_WHIRL_E2)
+        removeobject(LOCALID_R33_WHIRL_E3)
+        removeobject(LOCALID_R33_WHIRL_E4)
+        call(Route33_WesternSea_EventScript_DrawEchinadesCalm)
+        special(DrawWholeMapView)
+    }
+    releaseall
+}
+
+script Route33_WesternSea_EventScript_WhirlpoolLagoon {
+    lockall
+    call(EventScript_IchorWhirlpool)
+    if (var(VAR_RESULT) == TRUE) {
+        removeobject(LOCALID_R33_WHIRL_L1)
+        removeobject(LOCALID_R33_WHIRL_L2)
+        removeobject(LOCALID_R33_WHIRL_L3)
+        removeobject(LOCALID_R33_WHIRL_L4)
+        call(Route33_WesternSea_EventScript_DrawLagoonCalm)
+        special(DrawWholeMapView)
+    }
+    releaseall
+}
+
+script Route33_WesternSea_EventScript_DrawEchinadesCalm {
+    setmetatile(R33_WHIRL_ECHINADES_X, R33_WHIRL_ECHINADES_Y, METATILE_R33_SEA, FALSE)
+    setmetatile(R33_WHIRL_ECHINADES_X + 1, R33_WHIRL_ECHINADES_Y, METATILE_R33_SEA, FALSE)
+    setmetatile(R33_WHIRL_ECHINADES_X, R33_WHIRL_ECHINADES_Y + 1, METATILE_R33_SEA, FALSE)
+    setmetatile(R33_WHIRL_ECHINADES_X + 1, R33_WHIRL_ECHINADES_Y + 1, METATILE_R33_SEA, FALSE)
+    return
+}
+
+script Route33_WesternSea_EventScript_DrawLagoonCalm {
+    setmetatile(R33_WHIRL_LAGOON_X, R33_WHIRL_LAGOON_Y, METATILE_R33_SEA, FALSE)
+    setmetatile(R33_WHIRL_LAGOON_X + 1, R33_WHIRL_LAGOON_Y, METATILE_R33_SEA, FALSE)
+    setmetatile(R33_WHIRL_LAGOON_X, R33_WHIRL_LAGOON_Y + 1, METATILE_R33_SEA, FALSE)
+    setmetatile(R33_WHIRL_LAGOON_X + 1, R33_WHIRL_LAGOON_Y + 1, METATILE_R33_SEA, FALSE)
+    return
+}
+
+// --- the loose rock (the bronze ram) ----------------------------------------------
+script Route33_WesternSea_EventScript_RocksCove {
+    lockall
+    call(EventScript_IchorSeaRock)
+    if (var(VAR_RESULT) == TRUE) {
+        removeobject(LOCALID_R33_ROCK_COVE1)
+        removeobject(LOCALID_R33_ROCK_COVE2)
+        call(Route33_WesternSea_EventScript_DrawCoveOpen)
+        special(DrawWholeMapView)
+    }
+    releaseall
+}
+
+script Route33_WesternSea_EventScript_RocksCurrent {
+    lockall
+    call(EventScript_IchorSeaRock)
+    if (var(VAR_RESULT) == TRUE) {
+        removeobject(LOCALID_R33_ROCK_CURRENT1)
+        removeobject(LOCALID_R33_ROCK_CURRENT2)
+        call(Route33_WesternSea_EventScript_DrawCurrentOpen)
+        special(DrawWholeMapView)
+    }
+    releaseall
+}
+
+script Route33_WesternSea_EventScript_DrawCoveOpen {
+    setmetatile(R33_ROCKS_COVE_X, R33_ROCKS_COVE_Y, METATILE_R33_SEA, FALSE)
+    setmetatile(R33_ROCKS_COVE_X + 1, R33_ROCKS_COVE_Y, METATILE_R33_SEA, FALSE)
+    return
+}
+
+script Route33_WesternSea_EventScript_DrawCurrentOpen {
+    setmetatile(R33_ROCKS_CURRENT_X, R33_ROCKS_CURRENT_Y, METATILE_R33_CURRENT_W, FALSE)
+    setmetatile(R33_ROCKS_CURRENT_X, R33_ROCKS_CURRENT_Y + 1, METATILE_R33_CURRENT_W, FALSE)
+    return
+}
+
+script Route33_WesternSea_EventScript_DrawRaftHome {
+    setmetatile(R33_RAFT_SEA_X, R33_RAFT_SEA_Y, METATILE_R33_SEA, FALSE)
+    setmetatile(R33_RAFT_SEA_X + 1, R33_RAFT_SEA_Y, METATILE_R33_SEA, FALSE)
+    setmetatile(R33_RAFT_HOME_X, R33_RAFT_HOME_Y, METATILE_R33_RAFT_L, TRUE)
+    setmetatile(R33_RAFT_HOME_X + 1, R33_RAFT_HOME_Y, METATILE_R33_RAFT_R, TRUE)
+    return
+}
+
+// --- the fog bank toward the Pillars --------------------------------------------------
+script Route33_WesternSea_EventScript_FogBank {
+    msgbox(format("A wall of fog, thick as fleece. The bow would vanish into it at a length.\pSomewhere past it, they say, stand the Pillars."), MSGBOX_SIGN)
+}
+
+script Route33_WesternSea_EventScript_FogOn {
+    setvar(VAR_TEMP_2, 1)
+    setweather(WEATHER_FOG_HORIZONTAL)
+    doweather
+}
+
+script Route33_WesternSea_EventScript_FogOff {
+    setvar(VAR_TEMP_2, 0)
+    setweather(WEATHER_SUNNY)
+    doweather
+}
+
+// --- landings: ICHOR_STUB_PG_LANDING ------------------------------------------------
+// Each becomes setvar(VAR_0x8004, VOYAGE_<PORT>) and goto(EventScript_IchorLand)
+// once the sail engine lands; the port ids are in design/postgame/PLACEMENTS.md.
+script Route33_WesternSea_EventScript_LandTainaron {
+    msgbox(format("Cape Tainaron. Steps cut in the rock climb to a temple on the headland.\pThe way ashore isn't open yet."), MSGBOX_SIGN)
+}
+
+script Route33_WesternSea_EventScript_LandIthaka {
+    msgbox(format("Ithaka: the harbor of Phorkys, the Old Man of the Sea.\pThe way ashore isn't open yet."), MSGBOX_SIGN)
+}
+
+script Route33_WesternSea_EventScript_LandKerkyra {
+    msgbox(format("Kerkyra's harbor. Long Phaeacian ships ride at anchor inside.\pThe way ashore isn't open yet."), MSGBOX_SIGN)
+}
+
+script Route33_WesternSea_EventScript_LandJetty {
+    msgbox(format("Halia's jetty. A good place to tie up and step ashore."), MSGBOX_SIGN)
+}
+
+// --- the sea's sights -----------------------------------------------------------------
+script Route33_WesternSea_EventScript_StoneShip {
+    msgbox(format("A rock in the shape of a ship, oars out, as if it froze mid-stroke.\pSpray runs off it the way it runs off a hull."), MSGBOX_SIGN)
+}
+
+script Route33_WesternSea_EventScript_PoseidonsAltar {
+    goto(EventScript_IchorAltar_Poseidon)
+}
+
+script Route33_WesternSea_EventScript_TainaronCave {
+    msgbox(format("A sea cave in the cape's foot. Cold air breathes out of it, though the sun is warm."), MSGBOX_SIGN)
+}
+
+script Route33_WesternSea_EventScript_Echinades {
+    msgbox(format("Five rocks strung across the strait, and the reef between them.\pFishers say they were nymphs once, who forgot to pour for the river."), MSGBOX_SIGN)
+}
+
+script Route33_WesternSea_EventScript_PhorkysOlive {
+    msgbox(format("A long-leaved olive at the head of the cove. Behind it, a cave hums with bees."), MSGBOX_SIGN)
+}
+
+script Route33_WesternSea_EventScript_SignIslet {
+    msgbox(format("ROUTE 33\nHalia's islet, in the western sea."), MSGBOX_SIGN)
+}

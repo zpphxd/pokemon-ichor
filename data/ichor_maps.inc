@@ -18,3 +18,5 @@
 	.include "data/maps/PgTestDeck/scripts.inc"
 	.include "data/maps/EuploiaDeck/scripts.inc"
 	.include "data/maps/EuploiaBelow/scripts.inc"
+	.include "data/maps/Route33_WesternSea/scripts.inc"
+	.include "data/maps/Route33_WesternSea_HaliasHut/scripts.inc"

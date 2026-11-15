@@ -1202,12 +1202,12 @@
 #define FLAG_UNUSED_0x47D                                           0x47D // Unused Flag
 #define FLAG_UNUSED_0x47E                                           0x47E // Unused Flag
 #define FLAG_UNUSED_0x47F                                           0x47F // Unused Flag
-#define FLAG_UNUSED_0x480                                           0x480 // Unused Flag
-#define FLAG_UNUSED_0x481                                           0x481 // Unused Flag
-#define FLAG_UNUSED_0x482                                           0x482 // Unused Flag
-#define FLAG_UNUSED_0x483                                           0x483 // Unused Flag
-#define FLAG_UNUSED_0x484                                           0x484 // Unused Flag
-#define FLAG_UNUSED_0x485                                           0x485 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_R33_WRECK                                 0x480 // Ichor: post-game: Route 33 hidden item, the wreck's deck
+#define FLAG_ICHOR_HIDDEN_R33_STONE_SHIP                            0x481 // Ichor: post-game: Route 33 hidden item, the stone ship
+#define FLAG_ICHOR_HIDDEN_R33_BIRDS_ROCK                            0x482 // Ichor: post-game: Route 33 hidden item, the birds' rock's foot
+#define FLAG_ICHOR_HIDDEN_R33_PHORKYS                               0x483 // Ichor: post-game: Route 33 hidden item, under Phorkys's olive on Ithaka
+#define FLAG_ICHOR_HIDDEN_R33_HALIA                                 0x484 // Ichor: post-game: Route 33 hidden item, the tip of Halia's islet
+#define FLAG_ICHOR_HIDDEN_R33_ALTAR                                 0x485 // Ichor: post-game: Route 33 hidden item, the foot of Poseidon's stack
 #define FLAG_UNUSED_0x486                                           0x486 // Unused Flag
 #define FLAG_UNUSED_0x487                                           0x487 // Unused Flag
 #define FLAG_UNUSED_0x488                                           0x488 // Unused Flag
@@ -1766,6 +1766,15 @@
 #define FLAG_ICHOR_PG_MET_NOLAN                 (FLAG_ICHOR_GENERAL_START + 0x31E) // Ichor: post-game crew: Christopher Nolan has introduced himself at Lechaion
 #define FLAG_ICHOR_SHIP_IASO_TENDED             (FLAG_ICHOR_GENERAL_START + 0x320) // Ichor: post-game: Iaso has cured and revived the party since the last rest aboard (the Euploia's bunk clears it)
 #define FLAG_ICHOR_SHIP_SEA_CHEST               (FLAG_ICHOR_GENERAL_START + 0x321) // Ichor: post-game: opened your sea chest below the Euploia's deck (Mom packed it)
+#define FLAG_ICHOR_R33_WHIRLPOOL_ECHINADES      (FLAG_ICHOR_GENERAL_START + 0x325) // Ichor: post-game: Route 33, Triton's Conch calmed the whirlpool in the Echinades' gap (hide flag)
+#define FLAG_ICHOR_R33_WHIRLPOOL_LAGOON         (FLAG_ICHOR_GENERAL_START + 0x326) // Ichor: post-game: Route 33, Triton's Conch calmed the whirlpool at the lagoon's mouth (hide flag)
+#define FLAG_ICHOR_R33_ROCKS_COVE               (FLAG_ICHOR_GENERAL_START + 0x327) // Ichor: post-game: Route 33, the bronze ram broke the loose rock across the cove (hide flag)
+#define FLAG_ICHOR_R33_ROCKS_CHANNEL            (FLAG_ICHOR_GENERAL_START + 0x328) // Ichor: post-game: Route 33, the bronze ram broke the loose rock in the inner channel (hide flag)
+#define FLAG_ICHOR_ITEM_R33_BIRDS_ROCK          (FLAG_ICHOR_GENERAL_START + 0x329) // Ichor: post-game: Route 33, the amphora in the birds' rock's lee
+#define FLAG_ICHOR_ITEM_R33_CURRENT             (FLAG_ICHOR_GENERAL_START + 0x32A) // Ichor: post-game: Route 33, the amphora in the current's eddy
+#define FLAG_ICHOR_ITEM_R33_COVE                (FLAG_ICHOR_GENERAL_START + 0x32B) // Ichor: post-game: Route 33, the item on the cove's beach behind the loose rock
+#define FLAG_ICHOR_ITEM_R33_LAGOON              (FLAG_ICHOR_GENERAL_START + 0x32C) // Ichor: post-game: Route 33, the amphora in the lagoon behind the whirlpool
+#define FLAG_ICHOR_R33_KYMON_HOME               (FLAG_ICHOR_GENERAL_START + 0x32D) // Ichor: post-game: Route 33, you towed Kymon's raft home to Halia's islet
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)

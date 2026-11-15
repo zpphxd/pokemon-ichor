@@ -1,0 +1,1034 @@
+{
+  "id": "MAP_ROUTE33_WESTERN_SEA",
+  "name": "Route33_WesternSea",
+  "layout": "LAYOUT_ROUTE33_WESTERN_SEA",
+  "music": "MUS_ICHOR_TRIREME",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_AETHOS_ROUTE_33",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_OCEAN_ROUTE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_R33_GLAUKON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 51,
+      "y": 63,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route33_WesternSea_EventScript_Glaukon",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_R33_PONTIA",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
+      "x": 40,
+      "y": 55,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route33_WesternSea_EventScript_Pontia",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_R33_AKTAIOS",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
+      "x": 40,
+      "y": 75,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route33_WesternSea_EventScript_Aktaios",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_R33_HALIEUS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_FISHER",
+      "x": 30,
+      "y": 74,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route33_WesternSea_EventScript_Halieus",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_R33_NERITES",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
+      "x": 13,
+      "y": 37,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route33_WesternSea_EventScript_Nerites",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_R33_DAMON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 13,
+      "y": 6,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "Route33_WesternSea_EventScript_Damon",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_R33_KYMON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_FISHER",
+      "x": 47,
+      "y": 57,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_KymonAtSea",
+      "flag": "FLAG_ICHOR_R33_KYMON_HOME"
+    },
+    {
+      "local_id": "LOCALID_R33_WHIRL_E1",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 14,
+      "y": 38,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_WhirlpoolEchinades",
+      "flag": "FLAG_ICHOR_R33_WHIRLPOOL_ECHINADES"
+    },
+    {
+      "local_id": "LOCALID_R33_WHIRL_E2",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 15,
+      "y": 38,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_WhirlpoolEchinades",
+      "flag": "FLAG_ICHOR_R33_WHIRLPOOL_ECHINADES"
+    },
+    {
+      "local_id": "LOCALID_R33_WHIRL_E3",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 14,
+      "y": 39,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_WhirlpoolEchinades",
+      "flag": "FLAG_ICHOR_R33_WHIRLPOOL_ECHINADES"
+    },
+    {
+      "local_id": "LOCALID_R33_WHIRL_E4",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 15,
+      "y": 39,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_WhirlpoolEchinades",
+      "flag": "FLAG_ICHOR_R33_WHIRLPOOL_ECHINADES"
+    },
+    {
+      "local_id": "LOCALID_R33_WHIRL_L1",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 33,
+      "y": 11,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_WhirlpoolLagoon",
+      "flag": "FLAG_ICHOR_R33_WHIRLPOOL_LAGOON"
+    },
+    {
+      "local_id": "LOCALID_R33_WHIRL_L2",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 34,
+      "y": 11,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_WhirlpoolLagoon",
+      "flag": "FLAG_ICHOR_R33_WHIRLPOOL_LAGOON"
+    },
+    {
+      "local_id": "LOCALID_R33_WHIRL_L3",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 33,
+      "y": 12,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_WhirlpoolLagoon",
+      "flag": "FLAG_ICHOR_R33_WHIRLPOOL_LAGOON"
+    },
+    {
+      "local_id": "LOCALID_R33_WHIRL_L4",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 34,
+      "y": 12,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_WhirlpoolLagoon",
+      "flag": "FLAG_ICHOR_R33_WHIRLPOOL_LAGOON"
+    },
+    {
+      "local_id": "LOCALID_R33_ROCK_COVE1",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 42,
+      "y": 51,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_RocksCove",
+      "flag": "FLAG_ICHOR_R33_ROCKS_COVE"
+    },
+    {
+      "local_id": "LOCALID_R33_ROCK_COVE2",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 43,
+      "y": 51,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_RocksCove",
+      "flag": "FLAG_ICHOR_R33_ROCKS_COVE"
+    },
+    {
+      "local_id": "LOCALID_R33_ROCK_CURRENT1",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 40,
+      "y": 66,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_RocksCurrent",
+      "flag": "FLAG_ICHOR_R33_ROCKS_CHANNEL"
+    },
+    {
+      "local_id": "LOCALID_R33_ROCK_CURRENT2",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 40,
+      "y": 67,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_RocksCurrent",
+      "flag": "FLAG_ICHOR_R33_ROCKS_CHANNEL"
+    },
+    {
+      "local_id": "LOCALID_R33_FOG1",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 10,
+      "y": 66,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_FogBank",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "local_id": "LOCALID_R33_FOG2",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 10,
+      "y": 67,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route33_WesternSea_EventScript_FogBank",
+      "flag": "FLAG_TEMP_1"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 28,
+      "y": 17,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_ELIXIR",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R33_BIRDS_ROCK"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 16,
+      "y": 64,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_REVIVE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R33_CURRENT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 42,
+      "y": 48,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ABILITY_CAPSULE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R33_COVE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 39,
+      "y": 12,
+      "elevation": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_DAMP_ROCK",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_R33_LAGOON"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 14,
+      "y": 44,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE33_WESTERN_SEA_HALIAS_HUT",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 52,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 52,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 53,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 53,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 54,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 54,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 55,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 55,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 56,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 56,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 57,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 57,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 58,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 58,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 59,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 59,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 60,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 60,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 61,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 61,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 62,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 62,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 63,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 63,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 64,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 64,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 65,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 65,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 66,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 66,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 67,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 67,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 68,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 68,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 69,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 69,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 70,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 70,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 71,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 71,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 72,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 72,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 73,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 73,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 74,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 74,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 75,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 75,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 76,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 76,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 77,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 77,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 78,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 78,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 79,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "Route33_WesternSea_EventScript_FogOn"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 79,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "Route33_WesternSea_EventScript_FogOff"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 57,
+      "y": 66,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_LandTainaron"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_LandIthaka"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_LandKerkyra"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 47,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_LandJetty"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_StoneShip"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_StoneShip"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 43,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_PoseidonsAltar"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 43,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_PoseidonsAltar"
+    },
+    {
+      "type": "sign",
+      "x": 60,
+      "y": 69,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_TainaronCave"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 38,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_Echinades"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 38,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_Echinades"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 26,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_PhorkysOlive"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 44,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route33_WesternSea_EventScript_SignIslet"
+    },
+    {
+      "type": "hidden_item",
+      "x": 31,
+      "y": 74,
+      "elevation": 0,
+      "item": "ITEM_BIG_NUGGET",
+      "flag": "FLAG_ICHOR_HIDDEN_R33_WRECK"
+    },
+    {
+      "type": "hidden_item",
+      "x": 12,
+      "y": 5,
+      "elevation": 0,
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_ICHOR_HIDDEN_R33_STONE_SHIP"
+    },
+    {
+      "type": "hidden_item",
+      "x": 27,
+      "y": 16,
+      "elevation": 0,
+      "item": "ITEM_PRETTY_FEATHER",
+      "flag": "FLAG_ICHOR_HIDDEN_R33_BIRDS_ROCK"
+    },
+    {
+      "type": "hidden_item",
+      "x": 3,
+      "y": 25,
+      "elevation": 0,
+      "item": "ITEM_OLIVE_OIL",
+      "flag": "FLAG_ICHOR_HIDDEN_R33_PHORKYS"
+    },
+    {
+      "type": "hidden_item",
+      "x": 14,
+      "y": 51,
+      "elevation": 0,
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_ICHOR_HIDDEN_R33_HALIA"
+    },
+    {
+      "type": "hidden_item",
+      "x": 6,
+      "y": 42,
+      "elevation": 0,
+      "item": "ITEM_BIG_PEARL",
+      "flag": "FLAG_ICHOR_HIDDEN_R33_ALTAR"
+    }
+  ]
+}

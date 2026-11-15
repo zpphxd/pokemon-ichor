@@ -109,3 +109,6 @@ const u16 gMetatileAttributes_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/ti
 // Ichor: euploia
 const u16 gMetatiles_PorytilesManaged_Euploia[] = INCBIN_U16("data/tilesets/secondary/euploia/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Euploia[] = INCBIN_U16("data/tilesets/secondary/euploia/porytiles_bin/metatile_attributes.bin");
+// Ichor (world-postgame): westsea
+const u16 gMetatiles_PorytilesManaged_Westsea[] = INCBIN_U16("data/tilesets/secondary/westsea/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Westsea[] = INCBIN_U16("data/tilesets/secondary/westsea/porytiles_bin/metatile_attributes.bin");

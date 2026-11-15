@@ -3,14 +3,16 @@
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorDynamic",
     "gMapGroup_SpecialArea",
-    "gMapGroup_IndoorKalliste"
+    "gMapGroup_IndoorKalliste",
+    "gMapGroup_IndoorPostgame"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
     "KallisteRoute1",
     "AktiTown",
     "KallisteRoute1_KronionHill",
-    "EuploiaDeck"
+    "EuploiaDeck",
+    "Route33_WesternSea"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -56,5 +58,8 @@
     "AktiTown_GoatherdsHouse",
     "PgTestDeck",
     "EuploiaBelow"
+  ],
+  "gMapGroup_IndoorPostgame": [
+    "Route33_WesternSea_HaliasHut"
   ]
 }

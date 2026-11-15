@@ -54,7 +54,13 @@
 #define TRAINERS_END_ACT3                     0
 
 // The post-game, ids 500-679: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
-#define TRAINERS_END_POSTGAME                 0
+#define TRAINER_ICHOR_GLAUKON                 500 // westsea: Route 33, the cape's raft (the first, easy)
+#define TRAINER_ICHOR_PONTIA                  501 // westsea: Route 33, the reef fence's north gap
+#define TRAINER_ICHOR_AKTAIOS                 502 // westsea: Route 33, the reef fence's south gap
+#define TRAINER_ICHOR_HALIEUS                 503 // westsea: Route 33, on the wreck
+#define TRAINER_ICHOR_NERITES                 504 // westsea: Route 33, past the Echinades' whirlpool
+#define TRAINER_ICHOR_DAMON                   505 // westsea: Route 33, on the stone ship off Kerkyra
+#define TRAINERS_END_POSTGAME                 506
 
 // The Oikoumene, ids 680-819 and 864-1023: the second map.
 #define TRAINERS_END_OIKOUMENE                0

@@ -37,6 +37,7 @@
 #include "constants/ichor.h"
 #include "constants/ichor_sailing.h"
 #include "constants/ichor_postgame.h"
+#include "constants/ichor_postgame_sea.h"
 #include "constants/follower_npc.h"
 #include "constants/frontier_util.h"
 #include "constants/game_stat.h"
@@ -804,6 +805,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/ichor_postgame_sailing.inc" @ Ichor postgame: the sailing layer
 	.include "data/scripts/ichor_postgame_opening.inc" @ Ichor: the post-game's opening
 	.include "data/scripts/ichor_postgame_crew.inc" @ Ichor: the Euploia's crew
+	.include "data/scripts/ichor_postgame_sea.inc" @ Ichor: the post-game's seas (whirlpools, sea rocks)
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"

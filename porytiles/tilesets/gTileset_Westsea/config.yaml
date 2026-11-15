@@ -1,0 +1,4 @@
+tileset:
+  primary_pairing:
+    mode: manual
+    partners: [gTileset_Aethos]
