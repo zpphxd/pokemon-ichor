@@ -257,12 +257,12 @@ script ThyrsaCity_TempleOfDionysus_EventScript_Image {
     end
 }
 
-// The god's great altar in his orchestra (offerings count double, SYSTEMS.md §3).
+// The god's great altar in his orchestra: the engine's temple altar (ENGINE_API §3),
+// where offerings count double. Its own line first, then the rite's menu.
 script ThyrsaCity_TempleOfDionysus_EventScript_Altar {
-    // ICHOR_STUB_RITES: goto(EventScript_IchorTempleAltar_Dionysus) once the rites land.
-    msgbox(format("The great altar of Dionysus. Ivy grows over it, and the stone is stained with wine."),
-        MSGBOX_SIGN)
-    end
+    lockall
+    msgbox(format("The great altar of Dionysus. Ivy grows over it, and the stone is stained with wine."))
+    goto(EventScript_IchorTempleAltar_Dionysus)
 }
 
 script ThyrsaCity_TempleOfDionysus_EventScript_Krater {
@@ -757,8 +757,10 @@ script ThyrsaCity_TempleOfDionysus_EventScript_ThespisDefeated {
         "The Mask Laurel. Ivy and laurel together. The god likes both."))
     setflag(FLAG_BADGE04_GET)
     setvar(VAR_ICHOR_THREE_ACT_PLAY, 5)
-    // ICHOR_STUB_RITES: Dionysus Favor +15 (SCRIPT.md beat 31): setvar(VAR_0x8004,
-    // ICHOR_GOD_DIONYSUS), setvar(VAR_0x8005, ICHOR_FAVOR_LAUREL), special(Ichor_AddFavor).
+    // Dionysus Favor +15 for his laurel (SCRIPT.md beat 31)
+    setvar(VAR_0x8004, ICHOR_GOD_DIONYSUS)
+    setvar(VAR_0x8005, ICHOR_FAVOR_LAUREL)
+    special(Ichor_AddFavor)
     setspeaker(SP_NAME_NONE)
     message(format("{PLAYER} received the Mask Laurel from Thespis!"))
     waitmessage
@@ -770,15 +772,16 @@ script ThyrsaCity_TempleOfDionysus_EventScript_ThespisDefeated {
     playse(SE_SHINY)
     msgbox(format("A cup of stars fills a patch of your Star Chart. The Crater: the god's own cup."))
     waitse
-    // Dionysus's rite (SYSTEMS.md §3): the Hierophant teaches it, with one free Wine.
-    // ICHOR_STUB_RITES and ICHOR_STUB_OFFERINGS: call EventScript_IchorHierophantRite with
-    // VAR_0x8004 = ICHOR_GOD_DIONYSUS; it gives ITEM_WINE and sets the Hierophant's-offering
-    // flag (FLAG_ICHOR_GIFTS_START + 4 * ICHOR_GOD_DIONYSUS + 3). Until then the lines play
-    // and the Wine is skipped.
+    // Dionysus's rite (SYSTEMS.md §3): the Hierophant teaches it, with one free loved
+    // offering. Thespis says it his way; EventScript_IchorHierophantRite gives the Wine
+    // and sets the Hierophant's-offering flag (FLAG_ICHOR_GIFT(ICHOR_GOD_DIONYSUS,
+    // ICHOR_GIFT_HIEROPHANT)), once.
     setspeaker(ThyrsaCity_TempleOfDionysus_Text_NameThespis)
     msgbox(format(
         "The god likes wine. Unwatered. He's not a fussy god, but he has standards.\p"
         "Pour it on his altar and see what he does. Nobody ever knows."))
+    setvar(VAR_0x8004, ICHOR_GOD_DIONYSUS)
+    call(EventScript_IchorHierophantRite)
     msgbox(format(
         "The play's tonight. With my masks or without them.\p"
         "I'll be backstage. If anything goes wrong, come and find me.\p"
@@ -835,9 +838,18 @@ script ThyrsaCity_TempleOfDionysus_EventScript_Thespis {
     }
     setspeaker(ThyrsaCity_TempleOfDionysus_Text_NameThespis)
     msgbox(format("Comedy or tragedy? Ask me tomorrow. Today I'm both."))
-    // ICHOR_STUB_RITES: gift I, TM Swagger at Dionysus Favor 30 (SCRIPT.md beat 31):
-    // setvar(VAR_0x8004, ICHOR_GOD_DIONYSUS), call(EventScript_IchorHierophantGift); its
-    // line is "The god's pleased with you. He told me in a dream. He was very drunk."
+    // Gift I, Swagger, at Dionysus Favor 30 (SCRIPT.md beat 31): Thespis's line, then the
+    // engine's lesson (EventScript_IchorHierophantGift), which sets FLAG_ICHOR_GIFT
+    // (ICHOR_GOD_DIONYSUS, ICHOR_GIFT_I) once it's taught.
+    setvar(VAR_0x8004, ICHOR_GOD_DIONYSUS)
+    copyvar(VAR_0x800A, VAR_0x8004)
+    specialvar(VAR_RESULT, Ichor_NextGiftDue)
+    if (var(VAR_RESULT) == ICHOR_GIFT_I) {
+        setspeaker(ThyrsaCity_TempleOfDionysus_Text_NameThespis)
+        msgbox(format("The god's pleased with you. He told me in a dream. He was very drunk."))
+        setvar(VAR_0x8004, ICHOR_GOD_DIONYSUS)
+        call(EventScript_IchorHierophantGift)
+    }
     release
     end
 }

@@ -36,3 +36,19 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 - Air Slash
 - Mind Reader
 
+
+=== TRAINER_ICHOR_MNESARETE ===
+Name: MNESARETE
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Gelasable
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Spalunk
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe

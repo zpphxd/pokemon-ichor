@@ -1437,6 +1437,36 @@
                 "species": "SPECIES_CAIRNOLITH"
               }
             ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 29,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 30,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 29,
+                "max_level": 30,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 31,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 31,
+                "species": "SPECIES_SPALUNK"
+              }
+            ]
           }
         },
         {

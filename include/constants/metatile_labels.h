@@ -1298,5 +1298,13 @@
 #define METATILE_Arkadia_LampLit_L            0x222
 #define METATILE_Arkadia_LampLit_R            0x223
 // end gTileset_Arkadia
+// gTileset_Trophonios (Ichor: Trophonios's cave), written by tools/ichor/art/trophonios_build.py
+#define METATILE_Trophonios_Brazier_ColdTop      0x21E
+#define METATILE_Trophonios_Brazier_Cold         0x226
+#define METATILE_Trophonios_Brazier_LitTop       0x21F
+#define METATILE_Trophonios_Brazier_Lit          0x227
+#define METATILE_Trophonios_Cleft_Coils          0x278
+#define METATILE_Trophonios_Cleft_Empty          0x279
+// end gTileset_Trophonios
 
 #endif // GUARD_METATILE_LABELS_H

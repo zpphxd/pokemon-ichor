@@ -161,15 +161,16 @@ def _lip(L, x0, x1, y=0):
 
 
 def terrace_wall():
-    s = struct("terrace", "Cyclopean terrace wall", 5, 1, walk=["XXXX."], ground="none",
+    s = struct("terrace", "Cyclopean terrace wall", 4, 1, walk=["XXXX"], ground="none",
                notes="A retaining wall one cell tall, the upper level to the north, in the city "
                      "wall's masonry under a dressed coping: (0) west end, (1)-(2) the run, an "
-                     "even/odd pair (put (1) on even map columns), (3) east end, (4) a narrow "
-                     "stair up through the wall (walkable).")
+                     "even/odd pair (put (1) on even map columns), (3) east end. (The narrow "
+                     "stair batch 1 drew here was never laid, and its tiles went to the polish "
+                     "pass.)")
     L = s.B
-    for i in range(5):
+    for i in range(4):
         T.fill_masonry(L, i * 16, 0, 16, 16, "wall", ox=-16 * (i % 2), oy=-16)
-    _lip(L, 0, 80)
+    _lip(L, 0, 64)
     # ends: the wall's dressed quoins
     for x0, lit in ((0, True), (48, False)):
         xs = range(x0, x0 + 4) if lit else range(x0 + 12, x0 + 16)
@@ -179,16 +180,7 @@ def terrace_wall():
         L.vline(x0 if lit else x0 + 15, 0, 15, "cg0")
         for y in range(4, 16, 6):
             L.hline(xs[0], xs[-1], y, "cg1")
-    # a narrow stair through the wall
-    x0 = 64
-    for k in range(4):
-        y = k * 4
-        L.rect(x0 + 2, y, 12, 4, "cg4")
-        L.hline(x0 + 2, x0 + 13, y, "cg5")
-        L.hline(x0 + 2, x0 + 13, y + 3, "cg2")
-    L.vline(x0 + 1, 0, 15, "cg0")
-    L.vline(x0 + 14, 0, 15, "cg0")
-    s.names = {"W": (0, 0), "run": (1, 0), "run_odd": (2, 0), "E": (3, 0), "stair": (4, 0)}
+    s.names = {"W": (0, 0), "run": (1, 0), "run_odd": (2, 0), "E": (3, 0)}
     return finish(s)
 
 
@@ -287,16 +279,17 @@ def wall_face():
         L.px(x, 16, "cg0")
         L.px(x, 17, "cg2")
     # outer corners: dressed quoins up the face's ends
+    # (the battlement row's corner cells are never laid, since the strips cover the
+    # corners: they are drawn as the run, so they cost no tiles of their own)
     for x0, lit in ((0, True), (48, False)):
-        for y in range(0, 48):
+        for y in range(16, 48):
             for k in range(4):
                 x = x0 + k if lit else x0 + 15 - k
-                if y >= 16:
-                    c = ("cg4", "cg4", "cg3", "cg0")[k] if lit else ("cg0", "cg1", "cg2", "cg2")[k]
-                    if (y - 16) % 8 == 7:
-                        c = "cg1" if k < 3 else "cg0"
-                    L.px(x, y, c)
-        L.vline(x0 if lit else x0 + 15, 0, 47, "ink")
+                c = ("cg4", "cg4", "cg3", "cg0")[k] if lit else ("cg0", "cg1", "cg2", "cg2")[k]
+                if (y - 16) % 8 == 7:
+                    c = "cg1" if k < 3 else "cg0"
+                L.px(x, y, c)
+        L.vline(x0 if lit else x0 + 15, 16, 47, "ink")
     s.names = {"W": (0, 0), "run": (1, 0), "run_odd": (2, 0), "E": (3, 0)}
     return finish(s)
 

@@ -184,10 +184,15 @@ again?", and flavor for the altar, the krater, the thyrsoi and the thunder machi
 ## Stubs (by tag)
 
 - `ICHOR_STUB_MUSIC`: the map plays `MUS_ICHOR_TEMPLE_HERMES`.
-- `ICHOR_STUB_RITES`: the altar shows a line (later `EventScript_IchorTempleAltar_Dionysus`);
-  Dionysus Favor +15 with the laurel; the rite (`EventScript_IchorHierophantRite`) and gift I,
-  TM Swagger at Favor 30 (`EventScript_IchorHierophantGift`), with its line kept in a comment.
-- `ICHOR_STUB_OFFERINGS`: the free Wine Thespis gives with the rite is skipped.
+- **The rites are the engine's** (polish pass, Act II batch 2; ENGINE_API §3): the great
+  altar shows its line, then runs `EventScript_IchorTempleAltar_Dionysus` (PRAY, MAKE AN
+  OFFERING at double Favor, FAVOR); the laurel gives Dionysus +15 Favor
+  (`Ichor_AddFavor`, `ICHOR_FAVOR_LAUREL`); after his rite's lines Thespis calls
+  `EventScript_IchorHierophantRite`, which gives the free Wine once and sets the Hierophant's
+  offering flag; talking to him after the laurel, gift I (Swagger, at Favor 30) comes with his
+  line ("The god's pleased with you. He told me in a dream. He was very drunk.") and then
+  `EventScript_IchorHierophantGift`'s lesson. `act2_temple.sh` checks the prayer's Favor, the
+  laurel's +15, the Wine and the offering flag.
 - `ICHOR_STUB_GARLAND`: Oinoe's garland at the god's image waits on the rooms agent's
   `FLAG_ICHOR_OINOE_GARLAND`/`FLAG_ICHOR_GARLAND_LAID` and the key item `ITEM_IVY_GARLAND`;
   the script for it is written out in a comment. `OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE_GARLAND`

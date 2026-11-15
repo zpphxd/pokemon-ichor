@@ -1,1 +1,141 @@
-mapscripts Kirrha_Inn_MapScripts {}
+// The pilgrims' inn, Kirrha (SCRIPT.md Part 2, Kirrha interiors; beat 37A's town).
+// Room: tools/ichor/maps/westrooms.py. A square inn round a courtyard well. Strophios
+// (6,2) stands behind the long table, between the hearth and a stack of bedding, and is
+// talked to across it from (6,4). The heal is the Asclepeion's: the balls warm on the
+// hearth at his x-2..x-1, and he nods. This is Kirrha's heal location,
+// HEAL_LOCATION_KIRRHA; a whiteout wakes the player at (6,4).
+//
+// The whiteout's heal script (EventScript_AfterWhiteOutHeal) bows the respawn NPC with
+// nurse_joy_bow, and only a walker with sAnimTable_Nurse has that frame: on any other it
+// hangs. Strophios's sprite has none, so the heal location's respawn NPC is
+// LOCALID_KIRRHA_INN_RESPAWN, an object that never appears (hidden by
+// FLAG_SYS_POKEMON_GET); a missing object makes the bow a no-op. When his sprite gets a
+// bow frame, point respawn_npc at LOCALID_KIRRHA_INN_STROPHIOS and drop the stand-in.
+//
+// Pylades (11,2) gives the fig on a string for Xenodike at Route 9's lookout. The fig is
+// a key item that doesn't exist (ICHOR_STUB_KEY_ITEMS: ITEM_PYLADES_FIG); the shared
+// FLAG_ICHOR_PYLADES_FIG carries it, with a message. Once the parnassos agent's lookout
+// sets FLAG_ICHOR_XENODIKE_CAME_DOWN, Xenodike (12,2) stands beside him (FLAG_TEMP_1 hides
+// her until then) and Pylades gives the Focus Sash (FLAG_ICHOR_GOT_FOCUS_SASH).
+// A pilgrim's coin lies hidden down the well (7,5), read from (7,4).
+
+mapscripts Kirrha_Inn_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_KIRRHA)
+        if (!flag(FLAG_ICHOR_XENODIKE_CAME_DOWN)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Kirrha_Inn_Name_Strophios { "STROPHIOS" }
+text Kirrha_Inn_Name_Pylades { "PYLADES" }
+text Kirrha_Inn_Name_Xenodike { "XENODIKE" }
+text Kirrha_Inn_Name_Pilgrim { "PILGRIM" }
+
+script Kirrha_Inn_EventScript_Strophios {
+    lock
+    faceplayer
+    setspeaker(Kirrha_Inn_Name_Strophios)
+    msgbox(format("Pilgrim? Rest. It's free this month. Nobody's going anywhere."))
+    incrementgamestat(GAME_STAT_USED_POKECENTER)
+    setvar(VAR_0x800B, LOCALID_KIRRHA_INN_STROPHIOS)
+    call(EventScript_PkmnCenterNurse_TakeAndHealPkmn)
+    setspeaker(Kirrha_Inn_Name_Strophios)
+    message(format("My ancestor was king of this harbor. Now I'm king of the beds."))
+    waitmessage
+    // A nod, not the healer's bow: Strophios's walker has no bow frame (ANIM_NURSE_BOW).
+    applymovement(LOCALID_KIRRHA_INN_STROPHIOS, Common_Movement_WalkInPlaceFasterDown)
+    waitmovement(0)
+    waitbuttonpress
+    release
+}
+
+script Kirrha_Inn_EventScript_Pylades {
+    lock
+    faceplayer
+    setspeaker(Kirrha_Inn_Name_Pylades)
+    if (flag(FLAG_ICHOR_GOT_FOCUS_SASH)) {
+        msgbox(format("Father says the beds can run themselves for a week. He's never said that before."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_XENODIKE_CAME_DOWN)) {
+        msgbox(format("She came down! She threw the fig at me. Where we're from, that's yes."))
+        setspeaker(Kirrha_Inn_Name_Xenodike)
+        msgbox(format("It doesn't mean yes. It means you're an idiot. It also means yes."))
+        setspeaker(Kirrha_Inn_Name_Pylades)
+        msgbox(format("Here. Take this. My father wore it, and his father.\p"
+                      "It's a friend's sash. It holds you up when you ought to fall over."))
+        giveitem(ITEM_FOCUS_SASH)
+        if (var(VAR_RESULT) == FALSE) {
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_FOCUS_SASH)
+        setspeaker(Kirrha_Inn_Name_Xenodike)
+        msgbox(format("In the old story his ancestor never left his friend's side. Not once.\p"
+                      "I've told him that's not a reason to never leave this inn."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_PYLADES_FIG)) {
+        msgbox(format("She's at the lookout, up the Split Road. Give her the fig. She'll know."))
+        release
+        end
+    }
+    msgbox(format("My friend Xenodike went up to the lookout on the Split Road.\p"
+                  "To watch the temple till the god opens. Nine days ago. She's stubborn.\p"
+                  "I can't go up after her. Somebody has to run the beds.\p"
+                  "If you're going that way, would you give her this?"))
+    // ICHOR_STUB_KEY_ITEMS: ITEM_PYLADES_FIG isn't an item yet; the flag carries the fig.
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received a dried fig on a string."))
+    waitmessage
+    waitfanfare
+    setflag(FLAG_ICHOR_PYLADES_FIG)
+    setspeaker(Kirrha_Inn_Name_Pylades)
+    msgbox(format("She'll know it's from me. It's a joke. A long one. About a fig."))
+    release
+}
+
+script Kirrha_Inn_EventScript_Xenodike {
+    lock
+    faceplayer
+    setspeaker(Kirrha_Inn_Name_Xenodike)
+    if (flag(FLAG_ICHOR_GOT_FOCUS_SASH)) {
+        msgbox(format("Astyra first. Then we'll see. Soon, as the Pythia says."))
+    } else {
+        msgbox(format("Talk to him. He's been practising a speech. It's terrible."))
+    }
+    release
+}
+
+script Kirrha_Inn_EventScript_WellPilgrim {
+    lock
+    faceplayer
+    setspeaker(Kirrha_Inn_Name_Pilgrim)
+    msgbox(format("I drew a bucket and asked the well what the god would say.\p"
+                  "The well said nothing. It's a well. Still more polite than the god."))
+    release
+}
+
+script Kirrha_Inn_EventScript_Sign {
+    msgbox(format("Over the hearth, a big painted sign: a ship and a mule.\p"
+                  "“WE TAKE YOU ALL THE WAY. (WHEN THE GOD IS IN.)”"), MSGBOX_SIGN)
+}
+
+script Kirrha_Inn_EventScript_Bundles {
+    msgbox(format("Pilgrims' bundles, each with a name tag: KALLIAS OF MELOS. DORKAS OF NAXOS. Nine days of dust on them."),
+           MSGBOX_SIGN)
+}
+
+script Kirrha_Inn_EventScript_Well {
+    msgbox(format("The courtyard well. The water is a long way down, and cold."), MSGBOX_SIGN)
+}
+
+script Kirrha_Inn_EventScript_Alcove {
+    msgbox(format("A sleeping alcove behind a curtain of old sailcloth. The patches are from other sails."),
+           MSGBOX_SIGN)
+}

@@ -12,7 +12,8 @@
 //
 // Stubs: ICHOR_STUB_MUSIC (the held drone plays the Hollow's cue, the satyr play
 // Elaia's), ICHOR_STUB_KNUCKLEBONES (Silenos's bones are a scripted match, until
-// the knucklebones game is on main), ICHOR_STUB_RELICS (the Girdle is its flag).
+// the knucklebones game is on main). The Girdle is the engine's relic, given with
+// giveitem (EventScript_IchorAct2_ReceiveGirdle, data/scripts/ichor_act2.pory).
 
 mapscripts ThyrsaTheater_Skene_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {

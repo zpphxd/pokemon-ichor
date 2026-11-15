@@ -1,1 +1,74 @@
+// The goatherd's house, Aigion (SCRIPT.md Part 2, Aigion interiors).
+// Room: tools/ichor/maps/westrooms.py. Half house, half cave: Helike (10,3) by her
+// hearth; the goat pen in the cave end, with a Kerazap kid (2,4) asleep in a baby's
+// cradle. She gives the Soothe Bell if the lead Pokémon's friendship is 150 or more
+// (GetLeadMonFriendshipScore >= FRIENDSHIP_150_TO_199). Its flag is
+// FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION: Act I's FLAG_ICHOR_GOT_SOOTHE_BELL is Aigon's bell
+// in Akti.
+// ICHOR_STUB_AETHOS_DEX: Kerazap is a stand-in species until the dex lands.
+
 mapscripts Aigion_GoatherdsHouse_MapScripts {}
+
+text Aigion_GoatherdsHouse_Name_Helike { "HELIKE" }
+text Aigion_GoatherdsHouse_Name_Kerazap { "KERAZAP" }
+
+script Aigion_GoatherdsHouse_EventScript_Helike {
+    lock
+    faceplayer
+    setspeaker(Aigion_GoatherdsHouse_Name_Helike)
+    if (flag(FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION)) {
+        msgbox(format("They all stop wandering in the end. Then they're goats."))
+        release
+        end
+    }
+    msgbox(format("This town's named for goats. Aix. Aigion. Goat-town.\p"
+                  "Zeus was fed on goat's milk, they say. Right on this shore.\p"
+                  "I believe it. Goats would. Goats'll feed anything that cries."))
+    specialvar(VAR_RESULT, GetLeadMonFriendshipScore)
+    if (var(VAR_RESULT) < FRIENDSHIP_150_TO_199) {
+        msgbox(format("It's not sure about you yet.\p"
+                      "Come back when it looks at you the way that kid looks at me."))
+        release
+        end
+    }
+    msgbox(format("That one likes you. Look at its ears. That's goat-liking.\p"
+                  "Here. A goat bell. The kids wear them till they stop wandering off."))
+    giveitem(ITEM_SOOTHE_BELL)
+    if (var(VAR_RESULT) == FALSE) {
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION)
+    setspeaker(Aigion_GoatherdsHouse_Name_Helike)
+    msgbox(format("It doesn't make them stop. It just makes them easier to find."))
+    release
+}
+
+script Aigion_GoatherdsHouse_EventScript_Kid {
+    lock
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    setspeaker(Aigion_GoatherdsHouse_Name_Kerazap)
+    msgbox(format("Meh…"))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A Kerazap kid, asleep in a baby's cradle. One ear twitches. It doesn't wake."))
+    release
+}
+
+script Aigion_GoatherdsHouse_EventScript_Bells {
+    msgbox(format("A row of bronze goat bells, from big to tiny. The big one has a dent from a horn."), MSGBOX_SIGN)
+}
+
+script Aigion_GoatherdsHouse_EventScript_Cheeses {
+    msgbox(format("Round cheeses ripening in the cool of the rock. The old ones on the bottom shelf are nearly gold."),
+           MSGBOX_SIGN)
+}
+
+script Aigion_GoatherdsHouse_EventScript_Rock {
+    msgbox(format("The back wall is the hill itself, cool and a little damp. Moss grows in its cracks."), MSGBOX_SIGN)
+}
+
+script Aigion_GoatherdsHouse_EventScript_Pen {
+    msgbox(format("A goat pen indoors, ringed with dry stones. In it, a baby's cradle. In the cradle, a goat."),
+           MSGBOX_SIGN)
+}

@@ -1,1 +1,69 @@
+// The mason's house, Lebadeia (SCRIPT.md Part 2, Lebadeia interiors).
+// Room: tools/ichor/maps/westrooms.py. Agamedes (5,4) at his half-carved snake. The
+// back wall, x 0-7, is the rough wall he built: eight bg events along its bottom
+// course, read from row 2. Seven are rough stones; the loose one is the third from
+// the left, (2,1), and gives the Star Piece (FLAG_ICHOR_LEBADEIA_LOOSE_STONE).
+// A hidden Stardust lies in the stone dust in the south-west corner (0,7).
+
 mapscripts Lebadeia_MasonsHouse_MapScripts {}
+
+text Lebadeia_MasonsHouse_Name_Agamedes { "AGAMEDES" }
+
+script Lebadeia_MasonsHouse_EventScript_Agamedes {
+    lock
+    faceplayer
+    setspeaker(Lebadeia_MasonsHouse_Name_Agamedes)
+    if (flag(FLAG_ICHOR_LEBADEIA_LOOSE_STONE)) {
+        msgbox(format("That one! I'd have sworn it was that one. I swore at that one for years.\p"
+                      "Put the stone back. Loose. It's bad luck to fix it."))
+        release
+        end
+    }
+    msgbox(format("My mother named me after a builder who robbed a king.\p"
+                  "Caught in a trap. His brother cut his head off, so nobody'd know him.\p"
+                  "She said the name would keep me careful. It has.\p"
+                  "Every builder in Lebadeia leaves one stone loose. For luck.\p"
+                  "I built that wall. I left one loose. And now I can't find it.\p"
+                  "Find it, and whatever's behind it is yours. I don't remember that either."))
+    release
+}
+
+script Lebadeia_MasonsHouse_EventScript_RoughStone {
+    msgbox(format("A rough stone. It doesn't move."), MSGBOX_SIGN)
+}
+
+script Lebadeia_MasonsHouse_EventScript_LooseStone {
+    lockall
+    if (flag(FLAG_ICHOR_LEBADEIA_LOOSE_STONE)) {
+        msgbox(format("The loose stone, back in its place. Loose."))
+        releaseall
+        end
+    }
+    msgbox(format("This stone wobbles. You work it out of the wall.\p"
+                  "There's a little hollow behind it, and something wrapped in a rag."))
+    giveitem(ITEM_STAR_PIECE)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("You put the stone back for now."))
+        releaseall
+        end
+    }
+    setflag(FLAG_ICHOR_LEBADEIA_LOOSE_STONE)
+    setspeaker(Lebadeia_MasonsHouse_Name_Agamedes)
+    msgbox(format("That one! I'd have sworn it was that one. I swore at that one for years.\p"
+                  "Put the stone back. Loose. It's bad luck to fix it."))
+    releaseall
+}
+
+script Lebadeia_MasonsHouse_EventScript_Relief {
+    msgbox(format("A snake coming up out of the rough stone. Its head is finished. Its tail is still a line scratched on the rock."),
+           MSGBOX_SIGN)
+}
+
+script Lebadeia_MasonsHouse_EventScript_Chisels {
+    msgbox(format("Chisels on pegs, each in its place: points, claws, flats. One peg is empty. He's looking for that one too."),
+           MSGBOX_SIGN)
+}
+
+script Lebadeia_MasonsHouse_EventScript_Bench {
+    msgbox(format("His mallet, lying on the bench, worn to the shape of his hand."), MSGBOX_SIGN)
+}

@@ -4,8 +4,8 @@
 // read it (FLAG_ICHOR_PROPHECY_3_READ) and Gypsos has seen it at the Kronia, he comes home
 // (FLAG_ICHOR_GYPSOS_WENT_HOME, set on Route 7) and sleeps here in his boots (11,8).
 //
-// ICHOR_STUB_DIG: the fixed dig under the fig shows the turned-earth text until the dig
-// API lands; then it finds tablet #3 (FLAG_ICHOR_PROPHECY_3, named in flags.h).
+// ICHOR_STUB_DIG: the fixed dig under the fig (+0x14) shows the turned-earth text until
+// excavation lands; then it finds tablet #3 (FLAG_ICHOR_PROPHECY_3, named in flags.h).
 // Hippias hides behind FLAG_TEMP_1, set on every entry until he's home.
 // ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
 
@@ -63,8 +63,11 @@ script ThyrsaCity_EudoraHouse_EventScript_Hippias {
     release
 }
 
+// Prophecy tablet #3 is a one-time find (ENGINE_API §8), fixed dig +0x14 in world-act2's
+// block (FLAG_ICHOR_DIG_FIXED_START + 0x14). ICHOR_STUB_DIG: when excavation lands this
+// becomes setvar(VAR_0x8004, 0x14), setvar(VAR_0x8005, <tablet #3's find>), which sets
+// FLAG_ICHOR_PROPHECY_3, then goto(EventScript_IchorDigFixed). Until then, the turned earth.
 script ThyrsaCity_EudoraHouse_EventScript_TurnedEarth {
-    // ICHOR_STUB_DIG: swap for the dig API's fixed find (prophecy tablet #3) when it lands.
     msgbox(format("The earth under the fig has been turned, and not by a plough.\p"
                   "Something is buried here."), MSGBOX_SIGN)
 }

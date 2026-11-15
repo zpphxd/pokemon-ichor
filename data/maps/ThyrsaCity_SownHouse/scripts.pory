@@ -46,9 +46,11 @@ script ThyrsaCity_SownHouse_EventScript_Udaios {
     release
 }
 
+// The hearth is Hestia's altar in this house (ENGINE_API §3), under the dragon's tooth.
 script ThyrsaCity_SownHouse_EventScript_Tooth {
-    msgbox(format("Over the hearth hangs a tooth, or something very like one, as long as your forearm."),
-           MSGBOX_SIGN)
+    lockall
+    msgbox(format("Over the hearth hangs a tooth, or something very like one, as long as your forearm."))
+    goto(EventScript_IchorHearth)
 }
 
 script ThyrsaCity_SownHouse_EventScript_ClayMen {

@@ -828,13 +828,13 @@
 #define FLAG_UNUSED_0x309                                           0x309 // Unused Flag
 #define FLAG_UNUSED_0x30A                                           0x30A // Unused Flag
 #define FLAG_UNUSED_0x30B                                           0x30B // Unused Flag
-#define FLAG_UNUSED_0x30C                                           0x30C // Unused Flag
+#define FLAG_ICHOR_HIDDEN_THYRSA_CELL_BATTERY                       0x30C // Ichor: Thyrsa City: hidden Cell Battery in the ash of Semele's chamber (16,7)
 #define FLAG_HIDE_PETALBURG_GYM_GREETER                             0x30D
-#define FLAG_UNUSED_0x30E                                           0x30E // Unused Flag
-#define FLAG_UNUSED_0x30F                                           0x30F // Unused Flag
-#define FLAG_UNUSED_0x310                                           0x310 // Unused Flag
-#define FLAG_UNUSED_0x311                                           0x311 // Unused Flag
-#define FLAG_UNUSED_0x312                                           0x312 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_THYRSA_HEART_SCALE                        0x30E // Ichor: Thyrsa City: hidden Heart Scale in the fountain house of Dirke (22,34)
+#define FLAG_ICHOR_HIDDEN_THYRSA_RARE_CANDY                         0x30F // Ichor: Thyrsa City: hidden Rare Candy in the niche of the bricked-up seventh gate (12,2)
+#define FLAG_ICHOR_HIDDEN_THEATER_HONEY                             0x310 // Ichor: Thyrsa's theater: hidden Honey under the front row
+#define FLAG_ICHOR_HIDDEN_THYRSA_PRETTY_FEATHER                     0x311 // Ichor: Thyrsa City: hidden Pretty Feather in the nook behind Manto's house, where her birds come and go (45,7)
+#define FLAG_ICHOR_HIDDEN_THEATER_OBOL                              0x312 // Ichor: Thyrsa's theater: hidden Relic Copper (a seat's price, an obol) dropped by the west parodos (0,7)
 #define FLAG_UNUSED_0x313                                           0x313 // Unused Flag
 #define FLAG_UNUSED_0x314                                           0x314 // Unused Flag
 #define FLAG_HIDE_FANCLUB_OLD_LADY                                  0x315
@@ -864,12 +864,12 @@
 #define FLAG_UNUSED_0x32D                                           0x32D // Unused Flag
 #define FLAG_UNUSED_0x32E                                           0x32E // Unused Flag
 #define FLAG_UNUSED_0x32F                                           0x32F // Unused Flag
-#define FLAG_UNUSED_0x330                                           0x330 // Unused Flag
-#define FLAG_UNUSED_0x331                                           0x331 // Unused Flag
-#define FLAG_UNUSED_0x332                                           0x332 // Unused Flag
-#define FLAG_UNUSED_0x333                                           0x333 // Unused Flag
-#define FLAG_UNUSED_0x334                                           0x334 // Unused Flag
-#define FLAG_UNUSED_0x335                                           0x335 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_TROPHONIOS_B1F_BRONZE_OBOL                0x330 // Ichor: Act II: hidden item: Trophonios's cave B1F, a Bronze Obol in the underground stream
+#define FLAG_ICHOR_HIDDEN_TROPHONIOS_B1F_HONEY                      0x331 // Ichor: Act II: hidden item: Trophonios's cave B1F, honey left behind the throne of Mnemosyne
+#define FLAG_ICHOR_HIDDEN_TROPHONIOS_B2F_ETHER                      0x332 // Ichor: Act II: hidden item: Trophonios's cave B2F, an Ether in fork A's loop
+#define FLAG_ICHOR_HIDDEN_TROPHONIOS_B2F_DUSK_STONE                 0x333 // Ichor: Act II: hidden item: Trophonios's cave B2F, a Dusk Stone at the black pool's far rim
+#define FLAG_ICHOR_HIDDEN_KIRRHA_INN_RELIC_COPPER                   0x334 // Ichor: Act II: hidden: a pilgrim's coin down the inn's well
+#define FLAG_ICHOR_HIDDEN_LEBADEIA_MASON_STARDUST                   0x335 // Ichor: Act II: hidden: Stardust in the mason's dust drift
 #define FLAG_UNUSED_0x336                                           0x336 // Unused Flag
 #define FLAG_UNUSED_0x337                                           0x337 // Unused Flag
 #define FLAG_UNUSED_0x338                                           0x338 // Unused Flag
@@ -1772,6 +1772,8 @@
 #define FLAG_ICHOR_GYPSOS_WENT_HOME             (FLAG_ICHOR_GENERAL_START + 0x125) // Ichor: Act II: Gypsos read tablet 3 and went home to Eudora's house
 #define FLAG_ICHOR_ITEM_ROUTE7_FULL_HEAL        (FLAG_ICHOR_GENERAL_START + 0x127) // Ichor: Act II: item ball: Route 7 Full Heal at a switchback's dead end
 #define FLAG_ICHOR_ITEM_ROUTE7_BIG_PEARL        (FLAG_ICHOR_GENERAL_START + 0x128) // Ichor: Act II: item ball: Route 7 Big Pearl on the Asopos's reed islet (the Conch)
+#define FLAG_ICHOR_KNUCKLEBONES_PHAIDIMOS       (FLAG_ICHOR_GENERAL_START + 0x14E) // Ichor: Act II rooms: beat Phaidimos at the Kantharos the first time (Olive Oil x2)
+#define FLAG_ICHOR_KNUCKLEBONES_GLAUKE          (FLAG_ICHOR_GENERAL_START + 0x14F) // Ichor: Act II rooms: beat Glauke at the Kantharos the first time (Wine)
 #define FLAG_ICHOR_HIDE_DIONYSIA_CAST           (FLAG_ICHOR_GENERAL_START + 0x154) // Ichor: Act II: hides the Dionysia's cast, herald and seated Kleon outside the play (beat 32)
 #define FLAG_ICHOR_HIDE_THESPIS_SKENE           (FLAG_ICHOR_GENERAL_START + 0x155) // Ichor: Act II: hides Thespis backstage once the masks let go (beat 32)
 #define FLAG_ICHOR_HIDE_KLEON_THEATER           (FLAG_ICHOR_GENERAL_START + 0x156) // Ichor: Act II: hides Kleon on the stage's edge after his third battle (beat 33)
@@ -1790,10 +1792,9 @@
 #define FLAG_ICHOR_ALETHEA_WENT_WEST            (FLAG_ICHOR_GENERAL_START + 0x135) // Ichor: Act II: Alethea left Thyrsa by the Neistan Gate (beat 34; region B1 reads it)
 #define FLAG_ICHOR_HIDE_OMEN_THYRSIVY           (FLAG_ICHOR_GENERAL_START + 0x136) // Ichor: Act II: hides the Thyrsivy in Thyrsa's old trellises (the omen's visitor)
 #define FLAG_ICHOR_OMEN_THYRSIVY_TOLD           (FLAG_ICHOR_GENERAL_START + 0x137) // Ichor: Act II: Manto told the rare-visitor omen; the Thyrsivy may stand in the vines
-#define FLAG_ICHOR_DECOY_THYRSA                 (FLAG_ICHOR_GENERAL_START + 0x138) // Ichor: Act II: showed Thyrsa's blind beggar the way to Dirke (theoxenia decoy)
 #define FLAG_ICHOR_ITEM_THYRSA_BLACK_SLUDGE     (FLAG_ICHOR_GENERAL_START + 0x139) // Ichor: Act II: Thyrsa, the Black Sludge by the wine press
 #define FLAG_ICHOR_ITEM_THYRSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x13A) // Ichor: Act II: Thyrsa, the Super Potion in the vineyards' last row
-#define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL_START + 0x13B) // Ichor: Act II: Thyrsa, the Big Nugget on the west wall-walk (the Thyrsus)
+#define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL_START + 0x13B) // Ichor: Act II: Thyrsa, the Big Nugget in the alley behind the mask-maker's
 #define FLAG_ICHOR_GOT_PROTECTIVE_PADS          (FLAG_ICHOR_GENERAL_START + 0x140) // Ichor: Act II rooms: Peneleos's gift after the recruit's sparring match (Eleutherai)
 #define FLAG_ICHOR_OINOE_GARLAND                (FLAG_ICHOR_GENERAL_START + 0x141) // Ichor: Act II rooms: Oinoe's ivy garland errand is open; cleared when she gives the Big Root (Eleutherai)
 #define FLAG_ICHOR_TWINS_AMPHIS                 (FLAG_ICHOR_GENERAL_START + 0x142) // Ichor: Act II rooms: showed Amphis a Chelonet or Chelyra; got the Metronome (Eleutherai)
@@ -1838,6 +1839,14 @@
 #define FLAG_ICHOR_GOT_LUCKY_EGG                (FLAG_ICHOR_GENERAL_START + 0x1F7) // Ichor: Act II rooms3: Krotos's Lucky Egg, for his three kids (Arkadia)
 #define FLAG_ICHOR_GOT_BLACK_GLASSES            (FLAG_ICHOR_GENERAL_START + 0x1F8) // Ichor: Act II rooms3: Nyktimos's Black Glasses, after the Moon Laurel (Arkadia)
 #define FLAG_ICHOR_TRADED_ARKOBY                (FLAG_ICHOR_GENERAL_START + 0x1F9) // Ichor: Act II rooms3: traded Hippothoos a Gelasable for ARKAS the Arkoby (Arkadia)
+#define FLAG_ICHOR_LEBADEIA_LOOSE_STONE         (FLAG_ICHOR_GENERAL_START + 0x1B0) // Ichor: Act II: found Agamedes's loose stone (Star Piece)
+#define FLAG_ICHOR_GOT_MYSTIC_WATER_HERKYNA     (FLAG_ICHOR_GENERAL_START + 0x1B1) // Ichor: Act II: Herkyna gave the Mystic Water for bringing Goose home
+#define FLAG_ICHOR_GOT_FOCUS_SASH               (FLAG_ICHOR_GENERAL_START + 0x1B2) // Ichor: Act II: Pylades gave his father's Focus Sash
+#define FLAG_ICHOR_TRADED_MELISSEER             (FLAG_ICHOR_GENERAL_START + 0x1B3) // Ichor: Act II: traded the muleteer a Lophops for KASSOTIS the Melisseer
+#define FLAG_ICHOR_HEARD_THYIA                  (FLAG_ICHOR_GENERAL_START + 0x1B4) // Ichor: Act II: Thyia told the player about the Pythia's soon
+#define FLAG_ICHOR_THYIA_LAUREL_TODAY           (FLAG_ICHOR_GENERAL_START + 0x1B5) // Ichor: Act II: ICHOR_STUB_RITES: stands in for Thyia's daily laurel flag (FLAG_DAILY_ICHOR_LAUREL_START + Kirrha's index)
+#define FLAG_ICHOR_TISAMENOS_BIRD               (FLAG_ICHOR_GENERAL_START + 0x1B6) // Ichor: Act II: showed Tisamenos a sea bird (Pretty Feather x2)
+#define FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION       (FLAG_ICHOR_GENERAL_START + 0x1B7) // Ichor: Act II: Helike gave a goat bell (Soothe Bell); Act I's is FLAG_ICHOR_GOT_SOOTHE_BELL
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)
@@ -1853,6 +1862,15 @@
 #define FLAG_ICHOR_ITEM_POOL_ETHER              (FLAG_ICHOR_GENERAL2_START + 0x024) // Ichor: Act II: the Pool of Mnemosyne, the Ether by the north poplars
 #define FLAG_ICHOR_NYKTIMOS_STORY               (FLAG_ICHOR_GENERAL2_START + 0x050) // Ichor: Act II rooms3: Nyktimos has told you of Lykaon and the extra place (his story plays once)
 #define FLAG_ICHOR_KLYMENE_STORY                (FLAG_ICHOR_GENERAL2_START + 0x051) // Ichor: Act II rooms3: Klymene has told you of Atalanta's apples (after, she only offers the race)
+#define FLAG_ICHOR_TROPHONIOS_SNAKE_FED         (FLAG_ICHOR_GENERAL_START + 0x1A8) // Ichor: Act II: the snake in Trophonios's cave took the honey; its niche is clear (Part 5)
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_MAX_REPEL (FLAG_ICHOR_GENERAL_START + 0x1A9) // Ichor: Act II: item ball: Trophonios's cave B1F Max Repel past the marble rubble
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_ESCAPE_ROPE (FLAG_ICHOR_GENERAL_START + 0x1AA) // Ichor: Act II: item ball: Trophonios's cave B1F Escape Rope at the ladder's foot
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_MAX_ETHER (FLAG_ICHOR_GENERAL_START + 0x1AB) // Ichor: Act II: item ball: Trophonios's cave B2F Max Ether at fork B's dead end
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_HYPER_POTION (FLAG_ICHOR_GENERAL_START + 0x1AC) // Ichor: Act II: item ball: Trophonios's cave B2F Hyper Potion at fork C's dead end
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_SPELL_TAG (FLAG_ICHOR_GENERAL_START + 0x1AD) // Ichor: Act II: item ball: Trophonios's cave B2F Spell Tag in the web den
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_TM_FUTURE_SIGHT (FLAG_ICHOR_GENERAL_START + 0x1AE) // Ichor: Act II: item ball: Trophonios's cave B2F TM Future Sight on the oracle's ledge
+#define FLAG_ICHOR_HIDE_TROPHONIOS_GREAT_BOULDER (FLAG_ICHOR_GENERAL_START + 0x1AF) // Ichor: Act II: Trophonios's great boulder is split (Hephaestus's Hammer); stays gone
+#define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_DAMP_ROCK (FLAG_ICHOR_GENERAL2_START + 0x080) // Ichor: Act II: item ball: Trophonios's cave B1F Damp Rock in the wet corner by the stream's outlet
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
