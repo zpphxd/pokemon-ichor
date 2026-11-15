@@ -1792,6 +1792,7 @@
 #define FLAG_ICHOR_ITEM_TEMPLE_APHRODITE_MAX_REVIVE (FLAG_ICHOR_GENERAL_START + 0x25A) // Ichor: Temple of Aphrodite: the jar in Anthousa's alcove
 #define FLAG_ICHOR_ITEM_NERAIDA_MAX_REPEL       (FLAG_ICHOR_GENERAL_START + 0x25C) // Ichor: Neraida falls: the jar on the top terrace
 #define FLAG_ICHOR_ITEM_NERAIDA_PROTEIN         (FLAG_ICHOR_GENERAL_START + 0x25D) // Ichor: Neraida falls: the Protein on a rock in the upper pool
+#define FLAG_ICHOR_KRENAIA_TOLD                 (FLAG_ICHOR_GENERAL_START + 0x25E) // Ichor: Neraida falls: Krenaia told the laureled player about the silent falls and the horn (beat III-1H)
 #define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL_START + 0x280) // Ichor: world-act3: Daedalus gives the Master Ball in the workshop, Labyrinth Scene D
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)

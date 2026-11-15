@@ -143,6 +143,11 @@ enum __attribute__((__packed__)) Flavor
 #define BERRY_TREE_ROUTE_123_SITRUS   88
 #define BERRY_TREE_ROUTE_123_RAWST    89
 
+// Ichor: world-act3: the Neraida falls' terraces (SCRIPT.md Part 2), so a player
+// who reaches Krenaia without three berries finds them below her shrine.
+#define BERRY_TREE_ICHOR_NERAIDA_LUM    120
+#define BERRY_TREE_ICHOR_NERAIDA_SITRUS 121
+
 // Remainder are unused
 
 #define BERRY_TREES_COUNT 128

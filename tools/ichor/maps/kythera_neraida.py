@@ -164,7 +164,7 @@ def compose():
     m.piece("bridge_weir", "weir_E", 18, 15)
 
     # the Naiads' shrine, east of the pool
-    m.part("naiad_altar", "horn", ALTAR[0], ALTAR[1], 2, 1)
+    m.piece("naiad_altar", "horn", ALTAR[0], ALTAR[1])
     trees(m, oleanders=[(21, 14)])
     for x, y in ((22, 12), (23, 13), (22, 14)):
         m.piece("flowers", "narcissus" if (x + y) % 2 else "petals", x, y)
@@ -293,7 +293,7 @@ def events(m):
     m.sign(13, 40, P + "Sign")
     m.sign(20, 13, P + "SilentFalls")
     m.sign(ALTAR[0], ALTAR[1], P + "Altar")
-    m.sign(ALTAR[0] + 1, ALTAR[1], P + "Altar")
+
     m.sign(8, 1, P + "PageSeven")
     m.sign(21, 1, P + "VaultDoor")
     m.sign(12, 20, P + "IdleMill")

@@ -700,3 +700,5 @@ gSpecials::
 	def_special Ichor_BuildThreadReturnMenu
 	def_special Ichor_ThreadReturnTo
 	def_special Ichor_TurnDial
+	@ Ichor: world-act3 (src/ichor_kythera.c)
+	def_special Ichor_TakeFirstFruits

@@ -1,1 +1,245 @@
-mapscripts KytheraNeraidaFalls_MapScripts {}
+// The Neraida falls (design/phase4/SCRIPT.md Part 2, Part 5 "The Silent Falls",
+// beat III-1H). Layout and events: tools/ichor/maps/kythera_neraida.py (30 x 44).
+// South to north: the sign, band 1, Lykidas, Myles's mill (warp 0), the berry
+// terraces, the ford and Mopsos, band 2, the silent falls and the Naiads' shrine;
+// up the fall with the Horn, the upper pool (page VII, the vault door, Thestylis)
+// and the ledge path back down the east side.
+//
+// Until the Horn, the falls are silent: the map plays MUS_ICHOR_HOLLOW (standing
+// in for MUS_ICHOR_HELD_NOTE, the one held aulos note); once the horn fills, the
+// road's music comes in (MUS_ICHOR_ROAD, standing in for MUS_ICHOR_FOAM_ROAD).
+// The field's water SE isn't muted: the engine has no ambient-water switch yet.
+//
+// Hidden items (not placed yet; they need vanilla flags): a Mystic Water in the
+// mill-race below the turning wheel (15,29), and a Pearl behind the shrine's
+// basin (24,12).
+// TODO(labyrinth): with FLAG_ICHOR_GOT_LABRYS the vault door asks "Cleave the seal
+// with the Labrys?" and opens Kythera's Minoan vault (SCRIPT Part 5, Part 6), once
+// that map exists (FLAG_ICHOR_MINOAN_VAULT_KYTHERA is the Knossa writer's).
+
+const KYTHERA_DAEDALUS_PAGE_7 = FLAG_ICHOR_PAGES_START + 6
+
+mapscripts KytheraNeraidaFalls_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_GOT_HORN_OF_ACHELOUS)) {
+            savebgm(MUS_ICHOR_ROAD)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_GOT_HORN_OF_ACHELOUS)) {
+            call(KytheraNeraidaFalls_EventScript_DrawRiverAwake)
+        }
+    }
+}
+
+text KytheraNeraidaFalls_Text_NameKrenaia { "KRENAIA" }
+text KytheraNeraidaFalls_Text_NameBoy { "BOY" }
+
+// The horn taken, and the idle mill's wheel turning again.
+script KytheraNeraidaFalls_EventScript_DrawRiverAwake {
+    setmetatile(22, 11, METATILE_Neraida_Altar_Empty, TRUE)
+    setmetatile(14, 19, METATILE_Neraida_MillWheel_TL, TRUE)
+    setmetatile(15, 19, METATILE_Neraida_MillWheel_TL + 1, TRUE)
+    setmetatile(14, 20, METATILE_Neraida_MillWheel_TL + 8, TRUE)
+    setmetatile(15, 20, METATILE_Neraida_MillWheel_TL + 9, TRUE)
+}
+
+// ---------------------------------------------------------------------------
+// Signs and things to read
+// ---------------------------------------------------------------------------
+
+script KytheraNeraidaFalls_EventScript_Sign {
+    msgbox(format("THE NERAIDA FALLS.\nThe Naiads' shrine, north. Mind the stones."), MSGBOX_SIGN)
+}
+
+script KytheraNeraidaFalls_EventScript_SilentFalls {
+    if (flag(FLAG_ICHOR_GOT_HORN_OF_ACHELOUS)) {
+        msgbox(format("The falls roar. You can't hear yourself think. It's wonderful."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A tall white waterfall. The water pours down steadily.\p"
+                      "It makes no sound at all. You can hear your own heartbeat."), MSGBOX_SIGN)
+    }
+}
+
+script KytheraNeraidaFalls_EventScript_Altar {
+    if (flag(FLAG_ICHOR_GOT_HORN_OF_ACHELOUS)) {
+        msgbox(format("A mossy marble altar, heaped with figs and grapes and pomegranates."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A great curved bull's horn lies on the altar, wreathed in dead flowers."), MSGBOX_SIGN)
+    }
+}
+
+script KytheraNeraidaFalls_EventScript_IdleMill {
+    if (flag(FLAG_ICHOR_GOT_HORN_OF_ACHELOUS)) {
+        msgbox(format("An old mill, its wheel turning again. Nobody's home; the miller works downstream."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("An old mill. Its wheel stands still in the water, missing paddles."), MSGBOX_SIGN)
+    }
+}
+
+script KytheraNeraidaFalls_EventScript_PageSeven {
+    lockall
+    if (flag(KYTHERA_DAEDALUS_PAGE_7)) {
+        msgbox(format("A crevice in the rock, where a stone held a page down."))
+        releaseall
+        end
+    }
+    msgbox(format("A sheet of old papyrus, half dried into the rock.\p"
+                  "A sketch of a floor of five-by-five squares, each with a symbol.\p"
+                  "Notes in a cramped hand: “The crane dance. Seven turns.”\p"
+                  "“Theseus had it wrong.”"))
+    setflag(KYTHERA_DAEDALUS_PAGE_7)
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{PLAYER} found Daedalus's page VII!"))
+    waitfanfare
+    releaseall
+}
+
+script KytheraNeraidaFalls_EventScript_VaultDoor {
+    msgbox(format("A door cut into the cliff, with no handle. Only a hollow shaped like a double axe.\p"
+                  "Old paint flakes round its frame. Blue dolphins. Red bulls."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// The people
+// ---------------------------------------------------------------------------
+
+script KytheraNeraidaFalls_EventScript_Boy {
+    lock
+    faceplayer
+    setspeaker(KytheraNeraidaFalls_Text_NameBoy)
+    if (flag(FLAG_ICHOR_GOT_HORN_OF_ACHELOUS)) {
+        msgbox(format("They're all turning! Every mill! Grandfather's dancing. Don't look."))
+    } else {
+        msgbox(format("The falls went quiet and the mills stopped. Water, but no push.\p"
+                      "Grandfather says the river's sulking. Rivers do. He says."))
+    }
+    release
+}
+
+script KytheraNeraidaFalls_EventScript_Goat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_SKIDDO, CRY_MODE_NORMAL)
+    msgbox(format("Mehhh."))
+    waitmoncry
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Trainers (texts: data/scripts/ichor_act3_kythera_trainers.pory)
+// ---------------------------------------------------------------------------
+
+script KytheraNeraidaFalls_EventScript_Lykidas {
+    trainerbattle_single(TRAINER_ICHOR_LYKIDAS, Kythera_Text_LykidasIntro, Kythera_Text_LykidasDefeat)
+    setspeaker(Kythera_Text_SpeakerLykidas)
+    msgbox(Kythera_Text_LykidasAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraNeraidaFalls_EventScript_Kerinthos {
+    trainerbattle_single(TRAINER_ICHOR_KERINTHOS, Kythera_Text_KerinthosIntro, Kythera_Text_KerinthosDefeat)
+    setspeaker(Kythera_Text_SpeakerKerinthos)
+    msgbox(Kythera_Text_KerinthosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraNeraidaFalls_EventScript_Mopsos {
+    trainerbattle_single(TRAINER_ICHOR_MOPSOS, Kythera_Text_MopsosIntro, Kythera_Text_MopsosDefeat)
+    setspeaker(Kythera_Text_SpeakerMopsos)
+    msgbox(Kythera_Text_MopsosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraNeraidaFalls_EventScript_Thestylis {
+    trainerbattle_single(TRAINER_ICHOR_THESTYLIS, Kythera_Text_ThestylisIntro, Kythera_Text_ThestylisDefeat)
+    setspeaker(Kythera_Text_SpeakerThestylis)
+    msgbox(Kythera_Text_ThestylisAfter, MSGBOX_AUTOCLOSE)
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-1H: Krenaia, the silent falls, and the Horn of Achelous
+// ---------------------------------------------------------------------------
+
+script KytheraNeraidaFalls_EventScript_Krenaia {
+    lock
+    faceplayer
+    setspeaker(KytheraNeraidaFalls_Text_NameKrenaia)
+    if (flag(FLAG_ICHOR_GOT_HORN_OF_ACHELOUS)) {
+        msgbox(format("The pool above the falls hasn't been seen in a year. Go and look.\p"
+                      "Somebody's paper blew up there. A sketch of a dancing floor."))
+        release
+        end
+    }
+    if (!flag(FLAG_BADGE07_GET)) {
+        msgbox(format("Listen. No. Listen.\p"
+                      "The water still falls. It just doesn't say anything.\p"
+                      "I'll tell the goddess's champion, when there is one.\p"
+                      "It's not for me to ask a stranger."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_KRENAIA_TOLD)) {
+        msgbox(format("Galatea sent you? Good. Then you're laureled. Listen."))
+        setspeaker(SP_NAME_NONE)
+        closemessage
+        delay(60)
+        setspeaker(KytheraNeraidaFalls_Text_NameKrenaia)
+        msgbox(format("That. That's the falls. They've said nothing since the spring.\p"
+                      "Since the tide turned the wrong way at Kalliste, they tell me.\p"
+                      "See the horn? That's the river's. Achelous. A river god.\p"
+                      "He wrestled Herakles for a bride, once. As a bull. He lost a horn.\p"
+                      "The Naiads filled it with fruit. It's never been empty.\p"
+                      "Until this year. Everything's been running out this year.\p"
+                      "Fill it again. Three fruits of the field. Whatever grows."))
+        setflag(FLAG_ICHOR_KRENAIA_TOLD)
+    }
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Offer three berries as first fruits?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        specialvar(VAR_RESULT, Ichor_TakeFirstFruits)
+    } else {
+        setvar(VAR_RESULT, FALSE)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(KytheraNeraidaFalls_Text_NameKrenaia)
+        msgbox(format("Three. Any three. The terraces below have bushes.\p"
+                      "The river doesn't mind which."))
+        release
+        end
+    }
+    msgbox(format("You lay three berries in the mouth of the horn."))
+    closemessage
+    applymovement(LOCALID_NERAIDA_KRENAIA, Common_Movement_FaceRight)
+    waitmovement(0)
+    delay(30)
+    msgbox(format("The dead flowers on the horn turn green, then bloom.\p"
+                  "The horn fills from inside: grapes, figs and pomegranates spill over its lip."))
+    closemessage
+    // The roar: the falls find their voice, the river's music comes back.
+    playse(SE_M_WATERFALL)
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 1)
+    setvar(VAR_0x8006, 10)
+    setvar(VAR_0x8007, 2)
+    special(ShakeCamera)
+    waitstate
+    playbgm(MUS_ICHOR_ROAD, FALSE)
+    savebgm(MUS_ICHOR_ROAD)
+    applymovement(LOCALID_NERAIDA_KRENAIA, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(KytheraNeraidaFalls_Text_NameKrenaia)
+    msgbox(format("There he is. Loud, isn't he? Rivers always are.\p"
+                  "Take it. He'd want it to travel. Rivers don't sit still.\p"
+                  "It climbs water the way he did."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_HORN_OF_ACHELOUS)
+    setflag(FLAG_ICHOR_GOT_HORN_OF_ACHELOUS)
+    setvar(VAR_ICHOR_ACT3, 4)
+    setvar(VAR_0x8004, ICHOR_GOD_APHRODITE)
+    setvar(VAR_0x8005, 5)
+    special(Ichor_AddFavor)
+    call(KytheraNeraidaFalls_EventScript_DrawRiverAwake)
+    special(DrawWholeMapView)
+    setspeaker(KytheraNeraidaFalls_Text_NameKrenaia)
+    msgbox(format("The pool above the falls hasn't been seen in a year. Go and look.\p"
+                  "Somebody's paper blew up there. A sketch of a dancing floor."))
+    release
+}
