@@ -523,6 +523,16 @@ const u16 gTrainerPalette_HierophantThespis[] = INCGFX_U16("graphics/trainers/fr
 const u32 gTrainerFrontPic_Silenos[] = INCGFX_U32("graphics/trainers/front_pics/silenos.png", ".4bpp.smol");
 const u16 gTrainerPalette_Silenos[] = INCGFX_U16("graphics/trainers/front_pics/silenos.png", ".gbapal");
 
+// Pokemon Ichor, Act II batch 3 (tools/ichor/art/sprites_act2_b3_classes.py)
+const u32 gTrainerFrontPic_Huntress[] = INCGFX_U32("graphics/trainers/front_pics/huntress.png", ".4bpp.smol");
+const u16 gTrainerPalette_Huntress[] = INCGFX_U16("graphics/trainers/front_pics/huntress.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Charcoaler[] = INCGFX_U32("graphics/trainers/front_pics/charcoaler.png", ".4bpp.smol");
+const u16 gTrainerPalette_Charcoaler[] = INCGFX_U16("graphics/trainers/front_pics/charcoaler.png", ".gbapal");
+
+const u32 gTrainerFrontPic_HierophantKallisto[] = INCGFX_U32("graphics/trainers/front_pics/hierophant_kallisto.png", ".4bpp.smol");
+const u16 gTrainerPalette_HierophantKallisto[] = INCGFX_U16("graphics/trainers/front_pics/hierophant_kallisto.png", ".gbapal");
+
 // Pokemon Ichor, Act II batch 2 (tools/ichor/art/sprites_act2_b2_classes.py)
 const u32 gTrainerFrontPic_FowlerM[] = INCGFX_U32("graphics/trainers/front_pics/fowler_m.png", ".4bpp.smol");
 const u16 gTrainerPalette_FowlerM[] = INCGFX_U16("graphics/trainers/front_pics/fowler_m.png", ".gbapal");
@@ -1365,6 +1375,19 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_SILENOS] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Silenos, gTrainerPalette_Silenos),
+    },
+    // Ichor: Act II batch 3
+    [TRAINER_PIC_HUNTRESS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Huntress, gTrainerPalette_Huntress),
+    },
+    [TRAINER_PIC_CHARCOALER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Charcoaler, gTrainerPalette_Charcoaler),
+    },
+    [TRAINER_PIC_HIEROPHANT_KALLISTO] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_HierophantKallisto, gTrainerPalette_HierophantKallisto),
     },
     // Ichor: Act II batch 2
     [TRAINER_PIC_FOWLER_M] =

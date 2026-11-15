@@ -1654,6 +1654,191 @@ static const union AnimCmd *const sAnimTable_IchorCami[] = {
     [ANIM_STD_GO_FASTEST_EAST] = sAnim_GoFastestEast,
     [ANIM_ICHOR_RISE] = sAnim_IchorCamiRise,
 };
+
+// Ichor, Act II batch 3 (tools/ichor/art/sprites_act2_b3.py, design/phase3/SPRITES.md).
+// Like Cami's, each extra animation sits in ANIM_NURSE_BOW's slot for
+// nurse_joy_bow, and each one ends on its last frame.
+
+// Kallisto on the moonlit rock (frames 9 and 10). Facing north she sits with
+// her knees drawn up, looking at the sky, so MOVEMENT_TYPE_FACE_UP places her
+// there. Her look down at the player (ANIM_ICHOR_LOOK_DOWN) holds until she
+// moves; any walk is her standing walker, so she climbs down off the rock.
+static const union AnimCmd sAnim_IchorKallistoSit[] =
+{
+    ANIMCMD_FRAME(9, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorKallistoSitStep[] =
+{
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorKallistoLookDown[] =
+{
+    ANIMCMD_FRAME(9, 24),
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_END,
+};
+
+// Kleon on the stump: frames 0-8 are his seated pose. He gets up
+// (ANIM_ICHOR_STAND_UP): half up (9), then standing facing down in his
+// ordinary look (10). Swap him to OBJ_EVENT_GFX_ICHOR_KLEON before he walks.
+static const union AnimCmd sAnim_IchorStumpStandUp[] =
+{
+    ANIMCMD_FRAME(9, 12),
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_END,
+};
+
+// The golden hind. A standing object shows its normal-speed walk animation
+// paused on a standing step (FaceDirection), so those walks hold her grazing
+// frames (9-11) where a walker stands: placed or turned, she grazes. The fast
+// walks keep her head up between the bolt frames (3-8), so she runs head up and
+// stands alert where a run ends, until a turn puts her head down again.
+static const union AnimCmd sAnim_IchorHindGrazeSouth[] =
+{
+    ANIMCMD_FRAME(9, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorHindGrazeNorth[] =
+{
+    ANIMCMD_FRAME(10, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorHindGrazeWest[] =
+{
+    ANIMCMD_FRAME(11, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorHindGrazeEast[] =
+{
+    ANIMCMD_FRAME(11, 16, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorHindStepSouth[] =
+{
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorHindStepNorth[] =
+{
+    ANIMCMD_FRAME(5, 8),
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_FRAME(6, 8),
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorHindStepWest[] =
+{
+    ANIMCMD_FRAME(7, 8),
+    ANIMCMD_FRAME(11, 8),
+    ANIMCMD_FRAME(8, 8),
+    ANIMCMD_FRAME(11, 8),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorHindStepEast[] =
+{
+    ANIMCMD_FRAME(7, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(11, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(11, 8, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+// Touched, she throws her head up facing down (ANIM_ICHOR_STARTLE).
+static const union AnimCmd sAnim_IchorHindStartle[] =
+{
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sAnimTable_IchorKallisto[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_IchorKallistoSit,
+    [ANIM_STD_FACE_WEST] = sAnim_FaceWest,
+    [ANIM_STD_FACE_EAST] = sAnim_FaceEast,
+    [ANIM_STD_GO_SOUTH] = sAnim_GoSouth,
+    [ANIM_STD_GO_NORTH] = sAnim_IchorKallistoSitStep,
+    [ANIM_STD_GO_WEST] = sAnim_GoWest,
+    [ANIM_STD_GO_EAST] = sAnim_GoEast,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_GoFastSouth,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_GoFastNorth,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_GoFastWest,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_GoFastEast,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_GoFasterSouth,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_GoFasterNorth,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_GoFasterWest,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_GoFasterEast,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_GoFastestSouth,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_GoFastestNorth,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_GoFastestWest,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_GoFastestEast,
+    [ANIM_ICHOR_LOOK_DOWN] = sAnim_IchorKallistoLookDown,
+};
+
+static const union AnimCmd *const sAnimTable_IchorStump[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_FaceNorth,
+    [ANIM_STD_FACE_WEST] = sAnim_FaceWest,
+    [ANIM_STD_FACE_EAST] = sAnim_FaceEast,
+    [ANIM_STD_GO_SOUTH] = sAnim_GoSouth,
+    [ANIM_STD_GO_NORTH] = sAnim_GoNorth,
+    [ANIM_STD_GO_WEST] = sAnim_GoWest,
+    [ANIM_STD_GO_EAST] = sAnim_GoEast,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_GoFastSouth,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_GoFastNorth,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_GoFastWest,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_GoFastEast,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_GoFasterSouth,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_GoFasterNorth,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_GoFasterWest,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_GoFasterEast,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_GoFastestSouth,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_GoFastestNorth,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_GoFastestWest,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_GoFastestEast,
+    [ANIM_ICHOR_STAND_UP] = sAnim_IchorStumpStandUp,
+};
+
+static const union AnimCmd *const sAnimTable_IchorHind[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_IchorHindGrazeSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_IchorHindGrazeNorth,
+    [ANIM_STD_FACE_WEST] = sAnim_IchorHindGrazeWest,
+    [ANIM_STD_FACE_EAST] = sAnim_IchorHindGrazeEast,
+    [ANIM_STD_GO_SOUTH] = sAnim_IchorHindStepSouth,
+    [ANIM_STD_GO_NORTH] = sAnim_IchorHindStepNorth,
+    [ANIM_STD_GO_WEST] = sAnim_IchorHindStepWest,
+    [ANIM_STD_GO_EAST] = sAnim_IchorHindStepEast,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_GoFastSouth,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_GoFastNorth,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_GoFastWest,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_GoFastEast,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_GoFasterSouth,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_GoFasterNorth,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_GoFasterWest,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_GoFasterEast,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_GoFastestSouth,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_GoFastestNorth,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_GoFastestWest,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_GoFastestEast,
+    [ANIM_ICHOR_STARTLE] = sAnim_IchorHindStartle,
+};
 // End of Ichor animations
 
 static const union AnimCmd *const sAnimTable_FieldMove[] = {
@@ -1745,6 +1930,19 @@ static const struct StepAnimTable sStepAnimTables[] = {
     },
     {
         .anims = sAnimTable_IchorCami,
+        .animPos = {1, 3, 0, 2},
+    },
+    // Ichor, Act II batch 3: walk and face like sAnimTable_Standard
+    {
+        .anims = sAnimTable_IchorKallisto,
+        .animPos = {1, 3, 0, 2},
+    },
+    {
+        .anims = sAnimTable_IchorStump,
+        .animPos = {1, 3, 0, 2},
+    },
+    {
+        .anims = sAnimTable_IchorHind,
         .animPos = {1, 3, 0, 2},
     },
     {},

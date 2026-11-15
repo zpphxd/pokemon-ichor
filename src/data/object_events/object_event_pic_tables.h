@@ -2786,6 +2786,119 @@ static const struct SpriteFrameImage sPicTable_IchorMask[] = {
 static const struct SpriteFrameImage sPicTable_IchorCrows[] = {
     overworld_ascending_frames(gObjectEventPic_IchorCrows, 4, 4),
 };
+
+// Act II batch 3, Arkadia (tools/ichor/art/sprites_act2_b3.py)
+static const struct SpriteFrameImage sPicTable_IchorHuntress[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHuntress, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorCharcoaler[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorCharcoaler, 2, 4),
+};
+
+// Kallisto: a standard walker, then 9 seated on the rock looking at the sky
+// and 10 looking down (sAnimTable_IchorKallisto).
+static const struct SpriteFrameImage sPicTable_IchorKallisto[] = {
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 0),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 1),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 2),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 3),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 4),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 5),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 6),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 7),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 8),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 9),
+    overworld_frame(gObjectEventPic_IchorKallisto, 2, 4, 10),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPhylonoe[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPhylonoe, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorMuleteerGoad[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMuleteerGoad, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorLamplighter[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorLamplighter, 2, 4),
+};
+
+// Kleon on the stump: the seated pose sheet, then 9 half up and 10 standing
+// (sAnimTable_IchorStump).
+static const struct SpriteFrameImage sPicTable_IchorKleonStump[] = {
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 0),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 1),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 2),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 3),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 4),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 5),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 6),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 7),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 8),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 9),
+    overworld_frame(gObjectEventPic_IchorKleonStump, 2, 4, 10),
+};
+
+// Kleon's six balls: three drawings (centered, and a row running left that
+// mirrors to the right), laid out as a standard sheet.
+static const struct SpriteFrameImage sPicTable_IchorKleonBalls[] = {
+    overworld_frame(gObjectEventPic_IchorKleonBalls, 4, 4, 0),
+    overworld_frame(gObjectEventPic_IchorKleonBalls, 4, 4, 1),
+    overworld_frame(gObjectEventPic_IchorKleonBalls, 4, 4, 2),
+    overworld_frame(gObjectEventPic_IchorKleonBalls, 4, 4, 0),
+    overworld_frame(gObjectEventPic_IchorKleonBalls, 4, 4, 0),
+    overworld_frame(gObjectEventPic_IchorKleonBalls, 4, 4, 1),
+    overworld_frame(gObjectEventPic_IchorKleonBalls, 4, 4, 1),
+    overworld_frame(gObjectEventPic_IchorKleonBalls, 4, 4, 2),
+    overworld_frame(gObjectEventPic_IchorKleonBalls, 4, 4, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorTempleHound[] = {
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 0),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 1),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 2),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 3),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 4),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 5),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 6),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 7),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 8),
+};
+
+// The sleeping hound: the same sheet's frames 9 (curled) and 10 (an ear up),
+// laid out as a standard sheet, so walking in place twitches the ear.
+static const struct SpriteFrameImage sPicTable_IchorTempleHoundSleep[] = {
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 9),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 9),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 9),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 10),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 9),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 10),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 9),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 10),
+    overworld_frame(gObjectEventPic_IchorTempleHound, 4, 4, 9),
+};
+
+// The golden hind: 0-2 head up, 3-8 the bolt, 9-11 grazing (sAnimTable_IchorHind).
+static const struct SpriteFrameImage sPicTable_IchorGoldenHind[] = {
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 0),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 1),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 2),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 3),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 4),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 5),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 6),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 7),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 8),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 9),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 10),
+    overworld_frame(gObjectEventPic_IchorGoldenHind, 4, 4, 11),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorMnaseas[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMnaseas, 2, 4),
+};
 static const struct SpriteFrameImage sPicTable_IchorFowler[] = {
     overworld_ascending_frames(gObjectEventPic_IchorFowler, 2, 4),
 };

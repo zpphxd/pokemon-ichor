@@ -469,6 +469,18 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorYouthF
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKidMThyrsa;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMerchantThyrsa;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHarvesterThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHuntress;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCharcoaler;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKallisto;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPhylonoe;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMuleteerGoad;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorLamplighter;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonStump;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonBalls;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTempleHound;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTempleHoundSleep;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGoldenHind;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMnaseas;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorFowler;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorFowlerF;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSaon;
@@ -954,6 +966,18 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA] =             &gObjectEventGraphicsInfo_IchorKidMThyrsa,
     [OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA] =          &gObjectEventGraphicsInfo_IchorMerchantThyrsa,
     [OBJ_EVENT_GFX_ICHOR_HARVESTER_THYRSA] =         &gObjectEventGraphicsInfo_IchorHarvesterThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_HUNTRESS] =               &gObjectEventGraphicsInfo_IchorHuntress,
+    [OBJ_EVENT_GFX_ICHOR_CHARCOALER] =             &gObjectEventGraphicsInfo_IchorCharcoaler,
+    [OBJ_EVENT_GFX_ICHOR_KALLISTO] =               &gObjectEventGraphicsInfo_IchorKallisto,
+    [OBJ_EVENT_GFX_ICHOR_PHYLONOE] =               &gObjectEventGraphicsInfo_IchorPhylonoe,
+    [OBJ_EVENT_GFX_ICHOR_MULETEER_GOAD] =          &gObjectEventGraphicsInfo_IchorMuleteerGoad,
+    [OBJ_EVENT_GFX_ICHOR_LAMPLIGHTER] =            &gObjectEventGraphicsInfo_IchorLamplighter,
+    [OBJ_EVENT_GFX_ICHOR_KLEON_STUMP] =            &gObjectEventGraphicsInfo_IchorKleonStump,
+    [OBJ_EVENT_GFX_ICHOR_KLEON_BALLS] =            &gObjectEventGraphicsInfo_IchorKleonBalls,
+    [OBJ_EVENT_GFX_ICHOR_TEMPLE_HOUND] =           &gObjectEventGraphicsInfo_IchorTempleHound,
+    [OBJ_EVENT_GFX_ICHOR_TEMPLE_HOUND_SLEEP] =     &gObjectEventGraphicsInfo_IchorTempleHoundSleep,
+    [OBJ_EVENT_GFX_ICHOR_GOLDEN_HIND] =            &gObjectEventGraphicsInfo_IchorGoldenHind,
+    [OBJ_EVENT_GFX_ICHOR_MNASEAS] =                &gObjectEventGraphicsInfo_IchorMnaseas,
     [OBJ_EVENT_GFX_ICHOR_FOWLER] =                   &gObjectEventGraphicsInfo_IchorFowler,
     [OBJ_EVENT_GFX_ICHOR_FOWLER_F] =                 &gObjectEventGraphicsInfo_IchorFowlerF,
     [OBJ_EVENT_GFX_ICHOR_SAON] =                     &gObjectEventGraphicsInfo_IchorSaon,

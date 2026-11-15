@@ -359,6 +359,10 @@
 // nurse_joy_bow plays them (sAnimTable_IchorLyre, sAnimTable_IchorCami).
 #define ANIM_ICHOR_STRUM (ANIM_STD_COUNT + 0)   // Sam's and Apollo's lyre
 #define ANIM_ICHOR_RISE  (ANIM_STD_COUNT + 0)   // Cami rises from the bench
+// Ichor, Act II batch 3 (sAnimTable_IchorKallisto, _IchorStump, _IchorHind), the same slot
+#define ANIM_ICHOR_LOOK_DOWN (ANIM_STD_COUNT + 0) // Kallisto looks down from her rock
+#define ANIM_ICHOR_STAND_UP  (ANIM_STD_COUNT + 0) // Kleon gets up off the stump
+#define ANIM_ICHOR_STARTLE   (ANIM_STD_COUNT + 0) // the golden hind lifts her head
 
 #define ANIM_FIELD_MOVE 0
 

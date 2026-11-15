@@ -703,6 +703,18 @@ const u32 gObjectEventPic_IchorWoodenImage[] = INCGFX_U32("graphics/object_event
 const u32 gObjectEventPic_IchorWoodenImageGarland[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/wooden_image_garland.png", ".4bpp");
 const u32 gObjectEventPic_IchorMask[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mask.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gObjectEventPic_IchorCrows[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/crows.png", ".4bpp", "-mwidth 4 -mheight 4");
+// Act II batch 3, Arkadia (tools/ichor/art/sprites_act2_b3.py)
+const u32 gObjectEventPic_IchorHuntress[] = INCGFX_U32("graphics/object_events/pics/people/ichor/huntress.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorCharcoaler[] = INCGFX_U32("graphics/object_events/pics/people/ichor/charcoaler.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKallisto[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kallisto.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPhylonoe[] = INCGFX_U32("graphics/object_events/pics/people/ichor/phylonoe.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorMuleteerGoad[] = INCGFX_U32("graphics/object_events/pics/people/ichor/muleteer_goad.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorLamplighter[] = INCGFX_U32("graphics/object_events/pics/people/ichor/lamplighter.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKleonStump[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_stump.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKleonBalls[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/kleon_balls.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_IchorTempleHound[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/temple_hound.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_IchorGoldenHind[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/golden_hind.png", ".4bpp", "-mwidth 4 -mheight 4");
+const u32 gObjectEventPic_IchorMnaseas[] = INCGFX_U32("graphics/object_events/pics/people/ichor/mnaseas.png", ".4bpp", "-mwidth 2 -mheight 4");
 // Act II batch 2 (tools/ichor/art/sprites_act2_b2.py)
 const u32 gObjectEventPic_IchorFowler[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fowler.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorFowlerF[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fowler_f.png", ".4bpp", "-mwidth 2 -mheight 4");
