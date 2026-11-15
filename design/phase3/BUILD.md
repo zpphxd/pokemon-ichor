@@ -96,12 +96,19 @@ The theater's warp 0 is its gate back to the city's warp 11.
 
 **Trainer names** fit `TRAINER_NAME_LENGTH`, 10 characters. Batch 1's three long ones are now Astylos (Route 6's runner, was Thersandros), Mynniskos and Thettalos (the temple's actors, were Kallippides and Nikostratos); SCRIPT.md is updated. Eight later trainers' names are too long too and get renamed in their batches.
 
-The sprites agent makes these, under these names, so everyone else can use them now:
+**The sprites have landed** (merged from `act2-b1-sprites`; `design/phase3/SPRITES.md` is the catalog, `design/phase3/img/sprites_batch1.png` the contact sheet). Every name below is real. `include/constants/ichor_gfx_stubs_act2.h` is empty now and stays as the place for the next batch's not-yet-drawn names.
 
-- **Classes** (`Class:` in a party): `Maenad`, `Satyr`, `Actor`, `Vintner`. Until they exist, `tools/ichor/act2/fold_parties.py` folds them in as Harvester, Goatherd, Acolyte and Harvester.
-- **Pics** (`Pic:`): `Maenad`, `Satyr`, `Actor`, `Vintner`, `Hierophant Thespis`, `Silenos`. Until they exist, the fold uses Hierophant Ione's pic for Thespis and the Shepherd's for the rest.
-- **Walkers and objects** (`graphics_id` in `map.json`, `setobjectgraphics` in scripts): `include/constants/ichor_gfx_stubs_act2.h` names each one and points it at a stand-in walker. Use the names there. When the sprites agent adds a real one to `event_objects.h`, it deletes that name's line from the stub header in the same commit.
-- Named townsfolk (Pindaros, Staphylos, Oinoe and the rest) use the existing folk walkers in batch 1. The sprites agent may add palette variants and list them in its report; this session swaps them in.
+- **Classes:** `Maenad`, `Satyr`, `Actor`, `Vintner`. **Pics:** `Maenad`, `Satyr`, `Actor`, `Vintner`, `Hierophant Thespis` (Thespis stays `Class: Hierophant`), `Silenos` (`Class: Satyr`). `fold_parties.py` now folds them as written.
+- **Walkers and objects** (`OBJ_EVENT_GFX_ICHOR_…`): `MAENAD`, `SATYR`, `ACTOR`, `VINTNER`, `THESPIS`, `SILENOS`, `MANTO`, `HERALD`, `KRONIST`, `CHORUS_LEADER`, `BEE_WOMAN`, `FATE_SPINNER`, `FATE_MEASURER`, `FATE_CUTTER`, `GOLD_MASK_KING`, `UNWOVEN_ACTOR`, `KLEON_SEATED`, `ALETHEA_KNEEL`, `WOODEN_IMAGE`, `MASK`, `CROWS`, and these extras:
+  - `THESPIS_COMIC`: Thespis in the comic mask; his back frames match `THESPIS`, so swap while he faces away.
+  - `KLEON_FEAST`: Kleon at the Kronia's bench, a loaf in each hand (bites when walking in place facing down). **Use this at the Kronia tables.** `KLEON_SEATED` is the theater pose: the stage's edge with his hat (beat 33) and the front row (beat 32).
+  - `ALETHEA_SEATED`: her theater seat with the program. `ALETHEA_KNEEL` is the trowel.
+  - `GOLD_MASK_KING_KNEEL`: the king on his knees.
+  - `MAENAD_THYRSA`: the city maenad in wine-red (Lenaia).
+  - `WOODEN_IMAGE_GARLAND`: Eleutherai's image after Oinoe's ivy garland is laid.
+  - Thyrsa folk variants: `MOM_THYRSA` (Chthonia), `WOMAN_THYRSA` (Eudora), `YOUTH_F_THYRSA` (Erigone), `KID_M_THYRSA`, `MERCHANT_THYRSA` (Euthykles), `HARVESTER_THYRSA`; Staphylos is `VINTNER` and Polos is `ACTOR`.
+- **There is no `setobjectgraphics` command in this tree.** To change a person's look in a scene (a mask, a pose), either keep two objects and swap their hide flags, or give the object a `OBJ_EVENT_GFX_VAR_n` graphics id, set `VAR_OBJ_GFX_ID_n`, and respawn it (`copyobjectxytoperm`, `removeobject`, `addobject`). SPRITES.md has the recipe.
+- New palette tag `OBJ_EVENT_PAL_TAG_ICHOR_WINE` (0x1136) joins the folk and cast tags; a map shows at most those three.
 
 ### Ids
 

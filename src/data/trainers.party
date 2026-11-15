@@ -426,8 +426,8 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_ICHOR_IKARIOS ===
 Name: IKARIOS
-Class: Harvester
-Pic: Shepherd
+Class: Vintner
+Pic: Vintner
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -530,8 +530,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_EUIA ===
 Name: EUIA
-Class: Harvester
-Pic: Shepherd
+Class: Maenad
+Pic: Maenad
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -546,8 +546,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_BROMIA ===
 Name: BROMIA
-Class: Harvester
-Pic: Shepherd
+Class: Maenad
+Pic: Maenad
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -594,8 +594,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_KOMOS ===
 Name: KOMOS
-Class: Goatherd
-Pic: Shepherd
+Class: Satyr
+Pic: Satyr
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -694,8 +694,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_OINOPION ===
 Name: OINOPION
-Class: Harvester
-Pic: Shepherd
+Class: Vintner
+Pic: Vintner
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -714,8 +714,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_LENAIA ===
 Name: LENAIA
-Class: Harvester
-Pic: Shepherd
+Class: Maenad
+Pic: Maenad
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -730,8 +730,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_HEGELOCHOS ===
 Name: HEGELOCHOS
-Class: Acolyte
-Pic: Shepherd
+Class: Actor
+Pic: Actor
 Gender: Male
 Music: Rich
 AI: Check Bad Move
@@ -746,8 +746,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_MYNNISKOS ===
 Name: MYNNISKOS
-Class: Acolyte
-Pic: Shepherd
+Class: Actor
+Pic: Actor
 Gender: Male
 Music: Rich
 AI: Basic Trainer
@@ -762,8 +762,8 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_ICHOR_THETTALOS ===
 Name: THETTALOS
-Class: Acolyte
-Pic: Shepherd
+Class: Actor
+Pic: Actor
 Gender: Male
 Music: Rich
 AI: Basic Trainer
@@ -778,8 +778,8 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_ICHOR_THEODOROS ===
 Name: THEODOROS
-Class: Acolyte
-Pic: Shepherd
+Class: Actor
+Pic: Actor
 Gender: Male
 Music: Rich
 AI: Basic Trainer
@@ -795,7 +795,7 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 === TRAINER_ICHOR_THESPIS_1 ===
 Name: THESPIS
 Class: Hierophant
-Pic: Hierophant Ione
+Pic: Hierophant Thespis
 Gender: Male
 Music: Male
 Items: Super Potion / Super Potion
@@ -995,8 +995,8 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 === TRAINER_ICHOR_SILENOS ===
 Name: SILENOS
-Class: Goatherd
-Pic: Shepherd
+Class: Satyr
+Pic: Silenos
 Gender: Male
 Music: Rich
 AI: Basic Trainer
