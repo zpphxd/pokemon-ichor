@@ -1796,6 +1796,7 @@
 #define FLAG_ICHOR_MYSTERIES_NIGHT              (FLAG_ICHOR_GENERAL_START + 0x07B) // Ichor: beat 22: the night of the Mysteries played to the end (the raid, the multi battle, the stair)
 #define FLAG_ICHOR_TELESTERION_MULTI            (FLAG_ICHOR_GENERAL_START + 0x07C) // Ichor: beat 22: fought the Telesterion's grunts beside Kleon (either outcome)
 #define FLAG_ICHOR_TELESTERION_PIT_FALL         (FLAG_ICHOR_GENERAL_START + 0x07D) // Ichor: the Telesterion: fell into a grain pit at least once (Doso's chalk hint)
+#define FLAG_ICHOR_ITEM_AEGINA_NET_BALL         (FLAG_ICHOR_GENERAL_START + 0x07E) // Ichor: Aigina Town: Net Ball on the north-west beach
 #define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
 #define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
 #define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)
