@@ -934,6 +934,14 @@ static void SetOrbFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s3
 #define tFlashRadiusDelta    data[5]
 #define tClearScanlineEffect data[6]
 
+// Ichor: a shrinking light must clear the lines its old, wider circle filled.
+static void WriteFlashCircle(u16 *dest, s32 centerX, s32 centerY, s32 radius, bool32 shrinking)
+{
+    if (shrinking)
+        CpuFill16(0, dest, DISPLAY_HEIGHT * sizeof(u16));
+    SetFlashScanlineEffectWindowBoundaries(dest, centerX, centerY, radius);
+}
+
 static void UpdateFlashLevelEffect(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -941,14 +949,15 @@ static void UpdateFlashLevelEffect(u8 taskId)
     switch (tState)
     {
     case 0:
-        SetFlashScanlineEffectWindowBoundaries(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], tFlashCenterX, tFlashCenterY, tCurFlashRadius);
+        WriteFlashCircle(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], tFlashCenterX, tFlashCenterY, tCurFlashRadius, tFlashRadiusDelta < 0);
         tState = 1;
         break;
     case 1:
-        SetFlashScanlineEffectWindowBoundaries(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], tFlashCenterX, tFlashCenterY, tCurFlashRadius);
+        WriteFlashCircle(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], tFlashCenterX, tFlashCenterY, tCurFlashRadius, tFlashRadiusDelta < 0);
         tState = 0;
         tCurFlashRadius += tFlashRadiusDelta;
-        if (tCurFlashRadius > tDestFlashRadius)
+        // Ichor: the light can shrink as well as grow (dousing the Torch, leaving a lit zone)
+        if (tFlashRadiusDelta > 0 ? tCurFlashRadius > tDestFlashRadius : tCurFlashRadius < tDestFlashRadius)
         {
             if (tClearScanlineEffect == 1)
             {
@@ -957,6 +966,9 @@ static void UpdateFlashLevelEffect(u8 taskId)
             }
             else
             {
+                // Ichor: both buffers end on the new radius, so its edge doesn't flicker
+                WriteFlashCircle(gScanlineEffectRegBuffers[0], tFlashCenterX, tFlashCenterY, tDestFlashRadius, TRUE);
+                WriteFlashCircle(gScanlineEffectRegBuffers[1], tFlashCenterX, tFlashCenterY, tDestFlashRadius, TRUE);
                 DestroyTask(taskId);
             }
         }
@@ -1061,13 +1073,31 @@ static u8 StartUpdateOrbFlashEffect(s32 centerX, s32 centerY, s32 initialFlashRa
 #undef tClearScanlineEffect
 
 // A higher flash level is a smaller flash radius (more darkness). 0 is full brightness
+// Ichor: a radius past the screen's corner (144 px from its center) looks the
+// same as full light, so the animation only runs inside it, 2 px a step.
+#define ICHOR_FLASH_OFFSCREEN_RADIUS 148
+
 void AnimateFlash(u8 newFlashLevel)
 {
     u8 curFlashLevel = GetFlashLevel();
     bool8 fullBrightness = FALSE;
     if (newFlashLevel == 0)
         fullBrightness = TRUE;
-    StartUpdateFlashLevelEffect(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, sFlashLevelToRadius[curFlashLevel], sFlashLevelToRadius[newFlashLevel], fullBrightness, 1);
+    if (newFlashLevel == curFlashLevel) // Ichor: nothing to animate (the effect would never reach its end)
+    {
+        StartWaitForFlashUpdate();
+        LockPlayerFieldControls();
+        return;
+    }
+    if (curFlashLevel == 0) // Ichor: full light stopped the flash effect; start it again to darken
+    {
+        SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, ICHOR_FLASH_OFFSCREEN_RADIUS);
+        CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
+        ScanlineEffect_SetParams(sFlashEffectParams);
+    }
+    StartUpdateFlashLevelEffect(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2,
+                                min(sFlashLevelToRadius[curFlashLevel], ICHOR_FLASH_OFFSCREEN_RADIUS),
+                                min(sFlashLevelToRadius[newFlashLevel], ICHOR_FLASH_OFFSCREEN_RADIUS), fullBrightness, 2);
     StartWaitForFlashUpdate();
     LockPlayerFieldControls();
 }

@@ -1,5 +1,6 @@
 // Constants for tools/ichor/tests/ichor_relics.lua (see engine_consts.h).
 #include "engine_consts.h"
+#include "scanline_effect.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "constants/event_objects.h"
@@ -84,3 +85,5 @@ K(FLAME_NONE, FLAME_NONE)
 K(VAR_TEMP_2, VAR_TEMP_2)
 K(VAR_TEMP_3, VAR_TEMP_3)
 K(FLAME_HESTIA_SHIP, FLAME_HESTIA_SHIP)
+K(FLAG_ICHOR_BRAZIERS_START_R, FLAG_ICHOR_BRAZIERS_START)
+K(OFF_SCANLINE_STATE, offsetof(struct ScanlineEffect, state))

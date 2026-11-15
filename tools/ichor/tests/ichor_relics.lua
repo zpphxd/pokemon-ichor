@@ -296,6 +296,53 @@ L.start(function()
   settle()
   L.waitUntil(function() return flashLevel() == S.ICHOR_FLASH_TORCH and L.idle() end, 400, "the torch to light")
   expect(not L.getFlag(S.FLAG_ICHOR_TORCH_DOUSED), "... and lights it again, on the same entry")
+
+  -- A lit zone: in to full light, in again (already lit), and out to the
+  -- Torch's light. The picture must darken again: the flash's scanline effect
+  -- runs, and the screen's top line is outside the light.
+  local litFlag = S.FLAG_ICHOR_BRAZIERS_START_R + 0x0F
+  L.setFlag(litFlag, true)
+  L.setVar(S.VAR_0x8004, litFlag)
+  L.runHeader("RelicTest_EnterLitHeader")
+  expect(flashLevel() == 0, string.format("entering a lit zone lights the map fully (level %d)", flashLevel()))
+  L.setVar(S.VAR_0x8004, litFlag)
+  L.runHeader("RelicTest_EnterLitHeader", { limit = 300 })
+  expect(flashLevel() == 0 and L.idle(), "entering again while fully lit returns at once")
+  L.runHeader("RelicTest_LeaveLitHeader", { limit = 600 })
+  wait(4)
+  local topLine = emu:read16(S.gScanlineEffectRegBuffers)
+  local midLine = emu:read16(S.gScanlineEffectRegBuffers + 80 * 2)
+  expect(flashLevel() == S.ICHOR_FLASH_TORCH and emu:read8(S.gScanlineEffect + S.OFF_SCANLINE_STATE) ~= 0
+         and topLine & 0xFF == 0 and midLine & 0xFF > 120,
+         string.format("leaving it darkens the picture to the Torch's light (level %d, top line %04X, middle %04X)",
+                       flashLevel(), topLine, midLine))
+  shot("lit_zone_left")
+  L.setFlag(litFlag, false)
+
+  -- Glow-paint: a stand-in glow set (black, but slot 7's color 12 green) for
+  -- this map's tileset. Doused, the map shows in its glow colors outside the
+  -- light and its people don't; relit, its own colors and the window return.
+  local GLOW, GREEN = 0x0203F800, 0x03E0
+  for i = 0, 16 * 16 - 1 do emu:write16(GLOW + i * 2, 0) end
+  emu:write16(GLOW + (7 * 16 + 12) * 2, GREEN)
+  -- the unfaded buffer: the faded one carries the day-and-night tint on this outdoor map
+  local function bgColor(slot, i) return emu:read16(S.gPlttBufferUnfaded + (slot * 16 + i) * 2) end
+  local function winout() return emu:read16(0x0400004A) end
+  local own = bgColor(7, 12)
+  emu:write32(S.sGlowForTest, GLOW)
+  L.runHeader("RelicTest_DouseOnHeader")
+  L.waitUntil(function() return flashLevel() == S.ICHOR_FLASH_DOUSED and L.idle() end, 600, "the torch to go out")
+  wait(4)
+  expect(bgColor(7, 12) == GREEN and bgColor(0, 1) == 0 and bgColor(8, 3) == 0 and winout() & 0x0E == 0x0E and winout() & 0x10 == 0,
+         string.format("doused, the glow-paint shows: slot 7 color 12 %04X, the rest black, the map outside the light (WINOUT %04X)",
+                       bgColor(7, 12), winout()))
+  shot("glow_doused")
+  L.runHeader("RelicTest_RelightHeader")
+  L.waitUntil(function() return flashLevel() == S.ICHOR_FLASH_TORCH and L.idle() end, 600, "the torch to light")
+  wait(4)
+  expect(bgColor(7, 12) == own and winout() & 0x0E == 0,
+         string.format("relit, the map's own colors and the window come back (%04X, WINOUT %04X)", bgColor(7, 12), winout()))
+  emu:write32(S.sGlowForTest, 0)
   setCave(false)
   L.runHeader("RelicTest_FlashHeader")
   bagAndBack()

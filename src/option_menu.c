@@ -1,6 +1,7 @@
 #include "global.h"
 #include "constants/ichor.h"
 #include "option_menu.h"
+#include "overworld.h"
 #include "bg.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
@@ -25,6 +26,7 @@
 #define tButtonMode data[5]
 #define tWindowFrameType data[6]
 #define tRelicPrompts data[7] // Ichor
+#define tTintOff data[8]      // Ichor
 
 enum
 {
@@ -35,6 +37,7 @@ enum
     MENUITEM_BUTTONMODE,
     MENUITEM_FRAMETYPE,
     MENUITEM_RELICPROMPTS, // Ichor: ASK or AUTO before a relic acts (SYSTEMS §1)
+    MENUITEM_DAYNIGHTTINT, // Ichor: the overworld's time-of-day colors, or daytime colors all day
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
 };
@@ -45,8 +48,10 @@ enum
     WIN_OPTIONS
 };
 
-// Ichor: eight rows at 14 px fill the same 112-px box the seven vanilla rows did
-#define OPTION_ROW_HEIGHT 14
+// Ichor: nine rows at 12 px fill the same 112-px box the seven vanilla rows did.
+// Rows that close overlap a 16-px glyph cell, so text draws with a clear
+// background and a row is cleared before its choices are redrawn.
+#define OPTION_ROW_HEIGHT 12
 #define YPOS_TEXTSPEED    (MENUITEM_TEXTSPEED * OPTION_ROW_HEIGHT)
 #define YPOS_BATTLESCENE  (MENUITEM_BATTLESCENE * OPTION_ROW_HEIGHT)
 #define YPOS_BATTLESTYLE  (MENUITEM_BATTLESTYLE * OPTION_ROW_HEIGHT)
@@ -54,6 +59,7 @@ enum
 #define YPOS_BUTTONMODE   (MENUITEM_BUTTONMODE * OPTION_ROW_HEIGHT)
 #define YPOS_FRAMETYPE    (MENUITEM_FRAMETYPE * OPTION_ROW_HEIGHT)
 #define YPOS_RELICPROMPTS (MENUITEM_RELICPROMPTS * OPTION_ROW_HEIGHT)
+#define YPOS_DAYNIGHTTINT (MENUITEM_DAYNIGHTTINT * OPTION_ROW_HEIGHT)
 
 static void Task_OptionMenuFadeIn(u8 taskId);
 static void Task_OptionMenuProcessInput(u8 taskId);
@@ -74,6 +80,7 @@ static u8 ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
 static u8 RelicPrompts_ProcessInput(u8 selection);
 static void RelicPrompts_DrawChoices(u8 selection);
+static void DayNightTint_DrawChoices(u8 selection);
 static void DrawHeaderText(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
@@ -111,6 +118,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_BUTTONMODE]  = COMPOUND_STRING("BUTTON MODE"),
     [MENUITEM_FRAMETYPE]   = COMPOUND_STRING("FRAME"),
     [MENUITEM_RELICPROMPTS] = COMPOUND_STRING("RELIC PROMPTS"),
+    [MENUITEM_DAYNIGHTTINT] = COMPOUND_STRING("DAY/NIGHT TINT"),
     [MENUITEM_CANCEL]      = COMPOUND_STRING("CANCEL"),
 };
 
@@ -262,6 +270,7 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
         gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
         gTasks[taskId].tRelicPrompts = (gIchorSave.options & ICHOR_OPTION_RELIC_AUTO) != 0;
+        gTasks[taskId].tTintOff = (gIchorSave.options & ICHOR_OPTION_TINT_OFF) != 0;
 
         TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
         BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
@@ -270,6 +279,7 @@ void CB2_InitOptionMenu(void)
         ButtonMode_DrawChoices(gTasks[taskId].tButtonMode);
         FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
         RelicPrompts_DrawChoices(gTasks[taskId].tRelicPrompts);
+        DayNightTint_DrawChoices(gTasks[taskId].tTintOff);
         HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
 
         CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
@@ -372,6 +382,13 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             if (previousOption != gTasks[taskId].tRelicPrompts)
                 RelicPrompts_DrawChoices(gTasks[taskId].tRelicPrompts);
             break;
+        case MENUITEM_DAYNIGHTTINT:
+            previousOption = gTasks[taskId].tTintOff;
+            gTasks[taskId].tTintOff = RelicPrompts_ProcessInput(gTasks[taskId].tTintOff); // a two-way toggle, as the relic row
+
+            if (previousOption != gTasks[taskId].tTintOff)
+                DayNightTint_DrawChoices(gTasks[taskId].tTintOff);
+            break;
         default:
             return;
         }
@@ -396,6 +413,11 @@ static void Task_OptionMenuSave(u8 taskId)
         gIchorSave.options |= ICHOR_OPTION_RELIC_AUTO;
     else
         gIchorSave.options &= ~ICHOR_OPTION_RELIC_AUTO;
+    if (gTasks[taskId].tTintOff)
+        gIchorSave.options |= ICHOR_OPTION_TINT_OFF;
+    else
+        gIchorSave.options &= ~ICHOR_OPTION_TINT_OFF;
+    gTimeUpdateCounter = 0; // Ichor: the field re-tints on its first frame back
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -417,6 +439,8 @@ static void HighlightOptionMenuItem(u8 index)
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(index * OPTION_ROW_HEIGHT + 40, index * OPTION_ROW_HEIGHT + 40 + OPTION_ROW_HEIGHT));
 }
 
+static const u8 sOptionTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
+
 static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 {
     u8 dst[16];
@@ -432,7 +456,13 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
     }
 
     dst[i] = EOS;
-    AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, dst, x, y + 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized3(WIN_OPTIONS, FONT_NORMAL, x, y, sOptionTextColors, TEXT_SKIP_DRAW, dst); // Ichor: clear background
+}
+
+// Ichor: wipe a row's choices before they're drawn again (rows overlap a glyph cell)
+static void ClearOptionChoices(u8 y)
+{
+    FillWindowPixelRect(WIN_OPTIONS, PIXEL_FILL(1), 100, y, 104, OPTION_ROW_HEIGHT);
 }
 
 static u8 TextSpeed_ProcessInput(u8 selection)
@@ -460,6 +490,7 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 
 static void TextSpeed_DrawChoices(u8 selection)
 {
+    ClearOptionChoices(YPOS_TEXTSPEED); // Ichor
     u8 styles[3];
     s32 widthSlow, widthMid, widthFast, xMid;
 
@@ -494,6 +525,7 @@ static u8 BattleScene_ProcessInput(u8 selection)
 
 static void BattleScene_DrawChoices(u8 selection)
 {
+    ClearOptionChoices(YPOS_BATTLESCENE); // Ichor
     u8 styles[2];
 
     styles[0] = 0;
@@ -518,6 +550,7 @@ static u8 RelicPrompts_ProcessInput(u8 selection)
 
 static void RelicPrompts_DrawChoices(u8 selection)
 {
+    ClearOptionChoices(YPOS_RELICPROMPTS); // Ichor
     u8 styles[2];
 
     styles[0] = 0;
@@ -526,6 +559,20 @@ static void RelicPrompts_DrawChoices(u8 selection)
 
     DrawOptionMenuChoice(gText_RelicPromptsAsk, 120, YPOS_RELICPROMPTS, styles[0]);
     DrawOptionMenuChoice(gText_RelicPromptsAuto, GetStringRightAlignXOffset(FONT_NORMAL, gText_RelicPromptsAuto, 198), YPOS_RELICPROMPTS, styles[1]);
+}
+
+// Ichor: ON is the time of day's colors (OW_ENABLE_DNS), OFF daytime colors all day
+static void DayNightTint_DrawChoices(u8 selection)
+{
+    ClearOptionChoices(YPOS_DAYNIGHTTINT); // Ichor
+    u8 styles[2];
+
+    styles[0] = 0;
+    styles[1] = 0;
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 120, YPOS_DAYNIGHTTINT, styles[0]);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), YPOS_DAYNIGHTTINT, styles[1]);
 }
 
 static u8 BattleStyle_ProcessInput(u8 selection)
@@ -541,6 +588,7 @@ static u8 BattleStyle_ProcessInput(u8 selection)
 
 static void BattleStyle_DrawChoices(u8 selection)
 {
+    ClearOptionChoices(YPOS_BATTLESTYLE); // Ichor
     u8 styles[2];
 
     styles[0] = 0;
@@ -565,6 +613,7 @@ static u8 Sound_ProcessInput(u8 selection)
 
 static void Sound_DrawChoices(u8 selection)
 {
+    ClearOptionChoices(YPOS_SOUND); // Ichor
     u8 styles[2];
 
     styles[0] = 0;
@@ -604,6 +653,7 @@ static u8 FrameType_ProcessInput(u8 selection)
 
 static void FrameType_DrawChoices(u8 selection)
 {
+    ClearOptionChoices(YPOS_FRAMETYPE); // Ichor
     u8 text[16] = {EOS};
     u8 n = selection + 1;
     u16 i;
@@ -658,6 +708,7 @@ static u8 ButtonMode_ProcessInput(u8 selection)
 
 static void ButtonMode_DrawChoices(u8 selection)
 {
+    ClearOptionChoices(YPOS_BUTTONMODE); // Ichor
     s32 widthNormal, widthLR, widthLA, xLR;
     u8 styles[3];
 
@@ -692,7 +743,7 @@ static void DrawOptionMenuTexts(void)
 
     FillWindowPixelBuffer(WIN_OPTIONS, PIXEL_FILL(1));
     for (i = 0; i < MENUITEM_COUNT; i++)
-        AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[i], 8, (i * OPTION_ROW_HEIGHT) + 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized3(WIN_OPTIONS, FONT_NORMAL, 8, i * OPTION_ROW_HEIGHT, sOptionTextColors, TEXT_SKIP_DRAW, sOptionMenuItemsNames[i]);
     CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
 }
 

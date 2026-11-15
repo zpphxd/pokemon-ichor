@@ -129,8 +129,11 @@ bool8 SetUpMassOutbreakEncounter(u8 flags)
         return FALSE;
 
     CreateWildMon(gSaveBlock1Ptr->outbreakPokemonSpecies, gSaveBlock1Ptr->outbreakPokemonLevel);
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][0], gSaveBlock1Ptr->outbreakPokemonMoves[i], i);
+    if (gSaveBlock1Ptr->outbreakPokemonMoves[0] != MOVE_NONE) // Ichor: an omen's swarm keeps the species' own moves
+    {
+        for (u32 i = 0; i < MAX_MON_MOVES; i++)
+            SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][0], gSaveBlock1Ptr->outbreakPokemonMoves[i], i);
+    }
 
     return TRUE;
 }

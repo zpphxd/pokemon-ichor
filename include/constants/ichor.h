@@ -72,6 +72,7 @@
 // --- Relics (SYSTEMS §1) ----------------------------------------------------
 // IchorSave.options bits
 #define ICHOR_OPTION_RELIC_AUTO  (1 << 0)  // "Relic prompts": clear = ASK (the default), set = AUTO
+#define ICHOR_OPTION_TINT_OFF    (1 << 1)  // "Day/night tint": clear = ON (the default), set = OFF: daytime colors all day
 
 // gFieldEffectArguments[0] for a field effect a relic performs: the player
 // raises the relic and its icon shows, instead of a Pokémon's cut-in. The low
@@ -96,6 +97,24 @@
 // Weather entries (SYSTEMS §6; add new ones at the end)
 #define OMEN_WEATHER_KRYOPUFF  0  // snow on the Ascent's lowest slopes
 #define OMEN_WEATHER_LERNIP    1  // rain over Lake Stymphalia (Phase 4 SCRIPT.md, the Lernip hunt)
+#define OMEN_WEATHER_KERAMEIKOS_FOG  2  // world-act2: fog over Astyra's Kerameikos
+#define OMEN_WEATHER_KITHAIRON_FOG   3  // world-act2: fog on Mt. Kithairon
+// Swarm entries (add new ones at the end)
+#define OMEN_SWARM_GLAUKOIN    0  // world-act2: Astyra
+#define OMEN_SWARM_ROUTE_6     1  // world-act2: the Eleutherai road
+// Visitor entries (add new ones at the end)
+#define OMEN_VISITOR_HIEROLIVE 0  // world-act2: Astyra
+#define OMEN_VISITOR_THYRSIVY  1  // world-act2: Thyrsa's old trellises, after the Dionysia
+// Good-sign entries: the augur's blessing, or today's lucky number (1-6)
+#define OMEN_SIGN_BLESSING     0
+#define OMEN_SIGN_LUCKY(n)     (n)   // "Today, threes are lucky." is OMEN_SIGN_LUCKY(3)
+
+// The xenia rest (SYSTEMS §10): Ichor_RestUntil's VAR_0x8004, and the rest menu's choices
+#define ICHOR_REST_DAWN   0   // 06:00
+#define ICHOR_REST_NOON   1   // 12:00
+#define ICHOR_REST_DUSK   2   // 19:00
+#define ICHOR_REST_NIGHT  3   // 20:30
+#define ICHOR_REST_COUNT  4
 
 // --- The Labyrinth (LABYRINTH.md §5) --------------------------------------------
 // Names for the Thread's RETURN TO… list: the name id a ring's ON_LOAD gives
@@ -120,7 +139,8 @@
 #define FLAME_THRESHOLD  3
 #define FLAME_HESTIA_SHIP 4  // Lampon: Hestia's great hearth at Akti to the Euploia's (post-game)
 #define FLAME_LERNA      5   // Kleon's fire at Lerna (Labor 2)
-#define FLAME_COUNT      6
+#define FLAME_PANATHENAIA 6  // the Panathenaia's torch race: the Dipylon to the Akropolis (SYSTEMS §7)
+#define FLAME_COUNT      7
 #define ICHOR_FLAME_GUTTER_STEPS  5  // "The flame gutters."
 
 // Light radius levels for dark maps (SYSTEMS §2; sFlashLevelToRadius)
@@ -129,5 +149,96 @@
 #define ICHOR_FLASH_TORCH_STRONG  2  // 64 px: the Three-Flamed Torch, or Hecate's blessing
 #define ICHOR_FLASH_TORCH_BOTH    1  // 72 px: both
 #define ICHOR_FLASH_DOUSED        8  // dark: glow-paint only
+
+// --- The festival calendar (SYSTEMS §7; ENGINE_API §7) ---------------------------
+// An Aethos year is 36 days: 12 months of 3, the festival on each month's middle day.
+#define ICHOR_MONTH_HEKATOMBAION   0
+#define ICHOR_MONTH_METAGEITNION   1
+#define ICHOR_MONTH_BOEDROMION     2
+#define ICHOR_MONTH_PYANEPSION     3
+#define ICHOR_MONTH_MAIMAKTERION   4   // the month of storms: no festival
+#define ICHOR_MONTH_POSEIDEON      5
+#define ICHOR_MONTH_GAMELION       6
+#define ICHOR_MONTH_ANTHESTERION   7
+#define ICHOR_MONTH_ELAPHEBOLION   8
+#define ICHOR_MONTH_MOUNICHION     9
+#define ICHOR_MONTH_THARGELION    10
+#define ICHOR_MONTH_SKIROPHORION  11
+#define ICHOR_MONTH_COUNT         12
+#define ICHOR_DAYS_PER_MONTH       3
+// Festivals: each is its month + 1, so a month's festival is ICHOR_FESTIVAL(month)
+#define ICHOR_FESTIVAL_NONE        0
+#define ICHOR_FESTIVAL_PANATHENAIA (ICHOR_MONTH_HEKATOMBAION + 1)   // Athena, Astyra: the torch race
+#define ICHOR_FESTIVAL_KARNEIA     (ICHOR_MONTH_METAGEITNION + 1)   // Apollo, Lakonia
+#define ICHOR_FESTIVAL_MYSTERIES   (ICHOR_MONTH_BOEDROMION + 1)     // Demeter, Eleusa
+#define ICHOR_FESTIVAL_PYANOPSIA   (ICHOR_MONTH_PYANEPSION + 1)     // Apollo, every port
+#define ICHOR_FESTIVAL_POSEIDEA    (ICHOR_MONTH_POSEIDEON + 1)      // Poseidon, every harbor
+#define ICHOR_FESTIVAL_THEOGAMIA   (ICHOR_MONTH_GAMELION + 1)       // Hera and Zeus, Astyra
+#define ICHOR_FESTIVAL_ANTHESTERIA (ICHOR_MONTH_ANTHESTERION + 1)   // Dionysus, everywhere: Ghost-types at night
+#define ICHOR_FESTIVAL_DIONYSIA    (ICHOR_MONTH_ELAPHEBOLION + 1)   // Dionysus, Thyrsa
+#define ICHOR_FESTIVAL_MOUNICHIA   (ICHOR_MONTH_MOUNICHION + 1)     // Artemis, Arkadia
+#define ICHOR_FESTIVAL_THARGELIA   (ICHOR_MONTH_THARGELION + 1)     // Apollo and Artemis, Delphoi and Arkadia
+#define ICHOR_FESTIVAL_KRONIA      (ICHOR_MONTH_SKIROPHORION + 1)   // Kronos, Kronion Hill and Titan sites
+
+// --- Knucklebones (SYSTEMS §9; ENGINE_API §7) ----------------------------------
+// EventScript_IchorKnucklebones's VAR_0x8004: who you play
+#define ICHOR_BONES_CAUTIOUS  0   // rethrows only 1s
+#define ICHOR_BONES_BOLD      1   // chases Aphrodite whenever it holds three different sides
+#define ICHOR_BONES_SILENOS   2   // loaded bones: a 6 three times in ten
+#define ICHOR_BONES_MOM       3   // two rethrows and a humming bee, until FLAG_ICHOR_MOM_CONFESSED
+#define ICHOR_BONES_COUNT     4
+// Internal to data/scripts/ichor_bones.pory
+#define ICHOR_BONES_MENU_ROLL    4
+#define ICHOR_BONES_MENU_STAND   5
+#define ICHOR_BONES_MENU_LOADED  6
+#define ICHOR_BONES_TIE     0
+#define ICHOR_BONES_YOURS   1
+#define ICHOR_BONES_THEIRS  2
+
+// --- Excavation (SYSTEMS §5; ENGINE_API §8) -----------------------------------
+// A daily dig spot's VAR_0x8005: the act's loot table, and the amphora whose
+// sherds the spot holds, if any:
+//   setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_ARACHNE))
+#define ICHOR_DIG_ACT_I    1
+#define ICHOR_DIG_ACT_II   2
+#define ICHOR_DIG_ACT_III  3   // Act III and the post-game
+#define ICHOR_DIG_SHERDS(amphora)  (((amphora) + 1) << 4)
+
+// The 12 amphorae: sherds at FLAG_ICHOR_SHERDS_START + 4 * amphora (§5's table)
+#define ICHOR_AMPHORA_KRONOS      0   // Kalliste
+#define ICHOR_AMPHORA_PERSEPHONE  1   // Eleusa
+#define ICHOR_AMPHORA_ARACHNE     2   // Emporion
+#define ICHOR_AMPHORA_HERMES      3   // Emporion's coast
+#define ICHOR_AMPHORA_HEPHAESTUS  4   // Kaldera
+#define ICHOR_AMPHORA_ICARUS      5   // the Ikarian coasts
+#define ICHOR_AMPHORA_PANDORA     6   // Astyra
+#define ICHOR_AMPHORA_ORPHEUS     7   // Arkadia
+#define ICHOR_AMPHORA_ATALANTA    8   // Arkadia
+#define ICHOR_AMPHORA_PHAETHON    9   // Kaldera
+#define ICHOR_AMPHORA_PARIS      10   // Kythera
+#define ICHOR_AMPHORA_THESEUS    11   // Knossa
+#define ICHOR_AMPHORA_COUNT      12
+#define ICHOR_SHERDS_PER_AMPHORA  4
+#define ICHOR_OSTRAKA_COUNT      30
+
+// A fixed find's VAR_0x8005 is an item, or one of these
+#define ICHOR_FIND_SHERD(amphora)  (0xF000 + (amphora))  // the amphora's next sherd
+#define ICHOR_FIND_PROPHECY(n)     (0xF100 + (n))        // tablet n (1-8): FLAG_ICHOR_PROPHECY_START + n - 1
+#define ICHOR_FIND_PAGE(n)         (0xF200 + (n))        // Daedalus's page n (1-7): FLAG_ICHOR_PAGES_START + n - 1
+#define ICHOR_FIND_OSTRAKON        0xF300                // the next ostrakon
+
+// Ichor_DigStart's answer (internal to data/scripts/ichor_dig.pory)
+#define ICHOR_DIG_READY      0
+#define ICHOR_DIG_NO_TROWEL  1
+#define ICHOR_DIG_DUG_TODAY  2   // a daily spot, already dug today
+#define ICHOR_DIG_BARE       3   // a fixed find, already dug
+#define ICHOR_DIG_MODE_SPOT   0
+#define ICHOR_DIG_MODE_FIXED  1
+// Ichor_DigFindKind's answer
+#define ICHOR_FIND_KIND_ITEM      0
+#define ICHOR_FIND_KIND_SHERD     1
+#define ICHOR_FIND_KIND_OSTRAKON  2
+#define ICHOR_FIND_KIND_PROPHECY  3
+#define ICHOR_FIND_KIND_PAGE      4
 
 #endif // GUARD_CONSTANTS_ICHOR_H

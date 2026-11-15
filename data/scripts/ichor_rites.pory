@@ -216,7 +216,7 @@ script EventScript_IchorDesecratedAltar {
     lockall
     copyvar(VAR_0x800A, VAR_0x8004)
     setvar(VAR_0x800B, FALSE)
-    special(Ichor_CheckAltarCleansed)
+    specialvar(VAR_RESULT, Ichor_CheckAltarCleansed)
     if (var(VAR_RESULT) == TRUE) {
         goto(EventScript_IchorAltar)
     }

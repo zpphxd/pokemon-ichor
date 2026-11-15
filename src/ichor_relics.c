@@ -15,11 +15,13 @@
 #include "field_screen_effect.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "gpu_regs.h"
 #include "fldeff.h"
 #include "follower_npc.h"
 #include "ichor_frozen.h"
 #include "ichor_labyrinth.h"
 #include "ichor_relics.h"
+#include "ichor_theoxenia.h"
 #include "ichor_save.h"
 #include "item.h"
 #include "item_icon.h"
@@ -128,6 +130,7 @@ void Ichor_OnFieldFrame(void)
 {
     Ichor_FrozenHourFrame();
     Ichor_LabyrinthFrame();
+    Ichor_TheoxeniaFrame();
 }
 
 // --- Light (SYSTEMS §2) -------------------------------------------------------
@@ -172,6 +175,51 @@ void Ichor_AnimateTorchFlash(void)
     else
     {
         CreateTask(Task_EnableScriptNextFrame, 80);
+    }
+}
+
+// --- Glow-paint (SYSTEMS §2: douse to see glow-paint) ------------------------------
+
+#include "data/ichor_glow.h"
+
+// The in-game check's stand-in for a row of src/data/ichor_glow.h (tools/ichor/tests)
+static EWRAM_DATA const u16 (*sGlowForTest)[16] = NULL;
+static EWRAM_DATA bool8 sGlowShown = FALSE;
+
+static const u16 (*FindGlow(const struct MapLayout *layout))[16]
+{
+    u32 i;
+    if (!gMapHeader.cave || !FlagGet(FLAG_ICHOR_TORCH_DOUSED) || layout == NULL)
+        return NULL;
+    if (sGlowForTest != NULL)
+        return sGlowForTest;
+    for (i = 0; sGlowTilesets[i].tileset != NULL; i++)
+    {
+        if (sGlowTilesets[i].tileset == layout->secondaryTileset)
+            return sGlowTilesets[i].palettes;
+    }
+    return NULL;
+}
+
+// After a map's tileset palettes load (fieldmap.c), and when the torch is
+// doused: on a doused dark map with glow copies, the glow palettes replace the
+// map's, and the map's layers show outside the light (its sprites don't).
+void Ichor_UpdateGlow(const struct MapLayout *layout, bool32 skipFaded)
+{
+    const u16 (*glow)[16] = FindGlow(layout);
+    if (glow != NULL)
+    {
+        if (skipFaded)
+            CpuCopy16(glow, gPlttBufferUnfaded, NUM_PALS_TOTAL * PLTT_SIZE_4BPP);
+        else
+            LoadPalette(glow, BG_PLTT_ID(0), NUM_PALS_TOTAL * PLTT_SIZE_4BPP);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WINOBJ_BG0);
+        sGlowShown = TRUE;
+    }
+    else if (sGlowShown)
+    {
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WINOBJ_BG0);  // the overworld's own
+        sGlowShown = FALSE;
     }
 }
 
@@ -431,12 +479,14 @@ static const u8 *const sFlameNames[FLAME_COUNT] =
     [FLAME_THRESHOLD] = COMPOUND_STRING("Threshold fire"),
     [FLAME_HESTIA_SHIP] = COMPOUND_STRING("Hestia's fire"),
     [FLAME_LERNA]     = COMPOUND_STRING("Kleon's fire"),
+    [FLAME_PANATHENAIA] = COMPOUND_STRING("Race torch"),
 };
 
 // Kinds that survive a door or an edge: the rest die when you leave the map.
 static const bool8 sFlameTravels[FLAME_COUNT] =
 {
     [FLAME_HESTIA_SHIP] = TRUE,  // Akti's temple, its streets, the quay, the Euploia
+    [FLAME_PANATHENAIA] = TRUE,  // the Kerameikos's Dipylon, through Astyra, up to the Akropolis
 };
 
 static bool32 FlameTravels(u32 kind)
@@ -546,10 +596,13 @@ void Ichor_SetTorchDoused(void)
     {
         FlagSet(FLAG_ICHOR_TORCH_DOUSED);
         PutOutFlame();  // a doused torch carries no fire
+        Ichor_UpdateGlow(gMapHeader.mapLayout, FALSE);
     }
     else
     {
         FlagClear(FLAG_ICHOR_TORCH_DOUSED);
+        if (sGlowShown)
+            LoadMapTilesetPalettes(gMapHeader.mapLayout);  // the map's own colors, and the window back
     }
 }
 

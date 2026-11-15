@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_theoxenia.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -355,6 +356,8 @@ u32 FldEff_Shadow(void)
     graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
     if (graphicsInfo->shadowSize == SHADOW_SIZE_NONE) // don't create a shadow at all
         return 0;
+    if (Ichor_IsDisguisedGod(&gObjectEvents[objectEventId])) // Ichor: a god in disguise casts none
+        return 0;
     LoadSpriteSheetByTemplate(gFieldEffectObjectTemplatePointers[sShadowEffectTemplateIds[graphicsInfo->shadowSize]], 0, 0);
     spriteId = CreateSpriteAtEndUnchecked(gFieldEffectObjectTemplatePointers[sShadowEffectTemplateIds[graphicsInfo->shadowSize]], 0, 0, OW_OBJECT_SUBPRIORITY + 1);
     if (spriteId != MAX_SPRITES)
@@ -403,6 +406,7 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
         }
         if (!objectEvent->active
          || objectEvent->noShadow
+         || Ichor_IsDisguisedGod(objectEvent) // Ichor
          || objectEvent->inHotSprings
          || objectEvent->inSandPile
          || gWeatherPtr->noShadows

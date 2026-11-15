@@ -47,4 +47,7 @@ void ItemUse_IchorMessage(u8 taskId, const u8 *str);
 void ItemUse_IchorOpenScreenFromBag(u8 taskId, MainCallback callback);
 bool32 ItemUse_IchorIsFromField(u8 taskId);
 
+struct MapLayout;
+void Ichor_UpdateGlow(const struct MapLayout *layout, bool32 skipFaded); // fieldmap.c, after a tileset's palettes load
+
 #endif // GUARD_ICHOR_RELICS_H

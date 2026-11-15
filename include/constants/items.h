@@ -1079,6 +1079,10 @@ enum __attribute__((packed)) Item
     ITEM_BRONZE_VOTIVE = 892,
     // Ichor: Aphrodite's gift II, a held item
     ITEM_MYRTLE_WREATH = 893,
+    // Ichor: the dig tool (design/SYSTEMS.md §5), a key item beside the relics
+    ITEM_ALETHEAS_TROWEL = 894,
+    // Ichor: Mom's lucky knucklebone (design/SYSTEMS.md §9): one extra rethrow a match
+    ITEM_APHRODITE_BONE = 895,
 
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,

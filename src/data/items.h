@@ -3048,12 +3048,12 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_RELIC_COPPER] =
     {
-        .name = ITEM_NAME("Relic Copper"),
-        .price = 0,
+        .name = ITEM_NAME("Bronze Obol"),
+        .price = 2000, // Ichor: sells for 500 (a quarter, ITEM_SELL_FACTOR); Hades's blessing +50%
         .description = COMPOUND_STRING(
-            "A copper coin used\n"
-            "by a civilization\n"
-            "3,000 years ago."),
+            "A bronze coin. The\n"
+            "ferryman's fare,\n"
+            "they say."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_RELIC,
         .type = ITEM_USE_BAG_MENU,
@@ -3065,12 +3065,12 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_RELIC_SILVER] =
     {
-        .name = ITEM_NAME("Relic Silver"),
-        .price = 0,
+        .name = ITEM_NAME("Silver Owl"),
+        .price = 8000, // Ichor: sells for 2,000 (a quarter, ITEM_SELL_FACTOR); Hades's blessing +50%
         .description = COMPOUND_STRING(
-            "A silver coin used\n"
-            "by a civilization\n"
-            "3,000 years ago."),
+            "A silver coin with\n"
+            "Athena's owl on it.\n"
+            "Worth a good deal."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_RELIC,
         .type = ITEM_USE_BAG_MENU,
@@ -3082,12 +3082,12 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_RELIC_GOLD] =
     {
-        .name = ITEM_NAME("Relic Gold"),
-        .price = (I_PRICE >= GEN_6) ? 60000 : 0,
+        .name = ITEM_NAME("Gold Stater"),
+        .price = 20000, // Ichor: sells for 5,000 (a quarter, ITEM_SELL_FACTOR); Hades's blessing +50%
         .description = COMPOUND_STRING(
-            "A gold coin used\n"
-            "by a civilization\n"
-            "3,000 years ago."),
+            "An old gold coin.\n"
+            "Sell it, or keep\n"
+            "it for luck."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_RELIC,
         .type = ITEM_USE_BAG_MENU,
@@ -7613,6 +7613,36 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 10,
         .iconPic = gItemIcon_SootheBell,
         .iconPalette = gItemIconPalette_SootheBell,
+    },
+    [ITEM_ALETHEAS_TROWEL] =
+    {
+        .name = ITEM_NAME("Alethea's Trowel"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A digger's trowel.\n"
+            "Press A at turned\n"
+            "earth to dig there."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_AletheasTrowel,
+        .iconPalette = gItemIconPalette_AletheasTrowel,
+    },
+    [ITEM_APHRODITE_BONE] =
+    {
+        .name = ITEM_NAME("Aphrodite Bone"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Mom's lucky bone.\n"
+            "One more rethrow\n"
+            "in knucklebones."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_AphroditeBone,
+        .iconPalette = gItemIconPalette_AphroditeBone,
     },
 
 // Gems

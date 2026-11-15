@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_time.h"
 #include "ichor_frozen.h"
 #include "malloc.h"
 #include "battle_anim.h"
@@ -2773,7 +2774,7 @@ void UpdateLightSprite(struct Sprite *sprite)
         return;
     }
 
-    if (gTimeOfDay != TIME_NIGHT)
+    if (gTimeOfDay != TIME_NIGHT || Ichor_IsTintOff()) // Ichor: no night glow with DAY/NIGHT TINT OFF
     {
         sprite->invisible = TRUE;
         return;

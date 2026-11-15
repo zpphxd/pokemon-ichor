@@ -99,8 +99,19 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | Desecrated altars | 8–15 | world-act2 | the Kithairon shrine, Route 9's altar, and more |
 | Theoxenia | +0x00–0x0F | engine | one visit flag per god (`+ICHOR_GOD_*`), when theoxenia is built |
 | Theoxenia | +0x20–0x27 | world-act2 | decoys: Eleutherai, Thyrsa, Route 8, Kirrha, and more |
-| Fixed digs | +0x00–0x0F | Act I (not yet claimed) | Kalliste, Route 1, Kronion Hill, Emporion |
+| Theoxenia | +0x28–0x2F | world-act2 | decoys, batch 4: Routes 13–16, Nemea, Daphni, Emporion and Eleusa in Act II |
+| Xenia | +0x00–0x03 | chain 1 | The Potter's Knucklebone (§10): Diktys (Akti), the potter (Emporion), the actor (Thyrsa), the scribe (Astyra, world-act2's Eukleides) |
+| Xenia | +0x04–0x07 | chain 2 | The Split Coin: Emporion, Eleusa, Arkadia, Kaldera |
+| Xenia | +0x08–0x0B | chain 3 | The third chain (Phase 4's Broken Ring) |
+| Xenia | +0x10–0x1F | hosts | One flag per host who has fed you, first come: ask the engine session |
+| Fixed digs | +0x00–0x0F | world-act1 | Kalliste, Route 1, Kronion Hill, Emporion, Aigina |
 | Fixed digs | +0x10–0x1B | world-act2 | the Treasury of Minyas, Gla, Trophonios's great boulder, Route 9's gully, and more |
+| Fixed digs | +0x20–0x2F | world-act3 | Act III's finds, its prophecy tablets and Daedalus's pages |
+| Fixed digs | +0x30–0x3F | post-game | |
+| Daily dig spots | +0x00–0x1F | world-act1 | Act I: Kalliste, Emporion, Eleusa |
+| Daily dig spots | +0x20–0x3F | world-act2 | Act II |
+| Daily dig spots | +0x40–0x4F | world-act3 | Act III |
+| Daily dig spots | +0x50–0x5F | post-game | |
 
 **One assembler caveat.** The `compare` macro (and the `goto_if_eq`-style macros built on it) treats a second argument in `0x4000`–`0x40FF` as a var and anything else as a number. So comparing a var *against a bank var* needs `compare_var_to_var` explicitly. Comparing a bank var against a number works as usual.
 
@@ -112,7 +123,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 ## Status of the rest of this file
 
-§1–§7 are built; §8 is planned, with its names fixed. What each section leaves for later is listed at its end.
+§1–§8 are built. What each section leaves for later is listed at its end.
 
 | § | System | Batch | State |
 |---|---|---|---|
@@ -123,7 +134,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 5 | The Frozen Hour (SCRIPT.md Phase 4, E1–E6) | 5 | **Built** |
 | 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials, sentries, the disguise | 5 | **Built** |
 | 7 | Scripts' small needs: flag counts, a held tint, omens, time-of-day tables | 5 | **Built** |
-| 8 | Excavation: the Trowel, dig spots, fixed finds | not yet assigned | Planned, names fixed |
+| 8 | Excavation: the Trowel, dig spots, fixed finds | 6 | **Built** |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
@@ -218,12 +229,18 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
   - going in: `setvar(VAR_0x8004, <brazier flag>)`, then `call(EventScript_IchorEnterLitZone)`. It brightens the map fully if that brazier is lit.
   - going out: `call(EventScript_IchorLeaveLitZone)`, which eases back to the torch's radius.
 - **A map that loads with the player inside a lit zone** sets `setflashlevel(0)` in its ON_TRANSITION when the zone's flag is set.
+- **The light eases both ways.** `animateflash` (and so the lit zones, braziers, dousing and relighting) darkens as well as brightens, even from a fully lit map. Asking for the level the map already has returns at once. These were fixed 2026-11-14, from world-act2's report: entering a lit zone that was already fully lit used to hang, and nothing could darken a map once it was fully lit. A map's own guard against either (Trophonios's cave's `VAR_TEMP_6`) can go.
+- **The light moves 2 px a frame** and only inside the screen, so crossing a threshold takes under a second.
+- **Glow-paint** (dousing to see it):
+  - **The copies:** a secondary tileset's glow copies are `data/tilesets/secondary/<name>/glow/00.pal`–`15.pal`. They are the same slots as its `palettes/`, every color black except what glows.
+  - **Registering:** declare them in `src/data/tilesets/graphics.h` as `gTilesetPalettes_<Name>Glow`, the same way as its palettes, and add one row to `src/data/ichor_glow.h`: `{ &gTileset_<Name>, gTilesetPalettes_<Name>Glow }`.
+  - **What happens:** with the torch doused on a dark map of that tileset, slots 0–12 take the glow colors, and the map's layers show in the dark while its people stay hidden. Relighting brings back the map's own colors. A map loaded while doused gets the glow too.
 
 ### Carried flames (SYSTEMS §2)
 
-- **A carried flame** is a named fire on Hecate's Torch for a set number of steps. Its kinds are `FLAME_HEARTH`, `FLAME_SANCTUM`, `FLAME_THRESHOLD`, and the post-game's `FLAME_HESTIA_SHIP` (Hestia's fire) and `FLAME_LERNA` (Kleon's fire). Add new kinds at the end, with their names in `src/ichor_relics.c`.
+- **A carried flame** is a named fire on Hecate's Torch for a set number of steps. Its kinds are `FLAME_HEARTH`, `FLAME_SANCTUM`, `FLAME_THRESHOLD`, `FLAME_PANATHENAIA` (the Panathenaia's race torch, §7), and the post-game's `FLAME_HESTIA_SHIP` (Hestia's fire) and `FLAME_LERNA` (Kleon's fire). Add new kinds at the end, with their names in `src/ichor_relics.c`.
 - **The engine keeps it,** not the map's temp vars. Maps use `VAR_TEMP_*` for their own ends. Read it with `specialvar(VAR_RESULT, Ichor_GetFlameKind)` (`FLAME_NONE` without one) and `specialvar(VAR_RESULT, Ichor_GetFlameSteps)`. The first draft kept it in `VAR_TEMP_2` and `VAR_TEMP_3`; scripts that check those must switch to the specials.
-- **It dies when you leave the map,** unless its kind **travels**. A travelling kind keeps its steps through doors, warps and map edges: so far only `FLAME_HESTIA_SHIP`, Lampon's walk from Akti's temple to the quay. Mark a new kind in `sFlameTravels` (`src/ichor_relics.c`). A save and CONTINUE puts any flame out.
+- **It dies when you leave the map,** unless its kind **travels**. A travelling kind keeps its steps through doors, warps and map edges: so far `FLAME_HESTIA_SHIP`, Lampon's walk from Akti's temple to the quay, and `FLAME_PANATHENAIA`, the torch race from the Kerameikos's Dipylon through Astyra to the Akropolis. Mark a new kind in `sFlameTravels` (`src/ichor_relics.c`). A save and CONTINUE puts any flame out.
 - **A brazier that gives its fire:** `setvar(VAR_0x8004, FLAME_HEARTH)`, `setvar(VAR_0x8005, 20)`, then `special(Ichor_TakeFlame)`. `VAR_RESULT` is `FALSE` without a lit Torch.
 - **Relighting (the relay).** A brazier already lit with that fire gives a full budget the same way. Do it in the brazier's own script, after `call(EventScript_IchorBrazier)`: if its flag is set and `Ichor_GetFlameKind` is that kind (or any kind, if the brazier hands out its fire), call `Ichor_TakeFlame` again with the dry budget. Labor 2's burned pools work like this.
 - **A brazier that wants a named fire** checks `Ichor_GetFlameKind` itself, then `special(Ichor_PutOutFlame)` if the fire is spent on it.
@@ -534,11 +551,48 @@ copyvar(VAR_ICHOR_LABYRINTH, VAR_0x8004)   // saved back, turned or not
 
 ## 7. Scripts' small needs
 
-Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested by `make check TESTS="Ichor:"`.
+Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested by `make check TESTS="Ichor:"` and `tools/ichor/tests/ichor_world.sh`.
 
 ### Counting flags
 
 `setvar(VAR_0x8004, FLAG_ICHOR_PROPHECY_START)`, `setvar(VAR_0x8005, 8)`, `specialvar(VAR_RESULT, Ichor_CountFlagRange)`: how many of those flags are set. It works on any flag range: a bank, a vanilla range or the daily flags.
+
+### A party Pokémon's level
+
+`specialvar(VAR_RESULT, Ichor_GetHighestPartyLevel)` gives the level of the strongest Pokémon in the party, not counting Eggs. "Level thirty strong?" is `if (var(VAR_RESULT) >= 30)`.
+
+### The DAY/NIGHT TINT option
+
+**The setting.** The options menu has a DAY/NIGHT TINT row, ON or OFF. It's saved in `IchorSave.options` (`ICHOR_OPTION_TINT_OFF`, clear by default), so a new game is ON.
+
+**ON** is the expansion's day-and-night tint (`OW_ENABLE_DNS`), as before.
+
+**OFF** draws the overworld in daytime colors at every hour. Only the colors change:
+- `gTimeOfDay` and `GetTimeOfDay()` still follow the clock. So do the time-of-day encounter tables, night music, night-only events, Hecate's night test, the xenia rest and the omens.
+- Night lamps don't glow.
+
+**Not affected by the setting:**
+- A script's held tint (`Ichor_HoldTimeOfDay`, such as Delphoi's night) shows whatever the setting.
+- The Frozen Hour's gray and its color return are their own system.
+
+**For C code:** `Ichor_IsTintOff()` is TRUE when OFF is chosen and no tint is held.
+
+### The xenia rest (SYSTEMS §10)
+
+A host's bed moves the clock forward to dawn (06:00), noon (12:00), dusk (19:00) or night (20:30), never back and never past midnight. The menu offers only the hours still ahead today, then NOT NOW:
+
+```
+msgbox(format("Stay, if you like. Rest till you want to wake."))
+call(EventScript_IchorXeniaRest)
+if (var(VAR_RESULT) == TRUE) {
+    special(HealPlayerParty)
+    msgbox(format("{PLAYER} slept behind the striped curtain and woke well rested."))
+}
+```
+
+- **What it does:** it asks "Rest until when?", fades to black, moves the clock, waits a second and fades back. The tint follows at once.
+- **`VAR_RESULT`** is `FALSE` for NOT NOW, or when no hour is left (after 20:30). The healing and the host's words are the map's.
+- **From C,** `special(Ichor_RestUntil)` with an `ICHOR_REST_*` in `VAR_0x8004` moves the clock without the menu.
 
 ### Holding the day-and-night tint
 
@@ -546,6 +600,75 @@ Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested b
 - **It's the game's time of day while held,** not just the colors. Encounter tables and time-based evolutions follow it, so night falls at Delphoi for the Pokémon too.
 - The tint only shows on maps with natural light (towns, routes and the sea), so interiors look the same either way.
 - The expansion's own `SetTimeOfDay` hour override still works, but it resets on every warp. Use the hold for anything that spans maps.
+
+### Knucklebones (SYSTEMS §9)
+
+A best-of-five match, played in the message box with a menu. The map gives the opponent's personality in `VAR_0x8004` and their name, as prose, in `STR_VAR_3`:
+
+```
+bufferstring(STR_VAR_3, ThyrsaCity_Tavern_Text_Glauke)   // text … { "Glauke" }
+setvar(VAR_0x8004, ICHOR_BONES_BOLD)
+call(EventScript_IchorKnucklebones)
+if (var(VAR_RESULT) == TRUE) { ... you won ... }
+```
+
+**Each throw:**
+1. You see your four bones: "3  1  4  4  (12)".
+2. A menu lists each bone as KEEP or ROLL (A switches it), then ROLL THEM (once one is marked) and STAND. B also stands.
+3. The opponent throws and rethrows as they play.
+4. The higher sum takes the throw, and a tie is thrown again. Aphrodite (1, 3, 4, 6) beats everything; the Dog (four 1s) loses to everything.
+5. The score shows ("2-1"). The first to three wins.
+
+**The opponents** (`ICHOR_BONES_*`):
+
+| Value | Plays |
+|---|---|
+| `_CAUTIOUS` | Rethrows only its 1s |
+| `_BOLD` | Holding three different sides, rethrows the spare to chase Aphrodite. Otherwise, its 1s. |
+| `_SILENOS` | Loaded bones: a 6 comes up 30% of the time. After two throws in a row with two 6s or more, LOADED! appears in your menu; calling it wins the match at once ("“Loaded!” Silenos goes very still."). |
+| `_MOM` | Until `FLAG_ICHOR_MOM_CONFESSED`, the bee: two rethrows and faces 5/30/30/35. You win about 1 match in 18, as SYSTEMS §9 says. After the confession she plays fair, so it's about even. Every match goes on her record. |
+
+Nobody breaks up an Aphrodite.
+
+**Mom:**
+- `specialvar(VAR_RESULT, Ichor_GetMomRecord)` gives your wins against her, with her wins in `VAR_0x8004`, for the 2F text. The record starts at 0–212.
+- **Her first loss:** the map shows her lines and gives `ITEM_APHRODITE_BONE`, a key item that adds one rethrow a match.
+- **`FLAG_ICHOR_MOM_CONFESSED`** (engine-owned, bank offset 0x483) is set by world-act3 at the Kastalian spring (STORY III-7).
+
+**Left to the map:** prizes, the champions' flags and the lines around the match. There are no wagers.
+
+### The festival calendar (SYSTEMS §7)
+
+**The year.** An Aethos year is 36 days on the day counter (`VAR_DAYS`): 12 months of 3 days, and each month's festival on its middle day. So a festival comes every three days, and Maimakterion, the month of storms, has none.
+
+**The calls:**
+- `specialvar(VAR_RESULT, Ichor_GetFestival)` gives today's `ICHOR_FESTIVAL_*`, or `ICHOR_FESTIVAL_NONE`. A town dresses for its festival in `ON_TRANSITION`: decoration hide flags, music and an alternate market list.
+- `specialvar(VAR_RESULT, Ichor_GetMonth)` gives the `ICHOR_MONTH_*`, with the day of the month (0–2) in `VAR_0x8004`.
+- `setvar(VAR_0x8004, ICHOR_FESTIVAL_PANATHENAIA)`, then `specialvar(VAR_RESULT, Ichor_DaysToFestival)`, gives the days until that festival comes (0 means today): "The Panathenaia is in 4 days."
+- `specialvar(VAR_RESULT, Ichor_JoinFestival)`: the player takes part. The first time on a festival day, its god gives +5 Favor and `VAR_RESULT` is `TRUE`. The daily flag is `FLAG_DAILY_ICHOR_FESTIVAL_JOINED`. The Kronia has no god to give Favor.
+
+**By itself, the engine runs only the Anthesteria:** at night, Ghost-types come about three times as often on land. Everything else on a festival day is the town's script, and the main path never needs a festival (the Act II Dionysia is story time).
+
+**Not built:** `IchorSave.festivalsSeen`, and the Scroll of Deeds' calendar page.
+
+### Theoxenia's tells (SYSTEMS §10)
+
+A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR_GOD`** (Porymap's trainer type field; give it no sight range). The engine then gives three of §10's tells:
+
+1. **No shadow.** Every other object has one (`OW_OBJECT_VANILLA_SHADOWS` is off).
+2. **The follower bows** once it is within 3 tiles of the god and the player stands still: it turns to the god and dips. It bows again only after leaving that range.
+3. **The Augur's Eye** shows "Something here is watching you." in place of its top line, on any map where a disguised god stands.
+
+**Left to the map:**
+- The detail that doesn't fit (the third tell) is the god's art.
+- The tests and the reveal are scripts.
+- A Stranger omen (§6) is a row in `src/data/ichor_omens.h`.
+
+**Other uses:**
+- **The reveal:** when the god drops the disguise, swap the object's graphics. If you swap it for an ordinary object, the shadow comes back.
+- **Decoys** are ordinary objects: shadows, and no bow.
+- **Phase 4's E18, the shadowless figure,** is a `TRAINER_TYPE_ICHOR_GOD` object as well.
+- **The visit flags** are `FLAG_ICHOR_THEOXENIA_START + ICHOR_GOD_*`, as §1's table gives them.
 
 ### Omens (SYSTEMS §6)
 
@@ -558,8 +681,23 @@ Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested b
   specialvar(VAR_RESULT, Ichor_CheckOmen)
   if (var(VAR_RESULT) == TRUE) { setweather(WEATHER_RAIN) }
   ```
-- `specialvar(VAR_RESULT, Ichor_GetOmen)` gives the kind, with the entry in `VAR_0x8004`. The augurs use it.
-- **Not built yet:** SYSTEMS §6's daily draw from the entry table (swarms through `StartMassOutbreak`, visitors' hide flags, the story filter). Until it lands, a day without a forced omen has none.
+- `specialvar(VAR_RESULT, Ichor_GetOmen)` gives the kind, with the entry in `VAR_0x8004`. The augurs use it: Halitherses and Manto switch on the kind and entry for their line.
+- **The daily draw.** Each new day without a forced omen draws one:
+  - **The kind** comes by SYSTEMS §6's weights: swarm 35 (45 before any stranger can walk), visitor 25, weather 20, good sign 10, stranger 10. A kind with no open entry isn't drawn.
+  - **The entry** is then one of that kind's rows in `src/data/ichor_omens.h` whose `unlockFlag` is set and whose `lockFlag` isn't. So augurs only name places the player can reach.
+  - **A good sign** needs no rows. Half the time it is `OMEN_SIGN_BLESSING` (the augur grants a minor blessing with `Ichor_GrantBlessing`, §3). Otherwise it is `OMEN_SIGN_LUCKY(1)`–`(6)`, today's lucky number.
+- **What an omen does by itself:**
+  - **A swarm** starts the expansion's mass outbreak for the day: half the row's `map`'s land encounters are its `species` at its `level`, with the species' own moves.
+  - **A visitor's object** shows only on its day. Each new day the engine sets every visitor's `hideFlag`, then clears today's. A map's script sets it again once the visitor is caught or beaten.
+  - **Weather** is the map's `ON_TRANSITION`, as above.
+- **Adding an omen.** Number it in `include/constants/ichor.h` (`OMEN_SWARM_*`, `OMEN_VISITOR_*`, `OMEN_WEATHER_*`), then add a row:
+  ```
+  { .kind = OMEN_SWARM, .entry = OMEN_SWARM_ROUTE6, .unlockFlag = FLAG_ICHOR_ARRIVED_ELEUSA,
+    .species = SPECIES_..., .map = MAP_ROUTE6_ELEUTHERAI_ROAD, .level = 18 },
+  { .kind = OMEN_VISITOR, .entry = OMEN_VISITOR_THYRSIVY, .unlockFlag = FLAG_ICHOR_DIONYSIA_DONE,
+    .hideFlag = FLAG_ICHOR_HIDE_OMEN_THYRSIVY },
+  ```
+  The table has only the two weather rows so far, both opened by Laurel 7 (`FLAG_BADGE07_GET`) until world-act3 names a better flag. The Act I and II rows belong to world-act1 and world-act2, whose maps and flags aren't on this branch yet. Until rows exist, every day's omen is a good sign.
 
 ### Four time-of-day encounter tables on one map
 
@@ -568,23 +706,77 @@ These need no engine change. `OW_TIME_OF_DAY_ENCOUNTERS` is on, and `tools/wild_
 - **The hours** (`OW_TIMES_OF_DAY`, latest generation): morning 6–10, day 10–19, evening 19–20, night 20–6.
 - **A time with no table of its own falls back to `_Morning`** (`OW_TIME_OF_DAY_FALLBACK`). With all four defined, Lakonia's Chalkip can sit in `_Morning` and `_Evening` only.
 
-## 8. Excavation (SYSTEMS §5): planned, names fixed
+## 8. Excavation (SYSTEMS §5)
 
-Not built. These names are fixed so map scripts can be written against them now; until it lands, keep a stub like `ICHOR_STUB_DIG`. Alethea's Trowel itself (`ITEM_ALETHEAS_TROWEL`) comes with it.
+Alethea gives the Trowel with `giveitem(ITEM_ALETHEAS_TROWEL)` (a key item). Every dig spot is a bg event, or an object, whose script sets two vars and goes to one of two scripts:
 
 ```
-// A daily dig spot's bg event (its find is rolled once a day, by spot and day)
-setvar(VAR_0x8004, <spot index>)        // FLAG_DAILY_ICHOR_DIG_START + index: dug today
-setvar(VAR_0x8005, ICHOR_DIG_ACT_II)    // the loot table: ICHOR_DIG_ACT_I, _ACT_II or _ACT_III
+// A daily spot: dug once a day; its find is rolled from the day's seed and the spot
+setvar(VAR_0x8004, <spot index>)       // FLAG_DAILY_ICHOR_DIG_START + index: dug today
+setvar(VAR_0x8005, ICHOR_DIG_ACT_I | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_ARACHNE))
 goto(EventScript_IchorDigSpot)
 
-// A one-time find (a fixed dig)
-setvar(VAR_0x8004, <find index>)        // FLAG_ICHOR_DIG_FIXED_START + index: found
-setvar(VAR_0x8005, ITEM_RARE_BONE)      // what's buried there
+// A fixed find: dug once, ever
+setvar(VAR_0x8004, <find index>)       // FLAG_ICHOR_DIG_FIXED_START + index: dug
+setvar(VAR_0x8005, ITEM_RARE_BONE)     // an item, or ICHOR_FIND_SHERD(ICHOR_AMPHORA_*),
+                                       // ICHOR_FIND_PROPHECY(1-8), ICHOR_FIND_PAGE(1-7), ICHOR_FIND_OSTRAKON
 goto(EventScript_IchorDigFixed)
 ```
 
-- **Without the Trowel,** both say the ground has been turned here. Once a fixed find is dug, the spot is bare.
-- Hide a dig-spot object with the same flag as its find.
-- **Daily spot indices** are given out in blocks like the fixed ones; ask the engine session.
+**A daily spot's `VAR_0x8005`:**
+- The table: `ICHOR_DIG_ACT_I`, `_ACT_II` or `_ACT_III` (Act III and the post-game). These are SYSTEMS §5's tables.
+- The amphora, if the spot holds sherds: `| ICHOR_DIG_SHERDS(ICHOR_AMPHORA_*)`. The twelve `ICHOR_AMPHORA_*` names follow §5's table (`_KRONOS` is Kalliste, `_PERSEPHONE` Eleusa, `_ARACHNE` Emporion, and so on).
+- A spot with no amphora never gives a sherd: the roll goes again. So does a sherd roll once its amphora is whole, and an ostrakon roll once all 30 are found.
+
+**What a dig does:**
+- **Without the Trowel,** it says the earth has been turned and something glints in it.
+- **With it,** the player raises the Trowel (the relic pose), dust puffs on the tile and the find comes up.
+  - Items go in the Bag. If it's full, nothing is dug, and the spot stays.
+  - A sherd sets the amphora's next flag (`FLAG_ICHOR_SHERDS_START + 4 × amphora + n`) and says "*n* of its 4 pieces".
+  - An ostrakon sets the next of `FLAG_ICHOR_OSTRAKA_START + 0–29`, in order, and shows its words. The 30 are in `src/ichor_dig.c` (`sOstraka`). Nine name Aristeides, for Lysimachos, and the last is the player's. Writers may rewrite any of them.
+  - Tablet *n* sets `FLAG_ICHOR_PROPHECY_START + n − 1`, and page *n* sets `FLAG_ICHOR_PAGES_START + n − 1`. Alethea's reading, or the page's text, is the map's own script (see below).
+- **Afterwards,** a daily spot says "dug today" until tomorrow, and a fixed find says "nothing else is buried here".
+- **A fixed find with nothing left to give** (a sherd of a whole amphora) gives Stardust instead.
+- **Rolls are seeded by the day's seed and the spot,** so reloading a save digs up the same thing.
+- **Blessings:** Demeter's rolls twice and keeps the rarer find. Hades's doubles an item from a daily spot.
+- **Loot that waits on other work:** the fossils are Kanto's and Hoenn's until the dex adds the Aethos fossils. The 1% Ichor Stone is one of ten Mega Stones; Balance may change the list in `sIchorStones`.
+
+**A dig-spot object** (turned earth drawn as an object) takes the dig's flag as its own (`FLAG_DAILY_ICHOR_DIG_START + spot` or `FLAG_ICHOR_DIG_FIXED_START + index`). The dig removes it. A daily spot's object comes back the next day.
+
+**After the dig.** Both scripts work as a `goto` or a `call`. After a `call`, `VAR_RESULT` is `TRUE` if something was dug up just now, so a map can follow a tablet with Alethea's reading:
+
+```
+setvar(VAR_0x8004, 0x12)
+setvar(VAR_0x8005, ICHOR_FIND_PROPHECY(3))
+call(EventScript_IchorDigFixed)
+if (var(VAR_RESULT) == TRUE) {
+    // Alethea reads tablet 3
+}
+```
+
+**The coins** are renamed, and sell at any market for these (a quarter of their price, the expansion's Gen 9 rule; Hades's blessing +50%):
+
+| Item | Name | Sells for |
+|---|---|---|
+| `ITEM_RELIC_COPPER` | Bronze Obol | ¥500 |
+| `ITEM_RELIC_SILVER` | Silver Owl | ¥2,000 |
+| `ITEM_RELIC_GOLD` | Gold Stater | ¥5,000 |
+
+A moneychanger (Pasion in Emporion, Astyra's) pays the market's price plus his own percent, with any blessing counted:
+
+```
+setvar(VAR_0x8004, ITEM_RELIC_SILVER)
+setvar(VAR_0x8005, 20)                       // +20%
+specialvar(VAR_RESULT, Ichor_SellToMoneychanger)
+if (var(VAR_RESULT) == TRUE) {
+    playse(SE_SHOP)
+    msgbox(format("He pays you ¥{STR_VAR_1}."))
+}
+```
+
+`VAR_RESULT` is `FALSE` if you have none. With no blessing, +20% is ¥600, ¥2,400 and ¥6,000.
+
+**Index blocks** for dig spots are in §1's table. Ask the engine session for more.
+
+**Checks:** `tools/ichor/tests/ichor_dig.sh` (15 checks on Route 1) and `make check TESTS="Ichor:"` (`test/ichor_dig.c`: the rolls, rerolls, act tables and blessings).
 
