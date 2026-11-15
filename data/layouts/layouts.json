@@ -1060,10 +1060,10 @@
     {
       "id": "LAYOUT_ARKADIA_TEMPLE_OF_ARTEMIS",
       "name": "Arkadia_TempleOfArtemis_Layout",
-      "width": 17,
-      "height": 24,
+      "width": 30,
+      "height": 50,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_TempleHestia",
+      "secondary_tileset": "gTileset_TempleArtemis",
       "border_filepath": "data/layouts/Arkadia_TempleOfArtemis/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_TempleOfArtemis/map.bin",
       "layout_version": "emerald"

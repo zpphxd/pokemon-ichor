@@ -907,9 +907,9 @@
 #define FLAG_UNUSED_0x358                                           0x358 // Unused Flag
 #define FLAG_UNUSED_0x359                                           0x359 // Unused Flag
 #define FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY                       0x35A
-#define FLAG_UNUSED_0x35B                                           0x35B // Unused Flag
-#define FLAG_UNUSED_0x35C                                           0x35C // Unused Flag
-#define FLAG_UNUSED_0x35D                                           0x35D // Unused Flag
+#define FLAG_ICHOR_HIDDEN_TEMPLE_ARTEMIS_STARDUST                   0x35B // Ichor: Act II: hidden Stardust in the asphodel, Temple of Artemis
+#define FLAG_ICHOR_HIDDEN_TEMPLE_ARTEMIS_DUSK_BALL                  0x35C // Ichor: Act II: hidden Dusk Ball in the garden's dark corner, Temple of Artemis
+#define FLAG_ICHOR_HIDDEN_TEMPLE_ARTEMIS_STAR_PIECE                 0x35D // Ichor: Act II: hidden Star Piece on Kallisto's rock, Temple of Artemis
 #define FLAG_ICHOR_HIDDEN_STYX_KEPHEUS_EVERSTONE                    0x35E // Ichor: Act II rooms3: hidden item: the Everstone in Kepheus's rubble (Styx Falls)
 #define FLAG_UNUSED_0x35F                                           0x35F // Unused Flag
 #define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1           0x360
@@ -1888,6 +1888,11 @@
 #define FLAG_ICHOR_OMEN_SCHISTE_TOLD            (FLAG_ICHOR_GENERAL_START + 0x18E) // Ichor: Act II: an augur told the Split Road's omen; the Enigmaw may sit on the stone (ICHOR_STUB_OMENS)
 #define FLAG_ICHOR_ITEM_ROUTE9_ULTRA_BALL       (FLAG_ICHOR_GENERAL_START + 0x18F) // Ichor: Act II: item ball, the olive grove below Route 9's crossroads
 #define FLAG_ICHOR_ITEM_LEBADEIA_REVIVE         (FLAG_ICHOR_GENERAL_START + 0x190) // Ichor: Act II: item ball, Lebadeia's river bank by the pilgrims' hall
+#define FLAG_ICHOR_KALLISTO_RITE                (FLAG_ICHOR_GENERAL_START + 0x1E4) // Ichor: Act II: Kallisto taught Artemis's rite and gave the Moon Laurel (beat 44)
+#define FLAG_ICHOR_GOT_TM_DARK_PULSE            (FLAG_ICHOR_GENERAL_START + 0x1E5) // Ichor: Act II: Kallisto gave TM Dark Pulse with the Moon Laurel (beat 44)
+#define FLAG_ICHOR_HIDE_TEMPLE_HOUNDS_ASLEEP    (FLAG_ICHOR_GENERAL_START + 0x1E6) // Ichor: Act II: hides the Temple of Artemis's sleeping hounds until the Moon Laurel
+#define FLAG_ICHOR_KALLISTO_TABLET              (FLAG_ICHOR_GENERAL_START + 0x1E7) // Ichor: Act II: Kallisto has seen prophecy tablet 5 (beat 44, once)
+#define FLAG_ICHOR_ITEM_TEMPLE_ARTEMIS_PRETTY_FEATHER (FLAG_ICHOR_GENERAL_START + 0x1E8) // Ichor: Act II: the Pretty Feather on Anthia's bench, Temple of Artemis
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)

@@ -195,3 +195,7 @@ const u16 gMetatileAttributes_PorytilesManaged_WestHarbor[] = INCBIN_U16("data/t
 // Ichor: west_homes
 const u16 gMetatiles_PorytilesManaged_WestHomes[] = INCBIN_U16("data/tilesets/secondary/west_homes/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_WestHomes[] = INCBIN_U16("data/tilesets/secondary/west_homes/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: temple_artemis
+const u16 gMetatiles_PorytilesManaged_TempleArtemis[] = INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_TempleArtemis[] = INCBIN_U16("data/tilesets/secondary/temple_artemis/porytiles_bin/metatile_attributes.bin");
