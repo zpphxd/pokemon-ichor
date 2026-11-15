@@ -5,8 +5,7 @@
 //
 // Each service works only with its crew member aboard. Their hide flags are temp
 // flags, set here when they're not aboard (temp flags clear on every map load).
-// Phemios wears a stand-in walker until the sprites agent's
-// OBJ_EVENT_GFX_ICHOR_PHEMIOS lands (ICHOR_STUB_PG_SPRITES).
+// Phemios wears his own walker (merged from pg-b1-sprites).
 
 mapscripts EuploiaBelow_MapScripts {
     MAP_SCRIPT_ON_LOAD {

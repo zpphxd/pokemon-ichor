@@ -1,0 +1,833 @@
+// The Euploia's crew: ten recruitment scenes (design/ODYSSEY.md §3). Each is short, in
+// the crew member's own voice, and sets its FLAG_ICHOR_CREW_*. Nausikles and Alethea
+// come with the ship (ichor_postgame_opening.pory, scene 1).
+//
+// Akti's three are wired into the slice's maps: Lampon (the Temple of Hestia), Diktys
+// (his boat on the beach) and Glaukias (the Fisher's house). The other seven live on
+// other branches' maps, so their objects and events are described in
+// design/postgame/PLACEMENTS.md for the owner or the director to drop in: Kydon
+// (Emporion), Phemios (Thyrsa's theater), Lynkeus and Iaso (Astyra), Christopher Nolan
+// (Lechaion) and the oarsmen (Lakonia).
+//
+// Every scene waits for the ship (FLAG_ICHOR_GOT_EUPLOIA): before it, each person has
+// a line that points west. Recruit them before you round Maleia (ODYSSEY §3); the
+// euploia agent shows each one aboard once their flag is set.
+
+text IchorPgCrew_Name_Lampon { "LAMPON" }
+text IchorPgCrew_Name_Diktys { "DIKTYS" }
+text IchorPgCrew_Name_Glaukias { "GLAUKIAS" }
+text IchorPgCrew_Name_Demeas { "DEMEAS" }
+text IchorPgCrew_Name_Kydon { "KYDON" }
+text IchorPgCrew_Name_Phemios { "PHEMIOS" }
+text IchorPgCrew_Name_Lynkeus { "LYNKEUS" }
+text IchorPgCrew_Name_Iaso { "IASO" }
+text IchorPgCrew_Name_Nolan { "NOLAN" }
+text IchorPgCrew_Name_Kleon { "KLEON" }
+text IchorPgCrew_Name_Oarsman { "OARSMAN" }
+
+text IchorPgCrew_Text_Lampon { "Lampon" }
+text IchorPgCrew_Text_Diktys { "Diktys" }
+text IchorPgCrew_Text_Glaukias { "Glaukias" }
+text IchorPgCrew_Text_Kydon { "Kydon" }
+text IchorPgCrew_Text_Phemios { "Phemios" }
+text IchorPgCrew_Text_Lynkeus { "Lynkeus" }
+text IchorPgCrew_Text_Iaso { "Iaso" }
+text IchorPgCrew_Text_Nolan { "Nolan" }
+
+// STR_VAR_1 holds the name. Leaves the fanfare's message up for the caller.
+script EventScript_IchorPgCrew_Joined {
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{STR_VAR_1} joined the crew of the Euploia!"))
+    waitmessage
+    waitfanfare
+    return
+}
+
+// ===========================================================================
+// Lampon, keeper of Hestia's great hearth (Akti, the Temple of Hestia)
+//
+// Carry fire from the great hearth to the ship's hearth: SYSTEMS.md §2's carried
+// flame, 30 steps, a callback to the slice's Hearth Trial, where the sea wind put the
+// torch out at the door. This time the fire rides on Hecate's Torch, which the wind
+// can't touch. The shortest way from the hearth to the quay's trigger is 28 steps:
+// 8 to the temple door, 1 down its step, 19 across the plaza and up the harbor street.
+// ===========================================================================
+
+// ICHOR_STUB_CARRIED_FLAME: Hestia's fire for the ship is built on ichor-engine's
+// branch, not on this one yet. Each stub below stands for one engine call, and the
+// call sites (the great hearth, Akti's ON_TRANSITION, the quay) stay as they are when
+// the engine merges. Replace each `call(EventScript_IchorPgStub_X)` with:
+//   TakeFlame     setvar(VAR_0x8004, FLAME_HESTIA_SHIP), setvar(VAR_0x8005, 30),
+//                 special(Ichor_TakeFlame)       VAR_RESULT is FALSE without a lit Torch
+//   GetFlameKind  specialvar(VAR_RESULT, Ichor_GetFlameKind)
+//   GetFlameSteps specialvar(VAR_RESULT, Ichor_GetFlameSteps)
+//   PutOutFlame   special(Ichor_PutOutFlame)       the fire is spent on the ship's hearth
+// then delete the four stubs, FLAG_ICHOR_PG_HEARTH_FIRE's use here and the stand-in
+// FLAME_HESTIA_SHIP in include/constants/ichor_postgame.h. The engine's fire keeps its
+// steps through doors and warps, costs 2 a step in rain (the dry budget, 30, always
+// gets you there), and gutters at 5. Never read VAR_TEMP_2 or VAR_TEMP_3 for it: Akti's
+// slice triggers use both. Until then the fire never runs out, and the Torch isn't
+// needed.
+script EventScript_IchorPgStub_TakeFlame {
+    setflag(FLAG_ICHOR_PG_HEARTH_FIRE)
+    setvar(VAR_RESULT, TRUE)
+    return
+}
+
+script EventScript_IchorPgStub_GetFlameKind {
+    setvar(VAR_RESULT, FLAME_NONE)
+    if (flag(FLAG_ICHOR_PG_HEARTH_FIRE)) {
+        setvar(VAR_RESULT, FLAME_HESTIA_SHIP)
+    }
+    return
+}
+
+script EventScript_IchorPgStub_GetFlameSteps {
+    setvar(VAR_RESULT, 0)
+    if (flag(FLAG_ICHOR_PG_HEARTH_FIRE)) {
+        setvar(VAR_RESULT, 30)
+    }
+    return
+}
+
+script EventScript_IchorPgStub_PutOutFlame {
+    clearflag(FLAG_ICHOR_PG_HEARTH_FIRE)
+    return
+}
+
+// Whether Hestia's fire for the ship is still burning on the Torch: VAR_RESULT TRUE or FALSE.
+script EventScript_IchorPgCrew_HestiaFireBurns {
+    call(EventScript_IchorPgStub_GetFlameKind)
+    if (var(VAR_RESULT) != FLAME_HESTIA_SHIP) {
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    call(EventScript_IchorPgStub_GetFlameSteps)
+    if (var(VAR_RESULT) == 0) {
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    setvar(VAR_RESULT, TRUE)
+    return
+}
+
+// From the Temple of Hestia's ON_TRANSITION. FLAG_TEMP_18 is Lampon's hide flag: he's
+// aboard once he's crew.
+script EventScript_IchorPgCrew_TempleSetUp {
+    if (flag(FLAG_ICHOR_POSTGAME) && flag(FLAG_ICHOR_CREW_LAMPON)) {
+        setflag(FLAG_TEMP_18)
+    }
+    return
+}
+
+script EventScript_IchorPgCrew_Lampon {
+    lock
+    faceplayer
+    setspeaker(IchorPgCrew_Name_Lampon)
+    if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        msgbox(format("Ione says a ship is only a house that floats.\p"
+                      "Every house needs a hearth. I'm just saying. In case anyone asks."))
+        release
+        end
+    }
+    call(EventScript_IchorPgCrew_HestiaFireBurns)
+    if (var(VAR_RESULT) == TRUE) {
+        setspeaker(IchorPgCrew_Name_Lampon)
+        msgbox(format("What are you waiting for? The quay! Go!"))
+        release
+        end
+    }
+    setspeaker(IchorPgCrew_Name_Lampon)
+    if (flag(FLAG_ICHOR_PG_LAMPON_ASKED)) {
+        msgbox(format("The great hearth, your torch, the quay. Don't stop to chat.\p"
+                      "If it goes out, come back and light it again. Fires do that."))
+        release
+        end
+    }
+    msgbox(format("You! The one who read the hymn once. Once!\p"
+                  "You've got a ship now, Ione says. A ship is a house that floats.\p"
+                  "And a house needs a hearth, lit from Hestia's. From this one.\p"
+                  "Colonists did it. Carried fire from home all the way to the new city.\p"
+                  "Light that torch of Hecate's at the great hearth. Hestia won't mind.\p"
+                  "The sea wind ate your torch last time. It won't get that one.\p"
+                  "Thirty steps to the quay, near enough. Don't stop to chat.\p"
+                  "I'll meet you at the ship. I'm coming too. Somebody has to cook."))
+    setflag(FLAG_ICHOR_PG_LAMPON_ASKED)
+    release
+}
+
+// The great hearth, once Lampon has asked. From the slice's GreatHearth script.
+script EventScript_IchorPgCrew_LamponHearth {
+    lockall
+    call(EventScript_IchorPgCrew_HestiaFireBurns)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("Hestia's fire burns on your torch, low and steady. The quay is waiting."))
+        releaseall
+        end
+    }
+    msgbox(format("The great hearth of Hestia. It has never once gone out.\p"
+                  "Light your torch from it, for the ship?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        releaseall
+        end
+    }
+    closemessage
+    call(EventScript_IchorPgStub_TakeFlame)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Your torch is dark. Light it first, and then take Hestia's fire."))
+        releaseall
+        end
+    }
+    playse(SE_M_EMBER)
+    waitse
+    msgbox(format("Hestia's fire catches on your torch. Thirty steps, Lampon said. To the quay!"))
+    releaseall
+}
+
+// On the quay, the line x = 10 (rows 9-11), while VAR_TEMP_6 is 1. Lampon waits at
+// (8,10) by the gangplank; the player is walked to (9,10).
+script EventScript_IchorPgCrew_LamponQuayRow9 {
+    setvar(VAR_0x8008, 9)
+    goto(EventScript_IchorPgCrew_LamponQuay)
+}
+
+script EventScript_IchorPgCrew_LamponQuayRow10 {
+    setvar(VAR_0x8008, 10)
+    goto(EventScript_IchorPgCrew_LamponQuay)
+}
+
+script EventScript_IchorPgCrew_LamponQuayRow11 {
+    setvar(VAR_0x8008, 11)
+    goto(EventScript_IchorPgCrew_LamponQuay)
+}
+
+script EventScript_IchorPgCrew_LamponQuayTalk {
+    setvar(VAR_0x8008, 0)
+    goto(EventScript_IchorPgCrew_LamponQuay)
+}
+
+script EventScript_IchorPgCrew_LamponQuay {
+    lockall
+    setvar(VAR_TEMP_6, 0)
+    switch (var(VAR_0x8008)) {
+        case 9: applymovement(OBJ_EVENT_ID_PLAYER, IchorPgCrew_Movement_QuayFrom9)
+        case 10: applymovement(OBJ_EVENT_ID_PLAYER, IchorPgCrew_Movement_QuayFrom10)
+        case 11: applymovement(OBJ_EVENT_ID_PLAYER, IchorPgCrew_Movement_QuayFrom11)
+    }
+    waitmovement(0)
+    // The fire may have died on the way (the engine's steps ran out, or water).
+    call(EventScript_IchorPgCrew_HestiaFireBurns)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(IchorPgCrew_Name_Lampon)
+        msgbox(format("It went out? …It went out. Fires do that.\p"
+                      "Back to the great hearth. I'll wait. I'm good at waiting."))
+        releaseall
+        end
+    }
+    setspeaker(IchorPgCrew_Name_Lampon)
+    msgbox(format("There! You didn't drop it! I ran round the back way.\p"
+                  "Don't tell Ione. I was very dignified about it.\p"
+                  "Hold it steady. Let me take a light from it. Gently. GENTLY.\p"
+                  "A ship's a house that floats. Now this one has a hearth.\p"
+                  "I'll keep it lit. And I'll cook. Somebody has to."))
+    closemessage
+    call(EventScript_IchorPgStub_PutOutFlame)
+    applymovement(LOCALID_AKTI_PG_LAMPON, IchorPgCrew_Movement_LamponBoards)
+    waitmovement(0)
+    removeobject(LOCALID_AKTI_PG_LAMPON)
+    delay(30)
+    playse(SE_M_EMBER)
+    waitse
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Below deck, a hearth catches. The Euploia smells of woodsmoke."))
+    bufferstring(STR_VAR_1, IchorPgCrew_Text_Lampon)
+    call(EventScript_IchorPgCrew_Joined)
+    setflag(FLAG_ICHOR_CREW_LAMPON)
+    closemessage
+    releaseall
+}
+
+movement IchorPgCrew_Movement_QuayFrom9 { walk_down walk_left face_left }
+movement IchorPgCrew_Movement_QuayFrom10 { walk_left face_left }
+movement IchorPgCrew_Movement_QuayFrom11 { walk_up walk_left face_left }
+// From (8,10) round to the gangplank's foot (7,9) and up it.
+movement IchorPgCrew_Movement_LamponBoards { walk_left walk_up walk_up }
+
+// ===========================================================================
+// Diktys, carpenter and net-mender (Akti, his boat on the beach)
+//
+// Mend his boat with him: a Big Root for the knee and a coil of rope. The root comes
+// from Route 1's olive farmer; the rope from Demeas at Akti's Agora, as a line and a
+// flag (no new item). PLACEMENTS.md notes that Emporion's Agora could sell it later.
+// ===========================================================================
+
+script EventScript_IchorPgCrew_Diktys {
+    lock
+    faceplayer
+    setspeaker(IchorPgCrew_Name_Diktys)
+    if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        msgbox(format("Islands past Maleia, they're saying. Whole new islands.\p"
+                      "I'd go and look, if I had a boat that floated. Mine's a sieve."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_PG_DIKTYS_ASKED)) {
+        msgbox(format("You've got the Euploia! Then you'll want a carpenter.\p"
+                      "Oars snap. Planks spring. Somebody has to mend them at sea.\p"
+                      "But I won't leave my boat like this. She was my grandfather's.\p"
+                      "Help me mend her first. She wants a knee, a bent bit of root.\p"
+                      "Olive root's best. It grows the right shape. Ask in the Route 1 groves.\p"
+                      "And rope. A good coil. Demeas keeps some under his counter."))
+        setflag(FLAG_ICHOR_PG_DIKTYS_ASKED)
+        release
+        end
+    }
+    checkitem(ITEM_BIG_ROOT)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Still wants that knee. A bent olive root, from the groves on Route 1."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_PG_GOT_ROPE)) {
+        msgbox(format("A good root! Now rope. Demeas, at the Agora. Under the counter."))
+        release
+        end
+    }
+    msgbox(format("A root! And Demeas's rope. He put it on my tab, didn't he.\p"
+                  "Right. Hold this end. No, the other end. Now pull."))
+    closemessage
+    removeitem(ITEM_BIG_ROOT)
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_M_COMET_PUNCH)
+    waitse
+    delay(20)
+    playse(SE_M_COMET_PUNCH)
+    waitse
+    delay(20)
+    playse(SE_M_VITAL_THROW)
+    waitse
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(IchorPgCrew_Name_Diktys)
+    msgbox(format("There. She floats. Grandfather would've cried. He cried a lot.\p"
+                  "So. A carpenter for the Euploia? I mend nets too. And pride."))
+    bufferstring(STR_VAR_1, IchorPgCrew_Text_Diktys)
+    call(EventScript_IchorPgCrew_Joined)
+    setflag(FLAG_ICHOR_CREW_DIKTYS)
+    setspeaker(IchorPgCrew_Name_Diktys)
+    msgbox(format("I'll fetch my tools. See you aboard."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_AKTI_DIKTYS)
+    fadescreen(FADE_FROM_BLACK)
+    release
+}
+
+// Route 1's olive farmer, under the big olive, once Diktys has asked.
+script EventScript_IchorPgCrew_OliveFarmerRoot {
+    lock
+    faceplayer
+    msgbox(format("A root for Diktys's boat? Ha! He asks every spring.\p"
+                  "I dug out an old stump this year. Its root's bent like an elbow.\p"
+                  "Take it. It's no use to me. I tried it as a chair."))
+    giveitem(ITEM_BIG_ROOT)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(Common_EventScript_ShowBagIsFull)
+    }
+    setflag(FLAG_ICHOR_PG_GOT_BIG_ROOT)
+    release
+}
+
+// Demeas at Akti's Agora, once Diktys has asked.
+script EventScript_IchorPgCrew_DemeasRope {
+    lock
+    faceplayer
+    setspeaker(IchorPgCrew_Name_Demeas)
+    msgbox(format("Rope? For Diktys? His tab here is longer than any rope I sell.\p"
+                  "…Fine. One coil. On the tab. Tell him I'm counting."))
+    setspeaker(SP_NAME_NONE)
+    playse(SE_SHOP)
+    msgbox(format("{PLAYER} took a coil of rope for Diktys."))
+    setflag(FLAG_ICHOR_PG_GOT_ROPE)
+    release
+}
+
+// ===========================================================================
+// Glaukias, deckhand, Glaukos's grandson (Akti, the Fisher's house)
+//
+// Glaukos is gone: "He fished too, before the sea kept him" (SYSTEMS §10). He turns
+// up on the voyage as a sea-god (ODYSSEY §6.5). His grandson begs to come. Say yes.
+// ===========================================================================
+
+// From the Fisher's house ON_TRANSITION. FLAG_TEMP_18 hides Glaukos, FLAG_TEMP_19
+// Glaukias once he's aboard.
+script EventScript_IchorPgCrew_FishersHouseSetUp {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        setflag(FLAG_TEMP_18)
+        if (flag(FLAG_ICHOR_CREW_GLAUKIAS)) {
+            setflag(FLAG_TEMP_19)
+        }
+    }
+    return
+}
+
+script EventScript_IchorPgCrew_Glaukias {
+    lock
+    faceplayer
+    if (!flag(FLAG_ICHOR_GOT_OLD_ROD)) {
+        setspeaker(IchorPgCrew_Name_Glaukias)
+        msgbox(format("You're the one Grandpa liked. He left this for you. He said you'd come."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_OLD_ROD)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_OLD_ROD)
+        }
+    }
+    setspeaker(IchorPgCrew_Name_Glaukias)
+    if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        msgbox(format("Grandpa went out fishing one morning. The boat came back. He didn't.\p"
+                      "Everyone says the sea took him. I say he swam off. He always said he would.\p"
+                      "There are islands past Maleia now. I'd go and look. If anyone asked."))
+        release
+        end
+    }
+    msgbox(format("You've got a ship! The Euploia! Everyone's saying!\p"
+                  "Take me. Please. I can coil rope. I can gut fish. I can be quiet.\p"
+                  "…Mostly quiet. Grandpa went out past the islands. I want to look.\p"
+                  "Can I come?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(IchorPgCrew_Name_Glaukias)
+        msgbox(format("That's not a no. That's a not yet. I'll ask again tomorrow."))
+        release
+        end
+    }
+    setspeaker(IchorPgCrew_Name_Glaukias)
+    msgbox(format("YES! I'll get my things! …I don't have things. I'll get my knife!"))
+    bufferstring(STR_VAR_1, IchorPgCrew_Text_Glaukias)
+    call(EventScript_IchorPgCrew_Joined)
+    setflag(FLAG_ICHOR_CREW_GLAUKIAS)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_EXIT)
+    removeobject(LOCALID_FISHERS_HOUSE_GLAUKIAS)
+    fadescreen(FADE_FROM_BLACK)
+    release
+}
+
+// ===========================================================================
+// Kydon, quartermaster (Emporion, the Agora: his honey stall)
+// LABYRINTH.md seed 3's honey-seller. Buy one jar of Knossan honey; he decides he
+// likes you. Placement: a branch at the top of EmporionCity_EventScript_Kydon.
+// ===========================================================================
+
+script EventScript_IchorPgCrew_Kydon {
+    lock
+    faceplayer
+    setspeaker(IchorPgCrew_Name_Kydon)
+    msgbox(format("Knossan honey. The bees drink thyme. Only thyme, these days.\p"
+                  "The thing under the palace stopped bellowing. The bees got lazy."))
+    showmoneybox(0, 0)
+    setspeaker(IchorPgCrew_Name_Kydon)
+    msgbox(format("One jar? ¥300."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        hidemoneybox
+        setspeaker(IchorPgCrew_Name_Kydon)
+        msgbox(format("Suit yourself. The bees don't mind. I mind."))
+        release
+        end
+    }
+    checkmoney(300)
+    if (var(VAR_RESULT) == FALSE) {
+        hidemoneybox
+        setspeaker(IchorPgCrew_Name_Kydon)
+        msgbox(format("Short? The honey keeps. That's the thing about honey."))
+        release
+        end
+    }
+    checkitemspace(ITEM_HONEY)
+    if (var(VAR_RESULT) == FALSE) {
+        hidemoneybox
+        goto(Common_EventScript_ShowBagIsFull)
+    }
+    removemoney(300)
+    updatemoneybox
+    playse(SE_SHOP)
+    hidemoneybox
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_HONEY)
+    setspeaker(IchorPgCrew_Name_Kydon)
+    msgbox(format("You didn't haggle. Nobody doesn't haggle.\p"
+                  "You've got a ship, they say. Ships want a quartermaster.\p"
+                  "Someone to keep the hold. Count the jars. Sell you things at sea.\p"
+                  "I like you. I've decided. I'll bring the honey."))
+    bufferstring(STR_VAR_1, IchorPgCrew_Text_Kydon)
+    call(EventScript_IchorPgCrew_Joined)
+    setflag(FLAG_ICHOR_CREW_KYDON)
+    release
+}
+
+// ===========================================================================
+// Phemios, bard (Thyrsa, the great theater)
+// Sit through his rehearsal and tell him the truth about it. Three choices; honesty
+// wins. Wrong answers cost nothing: he asks again next time.
+// ===========================================================================
+
+text IchorPgCrew_Text_Perfect { "IT WAS PERFECT" }
+text IchorPgCrew_Text_TooManyShips { "TOO MANY SHIPS" }
+text IchorPgCrew_Text_LovedShips { "I LOVED THE SHIPS" }
+
+script EventScript_IchorPgCrew_Phemios {
+    lock
+    faceplayer
+    setspeaker(IchorPgCrew_Name_Phemios)
+    if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        msgbox(format("An audience! …No. Not yet. The second verse is still a mess.\p"
+                      "Come back another day. Bring honesty. Nobody ever does."))
+        release
+        end
+    }
+    msgbox(format("An audience! Sit. Sit anywhere. Every seat's free.\p"
+                  "The Return of Odysseus. Verse one."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Phemios strikes his lyre and sings."))
+    setspeaker(IchorPgCrew_Name_Phemios)
+    msgbox(format("“Tell me, Muse, of the man of many turns…\p"
+                  "…and of the ships. The ship from Pylos. The ship from Iolkos.\p"
+                  "The ship from the other Pylos. The ship from…”"))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(60)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(IchorPgCrew_Name_Phemios)
+    msgbox(format("“…and the ship from Aigina, which was also a ship.”\p"
+                  "Well? Be honest. Bards are lied to all day long."))
+    dynmultichoice(13, 4, TRUE, 3, 0, DYN_MULTICHOICE_CB_NONE, IchorPgCrew_Text_Perfect,
+                   IchorPgCrew_Text_TooManyShips, IchorPgCrew_Text_LovedShips)
+    setspeaker(IchorPgCrew_Name_Phemios)
+    switch (var(VAR_RESULT)) {
+        case 1:
+            msgbox(format("…Too many ships. Yes. Of course. Far too many ships!\p"
+                          "Everyone claps. You're the first one who's said it.\p"
+                          "You're sailing west, they say. Past Maleia. Where the songs come from.\p"
+                          "Take me with you. I'll sing the crew to sleep. I'll leave out the ships."))
+            bufferstring(STR_VAR_1, IchorPgCrew_Text_Phemios)
+            call(EventScript_IchorPgCrew_Joined)
+            setflag(FLAG_ICHOR_CREW_PHEMIOS)
+        case 2:
+            msgbox(format("Nobody loves the ships. You fell asleep. I watched you do it.\p"
+                          "Come back when you'll tell me the truth."))
+        default:
+            msgbox(format("It wasn't. Nobody listens to the ships. I don't listen to the ships.\p"
+                          "Come back when you'll tell me the truth."))
+    }
+    release
+}
+
+// ===========================================================================
+// Lynkeus, lookout (Astyra, the harbor at Phaleron: the quay's watchtower)
+// He names three things in the harbor he can see and you can't. Find them.
+// The three are bg events of their own (PLACEMENTS.md).
+// ===========================================================================
+
+script EventScript_IchorPgCrew_Lynkeus {
+    lock
+    faceplayer
+    setspeaker(IchorPgCrew_Name_Lynkeus)
+    if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        msgbox(format("Up here. Mind the ladder. Third rung's a liar.\p"
+                      "A ship off Aigina. A gull on her mast. The gull's eating a fish."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_PG_LYNKEUS_FOUND_1) && flag(FLAG_ICHOR_PG_LYNKEUS_FOUND_2)
+        && flag(FLAG_ICHOR_PG_LYNKEUS_FOUND_3)) {
+        msgbox(format("All three. Told you they were there.\p"
+                      "Your eyes are fine. Mine are better. I'll take the rail."))
+        bufferstring(STR_VAR_1, IchorPgCrew_Text_Lynkeus)
+        call(EventScript_IchorPgCrew_Joined)
+        setflag(FLAG_ICHOR_CREW_LYNKEUS)
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_PG_LYNKEUS_ASKED)) {
+        msgbox(format("Up here. Mind the ladder. Third rung's a liar.\p"
+                      "A lookout for your ship? Everyone wants one. Then nobody believes me.\p"
+                      "So. Three things in this harbor. I can see them. You can't.\p"
+                      "A coin, face down in the dune grass where the beach bends.\p"
+                      "A pearl among the shrine's shells. One shell isn't a shell.\p"
+                      "A gold ring in the quay stones, under the sacred ship's gangplank.\p"
+                      "Bring them up here. Then we'll talk."))
+        setflag(FLAG_ICHOR_PG_LYNKEUS_ASKED)
+        release
+        end
+    }
+    msgbox(format("The coin in the dune grass. The pearl in the shells.\p"
+                  "The ring under the gangplank. I can see them from here. Obviously."))
+    release
+}
+
+script EventScript_IchorPgCrew_LynkeusCoin {
+    lockall
+    if (!flag(FLAG_ICHOR_PG_LYNKEUS_ASKED) || flag(FLAG_ICHOR_PG_LYNKEUS_FOUND_1)) {
+        msgbox(format("Dune grass, bending in the wind off the bay."))
+        releaseall
+        end
+    }
+    msgbox(format("Face down, where the beach bends, Lynkeus said. You part the grass…"))
+    giveitem(ITEM_RELIC_COPPER)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_PG_LYNKEUS_FOUND_1)
+    }
+    releaseall
+}
+
+script EventScript_IchorPgCrew_LynkeusPearl {
+    lockall
+    if (!flag(FLAG_ICHOR_PG_LYNKEUS_ASKED) || flag(FLAG_ICHOR_PG_LYNKEUS_FOUND_2)) {
+        msgbox(format("A harbor shrine of Poseidon, hung with salt-white shells."))
+        releaseall
+        end
+    }
+    msgbox(format("Salt-white shells, dozens of them. One is rounder than the rest…"))
+    giveitem(ITEM_BIG_PEARL)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_PG_LYNKEUS_FOUND_2)
+    }
+    releaseall
+}
+
+script EventScript_IchorPgCrew_LynkeusRing {
+    lockall
+    if (!flag(FLAG_ICHOR_PG_LYNKEUS_ASKED) || flag(FLAG_ICHOR_PG_LYNKEUS_FOUND_3)) {
+        msgbox(format("Old quay stones, worn smooth by a thousand sandals."))
+        releaseall
+        end
+    }
+    msgbox(format("Under the gangplank, wedged between two stones: something gold."))
+    giveitem(ITEM_NUGGET)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_PG_LYNKEUS_FOUND_3)
+    }
+    releaseall
+}
+
+// ===========================================================================
+// Iaso, healer (Astyra's Asclepeion; the young healer who worked under Phaedon)
+// Phaedon recommends her if the Katabasis is done; otherwise, help her with three
+// patients on the incubation stoa.
+// ===========================================================================
+
+script EventScript_IchorPgCrew_Iaso {
+    lock
+    faceplayer
+    setspeaker(IchorPgCrew_Name_Iaso)
+    if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        msgbox(format("Busy. Very busy. Three patients and one of me.\p"
+                      "Phaedon used to do the work of five. Now it's Akti's turn."))
+        release
+        end
+    }
+    // ICHOR_STUB_PG_FLAGS: batch 3 replaces ICHOR_PG_KATABASIS_DONE with its own value.
+    if (var(VAR_ICHOR_KATABASIS) >= ICHOR_PG_KATABASIS_DONE) {
+        msgbox(format("You're the Archon. Phaedon wrote to me, from Akti.\p"
+                      "He says you went down to the doors, and came back up.\p"
+                      "He says your ship needs a healer. He'd go himself. He can't.\p"
+                      "So I'm to go instead. He asked very nicely. He always did."))
+        bufferstring(STR_VAR_1, IchorPgCrew_Text_Iaso)
+        call(EventScript_IchorPgCrew_Joined)
+        setflag(FLAG_ICHOR_CREW_IASO)
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_PG_IASO_PATIENT_1) && flag(FLAG_ICHOR_PG_IASO_PATIENT_2)
+        && flag(FLAG_ICHOR_PG_IASO_PATIENT_3)) {
+        msgbox(format("All three on their feet. You'd make a decent orderly.\p"
+                      "Fine. I'll come. Someone has to mind a crew that eats strange things."))
+        bufferstring(STR_VAR_1, IchorPgCrew_Text_Iaso)
+        call(EventScript_IchorPgCrew_Joined)
+        setflag(FLAG_ICHOR_CREW_IASO)
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_PG_IASO_ASKED)) {
+        msgbox(format("Busy. Very busy. Three patients and one of me.\p"
+                      "A healer for your ship? Help me with these three first.\p"
+                      "Ask them what they need, then bring it. I'll be here. Obviously."))
+        setflag(FLAG_ICHOR_PG_IASO_ASKED)
+        release
+        end
+    }
+    msgbox(format("Ask them what they need. Then bring it. I'm not your nursemaid."))
+    release
+}
+
+// The hoplite on the first pallet: a Paralyze Heal.
+script EventScript_IchorPgCrew_IasoPatient1 {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_PG_IASO_PATIENT_1)) {
+        msgbox(format("Moving again. Stiff, but moving. Thank you, Archon."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_PG_IASO_ASKED)) {
+        msgbox(format("Don't mind me. Waiting my turn. Iaso's run off her feet."))
+        release
+        end
+    }
+    msgbox(format("My Pokémon's stiff as a plank. Paralyzed.\p"
+                  "And Iaso's run out of Paralyze Heal. Have you one?"))
+    checkitem(ITEM_PARALYZE_HEAL)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("No? The Agora sells them. Iaso would know, if she ever left."))
+        release
+        end
+    }
+    removeitem(ITEM_PARALYZE_HEAL)
+    setflag(FLAG_ICHOR_PG_IASO_PATIENT_1)
+    playse(SE_USE_ITEM)
+    waitse
+    msgbox(format("Look at that. Moving! Tell Iaso. She'll pretend she knew."))
+    release
+}
+
+// The fisherwoman on the second pallet: an Antidote.
+script EventScript_IchorPgCrew_IasoPatient2 {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_PG_IASO_PATIENT_2)) {
+        msgbox(format("Pink again. It's eating again too. Mostly my sandals."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_PG_IASO_ASKED)) {
+        msgbox(format("It's only an urchin sting. The healer will get to us."))
+        release
+        end
+    }
+    msgbox(format("My Pokémon stepped on an urchin, and now it's gone green.\p"
+                  "An Antidote would do it. Have you one?"))
+    checkitem(ITEM_ANTIDOTE)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("No? Then we'll wait. We're good at waiting. We fish."))
+        release
+        end
+    }
+    removeitem(ITEM_ANTIDOTE)
+    setflag(FLAG_ICHOR_PG_IASO_PATIENT_2)
+    playse(SE_USE_ITEM)
+    waitse
+    msgbox(format("Oh, that's better. Pink again. Thank you!"))
+    release
+}
+
+// The boy on the third pallet: an Awakening.
+script EventScript_IchorPgCrew_IasoPatient3 {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_PG_IASO_PATIENT_3)) {
+        msgbox(format("It's awake! It bit me. It's definitely awake."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_PG_IASO_ASKED)) {
+        msgbox(format("Shh. My Pokémon's asleep. It's been asleep for two days."))
+        release
+        end
+    }
+    msgbox(format("My Pokémon won't wake up. Two days now. It isn't hurt.\p"
+                  "Iaso says an Awakening. She hasn't got one. Have you?"))
+    checkitem(ITEM_AWAKENING)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Oh. Then I'll just keep poking it."))
+        release
+        end
+    }
+    removeitem(ITEM_AWAKENING)
+    setflag(FLAG_ICHOR_PG_IASO_PATIENT_3)
+    playse(SE_USE_ITEM)
+    waitse
+    msgbox(format("It's awake! It's… biting me. It's definitely awake. Thank you!"))
+    release
+}
+
+// ===========================================================================
+// Christopher Nolan, dramatist (Lechaion, Emporion's harbor, beside the Diolkos)
+// ODYSSEY §3's scene, word for word. He joins once the Euploia is moored at Lechaion.
+// ===========================================================================
+
+script EventScript_IchorPgCrew_Nolan {
+    lock
+    faceplayer
+    setspeaker(IchorPgCrew_Name_Nolan)
+    setvar(VAR_0x8009, 0)
+    if (!flag(FLAG_ICHOR_PG_MET_NOLAN)) {
+        msgbox(format("Look at that. A real ship. Hauled over real land.\p"
+                      "Anyone else would paint one. Painted ships look painted.\p"
+                      "Christopher Nolan. I'm staging the Odyssey. All of it.\p"
+                      "Not the songs. The songs are out of order, and half of them are fake.\p"
+                      "I need a real ship. A real storm. A real whirlpool."))
+        setflag(FLAG_ICHOR_PG_MET_NOLAN)
+        setvar(VAR_0x8009, 1)
+    }
+    setvar(VAR_RESULT, 0xFF)
+    if (flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        specialvar(VAR_RESULT, Ichor_GetShipPort)
+    }
+    if (var(VAR_RESULT) != VOYAGE_LECHAION) {
+        if (var(VAR_0x8009) == 0) {
+            setspeaker(IchorPgCrew_Name_Nolan)
+            msgbox(format("Bring me a real ship. I'll know if it's painted."))
+        }
+        release
+        end
+    }
+    setspeaker(IchorPgCrew_Name_Nolan)
+    msgbox(format("…That's your ship? With a crew? Going where he went?\p"
+                  "Take me. I'll keep out of the way. Mostly."), MSGBOX_YESNO)
+    setspeaker(IchorPgCrew_Name_Nolan)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Good. We start at the end and work back. Trust me."))
+        bufferstring(STR_VAR_1, IchorPgCrew_Text_Nolan)
+        call(EventScript_IchorPgCrew_Joined)
+        setflag(FLAG_ICHOR_CREW_NOLAN)
+    } else {
+        msgbox(format("I'll wait. Waiting is most of the job."))
+    }
+    release
+}
+
+// ===========================================================================
+// The twelve Lakonian oarsmen (Lakonia, the battle-school ring). Kleon lends them.
+// ===========================================================================
+
+script EventScript_IchorPgCrew_Oarsmen {
+    lock
+    faceplayer
+    setspeaker(IchorPgCrew_Name_Kleon)
+    if (flag(FLAG_ICHOR_CREW_OARSMEN)) {
+        msgbox(format("Bring them back in one piece. Mother counts them."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        msgbox(format("Visiting Mother. She says “Good” a lot now.\p"
+                      "I'm getting used to it. It's not so bad. Don't tell her."))
+        release
+        end
+    }
+    msgbox(format("You've got the Euploia? Then you need rowers. I've got twelve.\p"
+                  "Battle school's finest. Well. Battle school's loudest.\p"
+                  "Take them. I'm busy. Labors. Glory. You know how it is.\p"
+                  "They row better than they fight. Don't tell them."))
+    setspeaker(IchorPgCrew_Name_Oarsman)
+    msgbox(format("We heard that."))
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("Twelve Lakonian oarsmen joined the crew of the Euploia!"))
+    waitmessage
+    waitfanfare
+    setflag(FLAG_ICHOR_CREW_OARSMEN)
+    release
+}

@@ -5,6 +5,9 @@ mapscripts AktiTown_Agora_MapScripts {}
 text AktiTown_Agora_Text_NameDemeas { "DEMEAS" }
 
 script AktiTown_Agora_EventScript_Demeas {
+    if (flag(FLAG_ICHOR_POSTGAME) && flag(FLAG_ICHOR_PG_DIKTYS_ASKED) && !flag(FLAG_ICHOR_PG_GOT_ROPE)) {
+        goto(EventScript_IchorPgCrew_DemeasRope)
+    }
     lock
     faceplayer
     setspeaker(AktiTown_Agora_Text_NameDemeas)

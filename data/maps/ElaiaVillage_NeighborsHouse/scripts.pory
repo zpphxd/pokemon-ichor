@@ -6,6 +6,9 @@ text ElaiaVillage_NeighborsHouse_Name_Kydippe { "KYDIPPE" }
 text ElaiaVillage_NeighborsHouse_Name_Chansey { "CHANSEY" }
 
 script ElaiaVillage_NeighborsHouse_EventScript_Kydippe {
+    if (flag(FLAG_ICHOR_POSTGAME) && flag(FLAG_ICHOR_GOT_KYDIPPE_ORAN)) {
+        goto(EventScript_IchorPg_Kydippe)
+    }
     lock
     faceplayer
     setspeaker(ElaiaVillage_NeighborsHouse_Name_Kydippe)

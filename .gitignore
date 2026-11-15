@@ -94,6 +94,8 @@ data/scripts/ichor_herms.inc
 data/scripts/ichor_labyrinth.inc
 data/maps/EuploiaDeck/scripts.inc
 data/maps/EuploiaBelow/scripts.inc
+data/scripts/ichor_postgame_opening.inc
+data/scripts/ichor_postgame_crew.inc
 data/scripts/ichor_frozen.inc
 data/scripts/ichor_postgame_sailing.inc
 data/maps/PgTestDeck/scripts.inc

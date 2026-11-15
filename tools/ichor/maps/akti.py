@@ -663,7 +663,14 @@ SCRIPTED_PATHS = {
     "Kleon": [(5, 11)] + [(x, 11) for x in range(5, 12)] + [(11, y) for y in range(11, 17)],
     # the player drawn up to the group from the trigger at x = 10
     "Player": [(x, y) for x in (8, 9, 10) for y in (9, 10, 11) if (x, y) != (8, 9)],
+    # The post-game (data/scripts/ichor_postgame_opening.pory, ichor_postgame_crew.pory):
+    # the player walked from x = 10 along row 10 to Nausikles on his bollard (5,9), and
+    # Lampon round to the gangplank's foot (7,9) with Hestia's fire
+    "Player (the Euploia)": [(x, 10) for x in range(6, 11)] + [(6, 9), (10, 9), (10, 11)],
+    "Lampon boards": [(8, 10), (7, 10), (7, 9)],
 }
+# People who stand on the moored Euploia's deck, which is solid ground for the player
+ON_DECK = {"LOCALID_AKTI_PG_ALETHEA"}
 
 
 def check():
@@ -694,6 +701,8 @@ def check():
             x, y = o["x"], o["y"]
             if any(f in o["graphics_id"] for f in FLYERS):
                 continue                           # gulls may hang over the water
+            if o.get("local_id") in ON_DECK:
+                continue                           # aboard the Euploia
             if not walkable(blocks, x, y):
                 errors.append(f"{name}: object {o.get('local_id', o['graphics_id'])} at ({x},{y}) stands on a solid cell")
         for t in ev["coord_events"]:

@@ -27,9 +27,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AktiTown_FishersHouse_EventScript_Glaukos",
-      "flag": "0"
+      "flag": "FLAG_TEMP_18"
     },
     {
+      "local_id": "LOCALID_FISHERS_HOUSE_GLAUKIAS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
       "x": 6,
       "y": 6,
@@ -40,7 +41,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AktiTown_FishersHouse_EventScript_Grandson",
-      "flag": "0"
+      "flag": "FLAG_TEMP_19"
     }
   ],
   "warp_events": [

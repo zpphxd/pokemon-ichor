@@ -7,14 +7,10 @@
 // --- The ship's look and her deck --------------------------------------------------
 
 // The Euploia at sea, 64x64, the standard 9-frame layout: sail full (downwind and
-// crosswind) and slack (upwind and calm). ICHOR_STUB_PG_SPRITES: stand-ins in
-// the standard 9-frame layout until the sprites agent's
-// OBJ_EVENT_GFX_ICHOR_EUPLOIA and _EUPLOIA_SLACK merge: the S.S. Tidal (96x40,
-// the largest ship in an Emerald build) for the full sail, and Rayquaza's still
-// frames (64x64, the Euploia's size) for the slack one. The FRLG Seagallop is
-// 64x64 but not in an Emerald build; the cable car is 64x64 but has one frame.
-#define ICHOR_SHIP_GFX         OBJ_EVENT_GFX_SS_TIDAL        // ICHOR_STUB_PG_SPRITES
-#define ICHOR_SHIP_GFX_SLACK   OBJ_EVENT_GFX_RAYQUAZA_STILL  // ICHOR_STUB_PG_SPRITES
+// crosswind) and slack (upwind and calm). The sprites agent's sheets (pg-b1-sprites)
+// stand on the frame's bottom-middle 16x16 (design/postgame/SPRITES.md).
+#define ICHOR_SHIP_GFX         OBJ_EVENT_GFX_ICHOR_EUPLOIA
+#define ICHOR_SHIP_GFX_SLACK   OBJ_EVENT_GFX_ICHOR_EUPLOIA_SLACK
 
 // Where boarding a moored ship, going below and every helm action arrive.
 // ICHOR_STUB_EUPLOIA_DECK: a test room of the sail-engine's until the euploia

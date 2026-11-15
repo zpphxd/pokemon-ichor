@@ -33,7 +33,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AktiTown_EventScript_Diktys",
-      "flag": "0"
+      "flag": "FLAG_TEMP_1B"
     },
     {
       "local_id": "LOCALID_AKTI_NAUSIKLES",
@@ -47,7 +47,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AktiTown_EventScript_Nausikles",
-      "flag": "0"
+      "flag": "FLAG_TEMP_1C"
     },
     {
       "local_id": "LOCALID_AKTI_KLEON",
@@ -291,6 +291,62 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "AktiTown_EventScript_LooseGoat",
       "flag": "FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT"
+    },
+    {
+      "local_id": "LOCALID_AKTI_PG_HERALD",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TRUCE_HERALD",
+      "x": 14,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorHerald_Akti",
+      "flag": "FLAG_TEMP_18"
+    },
+    {
+      "local_id": "LOCALID_AKTI_PG_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorPg_AletheaOnDeck",
+      "flag": "FLAG_TEMP_19"
+    },
+    {
+      "local_id": "LOCALID_AKTI_PG_LAMPON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorPgCrew_LamponQuayTalk",
+      "flag": "FLAG_TEMP_1A"
+    },
+    {
+      "local_id": "LOCALID_AKTI_PG_NAUSIKLES",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 5,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_IchorPg_Nausikles",
+      "flag": "FLAG_TEMP_1D"
     }
   ],
   "warp_events": [
@@ -409,6 +465,69 @@
       "var": "VAR_TEMP_3",
       "var_value": "1",
       "script": "AktiTown_EventScript_HarborPart2Row11"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "1",
+      "script": "EventScript_IchorPg_AktiShipRow9"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "1",
+      "script": "EventScript_IchorPg_AktiShipRow10"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "1",
+      "script": "EventScript_IchorPg_AktiShipRow11"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_TEMP_6",
+      "var_value": "1",
+      "script": "EventScript_IchorPgCrew_LamponQuayRow9"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 10,
+      "elevation": 3,
+      "var": "VAR_TEMP_6",
+      "var_value": "1",
+      "script": "EventScript_IchorPgCrew_LamponQuayRow10"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 11,
+      "elevation": 3,
+      "var": "VAR_TEMP_6",
+      "var_value": "1",
+      "script": "EventScript_IchorPgCrew_LamponQuayRow11"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 9,
+      "elevation": 3,
+      "var": "VAR_TEMP_5",
+      "var_value": "2",
+      "script": "EventScript_IchorPg_AktiGangplank"
     }
   ],
   "bg_events": [

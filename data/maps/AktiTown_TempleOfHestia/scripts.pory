@@ -16,6 +16,9 @@ mapscripts AktiTown_TempleOfHestia_MapScripts {
         if (var(VAR_ICHOR_HEARTH_TRIAL) >= 1 && var(VAR_ICHOR_HEARTH_TRIAL) <= 5) {
             setvar(VAR_ICHOR_HEARTH_TRIAL, 0)
         }
+        // The post-game: Lampon goes aboard once he's crew (FLAG_TEMP_18,
+        // data/scripts/ichor_postgame_crew.pory).
+        call(EventScript_IchorPgCrew_TempleSetUp)
     }
     MAP_SCRIPT_ON_LOAD {
         call(AktiTown_TempleOfHestia_EventScript_DrawBraziers)
@@ -207,6 +210,11 @@ script AktiTown_TempleOfHestia_EventScript_Lampon {
     trainerbattle_single(TRAINER_ICHOR_LAMPON,
         format("Nobody touches the hearth until they've faced its keeper!"),
         format("Fine. Fine! Carry the flame. Carefully. CAREFULLY."))
+    // The post-game (after the trainerbattle, which a trainer's script must open with):
+    // Hestia's fire for the Euploia (data/scripts/ichor_postgame_crew.pory).
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPgCrew_Lampon)
+    }
     setspeaker(AktiTown_TempleOfHestia_Text_NameLampon)
     msgbox(format("Read the hymn by the door. Twice. I had to read it nine times."), MSGBOX_AUTOCLOSE)
     end
@@ -319,6 +327,9 @@ script AktiTown_TempleOfHestia_EventScript_Stele {
 }
 
 script AktiTown_TempleOfHestia_EventScript_GreatHearth {
+    if (flag(FLAG_ICHOR_POSTGAME) && flag(FLAG_ICHOR_PG_LAMPON_ASKED) && !flag(FLAG_ICHOR_CREW_LAMPON)) {
+        goto(EventScript_IchorPgCrew_LamponHearth)
+    }
     lockall
     if (flag(FLAG_ICHOR_HEARTH_TRIAL_DONE)) {
         msgbox(format("The great hearth of Hestia. It has never once gone out."))

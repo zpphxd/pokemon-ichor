@@ -11,10 +11,16 @@
 mapscripts AktiTown_Asclepeion_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
         setrespawn(HEAL_LOCATION_AKTI_TOWN)
+        // The post-game: Phaedon at the counter, Elpis by the cots
+        // (data/scripts/ichor_postgame_opening.pory). FLAG_TEMP_18 and FLAG_TEMP_19.
+        call(EventScript_IchorPg_AsclepeionSetUp)
     }
 }
 
 script AktiTown_Asclepeion_EventScript_Healer {
+    if (flag(FLAG_ICHOR_POSTGAME)) {
+        goto(EventScript_IchorPg_AktiHealer)
+    }
     setvar(VAR_0x800B, LOCALID_AKTI_HEALER)
     call(Ichor_EventScript_AsclepeionHealer)
     waitmessage

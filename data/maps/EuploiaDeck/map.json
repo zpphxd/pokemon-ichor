@@ -46,7 +46,7 @@
     },
     {
       "local_id": "LOCALID_EUPLOIA_LYNKEUS",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_LYNKEUS",
       "x": 13,
       "y": 8,
       "elevation": 3,
@@ -74,7 +74,7 @@
     },
     {
       "local_id": "LOCALID_EUPLOIA_NOLAN",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_NOLAN",
       "x": 20,
       "y": 5,
       "elevation": 3,

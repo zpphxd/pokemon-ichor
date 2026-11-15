@@ -4,8 +4,7 @@
 // Nausikles and Alethea come with the ship (FLAG_ICHOR_GOT_EUPLOIA); the rest of
 // the crew stand on deck only once they've signed on. Their hide flags are temp
 // flags, set here when they're not aboard (temp flags clear on every map load).
-// Lynkeus and Nolan wear stand-in walkers until the sprites agent's
-// OBJ_EVENT_GFX_ICHOR_LYNKEUS and _NOLAN land (ICHOR_STUB_PG_SPRITES).
+// Lynkeus and Nolan wear their own walkers (merged from pg-b1-sprites).
 
 mapscripts EuploiaDeck_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
