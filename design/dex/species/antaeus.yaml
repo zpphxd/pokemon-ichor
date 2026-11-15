@@ -1,0 +1,80 @@
+line: antaeus
+species:
+
+- dex: 113
+  concept: Earth-wrestler
+  name: Geogrip
+  etymology: gē (Greek, earth, as in Gaia) + grip
+  category: Wrestler
+  types: [Fighting, Ground]
+  abilities: [Earth Eater]
+  hidden_ability: Stamina
+  base_stats: {hp: 120, atk: 120, def: 95, spa: 40, spd: 75, spe: 40}
+  ev_yield: {hp: 1, atk: 1}
+  exp_yield: 175
+  catch_rate: 60
+  gender: {female_pct: 0}
+  egg_groups: [Human-Like]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 2.3
+  weight_kg: 180.0
+  myth: >-
+    Antaeus, a giant son of Gaia, made every traveler wrestle him. Each fall to
+    the ground only renewed his strength, so Herakles lifted him off the earth
+    and crushed him in the air (Apollodorus 2.5.11; Pindar, Isthmian 4).
+  expression: >-
+    A giant wrestler that never lifts its heels: its toes are roots sunk in
+    the sand. Throw it down and it gets up stronger. Lift it, and it is
+    helpless.
+  art: >-
+    Large: it fills about 56×58 px. A huge, broad-shouldered wrestler in
+    three-quarter view facing left, in a low grappling crouch with arms wide
+    and hands open. Its feet are flat and spread, and the toes are thick roots
+    dug into a patch of sand. Clay-red skin streaked with dust and oil like a
+    palaestra wrestler, a topknot of dry grass, and cracked-earth patterns on
+    its forearms. Terracotta skin, limestone sand and dust, olive root-toes,
+    black-figure ink outline. The follower shuffles flat-footed and never hops.
+  shiny: Marble-pale skin with cypress-green roots, like a statue of a wrestler.
+  dex_entry:
+    - Its toes are roots. Each time it is
+    - thrown to the ground, it springs up
+    - stronger than before, so wise rivals
+    - try to lift it off its feet instead.
+  habitat: >-
+    The wrestling sands of the Lakonian palaestra, by day; rare, and only one
+    at a time. More appear on the sands of Olympia in the post-game.
+  learnset:
+    level_up:
+      - [1, Sand Attack]
+      - [1, Mud-Slap]
+      - [1, Rock Smash]
+      - [1, Bide]
+      - [5, Arm Thrust]
+      - [9, Seismic Toss]
+      - [13, Bulldoze]
+      - [17, Vital Throw]
+      - [21, Ingrain]
+      - [25, Bulk Up]
+      - [29, Dig]
+      - [33, Circle Throw]
+      - [37, Stomping Tantrum]
+      - [41, Shore Up]
+      - [45, High Horsepower]
+      - [49, Superpower]
+      - [53, Body Press]
+      - [57, Earthquake]
+      - [62, Close Combat]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Hyper Beam, Giga Impact,
+      Strength, Rock Smash, Brick Break, Low Kick, Low Sweep, Drain Punch, Focus Punch, Hammer Arm,
+      Bulk Up, Superpower, Close Combat, Body Slam, Body Press, Reversal, Counter, Seismic Toss,
+      Revenge, Payback, Rock Slide, Rock Tomb, Stone Edge, Smack Down, Dig, Bulldoze, Earthquake,
+      Stomping Tantrum, High Horsepower, Mud-Slap, Sandstorm, Sunny Day, Fire Punch, Ice Punch,
+      Thunder Punch, Heavy Slam, Fling, Taunt, Endeavor, Helping Hand, Coaching, Rock Climb]
+    egg: [Storm Throw, Fake Out, Mat Block, Detect, Curse]
+  signature: >-
+    Earth Eater turns Ground moves into healing, and Ingrain and Shore Up keep
+    the earth feeding it. At 180 kg it is just light enough for Sky Drop to
+    lift it, as Herakles did.
+  new_move: null

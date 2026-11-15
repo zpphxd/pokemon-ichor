@@ -1,0 +1,154 @@
+line: stymphalian
+species:
+
+- dex: 109
+  concept: Bronze chick
+  name: Chalkip
+  etymology: chalkos (Greek, bronze) + pip (the first crack a hatchling makes in its shell)
+  category: Bronze Chick
+  types: [Steel, Flying]
+  abilities: [Keen Eye, Skill Link]
+  hidden_ability: Iron Barbs
+  base_stats: {hp: 50, atk: 72, def: 70, spa: 35, spd: 45, spe: 53}
+  ev_yield: {atk: 1}
+  exp_yield: 66
+  catch_rate: 120
+  gender: {female_pct: 50}
+  egg_groups: [Flying]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.5
+  weight_kg: 14.0
+  myth: >-
+    Ares's man-eating birds nested in the marsh of Stymphalos. They had bronze
+    beaks and shot their feathers like arrows (Apollonius, Argonautica 2;
+    Apollodorus, Library 2.5.6).
+  expression: >-
+    A crane chick in the reeds, too young to fly but already growing bronze
+    pin-feathers sharp enough to draw blood. It panics at the clash of metal,
+    as its whole kind does.
+  art: >-
+    Small: it fills about 32×40 px. A leggy crane chick in three-quarter view
+    facing left, standing on one stilt leg in a tuft of reeds, with a long
+    straight bronze beak and a fluffy round body. Bronze pin-feathers poke out
+    of the down along its stubby wings and crown, each tipped like an
+    arrowhead. Marble-gray down, sun-gold and terracotta bronze for the beak and
+    pins, cypress-dark legs, a red eye, black-figure ink outline. The follower
+    hops and flaps without ever lifting off.
+  shiny: The bronze turns olive verdigris and the down turns limestone tan.
+  dex_entry:
+    - It hides in the lake reeds until its
+    - bronze pin-feathers harden. One clash of
+    - metal sends a whole brood flapping and
+    - shrieking, though none of them can fly.
+  habitat: >-
+    The reed-bed nests of Lake Stymphalia, Lakonia, in the morning and evening;
+    rare, at level 33. Wading the shallows or using the Augur's Eye turns them
+    up.
+  learnset:
+    level_up:
+      - [1, Peck]
+      - [1, Leer]
+      - [4, Fury Attack]
+      - [8, Metal Claw]
+      - [12, Pin Missile]
+      - [16, Wing Attack]
+      - [20, Metal Sound]
+      - [24, Air Cutter]
+      - [28, Steel Wing]
+      - [32, Agility]
+      - [36, Drill Peck]
+      - [40, Iron Defense]
+      - [44, Iron Head]
+      - [48, Brave Bird]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Swift, Agility,
+      Steel Wing, Aerial Ace, Air Cutter, Pluck, Fly, Roost, Tailwind, Defog, Whirlwind, Dual Wingbeat,
+      Acrobatics, U-turn, Pin Missile, Metal Claw, Metal Sound, Iron Defense, Iron Head, Spikes, Thief,
+      Taunt, Torment, Sandstorm, Rock Tomb]
+    egg: [Feather Dance, Pursuit, Curse, Sky Attack, Night Slash, Stealth Rock]
+  signature: >-
+    Skill Link makes Pin Missile fire all five feathers from level 12. It
+    learns Metal Sound at 20: the same clangor that once drove its kind from
+    the marsh.
+  new_move: null
+
+- dex: 110
+  concept: Stymphalian bird
+  name: Belornis
+  etymology: belos (Greek, dart) + ornis (Greek, bird)
+  category: Arrowfeather
+  types: [Steel, Flying]
+  abilities: [Keen Eye, Skill Link]
+  hidden_ability: Iron Barbs
+  base_stats: {hp: 75, atk: 112, def: 108, spa: 55, spd: 70, spe: 80}
+  ev_yield: {atk: 2}
+  exp_yield: 190
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Flying]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.6
+  weight_kg: 82.0
+  myth: >-
+    Herakles could not wade into the Stymphalian marsh, so he clashed a pair of
+    bronze rattles made by Hephaestus. The birds rose in terror and he shot
+    them as they flew: the sixth Labor (Apollodorus, Library 2.5.6). Pausanias
+    says they were the size of cranes (Pausanias 8.22.4).
+  expression: >-
+    Grown, it's the bird the Argonauts feared: a bronze crane whose wing
+    feathers come loose as darts. It still can't stand the clash of metal, and
+    that is how the sixth Labor is won.
+  art: >-
+    Large: it fills about 62×62 px. A tall crane-like bird in three-quarter view
+    facing left, both wings raised high in a clear threat display, long legs
+    braced and a heavy straight beak like a spearhead under a scowling raptor's
+    brow. The primary feathers of each wing are separate bronze darts with
+    barbed tips, and one has just been loosed and flies ahead of it. A red brow
+    stripe over a red eye and a fan of gray tail feathers. Marble-gray and slate
+    plumage, sun-gold and terracotta bronze darts and beak, cypress-dark legs,
+    black-figure ink outline. Frame 2 flexes the wings and sends the dart on;
+    the back sprite shows the dart-feathers fanned out like a full quiver.
+  shiny: Olive verdigris bronze and charcoal-gray plumage, like bronze long buried.
+  dex_entry:
+    - It looses its bronze wing feathers like
+    - a volley of darts and grows them back by
+    - the next moon. Old marsh folk still bang
+    - pots together to drive a flock away.
+  habitat: >-
+    Lake Stymphalia, Lakonia, in the morning and evening; uncommon, at levels
+    46–50. Single birds roost in the reed beds. In the post-game the whole
+    flock gathers over the lake at dusk. Driving it out is the sixth Labor;
+    afterward a few come back, rarely.
+  learnset:
+    level_up:
+      - [0, Spikes]
+      - [1, Peck]
+      - [1, Leer]
+      - [1, Fury Attack]
+      - [1, Metal Claw]
+      - [12, Pin Missile]
+      - [16, Wing Attack]
+      - [20, Metal Sound]
+      - [24, Air Cutter]
+      - [28, Steel Wing]
+      - [32, Agility]
+      - [38, Drill Peck]
+      - [42, Iron Defense]
+      - [46, Iron Head]
+      - [50, Dual Wingbeat]
+      - [54, Roost]
+      - [58, Brave Bird]
+      - [64, Sky Attack]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Mud-Slap, Swift, Agility,
+      Steel Wing, Aerial Ace, Air Cutter, Pluck, Fly, Roost, Tailwind, Defog, Whirlwind, Dual Wingbeat,
+      Acrobatics, U-turn, Pin Missile, Metal Claw, Metal Sound, Iron Defense, Iron Head, Spikes, Thief,
+      Taunt, Torment, Sandstorm, Rock Tomb, Hyper Beam, Giga Impact, Brave Bird, Drill Peck, Sky Attack,
+      Swords Dance, Smart Strike, Body Press, Heavy Slam, Rock Slide, Stealth Rock, Knock Off]
+    egg: []
+  signature: >-
+    It learns Spikes on evolving, as its shed dart-feathers litter the ground.
+    With Skill Link, Pin Missile always lands all five hits, a full volley.
+  new_move: null

@@ -1,0 +1,86 @@
+line: sisyphus
+species:
+
+- dex: 131
+  concept: Boulder-pusher
+  name: Bouldyphus
+  etymology: boulder + Sisyphos (Greek, the king who cheated death)
+  category: Uphill
+  types: [Rock, Ghost]
+  abilities: [Sturdy, Rock Head]
+  hidden_ability: Stamina
+  base_stats: {hp: 80, atk: 115, def: 125, spa: 45, spd: 85, spe: 35}
+  ev_yield: {def: 2}
+  exp_yield: 175
+  catch_rate: 75
+  gender: {female_pct: 25}
+  egg_groups: [Mineral, Amorphous]
+  egg_cycles: 25
+  growth_rate: Slow
+  height_m: 1.4
+  weight_kg: 205.0
+  myth: >-
+    Sisyphus cheated death twice: he chained Thanatos, then talked Persephone
+    into letting him go back to the living. His punishment in the underworld is
+    to roll a boulder up a hill forever, and it always rolls back down (Odyssey
+    11.593–600; Theognis 702–712).
+  expression: >-
+    A ghost that has made peace with its punishment, so long ago that the
+    boulder has grown into its back. It hauls the stone uphill because that is
+    what it does, and the grin says it still thinks it got the better deal.
+  art: >-
+    Large: it fills about 62×60 px. A ghost hauling itself uphill in
+    three-quarter view facing left, a craggy boulder grown into its back and
+    leaning forward over it, with a ridge of stone spines along the top like
+    vertebrae. Shadow-flesh swells round the base of the stone where they have
+    fused, a violet meander glows around its girth, and a crack of violet light
+    runs down the stone into its arm. Its head has two stone stubs on the brow,
+    one wide gold eye, one eye screwed shut and a wide grin; its forearm ends in
+    a carved stone fist braced on the slope, and its legs are smoke fading into
+    wisps. Marble-gray boulder with flecks of moss, dusk-violet and ink
+    shadow-flesh, a violet glow, a sun-gold eye, black-figure ink outline. Frame
+    2 crackles light along the crack; the follower hauls itself along on its
+    knuckles and now and then slides back a tile.
+  shiny: The boulder turns terracotta and the ghost pales to marble white.
+  dex_entry:
+    - It hauls its boulder up the slope all day.
+    - At the top it slips and rolls back down.
+    - It only grins and starts again. It
+    - once tied up Death with a chain, they say.
+  habitat: >-
+    The endless slope in Tartarus, deepest of the post-game Katabasis. Common
+    there at any hour, since the underworld has no day; each one is found
+    pushing its boulder up the same hill.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Defense Curl]
+      - [1, Astonish]
+      - [5, Rollout]
+      - [9, Rock Throw]
+      - [13, Spite]
+      - [17, Rock Tomb]
+      - [21, Shadow Sneak]
+      - [25, Block]
+      - [29, Rock Slide]
+      - [33, Hex]
+      - [37, Stealth Rock]
+      - [41, Shadow Claw]
+      - [45, Endeavor]
+      - [49, Stone Edge]
+      - [53, Grudge]
+      - [57, Phantom Force]
+      - [61, Head Smash]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sandstorm, Rock Slide,
+      Rock Tomb, Stone Edge, Rock Blast, Stealth Rock, Smack Down, Rock Polish, Iron Defense,
+      Body Press, Heavy Slam, Gyro Ball, Earthquake, Bulldoze, Stomping Tantrum, Dig, Strength,
+      Rock Smash, Brick Break, Superpower, Bulk Up, Shadow Claw, Shadow Ball, Phantom Force,
+      Poltergeist, Hex, Night Shade, Will-O-Wisp, Pain Split, Spite, Payback, Scary Face, Rollout,
+      Endeavor, Block, Seismic Toss, Giga Impact]
+    egg: [Destiny Bond, Memento, Counter, Wide Guard, Bide, Curse]
+  signature: >-
+    The old trick: Sturdy lets it survive one hit it shouldn't, and Endeavor
+    then drags the foe down to its own last sliver of HP. Rock Head makes Head
+    Smash free.
+  new_move: null

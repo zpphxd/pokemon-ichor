@@ -1,0 +1,146 @@
+line: foam
+species:
+
+- dex: 89
+  concept: Foam scallop
+  name: Aphrell
+  etymology: aphros (Greek, sea foam) + shell
+  category: Foam Shell
+  types: [Water]
+  abilities: [Shell Armor, Cute Charm]
+  hidden_ability: Hydration
+  base_stats: {hp: 45, atk: 40, def: 85, spa: 55, spd: 60, spe: 35}
+  ev_yield: {def: 1}
+  exp_yield: 61
+  catch_rate: 190
+  gender: {female_pct: 75}
+  egg_groups: [Water 3, Fairy]
+  egg_cycles: 20
+  growth_rate: Fast
+  base_friendship: 70
+  height_m: 0.4
+  weight_kg: 7.5
+  myth: >-
+    Aphrodite was born from the sea foam, aphros, and came ashore first at
+    Kythera and then at Cyprus (Hesiod, Theogony 188–200). Art shows her riding
+    a scallop shell.
+  expression: >-
+    The scallop before the birth, just opening as it rides the foam toward
+    Kythera.
+  art: >-
+    Small: it fills about 42×43 px. A little rose-pink creature peeking out of
+    an open scallop in three-quarter view facing left, riding a curl of sea
+    foam. The upper valve tilts up over its round face like a fan and the lower
+    valve cups its body, their fluted ribs fanning out from the hinge. Big dark
+    eyes and a small smile. Marble and pale terracotta shell with Aegean-blue
+    lines between the ribs, a rose-pink body, marble-white foam over Aegean-blue
+    water, black-figure ink outline. Frame 2 closes its eyes in a smile; the
+    follower claps its shell to hop along.
+  shiny: Its shell turns sun-gold with pearl-white ribs.
+  dex_entry:
+    - It drifts in on the surf, peeking out of
+    - its shell. When it opens wide, the foam
+    - that spills out smells of roses.
+  habitat: >-
+    Common on Kythera's sea-foam beaches, washed up with the morning tide.
+    Fishing in the surf turns up more at any hour.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Withdraw]
+      - [4, Bubble]
+      - [8, Clamp]
+      - [12, Fairy Wind]
+      - [16, Aqua Ring]
+      - [20, Bubble Beam]
+      - [24, Mist]
+      - [28, Water Pulse]
+      - [32, Brine]
+      - [36, Soak]
+      - [40, Hydro Pump]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Rain Dance, Hail,
+      Snowscape, Surf, Dive, Whirlpool, Brine, Water Pulse, Scald, Chilling Water, Ice Beam,
+      Icy Wind, Blizzard, Iron Defense, Light Screen, Safeguard, Charm, Draining Kiss,
+      Misty Terrain, Helping Hand, Hydro Pump, Muddy Water, Captivate]
+    egg: [Shell Smash, Rapid Spin, Wish, Lucky Chant, Refresh, Aqua Jet]
+  signature: >-
+    Shell Armor and a high Defense keep it shut tight. Shell Smash, an egg
+    move, throws it open.
+  new_move: null
+
+- dex: 90
+  concept: Foam-born
+  name: Aphrogene
+  etymology: aphros (Greek, sea foam) + -genes (Greek, born), after the epithet Aphrogeneia
+  category: Foam-born
+  types: [Water, Fairy]
+  abilities: [Cute Charm, Marvel Scale]
+  hidden_ability: Hydration
+  base_stats: {hp: 80, atk: 50, def: 80, spa: 110, spd: 110, spe: 70}
+  ev_yield: {spa: 1, spd: 1}
+  exp_yield: 175
+  catch_rate: 60
+  gender: {female_pct: 75}
+  egg_groups: [Water 3, Fairy]
+  egg_cycles: 20
+  growth_rate: Fast
+  base_friendship: 70
+  height_m: 1.5
+  weight_kg: 39.0
+  myth: >-
+    White foam spread on the sea and a goddess grew in it. She stepped ashore at
+    Kythera, and grass sprang up under her feet (Hesiod, Theogony 188–200).
+  expression: >-
+    The shell opens and the foam-born stands up in it, the moment painters have
+    loved ever since.
+  art: >-
+    Medium: it fills about 48×60 px. A slender foam spirit standing in an open
+    scallop shell in three-quarter view facing left, one hand raised to wring
+    out long hair made of sea foam, her lower body dissolving into surf that
+    spills over the shell's rim. The shell keeps the scallop's ribs, now opened
+    wide behind her like a fan. Marble-white foam, an Aegean-blue body, a marble
+    and pale terracotta shell, one rose-pink accent on her cheeks and the shell's
+    lip, black-figure ink outline. The follower drifts on a patch of foam.
+  shiny: Its shell turns sun-gold and its foam turns a soft rose pink.
+  dex_entry:
+    - It rises out of the foam, standing in its
+    - open shell. Where it first steps ashore,
+    - flowers spring up from the sand and every
+    - quarrel on the beach falls quiet.
+  habitat: >-
+    Evolves from Aphrell with a Shiny Stone. It isn't found in the wild, but the
+    acolytes of the Temple of Aphrodite on Kythera raise them.
+  learnset:
+    level_up:
+      - [0, Draining Kiss]
+      - [1, Tackle]
+      - [1, Withdraw]
+      - [1, Bubble]
+      - [1, Clamp]
+      - [12, Fairy Wind]
+      - [16, Aqua Ring]
+      - [20, Bubble Beam]
+      - [24, Mist]
+      - [28, Water Pulse]
+      - [32, Brine]
+      - [35, Misty Terrain]
+      - [38, Dazzling Gleam]
+      - [41, Soak]
+      - [44, Captivate]
+      - [47, Moonblast]
+      - [50, Life Dew]
+      - [54, Calm Mind]
+      - [58, Hydro Pump]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Rain Dance, Hail,
+      Snowscape, Surf, Dive, Whirlpool, Brine, Water Pulse, Scald, Chilling Water, Ice Beam,
+      Icy Wind, Blizzard, Iron Defense, Light Screen, Safeguard, Charm, Draining Kiss,
+      Misty Terrain, Helping Hand, Hydro Pump, Muddy Water, Captivate, Dazzling Gleam, Calm Mind,
+      Psychic, Psyshock, Hyper Voice, Disarming Voice, Alluring Voice, Misty Explosion, Encore,
+      Fake Tears, Covet, Flip Turn, Weather Ball, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    Cute Charm and Captivate: love on contact. A bulky special Water/Fairy with
+    Life Dew and Calm Mind, it heals its partner as it fights.
+  new_move: null

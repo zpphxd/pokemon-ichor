@@ -1,0 +1,147 @@
+line: halcyon
+species:
+
+- dex: 29
+  concept: Halcyon chick
+  name: Halcyling
+  etymology: halkyon (Greek, kingfisher) + -ling
+  category: Sea Nest
+  types: [Water, Flying]
+  abilities: [Cloud Nine, Keen Eye]
+  hidden_ability: Sniper
+  base_stats: {hp: 40, atk: 45, def: 35, spa: 50, spd: 40, spe: 75}
+  ev_yield: {spe: 1}
+  exp_yield: 56
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Water 1, Flying]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.3
+  weight_kg: 1.8
+  myth: >-
+    Each winter Alcyone, turned into a kingfisher, broods her eggs in a nest
+    floating on the sea, and her father Aeolus holds back the winds for seven
+    days so the water stays calm (Ovid, Metamorphoses 11).
+  expression: >-
+    A kingfisher chick that rides its own floating nest. Wherever it sleeps,
+    the swell lies down flat around it.
+  art: >-
+    Small: it fills about 32×30 px. A round kingfisher chick in three-quarter
+    view facing left, sitting in a small floating nest of driftwood and
+    sea-wrack, with an oversized dagger beak, stubby wings and a short tufted
+    crest. A thin, perfectly flat waterline laps the nest. Aegean blue crown
+    and back, terracotta-orange breast, marble-white throat, a limestone and
+    olive nest, black-figure ink outline. The follower hops behind and floats
+    on water tiles.
+  shiny: Its blue turns olive green and its breast sun-gold.
+  dex_entry:
+    - It is born in a nest that floats on the
+    - winter sea. While it sleeps there, the
+    - wind holds its breath and the waves lie
+    - down flat.
+  habitat: >-
+    Akti harbor and every coast, mornings and evenings; common along the
+    water's edge and on the water while Surfing. During the halcyon days at
+    Akti harbor its nests float all over the bay.
+  learnset:
+    level_up:
+      - [1, Peck]
+      - [1, Water Gun]
+      - [1, Growl]
+      - [4, Mist]
+      - [7, Quick Attack]
+      - [10, Wing Attack]
+      - [13, Aqua Jet]
+      - [16, Water Pulse]
+      - [19, Pluck]
+      - [22, Roost]
+      - [25, Air Slash]
+      - [28, Calm Mind]
+      - [31, Dive]
+      - [35, Drill Peck]
+      - [39, Brave Bird]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Water Pulse, Surf, Dive,
+      Scald, Brine, Whirlpool, Chilling Water, Ice Beam, Icy Wind, Blizzard, Hail, Rain Dance,
+      Weather Ball, Aerial Ace, Air Slash, Fly, Roost, Steel Wing, U-turn, Acrobatics, Pluck,
+      Tailwind, Defog, Calm Mind, Agility, Safeguard, Helping Hand, Thief]
+    egg: [Aqua Ring, Feather Dance, Water Sport, Mirror Move, Soak, Gust]
+  signature: >-
+    Cloud Nine from the start: no rain, sun, sand or snow works while it's on
+    the field. Mist and Calm Mind round out the calm.
+  new_move: null
+
+- dex: 30
+  concept: Halcyon
+  name: Galenyon
+  etymology: galene (Greek, calm sea) + halkyon (Greek, kingfisher)
+  category: Calm Sea
+  types: [Water, Flying]
+  abilities: [Cloud Nine, Keen Eye]
+  hidden_ability: Sniper
+  base_stats: {hp: 70, atk: 80, def: 65, spa: 85, spd: 80, spe: 105}
+  ev_yield: {spe: 2}
+  exp_yield: 172
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Water 1, Flying]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.9
+  weight_kg: 12.5
+  myth: >-
+    King Ceyx drowned at sea, and his wife Alcyone leapt into the waves after
+    him. The gods turned both into kingfishers, and the seven calm days of her
+    nesting are the halcyon days (Ovid, Metamorphoses 11).
+  expression: >-
+    Alcyone in flight. Its slow, broad wingbeat flattens the waves beneath it,
+    and the weather stops while it passes.
+  art: >-
+    Medium: it fills about 52×44 px. A sleek kingfisher in a slow, wide
+    downstroke, three-quarter view facing left, wings spread level, a long
+    spear beak and a swept-back crest, tail feathers fanned. Beneath it a
+    short band of glassy, perfectly flat water reflects its breast. Aegean blue
+    from deep to pale on the wings and back, terracotta-orange breast,
+    marble-white throat, a sun-gold eye ring, black-figure ink outline. The
+    back sprite shows the full wingspan with a pale blue bar across each wing.
+  shiny: Its blue turns olive green and its breast sun-gold.
+  dex_entry:
+    - Each winter it broods on the open sea,
+    - and for seven days no wind dares blow.
+    - Sailors time their voyages by its
+    - nesting.
+  habitat: >-
+    Evolves from Halcyling at level 24. Wild ones fish along the mainland
+    coasts and the shores of Kythera Isle (uncommon), mostly on calm mornings.
+  learnset:
+    level_up:
+      - [0, Haze]
+      - [1, Peck]
+      - [1, Water Gun]
+      - [1, Growl]
+      - [1, Mist]
+      - [7, Quick Attack]
+      - [10, Wing Attack]
+      - [13, Aqua Jet]
+      - [16, Water Pulse]
+      - [19, Pluck]
+      - [22, Roost]
+      - [26, Air Slash]
+      - [30, Calm Mind]
+      - [34, Dive]
+      - [38, Drill Peck]
+      - [42, Liquidation]
+      - [46, Brave Bird]
+      - [50, Hydro Pump]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Water Pulse, Surf, Dive,
+      Scald, Brine, Whirlpool, Chilling Water, Ice Beam, Icy Wind, Blizzard, Hail, Rain Dance,
+      Weather Ball, Aerial Ace, Air Slash, Fly, Roost, Steel Wing, U-turn, Acrobatics, Pluck,
+      Tailwind, Defog, Calm Mind, Agility, Safeguard, Helping Hand, Thief, Waterfall, Liquidation,
+      Hydro Pump, Brave Bird, Hurricane, Dual Wingbeat, Sky Attack, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    It learns Haze on evolving, flattening every stat change the way its wings
+    flatten the waves. With Cloud Nine it quietly undoes weather teams.
+  new_move: null

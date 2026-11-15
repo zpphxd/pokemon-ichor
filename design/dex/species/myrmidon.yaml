@@ -1,0 +1,140 @@
+line: myrmidon
+species:
+
+- dex: 21
+  concept: Worker ant
+  name: Ergant
+  etymology: ergates (Greek, worker) + ant
+  category: Worker Ant
+  types: [Bug]
+  abilities: [Swarm, Battle Armor]
+  hidden_ability: Defiant
+  base_stats: {hp: 45, atk: 62, def: 55, spa: 20, spd: 38, spe: 45}
+  ev_yield: {atk: 1}
+  exp_yield: 58
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Bug]
+  egg_cycles: 15
+  growth_rate: Medium Fast
+  height_m: 0.4
+  weight_kg: 5.5
+  myth: >-
+    When plague emptied Aegina, King Aeacus prayed under Zeus's oak and watched
+    a line of ants carrying grain up its bark. He asked for as many citizens as
+    there were ants (Ovid, Metamorphoses 7.614–626).
+  expression: >-
+    A worker ant, tireless and loyal, always carrying something bigger than
+    itself. It already stands a little straighter than other ants.
+  art: >-
+    Small: it fills about 30×26 px. A sturdy ant in three-quarter view facing
+    left, standing on four legs and holding a grain of wheat over its head with
+    the front two. Big mandibles and bent antennae. A segmented terracotta-brown
+    body with limestone highlights, a sun-gold wheat grain, black-figure ink
+    outline. The follower marches in step with the player.
+  shiny: A black-figure ink body with sun-gold highlights.
+  dex_entry:
+    - It carries ten times its own weight and
+    - never rests. Where one marches, a long
+    - line follows, all of them in step.
+  habitat: >-
+    In the grass around ant mounds on Route 1 and Kronion Hill, by day; common.
+    Also around the ant hills of Aegina, the Myrmidons' own island, levels
+    12–16.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Leer]
+      - [4, Sand Attack]
+      - [7, Bug Bite]
+      - [10, Bite]
+      - [13, Helping Hand]
+      - [16, Rock Smash]
+      - [19, Dig]
+      - [23, Lunge]
+      - [27, Iron Defense]
+      - [31, X-Scissor]
+      - [35, Crunch]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Sandstorm, Dig,
+      Rock Smash, Strength, Rock Tomb, Bulldoze, Mud-Slap, X-Scissor, Bug Bite, Struggle Bug,
+      Pounce, Skitter Smack, Leech Life, Iron Defense, Metal Claw, Helping Hand, Endeavor, Thief,
+      Taunt, Retaliate, Work Up, Take Down, Poison Jab, Crunch]
+    egg: [Fell Stinger, Quick Guard, Counter, Feint, Agility]
+  signature: >-
+    Helping Hand at 13 makes it a team player from the start, and Rock Smash at
+    16 is its first taste of the fighter it will become.
+  new_move: null
+
+- dex: 22
+  concept: Myrmidon
+  name: Hoplomex
+  etymology: hoplon (Greek, shield; arms) + myrmex (Greek, ant)
+  category: Hoplite
+  types: [Bug, Fighting]
+  abilities: [Swarm, Battle Armor]
+  hidden_ability: Defiant
+  base_stats: {hp: 70, atk: 110, def: 100, spa: 30, spd: 70, spe: 80}
+  ev_yield: {atk: 2}
+  exp_yield: 170
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Bug]
+  egg_cycles: 15
+  growth_rate: Medium Fast
+  height_m: 1.4
+  weight_kg: 58.0
+  myth: >-
+    Zeus turned Aegina's ants into men, the Myrmidons, named for myrmex, ant
+    (Ovid, Metamorphoses 7.627–660). They followed Achilles to Troy and fought
+    shield to shield and helmet to helmet (Homer, Iliad 16.212–217).
+  expression: >-
+    The worker turned soldier. It stands upright in bronze with a round hoplite
+    shield, and it never fights alone if it can help it.
+  art: >-
+    Large: it fills about 60×60 px. An ant-soldier lunging forward on its
+    hind legs in three-quarter view facing left, in a hoplite's charge. Its
+    middle arms hold a big round bronze shield painted with a black ant, its
+    front arms level a leaf-bladed spear at the foe, and its mandibles hang
+    under a crested Corinthian helmet that is part of its head. Terracotta-brown body plates, a
+    sun-gold bronze shield and helmet, a limestone crest, black-figure ink
+    emblem and outline. The back sprite shows the shield's inner straps.
+  shiny: A black-figure ink body with a silver marble shield and helmet.
+  dex_entry:
+    - They fight in a line, shield beside
+    - shield. If one falls, the line closes so
+    - fast that no enemy ever sees the gap.
+  habitat: >-
+    Evolves from Ergant at level 22. Wild ones drill in the grass outside the
+    Lakonian battle school; uncommon.
+  learnset:
+    level_up:
+      - [0, Wide Guard]
+      - [1, Tackle]
+      - [1, Leer]
+      - [1, Sand Attack]
+      - [1, Bug Bite]
+      - [10, Bite]
+      - [13, Helping Hand]
+      - [16, Rock Smash]
+      - [19, Dig]
+      - [22, Brick Break]
+      - [25, Lunge]
+      - [28, Iron Defense]
+      - [31, X-Scissor]
+      - [35, Crunch]
+      - [39, Bulk Up]
+      - [43, Reversal]
+      - [47, Close Combat]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Sunny Day, Sandstorm, Dig,
+      Rock Smash, Strength, Rock Tomb, Bulldoze, Mud-Slap, X-Scissor, Bug Bite, Struggle Bug,
+      Pounce, Skitter Smack, Leech Life, Iron Defense, Metal Claw, Helping Hand, Endeavor, Thief,
+      Taunt, Retaliate, Work Up, Take Down, Poison Jab, Crunch, Brick Break, Bulk Up, Swords Dance,
+      Low Kick, Low Sweep, Focus Punch, Close Combat, Body Press, Coaching, Seismic Toss,
+      Rock Slide, Iron Head, Smart Strike, Superpower, Reversal, Aerial Ace, Giga Impact]
+    egg: []
+  signature: >-
+    Wide Guard on evolving is the shield wall. Bulk Up and Close Combat make it
+    the real fighter the worker promised.
+  new_move: null

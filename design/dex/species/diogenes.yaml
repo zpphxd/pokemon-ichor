@@ -1,0 +1,80 @@
+line: diogenes
+species:
+
+- dex: 46
+  concept: Jar-dwelling cynic
+  name: Pithound
+  etymology: pithos (Greek, storage jar) + hound, for the Cynics, whose name means "dog-like"
+  category: Cynic
+  types: [Dark, Psychic]
+  abilities: [Unaware, Frisk]
+  hidden_ability: Prankster
+  base_stats: {hp: 90, atk: 70, def: 95, spa: 80, spd: 95, spe: 40}
+  ev_yield: {def: 1, spd: 1}
+  exp_yield: 168
+  catch_rate: 75
+  gender: {female_pct: 25}
+  egg_groups: [Field]
+  egg_cycles: 25
+  growth_rate: Medium Fast
+  height_m: 0.7
+  weight_kg: 38.0
+  myth: >-
+    Diogenes the Cynic slept in a pithos in the Athenian Agora and walked it
+    with a lamp lit in broad daylight, saying he was looking for an honest man.
+    When Alexander the Great stood over him and offered him anything he
+    wished, he asked Alexander to stand out of his sun (Diogenes Laertius,
+    Lives 6).
+  expression: >-
+    A scruffy dog that owns a cracked jar, a lamp and nothing else. It is not
+    impressed by you, your laurels or your Pokémon.
+  art: >-
+    Medium: it fills about 42×44 px. A cracked pithos tipped on its side in
+    three-quarter view facing left, with a shaggy dog lying half out of it,
+    chin on its paws and one eyebrow raised. A small clay oil lamp hangs from
+    its tail, lit in daylight with a sun-gold flame. A beard of scruffy fur,
+    half-lidded eyes with a violet glint, and a black-figure meander band
+    painted around the jar's shoulder. Terracotta jar, limestone-gray fur,
+    sun-gold flame, a dusky violet accent, black-figure ink outline. The
+    follower trudges along with the jar on its back like a shell.
+  shiny: Its jar turns black with terracotta figures, like red-figure pottery.
+  dex_entry:
+    - It sleeps in a cracked jar and walks by
+    - day with a lit lamp, looking for an
+    - honest Trainer. It hasn't found one, and
+    - it doesn't expect to.
+  habitat: >-
+    Uncommon. Found by checking the empty jars in the Agoras of Emporion City
+    and Astyra, at any time of day.
+  learnset:
+    level_up:
+      - [1, Leer]
+      - [1, Bite]
+      - [1, Confusion]
+      - [5, Flash]
+      - [9, Miracle Eye]
+      - [13, Yawn]
+      - [17, Psybeam]
+      - [21, Snarl]
+      - [25, Torment]
+      - [29, Crunch]
+      - [33, Slack Off]
+      - [37, Psyshock]
+      - [41, Foul Play]
+      - [45, Light Screen]
+      - [49, Trick Room]
+      - [53, Psychic]
+      - [57, Calm Mind]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Snarl, Taunt, Torment,
+      Embargo, Foul Play, Dark Pulse, Payback, Knock Off, Thief, Lash Out, Psychic, Psyshock,
+      Psych Up, Calm Mind, Nasty Plot, Trick Room, Light Screen, Reflect, Flash, Imprison,
+      Skill Swap, Trick, Zen Headbutt, Psychic Fangs, Shadow Ball, Future Sight, Expanding Force,
+      Will-O-Wisp, Sunny Day, Rain Dance, Uproar, Hyper Voice, Roar, Fake Tears, Dig, Mud-Slap,
+      Iron Tail, Body Slam, Hyper Beam, Giga Impact]
+    egg: [Howl, Curse, Recycle, Spite, Odor Sleuth, Parting Shot]
+  signature: >-
+    Unaware ignores every stat boost a foe brags about, Slack Off keeps it
+    lazing in its jar, and Foul Play turns the foe's own strength on it. Its
+    Trick Room makes being slow the point. It never learns Helping Hand.
+  new_move: null

@@ -1,0 +1,153 @@
+line: kallisto
+species:
+
+- dex: 66
+  concept: Star cub
+  name: Arkoby
+  etymology: arkos (Greek, bear) + baby
+  category: Star Cub
+  types: [Dark]
+  abilities: [Sturdy, Thick Fat]
+  hidden_ability: Guts
+  base_stats: {hp: 65, atk: 60, def: 50, spa: 40, spd: 50, spe: 35}
+  ev_yield: {hp: 1}
+  exp_yield: 63
+  catch_rate: 120
+  gender: {female_pct: 75}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.5
+  weight_kg: 14.0
+  myth: >-
+    Kallisto, a huntress sworn to Artemis, was seduced by Zeus and turned into
+    a bear, and years later her son Arkas nearly speared her. Zeus set them in
+    the sky as the Great Bear and the Little Bear (Ovid, Metamorphoses 2).
+  expression: >-
+    Arkas's Little Bear, small and lost. The seven pale spots on its back are
+    the stars it will one day wear.
+  art: >-
+    Small: it fills about 32×34 px. A round, fuzzy bear cub in three-quarter
+    view facing left, sitting up on its haunches and looking up at the sky,
+    one paw raised. Seven pale dots on its back trace the shape of the
+    Great Bear. A crescent-shaped patch of pale fur on its chest. Black-figure
+    ink and dark Aegean-blue fur, marble-white star spots and chest patch,
+    one Fairy-pink nose, black-figure ink outline. The follower stops to look
+    up whenever the sky is clear.
+  shiny: Its fur turns deep cypress-green and the star spots sun-gold.
+  dex_entry:
+    - Seven pale spots on its back shine on
+    - clear nights. When it is lost, it looks
+    - up, finds the stars that match them,
+    - and walks the way they point.
+  habitat: >-
+    Arkadia, in the glades around the Pool of Mnemosyne, day and night;
+    uncommon. It is easiest to find on clear nights.
+  learnset:
+    level_up:
+      - [1, Scratch]
+      - [1, Leer]
+      - [1, Baby-Doll Eyes]
+      - [5, Fury Swipes]
+      - [8, Fake Tears]
+      - [12, Bite]
+      - [16, Covet]
+      - [20, Slash]
+      - [24, Rest]
+      - [24, Snore]
+      - [28, Moonlight]
+      - [32, Crunch]
+      - [36, Charm]
+      - [40, Thrash]
+      - [44, Hammer Arm]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Charm, Fake Tears,
+      Play Rough, Dazzling Gleam, Draining Kiss, Misty Terrain, Crunch, Snarl, Thief, Taunt, Payback,
+      Fling, Foul Play, Knock Off, Body Slam, Take Down, Double-Edge, Strength, Rock Smash,
+      Brick Break, Focus Punch, Bulk Up, Dig, Shadow Claw, Swords Dance, Hone Claws, Rock Slide,
+      Bulldoze, Ice Punch, Thunder Punch, Fire Punch, Drain Punch, Seismic Toss, Counter, Covet,
+      Work Up, Endeavor, Trailblaze, Scary Face, Lash Out, Throat Chop, Metronome]
+    egg: [Yawn, Belly Drum, Counter, Crush Claw, Wish]
+  signature: >-
+    Sturdy from the start: like the stars on its back, it never goes down in
+    one blow. Rest and Snore together at level 24 make it a cub that sleeps
+    through a fight and wakes up still standing.
+  new_move: null
+
+- dex: 67
+  concept: Great Bear
+  name: Starkos
+  etymology: star + arkos (Greek, bear)
+  category: Great Bear
+  types: [Dark, Fairy]
+  abilities: [Sturdy, Thick Fat]
+  hidden_ability: Guts
+  base_stats: {hp: 110, atk: 115, def: 85, spa: 60, spd: 85, spe: 45}
+  ev_yield: {atk: 2}
+  exp_yield: 184
+  catch_rate: 60
+  gender: {female_pct: 75}
+  egg_groups: [Field]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 2.2
+  weight_kg: 255.0
+  myth: >-
+    Hera, still jealous, begged the sea gods never to let the Great Bear bathe
+    in Ocean, so of all the stars it alone never sets (Ovid, Metamorphoses 2;
+    Homer, Iliad 18.489).
+  expression: >-
+    Kallisto as the Great Bear: a towering, gentle mother whose back carries
+    the seven stars that never sink below the sea.
+  art: >-
+    Large: it fills about 62×60 px. A massive bear standing on all fours in
+    three-quarter view facing left, its broad bear skull thrust forward. Seven
+    bright stars run along its back and up its long raised tail in the shape of
+    the Great Bear, joined by faint lines of light, and a pale crescent marks
+    its chest. Black-figure ink and deep Aegean-blue fur, marble-white stars
+    with a Fairy-pink glow, sun-gold eyes, black-figure ink outline. Frame 2
+    opens its jaws in a roar as the stars twinkle; the back sprite shows the
+    full seven-star pattern, and the follower's stars twinkle at night.
+  shiny: Cypress-green fur with sun-gold stars, like the night sky over the forest.
+  dex_entry:
+    - The seven stars on its back never set.
+    - It is said a huntress became a bear,
+    - then a constellation, and that it is
+    - still watching for her son.
+  habitat: Evolves from Arkoby with a Moon Stone.
+  learnset:
+    level_up:
+      - [0, Play Rough]
+      - [1, Scratch]
+      - [1, Leer]
+      - [1, Baby-Doll Eyes]
+      - [1, Fury Swipes]
+      - [1, Fake Tears]
+      - [12, Bite]
+      - [16, Covet]
+      - [20, Slash]
+      - [24, Rest]
+      - [24, Snore]
+      - [28, Moonlight]
+      - [32, Crunch]
+      - [36, Charm]
+      - [40, Thrash]
+      - [44, Hammer Arm]
+      - [48, Cosmic Power]
+      - [53, Body Press]
+      - [58, Double-Edge]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Charm, Fake Tears,
+      Play Rough, Dazzling Gleam, Draining Kiss, Misty Terrain, Crunch, Snarl, Thief, Taunt, Payback,
+      Fling, Foul Play, Knock Off, Body Slam, Take Down, Double-Edge, Strength, Rock Smash,
+      Brick Break, Focus Punch, Bulk Up, Dig, Shadow Claw, Swords Dance, Hone Claws, Rock Slide,
+      Bulldoze, Ice Punch, Thunder Punch, Fire Punch, Drain Punch, Seismic Toss, Counter, Covet,
+      Work Up, Endeavor, Trailblaze, Scary Face, Lash Out, Throat Chop, Metronome, Hyper Beam,
+      Giga Impact, Earthquake, Close Combat, Body Press, Iron Defense, High Horsepower,
+      Stomping Tantrum, Superpower, Hyper Voice, Dark Pulse, Moonblast]
+    egg: []
+  signature: >-
+    It learns Play Rough on evolving and Cosmic Power later, so the stars on
+    its back become armor. With Sturdy it is Hierophant Kallisto's anchor:
+    the bear that never sets.
+  new_move: null
