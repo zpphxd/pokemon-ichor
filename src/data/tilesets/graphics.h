@@ -1038,6 +1038,7 @@ const u16 gTilesetPalettes_PorytilesManaged_GulfFerry[][16] =
     INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/13.gbapal"),
     INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/15.gbapal")
+};
 
 // Ichor: west_stone
 const u32 gTilesetTiles_PorytilesManaged_WestStone[] = INCBIN_U32("data/tilesets/secondary/west_stone/porytiles_bin/tiles.4bpp.lz");

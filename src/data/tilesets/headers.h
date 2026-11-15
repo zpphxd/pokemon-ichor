@@ -630,6 +630,8 @@ const struct Tileset gTileset_GulfFerry =
     .palettes = gTilesetPalettes_PorytilesManaged_GulfFerry,
     .metatiles = gMetatiles_PorytilesManaged_GulfFerry,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_GulfFerry,
+    .callback = NULL,
+};
 
 // Ichor (Act II rooms, the road west): Lebadeia's pilgrims' hall and the mason's house: living rock, rubble, cut stone. A Porytiles-managed secondary for the oikos
 // primary, built by tools/ichor/maps/westrooms.py (art in tools/ichor/art/westrooms_*.py).

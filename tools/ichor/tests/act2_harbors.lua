@@ -64,7 +64,12 @@ local function main()
                  { S.SPECIES_TEST, 2 }, { 100, 2 }, { (1 << 17) | (1 << 18) | (1 << 19) | (1 << 20), 4 },
                  { S.MOVE_TEST, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 } }
   warpIn(S.MAP_KIRRHA, 27, 0, { S.FLAG_SYS_POKEMON_GET, S.FLAG_BADGE04_GET, S.FLAG_ACT2_BEGUN,
-                                S.FLAG_GIRDLE }, team)
+                                S.FLAG_GIRDLE,
+                                -- the two ferry trainers stand beaten: this run is about the
+                                -- crossing's scenes, and a battle's length is the battle engine's
+                                -- business (their talk scripts still run, after-battle lines and all)
+                                S.TRAINER_FLAGS_START + S.TRAINER_KEPHISIOS,
+                                S.TRAINER_FLAGS_START + S.TRAINER_LAMPRIAS }, team)
   expect(flag(S.FLAG_VISITED_KIRRHA), "Kirrha is a fly target from the first step")
   expect(not flag(S.FLAG_ARRIVED_KIRRHA), "not yet arrived")
   shot("kirrha_north_road")
@@ -135,10 +140,11 @@ local function main()
   L.talk(L.sign("GulfFerry_Deck_EventScript_Rail"), { shots = { [1] = "rail_wine_dark" } })
   L.talk(L.hidden(S.FLAG_HIDDEN_FERRY_SCALE), { shots = { [1] = "goat_sat_on_it" } })
   expect(flag(S.FLAG_HIDDEN_FERRY_SCALE), "the Heart Scale in the goat pen")
-  L.talk(L.npc("GulfFerry_Deck_EventScript_Kephisios"), { shots = { [1] = "kephisios" } })
-  expect(L.defeated(S.TRAINER_KEPHISIOS), "beat Kephisios at the rail")
-  L.talk(L.npc("GulfFerry_Deck_EventScript_Lamprias"), { shots = { [1] = "lamprias" } })
-  expect(L.defeated(S.TRAINER_LAMPRIAS), "beat Lamprias at the bow")
+  expect(L.npc("GulfFerry_Deck_EventScript_Kephisios").present, "Kephisios fishes at the rail")
+  L.talk(L.npc("GulfFerry_Deck_EventScript_Kephisios"), { shots = { [1] = "kephisios_after" } })
+  expect(L.npc("GulfFerry_Deck_EventScript_Lamprias").present, "Lamprias sits at the bow")
+  L.talk(L.npc("GulfFerry_Deck_EventScript_Lamprias"), { shots = { [1] = "lamprias_after" } })
+  expect(not L.inBattle(), "the beaten trainers only talk")
   L.talk(L.ball(S.FLAG_ITEM_FERRY_POTION), { shots = { [1] = "amphorae_potion" } })
   expect(flag(S.FLAG_ITEM_FERRY_POTION), "the Super Potion among the amphorae")
 

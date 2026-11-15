@@ -881,3 +881,34 @@ shoulder, olives beyond it.
 **Pass 3** (in game). The landing scene reads: Alethea steps off, speaks, walks up the street; the
 ferry and Panopeus are on the quay behind. Every dead end pays: the quay's west end (Pearl), its east
 end (a Super Repel by the amphorae), the hollow plane (Honey).
+
+## The route standard (MAP_DESIGN §8)
+
+`python3 tools/ichor/map_audit.py Kirrha GulfFerry_Deck Aigion`, after merging rooms2's interiors:
+**0 hard shortfalls.** Kirrha (town): 3 item balls, 3 hidden items, 5 signs, surf and fishing
+tables. Aigion (town): 1 item ball, 2 hidden items, 5 signs, surf and fishing tables. The deck
+(interior, by its `_Deck` name): 2 trainers, 1 item ball, 1 hidden item, a fishing table. Its
+warnings are all "reach": the deck has no warp or connection (Panopeus's scripted warps are its
+only way in), so the audit's walker has nowhere to start; `act2_harbors.sh` walks to and uses every
+one of those objects. Kirrha's one edge warning is Route 9's placeholder layout on this branch.
+
+## Deviations from SCRIPT.md and BUILD.md
+
+- **Three tilesets, not one** (above): `kirrha`, `aigion`, `gulf_ferry`, one set of painters.
+- **The arrival** (beat 37A) plays on the road above the harbor, where Route 9 comes in, rather than
+  on the quay: the first entry is the setup, and from the hill the harbor, the pilgrims and the ferry
+  are all in view. Alethea then walks on down and waits on the quay.
+- **Aigion's Panopeus** asks the same question with the destination swapped ("Kirrha, across the
+  gulf"); the ferry's landing anecdote plays only on the first crossing.
+- **The Bronze Obol** at the pilgrims' gate is `ITEM_RELIC_COPPER`, the engine's Bronze Obol
+  (ENGINE_API §3); the crack it sits in is the rock beside the right-hand guard, the only cell at the
+  gate's foot a player can face.
+- **Lures added** for the user's "items as lures" direction, each at a dead end: Kirrha's Hyper
+  Potion (the shore path) and Net Ball (the beach's end), Aigion's Super Repel (the quay's east end).
+- **The altar** shows SCRIPT.md's line, then the engine's rite (which has its own Zeus line).
+- **The ferry** sets `FLAG_ICHOR_NO_RELICS` on arrival: the water round the boat is fishable, as Part 4
+  wants, and nobody surfs or flies off a boat in mid-gulf.
+- **Kirrha's decoy** is `FLAG_ICHOR_DECOY_KIRRHA` = `FLAG_ICHOR_THEOXENIA_START + 0x23`, defined beside
+  the bank's ranges in `flags.h`.
+- **The grove-keeper** wears `OBJ_EVENT_GFX_ICHOR_HEALER`: after a whiteout the game bows the respawn
+  NPC with `nurse_joy_bow`, which only the healer's animation table can do.
