@@ -1,0 +1,83 @@
+line: mask
+species:
+
+- dex: 63
+  concept: Theater mask
+  name: Prosomime
+  etymology: prosopon (Greek, face, the actor's mask) + mimos (Greek, mime, actor)
+  category: Two-Faced
+  types: [Psychic, Poison]
+  abilities: [Illusion]
+  hidden_ability: Cursed Body
+  base_stats: {hp: 70, atk: 50, def: 70, spa: 110, spd: 85, spe: 95}
+  ev_yield: {spa: 2}
+  exp_yield: 172
+  catch_rate: 45
+  gender: {genderless: true}
+  egg_groups: [Amorphous]
+  egg_cycles: 25
+  growth_rate: Medium Fast
+  height_m: 0.6
+  weight_kg: 1.5
+  myth: >-
+    Every play at the Dionysia was an offering to Dionysus, and its actors
+    wore masks. Thespis was said to be the first to step out of the chorus
+    and speak as someone else, his face smeared with wine lees before masks
+    were made (Horace, Ars Poetica 275–277; Diogenes Laertius 3.56).
+  expression: >-
+    A ghost wearing a mask with two faces, one laughing and one weeping. Its
+    Illusion is the first actor's trick: becoming someone else so completely
+    that the audience believes it.
+  art: >-
+    Small: it fills about 50×50 px. A violet smoke ghost in three-quarter view
+    facing left, wearing a carved stage mask with a dark, gaping stage mouth.
+    The mask's left half grins as comedy and its right half droops as tragedy
+    with one violet tear, carved curls crown it, and two pink ribbons trail from
+    its temples; below, the ghost curls away into a smoky tail. Marble-white
+    mask, terracotta cheek paint, wine-violet ghost and tear, Psychic-pink
+    ribbons, black-figure ink outline. Frame 2 bobs it in the air; the back
+    sprite shows the ghost from behind with the mask's carved rim, and the
+    follower turns its tragic face toward the player when idle.
+  shiny: The comic half turns sun-gold and the tragic half black-figure ink, like a painted vase.
+  dex_entry:
+    - One face laughs and the other weeps. It
+    - can wear the look of any Pokémon it has
+    - met, and plays the part so well that the
+    - audience forgets it is wearing a mask.
+  habitat: >-
+    Backstage in the skene of Thyrsa's amphitheater, in the evening and at
+    night; rare. A few of the prop masks on the skene's racks are really
+    Prosomime, and one attacks when the player examines it.
+  learnset:
+    level_up:
+      - [1, Astonish]
+      - [1, Smog]
+      - [1, Mimic]
+      - [5, Confusion]
+      - [9, Fake Tears]
+      - [13, Hypnosis]
+      - [17, Psybeam]
+      - [21, Clear Smog]
+      - [25, Encore]
+      - [29, Role Play]
+      - [33, Psyshock]
+      - [37, Sludge Bomb]
+      - [41, Nasty Plot]
+      - [45, Psychic]
+      - [49, Trick]
+      - [53, Perish Song]
+      - [58, Future Sight]
+      - [62, Sludge Wave]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Calm Mind, Psychic, Psyshock,
+      Psych Up, Shadow Ball, Dark Pulse, Sludge Bomb, Sludge Wave, Venoshock, Acid Spray,
+      Toxic Spikes, Gastro Acid, Will-O-Wisp, Thunder Wave, Taunt, Torment, Trick, Skill Swap,
+      Role Play, Magic Coat, Light Screen, Reflect, Safeguard, Ally Switch, Imprison, Nasty Plot,
+      Fake Tears, Trick Room, Expanding Force, Future Sight, Dream Eater, Hex, Pain Split, Spite,
+      Magic Room, Wonder Room, Gravity, Telekinesis, Embargo, Snatch, Uproar, Hyper Beam]
+    egg: [Teeter Dance, Curse, Memento, Grudge, Disable]
+  signature: >-
+    Illusion: it enters disguised as the last Pokémon in its party, and
+    Thespis always leads with it. Hypnosis and Perish Song let it stage a
+    tragedy whose ending everyone in the audience already knows.
+  new_move: null

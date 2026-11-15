@@ -1,0 +1,147 @@
+line: narthex
+species:
+
+- dex: 87
+  concept: Fennel sprout
+  name: Narthip
+  etymology: narthex (Greek, giant fennel) + pip
+  category: Fennel
+  types: [Grass]
+  abilities: [Flash Fire, Chlorophyll]
+  hidden_ability: Symbiosis
+  base_stats: {hp: 50, atk: 45, def: 50, spa: 65, spd: 55, spe: 45}
+  ev_yield: {spa: 1}
+  exp_yield: 60
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.5
+  weight_kg: 4.0
+  myth: >-
+    Prometheus hid fire in a hollow fennel stalk, the narthex, stole it from the
+    gods and gave it to mortals (Hesiod, Works and Days 47–52).
+  expression: >-
+    An unlit sprout with a hollow stem, made to carry a flame it doesn't have
+    yet.
+  art: >-
+    Small: it fills about 40×45 px. A fennel sprout in three-quarter view facing
+    left: a plump, bulb-shaped pale stalk for a body with a round face, big dark
+    eyes and a tiny nose, two feathery fronds for arms, and a long hollow neck
+    open at the top like a tiny chimney, crowned by a little umbel of yellow
+    buds. Limestone stalk, olive fronds, sun-gold buds, black-figure ink
+    outline. Frame 2 blinks and waves a frond; the follower hops along on its
+    root.
+  shiny: Its fronds turn rust-red and its buds turn white.
+  dex_entry:
+    - Its stalk is hollow all the way down. It
+    - loves warm, dry hillsides and turns its
+    - head to follow the sun, as if it were
+    - waiting to be lit.
+  habitat: >-
+    Uncommon by day on Kaldera's volcanic slopes. A rare one grows on
+    Kalliste's dry hillsides.
+  learnset:
+    level_up:
+      - [1, Absorb]
+      - [1, Growth]
+      - [4, Sweet Scent]
+      - [7, Leafage]
+      - [11, Mega Drain]
+      - [14, Worry Seed]
+      - [18, Magical Leaf]
+      - [22, Synthesis]
+      - [26, Giga Drain]
+      - [30, Sunny Day]
+      - [34, Energy Ball]
+      - [38, Aromatherapy]
+      - [42, Solar Beam]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sunny Day, Solar Beam,
+      Energy Ball, Giga Drain, Bullet Seed, Seed Bomb, Magical Leaf, Grass Knot, Grassy Terrain,
+      Grass Pledge, Leaf Storm, Worry Seed, Synthesis, Natural Gift, Helping Hand, Light Screen,
+      Safeguard, Weather Ball, Trailblaze, Flash, Endeavor]
+    egg: [Ingrain, Leech Seed, Ember, Nature Power, Aromatic Mist]
+  signature: >-
+    Flash Fire lets it catch a flame in its hollow stem before it can use one.
+    Symbiosis, its hidden ability, hands its own item to an ally: a gift.
+  new_move: null
+
+- dex: 88
+  concept: Fire-bearing fennel
+  name: Promethex
+  etymology: Prometheus (the Titan who stole fire) + narthex (Greek, giant fennel)
+  category: Firebearer
+  types: [Grass, Fire]
+  abilities: [Flash Fire, Chlorophyll]
+  hidden_ability: Symbiosis
+  base_stats: {hp: 75, atk: 60, def: 70, spa: 115, spd: 90, spe: 85}
+  ev_yield: {spa: 2}
+  exp_yield: 178
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 2.1
+  weight_kg: 32.0
+  myth: >-
+    For giving fire to mortals, Prometheus was chained to a crag, where an eagle
+    ate his liver each day and it grew back each night (Hesiod, Theogony
+    521–569). He was a Titan who chose humanity.
+  expression: >-
+    The fennel lit at last. It carries a Titan's gift and shares it, the
+    opposite of everything Team Titan wants.
+  art: >-
+    Large: it fills about 58×61 px. A fennel giant striding forward in
+    three-quarter view facing left, one frond-arm thrusting the stolen fire up
+    on a fennel torch. Its swollen limestone stem is split open at the middle on
+    a glowing ember, feathery olive fronds spread from it like arms and a
+    mantle, and a wide sun-gold umbel crowns its head above a small, steady
+    face. Olive fronds, a limestone stem, a sun-gold umbel, a terracotta ember
+    and a sun-gold flame with one orange accent, black-figure ink outline. Frame
+    2 flickers the torch flame; at night the follower's stem lights the ground
+    around it.
+  shiny: Its fronds turn rust-red and the ember in its stem glows blue.
+  dex_entry:
+    - An ember glows inside its hollow stem.
+    - Long ago one of its kind stole fire from
+    - the gods for people. It still shares its
+    - flame with anyone who is cold.
+  habitat: >-
+    Evolves from Narthip with a Fire Stone. It isn't found in the wild.
+  learnset:
+    level_up:
+      - [0, Incinerate]
+      - [1, Absorb]
+      - [1, Growth]
+      - [1, Sweet Scent]
+      - [1, Leafage]
+      - [1, Ember]
+      - [11, Mega Drain]
+      - [14, Worry Seed]
+      - [18, Magical Leaf]
+      - [22, Synthesis]
+      - [26, Giga Drain]
+      - [30, Sunny Day]
+      - [34, Flamethrower]
+      - [38, Energy Ball]
+      - [41, Aromatherapy]
+      - [44, Strength Sap]
+      - [48, Heat Wave]
+      - [52, Solar Beam]
+      - [57, Fire Blast]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sunny Day, Solar Beam,
+      Energy Ball, Giga Drain, Bullet Seed, Seed Bomb, Magical Leaf, Grass Knot, Grassy Terrain,
+      Grass Pledge, Leaf Storm, Worry Seed, Synthesis, Natural Gift, Helping Hand, Light Screen,
+      Safeguard, Weather Ball, Trailblaze, Flash, Endeavor, Flamethrower, Fire Blast, Overheat,
+      Will-O-Wisp, Heat Wave, Fire Spin, Flame Charge, Incinerate, Mystical Fire,
+      Burning Jealousy, Fire Pledge, Scorching Sands, Future Sight, Pollen Puff, Hyper Beam,
+      Giga Impact]
+    egg: []
+  signature: >-
+    A fast special Grass/Fire attacker. Strength Sap is the liver that grows
+    back, and Future Sight, by tutor, is Prometheus's forethought.
+  new_move: null

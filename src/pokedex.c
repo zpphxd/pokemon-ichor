@@ -4601,7 +4601,9 @@ bool16 HasAllHoennMons(void)
     for (i = 0; i < HOENN_DEX_COUNT - 1; i++)
     {
         j = HoennToNationalOrder(i + 1);
-        if (!(gSpeciesInfo[j].isMythical && !gSpeciesInfo[j].dexForceRequired) && !GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
+        // Ichor: look the species up by its dex number; Aethos's numbers don't match species IDs
+        u32 species = NationalPokedexNumToSpecies(j);
+        if (!(gSpeciesInfo[species].isMythical && !gSpeciesInfo[species].dexForceRequired) && !GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
             return FALSE;
     }
     return TRUE;

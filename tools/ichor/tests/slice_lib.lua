@@ -745,10 +745,17 @@ function L.sign(script)
   if #tiles == 0 then fail(string.format("map %d has no sign running %s", L.mapId(), script)) end
   return { tiles = tiles, x = tiles[1].x, y = tiles[1].y, what = script }
 end
+-- A hidden item's flag from its packed id (asm/macros/map.inc): a vanilla
+-- flag's offset from FLAG_HIDDEN_ITEMS_START, or 0x1000 on for Ichor's banks.
+function L.hiddenItemFlag(id)
+  if id >= 0x1000 then return 0x2000 + (id - 0x1000) end
+  return id + S.FLAG_HIDDEN_ITEMS_START
+end
+
 -- A hidden item, by its flag.
 function L.hidden(flag)
   for _, b in ipairs(L.mapEvents().bgs) do
-    if b.kind == S.BG_EVENT_HIDDEN_ITEM and ((b.union >> 11) & 0x1FFF) + S.FLAG_HIDDEN_ITEMS_START == flag then
+    if b.kind == S.BG_EVENT_HIDDEN_ITEM and L.hiddenItemFlag((b.union >> 11) & 0x1FFF) == flag then
       return { tiles = { { x = b.x, y = b.y } }, x = b.x, y = b.y, what = "hidden item" }
     end
   end

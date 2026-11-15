@@ -1,0 +1,84 @@
+line: scylla
+species:
+
+- dex: 135
+  concept: Six-headed snatcher
+  name: Hexylla
+  etymology: hex (Greek, six) + Skylla (Greek, Scylla)
+  category: Six-Necked
+  types: [Water, Dark]
+  abilities: [Strong Jaw, Intimidate]
+  hidden_ability: Moxie
+  base_stats: {hp: 80, atk: 115, def: 75, spa: 60, spd: 70, spe: 95}
+  ev_yield: {atk: 2}
+  exp_yield: 180
+  catch_rate: 45
+  gender: {female_pct: 87.5}
+  egg_groups: [Water 3, Field]
+  egg_cycles: 25
+  growth_rate: Medium Slow
+  height_m: 3.6
+  weight_kg: 140.0
+  myth: >-
+    Scylla was a nymph until Circe poisoned her bathing pool and turned her into
+    a monster (Ovid, Metamorphoses 14.1–74). She lives in a cave over the strait
+    with six long necks, each with a head and three rows of teeth, and yelps like
+    a newborn pup; she took six of Odysseus's men as he passed (Odyssey
+    12.85–100, 245–259).
+  expression: >-
+    The six-headed snatcher of the strait, and one half of a pair: it watches
+    Trybdis's whirlpool from across the water and catches whatever steers away
+    from it. Six heads means six bites, and it never takes fewer.
+  art: >-
+    Large: it fills about 62×61 px. A giant barnacle crag in three-quarter view
+    facing left, its slate wall plates split by glowing amber seams, a dark
+    barnacle hood with two amber eyes low on its front, and foam breaking at its
+    foot. From the crater at its crown six slate-teal hound necks arch out like
+    a fountain, two curving down in front of the crag, each ending in a
+    sea-hound head with a tall pointed ear-fin, open jaws with marble fangs and
+    an amber glow in its throat; the far heads fade to night-violet. Slate and
+    marble-gray crag, slate-teal necks, amber seams and eyes, marble foam over
+    Aegean-blue water, black-figure ink outline. Frame 2 snaps the front head's
+    jaws as the foam churns; the back sprite shows the necks fanned out over the
+    crag, and the follower's heads snap at passing birds.
+  shiny: The body turns cypress green and the heads turn marble white.
+  dex_entry:
+    - Its six heads yelp like newborn pups.
+    - Captains who fear Trybdis across the
+    - strait steer close to its cliff instead,
+    - and lose six sailors rather than all.
+  habitat: >-
+    The cliff caves on the Scylla side of the strait, on the post-game Odyssey
+    (uncommon, day and night). It lunges at the trireme as it passes; fish from
+    the deck near the cliff to find one.
+  learnset:
+    level_up:
+      - [1, Wrap]
+      - [1, Water Gun]
+      - [1, Leer]
+      - [5, Bite]
+      - [9, Aqua Jet]
+      - [13, Snatch]
+      - [17, Howl]
+      - [21, Beat Up]
+      - [25, Thief]
+      - [29, Crunch]
+      - [33, Liquidation]
+      - [37, Ice Fang]
+      - [41, Jaw Lock]
+      - [45, Sucker Punch]
+      - [49, Knock Off]
+      - [53, Psychic Fangs]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Surf, Waterfall,
+      Liquidation, Dive, Whirlpool, Rain Dance, Hydro Pump, Aqua Tail, Ice Fang, Fire Fang,
+      Thunder Fang, Psychic Fangs, Crunch, Throat Chop, Knock Off, Sucker Punch, Thief, Snarl, Taunt,
+      Torment, Payback, Foul Play, Lash Out, Brutal Swing, Dark Pulse, Ice Beam, Icy Wind,
+      Swords Dance, Poison Jab, Super Fang, Roar, Uproar, Hyper Voice, Scary Face, Body Slam, Covet,
+      Spite, Hyper Beam, Giga Impact]
+    egg: [Poison Fang, Pursuit, Aqua Ring, Clamp, Hyper Fang, Mirror Coat]
+  signature: >-
+    Strong Jaw powers every bite it knows, from Crunch and Jaw Lock to Fishious
+    Rend, which doubles when it strikes first. Snatch and Thief take what passes;
+    Beat Up is one bite per head.
+  new_move: null

@@ -1,0 +1,150 @@
+line: tripod
+species:
+
+- dex: 116
+  concept: Brazier
+  name: Pyrapod
+  etymology: pyr (Greek, fire) + pous, podos (Greek, foot)
+  category: Brazier
+  types: [Fire]
+  abilities: [Flash Fire, Forewarn]
+  hidden_ability: Magic Bounce
+  base_stats: {hp: 50, atk: 40, def: 80, spa: 75, spd: 60, spe: 25}
+  ev_yield: {def: 1}
+  exp_yield: 64
+  catch_rate: 120
+  gender: {genderless: true}
+  egg_groups: [Mineral]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.7
+  weight_kg: 40.0
+  myth: >-
+    When the Pythia refused Herakles an oracle, he seized her tripod to set up
+    an oracle of his own. Apollo fought him for it until Zeus parted them with
+    a thunderbolt, a favorite scene on vases (Apollodorus 2.6.2).
+  expression: >-
+    A plain three-legged bronze brazier that wanders the temple precinct on
+    its own. It is only a fire bowl for now, but the Pythia's tripod began as
+    one too, and it is always being picked up and carried off.
+  art: >-
+    Small: it fills about 34×38 px. A squat bronze brazier bowl on three bowed
+    legs with lion-paw feet, walking in three-quarter view facing left. Flames
+    lick up from the bowl, two round eyes glow from inside the fire, and ring
+    handles on each side stick out like ears. Sun-gold and terracotta bronze,
+    flames in sun-gold and terracotta, black-figure ink outline. The follower
+    toddles with a three-legged gait and sputters sparks.
+  shiny: Silver-gray iron instead of bronze, with Aegean-blue flames.
+  dex_entry:
+    - It wanders between the temple altars
+    - on three bronze legs, and pilgrims drop
+    - laurel leaves into its fire. It will
+    - not burn for anyone it dislikes.
+  habitat: >-
+    Rare at night by the oldest altar, at the foot of Delphoi's temple
+    precinct, at level 32. The Pythia's acolytes battle with them too.
+  learnset:
+    level_up:
+      - [1, Ember]
+      - [1, Smokescreen]
+      - [5, Confusion]
+      - [9, Fire Spin]
+      - [13, Will-O-Wisp]
+      - [17, Incinerate]
+      - [21, Psybeam]
+      - [25, Lava Plume]
+      - [29, Calm Mind]
+      - [33, Flamethrower]
+      - [37, Iron Defense]
+      - [41, Heat Wave]
+      - [45, Overheat]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Sunny Day, Flame Charge,
+      Flamethrower, Fire Blast, Heat Wave, Overheat, Will-O-Wisp, Fire Spin, Incinerate, Mystical Fire,
+      Burning Jealousy, Temper Flare, Scorching Sands, Iron Defense, Gyro Ball, Flash Cannon,
+      Heavy Slam, Rock Tomb, Rollout, Light Screen, Reflect, Safeguard, Calm Mind, Psych Up, Imprison]
+    egg: [Destiny Bond, Hypnosis, Clear Smog, Inferno, Stealth Rock, Heat Crash]
+  signature: >-
+    Forewarn names the foe's strongest move as it enters, an oracle before it
+    can speak. Smokescreen at level 1 is the laurel smoke of the temple.
+  new_move: null
+
+- dex: 117
+  concept: Oracle tripod
+  name: Mantipod
+  etymology: mantis (Greek, seer, prophet) + pous, podos (Greek, foot)
+  category: Oracle
+  types: [Fire, Psychic]
+  abilities: [Flash Fire, Forewarn]
+  hidden_ability: Magic Bounce
+  base_stats: {hp: 85, atk: 50, def: 100, spa: 120, spd: 105, spe: 45}
+  ev_yield: {spa: 2}
+  exp_yield: 245
+  catch_rate: 45
+  gender: {genderless: true}
+  egg_groups: [Mineral]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.8
+  weight_kg: 160.0
+  myth: >-
+    The Pythia sat on a bronze tripod over a cleft in Apollo's temple, breathed
+    the vapors that rose from it and spoke the god's answers (Diodorus 16.26).
+    Those answers were famous for meaning two things at once (Herodotus 1.53).
+  expression: >-
+    The brazier grown into the oracle seat itself: a tall tripod whose bowl
+    breathes laurel smoke and whose flames shape themselves into words. Like
+    the Pythia's answers, its words can always be read two ways.
+  art: >-
+    Large: it fills about 48×62 px. A tall bronze tripod in three-quarter view
+    facing left on three long lion-legged supports, with a deep bowl on top.
+    Laurel smoke curls up from the bowl into a veiled, face-like shape with two
+    glowing eyes, and a tongue of flame hangs from its mouth like a word half
+    spoken. A laurel wreath is tied around the bowl's rim, and a crack of light
+    glows on the ground beneath it, as if it stands over a chasm. Sun-gold and
+    terracotta bronze, marble-white smoke, olive laurel, sun-gold flame,
+    black-figure ink outline. The back sprite shows the smoke streaming up out
+    of the frame.
+  shiny: Silver iron with Aegean-blue flames and pale blue smoke.
+  dex_entry:
+    - Its flames shape themselves into words.
+    - Those who ask it a question always get
+    - an answer, and the answer is always
+    - true, though never the way they hoped.
+  habitat: >-
+    Evolves from Pyrapod at level 34. Uncommon in the temple precinct of
+    Delphoi, among the altars at night, at levels 48–52. Pythia Phemonoe's ace
+    at the Temple of Apollo, Delphoi.
+  learnset:
+    level_up:
+      - [0, Future Sight]
+      - [1, Ember]
+      - [1, Smokescreen]
+      - [1, Confusion]
+      - [1, Fire Spin]
+      - [13, Will-O-Wisp]
+      - [17, Incinerate]
+      - [21, Psybeam]
+      - [25, Lava Plume]
+      - [29, Calm Mind]
+      - [33, Flamethrower]
+      - [38, Extrasensory]
+      - [41, Iron Defense]
+      - [44, Mystical Fire]
+      - [48, Heat Wave]
+      - [52, Psychic]
+      - [56, Imprison]
+      - [60, Overheat]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Sunny Day, Flame Charge,
+      Flamethrower, Fire Blast, Heat Wave, Overheat, Will-O-Wisp, Fire Spin, Incinerate, Mystical Fire,
+      Burning Jealousy, Temper Flare, Scorching Sands, Iron Defense, Gyro Ball, Flash Cannon,
+      Heavy Slam, Rock Tomb, Rollout, Light Screen, Reflect, Safeguard, Calm Mind, Psych Up, Imprison,
+      Hyper Beam, Psychic, Psyshock, Future Sight, Expanding Force, Stored Power, Trick Room, Trick,
+      Skill Swap, Magic Room, Wonder Room, Shadow Ball, Solar Beam]
+    egg: []
+  signature: >-
+    It learns Future Sight on evolving: a prophecy that lands two turns later.
+    Forewarn reads the foe's best move, and Magic Bounce sends its tricks back
+    at it, like an oracle no one can fool.
+  new_move: null

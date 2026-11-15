@@ -1,0 +1,85 @@
+line: ladon
+species:
+
+- dex: 139
+  concept: Apple-guard serpent
+  name: Melodrakon
+  etymology: melon (Greek, apple) + drakon (Greek, serpent)
+  category: Apple Guard
+  types: [Dragon, Fairy]
+  abilities: [Intimidate, Shed Skin]
+  hidden_ability: Harvest
+  base_stats: {hp: 100, atk: 95, def: 105, spa: 80, spd: 95, spe: 30}
+  ev_yield: {def: 1, hp: 1}
+  exp_yield: 200
+  catch_rate: 30
+  gender: {female_pct: 50}
+  egg_groups: [Dragon, Grass]
+  egg_cycles: 35
+  growth_rate: Slow
+  height_m: 3.2
+  weight_kg: 214.0
+  myth: >-
+    Ladon was the serpent coiled around the tree of golden apples in the garden
+    of the Hesperides, the apples Gaia gave Hera as a wedding gift. He had a
+    hundred heads and spoke in many voices, and Herakles had to get past him for
+    his eleventh Labor (Hesiod, Theogony 333–335; Apollodorus 2.5.11).
+  expression: >-
+    A guardian that has grown into the thing it guards: its coils are the
+    tree's trunk, and the golden apples hang from its scales. In myth it is the
+    Hydra's sibling, and Hera's Hierophant keeps both.
+  art: >-
+    Large: it fills about 62×61 px. A serpent grown into the tree it guards, in
+    three-quarter view facing left: its gold coils root in a ring on the ground,
+    its body twists up into a braided bark trunk, and its hood spreads into a
+    round canopy of olive leaf-scales on gold ribs, hung with golden apples. Its
+    serpent head rears from the top left of the canopy with a pink eye and a
+    flicking tongue, and small hissing heads peer out among the leaves. Sun-gold
+    scales with a terracotta belly, umber bark, olive and cypress leaves,
+    sun-gold apples, a soft pink Fairy accent in the eyes, black-figure ink
+    outline. Frame 2 lifts the head and flicks the tongue; the back sprite shows
+    the canopy's ribbed hood from behind, and the follower slithers with one
+    apple balanced on its head.
+  shiny: The scales turn silver-white and the apples turn pale Aegean blue.
+  dex_entry:
+    - It coils around a tree of golden apples.
+    - A hundred voices hiss from its scales at
+    - once, so no thief can slip by unheard.
+    - The apples it guards never run out.
+  habitat: >-
+    The garden of the Hesperides at the western edge of the world, reached in
+    the post-game Labors (the eleventh). One guards the tree as a static
+    encounter at dusk, and only one. Olympias, the Serpent Queen of the
+    Pantheon, keeps another.
+  learnset:
+    level_up:
+      - [1, Wrap]
+      - [1, Glare]
+      - [1, Fairy Wind]
+      - [5, Twister]
+      - [9, Bite]
+      - [13, Breaking Swipe]
+      - [17, Ingrain]
+      - [21, Draining Kiss]
+      - [25, Coil]
+      - [29, Dragon Tail]
+      - [33, Grav Apple]
+      - [37, Play Rough]
+      - [41, Recycle]
+      - [45, Dragon Rush]
+      - [49, Moonblast]
+      - [53, Hyper Voice]
+      - [57, Outrage]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Dragon Tail,
+      Dragon Pulse, Outrage, Draco Meteor, Dragon Dance, Breaking Swipe, Scale Shot, Play Rough,
+      Dazzling Gleam, Misty Terrain, Draining Kiss, Charm, Seed Bomb, Giga Drain, Energy Ball,
+      Trailblaze, Grassy Terrain, Iron Tail, Aqua Tail, Earthquake, Body Slam, Thunder Wave,
+      Safeguard, Light Screen, Reflect, Rain Dance, Sunny Day, Taunt, Fling, Recycle, Natural Gift,
+      Flamethrower, Fire Blast, Hyper Voice, Scary Face, Hyper Beam, Giga Impact]
+    egg: [Sweet Scent, Leech Seed, Aromatherapy, Wish, Haze]
+  signature: >-
+    A guard that won't move: Ingrain roots it to the tree, Coil and Glare hold
+    the gate. With Harvest and Recycle its berries keep coming back like the
+    golden apples, and Grav Apple drops one on the thief.
+  new_move: null

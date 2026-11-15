@@ -1,0 +1,217 @@
+line: hippocamp
+species:
+
+- dex: 7
+  concept: Sea foal
+  name: Hipling
+  etymology: hippos (Greek, horse) + -ling
+  category: Sea Foal
+  types: [Water]
+  abilities: [Torrent]
+  hidden_ability: Swift Swim
+  base_stats: {hp: 50, atk: 56, def: 50, spa: 45, spd: 49, spe: 60}
+  ev_yield: {spe: 1}
+  exp_yield: 62
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Water 1, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.6
+  weight_kg: 14.0
+  myth: >-
+    Poseidon yoked his bronze-hoofed, golden-maned horses and drove them over
+    the waves, and the sea parted for him (Homer, Iliad 13.23–30). Greek
+    painters gave his horses fish tails: the hippokampoi.
+  expression: >-
+    A foal that hasn't decided yet whether it's a horse or a fish. It kicks
+    through the shallows on two front hooves and steers with a curled tail.
+  art: >-
+    Small: it fills about 34×36 px. A big-eyed foal in three-quarter view facing
+    left, a colt in front on two spindly forelegs and a curled fish tail behind
+    that props it up like a seahorse's. A short, frilly fin mane and finned
+    tufts at the fetlocks. Aegean-blue hide with a limestone-pale muzzle and
+    belly, a sun-gold mane like the golden manes of Poseidon's horses, marble
+    tail fins, black-figure ink outline. The follower hops along on its tail.
+  shiny: Its hide pales to wet-sand limestone and its mane turns Aegean blue.
+  dex_entry:
+    - It plays in tide pools, kicking up spray
+    - with its front hooves. Fishermen say a
+    - foal that splashes your boat brings you
+    - a calm sea home.
+  habitat: >-
+    Given by Professor Daphne at the Akademia grove, Elaia. It isn't found in
+    the wild until the post-game Sanctuary of Firsts.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Tail Whip]
+      - [4, Water Gun]
+      - [7, Mud-Slap]
+      - [10, Aqua Jet]
+      - [13, Double Kick]
+      - [16, Bulldoze]
+      - [19, Rain Dance]
+      - [22, Aqua Tail]
+      - [25, Take Down]
+      - [28, Aqua Ring]
+      - [31, Bounce]
+      - [34, Liquidation]
+      - [37, Wave Crash]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Rain Dance, Snowscape,
+      Weather Ball, Water Pulse, Surf, Waterfall, Dive, Whirlpool, Chilling Water, Scald,
+      Liquidation, Flip Turn, Water Pledge, Aqua Tail, Bounce, Muddy Water, Mud Shot, Mud-Slap,
+      Bulldoze, Dig, Icy Wind, Ice Beam, Haze, Body Slam, Take Down, Double-Edge, Helping Hand,
+      Agility, Endeavor, Rock Smash, Strength, Trailblaze]
+    egg: [Mist, Refresh, Counter, Water Sport, Ancient Power, Mirror Coat]
+  signature: >-
+    Mud-Slap at level 7 hints at the Ground type to come, and Double Kick gives
+    the foal a real horse's kick.
+  new_move: null
+
+- dex: 8
+  concept: Hippocamp
+  name: Thalamare
+  etymology: thalassa (Greek, sea) + mare (horse; also Latin for sea)
+  category: Hippocamp
+  types: [Water]
+  abilities: [Torrent]
+  hidden_ability: Swift Swim
+  base_stats: {hp: 65, atk: 72, def: 65, spa: 60, spd: 63, spe: 80}
+  ev_yield: {atk: 1, spe: 1}
+  exp_yield: 142
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Water 1, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.5
+  weight_kg: 68.0
+  myth: >-
+    The Homeric Hymn to Poseidon gives him two honors: tamer of horses and
+    savior of ships (Homeric Hymn 22). His hippokampoi, horse in front and fish
+    behind, drew his chariot through the sea.
+  expression: >-
+    The foal grown sleek: a true hippocamp, all horse in front and all fish
+    behind, built to pull a god's chariot through open water.
+  art: >-
+    Medium: it fills about 50×46 px. A sleek sea-horse in three-quarter view
+    facing left, rearing on webbed forehooves, with a long finned fish tail
+    coiling behind it in an S. A flowing fin mane runs from brow to withers, and
+    its ears have become small fins. Aegean-blue hide shading to marble on the
+    belly, a sun-gold fin mane, black-figure ink outline. The back sprite shows
+    the tail fin spread wide.
+  shiny: Pale marble hide with a deep Aegean-blue mane.
+  dex_entry:
+    - It can outswim a trireme at full oar.
+    - Islanders once harnessed them in pairs
+    - to carry messages across the sea, and
+    - they never lost one.
+  habitat: Evolves from Hipling at level 16.
+  learnset:
+    level_up:
+      - [0, Flip Turn]
+      - [1, Tackle]
+      - [1, Tail Whip]
+      - [1, Water Gun]
+      - [1, Mud-Slap]
+      - [10, Aqua Jet]
+      - [13, Double Kick]
+      - [16, Bulldoze]
+      - [20, Rain Dance]
+      - [24, Aqua Tail]
+      - [28, Take Down]
+      - [32, Aqua Ring]
+      - [36, Bounce]
+      - [40, Liquidation]
+      - [44, Agility]
+      - [48, Wave Crash]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Rain Dance, Snowscape,
+      Weather Ball, Water Pulse, Surf, Waterfall, Dive, Whirlpool, Chilling Water, Scald,
+      Liquidation, Flip Turn, Water Pledge, Aqua Tail, Bounce, Muddy Water, Mud Shot, Mud-Slap,
+      Bulldoze, Dig, Icy Wind, Ice Beam, Haze, Body Slam, Take Down, Double-Edge, Helping Hand,
+      Agility, Endeavor, Rock Smash, Strength, Trailblaze, Stomping Tantrum, High Horsepower,
+      Rock Tomb]
+    egg: []
+  signature: >-
+    It learns Flip Turn on evolving and darts in and out like a chariot horse.
+    It's the fastest stage of the line.
+  new_move: null
+
+- dex: 9
+  concept: Earth-shaker steed
+  name: Seismare
+  etymology: seismos (Greek, earthquake) + mare (horse)
+  category: Earthshaker
+  types: [Water, Ground]
+  abilities: [Torrent]
+  hidden_ability: Swift Swim
+  base_stats: {hp: 92, atk: 112, def: 92, spa: 78, spd: 82, spe: 72}
+  ev_yield: {atk: 2, hp: 1}
+  exp_yield: 265
+  catch_rate: 45
+  gender: {female_pct: 12.5}
+  egg_groups: [Water 1, Field]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 2.1
+  weight_kg: 240.0
+  myth: >-
+    Poseidon was Ennosigaios, the Earth-shaker, who shook the boundless earth
+    and the mountain peaks (Homer, Iliad 20.57–58). Virgil hails him as the god
+    whose great trident struck the earth and made it pour out the first horse
+    (Georgics 1.12–14).
+  expression: >-
+    The horse that sprang from the struck rock. Its hooves shake the seabed,
+    and its mane is a wave that never finishes breaking.
+  art: >-
+    Large: it fills about 60×58 px. A powerful steed rearing in three-quarter
+    view facing left, its fish tail now thick and muscled, ending in a broad
+    split fin planted on cracked stone. Its heavy forehooves are raised to
+    strike, and its mane curls forward like a breaking wave with foam at the
+    crest. Aegean-blue hide, limestone and terracotta cracks running up the
+    hooves and shins, marble foam and a sun-gold edge on the mane, black-figure
+    ink outline. The follower stamps, raising puffs of dust where it steps.
+  shiny: Sandy limestone hide with a deep Aegean-blue mane.
+  dex_entry:
+    - When it stamps on the seabed, whole
+    - islands tremble. Old sailors pour a cup
+    - of wine into the sea to calm it before
+    - they cross deep water.
+  habitat: Evolves from Thalamare at level 36.
+  learnset:
+    level_up:
+      - [0, High Horsepower]
+      - [1, Flip Turn]
+      - [1, Tackle]
+      - [1, Tail Whip]
+      - [1, Water Gun]
+      - [1, Mud-Slap]
+      - [10, Aqua Jet]
+      - [13, Double Kick]
+      - [16, Bulldoze]
+      - [20, Rain Dance]
+      - [24, Aqua Tail]
+      - [28, Take Down]
+      - [32, Aqua Ring]
+      - [38, Bounce]
+      - [42, Liquidation]
+      - [46, Agility]
+      - [50, Earthquake]
+      - [54, Wave Crash]
+      - [60, Fissure]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Rain Dance, Snowscape,
+      Weather Ball, Water Pulse, Surf, Waterfall, Dive, Whirlpool, Chilling Water, Scald,
+      Liquidation, Flip Turn, Water Pledge, Aqua Tail, Bounce, Muddy Water, Mud Shot, Mud-Slap,
+      Bulldoze, Dig, Icy Wind, Ice Beam, Haze, Body Slam, Take Down, Double-Edge, Helping Hand,
+      Agility, Endeavor, Rock Smash, Strength, Trailblaze, Stomping Tantrum, High Horsepower,
+      Rock Tomb, Hydro Cannon, Hyper Beam, Giga Impact, Earthquake, Earth Power, Hydro Pump,
+      Stone Edge, Heavy Slam, Rock Slide, Sandstorm]
+    egg: []
+  signature: >-
+    High Horsepower on evolving is the struck rock and the first horse. Fissure,
+    learned last, is the Earth-shaker at full strength.
+  new_move: null

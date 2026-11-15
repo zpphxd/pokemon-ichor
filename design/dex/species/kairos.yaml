@@ -1,0 +1,89 @@
+line: kairos
+species:
+
+- dex: 147
+  concept: The Moment
+  name: Kairazor
+  etymology: kairos (Greek, the right moment) + razor
+  category: Moment
+  types: [Flying, Psychic]
+  abilities: [Gale Wings]
+  hidden_ability: Quick Draw
+  base_stats: {hp: 85, atk: 130, def: 80, spa: 120, spd: 80, spe: 185}
+  ev_yield: {spe: 3}
+  exp_yield: 340
+  catch_rate: 3
+  gender: {genderless: true}
+  egg_groups: [Undiscovered]
+  egg_cycles: 120
+  growth_rate: Slow
+  base_friendship: 0
+  height_m: 1.6
+  weight_kg: 38.0
+  myth: >-
+    Kairos is the fleeting right moment. Lysippos's statue showed him as a
+    winged youth on tiptoe, holding a razor, with a long lock of hair in front
+    and his head bald behind: seize him as he comes, for once he is past no
+    one can catch him (Posidippus, Greek Anthology 16.275). Pausanias saw an
+    altar of Kairos at the entrance to the stadium at Olympia (5.14.9).
+  expression: >-
+    The answer to Kronolith: not endless time but the one moment that matters.
+    Its Flying type is immune to Kronolith's Ground attacks, and its priority
+    moves still go first under Trick Room, so the Frozen Hour can't hold it.
+  art: >-
+    Large: it fills about 61×55 px. A long-necked sky creature hovering in
+    three-quarter view facing left over a faint violet ring of time, Lugia's
+    build in Dialga's armor. One great swept wing rises from its back, an Aegean
+    arm plate leading into four sickle-feathers with gold cutting edges, and
+    Aegean plates traced with violet lines sit on its neck and shoulders. A dark
+    mask frames a regal violet eye, a pink third eye glows on its brow, and a
+    gold forelock curls forward over a bare, sleek crown; a violet diamond gem
+    sits in its deep breast, and its tail ends in a gold beam hung with two
+    balance pans. Marble and pale lilac body, Aegean-blue plates and mask,
+    sun-gold forelock and edges, a psychic-violet glow, black-figure ink
+    outline. Frame 2 lifts the wing and bobs the head; the back sprite shows the
+    bare back of its head, and the follower flickers a tile ahead of you instead
+    of walking.
+  shiny: The forelock turns silver, and its Aegean plates and mask turn sun-gold.
+  dex_entry:
+    - Its great wing is edged like a razor.
+    - Grab its forelock as it comes, and it is
+    - yours. Once it has passed, there is
+    - nothing behind to hold, and it is gone.
+  habitat: >-
+    The altar of Kairos at the stadium entrance, Olympia, after you win the
+    Olympiad (post-game). Suggested: it appears only in the first minute of
+    each hour on the day-and-night clock, and flies off if you don't speak to
+    it in time (static, level 70, one only).
+  learnset:
+    level_up:
+      - [1, Quick Attack]
+      - [1, Gust]
+      - [1, Confusion]
+      - [1, Fake Out]
+      - [8, Aerial Ace]
+      - [16, Feint]
+      - [24, Psycho Cut]
+      - [32, Air Slash]
+      - [40, After You]
+      - [48, Esper Wing]
+      - [54, Tailwind]
+      - [60, Me First]
+      - [66, Brave Bird]
+      - [70, Extreme Speed]
+      - [78, Psychic]
+      - [86, Quash]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Fly, Brave Bird, Air Slash,
+      Aerial Ace, Acrobatics, Dual Wingbeat, Hurricane, Tailwind, Roost, U-turn, Defog, Steel Wing,
+      Psychic, Psyshock, Psycho Cut, Zen Headbutt, Psychic Terrain, Expanding Force, Calm Mind,
+      Agility, Baton Pass, Ally Switch, Trick, Skill Swap, Reflect, Light Screen, Safeguard, Swift,
+      Sucker Punch, Knock Off, X-Scissor, Swords Dance, Close Combat, Bounce, Shadow Ball, Heat Wave,
+      Thunder Wave, Helping Hand, Laser Focus, Encore, Taunt, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    All about acting first. Gale Wings gives its Flying moves priority only at
+    full HP, so its chance is the first hit; Quick Draw sometimes lets it move
+    first anyway. Fake Out works only on its first turn, Me First steals the
+    foe's own move, and After You and Quash decide who gets the next moment.
+  new_move: null

@@ -1,0 +1,147 @@
+line: boreas
+species:
+
+- dex: 125
+  concept: Cold gust
+  name: Kryopuff
+  etymology: kryos (Greek, icy cold) + puff
+  category: Cold Gust
+  types: [Ice]
+  abilities: [Ice Body, Wind Rider]
+  hidden_ability: Snow Warning
+  base_stats: {hp: 45, atk: 50, def: 45, spa: 70, spd: 50, spe: 75}
+  ev_yield: {spe: 1}
+  exp_yield: 66
+  catch_rate: 120
+  gender: {female_pct: 50}
+  egg_groups: [Amorphous, Flying]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.4
+  weight_kg: 0.8
+  myth: >-
+    Boreas, the winged North Wind, courted the Athenian princess Oreithyia
+    with words and got nowhere. Then he remembered he was a wind, and carried
+    her off in a whirlwind (Ovid, Metamorphoses 6).
+  expression: >-
+    A small, cold gust with a puffed-cheek face, like the bearded wind faces
+    carved on old towers. It blows hard and gives up fast.
+  art: >-
+    Small: it fills about 47×30 px with its breath. A round puff of cold cloud
+    in three-quarter view facing left, with a little face blowing a long stream
+    of frost through a round mouth. A curl of frost on its brow like a cowlick
+    and stubby, feathery wing-wisps on its sides. Marble-white and pale
+    Aegean-blue cloud, a darker Aegean-blue frost stream and cowlick, dusky
+    purple wing-wisps as the accent, black-figure ink outline. Frame 2 stretches
+    the frost stream; the follower bobs along with its breath streaming behind
+    it.
+  shiny: Limestone-tan cloud with sun-gold frost.
+  dex_entry:
+    - It puffs out its cheeks and blows until
+    - frost forms on everything nearby. When
+    - it runs out of breath, it shrinks to
+    - the size of a sigh and drifts away.
+  habitat: >-
+    Rare. When a weather omen brings snow to the Ascent, a few drift onto its
+    lowest slopes, by day and night, at level 38.
+  learnset:
+    level_up:
+      - [1, Gust]
+      - [1, Powder Snow]
+      - [4, Mist]
+      - [8, Icy Wind]
+      - [12, Twister]
+      - [16, Haze]
+      - [20, Air Cutter]
+      - [24, Frost Breath]
+      - [28, Whirlwind]
+      - [32, Freeze-Dry]
+      - [36, Air Slash]
+      - [40, Ice Beam]
+      - [44, Blizzard]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Icy Wind, Ice Beam,
+      Blizzard, Frost Breath, Hail, Snowscape, Weather Ball, Rain Dance, Chilling Water, Air Cutter,
+      Swift, Tailwind, Defog, Whirlwind, Haze, Twister, Uproar, Taunt, Light Screen, Reflect]
+    egg: [Ominous Wind, Disable, Spite, Fake Out, Mean Look]
+  signature: >-
+    Freeze-Dry at 32 is super effective on Water types: the wind that wrecks
+    ships. Wind Rider makes other wind moves feed it instead of hurting it.
+  new_move: null
+
+- dex: 126
+  concept: North Wind
+  name: Borapteryx
+  etymology: Boreas (Greek, the North Wind) + pteryx (Greek, wing)
+  category: North Wind
+  types: [Ice, Flying]
+  abilities: [Ice Body, Wind Rider]
+  hidden_ability: Snow Warning
+  base_stats: {hp: 80, atk: 70, def: 70, spa: 110, spd: 75, spe: 100}
+  ev_yield: {spa: 1, spe: 1}
+  exp_yield: 240
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Amorphous, Flying]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 2.1
+  weight_kg: 48.0
+  myth: >-
+    Boreas carried off Oreithyia and so became Athens's kinsman by marriage.
+    When the Persian fleet came, the Athenians prayed to him, and a gale
+    wrecked hundreds of ships off Cape Artemision (Herodotus 7.189).
+  expression: >-
+    The North Wind as a creature: a beaked, winged wind-dragon with a ruff of
+    frost for a beard and great dusky purple wings, its body trailing off into a
+    gale. It keeps faith with those who pray to it and wrecks those who don't.
+  art: >-
+    Large: it fills about 62×59 px. A winged wind spirit in three-quarter view
+    facing left: a beaked bird-dragon head with a crest of frost feathers and a
+    ruff of icicles like a frozen beard, its open beak blowing a blast of snow.
+    A great dusky purple wing spreads behind it, and its body trails away into
+    two curling tails of gale, like the snake-tailed Boreas on old carved
+    chests. Marble-white and pale Aegean-blue head, ruff and gale, a deep
+    Aegean-blue beak, dusky purple wing as the accent, black-figure ink outline.
+    Frame 2 beats the wing as the snow blast billows; the follower is just the
+    head and a curl of wind.
+  shiny: Sun-gold wings and a limestone-gray crest and ruff.
+  dex_entry:
+    - Its beard is frost and its wings are
+    - storm clouds. Sailors who forget to
+    - honor it before winter sets in have
+    - been known to lose whole fleets.
+  habitat: >-
+    Evolves from Kryopuff at level 40. Uncommon on the windy upper slopes of
+    the Ascent and the peaks of Olympus, by day and night, at levels 52–58.
+    Most common in a snowstorm.
+  learnset:
+    level_up:
+      - [0, Tailwind]
+      - [1, Gust]
+      - [1, Powder Snow]
+      - [1, Mist]
+      - [1, Icy Wind]
+      - [12, Twister]
+      - [16, Haze]
+      - [20, Air Cutter]
+      - [24, Frost Breath]
+      - [28, Whirlwind]
+      - [32, Freeze-Dry]
+      - [36, Air Slash]
+      - [42, Ice Beam]
+      - [46, Snowscape]
+      - [50, Hurricane]
+      - [54, Blizzard]
+      - [58, Sheer Cold]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Icy Wind, Ice Beam,
+      Blizzard, Frost Breath, Hail, Snowscape, Weather Ball, Rain Dance, Chilling Water, Air Cutter,
+      Swift, Tailwind, Defog, Whirlwind, Haze, Twister, Uproar, Taunt, Light Screen, Reflect,
+      Hurricane, Air Slash, Fly, Roost, Sky Attack, Aurora Veil, Hyper Beam]
+    egg: []
+  signature: >-
+    It learns Tailwind on evolving, and Freeze-Dry still sinks Water types.
+    With Snow Warning it brings its own storm, and in snow its Blizzard never
+    misses.
+  new_move: null

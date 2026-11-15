@@ -1,0 +1,1338 @@
+# Aethos regional dex: the Gate 1 plan.
+#
+# One entry per evolution line, in dex order. Dex numbers are assigned by
+# tools/dex/plan.py from the order below; don't write them by hand.
+# Concept labels are working descriptions. Real names, stats and Pokédex
+# entries come at Gate 2, after the user approves this plan.
+#
+# evo describes how a member evolves into the NEXT member of its line,
+# or into member `to` (0-based index) when it branches.
+
+lines:
+
+# ── Starters (given at the Akademia grove, Elaia) ─────────────────────────
+
+- id: laurel
+  section: Starters
+  roles: [starter]
+  myth: >-
+    Daphne, a river nymph, fled Apollo after Eros struck him with a gold arrow
+    and her with a lead one. Ovid has her run "as the deer runs from the lion".
+    She prayed to be changed and became the laurel, Apollo's tree, whose
+    wreaths crown every victor (Ovid, Metamorphoses 1).
+  design: >-
+    A fawn with laurel-leaf ears, then a doe-nymph running on two legs with
+    bark creeping up her shins, then the moment of change: rooted legs,
+    branching arms, and a living laurel crown like the one the player earns.
+  habitat: Akademia grove, Elaia (starter). The other two return at the post-game Sanctuary of Firsts.
+  members:
+    - {concept: Laurel fawn, types: [Grass], evo: {method: level, level: 16}}
+    - {concept: Laurel doe, types: [Grass], evo: {method: level, level: 34}}
+    - {concept: Laurel dryad, types: [Grass, Fairy]}
+
+- id: cerberus
+  roles: [starter]
+  myth: >-
+    Kerberos, the hound at the gate of Hades, and his two-headed brother
+    Orthros (Hesiod, Theogony). Herakles dragged him up at Cape Tainaron for his
+    twelfth Labor. The Phlegethon, the underworld's river of fire, runs past
+    his gate.
+  design: >-
+    A pup with one head awake and two sleepy heads tucked into its ruff. One
+    more head wakes at each stage: two at the middle stage (Orthros), three at
+    the last, with a Phlegethon-fire mane and a serpent tail. Each head learns
+    one fang: Fire Fang, Thunder Fang, Ice Fang.
+  habitat: Akademia grove, Elaia (starter).
+  members:
+    - {concept: Hearth pup, types: [Fire], evo: {method: level, level: 16}}
+    - {concept: Two-headed hound, types: [Fire], evo: {method: level, level: 36}}
+    - {concept: Three-headed gatehound, types: [Fire, Ghost]}
+
+- id: hippocamp
+  roles: [starter]
+  myth: >-
+    Poseidon Hippios, lord of horses, drove a chariot of hippocampi, horses with
+    fish tails. He was Ennosigaios, the Earth-shaker, god of earthquakes as well
+    as the sea, and in one story he struck a rock and made the first horse.
+  design: >-
+    A foal with a fin mane and a curled fish tail that splashes in tide pools,
+    then a sleek sea-horse, then a powerful steed whose hooves crack the seabed,
+    with a mane like a breaking wave.
+  habitat: Akademia grove, Elaia (starter).
+  members:
+    - {concept: Sea foal, types: [Water], evo: {method: level, level: 16}}
+    - {concept: Hippocamp, types: [Water], evo: {method: level, level: 36}}
+    - {concept: Earth-shaker steed, types: [Water, Ground]}
+
+# ── Kalliste Isle: Route 1, Kronion Hill, Akti ────────────────────────────
+
+- id: hoopoe
+  section: Kalliste Isle
+  roles: [route bird]
+  myth: >-
+    In Aristophanes's Birds, Tereus the hoopoe (Epops) gathers the birds for
+    the schemer Peisetaerus, who has them build Cloudcuckooland, a city in the
+    clouds that cuts the gods off from mortals' offerings.
+  design: >-
+    The hoopoe's fan crest grows into a crown. The final stage is the self-made
+    king of birds, and its nests are woven from cloud.
+  habitat: Route 1 and Elaia's olive groves (chick); mainland roads (hoopoe); the Ascent's cliffs (king).
+  members:
+    - {concept: Hoopoe chick, types: [Normal, Flying], evo: {method: level, level: 14}}
+    - {concept: Hoopoe, types: [Normal, Flying], evo: {method: level, level: 32}}
+    - {concept: King of birds, types: [Normal, Flying]}
+
+- id: weasel
+  roles: [common mammal]
+  myth: >-
+    Galanthis, Alkmene's servant, tricked the birth goddess Eileithyia into
+    letting Herakles be born, then laughed at her. She was turned into a weasel,
+    and Hecate took her in as an attendant (Ovid, Metamorphoses 9).
+  design: >-
+    A quick weasel whose face markings make a permanent grin. It carries what
+    it finds in its mouth. The grown form wears Hecate's dark collar.
+  habitat: Everywhere on Kalliste and the mainland farms; most common at night.
+  members:
+    - {concept: Weasel kit, types: [Normal], evo: {method: level, level: 20}}
+    - {concept: Laughing weasel, types: [Normal]}
+
+- id: psyche
+  roles: [early bug]
+  myth: >-
+    The Greek psyche means both "soul" and "butterfly", and the Psychic type
+    takes its name from it. In the tale of Psyche and Eros, a mortal girl
+    survives Aphrodite's trials and is made immortal with butterfly wings.
+  design: >-
+    A caterpillar, then a chrysalis shaped like a veiled bride, then a butterfly
+    whose wings are a soft veil with eye-spots. Fast to evolve, like every
+    early-route bug.
+  habitat: Elaia's olive groves and Route 1, mornings.
+  members:
+    - {concept: Soul caterpillar, types: [Bug], evo: {method: level, level: 7}}
+    - {concept: Veiled chrysalis, types: [Bug], evo: {method: level, level: 10}}
+    - {concept: Psyche butterfly, types: [Bug, Fairy]}
+
+- id: olive
+  roles: [early grass, intro Pokémon]
+  myth: >-
+    Athena won Athens with the gift of the olive. When the Persians burned her
+    sacred olive on the Akropolis, it put out a new shoot a cubit long the next
+    day (Herodotus 8.55). Herakles cut his club from wild olive.
+  design: >-
+    A little olive cutting with two leaves (olives grow from cuttings), then a
+    sapling, then a gnarled ancient trunk whose arm-branches are heavy as
+    Herakles's club. It regrows what it loses.
+  habitat: Elaia's olive groves and the Akademia grove; Astyra's Akropolis (rare).
+  notes: Could replace Smoliv as Daphne's intro Pokémon.
+  members:
+    - {concept: Olive cutting, types: [Grass], evo: {method: level, level: 17}}
+    - {concept: Olive sapling, types: [Grass], evo: {method: stone, item: Leaf Stone}}
+    - {concept: Sacred olive, types: [Grass, Fighting]}
+
+- id: myrmidon
+  roles: [early bug]
+  myth: >-
+    When plague emptied Aegina, Zeus turned its ants into men for King Aeacus.
+    They were the Myrmidons, from myrmex, "ant", and they followed Achilles to
+    Troy (Ovid, Metamorphoses 7).
+  design: >-
+    A worker ant, then a soldier ant in bronze, carrying a round hoplite shield.
+  habitat: Ant mounds on Route 1 and Kronion Hill; the Lakonian battle school (soldier).
+  members:
+    - {concept: Worker ant, types: [Bug], evo: {method: level, level: 22}}
+    - {concept: Myrmidon, types: [Bug, Fighting]}
+
+- id: stoneborn
+  roles: [early rock, Team Titan]
+  myth: >-
+    After Zeus's flood, Deucalion and Pyrrha were told to throw "their mother's
+    bones" over their shoulders. They threw the stones of Mother Earth, and the
+    stones became people. Greek puns on laas (stone) and laos (people).
+  design: >-
+    A pebble with a face, then a walking cairn, then a stone person mid-stride,
+    looking back over its shoulder.
+  habitat: Kronion Hill's ruins and island caves. Team Titan grunts carry them.
+  members:
+    - {concept: Thrown pebble, types: [Rock, Ground], evo: {method: level, level: 25}}
+    - {concept: Cairn, types: [Rock, Ground], evo: {method: trade}}
+    - {concept: Stoneborn, types: [Rock, Fighting]}
+
+- id: amalthea
+  roles: [mascot, baby]
+  myth: >-
+    Infant Zeus was hidden from Kronos in a Cretan cave and nursed by the goat
+    Amalthea. Zeus broke off one of her horns, which became the cornucopia, and
+    her hide became the aegis, which raised thunderstorms when he shook it.
+  design: >-
+    A kid with crackling static fleece, then a goat with stubby horns that
+    spark, then a storm-goat with one broken horn spilling fruit and a
+    thundercloud fleece.
+  habitat: Kronion Hill (goat, rare) and the mainland hills; the kid hatches from eggs; the storm-goat lives in the Diktaean cave on Knossa.
+  notes: Its story is the Kronos story in miniature, a nurse hiding a child from him.
+  members:
+    - {concept: Storm kid, types: [Electric], baby: true, evo: {method: friendship}}
+    - {concept: Spark goat, types: [Electric], evo: {method: stone, item: Thunder Stone}}
+    - {concept: Storm-goat, types: [Electric, Fairy]}
+
+- id: halcyon
+  roles: [coastal bird]
+  myth: >-
+    Alcyone and Ceyx were turned into kingfishers. Each winter her father Aeolus
+    calms the winds for seven days while she nests on the sea: the halcyon days
+    (Ovid, Metamorphoses 11).
+  design: >-
+    A kingfisher whose calm wingbeat flattens the waves. Its ability is Cloud
+    Nine, which cancels weather.
+  habitat: Akti harbor and every coast.
+  notes: The Phase 1 slice ends in halcyon days at Akti harbor.
+  members:
+    - {concept: Halcyon chick, types: [Water, Flying], evo: {method: level, level: 24}}
+    - {concept: Halcyon, types: [Water, Flying]}
+
+- id: ketos
+  roles: [Magikarp role]
+  myth: >-
+    The ketos was the sea monster Poseidon sent against Andromeda, killed by
+    Perseus. Another came for Hesione at Troy, killed by Herakles. It became
+    the constellation Cetus.
+  design: >-
+    A feeble, gaping little fish that only flops, then the dog-headed, finned
+    sea-serpent of the vase paintings.
+  habitat: Fishing everywhere (Old Rod).
+  members:
+    - {concept: Ketos fry, types: [Water], evo: {method: level, level: 20}}
+    - {concept: Ketos, types: [Water, Dragon]}
+
+- id: karkinos
+  roles: [regional]
+  myth: >-
+    Hera sent the crab Karkinos to bite Herakles's foot while he fought the
+    Hydra. He crushed it, and Hera set it in the sky as Cancer.
+  design: >-
+    A tide-pool crab, then a big marsh crab with one huge claw that drips swamp
+    venom.
+  habitat: Akti tide pools (crab); the reed marshes of Lake Stymphalia, beside the Hydra (Karkinos).
+  members:
+    - {concept: Tide crab, types: [Water], evo: {method: level, level: 28}}
+    - {concept: Karkinos, types: [Water, Poison]}
+
+- id: nemean
+  roles: [regional, Labor]
+  myth: >-
+    The Nemean lion, Herakles's first Labor. No weapon could pierce its golden
+    hide, so he strangled it and wore its skin.
+  design: >-
+    A golden cub, then a great lion whose hide is plated like bronze. Its
+    ability is Fur Coat.
+  habitat: The scrub hills behind Emporion (cub, rare); Lakonia's hills (lion).
+  notes: Hierophant Ione's ace, as a cub. The post-game's first Labor.
+  members:
+    - {concept: Golden cub, types: [Normal], evo: {method: level, level: 30}}
+    - {concept: Nemean lion, types: [Normal]}
+
+- id: alectryon
+  roles: [regional Fighting]
+  myth: >-
+    Ares posted the youth Alectryon as lookout while he was with Aphrodite.
+    Alectryon fell asleep, Helios saw them, and Ares turned him into a rooster,
+    who has warned of every sunrise since (Lucian, The Rooster).
+  design: >-
+    A chick, then a strutting cockerel, then a war-cock whose comb is the
+    horsehair crest of a hoplite helmet. Its ability is Early Bird.
+  habitat: Elaia's farmyards (chick); the Lakonian battle school (cockerel and war-cock).
+  notes: Polemarch Brasidas's ace. A natural pick for Kleon, the Lakonian rival.
+  members:
+    - {concept: Rooster chick, types: [Fighting], evo: {method: level, level: 18}}
+    - {concept: Cockerel, types: [Fighting], evo: {method: level, level: 36}}
+    - {concept: War-cock, types: [Fighting, Flying]}
+
+# ── Emporion and the mainland coast (Laurel 2) ────────────────────────────
+
+- id: midas
+  section: Emporion and the coast
+  roles: [regional]
+  myth: >-
+    Dionysus granted King Midas the golden touch. Apollo gave him donkey's ears
+    for preferring Pan's music. His barber whispered the secret into a hole,
+    and the reeds that grew there whispered it to the wind (Ovid,
+    Metamorphoses 11).
+  design: >-
+    A foal with enormous ears, then a donkey with gilded hooves and a gold-leaf
+    hide, its ears hidden under a Phrygian cap.
+  habitat: Emporion's outskirts and Thyrsa's vineyards.
+  members:
+    - {concept: Big-eared foal, types: [Normal], evo: {method: held_item, item: Nugget, level: 25}}
+    - {concept: Golden donkey, types: [Normal, Steel]}
+
+- id: harpy
+  roles: [regional]
+  myth: >-
+    The Harpies, "snatchers" and storm-wind spirits, stole the food from blind
+    King Phineus until the sons of Boreas chased them off (Apollonius,
+    Argonautica 2).
+  design: >-
+    A storm-gray raptor with long hooked talons that snatches food from market
+    stalls. Its ability is Pickpocket. Hermes, god of messengers, is also the
+    god of thieves.
+  habitat: Emporion's Agora rooftops and the sea cliffs.
+  notes: Hierophant Kerykos's ace.
+  members:
+    - {concept: Snatcher fledgling, types: [Dark, Flying], evo: {method: level, level: 26}}
+    - {concept: Harpy, types: [Dark, Flying]}
+
+- id: tortoise
+  roles: [regional]
+  myth: >-
+    On the day he was born on Mount Kyllene, Hermes found a tortoise, made the
+    first lyre from its shell, stole Apollo's cattle, and paid him back with the
+    lyre (Homeric Hymn to Hermes).
+  design: >-
+    A hatchling, then a tortoise whose shell is strung like a lyre between two
+    horn-like spines. It evolves once it knows Sing.
+  habitat: The hills around Emporion; Arkadia's high meadows on Mount Kyllene.
+  members:
+    - {concept: Tortoise hatchling, types: [Ground], evo: {method: move, move: Sing}}
+    - {concept: Lyre tortoise, types: [Ground, Fairy]}
+
+- id: diogenes
+  roles: [oddity]
+  myth: >-
+    Diogenes the Cynic (kynikos means "dog-like") lived in a pithos in the
+    Agora, carried a lamp in daylight "looking for an honest man", and told
+    Alexander to stand out of his sun.
+  design: >-
+    A scruffy dog living in a cracked jar, holding a lamp, unimpressed by
+    everyone.
+  habitat: Empty jars in Emporion's Agora and Astyra's.
+  notes: Lives in a pithos, the jar that names Ichor's PC storage.
+  members:
+    - {concept: Jar-dwelling cynic, types: [Dark, Psychic]}
+
+- id: melissa
+  roles: [regional]
+  myth: >-
+    The Melissai, bee-nymphs, fed infant Zeus honey in the Cretan cave. The
+    Pythia was called "the Delphic Bee", and the second temple at Delphi was
+    said to be built by bees from wax and feathers (Pausanias 10.5).
+  design: >-
+    A worker bee, then a prophetess bee whose wings bear the honeycomb pattern
+    of the Delphic omphalos net. Only females evolve.
+  habitat: Eleusa's flower meadows; the laurel groves of Delphoi.
+  members:
+    - {concept: Honey bee, types: [Bug], evo: {method: level_female, level: 21}}
+    - {concept: Delphic bee, types: [Bug, Psychic]}
+
+- id: torpedo
+  roles: [oddity]
+  myth: >-
+    In Plato's Meno, Meno compares Socrates to the flat torpedo ray, the narke,
+    which numbs anyone who touches it. Narke gives English "narcotic".
+  design: >-
+    A flat ray with a bald, bearded "philosopher" face on its back. Touching it
+    numbs you.
+  habitat: Astyra's harbor; the trireme crossings (Good Rod).
+  members:
+    - {concept: Torpedo ray, types: [Water, Electric]}
+
+# ── Eleusa: wheat fields and the Mystery sanctum (Laurel 3) ───────────────
+
+- id: triptolemus
+  section: Eleusa
+  roles: [regional]
+  myth: >-
+    Demeter gave Triptolemus of Eleusis seed grain and a chariot drawn by winged
+    serpents, so he could teach the whole world to sow.
+  design: >-
+    A serpent sprouting wheat ears along its spine, then a winged serpent that
+    scatters seed as it flies.
+  habitat: Eleusa's wheat fields.
+  members:
+    - {concept: Wheat serpent, types: [Grass], evo: {method: level, level: 30}}
+    - {concept: Winged sower, types: [Grass, Dragon]}
+
+- id: pomegranate
+  roles: [regional, branch]
+  myth: >-
+    Hades took Kore while she picked a narcissus. She ate pomegranate seeds in
+    the underworld, so she must spend part of every year there as Persephone,
+    its queen. Her return each year is spring (Homeric Hymn to Demeter; the
+    Eleusinian Mysteries).
+  design: >-
+    A pomegranate seed-creature that branches with the clock. By day it becomes
+    Kore, the flower-crowned maiden of spring. By night it becomes Persephone,
+    the pale queen below, holding a split pomegranate.
+  habitat: Eleusa's underground Mystery sanctum (seed); Kore in the fields by day, Persephone below by night.
+  notes: Hierophant Chloe's ace, either form.
+  members:
+    - concept: Pomegranate seed
+      types: [Grass]
+      evo:
+        - {method: level_day, level: 28, to: 1}
+        - {method: level_night, level: 28, to: 2}
+    - {concept: Kore of spring, types: [Grass, Fairy]}
+    - {concept: Persephone below, types: [Grass, Ghost]}
+
+- id: boar
+  roles: [regional, Labor]
+  myth: >-
+    Piglets were sacrificed to Demeter at the Thesmophoria. When King Oeneus
+    forgot Artemis's offering, she sent the Calydonian boar to ravage his land,
+    and Meleager and Atalanta hunted it.
+  design: >-
+    A rooting piglet, then a huge bristled boar with crescent-moon tusks,
+    Artemis's mark. The piglet evolves only in Artemis's woods.
+  habitat: Eleusa's farms (piglet); Arkadia (boar).
+  members:
+    - {concept: Rooting piglet, types: [Ground], evo: {method: location, place: Arkadia}}
+    - {concept: Calydonian boar, types: [Dark, Ground]}
+
+- id: ploutos
+  roles: [regional]
+  myth: >-
+    Ploutos, son of Demeter, is the wealth of the harvest, shown as a child with
+    a cornucopia. Zeus blinded him so that he hands out riches without caring
+    who deserves them (Aristophanes, Plutus).
+  design: >-
+    A blind mole that burrows under the fields, then a fat mole hauling a horn
+    of grain. Its ability is Pickup, and it finds things at random.
+  habitat: Eleusa's fields and the Mystery sanctum's granaries.
+  members:
+    - {concept: Blind mole, types: [Ground], evo: {method: level, level: 32}}
+    - {concept: Ploutos, types: [Ground]}
+
+# ── Thyrsa: vineyards and the amphitheater (Laurel 4) ─────────────────────
+
+- id: thyrsus
+  section: Thyrsa
+  roles: [regional]
+  myth: >-
+    The thyrsus was a fennel staff wound with ivy and vine and tipped with a
+    pine cone, carried by Dionysus and his maenads. Struck on rock, it made wine
+    spring up (Euripides, Bacchae).
+  design: >-
+    A grape-vine tendril creature, then a walking thyrsus: a staff of ivy and
+    vine topped with a pine cone, oozing wine.
+  habitat: Thyrsa's vineyards.
+  members:
+    - {concept: Vine tendril, types: [Grass, Poison], evo: {method: level, level: 32}}
+    - {concept: Thyrsus, types: [Grass, Poison]}
+
+- id: leopard
+  roles: [regional]
+  myth: >-
+    Dionysus rides a leopard, and big cats draw his chariot in vase paintings
+    and the Pella mosaics. Leopards were said to love wine.
+  design: >-
+    A cub with grape-cluster spots and an ivy collar, then a swaying panther
+    of Dionysus.
+  habitat: Thyrsa's vineyards at night.
+  members:
+    - {concept: Vine cub, types: [Poison], evo: {method: level, level: 34}}
+    - {concept: Panther of Dionysus, types: [Poison, Dark]}
+
+- id: mask
+  roles: [oddity]
+  myth: >-
+    The masks of tragedy and comedy at the Dionysia. Thespis was the first
+    actor, and Dionysus is the god of the theater.
+  design: >-
+    A floating two-faced mask, one face laughing and one weeping. Its ability is
+    Illusion.
+  habitat: Backstage (the skene) of Thyrsa's amphitheater.
+  notes: Hierophant Thespis's ace, and Iapetos's tool for the staged tragedy.
+  members:
+    - {concept: Theater mask, types: [Psychic, Poison]}
+
+# ── Arkadia: moonlit cypress forests (Laurel 5) ───────────────────────────
+
+- id: lycaon
+  section: Arkadia
+  roles: [regional]
+  myth: >-
+    King Lycaon of Arcadia served Zeus human flesh to test whether he was really
+    a god. Zeus turned him into a wolf on Mount Lykaion, the oldest werewolf
+    story (Ovid, Metamorphoses 1).
+  design: >-
+    A wolf pup, then a wolf-king who rises onto two legs under the moon, with a
+    ruff like a crown. It evolves only at night.
+  habitat: Arkadia's cypress forests at night.
+  members:
+    - {concept: Wolf pup, types: [Dark], evo: {method: level_night, level: 30}}
+    - {concept: Wolf-king, types: [Dark]}
+
+- id: kallisto
+  roles: [regional]
+  myth: >-
+    Kallisto, a huntress sworn to Artemis, was seduced by Zeus and turned into a
+    bear. Her son Arkas, who gave Arcadia its name, nearly speared her. Zeus set
+    them in the sky as the Great Bear and the Little Bear.
+  design: >-
+    A cub, then a great bear with the seven stars of the Great Bear on its back.
+    It evolves with a Moon Stone.
+  habitat: Arkadia, in the glades around the Pool of Mnemosyne.
+  notes: Hierophant Kallisto's ace and namesake.
+  members:
+    - {concept: Star cub, types: [Dark], evo: {method: stone, item: Moon Stone}}
+    - {concept: Great Bear, types: [Dark, Fairy]}
+
+- id: laelaps
+  roles: [oddity, pair]
+  myth: >-
+    Laelaps (the name means "storm-wind") was a hound fated to catch anything it
+    chased. It was set on the Teumessian vixen, fated never to be caught. Zeus
+    ended the paradox by turning both to stone and setting them among the stars
+    (Apollodorus 2.4.7).
+  design: >-
+    A lean storm-hound with thundercloud ears. It mirrors the vixen. Its ability
+    is No Guard, so its moves never miss.
+  habitat: Arkadia; it roams.
+  members:
+    - {concept: Storm-hound, types: [Electric]}
+
+- id: vixen
+  roles: [oddity, pair]
+  myth: >-
+    The Teumessian vixen, fated never to be caught, pursued forever by Laelaps
+    until Zeus turned them both to stone and set them in the sky.
+  design: >-
+    A vixen with a tail of starlight that leaves afterimages. It mirrors the
+    hound and always gets away.
+  habitat: Arkadia; it roams and always flees.
+  notes: "Optional engine idea, flagged as a cost: it can't be caught until you own Laelaps."
+  members:
+    - {concept: Uncatchable vixen, types: [Dark, Fairy]}
+
+- id: arachne
+  roles: [regional]
+  myth: >-
+    Arachne challenged Athena to weave. Her flawless tapestry showed the gods'
+    crimes, and Athena turned her into a spider (Ovid, Metamorphoses 6).
+  design: >-
+    A spiderling, then a weaver spider whose webs are tapestries picturing the
+    gods behaving badly.
+  habitat: Webs between Arkadia's cypresses; Astyra's weaving quarter.
+  members:
+    - {concept: Spiderling, types: [Bug], evo: {method: level, level: 29}}
+    - {concept: Arachne, types: [Bug, Dark]}
+
+- id: endymion
+  roles: [oddity]
+  myth: >-
+    Endymion, the shepherd the Moon goddess Selene loved, was given eternal
+    sleep and eternal youth on Mount Latmos. She visits him every night.
+  design: >-
+    A moon-pale lamb curled up asleep, with a shepherd's-crook horn. Its ability
+    is Comatose, so it is always asleep.
+  habitat: Arkadia's moonlit meadows, at night only.
+  members:
+    - {concept: Sleeping shepherd-lamb, types: [Normal, Psychic]}
+
+# ── Astyra: the capital ───────────────────────────────────────────────────
+
+- id: owl
+  section: Astyra
+  roles: [regional]
+  myth: >-
+    Athena's little owl, the glaux, was stamped on Athenian coins, which were
+    called "owls". "Owls to Athens" meant carrying coals to Newcastle.
+  design: >-
+    An owlet with a coin-round face, then Athena's owl with an olive sprig and
+    a stare that reads your thoughts.
+  habitat: Astyra's Akropolis and the Library.
+  notes: Philosopher Hypatia's ace.
+  members:
+    - {concept: Owlet, types: [Psychic, Flying], evo: {method: level, level: 33}}
+    - {concept: Owl of Athena, types: [Psychic, Flying]}
+
+- id: asclepian
+  roles: [regional, Asclepeion nurse]
+  myth: >-
+    Asclepius's staff has one serpent coiled around it, and healing temples kept
+    sacred snakes. Pharmakon means both poison and cure.
+  design: >-
+    A snakelet, then a serpent coiled around a staff, the nurse Pokémon of every
+    Asclepeion (the Chansey role). It evolves once it knows Heal Pulse.
+  habitat: The gardens of Astyra's Asclepeion; rarely, any Asclepeion garden.
+  members:
+    - {concept: Temple snakelet, types: [Poison], evo: {method: move, move: Heal Pulse}}
+    - {concept: Healer serpent, types: [Poison, Fairy]}
+
+- id: charon
+  roles: [regional]
+  myth: >-
+    The unburied dead wander the near bank for a hundred years. Charon ferries
+    across the Styx only those who carry an obol, the coin placed in a dead
+    person's mouth.
+  design: >-
+    A small shade with an empty open palm, then a hooded wraith, then Charon,
+    a gaunt ferryman fused to his reed boat, with a pole and a lantern. The last
+    stage needs an old coin.
+  habitat: Astyra's Kerameikos cemetery (shade); Cape Tainaron (wraith); the Styx (ferryman).
+  members:
+    - {concept: Unburied shade, types: [Ghost], evo: {method: level, level: 30}}
+    - {concept: Hooded wraith, types: [Ghost], evo: {method: held_item, item: Relic Copper}}
+    - {concept: Ferryman, types: [Ghost, Water]}
+
+- id: sphinx
+  roles: [oddity]
+  myth: >-
+    The Sphinx sat on a rock outside Thebes and strangled anyone who failed her
+    riddle. Her name comes from sphingo, "to squeeze". Oedipus answered it,
+    and she threw herself from the rock.
+  design: >-
+    A winged lioness with a calm, knowing face, crouched on a rock, tail coiled
+    like a question.
+  habitat: The mountain road from Astyra to Delphoi.
+  members:
+    - {concept: Riddling sphinx, types: [Psychic, Fighting]}
+
+# ── Kaldera: the volcanic forge (Laurel 6) ────────────────────────────────
+
+- id: khalkotauros
+  section: Kaldera
+  roles: [regional]
+  myth: >-
+    The Khalkotauroi were bronze-hoofed, fire-breathing bulls that Hephaestus
+    made for King Aeetes. Jason yoked them, protected by Medea's ointment
+    (Apollonius, Argonautica 3).
+  design: >-
+    A calf with a glowing nose ring, then a bronze bull with a furnace in its
+    chest and riveted plates.
+  habitat: The forge slopes of Kaldera.
+  members:
+    - {concept: Furnace calf, types: [Fire], evo: {method: level, level: 33}}
+    - {concept: Bronze bull, types: [Fire, Steel]}
+
+- id: polybotes
+  roles: [regional, Team Titan]
+  myth: >-
+    In the war of the Giants, Poseidon tore a piece off Kos and threw it on the
+    giant Polybotes. It became the volcanic island of Nisyros, and its smoke is
+    the giant's breath (Apollodorus 1.6.2).
+  design: >-
+    A smoldering cinder, then a giant buried to the shoulders with a small
+    island, hut and all, on its back, breathing smoke.
+  habitat: The floor of Kaldera's caldera.
+  notes: Admin Hyperion's ace (Fire/Rock).
+  members:
+    - {concept: Smoldering cinder, types: [Fire], evo: {method: level, level: 35}}
+    - {concept: Buried giant, types: [Fire, Rock]}
+
+- id: telchine
+  roles: [regional, story]
+  myth: >-
+    The Telchines were flippered sea-spirits of Rhodes and the first
+    metalworkers. They forged Poseidon's trident and the adamant sickle that
+    Kronos used on Ouranos (Strabo 14.2.7).
+  design: >-
+    A seal-like pup with a tiny hammer, then a flippered smith with an anvil
+    shell and tongs.
+  habitat: Kaldera's black-sand shores and sea caves.
+  notes: They made the Harpe, so they tie straight into the Kaldera chapter.
+  members:
+    - {concept: Smith pup, types: [Water], evo: {method: level, level: 34}}
+    - {concept: Telchine smith, types: [Water, Steel]}
+
+- id: narthex
+  roles: [regional]
+  myth: >-
+    Prometheus stole fire from the gods hidden in a hollow fennel stalk, the
+    narthex, and gave it to mortals (Hesiod, Works and Days). He was a Titan who
+    chose humanity.
+  design: >-
+    A fennel sprout, then a tall fennel stalk with an ember glowing inside its
+    hollow stem. It evolves with a Fire Stone.
+  habitat: Kaldera's volcanic slopes; Kalliste's dry hillsides (sprout, rare).
+  notes: A Titan's gift, so it works as a foil to Team Titan.
+  members:
+    - {concept: Fennel sprout, types: [Grass], evo: {method: stone, item: Fire Stone}}
+    - {concept: Fire-bearing fennel, types: [Grass, Fire]}
+
+# ── Kythera Isle: sea-foam coves (Laurel 7) ───────────────────────────────
+
+- id: foam
+  section: Kythera Isle
+  roles: [regional]
+  myth: >-
+    Aphrodite was born from the sea foam (aphros) and came ashore first at
+    Kythera and then at Cyprus (Hesiod, Theogony 188–200). Art shows her
+    riding a scallop shell.
+  design: >-
+    A closed scallop shell, then a foam spirit standing in the open shell. It
+    evolves with a Shiny Stone.
+  habitat: Kythera's sea-foam beaches.
+  members:
+    - {concept: Foam scallop, types: [Water], evo: {method: stone, item: Shiny Stone}}
+    - {concept: Foam-born, types: [Water, Fairy]}
+
+- id: narcissus
+  roles: [regional, pair]
+  myth: >-
+    Narcissus scorned Echo, so Nemesis made him fall in love with his own
+    reflection in a spring. He wasted away and became the narcissus flower
+    (Ovid, Metamorphoses 3).
+  design: >-
+    A bulb, then a white narcissus forever bending over the water. Its ability
+    is Oblivious, and its hidden ability is Mirror Armor. It evolves only at the
+    Spring of Kallirhoe.
+  habitat: The Spring of Kallirhoe, Kythera.
+  members:
+    - {concept: Spring bulb, types: [Grass], evo: {method: location, place: Spring of Kallirhoe}}
+    - {concept: Narcissus, types: [Grass, Water]}
+
+- id: echo
+  roles: [oddity, pair]
+  myth: >-
+    Hera cursed the nymph Echo to repeat only the last words she heard. Echo
+    pined for Narcissus until nothing was left of her but her voice (Ovid,
+    Metamorphoses 3).
+  design: >-
+    A faint, half-visible nymph-sprite with no mouth, only a ripple. It learns
+    only copying moves: Mimic, Copycat, Mirror Move and Echoed Voice.
+  habitat: Kythera's sea caves, usually near Narcissus.
+  members:
+    - {concept: Echo, types: [Normal]}
+
+- id: eros
+  roles: [regional, baby]
+  myth: >-
+    Eros, Aphrodite's winged son, kindles love with gold arrows and kills it
+    with lead ones. His arrows started Daphne's story.
+  design: >-
+    A chubby winged infant (an Erote) with a toy bow, then a slim winged archer
+    with gold and lead arrows.
+  habitat: Kythera (Eros); the Erote hatches from eggs.
+  members:
+    - {concept: Erote, types: [Fairy], baby: true, evo: {method: friendship_day}}
+    - {concept: Eros, types: [Fairy, Flying]}
+
+- id: galatea
+  roles: [regional]
+  myth: >-
+    Pygmalion of Cyprus carved a statue so lovely he fell in love with it. He
+    prayed at Aphrodite's festival, and the statue warmed into a living woman
+    (Ovid, Metamorphoses 10). Later writers named her Galatea.
+  design: >-
+    A marble chip with a single carved eye, then a living statue with cracks of
+    warm light where the stone has woken. It evolves through friendship: love
+    brings it to life.
+  habitat: The marble temple grounds of Kythera; Astyra's sculptors' quarter.
+  notes: Hierophant Galatea's ace and namesake. Ovid's statue was ivory; Aethos uses marble to match her epithet.
+  members:
+    - {concept: Marble chip, types: [Rock], evo: {method: friendship}}
+    - {concept: Living statue, types: [Rock, Fairy]}
+
+# ── Knossa Isle: the Labyrinth and Daedalus's workshop ────────────────────
+
+- id: minotaur
+  section: Knossa Isle
+  roles: [oddity, story]
+  myth: >-
+    Asterion, the Minotaur, was the son of Pasiphae and Poseidon's white bull.
+    He was shut in Daedalus's Labyrinth and fed youths until Theseus killed him.
+  design: >-
+    A hulking bull-headed brawler, more sad than cruel, with a broken chain on
+    one wrist.
+  habitat: The center of the Labyrinth, Knossa.
+  notes: The bible's "a Minotaur waits at the center".
+  members:
+    - {concept: Minotaur, types: [Fighting, Dark]}
+
+- id: ariadne
+  roles: [oddity]
+  myth: >-
+    Ariadne gave Theseus a ball of thread to find his way out of the Labyrinth.
+    Later Dionysus married her, and her wedding crown became the Corona
+    Borealis.
+  design: >-
+    A living ball of red thread with a starry crown. It always knows the way
+    out, and learns Teleport and Follow Me.
+  habitat: The Labyrinth's passages.
+  members:
+    - {concept: Thread-ball, types: [Normal]}
+
+- id: icarus
+  roles: [oddity]
+  myth: >-
+    Daedalus made wings of feathers and wax. Icarus flew too near the sun, the
+    wax melted, and he fell into the sea (Ovid, Metamorphoses 8). A story of
+    hubris.
+  design: >-
+    A moth drawn to the sun on wax-and-feather wings that droop in the heat.
+    Its ability is Solar Power: stronger in sunlight, but it burns.
+  habitat: The cliffs below Daedalus's workshop, on sunny days.
+  members:
+    - {concept: Wax-winged moth, types: [Bug, Flying]}
+
+- id: talos
+  roles: [regional]
+  myth: >-
+    Talos was the bronze giant Hephaestus made to guard Crete. He circled the
+    island three times a day throwing boulders. A single vein of ichor ran from
+    his neck to his ankle, sealed with a bronze nail, until Medea pulled it out
+    (Apollonius, Argonautica 4).
+  design: >-
+    A small bronze figurine, then a towering bronze sentinel with a glowing gold
+    ichor vein and a nail at the ankle. Trade it holding a Metal Coat to evolve.
+  habitat: Kaldera's forge (figurine); Knossa's coastal cliffs (sentinel).
+  notes: Hierophant Talos's ace and namesake. Its ichor vein echoes the game's title.
+  members:
+    - {concept: Bronze figurine, types: [Steel], evo: {method: trade_item, item: Metal Coat}}
+    - {concept: Bronze sentinel, types: [Steel, Ground]}
+
+- id: kouretes
+  roles: [regional, story]
+  myth: >-
+    The Kouretes danced in armor, clashing spears on shields, so that Kronos
+    would not hear infant Zeus crying in the Cretan cave (Strabo 10.3).
+  design: >-
+    A round bronze shield with eyes, then a crested shield-dancer beating spear
+    on shield. Its ability is Punk Rock.
+  habitat: The Diktaean cave, Knossa; the Lakonian battle school.
+  notes: Ancient guardians against Kronos, a nice echo for the finale.
+  members:
+    - {concept: Clashing shield, types: [Steel], evo: {method: level, level: 35}}
+    - {concept: Shield-dancer, types: [Steel, Fighting]}
+
+- id: cyclops
+  roles: [fossil]
+  myth: >-
+    The Cyclopes, among them Polyphemus the shepherd (Odyssey 9). Dwarf-elephant
+    skulls found on Mediterranean islands have one big central hole where the
+    trunk attached, and they are a likely source of the one-eyed giants.
+  design: >-
+    A revived dwarf elephant whose trunk socket looks like one great eye, with
+    small real eyes on the sides. It grows into a shaggy, giant-sized shepherd
+    beast.
+  habitat: A skull fossil dug at Knossa, revived in Daedalus's workshop. You choose one of the two fossils; the other turns up in Atlantis.
+  notes: A myth misread from a fossil, which is Daphne's thesis made literal.
+  members:
+    - {concept: Skull fossil revived, types: [Rock, Normal], evo: {method: level, level: 39}}
+    - {concept: Cyclops, types: [Rock, Normal]}
+
+- id: belemnite
+  roles: [fossil]
+  myth: >-
+    Belemnite fossils are named from the Greek belemnon, "dart". For centuries
+    people took these bullet-shaped stones for thunderbolts that had fallen from
+    the sky.
+  design: >-
+    A revived squid with a bullet-shaped stone guard that stores lightning. It
+    grows into a thunder-squid that fires charged darts.
+  habitat: A dart fossil dug at Knossa, revived in Daedalus's workshop (the fossil choice).
+  members:
+    - {concept: Dart fossil revived, types: [Rock, Electric], evo: {method: level, level: 39}}
+    - {concept: Thunderbolt squid, types: [Rock, Electric]}
+
+# ── Lakonia: Sparta and Lake Stymphalia ───────────────────────────────────
+
+- id: stymphalian
+  section: Lakonia
+  roles: [regional, Labor]
+  myth: >-
+    Ares's man-eating birds of Lake Stymphalia had bronze beaks and feathers
+    they shot like arrows. Herakles flushed them out with bronze rattles that
+    Hephaestus made (the sixth Labor).
+  design: >-
+    A crane-like chick with bronze pin-feathers, then a great bronze bird whose
+    wing feathers fire as darts.
+  habitat: Lake Stymphalia, Lakonia.
+  members:
+    - {concept: Bronze chick, types: [Steel, Flying], evo: {method: level, level: 35}}
+    - {concept: Stymphalian bird, types: [Steel, Flying]}
+
+- id: spartoi
+  roles: [regional]
+  myth: >-
+    Cadmus killed Ares's dragon and, on Athena's advice, sowed its teeth. Armed
+    men sprang from the furrows, the Spartoi or "sown men", and fought until
+    only five remained (Ovid, Metamorphoses 3).
+  design: >-
+    A dragon's tooth half-buried like a seed, then a dragon-scaled hoplite
+    risen from the earth.
+  habitat: The fields of the Lakonian battle school.
+  members:
+    - {concept: Dragon's tooth, types: [Dragon], evo: {method: level, level: 40}}
+    - {concept: Sown warrior, types: [Dragon, Fighting]}
+
+- id: antaeus
+  roles: [oddity]
+  myth: >-
+    Antaeus, son of Gaia, wrestled every traveler and could not be beaten while
+    he touched the earth. Herakles lifted him into the air and crushed him.
+  design: >-
+    A giant wrestler with roots for toes, always flat-footed. Its ability is
+    Earth Eater: the earth heals it.
+  habitat: The wrestling sands of the Lakonian palaestra; Olympia.
+  members:
+    - {concept: Earth-wrestler, types: [Fighting, Ground]}
+
+# ── Delphoi: the Oracle (Laurel 8) ────────────────────────────────────────
+
+- id: python
+  section: Delphoi
+  roles: [regional]
+  myth: >-
+    Python was the earth-born serpent that guarded Gaia's oracle at Delphi,
+    born from the mud after the flood. Apollo killed it with his arrows and
+    took the oracle. The Pythia and the Pythian Games are named after it.
+  design: >-
+    A mud-colored hatchling coiled in a laurel root, then a vast earth-serpent
+    with an arrow scar.
+  habitat: The slopes of Parnassus above Delphoi; the Korykian cave.
+  notes: The bible's "Python" starter idea, recast as a wild line.
+  members:
+    - {concept: Mud hatchling, types: [Dragon], evo: {method: level, level: 36}}
+    - {concept: Python, types: [Dragon, Ground]}
+
+- id: tripod
+  roles: [regional]
+  myth: >-
+    The Pythia prophesied from a bronze tripod set over a chasm in Apollo's
+    temple. Herakles once grabbed the tripod and wrestled Apollo for it, a
+    favorite scene on vases.
+  design: >-
+    A three-legged bronze brazier, then an oracle tripod that breathes laurel
+    smoke and speaks in flames.
+  habitat: The temple precinct of Delphoi.
+  notes: Pythia Phemonoe's ace.
+  members:
+    - {concept: Brazier, types: [Fire], evo: {method: level, level: 34}}
+    - {concept: Oracle tripod, types: [Fire, Psychic]}
+
+- id: swan
+  roles: [regional]
+  myth: >-
+    Swans drew Apollo's chariot to the Hyperboreans each winter. Swans were said
+    to sing their most beautiful song just before they die (Plato, Phaedo).
+  design: >-
+    A gray cygnet, then a white swan with sun-gold wingtips that burn as it
+    sings.
+  habitat: The pools of the Kastalian spring, Delphoi.
+  members:
+    - {concept: Sun cygnet, types: [Fire], evo: {method: level, level: 35}}
+    - {concept: Swan of Apollo, types: [Fire, Flying]}
+
+- id: heliad
+  roles: [oddity]
+  myth: >-
+    Phaethon lost control of his father Helios's sun chariot and was struck down
+    by Zeus. His sisters, the Heliades, mourned until they became poplars whose
+    tears harden into amber (Ovid, Metamorphoses 2). The Greek for amber,
+    elektron, gave us "electric".
+  design: >-
+    A weeping poplar sprite whose tears are amber beads that spark when
+    rubbed.
+  habitat: The poplars along the Kastalian stream below Delphoi.
+  members:
+    - {concept: Amber poplar, types: [Electric, Grass]}
+
+# ── The Ascent and Olympus (Victory Road) ─────────────────────────────────
+
+- id: aetos
+  section: The Ascent and Olympus
+  roles: [regional, champion ace]
+  myth: >-
+    Zeus's eagle carried his thunderbolts and bore Ganymede up to Olympus. Zeus
+    also sent it to eat Prometheus's liver.
+  design: >-
+    A fierce eaglet, then a golden eagle with a thunderbolt clutched in its
+    talons.
+  habitat: The crags of the Ascent and Olympus.
+  notes: The Archon's ace.
+  members:
+    - {concept: Eaglet, types: [Flying], evo: {method: level, level: 40}}
+    - {concept: Eagle of Zeus, types: [Electric, Flying]}
+
+- id: chione
+  roles: [regional]
+  myth: >-
+    Chione, "snow", was the nymph daughter of Boreas the North Wind and the
+    Athenian princess Oreithyia.
+  design: >-
+    A drifting snowflake sprite, then a snow nymph in a gown of falling snow.
+    It evolves with an Ice Stone.
+  habitat: The snowfields of the Ascent.
+  members:
+    - {concept: Snowflake sprite, types: [Ice], evo: {method: stone, item: Ice Stone}}
+    - {concept: Snow nymph, types: [Ice, Fairy]}
+
+- id: boreas
+  roles: [regional]
+  myth: >-
+    Boreas, the winged North Wind, carried off Oreithyia and wrecked the Persian
+    fleet as a favor to Athens (Herodotus 7.189).
+  design: >-
+    A small cold gust with a face, then a winged wind spirit with a beard of
+    frost and purple wings.
+  habitat: The peaks of Olympus.
+  members:
+    - {concept: Cold gust, types: [Ice], evo: {method: level, level: 40}}
+    - {concept: North Wind, types: [Ice, Flying]}
+
+- id: krystallos
+  roles: [regional]
+  myth: >-
+    Krystallos is the Greek word for ice. Ancient writers believed rock crystal
+    was ice frozen so hard that it could never thaw again (Pliny 37.9, from
+    Greek sources).
+  design: >-
+    An ice shard, then a quartz-and-ice golem, clear as glass, that never melts.
+  habitat: The ice caves of the Ascent.
+  members:
+    - {concept: Ice shard, types: [Ice], evo: {method: level, level: 42}}
+    - {concept: Everlasting ice, types: [Ice, Rock]}
+
+- id: niobe
+  roles: [oddity]
+  myth: >-
+    Niobe boasted that her fourteen children outshone Leto's two. Apollo and
+    Artemis killed them all, and Niobe turned to stone on Mount Sipylos. The
+    rock still weeps (Iliad 24). A story of hubris.
+  design: >-
+    A rock face shaped like a mourning woman, with a spring running from its
+    eyes.
+  habitat: A weeping cliff on the Ascent.
+  members:
+    - {concept: Weeping rock, types: [Rock, Water]}
+
+- id: salmoneus
+  roles: [oddity]
+  myth: >-
+    King Salmoneus faked Zeus's thunder by dragging bronze kettles behind his
+    chariot and throwing torches as lightning. Zeus struck him down with a real
+    bolt (Apollodorus 1.9.7). A story of hubris.
+  design: >-
+    A clattering creature towing a train of bronze kettles. Its ability is
+    Lightning Rod, so the real lightning always finds it.
+  habitat: The foothills of the Ascent.
+  members:
+    - {concept: Thunder-faker, types: [Steel, Electric]}
+
+# ── Post-game: the Underworld and the Odyssey ─────────────────────────────
+
+- id: sisyphus
+  section: Post-game
+  roles: [oddity]
+  myth: >-
+    Sisyphus cheated death twice: he chained Thanatos, then talked his way out
+    of Hades. His punishment is to roll a boulder up a hill in Tartarus forever
+    (Odyssey 11).
+  design: >-
+    A ghost bent under a boulder it never stops pushing, grinning anyway.
+  habitat: Tartarus.
+  members:
+    - {concept: Boulder-pusher, types: [Rock, Ghost]}
+
+- id: siren
+  roles: [regional]
+  myth: >-
+    The Sirens, birds with women's voices, sang sailors onto the rocks.
+    Odysseus had himself tied to the mast to hear them (Odyssey 12). Siren
+    figures were carved on Greek tombs as mourners.
+  design: >-
+    A gray, ghostly fledgling, then a siren bird with a lyre-shaped tail and a
+    hypnotic song.
+  habitat: The Sirens' rocks, on the post-game Odyssey.
+  members:
+    - {concept: Mourning fledgling, types: [Ghost], evo: {method: level, level: 42}}
+    - {concept: Siren, types: [Ghost, Flying]}
+
+- id: styx
+  roles: [oddity]
+  myth: >-
+    The Styx is the ice-cold river of the underworld. The gods swore their
+    unbreakable oaths on its water, and a god who broke one lay breathless for a
+    year (Hesiod, Theogony 775–806).
+  design: >-
+    A frozen, ghostly river-maiden holding a jug of black water.
+  habitat: The banks of the Styx.
+  notes: The emblem of the Oath of the Styx ruleset.
+  members:
+    - {concept: Oath-keeper, types: [Ice, Ghost]}
+
+- id: scylla
+  roles: [oddity, pair]
+  myth: >-
+    Scylla was a nymph until Circe's poison turned her into a monster with six
+    dog heads on long necks, snatching sailors from passing ships (Odyssey 12).
+  design: >-
+    A sea-anemone body with six long dog-headed necks.
+  habitat: The strait on the post-game Odyssey.
+  members:
+    - {concept: Six-headed snatcher, types: [Water, Dark]}
+
+- id: charybdis
+  roles: [oddity, pair]
+  myth: >-
+    Charybdis, a daughter of Poseidon and Gaia, swallows the sea and spits it
+    out three times a day, across the strait from Scylla (Odyssey 12).
+  design: >-
+    A vast round maw ringed with teeth and a living whirlpool.
+  habitat: The strait on the post-game Odyssey.
+  members:
+    - {concept: Whirlpool maw, types: [Water, Ground]}
+
+- id: proteus
+  roles: [oddity]
+  myth: >-
+    Proteus, the Old Man of the Sea, herds Poseidon's seals and changes shape
+    when caught. Hold on, and he must tell you the future (Odyssey 4). He gives
+    his name to the ability Protean.
+  design: >-
+    An old bearded sea-elder, half seal and half wave. Its ability is Protean.
+  habitat: The shallows of Atlantis; the islets of the Odyssey.
+  members:
+    - {concept: Old Man of the Sea, types: [Water]}
+
+- id: argos
+  roles: [oddity]
+  myth: >-
+    Odysseus's old hound Argos waited twenty years. He knew his master through
+    the disguise, wagged his tail, and died (Odyssey 17).
+  design: >-
+    A gray-muzzled, devoted hound.
+  habitat: Elaia, at the homecoming that ends the post-game Odyssey.
+  members:
+    - {concept: Faithful hound, types: [Normal]}
+
+- id: ladon
+  roles: [regional, Labor]
+  myth: >-
+    Ladon was the serpent coiled around the tree of golden apples, Hera's
+    wedding gift, in the garden of the Hesperides (the eleventh Labor).
+  design: >-
+    A gold-scaled serpent coiled into a living apple tree, its coils hung with
+    golden apples.
+  habitat: The garden of the Hesperides, reached in the post-game Labors.
+  notes: For Olympias, the Serpent Queen of Hera's seat.
+  members:
+    - {concept: Apple-guard serpent, types: [Dragon, Fairy]}
+
+# ── Pseudo-legendary ──────────────────────────────────────────────────────
+
+- id: hydra
+  section: Pseudo-legendary
+  roles: [pseudo, Labor]
+  myth: >-
+    The Lernaean Hydra, raised by Hera to kill Herakles. For every head cut off,
+    two grew back. Its central head was immortal, and Herakles dipped his arrows
+    in its venom (the second Labor).
+  design: >-
+    A one-headed marsh hatchling, then a three-headed serpent, then a
+    many-headed hydra with a golden, immortal center head.
+  habitat: The reed marshes of Lake Stymphalia, Lakonia, only after rain (rare).
+  notes: Olympias's ace for Hera's Dragon seat. BST 300 / 420 / 600.
+  members:
+    - {concept: Marsh hatchling, types: [Dragon, Poison], evo: {method: level, level: 30}}
+    - {concept: Three-headed hydra, types: [Dragon, Poison], evo: {method: level, level: 55}}
+    - {concept: Lernaean Hydra, types: [Dragon, Poison]}
+
+# ── Legendaries and mythicals ─────────────────────────────────────────────
+
+- id: moirai
+  section: Legendaries and mythicals
+  group: true   # three separate species, not an evolution line
+  roles: [legendary trio, story]
+  myth: >-
+    The three Fates. Klotho spins the thread of each life, Lachesis measures it
+    and allots each person's share, and Atropos, "the unturnable", cuts it
+    (Hesiod, Theogony; Plato, Republic 10).
+  design: >-
+    The Spinner, holding a distaff and spindle, is birth. The Allotter, holding
+    a measuring rod, is life. The Cutter, holding shears, is death. All three
+    wear threads that run to the Loom.
+  habitat: "Chained at the Loom of Fate, Delphoi. Roused in the Frozen Hour at three sanctuaries (suggested: Elaia's festival shrine, the Pool of Mnemosyne, and Kaldera's forge)."
+  notes: Replaces Uxie, Mesprit and Azelf in the story (decision D2).
+  members:
+    - {concept: The Spinner, types: [Psychic, Fairy]}
+    - {concept: The Allotter, types: [Psychic, Normal]}
+    - {concept: The Cutter, types: [Psychic, Ghost]}
+
+- id: kronos
+  roles: [box legendary, story]
+  myth: >-
+    Kronos, youngest of the Titans, cut down his father Ouranos with an adamant
+    sickle, ruled the Golden Age, and swallowed his children for fear of a
+    prophecy, until Zeus overthrew him. Later he was confused with Chronos,
+    Time, which is why Father Time carries a scythe.
+  design: >-
+    A colossal Titan of earth and bronze with an hourglass torso and the Harpe
+    sickle. The world grays wherever its shadow falls.
+  habitat: The Stair of Hours, at the climax.
+  notes: Replaces Dialga as Lord of Time (decision D2).
+  members:
+    - {concept: Lord of Time, types: [Ground, Psychic]}
+
+- id: kairos
+  roles: [box legendary]
+  myth: >-
+    Kairos is the fleeting right moment. Lysippos's statue showed a winged youth
+    on tiptoe on a razor's edge, with a lock of hair in front and bald behind:
+    seize him as he comes, or he's gone. Pausanias (5.14.9) records an altar of
+    Kairos at the entrance to the stadium at Olympia.
+  design: >-
+    A winged youth balanced on a blade, with a forelock you could grab and
+    nothing behind. Kronos is endless time and Kairos is the chosen moment.
+    Flying is immune to Ground: Kronos can't touch him.
+  habitat: The altar of Kairos at Olympia (post-game).
+  notes: A new post-game legendary, the counterpart to Kronos (decision D3).
+  members:
+    - {concept: The Moment, types: [Flying, Psychic]}
+
+- id: pegasus
+  roles: [legendary]
+  myth: >-
+    The winged horse Pegasus sprang from the Gorgon's neck when Perseus beheaded
+    her. Bellerophon rode him, his hoof struck springs from rock, and in the end
+    he carried Zeus's thunder and lightning on Olympus (Hesiod, Theogony 285).
+  design: >-
+    A white winged stallion with storm-gold feathers and lightning in its mane.
+  habitat: The cloud meadows of Olympus (post-game).
+  members:
+    - {concept: Thunder-bearer, types: [Electric, Flying]}
+
+- id: zeus
+  roles: [mythical]
+  myth: >-
+    When Kronos fell, his three sons drew lots for the world: Zeus won the
+    broad sky, Poseidon the gray sea and Hades the murky dark (Iliad
+    15.187–193). Phidias's gold-and-ivory Zeus at Olympia sat enthroned with an
+    eagle on its scepter (Pausanias 5.11.1), so tall that if it stood up it
+    would lift the temple roof (Strabo 8.3.30).
+  design: >-
+    The first of three Regi-style colossi, the cult statues of the three
+    brothers. Phidias's Zeus has risen from its throne with a thunderbolt and an
+    eagle-topped scepter. Where its face should be, its lot's emblem glows: a
+    thunderbolt. Slow, with a huge Special Attack.
+  habitat: "Olympus, on a storm terrace below the true summit (post-game; suggested). Its throne at Olympia stands empty."
+  notes: >-
+    Decision D4. Suggested unlock, shared by the three colossi: Kronolith gives
+    back what it swallowed. Bring it to the Omphalos at Delphoi, the stone it
+    swallowed in Zeus's place, and it yields three bronze lots, stamped with a
+    thunderbolt, a trident and a bident. Each lot unseals one colossus.
+  members:
+    - {concept: Sky colossus, types: [Electric]}
+
+- id: poseidon
+  roles: [mythical]
+  myth: >-
+    In the drawing of lots Poseidon won the gray sea (Iliad 15.187–193). Homer
+    calls him the Earth-shaker, and when he takes up his trident every wind
+    blows at once (Odyssey 5.291–296). The bronze god hauled from a wreck off
+    Cape Artemision, arm drawn back to throw, is often read as him.
+  design: >-
+    A sea-green patinated bronze colossus in the Artemision pose, striding out
+    of the sea with its trident drawn back, crusted with barnacles and coral.
+    Its face is a glowing trident, its lot's emblem. Slow, with a huge Attack.
+  habitat: "The drowned temple at the heart of Atlantis (post-game; suggested)."
+  notes: Decision D4. Unsealed by the trident lot (see the sky colossus).
+  members:
+    - {concept: Sea colossus, types: [Water]}
+
+- id: hades
+  roles: [mythical]
+  myth: >-
+    In the drawing of lots Hades won the murky dark (Iliad 15.187–193), and his
+    name was heard as Aides, the Unseen (Plato, Cratylus 403a). His cap, the
+    Helm of Hades, hides whoever wears it: Athena put it on so Ares could not
+    see her (Iliad 5.844–845).
+  design: >-
+    A black basalt colossus that keeps its throne, wearing the Helm of Darkness
+    that makes it vanish, a bident across its knees. Under the helm its face is
+    a glowing bident, its lot's emblem. Slow, with a huge Defense.
+  habitat: "The Underworld, in a vault beneath Hades's hall at the end of the Katabasis (post-game; suggested)."
+  notes: Decision D4. Unsealed by the bident lot (see the sky colossus).
+  members:
+    - {concept: Dark colossus, types: [Ghost]}
+
+- id: ichor
+  roles: [mythical]
+  myth: >-
+    Ichor is the golden blood of the gods, the thing that makes them immortal
+    (Iliad 5.340). Talos's single vein held it.
+  design: >-
+    A small golden being shaped like a falling drop. Like Mew, it can learn
+    every TM and Transform.
+  habitat: The Pool of Mnemosyne, Arkadia (post-game). It is the memory of the first myth.
+  notes: The title Pokémon, kept as a fourth mythical after the three colossi (decision D4).
+  members:
+    - {concept: Ichor, types: [Psychic]}
+
+# ── Decisions the user needs to make at Gate 1 ────────────────────────────
+# Each has a recommendation. Record the answers in design/dex/DECISIONS.md.
+
+decisions:
+- id: D1
+  answer: "Yes (2026-11-14): the regional starters replace Snivy, Cyndaquil and Piplup."
+  title: Regional starters replace Snivy, Cyndaquil and Piplup
+  detail: >-
+    The plan gives Aethos its own three: the Laurel fawn (Grass, ends
+    Grass/Fairy), the Hearth pup (Fire, ends Fire/Ghost) and the Sea foal
+    (Water, ends Water/Ground). Phase 1 currently hands out Snivy, Cyndaquil
+    and Piplup, and Daphne's intro speech foreshadows them ("a serpent… a
+    giant breathing fire… a trident"). Swapping means rewriting about six lines
+    of the slice script once the species exist in the ROM.
+  recommend: Yes. Keep the existing three in the slice until the new species are implemented, then swap.
+- id: D2
+  title: New story legendaries replace Dialga and the lake trio
+  detail: >-
+    Kronos, Lord of Time, would replace Dialga at the climax, and the three
+    Moirai (Spinner, Allotter, Cutter) would replace Uxie, Mesprit and Azelf.
+    The beats stay the same: the Fates chained at the Loom, the Frozen Hour,
+    the Stair of Hours. Only the species change. This touches the bible's §2
+    and §4, which the main session owns.
+  recommend: Yes. Without this, the region's own legendaries would sit outside its story.
+- id: D3
+  title: Add Kairos as a post-game legendary at Olympia
+  detail: >-
+    Kairos is the counterpart to Kronos: the chosen moment against endless
+    time. A real altar of Kairos stood at the stadium entrance at Olympia, so
+    he would wait there in the post-game Olympiad. This adds one encounter to
+    the bible's post-game.
+  recommend: Yes.
+- id: D4
+  answer: >-
+    Changed (2026-11-14): three Regi-style colossi for Zeus, Poseidon and Hades
+    replace Hope. The user: "mythicals should be like a zeus pokemon, a posiden
+    pokemon, and a hades pokemon. as like regis giant types ... with good
+    names." Ichor stays as the title Pokémon and a fourth mythical, #152. The
+    user: "Keep it as #152". The dex is 152.
+  title: Four mythicals, the colossi of Zeus, Poseidon and Hades, and Ichor
+  detail: >-
+    The three sons of Kronos drew lots for the world: Zeus the sky, Poseidon
+    the sea, Hades the dark (Iliad 15.187–193). Their cult statues are a
+    Regi-style trio of living colossi, each slow, single-typed and lopsided,
+    with its lot's emblem glowing where a face would be: Olympanax (Electric),
+    Pontanax (Water) and Nekranax (Ghost). Suggested unlock: Kronolith, who
+    swallowed them, gives back three bronze lots at the Omphalos in Delphoi,
+    and each lot unseals one colossus on Olympus, in Atlantis or in the
+    Underworld. They replace Hope (Elpimoth). Ichor (Ichorin) stays as the
+    title Pokémon, Aethos's Mew, at #152.
+  recommend: Yes. Where the lots and the sealed chambers go in the post-game is the main session's call.
+- id: D5
+  answer: >-
+    (a) Aethos-only through the League (2026-11-14), replacing the earlier (b)
+    mixed answer from the same day. The user: "(a). It makes Aethos feel like a
+    real new region and keeps the bible's post-game promise. lets switch it to
+    this". Only the 151 appear until the League is beaten; existing species
+    arrive in the post-game.
+  title: How the regional dex mixes with the existing 1,025 species
+  detail: >-
+    The bible left this open. Options. (a) Aethos-only through the League,
+    with the national dex opening in the post-game (Time Fractures, the
+    Odyssey, Atlantis, Katabasis), so "all 1,025 catchable" still holds.
+    (b) Mixed throughout. (c) Aethos-only, full stop. The Phase 1 Route 1 table
+    still uses existing species; under (a) it switches to Aethos species once
+    they are in the ROM.
+  recommend: (a). It makes Aethos feel like a real new region and keeps the bible's post-game promise.
+- id: D6
+  title: Let the post-game Labors use regional species
+  detail: >-
+    The bible casts the Twelve Labors with existing species. Where the dex has
+    its own, they could take over: Nemean lion (1), Hydra (2), Calydonian boar
+    (4), Stymphalian birds (6), the two-headed hound for Geryon's cattle (10),
+    Ladon (11), and the starter line's three-headed hound for Cerberus (12).
+    The Hind, the Augean Stables, the Cretan Bull, Diomedes's mares and
+    Hippolyta's girdle keep their current casting.
+  recommend: Yes, where a regional species exists.

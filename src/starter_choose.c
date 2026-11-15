@@ -113,10 +113,12 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
     {16, 1},
 };
 
-// Ichor: the Python, the Typhon and the Trident (design/PITCH.md §4).
-#define GRASS_STARTER (IS_FRLG ? SPECIES_BULBASAUR  : SPECIES_SNIVY)
-#define FIRE_STARTER  (IS_FRLG ? SPECIES_CHARMANDER : SPECIES_CYNDAQUIL)
-#define WATER_STARTER (IS_FRLG ? SPECIES_SQUIRTLE   : SPECIES_PIPLUP)
+// Ichor: Aethos's own starters (design/dex/DECISIONS.md D1): Nebrel the laurel
+// fawn, Kynder the hearth pup and Hipling the sea foal. Snivy, Cyndaquil and
+// Piplup stay in the ROM and return later as gifts from the gods.
+#define GRASS_STARTER (IS_FRLG ? SPECIES_BULBASAUR  : SPECIES_NEBREL)
+#define FIRE_STARTER  (IS_FRLG ? SPECIES_CHARMANDER : SPECIES_KYNDER)
+#define WATER_STARTER (IS_FRLG ? SPECIES_SQUIRTLE   : SPECIES_HIPLING)
 
 static const u16 sStarterMon[STARTER_MON_COUNT] =
 {

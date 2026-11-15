@@ -1,0 +1,83 @@
+line: heliad
+species:
+
+- dex: 120
+  concept: Amber poplar
+  name: Elektear
+  etymology: elektron (Greek, amber) + tear
+  category: Amber Tear
+  types: [Electric, Grass]
+  abilities: [Static, Sap Sipper]
+  hidden_ability: Electromorphosis
+  base_stats: {hp: 70, atk: 55, def: 75, spa: 110, spd: 95, spe: 80}
+  ev_yield: {spa: 2}
+  exp_yield: 170
+  catch_rate: 60
+  gender: {female_pct: 100}
+  egg_groups: [Grass, Amorphous]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 1.4
+  weight_kg: 18.0
+  myth: >-
+    When Phaethon fell from the sun chariot, his sisters the Heliades wept on
+    the riverbank until they turned into poplars. Their tears still drip from
+    the branches and harden in the sun into amber (Ovid, Metamorphoses 2). The
+    Greek for amber, elektron, gave us the word electric.
+  expression: >-
+    A poplar sprite caught halfway into a tree, weeping beads of amber that
+    crackle when they rub together. It can't stop crying, and it hasn't tried
+    to.
+  art: >-
+    Medium: it fills about 40×60 px, tall and slender. A willowy poplar sprite
+    in three-quarter view facing left, leaning forward on legs fused into a pale
+    trunk that splits into roots. One arm rises into a tall, thin poplar branch
+    of trembling leaves, and the other hand is cupped at its chest to catch the
+    glowing amber tear-beads running from its eyes. Its hair is a bob of poplar
+    leaves under a tall leafy crown, framing a pale, stylized face. Marble-white
+    and gray bark, olive and silver-leaf leaves, sun-gold amber beads with small
+    white sparks, black-figure ink outline. Frame 2 trembles the leaves as
+    another tear falls; the follower drops amber beads that blink out on the
+    ground.
+  shiny: Silver-white bark with Aegean-blue tears.
+  dex_entry:
+    - Its tears harden into amber as they
+    - fall. When the beads rub together they
+    - spark, so its weeping crackles and
+    - flashes all night along the stream.
+  habitat: >-
+    The poplars along the Kastalian stream below Delphoi, at dusk and at night;
+    rare. It stands among real poplars, and the Augur's Eye picks it out by its
+    sparks.
+  learnset:
+    level_up:
+      - [1, Absorb]
+      - [1, Thunder Shock]
+      - [1, Fake Tears]
+      - [5, Charge]
+      - [9, Mega Drain]
+      - [13, Shock Wave]
+      - [17, Leech Seed]
+      - [21, Charge Beam]
+      - [25, Giga Drain]
+      - [29, Ingrain]
+      - [33, Tearful Look]
+      - [37, Discharge]
+      - [41, Synthesis]
+      - [45, Energy Ball]
+      - [49, Thunderbolt]
+      - [53, Electric Terrain]
+      - [57, Leaf Storm]
+      - [61, Thunder]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Hyper Beam, Thunderbolt,
+      Thunder, Thunder Wave, Charge Beam, Volt Switch, Electro Ball, Eerie Impulse, Electroweb,
+      Rising Voltage, Electric Terrain, Shock Wave, Energy Ball, Giga Drain, Solar Beam, Grass Knot,
+      Magical Leaf, Leaf Storm, Grassy Terrain, Trailblaze, Pollen Puff, Worry Seed, Sunny Day,
+      Rain Dance, Weather Ball, Light Screen, Safeguard, Charm, Fake Tears, Charge]
+    egg: [Parabolic Charge, Aromatherapy, Memento, Grudge, Life Dew]
+  signature: >-
+    Static is the amber's spark: touch it and risk paralysis. Its hidden
+    ability, Electromorphosis, charges it each time it is hit, a metamorphosis
+    in Ovid's own sense.
+  new_move: null
