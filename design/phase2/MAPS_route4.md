@@ -14,6 +14,22 @@ then checks the result; run it after any change, with `--render DIR` for the rev
 images. `tools/ichor/maps/route4_encounters.py` writes the wild tables. The check:
 `tools/ichor/tests/route4.sh`.
 
+The cleared road now supports `OMEN_VISITOR_ISTHMUS_NEMECUB`, the approved
+level-18 golden cub at (28,3) on the hill spur. Capture/defeat consumes the visit;
+escape/loss keeps it available. Same-day reentry cannot respawn it, and entry
+or interaction rejects an expired visitor. The map builder preserves the
+registration without changing terrain. The route check uses native Pokemon
+creation and the existing low-met-level strength assist; it exercises actual
+loss, escape, defeat and Master Ball capture.
+
+The kiln and spur dig registrations now call the real Act I excavation table
+with Arachne sherds, at independent daily indices 4 and 5. The family tomb has
+one fixed Arachne sherd (fixed index 1); its original Girdle/Act II gate remains.
+All three require the actual Trowel. The route harness verifies missing-tool
+refusal, real sherd flags, independent finds, and repeat protection, then
+tests the tomb after granting the later relic. This is regression coverage,
+not evidence that the Girdle is naturally obtainable during Act I.
+
 | Image | Shows |
 |---|---|
 | [`img/route4.png`](img/route4.png) | The route at 2x, with its people, items and obstacles, before beat 17 |

@@ -260,6 +260,20 @@
       "flag": "FLAG_ICHOR_HIDE_PROCESSION_ROUTE4"
     },
     {
+      "local_id": "LOCALID_ROUTE4_OMEN_NEMECUB",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(NEMECUB)",
+      "x": 28,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route4_Isthmus_EventScript_OmenNemecub",
+      "flag": "FLAG_ICHOR_HIDE_OMEN_NEMECUB"
+    },
+    {
       "local_id": "LOCALID_ROUTE4_HEAP_1",
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
       "x": 52,
@@ -536,7 +550,7 @@
       "y": 22,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route4_Isthmus_EventScript_DigSpot"
+      "script": "Route4_Isthmus_EventScript_DigKilns"
     },
     {
       "type": "sign",
@@ -544,7 +558,7 @@
       "y": 2,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route4_Isthmus_EventScript_DigSpot"
+      "script": "Route4_Isthmus_EventScript_DigSpur"
     },
     {
       "type": "sign",
@@ -552,7 +566,7 @@
       "y": 22,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "Route4_Isthmus_EventScript_DigSpot"
+      "script": "Route4_Isthmus_EventScript_DigTomb"
     },
     {
       "type": "hidden_item",

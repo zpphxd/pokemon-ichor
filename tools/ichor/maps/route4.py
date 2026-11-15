@@ -818,6 +818,7 @@ PEOPLE = [
     ("INITIATE_2", GFX + "YOUTH_M", 49, 14, "DOWN", "InitiateDonkey", "FLAG_ICHOR_HIDE_PROCESSION_ROUTE4"),
     ("INITIATE_3", GFX + "YOUTH_F", 50, 15, "LEFT", "InitiateSecret", "FLAG_ICHOR_HIDE_PROCESSION_ROUTE4"),
     ("DONKEY", "OBJ_EVENT_GFX_SPECIES(ONOTIS)", 53, 15, "RIGHT", "Donkey", "FLAG_ICHOR_HIDE_PROCESSION_ROUTE4"),
+    ("OMEN_NEMECUB", "OBJ_EVENT_GFX_SPECIES(NEMECUB)", 28, 3, "DOWN", "OmenNemecub", "FLAG_ICHOR_HIDE_OMEN_NEMECUB"),
 ]
 # obstacles: local id, gfx, x, y, script, hide flag
 OBSTACLES = [
@@ -857,7 +858,7 @@ SIGNS = [
     (15, 10, "NORTH", "KalliasPanel"),
     (SHRINE[0], SHRINE[1] + 1, "ANY", "HecateShrine"),
 ]
-DIG = [(12, 22), (27, 2), (44, 22)]   # ICHOR_STUB_DIG: by the kilns and on the spur (daily); in the tomb (fixed)
+DIG = [(12, 22, "DigKilns"), (27, 2, "DigSpur"), (44, 22, "DigTomb")]
 TRIGGERS = [(TRIGGER_X, y, "RockslideScene") for y in (8, 9, 10)]
 WARPS = [(MOUTH[0], MOUTH[1], "MAP_HECATES_HOLLOW", 0)]
 
@@ -912,7 +913,7 @@ def write_events():
     bgs = [{"type": "sign", "x": x, "y": y, "elevation": 0,
             "player_facing_dir": f"BG_EVENT_PLAYER_FACING_{f}", "script": PX + s} for x, y, f, s in SIGNS]
     bgs += [{"type": "sign", "x": x, "y": y, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-             "script": PX + "DigSpot"} for x, y in DIG]
+             "script": PX + script} for x, y, script in DIG]
     bgs += [{"type": "hidden_item", "x": x, "y": y, "elevation": 3, "item": item, "flag": flag,
              "quantity": 1, "underfoot": False} for item, x, y, flag in HIDDEN]
     m["bg_events"] = bgs
@@ -931,7 +932,7 @@ def write_city_connection():
 
 def reserved_cells():
     cells = [(x, y) for _, _, x, y, *_ in TRAINERS] + [(x, y) for _, _, x, y, *_ in PEOPLE]
-    cells += [(x, y) for _, x, y, _ in ITEMS] + [(x, y) for _, x, y, _ in HIDDEN] + DIG
+    cells += [(x, y) for _, x, y, _ in ITEMS] + [(x, y) for _, x, y, _ in HIDDEN] + [(x, y) for x, y, _ in DIG]
     cells += [(x, y) for x, y, _ in TRIGGERS]
     return cells
 
@@ -1144,7 +1145,7 @@ def check(g):
             problems.append(f"sign {s} at ({x},{y}) can't be read")
         if not solid[y, x]:
             problems.append(f"sign {s} at ({x},{y}) stands on open ground")
-    for x, y in DIG:
+    for x, y, _ in DIG:
         if (x, y) not in everything_open:
             problems.append(f"dig spot ({x},{y}) can't be stood on")
     # what the relics open stays shut without them

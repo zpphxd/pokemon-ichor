@@ -21,7 +21,7 @@ engine_prepare ROUTE4 "$OUT" tools/ichor/tests/route4_consts.c ""
 # Route 4's scripts and the obstacle scripts by name, and the addresses the walk reads.
 {
   echo "return {"
-  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gPartiesCount|gBattleMons|gSaveBlock1Ptr)$/ && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
+  arm-none-eabi-nm "$ELF" | awk '$3 ~ /^(gPartiesCount|gBattleMons|gSaveBlock1Ptr|gBagPosition|Task_BagMenu_HandleInput)$/ && !seen[$3]++ { print "  " $3 " = 0x" $1 "," }'
   echo "  SCRIPTS = {"
   arm-none-eabi-nm "$ELF" | awk '$3 ~ /^Route4_Isthmus_EventScript_[A-Za-z0-9_]+$/ && $3 !~ /_[0-9]+$/ { print "    " $3 " = 0x" $1 "," }'
   arm-none-eabi-nm "$ELF" | awk '$3 ~ /^EventScript_(RockSmash|CutTree|StrengthBoulder)$/ { print "    " $3 " = 0x" $1 "," }'

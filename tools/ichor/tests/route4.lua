@@ -47,30 +47,25 @@ local function addItems(list)
   L.wait(10)
 end
 
--- A level-100 lead, written into party slot 0 (personality and OT id 0, so the
--- box data's substructs sit in order unencrypted), then raised by slice_lib's assist.
-local function giveLead()
-  local mon = L.partyMon(0)
-  for o = 0, S.POKEMON_SIZE - 1 do emu:write8(mon + o, 0) end
-  for k, b in ipairs({ 0xCE, 0xBF, 0xCD, 0xCE, 0xFF }) do emu:write8(mon + 7 + k, b) end -- "TEST"
-  emu:write8(mon + 18, 2)
-  emu:write8(mon + 19, 0x02)
-  emu:write8(mon + 20, 0xFF)
-  emu:write16(mon + S.OFF_BOXMON_SECURE, S.SPECIES_LEAD & 0x7FF)
-  -- one move that ends a trainer's battle in a turn (substruct 1 follows 0 for
-  -- personality 0): Flamethrower, with PP for every battle on the road
-  emu:write16(mon + S.OFF_BOXMON_SECURE + 12, S.MOVE_LEAD & 0x7FF)
-  emu:write8(mon + S.OFF_BOXMON_SECURE + 20, 99)
-  local sum = 0
-  for o = 0, 47, 2 do sum = sum + emu:read16(mon + S.OFF_BOXMON_SECURE + o) end
-  emu:write16(mon + S.OFF_BOXMON_CHECKSUM, sum & 0xFFFF)
-  emu:write8(mon + S.OFF_MON_LEVEL, 5)
-  emu:write8(S.gPartiesCount, 1)
-  L.assistLevel100()
-  L.log(string.format("NOTE lead move1 %d (want %d), pp %d", emu:read16(mon + S.OFF_BOXMON_SECURE + 12) & 0x7FF,
-                      S.MOVE_LEAD, emu:read8(mon + S.OFF_BOXMON_SECURE + 20) & 0x7F))
+local function giveLead(level)
+  level = level or S.MAX_LEVEL
+  for i = 0, S.PARTY_SIZE - 1 do
+    for o = 0, S.POKEMON_SIZE - 1 do emu:write8(L.partyMon(i) + o, 0) end
+  end
+  emu:write8(S.gPartiesCount, 0)
+  L.setVar(S.VAR_TEMP_0, 0)
+  L.runRamScript({ S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 },
+                   S.SCR_OP_CALLNATIVE, { S.ScrCmd_createmon | 1, 4 }, 0, S.PARTY_SIZE,
+                   { S.SPECIES_LEAD, 2 }, { level == S.MAX_LEVEL and 5 or level, 2 }, { 0, 4 },
+                   S.SCR_OP_SETMONMOVE, 0, 0, { S.MOVE_LEAD, 2 }, S.SCR_OP_END })
+  L.settle()
+  if level == S.MAX_LEVEL then
+    L.setVar(S.VAR_TEMP_0, 0)
+    L.assistLevel100()
+    L.settle()
+  end
   local hp, maxhp = L.partyHp(0)
-  expect(L.partyLevel(0) == S.MAX_LEVEL and hp > 0, string.format("a level-100 lead (HP %d/%d)", hp, maxhp))
+  expect(L.partyLevel(0) == level and hp > 0, string.format("a level-%d lead (HP %d/%d)", level, hp, maxhp))
 end
 
 local function repel() L.setVar(S.VAR_REPEL_STEP_COUNT, REPEL) end
@@ -79,6 +74,26 @@ local function read(target, what, opts)
   local boxes = L.talk(target, opts)
   expect((boxes or 0) >= 1, string.format("%s: %d message box(es)", what, boxes or 0))
   return boxes
+end
+
+local function arachneSherds()
+  local count = 0
+  for i = 0, 3 do
+    if L.getFlag(S.FLAG_ARACHNE_SHERDS + i) then count = count + 1 end
+  end
+  return count
+end
+
+local function arachneDig(script, flag, seed)
+  local before = arachneSherds()
+  local savedSeed = emu:read32(L.sb1() + S.OFF_SB1_DAILY_SEED)
+  if seed then emu:write32(L.sb1() + S.OFF_SB1_DAILY_SEED, seed) end
+  read(L.sign(P .. script), script, { every = true })
+  emu:write32(L.sb1() + S.OFF_SB1_DAILY_SEED, savedSeed)
+  expect(L.getFlag(flag), script .. " records its own dig")
+  expect(arachneSherds() == before + 1, script .. " gives one actual Arachne sherd")
+  read(L.sign(P .. script), script .. " again")
+  expect(arachneSherds() == before + 1, script .. " cannot give the sherd twice")
 end
 
 -- Top the lead's HP back up between battles.
@@ -158,7 +173,13 @@ local function potters()
   read(L.npc(P .. "KilnWorker"), "the kiln worker", { shots = { [1] = "kiln_worker" } })
   item(S.FLAG_ITEM_POTION, "the Potion by the kilns")
   hidden(S.FLAG_HIDDEN_ETHER, "the Ether in the kiln's ash")
-  read(L.sign(P .. "DigSpot"), "a dig spot")
+  read(L.sign(P .. "DigKilns"), "the kiln dig without the Trowel")
+  expect(not L.getFlag(S.FLAG_DIG_KILNS) and arachneSherds() == 0, "a missing Trowel leaves the kiln find untouched")
+  addItems({ { S.ITEM_TROWEL, 1 } })
+  expect(L.itemCount(S.ITEM_TROWEL) == 1, "the route fixture receives a real Trowel")
+  -- Both initial rolls select sherds, with or without Demeter's reroll.
+  arachneDig("DigKilns", S.FLAG_DIG_KILNS, 0x2F)
+  expect(not L.getFlag(S.FLAG_DIG_SPUR), "the kiln dig leaves the spur's daily find available")
   read(L.npc(P .. "Exekias"), "Exekias after")
 end
 
@@ -203,6 +224,7 @@ local function spur()
   read(L.npc(P .. "Menalkas"), "Menalkas after")
   read(L.npc(P .. "Goat"), "a goat")
   item(S.FLAG_ITEM_SUPER_POTION, "the spur's Super Potion")
+  arachneDig("DigSpur", S.FLAG_DIG_SPUR, 0x1D)
   -- the orchard is shut by its thicket until Demeter's Sickle
   local thicket = L.npc("EventScript_CutTree")
   read(thicket, "the thicket without the Sickle", { shots = { [1] = "thicket_shut" } })
@@ -256,6 +278,7 @@ local function lower()
   item(S.FLAG_ITEM_REPEL, "the Repel in the walled plot")
   read(L.npc("EventScript_StrengthBoulder"), "the drum without the Girdle", { shots = { [1] = "drum_shut" } })
   expect(not L.getFlag(S.FLAG_ITEM_REVIVE), "the family tomb stays shut without the Girdle")
+  expect(not L.getFlag(S.FLAG_DIG_TOMB), "the Girdle-gated tomb find is still unclaimed")
   -- a wild Pokemon from Route 4's table in the east meadow
   local names = {}
   for _, n in ipairs({ "EPOPOI", "LOPHOPS", "ONOTIS", "KERAZAP", "GALEKIT", "CHELONET", "ERGANT", "ELALEAF",
@@ -345,8 +368,123 @@ local function relics()
   local x, y = L.pos()
   expect(y <= 22, string.format("the drum pushed in and the tomb entered (at %d,%d)", x, y))
   item(S.FLAG_ITEM_REVIVE, "the tomb's Revive")
-  read(L.sign(P .. "DigSpot"), "the tomb's dig spot")
+  arachneDig("DigTomb", S.FLAG_DIG_TOMB)
   L.shot("tomb_open")
+end
+
+local function omenVisitor()
+  L.setBeat("visitor", false)
+  local kind = emu:read8(L.ichor() + S.OFF_ICHOR_OMEN_KIND)
+  local entry = emu:read16(L.ichor() + S.OFF_ICHOR_OMEN_ENTRY)
+  local noRunning = L.getFlag(S.FLAG_NO_RUNNING)
+  local script = P .. "OmenNemecub"
+  local function setOmen(k, e)
+    emu:write8(L.ichor() + S.OFF_ICHOR_OMEN_KIND, k)
+    emu:write16(L.ichor() + S.OFF_ICHOR_OMEN_ENTRY, e)
+  end
+  local function reload()
+    warpTo(S.MAP_EMPORION, 8, 8)
+    warpTo(S.MAP_ROUTE4, 26, 3)
+  end
+  setOmen(S.OMEN_GOOD_SIGN, S.OMEN_LUCKY_THREE)
+  L.setFlag(S.FLAG_OMEN_NEMECUB, false)
+  reload()
+  expect(not L.npc(script).present, "no off-day golden cub, even with an unset legacy hide flag")
+  setOmen(S.OMEN_VISITOR, S.OMEN_NEMECUB)
+  L.setFlag(S.FLAG_OMEN_NEMECUB, false)
+  reload()
+  expect(L.npc(script).present, "the matching omen places the golden cub on the hill spur")
+  L.shot("nemecub_on_the_spur")
+  local visitor = L.npc(script).tiles[1]
+  L.go(visitor.x - 1, visitor.y)
+  expect(emu:saveStateFile(L.OUT .. "before_visitor.ss", 31), "saved the uncaught golden-cub state")
+  giveLead(1)
+  L.setFlag(S.FLAG_NO_RUNNING, true)
+  L.talk(L.npc(script))
+  expect(L.battles[#L.battles].outcome == S.B_OUTCOME_LOST
+         and not L.getFlag(S.FLAG_OMEN_NEMECUB) and not L.getFlag(S.FLAG_CTRL_OBJ_DELETE),
+         "losing does not consume the golden cub or leave object-delete control set")
+  expect(emu:loadStateFile(L.OUT .. "before_visitor.ss", 31), "restored the uncaught golden-cub state")
+  L.wait(20)
+  L.setFlag(S.FLAG_NO_RUNNING, false)
+  L.talk(L.npc(script), { stop = L.inBattle, every = true })
+  L.wait(120)
+  expect(emu:read16(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_SPECIES) == S.SPECIES_NEMECUB
+         and emu:read8(S.gBattleMons + S.BATTLE_MON_SIZE + S.OFF_BATTLE_MON_LEVEL) == 18,
+         "the golden cub starts a real level-18 Nemecub encounter")
+  local ran = L.battle()
+  L.settle()
+  expect(ran.outcome == S.B_OUTCOME_RAN and not L.getFlag(S.FLAG_OMEN_NEMECUB),
+         "running keeps today's golden cub available")
+  reload()
+  expect(L.npc(script).present, "the uncaught golden cub survives reentry")
+  L.setFlag(S.FLAG_NO_RUNNING, true)
+  L.talk(L.npc(script))
+  expect(L.battles[#L.battles].outcome == S.B_OUTCOME_WON
+         and L.getFlag(S.FLAG_OMEN_NEMECUB) and not L.npc(script).present,
+         "defeating the golden cub saves its hide state and removes the object")
+  reload()
+  expect(not L.npc(script).present, "same-day reentry cannot respawn the defeated cub")
+  L.setFlag(S.FLAG_OMEN_NEMECUB, false)
+  reload()
+  local battles = #L.battles
+  setOmen(S.OMEN_GOOD_SIGN, S.OMEN_LUCKY_THREE)
+  L.talk(L.npc(script))
+  expect(#L.battles == battles and not L.npc(script).present,
+         "an on-map day change prevents an expired golden-cub battle")
+  setOmen(S.OMEN_VISITOR, S.OMEN_NEMECUB)
+  L.setFlag(S.FLAG_OMEN_NEMECUB, false)
+  reload()
+  local code = { S.SCR_OP_SETVAR, { S.VAR_TEMP_0, 2 }, { 1, 2 } }
+  local key = emu:read32(L.sb2() + S.OFF_SB2_ENCRYPTION_KEY) & 0xFFFF
+  for i = 0, S.BAG_POKEBALLS_COUNT - 1 do
+    local slot = L.sb1() + S.OFF_SB1_POKEBALLS + i * S.ITEM_SLOT_SIZE
+    local item = emu:read16(slot)
+    if item ~= 0 then
+      code[#code + 1] = S.SCR_OP_REMOVEITEM
+      code[#code + 1] = { item, 2 }
+      code[#code + 1] = { emu:read16(slot + S.OFF_ITEM_SLOT_QUANTITY) ~ key, 2 }
+    end
+  end
+  code[#code + 1] = S.SCR_OP_ADDITEM
+  code[#code + 1] = { S.ITEM_MASTER_BALL, 2 }
+  code[#code + 1] = { 1, 2 }
+  code[#code + 1] = S.SCR_OP_END
+  L.setVar(S.VAR_TEMP_0, 0)
+  L.runRamScript(code)
+  L.settle()
+  expect(L.itemCount(S.ITEM_MASTER_BALL) == 1, "the golden-cub capture has one real Master Ball")
+  L.talk(L.npc(script), { stop = L.inBattle })
+  L.waitUntil(function()
+    if emu:read32(S.gBattlerControllerFuncs) == (S.HandleInputChooseAction | 1) then return true end
+    L.tap(K.A); L.wait(4)
+    return false
+  end, 1200, "the golden-cub battle action menu")
+  L.tap(K.UP); L.tap(K.RIGHT); L.tap(K.A)
+  L.waitUntil(function() return L.taskRunning("Task_BagMenu_HandleInput") end, 1200, "the golden-cub battle Bag")
+  L.wait(30)
+  for i = 1, S.POCKETS_COUNT do
+    if emu:read8(S.gBagPosition + S.OFF_BAG_POSITION_POCKET) == S.POCKET_POKE_BALLS then break end
+    L.tap(K.RIGHT); L.wait(50)
+  end
+  expect(emu:read8(S.gBagPosition + S.OFF_BAG_POSITION_POCKET) == S.POCKET_POKE_BALLS,
+         "the golden-cub battle Bag opens the Poke Ball pocket")
+  L.tap(K.UP); L.tap(K.UP); L.tap(K.A); L.wait(20); L.tap(K.A)
+  L.waitUntil(function()
+    if L.inOverworld() then return true end
+    if L.on("CB2_NamingScreen") then L.acceptName("caught_nemecub") else L.tap(K.A); L.wait(4) end
+    return false
+  end, 12000, "the golden-cub capture and return to the spur")
+  L.settle()
+  expect(emu:read8(S.gBattleOutcome) == S.B_OUTCOME_CAUGHT
+         and emu:read8(S.gPartiesCount) == 2 and L.itemCount(S.ITEM_MASTER_BALL) == 0
+         and L.getFlag(S.FLAG_OMEN_NEMECUB) and not L.npc(script).present,
+         "an actual capture adds Nemecub, consumes the ball and removes the visitor")
+  reload()
+  expect(not L.npc(script).present, "same-day reentry cannot respawn the captured cub")
+  setOmen(kind, entry)
+  L.setFlag(S.FLAG_NO_RUNNING, noRunning)
+  reload()
 end
 
 L.start(function()
@@ -360,5 +498,6 @@ L.start(function()
   lower()
   slide()
   relics()
+  omenVisitor()
   L.log("ok the walk is done")
 end)
