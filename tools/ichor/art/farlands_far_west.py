@@ -757,7 +757,6 @@ def strait():
                         L.px(i * 16 + x, y, "pk2" if f != 1 else "gl")
                     elif v == 5 and f == 2:
                         L.px(i * 16 + x, y, "b4")
-    F.settle(s, "glow", [(0, 0), (1, 0)])
     M = s.M
     # fog: a dithered bank of violet-white mist, denser westward
     for i in (2, 3, 4, 5):
@@ -789,6 +788,7 @@ def strait():
         for x, ch in enumerate(row):
             if ch == "1":
                 M.px(64 + x, 5 + j, "ns1" if (x + j) % 3 else "ev1")
+    F.settle(s, "glow", [(0, 0), (1, 0)])
     return s
 
 
@@ -995,7 +995,6 @@ def stream():
                             L.px(i * 16 + x, y, c)
                         elif d < r + 1 + (f % 3) * 0.7 and (x + y + f) % 2 == 0:
                             L.px(i * 16 + x, y, "gl" if f == 1 else "pk2")
-    F.settle(s, "glow", [(0, 0), (1, 0)])
     M, B = s.M, s.B
     # the void: stars on deep night
     for i in (4, 5):
@@ -1029,6 +1028,7 @@ def stream():
                     M.px(i * 16 + x, y, "w0" if (y + xx) % 3 else "ev3")
                 elif xx < edge + 2 and (y + x) % 2:
                     M.px(i * 16 + x, y, "b4")
+    F.settle(s, "glow", [(0, 0), (1, 0)])
     return s
 
 

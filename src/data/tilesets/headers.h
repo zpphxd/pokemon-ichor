@@ -507,3 +507,18 @@ const struct Tileset gTileset_SteppeTown =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_SteppeTown,
     .callback = NULL,
 };
+
+// Ichor: steppe_camp, the horse-peoples' camps: Themiskyra, Diomedes's yard, the Wagon Camp (post-game). Porytiles-managed, built by
+// tools/ichor/art/farlands_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_SteppeCamp =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_SteppeCamp,
+    .palettes = gTilesetPalettes_PorytilesManaged_SteppeCamp,
+    .metatiles = gMetatiles_PorytilesManaged_SteppeCamp,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_SteppeCamp,
+    .callback = InitTilesetAnim_PorytilesManaged_SteppeCamp,
+};

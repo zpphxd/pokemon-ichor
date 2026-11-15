@@ -407,7 +407,6 @@ def fountain():
                     L.px(int(x), yy, "w0" if j % 2 == f % 2 else "b4")
         for (x, y) in ((8 + f, 15), (22 - f, 15), (12, 17 - f % 2), (19, 17 - (f + 1) % 2)):
             L.px(x, y, "w0")
-    F.settle(s, "splash", [(0, 0), (1, 0), (0, 1), (1, 1)])
     # the spring: mossy blocks round a well-up pool
     for y in range(32):
         for x in range(32):
@@ -427,6 +426,7 @@ def fountain():
         for x in range(bx, bx + w):
             if by + h_ < 32:
                 M.px(32 + x, by + h_, "gd")
+    F.settle(s, "splash", [(0, 0), (1, 0), (0, 1), (1, 1)])
     return s
 
 

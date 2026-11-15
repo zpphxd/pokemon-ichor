@@ -74,13 +74,13 @@ static void QueueAnimTiles_PorytilesManaged_Hesperides_Glint(u16 timer)
 static void QueueAnimTiles_PorytilesManaged_Hesperides_Splash(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Hesperides_Splash);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Hesperides_Splash[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 11)), 20 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Hesperides_Splash[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 11)), 6 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_PorytilesManaged_Hesperides_Twinkle(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Hesperides_Twinkle);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Hesperides_Twinkle[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 31)), 16 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Hesperides_Twinkle[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 17)), 16 * TILE_SIZE_4BPP);
 }
 
 // ============================================

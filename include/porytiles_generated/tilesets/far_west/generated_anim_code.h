@@ -79,19 +79,19 @@ static void QueueAnimTiles_PorytilesManaged_FarWest_Breakers(u16 timer)
 static void QueueAnimTiles_PorytilesManaged_FarWest_Glow(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_FarWest_Glow);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_FarWest_Glow[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 9)), 36 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_FarWest_Glow[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 9)), 14 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_PorytilesManaged_FarWest_Surf(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_FarWest_Surf);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_FarWest_Surf[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 45)), 46 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_FarWest_Surf[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 23)), 46 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_PorytilesManaged_FarWest_Twinkle(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_FarWest_Twinkle);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_FarWest_Twinkle[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 91)), 8 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_FarWest_Twinkle[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 69)), 8 * TILE_SIZE_4BPP);
 }
 
 // ============================================
