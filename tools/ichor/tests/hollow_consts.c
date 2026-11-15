@@ -61,7 +61,7 @@ K(FLAG_NO_RUNNING, FLAG_ICHOR_NO_RUNNING)
 
 // the field: flash, the swapped metatiles
 K(OFF_SB1_FLASH, offsetof(struct SaveBlock1, flashLevel))
-K(VAR_TEMP_2_E, VAR_TEMP_2)
+K(VAR_TEMP_2_E, VAR_TEMP_8)
 K(MT_WEB_TORN_0, METATILE_CaveDark_Web1_Torn_0)
 K(MT_WEB_0, METATILE_CaveDark_Web1_0)
 K(MT_BRAZIER_LIT_00, METATILE_CaveDark_Brazier_Lit_00)

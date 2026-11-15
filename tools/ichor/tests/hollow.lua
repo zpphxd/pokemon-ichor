@@ -252,9 +252,12 @@ local function shortcut()
   L.wait(40)
   local x, y = L.pos()
   expect(y == 18, string.format("down the ledge (at %d,%d)", x, y))
+  -- A wild battle can break into a walk; try each pick-up again once if so.
   L.talk(L.ball(S.FLAG_ITEM_DUSK_BALL))
+  if not L.getFlag(S.FLAG_ITEM_DUSK_BALL) then L.talk(L.ball(S.FLAG_ITEM_DUSK_BALL)) end
   expect(L.getFlag(S.FLAG_ITEM_DUSK_BALL), "the Dusk Ball at the ledge's foot")
   L.talk(L.hidden(S.FLAG_HIDDEN_HARD_STONE))
+  if not L.getFlag(S.FLAG_HIDDEN_HARD_STONE) then L.talk(L.hidden(S.FLAG_HIDDEN_HARD_STONE)) end
   expect(L.getFlag(S.FLAG_HIDDEN_HARD_STONE), "the shortcut's hidden Hard Stone")
   L.go(43, 34)
   expect(region() == 1 and flash() == LIT, "back out in the east mouth's daylight")

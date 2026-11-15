@@ -413,7 +413,7 @@
       "x": 33,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterHekataion"
     },
@@ -422,7 +422,7 @@
       "x": 34,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "2",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -431,7 +431,7 @@
       "x": 15,
       "y": 8,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "2",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -440,7 +440,7 @@
       "x": 16,
       "y": 8,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterHekataion"
     },
@@ -449,7 +449,7 @@
       "x": 33,
       "y": 8,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterHekataion"
     },
@@ -458,7 +458,7 @@
       "x": 34,
       "y": 8,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "2",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -467,7 +467,7 @@
       "x": 15,
       "y": 9,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "2",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -476,7 +476,7 @@
       "x": 16,
       "y": 9,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterHekataion"
     },
@@ -485,7 +485,7 @@
       "x": 33,
       "y": 9,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterHekataion"
     },
@@ -494,7 +494,7 @@
       "x": 34,
       "y": 9,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "2",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -503,7 +503,7 @@
       "x": 33,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterHekataion"
     },
@@ -512,7 +512,7 @@
       "x": 34,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "2",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -521,7 +521,7 @@
       "x": 5,
       "y": 11,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "3",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -530,7 +530,7 @@
       "x": 13,
       "y": 11,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "3",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -539,7 +539,7 @@
       "x": 5,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterBrazier1"
     },
@@ -548,7 +548,7 @@
       "x": 13,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterBrazier1"
     },
@@ -557,7 +557,7 @@
       "x": 23,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterHekataion"
     },
@@ -566,7 +566,7 @@
       "x": 24,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterHekataion"
     },
@@ -575,7 +575,7 @@
       "x": 25,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterHekataion"
     },
@@ -584,7 +584,7 @@
       "x": 23,
       "y": 13,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "2",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -593,7 +593,7 @@
       "x": 24,
       "y": 13,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "2",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -602,7 +602,7 @@
       "x": 25,
       "y": 13,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "2",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -611,7 +611,7 @@
       "x": 3,
       "y": 17,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterBrazier1"
     },
@@ -620,7 +620,7 @@
       "x": 4,
       "y": 17,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterBrazier1"
     },
@@ -629,7 +629,7 @@
       "x": 3,
       "y": 18,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "3",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -638,7 +638,7 @@
       "x": 4,
       "y": 18,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "3",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -647,7 +647,7 @@
       "x": 3,
       "y": 21,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -656,7 +656,7 @@
       "x": 4,
       "y": 21,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -665,7 +665,7 @@
       "x": 3,
       "y": 22,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -674,7 +674,7 @@
       "x": 4,
       "y": 22,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -683,7 +683,7 @@
       "x": 3,
       "y": 23,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "5",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -692,7 +692,7 @@
       "x": 3,
       "y": 24,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDaylightWest"
     },
@@ -701,7 +701,7 @@
       "x": 4,
       "y": 24,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "5",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -710,7 +710,7 @@
       "x": 3,
       "y": 26,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDaylightWest"
     },
@@ -719,7 +719,7 @@
       "x": 4,
       "y": 26,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "5",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -728,7 +728,7 @@
       "x": 3,
       "y": 27,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDaylightWest"
     },
@@ -737,7 +737,7 @@
       "x": 4,
       "y": 27,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "5",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -746,7 +746,7 @@
       "x": 3,
       "y": 28,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDaylightWest"
     },
@@ -755,7 +755,7 @@
       "x": 4,
       "y": 28,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "5",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -764,7 +764,7 @@
       "x": 3,
       "y": 29,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDaylightWest"
     },
@@ -773,7 +773,7 @@
       "x": 4,
       "y": 29,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "5",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -782,7 +782,7 @@
       "x": 41,
       "y": 31,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -791,7 +791,7 @@
       "x": 43,
       "y": 31,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -800,7 +800,7 @@
       "x": 44,
       "y": 31,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -809,7 +809,7 @@
       "x": 7,
       "y": 32,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -818,7 +818,7 @@
       "x": 8,
       "y": 32,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -827,7 +827,7 @@
       "x": 9,
       "y": 32,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterBrazier2"
     },
@@ -836,7 +836,7 @@
       "x": 40,
       "y": 32,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -845,7 +845,7 @@
       "x": 41,
       "y": 32,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -854,7 +854,7 @@
       "x": 43,
       "y": 32,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -863,7 +863,7 @@
       "x": 44,
       "y": 32,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -872,7 +872,7 @@
       "x": 7,
       "y": 33,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -881,7 +881,7 @@
       "x": 8,
       "y": 33,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -890,7 +890,7 @@
       "x": 9,
       "y": 33,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "4",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -899,7 +899,7 @@
       "x": 41,
       "y": 33,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -908,7 +908,7 @@
       "x": 40,
       "y": 34,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -917,7 +917,7 @@
       "x": 41,
       "y": 34,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -926,7 +926,7 @@
       "x": 40,
       "y": 35,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -935,7 +935,7 @@
       "x": 41,
       "y": 35,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -944,7 +944,7 @@
       "x": 40,
       "y": 36,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -953,7 +953,7 @@
       "x": 41,
       "y": 36,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -962,7 +962,7 @@
       "x": 42,
       "y": 36,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -971,7 +971,7 @@
       "x": 43,
       "y": 36,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -980,7 +980,7 @@
       "x": 44,
       "y": 36,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "0",
       "script": "HecatesHollow_EventScript_EnterDaylightEast"
     },
@@ -989,7 +989,7 @@
       "x": 41,
       "y": 37,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -998,7 +998,7 @@
       "x": 42,
       "y": 37,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -1007,7 +1007,7 @@
       "x": 43,
       "y": 37,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     },
@@ -1016,7 +1016,7 @@
       "x": 44,
       "y": 37,
       "elevation": 0,
-      "var": "VAR_TEMP_2",
+      "var": "VAR_TEMP_8",
       "var_value": "1",
       "script": "HecatesHollow_EventScript_EnterDark"
     }

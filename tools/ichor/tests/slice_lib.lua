@@ -339,8 +339,9 @@ function L.battle()
       end
       turns = turns + 1
       -- a wild battle that can't be run from (FLAG_ICHOR_NO_RUNNING, Phase 2's
-      -- deck snatchers) is fought like a trainer's
-      if trainer or (S.FLAG_NO_RUNNING and L.getFlag(S.FLAG_NO_RUNNING)) then
+      -- deck snatchers) is fought like a trainer's, and so is one that won't let
+      -- the player go (Arena Trap, Shadow Tag): after three tries, fight
+      if trainer or turns > 3 or (S.FLAG_NO_RUNNING and L.getFlag(S.FLAG_NO_RUNNING)) then
         tap(K.UP); tap(K.LEFT); tap(K.A)     -- FIGHT
       else
         tap(K.DOWN); tap(K.RIGHT); tap(K.A)  -- RUN

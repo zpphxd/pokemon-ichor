@@ -23,7 +23,7 @@ and a half of light without Hecate's Torch, three and a half with it.
   the way back     from the Hekataion east, the shortcut tunnel to the east mouth
                    (its cobweb burns from the inside)
 
-Lighting is a small state machine (SYSTEMS.md §2's lit zones): VAR_TEMP_2 holds
+Lighting is a small state machine (SYSTEMS.md §2's lit zones): VAR_TEMP_8 holds
 the region the player stands in (REGIONS below; 0 is the dark). Every cell on a
 region's edge carries a trigger for each neighbouring region, so stepping across
 an edge runs the new region's Enter script once, which sets the light: the
@@ -407,7 +407,7 @@ def write_layout(ids, walk):
 
 
 # ---------------------------------------------------------------------------
-# The light: regions (VAR_TEMP_2), each a rect of open cells; the first rect
+# The light: regions (VAR_TEMP_8), each a rect of open cells; the first rect
 # that holds a cell names its region. 0, everywhere else, is the dark.
 # ---------------------------------------------------------------------------
 REGIONS = [
@@ -562,7 +562,7 @@ def write_events(walk):
     for x, y, frm, to in region_triggers(walk):
         if (x, y) in standing:          # nobody steps where someone stands
             continue
-        coords.append({"type": "trigger", "x": x, "y": y, "elevation": 0, "var": "VAR_TEMP_2",
+        coords.append({"type": "trigger", "x": x, "y": y, "elevation": 0, "var": "VAR_TEMP_8",
                        "var_value": str(frm), "script": PX + "Enter" + REGION_NAME[to]})
     m["coord_events"] = coords
     bgs = [{"type": "sign", "x": x, "y": y, "elevation": 0, "player_facing_dir": f"BG_EVENT_PLAYER_FACING_{f}",
@@ -665,15 +665,15 @@ def script_block():
     o.append("    return")
     o.append("}")
     o.append("")
-    o.append("// ON_TRANSITION: the region the player arrives in (VAR_TEMP_2) and its light.")
+    o.append("// ON_TRANSITION: the region the player arrives in (VAR_TEMP_8) and its light.")
     o.append(f"script {PX}FindRegion {{")
     o.append("    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)")
-    o.append("    setvar(VAR_TEMP_2, 0)")
+    o.append("    setvar(VAR_TEMP_8, 0)")
     for k, (i, name, (x0, y0, x1, y1)) in enumerate(REGIONS):
         kw = "if" if k == 0 else "elif"
         o.append(f"    {kw} (var(VAR_TEMP_0) >= {x0} && var(VAR_TEMP_0) <= {x1} && "
                  f"var(VAR_TEMP_1) >= {y0} && var(VAR_TEMP_1) <= {y1}) {{")
-        o.append(f"        setvar(VAR_TEMP_2, {i})")
+        o.append(f"        setvar(VAR_TEMP_8, {i})")
         o.append(f"        call({PX}Light{name})")
         o.append("    }")
     o.append("    return")
@@ -946,7 +946,7 @@ def render(m, cold, lit, out):
             elif tint[region_of(x, y)]:
                 d.rectangle([x * c, y * c, x * c + c - 1, y * c + c - 1], fill=tint[region_of(x, y)])
     for e in m["coord_events"]:
-        col = (255, 255, 255, 140) if e["var"] == "VAR_TEMP_2" else (255, 60, 200, 200)
+        col = (255, 255, 255, 140) if e["var"] == "VAR_TEMP_8" else (255, 60, 200, 200)
         d.rectangle([e["x"] * c + 10, e["y"] * c + 10, e["x"] * c + c - 11, e["y"] * c + c - 11], fill=col)
     for b in m["bg_events"]:
         d.rectangle([b["x"] * c + 2, b["y"] * c + 2, b["x"] * c + c - 3, b["y"] * c + c - 3],

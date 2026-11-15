@@ -6,14 +6,14 @@
 // map.json's events and the generated block at the end of this file. It is a dark
 // map ("cave": true): the engine gives the Torch's light (ENGINE_API.md §2).
 //
-// The light: VAR_TEMP_2 is the region the player stands in (0 the dark, 1 the east
+// The light: VAR_TEMP_8 is the region the player stands in (0 the dark, 1 the east
 // mouth's daylight, 2 the Hekataion, 3 Hekabe's hall, 4 hall 2, 5 the west mouth's
 // daylight). Every edge cell has a trigger per neighbouring region that runs the new
 // region's Enter script, which sets the light once.
 //
-// Temp vars: VAR_TEMP_0/1 the player's cell on arrival; VAR_TEMP_2 the region;
+// Temp vars: VAR_TEMP_0/1 the player's cell on arrival; VAR_TEMP_8 the region;
 // VAR_TEMP_4 the flash level the map last set (0: the torch's own);
-// VAR_TEMP_3 is 0 when the webs need redrawing (a web's script sets it, ON_FRAME
+// VAR_TEMP_9 is 0 when the webs need redrawing (a web's script sets it, ON_FRAME
 // redraws); VAR_TEMP_5/6/7 the barks at forks 1/2/3, once a visit.
 // Temp flags: FLAG_TEMP_1 hides Raknit, FLAG_TEMP_2 the hound that stays, FLAG_TEMP_3
 // and _4 the two that fade (all set or cleared in ON_TRANSITION).
@@ -53,7 +53,7 @@ mapscripts HecatesHollow_MapScripts {
         call(HecatesHollow_EventScript_DrawCave)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_TEMP_3, 0: HecatesHollow_EventScript_RedrawWebs
+        VAR_TEMP_9, 0: HecatesHollow_EventScript_RedrawWebs
     ]
 }
 
@@ -179,7 +179,7 @@ script HecatesHollow_EventScript_FlashToTorch {
 }
 
 script HecatesHollow_EventScript_EnterDark {
-    setvar(VAR_TEMP_2, 0)
+    setvar(VAR_TEMP_8, 0)
     if (!flag(FLAG_ICHOR_GOT_HECATES_TORCH) && var(VAR_TEMP_4) != 0) {
         goto(HecatesHollow_EventScript_ReloadInTheDark)
     }
@@ -199,20 +199,20 @@ script HecatesHollow_EventScript_ReloadInTheDark {
 }
 
 script HecatesHollow_EventScript_EnterDaylightEast {
-    setvar(VAR_TEMP_2, 1)
+    setvar(VAR_TEMP_8, 1)
     call(HecatesHollow_EventScript_FlashToLit)
     end
 }
 
 script HecatesHollow_EventScript_EnterDaylightWest {
-    setvar(VAR_TEMP_2, 5)
+    setvar(VAR_TEMP_8, 5)
     call(HecatesHollow_EventScript_FlashToLit)
     end
 }
 
 // The round chamber is lit faintly from above until the Hekataion's torches burn.
 script HecatesHollow_EventScript_EnterHekataion {
-    setvar(VAR_TEMP_2, 2)
+    setvar(VAR_TEMP_8, 2)
     if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
         call(HecatesHollow_EventScript_FlashToLit)
     } else {
@@ -223,7 +223,7 @@ script HecatesHollow_EventScript_EnterHekataion {
 }
 
 script HecatesHollow_EventScript_EnterBrazier1 {
-    setvar(VAR_TEMP_2, 3)
+    setvar(VAR_TEMP_8, 3)
     if (flag(HH_BRAZIER_1)) {
         call(HecatesHollow_EventScript_FlashToLit)
     } else {
@@ -233,7 +233,7 @@ script HecatesHollow_EventScript_EnterBrazier1 {
 }
 
 script HecatesHollow_EventScript_EnterBrazier2 {
-    setvar(VAR_TEMP_2, 4)
+    setvar(VAR_TEMP_8, 4)
     if (flag(HH_BRAZIER_2)) {
         call(HecatesHollow_EventScript_FlashToLit)
     } else {
@@ -443,12 +443,12 @@ script HecatesHollow_EventScript_Hound {
 // ---------------------------------------------------------------------------
 
 script HecatesHollow_EventScript_Web {
-    setvar(VAR_TEMP_3, 0)
+    setvar(VAR_TEMP_9, 0)
     goto(EventScript_IchorCobweb)
 }
 
 script HecatesHollow_EventScript_RedrawWebs {
-    setvar(VAR_TEMP_3, 1)
+    setvar(VAR_TEMP_9, 1)
     call(HecatesHollow_EventScript_DrawWebs)
     special(DrawWholeMapView)
     end
@@ -679,28 +679,28 @@ script HecatesHollow_EventScript_DrawWebs {
     return
 }
 
-// ON_TRANSITION: the region the player arrives in (VAR_TEMP_2) and its light.
+// ON_TRANSITION: the region the player arrives in (VAR_TEMP_8) and its light.
 script HecatesHollow_EventScript_FindRegion {
     getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    setvar(VAR_TEMP_2, 0)
+    setvar(VAR_TEMP_8, 0)
     if (var(VAR_TEMP_0) >= 41 && var(VAR_TEMP_0) <= 47 && var(VAR_TEMP_1) >= 32 && var(VAR_TEMP_1) <= 36) {
-        setvar(VAR_TEMP_2, 1)
+        setvar(VAR_TEMP_8, 1)
         call(HecatesHollow_EventScript_LightDaylightEast)
     }
     elif (var(VAR_TEMP_0) >= 16 && var(VAR_TEMP_0) <= 33 && var(VAR_TEMP_1) >= 2 && var(VAR_TEMP_1) <= 12) {
-        setvar(VAR_TEMP_2, 2)
+        setvar(VAR_TEMP_8, 2)
         call(HecatesHollow_EventScript_LightHekataion)
     }
     elif (var(VAR_TEMP_0) >= 1 && var(VAR_TEMP_0) <= 14 && var(VAR_TEMP_1) >= 12 && var(VAR_TEMP_1) <= 17) {
-        setvar(VAR_TEMP_2, 3)
+        setvar(VAR_TEMP_8, 3)
         call(HecatesHollow_EventScript_LightBrazier1)
     }
     elif (var(VAR_TEMP_0) >= 0 && var(VAR_TEMP_0) <= 3 && var(VAR_TEMP_1) >= 24 && var(VAR_TEMP_1) <= 29) {
-        setvar(VAR_TEMP_2, 5)
+        setvar(VAR_TEMP_8, 5)
         call(HecatesHollow_EventScript_LightDaylightWest)
     }
     elif (var(VAR_TEMP_0) >= 3 && var(VAR_TEMP_0) <= 12 && var(VAR_TEMP_1) >= 22 && var(VAR_TEMP_1) <= 32) {
-        setvar(VAR_TEMP_2, 4)
+        setvar(VAR_TEMP_8, 4)
         call(HecatesHollow_EventScript_LightBrazier2)
     }
     return
