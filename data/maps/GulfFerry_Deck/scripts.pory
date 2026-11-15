@@ -95,6 +95,7 @@ script GulfFerry_Deck_EventScript_Alethea {
 script GulfFerry_Deck_EventScript_Goat {
     lock
     faceplayer
+    // ICHOR_STUB_AETHOS_DEX: Kerazap (the goats) cries as its stand-in until the dex lands
     playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
     setspeaker(GulfFerry_Deck_Name_Goat)
     msgbox(format("Mehh."))

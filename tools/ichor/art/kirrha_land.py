@@ -97,8 +97,6 @@ def cliff_kit():
                     M.blit(["43", "21"], {"4": "pg4", "3": "pg3", "2": "pg2", "1": "pg1"}, xx, yy)
     KL.scrub(M, 20, 6)
     KL.scrub(M, 37, 7, big=True)
-    KL.scrub(B, 40, 22)
-    KL.scrub(B, 22, 37)
     # the left end: grass west of a lit, rounded flank; a joint at its east edge
     for y in range(0, 80):
         L = B if 16 <= y < 48 else M
@@ -640,7 +638,50 @@ def drowned_roofs():
     return s
 
 
+def well():
+    """A village well: a round grey well-head, a timber frame and pulley, a bucket on
+    its rope. 1x1 on grass."""
+    s = struct("well", "Village well", 1, 1, walk=["X"],
+               notes="A round limestone well-head with a timber frame and a bucket, on aethos "
+                     "grass. Impassable.", section=SEC)
+    KL.ground(s, "grass")
+    M = s.M
+    M.ellipse(1, 7, 14, 15, "pg3")
+    M.ellipse(2, 7, 13, 11, "pg4")
+    M.ellipse(4, 8, 11, 10, "pg0")
+    M.hline(3, 12, 13, "pg2")
+    M.hline(3, 12, 15, "pg1")
+    M.outline("ink")
+    M.vline(2, 1, 9, "pg1")
+    M.vline(13, 1, 9, "pg1")
+    M.hline(1, 14, 1, "pg2")
+    M.hline(1, 14, 2, "pg1")
+    M.vline(8, 3, 6, "lv0")
+    M.rect(6, 5, 4, 3, "pg2")
+    return s
+
+
+def bench():
+    """A long stone bench, for the grove's meetings ("shorter ones"). 2x1 on grass."""
+    s = struct("bench", "Stone bench", 2, 1, walk=["XX"],
+               notes="A long limestone bench on two blocks, on aethos grass, worn smooth. "
+                     "Impassable.", section=SEC)
+    KL.ground(s, "grass")
+    M = s.M
+    M.rect(1, 5, 30, 4, "pg4")
+    M.hline(1, 30, 5, "pg5")
+    M.hline(1, 30, 8, "pg2")
+    M.rect(3, 9, 5, 5, "pg3")
+    M.rect(24, 9, 5, 5, "pg3")
+    M.vline(7, 9, 13, "pg1")
+    M.vline(28, 9, 13, "pg1")
+    M.outline("ink")
+    for x in range(2, 30):
+        M.px(x, 15, "gr1")
+    return s
+
+
 def build():
     return [cliff_kit(), outcrop_small(), delphoi(), cleft(), laurel(),
             plane(), plane(hollow=True), pilgrims_gate(), fence(), zeus_altar(), steps(),
-            bay_rock(), drowned_roofs()]
+            bay_rock(), drowned_roofs(), well(), bench()]

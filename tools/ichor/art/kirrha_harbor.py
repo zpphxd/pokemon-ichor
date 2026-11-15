@@ -590,6 +590,58 @@ def kronist_crate():
     return s
 
 
+def beached():
+    """A small fishing boat hauled up on the beach, bow to the right, its oars
+    across the thwarts, the keel's furrow in the sand behind it. 2x1 on sand."""
+    s = struct("beached", "Boat hauled up on the beach", 2, 1, walk=["XX"],
+               notes="A rowing boat drawn up on aethos sand, bow to the right, tilted on its "
+                     "keel, oars shipped. Impassable.", section=SEC)
+    KL.ground(s, "sand")
+    M = s.M
+    for y in range(3, 8):
+        for x in range(4, 27 - abs(y - 5)):
+            M.px(x, y, "wd2" if y % 2 else "wd3")
+    M.rect(12, 3, 2, 5, "wd1")
+    M.rect(20, 3, 2, 5, "wd1")
+    M.line(5, 4, 28, 6, "wd3")
+    M.line(5, 5, 28, 7, "wd1")
+    M.hline(3, 29, 2, "ink")
+    _hull_side(M, 2, 30, 8, 12, bow_left=False, paint="b1", lift=3)
+    # the sand under it: its shadow and the keel's furrow (wood group has no sand:
+    # leave the borrowed sand bare, and shade with timber's darkest brown)
+    for x in range(4, 29, 2):
+        M.px(x, 14, "wd0")
+    return s
+
+
+def net_poles():
+    """A net hung to dry between two driftwood poles on the beach, cork floats along
+    its head rope. 2x2 on sand."""
+    s = struct("net_poles", "Nets drying on poles on the beach", 2, 2, walk=["XX", "XX"],
+               notes="Two driftwood poles on aethos sand with a net hung between them, cork "
+                     "floats along its head rope. Impassable.", section=SEC)
+    KL.ground(s, "sand")
+    M = s.M
+    for x in (3, 27):
+        M.vline(x, 2, 29, "wd1")
+        M.vline(x + 1, 2, 29, "wd2")
+        M.px(x, 1, "ink")
+        M.px(x + 1, 1, "ink")
+        M.hline(x - 1, x + 2, 30, "wd0")
+    for x in range(5, 27):
+        sag = 0 if 9 <= x <= 22 else 1
+        M.px(x, 5 + sag, "rp")
+        for y in range(6 + sag, 23):
+            if (x + y) % 4 == 0 or (x - y) % 4 == 0:
+                M.px(x, y, "wd2" if (x + y) % 8 else "wd1")
+        M.px(x, 23, "rp")
+        if x % 4 == 1:
+            M.blit(["kk", "ok"], {"k": "ink", "o": "oc1"}, x, 4 + sag)
+    for x in range(6, 26, 2):
+        M.px(x, 27, "wd0")
+    return s
+
+
 def build():
     return [quay(), quay_steps(), kaiki(), rowboat(), ferry_moored(), quay_goods(),
-            upturned_boat(), fish_market(), stall_shed(), kronist_crate()]
+            upturned_boat(), fish_market(), stall_shed(), kronist_crate(), beached(), net_poles()]

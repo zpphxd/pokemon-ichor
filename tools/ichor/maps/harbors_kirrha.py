@@ -152,6 +152,7 @@ def compose():
     for x in range(11, 20):
         col = "r" if x == 19 else ("m0" if x % 2 == 0 else "m1")
         if x <= 15:
+            col = "r" if x == 15 else col
             g.put_part("cliff", f"rim_{col}" if x > 10 else f"faceB_{col}", x, 6)
             g.put_part("cliff", f"faceB_{col}", x, 7)
             g.put_part("cliff", f"faceA_{col}", x, 8)
@@ -166,7 +167,7 @@ def compose():
     g.set(7, 9, BOULDER, True)
     g.set(8, 9, STELE, True)                 # the gate's notice
     g.set(9, 9, GRASS, False)
-    g.put("rocks", 2, 20)                    # the shore path ends at rocks
+    g.set(2, 20, BOULDER, True)              # the shore path ends at a rock
 
     # --- the inn and the road down from Route 9 -------------------------------
     sys.path.insert(0, str(H.ROOT / "tools/ichor/art"))
@@ -186,16 +187,19 @@ def compose():
         g.set(23 + i, 14, m, False)
     for i, m in enumerate((0x113, 0x114, 0x115)):
         g.set(23 + i, 15, m, False)
-    g.put("upturned", 29, 15)
-    g.set(31, 18, H.BOULDER_SAND, True)
-    g.set(33, 20, H.BOULDER_SAND, True)
+    g.put("upturned", 26, 17)
+    # the beach: nets drying on poles, a boat hauled up, a rock
+    g.put("net_poles", 30, 16)
+    g.put("beached", 32, 19)
+    g.set(29, 20, H.BOULDER_SAND, True)
+    # the town's well at the head of the street
+    g.put("well", 19, 12)
     # the quay's back: low dry-stone walls where it meets the town's grass
     for x0, x1 in ((10, 13), (23, 27)):
         for x in range(x0, x1 + 1):
             g.set(x, 20, 0x148 if x == x0 else (0x14A if x == x1 else 0x149), True)
     # sea rocks off the beach and in the bay
-    for (x, y, m) in ((0x166, 0, 0), (0x167, 1, 0), (0x16E, 0, 1), (0x16F, 1, 1)):
-        g.set(31 + y, 25 + m, x, True)
+    g.set(32, 25, 0x18C, True)
     g.set(2, 26, 0x18C, True)
     g.set(17, 28, 0x18C, True)
 

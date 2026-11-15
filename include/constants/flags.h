@@ -1827,6 +1827,7 @@
 #define FLAG_ICHOR_ITEM_KIRRHA_NET_BALL         (FLAG_ICHOR_GENERAL_START + 0x1A3) // Ichor: Act II: item ball: Kirrha Net Ball at the far end of the beach
 #define FLAG_ICHOR_AIGION_ARRIVAL_SEEN          (FLAG_ICHOR_GENERAL_START + 0x1A4) // Ichor: Act II: Alethea's lines on Aigion's quay have played (beat 37C)
 #define FLAG_ICHOR_KIRRHA_KRONIST_ALETHEA       (FLAG_ICHOR_GENERAL_START + 0x1A5) // Ichor: Act II: Alethea said her piece about the Kronist's kind lies (beat 37A)
+#define FLAG_ICHOR_ITEM_AIGION_SUPER_REPEL      (FLAG_ICHOR_GENERAL_START + 0x1A6) // Ichor: Act II: item ball: Aigion Super Repel at the quay's east end by the amphorae
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end

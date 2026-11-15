@@ -67,7 +67,7 @@ never draws. Aigion's south edge (Route 11, batch 3) keeps its six southern rows
 | grove | Laurels, figs' and planes' leaves, bark, on aethos grass |
 | market | Marble and bronze, fish and bread, amphorae, the fig's grey bark: the fish market, Delphoi's roofs, the altar of Zeus |
 
-**Tile budget.** gTileset_Kirrha uses 481 of 504 tiles, gTileset_Aigion 359 and gTileset_GulfFerry
+**Tile budget.** gTileset_Kirrha uses 492 of 504 tiles, gTileset_Aigion 365 and gTileset_GulfFerry
 213. Faces and pavings repeat on the 16 or 32 px grid, Aigion's houses are the
 recolors of Kirrha's, and tiles within two pixels of another are redrawn as that tile.
 
@@ -197,6 +197,29 @@ ids     walk
 
 Ground: all on the quay paving.
 
+#### Boat hauled up on the beach
+
+`beached`, 2 wide by 1 tall. A rowing boat drawn up on aethos sand, bow to the right, tilted on its keel, oars shipped. Impassable.
+
+```text
+ids           walk
+0x268 0x269   X X
+```
+
+Ground: all on aethos sand.
+
+#### Nets drying on poles on the beach
+
+`net_poles`, 2 wide by 2 tall. Two driftwood poles on aethos sand with a net hung between them, cork floats along its head rope. Impassable.
+
+```text
+ids           walk
+0x26A 0x26B   X X
+0x272 0x273   X X
+```
+
+Ground: all on aethos sand.
+
 ### Section: Parnassos, the groves and the sacred places (from 0x2C0)
 
 The grey cliff band and crags of Parnassos; Delphoi's roofs in the Phaidriades' cleft and the sacred road's steps; laurels and old planes; the pilgrims' gate; the fence of Apollo's plain; the altar of Zeus the Assembler; street steps; the rock in Kirrha's bay; Helike's drowned roofs.
@@ -218,25 +241,14 @@ Ground: aethos grass at (0,0), (1,0), (2,0), (3,0), (0,3), (1,3), (2,3), (3,3), 
 
 Parts: `rim_l` 0x2C0, `faceA_l` 0x2C8, `faceB_l` 0x2D0, `footB_l` 0x2D8, `footA_l` 0x2E0, `rim_m0` 0x2C1, `faceA_m0` 0x2C9, `faceB_m0` 0x2D1, `footB_m0` 0x2D9, `footA_m0` 0x2E1, `rim_m1` 0x2C2, `faceA_m1` 0x2CA, `faceB_m1` 0x2D2, `footB_m1` 0x2DA, `footA_m1` 0x2E2, `rim_r` 0x2C3, `faceA_r` 0x2CB, `faceB_r` 0x2D3, `footB_r` 0x2DB, `footA_r` 0x2E3.
 
-#### Small grey rocks
-
-`rocks`, 2 wide by 1 tall. On aethos grass: a rounded grey boulder with a tuft of scrub; a low split slab.
-
-```text
-ids           walk
-0x2C4 0x2C5   X X
-```
-
-Ground: all on aethos grass.
-
 #### Delphoi's roofs high in the cleft
 
 `delphoi`, 3 wide by 2 tall. The distant sanctuary between the Phaidriades: Apollo's temple with its pediment and columns, a treasury, the polygonal terrace wall, on grey rock. Impassable; set it above the sacred road's steps.
 
 ```text
 ids                 walk
-0x2E8 0x2E9 0x2EA   X X X
-0x2F0 0x2F1 0x2F2   X X X
+0x2C4 0x2C5 0x2C6   X X X
+0x2CC 0x2CD 0x2CE   X X X
 ```
 
 #### The cleft: the sacred road's steps between the cliffs
@@ -245,8 +257,8 @@ ids                 walk
 
 ```text
 ids           walk
-0x2EB 0x2EC   . .
-0x2F3 0x2F4   . .
+0x2E8 0x2E9   . .
+0x2F0 0x2F1   . .
 ```
 
 #### Laurel tree
@@ -255,8 +267,8 @@ ids           walk
 
 ```text
 ids           walk
-0x2ED 0x2EE   T T
-0x2F5 0x2F6   X X
+0x2EA 0x2EB   T T
+0x2F2 0x2F3   X X
 ```
 
 Ground: all on aethos grass.
@@ -267,8 +279,8 @@ Ground: all on aethos grass.
 
 ```text
 ids                       walk
-0x2F8 0x2F9 0x2FA 0x2FB   X X X X
-0x300 0x301 0x302 0x303   X X X X
+0x2EC 0x2ED 0x2EE 0x2EF   X X X X
+0x2F4 0x2F5 0x2F6 0x2F7   X X X X
 ```
 
 Ground: aethos grass at (0,0), (3,0), (0,1), (3,1); aethos path at (1,0), (2,0), (1,1), (2,1); the rest draws its own.
@@ -279,7 +291,7 @@ Ground: aethos grass at (0,0), (3,0), (0,1), (3,1); aethos path at (1,0), (2,0),
 
 ```text
 ids                             walk
-0x308 0x309 0x30A 0x30B 0x30C   X X X X X
+0x2F8 0x2F9 0x2FA 0x2FB 0x2FC   X X X X X
 ```
 
 Ground: all on aethos grass.
@@ -290,11 +302,22 @@ Ground: all on aethos grass.
 
 ```text
 ids           walk
-0x30D 0x30E   . .
-0x315 0x316   . .
+0x2FD 0x2FE   . .
+0x305 0x306   . .
 ```
 
 Ground: all on aethos sea.
+
+#### Village well
+
+`well`, 1 wide by 1 tall. A round limestone well-head with a timber frame and a bucket, on aethos grass. Impassable.
+
+```text
+ids     walk
+0x2FF   X
+```
+
+Ground: all on aethos grass.
 
 ### Section: Houses (from 0x370)
 
@@ -547,6 +570,28 @@ ids                 walk
 
 Ground: all on aethos sea.
 
+#### Stone bench
+
+`bench`, 2 wide by 1 tall. A long limestone bench on two blocks, on aethos grass, worn smooth. Impassable.
+
+```text
+ids           walk
+0x2E6 0x2E7   X X
+```
+
+Ground: all on aethos grass.
+
+#### Village well
+
+`well`, 1 wide by 1 tall. A round limestone well-head with a timber frame and a bucket, on aethos grass. Impassable.
+
+```text
+ids     walk
+0x2F0   X
+```
+
+Ground: all on aethos grass.
+
 ### Section: Houses (from 0x340)
 
 The house kit and the households' signs in Aigion's ochre stucco and blue paint.
@@ -722,3 +767,117 @@ ids     walk
 Ground: all on the deck's planks.
 
 <!-- passes: hand-written below this line; kirrha_build.py keeps it -->
+
+## The maps
+
+`tools/ichor/maps/harbors.py` builds all three (`harbors_kirrha.py`, `harbors_deck.py`,
+`harbors_aigion.py` hold each map's plan, events and checks); the scripts are each map's
+`scripts.pory`; `tools/ichor/tests/act2_harbors.sh` plays beat 37 through, both ways across the
+gulf. Renders: [img/Kirrha.png](img/Kirrha.png), [img/GulfFerry_Deck.png](img/GulfFerry_Deck.png),
+[img/Aigion.png](img/Aigion.png); in-game screenshots: [img/harbors_ingame.png](img/harbors_ingame.png).
+
+![Kirrha](img/Kirrha.png)
+
+**Kirrha** (36×30, aethos + kirrha). The road from Route 9 comes in at the north-east (columns
+26–29, verges 26 and 29: the seam BUILD.md fixed, `up` offset +18) through an olive slope, and runs
+down past Strophios's inn (warp 0; the healer, heal tile (23,10)) and along the foot of Parnassos's
+crags. West, the Phaidriades fill the map's top-left corner: the west cliff, the cleft with the sacred
+road's steps climbing to Delphoi's temple, treasury and stoa high on their terrace, the Kastalian
+falls (aethos's animated waterfall) pouring down beside the steps, and the pilgrims' gate across the
+road at the cleft's mouth with the Pythia's two guards in the road's only two cells. Rocks either
+side of them, so the player meets them head on; the right-hand rock is the crack with the pilgrim's
+obol. Below the road, Apollo's plain behind its fence (wild olives, anemones, nobody's plough), the
+fence-watcher and the beggar leaning on its east side, the dig spot "the edge is fine"; west of it a
+strip of shore under the cliffs, a dead end with a Hyper Potion where it stops at a rock. The one
+street drops south from the town's well between the muleteer's house and stable (warp 2) and the old
+sweeper's house with its kitchen garden (warp 3), to the quay's head: the fish market under the old
+fig (the drain with the Pearl in the fig's shade), the Kronist's crate of bread, the Agora's shed
+(warp 1). Along the quay, nets, an octopus line, amphorae waiting for the ferry, the pilgrims on their
+bundles, Alethea, and at the east end Panopeus at his gangplank with the ferry alongside, its patched
+sail up. A beach under the eastern hill (nets on poles, a boat hauled up, a Net Ball at its end). In
+the gulf a kaiki, a rowing boat, sea rocks, and the rock in the bay with the Big Pearl (the Conch).
+
+**Seams.** Kirrha's columns 11 and up are what `FillSouthConnection` copies into Route 9's view
+(offset −18 from Route 9: columns −11…−1 of Route 9's frame are dropped), so rows 0–5 are aethos-only
+from column 11 east; the Phaidriades stand in columns 0–10, which Route 9 never draws.
+`harbors_kirrha.check()` enforces exactly that, and that the north edge is open only at 26–29.
+**Border:** the sea. The map is laid out so the camera only ever shows the border beyond water:
+the gulf to the south and east, the gulf's west arm along the shore path.
+
+### Kirrha: render-and-critique passes
+
+**Pass 1** (`ThyrsaCity`-level bar; first render). *Wrong:* the crag texture read as a palisade of
+grey slabs, then (second try) as masonry, not rock; the quay was four rows of empty grey; the beach
+was a bare sand rectangle; the town between the houses was plain grass with flowers; the crag band
+along the road was one rectangular wall; gaps in the olive slope left the north edge open in four
+columns; the ferry's sail was a flat white box and its hull whitewashed like a kaiki. *Changed:* the
+face texture is now Voronoi lumps on a 32 px torus (fluted, lit top-left, rust down two of them) with
+both vertical phases in the kit; the quay is three rows with dry-stone walls at its back where it
+meets the town; gaps at the north edge become cypresses or rocks; the sail is lit and shaded as if
+filled, with panel seams, and the hull is tarred timber strakes.
+
+**Pass 2.** *Wrong:* the crowd gave the quay life in game, but the rendered beach and the open grass
+still read empty; the crags' one-height band; the anemone troughs and a laurel overlapped crag cells;
+the shore path ended at nothing. *Changed:* the beach has nets drying on poles and a boat hauled up
+(two new pieces), the upturned boat sits in the boatyard above it; the town has a well at the head
+of the street and the sweeper's kitchen garden; the crag band steps down eastward (rim at row 6, then
+7) with its ends properly flanked; the shore path ends at a rock with the Hyper Potion.
+
+**Pass 3** (in game, from `act2_harbors.sh`'s screenshots). The arrival, the gate scene, the quay
+crowd and the deck all read well at GBA size: the gate framed by the cliffs and the falls, the two
+guards in the road, Alethea at the player's side. *Wrong:* the 2×2 aethos sea stack read as a grey
+square with a dark blot; the crags' upper block ended without its east flank. *Changed:* single
+foam-ringed sea rocks instead; the upper block ends with its right flank.
+
+![The Gulf ferry](img/GulfFerry_Deck.png)
+
+**The Gulf ferry** (20×12, aethos + gulf_ferry). Panopeus's boat lies west-east in the animated gulf,
+bow toward Aigion. Row 3 is the deck under the far gunwale: fish over it into the water north of it
+(`FLAG_ICHOR_NO_RELICS` on every arrival keeps the Conch and the Wings from working on a boat under
+way). Amidships the mast and the patched square sail (ochre, red and blue patches, drawn over the
+player on the far rail), the goats' pen (two Kerazap, the hidden Heart Scale "a goat was sitting
+on it"); at the bow lashed amphorae, grain sacks and Lamprias facing the sea; at the stern the
+deckhouse and the steering oar, Panopeus beside it, Alethea watching the wake. Kephisios fishes at the
+rail amidships. The near rail carries the "color of wine" line.
+
+### The Gulf ferry: render-and-critique passes
+
+**Pass 1.** *Wrong:* the sail was gridded like a window; the pen's straw was noise (unique tiles in
+every cell); the bow and stern were drawn one row off the midships slice. *Changed:* the sail is lit
+and panelled; straw on an 8 px pattern; bow and stern share one hull outline (`_hull_end`) matched to
+midships row for row.
+
+**Pass 2.** *Wrong:* the goat pen and the bow cargo blocked the only reads of the hidden scale and the
+rail signs; the stern's half of the deck was bare planks. *Changed:* pen and cargo moved so every bg
+event is read from the deck; grain sacks by Lamprias and near the deckhouse.
+
+**Pass 3** (in game). The deck reads at GBA size: "ROUTE 10" over the sail, goats in their pen, the
+deckhouse's red cloak. Nothing to change but the sacks; the hull's long side is plain on purpose,
+the water under it moving.
+
+![Aigion](img/Aigion.png)
+
+**Aigion** (28×24, aethos + aigion). The gulf along the north: Helike's drowned roofs off the quay's
+west end (on aethos's animated sea, so the water moves over them), a kaiki, Panopeus's ferry alongside
+once the gulf is crossed, a rowing boat. A two-row quay; the fisher at its west end over the roofs,
+the hidden Pearl at its corner. The street climbs south past the old Achaean's narrow two-storey house
+(warp 0) with the town's well beside it, and the goatherd's (warp 1) built against the grey crags of
+the hill. Stone steps up through the terrace's dry-stone wall into the grove of Zeus the Assembler:
+six old planes in a ring round the altar (`EventScript_IchorAltar_Zeus`), the grove-keeper who heals
+beside it (`HEAL_LOCATION_AIGION`, (12,13)), a bench for the shorter meetings, the hollow plane with the
+wild bees' Honey. South, the road into the gorge (Route 11, batch 3) between olives, pines and
+cypresses, aethos-only for six rows, Alethea waiting at the edge.
+
+### Aigion: render-and-critique passes
+
+**Pass 1.** *Wrong:* a three-row quay, a huge flat grey slab; the planes scattered rather than a ring;
+the clearing empty grass. *Changed:* a two-row quay, which gave the grove a seventh row; six planes in
+a ring round the altar, the path from the steps into it, a bench, the well by the Achaean's door.
+
+**Pass 2.** *Wrong:* a boulder on Alethea's walk from the quay to the street; the crag beside the
+goatherd's house a six-cell block. *Changed:* the boulder moved; the crag narrowed to the hill's
+shoulder, olives beyond it.
+
+**Pass 3** (in game). The landing scene reads: Alethea steps off, speaks, walks up the street; the
+ferry and Panopeus are on the quay behind. Every dead end pays: the quay's west end (Pearl), its east
+end (a Super Repel by the amphorae), the hollow plane (Honey).

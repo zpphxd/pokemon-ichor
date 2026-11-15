@@ -39,6 +39,8 @@ def compose():
     g.put("deckhouse", 13, 3)
     g.put("goat_pen", 5, 5)
     g.put("bow_cargo", 3, 5)
+    g.put("grain_sack", 4, 4)                   # Lamprias's seat
+    g.put("grain_sack", 12, 6)                  # more grain, by the stern
     # the water: surfable and fishable in the game's terms (elevation 1), but not
     # walkable; the map's ON_TRANSITION forbids relics, so no one surfs off a ferry
     for y in range(HGT):

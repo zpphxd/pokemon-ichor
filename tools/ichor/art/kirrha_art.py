@@ -54,14 +54,15 @@ GROUPS = KL.GROUPS
 PIECES = {
     "kirrha": {
         "harbor": ["quay", "quay_steps", "kaiki", "rowboat", "ferry", "quay_goods", "upturned",
-                   "fish_market", "stall", "kronist_crate"],
-        "land": ["cliff", "rocks", "delphoi", "cleft", "laurel", "gate", "fence", "bay_rock"],
+                   "fish_market", "stall", "kronist_crate", "beached", "net_poles"],
+        "land": ["cliff", "delphoi", "cleft", "laurel", "gate", "fence", "bay_rock",
+                 "well"],
         "town": ["house", "house_signs", "stable"],
     },
     "aigion": {
         "harbor": ["quay", "quay_steps", "rowboat", "kaiki", "ferry", "quay_goods"],
         "land": ["cliff", "rocks", "laurel", "plane", "plane_hollow", "zeus_altar", "steps",
-                 "drowned"],
+                 "drowned", "bench", "well"],
         "town": ["house_aigion", "house_signs_aigion"],
     },
 }

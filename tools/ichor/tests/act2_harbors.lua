@@ -61,7 +61,7 @@ local function main()
   -- ---------------------------------------------------------------- beat 37A
   L.setBeat("kirrha", false)
   local team = { S.SCR_OP_CALLNATIVE, { S.ScrCmd_createmon | 1, 4 }, 0, S.PARTY_SIZE,
-                 { S.SPECIES_TEST, 2 }, { 62, 2 }, { (1 << 17) | (1 << 18) | (1 << 19) | (1 << 20), 4 },
+                 { S.SPECIES_TEST, 2 }, { 100, 2 }, { (1 << 17) | (1 << 18) | (1 << 19) | (1 << 20), 4 },
                  { S.MOVE_TEST, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 } }
   warpIn(S.MAP_KIRRHA, 27, 0, { S.FLAG_SYS_POKEMON_GET, S.FLAG_BADGE04_GET, S.FLAG_ACT2_BEGUN,
                                 S.FLAG_GIRDLE }, team)
@@ -157,6 +157,8 @@ local function main()
   L.talk(L.hidden(S.FLAG_HIDDEN_AIGION_PEARL), { shots = { [1] = "pearl_over_helike" } })
   expect(flag(S.FLAG_HIDDEN_AIGION_PEARL), "the Pearl where the drowned roofs show")
   L.talk(L.sign("Aigion_EventScript_QuaySign"), { shots = { [1] = "aigion_sign" } })
+  L.talk(L.ball(S.FLAG_ITEM_AIGION_REPEL), { shots = { [1] = "quay_end_super_repel" } })
+  expect(flag(S.FLAG_ITEM_AIGION_REPEL), "the Super Repel at the quay's east end")
   L.talk(L.npc("Aigion_EventScript_Child"), { shots = { [1] = "child_lakonian" } })
   L.go(13, 11); shot("the_grove")
   L.talk(L.npc("Aigion_EventScript_GroveKeeper"), { shots = { [1] = "grove_keeper", [4] = "grove_heal" } })
