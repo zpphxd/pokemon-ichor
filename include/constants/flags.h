@@ -910,7 +910,7 @@
 #define FLAG_UNUSED_0x35B                                           0x35B // Unused Flag
 #define FLAG_UNUSED_0x35C                                           0x35C // Unused Flag
 #define FLAG_UNUSED_0x35D                                           0x35D // Unused Flag
-#define FLAG_UNUSED_0x35E                                           0x35E // Unused Flag
+#define FLAG_ICHOR_HIDDEN_STYX_KEPHEUS_EVERSTONE                    0x35E // Ichor: Act II rooms3: hidden item: the Everstone in Kepheus's rubble (Styx Falls)
 #define FLAG_UNUSED_0x35F                                           0x35F // Unused Flag
 #define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1           0x360
 #define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_2           0x361
@@ -1837,6 +1837,20 @@
 #define FLAG_ICHOR_ITEM_ROUTE8_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x175) // Ichor: Route 8: item ball, Revive on Gla's shore (the Conch)
 #define FLAG_ICHOR_ITEM_ROUTE8_ULTRA_BALL       (FLAG_ICHOR_GENERAL_START + 0x176) // Ichor: Route 8: item ball, Ultra Ball deep in Timoxena's reeds
 #define FLAG_ICHOR_ITEM_ROUTE8_FULL_HEAL        (FLAG_ICHOR_GENERAL_START + 0x177) // Ichor: Route 8: item ball, Full Heal on the reed-boat shore
+#define FLAG_ICHOR_GOT_GRYLLOS                  (FLAG_ICHOR_GENERAL_START + 0x1EC) // Ichor: Act II rooms3: Eubouleus gave you Gryllos the Kaplet at the Styx Falls inn
+#define FLAG_ICHOR_GRYLLOS_SHOWN                (FLAG_ICHOR_GENERAL_START + 0x1ED) // Ichor: Act II rooms3: showed Eubouleus a Kaprodon; got the Balm Mushroom
+#define FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS      (FLAG_ICHOR_GENERAL_START + 0x1EE) // Ichor: Act II rooms3: hides Alethea at the inn's long table after her first visit there (beat 39); the Cave of Maia shows her
+#define FLAG_ICHOR_GOT_CLEANSE_TAG              (FLAG_ICHOR_GENERAL_START + 0x1EF) // Ichor: Act II rooms3: Horkia gave you the Cleanse Tag (Styx Falls)
+#define FLAG_ICHOR_GOT_TM_BULLDOZE              (FLAG_ICHOR_GENERAL_START + 0x1F0) // Ichor: Act II rooms3: Kepheus gave you TM Bulldoze (Styx Falls)
+#define FLAG_ICHOR_GOT_CHOICE_SCARF             (FLAG_ICHOR_GENERAL_START + 0x1F1) // Ichor: Act II rooms3: beat Parthenopaios on the racecourse; Klymene's Choice Scarf (Arkadia)
+#define FLAG_ICHOR_KLYMENE_RACE                 (FLAG_ICHOR_GENERAL_START + 0x1F2) // Ichor: Act II rooms3: the race against Parthenopaios is running (set at Klymene's, cleared at the finish)
+#define FLAG_ICHOR_KLYMENE_RACE_TURNED          (FLAG_ICHOR_GENERAL_START + 0x1F3) // Ichor: Act II rooms3: in the race, the player has touched the temple stair's first step
+#define FLAG_ICHOR_KROTOS_KID_1                 (FLAG_ICHOR_GENERAL_START + 0x1F4) // Ichor: Act II rooms3: Krotos's first lost kid is home (also its hide flag in Arkadia)
+#define FLAG_ICHOR_KROTOS_KID_2                 (FLAG_ICHOR_GENERAL_START + 0x1F5) // Ichor: Act II rooms3: Krotos's second lost kid is home (also its hide flag in Arkadia)
+#define FLAG_ICHOR_KROTOS_KID_3                 (FLAG_ICHOR_GENERAL_START + 0x1F6) // Ichor: Act II rooms3: Krotos's third lost kid is home (also its hide flag in Arkadia)
+#define FLAG_ICHOR_GOT_LUCKY_EGG                (FLAG_ICHOR_GENERAL_START + 0x1F7) // Ichor: Act II rooms3: Krotos's Lucky Egg, for his three kids (Arkadia)
+#define FLAG_ICHOR_GOT_BLACK_GLASSES            (FLAG_ICHOR_GENERAL_START + 0x1F8) // Ichor: Act II rooms3: Nyktimos's Black Glasses, after the Moon Laurel (Arkadia)
+#define FLAG_ICHOR_TRADED_ARKOBY                (FLAG_ICHOR_GENERAL_START + 0x1F9) // Ichor: Act II rooms3: traded Hippothoos a Gelasable for ARKAS the Arkoby (Arkadia)
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)
@@ -1854,6 +1868,8 @@
 #define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_TM_FUTURE_SIGHT (FLAG_ICHOR_GENERAL_START + 0x1AE) // Ichor: Act II: item ball: Trophonios's cave B2F TM Future Sight on the oracle's ledge
 #define FLAG_ICHOR_HIDE_TROPHONIOS_GREAT_BOULDER (FLAG_ICHOR_GENERAL_START + 0x1AF) // Ichor: Act II: Trophonios's great boulder is split (Hephaestus's Hammer); stays gone
 #define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_DAMP_ROCK (FLAG_ICHOR_GENERAL2_START + 0x080) // Ichor: Act II: item ball: Trophonios's cave B1F Damp Rock in the wet corner by the stream's outlet
+#define FLAG_ICHOR_NYKTIMOS_STORY               (FLAG_ICHOR_GENERAL2_START + 0x050) // Ichor: Act II rooms3: Nyktimos has told you of Lykaon and the extra place (his story plays once)
+#define FLAG_ICHOR_KLYMENE_STORY                (FLAG_ICHOR_GENERAL2_START + 0x051) // Ichor: Act II rooms3: Klymene has told you of Atalanta's apples (after, she only offers the race)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

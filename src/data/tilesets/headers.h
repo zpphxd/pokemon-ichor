@@ -594,6 +594,48 @@ const struct Tileset gTileset_ThyrsaStone =
     .callback = NULL,
 };
 
+// Ichor (Act II batch 3 rooms): Styx Falls's rooms: the Inn at the Falls, Horkia's house of oaths and Kepheus's house. A Porytiles-managed secondary for the oikos
+// primary, built by tools/ichor/maps/arkrooms.py (art in tools/ichor/art/arkrooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_StyxRooms =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_StyxRooms,
+    .palettes = gTilesetPalettes_PorytilesManaged_StyxRooms,
+    .metatiles = gMetatiles_PorytilesManaged_StyxRooms,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_StyxRooms,
+    .callback = NULL,
+};
+
+// Ichor (Act II batch 3 rooms): Arkadia's public rooms: the Asclepeion, the Agora stall, and Klymene's upper room. A Porytiles-managed secondary for the oikos
+// primary, built by tools/ichor/maps/arkrooms.py (art in tools/ichor/art/arkrooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ArkadiaRooms =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ArkadiaRooms,
+    .palettes = gTilesetPalettes_PorytilesManaged_ArkadiaRooms,
+    .metatiles = gMetatiles_PorytilesManaged_ArkadiaRooms,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaRooms,
+    .callback = NULL,
+};
+
+// Ichor (Act II batch 3 rooms): Arkadia's homes: Nyktimos's hall, Hippothoos's charcoal hut and Krotos's house and byre. A Porytiles-managed secondary for the oikos
+// primary, built by tools/ichor/maps/arkrooms.py (art in tools/ichor/art/arkrooms_*.py).
+// It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_ArkadiaHomes =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ArkadiaHomes,
+    .palettes = gTilesetPalettes_PorytilesManaged_ArkadiaHomes,
+    .metatiles = gMetatiles_PorytilesManaged_ArkadiaHomes,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaHomes,
+    .callback = NULL,
+};
+
 // Ichor: kopais, Route 8, the Kopais shore. Porytiles-managed, built by
 // tools/ichor/art/kopais_build.py for the aethos primary: its ground cells borrow
 // aethos's grass, road and water, so rebuild it whenever aethos changes. Its tile

@@ -1,1 +1,223 @@
-mapscripts Arkadia_KlymeneHouse_MapScripts {}
+// Klymene's upper room, over the old racecourse (SCRIPT.md Part 2, Arkadia interiors). Room:
+// tools/ichor/maps/arkrooms.py. Klymene (6,2) by her window; her grandson Parthenopaios (7,4).
+// The race, Arkadia's minigame: door to the first step of the temple stair and back,
+// inside the step count, and she gives the Choice Scarf. Fail, and you can go again at once.
+//
+// How the race counts. A step-glass (Phase 2's Herald's Run) needs a step count that lives
+// across maps, and the engine has none, so the race borrows the vanilla friendship step
+// counter, VAR_FRIENDSHIP_STEP_COUNTER: it goes up by one on every ordinary step, wraps at
+// 128, and does nothing else but tick friendship once per 128 steps (zeroing it costs at
+// most one tick). YES zeroes it and warps you out of the front door (MAP_ARKADIA warp 3),
+// setting FLAG_ICHOR_KLYMENE_RACE. The first temple step is a coord trigger on MAP_ARKADIA
+// (the arkadia agent's map) running Arkadia_KlymeneHouse_EventScript_RaceTurn below: if
+// you're already over the count there, you've lost; else it sets
+// FLAG_ICHOR_KLYMENE_RACE_TURNED. Coming back in through her door runs the finish
+// (ON_FRAME). Steps onto a warp or a trigger tile aren't counted, so the count runs about
+// two short of the true walk; the counts below are SCRIPT.md's and should be tuned on the
+// built town (the best route is meant to be 38, the lamp-tree and pasture route 52).
+// The counter wraps at 128, so a race abandoned and finished 128 or more steps later could
+// read short; the turn's check keeps that to a return leg of ninety-odd steps or more.
+//
+// The race's own step counts: 50 on Mortal (DIFFICULTY_EASY), 44 on Hero, 40 on Spartan.
+// ICHOR_STUB_DIG: Klymene's Atalanta potsherd lines read amphora #9's four sherd flags,
+// taken as FLAG_ICHOR_SHERDS_START + 32..35 (#n at +4(n-1)); confirm when digs land.
+// ICHOR_STUB_MUSIC: Arkadia's own cue.
+
+mapscripts Arkadia_KlymeneHouse_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 0: Arkadia_KlymeneHouse_EventScript_RaceFinish
+    ]
+}
+
+text Arkadia_KlymeneHouse_Name_Klymene { "KLYMENE" }
+text Arkadia_KlymeneHouse_Name_Parthenopaios { "PARTHENOPAIOS" }
+
+script Arkadia_KlymeneHouse_EventScript_Klymene {
+    lock
+    faceplayer
+    setspeaker(Arkadia_KlymeneHouse_Name_Klymene)
+    if (flag(FLAG_ICHOR_GOT_CHOICE_SCARF)) {
+        // ICHOR_STUB_DIG: amphora #9's sherds (see the header).
+        if (flag(FLAG_ICHOR_SHERDS_START+32) || flag(FLAG_ICHOR_SHERDS_START+33) ||
+            flag(FLAG_ICHOR_SHERDS_START+34) || flag(FLAG_ICHOR_SHERDS_START+35)) {
+            msgbox(format("Oh, that's a bit of her. The girl with the apples. Where did you find it?\p"
+                          "By the lake in Boeotia? They say she was theirs. Nonsense. She was ours.\p"
+                          "Find the rest. I'd like to see her whole. Then we'll see whose she was."))
+            release
+            end
+        }
+        msgbox(format("You run like nothing's chasing you. That's the best way.\p"
+                      "Atalanta ran like everything was. She was faster. You'll be happier."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_KLYMENE_STORY)) {
+        msgbox(format("Race him. Door to the temple stair and back.\p"
+                      "Beat him, and I'll give you something."))
+        goto(Arkadia_KlymeneHouse_EventScript_AskRace)
+    }
+    setflag(FLAG_ICHOR_KLYMENE_STORY)
+    msgbox(format("Atalanta ran these hills. Nobody could catch her. Nobody.\p"
+                  "The suitors had to race her. Lose, and that was the end of them.\p"
+                  "One boy won. Melanion. He dropped three golden apples as he ran.\p"
+                  "She stopped to pick up every one. She wasn't slow. She was curious.\p"
+                  "I've always liked her for that."))
+    setspeaker(Arkadia_KlymeneHouse_Name_Parthenopaios)
+    msgbox(format("Grandmother. Don't tell the apple story to everyone."))
+    setspeaker(Arkadia_KlymeneHouse_Name_Klymene)
+    msgbox(format("I don't. I tell it to everyone who comes in.\p"
+                  "Race him. Door to the temple stair and back.\p"
+                  "Beat him, and I'll give you something."))
+    goto(Arkadia_KlymeneHouse_EventScript_AskRace)
+}
+
+script Arkadia_KlymeneHouse_EventScript_Parthenopaios {
+    lock
+    faceplayer
+    setspeaker(Arkadia_KlymeneHouse_Name_Parthenopaios)
+    if (flag(FLAG_ICHOR_GOT_CHOICE_SCARF)) {
+        msgbox(format("I'm training. Every morning, to the stair and back. Next time it's mine."))
+        release
+        end
+    }
+    msgbox(format("Grandmother says I've been insufferable all week."))
+    goto(Arkadia_KlymeneHouse_EventScript_AskRace)
+}
+
+script Arkadia_KlymeneHouse_EventScript_AskRace {
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Race Parthenopaios?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Arkadia_KlymeneHouse_Name_Klymene)
+        msgbox(format("Another night, then. The track isn't going anywhere."))
+        release
+        end
+    }
+    setspeaker(Arkadia_KlymeneHouse_Name_Parthenopaios)
+    msgbox(format("To the first step of the temple stair, and back to this door. Go!"))
+    closemessage
+    setflag(FLAG_ICHOR_KLYMENE_RACE)
+    clearflag(FLAG_ICHOR_KLYMENE_RACE_TURNED)
+    setvar(VAR_FRIENDSHIP_STEP_COUNTER, 0)
+    playse(SE_EXIT)
+    warp(MAP_ARKADIA, 3)
+    waitstate
+}
+
+// VAR_RESULT: the race's step count for the difficulty.
+script Arkadia_KlymeneHouse_EventScript_RaceLimit {
+    getdifficulty(VAR_RESULT)
+    if (var(VAR_RESULT) == DIFFICULTY_EASY) {
+        setvar(VAR_RESULT, 50)
+    } elif (var(VAR_RESULT) == DIFFICULTY_HARD) {
+        setvar(VAR_RESULT, 40)
+    } else {
+        setvar(VAR_RESULT, 44)
+    }
+    return
+}
+
+// The temple stair's first step, on MAP_ARKADIA: a coord trigger there runs this. It does
+// nothing unless the race is on and you haven't turned yet.
+script Arkadia_KlymeneHouse_EventScript_RaceTurn {
+    if (!flag(FLAG_ICHOR_KLYMENE_RACE) || flag(FLAG_ICHOR_KLYMENE_RACE_TURNED)) {
+        end
+    }
+    lockall
+    call(Arkadia_KlymeneHouse_EventScript_RaceLimit)
+    copyvar(VAR_0x8004, VAR_FRIENDSHIP_STEP_COUNTER)
+    // compare_var_to_var: compare() would read VAR_RESULT as a number (ENGINE_API §1)
+    compare_var_to_var(VAR_0x8004, VAR_RESULT)
+    goto_if_gt(Arkadia_KlymeneHouse_EventScript_RaceTooSlow)
+    setflag(FLAG_ICHOR_KLYMENE_RACE_TURNED)
+    playse(SE_SUCCESS)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The first step of the temple stair! Now back to the door!"))
+    releaseall
+}
+
+script Arkadia_KlymeneHouse_EventScript_RaceTooSlow {
+    clearflag(FLAG_ICHOR_KLYMENE_RACE)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The first step of the temple stair. Far off, a door bangs: he's home already."))
+    releaseall
+}
+
+// Coming back in through her door.
+script Arkadia_KlymeneHouse_EventScript_RaceFinish {
+    setvar(VAR_TEMP_0, 1)
+    if (!flag(FLAG_ICHOR_KLYMENE_RACE)) {
+        end
+    }
+    lockall
+    clearflag(FLAG_ICHOR_KLYMENE_RACE)
+    copyvar(VAR_0x8004, VAR_FRIENDSHIP_STEP_COUNTER)
+    call(Arkadia_KlymeneHouse_EventScript_RaceLimit)
+    if (!flag(FLAG_ICHOR_KLYMENE_RACE_TURNED)) {
+        setspeaker(Arkadia_KlymeneHouse_Name_Parthenopaios)
+        msgbox(format("You never touched the stair! That's not a race. That's a walk."))
+        goto(Arkadia_KlymeneHouse_EventScript_RaceAgain)
+    }
+    compare_var_to_var(VAR_0x8004, VAR_RESULT)
+    goto_if_gt(Arkadia_KlymeneHouse_EventScript_RaceLost)
+    setspeaker(Arkadia_KlymeneHouse_Name_Parthenopaios)
+    msgbox(format("…You beat me. Grandmother, they beat me."))
+    setspeaker(Arkadia_KlymeneHouse_Name_Klymene)
+    msgbox(format("Good! Somebody had to. He was getting proud.\p"
+                  "Here. I ran in this. Nobody passed me in it.\p"
+                  "Well. One boy did. With apples. But that wasn't the scarf's fault."))
+    giveitem(ITEM_CHOICE_SCARF)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(Arkadia_KlymeneHouse_Name_Klymene)
+        msgbox(format("Your bag's too full for it. Make room, and beat him again."))
+        releaseall
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_CHOICE_SCARF)
+    releaseall
+}
+
+script Arkadia_KlymeneHouse_EventScript_RaceLost {
+    setspeaker(Arkadia_KlymeneHouse_Name_Parthenopaios)
+    msgbox(format("Ha! Again? Grandmother says I've been insufferable all week."))
+    setspeaker(Arkadia_KlymeneHouse_Name_Klymene)
+    msgbox(format("He has. Beat him. Please."))
+    goto(Arkadia_KlymeneHouse_EventScript_RaceAgain)
+}
+
+script Arkadia_KlymeneHouse_EventScript_RaceAgain {
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Race Parthenopaios again?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        releaseall
+        end
+    }
+    setspeaker(Arkadia_KlymeneHouse_Name_Parthenopaios)
+    msgbox(format("To the first step of the temple stair, and back to this door. Go!"))
+    closemessage
+    setflag(FLAG_ICHOR_KLYMENE_RACE)
+    clearflag(FLAG_ICHOR_KLYMENE_RACE_TURNED)
+    setvar(VAR_FRIENDSHIP_STEP_COUNTER, 0)
+    playse(SE_EXIT)
+    warp(MAP_ARKADIA, 3)
+    waitstate
+}
+
+script Arkadia_KlymeneHouse_EventScript_Window {
+    msgbox(format("Below the window the old racecourse runs straight and flat between the cypresses."),
+           MSGBOX_SIGN)
+}
+
+script Arkadia_KlymeneHouse_EventScript_Sandals {
+    msgbox(format("Old running sandals, hung in pairs. Each pair has a year scratched on a tag."),
+           MSGBOX_SIGN)
+}
+
+script Arkadia_KlymeneHouse_EventScript_Ribbon {
+    msgbox(format("A victor's ribbon on a nail. It was red, once."), MSGBOX_SIGN)
+}
+
+script Arkadia_KlymeneHouse_EventScript_Apples {
+    msgbox(format("Three wooden apples, painted gold. Someone has dusted them every day for years."),
+           MSGBOX_SIGN)
+}

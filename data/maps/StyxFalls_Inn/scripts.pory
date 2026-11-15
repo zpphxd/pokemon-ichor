@@ -1,1 +1,231 @@
-mapscripts StyxFalls_Inn_MapScripts {}
+// The Inn at the Falls, Nonakris (SCRIPT.md Part 2, Styx Falls interiors; beat 39).
+// Room: tools/ichor/maps/arkrooms.py. Aroanios (13,3) by his cup shelf heals the party
+// and offers the rest menu (an inn, not a xenia host); Eubouleus (14,6), Phase 2's
+// swineherd, has walked here with Gryllos the Kaplet in a basket (15,6); Alethea waits at
+// the long table (4,7) on your first visit after the Oath Stone (beat 39).
+//
+// Alethea: she shows on the first visit only. ON_TRANSITION shows her (FLAG_TEMP_1 clear)
+// and sets FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS at once, so once you leave she's gone, and
+// the Cave of Maia shows her (beat 39: "after the player has rested or left the inn once").
+// Styx Falls has no heal location (not a fly target, open question 7): resting here sets
+// FLAG_ICHOR_VISITED_STYX_FALLS and no respawn.
+//
+// ICHOR_STUB_GIFT_NAME: Gryllos should carry the nickname GRYLLOS and the OT EUBOULEUS;
+// no script call sets a gift's nickname or OT yet (ask ichor-engine). The givemon below
+// sets everything else SCRIPT.md asks for.
+// ICHOR_STUB_XENIA_REST: resting moves the clock forward (SYSTEMS.md §10); until the
+// engine's rest call exists the menu fades and the clock stays.
+// ICHOR_STUB_AETHOS_DEX: Kaplet and Kaprodon are stand-ins. ICHOR_STUB_MUSIC: Styx Falls's
+// own quiet cue.
+
+mapscripts StyxFalls_Inn_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS)) {
+            setflag(FLAG_TEMP_1)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS)
+        }
+    }
+}
+
+text StyxFalls_Inn_Name_Aroanios { "AROANIOS" }
+text StyxFalls_Inn_Name_Eubouleus { "EUBOULEUS" }
+text StyxFalls_Inn_Name_Alethea { "ALETHEA" }
+text StyxFalls_Inn_Name_Gryllos { "GRYLLOS" }
+
+script StyxFalls_Inn_EventScript_Aroanios {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Inn_Name_Aroanios)
+    msgbox(format("Welcome to the last inn before the gods' own water. Don't drink from the pool.\p"
+                  "Well. You can. You'd only do it once.\p"
+                  "My family's kept this inn since before anyone swore by anything.\p"
+                  "Demeter came through once, looking for her girl. We gave her a bed.\p"
+                  "She gave us beans.\p"
+                  "A bed, then? And bread. Not beans. Never beans."))
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    setflag(FLAG_ICHOR_VISITED_STYX_FALLS)
+    goto(StyxFalls_Inn_EventScript_Rest)
+}
+
+// The rest menu: only the times still ahead today are offered.
+script StyxFalls_Inn_EventScript_Rest {
+    gettime
+    setspeaker(StyxFalls_Inn_Name_Aroanios)
+    if (var(VAR_0x8000) >= 20) {
+        msgbox(format("It's late. Your bench is the one by the hearth. Mind the wet."))
+        release
+        end
+    }
+    message(format("Sleep till when?"))
+    waitmessage
+    if (var(VAR_0x8000) < 6) {
+        dynmultichoice(0, 0, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE, StyxFalls_Inn_Text_Dawn,
+                       StyxFalls_Inn_Text_Noon, StyxFalls_Inn_Text_Dusk, StyxFalls_Inn_Text_Night,
+                       StyxFalls_Inn_Text_NotNow)
+        if (var(VAR_RESULT) >= 4) {
+            goto(StyxFalls_Inn_EventScript_NoRest)
+        }
+    } elif (var(VAR_0x8000) < 12) {
+        dynmultichoice(0, 0, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE, StyxFalls_Inn_Text_Noon,
+                       StyxFalls_Inn_Text_Dusk, StyxFalls_Inn_Text_Night, StyxFalls_Inn_Text_NotNow)
+        if (var(VAR_RESULT) >= 3) {
+            goto(StyxFalls_Inn_EventScript_NoRest)
+        }
+    } elif (var(VAR_0x8000) < 19) {
+        dynmultichoice(0, 0, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE, StyxFalls_Inn_Text_Dusk,
+                       StyxFalls_Inn_Text_Night, StyxFalls_Inn_Text_NotNow)
+        if (var(VAR_RESULT) >= 2) {
+            goto(StyxFalls_Inn_EventScript_NoRest)
+        }
+    } else {
+        dynmultichoice(0, 0, FALSE, 5, 0, DYN_MULTICHOICE_CB_NONE, StyxFalls_Inn_Text_Night,
+                       StyxFalls_Inn_Text_NotNow)
+        if (var(VAR_RESULT) >= 1) {
+            goto(StyxFalls_Inn_EventScript_NoRest)
+        }
+    }
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    // ICHOR_STUB_XENIA_REST: move the clock forward to the chosen hour here.
+    delay(60)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("{PLAYER} slept on a bench by the rock. Outside, the falls made no sound at all."))
+    release
+}
+
+script StyxFalls_Inn_EventScript_NoRest {
+    setspeaker(StyxFalls_Inn_Name_Aroanios)
+    msgbox(format("The bed'll keep. Beds do."))
+    release
+}
+
+text StyxFalls_Inn_Text_Dawn { "DAWN" }
+text StyxFalls_Inn_Text_Noon { "NOON" }
+text StyxFalls_Inn_Text_Dusk { "DUSK" }
+text StyxFalls_Inn_Text_Night { "NIGHT" }
+text StyxFalls_Inn_Text_NotNow { "NOT NOW" }
+
+// ---------------------------------------------------------------------------
+// Eubouleus and Gryllos
+// ---------------------------------------------------------------------------
+
+script StyxFalls_Inn_EventScript_Eubouleus {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Inn_Name_Eubouleus)
+    if (flag(FLAG_ICHOR_GOT_GRYLLOS)) {
+        if (!flag(FLAG_ICHOR_GRYLLOS_SHOWN)) {
+            checkspecies(SPECIES_KAPRODON)
+            if (var(VAR_RESULT) == TRUE) {
+                goto(StyxFalls_Inn_EventScript_GryllosShown)
+            }
+            msgbox(format("Bring him back to show me. When he's got his tusks. I'll cry."))
+        } else {
+            msgbox(format("A boar's a boar to me, I'll be honest. But that one looked at me like Gryllos."))
+        }
+        release
+        end
+    }
+    msgbox(format("You! From Eleusa! You were at the Mysteries!\p"
+                  "I walked here. All of it. My knees have stopped speaking to me.\p"
+                  "This is Gryllos. He's a Kaplet. He won't grow up.\p"
+                  "Pigs like him only grow up in Arkadia. Under the oaks. Everybody knows that.\p"
+                  "I can't do the mountain. Not on these knees.\p"
+                  "Would you take him? Let him grow up there. He deserves to be a boar."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Take Gryllos?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(StyxFalls_Inn_Name_Eubouleus)
+        msgbox(format("No, it's a lot to ask. He's a lot of pig. I'll ask again tomorrow."))
+        release
+        end
+    }
+    // ICHOR_STUB_GIFT_NAME: nickname GRYLLOS, OT EUBOULEUS.
+    givemon(SPECIES_KAPLET, 28, ITEM_ORAN_BERRY, move1=MOVE_TAKE_DOWN, move2=MOVE_STOMPING_TANTRUM,
+            move3=MOVE_AMNESIA, move4=MOVE_REST)
+    copyvar(VAR_0x8004, VAR_RESULT)
+    if (var(VAR_0x8004) == MON_CANT_GIVE) {
+        setspeaker(StyxFalls_Inn_Name_Eubouleus)
+        msgbox(format("You've no room anywhere? Not even in a jar? Then he'll wait with me."))
+        release
+        end
+    }
+    setspeaker(StyxFalls_Inn_Name_Eubouleus)
+    msgbox(format("Thank you. Thank you. He likes acorns. He likes everything."))
+    removeobject(LOCALID_STYX_INN_GRYLLOS)
+    setflag(FLAG_ICHOR_GOT_GRYLLOS)
+    playfanfare(MUS_OBTAIN_ITEM)
+    setspeaker(SP_NAME_NONE)
+    message(format("{PLAYER} received Gryllos the Kaplet!"))
+    waitfanfare
+    waitmessage
+    if (var(VAR_0x8004) == MON_GIVEN_TO_PC) {
+        msgbox(format("Gryllos was set down in the Pithos."))
+    }
+    setspeaker(StyxFalls_Inn_Name_Eubouleus)
+    msgbox(format("Bring him back to show me. When he's got his tusks. I'll cry."))
+    release
+}
+
+script StyxFalls_Inn_EventScript_GryllosShown {
+    setspeaker(StyxFalls_Inn_Name_Eubouleus)
+    msgbox(format("Is that- Gryllos? Look at you! Look at those tusks!\p"
+                  "I'm crying. I said I'd cry. Here. The best thing a pig ever found me."))
+    giveitem(ITEM_BALM_MUSHROOM)
+    setflag(FLAG_ICHOR_GRYLLOS_SHOWN)
+    setspeaker(StyxFalls_Inn_Name_Eubouleus)
+    msgbox(format("Under an oak in Eleusa. He sniffed it out as a piglet. Now look at him."))
+    release
+}
+
+script StyxFalls_Inn_EventScript_Gryllos {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Inn_Name_Gryllos)
+    msgbox(format("Hnk."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("A small round pig in a basket of straw. It's chewing the basket."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Alethea, at the long table (beat 39)
+// ---------------------------------------------------------------------------
+
+script StyxFalls_Inn_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(StyxFalls_Inn_Name_Alethea)
+    msgbox(format("The innkeeper says nothing lives in that pool. Not a fish. Not a weed.\p"
+                  "Throw a stick in, and it doesn't float. It goes straight down.\p"
+                  "Truthfully, I'd like to drop something in and see. He says people have.\p"
+                  "I'm sleeping here tonight. You should too. Arkadia's over the mountain."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The room
+// ---------------------------------------------------------------------------
+
+script StyxFalls_Inn_EventScript_Hoof {
+    msgbox(format("A horse's hoof on a nail. The only thing in the house the black water couldn't eat."),
+           MSGBOX_SIGN)
+}
+
+script StyxFalls_Inn_EventScript_Window {
+    msgbox(format("Across the pool, the Styx falls and falls, and never seems to land."), MSGBOX_SIGN)
+}
+
+script StyxFalls_Inn_EventScript_Hearth {
+    msgbox(format("A hearth cut into the cliff. The cauldron smells of beans. Then of bread, quickly."),
+           MSGBOX_SIGN)
+}
+
+script StyxFalls_Inn_EventScript_Rock {
+    msgbox(format("The back wall is the cliff itself, black and running wet. It's cold to the touch."),
+           MSGBOX_SIGN)
+}

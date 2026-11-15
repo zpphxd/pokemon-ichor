@@ -1,1 +1,48 @@
+// Arkadia's Agora stall, built round the foot of the town's biggest cypress (SCRIPT.md
+// Part 2, Arkadia interiors; Part 6's shop). Room: tools/ichor/maps/arkrooms.py. The
+// stallkeeper (2,2) sells across her counter from (2,4).
+// Part 6's prices are the items' own: a mart takes each item's price from the item table,
+// so Balance sets them there. Olive Oil and Barley Cake are the engine's offering items.
+
 mapscripts Arkadia_Agora_MapScripts {}
+
+text Arkadia_Agora_Name_Stallkeeper { "STALLKEEPER" }
+
+script Arkadia_Agora_EventScript_Stallkeeper {
+    lock
+    faceplayer
+    setspeaker(Arkadia_Agora_Name_Stallkeeper)
+    message(format("Moon-cakes for the goddess, potions for the rest of you."))
+    waitmessage
+    pokemart(Arkadia_Agora_Mart)
+    setspeaker(Arkadia_Agora_Name_Stallkeeper)
+    msgbox(format("The arrows are for show. My husband made them. They don't fly."))
+    release
+}
+
+mart Arkadia_Agora_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_GREAT_BALL
+    ITEM_DUSK_BALL
+    ITEM_HYPER_POTION
+    ITEM_SUPER_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_SUPER_REPEL
+    ITEM_ESCAPE_ROPE
+    ITEM_OLIVE_OIL
+    ITEM_BARLEY_CAKE
+}
+
+script Arkadia_Agora_EventScript_MoonCakes {
+    msgbox(format("Clay jars of moon-cakes, round and pale. For the goddess, the label says."), MSGBOX_SIGN)
+}
+
+script Arkadia_Agora_EventScript_Arrows {
+    msgbox(format("A rack of arrows, fletched red, white and blue. A tag says: FOR DISPLAY."), MSGBOX_SIGN)
+}
+
+script Arkadia_Agora_EventScript_Cypress {
+    msgbox(format("The trunk of the biggest cypress in Arkadia. The stall is built round it.\p"
+                  "Its boughs are the roof."), MSGBOX_SIGN)
+}
