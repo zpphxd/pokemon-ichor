@@ -154,6 +154,42 @@ class SpriteAuditTest(unittest.TestCase):
         self.assertEqual(result["groups"], {"items": 1, "pokemon": 1, "trainers": 1})
         self.assertTrue(all(len(asset["sha256"]) == 64 for asset in result["assets"]))
 
+    def test_changes_accounts_for_each_asset_once(self):
+        before = {"schema_version": 1, "assets": [
+            {"path": "graphics/unchanged.png", "sha256": "a" * 64},
+            {"path": "graphics/changed.png", "sha256": "a" * 64},
+            {"path": "graphics/removed.png", "sha256": "a" * 64},
+        ]}
+        after = {"schema_version": 1, "assets": [
+            {"path": "graphics/changed.png", "sha256": "b" * 64},
+            {"path": "graphics/unchanged.png", "sha256": "a" * 64},
+            {"path": "graphics/added.png", "sha256": "c" * 64},
+        ]}
+        self.assertEqual(audit.inventory_changes(before, after), {
+            "schema_version": 1,
+            "added": ["graphics/added.png"],
+            "removed": ["graphics/removed.png"],
+            "changed": ["graphics/changed.png"],
+            "unchanged_count": 1,
+        })
+
+    def test_changes_rejects_wrong_schema(self):
+        with self.assertRaisesRegex(ValueError, "schema_version 1"):
+            audit.inventory_changes({"schema_version": 2, "assets": []}, {})
+
+    def test_changes_rejects_invalid_digest(self):
+        snapshot = {"schema_version": 1, "assets": [
+            {"path": "graphics/invalid.png", "sha256": "not a digest"},
+        ]}
+        with self.assertRaisesRegex(ValueError, "SHA-256"):
+            audit.inventory_changes(snapshot, snapshot)
+
+    def test_changes_rejects_duplicate_assets(self):
+        asset = {"path": "graphics/duplicate.png", "sha256": "a" * 64}
+        snapshot = {"schema_version": 1, "assets": [asset, asset]}
+        with self.assertRaisesRegex(ValueError, "duplicate inventory asset"):
+            audit.inventory_changes(snapshot, snapshot)
+
 
 if __name__ == "__main__":
     unittest.main()

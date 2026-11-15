@@ -2,6 +2,7 @@
 """Inventory sprite sources and check native Aethos sprite batches.
 
 python3 tools/ichor/sprite_audit.py inventory --output build/sprite_inventory.json
+python3 tools/ichor/sprite_audit.py changes --baseline build/sprite_inventory.json
 python3 tools/ichor/sprite_audit.py check --pokemon Nebrel Kynder Hipling
 python3 tools/ichor/sprite_audit.py check --image graphics/trainers/front_pics/kleon.png
 
@@ -158,23 +159,56 @@ def inventory(root):
     }
 
 
+def inventory_changes(before, after):
+    snapshots = []
+    for snapshot in (before, after):
+        if (not isinstance(snapshot, dict) or snapshot.get("schema_version") != 1
+                or not isinstance(snapshot.get("assets"), list)):
+            raise ValueError("expected a schema_version 1 sprite inventory")
+        assets = {}
+        for asset in snapshot["assets"]:
+            if (not isinstance(asset, dict) or not isinstance(asset.get("path"), str)
+                    or not isinstance(asset.get("sha256"), str)
+                    or not re.fullmatch(r"[0-9a-f]{64}", asset["sha256"])):
+                raise ValueError("inventory assets require a path and SHA-256 digest")
+            if asset["path"] in assets:
+                raise ValueError(f"duplicate inventory asset: {asset['path']}")
+            assets[asset["path"]] = asset["sha256"]
+        snapshots.append(assets)
+    old, new = snapshots
+    common = old.keys() & new.keys()
+    return {
+        "schema_version": 1,
+        "added": sorted(new.keys() - old.keys()),
+        "removed": sorted(old.keys() - new.keys()),
+        "changed": sorted(path for path in common if old[path] != new[path]),
+        "unchanged_count": sum(old[path] == new[path] for path in common),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--root", type=Path, default=ROOT)
     commands = parser.add_subparsers(dest="command", required=True)
     listing = commands.add_parser("inventory")
     listing.add_argument("--output", type=Path)
+    changes = commands.add_parser("changes")
+    changes.add_argument("--baseline", type=Path, required=True)
+    changes.add_argument("--output", type=Path)
     checking = commands.add_parser("check")
     checking.add_argument("--pokemon", nargs="+", default=[])
     checking.add_argument("--image", nargs="+", default=[])
     args = parser.parse_args()
     try:
-        if args.command == "inventory":
-            content = json.dumps(inventory(args.root), indent=2) + "\n"
+        if args.command in ("inventory", "changes"):
+            result = inventory(args.root)
+            if args.command == "changes":
+                result = inventory_changes(json.loads(args.baseline.read_text()), result)
+            content = json.dumps(result, indent=2) + "\n"
             if args.output:
                 args.output.parent.mkdir(parents=True, exist_ok=True)
                 args.output.write_text(content)
-                print(f"SPRITE INVENTORY: {args.output}")
+                print(f"SPRITE {args.command.upper()}: {args.output}")
             else:
                 print(content, end="")
         else:
