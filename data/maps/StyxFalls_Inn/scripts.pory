@@ -20,7 +20,8 @@
 
 mapscripts StyxFalls_Inn_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        if (flag(FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS)) {
+        // Not before the Oath Stone: heights sets FLAG_ICHOR_SAW_STYX as beat 39 ends.
+        if (flag(FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS) || !flag(FLAG_ICHOR_SAW_STYX)) {
             setflag(FLAG_TEMP_1)
         } else {
             setflag(FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS)

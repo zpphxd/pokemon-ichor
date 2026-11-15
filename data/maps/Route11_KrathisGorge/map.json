@@ -18,6 +18,11 @@
       "map": "MAP_STYX_FALLS",
       "offset": 0,
       "direction": "down"
+    },
+    {
+      "map": "MAP_AIGION",
+      "offset": 6,
+      "direction": "up"
     }
   ],
   "object_events": [

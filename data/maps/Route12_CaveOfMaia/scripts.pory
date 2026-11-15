@@ -59,6 +59,7 @@ script Route12_CaveOfMaia_EventScript_TheLyre {
     waitmovement(0)
     removeobject(LOCALID_MAIA_ALETHEA)
     setflag(FLAG_ICHOR_HIDE_ALETHEA_MAIA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS)  // she's gone on; the inn's table is empty now
     setvar(VAR_TEMP_1, 1)
     applymovement(LOCALID_MAIA_PRIESTESS, Common_Movement_FaceDown)
     waitmovement(0)

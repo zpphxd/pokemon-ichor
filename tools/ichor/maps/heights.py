@@ -277,7 +277,8 @@ def route11():
     m.force_open |= {(21, 15), (20, 17)}
 
     E = {
-        "connections": [{"map": "MAP_STYX_FALLS", "offset": R11_SOUTH - SF_NORTH, "direction": "down"}],
+        "connections": [{"map": "MAP_STYX_FALLS", "offset": R11_SOUTH - SF_NORTH, "direction": "down"},
+                        {"map": "MAP_AIGION", "offset": 6, "direction": "up"}],  # Aigion's road (13-14) meets ours (19-20)
         "object_events": [
             # beat 38: the muleteer and his mules, Alethea, the three drums
             obj(P + "MULETEER", 23, 13, R11 + "Muleteer", "MOVEMENT_TYPE_FACE_LEFT",

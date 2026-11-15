@@ -181,7 +181,7 @@ HEADER = {
     "allow_cycling": True, "allow_escaping": False, "allow_running": True,
     "show_map_name": True,
     "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-    "connections": None,     # Route 11 (batch 3) joins the south edge at columns 12-15
+    "connections": [{"map": "MAP_ROUTE11_KRATHIS_GORGE", "offset": -6, "direction": "down"}],  # Route 11's road (19-20) meets ours (13-14)
 }
 
 
