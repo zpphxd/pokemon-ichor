@@ -456,6 +456,24 @@ enum
     OBJ_EVENT_GFX_ICHOR_APOLLO,
     OBJ_EVENT_GFX_ICHOR_CAMI,
     OBJ_EVENT_GFX_ICHOR_DEMETER,
+    // The post-game's first sprites (tools/ichor/art/sprites_pg_*.py,
+    // design/postgame/SPRITES.md). The Euploia at sea, 64x64, sail full and
+    // slack: the same layout and palette, so the sailing layer swaps them in place
+    OBJ_EVENT_GFX_ICHOR_EUPLOIA,
+    OBJ_EVENT_GFX_ICHOR_EUPLOIA_SLACK,
+    // The Euploia's new crew and the herald of the Olympic truce (cast palette)
+    OBJ_EVENT_GFX_ICHOR_NOLAN,
+    OBJ_EVENT_GFX_ICHOR_PHEMIOS,
+    OBJ_EVENT_GFX_ICHOR_LYNKEUS,
+    OBJ_EVENT_GFX_ICHOR_TRUCE_HERALD,
+    // Olympia's people, ahead of the post-game's batch 2 (Olympia palette)
+    OBJ_EVENT_GFX_ICHOR_ACHILLES,
+    OBJ_EVENT_GFX_ICHOR_ODYSSEUS,
+    OBJ_EVENT_GFX_ICHOR_HIPPOLYTA,
+    OBJ_EVENT_GFX_ICHOR_ATALANTA,
+    OBJ_EVENT_GFX_ICHOR_ARIADNE,
+    OBJ_EVENT_GFX_ICHOR_OLYMPIAS,
+    OBJ_EVENT_GFX_ICHOR_PAIONIOS,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
@@ -619,6 +637,10 @@ enum
 #define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // the cast, plus the Shepherd, Hoplite, Augur and Acolyte walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA         0x1136 // Sam, Apollo, Cami and Demeter: true gold, white, green
+// The post-game's tags start high in the range, at 0x1148, so the act
+// branches, which count up from 0x1137, don't collide with them.
+#define OBJ_EVENT_PAL_TAG_ICHOR_OLYMPIA           0x1148 // Olympia: the Brains, Olympias, Paionios (post-game)
+#define OBJ_EVENT_PAL_TAG_ICHOR_EUPLOIA           0x1149 // the Euploia at sea: pitch, oak, bronze, linen, foam (post-game)
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS

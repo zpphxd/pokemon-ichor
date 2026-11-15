@@ -436,6 +436,19 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSam;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorApollo;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCami;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDemeter;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorEuploia;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorEuploiaSlack;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNolan;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPhemios;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorLynkeus;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTruceHerald;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAchilles;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorOdysseus;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHippolyta;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAtalanta;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAriadne;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorOlympias;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPaionios;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -865,6 +878,19 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_APOLLO] =             &gObjectEventGraphicsInfo_IchorApollo,
     [OBJ_EVENT_GFX_ICHOR_CAMI] =               &gObjectEventGraphicsInfo_IchorCami,
     [OBJ_EVENT_GFX_ICHOR_DEMETER] =            &gObjectEventGraphicsInfo_IchorDemeter,
+    [OBJ_EVENT_GFX_ICHOR_EUPLOIA] =           &gObjectEventGraphicsInfo_IchorEuploia,
+    [OBJ_EVENT_GFX_ICHOR_EUPLOIA_SLACK] =     &gObjectEventGraphicsInfo_IchorEuploiaSlack,
+    [OBJ_EVENT_GFX_ICHOR_NOLAN] =             &gObjectEventGraphicsInfo_IchorNolan,
+    [OBJ_EVENT_GFX_ICHOR_PHEMIOS] =           &gObjectEventGraphicsInfo_IchorPhemios,
+    [OBJ_EVENT_GFX_ICHOR_LYNKEUS] =           &gObjectEventGraphicsInfo_IchorLynkeus,
+    [OBJ_EVENT_GFX_ICHOR_TRUCE_HERALD] =      &gObjectEventGraphicsInfo_IchorTruceHerald,
+    [OBJ_EVENT_GFX_ICHOR_ACHILLES] =          &gObjectEventGraphicsInfo_IchorAchilles,
+    [OBJ_EVENT_GFX_ICHOR_ODYSSEUS] =          &gObjectEventGraphicsInfo_IchorOdysseus,
+    [OBJ_EVENT_GFX_ICHOR_HIPPOLYTA] =         &gObjectEventGraphicsInfo_IchorHippolyta,
+    [OBJ_EVENT_GFX_ICHOR_ATALANTA] =          &gObjectEventGraphicsInfo_IchorAtalanta,
+    [OBJ_EVENT_GFX_ICHOR_ARIADNE] =           &gObjectEventGraphicsInfo_IchorAriadne,
+    [OBJ_EVENT_GFX_ICHOR_OLYMPIAS] =          &gObjectEventGraphicsInfo_IchorOlympias,
+    [OBJ_EVENT_GFX_ICHOR_PAIONIOS] =          &gObjectEventGraphicsInfo_IchorPaionios,
     // End of Ichor object events
 };
 

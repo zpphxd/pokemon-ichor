@@ -191,6 +191,13 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_AUGUR,
     TRAINER_PIC_ACOLYTE_M,
     TRAINER_PIC_ACOLYTE_F,
+    // Pokemon Ichor post-game: the Olympiad's Brains and Olympias (design/postgame/SPRITES.md)
+    TRAINER_PIC_ICHOR_ACHILLES,
+    TRAINER_PIC_ICHOR_ODYSSEUS,
+    TRAINER_PIC_ICHOR_HIPPOLYTA,
+    TRAINER_PIC_ICHOR_ATALANTA,
+    TRAINER_PIC_ICHOR_ARIADNE,
+    TRAINER_PIC_ICHOR_OLYMPIAS,
     TRAINER_PIC_COUNT,
 };
 

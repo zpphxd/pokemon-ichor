@@ -2678,6 +2678,59 @@ static const struct SpriteFrameImage sPicTable_IchorCami[] = {
 static const struct SpriteFrameImage sPicTable_IchorDemeter[] = {
     overworld_ascending_frames(gObjectEventPic_IchorDemeter, 2, 4),
 };
+// The post-game's first sprites
+static const struct SpriteFrameImage sPicTable_IchorEuploia[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorEuploia, 8, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorEuploiaSlack[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorEuploiaSlack, 8, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorNolan[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorNolan, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPhemios[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPhemios, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorLynkeus[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorLynkeus, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorTruceHerald[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorTruceHerald, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAchilles[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAchilles, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorOdysseus[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorOdysseus, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorHippolyta[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorHippolyta, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAtalanta[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAtalanta, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAriadne[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAriadne, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorOlympias[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorOlympias, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPaionios[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPaionios, 2, 4),
+};
+
 // End of Ichor object events
 
 // Ichor: the ground item jar

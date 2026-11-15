@@ -673,6 +673,22 @@ const u32 gObjectEventPic_IchorSam[] = INCGFX_U32("graphics/object_events/pics/p
 const u32 gObjectEventPic_IchorApollo[] = INCGFX_U32("graphics/object_events/pics/people/ichor/apollo.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorCami[] = INCGFX_U32("graphics/object_events/pics/people/ichor/cami.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_IchorDemeter[] = INCGFX_U32("graphics/object_events/pics/people/ichor/demeter.png", ".4bpp", "-mwidth 2 -mheight 4");
+// The post-game's first sprites (tools/ichor/art/sprites_pg_*.py)
+const u16 gObjectEventPal_IchorEuploia[] = INCGFX_U16("graphics/object_events/palettes/ichor_euploia.pal", ".gbapal");
+const u16 gObjectEventPal_IchorOlympia[] = INCGFX_U16("graphics/object_events/palettes/ichor_olympia.pal", ".gbapal");
+const u32 gObjectEventPic_IchorEuploia[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_euploia.png", ".4bpp", "-mwidth 8 -mheight 8");
+const u32 gObjectEventPic_IchorEuploiaSlack[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_euploia_slack.png", ".4bpp", "-mwidth 8 -mheight 8");
+const u32 gObjectEventPic_IchorNolan[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_nolan.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPhemios[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_phemios.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorLynkeus[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_lynkeus.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorTruceHerald[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_truce_herald.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAchilles[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_achilles.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorOdysseus[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_odysseus.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorHippolyta[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_hippolyta.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAtalanta[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_atalanta.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAriadne[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_ariadne.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorOlympias[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_olympias.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPaionios[] = INCGFX_U32("graphics/object_events/pics/ichor/pg_paionios.png", ".4bpp", "-mwidth 2 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)
