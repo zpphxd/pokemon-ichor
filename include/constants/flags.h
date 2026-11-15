@@ -1811,6 +1811,11 @@
 #define FLAG_ICHOR_BOARDED_GULF_FERRY           (FLAG_ICHOR_GENERAL_START + 0x167) // Ichor: Act II: boarded Panopeus's ferry at Kirrha (beat 37B)
 #define FLAG_ICHOR_GULF_CROSSED                 (FLAG_ICHOR_GENERAL_START + 0x168) // Ichor: Act II: crossed the Gulf to Aigion (beat 37B-C)
 #define FLAG_ICHOR_VISITED_AIGION               (FLAG_ICHOR_GENERAL_START + 0x169) // Ichor: Act II: Aigion is a fly target (beat 37C)
+#define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
+#define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
+#define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)
+#define FLAG_ICHOR_ALETHEA_GOT_SKYLAPS          (FLAG_ICHOR_GENERAL_START + 0x1FD) // Ichor: Act II: Alethea caught the storm-hound Skylaps (beat 43)
+#define FLAG_ICHOR_HUNT_DONE                    (FLAG_ICHOR_GENERAL_START + 0x1FE) // Ichor: Act II: the Hunt for the Hind is won (beat 44)
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end

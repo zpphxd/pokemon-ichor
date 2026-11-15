@@ -10,7 +10,7 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 |---|---|---|---|
 | 1 | **The Kithairon crossing and Thyrsa:** Route 6, Mt. Kithairon (Eleutherai and the pass), Route 7 and the Kronia grounds, Thyrsa City and its interiors, the theater and skene, the Temple of Dionysus | 26–34 | built 2026-11-14 (below: what's left) |
 | 2 | The road west: Route 8, Lebadeia and Trophonios's cave, Route 9, Kirrha, the Gulf ferry, Aigion | 35–37 | in progress, with batch 1's polish pass alongside |
-| 3 | Arkadia: Route 11, Styx Falls, Route 12, Arkadia and its interiors, the Cypress Wood, the Pool, the Temple of Artemis | 38–44 | |
+| 3 | Arkadia: Route 11, Styx Falls, Route 12, Arkadia and its interiors, the Cypress Wood, the Pool, the Temple of Artemis | 38–44 | in progress, alongside batch 2 |
 | 4 | Back to the Isthmus and the road of the Mysteries: Route 13, Nemea, Route 14, the Act II changes to Emporion, Eleusa and Akti, Route 15 with Thria, Daphni, Route 16; Aigina's interior scripted onto world-act1's maps | 45–47 | |
 | 5 | Astyra: the city and its interiors, the Kerameikos and the paupers' graves, the Akropolis, Phaleron, the salt well | 48–57 | |
 | 6 | The voyage and Kaldera: the *Paralos*, Delos, Route 19, Paros, the caldera road, Kaldera and its interiors, the Temple of Hephaestus, the Telchines' forge, Nea Kameni; the empty house in Elaia | 58–67 | |
@@ -102,6 +102,47 @@ The oracle's way out (beat 35C, "the hole is the way out") is a scripted warp to
 **Names to watch:** `FLAG_ICHOR_GOT_SOOTHE_BELL` is Act I's; Aigion's Soothe Bell needs its own name (`FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION`). Part 8's `FLAG_ICHOR_GOT_GIRDLE` is the engine's `FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES`. `ITEM_PYLADES_FIG` doesn't exist: use `FLAG_ICHOR_PYLADES_FIG` and a message, tagged `ICHOR_STUB_KEY_ITEMS`.
 
 **Tests:** each map agent writes a headless test of its beats, as batch 1's did; this session writes `tools/ichor/tests/act2_batch2.sh` (the audit and the walk, extended west to Aigion) and runs both batches' suites.
+
+## Batch 3: Arkadia (beats 38–44)
+
+Started alongside batch 2 at the director's request ("run as many parallel map agents as your batches allow"). Everything in Batch 2's opening list holds: use the engine directly, the user's map standard, hidden items on vanilla flags, the same scope and done-means.
+
+### Who builds what
+
+| Agent | Builds | Files it owns |
+|---|---|---|
+| **heights** | The `arkadia_heights` secondary (SCRIPT.md Part 10: the gorge, the fallen Doric temple and its drums, the switchback cliff road, ledges, white water; the Styx's black cliff and still black pool; Nonakris's houses; the cypress road and its meadows); `MAP_ROUTE11_KRATHIS_GORGE` (40×56, beat 38: the drums, the Girdle's main-path gate), `MAP_STYX_FALLS` (36×30, beat 39), `MAP_ROUTE12_CYPRESS_ROAD` (56×36, beat 40) and `MAP_ROUTE12_CAVE_OF_MAIA` (Hermes's birth cave: a cave set of your own, or borrow from `kithairon_cave`'s art) | `tools/ichor/art/heights_*.py`, `data/tilesets/secondary/arkadia_heights/` (and a cave set), `tools/ichor/maps/heights.py`, those four maps, `design/phase3/TILES_heights.md` |
+| **arkadia** | The `arkadia` secondary (cypresses in four shapes, lamp-trees lit and unlit, timber-and-stone houses on terraces, the outside of every building, the Cypress Wood's deep shade, the Pool); `MAP_ARKADIA` (50×44, beat 41 and the town's roster), `MAP_ARKADIA_CYPRESS_WOOD` (36×30: beat 42, Kleon's new moon, word for word from STORY.md §7.2; beat 43, the storm-hound and the vixen) and `MAP_POOL_OF_MNEMOSYNE` (24×20) | `tools/ichor/art/arkadia_*.py`, `data/tilesets/secondary/arkadia/`, `tools/ichor/maps/arkadia.py`, those three maps, `design/phase3/TILES_arkadia.md` |
+| **artemis** | The `temple_artemis` secondary (the night garden: laurel walls, hunters' arches, myrtle, moonlit ground, the three clearings); `MAP_ARKADIA_TEMPLE_OF_ARTEMIS`: beat 44, Part 5's Hunt for the Hind (19193–19291), the acolytes, Hierophant Kallisto and the Moon Laurel (`FLAG_BADGE05_GET`), `EventScript_IchorTempleAltar_Artemis` and the Hierophant's gift calls | `tools/ichor/art/temple_artemis*.py`, its secondary, `tools/ichor/maps/temple_artemis.py`, the temple map, `design/phase3/TILES_temple_artemis.md` |
+| **rooms3** | Nine interiors on `oikos` (Part 10's list of new pieces): Styx Falls's inn (a rest point), Horkia's house (the oaths) and Kepheus's house; Arkadia's Asclepeion (heals, the Pithos), Agora (the shop), Nyktimos's hall (the empty place set), Klymene's house, Hippothoos's charcoal hut and Krotos's house; `HEAL_LOCATION_ARKADIA`; the in-game trade (Arkoby) | `tools/ichor/art/arkrooms_*.py`, their secondaries, `tools/ichor/maps/arkrooms.py`, those nine maps, `design/phase3/ROOMS_arkadia.md` |
+| **sprites3** | Part 10's batch 3 sprites: HUNTRESS and CHARCOALER (portraits, walkers), Kallisto (portrait `Hierophant Kallisto`, walker), Kleon on a stump, his row of balls, the temple hounds, the golden hind, Phylonoe, the muleteer, the lamplighter; the named folk as palette swaps | as sprites2, with `tools/ichor/art/sprites_act2_b3*.py` |
+
+### Maps, seams and doors
+
+All 17 maps are registered. Outdoor maps are in `gMapGroup_TownsAndRoutes`; Arkadia's rooms and the temple in `gMapGroup_IndoorArkadia`; Styx Falls's rooms and the Cave of Maia in `gMapGroup_IndoorStyx`.
+
+| Seam | Columns or rows | Owner |
+|---|---|---|
+| Aigion's south edge → Route 11's north edge | the harbors agent records Aigion's columns; the heights agent draws Route 11's road and records its columns; this session sets both offsets at integration. Seam rows aethos-only. | harbors, heights |
+| Route 11 ↔ Styx Falls ↔ Route 12 | the heights agent's (one tileset) | heights |
+| Route 12's south edge ↔ Arkadia's north edge | **fixed:** Route 12's road at columns 28–31 (verges 28, 31), Arkadia's at 22–25; Route 12 `down` offset +6, Arkadia `up` offset −6; seam rows aethos-only | heights, arkadia |
+| Arkadia ↔ the Cypress Wood ↔ the Pool | the arkadia agent's | arkadia |
+| Arkadia's east edge → Route 13 (batch 4) | the huntresses' cordon until `FLAG_BADGE05_GET`; record the rows | arkadia |
+| Arkadia's south (Route 27) and west (Route 32) roads | drawn, closed (Act III, post-game) | arkadia |
+
+**Door warps, fixed:** `MAP_ARKADIA` warps 0–6: Asclepeion, Agora, Nyktimos's hall, Klymene's house, the charcoal hut, Krotos's house, the Temple of Artemis. `MAP_STYX_FALLS` warps 0–2: the inn, Horkia's house, Kepheus's house. `MAP_ROUTE12_CYPRESS_ROAD` warp 0: the Cave of Maia. Each interior's warp 0 (and 1) leads back.
+
+### Ids
+
+**Trainers** 202–216: heights 202–210 (Apheidas, Auge, Echemos, Azan; Aipytos, Laodike, Telphousa, Kypselos, grunt Basanos), arkadia 211–212 (Euadne, Agapenor), artemis 213–216 (Kyrene, Anthia, Prokris, Kallisto). Classes `Huntress`, `Charcoaler`; pic `Hierophant Kallisto`.
+
+**Bank flags** (the last of 0x100–0x1FF until the second bank lands): this session 0x1FA–0x1FE, already claimed: `FLAG_ICHOR_VISITED_STYX_FALLS`, `_VISITED_ARKADIA`, `_KLEON_JOINED_TITANS`, `_ALETHEA_GOT_SKYLAPS`, `_HUNT_DONE`. heights 0x1C0–0x1D1, arkadia 0x1D2–0x1E3, artemis 0x1E4–0x1EB, rooms3 0x1EC–0x1F9. **Item balls and hidden items** take vanilla flags this batch, to save the bank: heights 0x338–0x34B, arkadia 0x34C–0x359, artemis 0x35A–0x35D, rooms3 0x35E–0x363 (`claim.py --range … flag`). If a range runs out, name the flag in your doc, stub its use, and say so.
+
+**Engine indices:** decoys `FLAG_ICHOR_THEOXENIA_START` +0x24 (Route 11), +0x25 (Arkadia); desecrated altar index 10 (Route 12); herms `HERM_AETHOS_ROUTE_11` and `_12` (rows and heal locations appended by their builders); prophecy tablet 5 at `FLAG_ICHOR_PROPHECY_START` +4, read at +12; Daedalus's page IV at `FLAG_ICHOR_PAGES_START` +3; Artemis's gift I by `FLAG_ICHOR_GIFT(god, ICHOR_GIFT_I)` through the engine's Hierophant calls.
+
+**Walkers named now** (aliased in `ichor_gfx_stubs_act2.h`'s batch 3 block): `OBJ_EVENT_GFX_ICHOR_HUNTRESS`, `_CHARCOALER`, `_KALLISTO`, `_KLEON_STUMP`, `_KLEON_BALLS`, `_TEMPLE_HOUND`, `_GOLDEN_HIND`, `_PHYLONOE`, `_MULETEER`, `_LAMPLIGHTER`. Iapetos in the Titan mask is batch 1's `_CHORUS_LEADER`; Alethea kneeling is `_ALETHEA_KNEEL`.
+
+Parties: `design/phase3/parties/{heights,arkadia,artemis}.party`. Wild tables: `design/phase3/encounters/region_b2.json`, folded (Routes 11–12, the Wood and the Pool, morning and night; fishing for Route 11's pool and the temple's waterfall pool). Styx Falls has no wild battles and its black pool no table.
 
 ## Handovers waiting for later batches
 
