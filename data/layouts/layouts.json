@@ -9701,8 +9701,8 @@
     {
       "id": "LAYOUT_KYTHERA_FOAM_ROAD",
       "name": "KytheraFoamRoad_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 64,
+      "height": 24,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Kythera",
       "border_filepath": "data/layouts/KytheraFoamRoad/border.bin",
