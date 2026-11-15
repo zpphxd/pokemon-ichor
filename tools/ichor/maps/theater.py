@@ -96,6 +96,7 @@ SEAT_ALETHEA = (17, 18)     # ... and Alethea beside them
 SEAT_KLEON = (16, 17)       # Kleon, the front row to the left (the diagonal's first seat)
 RESERVED = {SEAT_PLAYER, SEAT_ALETHEA, SEAT_KLEON}
 HONEY = (22, 18)            # a front-row seat with a jar of Honey under it (hidden item)
+OBOL = (0, 7)               # the west parodos's corner: a dropped obol (hidden item)
 
 DOOR_IVY, DOOR_CROWN, DOOR_GOAT = (14, 5), (19, 5), (25, 5)   # each door's lower cell
 BACK_DOOR = (30, 7)         # the skene's back door, in the east wing (warp 1)
@@ -315,7 +316,7 @@ def theater_events(g):
             obj(P + "HARVESTER", 12, 31, TH + "Worker", "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT", "FLAG_TEMP_1B",
                 "LOCALID_THEATER_WORKER"),
             obj(P + "YOUTH_M", 8, 21, TH + "WorkerTiers", "MOVEMENT_TYPE_FACE_UP", "FLAG_TEMP_1B"),
-            obj(P + "YOUTH_F", 30, 26, TH + "WorkerTiers", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_TEMP_1B"),
+            obj(P + "YOUTH_F", 33, 26, TH + "WorkerTiers", "MOVEMENT_TYPE_FACE_LEFT", "FLAG_TEMP_1B"),
             # the Dionysia's cast (beat 32): on stage and in the orchestra. The ones who
             # make an entrance during the play hide behind temp flags the map's
             # ON_TRANSITION sets; objects that change their look use OBJ_EVENT_GFX_VAR_n.
@@ -352,7 +353,7 @@ def theater_events(g):
             obj("OBJ_EVENT_GFX_VAR_3", KLEON_EDGE[0], KLEON_EDGE[1], TH + "KleonEmpty", "MOVEMENT_TYPE_FACE_DOWN",
                 "FLAG_ICHOR_HIDE_KLEON_THEATER", "LOCALID_THEATER_KLEON"),
             # after: a cleaner on the tiers
-            obj(P + "ELDER_F", 10, 24, TH + "Cleaner", "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+            obj(P + "ELDER_F", 13, 24, TH + "Cleaner", "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
                 "FLAG_ICHOR_HIDE_THEATER_CLEANER", "LOCALID_THEATER_CLEANER"),
         ],
         "coord_events": [trigger(x, y, TH + "TakeYourSeat", "VAR_ICHOR_DIONYSIA", "0") for (x, y) in stops]
@@ -369,6 +370,9 @@ def theater_events(g):
             # read from the orchestra's edge; the seat's cell has elevation 0
             {"type": "hidden_item", "x": HONEY[0], "y": HONEY[1], "elevation": 0,
              "item": "ITEM_HONEY", "flag": "FLAG_ICHOR_HIDDEN_THEATER_HONEY"},
+            # an obol, a seat's price, dropped in the corner of the west parodos (polish pass)
+            {"type": "hidden_item", "x": OBOL[0], "y": OBOL[1], "elevation": 3,
+             "item": "ITEM_RELIC_COPPER", "flag": "FLAG_ICHOR_HIDDEN_THEATER_OBOL"},
         ],
     }
     return ev

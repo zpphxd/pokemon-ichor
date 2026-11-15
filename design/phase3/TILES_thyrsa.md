@@ -703,8 +703,8 @@ the map is aethos hillside: olives, pines, cypresses and rock, open only along t
 - **The east hill**: the theater's high gate (42–44, 14–17) on the upper terrace among cypresses, the
   terrace wall at row 19, Polos and Euthykles on the terrace below.
 - **The vineyards** along the west wall: two blocks of vine rows (the city's tall grass) either side of
-  the lane to the Neistan Gate, the old terrace wall with the marked ivy at (10,26) and the Big Nugget on
-  the wall-walk beyond it (9,28), Staphylos's house and the wine press at their head, the old trellises in
+  the lane to the Neistan Gate, the old terrace wall with the marked ivy at (10,26) (the Big Nugget that
+  sat on the wall-walk beyond it moved to the alley behind the mask-maker's in the polish pass), Staphylos's house and the wine press at their head, the old trellises in
   the south-west corner where the omen's Thyrsivy stands.
 
 **Checks** (`thyrsa.py` runs them on every build): every warp sits on a door reachable from its
@@ -881,5 +881,21 @@ morning after a festival, the sellers and the fountain talk, and the smoke climb
   the Honey under a front-row seat (22,18).
 - **Kept:** the marked ivy (`ICHOR_STUB_RELICS`). The thyrsus exists now (Dionysus's gift II,
   `EventScript_IchorIvyClimb` on `MB_ROCK_CLIMB`), but a climb to the wall-walk needs the strip's
-  wall-walk at a second elevation with a way back down, which is a map change of its own; the Big Nugget
-  stays a lure seen from below. Manto's omens (`ICHOR_STUB_OMENS`): the engine's daily draw isn't built.
+  wall-walk opened as a place to stand, with a way back down, which is a map change of its own. Manto's
+  omens (`ICHOR_STUB_OMENS`): the engine's daily draw isn't built.
+
+### The map audit (MAP_DESIGN §8, `tools/ichor/map_audit.py`)
+
+Run on the polish pass's maps once the audit landed: Thyrsa City needs two hidden items (it has four)
+and the theater two (it had one). Its findings, and what changed:
+- *The Big Nugget's ball stood on a solid cell* (the west wall-walk, seen and never reached): it moved to
+  the end of the alley behind the mask-maker's house, (45,20), which was also the audit's *empty dead
+  end, ten cells deep*. The alley now pays.
+- *Eudora's court's flags and litter were solid* while the same metatiles are open on the street: the
+  court is closed by its walls and the house anyway, so its flags are open ground now.
+- *Grass (0x001) and the olive's crown tips (0x1CE, 0x1CF) are open inside the walls and solid on the
+  hillside*: intended. Batch 1 closed every hillside cell so the hill reads as one wood and the edges
+  stay shut except on the three roads.
+- *The theater*: a second hidden item, an obol (Relic Copper) dropped in the corner of the west parodos
+  (0,7); the worker on the tiers moved from a seat at (30,26) to the stair at (33,26) and the cleaner from
+  (10,24) to the walkway at (13,24), so both can be talked to.

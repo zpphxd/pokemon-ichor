@@ -631,8 +631,9 @@ script ThyrsaCity_EventScript_BrickedGate {
            MSGBOX_SIGN)
 }
 
-// ICHOR_STUB_RELICS: Dionysus's Thyrsus (rite gift II) climbs the marked ivy to the
-// wall-walk and the Big Nugget; until the rites land the ivy only describes itself.
+// ICHOR_STUB_RELICS: Dionysus's thyrsus (rite gift II) exists now (EventScript_IchorIvyClimb on
+// MB_ROCK_CLIMB), but the climb wants the west wall-walk opened as a place to stand, with a way
+// back down: a map change of its own. Until then the ivy describes itself.
 script ThyrsaCity_EventScript_MarkedIvy {
     msgbox(format("Ivy, thick as a curtain, up the old terrace wall.\p"
                   "Someone has scratched a pinecone on a staff into the stone behind it."),

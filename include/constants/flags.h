@@ -834,7 +834,7 @@
 #define FLAG_ICHOR_HIDDEN_THYRSA_RARE_CANDY                         0x30F // Ichor: Thyrsa City: hidden Rare Candy in the niche of the bricked-up seventh gate (12,2)
 #define FLAG_ICHOR_HIDDEN_THEATER_HONEY                             0x310 // Ichor: Thyrsa's theater: hidden Honey under the front row
 #define FLAG_ICHOR_HIDDEN_THYRSA_PRETTY_FEATHER                     0x311 // Ichor: Thyrsa City: hidden Pretty Feather in the nook behind Manto's house, where her birds come and go (45,7)
-#define FLAG_UNUSED_0x312                                           0x312 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_THEATER_OBOL                              0x312 // Ichor: Thyrsa's theater: hidden Relic Copper (a seat's price, an obol) dropped by the west parodos (0,7)
 #define FLAG_UNUSED_0x313                                           0x313 // Unused Flag
 #define FLAG_UNUSED_0x314                                           0x314 // Unused Flag
 #define FLAG_HIDE_FANCLUB_OLD_LADY                                  0x315
@@ -1794,7 +1794,7 @@
 #define FLAG_ICHOR_OMEN_THYRSIVY_TOLD           (FLAG_ICHOR_GENERAL_START + 0x137) // Ichor: Act II: Manto told the rare-visitor omen; the Thyrsivy may stand in the vines
 #define FLAG_ICHOR_ITEM_THYRSA_BLACK_SLUDGE     (FLAG_ICHOR_GENERAL_START + 0x139) // Ichor: Act II: Thyrsa, the Black Sludge by the wine press
 #define FLAG_ICHOR_ITEM_THYRSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x13A) // Ichor: Act II: Thyrsa, the Super Potion in the vineyards' last row
-#define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL_START + 0x13B) // Ichor: Act II: Thyrsa, the Big Nugget on the west wall-walk (the Thyrsus)
+#define FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET       (FLAG_ICHOR_GENERAL_START + 0x13B) // Ichor: Act II: Thyrsa, the Big Nugget in the alley behind the mask-maker's
 #define FLAG_ICHOR_GOT_PROTECTIVE_PADS          (FLAG_ICHOR_GENERAL_START + 0x140) // Ichor: Act II rooms: Peneleos's gift after the recruit's sparring match (Eleutherai)
 #define FLAG_ICHOR_OINOE_GARLAND                (FLAG_ICHOR_GENERAL_START + 0x141) // Ichor: Act II rooms: Oinoe's ivy garland errand is open; cleared when she gives the Big Root (Eleutherai)
 #define FLAG_ICHOR_TWINS_AMPHIS                 (FLAG_ICHOR_GENERAL_START + 0x142) // Ichor: Act II rooms: showed Amphis a Chelonet or Chelyra; got the Metronome (Eleutherai)

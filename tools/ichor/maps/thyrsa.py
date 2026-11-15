@@ -478,7 +478,8 @@ def town(g):
     for y in (33, 34):
         for x in range(41, 46):
             g.put_part("paving", "shade_n" if y == 33 else "flag", x, y)
-            g.solid[y, x] = True
+    # (the court's flags stay open ground: the walls and the house close it, and the
+    # same metatiles are open on the street outside)
     g.put_part("court_extras", "gate", 43, 35)
     g.put_part("court_extras", "ivy", 42, 35)
     g.put_part("court_extras", "ivy", 44, 32)
@@ -486,7 +487,6 @@ def town(g):
     g.put("laundry", 43, 33)
     g.put("jars", 44, 34)
     g.put_part("litter", "ivy", 43, 34)
-    g.solid[34, 43] = True
     # ---- the lower town: the Asclepeion and Dirke, the Agora -------------------
     g.put("asclepeion", 19, 28)
     g.put("dirke", 22, 33)
@@ -737,7 +737,9 @@ def events():
                   "FLAG_ICHOR_ITEM_THYRSA_BLACK_SLUDGE"),
         item_ball("LOCALID_THYRSA_ITEM_SUPER_POTION", 18, 33, "ITEM_SUPER_POTION",
                   "FLAG_ICHOR_ITEM_THYRSA_SUPER_POTION"),
-        item_ball("LOCALID_THYRSA_ITEM_BIG_NUGGET", 9, 28, "ITEM_BIG_NUGGET",
+        # in the alley behind the mask-maker's (polish pass: the audit's dead end, and the
+        # wall-walk it stood on can't be reached until the thyrsus climbs)
+        item_ball("LOCALID_THYRSA_ITEM_BIG_NUGGET", 45, 20, "ITEM_BIG_NUGGET",
                   "FLAG_ICHOR_ITEM_THYRSA_BIG_NUGGET"),
     ]
     warps = [
@@ -984,8 +986,6 @@ def check():
             errors.append(f"warp at ({x},{y}) to {w_['dest_map']} can't be reached from its doorstep")
     for o in ev["object_events"]:
         x, y = o["x"], o["y"]
-        if o["local_id"] in ("LOCALID_THYRSA_ITEM_BIG_NUGGET",):
-            continue                 # on the wall-walk, seen and not reached (the Thyrsus)
         if not walkable(blocks, x, y):
             errors.append(f"object {o['local_id']} at ({x},{y}) stands on a solid cell")
         elif (x, y) not in reach and o["local_id"] not in ("LOCALID_THYRSA_PROITID_GUARD",):

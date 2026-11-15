@@ -273,7 +273,11 @@ wings look used; the arch and doorway kept (they read as openings at 1x).
 - **The Honey under the front row** (Part 2's hidden item) is placed under the seat at
   (22,18), read from the orchestra's edge at (22,17), on
   `FLAG_ICHOR_HIDDEN_THEATER_HONEY` (vanilla 0x310; the seat's cell has elevation 0, so the
-  event does too).
+  event does too). A second, for the map audit's two: an obol (`ITEM_RELIC_COPPER`), a seat's
+  price, dropped in the west parodos's corner (0,7), on `FLAG_ICHOR_HIDDEN_THEATER_OBOL` (0x312).
+- **The workers before the play** stand where they can be talked to: the one on the tiers on the
+  stair at (33,26) (was a seat at (30,26)), the cleaner after it on the walkway at (13,24) (was a
+  seat at (10,24)).
 - **The Prosomime static** on the racks: after the Dionysia, in the evening and at
   night, once a day (`FLAG_DAILY_ICHOR_SKENE_MASK`), Lv 26 (Part 4).
 - **The battle background** for the theater's stage (Part 10) isn't drawn: the
