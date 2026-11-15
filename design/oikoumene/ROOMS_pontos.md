@@ -168,6 +168,22 @@ Each pass: render, look, write down what's wrong, fix it. Pass 1 looked at the c
 1. The bull's head read as a cat; the cold krater read as a white vase; the fan read as a palm tree. *Fixed:* the bull's head redrawn front on, on a round boss, with wide horns, ears, a long face and a broad muzzle with embers in the nostrils and a ring; the krater redrawn in blue-white rime over bronze with icicles off its lip and cold breath rising; the fan redrawn as a half-disc of alternating bronze blades with a gilt rim, on a pole and a three-footed stand.
 2. Compiled: the bull's head over the fire-jar reads as one machine, the five works stand apart enough to be told apart from the door, and the plates read as bronze now they're a block wide. Nothing to fix.
 
+## Stopped at (2026-11-14: the Oikoumene paused)
+
+**Done.**
+- `gTileset_Chalkeon`: 256 metatiles, 409 tiles of 504, palettes 6-12, identical on oikos, aethos and building; registered; builder, art and Porytiles hints committed.
+- All seven rooms: layouts, map.json events, scripts; door mats to `MAP_SALMYDESSOS` 0-1 and `MAP_AIA` 0-4.
+- Flags `FLAG_ICHOR_GOT_PHINEUS_DOVE`, `_TRADED_UNFEZANT`, `_GOT_HEAT_ROCK`, `_TRADED_PERSIAN` (bank 0x434-0x437); trades `INGAME_TRADE_ICHOR_PHASIANOS` and `_TIGRIS`; the special `Ichor_ChooseRotomForAppliance`.
+- Every line measured (0 over 216 px); two render-and-critique passes per room; the contact sheet `img/pontos_rooms.png`.
+- `make` green at this commit; the smoke test passed on the build before it.
+
+**Partial.**
+- `tools/ichor/tests/pontos_rooms.sh`: stopped mid-run. Passed so far: Phineus (dove once, empty cage, mat to warp 0), the bird-catcher (trade, PHASIANOS, mat), the Asclepeion (heal, Pithos menu, mat), the Agora (stall, mat), Phrixos's sons (Heat Rock once, mat). Not yet run: the linen-weaver's trade and the workshop's five forms.
+- The third, in-game critique pass: screenshots exist for the first five rooms (`build/test_pontos_rooms/shots/`); not written up.
+- `map_audit.py`: the only FAILs are the doors' warp ids, because this branch's Salmydessos and Aia have no warps yet (pontos-towns' branch numbers them per BUILD.md §5).
+
+**Not started.** ROM-before measurement; the final report to the lead.
+
 ## Generated tables
 
 The builder rewrites everything below each marker.
