@@ -107,7 +107,8 @@ Until the Aethos routes exist, our lanes' Aethos-side edges are left open and te
 | Okeanos | 813–819 |
 | Halls: 4 trainers, the champion, the champion's rematch, in PERIODOS's order | Troad 864–869, Lydia 870–875, Black Sea 876–881, North 882–887, Egypt 888–894 (+ Helen), Aithiopia 895–900, Libya 901–906, Far West 907–912, Western Sea 913–918, Okeanos 919–924 |
 | Herakles and his rematch | 925–926 |
-| Spare, for any land that runs over | 927–1023 |
+| Batch 1's overflow, for the route standard's 0.9 / 0.35 trainers per screen | Troad 927–934, Egypt 935–942, Black Sea 943–950 |
+| Spare, for any land that runs over | 951–1023 |
 
 **Bank flags** (0x3C0–0x47F, 192). The halls' 30 and two shared flags are claimed (0x3C0–0x3DF):
 - `FLAG_ICHOR_EMBLEM_GATE` … `_ROSE` (0x3C0–0x3C9, contiguous, in PERIODOS §1's order; `Ichor_CountFlags(FLAG_ICHOR_EMBLEM_GATE, 10)` counts them);
@@ -126,6 +127,8 @@ Until the Aethos routes exist, our lanes' Aethos-side edges are left open and te
 | unassigned | 0x444–0x47F (60) | 0x4D8–0x4FF |
 
 **The range was short.** Each land at core wants about 28 flags (a reward per household, item balls, quest steps, hide flags), so about 280 for ten lands plus the halls' 30, against 192. The director has granted 256 more from ichor-engine's second bank (commit a4a9de3d6e on `claude/ichor-engine-systems-5a55eb`): **bankflag offsets 0x800–0x8FF**, on main since a5de99c630 and merged into this branch (488242c6b6). About 448 in all. Batch 2 onward gets sub-ranges there; batch 1's agents, whose worktrees predate it, spend only their sub-range, reuse a quest's own flag as its NPC's hide flag, and put hidden items on the vanilla flags above. Claim with `python3 tools/ichor/claim.py --range LO-HI bankflag FLAG_ICHOR_<NAME> "comment"`.
+
+**Hidden items can't use bank flags yet.** `bg_hidden_item_event` stores its flag as a 13-bit offset from 0x1F4, so it reaches 0x21F3 at most; every bank flag is above. The route standard wants about 200 hidden items in the Oikoumene against 49 vanilla flags (0x4C0–0x4FF). This session has asked ichor-engine to widen the encoding (ids from 0x1000 up meaning bank flag 0x2000 + n) and told the director. Until it lands, agents spend their vanilla sub-range and record each further hidden item's tile and item under `ICHOR_STUB_HIDDEN` in their MAPS file, to be placed the day it lands.
 
 **Bank vars** 24–27: unassigned. Puzzle state lives in `VAR_TEMP_*` for the length of a map (PERIODOS §7).
 
