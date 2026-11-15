@@ -450,6 +450,12 @@ enum
     // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
+    // The Theoxenia's gods drawn from life, disguised and revealed
+    // (tools/ichor/art/sprites_npc_theoxenia.py)
+    OBJ_EVENT_GFX_ICHOR_SAM,
+    OBJ_EVENT_GFX_ICHOR_APOLLO,
+    OBJ_EVENT_GFX_ICHOR_CAMI,
+    OBJ_EVENT_GFX_ICHOR_DEMETER,
     // Act II batch 1 (tools/ichor/art/sprites_act2.py, design/phase3/SPRITES.md)
     OBJ_EVENT_GFX_ICHOR_MAENAD,
     OBJ_EVENT_GFX_ICHOR_MAENAD_THYRSA,
@@ -485,6 +491,31 @@ enum
     OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA,
     OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA,
     OBJ_EVENT_GFX_ICHOR_HARVESTER_THYRSA,
+    // Act II batch 2, the road west (tools/ichor/art/sprites_act2_b2.py, design/phase3/SPRITES.md)
+    OBJ_EVENT_GFX_ICHOR_FOWLER,
+    OBJ_EVENT_GFX_ICHOR_FOWLER_F,
+    OBJ_EVENT_GFX_ICHOR_SAON,
+    OBJ_EVENT_GFX_ICHOR_TROPHONIAN_PRIEST,
+    OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET,
+    OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_2,
+    OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_3,
+    OBJ_EVENT_GFX_ICHOR_AGAMEDES,
+    OBJ_EVENT_GFX_ICHOR_PANOPEUS,
+    OBJ_EVENT_GFX_ICHOR_TEMPLE_GUARD,
+    OBJ_EVENT_GFX_ICHOR_ALETHEA_RIM,
+    OBJ_EVENT_GFX_ICHOR_ALETHEA_NOTE,
+    OBJ_EVENT_GFX_ICHOR_HERKYNA,
+    OBJ_EVENT_GFX_ICHOR_XENODIKE,
+    OBJ_EVENT_GFX_ICHOR_THYIA,
+    OBJ_EVENT_GFX_ICHOR_TISAMENOS,
+    OBJ_EVENT_GFX_ICHOR_HELIKE,
+    // Part 10's other road-west folk: slice townsfolk recolored in the folk palette
+    OBJ_EVENT_GFX_ICHOR_STROPHIOS,
+    OBJ_EVENT_GFX_ICHOR_PYLADES,
+    OBJ_EVENT_GFX_ICHOR_MULETEER,
+    OBJ_EVENT_GFX_ICHOR_EEL_SMOKER,
+    OBJ_EVENT_GFX_ICHOR_ELDER_M_STONE,
+    OBJ_EVENT_GFX_ICHOR_ELDER_M_LETHE,
     OBJ_EVENT_GFX_ICHOR_COBWEB,  // Trophonios's cave (tools/ichor/art/trophonios_objects.py)
     OBJ_EVENT_GFX_ICHOR_GREAT_BOULDER,  // Trophonios's cave (tools/ichor/art/trophonios_objects.py)
     // End of Ichor object events
@@ -652,7 +683,8 @@ enum
 // Claim the next free one at the end of this block.
 #define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // the cast, plus the Shepherd, Hoplite, Augur and Acolyte walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
-#define OBJ_EVENT_PAL_TAG_ICHOR_WINE              0x1136 // Thyrsa: the folk palette with grape purples and wine red (Act II)
+#define OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA         0x1136 // Sam, Apollo, Cami and Demeter: true gold, white, green
+#define OBJ_EVENT_PAL_TAG_ICHOR_WINE              0x1137 // Thyrsa: the folk palette with grape purples and wine red (Act II)
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS

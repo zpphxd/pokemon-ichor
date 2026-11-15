@@ -432,6 +432,10 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyt
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatL;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatR;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSam;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorApollo;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCami;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDemeter;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMaenad;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMaenadThyrsa;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSatyr;
@@ -465,6 +469,29 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorYouthF
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKidMThyrsa;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMerchantThyrsa;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHarvesterThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorFowler;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorFowlerF;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSaon;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTrophonianPriest;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPilgrimBlanket;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPilgrimBlanket2;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPilgrimBlanket3;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAgamedes;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPanopeus;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTempleGuard;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAletheaRim;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAletheaNote;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHerkyna;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorXenodike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorThyia;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTisamenos;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHelike;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorStrophios;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPylades;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMuleteer;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorEelSmoker;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorElderMStone;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorElderMLethe;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCobweb;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGreatBoulder;
 // End of Ichor object events
@@ -892,6 +919,10 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatL,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatR,
+    [OBJ_EVENT_GFX_ICHOR_SAM] =                &gObjectEventGraphicsInfo_IchorSam,
+    [OBJ_EVENT_GFX_ICHOR_APOLLO] =             &gObjectEventGraphicsInfo_IchorApollo,
+    [OBJ_EVENT_GFX_ICHOR_CAMI] =               &gObjectEventGraphicsInfo_IchorCami,
+    [OBJ_EVENT_GFX_ICHOR_DEMETER] =            &gObjectEventGraphicsInfo_IchorDemeter,
     [OBJ_EVENT_GFX_ICHOR_MAENAD] =                   &gObjectEventGraphicsInfo_IchorMaenad,
     [OBJ_EVENT_GFX_ICHOR_MAENAD_THYRSA] =            &gObjectEventGraphicsInfo_IchorMaenadThyrsa,
     [OBJ_EVENT_GFX_ICHOR_SATYR] =                    &gObjectEventGraphicsInfo_IchorSatyr,
@@ -925,6 +956,29 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA] =             &gObjectEventGraphicsInfo_IchorKidMThyrsa,
     [OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA] =          &gObjectEventGraphicsInfo_IchorMerchantThyrsa,
     [OBJ_EVENT_GFX_ICHOR_HARVESTER_THYRSA] =         &gObjectEventGraphicsInfo_IchorHarvesterThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_FOWLER] =                   &gObjectEventGraphicsInfo_IchorFowler,
+    [OBJ_EVENT_GFX_ICHOR_FOWLER_F] =                 &gObjectEventGraphicsInfo_IchorFowlerF,
+    [OBJ_EVENT_GFX_ICHOR_SAON] =                     &gObjectEventGraphicsInfo_IchorSaon,
+    [OBJ_EVENT_GFX_ICHOR_TROPHONIAN_PRIEST] =        &gObjectEventGraphicsInfo_IchorTrophonianPriest,
+    [OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET] =          &gObjectEventGraphicsInfo_IchorPilgrimBlanket,
+    [OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_2] =        &gObjectEventGraphicsInfo_IchorPilgrimBlanket2,
+    [OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET_3] =        &gObjectEventGraphicsInfo_IchorPilgrimBlanket3,
+    [OBJ_EVENT_GFX_ICHOR_AGAMEDES] =                 &gObjectEventGraphicsInfo_IchorAgamedes,
+    [OBJ_EVENT_GFX_ICHOR_PANOPEUS] =                 &gObjectEventGraphicsInfo_IchorPanopeus,
+    [OBJ_EVENT_GFX_ICHOR_TEMPLE_GUARD] =             &gObjectEventGraphicsInfo_IchorTempleGuard,
+    [OBJ_EVENT_GFX_ICHOR_ALETHEA_RIM] =              &gObjectEventGraphicsInfo_IchorAletheaRim,
+    [OBJ_EVENT_GFX_ICHOR_ALETHEA_NOTE] =             &gObjectEventGraphicsInfo_IchorAletheaNote,
+    [OBJ_EVENT_GFX_ICHOR_HERKYNA] =                  &gObjectEventGraphicsInfo_IchorHerkyna,
+    [OBJ_EVENT_GFX_ICHOR_XENODIKE] =                 &gObjectEventGraphicsInfo_IchorXenodike,
+    [OBJ_EVENT_GFX_ICHOR_THYIA] =                    &gObjectEventGraphicsInfo_IchorThyia,
+    [OBJ_EVENT_GFX_ICHOR_TISAMENOS] =                &gObjectEventGraphicsInfo_IchorTisamenos,
+    [OBJ_EVENT_GFX_ICHOR_HELIKE] =                   &gObjectEventGraphicsInfo_IchorHelike,
+    [OBJ_EVENT_GFX_ICHOR_STROPHIOS] =                &gObjectEventGraphicsInfo_IchorStrophios,
+    [OBJ_EVENT_GFX_ICHOR_PYLADES] =                  &gObjectEventGraphicsInfo_IchorPylades,
+    [OBJ_EVENT_GFX_ICHOR_MULETEER] =                 &gObjectEventGraphicsInfo_IchorMuleteer,
+    [OBJ_EVENT_GFX_ICHOR_EEL_SMOKER] =               &gObjectEventGraphicsInfo_IchorEelSmoker,
+    [OBJ_EVENT_GFX_ICHOR_ELDER_M_STONE] =            &gObjectEventGraphicsInfo_IchorElderMStone,
+    [OBJ_EVENT_GFX_ICHOR_ELDER_M_LETHE] =            &gObjectEventGraphicsInfo_IchorElderMLethe,
     [OBJ_EVENT_GFX_ICHOR_COBWEB] = &gObjectEventGraphicsInfo_IchorCobweb,
     [OBJ_EVENT_GFX_ICHOR_GREAT_BOULDER] = &gObjectEventGraphicsInfo_IchorGreatBoulder,
     // End of Ichor object events

@@ -1825,6 +1825,8 @@ Static-encounter "caught" flags are automatic in the boss scripts' battle result
 
 ## Decisions for the user
 
+> **Settled by the user, 2026-11-14.** Asked directly: the Oikoumene opens in stages (PG-6, PG-7, PG-8); the Orpheus moment is Persephone's return, and nobody returns from the dead (K4); the five Titans and Briareus are freed (K3); the suitors stay, comic, with Mom in control (O3); Argos lives and joins you (O4); the legend castings are approved as a set (PG-31); the House of Night is built for 1.0 (PG-26, overriding K8's stretch). **Every other decision below takes its recommendation** (the user: "Take the recommendations"). Any can still be changed later.
+
 - **LB1. Kleon proposes, Olympias sets** (recommended, from STORY §3): Olympias, Hera's seat, sets them from Olympia's Heraion for you and Kleon as a pair. The alternatives are an oracle (prophecy has ended, so it fits poorly) or Herakles himself (who would overshadow the player).
 - **LB2. Ten that become twelve.** Olympias sets ten and discounts the Hydra and the Stables, as in the myth (recommended). Or set all twelve from the start.
 - **LB3. Pairs.** Set two at a time, either order (recommended), or all at once, or strictly in order.

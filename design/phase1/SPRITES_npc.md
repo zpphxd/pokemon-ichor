@@ -157,6 +157,30 @@ Add one entry to each of these five files, always inside its Ichor block:
 5. **Revert the map:** `git checkout -- data/maps/ElaiaVillage_PlayersHouse_2F/map.json`.
 6. **Rebuild, then run `tools/ichor/smoke_test.sh`.**
 
+## The Theoxenia's gods drawn from life
+
+Two of the gods in disguise (SYSTEMS.md §10) are drawn after real people the user knows, so their faces and hair match a photo the user gave; the clothes are Ichor's own. The photo is private and is not in the repo.
+
+- **Source:** `tools/ichor/art/sprites_npc_theoxenia.py` for the walkers, `tools/ichor/art/portraits_theoxenia.py` for the portraits, `tools/ichor/art/theoxenia_previews.py` for the review images.
+- **Palette:** all four share `graphics/object_events/palettes/ichor_theoxenia.pal` under `OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA` (0x1136): a true gold ramp, the god's white, two greens, the grey-brown shawl, and two hair browns.
+- **Previews:** `design/art/img/theoxenia_sam_cami_sheets.png`, `_portraits.png` (with `_pass1` and `_pass2`, the earlier likeness passes) and `_scene.png`.
+
+| Constant | Sheet | Look | Animations |
+|---|---|---|---|
+| `OBJ_EVENT_GFX_ICHOR_SAM` | `ichor/sam.png`, 12 frames | Apollo as a hired herdsman: short dark-brown hair, full and wavy on top, a grin and stubble. An undyed wool tunic, a grey-brown cloak, and a tortoiseshell-and-gold lyre in his left arm. | `sAnimTable_IchorLyre` |
+| `OBJ_EVENT_GFX_ICHOR_APOLLO` | `ichor/apollo.png`, 12 frames | Sam revealed, a pixel taller: a gold laurel wreath, a long white chiton with gold borders, a gold lyre. | `sAnimTable_IchorLyre` |
+| `OBJ_EVENT_GFX_ICHOR_CAMI` | `ichor/cami.png`, 11 frames | Demeter as a young woman: a chin-length chestnut bob with full bangs, a plain peplos, a grey-brown shawl with an ear of ripe wheat caught in its fringe. | `sAnimTable_IchorCami` |
+| `OBJ_EVENT_GFX_ICHOR_DEMETER` | `ichor/demeter.png`, 9 frames | Cami revealed, a pixel taller: a crown of wheat ears, a green peplos with a gold overfold, girdle and hem, a sheaf in her left arm. | `sAnimTable_Standard` |
+
+**The extra animations** sit in `ANIM_NURSE_BOW`'s slot (`ANIM_STD_COUNT`), named `ANIM_ICHOR_STRUM` and `ANIM_ICHOR_RISE`, so a script plays them with `nurse_joy_bow` and `waitmovement`, as the Asclepeion healer's bow is played. Both end, so `waitmovement` returns.
+
+- **The strum** (Sam, Apollo): frames 9 (hand high), 10 (hand low) and 11 (hand high, eyes shut), two bars of 9, 10, 9, 10, 11, then the hand comes down to frame 0. About 104 frames. It leaves him facing down.
+- **The seat** (Cami): her face-north and step-north entries hold frame 9, sitting with her back to you. So `MOVEMENT_TYPE_FACE_UP` places her seated on the bench tile, and a respawn, `face_up` or a turn north keeps her there. She can't walk north; every other direction walks normally. Don't `faceplayer` her while she should stay seated.
+- **The rise** (Cami): frame 9, then 10 (half up, turning), then 0, standing facing down. It leaves her facing down. Then hide Cami and show Demeter.
+- **Shadows:** a disguised god casts no shadow. The engine handles that, so the sheets draw none and the graphics info keeps the standard shadow size.
+
+**Check:** `tools/ichor/tests/theoxenia_sprites.sh` spawns all four, plays both animations and checks the frames, the facing, and that the script goes on.
+
 ## Field objects
 
 Small props that scripts show and hide, drawn 16×16 in the cast palette so they cost no extra OBJ palette slot.
