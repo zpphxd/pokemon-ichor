@@ -7,20 +7,16 @@ Each cell is two characters: the first is '#' for a collision cell, '~' for
 water, a ledge arrow (v ^ < >), or '.'; the second is the elevation (0-F).
 Objects show as 'O', warps as 'W', coord triggers as 'T' in the first character.
 """
-import json
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
-sys.path.insert(0, str(Path(__file__).parent))
-from slice_map_audit import Map, behaviors  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from mapdata import Repo  # noqa: E402
 
 
 def main():
     name = sys.argv[1]
-    mb = behaviors()
-    layouts = {l["id"]: l for l in json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"] if "id" in l}
-    m = Map(name, layouts, mb)
+    m = Repo().map(name)
     marks = {}
     for o in m.json.get("object_events", []):
         marks[(o["x"], o["y"])] = "O"

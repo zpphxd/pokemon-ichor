@@ -91,9 +91,9 @@
           "species": "SPECIES_KETOFRY"
         },
         {
-          "min_level": 28,
+          "min_level": 27,
           "max_level": 28,
-          "species": "SPECIES_KARKIPOOL"
+          "species": "SPECIES_KARKITOX"
         },
         {
           "min_level": 30,
@@ -633,9 +633,9 @@
           "species": "SPECIES_KETOFRY"
         },
         {
-          "min_level": 28,
+          "min_level": 27,
           "max_level": 28,
-          "species": "SPECIES_KARKIPOOL"
+          "species": "SPECIES_KARKITOX"
         },
         {
           "min_level": 30,

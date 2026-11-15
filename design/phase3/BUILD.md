@@ -18,6 +18,25 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 
 Each batch ends with a report to the director: the branch and commit, what's playable, the map renders, the test results and the ROM delta.
 
+## The route standard (MAP_DESIGN §8), for every batch
+
+From 2026-11-14 every batch report passes `python3 tools/ichor/map_audit.py <its maps>` (MAP_DESIGN §8, measured on Emerald; on main 96a88cd7fe, merged here). Act II is the **middle** band. Hard minimums:
+
+| | Land route | Sea route | Town | Dungeon |
+|---|---|---|---|---|
+| Grass cells per screen (15×10) | 15 | – | tables if any grass | – |
+| Forced grass between any two ends | 8 cells (two 4-deep bands, or three shallower) | – | – | – |
+| Trainers | 0.6 per screen, at least 6 | 0.35 per screen, at least 5 | – | 3 (1 in a one-floor cave) |
+| Item balls | 0.2 per screen, at least 3 | 2 | 1 | 2 per floor, visible and hidden |
+| Hidden items | 3 | 2 | 2 | 2 |
+| Species per land table | 5 | – | 5 | 4 |
+
+Also hard: a sign within 15 cells of every connected end; land tables `_Morning` and `_Night` wherever there's grass; a surf table (3 species) and a fishing table (4) wherever 12 or more water cells can be reached; a rock-smash table wherever there's marble rubble; land levels spanning no more than 5. Warnings to look at: a set piece, empty dead ends, edges that walk into a wall across a seam, item balls on solid cells. A FAIL that's right for a map (a story set piece like the Pool, a ship's deck) is explained in the report.
+
+**More trainers than SCRIPT.md names** are needed on most routes to reach 0.6 a screen. Add them as the script's own are written: a name that fits 10 characters (Greek, not on the Lazarus avoid-list, grep `design/` for collisions), an existing class, a party at BALANCE.md's levels for the map, lines in the CLAUDE.md voice. Append each to your staged `design/phase3/parties/<agent>.party` and its name to the end of `design/phase3/parties/ORDER.txt`, then run `python3 tools/ichor/act2/fold_parties.py design/phase3/parties/*.party`. Scripts use the names, so the ids may change when this session folds every branch together at integration (Act II's ids are 160–319, then 820–849).
+
+**Placeholders aren't maps.** Every batch 2 and 3 map was registered with a copy of Route 1, Akti Town or one of Akti's rooms so warps compile from the start; the audit flags them as copies, and they count as built only when their agent's branch is merged.
+
 ## Batch 2: the road west, and batch 1's polish
 
 Built on the merge of main's Hoenn cut and engine batches 2–4, so **use the engine directly; batch 1's stubs for these are gone from new work**:
@@ -156,7 +175,7 @@ Parties: `design/phase3/parties/{heights,arkadia,artemis}.party`. Wild tables: `
 | Euthymia | road (26,3), facing east | trainer, sight 3 |
 | The priestess | temple (11,9) | |
 
-Set the three to `TRAINER_TYPE_NORMAL` once their `trainerbattle` scripts exist (the game reads the id from the script). Stubs already on their maps: the herm at road (22,3), landing (22,4), sets `FLAG_ICHOR_HERM_AEGINA` behind `ICHOR_STUB_HERM` (the engine still has to give Aigina's herm an id); altars behind `ICHOR_STUB_RITES`, Zeus on Oros (6,4) and Artemis at the temple (15,11); a dig spot at temple (18,11). The encounter tables are still Phase 2's levels 12–16: re-level them to BALANCE.md's Astyra row.
+Set the three to `TRAINER_TYPE_NORMAL` once their `trainerbattle` scripts exist (the game reads the id from the script). Stubs already on their maps: the herm at road (22,3), landing (22,4), sets `FLAG_ICHOR_HERM_AEGINA` behind `ICHOR_STUB_HERM` (the engine still has to give Aigina's herm an id); altars behind `ICHOR_STUB_RITES`, Zeus on Oros (6,4) and Artemis at the temple (15,11); a dig spot at temple (18,11). The encounter tables are still Phase 2's levels 12–16: re-level them to BALANCE.md's Astyra row. **Update (world-act1, for the route standard):** world-act1 is adding grass, items, hidden items, surf and fishing tables at Astyra levels (32–35) and `"ichor_kind": "dungeon"` on the temple and Oros, and moving the three to the Astyra stage in `map_audit.py`'s `STAGES`. It is also placing **five more placeholder trainers** the same way as the first three (three more on the road, one at the temple, one on Oros; `TRAINER_TYPE_NONE`, one line, an `ICHOR_ACT2` comment with a suggested party). Batch 4 registers all **eight** at Astyra levels in Act II's ids and sets them to `TRAINER_TYPE_NORMAL`; the people, ant hills, altars, dig, gatekeeper lines and land-table levels stay Act II's.
 
 **Batch 6, Route 34 (post-game) → Kaldera's old port** (the world-postgame session, 2026-11-14): proposed and provisional, Route 34 joins `MAP_KALDERA_CALDERA_ROAD`'s east edge as open water on rows 46–51 beside the old port, with an 8-column aethos-only strip, closed until the post-game (whirlpools or a gate, the post-game session's choice). Tell that session (`local_aa883887-f146-4c32-aaad-5501bc2f5fec`) before moving it. Its post-game scenes on Act II maps (Thyrsa's vineyards and theater, Astyra's watchtower and Asclepeion) live in `design/postgame/PLACEMENTS.md`; keep any tiles it asks for free.
 
@@ -170,7 +189,7 @@ Set the three to `TRAINER_TYPE_NORMAL` once their `trainerbattle` scripts exist 
 
 All six agents' branches are merged (`act2-b1-sprites`, `-thyrsa`, `-temple`, `-rooms`, `-kithairon`, `-scenes`). Main's Hoenn cut and engine batches 2–4 are merged on top (2026-11-14): the real relic flags replace this session's Sickle and Girdle stand-ins, and with the cut the ROM is 22,477,208 B (67.0%); every batch 1 test still passes. `tools/ichor/tests/act2_batch1.sh --all` passes: the audit, the walk across every seam and door, and the agents' own tests (Kithairon 18 checks, Thyrsa City, the Three-Act Play 58 checks, the thirteen rooms, the Dionysia 32 checks). The ROM went from 25,544,940 B to 25,833,680 B (+282 KB, now 77.0%).
 
-**Known failure (2026-11-14), not ours:** after merging main a5de99c630, the batch walk (`act2_batch1.sh`) stops at Thyrsa's theater gate. Main's carried-flame engine (b061bfd18a) keeps its state in `VAR_TEMP_2` and `VAR_TEMP_3` and burns `VAR_TEMP_2` down each step whenever both are nonzero; Thyrsa City's ON_TRANSITION sets both to 1 (the keeper's gate, Manto's crows), so the keeper's trigger fires. Reported to the ichor-engine session with a proposed fix (move the flame state out of the temp vars). Act II maps should not change their temp vars for it.
+**Known failure (2026-11-14), not ours:** after merging main a5de99c630, the batch walk (`act2_batch1.sh`) stops at Thyrsa's theater gate. Main's carried-flame engine (b061bfd18a) keeps its state in `VAR_TEMP_2` and `VAR_TEMP_3` and burns `VAR_TEMP_2` down each step whenever both are nonzero; Thyrsa City's ON_TRANSITION sets both to 1 (the keeper's gate, Manto's crows), so the keeper's trigger fires. Fixed by the ichor-engine session in f3d3e16cf7 (the flame lives in engine memory; scripts read it with `Ichor_GetFlameKind` and `Ichor_GetFlameSteps`), on `claude/ichor-engine-systems-5a55eb`; the walk passes again once the director merges it to main and this branch merges main. Act II maps keep their temp vars.
 
 Deviations the integrator accepted: the rooms' art takes three secondaries (`ThyrsaRooms`, `ThyrsaHomes`, `ThyrsaStone`) and the crossing's three (`Kithairon`, `Kronia`, `KithaironCave`), each because one set's 504 tiles couldn't hold it; the mask in the Three-Act Play is shown by the rack's empty peg, not on the player.
 
