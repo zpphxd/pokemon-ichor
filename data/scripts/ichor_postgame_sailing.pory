@@ -1,0 +1,167 @@
+// Ichor postgame: the sailing layer's scripts (design/postgame/ENGINE.md).
+//
+// The specials are in src/ichor_sailing.c; the ports are src/data/ichor_voyages.h.
+// Map agents put these on their maps:
+//   - a port's gangplank (coord or bg event on the quay): VAR_0x8004 = its
+//     VOYAGE_* id, then goto(EventScript_IchorBoardShip)
+//   - a sea map's landing (bg event): VAR_0x8004 = the port, then
+//     goto(EventScript_IchorLand)
+//   - the deck's gangplank: EventScript_IchorLeaveShip; the helm (Nausikles at
+//     the steering oars): EventScript_IchorHelm
+
+// ---------------------------------------------------------------------------
+// Boarding, landing, leaving
+// ---------------------------------------------------------------------------
+
+// A port's gangplank, VAR_0x8004 = the port. Onto its sea in the ship if it has
+// one, else onto the deck, moored there.
+script EventScript_IchorBoardShip {
+    lockall
+    specialvar(VAR_RESULT, Ichor_IsMooredAt)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("The Euploia isn't moored here."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    msgbox(format("Board the Euploia?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    closemessage
+    special(Ichor_BoardShip)
+    end
+}
+
+// A sea map's landing tile, VAR_0x8004 = the port: ashore at its quay, ship mode off.
+script EventScript_IchorLand {
+    lockall
+    specialvar(VAR_RESULT, Ichor_IsSailing)
+    if (var(VAR_RESULT) == FALSE) {
+        releaseall
+        end
+    }
+    specialvar(VAR_RESULT, Ichor_PortHasQuay)
+    if (var(VAR_RESULT) == FALSE) {
+        releaseall
+        end
+    }
+    special(Ichor_BufferPortName)
+    msgbox(format("Go ashore at {STR_VAR_1}?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    closemessage
+    special(Ichor_GoAshore)
+    end
+}
+
+// The deck's gangplank: back to the quay where she's moored.
+script EventScript_IchorLeaveShip {
+    lockall
+    specialvar(VAR_0x8004, Ichor_GetShipPort)
+    if (var(VAR_0x8004) == VOYAGE_NONE) {
+        msgbox(format("She's at sea. The gangplank stays lashed down."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    special(Ichor_BufferPortName)
+    msgbox(format("Go ashore at {STR_VAR_1}?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    closemessage
+    special(Ichor_LeaveShip)
+    end
+}
+
+// The Relic Ring's DECK, at sea in the ship: down to the deck, remembering where she was.
+script EventScript_IchorGoBelowDeck {
+    lockall
+    special(Ichor_GoBelowDeck)
+    end
+}
+
+// ---------------------------------------------------------------------------
+// The helm
+// ---------------------------------------------------------------------------
+
+// Nausikles at the steering oars. TAKE HER OUT (below from the sea), CAST OFF
+// (moored at a port with a sea map), SET A COURSE (not past Maleia), THE WIND?, STAY.
+script EventScript_IchorHelm {
+    lockall
+    message(format("NAUSIKLES: Where to, Archon?"))
+    waitmessage
+    special(Ichor_BuildHelmMenu)
+    dynmultistack(VAR_0x8001, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+    switch (var(VAR_RESULT)) {
+        case ICHOR_HELM_TAKE_HER_OUT: goto(EventScript_IchorHelm_TakeHerOut)
+        case ICHOR_HELM_CAST_OFF: goto(EventScript_IchorHelm_CastOff)
+        case ICHOR_HELM_SET_COURSE: goto(EventScript_IchorHelm_SetCourse)
+        case ICHOR_HELM_WIND: goto(EventScript_IchorHelm_Wind)
+    }
+    msgbox(format("NAUSIKLES: Suit yourself. She'll keep."), MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script EventScript_IchorHelm_TakeHerOut {
+    msgbox(format("NAUSIKLES: Back out, then. Hold on to something."), MSGBOX_DEFAULT)
+    closemessage
+    special(Ichor_ReturnToSea)
+    end
+}
+
+script EventScript_IchorHelm_CastOff {
+    msgbox(format("NAUSIKLES: Cast off! Oars out!"), MSGBOX_DEFAULT)
+    closemessage
+    special(Ichor_CastOff)
+    end
+}
+
+// The ports list, then a short crossing: Nausikles's line, a fade, the sea, the quay.
+script EventScript_IchorHelm_SetCourse {
+    special(Ichor_BuildVoyageMenu)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("NAUSIKLES: Nowhere else to go yet. The chart's blank past here."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    message(format("NAUSIKLES: Name the port."))
+    waitmessage
+    dynmultistack(VAR_0x8001, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+    if (var(VAR_RESULT) == MULTI_B_PRESSED) {
+        closemessage
+        releaseall
+        end
+    }
+    copyvar(VAR_0x8004, VAR_RESULT)
+    special(Ichor_BufferCrossing)
+    msgbox(gStringVar4, MSGBOX_DEFAULT)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_M_SURF)
+    waitse
+    delay(40)
+    special(Ichor_SetCourse)
+    end
+}
+
+script EventScript_IchorHelm_Wind {
+    specialvar(VAR_RESULT, Ichor_GetWind)
+    special(Ichor_BufferWind)
+    if (var(VAR_0x8006) == TRUE) {
+        msgbox(format("NAUSIKLES: Dead ahead, whichever way we point her. That's not weather. That's somebody."), MSGBOX_DEFAULT)
+    } elif (var(VAR_0x8005) == ICHOR_WIND_CALM) {
+        msgbox(format("NAUSIKLES: Not a breath today. The oarsmen will earn their bread."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("NAUSIKLES: A {STR_VAR_3} wind out of the {STR_VAR_2}. Keep it behind you and she flies."), MSGBOX_DEFAULT)
+    }
+    releaseall
+    end
+}

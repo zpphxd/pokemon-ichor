@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ichor_relics.h"
+#include "ichor_sailing.h" // Ichor postgame: the Euploia at sea
 #include "main.h"
 #include "bike.h"
 #include "event_data.h"
@@ -714,6 +715,7 @@ static void PlaySpinSound(void)
 
 static void MovePlayerNotOnBike(enum Direction direction, u16 heldKeys)
 {
+    direction = Ichor_SailPushDirection(direction); // Ichor postgame: a strong wind behind carries the ship a tile on
     sPlayerNotOnBikeFuncs[CheckMovementInputNotOnBike(direction)](direction, heldKeys);
 }
 
@@ -842,6 +844,8 @@ bool32 CanTriggerSpinEvolution()
 static void PlayerNotOnBikeTurningInPlace(enum Direction direction, u16 heldKeys)
 {
     WindUpSpinTimer(direction);
+    if (Ichor_IsSailing()) // Ichor postgame: the sail fills or slackens with the new heading
+        Ichor_SailTurn(direction);
     PlayerTurnInPlace(direction);
 }
 
@@ -900,6 +904,10 @@ static void PlayerNotOnBikeMoving(enum Direction direction, u16 heldKeys)
         {
             gPlayerAvatar.creeping = TRUE;
             PlayerWalkSlow(direction);
+        }
+        else if (Ichor_IsSailing())
+        {
+            Ichor_SailStep(direction); // Ichor postgame: the Euploia's speed and sail come from the wind
         }
         else
         {
@@ -1004,6 +1012,7 @@ static enum Collision CheckForObjectEventStaticCollision(struct ObjectEvent *obj
 static bool8 CanStopSurfing(s16 x, s16 y, enum Direction direction)
 {
     if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+     && !Ichor_IsSailing() // Ichor postgame: the ship goes ashore only at a landing (EventScript_IchorLand)
      && MapGridGetElevationAt(x, y) == ELEVATION_DEFAULT
      && (GetObjectEventIdByPosition(x, y, ELEVATION_DEFAULT) == OBJECT_EVENTS_COUNT
      || GetObjectEventIdByPosition(x, y, ELEVATION_DEFAULT) == GetFollowerNPCObjectId()
@@ -1587,11 +1596,15 @@ u16 GetRSAvatarGraphicsIdByGender(enum Gender gender)
 
 u16 GetPlayerAvatarGraphicsIdByStateId(u8 state)
 {
+    if (state == PLAYER_AVATAR_STATE_SURFING && FlagGet(FLAG_ICHOR_ON_SHIP)) // Ichor postgame: surfing in the ship
+        return Ichor_GetShipGraphicsId(GetPlayerMovementDirection());
     return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gPlayerAvatar.gender);
 }
 
 enum Gender GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
 {
+    if (Ichor_IsShipGraphics(gfxId)) // Ichor postgame: the ship has no gender; the save does
+        return gSaveBlock2Ptr->playerGender;
     switch (gfxId)
     {
     case OBJ_EVENT_GFX_MAY_NORMAL:
@@ -1670,6 +1683,8 @@ static u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
 {
     u8 i;
 
+    if (Ichor_IsShipGraphics(graphicsId)) // Ichor postgame: back from a battle at sea, still in the ship
+        return PLAYER_AVATAR_FLAG_SURFING;
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[0]); i++)
     {
         if (sPlayerAvatarGfxToStateFlag[gender][i].graphicsId == graphicsId)

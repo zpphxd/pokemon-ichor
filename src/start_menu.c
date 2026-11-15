@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ichor_rites.h"
+#include "ichor_sailing.h" // Ichor postgame: the wind line
 #include "config/save.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
@@ -444,11 +445,32 @@ static void BuildMultiPartnerRoomStartMenu(void)
 
 static void ShowIchorBlessingWindow(void)
 {
-    sIchorBlessingWindowId = AddWindow(&sWindowTemplate_IchorBlessing);
+    // Ichor postgame: at sea in the ship the panel also shows the wind, a line
+    // below the blessing (or alone), and grows to fit.
+    struct WindowTemplate template = sWindowTemplate_IchorBlessing;
+    u8 *end = gStringVar4;
+    u32 lines = 0;
+
+    if (Ichor_HasBlessing())
+    {
+        end = StringCopy(end, COMPOUND_STRING("BLESSING\n"));
+        Ichor_BufferBlessingPanel(end);
+        end += StringLength(end);
+        lines = 2;
+    }
+    if (Ichor_HasWindPanel())
+    {
+        if (lines != 0)
+            *end++ = CHAR_NEWLINE;
+        end = Ichor_BufferWindPanel(end);
+        *end = EOS;
+        lines++;
+        template.width = ICHOR_WIND_PANEL_WIDTH;
+    }
+    template.height = lines * 2;
+    sIchorBlessingWindowId = AddWindow(&template);
     PutWindowTilemap(sIchorBlessingWindowId);
     DrawStdWindowFrame(sIchorBlessingWindowId, FALSE);
-    StringCopy(gStringVar4, COMPOUND_STRING("BLESSING\n"));
-    Ichor_BufferBlessingPanel(gStringVar4 + StringLength(gStringVar4));
     AddTextPrinterParameterized(sIchorBlessingWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sIchorBlessingWindowId, COPYWIN_GFX);
 }
@@ -565,7 +587,7 @@ static bool32 InitStartMenuStep(void)
     case 3:
         if (GetSafariZoneFlag())
             ShowSafariBallsWindow();
-        else if (Ichor_HasBlessing())
+        else if (Ichor_HasBlessing() || Ichor_HasWindPanel()) // Ichor postgame: or the wind at sea
             ShowIchorBlessingWindow();
         if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             ShowPyramidFloorWindow();

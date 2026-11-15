@@ -1,6 +1,7 @@
 #include "global.h"
 #include "ichor_relics.h"
 #include "ichor_frozen.h"
+#include "ichor_sailing.h" // Ichor postgame
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -1060,6 +1061,10 @@ bool8 MetatileBehavior_IsSurfableInSeafoamIslands(u16 metatileBehavior)
 
 static enum Direction GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStruct, u8 transitionFlags, u16 metatileBehavior, enum MapType mapType)
 {
+    u32 ichorFacing = Ichor_TakeArrivalFacing(); // Ichor postgame: a ship warp sets the heading
+
+    if (ichorFacing != DIR_NONE)
+        return ichorFacing;
     if (FlagGet(FLAG_SYS_CRUISE_MODE) && mapType == MAP_TYPE_OCEAN_ROUTE)
         return DIR_EAST;
     else if (MetatileBehavior_IsDeepSouthWarp(metatileBehavior) == TRUE)
@@ -1863,6 +1868,7 @@ static void OverworldBasic(void)
     UpdateCameraPanning();
     BuildOamBuffer();
     Ichor_OnFieldFrame(); // Ichor: the Frozen Hour, the Thread, Asterion
+    Ichor_SailingFrame(); // Ichor postgame: the Great Bear at sea by night
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();

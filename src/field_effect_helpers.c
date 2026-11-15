@@ -6,6 +6,8 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "gpu_regs.h"
+#include "event_data.h"
+#include "ichor_sailing.h" // Ichor postgame: no surf blob under the ship
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "sound.h"
@@ -1258,6 +1260,10 @@ void UpdateSurfBlobFieldEffect(struct Sprite *sprite)
     SynchronizeSurfPosition(playerObj, sprite);
     UpdateBobbingEffect(playerObj, playerSprite, sprite);
     sprite->oam.priority = playerSprite->oam.priority;
+    // Ichor postgame: the Euploia sails without a surf blob; it shows again under a
+    // fishing or relic pose, which takes the ship's graphics off.
+    if (FlagGet(FLAG_ICHOR_ON_SHIP))
+        sprite->invisible = playerObj->invisible || Ichor_IsShipGraphics(playerObj->graphicsId);
 }
 
 static void SynchronizeSurfAnim(struct ObjectEvent *playerObj, struct Sprite *sprite)

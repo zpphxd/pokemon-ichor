@@ -3,6 +3,7 @@
 #include "event_data.h"
 #include "field_effect.h"
 #include "gpu_regs.h"
+#include "ichor_sailing.h" // Ichor postgame: the at-sea lock
 #include "international_string_util.h"
 #include "main.h"
 #include "malloc.h"
@@ -188,7 +189,8 @@ static void FieldUpdateRegionMap(void)
                 break;
         case MAP_INPUT_R_BUTTON:
                 if (sFieldRegionMapHandler->regionMap.mapSecType == MAPSECTYPE_CITY_CANFLY
-                    && FlagGet(OW_FLAG_POKE_RIDER) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+                    && FlagGet(OW_FLAG_POKE_RIDER) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE
+                    && !Ichor_IsSeaLocked()) // Ichor postgame: no flight past Maleia
                 {
                     PlaySE(SE_SELECT);
                     SetFlyDestination(&sFieldRegionMapHandler->regionMap);
@@ -242,7 +244,8 @@ static void PrintTitleWindowText(void)
     FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(1));
 
     if (sFieldRegionMapHandler->regionMap.mapSecType == MAPSECTYPE_CITY_CANFLY
-        && FlagGet(OW_FLAG_POKE_RIDER) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+        && FlagGet(OW_FLAG_POKE_RIDER) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE
+        && !Ichor_IsSeaLocked()) // Ichor postgame: no "R FLY" past Maleia
     {
         AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, FlyPromptText, flyOffset, 1, 0, NULL);
         ScheduleBgCopyTilemapToVram(WIN_TITLE);

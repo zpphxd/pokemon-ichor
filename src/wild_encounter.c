@@ -1,5 +1,7 @@
 #include "global.h"
 #include "ichor_rites.h"
+#include "ichor_postgame_encounters.h" // Ichor postgame
+#include "ichor_sailing.h"             // Ichor postgame
 #include "battle_setup.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
@@ -583,7 +585,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
-    CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
+    CreateWildMon(Ichor_OverlayWildSpecies(wildMonInfo->wildPokemon[wildMonIndex].species, area), level); // Ichor postgame: shades on the roads
     return TRUE;
 }
 
@@ -615,6 +617,7 @@ static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
     encounterRate = Ichor_ModifyEncounterRate(encounterRate); // Ichor: Artemis, Poseidon, the Frenzy
+    encounterRate = Ichor_ModifySailingEncounterRate(encounterRate); // Ichor postgame: x0.5 downwind, x1.5 upwind
     if (LURE_STEP_COUNT != 0)
         encounterRate *= 2;
     if (!ignoreAbility && !GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SANITY_IS_EGG))

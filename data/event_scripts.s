@@ -35,6 +35,7 @@
 #include "constants/field_weather.h"
 #include "constants/flags.h"
 #include "constants/ichor.h"
+#include "constants/ichor_sailing.h"
 #include "constants/follower_npc.h"
 #include "constants/frontier_util.h"
 #include "constants/game_stat.h"
@@ -798,6 +799,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/ichor_rites.inc" @ Ichor: rites
 	.include "data/scripts/ichor_herms.inc" @ Ichor: herm waystones
 	.include "data/scripts/ichor_labyrinth.inc" @ Ichor: the Labyrinth
+	.include "data/scripts/ichor_postgame_sailing.inc" @ Ichor postgame: the sailing layer
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"

@@ -1,0 +1,6 @@
+// ICHOR_STUB_EUPLOIA_DECK: the sail-engine's stand-in for MAP_EUPLOIA_DECK (the
+// euploia agent's map), on the Diver's house layout. Nausikles (the slice's
+// sailor) at the helm runs EventScript_IchorHelm; the door mat is the gangplank,
+// EventScript_IchorLeaveShip. The build lead points ICHOR_SHIP_DECK_MAP at
+// MAP_EUPLOIA_DECK at merge and deletes this map.
+mapscripts PgTestDeck_MapScripts {}
