@@ -1740,6 +1740,7 @@
 #define FLAG_ICHOR_ITEM_ROUTE4_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x00D) // Ichor: Route 4: Revive in the family tomb (the Girdle)
 #define FLAG_ICHOR_ITEM_ROUTE4_SUN_STONE        (FLAG_ICHOR_GENERAL_START + 0x00E) // Ichor: Route 4: Sun Stone in the terrace orchard (the Sickle)
 #define FLAG_ICHOR_ITEM_ROUTE4_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x00F) // Ichor: Route 4: Great Ball in the woods clearing (the Hammer)
+#define FLAG_ICHOR_ITEM_ROUTE4_SPELL_TAG        (FLAG_ICHOR_GENERAL_START + 0x010) // Ichor: Route 4: Spell Tag at Hecate's crossroads shrine in the glade
 #define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
 #define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
 #define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)

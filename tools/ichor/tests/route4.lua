@@ -169,6 +169,9 @@ local function tombs()
   read(L.sign(P .. "TombsSign"), "the tombs sign", { shots = { [1] = "sign_tombs" } })
   read(L.npc(P .. "Mourner"), "the mourner", { shots = { [1] = "mourner" } })
   read(L.sign(P .. "KalliasPanel"), "the Kallias plot")
+  -- Hecate's glade off the corner: her shrine and the Spell Tag
+  read(L.sign(P .. "HecateShrine"), "Hecate's crossroads shrine", { shots = { [1] = "hecate_shrine" } })
+  item(S.FLAG_ITEM_SPELL_TAG, "the glade's Spell Tag")
   -- band 1, then Myrrhine across the road
   L.go(20, 14)
   local _, _, b = L.grid().tile(20, 14)

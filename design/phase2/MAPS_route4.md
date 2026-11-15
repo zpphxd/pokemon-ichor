@@ -35,11 +35,13 @@ door in the cut bank beyond the slide.
 **Rhythm,** south to east: the gate's olive groves and the route sign; the kilns and
 Exekias, in plain view, watching the road (first trainer, mandatory); the woods
 clearing west of the road, its mouth choked with marble rubble (the Hammer's first
-lesson, a Great Ball and a forgotten grave inside); the corner among the tombs; the
-paving gone to grass between two walled plots (forced band 1, three deep); Myrrhine
+lesson, a Great Ball and a forgotten grave inside); the corner among the tombs, with
+Hecate's glade in the woods above it (her crossroads shrine, older than the paving,
+and a Spell Tag in the grass); the paving gone to grass between two walled plots
+(forced band 1, three deep); Myrrhine
 across the road; the fork: the hill spur north (the goat path, Menalkas and his goats,
 the herm's side path with its Titanborn guard, the Super Potion, the terrace orchard
-behind its thicket); the rise (forced band 2); Pheidippos at the narrow cutting
+behind its thicket); the rise (forced band 2, four deep); Pheidippos at the narrow cutting
 (mandatory); the camp (healer, Eudemos, the initiates, Alethea on her milestone,
 Kapelos); the slide; the Hollow.
 
@@ -54,7 +56,7 @@ rockslide (the Hammer, the main path), the orchard's thicket (Demeter's Sickle, 
 Act I: the Sun Stone shows on the terrace), the family tomb's drum (the Girdle, Act II:
 the Revive shows through the gate).
 
-**Every dead end pays:** the clearing (Great Ball), the kiln yard (Potion; the Ether in
+**Every dead end pays:** the clearing (Great Ball), Hecate's glade (Spell Tag, her shrine), the kiln yard (Potion; the Ether in
 the wasters' ash), the walled plot (Repel), the spur's top corner (Super Potion), the
 orchard (Sun Stone), the herm's nook (the herm), the cookfire (Stardust), the milestone
 (Oran Berry), the scree nook (Hard Stone), the tomb (Revive), the road's end (the
@@ -81,11 +83,21 @@ First layout, rendered whole, in sixteen 15×10 views and as a walk map.
 
 - The woods filler rewritten: only the two cells by the map's edge keep the border's 2×2 olive phase, so the woods run on into the border; inside, olives, stone pines and cypresses are placed staggered by noise, so the lines are mixed and never one tree in rows.
 - The struck camp now leaves trampled ground: dry grass and stones where the tents stood, the fire's ring cold, Alethea's milestone by the road (it was flat grass).
-- In game (`route4.sh`): see below.
+- MAP_DESIGN §8's audit (`map_audit.py`) failed the grass: 120 cells in 12.8 screens, 9 a screen against 15. Added, each with a reason: Hecate's glade above the corner (her shrine, a Spell Tag); the goatherd's pasture grown down the hill round Menalkas and his goats; band 2 made four deep; the lower terrace's meadow run along the grove from the grave plot's back gate to the milestone; the east meadow out to the scree nook; the orchard's aisles behind the thicket. Now 207 cells, 16 a screen.
+
+## In game
+
+`route4.sh` walks the whole road from the city's gate (75 checks; night in the run, so the screenshots are tinted). Looked at:
+- The seam: the gate road runs on across it without a break, the city wall and its hoplites in view below. The name popup reads ROUTE 4.
+- Beat 17 reads as written: Alethea's "!" and her lines from the milestone, Eudemos from the tents, each heap's prompt, the scroll in the chips, the slide clearing to dusty road, Eudemos walking up to the road with the Barley Cakes, Alethea's send-off. On the next arrival the camp is gone and the ground trampled.
+- The herm: Laas runs off down the goat path; the herm's prayer cleanses it (the engine's desecrated-altar lines), then oil anoints it and the altar menu opens.
+- The heaps draw as dark mossy rocks (the vanilla breakable-rock sprite in an NPC palette), not marble: see below.
 
 ## What still isn't ideal
 
-- The heaps are the vanilla breakable-rock sprite (ENGINE_API §2's art note: the marble-rubble object art isn't drawn yet). Each stands on a marble-rubble cell, so the slide reads as rubble around them.
+- The heaps (and the woods clearing's rubble) are the vanilla breakable-rock sprite, which draws as a dark mossy rock in game (ENGINE_API §2's art note: the marble-rubble object art, INVENTORY §1, isn't drawn yet). Each stands on a marble-rubble cell, so the slide reads as rubble around them; the object art is the fix.
+- The audit warns twice, both by design: it can't stand next to heap 2 (the heaps are a chain, so heap 1 hides it), and it can't measure forced grass because the Hammer's slide is on the main path (it walks without relics). `route4.py` checks both bands with the slide open: band 1 is 3 deep, band 2 is 4.
+- The lower terrace's meadow along the grove is a long two-row strip: a ragged edge there needs a tall-grass shape Skiron doesn't have (two inner corners on one cell).
 - The great herm is aethos's small roadside herm (0x01B); Skiron has no great herm and no desecrated look, so the sickle is in the text only.
 - The Hollow's mouth is General's cave door, retextured, set in Skiron's grey cut bank: its brown frame is a shade warmer than the bank's strata.
 - Potter, runner and initiate walkers and portraits aren't drawn: Exekias is the man, Pheidippos the youth, Myrrhine and the initiates the priestess and the youths; their battle portraits are SCRIPT.md's placeholders (Hiker, running Triathlete, Psychic).

@@ -302,6 +302,10 @@ CAMP = (43, 11, 56, 16)            # the camp's box
 STEPS = (18, 4)                    # the orchard's steps, where the thicket stands
 DRUM = (42, 23)                    # the family tomb's gate, where the column drum stands
 TEACH_RUBBLE = (6, 19)             # the woods clearing's mouth, choked with marble rubble
+# Hecate's glade in the woods north of the corner, entered from the road at (8..9, 12)
+GLADE_GRASS = {7: (4, 7), 8: (3, 8), 9: (3, 9), 10: (3, 9), 11: (4, 9), 12: (8, 9)}
+SHRINE = (6, 7)                    # her crossroads shrine: a bronze tripod on its plinth (6, 8)
+GLADE = {(x, y) for y, (x0, x1) in GLADE_GRASS.items() for x in range(x0, x1 + 1)} | {SHRINE}
 TRIGGER_X = 48                     # beat 17's first scene: 4 tiles short of the slide
 
 
@@ -391,17 +395,24 @@ def ground(g):
     g.fill("grass", 39, 8, 43, 8)            # the cutting narrows it to two
     # --- forced bands: the paving has gone, the grass has taken it ----------------
     g.fill("tall", 19, 11, 21, 16)           # band 1, between the two plots
-    g.fill("tall", 34, 10, 36, 12)           # band 2, on the rise
+    g.fill("tall", 34, 10, 36, 13)           # band 2, on the rise: four deep
     # --- side ways ---------------------------------------------------------------
     g.fill("path", 26, 5, 27, 12)            # the hill spur's goat path
     g.fill("path", 23, 8, 25, 9)             # the herm's side path
     # --- optional grass, each with a reason: drawn as staircases, never boxes -------
-    meadow(g, {1: (28, 31), 2: (28, 32), 3: (28, 32), 4: (29, 32)})     # the goatherd's meadow
-    meadow(g, {7: (28, 30), 8: (28, 31), 9: (29, 31)})                  # under it, by the goat path
+    # the goatherd's hill pasture, Menalkas and his goats in it, the Super Potion past it
+    meadow(g, {1: (28, 31), 2: (28, 32), 3: (28, 32), 4: (28, 32), 5: (28, 31), 6: (28, 31),
+               7: (28, 31), 8: (28, 31), 9: (29, 31)})
     meadow(g, {19: (2, 4), 20: (2, 4), 21: (3, 4)})                     # the woods clearing
-    meadow(g, {20: (33, 36), 21: (33, 37), 22: (33, 37), 23: (34, 37)})  # round the old milestone
-    meadow(g, {21: (27, 29), 22: (27, 30), 23: (28, 30)})               # under the mound
-    meadow(g, {19: (49, 52), 20: (47, 53), 21: (47, 54), 22: (48, 54), 23: (50, 53)})  # the east meadow
+    # Hecate's glade in the woods north of the corner: her crossroads shrine, an item
+    meadow(g, GLADE_GRASS)
+    # the lower terrace: the grave plot's back gate, the mound, the old milestone
+    meadow(g, {20: (33, 36), 21: (33, 37), 22: (19, 37), 23: (19, 37), 24: (21, 24)})
+    meadow(g, {21: (26, 30)})
+    # the east meadow under the camp's terrace lips (the scree nook past it)
+    meadow(g, {18: (48, 53), 19: (47, 54), 20: (47, 54), 21: (47, 54), 22: (47, 54), 23: (48, 54)})
+    # the orchard's aisles, behind the thicket (the Sun Stone)
+    meadow(g, {2: (18, 20), 3: (18, 20)})
 
 
 def meadow(g, rows):
@@ -418,6 +429,7 @@ def west_and_north_woods(g):
     cells |= set(rect(0, 0, 10, 12))                       # north-west corner
     cells |= set(rect(0, 13, 6, 25))                       # west of the gate's road
     cells -= set(rect(2, 17, 5, 21))                       # the woods clearing
+    cells -= GLADE                                         # Hecate's glade
     cells -= {TEACH_RUBBLE}
     cells |= set(rect(0, 26, 6, H - 1)) | set(rect(10, 26, W - 1, H - 1))   # the strip by the city
     cells |= set(rect(10, 0, 10, 3))
@@ -535,9 +547,6 @@ def spur(g):
                       ("rock", 32, 8), ("oak", 33, 9), ("pine_young", 32, 9), ("rock", 33, 10)):
         if not g.fixed[y, x]:
             g.piece(k, x, y)
-    g.piece("thyme", 28, 5)
-    g.piece("dry_grass", 31, 6)
-    g.piece("pebbles", 29, 6)
     g.cypress(30, 10)
     g.piece("oak", 28, 10)
     g.piece("oak", 29, 10)
@@ -715,6 +724,17 @@ def lower(g):
             g.piece(k, x, y)
 
 
+def glade(g):
+    """Hecate's glade: a crossroads shrine older than the paving, where the old
+    track forked before the road was laid. Someone leaves her a cake here."""
+    x, y = SHRINE
+    g.put(0x130, x, y, kind="shrine")          # aethos's bronze tripod, on its marble plinth
+    g.put(0x131, x, y + 1, kind="shrine")
+    g.piece("stele_low", 8, 7)
+    g.piece("thyme", 9, 9)
+    g.piece("dry_grass", 3, 11)
+
+
 def clearing(g):
     """The woods clearing west of the gate's road, its mouth choked with marble
     rubble: the Hammer's first lesson. A forgotten grave, and a Great Ball."""
@@ -754,6 +774,7 @@ def compose(slide=True, camp=True, reserve=()):
     upper(g, slide=slide, camp=camp)
     lower(g)
     clearing(g)
+    glade(g)
     west_and_north_woods(g)
     for (x, y) in reserve:                   # people and items stand on plain ground
         if not g.fixed[y, x]:
@@ -818,6 +839,7 @@ ITEMS = [
     ("ITEM_SUN_STONE", 19, 2, "FLAG_ICHOR_ITEM_ROUTE4_SUN_STONE"),
     ("ITEM_REVIVE", 41, 21, "FLAG_ICHOR_ITEM_ROUTE4_REVIVE"),
     ("ITEM_GREAT_BALL", 3, 18, "FLAG_ICHOR_ITEM_ROUTE4_GREAT_BALL"),
+    ("ITEM_SPELL_TAG", 4, 8, "FLAG_ICHOR_ITEM_ROUTE4_SPELL_TAG"),
 ]
 HIDDEN = [
     ("ITEM_ETHER", 16, 21, "FLAG_ICHOR_HIDDEN_ROUTE4_ETHER"),            # in the kiln's ash (the wasters' heap)
@@ -833,6 +855,7 @@ SIGNS = [
     (58, 9, "ANY", "HollowSign"),
     (HERM_AT[0], HERM_AT[1], "NORTH", "GreatHerm"),
     (15, 10, "NORTH", "KalliasPanel"),
+    (SHRINE[0], SHRINE[1] + 1, "ANY", "HecateShrine"),
 ]
 DIG = [(12, 22), (27, 2), (44, 22)]   # ICHOR_STUB_DIG: by the kilns and on the spur (daily); in the tomb (fixed)
 TRIGGERS = [(TRIGGER_X, y, "RockslideScene") for y in (8, 9, 10)]
@@ -1082,7 +1105,7 @@ def check(g):
         if goal in reach(g, start, blocked=(things - heaps) | {h}, opened=heaps - {h}):
             problems.append(f"the heap at {h} can be walked round")
     # forced bands
-    bands = {"band 1": set(rect(19, 11, 21, 16)), "band 2": set(rect(34, 10, 36, 12))}
+    bands = {"band 1": set(rect(19, 11, 21, 16)), "band 2": set(rect(34, 10, 36, 13))}
     for name, cells in bands.items():
         g_cells = {c for c in cells if g.walk[c[1], c[0]] == "G"}
         if goal in reach(g, start, blocked=(things - heaps) | g_cells, opened=heaps):
@@ -1233,7 +1256,7 @@ VIEWS = [
     ("01_gate", 8, 27), ("02_kilns", 10, 20), ("03_corner", 12, 14), ("04_band1", 19, 14),
     ("05_myrrhine", 25, 13), ("06_herm", 25, 8), ("07_spur_top", 26, 3), ("08_orchard", 18, 4),
     ("09_rise", 33, 11), ("10_cutting", 41, 9), ("11_camp", 48, 12), ("12_slide", 53, 9),
-    ("13_lower_west", 30, 19), ("14_tomb", 42, 21), ("15_lower_east", 52, 20), ("16_clearing", 5, 19),
+    ("13_lower_west", 30, 19), ("14_tomb", 42, 21), ("15_lower_east", 52, 20), ("16_clearing", 5, 19), ("17_glade", 7, 10),
 ]
 
 

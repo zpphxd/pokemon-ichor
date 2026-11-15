@@ -419,6 +419,13 @@ script Route4_Isthmus_EventScript_KalliasPanel {
                   "Seven names below it, and room left for the next."), MSGBOX_SIGN)
 }
 
+// The glade north of the corner. Hecate's suppers were left where roads met, and the
+// one who left them walked away without looking back (SCRIPT.md's beat 18 asks for one).
+script Route4_Isthmus_EventScript_HecateShrine {
+    msgbox(format("An old crossroads shrine of Hecate, older than the paving.\p"
+                  "Someone has left a barley cake on it, and gone without looking back."), MSGBOX_SIGN)
+}
+
 // ICHOR_STUB_DIG: two daily dig spots (by the kilns, on the spur; SCRIPT.md Part 6's
 // Arachne amphora) and the family tomb's fixed find. Turned earth only, for now.
 script Route4_Isthmus_EventScript_DigSpot {
