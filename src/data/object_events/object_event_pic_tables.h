@@ -2654,6 +2654,9 @@ static const struct SpriteFrameImage sPicTable_IchorKleonSeasick[] = {
 static const struct SpriteFrameImage sPicTable_IchorKleonTablet[] = {
     overworld_ascending_frames(gObjectEventPic_IchorKleonTablet, 2, 4),
 };
+static const struct SpriteFrameImage sPicTable_IchorKerykos[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKerykos, 2, 4),
+};
 // End of Ichor object events
 
 // Ichor: the ground item jar

@@ -1165,4 +1165,32 @@
 #define METATILE_TempleDemeter_DraughtDoor_B            0x274
 // end gTileset_TempleDemeter
 
+// gTileset_TempleHermes (Ichor: the Herald's Run), written by tools/ichor/maps/temple_hermes.py
+#define METATILE_TempleHermes_Herm_HeadS                 0x238
+#define METATILE_TempleHermes_Herm_HeadN                 0x23A
+#define METATILE_TempleHermes_Herm_HeadOiledN            0x23E
+#define METATILE_TempleHermes_Herm_HeadOiledE            0x23D
+#define METATILE_TempleHermes_Herm_HeadOiledS            0x23C
+#define METATILE_TempleHermes_Herm_HeadOiledW            0x23F
+#define METATILE_TempleHermes_Herm_Shaft                 0x240
+#define METATILE_TempleHermes_Herm_ShaftScroll           0x241
+#define METATILE_TempleHermes_Turnstile_TurnN            0x248
+#define METATILE_TempleHermes_Turnstile_TurnE            0x249
+#define METATILE_TempleHermes_Turnstile_TurnS            0x24A
+#define METATILE_TempleHermes_Turnstile_TurnW            0x24B
+#define METATILE_TempleHermes_Turnstile_GateHShut        0x24C
+#define METATILE_TempleHermes_Turnstile_GateHOpen        0x24D
+#define METATILE_TempleHermes_Props_TorchLit             0x260
+#define METATILE_TempleHermes_Props_TorchCold            0x261
+#define METATILE_TempleHermes_Props_GlassTop             0x262
+#define METATILE_TempleHermes_Props_Floor                0x26B
+#define METATILE_TempleHermes_ScrollTable_FullL          0x280
+#define METATILE_TempleHermes_ScrollTable_FullR          0x281
+#define METATILE_TempleHermes_ScrollTable_EmptyL         0x282
+#define METATILE_TempleHermes_ScrollTable_EmptyR         0x283
+#define METATILE_TempleHermes_Floor_Slab                 0x201
+#define METATILE_TempleHermes_Lane_ArrowE                0x211
+#define METATILE_TempleHermes_Lane_ArrowW                0x213
+// end gTileset_TempleHermes
+
 #endif // GUARD_METATILE_LABELS_H

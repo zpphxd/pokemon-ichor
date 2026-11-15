@@ -9712,7 +9712,7 @@
     {
       "id": "LAYOUT_EMPORION_CITY_TEMPLE_OF_HERMES",
       "name": "EmporionCity_TempleOfHermes_Layout",
-      "width": 17,
+      "width": 21,
       "height": 24,
       "primary_tileset": "gTileset_Oikos",
       "secondary_tileset": "gTileset_TempleHermes",

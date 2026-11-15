@@ -439,6 +439,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPheido
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAiakides;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonSeasick;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonTablet;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKerykos;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -871,6 +872,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_AIAKIDES] =           &gObjectEventGraphicsInfo_IchorAiakides,
     [OBJ_EVENT_GFX_ICHOR_KLEON_SEASICK] =      &gObjectEventGraphicsInfo_IchorKleonSeasick,
     [OBJ_EVENT_GFX_ICHOR_KLEON_TABLET] =       &gObjectEventGraphicsInfo_IchorKleonTablet,
+    [OBJ_EVENT_GFX_ICHOR_KERYKOS] =            &gObjectEventGraphicsInfo_IchorKerykos,
     // End of Ichor object events
 };
 

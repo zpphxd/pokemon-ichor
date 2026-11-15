@@ -457,6 +457,8 @@ enum
     OBJ_EVENT_GFX_ICHOR_AIAKIDES,
     OBJ_EVENT_GFX_ICHOR_KLEON_SEASICK,
     OBJ_EVENT_GFX_ICHOR_KLEON_TABLET,
+    // Phase 2, batch 2: Hierophant Kerykos (tools/ichor/art/sprites_kerykos.py)
+    OBJ_EVENT_GFX_ICHOR_KERYKOS,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,

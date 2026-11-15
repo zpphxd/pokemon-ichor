@@ -48,7 +48,12 @@
 #define TRAINER_ICHOR_ALETHEA_DECK            40
 #define TRAINER_ICHOR_PHORMION                41
 #define TRAINER_ICHOR_LYKON                   42
-#define TRAINERS_END_ACT1                     43
+// The Temple of Hermes (ids 65-79; tools/ichor/maps/temple_hermes.py)
+#define TRAINER_ICHOR_PODARGE                 65
+#define TRAINER_ICHOR_EUCHIDAS                66
+#define TRAINER_ICHOR_PHILONIDES              67
+#define TRAINER_ICHOR_KERYKOS_1               68
+#define TRAINERS_END_ACT1                     69
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

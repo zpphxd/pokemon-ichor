@@ -1682,6 +1682,14 @@
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_HERALDS_RUN_DONE             (FLAG_ICHOR_GENERAL_START + 0x0F0) // Ichor: the Herald's Run: the third scroll delivered (beat 15)
+#define FLAG_ICHOR_HERMES_HERM_J1               (FLAG_ICHOR_GENERAL_START + 0x0F1) // Ichor: the Herald's Run: junction herm J1 oiled
+#define FLAG_ICHOR_HERMES_HERM_J2               (FLAG_ICHOR_GENERAL_START + 0x0F2) // Ichor: the Herald's Run: junction herm J2 oiled
+#define FLAG_ICHOR_HERMES_HERM_J3               (FLAG_ICHOR_GENERAL_START + 0x0F3) // Ichor: the Herald's Run: junction herm J3 oiled
+#define FLAG_ICHOR_HERMES_HERM_J4               (FLAG_ICHOR_GENERAL_START + 0x0F4) // Ichor: the Herald's Run: junction herm J4 oiled
+#define FLAG_ICHOR_GOT_TM_AERIAL_ACE            (FLAG_ICHOR_GENERAL_START + 0x0F5) // Ichor: TM40 Aerial Ace from Kerykos
+#define FLAG_ICHOR_HERALDS_RUN_FAILED           (FLAG_ICHOR_GENERAL_START + 0x0F6) // Ichor: the step-glass ran dry once (Angelos's hint)
+#define FLAG_ICHOR_HERALDS_RUN_TOLD             (FLAG_ICHOR_GENERAL_START + 0x0F7) // Ichor: Kerykos explained the Herald's Run
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
