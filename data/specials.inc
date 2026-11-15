@@ -638,3 +638,13 @@ gSpecials::
 	def_special UpdateTrainerCardPhotoIcons
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
+	@ Ichor: Act II, the Dionysia (src/ichor_act2_scene.c)
+	def_special Ichor_TheaterDusk
+	def_special Ichor_TheaterFillSeats
+	def_special Ichor_TheaterTranceResume
+	def_special Ichor_TheaterTranceStart
+	def_special Ichor_TheaterTranceRelease
+	def_special Ichor_TheaterTranceWake, waitstate=1
+	def_special Ichor_TheaterGaze, waitstate=1
+	def_special Ichor_ShowProgram
+	def_special Ichor_HideProgram

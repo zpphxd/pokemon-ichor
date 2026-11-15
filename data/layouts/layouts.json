@@ -9547,10 +9547,10 @@
     {
       "id": "LAYOUT_THYRSA_THEATER",
       "name": "ThyrsaTheater_Layout",
-      "width": 30,
-      "height": 64,
+      "width": 40,
+      "height": 34,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Agros",
+      "secondary_tileset": "gTileset_Theater",
       "border_filepath": "data/layouts/ThyrsaTheater/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaTheater/map.bin",
       "layout_version": "emerald"
@@ -9723,10 +9723,10 @@
     {
       "id": "LAYOUT_THYRSA_THEATER_SKENE",
       "name": "ThyrsaTheater_Skene_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 20,
+      "height": 12,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Skene",
       "border_filepath": "data/layouts/ThyrsaTheater_Skene/border.bin",
       "blockdata_filepath": "data/layouts/ThyrsaTheater_Skene/map.bin",
       "layout_version": "emerald"

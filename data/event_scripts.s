@@ -47,6 +47,7 @@
 #include "constants/mass_outbreak.h"
 #include "constants/mauville_old_man.h"
 #include "constants/metatile_labels.h"
+#include "constants/ichor_act2_scene.h"
 #include "constants/move_relearner.h"
 #include "constants/moves.h"
 #include "constants/mystery_gift.h"
@@ -601,6 +602,8 @@ gStdScripts_End::
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/scripts.inc"
 	@ Ichor: our maps' scripts, kept in one list for clean upstream merges
 	.include "data/ichor_maps.inc"
+	@ Ichor: Act II's shared scene scripts (the Dionysia's relics and pages)
+	.include "data/scripts/ichor_act2.inc"
 
 .if IS_FRLG
 

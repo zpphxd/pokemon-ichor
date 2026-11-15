@@ -1731,6 +1731,16 @@
 #define FLAG_ICHOR_GYPSOS_WENT_HOME             (FLAG_ICHOR_GENERAL_START + 0x125) // Ichor: Act II: Gypsos read tablet 3 and went home to Eudora's house
 #define FLAG_ICHOR_ITEM_ROUTE7_FULL_HEAL        (FLAG_ICHOR_GENERAL_START + 0x127) // Ichor: Act II: item ball: Route 7 Full Heal at a switchback's dead end
 #define FLAG_ICHOR_ITEM_ROUTE7_BIG_PEARL        (FLAG_ICHOR_GENERAL_START + 0x128) // Ichor: Act II: item ball: Route 7 Big Pearl on the Asopos's reed islet (the Conch)
+#define FLAG_ICHOR_HIDE_DIONYSIA_CAST           (FLAG_ICHOR_GENERAL_START + 0x154) // Ichor: Act II: hides the Dionysia's cast, herald and seated Kleon outside the play (beat 32)
+#define FLAG_ICHOR_HIDE_THESPIS_SKENE           (FLAG_ICHOR_GENERAL_START + 0x155) // Ichor: Act II: hides Thespis backstage once the masks let go (beat 32)
+#define FLAG_ICHOR_HIDE_KLEON_THEATER           (FLAG_ICHOR_GENERAL_START + 0x156) // Ichor: Act II: hides Kleon on the stage's edge after his third battle (beat 33)
+#define FLAG_ICHOR_HIDE_CHORUS_LEADER           (FLAG_ICHOR_GENERAL_START + 0x157) // Ichor: Act II: the chorus leader has walked back into the palace door (beat 32)
+#define FLAG_ICHOR_HIDE_THEATER_CLEANER         (FLAG_ICHOR_GENERAL_START + 0x158) // Ichor: Act II: hides the theater's cleaner until the theater stands empty (Part 2)
+#define FLAG_ICHOR_WON_KLEON_3                  (FLAG_ICHOR_GENERAL_START + 0x159) // Ichor: Act II: won Kleon's third battle (beat 33)
+#define FLAG_ICHOR_SILENOS_MET                  (FLAG_ICHOR_GENERAL_START + 0x15A) // Ichor: Act II: Silenos has told you about the girdle (beat 34)
+#define FLAG_ICHOR_SILENOS_WON_BONES            (FLAG_ICHOR_GENERAL_START + 0x15B) // Ichor: Act II: beat Silenos at knucklebones (beat 34)
+#define FLAG_ICHOR_SILENOS_WON_RIDDLE           (FLAG_ICHOR_GENERAL_START + 0x15C) // Ichor: Act II: answered Silenos's riddle (beat 34)
+#define FLAG_ICHOR_SILENOS_WON_FIGHT            (FLAG_ICHOR_GENERAL_START + 0x15D) // Ichor: Act II: beat Silenos in battle (beat 34)
 #define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL_START + 0x130) // Ichor: Act II: met Manto the augur on the Kadmeia wall (beat 30); her house opens
 #define FLAG_ICHOR_NEISTAN_DRUM_MOVED           (FLAG_ICHOR_GENERAL_START + 0x131) // Ichor: Act II: pushed the fallen drum out of the Neistan Gate with the Girdle
 #define FLAG_ICHOR_HIDE_NEISTAN_GUARDS          (FLAG_ICHOR_GENERAL_START + 0x132) // Ichor: Act II: hides the festival guard in the Neistan Gate (after the Dionysia)
