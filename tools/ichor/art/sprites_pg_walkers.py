@@ -438,8 +438,8 @@ ACHILLES = dict(
 )
 
 # Odysseus, the man of many turns: broad, a gray beard and gray at the
-# temples, one brow up, a traveler's felt pilos, a linen tunic under a brown
-# cloak over both shoulders, and an oar on his left shoulder (Teiresias told
+# temples, one brow up, a traveler's felt pilos, a linen tunic under Homer's
+# purple cloak with its gold brooch, and an oar on his left shoulder (Teiresias told
 # him to carry one inland).
 _OAR = ["_kkk", "kLLk", "kLlk", "kLlk", "_kk_"] + ["_ku"] * 12 + ["_kb"]
 ODYSSEUS = dict(
@@ -487,23 +487,23 @@ ODYSSEUS = dict(
         ],
     ),
     over=dict(
-        down={"all": [("b0", ["..kuuuSSSSuubk.."]),
-                      ("b1", [".kuuLLLLLLLLubk."]),
-                      ("b2", ["_ku__________bk_"]),
-                      ("b3", ["_ku__________bk_"]),
-                      ("b4", ["_ku__________bk_"]),
+        down={"all": [("b0", ["..kpOpSSSSpprk.."]),
+                      ("b1", [".kppLLLLLLLLprk."]),
+                      ("b2", ["_kp__________rk_"]),
+                      ("b3", ["_kp__________rk_"]),
+                      ("b4", ["_kp__________rk_"]),
                       pole(12, 0, _OAR)]},
-        up={"all": [("b0", ["..kuuuuuuuuubk.."]),
-                    ("b1", [".kuuuuuuuuuubbk."]),
-                    ("b2", ["_ku__uuuuub__bk_"]),
-                    ("b3", ["_ku__uuuuub__bk_"]),
-                    ("b4", ["_ku__uuuubb__bk_"]),
-                    ("b5", ["_____buuubb_____"]),
+        up={"all": [("b0", ["..kppppppppprk.."]),
+                    ("b1", [".kpppppppppprrk."]),
+                    ("b2", ["_kp__pppppr__rk_"]),
+                    ("b3", ["_kp__pppppr__rk_"]),
+                    ("b4", ["_kp__pppprr__rk_"]),
+                    ("b5", ["_____rpppr______"]),
                     pole(0, 0, _rev(_OAR))]},
-        left={"all": [("b0", ["_____kuuubk_____"]),
-                      ("b1", ["____kuuuubbk____"]),
-                      ("b2", ["_________ubk____"]),
-                      ("b3", ["_________ubk____"]),
+        left={"all": [("b0", ["_____kpOprk_____"]),
+                      ("b1", ["____kpppprrk____"]),
+                      ("b2", ["_________prk____"]),
+                      ("b3", ["_________prk____"]),
                       pole(9, 0, _OAR)]},
     ),
 )
