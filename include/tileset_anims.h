@@ -44,4 +44,7 @@ void InitTilesetAnim_Thyrsa(void); // Ichor: Semele's smoke (src/tileset_anims.c
 // [Porytiles] Auto-generated declaration. Do not remove.
 void InitTilesetAnim_PorytilesManaged_Aethos(void);
 
+// Ichor: gTileset_Kopais (Route 8), written by tools/ichor/art/kopais_build.py
+void InitTilesetAnim_Kopais(void);
+
 #endif // GUARD_TILESET_ANIMS_H

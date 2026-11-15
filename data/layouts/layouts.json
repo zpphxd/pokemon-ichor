@@ -697,10 +697,10 @@
     {
       "id": "LAYOUT_ROUTE8_KOPAIS",
       "name": "Route8_Kopais_Layout",
-      "width": 30,
-      "height": 64,
+      "width": 64,
+      "height": 26,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Agros",
+      "secondary_tileset": "gTileset_Kopais",
       "border_filepath": "data/layouts/Route8_Kopais/border.bin",
       "blockdata_filepath": "data/layouts/Route8_Kopais/map.bin",
       "layout_version": "emerald"

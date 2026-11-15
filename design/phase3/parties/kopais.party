@@ -84,3 +84,39 @@ Gelasable
 Level: 31
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
+/* Two more for the route standard (MAP_DESIGN section 8: 7 trainers on an 11-screen
+   middle route); the kopais agent's, not in SCRIPT.md. Pelopidas is Gorgidas's
+   partner (the two founded Thebes's Sacred Band); Megareus is named for the king
+   of Onchestos, Hippomenes's father. */
+
+=== TRAINER_ICHOR_PELOPIDAS ===
+Name: PELOPIDAS
+Class: Fowler
+Pic: Fowler M
+Gender: Male
+Music: Cool
+AI: Check Bad Move
+
+Halcyling
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Galenyon
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_MEGAREUS ===
+Name: MEGAREUS
+Class: Runner
+Pic: Runner
+Gender: Male
+Music: Cool
+AI: Check Bad Move
+
+Onotis
+Level: 30
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Kerazap
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe

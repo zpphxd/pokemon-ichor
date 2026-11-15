@@ -594,6 +594,22 @@ const struct Tileset gTileset_ThyrsaStone =
     .callback = NULL,
 };
 
+// Ichor: kopais, Route 8, the Kopais shore. Porytiles-managed, built by
+// tools/ichor/art/kopais_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, road and water, so rebuild it whenever aethos changes. Its tile
+// animation (the reeds' sway, the marsh water's glints) is
+// src/data/tilesets/kopais_anims.h, written by the same build.
+const struct Tileset gTileset_Kopais =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kopais,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kopais,
+    .metatiles = gMetatiles_PorytilesManaged_Kopais,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kopais,
+    .callback = InitTilesetAnim_Kopais,
+};
+
 // Ichor (Act II batch 2): Trophonios's cave under Lebadeia (SCRIPT.md Part 5, beats 35B-35C).
 // A Porytiles-managed secondary for the aethos primary, built by tools/ichor/art/trophonios_build.py.
 // It uses only its own tiles and palettes 6-12.

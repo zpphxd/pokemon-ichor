@@ -51,6 +51,12 @@
       "respawn_npc": "LOCALID_KIRRHA_INN_RESPAWN",
       "respawn_x": 6,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_8",
+      "map": "MAP_ROUTE8_KOPAIS",
+      "x": 24,
+      "y": 15
     }
   ]
 }

@@ -836,14 +836,14 @@
 #define FLAG_ICHOR_HIDDEN_THYRSA_PRETTY_FEATHER                     0x311 // Ichor: Thyrsa City: hidden Pretty Feather in the nook behind Manto's house, where her birds come and go (45,7)
 #define FLAG_ICHOR_HIDDEN_THEATER_OBOL                              0x312 // Ichor: Thyrsa's theater: hidden Relic Copper (a seat's price, an obol) dropped by the west parodos (0,7)
 #define FLAG_UNUSED_0x313                                           0x313 // Unused Flag
-#define FLAG_UNUSED_0x314                                           0x314 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE8_HEART_SCALE                        0x314 // Ichor: Route 8: hidden Heart Scale in the reeds behind the eel-smoker's fire
 #define FLAG_HIDE_FANCLUB_OLD_LADY                                  0x315
 #define FLAG_HIDE_FANCLUB_BOY                                       0x316
 #define FLAG_HIDE_FANCLUB_LITTLE_BOY                                0x317
 #define FLAG_HIDE_FANCLUB_LADY                                      0x318
-#define FLAG_UNUSED_0x319                                           0x319 // Unused Flag
-#define FLAG_UNUSED_0x31A                                           0x31A // Unused Flag
-#define FLAG_UNUSED_0x31B                                           0x31B // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE8_PEARL                              0x319 // Ichor: Route 8: hidden Pearl at the very end of the dike
+#define FLAG_ICHOR_HIDDEN_ROUTE8_NUGGET                             0x31A // Ichor: Route 8: hidden Nugget in the Treasury of Minyas's wall
+#define FLAG_ICHOR_HIDDEN_ROUTE8_BIG_MUSHROOM                       0x31B // Ichor: Route 8: hidden Big Mushroom under the goat path's last ledge
 #define FLAG_UNUSED_0x31C                                           0x31C // Unused Flag
 #define FLAG_UNUSED_0x31D                                           0x31D // Unused Flag
 #define FLAG_UNUSED_0x31E                                           0x31E // Unused Flag
@@ -1829,6 +1829,14 @@
 #define FLAG_ICHOR_THYIA_LAUREL_TODAY           (FLAG_ICHOR_GENERAL_START + 0x1B5) // Ichor: Act II: ICHOR_STUB_RITES: stands in for Thyia's daily laurel flag (FLAG_DAILY_ICHOR_LAUREL_START + Kirrha's index)
 #define FLAG_ICHOR_TISAMENOS_BIRD               (FLAG_ICHOR_GENERAL_START + 0x1B6) // Ichor: Act II: showed Tisamenos a sea bird (Pretty Feather x2)
 #define FLAG_ICHOR_GOT_SOOTHE_BELL_AIGION       (FLAG_ICHOR_GENERAL_START + 0x1B7) // Ichor: Act II: Helike gave a goat bell (Soothe Bell); Act I's is FLAG_ICHOR_GOT_SOOTHE_BELL
+#define FLAG_ICHOR_READ_ALETHEA_NOTES           (FLAG_ICHOR_GENERAL_START + 0x170) // Ichor: Route 8: read Alethea's fifth note at the west sign (beat 35A); changes her greeting at Lebadeia
+#define FLAG_ICHOR_ROUTE8_ENIGMAW               (FLAG_ICHOR_GENERAL_START + 0x171) // Ichor: Route 8: the Sphinx's-ledge Enigmaw was caught or beaten
+#define FLAG_ICHOR_ITEM_ROUTE8_TM_ANCIENT_POWER (FLAG_ICHOR_GENERAL_START + 0x172) // Ichor: Route 8: item ball, TM Ancient Power in the Treasury of Minyas
+#define FLAG_ICHOR_ITEM_ROUTE8_HYPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x173) // Ichor: Route 8: item ball, Hyper Potion on the Sphinx's ledge
+#define FLAG_ICHOR_ITEM_ROUTE8_SUPER_REPEL      (FLAG_ICHOR_GENERAL_START + 0x174) // Ichor: Route 8: item ball, Super Repel at the end of the dike's jetty
+#define FLAG_ICHOR_ITEM_ROUTE8_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x175) // Ichor: Route 8: item ball, Revive on Gla's shore (the Conch)
+#define FLAG_ICHOR_ITEM_ROUTE8_ULTRA_BALL       (FLAG_ICHOR_GENERAL_START + 0x176) // Ichor: Route 8: item ball, Ultra Ball deep in Timoxena's reeds
+#define FLAG_ICHOR_ITEM_ROUTE8_FULL_HEAL        (FLAG_ICHOR_GENERAL_START + 0x177) // Ichor: Route 8: item ball, Full Heal on the reed-boat shore
 #define FLAG_ICHOR_VISITED_STYX_FALLS           (FLAG_ICHOR_GENERAL_START + 0x1FA) // Ichor: Act II: rested at Styx Falls (beat 39)
 #define FLAG_ICHOR_VISITED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1FB) // Ichor: Act II: Arkadia is a fly target (beat 41)
 #define FLAG_ICHOR_KLEON_JOINED_TITANS          (FLAG_ICHOR_GENERAL_START + 0x1FC) // Ichor: Act II: Kleon went to the Titans after the new moon (beat 42)
