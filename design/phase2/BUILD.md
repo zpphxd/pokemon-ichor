@@ -12,7 +12,7 @@ The route chain follows the revised `design/AETHOS_MAP.md`; SCRIPT.md's route pl
 |---|---|---|
 | 1 | The voyage (Routes 2–3) and Aigina: beats 9A–10C, the *Euploia*, Aigina Town and its three homes; Aigina's three interior maps built for world-act2 (Act II) | in progress |
 | 2 | Emporion and the Temple of Hermes: beats 11–16 | in progress (tilesets on main) |
-| 3 | Route 4 (the Isthmus), Hecate's Hollow, Route 5 (the Skironian cliffs): beats 17–19 | tilesets started: `isthmos`, `cave_dark` |
+| 3 | Route 4 (the Isthmus), Hecate's Hollow, Route 5 (the Skironian cliffs): beats 17–19 | in progress (priority: the walk from Emporion to Eleusa) |
 | 4 | Eleusa and the Temple of Demeter: beats 20–22 | the maps, ambient events and the rite's layout built (below); the story scenes next |
 | 5 | The revelation: beats 23–25, the sanctum, Return to Kalliste | |
 
@@ -85,6 +85,20 @@ Door warps, all to the interior's warp 0. An interior's way out targets the warp
 Bank flags 0x0C0–0x0D5 of the Emporion city agent's 0x0C0–0x0DF: `FLAG_ICHOR_ARRIVED_EMPORION`, `_VISITED_EMPORION`, `_RITES_TUTORIAL`, `_GOT_TROWEL`, `_HIDE_KLEON_QUAY`, `_HIDE_KERYKOS_QUAY`, `_HIDE_ALETHEA_QUAY`, `_KLEON_WON_HERALD`, `_HIDE_KLEON_TEMPLE_STEPS`, `_HIDE_KLEON_ISTHMUS_GATE` (SCRIPT.md's `_SACRED_GATE`), `_KLEON_BATTLE_2_DONE`, `_WON_KLEON_2`, `_DAEDALUS_PAGE_1`, `_NUMBER_NINE_UNTIED` (also Number Nine's hide flag), `_HIDE_SYKEAS_HARPECK`, `_GOT_SYKEAS_FIGS`, `_MET_HALITHERSES`, `_DUG_EMPORION_QUAY`, `_HERM_EMPORION`, `_ITEM_EMPORION_SUPER_POTION`, `_ITEM_EMPORION_X_SPEED`, `_ITEM_EMPORION_REPEL`. Vanilla 0x28A–0x28D for the hidden items: `FLAG_ICHOR_HIDDEN_EMPORION_BRONZE_OBOL`, `_HEART_SCALE`, `_HONEY`, `_STARDUST`. Trainers 43–45: `TRAINER_ICHOR_KLEON_2_KYNDER`, `_HIPLING`, `_NEBREL`.
 
 **Stub tags in Emporion's scripts:** `ICHOR_STUB_RITES` (the quay herm's altar menu, Poseidon's altar), `ICHOR_STUB_HERM` (the crossroads great herm), `ICHOR_STUB_DIG` (the quay planter's sherd, the Hephaisteion's garden, the ship sheds' sand), `ICHOR_STUB_AUGURY` (Halitherses), `ICHOR_STUB_OFFERINGS` (Kerykos's oil, the Trowel, Daedalus's page I, the offerings stall), `ICHOR_STUB_COINS` (Pasion buys the Bronze Obol, Relic Copper, at a fixed ¥600), `ICHOR_STUB_SPRITE` (Kerykos's and Number Nine's walkers).
+
+## Batch 3 maps: the road from Emporion to Eleusa
+
+The user's standard for every route (director, 2026-11-14): "Thoughtfully. Engaging. Well designed. To Pokémon standards, including plenty of grass and wild encounters etc. Items etc." On top of MAP_DESIGN.md: forced grass bands across the path and plenty of optional grass with a reason to enter; morning, day and night land tables (plus surf, fishing and rock-smash tables where the map has water or breakable rocks), from BALANCE.md's Eleusa band; visible items as lures and hidden items where curiosity leads; trainers as checkpoints; one set piece per route; signs at each end and at forks; three render-and-critique passes. MAP_DESIGN §8 and `tools/ichor/map_audit.py` (coming on main) will measure it.
+
+| Map | Tilesets | Joins | Owner | Trainer ids | Bank flags | Vanilla flags (hidden items) |
+|---|---|---|---|---|---|---|
+| `MAP_ROUTE4_ISTHMUS` (and a second Route 4 map if the agent splits it) | aethos + **skiron** | Emporion's Isthmus Gate (the city's north seam, x 7–9) → the Hollow's east mouth (a warp) | Route 4 agent | 80–99 | 0x000–0x01F | 0x2A3–0x2AF |
+| `MAP_HECATES_HOLLOW` (and its sub-rooms) | aethos + **cave_dark** | Route 4 (east mouth) → Route 5 (west mouth) | Hollow agent | 100–109 | 0x020–0x03F | 0x2B0–0x2B7 |
+| `MAP_ROUTE5_SKIRONIAN_CLIFFS` | aethos + **skiron** | the Hollow's west mouth (a warp) → Eleusa's west edge (rows 24–27 at x = 0) | Route 5 agent | 110–129 | 0x040–0x05F | 0x2B8–0x2C7 |
+
+**From SCRIPT.md** (by its old route names): Route 4 takes "Route 2, the Sacred Way" and beat 17 (the rockslide, the procession); the Hollow takes "Hecate's Hollow", beat 18 and Part 5's Three Roads; Route 5 takes "Route 3, the Pine Slopes" and beat 19's road (the rock seat over Salamis, Aphrodite's niches, the pines, a roadside rest house in Thria's place). Their trainers and encounter tables are in Parts 3 and 4 under those names; Thria, the Rheitoi and the jesters' bridge are world-act2's.
+
+**Engine APIs now on main** (`design/ENGINE_API.md`): relics by `giveitem` (`ITEM_HECATES_TORCH`); obstacles (`OBJ_EVENT_GFX_BREAKABLE_ROCK` + `EventScript_RockSmash` for marble rubble, needing the Bronze Hammer); darkness (`"cave": true`), braziers (`EventScript_IchorBrazier`, this session's block `FLAG_ICHOR_BRAZIERS_START + 0x14`–`0x1F`) and lit zones; altars (`EventScript_IchorAltar_<God>`, `EventScript_IchorDesecratedAltar`); great herms (`EventScript_IchorGreatHerm`, `HERM_AETHOS_ROUTE_4` / `_5`, with a table row in `src/data/ichor_herms.h` and a heal location each). Use them, not stubs, unless the API isn't built yet.
 
 ## Warps, connections and seams (batch 1)
 
