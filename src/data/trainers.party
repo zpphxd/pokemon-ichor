@@ -1255,8 +1255,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_APHEIDAS ===
 Name: APHEIDAS
-Class: Shepherd
-Pic: Shepherd
+Class: Charcoaler
+Pic: Charcoaler
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -1271,8 +1271,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_AUGE ===
 Name: AUGE
-Class: Hoplite
-Pic: Shepherd
+Class: Huntress
+Pic: Huntress
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -1363,8 +1363,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_TELPHOUSA ===
 Name: TELPHOUSA
-Class: Hoplite
-Pic: Shepherd
+Class: Huntress
+Pic: Huntress
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -1391,8 +1391,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_KYPSELOS ===
 Name: KYPSELOS
-Class: Shepherd
-Pic: Shepherd
+Class: Charcoaler
+Pic: Charcoaler
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -1423,8 +1423,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_EUADNE ===
 Name: EUADNE
-Class: Hoplite
-Pic: Shepherd
+Class: Huntress
+Pic: Huntress
 Gender: Female
 Music: Female
 AI: Check Bad Move
@@ -1443,8 +1443,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_AGAPENOR ===
 Name: AGAPENOR
-Class: Shepherd
-Pic: Shepherd
+Class: Charcoaler
+Pic: Charcoaler
 Gender: Male
 Music: Hiker
 AI: Check Bad Move
@@ -1459,8 +1459,8 @@ IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 === TRAINER_ICHOR_KYRENE ===
 Name: KYRENE
-Class: Hoplite
-Pic: Shepherd
+Class: Huntress
+Pic: Huntress
 Gender: Female
 Music: Female
 AI: Basic Trainer
@@ -1479,8 +1479,8 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_ICHOR_ANTHIA ===
 Name: ANTHIA
-Class: Hoplite
-Pic: Shepherd
+Class: Huntress
+Pic: Huntress
 Gender: Female
 Music: Female
 AI: Basic Trainer
@@ -1499,8 +1499,8 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_ICHOR_PROKRIS ===
 Name: PROKRIS
-Class: Hoplite
-Pic: Shepherd
+Class: Huntress
+Pic: Huntress
 Gender: Female
 Music: Female
 AI: Basic Trainer
@@ -1528,7 +1528,7 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 === TRAINER_ICHOR_KALLISTO_1 ===
 Name: KALLISTO
 Class: Hierophant
-Pic: Hierophant Ione
+Pic: Hierophant Kallisto
 Gender: Female
 Music: Female
 Items: Hyper Potion / Hyper Potion
