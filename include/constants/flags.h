@@ -1707,6 +1707,31 @@
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
 #define FLAG_ICHOR_HIDE_ELEUSA_EAST_HOPLITE     (FLAG_ICHOR_GENERAL_START + 0x10C) // Ichor: the hoplite in Eleusa's east wall gap (48,25), hidden when Route 15 opens in Act II (batch 4)
+#define FLAG_ICHOR_HIDE_ELEUTHERAI_VINES        (FLAG_ICHOR_GENERAL_START + 0x110) // Ichor: Act II: the old vines across Route 6 are cut (beat 26)
+#define FLAG_ICHOR_HIDE_HERALD_BARRIER          (FLAG_ICHOR_GENERAL_START + 0x111) // Ichor: Act II: the herald has lifted his barrier on Route 6 and gone (beat 26)
+#define FLAG_ICHOR_HIDE_ALETHEA_ROUTE6          (FLAG_ICHOR_GENERAL_START + 0x112) // Ichor: Act II: hide Alethea by Route 6's vines (beat 26)
+#define FLAG_ICHOR_HIDE_ROUTE6_DRUM             (FLAG_ICHOR_GENERAL_START + 0x113) // Ichor: Act II: the column drum on Route 6's cellar steps is moved (the Girdle)
+#define FLAG_ICHOR_ITEM_ROUTE6_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x114) // Ichor: Act II: item ball: Route 6 Super Potion on the spur
+#define FLAG_ICHOR_ITEM_ROUTE6_SUPER_REPEL      (FLAG_ICHOR_GENERAL_START + 0x115) // Ichor: Act II: item ball: Route 6 Super Repel at the terrace stair's head
+#define FLAG_ICHOR_ITEM_ROUTE6_MAX_ETHER        (FLAG_ICHOR_GENERAL_START + 0x116) // Ichor: Act II: item ball: Route 6 Max Ether in the sunken cellar
+#define FLAG_ICHOR_ITEM_ANTIOPE_PP_UP           (FLAG_ICHOR_GENERAL_START + 0x117) // Ichor: Act II: item ball: Antiope's cave PP Up on the rock shelf
+#define FLAG_ICHOR_ITEM_ANTIOPE_STAR_PIECE      (FLAG_ICHOR_GENERAL_START + 0x118) // Ichor: Act II: item ball: Antiope's cave Star Piece on the ivy ledge
+#define FLAG_ICHOR_HIDE_ALETHEA_ELEUTHERAI      (FLAG_ICHOR_GENERAL_START + 0x119) // Ichor: Act II: hide Alethea at Eleutherai's plinth (beat 27)
+#define FLAG_ICHOR_DECOY_ELEUTHERAI             (FLAG_ICHOR_GENERAL_START + 0x11A) // Ichor: Act II: gave water to the old man at Eleutherai's trough (a theoxenia decoy)
+#define FLAG_ICHOR_SAW_MAENADS                  (FLAG_ICHOR_GENERAL_START + 0x11B) // Ichor: Act II: saw the maenads dance on Kithairon (beat 28); hides the ring
+#define FLAG_ICHOR_PHORBAS_STORY                (FLAG_ICHOR_GENERAL_START + 0x11C) // Ichor: Act II: Phorbas told the foundling's story at the fold (beat 28)
+#define FLAG_ICHOR_HIDE_KITHAIRON_DRUM          (FLAG_ICHOR_GENERAL_START + 0x11D) // Ichor: Act II: the toppled boundary drum on Kithairon is moved (the Girdle)
+#define FLAG_ICHOR_ITEM_KITHAIRON_TM_VENOSHOCK  (FLAG_ICHOR_GENERAL_START + 0x11E) // Ichor: Act II: item ball: Mt. Kithairon TM Venoshock by Aktaion's spring
+#define FLAG_ICHOR_ITEM_KITHAIRON_REVIVE        (FLAG_ICHOR_GENERAL_START + 0x11F) // Ichor: Act II: item ball: Mt. Kithairon Revive at the dancing floor's edge
+#define FLAG_ICHOR_ITEM_KITHAIRON_MAX_REVIVE    (FLAG_ICHOR_GENERAL_START + 0x120) // Ichor: Act II: item ball: Mt. Kithairon Max Revive on the crag (the Girdle)
+#define FLAG_ICHOR_ITEM_KITHAIRON_MAX_ELIXIR    (FLAG_ICHOR_GENERAL_START + 0x121) // Ichor: Act II: item ball: Mt. Kithairon Max Elixir on the ivy ledge (the Thyrsus)
+#define FLAG_ICHOR_KRONIA_READER_GONE           (FLAG_ICHOR_GENERAL_START + 0x122) // Ichor: Act II: the Kronia's reader went for someone who reads better (beat 29)
+#define FLAG_ICHOR_HIDE_KLEON_KRONIA            (FLAG_ICHOR_GENERAL_START + 0x123) // Ichor: Act II: hide Kleon at the Kronia's tables (beat 29)
+#define FLAG_ICHOR_HIDE_ALETHEA_KRONIA          (FLAG_ICHOR_GENERAL_START + 0x124) // Ichor: Act II: hide Alethea at the Kronia's tables (beat 29)
+#define FLAG_ICHOR_GYPSOS_WENT_HOME             (FLAG_ICHOR_GENERAL_START + 0x125) // Ichor: Act II: Gypsos read tablet 3 and went home to Eudora's house
+#define FLAG_ICHOR_PROPHECY_3_READ              (FLAG_ICHOR_GENERAL_START + 0x126) // Ichor: Act II: Alethea has read prophecy tablet 3 (Gypsos's homecoming needs it)
+#define FLAG_ICHOR_ITEM_ROUTE7_FULL_HEAL        (FLAG_ICHOR_GENERAL_START + 0x127) // Ichor: Act II: item ball: Route 7 Full Heal at a switchback's dead end
+#define FLAG_ICHOR_ITEM_ROUTE7_BIG_PEARL        (FLAG_ICHOR_GENERAL_START + 0x128) // Ichor: Act II: item ball: Route 7 Big Pearl on the Asopos's reed islet (the Conch)
 #define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL_START + 0x130) // Ichor: Act II: met Manto the augur on the Kadmeia wall (beat 30); her house opens
 #define FLAG_ICHOR_NEISTAN_DRUM_MOVED           (FLAG_ICHOR_GENERAL_START + 0x131) // Ichor: Act II: pushed the fallen drum out of the Neistan Gate with the Girdle
 #define FLAG_ICHOR_HIDE_NEISTAN_GUARDS          (FLAG_ICHOR_GENERAL_START + 0x132) // Ichor: Act II: hides the festival guard in the Neistan Gate (after the Dionysia)

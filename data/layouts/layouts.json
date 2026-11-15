@@ -9492,10 +9492,10 @@
     {
       "id": "LAYOUT_ROUTE6_ELEUTHERAI_ROAD",
       "name": "Route6_EleutheraiRoad_Layout",
-      "width": 30,
-      "height": 64,
+      "width": 56,
+      "height": 28,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Agros",
+      "secondary_tileset": "gTileset_Kithairon",
       "border_filepath": "data/layouts/Route6_EleutheraiRoad/border.bin",
       "blockdata_filepath": "data/layouts/Route6_EleutheraiRoad/map.bin",
       "layout_version": "emerald"
@@ -9503,10 +9503,10 @@
     {
       "id": "LAYOUT_ELEUTHERAI",
       "name": "Eleutherai_Layout",
-      "width": 30,
-      "height": 64,
+      "width": 32,
+      "height": 26,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Agros",
+      "secondary_tileset": "gTileset_Kithairon",
       "border_filepath": "data/layouts/Eleutherai/border.bin",
       "blockdata_filepath": "data/layouts/Eleutherai/map.bin",
       "layout_version": "emerald"
@@ -9514,10 +9514,10 @@
     {
       "id": "LAYOUT_MT_KITHAIRON",
       "name": "MtKithairon_Layout",
-      "width": 30,
-      "height": 64,
+      "width": 40,
+      "height": 56,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Agros",
+      "secondary_tileset": "gTileset_Kithairon",
       "border_filepath": "data/layouts/MtKithairon/border.bin",
       "blockdata_filepath": "data/layouts/MtKithairon/map.bin",
       "layout_version": "emerald"
@@ -9525,10 +9525,10 @@
     {
       "id": "LAYOUT_ROUTE7_KRONIA_GROUNDS",
       "name": "Route7_KroniaGrounds_Layout",
-      "width": 30,
-      "height": 64,
+      "width": 44,
+      "height": 40,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Agros",
+      "secondary_tileset": "gTileset_Kronia",
       "border_filepath": "data/layouts/Route7_KroniaGrounds/border.bin",
       "blockdata_filepath": "data/layouts/Route7_KroniaGrounds/map.bin",
       "layout_version": "emerald"
@@ -9558,10 +9558,10 @@
     {
       "id": "LAYOUT_ROUTE6_ANTIOPES_CAVE",
       "name": "Route6_AntiopesCave_Layout",
-      "width": 24,
-      "height": 62,
+      "width": 16,
+      "height": 12,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Agros",
+      "secondary_tileset": "gTileset_KithaironCave",
       "border_filepath": "data/layouts/Route6_AntiopesCave/border.bin",
       "blockdata_filepath": "data/layouts/Route6_AntiopesCave/map.bin",
       "layout_version": "emerald"

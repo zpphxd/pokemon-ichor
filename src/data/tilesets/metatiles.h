@@ -457,6 +457,18 @@ const u16 gMetatileAttributes_PorytilesManaged_Isthmos[] = INCBIN_U16("data/tile
 const u16 gMetatiles_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatile_attributes.bin");
 
+// Ichor: kithairon
+const u16 gMetatiles_PorytilesManaged_Kithairon[] = INCBIN_U16("data/tilesets/secondary/kithairon/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Kithairon[] = INCBIN_U16("data/tilesets/secondary/kithairon/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: kronia
+const u16 gMetatiles_PorytilesManaged_Kronia[] = INCBIN_U16("data/tilesets/secondary/kronia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Kronia[] = INCBIN_U16("data/tilesets/secondary/kronia/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: kithairon_cave
+const u16 gMetatiles_PorytilesManaged_KithaironCave[] = INCBIN_U16("data/tilesets/secondary/kithairon_cave/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_KithaironCave[] = INCBIN_U16("data/tilesets/secondary/kithairon_cave/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: thyrsa
 const u16 gMetatiles_PorytilesManaged_Thyrsa[] = INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Thyrsa[] = INCBIN_U16("data/tilesets/secondary/thyrsa/porytiles_bin/metatile_attributes.bin");
