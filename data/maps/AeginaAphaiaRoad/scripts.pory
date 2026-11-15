@@ -8,23 +8,42 @@
 // Oros, east up the marble steps to the Temple of Aphaia. Terraces east of the
 // road drop back down to the orchard.
 //
-// ICHOR_ACT2: world-act2 scripts the island's people. Myrmex, Sostratos and
-// Euthymia stand where they fight (BUILD.md gives each one's facing and sight)
-// and say one line; their trainer_type stays NONE until world-act2 registers
-// their parties and swaps these scripts for trainerbattle ones.
+// ICHOR_ACT2: world-act2 scripts the island's people. The road's six trainers
+// stand where they fight (BUILD.md gives each one's facing and sight) and say
+// one line; their trainer_type stays NONE until world-act2 registers their
+// parties and swaps these scripts for trainerbattle ones. Myrmex, Sostratos and
+// Euthymia are Phase 2's (their Act II parties are in world-act2's
+// design/phase3/SCRIPT.md, "Aigina's interior, levels 34-36"); Opora,
+// Marilades and Nikasia were placed for the route standard, each with a
+// suggested class and party at Astyra's levels.
 
 mapscripts AeginaAphaiaRoad_MapScripts {}
 
+text AeginaAphaiaRoad_Text_NameOpora { "OPORA" }
 text AeginaAphaiaRoad_Text_NameMyrmex { "MYRMEX" }
 text AeginaAphaiaRoad_Text_NameSostratos { "SOSTRATOS" }
 text AeginaAphaiaRoad_Text_NameEuthymia { "EUTHYMIA" }
+text AeginaAphaiaRoad_Text_NameMarilades { "MARILADES" }
+text AeginaAphaiaRoad_Text_NameNikasia { "NIKASIA" }
 
 // ---------------------------------------------------------------------------
 // The trainers (ICHOR_ACT2 placeholders: no battle)
 // ---------------------------------------------------------------------------
 
-// ICHOR_ACT2: HOPLITE Myrmex, Ergant 14 and 15. At the ant hills' corner, facing
-// west across the road north (sight 3); mandatory.
+// ICHOR_ACT2: HARVESTER Opora, Kaplet 33 and Gelasable 34. In the pistachio
+// orchard by the gate, facing east across the road up (sight 3): the road's
+// first trainer, in plain view from the gate. Optional (the orchard is open
+// round her).
+script AeginaAphaiaRoad_EventScript_Opora {
+    lock
+    faceplayer
+    setspeaker(AeginaAphaiaRoad_Text_NameOpora)
+    msgbox(format("Pistachios split open when they're ripe. So do I, if you tread on my baskets."))
+    release
+}
+
+// ICHOR_ACT2: HOPLITE Myrmex, Hoplomex 34 and 35 (world-act2). At the ant hills'
+// corner, facing west across the road north (sight 3); mandatory.
 script AeginaAphaiaRoad_EventScript_Myrmex {
     lock
     faceplayer
@@ -33,8 +52,9 @@ script AeginaAphaiaRoad_EventScript_Myrmex {
     release
 }
 
-// ICHOR_ACT2: MERCHANT Sostratos, Onotis 15 and Chelonet 15. At the fork, facing
-// east across the road just below it (sight 3); mandatory for both ends.
+// ICHOR_ACT2: MERCHANT Sostratos, Chelonet 34 and Midonos 35 (world-act2). At
+// the fork, facing east across the road just below it (sight 3); mandatory for
+// both ends.
 script AeginaAphaiaRoad_EventScript_Sostratos {
     lock
     faceplayer
@@ -43,13 +63,38 @@ script AeginaAphaiaRoad_EventScript_Sostratos {
     release
 }
 
-// ICHOR_ACT2: PILGRIM Euthymia, Galekit 15 and Kerazap 16. At the foot of the
-// temple steps, facing east across them (sight 3); mandatory for the temple.
+// ICHOR_ACT2: PILGRIM Euthymia, Gelasable 34 and Kerazap 36 (world-act2). At the
+// foot of the temple steps, facing east across them (sight 3); mandatory for
+// the temple.
 script AeginaAphaiaRoad_EventScript_Euthymia {
     lock
     faceplayer
     setspeaker(AeginaAphaiaRoad_Text_NameEuthymia)
     msgbox(format("I came to see a goddess nobody can see. It's going very well."))
+    release
+}
+
+// ICHOR_ACT2: CHARCOALER Marilades (an Acharnian charcoal-burner's name, from
+// Aristophanes), Cairnolith 34 and Plouteras 35. In the pine glade on the Oros
+// path, stepping out of the trees and facing west across it (sight 3);
+// mandatory for Mount Oros. Placeholder sprite: OBJ_EVENT_GFX_ICHOR_MAN.
+script AeginaAphaiaRoad_EventScript_Marilades {
+    lock
+    faceplayer
+    setspeaker(AeginaAphaiaRoad_Text_NameMarilades)
+    msgbox(format("Don't light anything up here. These pines go up like gossip."))
+    release
+}
+
+// ICHOR_ACT2: HUNTRESS Nikasia, Pithound 34 and Harpelle 35. At the top of the
+// east terraces, facing east along the edge (sight 2) over the two cells the
+// way home hops down from; optional (the road back is the long way round).
+// Placeholder sprite: OBJ_EVENT_GFX_ICHOR_YOUTH_F.
+script AeginaAphaiaRoad_EventScript_Nikasia {
+    lock
+    faceplayer
+    setspeaker(AeginaAphaiaRoad_Text_NameNikasia)
+    msgbox(format("I hunt hares on this hill. So far it's a draw."))
     release
 }
 

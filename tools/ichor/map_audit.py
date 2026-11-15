@@ -76,14 +76,15 @@ SEA_WATER_SHARE = 0.5     # a route whose open ground is mostly water is a sea r
 # Routes go by number (AETHOS_MAP.md's story order); other places by name prefix. Add places as they're built.
 STAGES = [  # (stage, band, route numbers, place prefixes)
     ("Kalliste", "early", (1,), ("Elaia", "Kalliste", "Akti")),
-    ("Emporion", "early", (2, 3), ("TriremeEuploia", "Aegina", "Emporion")),
+    ("Emporion", "early", (2, 3), ("TriremeEuploia", "AeginaTown", "Emporion")),
     ("Eleusa", "early", (4, 5), ("HecatesHollow", "Eleusa")),
     ("Thyrsa", "middle", (6, 7), ("MtKithairon", "Kithairon", "Eleutherai", "Thyrsa", "Kronia")),
     ("Arkadia", "middle", (8, 9, 10, 11, 12),
      ("Lebadeia", "Trophonios", "Kopais", "Kirrha", "GulfFerry", "Aigion", "StyxFalls", "Arkadia",
       "PoolOfMnemosyne")),
     ("Astyra", "middle", (13, 14, 15, 16, 17, 18),
-     ("Nemea", "Daphni", "Astyra", "Marathon", "CapeSounion", "Sounion")),
+     ("Nemea", "Daphni", "Astyra", "Marathon", "CapeSounion", "Sounion",
+      "AeginaAphaia", "AeginaTemple", "AeginaMount")),  # Aigina's interior opens in Act II (beat 46)
     ("Kaldera", "middle", (19, 20, 21), ("Kaldera", "Paros", "Delos", "Skyros", "Lemnos", "Samothrake", "Ikaria",
                                          "Samos", "Chios", "Lesbos")),
     ("Kythera", "late", (22,), ("Melos", "Kythera")),

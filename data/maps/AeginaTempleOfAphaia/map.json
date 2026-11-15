@@ -22,6 +22,20 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_APHAIA_MYRTO",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 10,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AeginaTempleOfAphaia_EventScript_Myrto",
+      "flag": "0"
+    },
+    {
       "local_id": "LOCALID_APHAIA_PRIESTESS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
       "x": 11,
@@ -47,6 +61,19 @@
       "trainer_sight_or_berry_tree_id": "ITEM_PRETTY_FEATHER",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_ITEM_APHAIA_PRETTY_FEATHER"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 16,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_GREAT_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_APHAIA_GREAT_BALL"
     }
   ],
   "warp_events": [],
@@ -67,6 +94,23 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "AeginaTempleOfAphaia_EventScript_DigSpot"
+    },
+    {
+      "type": "hidden_item",
+      "x": 7,
+      "y": 14,
+      "elevation": 3,
+      "item": "ITEM_MOON_STONE",
+      "flag": "FLAG_ICHOR_HIDDEN_APHAIA_MOON_STONE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 20,
+      "y": 13,
+      "elevation": 3,
+      "item": "ITEM_ETHER",
+      "flag": "FLAG_ICHOR_HIDDEN_APHAIA_ETHER"
     }
-  ]
+  ],
+  "ichor_kind": "dungeon"
 }
