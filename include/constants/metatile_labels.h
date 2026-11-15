@@ -1292,4 +1292,15 @@
 #define METATILE_TempleDionysus_TierFrontArm_Lowered   0x276
 // end gTileset_TempleDionysus
 
+// gTileset_ArkadiaHeights, gTileset_MaiaCave (Ichor: the Arkadian climb), written by tools/ichor/art/heights_build.py
+#define METATILE_ArkadiaHeights_DrumWedged           0x2B1
+#define METATILE_ArkadiaHeights_DrumRest             0x2B0
+#define METATILE_ArkadiaHeights_Gap                  0x2B3
+#define METATILE_Kyllene_DrumWedged           0x26E
+#define METATILE_Kyllene_Shrine_Top           0x2B0
+#define METATILE_Kyllene_Shrine_TopR          0x2B1
+#define METATILE_Kyllene_ShrineBad_Top        0x2B2
+#define METATILE_Kyllene_ShrineBad_TopR       0x2B3
+// end gTileset_ArkadiaHeights
+
 #endif // GUARD_METATILE_LABELS_H

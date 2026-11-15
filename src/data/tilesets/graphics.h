@@ -970,3 +970,95 @@ const u16 gTilesetPalettes_PorytilesManaged_ThyrsaStone[][16] =
     INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/15.gbapal")
 };
+
+// Ichor: arkadia_heights, the Arkadian climb: Route 11, Styx Falls and Route 12; built by tools/ichor/art/heights_build.py
+const u32 gTilesetTiles_PorytilesManaged_ArkadiaHeights[] = INCBIN_U32("data/tilesets/secondary/arkadia_heights/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_ArkadiaHeights[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: maia_cave, the Arkadian climb: the Cave of Maia on Route 12; built by tools/ichor/art/heights_build.py
+const u32 gTilesetTiles_PorytilesManaged_MaiaCave[] = INCBIN_U32("data/tilesets/secondary/maia_cave/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_MaiaCave[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/maia_cave/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: styx_falls, the Arkadian climb: Styx Falls and Nonakris; built by tools/ichor/art/heights_build.py
+const u32 gTilesetTiles_PorytilesManaged_StyxFalls[] = INCBIN_U32("data/tilesets/secondary/styx_falls/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_StyxFalls[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/styx_falls/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: kyllene, the Arkadian climb: Route 12, the cypress road over Kyllene; built by tools/ichor/art/heights_build.py
+const u32 gTilesetTiles_PorytilesManaged_Kyllene[] = INCBIN_U32("data/tilesets/secondary/kyllene/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Kyllene[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kyllene/porytiles_bin/palettes/15.gbapal")
+};
