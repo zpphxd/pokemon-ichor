@@ -9,7 +9,6 @@
 //
 // Lysis trades Pothos for a Galenyon (INGAME_TRADE_ICHOR_POTHOS).
 //
-// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
 
 mapscripts KytheraPaphia_PottersHouse_MapScripts {}
 

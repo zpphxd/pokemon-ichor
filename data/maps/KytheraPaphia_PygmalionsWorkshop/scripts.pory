@@ -9,7 +9,6 @@
 // After the climax (VAR_ICHOR_ACT3 >= 19) he gives a Shiny Stone (Aphrell
 // evolves into Aphrogene with it).
 //
-// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
 
 mapscripts KytheraPaphia_PygmalionsWorkshop_MapScripts {}
 

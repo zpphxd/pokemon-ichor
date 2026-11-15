@@ -8,7 +8,6 @@
 // On the first visit she gives the rite's hint (how the gallery's statues can't
 // move while a mirror watches them); after the Foam Laurel, a Mirror Herb.
 //
-// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
 
 mapscripts KytheraPaphia_MirrorHouse_MapScripts {}
 

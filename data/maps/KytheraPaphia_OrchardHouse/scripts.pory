@@ -11,7 +11,6 @@
 // judgement of Paris. When the amphora is complete (Daphne mends it at the
 // Akademia) the tree bears gold.
 //
-// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
 // TODO(engine §5): the roots' fixed dig spot (Alethea's Trowel) giving the third
 // sherd, FLAG_ICHOR_SHERDS_START + 42 (amphora #11 is FLAG_ICHOR_SHERDS_START + 40,
 // SCRIPT.md Part 8). Until digging exists, the roots only describe themselves.

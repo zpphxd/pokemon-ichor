@@ -5,7 +5,6 @@
 // Room: tools/ichor/maps/kythera_homes.py. Theodote stands at (6,2), behind the
 // counter; the player talks from (6,4). The mat is (6,8).
 //
-// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
 // TODO(engine §3): Frankincense and Olive Oil join the stock, and the marble
 // votives ("a marble foot", 100; SCRIPT.md Open questions 12), once they exist
 // as items.

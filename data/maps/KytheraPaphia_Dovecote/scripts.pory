@@ -8,7 +8,6 @@
 // She gives the Egg (it hatches an Erosie, which is never found in the wild and
 // grows into Himerow through friendship).
 //
-// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
 
 mapscripts KytheraPaphia_Dovecote_MapScripts {}
 
