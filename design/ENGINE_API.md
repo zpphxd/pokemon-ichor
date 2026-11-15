@@ -84,6 +84,20 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | `FLAG_DAILY_ICHOR_LAUREL_START` | `0x2870` | 32 | Laurel trees, one sprig a day |
 | `FLAG_DAILY_ICHOR_GENERAL_START` | `0x2890` | 112 | Claimed by name |
 
+**Index blocks given out** within the reserved ranges (ask the engine session for more):
+
+| Range | Indices | Owner | Use |
+|---|---|---|---|
+| Braziers | +0x00–0x0F | engine | tests and the slice |
+| Braziers | +0x10–0x1F | world-act1 | the Telesterion, the Mystery sanctum, Eleusa's procession torches (§2) |
+| Braziers | +0x20–0x2F | world-act2 | Antiope's cave, Trophonios's cave B1F and the oracle's chamber; room for Arkadia and Kaldera |
+| Desecrated altars | 0–7 | Act I (not yet claimed) | |
+| Desecrated altars | 8–15 | world-act2 | the Kithairon shrine, Route 9's altar, and more |
+| Theoxenia | +0x00–0x0F | engine | one visit flag per god (`+ICHOR_GOD_*`), when theoxenia is built |
+| Theoxenia | +0x20–0x27 | world-act2 | decoys: Eleutherai, Thyrsa, Route 8, Kirrha, and more |
+| Fixed digs | +0x00–0x0F | Act I (not yet claimed) | Kalliste, Route 1, Kronion Hill, Emporion |
+| Fixed digs | +0x10–0x1B | world-act2 | the Treasury of Minyas, Gla, Trophonios's great boulder, Route 9's gully, and more |
+
 **One assembler caveat.** The `compare` macro (and the `goto_if_eq`-style macros built on it) treats a second argument in `0x4000`–`0x40FF` as a var and anything else as a number. So comparing a var *against a bank var* needs `compare_var_to_var` explicitly. Comparing a bank var against a number works as usual.
 
 **Tests read the banks from IchorSave,** not from SaveBlock1. `tools/ichor/tests/engine_lib.lua`'s `L.getFlag`, `L.setFlag`, `L.getVar` and `L.setVar` handle every range.
@@ -94,7 +108,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 ## Status of the rest of this file
 
-§1–§6 are built. What each section leaves for later is listed at its end.
+§1–§7 are built; §8 is planned, with its names fixed. What each section leaves for later is listed at its end.
 
 | § | System | Batch | State |
 |---|---|---|---|
@@ -105,6 +119,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 5 | The Frozen Hour (SCRIPT.md Phase 4, E1–E6) | 5 | **Built** |
 | 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials, sentries, the disguise | 5 | **Built** |
 | 7 | Scripts' small needs: flag counts, a held tint, omens, time-of-day tables | 5 | **Built** |
+| 8 | Excavation: the Trowel, dig spots, fixed finds | not yet assigned | Planned, names fixed |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
@@ -180,6 +195,7 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
   | +0x00–0x0F | engine | tests and the slice |
   | +0x10–0x13 | world-act1 | the Telesterion's season braziers in Eleusa: autumn, winter, spring, summer |
   | +0x14–0x1F | world-act1 | kept: the Mystery sanctum's four, Eleusa's procession torches |
+  | +0x20–0x2F | world-act2 | Antiope's cave, Trophonios's cave B1F and the oracle's chamber; room for Arkadia and Kaldera |
   ```
   // the brazier's bg event
   script Map_Brazier1 {
@@ -522,4 +538,24 @@ These need no engine change. `OW_TIME_OF_DAY_ENCOUNTERS` is on, and `tools/wild_
 - **In `src/data/wild_encounters.json`,** give the map up to four entries with the same `map` and `base_label`s ending `_Morning`, `_Day`, `_Evening` and `_Night`. Route 1 already has `gKallisteRoute1_Morning` and `_Night`.
 - **The hours** (`OW_TIMES_OF_DAY`, latest generation): morning 6–10, day 10–19, evening 19–20, night 20–6.
 - **A time with no table of its own falls back to `_Morning`** (`OW_TIME_OF_DAY_FALLBACK`). With all four defined, Lakonia's Chalkip can sit in `_Morning` and `_Evening` only.
+
+## 8. Excavation (SYSTEMS §5): planned, names fixed
+
+Not built. These names are fixed so map scripts can be written against them now; until it lands, keep a stub like `ICHOR_STUB_DIG`. Alethea's Trowel itself (`ITEM_ALETHEAS_TROWEL`) comes with it.
+
+```
+// A daily dig spot's bg event (its find is rolled once a day, by spot and day)
+setvar(VAR_0x8004, <spot index>)        // FLAG_DAILY_ICHOR_DIG_START + index: dug today
+setvar(VAR_0x8005, ICHOR_DIG_ACT_II)    // the loot table: ICHOR_DIG_ACT_I, _ACT_II or _ACT_III
+goto(EventScript_IchorDigSpot)
+
+// A one-time find (a fixed dig)
+setvar(VAR_0x8004, <find index>)        // FLAG_ICHOR_DIG_FIXED_START + index: found
+setvar(VAR_0x8005, ITEM_RARE_BONE)      // what's buried there
+goto(EventScript_IchorDigFixed)
+```
+
+- **Without the Trowel,** both say the ground has been turned here. Once a fixed find is dug, the spot is bare.
+- Hide a dig-spot object with the same flag as its find.
+- **Daily spot indices** are given out in blocks like the fixed ones; ask the engine session.
 
