@@ -6,7 +6,7 @@
   "data/tilesets/secondary/bull_road/porytiles_bin/anim/surf/1.png": "5020288ed8a2255fff95fcc0c2948e43",
   "data/tilesets/secondary/bull_road/porytiles_bin/anim/surf/2.png": "eb964ce116feed5ec2b20052e1ad9849",
   "data/tilesets/secondary/bull_road/porytiles_bin/metatile_attributes.bin": "484dce052b7e3301e8ed81080e4dfe3a",
-  "data/tilesets/secondary/bull_road/porytiles_bin/metatiles.bin": "73d0945930d1d0f746ef2aa064072b54",
+  "data/tilesets/secondary/bull_road/porytiles_bin/metatiles.bin": "ba9d1a7b7ce2a99b13bded1e9bc76677",
   "data/tilesets/secondary/bull_road/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/bull_road/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/bull_road/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -23,7 +23,7 @@
   "data/tilesets/secondary/bull_road/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/bull_road/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/bull_road/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/bull_road/porytiles_bin/tiles.png": "7629b98b9374ccfdda7745c9e7db7713",
+  "data/tilesets/secondary/bull_road/porytiles_bin/tiles.png": "cf31cf6e949c11cd25be5026a62196f4",
   "data/tilesets/secondary/bull_road/porytiles_src/anim/anim.json": "3d8f8405cd05ff858898f03bb25a81ca",
   "data/tilesets/secondary/bull_road/porytiles_src/anim/bees/0.png": "8ff1e098d0057939069b9eb7cefc300c",
   "data/tilesets/secondary/bull_road/porytiles_src/anim/bees/1.png": "81a4f7ded3413be26eec8608e6abe387",
@@ -35,7 +35,7 @@
   "data/tilesets/secondary/bull_road/porytiles_src/anim/surf/key.png": "66044cc51339615dd6c5d290b58eb0d4",
   "data/tilesets/secondary/bull_road/porytiles_src/attributes.csv": "62cbcae7e8f397f48741d5e5acf283db",
   "data/tilesets/secondary/bull_road/porytiles_src/bottom.png": "5e93840faba44691fe26927c110581a0",
-  "data/tilesets/secondary/bull_road/porytiles_src/middle.png": "c988c7567edc9c7a62d57461ea9ceba6",
+  "data/tilesets/secondary/bull_road/porytiles_src/middle.png": "16c7e667490e1637f55ed6723e9f7dca",
   "data/tilesets/secondary/bull_road/porytiles_src/top.png": "a9f80ac359d7ba25f9243a878b823286",
   "include/porytiles_generated/tilesets/bull_road/generated_anim_code.h": "17d27a3762badec822b7a4e438cf7b80"
 }

@@ -596,15 +596,17 @@ def brow():
             e = 5 + int(round(Co.wob(x + 3 * cx, 0.7) * 0.6))
             if end == "S" and 4 <= x <= 11:
                 continue
-            for y in range(0, e - 2):
-                M.px(ox + x, y, "g1" if (x + y) % 3 else "cs1")
+            # the lower terrace in the wall's shadow, just beyond the drop
+            for y in range(max(0, e - 4), e - 2):
+                M.px(ox + x, y, "cs1" if (x + y) % 2 else "g1")
             M.px(ox + x, e - 2, "cs0")
             M.px(ox + x, e - 1, "cs1" if (x + 2 * cx) % 5 else "cs0")
             M.px(ox + x, e, "cs5" if (x + cx) % 6 else "cs3")
             M.px(ox + x, e + 1, "cs4" if (x + cx) % 6 else "cs2")
             M.px(ox + x, e + 2, "cs3" if (x + cx) % 6 else "cs1")
+            M.px(ox + x, e + 3, "cs2" if (x + cx) % 4 else "cs1")
             if (x * 3 + cx) % 7 == 0:
-                M.px(ox + x, e + 3, "my3")
+                M.px(ox + x, e + 4, "my3")
         if end == "S":
             for i, y0 in enumerate((0, 4, 8)):
                 for x in range(4, 12):

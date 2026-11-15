@@ -38,7 +38,7 @@ def spec(name):
             "symbol": "gTileset_Amnisos", "dir": "amnisos", "label": "Amnisos",
             "doc": "TILES_amnisos.md", "title": "Amnisos, the harbor of Knossa",
             "groups": N.groups("minoan", "fresco", "stone", "foam", "green", "bronze", "terra"),
-            "images": [("knossa_amnisos_quay.png", "A 240 x 160 screen of Amnisos's quay at dawn: "
+            "images": [("knossa_amnisos_quay.png", "A 240 x 160 screen of Amnisos's quay: "
                         "the Titan ships at the mole, the Asclepeion and the Agora, hives on every "
                         "roof (3x; `_1x` is 1x)"),
                        ("knossa_amnisos_town.png", "Amnisos: the quay and the mole, the five "
@@ -199,5 +199,70 @@ def spec(name):
             ],
             "rows": {"court": 0, "walls": 10, "fresco": 18, "land": 21},
             "labels": [("court_works", [("fence_gate", "PenGate")])],
+        }
+    if name == "palace_rooms":
+        import knossa_rooms as Ro
+        rooms = {s.key: s for s in Ro.build()}
+        return {
+            "symbol": "gTileset_PalaceRooms", "dir": "palace_rooms", "label": "PalaceRooms",
+            "doc": "TILES_palace_rooms.md", "primary": "oikos",
+            "title": "the Palace of Minos's rooms and the Bull Road vault",
+            "groups": N.groups("minoan", "fresco", "bronze", "terra", "titan"),
+            "maps": "the Throne Room, the West Magazines, the Queen's Megaron and the Grand "
+                    "Staircase (`MAP_KNOSSA_PALACE_THRONE_ROOM`, `_WEST_MAGAZINES`, "
+                    "`_QUEENS_MEGARON`, `_GRAND_STAIRCASE`), and the Bull Road vault "
+                    "(`MAP_KNOSSA_BULL_ROAD_VAULT`)",
+            "images": [("knossa_throne_room.png", "The Throne Room for scene A: the gypsum "
+                        "throne between its griffins, the benches, the lustral basin"),
+                       ("knossa_magazines_megaron.png", "The West Magazines with the Titans' "
+                        "camp among the pithoi; the Queen's Megaron's dolphins; the Grand "
+                        "Staircase going down")],
+            "sections": [("rooms", [rooms["house"], rooms["frescoes"], rooms["furniture"],
+                                    rooms["staircase"]])],
+            "rows": {"rooms": 0},
+            "labels": [],
+        }
+    if name == "ida":
+        import knossa_ida as I
+        import knossa_road as R
+        ida = {s.key: s for s in I.build()}
+        road = {s.key: s for s in R.build()}
+        return {
+            "symbol": "gTileset_Ida", "dir": "ida", "label": "Ida",
+            "doc": "TILES_ida.md", "title": "Mount Ida and the caves",
+            "groups": N.groups("stone", "green", "bronze", "minoan", "cave"),
+            "maps": "the Ida path (`MAP_KNOSSA_IDA_PATH`), the cradle shrine "
+                    "(`MAP_KNOSSA_CRADLE_SHRINE`), the Idaean Cave (`MAP_KNOSSA_IDAEAN_CAVE`) "
+                    "and the Cave of Eileithyia (`MAP_KNOSSA_CAVE_OF_EILEITHYIA`)",
+            "images": [("knossa_ida_path.png", "The Ida path: holm oaks and goat pastures, "
+                        "the cradle shrine's forecourt, its shields and cradle-altar, the "
+                        "Idaean Cave's mouth"),
+                       ("knossa_caves.png", "The Idaean Cave (Epimenides's ledge, Amalthea's "
+                        "horn) and the Cave of Eileithyia (the birth-stone)")],
+            "sections": [
+                ("ida", [ida["oaks"], ida["cradle_shrine"],
+                         La.cliff(names_only=["lip_L", "lip", "lip_b", "lip_R", "face_L",
+                                              "face", "face_b", "face_R", "side_E", "side_W",
+                                              "back", "back_NW", "back_NE", "corner_in_E",
+                                              "corner_in_W", "foot_grass"],
+                                  notes_extra=" On Ida, stack two or three `face` rows for the "
+                                              "mountain's crags."),
+                         La.terrace(key="terrace", title="The forecourt's wall",
+                                    notes="The cradle shrine's walled forecourt and the "
+                                          "Ida path's field walls, dry-stone limestone "
+                                          "(Kythera's terrace kit): a `top_*` row over `L` "
+                                          "`M` (`M2`) `R`; `steps` through it; `niche` for a "
+                                          "votive."),
+                         La.cave_mouth(),
+                         K.pick(road["phrygana"], ["thyme", "sage", "burnet", "asphodel",
+                                                   "thyme_b"], key="phrygana",
+                                notes=road["phrygana"].notes.replace("between the terraces "
+                                                                     "and on the Bronze "
+                                                                     "Heel's slope",
+                                                                     "on the goat pastures"))]),
+                ("cave", [ida["cave"], ida["cave_shrines"]]),
+            ],
+            "rows": {"ida": 0, "cave": 16},
+            "labels": [],
         }
     raise SystemExit(f"knossa_specs: unknown tileset {name}")

@@ -257,13 +257,23 @@ def bull_road():
     first forced grass band."""
     s = Scene("bull_road", 15, 10)
     s.path_patch(6, 0, 8, 9)
+    # the vineyard's terrace, west: vine rows and low vines over its wall
     vine_row(s, 0, 4, 0)
-    vine_patch(s, 0, 1, 5, 2, grapes={(2, 0)})
+    vine_patch(s, 0, 1, 5, 1) if False else None
+    for x in range(0, 5):
+        s.piece("vines", "SW" if x == 0 else ("SE" if x == 4 else
+                                             ("C_grapes" if x == 2 else "S")), x, 1)
+    s.wall_run("terrace", 0, 4, 2, top=False)
+    s.piece("vines", "sign", 5, 1)
+    # olives on the terrace east
     s.olive(10, 0)
     s.olive(12, 1)
     s.cypress(14, 0)
     s.piece("phrygana", "thyme", 9, 2)
-    brow_run(s, 0, 14, 3, stairs=(7,))
+    s.piece("phrygana", "asphodel", 11, 2) if False else None
+    brow_run(s, 5, 14, 3, stairs=(7,))
+    s.piece("phrygana", "thyme_b", 2, 3)
+    # the meadow where the herd crosses
     s.piece("phrygana", "thyme", 1, 5)
     s.piece("phrygana", "asphodel", 13, 4)
     s.piece("phrygana", "sage", 0, 6)
@@ -327,7 +337,7 @@ def bull_road_wide():
     s.part("labrys_door", "top_L", 17, 11, 3, 2)
     s.rect(12, 10, 14, 13, PATH)
     # the beekeeper's hut and its spring, south-west
-    s.put("mitato", 3, 15)
+    s.part("mitato", "top_L", 3, 15, 3, 3)
     s.m[15, 6] = s.m[15, 6]
     s.piece("mitato", "runnel", 4, 18)
     s.piece("mitato", "runnel", 4, 19)
@@ -342,7 +352,7 @@ def bull_road_wide():
     s.rect(15, 15, 27, 18, TALL)
     s.rect(15, 14, 27, 14, GRASS)
     for x in (16, 20, 24):
-        s.olive(x, 19) if x + 1 < W else None
+        s.olive(x, 20)
     s.cypress(28, 15)
     s.cypress(29, 17)
     s.olive(27, 9)
@@ -361,8 +371,10 @@ def bronze_heel():
         s.piece("phrygana", "thyme" if x % 2 else "sage", x, 0)
     s.piece("phrygana", "asphodel", 11, 1)
     s.piece("phrygana", "burnet", 16, 1)
-    # the brow down onto the beach
-    brow_run(s, 4, 19, 2)
+    # the grass gives way to the beach
+    for x in range(0, W):
+        s.m[2, x] = KS.SAND_GRASS["T"]
+    s.m[2, 0] = KS.SAND_GRASS["T"]
     s.put("talos_foot", 6, 3)
     s.piece("tide_pools", "pool", 13, 6)
     s.piece("tide_pools", "pool_b", 15, 7)
@@ -393,7 +405,7 @@ def bronze_heel():
 def court_pave(s, x0, y0, x1, y1, seed=0):
     for y in range(y0, y1 + 1):
         for x in range(x0, x1 + 1):
-            k = (x * 5 + y * 3 + seed) % 13
+            k = (x * 5 + y * 3 + seed) % 19
             n = "ABCD"[(x + 2 * y + seed) % 4]
             if k == 0:
                 n = "cracked"
@@ -432,6 +444,11 @@ def palace_court():
                     {3: "door", 1: "face_labrys", 6: "face_window"}],
              tops={5: "top_horns", 7: "top_broken", 12: "top_horns", 2: "top_horns"})
     s.part("frescoes", "leap_TL", 9, 1, 3, 2)
+    # a portico before the Throne Room's door: red columns under a red beam
+    s.run("columns", ["beam_L", "beam_col", "beam", "beam_col", "beam_horns", "beam_col",
+                      "beam_R"], 0, 3)
+    s.run("columns", ["under", "under_col", "under", "under_col", "under", "under_col",
+                      "under"], 0, 4)
     # the lane: nine cells west to east, the line in front of the leaper
     s.piece("paving", "lane_W", 2, 5)
     for x in range(3, 10):
@@ -514,6 +531,232 @@ def palace_hill():
     return s
 
 
+# --------------------------------------------------------------------------
+# The palace's rooms
+# --------------------------------------------------------------------------
+
+def room_shell(s, x0, x1, y0, y1, exit_x=None, panels=(), field="field"):
+    """A room: the north wall three rows tall from y0, floor to y1-1, the
+    south wall on y1, side walls at x0 and x1."""
+    for x in range(x0, x1 + 1):
+        if x == x0:
+            s.piece("house", "frieze_L", x, y0)
+            s.piece("house", "field_L", x, y0 + 1)
+            s.piece("house", "dado_L", x, y0 + 2)
+        elif x == x1:
+            s.piece("house", "frieze_R", x, y0)
+            s.piece("house", "field_R", x, y0 + 1)
+            s.piece("house", "dado_R", x, y0 + 2)
+        else:
+            s.piece("house", "frieze", x, y0)
+            s.piece("house", field, x, y0 + 1)
+            s.piece("house", "dado_b" if x % 5 == 2 else "dado", x, y0 + 2)
+    for y in range(y0 + 3, y1):
+        s.piece("house", "side_W", x0, y)
+        s.piece("house", "side_E", x1, y)
+        for x in range(x0 + 1, x1):
+            if y == y0 + 3:
+                s.piece("house", "shade" if x % 2 else "shade_b", x, y)
+            else:
+                s.piece("house", "floor_" + "ABCD"[(x * 3 + y) % 4], x, y)
+    for x in range(x0, x1 + 1):
+        s.piece("house", "south_W" if x == x0 else ("south_E" if x == x1 else "south"), x, y1)
+    if exit_x is not None:
+        s.piece("house", "exit", exit_x, y1)
+    for (key, name, px_, py_, w, h) in panels:
+        s.part(key, name, px_, py_, w, h)
+
+
+def throne_room():
+    """The Throne Room (13 x 9) as scene A stages it: the gypsum throne
+    against the north wall between its griffins, benches either side, the
+    porphyry basin, the lustral basin, the way out to the court."""
+    s = Scene("palace_rooms", 13, 9, fill=0x200, primary="oikos")
+    s.m[:] = s.s["house"]["ids"][0][0]
+    room_shell(s, 0, 12, 0, 8, exit_x=6, field="field_red",
+               panels=(("frescoes", "griffin_TL", 3, 0, 2, 2),
+                       ("frescoes", "griffin2_TL", 8, 0, 2, 2)))
+    s.piece("furniture", "throne_back", 6, 2)
+    s.piece("furniture", "throne", 6, 3)
+    s.run("furniture", ["bench_L", "bench", "bench", "bench_R"], 1, 3)
+    s.run("furniture", ["bench_L", "bench", "bench", "bench_R"], 8, 3)
+    s.piece("furniture", "bowl", 6, 5)
+    s.part("furniture", "basin_TL", 1, 5, 2, 1)
+    s.part("furniture", "basin_BL", 1, 6, 2, 1)
+    s.piece("house", "rug", 6, 6)
+    s.piece("house", "rug", 6, 7)
+    s.piece("furniture", "stand", 11, 5)
+    return s
+
+
+def palace_rooms():
+    """Three rooms side by side (31 x 10): the West Magazines with the Titans'
+    camp among the pithoi, the Queen's Megaron with its dolphins and
+    Ariadne's bed, the Grand Staircase going down."""
+    W, H = 33, 10
+    s = Scene("palace_rooms", W, H, fill=0x200, primary="oikos")
+    s.m[:] = s.s["house"]["ids"][0][0]
+    # the West Magazines
+    room_shell(s, 0, 11, 0, 9, exit_x=5,
+               panels=(("furniture", "banner", 3, 1, 1, 1), ("frescoes", "monkey", 8, 1, 1, 1),
+                       ("furniture", "wall_spears", 6, 1, 1, 1)))
+    for x in (1, 3, 9):
+        s.piece("furniture", "pithoi_top", x, 3)
+        s.piece("furniture", "pithoi", x, 4)
+    s.piece("furniture", "pithos_top", 10, 3)
+    s.piece("furniture", "pithos", 10, 4)
+    s.piece("furniture", "bedroll", 2, 6)
+    s.piece("furniture", "bedroll", 3, 7)
+    s.piece("furniture", "crate", 9, 6)
+    s.piece("furniture", "table_L", 5, 5)
+    s.piece("furniture", "table_R", 6, 5)
+    s.piece("furniture", "spears", 10, 7)
+    s.piece("furniture", "brazier", 7, 7)
+    s.piece("furniture", "cist", 1, 8)
+    s.piece("furniture", "cist_open", 8, 8)
+    # the Queen's Megaron
+    room_shell(s, 11, 22, 0, 9, exit_x=16,
+               panels=(("frescoes", "dolphins_TL", 13, 0, 3, 2),
+                       ("frescoes", "saffron", 19, 1, 1, 1)))
+    s.piece("house", "door_top", 20, 1) if False else None
+    s.piece("furniture", "bed_top", 20, 3)
+    s.piece("furniture", "bed", 20, 4)
+    s.piece("furniture", "bath", 12, 3)
+    s.piece("furniture", "chest", 21, 3)
+    s.piece("furniture", "loom", 17, 3)
+    s.part("furniture", "well_TL", 13, 6, 2, 1)
+    s.piece("furniture", "stand", 21, 7)
+    s.piece("house", "rug", 16, 5)
+    s.piece("house", "rug", 16, 6)
+    # the Grand Staircase: a flight going down north, its balustrade, the dark
+    room_shell(s, 22, 32, 0, 9, exit_x=27)
+    for y in (3, 4, 5, 6):
+        row = {3: "deep", 4: "flight", 5: "flight", 6: "head"}[y]
+        s.run("staircase", [row + "_L", row, row + "_R"], 23, y)
+        s.piece("staircase", "balustrade_col" if y in (4, 6) else "balustrade", 26, y)
+    s.piece("staircase", "dark", 24, 2)
+    s.piece("staircase", "top_col", 26, 7) if False else None
+    s.part("furniture", "well_TL", 28, 4, 2, 1)
+    s.piece("frescoes", "monkey", 30, 1)
+    return s
+
+
+# --------------------------------------------------------------------------
+# Mount Ida and the caves
+# --------------------------------------------------------------------------
+
+def cliff_band(s, x0, x1, y, rows=2):
+    s.piece("cliff", "lip_L", x0, y)
+    for x in range(x0 + 1, x1):
+        s.piece("cliff", "lip_b" if x % 4 == 1 else "lip", x, y)
+    s.piece("cliff", "lip_R", x1, y)
+    for r in range(rows):
+        s.piece("cliff", "face_L", x0, y + 1 + r)
+        for x in range(x0 + 1, x1):
+            s.piece("cliff", "face_b" if (x + r) % 4 == 0 else "face", x, y + 1 + r)
+        s.piece("cliff", "face_R", x1, y + 1 + r)
+
+
+def ida_path():
+    """The Ida path at the cradle shrine (20 x 14): Ida's crag with the
+    Idaean Cave's mouth, the Kouretes' shields on the rock either side, the
+    walled forecourt with the cradle-altar, holm oaks and goat pasture."""
+    W, H = 20, 14
+    s = Scene("ida", W, H)
+    for x in (0, 4, 14):
+        s.part("oaks", "oak_TL", x, 0, 2, 1)
+    s.piece("oaks", "boulder", 9, 0)
+    cliff_band(s, 1, 18, 1, rows=2)
+    s.put("cave_mouth", 8, 1)
+    s.part("cave_mouth", "lip_L", 8, 1, 3, 3)
+    s.run("cradle_shrine", ["shields_L", "shields", "shields_R"], 5, 2)
+    s.run("cradle_shrine", ["shields_L", "shields_R"], 12, 3)
+    s.piece("cradle_shrine", "shield_one", 14, 2)
+    s.piece("cliff", "foot_grass", 3, 4)
+    s.piece("cliff", "foot_grass", 16, 4)
+    # the forecourt: walled, the cradle-altar before the mouth
+    s.rect(4, 4, 15, 7, PATH)
+    s.piece("cradle_shrine", "altar_L", 8, 5)
+    s.piece("cradle_shrine", "altar_R", 9, 5)
+    s.piece("cradle_shrine", "offerings", 10, 5)
+    s.piece("cradle_shrine", "lamp", 6, 5)
+    s.piece("cradle_shrine", "lamp", 13, 5)
+    s.wall_run("terrace", 3, 8, 9, top=True)
+    s.wall_run("terrace", 11, 16, 9, top=True)
+    for y in (4, 5, 6, 7):
+        s.m[y, 3] = s.s["terrace"]["ids"][1][0] if False else s.m[y, 3]
+    s.rect(9, 8, 10, 13, PATH)
+    for y in range(10, 14):
+        s.piece("oaks", "goat_track", 9, y)
+    # pasture: oaks, boulders, thyme
+    s.part("oaks", "oak_TL", 1, 10, 2, 2)
+    s.part("oaks", "oak_TL", 15, 11, 2, 2)
+    s.piece("oaks", "young_top", 6, 11)
+    s.piece("oaks", "young", 6, 12)
+    s.piece("oaks", "acorns", 3, 12)
+    s.piece("oaks", "boulders", 12, 11)
+    s.piece("oaks", "boulder", 18, 9)
+    for (x, y, n) in ((0, 8, "thyme"), (13, 12, "thyme_b"), (5, 10, "asphodel"),
+                      (18, 12, "sage"), (11, 13, "burnet")):
+        s.piece("phrygana", n, x, y)
+    s.sprite("tauros", 0, 0, 0) if False else None
+    return s
+
+
+def caves():
+    """The two caves side by side (27 x 12): the Idaean Cave, with
+    Epimenides's ledge, a column, a black pool and Amalthea's horn at the
+    back; the Cave of Eileithyia, a long low cave, its floor worn into a
+    path to the birth-stone inside its little wall."""
+    W, H = 27, 12
+    s = Scene("ida", W, H)
+    s.m[:] = s.s["cave"]["ids"][0][0]
+
+    def room(x0, x1, y0, y1):
+        for x in range(x0, x1 + 1):
+            s.piece("cave", "face_L" if x == x0 else ("face_R" if x == x1 else
+                                                     ("face_b" if x % 3 == 0 else "face")), x, y0)
+        for y in range(y0 + 1, y1 + 1):
+            s.piece("cave", "side_W", x0, y)
+            s.piece("cave", "side_E", x1, y)
+            for x in range(x0 + 1, x1):
+                s.piece("cave", "floor_b" if (x * 7 + y * 3) % 5 == 0 else "floor", x, y)
+    # the Idaean Cave
+    room(0, 13, 1, 10)
+    s.part("cave_shrines", "horn_TL", 6, 2, 2, 2)
+    s.piece("cave", "dark", 11, 1)
+    s.piece("cave", "ledge_L", 2, 5)
+    s.piece("cave", "ledge_R", 3, 5)
+    s.piece("cave", "col_top", 10, 4)
+    s.piece("cave", "col", 10, 5)
+    s.piece("cave", "pool_L", 8, 7)
+    s.piece("cave", "pool_R", 9, 7)
+    s.piece("cave", "stalagmites", 12, 8)
+    s.piece("cave", "stalagmite", 1, 8)
+    s.piece("cave", "rubble", 4, 9)
+    s.piece("cave", "bones", 11, 6)
+    s.piece("cave", "drip", 5, 3)
+    for y in range(7, 11):
+        s.piece("cave", "path", 6, y)
+    s.piece("cave", "exit", 6, 11)
+    s.piece("cave", "glow", 6, 10)
+    # the Cave of Eileithyia
+    room(14, 26, 1, 10)
+    s.part("cave_shrines", "stone_TL", 19, 2, 2, 2)
+    for y in range(4, 11):
+        s.piece("cave", "path", 20, y)
+    s.piece("cave", "shelf", 17, 3)
+    s.piece("cave", "shelf", 23, 3)
+    s.piece("cave", "stalagmite", 15, 6)
+    s.piece("cave", "stalagmites", 25, 7)
+    s.piece("cave", "crack", 23, 8)
+    s.piece("cave", "steps", 20, 7)
+    s.piece("cave", "drip", 16, 9)
+    s.piece("cave", "exit", 20, 11)
+    s.piece("cave", "glow", 20, 10)
+    return s
+
+
 SCENES = {
     "amnisos_quay": (amnisos_quay, "knossa_amnisos_quay.png", 3),
     "amnisos_town": (amnisos_town, "knossa_amnisos_town.png", 2),
@@ -522,6 +765,10 @@ SCENES = {
     "bronze_heel": (bronze_heel, "knossa_bronze_heel.png", 2),
     "palace_court": (palace_court, "knossa_palace_court.png", 3),
     "palace_hill": (palace_hill, "knossa_palace_hill.png", 2),
+    "throne_room": (throne_room, "knossa_throne_room.png", 3),
+    "palace_rooms": (palace_rooms, "knossa_magazines_megaron.png", 2),
+    "ida_path": (ida_path, "knossa_ida_path.png", 2),
+    "caves": (caves, "knossa_caves.png", 2),
 }
 ONE_X = {"amnisos_quay", "bull_road", "palace_court"}
 

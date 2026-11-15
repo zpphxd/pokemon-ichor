@@ -6,12 +6,12 @@
 
 | Image | Shows |
 |---|---|
-| [`img/knossa_amnisos_quay.png`](img/knossa_amnisos_quay.png) | A 240 x 160 screen of Amnisos's quay at dawn: the Titan ships at the mole, the Asclepeion and the Agora, hives on every roof (3x; `_1x` is 1x) |
+| [`img/knossa_amnisos_quay.png`](img/knossa_amnisos_quay.png) | A 240 x 160 screen of Amnisos's quay: the Titan ships at the mole, the Asclepeion and the Agora, hives on every roof (3x; `_1x` is 1x) |
 | [`img/knossa_amnisos_town.png`](img/knossa_amnisos_town.png) | Amnisos: the quay and the mole, the five houses, the cliff and the Cave of Eileithyia's mouth, the south gap |
 | [`img/amnisos_pieces.png`](img/amnisos_pieces.png) | Every structure on its ground |
 | [`img/amnisos_sheet.png`](img/amnisos_sheet.png) | The numbered metatile sheet, rendered from the compiled tileset |
 
-![A 240 x 160 screen of Amnisos's quay at dawn: the Titan ships at the mole, the Asclepeion and the Agora, hives on every roof (3x; `_1x` is 1x)](img/knossa_amnisos_quay.png)
+![A 240 x 160 screen of Amnisos's quay: the Titan ships at the mole, the Asclepeion and the Agora, hives on every roof (3x; `_1x` is 1x)](img/knossa_amnisos_quay.png)
 
 ## The Knossa family
 
@@ -69,6 +69,7 @@ and `build/amnisos/catalog.json` is the same as JSON.
 | `W` | Sea: `MB_OCEAN_WATER`, surfable (collision 0). |
 | `P` | Fresh water: `MB_POND_WATER`, surfable. |
 | `J` | Ledge: `MB_JUMP_SOUTH`. |
+| `^` | Ledge down to the north: `MB_JUMP_NORTH`. |
 | `S` | Sand: `MB_SAND`. |
 
 **Borrowed ground.** Cells marked *grass*, *path*, *sand*, *sea* or *shallow* draw no

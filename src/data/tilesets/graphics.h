@@ -1062,3 +1062,49 @@ const u16 gTilesetPalettes_PorytilesManaged_PalaceMinos[][16] =
     INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/palace_minos/porytiles_bin/palettes/15.gbapal")
 };
+
+// Ichor: palace_rooms (the Palace of Minos's rooms and the Bull Road vault), written by tools/ichor/art/knossa_build.py
+const u32 gTilesetTiles_PorytilesManaged_PalaceRooms[] = INCBIN_U32("data/tilesets/secondary/palace_rooms/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_PalaceRooms[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/palace_rooms/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: ida (Mount Ida and the caves), written by tools/ichor/art/knossa_build.py
+const u32 gTilesetTiles_PorytilesManaged_Ida[] = INCBIN_U32("data/tilesets/secondary/ida/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Ida[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/15.gbapal")
+};
