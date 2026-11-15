@@ -555,6 +555,8 @@ enum TrainerClassID
     TRAINER_CLASS_SCHOLAR,
     TRAINER_CLASS_MERCHANT,
     TRAINER_CLASS_PILGRIM,
+    // Ichor: the Titans' admins (Hyperion, Iapetos, Rhea); GetBattleBGM gives them MUS_ICHOR_BATTLE_ADMIN
+    TRAINER_CLASS_TITAN_ADMIN,
 
     TRAINER_CLASS_COUNT,
 };

@@ -428,6 +428,8 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SCHOLAR] = { _("SCHOLAR"), 8 },
     [TRAINER_CLASS_MERCHANT] = { _("MERCHANT"), 20 },
     [TRAINER_CLASS_PILGRIM] = { _("PILGRIM"), 3 },
+    // Ichor: the Titans' admins pay like Emerald's (Aqua and Magma admins, 10)
+    [TRAINER_CLASS_TITAN_ADMIN] = { _("TITAN ADMIN"), 10 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =
@@ -5112,6 +5114,7 @@ static void HandleEndTurn_BattleWon(void)
         case TRAINER_CLASS_MAGMA_ADMIN:
         case TRAINER_CLASS_MAGMA_LEADER:
         case TRAINER_CLASS_TITANBORN: // Ichor
+        case TRAINER_CLASS_TITAN_ADMIN: // Ichor
             PlayBGM(MUS_VICTORY_AQUA_MAGMA);
             break;
         case TRAINER_CLASS_LEADER:
