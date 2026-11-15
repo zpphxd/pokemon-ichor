@@ -595,6 +595,8 @@ struct IchorEpics              // POSTGAME.md; 64 bytes
 
 ## Decisions for the user
 
+> **Settled by the user, 2026-11-14.** Asked directly: the Oikoumene opens in stages (PG-6, PG-7, PG-8); the Orpheus moment is Persephone's return, and nobody returns from the dead (K4); the five Titans and Briareus are freed (K3); the suitors stay, comic, with Mom in control (O3); Argos lives and joins you (O4); the legend castings are approved as a set (PG-31); the House of Night is built for 1.0 (PG-26, overriding K8's stretch). **Every other decision below takes its recommendation** (the user: "Take the recommendations"). Any can still be changed later.
+
 The three epics each end with their own list: LABORS (LB1–LB9), UNDERWORLD (K1–K8) and ODYSSEY (O1–O9). These are the post-game's frame:
 
 - **P1. What 1.0 means.** 1.0 is the release with the post-game's core (recommended), and the story-complete build becomes 0.9. Or keep PITCH's meaning, and the post-game ships as a 1.x update.
