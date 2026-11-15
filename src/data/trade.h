@@ -1299,6 +1299,31 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_ONOTIS,
         .level = 19,                         // SCRIPT.md: Galanthis is Lv 19
+    },
+
+    // Ichor: Euphorion is writing a tragedy for the Dionysia at Thyrsa, and his
+    // Pithound growls at every line. He'd rather read it to a gentler audience:
+    // bees, which only sting at the end (design/phase2/SCRIPT.md, Part 2,
+    // Euphorion's house). The dog is called Critic, and was right about everything.
+    // ICHOR_STUB_AETHOS_DEX: SPECIES_PITHOUND and SPECIES_MELIBEE are stand-ins
+    // until the Aethos dex lands. abilityNum 2 is the hidden-ability slot:
+    // Prankster on the real Pithound; the stand-in gets its own hidden ability.
+    [INGAME_TRADE_ICHOR_CRITIC] =
+    {
+        .nickname = _("CRITIC"),
+        .species = SPECIES_PITHOUND,
+        .ivs = {20, 24, 14, 22, 18, 20},
+        .abilityNum = 2,
+        .otId = 52411,
+        .conditions = {5, 5, 5, 30, 5},
+        .personality = 0x7E1,
+        .heldItem = ITEM_TWISTED_SPOON,
+        .mailNum = -1,
+        .otName = _("EUPHOR"),               // a mon keeps 7 letters of its OT: Euphorion, cut short
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_MELIBEE,
+        .level = 21,                         // SCRIPT.md: Critic is Lv 21
     }
 };
 

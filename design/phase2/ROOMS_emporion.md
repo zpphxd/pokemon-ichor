@@ -289,7 +289,7 @@ Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table;
   0 ########
   1 ####4#5#
   2 #3##...6
-  3 ..2.....
+  3 ...2....
   4 ##....##
   5 ##....##
   6 .......#
@@ -299,7 +299,7 @@ Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table;
 | # | Kind | Tile | Read from | What |
 |---|---|---|---|---|
 | 1 | warp | (3,7), (4,7) |  | the stair door down to the yard (south-arrow mat) |
-| 2 | npc | (2,3) | faces north | Penelopeia, at her loom |
+| 2 | npc | (3,3) | faces west | Penelopeia, beside her loom |
 | 3 | bg | (1,2) | (1,3) facing north | the loom and its shroud |
 | 4 | bg | (4,1) | (4,2) facing north | the window on the sea |
 | 5 | bg | (6,1) | (6,2) facing north | her husband's oar |

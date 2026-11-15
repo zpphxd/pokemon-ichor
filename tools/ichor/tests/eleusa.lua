@@ -73,6 +73,10 @@ local function flash() return emu:read8(L.sb1() + S.OFF_SB1_FLASH) end
 local function village()
   L.setBeat("village", false)
   warpTo(S.MAP_ELEUSA, 1, 25)
+  -- a repel for the walk round the village: the wheat's wild Pokemon are
+  -- wheat()'s to meet, and one jumping out on the way to a person can leave
+  -- the talk that follows pressing A into nothing
+  L.setVar(S.VAR_REPEL_STEP_COUNT, 250)
   expect(L.mapMusic() == S.MUS_ELEUSA, "Eleusa plays MUS_ICHOR_ELEUSA")
   L.shot("west_gate")
   -- everyone in the village
@@ -97,6 +101,7 @@ end
 
 local function doors()
   L.setBeat("doors", false)
+  L.setVar(S.VAR_REPEL_STEP_COUNT, 250)
   for _, m in ipairs({ "MAP_E_ASCLEPEION", "MAP_E_AGORA", "MAP_E_KELEOS", "MAP_E_GRANARY",
                        "MAP_E_POETS", "MAP_E_FARMHOUSE" }) do
     L.useWarp(S[m])

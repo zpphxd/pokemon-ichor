@@ -708,10 +708,10 @@
     {
       "id": "LAYOUT_ELEUSA_VILLAGE_ASCLEPEION",
       "name": "EleusaVillage_Asclepeion_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 17,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Civic",
       "border_filepath": "data/layouts/EleusaVillage_Asclepeion/border.bin",
       "blockdata_filepath": "data/layouts/EleusaVillage_Asclepeion/map.bin",
       "layout_version": "emerald"
@@ -719,10 +719,10 @@
     {
       "id": "LAYOUT_ELEUSA_VILLAGE_AGORA",
       "name": "EleusaVillage_Agora_Layout",
-      "width": 10,
+      "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Limen",
       "border_filepath": "data/layouts/EleusaVillage_Agora/border.bin",
       "blockdata_filepath": "data/layouts/EleusaVillage_Agora/map.bin",
       "layout_version": "emerald"
@@ -730,10 +730,10 @@
     {
       "id": "LAYOUT_ELEUSA_VILLAGE_HOUSE_OF_KELEOS",
       "name": "EleusaVillage_HouseOfKeleos_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 15,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Domos",
       "border_filepath": "data/layouts/EleusaVillage_HouseOfKeleos/border.bin",
       "blockdata_filepath": "data/layouts/EleusaVillage_HouseOfKeleos/map.bin",
       "layout_version": "emerald"
@@ -741,10 +741,10 @@
     {
       "id": "LAYOUT_ELEUSA_VILLAGE_FARMHOUSE",
       "name": "EleusaVillage_Farmhouse_Layout",
-      "width": 10,
+      "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Domos",
       "border_filepath": "data/layouts/EleusaVillage_Farmhouse/border.bin",
       "blockdata_filepath": "data/layouts/EleusaVillage_Farmhouse/map.bin",
       "layout_version": "emerald"
@@ -752,10 +752,10 @@
     {
       "id": "LAYOUT_ELEUSA_VILLAGE_GRANARY_HOUSE",
       "name": "EleusaVillage_GranaryHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 13,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Limen",
       "border_filepath": "data/layouts/EleusaVillage_GranaryHouse/border.bin",
       "blockdata_filepath": "data/layouts/EleusaVillage_GranaryHouse/map.bin",
       "layout_version": "emerald"
@@ -763,10 +763,10 @@
     {
       "id": "LAYOUT_ELEUSA_VILLAGE_POETS_HOUSE",
       "name": "EleusaVillage_PoetsHouse_Layout",
-      "width": 10,
+      "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Limen",
       "border_filepath": "data/layouts/EleusaVillage_PoetsHouse/border.bin",
       "blockdata_filepath": "data/layouts/EleusaVillage_PoetsHouse/map.bin",
       "layout_version": "emerald"

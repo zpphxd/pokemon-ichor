@@ -1,1 +1,63 @@
+// Dysaules's farmhouse (design/phase2/SCRIPT.md, Part 2, "Eleusa interiors"):
+// Theano, Dysaules's wife. Dysaules himself is out at the Rharian field,
+// staring at it. Room: tools/ichor/maps/eleusa_rooms.py ("farmhouse"), a farm
+// kitchen on domos. The barn doors are the mat at (4..5, 7), warp 0, back to
+// MAP_ELEUSA_VILLAGE's warp 6 (the first of the barn doors' two).
+//
+// Theano gives TM09 Bullet Seed: FLAG_ICHOR_GOT_TM_BULLET_SEED. The house's
+// cat is a Galekit (the Greek mouser was a weasel), asleep on a sack (9, 5).
+
 mapscripts EleusaVillage_Farmhouse_MapScripts {}
+
+text EleusaVillage_Farmhouse_Text_NameTheano { "THEANO" }
+text EleusaVillage_Farmhouse_Text_NameGalekit { "GALEKIT" }
+
+script EleusaVillage_Farmhouse_EventScript_Theano {
+    lock
+    faceplayer
+    if (!flag(FLAG_ICHOR_GOT_TM_BULLET_SEED)) {
+        setspeaker(EleusaVillage_Farmhouse_Text_NameTheano)
+        msgbox(format("He's at the field again, isn't he. Staring at it.\p"
+                      "Here. A Grass technique. Take it, before he teaches it to the wheat."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_TM09)
+        if (var(VAR_RESULT) == FALSE) {
+            setspeaker(EleusaVillage_Farmhouse_Text_NameTheano)
+            msgbox(format("No room? Then come back for it. It'll keep. Unlike him."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_TM_BULLET_SEED)
+    }
+    setspeaker(EleusaVillage_Farmhouse_Text_NameTheano)
+    msgbox(format("Twenty years married.\p"
+                  "I've never seen him look at me the way he looks at that field.\p"
+                  "I've made my peace with it. The field's very handsome."))
+    release
+}
+
+script EleusaVillage_Farmhouse_EventScript_Galekit {
+    lock
+    playmoncry(SPECIES_GALEKIT, CRY_MODE_NORMAL)
+    setspeaker(EleusaVillage_Farmhouse_Text_NameGalekit)
+    msgbox(format("…Mrr."))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The house's Galekit, asleep on a sack of barley. Not a mouse in the place. It has earned the sack."))
+    release
+}
+
+script EleusaVillage_Farmhouse_EventScript_Stool {
+    msgbox(format("A stool under the window that faces the Rharian field, worn into a Dysaules-shaped dip."),
+           MSGBOX_SIGN)
+}
+
+script EleusaVillage_Farmhouse_EventScript_SeedJars {
+    msgbox(format("Seed jars along the wall, sealed with wax. One has the goddess's sign on it: seed for the Rharian field."),
+           MSGBOX_SIGN)
+}
+
+script EleusaVillage_Farmhouse_EventScript_Hearth {
+    msgbox(format("Barley porridge on the fire. A bowl is set aside for when he remembers to come home."),
+           MSGBOX_SIGN)
+}

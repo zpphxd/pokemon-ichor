@@ -26,6 +26,7 @@ enum InGameTradeID
     INGAME_TRADE_ICHOR_STATER, // Pheidon's Chelonet, for a Karkipool (Aegina, the mint)
     INGAME_TRADE_ICHOR_SOCRATES, // Thaletas's Narkeray, for an Onotis (Emporion, the Deigma)
     INGAME_TRADE_ICHOR_GALANTHIS, // Xenokles's Gelasable, for an Onotis (Route 5, the inn)
+    INGAME_TRADE_ICHOR_CRITIC, // Euphorion's Pithound, for a Melibee (Eleusa, Euphorion's house)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

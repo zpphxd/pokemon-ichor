@@ -216,7 +216,8 @@ SHARED_OIKIA = ["window", "niche", "herbs", "jar_shelf", "honey_shelf", "kline",
                 "klismos_l", "stool", "table", "table_round", "desk", "oars", "scrolls", "chest",
                 "loom", "altar", "trident", "nets", "klepsydra", "kalathos", "amphora",
                 "amphora_plain", "pithos", "pots", "hearth", "soot", "myrtle", "fish_basket",
-                "knucklebones", "lampstand", "column", "mat", "stairs_down_wood", "boat"]
+                "knucklebones", "lampstand", "column", "mat", "stairs_down_wood", "boat",
+                "mortar", "niche_horse"]          # these two for Eleusa's rooms (eleusa_rooms.py)
 for _name in SHARED_OIKIA:
     STAMPS[_name] = dict(O.STAMPS[_name], source="oikia")
 for _name in ("bench", "scales", "hearth_floor"):
@@ -1425,4 +1426,25 @@ def _shed_doors():
 
 stamp("shed_doors", "wood", _shed_doors(), 2, 2,
       note="the great double doors out to the shipsheds, barred from inside")
+
+
+# ===========================================================================
+# Eleusa's rooms (tools/ichor/maps/eleusa_rooms.py, batch 4). No new art: each
+# is an existing piece with a different behavior, so it costs metatiles, never
+# tiles.
+# ===========================================================================
+
+# The Agora stall's counter: "a door laid across two barrels". oikia's long
+# table, with its bread, jug and olives for sale, is the nearest board on
+# legs; as a counter, the stallkeeper is talked to across it.
+STAMPS["counter_plank"] = dict(STAMPS["table"], behavior={(0, 0): "MB_COUNTER", (1, 0): "MB_COUNTER"},
+                               note="the stall's counter, a board on legs with bread, a jug and olives on it; "
+                                    "talked across (oikia's table, as MB_COUNTER)",
+                               source="limen")
+
+# The granary's way down to Sitokles's grain pit: oikia's timber stairwell
+# without its warp, since the pit isn't a map.
+STAMPS["pit_stairs"] = dict(STAMPS["stairs_down_wood"], walk=set(), behavior={},
+                            note="the timber steps down to the grain pit (oikia's stairwell, no warp)",
+                            source="limen")
 

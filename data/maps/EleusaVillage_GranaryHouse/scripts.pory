@@ -1,1 +1,63 @@
+// The granary-keeper's house (design/phase2/SCRIPT.md, Part 2, "Eleusa
+// interiors"): Sitokles, keeper of the sanctuary's granaries. Half house, half
+// storeroom. Room: tools/ichor/maps/eleusa_rooms.py ("granary"), on limen. The
+// barn doors are the mat at (4..5, 8), warp 0, back to MAP_ELEUSA_VILLAGE's
+// warp 3 (the first of the barn doors' two).
+//
+// Lore first; once the cold iron has been taken from under Eleusa
+// (FLAG_ICHOR_FRAGMENT_STOLEN, which beat 23, batch 5, sets), the Amulet Coin
+// his family kept beside it: FLAG_ICHOR_GOT_AMULET_COIN. The Revive under his
+// bed is a hidden item (FLAG_ICHOR_HIDDEN_ELEUSA_GRANARY_REVIVE).
+
 mapscripts EleusaVillage_GranaryHouse_MapScripts {}
+
+text EleusaVillage_GranaryHouse_Text_NameSitokles { "SITOKLES" }
+
+script EleusaVillage_GranaryHouse_EventScript_Sitokles {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_GranaryHouse_Text_NameSitokles)
+    if (!flag(FLAG_ICHOR_FRAGMENT_STOLEN)) {
+        msgbox(format("Every city in Aethos sends Eleusa a share of its harvest. I count it.\p"
+                      "My grandmother said there's cold iron under the grain.\p"
+                      "You never plant over cold iron, she said. You keep it."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_GOT_AMULET_COIN)) {
+        msgbox(format("The iron's gone. I felt it go. Like a tooth.\p"
+                      "My family kept this beside it, for luck. To keep the luck in, I suppose.\p"
+                      "No sense keeping it now. Take it. Ploutos hands out luck blind anyway."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_AMULET_COIN)
+        if (var(VAR_RESULT) == FALSE) {
+            setspeaker(EleusaVillage_GranaryHouse_Text_NameSitokles)
+            msgbox(format("Full up? I know the feeling. It'll be here."))
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_AMULET_COIN)
+        release
+        end
+    }
+    msgbox(format("The grain doesn't care. Grain never cares. That's what I love about it."))
+    release
+}
+
+script EleusaVillage_GranaryHouse_EventScript_Painting {
+    msgbox(format("A painting of a girl picking flowers. Behind her, the ground splits open."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_GranaryHouse_EventScript_SeedCorn {
+    msgbox(format("Seed-corn, kept back from the harvest. Next year's field, asleep in a jar."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_GranaryHouse_EventScript_TallyBoard {
+    msgbox(format("A tally board: every city in Aethos, with its first fruits scratched beside it. A few cities are behind."),
+           MSGBOX_SIGN)
+}
+
+script EleusaVillage_GranaryHouse_EventScript_GrainPit {
+    msgbox(format("Steps down to Sitokles's own grain pit. Cool air comes up, and the smell of barley."),
+           MSGBOX_SIGN)
+}
