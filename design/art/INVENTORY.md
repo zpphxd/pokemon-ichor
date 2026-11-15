@@ -94,6 +94,24 @@ sources, no additions or removals and 20,037 unchanged sources. These are
 coverage counts, not a declaration that the unchanged sprites are finished;
 the ball owner's assets remain untouched.
 
+**Coordinator effects integration verification:** source checkpoint
+`b5ca00aa58` was applied alone as `70ff39b430`, retaining the earlier
+coordinator ledger and both already-landed equivalent checkpoints.
+`make -f make_tools.mk`, `make -j$(sysctl -n hw.ncpu)`, original smoke
+(9 captures), all 16 source-exact/native PNG checks and 19 sprite-audit
+regressions pass. Both the preserved post-Pokemon baseline and the combined
+ROM pass `bash tools/ichor/tests/elaia_effects.sh` (538 checks / 229 captures
+each). The integrated ROM uses 23,041,920 bytes (68.67%), leaving
+10,512,512 bytes. Native effect/emotion artwork and rebuilt follower,
+arrow, relic-state and introductory Smoliv captures were visually reviewed;
+the bounded effect artwork is accepted. Fishing/surf/relic fixtures remain
+rendering evidence, not controller/mount eligibility approval. The transient
+white follower in the grass-step capture also exists in the baseline and
+is not attributed to this redraw. Full source reconciliation now reports
+129 changed, no added/removed and 20,020 unchanged image/palette sources.
+All retained groups above remain in scope; neither these counts nor this
+checkpoint declare every town sprite finished.
+
 - **Audited against:** the remnants branch, which is `main` at `25526ae5dc` plus that pass's fixes (`design/phase1/UI_remnants.md`), with a clean `make` (devkitARM 16.1, Emerald build). Each row was checked by looking: in game for the screens (the slice playthrough, its side checks and gallery, and a screen harness), and in the repo for the rest.
 - **Sizes** were measured at `c82f1634f7` from the linker map, `pokeemerald.map`, and `nm -S` on `pokeemerald.elf`, and have not been re-measured; only the ROM total below is current. Unsized assembly labels are sized by the gap to the next symbol. KiB means 1024 bytes. Sizes are good to a few percent, and the groupings are by symbol name and source file.
 - **Update rule:** when a batch merges, flip its rows from **In progress (batch)** to **Greek** and fix the counts in the summary.
