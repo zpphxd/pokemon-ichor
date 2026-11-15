@@ -1087,3 +1087,4 @@ gSpecials::
 	def_special Ichor_BuildThreadReturnMenu
 	def_special Ichor_ThreadReturnTo
 	def_special Ichor_TurnDial
+	def_special Ichor_ChooseRotomForAppliance, waitstate=1

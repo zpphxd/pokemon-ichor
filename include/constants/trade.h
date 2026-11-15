@@ -23,6 +23,9 @@ enum InGameTradeID
     INGAME_TRADE_SEEL,
     // Ichor
     INGAME_TRADE_ICHOR_ARION, // Kimon's Finizen, for a Wooloo (Elaia, Glykera's house)
+    // Ichor: the Oikoumene, the Black Sea (design/oikoumene/ROOMS_pontos.md)
+    INGAME_TRADE_ICHOR_PHASIANOS, // Ixos's Unfezant, for a Pidgeot (Salmydessos, the bird-catcher's)
+    INGAME_TRADE_ICHOR_TIGRIS,    // Byssa's Persian, for a Liepard (Aia, the linen-weaver's)
 };
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon

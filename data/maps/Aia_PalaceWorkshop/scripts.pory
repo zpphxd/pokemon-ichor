@@ -1,1 +1,133 @@
+// The palace workshop, Aia: Hephaestus's self-moving works (design/OIKOUMENE.md
+// §4.3). Room: tools/ichor/maps/pontos_rooms.py ("workshop"). The door mat is
+// (6..7, 8), warp 0, back to MAP_AIA warp 4.
+//
+// Tekton (10,4), the palace's tinker, oils the works: a golden maid that turns
+// her head (Iliad 18.417), tripods that roll by themselves (Iliad 18.373), a
+// bull's head in the wall. A Rotom (7,5) is loose among them.
+//
+// Rotom's five forms change here, at five of the works. Each one's bg event
+// says what it is, then Appliance offers to let a Rotom in: the special
+// Ichor_ChooseRotomForAppliance (src/party_menu.c) opens the party menu and
+// runs the Rotom Catalog's own form change, animation and move teaching on the
+// Rotom picked, with VAR_0x8005 the work's Catalog index:
+//   1 the fire-jar (Heat, Overheat)      2 the wash-basin (Wash, Hydro Pump)
+//   3 the cold krater (Frost, Blizzard)  4 the fan (Fan, Air Slash)
+//   5 the reaping-sledge (Mow, Leaf Storm)
+// A Rotom already in that work's form comes back out (plain Rotom, Thunder
+// Shock), as in the games.
+
 mapscripts Aia_PalaceWorkshop_MapScripts {}
+
+text Aia_PalaceWorkshop_Text_NameTekton { "TEKTON" }
+
+script Aia_PalaceWorkshop_EventScript_Tekton {
+    lock
+    faceplayer
+    setspeaker(Aia_PalaceWorkshop_Text_NameTekton)
+    call(Aia_PalaceWorkshop_EventScript_HasRotom)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("That's a Rotom you've got. I can smell the thunder on it.\p"
+                      "Let it into any of the works. The fire-jar, the basin, the krater, "
+                      "the fan, the sledge. It'll know what to do.\p"
+                      "It comes back out the way it went in. Same work, second time."))
+        release
+        end
+    }
+    msgbox(format("Don't touch the maid. She doesn't like it. Neither do I.\p"
+                  "Hephaestus built all this for the king, back when gods came to dinner.\p"
+                  "The tripods used to roll off to the gods' feasts by themselves. Now they just roll.\p"
+                  "Something lives in the works. Little lightning. It gets in and makes them go.\p"
+                  "If you ever catch one, a Rotom, bring it here. You'll see."))
+    release
+}
+
+// VAR_RESULT = TRUE if any Rotom, in any form, is in the party.
+script Aia_PalaceWorkshop_EventScript_HasRotom {
+    checkspecies(SPECIES_ROTOM)
+    if (var(VAR_RESULT) == TRUE) { return }
+    checkspecies(SPECIES_ROTOM_HEAT)
+    if (var(VAR_RESULT) == TRUE) { return }
+    checkspecies(SPECIES_ROTOM_WASH)
+    if (var(VAR_RESULT) == TRUE) { return }
+    checkspecies(SPECIES_ROTOM_FROST)
+    if (var(VAR_RESULT) == TRUE) { return }
+    checkspecies(SPECIES_ROTOM_FAN)
+    if (var(VAR_RESULT) == TRUE) { return }
+    checkspecies(SPECIES_ROTOM_MOW)
+    return
+}
+
+script Aia_PalaceWorkshop_EventScript_Appliance {
+    call(Aia_PalaceWorkshop_EventScript_HasRotom)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("It's quite still. It seems to be waiting for something to get into it."))
+        releaseall
+        end
+    }
+    msgbox(format("Let a Rotom into it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        releaseall
+        end
+    }
+    special(Ichor_ChooseRotomForAppliance)
+    waitstate
+    releaseall
+}
+
+script Aia_PalaceWorkshop_EventScript_FireJar {
+    lockall
+    msgbox(format("The fire-jar. Its coals have never gone out, and nobody feeds them."))
+    setvar(VAR_0x8005, 1)
+    goto(Aia_PalaceWorkshop_EventScript_Appliance)
+}
+
+script Aia_PalaceWorkshop_EventScript_WashBasin {
+    lockall
+    msgbox(format("The wash-basin. Its water stays clean, however many hands go into it."))
+    setvar(VAR_0x8005, 2)
+    goto(Aia_PalaceWorkshop_EventScript_Appliance)
+}
+
+script Aia_PalaceWorkshop_EventScript_ColdKrater {
+    lockall
+    msgbox(format("The cold krater. Wine goes in warm and comes out with ice in it."))
+    setvar(VAR_0x8005, 3)
+    goto(Aia_PalaceWorkshop_EventScript_Appliance)
+}
+
+script Aia_PalaceWorkshop_EventScript_Fan {
+    lockall
+    msgbox(format("The fan. It turns by itself, slowly, whenever the room gets hot."))
+    setvar(VAR_0x8005, 4)
+    goto(Aia_PalaceWorkshop_EventScript_Appliance)
+}
+
+script Aia_PalaceWorkshop_EventScript_Sledge {
+    lockall
+    msgbox(format("The reaping-sledge. Point it at a field and it cuts it, all by itself."))
+    setvar(VAR_0x8005, 5)
+    goto(Aia_PalaceWorkshop_EventScript_Appliance)
+}
+
+script Aia_PalaceWorkshop_EventScript_Rotom {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ROTOM, CRY_MODE_NORMAL)
+    msgbox(format("Rotom zipped through the wash-basin and out again. It looks pleased with itself."))
+    waitmoncry
+    release
+}
+
+script Aia_PalaceWorkshop_EventScript_GoldenMaid {
+    msgbox(format("A maid of gold, made like a living girl. Her head turns to follow you."), MSGBOX_SIGN)
+}
+
+script Aia_PalaceWorkshop_EventScript_Tripod {
+    msgbox(format("A bronze tripod on gold wheels. Every so often it rolls an inch by itself."), MSGBOX_SIGN)
+}
+
+script Aia_PalaceWorkshop_EventScript_Workbench {
+    msgbox(format("Tekton's bench. A tripod lies on it with one wheel on, and a hammer beside it."),
+           MSGBOX_SIGN)
+}

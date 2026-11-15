@@ -1,1 +1,61 @@
+// The Agora, Aia: a Colchian timber market hall. Room:
+// tools/ichor/maps/pontos_rooms.py ("agora"). The door mat is (5..6, 8), warp
+// 0, back to MAP_AIA warp 1.
+//
+// Korax keeps the stall (9,2), with the Pontic honey on the shelf behind him:
+// the honey that made Xenophon's soldiers drunk on the march (Anabasis 4.8.20).
+// He sells it, and tells everyone not to eat it. On the west wall, a fleece
+// stretched on a frame with Phasis gold dust in the wool (Strabo 11.2.19).
+
 mapscripts Aia_Agora_MapScripts {}
+
+text Aia_Agora_Text_NameKorax { "KORAX" }
+
+script Aia_Agora_EventScript_Korax {
+    lock
+    faceplayer
+    setspeaker(Aia_Agora_Text_NameKorax)
+    message(format("Linen, pitch, wax, honey. Gold dust, if you're lucky. Buying?"))
+    waitmessage
+    pokemart(Aia_Agora_Mart)
+    setspeaker(Aia_Agora_Text_NameKorax)
+    msgbox(format("Don't eat the honey. Sell it, bait a trap with it. Don't eat it."))
+    release
+}
+
+mart Aia_Agora_Mart {
+    ITEM_ULTRA_BALL
+    ITEM_GREAT_BALL
+    ITEM_FULL_RESTORE
+    ITEM_MAX_POTION
+    ITEM_HYPER_POTION
+    ITEM_FULL_HEAL
+    ITEM_REVIVE
+    ITEM_MAX_REPEL
+    ITEM_HONEY
+}
+
+script Aia_Agora_EventScript_FleeceMan {
+    msgbox(format("Up in the hills they lay fleeces in the streams. The water brings down gold dust.\p"
+                  "The wool catches it. You dry the fleece, and comb out the gold.\p"
+                  "Some Greek saw one once and went home and made a song of it."), MSGBOX_NPC)
+}
+
+script Aia_Agora_EventScript_Sailor {
+    msgbox(format("Pontic honey, half the price of Attic!\p"
+                  "He keeps telling me not to eat it. Funny thing for a man to say who's selling it."),
+           MSGBOX_NPC)
+}
+
+script Aia_Agora_EventScript_Fleece {
+    msgbox(format("A fleece stretched on a frame to dry. Flecks of gold glint in the wool."), MSGBOX_SIGN)
+}
+
+script Aia_Agora_EventScript_Pheasants {
+    msgbox(format("Two pheasants hung by the feet. The Greeks named the bird for the river here."),
+           MSGBOX_SIGN)
+}
+
+script Aia_Agora_EventScript_Linen {
+    msgbox(format("Colchian linen, folded and stacked. It's as fine as anything from Egypt."), MSGBOX_SIGN)
+}

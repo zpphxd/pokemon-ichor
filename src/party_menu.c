@@ -6904,6 +6904,44 @@ bool32 TryMultichoiceFormChange(u8 taskId)
     }
 }
 
+// Ichor: Aia's palace workshop (design/oikoumene/ROOMS_pontos.md). Hephaestus's
+// self-moving works take a Rotom the way the Rotom Catalog's appliances do, so
+// the change runs through the Catalog's own form table, animation and move
+// teaching. The script puts the work's Catalog index in VAR_0x8005 (1 the
+// fire-jar ... 5 the reaping-sledge) and calls Ichor_ChooseRotomForAppliance;
+// a Rotom already in that work's form comes back out of it (index 0, the bulb).
+// On return VAR_0x8004 holds the slot picked, or PARTY_NOTHING_CHOSEN.
+#if P_FAMILY_ROTOM
+static void ItemUseCB_IchorRotomAppliance(u8 taskId, TaskFunc task)
+{
+    static const u16 sForms[] = {SPECIES_ROTOM, SPECIES_ROTOM_HEAT, SPECIES_ROTOM_WASH,
+                                 SPECIES_ROTOM_FROST, SPECIES_ROTOM_FAN, SPECIES_ROTOM_MOW};
+    static const u16 sMoves[] = {ROTOM_BASE_MOVE, ROTOM_HEAT_MOVE, ROTOM_WASH_MOVE,
+                                 ROTOM_FROST_MOVE, ROTOM_FAN_MOVE, ROTOM_MOW_MOVE};
+    u32 choice = gSpecialVar_0x8005 < ARRAY_COUNT(sForms) ? gSpecialVar_0x8005 : 0;
+
+    gSpecialVar_0x8004 = gPartyMenu.slotId;
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_SPECIES) == sForms[choice])
+        choice = 0;
+    gSpecialVar_Result = choice;
+    gSpecialVar_0x8000 = sMoves[choice];
+    TryMultichoiceFormChange(taskId);
+}
+#endif
+
+void Ichor_ChooseRotomForAppliance(void)
+{
+    gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
+#if P_FAMILY_ROTOM
+    gSpecialVar_ItemId = ITEM_ROTOM_CATALOG;
+    gItemUseCB = ItemUseCB_IchorRotomAppliance;
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_USE_ITEM, FALSE,
+                  PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+#else
+    ScriptContext_Enable();
+#endif
+}
+
 static void CursorCb_CatalogBulb(u8 taskId)
 {
     gSpecialVar_Result = 0;

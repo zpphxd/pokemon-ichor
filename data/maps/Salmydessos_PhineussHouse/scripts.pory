@@ -1,1 +1,104 @@
-mapscripts Salmydessos_PhineussHouse_MapScripts {}
+// Phineus's house, Salmydessos (design/OIKOUMENE.md §4.3). Room:
+// tools/ichor/maps/pontos_rooms.py ("phineus"). The door mat is (4..5, 7),
+// warp 0, back to MAP_SALMYDESSOS warp 0.
+//
+// The blind seer, who told men too much of the gods' plans. Zeus took his eyes
+// and sent the Harpies to snatch his food, until the Argonauts drove them off.
+// Now there is nothing more to see, and nothing to snatch. He stands (6,4) at
+// the end of his bare table, and gives you the dove that once led the Argo
+// through the Clashing Rocks: FLAG_ICHOR_GOT_PHINEUS_DOVE. The dove is a key
+// item only in name for now (ICHOR_STUB_LEGEND): the Rocks' side channel is
+// stretch, and the flag is what its passage will check. Once it's given, the
+// cage by the window hangs empty (EmptyCage, written by chalkeon_build.py).
+
+mapscripts Salmydessos_PhineussHouse_MapScripts {
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_GOT_PHINEUS_DOVE)) {
+            call(Salmydessos_PhineussHouse_EventScript_EmptyCage)
+        }
+    }
+}
+
+text Salmydessos_PhineussHouse_Text_NamePhineus { "PHINEUS" }
+
+script Salmydessos_PhineussHouse_EventScript_Phineus {
+    lock
+    faceplayer
+    setspeaker(Salmydessos_PhineussHouse_Text_NamePhineus)
+    if (flag(FLAG_ICHOR_GOT_PHINEUS_DOVE)) {
+        if (flag(FLAG_ICHOR_EMBLEM_FLEECE)) {
+            msgbox(format("You've been to the palace. I can hear it on you. Bronze and smoke.\p"
+                          "Once I'd have known what the princess would do next.\p"
+                          "Now I just worry about her, like anybody else. It's restful."))
+        } else {
+            msgbox(format("I bought a stool. Forty years I ate standing, so I could run.\p"
+                          "Now I keep forgetting to sit down."))
+        }
+        release
+        end
+    }
+    msgbox(format("Footsteps. Not a Harpy, then. They never knocked either.\p"
+                  "The gods punished me for telling too much.\p"
+                  "Now there's nothing to tell, and the Harpies have gone.\p"
+                  "I miss them, oddly.\p"
+                  "You'll be going past the Rocks. Everybody asks me about the Rocks.\p"
+                  "I can't tell you if it'll work. That's new.\p"
+                  "I can tell you what worked once. Take the dove."))
+    // ICHOR_STUB_LEGEND: the dove is the Clashing Rocks' side-channel key, a
+    // flag until the passage is built (OIKOUMENE §4.3).
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_ICHOR_OBTAIN_KEY_ITEM)
+    message(format("{PLAYER} received the dove!"))
+    waitmessage
+    waitfanfare
+    setflag(FLAG_ICHOR_GOT_PHINEUS_DOVE)
+    call(Salmydessos_PhineussHouse_EventScript_EmptyCage)
+    special(DrawWholeMapView)
+    setspeaker(Salmydessos_PhineussHouse_Text_NamePhineus)
+    msgbox(format("Let her go before the Rocks, and row hard behind her.\p"
+                  "They'll take her tail feathers. Last time that was all they took."))
+    release
+}
+
+script Salmydessos_PhineussHouse_EventScript_DoveCage {
+    if (flag(FLAG_ICHOR_GOT_PHINEUS_DOVE)) {
+        msgbox(format("The cage is empty. One white feather is left on the floor of it."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A white dove in a wicker cage. It watches the shutters as if it knows what's past them."),
+               MSGBOX_SIGN)
+    }
+}
+
+script Salmydessos_PhineussHouse_EventScript_Shutters {
+    msgbox(format("The shutters are barred. Phineus has no use for the light."), MSGBOX_SIGN)
+}
+
+script Salmydessos_PhineussHouse_EventScript_ClawMarks {
+    msgbox(format("Claw marks, raked deep into the plaster.\p"
+                  "A dark feather is still stuck in the beam above them."), MSGBOX_SIGN)
+}
+
+script Salmydessos_PhineussHouse_EventScript_Table {
+    msgbox(format("A long table with nothing on it. The wood is scored with claw marks from end to end."),
+           MSGBOX_SIGN)
+}
+
+script Salmydessos_PhineussHouse_EventScript_Jars {
+    msgbox(format("Jars of grain and oil, full to the lids. Someone has scratched “MINE” on every one."),
+           MSGBOX_SIGN)
+}
+
+script Salmydessos_PhineussHouse_EventScript_Stool {
+    msgbox(format("A new stool. Nobody has sat on it yet."), MSGBOX_SIGN)
+}
+
+// chalkeon_build: begin generated
+
+// Written by tools/ichor/art/chalkeon_build.py; don't edit by hand.
+
+script Salmydessos_PhineussHouse_EventScript_EmptyCage {
+    setmetatile(3, 1, 0x2F8, TRUE)
+    return
+}
+
+// chalkeon_build: end generated
