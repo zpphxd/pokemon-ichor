@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/arkadia/porytiles_bin/metatile_attributes.bin": "fef14ad8232423ca7cbc155b08a0aa92",
-  "data/tilesets/secondary/arkadia/porytiles_bin/metatiles.bin": "2a3c2d3c550547b10e85d11e49ae9ac7",
+  "data/tilesets/secondary/arkadia/porytiles_bin/metatile_attributes.bin": "d57e9469116932d5cbcc7ed61deda244",
+  "data/tilesets/secondary/arkadia/porytiles_bin/metatiles.bin": "fff4e72100257eaa2f66aabc53c2cc5a",
   "data/tilesets/secondary/arkadia/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/arkadia/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/arkadia/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/arkadia/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/arkadia/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/arkadia/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/arkadia/porytiles_bin/tiles.png": "d2684d5878a5be0679231e92edb24340",
-  "data/tilesets/secondary/arkadia/porytiles_src/attributes.csv": "aeca08b3f028f591f864fdf09c2d1042",
-  "data/tilesets/secondary/arkadia/porytiles_src/bottom.png": "6b61793b77b44f0e80eda15914f094a3",
-  "data/tilesets/secondary/arkadia/porytiles_src/middle.png": "588596d9b77a3ff13c1e2e40634a050b",
-  "data/tilesets/secondary/arkadia/porytiles_src/top.png": "ddde207e74911625263db07af69f51b2"
+  "data/tilesets/secondary/arkadia/porytiles_bin/tiles.png": "e0f1ae1054a2015463beffeefd514abc",
+  "data/tilesets/secondary/arkadia/porytiles_src/attributes.csv": "f518b4f3945a32bb2f25706ac0c27d80",
+  "data/tilesets/secondary/arkadia/porytiles_src/bottom.png": "d0ec7e232bdcbbd46ddab7c07e6d081a",
+  "data/tilesets/secondary/arkadia/porytiles_src/middle.png": "53cb4905e9a50b06dd2101122bd321eb",
+  "data/tilesets/secondary/arkadia/porytiles_src/top.png": "3099fd787dd38419296e067fb4389ee0"
 }

@@ -215,7 +215,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Arkadia_EventScript_WestGuard",
-      "flag": "FLAG_SYS_GAME_CLEAR"
+      "flag": "FLAG_ICHOR_POSTGAME"
     },
     {
       "local_id": "LOCALID_ARKADIA_WEST_GUARD_2",
@@ -229,7 +229,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Arkadia_EventScript_WestGuard",
-      "flag": "FLAG_SYS_GAME_CLEAR"
+      "flag": "FLAG_ICHOR_POSTGAME"
     },
     {
       "local_id": "LOCALID_ARKADIA_KID_1",
@@ -463,7 +463,7 @@
     {
       "type": "hidden_item",
       "x": 31,
-      "y": 9,
+      "y": 10,
       "elevation": 3,
       "item": "ITEM_SILVER_POWDER",
       "flag": "FLAG_ICHOR_HIDDEN_ARKADIA_SILVER_POWDER"

@@ -393,9 +393,9 @@ def arkadia_events():
     o("LOCALID_ARKADIA_HOPLITE", "OBJ_EVENT_GFX_ICHOR_HOPLITE", 13, 40, S + "Hoplite",
       "MOVEMENT_TYPE_FACE_UP")
     o("LOCALID_ARKADIA_WEST_GUARD_1", "OBJ_EVENT_GFX_ICHOR_HOPLITE", 5, 36, S + "WestGuard",
-      "MOVEMENT_TYPE_FACE_RIGHT", "FLAG_SYS_GAME_CLEAR")
+      "MOVEMENT_TYPE_FACE_RIGHT", "FLAG_ICHOR_POSTGAME")
     o("LOCALID_ARKADIA_WEST_GUARD_2", "OBJ_EVENT_GFX_ICHOR_HOPLITE", 5, 37, S + "WestGuard",
-      "MOVEMENT_TYPE_FACE_RIGHT", "FLAG_SYS_GAME_CLEAR")
+      "MOVEMENT_TYPE_FACE_RIGHT", "FLAG_ICHOR_POSTGAME")
     o("LOCALID_ARKADIA_KID_1", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 19, 6, S + "Kid1",
       "MOVEMENT_TYPE_FACE_DOWN", "FLAG_ICHOR_KROTOS_KID_1")
     o("LOCALID_ARKADIA_KID_2", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 21, 32, S + "Kid2",
@@ -421,7 +421,7 @@ def arkadia_events():
     b(34, 35, S + "DigSpot")
     b(34, 20, S + "TurnedEarth")
     for (x, y, item, flag) in ((21, 9, "ITEM_REVIVE", "FLAG_ICHOR_HIDDEN_ARKADIA_REVIVE"),
-                               (31, 9, "ITEM_SILVER_POWDER", "FLAG_ICHOR_HIDDEN_ARKADIA_SILVER_POWDER")):
+                               (31, 10, "ITEM_SILVER_POWDER", "FLAG_ICHOR_HIDDEN_ARKADIA_SILVER_POWDER")):
         hidden.append({"type": "hidden_item", "x": x, "y": y, "elevation": 3, "item": item,
                        "flag": flag})
     return {"object_events": obj, "warp_events": warp, "coord_events": trig,

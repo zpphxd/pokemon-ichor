@@ -84,7 +84,7 @@ def arkadia():
     p.rect(10, 30, 11, 34, "A")
     p.rect(40, 6, 41, 21, "A")
     p.rect(38, 6, 39, 7, "A")
-    p.rect(41, 26, 41, 37, "A")
+    p.rect(41, 31, 41, 37, "A")
     # the east road (Route 13): verges on rows 22 and 25
     p.rect(35, EAST_ROAD[0] - 1, 49, EAST_ROAD[1] + 1, ".")
     p.rect(35, EAST_ROAD[0], 49, EAST_ROAD[1], "=")
@@ -95,8 +95,11 @@ def arkadia():
     p.rect(0, WEST_ROAD[0], 14, WEST_ROAD[1], "=")
     # the Asclepeion's outcrop: the building stands against its south face, and
     # Pan's grotto opens in the face west of it
-    p.rect(10, 6, 18, 7, "R")
-    p.rect(10, 8, 12, 12, "R")
+    # Pan's grotto opens in the face west of it. Cypresses crowd its top.
+    p.rect(10, 6, 18, 6, "K")
+    p.rect(13, 7, 18, 7, "R")
+    p.rect(10, 7, 12, 11, "K")
+    p.rect(10, 12, 12, 12, "R")
     # the square: beaten earth, below the upper terrace (wall on row 12); the main
     # road runs on south through it to the lane along its foot (row 21)
     p.rect(12, 13, 33, 17, "=")
@@ -115,10 +118,11 @@ def arkadia():
     p.rect(17, 32, 23, 33, "f")
     p.rect(16, 24, 16, 33, "K")
     p.rect(15, 26, 15, 33, "K")
-    p.rect(24, 23, 26, 33, "K")
-    p.rect(27, 25, 27, 33, "K")
+    p.rect(26, 23, 27, 33, "K")
     p.rect(28, 22, 33, 26, "K")
-    p.rect(27, 23, 27, 24, "K")
+    # the main path runs on down between the hill and the falls to the temple road
+    p.rect(24, 22, 25, 33, "=")
+    p.rect(23, 22, 24, 22, "=")
     p.rect(28, 27, 33, 27, "R")
     p.rect(28, 28, 33, 33, "f")
     # the plunge pool
