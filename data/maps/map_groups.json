@@ -13,7 +13,8 @@
     "gMapGroup_IndoorKirrha",
     "gMapGroup_IndoorAigion",
     "gMapGroup_IndoorStyx",
-    "gMapGroup_IndoorArkadia"
+    "gMapGroup_IndoorArkadia",
+    "gMapGroup_IndoorAstyra"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ElaiaVillage",
@@ -45,7 +46,12 @@
     "Route12_CypressRoad",
     "Arkadia",
     "Arkadia_CypressWood",
-    "PoolOfMnemosyne"
+    "PoolOfMnemosyne",
+    "Astyra",
+    "Astyra_Kerameikos",
+    "Astyra_PaupersGraves",
+    "Astyra_Akropolis",
+    "Astyra_Phaleron"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -171,5 +177,25 @@
     "EleusaSanctum_B1F",
     "EleusaSanctum_B2F",
     "EleusaSanctum_B3F"
+  ],
+  "gMapGroup_IndoorAstyra": [
+    "SaltWell_1F",
+    "SaltWell_B1F",
+    "Astyra_Asclepeion",
+    "Astyra_Agora",
+    "Astyra_StoaOfTheArchon",
+    "Astyra_Library",
+    "Astyra_Lyceum",
+    "Astyra_Tavern",
+    "Astyra_PhaedonsHouse",
+    "Astyra_KephalosHouse",
+    "Astyra_LysimachosHouse",
+    "Astyra_ScribesHouse",
+    "Astyra_PraxagorasHouse",
+    "Astyra_SculptorsWorkshop",
+    "Astyra_WeaversHouse",
+    "Astyra_KerameikosPottery",
+    "Astyra_KerameikosLodge",
+    "Astyra_PhaleronNetLoft"
   ]
 }

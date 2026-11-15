@@ -1,0 +1,22 @@
+{
+  "id": "MAP_ASTYRA_PAUPERS_GRAVES",
+  "name": "Astyra_PaupersGraves",
+  "layout": "LAYOUT_ASTYRA_PAUPERS_GRAVES",
+  "music": "MUS_ICHOR_EMPORION",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_ASTYRA",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": [],
+  "ichor_kind": "town"
+}
