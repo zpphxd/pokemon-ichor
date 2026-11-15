@@ -93,14 +93,15 @@ From `tools/ichor/claim_ranges.md`: trainer ids **500–679**; bank flags **0x30
 | 1 | 0x300–0x32F | 0x480–0x487 | 500–509 |
 | 2 | 0x330–0x34F, 0x700–0x71F | 0x488–0x48F | 510–539 |
 | 3 | 0x350–0x36F, 0x720–0x75F | 0x490–0x49B | 540–569 |
-| 4–5 | 0x370–0x39F, 0x760–0x7AF | 0x49C–0x4AB | 570–629 |
-| 6 | 0x3A0–0x3B3, 0x7B0–0x7DF | 0x4AC–0x4B5 | 630–664 |
-| 7–8 | 0x3B4–0x3BF, 0x7E0–0x7FF | 0x4B6–0x4BF | 665–679 |
+| 4–5 | 0x370–0x39F, 0x760–0x7AF | 0x49C–0x4AB | 570–629, 1024–1103 |
+| 6 | 0x3A0–0x3B3, 0x7B0–0x7DF | 0x4AC–0x4B5 | 630–664, 1104–1173 |
+| 7–8 | 0x3B4–0x3BF, 0x7E0–0x7FF | 0x4B6–0x4BF | 665–679, 1174–1223 |
 
 **Flags: 448 bank flags in all** (the director's answer, 2026-11-14), against the epics' ~140 story flags, ~60 hide flags and the item balls. So still:
 - Per-epic state goes in `struct IchorEpics` (POSTGAME §6, ENGINE.md), not in flags.
 - Hide flags for people who come and go on one map use `FLAG_TEMP_*`, set in `ON_TRANSITION` from the real state (temp flags clear on every map load).
-- **Hidden items are the tight one:** 64 vanilla flags for ~130 maps. Put hidden items where they matter most; if a batch needs more, say so in its report and the build lead asks.
+- **Trainer ids: 380 in all** (the director, 2026-11-14): 500–679, plus **1024–1223** once hoenn-cut's raise of `MAX_TRAINERS_COUNT` to 1,536 is merged. Batches 1–3 stay in 500–569. §8's trainer rate isn't loosened for sea maps; size them tighter and class arenas as dungeons instead.
+- **Hidden items move to bank flags** when ichor-engine's change lands (approved, its top priority). Then claim hidden items from the batch's bank range like any flag. Until then, batch 1 uses its vanilla flags. That puts about 200 hidden items, ~140 story flags and the item balls all on the 448 bank flags, so count them per batch, and tell the build lead early if a batch runs over; the director will open the reserve.
 
 
 ---
