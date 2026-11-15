@@ -489,6 +489,11 @@ void Ichor_PutOutFlame(void)
     PutOutFlame();
 }
 
+// world-postgame's sailing flag, claimed on its branch; its own define wins once merged.
+#ifndef FLAG_ICHOR_ON_SHIP
+#define FLAG_ICHOR_ON_SHIP (FLAG_ICHOR_GENERAL_START + 0x302)
+#endif
+
 static bool32 IsRaining(void)
 {
     u32 weather = GetCurrentWeather();
@@ -505,7 +510,7 @@ bool32 Ichor_CarriedFlameStep(bool32 canTalk)
 
     if (!Ichor_IsCarryingFlame())
         return FALSE;
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && !FlagGet(FLAG_ICHOR_ON_SHIP)) // sailing isn't swimming
     {
         PutOutFlame();
         if (canTalk)

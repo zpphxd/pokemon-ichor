@@ -226,7 +226,7 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
 - **Relighting (the relay).** A brazier already lit with that fire gives a full budget the same way. Do it in the brazier's own script, after `call(EventScript_IchorBrazier)`: if its flag is set and `VAR_TEMP_3` is that kind (or any kind, if the brazier hands out its fire), call `Ichor_TakeFlame` again with the dry budget. Labor 2's burned pools work like this.
 - **A brazier that wants a named fire** checks `VAR_TEMP_3` itself, then `special(Ichor_PutOutFlame)` if the fire is spent on it.
 - **Each step burns one; in rain, two.** Rain means rain, downpour or a thunderstorm. Scripts always give the dry budget: SYSTEMS's 40 becomes 20 in rain. Passing 5 steps left: "The flame gutters." At 0: "The carried fire dies down to the torch's own flame."
-- **Water puts it out:** "The water puts out the carried fire." Surfing, which covers falling into water and the waterfall, does it on the next step. Dousing the Torch from the Ring puts it out silently.
+- **Water puts it out:** "The water puts out the carried fire." Surfing, which covers falling into water and the waterfall, does it on the next step. Sailing doesn't: aboard the Euploia (world-postgame's `FLAG_ICHOR_ON_SHIP`) the torch stays lit. Dousing the Torch from the Ring puts it out silently.
 - **Wind:** a draughty doorway's coord event runs `call(EventScript_IchorDraught)`. It does nothing without a flame; with one, "A draught snuffs out the carried fire."
 - **The start menu's panel** shows "Hearth fire: 12 steps", under the blessing when there is one.
 - **Order, Return and Reveal** (SYSTEMS's other verbs) are the map's own script.

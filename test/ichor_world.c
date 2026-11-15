@@ -109,3 +109,16 @@ TEST("Ichor: rain burns a carried flame down two steps at a time, and it still g
     EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_NONE);
     gWeatherPtr->currWeather = weather;
 }
+
+TEST("Ichor: a carried flame doesn't drown aboard the Euploia")
+{
+    VarSet(VAR_TEMP_2, 10);
+    VarSet(VAR_TEMP_3, FLAME_HESTIA_SHIP);
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_SURFING;
+    FlagSet(FLAG_ICHOR_GENERAL_START + 0x302);  // world-postgame's FLAG_ICHOR_ON_SHIP
+    Ichor_CarriedFlameStep(FALSE);
+    EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_HESTIA_SHIP);
+    EXPECT_EQ(VarGet(VAR_TEMP_2), 9);
+    FlagClear(FLAG_ICHOR_GENERAL_START + 0x302);
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
+}
