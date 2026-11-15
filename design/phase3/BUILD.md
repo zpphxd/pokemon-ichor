@@ -8,7 +8,7 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 
 | # | Batch | Beats | Status |
 |---|---|---|---|
-| 1 | **The Kithairon crossing and Thyrsa:** Route 6, Mt. Kithairon (Eleutherai and the pass), Route 7 and the Kronia grounds, Thyrsa City and its interiors, the theater and skene, the Temple of Dionysus | 26–34 | in progress |
+| 1 | **The Kithairon crossing and Thyrsa:** Route 6, Mt. Kithairon (Eleutherai and the pass), Route 7 and the Kronia grounds, Thyrsa City and its interiors, the theater and skene, the Temple of Dionysus | 26–34 | built 2026-11-14 (below: what's left) |
 | 2 | The road west: Route 8, Lebadeia and Trophonios's cave, Route 9, Kirrha, the Gulf ferry, Aigion | 35–37 | |
 | 3 | Arkadia: Route 11, Styx Falls, Route 12, Arkadia and its interiors, the Cypress Wood, the Pool, the Temple of Artemis | 38–44 | |
 | 4 | Back to the Isthmus and the road of the Mysteries: Route 13, Nemea, Route 14, the Act II changes to Emporion, Eleusa and Akti, Route 15 with Thria, Daphni, Route 16; Aigina's interior scripted onto world-act1's maps | 45–47 | |
@@ -32,6 +32,16 @@ Each batch ends with a report to the director: the branch and commit, what's pla
 Set the three to `TRAINER_TYPE_NORMAL` once their `trainerbattle` scripts exist (the game reads the id from the script). Stubs already on their maps: the herm at road (22,3), landing (22,4), sets `FLAG_ICHOR_HERM_AEGINA` behind `ICHOR_STUB_HERM` (the engine still has to give Aigina's herm an id); altars behind `ICHOR_STUB_RITES`, Zeus on Oros (6,4) and Artemis at the temple (15,11); a dig spot at temple (18,11). The encounter tables are still Phase 2's levels 12–16: re-level them to BALANCE.md's Astyra row.
 
 ## Batch 1
+
+### Result (2026-11-14)
+
+All six agents' branches are merged (`act2-b1-sprites`, `-thyrsa`, `-temple`, `-rooms`, `-kithairon`, `-scenes`). `tools/ichor/tests/act2_batch1.sh --all` passes: the audit, the walk across every seam and door, and the agents' own tests (Kithairon 18 checks, Thyrsa City, the Three-Act Play 58 checks, the thirteen rooms, the Dionysia 32 checks). The ROM went from 25,544,940 B to 25,833,680 B (+282 KB, now 77.0%).
+
+Deviations the integrator accepted: the rooms' art takes three secondaries (`ThyrsaRooms`, `ThyrsaHomes`, `ThyrsaStone`) and the crossing's three (`Kithairon`, `Kronia`, `KithaironCave`), each because one set's 504 tiles couldn't hold it; the mask in the Three-Act Play is shown by the rack's empty peg, not on the player.
+
+**Left for a polish pass** (the user's first priority is how maps look): Mt. Kithairon reads flat (pine blocks and grey rock slabs; it wants cliff faces and climb); the maenads' drums read as pale stones; Route 7's west meadow is open and empty; Thyrsa's central plaza is a wide bare cobble field; Eudora's yard is two plain walls and a tree; Manto's and Polos's rooms are sparse; Semele's smoke doesn't animate.
+
+**Left until other work lands:** Eleusa ↔ Route 6's connection (offset 0 both ways) once Eleusa is on the same branch; hidden items (listed per map above) once the Hoenn cut is on main; the stubs by tag (`grep -rn ICHOR_STUB_`); battle backgrounds, item icons, the Mask Laurel icon and the map-name steles (Part 10); heal locations and herm landings for the fly menu (Route 6 (34,8), Route 7 (24,16)).
 
 ### Who builds what
 
