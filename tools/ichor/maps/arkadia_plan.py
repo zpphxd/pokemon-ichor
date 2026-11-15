@@ -187,10 +187,10 @@ POOL_ROWS = [
     "K.vvv............vvvv.KK",  # 6
     "K.vv..............vv..KK",  # 7
     "K......................K",  # 8
-    "K.......................",  # 9  from the Wood (rows 9-11)
-    "K.......................",  # 10
-    "K.vv....................",  # 11
-    "K.vvvv............vvv..K",  # 12
+    "K.......==..............",  # 9  from the Wood (rows 9-11)
+    "K.......==....==========",  # 10   a worn path from the Wood to the pool's
+    "K.vv....================",  # 11   kerb and Mnaseas's seat
+    "K.vvvv..========..vvv..K",  # 12
     "KK.vvvvv.........vvvv.KK",  # 13
     "KK..vvvvv.......vvvv..KK",  # 14
     "KKK...vvvvv...vvvvv..KKK",  # 15

@@ -248,6 +248,13 @@ ARKADIA_DOORS = [
     (9, 17, "MAP_ARKADIA_CYPRESS_WOOD"),
 ]
 TEMPLE_STAIR_FOOT = [(19, 33), (20, 33), (21, 33)]
+# Where the scripts put people after beat 41 (scripts.pory's Setup and Dusk): Alethea
+# waits by the Wood's gate, the two huntresses stand in the square. They must not cut off
+# a door: the gate's doorstep (9,18) is reached by a one-wide lane.
+ALETHEA_WAIT = (11, 16)
+SCRIPT_PEOPLE = {ALETHEA_WAIT, (21, 19), (22, 19)}
+MOVED_BY_SCRIPT = ("LOCALID_ARKADIA_ALETHEA", "LOCALID_ARKADIA_HUNTRESS_1", "LOCALID_ARKADIA_HUNTRESS_2",
+                   "LOCALID_ARKADIA_LAMPLIGHTER", "LOCALID_ARKADIA_CHILD_1")
 
 
 def house(m, x, y, w, upper=None, ground_row=None, roof_extra=None):
@@ -754,6 +761,14 @@ def check(maps):
     for (x, y, dest) in ARKADIA_DOORS:
         if a.walk[y][x] == "X":
             errs.append(f"Arkadia: the door to {dest} at ({x},{y}) is on a blocking cell")
+    # after beat 41, with everyone standing where the scripts leave them, every door but the
+    # temple's (held on purpose until beat 42) can still be reached
+    crowd = {(e["x"], e["y"]) for e in ae["object_events"]
+             if e["local_id"] not in MOVED_BY_SCRIPT + ("LOCALID_ARKADIA_TEMPLE_GUARD",)} | SCRIPT_PEOPLE
+    after = reach(a, [(23, 0)], people=crowd)
+    for (x, y, dest) in ARKADIA_DOORS:
+        if not faceable(after, x, y):
+            errs.append(f"Arkadia: the door to {dest} at ({x},{y}) is cut off by people standing")
     # the Wood: band 1 is forced, Euadne's line is forced, band 2 is forced
     ferns = {(x, y) for y in range(w.h) for x in range(w.w) if w.plan.g[y][x] == ","}
     seenw = check_common(w, we, [(32, 29)], errs)

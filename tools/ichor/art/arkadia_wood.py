@@ -32,19 +32,21 @@ def floor_px(x, y, variant=0):
 
 
 def clearing_px(x, y, variant=0):
-    """The stump clearing: short moss and grass under the open sky, grey-blue with
-    starlight, dew catching it here and there."""
+    """The stump clearing: short moss and grass under the open sky, brighter than
+    the shaded floor, with dew catching the starlight here and there. (Pass 2: a
+    grey-blue floor read as a pond in the render; moss green reads as ground.)"""
     xx, yy = x % 16, y % 16
     h = L.hsh(xx, yy, 31 + variant) % 100
-    if h < 3:
+    if h < 2:
         return "ws2"
-    if (xx * 5 + yy * 3) % 13 == 0:
+    if h < 5:
         return "ws1"
-    if h > 90:
-        return "wn0"
-    if (xx + yy * 2) % 9 == 0:
-        return "wf3"
-    return "ws0"
+    # tufts of grass: short upright strokes
+    if (xx * 5 + yy * 3) % 13 == 0 or ((xx * 7 + yy * 11) % 17 == 0 and yy % 2 == 0):
+        return "wn1"
+    if h > 86 or (xx + yy * 2) % 9 == 0:
+        return "wf2"
+    return "wn0"
 
 
 def floor():

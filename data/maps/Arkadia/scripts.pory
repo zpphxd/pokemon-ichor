@@ -49,18 +49,23 @@ text Arkadia_Name_Guard { "GUARD" }
 script Arkadia_EventScript_Setup {
     if (flag(FLAG_ICHOR_ARRIVED_ARKADIA)) {
         setflag(FLAG_ICHOR_VISITED_ARKADIA)
-        // Alethea waits at the Cypress Wood's gate until beat 42
-        setobjectxyperm(LOCALID_ARKADIA_ALETHEA, 10, 18)
-        setobjectmovementtype(LOCALID_ARKADIA_ALETHEA, MOVEMENT_TYPE_FACE_LEFT)
+        // Alethea waits by the Cypress Wood's gate until beat 42 (beside its doorstep's
+        // one-wide approach, not on it: tools/ichor/maps/arkadia.py checks the spot)
+        setobjectxyperm(LOCALID_ARKADIA_ALETHEA, 11, 16)
+        setobjectmovementtype(LOCALID_ARKADIA_ALETHEA, MOVEMENT_TYPE_FACE_DOWN)
     } else {
-        // beat 41: the lamplighter and the two huntresses are coming up the road
-        setobjectxyperm(LOCALID_ARKADIA_LAMPLIGHTER, 24, 14)
+        // beat 41: the lamplighter and the two huntresses are coming up the road. (Rows
+        // 13-15, just below the screen: objects further than 9 rows from the player
+        // aren't spawned, and the player stops on row 6.)
+        setobjectxyperm(LOCALID_ARKADIA_LAMPLIGHTER, 24, 13)
         setobjectmovementtype(LOCALID_ARKADIA_LAMPLIGHTER, MOVEMENT_TYPE_FACE_UP)
-        setobjectxyperm(LOCALID_ARKADIA_HUNTRESS_1, 23, 16)
+        setobjectxyperm(LOCALID_ARKADIA_HUNTRESS_1, 23, 14)
         setobjectmovementtype(LOCALID_ARKADIA_HUNTRESS_1, MOVEMENT_TYPE_FACE_UP)
-        setobjectxyperm(LOCALID_ARKADIA_HUNTRESS_2, 24, 17)
+        setobjectxyperm(LOCALID_ARKADIA_HUNTRESS_2, 24, 15)
         setobjectmovementtype(LOCALID_ARKADIA_HUNTRESS_2, MOVEMENT_TYPE_FACE_UP)
-        setobjectmovementtype(LOCALID_ARKADIA_ALETHEA, MOVEMENT_TYPE_FACE_UP)
+        // she comes in from Route 12 at the player's side (the walk happens in the dark)
+        setobjectxyperm(LOCALID_ARKADIA_ALETHEA, 24, 6)
+        setobjectmovementtype(LOCALID_ARKADIA_ALETHEA, MOVEMENT_TYPE_FACE_DOWN)
     }
 }
 
@@ -189,14 +194,14 @@ script Arkadia_EventScript_Dusk {
     applymovement(LOCALID_ARKADIA_HUNTRESS_2, Arkadia_Movement_HuntressAway)
     waitmovement(LOCALID_ARKADIA_HUNTRESS_1)
     waitmovement(LOCALID_ARKADIA_HUNTRESS_2)
-    setobjectxyperm(LOCALID_ARKADIA_HUNTRESS_1, 16, 15)
-    setobjectxyperm(LOCALID_ARKADIA_HUNTRESS_2, 17, 15)
+    setobjectxyperm(LOCALID_ARKADIA_HUNTRESS_1, 21, 19)
+    setobjectxyperm(LOCALID_ARKADIA_HUNTRESS_2, 22, 19)
     setobjectmovementtype(LOCALID_ARKADIA_HUNTRESS_1, MOVEMENT_TYPE_FACE_RIGHT)
     setobjectmovementtype(LOCALID_ARKADIA_HUNTRESS_2, MOVEMENT_TYPE_FACE_LEFT)
-    setobjectxy(LOCALID_ARKADIA_HUNTRESS_1, 16, 15)
-    setobjectxy(LOCALID_ARKADIA_HUNTRESS_2, 17, 15)
+    setobjectxy(LOCALID_ARKADIA_HUNTRESS_1, 21, 19)
+    setobjectxy(LOCALID_ARKADIA_HUNTRESS_2, 22, 19)
     // Alethea turns to the player
-    applymovement(LOCALID_ARKADIA_ALETHEA, Common_Movement_FaceUp)
+    applymovement(LOCALID_ARKADIA_ALETHEA, Common_Movement_FaceLeft)
     waitmovement(0)
     setspeaker(Arkadia_Name_Alethea)
     msgbox(format("Kleon. That was Kleon."))
@@ -222,9 +227,9 @@ script Arkadia_EventScript_Dusk {
     // she goes ahead to the Cypress Wood's gate, west of the square
     applymovement(LOCALID_ARKADIA_ALETHEA, Arkadia_Movement_AletheaToWood)
     waitmovement(0)
-    setobjectxyperm(LOCALID_ARKADIA_ALETHEA, 10, 18)
-    setobjectmovementtype(LOCALID_ARKADIA_ALETHEA, MOVEMENT_TYPE_FACE_LEFT)
-    setobjectxy(LOCALID_ARKADIA_ALETHEA, 10, 18)
+    setobjectxyperm(LOCALID_ARKADIA_ALETHEA, 11, 16)
+    setobjectmovementtype(LOCALID_ARKADIA_ALETHEA, MOVEMENT_TYPE_FACE_DOWN)
+    setobjectxy(LOCALID_ARKADIA_ALETHEA, 11, 16)
     setobjectxyperm(LOCALID_ARKADIA_LAMPLIGHTER, 25, 10)
     setobjectmovementtype(LOCALID_ARKADIA_LAMPLIGHTER, MOVEMENT_TYPE_WANDER_UP_AND_DOWN)
     releaseall
@@ -233,13 +238,14 @@ script Arkadia_EventScript_Dusk {
 movement Arkadia_Movement_StepRight { walk_right }
 movement Arkadia_Movement_StepLeft { walk_left }
 movement Arkadia_Movement_StepDown { walk_down }
+// Everyone who speaks stops on row 8 or above, clear of the message box.
 movement Arkadia_Movement_LamplighterUp { walk_up * 5 }
 movement Arkadia_Movement_StepAside { walk_right face_left }
 movement Arkadia_Movement_HuntressUp1 { walk_up * 6 }
 movement Arkadia_Movement_HuntressUp2 { walk_up * 7 }
 movement Arkadia_Movement_HuntressAway { walk_down * 7 }
-movement Arkadia_Movement_LamplighterToPlayer { walk_left walk_up walk_up face_left }
-movement Arkadia_Movement_AletheaToWood { walk_right walk_down * 6 }
+movement Arkadia_Movement_LamplighterToPlayer { walk_up walk_up face_left }
+movement Arkadia_Movement_AletheaToWood { walk_down * 6 }
 
 // ---------------------------------------------------------------------------
 // The town's people
