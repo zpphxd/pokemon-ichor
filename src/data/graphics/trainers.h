@@ -504,6 +504,21 @@ const u16 gTrainerPalette_AcolyteM[] = INCGFX_U16("graphics/trainers/front_pics/
 const u32 gTrainerFrontPic_AcolyteF[] = INCGFX_U32("graphics/trainers/front_pics/acolyte_f.png", ".4bpp.smol");
 const u16 gTrainerPalette_AcolyteF[] = INCGFX_U16("graphics/trainers/front_pics/acolyte_f.png", ".gbapal");
 
+// Pokemon Ichor post-game: the Olympiad's Brains and Olympias
+// (tools/ichor/art/sprites_pg_portraits.py); each palette is read from its PNG
+const u32 gTrainerFrontPic_IchorAchilles[] = INCGFX_U32("graphics/trainers/front_pics/ichor_pg_achilles.png", ".4bpp.smol");
+const u16 gTrainerPalette_IchorAchilles[] = INCGFX_U16("graphics/trainers/front_pics/ichor_pg_achilles.png", ".gbapal");
+const u32 gTrainerFrontPic_IchorOdysseus[] = INCGFX_U32("graphics/trainers/front_pics/ichor_pg_odysseus.png", ".4bpp.smol");
+const u16 gTrainerPalette_IchorOdysseus[] = INCGFX_U16("graphics/trainers/front_pics/ichor_pg_odysseus.png", ".gbapal");
+const u32 gTrainerFrontPic_IchorHippolyta[] = INCGFX_U32("graphics/trainers/front_pics/ichor_pg_hippolyta.png", ".4bpp.smol");
+const u16 gTrainerPalette_IchorHippolyta[] = INCGFX_U16("graphics/trainers/front_pics/ichor_pg_hippolyta.png", ".gbapal");
+const u32 gTrainerFrontPic_IchorAtalanta[] = INCGFX_U32("graphics/trainers/front_pics/ichor_pg_atalanta.png", ".4bpp.smol");
+const u16 gTrainerPalette_IchorAtalanta[] = INCGFX_U16("graphics/trainers/front_pics/ichor_pg_atalanta.png", ".gbapal");
+const u32 gTrainerFrontPic_IchorAriadne[] = INCGFX_U32("graphics/trainers/front_pics/ichor_pg_ariadne.png", ".4bpp.smol");
+const u16 gTrainerPalette_IchorAriadne[] = INCGFX_U16("graphics/trainers/front_pics/ichor_pg_ariadne.png", ".gbapal");
+const u32 gTrainerFrontPic_IchorOlympias[] = INCGFX_U32("graphics/trainers/front_pics/ichor_pg_olympias.png", ".4bpp.smol");
+const u16 gTrainerPalette_IchorOlympias[] = INCGFX_U16("graphics/trainers/front_pics/ichor_pg_olympias.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1314,5 +1329,29 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_ACOLYTE_F] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
+    },
+    [TRAINER_PIC_ICHOR_ACHILLES] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorAchilles, gTrainerPalette_IchorAchilles),
+    },
+    [TRAINER_PIC_ICHOR_ODYSSEUS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorOdysseus, gTrainerPalette_IchorOdysseus),
+    },
+    [TRAINER_PIC_ICHOR_HIPPOLYTA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorHippolyta, gTrainerPalette_IchorHippolyta),
+    },
+    [TRAINER_PIC_ICHOR_ATALANTA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorAtalanta, gTrainerPalette_IchorAtalanta),
+    },
+    [TRAINER_PIC_ICHOR_ARIADNE] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorAriadne, gTrainerPalette_IchorAriadne),
+    },
+    [TRAINER_PIC_ICHOR_OLYMPIAS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorOlympias, gTrainerPalette_IchorOlympias),
     },
 };

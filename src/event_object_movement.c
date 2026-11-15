@@ -596,6 +596,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_IchorCast,             OBJ_EVENT_PAL_TAG_ICHOR_CAST},
     {gObjectEventPal_IchorFolk,             OBJ_EVENT_PAL_TAG_ICHOR_FOLK},
     {gObjectEventPal_IchorTheoxenia,        OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA},
+    {gObjectEventPal_IchorOlympia,          OBJ_EVENT_PAL_TAG_ICHOR_OLYMPIA},
+    {gObjectEventPal_IchorEuploia,          OBJ_EVENT_PAL_TAG_ICHOR_EUPLOIA},
     // End of Ichor object events
 #ifdef BUGFIX
     {NULL,                                  OBJ_EVENT_PAL_TAG_NONE},
