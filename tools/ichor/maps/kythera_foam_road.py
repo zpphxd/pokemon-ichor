@@ -96,16 +96,21 @@ def compose():
     m.rect(0, 13, W - 1, H - 1, A.SEA, False)
 
     # ==== the Skandeia strip, x 56..63: aethos only; the road leaves at rows 9-10 =========
-    grove(m, olives=[(56, 1), (59, 0), (62, 2), (57, 4), (60, 5), (62, 11), (58, 11)],
+    # South of the road the strip is Skandeia's olive wood (its rows 18-21), so the
+    # two maps meet wood to wood; the shore bends south round it.
+    m.rect(58, 11, 63, 16, A.GRASS, False)
+    grove(m, olives=[(56, 1), (59, 0), (62, 2), (57, 4), (60, 5), (58, 11), (60, 12), (62, 11), (58, 13),
+                     (62, 13), (60, 14)],
           cypresses=[(61, 3), (63, 6), (56, 6), (59, 3)])
     m.path(cells((52, 9, 55, 10), (54, 8, 55, 8), (56, 9, 63, 10)))
     for x, y in ((58, 8), (59, 8), (61, 8), (57, 7)):
         m.set(x, y, A.ANEMONE, False)
-    m.rect(56, 13, 63, 13, A.SAND, False)
-    m.set(56, 12, A.SAND, False)
-    m.set(57, 12, A.SAND, False)
-    m.set(63, 13, A.BOULDER_SAND, True)
-    aethos_shore(m, 56, 63, 14)
+    m.rect(56, 12, 57, 13, A.SAND, False)
+    aethos_shore(m, 56, 57, 14)
+    m.rect(58, 17, 63, 17, A.SAND, False)
+    aethos_shore(m, 58, 63, 18)
+    for y in range(15, 18):
+        m.set(57, y, 0x123, False)                # the waterline, sand to the east
     m.set(55, 7, A.STELE, True)                  # THE FOAM ROAD
 
     # ==== the ridge, the terrace and band 1, x 44..55 ========================================

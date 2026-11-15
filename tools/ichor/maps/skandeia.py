@@ -318,7 +318,8 @@ def specs():
                   start=GANGPLANK,
                   seams={"west": 8, "east": 8, "north": 6},
                   connections=
-                  [("right", "MAP_ROUTE22_MYRTOAN_SEA", -15), ("right", "MAP_ROUTE23_CRETAN_SEA", 15)],
+                  [("right", "MAP_ROUTE22_MYRTOAN_SEA", -15), ("right", "MAP_ROUTE23_CRETAN_SEA", 15),
+                   ("left", "MAP_KYTHERA_FOAM_ROAD", 7)],
                   screens={"1_gangplank": GANGPLANK, "2_slips": (13, 9), "3_quay": (28, 16),
                            "4_street_head": (20, 17), "5_street": (12, 17), "6_gate": (4, 16),
                            "7_lower_lane": (13, 23), "8_shrine": (27, 24), "9_agora": (23, 23)})

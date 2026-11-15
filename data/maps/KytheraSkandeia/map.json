@@ -23,6 +23,11 @@
       "map": "MAP_ROUTE23_CRETAN_SEA",
       "offset": 15,
       "direction": "right"
+    },
+    {
+      "map": "MAP_KYTHERA_FOAM_ROAD",
+      "offset": 7,
+      "direction": "left"
     }
   ],
   "object_events": [
