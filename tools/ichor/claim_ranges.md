@@ -58,10 +58,10 @@ Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 1,536 (raised
 | Reserve | 22–39 | Ask the director |
 | **world-act1** | 40–159 | |
 | **world-act2** | 160–319, 820–849 and 1344–1403 | 820–849 added from the shared reserve (2026-11-14): Act II's script needs 182. 1344–1403 added with the 1,536 raise |
-| **world-act3** | 320–499 | Includes the League |
+| **world-act3** | 320–499 and 1404–1503 | Includes the League. 1404–1503 added with the 1,536 raise |
 | **the post-game** | 500–679 and 1024–1223 | Rematches (the War Horn, the Arena of Champions) need ids of their own |
 | **the Oikoumene** | 680–819, 864–1023 and 1224–1343 | 420 in all, for its ten champion halls and its routes |
-| Reserve | 850–863 and 1404–1535 | Shared; ask the director |
+| Reserve | 850–863 and 1504–1535 | Shared; ask the director |
 
 To add a trainer:
 

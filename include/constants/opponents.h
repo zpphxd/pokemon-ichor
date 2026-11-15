@@ -50,7 +50,7 @@
 // world-act2, ids 160-319, 820-849 and 1344-1403: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0
 
-// world-act3, ids 320-499: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
+// world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0
 
 // The post-game, ids 500-679 and 1024-1223: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
@@ -59,7 +59,7 @@
 // The Oikoumene, ids 680-819, 864-1023 and 1224-1343: the second map.
 #define TRAINERS_END_OIKOUMENE                0
 
-// Ids 850-863 and 1404-1535 are the director's reserve.
+// Ids 850-863 and 1504-1535 are the director's reserve.
 
 #define ICHOR_TRAINERS_MAX(a, b) ((a) > (b) ? (a) : (b))
 #define TRAINERS_COUNT_EMERALD ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(TRAINERS_END_SLICE, TRAINERS_END_FRONTIER), \
