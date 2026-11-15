@@ -28,8 +28,8 @@ The checklist that makes the total conversion true: every player-facing asset gr
 | Greek | 21 |
 | In progress (batch) | 15 |
 | Hoenn | 91 |
-| Cut | 48 |
-| Keep | 31 |
+| Cut | 47 |
+| Keep | 32 |
 | New | 18 |
 
 | Area | Greek | In progress | Hoenn | Cut | Keep | New | Rows |
@@ -43,7 +43,7 @@ The checklist that makes the total conversion true: every player-facing asset gr
 | 7. Text | 0 | 3 | 15 | 1 | 1 | 0 | 20 |
 | 8. Audio | 1 | 1 | 11 | 4 | 3 | 0 | 20 |
 | 9. Data | 1 | 1 | 3 | 5 | 2 | 0 | 12 |
-| 10. Cuts | 0 | 0 | 1 | 18 | 1 | 0 | 20 |
+| 10. Cuts | 0 | 0 | 1 | 17 | 2 | 0 | 20 |
 | 11. Overlooked | 2 | 0 | 10 | 1 | 8 | 0 | 21 |
 
 Greek is mostly the tilesets, the title screen, the dialogue frames, Theo and Ianthe, the cast portraits and walkers, the grass, sand, water and temple battle backgrounds, and 10 songs. None of the Greek tilesets is attached to a map yet (0 of 790 layouts).
@@ -208,7 +208,7 @@ The Aethos regional dex of about 150 species is designed separately in `design/d
 | Laurel case | not in the ROM | New | 1 | ART_PLAN §5. Could share the trainer card's laurel art. |
 | Save prompt and save info panel | `src/start_menu.c`, `src/strings.c:957` (`gText_SavingBadges`), `data/text/save.inc` | Hoenn | 1 | The info box lists PLAYER, BADGES, POKéDEX and PLAYTIME on the Greek frame. Rename BADGES to LAURELS. |
 | Reset-clock and save-error screens | `graphics/reset_rtc_screen/`, `src/reset_rtc_screen.c`, `src/main_menu.c:259-262` | Keep | 6 | Generic text. See §11. |
-| Easy Chat and Mail | `graphics/easy_chat/` (9), `graphics/mail/` (12 mail designs), `src/easy_chat.c` | Hoenn | 6 | Proposed cut, §10. |
+| Easy Chat and Mail | `graphics/easy_chat/` (9), `graphics/mail/` (12 mail designs), `src/easy_chat.c` | Hoenn | Keep | Kept for now ("where safe"): mail items and the Frontier still use them. 45 KiB. |
 | Berry tag and berry check | `graphics/bag/berry_tag*`, `check_berry*`, `src/berry_tag_screen.c` | Hoenn | 2 | Follows the berry decision (§1). |
 | Pokémon Jump, Berry Crush, Dodrio picking, slot machine and roulette screens | `graphics/pokemon_jump/`, `berry_crush/`, `dodrio_berry_picking/`, `slot_machine/`, `roulette/` | Cut | 6 | Per ART_PLAN, as minigames (§10). |
 | Contest, Berry Blender, Pokéblock, PokéNav, Union Room, Mystery Gift, Wonder Card and secret-base screens | `graphics/contest/`, `berry_blender/`, `pokeblock/`, `pokenav/`, `union_room_chat/`, `wonder_card/`, `wonder_news/`, `link/`, `wireless_status_screen/` | Cut | 6 | Per ART_PLAN (§10). |
@@ -313,16 +313,16 @@ The first block is ART_PLAN's cut list, plus FRLG data, the PokéNav, Mirage Isl
 
 | System | Where | ROM (KiB) | Status | Phase | Notes |
 |---|---|---|---|---|---|
-| Contests | `src/contest*.c`, `contest_ai.c`, `picture_frame`, `graphics/contest/`, `graphics/picture_frame/`, `data/contest_ai_scripts.s`, `include/config/contest.h`, `ContestHall*` maps, `gTileset_Contest`, 8 contest songs | 201.3 | Cut | 6 | Includes the Lilycove Lady, the contest SFX and the contest-category icons in `graphics/types/`. Contest scarves and the summary screen's contest-moves page need to go with it. |
-| Berry Blender | `src/berry_blender.c`, `graphics/berry_blender/`, `data/text/blend_master.inc`, `SE_BERRY_BLENDER` | 38.5 | Cut | 6 | |
-| Pokéblocks | `src/pokeblock*.c`, `use_pokeblock.c`, `graphics/pokeblock/` | 31.3 | Cut | 6 | Tied to the Blender, contests and the Pokénav's conditions. |
-| Secret bases and decorations | `src/secret_base.c`, `decoration*.c`, `graphics/decorations/`, `data/tilesets/*/secret_base*`, `SecretBase_*` maps, `data/text/secret_base_trainers.inc` | 123.4 | Cut | 6 | Includes the player's decorating pose, the doll and cushion object sprites and `record_mixing` hooks. |
-| Mirage Island and Mirage Tower | `src/mirage_tower.c`, `MirageTower_*` maps, `gTileset_MirageTower`, `Route111_NoMirageTower`, `Route130_MirageIsland` layouts, `graphics/misc/mirage_tower*` | 43.6 | Cut | 6 | |
-| PokéNav and Match Call | `src/pokenav*.c` (14 files), `src/match_call.c`, `graphics/pokenav/` (64), `data/text/match_call.inc`, `SE_POKENAV_*` | 137.3 | Cut | 6 | Region map and ribbons are also reachable through the Pokénav. Keep the region map code if the Fly map needs it. |
-| e-Reader and Mystery Gift | `src/mystery_gift*.c`, `mevent*.c`, `ereader*.c`, `data/multiboot_ereader.s`, `graphics/wonder_card/`, `wonder_news/`, `MysteryEventsHouse` | 61.0 | Cut | 6 | Includes the 12.5 KiB e-Reader multiboot program and the Mystery Events House tileset. |
-| Minigames: slots, roulette, Pokémon Jump, Berry Crush, Dodrio picking, lottery corner, Game Corners, Trick House | `src/slot_machine.c`, `roulette.c`, `pokemon_jump.c`, `berry_crush.c`, `dodrio_berry_picking.c`, `lottery_corner.c`, `minigame_countdown.c`, matching `graphics/` and maps | 235.3 | Cut | 6 | Trick House has its own tileset, maps and music. |
-| Link-only features: Union Room, link trade and battle, Cable Club, record mixing, Colosseum multiboot, rfu library, Berry-fix multiboot | `src/union_room*.c`, `link*.c`, `librfu*.c`, `AgbRfu_LinkManager.c`, `cable_club.c`, `record_mixing.c`, `data/multiboot_pokemon_colosseum.s` (164 KiB), `data/multiboot_berry_glitch_fix.s` (15 KiB), `BattleColosseum_*`, `UnionRoom`, `TradeCenter`, `CableClub` maps and tilesets | 419.9 | Cut | 6 | Includes `src/trade.c` (69 KiB) and the trade art. In-game NPC trades share that scene, so the saving is about 70 KiB smaller if they stay. |
-| Hoenn Battle Frontier: maps, art, trainers, text | `BattleFrontier_*` maps (Tower, Dome, Palace, Pike, Pyramid, Arena, Factory, lounge), `BattlePyramidSquare*`, three Battle Tents, `TrainerHill_*`, twelve Frontier and Trainer Hill tilesets, `graphics/battle_frontier/`, `frontier_pass/`, `door_anims/battle_*`, `sFrontierTrainerSlides`, `data/text/battle_tent.inc` | 540.6 | Cut | 5 | Per ART_PLAN: the Hoenn facilities go. The Olympiad (PITCH §6.3) is built fresh at Olympia, with Achilles, Atalanta, Odysseus and Hippolyta as Brains. |
+| Contests | `src/contest*.c`, `contest_ai.c`, `picture_frame`, `graphics/contest/`, `graphics/picture_frame/`, `data/contest_ai_scripts.s`, `include/config/contest.h`, `ContestHall*` maps, `gTileset_Contest`, 8 contest songs | 201.3 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_CONTESTS` in `include/config/ichor.h`). About 21 KiB stays: the summary screen still reads the contest move data and the category icons; guarding that waits for the menus restyle. |
+| Berry Blender | `src/berry_blender.c`, `graphics/berry_blender/`, `data/text/blend_master.inc`, `SE_BERRY_BLENDER` | 38.5 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_CONTESTS`). |
+| Pokéblocks | `src/pokeblock*.c`, `use_pokeblock.c`, `graphics/pokeblock/` | 31.3 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_CONTESTS`). The Safari Zone's feeder now places nothing. |
+| Secret bases and decorations | `src/secret_base.c`, `decoration*.c`, `graphics/decorations/`, `data/tilesets/*/secret_base*`, `SecretBase_*` maps, `data/text/secret_base_trainers.inc` | 123.4 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_SECRET_BASES`). The bedroom PC's DECORATION option closes the PC. About 11 KiB stays, because the Frontier exchange corner names decorations. |
+| Mirage Island and Mirage Tower | `src/mirage_tower.c`, `MirageTower_*` maps, `gTileset_MirageTower`, `Route111_NoMirageTower`, `Route130_MirageIsland` layouts, `graphics/misc/mirage_tower*` | 43.6 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_MIRAGE_TOWER`). |
+| PokéNav and Match Call | `src/pokenav*.c` (14 files), `src/match_call.c`, `graphics/pokenav/` (64), `data/text/match_call.inc`, `SE_POKENAV_*` | 137.3 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_POKENAV`). |
+| e-Reader and Mystery Gift | `src/mystery_gift*.c`, `mevent*.c`, `ereader*.c`, `data/multiboot_ereader.s`, `graphics/wonder_card/`, `wonder_news/`, `MysteryEventsHouse` | 61.0 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_MYSTERY_GIFT`, `ICHOR_CUT_MULTIBOOT`). The main menu's Mystery Gift entries go back to the menu. |
+| Minigames: slots, roulette, Pokémon Jump, Berry Crush, Dodrio picking, lottery corner, Game Corners, Trick House | `src/slot_machine.c`, `roulette.c`, `pokemon_jump.c`, `berry_crush.c`, `dodrio_berry_picking.c`, `lottery_corner.c`, `minigame_countdown.c`, matching `graphics/` and maps | 235.3 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_MINIGAMES`). |
+| Link-only features: Union Room, link trade and battle, Cable Club, record mixing, Colosseum multiboot, rfu library, Berry-fix multiboot | `src/union_room*.c`, `link*.c`, `librfu*.c`, `AgbRfu_LinkManager.c`, `cable_club.c`, `record_mixing.c`, `data/multiboot_pokemon_colosseum.s` (164 KiB), `data/multiboot_berry_glitch_fix.s` (15 KiB), `BattleColosseum_*`, `UnionRoom`, `TradeCenter`, `CableClub` maps and tilesets | 419.9 | Cut | 6 | Union Room, Cable Club, record mixing and the Colosseum and Berry-fix multiboot programs are cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_LINK`, `ICHOR_CUT_MULTIBOOT`). The RFU library and link-battle core stay, because main.c, battles and the overworld call into them. `trade.c` stays for in-game trades. |
+| Hoenn Battle Frontier: maps, art, trainers, text | `BattleFrontier_*` maps (Tower, Dome, Palace, Pike, Pyramid, Arena, Factory, lounge), `BattlePyramidSquare*`, three Battle Tents, `TrainerHill_*`, twelve Frontier and Trainer Hill tilesets, `graphics/battle_frontier/`, `frontier_pass/`, `door_anims/battle_*`, `sFrontierTrainerSlides`, `data/text/battle_tent.inc` | 540.6 | Cut | 5 | Maps cut by hoenn-cut batch 3. Kept: the Battle Pyramid floor, top and squares (the Labyrinth's engine builds floors from them), the Pike rooms and the Trainer Hill floors, whose layouts the engine loads. The art the engine no longer reaches drops out of the ROM by itself (the build now uses -ffunction-sections). |
 | FRLG data in the ROM | 75 FRLG songs (239 KiB), two FRLG Japanese fonts (64 KiB), 62 FRLG trainer pics (43 KiB), Kanto and Sevii region-map art, `hall_of_fame_frlg.c`, `voicegroup_frlg_*` | 365.4 | Cut | 6 | Per ART_PLAN, but FRLG maps are not in the ROM, so this is the whole ROM saving. The repo cleanup is in §9. |
 | **Total, ART_PLAN's list (Frontier engine kept)** | | **2,197.7** | | | **2.15 MiB (2.25 MB)** |
 | Hoenn Battle Frontier engine and data tables | `src/battle_tower.c` (`gBattleFrontierMons` 32 KiB, `gBattleFrontierTrainers` 16 KiB), `battle_dome.c`, `battle_pike.c`, `battle_pyramid.c`, `battle_arena.c`, `battle_factory*.c`, `battle_palace.c`, `battle_tent.c`, `trainer_hill.c`, `trainer_tower*.c`, `frontier_util.c`, Frontier songs | 341.2 | Keep | 5 | Keep: the Olympiad needs the facilities' rules. Replace the Hoenn trainer and Pokémon tables. Removing the engine too adds 341 KiB. |
@@ -332,9 +332,9 @@ Additional Hoenn-only systems. They are **not** on ART_PLAN's list, so they are 
 
 | System | Where | ROM (KiB) | Status | Phase | Notes |
 |---|---|---|---|---|---|
-| Mauville Old Man: bard, storyteller, hipster, Giddy, trader | `src/mauville_old_man.c`, `bard_music.c` (162 KiB of phoneme data), `sound/direct_sound_samples/phonemes/`, `ph_*.mid` | 283.8 | Cut | 6 | The biggest candidate. Easy Chat words and phonemes. |
-| TV shows, Battle TV and Pokémon News | `src/tv.c`, `battle_tv.c`, `data/text/tv.inc` (2,193 string lines), `pokemon_news.inc` | 76.6 | Cut | 6 | The Aethos world has no TV. The oikos tileset already turns the TV into a loom. |
-| Easy Chat and Mail | `src/easy_chat.c`, `data/text/`, `graphics/easy_chat/`, `graphics/mail/`, 12 mail items | 59.1 | Cut | 6 | Mail has no setting. Easy Chat words also feed trainer greetings. |
+| Mauville Old Man: bard, storyteller, hipster, Giddy, trader | `src/mauville_old_man.c`, `bard_music.c` (162 KiB of phoneme data), `sound/direct_sound_samples/phonemes/`, `ph_*.mid` | 283.8 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_MAUVILLE_MAN`). Not approved in the brief, but its maps were gone and the bard is an Easy Chat feature. Set the switch to 0 to restore it. |
+| TV shows, Battle TV and Pokémon News | `src/tv.c`, `battle_tv.c`, `data/text/tv.inc` (2,193 string lines), `pokemon_news.inc` | 76.6 | Cut | 6 | Cut from the ROM by hoenn-cut batch 3 (`ICHOR_CUT_TV`). |
+| Easy Chat and Mail | `src/easy_chat.c`, `data/text/`, `graphics/easy_chat/`, `graphics/mail/`, 12 mail items | 59.1 | Keep | 6 | Kept for now ("where safe"): mail items and the Frontier still use them. 45 KiB. |
 | Safari Zone | `src/safari_zone.c`, `battle_controller_safari.c`, `healthbox_safari.png`, Safari maps | 40.9 | Cut | 6 | |
 | Cable car and SS Tidal and ferries | `src/cable_car.c`, `ss_anne.c`, `seagallop.c`, graphics | 44.9 | Cut | 6 | Triremes replace ferries. |
 | Apprentice, Lilycove Lady, wall-clock set screen, mass outbreaks | `src/apprentice.c`, `lilycove_lady.c`, `wallclock.c`, `mass_outbreak.c` | 68.2 | Cut | 6 | The Lilycove Lady is counted under Contests, not here. Keep the wall clock until the water-clock scene has its own art (§5). |

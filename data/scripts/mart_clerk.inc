@@ -1,10 +1,3 @@
-gText_HowMayIServeYou::
-	.string "Welcome!\p"
-	.string "How may I serve you?$"
-
-gText_PleaseComeAgain::
-	.string "Please come again!$"
-
 Pokemart_DefaultItemList::
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION

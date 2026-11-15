@@ -35,6 +35,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_PC::
 
 @ from data/maps/LittlerootTown_BrendansHouse_2F/scripts.inc
 LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC::
+	releaseall
 	end
 
 @ from data/maps/LittlerootTown_MaysHouse_2F/scripts.inc
@@ -43,6 +44,7 @@ LittlerootTown_MaysHouse_2F_EventScript_PC::
 
 @ from data/maps/LittlerootTown_MaysHouse_2F/scripts.inc
 LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
+	releaseall
 	end
 
 @ from data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc

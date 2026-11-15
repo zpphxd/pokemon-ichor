@@ -55,7 +55,7 @@ Battle partners (`include/constants/battle_partner.h`, `src/data/battle_partners
 
 ## Removed maps
 
-Never use a Hoenn or FRLG `MAP_*`, `LAYOUT_*` or `HEAL_LOCATION_*` name. They're deleted, but `include/constants/maps_removed_stub.h` keeps each one defined, with an id no real map has, so upstream code still compiles. Only the Ichor maps and, until batch 3, the Battle Frontier's and Trainer Hill's are real.
+Never use a Hoenn or FRLG `MAP_*`, `LAYOUT_*` or `HEAL_LOCATION_*` name. They're deleted, but `include/constants/maps_removed_stub.h` keeps each one defined, with an id no real map has, so upstream code still compiles. Only the Ichor maps are real, plus the few Frontier maps whose layouts the engine loads at runtime: the Battle Pyramid floor, top and squares, the Pike rooms and the Trainer Hill floors.
 
 ## Map sections
 
@@ -63,7 +63,7 @@ The Hoenn cut freed Hoenn's map-section ids 0–57 and 59–85 for the Oikoumene
 
 - Each freed slot is `MAPSEC_OIKOUMENE_<id>` in `src/data/region_map/region_map_sections.json`, with no name or region-map position.
 - The Hoenn names stay defined as aliases in `include/constants/region_map_sections_hoenn.h`, so upstream code still compiles. When you give a slot a real name, rename it in the json and change its alias line.
-- 58 is `MAPSEC_BATTLE_FRONTIER`, which the kept Frontier maps still use. Batch 3 frees it.
+- 58 is `MAPSEC_BATTLE_FRONTIER`, which the kept Pyramid and Pike maps still use. It frees once the Olympiad replaces them.
 - 86 (`MAPSEC_SECRET_BASE`) and 87 (`MAPSEC_DYNAMIC`) are engine sections and stay.
 - Every slot appears in `map_name_popup.c`'s theme table and most in `region_map.c`. A few have more upstream behavior behind their Hoenn name, so check before reusing them:
   - 2 (Dewford): weather

@@ -130,62 +130,20 @@ gStdScripts::
 gStdScripts_End::
 
 
+#if !ICHOR_CUT_SECRET_BASES // Ichor: secret bases are cut
 	.include "data/scripts/shared_secret_base.inc"
+#endif
 	.include "data/maps/BattlePyramidSquare01/scripts.inc"
-	.include "data/maps/BattleFrontier_OutsideWest/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleTowerElevator/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleTowerCorridor/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleTowerBattleRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_OutsideEast/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleTowerMultiBattleRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleDomeCorridor/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleDomePreBattleRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleDomeBattleRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePalaceLobby/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePalaceCorridor/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePalaceBattleRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePyramidLobby/scripts.inc"
 	.include "data/maps/BattleFrontier_BattlePyramidFloor/scripts.inc"
 	.include "data/maps/BattleFrontier_BattlePyramidTop/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleArenaLobby/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleArenaCorridor/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleArenaBattleRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleFactoryPreBattleRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_BattleFactoryBattleRoom/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePikeLobby/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePikeCorridor/scripts.inc"
-	.include "data/maps/BattleFrontier_BattlePikeThreePathRoom/scripts.inc"
 	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/scripts.inc"
 	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/scripts.inc"
 	.include "data/maps/BattleFrontier_BattlePikeRoomWildMons/scripts.inc"
-	.include "data/maps/BattleFrontier_RankingHall/scripts.inc"
-	.include "data/maps/BattleFrontier_Lounge1/scripts.inc"
-	.include "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
-	.include "data/maps/BattleFrontier_Lounge2/scripts.inc"
-	.include "data/maps/BattleFrontier_Lounge3/scripts.inc"
-	.include "data/maps/BattleFrontier_Lounge4/scripts.inc"
-	.include "data/maps/BattleFrontier_ScottsHouse/scripts.inc"
-	.include "data/maps/BattleFrontier_Lounge5/scripts.inc"
-	.include "data/maps/BattleFrontier_Lounge6/scripts.inc"
-	.include "data/maps/BattleFrontier_Lounge7/scripts.inc"
-	.include "data/maps/BattleFrontier_ReceptionGate/scripts.inc"
-	.include "data/maps/BattleFrontier_Lounge8/scripts.inc"
-	.include "data/maps/BattleFrontier_Lounge9/scripts.inc"
-	.include "data/maps/BattleFrontier_PokemonCenter_1F/scripts.inc"
-	.include "data/maps/BattleFrontier_PokemonCenter_2F/scripts.inc"
-	.include "data/maps/BattleFrontier_Mart/scripts.inc"
-	.include "data/maps/TrainerHill_Entrance/scripts.inc"
 	.include "data/maps/TrainerHill_1F/scripts.inc"
 	.include "data/maps/TrainerHill_2F/scripts.inc"
 	.include "data/maps/TrainerHill_3F/scripts.inc"
 	.include "data/maps/TrainerHill_4F/scripts.inc"
 	.include "data/maps/TrainerHill_Roof/scripts.inc"
-	.include "data/maps/TrainerHill_Elevator/scripts.inc"
 	@ Ichor: our maps' scripts, kept in one list for clean upstream merges
 	.include "data/ichor_maps.inc"
 
@@ -813,21 +771,35 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/abnormal_weather.inc"
 	.include "data/scripts/trainer_script.inc"
 	.include "data/scripts/berry_tree.inc"
+#if !ICHOR_CUT_SECRET_BASES // Ichor: secret bases are cut
 	.include "data/scripts/secret_base.inc"
+#endif
+#if !ICHOR_CUT_LINK // Ichor: link features are cut
 	.include "data/scripts/cable_club.inc"
+#endif
 	.include "data/text/cable_club.inc"
+#if !ICHOR_CUT_CONTESTS // Ichor: contests are cut
 	.include "data/scripts/contest_hall.inc"
+#endif
+#if !ICHOR_CUT_TV // Ichor: TV is cut
 	.include "data/scripts/tv.inc"
+#endif
 	.include "data/text/tv.inc"
+#if !ICHOR_CUT_TV // Ichor: TV is cut
 	.include "data/scripts/interview.inc"
+#endif
 	.include "data/text/pokemon_news.inc"
+#if !ICHOR_CUT_MAUVILLE_MAN // Ichor: the Mauville Old Man is cut
 	.include "data/scripts/mauville_man.inc"
+#endif
 	.include "data/scripts/field_move_scripts.inc"
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"
 	.include "data/scripts/players_house.inc"
 	.include "data/scripts/ichor_hoenn_leftovers.inc"
+	.include "data/scripts/ichor_cut_stubs.inc"
+	.include "data/scripts/ichor_frontier_leftovers.inc"
 	.include "data/text/mauville_man.inc"
 	.include "data/text/trainers.inc"
 	.include "data/scripts/repel.inc"
@@ -836,7 +808,8 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/text/check_furniture.inc"
 	.include "data/scripts/cave_hole.inc"
 	.include "data/text/match_call.inc"
-	.include "data/scripts/apprentice.inc"
+@ Ichor: the Hoenn Battle Tower's Apprentice went with its maps (hoenn-cut batch 3)
+@	.include "data/scripts/apprentice.inc"
 	.include "data/text/apprentice.inc"
 	.include "data/scripts/battle_pike.inc"
 	.include "data/text/move_tutors.inc"
@@ -847,6 +820,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
 	.include "data/scripts/dexnav.inc"
-	.include "data/scripts/battle_frontier.inc"
+@ Ichor: the Hoenn Frontier's shared scripts; nothing kept calls them. The Olympiad can re-include it (hoenn-cut batch 3)
+@	.include "data/scripts/battle_frontier.inc"
 	.include "data/scripts/apricorn_tree.inc"
 	.include "data/scripts/wild_encounter.inc"

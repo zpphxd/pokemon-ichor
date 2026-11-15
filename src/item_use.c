@@ -721,7 +721,11 @@ void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
 
 static void CB2_OpenPokeblockFromBag(void)
 {
+#if !ICHOR_CUT_CONTESTS // Ichor: Pokéblocks are cut
     OpenPokeblockCase(PBLOCK_CASE_FIELD, CB2_ReturnToBagMenuPocket);
+#else
+    SetMainCallback2(CB2_ReturnToBagMenuPocket);
+#endif
 }
 
 static void Task_OpenRegisteredPokeblockCase(u8 taskId)
@@ -729,7 +733,11 @@ static void Task_OpenRegisteredPokeblockCase(u8 taskId)
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
+#if !ICHOR_CUT_CONTESTS // Ichor: Pokéblocks are cut
         OpenPokeblockCase(PBLOCK_CASE_FIELD, CB2_ReturnToField);
+#else
+        SetMainCallback2(CB2_ReturnToField);
+#endif
         DestroyTask(taskId);
     }
 }

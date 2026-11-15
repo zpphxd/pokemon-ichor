@@ -4,10 +4,6 @@ gBirchDexRatingText_AreYouCurious::
 	.string "Are you curious about how your\n"
 	.string "POKéDEX is coming along?$"
 
-gBirchDexRatingText_Cancel::
-	.string "Hm? Oh, you haven't caught enough\n"
-	.string "POKéMON to make it worthwhile.$"
-
 gBirchDexRatingText_SoYouveSeenAndCaught::
 	.string "Hmhm…\p"
 	.string "So, you've seen {STR_VAR_1} POKéMON,\n"
@@ -117,18 +113,6 @@ gBirchDexRatingText_OnANationwideBasis::
 
 @ FRLG
 
-PokedexRating_Text_HowIsPokedexComingAlong::
-	.string "OAK: Good to see you!\n"
-	.string "How is your POKéDEX coming along?\p"
-	.string "Here, let me take a look.$"
-
-PokedexRating_Text_SeenXOwnedY::
-	.string "The amount of progress you've made\n"
-	.string "on your POKéDEX is:\p"
-	.string "{STR_VAR_1} POKéMON seen and\n"
-	.string "{STR_VAR_2} POKéMON owned.\p"
-	.string "{FONT_NORMAL}PROF. OAK's rating:$"
-
 PokedexRating_Text_LessThan10::
 	.string "You still have lots to do.\p"
 	.string "Go into every patch of grass you\n"
@@ -204,28 +188,3 @@ PokedexRating_Text_LessThan150::
 PokedexRating_Text_Complete::
 	.string "Your POKéDEX is entirely complete!\n"
 	.string "Congratulations!!$"
-
-PokedexRating_Text_NationalDexSeenXOwnedY::
-	.string "And your NATIONAL POKéDEX is:\p"
-	.string "{STR_VAR_1} POKéMON seen and\n"
-	.string "{STR_VAR_2} POKéMON owned.$"
-
-PokedexRating_Text_LookForwardToFilledNationalDex::
-	.string "I'll be looking forward to seeing\n"
-	.string "you fill the NATIONAL POKéDEX!$"
-
-PokedexRating_Text_YouveCompletedDex::
-	.string "Finally…\p"
-	.string "You've finally completed the\n"
-	.string "POKéDEX!\p"
-	.string "It's magnificent!\n"
-	.string "Truly, this is a fantastic feat!$"
-
-PokedexRating_Text_LoveSeeingYourPokedex::
-	.string "OAK: Ah, welcome!\p"
-	.string "Tell me, how is your POKéDEX\n"
-	.string "coming along?\p"
-	.string "Wahaha!\p"
-	.string "Actually, I know how it is, but I\n"
-	.string "love seeing it anyway!\p"
-	.string "Let's see…$"

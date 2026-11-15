@@ -1700,7 +1700,9 @@ bool8 ScrCmd_pokenavcall(struct ScriptContext *ctx)
 
     if (msg == NULL)
         msg = (const u8 *)ctx->data[0];
+#if !ICHOR_CUT_POKENAV // Ichor: Match Call is cut
     ShowPokenavFieldMessage(msg);
+#endif
     return FALSE;
 }
 
@@ -2016,10 +2018,14 @@ bool8 ScrCmd_showcontestpainting(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     // Artist's painting is temporary and already has its data loaded
+#if !ICHOR_CUT_CONTESTS // Ichor: contests are cut
     if (contestWinnerId != CONTEST_WINNER_ARTIST)
         SetContestWinnerForPainting(contestWinnerId);
 
     ShowContestPainting();
+#else
+    (void)contestWinnerId;
+#endif
     ScriptContext_Stop();
     return TRUE;
 }
@@ -2546,7 +2552,9 @@ bool8 ScrCmd_playslotmachine(struct ScriptContext *ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
+#if !ICHOR_CUT_MINIGAMES // Ichor: the minigames are cut
     PlaySlotMachine(machineId, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+#endif
     ScriptContext_Stop();
     return TRUE;
 }
@@ -2587,7 +2595,9 @@ bool8 ScrCmd_startcontest(struct ScriptContext *ctx)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
+#if !ICHOR_CUT_CONTESTS // Ichor: contests are cut
     StartContest();
+#endif
     ScriptContext_Stop();
     return TRUE;
 }
@@ -2596,7 +2606,9 @@ bool8 ScrCmd_showcontestresults(struct ScriptContext *ctx)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
+#if !ICHOR_CUT_CONTESTS // Ichor: contests are cut
     ShowContestResults();
+#endif
     ScriptContext_Stop();
     return TRUE;
 }
@@ -2605,7 +2617,9 @@ bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
+#if !ICHOR_CUT_CONTESTS // Ichor: contests are cut
     ContestLinkTransfer(gSpecialVar_ContestCategory);
+#endif
     ScriptContext_Stop();
     return TRUE;
 }

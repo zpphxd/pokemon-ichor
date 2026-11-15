@@ -1570,12 +1570,6 @@ LilycoveCity_ContestLobby_Text_ParticipateAnotherTime:
 	.string "time.$"
 
 @ Unused
-LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader:
-	.string "Please decide which of you will\n"
-	.string "become the GROUP LEADER.\p"
-	.string "The other players must then choose\n"
-	.string "“JOIN GROUP.”$"
-
 ContestHall_Text_GettingStartedWireless:
 	.string "MC: Hello! We're just getting started\n"
 	.string "with a 4-player linked POKéMON\l"
