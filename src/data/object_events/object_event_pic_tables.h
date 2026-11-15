@@ -2677,8 +2677,12 @@ static const struct SpriteFrameImage sPicTable_IchorCami[] = {
 
 static const struct SpriteFrameImage sPicTable_IchorDemeter[] = {
     overworld_ascending_frames(gObjectEventPic_IchorDemeter, 2, 4),
+};
+
 static const struct SpriteFrameImage sPicTable_IchorMirror[] = {
     overworld_ascending_frames(gObjectEventPic_IchorMirror, 2, 4),
+};
+
 static const struct SpriteFrameImage sPicTable_IchorMirrorMark[] = {
     obj_frame_tiles(gObjectEventPic_IchorMirrorMark),
 };
