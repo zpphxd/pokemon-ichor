@@ -29,7 +29,7 @@ The Hoenn cut freed 700 vanilla flags: every Hoenn story, item and hide flag tha
 
 ## Trainers
 
-Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 864 (upstream's value), so trainer ids run 1–863, each with its own defeated flag at `TRAINER_FLAGS_START + id`.
+Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 1,024 (raised from upstream's 864 for the Oikoumene, PG-38 in `design/OIKOUMENE.md`), so trainer ids run 1–1023, each with its own defeated flag at `TRAINER_FLAGS_START + id`. System flags start at 0x900: always use their names, never numbers.
 
 | Owner | Trainer ids | Notes |
 |---|---|---|
@@ -40,8 +40,8 @@ Emerald's Hoenn trainers are gone. `MAX_TRAINERS_COUNT_EMERALD` is 864 (upstream
 | **world-act2** | 160–319 | |
 | **world-act3** | 320–499 | Includes the League |
 | **the post-game** | 500–679 | Rematches (the War Horn, the Arena of Champions) need ids of their own |
-| **the Oikoumene** | 680–819 | |
-| Reserve | 820–863 | Ask the director |
+| **the Oikoumene** | 680–819 and 864–1023 | 300 in all, for its ten champion halls |
+| Reserve | 820–863 | Shared; ask the director |
 
 To add a trainer:
 

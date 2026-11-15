@@ -56,10 +56,10 @@
 // The post-game, ids 500-679: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
 #define TRAINERS_END_POSTGAME                 0
 
-// The Oikoumene, ids 680-819: the second map.
+// The Oikoumene, ids 680-819 and 864-1023: the second map.
 #define TRAINERS_END_OIKOUMENE                0
 
-// Ids 820-863 are the director's reserve.
+// Ids 820-863 are the director's reserve. 864-1023 are the Oikoumene's (above).
 
 #define ICHOR_TRAINERS_MAX(a, b) ((a) > (b) ? (a) : (b))
 #define TRAINERS_COUNT_EMERALD ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(TRAINERS_END_SLICE, TRAINERS_END_FRONTIER), \
@@ -67,10 +67,10 @@
                                                   ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(TRAINERS_END_ACT3, TRAINERS_END_POSTGAME), \
                                                                      TRAINERS_END_OIKOUMENE))
 
-// Ichor: one trainer flag per id, from TRAINER_FLAGS_START (0x500). 864 is upstream's
-// value, so the flag and save layouts match upstream's again: ids 1-863 for about
-// 700 trainers. Raising it shifts every system flag and grows SaveBlock1.
-#define MAX_TRAINERS_COUNT_EMERALD 864
+// Ichor: one trainer flag per id, from TRAINER_FLAGS_START (0x500): ids 1-1023. Raised
+// from upstream's 864 for the Oikoumene's champion halls (design/OIKOUMENE.md PG-38).
+// Raising it shifts every system flag and grows SaveBlock1.
+#define MAX_TRAINERS_COUNT_EMERALD 1024
 
 // Ichor: temporary. Maps the removed Hoenn names to TRAINER_NONE until batch 2
 // deletes the Hoenn scripts that still use them. Never use these names.
