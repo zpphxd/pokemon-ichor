@@ -3498,6 +3498,1004 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ASTYRA",
+          "base_label": "gAstyra_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 29,
+                "max_level": 30,
+                "species": "SPECIES_OPHIDROP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_OPHIDROP"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_GLAUKOIN"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_OPHIDROP"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASTYRA",
+          "base_label": "gAstyra_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 30,
+                "max_level": 32,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 32,
+                "species": "SPECIES_GLAUKOIN"
+              },
+              {
+                "min_level": 33,
+                "max_level": 33,
+                "species": "SPECIES_HYPHANTIS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASTYRA_PAUPERS_GRAVES",
+          "base_label": "gAstyraPaupersGraves_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 27,
+                "max_level": 28,
+                "species": "SPECIES_RAKNIT"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 30,
+                "max_level": 31,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 31,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 31,
+                "species": "SPECIES_GLYPHLET"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASTYRA_PAUPERS_GRAVES",
+          "base_label": "gAstyraPaupersGraves_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 27,
+                "max_level": 28,
+                "species": "SPECIES_RAKNIT"
+              },
+              {
+                "min_level": 27,
+                "max_level": 29,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 28,
+                "max_level": 30,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 30,
+                "max_level": 31,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_OBOLORN"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_RAKNIT"
+              },
+              {
+                "min_level": 29,
+                "max_level": 31,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 30,
+                "max_level": 31,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 28,
+                "max_level": 28,
+                "species": "SPECIES_OBOLORN"
+              },
+              {
+                "min_level": 31,
+                "max_level": 31,
+                "species": "SPECIES_KALYPTOR"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASTYRA_KERAMEIKOS",
+          "base_label": "gAstyraKerameikos_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 34,
+                "max_level": 35,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_GLYPHLET"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASTYRA_KERAMEIKOS",
+          "base_label": "gAstyraKerameikos_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_PLOUTERAS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_HYPHANTIS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASTYRA_AKROPOLIS",
+          "base_label": "gAstyraAkropolis_Morning",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GLAUKOIN"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GLAUKOIN"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_SOPHOWL"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_HIEROLIVE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_SOPHOWL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASTYRA_AKROPOLIS",
+          "base_label": "gAstyraAkropolis_Night",
+          "land_mons": {
+            "encounter_rate": 15,
+            "mons": [
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GLAUKOIN"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_HYPHANTIS"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 31,
+                "max_level": 33,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 32,
+                "max_level": 33,
+                "species": "SPECIES_GLAUKOIN"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 32,
+                "max_level": 34,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_SOPHOWL"
+              },
+              {
+                "min_level": 33,
+                "max_level": 34,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_SOPHOWL"
+              },
+              {
+                "min_level": 34,
+                "max_level": 34,
+                "species": "SPECIES_HIEROLIVE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASTYRA_PHALERON",
+          "base_label": "gAstyraPhaleron_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_KERAZAP"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 10,
+                "max_level": 15,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 12,
+                "max_level": 17,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ASTYRA_PHALERON",
+          "base_label": "gAstyraPhaleron_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 33,
+                "max_level": 35,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SALT_WELL_1F",
+          "base_label": "gSaltWell1F_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SALT_WELL_B1F",
+          "base_label": "gSaltWellB1F_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CAIRNOLITH"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_KALYPTOR"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 37,
+                "max_level": 37,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 10,
+                "max_level": 15,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 12,
+                "max_level": 17,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 34,
+                "max_level": 36,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 37,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 38,
+                "species": "SPECIES_KYNOKETOS"
+              }
+            ]
+          }
         }
       ]
     },
