@@ -139,7 +139,8 @@ GROUP_RGB = {g: {C[n] for n in names} for g, names in GROUPS.items()}
 # The variant sets (labyrinth_build.py writes them after compiling).
 # glow: the doused torch (SYSTEMS.md §2). Everything is black but these.
 LATENT = {"lg": (120, 248, 208)}          # the glow paint, when doused
-LATENT_BASE = {"lg": "ls2"}               # ...and the stone it imitates by torchlight
+LATENT_BASE = {"lg": "ls1"}               # ...and the stone it imitates by torchlight:
+                                          # the wall tops' fill (labyrinth_kit._fill)
 GLOW_KEEP = ["fe1", "ff0", "ff1", "ff2", "ff3"]   # flames stay lit
 GLOW_DIM = {"lt0": (48, 8, 8), "lt1": (104, 24, 24), "lt2": (128, 48, 40)}   # the thread, faintly
 # dawn: scene L. Every color dimmed and cooled toward the grey morning, but the
@@ -168,15 +169,50 @@ class Struct(E.Struct):
         super().__init__(key, title, w, h, walk=walk, notes=notes, ground="none",
                          section=section)
         self.names = {}
+        self.anims = {}     # name -> {"layer", "frames": [Layer]}: see anim_layer()
+
+
+def anim_layer(s, name, n, layer="middle"):
+    """Start a tile animation on one of s's layers: returns n-1 extra frame
+    Layers, each a copy of the layer as it is now (frame 0 is the layer itself).
+    Paint the differences into them; every 8x8 tile that changes becomes a
+    Porytiles animated tile (labyrinth_build.py writes them)."""
+    src = s.layers[layer]
+    frames = []
+    for _ in range(n - 1):
+        L = K.Layer(src.w, src.h)
+        L.a[:] = src.a
+        frames.append(L)
+    s.anims[name] = {"layer": layer, "frames": frames}
+    return frames
+
+
+def anim_tiles(s):
+    """{(layer name, tx, ty): anim name} for every tile of s that changes between
+    frames."""
+    out = {}
+    for name, an in getattr(s, "anims", {}).items():
+        base = s.layers[an["layer"]].a
+        for f in an["frames"]:
+            for ty in range(s.h * 2):
+                for tx in range(s.w * 2):
+                    sl = np.s_[ty * 8:ty * 8 + 8, tx * 8:tx * 8 + 8]
+                    if not np.array_equal(base[sl], f.a[sl]):
+                        out[(an["layer"], tx, ty)] = name
+    return out
 
 
 def validate(structs):
     problems = []
     for s in structs:
+        at = anim_tiles(s)
         for ln, layer in s.layers.items():
             for ty in range(s.h * 2):
                 for tx in range(s.w * 2):
                     cols = tile_colors(layer, tx, ty)
+                    if (ln, tx, ty) in at:
+                        for f in s.anims[at[(ln, tx, ty)]]["frames"]:
+                            cols = cols | tile_colors(f, tx, ty)
                     if cols and not any(cols <= g for g in GROUP_RGB.values()):
                         names = sorted(K.RGB2NAME.get(c, str(c)) for c in cols)
                         problems.append(f"{s.key} {ln} tile ({tx},{ty}) mixes groups: {names}")
@@ -567,34 +603,60 @@ def edges():
 # The sheet
 # --------------------------------------------------------------------------
 
+# The Labyrinth is two secondaries (LABYRINTH.md §11 planned one; it outgrew 504
+# tiles): gTileset_Labyrinth for the outer rings, the workshop, Minos's tomb and
+# the Icarus Shaft, and gTileset_Mychos ("the innermost part of a house") for the
+# Titan wing, the Choros and the Starry Chamber. Both draw the same house and
+# thread sections at the same rows, so those metatile ids are the same in both.
+#
 # (first sheet row, section key, title, blurb). Each section starts on a fixed
-# row of the 8-wide sheet, so adding to one never renumbers another. Sections
-# still to be drawn are listed in RESERVED with their rows.
-SECTIONS = [
-    (0, "house", "The house: floors and walls",
-     "The masonry every map of the Labyrinth shares: the slab floor, the vaulted arcade, the "
-     "side walls and the threshold. The rings' dark corridor kit and the thread twins "
-     "(LABYRINTH.md §5.1) will join this section."),
-    (13, "workshop", "Daedalus's workshop",
-     "The hub at the end of Ring III (LABYRINTH.md §6, scenes D and L)."),
-]
-RESERVED = [
-    (36, "rings", "The rings' fixtures: braziers, anchor rings, cracked walls, labrys seals, "
-                  "dial walls, webs, niches, skylight pools, glow-marks, sun and moon gates, "
-                  "mirror bases, the dancing floor"),
-    (50, "rooms", "Titan barracks and mess hall, sickle banners, the forge, the archive, the "
-                  "vault, Minos's tomb, frescoes"),
-    (59, "heart", "The Starry Chamber: the lustral pool and the star-clock"),
-]
+# row of the 8-wide sheet, so adding to one never renumbers another.
+HOUSE = (0, "house", "The house: floors and walls",
+         "The masonry every map of the Labyrinth shares, the same at the same ids in "
+         "`labyrinth` and `mychos`: the workshop's slab floor, the vaulted arcade, the side "
+         "walls and the threshold; the rings' corridor walls (an autotile), the bronze anchor "
+         "rings and the stairs from ring to ring.")
+THREAD = (36, "thread", "The rings' floor and Ariadne's thread",
+          "The floor every ring is laid with, and its thread twins (LABYRINTH.md §5.1, "
+          "ENGINE_API.md §6), the same at the same ids in both tilesets.")
+SECTIONS = {
+    "labyrinth": [
+        HOUSE,
+        (13, "workshop", "Daedalus's workshop",
+         "The hub at the end of Ring III (LABYRINTH.md §6, scenes D and L)."),
+        THREAD,
+        (39, "rings", "The outer rings: I to III, and V",
+         "Ring I's braziers and hearth, Ring II's sun and moon gates and Asterion's cracked "
+         "walls, Ring III's webs and glow-marks, Ring V's skylight pools, niches and fresco, "
+         "and the labrys seals; then, in the same rows, Minos's tomb and the Icarus Shaft."),
+    ],
+    "mychos": [
+        HOUSE,
+        (13, "titans", "The Titan wing: Rings IV and VI",
+         "Team Titan's quarters: the barracks, the mess hall, the sentry posts, the forge, "
+         "the Hall of Dials, the archive, the vault and the Mistress's shrine."),
+        THREAD,
+        (39, "choros", "Ring VII: the Choros",
+         "Starlit marble, the mirrors' beam and the dancing floor (LABYRINTH.md §5.7)."),
+        (52, "heart", "The heart: the Starry Chamber",
+         "The black lustral pool under Daedalus's star-clock (LABYRINTH.md §6, scene J)."),
+    ],
+}
 SHEET_ROWS = 64       # 512 metatiles in a secondary
+# Sections the catalog lists on their own though they pack inside another's rows.
+SUBSECTIONS = {
+    "deep": ("rings", "Minos's tomb and the Icarus Shaft",
+             "The tomb behind Ring V's cracked wall (scene F), and the shaft above the "
+             "workshop (scene L)."),
+}
 
 
 def pack(sections):
     """First-fit each section's structures into the 8-wide sheet, in build order,
     from the section's first row; a section may not run into the next section's
-    (or a reserved section's) first row. Adding a structure never moves one
-    placed before it. Returns the rows used."""
-    starts = sorted([r for r, _ in sections] + [r for r, *_ in RESERVED] + [SHEET_ROWS])
+    first row. Adding a structure never moves one placed before it. Returns the
+    rows used."""
+    starts = sorted([r for r, _ in sections] + [SHEET_ROWS])
     total = 0
     for start, structs in sections:
         end = min(r for r in starts if r > start)
@@ -619,12 +681,47 @@ def pack(sections):
     return total
 
 
-def build():
-    house = [floors(), arcade(), arch4(), edges()]
-    shop = workshop_pieces()
-    for s in house + shop:
-        finish(s)
-    return [(SECTIONS[0][0], house), (SECTIONS[1][0], shop)]
+def build(tileset="labyrinth"):
+    """[(first row, [structures])] for one of the two tilesets, section by
+    section in SECTIONS order."""
+    import labyrinth_kit as KIT
+    house = [floors(), arcade(), arch4(), edges()] + KIT.house_kit()
+    out = {"house": house, "thread": KIT.thread_floors()}
+    if tileset == "labyrinth":
+        import labyrinth_rings
+        import labyrinth_deep
+        out["workshop"] = workshop_pieces()
+        deep = labyrinth_deep.build()
+        for s in deep:
+            s.subsection = "deep"
+        out["rings"] = order_for_packing(labyrinth_rings.build() + deep)
+    else:
+        import mychos_titans
+        import mychos_heart
+        out["titans"] = mychos_titans.build()
+        out["choros"] = mychos_heart.choros()
+        out["heart"] = mychos_heart.heart()
+    secs = []
+    for row, key, *_ in SECTIONS[tileset]:
+        ss = out[key]
+        for s in ss:
+            s.section = getattr(s, "subsection", None) or key
+            finish(s)
+        secs.append((row, ss))
+    return secs
+
+
+def order_for_packing(structs):
+    """Largest first (first-fit packs tighter), keeping each odd twin right after
+    its even twin; ties keep build order."""
+    groups = []
+    for s in structs:
+        if s.key.endswith("_odd") and groups and groups[-1][0].key == s.key[:-4]:
+            groups[-1].append(s)
+        else:
+            groups.append([s])
+    groups.sort(key=lambda g: (-g[0].h, -g[0].w))
+    return [s for g in groups for s in g]
 
 
 def workshop_pieces():
@@ -632,6 +729,6 @@ def workshop_pieces():
     return labyrinth_workshop.build()
 
 
-def write_catalog(used, structs):
+def write_catalog(tileset, used, structs):
     import labyrinth_catalog
-    labyrinth_catalog.main(used, structs)
+    labyrinth_catalog.main(tileset, used, structs)
