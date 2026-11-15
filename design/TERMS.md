@@ -38,6 +38,8 @@ The canonical Ichor word for every Pokémon-system term. Use it in scripts, syst
 | Pokémon League | the Pantheon | PANTHEON | PITCH §1. On Mount Olympus. |
 | Elite Four | the Pantheon (its four seats) | PANTHEON | PITCH §1 and §3. One member "holds a seat of the Pantheon". |
 | Champion | the Archon | ARCHON | PITCH §1. Aristeides the Just. Beating him makes you Archon of Aethos (**Flag**: the bible never says the title passes to the player, but the Hall of Fame line now says so). |
+| Gym, in the Oikoumene | a hall | | `oikoumene/PERIODOS.md` (decision PG-33). The Oikoumene's lands aren't Greek, so their halls aren't temples: each is its land's own seat, under its own name (the Skaian Gate, the treasury of Croesus, the precinct of Proteus). "Hall" is the word in prose; no label shows it. |
+| Gym Leader, in the Oikoumene | the land's champion, under their own title | PRINCE, KING, PRIESTESS, PRIEST, PHARAOH, HUNTRESS, ATHLETE, JUDGE | `oikoumene/PERIODOS.md` §1. "Champion" is the plain English word here, in lower case; the League's title is still the Archon. Helen, who battles in Memphis, is QUEEN. Widths 24–54 px. |
 | Hall of Fame | the Hall of Heroes | HALL OF HEROES | **Flag.** The bible has no name for it. "Heroes" in the Greek sense: people the age remembers. *Heroön* (a hero's shrine) is the scholarly option. |
 | Battle Frontier | the Olympiad | OLYMPIAD | PITCH §6. A cut system for now; its text is left alone. |
 | Ferry, S.S. Tidal | trireme | TRIREME | PITCH §1. The Phase 1 trireme is the *Euploia*. |
@@ -48,6 +50,7 @@ The canonical Ichor word for every Pokémon-system term. Use it in scripts, syst
 |---|---|---|---|
 | Badge | Laurel | LAURELS | PITCH §1. Laurel leaves woven into a victory crown. "Laurel" is capitalized when it is named ("the Hearth Laurel") and lower case otherwise ("your first laurel"). |
 | The eight badge names | the eight Laurels, below | | Only the Hearth Laurel is in the script. The other seven are **Flag**. |
+| Badge, in the Oikoumene | Emblem | EMBLEMS | `oikoumene/PERIODOS.md` §1 (decision PG-34). The Greek *emblēma* is a picture set into something, like the inlaid panel of a mosaic floor: each champion's Emblem is set into its land's panel of Alethea's chart. Capitalized when named ("the Scarab Emblem"), lower case otherwise. EMBLEMS is 42 px, the same as LAURELS. The ten names are below. |
 | PC / Pokémon Storage System | the Pithos | PITHOS | PITCH §1. The great storage jar. |
 | Box (in the PC) | Jar | JAR | **Flag.** The Pithos holds jars; the storage art is being redrawn as jars (INVENTORY §5). New games name them JAR1 to JAR14. |
 | Item storage in the PC | your stored things | ITEM STORAGE | Shared by the Pithos and the kibotos (the wooden chest at home), so the wording names neither. |
@@ -80,6 +83,25 @@ Each laurel is named for its god's domain, in one plain English word, so a playe
 | 6 | Hephaestus, Kaldera | Talos, the Bronzesmith | Forge Laurel |
 | 7 | Aphrodite, Kythera Isle | Galatea, the Living Marble | Foam Laurel (she was born from the sea foam) |
 | 8 | Apollo, Delphoi | Phemonoe, the Pythia | Sun Laurel |
+
+## The ten Emblems
+
+The Oikoumene's prizes, one per hall of the Periodos (`oikoumene/PERIODOS.md`). Each is named, like the Laurels, in one plain English word for its land's device, mostly taken from that land's own coins or seals. The longest, SILPHIUM EMBLEM, is 87 px, and "{PLAYER} received the Silphium Emblem from Kyrene!" wraps onto two lines of the field message box.
+
+| # | Land | Hall | Champion | Emblem |
+|---|---|---|---|---|
+| 1 | Troad | The Skaian Gate | Prince Hektor | **Gate Emblem** |
+| 2 | Lydia | The treasury of Croesus | King Croesus | **Lion Emblem** |
+| 3 | Black Sea | Aietes's palace | Medea, Priestess of Hecate | **Fleece Emblem** |
+| 4 | North | The round temple of Apollo | Abaris, Priest of Apollo | **Arrow Emblem** |
+| 5 | Egypt | The precinct of Proteus | Pharaoh Proteus | **Scarab Emblem** |
+| 6 | Aithiopia | Memnon's bath-court | King Memnon | **Dawn Emblem** |
+| 7 | Libya | The hippodrome of Kyrene | Kyrene, the lion-wrestler | **Silphium Emblem** |
+| 8 | Far West | The royal gallery of Tartessos | King Arganthonios | **Silver Emblem** |
+| 9 | Western Sea | Milo's palaestra | Milo of Kroton | **Tripod Emblem** |
+| 10 | Okeanos | The tower of Kronos | Rhadamanthys, Judge of the Blessed | **Rose Emblem** |
+
+**Names that don't fit** (decision PG-39). A trainer name holds 10 characters. ARGANTHONIOS and RHADAMANTHYS are 12, so their battle names are ARGANTHON (54 px) and RHADAMANTH (60 px), the old English form; their dialogue keeps the full names. A trainer class label holds 12 characters, so the Oikoumene's longer class names show short labels such as HOPLITE, SORCERESS, ARCHER and MINER.
 
 ## What this pass left alone
 
