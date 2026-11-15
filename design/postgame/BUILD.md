@@ -85,21 +85,22 @@ From `tools/ichor/claim_ranges.md`: trainer ids **500–679**; bank flags **0x30
 | `VAR_ICHOR_ODYSSEY` | The Odyssey, 0–30 (ODYSSEY §15) |
 | `VAR_ICHOR_KATABASIS` | The Katabasis (UNDERWORLD §13) |
 
-**Sub-ranges.** Bank flag offsets, vanilla flags and trainer ids per batch; each batch's agents get theirs in the batch's section. Bank vars 21–23 are held back for the epics that ask.
+**Sub-ranges.** Bank flag offsets, vanilla flags and trainer ids per batch; each batch's agents get theirs in the batch's section. Bank vars 21–23 are held back for the epics that ask. The second bank (offsets 0x700–0x7FF, IchorSave's `flags2`, on main since a5de99c630) is split here too; `claim.py --range 0x700-0x7FF bankflag …` works the same.
 
 | Batch | Bank flag offsets | Vanilla flags (hidden items) | Trainer ids |
 |---|---|---|---|
 | 1 | 0x300–0x32F | 0x480–0x487 | 500–509 |
-| 2 | 0x330–0x34F | 0x488–0x48F | 510–539 |
-| 3 | 0x350–0x36F | 0x490–0x49B | 540–569 |
-| 4–5 | 0x370–0x39F | 0x49C–0x4AB | 570–629 |
-| 6 | 0x3A0–0x3B3 | 0x4AC–0x4B5 | 630–664 |
-| 7–8 | 0x3B4–0x3BF | 0x4B6–0x4BF | 665–679 |
+| 2 | 0x330–0x34F, 0x700–0x71F | 0x488–0x48F | 510–539 |
+| 3 | 0x350–0x36F, 0x720–0x75F | 0x490–0x49B | 540–569 |
+| 4–5 | 0x370–0x39F, 0x760–0x7AF | 0x49C–0x4AB | 570–629 |
+| 6 | 0x3A0–0x3B3, 0x7B0–0x7DF | 0x4AC–0x4B5 | 630–664 |
+| 7–8 | 0x3B4–0x3BF, 0x7E0–0x7FF | 0x4B6–0x4BF | 665–679 |
 
-**The range is short, and the director has the ask** (2026-11-14). The epics' own counts are about 140 story flags (LABORS ~40, UNDERWORLD ~30, ODYSSEY ~35, POSTGAME ~35), about 60 hide flags, and an item ball or two on each of about 130 maps, against 192 bank flags and 64 vanilla flags. Until it's answered:
+**Flags: 448 bank flags in all** (the director's answer, 2026-11-14), against the epics' ~140 story flags, ~60 hide flags and the item balls. So still:
 - Per-epic state goes in `struct IchorEpics` (POSTGAME §6, ENGINE.md), not in flags.
 - Hide flags for people who come and go on one map use `FLAG_TEMP_*`, set in `ON_TRANSITION` from the real state (temp flags clear on every map load).
-- Item balls on batches 1–3 take bank flags from the batch's range; later batches wait for the answer.
+- **Hidden items are the tight one:** 64 vanilla flags for ~130 maps. Put hidden items where they matter most; if a batch needs more, say so in its report and the build lead asks.
+
 
 ---
 
@@ -130,7 +131,7 @@ New post-game systems are built here, in the conventions of ENGINE_API.md, docum
 | Ask | Who builds it | Needed by here | The name, once it lands | Fallback until then |
 |---|---|---|---|---|
 | **E7, the bull-leap timing** | world-act3: **built**, on origin/claude/world-act3-4e546d (`src/ichor_bull_leap.c`, API in its `design/phase4/ENGINE_ACT3.md`), not on main yet | The Moment (batch 2), Labor 7 (batch 5), Charybdis's fig tree (batch 6) | `special(Ichor_BullLeap)`: `VAR_0x8004` the moving object's local id, `0x8005` the line's tile `ICHOR_TILE(x, y)`, `0x8006` the window in frames (0 = 10), `0x8007` frames per tile (0 = 6); waits by itself; `VAR_RESULT` `ICHOR_LEAP_EARLY`/`_CLEAN`/`_LATE` (0/1/2, `include/constants/ichor_act3.h`). One call is one pass: for fail-forward, move the object back and call again with a wider window. | A YES/NO on the beat |
-| **The carried flame** | ichor-engine, building now | Lampon (batch 1), Labor 2 (batch 4) | `setvar(VAR_0x8004, FLAME_x)`, `setvar(VAR_0x8005, <dry steps>)`, `special(Ichor_TakeFlame)`; `VAR_TEMP_2` steps left, `VAR_TEMP_3` the kind; `call(EventScript_IchorDraught)` puts it out. Asked for: in rain each step costs 2 (scripts give the dry budget); a lit brazier refills a flame; kinds `FLAME_HESTIA_SHIP` and `FLAME_LERNA` | A line of dialogue |
+| **The carried flame** | ichor-engine: **on main** (b061bfd18a, ENGINE_API §2 "Carried flames"); asked for rain (each step costs 2) and for a flame that survives door warps (Lampon) | Lampon (batch 1), Labor 2 (batch 4) | `setvar(VAR_0x8004, FLAME_x)`, `setvar(VAR_0x8005, <dry steps>)`, `special(Ichor_TakeFlame)`; `VAR_TEMP_2` steps left, `VAR_TEMP_3` the kind; `call(EventScript_IchorDraught)` puts it out. Asked for: in rain each step costs 2 (scripts give the dry budget); a lit brazier refills a flame; kinds `FLAME_HESTIA_SHIP` and `FLAME_LERNA` | A line of dialogue |
 | **The disguise sprite** | with the director | Circe's forms, the beggar (batch 6) | `setvar(VAR_0x8004, OBJ_EVENT_GFX_…)`, `special(Ichor_SetPlayerGraphics)`, 0 to clear | An icon over the player |
 | **E9, the beam trace** | world-act3: **built**, already generic | Labor 5 (batch 4) | `special(Ichor_TraceBeam)`: `VAR_0x8004` the source object (the beam leaves the way it faces), `0x8005` the first of six metatiles in a row (E–W, N–S, NE, NW, SE, SW): pass six water-channel metatiles. Turns are E8 mirror objects (`MOVEMENT_TYPE_ICHOR_MIRROR*`), so the sluice dials are mirror objects. `VAR_RESULT` the object it ends on or 0, end tile in `0x8006`/`0x8007`. At most 2 beams at once, 128 tiles, 16 turns, no crossing. | Fixed states per sluice |
 | **Asterion's charge for the boar** | ichor-engine (built; asked for a hit script, `Ichor_AddDrift`, and a no-hearing bit) | Labor 4 (batch 4) | `special(Ichor_StartAsterion)` on any object | Scripted lanes |
