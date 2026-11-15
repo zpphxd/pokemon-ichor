@@ -104,10 +104,11 @@ const struct ItemInfo gItemsInfo[] =
     {
         .name = ITEM_NAME("Master Ball"),
         .price = 0,
+        // Ichor: Daedalus's cage, given in the Labyrinth's workshop (LABYRINTH.md Scene D).
         .description = COMPOUND_STRING(
-            "The best Ball that\n"
-            "catches a Pokémon\n"
-            "without fail."),
+            "Daedalus's work.\n"
+            "Nothing caught in it\n"
+            "ever gets out."),
         .pocket = POCKET_POKE_BALLS,
         .type = ITEM_USE_BAG_MENU,
         .battleUsage = EFFECT_ITEM_THROW_BALL,

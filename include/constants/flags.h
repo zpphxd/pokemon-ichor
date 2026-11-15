@@ -1698,6 +1698,7 @@
 #define FLAG_ICHOR_SAW_GEAR_BOX                 (FLAG_ICHOR_GENERAL_START + 0x20D) // Ichor: Route 23: saw Skyllias's box of gears off Antikythera (set there; read in the divers' house)
 #define FLAG_ICHOR_MELOS_RITE                   (FLAG_ICHOR_GENERAL_START + 0x20E) // Ichor: Melos: made the armless goddess an offering (set on MAP_MELOS; read by Kentrios)
 #define FLAG_ICHOR_MELOS_OBSIDIAN_LUMP          (FLAG_ICHOR_GENERAL_START + 0x20F) // Ichor: Melos: dug the lump of black glass at the slope's seam (set on MAP_MELOS; read by Melanippos)
+#define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL_START + 0x280) // Ichor: world-act3: Daedalus gives the Master Ball in the workshop, Labyrinth Scene D
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

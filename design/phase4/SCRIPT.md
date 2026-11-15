@@ -1616,7 +1616,7 @@ Per LABYRINTH §6, Ring II: the sun and moon gates, the Long Hall, the three her
 
 ## Beat III-3H. Ring III and Daedalus's workshop (Scene D)
 
-Per LABYRINTH §6, Ring III: the front way through the webs, or the back way by the glow-marks. **Scene D, the workshop: Daedalus**, per LABYRINTH §8 Scene D, word for word, with its Number Nine line if `FLAG_ICHOR_NUMBER_NINE_UNTIED` is set.
+Per LABYRINTH §6, Ring III: the front way through the webs, or the back way by the glow-marks. **Scene D, the workshop: Daedalus**, per LABYRINTH §8 Scene D, word for word, with its Number Nine line if `FLAG_ICHOR_NUMBER_NINE_UNTIED` is set. Scene D now includes **the Master Ball** (user, 2026-11-14, "Yes, Daedalus"; LABYRINTH 6aa684599e): five new boxes and `giveitem ITEM_MASTER_BALL` just before the Labrys, whose "Here." becomes "And this.". Give it once, gated by `FLAG_ICHOR_GOT_MASTER_BALL` (claimed). It is the game's only Master Ball on the main path; Hoenn's two (the Aqua Hideout, Silph Co.) go with the Hoenn cut.
 
 The workshop's objects, per LABYRINTH seed 17:
 ```text
@@ -17140,6 +17140,7 @@ Flag naming follows the slice and Phase 2: visible items `FLAG_ICHOR_ITEM_<MAP>_
 | Ring III | Rare Bone | visible | a web pocket in the maze |
 | Ring III | TM Poltergeist | visible | Automaton No. 7's room |
 | Ring III | Star Piece | visible | the glow trail's side spur |
+| Ring III | **the Master Ball**, flag-gated (`FLAG_ICHOR_GOT_MASTER_BALL`) | Daedalus | the workshop (Scene D), just before the Labrys |
 | Ring III | **the Labrys** | Daedalus | the workshop (Scene D) |
 | Ring IV | Max Revive | visible | the barracks |
 | Ring IV | Hyper Potion | visible | the armory, behind Pelos |
