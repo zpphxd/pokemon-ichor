@@ -168,8 +168,9 @@ Elaia owns the polished **Eripip** and **Galekit**, not their later stages.
 | Kronion tablet | Markings and lighting refined at native 16x16 resolution, preserving the cast palette and wiring. Captured during the Route 1 review's real cutscene drop, not an ordinary summit visit. Creative approval pending. |
 | Two upturned-boat halves | Direct native 32x16 drawing split into matched halves, replacing tileset extraction. Restrained plank seam and keel clusters use the existing cast palette. Native and real harbor evidence artistically accepted at checkpoint scope. |
 | Sailor and Diver walkers | Eight-row native directional heads, longer cloth bodies, distinct strides and all nine engine frames implemented in `sprites_folk.py`. Costumes and folk palette preserved; Sailor's shoulder rope matches the existing portrait identity. Palette-correct complete sheets and real harbor before/after captured against the exact post-Elaia ROM. Artistically accepted at checkpoint scope. |
-| Healer and Kid F walkers | Native eight-row directional heads, folded chiton and child-sized saffron tunic with complete strides. Healer's tenth bow frame retains closed eyes, head dip, hand over heart and planted serpent rod. All 19 states reproduce, and the preview now includes the full tenth frame. Both real heal paths hold the bow for exactly 32 frames and restore player control. Existing palette, costumes and animation wiring preserved; creative approval pending. |
-| Remaining local walkers: Acolyte F/M, Augur, Goatherd, Hoplite and Merchant | Existing assets retained for now; six placed sheets still await native polish. Merchant/Sailor walkers remain owned here. Pilgrim is absent from these nine maps and its walker belongs to the voyage/Aegina batch. |
+| Healer and Kid F walkers | Native eight-row directional heads, folded chiton and child-sized saffron tunic with complete strides. Healer's tenth bow frame retains closed eyes, head dip, hand over heart and planted serpent rod. All 19 states reproduce, and the preview now includes the full tenth frame. Both real heal paths hold the bow for exactly 32 frames and restore player control. Existing palette, costumes and animation wiring preserved; artistically accepted at checkpoint scope. |
+| Augur and Acolyte M/F walkers | Native directional heads, longer indigo/linen robes, distinct strides and all 27 states implemented. Gold band/feather, sparse bird hem, planted staff, saffron cloth, soot/ash, tongs/coal and attached raised lamp preserved. Cast palette unchanged and verified in the ROM. Complete colored sheets and matched Route 1/Temple captures pass technical checks; creative approval pending. |
+| Remaining local walkers: Goatherd, Hoplite and Merchant | Existing assets retained for now; three placed sheets still await native polish. Merchant/Sailor walkers remain owned here. Pilgrim is absent from these nine maps and its walker belongs to the voyage/Aegina batch. |
 | Remaining local class portraits: Shepherd, Harvester, Goatherd, Hoplite, Augur and Acolyte M/F; local healing effects | Existing assets retained for now; these seven portraits are the local trainer-pic union beyond the already polished cast. Merchant, Sailor and Pilgrim portraits are not used by those local trainers and belong to the voyage/Aegina batch. Shared emotes and related effects are assigned to Elaia's continuation above. |
 | Tiles, animated metatiles, battle backgrounds, UI, weather and move animations | Retained explicitly; not part of a native creature/character/object sprite redraw claim. Temple braziers and hearth-trial changes are metatiles, not object sprites. |
 
@@ -177,15 +178,16 @@ The town batch is **not complete**. Full shared regeneration and final ROM
 evidence must follow integration of Elaia's landed polish so its assets are not
 reverted. Greek god ball art has separate ownership and is excluded here.
 
-The walker checkpoints preserve the other 18 folk sheets from the landed
+The walker checkpoints preserve the other 15 folk sheets from the landed
 Elaia base; all 22 arrays reproduce their checked-in PNGs. Native image checks,
 helper compilation, `make -j$(sysctl -n hw.ncpu)` and smoke pass. The matching
-gallery passes at all eleven cameras across the nine maps. The healer's talk
+gallery passes at all fourteen cameras across the nine maps, checking both
+map identity and the overworld callback. The healer's talk
 and whiteout regressions pass against both exact before and current ROMs.
 `python3 -m unittest discover -s tools/ichor/tests -p test_folk_sprites.py`
 checks source reproduction, complete distinct states, the planted rod and
 uncropped tenth-frame preview. ROM usage remains 23,040,960 bytes (68.67%).
-This does not mark the remaining 39 owned species, six walkers, seven
+This does not mark the remaining 39 owned species, three walkers, seven
 portraits or healing effects finished.
 
 | Item | Where | Status | Phase | Notes |

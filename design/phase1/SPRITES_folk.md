@@ -37,8 +37,23 @@ retain their folk palette and all nine walking states. The sheet preview now
 uses the actual frame count, so the healer's bow is not omitted. All 22 sources
 reproduce, the other 20 PNGs are unchanged from the preceding checkpoint, and
 the two real heal paths hold the bow for exactly 32 frames before returning
-control. Build, smoke and the scoped gallery pass. Six local walkers still
-await polish; these two new sheets await artistic approval.
+control. Build, smoke and the scoped gallery pass. This checkpoint is
+artistically accepted; six local walkers remained at that point.
+
+**Route 1/Temple checkpoint:** `augur` and `acolyte_m/f` have smaller
+directional heads, longer robes and all 27 distinct standing/walking states.
+The Augur keeps white hair/beard, gold band/feather, indigo robe, restrained
+bird hem and planted wooden staff. The acolytes retain saffron over linen,
+soot/ash, bronze tongs with coal and the raised lamp; the side-view lamp joins
+the sleeve rather than floating beside it. All 22 source arrays reproduce.
+The other 19 folk PNGs and every other human sheet are byte-identical to the
+preceding checkpoint. All 16 compiled cast-palette roles match the indexed
+PNG palette. Native checks, four folk regressions, helper compilation, build
+and smoke pass. The historical/current gallery now covers fourteen cameras
+across nine maps and checks the overworld callback as well as the map before
+each capture. Complete colored 1x/4x sheets and actual field captures are
+preserved outside git. These three sheets await artistic approval; Goatherd,
+Hoplite and Merchant walkers, seven class portraits and healing effects remain.
 
 - **Source:** `tools/ichor/art/sprites_folk.py`. Every head, body and prop is ASCII art in that file, one character per pixel.
 - **Rebuild the PNGs and the folk palette:** `python3 tools/ichor/art/sprites_folk.py --write`
