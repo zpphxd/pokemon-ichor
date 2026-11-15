@@ -586,7 +586,7 @@ def events(m):
             sign(19, 19, S8 + "DigTreasury"),
             sign(22, 24, S8 + "SignSphinx"),
             sign(24, 25, S8 + "DigSphinx"),
-            sign(17, 3, S8 + "DigGla"),
+            sign(17, 2, S8 + "DigGla"),
             sign(7, 11, S8 + "SignWest"),
             hidden(42, 10, "ITEM_HEART_SCALE", "FLAG_ICHOR_HIDDEN_ROUTE8_HEART_SCALE"),
             hidden(30, 15, "ITEM_PEARL", "FLAG_ICHOR_HIDDEN_ROUTE8_PEARL"),
@@ -594,7 +594,7 @@ def events(m):
             hidden(39, 23, "ITEM_BIG_MUSHROOM", "FLAG_ICHOR_HIDDEN_ROUTE8_BIG_MUSHROOM"),
         ],
     }
-    m.dig_spots = [(53, 13), (36, 14), (23, 18), (19, 19), (24, 25), (17, 3)]
+    m.dig_spots = [(53, 13), (36, 14), (23, 18), (19, 19), (24, 25), (17, 2)]
     return E
 
 
@@ -615,7 +615,7 @@ def border(m):
 
 ENTRY = [(63, EAST_ROAD), (63, EAST_ROAD + 1)]
 EXIT = [(0, WEST_ROAD), (0, WEST_ROAD + 1)]
-UNREACHABLE_OK = {(17, 4), (17, 3)}            # Gla: the Revive and the dig (the Conch)
+UNREACHABLE_OK = {(17, 4), (17, 2)}            # Gla: the Revive and the dig (the Conch)
 
 
 def reach(m, starts, blocked=()):
