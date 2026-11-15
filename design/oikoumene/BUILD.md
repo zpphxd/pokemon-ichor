@@ -36,7 +36,7 @@ Each batch runs as parallel worktree agents. This session merges them into its b
 | # | Batch | Agents | Status |
 |---|---|---|---|
 | 0 | **Setup:** this file, the sections named (§3), the halls' 30 flags, id and flag sub-ranges (§4), batch 1's maps registered | this session | done |
-| 1 | **The chart and the near ports.** The region map, Troad / Egypt / Black Sea towns and arrival lanes, their interiors, batch 1's trainer classes and sprites, batch 1's music | 9 (§5) | in progress |
+| 1 | **The chart and the near ports.** The region map, Troad / Egypt / Black Sea towns and arrival lanes, their interiors, batch 1's trainer classes and sprites, batch 1's music | 10 (§5) | **paused 2026-11-14**, mid-batch: see §8 |
 | 2 | **The near lands' routes, dungeons and halls.** Troad II (Skamander, Ida, Gargaros, the Walls), the Skaian Gate; Egypt II (the Pyramid Field, the Great Pyramid, the Nile, Heliopolis, Elephantine), the precinct of Proteus and Helen; Black Sea II (the Phasis, the Field of Ares, Leuke, the Grove, the Caucasus caves), Aietes's palace and the Fleece; Themiskyra's two households; the near lands' legends; the Nurseries' first three | ~8 | **on hold** (director, 2026-11-14: the main story through the League comes first; planning, design and engine asks continue) |
 | 3 | **Lydia and Libya** (63–72): each land's tileset, towns, routes, interiors and dungeons; the treasury and the hippodrome (the chariot); their legends, classes and music | ~8 | |
 | 4 | **Aithiopia, the North, the Far West** (70–82): the same, with the round temple, the bath-court and the royal gallery; the cataracts, the Rhipaean ice and the far west's links to LABORS's maps | ~9 | |
@@ -222,3 +222,31 @@ The precinct of Proteus, the Skaian Gate and Aietes's palace are batch 2's halls
 ## 8. Results
 
 Each batch's result goes here when it's merged: what was built, its renders, its tests, ROM after, and what's stubbed.
+
+### Batch 1: paused 2026-11-14, mid-batch
+
+**Why.** The director paused the Oikoumene to save usage for the main story ("everything up unto the post game", the user). Each agent committed its work in progress and stopped. Everything that builds green is merged into `claude/world-oikoumene-950021`; `make` and the smoke test pass there (ROM 22,602,916 B, 67.36%), and the slice playthrough was run at the pause (§8's last line).
+
+**Where each agent stopped.** Branches are local (`worktree-agent-…`); their worktrees are under `.claude/worktrees/agent-…`. Each one's own doc has a "Stopped at" section with the detail.
+
+| Agent | Branch, commit | Merged? | Done | Left to do |
+|---|---|---|---|---|
+| chart | `worktree-agent-adac0821250d61eae` ccd821fc73 | yes | `REGION_OIKOUMENE` and the two ranges; the crossing targets (AETHOS, THE OIKOUMENE) with last-port tracking; fly targets for the six batch-1 towns; popups; the trainer-music branch; the Nursery hook; `oikoumene_chart.sh` 23/23 (before the last art regen) | the chart art is a first pass (one critique; the inlay and clutter); `test/ichor_nursery.c` unrun; BUILD.md §5's Nursery-table subsection unwritten; **every heal location is a placeholder at (3,23)**: move them to the Wings landings below. `MAPS_chart.md` |
+| troad-towns | `worktree-agent-aaf67496f696a4c43` f5792f36aa | yes | `troas` (476/504); Sestos 36×30, the Hellespont 64×34, Ilion 48×42, built by code with their checks passing; scripts, trainers 680–691, flags, wild tables; three render passes per map | `troad_towns.sh` written, never run; the audit not re-run after the last fixes; Wings landings Sestos (5,15), Ilion (10,30); the Abdera landing (10,9). `MAPS_troad.md` |
+| troad-rooms | `worktree-agent-a170559185cdf325e` 5d11303ece | yes | `megaron` (471/504); all 14 rooms laid out with events and scripts; 10 flags; Odysseus (trainer 692); both trades; the Xenion rename | `troad_rooms.sh` written, never run; critique pass 3 placeholders. `ROOMS_troad.md` |
+| egypt-towns | `worktree-agent-a06cef9b103011bd5` 39334dbb66 | yes | `kemet` (491/504); Naukratis 36×34, Pharos 36×30, the Delta Reeds 32×46, Memphis 40×36, built by code with checks passing; scripts, trainers 700–713 and 935–936, wild tables, flags | Memphis has one render pass, the others two; the audit ran before the wild tables; two hidden items stubbed (no flags); `egypt_towns` test, text measuring and the 2x renders not done; Wings landings Naukratis (13,14), Memphis (13,10). **Pharos is 36 wide** (for world-postgame's Route 34 offset). `MAPS_egypt.md` |
+| egypt-rooms | `worktree-agent-aa8f56a81f4ac4d08` 6efab4ce9c | yes | `per` (482/504); all 12 rooms with events and scripts; flags 0x414–0x41A; the Kecleon trade | `egypt_rooms.sh` written, never run; text widths unmeasured; pass 3, the contact sheet. `ROOMS_egypt.md` |
+| pontos-towns | `worktree-agent-ae3a8f3efbb0e259c` da17645e58 | **no: red** | `pontos` (397/504, registered); the Bosporus, Salmydessos, the Pontic Coast and Aia laid out by code with events, connections and 2x renders; Wings landings Salmydessos (5,7), Aia (18,15); the Themiskyra landing (65,30) | **its maps' `scripts.pory` aren't written**, so the link fails on every event script; its item and hidden flags aren't claimed (the 9 bank and 8 vanilla names are in its events; claim them in 0x424–0x433 and 0x4D0–0x4D7); `ITEM_GOLD_BAR` doesn't exist (use `ITEM_BIG_NUGGET`); trainers, wild tables, the test and the audit not started. `MAPS_pontos.md` |
+| pontos-rooms | `worktree-agent-a90b07227030bd7f9` 1f78783eb7 | yes | `chalkeon` (409/504); all 7 rooms; flags 0x434–0x437; both trades; Rotom's forms through `Ichor_ChooseRotomForAppliance` | `pontos_rooms.sh` stopped at 5/7 rooms (the linen trade and the five forms unrun); its doors back out need Salmydessos's and Aia's warps (pontos-towns). `ROOMS_pontos.md` |
+| sprites-trainers | `worktree-agent-a122816942fd56b5a` 1fd7c8655d | yes, complete | 11 classes and 5 titles with 15 pics; 82-check battle test | KING has no pic; the titles play the Hierophants' theme (`ICHOR_STUB_MUSIC`). `SPRITES.md` "Trainer pics" |
+| sprites-overworld | `worktree-agent-a4ba955008a7f2b1a` 5f3d55e71d | yes | 27 walkers and Odysseus; palettes 0x1146–0x1148; 258-check test | the in-game look (pass 3) unreviewed. `SPRITES.md` "Overworld" |
+| music | `worktree-agent-ae5b33f6bf5a1e274` 1e5c477274 | yes | 10 songs, ids 639–648, 12.7 KB, the Periodos as one call per hall; 81-check test | revision pass 1 written but not re-rendered; pass 2. **Song ids 639+ will collide with other branches' songs** at the director's merge: renumber then. `MUSIC_cues.md` |
+
+**To restart, in order.**
+1. Merge origin/main; resolve with `tools/ichor/oikoumene_merge.py` (union for registration files, `wild` for the tables).
+2. Swap the stand-ins: `ICHOR_STUB_CLASS` parties to the real classes (`SPRITES.md`'s table), stand-in graphics to the `OBJ_EVENT_GFX_ICHOR_*` walkers, stand-in map music to `MUS_ICHOR_*` (`MUSIC_cues.md`); set the six heal locations to the Wings landings above.
+3. Finish pontos-towns from its branch (scripts, flags, trainers, wild tables), then merge it, which also gives pontos-rooms its doors.
+4. Run every agent's unrun test, the audit on all batch-1 maps (expect hidden-item shortfalls until bank-flag hidden items land), and the remaining render passes; send the renders.
+5. Tell world-postgame Pharos's width (36) and the Themiskyra landing (65,30) on the Pontic Coast.
+
+**Lessons for the agents' briefs.** `isolation: worktree` cuts from main, not this branch: every agent had to reset to the lead's commit, so say so in the brief. Agents ran out of time on tests and render passes more than on building; ask for the test run before the third render pass.
