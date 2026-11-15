@@ -1,0 +1,9 @@
+# Per-tileset Porytiles config for gTileset_Euploia, the Euploia refitted (deck and
+# below deck). Sources are drawn by tools/ichor/art/euploia_build.py, which
+# compiles the ship against an empty stand-in primary, checks its metatiles use
+# only its own tiles and palettes 6-12, then points its sea cells at aethos's sea.
+# Pair it with aethos when compiling it directly.
+tileset:
+  primary_pairing:
+    mode: manual
+    partners: [gTileset_Aethos]

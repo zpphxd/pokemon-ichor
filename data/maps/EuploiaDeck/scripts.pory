@@ -1,0 +1,224 @@
+// The Euploia's deck, refitted for the post-game (ODYSSEY §2, §3). Drawn by
+// tools/ichor/art/euploia_deck.py; events placed by tools/ichor/maps/euploia.py.
+//
+// Nausikles and Alethea come with the ship (FLAG_ICHOR_GOT_EUPLOIA); the rest of
+// the crew stand on deck only once they've signed on. Their hide flags are temp
+// flags, set here when they're not aboard (temp flags clear on every map load).
+// Lynkeus and Nolan wear stand-in walkers until the sprites agent's
+// OBJ_EVENT_GFX_ICHOR_LYNKEUS and _NOLAN land (ICHOR_STUB_PG_SPRITES).
+
+mapscripts EuploiaDeck_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+            setflag(FLAG_TEMP_5)
+        }
+        if (!flag(FLAG_ICHOR_CREW_LYNKEUS)) {
+            setflag(FLAG_TEMP_1)
+        }
+        if (!flag(FLAG_ICHOR_CREW_GLAUKIAS)) {
+            setflag(FLAG_TEMP_2)
+        }
+        if (!flag(FLAG_ICHOR_CREW_NOLAN)) {
+            setflag(FLAG_TEMP_3)
+        }
+        if (!flag(FLAG_ICHOR_CREW_OARSMEN)) {
+            setflag(FLAG_TEMP_4)
+        }
+    }
+}
+
+text EuploiaDeck_Text_NameNausikles { "NAUSIKLES" }
+text EuploiaDeck_Text_NameAlethea { "ALETHEA" }
+text EuploiaDeck_Text_NameLynkeus { "LYNKEUS" }
+text EuploiaDeck_Text_NameGlaukias { "GLAUKIAS" }
+text EuploiaDeck_Text_NameNolan { "NOLAN" }
+text EuploiaDeck_Text_NameOarsman { "OARSMAN" }
+
+// ---------------------------------------------------------------------------
+// Nausikles at the steering oars: the helm (the sail-engine agent's)
+// ---------------------------------------------------------------------------
+
+script EuploiaDeck_EventScript_Nausikles {
+    lock
+    faceplayer
+    setspeaker(EuploiaDeck_Text_NameNausikles)
+    call(EventScript_IchorHelm)
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Alethea at the chart table: the Periplous, and the stars at night
+// ---------------------------------------------------------------------------
+
+script EuploiaDeck_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(EuploiaDeck_Text_NameAlethea)
+    // ICHOR_STUB_SAILING: at night, at sea. The build lead swaps this for
+    // specialvar(VAR_RESULT, Ichor_IsStarsOut) once the sail engine lands.
+    gettimeofday
+    if (var(VAR_0x8000) == 3) {    // TIME_NIGHT (an enum, so not visible to the assembler)
+        msgbox(format("Look up. That's the Great Bear, turning round the pole.\p"
+                      "Calypso told Odysseus: keep the Bear on your left, and you're going east."))
+        msgbox(format("Truthfully, it's the one thing in his whole story I've never caught him embellishing."))
+        release
+        end
+    }
+    // ICHOR_STUB_PERIPLOUS: the Periplous and its corrections come with batch 6.
+    msgbox(format("Odysseus's chart. Every island he swears he saw, and what was on it.\p"
+                  "I'm checking each one. So far I've corrected the spelling."))
+    msgbox(format("Past Maleia the papyrus is blank. Not empty. Blank.\p"
+                  "Truthfully, that's the part I can't wait to fill in."))
+    if (flag(FLAG_ICHOR_CREW_NOLAN)) {
+        msgbox(format("Your dramatist asked which parts of the chart are true.\p"
+                      "I said I'd tell him when I know. He said that's the only honest answer he's had all year."))
+    } elif (flag(FLAG_ICHOR_CREW_PHEMIOS)) {
+        msgbox(format("Phemios already has a song about the islands. He hasn't seen them.\p"
+                      "Truthfully, neither have I. But I'm not singing about it."))
+    }
+    release
+}
+
+script EuploiaDeck_EventScript_Chart {
+    lockall
+    if (!flag(FLAG_ICHOR_GOT_EUPLOIA)) {
+        msgbox(format("A bare chart table, scored with old compass marks.\p"
+                      "Whoever navigates this ship keeps the charts in their head."))
+        releaseall
+        end
+    }
+    msgbox(format("A sea chart, pinned at the corners with sling stones.\p"
+                  "Aethos's coast is inked in on the right, with Alethea's notes in red."))
+    msgbox(format("West of Maleia the papyrus is blank, but for one red question mark."))
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Lynkeus at the rail
+// ---------------------------------------------------------------------------
+
+script EuploiaDeck_EventScript_Lynkeus {
+    lock
+    faceplayer
+    setspeaker(EuploiaDeck_Text_NameLynkeus)
+    msgbox(format("A gull on the harbor wall, two stadia off. It's got a sardine.\p"
+                  "Now it's dropped it. Now the other gull has it."))
+    if (flag(FLAG_ICHOR_CREW_OARSMEN)) {
+        msgbox(format("Twelve Lakonians, and not one of them looks at the sea.\p"
+                      "They look at the back in front of them. That's how they row so straight."))
+    } else {
+        msgbox(format("I see the glint before the wave does. Stay by me at sea.\p"
+                      "Whatever's floating out there, I'll call it."))
+    }
+    applymovement(LOCALID_EUPLOIA_LYNKEUS, EuploiaDeck_Movement_FaceDown)
+    waitmovement(0)
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Glaukias, Glaukos's grandson
+// ---------------------------------------------------------------------------
+
+script EuploiaDeck_EventScript_Glaukias {
+    lock
+    faceplayer
+    setspeaker(EuploiaDeck_Text_NameGlaukias)
+    msgbox(format("Grandpa says the sea's full of gods if you know where to look.\p"
+                  "I'm looking everywhere! That's got to count."))
+    msgbox(format("Nausikles says I can take the steering oar when I'm older.\p"
+                  "I'm older than yesterday. I asked."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Christopher Nolan: the run-through, told backwards
+// ---------------------------------------------------------------------------
+
+script EuploiaDeck_EventScript_Nolan {
+    lock
+    faceplayer
+    setspeaker(EuploiaDeck_Text_NameNolan)
+    // ICHOR_STUB_ODYSSEY_FLAGS: the run-through reads the voyage's choices
+    // (VAR_ICHOR_ODYSSEY, IchorEpics.voyage) once batch 6 claims them, from the
+    // homecoming back to Maleia. Until then there's nothing to run.
+    msgbox(format("The run-through. We start at the end and work back.\p"
+                  "Problem. There isn't an end yet."))
+    msgbox(format("So we wait. Waiting is most of the job.\p"
+                  "When there's a voyage, I'll tell it to you backwards. Trust me."))
+    if (flag(FLAG_ICHOR_CREW_PHEMIOS)) {
+        msgbox(format("Your bard sings it beautifully. That's the problem.\p"
+                      "Nobody believes a song that beautiful."))
+    }
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The oarsmen, lent by Kleon: Lakonian, so short
+// ---------------------------------------------------------------------------
+
+script EuploiaDeck_EventScript_Oarsman1 {
+    lock
+    faceplayer
+    setspeaker(EuploiaDeck_Text_NameOarsman)
+    msgbox(format("Kleon said row.\pWe row."))
+    applymovement(LOCALID_EUPLOIA_OARSMAN_1, EuploiaDeck_Movement_FaceAft)
+    waitmovement(0)
+    release
+}
+
+script EuploiaDeck_EventScript_Oarsman2 {
+    lock
+    faceplayer
+    setspeaker(EuploiaDeck_Text_NameOarsman)
+    if (flag(FLAG_ICHOR_CREW_PHEMIOS)) {
+        msgbox(format("The bard sings at the stroke.\pWe do not sing."))
+    } else {
+        msgbox(format("Wind's fair.\pSo we sit. We do not like sitting."))
+    }
+    applymovement(LOCALID_EUPLOIA_OARSMAN_2, EuploiaDeck_Movement_FaceAft)
+    waitmovement(0)
+    release
+}
+
+script EuploiaDeck_EventScript_Oarsman3 {
+    lock
+    faceplayer
+    setspeaker(EuploiaDeck_Text_NameOarsman)
+    msgbox(format("Lakonians don't get seasick.\pWe get angry."))
+    applymovement(LOCALID_EUPLOIA_OARSMAN_3, EuploiaDeck_Movement_FaceAft)
+    waitmovement(0)
+    release
+}
+
+script EuploiaDeck_EventScript_Benches {
+    lockall
+    if (flag(FLAG_ICHOR_CREW_OARSMEN)) {
+        msgbox(format("An oarsman's bench. Its cushion is worn to the shape of a Lakonian."))
+    } else {
+        msgbox(format("Empty benches along the rail, the oars shipped and lashed.\p"
+                      "She needs a crew to row her."))
+    }
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// The deck's fittings
+// ---------------------------------------------------------------------------
+
+script EuploiaDeck_EventScript_Klepsydra {
+    msgbox(format("The captain's water clock: one bronze bowl dripping into another.\p"
+                  "Nausikles swears it has never once been right."), MSGBOX_SIGN)
+}
+
+script EuploiaDeck_EventScript_Amphorae {
+    msgbox(format("Amphorae lashed under the rail: water, oil and the good wine,\l"
+                  "which is marked as vinegar so the oarsmen leave it alone."), MSGBOX_SIGN)
+}
+
+script EuploiaDeck_EventScript_WaterJar {
+    msgbox(format("The crew's water jar, with a dipper on a string.\p"
+                  "Somebody has scratched a tally of days on its side."), MSGBOX_SIGN)
+}
+
+movement EuploiaDeck_Movement_FaceAft { face_left }
+movement EuploiaDeck_Movement_FaceDown { face_down }

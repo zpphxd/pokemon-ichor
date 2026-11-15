@@ -447,3 +447,18 @@ const struct Tileset gTileset_Labyrinth =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
     .callback = NULL,
 };
+
+// Ichor: euploia, the Euploia refitted for the post-game: her deck and the crew's
+// quarters below (ODYSSEY §2). Porytiles-managed, built by tools/ichor/art/euploia_build.py
+// for the aethos primary (world-act1's trireme art, redrawn bow-east and refitted): its
+// sea cells borrow aethos's animated sea, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Euploia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Euploia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Euploia,
+    .metatiles = gMetatiles_PorytilesManaged_Euploia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Euploia,
+    .callback = NULL,
+};

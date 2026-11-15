@@ -1,0 +1,20 @@
+// ICHOR_STUB_SAILING: stand-ins for the sail-engine agent's scripts, so the
+// Euploia's deck (MAP_EUPLOIA_DECK) links on the euploia branch before
+// data/scripts/ichor_postgame_sailing.pory lands. Nothing else lives here.
+// The build lead deletes this file, and its line in data/event_scripts.s, at merge.
+
+// Nausikles at the steering oars: call(EventScript_IchorHelm). The real one
+// offers TAKE HER OUT, CAST OFF, SET A COURSE, THE WIND? and STAY.
+script EventScript_IchorHelm {
+    msgbox(format("She's moored, and the sea's not ready for her yet.\pAsk me again when it is."))
+    return
+}
+
+// The deck's gangplank (its bg event runs this): back to the quay where she's
+// moored.
+script EventScript_IchorLeaveShip {
+    lockall
+    msgbox(format("The gangplank runs down to the quay.\pGoing ashore isn't rigged yet."))
+    releaseall
+    end
+}
