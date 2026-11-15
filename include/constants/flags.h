@@ -1790,7 +1790,6 @@
 #define FLAG_ICHOR_GALLERY_MIRROR_P3_BIT0       (FLAG_ICHOR_GENERAL_START + 0x258) // Ichor: Temple of Aphrodite: turnable mirror P3's facing, bit 0
 #define FLAG_ICHOR_GALLERY_MIRROR_P3_BIT1       (FLAG_ICHOR_GENERAL_START + 0x259) // Ichor: Temple of Aphrodite: turnable mirror P3's facing, bit 1
 #define FLAG_ICHOR_ITEM_TEMPLE_APHRODITE_MAX_REVIVE (FLAG_ICHOR_GENERAL_START + 0x25A) // Ichor: Temple of Aphrodite: the jar in Anthousa's alcove
-#define FLAG_ICHOR_KRENAIA_GAVE_HORN            (FLAG_ICHOR_GENERAL_START + 0x25B) // Ichor: Neraida falls: Krenaia gave the Horn of Achelous (stand-in for FLAG_ICHOR_GOT_HORN_OF_ACHELOUS until the relics batch)
 #define FLAG_ICHOR_ITEM_NERAIDA_MAX_REPEL       (FLAG_ICHOR_GENERAL_START + 0x25C) // Ichor: Neraida falls: the jar on the top terrace
 #define FLAG_ICHOR_ITEM_NERAIDA_PROTEIN         (FLAG_ICHOR_GENERAL_START + 0x25D) // Ichor: Neraida falls: the Protein on a rock in the upper pool
 #define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL_START + 0x280) // Ichor: world-act3: Daedalus gives the Master Ball in the workshop, Labyrinth Scene D

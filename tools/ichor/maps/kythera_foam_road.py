@@ -30,11 +30,15 @@ NAME = "KytheraFoamRoad"
 P = "KytheraFoamRoad_EventScript_"
 
 # The seams the neighbours agree on.
-SKANDEIA_ROAD = (9, 11)        # east edge: the road's rows
-PAPHIA_ROAD = (8, 10)          # west edge: the road's rows
-PAPHIA_GATE_Y = 21             # Paphia's east gate rows start here (its road is rows 21..23)
+SKANDEIA_ROAD = (9, 10)        # east edge: the road's rows
+SKANDEIA_GATE_Y = 16           # Skandeia's west gate road is its rows 16-17
+PAPHIA_ROAD = (7, 10)          # west edge: the road's rows
+PAPHIA_GATE_Y = 20             # Paphia's east gate road is its rows 20..23
 STAIR = (41, 42)               # the stair up to the spring, at the north edge
 SPRING_OPENING_X = 12          # the spring's south opening starts at its x = 12
+
+HERM = (43, 5)                 # the great herm's top; its base (the bg event) is the row below
+ROCK_TRIGGER = [(27, 7), (27, 8)]
 
 
 def hedge(m, x0, x1, y, ends=True):
@@ -63,237 +67,219 @@ def aethos_shore(m, x0, x1, y):
         m.set(x, y, 0x12C, False)
 
 
+def grove(m, olives=(), cypresses=(), pines=(), bushes=(), briars=()):
+    for x, y in olives:
+        m.olive(x, y)
+    for x, y in pines:
+        m.pine(x, y)
+    for x, y in cypresses:
+        m.cypress(x, y)
+    for x, y in bushes:
+        m.piece("myrtle", "bush" if (x + y) % 2 else "single", x, y)
+    for x, y in briars:
+        m.piece("flowers", "briar", x, y)
+
+
+def cells(*rects):
+    out = set()
+    for x0, y0, x1, y1 in rects:
+        out |= {(x, y) for x in range(x0, x1 + 1) for y in range(y0, y1 + 1)}
+    return out
+
+
 def compose():
     m = Map(NAME, "kythera", W, H, fill=A.GRASS)
-    m.border = [A.SEA] * 4
+    # The border: an olive wood, matching the ridge the camera sees past the quarry.
+    m.border = [A.OLIVE_TOP[0], A.OLIVE_TOP[1], A.OLIVE_BOT_TIP[0], A.OLIVE_BOT_TIP[1]]
     m.header = {"music": "MUS_ICHOR_ROAD", "weather": "WEATHER_SUNNY", "map_type": "MAP_TYPE_ROUTE",
                 "show_map_name": True, "allow_cycling": True, "allow_running": True}
-
-    # ---- the sea under everything south --------------------------------------------------
     m.rect(0, 13, W - 1, H - 1, A.SEA, False)
 
-    # ==== the Skandeia strip, x 56..63: aethos only ==========================================
-    m.rect(56, 0, 63, 12, A.GRASS, False)
-    for x, y in ((56, 1), (58, 0), (60, 2), (62, 0), (61, 5), (57, 5)):
-        m.olive(x, y)
-    for x, y in ((59, 4), (63, 3), (56, 3)):
-        m.cypress(x, y)
-    m.path_patch(54, 9, 63, 11)
-    m.rect(56, 12, 63, 13, A.SAND, False)
+    # ==== the Skandeia strip, x 56..63: aethos only; the road leaves at rows 9-10 =========
+    grove(m, olives=[(56, 1), (59, 0), (62, 2), (57, 4), (60, 5), (62, 11), (58, 11)],
+          cypresses=[(61, 3), (63, 6), (56, 6), (59, 3)])
+    m.path(cells((52, 9, 55, 10), (54, 8, 55, 8), (56, 9, 63, 10)))
+    for x, y in ((58, 8), (59, 8), (61, 8), (57, 7)):
+        m.set(x, y, A.ANEMONE, False)
+    m.rect(56, 13, 63, 13, A.SAND, False)
+    m.set(56, 12, A.SAND, False)
+    m.set(57, 12, A.SAND, False)
+    m.set(63, 13, A.BOULDER_SAND, True)
     aethos_shore(m, 56, 63, 14)
-    m.rect(57, 7, 58, 7, A.ANEMONE, False)
-    m.set(62, 7, A.TALL, False)
+    m.set(55, 7, A.STELE, True)                  # THE FOAM ROAD
 
-    # ==== the calm stretch and band 1, x 45..55 ===============================================
-    # the ridge over the terrace
-    m.rect(44, 0, 55, 3, A.GRASS, False)
-    hedge(m, 44, 52, 3)
-    for x, y in ((45, 0), (48, 1), (52, 0)):
-        m.olive(x, y)
-    m.cypress(51, 1)
-    m.cypress(54, 1)
-    m.piece("flowers", "briar_L", 53, 3)
-    m.piece("flowers", "briar_R", 54, 3)
-    m.piece("myrtle", "single", 55, 3)
-    # the terrace, rows 4-5, stepping down east in two ledges
-    m.rect(44, 4, 55, 5, A.GRASS, False)
-    for y in (4, 5):
+    # ==== the ridge, the terrace and band 1, x 44..55 ========================================
+    grove(m, olives=[(44, 0), (49, 1), (53, 0)], cypresses=[(47, 1), (52, 2), (55, 1)],
+          bushes=[(46, 3), (51, 3)], briars=[(48, 3), (55, 3)])
+    for y in (4, 5):                              # the terrace drops east in two ledges
         m.set(47, y, A.LEDGE["E"], False)
         m.set(53, y, A.LEDGE["E"], False)
-    for x in (45, 50, 51):
-        m.piece("flowers", "thrift", x, 4)
-    # the hedge between terrace and road
-    hedge(m, 44, 52, 6)
-    hedge(m, 44, 52, 7, ends=False)
-    m.piece("myrtle", "SE", 52, 7)
-    m.piece("myrtle", "NE", 52, 6)
-    # the road, the shingle, and band 1 between hedge and sea-cliff
-    m.rect(44, 8, 55, 11, A.SAND, False)
-    m.blob("shingle", ["..#####...",
-                       ".#######..",
-                       "..######.."], 45, 9)
+    for x, y in ((45, 4), (49, 5), (50, 4), (52, 5), (54, 4)):
+        m.piece("flowers", "thrift", x, y)
+    hedge(m, 44, 53, 6)
+    hedge(m, 44, 53, 7, ends=False)
+    m.piece("myrtle", "SE", 53, 7)
+    m.piece("myrtle", "NE", 53, 6)
+    m.piece("myrtle", "SW", 44, 7)
+    m.piece("myrtle", "NW", 44, 6)
+    m.rect(44, 8, 51, 11, A.SAND, False)
+    m.blob("shingle", ["..####..",
+                       ".######.",
+                       "..####.."], 43, 9, edge_in=False)
     m.blob("seagrass", ["###",
                         "###",
                         "###",
                         "###"], 49, 8)
     cliff(m, 49, 55, 12, foot="sea")
-    m.set(56, 12, A.SAND, False)
+    m.piece("cliff", "corner_in_W", 49, 12)
 
-    # ==== Amphitos's beach, x 44..48 ==========================================================
-    m.shore(["#####",
-             "~~~~~"], 44, 12)
-    m.piece("sand_decor", "shells", 45, 11)
-    m.piece("sand_decor", "wrack", 47, 12)
-    m.piece("rocks", "tide_rock", 46, 15)
+    # ==== the fork, x 36..44: the stair to the spring, the great herm =========================
+    grove(m, olives=[(36, 0), (38, 2)], cypresses=[(39, 0), (44, 3)], bushes=[(37, 4)])
+    for x in (40, 43):
+        for y in (0, 1, 2):
+            m.piece("myrtle", "V", x, y)
+        m.piece("myrtle", "B", x, 3)
 
-    # ==== the fork, x 39..43 ==================================================================
-    m.rect(36, 0, 43, 3, A.GRASS, False)
-    hedge(m, 36, 40, 3)
-    hedge(m, 43, 43, 3, ends=False)
-    m.piece("myrtle", "single", 43, 3)
-    for x in STAIR:
-        for y in range(0, 4):
-            m.set(x, y, A.PATH, False)
-        m.piece("myrtle", "gap_stair", x, 3)
-    m.piece("myrtle", "V", 40, 0)
-    m.piece("myrtle", "V", 40, 1)
-    m.piece("myrtle", "V", 40, 2)
-    m.piece("myrtle", "V", 43, 0)
-    m.piece("myrtle", "V", 43, 1)
-    m.piece("myrtle", "V", 43, 2)
-    m.olive(37, 0)
-    m.cypress(39, 1)
-    m.path_patch(39, 4, 44, 11)
-    m.set(41, 4, A.PATH)
-    m.set(42, 4, A.PATH)
-    m.piece("herm", "herm", 44, 5)
-    m.piece("herm", "herm_base", 44, 6)
-    m.set(39, 7, A.STELE, True)                  # the fork's sign
-    m.shore(["######",
-             "~~~~~~"], 38, 12)
-
-    # ==== the cutting, x 28..38 ===============================================================
-    m.rect(28, 0, 38, 4, A.GRASS, False)
-    for x, y in ((28, 1), (31, 0), (35, 1)):
-        m.olive(x, y)
-    m.cypress(33, 2)
-    m.cypress(30, 3)
-    hedge(m, 36, 38, 4)
-    cliff(m, 28, 38, 5, foot="sand", ends=False)
-    m.rect(28, 8, 38, 8, A.SAND, False)
-    m.shore(["###########",
-             "~~~~~~~~~~~"], 28, 8)
-    m.rect(38, 7, 39, 11, A.SAND, False)
-    m.path_patch(39, 7, 41, 11)
-    # the neck: marble blocks along the water's side of the path, east of Skopas
-    for x in (36, 37, 38):
-        m.piece("quarry", "blocks" if x % 2 else "block", x, 8)
-    # the neck: marble blocks along the water's side of the path
-    # band 2, straight behind Skopas
+    # ==== the cutting, x 28..38, and the rock beach, x 16..27 =================================
+    grove(m, olives=[(28, 0), (31, 1), (34, 0)], pines=[(36, 2)], cypresses=[(30, 3), (33, 3), (29, 3)])
+    cliff(m, 28, 37, 5, foot="sand", ends=False)
+    m.piece("cliff", "lip_R", 38, 5)
+    m.piece("cliff", "face_R", 38, 6)
+    rows = []                                     # one shoreline from the beach along the cutting to the fork
+    for y in range(6, 14):
+        r = ""
+        for x in range(16, 44):
+            land = y <= 8 if 28 <= x <= 38 else y <= 12
+            r += "#" if land else "~"
+        rows.append(r)
+    m.shore(rows, 16, 6)
+    m.rect(39, 6, 43, 10, A.GRASS, False)         # the fork is a meadow above its own beach
+    m.blob("shingle", ["...####",
+                       ".######"], 37, 11, edge_in=False)
+    for x in range(28, 38):
+        m.piece("cliff", "foot_sand" if (x * 3) % 7 else "foot_sand_rocks", x, 7)
     m.blob("seagrass", ["####",
                         "####"], 30, 7)
+    for x in (36, 37, 38):                        # the neck: marble blocks on the water's side
+        m.piece("quarry", "blocks" if x % 2 else "block", x, 8)
 
-    # ==== Aphrodite's rock, x 16..27 ==========================================================
-    m.rect(16, 0, 27, 3, A.GRASS, False)
+    road = cells((STAIR[0], 0, STAIR[1], 7), (38, 7, 39, 8), (38, 8, 44, 9), (43, 10, 44, 10))
+    m.path(road)
+    for x in STAIR:
+        m.piece("myrtle", "gap_stair", x, 3)
+    m.piece("herm", "herm", HERM[0], HERM[1])
+    m.piece("herm", "herm_base", HERM[0], HERM[1] + 1)
+    m.set(39, 6, A.STELE, True)                   # the fork's sign
+    for x, y in ((40, 5), (44, 5), (39, 4), (42, 10), (40, 10), (39, 10)):
+        m.piece("flowers", "petals" if x % 2 else "thrift", x, y)
+
+    # the beach: cliff, seep and basin, shingle, the dig, the rock offshore, the reef spit
+    grove(m, olives=[(24, 0), (26, 2)], cypresses=[(25, 2)])
     cliff(m, 16, 27, 4, foot="sand", ends=False)
     m.piece("cliff", "seep", 25, 5)
     m.piece("falls", "basin", 25, 6)
-    m.rect(16, 7, 27, 12, A.SAND, False)
     m.blob("shingle", ["....####....",
                        "...######...",
                        "..######...."], 16, 9, edge_in=False)
-    m.shore(["############",
-             "~~~~~~~~~~~~"], 16, 12)
-    m.piece("sand_decor", "sherd_dig", 22, 11)
-    m.piece("sand_decor", "scallop", 18, 10)
-    m.piece("sand_decor", "lace", 20, 12 - 1)
-    m.piece("sand_decor", "lace", 21, 12 - 1)
-    m.piece("sand_decor", "footprints", 23, 8)
-    m.piece("sand_decor", "wrack", 26, 11)
+    for name, x, y in (("sherd_dig", 22, 11), ("scallop", 18, 10), ("lace", 20, 12), ("lace", 21, 12),
+                       ("footprints", 23, 8), ("wrack", 26, 11), ("shells", 17, 7)):
+        m.piece("sand_decor", name, x, y)
     rock = m.s("aphrodite_rock")
     for j in range(3):
         for i in range(3):
             m.set(19 + i, 15 + j, rock["ids"][j][i], True)
-    # the reef spit out to Pontinos's platform
     for y in (13, 14, 15):
         m.piece("rocks", "spit_V", 25, y)
-    m.piece("rocks", "spit_head", 25, 16)
-    for x, y in ((23, 16), (24, 16), (23, 17), (24, 17)):
+    for x, y in ((25, 16), (23, 16), (24, 16), (23, 17), (24, 17)):
         m.piece("rocks", "spit_head", x, y)
-    m.piece("rocks", "tide_rocks", 27, 18)
+    m.piece("rocks", "tide_rocks", 28, 18)
     m.piece("rocks", "tide_rock", 17, 19)
+    m.piece("rocks", "tide_rock", 33, 12)
+    m.piece("rocks", "tide_rocks", 47, 16)
 
-    # the quarry, cut into the hill behind the beach (the Girdle moves its drums)
+    # the quarry, cut into the hill behind the beach; the Girdle moves its drums
     for x in range(16, 24):
-        e = "cut_L" if x == 16 else ("cut_R" if x == 23 else "cut")
-        m.piece("quarry", e, x, 0)
-    m.part("quarry", "gate_TL", 18, 4, 2, 2)
+        m.piece("quarry", "cut_L" if x == 16 else ("cut_R" if x == 23 else "cut"), x, 0)
     m.rect(17, 1, 22, 3, A.PATH, False)
-    m.piece("quarry", "face_L", 16, 1)
-    m.piece("quarry", "face_carved", 16, 2)
-    m.piece("quarry", "face_R", 23, 1)
-    m.piece("quarry", "face", 23, 2)
-    m.piece("quarry", "face", 16, 3)
-    m.piece("quarry", "face", 23, 3)
+    for y, n in ((1, "face_L"), (2, "face_carved"), (3, "face")):
+        m.piece("quarry", n, 16, y)
+    for y, n in ((1, "face_R"), (2, "face"), (3, "face")):
+        m.piece("quarry", n, 23, y)
+    m.blob("seagrass", ["###..",
+                        "####.",
+                        "###.."], 17, 1, edge_in=False)
     m.piece("quarry", "step", 22, 1)
     m.piece("quarry", "step_edge", 22, 2)
-    m.blob("seagrass", ["####.",
-                        "#####"], 17, 1)
     m.piece("quarry", "drum_up", 21, 3)
     m.piece("quarry", "chips", 20, 2)
+    m.piece("quarry", "chips", 21, 1)
+    m.part("quarry", "gate_TL", 18, 4, 2, 2)
 
-    # ==== the headland, the cascade and the cove (the Horn), x 9..15 ==========================
-    m.rect(9, 12, 15, 13, A.GRASS, False)
-    for x in range(9, 15):
-        e = "_L" if x == 9 else ""
+    # ==== the headland, its cascade and the cove (the Horn), x 8..15 ===========================
+    m.rect(9, 12, 14, 13, A.GRASS, False)
+    for x in range(8, 16):
+        e = "_L" if x == 8 else ("_R" if x == 15 else "")
         m.piece("cliff", "lip" + e, x, 14)
         m.piece("cliff", "face" + e, x, 15)
         m.piece("cliff", "foot_sea" + e, x, 16)
     for y in (12, 13):
         m.piece("cliff", "side_E", 15, y)
         m.piece("cliff", "side_W", 8, y)
-    m.piece("cliff", "lip_R", 15, 14)
-    m.piece("cliff", "face_R", 15, 15)
-    m.piece("cliff", "foot_sea_R", 15, 16)
-    m.piece("cliff", "lip_L", 8, 14)
-    m.piece("cliff", "face_L", 8, 15)
-    m.piece("cliff", "foot_sea_L", 8, 16)
+    m.piece("falls", "thin_foot", 12, 13)
     m.piece("falls", "thin_fall", 12, 14)
     m.piece("falls", "thin_fall", 12, 15)
     m.piece("falls", "thin_sea", 12, 16)
-    m.piece("falls", "thin_foot", 12, 13)
-    m.piece("flowers", "thrift", 10, 12)
+    m.piece("flowers", "thrift", 9, 12)
     m.piece("flowers", "briar", 14, 12)
+    m.piece("flowers", "petals", 13, 12)
 
-    # ==== the myrtle grove and band 3, x 10..15 ===============================================
-    m.rect(8, 0, 15, 11, A.GRASS, False)
-    for x, y in ((8, 0), (11, 1), (14, 0)):
-        m.olive(x, y)
-    m.cypress(13, 3)
-    m.piece("myrtle", "bush", 10, 4)
+    # ==== the myrtle grove and band 3, x 11..15; the approach, x 8..10 ==========================
+    grove(m, olives=[(8, 0), (11, 1), (14, 0), (13, 3)], cypresses=[(10, 3), (15, 3)], bushes=[(9, 3)])
     hedge(m, 8, 15, 5)
-    hedge(m, 8, 15, 11)
-    m.rect(8, 6, 15, 10, A.GRASS, False)
-    m.path_patch(8, 7, 15, 9)
+    hedge(m, 11, 15, 11)
+    m.path(cells((8, 8, 15, 8), (11, 7, 15, 9)))
     m.blob("seagrass", ["###",
                         "###",
                         "###",
                         "###",
                         "###"], 12, 6)
-    m.piece("flowers", "petals", 9, 6)
+    m.piece("flowers", "petals", 11, 6)
     m.piece("flowers", "petals", 15, 10)
+    m.put("rollers", 8, 6)                        # Kassiteros's boat, north of the neck
+    m.piece("myrtle", "single", 9, 9)
+    m.piece("flowers", "briar", 10, 9)
+    hedge(m, 8, 10, 10)
+    for x in (8, 9, 10):
+        m.piece("flowers", "thrift" if x % 2 else "petals", x, 11)
+    for name, x, y in (("rocks_sand", 17, 8), ("rock_sand", 26, 9), ("rocks_sand", 16, 11)):
+        m.piece("rocks", name, x, y)
 
-    # ==== the approach to Paphia, x 8..10, and Kassiteros's boat ===============================
-    m.put("rollers", 8, 6)
-    m.piece("myrtle", "bush", 9, 9)
-    m.piece("myrtle", "single", 10, 9)
-
-    # ==== the Paphia strip, x 0..7: aethos only ==============================================
-    m.rect(0, 0, 7, 12, A.GRASS, False)
-    m.path_patch(0, 7, 7, 10)
-    for x, y in ((0, 1), (3, 0), (5, 2), (1, 4), (6, 11), (2, 11)):
-        m.olive(x, y)
-    for x, y in ((7, 4), (4, 4)):
-        m.cypress(x, y)
+    # ==== the Paphia strip, x 0..7: aethos only; the road leaves at rows 7-10 ==================
+    grove(m, olives=[(0, 0), (3, 1), (6, 0), (1, 4), (5, 4), (0, 11), (3, 11), (6, 11)],
+          cypresses=[(7, 2), (4, 3), (2, 3)])
+    m.path(cells((0, 8, 7, 9), (5, 7, 7, 7)))
+    m.set(5, 6, A.STELE, True)                    # PAPHIA. The Temple of Aphrodite.
+    for x, y in ((1, 7), (3, 7), (2, 6)):
+        m.set(x, y, A.ANEMONE, False)
     m.rect(0, 13, 7, 13, A.SAND, False)
+    m.set(0, 13, A.BOULDER_SAND, True)
     aethos_shore(m, 0, 7, 14)
-    m.set(6, 6, A.STELE, True)                   # PAPHIA. The Temple of Aphrodite.
     return m
 
 
 def events(m):
     # signs
-    m.sign(55, 8, P + "SignEast")
-    m.sign(39, 7, P + "SignFork")
-    m.sign(6, 6, P + "SignPaphia")
-    m.sign(44, 6, P + "Herm")
+    m.sign(55, 7, P + "SignEast")
+    m.sign(39, 6, P + "SignFork")
+    m.sign(5, 6, P + "SignPaphia")
+    m.sign(HERM[0], HERM[1] + 1, P + "Herm")
     m.sign(25, 6, P + "Basin")
     m.sign(22, 11, P + "DigSpot")
     m.sign(18, 5, P + "Drums")
     m.sign(19, 5, P + "Drums")
     m.sign(15, 12, P + "Cascade")
-    m.sign(9, 7, P + "Boat")
-    m.sign(10, 7, P + "Boat")
+    for x in (8, 9, 10):
+        m.sign(x, 7, P + "Boat")
 
     # people
     m.obj("ICHOR_FISHER", 46, 12, P + "Amphitos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2)
@@ -303,7 +289,7 @@ def events(m):
           flag="FLAG_ICHOR_HIDE_KASSITEROS")
     m.obj("ICHOR_ALETHEA", 21, 10, P + "Alethea", "MOVEMENT_TYPE_FACE_DOWN",
           flag="FLAG_ICHOR_HIDE_ALETHEA_FOAM_ROAD", local_id="LOCALID_FOAM_ROAD_ALETHEA")
-    m.obj("ICHOR_YOUTH_M", 44, 7, P + "Messenger", "MOVEMENT_TYPE_FACE_DOWN",
+    m.obj("ICHOR_YOUTH_M", HERM[0] + 1, HERM[1], P + "Messenger", "MOVEMENT_TYPE_FACE_DOWN",
           flag="FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD", local_id="LOCALID_FOAM_ROAD_MESSENGER")
 
     # items
@@ -311,28 +297,28 @@ def events(m):
     m.item_ball(22, 1, "ITEM_RARE_CANDY", "FLAG_ICHOR_ITEM_FOAM_ROAD_RARE_CANDY")
     m.item_ball(10, 13, "ITEM_PRETTY_FEATHER", "FLAG_ICHOR_ITEM_FOAM_ROAD_PRETTY_FEATHER")
 
-    # Aphrodite's rock: Alethea's scene, across the beach where the cutting opens
-    for y in (7, 8):
-        m.trigger(27, y, P + "AletheaRock")
+    # Aphrodite's rock: Alethea's scene, where the cutting opens onto the beach
+    for x, y in ROCK_TRIGGER:
+        m.trigger(x, y, P + "AletheaRock")
 
     # connections
     m.connect("up", STAIR[0] - SPRING_OPENING_X, "MAP_KYTHERA_SPRING_OF_KALLIRHOE")
     m.connect("left", PAPHIA_ROAD[0] - PAPHIA_GATE_Y, "MAP_KYTHERA_PAPHIA")
-    # TODO(skandeia): connect("right", ..., "MAP_KYTHERA_SKANDEIA") once Skandeia exists; its
-    # west gate's road rows meet this map's rows SKANDEIA_ROAD (9..11).
+    m.connect("right", SKANDEIA_ROAD[0] - SKANDEIA_GATE_Y, "MAP_KYTHERA_SKANDEIA")
     m.seam("left")
     m.seam("right")
 
 
-VIEWS = [(58, 10), (51, 9), (46, 9), (41, 6), (36, 7), (31, 7), (24, 9), (20, 4), (21, 14), (12, 8), (5, 8), (12, 12)]
+VIEWS = [(58, 9), (51, 9), (46, 9), (41, 6), (35, 7), (27, 8), (21, 9), (20, 3), (21, 14), (12, 8), (4, 8), (12, 12)]
 
 
 def main():
     m = compose()
     events(m)
-    must = [(19, 6, "the quarry gate"), (22, 11, "the dig spot"), (24, 16, "Pontinos's platform"),
-            (41, 0, "the spring stair"), (25, 7, "the basin")]
-    errors = m.build("kythera_foam_road", starts=[(63, 10)], must_reach=must, views=VIEWS,
+    must = [(19, 6, "the quarry gate"), (22, 12, "the dig spot"), (24, 16, "Pontinos's platform"),
+            (41, 0, "the spring stair"), (25, 7, "the basin"), (0, 8, "the Paphia seam"),
+            (HERM[0], HERM[1] + 2, "the great herm's landing")]
+    errors = m.build("kythera_foam_road", starts=[(63, 9)], must_reach=must, views=VIEWS,
                      render="--no-render" not in sys.argv)
     sys.exit(1 if errors else 0)
 
