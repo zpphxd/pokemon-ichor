@@ -1,0 +1,32 @@
+// Ichor: scripts for the world's small systems (design/ENGINE_API.md §7).
+
+// The xenia rest (SYSTEMS §10): a host's bed, until DAWN, NOON, DUSK or NIGHT,
+// whichever are still ahead today. Call it after the host's offer:
+//     call(EventScript_IchorXeniaRest)
+//     if (var(VAR_RESULT) == TRUE) { ... woke rested ... }
+// VAR_RESULT is TRUE if the player rested (the clock has moved), FALSE if they
+// chose NOT NOW, or if no hour is left today (after 20:30). The healing and
+// the host's words are the map's.
+script EventScript_IchorXeniaRest {
+    specialvar(VAR_RESULT, Ichor_BuildRestMenu)
+    if (var(VAR_RESULT) == 0) {
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    message(format("Rest until when?"))
+    waitmessage
+    dynmultistack(0, 0, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+    if (var(VAR_RESULT) >= ICHOR_REST_COUNT) {
+        closemessage
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    copyvar(VAR_0x8004, VAR_RESULT)
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    special(Ichor_RestUntil)
+    delay(60)
+    fadescreen(FADE_FROM_BLACK)
+    setvar(VAR_RESULT, TRUE)
+    return
+}

@@ -2,11 +2,17 @@
 // of day replaces the clock's hour for the tint, and for everything else that
 // asks the time of day (encounter tables, evolutions), until it is released.
 // Delphoi stays at evening, then night, from Phase 4's III-7 to III-8.
+// Also the xenia rest (SYSTEMS §10), which moves the clock itself forward.
 #include "global.h"
 #include "event_data.h"
 #include "ichor_time.h"
+#include "list_menu.h"
+#include "malloc.h"
 #include "overworld.h"
 #include "rtc.h"
+#include "script_menu.h"
+#include "string_util.h"
+#include "constants/ichor.h"
 #include "constants/rtc.h"
 
 // A moment inside each time of day where its tint is at full strength.
@@ -45,5 +51,73 @@ void Ichor_HoldTimeOfDay(void)
 void Ichor_ReleaseTimeOfDay(void)
 {
     gIchorSave.heldTimeOfDay = 0;
+    RetintNow();
+}
+
+// --- The xenia rest (SYSTEMS §10) --------------------------------------------------
+// A host's bed moves the clock forward to dawn, noon, dusk or night, and never
+// past midnight: each choice is offered only while that hour is still ahead.
+
+static const u8 sRestHour[ICHOR_REST_COUNT][2] =
+{
+    [ICHOR_REST_DAWN]  = { 6, 0 },
+    [ICHOR_REST_NOON]  = { 12, 0 },
+    [ICHOR_REST_DUSK]  = { 19, 0 },
+    [ICHOR_REST_NIGHT] = { 20, 30 },
+};
+
+static const u8 *const sRestNames[ICHOR_REST_COUNT] =
+{
+    [ICHOR_REST_DAWN]  = COMPOUND_STRING("DAWN"),
+    [ICHOR_REST_NOON]  = COMPOUND_STRING("NOON"),
+    [ICHOR_REST_DUSK]  = COMPOUND_STRING("DUSK"),
+    [ICHOR_REST_NIGHT] = COMPOUND_STRING("NIGHT"),
+};
+
+static bool32 IsRestAhead(u32 rest)
+{
+    return sRestHour[rest][0] * 60 + sRestHour[rest][1] > gLocalTime.hours * 60 + gLocalTime.minutes;
+}
+
+static void PushRestChoice(const u8 *text, u16 id)
+{
+    struct ListMenuItem item;
+    u8 *name = Alloc(16);  // freed by the menu
+    StringCopy(name, text);
+    item.name = name;
+    item.id = id;
+    MultichoiceDynamic_PushElement(item);
+}
+
+// specialvar Ichor_BuildRestMenu: pushes the hours still ahead today, then
+// NOT NOW, for dynmultistack. Answers how many hours it offered; with none
+// it pushes nothing.
+u16 Ichor_BuildRestMenu(void)
+{
+    u32 rest, count = 0;
+
+    RtcCalcLocalTime();
+    for (rest = 0; rest < ICHOR_REST_COUNT; rest++)
+    {
+        if (!IsRestAhead(rest))
+            continue;
+        PushRestChoice(sRestNames[rest], rest);
+        count++;
+    }
+    if (count != 0)
+        PushRestChoice(COMPOUND_STRING("NOT NOW"), ICHOR_REST_COUNT);
+    return count;
+}
+
+// special Ichor_RestUntil: the clock moves forward to the ICHOR_REST_* hour in
+// VAR_0x8004, if it is still ahead today; otherwise it stays.
+void Ichor_RestUntil(void)
+{
+    u32 rest = gSpecialVar_0x8004;
+
+    RtcCalcLocalTime();
+    if (rest >= ICHOR_REST_COUNT || !IsRestAhead(rest))
+        return;
+    RtcCalcLocalTimeOffset(gLocalTime.days, sRestHour[rest][0], sRestHour[rest][1], 0);
     RetintNow();
 }

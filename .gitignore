@@ -94,3 +94,4 @@ data/scripts/ichor_herms.inc
 data/scripts/ichor_labyrinth.inc
 data/scripts/ichor_frozen.inc
 data/scripts/ichor_dig.inc
+data/scripts/ichor_world.inc

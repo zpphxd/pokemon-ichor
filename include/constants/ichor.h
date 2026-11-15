@@ -96,6 +96,16 @@
 // Weather entries (SYSTEMS §6; add new ones at the end)
 #define OMEN_WEATHER_KRYOPUFF  0  // snow on the Ascent's lowest slopes
 #define OMEN_WEATHER_LERNIP    1  // rain over Lake Stymphalia (Phase 4 SCRIPT.md, the Lernip hunt)
+// Good-sign entries: the augur's blessing, or today's lucky number (1-6)
+#define OMEN_SIGN_BLESSING     0
+#define OMEN_SIGN_LUCKY(n)     (n)   // "Today, threes are lucky." is OMEN_SIGN_LUCKY(3)
+
+// The xenia rest (SYSTEMS §10): Ichor_RestUntil's VAR_0x8004, and the rest menu's choices
+#define ICHOR_REST_DAWN   0   // 06:00
+#define ICHOR_REST_NOON   1   // 12:00
+#define ICHOR_REST_DUSK   2   // 19:00
+#define ICHOR_REST_NIGHT  3   // 20:30
+#define ICHOR_REST_COUNT  4
 
 // --- The Labyrinth (LABYRINTH.md §5) --------------------------------------------
 // Names for the Thread's RETURN TO… list: the name id a ring's ON_LOAD gives

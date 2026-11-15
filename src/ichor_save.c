@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "ichor_omen.h"
 #include "ichor_save.h"
+#include "pokemon.h"
 
 // The layout is part of the save format. These pin it, so a change that moves
 // a field fails the build instead of silently breaking saves.
@@ -108,4 +109,21 @@ u32 Ichor_CountFlags(u16 firstFlag, u16 count)
 u16 Ichor_CountFlagRange(void)
 {
     return Ichor_CountFlags(gSpecialVar_0x8004, gSpecialVar_0x8005);
+}
+
+// specialvar Ichor_GetHighestPartyLevel: the level of the strongest Pokémon in
+// the party, not counting Eggs. "Level thirty strong?" is VAR_RESULT >= 30.
+u16 Ichor_GetHighestPartyLevel(void)
+{
+    u32 i, level, highest = 0;
+
+    for (i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_EGG))
+            continue;
+        level = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL);
+        if (level > highest)
+            highest = level;
+    }
+    return highest;
 }

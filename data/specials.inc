@@ -1106,3 +1106,6 @@ gSpecials::
 	def_special Ichor_DigPuff
 	def_special Ichor_DigFindKind
 	def_special Ichor_DigFinish
+	def_special Ichor_GetHighestPartyLevel
+	def_special Ichor_BuildRestMenu
+	def_special Ichor_RestUntil

@@ -5,11 +5,15 @@
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "ichor_herms.h"
+#include "ichor_omen.h"
 #include "ichor_relics.h"
 #include "ichor_save.h"
 #include "rtc.h"
+#include "pokemon.h"
+#include "test/overworld_script.h"
 #include "test/test.h"
 #include "constants/ichor.h"
+#include "constants/map_groups.h"
 #include "constants/rtc.h"
 #include "constants/weather.h"
 
@@ -19,6 +23,8 @@ u16 Ichor_CheckOmen(void);
 u16 Ichor_GetOmen(void);
 void Ichor_HoldTimeOfDay(void);
 void Ichor_ReleaseTimeOfDay(void);
+u16 Ichor_GetHighestPartyLevel(void);
+void Ichor_RestUntil(void);
 
 TEST("Ichor: Ichor_CountFlagRange counts the set flags in a range")
 {
@@ -35,7 +41,7 @@ TEST("Ichor: Ichor_CountFlagRange counts the set flags in a range")
     FlagClear(FLAG_ICHOR_PROPHECY_START + 8);
 }
 
-TEST("Ichor: a forced omen arrives the next day, then the day after has none")
+TEST("Ichor: a forced omen arrives the next day, then the day after draws its own")
 {
     gIchorSave.omenKind = OMEN_NONE;
     gIchorSave.omenEntry = 0;
@@ -54,7 +60,7 @@ TEST("Ichor: a forced omen arrives the next day, then the day after has none")
     EXPECT_EQ(gSpecialVar_0x8004, OMEN_WEATHER_LERNIP);
 
     Ichor_DoDailyEvents(1);
-    EXPECT_EQ(Ichor_GetOmen(), OMEN_NONE);
+    EXPECT_EQ(Ichor_GetOmen(), OMEN_GOOD_SIGN);  // drawn: no other kind has an open entry yet
 }
 
 TEST("Ichor: a held time of day overrides the clock until released")
@@ -140,4 +146,104 @@ TEST("Ichor: hidden items decode vanilla flags and bank flags from the same fiel
     EXPECT_EQ(Ichor_GetHiddenItemFlag(ICHOR_HIDDEN_ITEM_BANK_ID + (FLAG_ICHOR_GENERAL_START - ICHOR_FLAGS_START)), FLAG_ICHOR_GENERAL_START);
     EXPECT_EQ(Ichor_GetHiddenItemFlag(ICHOR_HIDDEN_ITEM_BANK_ID + (ICHOR_FLAGS2_END - ICHOR_FLAGS_START)), ICHOR_FLAGS2_END);
     EXPECT_LT(ICHOR_HIDDEN_ITEM_BANK_ID + (ICHOR_FLAGS2_END - ICHOR_FLAGS_START), 1 << 13);  // fits the 13-bit field
+}
+
+TEST("Ichor: Ichor_GetHighestPartyLevel reads the strongest Pokémon, not an Egg")
+{
+    ZeroPlayerPartyMons();
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_WOBBUFFET, 12;
+        givemon SPECIES_WOBBUFFET, 31;
+        givemon SPECIES_WOBBUFFET, 25;
+    );
+    EXPECT_EQ(Ichor_GetHighestPartyLevel(), 31);
+    ZeroPlayerPartyMons();
+}
+
+static u32 LocalMinutes(void)
+{
+    RtcCalcLocalTime();
+    return gLocalTime.hours * 60 + gLocalTime.minutes;
+}
+
+TEST("Ichor: a xenia rest moves the clock forward to the hour chosen, never back")
+{
+    RtcCalcLocalTimeOffset(3, 8, 0, 0);    // day 3, 08:00
+    gSpecialVar_0x8004 = ICHOR_REST_DUSK;
+    Ichor_RestUntil();
+    EXPECT_EQ(LocalMinutes() / 60, 19);
+    EXPECT_EQ(gLocalTime.days, 3);
+    gSpecialVar_0x8004 = ICHOR_REST_NOON;  // behind: nothing happens
+    Ichor_RestUntil();
+    EXPECT_EQ(LocalMinutes() / 60, 19);
+    gSpecialVar_0x8004 = ICHOR_REST_NIGHT;
+    Ichor_RestUntil();
+    EXPECT_GE(LocalMinutes(), 20 * 60 + 30);
+    EXPECT_LT(LocalMinutes(), 20 * 60 + 32);
+    gSpecialVar_0x8004 = ICHOR_REST_DAWN;  // never past midnight
+    Ichor_RestUntil();
+    EXPECT_GE(LocalMinutes(), 20 * 60 + 30);
+    EXPECT_EQ(gLocalTime.days, 3);
+}
+
+TEST("Ichor: the daily omen is drawn only from entries the story has opened")
+{
+    u32 seed, kinds[OMEN_STRANGER + 1] = {0};
+    FlagClear(FLAG_BADGE07_GET);
+    FlagClear(FLAG_BADGE08_GET);
+    for (seed = 0; seed < 300; seed++)
+    {
+        Ichor_DrawOmen(seed * 2654435761u);
+        kinds[gIchorSave.omenKind]++;
+    }
+    EXPECT_EQ(kinds[OMEN_GOOD_SIGN], 300);  // nothing else is open yet
+
+    FlagSet(FLAG_BADGE07_GET);  // the two weather rows open
+    memset(kinds, 0, sizeof(kinds));
+    for (seed = 0; seed < 600; seed++)
+    {
+        Ichor_DrawOmen(seed * 2654435761u);
+        kinds[gIchorSave.omenKind]++;
+        if (gIchorSave.omenKind == OMEN_WEATHER)
+            EXPECT(gIchorSave.omenEntry == OMEN_WEATHER_KRYOPUFF || gIchorSave.omenEntry == OMEN_WEATHER_LERNIP);
+        if (gIchorSave.omenKind == OMEN_GOOD_SIGN)
+            EXPECT_LE(gIchorSave.omenEntry, OMEN_SIGN_LUCKY(6));
+    }
+    EXPECT_EQ(kinds[OMEN_SWARM] + kinds[OMEN_VISITOR] + kinds[OMEN_STRANGER], 0);
+    EXPECT_GT(kinds[OMEN_WEATHER], 600 * 55 / 100);  // 20 against the good sign's 10
+    EXPECT_LT(kinds[OMEN_WEATHER], 600 * 78 / 100);
+
+    FlagSet(FLAG_BADGE08_GET);  // the test rows: a swarm and two visitors
+    memset(kinds, 0, sizeof(kinds));
+    for (seed = 0; seed < 1000; seed++)
+    {
+        Ichor_DrawOmen(seed * 2654435761u);
+        kinds[gIchorSave.omenKind]++;
+    }
+    EXPECT_GT(kinds[OMEN_SWARM], 1000 * 37 / 100);  // 45 of 100 before strangers walk
+    EXPECT_LT(kinds[OMEN_SWARM], 1000 * 53 / 100);
+    EXPECT_GT(kinds[OMEN_VISITOR], 1000 * 18 / 100);
+    EXPECT_EQ(kinds[OMEN_STRANGER], 0);
+    FlagClear(FLAG_BADGE07_GET);
+    FlagClear(FLAG_BADGE08_GET);
+}
+
+TEST("Ichor: an omen's swarm starts today's outbreak, and only today's visitor shows")
+{
+    FlagSet(FLAG_BADGE08_GET);
+    gIchorSave.forcedOmenKind = OMEN_SWARM;
+    gIchorSave.forcedOmenEntry = 0;
+    Ichor_DoDailyEvents(1);
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonSpecies, SPECIES_WOBBUFFET);
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakPokemonLevel, 7);
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakLocationMapNum, MAP_NUM(MAP_KALLISTE_ROUTE1));
+    EXPECT_EQ(gSaveBlock1Ptr->outbreakDaysLeft, 1);
+    EXPECT(FlagGet(FLAG_TEMP_1) && FlagGet(FLAG_TEMP_2));  // no visitor today
+
+    gIchorSave.forcedOmenKind = OMEN_VISITOR;
+    gIchorSave.forcedOmenEntry = 1;
+    Ichor_DoDailyEvents(1);
+    EXPECT(FlagGet(FLAG_TEMP_1));
+    EXPECT(!FlagGet(FLAG_TEMP_2));
+    FlagClear(FLAG_BADGE08_GET);
 }

@@ -23,6 +23,7 @@ void StartStaticMassOutbreak(enum MassOutbreakIndex outbreakIdx);
 enum Species GetStaticOutbreakSpecies(enum MassOutbreakIndex outbreakIdx);
 u8 *GetStaticOutbreakMapName(u8 *dest, enum MassOutbreakIndex outbreakIdx);
 void ZeroMassOutbreak(void);
+void StartMassOutbreak(struct MassOutbreak outbreak); // Ichor: omens start swarms (src/ichor_omen.c)
 struct MassOutbreak GetStaticOutbreak(enum MassOutbreakIndex outbreakIdx);
 
 #endif // GUARD_MASS_OUTBREAK_H

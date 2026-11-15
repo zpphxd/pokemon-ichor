@@ -540,11 +540,32 @@ copyvar(VAR_ICHOR_LABYRINTH, VAR_0x8004)   // saved back, turned or not
 
 ## 7. Scripts' small needs
 
-Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested by `make check TESTS="Ichor:"`.
+Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested by `make check TESTS="Ichor:"` and `tools/ichor/tests/ichor_world.sh`.
 
 ### Counting flags
 
 `setvar(VAR_0x8004, FLAG_ICHOR_PROPHECY_START)`, `setvar(VAR_0x8005, 8)`, `specialvar(VAR_RESULT, Ichor_CountFlagRange)`: how many of those flags are set. It works on any flag range: a bank, a vanilla range or the daily flags.
+
+### A party Pokémon's level
+
+`specialvar(VAR_RESULT, Ichor_GetHighestPartyLevel)` gives the level of the strongest Pokémon in the party, not counting Eggs. "Level thirty strong?" is `if (var(VAR_RESULT) >= 30)`.
+
+### The xenia rest (SYSTEMS §10)
+
+A host's bed moves the clock forward to dawn (06:00), noon (12:00), dusk (19:00) or night (20:30), never back and never past midnight. The menu offers only the hours still ahead today, then NOT NOW:
+
+```
+msgbox(format("Stay, if you like. Rest till you want to wake."))
+call(EventScript_IchorXeniaRest)
+if (var(VAR_RESULT) == TRUE) {
+    special(HealPlayerParty)
+    msgbox(format("{PLAYER} slept behind the striped curtain and woke well rested."))
+}
+```
+
+- **What it does:** it asks "Rest until when?", fades to black, moves the clock, waits a second and fades back. The tint follows at once.
+- **`VAR_RESULT`** is `FALSE` for NOT NOW, or when no hour is left (after 20:30). The healing and the host's words are the map's.
+- **From C,** `special(Ichor_RestUntil)` with an `ICHOR_REST_*` in `VAR_0x8004` moves the clock without the menu.
 
 ### Holding the day-and-night tint
 
@@ -564,8 +585,23 @@ Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested b
   specialvar(VAR_RESULT, Ichor_CheckOmen)
   if (var(VAR_RESULT) == TRUE) { setweather(WEATHER_RAIN) }
   ```
-- `specialvar(VAR_RESULT, Ichor_GetOmen)` gives the kind, with the entry in `VAR_0x8004`. The augurs use it.
-- **Not built yet:** SYSTEMS §6's daily draw from the entry table (swarms through `StartMassOutbreak`, visitors' hide flags, the story filter). Until it lands, a day without a forced omen has none.
+- `specialvar(VAR_RESULT, Ichor_GetOmen)` gives the kind, with the entry in `VAR_0x8004`. The augurs use it: Halitherses and Manto switch on the kind and entry for their line.
+- **The daily draw.** Each new day without a forced omen draws one:
+  - **The kind** comes by SYSTEMS §6's weights: swarm 35 (45 before any stranger can walk), visitor 25, weather 20, good sign 10, stranger 10. A kind with no open entry isn't drawn.
+  - **The entry** is then one of that kind's rows in `src/data/ichor_omens.h` whose `unlockFlag` is set and whose `lockFlag` isn't. So augurs only name places the player can reach.
+  - **A good sign** needs no rows. Half the time it is `OMEN_SIGN_BLESSING` (the augur grants a minor blessing with `Ichor_GrantBlessing`, §3). Otherwise it is `OMEN_SIGN_LUCKY(1)`–`(6)`, today's lucky number.
+- **What an omen does by itself:**
+  - **A swarm** starts the expansion's mass outbreak for the day: half the row's `map`'s land encounters are its `species` at its `level`, with the species' own moves.
+  - **A visitor's object** shows only on its day. Each new day the engine sets every visitor's `hideFlag`, then clears today's. A map's script sets it again once the visitor is caught or beaten.
+  - **Weather** is the map's `ON_TRANSITION`, as above.
+- **Adding an omen.** Number it in `include/constants/ichor.h` (`OMEN_SWARM_*`, `OMEN_VISITOR_*`, `OMEN_WEATHER_*`), then add a row:
+  ```
+  { .kind = OMEN_SWARM, .entry = OMEN_SWARM_ROUTE6, .unlockFlag = FLAG_ICHOR_ARRIVED_ELEUSA,
+    .species = SPECIES_..., .map = MAP_ROUTE6_ELEUTHERAI_ROAD, .level = 18 },
+  { .kind = OMEN_VISITOR, .entry = OMEN_VISITOR_THYRSIVY, .unlockFlag = FLAG_ICHOR_DIONYSIA_DONE,
+    .hideFlag = FLAG_ICHOR_HIDE_OMEN_THYRSIVY },
+  ```
+  The table has only the two weather rows so far, both opened by Laurel 7 (`FLAG_BADGE07_GET`) until world-act3 names a better flag. The Act I and II rows belong to world-act1 and world-act2, whose maps and flags aren't on this branch yet. Until rows exist, every day's omen is a good sign.
 
 ### Four time-of-day encounter tables on one map
 
