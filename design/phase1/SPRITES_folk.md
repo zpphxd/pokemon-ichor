@@ -72,9 +72,8 @@ Native checks, four regressions, helpers, build and smoke pass. Both matching
 galleries cover seventeen cameras across nine maps. The real Merchant is
 mostly occluded by his counter; complete body/motion evidence is on the native
 sheet, not misrepresented as a full-body in-game shot. All local walker
-implementations are now present; these three await creative approval.
-The previous temple/augur checkpoint is accepted. Seven class portraits and local
-healing effects remain.
+implementations are now present and artistically accepted at checkpoint scope.
+Seven class portraits and local healing effects remained at that point.
 
 - **Source:** `tools/ichor/art/sprites_folk.py`. Every head, body and prop is ASCII art in that file, one character per pixel.
 - **Rebuild the PNGs and the folk palette:** `python3 tools/ichor/art/sprites_folk.py --write`

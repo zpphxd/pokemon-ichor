@@ -113,14 +113,14 @@ def shepherd():
         ("hair", (64, 40, 32)),
     ])
     skin = skin_mat("lea")
-    wood = Mat(["felt_d", "felt_m", "felt_l"], outline="ink", wx=1.0, wy=0.0, cuts=[0.3, 0.7])
-    wool = Mat(["wool_d", "wool_m", "wool_l"], outline="felt_d", wx=0.7, wy=0.4, cuts=[0.45, 0.8])
-    tunic = Mat(["blue_d", "blue_m", "blue_l"], wx=0.85, wy=0.3, cuts=[0.25, 0.7])
+    wood = Mat(["felt_d", "felt_m", "felt_l"], outline="felt_d", wx=1.0, wy=0.0, cuts=[0.3, 0.7])
+    wool = Mat(["wool_d", "wool_m", "wool_l"], outline="wool_d", wx=0.7, wy=0.4, cuts=[0.45, 0.8])
+    tunic = Mat(["blue_d", "blue_m", "blue_l"], outline="blue_d", wx=0.85, wy=0.3, cuts=[0.25, 0.7])
     lea = Mat(["lea"])
     f = Fig(pal)
 
     # crook shaft, planted at his right side (the hook is drawn by hand below)
-    f.rect(19, 5, 21, 61, wood, group=50)
+    f.rect(19, 9, 20, 61, wood, group=50)
     # sheepskin hanging down his back, shaggy hem
     back = f.poly([(29, 23), (42, 22), (47, 27), (49, 34), (50, 41), (48, 44), (46, 42), (44, 45), (42, 42),
                    (40, 44), (38, 41)], wool, group=60, bias=0.25)
@@ -147,15 +147,14 @@ def shepherd():
     f.thick_line([(43, 27), (47, 23), (48, 17)], 4, skin, group=300)
 
     # fleece curls
-    f.textures = [((back, mantle), ["wool_d", "wool_m", "wool_l"], stagger(23, 24, 50, 44, 5, 4),
-                   [(0, 0), (1, 1), (2, 0)])]
+    f.textures = [((back, mantle), ["wool_d", "wool_m", "wool_l"],
+                   [(26, 27), (42, 27), (46, 39)], [(0, 0), (1, 1)])]
     # fist around the crook
-    f.patch(17, 31, [
-        ".bbbb.",
-        "bLLLMb",
-        "bLbLMb",
-        "bLLMMb",
-        ".bbbb.",
+    f.patch(18, 31, [
+        ".LLb",
+        "LLMb",
+        "LMMb",
+        ".Mbb",
     ], {"b": "lea", "L": "skin_l", "M": "skin_m"})
     # sandal straps and knees
     f.line([(27, 54), (30, 54)], "lea")
@@ -165,58 +164,48 @@ def shepherd():
     f.pxs([(28, 48), (36, 48)], "skin_m")
     # knot of the sheepskin's forelegs at his chest
     f.patch(31, 27, [
-        ".kkk.",
-        "kWmWk",
-        "kmWdk",
-        ".kdk.",
-        "..k..",
+        ".Wm.",
+        "WWmd",
+        ".md.",
+        "..d.",
     ], {"k": "felt_d", "W": "wool_l", "m": "wool_m", "d": "wool_d"})
     # crook hook
-    f.patch(11, 0, [
-        "...kkkkk...",
-        "..kFFFFfk..",
-        ".kFkkkkkfk.",
-        "kFk.....kFk",
-        "kFk.....kFk",
-        "kfk.....kfk",
-        ".k......kfk",
-    ], {"k": "ink", "F": "felt_l", "f": "felt_m"})
+    f.patch(13, 4, [
+        "..ddd...",
+        ".dFFfd..",
+        "dFF..fd.",
+        "dF....fd",
+        "df....fd",
+        "......fd",
+        "......fd",
+    ], {"d": "felt_d", "F": "felt_l", "f": "felt_m"})
     # waving hand, palm out
-    f.patch(45, 10, [
-        ".k.k...",
-        "kLkLkk.",
-        "kLkLkLk",
-        "kLLLLLk",
-        "kLLLLMk",
-        ".kLLMkb",
-        "..kMMb.",
-        "..bMb..",
+    f.patch(46, 11, [
+        ".L.L.",
+        "LMLL.",
+        "LLLLM",
+        "LLLMM",
+        ".LMMb",
+        "..MMb",
+        "..Mb.",
     ], {"k": "lea", "L": "skin_l", "M": "skin_m", "b": "lea"})
     # head: felt pilos tilted back, a grin
-    f.patch(25, 1, [
-        "........kkkk......",
-        "......kkFFffkk....",
-        ".....kFFFFffffk...",
-        "....kFFFFfffffdk..",
-        "....kFFFfffffffdk.",
-        "...kFFFffffffffdk.",
-        "...kFFfffffffffddk",
-        "..kFFfffffffffffdk",
-        "..kFffffffffffffdk",
-        "..kddddddddddddddk",
-        "..kfFfffffffffdddk",
-        "..kkkkkkkkkkkkkkHk",
-        "..bDDDMMMMMMMDbHHk",
-        "..bLHHLLLHHHLMbHHk",
-        "..bLWkLLLkWLMDMbHk",
-        ".bLLWkLLLkWLMDMbHk",
-        ".bLLLLLLLLLMMMbHk.",
-        "bLLLLDLLLLMMMMbHk.",
-        ".bLLDDLLLMMMMbHk..",
-        "..bLbLLLbMMMbk....",
-        "..bLLbbbMMMbk.....",
-        "...bbLLLMMbk......",
-        ".....bbbbbk.......",
+    f.patch(25, 8, [
+        ".....FFff.....",
+        "....FFFFff....",
+        "...FFFFffff...",
+        "..FFFFfffffd..",
+        ".FFFFfffffdd..",
+        ".fffffffdddd..",
+        ".HLLLLLLMHHH..",
+        ".LLHLLHLMHHHb.",
+        ".LLkLLkLMDbHb.",
+        "LLLLLLLMMDbHb.",
+        ".LLDLLLMMDbH..",
+        ".LLLLLLMMDb...",
+        "..LLbLLMMb....",
+        "...LLLMMb.....",
+        "....LMMb......",
     ], {"k": "ink", "F": "felt_l", "f": "felt_m", "d": "felt_d", "H": "hair", "b": "lea",
         "L": "skin_l", "M": "skin_m", "D": "skin_d", "W": "wool_l"})
     return f, pal
@@ -237,9 +226,9 @@ def harvester():
         ("wick_l", (224, 184, 104)), ("wick_d", (160, 112, 56)),
     ])
     skin = skin_mat("brown")
-    dress = Mat(["ol_d", "ol_m", "ol_l"], wx=0.85, wy=0.2, cuts=[0.3, 0.75])
-    apron = Mat(["lin_d", "lin_l"], outline="brown", wx=0.8, wy=0.3, cuts=[0.62])
-    scarf = Mat(["ter_d", "ter_m", "ter_l"], cuts=[0.3, 0.7])
+    dress = Mat(["ol_d", "ol_m", "ol_l"], outline="ol_d", wx=0.85, wy=0.2, cuts=[0.3, 0.75])
+    apron = Mat(["lin_d", "lin_l"], outline="lin_d", wx=0.8, wy=0.3, cuts=[0.62])
+    scarf = Mat(["ter_d", "ter_m", "ter_l"], outline="ter_d", cuts=[0.3, 0.7])
     wicker = Mat(["brown", "wick_d", "wick_l"], outline="brown", wx=0.7, wy=0.5, cuts=[0.45, 0.8])
     lea = Mat(["brown"])
     f = Fig(pal)
@@ -264,86 +253,68 @@ def harvester():
     # far arm hanging to the basket rim
     f.thick_line([(39, 26), (41, 30), (42, 34)], 4, skin, group=300)
     # wicker basket on her left hip
-    bask = f.poly([(35, 36), (55, 36), (54, 41), (52, 45), (48, 47), (42, 47), (38, 45), (36, 41)], wicker, group=500)
+    bask = f.poly([(39, 37), (55, 37), (54, 42), (51, 47), (43, 47), (40, 43)], wicker, group=500)
 
     # basket weave
-    f.textures = [((bask,), ["brown", "wick_d", "wick_l"], stagger(36, 37, 55, 47, 4, 2), [(0, 0), (1, 0)])]
+    f.textures = [((bask,), ["brown", "wick_d", "wick_l"],
+                   [(42, 41), (47, 43), (51, 40)], [(0, 0), (1, 0)])]
     # heap of black and green olives above the rim, two leaves poking out
-    heap = [list("." * 21) for _ in range(9)]
-    rows = {0: (0, -1), 1: (0, -1), 2: (6, 13), 3: (4, 15), 4: (2, 17), 5: (1, 18), 6: (1, 19), 7: (0, 20)}
-    for r, (a, b) in rows.items():
-        for c in range(a, b + 1):
-            heap[r][c] = "k"
-    olives = [(7, 2, "d"), (11, 2, "g"), (4, 4, "g"), (8, 4, "d"), (12, 4, "d"), (15, 4, "g"),
-              (2, 6, "d"), (6, 6, "d"), (10, 6, "g"), (14, 6, "d"), (17, 6, "d")]
-    for c, r, kind in olives:
-        hi, body = ("T", "d") if kind == "d" else ("G", "g")
-        for dc, dr, ch in ((0, 0, hi), (1, 0, body), (2, 0, body), (0, 1, body), (1, 1, body), (2, 1, body)):
-            if heap[r + dr][c + dc] == "k":
-                heap[r + dr][c + dc] = ch
-    for c, r in ((9, 0), (10, 1), (13, 0), (12, 1)):
-        heap[r][c] = "G"
-    for c, r in ((8, 0), (9, 1), (11, 1), (10, 0), (12, 0), (13, 1), (14, 0)):
-        if heap[r][c] == ".":
-            heap[r][c] = "k"
-    heap[8] = list("bWWWWWWWWWWWWWWWWWwwb")
-    f.patch(35, 27, ["".join(r) for r in heap] + ["bwwwwwwwwwwwwwwwwwwbb"],
+    f.patch(39, 31, [
+        ".......GG.......",
+        "....Gg.dg.Gg....",
+        "...Ggg.dd.Ggg...",
+        ".Td.dd.Gg.Td.dd.",
+        ".dd.Td.Gggdd.Td.",
+        "dd.dd.dd.dd.dddd",
+        "WWWWWWWWWWWWwwww",
+        ".wwwwwwwwwwwwww.",
+    ],
             {"k": "ink", "d": "ter_d", "T": "lin_l", "g": "ol_m", "G": "ol_l", "b": "brown",
              "W": "wick_l", "w": "wick_d"})
     # hand over the rim
-    f.patch(40, 33, [
-        ".bbbb.",
-        "bLLLLb",
-        "bLMLMb",
-        "bMMMMb",
-        ".bbbb.",
+    f.patch(41, 34, [
+        ".LLb",
+        "LLMb",
+        "LMMb",
+        ".Mbb",
     ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
     # olive sprig in her raised hand: a twig, slim silver leaves, two olives
-    f.patch(8, 6, [
-        "..kk.........",
-        ".kGGk........",
-        "kGGgk...kk...",
-        ".kkkbk.kGGk..",
-        "....kbkGgk...",
-        "..kk.kbkk....",
-        ".kGGkkbk.kk..",
-        "kGGgkkbkkGGk.",
-        ".kkk.kbkGgk..",
-        "....kTdbkk...",
-        "...kTddkbk...",
-        "...kdddkbk...",
-        "....kkk.kbk..",
-        ".........kbk.",
-        ".........kbk.",
+    f.patch(12, 10, [
+        ".GGg...",
+        "GGgb...",
+        "...bGg.",
+        "...bGGg",
+        ".GGgb..",
+        "GGg.b..",
+        ".Td.bGg",
+        ".dd.bGG",
+        ".....b.",
+        ".....b.",
+        "......b",
     ], {"k": "ink", "G": "ol_l", "g": "ol_m", "b": "brown", "d": "ter_d", "T": "lin_l"})
-    f.patch(15, 19, [
-        ".bbbb.",
-        "bLLLLb",
-        "bLbLMb",
-        "bLLMMb",
-        ".bbbb.",
+    f.patch(16, 20, [
+        ".LLb",
+        "LLMb",
+        "LMMb",
+        ".Mbb",
     ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
     # head: terracotta headscarf knotted at the nape, a few loose strands
-    f.patch(24, 5, [
-        ".....kkkkkkk.......",
-        "...kkTTTTTttkk.....",
-        "..kTTTTTTtttttk....",
-        ".kTTTTTTtttttttk...",
-        ".kTTTTTttttttttdk..",
-        "kTTTTTtttttttttddk.",
-        "kTTTTtttttttttdddk.",
-        "ktttttttttttdddddk.",
-        "kbHHbbbbbbbbkddTtk.",
-        ".bHLLLLLLLLMbdTTtdk",
-        ".bkkkLLLkkkMMbdtdk.",
-        ".bLWkLLLkWLMDMbdk..",
-        "bLLLLLLLLLLMDMbtk..",
-        "bLLLLDLLLLMMMbtdTk.",
-        ".bLLDDLLLMMMMbdTtk.",
-        ".bLLLLLLMMMMbkdtdk.",
-        "..bLLtttLMMbk.ktk..",
-        "...bLLLMMMbk...kk..",
-        "....bbbbbbk........",
+    f.patch(25, 10, [
+        "....TTTtt.....",
+        "..TTTTTttt....",
+        ".TTTTTttttd...",
+        "TTTTTtttttdd..",
+        "TTTttttttddd..",
+        ".bbbbbbbbbTd..",
+        ".LLLLLLMMbTtd.",
+        ".LbLLLbMDbtd..",
+        ".LkLLLkMMbtd..",
+        "LLLLLLLMMbtd..",
+        ".LLDLLLMMbtd..",
+        ".LLLLLLMMb.dd.",
+        "..LLttLMMb..d.",
+        "...LLLMMb.....",
+        "....LMMb......",
     ], {"k": "ink", "T": "ter_l", "t": "ter_m", "d": "ter_d", "b": "brown", "H": "brown",
         "L": "skin_l", "M": "skin_m", "D": "skin_d", "W": "lin_l"})
     return f, pal
@@ -366,8 +337,8 @@ def goatherd():
         ("cord", (184, 88, 48)),
     ])
     skin = skin_mat("brown")
-    goat = Mat(["gh_d", "gh_m", "gh_l"], outline="ink", wx=0.75, wy=0.35, cuts=[0.4, 0.75])
-    tunic = Mat(["oat_d", "oat_m", "oat_l"], outline="brown", wx=0.85, wy=0.25, cuts=[0.3, 0.72])
+    goat = Mat(["gh_d", "gh_m", "gh_l"], outline="gh_d", wx=0.75, wy=0.35, cuts=[0.4, 0.75])
+    tunic = Mat(["oat_d", "oat_m", "oat_l"], outline="oat_d", wx=0.85, wy=0.25, cuts=[0.3, 0.72])
     lea = Mat(["brown"])
     f = Fig(pal)
 
@@ -393,23 +364,22 @@ def goatherd():
     f.thick_line([(21, 31), (25, 25)], 4, skin, group=201)
 
     # goat-hair: long strands
-    f.textures = [((back, front), ["gh_d", "gh_m", "gh_l"], stagger(33, 23, 50, 50, 3, 4), [(0, 0), (0, 1), (1, 2)])]
+    f.textures = [((back, front), ["gh_d", "gh_m", "gh_l"],
+                   [(40, 27), (44, 41), (46, 47)], [(0, 0), (0, 1)])]
     # ragged tunic hem and leg thongs
     f.erase_px([(27, 46), (33, 47), (40, 46)])
     f.pxs([(27, 45), (33, 46), (40, 45)], "brown")
-    for y in (49, 52, 55):
+    for y in (50, 54):
         f.line([(25, y), (30, y + 1)], "brown")
         f.line([(38, y), (42, y + 1)], "brown")
     # bronze goat-bell hanging from his rope belt
-    f.patch(29, 35, [
-        "...k...",
-        "..kkk..",
-        ".kGGgk.",
-        ".kGggk.",
-        "kGGggdk",
-        "kGgggdk",
-        "kkkkkkk",
-        "...g...",
+    f.patch(30, 35, [
+        ".d...",
+        ".Gg..",
+        "GGgd.",
+        "GGggd",
+        "ggggd",
+        "..g..",
     ], {"k": "ink", "G": "gold_l", "g": "gold_d", "d": "brown"})
     # one bee, for the goatherd the bees fed
     f.patch(47, 9, [
@@ -418,50 +388,42 @@ def goatherd():
         "..kk.",
     ], {"k": "ink", "G": "gold_l", "W": "oat_l"})
     # head: wild dark curls going gray, a full beard
-    f.patch(24, 3, [
-        "....kk.kkk.kk......",
-        "..kkhhkhhHkkhhk....",
-        ".khHHhkHgHHkhHHk...",
-        ".kHhhHHhhHhhHhHHk..",
-        "khHHHhHHHHhHHHhHk..",
-        "kHgHHHhhHHHhhHHHHk.",
-        "khHHHhHHHhHHHhHHHk.",
-        "kHHhLLLLLLHhhHHhHHk",
-        "khHLLLLLLLLMHHhHHHk",
-        ".kHLHHHLLHHHMbhHHHk",
-        ".kLLWkLLLkWMMDbHhHk",
-        ".bLLWkLLLkWMDDbhHk.",
-        "bLLLLLLLLLMMDbHhHk.",
-        "bLLLDLLLLMMMbhHHk..",
-        ".bhHDHHhHHhHHhHHk..",
-        ".khHhHHhHHHhHHHk...",
-        ".kHHhHhHHhHHhHHk...",
-        "..khHHHhHHhHHk.....",
-        "...kHhHHhHHHk......",
-        "....kkHhHHkk.......",
-        "......kkkk.........",
-    ], {"k": "ink", "H": "hair", "h": "brown", "g": "gh_l", "b": "brown", "L": "skin_l", "M": "skin_m",
+    f.patch(25, 7, [
+        "....gHggH....",
+        "..HggggggHh..",
+        ".HggHgggHHhh.",
+        "HggggHHggHhh.",
+        "HggLLLLLLHhh.",
+        ".gLLHHLLHHMh.",
+        ".LLLkLLLkMDh.",
+        "LLLLLLLLMMDh.",
+        ".LLDLLLLMMDh.",
+        ".LLLLLLMMMhh.",
+        ".HggLLMgggHh.",
+        ".gggHggggHhh.",
+        "..gggggHghh..",
+        "...gggHghh...",
+        "....gHghh....",
+        ".....hhh.....",
+    ], {"k": "ink", "H": "hair", "h": "gh_m", "g": "gh_l", "b": "brown", "L": "skin_l", "M": "skin_m",
         "D": "skin_d", "W": "oat_l"})
     # the syrinx: reeds bound with a red cord, longest on the left
-    f.patch(17, 18, [
-        "kkkkkkkkkkkkk",
-        "kWkWkWkWkWkWk",
-        "kcccccccccccc",
-        "kWkWkWkWkWkWk",
-        "kWkWkWkWkWkk.",
-        "kWkWkWkWkk...",
-        "kWkWkWkk.....",
-        "kWkWkk.......",
-        "kmkk.........",
-        "kk...........",
-    ], {"k": "ink", "W": "oat_l", "m": "oat_m", "c": "cord"})
+    f.patch(19, 19, [
+        "WmWmWmWmW",
+        "WmWmWmWmW",
+        "ccccccccc",
+        "WmWmWmWm.",
+        "WmWmWm...",
+        "WmWm.....",
+        "Wm.......",
+        "mm.......",
+    ], {"W": "oat_l", "m": "oat_d", "c": "cord"})
     # fingers on the reeds
-    f.patch(23, 22, [
-        ".bbbb.",
-        "bLLLLb",
-        "bLbLMb",
-        "bLLMMb",
-        ".bbbb.",
+    f.patch(23, 23, [
+        ".LLb",
+        "LLMb",
+        "LMMb",
+        ".Mbb",
     ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
     return f, pal
 
@@ -483,17 +445,17 @@ def hoplite():
         ("wood", (176, 120, 72)),
     ])
     skin = skin_mat("brown")
-    bronze = Mat(["br_d", "br_m", "br_l"], cuts=[0.35, 0.72])
-    crimson = Mat(["cr_d", "cr_m", "cr_l"], wx=0.85, wy=0.2, cuts=[0.25, 0.65])
-    linen = Mat(["lin_d", "lin_l"], outline="brown", wx=0.8, wy=0.3, cuts=[0.6])
-    wood = Mat(["br_d", "wood"], cuts=[0.75])
+    bronze = Mat(["br_d", "br_m", "br_l"], outline="br_d", cuts=[0.35, 0.72])
+    crimson = Mat(["cr_d", "cr_m", "cr_l"], outline="cr_d", wx=0.85, wy=0.2, cuts=[0.25, 0.65])
+    linen = Mat(["lin_d", "lin_l"], outline="lin_d", wx=0.8, wy=0.3, cuts=[0.6])
+    wood = Mat(["br_d", "wood"], outline="br_d", cuts=[0.75])
     lea = Mat(["brown"])
     f = Fig(pal)
 
     # crimson cloak behind his shoulders
     f.poly([(23, 24), (40, 23), (44, 30), (46, 44), (40, 47), (24, 47), (19, 42), (21, 30)], crimson, bias=0.3)
     # spear held low and forward, butt behind his near leg
-    pole(f, (8, 7), (29, 56), wood, group=50)
+    f.thick_line([(8, 9), (29, 56)], 2, wood, group=50, noline=True, nooutline=True)
     # legs: a wide, ready stance, bronze greaves on the shins
     f.poly([(25, 45), (30, 45), (29, 51), (27, 57), (23, 57), (24, 51)], skin, group=100)
     f.poly([(35, 45), (39, 45), (41, 51), (43, 57), (39, 57), (37, 51)], skin, group=101)
@@ -512,8 +474,8 @@ def hoplite():
     f.thick_line([(25, 27), (22, 34)], 5, skin, group=200)
     f.thick_line([(22, 34), (19, 31)], 4, skin, group=200)
     # the hoplon on his far arm: bronze rim, crimson face, painted lambda
-    rim = f.ellipse((29, 25, 54, 50), bronze, group=600)
-    f.ellipse((31, 27, 52, 48), crimson, group=610, clip=rim, noline=True)
+    rim = f.ellipse((31, 27, 54, 50), bronze, group=600)
+    f.ellipse((33, 29, 52, 48), crimson, group=610, clip=rim, noline=True)
     f.shade_poly([(31, 27), (40, 27), (33, 36), (31, 40)], -0.35)
 
     # pteruges strips
@@ -527,63 +489,52 @@ def hoplite():
     f.line([(33, 27), (37, 26)], "br_l")
     f.line([(30, 33), (31, 30)], "br_l")
     # the lambda, Lakonia's mark
-    f.patch(35, 30, [
-        "......kk.......",
-        ".....kGGk......",
-        ".....kGYk......",
-        "....kGYkYk.....",
-        "....kGYkYk.....",
-        "...kGYk.kYk....",
-        "...kGYk.kYk....",
-        "..kGYk...kYk...",
-        "..kGYk...kYk...",
-        ".kGYk.....kYk..",
-        ".kGYk.....kYk..",
-        "kGYk.......kYk.",
-        "kkk.........kk.",
+    f.patch(37, 32, [
+        "....G.....",
+        "...GGY....",
+        "...G.Y....",
+        "..GG.YY...",
+        "..G...Y...",
+        ".GG...YY..",
+        ".G.....Y..",
+        "GG.....YY.",
+        "G.......Y.",
     ], {"k": "cr_d", "G": "br_l", "Y": "br_m"})
     # spearhead, a bronze leaf blade, and the hand around the shaft
-    f.patch(5, 0, [
-        "..k...",
-        ".kGk..",
-        ".kGYk.",
-        ".kGYk.",
-        "..kGYk",
-        "..kGYk",
-        "...kYk",
-        "...kkk",
-    ], {"k": "ink", "G": "br_l", "Y": "br_m"})
-    f.patch(16, 28, [
-        ".bbbb.",
-        "bLLLLb",
-        "bLbLMb",
-        "bLLMMb",
-        ".bbbb.",
+    f.patch(6, 3, [
+        "..Y.",
+        ".GY.",
+        ".GYy",
+        ".GYy",
+        "..Yy",
+        "..Yy",
+        "...y",
+    ], {"G": "br_l", "Y": "br_m", "y": "br_d"})
+    f.patch(17, 30, [
+        ".LLb",
+        "LLMb",
+        "LMMb",
+        ".Mbb",
     ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
     # head: Corinthian helmet pushed up on his crown, crimson crest streaming back
-    f.patch(22, 0, [
-        ".....kkkkkkk............",
-        "...kkRRRRRRrkkk.........",
-        "..kRRRRRrrrrrrrkk.......",
-        "..kRRrrrrrrrrrrrrkk.....",
-        "...kkkkkkkkkkkrrrrrk....",
-        ".....kGGGYYYYYkkrrrrk...",
-        "....kGGYYYYYYYYYkrrrrk..",
-        "...kGGYYYYYYYYYyyrrrrk..",
-        ".kkGYYYYYYYYYYYyyykrrrk.",
-        "kGkkkYYYYYYYYYYyyykrrk..",
-        "kYYYkYYYYYYYYYyyyyykrk..",
-        ".kkkkkkkkkkkkkkkkkkkHk..",
-        "...bLLLLLLLLMHHHHHk.....",
-        "...bLHHHLLHHHMbHHk......",
-        "...bLWkLLLkWMDMbHk......",
-        "..bLLWkLLLkWMDMbHk......",
-        "..bLLLLLLLLMMMbHk.......",
-        ".bLLLLDLLLMMMbHk........",
-        "..bLLDDLLMMMbk..........",
-        "..bLLLbbbMMbk...........",
-        "...bLLLLMMbk............",
-        "....bbbbbbk.............",
+    f.patch(25, 5, [
+        ".....RRrr.......",
+        "...RRRRrrrr.....",
+        "....RRrrrrrrr...",
+        "....rGGGYYYrrr..",
+        "...GGGYYYYYyrr..",
+        "..GGYYYYYYYyy...",
+        ".GYYHYYYYHYYYy..",
+        ".YYYYYYYYYYYYy..",
+        "..HLLLLLLMHHH...",
+        "..LLHLLHLMMHHb..",
+        "..LLkLLkLMDbHb..",
+        ".LLLLLLLMMDbH...",
+        "..LLDLLLMMDbH...",
+        "..LLLLLLMMDb....",
+        "...LLbLLMMb.....",
+        "....LLLMMb......",
+        ".....LMMb.......",
     ], {"k": "ink", "R": "cr_l", "r": "cr_m", "G": "br_l", "Y": "br_m", "y": "br_d", "H": "hair",
         "b": "brown", "L": "skin_l", "M": "skin_m", "D": "skin_d", "W": "lin_l"})
     return f, pal
@@ -606,14 +557,14 @@ def augur():
         ("gold", (240, 192, 64)),
     ])
     skin = skin_mat("brown")
-    robe = Mat(["ind_d", "ind_m", "ind_l"], wx=0.85, wy=0.25, cuts=[0.3, 0.72])
-    wood = Mat(["brown", "wood"], cuts=[0.7])
+    robe = Mat(["ind_d", "ind_m", "ind_l"], outline="ind_d", wx=0.85, wy=0.25, cuts=[0.3, 0.72])
+    wood = Mat(["brown", "wood"], outline="brown", cuts=[0.7])
     frieze = Mat(["ter_d", "ter_l"], wx=1.0, wy=0.0, cuts=[0.75])
     lea = Mat(["brown"])
     f = Fig(pal)
 
     # staff in his far hand, planted beside him
-    pole(f, (47, 6), (46, 61), wood, group=50)
+    f.thick_line([(47, 8), (46, 61)], 2, wood, group=50, noline=True, nooutline=True)
     # long robe to the ankles
     body = f.poly([(25, 23), (39, 23), (42, 32), (44, 44), (46, 58), (20, 58), (22, 44), (23, 32)], robe)
     f.poly([(23, 58), (28, 58), (28, 61), (22, 61)], lea)
@@ -634,67 +585,55 @@ def augur():
     f.thick_line([(18, 18), (16, 11)], 4, skin, group=210)
 
     # the frieze: borders and birds in flight
-    f.line([(19, 49), (47, 49)], "ink")
-    f.line([(19, 56), (47, 56)], "ink")
-    f.patch(20, 51, [
-        "kk...kk..kk...kk..kk...kk",
-        ".kk.kk....kk.kk....kk.kk.",
-        "..kkk......kkk......kkk..",
-        "...k........k........k...",
-    ], {"k": "ink"})
+    f.line([(23, 49), (43, 49)], "ter_d")
+    f.line([(23, 56), (44, 56)], "ter_d")
+    for x in (24, 36):
+        f.patch(x, 51, ["kk...kk", ".kk.kk.", "..kkk..", "...k..."], {"k": "ink"})
     # sleeve hem and the edge of the himation
     f.line([(16, 28), (21, 32)], "ind_l")
     f.line([(40, 26), (24, 45)], "ind_l")
     # hand on the staff
-    f.patch(43, 28, [
-        ".bbbb.",
-        "bLLLLb",
-        "bLbLMb",
-        "bLLMMb",
-        ".bbbb.",
+    f.patch(44, 29, [
+        ".LLb",
+        "LLMb",
+        "LMMb",
+        ".Mbb",
     ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
     # staff head: a knot of wood
-    f.patch(45, 3, [
-        ".kkk.",
-        "kWwWk",
-        "kwWwk",
-        ".kwk.",
+    f.patch(46, 5, [
+        "wWw",
+        "WWw",
+        ".w.",
     ], {"k": "ink", "W": "wood", "w": "brown"})
     # pointing hand, index finger to the birds
-    f.patch(12, 3, [
-        "..k....",
-        ".kLk...",
-        ".kLk...",
-        ".kLkk..",
-        "kLLLLk.",
-        "kLLLMk.",
-        "kLLMMk.",
-        ".kMMk..",
-        "..kk...",
+    f.patch(14, 5, [
+        "..L.",
+        "..L.",
+        "..LM",
+        "LLLM",
+        "LLMM",
+        ".MMk",
+        "..Mk",
     ], {"k": "brown", "L": "skin_l", "M": "skin_m"})
     # head tilted up to the sky: white hair and beard, gold fillet, crow feather
-    f.patch(22, 1, [
-        ".................kk.",
-        "................kIk.",
-        "...............kIik.",
-        "......kkkkk...kIik..",
-        "....kkGGGGgkk.kIik..",
-        "...kGGGGGGGggkkIk...",
-        "..kGGGGGGGGgggkIk...",
-        "..kYYYYYYYYYYYYYk...",
-        ".kLLLLLLLLLLMgggk...",
-        ".bLgggLLLggggMbgk...",
-        ".bLkkLLLLkkMMDbgk...",
-        "bLLGGLLLLGGMDMbgk...",
-        "bLLLLLLLLLMMDbggk...",
-        "bLLLDLLLLMMMbgggk...",
-        "kGGGDGGGGGGGgggk....",
-        "kGGGkkkGGGGgggk.....",
-        "kGGGGGGGGGggggk.....",
-        ".kGGGGGGGGgggk......",
-        "..kGGGGGgggk........",
-        "...kkGGgkk..........",
-        ".....kk.............",
+    f.patch(25, 6, [
+        "............I.",
+        "...........II.",
+        "..........Iii.",
+        "....GGGgg.II..",
+        "..GGGGGGggI...",
+        ".GGGGGGGggg...",
+        ".YYYYYYYYYg...",
+        ".LLLLLLLMMg...",
+        "LLLggLLggMDg..",
+        "LLLkLLLkMMDg..",
+        "LLLLLLLLMMDg..",
+        ".LLDLLLMMMgg..",
+        ".GGGLLGGGgg...",
+        ".GGGGGGGggg...",
+        "..GGGGGggg....",
+        "...GGGggg.....",
+        "....Gggg......",
     ], {"k": "ink", "I": "ink", "i": "ind_m", "G": "gray_l", "g": "gray_d", "Y": "gold", "b": "brown",
         "L": "skin_l", "M": "skin_m", "D": "skin_d"})
     return f, pal
@@ -715,7 +654,7 @@ ACOLYTE_ROBES = [
 def acolyte_robe(f, saffron, white):
     """Ankle-length white chiton, a saffron himation over the far shoulder, saffron hem."""
     body = f.poly([(26, 23), (39, 23), (41, 32), (42, 44), (44, 58), (21, 58), (23, 44), (24, 32)], white)
-    for x in (28, 33, 38):
+    for x in (29, 38):
         f.shade_poly([(x, 46), (x + 1, 46), (x + 1 + (x - 33) // 4, 57), (x + (x - 33) // 4, 57)], 0.45)
     f.rect(19, 55, 46, 57, saffron, clip=body, noline=True)
     return body
@@ -725,9 +664,9 @@ def acolyte_m():
     """Lampon, the hearth's keeper: an ember held out, carefully, in bronze tongs."""
     pal = Palette([("ink", INK), *SKIN_TAN, ("brown", (96, 56, 40)), ("hair", (56, 40, 32)), *ACOLYTE_ROBES])
     skin = skin_mat("brown")
-    white = Mat(["wh_d", "wh_m", "wh_l"], outline="brown", wx=0.85, wy=0.25, cuts=[0.55, 0.85])
-    saffron = Mat(["saf_d", "saf_m", "saf_l"], wx=0.85, wy=0.25, cuts=[0.3, 0.7])
-    bronze = Mat(["saf_d", "saf_m"], cuts=[0.6])
+    white = Mat(["wh_d", "wh_m", "wh_l"], outline="wh_d", wx=0.85, wy=0.25, cuts=[0.55, 0.85])
+    saffron = Mat(["saf_d", "saf_m", "saf_l"], outline="saf_d", wx=0.85, wy=0.25, cuts=[0.3, 0.7])
+    bronze = Mat(["saf_d", "saf_m"], outline="saf_d", cuts=[0.6])
     lea = Mat(["brown"])
     f = Fig(pal)
 
@@ -741,58 +680,49 @@ def acolyte_m():
     f.thick_line([(26, 25), (23, 31), (27, 33)], 5, skin, group=200)
     f.thick_line([(40, 26), (42, 32), (37, 36)], 5, skin, group=300)
     # the tongs: a bronze bar held out to his right, hinged near his hands
-    bar(f, (38, 36), (12, 26), bronze, group=500)
+    f.thick_line([(37, 35), (12, 25)], 2, bronze, group=500, noline=True, nooutline=True)
+    f.thick_line([(37, 35), (10, 29)], 2, bronze, group=500, noline=True, nooutline=True)
 
     # hearth ash on the hem and sleeve
     f.pxs([(22, 54), (23, 53), (25, 54), (27, 55), (42, 53)], "ash")
     # hands on the tongs
-    f.patch(25, 29, [
-        ".bbbb.",
-        "bLLLLb",
-        "bLbLMb",
-        "bLLMMb",
-        ".bbbb.",
+    f.patch(25, 30, [
+        ".LLb",
+        "LLMb",
+        "LMMb",
+        ".Mbb",
     ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
-    f.patch(34, 32, [
-        ".bbbb.",
-        "bLLLMb",
-        "bLbMMb",
-        ".bbbb.",
+    f.patch(35, 33, [
+        ".LLb",
+        "LLMb",
+        "LMMb",
+        ".Mbb",
     ], {"b": "brown", "L": "skin_l", "M": "skin_m"})
     # the jaws and the glowing ember
-    f.patch(3, 20, [
-        "..F.Y.......",
-        "...Y..F.....",
-        "...kkkkkk...",
-        "..kSSSSSSkk.",
-        ".kSkkkkkkSSk",
-        "..kFYYFk.kSS",
-        "..kYWWYk.kSS",
-        "..kFYYFk.kSS",
-        ".kSkkkkkkSSk",
-        "..kSSSSSSkk.",
-        "...kkkkkk...",
+    f.pxs([(7, 20), (12, 22)], "fire")
+    f.patch(8, 24, [
+        ".FF.",
+        "FYYF",
+        "YWWY",
+        "FYYF",
+        ".FF.",
     ], {"k": "ink", "F": "fire", "Y": "saf_l", "W": "wh_l", "S": "saf_m"})
     # head: short dark hair, a smear of ash on his cheek, alarmed
-    f.patch(24, 4, [
-        ".....kkkkkk.........",
-        "...kkHHhHHHkk.......",
-        "..kHHhHHHHhHHk......",
-        ".kHhHHHHhHHHHHk.....",
-        ".kHHHHhHHHHhHHHk....",
-        "kHhHHHHHHHHHHhHk....",
-        "kHHHLHHHLLHHHHHk....",
-        "kHLLHLLLHLLMHHHk....",
-        ".bLHLLLLLHHMbHHk....",
-        ".bLWkLLLLkWMDMbk....",
-        "bLLWkLLLLkWMDMbk....",
-        "bLLLLLLLLLMMMbHk....",
-        ".bLLDLLLLMMMbHk.....",
-        ".bLLLLLLAAMMbk......",
-        "..bLLkkkLAMbk.......",
-        "..bLLkDkLMMbk.......",
-        "...bLLLLMMbk........",
-        "....bbbbbbk.........",
+    f.patch(25, 10, [
+        "....HHHHh....",
+        "..HHHHHHHh...",
+        ".HHHHHHHHHh..",
+        "HHHLLHHLLHHh.",
+        ".HLLLLLLMHHh.",
+        ".LbLLLbLMMHb.",
+        ".LkLLLkLMDbH.",
+        "LLLLLLLLMDbH.",
+        ".LLDLLLMMDbH.",
+        ".LLLLLLAMMb..",
+        "..LLLDDAMMb..",
+        "..LLDLDMMb...",
+        "...LLLMMb....",
+        "....LMMb.....",
     ], {"k": "ink", "H": "hair", "h": "brown", "b": "brown", "L": "skin_l", "M": "skin_m", "D": "skin_d",
         "W": "wh_l", "A": "ash"})
     return f, pal
@@ -803,8 +733,8 @@ def acolyte_f():
     pal = Palette([("ink", INK), *SKIN_FAIR, ("hair_d", (112, 48, 32)), ("hair_l", (176, 88, 48)),
                    *ACOLYTE_ROBES])
     skin = skin_mat("hair_d")
-    white = Mat(["wh_d", "wh_m", "wh_l"], outline="hair_d", wx=0.85, wy=0.25, cuts=[0.55, 0.85])
-    saffron = Mat(["saf_d", "saf_m", "saf_l"], wx=0.85, wy=0.25, cuts=[0.3, 0.7])
+    white = Mat(["wh_d", "wh_m", "wh_l"], outline="wh_d", wx=0.85, wy=0.25, cuts=[0.55, 0.85])
+    saffron = Mat(["saf_d", "saf_m", "saf_l"], outline="saf_d", wx=0.85, wy=0.25, cuts=[0.3, 0.7])
     lea = Mat(["hair_d"])
     f = Fig(pal)
 
@@ -821,49 +751,47 @@ def acolyte_f():
     # near arm raises the lamp
     f.poly([(23, 23), (28, 23), (28, 28), (24, 29)], white, group=210)
     f.thick_line([(25, 26), (20, 30)], 5, skin, group=200)
-    f.thick_line([(20, 30), (17, 23)], 4, skin, group=200)
+    f.thick_line([(20, 30), (17, 20)], 4, skin, group=200)
 
     # hearth ash on the hem
     f.pxs([(23, 54), (24, 53), (26, 54), (40, 53), (41, 54)], "ash")
     # clay oil lamp with its flame on the nozzle
-    f.patch(8, 6, [
-        "..k...........",
-        ".kYk..........",
-        ".kYYk.........",
-        "kYWYk.........",
-        "kFWWYk........",
-        ".kFFk.........",
-        ".kkkkkkkkkk...",
-        "kTTTTTTTTTkk..",
-        ".kkTTTTTTTTTk.",
-        "...kttttttttk.",
-        "....kkkkkkkk..",
+    f.patch(10, 7, [
+        "..Y......",
+        ".YY......",
+        ".YWY.....",
+        ".FWWY....",
+        "..FF.....",
+        ".tT......",
+        "TTTTTTTt.",
+        ".TTTtttt.",
+        "..ttttt..",
+        "...ttt...",
     ], {"k": "ink", "Y": "saf_l", "W": "wh_l", "F": "fire", "T": "hair_l", "t": "hair_d"})
-    f.patch(14, 16, [
-        ".bbbb.",
-        "bLLLLb",
-        "bLbLMb",
-        "bLLMMb",
-        ".bbbb.",
+    f.patch(14, 17, [
+        ".LLb",
+        "LLMb",
+        "LMMb",
+        ".Mbb",
     ], {"b": "hair_d", "L": "skin_l", "M": "skin_m"})
     # head: auburn hair in a bun tied with saffron, ash on her nose, grinning
-    f.patch(24, 4, [
-        "...........kkkk.....",
-        "......kkkkkhHHHk....",
-        "....kkhhHHHkSSSk....",
-        "...khhHHHHHHkHHHk...",
-        "..khHHHHHHHHHkkk....",
-        ".khHHHHHHHHHHHHk....",
-        ".khHHLLLHHHHHHHk....",
-        "khHLLLLLLLLMHHHk....",
-        "kHkkkLLLLkkkMbHk....",
-        ".bLWkLLLLkWMDMbk....",
-        ".bLLLLLLLLLMMDbHk...",
-        "bLLLLDAALLMMMbHk....",
-        ".bLLDDLLLMMMbHHk....",
-        "..bLLFFFLMMbHHk.....",
-        "...bLLLLMMbkHk......",
-        "....bbbbbbk.kk......",
+    f.patch(25, 7, [
+        ".........hhH..",
+        ".....hhhHHHHH.",
+        "...hhhhHSSSHH.",
+        "..hhhhHHHHHH..",
+        ".hhhhHHHHHHH..",
+        "hhhHHLLHHHHHH.",
+        ".HLLLLLLMMHHH.",
+        ".LbLLLbLMDbHH.",
+        ".LkLLLkLMDbHH.",
+        "LLLLLLLLMDbHH.",
+        ".LLDAALLMMbHH.",
+        ".LLDLLLMMMbH..",
+        "..LLFFLMMbHH..",
+        "...LLLMMb.HH..",
+        "....LMMb..H...",
+        ".....Mb.......",
     ], {"k": "ink", "H": "hair_d", "h": "hair_l", "S": "saf_l", "b": "hair_d", "L": "skin_l",
         "M": "skin_m", "D": "skin_d", "W": "wh_l", "A": "ash", "F": "fire"})
     return f, pal
