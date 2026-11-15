@@ -95,3 +95,4 @@ data/scripts/ichor_labyrinth.inc
 data/scripts/ichor_postgame_opening.inc
 data/scripts/ichor_postgame_crew.inc
 data/scripts/ichor_postgame_opening_stubs.inc
+data/scripts/ichor_frozen.inc

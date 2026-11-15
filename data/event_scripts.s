@@ -800,6 +800,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/scripts/ichor_rites.inc" @ Ichor: rites
 	.include "data/scripts/ichor_herms.inc" @ Ichor: herm waystones
 	.include "data/scripts/ichor_labyrinth.inc" @ Ichor: the Labyrinth
+	.include "data/scripts/ichor_frozen.inc" @ Ichor: the Frozen Hour
 	.include "data/scripts/ichor_postgame_opening.inc" @ Ichor: the post-game's opening
 	.include "data/scripts/ichor_postgame_crew.inc" @ Ichor: the Euploia's crew
 	.include "data/scripts/ichor_postgame_opening_stubs.inc" @ ICHOR_STUB_SAILING: the build lead deletes this line at merge

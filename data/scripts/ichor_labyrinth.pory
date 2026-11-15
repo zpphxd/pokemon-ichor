@@ -143,3 +143,15 @@ script EventScript_IchorDial {
     copyvar(VAR_RESULT, VAR_0x8006)
     return
 }
+
+// ---------------------------------------------------------------------------
+// The Titan disguise (LABYRINTH §5.6): walking into a Titanborn while disguised
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorRecruitBump {
+    lockall
+    msgbox(format("Watch it, recruit."), MSGBOX_DEFAULT)
+    closemessage
+    releaseall
+    end
+}

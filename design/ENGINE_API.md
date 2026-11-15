@@ -11,15 +11,15 @@ All of Ichor's own persistent state lives in **`struct IchorSave`** (`include/ic
 
 | | |
 |---|---|
-| Size | 1,280 bytes, fixed. SaveBlock3 is now 1,284 of its 1,624 bytes. |
-| Version | `ICHOR_SAVE_VERSION` (1). Version 0 means a save from before IchorSave. |
-| New game | `Ichor_InitSave()` (from `NewGameInitData`): everything zero, except `version = ICHOR_SAVE_VERSION` (2) and `momLosses = 212`. |
-| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Version 2 added `frozenHourStep` (§5), carved from `headerReserved`. |
-| New day | `Ichor_DoDailyEvents()` (from `DoDailyEvents`) clears the daily flag bank. |
-| Headroom | 176 bytes in `reserved`, plus 23 in `headerReserved`. |
+| Size | 1,472 bytes. It was 1,280 until version 4 added the second flag bank at 0x500. SaveBlock3 is now 1,476 of its 1,624 bytes. |
+| Version | `ICHOR_SAVE_VERSION` (4). Version 0 means a save from before IchorSave. |
+| New game | `Ichor_InitSave()` (from `NewGameInitData`): everything zero, except `version` and `momLosses = 212`. |
+| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Each later version's step: 2 added `frozenHourStep` (§5); 3 added the forced omen and the held tint (§7), all from `headerReserved`; 4 added `flags2`, zeroed on load because an older save holds what used to sit past IchorSave's end there. |
+| New day | `Ichor_DoDailyEvents()` (from `DoDailyEvents`) clears the daily flag bank and draws the day's omen (§7). |
+| Headroom | 176 bytes in `reserved` at 0x450 (world-postgame takes 64 of them for `IchorEpics`), 20 in `headerReserved`, and 148 more in SaveBlock3. |
 
 **Adding a field later.**
-1. Take its bytes from the front of `reserved` and shrink `reserved` by the same amount. The struct must stay 1,280 bytes; `STATIC_ASSERT`s in `src/ichor_save.c` pin the size and the offsets.
+1. Take its bytes from the front of `reserved` and shrink `reserved` by the same amount. The struct keeps its size; `STATIC_ASSERT`s in `src/ichor_save.c` pin the size and the offsets. Growing the struct again is a last resort: it moves what follows IchorSave in SaveBlock3.
 2. Bump `ICHOR_SAVE_VERSION`.
 3. In `Ichor_OnSaveLoaded`, give the field its default when an older version loads.
 
@@ -39,6 +39,7 @@ This way the save never breaks again.
 | `xenia[8]` | §10 xenia | Links done per token chain. |
 | `vars[32]` | the var bank | See below. |
 | `flags[256]` | the flag bank | 2,048 flags. See below. |
+| `flags2[192]` (0x500) | the second flag bank | 1,536 flags (version 4). See below. |
 | `dailyFlags[32]` | the daily bank | 256 flags, cleared each day. |
 | `thread` | LABYRINTH.md §5.1 | Ariadne's Thread: 24 anchors (8 bytes each, not 6, because apcs-gnu rounds structs to 4 bytes), 1,792 committed steps, a 152-step live segment. |
 
@@ -49,12 +50,13 @@ Only 26 vanilla vars and 322 vanilla flags were left, so IchorSave carries its o
 | Bank | Ids | Count | Claim with |
 |---|---|---|---|
 | Flags | `0x2000`–`0x27FF` | 2,048 | `python3 tools/ichor/claim.py bankflag FLAG_ICHOR_<NAME> "comment"` |
+| Flags, second bank | `0x2900`–`0x2EFF` | 1,536 | the same command; `--range` offsets 0x500–0xADF land here |
 | Daily flags | `0x2800`–`0x28FF` | 256, cleared each day | `python3 tools/ichor/claim.py dailyflag FLAG_DAILY_ICHOR_<NAME> "comment"` |
 | Vars | `0x4100`–`0x411F` | 32 | `python3 tools/ichor/claim.py bankvar VAR_ICHOR_<NAME> "comment"` |
 
 **Use the banks for all new Ichor content,** including story flags, item balls, hidden items and hide flags. Keep the remaining vanilla flags and vars for anything that has to sit in SaveBlock1. A claim adds a named line to `include/constants/flags.h` or `vars.h`, in the bank's "general" range.
 
-**Parallel sessions** pass `--range LO-HI` first, as with vanilla flags (`tools/ichor/claim_ranges.md`). For a bank, LO and HI are offsets into its general range (`0x000`–`0x4FF` for flags, `0x00`–`0x6F` for daily flags, `0x00`–`0x1F` for vars). Each claim takes the lowest free offset in the range, and lines stay sorted by offset, so separate ranges merge cleanly.
+**Parallel sessions** pass `--range LO-HI` first, as with vanilla flags (`tools/ichor/claim_ranges.md`). For a bank, LO and HI are offsets into its general range (`0x000`–`0xADF` for flags, where `0x500` and up is the second bank; `0x00`–`0x6F` for daily flags; `0x00`–`0x1F` for vars). Each claim takes the lowest free offset in the range, and lines stay sorted by offset, so separate ranges merge cleanly.
 
 ```bash
 python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS "met the Herald in Emporion"
@@ -78,11 +80,27 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | `FLAG_ICHOR_DIG_FIXED_START` | `0x2260` | 64 | One-time dig finds |
 | `FLAG_ICHOR_THEOXENIA_START` | `0x22A0` | 64 | Theoxenia visits, hides and decoys |
 | `FLAG_ICHOR_XENIA_START` | `0x22E0` | 32 | Xenia hosts and token-chain links |
-| `FLAG_ICHOR_GENERAL_START` | `0x2300` | 1,280 | Claimed by name |
+| `FLAG_ICHOR_GENERAL_START` | `0x2300` | 1,280 | Claimed by name: `claim.py` bankflag offsets 0x000–0x4FF |
+| `FLAG_ICHOR_GENERAL2_START` | `0x2900` | 1,504 | The second bank, claimed by name: `claim.py` bankflag offsets 0x500–0xADF |
+| `FLAG_ICHOR_WAYSTONES_START` | `0x2EE0` | 32 | The Oikoumene's waystones (herms beyond Aethos, §4) |
 | `FLAG_DAILY_ICHOR_PRAYED_START` | `0x2800` | 16 | Prayed to god *g* today |
 | `FLAG_DAILY_ICHOR_DIG_START` | `0x2810` | 96 | Daily dig spots |
 | `FLAG_DAILY_ICHOR_LAUREL_START` | `0x2870` | 32 | Laurel trees, one sprig a day |
 | `FLAG_DAILY_ICHOR_GENERAL_START` | `0x2890` | 112 | Claimed by name |
+
+**Index blocks given out** within the reserved ranges (ask the engine session for more):
+
+| Range | Indices | Owner | Use |
+|---|---|---|---|
+| Braziers | +0x00–0x0F | engine | tests and the slice |
+| Braziers | +0x10–0x1F | world-act1 | the Telesterion, the Mystery sanctum, Eleusa's procession torches (§2) |
+| Braziers | +0x20–0x2F | world-act2 | Antiope's cave, Trophonios's cave B1F and the oracle's chamber; room for Arkadia and Kaldera |
+| Desecrated altars | 0–7 | Act I (not yet claimed) | |
+| Desecrated altars | 8–15 | world-act2 | the Kithairon shrine, Route 9's altar, and more |
+| Theoxenia | +0x00–0x0F | engine | one visit flag per god (`+ICHOR_GOD_*`), when theoxenia is built |
+| Theoxenia | +0x20–0x27 | world-act2 | decoys: Eleutherai, Thyrsa, Route 8, Kirrha, and more |
+| Fixed digs | +0x00–0x0F | Act I (not yet claimed) | Kalliste, Route 1, Kronion Hill, Emporion |
+| Fixed digs | +0x10–0x1B | world-act2 | the Treasury of Minyas, Gla, Trophonios's great boulder, Route 9's gully, and more |
 
 **One assembler caveat.** The `compare` macro (and the `goto_if_eq`-style macros built on it) treats a second argument in `0x4000`–`0x40FF` as a var and anything else as a number. So comparing a var *against a bank var* needs `compare_var_to_var` explicitly. Comparing a bank var against a number works as usual.
 
@@ -94,7 +112,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 
 ## Status of the rest of this file
 
-§1–§6 are built. What each section leaves for later is listed at its end.
+§1–§7 are built; §8 is planned, with its names fixed. What each section leaves for later is listed at its end.
 
 | § | System | Batch | State |
 |---|---|---|---|
@@ -103,7 +121,9 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 3 | Rites: altars, Favor, blessings, gifts | 3 | **Built** |
 | 4 | Herm waystones and the Wings | 4 | **Built** |
 | 5 | The Frozen Hour (SCRIPT.md Phase 4, E1–E6) | 5 | **Built** |
-| 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials | 5 | **Built** |
+| 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials, sentries, the disguise | 5 | **Built** |
+| 7 | Scripts' small needs: flag counts, a held tint, omens, time-of-day tables | 5 | **Built** |
+| 8 | Excavation: the Trowel, dig spots, fixed finds | not yet assigned | Planned, names fixed |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
@@ -179,6 +199,7 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
   | +0x00–0x0F | engine | tests and the slice |
   | +0x10–0x13 | world-act1 | the Telesterion's season braziers in Eleusa: autumn, winter, spring, summer |
   | +0x14–0x1F | world-act1 | kept: the Mystery sanctum's four, Eleusa's procession torches |
+  | +0x20–0x2F | world-act2 | Antiope's cave, Trophonios's cave B1F and the oracle's chamber; room for Arkadia and Kaldera |
   ```
   // the brazier's bg event
   script Map_Brazier1 {
@@ -197,6 +218,18 @@ Place an object event with the obstacle's graphics and script. The scripts keep 
   - going in: `setvar(VAR_0x8004, <brazier flag>)`, then `call(EventScript_IchorEnterLitZone)`. It brightens the map fully if that brazier is lit.
   - going out: `call(EventScript_IchorLeaveLitZone)`, which eases back to the torch's radius.
 - **A map that loads with the player inside a lit zone** sets `setflashlevel(0)` in its ON_TRANSITION when the zone's flag is set.
+
+### Carried flames (SYSTEMS §2)
+
+- **A carried flame** is a named fire on Hecate's Torch for a set number of steps. Its kind is in `VAR_TEMP_3` (`FLAME_HEARTH`, `FLAME_SANCTUM`, `FLAME_THRESHOLD`; add new kinds at the end, with their names in `src/ichor_relics.c`). Its steps left are in `VAR_TEMP_2`. Both reset on a map change, so the flame dies when you leave.
+- **A brazier that gives its fire:** `setvar(VAR_0x8004, FLAME_HEARTH)`, `setvar(VAR_0x8005, 20)`, then `special(Ichor_TakeFlame)`. `VAR_RESULT` is `FALSE` without a lit Torch. A brazier already lit with that fire relights it the same way (the relay).
+- **A brazier that wants a named fire** checks `VAR_TEMP_3` itself, then `special(Ichor_PutOutFlame)` if the fire is spent on it.
+- **Each step burns one.** At 5 steps left: "The flame gutters." At 0: "The carried fire dies down to the torch's own flame."
+- **Water puts it out:** "The water puts out the carried fire." Surfing, which covers falling into water and the waterfall, does it on the next step. Dousing the Torch from the Ring puts it out silently.
+- **Wind:** a draughty doorway's coord event runs `call(EventScript_IchorDraught)`. It does nothing without a flame; with one, "A draught snuffs out the carried fire."
+- **The start menu's panel** shows "Hearth fire: 12 steps", under the blessing when there is one.
+- **Order, Return and Reveal** (SYSTEMS's other verbs) are the map's own script.
+- **Rain** isn't decided yet; world-postgame is asking.
 
 ### Calls for scripted relic moments
 
@@ -350,7 +383,12 @@ Built in `src/ichor_frozen.c`. Tested by `tools/ichor/tests/ichor_frozen.sh` (21
 
 While `FLAG_ICHOR_FROZEN_HOUR` is set:
 - **Every tileset and sprite palette is gray.** The exceptions are the player, the follower and any unfrozen object (E3). The tint lives in the unfaded palette buffer, so fades, warps, weather and battles all keep it. The day-and-night tint is off.
-- **Everyone else is frozen,** including people who spawn later. A script's `lockall`/`releaseall` doesn't thaw them, and frozen trainers don't see you. Talking to a frozen person still runs their script, so check the flag there, and don't `faceplayer`.
+- **Everyone else is frozen,** including people who spawn later. A script's `lockall`/`releaseall` doesn't thaw them, and frozen trainers don't see you.
+- **Talking to a frozen person** gives Phase 4's generic line (`EventScript_IchorFrozenGeneric`), never their own script, so frozen trainers don't battle:
+  - "They don't move. They don't blink.", "Frozen mid-step, one foot off the ground." or "Caught halfway through a word.", by local id modulo 3;
+  - "It's frozen with its ears up, listening for something." for a Pokémon object.
+  - Inanimate objects (item balls, rocks) keep their own scripts.
+  - **A map with frozen scripts of its own** calls `special(Ichor_FrozenScriptsHere)` in `ON_TRANSITION`. Then every object's own script runs. Those scripts check `FLAG_ICHOR_FROZEN_HOUR` themselves, and can `goto(EventScript_IchorFrozenGeneric)` for anyone without a line. Don't `faceplayer` a frozen person.
 - **There are no wild encounters** on foot or surfing.
 - **The map's music is `MUS_ICHOR_ELPIS_LULLABY_BOX`,** on every map.
 - **Not built:** muting the field's own sound effects. Scripts' `playse` is unaffected anyway.
@@ -447,6 +485,18 @@ His own movement type is his patrol: `FACE_*` or `WALK_SEQUENCE_*`, set in Porym
 - **Trainers can't see the player** on a dark tile: a dark map, outside lit zones and light pools. Elsewhere they see 2 tiles at most. Talking to them still starts the battle.
 - **Asterion** follows the table above.
 
+### Sentries and the disguise (§5.6)
+
+- **Trainer types** (`include/constants/trainer_types.h`), set in Porymap:
+  - `TRAINER_TYPE_ICHOR_TITANBORN`: sees in a line, as `TRAINER_TYPE_NORMAL` does.
+  - `TRAINER_TYPE_ICHOR_SENTRY`: sees its own line, plus the lines either side of it from 2 tiles out, to its sight range (give sentries 5). Seen in a side lane, the sentry calls out from its post instead of walking over.
+- **The disguise.** While `FLAG_ICHOR_DISGUISE_ON` is set, both types take the player for a recruit. They see nothing, unless the player runs within 3 tiles; then they see as usual.
+  - Walking into one shows "Watch it, recruit." (`EventScript_IchorRecruitBump`), once until the player steps away.
+  - Talking to one runs its own script, as always. Gigas elites, who question you instead, are script.
+  - `FLAG_ICHOR_DISGUISE_ON` is the engine's: set it when the helmet goes on and clear it when it comes off. Having the helmet (`TITAN_DISGUISE` in LABYRINTH §13) is world-act3's flag.
+  - **The sprite is not swapped yet.** The two helmeted walking sheets (decision L9) don't exist; this is LABYRINTH's "keep the mechanic, skip the sprite". When they land, the swap goes in `GetPlayerAvatarGraphicsIdByStateIdAndGender`, and the sheets need the player's animation table, running frames included.
+- **The Helm** stacks with the disguise.
+
 ### Dials
 
 ```
@@ -463,8 +513,65 @@ copyvar(VAR_ICHOR_LABYRINTH, VAR_0x8004)   // saved back, turned or not
 - **Art:** the thread's twins, the skylight pools, Asterion's stars and lying-down frame, and the dust puff on his scrape.
 - **Engine:**
   - the waypoint patrol for wall %2 (`MOVEMENT_TYPE_ICHOR_PATROL`);
-  - sentries' sight bands and the disguise (§5.6);
+  - the disguise's sprite (above);
   - the bull-leap (E7);
   - the mirrors and beam (E9);
   - the Endless Labyrinth.
 - **Script-only, for world-act3:** the sun and moon gates, the dancing floor, the lift, the sunken floor and the alarms.
+
+## 7. Scripts' small needs
+
+Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested by `make check TESTS="Ichor:"`.
+
+### Counting flags
+
+`setvar(VAR_0x8004, FLAG_ICHOR_PROPHECY_START)`, `setvar(VAR_0x8005, 8)`, `specialvar(VAR_RESULT, Ichor_CountFlagRange)`: how many of those flags are set. It works on any flag range: a bank, a vanilla range or the daily flags.
+
+### Holding the day-and-night tint
+
+- **`setvar(VAR_0x8004, TIME_EVENING)`, then `special(Ichor_HoldTimeOfDay)`.** The tint holds at that time of day, whatever the clock says. The hold lasts through warps and saves until `special(Ichor_ReleaseTimeOfDay)`. It takes `TIME_MORNING`, `TIME_DAY`, `TIME_EVENING` or `TIME_NIGHT`, each at full strength.
+- **It's the game's time of day while held,** not just the colors. Encounter tables and time-based evolutions follow it, so night falls at Delphoi for the Pokémon too.
+- The tint only shows on maps with natural light (towns, routes and the sea), so interiors look the same either way.
+- The expansion's own `SetTimeOfDay` hour override still works, but it resets on every warp. Use the hold for anything that spans maps.
+
+### Omens (SYSTEMS §6)
+
+- **Today's omen** is `IchorSave.omenKind` (`OMEN_SWARM`, `_VISITOR`, `_WEATHER`, `_GOOD_SIGN`, `_STRANGER`, or `OMEN_NONE`) and `omenEntry`, an entry within that kind. The entries are numbered in `include/constants/ichor.h`: `OMEN_WEATHER_KRYOPUFF` and `OMEN_WEATHER_LERNIP` so far. Add new ones at the end.
+- **Forcing tomorrow's omen,** as when Akanthis first tells the Lernip rumor: `setvar(VAR_0x8004, OMEN_WEATHER)`, `setvar(VAR_0x8005, OMEN_WEATHER_LERNIP)`, `special(Ichor_ForceOmen)`.
+- **A map that owns an omen's weather** checks it in `ON_TRANSITION`:
+  ```
+  setvar(VAR_0x8004, OMEN_WEATHER)
+  setvar(VAR_0x8005, OMEN_WEATHER_LERNIP)
+  specialvar(VAR_RESULT, Ichor_CheckOmen)
+  if (var(VAR_RESULT) == TRUE) { setweather(WEATHER_RAIN) }
+  ```
+- `specialvar(VAR_RESULT, Ichor_GetOmen)` gives the kind, with the entry in `VAR_0x8004`. The augurs use it.
+- **Not built yet:** SYSTEMS §6's daily draw from the entry table (swarms through `StartMassOutbreak`, visitors' hide flags, the story filter). Until it lands, a day without a forced omen has none.
+
+### Four time-of-day encounter tables on one map
+
+These need no engine change. `OW_TIME_OF_DAY_ENCOUNTERS` is on, and `tools/wild_encounters/wild_encounters_to_header.py` builds one table per time of day.
+- **In `src/data/wild_encounters.json`,** give the map up to four entries with the same `map` and `base_label`s ending `_Morning`, `_Day`, `_Evening` and `_Night`. Route 1 already has `gKallisteRoute1_Morning` and `_Night`.
+- **The hours** (`OW_TIMES_OF_DAY`, latest generation): morning 6–10, day 10–19, evening 19–20, night 20–6.
+- **A time with no table of its own falls back to `_Morning`** (`OW_TIME_OF_DAY_FALLBACK`). With all four defined, Lakonia's Chalkip can sit in `_Morning` and `_Evening` only.
+
+## 8. Excavation (SYSTEMS §5): planned, names fixed
+
+Not built. These names are fixed so map scripts can be written against them now; until it lands, keep a stub like `ICHOR_STUB_DIG`. Alethea's Trowel itself (`ITEM_ALETHEAS_TROWEL`) comes with it.
+
+```
+// A daily dig spot's bg event (its find is rolled once a day, by spot and day)
+setvar(VAR_0x8004, <spot index>)        // FLAG_DAILY_ICHOR_DIG_START + index: dug today
+setvar(VAR_0x8005, ICHOR_DIG_ACT_II)    // the loot table: ICHOR_DIG_ACT_I, _ACT_II or _ACT_III
+goto(EventScript_IchorDigSpot)
+
+// A one-time find (a fixed dig)
+setvar(VAR_0x8004, <find index>)        // FLAG_ICHOR_DIG_FIXED_START + index: found
+setvar(VAR_0x8005, ITEM_RARE_BONE)      // what's buried there
+goto(EventScript_IchorDigFixed)
+```
+
+- **Without the Trowel,** both say the ground has been turned here. Once a fixed find is dug, the spot is bare.
+- Hide a dig-spot object with the same flag as its find.
+- **Daily spot indices** are given out in blocks like the fixed ones; ask the engine session.
+

@@ -451,7 +451,8 @@ bool8 CheckForTrainersWantingBattle(void)
     {
         if (!gObjectEvents[i].active)
             continue;
-        if (gObjectEvents[i].trainerType != TRAINER_TYPE_NORMAL && gObjectEvents[i].trainerType != TRAINER_TYPE_SEE_ALL_DIRECTIONS && gObjectEvents[i].trainerType != TRAINER_TYPE_BURIED)
+        if (gObjectEvents[i].trainerType != TRAINER_TYPE_NORMAL && gObjectEvents[i].trainerType != TRAINER_TYPE_SEE_ALL_DIRECTIONS && gObjectEvents[i].trainerType != TRAINER_TYPE_BURIED
+         && gObjectEvents[i].trainerType != TRAINER_TYPE_ICHOR_TITANBORN && gObjectEvents[i].trainerType != TRAINER_TYPE_ICHOR_SENTRY) // Ichor
             continue;
         trainerObjects[trainerObjectsCount++] = i;
     }
@@ -609,7 +610,14 @@ static u8 GetTrainerApproachDistance(struct ObjectEvent *trainerObj)
     if (range == 0)
         return 0;
     PlayerGetDestCoords(&x, &y);
-    if (trainerObj->trainerType == TRAINER_TYPE_NORMAL)  // can only see in one direction
+    if (trainerObj->trainerType == TRAINER_TYPE_ICHOR_SENTRY && trainerObj->facingDirection <= DIR_EAST) // Ichor: a band 3 tiles wide
+    {
+        approachDistance = sDirectionalApproachDistanceFuncs[trainerObj->facingDirection - 1](trainerObj, range, x, y);
+        if (approachDistance)
+            return CheckPathBetweenTrainerAndPlayer(trainerObj, approachDistance, trainerObj->facingDirection);
+        return Ichor_GetSentrySideSight(trainerObj, range, x, y);
+    }
+    if (trainerObj->trainerType == TRAINER_TYPE_NORMAL || trainerObj->trainerType == TRAINER_TYPE_ICHOR_TITANBORN)  // can only see in one direction
     {
         // Disable trainer approach while moving diagonally (usually moving on sideway stairs)
         if (trainerObj->facingDirection > DIR_EAST)
