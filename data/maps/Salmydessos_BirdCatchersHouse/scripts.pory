@@ -1,1 +1,108 @@
-mapscripts Salmydessos_BirdCatchersHouse_MapScripts {}
+// The bird-catcher's house, Salmydessos (design/OIKOUMENE.md §4.3). Room:
+// tools/ichor/maps/pontos_rooms.py ("birdcatcher"). The door mat is (3..4, 6),
+// warp 0, back to MAP_SALMYDESSOS warp 1.
+//
+// Ixos (4,3) catches songbirds on the cliffs with lime-sticks and a decoy owl.
+// His Unfezant (6,4) came off a Colchian ship and is too big for his cages;
+// hawks rob his sticks, and he wants a Pidgeot to keep them off. In-game trade
+// INGAME_TRADE_ICHOR_PHASIANOS sets FLAG_ICHOR_TRADED_UNFEZANT, which hides the
+// Unfezant; your Pidgeot then stands in its place. Its object hides on
+// FLAG_TEMP_1, which ON_TRANSITION sets until the trade is done.
+
+mapscripts Salmydessos_BirdCatchersHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_UNFEZANT)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Salmydessos_BirdCatchersHouse_Text_NameIxos { "IXOS" }
+
+script Salmydessos_BirdCatchersHouse_EventScript_Ixos {
+    lock
+    faceplayer
+    setspeaker(Salmydessos_BirdCatchersHouse_Text_NameIxos)
+    if (flag(FLAG_ICHOR_TRADED_UNFEZANT)) {
+        msgbox(format("Not a hawk on the cliff since that Pidgeot came. Not one.\p"
+                      "The finches have stopped singing too, mind. They're nervous."))
+        release
+        end
+    }
+    msgbox(format("Mind the lime! Those sticks'd hold a finch till spring.\p"
+                  "I catch songbirds on the cliffs. The owl does the hard part.\p"
+                  "Small birds hate owls. They come to mob it, and they land on the sticks.\p"
+                  "Then the hawks come for the small birds. And I get there last."))
+    msgbox(format("That one I didn't catch. He came off a Colchian ship, from the Phasis.\p"
+                  "Too big for my cages, and he eats like a sailor.\p"
+                  "Now a Pidgeot, there's a bird. No hawk on this coast would come near."))
+    // The in-game trade, written out as Kimon's is (ElaiaVillage_BakersHouse) so
+    // each line carries Ixos's name box.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_PHASIANOS)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    msgbox(format("Trade me a Pidgeot for him?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(Salmydessos_BirdCatchersHouse_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(Salmydessos_BirdCatchersHouse_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Salmydessos_BirdCatchersHouse_Text_NameIxos)
+        msgbox(format("That's no Pidgeot. I know birds, friend. It's the whole job."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_UNFEZANT)
+    removeobject(LOCALID_IXOS_UNFEZANT)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_IXOS_PIDGEOT)
+    setspeaker(Salmydessos_BirdCatchersHouse_Text_NameIxos)
+    msgbox(format("Look at him. Every hawk from here to the Rocks is thinking again.\p"
+                  "Feed Phasianos well. He's used to Colchian barley."))
+    release
+}
+
+script Salmydessos_BirdCatchersHouse_EventScript_NoTrade {
+    setspeaker(Salmydessos_BirdCatchersHouse_Text_NameIxos)
+    msgbox(format("Pity. The hawks will be pleased."))
+    release
+}
+
+script Salmydessos_BirdCatchersHouse_EventScript_Unfezant {
+    lock
+    faceplayer
+    playmoncry(SPECIES_UNFEZANT, CRY_MODE_NORMAL)
+    msgbox(format("The Unfezant puffs out its chest at the owl.\p"
+                  "The owl doesn't move. It's made of wood."))
+    waitmoncry
+    release
+}
+
+script Salmydessos_BirdCatchersHouse_EventScript_Pidgeot {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PIDGEOT, CRY_MODE_NORMAL)
+    msgbox(format("Your old Pidgeot watches the door. Nothing's getting at those sticks."))
+    waitmoncry
+    release
+}
+
+script Salmydessos_BirdCatchersHouse_EventScript_Cages {
+    msgbox(format("Finches, a linnet, a robin, a lark. They all go quiet when you look at them."), MSGBOX_SIGN)
+}
+
+script Salmydessos_BirdCatchersHouse_EventScript_LimeSticks {
+    msgbox(format("Reeds smeared with birdlime boiled from mistletoe berries.\p"
+                  "There's a feather stuck to one. Better not touch."), MSGBOX_SIGN)
+}
+
+script Salmydessos_BirdCatchersHouse_EventScript_DecoyOwl {
+    msgbox(format("A little owl on a post, carved and painted. Its eyes are two yellow beads."), MSGBOX_SIGN)
+}

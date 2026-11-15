@@ -1,1 +1,117 @@
-mapscripts Aia_LinenWeaversHouse_MapScripts {}
+// The linen-weaver's house, Aia (design/OIKOUMENE.md §4.3). Room:
+// tools/ichor/maps/pontos_rooms.py ("linen"). The door mat is (5..6, 7), warp
+// 0, back to MAP_AIA warp 3.
+//
+// Byssa (6,4) weaves linen the way the Egyptians do, on a ground loom (the
+// Colchians and the Egyptians alone work linen alike: Herodotus 2.105). Her
+// Persian, Tigris (2,6), came off a boat from past the mountains and sleeps on
+// her good linen; she wants a cat that hunts. In-game trade
+// INGAME_TRADE_ICHOR_TIGRIS sets FLAG_ICHOR_TRADED_PERSIAN, which hides the
+// Persian; your Liepard then sits in its place. Its object hides on
+// FLAG_TEMP_1, which ON_TRANSITION sets until the trade is done.
+
+mapscripts Aia_LinenWeaversHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_PERSIAN)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Aia_LinenWeaversHouse_Text_NameByssa { "BYSSA" }
+
+script Aia_LinenWeaversHouse_EventScript_Byssa {
+    lock
+    faceplayer
+    setspeaker(Aia_LinenWeaversHouse_Text_NameByssa)
+    if (flag(FLAG_ICHOR_TRADED_PERSIAN)) {
+        msgbox(format("That Liepard caught a rat before breakfast and laid it by the loom.\p"
+                      "I've never been so proud of anything with whiskers."))
+        release
+        end
+    }
+    msgbox(format("Mind the warp! Step over it, not on it.\p"
+                  "We weave linen flat on the floor, pegged down, the way they do in Egypt.\p"
+                  "The Greeks say we must have come from there. Or they from us. Nobody knows."))
+    msgbox(format("That's Tigris. He came off a boat from somewhere past the mountains.\p"
+                  "A cat from that far away, and all he does is sleep on my good linen.\p"
+                  "I want a cat that hunts. A lean one. A Liepard."))
+    // The in-game trade, written out as Kimon's is (ElaiaVillage_BakersHouse) so
+    // each line carries Byssa's name box.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_TIGRIS)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    msgbox(format("Would you trade me one for him?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(Aia_LinenWeaversHouse_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(Aia_LinenWeaversHouse_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Aia_LinenWeaversHouse_Text_NameByssa)
+        msgbox(format("That's no Liepard. I've had one lazy cat. I know what one looks like."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_PERSIAN)
+    removeobject(LOCALID_AIA_TIGRIS)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_AIA_LIEPARD)
+    setspeaker(Aia_LinenWeaversHouse_Text_NameByssa)
+    msgbox(format("Straight for the flax pile, look. Something in there moved, once.\p"
+                  "Be kind to Tigris. He'll sleep on anything soft you own."))
+    release
+}
+
+script Aia_LinenWeaversHouse_EventScript_NoTrade {
+    setspeaker(Aia_LinenWeaversHouse_Text_NameByssa)
+    msgbox(format("Well. He's asleep anyway. He won't have heard."))
+    release
+}
+
+script Aia_LinenWeaversHouse_EventScript_Persian {
+    lock
+    faceplayer
+    playmoncry(SPECIES_PERSIAN, CRY_MODE_NORMAL)
+    msgbox(format("Tigris is asleep on a fold of linen. He opens one eye, and shuts it again."))
+    waitmoncry
+    release
+}
+
+script Aia_LinenWeaversHouse_EventScript_Liepard {
+    lock
+    faceplayer
+    playmoncry(SPECIES_LIEPARD, CRY_MODE_NORMAL)
+    msgbox(format("Your old Liepard is watching the flax pile. Its tail twitches."))
+    waitmoncry
+    release
+}
+
+script Aia_LinenWeaversHouse_EventScript_Loom {
+    msgbox(format("A ground loom pegged to the floor. A third of the linen is woven, fine and even."),
+           MSGBOX_SIGN)
+}
+
+script Aia_LinenWeaversHouse_EventScript_LinenLine {
+    msgbox(format("Linen hung to bleach. It's whiter than anything else in Aia."), MSGBOX_SIGN)
+}
+
+script Aia_LinenWeaversHouse_EventScript_Flax {
+    msgbox(format("Flax, pulled whole and stood to dry. The tops are still in blue flower."), MSGBOX_SIGN)
+}
+
+script Aia_LinenWeaversHouse_EventScript_Bolts {
+    msgbox(format("Bolts of finished linen. Each has a little knot of red thread in one corner. Hers."),
+           MSGBOX_SIGN)
+}
+
+script Aia_LinenWeaversHouse_EventScript_Tub {
+    msgbox(format("A tub where flax soaks until the fibre comes loose. It smells like a marsh."),
+           MSGBOX_SIGN)
+}

@@ -865,7 +865,7 @@
       "width": 10,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Chalkeon",
       "border_filepath": "data/layouts/Salmydessos_PhineussHouse/border.bin",
       "blockdata_filepath": "data/layouts/Salmydessos_PhineussHouse/map.bin",
       "layout_version": "emerald"
@@ -873,10 +873,10 @@
     {
       "id": "LAYOUT_SALMYDESSOS_BIRD_CATCHERS_HOUSE",
       "name": "Salmydessos_BirdCatchersHouse_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 9,
+      "height": 7,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Chalkeon",
       "border_filepath": "data/layouts/Salmydessos_BirdCatchersHouse/border.bin",
       "blockdata_filepath": "data/layouts/Salmydessos_BirdCatchersHouse/map.bin",
       "layout_version": "emerald"
@@ -884,10 +884,10 @@
     {
       "id": "LAYOUT_AIA_ASCLEPEION",
       "name": "Aia_Asclepeion_Layout",
-      "width": 15,
-      "height": 11,
+      "width": 13,
+      "height": 10,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_Chalkeon",
       "border_filepath": "data/layouts/Aia_Asclepeion/border.bin",
       "blockdata_filepath": "data/layouts/Aia_Asclepeion/map.bin",
       "layout_version": "emerald"
@@ -895,10 +895,10 @@
     {
       "id": "LAYOUT_AIA_AGORA",
       "name": "Aia_Agora_Layout",
-      "width": 15,
-      "height": 11,
+      "width": 12,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Civic",
+      "secondary_tileset": "gTileset_Chalkeon",
       "border_filepath": "data/layouts/Aia_Agora/border.bin",
       "blockdata_filepath": "data/layouts/Aia_Agora/map.bin",
       "layout_version": "emerald"
@@ -909,7 +909,7 @@
       "width": 10,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Chalkeon",
       "border_filepath": "data/layouts/Aia_PhrixosSonsHouse/border.bin",
       "blockdata_filepath": "data/layouts/Aia_PhrixosSonsHouse/map.bin",
       "layout_version": "emerald"
@@ -917,10 +917,10 @@
     {
       "id": "LAYOUT_AIA_LINEN_WEAVERS_HOUSE",
       "name": "Aia_LinenWeaversHouse_Layout",
-      "width": 10,
+      "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Chalkeon",
       "border_filepath": "data/layouts/Aia_LinenWeaversHouse/border.bin",
       "blockdata_filepath": "data/layouts/Aia_LinenWeaversHouse/map.bin",
       "layout_version": "emerald"
@@ -928,10 +928,10 @@
     {
       "id": "LAYOUT_AIA_PALACE_WORKSHOP",
       "name": "Aia_PalaceWorkshop_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 13,
+      "height": 9,
       "primary_tileset": "gTileset_Oikos",
-      "secondary_tileset": "gTileset_Oikia",
+      "secondary_tileset": "gTileset_Chalkeon",
       "border_filepath": "data/layouts/Aia_PalaceWorkshop/border.bin",
       "blockdata_filepath": "data/layouts/Aia_PalaceWorkshop/map.bin",
       "layout_version": "emerald"

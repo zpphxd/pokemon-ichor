@@ -1765,6 +1765,10 @@
 #define FLAG_ICHOR_SHORTCUT_ROSE                (FLAG_ICHOR_GENERAL_START + 0x3DD) // Ichor: Periodos: tower of Kronos midpoint shortcut open
 #define FLAG_ICHOR_OIKOUMENE_ARRIVED            (FLAG_ICHOR_GENERAL_START + 0x3DE) // Ichor: Oikoumene: first landed at any Oikoumene port (Alethea's quay scene; the AETHOS and THE OIKOUMENE fly targets)
 #define FLAG_ICHOR_SUPER_ROD_GIVEN              (FLAG_ICHOR_GENERAL_START + 0x3DF) // Ichor: Oikoumene: a first-port fisher gave the Super Rod (the others give a Big Pearl)
+#define FLAG_ICHOR_GOT_PHINEUS_DOVE             (FLAG_ICHOR_GENERAL_START + 0x434) // Ichor: Oikoumene: Phineus gave the dove (Salmydessos; flavour, ICHOR_STUB_LEGEND until the Clashing Rocks' side channel)
+#define FLAG_ICHOR_TRADED_UNFEZANT              (FLAG_ICHOR_GENERAL_START + 0x435) // Ichor: Oikoumene: Ixos traded his Unfezant for a Pidgeot (Salmydessos)
+#define FLAG_ICHOR_GOT_HEAT_ROCK                (FLAG_ICHOR_GENERAL_START + 0x436) // Ichor: Oikoumene: Phrixos's sons gave the Heat Rock (Aia)
+#define FLAG_ICHOR_TRADED_PERSIAN               (FLAG_ICHOR_GENERAL_START + 0x437) // Ichor: Oikoumene: Byssa traded her Persian for a Liepard (Aia)
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)

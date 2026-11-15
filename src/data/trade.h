@@ -1229,6 +1229,46 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_WOOLOO
+    },
+    // Ichor: the Oikoumene's Black Sea (design/oikoumene/ROOMS_pontos.md).
+    // Ixos catches songbirds on the cliffs at Salmydessos. This one came off a
+    // Colchian ship, named for the river Phasis like every pheasant; it's too
+    // big for his cages, and hawks rob his lime-sticks. A Pidgeot keeps them off.
+    // Male (personality's low byte over the 50/50 threshold): the red wattle.
+    [INGAME_TRADE_ICHOR_PHASIANOS] =
+    {
+        .nickname = _("PHASIANOS"),
+        .species = SPECIES_UNFEZANT,
+        .ivs = {22, 24, 18, 16, 18, 26},
+        .abilityNum = 0,
+        .otId = 52817,
+        .conditions = {30, 5, 5, 5, 5},
+        .personality = 0x96,
+        .heldItem = ITEM_SHARP_BEAK,
+        .mailNum = -1,
+        .otName = _("IXOS"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_PIDGEOT
+    },
+    // Byssa weaves linen at Aia the Egyptian way. Her Persian came off a boat
+    // from past the mountains and sleeps on her good linen; she wants a cat
+    // that hunts. Named for the far river.
+    [INGAME_TRADE_ICHOR_TIGRIS] =
+    {
+        .nickname = _("TIGRIS"),
+        .species = SPECIES_PERSIAN,
+        .ivs = {18, 20, 16, 22, 20, 26},
+        .abilityNum = 0,
+        .otId = 31406,
+        .conditions = {5, 30, 5, 5, 5},
+        .personality = 0x44,
+        .heldItem = ITEM_QUICK_CLAW,
+        .mailNum = -1,
+        .otName = _("BYSSA"),
+        .otGender = FEMALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_LIEPARD
     }
 };
 

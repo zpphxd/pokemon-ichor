@@ -1099,3 +1099,4 @@ gSpecials::
 	def_special Ichor_ForceOmen
 	def_special Ichor_CheckOmen
 	def_special Ichor_GetOmen
+	def_special Ichor_ChooseRotomForAppliance, waitstate=1

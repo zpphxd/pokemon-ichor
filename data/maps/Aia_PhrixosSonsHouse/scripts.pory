@@ -1,1 +1,81 @@
+// Phrixos's sons' house, Aia (design/OIKOUMENE.md §4.3). Room:
+// tools/ichor/maps/pontos_rooms.py ("phrixos"). The door mat is (4..5, 7),
+// warp 0, back to MAP_AIA warp 2.
+//
+// Exiles from Greece in a Colchian log house. Phrixos flew here from Orchomenos
+// on the golden ram; his sister Helle fell into the strait on the way. He gave
+// the ram to Zeus of Escape and its fleece to King Aietes, married the king's
+// daughter Chalkiope, and kept a Greek hearth. His sons (Argonautica 2.1093ff)
+// tried to sail home once and were wrecked on the Isle of Ares.
+//
+// Argos (5,3), the eldest, tells the Fleece's story and gives a Heat Rock from
+// under the altar: FLAG_ICHOR_GOT_HEAT_ROCK. Phrontis sits at the table (2,5);
+// Melas minds the hearth (2,3).
+
 mapscripts Aia_PhrixosSonsHouse_MapScripts {}
+
+text Aia_PhrixosSonsHouse_Text_NameArgos { "ARGOS" }
+text Aia_PhrixosSonsHouse_Text_NamePhrontis { "PHRONTIS" }
+text Aia_PhrixosSonsHouse_Text_NameMelas { "MELAS" }
+
+script Aia_PhrixosSonsHouse_EventScript_Argos {
+    lock
+    faceplayer
+    setspeaker(Aia_PhrixosSonsHouse_Text_NameArgos)
+    if (flag(FLAG_ICHOR_GOT_HEAT_ROCK)) {
+        msgbox(format("We tried to sail home once. To Orchomenos, to claim Father's lands.\p"
+                      "We got as far as the Isle of Ares. The birds there shoot their feathers.\p"
+                      "A ship full of heroes picked us out of the sea. That's another story.\p"
+                      "Longer, too. Melas tells it worse."))
+        release
+        end
+    }
+    msgbox(format("A Greek, in Aia? Come in. We're Greeks too. Half.\p"
+                  "Our father came here from Orchomenos on the back of a golden ram.\p"
+                  "His stepmother wanted him dead. The ram flew him and his sister out over the sea.\p"
+                  "Helle looked down. She fell. They named the strait for her.\p"
+                  "Father came the rest of the way alone. He gave the ram to Zeus of Escape, on that altar.\p"
+                  "The king hung its fleece in the grove of Ares. It's still there. Guarded."))
+    msgbox(format("The fire under the altar has never gone out. Father said the ram was half sun.\p"
+                  "Here. A stone from under it. It's been warm for forty years."))
+    giveitem(ITEM_HEAT_ROCK)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_HEAT_ROCK)
+        setspeaker(Aia_PhrixosSonsHouse_Text_NameArgos)
+        msgbox(format("Give it to something that fights in the sun. It keeps the day bright longer."))
+    }
+    release
+}
+
+script Aia_PhrixosSonsHouse_EventScript_Phrontis {
+    lock
+    faceplayer
+    setspeaker(Aia_PhrixosSonsHouse_Text_NamePhrontis)
+    msgbox(format("Argos tells it better. He's had the practice. He tells it every night.\p"
+                  "I was born here. I've never seen Greece. I hear it's mostly rocks."))
+    release
+}
+
+script Aia_PhrixosSonsHouse_EventScript_Melas {
+    lock
+    faceplayer
+    setspeaker(Aia_PhrixosSonsHouse_Text_NameMelas)
+    msgbox(format("Father kept a Greek hearth in a Colchian house. Mother thought it was sweet.\p"
+                  "She's the king's daughter, Chalkiope. She lives up at the palace now.\p"
+                  "Her sister's the clever one. Mother says that like it's a warning."))
+    release
+}
+
+script Aia_PhrixosSonsHouse_EventScript_RamPanel {
+    msgbox(format("A painted panel. A golden ram flies over the sea with a boy on its back.\p"
+                  "Below them, a girl is falling."), MSGBOX_SIGN)
+}
+
+script Aia_PhrixosSonsHouse_EventScript_Altar {
+    msgbox(format("A horned altar to Zeus of Escape. Its fire is small, and has never gone out."),
+           MSGBOX_SIGN)
+}
+
+script Aia_PhrixosSonsHouse_EventScript_Hearth {
+    msgbox(format("A Greek hearth, the cauldron on its tripod. It smells of lentils."), MSGBOX_SIGN)
+}

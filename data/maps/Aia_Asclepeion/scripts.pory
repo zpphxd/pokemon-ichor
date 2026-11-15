@@ -1,1 +1,41 @@
+// The Asclepeion, Aia: bronze and enamel, the way Aietes builds. Room:
+// tools/ichor/maps/pontos_rooms.py ("asclepeion"). The door mat is (6..7, 9),
+// warp 0, back to MAP_AIA warp 0.
+//
+// The healer (4,2) stands behind the counter beside the spring, a bronze bull's
+// head pouring into its basin (2..3, 1..2), where the heal animation sets the
+// party's balls. The Pithos is the great jar in the east corner (10..11, 0..2).
+// Both use the shared Asclepeion scripts in AktiTown_Asclepeion/scripts.pory.
+// Once the chart agent adds HEAL_LOCATION_AIA, ON_TRANSITION should call
+// setrespawn(HEAL_LOCATION_AIA) as Akti's does.
+
 mapscripts Aia_Asclepeion_MapScripts {}
+
+script Aia_Asclepeion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_AIA_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+script Aia_Asclepeion_EventScript_Pithos {
+    goto(Ichor_EventScript_Pithos)
+}
+
+script Aia_Asclepeion_EventScript_Watcher {
+    msgbox(format("My husband ate a whole comb of hill honey. The wild kind.\p"
+                  "He told me I was three people. Then he tried to fly.\p"
+                  "He'll be right by tomorrow. They always are."), MSGBOX_NPC)
+}
+
+script Aia_Asclepeion_EventScript_OldMan {
+    msgbox(format("Up in the Caucasus there's a root that grew where Prometheus bled.\p"
+                  "Ichor, the old songs call that blood. Golden.\p"
+                  "The healer won't keep it. She says it works too well."), MSGBOX_NPC)
+}
+
+script Aia_Asclepeion_EventScript_Serpent {
+    msgbox(format("Asclepius's serpent in bronze, coiled up its post.\p"
+                  "Somebody polishes its head every morning. It shines."), MSGBOX_SIGN)
+}

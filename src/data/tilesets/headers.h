@@ -445,5 +445,17 @@ const struct Tileset gTileset_Labyrinth =
     .palettes = gTilesetPalettes_PorytilesManaged_Labyrinth,
     .metatiles = gMetatiles_PorytilesManaged_Labyrinth,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
+// Ichor: chalkeon, the Black Sea's interiors in the Oikoumene (Salmydessos and
+// Aia; batch 2's palace hall extends it). A Porytiles-managed secondary built
+// by tools/ichor/art/chalkeon_build.py; it uses only its own tiles and
+// palettes 6-12, so it works on any primary (drawn for oikos).
+const struct Tileset gTileset_Chalkeon =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Chalkeon,
+    .palettes = gTilesetPalettes_PorytilesManaged_Chalkeon,
+    .metatiles = gMetatiles_PorytilesManaged_Chalkeon,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Chalkeon,
     .callback = NULL,
 };
