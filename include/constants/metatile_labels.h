@@ -1292,4 +1292,13 @@
 #define METATILE_TempleDionysus_TierFrontArm_Lowered   0x276
 // end gTileset_TempleDionysus
 
+// gTileset_Parnassos (Ichor: Lebadeia and Route 9), written by tools/ichor/art/parnassos_build.py
+#define METATILE_Parnassos_Grille               0x2E8
+#define METATILE_Parnassos_GrilleOpen           0x2E9
+#define METATILE_Parnassos_DrumGully            0x2C0
+#define METATILE_Parnassos_DrumGully_B          0x2C1
+#define METATILE_Parnassos_AltarApollo          0x2BA
+#define METATILE_Parnassos_Drum                 0x2BD
+// end gTileset_Parnassos
+
 #endif // GUARD_METATILE_LABELS_H

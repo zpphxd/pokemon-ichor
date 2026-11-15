@@ -576,3 +576,17 @@ const struct Tileset gTileset_ThyrsaStone =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaStone,
     .callback = NULL,
 };
+
+// Ichor: parnassos, the road west: Lebadeia and Route 9, the Split Road. Porytiles-managed,
+// built by tools/ichor/art/parnassos_build.py for the aethos primary: its ground cells borrow
+// aethos's grass, road, sea and tall grass, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Parnassos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Parnassos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Parnassos,
+    .metatiles = gMetatiles_PorytilesManaged_Parnassos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Parnassos,
+    .callback = NULL,
+};

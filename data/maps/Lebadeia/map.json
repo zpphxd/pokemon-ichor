@@ -2,7 +2,7 @@
   "id": "MAP_LEBADEIA",
   "name": "Lebadeia",
   "layout": "LAYOUT_LEBADEIA",
-  "music": "MUS_ICHOR_AKTI",
+  "music": "MUS_ICHOR_ROAD",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_LEBADEIA",
   "requires_flash": false,
@@ -13,9 +13,320 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
-  "object_events": [],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+  "connections": [
+    {
+      "map": "MAP_ROUTE8_KOPAIS",
+      "offset": 0,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_ROUTE9_SCHISTE",
+      "offset": -8,
+      "direction": "left"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_LEBADEIA_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA_RIM",
+      "x": 9,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_Alethea",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_LEBADEIA"
+    },
+    {
+      "local_id": "LOCALID_LEBADEIA_SAON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAON",
+      "x": 5,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_Saon",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_LEBADEIA_PRIEST",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TROPHONIAN_PRIEST",
+      "x": 7,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_Priest",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET",
+      "x": 2,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_Farmer",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET",
+      "x": 5,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_Sailor",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET",
+      "x": 8,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_OldWoman",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 2,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_OldMan",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
+      "x": 14,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_CakeSeller",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
+      "x": 9,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Lebadeia_EventScript_Child",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 17,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_LEBADEIA_PILGRIMS_HALL",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_LEBADEIA_HERKYNA_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "MAP_LEBADEIA_MASONS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_TROPHONIOS_CAVE_B1F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Lebadeia_EventScript_SpringsTalk"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Lebadeia_EventScript_SpringsTalk"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Lebadeia_EventScript_SpringsTalk"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Lebadeia_EventScript_SpringsTalk"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Lebadeia_EventScript_SpringsTalk"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 6,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Lebadeia_EventScript_SpringsTalk"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 28,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Lebadeia_EventScript_SignEast"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Lebadeia_EventScript_SignWest"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_EventScript_Grille"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Lebadeia_EventScript_Lethe"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_EventScript_Mnemosyne"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_EventScript_SignSprings"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Lebadeia_EventScript_Tablets"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Lebadeia_EventScript_DigSpot"
+    },
+    {
+      "type": "hidden_item",
+      "x": 3,
+      "y": 4,
+      "elevation": 3,
+      "item": "ITEM_RELIC_COPPER",
+      "flag": "FLAG_ICHOR_HIDDEN_LEBADEIA_BRONZE_OBOL",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 18,
+      "y": 5,
+      "elevation": 3,
+      "item": "ITEM_CALCIUM",
+      "flag": "FLAG_ICHOR_HIDDEN_LEBADEIA_CALCIUM",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 1,
+      "y": 10,
+      "elevation": 3,
+      "item": "ITEM_HONEY",
+      "flag": "FLAG_ICHOR_HIDDEN_LEBADEIA_HONEY",
+      "quantity": 1,
+      "underfoot": false
+    }
+  ]
 }
