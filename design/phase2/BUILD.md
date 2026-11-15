@@ -116,6 +116,18 @@ The user's standard for every route (director, 2026-11-14): "Thoughtfully. Engag
 
 **Wild:** `gRoute4Isthmus_Morning` (dawn and dusk: evening falls back to it), `_Day`, `_Night` land tables at 16–19 and a rock-smash table (`tools/ichor/maps/route4_encounters.py`). Gelasable (evolves at 20) and Cairnolith (at 25) left SCRIPT.md's night table for Galekit and Pebblith; Obolorn is 1% at night (`SPECIES_OBOLORN` stands in as Shuppet).
 
+### Route 5, the Skironian cliffs (the Route 5 agent)
+
+Built by `tools/ichor/maps/route5.py` (68x31) and `tools/ichor/maps/route5_rooms.py` (the inn, on domos); plans, tables and passes in `design/phase2/MAPS_route5.md`; walked by `tools/ichor/tests/route5.sh`.
+
+| From | To | How |
+|---|---|---|
+| `MAP_ROUTE5_SKIRONIAN_CLIFFS` warp **0**, the Hollow's west mouth: the cave door at **(9,8)**, the player steps out to (9,9) | `MAP_HECATES_HOLLOW`, its west-mouth warp | **The Hollow's west mouth should target `MAP_ROUTE5_SKIRONIAN_CLIFFS` warp 0.** Our side is a placeholder until the Hollow merges: `route5.py` points it at `MAP_HECATES_HOLLOW` once that map is registered (set `HOLLOW_WARP_ID` to the mouth's id and re-run it); before then at `MAP_EMPORION_CITY` warp 0, so the ROM builds. |
+| `MAP_ROUTE5_SKIRONIAN_CLIFFS` east edge | `MAP_ELEUSA_VILLAGE` west edge | map connection, `right` offset **-3** / Eleusa's `left` offset **3**. Open on our rows 21-24 at x = 67, Eleusa's 24-27. Our columns 60-67 are aethos only. Note: `eleusa.py` writes `"connections": null`; it needs to keep this entry when it's next run. |
+| Route 5 warp **1**, the inn's door (54,20) | `MAP_ROUTE5_REST_HOUSE` warp 0 | the inn's mat (7-8, 8) is its warp 0, back to Route 5's warp 1 |
+
+Great herm: `HERM_AETHOS_ROUTE_5` at (58,20), `HEAL_LOCATION_HERM_AETHOS_ROUTE_5` at (58,21) (row in `src/data/ichor_herms.h`). Trainers 110-116: `TRAINER_ICHOR_KYNEGEIROS`, `_MELANTHIOS`, `_MYRTO`, `_ARISTAIOS`, `_MOPSOS`, `_DAPHNIS`, `_KERDON` (`TRAINERS_END_ACT1` 117). Bank flags 0x040-0x04B: `FLAG_ICHOR_ITEM_ROUTE5_SUPER_POTION`, `_GREAT_BALL`, `_PP_UP`, `_CALCIUM`, `_SUPER_REPEL`, `_REVIVE`, `_ETHER`, `FLAG_ICHOR_ROUTE5_THICKET_CUT`, `FLAG_ICHOR_ROUTE5_RUBBLE_BROKEN`, `FLAG_ICHOR_GOT_GOOD_ROD`, `FLAG_ICHOR_TRADED_GELASABLE`, `FLAG_ICHOR_MET_XENOKLES`. Vanilla 0x2B8-0x2BB (the only free ones in 0x2B8-0x2C7): `FLAG_ICHOR_HIDDEN_ROUTE5_HONEY`, `_PRETTY_FEATHER`, `_HEART_SCALE`, `_ORAN_BERRY`. In-game trade `INGAME_TRADE_ICHOR_GALANTHIS`. The inn is Thria's Inn of the Plain (Xenokles, his stable boy and his trade), moved to the road; Thria's other two households stay with world-act2.
+
 **Engine APIs now on main** (`design/ENGINE_API.md`): relics by `giveitem` (`ITEM_HECATES_TORCH`); obstacles (`OBJ_EVENT_GFX_BREAKABLE_ROCK` + `EventScript_RockSmash` for marble rubble, needing the Bronze Hammer); darkness (`"cave": true`), braziers (`EventScript_IchorBrazier`, this session's block `FLAG_ICHOR_BRAZIERS_START + 0x14`–`0x1F`) and lit zones; altars (`EventScript_IchorAltar_<God>`, `EventScript_IchorDesecratedAltar`); great herms (`EventScript_IchorGreatHerm`, `HERM_AETHOS_ROUTE_4` / `_5`, with a table row in `src/data/ichor_herms.h` and a heal location each). Use them, not stubs, unless the API isn't built yet.
 
 ### Hecate's Hollow (the Hollow agent)

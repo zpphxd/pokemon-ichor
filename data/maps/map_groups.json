@@ -22,7 +22,8 @@
     "EmporionCity",
     "EmporionHarbor",
     "EleusaVillage",
-    "Route4_Isthmus"
+    "Route4_Isthmus",
+    "Route5_SkironianCliffs"
   ],
   "gMapGroup_IndoorDynamic": [
     "BattlePyramidSquare01",
@@ -95,7 +96,8 @@
     "EleusaVillage_PoetsHouse",
     "EleusaSanctum_B1F",
     "EleusaSanctum_B2F",
-    "EleusaSanctum_B3F"
+    "EleusaSanctum_B3F",
+    "Route5_RestHouse"
   ],
   "gMapGroup_DungeonsAct1": [
     "HecatesHollow"

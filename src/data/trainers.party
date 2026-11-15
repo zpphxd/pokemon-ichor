@@ -853,6 +853,138 @@ Kerazap
 Level: 20
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
+/* Route 5, the Skironian cliffs (design/phase2/SCRIPT.md Part 3, "Route 3 trainers",
+ * on the road it became; tools/ichor/maps/route5.py). Levels 20-21, BALANCE.md's
+ * Eleusa row. The species are Aethos stand-ins (ICHOR_STUB_AETHOS_DEX), so no
+ * Ability: lines; the dex adds Myrto's Kerazap's Cute Charm. Aristaios is a
+ * BEEKEEPER in the script: that class isn't drawn yet, so he battles as a
+ * Harvester until it is (ICHOR_STUB_SPRITE). Melanthios, Mopsos, Daphnis and Kerdon
+ * are new. */
+
+=== TRAINER_ICHOR_KYNEGEIROS ===
+Name: KYNEGEIROS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Check Bad Move
+
+Eopeep
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Ergant
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_MELANTHIOS ===
+Name: MELANTHIOS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Eripip
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kerazap
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_MYRTO ===
+Name: MYRTO
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Kerazap
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Elaleaf
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_ARISTAIOS ===
+Name: ARISTAIOS
+Class: Harvester
+Pic: Harvester
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Melibee
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Melibee
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Melibee
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_MOPSOS ===
+Name: MOPSOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Suspicious
+AI: Check Bad Move
+
+Epopoi
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Harpeck
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Lophops
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_DAPHNIS ===
+Name: DAPHNIS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Onotis
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Galekit
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kerazap
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_KERDON ===
+Name: KERDON
+Class: Merchant
+Pic: Merchant
+Gender: Male
+Music: Rich
+AI: Check Bad Move
+
+Chelonet
+Level: 20
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Karkipool
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
 /* Ichor: world-act2 (ids 160-319) */
 
 

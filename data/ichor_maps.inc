@@ -50,3 +50,5 @@
 	.include "data/maps/EleusaSanctum_B3F/scripts.inc"
 	.include "data/maps/Route4_Isthmus/scripts.inc"
 	.include "data/maps/HecatesHollow/scripts.inc"
+	.include "data/maps/Route5_SkironianCliffs/scripts.inc"
+	.include "data/maps/Route5_RestHouse/scripts.inc"

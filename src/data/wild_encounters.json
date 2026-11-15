@@ -1604,6 +1604,328 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+          "base_label": "gRoute5SkironianCliffs_Morning",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_EPOPOI"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_NEMECUB"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_KERAZAP"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_HALCYLING"
+              },
+              {
+                "min_level": 20,
+                "max_level": 30,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_GALENYON"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 18,
+                "max_level": 21,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_PEBBLITH"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 19,
+                "max_level": 22,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 19,
+                "max_level": 21,
+                "species": "SPECIES_KETOFRY"
+              },
+              {
+                "min_level": 20,
+                "max_level": 22,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_NARKERAY"
+              },
+              {
+                "min_level": 20,
+                "max_level": 25,
+                "species": "SPECIES_KARKIPOOL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_KYNOKETOS"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_NARKERAY"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+          "base_label": "gRoute5SkironianCliffs_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_HARPECK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_EPOPOI"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_ELALEAF"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_LOPHOPS"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_KERAZAP"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+          "base_label": "gRoute5SkironianCliffs_Night",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_KERAZAP"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_ONOTIS"
+              },
+              {
+                "min_level": 21,
+                "max_level": 21,
+                "species": "SPECIES_GELASABLE"
+              }
+            ]
+          }
         }
       ]
     },

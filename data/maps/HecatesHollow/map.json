@@ -317,21 +317,21 @@
       "x": 0,
       "y": 27,
       "elevation": 0,
-      "dest_map": "MAP_HECATES_HOLLOW",
+      "dest_map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
       "dest_warp_id": "0"
     },
     {
       "x": 0,
       "y": 26,
       "elevation": 0,
-      "dest_map": "MAP_HECATES_HOLLOW",
+      "dest_map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
       "dest_warp_id": "0"
     },
     {
       "x": 0,
       "y": 28,
       "elevation": 0,
-      "dest_map": "MAP_HECATES_HOLLOW",
+      "dest_map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
       "dest_warp_id": "0"
     }
   ],

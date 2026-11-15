@@ -35,6 +35,12 @@
       "respawn_y": 4
     },
     {
+      "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_5",
+      "map": "MAP_ROUTE5_SKIRONIAN_CLIFFS",
+      "x": 58,
+      "y": 21
+    },
+    {
       "id": "HEAL_LOCATION_HERM_AETHOS_ROUTE_4",
       "map": "MAP_ROUTE4_ISTHMUS",
       "x": 23,

@@ -128,3 +128,5 @@ data/scripts/ichor_labyrinth.inc
 data/scripts/ichor_frozen.inc
 data/maps/Route4_Isthmus/scripts.inc
 data/maps/HecatesHollow/scripts.inc
+data/maps/Route5_SkironianCliffs/scripts.inc
+data/maps/Route5_RestHouse/scripts.inc
