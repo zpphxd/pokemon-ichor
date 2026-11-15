@@ -432,6 +432,39 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyt
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatL;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatR;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMaenad;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMaenadThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSatyr;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSilenos;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorManto;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKronist;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHerald;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorVintner;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorActor;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorThespis;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorThespisComic;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorChorusLeader;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorBeeWoman;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorFateSpinner;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorFateMeasurer;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorFateCutter;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGoldMaskKing;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGoldMaskKingKneel;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUnwovenActor;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonSeated;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonFeast;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAletheaKneel;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAletheaSeated;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorWoodenImage;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorWoodenImageGarland;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMask;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCrows;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMomThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorWomanThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorYouthFThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKidMThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMerchantThyrsa;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHarvesterThyrsa;
 // End of Ichor object events
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
@@ -857,6 +890,39 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatL,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatR,
+    [OBJ_EVENT_GFX_ICHOR_MAENAD] =                   &gObjectEventGraphicsInfo_IchorMaenad,
+    [OBJ_EVENT_GFX_ICHOR_MAENAD_THYRSA] =            &gObjectEventGraphicsInfo_IchorMaenadThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_SATYR] =                    &gObjectEventGraphicsInfo_IchorSatyr,
+    [OBJ_EVENT_GFX_ICHOR_SILENOS] =                  &gObjectEventGraphicsInfo_IchorSilenos,
+    [OBJ_EVENT_GFX_ICHOR_MANTO] =                    &gObjectEventGraphicsInfo_IchorManto,
+    [OBJ_EVENT_GFX_ICHOR_KRONIST] =                  &gObjectEventGraphicsInfo_IchorKronist,
+    [OBJ_EVENT_GFX_ICHOR_HERALD] =                   &gObjectEventGraphicsInfo_IchorHerald,
+    [OBJ_EVENT_GFX_ICHOR_VINTNER] =                  &gObjectEventGraphicsInfo_IchorVintner,
+    [OBJ_EVENT_GFX_ICHOR_ACTOR] =                    &gObjectEventGraphicsInfo_IchorActor,
+    [OBJ_EVENT_GFX_ICHOR_THESPIS] =                  &gObjectEventGraphicsInfo_IchorThespis,
+    [OBJ_EVENT_GFX_ICHOR_THESPIS_COMIC] =            &gObjectEventGraphicsInfo_IchorThespisComic,
+    [OBJ_EVENT_GFX_ICHOR_CHORUS_LEADER] =            &gObjectEventGraphicsInfo_IchorChorusLeader,
+    [OBJ_EVENT_GFX_ICHOR_BEE_WOMAN] =                &gObjectEventGraphicsInfo_IchorBeeWoman,
+    [OBJ_EVENT_GFX_ICHOR_FATE_SPINNER] =             &gObjectEventGraphicsInfo_IchorFateSpinner,
+    [OBJ_EVENT_GFX_ICHOR_FATE_MEASURER] =            &gObjectEventGraphicsInfo_IchorFateMeasurer,
+    [OBJ_EVENT_GFX_ICHOR_FATE_CUTTER] =              &gObjectEventGraphicsInfo_IchorFateCutter,
+    [OBJ_EVENT_GFX_ICHOR_GOLD_MASK_KING] =           &gObjectEventGraphicsInfo_IchorGoldMaskKing,
+    [OBJ_EVENT_GFX_ICHOR_GOLD_MASK_KING_KNEEL] =     &gObjectEventGraphicsInfo_IchorGoldMaskKingKneel,
+    [OBJ_EVENT_GFX_ICHOR_UNWOVEN_ACTOR] =            &gObjectEventGraphicsInfo_IchorUnwovenActor,
+    [OBJ_EVENT_GFX_ICHOR_KLEON_SEATED] =             &gObjectEventGraphicsInfo_IchorKleonSeated,
+    [OBJ_EVENT_GFX_ICHOR_KLEON_FEAST] =              &gObjectEventGraphicsInfo_IchorKleonFeast,
+    [OBJ_EVENT_GFX_ICHOR_ALETHEA_KNEEL] =            &gObjectEventGraphicsInfo_IchorAletheaKneel,
+    [OBJ_EVENT_GFX_ICHOR_ALETHEA_SEATED] =           &gObjectEventGraphicsInfo_IchorAletheaSeated,
+    [OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE] =             &gObjectEventGraphicsInfo_IchorWoodenImage,
+    [OBJ_EVENT_GFX_ICHOR_WOODEN_IMAGE_GARLAND] =     &gObjectEventGraphicsInfo_IchorWoodenImageGarland,
+    [OBJ_EVENT_GFX_ICHOR_MASK] =                     &gObjectEventGraphicsInfo_IchorMask,
+    [OBJ_EVENT_GFX_ICHOR_CROWS] =                    &gObjectEventGraphicsInfo_IchorCrows,
+    [OBJ_EVENT_GFX_ICHOR_MOM_THYRSA] =               &gObjectEventGraphicsInfo_IchorMomThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_WOMAN_THYRSA] =             &gObjectEventGraphicsInfo_IchorWomanThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_YOUTH_F_THYRSA] =           &gObjectEventGraphicsInfo_IchorYouthFThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA] =             &gObjectEventGraphicsInfo_IchorKidMThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA] =          &gObjectEventGraphicsInfo_IchorMerchantThyrsa,
+    [OBJ_EVENT_GFX_ICHOR_HARVESTER_THYRSA] =         &gObjectEventGraphicsInfo_IchorHarvesterThyrsa,
     // End of Ichor object events
 };
 
