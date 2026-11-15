@@ -94,6 +94,7 @@ Still to do:
 - **Narrow batches.** One specialist agent per asset group, in its own worktree, committing as it goes.
 - **Director review.** Each batch is checked in renders and in-game screenshots before it merges.
 - **An inventory,** `design/art/INVENTORY.md`, tracking every asset group with its status (Hoenn, in progress, Greek) so nothing is left unchanged by accident.
+- **Town-by-town sprite polish.** The approved redraw direction is translated to native GBA pixels, not shipped as high-resolution concept art. Shared sprites are updated with their first town; backs, icons, follower views, palettes and supported animation states must stay consistent. Capture a source baseline with `python3 tools/ichor/sprite_audit.py inventory --output build/sprite_inventory.json`; this includes unplaced and National Dex assets, not just the Aethos dex. Check each regional batch with `python3 tools/ichor/sprite_audit.py check --pokemon Nebrel Kynder Hipling` (replace the names with the batch's species), and trainer portraits with `--image graphics/trainers/front_pics/kleon.png`. The gate checks native dimensions, indexed colors, palettes, nonempty frames and design-to-ROM copies, and reports static frame pairs for visual review. A changed hash or a passing gate is not artistic approval: inspect native-size comparisons and in-game screenshots, then run the build and smoke test before landing each town's commits on `main`.
 
 ## 7. Order
 
