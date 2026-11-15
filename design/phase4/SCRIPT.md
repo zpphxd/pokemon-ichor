@@ -6273,7 +6273,7 @@ ALETHEA: …I'm writing that down.
 ```
 [Fade out. The player is free. The post-game begins.]
 
-[Set `FLAG_ICHOR_EPILOGUE_DONE` and `VAR_ICHOR_ACT3` to 26. Fade back in on the Akademia with control returned. Daphne and Alethea switch to their post-game lines (below), and the world changes as the table in "After the epilogue" says.]
+[Set `FLAG_ICHOR_EPILOGUE_DONE`, `VAR_ICHOR_ACT3` to 26, and, as the very last line of the epilogue, **`FLAG_ICHOR_POSTGAME`**: the world-postgame session's bank flag (`FLAG_ICHOR_GENERAL_START + 0x300`, claimed on `claude/world-postgame-9fad0c`), which gates every post-game object, warp and encounter. Until the branches meet, this branch carries the same define line and the director resolves it on merge. Kleon at Elaia's well ("Herakles had twelve. Let's see about us.") is the post-game's own scene on its flag, so the epilogue's end state leaves him out. Post-game placements on this act's League, Olympus and Delphoi maps (the Pantheon's weekly rematches, the Omphalos's three bronze lots, the summit stone past the Pantheon) come from `design/postgame/PLACEMENTS.md`. Fade back in on the Akademia with control returned. Daphne and Alethea switch to their post-game lines (below), and the world changes as the table in "After the epilogue" says.]
 
 **Design note.** Every box from the water clock to "…I'm writing that down." is STORY §7.11, word for word. The game ends where it began, on the same festival and the same question; the only new thing in the scene is the third answer.
 
