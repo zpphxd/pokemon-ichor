@@ -18,7 +18,8 @@
 - **Wild tables by time of day:** `_Morning`, `_Day` and `_Night` land tables (`wild_encounters.json` supports them; see `gKallisteRoute1_Morning`), surf and fishing on water, rock smash at breakable rocks, all in BALANCE.md's band.
 - **Items:** visible and hidden; every dead end pays.
 - **Trainers** are checkpoints. **Every route** has a set piece and signs at its ends and forks.
-- **The audit:** `tools/ichor/map_audit.py` and MAP_DESIGN §8 ("The route standard, in numbers") are coming to main. Every batch report must pass it on its maps.
+- **The audit is hard:** MAP_DESIGN §8 ("The route standard, in numbers", on main since 96a88cd7fe) at the **late** figures: grass 15 a screen with 8 cells forced; trainers 0.9 a land screen (floor 8) and 0.35 a sea screen (floor 5); item balls 0.3 a screen (floor 5) and 4 hidden items on a land route, 2 and 2 at sea; 7 species in each land table, 3 surfing, 4 fishing; Morning and Night tables wherever there's grass; signs at every end; the dungeon and town minimums. `python3 tools/ichor/map_audit.py <your maps>` must exit 0 before you report; put its output in the report. Add new places to `STAGES` in map_audit.py as late. Where a map's class isn't its type's (an arena, a side area), set `"ichor_kind"` in its map.json.
+- **Size maps to the budget.** Trainers and hidden items are counted per screen, and ids are scarce (§3), so don't make a map bigger than its design needs: a set-piece arena is a `dungeon`, and a sea map is as big as its sailing, not 80×80 by default.
 - **Renders** of every map go to the director.
 - **Every house is enterable,** with someone living there and something that happens: a gift, a trade, a quest, a minigame, a rematch, or lore that leads to a reward (MAP_DESIGN §2). Spread the rewards; open some after a later beat.
 - **Every interior is a unique layout.** No room is copied from another, here or on any other branch.
