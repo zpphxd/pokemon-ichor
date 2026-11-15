@@ -77,6 +77,7 @@ Kythera-family catalog as a Python dict (`mid('{name}', 'surf', 'S')`), and
 | `P` | Fresh water: `MB_POND_WATER`, surfable. |
 | `F` | Waterfall: `MB_WATERFALL` (the Horn of Achelous climbs it). |
 | `J` | Ledge: `MB_JUMP_SOUTH`. |
+| `C` | Cave floor: `MB_CAVE`, wild encounters. Passable. |
 
 **Borrowed ground.** Cells marked *grass*, *path*, *sand*, *sea*, *shallow* or *fall*
 draw no ground of their own: after Porytiles compiles, the build points their

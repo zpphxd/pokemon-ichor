@@ -6629,7 +6629,7 @@ PHEREKLOS: You can't buy bronze like that. I'm keeping the helmets.
 
 **The beats**, east to west, walking away from Skandeia:
 1. **A calm stretch** of shingle, and a sign: "THE FOAM ROAD. Paphia and the temple, west. The spring of Kallirhoe, north."
-2. **Forced grass band 1,** 3 deep, a strip of sea-grass and thrift between the myrtle hedge and a cliff edge, the full width of the path.
+2. **Forced grass band 1,** 8 deep (MAP_DESIGN §8: the east end and the spring stair are 8 grass cells apart), a meadow of sea-grass and thrift between the myrtle hedge and a cliff edge, the full width of the path. HOPLITE Lykon keeps the road at the sign before it, and ACOLYTE Theano walks the terrace above it (Part 3).
 3. **The first trainer,** easy and in plain view on the shingle with a rod: FISHER Amphitos (42, two Pokémon).
 4. **The fork.** Kythera's great herm stands here (beat III-1D; Hermes's theoxenia E1 sits on its plinth when it's live). North, the stair up to the spring. West, the road. **Hidden item:** behind the herm, an Ether.
 5. **The cutting.** The road narrows to a two-tile path under a sea-cliff, with the surf on the other side. SCULPTOR Skopas (44), mandatory, sits on a block of marble mid-cutting, facing east, sight 4 across the whole width. **Forced grass band 2,** 4 deep, starts right behind him, so there is no chance to heal between them.
@@ -11308,6 +11308,226 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 
 Kynoketos
 Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+## The second wave: the Foam Road and the Neraida falls, levels 42–46
+
+MAP_DESIGN §8 (the route standard, measured on Emerald) wants a late land route to carry 0.9 trainers a screen, 8 at least: 9 on the Foam Road (10.2 screens) and 8 at the Neraida falls (8.8). These nine join the ones above. Their ids are 490–498, the top of act3's range, so Knossa's ids from 348 stay free.
+
+**1. HOPLITE Lykon.** At the road's east end by the sign, facing down across both lanes of the road, sight 2. Mandatory, and easy: the route's first trainer, in plain view of Skandeia's gate. (the Foam Road)
+```text
+Before: LYKON: Halt. Nobody walks the Foam Road unchallenged. My rule.
+Defeat: LYKON: Rules are rules. You win.
+After:  LYKON: Skandeia's gate is mine to keep. Paphia's yours to reach.
+```
+```
+=== TRAINER_ICHOR_LYKON_KYTHERA ===
+Name: LYKON
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**2. ACOLYTE Theano.** On the terrace above the hedge, walking to the temple, facing west along it, sight 3. Optional: the terrace is the way back east. (the Foam Road)
+```text
+Before: THEANO: I walk to the temple every spring. Walk with me a while. Battle first.
+Defeat: THEANO: The goddess would have liked that one.
+After:  THEANO: From up here her temple's roof shows over the trees. Pink as a shell.
+```
+```
+=== TRAINER_ICHOR_THEANO ===
+Name: THEANO
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Himerow
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**3. DIVER Kymodoke.** On the sand islet in the bay, by the Pearl String, facing north to the shore, sight 3. Optional, reached only by Surf. (the Foam Road)
+```text
+Before: KYMODOKE: You swam out to my islet! Nobody does. Battle me, then go away.
+Defeat: KYMODOKE: Back to the waves with me.
+After:  KYMODOKE: Pearls wash up here. Not from oysters. From the foam, my gran says.
+```
+```
+=== TRAINER_ICHOR_KYMODOKE ===
+Name: KYMODOKE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Galenyon
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**4. SHEPHERD Menalkas.** In the clifftop meadow under the east wood, with his flock, facing west, sight 3. Optional. Named for Theocritus's herdsman. (the Foam Road)
+```text
+Before: MENALKAS: My flock grazes this clifftop. You've trodden on their supper.
+Defeat: MENALKAS: Fine. Fine. They'll eat the thrift instead.
+After:  MENALKAS: Sheep don't care for the sea. They face inland. Wise animals.
+```
+```
+=== TRAINER_ICHOR_MENALKAS ===
+Name: MENALKAS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Gelasable
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**5. HARVESTER Amaryllis.** Cutting myrtle at the grove's east edge, facing down across the road into the grove, sight 2. Mandatory: grass band 3 starts right behind her. (the Foam Road)
+```text
+Before: AMARYLLIS: Myrtle for the temple's garlands. Don't trample the grove.
+Defeat: AMARYLLIS: My basket! Well. Myrtle grows back.
+After:  AMARYLLIS: Aphrodite hid behind a myrtle when she came ashore. Bare as a pebble.
+```
+```
+=== TRAINER_ICHOR_AMARYLLIS ===
+Name: AMARYLLIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Psychora
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narcibulb
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**6. SHEPHERD Daphnis.** In the meadow by the sign at the ravine's foot, facing west to the road, sight 3, in plain view: the ravine's easy first trainer. Named for the herdsman of the bucolic songs. (the Neraida falls)
+```text
+Before: DAPHNIS: Quiet up the valley today. Too quiet. Fight me, so there's some noise.
+Defeat: DAPHNIS: There. That was noise.
+After:  DAPHNIS: I used to pipe to the sheep by the falls. You can't pipe over silence.
+```
+```
+=== TRAINER_ICHOR_DAPHNIS ===
+Name: DAPHNIS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Gelasable
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Himerow
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**7. HARVESTER Opora.** On the lower terrace by the Lum tree, facing east, sight 2. Optional. Her name is late summer, the season of fruit. (the Neraida falls)
+```text
+Before: OPORA: Berries for the Naiads. These are mine. Get your own!
+Defeat: OPORA: Take a berry. Take two. The trees are generous.
+After:  OPORA: Krenaia wants first fruits. Three. The Naiads can count.
+```
+```
+=== TRAINER_ICHOR_OPORA ===
+Name: OPORA
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melisseer
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**8. ACOLYTE Pegaios.** On the plunge pool's west bank, keeping it for the Naiads, facing south, sight 3. Optional. (the Neraida falls)
+```text
+Before: PEGAIOS: I keep the pool clean for the Naiads. You're tracking mud.
+Defeat: PEGAIOS: The Naiads saw that. They're laughing at me. Silently.
+After:  PEGAIOS: The falls make no sound. I've stopped hearing my own prayers.
+```
+```
+=== TRAINER_ICHOR_PEGAIOS ===
+Name: PEGAIOS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Narcisheen
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**9. ACOLYTE Dexithea.** In the meadow on the east bank below the ford, facing west, sight 3. Optional; the grass round her hides a Big Root. (the Neraida falls)
+```text
+Before: DEXITHEA: Pilgrims leave the shrine a ribbon. I leave a battle.
+Defeat: DEXITHEA: A good offering.
+After:  DEXITHEA: Mopsos reads birds at the ford. He reads them wrong. Don't tell him.
+```
+```
+=== TRAINER_ICHOR_DEXITHEA ===
+Name: DEXITHEA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Himerow
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Psychora
+Level: 46
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 ```
 

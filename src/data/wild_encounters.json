@@ -2761,6 +2761,75 @@
         },
         {
           "map": "MAP_KYTHERA_FOAM_ROAD",
+          "base_label": "gKytheraFoamRoad_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_HIMEROW"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 39,
+                "max_level": 41,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_HIMEROW"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_PSYCHORA"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_NARCIBULB"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_CHELYRA"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_PSYCHORA"
+              },
+              {
+                "min_level": 43,
+                "max_level": 43,
+                "species": "SPECIES_HIMEROW"
+              },
+              {
+                "min_level": 43,
+                "max_level": 43,
+                "species": "SPECIES_GLYPHLET"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_KYTHERA_FOAM_ROAD",
           "base_label": "gKytheraFoamRoad_Night",
           "land_mons": {
             "encounter_rate": 20,
@@ -2899,6 +2968,75 @@
         },
         {
           "map": "MAP_KYTHERA_SPRING_OF_KALLIRHOE",
+          "base_label": "gKytheraSpringOfKallirhoe_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_NARCIBULB"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_NARCIBULB"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_PSYCHORA"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_NARCIBULB"
+              },
+              {
+                "min_level": 40,
+                "max_level": 42,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_APHRELL"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_PSYCHORA"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_HIMEROW"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_NARCIBULB"
+              },
+              {
+                "min_level": 44,
+                "max_level": 44,
+                "species": "SPECIES_NARCISHEEN"
+              },
+              {
+                "min_level": 44,
+                "max_level": 44,
+                "species": "SPECIES_ECHOLALI"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_KYTHERA_SPRING_OF_KALLIRHOE",
           "base_label": "gKytheraSpringOfKallirhoe_Night",
           "land_mons": {
             "encounter_rate": 20,
@@ -2941,7 +3079,7 @@
               {
                 "min_level": 42,
                 "max_level": 43,
-                "species": "SPECIES_CHELYRA"
+                "species": "SPECIES_HARPELLE"
               },
               {
                 "min_level": 42,
@@ -3110,7 +3248,7 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_NARKERAY"
+                "species": "SPECIES_TELKANVIL"
               },
               {
                 "min_level": 44,
@@ -3293,7 +3431,7 @@
               {
                 "min_level": 43,
                 "max_level": 44,
-                "species": "SPECIES_GALENYON"
+                "species": "SPECIES_APHRELL"
               },
               {
                 "min_level": 44,
@@ -3304,6 +3442,75 @@
                 "min_level": 45,
                 "max_level": 45,
                 "species": "SPECIES_GALENYON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_KYTHERA_NERAIDA_FALLS",
+          "base_label": "gKytheraNeraidaFalls_Day",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_HIMEROW"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_GLYPHLET"
+              },
+              {
+                "min_level": 41,
+                "max_level": 43,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_CHELYRA"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_GALENYON"
+              },
+              {
+                "min_level": 42,
+                "max_level": 44,
+                "species": "SPECIES_HIMEROW"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_HIMEROW"
+              },
+              {
+                "min_level": 43,
+                "max_level": 45,
+                "species": "SPECIES_HARPELLE"
+              },
+              {
+                "min_level": 45,
+                "max_level": 45,
+                "species": "SPECIES_MELISSEER"
+              },
+              {
+                "min_level": 45,
+                "max_level": 45,
+                "species": "SPECIES_HIMEROW"
               }
             ]
           }
@@ -3352,7 +3559,7 @@
               {
                 "min_level": 43,
                 "max_level": 44,
-                "species": "SPECIES_CHELYRA"
+                "species": "SPECIES_PSYCHORA"
               },
               {
                 "min_level": 43,

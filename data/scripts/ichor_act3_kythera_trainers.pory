@@ -573,3 +573,129 @@ text Kythera_Text_NaupliosDefeat {
 text Kythera_Text_NaupliosAfter {
     format("That wreck on the reef? Not one of ours. Probably.")
 }
+
+text Kythera_Text_SpeakerLykon { "LYKON" }
+
+text Kythera_Text_LykonIntro {
+    format("Halt. Nobody walks the Foam Road unchallenged. My rule.")
+}
+
+text Kythera_Text_LykonDefeat {
+    format("Rules are rules. You win.")
+}
+
+text Kythera_Text_LykonAfter {
+    format("Skandeia's gate is mine to keep. Paphia's yours to reach.")
+}
+
+text Kythera_Text_SpeakerTheano { "THEANO" }
+
+text Kythera_Text_TheanoIntro {
+    format("I walk to the temple every spring. Walk with me a while. Battle first.")
+}
+
+text Kythera_Text_TheanoDefeat {
+    format("The goddess would have liked that one.")
+}
+
+text Kythera_Text_TheanoAfter {
+    format("From up here her temple's roof shows over the trees. Pink as a shell.")
+}
+
+text Kythera_Text_SpeakerKymodoke { "KYMODOKE" }
+
+text Kythera_Text_KymodokeIntro {
+    format("You swam out to my islet! Nobody does. Battle me, then go away.")
+}
+
+text Kythera_Text_KymodokeDefeat {
+    format("Back to the waves with me.")
+}
+
+text Kythera_Text_KymodokeAfter {
+    format("Pearls wash up here. Not from oysters. From the foam, my gran says.")
+}
+
+text Kythera_Text_SpeakerMenalkas { "MENALKAS" }
+
+text Kythera_Text_MenalkasIntro {
+    format("My flock grazes this clifftop. You've trodden on their supper.")
+}
+
+text Kythera_Text_MenalkasDefeat {
+    format("Fine. Fine. They'll eat the thrift instead.")
+}
+
+text Kythera_Text_MenalkasAfter {
+    format("Sheep don't care for the sea. They face inland. Wise animals.")
+}
+
+text Kythera_Text_SpeakerAmaryllis { "AMARYLLIS" }
+
+text Kythera_Text_AmaryllisIntro {
+    format("Myrtle for the temple's garlands. Don't trample the grove.")
+}
+
+text Kythera_Text_AmaryllisDefeat {
+    format("My basket! Well. Myrtle grows back.")
+}
+
+text Kythera_Text_AmaryllisAfter {
+    format("Aphrodite hid behind a myrtle when she came ashore. Bare as a pebble.")
+}
+
+text Kythera_Text_SpeakerDaphnis { "DAPHNIS" }
+
+text Kythera_Text_DaphnisIntro {
+    format("Quiet up the valley today. Too quiet. Fight me, so there's some noise.")
+}
+
+text Kythera_Text_DaphnisDefeat {
+    format("There. That was noise.")
+}
+
+text Kythera_Text_DaphnisAfter {
+    format("I used to pipe to the sheep by the falls. You can't pipe over silence.")
+}
+
+text Kythera_Text_SpeakerOpora { "OPORA" }
+
+text Kythera_Text_OporaIntro {
+    format("Berries for the Naiads. These are mine. Get your own!")
+}
+
+text Kythera_Text_OporaDefeat {
+    format("Take a berry. Take two. The trees are generous.")
+}
+
+text Kythera_Text_OporaAfter {
+    format("Krenaia wants first fruits. Three. The Naiads can count.")
+}
+
+text Kythera_Text_SpeakerPegaios { "PEGAIOS" }
+
+text Kythera_Text_PegaiosIntro {
+    format("I keep the pool clean for the Naiads. You're tracking mud.")
+}
+
+text Kythera_Text_PegaiosDefeat {
+    format("The Naiads saw that. They're laughing at me. Silently.")
+}
+
+text Kythera_Text_PegaiosAfter {
+    format("The falls make no sound. I've stopped hearing my own prayers.")
+}
+
+text Kythera_Text_SpeakerDexithea { "DEXITHEA" }
+
+text Kythera_Text_DexitheaIntro {
+    format("Pilgrims leave the shrine a ribbon. I leave a battle.")
+}
+
+text Kythera_Text_DexitheaDefeat {
+    format("A good offering.")
+}
+
+text Kythera_Text_DexitheaAfter {
+    format("Mopsos reads birds at the ford. He reads them wrong. Don't tell him.")
+}

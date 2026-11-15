@@ -98,7 +98,19 @@
 #define TRAINER_ICHOR_EIONE                   357
 #define TRAINER_ICHOR_NAUPLIOS                358
 
-#define TRAINERS_END_ACT3                     359
+// Kythera, ids 490-498 (MAP_DESIGN §8's route standard): the Foam Road's and the
+// Neraida falls' second wave, from the top of act3's range so Knossa's 348 on stay free.
+#define TRAINER_ICHOR_LYKON_KYTHERA                  490
+#define TRAINER_ICHOR_THEANO                 491
+#define TRAINER_ICHOR_KYMODOKE               492
+#define TRAINER_ICHOR_MENALKAS               493
+#define TRAINER_ICHOR_AMARYLLIS              494
+#define TRAINER_ICHOR_DAPHNIS                495
+#define TRAINER_ICHOR_OPORA                  496
+#define TRAINER_ICHOR_PEGAIOS                497
+#define TRAINER_ICHOR_DEXITHEA               498
+
+#define TRAINERS_END_ACT3                     499
 
 // The post-game, ids 500-679: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
 #define TRAINERS_END_POSTGAME                 0

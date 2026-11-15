@@ -811,9 +811,155 @@ def sculptors():
     return s
 
 
+STATUE = [
+    # a draped goddess on a square plinth, lit from the upper left (16 x 32)
+    "......kkkk......",
+    ".....k5w55k.....",
+    ".....kw555k.....",
+    ".....k55m5k.....",
+    "......k5mk......",
+    "....kk55555kk...",
+    "...k5w555555mk..",
+    "...kw55555555k..",
+    "...k5k55555mkmk.",
+    "...kwk55555m3kk.",
+    "....kk5w55m3k...",
+    ".....k5w5mm3k...",
+    ".....kw55m33k...",
+    "....k5w55m5m3k..",
+    "....kw55m55m3k..",
+    "....k5w5m55m3k..",
+    "...k5w55m5m53mk.",
+    "...kw55m55m553k.",
+    "...k5w5m55m5m3k.",
+    "..k5w55m55m55m3k",
+    "..kkkkkkkkkkkkkk",
+    ".k44444444444443",
+    ".k5555555555553k",
+    ".k5w555555555m3k",
+    ".k5w55kkkk555m3k",
+    ".k5w55k22k555m3k",
+    ".k5w55kkkk555m3k",
+    ".k5w555555555m3k",
+    ".k5555555555m33k",
+    ".kmmmmmmmmmmm33k",
+    ".kkkkkkkkkkkkkkk",
+    "..33333333333333",
+]
+STATUE_COLORS = {"k": "mw3", "5": "rm5", "w": "w0", "m": "mw2", "3": "rm2", "4": "rm4", "2": "rm1"}
+
+
+def props():
+    """Paphia's street props: a marble statue of the goddess on her plinth (on
+    path and on grass), and a market stall."""
+    names = {"statue": (0, 0), "statue_base": (0, 1), "statue_g": (1, 0), "statue_g_base": (1, 1),
+             "stall_TL": (2, 0), "stall_TR": (3, 0), "stall_BL": (2, 1), "stall_BR": (3, 1)}
+    s = struct("props", "Statues and a market stall", 4, 2, SEC, walk=["TTXX", "XXXX"], names=names,
+               notes="Paphia's agora and gardens. `statue` over `statue_base`: the goddess in white "
+                     "marble on a square plinth, her top drawn over the player (on borrowed path; "
+                     "`statue_g` / `statue_g_base` stand on grass). `stall_TL` `stall_TR` over "
+                     "`stall_BL` `stall_BR`: a market stall, a striped awning on poles over a counter "
+                     "of amphorae, fish and apples (on borrowed path). All impassable but the "
+                     "statues' tops.")
+    ground(s, "path", [(0, 0), (0, 1), (2, 0), (3, 0), (2, 1), (3, 1)])
+    ground(s, "grass", [(1, 0), (1, 1)])
+    M, T = s.M, s.T
+    for ox in (0, 16):
+        for j, row in enumerate(STATUE):
+            for i, ch in enumerate(row):
+                c = STATUE_COLORS.get(ch)
+                if c:
+                    (T if j < 16 else M).px(ox + i, j, c)
+    # the stall: an awning striped in terracotta and white, on two timber poles
+    ox = 32
+    for y in range(2, 14):
+        for x in range(1, 31):
+            stripe = ((x - 1) // 4) % 2
+            c = "tc1" if stripe else "w0"
+            if y == 2:
+                c = "wd0"
+            elif y == 3:
+                c = "tc0" if stripe else "kr2"
+            elif y >= 12:
+                # the scalloped valance
+                if (x - 1) % 4 in (0, 3) and y == 13:
+                    continue
+                c = "tc0" if stripe else "kr1"
+            if x in (1, 30) and y > 2:
+                c = "wd0"
+            M.px(ox + x, y, c)
+    for x in (2, 29):
+        for y in range(14, 22):
+            M.px(ox + x, y, "wd1")
+            M.px(ox + x + (1 if x == 2 else -1), y, "wd0")
+    # the counter and its wares
+    for y in range(20, 31):
+        for x in range(1, 31):
+            c = "wd2" if y < 23 else ("wd1" if (x + y) % 6 else "wd0")
+            if y == 20:
+                c = "wd3"
+            if x in (1, 30) or y == 30:
+                c = "wd0"
+            M.px(ox + x, y, c)
+    put(M, ox + 4, 14, [
+        "..kk....kk.......rr.rr...",
+        ".kttk..kttk.....rrrrrrr..",
+        ".kttk..kttk.....rr.rr.r..",
+        "kttttkkttttk.bbbbbbbbbb..",
+        "kt22tkkt22tk.b2222bb222b.",
+        ".kttk..kttk...bbbbbbbbb..",
+    ], {"k": "ink", "t": "tc2", "2": "tc3", "r": "rs1", "b": "kr1", "B": "kr2"})
+    return s
+
+
+def hives():
+    """Kerinthos's bee wall on the Neraida terraces: clay hives laid on their sides
+    in a low stone wall, mouths to the sun, bees drifting (on borrowed grass)."""
+    names = {"hives_L": (0, 0), "hives_R": (1, 0), "hive": (2, 0)}
+    s = struct("hives", "Clay beehives", 3, 1, SEC, walk=["XXX"], names=names,
+               notes="The ravine's bee wall (on borrowed grass): `hives_L` `hives_R`, two cells of "
+                     "long clay hives laid in a dry-stone wall, mouths to the south; `hive`, one on its "
+                     "own stand. Impassable.")
+    ground(s, "grass")
+    M = s.M
+    wall = [
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "kkkkkkkkkkkkkkkk",
+        "k3322k3322k3322k",
+        "kkkkkkkkkkkkkkkk",
+    ]
+    hive = [
+        ".kkkkk..",
+        "k22222k.",
+        "k2kkk22k",
+        "k2k0k23k",
+        "k2kkk23k",
+        "k22223k.",
+        ".kkkkk..",
+    ]
+    for ox in (0, 16):
+        for x0 in (1, 8):
+            put(M, ox + x0, 2, hive, {"k": "wd0", "2": "tc2", "3": "tc1", "0": "ink"})
+        for j, row in enumerate(wall):
+            for i, ch in enumerate(row):
+                c = {"k": "wd0", "3": "kr2", "2": "kr1"}.get(ch)
+                if c:
+                    M.px(ox + i, 8 + j, c)
+    put(M, 32 + 4, 3, hive, {"k": "wd0", "2": "tc2", "3": "tc1", "0": "ink"})
+    put(M, 32 + 5, 10, ["kkkkkk", "k2222k", ".k..k.", ".k..k.", "kk..kk"], {"k": "wd0", "2": "wd2"})
+    for (x, y) in ((3, 1), (12, 0), (20, 1), (27, 0), (40, 1), (34, 0)):
+        M.px(x, y, "ink")
+        M.px(x + 1, y, "tc3")
+    return s
+
+
 def build():
     h = house_kit()
     mirrors(h)
     sc = sculptors()
     return [h, herm_shrine(), dovecote(), great_stair(), temple_front(),
-            K.pick(sc, ["block", "block_face", "hoist", "bench", "chips", "hoist_foot"], w=6)]
+            K.pick(sc, ["block", "block_face", "hoist", "bench", "chips", "hoist_foot"], w=6), props(), hives()]

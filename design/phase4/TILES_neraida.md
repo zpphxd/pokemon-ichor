@@ -65,7 +65,7 @@ hints.
 | bronze | Bronze mirrors, the harbor shrine's dove, the great herm, the Minoan vault door |
 | melos | Melos's obsidian slope on its earth and grass |
 
-**Tile budget.** 365 of 504 tiles (312 metatiles). The door animations copy their
+**Tile budget.** 383 of 504 tiles (312 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 
@@ -402,3 +402,32 @@ ids                                            walk
 | 0x334 | `top_steps` | `T` | `MB_NORMAL` | COVERED | grass |
 | 0x335 | `top_niche` | `.` | `MB_NORMAL` | COVERED | grass |
 | 0x336 | `top_spout` | `.` | `MB_NORMAL` | COVERED | grass |
+
+### Clay beehives
+
+`hives`, 3 wide by 1 tall. The ravine's bee wall (on borrowed grass): `hives_L` `hives_R`, two cells of long clay hives laid in a dry-stone wall, mouths to the south; `hive`, one on its own stand. Impassable.
+
+```text
+ids                    walk
+0x2DD 0x2DE 0x2DF   X X X
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x2DD | `hives_L` | `X` | `MB_NORMAL` | COVERED | grass |
+| 0x2DE | `hives_R` | `X` | `MB_NORMAL` | COVERED | grass |
+| 0x2DF | `hive` | `X` | `MB_NORMAL` | COVERED | grass |
+
+### Tide rocks, a reef spit, white rocks, sea marks
+
+`rocks`, 2 wide by 1 tall. White rock: `rock_grass` on grass (Lykidas's rock, the ravine's boulders), `rocks_sand`. Impassable.
+
+```text
+ids              walk
+0x313 0x314   X X
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x313 | `rock_grass` | `X` | `MB_NORMAL` | COVERED | grass |
+| 0x314 | `rocks_sand` | `X` | `MB_NORMAL` | COVERED | sand |

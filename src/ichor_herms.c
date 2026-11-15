@@ -91,6 +91,11 @@ void Ichor_AnointHerm(void)
 static u32 GetHermForMapsec(u32 mapsec)
 {
     u32 herm;
+    // A herm with no map section of its own (Kythera's: Skandeia is the island's fly
+    // target) is anointed and counted like any other, but is never a fly target, and
+    // the region map's empty sea (MAPSEC_NONE) must never find it.
+    if (mapsec == MAPSEC_NONE)
+        return HERM_NONE;
     for (herm = 0; herm < HERM_MAX; herm++)
     {
         if (IsPlaced(herm) && gIchorHerms[herm].mapsec == mapsec)

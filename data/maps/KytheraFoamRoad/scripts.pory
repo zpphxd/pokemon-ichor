@@ -1,13 +1,17 @@
 // The Foam Road (design/phase4/SCRIPT.md Part 2, beats III-1D and III-1D2).
 // Layout and events: tools/ichor/maps/kythera_foam_road.py (64 x 24). East to
-// west: Skandeia's gate, the road sign, band 1, Amphitos, the fork (the great
-// herm, the stair up to the Spring of Kallirhoe), the cutting and Skopas, the
-// rock beach (Alethea's dig, the freshwater basin, Pontinos on the reef spit),
-// the quarry behind its drums (the Girdle), the headland's cascade (the Horn),
-// band 3 in the myrtle grove, Kassiteros at the neck, and Paphia's gate.
+// west: Skandeia's gate, Lykon and the road sign, band 1 (8 deep, between the
+// myrtle and the sea-cliff), Theano on the terrace above it, Amphitos by his
+// jetty, the fork (the great herm, the stair up to the Spring of Kallirhoe), the
+// cutting and Skopas, the rock beach (Alethea's dig, the freshwater basin,
+// Pontinos on the reef spit, Kymodoke on the islet), the quarry behind its drums
+// (the Girdle), the headland's cascade (the Horn), Amaryllis and band 3 in the
+// myrtle grove, Kassiteros at the neck, and Paphia's gate. Menalkas grazes his
+// flock in the clifftop meadow under the east wood.
 //
-// Hidden items (not placed yet; they need vanilla flags): an Ether behind the
-// great herm (43,4), and a Heart Scale in the cove's corner (13,13).
+// Hidden items: an Ether behind the great herm (43,4), a Heart Scale in the
+// Horn's clifftop meadow (13,13), a Net Ball on the rock past the jetty (47,17)
+// and Stardust in the cove under the east wood (54,22).
 // TODO(engine §5): Alethea's dig is scripted here; the trowel's dig spots and
 // the quarry's fixed dig (sherd 4, FLAG_ICHOR_SHERDS_START + 43, at the quarry
 // floor) come with the excavation system.
@@ -292,4 +296,46 @@ movement KytheraFoamRoad_Movement_MessengerWest {
     walk_left * 2
     walk_down * 3
     walk_left * 4
+}
+
+// ---------------------------------------------------------------------------
+// The second wave of trainers (MAP_DESIGN §8; texts in ichor_act3_kythera_trainers.pory)
+// ---------------------------------------------------------------------------
+
+script KytheraFoamRoad_EventScript_Lykon {
+    trainerbattle_single(TRAINER_ICHOR_LYKON_KYTHERA, Kythera_Text_LykonIntro, Kythera_Text_LykonDefeat)
+    setspeaker(Kythera_Text_SpeakerLykon)
+    msgbox(Kythera_Text_LykonAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Theano {
+    trainerbattle_single(TRAINER_ICHOR_THEANO, Kythera_Text_TheanoIntro, Kythera_Text_TheanoDefeat)
+    setspeaker(Kythera_Text_SpeakerTheano)
+    msgbox(Kythera_Text_TheanoAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Kymodoke {
+    trainerbattle_single(TRAINER_ICHOR_KYMODOKE, Kythera_Text_KymodokeIntro, Kythera_Text_KymodokeDefeat)
+    setspeaker(Kythera_Text_SpeakerKymodoke)
+    msgbox(Kythera_Text_KymodokeAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Menalkas {
+    trainerbattle_single(TRAINER_ICHOR_MENALKAS, Kythera_Text_MenalkasIntro, Kythera_Text_MenalkasDefeat)
+    setspeaker(Kythera_Text_SpeakerMenalkas)
+    msgbox(Kythera_Text_MenalkasAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraFoamRoad_EventScript_Amaryllis {
+    trainerbattle_single(TRAINER_ICHOR_AMARYLLIS, Kythera_Text_AmaryllisIntro, Kythera_Text_AmaryllisDefeat)
+    setspeaker(Kythera_Text_SpeakerAmaryllis)
+    msgbox(Kythera_Text_AmaryllisAfter, MSGBOX_AUTOCLOSE)
+}
+
+// Menalkas's flock on the clifftop meadow.
+script KytheraFoamRoad_EventScript_Sheep {
+    lock
+    faceplayer
+    msgbox(format("The sheep chews, and faces inland. It has never once looked at the sea."), MSGBOX_DEFAULT)
+    release
 }

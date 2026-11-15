@@ -123,7 +123,7 @@ GROUND_METATILE = {"grass": 0x001, "path": 0x1D9, "sand": 0x124, "sea": 0x170,
 WALK_BEHAVIOR = {
     "G": "MB_TALL_GRASS", "J": "MB_JUMP_SOUTH", "<": "MB_JUMP_WEST", ">": "MB_JUMP_EAST",
     "D": "MB_NON_ANIMATED_DOOR", "W": "MB_OCEAN_WATER", "P": "MB_POND_WATER",
-    "F": "MB_WATERFALL", "S": "MB_SAND",
+    "F": "MB_WATERFALL", "S": "MB_SAND", "C": "MB_CAVE",
 }
 
 

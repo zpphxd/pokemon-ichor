@@ -10,9 +10,10 @@
 // road's music comes in (MUS_ICHOR_ROAD, standing in for MUS_ICHOR_FOAM_ROAD).
 // The field's water SE isn't muted: the engine has no ambient-water switch yet.
 //
-// Hidden items (not placed yet; they need vanilla flags): a Mystic Water in the
-// mill-race below the turning wheel (15,29), and a Pearl behind the shrine's
-// basin (24,12).
+// Hidden items: a Mystic Water in the mill-race below the turning wheel (14,29),
+// a Pearl behind the shrine's basin (24,12), a Heart Scale at the ledge path's
+// foot (26,33) and Honey in Kerinthos's bee wall (5,22). The second wave of
+// trainers (Daphnis, Opora, Pegaios, Dexithea) is at the end of this file.
 // TODO(labyrinth): with FLAG_ICHOR_GOT_LABRYS the vault door asks "Cleave the seal
 // with the Labrys?" and opens Kythera's Minoan vault (SCRIPT Part 5, Part 6), once
 // that map exists (FLAG_ICHOR_MINOAN_VAULT_KYTHERA is the Knossa writer's).
@@ -242,4 +243,32 @@ script KytheraNeraidaFalls_EventScript_Krenaia {
     msgbox(format("The pool above the falls hasn't been seen in a year. Go and look.\p"
                   "Somebody's paper blew up there. A sketch of a dancing floor."))
     release
+}
+
+// ---------------------------------------------------------------------------
+// The second wave of trainers (MAP_DESIGN §8; texts in ichor_act3_kythera_trainers.pory)
+// ---------------------------------------------------------------------------
+
+script KytheraNeraidaFalls_EventScript_Daphnis {
+    trainerbattle_single(TRAINER_ICHOR_DAPHNIS, Kythera_Text_DaphnisIntro, Kythera_Text_DaphnisDefeat)
+    setspeaker(Kythera_Text_SpeakerDaphnis)
+    msgbox(Kythera_Text_DaphnisAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraNeraidaFalls_EventScript_Opora {
+    trainerbattle_single(TRAINER_ICHOR_OPORA, Kythera_Text_OporaIntro, Kythera_Text_OporaDefeat)
+    setspeaker(Kythera_Text_SpeakerOpora)
+    msgbox(Kythera_Text_OporaAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraNeraidaFalls_EventScript_Pegaios {
+    trainerbattle_single(TRAINER_ICHOR_PEGAIOS, Kythera_Text_PegaiosIntro, Kythera_Text_PegaiosDefeat)
+    setspeaker(Kythera_Text_SpeakerPegaios)
+    msgbox(Kythera_Text_PegaiosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script KytheraNeraidaFalls_EventScript_Dexithea {
+    trainerbattle_single(TRAINER_ICHOR_DEXITHEA, Kythera_Text_DexitheaIntro, Kythera_Text_DexitheaDefeat)
+    setspeaker(Kythera_Text_SpeakerDexithea)
+    msgbox(Kythera_Text_DexitheaAfter, MSGBOX_AUTOCLOSE)
 }

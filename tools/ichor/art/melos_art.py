@@ -562,7 +562,7 @@ def cave():
         "pool_N": (0, 3), "pool_S": (1, 3), "pool_E": (2, 3), "pool_W": (3, 3),
         "brazier_cold": (4, 3), "brazier_lit": (5, 3), "mouth_L": (6, 3), "mouth_R": (7, 3),
     }
-    walk = ["XXXXXXXX", "XXXXXXXD", "XXX.....", "XXXXXXWW"]
+    walk = ["XXXXXXXX", "XXXXXXXD", "XXXCCCCC", "XXXXXXWW"]
     s = struct("cave", "Echo's sea caves", 8, 4, SEC_C, walk=walk, names=names,
                notes="Dark pink rock, the spring's water running down to the sea. The rock mass is "
                      "`ceil` (the cave's roof seen from above), edged by `ceil_S` (its south lip, "
@@ -573,7 +573,8 @@ def cave():
                      "over `base_L` `base` `base_R`, where it meets the floor. `crack` is the "
                      "Speaking Hall's roof crack, with `light_L` `light_R` the patch of daylight it "
                      "throws on the floor. The floor: `floor`, `floor_b`, `floor_pebbles` "
-                     "(walkable). `pool_N` `_S` `_E` `_W` edge a cave pool (borrowed sea; named by "
+                     "(walkable, `MB_CAVE`: wild Pokémon live on it; so do `light_*`). "
+                     "`pool_N` `_S` `_E` `_W` edge a cave pool (borrowed sea; named by "
                      "where the water is). `wall_lamp` is a lamp in a niche by the diver; "
                      "`brazier_cold` / `brazier_lit` the dark gallery's brazier (SYSTEMS §2; swap "
                      "cold for lit). `stair_up` climbs back to the spring (the door). `mouth_L` "

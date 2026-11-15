@@ -100,17 +100,32 @@ local function canHave(species, ability)
 end
 
 local function checkTable(trainers, order)
-  L.expect(#order == S.TRAINERS_END_ACT3 - S.TRAINER_ICHOR_EUDOROS,
-           string.format("SCRIPT's Kythera section has %d trainers, ids %d-%d", #order, S.TRAINER_ICHOR_EUDOROS,
-                         S.TRAINERS_END_ACT3 - 1))
+  -- Kythera's trainers are three id blocks: 320-347 (SCRIPT's first cast), 348-358 (the
+  -- sea routes' swimmers, for the route standard) and 490-498 (the Foam Road's and the
+  -- falls' second wave, from the top of act3's range). Every SCRIPT trainer must sit in
+  -- one of them, each id once.
+  local ranges = {
+    { S.TRAINER_ICHOR_EUDOROS, S.TRAINER_ICHOR_MYRSINE },
+    { S.TRAINER_ICHOR_AKTAIOS, S.TRAINER_ICHOR_NAUPLIOS },
+    { S.TRAINER_ICHOR_LYKON_KYTHERA, S.TRAINER_ICHOR_DEXITHEA },
+  }
+  local blocks = 0
+  for _, r in ipairs(ranges) do blocks = blocks + r[2] + 1 - r[1] end
+  L.expect(#order == blocks,
+           string.format("SCRIPT's Kythera section has %d trainers, the id blocks hold %d", #order, blocks))
   local wrong, mons = {}, 0
   local function want(cond, what) if not cond then wrong[#wrong + 1] = what end end
+  local seen = {}
   for i, c in ipairs(order) do
     local w = trainers[c]
     local id = S[c]
     if id == nil then L.fail("no constant " .. c .. " in act3_trainers_consts.c") end
     local where = c:sub(15)
-    want(id == S.TRAINER_ICHOR_EUDOROS + i - 1, string.format("%s is id %d, out of SCRIPT's order", where, id))
+    local inRange = false
+    for _, r in ipairs(ranges) do if id >= r[1] and id <= r[2] then inRange = true end end
+    want(inRange, string.format("%s is id %d, outside Kythera's id blocks", where, id))
+    want(not seen[id], string.format("%s repeats id %d", where, id))
+    seen[id] = true
     local t = S.gTrainers + (S.DIFFICULTY_NORMAL * S.TRAINERS_COUNT + id) * S.TRAINER_SIZE
     want(emu:read8(t + S.OFF_TRAINER_CLASS) == const("TRAINER_CLASS_", w.Class), where .. ": class " .. w.Class)
     want(gameName(t + S.OFF_TRAINER_NAME) == w.Name, where .. ": name " .. w.Name)

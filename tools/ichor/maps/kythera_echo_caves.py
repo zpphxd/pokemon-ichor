@@ -33,35 +33,46 @@ P = "KytheraEchoCaves_EventScript_"
 
 def plan():
     """The cave as rows of '#' rock, '.' open ground, '~' water, 'o' a floor tile
-    in the water (the rock at the sea mouth)."""
+    in the water (the rock at the sea mouth). Under any rock the first two open
+    rows become its wall face, so a chamber's walkable floor starts two rows down;
+    the carving below breaks the chambers' edges so none is a box."""
     g = [["#"] * W for _ in range(H)]
 
     def carve(x0, y0, x1, y1, ch="."):
         for y in range(y0, y1 + 1):
             for x in range(x0, x1 + 1):
                 g[y][x] = ch
-    # the Speaking Hall, its pool, the walk round the rim to the ledge
-    carve(2, 1, 13, 10)
+    # the Speaking Hall, bulging round its pool, the walk round the rim to the ledge
+    carve(3, 1, 12, 10)
+    carve(2, 2, 13, 9)
+    carve(13, 1, 13, 3)
     carve(3, 11, 11, 11)
     carve(4, 12, 9, 12)
     carve(6, 13, 6, 13)
-    carve(5, 6, 10, 10, "~")
-    # the dark gallery: the passage, the dead end north (the Zinc), the brazier's niche,
-    # the neck past the lamp, Kolymbos's corner and the far end (the Heart Scale)
+    carve(6, 6, 9, 6, "~")
+    carve(5, 7, 10, 9, "~")
+    carve(6, 10, 9, 10, "~")
+    # the dark gallery: the passage (its roof dips and rises), the dead end north (the
+    # Zinc), the brazier's niche, the pinch past the lamp, Kolymbos's corner, the far end
     carve(14, 4, 22, 7)
+    carve(17, 3, 18, 3)
     carve(19, 1, 20, 3)
     carve(15, 8, 15, 8)
     carve(23, 5, 27, 7)
-    carve(28, 3, 29, 7)
-    # down to the sea mouth
+    carve(28, 1, 29, 7)
+    # down to the sea mouth: its chamber, an alcove in the north wall, coves round the water
     carve(27, 8, 28, 11)
     carve(12, 12, 29, 17)
+    carve(17, 11, 20, 11)
     carve(11, 16, 11, 17)
     carve(10, 18, 29, 22)
     carve(10, 23, 28, 23)
     carve(12, 24, 26, 24)
+    for (x, y) in ((12, 12), (13, 12), (29, 12), (29, 13), (12, 17), (29, 17)):
+        g[y][x] = "#"
     carve(14, 18, 23, 18, "~")
-    carve(11, 19, 28, 22, "~")
+    carve(12, 19, 28, 19, "~")
+    carve(11, 20, 28, 22, "~")
     carve(11, 23, 27, 23, "~")
     carve(13, 24, 25, 24, "~")
     carve(15, 25, 16, 25, "~")
@@ -79,7 +90,8 @@ BRAZIER = (15, 8)              # the cold brazier at the dark gallery's mouth
 ZINC = (19, 3)                 # the dead end north of the gallery
 LAMP = (25, 5)                 # the lamp in the neck's wall, by Kolymbos
 KOLYMBOS = (29, 7)             # where the gallery turns down to the sea, facing the neck
-HEART_SCALE = (29, 5)          # the gallery's far end (hidden: listed, not placed)
+HEART_SCALE = (29, 3)          # the gallery's far end, past Kolymbos (hidden)
+SHELL_BELL = (2, 9)            # the Speaking Hall's west nook, behind the pool (hidden)
 TM_ROCK = (23, 21)             # the rock at the sea mouth, by Surf
 MOUTH = (15, 25)               # the low arch onto the sea
 
@@ -173,7 +185,7 @@ def compose():
     m.piece("cave", "brazier_cold", *BRAZIER)
     m.piece("cave", "wall_lamp", *LAMP)
     for (x, y) in islets:
-        m.piece("cave", "floor_pebbles", x, y)
+        m.piece("rocks", "tide_rocks", x, y)       # the rock at the sea mouth (the TM goes on it)
     m.piece("cave", "mouth_L", *MOUTH)
     m.piece("cave", "mouth_R", MOUTH[0] + 1, MOUTH[1])
     # the sea mouth's water: tide rocks, a fallen column, a drum awash (surfable)
@@ -198,6 +210,8 @@ def events(m):
     m.sign(ECHO[0], ECHO[1], P + "Echo", "BG_EVENT_PLAYER_FACING_NORTH")
     m.sign(BRAZIER[0], BRAZIER[1], P + "Brazier")
     m.sign(16, 17, P + "SeaMouth", "BG_EVENT_PLAYER_FACING_SOUTH")
+    m.hidden(HEART_SCALE[0], HEART_SCALE[1], "ITEM_HEART_SCALE", "FLAG_ICHOR_HIDDEN_ECHO_CAVES_HEART_SCALE")
+    m.hidden(SHELL_BELL[0], SHELL_BELL[1], "ITEM_SHELL_BELL", "FLAG_ICHOR_HIDDEN_ECHO_CAVES_SHELL_BELL")
 
 
 VIEWS = [(6, 4), (7, 10), (17, 6), (25, 7), (26, 12), (18, 15), (21, 21)]

@@ -33,10 +33,10 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_FISHER",
-      "x": 46,
-      "y": 12,
+      "x": 45,
+      "y": 11,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -112,6 +112,110 @@
       "flag": "FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD"
     },
     {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 58,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "KytheraFoamRoad_EventScript_Lykon",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 50,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KytheraFoamRoad_EventScript_Theano",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_DIVER",
+      "x": 36,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KytheraFoamRoad_EventScript_Kymodoke",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
+      "x": 58,
+      "y": 13,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KytheraFoamRoad_EventScript_Menalkas",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER",
+      "x": 15,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "KytheraFoamRoad_EventScript_Amaryllis",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "x": 59,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraFoamRoad_EventScript_Sheep",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WOOLOO)",
+      "x": 58,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraFoamRoad_EventScript_Sheep",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 3,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_FOAM_ROAD_ULTRA_BALL"
+    },
+    {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 23,
       "y": 17,
@@ -149,6 +253,19 @@
       "trainer_sight_or_berry_tree_id": "ITEM_PRETTY_FEATHER",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_ITEM_FOAM_ROAD_PRETTY_FEATHER"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 35,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_PEARL_STRING",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_FOAM_ROAD_PEARL_STRING"
     }
   ],
   "warp_events": [],
@@ -175,8 +292,8 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 55,
-      "y": 7,
+      "x": 56,
+      "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KytheraFoamRoad_EventScript_SignEast"
@@ -191,8 +308,8 @@
     },
     {
       "type": "sign",
-      "x": 5,
-      "y": 6,
+      "x": 6,
+      "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KytheraFoamRoad_EventScript_SignPaphia"
@@ -248,7 +365,7 @@
     {
       "type": "sign",
       "x": 8,
-      "y": 7,
+      "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KytheraFoamRoad_EventScript_Boat"
@@ -256,7 +373,7 @@
     {
       "type": "sign",
       "x": 9,
-      "y": 7,
+      "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KytheraFoamRoad_EventScript_Boat"
@@ -264,10 +381,42 @@
     {
       "type": "sign",
       "x": 10,
-      "y": 7,
+      "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KytheraFoamRoad_EventScript_Boat"
+    },
+    {
+      "type": "hidden_item",
+      "x": 43,
+      "y": 4,
+      "elevation": 3,
+      "item": "ITEM_ETHER",
+      "flag": "FLAG_ICHOR_HIDDEN_FOAM_ROAD_ETHER"
+    },
+    {
+      "type": "hidden_item",
+      "x": 13,
+      "y": 13,
+      "elevation": 3,
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_ICHOR_HIDDEN_FOAM_ROAD_HEART_SCALE"
+    },
+    {
+      "type": "hidden_item",
+      "x": 47,
+      "y": 17,
+      "elevation": 3,
+      "item": "ITEM_NET_BALL",
+      "flag": "FLAG_ICHOR_HIDDEN_FOAM_ROAD_NET_BALL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 54,
+      "y": 22,
+      "elevation": 3,
+      "item": "ITEM_STARDUST",
+      "flag": "FLAG_ICHOR_HIDDEN_FOAM_ROAD_STARDUST"
     }
   ]
 }

@@ -18,9 +18,10 @@
 // FLAG_ICHOR_ITEM_ECHO_CAVES_TM_HYPER_VOICE.
 // TODO(world): Route 23 doesn't exist; once it does, surfing out through the
 // sea mouth's arch (15..16,25) leads onto it.
-// TODO(art): the cave floor (melos floor, floor_b, floor_pebbles, light_L/R) is
-// MB_NORMAL, so the land table (wild_encounters.json) never fires here; it needs
-// MB_CAVE. Surfing encounters work.
+// The cave floor (melos floor, floor_b, floor_pebbles, light_L/R) is MB_CAVE, so
+// the land table fires on it. Hidden items: a Heart Scale at the dark gallery's
+// far end (29,3), past Kolymbos, and a Shell Bell in the Speaking Hall's west
+// nook (2,9).
 // TODO(audio): MUS_ICHOR_KALLIRHOE; MUS_ICHOR_HOLLOW stands in.
 
 mapscripts KytheraEchoCaves_MapScripts {}

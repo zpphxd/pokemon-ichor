@@ -71,6 +71,7 @@ def hedgerow(m, x, y0, y1):
         k = (x * 7 + y * 13) % 6
         if k == 0 and y + 1 <= y1:
             m.cypress(x, y)
+            m.solid[y, x] = True                  # a hedge has no gaps, even under a cypress's crown
             y += 2
             continue
         name = ("myrtle", "single") if k in (1, 4) else ("myrtle", "bush") if k == 2 else \
@@ -79,7 +80,13 @@ def hedgerow(m, x, y0, y1):
         y += 1
 
 
+WOOD = set()
+BANDS = {}
+
+
 def compose():
+    WOOD.clear()
+    BANDS.clear()
     m = Map(NAME, "neraida", W, H, fill=A.GRASS)
     face = m.s("cliff")["ids"][1][1]
     m.border = [face] * 4                         # the ravine's rock beyond the edges
@@ -127,13 +134,9 @@ def compose():
         m.piece("cliff", "lip" + e, x, 7)
         for y in (8, 9, 10):
             m.piece("cliff", "face" + e, x, y)
-    # the wood closes the shelf's ends instead of more rock
-    for x, y in ((1, 7), (3, 7), (1, 9), (3, 9)):
-        m.olive(x, y)
-    for y in (7, 9):
-        m.cypress(5, y)
-        m.cypress(23, y)
-    hedgerow(m, 24, 7, 10)
+    # the wood closes the shelf's ends instead of more rock (filled with the rest)
+    WOOD.update({(x, y) for x in range(0, 6) for y in range(7, 11)})
+    WOOD.update({(23, 7), (23, 8), (23, 9), (23, 10), (24, 7), (24, 8), (24, 9), (24, 10)} - {(24, 7), (24, 8)})
     for y in range(7, 11):
         for x in FALL:
             m.set(x, y, A.FALL, False)
@@ -211,12 +214,10 @@ def compose():
     m.set(12, 20, m.s("mill")["ids"][1][0], True)                            # its door, shut and empty
 
     # ==== the east bank: band 2, Mopsos's narrow, the landing ===================================
-    m.blob("seagrass", ["####",
-                        "####",
-                        "####",
-                        "####"], 19, 15, edge_in=False)
     for y in range(15, 19):
         m.piece("myrtle", "V", 23, y)
+    # band 2, four deep from the river's kerb to the myrtle, ragged at its ends
+    BANDS["band2"] = cells((19, 15, 22, 18)) | {(19, 19), (22, 19), (20, 14), (19, 14)}
     for y in range(20, 25):                       # Mopsos's narrow: one tile wide, x 20
         for x in (19, 21):
             trees(m, oleanders=[(x, y)] if (x + y) % 2 else [], myrtles=[(x, y)] if not (x + y) % 2 else [])
@@ -228,9 +229,7 @@ def compose():
 
     # ==== the ledge path down the east side, one way =========================================
     hedgerow(m, 24, 11, 30)
-    hedgerow(m, 27, 3, 33)
-    for y in range(3, 33, 2):
-        m.olive(28, y)
+    WOOD.update({(x, y) for x in range(27, 30) for y in range(3, 34)})
     for y in range(7, 11):
         for x in (25, 26):
             m.set(x, y, A.GRASS, False)
@@ -241,9 +240,10 @@ def compose():
         m.piece("flowers", "thrift", x, y)
 
     # ==== the west bank: terraces, berry trees, the main path ===================================
-    for y in range(11, 36, 2):                    # the west wood: olives two deep, with a plane
-        m.olive(0, y)
-    trees(m, planes=[(0, 21)], cypresses=[(2, 11), (2, 13)])
+    # the west wood, two to three deep, with a plane
+    WOOD.update({(x, y) for x in (0, 1) for y in range(11, 38)} | {(2, y) for y in (11, 12, 13, 26, 27, 31)})
+    trees(m, planes=[(0, 21)])
+    WOOD.difference_update({(x, y) for x in range(0, 3) for y in range(21, 24)})
     # terrace walls with steps; the lowest is a ledge back down toward Paphia
     for x in range(2, 9):
         n = "L" if x == 2 else ("R" if x == 8 else "M")
@@ -255,38 +255,84 @@ def compose():
                 m.piece("terrace", "top" if n == "M" else "top_" + n, x, y - 1)
                 m.piece("terrace", n, x, y)
         m.set(x, 30, A.LEDGE["S"], False)
-    m.blob("seagrass", [".#####.",
-                        "#######",
-                        "######.",
-                        ".####.."], 2, 15, edge_in=False)
-    m.blob("seagrass", ["..####",
-                        ".#####",
-                        "######"], 2, 21, edge_in=False)
-    m.blob("seagrass", ["#######",
-                        "#######",
-                        "#######"], 7, 32)
+    # the terraces' optional grass, shaped to the terraces (the jar is in the top one)
+    def mask(rows, ox, oy):
+        return {(ox + i, oy + j) for j, r in enumerate(rows) for i, c in enumerate(r) if c == "g"}
+    BANDS["top"] = mask(["..ggg..",
+                         ".ggggg.",
+                         "gggggggg",
+                         ".ggggggg",
+                         "..ggg.g."], 2, 14)
+    BANDS["low"] = mask([".ggg..",
+                         "ggg...",
+                         "ggg...",
+                         ".gggg."], 2, 21)
+    # the meadows' optional grass (MAP_DESIGN §8): the plunge pool's west bank (Pegaios, a
+    # Max Potion), the east bank below the ford (Dexithea, a Big Root), the upper shelf
+    # (the Horn's), and the meadow south of band 1
+    BANDS["west_bank"] = mask(["...ggg..",
+                               ".ggggggg",
+                               "gg.gggg."], 2, 11)
+    BANDS["east_bank"] = mask([".ggg.",
+                               "ggggg",
+                               "gggg.",
+                               ".gggg",
+                               "..ggg"], 19, 29)
+    BANDS["shelf_w"] = mask(["..ggg..",
+                             ".ggggg.",
+                             "..gg..."], 1, 3)
+    BANDS["shelf_e"] = mask(["ggg.",
+                             "gggg",
+                             ".gg."], 21, 3)
+    BANDS["meadow_s"] = mask(["gggg.",
+                              ".gggg"], 7, 36)
+    # band 1, three deep across the riverbank meadow, from the myrtle to the river's kerb
+    BANDS["band1"] = cells((7, 32, 13, 34)) | {(7, 31), (8, 31), (7, 35), (8, 35), (9, 35), (10, 35), (11, 35)}
     for y in (32, 33, 34):
         m.piece("myrtle", "V", 6, y)
     m.piece("myrtle", "B", 6, 35)
-    m.path(cells((9, 21, 10, 31), (11, 22, 13, 24), (13, 25, 13, 25), (11, 29, 13, 29), (9, 31, 13, 31),
-                 (12, 36, 13, 37), (SOUTH_ROAD[0], 37, SOUTH_ROAD[1], H - 1)))
+    m.piece("myrtle", "T", 6, 31)
+    m.path(cells((12, 35, 12, 37), (13, 36, 13, 37), (10, 31, 12, 31), (11, 29, 13, 30), (10, 22, 10, 28),
+                 (11, 25, 13, 25), (9, 21, 10, 21), (SOUTH_ROAD[0], 37, SOUTH_ROAD[1], 38)))
+    m.piece("hives", "hives_L", 5, 22)
+    m.piece("hives", "hives_R", 6, 22)
+    m.piece("hives", "hive", 8, 23)
+    m.piece("rocks", "rock_grass", 10, 30)        # Lykidas's rock, by his goats
     for x, y in ((3, 27), (7, 28), (8, 29)):
         m.piece("flowers", "oleander" if x % 2 else "petals", x, y)
     m.piece("flowers", "briar", 2, 28)
-    for x, y in ((2, 32), (4, 32), (2, 34), (4, 34), (2, 36), (4, 36)):   # the wood west of band 1
-        m.olive(x, y)
+    WOOD.update({(x, y) for x in range(2, 6) for y in range(32, 38)})       # the wood west of band 1
 
     # ==== the south strip, rows 38..43: aethos only ===========================================
     m.rect(0, 38, W - 1, H - 1, A.GRASS, False)
-    trees_south = [(0, 38), (3, 40), (6, 38), (9, 41), (18, 41), (24, 39), (27, 41), (20, 42)]
-    for x, y in trees_south:
-        m.olive(x, y)
-    for x, y in ((12, 39), (17, 38), (26, 38), (2, 42)):
-        m.cypress(x, y)
-    m.path(cells((SOUTH_ROAD[0], 37, SOUTH_ROAD[1], H - 1), (12, 38, 13, 38), (16, 38, 22, 39)))
+    road = cells((SOUTH_ROAD[0], 37, SOUTH_ROAD[1], H - 1), (16, 38, 21, 38), (21, 37, 22, 37))
+    m.path(road)
     m.set(13, 40, A.STELE, True)                  # THE NERAIDA FALLS
-    for x, y in ((11, 42), (16, 41), (23, 41)):
+    # the orchard wood either side of the road out to Paphia, a clearing by the sign
+    south = {(x, y) for x in range(W) for y in range(38, H)}
+    south -= road | {(x, y) for x in range(11, 18) for y in range(38, 41)} | {(x, 39) for x in range(16, 24)}
+    south -= {(12, 41), (13, 41), (16, 41), (17, 41)}
+    WOOD.update(south)
+    m.woods(WOOD - {(x, y) for x in range(W) for y in range(38, H)}, salt=3, big=(("plane", 3, 3, 90),),
+            singles=[("myrtle", "bush"), ("flowers", "oleander"), ("myrtle", "single"), ("rocks", "rock_grass")])
+    m.woods({c for c in WOOD if c[1] >= 38}, salt=4, aethos_only=lambda x, y: y >= H - 6)
+    for x, y in ((11, 39), (16, 40), (12, 38), (17, 41), (20, 39)):
         m.set(x, y, A.ANEMONE, False)
+    for x, y in ((3, 12), (7, 12), (5, 13), (8, 11), (2, 14)):
+        m.piece("flowers", "narcissus" if (x + y) % 2 else "petals", x, y)
+    for k, cs in BANDS.items():
+        m.tallgrass(cs)
+    # every crown is walked round, here as in the woods (one rule, no invisible walls)
+    tops = {A.CYP_TOP} | set(m.s("plane")["ids"][0])
+    for y in range(H):
+        for x in range(W):
+            if int(m.mid[y, x]) in tops:
+                m.solid[y, x] = True
+    # barley round the clearing by the sign (aethos, the seam's strip)
+    for (x, y) in ((18, 40), (19, 40), (20, 40), (21, 40), (19, 41), (20, 41), (21, 41), (22, 41), (18, 41),
+                   (10, 39), (11, 40), (12, 40), (10, 40)):
+        if not m.solid[y, x] and int(m.mid[y, x]) in (A.GRASS, A.ANEMONE):
+            m.set(x, y, A.TALL, False)
     return m
 
 
@@ -314,6 +360,20 @@ def events(m):
     m.item_ball(3, 16, "ITEM_MAX_REPEL", "FLAG_ICHOR_ITEM_NERAIDA_MAX_REPEL")
     m.item_ball(12, 3, "ITEM_PROTEIN", "FLAG_ICHOR_ITEM_NERAIDA_PROTEIN")
     m.objects[-1]["_floats"] = True               # on its rock in the pool, reached by Surf
+    m.item_ball(20, 32, "ITEM_BIG_ROOT", "FLAG_ICHOR_ITEM_NERAIDA_BIG_ROOT")
+    m.item_ball(3, 12, "ITEM_MAX_POTION", "FLAG_ICHOR_ITEM_NERAIDA_MAX_POTION")
+    m.item_ball(6, 3, "ITEM_ELIXIR", "FLAG_ICHOR_ITEM_NERAIDA_ELIXIR")
+    m.hidden(14, 29, "ITEM_MYSTIC_WATER", "FLAG_ICHOR_HIDDEN_NERAIDA_MYSTIC_WATER")
+    m.hidden(24, 12, "ITEM_PEARL", "FLAG_ICHOR_HIDDEN_NERAIDA_PEARL")
+    m.hidden(26, 33, "ITEM_HEART_SCALE", "FLAG_ICHOR_HIDDEN_NERAIDA_HEART_SCALE")
+    m.hidden(5, 22, "ITEM_HONEY", "FLAG_ICHOR_HIDDEN_NERAIDA_HONEY")
+
+    # the second wave (MAP_DESIGN §8): Daphnis at the ravine's foot, Opora on the berry
+    # terrace, Pegaios at the plunge pool, Dexithea on the east bank
+    m.obj("ICHOR_SHEPHERD", 18, 39, P + "Daphnis", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3)
+    m.obj("ICHOR_HARVESTER", 6, 27, P + "Opora", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2)
+    m.obj("ICHOR_ACOLYTE_M", 8, 11, P + "Pegaios", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=3)
+    m.obj("ICHOR_ACOLYTE_F", 23, 30, P + "Dexithea", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3)
 
     m.connect("down", PAPHIA_ROAD_X - SOUTH_ROAD[0], "MAP_KYTHERA_PAPHIA")
     m.seam("down")
