@@ -1,1 +1,108 @@
+// The Aphaia Road: Aigina's interior, north of the town's gate (Act II).
+// design/phase2/SCRIPT.md, "Aegina's interior: an optional detour". The map and
+// every event's place come from tools/ichor/maps/aegina_detour.py.
+//
+// The road climbs from the gate through the pistachios, west along the lower
+// terrace, north past the ant hills, east along the upper terrace, then through
+// the golden grass to the great herm on the bay. There it forks: west to Mount
+// Oros, east up the marble steps to the Temple of Aphaia. Terraces east of the
+// road drop back down to the orchard.
+//
+// ICHOR_ACT2: world-act2 scripts the island's people. Myrmex, Sostratos and
+// Euthymia stand where they fight (BUILD.md gives each one's facing and sight)
+// and say one line; their trainer_type stays NONE until world-act2 registers
+// their parties and swaps these scripts for trainerbattle ones.
+
 mapscripts AeginaAphaiaRoad_MapScripts {}
+
+text AeginaAphaiaRoad_Text_NameMyrmex { "MYRMEX" }
+text AeginaAphaiaRoad_Text_NameSostratos { "SOSTRATOS" }
+text AeginaAphaiaRoad_Text_NameEuthymia { "EUTHYMIA" }
+
+// ---------------------------------------------------------------------------
+// The trainers (ICHOR_ACT2 placeholders: no battle)
+// ---------------------------------------------------------------------------
+
+// ICHOR_ACT2: HOPLITE Myrmex, Ergant 14 and 15. At the ant hills' corner, facing
+// west across the road north (sight 3); mandatory.
+script AeginaAphaiaRoad_EventScript_Myrmex {
+    lock
+    faceplayer
+    setspeaker(AeginaAphaiaRoad_Text_NameMyrmex)
+    msgbox(format("My family were ants. I'm proud of it. Ants can lift fifty times their weight."))
+    release
+}
+
+// ICHOR_ACT2: MERCHANT Sostratos, Onotis 15 and Chelonet 15. At the fork, facing
+// east across the road just below it (sight 3); mandatory for both ends.
+script AeginaAphaiaRoad_EventScript_Sostratos {
+    lock
+    faceplayer
+    setspeaker(AeginaAphaiaRoad_Text_NameSostratos)
+    msgbox(format("Richest trader on Aigina! Ask anyone. Ask my donkey."))
+    release
+}
+
+// ICHOR_ACT2: PILGRIM Euthymia, Galekit 15 and Kerazap 16. At the foot of the
+// temple steps, facing east across them (sight 3); mandatory for the temple.
+script AeginaAphaiaRoad_EventScript_Euthymia {
+    lock
+    faceplayer
+    setspeaker(AeginaAphaiaRoad_Text_NameEuthymia)
+    msgbox(format("I came to see a goddess nobody can see. It's going very well."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The great herm at the fork
+// ---------------------------------------------------------------------------
+
+// ICHOR_STUB_HERM: ENGINE_API section 4's EventScript_IchorGreatHerm isn't on
+// this branch. When it lands, point the herm's bg event at it, give the herm a
+// HERM_ id and heal location (the landing tile is the path just south of it),
+// and retire FLAG_ICHOR_HERM_AEGINA. Until then anointing is free and only sets
+// the flag (SYSTEMS.md section 4's words).
+script AeginaAphaiaRoad_EventScript_GreatHerm {
+    lockall
+    if (flag(FLAG_ICHOR_HERM_AEGINA)) {
+        msgbox(format("A great herm, hung with old garlands. The oil you gave it still shines."))
+        releaseall
+        end
+    }
+    msgbox(format("A great herm, hung with old garlands. Hermes's face, worn smooth.\p"
+                  "Anoint it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        releaseall
+        end
+    }
+    setflag(FLAG_ICHOR_HERM_AEGINA)
+    msgbox(format("The oil runs down the old stone face.\p"
+                  "Somewhere, Hermes makes a note."))
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Signs
+// ---------------------------------------------------------------------------
+
+script AeginaAphaiaRoad_EventScript_SouthSign {
+    msgbox(format("APHAIA ROAD\nUp to Aphaia's temple and Mount Oros."), MSGBOX_SIGN)
+}
+
+script AeginaAphaiaRoad_EventScript_ForkSign {
+    msgbox(format("West: Mount Oros, the island's peak.\nEast: the Temple of Aphaia."), MSGBOX_SIGN)
+}
+
+script AeginaAphaiaRoad_EventScript_OrosSign {
+    msgbox(format("MOUNT OROS\nZeus's altar is up top. So is the wind."), MSGBOX_SIGN)
+}
+
+script AeginaAphaiaRoad_EventScript_TempleSign {
+    msgbox(format("TEMPLE OF APHAIA\nThe goddess may be out. Visit anyway."), MSGBOX_SIGN)
+}
+
+// A horos, a boundary stone, on the hill east of the temple steps.
+script AeginaAphaiaRoad_EventScript_Horos {
+    msgbox(format("A boundary stone, cut with one word: HOROS.\p"
+                  "Aphaia's land starts here. Nobody's sure where it ends."), MSGBOX_SIGN)
+}

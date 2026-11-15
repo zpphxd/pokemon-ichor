@@ -8,7 +8,8 @@
 --   2. Screen-sized views of the town along the player's route, at night.
 --   3. Every person, sign and hidden item, the shut gate, and the three doors.
 --   4. After the crossing: no arrival, the gate open with its keeper aside, the
---      road north walkable to the seam, and Nausikles running the ferry.
+--      road north walkable across the seam onto the Aphaia Road, and Nausikles
+--      running the ferry.
 -- Passes when every expectation holds; "AEGINA FAIL" lines name the ones that don't.
 
 local L = dofile("tools/ichor/tests/ichor_lib.lua")
@@ -203,7 +204,9 @@ local steps = L.seq(
         return x == 23 and y == 4, string.format("the gatekeeper is at (%s,%s); want (23,4), beside the gate", tostring(x), tostring(y))
       end },
     { shot = "35_gate_open.png" }, { hold = K.UP, frames = 140, wait = 170 },
-    at(24, 0, "the road through the gate, at the seam"), { shot = "36_through_the_gate.png" } }
+    -- the gate's road runs on across the seam onto the Aphaia Road (its column 20)
+    on_map(S.MAP_APHAIA_ROAD, "the road through the gate, across the seam onto the Aphaia Road"),
+    { shot = "36_through_the_gate.png" } }
 )
 
 L.run("AEGINA", OUT, steps)

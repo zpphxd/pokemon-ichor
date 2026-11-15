@@ -63,8 +63,10 @@ The city's west gate is the **Isthmus Gate** to Route 4 (batch 3); its seam colu
 | the deck | Aegina's quay | scripted warp (end of beat 10, and the ferry) |
 | Aegina's inn, after the night | the deck | scripted warp (beat 10C) |
 | Aegina Town doors | inn, mint, Aiakides's house | warps both ways. Aegina Town's warps: **0** the quay landing (12,12), not a door: `warp(MAP_AEGINA_TOWN, 0)` lands the ferry and the end of beat 10 there; **1** the inn door (15,16); **2** the mint door (21,16); **3** Aiakides's door (27,8). Each door's `dest_warp_id` is 0, so each room's warp 0 is its door mat; the rooms send the player back to town warps 1, 2 and 3. |
-| Aegina Town, north gate | the Aphaia Road | map connection, up. The gate's passage is **columns 24-25** of Aegina Town; row 0 is walkable there and nowhere else (pines and scrub close the rest). Aegina's row 0 is sea west of column 21, so the Aphaia Road's bottom rows over Aegina's columns 0-20 should be sea or shore. With the road at the Aphaia Road's columns c and c+1, the connection's offset is 24 − c. |
-| the Aphaia Road | the Temple of Aphaia, Mount Oros | the detour agent's choice (connections or warps), recorded here |
+| Aegina Town, north gate | the Aphaia Road | map connection, up. The gate's passage is **columns 24-25** of Aegina Town; row 0 is walkable there and nowhere else (pines and scrub close the rest). Aegina's row 0 is sea west of column 21, so the Aphaia Road's bottom rows over Aegina's columns 0-20 should be sea or shore. With the road at the Aphaia Road's columns c and c+1, the connection's offset is 24 − c. **Built:** the road is at the Aphaia Road's columns 20-21 (c = 20): the town's connection is `up`, offset **4**; the road's is `down` to `MAP_AEGINA_TOWN`, offset **−4**. The town's (24,0) meets the road's (20,23). |
+| the Aphaia Road | Mount Oros | map connection, up/down, offset **0** both ways (Oros's columns 0-15 sit over the road's columns 0-15). The path crosses at the road's (8-9, 0) and Oros's (8-9, 15). |
+| the Aphaia Road | the Temple of Aphaia | map connection, up from the road with offset **16**, down from the temple with offset **−16** (the temple's columns 0-23 sit over the road's 16-39). The path crosses at the road's (27-28, 0) and the temple's (11-12, 19). |
+| Mount Oros | the Temple of Aphaia | not connected: a bay of open sea runs down between the two hills to the road's top edge, so neither map shows land where the other is. All three maps' borders are the sea, as the town's is. |
 
 Record the warp ids and the arrival tiles you choose in this table, so the scripted warps in other maps can use them.
 
@@ -107,6 +109,20 @@ The Telesterion's warps: 0–2 the stair (13, 12, 14 on row 26) to Eleusa's warp
 **Flags claimed** (bank 0x080–0x085, vanilla 0x2A0–0x2A2): `FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION`, `FLAG_ICHOR_ITEM_ELEUSA_AWAKENING`, `FLAG_ICHOR_SANCTUM_OPEN`, `FLAG_ICHOR_LESSER_MYSTERIES_DONE`, `FLAG_ICHOR_MET_DOSO`, `FLAG_ICHOR_HIDE_CHLOE_TELESTERION`; `FLAG_ICHOR_HIDDEN_ELEUSA_HONEY`, `FLAG_ICHOR_HIDDEN_ELEUSA_POMEG_BERRY`, `FLAG_ICHOR_HIDDEN_ELEUSA_BRONZE_OBOL`.
 
 **Braziers.** The Telesterion's four season braziers use `FLAG_ICHOR_BRAZIERS_START + 0x10` (Autumn), `+ 0x11` (Winter), `+ 0x12` (Spring), `+ 0x13` (Summer). The block `+ 0x14`–`+ 0x1F` is left for the sanctum's four and Eleusa's procession torches. Ask before using it for anything else.
+| `MAP_AEGINA_APHAIA_ROAD` | (22, 4), the path south of the great herm at (22, 3) | the herm's Wings landing (ENGINE_API §4's heal location) |
+
+### Aigina's interior: placed for world-act2 (Act II)
+
+Built by `tools/ichor/maps/aegina_detour.py` (render-and-critique passes in `MAPS_aigina_interior.md`). The people stand where they fight, with a placeholder line tagged `ICHOR_ACT2` and **`trainer_type` NONE**: the sight check reads the trainer id out of the script, so they can't be sighted trainers until world-act2 gives them `trainerbattle` scripts. Then set `TRAINER_TYPE_NORMAL` and the sight below; the builder proves each mandatory line cuts the only path.
+
+| Who | Map | Tile | Facing | Sight | Mandatory for | Local id |
+|---|---|---|---|---|---|---|
+| HOPLITE Myrmex | the Aphaia Road | (13, 14), the ant hills' corner | west | 3 | Oros and the temple: covers the road north at (11-12, 14) | `LOCALID_APHAIA_MYRMEX` |
+| MERCHANT Sostratos | the Aphaia Road | (20, 6), at the fork | east | 3 | both: covers the road at (21-22, 6), between the band and the fork | `LOCALID_APHAIA_SOSTRATOS` |
+| PILGRIM Euthymia | the Aphaia Road | (26, 3), at the foot of the temple steps | east | 3 | the temple: covers (27-29, 3) below the steps | `LOCALID_APHAIA_EUTHYMIA` |
+| the priestess of Aphaia | the Temple of Aphaia | (11, 9), on the steps before the doorway | south | — | — | `LOCALID_APHAIA_PRIESTESS` |
+
+The forced bands: the road's golden-and-green band at (19-24, 7-9), 3 deep, between Myrmex and Sostratos (both ends cross it); and a golden band on Oros's climb at (4-5, 9-10), 2 deep. Items: Silver Powder on the ant hills (22, 13) and the Super Potion at the Oros fork (12, 3) on the road; two Pretty Feathers (one ball, amount 2) on the temple steps (14, 9); Wine as Berry Juice (`ICHOR_STUB_OFFERINGS`) by Zeus's altar (8, 4) on Oros. Readable spots: the great herm (22, 3) (`ICHOR_STUB_HERM`), signs at the south end (19, 20), the fork (20, 3), the Oros path (10, 3) and the temple steps (30, 1), a horos boundary stone (34, 4); Zeus's altar (6, 4) on Oros and Artemis's altar (15, 11) on the temple hill (`ICHOR_STUB_RITES`, SCRIPT.md's words and no prayer); the dig spot in the old foundations (18, 11) (`ICHOR_STUB_DIG`, no reward). `tools/ichor/tests/aigina_interior.sh` walks it all.
 
 ## Flags claimed for batch 1
 
