@@ -12,6 +12,7 @@
 // region's Enter script, which sets the light once.
 //
 // Temp vars: VAR_TEMP_0/1 the player's cell on arrival; VAR_TEMP_2 the region;
+// VAR_TEMP_4 the flash level the map last set (0: the torch's own);
 // VAR_TEMP_3 is 0 when the webs need redrawing (a web's script sets it, ON_FRAME
 // redraws); VAR_TEMP_5/6/7 the barks at forks 1/2/3, once a visit.
 // Temp flags: FLAG_TEMP_1 hides Raknit, FLAG_TEMP_2 the hound that stays, FLAG_TEMP_3
@@ -80,6 +81,7 @@ script HecatesHollow_EventScript_SetUpCave {
             clearflag(FLAG_TEMP_2)
         }
     }
+    setvar(VAR_TEMP_4, 0)
     call(HecatesHollow_EventScript_FindRegion)
     return
 }
@@ -87,23 +89,32 @@ script HecatesHollow_EventScript_SetUpCave {
 // ---------------------------------------------------------------------------
 // The light (SYSTEMS.md §2): what each region does when the player arrives in it
 // (Light*, from ON_TRANSITION) or steps into it (Enter*, from its edge triggers).
+//
+// VAR_TEMP_4 is the flash level this map last set (HH_LIT or HH_SKYLIGHT), or 0 when
+// the engine's own torch level holds. ICHOR_STUB_DARKNESS: `animateflash` to the level
+// already set never ends (the flash task waits for a radius it has passed), so the map
+// only animates when the level changes, through FlashToLit and FlashToSkylight.
 // ---------------------------------------------------------------------------
 
 script HecatesHollow_EventScript_LightDaylightEast {
     setflashlevel(HH_LIT)
+    setvar(VAR_TEMP_4, HH_LIT)
     return
 }
 
 script HecatesHollow_EventScript_LightDaylightWest {
     setflashlevel(HH_LIT)
+    setvar(VAR_TEMP_4, HH_LIT)
     return
 }
 
 script HecatesHollow_EventScript_LightHekataion {
     if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
         setflashlevel(HH_LIT)
+        setvar(VAR_TEMP_4, HH_LIT)
     } else {
         setflashlevel(HH_SKYLIGHT)
+        setvar(VAR_TEMP_4, HH_SKYLIGHT)
     }
     return
 }
@@ -111,6 +122,7 @@ script HecatesHollow_EventScript_LightHekataion {
 script HecatesHollow_EventScript_LightBrazier1 {
     if (flag(HH_BRAZIER_1)) {
         setflashlevel(HH_LIT)
+        setvar(VAR_TEMP_4, HH_LIT)
     }
     return
 }
@@ -118,16 +130,60 @@ script HecatesHollow_EventScript_LightBrazier1 {
 script HecatesHollow_EventScript_LightBrazier2 {
     if (flag(HH_BRAZIER_2)) {
         setflashlevel(HH_LIT)
+        setvar(VAR_TEMP_4, HH_LIT)
     }
+    return
+}
+
+// Ease the light up to HH_LIT, unless it's there already: set by this map, or the
+// torch's own light at its brightest (vanilla Flash, or the Three-Flamed Torch with
+// Hecate's blessing on the player).
+script HecatesHollow_EventScript_FlashToLit {
+    if (var(VAR_TEMP_4) != HH_LIT) {
+        setvar(VAR_RESULT, FALSE)
+        if (flag(FLAG_SYS_USE_FLASH)) {
+            setvar(VAR_RESULT, TRUE)
+        } elif (flag(FLAG_ICHOR_GOT_HECATES_TORCH) && flag(FLAG_ICHOR_THREE_FLAMED_TORCH)) {
+            specialvar(VAR_RESULT, Ichor_GetBlessingGod)
+            if (var(VAR_RESULT) == ICHOR_GOD_HECATE) {
+                setvar(VAR_RESULT, TRUE)
+            } else {
+                setvar(VAR_RESULT, FALSE)
+            }
+        }
+        if (var(VAR_RESULT) == FALSE) {
+            animateflash(HH_LIT)
+        }
+    }
+    setflashlevel(HH_LIT)
+    setvar(VAR_TEMP_4, HH_LIT)
+    return
+}
+
+// Only before the Torch, so the light comes from the dark (flash 7) and grows.
+script HecatesHollow_EventScript_FlashToSkylight {
+    if (var(VAR_TEMP_4) != HH_SKYLIGHT) {
+        animateflash(HH_SKYLIGHT)
+    }
+    setflashlevel(HH_SKYLIGHT)
+    setvar(VAR_TEMP_4, HH_SKYLIGHT)
+    return
+}
+
+// Back to the torch's own light. The engine's Ichor_AnimateTorchFlash checks the level
+// itself, so it's safe whatever this map last set.
+script HecatesHollow_EventScript_FlashToTorch {
+    call(EventScript_IchorLeaveLitZone)
+    setvar(VAR_TEMP_4, 0)
     return
 }
 
 script HecatesHollow_EventScript_EnterDark {
     setvar(VAR_TEMP_2, 0)
-    if (!flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
+    if (!flag(FLAG_ICHOR_GOT_HECATES_TORCH) && var(VAR_TEMP_4) != 0) {
         goto(HecatesHollow_EventScript_ReloadInTheDark)
     }
-    call(EventScript_IchorLeaveLitZone)
+    call(HecatesHollow_EventScript_FlashToTorch)
     end
 }
 
@@ -144,15 +200,13 @@ script HecatesHollow_EventScript_ReloadInTheDark {
 
 script HecatesHollow_EventScript_EnterDaylightEast {
     setvar(VAR_TEMP_2, 1)
-    animateflash(HH_LIT)
-    setflashlevel(HH_LIT)
+    call(HecatesHollow_EventScript_FlashToLit)
     end
 }
 
 script HecatesHollow_EventScript_EnterDaylightWest {
     setvar(VAR_TEMP_2, 5)
-    animateflash(HH_LIT)
-    setflashlevel(HH_LIT)
+    call(HecatesHollow_EventScript_FlashToLit)
     end
 }
 
@@ -160,11 +214,9 @@ script HecatesHollow_EventScript_EnterDaylightWest {
 script HecatesHollow_EventScript_EnterHekataion {
     setvar(VAR_TEMP_2, 2)
     if (flag(FLAG_ICHOR_GOT_HECATES_TORCH)) {
-        animateflash(HH_LIT)
-        setflashlevel(HH_LIT)
+        call(HecatesHollow_EventScript_FlashToLit)
     } else {
-        animateflash(HH_SKYLIGHT)
-        setflashlevel(HH_SKYLIGHT)
+        call(HecatesHollow_EventScript_FlashToSkylight)
     }
     call(HecatesHollow_EventScript_HoundsFade)
     end
@@ -173,10 +225,9 @@ script HecatesHollow_EventScript_EnterHekataion {
 script HecatesHollow_EventScript_EnterBrazier1 {
     setvar(VAR_TEMP_2, 3)
     if (flag(HH_BRAZIER_1)) {
-        animateflash(HH_LIT)
-        setflashlevel(HH_LIT)
+        call(HecatesHollow_EventScript_FlashToLit)
     } else {
-        call(EventScript_IchorLeaveLitZone)
+        call(HecatesHollow_EventScript_FlashToTorch)
     }
     end
 }
@@ -184,10 +235,9 @@ script HecatesHollow_EventScript_EnterBrazier1 {
 script HecatesHollow_EventScript_EnterBrazier2 {
     setvar(VAR_TEMP_2, 4)
     if (flag(HH_BRAZIER_2)) {
-        animateflash(HH_LIT)
-        setflashlevel(HH_LIT)
+        call(HecatesHollow_EventScript_FlashToLit)
     } else {
-        call(EventScript_IchorLeaveLitZone)
+        call(HecatesHollow_EventScript_FlashToTorch)
     }
     end
 }
@@ -304,8 +354,7 @@ script HecatesHollow_EventScript_Hekataion {
     call(HecatesHollow_EventScript_LightTorchE)
     delay(30)
     call(HecatesHollow_EventScript_LightTorchS)
-    animateflash(HH_LIT)
-    setflashlevel(HH_LIT)
+    call(HecatesHollow_EventScript_FlashToLit)
     // Favor: the myth-quest and a loved offering for Hecate; Hestia's share of any offering
     setvar(VAR_0x8004, ICHOR_GOD_HECATE)
     setvar(VAR_0x8005, ICHOR_FAVOR_MYTH_QUEST + 5)
@@ -344,8 +393,9 @@ script HecatesHollow_EventScript_HoundsFade {
     msgbox(format("Black hounds sit at the pillar's feet."), MSGBOX_DEFAULT)
     closemessage
     applymovement(LOCALID_HOLLOW_HOUND_W, HecatesHollow_Movement_FadeWest)
+    waitmovement(LOCALID_HOLLOW_HOUND_W)
     applymovement(LOCALID_HOLLOW_HOUND_E, HecatesHollow_Movement_FadeEast)
-    waitmovement(0)
+    waitmovement(LOCALID_HOLLOW_HOUND_E)
     removeobject(LOCALID_HOLLOW_HOUND_W)
     removeobject(LOCALID_HOLLOW_HOUND_E)
     if (flag(FLAG_TEMP_2)) {
@@ -443,8 +493,7 @@ script HecatesHollow_EventScript_Brazier1 {
     if (var(VAR_RESULT) == TRUE) {
         call(HecatesHollow_EventScript_DrawBrazier1Lit)
         special(DrawWholeMapView)
-        animateflash(HH_LIT)
-        setflashlevel(HH_LIT)
+        call(HecatesHollow_EventScript_FlashToLit)
         msgbox(format("The brazier catches. Its light reaches every corner of the passage."), MSGBOX_DEFAULT)
     }
     releaseall
@@ -457,8 +506,7 @@ script HecatesHollow_EventScript_Brazier2 {
     if (var(VAR_RESULT) == TRUE) {
         call(HecatesHollow_EventScript_DrawBrazier2Lit)
         special(DrawWholeMapView)
-        animateflash(HH_LIT)
-        setflashlevel(HH_LIT)
+        call(HecatesHollow_EventScript_FlashToLit)
         msgbox(format("The brazier catches. Its light reaches every corner of the passage."), MSGBOX_DEFAULT)
     }
     releaseall

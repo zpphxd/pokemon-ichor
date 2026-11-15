@@ -233,6 +233,8 @@ def carve():
         # fork 3's pillars
         # pass 2: break up the straight walls the bands left
         (23, 20): ".", (26, 20): ".", (20, 20): ".", (10, 5): ".", (3, 7): ".",
+        # Hekabe's alcove over the waist: she steps down to the player and the waist stays open
+        (8, 12): ".", (8, 13): ".",
         # the shortcut tunnel's walls: a bend and a pinch, so the long shaft reads
         (42, 13): ".", (42, 14): ".", (39, 12): ".", (39, 13): ".",
         # the loop's pillar at fork 1
@@ -366,15 +368,17 @@ def build_ids_and_walk(state="cold"):
 
 def blockdata(ids, walk):
     """map.bin cells: metatile | collision << 10 | elevation << 12. As on Route 1,
-    open ground is elevation 3; rock, solid pieces and ledges are collision 1 at 0."""
+    open ground is elevation 3; rock, solid pieces and ledges are collision 1 at 0.
+    A web's cells are open ground under its two objects: the objects block the way
+    until the web burns, so the cells never need their collision changed."""
     out = np.zeros((H, W), np.uint16)
     webs = {(x, y + j) for x, y in WEBS.values() for j in (0, 1)}
     for y in range(H):
         for x in range(W):
-            if walk[y, x]:
+            if walk[y, x] or (x, y) in webs:
                 out[y, x] = (int(ids[y, x]) & 0x3FF) | (3 << 12)
-            else:   # a web's cells keep the ground's elevation, for when they burn
-                out[y, x] = (int(ids[y, x]) & 0x3FF) | (1 << 10) | ((3 << 12) if (x, y) in webs else 0)
+            else:
+                out[y, x] = (int(ids[y, x]) & 0x3FF) | (1 << 10)
     return out
 
 
@@ -452,7 +456,7 @@ NIGHT_HOUNDS = {"HOUND": (24, 9), "HOUND_W": (23, 7), "HOUND_E": (27, 7)}
 # local id, gfx, x, y, movement, trainer (sight or 0), script, hide flag
 OBJECTS = [
     ("OLD_WOMAN", GFX + "ELDER_F", 40, 33, "FACE_RIGHT", 0, "OldWoman", "0"),
-    ("HEKABE", GFX + "PILGRIM", 6, 14, "FACE_RIGHT", 3, "Hekabe", "0"),
+    ("HEKABE", GFX + "PILGRIM", 8, 12, "FACE_DOWN", 2, "Hekabe", "0"),
     ("KALLIAS", GFX + "ACOLYTE_M", 8, 34, "FACE_UP", 2, "Kallias", "0"),       # ICHOR_STUB_SPRITE: an initiate
     ("PHAINO", GFX + "PILGRIM", 16, 23, "FACE_DOWN", 2, "Phaino", "0"),
     ("BATTOS", GFX + "GOATHERD", 3, 25, "FACE_LEFT", 2, "Battos", "0"),
@@ -462,16 +466,19 @@ OBJECTS = [
     ("RAKNIT", "OBJ_EVENT_GFX_SPECIES(RAKNIT)", 7, 4, "FACE_DOWN", 0, "Raknit", "FLAG_TEMP_1"),
 ]
 # The cobwebs: two invisible objects each, on the web's two cells, sharing its flag.
+# The web you see is the metatile under them. Their graphics are the thorn thicket's
+# (ENGINE_API.md §2: "any; a web sprite is coming"), which map_audit.py also reads as
+# a relic obstacle; the breakable rock's would ask for a rock-smash table.
 for _name, (_x, _y) in WEBS.items():
     for _k in (0, 1):
-        OBJECTS.append((f"WEB_{_name.upper()}_{_k + 1}", "OBJ_EVENT_GFX_BREAKABLE_ROCK", _x, _y + _k, "INVISIBLE", 0,
+        OBJECTS.append((f"WEB_{_name.upper()}_{_k + 1}", "OBJ_EVENT_GFX_CUTTABLE_TREE", _x, _y + _k, "INVISIBLE", 0,
                         "Web", WEB_FLAG[_name]))
 # Items: (item, x, y, flag)
 ITEMS = [
     ("ITEM_RELIC_COPPER", 14, 22, "FLAG_ICHOR_ITEM_HOLLOW_BRONZE_OBOL"),    # the Bronze Obol (ICHOR_STUB_COINS)
     ("ITEM_SILK_SCARF", 4, 5, "FLAG_ICHOR_ITEM_HOLLOW_SILK_SCARF"),
     ("ITEM_ETHER", 8, 23, "FLAG_ICHOR_ITEM_HOLLOW_ETHER"),
-    ("ITEM_DUSK_BALL", 40, 18, "FLAG_ICHOR_ITEM_HOLLOW_DUSK_BALL"),
+    ("ITEM_DUSK_BALL", 38, 19, "FLAG_ICHOR_ITEM_HOLLOW_DUSK_BALL"),    # below the ledge, clear of its landing
     ("ITEM_REVIVE", 12, 35, "FLAG_ICHOR_ITEM_HOLLOW_REVIVE"),
 ]
 HIDDEN = [
@@ -551,7 +558,10 @@ def write_events(walk):
     for cells, var, way in BARKS:
         coords += [{"type": "trigger", "x": x, "y": y, "elevation": 0, "var": var, "var_value": "0",
                     "script": PX + "Bark" + way} for x, y in cells]
+    standing = {(o["x"], o["y"]) for o in objs if o["movement_type"] != "MOVEMENT_TYPE_INVISIBLE"}
     for x, y, frm, to in region_triggers(walk):
+        if (x, y) in standing:          # nobody steps where someone stands
+            continue
         coords.append({"type": "trigger", "x": x, "y": y, "elevation": 0, "var": "VAR_TEMP_2",
                        "var_value": str(frm), "script": PX + "Enter" + REGION_NAME[to]})
     m["coord_events"] = coords
@@ -763,7 +773,8 @@ def check(m, cold, lit):
         errors.append("the shortcut's ledge can be climbed from below")
     # Hekabe: her sight cuts the only way west
     hek = next(o for o in m["object_events"] if o.get("local_id") == "LOCALID_HOLLOW_HEKABE")
-    sight = {(hek["x"] + k, hek["y"]) for k in range(0, int(hek["trainer_sight_or_berry_tree_id"]) + 1)}
+    dx, dy = {"DOWN": (0, 1), "UP": (0, -1), "LEFT": (-1, 0), "RIGHT": (1, 0)}[hek["movement_type"].split("_")[-1]]
+    sight = {(hek["x"] + dx * k, hek["y"] + dy * k) for k in range(0, int(hek["trainer_sight_or_berry_tree_id"]) + 1)}
     if west in reach(walk_lit, (13, 13), frozenset(sight)):
         errors.append("the road west gets past Hekabe without crossing her sight")
     # people, items and signs
@@ -825,6 +836,9 @@ def sprite(gfx, facing):
     if gfx.startswith("OBJ_EVENT_GFX_SPECIES("):
         species = {"LYKOPUP": "poochyena", "RAKNIT": "spinarak"}[gfx[len("OBJ_EVENT_GFX_SPECIES("):-1]]
         sheet = Image.open(ROOT / f"graphics/pokemon/{species}/overworld.png")
+        # the game draws it with its own palette file, not the PNG's
+        vals = (ROOT / f"graphics/pokemon/{species}/overworld_normal.pal").read_text().split()[3:]
+        sheet.putpalette([int(v) for v in vals[:48]])
         w = h = 32
     elif gfx == "OBJ_EVENT_GFX_ITEM_BALL":
         sheet = Image.open(ROOT / "graphics/object_events/pics/misc/ichor_item_jar.png")

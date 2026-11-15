@@ -94,15 +94,19 @@ arrival cell.
 | hall 2 | 4 | lit once brazier 2 (`+ 0x15`) burns |
 | the west mouth's daylight | 5 | lit |
 
-**Lit is flash 1, not 0** (`ICHOR_STUB_DARKNESS`). In game the engine's flash 0 never
-lets the dark come back: `AnimateFlash` to 0 ends with `ScanlineEffect_Stop`, and a
-map loaded at flash 0 never starts the scanline effect, so the window that draws the
-dark stays fully open until the next map load (found by `hollow.sh`'s first run: the
-cave entered from its daylit mouth was fully lit throughout). Until the engine
-restarts the effect when the light shrinks, every lit place here is flash 1 (four and a
-half tiles), the braziers are lit with `VAR_0x8005 = FALSE` and the map sets its own
-flash after, and `HH_LIT` is the one constant to change back. The Telesterion's lit
-quarters (`temple_demeter`) have the same problem.
+**Working round the flash effect** (`ICHOR_STUB_DARKNESS`; BUILD.md lists the three
+limits for the engine session). The engine's flash 0 never lets the dark come back,
+the light can grow but not shrink, and animating to the level already set softlocks.
+So:
+- every lit place here is flash 1, four and a half tiles (`HH_LIT`, the one constant
+  to set back to 0); the braziers are lit with `VAR_0x8005 = FALSE` and the map
+  brightens the hall itself;
+- the map keeps the level it last set in `VAR_TEMP_4` and animates only when the
+  level changes (`FlashToLit`, `FlashToSkylight`, `FlashToTorch`);
+- before the Torch, stepping from a lit place back into the dark reloads the map on
+  that cell (`ReloadInTheDark`): a blink, and the dark closes in. With the Torch the
+  difference is 72 px against 56, so the light stays wide until the next load or
+  battle.
 
 ## People, items and flags
 
@@ -110,7 +114,7 @@ quarters (`temple_demeter`) have the same problem.
 |---|---|---|
 | OLD WOMAN | (40, 33), the edge of the east daylight | beat 18's warning once (`FLAG_ICHOR_MET_HOLLOW_CRONE`), then the dog; after the Torch, two new lines |
 | PILGRIM PHAINO (102) | (16, 23), fork 2's dead end | optional, in the dark, sight 2; Onotis 18, Galekit 19 |
-| PILGRIM HEKABE (100) | (6, 14), by brazier 1 | mandatory: sight 3 east covers the waist; Galekit 19, Gelasable 20; then a Barley Cake (`FLAG_ICHOR_GOT_HEKABE_SUPPER`) |
+| PILGRIM HEKABE (100) | (8, 12), in an alcove over the waist, by brazier 1 | mandatory: sight 2 down covers the one-tile waist, and she steps into her alcove, not the waist, to battle; Galekit 19, Gelasable 20; then a Barley Cake (`FLAG_ICHOR_GOT_HEKABE_SUPPER`) |
 | INITIATE KALLIAS (101) | (8, 34), Kallias's pocket | optional, sight 2 up the pocket's mouth; Pebblith 20, Onotis 20; an Acolyte until the initiate is drawn (`ICHOR_STUB_SPRITE`) |
 | GOATHERD BATTOS (103) | (3, 25), the west mouth's daylight | optional, faces out of the cave; Pebblith 19, Kerazap 20 |
 | the black hounds | (24, 9), (23, 7), (27, 7) | after 20:00: two fade into the rock as the player enters the Hekataion; the third is Lykopup, Lv 20 (`FLAG_ICHOR_HECATES_HOUND`) |
@@ -130,7 +134,7 @@ are optional and stand on side ways, so the bible's two remain the cave's story.
 | Silk Scarf | visible | the web chamber (4, 5) | `FLAG_ICHOR_ITEM_HOLLOW_SILK_SCARF` |
 | Ether | visible | by brazier 2 (8, 23) | `FLAG_ICHOR_ITEM_HOLLOW_ETHER` |
 | Revive | visible | Kallias's pocket (12, 35) | `FLAG_ICHOR_ITEM_HOLLOW_REVIVE` |
-| Dusk Ball | visible | the shortcut, at the ledge's foot (40, 18) | `FLAG_ICHOR_ITEM_HOLLOW_DUSK_BALL` |
+| Dusk Ball | visible | the shortcut, below the ledge (38, 19) | `FLAG_ICHOR_ITEM_HOLLOW_DUSK_BALL` |
 | Hard Stone | hidden | the shortcut tunnel (38, 22) | `FLAG_ICHOR_HIDDEN_HOLLOW_HARD_STONE` (0x2B3) |
 
 The webs' hide flags: `FLAG_ICHOR_HIDE_HOLLOW_WEB_WEST`, `_CHAMBER`, `_SHORTCUT`. Each
@@ -161,3 +165,104 @@ Cairnolith (it evolves at 25) and keeps Gelasable (at 20) to level 20 only.
 Statics: Lykopup Lv 20 at night, Raknit Lv 20 in the web chamber (BUILD.md's rulings).
 
 ## Render-and-critique passes
+
+Each pass rendered the whole cave lit, cold and dark at 2x, plus eight 15×10 screens
+along the road (`--render`), looked at them at full size, and (from pass 2) played the
+cave in `hollow.sh` and looked at its screenshots.
+
+### Pass 1: the first layout
+
+- The first grid was hand-drawn, and it read as a maze of rectangles: straight walls,
+  boxy fork rooms, corridors of one width. The terrain is now carved from shapes
+  (chambers as ellipses whose radius wavers, passages as bands), then roughened: a
+  rock cell on a straight wall opens where a slow noise runs high, but only if two
+  cells of rock stay behind it, so passages never merge and every wall keeps its
+  two-cell face.
+- Fork 3 was two identical square pillars in a rectangular hall. It's now a round
+  junction under the Hekataion with narrow loops round two uneven masses.
+- Scatter stood on rock (a stalagmite drawn over the wall at the east mouth, others).
+  The builder now checks that every piece stands on floor and every face piece (the
+  niches, the chalk wheel, the seep) sits on a face.
+- The checker found that the burnt webs stayed solid (the whole west half unreachable
+  after burning), that a brazier cell could never be faced, and that a rock row one
+  cell thick between two passages drew as half a wall. All fixed; the thin-rock rule
+  is now a check.
+
+### Pass 2: the dark road, and the first time in game
+
+- The fork rooms were bare in the dark. Each junction now has Hecate's chalk triangle
+  (her sign for the crossroads) and an arrow the right way; fork 1's hall a fallen
+  slab; fork 2's dead end a niche whose supper someone ate (Phaino's story). Bones
+  read as a glyph at this size, so they stay only by Hecate's niche and in the web
+  chamber.
+- In game the cave wasn't dark at all. Entered from its daylit mouth at flash 0, the
+  engine never starts the flash effect, and the whole cave stayed lit. Lit places are
+  now flash 1 (`HH_LIT`).
+- Then the light wouldn't shrink: stepping from the daylight (flash 1) into the dark
+  left four and a half tiles of light on the dark road. The engine's flash task only
+  grows the light. Without the Torch, stepping from a lit place into the dark now
+  reloads the map on that cell (`ReloadInTheDark`), which draws the dark afresh: a
+  blink, and the dark closes in. With the Torch the gap is 72 px against 56, and the
+  map lets it be. Both limits are reported to the engine session (BUILD.md).
+- The test's lead lost to Phaino: a level-100 Pokémon with no badges disobeys. The
+  test now gives it the eighth badge, as `emporion.lua` does, and Surf as its move.
+
+### Pass 3: walking the second half
+
+- Hekabe stood in line with the one-tile waist, so after her battle she stood in it
+  and the way west was shut until the map reloaded. She now waits in an alcove over
+  the waist and steps into the alcove, not the waist, to battle.
+- Walking from hall 2's lit brazier into the west mouth's daylight froze the game,
+  the light narrowing to a strip: `animateflash` to the level already set never ends
+  (the flash task waits for a radius it has already passed). The map now keeps the
+  level it last set in `VAR_TEMP_4` and only animates when the level changes.
+- The spring had two events on one cell, the side's and the front's; the game reads
+  only the first and refuses it if the facing is wrong, so pressing A there did
+  nothing. One event to a cell now, and the builder checks it.
+- The fading hounds were moved together and waited on as one; the second sometimes
+  stayed. They now fade one after the other.
+- The Dusk Ball sat on the ledge's landing cell, where it blocked the jump on that
+  column. It now sits below the ledge, clear of it.
+- The webs' invisible objects used the breakable rock's graphics, which
+  `map_audit.py` counts as rocks wanting a rock-smash table, and their cells were
+  solid in the map, so the audit couldn't reach the web chamber. The objects now use
+  the thorn thicket's graphics and the web cells are open ground under them: the
+  objects block the way until the web burns.
+
+## The audit
+
+`map_audit.py` (MAP_DESIGN §8) classes the Hollow as a one-floor dungeon:
+
+```text
+HecatesHollow  [dungeon, Eleusa, early]
+  48x40 = 12.8 screens; grass 0 (0/screen, 0%); trainers 4; items 5 + 4 hidden; signs 18; NPCs 5; wild: land MDN (6/5/5 spp), Lv 17–20
+
+1 map(s): 0 hard shortfall(s) in 0 map(s), 0 warning(s)
+```
+
+## In game
+
+`tools/ichor/tests/hollow.sh` plays the cave with key presses from a quickstart, by day
+(it sets the clock), and passes 71 checks: in at the east mouth's daylight; the old
+woman; the dark road at flash 7 and its three barks; fork 1's Escape Rope, fork 2's
+Bronze Obol and Phaino, fork 3's Stardust; the Hekataion's faint light, the west web
+refusing without fire, the offering refused and then made, the Torch, the torches
+lit and the middle one gone, the spring's heal, Hecate's altar, the niche's Honey;
+the west web burnt and torn, the Torch's light (with the prayer's blessing, flash 2),
+Hekabe at the waist and her Barley Cake, brazier 1 and its lit hall, the web
+chamber's web, Silk Scarf and pictures, Raknit absent and then present once the
+Arachne amphora is set, and beaten; brazier 2, the Ether, the Revive, Kallias, Battos,
+the west mouth's daylight; back east by the shortcut's web and ledge to the Dusk Ball
+and the Hard Stone; the old woman after the Torch; a wild Chelonet (Lv 19) from the
+day table; the hounds at 22:00, two fading and the third beaten; and out of the west
+mouth (to the east mouth, until Route 5 is merged). `tools/ichor/smoke_test.sh` passes.
+
+[`img/hecates_hollow_ingame.png`](img/hecates_hollow_ingame.png) has eighteen of its
+screenshots: the daylit mouth; the dark road at a tile and a half; two barks; the
+Hekataion's faint light and the offering; the torches lit; the road west by torchlight;
+Hekabe's battle; her hall lit, with her in her alcove; the web chamber's web; Raknit;
+hall 2 lit; Battos; the west mouth; the shortcut's web; a wild Pokémon in the dark;
+and the hound that stays.
+
+Every line of text measures inside the field box (`text_width.py --scan` on the
+compiled `scripts.inc`: 0 lines over 216 px); the name boxes are 36–51 px.
