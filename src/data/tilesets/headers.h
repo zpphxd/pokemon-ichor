@@ -430,3 +430,19 @@ const struct Tileset gTileset_TempleHermes =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary built by tools/ichor/art/pontos_build.py: the Black
+// Sea's coasts and towns (the Bosporus, Salmydessos, the Pontic Coast, Aia). Its
+// own art uses palettes 6-11; palette 12 is the Pontic sea, aethos's animated water
+// recolored dark green, so cells on sea, grass, sand and path borrow aethos's
+// metatiles. Rebuild it whenever aethos changes.
+const struct Tileset gTileset_Pontos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Pontos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Pontos,
+    .metatiles = gMetatiles_PorytilesManaged_Pontos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Pontos,
+    .callback = NULL,
+};

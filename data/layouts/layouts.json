@@ -818,10 +818,10 @@
     {
       "id": "LAYOUT_BOSPORUS",
       "name": "Bosporus_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 56,
+      "height": 34,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Pontos",
       "border_filepath": "data/layouts/Bosporus/border.bin",
       "blockdata_filepath": "data/layouts/Bosporus/map.bin",
       "layout_version": "emerald"
@@ -830,9 +830,9 @@
       "id": "LAYOUT_SALMYDESSOS",
       "name": "Salmydessos_Layout",
       "width": 28,
-      "height": 28,
+      "height": 24,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Pontos",
       "border_filepath": "data/layouts/Salmydessos/border.bin",
       "blockdata_filepath": "data/layouts/Salmydessos/map.bin",
       "layout_version": "emerald"
@@ -840,10 +840,10 @@
     {
       "id": "LAYOUT_PONTIC_COAST",
       "name": "PonticCoast_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 80,
+      "height": 40,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Pontos",
       "border_filepath": "data/layouts/PonticCoast/border.bin",
       "blockdata_filepath": "data/layouts/PonticCoast/map.bin",
       "layout_version": "emerald"
@@ -851,10 +851,10 @@
     {
       "id": "LAYOUT_AIA",
       "name": "Aia_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 44,
+      "height": 36,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Pontos",
       "border_filepath": "data/layouts/Aia/border.bin",
       "blockdata_filepath": "data/layouts/Aia/map.bin",
       "layout_version": "emerald"
