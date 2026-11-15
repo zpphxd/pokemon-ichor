@@ -17,7 +17,7 @@
   "object_events": [
     {
       "local_id": "LOCALID_EUDORA_HOUSE_EUDORA",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN_THYRSA",
       "x": 2,
       "y": 7,
       "elevation": 3,

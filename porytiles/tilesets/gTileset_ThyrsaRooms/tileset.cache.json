@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/metatile_attributes.bin": "b7ae4061df41e0b5c2f009750670a0fb",
-  "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/metatiles.bin": "7e8f9dbcec30e7a2fdce384112d6fdc6",
+  "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/metatile_attributes.bin": "a480a61d5f88c2b2fd7988d7edd013f7",
+  "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/metatiles.bin": "b04a7d3b41bebe25e0824d80ac92a0ba",
   "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/tiles.png": "25c3882e81117d70f9dab814cb36168a",
-  "data/tilesets/secondary/thyrsa_rooms/porytiles_src/attributes.csv": "4623b8b692224428e5f939f777b4c029",
-  "data/tilesets/secondary/thyrsa_rooms/porytiles_src/bottom.png": "371b29ab20b8454f5fba13d6e141a887",
-  "data/tilesets/secondary/thyrsa_rooms/porytiles_src/middle.png": "8458f1f0b713d1e75778007ddb26517c",
-  "data/tilesets/secondary/thyrsa_rooms/porytiles_src/top.png": "fd5afe97a777380e41f767d830008d08"
+  "data/tilesets/secondary/thyrsa_rooms/porytiles_bin/tiles.png": "b62cede0d5c1da4bcf03470390eeb396",
+  "data/tilesets/secondary/thyrsa_rooms/porytiles_src/attributes.csv": "2dc0446a62783426272ca5fbd75734b7",
+  "data/tilesets/secondary/thyrsa_rooms/porytiles_src/bottom.png": "e434cdf935226e1be6726dbe90ac33b3",
+  "data/tilesets/secondary/thyrsa_rooms/porytiles_src/middle.png": "884532259d40189c58a43611367fe53c",
+  "data/tilesets/secondary/thyrsa_rooms/porytiles_src/top.png": "b69656a9c98833fab1136fb5028d24e6"
 }

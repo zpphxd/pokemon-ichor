@@ -31,7 +31,7 @@
     },
     {
       "local_id": "LOCALID_THYRSA_AGORA_WINE",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_VINTNER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER_THYRSA",
       "x": 4,
       "y": 2,
       "elevation": 3,
@@ -58,7 +58,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
-      "x": 9,
+      "x": 6,
       "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",

@@ -17,7 +17,7 @@
   "object_events": [
     {
       "local_id": "LOCALID_MASK_WORKSHOP_EUTHYKLES",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA",
       "x": 10,
       "y": 4,
       "elevation": 3,

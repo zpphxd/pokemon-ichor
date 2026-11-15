@@ -698,3 +698,39 @@ kzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk
 kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 ...kzk....................kzk...
 """)], note="a shelf of bronze Corinthian helmets, the captain's with its red crest")
+
+
+# ---- pass 2 (render critique): bigger garlands, cages, a grape basket ------
+
+def _wreath(g, cx, cy, r, berries):
+    import math as _m
+    for a in range(0, 360, 12):
+        t = _m.radians(a)
+        x, y = int(round(cx + r * _m.cos(t))), int(round(cy + r * _m.sin(t)))
+        for (dx, dy, c) in ((0, 0, "g"), (1, 0, "G"), (0, 1, "v" if a < 180 else "G")):
+            if 0 <= y + dy < len(g) and 0 <= x + dx < len(g[0]):
+                g[y + dy][x + dx] = c
+    for a in range(0, 360, 45):
+        t = _m.radians(a + 20)
+        x, y = int(round(cx + (r + 1) * _m.cos(t))), int(round(cy + (r + 1) * _m.sin(t)))
+        if 0 <= y < len(g) and 0 <= x < len(g[0]):
+            g[y][x] = "V"
+    for (bx, by) in berries:
+        g[by][bx] = "p"
+
+
+def _garlands():
+    g = [["."] * 16 for _ in range(32)]
+    for y in range(4, 9):                       # the cord from the beam
+        g[y][7] = "K"
+        g[y][8] = "k"
+    _wreath(g, 7.5, 14.0, 5.0, [(5, 18), (10, 18)])
+    _wreath(g, 7.5, 25.0, 4.0, [(6, 28)])
+    for y in (20, 21):
+        g[y][7] = "K"
+    return "\n".join("".join(r) for r in g)
+
+
+del STAMPS["garlands"]
+stamp("garlands", 1, 2, art=[("nature", _garlands())],
+      note="ivy wreaths drying, one under another, hung from the beam")

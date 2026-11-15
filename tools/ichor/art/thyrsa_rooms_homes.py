@@ -185,22 +185,39 @@ stamp("stairs_down_s", 2, 1, flat=[("wood", _stairs_down_s())], walk={(0, 0), (1
 
 
 def _cage(bird):
-    """A wicker birdcage hanging from the beam on a cord, its door open: top layer."""
+    """A wicker birdcage hung from the beam on a cord, its door swung open: a
+    domed cage of withies, drawn on the top layer so walkers pass under it."""
     g = _canvas(16, 16)
-    for y in range(0, 4):
-        _put(g, 8, y, "K")
-    _paste(g, ["....kkkkkk....", "..kkJjJjJJkk..", ".kJ.j..j..jJk.", ".kj.j..j..jjk.", ".kJ.j..j..j.k.",
-               ".kj.j..j..j.k.", ".kJ.j..j..j.k.", ".kkkkkkkkkkkk.", "..kKKKKKKKKk.."], 1, 4)
-    # the open door, swung aside
-    _paste(g, ["k", "J", "j", "J", "k"], 13, 7)
-    for (x, y) in ((11, 7), (11, 8), (11, 9), (11, 10)):
-        _put(g, x, y, ".")
+    art = ["......kk......",
+           ".....kJJk.....",
+           "....kkkkkk....",
+           "..kkJJjJJjkk..",
+           ".kJjJkJjkJjJk.",
+           "kJjk.j..j.kjJk",
+           "kjJ.kj..jk.Jjk",
+           "kJj.Kj..jK.jJk",
+           "kjJ.kj..jk.Jjk",
+           "kJj.Kj..jK.jJk",
+           "kjJ.kj..jk.Jjk",
+           "kkkkkkkkkkkkkk",
+           "kJjJjJjJjJjJjk",
+           ".kKKKKKKKKKKk."]
+    _paste(g, art, 1, 2)
+    _put(g, 7, 0, "K")
+    _put(g, 8, 0, "k")
+    _put(g, 7, 1, "K")
+    _put(g, 8, 1, "k")
+    # the door, open: a gap in the front bars and the little door hanging aside
+    for y in range(8, 13):
+        _put(g, 7, y, ".")
+        _put(g, 8, y, ".")
+    _paste(g, ["k", "J", "j", "J", "j", "k"], 15, 7)
     if bird == "inside":
-        _paste(g, [".kk.", "kSSk", "kSSSk", ".kkk"], 5, 8)
-        _put(g, 5, 9, "J")
+        _paste(g, [".kk..", "kSSk.", "kSSSk", ".kkkk"], 6, 9)
+        _put(g, 9, 9, "J")
     elif bird == "roof":
-        _paste(g, ["..kk...", ".kwwk..", "kwwwwkk", ".kkkk.."], 4, 1)
-        _put(g, 3, 2, "J")
+        _paste(g, ["..kk...", ".kwwk..", "kwwwwkk", ".kkkk.."], 8, 0)
+        _put(g, 7, 1, "J")
     return _text(g)
 
 
@@ -908,3 +925,23 @@ kSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSk
 kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 ................................
 """)], note="five little clay men, armed, on a stone shelf: the five who were left standing")
+
+
+stamp("grape_basket", 1, 1, art=[("nature", """
+................
+....kk..........
+...kpPk.kkk.....
+..kpPsPkpPPk....
+..kPpPPkPsPk....
+.kpPsPpPPPpPkk..
+.kPpPPpPsPpPpk..
+kKkkkkkkkkkkkkk.
+kjJjJjJjJjJjJjk.
+kJjKjJjKjJjKjJk.
+kjJjJjJjJjJjJjk.
+kJjKjJjKjJjKjJk.
+.kjJjJjJjJjJjk..
+..kKKKKKKKKKk...
+...kkkkkkkkk....
+................
+""")], note="a wicker basket heaped with black grapes, picked this morning")

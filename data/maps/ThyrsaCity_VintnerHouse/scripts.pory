@@ -4,7 +4,8 @@
 // Treading the grapes, once a day: say YES and climb onto the treading floor, (5..8, 3..4).
 // VAR_TEMP_2 is 1 while you tread; each step onto a floor cell runs TreadStep (coord
 // events), which counts in VAR_TEMP_1. Thirty steps fill the vat. Stepping off the floor
-// onto any cell round it (TreadOff) ends it early, once you've trodden at all.
+// onto any cell round it (TreadOff) ends it early, once you've trodden at all; talk to
+// Staphylos again to start over.
 // ICHOR_STUB_OFFERINGS: the two jars of Wine wait for the item.
 // ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
 
@@ -78,7 +79,6 @@ script ThyrsaCity_VintnerHouse_EventScript_TreadOff {
     setspeaker(ThyrsaCity_VintnerHouse_Name_Staphylos)
     msgbox(format("Half a vat! Half a wine. Back up, back up!"))
     setvar(VAR_TEMP_1, 0)
-    setvar(VAR_TEMP_2, 1)
     releaseall
     end
 }

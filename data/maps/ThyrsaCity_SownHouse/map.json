@@ -17,7 +17,7 @@
   "object_events": [
     {
       "local_id": "LOCALID_SOWN_HOUSE_CHTHONIA",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MOM_THYRSA",
       "x": 5,
       "y": 3,
       "elevation": 3,
@@ -31,7 +31,7 @@
     },
     {
       "local_id": "LOCALID_SOWN_HOUSE_UDAIOS",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA",
       "x": 6,
       "y": 4,
       "elevation": 3,
