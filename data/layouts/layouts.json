@@ -9800,8 +9800,8 @@
     {
       "id": "LAYOUT_KYTHERA_NERAIDA_FALLS",
       "name": "KytheraNeraidaFalls_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 30,
+      "height": 44,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Neraida",
       "border_filepath": "data/layouts/KytheraNeraidaFalls/border.bin",

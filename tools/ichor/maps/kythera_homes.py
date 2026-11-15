@@ -99,6 +99,16 @@ DOORS = {
     "Melos_Farmhouse": 0,
     "Melos_KnappersHouse": 1,
     "Melos_Boathouse": 2,
+    # MAP_KYTHERA_PAPHIA's warps (tools/ichor/maps/kythera_paphia.py; 0 is the temple)
+    "KytheraPaphia_Asclepeion": 1,
+    "KytheraPaphia_Agora": 2,
+    "KytheraPaphia_PygmalionsWorkshop": 3,
+    "KytheraPaphia_Dovecote": 4,
+    "KytheraPaphia_MirrorHouse": 5,
+    "KytheraPaphia_OrchardHouse": 6,
+    "KytheraPaphia_PottersHouse": 7,
+    # MAP_KYTHERA_NERAIDA_FALLS's warps (tools/ichor/maps/kythera_neraida.py)
+    "KytheraNeraidaFalls_Mill": 0,
 }
 
 GROUPS = {

@@ -47,14 +47,14 @@
       "x": 5,
       "y": 9,
       "elevation": 0,
-      "dest_map": "MAP_AKTI_TOWN",
+      "dest_map": "MAP_KYTHERA_NERAIDA_FALLS",
       "dest_warp_id": "0"
     },
     {
       "x": 6,
       "y": 9,
       "elevation": 0,
-      "dest_map": "MAP_AKTI_TOWN",
+      "dest_map": "MAP_KYTHERA_NERAIDA_FALLS",
       "dest_warp_id": "0"
     }
   ],

@@ -391,8 +391,8 @@
     {
       "id": "HEAL_LOCATION_KYTHERA_PAPHIA",
       "map": "MAP_KYTHERA_PAPHIA",
-      "x": 0,
-      "y": 0,
+      "x": 38,
+      "y": 17,
       "respawn_map": "MAP_KYTHERA_PAPHIA_ASCLEPEION",
       "respawn_npc": "LOCALID_PAPHIA_HEALER"
     }

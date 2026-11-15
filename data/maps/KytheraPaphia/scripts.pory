@@ -1,1 +1,234 @@
-mapscripts KytheraPaphia_MapScripts {}
+// Paphia, the temple town (design/phase4/SCRIPT.md Part 2, beats III-1D2 and III-1F).
+// Layout and events: tools/ichor/maps/kythera_paphia.py (44 x 34). The east
+// gate from the Foam Road opens onto the square (the Asclepeion, the Agora, the
+// gate herm); the street runs west to the great stair, which climbs to the
+// Temple of Aphrodite; the jetty stair drops to the bay by the mirror-house;
+// the north gate leads through the orchard to the Neraida falls.
+//
+// Warps, in order: 0 the temple, 1 the Asclepeion, 2 the Agora, 3 Pygmalion's
+// workshop, 4 the dovecote, 5 the mirror-house, 6 the orchard house, 7 the
+// potter's house (tools/ichor/maps/kythera_homes.py's DOORS).
+//
+// Hidden items (not placed yet; they need vanilla flags): an Ultra Ball behind
+// the dovecote (26,10), and a Pearl under the mirror by the jetty (11,19).
+// Music: MUS_ICHOR_AKTI stands in for MUS_ICHOR_KYTHERA; Hermes's reveal has no
+// MUS_ICHOR_THEOXENIA sting yet.
+
+mapscripts KytheraPaphia_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_0, 0)
+        // III-1F: Alethea waits on the jetty once she has come ahead along the road.
+        if (!flag(FLAG_ICHOR_ALETHEA_SAILED_KNOSSA)
+            && (flag(FLAG_ICHOR_SAW_KALLIRHOE) || flag(FLAG_ICHOR_ALETHEA_REJOINED))) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_PAPHIA)
+            setvar(VAR_TEMP_0, 1)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_PAPHIA)
+        }
+        // III-1D2: the messenger waits at the gate herm while he has your Talaria.
+        if (flag(FLAG_ICHOR_TALARIA_LENT)) {
+            clearflag(FLAG_ICHOR_HIDE_HERMES_PAPHIA)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_HERMES_PAPHIA)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_ALETHEA_SAILED_KNOSSA)) {
+            call(KytheraPaphia_EventScript_DrawBoatGone)
+        }
+    }
+}
+
+text KytheraPaphia_Text_NameAlethea { "ALETHEA" }
+text KytheraPaphia_Text_NameMessenger { "MESSENGER" }
+text KytheraPaphia_Text_NameHermes { "HERMES" }
+text KytheraPaphia_Text_NameGatekeeper { "GATEKEEPER" }
+text KytheraPaphia_Text_NameGirl { "GIRL" }
+text KytheraPaphia_Text_NameOldMan { "OLD MAN" }
+
+// ---------------------------------------------------------------------------
+// Signs and things to read
+// ---------------------------------------------------------------------------
+
+script KytheraPaphia_EventScript_TempleStairSign {
+    msgbox(format("THE TEMPLE OF APHRODITE. Hierophant: Galatea, the Living Marble.\p"
+                  "Pilgrims are asked not to stare at the statues. They notice."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_EventScript_SignFalls {
+    msgbox(format("NORTH: THE NERAIDA FALLS.\nThe Naiads' shrine."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_EventScript_GateHerm {
+    msgbox(format("A plain herm by the gate. Somebody has hung a dove's feather on its nose."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_EventScript_JettyMirror {
+    msgbox(format("A bronze mirror by the door. A face looks back at you, smiling. It's yours."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_EventScript_OrchardMirror {
+    msgbox(format("A polished bronze mirror hangs by the door, in case the goddess calls."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_EventScript_Niche {
+    msgbox(format("A little marble foot stands in the niche. Somebody's offering, for a sore one."), MSGBOX_SIGN)
+}
+
+script KytheraPaphia_EventScript_Spout {
+    msgbox(format("Spring water dribbles from a spout into a trough. A dove is drinking."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// The townsfolk
+// ---------------------------------------------------------------------------
+
+script KytheraPaphia_EventScript_Gatekeeper {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_Text_NameGatekeeper)
+    if (flag(FLAG_BADGE07_GET)) {
+        msgbox(format("You've got the Laurel? Krenaia'll want you. Up the ravine."))
+    } else {
+        msgbox(format("The falls road. Nothing up there but mills and quiet. Very quiet."))
+    }
+    release
+}
+
+script KytheraPaphia_EventScript_Girl {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_Text_NameGirl)
+    msgbox(format("My dove's called Little Aphrodite. All the doves here are.\p"
+                  "It's confusing at the temple."))
+    release
+}
+
+script KytheraPaphia_EventScript_OldMan {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_Text_NameOldMan)
+    msgbox(format("The goddess checks her face in every mirror in town.\p"
+                  "So we keep them clean.\p"
+                  "Mostly I check mine. It's not getting any better."))
+    release
+}
+
+script KytheraPaphia_EventScript_Skipper {
+    msgbox(format("The honey boat's skipper doesn't look up from his ropes. The boat smells of thyme."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-1F: Alethea goes ahead, on the honey boat
+// ---------------------------------------------------------------------------
+
+script KytheraPaphia_EventScript_Alethea {
+    goto(KytheraPaphia_EventScript_AletheaSails)
+}
+
+script KytheraPaphia_EventScript_AletheaSails {
+    lockall
+    setvar(VAR_TEMP_0, 2)
+    applymovement(LOCALID_PAPHIA_ALETHEA, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(KytheraPaphia_Text_NameAlethea)
+    msgbox(format("There you are. Look at this. A honey boat. From Amnisos.\p"
+                  "The Titans took everything with oars. This has a sail and a smell.\p"
+                  "They didn't want it. It's going home to Knossa tonight.\p"
+                  "I'm going with it."))
+    msgbox(format("You've got a temple to do. I'm no use in temples.\p"
+                  "They're riddles. You know how I feel about riddles.\p"
+                  "I'll read the frescoes before the Titans break them.\p"
+                  "Daphne's tracings against the real walls. Truthfully, I can't wait.\p"
+                  "Meet me on the quay at Amnisos. I'll be the one covered in plaster dust."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Be careful?"), MSGBOX_YESNO)
+    setspeaker(KytheraPaphia_Text_NameAlethea)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Me? I'm always careful. It's everyone else who's the problem."))
+    } else {
+        msgbox(format("Good. Neither will you. I'll see you there."))
+    }
+    setspeaker(SP_NAME_NONE)
+    applymovement(LOCALID_PAPHIA_SKIPPER, KytheraPaphia_Movement_SkipperBoards)
+    waitmovement(0)
+    removeobject(LOCALID_PAPHIA_SKIPPER)
+    applymovement(LOCALID_PAPHIA_ALETHEA, KytheraPaphia_Movement_AletheaBoards)
+    waitmovement(0)
+    removeobject(LOCALID_PAPHIA_ALETHEA)
+    delay(30)
+    call(KytheraPaphia_EventScript_DrawBoatGone)
+    special(DrawWholeMapView)
+    msgbox(format("The skipper casts off without a word.\p"
+                  "The honey boat slides out of the bay, and its sail goes small against the sea."))
+    setflag(FLAG_ICHOR_ALETHEA_SAILED_KNOSSA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_PAPHIA)
+    releaseall
+}
+
+movement KytheraPaphia_Movement_SkipperBoards {
+    walk_left
+    walk_down
+}
+
+movement KytheraPaphia_Movement_AletheaBoards {
+    walk_right
+    walk_down
+    walk_down
+}
+
+// The boat has sailed: its sail and hull become open water (the plank stays).
+script KytheraPaphia_EventScript_DrawBoatGone {
+    setmetatile(6, 24, 0x170, FALSE)
+    setmetatile(7, 24, 0x170, FALSE)
+    setmetatile(6, 25, 0x170, FALSE)
+    setmetatile(7, 25, 0x170, FALSE)
+    setmetatile(6, 26, 0x170, FALSE)
+    setmetatile(7, 26, 0x170, FALSE)
+}
+
+// ---------------------------------------------------------------------------
+// Beat III-1D2: Hermes's reveal at the gate herm (theoxenia E1)
+// ---------------------------------------------------------------------------
+
+script KytheraPaphia_EventScript_Hermes {
+    lock
+    faceplayer
+    setspeaker(KytheraPaphia_Text_NameMessenger)
+    msgbox(format("There you are. Fine sandals. Whoever made these knew feet.\p"
+                  "Most people say no. Some say yes, then chase me for them.\p"
+                  "You just walked. The whole way. Without much whining."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("He stands. There is no shadow under him. There never was."))
+    setspeaker(KytheraPaphia_Text_NameHermes)
+    msgbox(format("Look at my feet, {PLAYER}. No shadow. Bad habit of ours, pretending.\p"
+                  "Remember it. We're about. More than you'd think.\p"
+                  "Your sandals. I loosened the left strap. You're welcome."))
+    setspeaker(SP_NAME_NONE)
+    setflag(FLAG_SYS_B_DASH)
+    clearflag(FLAG_ICHOR_TALARIA_LENT)
+    setspeaker(KytheraPaphia_Text_NameHermes)
+    msgbox(format("And this. A tortoise. My first lyre was a tortoise shell. Don't tell him."))
+    setspeaker(SP_NAME_NONE)
+    // TODO(theoxenia): SYSTEMS §10's gift in full: Modest, Rain Dish, god-taught Shell
+    // Smash, 3 perfect IVs, a Cherish Ball, the Xenia Ribbon, fateful, met as "a
+    // guest-gift of Hermes"; then set FLAG_ICHOR_THEOXENIA_HERMES and open the
+    // Stranger omen kind (SYSTEMS §6).
+    givemon(SPECIES_SQUIRTLE, 45, ITEM_WHITE_HERB)
+    if (var(VAR_RESULT) == MON_CANT_GIVE) {
+        msgbox(format("Your party and boxes are full. Hermes laughs, and keeps the tortoise for now."))
+        release
+        end
+    }
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{PLAYER} received a Squirtle from Hermes!"))
+    waitfanfare
+    setvar(VAR_0x8004, ICHOR_GOD_HERMES)
+    setvar(VAR_0x8005, 15)
+    special(Ichor_AddFavor)
+    fadescreen(FADE_TO_WHITE)
+    removeobject(LOCALID_PAPHIA_HERMES)
+    setflag(FLAG_ICHOR_HIDE_HERMES_PAPHIA)
+    fadescreen(FADE_FROM_WHITE)
+    release
+}

@@ -5,12 +5,15 @@
 // Room: tools/ichor/maps/kythera_homes.py. The healer stands at (3,2) with the
 // spring basin at (1..2,1..2); the player talks from (3,4). The mat is (7,10).
 //
-// TODO(act3): exit to MAP_KYTHERA_PAPHIA.
-// TODO(act3): setrespawn(HEAL_LOCATION_KYTHERA_PAPHIA) in ON_TRANSITION, once the
-// outdoor builder adds the heal location (respawn_map this map, respawn_npc
-// LOCALID_PAPHIA_HEALER), if Paphia is a fly target (SCRIPT.md Open questions 2).
+// A whiteout after resting here returns the player to this healer
+// (HEAL_LOCATION_KYTHERA_PAPHIA: respawn here, in front of the door outside).
+// Paphia isn't a fly target: Skandeia is the island's (SCRIPT.md Open questions 2).
 
-mapscripts KytheraPaphia_Asclepeion_MapScripts {}
+mapscripts KytheraPaphia_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_KYTHERA_PAPHIA)
+    }
+}
 
 text KytheraPaphia_Asclepeion_Name_Healer { "HEALER" }
 

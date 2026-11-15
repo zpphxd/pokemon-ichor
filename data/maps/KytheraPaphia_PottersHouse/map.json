@@ -48,15 +48,15 @@
       "x": 2,
       "y": 7,
       "elevation": 0,
-      "dest_map": "MAP_AKTI_TOWN",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_KYTHERA_PAPHIA",
+      "dest_warp_id": "7"
     },
     {
       "x": 3,
       "y": 7,
       "elevation": 0,
-      "dest_map": "MAP_AKTI_TOWN",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_KYTHERA_PAPHIA",
+      "dest_warp_id": "7"
     }
   ],
   "coord_events": [],
