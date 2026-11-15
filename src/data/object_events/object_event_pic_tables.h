@@ -2626,6 +2626,14 @@ static const struct SpriteFrameImage sPicTable_IchorUpturnedBoatL[] = {
 static const struct SpriteFrameImage sPicTable_IchorUpturnedBoatR[] = {
     obj_frame_tiles(gObjectEventPic_IchorUpturnedBoatR),
 };
+
+static const struct SpriteFrameImage sPicTable_IchorMirror[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorMirror, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorMirrorMark[] = {
+    obj_frame_tiles(gObjectEventPic_IchorMirrorMark),
+};
 // End of Ichor object events
 
 // Ichor: the ground item jar

@@ -1,0 +1,28 @@
+-- Galatea's Gallery: the routes tools/ichor/maps/kythera_temple.py checks against its
+-- model of the statues, with the model's predictions. Generated; do not edit.
+return {
+  pronaos = { x = 5, y = 34, steps = { "W", "N", "N", "N", "N", "N", "N", "N", "N", "N", "E", "N", "N", "N" },
+    touched = nil, at = 14, endx = 5, endy = 22,
+    statues = { LOCALID_GALLERY_S1 = { 5, 25 } },
+    before_last = { LOCALID_GALLERY_S1 = { 4, 25 } } },
+  pronaos_back = { x = 5, y = 34, steps = { "W", "N", "N", "N", "N", "N", "N", "N", "S", "S", "S" },
+    touched = "LOCALID_GALLERY_S1", at = 8, endx = 4, endy = 28,
+    statues = { LOCALID_GALLERY_S1 = { 3, 28 } },
+    before_last = { LOCALID_GALLERY_S1 = { 3, 28 } } },
+  gallery = { x = 5, y = 22, steps = { "W", "W", "W", "N", "N", "N", "N", "N", "N", "N", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "N", "N" },
+    touched = nil, at = 26, endx = 16, endy = 13,
+    statues = { LOCALID_GALLERY_S2 = { 12, 18 }, LOCALID_GALLERY_S3 = { 15, 20 }, LOCALID_GALLERY_S4 = { 16, 18 }, LOCALID_GALLERY_S5 = { 4, 15 } },
+    before_last = { LOCALID_GALLERY_S2 = { 12, 18 }, LOCALID_GALLERY_S3 = { 15, 20 }, LOCALID_GALLERY_S4 = { 16, 18 }, LOCALID_GALLERY_S5 = { 3, 15 } } },
+  gallery_east = { x = 5, y = 22, steps = { "N", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "N", "N", "N", "N", "N", "N", "W", "W", "N", "N" },
+    touched = "LOCALID_GALLERY_S5", at = 1, endx = 6, endy = 21,
+    statues = { LOCALID_GALLERY_S2 = { 7, 20 }, LOCALID_GALLERY_S3 = { 12, 21 }, LOCALID_GALLERY_S4 = { 16, 20 }, LOCALID_GALLERY_S5 = { 6, 22 } },
+    before_last = { LOCALID_GALLERY_S2 = { 7, 20 }, LOCALID_GALLERY_S3 = { 12, 21 }, LOCALID_GALLERY_S4 = { 16, 20 }, LOCALID_GALLERY_S5 = { 6, 22 } } },
+  court = { x = 16, y = 12, steps = { "E", "N", "N", "N", "N", "N", "N", "tLOCALID_GALLERY_P2", "W", "W", "W", "W", "W", "N" },
+    touched = nil, at = 14, endx = 12, endy = 5,
+    statues = { LOCALID_GALLERY_S7 = { 16, 6 }, LOCALID_GALLERY_S8 = { 13, 8 }, LOCALID_GALLERY_S9 = { 13, 10 } },
+    before_last = { LOCALID_GALLERY_S7 = { 17, 6 }, LOCALID_GALLERY_S8 = { 13, 8 }, LOCALID_GALLERY_S9 = { 13, 10 } } },
+  court_garden = { x = 16, y = 12, steps = { "W", "N", "N", "N", "N", "N", "N", "W", "W", "W", "N" },
+    touched = "LOCALID_GALLERY_S9", at = 2, endx = 15, endy = 10,
+    statues = { LOCALID_GALLERY_S7 = { 19, 10 }, LOCALID_GALLERY_S8 = { 14, 8 }, LOCALID_GALLERY_S9 = { 14, 10 } },
+    before_last = { LOCALID_GALLERY_S7 = { 19, 10 }, LOCALID_GALLERY_S8 = { 14, 8 }, LOCALID_GALLERY_S9 = { 14, 10 } } },
+}

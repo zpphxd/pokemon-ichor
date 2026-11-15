@@ -449,6 +449,9 @@ enum
     // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
+    // The Temple of Aphrodite's bronze mirrors (tools/ichor/art/temple_aphrodite_objects.py)
+    OBJ_EVENT_GFX_ICHOR_MIRROR,
+    OBJ_EVENT_GFX_ICHOR_MIRROR_MARK,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
