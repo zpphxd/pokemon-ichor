@@ -686,6 +686,12 @@ const u32 gObjectEventPic_IchorNestEmpty[] = INCGFX_U32("graphics/object_events/
 const u32 gObjectEventPic_IchorDarkTriremeBow[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/dark_trireme_bow.png", ".4bpp");
 const u32 gObjectEventPic_IchorDarkTriremeStern[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/dark_trireme_stern.png", ".4bpp");
 const u32 gObjectEventPic_IchorKerykos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kerykos.png", ".4bpp", "-mwidth 2 -mheight 4");
+// The Theoxenia's Sam, Apollo, Cami and Demeter (tools/ichor/art/sprites_npc_theoxenia.py)
+const u16 gObjectEventPal_IchorTheoxenia[] = INCGFX_U16("graphics/object_events/palettes/ichor_theoxenia.pal", ".gbapal");
+const u32 gObjectEventPic_IchorSam[] = INCGFX_U32("graphics/object_events/pics/people/ichor/sam.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorApollo[] = INCGFX_U32("graphics/object_events/pics/people/ichor/apollo.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorCami[] = INCGFX_U32("graphics/object_events/pics/people/ichor/cami.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorDemeter[] = INCGFX_U32("graphics/object_events/pics/people/ichor/demeter.png", ".4bpp", "-mwidth 2 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)

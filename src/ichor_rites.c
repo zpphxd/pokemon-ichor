@@ -376,7 +376,7 @@ static void Bless(u32 god, u32 steps, bool32 major)
 }
 
 // The step tick: one step off the blessing; when it runs out, the god's line.
-bool8 Ichor_OnStep(void)
+static bool32 BlessingStep(void)
 {
     u32 god = gIchorSave.blessing.god;
 
@@ -391,6 +391,14 @@ bool8 Ichor_OnStep(void)
     StringCopy(gStringVar4, sGods[god].fade);
     ScriptContext_SetupScript(EventScript_IchorBlessingFaded);
     return TRUE;
+}
+
+// field_control_avatar.c, every step: the blessing counts down, and so does a
+// carried flame (src/ichor_relics.c). TRUE when a script started.
+bool8 Ichor_OnStep(void)
+{
+    bool32 talked = BlessingStep();
+    return Ichor_CarriedFlameStep(!talked) || talked;
 }
 
 // --- Offerings ----------------------------------------------------------------------

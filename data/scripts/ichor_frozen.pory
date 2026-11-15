@@ -1,0 +1,21 @@
+// Ichor: the Frozen Hour (design/ENGINE_API.md §5; src/ichor_frozen.c).
+
+// Talking to someone the hour holds, on a map with no frozen scripts of its
+// own (Phase 4 SCRIPT.md Part 2, "The generic rule"). A map's own scripts can
+// goto it too.
+script EventScript_IchorFrozenGeneric {
+    lockall
+    specialvar(VAR_RESULT, Ichor_FrozenGenericLine)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("They don't move. They don't blink."), MSGBOX_DEFAULT)
+    } elif (var(VAR_RESULT) == 1) {
+        msgbox(format("Frozen mid-step, one foot off the ground."), MSGBOX_DEFAULT)
+    } elif (var(VAR_RESULT) == 2) {
+        msgbox(format("Caught halfway through a word."), MSGBOX_DEFAULT)
+    } else {
+        msgbox(format("It's frozen with its ears up, listening for something."), MSGBOX_DEFAULT)
+    }
+    closemessage
+    releaseall
+    end
+}

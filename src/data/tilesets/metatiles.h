@@ -129,3 +129,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Trireme[] = INCBIN_U16("data/tile
 // Ichor: cave_dark
 const u16 gMetatiles_PorytilesManaged_CaveDark[] = INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_CaveDark[] = INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: labyrinth
+const u16 gMetatiles_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/metatile_attributes.bin");
