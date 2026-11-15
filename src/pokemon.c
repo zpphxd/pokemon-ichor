@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "malloc.h"
 #include "apprentice.h"
 #include "battle.h"
@@ -888,6 +889,7 @@ bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
 
     if (LURE_STEP_COUNT != 0)
         totalRerolls += 1;
+    totalRerolls += Ichor_ExtraShinyRolls(); // Ichor: Zeus
 
     totalRerolls += CalculateChainFishingShinyRolls();
 
@@ -4876,7 +4878,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         }
 
         mod = sFriendshipEventModifiers[event][friendshipLevel];
-        friendship += CalculateFriendshipBonuses(mon,mod,holdEffect);
+        friendship += Ichor_ModifyFriendshipDelta(mon, CalculateFriendshipBonuses(mon,mod,holdEffect)); // Ichor: Aphrodite, the Myrtle Wreath
 
         if (friendship < 0)
             friendship = 0;
@@ -5134,6 +5136,12 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_AQUA_ADMIN:
         case TRAINER_CLASS_MAGMA_ADMIN:
             return MUS_VS_AQUA_MAGMA;
+        case TRAINER_CLASS_TITANBORN: // Ichor
+            return MUS_ICHOR_TITAN;
+        // Ichor: Kleon and the Hierophants share the Ichor rival theme
+        case TRAINER_CLASS_LAKONIAN:
+        case TRAINER_CLASS_HIEROPHANT:
+            return MUS_ICHOR_BATTLE_RIVAL;
         case TRAINER_CLASS_LEADER:
             return MUS_VS_GYM_LEADER;
         case TRAINER_CLASS_CHAMPION:
@@ -5163,7 +5171,7 @@ u16 GetBattleBGM(void)
             if (GetCurrentRegion() == REGION_KANTO)
                 return MUS_RG_VS_TRAINER;
             else
-                return MUS_VS_TRAINER;
+                return MUS_ICHOR_BATTLE_TRAINER; // Ichor
         }
     }
     else
@@ -5171,7 +5179,7 @@ u16 GetBattleBGM(void)
         if (GetCurrentRegion() == REGION_KANTO)
             return MUS_RG_VS_WILD;
         else
-            return MUS_VS_WILD;
+            return MUS_ICHOR_BATTLE_WILD; // Ichor
     }
 }
 
@@ -5404,7 +5412,7 @@ void SetWildMonHeldItem(void)
     enum Species species;
     u16 count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
     u16 i;
-    bool32 itemHeldBoost = CanFirstMonBoostHeldItemRarity();
+    bool32 itemHeldBoost = CanFirstMonBoostHeldItemRarity() || Ichor_BoostsWildHeldItems(); // Ichor: Demeter
     u16 chanceNoItem = itemHeldBoost ? 20 : 45;
     u16 chanceNotRare = itemHeldBoost ? 80 : 95;
 

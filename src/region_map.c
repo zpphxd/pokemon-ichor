@@ -1,4 +1,6 @@
 #include "global.h"
+#include "ichor_herms.h"
+#include "ichor_relics.h"
 #include "main.h"
 #include "text.h"
 #include "menu.h"
@@ -88,6 +90,7 @@ static u8 ProcessRegionMapInput_Zoomed(void);
 static u8 MoveRegionMapCursor_Zoomed(void);
 static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
 static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y);
+static bool32 IsIchorPostgameMapSec(mapsec_u16_t mapSecId);
 static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y);
 static void InitMapBasedOnPlayerLocation(void);
 static void RegionMap_InitializeStateBasedOnSSTidalLocation(void);
@@ -431,6 +434,9 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_ROUTE_132] = {MAP_GROUP(MAP_ROUTE132), MAP_NUM(MAP_ROUTE132), HEAL_LOCATION_NONE},
     [MAPSEC_ROUTE_133] = {MAP_GROUP(MAP_ROUTE133), MAP_NUM(MAP_ROUTE133), HEAL_LOCATION_NONE},
     [MAPSEC_ROUTE_134] = {MAP_GROUP(MAP_ROUTE134), MAP_NUM(MAP_ROUTE134), HEAL_LOCATION_NONE},
+// Ichor: outside an FRLG build the Kanto IDs below are Aethos's routes and
+// islands (design/AETHOS_MAP.md), so their Kanto heal locations go.
+#if IS_FRLG
     [MAPSEC_PALLET_TOWN] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_PALLET_TOWN},
     [MAPSEC_VIRIDIAN_CITY] = {MAP_GROUP(MAP_VIRIDIAN_CITY), MAP_NUM(MAP_VIRIDIAN_CITY), HEAL_LOCATION_VIRIDIAN_CITY},
     [MAPSEC_PEWTER_CITY] = {MAP_GROUP(MAP_PEWTER_CITY), MAP_NUM(MAP_PEWTER_CITY), HEAL_LOCATION_PEWTER_CITY},
@@ -535,6 +541,11 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_RIXY_CHAMBER] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
     [MAPSEC_VIAPOIS_CHAMBER] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
     [MAPSEC_EMBER_SPA] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_NONE},
+#endif // IS_FRLG
+    // Ichor: Kalliste. Add each Aethos town here as its maps land (design/AETHOS_MAP.md).
+    [MAPSEC_ELAIA_VILLAGE] = {MAP_GROUP(MAP_ELAIA_VILLAGE), MAP_NUM(MAP_ELAIA_VILLAGE), HEAL_LOCATION_ELAIA_VILLAGE},
+    [MAPSEC_KALLISTE_ROUTE_1] = {MAP_GROUP(MAP_KALLISTE_ROUTE1), MAP_NUM(MAP_KALLISTE_ROUTE1), HEAL_LOCATION_NONE},
+    [MAPSEC_AKTI_TOWN] = {MAP_GROUP(MAP_AKTI_TOWN), MAP_NUM(MAP_AKTI_TOWN), HEAL_LOCATION_AKTI_TOWN},
 };
 
 static const u8 *const sEverGrandeCityNames[] =
@@ -1209,7 +1220,32 @@ static mapsec_u16_t GetMapSecIdAt(u16 x, u16 y)
         }
     case REGION_HOENN:
     default:
+            // Ichor: the post-game's places are painted faint and stay unnamed until the game is cleared
+            if (IsIchorPostgameMapSec(sRegionMap_MapSectionLayout[y][x]) && !FlagGet(FLAG_SYS_GAME_CLEAR))
+                return MAPSEC_NONE;
             return sRegionMap_MapSectionLayout[y][x];
+    }
+}
+
+// Ichor: Cape Tainaron, Olympia, Atlantis, the Odyssey's islands, Rhodos and
+// the routes to them (design/AETHOS_MAP.md)
+static bool32 IsIchorPostgameMapSec(mapsec_u16_t mapSecId)
+{
+    switch (mapSecId)
+    {
+    case MAPSEC_CAPE_TAINARON:
+    case MAPSEC_OLYMPIA:
+    case MAPSEC_ATLANTIS:
+    case MAPSEC_ITHAKA:
+    case MAPSEC_KERKYRA:
+    case MAPSEC_RHODOS:
+    case MAPSEC_AETHOS_ROUTE_31:
+    case MAPSEC_AETHOS_ROUTE_32:
+    case MAPSEC_AETHOS_ROUTE_33:
+    case MAPSEC_AETHOS_ROUTE_34:
+        return TRUE;
+    default:
+        return FALSE;
     }
 }
 
@@ -1422,6 +1458,8 @@ static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
 
 static u8 GetMapsecType(mapsec_u16_t mapSecId)
 {
+    if (Ichor_IsHermFlyTarget(mapSecId)) // Ichor: an anointed herm's route is a fly target (SYSTEMS §4)
+        return MAPSECTYPE_CITY_CANFLY;
     switch (mapSecId)
     {
     case MAPSEC_NONE:
@@ -1462,6 +1500,9 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
         return FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
     case MAPSEC_SOUTHERN_ISLAND:
         return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? MAPSECTYPE_ROUTE : MAPSECTYPE_NONE;
+    // Ichor: outside an FRLG build these Kanto IDs are Aethos's routes and islands
+    // (design/AETHOS_MAP.md), so they must not read as Kanto towns.
+#if IS_FRLG
     case MAPSEC_PALLET_TOWN:
         return FlagGet(FLAG_WORLD_MAP_PALLET_TOWN) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_VIRIDIAN_CITY:
@@ -1502,6 +1543,35 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
         return FlagGet(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     case MAPSEC_ROUTE_10_POKECENTER:
         return FlagGet(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+#endif // IS_FRLG
+    // Ichor: Aethos. Elaia is home: it is a fly target as soon as you have a
+    // Pokemon. Each other town, and each harbor hamlet with a healer, gets its
+    // own visited flag when its maps land; until then it shows as a town you
+    // can't fly to (design/AETHOS_MAP.md).
+    case MAPSEC_ELAIA_VILLAGE:
+        return FlagGet(FLAG_SYS_POKEMON_GET) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+    case MAPSEC_AKTI_TOWN:
+        return FlagGet(FLAG_ICHOR_VISITED_AKTI) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
+    case MAPSEC_EMPORION_CITY:
+    case MAPSEC_ELEUSA_VILLAGE:
+    case MAPSEC_THYRSA_CITY:
+    case MAPSEC_LEBADEIA:
+    case MAPSEC_KIRRHA:
+    case MAPSEC_AIGION:
+    case MAPSEC_ARKADIA:
+    case MAPSEC_ASTYRA:
+    case MAPSEC_KALDERA:
+    case MAPSEC_KYTHERA_ISLE:
+    case MAPSEC_AMNISOS:
+    case MAPSEC_GYTHEION:
+    case MAPSEC_LAKONIA:
+    case MAPSEC_DELPHOI:
+    case MAPSEC_VALE_OF_TEMPE:
+    case MAPSEC_MOUNT_OLYMPUS:
+    case MAPSEC_CAPE_TAINARON:
+    case MAPSEC_OLYMPIA:
+    case MAPSEC_ATLANTIS:
+        return MAPSECTYPE_CITY_CANTFLY;
     default:
         return MAPSECTYPE_ROUTE;
     }
@@ -2139,6 +2209,17 @@ struct FlyLocation
 
 static const struct FlyLocation sFlyLocations[] =
 {
+    // Ichor: Aethos's fly targets. Add each town with its visited flag as its maps land.
+    {
+        .regionMapType = REGION_MAP_HOENN,
+        .mapsec = MAPSEC_ELAIA_VILLAGE,
+        .flag = FLAG_SYS_POKEMON_GET,
+    },
+    {
+        .regionMapType = REGION_MAP_HOENN,
+        .mapsec = MAPSEC_AKTI_TOWN,
+        .flag = FLAG_ICHOR_VISITED_AKTI,
+    },
     {
         .regionMapType = REGION_MAP_HOENN,
         .mapsec = MAPSEC_LITTLEROOT_TOWN,
@@ -2367,6 +2448,23 @@ static void CreateFlyDestIcons(void)
             gSprites[spriteId].sIconMapSec = sFlyLocations[i].mapsec;
         }
     }
+
+    // Ichor: a lit dot on every anointed herm's route (SYSTEMS §4)
+    for (i = 0; i < HERM_MAX; i++)
+    {
+        u32 mapsec = Ichor_GetAnointedHermMapsec(i);
+        if (mapsec == MAPSEC_NONE || GetRegionMapType(mapsec) != regionMapType)
+            continue;
+        GetMapSecDimensions(mapsec, &x, &y, &width, &height);
+        spriteId = CreateSpriteUnchecked(&sFlyDestIconSpriteTemplate, (x + MAPCURSOR_X_MIN) * 8 + 4, (y + MAPCURSOR_Y_MIN) * 8 + 4, 10);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.shape = SPRITE_SHAPE(8x8);
+            gSprites[spriteId].callback = SpriteCB_FlyDestIcon;
+            StartSpriteAnim(&gSprites[spriteId], SPRITE_SHAPE(8x8));
+            gSprites[spriteId].sIconMapSec = mapsec;
+        }
+    }
 }
 
 // Draw a red outline box on the mapsec if its corresponding flag has been set
@@ -2490,7 +2588,7 @@ static void CB_ExitFlyMap(void)
             }
             else
             {
-                SetMainCallback2(CB2_ReturnToPartyMenuFromFlyMap);
+                SetMainCallback2(Ichor_GetFlyMapCancelCallback()); // Ichor: back to the bag or field after the Wings
             }
             TRY_FREE_AND_SET_NULL(sFlyMap);
             FreeAllWindowBuffers();
@@ -2512,6 +2610,8 @@ u32 FilterFlyDestination(struct RegionMap* regionMap)
     case MAPSEC_EVER_GRANDE_CITY:
         return (FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && regionMap->posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
     default:
+        if (Ichor_GetHermHealLocation(regionMap->mapSecId) != HEAL_LOCATION_NONE) // Ichor: land south of the herm
+            return Ichor_GetHermHealLocation(regionMap->mapSecId);
         if (sMapHealLocations[regionMap->mapSecId][2] != HEAL_LOCATION_NONE)
             return sMapHealLocations[regionMap->mapSecId][2];
         else

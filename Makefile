@@ -1,5 +1,6 @@
 GAME_VERSION ?= EMERALD
-TITLE        ?= POKEMON EMER
+# Ichor: the cartridge title. GAME_CODE stays BPEE, because emulators pick the save type by it.
+TITLE        ?= POKEMONICHOR
 GAME_CODE    ?= BPEE
 BUILD_NAME   ?= emerald
 MAP_VERSION  ?= emerald
@@ -172,6 +173,15 @@ override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=
 ifneq ($(LTO),0)
   ifneq ($(TEST),1)
     override CFLAGS += -flto=auto -fno-fat-lto-objects -fno-asynchronous-unwind-tables -ffunction-sections -fdata-sections
+  endif
+endif
+# Ichor: per-function and per-variable sections without LTO too, so --gc-sections
+# drops each unused function and table, not only whole unused files. The Hoenn-only
+# systems cut in include/config/ichor.h rely on it. The test build keeps whole-file
+# sections (its linker script expects them), so cut code there needs stand-in labels.
+ifeq ($(LTO),0)
+  ifneq ($(TEST),1)
+    override CFLAGS += -ffunction-sections -fdata-sections
   endif
 endif
 

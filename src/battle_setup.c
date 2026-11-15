@@ -1017,6 +1017,22 @@ static void CB2_GiveStarter(void)
     BattleTransition_Start(B_TRANSITION_BLUR);
 }
 
+// Ichor: Daphne hands the starter over in the Akademia, so after the vanilla
+// select screen the script carries on (Kleon is the first battle, in the square).
+// Run it with `callnative ChooseStarterNoBattle` then `waitstate`.
+static void CB2_GiveStarterNoBattle(void)
+{
+    *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
+    ScriptGiveMon(GetStarterPokemon(gSpecialVar_Result), 5, ITEM_NONE);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
+void ChooseStarterNoBattle(void)
+{
+    SetMainCallback2(CB2_ChooseStarter);
+    gMain.savedCallback = CB2_GiveStarterNoBattle;
+}
+
 static void CB2_StartFirstBattle(void)
 {
     UpdatePaletteFade();

@@ -1,0 +1,133 @@
+// Glykera's house: the honey-cake bakery, and her father Kimon's corner.
+// Room: tools/ichor/maps/elaia_homes.py. Glykera (1,3) beside her oven; Kimon (9,5)
+// by his chair under the window. The door mat is (6..7,7).
+//
+// Glykera bakes the Klotheia's honey cakes, and her stall stands in the square.
+// She has run out of honey: bring her the comb from Melitta's hives (the hidden
+// Honey behind the player's house) and she trades two cakes for it.
+// Kimon rowed triremes for forty years. Once you have Poke Balls (after beat 4)
+// he trades his Finizen, Arion, for a Wooloo from Route 1. After the Hearth
+// Laurel he gives you the pearls he dived for as a boy.
+
+mapscripts ElaiaVillage_BakersHouse_MapScripts {}
+
+text ElaiaVillage_BakersHouse_Name_Glykera { "GLYKERA" }
+text ElaiaVillage_BakersHouse_Name_Kimon { "KIMON" }
+
+script ElaiaVillage_BakersHouse_EventScript_Glykera {
+    lock
+    faceplayer
+    setspeaker(ElaiaVillage_BakersHouse_Name_Glykera)
+    if (flag(FLAG_ICHOR_GOT_GLYKERA_CAKES)) {
+        if (flag(FLAG_ICHOR_KLEON_BATTLE_1_DONE)) {
+            msgbox(format("That Lakonian boy bought eleven cakes and ate twelve. I'm still working out how."))
+        } elif (flag(FLAG_ICHOR_THREAD_READ)) {
+            msgbox(format("Right about half the time, Halia told my Korinna.\pShe's choosing to hear it as a compliment. She gets that from her grandfather."))
+        } else {
+            msgbox(format("Korinna's been at the square since dawn. She says she isn't nervous.\pShe's been sick twice."))
+        }
+        release
+        end
+    }
+    checkitem(ITEM_HONEY)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("Is that honey? Melitta's honey? Oh, you darling. Give it here."))
+        removeitem(ITEM_HONEY)
+        setspeaker(ElaiaVillage_BakersHouse_Name_Glykera)
+        msgbox(format("There. The last tray is saved, and so is the festival.\pTake two from the first batch. They're still warm."))
+        giveitem(ITEM_OLD_GATEAU, 2)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_GLYKERA_CAKES)
+            setspeaker(ElaiaVillage_BakersHouse_Name_Glykera)
+            msgbox(format("Honey and barley. They mend whatever ails you, or your Pokémon."))
+        }
+    } else {
+        msgbox(format("Mind the tray! …Oh, it's you. Melitta's child. The whole island wants honey cakes today.\pAnd I've run out of honey. On festival day! Your mother promised me a jar.\pHer hives are behind your house. Bring me a comb and I'll make it worth your while."))
+    }
+    release
+}
+
+script ElaiaVillage_BakersHouse_EventScript_Kimon {
+    lock
+    faceplayer
+    setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)
+    if (flag(FLAG_BADGE01_GET) && !flag(FLAG_ICHOR_GOT_KIMON_PEARLS)) {
+        msgbox(format("A laurel! From the Hearthkeeper herself?\pIn my day the winner got a cup of wine and a slap on the back.\pHere. I brought these up off the sea floor when I was your age.\pSell them for your passage, or keep them for luck. I never decided."))
+        giveitem(ITEM_PEARL_STRING)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_KIMON_PEARLS)
+        }
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_DID_KIMON_TRADE)) {
+        if (flag(FLAG_BADGE01_GET)) {
+            msgbox(format("Halcyon days down at Akti, they tell me. Sea like oil, and no wind.\pTold you. Only oars move a ship then."))
+        } else {
+            msgbox(format("The Wooloo's asleep on my feet already.\pBest trade I ever made, and I once swapped a helmet for a goat."))
+        }
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_GOT_POKEBALLS)) {
+        msgbox(format("Forty years on the rowing benches. Top bench, the thranites. Best view of the sky.\pUp there you learn the sea. When the halcyons nest, it goes flat as oil.\pDays with no wind at all. No sail moves a ship then. Only oars.\pMy knees are done with oars. Arion isn't done with the sea. He sulks in his ball all day.\pCome back when you've some Poké Balls of your own. I've a thought about Arion."))
+        release
+        end
+    }
+    // The in-game trade, written out (as the ingame_trade macro does) so each
+    // line can carry Kimon's name box.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_ARION)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    msgbox(format("Arion's my Finizen. He swam beside my ship from Kalliste to Athens and back, twenty years.\pHe's wasted on an old man by a fire. Bring me a Wooloo, something warm for my feet,\pand Arion goes to sea with you. Deal?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)
+        msgbox(format("Think on it. Wooloo graze all along the road north."))
+        release
+        end
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)
+        msgbox(format("Think on it. Wooloo graze all along the road north."))
+        release
+        end
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)
+        msgbox(format("That's no Wooloo. My feet know the difference."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    setflag(FLAG_ICHOR_DID_KIMON_TRADE)
+    setspeaker(ElaiaVillage_BakersHouse_Name_Kimon)
+    msgbox(format("Mind this one, Arion. Stubborn chin. Runs in the family."))
+    release
+}
+
+script ElaiaVillage_BakersHouse_EventScript_Oven {
+    msgbox(format("Glykera's oven. The tray inside smells of honey and toasted barley."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_BakersHouse_EventScript_HoneyShelf {
+    if (flag(FLAG_ICHOR_GOT_GLYKERA_CAKES)) {
+        msgbox(format("Jars of honey. One is full again, sealed with Melitta's wax."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Jars of honey, every one of them scraped clean. On festival day."), MSGBOX_SIGN)
+    }
+}
+
+script ElaiaVillage_BakersHouse_EventScript_Pithos {
+    msgbox(format("A pithos of barley flour, half empty. Someone has written “FESTIVAL” on the lid."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_BakersHouse_EventScript_ModelTrireme {
+    msgbox(format("A model trireme with three banks of tiny oars.\pSomeone has painted KIMON on the top bench."), MSGBOX_SIGN)
+}
+
+script ElaiaVillage_BakersHouse_EventScript_Window {
+    msgbox(format("Between the olive trees, a sliver of sea. It hardly moves."), MSGBOX_SIGN)
+}

@@ -1,0 +1,109 @@
+-- IchorSave check, run by tools/ichor/tests/ichor_save.sh (read it first).
+--
+--   1. A new game: IchorSave is version 1, Mom's record is 0-212, everything else is zero.
+--   2. Scripts write and read the flag bank, the daily bank and the var bank
+--      (ichor_save_setup.s): each lands in IchorSave at its own bit, and no
+--      SaveBlock1 flag or var changes.
+--   3. A new day clears the daily bank and nothing else.
+--   4. Save, reset, CONTINUE: the banks come back as saved.
+--   5. An old save (IchorSave all zero, as a save from before it existed) loads
+--      as version 1 with the new-game defaults.
+
+local L = dofile("tools/ichor/tests/engine_lib.lua")
+local S, emu = L.S, L.emu
+local log, expect, wait, shot = L.log, L.expect, L.wait, L.shot
+
+local function ichor8(off) return emu:read8(L.ichor() + off) end
+local function ichor16(off) return emu:read16(L.ichor() + off) end
+local function allZero(off, n)
+  for i = 0, n - 1, 4 do
+    if emu:read32(L.ichor() + off + i) ~= 0 then return false end
+  end
+  return true
+end
+local function sb1Flags() return L.snapshot(L.sb1() + S.OFF_SB1_FLAGS, S.NUM_FLAG_BYTES - S.NUM_FLAG_BYTES % 4) end
+
+local function expectDefaults(when)
+  expect(ichor8(S.OFF_ICHOR_VERSION) == S.ICHOR_SAVE_VERSION,
+         string.format("%s: IchorSave version %d", when, ichor8(S.OFF_ICHOR_VERSION)))
+  expect(ichor16(S.OFF_ICHOR_MOM_LOSSES) == 212 and ichor16(S.OFF_ICHOR_MOM_WINS) == 0,
+         string.format("%s: Mom's record is %d-%d", when, ichor16(S.OFF_ICHOR_MOM_WINS), ichor16(S.OFF_ICHOR_MOM_LOSSES)))
+  expect(allZero(S.OFF_ICHOR_FAVOR, 16) and allZero(S.OFF_ICHOR_VARS, S.OFF_ICHOR_RESERVED - S.OFF_ICHOR_VARS),
+         when .. ": Favor, the banks and the thread start empty")
+  expect(ichor8(S.OFF_ICHOR_OPTIONS) == 0, when .. ": relic prompts default to ASK")
+end
+
+L.start(function()
+  expect(S.SB3_SIZE <= 1624 and S.ICHOR_SAVE_SIZE == 1280 and S.OFF_SB3_ICHOR == 0,
+         string.format("SaveBlock3 is %d of 1,624 bytes; IchorSave is %d bytes at its start", S.SB3_SIZE, S.ICHOR_SAVE_SIZE))
+
+  -- 1. A new game
+  L.quickstart()
+  shot("new_game")
+  expectDefaults("new game")
+
+  -- Start the clock (Quickstart leaves the water clock unset): its first run
+  -- counts as a new day, so it comes before any daily flag is set.
+  L.runHeader("SaveTest_ClockHeader")
+
+  -- 2. The banks
+  local before = sb1Flags()
+  L.setVar(S.VAR_TEMP_F, 0)
+  local varsBefore = L.snapshot(L.sb1() + S.OFF_SB1_VARS, 0x200)
+  L.runHeader("SaveTest_BanksHeader")
+  local got = L.getVar(S.VAR_0x8000)
+  expect(got == 127, string.format("the scripts read back every bank write (checks passed: %d of 127)", got))
+  local function bankByte(o) return ichor8(S.OFF_ICHOR_FLAGS + o) end
+  local function dailyByte(o) return ichor8(S.OFF_ICHOR_DAILY_FLAGS + o) end
+  local g = S.FLAG_ICHOR_GENERAL_START - S.ICHOR_FLAGS_START
+  local h = S.FLAG_ICHOR_HERMS_START + 3 - S.ICHOR_FLAGS_START
+  expect(bankByte(g >> 3) & (1 << (g & 7)) ~= 0, "FLAG_ICHOR_GENERAL_START is its own bit in IchorSave.flags")
+  expect(bankByte(255) == 0x80, "the bank's last flag is the top bit of the last byte")
+  expect(bankByte(h >> 3) == 1 << (h & 7), "a herm flag sits in the herm range")
+  local p = S.FLAG_DAILY_ICHOR_PRAYED_START + 2 - S.ICHOR_DAILY_FLAGS_START
+  expect(dailyByte(p >> 3) & (1 << (p & 7)) ~= 0 and dailyByte(31) == 0x80, "daily flags land in IchorSave.dailyFlags")
+  expect(ichor16(S.OFF_ICHOR_VARS) == 1234 and ichor16(S.OFF_ICHOR_VARS + 62) == 0xBEEF,
+         "bank vars land in IchorSave.vars")
+  expect(sb1Flags() == before, "no SaveBlock1 flag changed")
+  -- VAR_TEMP_F is the only SaveBlock1 var the script writes
+  L.setVar(S.VAR_TEMP_F, 0)
+  expect(L.snapshot(L.sb1() + S.OFF_SB1_VARS, 0x200) == varsBefore, "no other SaveBlock1 var changed")
+  L.setVar(S.VAR_TEMP_F, 1)
+
+  -- 3. A new day: the same day changes nothing, then move the RTC offset back a
+  -- day and run the time-based events again
+  L.runHeader("SaveTest_NewDayHeader")
+  expect(L.getFlag(S.FLAG_DAILY_ICHOR_PRAYED_START + 2), "the same day keeps the daily bank")
+  local day0 = L.getVar(S.VAR_DAYS)
+  local off = L.sb2() + S.OFF_SB2_LOCAL_TIME_OFFSET
+  emu:write16(off, (emu:read16(off) - 1) & 0xFFFF)
+  L.runHeader("SaveTest_NewDayHeader")
+  expect(L.getVar(S.VAR_DAYS) == day0 + 1, string.format("the day turned (VAR_DAYS %d -> %d)", day0, L.getVar(S.VAR_DAYS)))
+  expect(allZero(S.OFF_ICHOR_DAILY_FLAGS, 32), "a new day clears the daily bank")
+  expect(L.getFlag(S.FLAG_ICHOR_GENERAL_START) and L.getFlag(S.ICHOR_FLAGS_END) and L.getVar(S.ICHOR_VARS_START) == 1234,
+         "... and leaves the saved bank and vars alone")
+
+  -- 4. Save, reset, CONTINUE
+  L.setFlag(S.FLAG_DAILY_ICHOR_GENERAL_START + 5, true)   -- a daily flag, saved mid-day
+  emu:write16(L.ichor() + S.OFF_ICHOR_MOM_WINS, 3)
+  local saved = L.snapshot(L.ichor(), S.ICHOR_SAVE_SIZE)
+  L.runHeader("SaveTest_SaveHeader")
+  shot("saved")
+  emu:reset()
+  L.continueSave()
+  shot("continued")
+  expect(L.snapshot(L.ichor(), S.ICHOR_SAVE_SIZE) == saved, "all 1,280 bytes of IchorSave come back from the save")
+  expect(L.getFlag(S.FLAG_ICHOR_HERMS_START + 3) and L.getFlag(S.FLAG_DAILY_ICHOR_GENERAL_START + 5)
+         and L.getVar(S.ICHOR_VARS_END) == 0xBEEF and ichor16(S.OFF_ICHOR_MOM_WINS) == 3,
+         "flags, daily flags, vars and Mom's record read back through the engine")
+
+  -- 5. An old save: zero IchorSave, save, reset, CONTINUE
+  for i = 0, S.ICHOR_SAVE_SIZE - 1, 4 do emu:write32(L.ichor() + i, 0) end
+  L.runHeader("SaveTest_SaveHeader")
+  emu:reset()
+  L.continueSave()
+  shot("old_save_continued")
+  expectDefaults("a save from before IchorSave")
+  log(string.format("ok SaveBlock3 is %d bytes; IchorSave has %d reserved bytes",
+                    S.SB3_SIZE, S.ICHOR_SAVE_SIZE - S.OFF_ICHOR_RESERVED))
+end)

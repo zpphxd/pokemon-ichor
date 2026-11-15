@@ -3,6 +3,7 @@
 
 #include "constants/global.h"
 #include "constants/map_event_ids.h"
+#include "constants/localids_removed_stub.h" // Ichor: local IDs of maps the Hoenn cut deleted
 
 #define PLAYER_AVATAR_GFX_MALE_NORMAL     (IS_FRLG ? OBJ_EVENT_GFX_RED_NORMAL     : OBJ_EVENT_GFX_BRENDAN_NORMAL)
 #define PLAYER_AVATAR_GFX_MALE_MACH_BIKE  (IS_FRLG ? OBJ_EVENT_GFX_RED_BIKE       : OBJ_EVENT_GFX_BRENDAN_MACH_BIKE)
@@ -421,6 +422,34 @@ enum
     OBJ_EVENT_GFX_ICHOR_ALETHEA,
     OBJ_EVENT_GFX_ICHOR_HIEROPHANT_IONE,
     OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT,
+    // The slice's townsfolk and trainer-class walkers (design/phase1/SPRITES_folk.md)
+    OBJ_EVENT_GFX_ICHOR_MOM,
+    OBJ_EVENT_GFX_ICHOR_PRIESTESS,
+    OBJ_EVENT_GFX_ICHOR_YOUTH_M,
+    OBJ_EVENT_GFX_ICHOR_YOUTH_F,
+    OBJ_EVENT_GFX_ICHOR_MAN,
+    OBJ_EVENT_GFX_ICHOR_WOMAN,
+    OBJ_EVENT_GFX_ICHOR_ELDER_M,
+    OBJ_EVENT_GFX_ICHOR_ELDER_F,
+    OBJ_EVENT_GFX_ICHOR_KID_M,
+    OBJ_EVENT_GFX_ICHOR_KID_F,
+    OBJ_EVENT_GFX_ICHOR_FISHER,
+    OBJ_EVENT_GFX_ICHOR_SAILOR,
+    OBJ_EVENT_GFX_ICHOR_DIVER,
+    OBJ_EVENT_GFX_ICHOR_HEALER,
+    OBJ_EVENT_GFX_ICHOR_MERCHANT,
+    OBJ_EVENT_GFX_ICHOR_SHEPHERD,
+    OBJ_EVENT_GFX_ICHOR_HARVESTER,
+    OBJ_EVENT_GFX_ICHOR_GOATHERD,
+    OBJ_EVENT_GFX_ICHOR_HOPLITE,
+    OBJ_EVENT_GFX_ICHOR_AUGUR,
+    OBJ_EVENT_GFX_ICHOR_ACOLYTE_M,
+    OBJ_EVENT_GFX_ICHOR_ACOLYTE_F,
+    // Field objects (16x16, tools/ichor/art/sprites_objects.py)
+    OBJ_EVENT_GFX_ICHOR_TABLET,
+    // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
+    OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
+    OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
@@ -581,7 +610,8 @@ enum
 
 // Ichor object events: palette tags 0x1134-0x114F are Ichor's.
 // Claim the next free one at the end of this block.
-#define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // Kleon, Daphne, Alethea, Ione, Titan grunt
+#define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // the cast, plus the Shepherd, Hoplite, Augur and Acolyte walkers
+#define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS

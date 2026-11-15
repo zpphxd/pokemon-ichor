@@ -1,1 +1,36 @@
+// Kydippe's house: the old midwife, her Chansey, and two Oran Berries.
+
 mapscripts ElaiaVillage_NeighborsHouse_MapScripts {}
+
+text ElaiaVillage_NeighborsHouse_Name_Kydippe { "KYDIPPE" }
+text ElaiaVillage_NeighborsHouse_Name_Chansey { "CHANSEY" }
+
+script ElaiaVillage_NeighborsHouse_EventScript_Kydippe {
+    lock
+    faceplayer
+    setspeaker(ElaiaVillage_NeighborsHouse_Name_Kydippe)
+    if (flag(FLAG_ICHOR_GOT_KYDIPPE_ORAN)) {
+        msgbox(format("Every child I've delivered walks that road one day. Go well."))
+    } else {
+        msgbox(format("Melitta's child! Come here. I delivered you, you know.\pYou didn't cry. You just looked around, like you'd lost something.\pHere. For the road. Don't tell Philon, he'll want some."))
+        giveitem(ITEM_ORAN_BERRY, 2)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_KYDIPPE_ORAN)
+        }
+    }
+    release
+}
+
+script ElaiaVillage_NeighborsHouse_EventScript_Chansey {
+    lock
+    faceplayer
+    playmoncry(SPECIES_CHANSEY, CRY_MODE_NORMAL)
+    setspeaker(ElaiaVillage_NeighborsHouse_Name_Chansey)
+    msgbox(format("Chaaan!"))
+    waitmoncry
+    release
+}
+
+script ElaiaVillage_NeighborsHouse_EventScript_Niche {
+    msgbox(format("A clay Eileithyia stands in the niche. Kydippe never starts a delivery without her."), MSGBOX_SIGN)
+}

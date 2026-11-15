@@ -182,6 +182,7 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_HIEROPHANT_IONE,
     TRAINER_PIC_TITAN_GRUNT,
     TRAINER_PIC_PROFESSOR_DAPHNE,
+    TRAINER_PIC_ALETHEA,               // back pic only, for the catch tutorial
     // Pokemon Ichor trainer classes (see design/phase1/SPRITES_classes.md)
     TRAINER_PIC_SHEPHERD,
     TRAINER_PIC_HARVESTER,
@@ -534,6 +535,16 @@ enum TrainerClassID
     TRAINER_CLASS_RUIN_MANIAC_FRLG,
     TRAINER_CLASS_LADY_FRLG,
     TRAINER_CLASS_PAINTER_FRLG,
+    // Ichor: Aethos trainer classes
+    TRAINER_CLASS_LAKONIAN,
+    TRAINER_CLASS_SHEPHERD,
+    TRAINER_CLASS_HARVESTER,
+    TRAINER_CLASS_GOATHERD,
+    TRAINER_CLASS_HOPLITE,
+    TRAINER_CLASS_AUGUR,
+    TRAINER_CLASS_TITANBORN,
+    TRAINER_CLASS_ACOLYTE,
+    TRAINER_CLASS_HIEROPHANT,
 
     TRAINER_CLASS_COUNT,
 };
@@ -557,6 +568,8 @@ enum TrainerApproachMusic
     TRAINER_ENCOUNTER_MUSIC_CUTE,       // Used in FRLG for Beauties, Picknickers, Twins, Lasses, Ladies, Breeder, female Swimmers and Leaders
     TRAINER_ENCOUNTER_MUSIC_SERIOUS,    // Used in FRLG for most trainers
     TRAINER_ENCOUNTER_MUSIC_DANGEROUS,  // Used in FRLG for Burglars, Channelers, Poké Maniacs, Super Nerds and Rockets
+    TRAINER_ENCOUNTER_MUSIC_RIVAL,      // Ichor: Kleon
+    TRAINER_ENCOUNTER_MUSIC_TITAN,      // Ichor: Team Titan
 
     TRAINER_ENCOUNTER_MUSIC_COUNT
 };

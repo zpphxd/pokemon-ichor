@@ -1,8 +1,8 @@
 {
   "id": "MAP_ELAIA_VILLAGE_AKADEMIA",
   "name": "ElaiaVillage_Akademia",
-  "layout": "LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
-  "music": "MUS_BIRCH_LAB",
+  "layout": "LAYOUT_ELAIA_VILLAGE_AKADEMIA",
+  "music": "MUS_ICHOR_AKADEMIA",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ELAIA_VILLAGE",
   "requires_flash": false,
@@ -14,17 +14,53 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
-  "warp_events": [
+  "object_events": [
     {
-      "x": 6,
-      "y": 12,
-      "elevation": 0,
-      "dest_map": "MAP_ELAIA_VILLAGE",
-      "dest_warp_id": "2"
+      "local_id": "LOCALID_AKADEMIA_DAPHNE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PROFESSOR_DAPHNE",
+      "x": 10,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ElaiaVillage_Akademia_EventScript_Daphne",
+      "flag": "0"
     },
     {
-      "x": 7,
+      "local_id": "LOCALID_AKADEMIA_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 13,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ElaiaVillage_Akademia_EventScript_Alethea",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_AKADEMIA"
+    },
+    {
+      "local_id": "LOCALID_AKADEMIA_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 10,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 10,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_ELAIA_VILLAGE",
@@ -32,5 +68,78 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_Akademia_EventScript_Krater"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_Akademia_EventScript_Krater"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_Akademia_EventScript_Krater"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_Akademia_EventScript_WallMap"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_Akademia_EventScript_WallMap"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_Akademia_EventScript_Scrolls"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_Akademia_EventScript_Scrolls"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_Akademia_EventScript_Scrolls"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ElaiaVillage_Akademia_EventScript_Scrolls"
+    }
+  ]
 }

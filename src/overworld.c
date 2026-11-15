@@ -1,4 +1,6 @@
 #include "global.h"
+#include "ichor_relics.h"
+#include "ichor_frozen.h"
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -1106,10 +1108,8 @@ void SetDefaultFlashLevel(void)
 {
     if (!gMapHeader.cave)
         gSaveBlock1Ptr->flashLevel = 0;
-    else if (FlagGet(FLAG_SYS_USE_FLASH))
-        gSaveBlock1Ptr->flashLevel = 1;
     else
-        gSaveBlock1Ptr->flashLevel = gMaxFlashLevel - 1;
+        gSaveBlock1Ptr->flashLevel = Ichor_GetTorchFlashLevel(); // Ichor: Hecate's Torch lights dark maps
 }
 
 void SetFlashLevel(s32 flashLevel)
@@ -1210,6 +1210,7 @@ static bool16 IsInfiltratedSpaceCenter(struct WarpData *warp)
 static const u16 sNightMusicTable[END_MUS - START_MUS + 1] = // Ichor: + 1 so END_MUS itself is in bounds
 {
     // example usage: [MUS_SOOTOPOLIS - START_MUS] = MUS_LITTLEROOT,
+    [MUS_ICHOR_ROAD - START_MUS] = MUS_ICHOR_ROAD_NIGHT, // Ichor: the road's tune in its night mode
 };
 
 static u16 GetNightMusicFromTrack(u16 track)
@@ -1243,6 +1244,9 @@ u16 GetCurrLocationDefaultMusic(void)
 {
     u16 music;
 
+    if (Ichor_IsFrozenHour()) // Ichor: only the music box plays
+        return MUS_ICHOR_ELPIS_LULLABY_BOX;
+
     // Play the desert music only when the sandstorm is active on Route 111.
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE111)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE111)
@@ -1266,6 +1270,8 @@ u16 GetCurrLocationDefaultMusic(void)
 u16 GetWarpDestinationMusic(void)
 {
     u16 music = GetLocationMusic(&sWarpDestination);
+    if (Ichor_IsFrozenHour()) // Ichor: only the music box plays
+        return MUS_ICHOR_ELPIS_LULLABY_BOX;
     if (music != MUS_ROUTE118)
     {
         return music;
@@ -1777,6 +1783,8 @@ void UpdateTimeOfDay(bool32 updateBlend)
 // Whether a map type is naturally lit/outside
 bool32 MapHasNaturalLight(enum MapType mapType)
 {
+    if (Ichor_SuspendsDayNight()) // Ichor: no time of day in the Frozen Hour
+        return FALSE;
     return (OW_ENABLE_DNS
          && (mapType == MAP_TYPE_TOWN
           || mapType == MAP_TYPE_CITY
@@ -1854,6 +1862,7 @@ static void OverworldBasic(void)
     CameraUpdate();
     UpdateCameraPanning();
     BuildOamBuffer();
+    Ichor_OnFieldFrame(); // Ichor: the Frozen Hour, the Thread, Asterion
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
@@ -1938,10 +1947,10 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
-    if (IS_FRLG)
-        gFieldCallback = FieldCB_WarpExitFadeFromBlack;
-    else
-        gFieldCallback = ExecuteTruckSequence;
+    // Ichor: a new game wakes up at home in Elaia (src/new_game.c), not in
+    // Hoenn's moving truck, so fade in with the map's music as FRLG does. The
+    // truck sequence would shake the bedroom and stamp truck tiles over it.
+    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
     SetFieldVBlankCallback();

@@ -95,7 +95,9 @@ bool8 ShowPokenavFieldMessage(const u8 *str)
         return FALSE;
     StringExpandPlaceholders(gStringVar4, str);
     CreateTask(Task_HidePokenavMessageWhenDone, 0);
+#if !ICHOR_CUT_POKENAV // Ichor: Match Call is cut
     StartMatchCallFromScript(str);
+#endif
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_NORMAL;
     return TRUE;
 }

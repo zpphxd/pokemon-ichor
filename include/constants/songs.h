@@ -493,7 +493,7 @@
 
 // Ichor: our songs are appended after the phonemes (see below), so END_MUS covers
 // them; overworld.c sizes its night-music table from it.
-#define END_MUS                     MUS_ICHOR_BATTLE_RIVAL
+#define END_MUS                     MUS_ICHOR_HOLLOW
 
 // These PH_* constants are phoneme sounds used by the "bard" NPC (see src/bard_music.c and src/mauville_old_man.c).
 // Each comes in a triplet of PH_*_BLEND, PH_*_HELD, and PH_*_SOLO, and the name of each triplet incorporates the English phonetic sound it represents.
@@ -549,11 +549,37 @@
 #define PH_NURSE_HELD               608
 #define PH_NURSE_SOLO               609
 
-// Pokémon Ichor songs (tools/ichor/music). Map themes first: index END_MUS is past
-// the end of overworld.c's sNightMusicTable, so keep a battle theme last.
+// Pokémon Ichor songs (tools/ichor/music). Append new ones at the end and move
+// END_MUS to the last, so overworld.c's sNightMusicTable (sized END_MUS + 1) covers them.
 #define MUS_ICHOR_ELAIA             610
 #define MUS_ICHOR_ROUTE1            611
 #define MUS_ICHOR_BATTLE_RIVAL      612
+#define MUS_ICHOR_AKTI              613
+#define MUS_ICHOR_TEMPLE            614
+#define MUS_ICHOR_ASCLEPEION        615
+#define MUS_ICHOR_TITAN             616
+#define MUS_ICHOR_BATTLE_TRAINER    617
+#define MUS_ICHOR_BATTLE_WILD       618
+#define MUS_ICHOR_VICTORY_TRAINER   619
+#define MUS_ICHOR_ENCOUNTER_RIVAL   620
+#define MUS_ICHOR_ENCOUNTER_TITAN   621
+#define MUS_ICHOR_OBTAIN_KEY_ITEM   622
+#define MUS_ICHOR_OBTAIN_MON        623
+#define MUS_ICHOR_NEW_GAME          624
+#define MUS_ICHOR_AGORA             625
+#define MUS_ICHOR_AKADEMIA          626
+#define MUS_ICHOR_ELPIS_LULLABY     627 // the hum: Elpis's room (Act II)
+#define MUS_ICHOR_ELPIS_LULLABY_BOX 628 // the music box: Daedalus's workshop, the Frozen Hour
+#define MUS_ICHOR_TRIREME           629
+#define MUS_ICHOR_ROAD              630 // Act I's mainland routes
+#define MUS_ICHOR_ROAD_NIGHT        631 // overworld.c's sNightMusicTable plays it for MUS_ICHOR_ROAD at night
+#define MUS_ICHOR_EMPORION          632
+#define MUS_ICHOR_TEMPLE_HERMES     633
+#define MUS_ICHOR_ELEUSA            634
+#define MUS_ICHOR_TEMPLE_DEMETER    635 // the Telesterion and the Mysteries
+#define MUS_ICHOR_BATTLE_ADMIN      636 // Titan admins: Hyperion, Iapetos, Rhea
+#define MUS_ICHOR_REVELATION        637 // Daphne's revelation, the end of Act I
+#define MUS_ICHOR_HOLLOW            638 // caves and woods, from Hecate's Hollow on
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

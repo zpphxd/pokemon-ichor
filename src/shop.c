@@ -1,4 +1,6 @@
 #include "global.h"
+#include "ichor_rites.h"
+// Ichor: Ichor_ModifyBuyPrice is Hermes's Swift Trade
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -644,7 +646,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
         {
             ConvertIntToDecimalStringN(
                 gStringVar1,
-                GetItemPrice(itemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT),
+                Ichor_ModifyBuyPrice(GetItemPrice(itemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT)),
                 STR_CONV_MODE_LEFT_ALIGN,
                 6);
         }
@@ -770,6 +772,10 @@ static void BuyMenuInitWindows(void)
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(WIN_MONEY, 1, BG_PLTT_ID(13));
     LoadMessageBoxGfx(WIN_MONEY, 0xA, BG_PLTT_ID(14));
+    // Ichor: the list and description print in palette 15, which was only
+    // left over from the field. Load the dialogue box's parchment and ink so
+    // the description's fill matches its papyrus panel (graphics/shop/menu.png).
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     PutWindowTilemap(WIN_MONEY);
     PutWindowTilemap(WIN_ITEM_LIST);
     PutWindowTilemap(WIN_ITEM_DESCRIPTION);
@@ -1017,7 +1023,7 @@ static void Task_BuyMenu(u8 taskId)
             BuyMenuPrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
 
             if (sMartInfo.martType == MART_TYPE_NORMAL)
-                sShopData->totalCost = (GetItemPrice(itemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT));
+                sShopData->totalCost = (Ichor_ModifyBuyPrice(GetItemPrice(itemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT)));
             else
                 sShopData->totalCost = gDecorations[itemId].price;
 
@@ -1037,7 +1043,7 @@ static void Task_BuyMenu(u8 taskId)
                         ConvertIntToDecimalStringN(gStringVar2, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, 6);
                         StringExpandPlaceholders(gStringVar4, gText_YouWantedVar1ThatllBeVar2);
                         tItemCount = 1;
-                        sShopData->totalCost = (GetItemPrice(tItemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT)) * tItemCount;
+                        sShopData->totalCost = (Ichor_ModifyBuyPrice(GetItemPrice(tItemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT))) * tItemCount;
                         BuyMenuDisplayMessage(taskId, gStringVar4, BuyMenuConfirmPurchase);
                     }
                     else if (GetItemPocket(itemId) == POCKET_TM_HM)
@@ -1104,7 +1110,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, sShopData->maxQuantity) == TRUE)
     {
-        sShopData->totalCost = (GetItemPrice(tItemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT)) * tItemCount;
+        sShopData->totalCost = (Ichor_ModifyBuyPrice(GetItemPrice(tItemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT))) * tItemCount;
         BuyMenuPrintItemQuantityAndPrice(taskId);
     }
     else

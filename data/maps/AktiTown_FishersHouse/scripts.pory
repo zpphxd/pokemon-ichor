@@ -1,1 +1,39 @@
+// Glaukos the old fisher's house, where the player gets the Old Rod.
+
 mapscripts AktiTown_FishersHouse_MapScripts {}
+
+text AktiTown_FishersHouse_Text_NameGlaukos { "GLAUKOS" }
+
+script AktiTown_FishersHouse_EventScript_Glaukos {
+    lock
+    faceplayer
+    setspeaker(AktiTown_FishersHouse_Text_NameGlaukos)
+    if (flag(FLAG_ICHOR_GOT_OLD_ROD)) {
+        msgbox(format("I ate a strange seaweed once, as a lad. Felt immortal for a week.\p"
+                      "Then I didn't. Don't eat strange seaweed."))
+        release
+        end
+    }
+    msgbox(format("Ah, a visitor. Do you fish?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("Liar. You've got sandal tan, not net tan. Take this anyway."))
+    } else {
+        msgbox(format("Not yet, you mean. Take this. Everyone fishes eventually."))
+    }
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_OLD_ROD)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_OLD_ROD)
+    setspeaker(AktiTown_FishersHouse_Text_NameGlaukos)
+    msgbox(format("Face the water, use the rod, wait for the tug. Then pull!"))
+    release
+}
+
+script AktiTown_FishersHouse_EventScript_Grandson {
+    msgbox(format("Grandpa says he used to be a sea-god.\p"
+                  "Grandpa says a lot of things."), MSGBOX_NPC)
+}

@@ -1,1 +1,171 @@
-mapscripts AktiTown_Asclepeion_MapScripts {}
+// The Akti Asclepeion: Ichor's Pokémon Center.
+//
+// Director's ruling 6: the healer and the Pithos speak Ichor-only text, so Hoenn's
+// Pokémon Centers stay vanilla. The two shared scripts below carry Ichor_ labels so
+// every later Asclepeion can call them; only the healer's local id changes:
+//   setvar(VAR_0x800B, <healer's local id>)
+//   call(Ichor_EventScript_AsclepeionHealer)
+// and a bg event on each cell of the jar pointing at Ichor_EventScript_Pithos (a bg
+// event outranks the jar's MB_PC behavior, so the vanilla PC script never runs).
+
+mapscripts AktiTown_Asclepeion_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_AKTI_TOWN)
+    }
+}
+
+script AktiTown_Asclepeion_EventScript_Healer {
+    setvar(VAR_0x800B, LOCALID_AKTI_HEALER)
+    call(Ichor_EventScript_AsclepeionHealer)
+    waitmessage
+    waitbuttonpress
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The healer. Follows Common_EventScript_PkmnCenterNurse, minus the Gold Card,
+// Union Room and Trainer Hill branches the slice can't reach. VAR_0x800B holds the
+// healer's local id. Leaves a message up for the caller to close.
+// ---------------------------------------------------------------------------
+
+script Ichor_EventScript_AsclepeionHealer {
+    lock
+    faceplayer
+    msgbox(Ichor_Text_AsclepeionWelcome, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        message(Ichor_Text_AsclepeionGoInHealth)
+        return
+    }
+    incrementgamestat(GAME_STAT_USED_POKECENTER)
+    message(Ichor_Text_AsclepeionRestThem)
+    waitmessage
+    call(EventScript_PkmnCenterNurse_TakeAndHealPkmn)
+    if (!flag(FLAG_POKERUS_EXPLAINED)) {
+        specialvar(VAR_RESULT, IsPokerusInParty)
+        if (var(VAR_RESULT) == TRUE) {
+            message(gText_PokerusExplanation)
+            setflag(FLAG_POKERUS_EXPLAINED)
+            return
+        }
+    }
+    message(Ichor_Text_AsclepeionRestored)
+    waitmessage
+    applymovement(VAR_0x800B, Movement_PkmnCenterNurse_Bow)
+    waitmovement(0)
+    message(Ichor_Text_AsclepeionGoInHealth)
+    return
+}
+
+text Ichor_Text_AsclepeionWelcome {
+    format("Welcome to the Asclepeion.\p"
+           "We tend tired Pokémon by the sacred spring.\p"
+           "Shall we tend yours?")
+}
+
+text Ichor_Text_AsclepeionRestThem {
+    format("Rest them here a moment.")
+}
+
+text Ichor_Text_AsclepeionRestored {
+    format("There. Whole and well, by Asclepius's grace.\p")
+}
+
+text Ichor_Text_AsclepeionGoInHealth {
+    format("Go in health.")
+}
+
+// ---------------------------------------------------------------------------
+// The Pithos: the PC, as a great sealed storage jar. Same storage specials as
+// EventScript_PC, without the PC's screen-flicker metatile effect, and with its
+// own small menu so no "SOMEONE'S PC" text shows.
+// ---------------------------------------------------------------------------
+
+script Ichor_EventScript_Pithos {
+    lockall
+    setvar(VAR_0x8004, PC_LOCATION_OTHER)
+    msgbox(Ichor_Text_PithosLook)
+    msgbox(Ichor_Text_PithosLift)
+    goto(Ichor_EventScript_PithosMenu)
+}
+
+script Ichor_EventScript_PithosMenu {
+    message(Ichor_Text_PithosReach)
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Ichor_Text_PithosOptionPokemon,
+                   Ichor_Text_PithosOptionThings, Ichor_Text_PithosOptionClose)
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(Ichor_Text_PithosOpened)
+            msgbox(Ichor_Text_PithosPokemonRest)
+            special(ShowPokemonStorageSystemPC)
+            goto(Ichor_EventScript_PithosMenu)
+        case 1:
+            msgbox(Ichor_Text_PithosThings)
+            special(PlayerPC)
+            goto(Ichor_EventScript_PithosMenu)
+    }
+    msgbox(Ichor_Text_PithosClose)
+    releaseall
+    end
+}
+
+text Ichor_Text_PithosLook {
+    format("A great clay pithos, taller than you. Its wax seal glows faintly.")
+}
+
+text Ichor_Text_PithosLift {
+    format("{PLAYER} lifted the lid of the Pithos.")
+}
+
+text Ichor_Text_PithosReach {
+    format("What will you reach for?")
+}
+
+text Ichor_Text_PithosOptionPokemon { "Pokémon" }
+text Ichor_Text_PithosOptionThings { "Your things" }
+text Ichor_Text_PithosOptionClose { "Close the lid" }
+
+text Ichor_Text_PithosOpened {
+    format("The Pithos of Akti opened.")
+}
+
+text Ichor_Text_PithosPokemonRest {
+    format("Pokémon rest safely inside the jar.")
+}
+
+text Ichor_Text_PithosThings {
+    format("{PLAYER}'s own things are wrapped in cloth near the top.")
+}
+
+text Ichor_Text_PithosClose {
+    format("{PLAYER} set the lid back on the Pithos.")
+}
+
+// ---------------------------------------------------------------------------
+// The people of the Asclepeion
+// ---------------------------------------------------------------------------
+
+script AktiTown_Asclepeion_EventScript_Pithos {
+    goto(Ichor_EventScript_Pithos)
+}
+
+script AktiTown_Asclepeion_EventScript_BandagedFisher {
+    msgbox(format("Krabby. Don't ask.\p"
+                  "…It was a big Krabby."), MSGBOX_NPC)
+}
+
+script AktiTown_Asclepeion_EventScript_PithosWoman {
+    msgbox(format("Go on, open it. Everyone flinches the first time.\p"
+                  "Old stories. A jar, a girl, all the evils of the world. This one's just Pokémon."),
+           MSGBOX_NPC)
+}
+
+script AktiTown_Asclepeion_EventScript_OldMan {
+    msgbox(format("My grandmother swore Asclepius once raised a man from the dead.\p"
+                  "Zeus struck him down for it. So now his healers stick to Pokémon. Safer."),
+           MSGBOX_NPC)
+}
+
+script AktiTown_Asclepeion_EventScript_Statue {
+    msgbox(format("Asclepius, with a snake coiled round his staff. It looks well fed."), MSGBOX_SIGN)
+}

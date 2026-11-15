@@ -2206,6 +2206,10 @@ void TryPutFrontierTVShowOnAir(u16 winStreak, u8 facilityAndMode)
 {
     TVShow *show;
 
+#if ICHOR_CUT_TV // Ichor: TV is cut
+    if (TRUE)
+        return;
+#endif
     sCurTVShowSlot = FindFirstEmptyRecordMixTVShowSlot(gSaveBlock1Ptr->tvShows);
     if (sCurTVShowSlot != -1)
     {

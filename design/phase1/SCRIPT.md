@@ -476,7 +476,7 @@ ALETHEA: The road to Akti runs right past it. Come find me?
 ```text
 WOOLOO: Baaa. [It plants its hooves and does not move.]
 ```
-Amaryllis's lines are in the roster. The spur to the hill is open. Polyeidos the Augur stands at the foot of the stair (trainer, roster below).
+Amaryllis's lines are in the roster. The spur to the hill is open. Polyeidos the Augur watches it from a rise, and his line covers the whole spur (trainer, roster below).
 
 ### The summit cutscene
 
@@ -524,6 +524,10 @@ ALETHEA: Then: “The fragment of the Harpe lies…
 
 ALETHEA: A riddle. I hate riddles. They're just lies wearing hats.
 
+ALETHEA: …And at the bottom: “Last, the house of the double axe.”
+
+ALETHEA: That's not a riddle. That's just rude.
+
 ALETHEA: The Harpe… that's Kronos's sickle. From the old stories.
 
 ALETHEA: The one he used to overthrow his own father.
@@ -561,7 +565,7 @@ ALETHEA: The Hearthkeeper's waiting. I'll catch up. I'm fast.
 
 ALETHEA: That's a lie, actually. I'm slow. But I'll catch up.
 ```
-[Alethea walks down the stair and off the map. Set `FLAG_ICHOR_RUINS_CLEARED` and `FLAG_ICHOR_HIDE_ALETHEA_RUINS`. Hide the grunts. On Route 1, the flock's hide flag `FLAG_ICHOR_HIDE_ROUTE1_FLOCK` is set on the map transition, so the road is open.]
+[Alethea walks down the stair and off the map. Set `FLAG_ICHOR_RUINS_CLEARED` and `FLAG_ICHOR_HIDE_ALETHEA_RUINS`. Hide the grunts. With them gone, the pit's floor shows cut steps going down into the dark (the dark stair, a relic gate for Hecate's Torch; no text). On Route 1, the flock's hide flag `FLAG_ICHOR_HIDE_ROUTE1_FLOCK` is set on the map transition, so the road is open.]
 
 ---
 
@@ -750,6 +754,8 @@ Layout reference, from the scaffold: the player's house door is at (5,8), upper 
 | Kid with Wooloo | near the well | comic |
 | Old shepherd | north exit | gate |
 | Kleon, Alethea | beat 4 only | — |
+| Glykera, Kimon | at home, in the house west of the square | see "Glykera's house" below |
+| Traveling scribe | at the square's west edge by the altar, at his stool; from the morning through beat 4 | a visitor who collects fortunes (secretly Iapetos, `design/STORY.md` §8.2) |
 
 **Halia**
 ```text
@@ -827,6 +833,20 @@ GYLIPPOS: That was the conversation.
 GYLIPPOS: The boy talks enough for all of Lakonia. Someone must.
 ```
 
+**Traveling scribe.** He is Iapetos, unrecognizable: the first sighting of his hook (`design/STORY.md` §8.2). He stands at his stool by the altar from the morning until the end of beat 4, then slips away with the festival crowd: set `FLAG_ICHOR_HIDE_SCRIBE`, and the stool goes too. Name box: SCRIBE.
+```text
+> before FLAG_ICHOR_THREAD_READ:
+SCRIBE: Don't mind me. I collect fortunes. For a book.
+
+> after FLAG_ICHOR_THREAD_READ:
+SCRIBE: Yours stopped her spindle. In forty years, she says. Never once.
+
+SCRIBE: May I tell you something true? You're going to be in my book.
+
+[Object: the scribe's stool, while he is there]
+A wax tablet on a stool. Neat writing. Every line ends in a little hook.
+```
+
 **Kid with Wooloo** (with a Wooloo object event beside them)
 ```text
 KID: My Wooloo ate the festival garland. Don't tell Halia.
@@ -868,6 +888,9 @@ Today Kalliste's youths come of age. Threads read under the old olive.
 [Herm at the north exit, a road-pillar of Hermes]
 A herm stands by the road.
 North: Route 1, Akti Town.
+
+[The honey-cake stall in the square]
+Glykera's honey cakes, still warm. She's run home to bake another batch.
 ```
 
 **Hidden items and objects.** See Part 5.
@@ -939,6 +962,115 @@ KYDIPPE: Every child I've delivered walks that road one day. Go well.
 CHANSEY: Chaaan! [It pats your head. Professionally.]
 ```
 
+## Glykera's house (`MAP_ELAIA_VILLAGE_BAKERS_HOUSE`)
+
+Every house is a home (`design/MAP_DESIGN.md` §2). This is the house west of the square. **Glykera** bakes the Klotheia's honey cakes, and the stall in the square is hers; she is Korinna's mother. Her father **Kimon** pulled an oar on the war triremes for forty years and keeps the corner by the window. His Finizen, **Arion**, swam beside his ship the whole way.
+
+What happens:
+- **A swap.** Glykera has run out of honey. The comb hidden in Melitta's hives (Part 6) buys two of her honey cakes (Old Gateau ×2).
+- **A trade, after beat 4.** Once the player has Poké Balls, Kimon trades Arion for a Wooloo from Route 1.
+- **A return gift, after the Hearth Laurel.** Kimon gives the pearls he dived for as a boy (Pearl String).
+- **Lore.** Kimon's halcyon days ("the sea goes flat as oil… no sail moves a ship then") set up beat 8.
+
+The room is L-shaped: the bakery runs deep on the left, with the honey shelf, the oven (the kitchen hearth), the flour basket, the grain pithos, the kneading table and the mortar. Kimon's nook is a shallower bay on the right, with the model trireme, his oars and a blue rug.
+
+**Glykera**, at her oven
+```text
+> FLAG_ICHOR_GOT_GLYKERA_CAKES unset, no Honey in the bag:
+GLYKERA: Mind the tray! …Oh, it's you. Melitta's child. The whole island wants honey cakes today.
+
+GLYKERA: And I've run out of honey. On festival day! Your mother promised me a jar.
+
+GLYKERA: Her hives are behind your house. Bring me a comb and I'll make it worth your while.
+
+> unset, with Honey:
+GLYKERA: Is that honey? Melitta's honey? Oh, you darling. Give it here.
+```
+[Take one `ITEM_HONEY`.]
+```text
+GLYKERA: There. The last tray is saved, and so is the festival.
+
+GLYKERA: Take two from the first batch. They're still warm.
+```
+[Give `ITEM_OLD_GATEAU` ×2. Set `FLAG_ICHOR_GOT_GLYKERA_CAKES`.]
+```text
+GLYKERA: Honey and barley. They mend whatever ails you, or your Pokémon.
+
+> after the cakes, before FLAG_ICHOR_THREAD_READ:
+GLYKERA: Korinna's been at the square since dawn. She says she isn't nervous.
+
+GLYKERA: She's been sick twice.
+
+> after FLAG_ICHOR_THREAD_READ:
+GLYKERA: Right about half the time, Halia told my Korinna.
+
+GLYKERA: She's choosing to hear it as a compliment. She gets that from her grandfather.
+
+> after FLAG_ICHOR_KLEON_BATTLE_1_DONE:
+GLYKERA: That Lakonian boy bought eleven cakes and ate twelve. I'm still working out how.
+```
+
+**Kimon**, by his chair under the window
+```text
+> before FLAG_ICHOR_GOT_POKEBALLS:
+KIMON: Forty years on the rowing benches. Top bench, the thranites. Best view of the sky.
+
+KIMON: Up there you learn the sea. When the halcyons nest, it goes flat as oil.
+
+KIMON: Days with no wind at all. No sail moves a ship then. Only oars.
+
+KIMON: My knees are done with oars. Arion isn't done with the sea. He sulks in his ball all day.
+
+KIMON: Come back when you've some Poké Balls of your own. I've a thought about Arion.
+
+> after FLAG_ICHOR_GOT_POKEBALLS:
+KIMON: Arion's my Finizen. He swam beside my ship from Kalliste to Athens and back, twenty years.
+
+KIMON: He's wasted on an old man by a fire. Bring me a Wooloo, something warm for my feet,
+
+KIMON: and Arion goes to sea with you. Deal?
+```
+?? YES/NO, then choose a Pokémon (the expansion's party-and-storage picker)
+```text
+> NO, or nothing chosen:
+KIMON: Think on it. Wooloo graze all along the road north.
+
+> not a Wooloo:
+KIMON: That's no Wooloo. My feet know the difference.
+
+> a Wooloo: [the in-game trade `INGAME_TRADE_ICHOR_ARION`: Finizen "ARION", OT KIMON, holding an Oran Berry. Set FLAG_ICHOR_DID_KIMON_TRADE.]
+KIMON: Mind this one, Arion. Stubborn chin. Runs in the family.
+
+> after the trade:
+KIMON: The Wooloo's asleep on my feet already.
+
+KIMON: Best trade I ever made, and I once swapped a helmet for a goat.
+
+> FLAG_BADGE01_GET set, FLAG_ICHOR_GOT_KIMON_PEARLS unset (comes first):
+KIMON: A laurel! From the Hearthkeeper herself?
+
+KIMON: In my day the winner got a cup of wine and a slap on the back.
+
+KIMON: Here. I brought these up off the sea floor when I was your age.
+
+KIMON: Sell them for your passage, or keep them for luck. I never decided.
+```
+[Give `ITEM_PEARL_STRING`. Set `FLAG_ICHOR_GOT_KIMON_PEARLS`.]
+```text
+> after the trade and the Hearth Laurel:
+KIMON: Halcyon days down at Akti, they tell me. Sea like oil, and no wind.
+
+KIMON: Told you. Only oars move a ship then.
+```
+
+| Object | Text |
+|---|---|
+| The oven | "Glykera's oven. The tray inside smells of honey and toasted barley." |
+| Honey shelf | Before the cakes: "Jars of honey, every one of them scraped clean. On festival day." After: "Jars of honey. One is full again, sealed with Melitta's wax." |
+| Grain pithos | "A pithos of barley flour, half empty. Someone has written “FESTIVAL” on the lid." |
+| Model trireme | "A model trireme with three banks of tiny oars." / "Someone has painted KIMON on the top bench." |
+| Kimon's window | "Between the olive trees, a sliver of sea. It hardly moves." |
+
 ## Akademia (`MAP_ELAIA_VILLAGE_AKADEMIA`)
 
 **Daphne**
@@ -968,7 +1100,7 @@ ALETHEA: Don't touch that scroll. Or that one. Actually, don't touch scrolls.
 
 ## Route 1 (`MAP_KALLISTE_ROUTE1`)
 
-The road runs north from Elaia through olive groves and terraced hillside to Akti. The Kronion Hill spur branches off to the east about two-thirds of the way up. Trainer placement, south to north: Tityros, Phyllis, Komatas, Agis (at the spur fork), Polyeidos (at the foot of the hill stair).
+The road runs north from Elaia through olive groves and terraced hillside to Akti. The Kronion Hill spur branches off to the east about two-thirds of the way up. Trainer placement, south to north: Tityros (at the meadow wall's only gap, the first and easy one), Phyllis (optional, on her grove lane), Komatas (optional, on the bee terraces), Polyeidos (on the spur, guarding the way to the hill), Agis (holding the pass just north of the flock's wall gap). Three bands of tall grass cross the road and can't be walked around: just out of Elaia, in the grove narrows, and on the cove shore before the climb to Akti (tools/ichor/maps/route1.py proves it).
 
 | NPC | Where | Role |
 |---|---|---|
@@ -1040,7 +1172,7 @@ A hilltop sanctuary of tumbled Doric drums around a broken altar. The dig pit si
 |---|---|
 | Stele at the top of the stair | "KRONION HILL. An old shrine, older than the olives." / "Someone has scratched a sickle into the stone. Recently." |
 | Broken altar | "A cracked altar. The stone is warm, like a sleeping animal." |
-| Dig pit, after it is cleared | "A fresh hole, dug in a hurry. There's nothing in it." / "…It still feels like something's looking up." |
+| Dig pit, after it is cleared | The pit's floor now shows cut stone steps going down into the dark: Hecate's Torch's second gate, to the Kronion crypt (SYSTEMS.md, relic gates; D10). "Stone steps go down into the dark. You can't see a thing." / "…It still feels like something's looking up." |
 
 Post-scene NPCs: none. The grunts and Alethea are hidden.
 
@@ -1059,7 +1191,15 @@ Layout reference, from the scaffold: you enter from the south road. The Asclepei
 | Old woman | on the temple steps | temple lore |
 | Pilgrim | by the Asclepeion | Oracle gossip, dread |
 | Kid on the pier | end of the pier | comic |
+| Old fisher | end of the pier, beside the kid | points out the islet shrine (relic gate) |
+| Kapra | a loose goat, eating the Fisher's washing | Aigon's quest |
 | Alethea | beat 8 | — |
+
+Two homes added after the harbor pass, under MAP_DESIGN.md §2 ("every house is a
+home"): the divers' house above the beach and the goatherd's farmhouse by the south
+gate. Their people are under their own headings below. Diktys's upturned boat is two
+object events (`OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L/_R`), because Akti's six rows on
+the Route 1 seam may use only aethos metatiles.
 
 **Diktys** (after beat 6)
 ```text
@@ -1175,6 +1315,43 @@ Trireme to the mainland sails when the winds turn.
 GLAUKOS. Gone fishing. (Not really. Knock.)
 ```
 
+**Relic gates** (SYSTEMS.md §1, D10). Both are locked in the slice; only these lines exist.
+```text
+[The grotto on the tide rocks, (26,4)/(27,4): the Bronze Hammer's gate]
+Broken marble chokes the mouth of a sea grotto.
+
+Something glints in the dark behind it.
+
+The blocks won't shift by hand. A good hammer would break them.
+```
+**Old fisher** (end of the pier, looking out at the islet: the Conch's gate)
+```text
+OLD FISHER: That white shrine out on the islet is Poseidon's.
+
+No one's set foot on it since the storm.
+
+Row for it, and the current turns you right round.
+
+The gulls get all his offerings now.
+```
+**Kapra** (Aigon's loose goat, at the Fisher's washing until sent home)
+```text
+[Skiddo cry]
+Mehhh! It has a wet sock in its mouth.
+
+It looks at you. It looks at the goat pen.
+
+It trots off home, sock and all.
+```
+[Fade out, remove her and set `FLAG_ICHOR_AKTI_GOAT_HOME`. Her object flag,
+`FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT`, is set from that flag on every map load.]
+
+**The goats in the pen** (two Skiddo)
+```text
+[Skiddo cry]
+Mehhh! It's chewing a clothes peg.
+```
+
 ## Akti Asclepeion (Pokémon Center re-skin)
 
 **Healer.** These are the nurse strings, re-skinned. Ship them as Ichor-only copies under new labels, called from an Ichor nurse script, so Hoenn's centers don't change (see Open questions).
@@ -1253,6 +1430,102 @@ GLAUKOS: Then I didn't. Don't eat strange seaweed.
 GRANDSON: Grandpa says he used to be a sea-god.
 
 Grandpa says a lot of things.
+```
+
+## Akti divers' house (`MAP_AKTI_TOWN_DIVERS_HOUSE`)
+
+Above the beach, door at (26,14). Doris, Hydna's grandmother, keeps the sponges. Her
+lore points at the grotto (the Bronze Hammer's gate); after the Hearth Laurel she
+trades her shell bell for the Heart Scale the tide leaves on the beach.
+
+**Doris**, by her sponge baskets.
+```text
+> before FLAG_BADGE01_GET:
+DORIS: Hydna's my granddaughter. I dove these waters long before her.
+
+DORIS: We kept our sponges in a grotto under the tide rocks.
+
+DORIS: Then marble from the old shrine fell across its mouth.
+
+DORIS: My mother's jar is still in there, sealed.
+
+DORIS: Come back with Hestia's laurel. I'll have a trade for you.
+
+> after FLAG_BADGE01_GET:
+DORIS: A laurel! Hestia doesn't hand those out for nothing.
+
+DORIS: Here's my trade. The tide leaves Heart Scales by the boats.
+
+DORIS: Bring me one, and my old shell bell is yours.
+
+> no Heart Scale in the bag:
+DORIS: No scale yet? Look by the boat they've hauled up.
+
+> with one:
+DORIS: Oh, you've one already! Will you trade it?
+```
+?? YES/NO
+```text
+> NO:
+DORIS: Keep it, then. The offer keeps too.
+
+> YES:
+```
+[Take one `ITEM_HEART_SCALE`, give `ITEM_SHELL_BELL` and set `FLAG_ICHOR_GOT_SHELL_BELL`.
+If the bag is full, give the scale back.]
+```text
+{PLAYER} received the Shell Bell!
+
+DORIS: Strung it myself, from shells we brought up. Let your partner hold it.
+
+DORIS: Every blow it lands, the sea gives a little back.
+
+> after the trade:
+DORIS: Hold that bell to your ear. The whole sea's in it.
+```
+```text
+[Water clock]
+A water clock. Hydna times her dives by it.
+
+The lowest mark is scratched "GRANDMOTHER'S RECORD."
+```
+
+## Akti goatherd's farmhouse (`MAP_AKTI_TOWN_GOATHERDS_HOUSE`)
+
+By the south gate, door at (18,25), beside the goat pen. Aigon the goatherd; a kid goat
+(Skiddo) wanders the kitchen. Kapra, his escape artist, is loose in town from the first
+visit; sending her home earns her old bell.
+
+**Aigon**, at his hearth.
+```text
+> before FLAG_ICHOR_AKTI_GOAT_HOME:
+AIGON: Come in, come in. Mind the kid, she bites.
+
+AIGON: If you see a goat that isn't in my pen, that's Kapra. She eats laundry.
+
+AIGON: Shoo her home for me? She won't come for me. Only for strangers.
+
+> Kapra home, bell not given:
+AIGON: Kapra's home! Chewing a sock. Whose sock?
+
+AIGON: Never mind. Here, take her old bell. It calms anything that wears it.
+
+AIGON: Not Kapra, though. Nothing calms Kapra.
+```
+[Give `ITEM_SOOTHE_BELL` once and set `FLAG_ICHOR_GOT_SOOTHE_BELL`.]
+```text
+{PLAYER} received the Soothe Bell!
+
+> after the gift:
+AIGON: Kapra's sulking in the pen. She liked that sock.
+```
+**The kid goat** (Skiddo)
+```text
+[Skiddo cry]
+Meh! It nibbles your sandal strap.
+
+[Hearth]
+A pot of goat's milk warms by the fire.
 ```
 
 ## Temple of Hestia (`MAP_AKTI_TOWN_TEMPLE_OF_HESTIA`)
@@ -1377,7 +1650,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 ```
 
-**4. HOPLITE Agis.** A Lakonian youth of the delegation, drilling at the Kronion Hill fork.
+**4. HOPLITE Agis.** A Lakonian youth of the delegation, drilling in the pass just north of the flock's wall gap. He can only be met once the flock has moved.
 ```text
 Before: AGIS: A Lakonian brings one spear to a fight. One is enough.
 Defeat: AGIS: …Two spears next time.
@@ -1398,7 +1671,7 @@ Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 ```
 
-**5. AUGUR Polyeidos.** At the foot of the Kronion Hill stair, staring at the sky.
+**5. AUGUR Polyeidos.** On a rise above the spur to Kronion Hill, staring at the sky. His line covers the whole spur.
 ```text
 Before: POLYEIDOS: The birds are wrong today. Let me see if you're wrong too.
 Defeat: POLYEIDOS: You're not wrong. The birds still are.
@@ -1883,16 +2156,19 @@ Flag naming: visible item balls use `FLAG_ITEM_ICHOR_<MAP>_<ITEM>`, hidden items
 | Player's house 2F | Potion | chest (item storage) | starts inside, as in vanilla |
 | Player's house 1F | Talaria | gift, Mom (beat 1) | — |
 | Elaia | Potion | visible | beside the olive press |
-| Elaia | Honey | hidden | at Mom's beehives behind the house |
+| Elaia | Honey | hidden | at Mom's beehives behind the house; Glykera swaps her honey cakes for it |
 | Elaia | Relic Copper | hidden | in the well ("a coin someone wished on") |
 | Elaia, Kydippe's house | Oran Berry ×2 | gift | — |
+| Elaia, Glykera's house | Old Gateau ×2 (honey cakes) | swap, for the Honey from Melitta's hives | — |
+| Elaia, Glykera's house | Finizen "Arion" | in-game trade with Kimon, for a Wooloo; after beat 4 | — |
+| Elaia, Glykera's house | Pearl String | gift, Kimon; after the Hearth Laurel | — |
 | Akademia | starter, Pokédex | gift, Daphne | — |
 | Elaia | Poké Ball ×5 | gift, Alethea (beat 4) | — |
-| Route 1 | Poké Ball | visible | on a terrace ledge past Tityros |
-| Route 1 | Miracle Seed | visible | deep in Phyllis's olive grove |
-| Route 1 | Potion | visible | at the foot of the fork herm |
+| Route 1 | Poké Ball | visible | on the grove's west walk, above the lip down to the meadow |
+| Route 1 | Miracle Seed | visible | deep in Phyllis's olive grove, past her lane |
+| Route 1 | Potion | visible | on the cove beach, past the shore grass |
 | Route 1 | Oran Berry | hidden | under the big olive |
-| Route 1 | Repel | hidden | in the dry-stone wall near the flock |
+| Route 1 | Repel | hidden | in the corner of the walled patch by the carter |
 | Route 1 | Antidote | hidden | in the grass near the Ekans patch |
 | Route 1 | Sitrus Berry | gift, olive farmer | — |
 | Route 1 | Moomoo Milk | gift, carter | — |
@@ -1907,6 +2183,8 @@ Flag naming: visible item balls use `FLAG_ITEM_ICHOR_<MAP>_<ITEM>`, hidden items
 | Akti | Heart Scale | hidden | on the beach sand |
 | Akti | Mystic Water | gift, Hydna | — |
 | Akti, Fisher's house | Old Rod | gift, Glaukos | — |
+| Akti, goatherd's farmhouse | Soothe Bell | gift, Aigon, once Kapra is home | — |
+| Akti, divers' house | Shell Bell | trade, Doris, for a Heart Scale, after the Hearth Laurel | — |
 | Temple | Charcoal | trial reward | — |
 | Temple | Hearth Laurel (badge 1), TM42 Facade | Ione | — |
 
@@ -1925,6 +2203,9 @@ All names are Greek-rooted and clear of the Lazarus avoid-list.
 | the Klotheia | the coming-of-age festival | Klotho, the Spinner |
 | Korinna, Philon | youths at the reading | classical names |
 | Kydippe | the midwife next door | classical name |
+| Glykera | the honey-cake baker, Korinna's mother | "sweet one" |
+| Kimon | her father, a retired trireme oarsman | the Athenian admiral Cimon |
+| Arion | Kimon's Finizen | the poet a dolphin carried ashore |
 | Gylippos | Lakonian elder | Spartan name |
 | Amaryllis | the shepherdess with the flock | Theocritus |
 | Tityros | Shepherd | Theocritus |
@@ -1970,22 +2251,30 @@ Engine: claim these as `FLAG_ICHOR_*` and `VAR_ICHOR_*`.
 
 **Gifts**
 - `FLAG_ICHOR_GOT_KYDIPPE_ORAN`
+- `FLAG_ICHOR_GOT_GLYKERA_CAKES`
+- `FLAG_ICHOR_DID_KIMON_TRADE`
+- `FLAG_ICHOR_GOT_KIMON_PEARLS`
 - `FLAG_ICHOR_GOT_ROUTE1_SITRUS`
 - `FLAG_ICHOR_GOT_MOOMOO_MILK`
 - `FLAG_ICHOR_GOT_MYSTIC_WATER`
 - `FLAG_ICHOR_GOT_OLD_ROD`
+- `FLAG_ICHOR_GOT_SOOTHE_BELL`
+- `FLAG_ICHOR_GOT_SHELL_BELL`
+- `FLAG_ICHOR_AKTI_GOAT_HOME` (Kapra is back in the pen)
 
 **Object hide flags**
 - `FLAG_ICHOR_HIDE_KRATER_SNIVY`, `_CYNDAQUIL`, `_PIPLUP`
 - `FLAG_ICHOR_HIDE_KLEON_ELAIA`
 - `FLAG_ICHOR_HIDE_ALETHEA_AKADEMIA`
 - `FLAG_ICHOR_HIDE_ALETHEA_ELAIA`
+- `FLAG_ICHOR_HIDE_SCRIBE` (set at the end of beat 4)
 - `FLAG_ICHOR_HIDE_ALETHEA_RUINS`
 - `FLAG_ICHOR_HIDE_RUINS_GRUNTS`
 - `FLAG_ICHOR_HIDE_TITAN_TABLET`
 - `FLAG_ICHOR_HIDE_ROUTE1_FLOCK`
 - `FLAG_ICHOR_HIDE_KLEON_AKTI`
 - `FLAG_ICHOR_HIDE_ALETHEA_AKTI`
+- `FLAG_ICHOR_HIDE_AKTI_LOOSE_GOAT`
 
 **Battle**
 - `FLAG_ICHOR_NO_WHITEOUT`, assigned to `B_FLAG_NO_WHITEOUT` in `include/config/battle.h`

@@ -407,7 +407,33 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorProfes
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAlethea;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHierophantIone;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTitanGrunt;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMom;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPriestess;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorYouthM;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorYouthF;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMan;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorWoman;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorElderM;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorElderF;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKidM;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKidF;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorFisher;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSailor;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDiver;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHealer;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorMerchant;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorShepherd;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHarvester;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorGoatherd;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHoplite;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAugur;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteM;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyteF;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatL;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatR;
 // End of Ichor object events
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar; // Ichor: the ground item
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
     [OBJ_EVENT_GFX_BRENDAN_NORMAL] =           &gObjectEventGraphicsInfo_BrendanNormal,
@@ -469,7 +495,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M] =     &gObjectEventGraphicsInfo_CyclingTriathleteM,
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F] =     &gObjectEventGraphicsInfo_CyclingTriathleteF,
     [OBJ_EVENT_GFX_NURSE] =                    &gObjectEventGraphicsInfo_Nurse,
-    [OBJ_EVENT_GFX_ITEM_BALL] =                &gObjectEventGraphicsInfo_PokeBall,
+    [OBJ_EVENT_GFX_ITEM_BALL] =                &gObjectEventGraphicsInfo_IchorItemJar, // Ichor: a sealed clay jar, not a Poke Ball
     [OBJ_EVENT_GFX_BERRY_TREE] =               &gObjectEventGraphicsInfo_BerryTree,
     [OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES] =  &gObjectEventGraphicsInfo_BerryTreeEarlyStages,
     [OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES] =   &gObjectEventGraphicsInfo_BerryTreeLateStages,
@@ -806,6 +832,31 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_ALETHEA] =            &gObjectEventGraphicsInfo_IchorAlethea,
     [OBJ_EVENT_GFX_ICHOR_HIEROPHANT_IONE] =    &gObjectEventGraphicsInfo_IchorHierophantIone,
     [OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT] =        &gObjectEventGraphicsInfo_IchorTitanGrunt,
+    [OBJ_EVENT_GFX_ICHOR_MOM] =                &gObjectEventGraphicsInfo_IchorMom,
+    [OBJ_EVENT_GFX_ICHOR_PRIESTESS] =          &gObjectEventGraphicsInfo_IchorPriestess,
+    [OBJ_EVENT_GFX_ICHOR_YOUTH_M] =            &gObjectEventGraphicsInfo_IchorYouthM,
+    [OBJ_EVENT_GFX_ICHOR_YOUTH_F] =            &gObjectEventGraphicsInfo_IchorYouthF,
+    [OBJ_EVENT_GFX_ICHOR_MAN] =                &gObjectEventGraphicsInfo_IchorMan,
+    [OBJ_EVENT_GFX_ICHOR_WOMAN] =              &gObjectEventGraphicsInfo_IchorWoman,
+    [OBJ_EVENT_GFX_ICHOR_ELDER_M] =            &gObjectEventGraphicsInfo_IchorElderM,
+    [OBJ_EVENT_GFX_ICHOR_ELDER_F] =            &gObjectEventGraphicsInfo_IchorElderF,
+    [OBJ_EVENT_GFX_ICHOR_KID_M] =              &gObjectEventGraphicsInfo_IchorKidM,
+    [OBJ_EVENT_GFX_ICHOR_KID_F] =              &gObjectEventGraphicsInfo_IchorKidF,
+    [OBJ_EVENT_GFX_ICHOR_FISHER] =             &gObjectEventGraphicsInfo_IchorFisher,
+    [OBJ_EVENT_GFX_ICHOR_SAILOR] =             &gObjectEventGraphicsInfo_IchorSailor,
+    [OBJ_EVENT_GFX_ICHOR_DIVER] =              &gObjectEventGraphicsInfo_IchorDiver,
+    [OBJ_EVENT_GFX_ICHOR_HEALER] =             &gObjectEventGraphicsInfo_IchorHealer,
+    [OBJ_EVENT_GFX_ICHOR_MERCHANT] =           &gObjectEventGraphicsInfo_IchorMerchant,
+    [OBJ_EVENT_GFX_ICHOR_SHEPHERD] =           &gObjectEventGraphicsInfo_IchorShepherd,
+    [OBJ_EVENT_GFX_ICHOR_HARVESTER] =          &gObjectEventGraphicsInfo_IchorHarvester,
+    [OBJ_EVENT_GFX_ICHOR_GOATHERD] =           &gObjectEventGraphicsInfo_IchorGoatherd,
+    [OBJ_EVENT_GFX_ICHOR_HOPLITE] =            &gObjectEventGraphicsInfo_IchorHoplite,
+    [OBJ_EVENT_GFX_ICHOR_AUGUR] =              &gObjectEventGraphicsInfo_IchorAugur,
+    [OBJ_EVENT_GFX_ICHOR_ACOLYTE_M] =          &gObjectEventGraphicsInfo_IchorAcolyteM,
+    [OBJ_EVENT_GFX_ICHOR_ACOLYTE_F] =          &gObjectEventGraphicsInfo_IchorAcolyteF,
+    [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
+    [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatL,
+    [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatR,
     // End of Ichor object events
 };
 

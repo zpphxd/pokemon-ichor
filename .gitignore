@@ -85,3 +85,10 @@ data/maps/AktiTown_Agora/scripts.inc
 data/maps/AktiTown_FishersHouse/scripts.inc
 data/maps/AktiTown_TempleOfHestia/scripts.inc
 data/maps/KallisteRoute1_KronionHill/scripts.inc
+data/maps/ElaiaVillage_BakersHouse/scripts.inc
+data/maps/AktiTown_DiversHouse/scripts.inc
+data/maps/AktiTown_GoatherdsHouse/scripts.inc
+data/scripts/ichor_relics.inc
+data/scripts/ichor_rites.inc
+data/scripts/ichor_herms.inc
+data/scripts/ichor_labyrinth.inc

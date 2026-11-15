@@ -77,8 +77,8 @@
 #include "constants/sound.h"
 
 // Sound related settings
-#define P_MODIFIED_MEGA_CRIES            P_MEGA_EVOLUTIONS  // If TRUE, will use the extra separate Mega Cries (approx. 3% space of ROM). if FALSE, will use the same cry for all Mega Evolutions except modified with P_MODIFIED_MEGA_CRY_MODE. By default, this is set based on if mega evolutions are enabled.
-#define P_MODIFIED_MEGA_CRY_MODE         CRY_MODE_HIGH_PITCH
+#define P_MODIFIED_MEGA_CRIES            FALSE              // Ichor: Megas share their base cry (user's call, about 1 MB saved). If TRUE, will use the extra separate Mega Cries (approx. 3% space of ROM). if FALSE, will use the same cry for all Mega Evolutions except modified with P_MODIFIED_MEGA_CRY_MODE. By default, this is set based on if mega evolutions are enabled.
+#define P_MODIFIED_MEGA_CRY_MODE         CRY_MODE_NORMAL // Ichor: Megas play their base cry unchanged.
 
 // Pokédex
 #define DONT_SKIP_GAPS                   0              // Does not skip any gaps in the Pokédex.

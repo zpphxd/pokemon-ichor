@@ -1,0 +1,61 @@
+// The divers' house above Akti's beach: Doris, Hydna's grandmother. She tells of
+// the grotto under the tide rocks (the Bronze Hammer's gate) on any visit, and
+// after the Hearth Laurel trades her shell bell for a Heart Scale off the beach.
+
+mapscripts AktiTown_DiversHouse_MapScripts {}
+
+text AktiTown_DiversHouse_Text_NameDoris { "DORIS" }
+
+script AktiTown_DiversHouse_EventScript_Doris {
+    lock
+    faceplayer
+    setspeaker(AktiTown_DiversHouse_Text_NameDoris)
+    if (flag(FLAG_ICHOR_GOT_SHELL_BELL)) {
+        msgbox(format("Hold that bell to your ear. The whole sea's in it."))
+        release
+        end
+    }
+    if (!flag(FLAG_BADGE01_GET)) {
+        msgbox(format("Hydna's my granddaughter. I dove these waters long before her.\p"
+                      "We kept our sponges in a grotto under the tide rocks.\p"
+                      "Then marble from the old shrine fell across its mouth.\p"
+                      "My mother's jar is still in there, sealed.\p"
+                      "Come back with Hestia's laurel. I'll have a trade for you."))
+        release
+        end
+    }
+    msgbox(format("A laurel! Hestia doesn't hand those out for nothing.\p"
+                  "Here's my trade. The tide leaves Heart Scales by the boats.\p"
+                  "Bring me one, and my old shell bell is yours."))
+    checkitem(ITEM_HEART_SCALE)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("No scale yet? Look by the boat they've hauled up."))
+        release
+        end
+    }
+    msgbox(format("Oh, you've one already! Will you trade it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Keep it, then. The offer keeps too."))
+        release
+        end
+    }
+    setspeaker(SP_NAME_NONE)
+    removeitem(ITEM_HEART_SCALE)
+    giveitem(ITEM_SHELL_BELL)
+    if (var(VAR_RESULT) == FALSE) {
+        additem(ITEM_HEART_SCALE)
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_SHELL_BELL)
+    setspeaker(AktiTown_DiversHouse_Text_NameDoris)
+    msgbox(format("Strung it myself, from shells we brought up. Let your partner hold it.\p"
+                  "Every blow it lands, the sea gives a little back."))
+    release
+}
+
+script AktiTown_DiversHouse_EventScript_WaterClock {
+    msgbox(format("A water clock. Hydna times her dives by it.\p"
+                  "The lowest mark is scratched “GRANDMOTHER'S RECORD.”"), MSGBOX_SIGN)
+}

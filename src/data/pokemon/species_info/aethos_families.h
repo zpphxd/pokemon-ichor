@@ -3734,7 +3734,7 @@
         .levelUpLearnset = sKapletLevelUpLearnset,
         .teachableLearnset = sKapletTeachableLearnset,
         .eggMoveLearnset = sKapletEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_KAPRODON} /* stand-in until MAPSEC_ARKADIA exists */),
+        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_KAPRODON, CONDITIONS({IF_IN_MAPSEC, MAPSEC_ARKADIA})}),
     },
 
     [SPECIES_KAPRODON] =
@@ -6181,7 +6181,7 @@
         .levelUpLearnset = sNarcibulbLevelUpLearnset,
         .teachableLearnset = sNarcibulbTeachableLearnset,
         .eggMoveLearnset = sNarcibulbEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_NARCISHEEN} /* stand-in until MAPSEC_KYTHERA_ISLE exists */),
+        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_NARCISHEEN, CONDITIONS({IF_IN_MAPSEC, MAPSEC_KYTHERA_ISLE})}),
     },
 
     [SPECIES_NARCISHEEN] =

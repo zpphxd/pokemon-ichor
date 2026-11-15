@@ -16,7 +16,8 @@
 -- Pokes memory: gSaveBlock2Ptr->playerGender, and FLAG_SYS_B_DASH in
 -- gSaveBlock1Ptr->flags. Pointer addresses come from pokeemerald.map; the
 -- offsets are from include/global.h (SaveBlock2.playerGender at 0x08,
--- SaveBlock1.flags at 0x1270) and FLAG_SYS_B_DASH = SYSTEM_FLAGS + 0x60 = 2240.
+-- SaveBlock1.flags at 0x1270) and FLAG_SYS_B_DASH = SYSTEM_FLAGS + 0x60 (SYSTEM_FLAGS is 0x500 + MAX_TRAINERS_COUNT_EMERALD,
+-- read from include/constants/opponents.h).
 
 local OUT = os.getenv("WALK_OUT") or "build/walk_test/"
 local GENDER = tonumber(os.getenv("WALK_GENDER") or "0")
@@ -24,7 +25,17 @@ local K = C.GBA_KEY
 
 local GENDER_OFFSET = 0x08
 local FLAGS_OFFSET = 0x1270
-local FLAG_SYS_B_DASH = 2240
+local FLAG_SYS_B_DASH = (function()
+  local f = io.open("include/constants/opponents.h", "r")
+  local count
+  if f then
+    for line in f:lines() do
+      count = count or tonumber(line:match("^#define MAX_TRAINERS_COUNT_EMERALD%s+(%d+)"))
+    end
+    f:close()
+  end
+  return 0x500 + (count or 864) + 0x60
+end)()
 
 local function sym(name)
   local f = io.open("pokeemerald.map", "r")

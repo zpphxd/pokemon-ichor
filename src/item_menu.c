@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_relics.h"
 #include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
@@ -2165,6 +2166,8 @@ bool8 UseRegisteredKeyItemOnField(void)
         return FALSE;
     HideMapNamePopUpWindow();
     ChangeBgY_ScreenOff(0, 0, BG_COORD_SET);
+    if (Ichor_TryOpenRelicRing()) // Ichor: SELECT opens the Relic Ring once you own a free relic
+        return TRUE;
     if (gSaveBlock1Ptr->registeredItem != ITEM_NONE)
     {
         if (CheckBagHasItem(gSaveBlock1Ptr->registeredItem, 1) == TRUE)
@@ -2591,7 +2594,9 @@ static void LoadBagMenuTextWindows(void)
     LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
     LoadMessageBoxGfx(0, 10, BG_PLTT_ID(13));
     ListMenuLoadStdPalAt(BG_PLTT_ID(12), 1);
-    LoadPalette(&gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    // Ichor: menus and messages here use the dialogue box's parchment and ink
+    // palette instead of the white standard menu palette.
+    LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i <= WIN_POCKET_NAME; i++)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));

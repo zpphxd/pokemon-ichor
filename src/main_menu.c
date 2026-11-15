@@ -41,6 +41,9 @@
 #include "window.h"
 #include "mystery_gift_menu.h"
 
+// Ichor: Daphne's "This is a Pokémon" line (data/text/birch_speech.inc)
+extern const u8 gText_Birch_Pokemon[];
+
 /*
  * Main menu state machine
  * -----------------------
@@ -274,7 +277,7 @@ static const u8 gText_MysteryEventsCantUse[] = _("MYSTERY EVENTS can't be used w
 static const u8 gText_ContinueMenuPlayer[] = _("PLAYER");
 static const u8 gText_ContinueMenuTime[] = _("TIME");
 static const u8 gText_ContinueMenuPokedex[] = _("POKéDEX");
-static const u8 gText_ContinueMenuBadges[] = _("BADGES");
+static const u8 gText_ContinueMenuBadges[] = _("LAURELS"); // Ichor: design/TERMS.md
 
 #define MENU_LEFT 2
 #define MENU_TOP_WIN0 1
@@ -472,9 +475,10 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_PlayerShrink[] =
     sSpriteAffineAnim_PlayerShrink
 };
 
+// Ichor: Daphne asks which of the two is you, so the menu names them
 static const struct MenuAction sMenuActions_Gender[] = {
-    {gText_Boy, {NULL}},
-    {gText_Girl, {NULL}}
+    {COMPOUND_STRING("THEO"), {NULL}},
+    {COMPOUND_STRING("IANTHE"), {NULL}}
 };
 
 static const u8 *const sMalePresetNames[] = {
@@ -614,7 +618,7 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BG0); // Ichor: the plates not chosen fade to parchment, not gray
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
 
@@ -692,7 +696,7 @@ static void Task_MainMenuCheckBattery(u8 taskId)
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BG0); // Ichor: the plates not chosen fade to parchment, not gray
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
 
@@ -730,32 +734,35 @@ static void Task_DisplayMainMenu(u8 taskId)
         SetGpuReg(REG_OFFSET_WIN0V, 0);
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_OBJ);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_DARKEN | BLDCNT_TGT1_BG0);
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_LIGHTEN | BLDCNT_TGT1_BG0); // Ichor: the plates not chosen fade to parchment, not gray
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
 
-        palette = RGB_BLACK;
+        // Ichor: the menu's colors come from main_menu_text.pal (tools/ichor/art/
+        // ui_codex_misc.py): ink on a sun-gold plate, Theo's details in 1 and
+        // Ianthe's in 13. Emerald hardcoded white, grays, blue and pink here.
+        palette = sMainMenuTextPal[14];
         LoadPalette(&palette, BG_PLTT_ID(15) + 14, PLTT_SIZEOF(1));
 
-        palette = RGB_WHITE;
+        palette = sMainMenuTextPal[10];
         LoadPalette(&palette, BG_PLTT_ID(15) + 10, PLTT_SIZEOF(1));
 
-        palette = RGB(12, 12, 12);
+        palette = sMainMenuTextPal[11];
         LoadPalette(&palette, BG_PLTT_ID(15) + 11, PLTT_SIZEOF(1));
 
-        palette = RGB(26, 26, 25);
+        palette = sMainMenuTextPal[12];
         LoadPalette(&palette, BG_PLTT_ID(15) + 12, PLTT_SIZEOF(1));
 
         // Note: If there is no save file, the save block is zeroed out,
         // so the default gender is MALE.
         if (gSaveBlock2Ptr->playerGender == MALE)
         {
-            palette = RGB(4, 16, 31);
+            palette = sMainMenuTextPal[1];
             LoadPalette(&palette, BG_PLTT_ID(15) + 1, PLTT_SIZEOF(1));
         }
         else
         {
-            palette = RGB(31, 3, 21);
+            palette = sMainMenuTextPal[13];
             LoadPalette(&palette, BG_PLTT_ID(15) + 1, PLTT_SIZEOF(1));
         }
 
@@ -1067,15 +1074,27 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             DestroyTask(taskId);
             break;
         case ACTION_MYSTERY_GIFT:
+#if !ICHOR_CUT_MYSTERY_GIFT // Ichor: Mystery Gift is cut
             SetMainCallback2(CB2_InitMysteryGift);
+#else
+            SetMainCallback2(CB2_ReinitMainMenu);
+#endif
             DestroyTask(taskId);
             break;
         case ACTION_MYSTERY_EVENTS:
+#if !ICHOR_CUT_MYSTERY_GIFT // Ichor: Mystery Gift is cut
             SetMainCallback2(CB2_InitMysteryEventMenu);
+#else
+            SetMainCallback2(CB2_ReinitMainMenu);
+#endif
             DestroyTask(taskId);
             break;
         case ACTION_EREADER:
+#if !ICHOR_CUT_MYSTERY_GIFT // Ichor: Mystery Gift is cut
             SetMainCallback2(CB2_InitEReader);
+#else
+            SetMainCallback2(CB2_ReinitMainMenu);
+#endif
             DestroyTask(taskId);
             break;
         case ACTION_INVALID:
@@ -1284,7 +1303,7 @@ static void Task_NewGameBirchSpeech_Init(u8 taskId)
     gTasks[taskId].tPlayerSpriteId = SPRITE_NONE;
     gTasks[taskId].data[3] = 0xFF;
     gTasks[taskId].tTimer = 0xD8;
-    PlayBGM(MUS_ROUTE122);
+    PlayBGM(MUS_ICHOR_NEW_GAME); // Ichor
     ShowBg(0);
     ShowBg(1);
 }
@@ -1341,7 +1360,7 @@ static void Task_NewGameBirchSpeech_ThisIsAPokemon(u8 taskId)
     if (!gPaletteFade.active && !RunTextPrintersAndIsPrinter0Active())
     {
         gTasks[taskId].func = Task_NewGameBirchSpeech_MainSpeech;
-        StringExpandPlaceholders(gStringVar4, gText_ThisIsAPokemon);
+        StringExpandPlaceholders(gStringVar4, gText_Birch_Pokemon); // Ichor: Daphne's line, with the release pause
         AddTextPrinterWithCallbackForMessage(TRUE, NewGameBirchSpeech_WaitForThisIsPokemonText);
         sBirchSpeechMainTaskId = taskId;
     }
@@ -1368,7 +1387,7 @@ static void Task_NewGameBirchSpeechSub_InitPokeBall(u8 taskId)
     gSprites[spriteId].invisible = FALSE;
     gSprites[spriteId].data[0] = 0;
 
-    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 112, 58, 0, 0, 32, PALETTES_BG, SPECIES_LOTAD);
+    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 112, 58, 0, 0, 32, PALETTES_BG, SPECIES_SMOLIV); // Ichor: Daphne's Smoliv
     gTasks[taskId].func = Task_NewGameBirchSpeechSub_WaitForLotad;
     gTasks[sBirchSpeechMainTaskId].tTimer = 0;
 }
@@ -1868,7 +1887,7 @@ static void SpriteCB_MovePlayerDownWhileShrinking(struct Sprite *sprite)
 
 static u8 NewGameBirchSpeech_CreateLotadSprite(u8 x, u8 y)
 {
-    return CreateMonPicSprite_Affine(SPECIES_LOTAD, FALSE, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
+    return CreateMonPicSprite_Affine(SPECIES_SMOLIV, FALSE, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE); // Ichor: Daphne's Smoliv
 }
 
 static void AddBirchSpeechObjects(u8 taskId)

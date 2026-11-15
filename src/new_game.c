@@ -26,6 +26,7 @@
 #include "coins.h"
 #include "text.h"
 #include "overworld.h"
+#include "constants/heal_locations.h"
 #include "mail.h"
 #include "battle_records.h"
 #include "item.h"
@@ -137,8 +138,11 @@ static void WarpToTruck(void)
 {
     if (IS_FRLG)
         SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
-    else // Ichor: wake up at home in Elaia Village instead of in Hoenn's moving truck
+    else // Ichor: wake up at home in Elaia Village instead of in Hoenn's moving truck,
+    {    // and white out back home to Mom from the very first step
         SetWarpDestination(MAP_GROUP(MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_2F), MAP_NUM(MAP_ELAIA_VILLAGE_PLAYERS_HOUSE_2F), WARP_ID_NONE, 5, 5);
+        SetLastHealLocationWarp(HEAL_LOCATION_ELAIA_VILLAGE);
+    }
     WarpIntoMap();
 }
 
@@ -184,6 +188,9 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
+    // Ichor: until the Aethos regional dex replaces Hoenn's, the slice's species
+    // only show in the full dex, so a new game starts with it on.
+    EnableNationalPokedex();
     ClearTVShowData();
     ResetGabbyAndTy();
     ClearSecretBases();
@@ -209,7 +216,9 @@ void NewGameInitData(void)
     SetMauvilleOldMan();
     InitDewfordTrend();
     ResetFanClub();
+#if !ICHOR_CUT_MINIGAMES // Ichor: the minigames are cut
     ResetLotteryCorner();
+#endif
     UpdateDailySeed();
     WarpToTruck();
     if (IS_FRLG)
@@ -234,13 +243,16 @@ void NewGameInitData(void)
     ResetItemFlags();
     ResetDexNav();
     ClearFollowerNPCData();
+    Ichor_InitSave(); // Ichor
 }
 
 static void ResetMiniGamesRecords(void)
 {
     CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
     SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
+#if !ICHOR_CUT_MINIGAMES // Ichor: the minigames are cut
     ResetPokemonJumpRecords();
+#endif
     CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }
 

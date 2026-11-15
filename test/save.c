@@ -4,9 +4,9 @@
 
 // If you would like to ensure save compatibility, update the values below with those for your hack. You can find these through the debug menu.
 // Please note that this simple check is not 100% foolproof, but should be able to catch most unintended shifts.
-#define T_SAVEBLOCK1_SIZE 15604 // Ichor: dexSeen and dexCaught cover the 152 Aethos national dex numbers (upstream: 15568)
+#define T_SAVEBLOCK1_SIZE 15624 // Ichor: 1,024 trainer flags (MAX_TRAINERS_COUNT_EMERALD, PG-38, +20) and dexSeen/dexCaught for the 152 Aethos national dex numbers (+36) over upstream's 15568
 #define T_SAVEBLOCK2_SIZE 3884
-#define T_SAVEBLOCK3_SIZE 4
+#define T_SAVEBLOCK3_SIZE 1284 // Ichor: IchorSave (1,280 bytes, include/ichor_save.h) plus dexNavChain
 #define T_POKEMONSTORAGE_SIZE 34144
 
 TEST("SaveBlock1 is backwards compatible")

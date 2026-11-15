@@ -175,14 +175,14 @@ static const u8 sText_Mailbox[] = _("MAILBOX");
 
 static const u8 sText_WithdrawHowManyItems[] = _("Withdraw how many\n{STR_VAR_1}?");
 static const u8 sText_WithdrawXItems[] = _("Withdrew {STR_VAR_2}\n{STR_VAR_1}.");
-static const u8 sText_NoRoomInBag[] = _("There is no more\nroom in the BAG.");
+static const u8 sText_NoRoomInBag[] = _("There is no more\nroom in the Bag.");
 static const u8 sText_TooImportantToToss[] = _("That's much too\nimportant to toss\nout!");
 
 static const u8 *const sItemStorage_OptionDescriptions[] =
 {
-    [MENU_WITHDRAW] = COMPOUND_STRING("Take out items from the PC."),
-    [MENU_DEPOSIT]  = COMPOUND_STRING("Store items in the PC."),
-    [MENU_TOSS]     = COMPOUND_STRING("Throw away items stored in the PC."),
+    [MENU_WITHDRAW] = COMPOUND_STRING("Take out items you've stored."),
+    [MENU_DEPOSIT]  = COMPOUND_STRING("Put items away for safekeeping."),
+    [MENU_TOSS]     = COMPOUND_STRING("Throw away items you've stored."),
     [MENU_EXIT]     = gText_GoBackPrevMenu,
 };
 
@@ -191,7 +191,7 @@ static const struct MenuAction sPlayerPCMenuActions[] =
     [MENU_ITEMSTORAGE] = { COMPOUND_STRING("ITEM STORAGE"), {PlayerPC_ItemStorage} },
     [MENU_MAILBOX]     = { sText_Mailbox,                   {PlayerPC_Mailbox} },
     [MENU_DECORATION]  = { COMPOUND_STRING("DECORATION"),   {PlayerPC_Decoration} },
-    [MENU_TURNOFF]     = { COMPOUND_STRING("TURN OFF"),     {PlayerPC_TurnOff} }
+    [MENU_TURNOFF]     = { COMPOUND_STRING("CLOSE"),        {PlayerPC_TurnOff} }
 };
 
 static const u8 sBedroomPC_OptionOrder[] =
@@ -484,7 +484,11 @@ static void PlayerPC_Mailbox(u8 taskId)
 
 static void PlayerPC_Decoration(u8 taskId)
 {
+#if !ICHOR_CUT_SECRET_BASES // Ichor: decorations are cut
     DoPlayerRoomDecorationMenu(taskId);
+#else
+    PlayerPC_TurnOff(taskId);
+#endif
 }
 
 static void PlayerPC_TurnOff(u8 taskId)
