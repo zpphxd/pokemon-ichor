@@ -69,19 +69,19 @@
 #define TRAINER_ICHOR_KERYKOS_1               68
 #define TRAINERS_END_ACT1                     69
 
-// world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
+// world-act2, ids 160-319, 820-849 and 1344-1403: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0
 
-// world-act3, ids 320-499: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
+// world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0
 
-// The post-game, ids 500-679: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
+// The post-game, ids 500-679 and 1024-1223: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
 #define TRAINERS_END_POSTGAME                 0
 
-// The Oikoumene, ids 680-819 and 864-1023: the second map.
+// The Oikoumene, ids 680-819, 864-1023 and 1224-1343: the second map.
 #define TRAINERS_END_OIKOUMENE                0
 
-// Ids 820-863 are the director's reserve. 864-1023 are the Oikoumene's (above).
+// Ids 850-863 and 1504-1535 are the director's reserve.
 
 #define ICHOR_TRAINERS_MAX(a, b) ((a) > (b) ? (a) : (b))
 #define TRAINERS_COUNT_EMERALD ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(TRAINERS_END_SLICE, TRAINERS_END_FRONTIER), \
@@ -90,10 +90,11 @@
                                                   ICHOR_TRAINERS_MAX(ICHOR_TRAINERS_MAX(TRAINERS_END_ACT3, TRAINERS_END_POSTGAME), \
                                                                      TRAINERS_END_OIKOUMENE))
 
-// Ichor: one trainer flag per id, from TRAINER_FLAGS_START (0x500): ids 1-1023. Raised
-// from upstream's 864 for the Oikoumene's champion halls (design/OIKOUMENE.md PG-38).
+// Ichor: one trainer flag per id, from TRAINER_FLAGS_START (0x500): ids 1-1535. Raised
+// from upstream's 864, to 1,024 for the Oikoumene's champion halls (design/OIKOUMENE.md
+// PG-38) and then to 1,536 for Emerald's trainer density (design/MAP_DESIGN.md section 8).
 // Raising it shifts every system flag and grows SaveBlock1.
-#define MAX_TRAINERS_COUNT_EMERALD 1024
+#define MAX_TRAINERS_COUNT_EMERALD 1536
 
 // Ichor: temporary. Maps the removed Hoenn names to TRAINER_NONE until batch 2
 // deletes the Hoenn scripts that still use them. Never use these names.
