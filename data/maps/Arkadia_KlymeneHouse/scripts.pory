@@ -51,6 +51,12 @@ script Arkadia_KlymeneHouse_EventScript_Klymene {
         release
         end
     }
+    if (flag(FLAG_ICHOR_KLYMENE_STORY)) {
+        msgbox(format("Race him. Door to the temple stair and back.\p"
+                      "Beat him, and I'll give you something."))
+        goto(Arkadia_KlymeneHouse_EventScript_AskRace)
+    }
+    setflag(FLAG_ICHOR_KLYMENE_STORY)
     msgbox(format("Atalanta ran these hills. Nobody could catch her. Nobody.\p"
                   "The suitors had to race her. Lose, and that was the end of them.\p"
                   "One boy won. Melanion. He dropped three golden apples as he ran.\p"

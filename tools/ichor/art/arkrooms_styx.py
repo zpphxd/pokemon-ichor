@@ -61,7 +61,8 @@ def _rock_hearth():
     c.rect(4, 36, 27, 42, "a")
     for (x0, x1, y) in [(6, 25, 41), (8, 23, 40)]:
         c.hline(x0, x1, y, "d")
-        c.hline(x0, x1, y + 1, "k") if y == 41 else None
+        if y == 41:
+            c.hline(x0, x1, y + 1, "k")
     flames = [(8, 39, "f"), (9, 38, "F"), (10, 37, "f"), (11, 36, "F"), (12, 35, "Y"), (13, 36, "F"),
               (14, 37, "f"), (15, 34, "Y"), (16, 35, "F"), (17, 36, "Y"), (18, 37, "F"), (19, 36, "f"),
               (20, 37, "F"), (21, 38, "f"), (22, 39, "F"), (12, 38, "Y"), (16, 38, "Y"), (19, 39, "Y"),
@@ -237,22 +238,26 @@ def _window_falls():
     c = Canvas(16, 32)
     c.box(2, 6, 13, 27, "a", "k")
     c.rect(3, 7, 12, 26, "a")
-    # the cliff fills the window; the falls a thread down it
-    for y in range(9, 26):
-        for x in range(3, 13):
-            c.put(x, y, "k" if noise(x, y, 8) > 0.12 else "1")
-    for y in range(7, 9):
-        c.hline(3, 12, y, "s")
-    c.hline(3, 12, 9, "S")
+    # a strip of pale sky, mist on the cliff's top, then the cliff; the falls a
+    # white thread down it that thins into mist and never lands
     for y in range(10, 25):
+        for x in range(3, 13):
+            c.put(x, y, "k" if noise(x, y, 8) > 0.15 else "1")
+    for y in (9, 10):
+        for x in range(3, 13):
+            c.put(x, y, "S" if (x + y) % 3 else "s")
+    for y in range(11, 23):
         c.put(8, y, "w" if y % 4 else "p")
-        if y > 20:
-            c.put(7, y, "S")
+        if y > 18:
+            c.put(7 + (y % 2) * 2, y, "S")
+    for y in (23, 24):
+        for x in range(5, 11):
+            if (x + y) % 2:
+                c.put(x, y, "S")
     for x in range(3, 13):
-        c.put(x, 25, "S" if (x % 3) else "s")
+        c.put(x, 25, "1")
         c.put(x, 26, "k")
     # the frame and the shutters
-    c.box(1, 5, 14, 28, None) if False else None
     c.hline(1, 14, 5, "2")
     c.hline(1, 14, 28, "3")
     c.hline(1, 14, 29, "1")

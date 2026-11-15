@@ -1,6 +1,65 @@
 # The interiors of Styx Falls and Arkadia
 
-Act II batch 3's nine rooms (the rooms3 agent).
+Act II batch 3's nine rooms (the rooms3 agent): the three houses of Nonakris at Styx Falls (beat 39), the inn, Horkia's house of oaths and Kepheus's house; and Arkadia's six (beat 41), the Asclepeion, the Agora stall, Nyktimos's hall, Klymene's upper room, Hippothoos's charcoal hut and Krotos's house and byre. Each room is drawn for whoever lives or works in it, and each carries its SCRIPT.md Part 2 roster: its people, their lines, and their gift, trade or quest. No two share a layout, and none copies a batch 1, batch 2 or Act I room.
+
+The one-sheet overview: `design/phase3/img/arkadia_interiors_overview.png`.
+
+![The nine rooms](img/arkadia_interiors_overview.png)
+
+## Files and rebuilding
+
+| What | Where |
+|---|---|
+| Palettes, the drawing canvas, floors, walls, the stamp registry; oikia's pieces reused as drawn | `tools/ichor/art/arkrooms_art.py` |
+| Nonakris's pieces: the cliff hearth, the hoof door, the hoof-cups, the sledge, the cirque model | `tools/ichor/art/arkrooms_styx.py` |
+| Arkadia's public rooms and Klymene's: the spring and its channel, the cypress stall, the track window | `tools/ichor/art/arkrooms_civic.py` |
+| Arkadia's homes: the wolf pelt and the guest's place, the charcoal sacks, the byre | `tools/ichor/art/arkrooms_homes.py` |
+| Composer, near-duplicate merging, Porytiles, checks (batch 1's, pointed at these modules) | `tools/ichor/art/arkrooms_build.py` |
+| The rooms: grids, stamps, events; the driver | `tools/ichor/maps/arkrooms.py` |
+| Scripts | `data/maps/<Map>/scripts.pory` |
+| In-game check | `tools/ichor/tests/act2_arkrooms.sh` (screenshots in `build/test_arkrooms/shots/`) |
+
+```bash
+/usr/bin/python3 tools/ichor/maps/arkrooms.py               # compose, compile, check, write layouts, events, renders, this file's tables
+/usr/bin/python3 tools/ichor/maps/arkrooms.py --no-compile --preview DIR   # previews from source only
+tools/ichor/tests/act2_arkrooms.sh                          # after make
+```
+
+The driver writes each room's `map.bin` and `border.bin`, its `layouts.json` entry and its `map.json` events (people, warps, signs, hidden items) from the spots listed with the room, so the coordinates live in one place; `scripts.pory` is written by hand. The run checks that every warp, person, sign and hidden item is reachable from the door and read from the tile in front of it, that every 8x8 tile takes its colors from one palette, and that each room renders from the compiled tiles over `gTileset_Oikos` exactly as composed. It also writes the overview sheet.
+
+`arkrooms_build.py` is a copy of batch 1's `thyrsa_rooms_build.py` with one change: a wall n cells tall draws its style's first course on its top row and its last on its bottom row (the middle courses between), so a three-course cliff and a two-course plaster wall can stand side by side, as they do in the inn.
+
+## Three secondaries
+
+Nine rooms of new art came to about 1,280 unique tiles; a secondary holds 504 (door animations own 504-511). So the rooms are split by the art they share, as batch 1's were:
+
+| Secondary | Directory | Rooms | Why together |
+|---|---|---|---|
+| `gTileset_StyxRooms` | `styx_rooms` | the inn, Horkia's, Kepheus's | the black cliff, Nonakris's whitewash under slab ceilings, slate floors, hoof-cups |
+| `gTileset_ArkadiaRooms` | `arkadia_rooms` | the Asclepeion, the Agora, Klymene's | grey limestone, cypress timber, the bright whitewash, the boards |
+| `gTileset_ArkadiaHomes` | `arkadia_homes` | Nyktimos's hall, the charcoal hut, Krotos's | smoked logs, earth and log shoring, straw, the hearths |
+
+All three are on the `oikos` primary, use only their own tiles and palettes 6-12, and are compiled by the same script against an empty stand-in primary. The budget line for each is in the generated section below.
+
+## Palettes
+
+Seven, shared by the three sets, all multiples of 8 and none an aethos color. Four are oikia's unchanged (floor, wood, clay, bronze), so its floors and pieces (the kline, stools, tables, the chest, the loom, amphorae, the pithos, the hearth and its soot, the lampstand, the window, herbs, the doormat) are reused exactly as drawn.
+
+| Palette | Colors for |
+|---|---|
+| wall | beams, whitewash and its damp shades, oikia's blue shutters and sky; **cypress heartwood** (lit, mid, smoked) and sapwood ochre in place of oikia's red dado |
+| floor | oikia's terracotta, boards and limestone; packed earth and the hall's dark planks are drawn from its browns |
+| wood | oikia's furniture woods, linen, red and blue cloth, gold |
+| clay | oikia's pottery, hearth, ash, fire; the iron of tools and cauldrons |
+| nature | leaves and cypress, fleece, wicker and straw, rope and linen; **goat browns and wolf greys** in place of oikia's fish silvers |
+| bronze | oikia's bronze, flame, water and marble: the spring, its channel, the lamps, the gilded apples |
+| rock | the Styx's **black cliff** (four blue-blacks and a wet glint), Arkadia's grey limestone and its moss, earth, logs |
+
+## The looks
+
+- **Nonakris:** low stone houses roofed with slabs; inside, the slab ends show as a grey band under the black ceiling, the walls are whitewashed against the damp, and the footing is rubble with the wet creeping up it. Floors are big slabs of grey mountain stone. The inn and Horkia's house are built back into the cirque, so their back walls are the cliff itself: sheer, split into tall slabs, black, with wet streaks running down and puddles at its foot.
+- **Arkadia:** a town in a cypress forest. Timber the red of cypress heartwood, grey limestone with moss in it, hunters' herbs and nets and hides. Klymene's upper room is the bright one: whitewash between red posts.
+- **The homes:** Nyktimos's hall of squared logs smoked nearly black; Hippothoos's hut, half of it earth held back by logs, the floor trodden black with charcoal dust; Krotos's daub-and-wattle byre on a footing of field stones, straw on the byre side.
 
 <!-- arkrooms: begin generated -->
 

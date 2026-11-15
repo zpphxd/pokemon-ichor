@@ -33,12 +33,16 @@ script Arkadia_NyktimosHall_EventScript_Nyktimos {
         if (var(VAR_RESULT) == TRUE) {
             setflag(FLAG_ICHOR_GOT_BLACK_GLASSES)
         }
-    } else {
+    } elif (!flag(FLAG_ICHOR_NYKTIMOS_STORY)) {
         setspeaker(Arkadia_NyktimosHall_Name_Nyktimos)
         msgbox(format("My family's been very careful hosts for a very long time.\p"
                       "My ancestor, Lykaon, once served a guest something he shouldn't have.\p"
                       "The guest was Zeus. The ancestor became a wolf. That's him on the wall.\p"
                       "So we lay one more place than we need. Every night. Just in case."))
+        setflag(FLAG_ICHOR_NYKTIMOS_STORY)
+    } else {
+        setspeaker(Arkadia_NyktimosHall_Name_Nyktimos)
+        msgbox(format("So we lay one more place than we need. Every night. Just in case."))
     }
     goto(Arkadia_NyktimosHall_EventScript_Rest)
 }
