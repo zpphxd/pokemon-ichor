@@ -697,6 +697,24 @@ const u32 gObjectEventPic_IchorWoodenImage[] = INCGFX_U32("graphics/object_event
 const u32 gObjectEventPic_IchorWoodenImageGarland[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/wooden_image_garland.png", ".4bpp");
 const u32 gObjectEventPic_IchorMask[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/mask.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gObjectEventPic_IchorCrows[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/crows.png", ".4bpp", "-mwidth 4 -mheight 4");
+// Act II batch 2 (tools/ichor/art/sprites_act2_b2.py)
+const u32 gObjectEventPic_IchorFowler[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fowler.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorFowlerF[] = INCGFX_U32("graphics/object_events/pics/people/ichor/fowler_f.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorSaon[] = INCGFX_U32("graphics/object_events/pics/people/ichor/saon.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorTrophonianPriest[] = INCGFX_U32("graphics/object_events/pics/people/ichor/trophonian_priest.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPilgrimBlanket[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pilgrim_blanket.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPilgrimBlanket2[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pilgrim_blanket_2.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPilgrimBlanket3[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pilgrim_blanket_3.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAgamedes[] = INCGFX_U32("graphics/object_events/pics/people/ichor/agamedes.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPanopeus[] = INCGFX_U32("graphics/object_events/pics/people/ichor/panopeus.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorTempleGuard[] = INCGFX_U32("graphics/object_events/pics/people/ichor/temple_guard.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAletheaRim[] = INCGFX_U32("graphics/object_events/pics/people/ichor/alethea_rim.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAletheaNote[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/alethea_note.png", ".4bpp");
+const u32 gObjectEventPic_IchorHerkyna[] = INCGFX_U32("graphics/object_events/pics/people/ichor/herkyna.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorXenodike[] = INCGFX_U32("graphics/object_events/pics/people/ichor/xenodike.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorThyia[] = INCGFX_U32("graphics/object_events/pics/people/ichor/thyia.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorTisamenos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/tisamenos.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorHelike[] = INCGFX_U32("graphics/object_events/pics/people/ichor/helike.png", ".4bpp", "-mwidth 2 -mheight 4");
 // End of Ichor object events
 
 // Ichor: the ground item, a sealed clay jar in the folk palette (tools/ichor/art/items.py)
