@@ -1698,6 +1698,29 @@
 #define FLAG_ICHOR_SAW_GEAR_BOX                 (FLAG_ICHOR_GENERAL_START + 0x20D) // Ichor: Route 23: saw Skyllias's box of gears off Antikythera (set there; read in the divers' house)
 #define FLAG_ICHOR_MELOS_RITE                   (FLAG_ICHOR_GENERAL_START + 0x20E) // Ichor: Melos: made the armless goddess an offering (set on MAP_MELOS; read by Kentrios)
 #define FLAG_ICHOR_MELOS_OBSIDIAN_LUMP          (FLAG_ICHOR_GENERAL_START + 0x20F) // Ichor: Melos: dug the lump of black glass at the slope's seam (set on MAP_MELOS; read by Melanippos)
+#define FLAG_ICHOR_DAPHNE_SAILED_ASTYRA         (FLAG_ICHOR_GENERAL_START + 0x210) // Ichor: Act III: III-1A, boarded the Euploia at Kaldera; Daphne sailed home to Astyra (hides her on the southern deck)
+#define FLAG_ICHOR_REACHED_MELOS                (FLAG_ICHOR_GENERAL_START + 0x211) // Ichor: Act III: III-1B, slept through Route 22's night and landed at Melos
+#define FLAG_ICHOR_VISITED_MELOS                (FLAG_ICHOR_GENERAL_START + 0x212) // Ichor: Act III: Melos visited (Nausikles's southern lanes; not a fly target)
+#define FLAG_ICHOR_CROSSED_ROUTE22              (FLAG_ICHOR_GENERAL_START + 0x213) // Ichor: Act III: III-1B3, rounded Malea and landed at Skandeia (hides Nausikles on Melos's jetty)
+#define FLAG_ICHOR_VISITED_SKANDEIA             (FLAG_ICHOR_GENERAL_START + 0x214) // Ichor: Act III: Skandeia visited (fly target, MAPSEC_KYTHERA_ISLE)
+#define FLAG_ICHOR_EUPLOIA_KEPT                 (FLAG_ICHOR_GENERAL_START + 0x215) // Ichor: Act III: III-1C, beat Molybdos; the Euploia isn't requisitioned
+#define FLAG_ICHOR_ALETHEA_REJOINED             (FLAG_ICHOR_GENERAL_START + 0x216) // Ichor: Act III: III-1C2, Alethea met you on Skandeia's main street
+#define FLAG_ICHOR_SAILED_FOR_KNOSSA            (FLAG_ICHOR_GENERAL_START + 0x217) // Ichor: Act III: III-1I, sailed from Skandeia for Amnisos
+#define FLAG_ICHOR_SKANDEIA_CALL                (FLAG_ICHOR_GENERAL_START + 0x218) // Ichor: Act III: the Euploia's call at Skandeia between Amnisos and Gytheion (set by the Knossa writer's departure)
+#define FLAG_ICHOR_SAILED_FOR_GYTHEION          (FLAG_ICHOR_GENERAL_START + 0x219) // Ichor: Act III: sailed on from Skandeia's call for Gytheion (Route 24 starts from it)
+#define FLAG_ICHOR_HIDE_ALETHEA_CALL            (FLAG_ICHOR_GENERAL_START + 0x21A) // Ichor: Act III: Skandeia: hides Alethea at the gangplank (shown only during the call)
+#define FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x21B) // Ichor: Act III: Skandeia: hides Alethea at Axylos's door (shown from III-1C2 until the bad guests go)
+#define FLAG_ICHOR_HIDE_MOLYBDOS                (FLAG_ICHOR_GENERAL_START + 0x21C) // Ichor: Act III: Skandeia: hides Molybdos once he is beaten
+#define FLAG_ICHOR_HIDE_SKANDEIA_PORTERS        (FLAG_ICHOR_GENERAL_START + 0x21D) // Ichor: Act III: Skandeia: hides the Titanborn porters (from VAR_ICHOR_ACT3 6)
+#define FLAG_ICHOR_HIDE_KRONIST_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x21E) // Ichor: Act III: Skandeia: hides the Kronist (after the climax, VAR_ICHOR_ACT3 19)
+#define FLAG_ICHOR_HEARD_KRONIST                (FLAG_ICHOR_GENERAL_START + 0x21F) // Ichor: Act III: Skandeia: the Kronist has preached at you once (his walk-past trigger)
+#define FLAG_ICHOR_HIDE_DECK_ACT3               (FLAG_ICHOR_GENERAL_START + 0x220) // Ichor: Act III: southern deck: hides the voyage's passengers (boarding at Kaldera, the run to Amnisos)
+#define FLAG_ICHOR_SAW_TITAN_FLEET              (FLAG_ICHOR_GENERAL_START + 0x221) // Ichor: Act III: III-1B, the lookout showed you the dark fleet
+#define FLAG_ICHOR_MET_KENTRIOS                 (FLAG_ICHOR_GENERAL_START + 0x222) // Ichor: Act III: III-1B2, Kentrios warned you on Melos's terrace stair
+#define FLAG_ICHOR_ITEM_DECK_SOUTH_HYPER_POTION (FLAG_ICHOR_GENERAL_START + 0x223) // Ichor: Act III item ball: the southern deck's Hyper Potion among the oil amphorae
+#define FLAG_ICHOR_ITEM_MELOS_STAR_PIECE        (FLAG_ICHOR_GENERAL_START + 0x224) // Ichor: Act III item ball: Melos's Star Piece on the pumice cliffs' lip
+#define FLAG_ICHOR_ITEM_ROUTE22_MAX_ETHER       (FLAG_ICHOR_GENERAL_START + 0x225) // Ichor: Act III item ball: Route 22's Max Ether on Anydros's ledge
+#define FLAG_ICHOR_ITEM_ROUTE23_BIG_PEARL       (FLAG_ICHOR_GENERAL_START + 0x226) // Ichor: Act III item ball: Route 23's Big Pearl on Antikythera's beach
 #define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL_START + 0x280) // Ichor: world-act3: Daedalus gives the Master Ball in the workshop, Labyrinth Scene D
 // Ichor bank flags: end
 

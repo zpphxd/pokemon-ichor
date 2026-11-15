@@ -480,3 +480,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Melos[] = INCBIN_U16("data/tilese
 // Ichor: temple_aphrodite
 const u16 gMetatiles_PorytilesManaged_TempleAphrodite[] = INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_TempleAphrodite[] = INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: trireme
+const u16 gMetatiles_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatile_attributes.bin");

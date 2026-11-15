@@ -1,0 +1,336 @@
+{
+  "id": "MAP_KYTHERA_SKANDEIA",
+  "name": "KytheraSkandeia",
+  "layout": "LAYOUT_KYTHERA_SKANDEIA",
+  "music": "MUS_ICHOR_AKTI",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_KYTHERA_ISLE",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_ROUTE22_MYRTOAN_SEA",
+      "offset": -15,
+      "direction": "right"
+    },
+    {
+      "map": "MAP_ROUTE23_CRETAN_SEA",
+      "offset": 15,
+      "direction": "right"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_SKANDEIA_NAUSIKLES",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 26,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_Nausikles",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_SKANDEIA_MOLYBDOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 25,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_Molybdos",
+      "flag": "FLAG_ICHOR_HIDE_MOLYBDOS"
+    },
+    {
+      "local_id": "LOCALID_SKANDEIA_KRONIST",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "x": 30,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_Kronist",
+      "flag": "FLAG_ICHOR_HIDE_KRONIST_SKANDEIA"
+    },
+    {
+      "local_id": "LOCALID_SKANDEIA_DOCKHAND",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 28,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_Dockhand",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_SKANDEIA_OLD_SAILOR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 28,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_OldSailor",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_SKANDEIA_PORTER_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 11,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
+      "movement_range_x": 2,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_Porter",
+      "flag": "FLAG_ICHOR_HIDE_SKANDEIA_PORTERS"
+    },
+    {
+      "local_id": "LOCALID_SKANDEIA_PORTER_2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TITAN_GRUNT",
+      "x": 18,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
+      "movement_range_x": 2,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_Porter",
+      "flag": "FLAG_ICHOR_HIDE_SKANDEIA_PORTERS"
+    },
+    {
+      "local_id": "LOCALID_SKANDEIA_PHILINNA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 26,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_Philinna",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_SKANDEIA_ALETHEA_DOOR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 11,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_Alethea",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA"
+    },
+    {
+      "local_id": "LOCALID_SKANDEIA_ALETHEA_CALL",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 24,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "KytheraSkandeia_EventScript_AletheaCall",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_CALL"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 22,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_KYTHERA_SKANDEIA_ASCLEPEION",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 22,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_KYTHERA_SKANDEIA_AGORA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 10,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_KYTHERA_SKANDEIA_AXYLOS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 16,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_KYTHERA_SKANDEIA_NIKARETE_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 10,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_KYTHERA_SKANDEIA_PERFUMERS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 16,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_KYTHERA_SKANDEIA_DIVERS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 10,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_KYTHERA_SKANDEIA_SHIPWRIGHTS_HOUSE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 16,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "1",
+      "script": "KytheraSkandeia_EventScript_AletheaRejoins"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 17,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "1",
+      "script": "KytheraSkandeia_EventScript_AletheaRejoins"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "KytheraSkandeia_EventScript_KronistPreaches"
+    },
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "KytheraSkandeia_EventScript_KronistPreaches"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "KytheraSkandeia_EventScript_KronistPreaches"
+    },
+    {
+      "type": "trigger",
+      "x": 28,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "KytheraSkandeia_EventScript_KronistPreaches"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 13,
+      "elevation": 3,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "KytheraSkandeia_EventScript_KronistPreaches"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
+      "script": "KytheraSkandeia_EventScript_Slips"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
+      "script": "KytheraSkandeia_EventScript_Slips"
+    },
+    {
+      "type": "sign",
+      "x": 30,
+      "y": 25,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KytheraSkandeia_EventScript_HarborShrine"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KytheraSkandeia_EventScript_SignFoamRoad"
+    },
+    {
+      "type": "sign",
+      "x": 23,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "KytheraSkandeia_EventScript_SignSkandeia"
+    },
+    {
+      "type": "sign",
+      "x": 17,
+      "y": 19,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_SOUTH",
+      "script": "KytheraSkandeia_EventScript_Spout"
+    }
+  ]
+}

@@ -34,15 +34,15 @@
       "x": 6,
       "y": 8,
       "elevation": 0,
-      "dest_map": "MAP_AKTI_TOWN",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_KYTHERA_SKANDEIA",
+      "dest_warp_id": "6"
     },
     {
       "x": 7,
       "y": 8,
       "elevation": 0,
-      "dest_map": "MAP_AKTI_TOWN",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_KYTHERA_SKANDEIA",
+      "dest_warp_id": "6"
     }
   ],
   "coord_events": [],

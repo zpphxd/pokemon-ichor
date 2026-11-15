@@ -1,0 +1,359 @@
+// The Euploia's deck on Act III's southern voyages (design/phase4/SCRIPT.md,
+// Open questions 1, Part 2 "The Euploia, the southern voyage", and beats
+// III-1A, III-1B, III-1B3 and III-1I). The deck is Phase 2's ship cell for cell;
+// tools/ichor/maps/euploia_south.py places the people.
+//
+// The scene is picked on load:
+//   VAR_ICHOR_ACT3 == 0                 III-1A: moored at Kaldera, Daphne goes home
+//   ACT3 1, not yet at Melos            III-1B: Route 22 by night (the lookout, the
+//                                       sailors, two trainers); Nausikles ends it
+//   at Melos, Route 22 not yet crossed  III-1B3: Cape Malea, then Skandeia's quay
+//   sailed for Knossa, ACT3 < 5         III-1I: the night run along Knossa's coast
+//
+// What Act II must add (Kaldera is Act II's): Kaldera's harbor map with
+// Daphne on her bollard and the Euploia moored, and a warp onto this deck at
+// (12,6) once Kydippe's letter is read, with VAR_ICHOR_ACT3 still 0. The
+// boarding scene below then plays Daphne's goodbye and Nausikles's question.
+// Daphne's harbor staging (her bag, the bollard, Alethea's letter in a sign
+// window) can move to Kaldera's own map then; this deck version stands in.
+//
+// Music: MUS_ICHOR_TRIREME_NIGHT isn't written yet (SCRIPT.md, Music); the
+// trireme's day theme stands in.
+
+mapscripts TriremeEuploia_DeckSouth_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_0, 0)
+        setvar(VAR_TEMP_1, 0)
+        if (var(VAR_ICHOR_ACT3) == 0 || flag(FLAG_ICHOR_SAILED_FOR_KNOSSA)) {
+            setflag(FLAG_ICHOR_HIDE_DECK_ACT3)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_DECK_ACT3)
+        }
+        if (var(VAR_ICHOR_ACT3) == 0) {
+            setvar(VAR_TEMP_0, 1)
+            setobjectxyperm(LOCALID_DECKS_NAUSIKLES, 14, 4)
+            setobjectmovementtype(LOCALID_DECKS_NAUSIKLES, MOVEMENT_TYPE_FACE_LEFT)
+        } elif (!flag(FLAG_ICHOR_REACHED_MELOS)) {
+            if (!flag(FLAG_ICHOR_SAW_TITAN_FLEET)) {
+                setvar(VAR_TEMP_1, 1)
+            }
+        } elif (!flag(FLAG_ICHOR_CROSSED_ROUTE22)) {
+            setvar(VAR_TEMP_0, 2)
+        } elif (flag(FLAG_ICHOR_SAILED_FOR_KNOSSA) && var(VAR_ICHOR_ACT3) < 5) {
+            setvar(VAR_TEMP_0, 3)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (var(VAR_TEMP_0) == 2) {
+            call(TriremeEuploia_DeckSouth_EventScript_MaleaOn)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 1: TriremeEuploia_DeckSouth_EventScript_Boarding
+        VAR_TEMP_0, 2: TriremeEuploia_DeckSouth_EventScript_Malea
+        VAR_TEMP_0, 3: TriremeEuploia_DeckSouth_EventScript_ToAmnisos
+    ]
+}
+
+text TriremeEuploia_DeckSouth_Text_NameDaphne { "DAPHNE" }
+text TriremeEuploia_DeckSouth_Text_NameNausikles { "NAUSIKLES" }
+text TriremeEuploia_DeckSouth_Text_NameLookout { "LOOKOUT" }
+text TriremeEuploia_DeckSouth_Text_NameOarsman { "OARSMAN" }
+text TriremeEuploia_DeckSouth_Text_NamePassenger { "PASSENGER" }
+text TriremeEuploia_DeckSouth_Text_NameOldSailor { "OLD SAILOR" }
+
+// ---------------------------------------------------------------------------
+// III-1A. Kaldera: Daphne goes home
+// ---------------------------------------------------------------------------
+
+script TriremeEuploia_DeckSouth_EventScript_Boarding {
+    lockall
+    setvar(VAR_TEMP_0, 0)
+    applymovement(LOCALID_DECKS_DAPHNE, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameDaphne)
+    msgbox(format("There you are. I didn't sleep either. Don't tell anyone.\p"
+                  "I'm meant to be the wise one. Wise people sleep.\p"
+                  "I'm going home. Astyra, I mean. Home's a strange word this week.\p"
+                  "Phaedon's girl is poorly, and he's away so much.\p"
+                  "Somebody should sit with her. Read to her. She likes the olive one."))
+    msgbox(format("And this came last night, with the fish. From Alethea.\p"
+                  "It's addressed to me. Truthfully, it's for you."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Daphne. I'm on Kythera. I'm allowed: they only threw me out of Astyra.\p"
+                  "Everywhere else is outside the walls. I checked.\p"
+                  "The Titans are taking every ship on the island. Every hull with oars.\p"
+                  "They say it's for Knossa. They say it loudly, on the quay.\p"
+                  "Truthfully, I'd like company. Send {PLAYER}. -A."), MSGBOX_SIGN)
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameDaphne)
+    msgbox(format("Their whole fleet rowed past the caldera at midnight. Westward.\p"
+                  "Kythera for the ships. Knossa after.\p"
+                  "That's the order my book put things in, too.\p"
+                  "I wish I'd written a shorter book.\p"
+                  "Take her these. Tracings. The palace frescoes at Knossa.\p"
+                  "I made them in my Library days, from older tracings. She'll know."))
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{PLAYER} took the satchel of tracings."))
+    waitfanfare
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameDaphne)
+    msgbox(format("And {PLAYER}. Your mother.\p"
+                  "Wherever she's gone, she chose it. She always chooses.\p"
+                  "She's better at hiding than I am. And I hid for thirteen years.\p"
+                  "Go on. Nausikles has been pretending not to listen."))
+    closemessage
+    applymovement(LOCALID_DECKS_NAUSIKLES, TriremeEuploia_DeckSouth_Movement_CoilRope)
+    waitmovement(0)
+    call(TriremeEuploia_DeckSouth_EventScript_AskAboard)
+    releaseall
+}
+
+// Nausikles's question; YES sails (and doesn't return).
+script TriremeEuploia_DeckSouth_EventScript_AskAboard {
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameNausikles)
+    msgbox(format("Kaldera to Kythera. Two days' row, with water at Melos.\p"
+                  "Wind willing. Titans willing.\p"
+                  "Aboard? Once we're out, we don't turn back."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Take your time. The Titans aren't."))
+        closemessage
+        return
+    }
+    msgbox(format("Good. Mind the oars. They still don't mind you."))
+    closemessage
+    // Daphne goes ashore down the gangway and waves from the quay with both
+    // arms, like someone who doesn't wave often.
+    applymovement(LOCALID_DECKS_DAPHNE, TriremeEuploia_DeckSouth_Movement_DaphneAshore)
+    waitmovement(0)
+    removeobject(LOCALID_DECKS_DAPHNE)
+    setflag(FLAG_ICHOR_DAPHNE_SAILED_ASTYRA)
+    setvar(VAR_ICHOR_ACT3, 1)
+    fadescreen(FADE_TO_BLACK)
+    // Route 22 (MAPSEC_AETHOS_ROUTE_22): twelve cells of sea, west past Melos
+    // to Cape Malea. The deck reloads for the night crossing.
+    warpsilent(MAP_TRIREME_EUPLOIA_DECK_SOUTH, 12, 7)
+    waitstate
+}
+
+// ---------------------------------------------------------------------------
+// III-1B. Route 22, by night
+// ---------------------------------------------------------------------------
+
+script TriremeEuploia_DeckSouth_EventScript_TitanFleet {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    setflag(FLAG_ICHOR_SAW_TITAN_FLEET)
+    applymovement(LOCALID_DECKS_LOOKOUT, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameLookout)
+    msgbox(format("Ships. West. No lamps."))
+    closemessage
+    // The view pans out over the western sea: a string of low black shapes on the
+    // horizon, hull-down, all in a line. (TODO(art): the dark fleet's sprites,
+    // world-act1's OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_BOW/STERN, once merged.)
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, TriremeEuploia_DeckSouth_Movement_CameraWest)
+    waitmovement(0)
+    msgbox(format("Nine. Ten. Twelve. All rowing the same way.\p"
+                  "Not a lamp between them."))
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameNausikles)
+    msgbox(format("Titans. Let them go. We're not racing anyone tonight."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_CAMERA, TriremeEuploia_DeckSouth_Movement_CameraEast)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameNausikles)
+    msgbox(format("Look at the wake.\p"
+                  "It's running ahead of us. Thirty years at sea and I never saw that.\p"
+                  "The sea's going the wrong way again. Like the tide at Akti."))
+    closemessage
+    releaseall
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Nausikles {
+    lock
+    faceplayer
+    if (var(VAR_ICHOR_ACT3) == 0) {
+        call(TriremeEuploia_DeckSouth_EventScript_AskAboard)
+        release
+        end
+    }
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameNausikles)
+    if (!flag(FLAG_ICHOR_REACHED_MELOS)) {
+        msgbox(format("Sleep, if you can. We make Melos at first light.\p"
+                      "Water, bread, and on. Kythera's a long way yet.\p"
+                      "Sleep?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            msgbox(format("Suit yourself. The fish don't sleep either."))
+            release
+            end
+        }
+        msgbox(format("I'll wake you when there's land. Or Titans. Whichever."))
+        closemessage
+        goto(TriremeEuploia_DeckSouth_EventScript_SleepToMelos)
+    }
+    if (flag(FLAG_ICHOR_SAILED_FOR_KNOSSA)) {
+        msgbox(format("Knossa's north coast. Keep your hands inside the rail."))
+        release
+        end
+    }
+    msgbox(format("She's not moving without me, and I'm not moving."))
+    release
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Lookout {
+    lock
+    faceplayer
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameLookout)
+    if (flag(FLAG_ICHOR_SAILED_FOR_KNOSSA)) {
+        msgbox(format("Land. And a lot of boats on it."))
+    } elif (var(VAR_ICHOR_ACT3) == 0) {
+        msgbox(format("Calm water, west. I'd like it to stay that way."))
+    } else {
+        msgbox(format("Ships. West. No lamps.\pI keep counting them. It keeps being twelve."))
+    }
+    release
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Oarsman {
+    lock
+    faceplayer
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameOarsman)
+    msgbox(format("The Pythia doesn't even say soon now. She doesn't say anything."))
+    release
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Passenger {
+    lock
+    faceplayer
+    setspeaker(TriremeEuploia_DeckSouth_Text_NamePassenger)
+    msgbox(format("My cousin's a seer on Paros. She's stopped reading.\p"
+                  "She says it's all one day now."))
+    release
+}
+
+script TriremeEuploia_DeckSouth_EventScript_OldSailor {
+    lock
+    faceplayer
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameOldSailor)
+    msgbox(format("Kythera's where she came ashore. Aphrodite. On the foam.\p"
+                  "The foam's still there. Mind you, so's everything else."))
+    release
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Daphne {
+    lock
+    faceplayer
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameDaphne)
+    msgbox(format("Go on. Nausikles has been pretending not to listen."))
+    release
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Eudoros {
+    trainerbattle_single(TRAINER_ICHOR_EUDOROS, Kythera_Text_EudorosIntro, Kythera_Text_EudorosDefeat)
+    setspeaker(Kythera_Text_SpeakerEudoros)
+    msgbox(Kythera_Text_EudorosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Kerdon {
+    trainerbattle_single(TRAINER_ICHOR_KERDON, Kythera_Text_KerdonIntro, Kythera_Text_KerdonDefeat)
+    setspeaker(Kythera_Text_SpeakerKerdon)
+    msgbox(Kythera_Text_KerdonAfter, MSGBOX_AUTOCLOSE)
+}
+
+// The night ends when the player talks to Nausikles or sleeps on the cargo,
+// whichever comes first.
+script TriremeEuploia_DeckSouth_EventScript_Cargo {
+    lockall
+    msgbox(format("Amphorae lashed under a net. Oil from Kaldera. Nobody wanted oil."))
+    if (var(VAR_ICHOR_ACT3) == 1 && !flag(FLAG_ICHOR_REACHED_MELOS)) {
+        msgbox(format("Sleep on the cargo till morning?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == YES) {
+            closemessage
+            goto(TriremeEuploia_DeckSouth_EventScript_SleepToMelos)
+        }
+    }
+    releaseall
+}
+
+script TriremeEuploia_DeckSouth_EventScript_SleepToMelos {
+    fadescreen(FADE_TO_BLACK)
+    setflag(FLAG_ICHOR_REACHED_MELOS)
+    // Morning: the jetty at Klima, the Euploia moored off the hamlet with her
+    // boat run up on the shingle. Melos plays beat III-1B2.
+    warpsilent(MAP_MELOS, 22, 27)
+    waitstate
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Klepsydra {
+    msgbox(format("The captain's water clock. The water drips out of it a little too slowly."), MSGBOX_SIGN)
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Hatch {
+    msgbox(format("The hatch to the rowers' benches. Below, their chant goes low and slow."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// III-1B3. Cape Malea (afternoon light, whatever the clock says; no tint forced)
+// ---------------------------------------------------------------------------
+
+// A great gray headland off the starboard bow: the deck's `coast` variant.
+script TriremeEuploia_DeckSouth_EventScript_MaleaOn {
+    setmetatile(1, 0, 0x2EC, TRUE)
+    setmetatile(2, 0, 0x2ED, TRUE)
+    setmetatile(3, 0, 0x2EE, TRUE)
+    setmetatile(4, 0, 0x2EF, TRUE)
+    setmetatile(1, 1, 0x2F0, TRUE)
+    setmetatile(2, 1, 0x2F1, TRUE)
+    setmetatile(3, 1, 0x2F2, TRUE)
+    setmetatile(4, 1, 0x2F3, TRUE)
+}
+
+script TriremeEuploia_DeckSouth_EventScript_Malea {
+    lockall
+    setvar(VAR_TEMP_0, 0)
+    delay(30)
+    applymovement(LOCALID_DECKS_NAUSIKLES, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameNausikles)
+    msgbox(format("Malea. Round that, the old sailors say, and you forget your home.\p"
+                  "We're not rounding it. Kythera's just off the point."))
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameOldSailor)
+    msgbox(format("My father rounded Malea once. He came back. He said.\p"
+                  "He never did remember which house was ours."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    setflag(FLAG_ICHOR_CROSSED_ROUTE22)
+    // Skandeia's quay, the Euploia berthed: Skandeia plays beat III-1C.
+    warpsilent(MAP_KYTHERA_SKANDEIA, 25, 10)
+    waitstate
+}
+
+// ---------------------------------------------------------------------------
+// III-1I. The night run to Amnisos, along Knossa's north coast (Route 23)
+// ---------------------------------------------------------------------------
+
+script TriremeEuploia_DeckSouth_EventScript_ToAmnisos {
+    lockall
+    setvar(VAR_TEMP_0, 0)
+    delay(30)
+    setspeaker(TriremeEuploia_DeckSouth_Text_NameLookout)
+    msgbox(format("Land. And a lot of boats on it."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(30)
+    // TODO(act3, Knossa): warp to Amnisos's quay at dawn,
+    //   warpsilent(MAP_KNOSSA_AMNISOS, <the quay>)
+    // where the Knossa writer's arrival scene (LABYRINTH §2) sets
+    // VAR_ICHOR_ACT3 = 5. Until Knossa is built, the voyage ends here, on deck.
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Dawn. Amnisos's long beach, crowded with hulls, and a palace on the hill."))
+    closemessage
+    releaseall
+}
+
+movement TriremeEuploia_DeckSouth_Movement_CoilRope { walk_in_place_left walk_in_place_left face_left }
+movement TriremeEuploia_DeckSouth_Movement_DaphneAshore { walk_right walk_up walk_up }
+movement TriremeEuploia_DeckSouth_Movement_CameraWest { walk_left * 5 }
+movement TriremeEuploia_DeckSouth_Movement_CameraEast { walk_right * 5 }
