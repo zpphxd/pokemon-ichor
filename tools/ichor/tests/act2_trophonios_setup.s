@@ -56,6 +56,7 @@ TrophTest_Setup:
 	additem ITEM_BRONZE_HAMMER, 1
 	additem ITEM_HONEY, 1
 	setflag FLAG_ICHOR_TROPHONIOS_GRILLE_OPEN
+	setflag FLAG_ICHOR_VISITED_LEBADEIA   @ beat 35A's arrival has played: coming out of the hole is no arrival
 	setvar VAR_REPEL_STEP_COUNT, 999
 	warp MAP_TROPHONIOS_CAVE_B1F, 0
 	waitstate

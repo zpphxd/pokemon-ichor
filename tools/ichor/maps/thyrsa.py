@@ -812,7 +812,8 @@ def write_map_json():
         "weather": "WEATHER_SUNNY",
         "allow_cycling": True, "allow_escaping": False, "allow_running": True,
         "show_map_name": True,
-        "connections": [{"map": "MAP_ROUTE7_KRONIA_GROUNDS", "offset": 6, "direction": "down"}],
+        "connections": [{"map": "MAP_ROUTE7_KRONIA_GROUNDS", "offset": 6, "direction": "down"},
+                        {"map": "MAP_ROUTE8_KOPAIS", "offset": 9, "direction": "left"}],
         "object_events": objects, "warp_events": warps, "coord_events": coord, "bg_events": bg,
     })
     path.write_text(json.dumps(d, indent=2) + "\n")
