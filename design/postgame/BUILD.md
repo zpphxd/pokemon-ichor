@@ -104,7 +104,7 @@ From `tools/ichor/claim_ranges.md`: trainer ids **500–679**; bank flags **0x30
 - Per-epic state goes in `struct IchorEpics` (POSTGAME §6, ENGINE.md), not in flags.
 - Hide flags for people who come and go on one map use `FLAG_TEMP_*`, set in `ON_TRANSITION` from the real state (temp flags clear on every map load).
 - **Trainer ids: 380 in all** (the director, 2026-11-14): 500–679, plus **1024–1223** once hoenn-cut's raise of `MAX_TRAINERS_COUNT` to 1,536 is merged. Batches 1–3 stay in 500–569. §8's trainer rate isn't loosened for sea maps; size them tighter and class arenas as dungeons instead.
-- **Hidden items move to bank flags** when ichor-engine's change lands (approved, its top priority). Then claim hidden items from the batch's bank range like any flag. Until then, batch 1 uses its vanilla flags. That puts about 200 hidden items, ~140 story flags and the item balls all on the 448 bank flags, so count them per batch, and tell the build lead early if a batch runs over; the director will open the reserve.
+- **Hidden items take bank flags** (ichor-engine 786a024a21, being merged to main): claim one with `python3 tools/ichor/claim.py --range <the batch's bank range> hiddenitem FLAG_ICHOR_HIDDEN_ITEM_<NAME> "comment"`. The 13-bit field's ids from 0x1000 mean bank flag 0x2000 + (id − 0x1000), so check on restart that the second bank's offsets (0x700–0x7FF) fall inside it before claiming hidden items there. Batch 1's hidden items stay on their vanilla flags. That puts about 200 hidden items, ~140 story flags and the item balls all on the 448 bank flags, so count them per batch, and tell the build lead early if a batch runs over; the director will open the reserve.
 
 
 ---
