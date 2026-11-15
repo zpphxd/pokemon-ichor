@@ -23,11 +23,21 @@ overworld state. Arrow sheet order is north/west/east/south, then their
 saffron blinks; the engine's direction-indexed animation order is different.
 No production layout, collision, animation table or shared/ball palette changes.
 
+**Bounded dolphin follow-on:** the three `surf_blob.png` source views now
+have a separated snout/flipper silhouette, blue back, saffron flank and
+cream underside. All three keep the original 32x32 frame contract and
+mount seating plane; east still mirrors west through the engine table.
+The accepted rider sheets, shared palettes and other field effects are
+unchanged. There are no added mount animation frames: the native engine
+bobs its three direction frames.
+
 **Sources:**
 - `tools/ichor/art/field_effects.py`: every effect and the two shared effect palettes. `--write --only PNG ...` regenerates selected sheets **without writing shared palettes**. The full `--write` also rewrites shared effect palettes. `--preview DIR` writes the 6× art sheet.
 - `tools/ichor/art/follower_icons.py --write --emotes-only`: regenerates the 23-frame emotion sheet and its own palette **without writing follower balls**. Its pottery outline and punctuation reuse the field source.
 - `tools/ichor/art/check_elaia_effects.py`: source-exact dimensions, 4bpp/indexing, transparency, BGR555, palette-role and distinct-frame checks. `--before DIR --output DIR` renders native-resolution and nearest-neighbor comparison sheets.
 - `tools/ichor/art/surf_poses.py`: Theo and Ianthe riding the dolphin. Rebuild with `/usr/bin/python3 tools/ichor/art/surf_poses.py --write`.
+- Dolphin-only regeneration: `python3 tools/ichor/art/field_effects.py --write --only surf_blob.png`. This does not write the riders, healing art or any palette file.
+- `tools/ichor/art/check_elaia_water.py`: source-exact mount/underwater contracts and complete native/forced-engine 1x/4x comparisons.
 
 **Images (`img/`):**
 - `field_effects_before_after.png`: each effect in game over aethos, Emerald's on the left and Ichor's on the right, at 3×.
@@ -106,6 +116,34 @@ the selected animation. This proves native state rendering and finite
 animation completion, not full controller/late-relic gameplay eligibility.
 `make` and original smoke pass. Native and matched engine comparison artifacts
 are retained in the checkpoint session, not committed as ROMs or saves.
+
+### Paired dolphin and underwater follow-on
+
+`bash tools/ichor/tests/elaia_water.sh` pairs the actual native surf-blob
+effect with each accepted rider in four directions, seated/stepping and
+get-on/off poses. The latter are controller-held loops, not finite completed
+mounting sequences. It checks the real relative-frame table, dynamic player
+palette binding, live palette bytes, OBJ VRAM, callback synchronization,
+the existing rider/mount anchor (+8px Y), and their shared bob offset.
+Both underwater player states are also exercised with their native hidden
+bob helper and retained underwater palette (see `SPRITES_player_ow.md`).
+The preserved partial-Akti baseline and new ROM each pass **13,448
+assertions / 320 captures** across 64 forced state cases. The 2,576-byte
+fixture fits its 4KiB EWRAM reservation and is never linked into the ROM.
+
+These are explicitly labeled **Route 1 forced renderer fixtures**, not
+natural water traversal, a Dive map or proof of Surf/Dive relic eligibility.
+All captures are paired into complete 1x/4x galleries in session artifacts;
+the three source sheets pass their source checker and the native rollout
+gate. Build and original smoke pass. Other field/environment and unused
+groups retain their separate rollout scope.
+
+The dolphin was artistically accepted after complete native and mount-board
+review. The later underwater pose-only refinement leaves its PNG, source,
+accepted riders and shared palettes unchanged. The submitted water ROM,
+landed `4133f17748` main baseline and refined ROM each pass the same
+13,448-assertion/320-capture fixture; separate complete comparisons preserve
+both the pose-only delta and full main-to-water rollout.
 
 ## Historical testing
 

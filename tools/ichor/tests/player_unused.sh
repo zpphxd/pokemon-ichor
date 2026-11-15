@@ -2,6 +2,7 @@
 # Forced unused-state rendering, not gameplay/controller eligibility.
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
+ROM="${1:-${ROM:-pokeemerald.gba}}"
 . tools/ichor/tests/engine_build.sh
 ENGINE_SYMS="$ENGINE_SYMS gObjectEventPal_Brendan gObjectEventPal_May"
 engine_prepare PLAYER_UNUSED build/player_unused \

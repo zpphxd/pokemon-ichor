@@ -41,10 +41,10 @@ Walking, running, fishing, field-move and surfing sheets were regenerated in
 the 2026-11-15 Elaia native pass with a cleaner petasos contour and eye glints.
 All their motion frames are distinct and match their source arrays.
 
-The bike and underwater sheets remain outside this checkpoint.
-Bikes, watering and decorating are unused by Aethos's current design; underwater is
-a supported engine state and still needs an Ichor-native sheet in its own
-`player_underwater.pal`. It is not counted as redrawn by this checkpoint.
+Bike sheets remain retained and unchanged. Watering/decorating art landed
+separately at `4133f17748`; these unused systems were not enabled. Underwater
+now has an Ichor-native follow-on in its existing `player_underwater.pal`,
+described below.
 The current ROM builds and passes smoke and all three Elaia opening runs.
 Both genders have new in-game walk/run captures from `player_ow_walk.lua`.
 The earlier in-game images below show the previous artwork.
@@ -63,7 +63,7 @@ These captures are explicitly **forced engine-state evidence**: an idle NPC
 callback prevents normal NPC behavior from overriding the selected player
 animation. They are not proof that early Elaia gameplay permits fishing or
 late relics, nor do isolated rider states exercise the surf mount/controller.
-Underwater and bikes remain outside this checkpoint.
+Bikes remain outside this checkpoint.
 
 ## Unused watering and decorating artwork
 
@@ -79,12 +79,59 @@ unchanged; this artwork does not enable either unused system.
 
 `bash tools/ichor/tests/player_unused.sh` exercises the actual graphics IDs,
 animation/image tables, all sixteen live palette words, hardware mirroring
-and complete OBJ VRAM frame transfers. Both exact before and current ROMs
+and complete OBJ VRAM frame transfers. Supply another ROM as the first
+argument or through `ROM`, with its matching ELF beside it.
+Both exact before and current ROMs
 pass 242 checks with 34 captures each. These are labeled test-only fixtures,
 not ordinary gameplay or proof of controller eligibility. Three source
 regressions, four native PNG checks, helper/build and original smoke pass.
 Complete palette-correct 1x/4x comparisons and matching ROM/ELF/map packages
 are preserved in the coordinator's session artifacts.
+
+## Native underwater follow-on
+
+`python3 tools/ichor/art/player_underwater.py --write` writes only the two
+128x32 underwater sheets. Native swimming bodies, wide bent elbows/raised
+forearms and splayed kicking knees replace the upstream player/black-blob shapes.
+The profile leans from head to hips with folded knees and returning feet.
+The existing petasos,
+faces, Theo's short hair and Ianthe's braid are shared identity sources.
+The underwater palette file is unchanged. Role indices retain skin,
+blue clothing, straw, satchel and outline meanings; PNG palettes use the
+same truncated BGR555 values the ROM loads.
+
+All four source frames (south, north, west, spare east) are redrawn and
+distinct. The existing engine image table aliases nine logical slots onto
+the first three source frames; the fourth remains unused, not falsely
+claimed as an additional live facing. East mirrors the west frame in game.
+Underwater movement has no newly added stroke frames: the original aliases
+and engine hFlips/bob helper are retained.
+
+`bash tools/ichor/tests/elaia_water.sh` covers both players' four facings
+and four standard movement speeds, together with paired dolphin/rider
+states. Another ROM can be supplied as the first argument or through `ROM`,
+with its matching ELF beside it. The partial-Akti baseline and new ROM each pass 13,448 assertions
+and 320 captures across 64 state cases. Actual graphics IDs, dynamic
+palette tags/live bytes, native image aliases and OBJ VRAM are checked.
+The real hidden underwater helper bobs the swimmer; an idle NPC callback
+holds the requested state table. The 1x/4x native and complete matched
+engine galleries are retained as session artifacts.
+
+This is **forced actual-ROM rendering on Route 1**, not underwater-map
+gameplay or proof that the post-game Nereid Pearl is available early.
+Build, smoke and the three-sheet source/native gates pass. Accepted walking,
+surf rider and other player sheets and all palette files remain unchanged.
+The coordinator held the initial `f786a9ad25` underwater submission because
+its near-straight limbs read as standing. The pose refinement above leaves
+the accepted dolphin untouched and adds measurable native arm/knee spread
+and profile knee-to-ankle bend gates. The preserved submitted ROM, landed
+`4133f17748` main baseline and refined ROM each pass the identical 320-capture
+fixture. Complete 1x/4x comparisons are preserved separately for the
+pose-only refinement and full current-main rollout; no older evidence is
+overwritten. The safe-boundary merge includes the separate watering/decorating
+art, which this refinement does not change.
+The refined native poses are artistically accepted; independent main
+integration remains the coordinator's gate.
 
 ## Palettes: how the roles were remapped
 

@@ -514,119 +514,80 @@ def shadow_frame(size):
 # The surf mount: a Minoan dolphin (32x32, may.pal)
 # --------------------------------------------------------------------------
 
+# Native silhouettes keep the rider's seating plane at y=23. The snout,
+# flank stripe and paired flukes remain visible beyond the rider's legs.
 DOLPHIN = {
-    # facing south, toward the viewer: the rider sits on its back; its head
-    # comes at us between the rider's shins, flippers out, foam at the sides
-    "south": [
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "............kkkkkkkk............",
-        "..........kknBBBBBnnkk..........",
-        ".........knBBBBBBBBBnnnk........",
-        "........knBBBBBBBBBBnnnnk.......",
-        "........knBBBBBBBBBnnnnnk.......",
-        "..kkk..knnBBBBBBBnnnnnnnk..kkk..",
-        ".kBBnk.knnnBBBBnnnnnnnnnk.knnnk.",
-        ".knnnnkknnnnnnnnnnnnnnnnkknnnnk.",
-        "..kkkkkknnnnnBBBBBnnnnnnkkkkkk..",
-        "LL.....knnnnBBBBBBBnnnnnk.....LL",
-        ".LLL....knnnBBBBBBBnnnnk....LLL.",
-        "...LLL...knkBnnnnnBknnk...LLL...",
-        ".....LLL..knnnnnnnnnnk..LLL.....",
-        ".......LLL.kLLLLLLLLk.LLL.......",
-        ".........LLLkLllllLkLLL.........",
-        "...........LLLkkkkLLL...........",
-        "..............LLLL..............",
-    ],
-    # facing north, away: its back under the rider, the tail flukes toward us
-    "north": [
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "............kkkkkkkk............",
-        "..........kknBBBBBnnkk..........",
-        ".........knBBBBBBBBBnnnk........",
-        "........knBBBBBBBBBBnnnnk.......",
-        "........knBBBBBBBBBnnnnnk.......",
-        "..kkk..knnBBBBBBBnnnnnnnk..kkk..",
-        ".kBBnkkknnnBBBBnnnnnnnnnkkknnnk.",
-        "..kkkk.knnnnnnnnnnnnnnnnk.kkkk..",
-        "LL......knnnnnnnnnnnnnnk......LL",
-        ".LLL.....kknnnnnnnnnnkk.....LLL.",
-        "...LLL.....knnnBnnnnk.....LLL...",
-        ".....kkkk..knnBBnnnnk..kkkk.....",
-        "....knBBBkkknnnnnnnnkkkBBBnk....",
-        "....kknnnnnnnnkknnnnnnnnnkk.....",
-        "......kkkkkkkk..kkkkkkkkk.......",
-        ".......LLLLLLLLLLLLLLLLLL.......",
-        "................................",
-    ],
-    # facing west: in profile, rostrum to the left, the dorsal fin behind the
-    # rider, the saffron stripe down the flank, the tail fluke raised on the right
-    "west": [
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "................................",
-        "........................kk......",
-        ".......................knnk.....",
-        "......................knBnk.....",
-        ".....................knBBnk.....",
-        "...................kknBBBnk..kk.",
-        ".........kkkkkkkkkknBBBBBnk.knBk",
-        ".......kknBBBBBBBBBBBBBBBnkknnk.",
-        ".....kknBBBBBBBBBBBBBBBBBBBnnk..",
-        "...kknBkBBBBBBBBBBBBBBBnnnnnk...",
-        ".kknBBBBnOOOOOOOOOOOOOOnnnnk....",
-        "knnnnBnOOLLLLLLLLLLLLLLOOnk.....",
-        "kLLLLLLLLLLLLLLLLLLLLLLLLk......",
-        ".kkLLLLLLLlllllllllLLLkk........",
-        "LL.kkkkkkkkkkkkkkkkkkkk.....LL..",
-        ".LLLL......................LLLL.",
-        "...LLLLLL...............LLLLL...",
-        "......LLLLLLLLLLLLLLLLLLLL......",
-        "...........LLLLLLLLLL...........",
-        "................................",
-        "................................",
-        "................................",
-    ],
+    "south": (1, 15, """
+...........kkkkkkkk
+.........kkBBBBBBBnnkk
+........kBBBBBBBBBBnnnk
+.......kBBBBBBBBBBBBnnnk
+..kk...kBBBBBBBBBBBBnnnk...kk
+.kBnk..kBBBBBBBBBBBBnnnk..knnk
+kBBnnkkkBBBBBBBBBBBBnnnkkknnnnk
+.knnnnkknnBOOBBBBBBOnnnkknnnnk
+..kkkk..knnOOOOOOOOOnnk..kkkk
+.........kBnBBBBBBnnnk
+.........kkBknnnnknnkk
+..........kBOOOOOnnk
+..........kBLLLLLlnk
+...........kLLLLllk
+............kllllk
+.............kkkk
+"""),
+    "north": (1, 15, """
+...........kkkkkkkk
+.........kkBBBBBBBnnkk
+........kBBBBBBBBBBnnnk
+.......kBBBBBBBBBBBBnnnk
+..kk...kBBBBBBBBBBBBnnnk...kk
+.kBnk..kBBBBBBBBBBBBnnnk..knnk
+kBBnnkkkBBBBBBBBBBBBnnnkkknnnnk
+.knnnnkknOOOOOOOOOOOnnkknnnnk
+..kkkk..knnBBBBBBBBnnnk..kkkk
+.........knnBBBBBBnnnk
+..........knBBBBnnnk
+...kkkk...knnBBnnnk...kkkk
+..kBBnnkkkknnBnnnnkkkkBBnnk
+..knnBBBBnnnnnnnnnnBBBBnnnk
+...kkOOOOOOnnkknnOOOOOOkk
+.....kkkkkkkk..kkkkkkkk
+"""),
+    "west": (0, 11, """
+........................kk
+.......................kBnk
+......................kBBnk
+.....................kBBBnk
+...................kkBBBBnk...k
+.........kkkkkkkkkBBBBBBnnk..kBk
+.......kkBBBBBBBBBBBBBBnnnk.knnk
+......kkBBBBBBBBBBBBBBBBBnnkkBnk
+....kkBBBBBBBBBBBBBBBBBBBnnnnnk
+..kkBBkBBBBBBBBBBBBBBBBBnnnnnk
+.kBBBBBBOOOOOOOOOOOOOOOnnnnk
+kBBBBnnOOLLLLLLLLLLLLLOOnnk
+kLLLLLLLLLLLLLLLLLLLLllnnk
+.kkkkLLLLLllkklllLLLLllkk
+.....kkkkklkBnklkkkkkk
+...........kBnnk
+............knnk
+.............kk
+"""),
 }
 
 
 def dolphin_frames():
-    return [ascii_frame(DOLPHIN[d], MY) for d in ("south", "north", "west")]
+    frames = []
+    for facing in ("south", "north", "west"):
+        x, y, source = DOLPHIN[facing]
+        rows = source.strip("\n").splitlines()
+        assert y + len(rows) <= 32
+        assert all(x + len(row) <= 32 for row in rows), facing
+        canvas = ["." * 32] * y
+        canvas += [("." * x + row).ljust(32, ".") for row in rows]
+        canvas += ["." * 32] * (32 - len(canvas))
+        frames.append(ascii_frame(canvas, MY))
+    return frames
 
 
 # --------------------------------------------------------------------------

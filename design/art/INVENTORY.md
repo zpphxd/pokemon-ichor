@@ -14,7 +14,7 @@ new higher-quality art direction.
 | Theo/Ianthe fronts, Kleon, Daphne and Alethea portraits | New native poses/faces/folds in the existing painters; Daphne intro and trainer portrait regenerate together | Intro/player-choice/Kleon captures and native checks pass; later portrait contexts remain unexercised |
 | Theo/Ianthe and Alethea animated battle backs | Profile/eye detail, matched palettes; all four throw frames retained and distinct | Opening player throw captured; native checks cover all sheets, not later tutorial/throw contexts |
 | Player walking, running, fishing, relic raise and surfing | All ten sheets regenerated from the shared native hats/faces; no opaque palette-role changes | Both genders' walk/run captures pass; fishing, surfing and relic tables now have labeled engine-state captures, not proof of early-game controller eligibility |
-| Player underwater | Unchanged, still a supported engine state using `player_underwater.pal` | Native underwater redesign; not counted as done |
+| Player underwater | Both 128x32 sheets redrawn with wide bent arms, splayed kicking knees and a leaning profile; shared Theo/Ianthe identity parts and `player_underwater.pal` preserved | Pose/source/native checks and forced real-ROM state/bob/VRAM coverage pass; fourth source frame remains unused by the standard image table, and Dive eligibility/controller is not exercised |
 | Player bikes | Unchanged | Unused by current Aethos design; retain in the full-rollout inventory rather than silently deleting |
 | Player watering and decorating | Four native sheets replace recolored Brendan/May with Theo/Ianthe's established faces/clothing, a handled clay watering jug and crouched decorating pose | Source/native checks and matching 242-check/34-capture engine fixtures pass; gameplay availability/controllers/shared palettes unchanged; these unused systems are not enabled |
 | Kleon, Daphne, Alethea walkers | Native hair/headband/eye details; nine existing engine frames each | Native checks and current Elaia/Akademia captures pass |
@@ -25,7 +25,7 @@ new higher-quality art direction.
 | Three starter kraters and their rocking views | Native contour/rim/clay highlight polish; existing starter palettes, motifs and engine frame order preserved | Current selection/rocking capture |
 | Ripples, normal/landing splashes and ledge dust | Five native contact sheets replace inherited Emerald pixel shapes; unchanged dimensions/frame counts | Current in-game contact/landing capture |
 | Grass/reed rustle and landing variants, sandal prints, field emotes, shadows, warp arrow and follower emotions | Fifteen native field sheets and the 23-frame follower-emotion sheet redrawn from reproducible indexed sources; shared/ball palettes untouched | Source/native checks and matched engine captures pass; tall-grass steps use actual Route 1 terrain, reeds use a labeled RAM fixture, other effects use labeled API fixtures |
-| Dolphin surf mount | Existing Greek artwork retained, not newly redrawn in this checkpoint | Explicit later/global higher-quality review scope; rider state evidence does not validate the complete surf controller or mount |
+| Dolphin surf mount | Three native views redrawn with a visible snout, saffron flank, cream belly, flippers and flukes; accepted rider sheets and both player palettes unchanged | Matched forced real-ROM paired mount/rider evidence covers four directions, step/get-on/off poses, native bobbing, palette and VRAM binding; not full Surf controller eligibility |
 | Outdoor aethos/kalliste and interior oikos/oikia/civic terrain/furniture | Existing Greek tiles retained; no layout, collision, tileset palettes or tile budget changed | Separate terrain/environment pass if required for visual consistency |
 | Door and water tile animations | Existing artwork retained | Separate environment-animation review |
 | Opening/menu/battle UI, ordinary item icons and the bakery trade scene | Existing artwork retained | Full-rollout shared-screen/item/trade scope; no claim these sprites were all redrawn |
@@ -81,6 +81,78 @@ this is not a finished-every-sprite town declaration. The human/opening-object
 checkpoint was landed on `main` as `dfb7974fbc`, and Pokemon as `9ae5aff4af`;
 the follow-on effects checkpoint does not require reapplying either
 equivalent feature-branch commit.
+
+**Bounded mount/underwater follow-on:** based on `main` at `8fce8d4ed6`,
+only `surf_blob.png` and the two `underwater.png` sheets are changed.
+`check_elaia_water.py` verifies three source-exact indexed 4bpp sheets and
+eleven distinct source frames, transparent index 0, BGR555 palette colors,
+shared mount color roles and unchanged accepted rider source arrays. The
+underwater palette file is retained byte-for-byte; embedded PNG palettes
+use its already-truncated hardware colors.
+
+`elaia_water.sh` passes 13,448 assertions and 320 captures against both the
+preserved partial-Akti `2d1a23993f` ROM and this checkpoint's ROM. Its 64
+forced state cases cover both genders' four surf directions in seated,
+stepping and controller-held get-on/off poses, plus underwater's four
+facings and four standard movement speeds. Native callbacks, palette tags
+and live bytes, relative-frame/image-table aliases, OBJ VRAM, mount anchors
+and shared bob offsets are checked. The hidden native underwater bob helper
+tracks the swimmer; it does not render a surface dolphin underwater.
+All 320 matched captures and complete 1x/4x comparisons are retained in
+session artifacts. These are Route 1 renderer fixtures, not natural
+surfing/diving play or early relic eligibility. No map, controller, frame
+table, accepted rider, shared palette or ball asset is changed. Helper
+compilation, `make`, smoke (9 captures), native checks and the three-image
+rollout gate pass. ROM usage is 23,040,960 bytes (68.67%).
+
+Terrain/furniture, door/water tile animations, UI/item/trade, bikes and other
+unused/global groups remain open. Watering/decorating landed separately as
+`4133f17748`, not part of this three-sheet checkpoint. Artistic approval and
+serial main integration remain the coordinator's gate.
+
+**Underwater pose refinement:** the coordinator accepted the dolphin but
+held `f786a9ad25` because the initial underwater silhouettes still read as
+upright standing figures. A follow-up redraw changes only the two underwater
+PNGs: raised returning forearms/wide elbows, bent splayed front/back kicks,
+and a leaning profile with folded knees and feet. The source checker now
+also measures visible arm/knee spread and the profile knee-to-ankle bend.
+The accepted dolphin, riders, palettes, tables and bob/controller wiring
+remain unchanged. The landed watering/decorating checkpoint was merged at
+the clean boundary; those four PNGs are unchanged by this refinement.
+
+The original submitted ROM, current-main `4133f17748` ROM and refined ROM
+each pass the same 13,448-assertion/320-capture water fixture. Two independent
+complete 1x/4x comparison sets separate the pose-only refinement from the
+full current-main water rollout. Older comparisons and ROMs remain preserved.
+Helper/build, 9-capture smoke, three-sheet native gate, retained-effect and
+unused-player source checks, and 22 audit/unused-player regressions pass.
+ROM usage remains 23,040,960 bytes (68.67%). The refined native swimming
+poses and retained dolphin are artistically accepted; independent integration
+remains the coordinator's gate, not a full-town completion claim.
+
+**Coordinator water integration verification:** source `f786a9ad25` and
+accepted pose follow-up `4011f16e92` are applied without the housekeeping
+merge or earlier Elaia equivalents. The combined snapshot retains the
+accepted Akti portraits/Nemean family and four unused-player sheets.
+Helpers, build, 9-capture smoke, three source/native image checks, retained
+16-effect and unused-player source checks, and 22 audit/player regressions
+pass. The actual post-portrait main ROM `bc616c533d...` and current ROM each
+pass 13,448 checks with 320 captures. Complete matching boards are inspected;
+the first mistaken positional-ROM invocation was discarded rather than
+presented as before evidence. The new water/unused-player wrappers now honor
+both a positional ROM and the existing `ROM` environment selector. Matching
+ELFs and the corrected baseline command are retained with the captures.
+
+ROM use is 23,039,520 bytes (68.66%), SHA256
+`97f0cdc84363a24438c52d36728514447c2a51cfb6c3da07337a20d1102aff2b`.
+The coordinator's `elaia-water-integrated` package preserves matching
+GBA/ELF/map, authoritative `before`/`after` runs and complete 1x/4x
+comparisons. Paths labeled `discarded` are not baseline evidence.
+Source reconciliation reports 178 changed, no added/removed and 19,971
+unchanged image/palette sources. Shared palettes, riders, unused-player
+art and protected balls remain unchanged. Surf/Dive eligibility and
+natural controller play are not claimed; all retained global groups remain
+open.
 
 **Coordinator integration verification:** Pokemon source checkpoint
 `f247d1e645` was applied as `9ae5aff4af` on top of the landed human checkpoint
