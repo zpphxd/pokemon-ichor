@@ -484,7 +484,7 @@ def wood_events():
       "MOVEMENT_TYPE_NONE", "FLAG_ICHOR_KLEON_JOINED_TITANS")
     o("LOCALID_WOOD_BALLS", "OBJ_EVENT_GFX_ICHOR_KLEON_BALLS", 16, 13, S + "Kleon",
       "MOVEMENT_TYPE_FACE_RIGHT", "FLAG_ICHOR_KLEON_JOINED_TITANS")
-    o("LOCALID_WOOD_IAPETOS", "OBJ_EVENT_GFX_ICHOR_CHORUS_LEADER", 20, 10, S + "Nothing",
+    o("LOCALID_WOOD_IAPETOS", "OBJ_EVENT_GFX_ICHOR_CHORUS_LEADER", 21, 13, S + "Nothing",
       "MOVEMENT_TYPE_FACE_LEFT", "FLAG_TEMP_11")
     o("LOCALID_WOOD_ALETHEA", "OBJ_EVENT_GFX_VAR_1", 19, 21, S + "Nothing",
       "MOVEMENT_TYPE_FACE_UP", "FLAG_TEMP_12")
@@ -556,7 +556,7 @@ def pool():
 
 def pool_events():
     S = "PoolOfMnemosyne_EventScript_"
-    obj = [{"local_id": "LOCALID_POOL_MNASEAS", "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M", "x": 7,
+    obj = [{"local_id": "LOCALID_POOL_MNASEAS", "graphics_id": "OBJ_EVENT_GFX_ICHOR_MNASEAS", "x": 7,
             "y": 9, "elevation": 3, "movement_type": "MOVEMENT_TYPE_FACE_RIGHT", "movement_range_x": 0,
             "movement_range_y": 0, "trainer_type": "TRAINER_TYPE_NONE",
             "trainer_sight_or_berry_tree_id": "0", "script": S + "Mnaseas", "flag": "0"}]

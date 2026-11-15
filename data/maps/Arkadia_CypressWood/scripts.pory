@@ -390,24 +390,26 @@ script Arkadia_CypressWood_EventScript_ReadTablets {
 movement Arkadia_CypressWood_Movement_StandUp { nurse_joy_bow }
 movement Arkadia_CypressWood_Movement_IntoClearing { walk_up * 2 walk_left face_up }
 movement Arkadia_CypressWood_Movement_AletheaUp { walk_up * 5 face_up }
-movement Arkadia_CypressWood_Movement_KleonToMask { walk_up * 3 walk_right * 4 face_right }
-movement Arkadia_CypressWood_Movement_KleonToBalls { walk_left * 3 walk_down * 2 face_down }
-movement Arkadia_CypressWood_Movement_KleonAway { walk_up * 2 walk_right * 4 }
+// Iapetos stands at the clearing's east tree line (21,13): with the player at (18,16), rows
+// 12-18 are what shows above the message box, so everything happens on them.
+movement Arkadia_CypressWood_Movement_KleonToMask { walk_down walk_right * 4 walk_up walk_right face_right }
+movement Arkadia_CypressWood_Movement_KleonToBalls { walk_left * 3 face_left }
+movement Arkadia_CypressWood_Movement_KleonAway { walk_right * 5 }
 movement Arkadia_CypressWood_Movement_VixenRuns {
     walk_fast_right * 4
     walk_fast_up walk_fast_right * 2 walk_fast_down * 2 walk_fast_left * 2 walk_fast_up
     walk_fast_up walk_fast_right * 2 walk_fast_down * 2 walk_fast_left * 2 walk_fast_up
-    walk_fast_up walk_fast_right * 5 walk_fast_up * 2 walk_fast_right
+    walk_fast_up walk_fast_right * 6 walk_fast_down walk_fast_right * 2
 }
 movement Arkadia_CypressWood_Movement_HoundRuns {
     walk_fast_right * 5
     walk_fast_up walk_fast_right * 2 walk_fast_down * 2 walk_fast_left * 2 walk_fast_up
     walk_fast_up walk_fast_right * 2 walk_fast_down * 2 walk_fast_left * 2 walk_fast_up
-    walk_fast_up walk_fast_right * 5 walk_fast_up * 2 face_right
+    walk_fast_up walk_fast_right * 6 walk_fast_down walk_fast_right face_right
 }
-movement Arkadia_CypressWood_Movement_HoundToAlethea { walk_right walk_down * 6 face_left }
-movement Arkadia_CypressWood_Movement_AletheaLeaves { walk_right walk_down walk_left walk_down * 5 }
-movement Arkadia_CypressWood_Movement_HoundLeaves { delay_16 walk_down walk_left walk_down * 5 }
+movement Arkadia_CypressWood_Movement_HoundToAlethea { walk_down * 3 walk_left face_left }
+movement Arkadia_CypressWood_Movement_AletheaLeaves { walk_down * 6 }
+movement Arkadia_CypressWood_Movement_HoundLeaves { delay_16 walk_down walk_left walk_down * 4 }
 
 // ---------------------------------------------------------------------------
 // The Wood's trainers (Part 3; the four after Euadne and Agapenor are the route

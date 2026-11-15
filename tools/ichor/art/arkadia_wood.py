@@ -37,9 +37,9 @@ def clearing_px(x, y, variant=0):
     grey-blue floor read as a pond in the render; moss green reads as ground.)"""
     xx, yy = x % 16, y % 16
     h = L.hsh(xx, yy, 31 + variant) % 100
-    if h < 2:
+    if h < 1:
         return "ws2"
-    if h < 5:
+    if h < 3:
         return "ws1"
     # tufts of grass: short upright strokes
     if (xx * 5 + yy * 3) % 13 == 0 or ((xx * 7 + yy * 11) % 17 == 0 and yy % 2 == 0):

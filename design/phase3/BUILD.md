@@ -156,7 +156,7 @@ All 17 maps are registered. Outdoor maps are in `gMapGroup_TownsAndRoutes`; Arka
 
 ### Ids
 
-**Trainers** 202–216: heights 202–210 (Apheidas, Auge, Echemos, Azan; Aipytos, Laodike, Telphousa, Kypselos, grunt Basanos), arkadia 211–212 (Euadne, Agapenor), artemis 213–216 (Kyrene, Anthia, Prokris, Kallisto). Classes `Huntress`, `Charcoaler`; pic `Hierophant Kallisto`.
+**Trainers** 202–216: heights 202–210 (Apheidas, Auge, Echemos, Azan; Aipytos, Laodike, Telphousa, Kypselos, grunt Basanos), arkadia 211–212 (Euadne, Agapenor), artemis 213–216 (Kyrene, Anthia, Prokris, Kallisto); after trophonios's Mnesarete (217), arkadia's four for the route standard 218–221 (Hekaerge, Mainalos, Lysippe, Melanippe; `ORDER.txt`). Classes `Huntress`, `Charcoaler`; pic `Hierophant Kallisto`.
 
 **Bank flags** (the last of 0x100–0x1FF until the second bank lands): this session 0x1FA–0x1FE, already claimed: `FLAG_ICHOR_VISITED_STYX_FALLS`, `_VISITED_ARKADIA`, `_KLEON_JOINED_TITANS`, `_ALETHEA_GOT_SKYLAPS`, `_HUNT_DONE`. heights 0x1C0–0x1D1, arkadia 0x1D2–0x1E3, artemis 0x1E4–0x1EB, rooms3 0x1EC–0x1F9. **Item balls and hidden items** take vanilla flags this batch, to save the bank: heights 0x338–0x34B, arkadia 0x34C–0x359, artemis 0x35A–0x35D, rooms3 0x35E–0x363 (`claim.py --range … flag`). If a range runs out, name the flag in your doc, stub its use, and say so.
 

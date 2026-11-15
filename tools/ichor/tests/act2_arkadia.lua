@@ -100,8 +100,9 @@ local function main()
   -- ============================================================ beat 41: Arkadia, at dusk
   L.setBeat("41_dusk", false)
   local moves = (1 << 17) | (1 << 18) | (1 << 19) | (1 << 20)
+  -- (the eighth badge only so the level-60 test Pokémon obeys: obedience goes by met level)
   into(S.MAP_ARKADIA, 23, 0, {
-    flags = { S.FLAG_SYS_POKEMON_GET, S.FLAG_ACT2_BEGUN, S.FLAG_TABLET_5 },
+    flags = { S.FLAG_SYS_POKEMON_GET, S.FLAG_ACT2_BEGUN, S.FLAG_TABLET_5, S.FLAG_BADGE08_GET },
     extra = { S.SCR_OP_CALLNATIVE, { S.ScrCmd_createmon | 1, 4 }, 0, S.PARTY_SIZE,
               { S.SPECIES_TEST, 2 }, { 60, 2 }, { moves, 4 },
               { S.MOVE_TEST, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 },

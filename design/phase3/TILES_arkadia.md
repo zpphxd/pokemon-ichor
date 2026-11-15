@@ -550,3 +550,114 @@ ids           walk
 Parts: `tl` 0x25C, `tr` 0x25D, `ml` 0x264, `mr` 0x265, `bl` 0x26C, `br` 0x26D.
 
 <!-- passes: hand-written below this line; arkadia_build.py keeps it -->
+
+## Render-and-critique passes
+
+Written by hand, kept across rebuilds. Each map was rendered with
+`tools/ichor/maps/arkadia.py --render` (plain 2x, a review copy with collision and events, and
+15 x 10 GBA screens at the places that matter, in `build/render/arkadia/`), compared with
+MAP_DESIGN.md and Kithairon's and Act I's best maps, and fixed. On every build the builder
+checks that every person, sign, item, door and trigger can be reached from the entry, that the
+seam strips hold only aethos's metatiles, that the cordon, the hoplite and the guards can't be
+walked round, that the Wood's bands are forced, and that nobody the scripts leave standing
+cuts off a door. `--publish` writes the final 2x renders. In-game screenshots of every scene
+are from `tools/ichor/tests/act2_arkadia.sh` (`build/test_arkadia/shots/`), and
+`tools/ichor/map_audit.py` measures the route standard (MAP_DESIGN §8).
+
+| Render | Map |
+|---|---|
+| [`img/Arkadia.png`](img/Arkadia.png) | Arkadia (50 x 44) |
+| [`img/Arkadia_CypressWood.png`](img/Arkadia_CypressWood.png) | The Cypress Wood (36 x 30) |
+| [`img/PoolOfMnemosyne.png`](img/PoolOfMnemosyne.png) | The Pool of Mnemosyne (24 x 20) |
+
+### The art (both sets)
+
+1. **First paint.** Every piece drawn once, straight from SCRIPT.md Part 2: the town set came
+   to 624 tiles against 504. The Agora's stall, Hippothoos's hut and Krotos's byre mixed
+   colors from two palette groups in single 8x8 tiles, and the Wood's gate copied its
+   lintel into the bottom layer under a top layer of another group, so Porytiles refused
+   both sets.
+2. **Second.** Every 8x8 tile of every layer now draws from one group. The budget came down
+   to 529, then 510, then 488: the roofs' and walls' textures repeat every 8 px, the big
+   symmetric pieces (the temple, its precinct gate, the Wood's gate, the cypress shapes) are
+   drawn half and mirrored, and the soft-edged sets (rock, terrace, canopy) hold only the
+   outlines the plans use.
+3. **Third.** The shingles were grey and read as slate at 1x, the same as the rock and the
+   terrace walls. They are four weathered browns now, (48,40,40) to (184,152,112), so the
+   roofs read as wood between the grey stone.
+4. **Fourth.** In the Wood's published render the stump clearing's grey-blue, starlit floor
+   read as a pond, the one thing it must not look like in a wood whose next map is a pool.
+   The floor is moss now: two greens, tufts, darker patches and a few dew glints in the
+   starlight colors, still brighter than the shaded floor around it.
+
+### Arkadia
+
+1. **Draft.** The beats and the roster in place, but the first render had canopy strips
+   along the edges that looked like walls, a bare square, flat rock tops, an Agora crown
+   that read as a dome, and a south-east yard with no way in.
+2. **Pass 1.** The plan was redrawn. The edges are aethos's woods (cypress spires, stone
+   pines, olives over deep-shade grass), ragged, with the seam strips cut through them; the
+   square has its lamp-trees, the basin and the town's cypresses; Krotos's pasture opens at column 41, rows 26–30; the terrace wall got a
+   fourth stair at column 33; boulders on the verges beside the cordon, the guards and the
+   hoplite keep them from being walked round. The builder checks all of it from here on.
+3. **Pass 2 (the audit).** The pasture was an empty dead end: a grazing Kerazap stands in it
+   now. The small cypresses' tops were walk-behind on some cells and solid on others, which
+   left cells you could stand inside a tree; every small cypress top is solid. The town got
+   the route standard's two hidden items (a Revive in the hollow cypress by the forest gate,
+   Silver Powder beside the Agora) and one ball (a Max Repel by the falls).
+4. **Pass 3 (rooms3's race).** Klymene's race runs from her doorstep (37,12) to the temple
+   stair's first step and back. The temple's sign and the lost girl stood on the temple road,
+   which made the shortest route 51 steps one way; they moved to (20,36) and (23,36), and the
+   race is 39 steps each way, 79 there and back with the step into her door.
+5. **Pass 4 (in game).** The headless test's screenshots showed the dusk scene playing to an
+   empty road: the lamplighter and the huntresses started on rows 14–17, objects more than 9
+   rows from the player aren't spawned, so the huntresses never appeared, and everyone who
+   did speak stood under the message box. They start on rows 13–15 now and stop on row 8,
+   level with the lamps the lamplighter lights, and Alethea arrives at the player's side.
+   The test then found the Wood's gate cut off: Alethea waited on its doorstep's one-wide
+   lane. She waits beside it at (11,16), the huntresses go to (21,19) and (22,19) instead of
+   onto a wandering child's spot, and the builder now checks every door with everyone
+   standing where the scripts leave them. The evening tint is heavy on cypress green: the
+   town reads as silhouettes with lit lamps, which is the beat.
+
+### The Cypress Wood
+
+1. **Draft.** Hand-built on a 36 x 30 grid (`WOOD_ROWS`): the gate's mats at the bottom
+   right, band 1, the narrow at column 19, the clearing, and the west spur to the tomb and
+   the Pool. Two trainers (Euadne at the narrow, Agapenor by his kiln) and too little grass
+   for a middle route of 7 screens.
+2. **Pass 1 (the audit).** The Wood grew a north-east glade and a south-east glade off the main
+   line, bands four deep, and ferns round the tomb: 119 grass cells, 8 of them forced. Four
+   more trainers (Hekaerge in the north-east glade, Mainalos at the end of band 1, Lysippe
+   past band 2, Melanippe on the tomb spur), three balls (Dusk Balls by the kiln, a Dusk
+   Stone in the north-east glade, a Hyper Potion past band 1), three hidden items, and signs
+   at the gate, the tomb and the Pool's end. Nothing grows or stands in Kleon's clearing: it
+   stays a scene.
+3. **Pass 2.** The clearing's floor (the art's fourth pass).
+4. **Pass 3 (in game).** The test's screenshots of beat 42 showed an empty tree line: with
+   the player at (18,16), rows 12–18 are all that show above the message box, and Iapetos
+   stood at (20,10), off the top of the screen, so he "faded in" where nobody could see.
+   He steps out of the clearing's east tree line at (21,13) now; Kleon walks to him along
+   rows 13–14, sweeps up his Poké Balls from the stump's side, and leaves into the trees
+   where the mask went; the vixen and the hound circle the stump and bolt the same way,
+   and the hound stops at that tree line, on screen, before it comes to Alethea. Alethea
+   and the hound leave down the narrow one behind the other instead of through each
+   other. Under the night tint the clearing's dew glints read as static, so there are
+   fewer of them.
+
+### The Pool of Mnemosyne
+
+1. **Draft.** The black pool and its fixed stars in a glade of white poplars and asphodel,
+   Mnaseas on the seat west of the pool, one ball and one hidden item.
+2. **Pass 1 (the audit).** A dead end this size pays two balls and two hidden items at
+   least: an Ether ball north of the pool and a hidden Pretty Feather in the south
+   asphodel, with the Ultra Ball, the PP Up, the Moon Stone and the Stardust.
+3. **Pass 2.** The glade was a flat field: nothing said where to walk. A worn limestone
+   path (aethos's, Arkadia's own) runs in from the Wood's edge, along the pool's kerb and up
+   to Mnaseas's seat, so the way from the Wood leads to the water and the man who tells
+   its story.
+4. **Pass 3 (in game).** By day, after beat 43 lets the clock go, the path reads at once as
+   the way in, and Mnaseas on his own walker (the elder in poplar white) sits where it ends,
+   beside the black water; the asphodel drifts frame the pool without crowding the walk.
+   Left as is: the place-name popup says ARKADIA in the Wood and at the Pool, because both
+   are in Arkadia's map section; a section of their own is the integrator's call.

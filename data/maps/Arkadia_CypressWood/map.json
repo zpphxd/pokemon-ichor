@@ -52,8 +52,8 @@
     {
       "local_id": "LOCALID_WOOD_IAPETOS",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_CHORUS_LEADER",
-      "x": 20,
-      "y": 10,
+      "x": 21,
+      "y": 13,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,

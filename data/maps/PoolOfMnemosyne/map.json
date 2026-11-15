@@ -23,7 +23,7 @@
   "object_events": [
     {
       "local_id": "LOCALID_POOL_MNASEAS",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MNASEAS",
       "x": 7,
       "y": 9,
       "elevation": 3,
