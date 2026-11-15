@@ -1747,6 +1747,9 @@
 #define FLAG_ICHOR_DECOY_ROUTE11                (FLAG_ICHOR_THEOXENIA_START + 0x24) // gave the thirsty traveler on Route 11 Fresh Water (a theoxenia decoy)
 #define FLAG_ICHOR_ALTAR_CLEANSED_ROUTE12       (FLAG_ICHOR_ALTARS_START + 10)      // Route 12's forest shrine of Artemis, cleansed (altar index 10)
 #define FLAG_ICHOR_DAEDALUS_PAGE_4              (FLAG_ICHOR_PAGES_START + 0x03)     // Daedalus's page IV, from the hawk's nest on Route 12 (ICHOR_STUB_KEY_ITEMS: no item yet)
+// Act II batch 5, Astyra (BUILD.md, "Cross-map scenes and hand-offs"): always set with the second fragment.
+#define FLAG_ICHOR_OLIVE_FELL                   FLAG_ICHOR_SECOND_FRAGMENT_STOLEN // Athena's olive has fallen (beat 55)
+#define FLAG_ICHOR_RHEA_AKROPOLIS_DONE          FLAG_ICHOR_SECOND_FRAGMENT_STOLEN // Rhea beaten on the Akropolis (beat 55)
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
 #define FLAG_ICHOR_ACT2_BEGUN                   (FLAG_ICHOR_GENERAL_START + 0x100) // Ichor: Act II: the vines are cut and Route 6 opens (beat 26)
 #define FLAG_ICHOR_VISITED_ELEUTHERAI           (FLAG_ICHOR_GENERAL_START + 0x101) // Ichor: Act II: reached Eleutherai on Mt. Kithairon (beat 27)
@@ -1999,6 +2002,26 @@
 #define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_TM_FUTURE_SIGHT (FLAG_ICHOR_GENERAL_START + 0x1AE) // Ichor: Act II: item ball: Trophonios's cave B2F TM Future Sight on the oracle's ledge
 #define FLAG_ICHOR_HIDE_TROPHONIOS_GREAT_BOULDER (FLAG_ICHOR_GENERAL_START + 0x1AF) // Ichor: Act II: Trophonios's great boulder is split (Hephaestus's Hammer); stays gone
 #define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_DAMP_ROCK (FLAG_ICHOR_GENERAL2_START + 0x080) // Ichor: Act II: item ball: Trophonios's cave B1F Damp Rock in the wet corner by the stream's outlet
+#define FLAG_ICHOR_ARRIVED_ASTYRA               (FLAG_ICHOR_GENERAL2_START + 0x0B0) // Ichor: Act II: first step through Astyra's Dipylon (beat 48; city)
+#define FLAG_ICHOR_VISITED_ASTYRA               (FLAG_ICHOR_GENERAL2_START + 0x0B1) // Ichor: Act II: Astyra is a fly target (city)
+#define FLAG_ICHOR_HEARD_PROCLAMATION           (FLAG_ICHOR_GENERAL2_START + 0x0B2) // Ichor: Act II: the Archon's proclamation in the Agora (beat 48; city)
+#define FLAG_ICHOR_MET_PHAEDON                  (FLAG_ICHOR_GENERAL2_START + 0x0B3) // Ichor: Act II: met Phaedon, at the first heal or in his house (beats 49-50; civic or homes)
+#define FLAG_ICHOR_MET_ELPIS                    (FLAG_ICHOR_GENERAL2_START + 0x0B4) // Ichor: Act II: met Elpis in Phaedon's house (beat 50; homes)
+#define FLAG_ICHOR_LIBRARY_DAPHNE               (FLAG_ICHOR_GENERAL2_START + 0x0B5) // Ichor: Act II: Daphne in Astyra's Library (beat 51; civic)
+#define FLAG_ICHOR_STOA_HEARING                 (FLAG_ICHOR_GENERAL2_START + 0x0B6) // Ichor: Act II: Alethea's hearing in the Stoa of the Archon (beat 52; civic)
+#define FLAG_ICHOR_OSTRACISM_DONE               (FLAG_ICHOR_GENERAL2_START + 0x0B7) // Ichor: Act II: the ostracism in the Agora (beat 53; city)
+#define FLAG_ICHOR_WROTE_OWN_NAME               (FLAG_ICHOR_GENERAL2_START + 0x0B8) // Ichor: Act II: the farmer's shard: you wrote your own name (beat 53; city)
+#define FLAG_ICHOR_ALETHEA_CONFESSED            (FLAG_ICHOR_GENERAL2_START + 0x0B9) // Ichor: Act II: Alethea confesses in the Kerameikos at dusk (beat 54; outskirts)
+#define FLAG_ICHOR_AKROPOLIS_RAID               (FLAG_ICHOR_GENERAL2_START + 0x0BA) // Ichor: Act II: the Akropolis raid has begun (beat 55; akropolis)
+#define FLAG_ICHOR_PROPYLAIA_PASSED             (FLAG_ICHOR_GENERAL2_START + 0x0BB) // Ichor: Act II: through the Propylaia in the raid (beat 55; akropolis)
+#define FLAG_ICHOR_KLEON_AKROPOLIS_DONE         (FLAG_ICHOR_GENERAL2_START + 0x0BC) // Ichor: Act II: Kleon on the Parthenon steps (beat 55; akropolis)
+#define FLAG_ICHOR_SECOND_FRAGMENT_STOLEN       (FLAG_ICHOR_GENERAL2_START + 0x0BD) // Ichor: Act II: Rhea takes the second fragment and the olive falls (end of beat 55; akropolis)
+#define FLAG_ICHOR_AFTER_RAID                   (FLAG_ICHOR_GENERAL2_START + 0x0BE) // Ichor: Act II: the Asclepeion after the raid (beat 56; civic)
+#define FLAG_ICHOR_RAID_MORNING                 (FLAG_ICHOR_GENERAL2_START + 0x0BF) // Ichor: Act II: Morning. in Phaedon's house after the raid (beat 56; homes)
+#define FLAG_ICHOR_SALT_WELL_OPEN               (FLAG_ICHOR_GENERAL2_START + 0x0C0) // Ichor: Act II: Boutes opens the salt well's grate (beat 57; akropolis)
+#define FLAG_ICHOR_GOT_KEPHALOS_CLOAK           (FLAG_ICHOR_GENERAL2_START + 0x0C1) // Ichor: Act II: Kephalos's cloak, carried by a flag (ICHOR_STUB_KEY_ITEMS; homes)
+#define FLAG_ICHOR_DELIVERED_CLOAK              (FLAG_ICHOR_GENERAL2_START + 0x0C2) // Ichor: Act II: gave Alethea Kephalos's cloak at the goodbye (beat 57; sea)
+#define FLAG_ICHOR_ALETHEA_LEFT                 (FLAG_ICHOR_GENERAL2_START + 0x0C3) // Ichor: Act II: Alethea's goodbye in the salt well (beat 57; sea)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
@@ -2016,6 +2039,9 @@
 #define FLAG_DAILY_ICHOR_KRONIST_BREAD          (FLAG_DAILY_ICHOR_GENERAL_START + 0x04C) // Ichor: Act II: one free Barley Cake a day from any Kronist
 #define FLAG_DAILY_ICHOR_SKENE_MASK             (FLAG_DAILY_ICHOR_GENERAL_START + 0x04D) // Ichor: Act II: the skene's mask rack hides a Prosomime once a day
 #define FLAG_DAILY_ICHOR_TREADING               (FLAG_DAILY_ICHOR_GENERAL_START + 0x04E) // Ichor: Act II: the vintner's grape-treading, once a day
+#define FLAG_DAILY_ICHOR_ASTYRA_JAR             (FLAG_DAILY_ICHOR_GENERAL_START + 0x04F) // Ichor: Act II: the Agora's barking jar, a wild Pithound once a day (Astyra; city)
+#define FLAG_DAILY_ICHOR_ASTYRA_CHIPS           (FLAG_DAILY_ICHOR_GENERAL_START + 0x050) // Ichor: Act II: the chip heap that looks back, a wild Glyphlet once a day (Astyra; city)
+#define FLAG_DAILY_ICHOR_PANATHENAIA            (FLAG_DAILY_ICHOR_GENERAL_START + 0x051) // Ichor: Act II: the Panathenaia's torch race, once a day (Astyra's Lyceum; civic, stretch)
 // Ichor daily bank flags: end
 
 // Temp flag aliases
@@ -2797,13 +2823,6 @@
 #define FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL                0
 #define FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY       0
 #define FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR                        0
-
-// ICHOR_STUB_ACT2_FLAGS (parnassos): flags Lebadeia's scripts read that other agents claim.
-// Until they're merged these read as never set (flag 0 is always clear); delete each
-// line once its real claim is in this file above.
-#ifndef FLAG_ICHOR_AKROPOLIS_RAID
-#define FLAG_ICHOR_AKROPOLIS_RAID 0     // batch 5's (beat 55)
-#endif
 
 #endif
 
