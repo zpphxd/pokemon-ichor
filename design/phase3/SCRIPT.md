@@ -2350,12 +2350,12 @@ AUGUR: Cranes mean sowing. In this season? Someone ought to go and look.
 ```
 [Set `FLAG_ICHOR_DEMETER_OMEN_TOLD`.]
 
-**Setup.** Show the old woman on the Maiden's Well's worn bench (Phase 2's seed object) when `FLAG_BADGE05_GET` is set and `FLAG_ICHOR_THEOXENIA_DEMETER` is unset: clear `FLAG_ICHOR_HIDE_THEOXENIA_DEMETER`. She is a stooped elder-woman walker in a gray shawl, facing the well.
+**Setup.** Show Cami on the Maiden's Well's worn bench (Phase 2's seed object) when `FLAG_BADGE05_GET` is set and `FLAG_ICHOR_THEOXENIA_DEMETER` is unset: clear `FLAG_ICHOR_HIDE_THEOXENIA_DEMETER`. She is a young woman in a gray shawl, sitting on the bench and facing the well (`OBJ_EVENT_GFX_ICHOR_CAMI`, the sitting pose; the user named her and gave the photo she is drawn from, SYSTEMS.md §10). Until that sprite is on main, the elder-woman walker stands in, tagged `ICHOR_STUB_TRAINER_ART`. Eleusa's sign by the well still says an old woman sat on this bench: that is the song's version, and her reveal answers it.
 
 **The tells** (SYSTEMS.md §10). She has **no shadow**. Within 3 tiles, the player's follower **bows**. With the Augur's Eye open on this map, its screen adds "Something here is watching you." And her shawl:
 ```text
 [the shawl, examined from behind her]
-Her shawl is old and gray. Caught in its fringe is a single ear of wheat.
+Her shawl is worn and gray. Caught in its fringe is a single ear of wheat.
 
 Ripe. In this season.
 ```
@@ -2367,51 +2367,51 @@ The Maiden's Well. The rope is wet. Draw some water?
 
 **Talking to her.**
 ```text
-OLD WOMAN: …
+CAMI: …
 
-OLD WOMAN: Oh. A traveler. Sit, if you like. The bench is long.
+CAMI: Oh. A traveler. Sit, if you like. The bench is long.
 
-OLD WOMAN: I've walked a long way looking for someone. My girl.
+CAMI: I'm Cami. I've walked a long way looking for someone. My daughter.
 
-OLD WOMAN: She went down somewhere I can't follow. Picking flowers.
+CAMI: She went down somewhere I can't follow. Picking flowers.
 
-OLD WOMAN: I'm thirsty. That's all. And tired of being sad.
+CAMI: I'm thirsty. That's all. And tired of being sad.
 
-OLD WOMAN: Have you anything to drink, child?
+CAMI: Have you anything to drink, friend?
 ```
 [A multichoice built from what the player carries: WINE (if they hold Wine), WATER (if they hold Fresh Water), BARLEY WATER (if they hold Fresh Water and a Barley Cake: her *kykeon*), NOTHING. `VAR_TEMP_1` records the drink.]
 ```text
 > WINE:
-OLD WOMAN: No. Not wine. Not today. Not for a long time.
+CAMI: No. Not wine. Not today. Not for a long time.
 
-OLD WOMAN: Have you anything else?
+CAMI: Have you anything else?
 ```
 [Return to the multichoice without WINE. This is SYSTEMS.md's refusal; it is not a failure.]
 ```text
 > WATER:
 [Take 1 Fresh Water.]
-OLD WOMAN: Water. Thank you, child. That's kind.
+CAMI: Water. Thank you, friend. That's kind.
 
 > BARLEY WATER:
 [Take 1 Fresh Water and 1 Barley Cake.]
-OLD WOMAN: Barley, and water, and… is that mint? Where did you learn that?
+CAMI: Barley, and water, and… is that mint? Where did you learn that?
 
-OLD WOMAN: Someone taught you very well. Someone old.
+CAMI: Someone taught you very well. Someone old.
 
 > NOTHING:
-OLD WOMAN: Never mind, child. Never mind.
+CAMI: Never mind, friend. Never mind.
 
-OLD WOMAN: I'll be here. I'm always here, lately.
+CAMI: I'll be here. I'm always here, lately.
 ```
 [NOTHING ends the visit; she stays on the bench and the test can be retried at once (SYSTEMS.md: "No permanent failure").]
 
 **The joke.** After WATER or BARLEY WATER:
 ```text
-OLD WOMAN: There. That's better.
+CAMI: There. That's better.
 
-OLD WOMAN: Now. A girl here made me laugh once, when I'd forgotten how.
+CAMI: Now. A girl here made me laugh once, when I'd forgotten how.
 
-OLD WOMAN: Do you know any jokes? Tell me one. A bad one, if you've got it.
+CAMI: Do you know any jokes? Tell me one. A bad one, if you've got it.
 ```
 ?? Multichoice: THE GOAT / THE FIG-SELLER / THE HARVEST
 ```text
@@ -2430,23 +2430,25 @@ You tell her the one about the fig-seller who sold a snatcher a fig…
 > THE HARVEST:
 You tell her about a year the harvest failed. It's very sad.
 
-OLD WOMAN: …That's not a joke, child. That's a harvest.
+CAMI: …That's not a joke, traveler. That's a harvest.
 
-OLD WOMAN: Never mind. Never mind. Come back another day.
+CAMI: Never mind. Never mind. Come back another day.
 ```
 [THE HARVEST ends the visit kindly. She stays on the bench and the visit can be tried again once you have left the well-yard and come back (a temp flag, `FLAG_TEMP_1`, cleared on the map change), with the same test, per SYSTEMS.md's "no permanent failure". THE GOAT and THE FIG-SELLER both land: the reveal follows.]
 
 **The reveal** (SYSTEMS.md §10, word for word).
 
-[The old woman laughs, a cracked sound, then a real one.]
+[Cami laughs, a cracked sound, then a real one.]
 ```text
-OLD WOMAN: Ha. Oh, that's terrible. Tell it again.
+CAMI: Ha. Oh, that's terrible. Tell it again.
 
-OLD WOMAN: I haven't laughed since my girl went away.
+CAMI: I haven't laughed since my daughter went away.
 ```
-[She stands, and she is taller than she was. Gold light fills the well-yard: a fade to white over 16 frames and back. The dry stalks around the well turn green and heavy (the well-yard's dry-grass metatiles swap to ripe wheat), and the dry fig over the well bursts into leaf (its metatile swaps to the fig in leaf, with fruit).]
+[She stands, and she is taller than she was: the object becomes `OBJ_EVENT_GFX_ICHOR_DEMETER`, her revealed form (two objects swapped by hide flags, as Act II does it; BUILD.md). Gold light fills the well-yard: a fade to white over 16 frames and back. The dry stalks around the well turn green and heavy (the well-yard's dry-grass metatiles swap to ripe wheat), and the dry fig over the well bursts into leaf (its metatile swaps to the fig in leaf, with fruit).]
 ```text
-DEMETER: I sat at this well once before, like this. An old woman nobody knew.
+DEMETER: I sat at this well once before. The song says I was an old woman.
+
+DEMETER: People remember what they expect. Nobody expects a god.
 
 DEMETER: A girl brought me water. Another made me laugh. I never forgot them.
 
@@ -2458,7 +2460,7 @@ DEMETER: You did both. Hold out your hands.
 
 DEMETER: It grows where it's tended. So do you.
 
-DEMETER: Don't tell anyone the old woman was me. They'll feed every beggar in Eleusa.
+DEMETER: Don't tell anyone Cami was me. They'll feed every stranger in Eleusa.
 
 DEMETER: …Actually. Tell everyone.
 ```
@@ -2486,14 +2488,14 @@ Snivy is past Servine's level (17) and one short of Serperior's (36), so its nex
   ```
 - **The water-carrier**:
   ```text
-  WATER-CARRIER: An old woman sat on that bench all week. Nobody spoke to her.
+  WATER-CARRIER: A young woman sat on that bench all week. Nobody spoke to her.
 
   WATER-CARRIER: Then the fig came out in leaf. I'm speaking to everyone now.
 
   WATER-CARRIER: You never know. You never know.
   ```
 
-**Design note.** Two of the three jokes land, as SYSTEMS.md says. The failing choice is a sad story, not a crude one, so the lesson is the Hymn's: she needed laughter, not sympathy. The drink accepts water, as SYSTEMS.md has it, and loves the *kykeon*, whose makings Metaneira gave the player after Laurel 3 in Phase 2. Prophecy tablet #4 is in the well-yard too (Part 2, "Eleusa in Act II").
+**Design note.** The *Hymn* has the goddess come as an old woman; here she comes as Cami, and the song remembered her wrong. Eleusa's sign still tells the song's version, and the reveal's "People remember what they expect" answers them. Two of the three jokes land, as SYSTEMS.md says. The failing choice is a sad story, not a crude one, so the lesson is the Hymn's: she needed laughter, not sympathy. The drink accepts water, as SYSTEMS.md has it, and loves the *kykeon*, whose makings Metaneira gave the player after Laurel 3 in Phase 2. Prophecy tablet #4 is in the well-yard too (Part 2, "Eleusa in Act II").
 
 ---
 
@@ -14481,7 +14483,7 @@ Before: THERSITES: Look at those sandals. Did a goat make them? Did a goat WEAR 
 Defeat: IAMBE: Ha! A walker with a sense of humor. Rare, today.
 Defeat: THERSITES: That's it. I'm insulting the next one twice. It's a Kronist, too.
 After:  IAMBE: We mock everyone here. It reminds the goddess how to laugh. She forgot, once.
-After:  IAMBE: If you ever meet a sad old woman, tell her a terrible joke. Trust me.
+After:  IAMBE: If you ever meet someone sad by a well, tell them a terrible joke. Trust me.
 After:  THERSITES: I was voted ugliest man in three cities. Undefeated.
 ```
 ```
@@ -14525,7 +14527,7 @@ Onotis
 Level: 36
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 ```
-Iambe's Gelasable keeps its evolution move, Taunt; Thersites's Harpelle keeps Tailwind, so the pair hits fast and mocks. Iambe's After line about the sad old woman points, for anyone listening, at Demeter at the Maiden's Well (beat 46B), who needs a bad joke.
+Iambe's Gelasable keeps its evolution move, Taunt; Thersites's Harpelle keeps Tailwind, so the pair hits fast and mocks. Iambe's After line about someone sad by a well points, for anyone listening, at Demeter at the Maiden's Well (beat 46B), who needs a bad joke.
 
 **3. FISHER Eunikos.** On the stream bank below the bridge. Optional.
 ```text
@@ -21378,7 +21380,7 @@ Region C1 needs **no new permanent vars**. Scene state is in `VAR_TEMP_*`; every
 
 **Theoxenia** (SYSTEMS.md §10; `FLAG_ICHOR_THEOXENIA_START` range)
 - `FLAG_ICHOR_THEOXENIA_DEMETER` (the visit done)
-- `FLAG_ICHOR_HIDE_THEOXENIA_DEMETER` (the old woman's object)
+- `FLAG_ICHOR_HIDE_THEOXENIA_DEMETER` (Cami's object)
 - `FLAG_ICHOR_DEMETER_OMEN_TOLD` (the augurs' one-time crane line)
 - Decoys: `FLAG_ICHOR_DECOY_ROUTE13`, `FLAG_ICHOR_DECOY_ROUTE16`
 
@@ -21990,7 +21992,7 @@ Every interior is unique (MAP_DESIGN §2). Thria's three are Phase 2's, already 
 |---|---|---|
 | HEALER | portrait, walker | Part 3's class |
 | ATHLETE | portrait, walker | region C2's class; Agias needs it at Nemea (open questions) |
-| Demeter, disguised | walker | a stooped old woman in a gray shawl, an ear of wheat in its fringe; **no shadow** (SYSTEMS.md §10, the per-object opt-out) |
+| Cami, and Demeter revealed | walkers | **Cami** (`OBJ_EVENT_GFX_ICHOR_CAMI`): a young woman in a worn gray shawl, an ear of wheat in its fringe, drawn from the user's photo; a sitting-on-the-bench pose and a standing frame. **Demeter** (`OBJ_EVENT_GFX_ICHOR_DEMETER`): her revealed form. Both **no shadow** (SYSTEMS.md §10, the per-object opt-out). The director's artist draws them; the elder-woman walker stands in until they're on main. |
 | Demeter, revealed | walker, or a large object | taller than the disguise, in gold and wheat-yellow, a sheaf in her arm; she appears for four boxes and walks off |
 | The ox-cart with Kleobis and Biton | objects | the cart (with their mother seated under a parasol) as one 32×32 object; the brothers as two runner walkers with ropes over their shoulders |
 | Epione and her wagon, Ambrosia and her husband, Agias and his grandson, Myrtilos and his wife, Molorchos and his ram, the hostel keeper, the halt's keeper, Apollo's priest, Phyllis and her father, the beekeeper, the Mycenae old woman, the riverbed old man, Hermodikos (with his stone), Pherenike and Thrasyllos, the Kronists, the lost woman | walkers and objects | from the townsfolk walkers by palette swap: healer (the new class), elder woman and man, pilgrim, farmer, merchant, priest. The ram and the mule reuse follower sprites. |

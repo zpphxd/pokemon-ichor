@@ -31,6 +31,8 @@ Each batch ends with a report to the director: the branch and commit, what's pla
 
 Set the three to `TRAINER_TYPE_NORMAL` once their `trainerbattle` scripts exist (the game reads the id from the script). Stubs already on their maps: the herm at road (22,3), landing (22,4), sets `FLAG_ICHOR_HERM_AEGINA` behind `ICHOR_STUB_HERM` (the engine still has to give Aigina's herm an id); altars behind `ICHOR_STUB_RITES`, Zeus on Oros (6,4) and Artemis at the temple (15,11); a dig spot at temple (18,11). The encounter tables are still Phase 2's levels 12–16: re-level them to BALANCE.md's Astyra row.
 
+**Batch 4, Demeter at the Maiden's Well (beat 46B).** Her disguise is **Cami**, a young woman (the user's request, SYSTEMS.md §10 on main at f6a581736e); SCRIPT.md 46B is updated to match. The director's artist is drawing `OBJ_EVENT_GFX_ICHOR_CAMI` (sitting on the bench, and a standing frame) and `OBJ_EVENT_GFX_ICHOR_DEMETER` (her revealed form); the director says when they're on main. Until then use the elder-woman walker, tagged `ICHOR_STUB_TRAINER_ART`. Eleusa's sign ("An old woman sat on that bench, they say") is world-act1's and stays as written.
+
 ## Batch 1
 
 ### Result (2026-11-14)
