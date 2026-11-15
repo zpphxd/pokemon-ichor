@@ -371,8 +371,8 @@
     {
       "id": "HEAL_LOCATION_EMPORION_CITY",
       "map": "MAP_EMPORION_CITY",
-      "x": 10,
-      "y": 10,
+      "x": 16,
+      "y": 37,
       "respawn_map": "MAP_EMPORION_CITY_ASCLEPEION",
       "respawn_npc": "LOCALID_EMPORION_HEALER",
       "respawn_x": 8,

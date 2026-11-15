@@ -48,6 +48,10 @@
 #define TRAINER_ICHOR_ALETHEA_DECK            40
 #define TRAINER_ICHOR_PHORMION                41
 #define TRAINER_ICHOR_LYKON                   42
+// Emporion city agent, ids 43-59: Kleon at the Isthmus Gate, one team per starter
+#define TRAINER_ICHOR_KLEON_2_KYNDER          43
+#define TRAINER_ICHOR_KLEON_2_HIPLING         44
+#define TRAINER_ICHOR_KLEON_2_NEBREL          45
 // Emporion's interiors, ids 60-64 (the hiring hall)
 #define TRAINER_ICHOR_GRUNT_EMPORION_CREW_BOSS 60
 // The Temple of Hermes (ids 65-79; tools/ichor/maps/temple_hermes.py)

@@ -19,18 +19,19 @@ script Ichor_EventScript_FerryQuay {
     lock
     faceplayer
     setspeaker(Ichor_Text_NameNausikles)
-    if (var(VAR_0x8004) == 0) {
-        // ICHOR_STUB_EMPORION: until Emporion's quay is built, it can't be sailed to.
-        msgbox(format("Emporion's quay is packed solid this week. Ships three deep.\p"
-                      "Come back when they've cleared it. I'll be here."))
-        release
-        end
-    }
     msgbox(format("Where to? Wind's fair, more or less."))
-    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AKTI", "STAY")
-    if (var(VAR_RESULT) == 0) {
-        clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
-        goto(Ichor_EventScript_FerryBoard)
+    if (var(VAR_0x8004) == 2) {
+        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "AKTI", "STAY")
+        if (var(VAR_RESULT) == 0) {
+            clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
+            goto(Ichor_EventScript_FerryBoard)
+        }
+    } else {
+        dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "EMPORION", "STAY")
+        if (var(VAR_RESULT) == 0) {
+            setflag(FLAG_ICHOR_FERRY_TO_EMPORION)
+            goto(Ichor_EventScript_FerryBoard)
+        }
     }
     msgbox(format("Suit yourself. I'll be here. The boat'll be here. Probably."))
     release
@@ -60,26 +61,26 @@ script Ichor_EventScript_FerryDeck {
     }
     closemessage
     fadescreen(FADE_TO_BLACK)
-    // ICHOR_STUB_EMPORION: FLAG_ICHOR_FERRY_TO_EMPORION sails to Emporion's quay
-    // once it exists; world-act2 adds an Aigina destination of its own.
-    warpsilent(MAP_AKTI_TOWN, 9, 10)
+    // world-act2 adds an Aigina destination of its own.
+    if (flag(FLAG_ICHOR_FERRY_TO_EMPORION)) {
+        // Emporion's quay, the Euploia's berth (BUILD.md's arrival table)
+        warpsilent(MAP_EMPORION_HARBOR, 30, 16)
+    } else {
+        warpsilent(MAP_AKTI_TOWN, 9, 10)
+    }
     waitstate
     release
 }
 
 // ---------------------------------------------------------------------------
-// The end of beat 10C. ICHOR_STUB_EMPORION: until Emporion's quay exists, a
-// card says what's next and leaves the player on deck with the ferry running.
-// Batch 2 replaces the body with the warp to Emporion's quay.
+// The end of beat 10C: the Euploia makes Emporion, and beat 11 plays on her
+// berth in the harbor district (data/maps/EmporionHarbor/scripts.pory). The ferry
+// is bound for Akti from there.
 // ---------------------------------------------------------------------------
 script Ichor_EventScript_EuploiaMakesEmporion {
     setflag(FLAG_ICHOR_CROSSING_DONE)
+    clearflag(FLAG_ICHOR_FERRY_TO_EMPORION)
     fadescreen(FADE_TO_BLACK)
-    delay(30)
-    msgbox(format("Emporion, the harbor of the world, is next.\p"
-                  "Its streets are still being laid.\p"
-                  "Until they are, the Euploia sails back to Akti."))
-    closemessage
-    delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    warpsilent(MAP_EMPORION_HARBOR, 30, 16)
+    waitstate
 }

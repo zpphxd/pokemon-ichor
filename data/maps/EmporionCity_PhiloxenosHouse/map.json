@@ -50,14 +50,14 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_EMPORION_CITY",
-      "dest_warp_id": "0"
+      "dest_warp_id": "6"
     },
     {
       "x": 7,
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_EMPORION_CITY",
-      "dest_warp_id": "0"
+      "dest_warp_id": "6"
     }
   ],
   "coord_events": [],

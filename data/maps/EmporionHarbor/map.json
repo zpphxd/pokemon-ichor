@@ -13,9 +13,368 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
-  "object_events": [],
-  "warp_events": [],
+  "connections": [
+    {
+      "map": "MAP_EMPORION_CITY",
+      "offset": 0,
+      "direction": "up"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_HARBOR_KLEON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KLEON",
+      "x": 31,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Kleon",
+      "flag": "FLAG_ICHOR_HIDE_KLEON_QUAY"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 29,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Alethea",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_QUAY"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_KERYKOS_PERCH",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KERYKOS",
+      "x": 34,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Kerykos",
+      "flag": "FLAG_ICHOR_HIDE_KERYKOS_QUAY"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_NAUSIKLES",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 28,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Nausikles",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_GLYKERA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 28,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Glykera",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_WINE_SELLER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
+      "x": 20,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_WineSeller",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_CUSTOMS_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 24,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_CustomsMan",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_DOCKHAND",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 9,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Dockhand",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_SAILOR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 15,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Sailor",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_MOTHER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 5,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Mother",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_SON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
+      "x": 4,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Son",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_HALITHERSES",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_AUGUR",
+      "x": 43,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Halitherses",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_STEVEDORE_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 21,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 2,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Stevedore",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HARBOR_STEVEDORE_2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SAILOR",
+      "x": 36,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EmporionHarbor_EventScript_Stevedore2",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WINGULL)",
+      "x": 40,
+      "y": 17,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WINGULL)",
+      "x": 46,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(WINGULL)",
+      "x": 41,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 2,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SUPER_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_EMPORION_SUPER_POTION"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_EMPORION_CITY_HIRING_HALL",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_EMPORION_CITY_HIRING_HALL",
+      "dest_warp_id": "0"
+    }
+  ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 30,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionHarbor_EventScript_QuayHerm"
+    },
+    {
+      "type": "sign",
+      "x": 31,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionHarbor_EventScript_Planter"
+    },
+    {
+      "type": "sign",
+      "x": 29,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EmporionHarbor_EventScript_CitySign"
+    },
+    {
+      "type": "sign",
+      "x": 20,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EmporionHarbor_EventScript_HarborRoadSign"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionHarbor_EventScript_HiringBoard"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EmporionHarbor_EventScript_DigShipsheds"
+    },
+    {
+      "type": "sign",
+      "x": 35,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionHarbor_EventScript_PoseidonAltar"
+    },
+    {
+      "type": "sign",
+      "x": 36,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionHarbor_EventScript_PoseidonAltar"
+    },
+    {
+      "type": "sign",
+      "x": 37,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "EmporionHarbor_EventScript_VictorsWreath"
+    },
+    {
+      "type": "hidden_item",
+      "x": 44,
+      "y": 18,
+      "elevation": 3,
+      "item": "ITEM_RELIC_COPPER",
+      "flag": "FLAG_ICHOR_HIDDEN_EMPORION_BRONZE_OBOL"
+    },
+    {
+      "type": "hidden_item",
+      "x": 25,
+      "y": 16,
+      "elevation": 3,
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_ICHOR_HIDDEN_EMPORION_HEART_SCALE"
+    }
+  ]
 }

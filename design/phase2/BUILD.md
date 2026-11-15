@@ -54,6 +54,38 @@ Registered with placeholder layouts; each owner rewrites its layout.
 
 The city's west gate is the **Isthmus Gate** to Route 4 (batch 3); its seam columns go in the connections table. The Long Walls Gate of SCRIPT.md has no road in the revised map: Astyra is reached through Eleusa in Act II, so it isn't drawn.
 
+### Emporion's connections, warps and arrival (the Emporion city agent)
+
+The city is 48×46 (`tools/ichor/maps/emporion.py`), the harbor district 48×26 (`emporion_harbor.py`); `design/phase2/MAPS_emporion.md` has the plans and the render passes.
+
+| From | To | How |
+|---|---|---|
+| `MAP_EMPORION_CITY` south edge | `MAP_EMPORION_HARBOR` north edge | map connection, offset 0. The harbor road is open at x = 21..25 on both seams. The city's rows 40–45 and the harbor's rows 0–5 are aethos only. |
+| `MAP_EMPORION_CITY` north edge, the **Isthmus Gate** | Route 4 (batch 3) | map connection, up, not made yet. The gate's road is open at **x = 7..9** on row 0 and nowhere else. The city's rows 0–5 are aethos only; Route 4's builder matches the columns (its rows nearest the seam aethos only too, unless it shares `emporion`). The gate's coord triggers are (7..9, 4). |
+| `MAP_EMPORION_CITY` west edge, the **Nemea gate** | Route 14 (Act II) | shut in Act I: a hoplite stands in the gap at (1, 41). If Act II makes it a connection, the road is row 41, and the city's columns 0–7 from row 32 down are aethos only. |
+| the deck | `MAP_EMPORION_HARBOR` (30, 16) | `warpsilent` (end of beat 10C, and the ferry with `FLAG_ICHOR_FERRY_TO_EMPORION`) |
+
+Door warps, all to the interior's warp 0. An interior's way out targets the warp id here.
+
+| Map | Warp id | Door (x, y) | Goes to |
+|---|---|---|---|
+| `MAP_EMPORION_CITY` | 0 | (12, 9) | `MAP_EMPORION_CITY_RUNNERS_HOUSE` |
+| | 1, 2 | (3, 11), (4, 11) | `MAP_EMPORION_CITY_HEPHAISTEION` (a two-cell door) |
+| | 3 | (23, 11) | `MAP_EMPORION_CITY_TEMPLE_OF_HERMES` |
+| | 4 | (3, 19) | `MAP_EMPORION_CITY_POTTERS_WORKSHOP` |
+| | 5 | (30, 21) | `MAP_EMPORION_CITY_TAVERN` |
+| | 6 | (39, 21) | `MAP_EMPORION_CITY_PHILOXENOS_HOUSE` |
+| | 7 | (45, 27) | `MAP_EMPORION_CITY_WIDOWS_HOUSE` |
+| | 8 | (16, 36) | `MAP_EMPORION_CITY_ASCLEPEION` |
+| | 9 | (32, 36) | `MAP_EMPORION_CITY_DEIGMA` (a coord trigger does the warp: the stoa's door bay has no `MB_NON_ANIMATED_DOOR`) |
+| `MAP_EMPORION_HARBOR` | 0, 1 | (4, 8), (5, 8) | `MAP_EMPORION_CITY_HIRING_HALL` (the warehouse's two-cell cart-door) |
+
+### Flags claimed for Emporion's streets and harbor
+
+Bank flags 0x0C0–0x0D5 of the Emporion city agent's 0x0C0–0x0DF: `FLAG_ICHOR_ARRIVED_EMPORION`, `_VISITED_EMPORION`, `_RITES_TUTORIAL`, `_GOT_TROWEL`, `_HIDE_KLEON_QUAY`, `_HIDE_KERYKOS_QUAY`, `_HIDE_ALETHEA_QUAY`, `_KLEON_WON_HERALD`, `_HIDE_KLEON_TEMPLE_STEPS`, `_HIDE_KLEON_ISTHMUS_GATE` (SCRIPT.md's `_SACRED_GATE`), `_KLEON_BATTLE_2_DONE`, `_WON_KLEON_2`, `_DAEDALUS_PAGE_1`, `_NUMBER_NINE_UNTIED` (also Number Nine's hide flag), `_HIDE_SYKEAS_HARPECK`, `_GOT_SYKEAS_FIGS`, `_MET_HALITHERSES`, `_DUG_EMPORION_QUAY`, `_HERM_EMPORION`, `_ITEM_EMPORION_SUPER_POTION`, `_ITEM_EMPORION_X_SPEED`, `_ITEM_EMPORION_REPEL`. Vanilla 0x28A–0x28D for the hidden items: `FLAG_ICHOR_HIDDEN_EMPORION_BRONZE_OBOL`, `_HEART_SCALE`, `_HONEY`, `_STARDUST`. Trainers 43–45: `TRAINER_ICHOR_KLEON_2_KYNDER`, `_HIPLING`, `_NEBREL`.
+
+**Stub tags in Emporion's scripts:** `ICHOR_STUB_RITES` (the quay herm's altar menu, Poseidon's altar), `ICHOR_STUB_HERM` (the crossroads great herm), `ICHOR_STUB_DIG` (the quay planter's sherd, the Hephaisteion's garden, the ship sheds' sand), `ICHOR_STUB_AUGURY` (Halitherses), `ICHOR_STUB_OFFERINGS` (Kerykos's oil, the Trowel, Daedalus's page I, the offerings stall), `ICHOR_STUB_COINS` (Pasion buys the Bronze Obol, Relic Copper, at a fixed ¥600), `ICHOR_STUB_SPRITE` (Kerykos's and Number Nine's walkers).
+
 ## Warps, connections and seams (batch 1)
 
 | From | To | How |
@@ -123,6 +155,7 @@ Built by `tools/ichor/maps/aegina_detour.py` (render-and-critique passes in `MAP
 | the priestess of Aphaia | the Temple of Aphaia | (11, 9), on the steps before the doorway | south | — | — | `LOCALID_APHAIA_PRIESTESS` |
 
 The forced bands: the road's golden-and-green band at (19-24, 7-9), 3 deep, between Myrmex and Sostratos (both ends cross it); and a golden band on Oros's climb at (4-5, 9-10), 2 deep. Items: Silver Powder on the ant hills (22, 13) and the Super Potion at the Oros fork (12, 3) on the road; two Pretty Feathers (one ball, amount 2) on the temple steps (14, 9); Wine as Berry Juice (`ICHOR_STUB_OFFERINGS`) by Zeus's altar (8, 4) on Oros. Readable spots: the great herm (22, 3) (`ICHOR_STUB_HERM`), signs at the south end (19, 20), the fork (20, 3), the Oros path (10, 3) and the temple steps (30, 1), a horos boundary stone (34, 4); Zeus's altar (6, 4) on Oros and Artemis's altar (15, 11) on the temple hill (`ICHOR_STUB_RITES`, SCRIPT.md's words and no prayer); the dig spot in the old foundations (18, 11) (`ICHOR_STUB_DIG`, no reward). `tools/ichor/tests/aigina_interior.sh` walks it all.
+| `MAP_EMPORION_HARBOR` | (30, 16), the *Euploia*'s berth | stepping off the *Euploia* (beat 11, the ferry) |
 
 ## Flags claimed for batch 1
 
@@ -161,7 +194,7 @@ Each stub is marked in the code with its tag, so it can be found and replaced wi
 - **`ICHOR_STUB_DARKNESS`: the Torch, braziers and lit zones** (ENGINE_API.md §2). The Telesterion is a dark map (`requires_flash`). Until the engine's darkness lands, its ON_TRANSITION sets flash level 3 (the Torch's radius, SCRIPT.md Part 5); its braziers call a local `StubBrazier` (ask, light, set the flag) in place of `EventScript_IchorBrazier`, and its lit-zone triggers call `StubEnterLitZone` and `LeaveLitZone` (flash 0 inside a lit quarter, 3 outside) in place of `EventScript_IchorEnterLitZone` / `_LeaveLitZone`. Dousing, and so the glowing seeds and chalk, waits for the engine.
 - **`ICHOR_STUB_OFFERINGS`: Olive Oil, Wine, Barley Cake, Frankincense.** New items from the engine session. Until then, Wine on Mount Oros is an item ball of `ITEM_BERRY_JUICE` with the tag.
 - **Music** (Act I's songs are on main; `design/MUSIC.md` has the rules): the deck and hold `MUS_ICHOR_TRIREME`; Aigina Town `MUS_ICHOR_AKTI` (island harbors share it); mainland routes `MUS_ICHOR_ROAD` (its night form switches in by itself); Emporion `MUS_ICHOR_EMPORION`; the Temple of Hermes `MUS_ICHOR_TEMPLE_HERMES`; Eleusa `MUS_ICHOR_ELEUSA`; the Telesterion and the Mysteries `MUS_ICHOR_TEMPLE_DEMETER`; Hecate's Hollow and any cave `MUS_ICHOR_HOLLOW`; Hyperion `MUS_ICHOR_BATTLE_ADMIN`; Daphne's revelation `MUS_ICHOR_REVELATION`; Aigina's interior (Act II) `MUS_ICHOR_ROAD`. Still stubbed (`ICHOR_STUB_MUSIC`): the inn's night by the hearth plays `MUS_ICHOR_ASCLEPEION`, and the Kleon's-stroke march variant of the trireme song doesn't exist. **Never** use Elpis's lullaby (627, 628) in Act I.
-- **`ICHOR_STUB_EMPORION`: the end of batch 1.** Beat 10C calls `Ichor_EventScript_EuploiaMakesEmporion` (in `data/scripts/ichor_act1.pory`). Until Emporion exists it plays a short card and leaves the player on deck with the ferry running, so Akti and Aegina stay reachable.
+- **The end of batch 1** (was `ICHOR_STUB_EMPORION`). Beat 10C calls `Ichor_EventScript_EuploiaMakesEmporion` (in `data/scripts/ichor_act1.pory`), which now sets `FLAG_ICHOR_CROSSING_DONE` and warps to Emporion's berth, where beat 11 plays. The ferry runs Akti ⇄ Emporion: Akti's Nausikles offers EMPORION, Emporion's offers AKTI, and on deck `FLAG_ICHOR_FERRY_TO_EMPORION` sails to the berth.
 
 ## Rulings that change SCRIPT.md's tables
 

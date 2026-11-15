@@ -9591,8 +9591,8 @@
     {
       "id": "LAYOUT_EMPORION_CITY",
       "name": "EmporionCity_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 48,
+      "height": 46,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Emporion",
       "border_filepath": "data/layouts/EmporionCity/border.bin",
@@ -9602,8 +9602,8 @@
     {
       "id": "LAYOUT_EMPORION_HARBOR",
       "name": "EmporionHarbor_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 48,
+      "height": 26,
       "primary_tileset": "gTileset_Aethos",
       "secondary_tileset": "gTileset_Isthmos",
       "border_filepath": "data/layouts/EmporionHarbor/border.bin",

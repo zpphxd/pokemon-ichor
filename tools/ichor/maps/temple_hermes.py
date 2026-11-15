@@ -63,7 +63,7 @@ PREFIX = "EmporionCity_TempleOfHermes_EventScript_"
 
 # The door mat's warps lead to Emporion. ICHOR placeholder: the city's temple door
 # warp id is fixed at merge (the city is built in parallel).
-CITY_DEST_WARP_ID = "0"
+CITY_DEST_WARP_ID = "3"   # the temple's door in MAP_EMPORION_CITY (emporion.py's warp 3)
 
 # --- The design ----------------------------------------------------------------------
 # One character per cell.

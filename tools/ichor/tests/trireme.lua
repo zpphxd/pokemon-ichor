@@ -327,15 +327,9 @@ local function main()
   shot("50_last_leg_arrive.png")
   play("51_last_leg", 8000, 40)
   expect(getFlag(S.FLAG_CROSSING_DONE), "the last leg sets FLAG_ICHOR_CROSSING_DONE")
-  shot("52_after_last_leg.png")
-
-  -- The ferry: Nausikles on deck asks to make port; no
-  walk({ { 8, 5 }, { 18, 5 }, { 18, 7 } }, "to Nausikles on the ferry")
-  face(K.RIGHT)
-  tap(K.A); wait(4)
-  play("53_ferry", 4000, 30, function() return K.B end)
-  expect(mapId() == S.MAP_DECK, "no to the ferry keeps the player on deck")
-  shot("54_ferry_deck.png")
+  -- the Euploia makes Emporion: beat 11 on the quay is emporion.sh's
+  waitUntil(function() return mapId() == S.MAP_EMPORION_HARBOR end, 3000, "Emporion's quay")
+  shot("52_emporion_quay.png")
 end
 
 local co = coroutine.create(main)
