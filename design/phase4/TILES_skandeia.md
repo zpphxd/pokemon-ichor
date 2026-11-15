@@ -66,7 +66,7 @@ hints.
 | bronze | Bronze mirrors, the harbor shrine's dove, the great herm, the Minoan vault door |
 | melos | Melos's obsidian slope on its earth and grass |
 
-**Tile budget.** 370 of 504 tiles (304 metatiles). The door animations copy their
+**Tile budget.** 407 of 504 tiles (304 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 
@@ -220,11 +220,29 @@ ids                                            walk
 | 0x25D | `bollard` | `X` | `MB_NORMAL` | COVERED | path |
 | 0x25E | `gangplank` | `.` | `MB_NORMAL` | COVERED | sea |
 
+### Quay flagstones
+
+`flags`, 6 wide by 1 tall. The quay's paving: lay `A`, `B` and `C` in a staggered mix (no two of a kind side by side reads best), with a `drain` grate, an iron mooring `ring` let into a slab, and a `worn` cracked slab here and there. Walkable.
+
+```text
+ids                                      walk
+0x260 0x261 0x262 0x263 0x264 0x265   . . . . . .
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x260 | `A` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x261 | `B` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x262 | `C` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x263 | `drain` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x264 | `ring` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x265 | `worn` | `.` | `MB_NORMAL` | COVERED |  |
+
 ## Town
 
 ### The Cycladic house kit
 
-`house`, 5 wide by 4 tall. Parts that snap together into whitewashed cube houses (see *House fronts* below). Rows: `R_*` the flat roof and its parapet, seen from above; `U_*` the upper wall; `G_*` and the doors, the ground-floor wall on its grey-washed foot. Columns `_L` (the lit west corner), `_M` (repeat it), `_R` (the shaded east corner). Roof extras: `R_chimney`, `R_dove` / `R_doves` (Paphia's roofs), `R_jar` (a water jar on the roof). Upper-wall extras: `U_window` (blue shutters), `U_window_pink`, `U_niche` (a little lamp niche), `U_vine` (a vine trained over the wall). Doors (`MB_NON_ANIMATED_DOOR`, put the warp here): `door` (Aegean blue in a rose-pink frame), `door_white` (the same in a white frame, for Skandeia's plainer houses), `door_arch` (an arched doorway). Ground-wall extras: `G_window`, `pot_rose`, `pot_basil` (a pot on the step), `mirror` (a polished bronze mirror by the door, Paphia's custom) and `mirror_dim` (the same, a dim figure in it), `G_bench` (a whitewashed bench), `G_shell` (a scallop shell set in the wall), `G_steps` (an outside stair up to the roof). Every cell is impassable except the doors.
+`house`, 5 wide by 5 tall. Parts that snap together into whitewashed cube houses (see *House fronts* below). Rows: `R_*` the flat roof and its parapet, seen from above; `U_*` the upper wall; `G_*` and the doors, the ground-floor wall on its grey-washed foot. Columns `_L` (the lit west corner), `_M` (repeat it), `_R` (the shaded east corner). Roof extras: `R_chimney`, `R_dove` / `R_doves` (Paphia's roofs), `R_jar` (a water jar on the roof). Upper-wall extras: `U_window` (blue shutters), `U_window_pink`, `U_niche` (a little lamp niche), `U_vine` (a vine trained over the wall). Doors (`MB_NON_ANIMATED_DOOR`, put the warp here): `door` (Aegean blue in a rose-pink frame), `door_white` (the same in a white frame, for Skandeia's plainer houses), `door_arch` (an arched doorway). Ground-wall extras: `G_window`, `pot_rose`, `pot_basil` (a pot on the step), `mirror` (a polished bronze mirror by the door, Paphia's custom) and `mirror_dim` (the same, a dim figure in it), `G_bench` (a whitewashed bench), `G_shell` (a scallop shell set in the wall), `G_steps` (an outside stair up to the roof). Every cell is impassable except the doors.
 
 ```text
 ids                                walk
@@ -232,6 +250,7 @@ ids                                walk
 0x2A8 0x2A9 0x2AA 0x2AB 0x2AC   X X X X X
 0x2B0 0x2B1 0x2B2 0x2B3 0x2B4   X X X D D
 0x2B8 0x2B9 0x2BA 0x2BB 0x2BC   X X X X X
+0x2C0 0x2C1 0x2C2 0x2C3 0x2C4   X X X X X
 ```
 
 | Id | Piece | Walk | Behavior | Layer | Ground |
@@ -256,6 +275,11 @@ ids                                walk
 | 0x2BA | `G_window` | `X` | `MB_NORMAL` | COVERED |  |
 | 0x2BB | `G_bench` | `X` | `MB_NORMAL` | COVERED |  |
 | 0x2BC | `G_steps` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x2C0 | `R_dove` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x2C1 | `R_doves` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x2C2 | `U_window_pink` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x2C3 | `U_niche` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x2C4 | `G_shell` | `X` | `MB_NORMAL` | COVERED |  |
 
 ### The great herm and the harbor shrine
 
@@ -278,26 +302,26 @@ ids        walk
 
 ```text
 ids                                            walk
-0x2C0 0x2C1 0x2C2 0x2C3 0x2C4 0x2C5 0x2C6   X X X X . X X
-0x2C8 0x2C9 0x2CA 0x2CB 0x2CC 0x2CD 0x2CE   . . . . T . .
+0x2C8 0x2C9 0x2CA 0x2CB 0x2CC 0x2CD 0x2CE   X X X X . X X
+0x2D0 0x2D1 0x2D2 0x2D3 0x2D4 0x2D5 0x2D6   . . . . T . .
 ```
 
 | Id | Piece | Walk | Behavior | Layer | Ground |
 |---|---|---|---|---|---|
-| 0x2C0 | `L` | `X` | `MB_NORMAL` | COVERED | grass |
-| 0x2C1 | `M` | `X` | `MB_NORMAL` | COVERED |  |
-| 0x2C2 | `M2` | `X` | `MB_NORMAL` | COVERED |  |
-| 0x2C3 | `R` | `X` | `MB_NORMAL` | COVERED | grass |
-| 0x2C4 | `steps` | `.` | `MB_NORMAL` | COVERED |  |
-| 0x2C5 | `niche` | `X` | `MB_NORMAL` | COVERED |  |
-| 0x2C6 | `spout` | `X` | `MB_NORMAL` | COVERED |  |
-| 0x2C8 | `top_L` | `.` | `MB_NORMAL` | COVERED | grass |
-| 0x2C9 | `top` | `.` | `MB_NORMAL` | COVERED | grass |
-| 0x2CA | `top_M2` | `.` | `MB_NORMAL` | COVERED | grass |
-| 0x2CB | `top_R` | `.` | `MB_NORMAL` | COVERED | grass |
-| 0x2CC | `top_steps` | `T` | `MB_NORMAL` | COVERED | grass |
-| 0x2CD | `top_niche` | `.` | `MB_NORMAL` | COVERED | grass |
-| 0x2CE | `top_spout` | `.` | `MB_NORMAL` | COVERED | grass |
+| 0x2C8 | `L` | `X` | `MB_NORMAL` | COVERED | grass |
+| 0x2C9 | `M` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x2CA | `M2` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x2CB | `R` | `X` | `MB_NORMAL` | COVERED | grass |
+| 0x2CC | `steps` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x2CD | `niche` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x2CE | `spout` | `X` | `MB_NORMAL` | COVERED |  |
+| 0x2D0 | `top_L` | `.` | `MB_NORMAL` | COVERED | grass |
+| 0x2D1 | `top` | `.` | `MB_NORMAL` | COVERED | grass |
+| 0x2D2 | `top_M2` | `.` | `MB_NORMAL` | COVERED | grass |
+| 0x2D3 | `top_R` | `.` | `MB_NORMAL` | COVERED | grass |
+| 0x2D4 | `top_steps` | `T` | `MB_NORMAL` | COVERED | grass |
+| 0x2D5 | `top_niche` | `.` | `MB_NORMAL` | COVERED | grass |
+| 0x2D6 | `top_spout` | `.` | `MB_NORMAL` | COVERED | grass |
 
 ### House fronts
 

@@ -1721,6 +1721,8 @@ const struct Tileset gTileset_TempleHermes =
     .palettes = gTilesetPalettes_PorytilesManaged_TempleHermes,
     .metatiles = gMetatiles_PorytilesManaged_TempleHermes,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
+    .callback = NULL,
+};
 
 // Ichor: kythera, the Foam Road and the Spring of Kallirhoe (Act III). Porytiles-managed, built by
 // tools/ichor/art/kythera_build.py for the aethos primary: its ground cells
@@ -1808,5 +1810,85 @@ const struct Tileset gTileset_TempleAphrodite =
     .palettes = gTilesetPalettes_PorytilesManaged_TempleAphrodite,
     .metatiles = gMetatiles_PorytilesManaged_TempleAphrodite,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleAphrodite,
+    .callback = NULL,
+};
+
+// Ichor: oikia_skandeia, Skandeia's homes (Kythera): oikia's floors, walls and
+// furniture plus the harbor trades' pieces (tools/ichor/art/aegean_skandeia.py). A
+// region secondary built by tools/ichor/maps/kythera_homes.py with
+// tools/ichor/art/interiors_lib.py: it holds only the cells its rooms use, in its
+// own tiles and palettes 6-12, so it works on any interior primary (oikos).
+const struct Tileset gTileset_OikiaSkandeia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaSkandeia,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaSkandeia,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaSkandeia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaSkandeia,
+    .callback = NULL,
+};
+
+// Ichor: oikia_paphia, Paphia's homes and workshops (Kythera): oikia's pieces plus
+// the temple town's crafts and yards (tools/ichor/art/aegean_paphia.py). A region
+// secondary built by tools/ichor/maps/kythera_homes.py with
+// tools/ichor/art/interiors_lib.py: it holds only the cells its rooms use, in its
+// own tiles and palettes 6-12, so it works on any interior primary (oikos).
+const struct Tileset gTileset_OikiaPaphia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaPaphia,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaPaphia,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaPaphia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaPaphia,
+    .callback = NULL,
+};
+
+// Ichor: oikia_melos, the country houses: Melos's households and Myles's mill at the
+// Neraida falls, oikia's pieces plus tools/ichor/art/aegean_melos.py's. A region
+// secondary built by tools/ichor/maps/kythera_homes.py with
+// tools/ichor/art/interiors_lib.py: it holds only the cells its rooms use, in its
+// own tiles and palettes 6-12, so it works on any interior primary (oikos).
+const struct Tileset gTileset_OikiaMelos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_OikiaMelos,
+    .palettes = gTilesetPalettes_PorytilesManaged_OikiaMelos,
+    .metatiles = gMetatiles_PorytilesManaged_OikiaMelos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_OikiaMelos,
+    .callback = NULL,
+};
+
+// Ichor: civic_kythera, Kythera's Asclepeions and Agoras: gTileset_Civic's metatiles
+// they use plus their own (tools/ichor/art/aegean_civic.py). A region secondary
+// built by tools/ichor/maps/kythera_homes.py with tools/ichor/art/interiors_lib.py:
+// it holds only the cells its rooms use, in its own tiles and palettes 6-12, so it
+// works on any interior primary (oikos).
+const struct Tileset gTileset_CivicKythera =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_CivicKythera,
+    .palettes = gTilesetPalettes_PorytilesManaged_CivicKythera,
+    .metatiles = gMetatiles_PorytilesManaged_CivicKythera,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_CivicKythera,
+    .callback = NULL,
+};
+
+// Ichor: trireme, the Euploia's deck and hold. A Porytiles-managed secondary
+// built by tools/ichor/art/trireme_build.py for the aethos primary: its sea
+// cells borrow aethos's animated sea, so rebuild it whenever aethos changes.
+// (Copied byte for byte from world-act1, where the deck was built, so Act III's
+// MAP_TRIREME_EUPLOIA_DECK_SOUTH has its ship; keep one copy when both merge.)
+const struct Tileset gTileset_Trireme =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Trireme,
+    .palettes = gTilesetPalettes_PorytilesManaged_Trireme,
+    .metatiles = gMetatiles_PorytilesManaged_Trireme,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Trireme,
     .callback = NULL,
 };

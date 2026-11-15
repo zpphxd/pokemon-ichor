@@ -1,0 +1,420 @@
+// Skandeia, Kythera's harbor (design/phase4/SCRIPT.md Part 2 "Skandeia"; beats
+// III-1C, III-1C2's street half, III-1I, the call on the way to Gytheion, and
+// III-2's pointer). The layout and every event's place are
+// tools/ichor/maps/skandeia.py's.
+//
+// Arrival: the deck's Malea scene warps the player to the gangplank (25,10)
+// with FLAG_ICHOR_CROSSED_ROUTE22 set. VAR_ICHOR_ACT3 becomes 2 here, and the
+// requisition plays (Molybdos, a battle) until it is won.
+// The Kronist preaches once to anyone who walks past him (row 13).
+// III-1C2: the trigger at the main street's head (x 19) is the only way into the
+// town, so Alethea always meets the player there before Axylos's door; she then
+// waits at the door until the bad guests are gone (Axylos's house plays the rest).
+// The call after Knossa (FLAG_ICHOR_SKANDEIA_CALL, set by the Knossa writer's
+// departure from Amnisos, which warps here): Alethea at the gangplank, the
+// changed quay, and Nausikles sails on for Gytheion.
+//
+// Music: MUS_ICHOR_KYTHERA isn't written yet; Akti's harbor theme stands in, as
+// it does in Skandeia's homes.
+
+mapscripts KytheraSkandeia_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_VISITED_SKANDEIA)
+        setvar(VAR_TEMP_0, 0)
+        setvar(VAR_TEMP_1, 0)
+        setvar(VAR_TEMP_2, 0)
+        if (flag(FLAG_ICHOR_CROSSED_ROUTE22) && var(VAR_ICHOR_ACT3) < 2) {
+            setvar(VAR_ICHOR_ACT3, 2)
+        }
+        if (flag(FLAG_ICHOR_CROSSED_ROUTE22) && !flag(FLAG_ICHOR_EUPLOIA_KEPT)) {
+            setvar(VAR_TEMP_0, 1)
+            clearflag(FLAG_ICHOR_HIDE_MOLYBDOS)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_MOLYBDOS)
+        }
+        if (var(VAR_ICHOR_ACT3) >= 6) {
+            setflag(FLAG_ICHOR_HIDE_SKANDEIA_PORTERS)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_SKANDEIA_PORTERS)
+        }
+        if (var(VAR_ICHOR_ACT3) >= 19) {
+            setflag(FLAG_ICHOR_HIDE_KRONIST_SKANDEIA)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_KRONIST_SKANDEIA)
+            if (!flag(FLAG_ICHOR_HEARD_KRONIST)) {
+                setvar(VAR_TEMP_2, 1)
+            }
+        }
+        if (flag(FLAG_ICHOR_EUPLOIA_KEPT) && !flag(FLAG_ICHOR_ALETHEA_REJOINED)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+        if (flag(FLAG_ICHOR_ALETHEA_REJOINED) && !flag(FLAG_ICHOR_BAD_GUESTS_GONE)) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA)
+        }
+        if (flag(FLAG_ICHOR_SKANDEIA_CALL) && !flag(FLAG_ICHOR_SAILED_FOR_GYTHEION)) {
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_CALL)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_CALL)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 1: KytheraSkandeia_EventScript_Requisition
+    ]
+}
+
+text KytheraSkandeia_Text_NameMolybdos { "MOLYBDOS" }
+text KytheraSkandeia_Text_NameNausikles { "NAUSIKLES" }
+text KytheraSkandeia_Text_NameKronist { "KRONIST" }
+text KytheraSkandeia_Text_NameDockhand { "DOCKHAND" }
+text KytheraSkandeia_Text_NameOldSailor { "OLD SAILOR" }
+text KytheraSkandeia_Text_NameTitanborn { "TITANBORN" }
+text KytheraSkandeia_Text_NamePhilinna { "PHILINNA" }
+text KytheraSkandeia_Text_NameAlethea { "ALETHEA" }
+text KytheraSkandeia_Text_NorYours { "NOR YOURS" }
+text KytheraSkandeia_Text_NoThanks { "NO THANKS" }
+
+// ---------------------------------------------------------------------------
+// III-1C. The requisition
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_EventScript_Requisition {
+    lockall
+    setvar(VAR_TEMP_0, 0)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(KytheraSkandeia_Text_NameMolybdos)
+    msgbox(format("Trireme, three banks, one captain. Good. She's requisitioned.\p"
+                  "For Knossa. Orders of the Hand."))
+    applymovement(LOCALID_SKANDEIA_NAUSIKLES, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(KytheraSkandeia_Text_NameNausikles)
+    msgbox(format("She's the Euploia. She's been requisitioned by better than you.\p"
+                  "By the sea, mostly. She won."))
+    setspeaker(KytheraSkandeia_Text_NameMolybdos)
+    msgbox(format("The sea's not here. I am."))
+    msgbox(format("You. Off the ship? Then you're crew. Crew fights for the hull.\p"
+                  "May your thread never be cut. Now let's see about your Pokémon."))
+    closemessage
+    trainerbattle_no_intro(TRAINER_ICHOR_MOLYBDOS, Kythera_Text_MolybdosDefeat)
+    setspeaker(KytheraSkandeia_Text_NameMolybdos)
+    msgbox(format("Fine. Keep your tub. We've got forty already.\p"
+                  "Forty-one, with the fish boat. Nobody wanted the fish boat."))
+    closemessage
+    // He chalks a line through the tablet and stamps off down the quay.
+    applymovement(LOCALID_SKANDEIA_MOLYBDOS, KytheraSkandeia_Movement_MolybdosLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_SKANDEIA_MOLYBDOS)
+    setflag(FLAG_ICHOR_HIDE_MOLYBDOS)
+    setflag(FLAG_ICHOR_EUPLOIA_KEPT)
+    setvar(VAR_TEMP_1, 1)
+    applymovement(LOCALID_SKANDEIA_NAUSIKLES, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(KytheraSkandeia_Text_NameNausikles)
+    msgbox(format("Forty boats. For one island. What are they carrying, a mountain?\p"
+                  "I'll be here. She's not moving without me, and I'm not moving."))
+    closemessage
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// The Kronist
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_EventScript_KronistPreaches {
+    lockall
+    setvar(VAR_TEMP_2, 0)
+    setflag(FLAG_ICHOR_HEARD_KRONIST)
+    applymovement(LOCALID_SKANDEIA_KRONIST, Common_Movement_FacePlayer)
+    waitmovement(0)
+    call(KytheraSkandeia_EventScript_KronistSermon)
+    releaseall
+}
+
+script KytheraSkandeia_EventScript_Kronist {
+    lock
+    faceplayer
+    setflag(FLAG_ICHOR_HEARD_KRONIST)
+    setvar(VAR_TEMP_2, 0)
+    if (flag(FLAG_ICHOR_SKANDEIA_CALL)) {
+        setspeaker(KytheraSkandeia_Text_NameKronist)
+        msgbox(format("Every thread ends on the same day. Every one.\p"
+                      "…Nobody listens any more. They've seen the boats come back."))
+        release
+        end
+    }
+    call(KytheraSkandeia_EventScript_KronistSermon)
+    release
+}
+
+script KytheraSkandeia_EventScript_KronistSermon {
+    setspeaker(KytheraSkandeia_Text_NameKronist)
+    msgbox(format("Ask any seer on this island. Go on. Ask.\p"
+                  "Every thread ends on the same day. Every one. Yours. Mine.\p"
+                  "The cloth runs out at Delphoi. Ask anyone. Ask the Pythia.\p"
+                  "She won't answer. She can't. We can.\p"
+                  "May your thread never be cut, friend."))
+    dynmultichoice(20, 6, TRUE, 2, 0, DYN_MULTICHOICE_CB_NONE, KytheraSkandeia_Text_NorYours,
+                   KytheraSkandeia_Text_NoThanks)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("Ha! You know the words. Come to the feast. There's always bread."))
+    } else {
+        msgbox(format("Everybody says that. Then their seer stops talking to them."))
+    }
+    closemessage
+    applymovement(LOCALID_SKANDEIA_DOCKHAND, Common_Movement_FacePlayer)
+    waitmovement(0)
+    setspeaker(KytheraSkandeia_Text_NameDockhand)
+    msgbox(format("He's right about the seers. That's what I can't get past.\p"
+                  "The rest, I don't know. But he's right about the seers."))
+    closemessage
+}
+
+// ---------------------------------------------------------------------------
+// III-1C2. Alethea, on the main street
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_EventScript_AletheaRejoins {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    // She runs down the street with a trowel in one hand and a half-eaten fig in
+    // the other, from Axylos's door (off screen) to the player.
+    clearflag(FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA)
+    addobject(LOCALID_SKANDEIA_ALETHEA_DOOR)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8005) == 16) {
+        applymovement(LOCALID_SKANDEIA_ALETHEA_DOOR, KytheraSkandeia_Movement_AletheaRunsRow16)
+    } else {
+        applymovement(LOCALID_SKANDEIA_ALETHEA_DOOR, KytheraSkandeia_Movement_AletheaRunsRow17)
+    }
+    waitmovement(0)
+    setspeaker(KytheraSkandeia_Text_NameAlethea)
+    msgbox(format("{PLAYER}! You came. Truthfully, I wasn't sure the letter would.\p"
+                  "The gulls here are mostly decorative.\p"
+                  "And yes. I'm allowed. They only exiled me from Astyra.\p"
+                  "I read the decree twice. It doesn't say a word about islands."))
+    closemessage
+    delay(30)
+    msgbox(format("…You look awful. What happened?"))
+    closemessage
+    // The player takes out Kydippe's letter. Alethea reads it.
+    delay(60)
+    msgbox(format("Oh.\p"
+                  "{PLAYER}. I'm sorry. I'm so sorry.\p"
+                  "“She knew. I don't know how.” That sounds like her.\p"
+                  "Then we keep going. That's what I've got.\p"
+                  "Truthfully, it's all I've ever got."))
+    closemessage
+    // The player hands over the satchel. She spreads a tracing against the wall:
+    // a bull, a leaping youth, dolphins.
+    msgbox(format("Daphne's tracings. Oh, she kept these. She swore she'd burned them.\p"
+                  "The palace at Knossa. Bulls. Dolphins. A man with lilies on his head.\p"
+                  "Forty Titan boats, all for Knossa. And Daphne sends me Knossa.\p"
+                  "She knew. Of course she knew. It's in her book. Last chapter."))
+    msgbox(format("Come and eat first. There's a man here who'll feed anyone.\p"
+                  "That's the problem."))
+    closemessage
+    // She walks to Axylos's door and waits.
+    if (var(VAR_0x8005) == 16) {
+        applymovement(LOCALID_SKANDEIA_ALETHEA_DOOR, KytheraSkandeia_Movement_AletheaToDoorRow16)
+    } else {
+        applymovement(LOCALID_SKANDEIA_ALETHEA_DOOR, KytheraSkandeia_Movement_AletheaToDoorRow17)
+    }
+    waitmovement(0)
+    setflag(FLAG_ICHOR_ALETHEA_REJOINED)
+    releaseall
+}
+
+script KytheraSkandeia_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Text_NameAlethea)
+    msgbox(format("Come and eat first. There's a man here who'll feed anyone.\p"
+                  "That's the problem."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Nausikles at the gangplank: III-1I, and the call on the way to Gytheion
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_EventScript_Nausikles {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Text_NameNausikles)
+    if (flag(FLAG_ICHOR_SKANDEIA_CALL) && !flag(FLAG_ICHOR_SAILED_FOR_GYTHEION)) {
+        goto(KytheraSkandeia_EventScript_NausiklesCall)
+    }
+    if (var(VAR_ICHOR_ACT3) < 3) {
+        msgbox(format("Temple first.\p"
+                      "I won't sail into Titans with a crew that's won nothing."))
+        release
+        end
+    }
+    if (var(VAR_ICHOR_ACT3) == 3) {
+        msgbox(format("Krenaia's boy was down here asking for you.\p"
+                      "The falls, north of Paphia.\p"
+                      "Go and see. I've waited forty years for less."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_SAILED_FOR_KNOSSA)) {
+        // TODO(act3): Nausikles's southern lanes (Kaldera, Melos, Skandeia,
+        // Amnisos, Gytheion), offered from every quay he has called at.
+        msgbox(format("She's not moving without me, and I'm not moving."))
+        release
+        end
+    }
+    msgbox(format("Knossa, then. Where the forty boats went.\p"
+                  "We'll make Amnisos by dawn.\p"
+                  "Whatever you do there, don't go under the palace.\p"
+                  "Sail now?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Finish up. Kythera's a hard place to leave. Everyone says so."))
+        release
+        end
+    }
+    msgbox(format("I said don't. You heard me say don't. Remember that."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    setflag(FLAG_ICHOR_SAILED_FOR_KNOSSA)
+    // The deck at night, Route 23 along Knossa's north coast (MAPSEC_AETHOS_ROUTE_23).
+    warpsilent(MAP_TRIREME_EUPLOIA_DECK_SOUTH, 12, 7)
+    waitstate
+}
+
+script KytheraSkandeia_EventScript_NausiklesCall {
+    msgbox(format("Water, then Gytheion. Lakonia's a day up the gulf.\p"
+                  "Your Lakonian boy went ahead on a fish boat. Before dawn. Didn't wait.\p"
+                  "Gytheion? Lakonia's port. Bring a cloak.\p"
+                  "They don't talk there, so it's cold."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("We'll go when you're ready. The gulf's not going anywhere."))
+        release
+        end
+    }
+    msgbox(format("Good. Out past the cape, then north."))
+    closemessage
+    setflag(FLAG_ICHOR_SAILED_FOR_GYTHEION)
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_SKANDEIA_ALETHEA_CALL)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_CALL)
+    // TODO(act3, Lakonia): hand off to the Lakonia writer's crossing (Route 24)
+    // and Gytheion's arrival, which sets VAR_ICHOR_ACT3 = 7:
+    //   warpsilent(MAP_TRIREME_EUPLOIA_DECK_SOUTH or Route 24's deck scene, ...)
+    fadescreen(FADE_FROM_BLACK)
+    release
+}
+
+script KytheraSkandeia_EventScript_AletheaCall {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Text_NameAlethea)
+    msgbox(format("A sky. Truthfully, I'd forgotten what one looked like.\p"
+                  "I keep thinking about the healer's face. When the mask came off.\p"
+                  "He looked relieved. That's the worst part."))
+    release
+}
+
+script KytheraSkandeia_EventScript_Molybdos {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Text_NameMolybdos)
+    msgbox(format("Crew fights for the hull. Well? Fight."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The harbor's people
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_EventScript_Dockhand {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Text_NameDockhand)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("The boats came back. Half of them. Rowed by Titans with no helmets on.\p"
+                      "They said sorry. Every one of them. Then they asked for breakfast."))
+    } elif (flag(FLAG_ICHOR_SKANDEIA_CALL)) {
+        msgbox(format("Forty boats went to Knossa. Thirty came back past here last night.\p"
+                      "Low in the water. Going north. Nobody waved."))
+    } else {
+        msgbox(format("He's right about the seers. That's what I can't get past.\p"
+                      "The rest, I don't know. But he's right about the seers."))
+    }
+    release
+}
+
+// III-2's pointer: after the Foam Laurel, until Poseidon's test is passed.
+// TODO(act2/engine): also require !flag(FLAG_ICHOR_THEOXENIA_POSEIDON) once the
+// theoxenia range is claimed.
+script KytheraSkandeia_EventScript_OldSailor {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Text_NameOldSailor)
+    if (flag(FLAG_BADGE07_GET)) {
+        msgbox(format("Strangest thing in Astyra's waters.\p"
+                      "Under the cape, by the white shrine.\p"
+                      "An old man sits on a sea-rock out there. The spray goes right over him.\p"
+                      "And he's dry. Bone dry. Every time.\p"
+                      "Sailors leave him bread. He gives them advice about fishing rods."))
+    } else {
+        msgbox(format("Forty boats they took. They left the nets. What do I do with nets?\p"
+                      "Catch Titans, I suppose."))
+    }
+    release
+}
+
+script KytheraSkandeia_EventScript_Porter {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Text_NameTitanborn)
+    msgbox(format("Oars to the slip. Oars to the slip. Don't ask me what for. Oars."))
+    release
+}
+
+script KytheraSkandeia_EventScript_Philinna {
+    lock
+    faceplayer
+    setspeaker(KytheraSkandeia_Text_NamePhilinna)
+    msgbox(format("Fish! Fish! …There's no fish. They took the boats.\p"
+                  "There's a potter up in Paphia who comes down every week to buy fish.\p"
+                  "He never says anything. He just buys fish.\p"
+                  "He doesn't even like fish. I asked his sister."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Things
+// ---------------------------------------------------------------------------
+
+script KytheraSkandeia_EventScript_Slips {
+    msgbox(format("A fishing boat hauled up on the slip. Somebody's chalked a sickle on its bow.\p"
+                  "Underneath, smaller, somebody else has chalked: NOT THIS ONE. IT LEAKS."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_EventScript_HarborShrine {
+    msgbox(format("Aphrodite of the Harbor. A bronze dove on a marble niche.\p"
+                  "Sailors leave her a shell before they sail. The niche is full of shells.\p"
+                  "Nobody's sailed in a week. The shells are all old."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_EventScript_SignFoamRoad {
+    msgbox(format("THE FOAM ROAD\pWest along the shore to Paphia and the temple."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_EventScript_SignSkandeia {
+    msgbox(format("SKANDEIA\pKythera's harbor. Ships welcome."), MSGBOX_SIGN)
+}
+
+script KytheraSkandeia_EventScript_Spout {
+    msgbox(format("A spring spout in the terrace wall, dribbling into a trough. The water's cold."), MSGBOX_SIGN)
+}
+
+movement KytheraSkandeia_Movement_MolybdosLeaves { walk_right walk_down * 6 }
+movement KytheraSkandeia_Movement_AletheaRunsRow16 { walk_fast_right * 7 }
+movement KytheraSkandeia_Movement_AletheaRunsRow17 { walk_fast_down walk_fast_right * 7 }
+movement KytheraSkandeia_Movement_AletheaToDoorRow16 { walk_left * 7 face_up }
+movement KytheraSkandeia_Movement_AletheaToDoorRow17 { walk_left * 7 walk_up face_up }

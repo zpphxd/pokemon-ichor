@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_relics.h"
 #include "main.h"
 #include "bike.h"
 #include "event_data.h"
@@ -969,7 +970,7 @@ enum Collision CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16
     if (collision == COLLISION_ELEVATION_MISMATCH && CanStopSurfing(x, y, direction))
         return COLLISION_STOP_SURFING;
 
-    if (ShouldJumpLedge(x, y, direction))
+    if (ShouldJumpLedge(x, y, direction) || Ichor_CanLeapGap(objectEvent, x, y, direction)) // Ichor: the Winged Talaria
     {
         IncrementGameStat(GAME_STAT_JUMPED_DOWN_LEDGES);
         return COLLISION_LEDGE_JUMP;

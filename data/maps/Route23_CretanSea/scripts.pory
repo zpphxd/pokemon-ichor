@@ -1,0 +1,57 @@
+// Route 23, the Cretan Sea: the western stretch from Skandeia's east bay to
+// Antikythera, optional, by Surf (design/phase4/SCRIPT.md Part 2 and "Optional.
+// Antikythera: the box of gears"). Layout: tools/ichor/maps/kythera_seas.py.
+//
+// TODO(act3, Knossa): the east edge is open water where the lane goes on along
+// Knossa's coast to Amnisos (Open questions 16); its 8 columns nearest the seam
+// are aethos-only, ready for the Knossa writer's eastern map.
+// Hidden item (not placed: hidden items need vanilla flags not yet available):
+// a Star Piece in the wreck's ribs (45-47,34-35).
+// Music: MUS_ICHOR_FOAM_ROAD isn't written yet; Act I's road theme stands in.
+
+mapscripts Route23_CretanSea_MapScripts {}
+
+script Route23_CretanSea_EventScript_Bathyllos {
+    trainerbattle_single(TRAINER_ICHOR_BATHYLLOS, Kythera_Text_BathyllosIntro, Kythera_Text_BathyllosDefeat)
+    setspeaker(Kythera_Text_SpeakerBathyllos)
+    msgbox(Kythera_Text_BathyllosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route23_CretanSea_EventScript_Euthykles {
+    trainerbattle_single(TRAINER_ICHOR_EUTHYKLES, Kythera_Text_EuthyklesIntro, Kythera_Text_EuthyklesDefeat)
+    setspeaker(Kythera_Text_SpeakerEuthykles)
+    msgbox(Kythera_Text_EuthyklesAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route23_CretanSea_EventScript_Myrsine {
+    trainerbattle_single(TRAINER_ICHOR_MYRSINE, Kythera_Text_MyrsineIntro, Kythera_Text_MyrsineDefeat)
+    setspeaker(Kythera_Text_SpeakerMyrsine)
+    msgbox(Kythera_Text_MyrsineAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route23_CretanSea_EventScript_Wreck {
+    msgbox(format("The ribs of an old ship, sticking out of the reef like a fish's bones.\p"
+                  "Somebody's ship. Somebody's cargo. Somebody's very bad afternoon."), MSGBOX_SIGN)
+}
+
+// In the lee of the ribs, half-buried: Skyllias's box (the divers' house reads
+// FLAG_ICHOR_SAW_GEAR_BOX). It isn't taken: too heavy, and not yours.
+script Route23_CretanSea_EventScript_GearBox {
+    lock
+    msgbox(format("A lump of green bronze the size of a loaf, cracked open like a nut.\p"
+                  "Inside: gears. Dozens of them. Every tooth cut by hand.\p"
+                  "On the face, dials. One counts the days. One, the moon.\p"
+                  "One counts the games.\p"
+                  "Somebody built a box that counted the hours.\p"
+                  "The sea got into it. It's stopped."))
+    setflag(FLAG_ICHOR_SAW_GEAR_BOX)
+    release
+}
+
+script Route23_CretanSea_EventScript_SignSkandeia {
+    msgbox(format("ROUTE 23\pSouth-east: Antikythera, and Knossa beyond."), MSGBOX_SIGN)
+}
+
+script Route23_CretanSea_EventScript_SignOpenSea {
+    msgbox(format("The open sea. Without a ship, it's a long way to anywhere."), MSGBOX_SIGN)
+}

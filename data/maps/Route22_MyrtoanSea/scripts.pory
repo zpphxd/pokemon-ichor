@@ -1,0 +1,34 @@
+// Route 22, the Myrtoan Sea: Melos (east) to Skandeia's east bay (west), under
+// Cape Malea's gray cliffs; optional, by Surf (design/phase4/SCRIPT.md Part 2).
+// The story crosses it on the Euploia's deck. Layout: tools/ichor/maps/kythera_seas.py.
+//
+// Hidden item (not placed: hidden items need vanilla flags not yet available):
+// a Big Pearl at the foot of Hagne's sunken column (55,25).
+// Music: MUS_ICHOR_FOAM_ROAD isn't written yet; Act I's road theme stands in.
+
+mapscripts Route22_MyrtoanSea_MapScripts {}
+
+script Route22_MyrtoanSea_EventScript_Nikandros {
+    trainerbattle_single(TRAINER_ICHOR_NIKANDROS, Kythera_Text_NikandrosIntro, Kythera_Text_NikandrosDefeat)
+    setspeaker(Kythera_Text_SpeakerNikandros)
+    msgbox(Kythera_Text_NikandrosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_MyrtoanSea_EventScript_Hagne {
+    trainerbattle_single(TRAINER_ICHOR_HAGNE, Kythera_Text_HagneIntro, Kythera_Text_HagneDefeat)
+    setspeaker(Kythera_Text_SpeakerHagne)
+    msgbox(Kythera_Text_HagneAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Route22_MyrtoanSea_EventScript_SignMalea {
+    msgbox(format("CAPE MALEA. Round it and forget your home, the sailors say.\p"
+                  "Someone has scratched underneath: NOT TRUE. I REMEMBERED. MOSTLY."), MSGBOX_SIGN)
+}
+
+script Route22_MyrtoanSea_EventScript_SignMelos {
+    msgbox(format("ROUTE 22\pEast: Melos. West: Kythera."), MSGBOX_SIGN)
+}
+
+script Route22_MyrtoanSea_EventScript_SunkenColumn {
+    msgbox(format("The top of a fallen column, awash. A whole temple lies under the sea here."), MSGBOX_SIGN)
+}

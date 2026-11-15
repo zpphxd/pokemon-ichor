@@ -1,0 +1,251 @@
+// Klima, on Melos's great round bay (design/phase4/SCRIPT.md Part 2 "Melos",
+// beat III-1B2, Part 5 "The statue in the field"). The layout and every event's
+// place are tools/ichor/maps/melos.py's.
+//
+// The Euploia's first voyage puts in here for water: the player lands on the
+// jetty (22,27) from the deck (FLAG_ICHOR_REACHED_MELOS) and Nausikles's arrival
+// lines play once (FLAG_ICHOR_VISITED_MELOS). Talking to him sails on to Cape
+// Malea (the deck's III-1B3). He stays only until Route 22 is crossed.
+//
+// The armless goddess (LOCALID_MELOS_STATUE) is a rooted statue
+// (MOVEMENT_TYPE_ICHOR_STATUE_ROOTED, design/phase4/ENGINE_ACT3.md): she turns
+// to face you whenever you look away, unless you face her or the bronze mirror
+// (LOCALID_MELOS_MIRROR, MOVEMENT_TYPE_ICHOR_MIRROR_UP) that faces her across
+// the terrace. After the Foam Laurel she keeps facing the sea.
+//
+// Music: MUS_ICHOR_FOAM_ROAD isn't written yet; Act I's road theme stands in.
+
+mapscripts Melos_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setvar(VAR_TEMP_0, 0)
+        if (flag(FLAG_ICHOR_REACHED_MELOS) && !flag(FLAG_ICHOR_VISITED_MELOS)) {
+            setvar(VAR_TEMP_0, 1)
+        }
+        setflag(FLAG_ICHOR_VISITED_MELOS)
+        // Kentrios's warning on the terrace stair is armed only once
+        if (flag(FLAG_ICHOR_MET_KENTRIOS)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+        if (flag(FLAG_BADGE07_GET)) {
+            setobjectmovementtype(LOCALID_MELOS_STATUE, MOVEMENT_TYPE_FACE_DOWN)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 1: Melos_EventScript_Arrival
+    ]
+}
+
+text Melos_Text_NameNausikles { "NAUSIKLES" }
+text Melos_Text_NameKentrios { "KENTRIOS" }
+text Melos_Text_NameGirl { "GIRL" }
+
+// ---------------------------------------------------------------------------
+// III-1B2. A morning ashore
+// ---------------------------------------------------------------------------
+
+script Melos_EventScript_Arrival {
+    lockall
+    setvar(VAR_TEMP_0, 0)
+    applymovement(LOCALID_MELOS_NAUSIKLES, Common_Movement_FacePlayer)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(Melos_Text_NameNausikles)
+    msgbox(format("Melos. Water, bread, and an hour to stretch your legs.\p"
+                  "Every ship that ever sailed past here stopped here. For the water.\p"
+                  "And the glass. See the hill? It's black glass, all of it.\p"
+                  "People came here for knives before anyone knew how to make bronze."))
+    closemessage
+    // A beat. He looks at the beach: a long line of fresh keel-marks runs down
+    // into the water.
+    applymovement(LOCALID_MELOS_NAUSIKLES, Common_Movement_FaceLeft)
+    waitmovement(0)
+    delay(40)
+    applymovement(LOCALID_MELOS_NAUSIKLES, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(format("The Titans watered here too. Last night, by the look of it.\p"
+                  "Go on. I'll fill the jars. Come back when you've had your look."))
+    closemessage
+    releaseall
+}
+
+script Melos_EventScript_Nausikles {
+    lock
+    faceplayer
+    setspeaker(Melos_Text_NameNausikles)
+    msgbox(format("Jars are full. Kythera, then. We'll see Malea by sunset.\p"
+                  "Sail on?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("The jars won't get any fuller. But all right."))
+        release
+        end
+    }
+    msgbox(format("Good. Leave the glass. It cuts."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    // The deck, off Cape Malea: beat III-1B3.
+    warpsilent(MAP_TRIREME_EUPLOIA_DECK_SOUTH, 12, 7)
+    waitstate
+}
+
+// ---------------------------------------------------------------------------
+// The statue in the field (Part 5)
+// ---------------------------------------------------------------------------
+
+// The trigger on wall B's stair, once.
+script Melos_EventScript_KentriosWarning {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    setflag(FLAG_ICHOR_MET_KENTRIOS)
+    applymovement(LOCALID_MELOS_KENTRIOS, Common_Movement_FaceDown)
+    waitmovement(0)
+    call(Melos_EventScript_KentriosStory)
+    releaseall
+}
+
+script Melos_EventScript_KentriosStory {
+    setspeaker(Melos_Text_NameKentrios)
+    msgbox(format("Careful on the terrace. Mind the lady.\p"
+                  "Found her last spring. My hoe hit her shoulder. I nearly died.\p"
+                  "She'd been down there longer than my family's been up here.\p"
+                  "Aphrodite, the priest at Kythera says. I'd have guessed that.\p"
+                  "No arms. I dug the whole field for her arms. Not a finger."))
+    msgbox(format("I'll tell you something odd. You'll think I've been in the sun.\p"
+                  "She turns. Her head. When you're not looking at her.\p"
+                  "She faced the sea when I stood her up. Now she faces whoever's here.\p"
+                  "I put the old mirror up so she could see herself. She liked that.\p"
+                  "She doesn't turn while she's in the mirror. Try it. Go on."))
+    closemessage
+}
+
+script Melos_EventScript_Kentrios {
+    lock
+    faceplayer
+    if (!flag(FLAG_ICHOR_MET_KENTRIOS)) {
+        setflag(FLAG_ICHOR_MET_KENTRIOS)
+        setvar(VAR_TEMP_1, 1)
+        call(Melos_EventScript_KentriosStory)
+        release
+        end
+    }
+    setspeaker(Melos_Text_NameKentrios)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("When it all started again she was facing my door. She's never done that."))
+    } elif (flag(FLAG_ICHOR_MELOS_RITE)) {
+        msgbox(format("She's watching the sea again. Come in, after. I've something for you."))
+    } else {
+        msgbox(format("She doesn't turn while she's in the mirror. Try it. Go on."))
+    }
+    release
+}
+
+script Melos_EventScript_Statue {
+    lock
+    if (flag(FLAG_BADGE07_GET)) {
+        msgbox(format("She's looking out at Kythera. She doesn't turn any more."), MSGBOX_SIGN)
+        release
+        end
+    }
+    msgbox(format("A marble woman, half in the earth, with no arms. She's looking at you.\p"
+                  "You're fairly sure she was looking at the sea a moment ago.\p"
+                  "Make an offering to Aphrodite?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        release
+        end
+    }
+    // TODO(engine §3): the offering menu (SYSTEMS §3: she loves Frankincense and
+    // likes Pretty Feathers and sea gifts; a Pearl works), Favor at its rates and
+    // +5 the first time:
+    //   setvar(VAR_0x8004, ICHOR_GOD_APHRODITE) goto(EventScript_IchorAltar_Aphrodite)
+    // The niche counts as Aphrodite's shrine for FLAG_DAILY_ICHOR_PRAYED_APHRODITE.
+    // Until the rites land, the offering is a moment's thanks, and nothing leaves the bag.
+    msgbox(format("You lay it at the foot of the niche.\p"
+                  "The sea wind drops for a moment. Somewhere, a dove calls."))
+    closemessage
+    turnobject(LOCALID_MELOS_STATUE, DIR_SOUTH)
+    if (!flag(FLAG_ICHOR_MELOS_RITE)) {
+        setflag(FLAG_ICHOR_MELOS_RITE)
+        setspeaker(Melos_Text_NameKentrios)
+        msgbox(format("Ha. She liked that. I can tell. She's facing the sea again."))
+    }
+    release
+}
+
+script Melos_EventScript_Mirror {
+    msgbox(format("An old bronze mirror, green at the rim, propped against the wall.\p"
+                  "In it the marble woman stands in her niche, and holds still."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// The people and the trainers
+// ---------------------------------------------------------------------------
+
+script Melos_EventScript_Girl {
+    lock
+    faceplayer
+    setspeaker(Melos_Text_NameGirl)
+    if (var(VAR_ICHOR_ACT3) >= 19) {
+        msgbox(format("The Titans brought the bucket back! With a letter. It says sorry.\p"
+                      "It's spelled wrong."))
+    } else {
+        msgbox(format("Ships stop for our water. Then they go. Nobody stays on Melos.\p"
+                      "The Titans didn't even say thank you. They took the bucket."))
+    }
+    release
+}
+
+script Melos_EventScript_Kimolos {
+    trainerbattle_single(TRAINER_ICHOR_KIMOLOS, Kythera_Text_KimolosIntro, Kythera_Text_KimolosDefeat)
+    setspeaker(Kythera_Text_SpeakerKimolos)
+    msgbox(Kythera_Text_KimolosAfter, MSGBOX_AUTOCLOSE)
+}
+
+script Melos_EventScript_Theion {
+    trainerbattle_single(TRAINER_ICHOR_THEION, Kythera_Text_TheionIntro, Kythera_Text_TheionDefeat)
+    setspeaker(Kythera_Text_SpeakerTheion)
+    msgbox(Kythera_Text_TheionAfter, MSGBOX_AUTOCLOSE)
+}
+
+// ---------------------------------------------------------------------------
+// Things
+// ---------------------------------------------------------------------------
+
+script Melos_EventScript_Well {
+    msgbox(format("A deep well with a stone trough. The water is cold and tastes of rock."), MSGBOX_SIGN)
+}
+
+script Melos_EventScript_Pumice {
+    msgbox(format("White stone, worn by the sea into curves like frozen waves.\p"
+                  "It looks soft. It isn't."), MSGBOX_SIGN)
+}
+
+// The slope's two daily dig spots (SYSTEMS §5's Act III table).
+// TODO(engine §5): the daily dig, FLAG_DAILY_ICHOR_DIG_START + n, once it lands.
+script Melos_EventScript_DigSpot {
+    msgbox(format("Black glass, everywhere. It glints like wet stone.\p"
+                  "People were cutting with this before anyone knew how to make bronze."), MSGBOX_SIGN)
+}
+
+// The slope's fixed find: the knapper's lump, a flag rather than an item
+// (Melanippos reads FLAG_ICHOR_MELOS_OBSIDIAN_LUMP).
+// TODO(engine §5): route it through the fixed-dig range when digging lands.
+script Melos_EventScript_Seam {
+    lock
+    if (flag(FLAG_ICHOR_MELOS_OBSIDIAN_LUMP)) {
+        msgbox(format("The seam of black glass, with a clean gap where your lump came out."), MSGBOX_SIGN)
+        release
+        end
+    }
+    msgbox(format("A seam of black glass runs through the slope here. Not a flaw in it.\p"
+                  "You work a good lump of it loose. It's heavy, and cold.\p"
+                  "Melanippos will want to see this."))
+    setflag(FLAG_ICHOR_MELOS_OBSIDIAN_LUMP)
+    release
+}
+
+script Melos_EventScript_Sacks {
+    msgbox(format("Sacks of black glass, tied off with a Titan's knots. For edges."), MSGBOX_SIGN)
+}
+
+script Melos_EventScript_Sign {
+    msgbox(format("KLIMA, ON MELOS'S BAY\pWater for every ship that asks."), MSGBOX_SIGN)
+}

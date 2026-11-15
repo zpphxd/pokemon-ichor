@@ -3346,6 +3346,7 @@ const u16 gTilesetPalettes_PorytilesManaged_TempleHermes[][16] =
     INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/palettes/13.gbapal"),
     INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/palettes/15.gbapal")
+};
 
 // Ichor: kythera (the Foam Road and the Spring of Kallirhoe), written by tools/ichor/art/kythera_build.py
 const u32 gTilesetTiles_PorytilesManaged_Kythera[] = INCBIN_U32("data/tilesets/secondary/kythera/porytiles_bin/tiles.4bpp.lz");
@@ -3483,4 +3484,119 @@ const u16 gTilesetPalettes_PorytilesManaged_TempleAphrodite[][16] =
     INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/13.gbapal"),
     INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: oikia_skandeia
+const u32 gTilesetTiles_PorytilesManaged_OikiaSkandeia[] = INCBIN_U32("data/tilesets/secondary/oikia_skandeia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_OikiaSkandeia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: oikia_paphia
+const u32 gTilesetTiles_PorytilesManaged_OikiaPaphia[] = INCBIN_U32("data/tilesets/secondary/oikia_paphia/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_OikiaPaphia[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: oikia_melos
+const u32 gTilesetTiles_PorytilesManaged_OikiaMelos[] = INCBIN_U32("data/tilesets/secondary/oikia_melos/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_OikiaMelos[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: civic_kythera
+const u32 gTilesetTiles_PorytilesManaged_CivicKythera[] = INCBIN_U32("data/tilesets/secondary/civic_kythera/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_CivicKythera[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: trireme
+const u32 gTilesetTiles_PorytilesManaged_Trireme[] = INCBIN_U32("data/tilesets/secondary/trireme/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Trireme[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/palettes/15.gbapal")
 };

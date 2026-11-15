@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_relics.h"
 #include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
@@ -2165,6 +2166,8 @@ bool8 UseRegisteredKeyItemOnField(void)
         return FALSE;
     HideMapNamePopUpWindow();
     ChangeBgY_ScreenOff(0, 0, BG_COORD_SET);
+    if (Ichor_TryOpenRelicRing()) // Ichor: SELECT opens the Relic Ring once you own a free relic
+        return TRUE;
     if (gSaveBlock1Ptr->registeredItem != ITEM_NONE)
     {
         if (CheckBagHasItem(gSaveBlock1Ptr->registeredItem, 1) == TRUE)

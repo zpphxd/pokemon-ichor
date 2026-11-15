@@ -80,6 +80,7 @@ There are seven palettes of at most 15 colors each. Every 8x8 tile uses exactly 
 - **Moving furniture:** edit the room in `oikia_rooms.py` and rerun. Every combination of a piece and a floor that a room needs is made automatically.
 - **Hand-editing in Porymap:** the catalog combinations are already in the tileset. Metatile ids stay stable while pieces are only added at the end of the lists, but changing the art of an earlier piece can shift later ids. Rerun the builder and repaint, rather than trusting old ids.
 - **Budget:** about 60% of the 512 metatiles and 512 tiles are used today. The "Built" line below has the exact counts. The catalogs cost most of the metatiles. If space runs short, trim `FREE` to the pieces really used on more than one floor.
+- **A later region's homes** don't add to oikia: its pieces and rooms go on the region's own secondaries, which carry oikia's pieces too. See `design/phase4/ROOMS_aegean.md`.
 
 ## Generated tables
 

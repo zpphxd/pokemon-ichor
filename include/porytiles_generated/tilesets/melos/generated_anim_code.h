@@ -56,13 +56,13 @@ const u16 *const gTilesetAnims_PorytilesManaged_Melos_Surf[] = {
 static void QueueAnimTiles_PorytilesManaged_Melos_Glint(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Melos_Glint);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Melos_Glint[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 1)), 2 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Melos_Glint[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 1)), 3 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_PorytilesManaged_Melos_Surf(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_PorytilesManaged_Melos_Surf);
-    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Melos_Surf[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 3)), 103 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(gTilesetAnims_PorytilesManaged_Melos_Surf[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 4)), 103 * TILE_SIZE_4BPP);
 }
 
 // ============================================

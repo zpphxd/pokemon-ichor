@@ -1681,6 +1681,48 @@
 #define FLAG_ICHOR_XENIA_START                  (ICHOR_FLAGS_START + 0x2E0) // 32: hosts and token-chain links (§10)
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
+
+// The relics (SYSTEMS §1). Each FLAG_ICHOR_GOT_* is set whenever its item
+// enters the bag. They sit at FLAG_ICHOR_RELICS_START + (item - ITEM_TALARIA);
+// the Talaria's is the slice's FLAG_SYS_B_DASH instead.
+#define FLAG_ICHOR_GOT_TALARIA                  FLAG_SYS_B_DASH
+#define FLAG_ICHOR_GOT_BRONZE_HAMMER            (FLAG_ICHOR_RELICS_START + 0x01)
+#define FLAG_ICHOR_GOT_HECATES_TORCH            (FLAG_ICHOR_RELICS_START + 0x02)
+#define FLAG_ICHOR_GOT_DEMETERS_SICKLE          (FLAG_ICHOR_RELICS_START + 0x03)
+#define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES       (FLAG_ICHOR_RELICS_START + 0x04)
+#define FLAG_ICHOR_GOT_POSEIDONS_CONCH          (FLAG_ICHOR_RELICS_START + 0x05)
+#define FLAG_ICHOR_GOT_DAEDALUS_WINGS           (FLAG_ICHOR_RELICS_START + 0x06)
+#define FLAG_ICHOR_GOT_HORN_OF_ACHELOUS         (FLAG_ICHOR_RELICS_START + 0x07)
+#define FLAG_ICHOR_GOT_ARIADNES_THREAD          (FLAG_ICHOR_RELICS_START + 0x08)
+#define FLAG_ICHOR_GOT_LABRYS                   (FLAG_ICHOR_RELICS_START + 0x09)
+#define FLAG_ICHOR_GOT_HELM_OF_DARKNESS         (FLAG_ICHOR_RELICS_START + 0x0A)
+#define FLAG_ICHOR_GOT_NEREID_PEARL             (FLAG_ICHOR_RELICS_START + 0x0B)
+#define FLAG_ICHOR_GOT_AEOLUS_BAG               (FLAG_ICHOR_RELICS_START + 0x0C)
+// upgrades, from the rites' gift II
+#define FLAG_ICHOR_WINGED_TALARIA               (FLAG_ICHOR_RELICS_START + 0x20) // Hermes: leap one-tile gaps
+#define FLAG_ICHOR_THREE_FLAMED_TORCH           (FLAG_ICHOR_RELICS_START + 0x21) // Hecate: wider light, burns thornwebs
+#define FLAG_ICHOR_HEPHAESTUS_HAMMER            (FLAG_ICHOR_RELICS_START + 0x22) // Hephaestus: great boulders
+#define FLAG_ICHOR_TRITON_CONCH                 (FLAG_ICHOR_RELICS_START + 0x23) // Poseidon: calms whirlpools (post-game)
+#define FLAG_ICHOR_HELM_OF_HADES                (FLAG_ICHOR_RELICS_START + 0x24) // Hades: works in shadow by day (post-game)
+// state
+#define FLAG_ICHOR_TORCH_DOUSED                 (FLAG_ICHOR_RELICS_START + 0x30) // the torch is out (Relic Ring)
+#define FLAG_ICHOR_HELM_ON                      (FLAG_ICHOR_RELICS_START + 0x31) // the Helm of Darkness is worn
+#define FLAG_ICHOR_NO_RELICS                    (FLAG_ICHOR_RELICS_START + 0x32) // set in ON_TRANSITION: no relics here; cleared on every map change
+// gift II upgrades that aren't relics (SYSTEMS §3)
+#define FLAG_ICHOR_EVER_EMBER                   (FLAG_ICHOR_RELICS_START + 0x25) // Hestia: Hearthfire never counts down; hearths heal
+#define FLAG_ICHOR_HARVEST_BASKET               (FLAG_ICHOR_RELICS_START + 0x26) // Demeter: berry trees always give one more
+#define FLAG_ICHOR_THYRSUS                      (FLAG_ICHOR_RELICS_START + 0x27) // Dionysus: climb marked ivy walls (Rock Climb)
+#define FLAG_ICHOR_HUNTERS_MOON                 (FLAG_ICHOR_RELICS_START + 0x28) // Artemis: the Augur's Eye lists rare slots (hook)
+#define FLAG_ICHOR_ATHENAS_STYLUS               (FLAG_ICHOR_RELICS_START + 0x29) // Athena: Scroll of Deeds hints (hook)
+#define FLAG_ICHOR_EYES_OF_ARGUS                (FLAG_ICHOR_RELICS_START + 0x2A) // Hera: the Augur's Eye detector always on (hook)
+
+// The rites' gifts: god g's gift I, II, III and the Hierophant's offering
+#define FLAG_ICHOR_GIFT(god, n)                 (FLAG_ICHOR_GIFTS_START + 4 * (god) + (n))
+#define ICHOR_GIFT_I                            0
+#define ICHOR_GIFT_II                           1
+#define ICHOR_GIFT_III                          2
+#define ICHOR_GIFT_HIEROPHANT                   3
+#define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
 #define FLAG_ICHOR_SAW_BAD_GUESTS               (FLAG_ICHOR_GENERAL_START + 0x200) // Ichor: Skandeia: saw the Titan guests at Axylos's table (beat III-1C2)
 #define FLAG_ICHOR_BAD_GUESTS_GONE              (FLAG_ICHOR_GENERAL_START + 0x201) // Ichor: Skandeia: drove the bad guests from Axylos's table; also hides them and Alethea there
@@ -1698,6 +1740,29 @@
 #define FLAG_ICHOR_SAW_GEAR_BOX                 (FLAG_ICHOR_GENERAL_START + 0x20D) // Ichor: Route 23: saw Skyllias's box of gears off Antikythera (set there; read in the divers' house)
 #define FLAG_ICHOR_MELOS_RITE                   (FLAG_ICHOR_GENERAL_START + 0x20E) // Ichor: Melos: made the armless goddess an offering (set on MAP_MELOS; read by Kentrios)
 #define FLAG_ICHOR_MELOS_OBSIDIAN_LUMP          (FLAG_ICHOR_GENERAL_START + 0x20F) // Ichor: Melos: dug the lump of black glass at the slope's seam (set on MAP_MELOS; read by Melanippos)
+#define FLAG_ICHOR_DAPHNE_SAILED_ASTYRA         (FLAG_ICHOR_GENERAL_START + 0x210) // Ichor: Act III: III-1A, boarded the Euploia at Kaldera; Daphne sailed home to Astyra (hides her on the southern deck)
+#define FLAG_ICHOR_REACHED_MELOS                (FLAG_ICHOR_GENERAL_START + 0x211) // Ichor: Act III: III-1B, slept through Route 22's night and landed at Melos
+#define FLAG_ICHOR_VISITED_MELOS                (FLAG_ICHOR_GENERAL_START + 0x212) // Ichor: Act III: Melos visited (Nausikles's southern lanes; not a fly target)
+#define FLAG_ICHOR_CROSSED_ROUTE22              (FLAG_ICHOR_GENERAL_START + 0x213) // Ichor: Act III: III-1B3, rounded Malea and landed at Skandeia (hides Nausikles on Melos's jetty)
+#define FLAG_ICHOR_VISITED_SKANDEIA             (FLAG_ICHOR_GENERAL_START + 0x214) // Ichor: Act III: Skandeia visited (fly target, MAPSEC_KYTHERA_ISLE)
+#define FLAG_ICHOR_EUPLOIA_KEPT                 (FLAG_ICHOR_GENERAL_START + 0x215) // Ichor: Act III: III-1C, beat Molybdos; the Euploia isn't requisitioned
+#define FLAG_ICHOR_ALETHEA_REJOINED             (FLAG_ICHOR_GENERAL_START + 0x216) // Ichor: Act III: III-1C2, Alethea met you on Skandeia's main street
+#define FLAG_ICHOR_SAILED_FOR_KNOSSA            (FLAG_ICHOR_GENERAL_START + 0x217) // Ichor: Act III: III-1I, sailed from Skandeia for Amnisos
+#define FLAG_ICHOR_SKANDEIA_CALL                (FLAG_ICHOR_GENERAL_START + 0x218) // Ichor: Act III: the Euploia's call at Skandeia between Amnisos and Gytheion (set by the Knossa writer's departure)
+#define FLAG_ICHOR_SAILED_FOR_GYTHEION          (FLAG_ICHOR_GENERAL_START + 0x219) // Ichor: Act III: sailed on from Skandeia's call for Gytheion (Route 24 starts from it)
+#define FLAG_ICHOR_HIDE_ALETHEA_CALL            (FLAG_ICHOR_GENERAL_START + 0x21A) // Ichor: Act III: Skandeia: hides Alethea at the gangplank (shown only during the call)
+#define FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x21B) // Ichor: Act III: Skandeia: hides Alethea at Axylos's door (shown from III-1C2 until the bad guests go)
+#define FLAG_ICHOR_HIDE_MOLYBDOS                (FLAG_ICHOR_GENERAL_START + 0x21C) // Ichor: Act III: Skandeia: hides Molybdos once he is beaten
+#define FLAG_ICHOR_HIDE_SKANDEIA_PORTERS        (FLAG_ICHOR_GENERAL_START + 0x21D) // Ichor: Act III: Skandeia: hides the Titanborn porters (from VAR_ICHOR_ACT3 6)
+#define FLAG_ICHOR_HIDE_KRONIST_SKANDEIA        (FLAG_ICHOR_GENERAL_START + 0x21E) // Ichor: Act III: Skandeia: hides the Kronist (after the climax, VAR_ICHOR_ACT3 19)
+#define FLAG_ICHOR_HEARD_KRONIST                (FLAG_ICHOR_GENERAL_START + 0x21F) // Ichor: Act III: Skandeia: the Kronist has preached at you once (his walk-past trigger)
+#define FLAG_ICHOR_HIDE_DECK_ACT3               (FLAG_ICHOR_GENERAL_START + 0x220) // Ichor: Act III: southern deck: hides the voyage's passengers (boarding at Kaldera, the run to Amnisos)
+#define FLAG_ICHOR_SAW_TITAN_FLEET              (FLAG_ICHOR_GENERAL_START + 0x221) // Ichor: Act III: III-1B, the lookout showed you the dark fleet
+#define FLAG_ICHOR_MET_KENTRIOS                 (FLAG_ICHOR_GENERAL_START + 0x222) // Ichor: Act III: III-1B2, Kentrios warned you on Melos's terrace stair
+#define FLAG_ICHOR_ITEM_DECK_SOUTH_HYPER_POTION (FLAG_ICHOR_GENERAL_START + 0x223) // Ichor: Act III item ball: the southern deck's Hyper Potion among the oil amphorae
+#define FLAG_ICHOR_ITEM_MELOS_STAR_PIECE        (FLAG_ICHOR_GENERAL_START + 0x224) // Ichor: Act III item ball: Melos's Star Piece on the pumice cliffs' lip
+#define FLAG_ICHOR_ITEM_ROUTE22_MAX_ETHER       (FLAG_ICHOR_GENERAL_START + 0x225) // Ichor: Act III item ball: Route 22's Max Ether on Anydros's ledge
+#define FLAG_ICHOR_ITEM_ROUTE23_BIG_PEARL       (FLAG_ICHOR_GENERAL_START + 0x226) // Ichor: Act III item ball: Route 23's Big Pearl on Antikythera's beach
 #define FLAG_ICHOR_HIDE_ALETHEA_FOAM_ROAD       (FLAG_ICHOR_GENERAL_START + 0x240) // Ichor: Foam Road: hides Alethea at Aphrodite's rock once her scene is done (beat III-1D)
 #define FLAG_ICHOR_HIDE_KASSITEROS              (FLAG_ICHOR_GENERAL_START + 0x241) // Ichor: Foam Road: hides Kassiteros after Knossa (VAR_ICHOR_ACT3 >= 6)
 #define FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD     (FLAG_ICHOR_GENERAL_START + 0x242) // Ichor: Foam Road: hides Hermes the messenger at the great herm (theoxenia E1; move to the theoxenia range with ichor-engine)
@@ -1728,6 +1793,9 @@
 #define FLAG_ICHOR_KRENAIA_GAVE_HORN            (FLAG_ICHOR_GENERAL_START + 0x25B) // Ichor: Neraida falls: Krenaia gave the Horn of Achelous (stand-in for FLAG_ICHOR_GOT_HORN_OF_ACHELOUS until the relics batch)
 #define FLAG_ICHOR_ITEM_NERAIDA_MAX_REPEL       (FLAG_ICHOR_GENERAL_START + 0x25C) // Ichor: Neraida falls: the jar on the top terrace
 #define FLAG_ICHOR_ITEM_NERAIDA_PROTEIN         (FLAG_ICHOR_GENERAL_START + 0x25D) // Ichor: Neraida falls: the Protein on a rock in the upper pool
+#define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL_START + 0x280) // Ichor: world-act3: Daedalus gives the Master Ball in the workshop, Labyrinth Scene D
+#define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
+#define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.
@@ -1735,7 +1803,8 @@
 #define ICHOR_DAILY_FLAGS_COUNT                 256
 #define ICHOR_DAILY_FLAGS_END                   (ICHOR_DAILY_FLAGS_START + ICHOR_DAILY_FLAGS_COUNT - 1)
 
-#define FLAG_DAILY_ICHOR_PRAYED_START           (ICHOR_DAILY_FLAGS_START + 0x00) // 16: prayed to each god today (§3)
+#define FLAG_DAILY_ICHOR_PRAYED_START           (ICHOR_DAILY_FLAGS_START + 0x00) // 16: prayed to each god today (§3); slot 0 (no god) is Ares's bout
+#define FLAG_DAILY_ICHOR_ARES_BOUT              (ICHOR_DAILY_FLAGS_START + 0x00) // fought Ares's war-acolyte today
 #define FLAG_DAILY_ICHOR_DIG_START              (ICHOR_DAILY_FLAGS_START + 0x10) // 96 daily dig spots (§5)
 #define FLAG_DAILY_ICHOR_LAUREL_START           (ICHOR_DAILY_FLAGS_START + 0x70) // 32 laurel trees, one sprig a day (§3)
 #define FLAG_DAILY_ICHOR_GENERAL_START          (ICHOR_DAILY_FLAGS_START + 0x90) // 112 claimed by name, below

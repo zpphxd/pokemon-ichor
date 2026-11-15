@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "pokemon.h"
 #include "battle.h"
 #include "daycare.h"
@@ -1083,7 +1084,7 @@ static void _IncrementDaycareSteps(struct DayCare *daycare)
 
     if ((daycare->mons[1].steps & 0xFF) == 0xFF)
     {
-        u8 compatibility = ModifyBreedingScoreForOvalCharm(GetDaycareCompatibilityScore(daycare));
+        u8 compatibility = Ichor_ModifyEggChance(ModifyBreedingScoreForOvalCharm(GetDaycareCompatibilityScore(daycare))); // Ichor: Hera
         if (RandomPercentage(RNG_DAYCARE_MAKE_EGG, compatibility))
             _TriggerPendingDaycareEgg(daycare);
     }
@@ -1124,6 +1125,7 @@ static u32 GetEggCyclesToSubtract(void)
     u32 result = 1;
     if (DoesPartyHaveIncubatorMon())
         result += 1;
+    result += Ichor_ExtraEggCycles(); // Ichor: Hera
     return result;
 }
 

@@ -480,3 +480,23 @@ const u16 gMetatileAttributes_PorytilesManaged_Melos[] = INCBIN_U16("data/tilese
 // Ichor: temple_aphrodite
 const u16 gMetatiles_PorytilesManaged_TempleAphrodite[] = INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_TempleAphrodite[] = INCBIN_U16("data/tilesets/secondary/temple_aphrodite/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: oikia_skandeia
+const u16 gMetatiles_PorytilesManaged_OikiaSkandeia[] = INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_OikiaSkandeia[] = INCBIN_U16("data/tilesets/secondary/oikia_skandeia/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: oikia_paphia
+const u16 gMetatiles_PorytilesManaged_OikiaPaphia[] = INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_OikiaPaphia[] = INCBIN_U16("data/tilesets/secondary/oikia_paphia/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: oikia_melos
+const u16 gMetatiles_PorytilesManaged_OikiaMelos[] = INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_OikiaMelos[] = INCBIN_U16("data/tilesets/secondary/oikia_melos/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: civic_kythera
+const u16 gMetatiles_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: trireme
+const u16 gMetatiles_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatile_attributes.bin");
