@@ -2,6 +2,7 @@
 // and var banks. See include/ichor_save.h and design/ENGINE_API.md.
 #include "global.h"
 #include "event_data.h"
+#include "ichor_omen.h"
 #include "ichor_save.h"
 
 // The layout is part of the save format. These pin it, so a change that moves
@@ -16,6 +17,9 @@ STATIC_ASSERT(offsetof(struct IchorSave, flags) == 0x080, IchorSaveFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, dailyFlags) == 0x180, IchorSaveDailyFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, thread) == 0x1A0, IchorSaveThreadOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, reserved) == 0x450, IchorSaveReservedOffset);
+STATIC_ASSERT(offsetof(struct IchorSave, flags2) == 0x500, IchorSaveFlags2Offset);
+STATIC_ASSERT(ICHOR_FLAGS2_START > ICHOR_DAILY_FLAGS_END, IchorFlags2AfterTheDailyBank);
+STATIC_ASSERT(ICHOR_FLAGS2_END < SPECIAL_FLAGS_START, IchorFlags2BelowSpecialFlags);
 STATIC_ASSERT(offsetof(struct SaveBlock3, ichor) == 0, IchorSaveFirstInSaveBlock3);
 STATIC_ASSERT(ICHOR_FLAGS_START % 8 == 0 && ICHOR_DAILY_FLAGS_START % 8 == 0, IchorFlagBanksByteAligned);
 STATIC_ASSERT(FLAGS_COUNT <= ICHOR_FLAGS_START, VanillaFlagsBelowIchorBanks);
@@ -49,15 +53,22 @@ void Ichor_OnSaveLoaded(void)
         return;
     }
     if (gIchorSave.version < 2)
-    {
         gIchorSave.frozenHourStep = 0;
-        gIchorSave.version = 2;
+    if (gIchorSave.version < 3)
+    {
+        gIchorSave.forcedOmenKind = 0;
+        gIchorSave.forcedOmenEntry = 0;
+        gIchorSave.heldTimeOfDay = 0;
     }
+    if (gIchorSave.version < 4)  // the block grew: what was past its old end (dexNavChain) is not flags
+        memset(gIchorSave.flags2, 0, sizeof(gIchorSave.flags2));
+    gIchorSave.version = ICHOR_SAVE_VERSION;
 }
 
 void Ichor_DoDailyEvents(u32 daysSince)
 {
     memset(gIchorSave.dailyFlags, 0, sizeof(gIchorSave.dailyFlags));
+    Ichor_OmenNewDay();
 }
 
 u8 *Ichor_GetFlagPointer(u16 id)
@@ -66,6 +77,8 @@ u8 *Ichor_GetFlagPointer(u16 id)
         return &gIchorSave.flags[(id - ICHOR_FLAGS_START) / 8];
     if (id >= ICHOR_DAILY_FLAGS_START && id <= ICHOR_DAILY_FLAGS_END)
         return &gIchorSave.dailyFlags[(id - ICHOR_DAILY_FLAGS_START) / 8];
+    if (id >= ICHOR_FLAGS2_START && id <= ICHOR_FLAGS2_END)
+        return &gIchorSave.flags2[(id - ICHOR_FLAGS2_START) / 8];
     return NULL;
 }
 
@@ -88,4 +101,11 @@ u32 Ichor_CountFlags(u16 firstFlag, u16 count)
             n++;
     }
     return n;
+}
+
+// specialvar Ichor_CountFlagRange: how many of the VAR_0x8005 flags from
+// VAR_0x8004 on are set (Ichor_CountFlags, for scripts).
+u16 Ichor_CountFlagRange(void)
+{
+    return Ichor_CountFlags(gSpecialVar_0x8004, gSpecialVar_0x8005);
 }

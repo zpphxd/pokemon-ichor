@@ -126,3 +126,9 @@ FrozenTest_Begin:
 	special Ichor_FrozenHourBegin
 	releaseall
 	end
+
+	test_header FrozenTest_ScriptsHereHeader, FrozenTest_ScriptsHere
+FrozenTest_ScriptsHere:
+	setvar VAR_TEMP_F, 1
+	special Ichor_FrozenScriptsHere
+	end
