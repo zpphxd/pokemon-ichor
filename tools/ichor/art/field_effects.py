@@ -1,10 +1,11 @@
 """Field effects for the Kalliste slice, redrawn to sit on the aethos tiles.
 
 Usage:
-    python3 tools/ichor/art/field_effects.py [--write] [--preview DIR]
+    python3 tools/ichor/art/field_effects.py [--write] [--only PNG ...] [--preview DIR]
 
 --write    rewrites the effect PNGs and the two shared effect palettes in
            graphics/field_effects/
+--only     limits PNGs and prevents shared-palette writes
 --preview  writes DIR/field_effects.png: every redrawn effect at 6x, each over
            the aethos tile it plays on
 
@@ -35,6 +36,7 @@ What is here, and why it looks the way it does:
 """
 import os
 import sys
+import argparse
 
 import numpy as np
 from PIL import Image, ImageDraw
@@ -55,11 +57,11 @@ OBJ_PALS = os.path.join(ROOT, "graphics/object_events/palettes")
 # --------------------------------------------------------------------------
 
 class RawPal:
-    """16 colors as given (no multiple-of-8 check: npc_1.pal is Emerald's)."""
+    """16 colors at their hardware BGR555 precision."""
 
     def __init__(self, colors):
         assert len(colors) == 16
-        self.colors = [tuple(c) for c in colors]
+        self.colors = [tuple(v & ~7 for v in c) for c in colors]
 
     def flat(self):
         return [v for c in self.colors for v in c]
@@ -267,6 +269,27 @@ TALL_GRASS = 0x00D
 REEDS = 0x015
 
 
+def grass_motion(tile, bend, reeds=False, landing=False):
+    """Native stalks flex around the feet; the tile still anchors their roots."""
+    out = tile.copy()
+    out[:10 if not reeds else 13] = 0
+    im = Image.fromarray(out, "P")
+    d = ImageDraw.Draw(im)
+    for i, (x, y) in enumerate(((2, 14), (5, 15), (10, 14), (13, 15))):
+        direction = -1 if i < 2 else 1
+        tip = max(1, min(14, x + direction * bend))
+        top = (2 if reeds else 4) + (i % 2) + (2 if landing else 0)
+        joint = (x + direction, y - 4)
+        d.line([(x, y), joint, (tip, top)], fill=G1["a"])
+        d.line([(x + 1, y - 1), (joint[0] + 1, joint[1]), (tip + 1, top + 1)],
+               fill=G1["e"])
+        d.line((joint[0], joint[1], joint[0] + direction * 2, joint[1] - 2),
+               fill=G1["d"])
+        d.line((tip, top, tip, top + 2), fill=G1["o"])
+        d.line((tip + 1, top, tip + 1, top + 1), fill=G1["b"])
+    return np.array(im)
+
+
 def tall_grass_frames():
     tile = metatile_indices(TALL_GRASS, GENERAL_1)
     shade = G1["c"]
@@ -274,152 +297,42 @@ def tall_grass_frames():
     tuft[10:16] = tile[10:16]
     # the top edge: keep only the blade strokes of row 9, so the tips stand up
     tuft[9] = np.where(tile[9] != shade, tile[9], 0)
-    # frame 1: the stalks whip apart and lean out, grain flying off the heads
-    f1 = overlay(tuft, [
-        "................",
-        "................",
-        "...b........b...",
-        "..bo.......ob...",
-        "..ad.b..b..da...",
-        "...ad.....da....",
-        "...ead...dae....",
-        "....eda.ade.....",
-        "...a.ed.de.a....",
-        "__aa_______aa___",
-    ], G1)
-    # frame 2: grain and chaff thrown high
-    f2 = overlay(tuft, [
-        "................",
-        "..b.........o...",
-        ".......d........",
-        ".o..d......b....",
-        "..........d..b..",
-        "....b..o........",
-        ".d.........d....",
-        "......d..b......",
-        "..b..........o..",
-        "________________",
-    ], G1)
-    # frame 3: falling back
-    f3 = overlay(tuft, [
-        "................",
-        "................",
-        "................",
-        "................",
-        "..o..........b..",
-        ".....d..........",
-        "...........d....",
-        "..b...o.........",
-        ".......d.....b..",
-        "________________",
-    ], G1)
-    # frame 4: the last grain settling into the tuft
-    f4 = overlay(tuft, [
-        "................",
-        "................",
-        "................",
-        "................",
-        "................",
-        "................",
-        "....b...........",
-        "...........o....",
-        "......d.........",
-        "________________",
-    ], G1)
+    f1, f2, f3, f4 = [grass_motion(tuft, n) for n in (3, 2, -1, 0)]
     return [tuft, f1, f2, f3, f4]
 
 
 def jump_tall_grass_frames():
     """Landing in barley: stalks and grain burst out from under the feet (16x8)."""
-    rows = [
-        [
-            "................",
-            "................",
-            "...b........b...",
-            "...db......bd...",
-            ".b..d......d..b.",
-            ".db..........bd.",
-            "..d..b....b..d..",
-            "......d..d......",
-        ],
-        [
-            "..b..........b..",
-            "...b........b...",
-            "b..d........d..b",
-            ".b............b.",
-            ".d..b......b..d.",
-            ".....d....d.....",
-            "................",
-            "................",
-        ],
-        [
-            "................",
-            "................",
-            "..bd........db..",
-            "................",
-            "bo............ob",
-            "................",
-            "....bd....db....",
-            "................",
-        ],
-        [
-            "................",
-            "................",
-            "................",
-            "..oo........oo..",
-            "................",
-            "oo............oo",
-            "................",
-            "....oo....oo....",
-        ],
-    ]
-    return [ascii_frame(r, G1) for r in rows]
+    frames = []
+    for phase in range(4):
+        im = Image.new("P", (16, 8), 0)
+        d = ImageDraw.Draw(im)
+        for x in (2, 5, 10, 13):
+            side = -1 if x < 8 else 1
+            top = 1 + phase
+            if phase < 2:
+                d.line((8 + side, 7, x, top + 2), fill=G1["c"])
+                d.line((8 + side, 6, x + 1, top + 2), fill=G1["d"])
+            d.line((x, top, x, top + 1), fill=G1["o"])
+            d.line((x + 1, top, x + 1, top + 1), fill=G1["b"])
+        frames.append(np.array(im))
+    return frames
 
 
 # --------------------------------------------------------------------------
 # Reeds: aethos long grass (metatile 0x015)
 # --------------------------------------------------------------------------
 
-def _part(tile, shifts):
-    """The reed tile with its left half pushed left and right half pushed right
-    by shifts[y] pixels, opening a gap down the middle."""
-    out = np.zeros_like(tile)
-    for y in range(16):
-        s = shifts[y]
-        if s >= 0:
-            out[y, :8 - s] = tile[y, s:8]
-            out[y, 8 + s:] = tile[y, 8:16 - s]
-        else:
-            s = -s
-            out[y, s:8] = tile[y, :8 - s]
-            out[y, 8:16 - s] = tile[y, 8 + s:]
-    return out
-
-
 def long_grass_frames():
     tile = metatile_indices(REEDS, GENERAL_1)
     rest = tile.copy()
-    f1 = _part(tile, [2] * 4 + [2] * 4 + [1] * 4 + [0] * 4)
-    f2 = _part(tile, [3] * 4 + [2] * 4 + [1] * 4 + [1] * 4)
-    f3 = _part(tile, [-1] * 6 + [0] * 10)
+    f1, f2, f3 = [grass_motion(tile, n, reeds=True) for n in (3, 1, -1)]
     return [rest, f1, f2, f3]
 
 
 def jump_long_grass_frames():
     tile = metatile_indices(REEDS, GENERAL_1)
-    frames = [
-        _part(tile, [4] * 6 + [3] * 4 + [2] * 3 + [1] * 3),
-        _part(tile, [3] * 6 + [3] * 4 + [2] * 3 + [1] * 3),
-        _part(tile, [2] * 8 + [1] * 8),
-        _part(tile, [1] * 8 + [0] * 8),
-        _part(tile, [-1] * 6 + [0] * 10),
-        tile.copy(),
-        tile.copy(),
-    ]
-    # a little chaff on the first frames
-    frames[0] = overlay(frames[0], ["..d..........d..", ".b............b."], G1)
-    frames[1] = overlay(frames[1], [".d............d."], G1)
-    return frames
+    return [grass_motion(tile, n, reeds=True, landing=True) for n in (4, 3, 2, 1, -1, 0)] + [tile.copy()]
 
 
 # --------------------------------------------------------------------------
@@ -433,20 +346,20 @@ def sandal_frames():
         [
             "................",
             "................",
-            ".........pqp....",
-            ".........qrq....",
-            ".........qrq....",
-            ".........prp....",
-            ".........qrq....",
-            ".........pqp....",
+            ".........pp.....",
+            "........pqqp....",
+            "........qrrq....",
+            "........qprq....",
+            "........qrrq....",
+            ".........qp.....",
             "................",
             "................",
-            "....pqp.........",
-            "....qrq.........",
-            "....qrq.........",
-            "....prp.........",
-            "....qrq.........",
-            "....pqp.........",
+            "....pp..........",
+            "...pqqp.........",
+            "...qrrq.........",
+            "...qrpq.........",
+            "...qrrq.........",
+            "....pq..........",
         ],
         [
             "................",
@@ -459,12 +372,12 @@ def sandal_frames():
             "................",
             "................",
             "................",
-            "................",
-            "..........pqqqqp",
-            "..........qrrprq",
-            "................",
-            "..pqqqqp........",
-            "..qrprrq........",
+            "...........ppp..",
+            "..........pqrrqp",
+            "...........qrpqp",
+            "...ppp..........",
+            "..pqrrqp........",
+            "...qprqp........",
         ],
     ]
     return [ascii_frame(r, G0) for r in rows]
@@ -476,21 +389,21 @@ def sandal_frames():
 
 _SHARD = [
     "................",
-    "...kkkkk..kkk...",
-    "..kLLUUUkkUUuk..",
-    ".kLUUUUUUUUUUuk.",
+    "....kkkk..kk....",
+    "...kLLUUkkUuk...",
+    "..kLUUUUUUUUuk..",
     ".kLU########Uuk.",
     ".kUU########Uuk.",
     "..kU########Uuk.",
     "..kU########Uk..",
     ".kUU########Uk..",
-    ".kUU########Uuk.",
-    ".kUU########Uuk.",
-    ".kuU########uuk.",
-    "..kuuuuuuuuuuk..",
-    "...kkkkkuukkk...",
-    "........kuk.....",
-    ".........k......",
+    "..kU########Uuk.",
+    "..kU########uuk.",
+    "...k########uuk.",
+    "...kuuuuuuuuuk..",
+    "....kkkuukkkk...",
+    ".......kk.......",
+    "................",
 ]
 
 GLYPHS = {
@@ -564,26 +477,37 @@ def shard(glyph, legend):
 # --------------------------------------------------------------------------
 
 def arrow_frames():
-    van = load_vanilla("arrow.png")
-    out = van.copy()
-    # Emerald draws the arrow fill in index 14 (frames 0-3) and 10 (frames 4-7)
-    # with an index-15 outline. Fill: terracotta, shaded on the lower right,
-    # with a cream glint on the upper left; blink frames: saffron.
-    for f in range(8):
-        fr = out[:, f * 16:(f + 1) * 16]
-        fill = fr != 0
-        fill &= fr != MY["k"]
-        ys, xs = np.nonzero(fill)
-        if len(ys) == 0:
-            continue
-        cy, cx = ys.mean(), xs.mean()
-        light, dark = (MY["U"], MY["u"]) if f < 4 else (MY["O"], MY["o"])
-        for y, x in zip(ys, xs):
-            fr[y, x] = dark if (y - cy) + (x - cx) > 2 else light
-        # a glint on the first fill pixel from the top left
-        y0, x0 = min(zip(ys, xs), key=lambda p: p[0] + p[1])
-        fr[y0, x0] = MY["L"]
-    return out
+    frames = []
+    for blink in (False, True):
+        for direction in range(4):
+            im = Image.new("P", (16, 16), 0)
+            d = ImageDraw.Draw(im)
+            d.polygon([(8, 13), (2, 7), (5, 7), (5, 3), (10, 3),
+                       (10, 7), (13, 7)], fill=MY["k"])
+            d.polygon([(8, 11), (4, 8), (6, 8), (6, 4), (9, 4),
+                       (9, 8), (11, 8)], fill=MY["O"] if blink else MY["U"])
+            d.line((9, 5, 9, 9), fill=MY["o"] if blink else MY["u"])
+            d.line((7, 4, 7, 6), fill=MY["L"])
+            # Sheet order differs from the direction-indexed animation table.
+            rotation = (180, 270, 90, 0)[direction]  # north, west, east, south
+            frames.append(np.array(im.rotate(rotation)))
+    return strip(frames)
+
+
+SHADOW_SIZES = {"small": (8, 8), "medium": (16, 8),
+                "large": (32, 8), "extra_large": (64, 32)}
+
+
+def shadow_frame(size):
+    w, h = SHADOW_SIZES[size]
+    im = Image.new("P", (w, h), 0)
+    d = ImageDraw.Draw(im)
+    cy = h // 2
+    ry = max(1, min(3, w // 8))
+    d.ellipse((1, cy - ry, w - 2, cy + ry), fill=9)
+    # A flatter trailing edge anchors the blended shadow to the ground.
+    d.line((w // 4, cy + ry, w * 3 // 4 - 1, cy + ry), fill=9)
+    return np.array(im)
 
 
 # --------------------------------------------------------------------------
@@ -802,6 +726,11 @@ def build():
         "jump_big_splash.png": (strip(splash_frames(big=True)), GENERAL_0),
         "ground_impact_dust.png": (strip(dust_frames()), GENERAL_0),
     })
+    for size in SHADOW_SIZES:
+        name = f"shadow_{size}.png"
+        # Only index 9 is used. The engine supplies black from TAG_WEATHER_START.
+        pal = RawPal([GENERAL_1.colors[0]] + [(0, 0, 0)] * 15)
+        out[name] = (shadow_frame(size), pal)
     return out
 
 
@@ -828,6 +757,8 @@ def preview(effects, k=6):
         h = arr.shape[0]
         fw = {"surf_blob.png": 32, "pokecenter_monitor/0.png": 24, "pokecenter_monitor/1.png": 24,
               "pokeball_glow.png": 8}.get(name, 16)
+        if name.startswith("shadow_"):
+            fw = SHADOW_SIZES[name[7:-4]][0]
         im = to_rgba(arr, pal)
         nf = arr.shape[1] // fw
         row = Image.new("RGBA", (nf * (fw + 2), h), (232, 224, 200, 255))
@@ -856,15 +787,25 @@ def preview(effects, k=6):
 
 
 def main():
-    args = sys.argv[1:]
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--write", action="store_true")
+    parser.add_argument("--preview")
+    parser.add_argument("--only", nargs="+", help="Write only these PNGs; do not touch shared palettes")
+    args = parser.parse_args()
     effects = build()
-    if "--write" in args:
+    if args.only:
+        unknown = set(args.only) - effects.keys()
+        if unknown:
+            parser.error(f"unknown effects: {sorted(unknown)}")
+        effects = {name: effects[name] for name in args.only}
+    if args.write:
         for name, (arr, pal) in effects.items():
             save(arr, pal, name)
-        GENERAL_0.write_jasc(os.path.join(PALS, "general_0.pal"))
-        GENERAL_1.write_jasc(os.path.join(PALS, "general_1.pal"))
-    if "--preview" in args:
-        d = args[args.index("--preview") + 1]
+        if not args.only:
+            GENERAL_0.write_jasc(os.path.join(PALS, "general_0.pal"))
+            GENERAL_1.write_jasc(os.path.join(PALS, "general_1.pal"))
+    if args.preview:
+        d = args.preview
         os.makedirs(d, exist_ok=True)
         preview(effects).save(os.path.join(d, "field_effects.png"))
 

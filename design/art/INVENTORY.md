@@ -13,7 +13,7 @@ new higher-quality art direction.
 |---|---|---|
 | Theo/Ianthe fronts, Kleon, Daphne and Alethea portraits | New native poses/faces/folds in the existing painters; Daphne intro and trainer portrait regenerate together | Intro/player-choice/Kleon captures and native checks pass; later portrait contexts remain unexercised |
 | Theo/Ianthe and Alethea animated battle backs | Profile/eye detail, matched palettes; all four throw frames retained and distinct | Opening player throw captured; native checks cover all sheets, not later tutorial/throw contexts |
-| Player walking, running, fishing, relic raise and surfing | All ten sheets regenerated from the shared native hats/faces; no opaque palette-role changes | Both genders' walk/run captures pass; fishing, surfing and field-move contexts remain unexercised |
+| Player walking, running, fishing, relic raise and surfing | All ten sheets regenerated from the shared native hats/faces; no opaque palette-role changes | Both genders' walk/run captures pass; fishing, surfing and relic tables now have labeled engine-state captures, not proof of early-game controller eligibility |
 | Player underwater | Unchanged, still a supported engine state using `player_underwater.pal` | Native underwater redesign; not counted as done |
 | Player bikes, watering and decorating | Unchanged | Unused by current Aethos design; retain in the full-rollout inventory rather than silently deleting |
 | Kleon, Daphne, Alethea walkers | Native hair/headband/eye details; nine existing engine frames each | Native checks and current Elaia/Akademia captures pass |
@@ -23,7 +23,8 @@ new higher-quality art direction.
 | Ground item jar | New hand-painted handled/clay jar, still 16x16 on the existing folk palette | Current in-game pickup capture |
 | Three starter kraters and their rocking views | Native contour/rim/clay highlight polish; existing starter palettes, motifs and engine frame order preserved | Current selection/rocking capture |
 | Ripples, normal/landing splashes and ledge dust | Five native contact sheets replace inherited Emerald pixel shapes; unchanged dimensions/frame counts | Current in-game contact/landing capture |
-| Grass/reed rustle, sandal prints, emotes, shadows, warp arrow, dolphin mount and follower emotions | Existing Greek or neutral artwork retained, not newly redrawn | Explicit remaining higher-quality review scope |
+| Grass/reed rustle and landing variants, sandal prints, field emotes, shadows, warp arrow and follower emotions | Fifteen native field sheets and the 23-frame follower-emotion sheet redrawn from reproducible indexed sources; shared/ball palettes untouched | Source/native checks and matched engine captures pass; tall-grass steps use actual Route 1 terrain, reeds use a labeled RAM fixture, other effects use labeled API fixtures |
+| Dolphin surf mount | Existing Greek artwork retained, not newly redrawn in this checkpoint | Explicit later/global higher-quality review scope; rider state evidence does not validate the complete surf controller or mount |
 | Outdoor aethos/kalliste and interior oikos/oikia/civic terrain/furniture | Existing Greek tiles retained; no layout, collision, tileset palettes or tile budget changed | Separate terrain/environment pass if required for visual consistency |
 | Door and water tile animations | Existing artwork retained | Separate environment-animation review |
 | Opening/menu/battle UI, ordinary item icons and the bakery trade scene | Existing artwork retained | Full-rollout shared-screen/item/trade scope; no claim these sprites were all redrawn |
@@ -54,11 +55,31 @@ Palette and footprint bytes are unchanged; the three diagonal mastiff heads,
 arched lunge and sleeping flame-head progression remain intact. Final
 native and real-engine before/after captures are retained with this handoff.
 
+**Follow-on effects/state checkpoint:** `check_elaia_effects.py` checks all
+16 sheets against native source pixels, exact dimensions, 4bpp indexed PNGs,
+transparent index 0, BGR555 colors and distinct intended motion pairs.
+`elaia_effects.sh` passes 538 checks and 229 captures against both the
+preserved post-Pokemon integration baseline (`9ae5aff4af`) and the new ROM.
+Its actual-input grass route does not change production terrain. It labels
+forced owner-attached emotes, emotion indices on the actual Nebrel follower,
+four shadow templates (including the unused overworld XL template), warp-arrow blinks,
+sandal prints, landing effects and the single RAM reed tile separately.
+The field and follower shard share one source outline.
+
+Both players' twelve fishing animations, four surf facings, four surf-step
+animations, four get-on/off poses and five-frame relic raise use real graphics
+IDs, image/animation tables, dynamically allocated palette tags and matching
+ROM palette bytes. These are forced state-table fixtures with an idle callback,
+not claims that the fishing/surf/relic controllers were played normally in
+early Elaia. Build and original smoke pass; ROM usage remains 23,027,752 bytes
+(68.63%). The coordinator's native PNG gate passes all 16 changed sheets.
+
 The old missing-toolchain failure is resolved. Retained groups above,
-unexercised supported states and final artistic approval remain explicit;
+unexercised controllers and final artistic approval remain explicit;
 this is not a finished-every-sprite town declaration. The human/opening-object
-checkpoint was landed separately on `main`; the Pokemon checkpoint does
-not require reapplying that equivalent human commit.
+checkpoint was landed on `main` as `dfb7974fbc`, and Pokemon as `9ae5aff4af`;
+the follow-on effects checkpoint does not require reapplying either
+equivalent feature-branch commit.
 
 **Coordinator integration verification:** Pokemon source checkpoint
 `f247d1e645` was applied as `9ae5aff4af` on top of the landed human checkpoint
