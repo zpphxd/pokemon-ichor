@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_frozen.h"
 #include "malloc.h"
 #include "battle_anim.h"
 #include "battle_pyramid.h"
@@ -363,6 +364,10 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
     [MOVEMENT_TYPE_ICHOR_MIRROR_UP] = MovementType_FaceDirection,
     [MOVEMENT_TYPE_ICHOR_MIRROR_LEFT] = MovementType_FaceDirection,
     [MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT] = MovementType_FaceDirection,
+    [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_DOWN] = MovementType_IchorFrozenStep,
+    [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_UP] = MovementType_IchorFrozenStep,
+    [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_LEFT] = MovementType_IchorFrozenStep,
+    [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_RIGHT] = MovementType_IchorFrozenStep,
 };
 
 static const bool8 sMovementTypeHasRange[NUM_MOVEMENT_TYPES] = {
@@ -511,6 +516,10 @@ const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
     [MOVEMENT_TYPE_ICHOR_MIRROR_UP] = DIR_NORTH,
     [MOVEMENT_TYPE_ICHOR_MIRROR_LEFT] = DIR_WEST,
     [MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_DOWN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_ICHOR_FROZEN_STEP_RIGHT] = DIR_EAST,
 };
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -6113,6 +6122,26 @@ bool8 MovementType_RunInPlace_Step0(struct ObjectEvent *objectEvent, struct Spri
 
 movement_type_def(MovementType_Invisible, gMovementTypeFuncs_Invisible)
 
+// Ichor: MOVEMENT_TYPE_ICHOR_FROZEN_STEP_*. The walk animation's first frame,
+// the stride, held for good: the Frozen Hour caught them walking.
+movement_type_def(MovementType_IchorFrozenStep, gMovementTypeFuncs_IchorFrozenStep)
+
+bool8 MovementType_IchorFrozenStep_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    ClearObjectEventMovement(objectEvent, sprite);
+    if (!objectEvent->inanimate)
+        StartSpriteAnim(sprite, GetMoveDirectionAnimNum(objectEvent->facingDirection));
+    objectEvent->disableAnim = TRUE;  // BeginAnim still draws the stride, then it holds
+    sprite->animPaused = TRUE;
+    sprite->sTypeFuncId = 1;
+    return FALSE;
+}
+
+bool8 MovementType_IchorFrozenStep_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    return FALSE;
+}
+
 bool8 MovementType_Invisible_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ClearObjectEventMovement(objectEvent, sprite);
@@ -10541,6 +10570,8 @@ void FreezeObjectEventsExceptOne(u8 objectEventId)
 
 void UnfreezeObjectEvent(struct ObjectEvent *objectEvent)
 {
+    if (Ichor_KeepsObjectFrozen(objectEvent)) // Ichor: the Frozen Hour holds them, whatever releaseall says
+        return;
     if (objectEvent->active && objectEvent->frozen)
     {
         objectEvent->frozen = 0;

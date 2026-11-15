@@ -114,3 +114,7 @@ data/maps/Route22_MyrtoanSea/scripts.inc
 data/maps/KytheraSkandeia/scripts.inc
 data/maps/Route23_CretanSea/scripts.inc
 data/maps/TriremeEuploia_DeckSouth/scripts.inc
+data/scripts/ichor_relics.inc
+data/scripts/ichor_rites.inc
+data/scripts/ichor_herms.inc
+data/scripts/ichor_labyrinth.inc

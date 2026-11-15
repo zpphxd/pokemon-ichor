@@ -1,0 +1,480 @@
+// Ichor: the rites (design/SYSTEMS.md §3; design/ENGINE_API.md §3).
+//
+// Every altar runs EventScript_IchorAltar with its god in VAR_0x800A and, at the
+// god's temple, VAR_0x800B = TRUE (offerings count double). Use the per-god
+// entry points below directly as an altar's bg event or object script.
+// src/ichor_rites.c has the specials and the god's words.
+
+// ---------------------------------------------------------------------------
+// The altar
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorAltar {
+    lockall
+    special(Ichor_BufferAltar)
+    message(gStringVar4)
+    waitmessage
+    special(Ichor_BuildAltarMenu)
+    dynmultistack(19, 3, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+    switch (var(VAR_RESULT)) {
+        case 0: goto(EventScript_IchorPray)
+        case 1: goto(EventScript_IchorOffer)
+        case 2: goto(EventScript_IchorFavor)
+        case 3: goto(EventScript_IchorLesson)
+        case 4: goto(EventScript_IchorRest)
+        case 5: goto(EventScript_IchorAresBattle)
+    }
+    closemessage
+    releaseall
+    end
+}
+
+// Another god's blessing is on the player: ask before replacing it. Returns
+// with VAR_RESULT = YES to go on.
+script EventScript_IchorAskReplace {
+    specialvar(VAR_RESULT, Ichor_CheckBlessingConflict)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{STR_VAR_2}'s blessing is still on you. Go on anyway?"), MSGBOX_YESNO)
+        return
+    }
+    setvar(VAR_RESULT, YES)
+    return
+}
+
+script EventScript_IchorPray {
+    call(EventScript_IchorAskReplace)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    special(Ichor_Pray)
+    playse(SE_M_HEAL_BELL)
+    msgbox(gStringVar4, MSGBOX_DEFAULT)
+    goto(EventScript_IchorAltarGifts)
+}
+
+script EventScript_IchorOffer {
+    special(Ichor_BuildOfferingMenu)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("You have nothing to offer."), MSGBOX_DEFAULT)
+        closemessage
+        releaseall
+        end
+    }
+    message(format("What will you offer?"))
+    waitmessage
+    dynmultistack(0, 0, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM)
+    if (var(VAR_RESULT) == MULTI_B_PRESSED) {
+        closemessage
+        releaseall
+        end
+    }
+    copyvar(VAR_0x8006, VAR_RESULT)
+    call(EventScript_IchorAskReplace)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    special(Ichor_MakeOffering)
+    if (var(VAR_RESULT) != 3) {
+        playse(SE_M_HEAL_BELL)
+    }
+    msgbox(gStringVar4, MSGBOX_DEFAULT)
+    goto(EventScript_IchorAltarGifts)
+}
+
+script EventScript_IchorFavor {
+    special(Ichor_BufferFavor)
+    msgbox(gStringVar4, MSGBOX_DEFAULT)
+    goto(EventScript_IchorAltarGifts)
+}
+
+// The god teaches gift I's move again, as often as asked, like a TM.
+script EventScript_IchorLesson {
+    special(Ichor_BufferLesson)
+    msgbox(format("{STR_VAR_1} will teach {STR_VAR_2} again. Which Pokémon will learn it?"), MSGBOX_DEFAULT)
+    special(ChooseMonForMoveTutor)
+    lockall
+    closemessage
+    releaseall
+    end
+}
+
+// Hestia's hearth with Ever-Ember: warm yourselves.
+script EventScript_IchorRest {
+    msgbox(format("You warm yourselves at the hearth."), MSGBOX_DEFAULT)
+    closemessage
+    call(Common_EventScript_OutOfCenterPartyHeal)
+    releaseall
+    end
+}
+
+// Any gifts due, oldest first.
+script EventScript_IchorAltarGifts {
+    specialvar(VAR_RESULT, Ichor_NextGiftDue)
+    switch (var(VAR_RESULT)) {
+        case ICHOR_GIFT_I: goto(EventScript_IchorGiftLesson)
+        case ICHOR_GIFT_II: goto(EventScript_IchorGiftII)
+        case ICHOR_GIFT_III: goto(EventScript_IchorGiftIII)
+    }
+    closemessage
+    releaseall
+    end
+}
+
+script EventScript_IchorGiftLesson {
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{STR_VAR_1} is pleased with you.\pA lesson rises in your mind: {STR_VAR_2}.\pWhich Pokémon will learn it?"), MSGBOX_DEFAULT)
+    waitfanfare
+    special(ChooseMonForMoveTutor)
+    lockall
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("The lesson will wait for you here."), MSGBOX_DEFAULT)
+        closemessage
+        releaseall
+        end
+    }
+    setvar(VAR_0x8005, ICHOR_GIFT_I)
+    special(Ichor_TakeGift)
+    goto(EventScript_IchorAltarGifts)
+}
+
+script EventScript_IchorGiftII {
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{STR_VAR_1} is pleased with you!"), MSGBOX_DEFAULT)
+    waitfanfare
+    msgbox(gStringVar4, MSGBOX_DEFAULT)
+    if (var(VAR_0x8006) != ITEM_NONE) {
+        giveitem(VAR_0x8006)
+    }
+    setvar(VAR_0x8005, ICHOR_GIFT_II)
+    special(Ichor_TakeGift)
+    goto(EventScript_IchorAltarGifts)
+}
+
+script EventScript_IchorGiftIII {
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("{STR_VAR_1} has chosen you."), MSGBOX_DEFAULT)
+    waitfanfare
+    msgbox(gStringVar4, MSGBOX_DEFAULT)
+    setvar(VAR_0x8005, ICHOR_GIFT_III)
+    special(Ichor_TakeGift)
+    goto(EventScript_IchorAltarGifts)
+}
+
+// ---------------------------------------------------------------------------
+// Ares wants a fight, not a thing
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorAresBattle {
+    if (flag(FLAG_DAILY_ICHOR_ARES_BOUT)) {
+        msgbox(format("Ares has had his fight today."), MSGBOX_DEFAULT)
+        closemessage
+        releaseall
+        end
+    }
+    call(EventScript_IchorAresBout)
+    releaseall
+    end
+}
+
+// The daily war-acolyte's battle. A trainer for it doesn't exist yet: when it
+// does, battle here and call EventScript_IchorAresVictory on a win.
+script EventScript_IchorAresBout {
+    msgbox(format("The shield rings. No one answers yet."), MSGBOX_DEFAULT)
+    closemessage
+    return
+}
+
+// A won bout counts as a loved offering to Ares: +5 Favor and War-lust.
+script EventScript_IchorAresVictory {
+    setflag(FLAG_DAILY_ICHOR_ARES_BOUT)
+    setvar(VAR_0x800A, ICHOR_GOD_ARES)
+    setvar(VAR_0x800B, FALSE)
+    setvar(VAR_0x8006, ITEM_NONE)
+    special(Ichor_AresVictory)
+    msgbox(gStringVar4, MSGBOX_DEFAULT)
+    goto(EventScript_IchorAltarGifts)
+}
+
+// ---------------------------------------------------------------------------
+// Hearths, desecrated altars, and the Hierophants
+// ---------------------------------------------------------------------------
+
+// A household hearth: Hestia's altar in every home.
+script EventScript_IchorHearth {
+    setvar(VAR_0x800A, ICHOR_GOD_HESTIA)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+// VAR_0x8004 = the god, VAR_0x8005 = the altar's index (0-31). Beat the
+// Titanborn guard in your own script first.
+script EventScript_IchorDesecratedAltar {
+    lockall
+    copyvar(VAR_0x800A, VAR_0x8004)
+    setvar(VAR_0x800B, FALSE)
+    special(Ichor_CheckAltarCleansed)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(EventScript_IchorAltar)
+    }
+    msgbox(format("Someone has scratched a sickle into the altar stone.\pPray to cleanse it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        closemessage
+        releaseall
+        end
+    }
+    special(Ichor_CleanseAltar)
+    playse(SE_M_HEAL_BELL)
+    msgbox(format("The scratches fill with light, and are gone.\p{STR_VAR_1} remembers this."), MSGBOX_DEFAULT)
+    goto(EventScript_IchorAltarGifts)
+}
+
+// call it with VAR_0x8004 = the god, from the Hierophant's script. Gives gift I
+// if it is due; VAR_RESULT is TRUE if it was given.
+script EventScript_IchorHierophantGift {
+    copyvar(VAR_0x800A, VAR_0x8004)
+    specialvar(VAR_RESULT, Ichor_NextGiftDue)
+    if (var(VAR_RESULT) != ICHOR_GIFT_I) {
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    msgbox(format("{STR_VAR_1} is pleased with you. I was asked to teach you this: {STR_VAR_2}.\pWhich Pokémon will learn it?"), MSGBOX_DEFAULT)
+    special(ChooseMonForMoveTutor)
+    lock
+    faceplayer
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Come back when you're ready. The lesson will keep."), MSGBOX_DEFAULT)
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    setvar(VAR_0x8005, ICHOR_GIFT_I)
+    special(Ichor_TakeGift)
+    setvar(VAR_RESULT, TRUE)
+    return
+}
+
+// call it with VAR_0x8004 = the god, on the player's first visit. The
+// Hierophant teaches the god's rite and gives one loved offering.
+script EventScript_IchorHierophantRite {
+    copyvar(VAR_0x800A, VAR_0x8004)
+    setvar(VAR_0x8005, ICHOR_GIFT_HIEROPHANT)
+    specialvar(VAR_RESULT, Ichor_CheckGiftTaken)
+    if (var(VAR_RESULT) == TRUE) {
+        return
+    }
+    special(Ichor_GetLovedOffering)
+    msgbox(format("Before you go: this is what {STR_VAR_1} loves best. Leave it at an altar."), MSGBOX_DEFAULT)
+    giveitem(VAR_0x8006)
+    special(Ichor_TakeGift)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// The step tick and Hestia's Hearthfire
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorBlessingFaded {
+    lockall
+    msgbox(gStringVar4, MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+script EventScript_IchorHearthfire {
+    lockall
+    msgbox(format("{PLAYER} called up Hestia's warmth."), MSGBOX_DEFAULT)
+    closemessage
+    special(Ichor_UseHearthfire)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    msgbox(format("Your Pokémon are rested."), MSGBOX_DEFAULT)
+    releaseall
+    end
+}
+
+// ---------------------------------------------------------------------------
+// One entry point per god: the roadside altar and the temple's great altar
+// ---------------------------------------------------------------------------
+
+script EventScript_IchorAltar_Hestia {
+    setvar(VAR_0x800A, ICHOR_GOD_HESTIA)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Hestia {
+    setvar(VAR_0x800A, ICHOR_GOD_HESTIA)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Hermes {
+    setvar(VAR_0x800A, ICHOR_GOD_HERMES)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Hermes {
+    setvar(VAR_0x800A, ICHOR_GOD_HERMES)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Demeter {
+    setvar(VAR_0x800A, ICHOR_GOD_DEMETER)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Demeter {
+    setvar(VAR_0x800A, ICHOR_GOD_DEMETER)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Dionysus {
+    setvar(VAR_0x800A, ICHOR_GOD_DIONYSUS)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Dionysus {
+    setvar(VAR_0x800A, ICHOR_GOD_DIONYSUS)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Artemis {
+    setvar(VAR_0x800A, ICHOR_GOD_ARTEMIS)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Artemis {
+    setvar(VAR_0x800A, ICHOR_GOD_ARTEMIS)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Hephaestus {
+    setvar(VAR_0x800A, ICHOR_GOD_HEPHAESTUS)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Hephaestus {
+    setvar(VAR_0x800A, ICHOR_GOD_HEPHAESTUS)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Aphrodite {
+    setvar(VAR_0x800A, ICHOR_GOD_APHRODITE)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Aphrodite {
+    setvar(VAR_0x800A, ICHOR_GOD_APHRODITE)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Apollo {
+    setvar(VAR_0x800A, ICHOR_GOD_APOLLO)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Apollo {
+    setvar(VAR_0x800A, ICHOR_GOD_APOLLO)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Ares {
+    setvar(VAR_0x800A, ICHOR_GOD_ARES)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Ares {
+    setvar(VAR_0x800A, ICHOR_GOD_ARES)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Poseidon {
+    setvar(VAR_0x800A, ICHOR_GOD_POSEIDON)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Poseidon {
+    setvar(VAR_0x800A, ICHOR_GOD_POSEIDON)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Athena {
+    setvar(VAR_0x800A, ICHOR_GOD_ATHENA)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Athena {
+    setvar(VAR_0x800A, ICHOR_GOD_ATHENA)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Hera {
+    setvar(VAR_0x800A, ICHOR_GOD_HERA)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Hera {
+    setvar(VAR_0x800A, ICHOR_GOD_HERA)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Zeus {
+    setvar(VAR_0x800A, ICHOR_GOD_ZEUS)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Zeus {
+    setvar(VAR_0x800A, ICHOR_GOD_ZEUS)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Hecate {
+    setvar(VAR_0x800A, ICHOR_GOD_HECATE)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Hecate {
+    setvar(VAR_0x800A, ICHOR_GOD_HECATE)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorAltar_Hades {
+    setvar(VAR_0x800A, ICHOR_GOD_HADES)
+    setvar(VAR_0x800B, FALSE)
+    goto(EventScript_IchorAltar)
+}
+
+script EventScript_IchorTempleAltar_Hades {
+    setvar(VAR_0x800A, ICHOR_GOD_HADES)
+    setvar(VAR_0x800B, TRUE)
+    goto(EventScript_IchorAltar)
+}

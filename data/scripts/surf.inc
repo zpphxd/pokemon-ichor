@@ -1,4 +1,5 @@
 EventScript_UseSurf::
+	goto EventScript_IchorSurf @ Ichor: relics replace HMs (data/scripts/ichor_relics.pory)
 	checkfieldmove FIELD_MOVE_SURF
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_EndUseSurf
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
@@ -14,6 +15,7 @@ EventScript_EndUseSurf::
 	end
 
 EventScript_CurrentTooFast::
+	goto EventScript_IchorCurrentTooFast @ Ichor: relics replace HMs (data/scripts/ichor_relics.pory)
 	lockall
 	checkfieldmove FIELD_MOVE_SURF
 	goto_if_eq VAR_RESULT, FALSE, EventScript_CurrentTooFastEndMsg

@@ -61,7 +61,7 @@ function L.runHeader(name, opts)
   emu:write32(S.gMapHeader + S.OFF_MAPHEADER_MAPSCRIPTS, addr)
   L.waitUntil(function() return L.getVar(S.VAR_TEMP_F) ~= 0 end, opts.start or 600, name .. " to start")
   if opts.noSettle then return end
-  L.settle({ limit = opts.limit })
+  L.settle({ limit = opts.limit, answers = opts.answers })
 end
 
 -- --- IchorSave ---------------------------------------------------------------------------------

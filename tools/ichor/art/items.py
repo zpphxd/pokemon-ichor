@@ -26,9 +26,10 @@ role order and every sharing palette is rewritten, so no item that shares a
 file is left with scrambled colors. The sharing is read from
 src/data/items.h at run time and checked before anything is written.
 
-The four flag-only key items of the slice (Talaria, Augur's Eye, Pokedex,
-Hearth Laurel) are not items in the engine. Their icons are drawn as
-ichor_*.png assets, ready for when they become items; nothing builds them yet.
+The relics' icons are drawn in items_relics.py. The three flag-only key items
+of the slice (Augur's Eye, Pokedex, Hearth Laurel) are not items in the
+engine; their icons are drawn as ichor_*.png assets, ready for when they
+become items, and nothing builds them yet.
 """
 from __future__ import annotations
 
@@ -427,7 +428,9 @@ def _repel():
 # ==========================================================================
 @icon("escape_rope", {
     "escape_rope": pal(ramp_roles("r", [(112, 80, 40), (160, 120, 64), (200, 168, 104), (232, 208, 152)])),
-}, labels={"escape_rope": "Escape Rope"})
+    # the same coil, dyed red: Ariadne's Thread (items_relics.py)
+    "ariadnes_thread": pal(ramp_roles("r", [(112, 24, 24), (176, 40, 32), (224, 88, 64), (248, 160, 128)])),
+}, labels={"escape_rope": "Escape Rope", "ariadnes_thread": "Ariadne's Thread"})
 def _escape_rope():
     ic = Icon("K r1 r2 r3 r4")
     sil = np.zeros((24, 24), bool)
@@ -1088,7 +1091,7 @@ def _hm():
 @icon("ichor_talaria", {
     "ichor_talaria": pal(ramp_roles("le", [(104, 56, 32), (160, 96, 56), (208, 144, 96)]),
                          **ramp_roles("f", [C["mb_d"], C["mb_m"], C["mb_l"]]), g1=C["sg_d"], g2=C["sg_l"]),
-}, labels={"ichor_talaria": "Talaria (asset)"}, asset=True)
+}, labels={"ichor_talaria": "Talaria"})
 def _talaria():
     ic = Icon("K le1 le2 le3 f1 f2 f3 g1 g2")
     # a laced sandal-boot in profile, toe to the left, a wing at the ankle
@@ -1251,6 +1254,13 @@ def folk_colors():
 def write_jar():
     save_indexed(jar_array(), folk_colors(), JAR_PATH)
     print(f"items.py: wrote {os.path.relpath(JAR_PATH, ROOT)}")
+
+
+# ==========================================================================
+# The relics (design/SYSTEMS.md §1), drawn in items_relics.py
+# ==========================================================================
+import items_relics  # noqa: E402
+items_relics.register(icon, pal, ramp_roles, C, Icon)
 
 
 # ==========================================================================

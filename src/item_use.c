@@ -43,6 +43,7 @@
 #include "task.h"
 #include "text.h"
 #include "vs_seeker.h"
+#include "ichor_relics.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/item_effects.h"
@@ -1578,6 +1579,53 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
     {
         gTasks[taskId].func = ItemUseOnFieldCB_TownMap;
     }
+}
+
+// Ichor: what the relics (src/ichor_relics.c) need from the bag's item use.
+static const u8 *sIchorFieldScript;
+
+static void ItemUseOnFieldCB_IchorScript(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(sIchorFieldScript);
+    DestroyTask(taskId);
+}
+
+// Close the bag (if open) and run a field script.
+void ItemUse_IchorRunFieldScript(u8 taskId, const u8 *script)
+{
+    sIchorFieldScript = script;
+    sItemUseOnFieldCB = ItemUseOnFieldCB_IchorScript;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
+// A message in the bag, or on the field when used with SELECT. On the field it
+// waits for a button before it closes, as a script's message would.
+void ItemUse_IchorMessage(u8 taskId, const u8 *str)
+{
+    static const u8 sText_Wait[] = _("{PAUSE_UNTIL_PRESS}");
+
+    if (gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        StringExpandPlaceholders(gStringVar4, str);
+        StringAppend(gStringVar4, sText_Wait);
+        DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
+    }
+    else
+    {
+        DisplayCannotUseItemMessage(taskId, FALSE, str);
+    }
+}
+
+void ItemUse_IchorOpenScreenFromBag(u8 taskId, MainCallback callback)
+{
+    gBagMenu->newScreenCallback = callback;
+    Task_FadeAndCloseBagMenu(taskId);
+}
+
+bool32 ItemUse_IchorIsFromField(u8 taskId)
+{
+    return gTasks[taskId].tUsingRegisteredKeyItem == TRUE;
 }
 
 #undef tUsingRegisteredKeyItem

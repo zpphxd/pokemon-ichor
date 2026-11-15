@@ -7,6 +7,7 @@
 #include "text.h"
 #include "battle_anim.h"
 #include "test/test.h"
+#include "ichor_frozen.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -1696,6 +1697,7 @@ u8 LoadSpritePaletteInSlot(const struct SpritePalette *palette, u8 paletteNum)
 void DoLoadSpritePalette(const u16 *src, u16 paletteOffset)
 {
     LoadPaletteFast(src, OBJ_PLTT_OFFSET + paletteOffset, PLTT_SIZE_4BPP);
+    Ichor_OnSpritePaletteLoaded(paletteOffset / 16); // Ichor: the Frozen Hour saves its colors
 }
 
 u32 AllocSpritePalette(u16 tag)

@@ -91,21 +91,26 @@
 #define MOVEMENT_TYPE_WATCH_PLAYER_OWE                 0x56
 #define MOVEMENT_TYPE_APPROACH_PLAYER_OWE              0x57
 #define MOVEMENT_TYPE_DESPAWN_OWE                      0x58
+// Ichor: caught mid-stride and held there, for the Frozen Hour (ENGINE_API §5)
+#define MOVEMENT_TYPE_ICHOR_FROZEN_STEP_DOWN           0x59
+#define MOVEMENT_TYPE_ICHOR_FROZEN_STEP_UP             0x5A
+#define MOVEMENT_TYPE_ICHOR_FROZEN_STEP_LEFT           0x5B
+#define MOVEMENT_TYPE_ICHOR_FROZEN_STEP_RIGHT          0x5C
 // Ichor: Galatea's marble statues and bronze mirrors (src/ichor_statue.c,
 // design/phase4/ENGINE_ACT3.md). The suffix is the starting facing; none is down.
-#define MOVEMENT_TYPE_ICHOR_STATUE                     0x59
-#define MOVEMENT_TYPE_ICHOR_STATUE_UP                  0x5A
-#define MOVEMENT_TYPE_ICHOR_STATUE_LEFT                0x5B
-#define MOVEMENT_TYPE_ICHOR_STATUE_RIGHT               0x5C
-#define MOVEMENT_TYPE_ICHOR_STATUE_ROOTED              0x5D
-#define MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_UP           0x5E
-#define MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_LEFT         0x5F
-#define MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_RIGHT        0x60
-#define MOVEMENT_TYPE_ICHOR_MIRROR                     0x61
-#define MOVEMENT_TYPE_ICHOR_MIRROR_UP                  0x62
-#define MOVEMENT_TYPE_ICHOR_MIRROR_LEFT                0x63
-#define MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT               0x64
-#define NUM_MOVEMENT_TYPES                             0x65 // Ichor: was 0x59
+#define MOVEMENT_TYPE_ICHOR_STATUE                     0x5D
+#define MOVEMENT_TYPE_ICHOR_STATUE_UP                  0x5E
+#define MOVEMENT_TYPE_ICHOR_STATUE_LEFT                0x5F
+#define MOVEMENT_TYPE_ICHOR_STATUE_RIGHT               0x60
+#define MOVEMENT_TYPE_ICHOR_STATUE_ROOTED              0x61
+#define MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_UP           0x62
+#define MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_LEFT         0x63
+#define MOVEMENT_TYPE_ICHOR_STATUE_ROOTED_RIGHT        0x64
+#define MOVEMENT_TYPE_ICHOR_MIRROR                     0x65
+#define MOVEMENT_TYPE_ICHOR_MIRROR_UP                  0x66
+#define MOVEMENT_TYPE_ICHOR_MIRROR_LEFT                0x67
+#define MOVEMENT_TYPE_ICHOR_MIRROR_RIGHT               0x68
+#define NUM_MOVEMENT_TYPES                             0x69 // Ichor: was 0x59
 
 #define MOVEMENT_ACTION_FACE_DOWN                       0x0
 #define MOVEMENT_ACTION_FACE_UP                         0x1

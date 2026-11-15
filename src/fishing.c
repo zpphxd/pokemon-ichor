@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "main.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
@@ -502,6 +503,9 @@ static bool32 Fishing_RollForBite(u32 rod, bool32 isStickyHold)
 static u32 CalculateFishingBiteOdds(u32 rod, bool32 isStickyHold)
 {
     u32 odds;
+
+    if (Ichor_FishBitesAtOnce()) // Ichor: Poseidon's calm seas
+        return 100;
 
     if (rod == OLD_ROD)
         odds = FISHING_OLD_ROD_ODDS;
