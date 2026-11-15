@@ -3,6 +3,7 @@
 
 #include "constants/global.h"
 #include "constants/map_event_ids.h"
+#include "constants/localids_removed_stub.h" // Ichor: local IDs of maps the Hoenn cut deleted
 
 #define PLAYER_AVATAR_GFX_MALE_NORMAL     (IS_FRLG ? OBJ_EVENT_GFX_RED_NORMAL     : OBJ_EVENT_GFX_BRENDAN_NORMAL)
 #define PLAYER_AVATAR_GFX_MALE_MACH_BIKE  (IS_FRLG ? OBJ_EVENT_GFX_RED_BIKE       : OBJ_EVENT_GFX_BRENDAN_MACH_BIKE)
@@ -449,6 +450,12 @@ enum
     // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
+    // The Theoxenia's gods drawn from life, disguised and revealed
+    // (tools/ichor/art/sprites_npc_theoxenia.py)
+    OBJ_EVENT_GFX_ICHOR_SAM,
+    OBJ_EVENT_GFX_ICHOR_APOLLO,
+    OBJ_EVENT_GFX_ICHOR_CAMI,
+    OBJ_EVENT_GFX_ICHOR_DEMETER,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
@@ -611,6 +618,7 @@ enum
 // Claim the next free one at the end of this block.
 #define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // the cast, plus the Shepherd, Hoplite, Augur and Acolyte walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
+#define OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA         0x1136 // Sam, Apollo, Cami and Demeter: true gold, white, green
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS

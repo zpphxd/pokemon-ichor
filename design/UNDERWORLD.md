@@ -1489,6 +1489,8 @@ RHEA: I'm saying them now. Sit down. Fewer words won't do for this one.
 
 ## Decisions for the user
 
+> **Settled by the user, 2026-11-14.** Asked directly: the Oikoumene opens in stages (PG-6, PG-7, PG-8); the Orpheus moment is Persephone's return, and nobody returns from the dead (K4); the five Titans and Briareus are freed (K3); the suitors stay, comic, with Mom in control (O3); Argos lives and joins you (O4); the legend castings are approved as a set (PG-31); the House of Night is built for 1.0 (PG-26, overriding K8's stretch). **Every other decision below takes its recommendation** (the user: "Take the recommendations"). Any can still be changed later.
+
 - **K1. The Cutter as your guide** (recommended, from STORY §3), traveling as a scripted escort, or from your party if you caught her.
 - **K2. Theano,** the name proposed for Elpis's mother, and Phaedon's message to her and her reply.
 - **K3. Freeing the Titans.** The Katabasis frees the five Titans and Briareus, as the bible says, and frames it as ending the last "for ever". Hades objects and comes round. The alternative is to seal them again, which the bible doesn't want.
