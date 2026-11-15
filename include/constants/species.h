@@ -1861,4 +1861,7 @@ enum __attribute__((packed)) Species
 
 #define SPECIES_SHINY_TAG 5000
 
+// Ichor: Aethos dex stand-ins until the dex is implemented (see the header).
+#include "constants/ichor_species_stubs.h"
+
 #endif  // GUARD_CONSTANTS_SPECIES_H

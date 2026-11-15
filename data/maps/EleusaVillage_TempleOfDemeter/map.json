@@ -1,0 +1,1372 @@
+{
+  "id": "MAP_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER",
+  "name": "EleusaVillage_TempleOfDemeter",
+  "layout": "LAYOUT_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER",
+  "music": "MUS_ICHOR_TEMPLE_DEMETER",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_ELEUSA_VILLAGE",
+  "requires_flash": true,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_TEMPLE_DEMETER_DOSO",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_F",
+      "x": 11,
+      "y": 25,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Doso",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TEMPLE_DEMETER_KALLIDIKE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 5,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Kallidike",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TEMPLE_DEMETER_EUMOLPOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_M",
+      "x": 8,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Eumolpos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TEMPLE_DEMETER_MELISSA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ACOLYTE_F",
+      "x": 23,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Melissa",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_TEMPLE_DEMETER_CHLOE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PRIESTESS",
+      "x": 13,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Chloe",
+      "flag": "FLAG_ICHOR_HIDE_CHLOE_TELESTERION"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUSA_VILLAGE",
+      "dest_warp_id": "8"
+    },
+    {
+      "x": 12,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUSA_VILLAGE",
+      "dest_warp_id": "8"
+    },
+    {
+      "x": 14,
+      "y": 26,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUSA_VILLAGE",
+      "dest_warp_id": "8"
+    },
+    {
+      "x": 13,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUSA_SANCTUM_B1F",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 21,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 21,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 21,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 21,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 21,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 22,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 22,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 22,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 22,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 22,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_3",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Pit"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterWinter"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSpring"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSummer"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSummer"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSummer"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSummer"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSummer"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSummer"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSummer"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSummer"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "0",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_EnterSummer"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 2,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 9,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 24,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 15,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 20,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 23,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_TEMP_2",
+      "var_value": "1",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 21,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierAutumn"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierAutumn"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierWinter"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierWinter"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierSpring"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierSpring"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 21,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierSummer"
+    },
+    {
+      "type": "sign",
+      "x": 24,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_BrazierSummer"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_GreatAltar"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 14,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Throne"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EleusaVillage_TempleOfDemeter_EventScript_Throne"
+    }
+  ]
+}

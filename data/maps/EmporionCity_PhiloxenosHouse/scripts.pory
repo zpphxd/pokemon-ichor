@@ -1,0 +1,126 @@
+// Philoxenos's house (design/phase2/SCRIPT.md, Part 2; SYSTEMS.md §10): a
+// retired grain-shipper who keeps the old law of hospitality, and his cook.
+// Room: tools/ichor/maps/emporion_rooms.py ("philoxenos"), an andron on domos.
+// The street door is the mat at (6..7, 10), warp 0. Its MAP_EMPORION_CITY
+// dest_warp_id (0) is a placeholder until the city agent's door ids are known.
+//
+// The xenia host (5,8): he feeds you before he asks your name, which heals the
+// party, and offers a bed. Each time you come holding a laurel he hasn't heard
+// about (the Herald Laurel, then the Harvest Laurel), he trades the story for
+// Wine: FLAG_ICHOR_PHILOXENOS_LAUREL_2, _3.
+//
+// ICHOR_STUB_XENIA: two parts wait on the engine. The rest menu (DAWN / NOON /
+// DUSK / NIGHT, each shown only if that hour is still ahead today) moves the
+// clock when SYSTEMS.md §10's rest lands; until then the bed is a fade and a
+// heal. The Split Coin (ITEM_HALF_COIN, FLAG_ICHOR_SPLIT_COIN_1), a stretch
+// feature, is left out until the item and a flag exist.
+
+mapscripts EmporionCity_PhiloxenosHouse_MapScripts {}
+
+text EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos { "PHILOXENOS" }
+text EmporionCity_PhiloxenosHouse_Text_NameCook { "COOK" }
+
+script EmporionCity_PhiloxenosHouse_EventScript_Philoxenos {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos)
+    msgbox(format("Sit. Eat first.\p"
+                  "Then tell me who you are. Not before."))
+    closemessage
+    call(EmporionCity_PhiloxenosHouse_EventScript_Feast)
+    setspeaker(EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos)
+    msgbox(format("Bread, olives, a little cheese. Your Pokémon had the cheese."))
+    // A story for a laurel, one laurel at a time.
+    if (flag(FLAG_BADGE02_GET) && !flag(FLAG_ICHOR_PHILOXENOS_LAUREL_2)) {
+        call(EmporionCity_PhiloxenosHouse_EventScript_LaurelStory)
+        setspeaker(EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos)
+        msgbox(format("Ha! And then the herald ran into a pillar? Wonderful."))
+        call(EmporionCity_PhiloxenosHouse_EventScript_GiveWine)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_PHILOXENOS_LAUREL_2)
+        }
+    } elif (flag(FLAG_BADGE03_GET) && !flag(FLAG_ICHOR_PHILOXENOS_LAUREL_3)) {
+        call(EmporionCity_PhiloxenosHouse_EventScript_LaurelStory)
+        setspeaker(EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos)
+        msgbox(format("Ha! And then every lamp went out at once? Wonderful."))
+        call(EmporionCity_PhiloxenosHouse_EventScript_GiveWine)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_PHILOXENOS_LAUREL_3)
+        }
+    }
+    setspeaker(EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos)
+    msgbox(format("Stay, if you like. Rest till you want to wake."))
+    // ICHOR_STUB_XENIA: the rest menu (see the header).
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Rest in the guest bed?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        playfanfare(MUS_HEAL)
+        waitfanfare
+        special(HealPlayerParty)
+        delay(30)
+        fadescreen(FADE_FROM_BLACK)
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("{PLAYER} slept behind the striped curtain and woke well rested."))
+    }
+    release
+}
+
+// The table: a fade, the heal jingle, the party healed.
+script EmporionCity_PhiloxenosHouse_EventScript_Feast {
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+script EmporionCity_PhiloxenosHouse_EventScript_LaurelStory {
+    setspeaker(EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos)
+    msgbox(format("A new leaf on your crown! Sit. Tell me everything."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(60)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+script EmporionCity_PhiloxenosHouse_EventScript_GiveWine {
+    setspeaker(EmporionCity_PhiloxenosHouse_Text_NamePhiloxenos)
+    msgbox(format("Here. Wine, for Zeus of Strangers. He likes a story with his cup."))
+    // ICHOR_STUB_OFFERINGS: ITEM_WINE once the offerings are items; Berry Juice
+    // stands in (design/phase2/BUILD.md).
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_BERRY_JUICE, 1)
+    return
+}
+
+script EmporionCity_PhiloxenosHouse_EventScript_Cook {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_PhiloxenosHouse_Text_NameCook)
+    msgbox(format("He feeds everyone. Sailors, beggars, a goat once.\p"
+                  "I don't argue. I just cook more."))
+    release
+}
+
+script EmporionCity_PhiloxenosHouse_EventScript_Mosaic {
+    msgbox(format("A pebble mosaic: a host stepping out of his door to take a traveler's hand."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_PhiloxenosHouse_EventScript_Hearth {
+    msgbox(format("A pot of lentils on the fire, and more bread than any one house could eat."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_PhiloxenosHouse_EventScript_GuestBed {
+    msgbox(format("The guest bed, behind a striped curtain. It's always made up."), MSGBOX_SIGN)
+}
+
+script EmporionCity_PhiloxenosHouse_EventScript_Washbasin {
+    msgbox(format("A marble washbasin by the door. A guest's feet are washed before anything else."),
+           MSGBOX_SIGN)
+}

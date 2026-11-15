@@ -1,0 +1,649 @@
+// Emporion City: SCRIPT.md beats 14 (Kleon on the temple steps) and 16 (Kleon's
+// second battle at the Isthmus Gate), and the city's half of the Emporion roster
+// (Part 2): Kydon, Number Nine, Sykeas and his snatcher, Pasion, the man with a
+// lamp, the empty jars, the stallkeepers, the kid, the metic and the gates.
+//
+// The reconciled map (BUILD.md, SCRIPT.md's route-plan note): SCRIPT.md's Sacred
+// Gate is the Isthmus Gate, north-west, to Route 4; the Route 14 gate (Nemea) is
+// shut in Act I; the Coast Gate and the Long Walls Gate are not drawn.
+//
+// Scene state lives in flags; ON_TRANSITION turns it into temp vars for the
+// coord triggers:
+//   VAR_TEMP_1 == 1  beat 14 waits on the temple stair's bottom tread, (21..25, 16),
+//                    and in front of the door, (23,13), for players who come by the terrace
+//   VAR_TEMP_2 == 1  the Isthmus Gate's trigger, (7..9, 4): the hoplites' line
+//                    before the Herald Laurel, Kleon's battle after it
+//   VAR_TEMP_3 == 0  always: the Deigma's door (32,36). The stoa's door bay isn't
+//                    MB_NON_ANIMATED_DOOR in the tileset, so a trigger does the warp.
+//
+// Stubs (design/phase2/BUILD.md): ICHOR_STUB_HERM (the crossroads herm),
+// ICHOR_STUB_DIG (the Hephaisteion's garden), ICHOR_STUB_OFFERINGS (the offerings
+// stall), ICHOR_STUB_COINS (Pasion), ICHOR_STUB_SPRITE (Number Nine, map.json).
+
+mapscripts EmporionCity_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_VISITED_EMPORION)
+        // Kleon only stands at the temple door while beat 14 plays.
+        setflag(FLAG_ICHOR_HIDE_KLEON_TEMPLE_STEPS)
+        if (!flag(FLAG_ICHOR_KLEON_WON_HERALD)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+        if (flag(FLAG_ICHOR_KLEON_WON_HERALD) && !flag(FLAG_ICHOR_KLEON_BATTLE_2_DONE)) {
+            clearflag(FLAG_ICHOR_HIDE_KLEON_ISTHMUS_GATE)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_KLEON_ISTHMUS_GATE)
+        }
+        if (!flag(FLAG_ICHOR_KLEON_BATTLE_2_DONE)) {
+            setvar(VAR_TEMP_2, 1)
+        }
+    }
+}
+
+text EmporionCity_Text_NameKleon { "KLEON" }
+text EmporionCity_Text_NameKydon { "KYDON" }
+text EmporionCity_Text_NameSykeas { "SYKEAS" }
+text EmporionCity_Text_NamePasion { "PASION" }
+
+// ---------------------------------------------------------------------------
+// Beat 14: Kleon on the temple steps
+// ---------------------------------------------------------------------------
+
+script EmporionCity_EventScript_KleonStepsX21 {
+    setvar(VAR_0x8008, 21)
+    goto(EmporionCity_EventScript_KleonStepsScene)
+}
+
+script EmporionCity_EventScript_KleonStepsX22 {
+    setvar(VAR_0x8008, 22)
+    goto(EmporionCity_EventScript_KleonStepsScene)
+}
+
+script EmporionCity_EventScript_KleonStepsX23 {
+    setvar(VAR_0x8008, 23)
+    goto(EmporionCity_EventScript_KleonStepsScene)
+}
+
+script EmporionCity_EventScript_KleonStepsX24 {
+    setvar(VAR_0x8008, 24)
+    goto(EmporionCity_EventScript_KleonStepsScene)
+}
+
+script EmporionCity_EventScript_KleonStepsX25 {
+    setvar(VAR_0x8008, 25)
+    goto(EmporionCity_EventScript_KleonStepsScene)
+}
+
+// Reaching the door along the upper terrace skips the stair's foot, so the
+// tile in front of the door (23,13) starts the scene too: the door bangs open
+// and the player steps back down to the stair's foot, where Kleon finds them.
+script EmporionCity_EventScript_KleonStepsDoor {
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_BackDownTheSteps)
+    waitmovement(0)
+    setvar(VAR_0x8008, 23)
+    goto(EmporionCity_EventScript_KleonStepsScene)
+}
+
+movement EmporionCity_Movement_BackDownTheSteps { face_up delay_16 walk_down * 3 face_up }
+
+script EmporionCity_EventScript_KleonStepsScene {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    // to the middle of the stair, under the temple door
+    switch (var(VAR_0x8008)) {
+        case 21: applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_Right2FaceUp)
+        case 22: applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_RightFaceUp)
+        case 23: applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+        case 24: applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_LeftFaceUp)
+        default: applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_Left2FaceUp)
+    }
+    waitmovement(0)
+    // Kleon comes out of the door, a second laurel leaf tied beside the first.
+    playse(SE_DOOR)
+    clearflag(FLAG_ICHOR_HIDE_KLEON_TEMPLE_STEPS)
+    addobject(LOCALID_EMPORION_KLEON_STEPS)
+    applymovement(LOCALID_EMPORION_KLEON_STEPS, EmporionCity_Movement_KleonDownTheSteps)
+    waitmovement(0)
+    setspeaker(EmporionCity_Text_NameKleon)
+    msgbox(format("{PLAYER}! Sixty-one steps! Remember that number!\p"
+                  "Kerykos says it's the fastest run in nine years.\p"
+                  "And I beat him. First try. First try! Look at it!\p"
+                  "First to the next laurel. That was the deal. I WIN!\p"
+                  "…I don't know what I win. I never said.\p"
+                  "I win the winning. That's plenty.\p"
+                  "I'll wait at the Isthmus Gate. Being ahead of you. See you there!"))
+    closemessage
+    applymovement(LOCALID_EMPORION_KLEON_STEPS, EmporionCity_Movement_KleonRunsWest)
+    waitmovement(0)
+    removeobject(LOCALID_EMPORION_KLEON_STEPS)
+    setflag(FLAG_ICHOR_HIDE_KLEON_TEMPLE_STEPS)
+    setflag(FLAG_ICHOR_KLEON_WON_HERALD)
+    clearflag(FLAG_ICHOR_HIDE_KLEON_ISTHMUS_GATE)
+    releaseall
+}
+
+movement EmporionCity_Movement_Right2FaceUp { walk_right * 2 face_up }
+movement EmporionCity_Movement_RightFaceUp { walk_right face_up }
+movement EmporionCity_Movement_LeftFaceUp { walk_left face_up }
+movement EmporionCity_Movement_Left2FaceUp { walk_left * 2 face_up }
+// From the door (23,12) down the temple steps to (23,15), above the player.
+movement EmporionCity_Movement_KleonDownTheSteps { walk_down * 3 }
+// Down the last step and west along the lane under the terrace, toward the gate.
+movement EmporionCity_Movement_KleonRunsWest { walk_fast_left * 9 }
+
+script EmporionCity_EventScript_KleonSteps {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Text_NameKleon)
+    msgbox(format("Sixty-one steps! Remember that number!"))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Beat 16: the Isthmus Gate and Kleon's second battle
+// ---------------------------------------------------------------------------
+
+script EmporionCity_EventScript_IsthmusGateX7 {
+    setvar(VAR_0x8008, 7)
+    goto(EmporionCity_EventScript_IsthmusGate)
+}
+
+script EmporionCity_EventScript_IsthmusGateX8 {
+    setvar(VAR_0x8008, 8)
+    goto(EmporionCity_EventScript_IsthmusGate)
+}
+
+script EmporionCity_EventScript_IsthmusGateX9 {
+    setvar(VAR_0x8008, 9)
+    goto(EmporionCity_EventScript_IsthmusGate)
+}
+
+script EmporionCity_EventScript_IsthmusGate {
+    lockall
+    if (!flag(FLAG_BADGE02_GET)) {
+        applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+        waitmovement(0)
+        msgbox(format("The Isthmus road's shut for the Mysteries' truce. Heralds only.\p"
+                      "Got a herald's laurel? No? Then you're a tourist. Go buy a lamp."))
+        closemessage
+        applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_StepBack)
+        waitmovement(0)
+        releaseall
+        end
+    }
+    // Kleon leans in the gateway, tossing a Poké Ball.
+    switch (var(VAR_0x8008)) {
+        case 7: applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_RightFaceUp)
+        case 9: applymovement(OBJ_EVENT_ID_PLAYER, EmporionCity_Movement_LeftFaceUp)
+        default: applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    }
+    waitmovement(0)
+    applymovement(LOCALID_EMPORION_KLEON_GATE, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(EmporionCity_Text_NameKleon)
+    msgbox(format("Took you long enough. How many steps?\p"
+                  "…Doesn't matter. I won the race. That was the deal.\p"
+                  "So why does it feel like I haven't won anything?\p"
+                  "It's you. It's because you're still standing there.\p"
+                  "No crowd this time. No festival. Just us. Battle me. Properly."))
+    closemessage
+    // Losing doesn't end the game: the story carries on either way.
+    setflag(FLAG_ICHOR_NO_WHITEOUT)
+    switch (var(VAR_STARTER_MON)) {
+        case 0:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_2_KYNDER, EmporionCity_Text_KleonDefeat)
+        case 1:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_2_HIPLING, EmporionCity_Text_KleonDefeat)
+        default:
+            trainerbattle_no_intro(TRAINER_ICHOR_KLEON_2_NEBREL, EmporionCity_Text_KleonDefeat)
+    }
+    clearflag(FLAG_ICHOR_NO_WHITEOUT)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    setspeaker(EmporionCity_Text_NameKleon)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        setflag(FLAG_ICHOR_WON_KLEON_2)
+        msgbox(format("Again. I lost again.\p"
+                      "You know what the Oracle told my mother. Young and glorious.\p"
+                      "The young part's going great."))
+    } else {
+        special(HealPlayerParty)
+        msgbox(format("Ha! There. That's what winning's supposed to feel like.\p"
+                      "…It doesn't, though. Not quite."))
+    }
+    msgbox(format("The Mysteries are at Eleusa. When the procession gets there.\p"
+                  "They say initiates stop being afraid of dying.\p"
+                  "I'm not afraid of it. Lakonians aren't.\p"
+                  "I'd just like to hear someone say it isn't the end. Out loud. Once.\p"
+                  "Don't look at me like that. Lakonians don't get sad. We get faster."))
+    closemessage
+    // He runs through the gate and off up the Isthmus road.
+    applymovement(LOCALID_EMPORION_KLEON_GATE, EmporionCity_Movement_KleonThroughTheGate)
+    waitmovement(0)
+    removeobject(LOCALID_EMPORION_KLEON_GATE)
+    setflag(FLAG_ICHOR_KLEON_BATTLE_2_DONE)
+    setflag(FLAG_ICHOR_HIDE_KLEON_ISTHMUS_GATE)
+    setvar(VAR_TEMP_2, 0)
+    // The hoplites step aside.
+    applymovement(LOCALID_EMPORION_HOPLITE_GATE_W_PERCH, Common_Movement_FaceRight)
+    applymovement(LOCALID_EMPORION_HOPLITE_GATE_E_PERCH, Common_Movement_FaceLeft)
+    waitmovement(0)
+    msgbox(format("A herald's laurel. Pass, herald.\p"
+                  "Mind the road past the tombs. Titans brought half a hill down on it.\p"
+                  "Old Kedalion at the Hephaisteion has a hammer. If he's in a mood."))
+    closemessage
+    releaseall
+}
+
+text EmporionCity_Text_KleonDefeat {
+    format("No. No, no, no. I was ahead!")
+}
+
+movement EmporionCity_Movement_StepBack { lock_facing_direction walk_down unlock_facing_direction }
+// From the gateway (8,3) up the Isthmus road and out of the city.
+movement EmporionCity_Movement_KleonThroughTheGate { walk_fast_up * 5 }
+
+script EmporionCity_EventScript_KleonGate {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Text_NameKleon)
+    msgbox(format("Being ahead of you. See?"))
+    release
+}
+
+script EmporionCity_EventScript_GateHoplite {
+    if (flag(FLAG_ICHOR_KLEON_BATTLE_2_DONE)) {
+        msgbox(format("A herald's laurel. Pass, herald.\p"
+                      "Mind the road past the tombs. Titans brought half a hill down on it.\p"
+                      "Old Kedalion at the Hephaisteion has a hammer. If he's in a mood."), MSGBOX_NPC)
+    } elif (flag(FLAG_BADGE02_GET)) {
+        msgbox(format("A herald's laurel. Pass, herald."), MSGBOX_NPC)
+    } else {
+        msgbox(format("The Isthmus road's shut for the Mysteries' truce. Heralds only.\p"
+                      "Got a herald's laurel? No? Then you're a tourist. Go buy a lamp."), MSGBOX_NPC)
+    }
+}
+
+// The Route 14 gate: the road to Nemea opens in Act II, from the other side.
+script EmporionCity_EventScript_NemeaHoplite {
+    msgbox(format("The Nemea road. Shut, by order of the Archon.\p"
+                  "Something big's been taking goats in those hills. A lion, they say.\p"
+                  "Could be a week. Could be a year. Lions, you know."), MSGBOX_NPC)
+}
+
+// The Deigma's door: see the header.
+script EmporionCity_EventScript_DeigmaDoor {
+    lockall
+    playse(SE_DOOR)
+    warp(MAP_EMPORION_CITY_DEIGMA, 0)
+    waitstate
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// The Agora
+// ---------------------------------------------------------------------------
+
+script EmporionCity_EventScript_GeneralStallkeeper {
+    lock
+    faceplayer
+    message(format("Potions, balls, rope and repel! Everything a hero forgets!"))
+    waitmessage
+    // After the forge is relit (FLAG_ICHOR_FORGE_RELIT, the Hephaisteion's) the
+    // stall adds Charcoal; that tier goes in when the interiors' flag merges.
+    if (flag(FLAG_BADGE02_GET)) {
+        pokemart(EmporionCity_Mart_GeneralAfterLaurel)
+    } else {
+        pokemart(EmporionCity_Mart_General)
+    }
+    msgbox(format("Come back when you've forgotten something else!"))
+    release
+}
+
+mart EmporionCity_Mart_General {
+    ITEM_POKE_BALL
+    ITEM_POTION
+    ITEM_SUPER_POTION
+    ITEM_ANTIDOTE
+    ITEM_PARALYZE_HEAL
+    ITEM_AWAKENING
+    ITEM_BURN_HEAL
+    ITEM_REPEL
+    ITEM_ESCAPE_ROPE
+}
+
+mart EmporionCity_Mart_GeneralAfterLaurel {
+    ITEM_POKE_BALL
+    ITEM_GREAT_BALL
+    ITEM_POTION
+    ITEM_SUPER_POTION
+    ITEM_ANTIDOTE
+    ITEM_PARALYZE_HEAL
+    ITEM_AWAKENING
+    ITEM_BURN_HEAL
+    ITEM_ICE_HEAL
+    ITEM_REPEL
+    ITEM_SUPER_REPEL
+    ITEM_ESCAPE_ROPE
+}
+
+// ICHOR_STUB_OFFERINGS: Olive Oil 200, Barley Cake 150, Wine 300, Frankincense 500
+// (SYSTEMS.md §3) are new items; the stall opens its mart when they exist.
+script EmporionCity_EventScript_OfferingsStallkeeper {
+    msgbox(format("Oil, barley, wine, frankincense. Whatever your god's fussy about.\p"
+                  "Sold out till the next ship. The gods are thirsty this year."), MSGBOX_NPC)
+}
+
+// SCRIPT.md Part 6 also lists Bulldoze and Round, which have no TM in this build
+// yet; Balance assigns their numbers.
+script EmporionCity_EventScript_ScrollStallkeeper {
+    lock
+    faceplayer
+    message(format("Techniques, written down. Teach your Pokémon. Use it again and again."))
+    waitmessage
+    pokemart(EmporionCity_Mart_Scrolls)
+    msgbox(format("A scroll never forgets. Unlike its owner."))
+    release
+}
+
+mart EmporionCity_Mart_Scrolls {
+    ITEM_TM17
+    ITEM_TM34
+    ITEM_TM44
+}
+
+// Kydon, the Knossan honey-seller (LABYRINTH.md seed 3). The mart sells Honey,
+// Hermes's loved offering, at items.h's price (SCRIPT.md wants Ichor's 300).
+script EmporionCity_EventScript_Kydon {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Text_NameKydon)
+    msgbox(format("Knossan honey. The bees drink thyme and fear.\p"
+                  "Fear? There's a thing under the palace that bellows at the new moon.\p"
+                  "The bees don't mind. I mind."))
+    pokemart(EmporionCity_Mart_Kydon)
+    release
+}
+
+mart EmporionCity_Mart_Kydon {
+    ITEM_HONEY
+}
+
+// Pasion, the moneychanger, at his table with his scales. ICHOR_STUB_COINS: he
+// buys the three coins at +20% when they exist (the Bronze Obol is Relic Copper,
+// SYSTEMS.md §5); until then he buys the obol at a fixed ¥600.
+script EmporionCity_EventScript_Pasion {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Text_NamePasion)
+    msgbox(format("Old coins? I buy old coins. Fair weight, fair price."))
+    checkitem(ITEM_RELIC_COPPER)
+    if (var(VAR_RESULT) == FALSE) {
+        release
+        end
+    }
+    msgbox(format("A Bronze Obol! The ferryman's fare, they say.\p"
+                  "Put one in the mouth of the dead.\p"
+                  "I'll give you a good price for it. The ferryman won't."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Sell Pasion the Bronze Obol for ¥600?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        removeitem(ITEM_RELIC_COPPER)
+        addmoney(600)
+        playse(SE_SHOP)
+        msgbox(format("Pasion weighs the coin twice and pays in silver."))
+    }
+    release
+}
+
+// Number Nine (LABYRINTH.md seed 4): a wooden statue of a young man, mid-stride,
+// roped to its plinth like a goat.
+script EmporionCity_EventScript_NumberNine {
+    lockall
+    msgbox(format("A wooden statue, roped to its plinth like a goat.\p"
+                  "The plaque says: BY DAEDALUS. DO NOT UNTIE."))
+    msgbox(format("Untie it?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("The statue strains very slightly against its rope."))
+        releaseall
+        end
+    }
+    msgbox(format("You untie the rope."))
+    closemessage
+    applymovement(LOCALID_EMPORION_NUMBER_NINE_PERCH, Common_Movement_FacePlayer)
+    waitmovement(0)
+    msgbox(format("The statue looks down at you.\p"
+                  "Then it steps off the plinth and walks away."))
+    closemessage
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8005) == 22) {
+        applymovement(LOCALID_EMPORION_NUMBER_NINE_PERCH, EmporionCity_Movement_NineWalksEast)
+    } else {
+        applymovement(LOCALID_EMPORION_NUMBER_NINE_PERCH, EmporionCity_Movement_NineWalksNorth)
+    }
+    waitmovement(0)
+    removeobject(LOCALID_EMPORION_NUMBER_NINE_PERCH)
+    setflag(FLAG_ICHOR_NUMBER_NINE_UNTIED)
+    msgbox(format("Nobody in the Agora seems surprised."))
+    releaseall
+}
+
+// Off the plinth (34,23): up the street past the tavern, or, if the player stands
+// there, east along the grid street.
+movement EmporionCity_Movement_NineWalksNorth { walk_up * 7 }
+movement EmporionCity_Movement_NineWalksEast { walk_right * 13 }
+
+script EmporionCity_EventScript_EmptyPlinth {
+    if (flag(FLAG_ICHOR_NUMBER_NINE_UNTIED)) {
+        msgbox(format("An empty plinth. A cut rope.\p"
+                      "The plaque says: BY DAEDALUS. DO NOT UNTIE."), MSGBOX_SIGN)
+    }
+}
+
+// Sykeas, the fig-seller, and the snatcher on his awning.
+script EmporionCity_EventScript_Sykeas {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_Text_NameSykeas)
+    if (flag(FLAG_ICHOR_GOT_SYKEAS_FIGS)) {
+        call(EmporionCity_EventScript_SykeasGrandfather)
+    } elif (flag(FLAG_ICHOR_HIDE_SYKEAS_HARPECK)) {
+        msgbox(format("You got it! Here. Figs. Real ones. And it dropped this."))
+        setspeaker(SP_NAME_NONE)
+        giveitem(ITEM_FIGY_BERRY, 3)
+        giveitem(ITEM_PRETTY_FEATHER)
+        setflag(FLAG_ICHOR_GOT_SYKEAS_FIGS)
+        setspeaker(EmporionCity_Text_NameSykeas)
+        call(EmporionCity_EventScript_SykeasGrandfather)
+    } else {
+        msgbox(format("Figs! Best figs in Emporion! Fewer every minute!\p"
+                      "That snatcher's had six. Six! It looks at me while it eats them."))
+    }
+    release
+}
+
+script EmporionCity_EventScript_SykeasGrandfather {
+    msgbox(format("My grandfather says “fig-shower” used to mean a snitch.\p"
+                  "He never says why. He just gets a look."))
+}
+
+// A static battle: win, lose or catch, the snatcher is gone.
+script EmporionCity_EventScript_Harpeck {
+    lock
+    faceplayer
+    playmoncry(SPECIES_HARPECK, CRY_MODE_ENCOUNTER)
+    msgbox(format("Kraa! It has a fig in its beak."))
+    waitmoncry
+    closemessage
+    setflag(FLAG_ICHOR_NO_WHITEOUT)
+    setwildbattle(SPECIES_HARPECK, 13)
+    dowildbattle
+    clearflag(FLAG_ICHOR_NO_WHITEOUT)
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_LOST || var(VAR_RESULT) == B_OUTCOME_DREW) {
+        special(HealPlayerParty)
+    }
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_EMPORION_HARPECK_PERCH)
+    setflag(FLAG_ICHOR_HIDE_SYKEAS_HARPECK)
+    fadescreen(FADE_FROM_BLACK)
+    release
+}
+
+script EmporionCity_EventScript_ManWithALamp {
+    msgbox(format("I'm looking for an honest man.\p"
+                  "You'll do for now. Don't let it go to your head."), MSGBOX_NPC)
+}
+
+script EmporionCity_EventScript_Kid {
+    msgbox(format("A snatcher stole my bread, so I stole its feather.\p"
+                  "Now we're even. It doesn't think so."), MSGBOX_NPC)
+}
+
+script EmporionCity_EventScript_Metic {
+    msgbox(format("Thirty years I've lived here. I still pay the stranger's tax.\p"
+                  "In Emporion everyone's a stranger. That's why it works."), MSGBOX_NPC)
+}
+
+// The empty jars by the stoa: one in four holds a Pithound.
+script EmporionCity_EventScript_Pithos {
+    lockall
+    random(4)
+    if (var(VAR_RESULT) != 0) {
+        msgbox(format("An empty storage jar. It smells, faintly, of dog."))
+        releaseall
+        end
+    }
+    playmoncry(SPECIES_PITHOUND, CRY_MODE_ENCOUNTER)
+    msgbox(format("Something in the jar growls.\p"
+                  "A scruffy face looks up at you, deeply unimpressed."))
+    waitmoncry
+    closemessage
+    random(3)
+    switch (var(VAR_RESULT)) {
+        case 0: setwildbattle(SPECIES_PITHOUND, 14)
+        case 1: setwildbattle(SPECIES_PITHOUND, 15)
+        default: setwildbattle(SPECIES_PITHOUND, 16)
+    }
+    dowildbattle
+    releaseall
+}
+
+// Not in SCRIPT.md's roster: the market's crowd, a line each.
+script EmporionCity_EventScript_SpiceSeller {
+    msgbox(format("Saffron from Thera, sumac from Tyre, salt from right here.\p"
+                  "The salt's the only one I'd swear to."), MSGBOX_NPC)
+}
+
+script EmporionCity_EventScript_Fishmonger {
+    msgbox(format("Bream! Mullet! A tunny the size of a Lakonian!\p"
+                  "Smaller than that one. He ran past here this morning."), MSGBOX_NPC)
+}
+
+script EmporionCity_EventScript_Shopper {
+    msgbox(format("I came for one pot. I've bought a lamp, a scarf and a goat.\p"
+                  "I still haven't found the pot."), MSGBOX_NPC)
+}
+
+script EmporionCity_EventScript_Elder {
+    msgbox(format("I've sat on this bench since the Archon was a boy.\p"
+                  "The prices go up. The bench stays the same."), MSGBOX_NPC)
+}
+
+script EmporionCity_EventScript_Pilgrim {
+    msgbox(format("I'm walking to the Mysteries at Eleusa.\p"
+                  "The Isthmus road's shut, so I pray here till it opens. It's a lot of praying."),
+           MSGBOX_NPC)
+}
+
+script EmporionCity_EventScript_Runner {
+    msgbox(format("Dromokleia runs the letters. I run the ones she's too busy for.\p"
+                  "That's most of them. She's very busy."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// Signs, the herm, the relic gate and the garden
+// ---------------------------------------------------------------------------
+
+script EmporionCity_EventScript_TempleSign {
+    msgbox(format("TEMPLE OF HERMES\nHierophant: Kerykos, the Herald.\p"
+                  "Every road's a short one."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_AsclepeionSign {
+    msgbox(format("ASCLEPEION\nRest for Pokémon and the weary, by the grace of Asclepius."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_AgoraSign {
+    msgbox(format("THE AGORA\nFair weights. Fair measures. Fair warning: mind your figs."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_DeigmaSign {
+    msgbox(format("THE DEIGMA\nMerchants' samples shown within. Look, but don't lick."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_TavernSign {
+    msgbox(format("THE DOLPHIN\nWine, bread, knucklebones. No wagers. (Some wagers.)"), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_HephaisteionSign {
+    msgbox(format("HEPHAISTEION\nThe smith's temple. Kedalion keeps the forge."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_IsthmusGateSign {
+    msgbox(format("THE ISTHMUS GATE\nNorth: the Isthmus road to Eleusa.\p"
+                  "Heralds only during the truce."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_NemeaGateSign {
+    msgbox(format("THE NEMEA GATE\nWest: Route 14 to Nemea."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_ForkSign {
+    msgbox(format("North: the Agora. South: the harbor.\nWest: the Nemea road."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_Peirene {
+    msgbox(format("The water is cold and very sweet."), MSGBOX_SIGN)
+}
+
+// A relic gate (SYSTEMS.md §1): the cistern under the temple terrace opens with
+// Hecate's Torch (beat 18).
+script EmporionCity_EventScript_Cistern {
+    msgbox(format("A black arch under the terrace, its grille torn away.\p"
+                  "Two eyes catch the light, and blink.\p"
+                  "It's pitch dark in there. You'd want a torch."), MSGBOX_SIGN)
+}
+
+script EmporionCity_EventScript_CisternSign {
+    msgbox(format("A painted board: NO LIGHT, NO ENTRY."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_HERM: SYSTEMS.md §4's great herm. EventScript_IchorGreatHerm (ENGINE_API
+// §4) replaces this when it lands; until the Olive Oil item exists, Kerykos's
+// flasks (FLAG_ICHOR_RITES_TUTORIAL) are the oil.
+script EmporionCity_EventScript_GreatHerm {
+    lockall
+    msgbox(format("A great herm, hung with old garlands. Hermes's face, worn smooth."))
+    if (flag(FLAG_ICHOR_HERM_EMPORION)) {
+        msgbox(format("The old stone face still shines with oil."))
+        releaseall
+        end
+    }
+    if (!flag(FLAG_ICHOR_RITES_TUTORIAL)) {
+        releaseall
+        end
+    }
+    msgbox(format("Anoint it with olive oil?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        msgbox(format("The oil runs down the old stone face.\p"
+                      "Somewhere, Hermes makes a note."))
+        setflag(FLAG_ICHOR_HERM_EMPORION)
+    }
+    releaseall
+}
+
+// ICHOR_STUB_DIG: a daily dig spot (the Arachne amphora's, SCRIPT.md Part 6).
+script EmporionCity_EventScript_DigHephaisteion {
+    msgbox(format("The earth in Hephaestus's garden has been turned over.\p"
+                  "Nothing glints today."), MSGBOX_SIGN)
+}

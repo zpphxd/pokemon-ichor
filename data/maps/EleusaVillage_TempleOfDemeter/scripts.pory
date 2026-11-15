@@ -1,0 +1,568 @@
+// The Temple of Demeter at Eleusa, the Telesterion: the Lesser Mysteries
+// (design/phase2/SCRIPT.md Part 5, beat 21's setting, Part 3's acolytes).
+//
+// The hall is laid out by tools/ichor/maps/temple_demeter.py, which also writes
+// map.json's events and the generated block at the end of this file. The trail runs
+// Autumn (front left), Winter (back left), Spring (back right), Summer (front right,
+// across the grain pits). Each brazier's flag is FLAG_ICHOR_BRAZIERS_START + 0x10..0x13
+// in that order (design/phase2/BUILD.md); a lit brazier lights its quarter for good.
+// The next brazier is the first unlit one in season order, and only its seed is set
+// down (the seeds and Hecate's chalk are painted in latent colors: they show when
+// the torch is doused).
+//
+// Temp vars: VAR_TEMP_2 is 1 while the player stands in a lit quarter (the lit-zone
+// triggers read it); VAR_TEMP_3 is 1 once the pits are boarded over (it turns the pit
+// triggers off); VAR_TEMP_5 counts talks with Doso this visit.
+//
+// The story batch adds beat 21's scene (Chloe revealed, her battle, the Harvest
+// Laurel), the acolytes' battles (Part 3), and beats 22 and 25 in this hall.
+//
+// Stubs, until the engine session's batches land (design/phase2/BUILD.md):
+//   ICHOR_STUB_DARKNESS  the Torch: the hall opens at the Torch's radius (flash level
+//                        3) instead of the engine's; StubBrazier stands in for
+//                        EventScript_IchorBrazier, and StubEnterLitZone and
+//                        StubLeaveLitZone for EventScript_IchorEnterLitZone and
+//                        EventScript_IchorLeaveLitZone (ENGINE_API.md §2). Dousing
+//                        (the glow palettes, to see the seeds) waits for the engine.
+//   ICHOR_STUB_RITES     Demeter's great altar shows its text only.
+
+const TD_AUTUMN = FLAG_ICHOR_BRAZIERS_START + 0x10
+const TD_WINTER = FLAG_ICHOR_BRAZIERS_START + 0x11
+const TD_SPRING = FLAG_ICHOR_BRAZIERS_START + 0x12
+const TD_SUMMER = FLAG_ICHOR_BRAZIERS_START + 0x13
+const TD_TORCH_RADIUS = 3       // the flash level SCRIPT.md Part 5 gives the hall with the Torch
+
+mapscripts EleusaVillage_TempleOfDemeter_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // ICHOR_STUB_DARKNESS: the engine will set the Torch's radius itself.
+        setflashlevel(TD_TORCH_RADIUS)
+        setvar(VAR_TEMP_2, 0)
+        if (flag(FLAG_BADGE03_GET)) {
+            setvar(VAR_TEMP_3, 1)
+        }
+        if (flag(FLAG_ICHOR_LESSER_MYSTERIES_DONE)) {
+            clearflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
+        } else {
+            setflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        call(EleusaVillage_TempleOfDemeter_EventScript_DrawHall)
+    }
+}
+
+text EleusaVillage_TempleOfDemeter_Text_NameDoso { "DOSO" }
+text EleusaVillage_TempleOfDemeter_Text_NameKallidike { "KALLIDIKE" }
+text EleusaVillage_TempleOfDemeter_Text_NameEumolpos { "EUMOLPOS" }
+text EleusaVillage_TempleOfDemeter_Text_NameMelissa { "MELISSA" }
+text EleusaVillage_TempleOfDemeter_Text_NameChloe { "CHLOE" }
+
+// ---------------------------------------------------------------------------
+// The people of the hall
+// ---------------------------------------------------------------------------
+
+// Doso sits on the step inside the door (beat 21). Her welcome once; her name the
+// next time; then the safety valve (Part 5).
+script EleusaVillage_TempleOfDemeter_EventScript_Doso {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDoso)
+    if (flag(FLAG_BADGE03_GET)) {
+        msgbox(format("You found the Kore. Most people walk straight past her."))
+    } elif (!flag(FLAG_ICHOR_MET_DOSO)) {
+        msgbox(format("Welcome, child. Mind your feet. It's dark in the goddess's house.\p"
+                      "It's meant to be. The Kore went down into the dark, and stayed a while.\p"
+                      "Her mother searched for her by torchlight. You've a torch, I see.\p"
+                      "Follow the Kore's trail. Put your light out to see it.\p"
+                      "Light it again to see the walls.\p"
+                      "At each step of her trail, give the goddess a fire.\p"
+                      "Somewhere in here is the Mystagogue. You won't see her. She'll see you."))
+        setflag(FLAG_ICHOR_MET_DOSO)
+    } elif (var(VAR_TEMP_5) == 0) {
+        msgbox(format("My name? Doso.\p"
+                      "It's a very common name. Around here."))
+        setvar(VAR_TEMP_5, 1)
+    } else {
+        msgbox(format("Lost? Put your light out and look for the red.\p"
+                      "The goddess always leaves a trail."))
+    }
+    release
+}
+
+// The acolytes stand with their lamps (Part 3). Their battles come with the story
+// batch; until then each gives the hint they give after it.
+script EleusaVillage_TempleOfDemeter_EventScript_Kallidike {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameKallidike)
+    msgbox(format("Put your torch out. Yes, on purpose. The dark won't bite.\p"
+                  "See the seed glowing? That's her trail. Light the brazier beside it."))
+    release
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_Eumolpos {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameEumolpos)
+    msgbox(format("My family's sung here since the first harvest.\p"
+                  "The trail goes cold in winter. So does the goddess. Keep walking."))
+    release
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_Melissa {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameMelissa)
+    msgbox(format("Her priestesses are called bees. Buzz. That's a joke. We don't buzz.\p"
+                  "Bees don't sleep through winter. They huddle and wait. Like us."))
+    release
+}
+
+// Chloe in the Anaktoron's doorway, seen once the fourth brazier burns. Beat 21's
+// scene and her battle come with the story batch.
+script EleusaVillage_TempleOfDemeter_EventScript_Chloe {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameChloe)
+    msgbox(format("…"))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The four season braziers
+// ---------------------------------------------------------------------------
+
+// VAR_RESULT: the next brazier on the trail, 0 Autumn .. 3 Summer, 4 when all burn.
+script EleusaVillage_TempleOfDemeter_EventScript_NextBrazier {
+    if (!flag(TD_AUTUMN)) {
+        setvar(VAR_RESULT, 0)
+    } elif (!flag(TD_WINTER)) {
+        setvar(VAR_RESULT, 1)
+    } elif (!flag(TD_SPRING)) {
+        setvar(VAR_RESULT, 2)
+    } elif (!flag(TD_SUMMER)) {
+        setvar(VAR_RESULT, 3)
+    } else {
+        setvar(VAR_RESULT, 4)
+    }
+    return
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_BrazierAutumn {
+    lockall
+    if (flag(TD_AUTUMN)) {
+        msgbox(format("The brazier burns, and its corner of the hall is warm and gold."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    msgbox(format("A cold bronze brazier. Its plaque shows a falling leaf."), MSGBOX_DEFAULT)
+    setvar(VAR_0x8004, TD_AUTUMN)
+    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_LightAutumn)
+        goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierCaught)
+    }
+    releaseall
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_BrazierWinter {
+    lockall
+    if (flag(TD_WINTER)) {
+        msgbox(format("The brazier burns, and its corner of the hall is warm and gold."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    call(EleusaVillage_TempleOfDemeter_EventScript_NextBrazier)
+    if (var(VAR_RESULT) != 1) {
+        msgbox(format("The brazier won't take. Its plaque shows a bare branch.\p"
+                      "The year isn't there yet."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    msgbox(format("A cold bronze brazier. Its plaque shows a bare branch."), MSGBOX_DEFAULT)
+    setvar(VAR_0x8004, TD_WINTER)
+    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_LightWinter)
+        goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierCaught)
+    }
+    releaseall
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_BrazierSpring {
+    lockall
+    if (flag(TD_SPRING)) {
+        msgbox(format("The brazier burns, and its corner of the hall is warm and gold."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    call(EleusaVillage_TempleOfDemeter_EventScript_NextBrazier)
+    if (var(VAR_RESULT) != 2) {
+        msgbox(format("The brazier won't take. Its plaque shows a sprout.\p"
+                      "The year isn't there yet."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    msgbox(format("A cold bronze brazier. Its plaque shows a sprout."), MSGBOX_DEFAULT)
+    setvar(VAR_0x8004, TD_SPRING)
+    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_LightSpring)
+        goto(EleusaVillage_TempleOfDemeter_EventScript_BrazierCaught)
+    }
+    releaseall
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_BrazierSummer {
+    lockall
+    if (flag(TD_SUMMER)) {
+        msgbox(format("The brazier burns, and its corner of the hall is warm and gold."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    call(EleusaVillage_TempleOfDemeter_EventScript_NextBrazier)
+    if (var(VAR_RESULT) != 3) {
+        msgbox(format("The brazier won't take. Its plaque shows a sheaf.\p"
+                      "The year isn't there yet."), MSGBOX_DEFAULT)
+        releaseall
+        end
+    }
+    msgbox(format("A cold bronze brazier. Its plaque shows a sheaf."), MSGBOX_DEFAULT)
+    setvar(VAR_0x8004, TD_SUMMER)
+    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrazier)
+    if (var(VAR_RESULT) == TRUE) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_LightSummer)
+        special(DrawWholeMapView)
+        msgbox(format("The brazier catches. Its corner of the hall is suddenly, warmly gold.\p"
+                      "Light runs from all four corners to the Anaktoron's door.\p"
+                      "Someone has been standing in it the whole time."), MSGBOX_DEFAULT)
+        call(EleusaVillage_TempleOfDemeter_EventScript_StubBrighten)
+        setflag(FLAG_ICHOR_LESSER_MYSTERIES_DONE)
+        clearflag(FLAG_ICHOR_HIDE_CHLOE_TELESTERION)
+        addobject(LOCALID_TEMPLE_DEMETER_CHLOE)
+    }
+    releaseall
+}
+
+// A brazier has just caught: redraw, the seed goes out, the next begins to glow.
+script EleusaVillage_TempleOfDemeter_EventScript_BrazierCaught {
+    call(EleusaVillage_TempleOfDemeter_EventScript_DrawSeed)
+    special(DrawWholeMapView)
+    msgbox(format("The brazier catches. Its corner of the hall is suddenly, warmly gold.\p"
+                  "The seed at its foot is gone.\p"
+                  "Somewhere else in the dark, another has begun to glow."), MSGBOX_DEFAULT)
+    call(EleusaVillage_TempleOfDemeter_EventScript_StubBrighten)
+    releaseall
+    end
+}
+
+// ICHOR_STUB_DARKNESS: stands in for EventScript_IchorBrazier (ENGINE_API.md §2):
+// asks, lights, sets the brazier's flag (VAR_0x8004); VAR_RESULT is TRUE only when
+// it was lit just now. The engine's version will check the Torch.
+script EleusaVillage_TempleOfDemeter_EventScript_StubBrazier {
+    msgbox(format("Light it with Hecate's Torch?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setvar(VAR_RESULT, FALSE)
+        return
+    }
+    switch (var(VAR_0x8004)) {
+        case TD_AUTUMN:
+            setflag(TD_AUTUMN)
+        case TD_WINTER:
+            setflag(TD_WINTER)
+        case TD_SPRING:
+            setflag(TD_SPRING)
+        case TD_SUMMER:
+            setflag(TD_SUMMER)
+    }
+    playse(SE_M_FLAME_WHEEL2)
+    waitse
+    setvar(VAR_RESULT, TRUE)
+    return
+}
+
+// ICHOR_STUB_DARKNESS: the brazier just lit stands in the player's quarter, so the
+// quarter brightens at once.
+script EleusaVillage_TempleOfDemeter_EventScript_StubBrighten {
+    closemessage
+    setvar(VAR_TEMP_2, 1)
+    animateflash(0)
+    setflashlevel(0)
+    return
+}
+
+// ---------------------------------------------------------------------------
+// The lit quarters (lit zones) and the pits
+// ---------------------------------------------------------------------------
+
+// ICHOR_STUB_DARKNESS: EventScript_IchorEnterLitZone. Brightens the hall while the
+// player is in a quarter whose brazier burns.
+script EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone {
+    if (var(VAR_RESULT) == TRUE) {
+        lockall
+        setvar(VAR_TEMP_2, 1)
+        animateflash(0)
+        setflashlevel(0)
+        releaseall
+    }
+    return
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_EnterAutumn {
+    setvar(VAR_RESULT, FALSE)
+    if (flag(TD_AUTUMN)) {
+        setvar(VAR_RESULT, TRUE)
+    }
+    call(EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone)
+    end
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_EnterWinter {
+    setvar(VAR_RESULT, FALSE)
+    if (flag(TD_WINTER)) {
+        setvar(VAR_RESULT, TRUE)
+    }
+    call(EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone)
+    end
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_EnterSpring {
+    setvar(VAR_RESULT, FALSE)
+    if (flag(TD_SPRING)) {
+        setvar(VAR_RESULT, TRUE)
+    }
+    call(EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone)
+    end
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_EnterSummer {
+    setvar(VAR_RESULT, FALSE)
+    if (flag(TD_SUMMER)) {
+        setvar(VAR_RESULT, TRUE)
+    }
+    call(EleusaVillage_TempleOfDemeter_EventScript_StubEnterLitZone)
+    end
+}
+
+// ICHOR_STUB_DARKNESS: EventScript_IchorLeaveLitZone. Back to the Torch's radius.
+script EleusaVillage_TempleOfDemeter_EventScript_LeaveLitZone {
+    lockall
+    setvar(VAR_TEMP_2, 0)
+    animateflash(TD_TORCH_RADIUS)
+    setflashlevel(TD_TORCH_RADIUS)
+    releaseall
+    end
+}
+
+// A step into a grain pit drops the player, unhurt, onto the tiers by the Spring
+// brazier (Part 5). The pits are black by torchlight and vanish when doused; the
+// chalk between them shows only doused.
+script EleusaVillage_TempleOfDemeter_EventScript_Pit {
+    lockall
+    playse(SE_FALL)
+    msgbox(format("You slide down into a grain pit.\p"
+                  "Someone has helpfully left a ladder."), MSGBOX_DEFAULT)
+    closemessage
+    warpsilent(MAP_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER, 23, 4)
+    waitstate
+    releaseall
+    end
+}
+
+// ---------------------------------------------------------------------------
+// Things to look at
+// ---------------------------------------------------------------------------
+
+// ICHOR_STUB_RITES: Demeter's great altar. When the rites land (ENGINE_API.md §3)
+// this becomes EventScript_IchorTempleAltar_Demeter.
+script EleusaVillage_TempleOfDemeter_EventScript_GreatAltar {
+    msgbox(format("Demeter's great altar. A few grains of barley lie on the bare stone."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_Throne {
+    msgbox(format("The Hierophant's throne. Marble, with a red cushion worn thin."), MSGBOX_SIGN)
+}
+
+// --- Generated by tools/ichor/maps/temple_demeter.py from the room. Do not edit. ---
+
+// Draws the hall from the rite's state: the lit braziers and their quarters,
+// the one seed that glows (the next brazier's), the pits once boarded over,
+// and the Anaktoron's door, shut until the sanctum opens.
+script EleusaVillage_TempleOfDemeter_EventScript_DrawHall {
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x10)) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_LightAutumn)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x11)) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_LightWinter)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x12)) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_LightSpring)
+    }
+    if (flag(FLAG_ICHOR_BRAZIERS_START + 0x13)) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_LightSummer)
+    }
+    call(EleusaVillage_TempleOfDemeter_EventScript_DrawSeed)
+    if (flag(FLAG_BADGE03_GET)) {
+        call(EleusaVillage_TempleOfDemeter_EventScript_BoardPits)
+    }
+    if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {
+        setmetatile(13, 13, 0x28A, TRUE)
+    } else {
+        setmetatile(13, 13, 0x28A, FALSE)
+    }
+    return
+}
+
+// Only the next seed on the trail is set down (latent: it shows when doused).
+script EleusaVillage_TempleOfDemeter_EventScript_DrawSeed {
+    if (!flag(FLAG_ICHOR_BRAZIERS_START + 0x10)) {
+        setmetatile(2, 23, METATILE_TempleDemeter_Floor_Seed, FALSE)
+    }
+    elif (!flag(FLAG_ICHOR_BRAZIERS_START + 0x11)) {
+        setmetatile(2, 8, METATILE_TempleDemeter_Floor_Seed, FALSE)
+    }
+    elif (!flag(FLAG_ICHOR_BRAZIERS_START + 0x12)) {
+        setmetatile(24, 8, METATILE_TempleDemeter_Floor_Seed, FALSE)
+    }
+    elif (!flag(FLAG_ICHOR_BRAZIERS_START + 0x13)) {
+        setmetatile(24, 23, METATILE_TempleDemeter_Floor_Seed, FALSE)
+    }
+    return
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_LightAutumn {
+    setmetatile(2, 21, METATILE_TempleDemeter_BrazierTop_Lit, TRUE)
+    setmetatile(2, 22, METATILE_TempleDemeter_BrazierAutumn_Lit, TRUE)
+    setmetatile(1, 21, METATILE_TempleDemeter_Glow_L0, FALSE)
+    setmetatile(3, 21, METATILE_TempleDemeter_Glow_R0, FALSE)
+    setmetatile(1, 22, METATILE_TempleDemeter_Glow_L1, FALSE)
+    setmetatile(3, 22, METATILE_TempleDemeter_Glow_R1, FALSE)
+    setmetatile(1, 23, METATILE_TempleDemeter_Glow_BL, FALSE)
+    setmetatile(2, 23, METATILE_TempleDemeter_Glow_B, FALSE)
+    setmetatile(3, 23, METATILE_TempleDemeter_Glow_BR, FALSE)
+    setmetatile(6, 18, METATILE_TempleDemeter_Glow_L0, FALSE)
+    setmetatile(8, 18, METATILE_TempleDemeter_Glow_R0, FALSE)
+    setmetatile(6, 19, METATILE_TempleDemeter_Glow_L1, FALSE)
+    setmetatile(8, 19, METATILE_TempleDemeter_Glow_R1, FALSE)
+    setmetatile(6, 20, METATILE_TempleDemeter_Glow_BL, FALSE)
+    setmetatile(7, 20, METATILE_TempleDemeter_Glow_B, FALSE)
+    setmetatile(8, 20, METATILE_TempleDemeter_Glow_BR, FALSE)
+    setmetatile(7, 18, METATILE_TempleDemeter_ColumnTorch_Lit, TRUE)
+    setmetatile(7, 19, METATILE_TempleDemeter_ColumnBottom_Lit, TRUE)
+    return
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_LightWinter {
+    setmetatile(2, 6, METATILE_TempleDemeter_BrazierTop_Lit, TRUE)
+    setmetatile(2, 7, METATILE_TempleDemeter_BrazierWinter_Lit, TRUE)
+    setmetatile(1, 6, METATILE_TempleDemeter_Glow_L0, FALSE)
+    setmetatile(3, 6, METATILE_TempleDemeter_Glow_R0, FALSE)
+    setmetatile(1, 7, METATILE_TempleDemeter_Glow_L1, FALSE)
+    setmetatile(3, 7, METATILE_TempleDemeter_Glow_R1, FALSE)
+    setmetatile(1, 8, METATILE_TempleDemeter_Glow_BL, FALSE)
+    setmetatile(2, 8, METATILE_TempleDemeter_Glow_B, FALSE)
+    setmetatile(3, 8, METATILE_TempleDemeter_Glow_BR, FALSE)
+    setmetatile(6, 9, METATILE_TempleDemeter_Glow_L0, FALSE)
+    setmetatile(8, 9, METATILE_TempleDemeter_Glow_R0, FALSE)
+    setmetatile(6, 10, METATILE_TempleDemeter_Glow_L1, FALSE)
+    setmetatile(8, 10, METATILE_TempleDemeter_Glow_R1, FALSE)
+    setmetatile(6, 11, METATILE_TempleDemeter_Glow_BL, FALSE)
+    setmetatile(7, 11, METATILE_TempleDemeter_Glow_B, FALSE)
+    setmetatile(8, 11, METATILE_TempleDemeter_Glow_BR, FALSE)
+    setmetatile(7, 9, METATILE_TempleDemeter_ColumnTorch_Lit, TRUE)
+    setmetatile(7, 10, METATILE_TempleDemeter_ColumnBottom_Lit, TRUE)
+    setmetatile(4, 2, METATILE_TempleDemeter_Sconce_Lit, TRUE)
+    setmetatile(10, 2, METATILE_TempleDemeter_Sconce_Lit, TRUE)
+    return
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_LightSpring {
+    setmetatile(24, 6, METATILE_TempleDemeter_BrazierTop_Lit, TRUE)
+    setmetatile(24, 7, METATILE_TempleDemeter_BrazierSpring_Lit, TRUE)
+    setmetatile(23, 6, METATILE_TempleDemeter_Glow_L0, FALSE)
+    setmetatile(25, 6, METATILE_TempleDemeter_Glow_R0, FALSE)
+    setmetatile(23, 7, METATILE_TempleDemeter_Glow_L1, FALSE)
+    setmetatile(25, 7, METATILE_TempleDemeter_Glow_R1, FALSE)
+    setmetatile(23, 8, METATILE_TempleDemeter_Glow_BL, FALSE)
+    setmetatile(24, 8, METATILE_TempleDemeter_Glow_B, FALSE)
+    setmetatile(25, 8, METATILE_TempleDemeter_Glow_BR, FALSE)
+    setmetatile(18, 9, METATILE_TempleDemeter_Glow_L0, FALSE)
+    setmetatile(20, 9, METATILE_TempleDemeter_Glow_R0, FALSE)
+    setmetatile(18, 10, METATILE_TempleDemeter_Glow_L1, FALSE)
+    setmetatile(20, 10, METATILE_TempleDemeter_Glow_R1, FALSE)
+    setmetatile(18, 11, METATILE_TempleDemeter_Glow_BL, FALSE)
+    setmetatile(19, 11, METATILE_TempleDemeter_Glow_B, FALSE)
+    setmetatile(20, 11, METATILE_TempleDemeter_Glow_BR, FALSE)
+    setmetatile(19, 9, METATILE_TempleDemeter_ColumnTorch_Lit, TRUE)
+    setmetatile(19, 10, METATILE_TempleDemeter_ColumnBottom_Lit, TRUE)
+    setmetatile(16, 2, METATILE_TempleDemeter_Sconce_Lit, TRUE)
+    setmetatile(22, 2, METATILE_TempleDemeter_Sconce_Lit, TRUE)
+    return
+}
+
+script EleusaVillage_TempleOfDemeter_EventScript_LightSummer {
+    setmetatile(24, 21, METATILE_TempleDemeter_BrazierTop_Lit, TRUE)
+    setmetatile(24, 22, METATILE_TempleDemeter_BrazierSummer_Lit, TRUE)
+    setmetatile(24, 23, METATILE_TempleDemeter_Glow_B, FALSE)
+    setmetatile(19, 18, METATILE_TempleDemeter_ColumnTorch_Lit, TRUE)
+    setmetatile(19, 19, METATILE_TempleDemeter_ColumnBottom_Lit, TRUE)
+    return
+}
+
+// After the Harvest Laurel the pits are boarded over: plain floor.
+script EleusaVillage_TempleOfDemeter_EventScript_BoardPits {
+    setmetatile(19, 17, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(20, 17, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(21, 17, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(22, 17, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(23, 17, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(24, 17, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(25, 17, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(17, 18, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(20, 18, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(21, 18, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(23, 18, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(24, 18, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(25, 18, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(17, 19, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(20, 19, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(21, 19, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(23, 19, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(24, 19, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(25, 19, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(16, 20, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(17, 20, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(21, 20, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(22, 20, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(23, 20, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(24, 20, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(25, 20, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(17, 21, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(18, 21, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(21, 21, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(23, 21, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(25, 21, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(17, 22, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(18, 22, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(23, 22, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(25, 22, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(16, 23, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(17, 23, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(18, 23, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(19, 23, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(20, 23, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(25, 23, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(16, 24, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(17, 24, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(18, 24, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(19, 24, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(20, 24, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(21, 24, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(22, 24, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(23, 24, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(24, 24, METATILE_TempleDemeter_Floor, FALSE)
+    setmetatile(25, 24, METATILE_TempleDemeter_Floor, FALSE)
+    return
+}
+
+// --- End of the generated block. ---

@@ -1028,6 +1028,7 @@ gSpecials::
 	def_special UpdateTrainerCardPhotoIcons
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
+	def_special Ichor_SetHoursOverride
 	@ Ichor: relics (src/ichor_relics.c)
 	def_special Ichor_CanUseRelic
 	def_special Ichor_RelicPromptsAuto

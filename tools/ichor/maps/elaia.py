@@ -729,6 +729,9 @@ def write_events(g):
                         for x, y, d, i in WARPS]
     coords = [(x, y, "FLAG_ICHOR_GOT_STARTER", "ShepherdGate") for x, y in SHEPHERD_ROW]
     coords += [(x, y, "FLAG_ICHOR_THREAD_READ", "HaliaCalls") for x, y in halia_ring(g)]
+    # Phase 2 beat 9A: after the slice, the same ring brings you to Halia once more.
+    # The script returns at once until FLAG_ICHOR_SLICE_COMPLETE is set.
+    coords += [(x, y, "FLAG_ICHOR_HALIA_SECOND_LOOK", "HaliaSecondLook") for x, y in halia_ring(g)]
     coords += [(x, y, "FLAG_ICHOR_KLEON_BATTLE_1_DONE", "KleonTrigger") for x, y in KLEON_STEPS]
     door = SPOTS["door_akademia"]
     coords.append((door[0], door[1] + 1, "FLAG_ICHOR_THREAD_READ", "AkademiaNote"))

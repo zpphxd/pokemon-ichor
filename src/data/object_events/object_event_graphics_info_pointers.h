@@ -432,6 +432,20 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAcolyt
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorTablet;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatL;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorUpturnedBoatR;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPilgrim;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPronomos;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorEndeis;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorPheidon;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorAiakides;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKedalion;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonSeasick;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKleonTablet;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEggs;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestHatching;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorNestEmpty;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeBow;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDarkTriremeStern;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorKerykos;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorSam;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorApollo;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCami;
@@ -861,6 +875,20 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ICHOR_TABLET] =             &gObjectEventGraphicsInfo_IchorTablet,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatL,
     [OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R] =    &gObjectEventGraphicsInfo_IchorUpturnedBoatR,
+    [OBJ_EVENT_GFX_ICHOR_PILGRIM] =            &gObjectEventGraphicsInfo_IchorPilgrim,
+    [OBJ_EVENT_GFX_ICHOR_PRONOMOS] =           &gObjectEventGraphicsInfo_IchorPronomos,
+    [OBJ_EVENT_GFX_ICHOR_ENDEIS] =             &gObjectEventGraphicsInfo_IchorEndeis,
+    [OBJ_EVENT_GFX_ICHOR_PHEIDON] =            &gObjectEventGraphicsInfo_IchorPheidon,
+    [OBJ_EVENT_GFX_ICHOR_AIAKIDES] =           &gObjectEventGraphicsInfo_IchorAiakides,
+    [OBJ_EVENT_GFX_ICHOR_KEDALION] =           &gObjectEventGraphicsInfo_IchorKedalion,
+    [OBJ_EVENT_GFX_ICHOR_KLEON_SEASICK] =      &gObjectEventGraphicsInfo_IchorKleonSeasick,
+    [OBJ_EVENT_GFX_ICHOR_KLEON_TABLET] =       &gObjectEventGraphicsInfo_IchorKleonTablet,
+    [OBJ_EVENT_GFX_ICHOR_NEST_EGGS] = &gObjectEventGraphicsInfo_IchorNestEggs,
+    [OBJ_EVENT_GFX_ICHOR_NEST_HATCHING] = &gObjectEventGraphicsInfo_IchorNestHatching,
+    [OBJ_EVENT_GFX_ICHOR_NEST_EMPTY] = &gObjectEventGraphicsInfo_IchorNestEmpty,
+    [OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_BOW] = &gObjectEventGraphicsInfo_IchorDarkTriremeBow,
+    [OBJ_EVENT_GFX_ICHOR_DARK_TRIREME_STERN] = &gObjectEventGraphicsInfo_IchorDarkTriremeStern,
+    [OBJ_EVENT_GFX_ICHOR_KERYKOS] =            &gObjectEventGraphicsInfo_IchorKerykos,
     [OBJ_EVENT_GFX_ICHOR_SAM] =                &gObjectEventGraphicsInfo_IchorSam,
     [OBJ_EVENT_GFX_ICHOR_APOLLO] =             &gObjectEventGraphicsInfo_IchorApollo,
     [OBJ_EVENT_GFX_ICHOR_CAMI] =               &gObjectEventGraphicsInfo_IchorCami,

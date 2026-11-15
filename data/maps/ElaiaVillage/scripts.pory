@@ -69,6 +69,14 @@ script ElaiaVillage_EventScript_SetUpVillage {
         setobjectmovementtype(LOCALID_ELAIA_SHEPHERD, MOVEMENT_TYPE_FACE_LEFT)
         setflag(FLAG_ICHOR_HIDE_SCRIBE)          // gone with the festival crowd
     }
+    if (flag(FLAG_ICHOR_SLICE_COMPLETE)) {
+        // Phase 2 beat 9A: the festival is over. Halia sits alone under the
+        // canopy; Korinna and Philon have gone back to the stalls and the well.
+        setobjectxyperm(LOCALID_ELAIA_KORINNA, 20, 22)
+        setobjectmovementtype(LOCALID_ELAIA_KORINNA, MOVEMENT_TYPE_FACE_UP)
+        setobjectxyperm(LOCALID_ELAIA_PHILON, 22, 18)
+        setobjectmovementtype(LOCALID_ELAIA_PHILON, MOVEMENT_TYPE_FACE_LEFT)
+    }
 }
 
 // Walk the player to (VAR_0x8008, VAR_0x8009): down or up first, then across.
@@ -233,7 +241,9 @@ script ElaiaVillage_EventScript_Halia {
     }
     faceplayer
     setspeaker(ElaiaVillage_Name_Halia)
-    if (flag(FLAG_ICHOR_GOT_STARTER)) {
+    if (flag(FLAG_ICHOR_HALIA_SECOND_LOOK)) {
+        msgbox(format("Go on. The wind won't wait, and neither will your mother."))
+    } elif (flag(FLAG_ICHOR_GOT_STARTER)) {
         msgbox(format("Daphne found you a partner? Good.\pWhatever's on your thread, you won't walk it alone."))
     } else {
         msgbox(format("Come back after the festival. My eyes are tired today."))
@@ -605,5 +615,52 @@ script ElaiaVillage_EventScript_Well {
             setflag(FLAG_ICHOR_GOT_ELAIA_RELIC_COPPER)
         }
     }
+    releaseall
+}
+
+// ---------------------------------------------------------------------------
+// Phase 2 beat 9A: Halia's second look (design/phase2/SCRIPT.md).
+// The ring of triggers round the canopy (elaia.py) runs this until it is done;
+// before the slice is finished it does nothing. The player is walked to the
+// first place in the old line, (14,20), in front of Halia.
+// ---------------------------------------------------------------------------
+script ElaiaVillage_EventScript_HaliaSecondLook {
+    if (!flag(FLAG_ICHOR_SLICE_COMPLETE)) {
+        end
+    }
+    lockall
+    applymovement(LOCALID_ELAIA_HALIA, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(ElaiaVillage_Name_Halia)
+    msgbox(format("There you are. Sit. No, closer."))
+    closemessage
+    setvar(VAR_0x8008, 14)
+    setvar(VAR_0x8009, 20)
+    call(ElaiaVillage_EventScript_WalkPlayer)
+    applymovement(LOCALID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(ElaiaVillage_Name_Halia)
+    msgbox(format("I said the light was poor, at the festival. It wasn't the light."))
+    closemessage
+    // She lights a small clay lamp and holds it low over your hand.
+    playse(SE_M_EMBER)
+    waitse
+    delay(60)
+    setspeaker(ElaiaVillage_Name_Halia)
+    msgbox(format("…\p"
+                  "Forty years I've read threads under this tree.\p"
+                  "Forty years, and I've never once seen nothing.\p"
+                  "Don't look at me like that. I don't know what it means.\p"
+                  "That's what frightens me.\p"
+                  "I've sent a gull to Daphne. She'll know what to make of it.\p"
+                  "Or she'll pretend to. She's very good at pretending to.\p"
+                  "Go on. Your mother's gone down to the harbor. The wind's turning.\p"
+                  "I can smell it."))
+    closemessage
+    setflag(FLAG_ICHOR_HALIA_SECOND_LOOK)
+    // Mom goes down to Akti's quay to see you off (beat 9B).
+    setflag(FLAG_ICHOR_HIDE_MOM_HOME)
+    clearflag(FLAG_ICHOR_HIDE_MOM_AKTI)
+    clearflag(FLAG_ICHOR_HIDE_KLEON_AKTI_DOOR)
     releaseall
 }
