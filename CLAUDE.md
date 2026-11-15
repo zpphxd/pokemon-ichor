@@ -47,7 +47,7 @@ mgba pokeemerald.gba                   # play it
 - **Flags and vars.**
   - Claim an unused one by renaming its `FLAG_UNUSED_0x…` or `VAR_UNUSED_0x…` line in `include/constants/flags.h` or `vars.h` to `FLAG_ICHOR_<NAME>` or `VAR_ICHOR_<NAME>`, with a comment.
   - Never reuse an `ICHOR_` one. `grep -n ICHOR_ include/constants/` lists what is taken.
-  - Prefer Ichor's own banks, saved in IchorSave: `tools/ichor/claim.py bankflag`, `dailyflag` or `bankvar` (2,048 flags, 256 daily flags, 32 vars). They work with every flag and var command. See `design/ENGINE_API.md` §1.
+  - Prefer Ichor's own banks, saved in IchorSave: `tools/ichor/claim.py bankflag`, `dailyflag` or `bankvar` (3,584 flags in two banks, 256 daily flags, 32 vars). They work with every flag and var command. See `design/ENGINE_API.md` §1.
 - **Config changes** go in `include/config/*.h`. Note why in the commit message.
 - **Naming.**
   - Place, character and item names come from the bible.

@@ -2,7 +2,7 @@
 
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, K, emu = L.S, L.K, L.emu
-local log, expect, wait, shot, settle = L.log, L.expect, L.wait, L.shot, L.settle
+local log, expect, wait, shot, settle, tap = L.log, L.expect, L.wait, L.shot, L.settle, L.tap
 
 local PX, PY = 6, 45                 -- in Route 1's south grass
 local WOOLOO_A, WOOLOO_B = 5, 6      -- the two wandering Wooloo (one palette)
@@ -114,6 +114,22 @@ L.start(function()
   expect(ax == ax2 and ay == ay2 and bx == bx2 and by == by2, "five seconds on, the flock hasn't moved")
   shot("frozen")
 
+  -- Talking to the frozen: the generic lines (Phase 4 SCRIPT.md Part 2)
+  local function talk(name)
+    emu:write16(S.gSpecialVar_Result, 0xBEEF)
+    tap(K.A)
+    local box = false
+    for _ = 1, 60 do wait(1) if L.boxUp() then box = true end end
+    shot(name)
+    local line = emu:read16(S.gSpecialVar_Result)
+    settle()
+    return box, line
+  end
+  L.step(K.LEFT); L.step(K.LEFT); L.face(K.UP)    -- (4,45), under the first Wooloo
+  local box, line = talk("talk_wooloo")
+  expect(box and line == 3, "a frozen Wooloo: \"It's frozen with its ears up, listening for something.\"")
+  L.step(K.RIGHT); L.step(K.RIGHT)
+
   -- No wild Pokémon in the tall grass
   local steps, taken = 0, 0
   for _ = 1, 8 do
@@ -131,6 +147,17 @@ L.start(function()
   wait(90)
   expect(x == 9 and y == 49 and L.idle() and not L.inBattle(), string.format("in the shepherd's sight at (%d,%d), he stays frozen", x, y))
   shot("unseen")
+
+  L.step(K.RIGHT); L.step(K.RIGHT)               -- (11,49), face to face
+  box, line = talk("talk_shepherd")
+  expect(box and line == 1 and not L.inBattle(), "talking to the frozen shepherd (local id 4): \"Frozen mid-step...\", no battle")
+  L.runHeader("FrozenTest_ScriptsHereHeader")
+  tap(K.A)
+  settle({ limit = 20000 })                      -- his intro, then the battle
+  L.waitUntil(L.idle, 3000, "the field after the battle")
+  expect(L.defeated(S.TRAINER_ICHOR_TITYROS), "on a map that answers for itself (Ichor_FrozenScriptsHere), his own script runs: a battle")
+  wait(30)
+  expect(grayBgCount() == 13 and frozen(obj(WOOLOO_A)), "after a battle the world is still gray and still")
 
   -- releaseall doesn't thaw anyone
   run("FrozenTest_LockReleaseHeader")

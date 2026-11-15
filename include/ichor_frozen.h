@@ -16,5 +16,6 @@ bool32 Ichor_IsHeldByFrozenHour(struct ObjectEvent *objectEvent); // trainer_see
 bool32 Ichor_KeepsObjectFrozen(struct ObjectEvent *objectEvent);  // event_object_movement.c
 void Ichor_FrozenHourFrame(void);                        // overworld.c, every field frame
 void Ichor_FrozenHourOnMapTransition(void);
+const u8 *Ichor_FrozenTalkScript(u32 objectEventId, const u8 *script); // field_control_avatar.c
 
 #endif // GUARD_ICHOR_FROZEN_H
