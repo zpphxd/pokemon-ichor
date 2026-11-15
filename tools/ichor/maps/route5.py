@@ -1131,7 +1131,7 @@ def people(im, pad=0):
 # Where the player stands for each 15x10 review view, along the road.
 VIEWS = [
     ("01_mouth", 10, 10), ("02_clearing", 17, 7), ("03_seat", 25, 9), ("04_knoll", 31, 6),
-    ("05_hollow", 40, 9), ("06_fork", 47, 10), ("07_meadow", 54, 6), ("08_cutting", 46, 15),
+    ("05_hollow", 40, 9), ("06_fork", 47, 10), ("07_meadow", 55, 2), ("08_cutting", 46, 15),
     ("09_niches", 40, 16), ("10_stair", 38, 20), ("11_point", 37, 23), ("12_fisher", 42, 23),
     ("13_band3", 48, 22), ("14_inn", 54, 22), ("15_east", 62, 22),
 ]

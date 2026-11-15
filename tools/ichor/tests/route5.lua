@@ -36,26 +36,6 @@ local function talk(target, what, opts)
   return boxes
 end
 
--- A level-100 lead, written into party slot 0 (personality and OT id 0, so the
--- box data's substructs sit in order unencrypted), then raised by slice_lib's assist.
-local function giveLead()
-  local mon = L.partyMon(0)
-  for o = 0, S.POKEMON_SIZE - 1 do emu:write8(mon + o, 0) end
-  for k, b in ipairs({ 0xCE, 0xBF, 0xCD, 0xCE, 0xFF }) do emu:write8(mon + 7 + k, b) end -- "TEST"
-  emu:write8(mon + 18, 2)
-  emu:write8(mon + 19, 0x02)
-  emu:write8(mon + 20, 0xFF)
-  emu:write16(mon + S.OFF_BOXMON_SECURE, S.SPECIES_LEAD & 0x7FF)
-  local sum = 0
-  for o = 0, 47, 2 do sum = sum + emu:read16(mon + S.OFF_BOXMON_SECURE + o) end
-  emu:write16(mon + S.OFF_BOXMON_CHECKSUM, sum & 0xFFFF)
-  emu:write8(mon + S.OFF_MON_LEVEL, 5)
-  emu:write8(S.gPartiesCount, 1)
-  L.assistLevel100()
-  local hp, maxhp = L.partyHp(0)
-  expect(L.partyLevel(0) == S.MAX_LEVEL and hp > 0, string.format("a level-100 lead (HP %d/%d)", hp, maxhp))
-end
-
 local function nickname(slot)
   local s = ""
   for i = 0, 9 do
@@ -152,6 +132,7 @@ end
 
 local function meadow()
   L.setBeat("meadow", false)
+  quiet()
   talk(L.sign(R .. "MeadowSign"), "the meadow's sign", { shots = { [1] = "read_MeadowSign" } })
   trainer(S.TRAINER_ARISTAIOS, "Aristaios", "Aristaios", true)
   talk(L.sign(R .. "Hives"), "the hives")
@@ -167,6 +148,7 @@ end
 
 local function terrace()
   L.setBeat("terrace", false)
+  quiet()
   trainer(S.TRAINER_MYRTO, "Myrto", "Myrto", true)
   talk(L.sign(R .. "Niches"), "Aphrodite's niches", { shots = { [1] = "read_Niches" } })
   talk(L.sign("EventScript_IchorAltar_Aphrodite"), "Aphrodite's altar (prayer)", { shots = { [1] = "altar" } })
@@ -184,6 +166,7 @@ end
 
 local function shore()
   L.setBeat("shore", false)
+  quiet()
   trainer(S.TRAINER_MOPSOS, "Mopsos", "Mopsos")
   L.shot("past_the_stair")
   L.talk(L.hidden(S.FLAG_HIDDEN_HEART_SCALE))
@@ -200,7 +183,9 @@ end
 
 local function inn()
   L.setBeat("inn", false)
+  quiet()
   talk(L.sign(R .. "InnSign"), "the inn's sign")
+  L.runHeader("Route5Test_OnotisHeader")              -- an Onotis to trade, in party slot 1
   L.useWarp(S.MAP_REST_HOUSE)
   expect(L.mapId() == S.MAP_REST_HOUSE, "through the inn's door")
   L.shot("inn_room")
@@ -249,6 +234,7 @@ end
 
 local function eastEnd()
   L.setBeat("east end", false)
+  quiet()
   local oil = L.itemCount(S.ITEM_OLIVE_OIL)
   talk(L.sign("EventScript_IchorGreatHerm"), "the great herm", { answers = { "yes" }, shots = { [2] = "herm" } })
   expect(L.getFlag(S.FLAG_HERM_ROUTE5) and L.itemCount(S.ITEM_OLIVE_OIL) == oil - 1,
@@ -275,9 +261,14 @@ end
 
 L.start(function()
   L.quickstart()
-  giveLead()
-  L.loadBlob()             -- the assist's RAM script was written over the blob's start
+  -- the setup gives a level-100 Swampert, with its moves, to win the trainers'
+  -- battles with its first one (the Onotis for the inn's trade comes at the inn)
   L.runHeader("Route5Test_SetupHeader", { limit = 4000 })
+  expect(L.partyLevel(0) == S.MAX_LEVEL, "a level-100 lead")
+  -- Wild battles are fought, not run from: the route's Spalunk (Diglett until the
+  -- dex lands) has Arena Trap, and slice_lib's battle player fights a wild one
+  -- only while FLAG_ICHOR_NO_RUNNING is set.
+  L.setFlag(S.FLAG_NO_RUNNING, true)
   L.waitUntil(function() return L.mapId() == S.MAP_ROUTE5 and L.idle() end, 3000, "the warp to Route 5")
   L.wait(30)
   quiet()

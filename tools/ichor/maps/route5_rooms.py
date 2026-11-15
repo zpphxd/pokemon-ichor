@@ -87,6 +87,8 @@ ROOMS = {
             ("sack", 12, 2),
             ("water_jar", 15, 6),
             ("sack", 12, 8),
+            ("crate", 15, 8),
+            ("sack", 13, 8),
         ],
         "spots": [
             ("warp", "door to Route 5 (south-arrow mat)", [(7, 8), (8, 8)]),

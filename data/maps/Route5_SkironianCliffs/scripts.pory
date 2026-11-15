@@ -24,7 +24,8 @@ text Route5_SkironianCliffs_Text_NameMelanthios { "MELANTHIOS" }
 text Route5_SkironianCliffs_Text_NameMyrto { "MYRTO" }
 text Route5_SkironianCliffs_Text_NameAristaios { "ARISTAIOS" }
 text Route5_SkironianCliffs_Text_NameMopsos { "MOPSOS" }
-text Route5_SkironianCliffs_Text_NamePitchGatherer { "PITCH-GATHERER" }
+// SCRIPT.md's PITCH-GATHERER is 67 px in the name box's font; the box holds 64.
+text Route5_SkironianCliffs_Text_NamePitchGatherer { "RESIN TAPPER" }
 text Route5_SkironianCliffs_Text_NameAigialeus { "AIGIALEUS" }
 text Route5_SkironianCliffs_Text_NameInitiate { "INITIATE" }
 

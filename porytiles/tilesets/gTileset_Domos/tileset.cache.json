@@ -1,6 +1,6 @@
 {
-  "data/tilesets/secondary/domos/porytiles_bin/metatile_attributes.bin": "91887d51e95fc6d654dea4887ecae227",
-  "data/tilesets/secondary/domos/porytiles_bin/metatiles.bin": "a8ccb6ddeee8b94d0085864ba3bd7d0a",
+  "data/tilesets/secondary/domos/porytiles_bin/metatile_attributes.bin": "fa364aab6e15b3e315f55201e9f074dd",
+  "data/tilesets/secondary/domos/porytiles_bin/metatiles.bin": "98ba3b55cb0ecfca71784cfbe2d45810",
   "data/tilesets/secondary/domos/porytiles_bin/palettes/00.pal": "395259102cd54e1a0568846a8d0a51c7",
   "data/tilesets/secondary/domos/porytiles_bin/palettes/01.pal": "18e095382615dc1fa5ddc1c7bcbbfd39",
   "data/tilesets/secondary/domos/porytiles_bin/palettes/02.pal": "c97ed6720ac909f75f122470b62ae8e2",
@@ -17,9 +17,9 @@
   "data/tilesets/secondary/domos/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/domos/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/domos/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/domos/porytiles_bin/tiles.png": "a792a6755a2b7da1477aa95a112ca165",
+  "data/tilesets/secondary/domos/porytiles_bin/tiles.png": "bb1aa71878ede1efdfdb1d21ab76ef03",
   "data/tilesets/secondary/domos/porytiles_src/attributes.csv": "19d3c4c7337510bd6aa08c623417c693",
-  "data/tilesets/secondary/domos/porytiles_src/bottom.png": "7ede3c01d80861b5b8d08633eb684a53",
-  "data/tilesets/secondary/domos/porytiles_src/middle.png": "a32120c6d4326155026f29048f7826d9",
+  "data/tilesets/secondary/domos/porytiles_src/bottom.png": "4d70e207691c9441a86cc01551258704",
+  "data/tilesets/secondary/domos/porytiles_src/middle.png": "48659168c7ad5b2b106d1ef96ed15d5b",
   "data/tilesets/secondary/domos/porytiles_src/top.png": "0f5a72cd14d5f4ea431ba1bf10adfb05"
 }

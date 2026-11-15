@@ -204,7 +204,7 @@ Built: **185** metatiles (`0x200`-`0x2b8`) of 512, **436** tiles of 504, palette
 
 <!-- domos_build: begin generated -->
 
-Built: **165** metatiles (`0x200`-`0x2a4`) of 512, **408** tiles of 504, palettes 6-12.
+Built: **166** metatiles (`0x200`-`0x2a5`) of 512, **412** tiles of 504, palettes 6-12.
 
 | Piece | Metatile |
 |---|---|
@@ -297,6 +297,7 @@ Built: **165** metatiles (`0x200`-`0x2a4`) of 512, **408** tiles of 504, palette
 | `drying_shelf` | 2x2 | clay | limen | 279 27A / 27F 280 (potter) | long shelves of new cups and jars drying, not yet painted |
 | `scrawl` | 2x1 | wall | limen | 27B 27C (potter) | EUPHRONIOS PAINTED ME, scrawled in black slip on the plaster (here, the first word) |
 | `clay_bin` | 1x1 | clay | limen | 28D (potter) | a stone basin of wet clay, kneaded and waiting |
+| `crate` | 1x1 | wood | limen | 2A5 (rest_house) | a plank crate, nailed shut |
 | `shed_doors` | 2x2 | wood | limen | 297 298 / 29B 29C (rest_house) | the great double doors out to the shipsheds, barred from inside |
 
 <!-- domos_build: end generated -->

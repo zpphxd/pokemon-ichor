@@ -109,8 +109,30 @@ Also `FLAG_ICHOR_ROUTE5_THICKET_CUT` and `FLAG_ICHOR_ROUTE5_RUBBLE_BROKEN` (the 
 **Pass 3** (with people):
 - *Kynegeiros and Mopsos could block the road.* A trainer who sees the player walks up to them and stays; with sight 3 into a 1-wide ledge or stair, he'd end up standing in it, and the player couldn't get past (the in-game walk found it: "no path"). **Fix:** both stand beside the one cell out of the narrow way and see only that cell. `route5.py` now checks every trainer's possible stopping cells.
 - *The woods were speckled with grey rocks* in rows. **Fix:** fewer rocks in the woods' single cells, more oak.
+- *The pitch-gatherer's name overflowed its box.* PITCH-GATHERER is 67 px in the name box's small font, and the box holds 64. **Fix:** RESIN TAPPER (56 px). Every other line was measured with `text_width.py --scan` on the compiled scripts: none is over 216 px.
+- *The view at the meadow's top edge* shows the border: a row of Aleppo pines, which reads as the mountain's forest going on. The west edge's border is never seen (nothing walkable within 7 columns of it), nor the south's (the lowest walkable row is six rows above it).
+
+## In game
+
+`tools/ichor/tests/route5.sh` plays the road from a Quickstart (screenshots in `build/test_route5/shots/`). What the screenshots showed:
+- The warp onto the mouth's door walks the player out of the cave to (9,9), under the "ROUTE 5" popup, with the road's tune (its night form after dark).
+- The strait shows at the bottom of the screen all along the cliff road; the seat reads as a throne on the edge with Kynegeiros beside it; the niches and the altar stone read at a glance.
+- Night tables are live: the first run met a wild Gelasable at 20 in the clearing's band after dark, the next a Pebblith, then a Galekit.
+- The followers walk behind the player on the one-cell ledge and the cleft stair without blocking either.
+- Two things the walk found and the map fixed: Kynegeiros and Mopsos walking into the narrow ways (pass 3), and the pitch-gatherer's long name.
 
 ## The inn's room
+
+Thria moved to Act II, so its **Inn of the Plain** stands on the road instead, at the cliffs' foot where the road comes out onto Eleusa's plain: SCRIPT.md Part 2's Xenokles (rest, and his trade: an Onotis for his Gelasable GALANTHIS, Lv 19, holding a Leppa Berry) and his stable boy (the Lakonian who ran into both doorposts). Thria's other two households, the sisters and Trygaios, stay with world-act2; so does Trygaios's sow, which the script put in this road's thyme meadow.
+
+One long, low common room on domos (the set Emporion's town rooms share; its cells are appended after theirs, so their ids don't move): the pilgrims' pallets at the west end with their sandals on pegs over them (Galanthis takes the left ones), the road scratched on the plaster by every guest, the hearth halfway down with its soot up the wall, the table between its benches, a krater and a rack of wine jars, the washbasin by the door (a guest's feet come first), and through two posts the stable: trodden earth, feed sacks, a crate, the water jar and the barred doors to the donkey yard, where the Onotis stands after the trade. It plays `MUS_ICHOR_ELEUSA`, the plain's village.
+
+**Passes:**
+1. *The table and its benches, the pots and the washbasin walled the west end off* from the door: Galanthis, the pallets and the road on the wall couldn't be reached (the room build's spot check). **Fix:** the table group moved west and down, the pots to the hearth's other side, the washbasin beside the mat.
+2. *The lampstand shut the pallets' corner* off again. **Fix:** it stands by the stable's posts, lighting the way through.
+3. *The stable was bare* beside the busy common room: two sacks, a jar and the doors. **Fix:** another feed sack and a crate along its south wall, clear of the stall where the Onotis stands and the stable boy works.
+
+## The inn's room, as built
 
 <!-- domos_build: begin generated -->
 
@@ -131,7 +153,7 @@ Walk map: `#` blocked, `.` open. Digits and letters mark the spots in the table;
   5 ...###..........
   6 #..##.....##..3#
   7 #.....#...##...#
-  8 ......911..##...
+  8 ......911..###.#
 ```
 
 | # | Kind | Tile | Read from | What |

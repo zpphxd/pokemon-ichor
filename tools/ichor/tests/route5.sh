@@ -27,4 +27,4 @@ engine_prepare ROUTE5 "$OUT" tools/ichor/tests/route5_consts.c tools/ichor/tests
   echo "  },"
   echo "}"
 } > "$OUT/route5_symbols.lua"
-engine_run ROUTE5 "$OUT" tools/ichor/tests/route5.lua 500000 1800
+engine_run ROUTE5 "$OUT" tools/ichor/tests/route5.lua 500000 3600

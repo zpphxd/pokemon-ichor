@@ -36,14 +36,14 @@
 
 @ --- The bag and the party for the walk, then out of the Hollow's west mouth --
 @ The road's player has come from Emporion and through the Hollow: the Bronze
-@ Hammer (beat 13), oil for the herms (Kerykos, beat 11), the Old Rod from Akti,
-@ and an Onotis to trade at the inn. The warp lands on the mouth's door tile,
+@ Hammer (beat 13), oil for the herms (Kerykos, beat 11) and the Old Rod from
+@ Akti, with a level-100 Swampert to win the battles. The warp lands on the mouth's door tile,
 @ and the game walks the player out of it, as a warp from the Hollow does.
 	test_header Route5Test_SetupHeader, Route5Test_Setup
 Route5Test_Setup:
 	lockall
 	setvar VAR_TEMP_F, 1
-	givemon SPECIES_ONOTIS, 18
+	givemon SPECIES_SWAMPERT, 100
 	giveitem ITEM_BRONZE_HAMMER, 1
 	giveitem ITEM_OLIVE_OIL, 3
 	giveitem ITEM_OLD_ROD, 1
@@ -52,5 +52,16 @@ Route5Test_Setup:
 	setflag FLAG_BADGE02_GET
 	warp MAP_ROUTE5_SKIRONIAN_CLIFFS, 9, 8
 	waitstate
+	releaseall
+	end
+
+@ --- The Onotis for the inn's trade, given only there: with a second Pokémon in
+@ the party, a trainer's Whirlwind drags it into battle and the walk's battle
+@ player (first move, always) can't cope with it fainting.
+	test_header Route5Test_OnotisHeader, Route5Test_Onotis
+Route5Test_Onotis:
+	lockall
+	setvar VAR_TEMP_F, 1
+	givemon SPECIES_ONOTIS, 18
 	releaseall
 	end
