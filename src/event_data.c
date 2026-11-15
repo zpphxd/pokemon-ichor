@@ -212,7 +212,7 @@ u8 *GetFlagPointer(u16 id)
 {
     if (id == 0)
         return NULL;
-    else if (id >= ICHOR_FLAGS_START && id <= ICHOR_DAILY_FLAGS_END) // Ichor: the flag banks in IchorSave
+    else if (id >= ICHOR_FLAGS_START && id <= ICHOR_FLAGS2_END) // Ichor: the flag banks in IchorSave
         return Ichor_GetFlagPointer(id);
     else if (id < SPECIAL_FLAGS_START)
         return &gSaveBlock1Ptr->flags[id / 8];

@@ -1682,6 +1682,15 @@
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
 
+// The second bank (IchorSave.flags2, version 4), past the daily bank.
+// claim.py bankflag's offsets 0x500-0xADF land in its general range.
+#define ICHOR_FLAGS2_START                      0x2900
+#define ICHOR_FLAGS2_COUNT                      1536
+#define ICHOR_FLAGS2_END                        (ICHOR_FLAGS2_START + ICHOR_FLAGS2_COUNT - 1)
+#define FLAG_ICHOR_GENERAL2_START               (ICHOR_FLAGS2_START + 0x000) // 1,504 claimed by name
+#define FLAG_ICHOR_GENERAL2_COUNT               0x5E0
+#define FLAG_ICHOR_WAYSTONES_START              (ICHOR_FLAGS2_START + 0x5E0) // 32: the Oikoumene's waystones (herms beyond Aethos)
+
 // The relics (SYSTEMS §1). Each FLAG_ICHOR_GOT_* is set whenever its item
 // enters the bag. They sit at FLAG_ICHOR_RELICS_START + (item - ITEM_TALARIA);
 // the Talaria's is the slice's FLAG_SYS_B_DASH instead.

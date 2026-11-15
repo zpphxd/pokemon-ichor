@@ -1,8 +1,8 @@
 // Ichor: IchorSave, the one block of Ichor state in SaveBlock3, and its flag
 // and var banks. See include/ichor_save.h and design/ENGINE_API.md.
-#include "ichor_omen.h"
 #include "global.h"
 #include "event_data.h"
+#include "ichor_omen.h"
 #include "ichor_save.h"
 
 // The layout is part of the save format. These pin it, so a change that moves
@@ -17,6 +17,9 @@ STATIC_ASSERT(offsetof(struct IchorSave, flags) == 0x080, IchorSaveFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, dailyFlags) == 0x180, IchorSaveDailyFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, thread) == 0x1A0, IchorSaveThreadOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, reserved) == 0x450, IchorSaveReservedOffset);
+STATIC_ASSERT(offsetof(struct IchorSave, flags2) == 0x500, IchorSaveFlags2Offset);
+STATIC_ASSERT(ICHOR_FLAGS2_START > ICHOR_DAILY_FLAGS_END, IchorFlags2AfterTheDailyBank);
+STATIC_ASSERT(ICHOR_FLAGS2_END < SPECIAL_FLAGS_START, IchorFlags2BelowSpecialFlags);
 STATIC_ASSERT(offsetof(struct SaveBlock3, ichor) == 0, IchorSaveFirstInSaveBlock3);
 STATIC_ASSERT(ICHOR_FLAGS_START % 8 == 0 && ICHOR_DAILY_FLAGS_START % 8 == 0, IchorFlagBanksByteAligned);
 STATIC_ASSERT(FLAGS_COUNT <= ICHOR_FLAGS_START, VanillaFlagsBelowIchorBanks);
@@ -57,6 +60,8 @@ void Ichor_OnSaveLoaded(void)
         gIchorSave.forcedOmenEntry = 0;
         gIchorSave.heldTimeOfDay = 0;
     }
+    if (gIchorSave.version < 4)  // the block grew: what was past its old end (dexNavChain) is not flags
+        memset(gIchorSave.flags2, 0, sizeof(gIchorSave.flags2));
     gIchorSave.version = ICHOR_SAVE_VERSION;
 }
 
@@ -72,6 +77,8 @@ u8 *Ichor_GetFlagPointer(u16 id)
         return &gIchorSave.flags[(id - ICHOR_FLAGS_START) / 8];
     if (id >= ICHOR_DAILY_FLAGS_START && id <= ICHOR_DAILY_FLAGS_END)
         return &gIchorSave.dailyFlags[(id - ICHOR_DAILY_FLAGS_START) / 8];
+    if (id >= ICHOR_FLAGS2_START && id <= ICHOR_FLAGS2_END)
+        return &gIchorSave.flags2[(id - ICHOR_FLAGS2_START) / 8];
     return NULL;
 }
 

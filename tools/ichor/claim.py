@@ -25,7 +25,10 @@ same way and leave the vanilla flags alone:
 
 Each bank claim takes the next free id in the bank's general range and adds its
 line between the bank's "adds lines here" and "end" markers. --range works for
-them too: LO-HI is then an offset into the bank's general range.
+them too: LO-HI is then an offset into the bank's general range. For bankflag,
+offsets 0x000-0x4FF are the first bank (FLAG_ICHOR_GENERAL_START) and
+0x500-0xADF the second (FLAG_ICHOR_GENERAL2_START + offset - 0x500), so the
+ranges in claim_ranges.md run on as one line.
 """
 import re
 import sys
@@ -37,24 +40,37 @@ KINDS = {
     "var": (ROOT / "include/constants/vars.h", "VAR", lambda v: True),
 }
 
-# bank kind: (header, name prefix, base macro, capacity, marker text)
+# bank kind: (header, name prefix, segments, marker text). Each segment is
+# (first offset, last offset, base macro): offsets run on across segments.
 BANKS = {
-    "bankflag": (ROOT / "include/constants/flags.h", "FLAG_ICHOR_", "FLAG_ICHOR_GENERAL_START", 0x500,
+    "bankflag": (ROOT / "include/constants/flags.h", "FLAG_ICHOR_",
+                 [(0x000, 0x4FF, "FLAG_ICHOR_GENERAL_START"), (0x500, 0xADF, "FLAG_ICHOR_GENERAL2_START")],
                  "Ichor bank flags"),
-    "dailyflag": (ROOT / "include/constants/flags.h", "FLAG_DAILY_ICHOR_", "FLAG_DAILY_ICHOR_GENERAL_START", 0x70,
-                  "Ichor daily bank flags"),
-    "bankvar": (ROOT / "include/constants/vars.h", "VAR_ICHOR_", "ICHOR_VARS_START", 32, "Ichor bank vars"),
+    "dailyflag": (ROOT / "include/constants/flags.h", "FLAG_DAILY_ICHOR_",
+                  [(0x00, 0x6F, "FLAG_DAILY_ICHOR_GENERAL_START")], "Ichor daily bank flags"),
+    "bankvar": (ROOT / "include/constants/vars.h", "VAR_ICHOR_", [(0, 31, "ICHOR_VARS_START")], "Ichor bank vars"),
 }
 
 
 def claim_bank(kind, claims, lo=None, hi=None):
-    path, prefix, base, capacity, marker = BANKS[kind]
+    path, prefix, segments, marker = BANKS[kind]
     text = path.read_text()
     lines = text.split("\n")
     start = next(i for i, l in enumerate(lines) if l.startswith(f"// {marker}: claim.py"))
     end = next(i for i, l in enumerate(lines) if l == f"// {marker}: end")
-    used = re.compile(rf"^#define \w+\s+\({base} \+ (0x[0-9A-Fa-f]+)\)")
-    taken = [int(m.group(1), 16) for l in lines[start + 1:end] if (m := used.match(l))]
+    bases = "|".join(base for _, _, base in segments)
+    used_line = re.compile(rf"^#define \w+\s+\(({bases}) \+ (0x[0-9A-Fa-f]+)\)")
+    first_of = {base: first for first, _, base in segments}
+
+    def offset_of(line):
+        m = used_line.match(line)
+        return None if m is None else first_of[m.group(1)] + int(m.group(2), 16)
+
+    def segment_of(off):
+        return next(seg for seg in segments if seg[0] <= off <= seg[1])
+
+    taken = [o for l in lines[start + 1:end] if (o := offset_of(l)) is not None]
+    capacity = segments[-1][1] + 1
     lo = 0 if lo is None else lo
     hi = capacity - 1 if hi is None else min(hi, capacity - 1)
     for name, _ in claims:
@@ -66,10 +82,11 @@ def claim_bank(kind, claims, lo=None, hi=None):
     if len(free) < len(claims):
         raise SystemExit(f"only {len(free)} free {kind}s left in 0x{lo:03X}-0x{hi:03X}")
     for (name, comment), off in zip(claims, free):
-        line = f"#define {name.ljust(39)} ({base} + 0x{off:03X}) // Ichor: {comment}"
-        print(f"{name} = {base} + 0x{off:03X}")
+        first, _, base = segment_of(off)
+        line = f"#define {name.ljust(39)} ({base} + 0x{off - first:03X}) // Ichor: {comment}"
+        print(f"{name} = {base} + 0x{off - first:03X}")
         # keep the lines sorted by offset, so separate ranges merge as separate hunks
-        at = next((i for i in range(start + 1, end) if (m := used.match(lines[i])) and int(m.group(1), 16) > off), end)
+        at = next((i for i in range(start + 1, end) if (o := offset_of(lines[i])) is not None and o > off), end)
         lines[at:at] = [line]
         end += 1
     path.write_text("\n".join(lines))

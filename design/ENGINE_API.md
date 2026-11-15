@@ -11,15 +11,15 @@ All of Ichor's own persistent state lives in **`struct IchorSave`** (`include/ic
 
 | | |
 |---|---|
-| Size | 1,280 bytes, fixed. SaveBlock3 is now 1,284 of its 1,624 bytes. |
-| Version | `ICHOR_SAVE_VERSION` (1). Version 0 means a save from before IchorSave. |
-| New game | `Ichor_InitSave()` (from `NewGameInitData`): everything zero, except `version = ICHOR_SAVE_VERSION` (2) and `momLosses = 212`. |
-| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Version 2 added `frozenHourStep` (§5), carved from `headerReserved`. |
-| New day | `Ichor_DoDailyEvents()` (from `DoDailyEvents`) clears the daily flag bank. |
-| Headroom | 176 bytes in `reserved`, plus 23 in `headerReserved`. |
+| Size | 1,472 bytes. It was 1,280 until version 4 added the second flag bank at 0x500. SaveBlock3 is now 1,476 of its 1,624 bytes. |
+| Version | `ICHOR_SAVE_VERSION` (4). Version 0 means a save from before IchorSave. |
+| New game | `Ichor_InitSave()` (from `NewGameInitData`): everything zero, except `version` and `momLosses = 212`. |
+| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Each later version's step: 2 added `frozenHourStep` (§5); 3 added the forced omen and the held tint (§7), all from `headerReserved`; 4 added `flags2`, zeroed on load because an older save holds what used to sit past IchorSave's end there. |
+| New day | `Ichor_DoDailyEvents()` (from `DoDailyEvents`) clears the daily flag bank and draws the day's omen (§7). |
+| Headroom | 176 bytes in `reserved` at 0x450 (world-postgame takes 64 of them for `IchorEpics`), 20 in `headerReserved`, and 148 more in SaveBlock3. |
 
 **Adding a field later.**
-1. Take its bytes from the front of `reserved` and shrink `reserved` by the same amount. The struct must stay 1,280 bytes; `STATIC_ASSERT`s in `src/ichor_save.c` pin the size and the offsets.
+1. Take its bytes from the front of `reserved` and shrink `reserved` by the same amount. The struct keeps its size; `STATIC_ASSERT`s in `src/ichor_save.c` pin the size and the offsets. Growing the struct again is a last resort: it moves what follows IchorSave in SaveBlock3.
 2. Bump `ICHOR_SAVE_VERSION`.
 3. In `Ichor_OnSaveLoaded`, give the field its default when an older version loads.
 
@@ -39,6 +39,7 @@ This way the save never breaks again.
 | `xenia[8]` | §10 xenia | Links done per token chain. |
 | `vars[32]` | the var bank | See below. |
 | `flags[256]` | the flag bank | 2,048 flags. See below. |
+| `flags2[192]` (0x500) | the second flag bank | 1,536 flags (version 4). See below. |
 | `dailyFlags[32]` | the daily bank | 256 flags, cleared each day. |
 | `thread` | LABYRINTH.md §5.1 | Ariadne's Thread: 24 anchors (8 bytes each, not 6, because apcs-gnu rounds structs to 4 bytes), 1,792 committed steps, a 152-step live segment. |
 
@@ -49,12 +50,13 @@ Only 26 vanilla vars and 322 vanilla flags were left, so IchorSave carries its o
 | Bank | Ids | Count | Claim with |
 |---|---|---|---|
 | Flags | `0x2000`–`0x27FF` | 2,048 | `python3 tools/ichor/claim.py bankflag FLAG_ICHOR_<NAME> "comment"` |
+| Flags, second bank | `0x2900`–`0x2EFF` | 1,536 | the same command; `--range` offsets 0x500–0xADF land here |
 | Daily flags | `0x2800`–`0x28FF` | 256, cleared each day | `python3 tools/ichor/claim.py dailyflag FLAG_DAILY_ICHOR_<NAME> "comment"` |
 | Vars | `0x4100`–`0x411F` | 32 | `python3 tools/ichor/claim.py bankvar VAR_ICHOR_<NAME> "comment"` |
 
 **Use the banks for all new Ichor content,** including story flags, item balls, hidden items and hide flags. Keep the remaining vanilla flags and vars for anything that has to sit in SaveBlock1. A claim adds a named line to `include/constants/flags.h` or `vars.h`, in the bank's "general" range.
 
-**Parallel sessions** pass `--range LO-HI` first, as with vanilla flags (`tools/ichor/claim_ranges.md`). For a bank, LO and HI are offsets into its general range (`0x000`–`0x4FF` for flags, `0x00`–`0x6F` for daily flags, `0x00`–`0x1F` for vars). Each claim takes the lowest free offset in the range, and lines stay sorted by offset, so separate ranges merge cleanly.
+**Parallel sessions** pass `--range LO-HI` first, as with vanilla flags (`tools/ichor/claim_ranges.md`). For a bank, LO and HI are offsets into its general range (`0x000`–`0xADF` for flags, where `0x500` and up is the second bank; `0x00`–`0x6F` for daily flags; `0x00`–`0x1F` for vars). Each claim takes the lowest free offset in the range, and lines stay sorted by offset, so separate ranges merge cleanly.
 
 ```bash
 python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS "met the Herald in Emporion"
@@ -78,7 +80,9 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | `FLAG_ICHOR_DIG_FIXED_START` | `0x2260` | 64 | One-time dig finds |
 | `FLAG_ICHOR_THEOXENIA_START` | `0x22A0` | 64 | Theoxenia visits, hides and decoys |
 | `FLAG_ICHOR_XENIA_START` | `0x22E0` | 32 | Xenia hosts and token-chain links |
-| `FLAG_ICHOR_GENERAL_START` | `0x2300` | 1,280 | Claimed by name |
+| `FLAG_ICHOR_GENERAL_START` | `0x2300` | 1,280 | Claimed by name: `claim.py` bankflag offsets 0x000–0x4FF |
+| `FLAG_ICHOR_GENERAL2_START` | `0x2900` | 1,504 | The second bank, claimed by name: `claim.py` bankflag offsets 0x500–0xADF |
+| `FLAG_ICHOR_WAYSTONES_START` | `0x2EE0` | 32 | The Oikoumene's waystones (herms beyond Aethos, §4) |
 | `FLAG_DAILY_ICHOR_PRAYED_START` | `0x2800` | 16 | Prayed to god *g* today |
 | `FLAG_DAILY_ICHOR_DIG_START` | `0x2810` | 96 | Daily dig spots |
 | `FLAG_DAILY_ICHOR_LAUREL_START` | `0x2870` | 32 | Laurel trees, one sprig a day |
