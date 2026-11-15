@@ -1174,4 +1174,11 @@
 #define METATILE_Steppe_Kurgan_Crown_Idol        0x346
 // end gTileset_Steppe
 
+// gTileset_Hesperides (Ichor: the Garden of the Hesperides and the Atlas range), written by tools/ichor/art/farlands_build.py
+#define METATILE_Hesperides_Ladon_Head               0x272
+#define METATILE_Hesperides_Ladon_Coil               0x273
+#define METATILE_Hesperides_Ladon_W                  0x278
+#define METATILE_Hesperides_Ladon_E                  0x279
+// end gTileset_Hesperides
+
 #endif // GUARD_METATILE_LABELS_H

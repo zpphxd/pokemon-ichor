@@ -786,3 +786,49 @@ const u16 gTilesetPalettes_PorytilesManaged_FarWest[][16] =
     INCBIN_U16("data/tilesets/secondary/far_west/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/far_west/porytiles_bin/palettes/15.gbapal")
 };
+
+// Ichor: hesperides (the Garden of the Hesperides and the Atlas range), written by tools/ichor/art/farlands_build.py
+const u32 gTilesetTiles_PorytilesManaged_Hesperides[] = INCBIN_U32("data/tilesets/secondary/hesperides/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Hesperides[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/hesperides/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: steppe_town (the Greek colonies of the steppe coast: Abdera and Olbia), written by tools/ichor/art/farlands_build.py
+const u32 gTilesetTiles_PorytilesManaged_SteppeTown[] = INCBIN_U32("data/tilesets/secondary/steppe_town/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_SteppeTown[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/steppe_town/porytiles_bin/palettes/15.gbapal")
+};
