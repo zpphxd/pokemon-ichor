@@ -38,7 +38,11 @@
       "id": "HEAL_LOCATION_ELEUSA_VILLAGE",
       "map": "MAP_ELEUSA_VILLAGE",
       "x": 10,
-      "y": 24
+      "y": 24,
+      "respawn_map": "MAP_ELEUSA_VILLAGE_ASCLEPEION",
+      "respawn_npc": "LOCALID_ELEUSA_HEALER",
+      "respawn_x": 9,
+      "respawn_y": 4
     }
   ]
 }

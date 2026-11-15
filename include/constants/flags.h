@@ -779,7 +779,7 @@
 #define FLAG_UNUSED_0x2D9                                           0x2D9 // Unused Flag
 
 #define FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER                     0x2DA
-#define FLAG_UNUSED_0x2DB                                           0x2DB // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ELEUSA_GRANARY_REVIVE                     0x2DB // Ichor: Eleusa: the Revive under Sitokles's bed (hidden item)
 #define FLAG_UNUSED_0x2DC                                           0x2DC // Unused Flag
 #define FLAG_UNUSED_0x2DD                                           0x2DD // Unused Flag
 #define FLAG_UNUSED_0x2DE                                           0x2DE // Unused Flag
@@ -1753,6 +1753,12 @@
 #define FLAG_ICHOR_LESSER_MYSTERIES_DONE        (FLAG_ICHOR_GENERAL_START + 0x083) // Ichor: the Telesterion: the fourth brazier lit, Chloe revealed
 #define FLAG_ICHOR_MET_DOSO                     (FLAG_ICHOR_GENERAL_START + 0x084) // Ichor: the Telesterion: Doso's welcome heard
 #define FLAG_ICHOR_HIDE_CHLOE_TELESTERION       (FLAG_ICHOR_GENERAL_START + 0x085) // Ichor: the Telesterion: Chloe unseen in the Anaktoron's doorway until the fourth brazier
+#define FLAG_ICHOR_GOT_KYKEON                   (FLAG_ICHOR_GENERAL_START + 0x090) // Ichor: Eleusa: Metaneira gave the goddess's drink, Fresh Water and Barley Cakes, after Laurel 3
+#define FLAG_ICHOR_GOT_TM_BULLET_SEED           (FLAG_ICHOR_GENERAL_START + 0x091) // Ichor: Eleusa: Theano gave TM09 Bullet Seed in Dysaules's farmhouse
+#define FLAG_ICHOR_GOT_AMULET_COIN              (FLAG_ICHOR_GENERAL_START + 0x092) // Ichor: Eleusa: Sitokles gave the Amulet Coin his family kept by the cold iron, after the theft
+#define FLAG_ICHOR_TRADED_PITHOUND              (FLAG_ICHOR_GENERAL_START + 0x093) // Ichor: Eleusa: traded Euphorion a Melibee for his Pithound, CRITIC
+#define FLAG_ICHOR_FRAGMENT_STOLEN              (FLAG_ICHOR_GENERAL_START + 0x094) // Ichor: beat 23 (batch 5): the Titans have taken the cold iron from under Eleusa; set by the theft
+#define FLAG_ICHOR_MET_METANEIRA                (FLAG_ICHOR_GENERAL_START + 0x095) // Ichor: Eleusa: Metaneira has told you why her family feeds strangers (she says it once)
 #define FLAG_ICHOR_HERALDS_RUN_DONE             (FLAG_ICHOR_GENERAL_START + 0x0F0) // Ichor: the Herald's Run: the third scroll delivered (beat 15)
 #define FLAG_ICHOR_HERMES_HERM_J1               (FLAG_ICHOR_GENERAL_START + 0x0F1) // Ichor: the Herald's Run: junction herm J1 oiled
 #define FLAG_ICHOR_HERMES_HERM_J2               (FLAG_ICHOR_GENERAL_START + 0x0F2) // Ichor: the Herald's Run: junction herm J2 oiled

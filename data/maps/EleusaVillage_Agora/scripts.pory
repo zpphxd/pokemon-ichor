@@ -1,1 +1,78 @@
+// Eleusa's Agora stall (design/phase2/SCRIPT.md, Part 2, "Eleusa interiors"):
+// a farmhouse front room turned shop, kept by a farm wife. Room:
+// tools/ichor/maps/eleusa_rooms.py ("agora"), on limen. The door is the mat at
+// (4..5, 7), warp 0, back to MAP_ELEUSA_VILLAGE's warp 1.
+//
+// The market follows AktiTown_Agora (the Mart re-skin): the stallkeeper's line,
+// then pokemart. The stock is SCRIPT.md's "Shops" table: the Harvest Laurel
+// (FLAG_BADGE03_GET) adds Revive and Full Heal.
+
 mapscripts EleusaVillage_Agora_MapScripts {}
+
+text EleusaVillage_Agora_Text_NameStallkeeper { "STALLKEEPER" }
+text EleusaVillage_Agora_Text_NameOldWoman { "OLD WOMAN" }
+
+script EleusaVillage_Agora_EventScript_Stallkeeper {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Agora_Text_NameStallkeeper)
+    message(format("Barley, oil, honey, potions. Eleusa grows everything except surprises."))
+    waitmessage
+    if (flag(FLAG_BADGE03_GET)) {
+        pokemart(EleusaVillage_Agora_Mart_AfterLaurel)
+    } else {
+        pokemart(EleusaVillage_Agora_Mart_BeforeLaurel)
+    }
+    setspeaker(EleusaVillage_Agora_Text_NameStallkeeper)
+    msgbox(format("Come again. The barley will still be here. It always is."))
+    release
+}
+
+mart EleusaVillage_Agora_Mart_BeforeLaurel {
+    ITEM_GREAT_BALL
+    ITEM_SUPER_POTION
+    ITEM_ANTIDOTE
+    ITEM_PARALYZE_HEAL
+    ITEM_AWAKENING
+    ITEM_REPEL
+    ITEM_OLIVE_OIL
+    ITEM_BARLEY_CAKE
+    ITEM_HONEY
+}
+
+mart EleusaVillage_Agora_Mart_AfterLaurel {
+    ITEM_GREAT_BALL
+    ITEM_SUPER_POTION
+    ITEM_ANTIDOTE
+    ITEM_PARALYZE_HEAL
+    ITEM_AWAKENING
+    ITEM_REPEL
+    ITEM_OLIVE_OIL
+    ITEM_BARLEY_CAKE
+    ITEM_HONEY
+    ITEM_REVIVE
+    ITEM_FULL_HEAL
+}
+
+script EleusaVillage_Agora_EventScript_Customer {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Agora_Text_NameOldWoman)
+    msgbox(format("Barley for the cakes, honey for the cakes.\p"
+                  "The goddess gets the first cake. I get the burnt one. That's fair."))
+    release
+}
+
+script EleusaVillage_Agora_EventScript_HoneyJars {
+    msgbox(format("Honey jars in a row, sealed with wax. Thyme honey, from the hives by the poppy meadow."),
+           MSGBOX_SIGN)
+}
+
+script EleusaVillage_Agora_EventScript_Scale {
+    msgbox(format("A bronze scale. Somehow the barley side always wins."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_Agora_EventScript_Sacks {
+    msgbox(format("Sacks of barley, stacked to the ceiling. One of them is leaking, very slowly."),
+           MSGBOX_SIGN)
+}

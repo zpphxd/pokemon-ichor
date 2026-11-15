@@ -189,35 +189,30 @@ script EleusaVillage_EventScript_Kleon {
 // ---------------------------------------------------------------------------
 
 // Out of the Telesterion with the Harvest Laurel: the procession has come up the Sacred
-// Way and filled the court. Alethea comes up to the steps (25, 12), where the stair
-// lands the player, and Kerykos steps over from his place beside the door. Anywhere
-// else (a Laurel won and the village entered some other way), they speak from where
-// they stand.
+// Way and filled the court. It plays on the first step out of the hall, on the steps
+// (25, 12) where its stair lands the player: Alethea comes up to them, and Kerykos steps
+// over from his place beside the door. (Coming into the village any other way, the
+// procession is simply there, and the arrival waits for the next walk out of the hall.)
 script EleusaVillage_EventScript_ProcessionArrives {
-    lockall
     setvar(VAR_TEMP_9, 2)
-    setflag(FLAG_ICHOR_PROCESSION_ARRIVED)
     getplayerxy(VAR_0x8004, VAR_0x8005)
-    setvar(VAR_0x8006, FALSE)
-    if (var(VAR_0x8004) == 25 && var(VAR_0x8005) == 12) {
-        setvar(VAR_0x8006, TRUE)
+    if (var(VAR_0x8004) != 25 || var(VAR_0x8005) != 12) {
+        end
     }
+    lockall
+    setflag(FLAG_ICHOR_PROCESSION_ARRIVED)
     delay(16)
-    if (var(VAR_0x8006) == TRUE) {
-        applymovement(LOCALID_ELEUSA_ALETHEA, EleusaVillage_Movement_AletheaToSteps)
-        waitmovement(0)
-        turnobject(OBJ_EVENT_ID_PLAYER, DIR_SOUTH)
-    }
+    applymovement(LOCALID_ELEUSA_ALETHEA, EleusaVillage_Movement_AletheaToSteps)
+    waitmovement(0)
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_SOUTH)
     setspeaker(EleusaVillage_Text_NameAlethea)
     msgbox(format("We made it! Very slowly. Every step of the way. On purpose.\p"
                   "I sent word to Daphne with one of Kerykos's runners. She's coming.\p"
                   "She hates boats. She'll arrive cross."))
     closemessage
-    if (var(VAR_0x8006) == TRUE) {
-        applymovement(LOCALID_ELEUSA_KERYKOS, EleusaVillage_Movement_KerykosToPlayer)
-        waitmovement(0)
-        turnobject(OBJ_EVENT_ID_PLAYER, DIR_EAST)
-    }
+    applymovement(LOCALID_ELEUSA_KERYKOS, EleusaVillage_Movement_KerykosToPlayer)
+    waitmovement(0)
+    turnobject(OBJ_EVENT_ID_PLAYER, DIR_EAST)
     setspeaker(EleusaVillage_Text_NameKerykos)
     msgbox(format("{PLAYER}! A laurel from my cousin! Did she say anything? Anything at all?\p"
                   "…“Good.” Ha! That's practically a speech, for Chloe.\p"
@@ -225,12 +220,10 @@ script EleusaVillage_EventScript_ProcessionArrives {
                   "Once those doors shut, they don't open till it's done."))
     closemessage
     setspeaker(SP_NAME_NONE)
-    if (var(VAR_0x8006) == TRUE) {
-        applymovement(LOCALID_ELEUSA_KERYKOS, EleusaVillage_Movement_KerykosBack)
-        applymovement(LOCALID_ELEUSA_ALETHEA, EleusaVillage_Movement_AletheaBack)
-        waitmovement(LOCALID_ELEUSA_KERYKOS)
-        waitmovement(LOCALID_ELEUSA_ALETHEA)
-    }
+    applymovement(LOCALID_ELEUSA_KERYKOS, EleusaVillage_Movement_KerykosBack)
+    applymovement(LOCALID_ELEUSA_ALETHEA, EleusaVillage_Movement_AletheaBack)
+    waitmovement(LOCALID_ELEUSA_KERYKOS)
+    waitmovement(LOCALID_ELEUSA_ALETHEA)
     releaseall
     end
 }
