@@ -105,3 +105,20 @@ SaveTest_Save:
 	special SaveGame
 	releaseall
 	end
+
+@ --- The second bank: its first and last flags, set and read back by script ---------
+	test_header SaveTest_Bank2Header, SaveTest_Bank2
+SaveTest_Bank2:
+	lockall
+	setvar VAR_TEMP_F, 1
+	setvar VAR_0x8001, 0
+	setflag FLAG_ICHOR_GENERAL2_START
+	setflag ICHOR_FLAGS2_END
+	goto_if_unset FLAG_ICHOR_GENERAL2_START, SaveTest_Bank2_Done
+	goto_if_unset ICHOR_FLAGS2_END, SaveTest_Bank2_Done
+	goto_if_set FLAG_ICHOR_WAYSTONES_START, SaveTest_Bank2_Done
+	setvar VAR_0x8001, 3
+SaveTest_Bank2_Done:
+	releaseall
+	end
+
