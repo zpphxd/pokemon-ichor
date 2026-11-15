@@ -24,6 +24,11 @@ script Route22_CretanSea_EventScript_Anydros {
     msgbox(format("Anydros, the waterless. A bare rock and one fig tree, dead of thirst."), MSGBOX_SIGN)
 }
 
+script Route22_CretanSea_EventScript_SignPolyaigos {
+    msgbox(format("POLYAIGOS. Many goats, the name says.\p"
+                  "One goat, these days. He's in charge."), MSGBOX_SIGN)
+}
+
 script Route22_CretanSea_EventScript_SignMelos {
     msgbox(format("ROUTE 22\pWest: Melos. Water for every ship that asks."), MSGBOX_SIGN)
 }

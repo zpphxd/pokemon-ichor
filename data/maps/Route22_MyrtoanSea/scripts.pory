@@ -2,8 +2,8 @@
 // Cape Malea's gray cliffs; optional, by Surf (design/phase4/SCRIPT.md Part 2).
 // The story crosses it on the Euploia's deck. Layout: tools/ichor/maps/kythera_seas.py.
 //
-// Hidden item (not placed: hidden items need vanilla flags not yet available):
-// a Big Pearl at the foot of Hagne's sunken column (55,25).
+// Hidden items: a Big Pearl at Hagne's sunken column (55,25), in the drowned
+// temple; a Heart Scale under the rock on Myrtilos's islet (15,22).
 // Music: MUS_ICHOR_FOAM_ROAD isn't written yet; Act I's road theme stands in.
 
 mapscripts Route22_MyrtoanSea_MapScripts {}
@@ -27,6 +27,16 @@ script Route22_MyrtoanSea_EventScript_SignMalea {
 
 script Route22_MyrtoanSea_EventScript_SignMelos {
     msgbox(format("ROUTE 22\pEast: Melos. West: Kythera."), MSGBOX_SIGN)
+}
+
+script Route22_MyrtoanSea_EventScript_SignSkandeia {
+    msgbox(format("ROUTE 22\pWest: Skandeia, Kythera's harbor. East: Melos."), MSGBOX_SIGN)
+}
+
+// Myrtilos's islet: the charioteer Pelops threw into this sea, who gave it his name.
+script Route22_MyrtoanSea_EventScript_Grave {
+    msgbox(format("MYRTILOS. He drove the winning chariot. The winner threw him in the sea.\p"
+                  "The sea kept him, and took his name."), MSGBOX_SIGN)
 }
 
 script Route22_MyrtoanSea_EventScript_SunkenColumn {

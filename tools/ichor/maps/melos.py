@@ -13,14 +13,18 @@ stair at the east end; the barley band, 3 deep, the only way up; TITANBORN
 Theion at the top of it, watching wall C's stair; and above, the obsidian slope
 with its knapping pits and the seam. The crest is pine and olive. A path runs
 west along the shore to the white pumice cliffs, a dead end with a Star Piece
-on the lip.
+on the lip past a clifftop meadow of wild grass (a Pearl hides in the pumice
+hollow, reached by sea). Wild grass fills the corner under wall B's east step
+too, a Revive at its back; Black Glasses wait at the slope's east end, past
+Theion; an Ultra Ball hides under the jetty's last stone, and a Heart Scale
+at the niche's foot once the goddess has had her offering.
 
 Seams: Melos and Route 22's maps all use gTileset_Melos, so their shared seams
 are exempt from the aethos-only strip (MAP_DESIGN.md §5). The sea maps draw
 Melos's coast near the seam from COAST_WEST and COAST_EAST below.
 """
 import kythera_outdoor as K
-from kythera_outdoor import obj, item_ball, sign, trigger, warp
+from kythera_outdoor import obj, item_ball, sign, trigger, warp, hidden
 
 NAME = "Melos"
 P = "Melos_EventScript_"
@@ -34,7 +38,7 @@ PLAN = [
     "T" * 32,                                       # 1
     "T" * 32,                                       # 2
     "T" * 32,                                       # 3
-    "TTTTTTTggooooooggoooooooooggTTTT",             # 4  the obsidian slope
+    "TTTTTTTggoooooooooooooooooggTTTT",             # 4  the obsidian slope
     "TTTTTggooooooooooooooooooooogTTT",             # 5
     "TTTTggoooooooooooooooooooooogTTT",             # 6
     "TTTTTgggooooooooooooooooooogTTTT",             # 7
@@ -60,10 +64,14 @@ PLAN += [
     R(("T", 2), ("g", 1), ("t", 6), ("g", 8), ("f", 1), ("g", 12), ("T", 2)),            # 17 Kentrios's field
     R(("T", 2), ("g", 28), ("T", 2)),                                              # 18 wall B's top: the mirror
     R(("T", 2), ("g", 7), ("B", 3), ("g", 18), ("T", 2)),                          # 19 wall B; the farmhouse
-    R(("T", 2), ("g", 7), ("B", 3), ("g", 5), ("B", 3), ("g", 8), ("T", 4)),       # 20 the houses
-    R(("T", 2), ("g", 6), ("f", 1), ("B", 3), ("g", 1), ("f", 1), ("g", 3), ("B", 3), ("g", 8),
-      ("s", 1), ("T", 2), ("~", 1)),                                               # 21
-    R(("g", 8), ("f", 1), ("B", 3), ("g", 4), ("f", 1), ("B", 3), ("g", 6), ("s", 3), ("~", 3)),  # 22 the lip
+    # 20-22: the houses; west, the clifftop meadow before the pumice (the Star
+    # Piece past it); east, wild grass in the corner under wall B's step (a
+    # Revive at its back)
+    R(("T", 2), ("g", 7), ("B", 3), ("g", 5), ("B", 3), ("g", 1), (",", 2), ("g", 5), ("T", 4)),  # 20
+    R(("T", 2), (",", 1), ("g", 2), (",", 2), ("g", 1), ("f", 1), ("B", 3), ("g", 1), ("f", 1), ("g", 3),
+      ("B", 3), ("g", 1), (",", 6), ("g", 1), ("s", 1), ("T", 2), ("~", 1)),       # 21
+    R(("g", 2), (",", 5), ("g", 1), ("f", 1), ("B", 3), ("g", 4), ("f", 1), ("B", 3), ("g", 2), (",", 3),
+      ("g", 1), ("s", 3), ("~", 3)),                                               # 22 the lip
     R(("k", 7), ("p", 16), ("g", 2), ("s", 3), ("~", 4)),                          # 23 the lane
     R(("k", 7), ("g", 6), ("B", 7), ("g", 5), ("s", 3), ("~", 4)),                 # 24 the boathouse
     R(("~", 7), ("s", 6), ("B", 7), ("s", 6), ("~", 6)),                           # 25 (the pumice's foot)
@@ -91,6 +99,7 @@ STAIR_C = (15, 16)      # wall C's stair columns, row 9
 STAIR_A = 27            # wall A's stair column, row 15
 STAIR_B = 13            # wall B's stair column, row 19
 THEION = (14, 10)
+SEAM = (16, 5)          # the slope's fixed find, where the long vein runs in
 
 
 def terrace(g, y_top, x0, x1, steps=(), niche=None, skip=(), rise=None):
@@ -154,7 +163,7 @@ def compose():
     # ---- the slope's things: pits (the daily digs), the seam, a core, Theion's
     # sacks, and the veins of glass with the knappers' spoil heaps
     veins(g)
-    for (x, y, name) in ((9, 6, "pit"), (23, 5, "pit_b"), (16, 4, "pit_b"), (20, 7, "flakes"),
+    for (x, y, name) in ((9, 6, "pit"), (23, 5, "pit_b"), SEAM + ("pit_b",), (20, 7, "flakes"),
                          (6, 6, "flakes"), (25, 6, "core"), (13, 7, "sacks")):
         g.piece("obsidian_bits", name, x, y)
 
@@ -263,6 +272,10 @@ def specs():
         obj("ICHOR_TITAN_GRUNT", THEION[0], THEION[1], "right", P + "Theion", "LOCALID_MELOS_THEION",
             trainer=2),
         item_ball(1, 22, "ITEM_STAR_PIECE", "FLAG_ICHOR_ITEM_MELOS_STAR_PIECE"),
+        # past Theion, where the slope runs out under the pines
+        item_ball(28, 5, "ITEM_BLACK_GLASSES", "FLAG_ICHOR_ITEM_MELOS_BLACK_GLASSES"),
+        # at the back of the wild grass under wall B's east step
+        item_ball(23, 20, "ITEM_REVIVE", "FLAG_ICHOR_ITEM_MELOS_REVIVE"),
     ]
     warps = [
         warp(FARM[0] + 1, FARM[1] + 3, "MAP_MELOS_FARMHOUSE", 0),
@@ -273,9 +286,14 @@ def specs():
         sign(14, 22, P + "Well", "north"), sign(15, 22, P + "Well", "north"),
         sign(3, 23, P + "Pumice", "south"), sign(4, 23, P + "Pumice", "south"),
         sign(9, 6, P + "DigSpot"), sign(23, 5, P + "DigSpot"),
-        sign(16, 4, P + "Seam"),
+        sign(*SEAM, P + "Seam"),
         sign(13, 7, P + "Sacks"),
         sign(20, 26, P + "Sign"),
+        # the niche's foot, beside the goddess: a Heart Scale once she's had
+        # her offering (scripted, so it waits for the rite)
+        sign(NICHE[0] - 1, NICHE[1], P + "NicheFoot", "north"),
+        hidden(21, 29, "ITEM_ULTRA_BALL", "FLAG_ICHOR_HIDDEN_MELOS_ULTRA_BALL"),   # the jetty's last stone
+        hidden(2, 24, "ITEM_PEARL", "FLAG_ICHOR_HIDDEN_MELOS_PEARL"),              # the pumice hollow, by sea
     ]
     coords = [trigger(STAIR_B, 19, P + "KentriosWarning", "VAR_TEMP_1", 0)]
     spec = K.Spec(NAME, g, music="MUS_ICHOR_ROAD", mapsec="MAPSEC_MELOS", map_type="MAP_TYPE_TOWN",

@@ -27,7 +27,7 @@ Route 24 (the Lakonia writer's). So x 0-7, x 32-39 and rows 0-5 use only
 aethos metatiles; check() enforces it.
 """
 import kythera_outdoor as K
-from kythera_outdoor import obj, sign, trigger, warp
+from kythera_outdoor import obj, sign, trigger, warp, hidden, item_ball
 
 NAME = "KytheraSkandeia"
 P = "KytheraSkandeia_EventScript_"
@@ -294,6 +294,8 @@ def specs():
             "FLAG_ICHOR_HIDE_ALETHEA_SKANDEIA"),
         obj("ICHOR_ALETHEA", 24, 10, "right", P + "AletheaCall", "LOCALID_SKANDEIA_ALETHEA_CALL",
             "FLAG_ICHOR_HIDE_ALETHEA_CALL"),
+        # the pocket beach's far corner, under the olives
+        item_ball(12, 27, "ITEM_SEA_INCENSE", "FLAG_ICHOR_ITEM_SKANDEIA_SEA_INCENSE"),
     ]
     warps = [
         warp(22, 15, "MAP_KYTHERA_SKANDEIA_ASCLEPEION", 0),
@@ -307,6 +309,10 @@ def specs():
     bgs = [
         sign(SLIPS, 7, P + "Slips", "east"), sign(SLIPS, 6, P + "Slips", "east"),
         sign(30, 25, P + "HarborShrine"),
+        # a sailor's thanks lost in the niche among the shells, and something
+        # the tide left at the foot of the boat's slip
+        hidden(30, 24, "ITEM_BIG_PEARL", "FLAG_ICHOR_HIDDEN_SKANDEIA_BIG_PEARL"),
+        hidden(SLIPS, 8, "ITEM_HEART_SCALE", "FLAG_ICHOR_HIDDEN_SKANDEIA_HEART_SCALE"),
         sign(5, 15, P + "SignFoamRoad"),
         sign(24, 11, P + "SignSkandeia"),
         sign(17, 19, P + "Spout", "south"),
