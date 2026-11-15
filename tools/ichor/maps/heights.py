@@ -609,7 +609,7 @@ def route12():
             obj("OBJ_EVENT_GFX_SPECIES(KERAZAP)", 9, 7, R12 + "Goat", "MOVEMENT_TYPE_WANDER_AROUND",
                 rx=1, ry=1),
             obj("OBJ_EVENT_GFX_SPECIES(KERAZAP)", 14, 10, R12 + "Goat", "MOVEMENT_TYPE_FACE_LEFT"),
-            obj(P + "HUNTRESS", 37, 2, R12 + "Hekaerge", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
+            obj(P + "HUNTRESS", 37, 2, R12 + "Loxo", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
             obj(P + "YOUTH_F", 27, 10, R12 + "Laodike", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=0),
             obj(P + "GOATHERD", 48, 12, R12 + "Korythos", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3),
             obj(P + "HUNTRESS", 33, 22, R12 + "Telphousa", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=1),  # sight 1: walking up she would plug the track

@@ -1,17 +1,24 @@
 #!/usr/bin/env python3
-"""Build Route 1 and the Kronion Hill summit: layouts, borders and events.
+"""Build Route 1 and Kronion Hill (the summit and its high pastures): layouts, borders and events.
 
 Both maps are drawn below as ASCII grids on gTileset_Aethos + gTileset_Agros,
 with the interior olives listed as anchors and the bigger set pieces (the big
-olive, the cart, the bee wall, the spring, the shrine, the threshing floor and
+olive, the cart, the bee wall, the springs, the shrines, the threshing floor and
 Kronion's ruins) placed in code. This script auto-tiles them:
 
   - tall grass and the road get soft, curving edges from Agros's shape pieces;
-    a grass cell in a stair-step corner becomes a diagonal "half cell"
+    a grass cell in a stair-step corner becomes a diagonal "half cell". Agros
+    holds only the shapes the maps use and its tiles are nearly spent, so the
+    grass's edges are nudged a cell at a time to shapes it already has
+    (Grid.snap_shapes)
   - field walls join in any direction; the hill's rock bands end in slopes
   - olives get crown tips above and soft shade below; '%' woods fill with a
     staggered mix of olives, stone pines, figs, cypresses, rocks and shrubs
   - the rocky shore picks its piece by where the sea is
+
+check_route() proves MAP_DESIGN's rules on the built maps: the forced bands,
+the checkpoint trainers' lines, a clear climb to the summit, and no ledge that
+traps a player.
 
 It sets collision and elevation for every cell and writes:
 
@@ -76,6 +83,7 @@ OLIVE_TOP = (0x1D4, 0x1D5)
 OLIVE_BOTTOM = (0x1E4, 0x1E5)
 OLIVE_BOTTOM_TIP = (0x1DC, 0x1DD)
 OLIVE_TIP = {"grass": (0x1CE, 0x1CF), "tall": (0x1C6, 0x1C7)}
+SOLID_TIP = (0x1E8, 0x1E9)     # the tip over "ledge grass": drawn the same, used for gaps inside the woods
 CYPRESS_TOP, CYPRESS_TOP_TALL, CYPRESS_BOTTOM = 0x00E, 0x025, 0x016
 CYPRESS_BOTTOM_TIP = (0x1F4, 0x1F5)    # a cypress foot over an olive crown's left / right half
 # An olive's crown pokes 3 px into the cell above it, so that cell must draw the
@@ -164,6 +172,7 @@ class Grid:
         self.seam_prep()
         self.fill_woods()
         self.settle_crowns()
+        self.open_edge_gaps()
         self.cells = np.zeros((self.h, self.w), np.uint32)
         self.done = np.zeros((self.h, self.w), bool)
         self.half = {}            # (x, y) -> ("path" | "tall", letter)
@@ -259,6 +268,26 @@ class Grid:
                         need[(x, y - 2)], need[(x + 1, y - 2)] = 0, 1
                 else:
                     column(x, y)
+
+    OPEN = ".,=-*hyd"                     # ground a player walks on
+
+    def open_edge_gaps(self):
+        """A gap ('^') on the north edge of the woods draws an olive's crown tip
+        over grass, so it looks walkable. When open ground lies only to its
+        north, it becomes grass the player can step into, behind the crown; a
+        gap beside open ground any other way stays solid, so no new path opens
+        through the woods. Gaps inside the woods stay solid and draw their tip
+        with aethos's twin of the grass tip (see trees), so each tip metatile
+        is either always open or always solid."""
+        src = [r[:] for r in self.chars]
+        for y in range(self.h):
+            for x in range(self.w):
+                if src[y][x] != "^" or not (0 < x < self.w - 1):
+                    continue
+                opened = [(dx, dy) for dx, dy in STEPS
+                          if 0 <= x + dx < self.w and 0 <= y + dy < self.h and src[y + dy][x + dx] in self.OPEN]
+                if opened == [(0, -1)]:
+                    self.chars[y][x] = "."
 
     # --- olive crowns -----------------------------------------------------------
     def olive_blocks(self):
@@ -372,6 +401,61 @@ class Grid:
                     self.chars[y][x] = "."
                 elif c == "." and near(x, y) and n > 0.35:
                     self.chars[y][x] = ","
+
+    def unknown_shapes(self, have):
+        """Cells whose soft-ground shape Agros doesn't hold (have: kind -> keys)."""
+        self.half = {}
+        self.find_halves()
+        bad = []
+        for y in range(self.h):
+            if y in self.seam_rows:
+                continue
+            for x in range(self.w):
+                c, h = self.chars[y][x], self.half.get((x, y))
+                for kind, ch in (("tall", ","), ("path", "=")):
+                    if c == ch or (h and h[0] == kind):
+                        k = self.shape_key(kind, ch, x, y)
+                        if k != "1|11111111" and k not in have[kind]:
+                            bad.append((x, y))
+                if c == "-" and self.track_key(x, y) not in have["track"]:
+                    bad.append((x, y))
+        return bad
+
+    def snap_shapes(self, cat, keep_rows=()):
+        """Agros holds only the ground shapes its maps use, and its tiles are
+        nearly all spent. So instead of growing it, nudge the tall grass's edges
+        a cell at a time (grass to meadow or back, never on an event, a forced
+        band's rows or a seam row) until every shape is one Agros already has.
+        Each step takes the nudge near the first odd cell that leaves the fewest
+        odd cells, preferring to add grass. Without a catalog it does nothing."""
+        if cat is None:
+            return
+        have = {k: set(cat[k]["names"]) for k in ("tall", "path", "track")}
+        frozen = set(self.protect) | {(x, y) for y in set(keep_rows) | self.seam_rows for x in range(self.w)}
+        bad = self.unknown_shapes(have)
+        while bad:
+            best = None
+            for x0, y0 in bad:
+                for dy in (0, -1, 1):
+                    for dx in (0, -1, 1):
+                        x, y = x0 + dx, y0 + dy
+                        c = self.ch(x, y)
+                        if (x, y) in frozen or c not in (".", ","):
+                            continue
+                        self.chars[y][x] = "." if c == "," else ","
+                        n = len(self.unknown_shapes(have))
+                        self.chars[y][x] = c
+                        if best is None or (n, c == ",") < (best[0], best[3] == ","):
+                            best = (n, x, y, c)
+                if best is not None and best[0] < len(bad):
+                    break                 # this cell's nudge helps: take it
+            if best is None or best[0] >= len(bad):
+                break
+            _, x, y, c = best
+            self.chars[y][x] = "." if c == "," else ","
+            bad = self.unknown_shapes(have)
+        if bad:
+            sys.exit(f"{self.name}: no nudge fits these cells' shapes to Agros: {bad[:8]}")
 
     def find_halves(self):
         """Grass cells in a stair-step corner of the road or a meadow become half
@@ -510,9 +594,11 @@ class Grid:
                 ax, ay = x + i, y - 1
                 if ay < 0 or self.ch(ax, ay) not in (".", ",", "^") or self.done[ay, ax] or (ax, ay) in self.half:
                     continue
-                tip = OLIVE_TIP["tall" if self.ch(ax, ay) == "," else "grass"][i]
-                # '^' is a gap in the woods: the tip over grass, but as solid as the trees
-                self.put(ax, ay, block(tip) if self.ch(ax, ay) == "^" else walk(tip))
+                # '^' is a gap in the woods: a tip over grass, but as solid as the trees
+                if self.ch(ax, ay) == "^":
+                    self.put(ax, ay, block(SOLID_TIP[i]))
+                else:
+                    self.put(ax, ay, walk(OLIVE_TIP["tall" if self.ch(ax, ay) == "," else "grass"][i]))
         return tops
 
     def shades(self, cat, tops):
@@ -735,7 +821,8 @@ class Grid:
 #   the carter resting by her cart; a walled patch with a hidden Repel
 #   Tityros at the meadow wall's only gap: the first trainer, in plain view
 #   the shepherd's meadow and the threshing floor; a lip back down for the return
-#   the grove narrows (band 2, 3 deep); a west walk with a Poke Ball, and a lip
+#   Thestylis at the grove narrows' mouth, her line across its narrowest row;
+#     the narrows (band 2, 3 deep); a west walk with a Poke Ball, and a lip
 #     back into the meadow
 #   Phyllis's grove: a spring under a fig, Phyllis on the lane by her seed
 #   the ancient olive; the bee terraces climbing east (Komatas, optional)
@@ -790,7 +877,7 @@ ROUTE1 = [
     "%%..........===.............%%",  # 37
     "%%......%,,,,,,,%%%%%%%%%%%%%%",  # 38 the grove narrows (band 2); the west walk
     "%%......%,,,,,,%%%%%%%%%%%%%%%",  # 39
-    "%%..,...%%,,,,,%%%%%%%%%%%%%%%",  # 40
+    "%%..,...%%,,,,,.%%%%%%%%%%%%%%",  # 40 Thestylis at the narrows' mouth
     "%%______%%===..............%%%",  # 41 the west walk's lip down to the meadow
     "%%..,,,...===....,,,..h......%",  # 42 the shepherd's meadow
     "%%.,,,,...===...,,,,.....,...%",  # 43
@@ -838,12 +925,27 @@ ROUTE1_BAND_ROWS = [9, 10, 11, 38, 39, 40, 57, 58]
 ROUTE1_PINES = [(21, 55), (26, 55)]
 
 # ---------------------------------------------------------------------------
-# Kronion Hill: the summit, east of Route 1 (connection offset 2: this map's
-# row 0 is Route 1's row 2). 24 x 62. From the hill foot (y=16-17, Route 1's
-# 18-19) a stair climbs a band of rock, the path doubles back along a shelf to
-# a second stair, and the shrine's stylobate stands on top, at the edge of a
-# cliff over the sea. Rows 20-61 are only woods: Route 1 shows this map past
-# its east edge, so it covers every row a player there can see.
+# Kronion Hill, east of Route 1 (connection offset 2: this map's row 0 is
+# Route 1's row 2). 24 x 62. Classed a dungeon (map.json "ichor_kind"): the
+# ruined sanctuary is beat 5's story place, the flock holds the Akti road until
+# its scene plays, and the dark stair in the pit leads down to the Kronion crypt.
+#
+# The climb (the main line): from the hill foot (y=16-17, Route 1's 18-19) a
+# stair climbs a band of rock, the path doubles back along a shelf to a second
+# stair, and the shrine's stylobate stands on top, at the edge of a cliff over
+# the sea.
+#
+# The high pastures (a branch off the hill foot, past the herm): the hill's
+# south flank, three terraces stepping down to the sea cliffs on the east.
+#   the goat path down; Menalkas at its foot, in plain view
+#   the upper pasture and the shepherds' fold
+#   steps, or a lip by the fold, down to the spring: Thyrsis sings beside it,
+#     facing the water; Pan's shrine; olive terraces with a Burn Heal
+#   steps, or a lip, down to the goat terraces; Lykidas above the stair in
+#     the rock band, and below it the lookout shelf: the Everstone, and a
+#     feather on the tip of the point
+# Below the terraces the rows are the hill's woods: Route 1 shows this map
+# past its east edge, so it covers every row a player there can see.
 # ---------------------------------------------------------------------------
 KRONION = [
     # 0         1         2
@@ -862,17 +964,46 @@ KRONION = [
     "%%ZZZZZZZZZZZzZZZZq~~~~~",  # 11 upper rock band, stair at x=13
     "%%QQ,.r..,,,==,,.Bq~~~~~",  # 12 the shelf: the path climbs it on the diagonal,
     "%%QQ,,===,,,y..b..q~~~~~",  # 13 through grass across the whole shelf (x=9-11)
-    "%%.,,===rZZZZZZZZZ%qqqqq",  # 14 lower band, east half
-    "%%ZZZZzZZZZ%%%%%%%%%%%%%",  # 15 lower band, west half, stair at x=6
-    "===,,==.%%%%%%%%%%%%%%%%",  # 16 hill foot, from Route 1: grass across the path, then
-    "===,,,,B%%%%%%%%%%%%%%%%",  # 17 the path runs on to the stair
-    "%%%%%%%%%%%%%%%%%%%%%%%%",  # 18
-    "%%%%%%%%%%%%%%%%%%%%%%%%",  # 19
-] + ["%" * 24] * 42  # 20-61: the hill's woods, seen past Route 1's east edge
+    "%%.,,===rZZZZZZZZZ%qq~~~",  # 14 lower band, east half; the sea cliffs turn south
+    "%%ZZZZzZZZZ%%%%%%%%%q~~~",  # 15 lower band, west half, stair at x=6
+    "===,,==.%%%%%%%%%%%%q~~~",  # 16 hill foot, from Route 1: grass across the path, then
+    "===,,,,.H%%%%%%%%%%q~~~~",  # 17 the path runs on to the stair; the herm at the fork
+    "%%%%%,,.%%%%%%%%%%%q~~~~",  # 18 the goat path down to the pastures
+    "%%%%%.......%%%%%%%%q~~~",  # 19 Menalkas at its foot (9,19)
+    "%%%%..,*.....,,,%%%%.q~~",  # 20 the upper pasture
+    "%%WWWWW..,,,,,,,%%r..q~~",  # 21 the shepherds' fold
+    "%%W...W.,,,,,,,,,..*.q~~",  # 22
+    "%%W......,,,,,,,..y.q~~~",  # 23 the fold's gate (6,23)
+    "%%W...W.h,,,,...%%..q~~~",  # 24
+    "%%WWWWW.*.,,.....%%q~~~~",  # 25
+    "%%%TTTTsT%%TTT___TT%q~R~",  # 26 terrace walls: steps (7,26), a lip (14-16,26)
+    "%%###...#..,,,....,,.q~~",  # 27 the spring under a stone pine; Pan's shrine
+    "%%###...#.,,,,,....,.q~~",  # 28
+    "%%.......,,,,,.,,,,.q~~~",  # 29 Thyrsis at the spring (3,29)
+    "%%..y...,,,,,...,,,.q~~~",  # 30 the olive terraces
+    "%%..h..*.,,......*...q~~",  # 31
+    "%%..*..h.....,,,,..,.q~~",  # 32
+    "%%.,,,..y...,,,,,,,,q~R~",  # 33
+    "%%,,,,,.....,,,,,..q~~~~",  # 34 a Burn Heal (18,34)
+    "%%.,,....h.......,,q~~~~",  # 35
+    "%%%TTTsTT%%%TT___T%%q~~~",  # 36 terrace walls: steps (6,36), a lip (14-16,36)
+    "%%...r.----.yy....b.q~~~",  # 37 the goat terraces: a worn track steps down to Lykidas
+    "%%.,,,,,..----.r.....q~~",  # 38
+    "%%,,,,,,,..QQ----.b..q~~",  # 39
+    "%%.,,,,,.h.QQ..*....q~~R",  # 40 Lykidas (17,40) above the stair
+    "%%%%%%%%ZZZZ%%ZZzZZZq~~~",  # 41 a band of rock, broken by a clump of shrubs; stair at x=16
+    "%%%%%%%%%%..y.*..,...q~~",  # 42 the lookout shelf: the Everstone (11,44)
+    "%%%%%%%%%r.....*......q~",  # 43 the point (22,43)
+    "%%%%%%%%%%%.......h...q~",  # 44
+    "%%%%%%%%%%%%%%%......q~~",  # 45
+    "%%%%%%%%%%%%%%%%%%%%q~~~",  # 46
+] + ["%%%%%%%%%%%%%%%%%%%q~~~~"] * 15  # 47-61: the hill's foot woods, seen past Route 1's east edge
 KRONION_OFFSET = 2
-KRONION_BAND_ROWS = [12, 13, 16, 17]
-KRONION_OLIVES = []
+KRONION_SHOWN = 48          # rows the review renders show: the summit and the pastures
+KRONION_BAND_ROWS = [12, 13, 16, 17, 18]
+KRONION_OLIVES = [(8, 23), (11, 31), (15, 30), (16, 33)]
 KRONION_CYPRESSES = []
+KRONION_PINES = [(5, 27), (18, 22), (17, 43)]
 
 
 def build_route1_pieces(g, cat):
@@ -913,6 +1044,12 @@ def build_kronion_ruins(g, cat):
         g.ground(x, y, c)                                  # half-buried edges
 
 
+def build_kronion_pastures(g, cat):
+    """The high pastures' set pieces."""
+    g.place(cat, "spring", 2, 27)                     # the spring Thyrsis sings to
+    g.place(cat, "shrine", 8, 27)                     # Pan's shrine
+
+
 # ---------------------------------------------------------------------------
 # Events. Scripts refer to objects by the LOCALID_ constants mapjson generates.
 # ---------------------------------------------------------------------------
@@ -943,6 +1080,8 @@ def hidden(x, y, item, flag):
 
 P = "OBJ_EVENT_GFX_ICHOR_"
 WOOLOO = "OBJ_EVENT_GFX_SPECIES(WOOLOO)"
+MAREEP = "OBJ_EVENT_GFX_SPECIES(MAREEP)"
+SKIDDO = "OBJ_EVENT_GFX_SPECIES(SKIDDO)"
 R1 = "KallisteRoute1_EventScript_"
 KH = "KallisteRoute1_KronionHill_EventScript_"
 
@@ -962,6 +1101,8 @@ ROUTE1_EVENTS = {
         obj(WOOLOO, 4, 44, R1 + "GrazingWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
         obj(WOOLOO, 3, 47, R1 + "GrazingWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
         item_ball(3, 39, "ITEM_POKE_BALL", "FLAG_ICHOR_ITEM_ROUTE1_POKE_BALL"),
+        # the second checkpoint: at the grove narrows' south mouth, her line across its narrowest row
+        obj(P + "HARVESTER", 15, 40, R1 + "Thestylis", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=5),
         # optional: she watches her lane, off the road
         obj(P + "HARVESTER", 25, 34, R1 + "Phyllis", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=5),
         item_ball(27, 35, "ITEM_MIRACLE_SEED", "FLAG_ICHOR_ITEM_ROUTE1_MIRACLE_SEED"),
@@ -995,6 +1136,7 @@ ROUTE1_EVENTS = {
 # line must cut). check_route() proves no path skirts them.
 ROUTE1_MANDATORY = {
     "Tityros": (12, 49, "W", 3, "north"),
+    "Thestylis": (15, 40, "W", 5, "north"),
     "Agis": (14, 13, "W", 3, "north"),
     "Polyeidos": (24, 17, "S", 2, "kronion"),
 }
@@ -1013,6 +1155,18 @@ KRONION_EVENTS = {
         obj("OBJ_EVENT_GFX_ICHOR_TABLET", 10, 8, "0", "MOVEMENT_TYPE_FACE_DOWN",
             flag="FLAG_ICHOR_HIDE_TITAN_TABLET", local_id="LOCALID_KRONION_TABLET"),
         item_ball(16, 3, "ITEM_ESCAPE_ROPE", "FLAG_ICHOR_ITEM_KRONION_ESCAPE_ROPE"),
+        # the high pastures, top to bottom
+        # the first trainer on the branch: at the goat path's foot, in plain view
+        obj(P + "SHEPHERD", 9, 19, KH + "Menalkas", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=4),
+        obj(WOOLOO, 4, 23, KH + "FoldWooloo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        obj(MAREEP, 3, 22, KH + "FoldMareep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        # optional: he sings to the spring, his back to the path
+        obj(P + "SHEPHERD", 3, 29, KH + "Thyrsis", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=1),
+        item_ball(18, 34, "ITEM_BURN_HEAL", "FLAG_ICHOR_ITEM_KRONION_BURN_HEAL"),
+        obj(SKIDDO, 5, 38, KH + "Skiddo", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1),
+        # above the only stair down to the lookout shelf
+        obj(P + "GOATHERD", 17, 40, KH + "Lykidas", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2),
+        item_ball(11, 44, "ITEM_EVERSTONE", "FLAG_ICHOR_ITEM_KRONION_EVERSTONE"),
     ],
     "warp_events": [],
     "coord_events": [
@@ -1023,19 +1177,31 @@ KRONION_EVENTS = {
         sign(14, 10, KH + "Stele"),
         sign(9, 5, KH + "Altar"),
         sign(10, 5, KH + "Altar"),
-        sign(9, 6, KH + "Pit"),
-        sign(10, 6, KH + "Pit"),
+        # the pit's front row: its back row (9-10,6) can't be faced from anywhere
         sign(9, 7, KH + "Pit"),
         sign(10, 7, KH + "Pit"),
         hidden(13, 7, "ITEM_HARD_STONE", "FLAG_ICHOR_HIDDEN_KRONION_HARD_STONE"),
         hidden(10, 4, "ITEM_STARDUST", "FLAG_ICHOR_HIDDEN_KRONION_STARDUST"),
+        sign(8, 17, KH + "HermFork"),
+        sign(8, 28, KH + "PanShrine", "BG_EVENT_PLAYER_FACING_NORTH"),
+        hidden(22, 43, "ITEM_PRETTY_FEATHER", "FLAG_ICHOR_HIDDEN_KRONION_PRETTY_FEATHER"),
     ],
+    # Not a route: see the KRONION comment. mapjson ignores the key; map_audit.py reads it.
+    "ichor_kind": "dungeon",
+}
+
+# The branch's checkpoints: (x, y, facing, sight). check_route() proves every
+# walk from the hill foot to what they guard crosses their line.
+KRONION_MANDATORY = {
+    "Menalkas": (9, 19, "W", 4, [(10, 22)]),            # the upper pasture
+    "Lykidas": (17, 40, "W", 2, [(11, 44), (21, 43)]),  # the lookout shelf
 }
 
 # Player positions along the route for the screen-sized review crops.
 ROUTE1_VIEWS = [(11, 61), (11, 56), (10, 51), (10, 46), (12, 41), (13, 37), (21, 35), (12, 31),
                 (12, 25), (19, 25), (12, 20), (23, 19), (12, 16), (12, 13), (9, 8), (11, 3)]
-KRONION_VIEWS = [(2, 16), (6, 13), (12, 12), (11, 10), (14, 9), (16, 5)]
+KRONION_VIEWS = [(2, 16), (6, 13), (12, 12), (11, 10), (14, 9), (16, 5),
+                 (6, 18), (9, 21), (15, 25), (5, 29), (14, 32), (8, 37), (15, 39), (15, 43)]
 
 
 # ---------------------------------------------------------------------------
@@ -1054,7 +1220,7 @@ def make_route1():
 
 
 def make_kronion():
-    g = Grid(KRONION, "Kronion Hill", KRONION_OLIVES, KRONION_CYPRESSES, sea_edges="NE")
+    g = Grid(KRONION, "Kronion Hill", KRONION_OLIVES, KRONION_CYPRESSES, KRONION_PINES, sea_edges="NE")
     g.roughen(event_cells(KRONION_EVENTS), seed=11, keep_rows=KRONION_BAND_ROWS)
     return g
 
@@ -1062,6 +1228,7 @@ def make_kronion():
 def build_route1(cat):
     g = make_route1()
     build_route1_pieces(g, cat)
+    g.snap_shapes(cat, ROUTE1_BAND_ROWS)
     g.build(cat)
     g.check()
     return g
@@ -1070,6 +1237,8 @@ def build_route1(cat):
 def build_kronion(cat):
     g = make_kronion()
     build_kronion_ruins(g, cat)
+    build_kronion_pastures(g, cat)
+    g.snap_shapes(cat, KRONION_BAND_ROWS)
     g.build(cat)
     g.check()
     return g
@@ -1081,6 +1250,13 @@ def write_shapes():
     r1, kh = make_route1(), make_kronion()
     build_route1_pieces(r1, None)
     build_kronion_ruins(kh, None)
+    build_kronion_pastures(kh, None)
+    # Fit the grass to the shapes Agros already holds, as the build does, so the
+    # list keeps only what the maps use. (A first run, before any catalog, keeps
+    # every shape the maps draw.)
+    cat = load_catalog() if CATALOG.exists() else None
+    r1.snap_shapes(cat, ROUTE1_BAND_ROWS)
+    kh.snap_shapes(cat, KRONION_BAND_ROWS)
     for g in (r1, kh):
         for k, keys in g.shapes().items():
             merged[k] |= keys
@@ -1390,6 +1566,35 @@ class Walk:
         self.dist = dist
         return min(best) if best else None
 
+    def traps(self, starts):
+        """Cells a walk from the starts reaches but can't come back from (a
+        ledge dropped the player somewhere with no way back up)."""
+        ok = lambda c: self.kind.get(c) in ("open", "grass")
+        def moves(c):
+            for dx, dy in STEPS:
+                n = (c[0] + dx, c[1] + dy)
+                if self.kind.get(n) == "ledge" and (dx, dy) == (0, 1):
+                    n = (n[0], n[1] + 1)
+                if ok(n):
+                    yield n
+        seen, todo = {s for s in starts if ok(s)}, [s for s in starts if ok(s)]
+        back = {}
+        while todo:
+            c = todo.pop()
+            for n in moves(c):
+                back.setdefault(n, set()).add(c)
+                if n not in seen:
+                    seen.add(n)
+                    todo.append(n)
+        home, todo = {s for s in starts if ok(s)}, [s for s in starts if ok(s)]
+        while todo:
+            c = todo.pop()
+            for p in back.get(c, ()):
+                if p not in home:
+                    home.add(p)
+                    todo.append(p)
+        return sorted(seen - home)
+
     def grass_parts(self):
         seen, parts = set(), []
         for c, k in self.kind.items():
@@ -1448,7 +1653,9 @@ def check_route(r1, kh):
     """MAP_DESIGN's route rules, proved: no grass-free walk from Elaia to Akti,
     at least three forced bands (the first exactly 2 deep), the mandatory
     trainers' lines cut every walk they guard, and Kronion Hill's climb crosses
-    grass. Prints the proof; exits on a broken rule."""
+    grass; on the hill, Menalkas and Lykidas hold what they guard, the climb to
+    the summit crosses no trainer's line, and on both maps no ledge traps a
+    player. Prints the proof; exits on a broken rule."""
     errs = []
     w = Walk(r1.blocks(), PRIMARY, SECONDARY)
     if w.cost(R1_SOUTH, R1_NORTH) is None:
@@ -1488,6 +1695,32 @@ def check_route(r1, kh):
         print(f"  Kronion Hill forced band: rows {ys[0]}-{ys[-1]}, crossed in no fewer than {depth} steps")
     if not kb or any(d < 2 for _, d in kb):
         errs.append("Kronion Hill: the climb needs a band of grass at least 2 deep")
+    kt = trainers_of(KRONION_EVENTS)
+    for name, (x, y, facing, reach, goals) in KRONION_MANDATORY.items():
+        bx, by, bf, bs = kt[name]
+        if (bx, by, FACING[bf], bs) != (x, y, FACING[facing], reach):
+            errs.append(f"Kronion Hill: {name}'s event does not match KRONION_MANDATORY")
+        line = k.sight(x, y, facing, reach)
+        if k.cost(KH_FOOT, goals) is None:
+            errs.append(f"Kronion Hill: no walk at all from the hill foot to what {name} guards")
+        skirt = k.cost(KH_FOOT, goals, avoid=set(line) | {(x, y)})
+        print(f"  {name} at ({x},{y}) sees {line}: " + ("cannot be skirted" if skirt is None else "CAN be skirted"))
+        if skirt is not None:
+            errs.append(f"Kronion Hill: {name}'s line can be skirted")
+    # The climb to the summit stays clear of every trainer on the hill: the
+    # pastures are a branch, so nobody stops a player headed for the scene.
+    seen = set()
+    for name, (x, y, f, reach) in kt.items():
+        seen |= set(k.sight(x, y, f, reach)) | {(x, y)}
+    if k.cost(KH_FOOT, KH_TOP, avoid=seen) is None:
+        errs.append("Kronion Hill: the climb to the summit crosses a trainer's line")
+    for name in sorted(set(kt) - set(KRONION_MANDATORY)):
+        print(f"  {name} is optional")
+    # §1: never use a ledge to trap a player away from an exit.
+    for name, walk_, starts in (("Route 1", w, R1_SOUTH), ("Kronion Hill", k, KH_FOOT)):
+        stuck = walk_.traps(starts)
+        if stuck:
+            errs.append(f"{name}: {len(stuck)} cell(s) a player can reach but not leave, e.g. {stuck[:4]}")
     if errs:
         sys.exit("route rules broken:\n  " + "\n  ".join(errs))
     return w, k
@@ -1590,12 +1823,13 @@ def main():
     if not args.no_render:
         for p in render(r1, "kalliste_route1", ROUTE1_EVENTS, ROUTE1_BORDER, ROUTE1_VIEWS):
             print(p)
-        for p in render(kh, "kalliste_route1_kronion_hill", KRONION_EVENTS, KRONION_BORDER, KRONION_VIEWS, rows=20):
+        for p in render(kh, "kalliste_route1_kronion_hill", KRONION_EVENTS, KRONION_BORDER, KRONION_VIEWS,
+                        rows=KRONION_SHOWN):
             print(p)
         print(render_seams(r1, kh))
         print(walk_render("kalliste_route1_walk", r1.blocks(), PRIMARY, SECONDARY, ROUTE1_EVENTS,
                           R1_SOUTH, R1_NORTH, "Route 1: Elaia (bottom) to Akti (top)"))
-        print(walk_render("kalliste_route1_kronion_hill_walk", kh.blocks()[:20], PRIMARY, SECONDARY, KRONION_EVENTS,
+        print(walk_render("kalliste_route1_kronion_hill_walk", kh.blocks()[:KRONION_SHOWN], PRIMARY, SECONDARY, KRONION_EVENTS,
                           KH_FOOT, KH_TOP, "Kronion Hill: hill foot (left) to the summit"))
 
 

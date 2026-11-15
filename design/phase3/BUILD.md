@@ -172,6 +172,400 @@ All 17 maps are registered. Outdoor maps are in `gMapGroup_TownsAndRoutes`; Arka
 
 Parties: `design/phase3/parties/{heights,arkadia,artemis}.party`. Wild tables: `design/phase3/encounters/region_b2.json`, folded (Routes 11–12, the Wood and the Pool, morning and night; fishing for Route 11's pool and the temple's waterfall pool). Styx Falls has no wild battles and its black pool no table.
 
+## Batch 5: Astyra (beats 48–57)
+
+The midpoint, and the next batch on the critical path (Arkadia → **Astyra** → Kaldera). It builds on main fe2234a4ac merged here: the real Aethos dex (`ICHOR_AETHOS_DEX` is defined, so species are real, follower sprites included) and hidden items on bank flags. Everything in Batch 2's opening list holds: use the engine directly, the route standard, every house a home, every interior unique, three render-and-critique passes, a 2x render per map in `design/phase3/img/`, and batch 1's done-means.
+
+Six map agents and a sprites agent, each on its own branch (`act2-b5-<agent>`) in its own worktree, each pushing as it goes. Batch 2 ran seven. The raid and the salt well are each a dungeon-sized job, so they go to two agents; one agent holding both would be the batch's long pole. If only five can run, fold `sea` into `akropolis` and move Phaleron and its net-loft to `outskirts`.
+
+### Before the agents start (this session)
+
+1. **Register all 23 maps** with `tools/ichor/new_map.py`: placeholder layouts copied from Act I maps, stand-in music, the map ids and groups below, so every warp compiles from the start. The five outdoor maps go in `gMapGroup_TownsAndRoutes`. The 16 rooms and the two salt-well floors go in a new `gMapGroup_IndoorAstyra`, appended to `group_order`.
+2. **Claim the cross-map story flags** (the hand-off table below) in 0x5B0–0x5C5. Then delete the `#ifndef FLAG_ICHOR_AKROPOLIS_RAID … 0` stub at the end of `flags.h`, which Lebadeia's scripts read.
+3. **Claim three daily flags**: `FLAG_DAILY_ICHOR_ASTYRA_JAR` and `_ASTYRA_CHIPS` (the city's) and `_PANATHENAIA` (civic's, stretch). They take the next free offsets, 0x4F–0x51 today. `FLAG_DAILY_ICHOR_KRONIST_BREAD` already exists and is shared.
+4. **Append batch 5's 23 trainer names to `parties/ORDER.txt`** in the order of the Ids table, so agents never touch that file. Stage `design/phase3/encounters/region_c2.json` from SCRIPT.md Part 4: every table is already written there. Batch 4 takes `region_c1.json`.
+5. **Generalize the picture window.** Turn `Ichor_ShowProgram`/`Ichor_HideProgram` (`src/ichor_act2_scene.c`, the Dionysia's program close-up) into `special(Ichor_ShowPicture)` with `VAR_0x8004` = `ICHOR_PICTURE_PROGRAM`, `_DECREE`, `_FORGED_ORDER` or `_PRACTICE_TABLETS`, and `special(Ichor_HidePicture)`. The program stays a wrapper. The three new 64×64 images start as copies of the program, and sprites5 draws them.
+6. **Add batch 5's block to `include/constants/ichor_gfx_stubs_act2.h`**: every walker in "Stand-ins" below, aliased to its stand-in. Also give `fold_parties.py` stand-ins for the new pics (Archer, Philosopher, Athlete, Potter, Pilgrim, Kleon Titan, Admin Rhea). With the dex in, stop dropping `Ability:` lines.
+7. **Update `map_audit.py`.** Add `"SaltWell"` to the Astyra prefixes in `STAGES`.
+8. **Rename the three trainers** whose names are longer than `TRAINER_NAME_LENGTH` (10) in SCRIPT.md: Theophrastos becomes **Tyrtamos** (his birth name; Aristotle renamed him), Antisthenes becomes **Krates** (Diogenes's pupil, which keeps the jar), and Aristoxenos becomes **Archytas** (the harmonist). None of the three appears in `design/` or on the Lazarus list.
+
+### Maps
+
+All are in `MAPSEC_ASTYRA`. Kinds are what `map_audit.py` judges them as. Interior sizes are a guide; the room's owner decides.
+
+| Map (directory) | Kind | `map_type` | Size | Tilesets | Beats | Owner |
+|---|---|---|---|---|---|---|
+| `MAP_ASTYRA` (`Astyra`) | town | CITY | 64×56 | aethos + `astyra` | 48 (the Dipylon, the Agora), 52 (Kerykos's run), 53 | city |
+| `MAP_ASTYRA_KERAMEIKOS` (`Astyra_Kerameikos`) | town | TOWN | 40×30 | aethos + `kerameikos` | 48 (first step: walls and rock, no text), 54 | outskirts |
+| `MAP_ASTYRA_PAUPERS_GRAVES` (`Astyra_PaupersGraves`) | town (`"ichor_kind": "town"`) | ROUTE | 16×12 | aethos + `kerameikos` | — | outskirts |
+| `MAP_ASTYRA_AKROPOLIS` (`Astyra_Akropolis`) | town | TOWN | 44×36 | aethos + `akropolis` | 55, 57 (Boutes, the grate) | akropolis |
+| `MAP_ASTYRA_PHALERON` (`Astyra_Phaleron`) | town | TOWN | 36×24 | aethos + `phaleron` | 57 (the landing); batch 6's 58 starts here | sea |
+| `MAP_SALT_WELL_1F` (`SaltWell_1F`) | dungeon | UNDERGROUND, lit from above | 30×24 | aethos + `salt_well` | 57 | sea |
+| `MAP_SALT_WELL_B1F` (`SaltWell_B1F`) | dungeon | UNDERGROUND, `"cave": true` | 30×24 | aethos + `salt_well` | 57 | sea |
+| `MAP_ASTYRA_ASCLEPEION` | interior | INDOOR | ~20×14 | oikos + civic's | 49, 56 (the pallets) | civic |
+| `MAP_ASTYRA_AGORA` (the market hall) | interior | INDOOR | ~18×10 | oikos + civic's | shops | civic |
+| `MAP_ASTYRA_STOA_OF_THE_ARCHON` | interior | INDOOR | ~22×12 | oikos + civic's | 52 | civic |
+| `MAP_ASTYRA_LIBRARY` | interior | INDOOR | ~24×12 + courtyard | oikos + civic's | 51 | civic |
+| `MAP_ASTYRA_LYCEUM` | interior | INDOOR | ~24×20 | oikos + civic's | the walk (4 trainers) | civic |
+| `MAP_ASTYRA_TAVERN` (the Glaux) | interior | INDOOR | ~14×10 | oikos + homes's | knucklebones | homes |
+| `MAP_ASTYRA_PHAEDONS_HOUSE` | interior | INDOOR | ~14×9, two rooms | oikos + homes's | 50, 56 (Elpis, "Morning.") | homes |
+| `MAP_ASTYRA_KEPHALOS_HOUSE` | interior | INDOOR | ~18×12 | oikos + homes's | xenia host, the cloak | homes |
+| `MAP_ASTYRA_LYSIMACHOS_HOUSE` | interior | INDOOR | ~7×6 | oikos + homes's | ostraka | homes |
+| `MAP_ASTYRA_SCRIBES_HOUSE` (Eukleides) | interior | INDOOR | ~10×7 | oikos + homes's | the census errand | homes |
+| `MAP_ASTYRA_PRAXAGORAS_HOUSE` | interior | INDOOR | ~12×9 | oikos + homes's | oil, Sideros | homes |
+| `MAP_ASTYRA_SCULPTORS_WORKSHOP` (Kritios) | interior | INDOOR | ~16×12 | oikos + `astyra_crafts` | Scope Lens, the static Glyphlet | outskirts |
+| `MAP_ASTYRA_WEAVERS_HOUSE` | interior | INDOOR | ~12×12, loft in-map | oikos + `astyra_crafts` | the Hyphantis trade | outskirts |
+| `MAP_ASTYRA_KERAMEIKOS_POTTERY` (Brygos) | interior | INDOOR | ~12×9 | oikos + `astyra_crafts` | Spell Tag | outskirts |
+| `MAP_ASTYRA_KERAMEIKOS_LODGE` (Manes) | interior | INDOOR | ~8×7 | oikos + `astyra_crafts` | lore, the obol | outskirts |
+| `MAP_ASTYRA_PHALERON_NET_LOFT` (Hipponikos) | interior | INDOOR | ~12×10, loft in-map | oikos + `astyra_crafts` | Damp Rock | outskirts |
+
+Every outdoor map's `ON_TRANSITION` holds its people's story hides: `FLAG_TEMP_11`–`_17`, set from the story flags. The bank pays only for state nothing else records, so SCRIPT.md Part 8's named hide flags (Alethea's six, Daphne's three, the Keeper, the Archon, Kerykos, the raid, the vote, the dolphin) are temp flags under those names' comments. Leave `FLAG_TEMP_18`–`_1F` to world-postgame's placements. Each map takes at most 64 object templates with 16 live at once, so hide the regulars around a scene while it plays.
+
+### Who builds what
+
+| Agent | Builds | Files it owns |
+|---|---|---|
+| **city** | The `astyra` secondary (SCRIPT.md Part 10, minus Phaleron): marble houses, the Agora's paving, the herald's stone, the urn's fence, the crowd metatiles (busy, quiet, the fenced vote), stoas, the Painted Stoa, the statue plinths (Kairos scratched), the pithoi, the Kronist's cart, the old spring house, fountains, four gate styles, the Akropolis cliff from below with the ramp's foot, the Asclepeion against the cliff, the herb garden, the theater seats, the drying lines, the chip heaps, the open orchard. `MAP_ASTYRA` with its roster: the archer, Hierokles, the wardens, Euthyphron, Diopeithes, the woman and child, Kerykos, the stall, Toxaris, Anacharsis, Zenon, Krates, the ramp guard, the citizens, the kid. Beat 48 (the Dipylon trigger, the proclamation, the statues), beat 52's run, beat 53 (the urn). The two decoys, the jars, the chips, the Perdix plaque, the Kronists' stall and its fixed dig, two daily digs, Kephalos's berry tree, the signs, and every door and gate below. | `tools/ichor/art/astyra_*.py`, `data/tilesets/secondary/astyra/`, `tools/ichor/maps/astyra.py`, `data/maps/Astyra/` and its layout, `design/phase3/TILES_astyra.md`, `parties/city.party`, `tests/act2_astyra.*` |
+| **civic** | Five public rooms on its own room secondaries (`astyra_civic`, plus `_civic2` if the 504 tiles don't hold them). The Asclepeion: Phaedon, Panacoil, the Pithos, the cold hearth, beat 49, and beat 56's half (Chalkos and the pallets). The market hall: three counters and the moneychanger. The Stoa: beat 52 with `ICHOR_PICTURE_PRACTICE_TABLETS`; the clerk and the desk afterwards. The Library: beat 51, page V, the amphora. The Lyceum: the walk. `HEAL_LOCATION_ASTYRA`. | `tools/ichor/art/astyra_civic_*.py`, its secondaries, `tools/ichor/maps/astyra_civic.py`, those five maps, `design/phase3/ROOMS_astyra_civic.md`, the heal-location row, `parties/civic.party`, `tests/act2_astyra_civic.*` |
+| **homes** | Six rooms on an `astyra_homes` secondary. Phaedon's house: beat 50; beat 56's half with Elpis, Daphne and "Morning." (sets `FLAG_ICHOR_RAID_MORNING`, holds `TIME_MORNING`); the music box; the Destiny Knot; Elpis and the conch. Kephalos's house: the xenia heal and rest, the cloak, the incense. Lysimachos's house: the ostraka, and his end of the errand. Eukleides's house: the errand, PP Up, the curl, the knucklebone link (stretch). Praxagora's house: before the raid and after it (Sideros, Olive Oil ×5). The Glaux: Dikaiopolis, Philokleon and Xanthippe. | `tools/ichor/art/astyra_homes_*.py`, its secondary, `tools/ichor/maps/astyra_homes.py`, those six maps, `design/phase3/ROOMS_astyra_homes.md` |
+| **outskirts** | The `kerameikos` secondary (SCRIPT.md Part 10: stelai, lekythoi, the bull's plot, Hegeso, Dexileos, the Eridanos in its channel, cypresses, kilns, clay pits, cemetery grass, the mounds, the coin stones, the wild fig). `MAP_ASTYRA_KERAMEIKOS`: beat 48's first sight, Brygos, Proxenos, the drum, beat 54 (dusk; warps to the Akropolis). `MAP_ASTYRA_PAUPERS_GRAVES`. Five craftsmen's rooms on an `astyra_crafts` secondary: Brygos's workshop, the gravedigger's lodge, Kritios's workshop, the weavers' house, and Hipponikos's net-loft (its door is on the sea agent's Phaleron). The trade entry. | `tools/ichor/art/kerameikos_*.py`, `astyra_crafts_*.py`, both secondaries, `tools/ichor/maps/kerameikos.py`, `astyra_crafts.py`, those seven maps, `TILES_kerameikos.md`, `ROOMS_astyra_crafts.md`, the `src/data/trade.h` entry, `parties/outskirts.party`, `tests/act2_kerameikos.*` |
+| **akropolis** | The `akropolis` secondary (Part 10: the rock's paving, the Propylaia, the bronze Athena's base, the Parthenon from outside, the Erechtheion and both porches, the trident marks under the roof hole, the grate, the Pandroseion; **the olive**, 2×3, with its falling frame and a fallen trunk; the split and its rubble rows; the stump, the drums, the weeds, the parapet; lit and unlit torch stands). `MAP_ASTYRA_AKROPOLIS`: beat 55 whole (four stops, two multi battles, Kleon, Rhea, the olive, `ICHOR_PICTURE_FORGED_ORDER`), the rock after the raid (Pandrosa, the guard, the stump, the parapet), beat 57's top half (Boutes, the grate, the Leaf Stone), Athena's great altar, the drum's ledge, a daily dig, the stargazing seat (stub). `PARTNER_ICHOR_ALETHEA_AKROPOLIS`. | `tools/ichor/art/akropolis_*.py`, `data/tilesets/secondary/akropolis/`, `tools/ichor/maps/akropolis.py`, the map, `TILES_akropolis.md`, `parties/akropolis.party`, the partner in `src/data/battle_partners.party` and `include/constants/battle_partner.h`, `tests/act2_akropolis.*` |
+| **sea** | The `salt_well` secondary on aethos: salt-white rock, terraced tide pools (deep, drained, wadeable), two-frame sluice wheels, the great sluice, the shelf and its lip, wet sand, blowholes (dark, and lit), the fresh trickle, the sea arch, light shafts, two braziers. Start from `trophonios_*`/`kithairon_cave_*` rock. The `phaleron` secondary: coarse sand, dune grass, the quay and its bollards, fishers' huts, the harbor shrine, the cliff and its sea arch, the bay, the moored *Paralos*, and a small watchtower. Start from `kirrha_*` and the slice's trireme. Both well floors, with beat 57's well half (the sluices, the tide, the braziers, the blowholes, Asbestos, Nauson, Lepis, Alethea's three points, the dolphin, the Conch, Delphinus, the goodbye and the cloak, the ride out). `MAP_ASTYRA_PHALERON`: Euangelos, Konon, the shrine and its seller, the islet, Daphne from the morning after the raid, the *Paralos*'s hoplite and Peisias as one-line stubs for batch 6, and Hipponikos's door. | `tools/ichor/art/salt_well_*.py`, `phaleron_*.py`, both secondaries, `tools/ichor/maps/salt_well.py`, `phaleron.py`, those three maps, `TILES_salt_well.md`, `TILES_phaleron.md`, `parties/sea.party`, `tests/act2_salt_well.*` |
+| **sprites5** | Every walker, object, class and pic in "Stand-ins" below, plus the three 64×64 picture-window images | as sprites2 and sprites3, with `tools/ichor/art/sprites_act2_b5*.py`, `design/phase3/SPRITES.md`, deleting each stub line as its sprite lands |
+
+The homes agent stages no `.party` file because nobody in its rooms battles. Its test is `tests/act2_astyra_homes.*`.
+
+**Shared files** take small appended entries, and this session resolves conflicts in them:
+- `flags.h`: through `claim.py` only, inside your range.
+- `layouts.json` and `map_groups.json`: this session registers every map; agents change only their own layout entries.
+- `src/data/tilesets/{headers,graphics,metatiles}.h`: one appended block per new secondary.
+- `heal_locations.json`: civic's.
+- `trade.h`: outskirts's.
+- `battle_partners.party` and `battle_partner.h`: akropolis's.
+- The sprite tables: sprites5's.
+
+**Tile budget.** A secondary holds at most 504 tiles. Keep 496–511 free on any map with wide doors. `astyra` is the fullest: one secondary has to draw a whole 64×56 city. Lean on aethos for roads, grass, trees and plain walls, and cut variety before the cliff or the Agora. Thyrsa City (56×48) fit in one set.
+
+### Cross-map scenes and hand-offs
+
+Each scene is owned by the agent whose map it plays on. Agents meet only through these flags and the fixed warp ids. Every cross-agent scripted warp is `warp(MAP_…, <warp id>)`, which the macro accepts, so no agent waits for another's coordinates.
+
+| Flag (claimed by this session, 0x5B0–0x5C5) | Set by | Read by |
+|---|---|---|
+| `FLAG_ICHOR_ARRIVED_ASTYRA`, `_VISITED_ASTYRA` | city (the first step through the Dipylon) | everyone (rooms' occupants appear) |
+| `FLAG_ICHOR_HEARD_PROCLAMATION` | city (beat 48) | civic (Alethea shows in the Stoa) |
+| `FLAG_ICHOR_MET_PHAEDON` | civic (first heal), or homes (beat 50, if the heal was skipped) | both |
+| `FLAG_ICHOR_MET_ELPIS` | homes (beat 50) | civic (Daphne in the Library; the Asclepeion's music) |
+| `FLAG_ICHOR_LIBRARY_DAPHNE` | civic (beat 51) | city (Kerykos's run) |
+| `FLAG_ICHOR_STOA_HEARING` | civic (beat 52) | city (the urn; the after-the-hearing lines), every room's lines |
+| `FLAG_ICHOR_OSTRACISM_DONE`, `FLAG_ICHOR_WROTE_OWN_NAME` | city (beat 53) | outskirts (beat 54; the farmer box), everyone's after-lines |
+| `FLAG_ICHOR_ALETHEA_CONFESSED` | outskirts (beat 54) | akropolis (beat 55 starts on arrival) |
+| `FLAG_ICHOR_AKROPOLIS_RAID`, `_PROPYLAIA_PASSED`, `_KLEON_AKROPOLIS_DONE` | akropolis | city (the ramp guard hides from `_RAID`, so a whiteout can walk back up), akropolis (resume) |
+| `FLAG_ICHOR_SECOND_FRAGMENT_STOLEN` (with `#define`s `FLAG_ICHOR_OLIVE_FELL` and `_RHEA_AKROPOLIS_DONE` aliased to it: always set together) | akropolis (end of 55) | civic (beat 56), everyone's after-raid lines |
+| `FLAG_ICHOR_AFTER_RAID` | civic (beat 56, the Asclepeion) | homes (beat 56's house half, Sideros, the cloak), city lines |
+| `FLAG_ICHOR_RAID_MORNING` (**new**) | homes ("Morning." in Phaedon's house) | akropolis (beat 57), sea (Daphne on the quay), city (the stall is empty) |
+| `FLAG_ICHOR_SALT_WELL_OPEN` | akropolis (beat 57) | akropolis (the grate), sea |
+| `FLAG_ICHOR_GOT_KEPHALOS_CLOAK` | homes | sea (the goodbye's cloak box) |
+| `FLAG_ICHOR_DELIVERED_CLOAK`, `FLAG_ICHOR_ALETHEA_LEFT` | sea (beat 57) | homes (Kephalos's incense), akropolis, city |
+| `FLAG_ICHOR_GOT_POSEIDONS_CONCH` (the engine's relic flag) | sea | homes (Elpis's conch), sea (the islet), everyone |
+
+**The held tint chain** (`Ichor_HoldTimeOfDay`, ENGINE_API §7; the hold survives warps and saves):
+1. city: beat 53 holds `TIME_DAY` for the urn and releases it at the end.
+2. outskirts: the Kerameikos's `ON_TRANSITION` holds `TIME_EVENING` when `OSTRACISM_DONE` is set and `ALETHEA_CONFESSED` is not. After beat 54 it holds `TIME_NIGHT`, then `warp(MAP_ASTYRA_AKROPOLIS, 0)`.
+3. akropolis and civic keep the night held.
+4. homes' "Morning." holds `TIME_MORNING`.
+5. sea releases the hold when the ride lands at Phaleron, and also on `FLAG_ICHOR_ALETHEA_LEFT` as a safety.
+
+**Readings picked where the script is open:**
+- **Beats 48 and 53 play in the outdoor Agora** on `MAP_ASTYRA`, so they are the city agent's. `MAP_ASTYRA_AGORA` is the market hall. **Beat 54 plays in the Kerameikos**, so it is outskirts's.
+- **Beat 52's run** fires on a load of `MAP_ASTYRA` with the player on the Library's doorstep, `LIBRARY_DAPHNE` set and `STOA_HEARING` clear. It ends `warp(MAP_ASTYRA_STOA_OF_THE_ARCHON, 0)`. The Stoa plays the hearing on *any* entry in that state.
+- **Beat 53's "next time"** is the first load of `MAP_ASTYRA` after the hearing where the player isn't standing on the Stoa's doorstep (`getplayerxy` in an `ON_FRAME`). Stepping out of the Stoa leaves the evening free; the next door or gate brings noon.
+- **Beat 57's "by day"** means `RAID_MORNING`, not the clock. The morning stays held until Phaleron.
+- **Pandrosa's "TM Calm Mind"** is the engine's gift I, a lesson (ENGINE_API §3). Use `EventScript_IchorHierophantRite` (one free loved offering: Olive Oil) and `EventScript_IchorHierophantGift`, with `VAR_0x8004 = ICHOR_GOD_ATHENA`.
+- **No wild battles during the raid.** No engine flag turns encounters off, so keep the north wall's grass off the raid's path behind Alethea's turn-back triggers ("Not now. Up.").
+- **The salt well's 1F basins** are non-surfable deep-water metatiles (draining is the only way), and so is B1F's flooded floor. Only B1F's deep pool and the arch are surfable. The audit then wants water tables on B1F alone, as Part 4 has them.
+- **Alethea's and the dolphin's positions** in the well are derived from W1–W3, Asbestos's trainer flag and the Conch. That costs no flags.
+- **The paupers' graves** are 16×12, the front matter's size.
+- **The Phaleric Gate** is on the south edge, centre-west.
+- **The Glaux** is homes's, to balance the load.
+
+### Seams and warps
+
+Offsets follow batch 2's rule: the game reads a neighbor's row (or column) as this map's minus the offset. On left and right connections the 8 columns nearest the seam are aethos-only; on up and down connections, the 6 rows (MAP_DESIGN §5). This applies across the overlap, unless the two maps share a secondary.
+
+| Seam | Fixed now | Connection | Owner |
+|---|---|---|---|
+| Route 16 (batch 4) → the Kerameikos's west edge | The Kerameikos's road meets x = 0 on rows 14–15, with verges on 13 and 16; every other row of the west edge is blocked. Columns 0–7 are aethos-only (road, verges, cypresses, rocks). For Route 16's road on rows *q*, *q*+1: Kerameikos `left` offset 14 − *q*, Route 16 `right` offset *q* − 14. Added at integration once Route 16 exists. | none yet | outskirts |
+| The Kerameikos ↔ Astyra (the Dipylon) | The Kerameikos's road meets x = 39 on rows 14–15 (verges 13, 16), and columns 32–39 are aethos-only. Astyra's Dipylon road meets x = 0 on rows 28–29 (verges 27, 30), and columns 0–7 are aethos-only outside the west wall. **The Dipylon's towers stand on Astyra's map at columns 8–11**, its passage on rows 28–29, as Thyrsa's gates do. | Kerameikos `right` −14; Astyra `left` +14 | outskirts, city |
+| The Kerameikos ↔ the paupers' graves | The gap in the cemetery's south wall meets y = 29 at columns 24–27 (path 25–26). The graves' path meets y = 0 at columns 6–9 (path 7–8). Same secondary, so there's no strip. | Kerameikos `down` +18; graves `up` −18 | outskirts |
+| Astyra ↔ Phaleron (the Phaleric Gate) | Astyra's road meets y = 55 at columns 28–31 (road 29–30), the gate in the south wall above it, and rows 50–55 are aethos-only. Phaleron's road meets y = 0 at columns 10–13 (road 11–12), and rows 0–5 are aethos-only. | Astyra `down` +18; Phaleron `up` −18 | city, sea |
+| Astyra → Route 17 (batch 7), the Diochares Gate | Astyra's road meets y = 0 at columns 50–53 (road 51–52), by the Lyceum; rows 0–5 are aethos-only. For Route 17's road at columns *c*…*c*+3: Astyra `up` 50 − *c*, Route 17 `down` *c* − 50. Until then the warden stands in the passage, with his SCRIPT.md lines; batch 7 moves him aside. | none yet | city |
+| Astyra → Route 18 (batch 7), the Itonian Gate | Astyra's road meets x = 63 on rows 44–45 (verges 43, 46); columns 56–63 are aethos-only. For Route 18's road on rows *r*, *r*+1: Astyra `right` 44 − *r*, Route 18 `left` *r* − 44. The warden stands in the passage the same way. | none yet | city |
+| Phaleron's south edge → the sea (Route 3, world-act1, or batch 7's open sea) | Open water across the whole edge, rows 18–23, aethos water only, so it can join at any offset later | none yet | sea |
+
+If the city and outskirts agents want the walls to continue across the Dipylon seam, they may share a walls-and-gate core at identical metatile ids in both secondaries, the kithairon/kronia trick. The seam then becomes core-or-aethos. They agree it together and record it here; the default is the aethos strip.
+
+**Door warps, fixed now.** Outdoor warp *N* leads to the room's warp 0 (and 1, for a two-wide door), which leads back to *N*. The outdoor map's owner places the door; the room's owner wires the way back.
+
+| Outdoor map | Warp | Leads to |
+|---|---|---|
+| `MAP_ASTYRA` | 0–5 | `_ASCLEPEION`, `_AGORA`, `_STOA_OF_THE_ARCHON`, `_LIBRARY`, `_LYCEUM`, `_TAVERN` |
+| `MAP_ASTYRA` | 6–12 | `_PHAEDONS_HOUSE` (next door to the Asclepeion), `_KEPHALOS_HOUSE`, `_LYSIMACHOS_HOUSE`, `_SCULPTORS_WORKSHOP`, `_WEAVERS_HOUSE`, `_SCRIBES_HOUSE`, `_PRAXAGORAS_HOUSE` |
+| `MAP_ASTYRA` | 13 | The ramp's top step, to `MAP_ASTYRA_AKROPOLIS`'s warp 0 (the west foot). The ramp guard stands in front of it until `AKROPOLIS_RAID`. |
+| `MAP_ASTYRA_KERAMEIKOS` | 0, 1 | `_KERAMEIKOS_POTTERY`, `_KERAMEIKOS_LODGE` |
+| `MAP_ASTYRA_PHALERON` | 0 | `_PHALERON_NET_LOFT` |
+| `MAP_ASTYRA_AKROPOLIS` | 0 | The west foot of the ramp, back to `MAP_ASTYRA`'s warp 13. During the raid, a trigger turns the player back ("ALETHEA: Not now. Up."). Beat 54's warp lands here. |
+| `MAP_ASTYRA_AKROPOLIS` | 1 | The north porch's grate, to `MAP_SALT_WELL_1F`'s warp 0. It is shut by metatile until `SALT_WELL_OPEN`: "A bronze grate in the floor… locked from below." |
+| `MAP_SALT_WELL_1F` | 1 | The stair down, to `MAP_SALT_WELL_B1F`'s warp 0 |
+
+**Scripted warps:**
+- Beat 52: `MAP_ASTYRA` → the Stoa's warp 0.
+- Beat 54: the Kerameikos → the Akropolis's warp 0, at night.
+- The blowholes: B1F coord events land the player in 1F's P1, wet. Nothing else changes.
+- The sea-door: coord triggers on the arch's water at B1F and at Phaleron. The player is surfing on the Conch, which the engine's Surf prompt allows. A warp onto water keeps the player surfing; the sea agent's test proves it. Both ends are the sea agent's.
+- The first ride lands surfing in Phaleron's bay, under the arch.
+
+**Keep these tiles free** for world-postgame's `PLACEMENTS.md`:
+- **City:** a walkable tile beside the herald's stone (the truce herald, `FLAG_TEMP_18`).
+- **Asclepeion:** the counter tile, and the first three pallets of the incubation stoa. Iaso takes Phaedon's place in the post-game, so his object hides on `FLAG_ICHOR_POSTGAME` until Act III names its unmasking flag.
+- **Phaleron:** a watchtower at the quay's root (Lynkeus, facing down), plus open bg spots at the dune grass where the beach bends, at the harbor shrine (whose script the post-game branches) and on the quay stones under the *Paralos*'s gangplank.
+
+### Heal locations and herms
+
+- **`HEAL_LOCATION_ASTYRA`** (civic adds the row): map `MAP_ASTYRA`, at the Asclepeion's doorstep (the city agent records the tile here), `respawn_map` `MAP_ASTYRA_ASCLEPEION`, `respawn_npc` `LOCALID_ASTYRA_HEALER` (Phaedon's counter object).
+- A whiteout mid-raid respawns here at night, and the raid resumes at its first undone stop.
+- Kephalos's xenia heal and the salt well's spring (`special HealPlayerParty`) aren't heal locations.
+- **No herms.** Routes 13–16 are batch 4's; Routes 17–18 are batch 7's.
+- Fly: when the fly wiring lands, `MAPSEC_ASTYRA` reads `FLAG_ICHOR_VISITED_ASTYRA` like the other towns (`src/region_map.c`, this session).
+
+### Ids
+
+**Trainers** (23). Stage parties in `design/phase3/parties/<agent>.party`, copied from SCRIPT.md Part 3 (14830–15513) with the renames. Agents don't pick numbers: this session folds (`fold_parties.py`; today's next free id is 232). Classes and pics that don't exist yet fold as stand-ins. The Fisher class is the existing `Class: Fisherman`.
+
+| Agent | Trainers, in `ORDER.txt` order |
+|---|---|
+| city | `TRAINER_ICHOR_TOXARIS`, `_ANACHARSIS` (Archers), `_ZENON`, `_KRATES` (Philosophers) |
+| civic | `TRAINER_ICHOR_AUTOLYKOS`, `_ARCHYTAS`, `_PHRYNON`, `_TYRTAMOS` (the walk; `cleartrainerflag` all four to walk again after a loss) |
+| outskirts | `TRAINER_ICHOR_BRYGOS` (Potter), `_PROXENOS` (Pilgrim) |
+| akropolis | `TRAINER_ICHOR_GRUNT_AKROPOLIS_LITHOS`, `_KONIORTOS`, `_SIDEROS`, `_CHALKOS`; `TRAINER_ICHOR_KLEON_AKROPOLIS_KYNDER`, `_HIPLING`, `_NEBREL` (aces Seismare, Daphnyad, Pylakyon); `TRAINER_ICHOR_RHEA_AKROPOLIS`. Also `PARTNER_ICHOR_ALETHEA_AKROPOLIS` (Plouteras, Sophowl, Skylaps), written straight into `battle_partners.party`, not folded; `PARTNER_COUNT` goes to 3. |
+| sea | `TRAINER_ICHOR_EUANGELOS`, `_NAUSON` (Fisherman), `_KONON` (Sailor), `TRAINER_ICHOR_GRUNT_SALT_WELL_ASBESTOS`, `_LEPIS` |
+
+The towns need no route-standard trainers. The salt well's three meet the dungeon's three. Aigina's eight Astyra-level placeholders stay batch 4's (Handovers above).
+
+**Bank flags and hidden items.** Both come from the second bank (`claim.py --range LO-HI bankflag FLAG_ICHOR_<NAME>` and `claim.py --range LO-HI hiddenitem FLAG_ICHOR_HIDDEN_ITEM_<MAP>_<ITEM>`; the tool requires that `_HIDDEN_ITEM_` prefix). Visible items are `FLAG_ICHOR_ITEM_<MAP>_<ITEM>` bank flags. **Batch 5 has 0x5B0–0x60F (96).** Each agent claims inside its "Range at 96" row; "Min" is the least it needs.
+
+| Range at 96 | Owner | What | Min | Range at 72 |
+|---|---|---|---|---|
+| 0x5B0–0x5C5 | this session | the 20 hand-off flags above, and 2 spare | 20 | 0x5B0–0x5C3 |
+| 0x5C6–0x5CF | city | Hyper Potion, Max Repel, Ultra Ball ×2 (balls); hidden Silver Owl (`ITEM_RELIC_SILVER`, the drain grate), Rare Candy (Kodros's heel), Heart Scale (the weaving court) | 6 | 0x5C4–0x5C9 |
+| 0x5D0–0x5D9 | civic | `GOT_CHOICE_SPECS` (alias `LYCEUM_WALK_DONE`); room hidden items, optional | 1 | 0x5CA |
+| 0x5DA–0x5E7 | homes | `GOT_DESTINY_KNOT`, `ELPIS_HEARD_CONCH`, `GOT_PURE_INCENSE`, `EUKLEIDES_ERRAND`, `_ERRAND_DONE`, `GOT_EUKLEIDES_PP_UP`, `GOT_PRAXAGORAS_OIL`, `OSTRAKA_10`, `_20`, `_30`, `KNUCKLEBONES_ASTYRA` (Xanthippe), `_DIKAIOPOLIS`, `_PHILOKLEON`; room hidden items, optional | 13 | 0x5CB–0x5D7 |
+| 0x5E8–0x5F7 | outskirts | `GOT_SPELL_TAG`, `GOT_SCOPE_LENS`, `STATIC_KRITIOS_GLYPHLET`, `TRADED_HYPHANTIS`, `GOT_DAMP_ROCK`, `HIDE_KERAMEIKOS_DRUM`; Revive, X Defend, one ball on the graves (balls); hidden Bronze Obol ×2 (`ITEM_RELIC_COPPER`: the grave-jar, the flat stone), plus one more on each map to reach the town minimum of 2 | 13 | 0x5D8–0x5E4 |
+| 0x5F8–0x600 | akropolis | `GOT_LEAF_STONE`, `HIDE_AKROPOLIS_DRUM`; Full Heal, Star Piece (balls); hidden Stardust, plus one more | 6 | 0x5E5–0x5EA |
+| 0x601–0x60F | sea | `SALT_WELL_W1`, `_W2`, `_W3`, `_LOW_TIDE`; Phaleron's Big Pearl (the islet), 1F's Pearl, Heart Scale and Shoal Salt, B1F's Mystic Water (balls); hidden B1F Big Pearl, B1F Shoal Salt ×2, Phaleron Shoal Shell ×2, plus one more on Phaleron | 13 | 0x5EB–0x5F7 |
+
+The Glaux's three flags are counted with homes. If a range runs out, name the flag in your doc, stub its use, and say so.
+
+**Engine indices** (ENGINE_API §1's blocks):
+- **Decoys:** `FLAG_ICHOR_THEOXENIA_START` +0x26 is the old man at the crossing (`FLAG_ICHOR_DECOY_ASTYRA_1`, a `#define`); +0x27 is the thirsty girl (`_2`). That fills world-act2's block, so batch 4's two decoys need a new one.
+- **Braziers:** `FLAG_ICHOR_BRAZIERS_START` +0x23 and +0x24 are B1F's shelf braziers B1 and B2.
+- **Fixed dig:** `FLAG_ICHOR_DIG_FIXED_START` +0x16 is the old spring house's threshold (a Hard Stone; the Titan's sickle pin doesn't exist yet).
+- **Desecrated altars:** none in Astyra. Indices 11–13 stay for batch 4's Route 13, 15 and 16.
+- **Daily digs:** seven spots, but no block has been given out yet. Each stays on `EventScript_IchorAct2_DigStub`, with its spot named in a comment.
+- **Other ranges:** Delphinus is `FLAG_ICHOR_CONSTELLATIONS_START` +0 (SYSTEMS §8 #1). Page V is `FLAG_ICHOR_PAGES_START` +4, given as page III was (`ichor_act2.pory`'s pattern, in the Library's own script). Tablets are found at `FLAG_ICHOR_PROPHECY_START` +*n* and read at +8+*n*. Ostraka are `FLAG_ICHOR_OSTRAKA_START` +0…29, counted with `Ichor_CountFlagRange`. Athena's rite and gift come from the engine's gift range. The knucklebone link (stretch) is `FLAG_ICHOR_XENIA_START`, and its index needs the engine session.
+
+**Vars:** none permanent (SCRIPT.md Part 8). The Lyceum's walk is `VAR_TEMP_1`; scene gates are `VAR_TEMP_*`. **Daily flags:** the three in step 3 above. Nothing here needs the director's OK beyond the block's width.
+
+### Encounters and parties
+
+BALANCE.md's Astyra row is wild 30–36 and trainers 33–38. SCRIPT.md Part 4 has every slot. This session stages them as `design/phase3/encounters/region_c2.json` (labels below). Agents only report a change, such as a table their encounter cells don't need. The two small spots sit below 30 on purpose (the dex's first stages). The audit WARNs about them; explain that in the report.
+
+| Map | Labels | Land rate, band | Water and fishing |
+|---|---|---|---|
+| `MAP_ASTYRA` (the herb garden, the weaving court) | `gAstyra_Morning`, `_Night` | 15, 29–33 | — |
+| `MAP_ASTYRA_PAUPERS_GRAVES` | `gAstyraPaupersGraves_Morning`, `_Night` | 20, 27–31 (Obolorn at night, 28) | — |
+| `MAP_ASTYRA_KERAMEIKOS` | `gAstyraKerameikos_Morning`, `_Night` | 20, 32–36 (Kalyptor at night) | none: the Eridanos is an impassable channel |
+| `MAP_ASTYRA_AKROPOLIS` | `gAstyraAkropolis_Morning`, `_Night` | 15, 31–34 (Glaukoin, Sophowl from 33, Hierolive 2%) | — |
+| `MAP_ASTYRA_PHALERON` | `gAstyraPhaleron_Morning`, `_Night` | 20, 33–36 | in `_Morning`: water rate 4 (Galenyon, Narkeray, Kynoketos); fishing rate 30 |
+| `MAP_SALT_WELL_1F` | `gSaltWell1F_Morning` (one table at all hours) | 10, 34–37 | — |
+| `MAP_SALT_WELL_B1F` | `gSaltWellB1F_Morning` | 10, 34–37 | in `_Morning`: the deep pools' water and fishing |
+
+**Statics** (scripted `setwildbattle`):
+- Pithound 32–34 in the day's jar, `FLAG_DAILY_ICHOR_ASTYRA_JAR`; the jar is `RetrieveLotteryNumber` mod 5 (check that it re-rolls daily).
+- Glyphlet 31–33 in the day's chip heap, `_ASTYRA_CHIPS`.
+- Kritios's Glyphlet holding a Hard Stone, 34, once.
+- The omen's Hierolive, 35: stub.
+
+Party levels:
+- The city's four: 35–36.
+- The Lyceum: 35–37.
+- The Kerameikos: 34–35.
+- Phaleron: 35–36.
+- The salt well: 35–37.
+- The raid pairs: 36–37.
+- Kleon: 35–39, ace 39.
+- Rhea: 38–40.
+- Alethea's partner team: 34–36.
+
+Species are checked against `design/dex/species/*.yaml`: every species above and in Part 3's blocks is in the dex (152 names), so nothing is a stand-in. With the dex real, parties may carry their `Ability:` lines.
+
+### Stand-ins (sprites5's scope)
+
+Each name goes into the batch 5 block of `ichor_gfx_stubs_act2.h` as `OBJ_EVENT_GFX_ICHOR_<NAME>` → its stand-in, and its line is deleted when the sprite lands. Palette families follow SPRITES.md; one map shows at most three tags, so plan the Agora's crowd scenes around that.
+
+**Classes** (portrait, plus a walker for each), folded as stand-ins until they land:
+- `Archer` (→ Hoplite)
+- `Philosopher` (→ Augur)
+- `Athlete` (→ Hoplite; batch 4's Agias needs it too)
+- `Potter` (→ Shepherd)
+- `Pilgrim` (→ Shepherd)
+- `Titan Admin` (→ Titanborn)
+
+**Pics:** `Archer`, `Philosopher`, `Athlete`, `Potter`, `Pilgrim`, `Kleon Titan` (→ Kleon; the helmet pushed back like a cap), `Admin Rhea` (→ the grunt).
+
+The partner's `Class: Scholar` is written as Augur until a Scholar class exists. HEALER (class, pic and walker) is batch 4's Epione: an optional extra.
+
+**Story walkers**, with stand-ins:
+- `PHAEDON` (→ `HEALER`), with `PHAEDON_KNEEL` for the pallet and the bed's end
+- `ELPIS_BED`, sitting up and lying down (→ `KID_F`)
+- `KEEPER`: Lykophron, with an ink-dark right hand readable at walker size (→ `AUGUR`)
+- `ARCHON` (→ `ELDER_M`)
+- `RHEA` (→ `TITAN_GRUNT`)
+- `KLEON_TITAN` (→ `KLEON`)
+- `ALETHEA_SATCHEL`, sitting on her satchel (→ `ALETHEA_SEATED`)
+- `ALETHEA_CLIMB`, the goat path; optional (→ `ALETHEA`)
+- `DAPHNE_SEATED`, on a stool with a scroll (→ `PROFESSOR_DAPHNE`)
+- `KERYKOS` (→ `HERALD`; it's world-act1's real walker, so delete this line when their branch merges)
+- `KERYKOS_STAFF`, on the stone with the staff raised (→ `HERALD`)
+- `EUTHYPHRON` (→ `KRONIST`)
+- `FARMER`, in a straw hat (→ `ELDER_M`)
+- `XANTHIPPE` (→ `WOMAN`)
+- `SIDEROS_BANDAGED` (→ `YOUTH_M`)
+- `CHALKOS_BANDAGED` (→ `TITAN_GRUNT`)
+- `TITAN_DIGGER`, with a shovel (→ `TITAN_GRUNT`)
+
+**Townsfolk by palette swap:**
+- `BOUTES` (sea-blue; → `ELDER_M`)
+- `PANDROSA` (white, olive sprig; → `PRIESTESS`)
+- `APELLIKON` (→ `ELDER_M`)
+- `TYRTAMOS` (→ `AUGUR`)
+- `KEPHALOS` (garland; → `ELDER_M`)
+- `LYSIMACHOS` (patched; → `ELDER_M`)
+- `KRITIOS` (→ `MAN`)
+- `KALONIKE` (→ `WOMAN`)
+- `WEAVER_GIRL` (→ `YOUTH_F`)
+- `EUKLEIDES` (→ `MAN`)
+- `PRAXAGORA` (→ `MOM`)
+- `KLEITOS` (→ `KID_M`)
+- `MANES` (→ `ELDER_M`)
+- `HIPPONIKOS` (→ `FISHER`)
+- `DIOPEITHES` (→ `AUGUR`)
+- `HIEROKLES` (crow feather; → `AUGUR`)
+
+The six voters' shard-drop frame is optional; a face-up and a sound effect do the job.
+
+**Objects:**
+- `KRONIST_CART`, 2×1 (→ `UPTURNED_BOAT_L`)
+- `URN`, in its fence (→ `TABLET`); or metatiles plus a tipping object
+- `DOLPHIN`, with the conch in its mouth (→ a water follower)
+- `STARRY`, the clay bull (→ `TABLET`)
+- `MUSIC_BOX`, with a two-frame tick (→ `TABLET`)
+- `FRAGMENT_GLINT` (→ the item-ball sprite)
+
+Ophidrop, Panacoil, Plouteras ×2, Pithound and Glyphlet are `OBJ_EVENT_GFX_SPECIES(...)`, and real now.
+
+**Screens:** the three 64×64 picture images (`ICHOR_PICTURE_DECREE`, `_FORGED_ORDER`, `_PRACTICE_TABLETS`).
+
+**Later, not batch 5:**
+- the dolphin as the surf sprite (stub: the normal surf blob)
+- the two new battle backgrounds (stub: the dark temple and the cave)
+- the map-name stele
+
+### What the script needs from the engine
+
+**Built** (use directly):
+- **Multi battles:** `setmultitrainerbattle` (`asm/macros/event.inc`, 2665) with a partner from `battle_partners.party`.
+- **The held tint:** `Ichor_HoldTimeOfDay` and `Ichor_ReleaseTimeOfDay`. This is SCRIPT.md Part 8's "hold the tint" ask, already done.
+- **Scene staging:** `special ShakeCamera`; `setmetatile` plus `DrawWholeMapView` (the olive, the split, the sluices, the tide, the crowd); `FLAG_ICHOR_NO_WHITEOUT` (`B_FLAG_NO_WHITEOUT`) for Kleon.
+- **Braziers and darkness:** `EventScript_IchorBrazier` and the lit zones.
+- **Rites:** `EventScript_IchorHearth` (the Asclepeion's hearth, after Phaedon's lines); `EventScript_IchorAltar_Poseidon` (Phaleron); `EventScript_IchorTempleAltar_Athena` (the rock's great altar; offerings count double, as SCRIPT.md wants); the Hierophant calls for Pandrosa.
+- **Favor:** `Ichor_AddFavor` for the decoys (Zeus +1).
+- **The Conch:** the engine's Surf checks `ITEM_POSEIDONS_CONCH`.
+- **The pictures:** `Ichor_ShowPicture`, once step 5 is done.
+
+**Script-only, no engine work:**
+- **The ostracism:** scripted walks to the urn, a clink sound effect per shard, the count board as three sign boxes, the decree as a picture. The farmer's three-way multichoice sets `WROTE_OWN_NAME`.
+- **The raid:** four stops shown by flags in turn, with 14 objects at most.
+- **The Lyceum's no-heal walk:** a coord-triggered sequence on `VAR_TEMP_1`.
+- **The tide puzzle:** metatile swaps from flags in `ON_LOAD`, with blowholes as coord warps.
+- **The ride out:** the Surf prompt, then a coord warp while surfing.
+- **The daily jar:** `RetrieveLotteryNumber`.
+- **Kritios's and the painter's type checks:** loop over the party's species and compare their types.
+
+**Stubbed by tag** (the engine isn't there yet):
+- `ICHOR_STUB_DIG`: the seven daily digs, the fixed dig, and the ostraka's only source.
+- `ICHOR_STUB_KNUCKLEBONES`: the Glaux, as scripted wins and losses, as Thyrsa's Kantharos did.
+- `ICHOR_STUB_XENIA_REST`: Kephalos's rest menu. The heal itself works.
+- `ICHOR_STUB_KEY_ITEMS`: Kephalos's Cloak (a flag carries it, as Pylades's fig does), the Ostrakon, the Half Knucklebone, the Titan's sickle pin, the Pythian Laurel.
+- `ICHOR_STUB_TMS`: TMs Payback, Taunt and the scroll stall's five.
+- `ICHOR_STUB_OMENS`: Hierokles reads `Ichor_GetOmen` with a fallback line. The three Astyra omen entries (the Glaukoin swarm, the Hierolive visitor, fog over the Kerameikos) go to the engine session to append to `ichor.h`.
+- `ICHOR_STUB_STARS`: Delphinus's line and the parapet's seat. The flag is set for real.
+- `ICHOR_STUB_MUSIC`:
+
+  | SCRIPT.md's cue | Stand-in |
+  |---|---|
+  | `MUS_ICHOR_ASTYRA` | `MUS_ICHOR_EMPORION` |
+  | `MUS_ICHOR_OSTRACISM` | silence |
+  | `MUS_ICHOR_PHAEDON` | `MUS_ICHOR_ASCLEPEION` |
+  | `MUS_ICHOR_ALETHEA` | skipped |
+  | `MUS_ICHOR_BATTLE_RIVAL_TITAN` | `MUS_ICHOR_BATTLE_RIVAL` |
+  | `MUS_ICHOR_BATTLE_ADMIN_RHEA` | `MUS_ICHOR_BATTLE_ADMIN` |
+  | `MUS_ICHOR_SURF` | the map's music |
+
+  The salt well's `MUS_ICHOR_HOLLOW`, `MUS_ICHOR_TITAN` and the lullaby (627, 628) are built and real. The new sound effects stand in with stock ones.
+
+**Needs another session:**
+- **The engine session:** a daily-dig block for Astyra's seven spots; a new theoxenia decoy block for batch 4; the knucklebone link's xenia index; the moneychanger's +20% on the Silver Owl (a sell-price hook; until then he only talks).
+- **The Panathenaia's torch race:** it needs a festival-day check and a new flame kind (`FLAME_PANATHENAIA` in `src/ichor_relics.c`). It's deferred: civic writes only the athlete's "No race this year" line.
+
+**The engine's answers (ichor-engine, 2026-11-14).** They're on `claude/ichor-engine-systems-5a55eb` through 4c11c5e57f, not on main yet; ENGINE_API §1, §7 and §8 have the details. Until the director merges that branch into main and main is merged here, write each call below as a stub, with the exact call in a comment and its tag. This session swaps the stubs for the real calls after that merge.
+- **Daily digs:** world-act2 has `FLAG_DAILY_ICHOR_DIG_START` +0x20–0x3F (32). Batch 5 takes +0x20–0x26 (city +0x20–0x21, akropolis +0x22, outskirts +0x23–0x24, sea +0x25–0x26). Batches 1–3's stubs take +0x27 on later. Call: `setvar(VAR_0x8004, <spot>); setvar(VAR_0x8005, ICHOR_DIG_ACT_II | ICHOR_DIG_SHERDS(ICHOR_AMPHORA_PANDORA)); goto(EventScript_IchorDigSpot)`. Fixed finds: `setvar(VAR_0x8004, <index>); setvar(VAR_0x8005, <item or ICHOR_FIND_PROPHECY(n) / _PAGE(n) / _SHERD(a) / ICHOR_FIND_OSTRAKON>); call(EventScript_IchorDigFixed)`; VAR_RESULT is TRUE if it was dug just now. The Kronists' stall's fixed dig is +0x16.
+- **Decoys:** batch 5 keeps +0x26 and +0x27. Batch 4 gets the new block +0x28–0x2F. A god in disguise is an object with trainer type `TRAINER_TYPE_ICHOR_GOD`.
+- **Xenia:** Eukleides's knucklebone link is `FLAG_ICHOR_XENIA_START + 0x03`. Kephalos's rest is `call(EventScript_IchorXeniaRest)`, which sets VAR_RESULT TRUE if the player rested, so `ICHOR_STUB_XENIA_REST` goes.
+- **Knucklebones (the Glaux):** `bufferstring(STR_VAR_3, <prose name>); setvar(VAR_0x8004, ICHOR_BONES_CAUTIOUS / _BOLD / _SILENOS / _MOM); call(EventScript_IchorKnucklebones)`. It plays best of five; VAR_RESULT is TRUE if the player won.
+- **The moneychanger:** `setvar(VAR_0x8004, ITEM_RELIC_SILVER); setvar(VAR_0x8005, 20); specialvar(VAR_RESULT, Ichor_SellToMoneychanger)`. TRUE means sold, with the price in STR_VAR_1.
+- **Omens:** the numbers are in ichor.h: `OMEN_SWARM_GLAUKOIN`, `OMEN_VISITOR_HIEROLIVE`, `OMEN_WEATHER_KERAMEIKOS_FOG`. Rows go in `src/data/ichor_omens.h` (examples in ENGINE_API §7). A weather omen runs in the map's ON_TRANSITION with `Ichor_CheckOmen`.
+- **Level check:** `specialvar(VAR_RESULT, Ichor_GetHighestPartyLevel)`.
+- **Still deferred:** the Panathenaia's festival day and `FLAME_PANATHENAIA`.
+
+### Tests
+
+Each agent writes `tools/ichor/tests/act2_<name>.sh`, `.lua` and `_consts.c` on `slice_lib.lua`, as `act2_harbors.sh` does: Quickstart, then an EWRAM setup script gives a level-36 team (Hecate's Torch and the Girdle in the bag) and batch 4's end flags (the five laurels, `FLAG_ICHOR_ROUTE15_OPEN`, `_SAW_ASTYRA`, `_ALETHEA_GOT_SKYLAPS`, `_KLEON_JOINED_TITANS`). It seeds the hand-off flags its scenes need, warps in, plays by key presses, checks flags (bank ones through IchorSave), and saves screenshots to `build/test_<name>/shots/`. It fails on any failed check, a crash or a timeout.
+
+| Test | Agent | Checks |
+|---|---|---|
+| `act2_astyra.sh` | city | The Dipylon trigger; the proclamation (Alethea hidden, `HEARD_PROCLAMATION`); the statues, Kerykos and the stall; both decoys (+0x26, +0x27, Zeus Favor +1); the jar and the chips; the ramp guard blocks; every door 0–13 lands on its room's warp 0, and back; the wardens; the Phaleric seam; signs and hidden items. Seed `LIBRARY_DAPHNE` and load on the Library's doorstep: the run lands in the Stoa. Seed `STOA_HEARING`: step out of the Stoa (no urn), then the Glaux and back out (the urn, each farmer branch in turn, `OSTRACISM_DONE`, tint released). |
+| `act2_astyra_civic.sh` | civic | The first heal (`MET_PHAEDON`, the lead's nickname) and a rotated closing; the Pithos and the hearth; the shops open. Seed `MET_ELPIS`: Daphne, page V (only A PARTRIDGE sets +4), the amphora. The hearing with 0 and with 5 tablets, the practice-tablet picture, `STOA_HEARING`. The walk won (Choice Specs) and lost (retry). Seed `SECOND_FRAGMENT_STOLEN`: Chalkos, the heal, `AFTER_RAID`. A forced whiteout respawns at the counter. |
+| `act2_astyra_homes.sh` | homes | Beat 50, both choices (`MET_ELPIS`, Daphne hidden, the music box). Seed `AFTER_RAID`: the house half, `RAID_MORNING`, `TIME_MORNING` held; the Destiny Knot. Kephalos's heal; the cloak, then both incense branches. The errand round trip (PP Up). The ostraka lines. Praxagora before and after (Olive Oil ×5). The Glaux's three tables. Every occupant answers. |
+| `act2_kerameikos.sh` | outskirts | In from the west edge; Brygos and Proxenos; the drum and the X Defend; hidden items; the graves seam; Manes. Each craft room's quest with the right Pokémon given: the Spell Tag, the Scope Lens and the static, the PEPLOS trade, the Damp Rock. Seed `OSTRACISM_DONE`: evening held, both forms of beat 54, `CONFESSED`, arriving on the Akropolis's warp 0 with night held. |
+| `act2_akropolis.sh` | akropolis | Seed `CONFESSED`: the Propylaia and its picture; no going back; both multi battles with Alethea; one forced loss, whiteout and resume; the heal at 2b; Kleon for each starter, and a loss (`NO_WHITEOUT` cleared after); Rhea; the olive's metatiles read fallen; `SECOND_FRAGMENT_STOLEN`; the ramp opens. Seed `RAID_MORNING`: Boutes, `SALT_WELL_OPEN`, the Leaf Stone; Pandrosa's rite and her gift at Favor 30; the drum's ledge; the day table. |
+| `act2_salt_well.sh` | sea | Seed `SALT_WELL_OPEN`: wading; W1 both ways; W3 and the side grotto; W2 and Asbestos; the spring heals; HIGH, the shelf, both braziers (+0x23, +0x24), Nauson; LOW, a blowhole (state kept), Lepis and the Mystic Water; the Conch, Delphinus (+0), the goodbye with and without the cloak, `ALETHEA_LEFT`; surfing through the arch lands at Phaleron surfing, tint released. On Phaleron: both trainers, the shrine and its shop, the islet by surf, Daphne on the quay, the net-loft door, the north seam. |
+
+**This session's `act2_batch5.sh`:**
+1. `map_audit.py` on all 23 maps. Every FAIL that's right for a map (a small spot's levels) is explained in the report.
+2. The walk across every seam, door, stair, grate and the sea-door.
+3. The story from the Kerameikos's west edge (Route 16 isn't built yet), headless: 48 → 57 in order, ending surfing at Phaleron with the Conch, Alethea gone and Daphne at the gangplank.
+4. `--all` runs every agent's test and batches 1–3's suites. Then `make check`.
+
+The report gives the ROM delta. Batch 5 is five outdoor sets, three or four room sets and about 50 sprites, so expect 0.6–0.9 MB; check `make`'s memory line.
+
+### Decisions (2026-11-14)
+
+- **Bank block:** 0x5B0–0x60F (96). Batches 4, 6 and 7 keep 0x610–0x63F and the 89 free first-bank flags in 0x100–0x1FF.
+- **Engine asks:** answered above.
+- **Renames:** Tyrtamos, Krates and Archytas are approved.
+- **Phaleron's south edge:** open water with no connection for now. Batch 7 (the open Aegean) or world-act1 joins it later; leave the 8-column aethos-only strip clear.
+
 ## Handovers waiting for later batches
 
 **Batch 4, Aigina's interior** (from world-act1, 2026-11-14; maps on `claude/world-act1-6d11b7` at 1090709095, seams and spots in `design/phase2/BUILD.md`, the island stitched in `design/phase2/img/aigina_island.png`). `MAP_AEGINA_APHAIA_ROAD`, `MAP_AEGINA_TEMPLE_OF_APHAIA` and `MAP_AEGINA_MOUNT_OROS` are connected to the town and each other. The town's north gate opens on `FLAG_ICHOR_FERRY_TO_AEGINA`. Placeholders for us to replace, each with a script tagged `ICHOR_ACT2`:

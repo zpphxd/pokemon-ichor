@@ -683,8 +683,7 @@ SIGNS = [   # x, y, facing, script
     (3, 6, "ANY", "Beehives"),
     (7, 6, "ANY", "Beehives"),
     (2, 10, "ANY", "Beehives"),
-    (25, 15, "NORTH", "OlivePress"),
-    (26, 15, "NORTH", "OlivePress"),
+    (25, 15, "NORTH", "OlivePress"),   # (26,15) has none: the olive farmer stands in front of it
     (27, 15, "NORTH", "OlivePress"),
     (27, 32, "ANY", "RaceStart"),
     (7, 21, "NORTH", "Altar"),
@@ -694,7 +693,10 @@ SIGNS = [   # x, y, facing, script
     (21, 21, "NORTH", "Stall"),
     (6, 21, "ANY", "ScribesStool"),
 ]
-HIDDEN = [("ITEM_HONEY", 5, 7, "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY")]
+HIDDEN = [
+    ("ITEM_HONEY", 5, 7, "FLAG_HIDDEN_ITEM_ICHOR_ELAIA_HONEY"),
+    ("ITEM_X_SPEED", 27, 35, "FLAG_ICHOR_HIDDEN_ELAIA_X_SPEED"),   # the dead-end corner past the race start
+]
 
 
 def halia_ring(g):

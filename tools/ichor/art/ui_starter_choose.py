@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Draw Ichor's starter selection: Daphne's long table in the Akademia.
 
-Three kraters stand on her white marble table, each painted for the Pokemon
-inside, as in the room itself (TILES_civic.md): a cream serpent on a black
-band for Snivy (it grows into Delphoi's python), flames for Cyndaquil, and a
-white-ground krater with blue water and waves for Piplup. The selected krater
+Three kraters stand on her white marble table, each painted for the Aethos
+starter inside: a laurel band in added white with gold berries on black
+glaze for Nebrel (Daphne's laurel), a gold running-dog scroll cresting in flame on black
+glaze for Kynder (the Cerberus pup; its mouth glows with embers), and a
+white-ground krater with the scroll as blue waves for Hipling (the hippocamp).
+The selected krater
 rocks as its Pokemon stirs. A black-figure hand points down at it, and the
 chosen Pokemon rises on a painted tondo, the inside of a cup.
 
@@ -18,8 +20,8 @@ positions change (src/starter_choose.c, marked Ichor).
                 rocked right) and the hand; starter_circle.png: the tondo
 
 The sheet keeps Emerald's first frames where they were, because the Battle
-Factory also loads its first 64 tiles: 0/16/32 Snivy's krater, 48 the hand,
-then 64/80/96 Cyndaquil's and 112/128/144 Piplup's.
+Factory also loads its first 64 tiles: 0/16/32 Nebrel's krater, 48 the hand,
+then 64/80/96 Kynder's and 112/128/144 Hipling's.
 
 Writes graphics/starter_choose/: tiles.png, birch_grass.bin (the wall),
 birch_bag.bin (the table), pokeball_selection.png, starter_circle.png; and a
@@ -187,7 +189,7 @@ def table():
 SPR = pal16([
     TRANSPARENT, INK, (56, 40, 40),                  # 1 ink, 2 glaze
     CLAY_DARK, CLAY, CLAY_LIGHT, CLAY_PALE,          # 3-6 clay
-    PARCHMENT,                                       # 7 the serpent's cream
+    PARCHMENT,                                       # 7 cream: the laurel in added white
     (232, 64, 32), GOLD,                             # 8 flame red, 9 flame gold
     MARBLE_LIGHT, MARBLE_DARK,                       # 10 white ground, 11 its shade
     AEGEAN, AEGEAN_LIGHT, AEGEAN_DARK,               # 12-14 water
@@ -225,29 +227,37 @@ KRATER = [
 ]
 
 
+# The bands' motifs, one period each, tiled across the band ('#' the figure,
+# '.' the ground, "'" a pale berry, '^' a flame-red crest).
+LAUREL = [".##..'",      # laurel in added white on the glaze: leaves rising
+          "##.#..",      # and hanging off one stem, a gold berry every period
+          "######",
+          "...##."]
+RUNNING_DOG = [".##...",  # the running-dog scroll: each wave curls back
+               "#..#..",  # on itself over a continuous ground line
+               "#.##.#",
+               "#....#"]
+
+
 def band(name, w, h):
     """The krater's painted band, w x h: each starter's own motif."""
-    b = [[" "] * w for _ in range(h)]
+    if name == "nebrel":
+        pat, fg, bg = LAUREL, "'", "k"
+    elif name == "kynder":
+        pat, fg, bg = RUNNING_DOG, "g", "k"
+    else:
+        pat, fg, bg = RUNNING_DOG, "b", "w"
+    b = [[bg] * w for _ in range(h)]
+    p = len(pat[0])
     for y in range(h):
         for x in range(w):
-            if name == "snivy":
-                # a cream serpent winding across black glaze
-                yy = 1.5 + 1.4 * math.sin(x * math.pi / 5.0)
-                b[y][x] = "'" if abs(y - yy) < 0.75 else "k"
-                if x == w - 3 and y == round(1.5 + 1.4 * math.sin((w - 3) * math.pi / 5.0)):
-                    b[y][x] = "r"           # the serpent's tongue... its eye
-            elif name == "cyndaquil":
-                # flames licking up from the band's foot
-                phase = (x % 5)
-                hgt = [3, 4, 2, 4, 3][phase]
-                if y >= h - hgt:
-                    b[y][x] = "g" if (y == h - 1 or phase in (1, 3) and y >= h - 2) else "r"
-                else:
-                    b[y][x] = "k"
-            else:
-                # running waves in blue on white ground
-                yy = 1.5 - 1.5 * math.cos(x * math.pi / 3.0)
-                b[y][x] = "b" if abs(y - (h - 1 - yy * 0.66)) < 0.8 or y == h - 1 else "w"
+            ch = pat[y][x % p]
+            if ch == "#":
+                b[y][x] = fg
+                if name == "kynder" and y == 0:
+                    b[y][x] = "r"           # the scroll's crests catch fire
+            elif ch == "'":
+                b[y][x] = "g"               # the laurel's berries
     return b
 
 
@@ -263,17 +273,23 @@ def krater(name):
             for i in range(w):
                 r[x0 + i] = b[j][i]
             j += 1
-    white = name == "piplup"
+    white = name == "hipling"
     for r in rows:
         for i, ch in enumerate(r):
             if ch == "i":
-                r[i] = "b" if white else "k"      # the mouth: water, or dark wine
+                r[i] = "b" if white else "k"      # the mouth: water, or dark glaze
             elif white and ch in "cl":
                 r[i] = "w" if ch == "l" else "w"
             elif white and ch == "d":
                 r[i] = "W"
             elif white and ch == "p":
                 r[i] = "*"
+    if name == "kynder":
+        # embers glow in Kynder's mouth
+        for y, x in ((3, 6), (3, 13), (3, 19), (4, 9), (4, 16)):
+            rows[y][x] = "r"
+        for y, x in ((3, 10), (4, 12)):
+            rows[y][x] = "g"
     if white:
         # the water's surface catches the light
         for i, ch in enumerate(rows[3]):
@@ -330,10 +346,10 @@ def hand():
 
 def sprites():
     frames = {}
-    for name in ("snivy", "cyndaquil", "piplup"):
+    for name in ("nebrel", "kynder", "hipling"):
         f = krater(name)
         frames[name] = [f, rocked(f, -1), rocked(f, 1)]
-    order = frames["snivy"] + [hand()] + frames["cyndaquil"] + frames["piplup"]
+    order = frames["nebrel"] + [hand()] + frames["kynder"] + frames["hipling"]
     sheet = np.vstack(order)
     write_indexed_png(OUT / "pokeball_selection.png", sheet, [SPR])
     return sheet

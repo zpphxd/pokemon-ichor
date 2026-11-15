@@ -86,9 +86,9 @@ def main(files):
         sys.exit(f'{len(order)} trainers, but Act II has {len(blocks_ids)} ids (160-319, 820-849, 1344-1403): ask the director for more')
     defs = [f'#define {n:<37} {blocks_ids[i]}' for i, n in enumerate(order)]
     end = blocks_ids[len(order) - 1] + 1 if order else 0
-    new = ('// world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.\n' + '\n'.join(defs)
+    new = ('// world-act2, ids 160-319, 820-849 and 1344-1403: Thyrsa, Arkadia, Astyra, Kaldera.\n' + '\n'.join(defs)
            + ('\n' if defs else '') + f'#define TRAINERS_END_ACT2                     {end}\n')
-    opp = re.sub(r'// world-act2, ids 160-319:.*?#define TRAINERS_END_ACT2\s+\d+\n', new, opp, flags=re.S)
+    opp = re.sub(r'// world-act2, ids 160-319[^\n]*\n.*?#define TRAINERS_END_ACT2\s+\d+\n', new, opp, flags=re.S)
     OPP.write_text(opp)
     print(f'{len(blocks)} parties, {len(order)} ids, the last {end - 1}')
 

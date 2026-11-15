@@ -326,6 +326,72 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Work Up
 - Leer
 
+/* Ichor: the slice, from the director's reserve (ids 22-25): Route 1's sixth trainer and Kronion Hill's herders */
+
+=== TRAINER_ICHOR_THESTYLIS ===
+Name: THESTYLIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Tandemaus
+Level: 4
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Nincada
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_MENALKAS ===
+Name: MENALKAS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Rockruff
+Level: 6
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Wooloo
+Level: 7
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_THYRSIS ===
+Name: THYRSIS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Check Bad Move
+
+Igglybuff
+Level: 7
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Mareep
+Level: 8
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_ICHOR_LYKIDAS ===
+Name: LYKIDAS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Check Bad Move
+
+Mudbray
+Level: 8
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+Skiddo
+Level: 9
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
 /* Ichor: the Frontier engine's Brains (ids 15-21), kept for gFrontierBrainInfo */
 
 === TRAINER_ANABEL ===
@@ -2203,24 +2269,8 @@ Lykopup
 Level: 33
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
-=== TRAINER_ICHOR_HEKAERGE ===
-Name: HEKAERGE
-Class: Huntress
-Pic: Huntress
-Gender: Female
-Music: Female
-AI: Check Bad Move
-
-Raknit
-Level: 32
-IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
-
-Lykopup
-Level: 33
-IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
-
-=== TRAINER_ICHOR_HEKAERGE ===
-Name: HEKAERGE
+=== TRAINER_ICHOR_LOXO ===
+Name: LOXO
 Class: Huntress
 Pic: Huntress
 Gender: Female
@@ -2268,6 +2318,22 @@ Level: 34
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 
 Gelasable
+Level: 33
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+=== TRAINER_ICHOR_HEKAERGE ===
+Name: HEKAERGE
+Class: Huntress
+Pic: Huntress
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Raknit
+Level: 32
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Lykopup
 Level: 33
 IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
 

@@ -306,8 +306,9 @@ end
 function L.isTrainerBattle() return emu:read32(S.gBattleTypeFlags) & S.BATTLE_TYPE_TRAINER ~= 0 end
 local function controller(name) return emu:read32(S.gBattlerControllerFuncs) == (S[name] | 1) end
 
-local TRAINERS = { "KLEON_SNIVY", "KLEON_CYNDAQUIL", "KLEON_PIPLUP", "TITYROS", "PHYLLIS", "KOMATAS", "AGIS",
-                   "POLYEIDOS", "PETROS", "AMATHOS", "LAMPON", "PYRRHA", "AITHRA", "IONE",
+local TRAINERS = { "KLEON_SNIVY", "KLEON_CYNDAQUIL", "KLEON_PIPLUP", "TITYROS", "THESTYLIS", "PHYLLIS", "KOMATAS",
+                   "AGIS", "POLYEIDOS", "PETROS", "AMATHOS", "MENALKAS", "THYRSIS", "LYKIDAS", "LAMPON", "PYRRHA",
+                   "AITHRA", "IONE",
                    -- Phase 2
                    "ALETHEA_DECK", "PHORMION", "LYKON",
                    "CREW_BOSS", "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS",
@@ -338,9 +339,11 @@ function L.battle()
         shotTaken = true
       end
       turns = turns + 1
-      -- a wild battle that can't be run from (FLAG_ICHOR_NO_RUNNING, Phase 2's
-      -- deck snatchers) is fought like a trainer's
-      if trainer or (S.FLAG_NO_RUNNING and L.getFlag(S.FLAG_NO_RUNNING)) then
+      -- a wild battle that can't be run from is fought like a trainer's: running
+      -- barred (FLAG_ICHOR_NO_RUNNING, Phase 2's deck snatchers), or a wild
+      -- Pokémon that won't let the player go (Diglett's Arena Trap on Kronion
+      -- Hill), fought after three tries
+      if trainer or turns > 3 or (S.FLAG_NO_RUNNING and L.getFlag(S.FLAG_NO_RUNNING)) then
         tap(K.UP); tap(K.LEFT); tap(K.A)     -- FIGHT
       else
         tap(K.DOWN); tap(K.RIGHT); tap(K.A)  -- RUN

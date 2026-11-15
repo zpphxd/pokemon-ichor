@@ -1,7 +1,7 @@
 // Route 12, the Cypress Road: beat 40's road over Kyllene's shoulder and the
 // route's roster. Text from design/phase3/SCRIPT.md: Part 2 (Route 12), Part 3
 // (Route 12 trainers) and Part 6 (page IV); the three trainers SCRIPT.md doesn't
-// name (Phegeus, Hekaerge, Korythos) meet the route standard (MAP_DESIGN §8).
+// name (Phegeus, Loxo, Korythos) meet the route standard (MAP_DESIGN §8).
 // The Cave of Maia (beat 40 itself) is its own map, warp 0 at (26,8). Layout and
 // events: tools/ichor/maps/heights.py.
 //
@@ -31,7 +31,7 @@ text Route12_CypressRoad_Text_SpeakerTelphousa { "TELPHOUSA" }
 text Route12_CypressRoad_Text_SpeakerKypselos { "KYPSELOS" }
 text Route12_CypressRoad_Text_SpeakerBasanos { "GRUNT" }
 text Route12_CypressRoad_Text_SpeakerPhegeus { "PHEGEUS" }
-text Route12_CypressRoad_Text_SpeakerHekaerge { "HEKAERGE" }
+text Route12_CypressRoad_Text_SpeakerLoxo { "LOXO" }
 text Route12_CypressRoad_Text_SpeakerKorythos { "KORYTHOS" }
 
 // --- the hawk spur ----------------------------------------------------------------------
@@ -183,17 +183,17 @@ text Route12_CypressRoad_Text_PhegeusDefeat {
     format("Warm enough. Too warm.")
 }
 
-script Route12_CypressRoad_EventScript_Hekaerge {
-    trainerbattle_single(TRAINER_ICHOR_HEKAERGE, Route12_CypressRoad_Text_HekaergeIntro, Route12_CypressRoad_Text_HekaergeDefeat)
-    setspeaker(Route12_CypressRoad_Text_SpeakerHekaerge)
+script Route12_CypressRoad_EventScript_Loxo {
+    trainerbattle_single(TRAINER_ICHOR_LOXO, Route12_CypressRoad_Text_LoxoIntro, Route12_CypressRoad_Text_LoxoDefeat)
+    setspeaker(Route12_CypressRoad_Text_SpeakerLoxo)
     msgbox(format("The hawk brought something shiny to its nest. Paper, I think. Hawks can't read."), MSGBOX_AUTOCLOSE)
 }
 
-text Route12_CypressRoad_Text_HekaergeIntro {
+text Route12_CypressRoad_Text_LoxoIntro {
     format("You moved the drum? Then you can climb. Can you fight?")
 }
 
-text Route12_CypressRoad_Text_HekaergeDefeat {
+text Route12_CypressRoad_Text_LoxoDefeat {
     format("You can. The hawk's all yours.")
 }
 

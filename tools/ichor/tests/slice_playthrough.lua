@@ -11,7 +11,8 @@
 -- to level 100's (and the game recalculates its stats). That is battle strength
 -- only: its moves, met level and species are untouched, it never levels or
 -- evolves, and every battle is still fought with button presses (the first
--- move for trainers, RUN for wild Pokémon). Nothing else is written to memory
+-- move for trainers, RUN for wild Pokémon, or the first move once a trapping one
+-- won't let it flee). Nothing else is written to memory
 -- except reading state; options are set in the OPTION menu by hand.
 --
 -- Env: SLICE_OUT (default build/slice/), SLICE_SYMBOLS (default <out>symbols.lua),
@@ -104,6 +105,14 @@ local function ball(flag) return function() return L.ball(S[flag]) end end
 local function hidden(flag) return function() return L.hidden(S[flag]) end end
 local function sign(script) return function() return L.sign(script) end end
 
+-- Trainer battles so far. A wild one can start on the step back to a trainer who
+-- stands by tall grass, so "doesn't battle again" counts only trainer battles.
+local function trainerBattles()
+  local n = 0
+  for _, b in ipairs(L.battles) do if b.trainer then n = n + 1 end end
+  return n
+end
+
 -- A trainer: talk to them (walking there may get the player spotted first, and
 -- the battle is played out on the way), then talk again for the after-battle line
 -- and make sure it isn't a second battle.
@@ -115,9 +124,9 @@ local function trainer(name, script, song, opts)
   local rec
   for _, b in ipairs(L.battles) do if b.who == name then rec = b end end
   battleCheck(rec, name, song, name)
-  local n1 = #L.battles
+  local n1 = trainerBattles()
   talk(L.npc(script), { shotBefore = string.lower(name) .. "_after" })
-  L.check(#L.battles == n1, name .. " does not battle again")
+  L.check(trainerBattles() == n1, name .. " does not battle again")
 end
 
 -- Visit a list of things in the order the map makes shortest: always the nearest
@@ -360,6 +369,8 @@ beat("04_elaia_after", function()
     visitItem("the Relic Copper in the well", sign(E .. "Well"), "FLAG_GOT_ELAIA_RELIC_COPPER", "ITEM_RELIC_COPPER",
               { shotBefore = "well" }),
     visitItem("the Honey at Mom's beehives", hidden("FLAG_HIDDEN_ELAIA_HONEY"), "FLAG_HIDDEN_ELAIA_HONEY", "ITEM_HONEY"),
+    visitItem("the X Speed past the race start", hidden("FLAG_HIDDEN_ELAIA_X_SPEED"), "FLAG_HIDDEN_ELAIA_X_SPEED",
+              "ITEM_X_SPEED"),
     visitTalk("halia_after", npc(E .. "Halia")),
     visitTalk("village_sign", sign(E .. "VillageSign")),
     visitTalk("olive_farmer", npc(E .. "OliveFarmer")),
@@ -410,6 +421,7 @@ beat("05_route1", function()
     visitTalk("wall_youth", npc(R1 .. "WallYouth")),
     visitTalk("herm_south", sign(R1 .. "HermSouth")),
     visitTrainer("TITYROS", R1 .. "Tityros"),
+    visitTrainer("THESTYLIS", R1 .. "Thestylis"),
     visitItem("the Route 1 Poke Ball", ball("FLAG_ITEM_ROUTE1_POKE_BALL"), "FLAG_ITEM_ROUTE1_POKE_BALL", "ITEM_POKE_BALL"),
     visitTrainer("PHYLLIS", R1 .. "Phyllis"),
     visitItem("the Miracle Seed", ball("FLAG_ITEM_ROUTE1_MIRACLE_SEED"), "FLAG_ITEM_ROUTE1_MIRACLE_SEED", "ITEM_MIRACLE_SEED"),
@@ -461,6 +473,19 @@ beat("05_summit", function()
     visitTalk("stele", sign(KH .. "Stele")),
     visitTalk("altar", sign(KH .. "Altar")),
     visitTalk("pit_after", sign(KH .. "Pit"), { shotBefore = "pit_after", every = true }),
+    -- the high pastures, down the goat path past the herm
+    visitTalk("herm_fork_kronion", sign(KH .. "HermFork")),
+    visitTrainer("MENALKAS", KH .. "Menalkas"),
+    visitTalk("fold_mareep", npc(KH .. "FoldMareep")),
+    visitTrainer("THYRSIS", KH .. "Thyrsis"),
+    visitTalk("pan_shrine", sign(KH .. "PanShrine")),
+    visitItem("the Burn Heal on the olive terraces", ball("FLAG_ITEM_KRONION_BURN_HEAL"), "FLAG_ITEM_KRONION_BURN_HEAL",
+              "ITEM_BURN_HEAL"),
+    visitTrainer("LYKIDAS", KH .. "Lykidas"),
+    visitItem("the Everstone on the lookout shelf", ball("FLAG_ITEM_KRONION_EVERSTONE"), "FLAG_ITEM_KRONION_EVERSTONE",
+              "ITEM_EVERSTONE"),
+    visitItem("the Pretty Feather on the point", hidden("FLAG_HIDDEN_KRONION_FEATHER"), "FLAG_HIDDEN_KRONION_FEATHER",
+              "ITEM_PRETTY_FEATHER"),
   })
 end)
 
@@ -1306,9 +1331,9 @@ local function acolyte(name, script)
   local rec
   for _, b in ipairs(L.battles) do if b.who == name then rec = b end end
   battleCheck(rec, name, S.MUS_BATTLE_TRAINER, name)
-  local n1 = #L.battles
+  local n1 = trainerBattles()
   here(L.npc(script), { shotBefore = string.lower(name) .. "_after" })
-  L.check(#L.battles == n1, name .. " does not battle again")
+  L.check(trainerBattles() == n1, name .. " does not battle again")
 end
 
 beat("15_temple", function()
@@ -1445,8 +1470,8 @@ L.start(function()
     log("note a resumed run checks only the beats it played")
   else
     -- every trainer in the slice and Phase 2 so far
-    for _, n in ipairs({ "TITYROS", "PHYLLIS", "KOMATAS", "AGIS", "POLYEIDOS", "PETROS", "AMATHOS", "LAMPON",
-                         "PYRRHA", "AITHRA", "IONE", KLEON_TRAINER[STARTER],
+    for _, n in ipairs({ "TITYROS", "THESTYLIS", "PHYLLIS", "KOMATAS", "AGIS", "POLYEIDOS", "PETROS", "AMATHOS",
+                         "MENALKAS", "THYRSIS", "LYKIDAS", "LAMPON", "PYRRHA", "AITHRA", "IONE", KLEON_TRAINER[STARTER],
                          "ALETHEA_DECK", "PHORMION", "LYKON",
                          "CREW_BOSS", "PODARGE", "EUCHIDAS", "PHILONIDES", "KERYKOS", KLEON_2[STARTER] }) do
       if not L.defeated(S["TRAINER_" .. n]) then L.fail(n .. " was never beaten") end

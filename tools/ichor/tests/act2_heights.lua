@@ -179,7 +179,7 @@ L.start(function()
   expect(L.getFlag(S.FLAG_HAWK_DRUM) and mt(34, 6) == S.MT_HAWK_STEP, "the hawk drum wedged in its gap: a step")
   L.talk(L.sign(R12 .. "HawkNest"), { shots = { [2] = "r12_page_iv", [4] = "r12_page_tray" } })
   expect(L.getFlag(S.FLAG_PAGE_4), "Daedalus's page IV, from the hawk's nest")
-  expect(L.defeated(S.TRAINER_HEKAERGE), "Hekaerge stopped the player on the spur")
+  expect(L.defeated(S.TRAINER_LOXO), "Loxo stopped the player on the spur")
   shot("r12_spur_top")
 
   -- Basanos and the shrine of Artemis.
