@@ -100,9 +100,14 @@ local function canHave(species, ability)
 end
 
 local function checkTable(trainers, order)
-  L.expect(#order == S.TRAINERS_END_ACT3 - S.TRAINER_ICHOR_EUDOROS,
-           string.format("SCRIPT's Kythera section has %d trainers, ids %d-%d", #order, S.TRAINER_ICHOR_EUDOROS,
-                         S.TRAINERS_END_ACT3 - 1))
+  -- Kythera's trainers are two blocks: 320-347, and 490-498 (the route standard's second
+  -- wave, taken from the top of act3's range so Knossa's 348 on stay free)
+  local blocks = (S.TRAINER_ICHOR_MYRSINE + 1 - S.TRAINER_ICHOR_EUDOROS)
+                 + (S.TRAINER_ICHOR_DEXITHEA + 1 - S.TRAINER_ICHOR_LYKON)
+  L.expect(#order == blocks,
+           string.format("SCRIPT's Kythera section has %d trainers, ids %d-%d and %d-%d", #order,
+                         S.TRAINER_ICHOR_EUDOROS, S.TRAINER_ICHOR_MYRSINE, S.TRAINER_ICHOR_LYKON,
+                         S.TRAINER_ICHOR_DEXITHEA))
   local wrong, mons = {}, 0
   local function want(cond, what) if not cond then wrong[#wrong + 1] = what end end
   for i, c in ipairs(order) do
@@ -110,7 +115,9 @@ local function checkTable(trainers, order)
     local id = S[c]
     if id == nil then L.fail("no constant " .. c .. " in act3_trainers_consts.c") end
     local where = c:sub(15)
-    want(id == S.TRAINER_ICHOR_EUDOROS + i - 1, string.format("%s is id %d, out of SCRIPT's order", where, id))
+    local first = S.TRAINER_ICHOR_MYRSINE + 1 - S.TRAINER_ICHOR_EUDOROS
+    local expectId = i <= first and S.TRAINER_ICHOR_EUDOROS + i - 1 or S.TRAINER_ICHOR_LYKON + i - first - 1
+    want(id == expectId, string.format("%s is id %d, out of SCRIPT's order", where, id))
     local t = S.gTrainers + (S.DIFFICULTY_NORMAL * S.TRAINERS_COUNT + id) * S.TRAINER_SIZE
     want(emu:read8(t + S.OFF_TRAINER_CLASS) == const("TRAINER_CLASS_", w.Class), where .. ": class " .. w.Class)
     want(gameName(t + S.OFF_TRAINER_NAME) == w.Name, where .. ": name " .. w.Name)
