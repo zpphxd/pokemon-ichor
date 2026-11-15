@@ -103,7 +103,8 @@ def room_modules():
     """The modules whose ROOMS dicts are built from these sets."""
     import aegina_homes
     import emporion_rooms
-    return [aegina_homes, emporion_rooms]
+    import eleusa_rooms
+    return [aegina_homes, emporion_rooms, eleusa_rooms]
 
 
 # --------------------------------------------------------------------------

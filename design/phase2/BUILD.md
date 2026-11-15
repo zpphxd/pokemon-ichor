@@ -154,6 +154,8 @@ The Telesterion's warps: 0–2 the stair (13, 12, 14 on row 26) to Eleusa's warp
 
 **Flags claimed** (bank 0x080–0x085, vanilla 0x2A0–0x2A2): `FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION`, `FLAG_ICHOR_ITEM_ELEUSA_AWAKENING`, `FLAG_ICHOR_SANCTUM_OPEN`, `FLAG_ICHOR_LESSER_MYSTERIES_DONE`, `FLAG_ICHOR_MET_DOSO`, `FLAG_ICHOR_HIDE_CHLOE_TELESTERION`; `FLAG_ICHOR_HIDDEN_ELEUSA_HONEY`, `FLAG_ICHOR_HIDDEN_ELEUSA_POMEG_BERRY`, `FLAG_ICHOR_HIDDEN_ELEUSA_BRONZE_OBOL`.
 
+**The six interiors** are built (the Eleusa interiors agent): `tools/ichor/maps/eleusa_rooms.py`, the plans and passes in `design/phase2/ROOMS_eleusa.md`, the check `tools/ichor/tests/eleusa_rooms.sh`. The placeholder copies are gone; each room's mat warps back to the first id of its door. Claimed: bank 0x090–0x095 `FLAG_ICHOR_GOT_KYKEON`, `_GOT_TM_BULLET_SEED`, `_GOT_AMULET_COIN`, `_TRADED_PITHOUND`, `_FRAGMENT_STOLEN`, `_MET_METANEIRA`; vanilla 0x2DB `FLAG_ICHOR_HIDDEN_ELEUSA_GRANARY_REVIVE`; `HEAL_LOCATION_ELEUSA_VILLAGE` (the road below the Asclepeion's door, (10, 24)); the in-game trade `INGAME_TRADE_ICHOR_CRITIC`. **Batch 5 sets `FLAG_ICHOR_FRAGMENT_STOLEN`** at the theft (beat 23): Sitokles gives the Amulet Coin once it is set.
+
 **Braziers.** The Telesterion's four season braziers use `FLAG_ICHOR_BRAZIERS_START + 0x10` (Autumn), `+ 0x11` (Winter), `+ 0x12` (Spring), `+ 0x13` (Summer). The block `+ 0x14`–`+ 0x1F` is left for the sanctum's four and Eleusa's procession torches. Ask before using it for anything else.
 | `MAP_AEGINA_APHAIA_ROAD` | (22, 4), the path south of the great herm at (22, 3) | the herm's Wings landing (ENGINE_API §4's heal location) |
 

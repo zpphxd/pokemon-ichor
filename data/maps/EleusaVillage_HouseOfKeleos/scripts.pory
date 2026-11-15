@@ -1,1 +1,131 @@
+// The house of Keleos (design/phase2/SCRIPT.md, Part 2, "Eleusa interiors";
+// SYSTEMS.md §10): Eleusa's oldest family. Metaneira took the disguised Demeter
+// in as a nurse, and her family has fed every stranger since. Room:
+// tools/ichor/maps/eleusa_rooms.py ("keleos"), a hall on domos with the great
+// hearth in the middle. The door is the mat at (7..8, 9), warp 0, back to
+// MAP_ELEUSA_VILLAGE's warp 2.
+//
+// Eleusa's xenia host, as Philoxenos is Emporion's: she feeds you first (a
+// heal), then offers a place by the hearth. After the Harvest Laurel
+// (FLAG_BADGE03_GET), once, the goddess's drink: Fresh Water and Barley Cakes
+// for the kykeon, a seed for Demeter's theoxenia at the well (SYSTEMS.md §10),
+// FLAG_ICHOR_GOT_KYKEON. Her welcome is told in full once
+// (FLAG_ICHOR_MET_METANEIRA); after that she just sits you down.
+//
+// ICHOR_STUB_XENIA: the rest menu (DAWN / NOON / DUSK / NIGHT) waits on
+// SYSTEMS.md §10's clock, as Philoxenos's does; the rest is a fade and a heal.
+// The Split Coin's second link (ITEM_HALF_COIN, the Big Pearl,
+// FLAG_ICHOR_SPLIT_COIN_2), a stretch feature, waits for the item and a flag.
+
 mapscripts EleusaVillage_HouseOfKeleos_MapScripts {}
+
+text EleusaVillage_HouseOfKeleos_Text_NameMetaneira { "METANEIRA" }
+text EleusaVillage_HouseOfKeleos_Text_NameGirl { "GIRL" }
+
+script EleusaVillage_HouseOfKeleos_EventScript_Metaneira {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_HouseOfKeleos_Text_NameMetaneira)
+    if (flag(FLAG_ICHOR_MET_METANEIRA)) {
+        msgbox(format("Sit. Eat first."))
+    } else {
+        msgbox(format("Sit. Eat first.\p"
+                      "My family has fed strangers at this table since there was a table.\p"
+                      "Once it was a goddess, and we didn't know.\p"
+                      "So now we feed everyone. Just in case."))
+        setflag(FLAG_ICHOR_MET_METANEIRA)
+    }
+    closemessage
+    call(EleusaVillage_HouseOfKeleos_EventScript_Feast)
+    if (flag(FLAG_BADGE03_GET) && !flag(FLAG_ICHOR_GOT_KYKEON)) {
+        call(EleusaVillage_HouseOfKeleos_EventScript_Kykeon)
+    }
+    // ICHOR_STUB_XENIA: the rest menu (see the header).
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Rest by the great hearth?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES) {
+        closemessage
+        fadescreen(FADE_TO_BLACK)
+        playfanfare(MUS_HEAL)
+        waitfanfare
+        special(HealPlayerParty)
+        delay(30)
+        fadescreen(FADE_FROM_BLACK)
+        setspeaker(SP_NAME_NONE)
+        msgbox(format("{PLAYER} slept by the fire, as the goddess once did, and woke well rested."))
+    }
+    release
+}
+
+// The table: a fade, the heal jingle, the party healed.
+script EleusaVillage_HouseOfKeleos_EventScript_Feast {
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_BLACK)
+    return
+}
+
+// The goddess's drink, once, after the Harvest Laurel. Both gifts are checked
+// for room before the flag is set, so a full bag can come back for them.
+script EleusaVillage_HouseOfKeleos_EventScript_Kykeon {
+    setspeaker(EleusaVillage_HouseOfKeleos_Text_NameMetaneira)
+    msgbox(format("Chloe gave you her laurel? Then you should have this.\p"
+                  "The goddess's own drink.\p"
+                  "Barley, water, a little mint. We call it kykeon.\p"
+                  "Keep the makings with you. You never know who's thirsty."))
+    checkitemspace(ITEM_FRESH_WATER, 2)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EleusaVillage_HouseOfKeleos_EventScript_BagFull)
+    }
+    checkitemspace(ITEM_BARLEY_CAKE, 2)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EleusaVillage_HouseOfKeleos_EventScript_BagFull)
+    }
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_FRESH_WATER, 2)
+    giveitem(ITEM_BARLEY_CAKE, 2)
+    setflag(FLAG_ICHOR_GOT_KYKEON)
+    return
+}
+
+script EleusaVillage_HouseOfKeleos_EventScript_BagFull {
+    setspeaker(EleusaVillage_HouseOfKeleos_Text_NameMetaneira)
+    msgbox(format("Your bag's as full as my table. Come back when there's room."))
+    release
+    end
+}
+
+script EleusaVillage_HouseOfKeleos_EventScript_Girl {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_HouseOfKeleos_Text_NameGirl)
+    msgbox(format("My sister Kallidike's an acolyte.\p"
+                  "She practices being mysterious at dinner.\p"
+                  "She says “I can't tell you” about the salt."))
+    release
+}
+
+script EleusaVillage_HouseOfKeleos_EventScript_Hearth {
+    msgbox(format("The great hearth, in the middle of the hall, the old way. The fire hasn't gone out in living memory."),
+           MSGBOX_SIGN)
+}
+
+script EleusaVillage_HouseOfKeleos_EventScript_Cradle {
+    msgbox(format("A winnowing basket lined with fleece: the cradle, set close to the fire. Babies in this house sleep warm."),
+           MSGBOX_SIGN)
+}
+
+script EleusaVillage_HouseOfKeleos_EventScript_Loom {
+    msgbox(format("Metaneira's loom. A cloak half woven, with ears of wheat round the border."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_HouseOfKeleos_EventScript_WaterJars {
+    msgbox(format("Three water jars by the door, for the trip to the Maiden's Well."), MSGBOX_SIGN)
+}
+
+script EleusaVillage_HouseOfKeleos_EventScript_Altar {
+    msgbox(format("Hestia's altar. A barley cake sits on it, still warm. Hestia always eats first here."),
+           MSGBOX_SIGN)
+}
