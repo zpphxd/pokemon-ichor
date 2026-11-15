@@ -66,7 +66,12 @@
 #define TRAINER_ICHOR_MENALKAS                83
 #define TRAINER_ICHOR_PHEIDIPPOS              84
 #define TRAINER_ICHOR_KAPELOS                 85
-#define TRAINERS_END_ACT1                     86
+// Hecate's Hollow, ids 100-109 (tools/ichor/maps/hecates_hollow.py)
+#define TRAINER_ICHOR_HEKABE                  100
+#define TRAINER_ICHOR_KALLIAS                 101
+#define TRAINER_ICHOR_PHAINO                  102
+#define TRAINER_ICHOR_BATTOS                  103
+#define TRAINERS_END_ACT1                     104
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

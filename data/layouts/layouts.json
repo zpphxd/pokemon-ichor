@@ -814,6 +814,17 @@
       "border_filepath": "data/layouts/Route4_Isthmus/border.bin",
       "blockdata_filepath": "data/layouts/Route4_Isthmus/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_HECATES_HOLLOW",
+      "name": "HecatesHollow_Layout",
+      "width": 48,
+      "height": 40,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_CaveDark",
+      "border_filepath": "data/layouts/HecatesHollow/border.bin",
+      "blockdata_filepath": "data/layouts/HecatesHollow/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

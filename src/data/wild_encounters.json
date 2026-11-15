@@ -1397,6 +1397,213 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_HECATES_HOLLOW",
+          "base_label": "gHecatesHollow_Morning",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_CHELONET"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HECATES_HOLLOW",
+          "base_label": "gHecatesHollow_Day",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_CHELONET"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_HECATES_HOLLOW",
+          "base_label": "gHecatesHollow_Night",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 18,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 17,
+                "max_level": 19,
+                "species": "SPECIES_ERGANT"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_SPALUNK"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_PEBBLITH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GELASABLE"
+              },
+              {
+                "min_level": 20,
+                "max_level": 20,
+                "species": "SPECIES_GALEKIT"
+              }
+            ]
+          }
         }
       ]
     },
