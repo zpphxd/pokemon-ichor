@@ -1733,6 +1733,20 @@
 #define ICHOR_GIFT_HIEROPHANT                   3
 #define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_SAFFRON_THREAD               (FLAG_ICHOR_GENERAL_START + 0x070) // Ichor: beat 19: Krokis tied the saffron thread at Eleusa's gate, three times, and it slipped off
+#define FLAG_ICHOR_ARRIVED_ELEUSA               (FLAG_ICHOR_GENERAL_START + 0x071) // Ichor: beat 20: first step into Eleusa Village
+#define FLAG_ICHOR_VISITED_ELEUSA               (FLAG_ICHOR_GENERAL_START + 0x072) // Ichor: Eleusa visited (fly target)
+#define FLAG_ICHOR_HIDE_KLEON_ELEUSA            (FLAG_ICHOR_GENERAL_START + 0x073) // Ichor: hide Kleon in Eleusa's square (beats 20-22; set once the Mysteries begin)
+#define FLAG_ICHOR_GOT_TM_GIGA_DRAIN            (FLAG_ICHOR_GENERAL_START + 0x074) // Ichor: beat 21: TM19 Giga Drain from Chloe
+#define FLAG_ICHOR_PROCESSION_ARRIVED           (FLAG_ICHOR_GENERAL_START + 0x075) // Ichor: beat 22: the procession reached Eleusa (out of the Telesterion with the Harvest Laurel)
+#define FLAG_ICHOR_HIDE_PROCESSION_ELEUSA       (FLAG_ICHOR_GENERAL_START + 0x076) // Ichor: hide the procession in Eleusa: Alethea, Kerykos, Eudemos, the initiates (shown from PROCESSION_ARRIVED until the Mysteries begin)
+#define FLAG_ICHOR_MYSTERIES_BEGUN              (FLAG_ICHOR_GENERAL_START + 0x077) // Ichor: beat 22: told Kerykos YES, the doors closed; the night scene plays in the Telesterion
+#define FLAG_ICHOR_HIDE_MYSTERIES_CROWD         (FLAG_ICHOR_GENERAL_START + 0x078) // Ichor: hide the Mysteries' congregation in the Telesterion: Kerykos, Alethea, the initiates (shown during beat 22)
+#define FLAG_ICHOR_HIDE_TELESTERION_GRUNTS      (FLAG_ICHOR_GENERAL_START + 0x079) // Ichor: hide Psammis and Chersos in the Telesterion (shown only while they climb out, beat 22)
+#define FLAG_ICHOR_HIDE_KLEON_TELESTERION       (FLAG_ICHOR_GENERAL_START + 0x07A) // Ichor: hide Kleon in the Telesterion (seated in beat 22, then at the Anaktoron's door until beat 24 sets it)
+#define FLAG_ICHOR_MYSTERIES_NIGHT              (FLAG_ICHOR_GENERAL_START + 0x07B) // Ichor: beat 22: the night of the Mysteries played to the end (the raid, the multi battle, the stair)
+#define FLAG_ICHOR_TELESTERION_MULTI            (FLAG_ICHOR_GENERAL_START + 0x07C) // Ichor: beat 22: fought the Telesterion's grunts beside Kleon (either outcome)
+#define FLAG_ICHOR_TELESTERION_PIT_FALL         (FLAG_ICHOR_GENERAL_START + 0x07D) // Ichor: the Telesterion: fell into a grain pit at least once (Doso's chalk hint)
 #define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
 #define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
 #define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)

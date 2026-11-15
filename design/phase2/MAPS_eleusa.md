@@ -3,7 +3,9 @@
 Batch 4's places (design/phase2/BUILD.md): the village of the Mysteries and its
 Telesterion, built from `gTileset_Eleusa` and `gTileset_TempleDemeter`
 (TILES_eleusa.md, TILES_temple_demeter.md), with their everyday people, signs, items
-and the Lesser Mysteries' layout. The story scenes (beats 20–25) come in the next batch.
+and the Lesser Mysteries' layout. The story scenes of beats 19–22 (Krokis's gate, the
+arrival, Laurel 3, the procession and the night of the Mysteries) are in BUILD.md, "Batch 4's
+story", and `tools/ichor/tests/temple_demeter.sh` plays them; beats 23–25 come next.
 
 | | Builder | Size | Tilesets |
 |---|---|---|---|

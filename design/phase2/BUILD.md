@@ -157,6 +157,23 @@ The Telesterion's warps: 0–2 the stair (13, 12, 14 on row 26) to Eleusa's warp
 **Braziers.** The Telesterion's four season braziers use `FLAG_ICHOR_BRAZIERS_START + 0x10` (Autumn), `+ 0x11` (Winter), `+ 0x12` (Spring), `+ 0x13` (Summer). The block `+ 0x14`–`+ 0x1F` is left for the sanctum's four and Eleusa's procession torches. Ask before using it for anything else.
 | `MAP_AEGINA_APHAIA_ROAD` | (22, 4), the path south of the great herm at (22, 3) | the herm's Wings landing (ENGINE_API §4's heal location) |
 
+### Batch 4's story: beats 19 (the gate), 20, 21 and 22
+
+Scripted by the Eleusa story agent in `data/maps/EleusaVillage/scripts.pory` and `data/maps/EleusaVillage_TempleOfDemeter/scripts.pory`; the cast's places are in `eleusa.py`'s and `temple_demeter.py`'s object tables. `tools/ichor/tests/temple_demeter.sh` plays it all.
+
+| Beat | Where | What |
+|---|---|---|
+| 19, Krokis's gate | Eleusa, triggers at (6, 24–27) | Once: the player steps up beside Krokis (8, 26) and the thread slips three times. Talking to her first plays it too. |
+| 20 | Eleusa | ON_TRANSITION sets `FLAG_ICHOR_ARRIVED_ELEUSA` and the fly flag `FLAG_ICHOR_VISITED_ELEUSA` (`MAPSEC_ELEUSA_VILLAGE` flies to `HEAL_LOCATION_ELEUSA_VILLAGE`, (10, 24)). Kleon waits in the square at (24, 23). |
+| 21 | the Telesterion | The engine's braziers and lit zones (the `ICHOR_STUB_DARKNESS` stand-ins are gone). The acolytes are trainers; Chloe's battle picks `_NIGHT` when `gettimeofday` says `TIME_NIGHT`; a loss whites out. The Laurel sets `FLAG_BADGE03_GET`, Demeter +15, TM19, a Barley Cake (the engine's Hierophant's-offering flag, `FLAG_ICHOR_GIFTS_START + 15`, is SCRIPT.md's `FLAG_ICHOR_CHLOE_RITE`) and boards the pits. |
+| 22 | Eleusa, then the Telesterion | Out of the hall with the Laurel, the procession arrives (Alethea comes up to the steps). Kerykos's YES warps to (13, 17) in the hall; the raid kicks over the Autumn and Summer braziers (drawn overturned on every load after), the multi battle beside Kleon (`PARTNER_ICHOR_KLEON_ELEUSA_*`, either outcome continues), and the stair: `FLAG_ICHOR_MYSTERIES_NIGHT`, `_TELESTERION_MULTI`, `_SANCTUM_OPEN`, then `warp(MAP_ELEUSA_SANCTUM_B1F, 0)`. Kleon then keeps the Anaktoron's door at (14, 14). |
+
+**Flags claimed** (bank 0x070–0x07D): `FLAG_ICHOR_SAFFRON_THREAD`, `_ARRIVED_ELEUSA`, `_VISITED_ELEUSA`, `_HIDE_KLEON_ELEUSA`, `_GOT_TM_GIGA_DRAIN`, `_PROCESSION_ARRIVED`, `_HIDE_PROCESSION_ELEUSA`, `_MYSTERIES_BEGUN` (Kerykos's YES), `_HIDE_MYSTERIES_CROWD`, `_HIDE_TELESTERION_GRUNTS`, `_HIDE_KLEON_TELESTERION`, `_MYSTERIES_NIGHT`, `_TELESTERION_MULTI`, `_TELESTERION_PIT_FALL`. **Trainers** 140–147: `TRAINER_ICHOR_KALLIDIKE`, `_EUMOLPOS`, `_MELISSA`, `_CHLOE_1_DAY`, `_CHLOE_1_NIGHT`, `_GRUNT_TELESTERION_PSAMMIS`, `_GRUNT_TELESTERION_CHERSOS`, `_EUBOULEUS` (the new `TRAINER_CLASS_SWINEHERD`). Kleon got a battle back pic (`tools/ichor/art/sprites_kleon_back.py`), which a partner needs.
+
+**Temp vars.** The village: `VAR_TEMP_8` (the gate played), `VAR_TEMP_9` (the procession waits). The hall: `VAR_TEMP_8` (the Mysteries wait), `_9` (Doso's chalk hint), `_A` (Doso's talks), `_B` (in a lit quarter), `_C` (the pits boarded). `VAR_TEMP_2` and `_3` are the engine's carried flame.
+
+**For beat 23 (the sanctum).** It begins on `MAP_ELEUSA_SANCTUM_B1F`'s warp 0 with `FLAG_ICHOR_MYSTERIES_NIGHT` and `FLAG_ICHOR_SANCTUM_OPEN` set; Chloe and Alethea came down the stair with the player (the Telesterion hides Chloe while `_MYSTERIES_NIGHT` is set). Beat 24 sets `FLAG_ICHOR_HIDE_KLEON_TELESTERION` when Kleon leaves the door for Thyrsa.
+
 ### Aigina's interior: placed for world-act2 (Act II)
 
 Built by `tools/ichor/maps/aegina_detour.py` (render-and-critique passes in `MAPS_aigina_interior.md`). The people stand where they fight, with a placeholder line tagged `ICHOR_ACT2` and **`trainer_type` NONE**: the sight check reads the trainer id out of the script, so they can't be sighted trainers until world-act2 gives them `trainerbattle` scripts. Then set `TRAINER_TYPE_NORMAL` and the sight below; the builder proves each mandatory line cuts the only path.

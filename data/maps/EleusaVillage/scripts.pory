@@ -1,22 +1,63 @@
 // Eleusa Village: the village of the Mysteries. design/phase2/SCRIPT.md, "Eleusa
-// Village" (Part 2), its signs, Part 6's items, and beat 20's setting.
+// Village" (Part 2), its signs, Part 6's items, and beats 19, 20 and 22.
 //
 // The layout and map.json's events come from tools/ichor/maps/eleusa.py, which
 // also writes the generated block at the end of this file. This file holds the
-// village's everyday life: its people, signs and stubs. The story scenes (Krokis's
-// saffron thread, beat 19; arrival and Kleon, beat 20; the procession, beat 22;
-// the morning after, beats 24-25) come with the story batch.
+// village's everyday life (its people, signs and stubs) and its story scenes:
+//   beat 19  Krokis's gate: the saffron thread, once, on the road in from Route 5
+//   beat 20  arrival (FLAG_ICHOR_ARRIVED_ELEUSA, the fly flag) and Kleon in the square
+//   beat 22  the procession arrives as the player walks out of the Telesterion with the
+//            Harvest Laurel; Kerykos's YES closes the doors and the night of the
+//            Mysteries plays in the Telesterion (its scripts.pory)
+// The morning after (beats 24-25) comes with the next batch.
+//
+// Temp vars: VAR_TEMP_8 is 1 once the saffron thread is tied (Krokis's gate triggers
+// read it); VAR_TEMP_9 is 1 while the procession's arrival waits to play (ON_FRAME).
 //
 // Stubs, until the engine session's batches land (design/phase2/BUILD.md):
-//   ICHOR_STUB_RITES  Demeter's field shrine shows its text, nothing about prayer
-//   ICHOR_STUB_DIG    the fields' two daily dig spots show the turned earth only
+//   ICHOR_STUB_RITES   Demeter's field shrine shows its text, nothing about prayer
+//   ICHOR_STUB_DIG     the fields' two daily dig spots show the turned earth only
+//   ICHOR_STUB_SPRITE  the initiates walk as pilgrims and youths, Eudemos as an elder
 
 mapscripts EleusaVillage_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // beat 20: the first step in, and Eleusa is a place the Wings can find
+        setflag(FLAG_ICHOR_ARRIVED_ELEUSA)
+        setflag(FLAG_ICHOR_VISITED_ELEUSA)
+        if (flag(FLAG_ICHOR_SAFFRON_THREAD)) {
+            setvar(VAR_TEMP_8, 1)
+        }
+        call(EleusaVillage_EventScript_PlaceCast)
+    }
     MAP_SCRIPT_ON_LOAD {
         if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {
             call(EleusaVillage_EventScript_ShutPloutonion)
         }
     }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_9, 1: EleusaVillage_EventScript_ProcessionArrives
+    ]
+}
+
+// Who is in the village: Kleon waits in the square until the Mysteries begin; the
+// procession is here from the Harvest Laurel until then. Its arrival plays once, on
+// the first step out with the Laurel.
+script EleusaVillage_EventScript_PlaceCast {
+    if (flag(FLAG_ICHOR_MYSTERIES_BEGUN)) {
+        setflag(FLAG_ICHOR_HIDE_KLEON_ELEUSA)
+        setflag(FLAG_ICHOR_HIDE_PROCESSION_ELEUSA)
+        return
+    }
+    clearflag(FLAG_ICHOR_HIDE_KLEON_ELEUSA)
+    if (flag(FLAG_BADGE03_GET)) {
+        clearflag(FLAG_ICHOR_HIDE_PROCESSION_ELEUSA)
+        if (!flag(FLAG_ICHOR_PROCESSION_ARRIVED)) {
+            setvar(VAR_TEMP_9, 1)
+        }
+    } else {
+        setflag(FLAG_ICHOR_HIDE_PROCESSION_ELEUSA)
+    }
+    return
 }
 
 // ---------------------------------------------------------------------------
@@ -26,21 +67,273 @@ mapscripts EleusaVillage_MapScripts {
 text EleusaVillage_Text_NameKrokis { "KROKIS" }
 text EleusaVillage_Text_NameDysaules { "DYSAULES" }
 text EleusaVillage_Text_NameEubouleus { "EUBOULEUS" }
+text EleusaVillage_Text_NameKleon { "KLEON" }
+text EleusaVillage_Text_NameAlethea { "ALETHEA" }
+text EleusaVillage_Text_NameKerykos { "KERYKOS" }
+text EleusaVillage_Text_NameEudemos { "EUDEMOS" }
+text EleusaVillage_Text_NameInitiate { "INITIATE" }
+
+// ---------------------------------------------------------------------------
+// Beat 19: Krokis's gate
+// ---------------------------------------------------------------------------
+
+// The road in from Route 5 crosses the trigger two steps short of her stool. The
+// player steps up beside her (above her, at (8, 26)) and holds out a hand.
+script EleusaVillage_EventScript_KrokisGate {
+    lockall
+    setvar(VAR_TEMP_8, 1)
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    switch (var(VAR_0x8005)) {
+        case 24:
+            applymovement(OBJ_EVENT_ID_PLAYER, EleusaVillage_Movement_ToKrokisFrom24)
+        case 25:
+            applymovement(OBJ_EVENT_ID_PLAYER, EleusaVillage_Movement_ToKrokisFrom25)
+        case 26:
+            applymovement(OBJ_EVENT_ID_PLAYER, EleusaVillage_Movement_ToKrokisFrom26)
+        default:
+            applymovement(OBJ_EVENT_ID_PLAYER, EleusaVillage_Movement_ToKrokisFrom27)
+    }
+    waitmovement(0)
+    turnobject(LOCALID_ELEUSA_KROKIS, DIR_NORTH)
+    call(EleusaVillage_EventScript_SaffronThread)
+    releaseall
+    end
+}
+
+movement EleusaVillage_Movement_ToKrokisFrom24 { walk_right * 2 walk_down * 2 face_down }
+movement EleusaVillage_Movement_ToKrokisFrom25 { walk_right * 2 walk_down face_down }
+movement EleusaVillage_Movement_ToKrokisFrom26 { walk_right * 2 face_down }
+movement EleusaVillage_Movement_ToKrokisFrom27 { walk_up walk_right * 2 face_down }
+
+// The saffron thread (SCRIPT.md beat 19): tied three times, and three times it slides
+// off the player's wrist into the dust. Never explained here (Alethea mentions it
+// once, in beat 25).
+script EleusaVillage_EventScript_SaffronThread {
+    setspeaker(EleusaVillage_Text_NameKrokis)
+    msgbox(format("Welcome to Eleusa, traveler. Hold out your right hand.\p"
+                  "My family's tied the saffron thread on pilgrims for a thousand years.\p"
+                  "Right wrist, and the Kore keeps you safe below. There."))
+    closemessage
+    call(EleusaVillage_EventScript_ThreadSlips)
+    msgbox(format("…Hm. Bad knot. Again."))
+    closemessage
+    call(EleusaVillage_EventScript_ThreadSlips)
+    msgbox(format("That's never… Once more."))
+    closemessage
+    call(EleusaVillage_EventScript_ThreadSlips)
+    // She looks at it for a long while.
+    applymovement(LOCALID_ELEUSA_KROKIS, Common_Movement_QuestionMark)
+    waitmovement(0)
+    delay(60)
+    msgbox(format("Well! It must be the damp. It's been very damp this year.\p"
+                  "Go on in.\p"
+                  "Go on."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    setflag(FLAG_ICHOR_SAFFRON_THREAD)
+    return
+}
+
+// She ties it (a soft sound), and it slides off: hold 30 frames.
+script EleusaVillage_EventScript_ThreadSlips {
+    playse(SE_M_STRING_SHOT)
+    delay(30)
+    applymovement(LOCALID_ELEUSA_KROKIS, EleusaVillage_Movement_KrokisTies)
+    waitmovement(0)
+    delay(30)
+    return
+}
+
+movement EleusaVillage_Movement_KrokisTies { walk_in_place_up }
+
+// Spoken to: the thread first, if the gate hasn't played (the player came in some
+// other way); then the damp.
+script EleusaVillage_EventScript_Krokis {
+    lock
+    faceplayer
+    if (!flag(FLAG_ICHOR_SAFFRON_THREAD)) {
+        setvar(VAR_TEMP_8, 1)
+        call(EleusaVillage_EventScript_SaffronThread)
+        release
+        end
+    }
+    setspeaker(EleusaVillage_Text_NameKrokis)
+    msgbox(format("Well! It must be the damp. It's been very damp this year."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Beat 20: Kleon in the square
+// ---------------------------------------------------------------------------
+
+script EleusaVillage_EventScript_Kleon {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameKleon)
+    if (flag(FLAG_BADGE03_GET)) {
+        // After the trial, before the Mysteries: he never found Chloe in the dark.
+        msgbox(format("You got Chloe's laurel? …I never found her. In the dark.\p"
+                      "I ran into eleven pillars. Doso counted.\p"
+                      "She says I went down fine. I just never came back up.\p"
+                      "Doesn't matter. I'll get it later. Nothing in the dark matters."))
+    } else {
+        msgbox(format("I'm getting initiated. Tonight, when the procession gets here.\p"
+                      "Not because I'm scared of anything. Because it's educational.\p"
+                      "Educational and nothing else."))
+    }
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Beat 22: the procession arrives
+// ---------------------------------------------------------------------------
+
+// Out of the Telesterion with the Harvest Laurel: the procession has come up the Sacred
+// Way and filled the court. Alethea comes up to the steps (25, 12), where the stair
+// lands the player, and Kerykos steps over from his place beside the door. Anywhere
+// else (a Laurel won and the village entered some other way), they speak from where
+// they stand.
+script EleusaVillage_EventScript_ProcessionArrives {
+    lockall
+    setvar(VAR_TEMP_9, 2)
+    setflag(FLAG_ICHOR_PROCESSION_ARRIVED)
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    setvar(VAR_0x8006, FALSE)
+    if (var(VAR_0x8004) == 25 && var(VAR_0x8005) == 12) {
+        setvar(VAR_0x8006, TRUE)
+    }
+    delay(16)
+    if (var(VAR_0x8006) == TRUE) {
+        applymovement(LOCALID_ELEUSA_ALETHEA, EleusaVillage_Movement_AletheaToSteps)
+        waitmovement(0)
+        turnobject(OBJ_EVENT_ID_PLAYER, DIR_SOUTH)
+    }
+    setspeaker(EleusaVillage_Text_NameAlethea)
+    msgbox(format("We made it! Very slowly. Every step of the way. On purpose.\p"
+                  "I sent word to Daphne with one of Kerykos's runners. She's coming.\p"
+                  "She hates boats. She'll arrive cross."))
+    closemessage
+    if (var(VAR_0x8006) == TRUE) {
+        applymovement(LOCALID_ELEUSA_KERYKOS, EleusaVillage_Movement_KerykosToPlayer)
+        waitmovement(0)
+        turnobject(OBJ_EVENT_ID_PLAYER, DIR_EAST)
+    }
+    setspeaker(EleusaVillage_Text_NameKerykos)
+    msgbox(format("{PLAYER}! A laurel from my cousin! Did she say anything? Anything at all?\p"
+                  "…“Good.” Ha! That's practically a speech, for Chloe.\p"
+                  "The Mysteries open when the doors close. Heal up first.\p"
+                  "Once those doors shut, they don't open till it's done."))
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    if (var(VAR_0x8006) == TRUE) {
+        applymovement(LOCALID_ELEUSA_KERYKOS, EleusaVillage_Movement_KerykosBack)
+        applymovement(LOCALID_ELEUSA_ALETHEA, EleusaVillage_Movement_AletheaBack)
+        waitmovement(LOCALID_ELEUSA_KERYKOS)
+        waitmovement(LOCALID_ELEUSA_ALETHEA)
+    }
+    releaseall
+    end
+}
+
+movement EleusaVillage_Movement_AletheaToSteps { walk_right walk_up face_up }
+movement EleusaVillage_Movement_AletheaBack { walk_down walk_left face_up }
+movement EleusaVillage_Movement_KerykosToPlayer { walk_left face_left }
+movement EleusaVillage_Movement_KerykosBack { walk_right face_left }
+
+// Kerykos on the Telesterion's steps: YES closes the doors on the night of the Mysteries.
+script EleusaVillage_EventScript_Kerykos {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameKerykos)
+    msgbox(format("Ready? Doors are closing."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Don't be long. I hate waiting quietly. I hate it loudly too."))
+        release
+        end
+    }
+    closemessage
+    setspeaker(SP_NAME_NONE)
+    setflag(FLAG_ICHOR_MYSTERIES_BEGUN)
+    fadescreen(FADE_TO_BLACK)
+    // The Telesterion's ON_TRANSITION sees FLAG_ICHOR_MYSTERIES_BEGUN and seats everyone.
+    warpsilent(MAP_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER, 13, 17)
+    waitstate
+    release
+    end
+}
+
+script EleusaVillage_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameAlethea)
+    msgbox(format("I sent word to Daphne with one of Kerykos's runners. She's coming.\p"
+                  "She hates boats. She'll arrive cross."))
+    release
+}
+
+script EleusaVillage_EventScript_Eudemos {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameEudemos)
+    msgbox(format("Every year since there was a year, the procession walks to Eleusa."))
+    release
+}
+
+// The initiates in white. Two take up the procession's cry (SCRIPT.md beat 17).
+script EleusaVillage_EventScript_Initiate1 {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameInitiate)
+    msgbox(format("Iakch', o Iakche! Iakch', o Iakche!"))
+    release
+}
+
+script EleusaVillage_EventScript_Initiate2 {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameInitiate)
+    msgbox(format("We fasted all the way from Emporion. I could eat a whole Kaplet."))
+    release
+}
+
+script EleusaVillage_EventScript_Initiate3 {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameInitiate)
+    msgbox(format("I carried the holy basket the whole Sacred Way.\p"
+                  "Nobody will tell me what's in it. I didn't look. I wanted to."))
+    release
+}
+
+script EleusaVillage_EventScript_Initiate4 {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameInitiate)
+    msgbox(format("Iakch', o Iakche! Iakch', o Iakche!"))
+    release
+}
+
+script EleusaVillage_EventScript_Initiate5 {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameInitiate)
+    msgbox(format("The Lakonian boy's been explaining the Mysteries to us since Emporion.\p"
+                  "He's never been."))
+    release
+}
+
+script EleusaVillage_EventScript_Initiate6 {
+    lock
+    faceplayer
+    setspeaker(EleusaVillage_Text_NameInitiate)
+    msgbox(format("My mother was initiated. She won't say a word about it.\p"
+                  "She smiles, though."))
+    release
+}
 
 // ---------------------------------------------------------------------------
 // The people of Eleusa
 // ---------------------------------------------------------------------------
-
-// Krokis keeps the west gate. Her saffron thread (beat 19) is the story batch's
-// coord trigger; until it plays, this is her everyday line.
-script EleusaVillage_EventScript_Krokis {
-    lock
-    faceplayer
-    setspeaker(EleusaVillage_Text_NameKrokis)
-    msgbox(format("Saffron thread, for the pilgrims. A family trade.\p"
-                  "A thousand years of knots. Not one has ever slipped."))
-    release
-}
 
 script EleusaVillage_EventScript_Dysaules {
     lock
@@ -53,15 +346,16 @@ script EleusaVillage_EventScript_Dysaules {
     release
 }
 
-// A swineherd (Part 3). His battle comes with the story batch; until then he
-// tells the first half of his story and keeps the pigs' side of it.
+// A swineherd (Part 3), optional: he watches the threshing floor.
 script EleusaVillage_EventScript_Eubouleus {
-    lock
-    faceplayer
+    trainerbattle_single(TRAINER_ICHOR_EUBOULEUS,
+        format("When the earth opened for the Kore, my ancestor's pigs fell in too.\p"
+               "Nobody writes songs about the pigs. Battle!"),
+        format("Down they go."))
     setspeaker(EleusaVillage_Text_NameEubouleus)
-    msgbox(format("When the earth opened for the Kore, my ancestor's pigs fell in too.\p"
-                  "Nobody writes songs about the pigs."))
-    release
+    msgbox(format("Every year the priestesses throw piglets in a pit for the festival.\p"
+                  "Mine always climb back out. I've stopped arguing with them."), MSGBOX_AUTOCLOSE)
+    end
 }
 
 script EleusaVillage_EventScript_Kid {

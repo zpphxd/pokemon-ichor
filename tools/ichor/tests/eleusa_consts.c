@@ -3,6 +3,7 @@
 #include "constants/field_effects.h"
 #include "constants/map_groups.h"
 #include "constants/metatile_labels.h"
+#include "constants/opponents.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "pokemon.h"
@@ -36,6 +37,13 @@ K(FLAG_BRAZIER_AUTUMN, FLAG_ICHOR_BRAZIERS_START + 0x10)
 K(FLAG_BRAZIER_WINTER, FLAG_ICHOR_BRAZIERS_START + 0x11)
 K(FLAG_BRAZIER_SPRING, FLAG_ICHOR_BRAZIERS_START + 0x12)
 K(FLAG_BRAZIER_SUMMER, FLAG_ICHOR_BRAZIERS_START + 0x13)
+K(FLAG_GOT_HECATES_TORCH, FLAG_ICHOR_GOT_HECATES_TORCH)
+
+// the story's trainers (temple_demeter.sh fights them; this walk counts them beaten)
+K(TRAINER_EUBOULEUS, TRAINER_ICHOR_EUBOULEUS)
+K(TRAINER_KALLIDIKE, TRAINER_ICHOR_KALLIDIKE)
+K(TRAINER_EUMOLPOS, TRAINER_ICHOR_EUMOLPOS)
+K(TRAINER_MELISSA, TRAINER_ICHOR_MELISSA)
 
 // the wild table's stand-ins (ichor_species_stubs.h), and a lead for the party
 K(SPECIES_STACHYSS, SPECIES_STACHYSS)

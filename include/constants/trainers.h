@@ -555,6 +555,7 @@ enum TrainerClassID
     TRAINER_CLASS_SCHOLAR,
     TRAINER_CLASS_MERCHANT,
     TRAINER_CLASS_PILGRIM,
+    TRAINER_CLASS_SWINEHERD,           // Eubouleus at Eleusa; the Goatherd's pic stands in until the Swineherd is drawn
 
     TRAINER_CLASS_COUNT,
 };

@@ -17,6 +17,11 @@ each corner. The rite follows Persephone's trail:
 Each brazier's flag is FLAG_ICHOR_BRAZIERS_START + 0x10..0x13 (BUILD.md); each
 lights its quarter for good (a lit zone, ENGINE_API.md §2) and its column torch.
 
+Beat 22, the night of the Mysteries, plays here too: its cast (Kerykos, Alethea, Kleon,
+initiates, two Titanborn) stands where the table below puts them, hidden but for the
+scene; the raid kicks over the front braziers (`overturned`) and leaves bootprints,
+drawn on every load after FLAG_ICHOR_MYSTERIES_NIGHT.
+
 Writes:
   data/layouts/EleusaVillage_TempleOfDemeter/map.bin, border.bin
   data/maps/EleusaVillage_TempleOfDemeter/map.json (events from the tables below)
@@ -272,16 +277,60 @@ def lit_grid(g, seasons):
     return out
 
 
+# The raid (beat 22): a kicked brazier lies on its side across its legs' cell and the
+# one east of it (`overturned`, 2x1), the bowl's cell is bare floor, and its glow and
+# its column torch go cold, so its quarter is dark again.
+RAID_TRACKS = [(13, 15), (13, 16)]        # bootprints out of the Anaktoron's door
+
+
+def kick_cells(g, season):
+    """(x, y, metatile id, solid) for a brazier kicked over."""
+    bx, by = BRAZIER[season]
+    out = [(bx, by, IDS["floor.floor"], False),
+           (bx, by + 1, IDS["overturned.r0c0"], True),
+           (bx + 1, by + 1, IDS["overturned.r0c1"], True)]
+    taken = {(x, y) for x, y, _, _ in out}
+    for x, y, n in light_cells(g, season):
+        if (x, y) in taken:
+            continue
+        base = g[y][x]
+        out.append((x, y, IDS[base], not walkable_name(base)))
+    return out
+
+
 # --- Events -------------------------------------------------------------------------------
 GFX = "OBJ_EVENT_GFX_ICHOR_"
+CROWD = "FLAG_ICHOR_HIDE_MYSTERIES_CROWD"        # beat 22's congregation, there only for the scene
+GRUNTS = "FLAG_ICHOR_HIDE_TELESTERION_GRUNTS"    # the two who climb out of the Anaktoron
+SCENE_FLAGS = {CROWD, GRUNTS, "FLAG_ICHOR_HIDE_KLEON_TELESTERION"}
 OBJECTS = [
-    # local id, gfx, x, y, facing, script, hide flag
+    # local id, gfx, x, y, facing, script, hide flag[, trainer sight]
     ("DOSO", GFX + "ELDER_F", 11, 25, "RIGHT", "Doso", "0"),
-    ("KALLIDIKE", GFX + "ACOLYTE_F", 5, 23, "LEFT", "Kallidike", "0"),
-    ("EUMOLPOS", GFX + "ACOLYTE_M", 8, 9, "LEFT", "Eumolpos", "0"),
-    ("MELISSA", GFX + "ACOLYTE_F", 23, 3, "UP", "Melissa", "0"),
+    # the acolytes (SCRIPT.md Part 3). Kallidike's sight covers the Autumn seed; Eumolpos
+    # faces the straight line (y 8) to the Winter brazier; Melissa faces the wall, so she
+    # only battles when spoken to.
+    ("KALLIDIKE", GFX + "ACOLYTE_F", 5, 23, "LEFT", "Kallidike", "0", 3),
+    ("EUMOLPOS", GFX + "ACOLYTE_M", 8, 9, "UP", "Eumolpos", "0", 1),
+    ("MELISSA", GFX + "ACOLYTE_F", 23, 3, "UP", "Melissa", "0", 1),
     ("CHLOE", GFX + "PRIESTESS", CHLOE[0], CHLOE[1], "DOWN", "Chloe", "FLAG_ICHOR_HIDE_CHLOE_TELESTERION"),
+    # beat 22, the night of the Mysteries: the player stands at the front (13, 17), Alethea
+    # beside them, Kleon two places along; Kerykos by the holy baskets; initiates behind.
+    # The grunts climb out of the Anaktoron's door. After the scene Kleon keeps the door
+    # (ON_TRANSITION moves him to KLEON_DOOR) until beat 24. ICHOR_STUB_SPRITE: initiates
+    # are drawn as pilgrims and youths.
+    ("KERYKOS", GFX + "KERYKOS", 11, 15, "DOWN", "Hush", CROWD),
+    ("ALETHEA", GFX + "ALETHEA", 12, 17, "UP", "Hush", CROWD),
+    ("KLEON", GFX + "KLEON", 15, 17, "UP", "Kleon", "FLAG_ICHOR_HIDE_KLEON_TELESTERION"),
+    ("PSAMMIS", GFX + "TITAN_GRUNT", DOOR[0], DOOR[1], "DOWN", "Hush", GRUNTS),
+    ("CHERSOS", GFX + "TITAN_GRUNT", DOOR[0], DOOR[1], "DOWN", "Hush", GRUNTS),
+    ("INITIATE_1", GFX + "PILGRIM", 11, 17, "UP", "Hush", CROWD),
+    ("INITIATE_2", GFX + "YOUTH_F", 12, 18, "UP", "Hush", CROWD),
+    ("INITIATE_3", GFX + "YOUTH_M", 14, 18, "UP", "Hush", CROWD),
+    ("INITIATE_4", GFX + "PILGRIM", 15, 18, "UP", "Hush", CROWD),
 ]
+MYSTERIES_SPOT = (13, 17)                 # where Kerykos's YES lands the player (eleusa scripts)
+KLEON_DOOR = (14, 14)                     # Kleon's post at the Anaktoron's door after beat 22
+KICKED = ("autumn", "summer")             # the braziers the grunts kick over (the front two)
 
 
 def bg_events():
@@ -302,11 +351,16 @@ def zone_of(x, y):
     return None
 
 
+PIT_VAR = "VAR_TEMP_C"        # 1 once the pits are boarded over (the Harvest Laurel)
+ZONE_VAR = "VAR_TEMP_B"       # 1 while the player stands in a lit quarter
+# (Not VAR_TEMP_2 and _3: the engine keeps a carried flame's steps and kind there.)
+
+
 def coord_events(solid):
     """Pit triggers on every pit, then the lit zones' rings: entering on the zone's
     edge cells, leaving on the dark cells just outside it."""
     pits, _ = pit_cells()
-    out = [(x, y, "VAR_TEMP_3", "0", "Pit") for (x, y) in sorted(pits, key=lambda p: (p[1], p[0]))]
+    out = [(x, y, PIT_VAR, "0", "Pit") for (x, y) in sorted(pits, key=lambda p: (p[1], p[0]))]
     taken = set(pits)
 
     def open_(x, y):
@@ -325,9 +379,9 @@ def coord_events(solid):
                     if zone_of(*p) is None and p not in taken:
                         leave.add(p)
     for (x, y, z) in enter:
-        out.append((x, y, "VAR_TEMP_2", "0", "Enter" + z.title()))
+        out.append((x, y, ZONE_VAR, "0", "Enter" + z.title()))
     for (x, y) in sorted(leave, key=lambda p: (p[1], p[0])):
-        out.append((x, y, "VAR_TEMP_2", "1", "LeaveLitZone"))
+        out.append((x, y, ZONE_VAR, "1", "LeaveLitZone"))
     return out
 
 
@@ -339,8 +393,9 @@ def write_events(solid):
     m["object_events"] = [{
         "local_id": f"LOCALID_TEMPLE_DEMETER_{lid}", "graphics_id": gfx, "x": x, "y": y, "elevation": 3,
         "movement_type": f"MOVEMENT_TYPE_FACE_{f}", "movement_range_x": 0, "movement_range_y": 0,
-        "trainer_type": "TRAINER_TYPE_NONE", "trainer_sight_or_berry_tree_id": "0",
-        "script": PX + s, "flag": flag} for lid, gfx, x, y, f, s, flag in OBJECTS]
+        "trainer_type": "TRAINER_TYPE_NORMAL" if sight else "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": str(sight[0]) if sight else "0",
+        "script": PX + s, "flag": flag} for lid, gfx, x, y, f, s, flag, *sight in OBJECTS]
     warps = [{"x": x, "y": y, "elevation": 0, "dest_map": "MAP_ELEUSA_VILLAGE",
               "dest_warp_id": str(VILLAGE_DOOR_WARP)} for x, y in STAIRS]
     warps.append({"x": DOOR[0], "y": DOOR[1], "elevation": 0, "dest_map": "MAP_ELEUSA_SANCTUM_B1F",
@@ -377,6 +432,9 @@ def script_block(g):
     o.append("    if (flag(FLAG_BADGE03_GET)) {")
     o.append(f"        call({PX}BoardPits)")
     o.append("    }")
+    o.append("    if (flag(FLAG_ICHOR_MYSTERIES_NIGHT)) {")
+    o.append(f"        call({PX}DrawRaid)")
+    o.append("    }")
     o.append("    if (!flag(FLAG_ICHOR_SANCTUM_OPEN)) {")
     o.append(f"        setmetatile({DOOR[0]}, {DOOR[1]}, 0x{IDS['anaktoron.r2c2']:03X}, TRUE)")
     o.append("    } else {")
@@ -409,6 +467,23 @@ def script_block(g):
         o.append(f"    setmetatile({x}, {y}, METATILE_TempleDemeter_Floor, FALSE)")
     o.append("    return")
     o.append("}")
+    o.append("")
+    o.append("// The night of the Mysteries (beat 22): the grunts kick over the front braziers,")
+    o.append("// and leave bootprints out of the Anaktoron's door.")
+    o.append(f"script {PX}DrawRaid {{")
+    for s in KICKED:
+        o.append(f"    call({PX}Kick{s.title()})")
+    for (x, y) in RAID_TRACKS:
+        o.append(f"    setmetatile({x}, {y}, 0x{IDS['floor.bootprints']:03X}, FALSE)")
+    o.append("    return")
+    o.append("}")
+    for s in KICKED:
+        o.append("")
+        o.append(f"script {PX}Kick{s.title()} {{")
+        for x, y, mid, solid in kick_cells(g, s):
+            o.append(f"    setmetatile({x}, {y}, 0x{mid:03X}, {'TRUE' if solid else 'FALSE'})")
+        o.append("    return")
+        o.append("}")
     o.append("")
     o.append(SCRIPT_END)
     return "\n".join(o)
@@ -468,15 +543,30 @@ def labels():
 def check(g, solid, m):
     errors = []
     pits, safe = pit_cells()
-    people = {(o["x"], o["y"]) for o in m["object_events"]}
+    # beat 22's cast is only in the hall for its scene, so the rite's walks ignore them
+    people = {(o["x"], o["y"]) for o in m["object_events"] if o["flag"] not in SCENE_FLAGS}
     every = reach(solid, ARRIVAL)
     open_cells = {(x, y) for y in range(H) for x in range(W) if not solid[y, x]}
     stranded = sorted(open_cells - every)
     if stranded:
         errors.append(f"open but unreachable from the stair: {stranded[:10]}")
     for o in m["object_events"]:
+        if o["flag"] == GRUNTS:
+            if (o["x"], o["y"]) != DOOR:
+                errors.append(f"{o['local_id']} should climb out of the Anaktoron's door {DOOR}")
+            continue
         if solid[o["y"], o["x"]] or (o["x"], o["y"]) in pits:
             errors.append(f"{o['local_id']} stands on {g[o['y']][o['x']]}")
+    # beat 22: the scene's spot, and Kleon's post beside the door (not in front of it)
+    for what, (x, y) in (("the Mysteries' spot", MYSTERIES_SPOT), ("Kleon's post", KLEON_DOOR)):
+        if solid[y, x] or (x, y) in pits or (x, y) not in every:
+            errors.append(f"{what} {(x, y)} isn't open floor")
+    if KLEON_DOOR == CHLOE or reach(solid, ARRIVAL, frozenset({KLEON_DOOR})).isdisjoint({CHLOE}):
+        errors.append("Kleon's post blocks the way to the Anaktoron's door")
+    for s in KICKED:
+        for x, y, mid, _ in kick_cells(g, s)[:3]:
+            if (x, y) in (DOOR, CHLOE, MYSTERIES_SPOT) or g[y][x].startswith(("columns", "anaktoron")):
+                errors.append(f"the kicked {s} brazier lands on {g[y][x]} at ({x},{y})")
     no_pits = reach(solid, ARRIVAL, frozenset(pits) | people)
     for s in ("autumn", "winter", "spring"):
         x, y = BRAZIER[s]
@@ -534,7 +624,7 @@ def renderer():
 
 def people(im, scale):
     from PIL import Image
-    for lid, gfx, x, y, facing, script, flag in OBJECTS:
+    for lid, gfx, x, y, facing, script, flag, *_ in OBJECTS:
         if flag != "0":
             continue
         sheet = Image.open(ROOT / f"graphics/object_events/pics/people/ichor/{gfx[len(GFX):].lower()}.png")
