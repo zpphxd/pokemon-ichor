@@ -1,6 +1,7 @@
 #include "global.h"
 #include "ichor_relics.h"
 #include "ichor_rites.h"
+#include "ichor_sailing.h" // Ichor postgame: the wind line
 #include "config/save.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
@@ -446,21 +447,53 @@ static void BuildMultiPartnerRoomStartMenu(void)
 
 static void ShowIchorBlessingWindow(void)
 {
-    sIchorBlessingWindowId = AddWindow(&sWindowTemplate_IchorBlessing);
+    // Ichor: the blessing and the carried fire, one line each, under a header when only one shows.
+    // Ichor postgame: at sea in the ship the wind gets a line too, and the panel grows to fit.
+    struct WindowTemplate template = sWindowTemplate_IchorBlessing;
+    u8 *end = gStringVar4;
+    u32 lines = 0;
+    bool32 blessing = Ichor_HasBlessing();
+    bool32 flame = Ichor_IsCarryingFlame();
+
+    if (blessing && !flame)
+    {
+        end = StringCopy(end, COMPOUND_STRING("BLESSING\n"));
+        lines++;
+    }
+    else if (flame && !blessing)
+    {
+        end = StringCopy(end, COMPOUND_STRING("CARRIED FIRE\n"));
+        lines++;
+    }
+    *end = EOS;
+    if (blessing)
+    {
+        Ichor_BufferBlessingPanel(end);
+        end += StringLength(end);
+        lines++;
+    }
+    if (flame)
+    {
+        if (blessing)
+            *end++ = CHAR_NEWLINE;
+        Ichor_BufferFlamePanel(end);
+        end += StringLength(end);
+        lines++;
+    }
+    if (Ichor_HasWindPanel())
+    {
+        if (lines != 0)
+            *end++ = CHAR_NEWLINE;
+        end = Ichor_BufferWindPanel(end);
+        *end = EOS;
+        lines++;
+        if (template.width < ICHOR_WIND_PANEL_WIDTH)
+            template.width = ICHOR_WIND_PANEL_WIDTH;
+    }
+    template.height = lines * 2;
+    sIchorBlessingWindowId = AddWindow(&template);
     PutWindowTilemap(sIchorBlessingWindowId);
     DrawStdWindowFrame(sIchorBlessingWindowId, FALSE);
-    if (!Ichor_HasBlessing())
-        StringCopy(gStringVar4, COMPOUND_STRING("CARRIED FIRE\n"));
-    else if (!Ichor_IsCarryingFlame())
-        StringCopy(gStringVar4, COMPOUND_STRING("BLESSING\n"));
-    else
-        gStringVar4[0] = EOS;
-    if (Ichor_HasBlessing())
-        Ichor_BufferBlessingPanel(gStringVar4 + StringLength(gStringVar4));
-    if (Ichor_HasBlessing() && Ichor_IsCarryingFlame())
-        StringAppend(gStringVar4, COMPOUND_STRING("\n"));
-    if (Ichor_IsCarryingFlame())
-        Ichor_BufferFlamePanel(gStringVar4 + StringLength(gStringVar4));
     AddTextPrinterParameterized(sIchorBlessingWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sIchorBlessingWindowId, COPYWIN_GFX);
 }
@@ -577,7 +610,7 @@ static bool32 InitStartMenuStep(void)
     case 3:
         if (GetSafariZoneFlag())
             ShowSafariBallsWindow();
-        else if (Ichor_HasBlessing() || Ichor_IsCarryingFlame())
+        else if (Ichor_HasBlessing() || Ichor_IsCarryingFlame() || Ichor_HasWindPanel()) // Ichor postgame: or the wind at sea
             ShowIchorBlessingWindow();
         if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             ShowPyramidFloorWindow();

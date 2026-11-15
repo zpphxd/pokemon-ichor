@@ -64,6 +64,46 @@ struct IchorBlessing
     u16 steps;  // steps left
 };
 
+// Ichor postgame: the post-game's epics (design/POSTGAME.md §6), 64 bytes from the
+// front of `reserved`. Every default is zero, which is what `reserved` always
+// held, so an older save needs no migration and the version stays as it was.
+// Fields keep POSTGAME §6's order; the ship's upgrades are flags
+// (FLAG_ICHOR_SHIP_RAM, _SAIL, _KEEL), so its byte holds the ship's port, and the
+// sea position for going below deck comes from the pad (design/postgame/ENGINE.md).
+struct IchorEpics
+{
+    // LABORS.md §12
+    /*0x00*/ u16 laborsSet;         // 12 bits
+    /*0x02*/ u16 laborsDone;        // 12 bits
+    /*0x04*/ u16 laborsDedicated;   // 12 bits
+    /*0x06*/ u8 laborStep[12];      // per-Labor state
+    /*0x14*/ u32 lernaPools;        // Labor 2: nine 2-bit pools + the moved-fire bit
+    // UNDERWORLD.md §13
+    /*0x18*/ u8 titans;             // 6 bits
+    /*0x1A*/ u16 shades;            // shades met, unburied paid for
+    /*0x1C*/ u8 oathAtRest;
+    // ODYSSEY.md §15
+    /*0x1E*/ u16 crew;              // 10 bits
+    /*0x20*/ u8 oarsmenTaken;       // Scylla's toll and the rescued bits
+    /*0x21*/ u8 wind;               // ICHOR_WIND_*: direction 0-2, strength 3-4, grudge 5, becalmed 6
+    /*0x22*/ u16 storm;             // Tornadus's position while loose
+    /*0x24*/ u16 voyage;            // the voyage's choices
+    /*0x26*/ u8 shipPort;           // VOYAGE_* where she's moored; 0 = never moored (she waits at Akti)
+    // POSTGAME.md
+    /*0x28*/ u16 kleos;             // the twelve laurels
+    /*0x2A*/ u8 colossusLots;       // 3 bits held, 3 bits used
+    /*0x2B*/ u8 primordials;        // Gaia, Oceanus, Ouranos, the Prime Mover
+    /*0x2C*/ u8 atlantisBreath;     // carried between dives on the same visit
+    /*0x2D*/ u8 version;            // for migrations
+    // The ship below deck from the sea: where she lies (Ichor_GoBelowDeck)
+    /*0x2E*/ u8 seaMapGroup;
+    /*0x2F*/ u8 seaMapNum;
+    /*0x30*/ u8 seaX;
+    /*0x31*/ u8 seaY;
+    /*0x32*/ u8 seaFacing;          // DIR_*
+    /*0x33*/ u8 pad[13];
+};
+
 struct IchorSave
 {
     /*0x000*/ u8 version;               // ICHOR_SAVE_VERSION; 0 means a save made before IchorSave
@@ -86,7 +126,8 @@ struct IchorSave
     /*0x080*/ u8 flags[ICHOR_FLAGS_COUNT / 8];
     /*0x180*/ u8 dailyFlags[ICHOR_DAILY_FLAGS_COUNT / 8];  // cleared each day
     /*0x1A0*/ struct IchorThread thread;   // 688 bytes
-    /*0x450*/ u8 reserved[0x500 - 0x450];
+    /*0x450*/ struct IchorEpics epics;   // Ichor postgame: 64 bytes (POSTGAME §6)
+    /*0x490*/ u8 reserved[0x500 - 0x450 - 64];
     /*0x500*/ u8 flags2[ICHOR_FLAGS2_COUNT / 8];  // the second flag bank (version 4)
 };
 

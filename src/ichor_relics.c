@@ -20,6 +20,7 @@
 #include "ichor_frozen.h"
 #include "ichor_labyrinth.h"
 #include "ichor_relics.h"
+#include "ichor_sailing.h" // Ichor postgame: the Wings at sea, the ring's DECK
 #include "ichor_save.h"
 #include "item.h"
 #include "item_icon.h"
@@ -66,6 +67,7 @@ extern const u8 EventScript_IchorTorchDoused[];
 extern const u8 EventScript_IchorTorchRelit[];
 extern const u8 EventScript_IchorAeolusBag[];
 extern const u8 EventScript_IchorHearthfire[];
+extern const u8 EventScript_IchorGoBelowDeck[]; // Ichor postgame
 
 // The free relics the Relic Ring offers, in its fixed order.
 static const u16 sRingRelics[] = {
@@ -530,6 +532,10 @@ void ItemUseOutOfBattle_IchorWings(u8 taskId)
     {
         ItemUse_IchorMessage(taskId, sText_Forbidden);
     }
+    else if (Ichor_IsSeaLocked()) // Ichor postgame: past Maleia the Wings (and every herm) wait for home
+    {
+        ItemUse_IchorMessage(taskId, gText_IchorNoHermAtSea);
+    }
     else if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType))
     {
         ItemUse_IchorMessage(taskId, sText_NoSky);
@@ -585,6 +591,7 @@ void ItemUseOutOfBattle_IchorAeolusBag(u8 taskId)
 // or RING_HEARTHFIRE.
 #define RING_REGISTERED  0
 #define RING_HEARTHFIRE  0xFF
+#define RING_DECK        0xFE  // Ichor postgame
 
 static bool32 HasRingRelic(void)
 {
@@ -599,7 +606,7 @@ static bool32 HasRingRelic(void)
 
 bool32 Ichor_TryOpenRelicRing(void)
 {
-    if (!HasRingRelic() && !Ichor_IsBlessed(ICHOR_GOD_HESTIA))
+    if (!HasRingRelic() && !Ichor_IsBlessed(ICHOR_GOD_HESTIA) && !Ichor_CanGoBelowDeck()) // Ichor postgame: DECK
         return FALSE;
     ScriptContext_SetupScript(EventScript_IchorRelicRing);
     return TRUE;
@@ -673,6 +680,13 @@ void Ichor_BuildRelicRing(void)
         if (gSpecialVar_0x8000 == ITEM_NONE || cursor == RING_HEARTHFIRE)
             gSpecialVar_0x8000 = ICHOR_RING_HEARTHFIRE;
     }
+    // Ichor postgame: DECK, at sea in the ship, goes below (src/ichor_sailing.c)
+    if (Ichor_CanGoBelowDeck())
+    {
+        PushRingEntry(COMPOUND_STRING("DECK"), ICHOR_RING_DECK);
+        if (gSpecialVar_0x8000 == ITEM_NONE || cursor == RING_DECK)
+            gSpecialVar_0x8000 = ICHOR_RING_DECK;
+    }
     if (cursor == RING_REGISTERED && registered != ITEM_NONE && CheckBagHasItem(registered, 1))
         gSpecialVar_0x8000 = registered;
     // the menu snaps a box this far right against the screen's right edge
@@ -691,6 +705,12 @@ void Ichor_UseRingChoice(void)
     {
         gIchorSave.relicRingCursor = RING_HEARTHFIRE;
         ScriptContext_SetupScript(EventScript_IchorHearthfire);
+        return;
+    }
+    if (itemId == ICHOR_RING_DECK) // Ichor postgame
+    {
+        gIchorSave.relicRingCursor = RING_DECK;
+        ScriptContext_SetupScript(EventScript_IchorGoBelowDeck);
         return;
     }
     if (itemId >= ICHOR_RELIC_FIRST && itemId <= ICHOR_RELIC_LAST)

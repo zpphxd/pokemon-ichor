@@ -1099,3 +1099,28 @@ gSpecials::
 	def_special Ichor_ForceOmen
 	def_special Ichor_CheckOmen
 	def_special Ichor_GetOmen
+	@ Ichor postgame: the sailing layer (src/ichor_sailing.c, design/postgame/ENGINE.md)
+	def_special Ichor_IsSailing
+	def_special Ichor_GetShipPort
+	def_special Ichor_IsMooredAt
+	def_special Ichor_PortHasSea
+	def_special Ichor_PortHasQuay
+	def_special Ichor_BufferPortName
+	def_special Ichor_BoardShip, waitstate=1
+	def_special Ichor_GoAshore, waitstate=1
+	def_special Ichor_LeaveShip, waitstate=1
+	def_special Ichor_CastOff, waitstate=1
+	def_special Ichor_PutShipAtSea, waitstate=1
+	def_special Ichor_GoBelowDeck, waitstate=1
+	def_special Ichor_ReturnToSea, waitstate=1
+	def_special Ichor_BuildHelmMenu
+	def_special Ichor_BuildVoyageMenu
+	def_special Ichor_BufferCrossing
+	def_special Ichor_SetCourse, waitstate=1
+	def_special Ichor_SetWind
+	def_special Ichor_GetWind
+	def_special Ichor_BufferWind
+	def_special Ichor_SetGrudge
+	def_special Ichor_LiftGrudge
+	def_special Ichor_GetSailingEncounterRate
+	def_special Ichor_IsStarsOut

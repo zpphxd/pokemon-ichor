@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "ichor_omen.h"
 #include "ichor_save.h"
+#include "ichor_sailing.h" // Ichor postgame
 
 // The layout is part of the save format. These pin it, so a change that moves
 // a field fails the build instead of silently breaking saves.
@@ -16,7 +17,11 @@ STATIC_ASSERT(offsetof(struct IchorSave, vars) == 0x040, IchorSaveVarsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, flags) == 0x080, IchorSaveFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, dailyFlags) == 0x180, IchorSaveDailyFlagsOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, thread) == 0x1A0, IchorSaveThreadOffset);
-STATIC_ASSERT(offsetof(struct IchorSave, reserved) == 0x450, IchorSaveReservedOffset);
+STATIC_ASSERT(offsetof(struct IchorSave, epics) == 0x450, IchorSaveEpicsOffset); // Ichor postgame
+STATIC_ASSERT(sizeof(struct IchorEpics) == 64, IchorEpicsSize);                    // Ichor postgame
+STATIC_ASSERT(offsetof(struct IchorEpics, wind) == 0x21 && offsetof(struct IchorEpics, shipPort) == 0x26
+           && offsetof(struct IchorEpics, seaMapGroup) == 0x2E, IchorEpicsLayout); // Ichor postgame
+STATIC_ASSERT(offsetof(struct IchorSave, reserved) == 0x490, IchorSaveReservedOffset);
 STATIC_ASSERT(offsetof(struct IchorSave, flags2) == 0x500, IchorSaveFlags2Offset);
 STATIC_ASSERT(ICHOR_FLAGS2_START > ICHOR_DAILY_FLAGS_END, IchorFlags2AfterTheDailyBank);
 STATIC_ASSERT(ICHOR_FLAGS2_END < SPECIAL_FLAGS_START, IchorFlags2BelowSpecialFlags);
@@ -69,6 +74,7 @@ void Ichor_DoDailyEvents(u32 daysSince)
 {
     memset(gIchorSave.dailyFlags, 0, sizeof(gIchorSave.dailyFlags));
     Ichor_OmenNewDay();
+    Ichor_RollDailyWind(); // Ichor postgame: the day's wind, from the new daily seed
 }
 
 u8 *Ichor_GetFlagPointer(u16 id)
