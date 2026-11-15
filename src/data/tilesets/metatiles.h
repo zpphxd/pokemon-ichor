@@ -101,3 +101,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Isthmos[] = INCBIN_U16("data/tile
 // Ichor: temple_hermes
 const u16 gMetatiles_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: troas
+const u16 gMetatiles_PorytilesManaged_Troas[] = INCBIN_U16("data/tilesets/secondary/troas/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Troas[] = INCBIN_U16("data/tilesets/secondary/troas/porytiles_bin/metatile_attributes.bin");

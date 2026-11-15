@@ -1,1 +1,226 @@
+// The Hellespont: the sea lane between Thrace and the Troad (design/OIKOUMENE.md
+// §4.1; design/oikoumene/MAPS_troad.md). The current runs east; the swimmers
+// teach it. Layout and events come from tools/ichor/maps/hellespont.py.
+
 mapscripts Hellespont_MapScripts {}
+
+// ---------------------------------------------------------------------------
+// Speakers
+// ---------------------------------------------------------------------------
+
+text Hellespont_Text_NameGlaukippos { "GLAUKIPPOS" }
+text Hellespont_Text_NameNerea { "NEREA" }
+text Hellespont_Text_NameEuphemos { "EUPHEMOS" }
+text Hellespont_Text_NameKyane { "KYANE" }
+text Hellespont_Text_NameIphitos { "IPHITOS" }
+text Hellespont_Text_NameKotys { "KOTYS" }
+text Hellespont_Text_NameMenestheus { "MENESTHEUS" }
+text Hellespont_Text_NameThrasios { "THRASIOS" }
+
+// ---------------------------------------------------------------------------
+// Trainers (ICHOR_STUB_CLASS: the swimmers stand in for Argonauts, Kotys for a
+// Shepherd of Ida, the hoplites for a Trojan Hoplite and a Charioteer)
+// ---------------------------------------------------------------------------
+
+script Hellespont_EventScript_Glaukippos {
+    trainerbattle_single(TRAINER_ICHOR_GLAUKIPPOS, Hellespont_Text_GlaukipposIntro, Hellespont_Text_GlaukipposDefeat)
+    setspeaker(Hellespont_Text_NameGlaukippos)
+    msgbox(format("Cross upstream of where you want to land.\pThe strait carries everyone east. Even me."), MSGBOX_AUTOCLOSE)
+}
+
+text Hellespont_Text_GlaukipposIntro {
+    format("Leander swam this every night for a girl with a lamp. I do it for my knees.")
+}
+
+text Hellespont_Text_GlaukipposDefeat {
+    format("The current took my breath.")
+}
+
+script Hellespont_EventScript_Nerea {
+    trainerbattle_single(TRAINER_ICHOR_NEREA, Hellespont_Text_NereaIntro, Hellespont_Text_NereaDefeat)
+    setspeaker(Hellespont_Text_NameNerea)
+    msgbox(format("The slack water runs along the shores.\pThat's the only way to swim west. Ask anyone who tried the middle."), MSGBOX_AUTOCLOSE)
+}
+
+text Hellespont_Text_NereaIntro {
+    format("This channel's mine at dawn. You're early.")
+}
+
+text Hellespont_Text_NereaDefeat {
+    format("Fine. Share the water.")
+}
+
+script Hellespont_EventScript_Euphemos {
+    trainerbattle_single(TRAINER_ICHOR_EUPHEMOS, Hellespont_Text_EuphemosIntro, Hellespont_Text_EuphemosDefeat)
+    setspeaker(Hellespont_Text_NameEuphemos)
+    msgbox(format("We came through here on the Argo, after the fleece.\pThe ram that carried it dropped a girl right out there. Poor thing."), MSGBOX_AUTOCLOSE)
+}
+
+text Hellespont_Text_EuphemosIntro {
+    format("I sailed on the Argo, you know. Rowed, mostly.")
+}
+
+text Hellespont_Text_EuphemosDefeat {
+    format("I rowed better than that.")
+}
+
+script Hellespont_EventScript_Kyane {
+    trainerbattle_single(TRAINER_ICHOR_KYANE, Hellespont_Text_KyaneIntro, Hellespont_Text_KyaneDefeat)
+    setspeaker(Hellespont_Text_NameKyane)
+    msgbox(format("Something shiny washed up on the sandbar this morning.\pI was busy losing to you."), MSGBOX_AUTOCLOSE)
+}
+
+text Hellespont_Text_KyaneIntro {
+    format("That sandbar's mine. Finders keepers.")
+}
+
+text Hellespont_Text_KyaneDefeat {
+    format("...Keepers of what, though.")
+}
+
+script Hellespont_EventScript_Iphitos {
+    trainerbattle_single(TRAINER_ICHOR_IPHITOS, Hellespont_Text_IphitosIntro, Hellespont_Text_IphitosDefeat)
+    setspeaker(Hellespont_Text_NameIphitos)
+    msgbox(format("The water slows here before the Bosporus.\pBest place on the strait to float and think."), MSGBOX_AUTOCLOSE)
+}
+
+text Hellespont_Text_IphitosIntro {
+    format("End of the race! Catch your breath, then catch this!")
+}
+
+text Hellespont_Text_IphitosDefeat {
+    format("Caught.")
+}
+
+script Hellespont_EventScript_Kotys {
+    trainerbattle_single(TRAINER_ICHOR_KOTYS, Hellespont_Text_KotysIntro, Hellespont_Text_KotysDefeat)
+    setspeaker(Hellespont_Text_NameKotys)
+    msgbox(format("My mares graze up to the old mound.\pThe elms on it never get tall. They try, though."), MSGBOX_AUTOCLOSE)
+}
+
+text Hellespont_Text_KotysIntro {
+    format("Thracian grass, Thracian beasts. Lose to both!")
+}
+
+text Hellespont_Text_KotysDefeat {
+    format("Lost to one, anyway.")
+}
+
+script Hellespont_EventScript_Menestheus {
+    trainerbattle_single(TRAINER_ICHOR_MENESTHEUS, Hellespont_Text_MenestheusIntro, Hellespont_Text_MenestheusDefeat)
+    setspeaker(Hellespont_Text_NameMenestheus)
+    msgbox(format("Between you and me, the mound's empty.\pThe man's at Olympia. He writes."), MSGBOX_AUTOCLOSE)
+}
+
+text Hellespont_Text_MenestheusIntro {
+    format("I guard the mound. Orders.")
+}
+
+text Hellespont_Text_MenestheusDefeat {
+    format("Orders didn't say you'd be good.")
+}
+
+script Hellespont_EventScript_Thrasios {
+    trainerbattle_single(TRAINER_ICHOR_THRASIOS, Hellespont_Text_ThrasiosIntro, Hellespont_Text_ThrasiosDefeat)
+    setspeaker(Hellespont_Text_NameThrasios)
+    msgbox(format("Ten years, my grandmother says the war took. Ilion says a summer.\pShe wasn't there for either."), MSGBOX_AUTOCLOSE)
+}
+
+text Hellespont_Text_ThrasiosIntro {
+    format("My team runs like a chariot! Want a ride?")
+}
+
+text Hellespont_Text_ThrasiosDefeat {
+    format("A wheel came off.")
+}
+
+// ---------------------------------------------------------------------------
+// People
+// ---------------------------------------------------------------------------
+
+script Hellespont_EventScript_LandingFisher {
+    lock
+    faceplayer
+    msgbox(format("The Abdera boat? Comes when it comes.\pI just fish off the end. Things bite out here."))
+    release
+}
+
+// The beach's set piece: the old man who counts the ships' slipways, and his
+// bone from the sand.
+script Hellespont_EventScript_BeachElder {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_HELLESPONT_GOT_RARE_BONE)) {
+        msgbox(format("Forty stones this morning. Forty yesterday.\pThe songs can have their thousand. I'll have my forty."))
+        release
+        end
+    }
+    msgbox(format("My grandfather swore a thousand ships were drawn up on this beach.\p"
+                  "I count the old slipway stones every morning. Never more than forty.\p"
+                  "Dug this out by the twelfth stone. A hero's, the songs would say.\p"
+                  "A cow's, I say. Take it."))
+    giveitem(ITEM_RARE_BONE)
+    if (var(VAR_RESULT) == FALSE) {
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_HELLESPONT_GOT_RARE_BONE)
+    release
+}
+
+script Hellespont_EventScript_BeachKid {
+    lock
+    faceplayer
+    msgbox(format("I'm hunting bronze. Spearheads, helmets.\pMama says the war was one summer. A summer leaves stuff, right?"))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Signs and set pieces
+// ---------------------------------------------------------------------------
+
+script Hellespont_EventScript_WestSign {
+    msgbox(format("THE HELLESPONT\nWest: Samothrake. East: the Bosporus.\pThe current runs east. Swim west along the shores."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_LABORS: Abdera is LABORS's (Labor 8, world-postgame). The end of
+// this stage, (10, 9), is the landing tile where its boat will tie up.
+script Hellespont_EventScript_AbderaLanding {
+    msgbox(format("ABDERA LANDING\nBoats for Abdera tie up at the end.\pNo boat today."), MSGBOX_SIGN)
+}
+
+script Hellespont_EventScript_ForkSign {
+    msgbox(format("North: SESTOS.\nWest: the Abdera landing."), MSGBOX_SIGN)
+}
+
+script Hellespont_EventScript_EastSign {
+    msgbox(format("East: THE BOSPORUS, and the Black Sea.\nNorth: Hero's point, SESTOS."), MSGBOX_SIGN)
+}
+
+script Hellespont_EventScript_SigeionSign {
+    msgbox(format("CAPE SIGEION\nThe mound of Achilles is up the slope."), MSGBOX_SIGN)
+}
+
+script Hellespont_EventScript_BeachSign {
+    msgbox(format("South: THE SKAMANDER PLAIN.\nBeyond it, ILION."), MSGBOX_SIGN)
+}
+
+script Hellespont_EventScript_RhoiteionSign {
+    msgbox(format("RHOITEION\nThe mound of Ajax."), MSGBOX_SIGN)
+}
+
+script Hellespont_EventScript_Protesilaos {
+    msgbox(format("The mound of Protesilaos, first ashore at Troy.\pHis elms grow until they can see Troy over the water. Then their tops wither."), MSGBOX_SIGN)
+}
+
+script Hellespont_EventScript_AchillesMound {
+    msgbox(format("A mound of turf, ringed with stones.\pSomeone has scratched on the stele: NOT YET."), MSGBOX_SIGN)
+}
+
+script Hellespont_EventScript_AjaxMound {
+    msgbox(format("Ajax's mound. Gulls stand on it facing the sea."), MSGBOX_SIGN)
+}
+
+script Hellespont_EventScript_HellesRock {
+    msgbox(format("A little gilded ram stands on the rock. Sailors keep it bright.\pFor Helle, they say. She fell off a bigger one, right here."), MSGBOX_SIGN)
+}

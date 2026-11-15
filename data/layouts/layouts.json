@@ -455,10 +455,10 @@
     {
       "id": "LAYOUT_SESTOS",
       "name": "Sestos_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 36,
+      "height": 30,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Troas",
       "border_filepath": "data/layouts/Sestos/border.bin",
       "blockdata_filepath": "data/layouts/Sestos/map.bin",
       "layout_version": "emerald"
@@ -466,10 +466,10 @@
     {
       "id": "LAYOUT_HELLESPONT",
       "name": "Hellespont_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 64,
+      "height": 34,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Troas",
       "border_filepath": "data/layouts/Hellespont/border.bin",
       "blockdata_filepath": "data/layouts/Hellespont/map.bin",
       "layout_version": "emerald"
@@ -477,10 +477,10 @@
     {
       "id": "LAYOUT_ILION",
       "name": "Ilion_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 48,
+      "height": 42,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Troas",
       "border_filepath": "data/layouts/Ilion/border.bin",
       "blockdata_filepath": "data/layouts/Ilion/map.bin",
       "layout_version": "emerald"

@@ -1,1 +1,216 @@
+// Ilion: Troy, the city of Priam (design/OIKOUMENE.md §4.1; design/oikoumene/
+// MAPS_troad.md). Layout and events come from tools/ichor/maps/ilion.py.
+//
+// The fate undone: Cassandra has stopped seeing Troy burn, and Troy doesn't
+// remember a ten-year war. "It was a summer."
+
 mapscripts Ilion_MapScripts {}
+
+// ---------------------------------------------------------------------------
+// Speakers
+// ---------------------------------------------------------------------------
+
+text Ilion_Text_NameAgenor { "AGENOR" }
+text Ilion_Text_NamePolites { "POLITES" }
+text Ilion_Text_NameHippothoos { "HIPPOTHOOS" }
+text Ilion_Text_NameAnchises { "ANCHISES" }
+text Ilion_Text_NameTheano { "THEANO" }
+
+// ---------------------------------------------------------------------------
+// The Skaian Gate (ICHOR_STUB_HALL: Hektor's hall is batch 2's; its build
+// opens one of the doors at (11, 15) or (12, 15) and replaces these scripts)
+// ---------------------------------------------------------------------------
+
+script Ilion_EventScript_SkaianGuard {
+    lock
+    faceplayer
+    msgbox(format("The Skaian Gate's shut to visitors for now. The prince's orders.\p"
+                  "He trains up in the tower. Come back when you've made a name out there."))
+    release
+}
+
+script Ilion_EventScript_SkaianDoors {
+    msgbox(format("Bronze-banded doors, barred from inside.\pShields hang over them, polished bright."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// Trainers (ICHOR_STUB_CLASS: Trojan Hoplite for Agenor and Polites,
+// Charioteer for Hippothoos, Shepherd of Ida for Anchises)
+// ---------------------------------------------------------------------------
+
+script Ilion_EventScript_Agenor {
+    trainerbattle_single(TRAINER_ICHOR_AGENOR, Ilion_Text_AgenorIntro, Ilion_Text_AgenorDefeat)
+    setspeaker(Ilion_Text_NameAgenor)
+    msgbox(format("We drill every morning. Nobody's attacking. Habit."), MSGBOX_AUTOCLOSE)
+}
+
+text Ilion_Text_AgenorIntro {
+    format("The drill's for hoplites. You'll do.")
+}
+
+text Ilion_Text_AgenorDefeat {
+    format("I'll do better tomorrow.")
+}
+
+script Ilion_EventScript_Polites {
+    trainerbattle_single(TRAINER_ICHOR_POLITES, Ilion_Text_PolitesIntro, Ilion_Text_PolitesDefeat)
+    setspeaker(Ilion_Text_NamePolites)
+    msgbox(format("From the tower you can see the whole plain.\p"
+                  "The songs put a thousand ships on it. It's barley."), MSGBOX_AUTOCLOSE)
+}
+
+text Ilion_Text_PolitesIntro {
+    format("I'm the lookout. I looked out. Here you are.")
+}
+
+text Ilion_Text_PolitesDefeat {
+    format("Should've looked harder.")
+}
+
+script Ilion_EventScript_Hippothoos {
+    trainerbattle_single(TRAINER_ICHOR_HIPPOTHOOS, Ilion_Text_HippothoosIntro, Ilion_Text_HippothoosDefeat)
+    setspeaker(Ilion_Text_NameHippothoos)
+    msgbox(format("The breeder trades horses, if you've one worth his.\pHe's fussy. He's from Troy."), MSGBOX_AUTOCLOSE)
+}
+
+text Ilion_Text_HippothoosIntro {
+    format("Troy of the fine horses! Mine are finer than most.")
+}
+
+text Ilion_Text_HippothoosDefeat {
+    format("Fine, but not the finest.")
+}
+
+script Ilion_EventScript_Anchises {
+    trainerbattle_single(TRAINER_ICHOR_ANCHISES, Ilion_Text_AnchisesIntro, Ilion_Text_AnchisesDefeat)
+    setspeaker(Ilion_Text_NameAnchises)
+    msgbox(format("Up on Ida the springs never freeze.\pAnd a goddess once asked me the way. I've never been sure which one."), MSGBOX_AUTOCLOSE)
+}
+
+text Ilion_Text_AnchisesIntro {
+    format("Down from Ida with the flock. A battle first, then the market.")
+}
+
+text Ilion_Text_AnchisesDefeat {
+    format("The market, then.")
+}
+
+// ---------------------------------------------------------------------------
+// People
+// ---------------------------------------------------------------------------
+
+script Ilion_EventScript_Washerwoman {
+    lock
+    faceplayer
+    msgbox(format("We wash at the springs, same as always.\p"
+                  "The songs say the women stopped coming when the war began.\p"
+                  "We never stopped. It was a summer."))
+    release
+}
+
+script Ilion_EventScript_Grandmother {
+    lock
+    faceplayer
+    msgbox(format("Priam's girl Cassandra saw the city burn every night for years.\p"
+                  "Last month she stopped. Now her predictions are all wrong.\p"
+                  "She's never been happier."))
+    release
+}
+
+script Ilion_EventScript_Crier {
+    lock
+    faceplayer
+    msgbox(format("News from the citadel! The city still stands!\p"
+                  "Same as yesterday. Same as tomorrow, probably. Nobody knows anymore!"))
+    release
+}
+
+script Ilion_EventScript_Kid {
+    lock
+    faceplayer
+    msgbox(format("The songs say a big wooden horse.\pGrandpa says a big wooden cart. With wine in it."))
+    release
+}
+
+script Ilion_EventScript_Veteran {
+    lock
+    faceplayer
+    msgbox(format("Ten years, the singers say. It was a summer.\pA long summer, mind. And hot."))
+    release
+}
+
+script Ilion_EventScript_Priestess {
+    lock
+    faceplayer
+    setspeaker(Ilion_Text_NameTheano)
+    msgbox(format("Athena's temple keeps the Palladion. It fell from the sky.\p"
+                  "Nobody's tried to steal it this year. We keep checking."))
+    release
+}
+
+script Ilion_EventScript_Spinner {
+    lock
+    faceplayer
+    msgbox(format("The weaver's making Athena's robe. It takes her all year.\p"
+                  "She's short of dyes. Berries, mostly."))
+    release
+}
+
+script Ilion_EventScript_Quarryman {
+    lock
+    faceplayer
+    msgbox(format("The mason dropped his chisel down into the old walls. The undercroft.\p"
+                  "He won't go after it. Neither will I."))
+    release
+}
+
+script Ilion_EventScript_Traveler {
+    lock
+    faceplayer
+    msgbox(format("Came in off the plain. The river grumbles at you out there.\pOut loud. In words."))
+    release
+}
+
+script Ilion_EventScript_RampGuard {
+    lock
+    faceplayer
+    msgbox(format("Up the ramp to the Pergamos. Mind the step.\pEveryone minds the step."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Signs
+// ---------------------------------------------------------------------------
+
+script Ilion_EventScript_TownSign {
+    msgbox(format("ILION\nThe city of Priam, of the fine horses."), MSGBOX_SIGN)
+}
+
+script Ilion_EventScript_PlainSign {
+    msgbox(format("West: THE SKAMANDER PLAIN.\nBeyond it, the Hellespont."), MSGBOX_SIGN)
+}
+
+script Ilion_EventScript_IdaSign {
+    msgbox(format("East: THE IDA ROAD, to Mount Ida."), MSGBOX_SIGN)
+}
+
+script Ilion_EventScript_SkaianSign {
+    msgbox(format("THE SKAIAN GATE\nBarred. The ramp gate leads up to the citadel."), MSGBOX_SIGN)
+}
+
+script Ilion_EventScript_PergamosSign {
+    msgbox(format("THE PERGAMOS\nPriam's palace. The temple of Athena."), MSGBOX_SIGN)
+}
+
+script Ilion_EventScript_WarmSpring {
+    msgbox(format("A warm spring. Steam curls off the trough on cool mornings."), MSGBOX_SIGN)
+}
+
+script Ilion_EventScript_ColdSpring {
+    msgbox(format("A cold spring. In summer, they say, it runs cold as hail.\pThey're right."), MSGBOX_SIGN)
+}
+
+script Ilion_EventScript_PalladionStones {
+    msgbox(format("Old pedestal stones, stacked by the palace.\p"
+                  "The Palladion stood here once. It's kept inside the temple now."), MSGBOX_SIGN)
+}

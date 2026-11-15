@@ -432,3 +432,244 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 
 /* Ichor: the Oikoumene (ids 680-819) */
+/* Ichor: the Oikoumene, Troad */
+/* ICHOR_STUB_CLASS: Argonaut (the Hellespont, west calm water) */
+=== TRAINER_ICHOR_GLAUKIPPOS ===
+Name: GLAUKIPPOS
+Class: Swimmer M
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Pelipper
+Level: 70
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Cramorant
+Level: 70
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Argonaut (the Hellespont, the north channel) */
+=== TRAINER_ICHOR_NEREA ===
+Name: NEREA
+Class: Swimmer F
+Pic: Swimmer F
+Gender: Female
+Music: Swimmer
+AI: Basic Trainer
+
+Tentacruel
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Mantine
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Pelipper
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Argonaut (the Hellespont, the south channel) */
+=== TRAINER_ICHOR_EUPHEMOS ===
+Name: EUPHEMOS
+Class: Swimmer M
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Clawitzer
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Seadra
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Wishiwashi
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Argonaut (the Hellespont, by the sandbar) */
+=== TRAINER_ICHOR_KYANE ===
+Name: KYANE
+Class: Swimmer F
+Pic: Swimmer F
+Gender: Female
+Music: Swimmer
+AI: Basic Trainer
+
+Cramorant
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Gastrodon
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Argonaut (the Hellespont, the east pool) */
+=== TRAINER_ICHOR_IPHITOS ===
+Name: IPHITOS
+Class: Swimmer M
+Pic: Swimmer M
+Gender: Male
+Music: Swimmer
+AI: Basic Trainer
+
+Tentacruel
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Clawitzer
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Pelipper
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Shepherd of Ida (the Hellespont's north strip) */
+=== TRAINER_ICHOR_KOTYS ===
+Name: KOTYS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Mudsdale
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Dubwool
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Gogoat
+Level: 71
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Trojan Hoplite (the Hellespont, Achilles's mound) */
+=== TRAINER_ICHOR_MENESTHEUS ===
+Name: MENESTHEUS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Pawmot
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Medicham
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Bisharp
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Charioteer (the Hellespont, Ajax's mound) */
+=== TRAINER_ICHOR_THRASIOS ===
+Name: THRASIOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Arcanine
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Tauros
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Staraptor
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Trojan Hoplite (Ilion, the drill yard) */
+=== TRAINER_ICHOR_AGENOR ===
+Name: AGENOR
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Gurdurr
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Probopass
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Hitmonlee
+Level: 72
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Trojan Hoplite (Ilion, the drill yard) */
+=== TRAINER_ICHOR_POLITES ===
+Name: POLITES
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Escavalier
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Hitmontop
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Ferrothorn
+Level: 73
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Charioteer (Ilion, the horse yard) */
+=== TRAINER_ICHOR_HIPPOTHOOS ===
+Name: HIPPOTHOOS
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Rapidash
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Mudsdale
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Bouffalant
+Level: 74
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+/* ICHOR_STUB_CLASS: Shepherd of Ida (Ilion, the Ida road) */
+=== TRAINER_ICHOR_ANCHISES ===
+Name: ANCHISES
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Sawsbuck
+Level: 70
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+
+Gogoat
+Level: 70
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+

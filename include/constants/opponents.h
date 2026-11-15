@@ -57,7 +57,20 @@
 #define TRAINERS_END_POSTGAME                 0
 
 // The Oikoumene, ids 680-819 and 864-1023: the second map.
-#define TRAINERS_END_OIKOUMENE                0
+// troad-towns: the Hellespont and Ilion (design/oikoumene/MAPS_troad.md), ids 680-691.
+#define TRAINER_ICHOR_GLAUKIPPOS                 680
+#define TRAINER_ICHOR_NEREA                      681
+#define TRAINER_ICHOR_EUPHEMOS                   682
+#define TRAINER_ICHOR_KYANE                      683
+#define TRAINER_ICHOR_IPHITOS                    684
+#define TRAINER_ICHOR_KOTYS                      685
+#define TRAINER_ICHOR_MENESTHEUS                 686
+#define TRAINER_ICHOR_THRASIOS                   687
+#define TRAINER_ICHOR_AGENOR                     688
+#define TRAINER_ICHOR_POLITES                    689
+#define TRAINER_ICHOR_HIPPOTHOOS                 690
+#define TRAINER_ICHOR_ANCHISES                   691
+#define TRAINERS_END_OIKOUMENE                692
 
 // Ids 820-863 are the director's reserve. 864-1023 are the Oikoumene's (above).
 
