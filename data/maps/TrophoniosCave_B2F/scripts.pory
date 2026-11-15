@@ -76,6 +76,27 @@ script TrophoniosCave_B2F_EventScript_HandprintC {
     }
 }
 
+// --- Mnesarete, past fork A ---------------------------------------------------------------
+// Added for MAP_DESIGN section 8.4 (three trainers in a dungeon); not in SCRIPT.md. A pilgrim
+// who drank from the springs in the wrong order, as Lebadeia's sign warns against.
+
+text TrophoniosCave_B2F_Text_SpeakerMnesarete { "MNESARETE" }
+
+script TrophoniosCave_B2F_EventScript_Mnesarete {
+    trainerbattle_single(TRAINER_ICHOR_MNESARETE, TrophoniosCave_B2F_Text_MnesareteIntro, TrophoniosCave_B2F_Text_MnesareteDefeat)
+    setspeaker(TrophoniosCave_B2F_Text_SpeakerMnesarete)
+    msgbox(format("Mnemosyne first, then Lethe. I read the sign afterwards."))
+    msgbox(format("Now I remember everything, except what I came down here for."), MSGBOX_AUTOCLOSE)
+}
+
+text TrophoniosCave_B2F_Text_MnesareteIntro {
+    format("I drank the wrong spring first. I remember everything. Battle me. Give me something new.")
+}
+
+text TrophoniosCave_B2F_Text_MnesareteDefeat {
+    format("That one I'll remember too. Thank you. I think.")
+}
+
 // --- the snake's cleft ---------------------------------------------------------------------
 // The snake is an invisible object over the cleft's coils, hidden by
 // FLAG_ICHOR_TROPHONIOS_SNAKE_FED. It is never named or shown.

@@ -1574,6 +1574,22 @@ IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 - Moonlight
 - Charm
 
+=== TRAINER_ICHOR_MNESARETE ===
+Name: MNESARETE
+Class: Shepherd
+Pic: Shepherd
+Gender: Female
+Music: Female
+AI: Check Bad Move
+
+Gelasable
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
+Spalunk
+Level: 31
+IVs: 9 HP / 9 Atk / 9 Def / 9 SpA / 9 SpD / 9 Spe
+
 
 /* Ichor: world-act3 (ids 320-499) */
 

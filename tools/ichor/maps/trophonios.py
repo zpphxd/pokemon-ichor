@@ -570,6 +570,7 @@ def build_b1f(cat):
                 local_id="LOCALID_TROPHONIOS_RUBBLE"),
             item_ball(8, 13, "ITEM_ESCAPE_ROPE", "FLAG_ICHOR_ITEM_TROPHONIOS_B1F_ESCAPE_ROPE"),
             item_ball(2, 21, "ITEM_MAX_REPEL", "FLAG_ICHOR_ITEM_TROPHONIOS_B1F_MAX_REPEL"),
+            item_ball(24, 12, "ITEM_DAMP_ROCK", "FLAG_ICHOR_ITEM_TROPHONIOS_B1F_DAMP_ROCK"),   # the wet corner by the outlet
             # the reading (beat 35C): hidden by FLAG_TEMP_11 unless the player comes up on the throne
             obj(P + "SAON", 12, 7, B1 + "Saon", "MOVEMENT_TYPE_FACE_UP", flag="FLAG_TEMP_11",
                 local_id="LOCALID_TROPHONIOS_SAON"),
@@ -643,9 +644,13 @@ def build_b2f(cat):
         m.put(hx + dx, hy + dy, "hole", n)
     m.put(9, 18, "offerings", "cakes")
     m.put(4, 18, "offerings", "bread")
-    pool = [sign(21 + xx, 12 + yy, B2 + "BlackPool") for yy in range(3) for xx in range(3)]
+    pool = [sign(21 + xx, 12 + yy, B2 + "BlackPool") for yy in range(3) for xx in range(3) if (xx, yy) != (1, 1)]
     events = {
         "object_events": [
+            # Mnesarete, in the nook between the stalagmites and the jutting wall past fork A:
+            # the passage narrows to one cell there, under her eye (MAP_DESIGN section 8.4's third)
+            obj(P + "WOMAN", 12, 3, B2 + "Mnesarete", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=1,
+                local_id="LOCALID_TROPHONIOS_MNESARETE"),
             obj(P + "AUGUR", 20, 12, B2 + "Melampos", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=3,
                 local_id="LOCALID_TROPHONIOS_MELAMPOS"),
             obj(P + "AUGUR", B2F_CLEFT[0], B2F_CLEFT[1], B2 + "Snake", "MOVEMENT_TYPE_INVISIBLE",
@@ -667,7 +672,7 @@ def build_b2f(cat):
             trigger(12, 17, B2 + "LeaveOracle"),
         ],
         "bg_events": [
-            sign(5, 2, B2 + "Spring"), sign(5, 3, B2 + "Spring"),
+            sign(5, 3, B2 + "Spring"),
             sign(9, 2, B2 + "HandprintA"), sign(17, 2, B2 + "HandprintB"), sign(18, 10, B2 + "HandprintC"),
             *pool,
             sign(18, 14, B2 + "DigSpot"),

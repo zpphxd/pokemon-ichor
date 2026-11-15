@@ -87,6 +87,8 @@ L.start(function()
   expect(not L.getFlag(S.FLAG_TORCH_DOUSED), "the torch is lit again")
 
   -- The Bronze Obol in the stream; across the ford.
+  L.talk(L.ball(S.FLAG_DAMP_ROCK))
+  expect(L.getFlag(S.FLAG_DAMP_ROCK), "the Damp Rock in the wet corner by the stream's outlet")
   L.talk(L.hidden(S.FLAG_HIDDEN_OBOL))
   expect(L.getFlag(S.FLAG_HIDDEN_OBOL) and L.itemCount(S.ITEM_RELIC_COPPER) == 1, "the Bronze Obol in the stream")
   L.go(19, 16); shot("the_ford")
@@ -126,6 +128,7 @@ L.start(function()
 
   -- Fork B: the dead end's Max Ether; the web den behind its curtain.
   L.talk(L.ball(S.FLAG_MAX_ETHER))
+  expect(L.defeated(S.TRAINER_MNESARETE), "Mnesarete battled where the passage narrows past fork A")
   expect(L.getFlag(S.FLAG_MAX_ETHER), "fork B's dead end pays: the Max Ether")
   L.talk(L.sign(B2 .. "HandprintB"))
   L.talk(L.npc("EventScript_IchorCobweb"), { shots = { [1] = "cobweb" }, answers = { "yes" } })

@@ -351,7 +351,7 @@ shortcut out.
 | (9,2)-(9,3) | **The bronze grille**, inside: daylight through the bars, cut steps below. Warp 0 on the steps (MB_NORTH_ARROW_WARP) to `MAP_LEBADEIA` warp 3; arriving from the grille lands here. |
 | (4-14, 4-8) | **The upper chamber**: the priests' paving, votive tablets (6,3) and (13,3), clay lamps (7,3) and (11,3), bread (5,4) and honey cakes (4,5), and **the throne of Mnemosyne** (12,4)-(12,5). Dark like the rest (pass 3 says why). Hidden Honey (13,4), in the corner by the throne. |
 | (9,8)-(9,11) | **The rope ladder** down the chamber's cliff (a face three tall). Coord events at (9,9) (out of the stream's lit zone) and (9,10) (into it). |
-| (9,12) | The ladder's foot: "The ladder ends in the dark. Water is running somewhere close." (once per visit; not when coming up from B2F). Escape Rope (8,13). |
+| (9,12) | The ladder's foot: "The ladder ends in the dark. Water is running somewhere close." (once per visit; not when coming up from B2F). Escape Rope (8,13). A Damp Rock (24,12) in the wet corner by the stream's outlet, so that pocket pays. |
 | (14,13)-(14,14) | **Brazier 1**, `FLAG_ICHOR_BRAZIERS_START + 0x21`: lights the stream chamber (rows 10-17, and the outcrop room open off the south bank) for good. Lit-zone coord events on the zone's two exits, (4,17)/(4,18) and (22-23,17)/(22-23,18). |
 | (15,15) | **Herkyna's goose**, a Halcyling standing in the stream (`FLAG_ICHOR_FOUND_HERKYNAS_GOOSE`). Talk from the bank; YES sends it home. |
 | (18,11) | **The first chalk hand**, on the wall past the brazier, fingers pointing east toward the ford and the stair. Its sign reads it by torchlight and doused. |
@@ -370,6 +370,7 @@ shortcut out.
 | (3,1)-(3,2) | **The stair up** (MB_LADDER), warp 0 to B1F's warp 1. |
 | (5,2)-(5,3) | **The spring**: water running down the rock into a basin. The midpoint rest (heals). |
 | (7,4) | **Fork A.** The chalk hand at (9,2) and on the floor at (8,4) point east. The wrong branch loops round a pillar and back to the stair (hidden Ether at (2,8), in the loop's far corner). |
+| (12,3) | **Mnesarete** (trainer 217, Pilgrim), in the nook between the stalagmites and the jutting wall past fork A, facing the passage, sight 1: it narrows to one cell under her eye, so she's mandatory. Added for MAP_DESIGN section 8.4 (three trainers per dungeon); she drank from the springs in the wrong order. |
 | (17,4) | **Fork B.** The hand at (17,2) and on the floor at (17,6) point south. The wrong branch, east, is a dead end with the Max Ether (24,6). |
 | (16,8) | **The cobweb curtain** (`EventScript_IchorCobweb`, the Torch; it re-spins each visit) off the way south, closing **the web den** (10-15,7-9): webs, bones, the Spell Tag (11,8). |
 | (17,11) | **Fork C.** The hand at (18,10) points east ("Under it, smaller: honey."). Ahead, south, is a dead end with the Hyper Potion (17,13). |
@@ -444,7 +445,8 @@ shortcut out.
 
 ### State, stubs and what the integrator wires
 
-**Flags.** Bank 0x1A8-0x1AF: `FLAG_ICHOR_TROPHONIOS_SNAKE_FED`; the six item balls
+**Flags.** Second bank 0x580: `FLAG_ICHOR_ITEM_TROPHONIOS_B1F_DAMP_ROCK`. Bank 0x1A8-0x1AF:
+`FLAG_ICHOR_TROPHONIOS_SNAKE_FED`; the six item balls
 `FLAG_ICHOR_ITEM_TROPHONIOS_B1F_MAX_REPEL`, `_B1F_ESCAPE_ROPE`, `_B2F_MAX_ETHER`,
 `_B2F_HYPER_POTION`, `_B2F_SPELL_TAG`, `_B2F_TM_FUTURE_SIGHT`; and
 `FLAG_ICHOR_HIDE_TROPHONIOS_GREAT_BOULDER`. Vanilla 0x330-0x333 for the hidden items. Shared and
@@ -471,7 +473,26 @@ Halcyling's sprite).
   `include/constants/event_objects.h` and the four object tables (`OBJ_EVENT_GFX_ICHOR_COBWEB`,
   `_GREAT_BOULDER`, before "End of Ichor object events"); `include/constants/flags.h`;
   `data/layouts/layouts.json` (the two layouts' size and tilesets).
-- No heal location, herm or party change. The rock-smash table for the rubble (Engine notes).
+- No heal location or herm. One trainer added: `TRAINER_ICHOR_MNESARETE` (staged in
+  `design/phase3/parties/trophonios.party`, appended to `ORDER.txt`, folded: id 217 on this
+  branch, after batch 3's). The rock-smash table for the rubble (Engine notes).
+
+**The audit** (`python3 tools/ichor/map_audit.py TrophoniosCave`, MAP_DESIGN section 8):
+
+```text
+TrophoniosCave_B1F  [dungeon, Arkadia, middle]
+  30x24 = 4.8 screens; grass 0 (0/screen, 0%); trainers 1; items 3 + 2 hidden; signs 10; NPCs 4; wild: land M (7 spp), Lv 28-31
+  FAIL  warp: warp at (9,3) names Lebadeia warp 3, which has 0
+  FAIL  wild: 1 breakable rocks but no rock-smash table
+TrophoniosCave_B2F  [dungeon, Arkadia, middle]
+  26x22 = 3.8 screens; grass 0 (0/screen, 0%); trainers 2; items 4 + 2 hidden; signs 21; NPCs 3; wild: land M (7 spp), Lv 28-31
+```
+
+Both failures wait on others: Lebadeia's warps are the parnassos agent's, and the rock-smash
+table is the coordinator's to stage. Everything the dungeon rules count passes: items per floor
+(5 and 6, visible and hidden), 3 trainers, 4 hidden items, 7 species in the land table. Pass 3's
+audit warnings were fixed: a dead end in B1F's outlet corner (now the Damp Rock) and two signs no
+one could face (the spring's seep and the black pool's middle).
 
 ### Render-and-critique passes
 
