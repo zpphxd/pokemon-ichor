@@ -27,13 +27,14 @@ species:
     A small, cold gust with a puffed-cheek face, like the bearded wind faces
     carved on old towers. It blows hard and gives up fast.
   art: >-
-    Small: it fills about 32×28 px. A round puff of cold cloud in three-quarter
-    view facing left, with chubby puffed-out cheeks and pursed lips blowing a
-    stream of frost. Two stubby, feathery wing-wisps on its sides and a curl of
-    frost on its brow like a cowlick. Marble-white and pale Aegean-blue cloud,
-    darker Aegean-blue frost breath, dusky purple wingtips as the accent,
-    black-figure ink outline. The follower bobs along with its breath
-    streaming behind it.
+    Small: it fills about 47×30 px with its breath. A round puff of cold cloud
+    in three-quarter view facing left, with a little face blowing a long stream
+    of frost through a round mouth. A curl of frost on its brow like a cowlick
+    and stubby, feathery wing-wisps on its sides. Marble-white and pale
+    Aegean-blue cloud, a darker Aegean-blue frost stream and cowlick, dusky
+    purple wing-wisps as the accent, black-figure ink outline. Frame 2 stretches
+    the frost stream; the follower bobs along with its breath streaming behind
+    it.
   shiny: Limestone-tan cloud with sun-gold frost.
   dex_entry:
     - It puffs out its cheeks and blows until
@@ -91,20 +92,20 @@ species:
     When the Persian fleet came, the Athenians prayed to him, and a gale
     wrecked hundreds of ships off Cape Artemision (Herodotus 7.189).
   expression: >-
-    The North Wind in person: a winged spirit with a beard of frost and great
-    dusky purple wings, its body trailing off into a gale. It keeps faith with
-    those who pray to it and wrecks those who don't.
+    The North Wind as a creature: a beaked, winged wind-dragon with a ruff of
+    frost for a beard and great dusky purple wings, its body trailing off into a
+    gale. It keeps faith with those who pray to it and wrecks those who don't.
   art: >-
-    Large: it fills about 62×56 px. A winged wind spirit in three-quarter view
-    facing left: the upper body of a stern, wild-haired figure with a long
-    frost beard, and a lower body that trails away into two curling tails of
-    gale, like the snake-tailed Boreas on old carved chests. Two great dusky
-    purple wings spread behind it, and its cheeks puff as it blows a blast of
-    snow. Icicles hang from its beard and brows. Marble-white and pale
-    Aegean-blue body and gale, dusky purple wings as the accent, darker Aegean
-    blue for shading, black-figure ink outline. The follower is just the head
-    and a curl of wind.
-  shiny: Sun-gold wings and a limestone-gray beard.
+    Large: it fills about 62×59 px. A winged wind spirit in three-quarter view
+    facing left: a beaked bird-dragon head with a crest of frost feathers and a
+    ruff of icicles like a frozen beard, its open beak blowing a blast of snow.
+    A great dusky purple wing spreads behind it, and its body trails away into
+    two curling tails of gale, like the snake-tailed Boreas on old carved
+    chests. Marble-white and pale Aegean-blue head, ruff and gale, a deep
+    Aegean-blue beak, dusky purple wing as the accent, black-figure ink outline.
+    Frame 2 beats the wing as the snow blast billows; the follower is just the
+    head and a curl of wind.
+  shiny: Sun-gold wings and a limestone-gray crest and ruff.
   dex_entry:
     - Its beard is frost and its wings are
     - storm clouds. Sailors who forget to

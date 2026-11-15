@@ -30,12 +30,13 @@ species:
     bent twig. Its blunt arrows only tickle, but whoever it hits feels fond of
     it at once.
   art: >-
-    Small: it fills about 30×34 px. A chubby winged infant hovering in
-    three-quarter view facing left, legs tucked up, holding a twig bow over its
-    head. Two stubby wings, a curl of hair, round cheeks, and a tiny quiver
-    with one blunt arrow. Marble-white wings, limestone skin, sun-gold curls
-    and bowstring, one Fairy-pink accent on the cheeks, black-figure ink
-    outline. The follower bobs as if its wings are working too hard.
+    Small: it fills about 42×44 px. A chubby, rosy-pink winged infant hovering
+    in three-quarter view facing left, legs tucked up, holding a twig bow over
+    its head with both hands. A round head with big dark eyes and one gold curl
+    on top, two stubby white wings, and a tiny quiver on a strap across its
+    back. Rosy-pink body, marble-white wings, sun-gold curl and bow,
+    black-figure ink outline. Frame 2 squeezes its eyes shut in a grin; the
+    follower bobs as if its wings are working too hard.
   shiny: Its curls and bow turn lead-gray instead of gold.
   dex_entry:
     - It shoots blunt arrows at anyone it
@@ -96,17 +97,20 @@ species:
     gold and Daphne with lead, and so began the chase that ended in the laurel
     (Ovid, Metamorphoses 1).
   expression: >-
-    The infant grown into a slim archer with real wings and a real bow. Its
-    quiver holds gold arrows on one side and dull lead ones on the other, the
-    pair that started Daphne's story.
+    The infant grown into an archer with real wings and a real bow. Its quiver
+    holds gold arrows on one side and dull lead ones on the other, the pair that
+    started Daphne's story.
   art: >-
-    Medium: it fills about 46×52 px. A slim winged archer in three-quarter view
-    facing left, hovering with its bow drawn and an arrow nocked. Two large
-    swan wings, the left tipped sun-gold and the right lead-gray, a curl of
-    gold hair, and a quiver of mixed gold and gray arrows at the hip.
-    Marble-white feathers, limestone skin, sun-gold bow and arrowheads, one
-    Fairy-pink accent on the fletching, black-figure ink outline. The back
-    sprite shows the quiver; the follower circles the player.
+    Large: it fills about 62×61 px. A winged archer hovering in three-quarter
+    view facing left, drawing a sun-gold bow with an arrow nocked. A round,
+    stylized head with big sun-gold eyes, rosy cheeks and gold curls with one
+    curl springing up sits on a body of layered swan-down plumage that falls
+    like a feathered robe. One great swan wing rises behind it, tipped sun-gold,
+    and a lead-gray quiver of gold and gray arrows hangs at its hip.
+    Marble-white plumage, sun-gold bow, curls and wingtip, lead-gray quiver,
+    Fairy-pink fletching and cheeks, black-figure ink outline. Frame 2 winks as
+    it aims; the back sprite shows the quiver, and the follower circles the
+    player.
   shiny: Every gold arrow turns lead-gray, and its feathers blush rose-pink.
   dex_entry:
     - It carries two kinds of arrow. Gold ones

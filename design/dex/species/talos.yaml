@@ -96,13 +96,15 @@ species:
     side and the bronze nail at its ankle. That nail is its only weakness, and
     it knows it.
   art: >-
-    Large: it fills the box, about 58×64 px. A towering bronze giant in
+    Large: it fills the box, about 55×61 px. A towering bronze automaton in
     three-quarter view facing left, mid-stride, one arm cocked back with a
-    boulder. An archaic smiling face under a crested helmet, blocky muscles,
-    and a glowing vein that runs from the neck down one leg to a big nail head
-    at the ankle. Sun-gold and terracotta bronze with ink-brown shading, a
-    bright sun-gold ichor vein, a limestone boulder, black-figure ink outline.
-    The back sprite shows the vein running down its spine.
+    boulder. A domed, crested helm with its eyes glowing in the visor slit, and
+    plate seams, rivets and joint rings that show it was made, not born. A
+    glowing vein runs from its neck down one leg to a big nail head at the
+    ankle. Sun-gold and terracotta bronze with ink-brown shading, a bright
+    sun-gold ichor vein, a limestone boulder, black-figure ink outline. Frame 2
+    draws the boulder further back; the back sprite shows the vein running down
+    its spine.
   shiny: A cypress-green patina all over, with a marble-white vein.
   dex_entry:
     - It circles its island three times a day

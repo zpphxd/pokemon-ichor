@@ -26,12 +26,13 @@ species:
     An unlit sprout with a hollow stem, made to carry a flame it doesn't have
     yet.
   art: >-
-    Small: it fills about 26×38 px. A fennel sprout in three-quarter view facing
-    left: a thick pale stalk for a body, two feathery fronds for arms, and a
-    little umbel of yellow buds for a cap. Two small dark eyes sit in a split in
-    the stalk, and its hollow top is open like a tiny chimney. Olive and
-    silver-leaf fronds, a limestone stalk, sun-gold buds, black-figure ink
-    outline. The follower hops along on its root.
+    Small: it fills about 40×45 px. A fennel sprout in three-quarter view facing
+    left: a plump, bulb-shaped pale stalk for a body with a round face, big dark
+    eyes and a tiny nose, two feathery fronds for arms, and a long hollow neck
+    open at the top like a tiny chimney, crowned by a little umbel of yellow
+    buds. Limestone stalk, olive fronds, sun-gold buds, black-figure ink
+    outline. Frame 2 blinks and waves a frond; the follower hops along on its
+    root.
   shiny: Its fronds turn rust-red and its buds turn white.
   dex_entry:
     - Its stalk is hollow all the way down. It
@@ -93,13 +94,15 @@ species:
     The fennel lit at last. It carries a Titan's gift and shares it, the
     opposite of everything Team Titan wants.
   art: >-
-    Large: it fills about 40×62 px, tall and narrow. A towering fennel stalk in
-    three-quarter view facing left, its jointed stem swollen at the middle where
-    a split shows an ember glowing inside. Feathery fronds form arms, one cupped
-    as if offering the flame, and a wide yellow umbel crowns its head like a
-    torch. Olive fronds, a limestone stem, a sun-gold umbel, a terracotta ember
-    with one orange accent, black-figure ink outline. At night the follower's
-    stem lights the ground around it.
+    Large: it fills about 58×61 px. A fennel giant striding forward in
+    three-quarter view facing left, one frond-arm thrusting the stolen fire up
+    on a fennel torch. Its swollen limestone stem is split open at the middle on
+    a glowing ember, feathery olive fronds spread from it like arms and a
+    mantle, and a wide sun-gold umbel crowns its head above a small, steady
+    face. Olive fronds, a limestone stem, a sun-gold umbel, a terracotta ember
+    and a sun-gold flame with one orange accent, black-figure ink outline. Frame
+    2 flickers the torch flame; at night the follower's stem lights the ground
+    around it.
   shiny: Its fronds turn rust-red and the ember in its stem glows blue.
   dex_entry:
     - An ember glows inside its hollow stem.

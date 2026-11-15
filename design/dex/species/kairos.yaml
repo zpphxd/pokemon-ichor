@@ -31,19 +31,22 @@ species:
     Its Flying type is immune to Kronolith's Ground attacks, and its priority
     moves still go first under Trick Room, so the Frozen Hour can't hold it.
   art: >-
-    Medium-large: it fills about 50×58 px. A slim winged youth in three-quarter
-    view facing left, balanced on the tips of its toes on the edge of a curved
-    razor that floats beneath it, leaning forward mid-dash. Two swept wings on
-    its back and small wings at its ankles. A long forelock streams forward over
-    its face, and the back of its head is smooth and bare. It holds a tiny pair
-    of balance scales level on its palm. Marble skin, sun-gold forelock and wing
-    edges, Aegean-blue flight feathers, a silver razor with a pale
-    psychic-pink edge glow, black-figure ink outline. The back sprite shows the
-    bare back of its head; the follower flickers a tile ahead of you instead of
-    walking.
-  shiny: The forelock turns silver and the wings turn sun-gold all over.
+    Large: it fills about 61×55 px. A long-necked sky creature hovering in
+    three-quarter view facing left over a faint violet ring of time, Lugia's
+    build in Dialga's armor. One great swept wing rises from its back, an Aegean
+    arm plate leading into four sickle-feathers with gold cutting edges, and
+    Aegean plates traced with violet lines sit on its neck and shoulders. A dark
+    mask frames a regal violet eye, a pink third eye glows on its brow, and a
+    gold forelock curls forward over a bare, sleek crown; a violet diamond gem
+    sits in its deep breast, and its tail ends in a gold beam hung with two
+    balance pans. Marble and pale lilac body, Aegean-blue plates and mask,
+    sun-gold forelock and edges, a psychic-violet glow, black-figure ink
+    outline. Frame 2 lifts the wing and bobs the head; the back sprite shows the
+    bare back of its head, and the follower flickers a tile ahead of you instead
+    of walking.
+  shiny: The forelock turns silver, and its Aegean plates and mask turn sun-gold.
   dex_entry:
-    - It runs on tiptoe along a razor's edge.
+    - Its great wing is edged like a razor.
     - Grab its forelock as it comes, and it is
     - yours. Once it has passed, there is
     - nothing behind to hold, and it is gone.

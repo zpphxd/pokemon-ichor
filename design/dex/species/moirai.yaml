@@ -30,22 +30,23 @@ species:
     gentlest of the trio and the hardest to wear down, because whatever is
     spun can be spun again.
   art: >-
-    Medium: it fills about 40×52 px. A small floating maiden in three-quarter
-    view facing left, drawn like a figure on a black-figure vase, in a long
-    pleated chiton with her hair bound up by a band of thread. She holds a
-    distaff wound with fleece in one hand and lets a spindle twirl below the
-    other. A single glowing thread runs from her breast off the right edge of
-    the sprite, toward the Loom, and a broken bronze shackle with two links
-    hangs from her left wrist. The trio's shared look: marble skin, black-figure
-    ink outline, a pale psychic-pink glow at the brow; hers is a marble-white
-    chiton with a sun-gold thread and a soft Fairy-pink hem. The follower
-    floats, and its thread trails behind.
-  shiny: The chiton turns pale Aegean blue and the thread turns silver.
+    Large: she fills about 62×63 px with her wings and thread. A round,
+    rose-white great bird in three-quarter view facing left, with a swan's neck,
+    a crest of fleece curls, a gold beak, a masked almond eye and the trio's
+    pink brow-gem. Her wings rise in a V of night-violet black-figure flight
+    feathers flecked with stars, a bronze whorl is set in her breast, and the
+    golden thread runs as a glowing seam down her neck and spine. Her tail
+    twists into a spindle with a bronze whorl ring and a fine point, and the new
+    thread loops away from its tip. Rose and marble plumage, night-violet wings,
+    sun-gold thread, psychic-pink brow-gem, black-figure ink outline. Frame 2
+    beats the wings; the back sprite shows the wings raised like a lyre over the
+    spindle, and the follower floats with its thread trailing behind.
+  shiny: Her rose plumage turns pale Aegean blue and the thread turns silver.
   dex_entry:
     - It spins a new thread the moment a life
     - begins. It is said that a baby who laughs
     - in its sleep has felt that thread tug.
-    - For ages its hands were chained.
+    - For ages its wings were chained.
   habitat: >-
     Chained at the Loom of Fate under Delphoi until you cut the Fates free.
     In the Frozen Hour it waits at Elaia's festival shrine, where the island
@@ -112,21 +113,23 @@ species:
     The middle of the thread: a life, measured. Every one of its stats is the
     same, because the Allotter gives no part of itself more than its share.
   art: >-
-    Medium: it fills about 42×54 px, a little taller than its sisters. The same
-    floating vase-painting maiden in three-quarter view facing left, in a
-    pleated chiton with her hair bound by thread, holding a long measuring rod
-    marked with notches upright like a staff, a loop of thread pulled taut
-    along it. Her glowing thread runs off the right edge toward the Loom, and a
-    broken bronze shackle hangs from her left wrist. Marble skin, black-figure
-    ink outline and the trio's pale psychic-pink brow glow; hers is a
-    limestone chiton with an olive border and a marble-silver thread. The
-    follower holds its rod out level, as if measuring the path.
-  shiny: The chiton turns sun-gold and the thread turns terracotta red.
+    Large: she fills about 62×63 px, the tallest of the three. A stately pale
+    crane in three-quarter view facing left, the trio's swan neck stretched
+    forward under a straight quill crest, with a long gold beak, a masked eye
+    and the pink brow-gem. Her raised wings have evenly ruled olive flight
+    feathers flecked with gold, a bronze whorl sits in her breast, and the
+    golden thread runs as a seam down her neck and spine. Her tail is one
+    ruler-straight plume banded in bronze at every cubit, with the thread pulled
+    taut along it. Limestone and marble plumage, olive wings, bronze bands,
+    pale-gold thread, psychic-pink brow-gem, black-figure ink outline. Frame 2
+    beats the wings; the back sprite shows the raised wings over the banded
+    plume, and the follower holds its tail out level, as if measuring the path.
+  shiny: Her pale plumage turns sun-gold and the thread turns terracotta red.
   dex_entry:
-    - It measures each thread with its rod and
-    - sets how long that life will run. It has
-    - never given anyone more than their share,
-    - and never one breath less.
+    - It measures each thread along its tail
+    - and sets how long that life will run. It
+    - has never given anyone more than their
+    - share, and never one breath less.
   habitat: >-
     Chained at the Loom of Fate under Delphoi until you cut the Fates free.
     In the Frozen Hour it waits at the Pool of Mnemosyne, Arkadia, where the
@@ -193,16 +196,18 @@ species:
     The end of the thread. It is the fastest and most dangerous of the three,
     but not cruel: it only finishes what its sisters began.
   art: >-
-    Medium: it fills about 40×52 px. The same floating vase-painting maiden in
-    three-quarter view facing left, hair bound by thread, but her chiton is
-    solid black-figure ink with a terracotta key-pattern border, as if she were
-    painted in silhouette. She holds a pair of long bronze shears half open,
-    and her glowing thread ends in a clean cut just past the blades. A broken
-    bronze shackle hangs from her left wrist. Marble skin, black-figure ink
-    outline and the trio's pale psychic-pink brow glow, with a pale violet
-    Ghost accent on the cut end of the thread. The follower snips the air now
-    and then.
-  shiny: The chiton turns marble white and the shears turn silver.
+    Large: she fills about 62×62 px. A gaunt, hunched night-violet bird like a
+    hooded crow, in three-quarter view facing left, with a feathered hood drawn
+    over a heavy-lidded eye, a hooked gold beak and the pink brow-gem. Her
+    ragged, knife-edged wings rise in a V, a bronze whorl sits in her breast,
+    and the golden thread runs as a seam down her neck and spine. Her tail
+    splits into two steel blade feathers that cross like shears, and the thread
+    is cut clean where they meet, its loose end curling away in a spiral of
+    sparks. Night-violet and ink plumage, steel-gray blades, sun-gold thread,
+    psychic-pink brow-gem, black-figure ink outline. Frame 2 beats the wings;
+    the back sprite shows the hood under the raised wings with the shears below,
+    and the follower snips the air now and then.
+  shiny: Her night-violet plumage turns marble white and her shears turn bright silver.
   dex_entry:
     - Its shears cut the thread at the end of
     - every life, and nothing can turn them

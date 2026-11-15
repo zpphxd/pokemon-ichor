@@ -27,27 +27,28 @@ species:
     an olive wreath on its head and an eagle on its scepter (Pausanias 5.11.1),
     so tall that if it stood up it would lift the temple roof (Strabo 8.3.30).
   expression: >-
-    The statue that stood up. It has risen from Phidias's throne with a
-    thunderbolt where the Victory used to sit in its hand, and like its two
-    brothers it has no face, only its lot's emblem glowing where one should be.
+    The statue that stood up and became the storm. It wears the Corinthian helm
+    and cuirass the Cyclopes forged for all three brothers, and inside them it
+    is a thunderhead, its forearm the thunderbolt itself. Like its brothers it
+    has no face, only its lot's emblem glowing in the visor.
   art: >-
-    Largest: it fills the whole 64×64 box, its wreathed head pressing the top
-    edge as if it could lift a roof. A colossal statue in three-quarter view
-    facing left, half risen from the throne behind it, with ivory limbs and
-    chest and a sun-gold robe falling from one shoulder to its feet. Its right
-    hand raises a jagged gold thunderbolt and its left grips a tall scepter
-    topped by a gold eagle with spread wings. Where its face should be is a
-    smooth ivory oval with a thunderbolt picked out in seven glowing points,
-    under an olive wreath. Marble-white ivory shaded with limestone, sun-gold
-    robe and fittings, olive wreath, an electric-yellow glow on the bolt and the
-    face points, black-figure ink outline; the back sprite shows the robe and
-    the empty throne, and the follower trails a few sparks.
-  shiny: The ivory darkens to storm-gray and the gold turns pale silver, with an Aegean-blue glow on the bolt.
+    Largest: it fills the whole box, about 62×61 px. A storm titan floating in
+    three-quarter view facing left: a gold Corinthian helm and muscled cuirass,
+    the war-gear all three brothers share, over a body of thunderhead that
+    tapers below the belt into a storm funnel. A crest of living lightning arcs
+    over the helm, a thunderbolt glows in the visor's T, and two great eagle
+    wings of storm cloud spread behind it. Its near forearm is a forking bolt
+    that strikes the ground, and its far hand is a gold-gauntleted fist.
+    Sun-gold helm and cuirass with a black-figure meander belt, ink and
+    storm-blue cloud, electric-yellow lightning, black-figure ink outline. Frame
+    2 re-forks the bolt and flickers the crest; the back sprite shows the helm
+    and crest between the wings, and the follower trails a few sparks.
+  shiny: The gold helm and cuirass turn pale silver, and its lightning flashes Aegean blue.
   dex_entry:
     - It sat on a throne of gold and ivory.
     - Guides swore it would lift the temple roof
     - if it ever stood. The throne is empty now,
-    - and thunder rolls wherever it walks.
+    - and thunder rolls wherever it goes.
   habitat: >-
     Olympus, on a storm-struck terrace below the true summit (post-game;
     suggested). Its empty throne in the Temple of Zeus at Olympia is the first

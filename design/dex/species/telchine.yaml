@@ -96,13 +96,14 @@ species:
     A master smith whose back is the anvil. The curved blank glowing in its tongs
     is the shape of the Harpe.
   art: >-
-    Large: it fills about 54×52 px. A broad, upright seal-smith in three-quarter
-    view facing left. Its back shell is shaped like a black anvil, one flipper
-    holds tongs gripping a glowing, sickle-curved blank, and the other holds a
-    hammer. A heavy brow, long whiskers like a smith's beard and a leather
-    apron. Aegean-blue and marble body, terracotta apron, anvil in ink and
-    marble-gray, sun-gold glowing blank, black-figure ink outline. The back
-    sprite shows the anvil shell.
+    Large: it fills about 59×62 px. A broad, upright seal-smith in three-quarter
+    view facing left. Its back carries a black anvil like a shell, one flipper
+    raises a hammer over its shoulder, and the other holds tongs gripping a
+    glowing, sickle-curved blank. A heavy brow, curved walrus tusks, a long
+    white beard of whiskers and a leather apron. Aegean-blue body, marble tusks
+    and beard, terracotta apron, anvil and hammer in ink and marble-gray,
+    sun-gold glowing blank, black-figure ink outline. Frame 2 lifts the hammer
+    as the blank glows; the back sprite shows the anvil shell.
   shiny: Its coat turns silver-gray and its anvil shell turns bronze.
   dex_entry:
     - Its shell is an anvil. Long ago its kind
