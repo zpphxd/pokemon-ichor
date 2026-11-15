@@ -177,6 +177,14 @@ const u16 gMetatileAttributes_PorytilesManaged_ThyrsaHomes[] = INCBIN_U16("data/
 const u16 gMetatiles_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatile_attributes.bin");
 
+// Ichor: arkadia
+const u16 gMetatiles_PorytilesManaged_Arkadia[] = INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Arkadia[] = INCBIN_U16("data/tilesets/secondary/arkadia/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: arkadia_wood
+const u16 gMetatiles_PorytilesManaged_ArkadiaWood[] = INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_ArkadiaWood[] = INCBIN_U16("data/tilesets/secondary/arkadia_wood/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: arkadia_heights
 const u16 gMetatiles_PorytilesManaged_ArkadiaHeights[] = INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_ArkadiaHeights[] = INCBIN_U16("data/tilesets/secondary/arkadia_heights/porytiles_bin/metatile_attributes.bin");
@@ -220,6 +228,22 @@ const u16 gMetatileAttributes_PorytilesManaged_ArkadiaRooms[] = INCBIN_U16("data
 // Ichor: arkadia_homes
 const u16 gMetatiles_PorytilesManaged_ArkadiaHomes[] = INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_ArkadiaHomes[] = INCBIN_U16("data/tilesets/secondary/arkadia_homes/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: trophonios
+const u16 gMetatiles_PorytilesManaged_Trophonios[] = INCBIN_U16("data/tilesets/secondary/trophonios/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Trophonios[] = INCBIN_U16("data/tilesets/secondary/trophonios/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: west_stone
+const u16 gMetatiles_PorytilesManaged_WestStone[] = INCBIN_U16("data/tilesets/secondary/west_stone/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_WestStone[] = INCBIN_U16("data/tilesets/secondary/west_stone/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: west_harbor
+const u16 gMetatiles_PorytilesManaged_WestHarbor[] = INCBIN_U16("data/tilesets/secondary/west_harbor/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_WestHarbor[] = INCBIN_U16("data/tilesets/secondary/west_harbor/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: west_homes
+const u16 gMetatiles_PorytilesManaged_WestHomes[] = INCBIN_U16("data/tilesets/secondary/west_homes/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_WestHomes[] = INCBIN_U16("data/tilesets/secondary/west_homes/porytiles_bin/metatile_attributes.bin");
 // Ichor: kopais
 const u16 gMetatiles_PorytilesManaged_Kopais[] = INCBIN_U16("data/tilesets/secondary/kopais/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Kopais[] = INCBIN_U16("data/tilesets/secondary/kopais/porytiles_bin/metatile_attributes.bin");

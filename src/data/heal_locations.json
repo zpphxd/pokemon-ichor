@@ -45,8 +45,8 @@
     {
       "id": "HEAL_LOCATION_LEBADEIA",
       "map": "MAP_LEBADEIA",
-      "x": 17,
-      "y": 10,
+      "x": 16,
+      "y": 14,
       "respawn_map": "MAP_LEBADEIA_PILGRIMS_HALL",
       "respawn_npc": "LOCALID_LEBADEIA_HALL_KEEPER",
       "respawn_x": 7,
@@ -55,8 +55,8 @@
     {
       "id": "HEAL_LOCATION_KIRRHA",
       "map": "MAP_KIRRHA",
-      "x": 23,
-      "y": 10,
+      "x": 18,
+      "y": 15,
       "respawn_map": "MAP_KIRRHA_INN",
       "respawn_npc": "LOCALID_KIRRHA_INN_RESPAWN",
       "respawn_x": 6,

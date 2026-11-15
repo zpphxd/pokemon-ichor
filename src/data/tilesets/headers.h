@@ -824,6 +824,36 @@ const struct Tileset gTileset_Parnassos =
     .callback = NULL,
 };
 
+// Ichor: arkadia, Arkadia, the hunters' town (Act II, beat 41). Porytiles-managed, built by
+// tools/ichor/art/arkadia_build.py for the aethos primary: its cells on grass borrow
+// aethos's grass, so rebuild it whenever aethos changes. It uses only its own
+// tiles and palettes 6-12.
+const struct Tileset gTileset_Arkadia =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Arkadia,
+    .palettes = gTilesetPalettes_PorytilesManaged_Arkadia,
+    .metatiles = gMetatiles_PorytilesManaged_Arkadia,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Arkadia,
+    .callback = NULL,
+};
+
+// Ichor: arkadia_wood, the Cypress Wood and the Pool of Mnemosyne (Act II, beats 42-43). Porytiles-managed, built by
+// tools/ichor/art/arkadia_build.py for the aethos primary: its cells on grass borrow
+// aethos's grass, so rebuild it whenever aethos changes. It uses only its own
+// tiles and palettes 6-12.
+const struct Tileset gTileset_ArkadiaWood =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_ArkadiaWood,
+    .palettes = gTilesetPalettes_PorytilesManaged_ArkadiaWood,
+    .metatiles = gMetatiles_PorytilesManaged_ArkadiaWood,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_ArkadiaWood,
+    .callback = NULL,
+};
+
 // Ichor (Act II batch 3 rooms): Styx Falls's rooms: the Inn at the Falls, Horkia's house of oaths and Kepheus's house. A Porytiles-managed secondary for the oikos
 // primary, built by tools/ichor/maps/arkrooms.py (art in tools/ichor/art/arkrooms_*.py).
 // It uses only its own tiles and palettes 6-12.

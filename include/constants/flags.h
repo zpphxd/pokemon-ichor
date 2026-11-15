@@ -892,16 +892,16 @@
 #define FLAG_ICHOR_HIDDEN_MAIA_PP_UP                                0x349 // Ichor: Act II: the Cave of Maia, hidden PP Up under the swaddling in the cradle niche
 #define FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO                         0x34A
 #define FLAG_ICHOR_HIDDEN_MAIA_FRESH_WATER                          0x34B // Ichor: Act II: the Cave of Maia, hidden Fresh Water in the priestess's jar
-#define FLAG_UNUSED_0x34C                                           0x34C // Unused Flag
-#define FLAG_UNUSED_0x34D                                           0x34D // Unused Flag
-#define FLAG_UNUSED_0x34E                                           0x34E // Unused Flag
-#define FLAG_UNUSED_0x34F                                           0x34F // Unused Flag
-#define FLAG_UNUSED_0x350                                           0x350 // Unused Flag
-#define FLAG_UNUSED_0x351                                           0x351 // Unused Flag
-#define FLAG_UNUSED_0x352                                           0x352 // Unused Flag
-#define FLAG_UNUSED_0x353                                           0x353 // Unused Flag
-#define FLAG_UNUSED_0x354                                           0x354 // Unused Flag
-#define FLAG_UNUSED_0x355                                           0x355 // Unused Flag
+#define FLAG_ICHOR_ITEM_ARKADIA_MAX_REPEL                           0x34C // Ichor: Ichor: Arkadia, the Max Repel behind Krotos's byre
+#define FLAG_ICHOR_HIDDEN_ARKADIA_REVIVE                            0x34D // Ichor: Ichor: hidden item: Arkadia, the Revive in a hollow cypress by the forest gate
+#define FLAG_ICHOR_HIDDEN_ARKADIA_SILVER_POWDER                     0x34E // Ichor: Ichor: hidden item: Arkadia, the Silver Powder in an old web on the Agora's cypress
+#define FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_BALLS                     0x34F // Ichor: Ichor: the Cypress Wood, two Dusk Balls by Agapenor's kiln
+#define FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_CHARCOAL                     0x350 // Ichor: Ichor: hidden item: the Cypress Wood, the Charcoal in the kiln's ash
+#define FLAG_ICHOR_HIDDEN_POOL_MOON_STONE                           0x351 // Ichor: Ichor: hidden item: the Pool of Mnemosyne, the Moon Stone below the stone seat
+#define FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_BIG_MUSHROOM                 0x352 // Ichor: Ichor: hidden item: the Cypress Wood, a Big Mushroom in a hollow trunk (north-east glade)
+#define FLAG_ICHOR_HIDDEN_CYPRESS_WOOD_STAR_PIECE                   0x353 // Ichor: Ichor: hidden item: the Cypress Wood, the Star Piece on the Tomb of Kallisto
+#define FLAG_ICHOR_HIDDEN_POOL_STARDUST                             0x354 // Ichor: Ichor: hidden item: the Pool of Mnemosyne, Stardust at the water's far edge
+#define FLAG_ICHOR_HIDDEN_POOL_PRETTY_FEATHER                       0x355 // Ichor: Ichor: hidden item: the Pool of Mnemosyne, a white feather in the asphodel
 #define FLAG_UNUSED_0x356                                           0x356 // Unused Flag
 #define FLAG_UNUSED_0x357                                           0x357 // Unused Flag
 #define FLAG_UNUSED_0x358                                           0x358 // Unused Flag
@@ -1866,6 +1866,10 @@
 #define FLAG_ICHOR_ITEM_ROUTE8_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x175) // Ichor: Route 8: item ball, Revive on Gla's shore (the Conch)
 #define FLAG_ICHOR_ITEM_ROUTE8_ULTRA_BALL       (FLAG_ICHOR_GENERAL_START + 0x176) // Ichor: Route 8: item ball, Ultra Ball deep in Timoxena's reeds
 #define FLAG_ICHOR_ITEM_ROUTE8_FULL_HEAL        (FLAG_ICHOR_GENERAL_START + 0x177) // Ichor: Route 8: item ball, Full Heal on the reed-boat shore
+#define FLAG_ICHOR_ARRIVED_ARKADIA              (FLAG_ICHOR_GENERAL_START + 0x1D2) // Ichor: Act II: Arkadia's dusk arrival has played (beat 41)
+#define FLAG_ICHOR_STATIC_VIXEN_DEN             (FLAG_ICHOR_GENERAL_START + 0x1D6) // Ichor: Act II: the sleeping Kerdovix behind Agapenor's kiln was caught or beaten
+#define FLAG_ICHOR_POOL_VISION                  (FLAG_ICHOR_GENERAL_START + 0x1D7) // Ichor: Act II: the Pool of Mnemosyne showed the tree and the woman (once, at night)
+#define FLAG_ICHOR_MNASEAS_TOLD                 (FLAG_ICHOR_GENERAL_START + 0x1D8) // Ichor: Act II: Mnaseas told the Pool's story at least once
 #define FLAG_ICHOR_GOT_GRYLLOS                  (FLAG_ICHOR_GENERAL_START + 0x1EC) // Ichor: Act II rooms3: Eubouleus gave you Gryllos the Kaplet at the Styx Falls inn
 #define FLAG_ICHOR_GRYLLOS_SHOWN                (FLAG_ICHOR_GENERAL_START + 0x1ED) // Ichor: Act II rooms3: showed Eubouleus a Kaprodon; got the Balm Mushroom
 #define FLAG_ICHOR_HIDE_ALETHEA_STYX_FALLS      (FLAG_ICHOR_GENERAL_START + 0x1EE) // Ichor: Act II rooms3: hides Alethea at the inn's long table after her first visit there (beat 39); the Cave of Maia shows her
@@ -1978,6 +1982,14 @@
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 #define FLAG_ICHOR_DISGUISE_ON                  (FLAG_ICHOR_GENERAL_START + 0x482) // Ichor: The Titan helmet is on: ordinary Titanborn and sentries take the player for a recruit (engine, ENGINE_API §6)
+
+#define FLAG_ICHOR_ITEM_CYPRESS_WOOD_DUSK_STONE (FLAG_ICHOR_GENERAL2_START + 0x020) // Ichor: Act II: the Cypress Wood, the Dusk Stone in the north-east glade
+#define FLAG_ICHOR_ITEM_CYPRESS_WOOD_HYPER_POTION (FLAG_ICHOR_GENERAL2_START + 0x021) // Ichor: Act II: the Cypress Wood, the Hyper Potion in the south-east glade
+#define FLAG_ICHOR_ITEM_POOL_ULTRA_BALL         (FLAG_ICHOR_GENERAL2_START + 0x022) // Ichor: Act II: the Pool of Mnemosyne, the Ultra Ball under the poplars
+#define FLAG_ICHOR_ITEM_POOL_PP_UP              (FLAG_ICHOR_GENERAL2_START + 0x023) // Ichor: Act II: the Pool of Mnemosyne, the PP Up in the asphodel
+#define FLAG_ICHOR_ITEM_POOL_ETHER              (FLAG_ICHOR_GENERAL2_START + 0x024) // Ichor: Act II: the Pool of Mnemosyne, the Ether by the north poplars
+#define FLAG_ICHOR_NYKTIMOS_STORY               (FLAG_ICHOR_GENERAL2_START + 0x050) // Ichor: Act II rooms3: Nyktimos has told you of Lykaon and the extra place (his story plays once)
+#define FLAG_ICHOR_KLYMENE_STORY                (FLAG_ICHOR_GENERAL2_START + 0x051) // Ichor: Act II rooms3: Klymene has told you of Atalanta's apples (after, she only offers the race)
 #define FLAG_ICHOR_TROPHONIOS_SNAKE_FED         (FLAG_ICHOR_GENERAL_START + 0x1A8) // Ichor: Act II: the snake in Trophonios's cave took the honey; its niche is clear (Part 5)
 #define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_MAX_REPEL (FLAG_ICHOR_GENERAL_START + 0x1A9) // Ichor: Act II: item ball: Trophonios's cave B1F Max Repel past the marble rubble
 #define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_ESCAPE_ROPE (FLAG_ICHOR_GENERAL_START + 0x1AA) // Ichor: Act II: item ball: Trophonios's cave B1F Escape Rope at the ladder's foot
@@ -1987,8 +1999,6 @@
 #define FLAG_ICHOR_ITEM_TROPHONIOS_B2F_TM_FUTURE_SIGHT (FLAG_ICHOR_GENERAL_START + 0x1AE) // Ichor: Act II: item ball: Trophonios's cave B2F TM Future Sight on the oracle's ledge
 #define FLAG_ICHOR_HIDE_TROPHONIOS_GREAT_BOULDER (FLAG_ICHOR_GENERAL_START + 0x1AF) // Ichor: Act II: Trophonios's great boulder is split (Hephaestus's Hammer); stays gone
 #define FLAG_ICHOR_ITEM_TROPHONIOS_B1F_DAMP_ROCK (FLAG_ICHOR_GENERAL2_START + 0x080) // Ichor: Act II: item ball: Trophonios's cave B1F Damp Rock in the wet corner by the stream's outlet
-#define FLAG_ICHOR_NYKTIMOS_STORY               (FLAG_ICHOR_GENERAL2_START + 0x050) // Ichor: Act II rooms3: Nyktimos has told you of Lykaon and the extra place (his story plays once)
-#define FLAG_ICHOR_KLYMENE_STORY                (FLAG_ICHOR_GENERAL2_START + 0x051) // Ichor: Act II rooms3: Klymene has told you of Atalanta's apples (after, she only offers the race)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

@@ -1369,6 +1369,21 @@
 #define METATILE_TempleDionysus_TierFrontArm_Lowered   0x276
 // end gTileset_TempleDionysus
 
+// gTileset_Arkadia, gTileset_ArkadiaWood (Ichor: Arkadia), written by tools/ichor/art/arkadia_build.py
+#define METATILE_Arkadia_LampUnlit_L          0x230
+#define METATILE_Arkadia_LampUnlit_R          0x231
+#define METATILE_Arkadia_LampLit_L            0x222
+#define METATILE_Arkadia_LampLit_R            0x223
+// end gTileset_Arkadia
+// gTileset_Trophonios (Ichor: Trophonios's cave), written by tools/ichor/art/trophonios_build.py
+#define METATILE_Trophonios_Brazier_ColdTop      0x21E
+#define METATILE_Trophonios_Brazier_Cold         0x226
+#define METATILE_Trophonios_Brazier_LitTop       0x21F
+#define METATILE_Trophonios_Brazier_Lit          0x227
+#define METATILE_Trophonios_Cleft_Coils          0x278
+#define METATILE_Trophonios_Cleft_Empty          0x279
+// end gTileset_Trophonios
+
 // gTileset_ArkadiaHeights, gTileset_MaiaCave (Ichor: the Arkadian climb), written by tools/ichor/art/heights_build.py
 #define METATILE_ArkadiaHeights_DrumWedged           0x2D9
 #define METATILE_ArkadiaHeights_DrumRest             0x2D8

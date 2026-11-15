@@ -1337,6 +1337,28 @@ static const struct InGameTrade sIngameTrades[] =
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_GELASABLE
+    },
+    // Ichor: the muleteer of Kirrha (Act II, beat 37A's town). The Delphic bee came
+    // down off Parnassos into his beehive, and hums the day before things happen; he'd
+    // rather have something stupid in a normal way. Female, holding a Mental Herb.
+    // Named for the Kassotis, the spring the Pythia drinks from. His OT name is the
+    // harbor's name for him, OUREUS: Homer's word for a mule.
+    // ICHOR_STUB_AETHOS_DEX: Melisseer and Lophops are stand-ins until the dex lands.
+    [INGAME_TRADE_ICHOR_KASSOTIS] =
+    {
+        .nickname = _("KASSOTIS"),
+        .species = SPECIES_MELISSEER,
+        .ivs = {16, 14, 18, 26, 24, 22},
+        .abilityNum = 0,
+        .otId = 48107,
+        .conditions = {5, 5, 30, 5, 5},
+        .personality = 0x2510,   // low byte 0x10: female for any ratio that has females
+        .heldItem = ITEM_MENTAL_HERB,
+        .mailNum = -1,
+        .otName = _("OUREUS"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_LOPHOPS
     }
 };
 

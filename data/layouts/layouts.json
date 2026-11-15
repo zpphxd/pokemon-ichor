@@ -917,10 +917,10 @@
     {
       "id": "LAYOUT_ARKADIA",
       "name": "Arkadia_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 50,
+      "height": 44,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Arkadia",
       "border_filepath": "data/layouts/Arkadia/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia/map.bin",
       "layout_version": "emerald"
@@ -928,10 +928,10 @@
     {
       "id": "LAYOUT_ARKADIA_CYPRESS_WOOD",
       "name": "Arkadia_CypressWood_Layout",
-      "width": 30,
-      "height": 64,
+      "width": 36,
+      "height": 30,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Agros",
+      "secondary_tileset": "gTileset_ArkadiaWood",
       "border_filepath": "data/layouts/Arkadia_CypressWood/border.bin",
       "blockdata_filepath": "data/layouts/Arkadia_CypressWood/map.bin",
       "layout_version": "emerald"
@@ -939,10 +939,10 @@
     {
       "id": "LAYOUT_POOL_OF_MNEMOSYNE",
       "name": "PoolOfMnemosyne_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 24,
+      "height": 20,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_ArkadiaWood",
       "border_filepath": "data/layouts/PoolOfMnemosyne/border.bin",
       "blockdata_filepath": "data/layouts/PoolOfMnemosyne/map.bin",
       "layout_version": "emerald"
