@@ -65,7 +65,9 @@
 #define TRAINER_ICHOR_MYRTO                   112
 #define TRAINER_ICHOR_ARISTAIOS               113
 #define TRAINER_ICHOR_MOPSOS                  114
-#define TRAINERS_END_ACT1                     115
+#define TRAINER_ICHOR_DAPHNIS                 115
+#define TRAINER_ICHOR_KERDON                  116
+#define TRAINERS_END_ACT1                     117
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

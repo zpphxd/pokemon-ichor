@@ -1735,6 +1735,7 @@
 #define FLAG_ICHOR_GOT_GOOD_ROD                 (FLAG_ICHOR_GENERAL_START + 0x048) // Ichor: Route 5: Aigialeus gave the Good Rod
 #define FLAG_ICHOR_TRADED_GELASABLE             (FLAG_ICHOR_GENERAL_START + 0x049) // Ichor: Route 5's inn: traded an Onotis for Xenokles's Gelasable GALANTHIS
 #define FLAG_ICHOR_MET_XENOKLES                 (FLAG_ICHOR_GENERAL_START + 0x04A) // Ichor: Route 5's inn: Xenokles's welcome heard
+#define FLAG_ICHOR_ITEM_ROUTE5_ETHER            (FLAG_ICHOR_GENERAL_START + 0x04B) // Ichor: Route 5: the Ether at the terrace's east end, past the shepherd
 #define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
 #define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
 #define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)

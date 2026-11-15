@@ -46,7 +46,12 @@ local function nickname(slot)
   return s
 end
 
-local function quiet() L.setVar(S.VAR_REPEL_STEP_COUNT, 250) end
+-- Between beats: a fresh repel, and the party healed (Surf has 15 PP; the road
+-- has more battles than that).
+local function quiet()
+  L.setVar(S.VAR_REPEL_STEP_COUNT, 250)
+  if L.mapId() == S.MAP_ROUTE5 then L.runHeader("Route5Test_HealHeader") end
+end
 
 -- The wild table, by time of day: every species a land encounter here may be.
 local WILD = {}
@@ -149,6 +154,10 @@ end
 local function terrace()
   L.setBeat("terrace", false)
   quiet()
+  -- east of the cutting first: the shepherd's long grass and the Ether past him
+  trainer(S.TRAINER_DAPHNIS, "Daphnis", "Daphnis", true)
+  L.talk(L.ball(S.FLAG_ITEM_ETHER))
+  expect(L.getFlag(S.FLAG_ITEM_ETHER), "the Ether at the terrace's east end taken")
   trainer(S.TRAINER_MYRTO, "Myrto", "Myrto", true)
   talk(L.sign(R .. "Niches"), "Aphrodite's niches", { shots = { [1] = "read_Niches" } })
   talk(L.sign("EventScript_IchorAltar_Aphrodite"), "Aphrodite's altar (prayer)", { shots = { [1] = "altar" } })
@@ -169,6 +178,7 @@ local function shore()
   quiet()
   trainer(S.TRAINER_MOPSOS, "Mopsos", "Mopsos")
   L.shot("past_the_stair")
+  trainer(S.TRAINER_KERDON, "Kerdon", "Kerdon", true)
   L.talk(L.hidden(S.FLAG_HIDDEN_HEART_SCALE))
   expect(L.getFlag(S.FLAG_HIDDEN_HEART_SCALE), "the Heart Scale at the point's tip found")
   talk(L.npc(R .. "Aigialeus"), "Aigialeus", { every = true })

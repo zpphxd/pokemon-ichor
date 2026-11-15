@@ -12,6 +12,7 @@
 #include "constants/items.h"
 #include "constants/map_scripts.h"
 #include "constants/maps.h"
+#include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/species.h"
 #include "constants/vars.h"
@@ -44,6 +45,9 @@ Route5Test_Setup:
 	lockall
 	setvar VAR_TEMP_F, 1
 	givemon SPECIES_SWAMPERT, 100
+	@ the battle player always picks the first move: make it one that never misses
+	@ and knocks out anything on this road in one hit
+	setmonmove 0, 0, MOVE_SURF
 	giveitem ITEM_BRONZE_HAMMER, 1
 	giveitem ITEM_OLIVE_OIL, 3
 	giveitem ITEM_OLD_ROD, 1
@@ -52,6 +56,16 @@ Route5Test_Setup:
 	setflag FLAG_BADGE02_GET
 	warp MAP_ROUTE5_SKIRONIAN_CLIFFS, 9, 8
 	waitstate
+	releaseall
+	end
+
+@ --- A rest between the walk's beats: Surf has 15 PP, and the road has more
+@ battles than that.
+	test_header Route5Test_HealHeader, Route5Test_Heal
+Route5Test_Heal:
+	lockall
+	setvar VAR_TEMP_F, 1
+	special HealPlayerParty
 	releaseall
 	end
 

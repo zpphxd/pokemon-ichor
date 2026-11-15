@@ -24,6 +24,8 @@ text Route5_SkironianCliffs_Text_NameMelanthios { "MELANTHIOS" }
 text Route5_SkironianCliffs_Text_NameMyrto { "MYRTO" }
 text Route5_SkironianCliffs_Text_NameAristaios { "ARISTAIOS" }
 text Route5_SkironianCliffs_Text_NameMopsos { "MOPSOS" }
+text Route5_SkironianCliffs_Text_NameDaphnis { "DAPHNIS" }
+text Route5_SkironianCliffs_Text_NameKerdon { "KERDON" }
 // SCRIPT.md's PITCH-GATHERER is 67 px in the name box's font; the box holds 64.
 text Route5_SkironianCliffs_Text_NamePitchGatherer { "RESIN TAPPER" }
 text Route5_SkironianCliffs_Text_NameAigialeus { "AIGIALEUS" }
@@ -87,6 +89,29 @@ script Route5_SkironianCliffs_EventScript_Mopsos {
     setspeaker(Route5_SkironianCliffs_Text_NameMopsos)
     msgbox(format("Before the sea battle down there, every bird flew to one side.\p"
                   "Nobody asked the birds. Nobody ever asks the birds."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// Optional: at the far end of the terrace, past the cutting, in his long grass.
+script Route5_SkironianCliffs_EventScript_Daphnis {
+    trainerbattle_single(TRAINER_ICHOR_DAPHNIS,
+        format("Mind the grass! My flock's in there somewhere. So is everything else."),
+        format("Scattered them. They'll come home. They always come home hungry."))
+    setspeaker(Route5_SkironianCliffs_Text_NameDaphnis)
+    msgbox(format("Daphnis, they call me. After the shepherd who taught the pipes to sing.\p"
+                  "I can't play a note. The flock doesn't mind."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// Optional: a salt merchant on the beach, walking his sacks to the Mysteries.
+script Route5_SkironianCliffs_EventScript_Kerdon {
+    trainerbattle_single(TRAINER_ICHOR_KERDON,
+        format("Salt for the Mysteries' bread! Buy a sack, or battle me for free!"),
+        format("Free turned out expensive."))
+    setspeaker(Route5_SkironianCliffs_Text_NameKerdon)
+    msgbox(format("Everything costs something at the Mysteries. Bread, salt, a piglet.\p"
+                  "The initiates say the secret's free. I'll believe that when I see it."),
+           MSGBOX_AUTOCLOSE)
     end
 }
 

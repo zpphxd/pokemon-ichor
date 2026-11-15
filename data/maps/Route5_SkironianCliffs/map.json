@@ -92,6 +92,34 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE5_DAPHNIS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_SHEPHERD",
+      "x": 56,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route5_SkironianCliffs_EventScript_Daphnis",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_ROUTE5_KERDON",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT",
+      "x": 40,
+      "y": 24,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "2",
+      "script": "Route5_SkironianCliffs_EventScript_Kerdon",
+      "flag": "0"
+    },
+    {
       "local_id": "LOCALID_ROUTE5_PITCH_GATHERER",
       "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
       "x": 39,
@@ -308,6 +336,19 @@
       "trainer_sight_or_berry_tree_id": "ITEM_REVIVE",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ICHOR_ITEM_ROUTE5_REVIVE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 57,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ETHER",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_ROUTE5_ETHER"
     }
   ],
   "warp_events": [

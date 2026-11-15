@@ -264,25 +264,26 @@ C_ROWS = (21, 23)             # the shore road: road on 21-22, a verge on 23 (4 
 C_X = (35, W - 1)
 WIDE_X = 58                   # the shore road widens to Eleusa's four rows here
 CLEARING = (14, 2, 20, 8)     # the pine clearing north of the road
-BAND1 = (15, 17)              # columns of the first forced band (clearing and road)
+BAND1 = (14, 17)            # columns of the first forced band (clearing and road)
 SEAT = (24, 10)               # rock_seat_path, 2x2: the road's one-cell ledge is (24..25, 9)
 KNOLL_GAP = 31                # the cleft up to the watchtower's knoll
-KNOLL = (26, 2, 36, 5)
+KNOLL = (22, 1, 36, 5)
 TOWER = (33, 2)               # watchtower 2x4
 HOLLOW_GAP = 41               # the thicket's gap into the pine hollow
 PINE_HOLLOW = (38, 3, 44, 7)
 STEP_X = 34                   # where the coast steps south: B's west edge
 CUT_AB = (46, 48)             # the cutting from the cliff road down to the terrace
 NICHES = (40, 12)             # niches 3x3: brink, face, foot
-BAND2 = (43, 45)              # columns of the second forced band, on the terrace
+BAND2 = (42, 45)              # columns of the second forced band, on the terrace
 STAIR_X = 38                  # the cleft stair from the terrace down to the shore
 LOOKOUT_X = 37                # the rockfall closing the terrace's lookout (35-36)
 POINT = (35, 36)              # the shore point's columns, behind the rubble at x = 37
-BAND3 = (47, 49)              # columns of the third band, on the shore road
+BAND3 = (46, 49)              # columns of the third band, on the shore road
 INN_AT = (52, 17)             # the inn's 5x4 front, its door at INN_AT + INN_DOOR
 HERM_AT = (58, 20)            # the great herm; its landing tile is south of it
 MEADOW = (49, 1, 59, 11)
-SALAMIS_ROW = 27              # Salamis's shore across the strait, bottom left
+TERRACE_END = 57              # the terrace runs on east of the cutting to here
+SALAMIS_ROW = 25              # Salamis's shore across the strait, bottom left
 
 
 # ---------------------------------------------------------------------------
@@ -325,30 +326,34 @@ def make_plan(g):
     # the pine clearing: grass among fallen boulders, the band right through it
     x0, y0, x1, y1 = CLEARING
     g.fill("grass", x0, y0 + 1, x1, y1)
-    g.rows("tall", 14, 3, [".#####.",
+    g.rows("tall", 14, 3, [".######",
+                           "#######",
+                           "#######",
                            ".######",
-                           "..#####",
                            ".####..",
                            ".###...",
-                           ".###...",
-                           ".###...",
-                           ".###...",
-                           ".###..."])
+                           "####...",
+                           "####...",
+                           "####..."])
     # the watchtower's knoll, up the cleft
     x0, y0, x1, y1 = KNOLL
     g.fill("grass", x0, y0, x1, y1)
     g.fill("path", KNOLL_GAP, y1 + 1, KNOLL_GAP, 8)
-    g.rows("tall", 27, 2, ["###.",
-                           "###.",
-                           ".##."])
+    g.rows("tall", 22, 1, [".#####....",
+                           "##########",
+                           "##########",
+                           ".#########",
+                           "....####.."])
     # the pine hollow, behind the thicket
     x0, y0, x1, y1 = PINE_HOLLOW
     g.fill("grass", x0 + 1, y0, x1 - 1, y1)
     g.fill("grass", x0, y0 + 1, x1, y1 - 1)
     g.fill("grass", HOLLOW_GAP, y1 + 1, HOLLOW_GAP, 8)
-    g.rows("tall", 39, 4, ["..###",
-                           "..###",
-                           "..##."])
+    g.rows("tall", 39, 3, [".###.",
+                           "#####",
+                           "#####",
+                           "#####",
+                           ".###."])
     # the thyme meadow, off the road's east end
     g.rows("grass", 49, 1, [".....######",
                             "...########",
@@ -361,16 +366,35 @@ def make_plan(g):
                             "###########",
                             "###########",
                             "##########."])
-    g.rows("meadow", 50, 2, ["......###..",
-                             "....######.",
+    g.rows("meadow", 49, 2, [".....####..",
                              "...#######.",
+                             "..########.",
+                             ".#########.",
+                             ".########..",
+                             ".#######...",
                              "..######...",
-                             ".######....",
-                             ".#####.....",
-                             "..###......"])
+                             "..######...",
+                             "..######...",
+                             "..######...",
+                             "..######..."])
+    # long grass at the cliff's edge along the road, where it has a verge
+    g.fill("tall", 18, A_ROWS[1], 20, A_ROWS[1])
+    g.fill("tall", 30, A_ROWS[1], 43, A_ROWS[1])
+    # the terrace's east end, past the cutting: a hillside of long grass over
+    # the inn's roof, a shepherd and his flock, a pot at the far end
+    g.fill("grass", CUT_AB[1] + 1, B_ROWS[0], TERRACE_END, B_ROWS[0] + 1)
+    g.fill("grass", CUT_AB[1] + 1, B_ROWS[1], INN_AT[0] - 1, B_ROWS[1])
+    g.rows("tall", CUT_AB[1] + 2, B_ROWS[0], ["#####.",
+                                              "######",
+                                              "##...."])
     # bands across the terrace and the shore road
     g.fill("tall", BAND2[0], B_ROWS[0], BAND2[1], B_ROWS[1])
     g.fill("tall", BAND3[0], C_ROWS[0], BAND3[1], C_ROWS[1])
+    # beach grass on the shore road's verge
+    g.fill("tall", 38, C_ROWS[1], 44, C_ROWS[1])
+    g.fill("tall", 51, C_ROWS[1], 57, C_ROWS[1])
+    # and on the terrace's, under the niches
+    g.fill("tall", 38, B_ROWS[1], 40, B_ROWS[1])
     # the inn's yard and the herm's foot
     g.fill("grass", 57, 18, 59, 20)
     # the olives of Eleusa's plain: the east strip, matching Eleusa's own, with
@@ -670,9 +694,9 @@ def props(g):
     g.piece("amphorae", 38, 8)
     # the meadow: hives on their benches, thyme, a lone pine; the beekeeper's
     for (key, x, y) in (("hives", 55, 3), ("hives", 57, 5), ("hives", 53, 8), ("hives", 56, 8),
-                        ("thyme", 51, 9), ("thyme", 49, 6), ("thyme", 58, 9), ("thyme", 54, 1),
-                        ("thyme", 50, 10), ("thyme", 55, 10), ("thyme", 59, 6), ("thyme", 52, 1),
-                        ("dry_grass", 52, 10), ("pebbles", 59, 7), ("pine_young", 50, 1),
+                        ("thyme", 49, 6), ("thyme", 58, 9), ("thyme", 54, 1),
+                        ("thyme", 59, 6), ("thyme", 52, 1), ("thyme", 49, 9),
+                        ("pebbles", 59, 7), ("pine_young", 50, 1),
                         ("rock", 59, 10), ("pine_tall", 57, 9)):
         g.piece(key, x, y, block_t=True)
     for (x, y) in ((49, 4), (50, 5), (58, 7), (53, 11), (57, 2), (51, 8)):
@@ -762,6 +786,10 @@ TRAINERS = [
     ("MYRTO", GFX + "PILGRIM", 39, 15, "UP", 1, "Myrto", "TRAINER_ICHOR_MYRTO"),
     ("ARISTAIOS", GFX + "HARVESTER", 54, 5, "DOWN", 3, "Aristaios", "TRAINER_ICHOR_ARISTAIOS"),
     ("MOPSOS", GFX + "AUGUR", STAIR_X + 1, C_ROWS[0], "LEFT", 1, "Mopsos", "TRAINER_ICHOR_MOPSOS"),
+    # Optional: the shepherd at the terrace's far end, watching his long grass;
+    # the salt merchant on the beach, watching the road
+    ("DAPHNIS", GFX + "SHEPHERD", TERRACE_END - 1, B_ROWS[0] + 1, "LEFT", 3, "Daphnis", "TRAINER_ICHOR_DAPHNIS"),
+    ("KERDON", GFX + "MERCHANT", 40, 24, "UP", 2, "Kerdon", "TRAINER_ICHOR_KERDON"),
 ]
 # People: (local id, graphics, x, y, facing, script, hide flag)
 PEOPLE = [
@@ -789,6 +817,7 @@ ITEMS = [
     ("ITEM_CALCIUM", 42, 4, "FLAG_ICHOR_ITEM_ROUTE5_CALCIUM"),
     ("ITEM_SUPER_REPEL", 58, 3, "FLAG_ICHOR_ITEM_ROUTE5_SUPER_REPEL"),
     ("ITEM_REVIVE", B_X[0], B_ROWS[0], "FLAG_ICHOR_ITEM_ROUTE5_REVIVE"),
+    ("ITEM_ETHER", TERRACE_END, B_ROWS[0], "FLAG_ICHOR_ITEM_ROUTE5_ETHER"),
 ]
 # Hidden items: (item, x, y, flag)
 HIDDEN = [
