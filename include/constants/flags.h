@@ -727,10 +727,10 @@
 #define FLAG_ICHOR_HIDDEN_ELEUSA_HONEY 0x2A0 // Ichor: Eleusa: hidden Honey by the beehives
 #define FLAG_ICHOR_HIDDEN_ELEUSA_POMEG_BERRY 0x2A1 // Ichor: Eleusa: hidden Pomeg Berry under the well's tree
 #define FLAG_ICHOR_HIDDEN_ELEUSA_BRONZE_OBOL 0x2A2 // Ichor: Eleusa: hidden Bronze Obol in the Maiden's Well
-#define FLAG_UNUSED_0x2A3  0x2A3 // Unused Flag
-#define FLAG_UNUSED_0x2A4  0x2A4 // Unused Flag
-#define FLAG_UNUSED_0x2A5  0x2A5 // Unused Flag
-#define FLAG_UNUSED_0x2A6  0x2A6 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE4_ETHER 0x2A3 // Ichor: Route 4: hidden Ether in the kiln's ash
+#define FLAG_ICHOR_HIDDEN_ROUTE4_ORAN_BERRY 0x2A4 // Ichor: Route 4: hidden Oran Berry by the terrace milestone
+#define FLAG_ICHOR_HIDDEN_ROUTE4_STARDUST 0x2A5 // Ichor: Route 4: hidden Stardust by the procession's cookfire
+#define FLAG_ICHOR_HIDDEN_ROUTE4_HARD_STONE 0x2A6 // Ichor: Route 4: hidden Hard Stone in the scree under the slide
 #define FLAG_UNUSED_0x2A7  0x2A7 // Unused Flag
 #define FLAG_UNUSED_0x2A8  0x2A8 // Unused Flag
 #define FLAG_UNUSED_0x2A9  0x2A9 // Unused Flag
@@ -1724,6 +1724,22 @@
 #define ICHOR_GIFT_HIEROPHANT                   3
 #define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_SAW_ROCKSLIDE                (FLAG_ICHOR_GENERAL_START + 0x000) // Ichor: Route 4: beat 17's first scene played (Alethea at the slide)
+#define FLAG_ICHOR_ROCKSLIDE_CLEARED            (FLAG_ICHOR_GENERAL_START + 0x001) // Ichor: Route 4: beat 17, the three heaps broken, the slide cleared
+#define FLAG_ICHOR_GOT_PROCESSION_BARLEY        (FLAG_ICHOR_GENERAL_START + 0x002) // Ichor: Route 4: beat 17, Eudemos's two Barley Cakes
+#define FLAG_ICHOR_HIDE_ROCKSLIDE_1             (FLAG_ICHOR_GENERAL_START + 0x003) // Ichor: Route 4: the slide's first heap, broken (its object's hide flag)
+#define FLAG_ICHOR_HIDE_ROCKSLIDE_2             (FLAG_ICHOR_GENERAL_START + 0x004) // Ichor: Route 4: the slide's second heap, broken
+#define FLAG_ICHOR_HIDE_ROCKSLIDE_3             (FLAG_ICHOR_GENERAL_START + 0x005) // Ichor: Route 4: the slide's third heap, broken
+#define FLAG_ICHOR_HIDE_PROCESSION_ROUTE4       (FLAG_ICHOR_GENERAL_START + 0x006) // Ichor: Route 4: the procession's camp struck after the slide clears (SCRIPT.md's _ROUTE2; Alethea goes with it)
+#define FLAG_ICHOR_HIDE_GRUNT_LAAS              (FLAG_ICHOR_GENERAL_START + 0x007) // Ichor: Route 4: the herm's Titanborn guard ran off
+#define FLAG_ICHOR_HIDE_THICKET_ROUTE4          (FLAG_ICHOR_GENERAL_START + 0x008) // Ichor: Route 4: the orchard's thorn thicket cut (Demeter's Sickle)
+#define FLAG_ICHOR_ITEM_ROUTE4_POTION           (FLAG_ICHOR_GENERAL_START + 0x009) // Ichor: Route 4: Potion by the kilns
+#define FLAG_ICHOR_ITEM_ROUTE4_REPEL            (FLAG_ICHOR_GENERAL_START + 0x00A) // Ichor: Route 4: Repel in the walled grave plot
+#define FLAG_ICHOR_ITEM_ROUTE4_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x00B) // Ichor: Route 4: Super Potion up the hill spur
+#define FLAG_ICHOR_ITEM_ROUTE4_TM_ROCK_TOMB     (FLAG_ICHOR_GENERAL_START + 0x00C) // Ichor: Route 4: TM39 Rock Tomb under the slide's last heap
+#define FLAG_ICHOR_ITEM_ROUTE4_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x00D) // Ichor: Route 4: Revive in the family tomb (the Girdle)
+#define FLAG_ICHOR_ITEM_ROUTE4_SUN_STONE        (FLAG_ICHOR_GENERAL_START + 0x00E) // Ichor: Route 4: Sun Stone in the terrace orchard (the Sickle)
+#define FLAG_ICHOR_ITEM_ROUTE4_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x00F) // Ichor: Route 4: Great Ball in the woods clearing (the Hammer)
 #define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
 #define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
 #define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)

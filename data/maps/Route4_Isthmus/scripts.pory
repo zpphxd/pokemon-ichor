@@ -1,0 +1,514 @@
+// Route 4, the Isthmus road: SCRIPT.md's "Route 2, the Sacred Way" and beat 17,
+// reconciled as Route 4 (BUILD.md, batch 3). tools/ichor/maps/route4.py builds the
+// layout and the events, and writes the block at the end of this file.
+//
+// State:
+//   VAR_TEMP_1 == 1   beat 17's first scene waits on the road at x = 48, rows 8-10,
+//                     4 tiles short of the slide (until FLAG_ICHOR_SAW_ROCKSLIDE)
+//   FLAG_ICHOR_HIDE_ROCKSLIDE_1..3   each heap broken; ON_LOAD clears its cell
+//   FLAG_ICHOR_ROCKSLIDE_CLEARED     all three: ON_LOAD clears the whole slide, and on
+//                     the next arrival the procession has moved on
+//                     (FLAG_ICHOR_HIDE_PROCESSION_ROUTE4: the camp struck)
+//
+// The rockslide's heaps are OBJ_EVENT_GFX_BREAKABLE_ROCK objects, broken with the
+// engine's relic check, prompt and pose (ENGINE_API §2) by a local script rather than
+// EventScript_RockSmash, so the third heap can run the rest of beat 17 at once and the
+// cell under each heap clears as it breaks. The woods clearing's one-heap lesson uses
+// EventScript_RockSmash itself (and the map's rock-smash table).
+//
+// Stubs: ICHOR_STUB_DIG (the three dig spots show turned earth); ICHOR_STUB_SPRITE
+// (Exekias, Pheidippos and the initiates borrow walkers, and the POTTER, RUNNER and
+// INITIATE classes borrow portraits); ICHOR_STUB_HOLLOW (the Hollow's mouth warps back
+// onto itself until MAP_HECATES_HOLLOW is registered; rerun route4.py then).
+
+mapscripts Route4_Isthmus_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        // The procession sets off once the road is open: gone the next time you come.
+        if (flag(FLAG_ICHOR_ROCKSLIDE_CLEARED)) {
+            setflag(FLAG_ICHOR_HIDE_PROCESSION_ROUTE4)
+        }
+        if (!flag(FLAG_ICHOR_SAW_ROCKSLIDE)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_HIDE_ROCKSLIDE_1)) {
+            call(Route4_Isthmus_EventScript_HeapCell1)
+        }
+        if (flag(FLAG_ICHOR_HIDE_ROCKSLIDE_2)) {
+            call(Route4_Isthmus_EventScript_HeapCell2)
+        }
+        if (flag(FLAG_ICHOR_HIDE_ROCKSLIDE_3)) {
+            call(Route4_Isthmus_EventScript_HeapCell3)
+        }
+        if (flag(FLAG_ICHOR_ROCKSLIDE_CLEARED)) {
+            call(Route4_Isthmus_EventScript_ClearSlide)
+        }
+        if (flag(FLAG_ICHOR_HIDE_PROCESSION_ROUTE4)) {
+            call(Route4_Isthmus_EventScript_StrikeCamp)
+        }
+    }
+}
+
+text Route4_Isthmus_Text_NameAlethea { "ALETHEA" }
+text Route4_Isthmus_Text_NameEudemos { "EUDEMOS" }
+text Route4_Isthmus_Text_NameInitiates { "INITIATES" }
+text Route4_Isthmus_Text_NameInitiate { "INITIATE" }
+text Route4_Isthmus_Text_NameHealer { "HEALER" }
+text Route4_Isthmus_Text_NameKilnWorker { "KILN WORKER" }
+text Route4_Isthmus_Text_NameMourner { "MOURNER" }
+text Route4_Isthmus_Text_NameExekias { "EXEKIAS" }
+text Route4_Isthmus_Text_NameMyrrhine { "MYRRHINE" }
+text Route4_Isthmus_Text_NameMenalkas { "MENALKAS" }
+text Route4_Isthmus_Text_NamePheidippos { "PHEIDIPPOS" }
+text Route4_Isthmus_Text_NameKapelos { "KAPELOS" }
+
+// ---------------------------------------------------------------------------
+// Beat 17: the rockslide and the procession
+// ---------------------------------------------------------------------------
+
+// The coord trigger 4 tiles short of the slide, or talking to Alethea first.
+script Route4_Isthmus_EventScript_RockslideScene {
+    lockall
+    setvar(VAR_TEMP_1, 0)
+    setflag(FLAG_ICHOR_SAW_ROCKSLIDE)
+    playse(SE_PIN)
+    applymovement(LOCALID_ROUTE4_ALETHEA, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    applymovement(LOCALID_ROUTE4_ALETHEA, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(Route4_Isthmus_Text_NameAlethea)
+    msgbox(format("{PLAYER}! The Titans brought the hill down. On purpose.\p"
+                  "Look at the stone. Shovel marks.\p"
+                  "The procession's stuck. So am I. Truthfully, I'm enjoying the sit."))
+    applymovement(LOCALID_ROUTE4_EUDEMOS, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(Route4_Isthmus_Text_NameEudemos)
+    msgbox(format("Every year since there was a year, the procession walks to Eleusa.\p"
+                  "This year, a mountain sat down in the road."))
+    closemessage
+    applymovement(LOCALID_ROUTE4_EUDEMOS, Common_Movement_FaceDown)
+    waitmovement(0)
+    releaseall
+}
+
+// A heap of the slide: the Bronze Hammer breaks it (ENGINE_API §2's check and pose).
+script Route4_Isthmus_EventScript_Heap {
+    lockall
+    setvar(VAR_0x8004, ITEM_BRONZE_HAMMER)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CanUseRelic)
+    if (var(VAR_RESULT) == ICHOR_RELIC_MISSING) {
+        msgbox(format("Marble rubble from a toppled tomb. A good hammer would break it."))
+        releaseall
+        end
+    }
+    if (var(VAR_RESULT) == ICHOR_RELIC_FORBIDDEN) {
+        goto(EventScript_IchorForbidden)
+    }
+    specialvar(VAR_RESULT, Ichor_RelicPromptsAuto)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("{PLAYER} broke the rubble with the Bronze Hammer."))
+    } else {
+        msgbox(format("Marble rubble from a toppled tomb.\pBreak it with the Bronze Hammer?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            closemessage
+            releaseall
+            end
+        }
+    }
+    closemessage
+    setvar(VAR_0x8004, ITEM_BRONZE_HAMMER)
+    call(EventScript_IchorRelicPose)
+    playse(SE_M_ROCK_THROW)
+    applymovement(VAR_LAST_TALKED, Route4_Isthmus_Movement_Smash)
+    waitmovement(0)
+    removeobject(VAR_LAST_TALKED)
+    switch (var(VAR_LAST_TALKED)) {
+        case LOCALID_ROUTE4_HEAP_1: call(Route4_Isthmus_EventScript_HeapCell1)
+        case LOCALID_ROUTE4_HEAP_2: call(Route4_Isthmus_EventScript_HeapCell2)
+        case LOCALID_ROUTE4_HEAP_3: call(Route4_Isthmus_EventScript_HeapCell3)
+    }
+    special(DrawWholeMapView)
+    if (flag(FLAG_ICHOR_HIDE_ROCKSLIDE_1) && flag(FLAG_ICHOR_HIDE_ROCKSLIDE_2) && flag(FLAG_ICHOR_HIDE_ROCKSLIDE_3)) {
+        goto(Route4_Isthmus_EventScript_RoadClear)
+    }
+    releaseall
+}
+
+movement Route4_Isthmus_Movement_Smash { rock_smash_break }
+
+// The third heap: the scroll under it, the road open, the procession's thanks.
+script Route4_Isthmus_EventScript_RoadClear {
+    msgbox(format("Something lies in the chips where the last block stood. A scroll!"))
+    finditem(ITEM_TM39)
+    setflag(FLAG_ICHOR_ITEM_ROUTE4_TM_ROCK_TOMB)
+    call(Route4_Isthmus_EventScript_ClearSlide)
+    special(DrawWholeMapView)
+    playse(SE_M_STRENGTH)
+    msgbox(format("The road is clear!"))
+    setspeaker(Route4_Isthmus_Text_NameInitiates)
+    msgbox(format("Iakch', o Iakche! Iakch', o Iakche!"))
+    closemessage
+    // Eudemos comes up to the road
+    applymovement(LOCALID_ROUTE4_EUDEMOS, Route4_Isthmus_Movement_EudemosToRoad)
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(Route4_Isthmus_Text_NameEudemos)
+    msgbox(format("The road is open! Herald, take these. Barley cakes, for the goddess."))
+    giveitem(ITEM_BARLEY_CAKE, 2)
+    setflag(FLAG_ICHOR_GOT_PROCESSION_BARLEY)
+    setspeaker(Route4_Isthmus_Text_NameEudemos)
+    msgbox(format("She'll know who cleared her road."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(Route4_Isthmus_Text_NameAlethea)
+    msgbox(format("We'll follow at procession speed. Which is very slow. On purpose.\p"
+                  "The road goes under the mountain from here. Through Hecate's Hollow.\p"
+                  "The procession lights it with torches. You haven't got a torch.\p"
+                  "…You're going anyway. Of course you are. Go on, then."))
+    closemessage
+    setflag(FLAG_ICHOR_ROCKSLIDE_CLEARED)
+    releaseall
+}
+
+// From his place by the tents (50,12) up to the road under the player.
+movement Route4_Isthmus_Movement_EudemosToRoad { walk_up * 2 walk_right * 3 face_up }
+
+// ---------------------------------------------------------------------------
+// The procession's camp
+// ---------------------------------------------------------------------------
+
+script Route4_Isthmus_EventScript_Alethea {
+    if (!flag(FLAG_ICHOR_SAW_ROCKSLIDE)) {
+        goto(Route4_Isthmus_EventScript_RockslideScene)
+    }
+    lock
+    faceplayer
+    setspeaker(Route4_Isthmus_Text_NameAlethea)
+    if (flag(FLAG_ICHOR_ROCKSLIDE_CLEARED)) {
+        msgbox(format("We'll follow at procession speed. Which is very slow. On purpose."))
+    } else {
+        msgbox(format("The procession's stuck. So am I. Truthfully, I'm enjoying the sit."))
+    }
+    release
+}
+
+script Route4_Isthmus_EventScript_Eudemos {
+    lock
+    faceplayer
+    setspeaker(Route4_Isthmus_Text_NameEudemos)
+    if (flag(FLAG_ICHOR_ROCKSLIDE_CLEARED)) {
+        msgbox(format("She'll know who cleared her road."))
+    } else {
+        msgbox(format("Every year since there was a year, the procession walks to Eleusa.\p"
+                      "This year, a mountain sat down in the road."))
+    }
+    release
+}
+
+script Route4_Isthmus_EventScript_Healer {
+    lock
+    faceplayer
+    setspeaker(Route4_Isthmus_Text_NameHealer)
+    msgbox(format("A doctor walks with every procession. Hold still."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(Route4_Isthmus_Text_NameHealer)
+    msgbox(format("There. Walk slowly. We all do, this week."))
+    release
+}
+
+script Route4_Isthmus_EventScript_InitiateWait {
+    lock
+    faceplayer
+    setspeaker(Route4_Isthmus_Text_NameInitiate)
+    msgbox(format("I've waited my whole life to see the Mysteries.\p"
+                  "I can wait a bit longer. Behind a rock. In the sun."))
+    release
+}
+
+script Route4_Isthmus_EventScript_InitiateDonkey {
+    lock
+    faceplayer
+    setspeaker(Route4_Isthmus_Text_NameInitiate)
+    msgbox(format("We carry myrtle and walk all the way. You're not supposed to ride.\p"
+                  "The donkey rides. Well. The donkey carries. The donkey has it easy."))
+    release
+}
+
+script Route4_Isthmus_EventScript_InitiateSecret {
+    lock
+    faceplayer
+    setspeaker(Route4_Isthmus_Text_NameInitiate)
+    msgbox(format("Afterward, you're not allowed to tell anyone what you saw.\p"
+                  "I've already practiced not telling. I'm very good at it."))
+    release
+}
+
+script Route4_Isthmus_EventScript_Donkey {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ONOTIS, CRY_MODE_NORMAL)
+    msgbox(format("The procession's donkey. It carries the sacred baskets, and doesn't ask."))
+    waitmoncry
+    release
+}
+
+// ---------------------------------------------------------------------------
+// People along the road
+// ---------------------------------------------------------------------------
+
+script Route4_Isthmus_EventScript_KilnWorker {
+    lock
+    faceplayer
+    setspeaker(Route4_Isthmus_Text_NameKilnWorker)
+    msgbox(format("Clay from the river. Fire from the kiln. Black from the smoke.\p"
+                  "We close the vents at the end, see.\p"
+                  "Starve the fire. That's what makes the black."))
+    release
+}
+
+script Route4_Isthmus_EventScript_Mourner {
+    lock
+    faceplayer
+    setspeaker(Route4_Isthmus_Text_NameMourner)
+    msgbox(format("My grandmother's stone. See her? Holding my mother's hand.\p"
+                  "The carver gave them the same face.\p"
+                  "He said families look alike, in the end."))
+    release
+}
+
+script Route4_Isthmus_EventScript_Goat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_KERAZAP, CRY_MODE_NORMAL)
+    msgbox(format("The goat's wool crackles. It chews at you, unimpressed."))
+    waitmoncry
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Trainers (SCRIPT.md Part 3, "Route 2 trainers")
+// ---------------------------------------------------------------------------
+
+script Route4_Isthmus_EventScript_Exekias {
+    trainerbattle_single(TRAINER_ICHOR_EXEKIAS,
+        format("Every pot I paint, somebody breaks. Let's see what you break."),
+        format("Cracked. It'll still hold water. Mostly."))
+    setspeaker(Route4_Isthmus_Text_NameExekias)
+    msgbox(format("I painted two heroes playing knucklebones once. They're still playing.\p"
+                  "It's a very long game."), MSGBOX_AUTOCLOSE)
+}
+
+script Route4_Isthmus_EventScript_Myrrhine {
+    trainerbattle_single(TRAINER_ICHOR_MYRRHINE,
+        format("I'm going to the Mysteries! I can't tell you a thing. I don't know yet!"),
+        format("Oh! That was a mystery too."))
+    setspeaker(Route4_Isthmus_Text_NameMyrrhine)
+    msgbox(format("My donkey carries all my things. He'll carry the Mysteries, too.\p"
+                  "And never know what they were. There's a saying about that."), MSGBOX_AUTOCLOSE)
+}
+
+// The herm's Titanborn guard. After the battle he runs off, and the herm is free.
+script Route4_Isthmus_EventScript_Laas {
+    trainerbattle_single(TRAINER_ICHOR_GRUNT_ROUTE4_LAAS,
+        format("This herm's ours now. See the sickle? I did that. It took ages."),
+        format("Fine! Pray at it! See if that ugly stone face cares!"),
+        Route4_Isthmus_EventScript_LaasRunsOff)
+    goto(Route4_Isthmus_EventScript_LaasRunsOff)
+}
+
+script Route4_Isthmus_EventScript_LaasRunsOff {
+    lockall
+    getplayerxy(VAR_0x8004, VAR_0x8005)
+    if (var(VAR_0x8005) == 9) {
+        applymovement(LOCALID_ROUTE4_LAAS, Route4_Isthmus_Movement_LaasRunsRight)
+    } else {
+        applymovement(LOCALID_ROUTE4_LAAS, Route4_Isthmus_Movement_LaasRunsDown)
+    }
+    waitmovement(0)
+    removeobject(LOCALID_ROUTE4_LAAS)
+    setflag(FLAG_ICHOR_HIDE_GRUNT_LAAS)
+    releaseall
+}
+
+movement Route4_Isthmus_Movement_LaasRunsDown { walk_fast_down walk_fast_right * 3 walk_fast_down * 3 }
+movement Route4_Isthmus_Movement_LaasRunsRight { walk_fast_right * 3 walk_fast_down * 4 }
+
+script Route4_Isthmus_EventScript_Menalkas {
+    trainerbattle_single(TRAINER_ICHOR_MENALKAS,
+        format("My goats give milk, sparks and opinions."),
+        format("Shocking. Truly."))
+    setspeaker(Route4_Isthmus_Text_NameMenalkas)
+    msgbox(format("Titans went up my goat path four days back. My goats are still offended."), MSGBOX_AUTOCLOSE)
+}
+
+script Route4_Isthmus_EventScript_Pheidippos {
+    trainerbattle_single(TRAINER_ICHOR_PHEIDIPPOS,
+        format("A message for Eleusa! No time! …There's always time for a battle."),
+        format("Beaten, and still not delivered."))
+    setspeaker(Route4_Isthmus_Text_NamePheidippos)
+    if (flag(FLAG_ICHOR_ROCKSLIDE_CLEARED)) {
+        msgbox(format("The road's open? Then I'm late. Very, very late."), MSGBOX_AUTOCLOSE)
+    } else {
+        msgbox(format("There's a rockslide ahead. I'm a runner, not a climber.\p"
+                      "I'm just going to stand here. Fast."), MSGBOX_AUTOCLOSE)
+    }
+}
+
+script Route4_Isthmus_EventScript_Kapelos {
+    trainerbattle_single(TRAINER_ICHOR_KAPELOS,
+        format("Stuck behind a mountain with a thousand pilgrims. Battle? It's free."),
+        format("Free and losing. Story of my week."))
+    setspeaker(Route4_Isthmus_Text_NameKapelos)
+    msgbox(format("I sell myrtle crowns. Initiates wear them one night. Wonderful business."), MSGBOX_AUTOCLOSE)
+}
+
+// ---------------------------------------------------------------------------
+// The great herm, its desecrated altar, and the signs
+// ---------------------------------------------------------------------------
+
+// The great herm (HERM_AETHOS_ROUTE_4). Laas scratched a sickle into its face: beat
+// him, then pray to cleanse it (desecrated altar 0, Hermes, +3 Favor). Cleansed, it
+// takes oil like any great herm (EventScript_IchorAnointHerm) and keeps its altar.
+script Route4_Isthmus_EventScript_GreatHerm {
+    lockall
+    if (!flag(FLAG_ICHOR_HIDE_GRUNT_LAAS)) {
+        msgbox(format("A great herm, hung with old garlands.\pSomeone has scratched a sickle into its face."))
+        releaseall
+        end
+    }
+    setvar(VAR_0x8004, ICHOR_GOD_HERMES)
+    setvar(VAR_0x8005, 0)
+    specialvar(VAR_RESULT, Ichor_CheckAltarCleansed)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_IchorDesecratedAltar)
+    }
+    call(EventScript_IchorAnointHerm)
+    setvar(VAR_0x8004, ICHOR_GOD_HERMES)
+    setvar(VAR_0x8005, 0)
+    goto(EventScript_IchorDesecratedAltar)
+}
+
+script Route4_Isthmus_EventScript_SouthSign {
+    msgbox(format("ROUTE 4 · THE ISTHMUS ROAD\p"
+                  "South: Emporion City. East: the pass, and Eleusa beyond it."), MSGBOX_SIGN)
+}
+
+script Route4_Isthmus_EventScript_TombsSign {
+    msgbox(format("Walk softly. Everyone here was somebody's."), MSGBOX_SIGN)
+}
+
+script Route4_Isthmus_EventScript_ForkSign {
+    msgbox(format("North: the hill paths. East: the pass and Hecate's Hollow."), MSGBOX_SIGN)
+}
+
+script Route4_Isthmus_EventScript_HollowSign {
+    msgbox(format("HECATE'S HOLLOW. The road goes under the mountain."), MSGBOX_SIGN)
+}
+
+script Route4_Isthmus_EventScript_KalliasPanel {
+    msgbox(format("Cut in the stone: THE HOUSE OF KALLIAS.\p"
+                  "Seven names below it, and room left for the next."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_DIG: two daily dig spots (by the kilns, on the spur; SCRIPT.md Part 6's
+// Arachne amphora) and the family tomb's fixed find. Turned earth only, for now.
+script Route4_Isthmus_EventScript_DigSpot {
+    msgbox(format("Turned earth, with a glint of pottery in it."), MSGBOX_SIGN)
+}
+
+// --- Generated by tools/ichor/maps/route4.py from the layout. Do not edit. ---
+
+// heap 1 broken: the road under it, white with marble chips
+script Route4_Isthmus_EventScript_HeapCell1 {
+    setmetatile(52, 9, 0x367, FALSE)
+    return
+}
+
+// heap 2 broken: the road under it, white with marble chips
+script Route4_Isthmus_EventScript_HeapCell2 {
+    setmetatile(53, 9, 0x367, FALSE)
+    return
+}
+
+// heap 3 broken: the road under it, white with marble chips
+script Route4_Isthmus_EventScript_HeapCell3 {
+    setmetatile(54, 9, 0x367, FALSE)
+    return
+}
+
+// FLAG_ICHOR_ROCKSLIDE_CLEARED: the whole slide gone from the road
+script Route4_Isthmus_EventScript_ClearSlide {
+    setmetatile(52, 7, 0x29C, TRUE)
+    setmetatile(53, 7, 0x29C, TRUE)
+    setmetatile(54, 7, 0x29D, TRUE)
+    setmetatile(55, 7, 0x29C, TRUE)
+    setmetatile(51, 8, 0x203, FALSE)
+    setmetatile(52, 8, 0x203, FALSE)
+    setmetatile(53, 8, 0x203, FALSE)
+    setmetatile(54, 8, 0x203, FALSE)
+    setmetatile(55, 8, 0x203, FALSE)
+    setmetatile(52, 9, 0x367, FALSE)
+    setmetatile(53, 9, 0x367, FALSE)
+    setmetatile(54, 9, 0x367, FALSE)
+    setmetatile(51, 10, 0x204, FALSE)
+    setmetatile(52, 10, 0x204, FALSE)
+    setmetatile(53, 10, 0x204, FALSE)
+    setmetatile(54, 10, 0x204, FALSE)
+    setmetatile(55, 10, 0x204, FALSE)
+    setmetatile(52, 11, 0x004, FALSE)
+    setmetatile(53, 11, 0x001, FALSE)
+    setmetatile(54, 11, 0x001, FALSE)
+    setmetatile(55, 11, 0x001, FALSE)
+    return
+}
+
+// FLAG_ICHOR_HIDE_PROCESSION_ROUTE4: the camp struck, the ground trampled
+script Route4_Isthmus_EventScript_StrikeCamp {
+    setmetatile(47, 12, 0x31B, FALSE)
+    setmetatile(48, 12, 0x31B, FALSE)
+    setmetatile(51, 12, 0x31B, FALSE)
+    setmetatile(52, 12, 0x31B, FALSE)
+    setmetatile(54, 12, 0x31B, FALSE)
+    setmetatile(55, 12, 0x31B, FALSE)
+    setmetatile(44, 13, 0x31A, FALSE)
+    setmetatile(47, 13, 0x31B, FALSE)
+    setmetatile(48, 13, 0x31B, FALSE)
+    setmetatile(49, 13, 0x31B, FALSE)
+    setmetatile(51, 13, 0x31B, FALSE)
+    setmetatile(52, 13, 0x243, FALSE)
+    setmetatile(54, 13, 0x31B, FALSE)
+    setmetatile(55, 13, 0x31B, FALSE)
+    setmetatile(44, 14, 0x31B, FALSE)
+    setmetatile(45, 14, 0x31B, FALSE)
+    setmetatile(54, 14, 0x243, FALSE)
+    setmetatile(55, 14, 0x001, FALSE)
+    setmetatile(56, 14, 0x31B, FALSE)
+    setmetatile(44, 15, 0x31B, FALSE)
+    setmetatile(45, 15, 0x31B, FALSE)
+    setmetatile(47, 15, 0x243, FALSE)
+    setmetatile(48, 15, 0x31B, FALSE)
+    setmetatile(49, 15, 0x243, FALSE)
+    setmetatile(50, 15, 0x31B, FALSE)
+    setmetatile(51, 15, 0x31B, FALSE)
+    setmetatile(54, 15, 0x001, FALSE)
+    setmetatile(55, 15, 0x31B, FALSE)
+    setmetatile(56, 15, 0x001, FALSE)
+    setmetatile(44, 16, 0x001, FALSE)
+    setmetatile(45, 16, 0x31B, FALSE)
+    setmetatile(46, 16, 0x001, FALSE)
+    setmetatile(48, 16, 0x001, FALSE)
+    setmetatile(50, 16, 0x001, FALSE)
+    setmetatile(52, 16, 0x243, FALSE)
+    return
+}
+
+// --- End of the generated block. ---

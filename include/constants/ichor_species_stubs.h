@@ -68,6 +68,8 @@
 #define SPECIES_RHOARIL     SPECIES_BOUNSWEET    // Grass, Persephone's pomegranate
 // Emporion (batch 2)
 #define SPECIES_PANACOIL    SPECIES_ARBOK        // Poison/Fairy, the healer serpent coiled in every Asclepeion
+// Route 4 (batch 3)
+#define SPECIES_OBOLORN     SPECIES_SHUPPET      // Ghost, the unburied shade among the roadside tombs at night
 
 #endif // ICHOR_AETHOS_DEX
 

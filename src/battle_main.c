@@ -428,6 +428,10 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SCHOLAR] = { _("SCHOLAR"), 8 },
     [TRAINER_CLASS_MERCHANT] = { _("MERCHANT"), 20 },
     [TRAINER_CLASS_PILGRIM] = { _("PILGRIM"), 3 },
+    // Ichor: Route 4 (SCRIPT.md Part 3). Potters sell; runners carry; initiates give.
+    [TRAINER_CLASS_POTTER] = { _("POTTER"), 6 },
+    [TRAINER_CLASS_RUNNER] = { _("RUNNER"), 5 },
+    [TRAINER_CLASS_INITIATE] = { _("INITIATE"), 3 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =

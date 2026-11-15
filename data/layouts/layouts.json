@@ -803,6 +803,17 @@
       "border_filepath": "data/layouts/EleusaSanctum_B3F/border.bin",
       "blockdata_filepath": "data/layouts/EleusaSanctum_B3F/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE4_ISTHMUS",
+      "name": "Route4_Isthmus_Layout",
+      "width": 60,
+      "height": 32,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Skiron",
+      "border_filepath": "data/layouts/Route4_Isthmus/border.bin",
+      "blockdata_filepath": "data/layouts/Route4_Isthmus/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

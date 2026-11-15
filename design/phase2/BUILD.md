@@ -98,6 +98,24 @@ The user's standard for every route (director, 2026-11-14): "Thoughtfully. Engag
 
 **From SCRIPT.md** (by its old route names): Route 4 takes "Route 2, the Sacred Way" and beat 17 (the rockslide, the procession); the Hollow takes "Hecate's Hollow", beat 18 and Part 5's Three Roads; Route 5 takes "Route 3, the Pine Slopes" and beat 19's road (the rock seat over Salamis, Aphrodite's niches, the pines, a roadside rest house in Thria's place). Their trainers and encounter tables are in Parts 3 and 4 under those names; Thria, the Rheitoi and the jesters' bridge are world-act2's.
 
+### Route 4, the Isthmus road (built)
+
+`tools/ichor/maps/route4.py` (60×32, aethos + skiron, one map: the Diolkos stays with Emporion's harbor); passes and renders in `design/phase2/MAPS_route4.md`; check `tools/ichor/tests/route4.sh`.
+
+| From | To | How |
+|---|---|---|
+| `MAP_ROUTE4_ISTHMUS` south edge | `MAP_EMPORION_CITY` north edge (the Isthmus Gate) | map connection, offset **0** both ways (`down` from Route 4, `up` from the city). The road is open at x = 7..9 on both seams and nowhere else; Route 4's rows 26–31 are aethos only. Kleon's beat-16 run up to Route 4's (8, 29..31) stays clear. |
+| `MAP_ROUTE4_ISTHMUS` warp **0**, the Hollow's mouth at **(57, 7)** (a cave door in the cut bank, entered from (57, 8)) | `MAP_HECATES_HOLLOW` warp **0** | The Hollow's east mouth warp 0 should lead back to Route 4's warp 0. Until `MAP_HECATES_HOLLOW` is registered the mouth warps back onto itself (`ICHOR_STUB_HOLLOW`); rerun `route4.py` after the Hollow lands and it points into the Hollow. |
+| the great herm (23, 7), `HERM_AETHOS_ROUTE_4` | landing (23, 8) | `HEAL_LOCATION_HERM_AETHOS_ROUTE_4`, row in `src/data/ichor_herms.h` |
+
+**Desecrated altar index 0** (`FLAG_ICHOR_ALTARS_START + 0`) is Route 4's great herm (Hermes): Laas guards it, a prayer cleanses it, then it takes oil. The next desecrated altar should take index 1.
+
+**Trainers 80–85:** `TRAINER_ICHOR_EXEKIAS` (80, mandatory), `_MYRRHINE` (81, mandatory), `_GRUNT_ROUTE4_LAAS` (82, the herm's guard), `_MENALKAS` (83, optional), `_PHEIDIPPOS` (84, mandatory), `_KAPELOS` (85, optional); `TRAINERS_END_ACT1` 86. New classes `TRAINER_CLASS_POTTER`, `_RUNNER`, `_INITIATE` (appended after PILGRIM), on vanilla portraits until drawn (`ICHOR_STUB_SPRITE`).
+
+**Flags.** Bank 0x000–0x00F: `FLAG_ICHOR_SAW_ROCKSLIDE`, `_ROCKSLIDE_CLEARED`, `_GOT_PROCESSION_BARLEY`, `_HIDE_ROCKSLIDE_1`–`_3`, `_HIDE_PROCESSION_ROUTE4` (SCRIPT.md's `_ROUTE2`; Alethea leaves with the camp), `_HIDE_GRUNT_LAAS`, `_HIDE_THICKET_ROUTE4`, `_ITEM_ROUTE4_POTION`, `_REPEL`, `_SUPER_POTION`, `_TM_ROCK_TOMB`, `_REVIVE`, `_SUN_STONE`, `_GREAT_BALL`. Vanilla 0x2A3–0x2A6: `FLAG_ICHOR_HIDDEN_ROUTE4_ETHER`, `_ORAN_BERRY`, `_STARDUST`, `_HARD_STONE`. The woods clearing's rubble uses `FLAG_TEMP_11`, as vanilla's breakable rocks do.
+
+**Wild:** `gRoute4Isthmus_Morning` (dawn and dusk: evening falls back to it), `_Day`, `_Night` land tables at 16–19 and a rock-smash table (`tools/ichor/maps/route4_encounters.py`). Gelasable (evolves at 20) and Cairnolith (at 25) left SCRIPT.md's night table for Galekit and Pebblith; Obolorn is 1% at night (`SPECIES_OBOLORN` stands in as Shuppet).
+
 **Engine APIs now on main** (`design/ENGINE_API.md`): relics by `giveitem` (`ITEM_HECATES_TORCH`); obstacles (`OBJ_EVENT_GFX_BREAKABLE_ROCK` + `EventScript_RockSmash` for marble rubble, needing the Bronze Hammer); darkness (`"cave": true`), braziers (`EventScript_IchorBrazier`, this session's block `FLAG_ICHOR_BRAZIERS_START + 0x14`–`0x1F`) and lit zones; altars (`EventScript_IchorAltar_<God>`, `EventScript_IchorDesecratedAltar`); great herms (`EventScript_IchorGreatHerm`, `HERM_AETHOS_ROUTE_4` / `_5`, with a table row in `src/data/ichor_herms.h` and a heal location each). Use them, not stubs, unless the API isn't built yet.
 
 ## Warps, connections and seams (batch 1)
