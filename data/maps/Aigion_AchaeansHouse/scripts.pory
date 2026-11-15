@@ -1,1 +1,59 @@
+// The old Achaean's house, Aigion (SCRIPT.md Part 2, Aigion interiors).
+// Room: tools/ichor/maps/westrooms.py. Tisamenos (6,2) stands reciting to his frieze of
+// numbered black ships. Show him a sea bird, a Halcyling or a Galenyon, and he gives
+// Pretty Feather x2 (Artemis's offering, ahead of Arkadia's temple):
+// FLAG_ICHOR_TISAMENOS_BIRD.
+// ICHOR_STUB_AETHOS_DEX: Halcyling and Galenyon are stand-in species until the dex lands.
+
 mapscripts Aigion_AchaeansHouse_MapScripts {}
+
+text Aigion_AchaeansHouse_Name_Tisamenos { "TISAMENOS" }
+
+script Aigion_AchaeansHouse_EventScript_Tisamenos {
+    lock
+    faceplayer
+    setspeaker(Aigion_AchaeansHouse_Name_Tisamenos)
+    if (flag(FLAG_ICHOR_TISAMENOS_BIRD)) {
+        msgbox(format("Ship four hundred and seven. A Lokrian ship. Small. Smelled of fish."))
+        release
+        end
+    }
+    msgbox(format("Twelve hundred ships went to Troy. I know them all. Want to hear?\p"
+                  "No? Nobody does. The Boeotians had fifty. I'll skip the Boeotians.\p"
+                  "Every ship had a bird on its prow, painted. For luck at sea.\p"
+                  "Show me a real one. A sea bird. Something that rides the waves."))
+    checkspecies(SPECIES_HALCYLING)
+    if (var(VAR_RESULT) == FALSE) {
+        checkspecies(SPECIES_GALENYON)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        release
+        end
+    }
+    msgbox(format("Ha! There. That's the bird off ship four hundred and six.\p"
+                  "Take these. Feathers, from the grove. The huntress in Arkadia likes them."))
+    giveitem(ITEM_PRETTY_FEATHER, 2)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_TISAMENOS_BIRD)
+    }
+    release
+}
+
+script Aigion_AchaeansHouse_EventScript_Frieze {
+    msgbox(format("Black ships, every one numbered over its prow. Four hundred and one, four hundred and two…\p"
+                  "He has painted as far as four hundred and seven. The wall ran out first."), MSGBOX_SIGN)
+}
+
+script Aigion_AchaeansHouse_EventScript_Model {
+    msgbox(format("A model trireme on its stand. Every oar is carved on its own. There are a hundred and seventy."),
+           MSGBOX_SIGN)
+}
+
+script Aigion_AchaeansHouse_EventScript_Tablets {
+    msgbox(format("A chest of wax tablets: the Catalogue of Ships, ship by ship, in his hand. The Boeotians fill four."),
+           MSGBOX_SIGN)
+}
+
+script Aigion_AchaeansHouse_EventScript_Chair {
+    msgbox(format("His chair, turned to face the ships. The cushion has worn to his shape."), MSGBOX_SIGN)
+}

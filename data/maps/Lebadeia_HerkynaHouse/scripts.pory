@@ -1,1 +1,105 @@
-mapscripts Lebadeia_HerkynaHouse_MapScripts {}
+// Herkyna's house, by the river (SCRIPT.md Part 2, Lebadeia interiors).
+// Room: tools/ichor/maps/westrooms.py. A round river house with the mill-race through
+// it; one plank crosses it at (4,6). Herkyna (7,8) stands by the empty goose pen, her
+// grandmother (7,3) spins by the hearth.
+//
+// The quest: Herkyna's Halcyling, "Goose", followed the river into Trophonios's cave.
+// The trophonios agent's B1F object sends it home and sets the shared
+// FLAG_ICHOR_FOUND_HERKYNAS_GOOSE; from then on Goose (9,9) sits in the pen (shown by
+// clearing FLAG_TEMP_1, its hide flag, on entry) and Herkyna gives the Mystic Water once
+// (FLAG_ICHOR_GOT_MYSTIC_WATER_HERKYNA; Act I's FLAG_ICHOR_GOT_MYSTIC_WATER is another
+// gift).
+// ICHOR_STUB_AETHOS_DEX: Halcyling is a stand-in species until the dex lands.
+
+mapscripts Lebadeia_HerkynaHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_FOUND_HERKYNAS_GOOSE)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Lebadeia_HerkynaHouse_Name_Herkyna { "HERKYNA" }
+text Lebadeia_HerkynaHouse_Name_Grandmother { "GRANDMOTHER" }
+text Lebadeia_HerkynaHouse_Name_Goose { "GOOSE" }
+
+script Lebadeia_HerkynaHouse_EventScript_Herkyna {
+    lock
+    faceplayer
+    setspeaker(Lebadeia_HerkynaHouse_Name_Herkyna)
+    if (flag(FLAG_ICHOR_GOT_MYSTIC_WATER_HERKYNA)) {
+        msgbox(format("Goose sleeps in the pen now. With one eye open. In case of caves."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_FOUND_HERKYNAS_GOOSE)) {
+        msgbox(format("GOOSE! You came back up! Everyone comes back up!\p"
+                      "The nymph in the story got a river for her goose.\p"
+                      "I can't give you a river.\p"
+                      "Here. It's water from right where the river comes out. Magic, probably."))
+        giveitem(ITEM_MYSTIC_WATER)
+        if (var(VAR_RESULT) == FALSE) {
+            release
+            end
+        }
+        setflag(FLAG_ICHOR_GOT_MYSTIC_WATER_HERKYNA)
+        setspeaker(Lebadeia_HerkynaHouse_Name_Grandmother)
+        msgbox(format("Persephone found the goose, in the story. Under a stone.\p"
+                      "Persephone's good at coming back up, too. Ask anyone in Eleusa."))
+        release
+        end
+    }
+    msgbox(format("My goose went into the cave! Through the grille! It's not allowed!\p"
+                  "It's a Halcyling. But its name's Goose. Because of the story.\p"
+                  "The river goes under the hill, and Goose goes where the river goes."))
+    release
+}
+
+script Lebadeia_HerkynaHouse_EventScript_Grandmother {
+    lock
+    faceplayer
+    setspeaker(Lebadeia_HerkynaHouse_Name_Grandmother)
+    if (flag(FLAG_ICHOR_FOUND_HERKYNAS_GOOSE)) {
+        msgbox(format("Persephone found the goose, in the story. Under a stone.\p"
+                      "Persephone's good at coming back up, too. Ask anyone in Eleusa."))
+        release
+        end
+    }
+    msgbox(format("The priests won't let a child down there. Quite right.\p"
+                  "But you look like you're going down anyway. Everyone does."))
+    release
+}
+
+script Lebadeia_HerkynaHouse_EventScript_Goose {
+    lock
+    faceplayer
+    playmoncry(SPECIES_HALCYLING, CRY_MODE_NORMAL)
+    setspeaker(Lebadeia_HerkynaHouse_Name_Goose)
+    msgbox(format("Kweee!"))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("It shakes river water all over the reed mats. It looks very pleased with itself."))
+    release
+}
+
+script Lebadeia_HerkynaHouse_EventScript_Figure {
+    msgbox(format("A clay girl holding a clay goose: the river-nymph Herkyna, as a child would make her. Mostly goose."),
+           MSGBOX_SIGN)
+}
+
+script Lebadeia_HerkynaHouse_EventScript_Race {
+    msgbox(format("The mill-race runs right through the house, cold and quick, on its way to the mill."),
+           MSGBOX_SIGN)
+}
+
+script Lebadeia_HerkynaHouse_EventScript_Pen {
+    if (flag(FLAG_ICHOR_FOUND_HERKYNAS_GOOSE)) {
+        msgbox(format("Goose's pen. Goose is in it, sitting in the straw as if it never left."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("A goose pen of woven willow. Clean straw, and a water dish, still full."), MSGBOX_SIGN)
+    }
+}
+
+script Lebadeia_HerkynaHouse_EventScript_Hearth {
+    msgbox(format("A low fire, and a pot of lentils keeping warm for whoever comes back up."), MSGBOX_SIGN)
+}
