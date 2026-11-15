@@ -552,6 +552,57 @@ def garland():
     return finish(s)
 
 
+def statue():
+    s = struct("statue", "The god in bronze", 1, 2, walk=["T", "X"], ground="pave", section="civic",
+               notes="Dionysus in bronze on a marble plinth in the Agora square: young, ivy-crowned, "
+                     "a thyrsus (a fennel staff tipped with a pinecone) in his raised hand. The "
+                     "top cell draws over the player; give the bottom cell a bg event.")
+    Tl, M = s.T, s.M
+    BR = {"k": "ink", "b": "br", "g": "g0", "G": "g1", "m": "m3"}
+    # the upper body, the head and the thyrsus (top cell)
+    Tl.blit([
+        "           G    ",
+        "          GgG   ",
+        "           g    ",
+        "     kkk   b    ",
+        "    kGgGk  b    ",
+        "    kgbgk  b    ",
+        "     kbk   b    ",
+        "    kkbbkkkb    ",
+        "   kbgbbbbgk    ",
+        "   kbgbbbbk     ",
+        "   kb kbbbk     ",
+        "   kk kbgbk     ",
+        "      kbgbk     ",
+        "      kbbbk     ",
+        "      kbgbk     ",
+        "      kbbbk     ",
+    ], BR, 0, 0)
+    # the ivy crown: two greens are not in the marble group, so the crown is gold
+    Tl.px(4, 4, "g1")
+    Tl.px(8, 4, "g1")
+    # the legs and the plinth (bottom cell)
+    M.blit([
+        "      kbgbk     ",
+        "      kb kbk    ",
+        "      kb  kbk   ",
+        "     kbk  kbk   ",
+        "     kkk  kkk   ",
+        "  kkkkkkkkkkkk  ",
+        "  k1111111111k  ",
+        "  k2222222222k  ",
+        "  kkkkkkkkkkkk  ",
+        "   k33333333k   ",
+        "   k33333333k   ",
+        "   k34433443k   ",
+        "   k33333333k   ",
+        "  kkkkkkkkkkkk  ",
+        "  k4444444444k  ",
+        "  kkkkkkkkkkkk  ",
+    ], {"k": "ink", "b": "br", "g": "g0", "1": "w0", "2": "m2", "3": "m1", "4": "m3"}, 0, 16)
+    return finish(s)
+
+
 def build_houses():
     roof = roof_kit()
     up, ex, lo = upper_storey(), upper_extras(), ground_storey()
@@ -562,4 +613,4 @@ def build_houses():
 
 
 def build_market():
-    return [agora()] + stalls() + [garland()]
+    return [agora()] + stalls() + [garland(), statue()]

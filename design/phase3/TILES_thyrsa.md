@@ -57,7 +57,7 @@ strips; the hillside outside them is aethos.
 | vine | The vineyards: vines, grapes, trellises, tilled earth; the fig |
 | wood | The press, jars, barrels and stalls: timber, warm limestone, terracotta |
 
-**Tile budget.** 490 of 504 tiles are used. The door animations copy their frames into
+**Tile budget.** 497 of 504 tiles are used. The door animations copy their frames into
 tiles 504-511, so the build fails past 504. Symmetric fronts are mirrored about a tile
 edge, the walls and flags repeat on the 16 or 32 px grid, ivy is an overlay on the wall's
 own tiles, the limewashed houses are free recolors, and tiles within two pixels of
@@ -462,21 +462,33 @@ Ground: all on the street flags.
 
 Parts: `post_W` 0x350, `swag` 0x351, `post_E` 0x352.
 
+### The god in bronze
+
+`statue`, 1 wide by 2 tall. Dionysus in bronze on a marble plinth in the Agora square: young, ivy-crowned, a thyrsus (a fennel staff tipped with a pinecone) in his raised hand. The top cell draws over the player; give the bottom cell a bg event.
+
+```text
+ids     walk
+0x353   T
+0x35B   X
+```
+
+Ground: all on the street flags.
+
 ### Temple of Dionysus, the skene front
 
 `temple`, 8 wide by 4 tall. The crown of Thyrsa, at the head of the main street on the Kadmeia: a temple whose front is a theater's skene. A low pediment with the god's masks, comic and tragic, in gold on wine-red; a frieze of golden vines on red; and three painted doors between grey columns: the comic door (ivy), the palace door (a gold crown on purple, double, the real door) and the satyr door (a goat). Doors: bottom row, columns 3-4 (MB_NON_ANIMATED_DOOR); give both the temple's warp. Lay the broad steps below it, eight cells wide.
 
 ```text
 ids                                               walk
-0x358 0x359 0x35A 0x35B 0x35C 0x35D 0x35E 0x35F   X X X X X X X X
 0x360 0x361 0x362 0x363 0x364 0x365 0x366 0x367   X X X X X X X X
 0x368 0x369 0x36A 0x36B 0x36C 0x36D 0x36E 0x36F   X X X X X X X X
-0x370 0x371 0x372 0x373 0x374 0x375 0x376 0x377   X X X D D X X X
+0x370 0x371 0x372 0x373 0x374 0x375 0x376 0x377   X X X X X X X X
+0x378 0x379 0x37A 0x37B 0x37C 0x37D 0x37E 0x37F   X X X D D X X X
 ```
 
-Door metatiles: 0x373, 0x374.
+Door metatiles: 0x37B, 0x37C.
 
-Parts: `door` 0x373, `door_r` 0x374.
+Parts: `door` 0x37B, `door_r` 0x37C.
 
 ### Thyrsa's Asclepeion
 
@@ -484,17 +496,17 @@ Parts: `door` 0x373, `door_r` 0x374.
 
 ```text
 ids                             walk
-0x378 0x379 0x37A 0x37B 0x37C   X X X X X
 0x380 0x381 0x382 0x383 0x384   X X X X X
 0x388 0x389 0x38A 0x38B 0x38C   X X X X X
-0x390 0x391 0x392 0x393 0x394   X X D X X
+0x390 0x391 0x392 0x393 0x394   X X X X X
+0x398 0x399 0x39A 0x39B 0x39C   X X D X X
 ```
 
 Ground: the street flags at (0,0), (1,0), (2,0), (3,0), (4,0); the rest draws its own.
 
-Door metatiles: 0x392.
+Door metatiles: 0x39A.
 
-Parts: `door` 0x392.
+Parts: `door` 0x39A.
 
 ### The fountain house of Dirke
 
@@ -502,13 +514,13 @@ Parts: `door` 0x392.
 
 ```text
 ids                 walk
-0x37D 0x37E 0x37F   X X X
 0x385 0x386 0x387   X X X
+0x38D 0x38E 0x38F   X X X
 ```
 
 Ground: all on the street flags.
 
-Parts: `basin` 0x386.
+Parts: `basin` 0x38E.
 
 ### Semele's chamber
 
@@ -516,11 +528,11 @@ Parts: `basin` 0x386.
 
 ```text
 ids                 walk
-0x398 0x399 0x39A   X X X
 0x3A0 0x3A1 0x3A2   X X X
+0x3A8 0x3A9 0x3AA   X X X
 ```
 
-Parts: `crack` 0x3A1.
+Parts: `crack` 0x3A9.
 
 ## The vineyards
 
@@ -586,3 +598,118 @@ ids           walk
 Ground: all on the street flags.
 
 <!-- passes: hand-written below this line; thyrsa_build.py keeps it -->
+
+## Thyrsa City, the map
+
+`tools/ichor/maps/thyrsa.py` builds `MAP_THYRSA_CITY` (56×48, aethos + thyrsa): the layout, every
+event in `data/maps/ThyrsaCity/map.json`, and the checks. Its scripts are
+`data/maps/ThyrsaCity/scripts.pory`. The final render is [img/ThyrsaCity.png](img/ThyrsaCity.png);
+screen-sized views along the player's route are [img/ThyrsaCity_screens.png](img/ThyrsaCity_screens.png),
+and in-game screenshots from `tools/ichor/tests/thyrsa_city.sh` are
+[img/ThyrsaCity_ingame.png](img/ThyrsaCity_ingame.png).
+
+![Thyrsa City](img/ThyrsaCity.png)
+
+**The plan.** The Cyclopean walls stand just inside the seam strips (MAP_DESIGN §5), so every edge of
+the map is aethos hillside: olives, pines, cypresses and rock, open only along the three roads.
+- **The south wall** (battlement row 38, face rows 39–40) carries the **Elektran Gate** at columns 24–31:
+  a four-cell arch between two towers, the road up from Route 7 at columns 26–29 (the agreed seam,
+  offset +6). Two bricked gates are in its face at (14–15,40) and (40–41,40), read from the road outside.
+  Outside it: the road, two old graves and a herm in the clearings, olive groves.
+- **The west wall** (columns 8–9) has the **Neistan Gate**, a one-cell passage at (8–9,24) between two
+  towers; the road runs out on rows 23–24. **The east wall** (46–47) has the **Proitid Gate** at (46–47,31),
+  its guard sitting in the arch (shut until batch 7). **The north wall** (rows 0–2) faces the Kadmeia,
+  with two more bricked gates; the one at (12–13,2) is the seventh, with the Rare Candy's niche.
+- **The Kadmeia** (rows 3–11), up the broad stair at columns 26–29 through its parapet and terrace wall
+  (rows 12–13): the Temple of Dionysus at the head of the main street (24–31, 4–7, its palace door at
+  (27–28,7)), framed by the street all the way from the gate; Semele's chamber and Chthonia's house of
+  rough stones in the west garden; Manto's house on the citadel's east edge, her seat on the parapet at
+  (35,12) and Manto on the wall-walk above it at (35,11).
+- **The square** at the city's heart (21–34, 14–24): the wine stall, the bronze god, a garland across the
+  main street, garden plots with an olive and cypresses, the herald, the Kronist by the Agora.
+- **The lower town** inside the gate: the Asclepeion (19–23, 28–31) with the fountain house of Dirke in
+  front of it, the Agora (31–35, 28–31) under its striped awning, the Kantharos and Pindaros on the lane to
+  the Proitid Gate, Eudora's house beside her walled yard with its old tree.
+- **The east hill**: the theater's high gate (42–44, 14–17) on the upper terrace among cypresses, the
+  terrace wall at row 19, Polos and Euthykles on the terrace below.
+- **The vineyards** along the west wall: two blocks of vine rows (the city's tall grass) either side of
+  the lane to the Neistan Gate, the old terrace wall with the marked ivy at (10,26) and the Big Nugget on
+  the wall-walk beyond it (9,28), Staphylos's house and the wine press at their head, the old trellises in
+  the south-west corner where the omen's Thyrsivy stands.
+
+**Checks** (`thyrsa.py` runs them on every build): every warp sits on a door reachable from its
+doorstep; every person stands on open ground the player can reach; every sign can be read; no thyrsa
+metatile within six rows of the south seam or eight columns of the side edges; the south edge open
+exactly at columns 26–29 and the side edges only on their road rows; with both side gates shut, the road
+from Route 7 cannot reach the west or east road (the hillside is closed all round); the scenes' walking
+paths stay open; row 0 is solid.
+
+## Render-and-critique passes
+
+### The tileset
+
+**Pass 1** (the first full draw, about 710 distinct tiles, 666 after the limewash recolors): the art
+read well (the Cyclopean wall, the skene-front temple, the Agora) but was 160 tiles over the 504 budget,
+and the first masonry texture looked like mosaic: thick black joints round flat blocks. *Changed:* a new
+masonry generator with bulging, shaded blocks and thin joints (seed chosen from five renders); street
+flags on a 16 px texture so any prop meets the street; the art drawn in the bottom layer over the flags
+moved up a layer so the flags' tiles stay shared.
+
+**Pass 2** (budget): cut the pieces that cost most for least: the strip-shadow wall ends, a second ivy
+curtain, the barrel, the mask stall, the herm on the flags, the drain grate, the ivy cell in the upper
+storey, the fig (an aethos olive stands over Eudora's yard instead); Semele's chamber and Chthonia's house
+redrawn in the city wall's own masonry, phased to the map, so they share its tiles; the temple's side
+doors share one painted base; the fountain made symmetric; tiles within 3 px merged (Emporion merges at
+2; the masonry speckle is noise). Porytiles still stored the limewashed parts separately: it sorts each
+palette's colors by value, so the lime and vine-green colors were retuned to sort in step with the ochre
+and wine ones, slot for slot (thyrsa_lib.py asserts it). 490 tiles.
+
+**Pass 3** (the map's needs): mirrored east-wall pieces (free), and the bronze god for the square,
+whose emptiness was the map's weakest point. **497 of 504 tiles.** No animated doors are used anywhere
+in Thyrsa (every door is `MB_NON_ANIMATED_DOOR`), so the door-animation tiles 504–511 are never written.
+
+### The map
+
+**Pass 1** ([img/ThyrsaCity_pass1.png](img/ThyrsaCity_pass1.png)): the bones worked (the walls inside
+the seam strips, the gate on the road's axis, the temple framed by the main street, the vineyards' rows),
+but the inside was one sea of flags: the square, the street and the lanes merged into a 25×24 field with
+nothing in it. The outside olives stood in a grid, and leftover cells were filled with evenly scattered
+rocks; several edge cells under olive crowns were left walkable (the hillside leaked). The theater's gate
+was unreachable behind its own sign. *Changed:* the flags now cover only the streets, the square and the
+forecourts; everything else became gardens with kerbed edges: the square's corner plots, the Asclepeion's
+grove, the garden behind the Agora, the theater's grove of cypresses. The outside forest is placed in a
+shuffled order, olives, pines and cypresses mixed, and every hillside cell is solid. The sign moved.
+
+**Pass 2** ([img/ThyrsaCity_pass2.png](img/ThyrsaCity_pass2.png)): the districts now read apart and
+every 15×10 view has a landmark ([img/ThyrsaCity_screens.png](img/ThyrsaCity_screens.png)). Still weak:
+the square's middle, a wide plain of flags between the stall and the lower terrace; a stair in the east
+terrace wall that led onto Polos's roof; the approach outside the gate was bare grass. *Changed:* the
+bronze god in the square, the dead-end stair removed (the terraces join round the square's east side),
+graves and a herm along the road outside the gate (the dead buried outside the walls).
+
+**Pass 3** (the final, [img/ThyrsaCity.png](img/ThyrsaCity.png), and in game,
+[img/ThyrsaCity_ingame.png](img/ThyrsaCity_ingame.png)): played through headlessly: the welcome inside
+the gate, the tour, Manto, the theater keeper, the Neistan Gate before and after, Alethea going west, the
+omen's visitor. In game the flags are busy but read as an old paved city, the walls and towers carry the
+screen, and the vineyards' rows read as vines. Left for a later pass: Eudora's yard reads as two plain
+walls with a tree between (a small wall-corner piece would close it); Semele's chamber is a grey ruin
+that could take more ivy; the smoke from its crack is drawn still (SCRIPT.md Part 10 asks for a 2-frame
+animation, which needs a tileset callback in `src/tileset_anims.c`).
+
+## Deviations
+
+- **The theater keeper** stops the player at the high gate's doorstep before the laurel (beat 32's setup);
+  so the workers sweeping the cavea before the Dionysia (Part 2, the theater) are only met if the scenes
+  agent starts the Dionysia from a trigger inside rather than on entry. His name box reads KEEPER: "THEATER
+  KEEPER" is 66 px in the name box's font, over its 64.
+- **The Proitid Gate** is drawn open but its guard sits in the arch, so it is shut until batch 7.
+- **The Neistan Gate's drum** rolls out of the arch and one cell aside onto the hillside, and is gone
+  the next time the map loads (it carries its hide flag).
+- **The Neistan road leaves on two rows** (23–24) through a one-cell gate: a Cyclopean gate is narrow.
+- **Manto's omens** (ICHOR_STUB_OMENS): she gives the rare visitor once the Dionysia is over until it is
+  met, otherwise the swarm or the fog at random; only the visitor has an effect here.
+- **Alethea's tablet reading** checks the prophecy range by index (`FLAG_ICHOR_PROPHECY_START+3` found,
+  `+11` read) until the engine names `FLAG_ICHOR_PROPHECY_3` and `_3_READ` (ICHOR_STUB_DIG).
+- **One line of my own each** for the gatekeeper after the welcome, the theater keeper after the laurel and
+  after the play, the beggar after he's helped, a fifth citizen ("Laurel-holders sit at the front. I've no
+  laurel. I've a cushion."), the wine press, the bronze god, the temple front, the graves and the herm.

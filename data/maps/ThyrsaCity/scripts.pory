@@ -641,6 +641,11 @@ script ThyrsaCity_EventScript_TempleFront {
     msgbox(format("The god's masks over the temple's doors. One laughs. One weeps."), MSGBOX_SIGN)
 }
 
+script ThyrsaCity_EventScript_Statue {
+    msgbox(format("The god in bronze, ivy in his hair, a thyrsus raised.\p"
+                  "Somebody has tied a ribbon round his ankle for the festival."), MSGBOX_SIGN)
+}
+
 script ThyrsaCity_EventScript_Grave {
     msgbox(format("An old grave by the road. Thyrsa buries its dead outside the gates."),
            MSGBOX_SIGN)

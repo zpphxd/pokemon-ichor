@@ -177,7 +177,7 @@
     },
     {
       "local_id": "LOCALID_THYRSA_THEATER_KEEPER",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HARVESTER_THYRSA",
       "x": 44,
       "y": 18,
       "elevation": 3,
@@ -205,7 +205,7 @@
     },
     {
       "local_id": "LOCALID_THYRSA_CITIZEN_MASKS",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN_THYRSA",
       "x": 33,
       "y": 20,
       "elevation": 3,
@@ -219,7 +219,7 @@
     },
     {
       "local_id": "LOCALID_THYRSA_CITIZEN_SEER",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA",
       "x": 39,
       "y": 25,
       "elevation": 3,
@@ -247,7 +247,7 @@
     },
     {
       "local_id": "LOCALID_THYRSA_CITIZEN_IVY",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MOM_THYRSA",
       "x": 34,
       "y": 36,
       "elevation": 3,
@@ -275,7 +275,7 @@
     },
     {
       "local_id": "LOCALID_THYRSA_CHILD_1",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA",
       "x": 24,
       "y": 15,
       "elevation": 3,
@@ -317,7 +317,7 @@
     },
     {
       "local_id": "LOCALID_THYRSA_LENAIA",
-      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAENAD",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAENAD_THYRSA",
       "x": 11,
       "y": 30,
       "elevation": 3,
@@ -591,27 +591,11 @@
     },
     {
       "type": "sign",
-      "x": 16,
-      "y": 7,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ThyrsaCity_EventScript_SemeleChamber"
-    },
-    {
-      "type": "sign",
       "x": 15,
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ThyrsaCity_EventScript_SemeleCrack"
-    },
-    {
-      "type": "sign",
-      "x": 12,
-      "y": 2,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ThyrsaCity_EventScript_BrickedGate"
     },
     {
       "type": "sign",
@@ -756,6 +740,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ThyrsaCity_EventScript_Herm"
+    },
+    {
+      "type": "sign",
+      "x": 32,
+      "y": 19,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThyrsaCity_EventScript_Statue"
     }
   ]
 }

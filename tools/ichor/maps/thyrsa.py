@@ -442,7 +442,6 @@ def town(g):
     g.put_part("terrace", "W", 34, 19)
     for x in range(35, 45):
         g.put("terrace", x, 19, cx=1 + x % 2, w=1)
-    g.put_part("terrace", "stair", 36, 19)
     g.put_part("terrace", "E", 45, 19)
     # Polos the old actor, and Euthykles the mask-maker, on the terrace below
     DOORS["actor"] = house(g, 35, 20, ridge=[None, None, "chimney"],
@@ -477,6 +476,7 @@ def town(g):
     g.put("agora", 31, 28)
     # ---- the square: a wine stall, garlands across the main street --------------
     g.put("stall_wine", 22, 19)
+    g.put("statue", 32, 18)                    # the god in bronze
     for y in (21, 33):
         g.put_part("garland", "post_W", 25, y)
         for x in range(26, 30):
@@ -635,27 +635,27 @@ def events():
             flag="FLAG_ICHOR_HIDE_NEISTAN_DRUM"),
         obj("LOCALID_THYRSA_PROITID_GUARD", "OBJ_EVENT_GFX_ICHOR_HOPLITE", 46, 31, S + "ProitidGuard",
             move="MOVEMENT_TYPE_FACE_LEFT"),
-        obj("LOCALID_THYRSA_THEATER_KEEPER", "OBJ_EVENT_GFX_ICHOR_MAN", 44, 18, S + "TheaterKeeper",
+        obj("LOCALID_THYRSA_THEATER_KEEPER", "OBJ_EVENT_GFX_ICHOR_HARVESTER_THYRSA", 44, 18, S + "TheaterKeeper",
             move="MOVEMENT_TYPE_FACE_LEFT"),
         obj("LOCALID_THYRSA_BEGGAR", "OBJ_EVENT_GFX_ICHOR_ELDER_M", 21, 34, S + "Beggar",
             move="MOVEMENT_TYPE_FACE_RIGHT"),
-        obj("LOCALID_THYRSA_CITIZEN_MASKS", "OBJ_EVENT_GFX_ICHOR_WOMAN", 33, 20, S + "CitizenMasks",
+        obj("LOCALID_THYRSA_CITIZEN_MASKS", "OBJ_EVENT_GFX_ICHOR_WOMAN_THYRSA", 33, 20, S + "CitizenMasks",
             move="MOVEMENT_TYPE_FACE_LEFT"),
-        obj("LOCALID_THYRSA_CITIZEN_SEER", "OBJ_EVENT_GFX_ICHOR_MAN", 39, 25, S + "CitizenSeer",
+        obj("LOCALID_THYRSA_CITIZEN_SEER", "OBJ_EVENT_GFX_ICHOR_MERCHANT_THYRSA", 39, 25, S + "CitizenSeer",
             move="MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT", rx=2),
         obj("LOCALID_THYRSA_CITIZEN_KADMOS", "OBJ_EVENT_GFX_ICHOR_ELDER_F", 23, 24,
             S + "CitizenKadmos", move="MOVEMENT_TYPE_FACE_DOWN"),
-        obj("LOCALID_THYRSA_CITIZEN_IVY", "OBJ_EVENT_GFX_ICHOR_WOMAN", 34, 36, S + "CitizenIvy",
+        obj("LOCALID_THYRSA_CITIZEN_IVY", "OBJ_EVENT_GFX_ICHOR_MOM_THYRSA", 34, 36, S + "CitizenIvy",
             move="MOVEMENT_TYPE_FACE_UP"),
         obj("LOCALID_THYRSA_CITIZEN_CUSHION", "OBJ_EVENT_GFX_ICHOR_YOUTH_M", 21, 20,
             S + "CitizenCushion", move="MOVEMENT_TYPE_WANDER_UP_AND_DOWN", ry=1),
-        obj("LOCALID_THYRSA_CHILD_1", "OBJ_EVENT_GFX_ICHOR_KID_M", 24, 15, S + "Child",
+        obj("LOCALID_THYRSA_CHILD_1", "OBJ_EVENT_GFX_ICHOR_KID_M_THYRSA", 24, 15, S + "Child",
             move="MOVEMENT_TYPE_FACE_RIGHT"),
         obj("LOCALID_THYRSA_CHILD_2", "OBJ_EVENT_GFX_ICHOR_KID_F", 30, 15, S + "Child2",
             move="MOVEMENT_TYPE_FACE_LEFT"),
         obj("LOCALID_THYRSA_OINOPION", "OBJ_EVENT_GFX_ICHOR_VINTNER", 13, 22, S + "Oinopion",
             trainer=True, sight=3),
-        obj("LOCALID_THYRSA_LENAIA", "OBJ_EVENT_GFX_ICHOR_MAENAD", 11, 30, S + "Lenaia",
+        obj("LOCALID_THYRSA_LENAIA", "OBJ_EVENT_GFX_ICHOR_MAENAD_THYRSA", 11, 30, S + "Lenaia",
             trainer=True, sight=2, move="MOVEMENT_TYPE_FACE_LEFT"),
         obj("LOCALID_THYRSA_HEGELOCHOS", "OBJ_EVENT_GFX_ICHOR_ACTOR", 38, 18, S + "Hegelochos",
             trainer=True, sight=2, move="MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT", rx=2),
@@ -696,15 +696,16 @@ def events():
         (SIGNS["town"], "TownSign"), (SIGNS["kadmeia"], "KadmeiaSign"),
         (SIGNS["theater"], "TheaterSign"), (SIGNS["neistan"], "NeistanSign"),
         (SIGNS["proitid"], "ProitidSign"),
-        ((14, 7), "SemeleChamber"), ((16, 7), "SemeleChamber"), ((15, 7), "SemeleCrack"),
-        ((12, 2), "BrickedGate"), ((13, 2), "BrickedGate"), ((42, 2), "BrickedGate"),
+        # (16,7), (22,34) and (12,2) are kept free for the hidden items (BUILD.md, Thyrsa)
+        ((14, 7), "SemeleChamber"), ((15, 7), "SemeleCrack"),
+        ((13, 2), "BrickedGate"), ((42, 2), "BrickedGate"),
         ((43, 2), "BrickedGate"), ((14, 40), "BrickedGate"), ((15, 40), "BrickedGate"),
         ((40, 40), "BrickedGate"), ((41, 40), "BrickedGate"),
         ((10, 26), "MarkedIvy"), ((23, 34), "Dirke"), ((17, 16), "WinePress"),
         ((18, 16), "WinePress"),
         ((13, 7), "DigSemele"), ((10, 33), "DigVineyard"),
         ((27, 4), "TempleFront"), ((28, 4), "TempleFront"),
-        ((22, 42), "Grave"), ((33, 42), "Grave"), ((31, 44), "Herm"),
+        ((22, 42), "Grave"), ((33, 42), "Grave"), ((31, 44), "Herm"), ((32, 19), "Statue"),
     ]
     bg = [{"type": "sign", "x": x, "y": y, "elevation": 0,
            "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": S + name}
