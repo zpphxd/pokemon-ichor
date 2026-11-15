@@ -7839,6 +7839,43 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorCami = {
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorDemeter = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = sOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_IchorDemeter,
+};
+// End of Ichor object events
+
+// Ichor: items lying in the world are small clay jars sealed with beeswax,
+// not Poke Balls (OBJ_EVENT_GFX_ITEM_BALL keeps its name). The folk palette
+// is already loaded wherever townsfolk stand, so the jar costs no extra slot.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_FOLK,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_1,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .compressed = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = sOamTables_16x16,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_IchorItemJar,
+};
+
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHeroLampkeeper = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_TROAD,
@@ -7854,8 +7891,6 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorHeroLampkeepe
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_IchorDemeter,
-};
     .images = sPicTable_IchorHeroLampkeeper,
 };
 
@@ -8325,27 +8360,4 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorChalybesSmith
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Standard,
     .images = sPicTable_IchorChalybesSmith,
-};
-
-// End of Ichor object events
-
-// Ichor: items lying in the world are small clay jars sealed with beeswax,
-// not Poke Balls (OBJ_EVENT_GFX_ITEM_BALL keeps its name). The folk palette
-// is already loaded wherever townsfolk stand, so the jar costs no extra slot.
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_IchorItemJar = {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_ICHOR_FOLK,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 128,
-    .width = 16,
-    .height = 16,
-    .paletteSlot = PALSLOT_NPC_1,
-    .shadowSize = SHADOW_SIZE_S,
-    .inanimate = TRUE,
-    .compressed = FALSE,
-    .tracks = TRACKS_NONE,
-    .oam = &gObjectEventBaseOam_16x16,
-    .subspriteTables = sOamTables_16x16,
-    .anims = sAnimTable_Inanimate,
-    .images = sPicTable_IchorItemJar,
 };
