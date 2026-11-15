@@ -64,4 +64,10 @@ void InitTilesetAnim_PorytilesManaged_Amnisos(void);
 // [Porytiles] Auto-generated declaration. Do not remove.
 void InitTilesetAnim_PorytilesManaged_BullRoad(void);
 
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Labyrinth(void);
+
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Mychos(void);
+
 #endif // GUARD_TILESET_ANIMS_H

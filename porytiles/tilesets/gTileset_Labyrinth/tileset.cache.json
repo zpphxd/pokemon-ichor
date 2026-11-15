@@ -1,6 +1,9 @@
 {
-  "data/tilesets/secondary/labyrinth/porytiles_bin/metatile_attributes.bin": "a8bb84b560d5a93b4b073138fa246a1b",
-  "data/tilesets/secondary/labyrinth/porytiles_bin/metatiles.bin": "00588780435e62b7443dfd5ffe559f1b",
+  "data/tilesets/secondary/labyrinth/porytiles_bin/anim/flame/0.png": "834cf38f480db5a03ac7b19261264f26",
+  "data/tilesets/secondary/labyrinth/porytiles_bin/anim/flame/1.png": "3e4b0c2de1e145dcaadfd701b7463bd6",
+  "data/tilesets/secondary/labyrinth/porytiles_bin/anim/flame/2.png": "8483de590a262881db6d2d04acdf4892",
+  "data/tilesets/secondary/labyrinth/porytiles_bin/metatile_attributes.bin": "2682336998c8dc9878ec9449bd13ef63",
+  "data/tilesets/secondary/labyrinth/porytiles_bin/metatiles.bin": "1c705387291b351f06ddc8e7ea399df8",
   "data/tilesets/secondary/labyrinth/porytiles_bin/palettes/00.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/labyrinth/porytiles_bin/palettes/01.pal": "b324c3e89be895ac24935a8503a0154e",
   "data/tilesets/secondary/labyrinth/porytiles_bin/palettes/02.pal": "b324c3e89be895ac24935a8503a0154e",
@@ -17,9 +20,15 @@
   "data/tilesets/secondary/labyrinth/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/labyrinth/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/labyrinth/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/labyrinth/porytiles_bin/tiles.png": "76f34b3fb86fe5d83d11ebbc92827558",
-  "data/tilesets/secondary/labyrinth/porytiles_src/attributes.csv": "3fba897848ccf06884959f62ae916132",
-  "data/tilesets/secondary/labyrinth/porytiles_src/bottom.png": "8271afb422387be826d3ae915fdd8337",
-  "data/tilesets/secondary/labyrinth/porytiles_src/middle.png": "ddd3eca9ad68a1d55a76370dbf50e16d",
-  "data/tilesets/secondary/labyrinth/porytiles_src/top.png": "21bf03ee9b464bfa321d0175224e4319"
+  "data/tilesets/secondary/labyrinth/porytiles_bin/tiles.png": "46a44a08ef3e661b5b60389b66f14791",
+  "data/tilesets/secondary/labyrinth/porytiles_src/anim/anim.json": "c8a950241c305136a8084e0e8fdafb0a",
+  "data/tilesets/secondary/labyrinth/porytiles_src/anim/flame/0.png": "21c4af7bfe721fc384a43b5c62b96672",
+  "data/tilesets/secondary/labyrinth/porytiles_src/anim/flame/1.png": "d8102574f16e67758706540dd39ff6ae",
+  "data/tilesets/secondary/labyrinth/porytiles_src/anim/flame/2.png": "e19725f8fdcf4a1f3087332035e29aed",
+  "data/tilesets/secondary/labyrinth/porytiles_src/anim/flame/key.png": "21c4af7bfe721fc384a43b5c62b96672",
+  "data/tilesets/secondary/labyrinth/porytiles_src/attributes.csv": "5d97d0e60da9e56927d020024ab03aae",
+  "data/tilesets/secondary/labyrinth/porytiles_src/bottom.png": "a56e2ed53fe30b62e1e8fafaeae48f7e",
+  "data/tilesets/secondary/labyrinth/porytiles_src/middle.png": "a131f916f0343b738b686d2e7ec44eea",
+  "data/tilesets/secondary/labyrinth/porytiles_src/top.png": "874428bf888c7a23730001461b412aeb",
+  "include/porytiles_generated/tilesets/labyrinth/generated_anim_code.h": "b94b5bef6c786880ec30ebae02dcc429"
 }

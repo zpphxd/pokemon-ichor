@@ -169,3 +169,7 @@ const u16 gMetatileAttributes_PorytilesManaged_PalaceRooms[] = INCBIN_U16("data/
 // Ichor: ida
 const u16 gMetatiles_PorytilesManaged_Ida[] = INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Ida[] = INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: mychos
+const u16 gMetatiles_PorytilesManaged_Mychos[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Mychos[] = INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/metatile_attributes.bin");

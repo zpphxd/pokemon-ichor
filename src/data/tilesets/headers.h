@@ -601,11 +601,11 @@ const struct Tileset gTileset_Trireme =
 };
 
 // Ichor: labyrinth, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,
-// built by tools/ichor/art/labyrinth_build.py; so far it holds the house's masonry and
-// Daedalus's workshop. It uses only its own tiles and palettes 6-12, with opaque floors,
-// so it works on any interior primary (drawn for oikos). Its variant palette sets,
-// gTilesetPalettes_LabyrinthGlow (the doused torch) and gTilesetPalettes_LabyrinthDawn
-// (scene L), are in graphics.h. No layout uses it yet.
+// built by tools/ichor/art/labyrinth_build.py: the house's masonry, Daedalus's workshop, the outer
+// rings (I, II, III, V), Minos's tomb and the Icarus Shaft. It uses only
+// its own tiles and palettes 6-12, with opaque floors, so it works on any interior
+// primary (drawn for oikos). Its variant palette sets (gTilesetPalettes_LabyrinthGlow and gTilesetPalettes_LabyrinthDawn)
+// are in graphics.h. No layout uses it yet.
 const struct Tileset gTileset_Labyrinth =
 {
     .isCompressed = TRUE,
@@ -614,7 +614,24 @@ const struct Tileset gTileset_Labyrinth =
     .palettes = gTilesetPalettes_PorytilesManaged_Labyrinth,
     .metatiles = gMetatiles_PorytilesManaged_Labyrinth,
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Labyrinth,
-    .callback = NULL,
+    .callback = InitTilesetAnim_PorytilesManaged_Labyrinth,
+};
+
+// Ichor: mychos, Daedalus's Labyrinth under Knossa (LABYRINTH.md §11). Porytiles-managed,
+// built by tools/ichor/art/labyrinth_build.py: the house's masonry, the Titan wing (Rings IV and
+// VI), Ring VII and the Starry Chamber. It uses only
+// its own tiles and palettes 6-12, with opaque floors, so it works on any interior
+// primary (drawn for oikos). Its variant palette sets (gTilesetPalettes_MychosGlow)
+// are in graphics.h. No layout uses it yet.
+const struct Tileset gTileset_Mychos =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Mychos,
+    .palettes = gTilesetPalettes_PorytilesManaged_Mychos,
+    .metatiles = gMetatiles_PorytilesManaged_Mychos,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Mychos,
+    .callback = InitTilesetAnim_PorytilesManaged_Mychos,
 };
 
 // Ichor: amnisos, Amnisos, the harbor of Knossa (Act III, Knossa). Porytiles-managed, built by

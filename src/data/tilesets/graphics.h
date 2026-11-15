@@ -1108,3 +1108,40 @@ const u16 gTilesetPalettes_PorytilesManaged_Ida[][16] =
     INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/ida/porytiles_bin/palettes/15.gbapal")
 };
+
+// Ichor: mychos
+const u32 gTilesetTiles_PorytilesManaged_Mychos[] = INCBIN_U32("data/tilesets/secondary/mychos/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Mychos[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/palettes/15.gbapal")
+};
+
+// The doused set (SYSTEMS.md §2, "Douse"): black but for the glow paint, the flames
+// and a faint thread. Load it over palettes 6-12 while the torch is doused. Written
+// by tools/ichor/art/labyrinth_build.py; not yet wired into the engine.
+const u16 gTilesetPalettes_MychosGlow[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/glow/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/glow/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/glow/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/glow/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/glow/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/glow/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/mychos/porytiles_bin/glow/12.gbapal")
+};
