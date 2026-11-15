@@ -384,7 +384,7 @@ Everything here is obtainable in one save, with no link cable. Trade evolutions 
 | 84 | Doduo | Normal/Flying | Libya | Nursery: the Oasis Gardens of Ammon, Pyanepsion | nursery, or breed Dodrio | 10-20 |  |
 | 85 | Dodrio | Normal/Flying | Libya | The Silphium Plateau | grass, day | 64-66 |  |
 | 86 | Seel | Water | Egypt and the Nile | Nursery: the Papyrus Shallows of the Delta, Pyanepsion | nursery, or breed Dewgong | 10-20 |  |
-| 87 | Dewgong | Water/Ice | Egypt and the Nile | Pharos | surfing | 61-63 | Proteus herds seals on Pharos (Odyssey 4) |
+| 87 | Dewgong | Water/Ice | Egypt and the Nile | Pharos | surfing | 61-63 | Pharaoh Proteus's seal-herd, which Homer gave to a sea-god (Odyssey 4; PERIODOS.md §5) |
 | 88 | Grimer | Poison | The Western Sea | Nursery: the Seal Caves of Ogygia, Pyanepsion | nursery, or breed Muk | 10-20 |  |
 | 89 | Muk | Poison | The Western Sea | The Phlegraean Fields | grass, day | 74-76 |  |
 | 90 | Shellder | Water | Egypt and the Nile | The Nile (river lane) | surfing | 61-63 |  |
@@ -429,7 +429,7 @@ Everything here is obtainable in one save, with no link cable. Trade evolutions 
 | 129 | Magikarp | Water | The Far West: Atlas, the Hesperides and the Pillars | Nursery: the Tide Pools of Gadeira, Gamelion | nursery, or breed Gyarados | 10-20 |  |
 | 130 | Gyarados | Water/Flying | The Ring of Okeanos | Okeanos, the river-ocean (sea lane) | fishing | 75-78 |  |
 | 131 | Lapras | Water/Ice | The Ring of Okeanos | Okeanos, the river-ocean (sea lane) | surfing | 75-78 |  |
-| 132 | Ditto | Normal | Egypt and the Nile | Pharos | grass, day | 61-63 | the shapes of the Old Man of the Sea |
+| 132 | Ditto | Normal | Egypt and the Nile | Pharos | grass, day | 61-63 | strays from Pharaoh Proteus's troupe, trained to play Homer's shapes |
 | 133 | Eevee | Normal | Lydia and Phrygia | The Royal Road | grass, day | 63-66 |  |
 | 134 | Vaporeon | Water | The Ring of Okeanos | The Isles of the Blessed | surfing | 78-80 |  |
 | 135 | Jolteon | Electric | Libya | The Great Sand Sea | Augur's Eye (hidden) | 66-68 |  |
@@ -1027,7 +1027,7 @@ Everything here is obtainable in one save, with no link cable. Trade evolutions 
 | 727 | Incineroar | Fire/Dark | Egypt and the Nile | The Pyramid Field | grass, night | 62-64 | the cats of Bubastis (Herodotus 2.66); wild only, never a gift (PG-5) |
 | 728 | Popplio | Water | Egypt and the Nile | Nursery: the Papyrus Shallows of the Delta, Poseideon | nursery, or breed Primarina | 10-20 |  |
 | 729 | Brionne | Water | Egypt and the Nile | evolve Popplio | Lv 17 | — |  |
-| 730 | Primarina | Water/Fairy | Egypt and the Nile | Pharos | surfing | 61-63 | Proteus's seals; wild only, never a gift (PG-5) |
+| 730 | Primarina | Water/Fairy | Egypt and the Nile | Pharos | surfing | 61-63 | the pharaoh's seals; wild only, never a gift (PG-5) |
 | 731 | Pikipek | Normal/Flying | Aithiopia and the Sunrise | Nursery: the Wading Pools of Meroe, Poseideon | nursery, or breed Toucannon | 10-20 |  |
 | 732 | Trumbeak | Normal/Flying | Aithiopia and the Sunrise | evolve Pikipek | Lv 14 | — |  |
 | 733 | Toucannon | Normal/Flying | Aithiopia and the Sunrise | The Mountains of the Moon | grass, day | 73-75 |  |

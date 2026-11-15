@@ -410,6 +410,7 @@ The act scripts asked for three cues MUSIC.md didn't have. All three are adopted
 | The Archon | Mixolydian, stately, kithara and drum; it stops on "Gods help you". | STORY §6.15 |
 | Iapetos's tragedy and the satyr play | The Sickle as a processional; a fast 9/8 aulos romp. | STORY §6.3 |
 | The Hierophant battle | Not yet scored. | INVENTORY §8 |
+| *The Periodos*, the Oikoumene's ten halls | One theme in ten short arrangements. A is the Thread (motif 1) in D Dorian as a processional for aulos, kithara and frame drum, the same in every hall: home arrives first. B is in the land's own mode and meter and quotes the first phrase of its land track (OIKOUMENE §7). Intro 1, then A 8 and B 8, about 30 seconds, in the `ichor` voicegroup. If ROM runs short, one arrangement serves all ten. | `oikoumene/PERIODOS.md` §6 |
 
 ## What the engine taught us
 

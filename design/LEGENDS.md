@@ -475,7 +475,7 @@ AEOLUS: The thunder went south. Not my problem. Not my wind, strictly.
 - **Kyurem** is what's left when a whole is split. Aristophanes tells in Plato's *Symposium* (189c–193d) that people were once double, and Zeus cut them in half, and each half searches for its other. Kyurem is the cold hollow where two halves used to be one.
 
 **The quest: The Truth and the Glory.**
-1. **Alethea in Egypt.** In Memphis, Helen of Sparta, the land's champion, tells Alethea the truth: the Helen on Troy's walls was a phantom made of cloud, and she sat here the whole war (Euripides, *Helen*; Stesichorus's *Palinode*). A thousand ships for a better story. Alethea writes it down, and Helen asks her not to: "They prefer the other version." Alethea: "Truthfully? I don't care what they prefer." In the temple of the Stranger Aphrodite, the **Truth-Stone** (the Light Stone) is warm. Alethea gives it to you.
+1. **Alethea in Egypt.** In Memphis, Helen of Sparta, the guest of Pharaoh Proteus, the land's champion (`oikoumene/PERIODOS.md` §4.5), tells Alethea the truth: the Helen on Troy's walls was a phantom made of cloud, and she sat here the whole war (Euripides, *Helen*; Stesichorus's *Palinode*). A thousand ships for a better story. Alethea writes it down, and Helen asks her not to: "They prefer the other version." Alethea: "Truthfully? I don't care what they prefer." In the temple of the Stranger Aphrodite, the **Truth-Stone** (the Light Stone) is warm. Alethea gives it to you.
 2. **Kleon at Troy.** Kleon sails out to see Ilion, and to meet Hektor, who wants glory the way he did. They spar on the Skaian Gate's tower. Hektor: "I used to know how I'd die. It made the glory easy." Kleon: "It's not easy now. It's better." The **Glory-Stone** (the Dark Stone) cracks with light in Kleon's hand.
 3. **Waking them.** Each stone wakes its dragon where it was given: Reshiram over Memphis at noon, Zekrom over the Skamander plain in a storm. Alethea and Kleon each watch you catch theirs.
 4. **The cold half.** With either one caught, the Cave of Boreas's deepest floor freezes harder. Kyurem waits in the hollow. Alethea and Kleon both come; it's the first time the three of you have been in one place since the Akropolis. Kyurem won't fight until they stand on either side of it.
@@ -870,7 +870,7 @@ There are nine gold coins on it.
 **The casting.** Milo of Kroton, six times Olympic wrestling champion, trained by carrying a calf on his shoulders every day until it was a bull (Quintilian 1.9.5). Kubfu is the calf.
 
 **The quest.**
-1. **Milo.** The Western Sea's champion (OIKOUMENE §6). After you beat him, he gives you a cub. Lv 70.
+1. **Milo.** The Western Sea's champion (OIKOUMENE §6). After you beat him in his palaestra, he gives you the cub you carried across its last court (`oikoumene/PERIODOS.md` §4.9). Lv 70.
 
 ```text
 MILO: Carry it. Every day. When you can't carry it any more, you're ready.

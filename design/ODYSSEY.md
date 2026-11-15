@@ -621,7 +621,7 @@ Neither is a mistake. Scylla is the cheaper loss if you're prepared, and Charybd
 
 ### 6.9 The Outer Sea
 
-The last sea before Scheria (on Scylla's way). It loops by day; at night, keep the Bear on your left (§4). Lynkeus, if aboard, finds **Proteus's islet** here: a sandbar with seals, where theoxenia E13 (SYSTEMS §10) happens if the extended tier is chosen.
+The last sea before Scheria (on Scylla's way). It loops by day; at night, keep the Bear on your left (§4). Lynkeus, if aboard, finds **Proteus's islet** here: a sandbar with seals, where theoxenia E13 (SYSTEMS §10) happens if the extended tier is chosen. This is the sea-god, the Old Man of the Sea. Egypt's Pharaoh Proteus, the Oikoumene's champion at Memphis, is his namesake, and the seals on Pharos are the pharaoh's (`oikoumene/PERIODOS.md` §5).
 
 ### 6.10 Scheria: the Phaeacians
 
