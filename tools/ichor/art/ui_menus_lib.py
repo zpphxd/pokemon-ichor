@@ -257,15 +257,16 @@ def write_tiles_png(path, tiles, palettes, tiles_wide=16, min_tiles=0, pal_of_ti
     write_indexed_png(path, a, palettes)
 
 
-def write_indexed_png(path, a, palettes):
+def write_indexed_png(path, a, palettes, transparency=None):
     flat = [v for pal in palettes for c in pal16(pal) for v in c]
     im = Image.fromarray(np.asarray(a, np.uint8), "P")
     im.putpalette(flat)
+    options = {} if transparency is None else {"transparency": transparency}
     if len(palettes) == 1:
         assert int(np.asarray(a).max()) < 16
-        im.save(path, bits=4)
+        im.save(path, bits=4, **options)
     else:
-        im.save(path)
+        im.save(path, **options)
     print(f"wrote {Path(path).relative_to(ROOT)}")
 
 

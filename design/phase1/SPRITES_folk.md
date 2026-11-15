@@ -2,6 +2,18 @@
 
 Overworld walking sprites for Kalliste's island people and the slice's trainer classes: 22 new object-event graphics IDs. The cast (Kleon, Daphne, Alethea, Ione, the Titanborn) is in `SPRITES_npc.md`; the battle portraits the class walkers match are in `SPRITES_classes.md`.
 
+**2026-11-15 Elaia polish:** `mom`, `priestess`, `youth_m`, `youth_f`,
+`man`, `woman`, `elder_m`, `elder_f`, `kid_m`, `fisher`, `harvester` and
+`shepherd` now use the native `elaia_*` cloth bodies in the same source file.
+They add shoulder/waist/hem folds without changing costumes, props, stature,
+palette tags, or the nine-frame engine order. Kydippe also has shaded shawl
+folds. The other ten walkers retain their original bodies for their own
+town batches. All twelve generated arrays and distinct movement frames have
+been checked. The rebuilt ROM passes smoke and the three Elaia opening runs,
+with current village/interior captures of the shared folk. The earlier
+screenshots below are historical; native checks do not replace director
+review of every character and pose.
+
 - **Source:** `tools/ichor/art/sprites_folk.py`. Every head, body and prop is ASCII art in that file, one character per pixel.
 - **Rebuild the PNGs and the folk palette:** `python3 tools/ichor/art/sprites_folk.py --write`
 - **Preview:** `python3 tools/ichor/art/sprites_folk.py --preview DIR` writes the 4× sheet; `--grids DIR` writes 8× pixel grids for editing.

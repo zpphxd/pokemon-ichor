@@ -202,9 +202,9 @@ SK = {" ": 0, "#": 1, "k": 2, "d": 3, "c": 4, "l": 5, "p": 6, "'": 7, "r": 8, "g
 # '@' marks the painted band's two rows; 'i' the mouth's interior.
 KRATER = [
     "                          ",
-    "  ######################  ",
+    "   ####################   ",
     " #pllllllllllllllllllccd# ",
-    " #iiiiiiiiiiiiiiiiiiiiii# ",
+    "  #iiiiiiiiiiiiiiiiiiii#  ",
     "  #iiiiiiiiiiiiiiiiiiii#  ",
     "  #llcccccccccccccccccd#  ",
     "###kkkkkkkkkkkkkkkkkkkk###",
@@ -214,9 +214,9 @@ KRATER = [
     "  #@@@@@@@@@@@@@@@@@@@@#  ",
     "  #kkkkkkkkkkkkkkkkkkkk#  ",
     "  #plcccccccccccccccccd#  ",
-    "   #lcccccccccccccccdd#   ",
-    "   #lccccccccccccccddd#   ",
-    "    #lccccccccccccddd#    ",
+    "   #llccccccccccccccdd#   ",
+    "   #lclcccccccccccddd#    ",
+    "    #llccccccccccddd#     ",
     "     #llcccccccccdd#      ",
     "      ##kkkkkkkkkk##      ",
     "        #lcccccd#         ",
@@ -351,7 +351,7 @@ def sprites():
         frames[name] = [f, rocked(f, -1), rocked(f, 1)]
     order = frames["nebrel"] + [hand()] + frames["kynder"] + frames["hipling"]
     sheet = np.vstack(order)
-    write_indexed_png(OUT / "pokeball_selection.png", sheet, [SPR])
+    write_indexed_png(OUT / "pokeball_selection.png", sheet, [SPR], transparency=0)
     return sheet
 
 
@@ -381,7 +381,7 @@ def tondo():
         t = 2 * math.pi * k / 24
         x, y = cx + 28 * math.cos(t), cy + 28 * math.sin(t)
         a[int(round(y)), int(round(x))] = 5
-    write_indexed_png(OUT / "starter_circle.png", a, [CIRCLE])
+    write_indexed_png(OUT / "starter_circle.png", a, [CIRCLE], transparency=0)
     return a
 
 

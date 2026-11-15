@@ -6,6 +6,17 @@ boy-or-girl choice. The files keep Brendan's and May's names, so every code path
 
 Source: `tools/ichor/art/sprites_player.py`.
 
+**2026-11-15 native pass:** both fronts now lean into an asymmetric stance,
+with smaller hand-painted faces, flared chlamys folds and bent, sandal-laced
+legs. Ianthe's free hand holds her satchel strap. The four back frames keep the
+existing throw path and have a clearer right-facing eye/profile. All five
+battle sheets regenerate exactly with their existing shared palettes.
+The current ROM builds and passes smoke and all three Elaia opening runs,
+including the player choice and Kleon battle. Both player walk/run captures
+also pass. The in-game evidence below belongs to the previous artwork;
+current captures are retained with the Elaia handoff, not substituted into
+the historical comparison.
+
 ```bash
 /usr/bin/python3 tools/ichor/art/sprites_player.py --write --preview design/phase1/img
 /usr/bin/python3 tools/ichor/art/sprites_player.py --grids /tmp/grids   # pixel grids for edits
@@ -64,7 +75,7 @@ The index layout is the same for both characters. Only `hair_l` differs.
 | 13–14 | cream_d, cream_l | 200 176 136 · 248 240 216 | same | Chiton; the ball's white half |
 | 15 | terra | 192 80 48 | same | Satchel; the ball's red half |
 
-## Checked in game
+## Historical game checks
 
 `design/phase1/img/sprites_player_battle_ingame.png` shows:
 - the trainer card for both characters

@@ -44,7 +44,7 @@ PALDIR = os.path.join(ROOT, "graphics/object_events/palettes")
 #   14   white                           white (also the "!" emote)
 #   15   black                           black (also the "!" emote)
 
-TRANSPARENT = (115, 197, 164)  # Emerald's value, kept as is
+TRANSPARENT = (112, 192, 160)  # Emerald's transparent slot at exact BGR555 precision
 
 INK = (32, 24, 24)
 SKIN = [(248, 208, 168), (232, 160, 112), (184, 112, 72), (104, 56, 40)]
@@ -91,16 +91,16 @@ ROLE_IANTHE = dict(ROLE_THEO, c=5, C=5, D=6, h=7, H=8)
 
 HAT_FRONT = """
 .....kkkkkk.....
-..kkkywyyyYkkk..
-.kyykyyyyYYkyYk.
+..kkkywyyYYkkk..
+.kyyyyyyyYYYyYk.
 kyyyybbbbbbyyYYk
 kyyyyyyyyyyyyYYk
 .kYYYYYYYYYYYYk.
 """
 HAT_SIDE = """
 ......kkkkk.....
-....kkywyyYkk...
-.kkyykyyyYYkYkk.
+....kkywYYYkk...
+.kkyyyyyyYYYykk.
 kyyyyybbbbbyyyYk
 kyyyyyyyyyyyyYYk
 .kYYYYYYYYYYYYk.
@@ -112,7 +112,7 @@ FACES = {
 ...kHhhhhhhHk...
 ...khSssssShk...
 ...ksskssksSk...
-...kssssssSdk...
+...ksswssksdk...
 ....kSsssSdk....
 """,
         'up': """
@@ -135,7 +135,7 @@ FACES = {
 ..kHhhhHHhhhHk..
 ..khSssssssShk..
 ..khsskssksSHk..
-..khssssssSdHk..
+..khsswssksdHk..
 ..kHkSsssSdkHk..
 """,
         'up': """

@@ -34,7 +34,22 @@ python3 tools/ichor/art/sprites_player_ow.py --preview design/phase1/img/sprites
 | `fishing.png` | 384×32 | 12 of 32×32, figure centered: 0–3 west (Old Rod over the shoulder, raised, cast, out), 4–7 north, 8–11 south. A bite alternates 2/3, 6/7 or 10/11; east mirrors west. The rod is cane-brown with a straw highlight and a terracotta float. | Done |
 | `field_move.png` | 160×32 | 5 of 32×32, facing south: reach into the satchel (0–1), hold the relic at the chest (2), lift it (3), raise it overhead, glinting (4). Aethos has no HM Pokémon; field powers come from relics (bible §8), so the player raises a golden relic instead of a ball. | Done |
 
-Both folders are `graphics/object_events/pics/people/brendan/` (Theo) and `.../may/` (Ianthe). The bike, watering, decorating, underwater and surfing sheets are untouched; Aethos has no bikes or watering cans, and surfing (on a dolphin) is a later batch.
+Both folders are `graphics/object_events/pics/people/brendan/` (Theo) and
+`.../may/` (Ianthe). Surfing is implemented by `surf_poses.py --write`:
+192x32, six 32x32 sitting/hopping frames, sharing this file's hats and faces.
+Walking, running, fishing, field-move and surfing sheets were regenerated in
+the 2026-11-15 Elaia native pass with a cleaner petasos contour and eye glints.
+All their motion frames are distinct and match their source arrays.
+
+The bike, watering, decorating and underwater sheets remain untouched.
+The first three groups are unused by Aethos's current design; underwater is
+a supported engine state and still needs an Ichor-native sheet in its own
+`player_underwater.pal`. It is not counted as redrawn by this checkpoint.
+The current ROM builds and passes smoke and all three Elaia opening runs.
+Both genders have new in-game walk/run captures from `player_ow_walk.lua`.
+The earlier in-game images below show the previous artwork. Native source
+checks cover the other regenerated sheets, but are not in-game fishing,
+surfing or field-move coverage.
 
 ## Palettes: how the roles were remapped
 
@@ -61,7 +76,7 @@ Only Theo has a chlamys highlight; Ianthe's chlamys uses two shades because `may
 ## Side effects on the untouched sheets
 
 These still use Brendan's and May's art, so they now draw in the new colors:
-- **Brendan's bike, surf, watering, decorating and underwater sheets:** the white beanie turns cream, the navy clothes Aegean blue, the green band straw-gold, the red trim terracotta.
+- **Brendan's bike, watering and decorating sheets:** the white beanie turns cream, the navy clothes Aegean blue, the green band straw-gold, the red trim terracotta.
 - **May's:** the green bandana turns straw-gold, the brown hair stays brown, the gray knot and dark shorts turn Aegean blue.
 - **Rival Brendan and May** (`OBJ_EVENT_GFX_RIVAL_*`) and the **link players** take the same colors. Ichor's rival is Kleon, so the rivals should not appear in the slice.
 - **The "!" and "?" emotes** above trainers use `may.pal` 14 and 15: cream with ink, nearly as before.

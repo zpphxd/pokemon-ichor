@@ -12,7 +12,32 @@ Sources live in `tools/ichor/art/sprites_*.py`. Rebuild the PNGs with
 | `TRAINER_PIC_TITAN_GRUNT` | `Pic: Titan Grunt` | Titanborn grunt: Corinthian helmet, sickle emblem | `graphics/trainers/front_pics/titan_grunt.png` |
 | `TRAINER_PIC_PROFESSOR_DAPHNE` | `Pic: Professor Daphne` | Professor Daphne: laurel wreath, himation, scroll | `graphics/trainers/front_pics/professor_daphne.png` |
 
-The new pics are front-only (no back pic). Hoenn trainer pics are untouched.
+The four cast entries above are front-only. The player front/back pics are in
+`SPRITES_player.md`; Alethea's matched front/back pair is described below.
+
+## Elaia native-art checkpoint (2026-11-15)
+
+Theo, Ianthe and Kleon now have hand-painted smaller faces and asymmetric,
+weighted stances, with flared cloth, bent knees and articulated sandals.
+Daphne's portrait has a narrower face, layered himation folds and her existing
+teaching/scroll gesture. Her painter now actually writes both
+`professor_daphne.png` and `birch_speech/birch.png`, so the introduction cannot
+retain a different portrait after regeneration. Alethea's front keeps the
+blue headband, gold chiton, scroll satchel and trowel; the tutorial back and the
+three Elaia cast walkers retain those same identities.
+
+These are native indexed drawings, not resized concept-sheet extracts.
+The two player palettes and cast/folk palettes keep their opaque index roles.
+The player overworld transparent entry is now expressed at exact BGR555
+precision; its value in the ROM is unchanged.
+
+**Current verification:** native PNGs match their painters and preserve
+dimensions, shared palettes and distinct motion frames. The restored native
+toolchain builds the ROM; `smoke_test.sh` and all three `elaia_opening.sh`
+runs pass. New captures include Daphne's introduction, the player choice,
+Kleon's portrait/player throw and the Elaia walkers. Both genders also pass
+the existing walk/run capture script. The images below remain historical;
+director approval and coverage of later supported states are separate gates.
 
 ## Alethea's back pic (catch tutorial)
 
@@ -23,9 +48,9 @@ The new pics are front-only (no back pic). Hoenn trainer pics are untouched.
 - **Source:** `tools/ichor/art/sprites_alethea_back.py` (`--write`, `--preview DIR`, `--grids DIR`).
 - **Style:** it borrows the arm path, hands and ball from `sprites_player.py`, so the throw matches Theo's and Ianthe's frame for frame. The frames are the same as theirs: 0 holding the ball, 1 wind-up, 2 release, 3 rest. They play through `sBackAnims_Hoenn`.
 - **Palette:** her own, embedded in the PNG.
-- **No front pic yet.** The entry points its front pic at `gTrainerFrontPic_None`, so don't use it in a party file. When her front pic is drawn:
-  - Add it to this same entry.
-  - Give it the back pic's palette.
+- **Front pic:** `graphics/trainers/front_pics/alethea.png`, drawn by
+  `sprites_phase2_classes.py alethea --write`. It already uses the back pic's
+  palette, `gTrainerBackPicPalette_Alethea`, in the same trainer entry.
 - **The catch tutorial uses it:** `battle_controller_wally.c` and `reshow_battle_screen.c` draw `TRAINER_PIC_ALETHEA` where they drew `TRAINER_PIC_WALLY`. Wally's own pics are unchanged.
 - **Previews:**
   - `img/sprites_alethea_back.png` shows her four frames, with Ianthe's below.
@@ -39,9 +64,10 @@ The new pics are front-only (no back pic). Hoenn trainer pics are untouched.
 
 Preview: `design/phase1/img/sprites_trainers.png` (Brendan for scale, then Kleon, Ione, grunt, Daphne).
 
-## Tier 1 polish, pass 1
+## Historical tier 1 polish, pass 1
 
 - Titan grunt: lower Corinthian helmet with a swept-back crest, a T-shaped face opening with red eyes, a low crouch, a bronze shoulder guard, a sickle in the near hand and the far fist cocked.
 - Daphne: index finger raised as if mid-lecture, with the end of the scroll unrolled.
 - Kleon: a wider cloak flare and extra cloak folds.
-- Still open: full 3/4 turns with weight shift for all four, more cloth folds, and Kleon's swagger pose. Ione is unchanged.
+- Kleon's swagger and Daphne's folds have a newer native pass above. Ione and
+  the Titan grunt remain at this historical pass until the Akti/Route 1 batch.

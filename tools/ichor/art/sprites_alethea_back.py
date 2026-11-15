@@ -199,7 +199,8 @@ def figure(frame):
     # the satchel sits over the strap, under the hanging arm
     f.patch(SATCHEL_X, SATCHEL_Y, SATCHEL, KEY)
     f.patch(HEAD_X + dx, HEAD_Y, head_rows(), KEY)
-    f.patch(PONY_X + dx, PONY_Y, PONYTAIL, KEY)
+    f.patch(44 + dx, 27, ["kLL.", "kWk.", "kkLk", "LSSk", "LSSk", "SSk."], KEY)
+    f.patch(PONY_X + dx + (1 if frame == 2 else 0), PONY_Y, PONYTAIL, KEY)
     out = f.render()
 
     if frame == 3:

@@ -97,116 +97,100 @@ def front(key):
     m = mats()
     f = Fig(pal)
     girl = v["girl"]
-    hem = 49 if girl else 46
+    hem = 46 if girl else 43
 
-    # cloak: the back of it billows out to the right
-    f.poly([(31, 24), (39, 24), (45, 29), (49, 36), (53, 44), (55, 50), (51, 50), (48, 53), (45, 49),
-            (41, 51), (39, 44), (36, 30)], m["cloak"])
-    f.shade_poly([(46, 37), (47, 37), (51, 50), (49, 50)], 0.5)
-    f.shade_poly([(43, 42), (44, 42), (45, 50), (44, 50)], 0.45)
-    # legs
-    f.poly([(23, hem - 1), (28, hem - 1), (27, 51), (26, 56), (22, 56), (22, 51)], m["skin"], group=100)
-    f.poly([(32, hem - 1), (37, hem - 1), (37, 51), (37, 56), (33, 56), (32, 51)], m["skin"], group=101)
-    # chiton: torso, belt, skirt
-    tun = f.poly([(22, 26), (36, 26), (37, 35), (39, hem), (30, hem + 1), (21, hem), (22, 35)], m["cream"])
-    f.rect(18, 35, 42, 36, m["lea"], clip=tun)
-    f.shade_poly([(34, 37), (40, 37), (40, hem + 1), (35, hem + 1)], 0.35)
-    # folds fanning from the belt, notches where they meet the hem, and the
-    # blousing (kolpos) over the belt
-    for (xa, xb) in ((25, 24), (29, 29), (33, 34)):
-        f.line([(xa, 38), (xb, hem - 1)], "cream_d")
-        f.px(xb, hem, "ink")
-    f.line([(23, 34), (34, 34)], "cream_d")
-    # cloak drape: across the chest from the fibula, over the near arm
-    f.poly([(22, 26), (30, 24), (38, 24), (42, 28), (44, 34), (44, 41), (40, 42), (38, 36), (36, 30),
-            (29, 31), (23, 30)], m["cloak"], group=250)
-    f.shade_poly([(39, 33), (40, 33), (41, 41), (40, 41)], 0.45)
-    # satchel on the near hip below the drape, strap across the chest
-    f.line([(24, 30), (34, 39)], "brown")
-    f.patch(34, 38, [".kkkkk.", "kbbbbbk", "kbbGbbk", "kTkkkTk", "kTTTTTk", "kTTTTbk", ".kkkkk."], KEY)
-    # far (right) arm: Theo holds the ball out toward the opponent,
-    # Ianthe raises it beside her shoulder
+    f.poly([(31, 22), (39, 25), (43, 29), (50, 33), (57, 42), (60, 46),
+            (57, 46), (56, 50), (51, 47), (46, 51), (41, 48), (34, 47), (27, 44)], m["cloak"])
+    f.poly([(25, 26), (22, 31), (20, 39), (17, 43), (19, 45), (25, 40), (28, 28)], m["cloak"])
+    for a, b, delta in (((39, 28), (48, 47), 0.5), ((43, 31), (55, 46), 0.4),
+                        ((36, 29), (41, 46), -0.35)):
+        fold(f, a, b, 1, 2, delta)
+    # Weight is on the far leg; the near knee bends into the next step.
+    f.poly([(24, hem - 2), (29, hem - 1), (27, 49), (23, 53), (21, 57),
+            (17, 57), (19, 51), (22, 48)], m["skin"], group=100)
+    f.poly([(32, hem - 2), (37, hem - 1), (36, 49), (39, 55), (39, 57),
+            (35, 58), (32, 52), (31, 48)], m["skin"], group=101)
+    tun = f.poly([(25, 24), (34, 23), (37, 29), (35, 34), (36, 38),
+                  (40, hem), (36, hem + 1), (32, hem), (28, hem + 2),
+                  (23, hem), (20, hem - 1), (24, 34), (22, 29)], m["cream"])
+    f.rect(20, 33, 39, 34, m["lea"], clip=tun)
+    f.patch(28, 33, ["GM", "DM"], KEY)
+    for a, b in (((25, 35), (23, hem - 1)), ((29, 36), (29, hem)),
+                 ((32, 35), (35, hem))):
+        fold(f, a, b, 1, 2, 0.45)
+    f.line([(25, 31), (28, 32), (33, 31)], "cream_d")
+    f.poly([(24, 23), (29, 21), (35, 22), (40, 25), (39, 29),
+            (34, 28), (30, 26), (25, 27), (21, 25)], m["cloak"], group=250)
+    f.line([(26, 24), (30, 24), (34, 26), (37, 26)], "blue_l")
+    f.line([(25, 27), (34, 37)], "brown")
+    f.patch(34, 35, [".kkkkk.", "kTTTTbk", "kTbGbbk", "kTkkkTk",
+                     "kTTTTTk", "kTTTTbk", ".kkkkk."], KEY)
     if girl:
-        f.thick_line([(21, 30), (16, 34)], 5, m["skin"], group=400)
-        f.thick_line([(16, 34), (13, 27)], 4, m["skin"], group=400)
-        ball, fingers = (9, 20), (11, 23)
+        f.thick_line([(23, 27), (17, 31), (14, 23)], 4, m["skin"], group=400)
+        ball, fingers = (10, 16), (12, 20)
+        f.thick_line([(36, 28), (39, 33), (35, 34)], 4, m["skin"], group=410)
+        f.patch(33, 32, [".kkk.", "kLLSk", "kSSSk", ".kkk."], KEY)
     else:
-        f.thick_line([(21, 30), (16, 31)], 5, m["skin"], group=400)
-        f.thick_line([(16, 31), (11, 28)], 4, m["skin"], group=400)
-        ball, fingers = (5, 23), (9, 25)
-    f.poly([(19, 26), (24, 26), (24, 31), (19, 32)], m["cream"], group=401)
-    # neck
-    f.rect(26, 22, 30, 26, m["skin"], group=500)
-    # fibula pinning the chlamys at the right shoulder
-    f.patch(21, 25, [".k.", "kGk", ".k."], KEY)
-    # ball in the hand, fingers curled over it
+        f.thick_line([(23, 27), (17, 26), (10, 24)], 4, m["skin"], group=400)
+        ball, fingers = (4, 19), (8, 22)
+    f.poly([(21, 25), (25, 26), (24, 30), (20, 29)], m["cream"], group=401)
+    f.rect(28, 20, 31, 24, m["skin"], group=500)
+    f.patch(25, 23, [".k.", "kGk", ".k."], KEY)
     f.patch(ball[0], ball[1], BALL, BALL_KEY)
-    f.patch(fingers[0], fingers[1], ["..kk.", ".kLLk", "kLLSk", "kSLk.", ".kk.."], KEY)
-    # sandals with laces up the shin
-    for x0 in (19, 32):
-        f.patch(x0, 51, [
-            "...k.k..",
-            "...bLb..",
-            "...LbL..",
-            "..kbLbk.",
-            "..kLbLk.",
-            ".kLbLLLk",
-            "kLLbLLLk",
-            "kbbbbbbk",
-            ".kkkkkk.",
-        ], KEY)
-    # head under the petasos
-    f.patch(15, 1, HAT_FRONT + HEAD_FRONT[key], KEY)
+    f.patch(fingers[0], fingers[1], [".kk.", "kLLk", "kSSk", ".kk."], KEY)
+    for x, y in ((16, 52), (34, 53)):
+        f.patch(x, y, ["...bLb.", "...LbL.", "..kbLbk", "..kLbLk",
+                       ".kLbLLk", "kLLbLLk", "kbbbbbk", ".kkkkk."], KEY)
+    f.patch(23, 11, HEAD_FRONT[key], KEY)
     if girl:
-        # the low braid brought forward over the near shoulder
-        f.patch(32, 20, [".kbk.", "kbhbk", "khbbk", "kkbkk", "kbbhk", "kbhbk", "kkbkk", "kbhbk", "khbbk",
-                         "kkbkk", "kbbhk", "kGGMk", ".kbk.", "..k.."], KEY)
+        f.patch(35, 17, [".kbk.", "kbhbk", "khbbk", "kbbhk", "kbhbk",
+                        "kkbkk", "kbbhk", "kGGMk", ".kbk."], KEY)
+    f.patch(15, 2, HAT_FRONT, KEY)
     return f, pal
 
 
 HAT_FRONT = [
-    "............kkkkkk...........",
-    "..........kkGGGGMMkk.........",
-    ".........kGGGGGMMMMMk........",
-    "........kGGGGGMMMMMMDk.......",
-    "........kbbbbbbbbbbbbk.......",
-    "....kkkkGGMMMMMMMMMMMDkkkk...",
-    "..kkGGGGGGGGMMMMMMMMMMMMDDkk.",
-    ".kGGGGGGGGGMMMMMMMMMMMMMMDDDk",
-    "kDGGGGGMMMMMMMMMMMMMMMMMDDDDk",
-    "kkDDDDDDDDDDDDDDDDDDDDDDDDkkk",
-    "..kkkkkkkkkkkkkkkkkkkkkkkk...",
+    "............kkkkk............",
+    "..........kkGGGMMkk..........",
+    ".........kGGGGMMMMMk.........",
+    "........kGGGGMMMMMMDk........",
+    ".......kGGGMMMMMMMMDk........",
+    "....kkkbbbbbbbbbbbbbbkkk.....",
+    "..kkGGGGGGMMMMMMMMMMMDDDkk...",
+    ".kGGGGGGMMMMMMMMMMMMMDDDDk...",
+    "..kkDDDDDDDDDDDDDDDDDDDkk....",
+    "....kkkkkkkkkkkkkkkkkkk......",
 ]
 
 
 HEAD_FRONT = {
     "brendan": [
-        "....kkkkhkkkkkkkhkkhkk.......",
-        "....kSkkSSkkSSSkkkhhk........",
-        "....kSSSSSSSSSSSSkkhk........",
-        "....kLkkLLLkkLLSdkhk.........",
-        "....kLkWLLLkWLLSSdSk.........",
-        "....kLkkLLLkkLLSSdSk.........",
-        "....kLLLLdLLLLSSSdk..........",
-        ".....kLLLLLLdSSSdk...........",
-        ".....kLLLkkSSSSdk............",
-        "......bLLLLSSSdb.............",
-        ".......bbLSSSdb..............",
-        ".........bbbbb...............",
+        ".kkhkkkkkhkkk..",
+        "khkkkLkkkLkhhk.",
+        "kkLSSLLLSSkkhk.",
+        "kLLLkLLLkkLSdk.",
+        "kLLkWkLLkWLSdk.",
+        "kLLkkkLLkkLSdk.",
+        ".kLLLLLLLLLSdk.",
+        ".kLLSLLLSSSSk..",
+        "..kLLkkWkSSk...",
+        "...kLLLSSSk....",
+        "....kLSSSk.....",
+        ".....kkkk......",
     ],
     "may": [
-        "...kkbbhbbbbbbbhbbbbkk.......",
-        "...kbhbbSSbbbSSSbbbbhbk......",
-        "...kbbSSSSSSSSSSSSbbhbk......",
-        "...kbkkkLLLkkkLSdbbhbbk......",
-        "...kbLkWLLLkWLLSSdbbhbk......",
-        "...kbLkkLLLkkLLSSdbbbk.......",
-        "...kbLLLLdLLLLSSSdbbk........",
-        "...kbbLLLLLLdSSSdbbk.........",
-        "....kbLLLkkSSSSdbbk..........",
-        "....kbbLLLLSSSdbk............",
-        ".....kkbbLSSSdbk.............",
-        "......kk.bbbbbk..............",
+        ".kbhbbbbhbbkk..",
+        "kbhbbLbbbLbhbk.",
+        "kbbSSLLLSSbbbk.",
+        "kbLLkLLLkkLbdk.",
+        "kbLkWkLLkWLbdk.",
+        "kbLkkkLLkkLbdk.",
+        ".bLLLLLLLLLbdk.",
+        ".kbLSLLLSSSbk..",
+        "..bLLkkWkSSbk..",
+        "...bLLLSSSbk...",
+        "....bLSSSbk....",
+        ".....kkkk......",
     ],
 }
 
@@ -313,6 +297,7 @@ def back(key, frame):
 
     # head (back of the head, ear and cheek on the right), over the arm
     f.patch(20 + dx, 21, HEAD_BACK[key], KEY)
+    f.patch(44 + dx, 27, ["kLL.", "kWk.", "kkLk", "LSSk", "LSSk", "SSk."], KEY)
     if girl:
         rows = [".kbk."] + [BRAID[i % len(BRAID)] for i in range(16)] + ["kGGMk", "kGMDk", "kbhbk", ".kbk.", "..k.."]
         f.patch(28 + dx, 37, rows, KEY)
