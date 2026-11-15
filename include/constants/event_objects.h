@@ -450,6 +450,35 @@ enum
     // Diktys's upturned boat in Akti, two halves (tools/ichor/art/akti_objects.py)
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_L,
     OBJ_EVENT_GFX_ICHOR_UPTURNED_BOAT_R,
+    // The Oikoumene, batch 1: the Troad, Egypt and the Black Sea
+    // (tools/ichor/art/sprites_oikoumene_ow.py, design/oikoumene/SPRITES.md)
+    OBJ_EVENT_GFX_ICHOR_HERO_LAMPKEEPER,
+    OBJ_EVENT_GFX_ICHOR_PRIAM,
+    OBJ_EVENT_GFX_ICHOR_CASSANDRA,
+    OBJ_EVENT_GFX_ICHOR_HEKTOR,
+    OBJ_EVENT_GFX_ICHOR_ODYSSEUS,
+    OBJ_EVENT_GFX_ICHOR_TROJAN_M,
+    OBJ_EVENT_GFX_ICHOR_TROJAN_F,
+    OBJ_EVENT_GFX_ICHOR_TROJAN_HOPLITE,
+    OBJ_EVENT_GFX_ICHOR_CHARIOTEER,
+    OBJ_EVENT_GFX_ICHOR_SHEPHERD_IDA,
+    OBJ_EVENT_GFX_ICHOR_PROTEUS,
+    OBJ_EVENT_GFX_ICHOR_HELEN,
+    OBJ_EVENT_GFX_ICHOR_EGYPTIAN_M,
+    OBJ_EVENT_GFX_ICHOR_EGYPTIAN_F,
+    OBJ_EVENT_GFX_ICHOR_SUN_PRIEST,
+    OBJ_EVENT_GFX_ICHOR_SCRIBE,
+    OBJ_EVENT_GFX_ICHOR_EMBALMER,
+    OBJ_EVENT_GFX_ICHOR_NILE_BOATMAN,
+    OBJ_EVENT_GFX_ICHOR_PHOENICIAN,
+    OBJ_EVENT_GFX_ICHOR_AIETES,
+    OBJ_EVENT_GFX_ICHOR_MEDEA,
+    OBJ_EVENT_GFX_ICHOR_PHINEUS,
+    OBJ_EVENT_GFX_ICHOR_COLCHIAN_M,
+    OBJ_EVENT_GFX_ICHOR_COLCHIAN_F,
+    OBJ_EVENT_GFX_ICHOR_ARGONAUT,
+    OBJ_EVENT_GFX_ICHOR_SORCERESS,
+    OBJ_EVENT_GFX_ICHOR_CHALYBES_SMITH,
     // End of Ichor object events
 
     NUM_OBJ_EVENT_GFX,
@@ -612,6 +641,12 @@ enum
 // Claim the next free one at the end of this block.
 #define OBJ_EVENT_PAL_TAG_ICHOR_CAST              0x1134 // the cast, plus the Shepherd, Hoplite, Augur and Acolyte walkers
 #define OBJ_EVENT_PAL_TAG_ICHOR_FOLK              0x1135 // the townsfolk, plus the Harvester and Goatherd walkers
+// The Oikoumene's ten lands take 0x1146-0x114F from the top of the range, one
+// palette per land, so they never race the Aethos sessions counting up from
+// 0x1136 (design/oikoumene/SPRITES.md, "Overworld").
+#define OBJ_EVENT_PAL_TAG_ICHOR_TROAD             0x1146 // the Troad's people
+#define OBJ_EVENT_PAL_TAG_ICHOR_KEMET             0x1147 // Egypt's people, and the Phoenician
+#define OBJ_EVENT_PAL_TAG_ICHOR_PONTOS            0x1148 // the Black Sea's people
 // End of Ichor palette tags
 
 #if OW_FOLLOWERS_POKEBALLS
