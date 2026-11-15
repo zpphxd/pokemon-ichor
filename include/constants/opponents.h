@@ -51,7 +51,42 @@
 #define TRAINERS_END_ACT2                     0
 
 // world-act3, ids 320-499: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
-#define TRAINERS_END_ACT3                     0
+// Each region takes the next ids, in design/phase4/SCRIPT.md Part 3's order.
+
+// Kythera and Melos, ids 320-347 (Part 3, "Kythera's trainers"): the Euploia's
+// voyage, Melos, Route 22, Skandeia, the Foam Road, the spring and Echo's caves,
+// the Temple of Aphrodite, the Neraida falls, Route 23 and Antikythera.
+// Knossa continues at 348.
+#define TRAINER_ICHOR_EUDOROS                 320
+#define TRAINER_ICHOR_KERDON                  321
+#define TRAINER_ICHOR_KIMOLOS                 322
+#define TRAINER_ICHOR_THEION                  323
+#define TRAINER_ICHOR_KYMAIOS                 324
+#define TRAINER_ICHOR_ANTALKIDAS              325
+#define TRAINER_ICHOR_NIKANDROS               326
+#define TRAINER_ICHOR_HAGNE                   327
+#define TRAINER_ICHOR_MOLYBDOS                328
+#define TRAINER_ICHOR_OCHROS                  329
+#define TRAINER_ICHOR_PSEPHOS                 330
+#define TRAINER_ICHOR_AMPHITOS                331
+#define TRAINER_ICHOR_SKOPAS                  332
+#define TRAINER_ICHOR_PONTINOS                333
+#define TRAINER_ICHOR_KASSITEROS              334
+#define TRAINER_ICHOR_PHILOTES                335
+#define TRAINER_ICHOR_KALAMIS                 336
+#define TRAINER_ICHOR_KOLYMBOS                337
+#define TRAINER_ICHOR_ANTHOUSA                338
+#define TRAINER_ICHOR_RHODANTHE               339
+#define TRAINER_ICHOR_GALATEA_1               340
+#define TRAINER_ICHOR_LYKIDAS                 341
+#define TRAINER_ICHOR_KERINTHOS               342
+#define TRAINER_ICHOR_MOPSOS                  343
+#define TRAINER_ICHOR_THESTYLIS               344
+#define TRAINER_ICHOR_BATHYLLOS               345
+#define TRAINER_ICHOR_EUTHYKLES               346
+#define TRAINER_ICHOR_MYRSINE                 347
+
+#define TRAINERS_END_ACT3                     348
 
 // The post-game, ids 500-679: the Labors, Katabasis, the Olympiad, the Odyssey, Atlantis.
 #define TRAINERS_END_POSTGAME                 0

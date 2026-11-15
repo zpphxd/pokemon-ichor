@@ -1315,4 +1315,26 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
     },
+    // Ichor: Act III's Kythera, on placeholder art until the portraits are drawn
+    // (design/phase4/SCRIPT.md's and design/phase2/SCRIPT.md's class tables).
+    [TRAINER_PIC_HIEROPHANT_GALATEA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_LeaderWinona, gTrainerPalette_LeaderWinona),
+    },
+    [TRAINER_PIC_SCULPTOR] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Hiker, gTrainerPalette_Hiker),
+    },
+    [TRAINER_PIC_MERCHANT] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Gentleman, gTrainerPalette_Gentleman),
+    },
+    [TRAINER_PIC_PILGRIM] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_HexManiac, gTrainerPalette_HexManiac),
+    },
+    [TRAINER_PIC_BEEKEEPER] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_BugCatcher, gTrainerPalette_BugCatcher),
+    },
 };

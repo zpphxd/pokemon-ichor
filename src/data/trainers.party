@@ -427,6 +427,530 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 /* Ichor: world-act3 (ids 320-499) */
 
+/*
+Kythera and Melos (ids 320-347), from design/phase4/SCRIPT.md Part 3, in its
+order. Species are Aethos names (constants/ichor_species_stubs_act3.h).
+Where the build differs from the script:
+  - Pic: Titanborn M / F is the Titanborn portrait, Titan Grunt (as in the slice
+    and Phase 2), until the art batch draws the pair.
+  - Pic: Pilgrim M is Pilgrim, world-act1's portrait.
+  - Music: SCRIPT's Swimmer, Girl and Rich jingles are still Emerald's (SCRIPT
+    Part 9), so those trainers use the Ichor Male or Female jingle, by gender,
+    until the music batch repoints them: Eudoros, Kerdon, Kymaios, Antalkidas,
+    Hagne, Pontinos, Philotes, Kolymbos, Anthousa, Rhodanthe, Thestylis,
+    Bathyllos, Euthykles and Myrsine.
+  - Abilities the vanilla stand-in can't have are left out, because the game
+    stops on an "illegal ability" screen when the battle starts (trainer_util.c's
+    SetCorrectAbilityNum). Put them back when the dex lands:
+      Kerdon's Midonos       Ability: Good as Gold
+      Philotes's Himerow     Ability: Cute Charm
+      Galatea's Himerow      Ability: Cute Charm
+      Galatea's Chelyra      Ability: Punk Rock
+      Galatea's Aphrogene    Ability: Marvel Scale
+      Galatea's Korantha     Ability: Natural Cure
+      Galatea's Kalliglyph   Ability: Solid Rock
+    tools/ichor/tests/act3_trainers.sh fails once a species can take its
+    ability and the line is still missing.
+*/
+
+=== TRAINER_ICHOR_EUDOROS ===
+Name: EUDOROS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KERDON ===
+Name: KERDON
+Class: Merchant
+Pic: Merchant
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Pithound
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Midonos
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KIMOLOS ===
+Name: KIMOLOS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_THEION ===
+Name: THEION
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Gigantomb
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KYMAIOS ===
+Name: KYMAIOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ANTALKIDAS ===
+Name: ANTALKIDAS
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kynoketos
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_NIKANDROS ===
+Name: NIKANDROS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Narkeray
+Level: 41
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_HAGNE ===
+Name: HAGNE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Aphrogene
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_MOLYBDOS ===
+Name: MOLYBDOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Plouteras
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Cairnolith
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_OCHROS ===
+Name: OCHROS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Kolossette
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Taurivet
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PSEPHOS ===
+Name: PSEPHOS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Basic Trainer
+
+Kaprodon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Midonos
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_AMPHITOS ===
+Name: AMPHITOS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Aphrell
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_SKOPAS ===
+Name: SKOPAS
+Class: Sculptor
+Pic: Sculptor
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Glyphlet
+Level: 43
+Ability: Sturdy
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PONTINOS ===
+Name: PONTINOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KASSITEROS ===
+Name: KASSITEROS
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Basic Trainer
+
+Cairnolith
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Telkanvil
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_PHILOTES ===
+Name: PHILOTES
+Class: Pilgrim
+Pic: Pilgrim
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Himerow
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narcisheen
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KALAMIS ===
+Name: KALAMIS
+Class: Fisher
+Pic: Fisherman
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Narkeray
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrogene
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KOLYMBOS ===
+Name: KOLYMBOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Galenyon
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Kynoketos
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_ANTHOUSA ===
+Name: ANTHOUSA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Aphrogene
+Level: 44
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Psychora
+Level: 45
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_RHODANTHE ===
+Name: RHODANTHE
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Himerow
+Level: 45
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Korantha
+Level: 45
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+Aphrogene
+Level: 46
+IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
+
+=== TRAINER_ICHOR_GALATEA_1 ===
+Name: GALATEA
+Class: Hierophant
+Pic: Hierophant Galatea
+Gender: Female
+Music: Female
+Items: Full Restore / Full Restore
+AI: Basic Trainer / Check Bad Move
+
+Himerow
+Level: 46
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dazzling Gleam
+- Acrobatics
+- Tailwind
+- Play Rough
+
+Chelyra
+Level: 46
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Sing
+- Alluring Voice
+- Earth Power
+- Calm Mind
+
+Aphrogene @ Mystic Water
+Level: 47
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Moonblast
+- Scald
+- Calm Mind
+- Draining Kiss
+
+Korantha @ Miracle Seed
+Level: 47
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Dazzling Gleam
+- Energy Ball
+- Synthesis
+- Leech Seed
+
+Kalliglyph @ Sitrus Berry
+Level: 48
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Dazzling Gleam
+- Power Gem
+- Calm Mind
+- Wish
+
+=== TRAINER_ICHOR_LYKIDAS ===
+Name: LYKIDAS
+Class: Goatherd
+Pic: Goatherd
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Gelasable
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_KERINTHOS ===
+Name: KERINTHOS
+Class: Beekeeper
+Pic: Beekeeper
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Melisseer
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Psychora
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_MOPSOS ===
+Name: MOPSOS
+Class: Augur
+Pic: Augur
+Gender: Male
+Music: Hiker
+AI: Basic Trainer
+
+Sophowl
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Enigmaw
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+- Psychic
+- Close Combat
+- Calm Mind
+- Future Sight
+
+=== TRAINER_ICHOR_THESTYLIS ===
+Name: THESTYLIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Korantha
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Hierolive
+Level: 47
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_BATHYLLOS ===
+Name: BATHYLLOS
+Class: Diver
+Pic: Swimmer M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Aphrell
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_EUTHYKLES ===
+Name: EUTHYKLES
+Class: Sailor
+Pic: Sailor
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Kynoketos
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Harpelle
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+=== TRAINER_ICHOR_MYRSINE ===
+Name: MYRSINE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Narkeray
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrogene
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
 
 /* Ichor: the post-game (ids 500-679) */
 

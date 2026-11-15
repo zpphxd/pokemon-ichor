@@ -191,6 +191,14 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_AUGUR,
     TRAINER_PIC_ACOLYTE_M,
     TRAINER_PIC_ACOLYTE_F,
+    // Ichor: Act III's Kythera (design/phase4/SCRIPT.md Part 3), placeholder
+    // art until the portraits are drawn. world-act1 also defines MERCHANT and
+    // PILGRIM, with their real art: when the branches meet, keep those two.
+    TRAINER_PIC_HIEROPHANT_GALATEA,
+    TRAINER_PIC_SCULPTOR,
+    TRAINER_PIC_MERCHANT,
+    TRAINER_PIC_PILGRIM,
+    TRAINER_PIC_BEEKEEPER,
     TRAINER_PIC_COUNT,
 };
 
@@ -545,6 +553,16 @@ enum TrainerClassID
     TRAINER_CLASS_TITANBORN,
     TRAINER_CLASS_ACOLYTE,
     TRAINER_CLASS_HIEROPHANT,
+    // Ichor: Phase 2 classes that Act III's Kythera uses (design/phase2/SCRIPT.md,
+    // "New trainer classes"). world-act1 adds them too: when the branches meet,
+    // keep one copy of each.
+    TRAINER_CLASS_MERCHANT,
+    TRAINER_CLASS_PILGRIM,
+    TRAINER_CLASS_FISHER,
+    TRAINER_CLASS_BEEKEEPER,
+    // Ichor: Act III classes (design/phase4/SCRIPT.md, "New trainer classes")
+    TRAINER_CLASS_SCULPTOR,
+    TRAINER_CLASS_DIVER,
 
     TRAINER_CLASS_COUNT,
 };

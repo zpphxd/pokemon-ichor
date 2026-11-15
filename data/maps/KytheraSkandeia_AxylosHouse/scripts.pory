@@ -10,11 +10,12 @@
 // the guests' scene plays; challenging them can be refused, and talking to
 // Axylos, the guests or Alethea asks again.
 //
+// The guests are one double battle, both trainers at once:
+// TRAINER_ICHOR_OCHROS and TRAINER_ICHOR_PSEPHOS (SCRIPT.md Part 3). A loss
+// whites out with both still at the table, and talking to anyone asks again.
+//
 // TODO(act3): exit to MAP_KYTHERA_SKANDEIA (the warp goes to a placeholder until
 // the outdoor map exists; kythera_homes.py's DOORS takes its warp id).
-// TODO(act3): the double battle, trainerbattle_two_trainers with
-// TRAINER_ICHOR_OCHROS and TRAINER_ICHOR_PSEPHOS (SCRIPT.md Part 3), once those
-// trainers exist. Their defeat lines are below.
 // TODO(engine §3): Zeus +5 Favor when the guests go (special Ichor_AddFavor).
 // TODO(engine §10): half of the Broken Ring (a key item, not yet in the game) and
 // FLAG_ICHOR_XENIA_BROKEN_RING_1; and the xenia rest until a chosen hour.
@@ -35,7 +36,7 @@ text KytheraSkandeia_AxylosHouse_Name_Ochros { "OCHROS" }
 text KytheraSkandeia_AxylosHouse_Name_Psephos { "PSEPHOS" }
 text KytheraSkandeia_AxylosHouse_Name_Alethea { "ALETHEA" }
 
-// For the double battle, once it exists (SCRIPT.md Part 3).
+// The double battle's defeat lines (SCRIPT.md Part 3).
 text KytheraSkandeia_AxylosHouse_Text_OchrosDefeat { format("Full. I was full anyway.") }
 text KytheraSkandeia_AxylosHouse_Text_PsephosDefeat { format("I wasn't full.") }
 
@@ -91,7 +92,8 @@ script KytheraSkandeia_AxylosHouse_EventScript_Challenge {
     setspeaker(KytheraSkandeia_AxylosHouse_Name_Ochros)
     msgbox(format("Eat faster."))
     closemessage
-    // TODO(act3): the double battle goes here (see the header).
+    trainerbattle_two_trainers(TRAINER_ICHOR_OCHROS, KytheraSkandeia_AxylosHouse_Text_OchrosDefeat,
+                               TRAINER_ICHOR_PSEPHOS, KytheraSkandeia_AxylosHouse_Text_PsephosDefeat)
     setspeaker(KytheraSkandeia_AxylosHouse_Name_Ochros)
     msgbox(format("Bad bread anyway."))
     setspeaker(KytheraSkandeia_AxylosHouse_Name_Psephos)
