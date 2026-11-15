@@ -56,19 +56,16 @@ static bool32 ShouldRunTrainerSlideLastLowHp(u32 lastId, enum BattlerId battler,
 static void SetTrainerSlideParameters(enum BattlerId battler, u32* lastId, u32* trainerId, u32* retValue);
 static bool32 IsSlideInitalizedOrPlayed(enum BattlerId battler, enum TrainerSlideType slideId);
 
-// Partner trainers must be added as TRAINER_PARTNER(PARTNER_XXXX)
-static const u8* const sTrainerSlides[DIFFICULTY_COUNT][TRAINER_PARTNER(PARTNER_COUNT)][TRAINER_SLIDE_COUNT] =
+// Ichor: only one difficulty's slides, used by every difficulty. Each table is sized by
+// every trainer id, so a table per difficulty cost three times the ROM (about 960 KiB at
+// 1,536 trainers). Easy and Hard fell back to Normal anyway. Add slides here as
+// [TRAINER_X] = { ... }; partner trainers as TRAINER_PARTNER(PARTNER_XXXX).
+static const u8* const sTrainerSlides[TRAINER_PARTNER(PARTNER_COUNT)][TRAINER_SLIDE_COUNT] =
 {
-    [DIFFICULTY_NORMAL] =
-    {
-    },
 };
 
-static const u8* const sFrontierTrainerSlides[DIFFICULTY_COUNT][FRONTIER_TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
+static const u8* const sFrontierTrainerSlides[FRONTIER_TRAINERS_COUNT][TRAINER_SLIDE_COUNT] =
 {
-    [DIFFICULTY_NORMAL] =
-    {
-    },
 };
 
 #define TRAINER_RED_TEST    1
@@ -125,10 +122,11 @@ static const u8* const *GetTrainerSlideArray(enum DifficultyLevel difficulty, u3
 #if TESTING
     return (FlagGet(TESTING_FLAG_TRAINER_SLIDES) ? sTestTrainerSlides[difficulty][trainerId] : NULL);
 #else
+    // Ichor: one set of slides for every difficulty (see sTrainerSlides)
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-        return sFrontierTrainerSlides[difficulty][trainerId];
+        return sFrontierTrainerSlides[trainerId];
     else
-        return sTrainerSlides[difficulty][trainerId];
+        return sTrainerSlides[trainerId];
 #endif // TESTING
 }
 
