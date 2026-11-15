@@ -16,6 +16,8 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 | 6 | The voyage and Kaldera: the *Paralos*, Delos, Route 19, Paros, the caldera road, Kaldera and its interiors, the Temple of Hephaestus, the Telchines' forge, Nea Kameni; the empty house in Elaia | 58–67 | |
 | 7 | The optional lands: Euboia; Routes 17–18 with Marathon, Halai and Sounion; the open Aegean | — | |
 
+**Order, by the main story's critical path** (the director, 2026-11-14; the user: "I want to get to full 8 gyms + elite 4"): Thyrsa for Laurel 4 (batch 1, built) → Arkadia and the Temple of Artemis for Laurel 5 (batch 3, running) → **Astyra**, the midpoint (batch 5, next) → **Kaldera and the Temple of Hephaestus** for Laurel 6 (batch 6) → the routes connecting them (batch 4: Routes 13–16, Nemea, Daphni, the Act II changes to Emporion and Eleusa). The optional lands (batch 7: Euboia, Marathon, Sounion, Paros, the open Aegean; and Trophonios's cave, already under way in batch 2) come after a playable path through Laurel 6. Every map is built to §8 as it goes.
+
 Each batch ends with a report to the director: the branch and commit, what's playable, the map renders, the test results and the ROM delta.
 
 ## The route standard (MAP_DESIGN §8), for every batch
