@@ -349,8 +349,8 @@ shortcut out.
 | Where | What |
 |---|---|
 | (9,2)-(9,3) | **The bronze grille**, inside: daylight through the bars, cut steps below. Warp 0 on the steps (MB_NORTH_ARROW_WARP) to `MAP_LEBADEIA` warp 3; arriving from the grille lands here. |
-| (4-14, 4-8) | **The upper chamber**: the priests' paving, votive tablets (6,3) and (13,3), clay lamps (7,3) and (11,3), bread (5,4) and honey cakes (4,5), and **the throne of Mnemosyne** (12,4)-(12,5). Lit by the day through the grille (a lit zone keyed on `FLAG_ICHOR_TROPHONIOS_GRILLE_OPEN`, so always lit while you can be inside). Hidden Honey (13,4), in the corner by the throne. |
-| (9,8)-(9,11) | **The rope ladder** down the chamber's cliff (a face three tall). Coord events at (9,9) and (9,10) switch between the upper chamber's light and the stream's. |
+| (4-14, 4-8) | **The upper chamber**: the priests' paving, votive tablets (6,3) and (13,3), clay lamps (7,3) and (11,3), bread (5,4) and honey cakes (4,5), and **the throne of Mnemosyne** (12,4)-(12,5). Dark like the rest (pass 3 says why). Hidden Honey (13,4), in the corner by the throne. |
+| (9,8)-(9,11) | **The rope ladder** down the chamber's cliff (a face three tall). Coord events at (9,9) (out of the stream's lit zone) and (9,10) (into it). |
 | (9,12) | The ladder's foot: "The ladder ends in the dark. Water is running somewhere close." (once per visit; not when coming up from B2F). Escape Rope (8,13). |
 | (14,13)-(14,14) | **Brazier 1**, `FLAG_ICHOR_BRAZIERS_START + 0x21`: lights the stream chamber (rows 10-17, and the outcrop room open off the south bank) for good. Lit-zone coord events on the zone's two exits, (4,17)/(4,18) and (22-23,17)/(22-23,18). |
 | (15,15) | **Herkyna's goose**, a Halcyling standing in the stream (`FLAG_ICHOR_FOUND_HERKYNAS_GOOSE`). Talk from the bank; YES sends it home. |
@@ -383,7 +383,7 @@ shortcut out.
 - **The first YES at the hole**: the music fades, the screen goes black for 120 frames with no
   text, `FLAG_ICHOR_TROPHONIOS_READING` is set, and the player is warped silently onto the
   throne's seat on B1F (12,5). B1F's ON_TRANSITION sees the player there, shows Saon, a priest and
-  Alethea, lights the chamber and starts the scene (ON_FRAME): Saon's three lines, the player
+  Alethea, and starts the scene (ON_FRAME), by torchlight: Saon's three lines, the player
   looking left and right, "...Nothing?", the priests' silent look at each other, "Write it down." /
   "Write what?" / "Write that we asked.", the priests walking out through the grille, Alethea's two
   lines, and Alethea leaving. The cave's music comes back as the player gets up. No music plays
@@ -426,13 +426,52 @@ shortcut out.
 
 ### Engine notes
 
+- **A fully lit map can't be darkened again** until it reloads. When a lit zone or a brazier
+  brings the light to level 0, `UpdateFlashLevelEffect` stops the scanline effect; later
+  `Ichor_AnimateTorchFlash` (leaving a lit zone, dousing) only rewrites the window buffers of an
+  effect that is no longer running, and `AnimateFlash` toward a smaller radius ends on its first
+  step. So after brazier 1 is lit, all of B1F is bright until the player leaves the floor (and
+  likewise B2F after brazier 2, at its very end); the saved flash level is right, the picture
+  isn't. The cave's zone scripts follow the API, so they'll behave once the engine restarts the
+  effect when darkening (`InitCurrentFlashLevelScanlineEffect` does it on map load).
 - **`EventScript_IchorEnterLitZone` hangs if the map is already fully lit.** Its `animateflash(0)`
   eases from radius 200 to 200; `StartUpdateFlashLevelEffect` sets the step to -1 when the radii
   are equal, so the radius shrinks forever and the script never resumes. Both floors keep
-  `VAR_TEMP_2` (1 while fully lit) and only call it from the dark. The engine should return early
+  `VAR_TEMP_6` (1 while fully lit; `VAR_TEMP_2` and `_3` are the engine's carried flame) and only call it from the dark. The engine should return early
   when the level is already 0.
 - The rock-smash table for the rubble is the coordinator's to stage. By Part 4's band: Pebblith
   28-29 (60%), Pebblith 29-30 (30%), Cairnolith 29-30 (5%), Cairnolith 30-31 (4%), Spalunk 30-31 (1%).
+
+### State, stubs and what the integrator wires
+
+**Flags.** Bank 0x1A8-0x1AF: `FLAG_ICHOR_TROPHONIOS_SNAKE_FED`; the six item balls
+`FLAG_ICHOR_ITEM_TROPHONIOS_B1F_MAX_REPEL`, `_B1F_ESCAPE_ROPE`, `_B2F_MAX_ETHER`,
+`_B2F_HYPER_POTION`, `_B2F_SPELL_TAG`, `_B2F_TM_FUTURE_SIGHT`; and
+`FLAG_ICHOR_HIDE_TROPHONIOS_GREAT_BOULDER`. Vanilla 0x330-0x333 for the hidden items. Shared and
+engine flags used: `FLAG_ICHOR_TROPHONIOS_GRILLE_OPEN`, `_TROPHONIOS_READING`,
+`_FOUND_HERKYNAS_GOOSE`; `FLAG_ICHOR_BRAZIERS_START + 0x21`, `+ 0x22`;
+`FLAG_ICHOR_DIG_FIXED_START + 0x12` (named in the stub only). Temp state: `VAR_TEMP_0` (the
+reading's ON_FRAME), `VAR_TEMP_1` (the ladder's line), `VAR_TEMP_4`/`_5` (the arrival tile),
+`VAR_TEMP_6` (fully lit), `VAR_TEMP_9` (never set: the always-on coord events), `FLAG_TEMP_11`
+(the reading's three), `FLAG_TEMP_12`/`_13` (the rubble and the web, cleared each visit).
+Carried flames (the engine's newest §2) aren't used: Part 5 names no fire; the hole's "cold draft"
+could run `EventScript_IchorDraught` later if the director wants it.
+
+**Stubs** (`grep -rn ICHOR_STUB_`): `ICHOR_STUB_MUSIC` (`MUS_ICHOR_HOLLOW` on both floors, and
+its restart after the reading), `ICHOR_STUB_DIG` (the great boulder's fixed dig, a Rare Bone),
+`ICHOR_STUB_TMS` (TM Future Sight; Skill Swap stands in), `ICHOR_STUB_AETHOS_DEX` (the
+Halcyling's sprite).
+
+**For the integrator.**
+- Lebadeia's warp 3 (the grille) leads to B1F's warp 0 (9,3). The hole's way out is
+  `warp(MAP_LEBADEIA, 3)`: the grille's tile, then the door's walk out to the tile in front. If
+  Lebadeia's grille isn't a door behavior, change it to the coordinates of the tile in front.
+- Shared files with appended entries: `src/data/tilesets/headers.h`, `graphics.h`, `metatiles.h`
+  (`gTileset_Trophonios`); `include/constants/metatile_labels.h` (between its markers);
+  `include/constants/event_objects.h` and the four object tables (`OBJ_EVENT_GFX_ICHOR_COBWEB`,
+  `_GREAT_BOULDER`, before "End of Ichor object events"); `include/constants/flags.h`;
+  `data/layouts/layouts.json` (the two layouts' size and tilesets).
+- No heal location, herm or party change. The rock-smash table for the rubble (Engine notes).
 
 ### Render-and-critique passes
 
@@ -460,4 +499,21 @@ oracle's chamber was carved round with its shelf along the north side, and the l
 step (a short face with a lip and a shadow). Still wrong: the floor's mottle repeats where it's
 wide and empty, and B1F's south half is still boxy.
 
-**Pass 3** (in game, from the test's screenshots): see below.
+**Pass 3** (in game, from `tools/ichor/tests/act2_trophonios.sh`'s screenshots;
+`img/trophonios_ingame.png` is a contact sheet of them).
+- **The dark reads.** By torchlight the cap is clearly darker than the floor and the faces stand
+  out warm, so walls, floor, water and the way on are plain inside the 3.5-tile circle; the black
+  pool, the hole, the web and the boulder read at a glance. The great boulder's sprite, wedged
+  between the niche's jambs, looks like part of the rock.
+- **The upper chamber was lit, and it broke the dark.** I had made the chamber inside the grille
+  a lit zone (daylight through the bars). In game, once a map is fully lit the engine can't darken
+  it again (Engine notes), so all of B1F stayed bright from the first step. The chamber is dark
+  now, lit only by its lamps' metatiles and the torch, and the reading plays by torchlight: the
+  priests walk out of the circle into the dark toward the grille, which suits the scene.
+- **The map-name popup** said LEBADEIA on entering each floor (the cave shares Lebadeia's section).
+  It's off on both floors.
+- **Wide floors.** The north bank and B2F's long passage got a fallen block by the ladder's foot
+  and scree; the wet sheen and set stones break the mottle.
+- The scene itself reads as written: the player on the throne facing south, Saon and the priest
+  in front, Alethea to one side; the look left and right; "...Nothing?"; the silent look between
+  the priests; the speaker boxes; the walk out; the way out to Lebadeia.

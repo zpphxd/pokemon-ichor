@@ -7,7 +7,7 @@
 # Quickstarts a new game, gives a test team, Act I's Torch and Hammer and one Honey,
 # opens the grille (Saon's flag) and warps in through it (act2_trophonios_setup.s,
 # assembled into spare EWRAM: nothing in the ROM is patched), then plays both floors
-# with key presses: the lit upper chamber, the ladder, brazier 1, Herkyna's goose, the
+# with key presses: the upper chamber and the throne, the ladder, brazier 1, Herkyna's goose, the
 # chalk hand lit and doused, the Bronze Obol, the rubble and the Max Repel, Philomelos;
 # the spring, forks A-C and their pay, the web den, the snake and the honey, Melampos,
 # the great boulder with and without Hephaestus's Hammer, brazier 2, the TM, the hole

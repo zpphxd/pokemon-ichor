@@ -434,7 +434,8 @@ def b1f_grid():
     # texture: stalagmites, scree, damp
     cells(g, [(3, 12), (23, 12), (8, 21), (15, 19)], "^")
     cells(g, [(17, 12), (14, 21)], "!")
-    cells(g, [(24, 17), (2, 14), (3, 20), (7, 19)], "s")
+    cells(g, [(6, 13)], "b")               # a block fallen from the cliff, by the ladder's foot
+    cells(g, [(24, 17), (2, 14), (3, 20), (7, 19), (5, 12), (7, 12), (19, 13), (20, 13)], "s")
     cells(g, [(10, 14), (16, 14), (21, 17), (9, 18), (13, 18)], ",")
     return g
 
@@ -478,7 +479,7 @@ def b2f_grid():
     # texture
     cells(g, [(13, 9), (24, 3)], "^")
     cells(g, [(11, 3), (22, 10)], "!")
-    cells(g, [(5, 8), (14, 17)], "s")
+    cells(g, [(5, 8), (14, 17), (11, 4), (15, 3), (23, 5)], "s")
     cells(g, [(19, 4), (3, 7), (22, 15)], ",")
     return g
 
@@ -562,6 +563,7 @@ def build_b1f(cat):
         "object_events": [
             obj(P + "MAN", 20, 21, B1 + "Philomelos", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=3,
                 local_id="LOCALID_TROPHONIOS_PHILOMELOS"),
+            # ICHOR_STUB_AETHOS_DEX: the Halcyling's sprite is its stand-in species' until the dex lands
             obj("OBJ_EVENT_GFX_SPECIES(HALCYLING)", 15, 15, B1 + "Goose", "MOVEMENT_TYPE_LOOK_AROUND",
                 flag="FLAG_ICHOR_FOUND_HERKYNAS_GOOSE", local_id="LOCALID_TROPHONIOS_GOOSE"),
             obj("OBJ_EVENT_GFX_BREAKABLE_ROCK", 4, 19, "EventScript_RockSmash", flag="FLAG_TEMP_12",
@@ -582,8 +584,8 @@ def build_b1f(cat):
         ],
         "coord_events": [
             trigger(lx, 12, B1 + "LadderFoot", "VAR_TEMP_1", "0"),
-            # lit zones: the upper chamber (daylight through the grille), the stream (brazier 1)
-            trigger(lx, 9, B1 + "EnterUpper"),
+            # the lit zone: the stream chamber (brazier 1)
+            trigger(lx, 9, B1 + "LeaveStream"),
             trigger(lx, 10, B1 + "EnterStream"),
             trigger(4, 17, B1 + "EnterStream"),
             trigger(4, 18, B1 + "LeaveStream"),
@@ -726,7 +728,7 @@ def write_events(folder, events):
     mp["requires_flash"] = True
     mp["map_type"] = "MAP_TYPE_UNDERGROUND"
     mp["allow_escaping"] = True
-    mp["show_map_name"] = True
+    mp["show_map_name"] = False          # the section is Lebadeia's: no popup on the way down
     mp["battle_scene"] = "MAP_BATTLE_SCENE_NORMAL"
     for k in ("object_events", "warp_events", "coord_events", "bg_events"):
         mp[k] = events.get(k, [])

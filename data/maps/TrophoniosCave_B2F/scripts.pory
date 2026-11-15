@@ -11,11 +11,11 @@ const BRAZIER_FLAG = FLAG_ICHOR_BRAZIERS_START + 0x22
 
 mapscripts TrophoniosCave_B2F_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
-        setvar(VAR_TEMP_2, 0)                      // 1 while the map is fully lit
+        setvar(VAR_TEMP_6, 0)                      // 1 while the map is fully lit
         getplayerxy(VAR_TEMP_4, VAR_TEMP_5)
         if (flag(BRAZIER_FLAG) && var(VAR_TEMP_4) < 12 && var(VAR_TEMP_5) > 12) {
             setflashlevel(0)                       // loaded inside the lit oracle's chamber
-            setvar(VAR_TEMP_2, 1)
+            setvar(VAR_TEMP_6, 1)
         }
     }
     MAP_SCRIPT_ON_LOAD {
@@ -140,26 +140,26 @@ script TrophoniosCave_B2F_EventScript_DigSpot {
 
 // --- the oracle's chamber -----------------------------------------------------------------
 
-// The lit zone (ENGINE_API section 2). VAR_TEMP_2 guards the engine's
+// The lit zone (ENGINE_API section 2). VAR_TEMP_6 guards the engine's
 // EventScript_IchorEnterLitZone, which never finishes if the light is already full
 // (TrophoniosCave_B1F/scripts.pory says why).
 script TrophoniosCave_B2F_EventScript_EnterOracle {
     if (flag(BRAZIER_FLAG)) {
-        if (var(VAR_TEMP_2) == 0) {
+        if (var(VAR_TEMP_6) == 0) {
             setvar(VAR_0x8004, BRAZIER_FLAG)
             call(EventScript_IchorEnterLitZone)
-            setvar(VAR_TEMP_2, 1)
+            setvar(VAR_TEMP_6, 1)
         }
-    } elif (var(VAR_TEMP_2) == 1) {
+    } elif (var(VAR_TEMP_6) == 1) {
         call(EventScript_IchorLeaveLitZone)
-        setvar(VAR_TEMP_2, 0)
+        setvar(VAR_TEMP_6, 0)
     }
 }
 
 script TrophoniosCave_B2F_EventScript_LeaveOracle {
-    if (var(VAR_TEMP_2) == 1) {
+    if (var(VAR_TEMP_6) == 1) {
         call(EventScript_IchorLeaveLitZone)
-        setvar(VAR_TEMP_2, 0)
+        setvar(VAR_TEMP_6, 0)
     }
 }
 
@@ -168,7 +168,7 @@ script TrophoniosCave_B2F_EventScript_Brazier {
     setvar(VAR_0x8005, TRUE)
     call(EventScript_IchorBrazier)
     if (var(VAR_RESULT) == TRUE) {
-        setvar(VAR_TEMP_2, 1)
+        setvar(VAR_TEMP_6, 1)
         call(TrophoniosCave_B2F_EventScript_SetBrazierLit)
         special(DrawWholeMapView)
     }

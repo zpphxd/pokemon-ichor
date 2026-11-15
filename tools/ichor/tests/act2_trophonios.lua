@@ -1,7 +1,7 @@
 -- Trophonios's cave check, run by tools/ichor/tests/act2_trophonios.sh (read it first).
 --
 -- Plays the optional descent (SCRIPT.md Part 5, beats 35B-35C) with key presses on
--- slice_lib's walker: in through the grille (opened directly, as Saon does), the lit
+-- slice_lib's walker: in through the grille (opened directly, as Saon does), the dark
 -- upper chamber and the throne, down the ladder into the dark, brazier 1, Herkyna's
 -- goose, the first chalk hand by torchlight and doused, the hidden Bronze Obol, the
 -- ford, the marble rubble (the Bronze Hammer) to the Max Repel, Philomelos at the
@@ -47,7 +47,7 @@ L.start(function()
   -- B1F: the upper chamber, inside the grille.
   L.setBeat("b1f_upper")
   expect(at(GRILLE), "arrived on the grille's steps")
-  expect(flash() == 0, string.format("the upper chamber is lit by the day through the grille (flash %d)", flash()))
+  expect(flash() == S.ICHOR_FLASH_TORCH, string.format("inside the grille it's dark: the torch's circle (flash %d)", flash()))
   shot("upper_chamber")
   L.talk(L.sign(B1 .. "Throne"), { shots = { [1] = "throne" } })
   L.talk(L.sign(B1 .. "Tablets"))

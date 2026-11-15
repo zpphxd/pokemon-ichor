@@ -21,27 +21,22 @@ mapscripts TrophoniosCave_B1F_MapScripts {
         setflag(FLAG_TEMP_11)                      // the reading's three stay hidden
         setvar(VAR_TEMP_0, 0)
         setvar(VAR_TEMP_1, 0)
-        setvar(VAR_TEMP_2, 0)
+        setvar(VAR_TEMP_6, 0)
         getplayerxy(VAR_TEMP_4, VAR_TEMP_5)
         if (var(VAR_TEMP_4) == 12 && var(VAR_TEMP_5) == 5) {
-            // up through the hole, onto the throne: beat 35C
+            // up through the hole, onto the throne: beat 35C, by torchlight
             clearflag(FLAG_TEMP_11)
             setvar(VAR_TEMP_0, 1)
             setvar(VAR_TEMP_1, 1)
-            setflashlevel(0)
-            setvar(VAR_TEMP_2, 1)
-        } elif (var(VAR_TEMP_5) < 10) {
-            // the upper chamber: the day comes in through the grille
-            setflashlevel(0)
-            setvar(VAR_TEMP_2, 1)
-        } elif (flag(BRAZIER_FLAG)) {
+        }
+        if (flag(BRAZIER_FLAG) && var(VAR_TEMP_5) > 9) {
             // the stream chamber, and the pillar room open off its south bank
             if (var(VAR_TEMP_5) < 18) {
                 setflashlevel(0)
-                setvar(VAR_TEMP_2, 1)
+                setvar(VAR_TEMP_6, 1)
             } elif (var(VAR_TEMP_4) > 6 && var(VAR_TEMP_4) < 14 && var(VAR_TEMP_5) < 22) {
                 setflashlevel(0)
-                setvar(VAR_TEMP_2, 1)
+                setvar(VAR_TEMP_6, 1)
             }
         }
         if (var(VAR_TEMP_4) == 27 && var(VAR_TEMP_5) == 21) {
@@ -105,35 +100,31 @@ script TrophoniosCave_B1F_EventScript_LadderFoot {
     releaseall
 }
 
-// Lit zones (ENGINE_API section 2): stepping into a zone lights it if its fire is lit,
-// else the torch's circle. VAR_TEMP_2 is 1 while the map is fully lit: the engine's
-// EventScript_IchorEnterLitZone never finishes if the light is already full (its
-// animateflash eases from radius 200 to 200 the wrong way), so each script checks first.
-script TrophoniosCave_B1F_EventScript_EnterUpper {
-    if (var(VAR_TEMP_2) == 0) {
-        setvar(VAR_0x8004, FLAG_ICHOR_TROPHONIOS_GRILLE_OPEN)    // the day through the grille
-        call(EventScript_IchorEnterLitZone)
-        setvar(VAR_TEMP_2, 1)
-    }
-}
-
+// The lit zone (ENGINE_API section 2): brazier 1 lights the stream chamber, rows 10-17
+// and the outcrop room open off its south bank. Coord events on its three ways out
+// (the ladder, the rubble's passage, the way down to Philomelos) enter or leave it.
+// (VAR_TEMP_2 and _3 are the engine's carried flame on dark maps; this floor leaves them alone.)
+// VAR_TEMP_6 is 1 while the map is fully lit: the engine's EventScript_IchorEnterLitZone
+// never finishes if the light is already full (its animateflash eases from radius 200 to
+// 200 the wrong way), so each script checks first. (The engine can't yet darken a map
+// again once it is fully lit; TILES_trophonios.md, "Engine notes".)
 script TrophoniosCave_B1F_EventScript_EnterStream {
     if (flag(BRAZIER_FLAG)) {
-        if (var(VAR_TEMP_2) == 0) {
+        if (var(VAR_TEMP_6) == 0) {
             setvar(VAR_0x8004, BRAZIER_FLAG)
             call(EventScript_IchorEnterLitZone)
-            setvar(VAR_TEMP_2, 1)
+            setvar(VAR_TEMP_6, 1)
         }
-    } elif (var(VAR_TEMP_2) == 1) {
+    } elif (var(VAR_TEMP_6) == 1) {
         call(EventScript_IchorLeaveLitZone)
-        setvar(VAR_TEMP_2, 0)
+        setvar(VAR_TEMP_6, 0)
     }
 }
 
 script TrophoniosCave_B1F_EventScript_LeaveStream {
-    if (var(VAR_TEMP_2) == 1) {
+    if (var(VAR_TEMP_6) == 1) {
         call(EventScript_IchorLeaveLitZone)
-        setvar(VAR_TEMP_2, 0)
+        setvar(VAR_TEMP_6, 0)
     }
 }
 
@@ -142,7 +133,7 @@ script TrophoniosCave_B1F_EventScript_Brazier {
     setvar(VAR_0x8005, TRUE)
     call(EventScript_IchorBrazier)
     if (var(VAR_RESULT) == TRUE) {
-        setvar(VAR_TEMP_2, 1)
+        setvar(VAR_TEMP_6, 1)
         call(TrophoniosCave_B1F_EventScript_SetBrazierLit)
         special(DrawWholeMapView)
     }
