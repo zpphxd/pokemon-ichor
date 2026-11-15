@@ -122,6 +122,7 @@ The *Euploia* ("fair sailing", SCRIPT.md) has two maps. Both use the trireme dec
 | **The rail** | Lynkeus | Hidden items at sea glint; hidden islets show on the map; warns before Scylla strikes | — |
 | **Phemios** | Phemios | Plays any song you've heard (a music player); the Sirens' third way (§6.6) | — |
 | **Iaso** | Iaso | Cures status and revives fainted Pokémon, once per rest | — |
+| **The run-through** | Christopher Nolan | The voyage so far, told backwards (§3) | — |
 | **The trophy shelf** | — | One keepsake per island: a ram's fleece, a lotus, the bag's silver cord, a Siren's feather, Scylla's tooth, Circe's cup, a Phaeacian oar | — |
 
 ### Upgrades
@@ -156,6 +157,32 @@ Recruit them before you round Maleia. Each is a short scene, two to ten minutes.
 | **Lynkeus** | Lookout | Astyra's harbor watchtower | Find three things in the harbor he can see and you can't: three hidden items he describes | Hidden islets; Scylla's warning; theoxenia E13's islet |
 | **Iaso** | Healer | Astyra's Asclepeion | Phaedon recommends her if you've done the Katabasis; otherwise, help her with three patients | Status cures and revives aboard |
 | **Glaukias** | Deckhand, Glaukos's grandson | Akti, the Fisher's house | He begs to come. Say yes. | **He opens the bag of winds** (§6.4). If he isn't aboard, an oarsman does. |
+| **Christopher Nolan** | Dramatist (*didaskalos*), the man who wants it real | Lechaion, beside the Diolkos (Emporion's harbor) | Sail the *Euploia* into Lechaion and show him a real ship with a real crew (scene below) | The run-through; Scheria's song, backwards; the Strait |
+
+**Christopher Nolan** (the user's request, 2026-11-14). A dramatist from the far north, staging the Odyssey and refusing to fake any of it. He is the voyage's other answer to the songs: Alethea corrects them with the truth, and he wants to *see* the truth, at full size, in order or not. The name box reads NOLAN (the full name is too wide for it); he says his full name when you meet.
+
+[Lechaion, by the Diolkos. Haulers drag a ship across the Isthmus on its cradle. A man in a dark, neatly pinned cloak watches it without blinking.]
+```text
+NOLAN: Look at that. A real ship. Hauled over real land.
+
+NOLAN: Anyone else would paint one. Painted ships look painted.
+
+NOLAN: Christopher Nolan. I'm staging the Odyssey. All of it.
+
+NOLAN: Not the songs. The songs are out of order, and half of them are fake.
+
+NOLAN: I need a real ship. A real storm. A real whirlpool.
+```
+If the *Euploia* is moored in Lechaion:
+```text
+NOLAN: …That's your ship? With a crew? Going where he went?
+
+NOLAN: Take me. I'll keep out of the way. Mostly.
+```
+?? YES/NO. YES: "NOLAN: Good. We start at the end and work back. Trust me." NO: "NOLAN: I'll wait. Waiting is most of the job." Ask again on the next visit.
+
+- **The run-through** (his service aboard): talk to him for the voyage so far, told backwards, from the homecoming you haven't reached yet ("…and before that") back to Cape Maleia. It reads the same choice flags as Demodokos's song (§6.10), in reverse.
+- **The crew talk.** With Phemios: "PHEMIOS: You can't have the Cyclops that small." / "NOLAN: He was that small. I measured." With Alethea, after the Cyclops: "ALETHEA: Truthfully, I like him."
 
 **Glaukos himself** isn't crew. Poseidon's theoxenia line said "He fished too, before the sea kept him" (SYSTEMS §10). On the voyage, Glaukos turns up in the sea, changed, a sea-god now, half fish, delighted with himself (§6.5).
 
@@ -565,7 +592,7 @@ Iapetos isn't caught or punished again here: he's already exiled, and "Every dra
 
 > *On one side, Scylla with six heads, who snatches six men from every ship. On the other, Charybdis, who swallows the sea three times a day. Circe told Odysseus to hug Scylla's side: better to lose six than all* (*Odyssey* 12.73–259).
 
-**Play.** A narrow strait between a cliff and a whirlpool. On the left, a cave high in the cliff, where six long necks wait. On the right, the sea turns round and down. You have to steer one way or the other, and each takes something.
+**Play.** A narrow strait between a cliff and a whirlpool. On the left, a cave high in the cliff, where six long necks wait. On the right, the sea turns round and down. You have to steer one way or the other, and each takes something. If Christopher Nolan is aboard, he stands at the rail the whole way through: "NOLAN: Nobody paints this. Ever."
 
 **Maps:** the Strait (30×60): Scylla's cliff on the west side, Charybdis's whirlpool (a ring of currents around a center) on the east side, and between them nothing safe.
 
@@ -636,6 +663,7 @@ The last sea before Scheria (on Scylla's way). It loops by day; at night, keep t
 2. **The town.** The Phaeacians are the voyage's xenia (SYSTEMS §10): every door feeds you.
 3. **The games** (optional): three Phaeacian youths challenge you, as they did Odysseus. Euryalos insults you first, as he did in Homer ("You look like a merchant, not an athlete"). Battles.
 4. **The bard.** **Demodokos**, blind, sings the voyage: your voyage, built from your choices (the table below). It's a recap, and it's the moment the voyage looks back at itself.
+   - **If Christopher Nolan is aboard,** he stands up before the first verse: "NOLAN: Sing it backwards." / "DEMODOKOS: …Backwards?" / "NOLAN: Start at the homecoming. End at Maleia. Trust me." ?? YES/NO lets him. Backwards, Demodokos sings the same verses in reverse, and ends: "DEMODOKOS: …It's better backwards. I hate that."
 5. **The ship.** If Charybdis took the *Euploia*, the Phaeacians have rebuilt her, better (the Phaeacian keel). If not, they add the keel anyway.
 6. **The night crossing.** "Sleep. When you wake, you'll be home." You lie down on the deck (scene 10). Fade.
 
@@ -865,7 +893,7 @@ About **17 new tracks** (the three sea variants share a sequence).
 | Who or what | Overworld | Portrait |
 |---|---|---|
 | **The *Euploia*** at sea | 64×64, 4 directions × 2 frames, with sail states (full, slack) | — |
-| Phemios, Lynkeus | 16×32 each | — |
+| Phemios, Lynkeus, Christopher Nolan | 16×32 each (Nolan: a dark himation pinned neatly over a pale chiton) | — |
 | Lampon, Diktys, Kydon, Glaukias, Iaso | Existing walkers | — |
 | The Lakonian oarsmen | Existing Lakonian class walker | — |
 | Aeolus | 16×32 | 64×64 |
