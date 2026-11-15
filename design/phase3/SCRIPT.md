@@ -2350,7 +2350,7 @@ AUGUR: Cranes mean sowing. In this season? Someone ought to go and look.
 ```
 [Set `FLAG_ICHOR_DEMETER_OMEN_TOLD`.]
 
-**Setup.** Show Cami on the Maiden's Well's worn bench (Phase 2's seed object) when `FLAG_BADGE05_GET` is set and `FLAG_ICHOR_THEOXENIA_DEMETER` is unset: clear `FLAG_ICHOR_HIDE_THEOXENIA_DEMETER`. She is a young woman in a gray shawl, sitting on the bench and facing the well (`OBJ_EVENT_GFX_ICHOR_CAMI`, the sitting pose; the user named her and gave the photo she is drawn from, SYSTEMS.md §10). Until that sprite is on main, the elder-woman walker stands in, tagged `ICHOR_STUB_TRAINER_ART`. Eleusa's sign by the well still says an old woman sat on this bench: that is the song's version, and her reveal answers it.
+**Setup.** Show Cami on the Maiden's Well's worn bench (Phase 2's seed object) when `FLAG_BADGE05_GET` is set and `FLAG_ICHOR_THEOXENIA_DEMETER` is unset: clear `FLAG_ICHOR_HIDE_THEOXENIA_DEMETER`. She is a young woman in a gray shawl, sitting on the seat stone just south of the Kallichoron well and facing it (`OBJ_EVENT_GFX_ICHOR_CAMI` with `MOVEMENT_TYPE_FACE_UP`: her north-facing frames are the seated pose; the user named her and gave the photo she is drawn from, SYSTEMS.md §10). While she should stay seated, her script never uses `faceplayer`. Her sprite's palette tag, `OBJ_EVENT_PAL_TAG_ICHOR_THEOXENIA`, costs Eleusa's map one more OBJ palette slot. Eleusa's sign by the well still says an old woman sat on this bench: that is the song's version, and her reveal answers it.
 
 **The tells** (SYSTEMS.md §10). She has **no shadow**. Within 3 tiles, the player's follower **bows**. With the Augur's Eye open on this map, its screen adds "Something here is watching you." And her shawl:
 ```text
@@ -2444,7 +2444,7 @@ CAMI: Ha. Oh, that's terrible. Tell it again.
 
 CAMI: I haven't laughed since my daughter went away.
 ```
-[She stands, and she is taller than she was: the object becomes `OBJ_EVENT_GFX_ICHOR_DEMETER`, her revealed form (two objects swapped by hide flags, as Act II does it; BUILD.md). Gold light fills the well-yard: a fade to white over 16 frames and back. The dry stalks around the well turn green and heavy (the well-yard's dry-grass metatiles swap to ripe wheat), and the dry fig over the well bursts into leaf (its metatile swaps to the fig in leaf, with fruit).]
+[She stands: `applymovement` her object with `nurse_joy_bow` and `waitmovement` (her rise, `ANIM_ICHOR_RISE`, 56 frames, ending facing down). Then she is taller than she was: swap her for `OBJ_EVENT_GFX_ICHOR_DEMETER`, her revealed form (two objects swapped by hide flags, as Act II does it; BUILD.md). Gold light fills the well-yard: a fade to white over 16 frames and back. The dry stalks around the well turn green and heavy (the well-yard's dry-grass metatiles swap to ripe wheat), and the dry fig over the well bursts into leaf (its metatile swaps to the fig in leaf, with fruit).]
 ```text
 DEMETER: I sat at this well once before. The song says I was an old woman.
 
@@ -6281,26 +6281,26 @@ MULETEER: Then she says the future. Your bee doesn't need the water, apparently.
 - **Event:** one Laurel Sprig a day from her potted laurel (SYSTEMS.md §3, a laurel tree), and the Pythia's lore.
 
 ```text
-PHEMONIS: Forty years I swept the god's floor. Every morning. The same floor.
+THYIA: Forty years I swept the god's floor. Every morning. The same floor.
 
-PHEMONIS: The Pythia used to talk to me all day. Chatter, chatter. About anything.
+THYIA: The Pythia used to talk to me all day. Chatter, chatter. About anything.
 
-PHEMONIS: Then, a year ago, she started saying less. Then less. Then “soon.”
+THYIA: Then, a year ago, she started saying less. Then less. Then “soon.”
 
-PHEMONIS: She's not ill. I know ill. She's looking at something, and it's close.
+THYIA: She's not ill. I know ill. She's looking at something, and it's close.
 
-PHEMONIS: I came down here so I wouldn't have to watch her look at it.
+THYIA: I came down here so I wouldn't have to watch her look at it.
 ```
 [Then, once a day:]
 ```text
-PHEMONIS: Take a sprig from my laurel. It's from the temple door.
+THYIA: Take a sprig from my laurel. It's from the temple door.
 
-PHEMONIS: Apollo likes his own leaves back. Everybody does.
+THYIA: Apollo likes his own leaves back. Everybody does.
 
 [Give `ITEM_LAUREL_SPRIG` ×1. Its daily flag is `FLAG_DAILY_ICHOR_LAUREL_KIRRHA`.]
 
 > already today:
-PHEMONIS: One a day. The tree's young. So am I, compared to it.
+THYIA: One a day. The tree's young. So am I, compared to it.
 ```
 **After the climax** (Act III's scripts may reuse this): "She laughed today. The Pythia. I heard it from here."
 
@@ -17790,8 +17790,8 @@ Fishing `encounter_rate: 30`; water `encounter_rate: 4`, slots 60/30/5/4/1. The 
 
 | Map | Old Rod (70 / 30) | Good Rod (60 / 20 / 20) | Super Rod (40 / 40 / 15 / 4 / 1), placeholder |
 |---|---|---|---|
-| `MAP_ROUTE11_KRATHIS_GORGE` (the river spur's pool) | Ketofry 18–20 / Karkipool 25–27 | Karkipool 27–28 / Ketofry 19–20 / Karkipool 28–28 | Kynoketos / Karkipool / Kynoketos / Karkipool / Kynoketos |
-| `MAP_ARKADIA` (the temple's waterfall pool) | Ketofry 18–20 / Karkipool 25–27 | Karkipool 27–28 / Ketofry 19–20 / Karkipool 28–28 | as Route 11 |
+| `MAP_ROUTE11_KRATHIS_GORGE` (the river spur's pool) | Ketofry 18–20 / Karkipool 25–27 | Karkipool 27–28 / Ketofry 19–20 / Karkitox † 27–28 | Kynoketos / Karkipool / Kynoketos / Karkipool / Kynoketos |
+| `MAP_ARKADIA` (the temple's waterfall pool) | Ketofry 18–20 / Karkipool 25–27 | Karkipool 27–28 / Ketofry 19–20 / Karkitox † 27–28 | as Route 11 |
 
 **Styx Falls's black pool has no table at all:** nothing lives in it. A rod cast there gets the engine's own "Not even a nibble…", and its surfable water is drawn as still black water that the Conch refuses later: "The water won't hold you up. Nothing floats on the Styx." There is no surfable water anywhere in this region.
 
