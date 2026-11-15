@@ -4,7 +4,7 @@ Usage:
     python3 tools/ichor/art/sprites_folk.py [NAME ...] [--write] [--preview DIR] [--grids DIR]
 
 --write    writes graphics/object_events/pics/people/ichor/<name>.png (144x32,
-           4bpp indexed) for every walker here, and the folk palette
+           or 160x32 for the healer's bow, 4bpp indexed), and the folk palette
            graphics/object_events/palettes/ichor_folk.pal
 --preview  writes DIR/sprites_folk_sheets.png (4x, vanilla Birch first for
            scale, each walker labelled with its sheet name)
@@ -377,6 +377,102 @@ ARCHETYPES["akti_tunic"] = _dirs(
             8: "....kYYkkXYk....", 9: "....kYYkkkXYk...", 10: "...kYYk..kXYk...",
             11: "..kYYk....kXYk..", 12: "..kYYk....kXYk..",
             13: ".kFFk.....kFFFk.",
+        }),
+    ),
+)
+_AKTI_ROBE_DOWN = _with(_AKTI_DOWN, {
+    7: "...kCCQCCCQQk...",
+    8: "...kCCQCCCQQk...",
+    9: "...kCCCQCCCQQk..",
+    10: "..kCCCCQCCCQQk..",
+    11: "..kCCCQCCCCQQk..",
+    12: "..kCCCCQCCCCQk..",
+    13: "...kkFFkkFFkk...",
+})
+_AKTI_ROBE_UP = _with(_AKTI_ROBE_DOWN, {
+    0: "...kCCCCCCQk....", 7: "...kCCQCCCQQk...", 10: "..kCCCQCCCCQQk..",
+})
+_AKTI_ROBE_LEFT = _with(_AKTI_LEFT, {
+    7: "....kCCQCCQk....",
+    8: "....kCCQCCQk....",
+    9: "...kCCCQCCQQk...",
+    10: "...kCCQCCCQQk...",
+    11: "...kCCCQCCQQk...",
+    12: "...kCCCCQCCQk...",
+    13: "...kFFkkkkkkk...",
+})
+
+
+def _akti_robed(rows):
+    return dict(
+        stand=rows,
+        walk0=_with(rows, {**_HANDS_W0, 12: "..kCCCQCCCCCQk..", 13: "...kkFFkkkkkk..."}),
+        walk1=_with(rows, {**_HANDS_W1, 12: "..kCCCCQCCCCQk..", 13: "...kkkkkkFFkk..."}),
+    )
+
+
+ARCHETYPES["akti_robe"] = _dirs(
+    _akti_robed(_AKTI_ROBE_DOWN), _akti_robed(_AKTI_ROBE_UP),
+    dict(
+        stand=_AKTI_ROBE_LEFT,
+        walk0=_with(_AKTI_ROBE_LEFT, {
+            **_ARM_BACK, 11: "..kCCCQCCCQQk...", 12: "..kCCCCQCCCQQk..",
+            13: "..kFFkkkkkkFFk..",
+        }),
+        walk1=_with(_AKTI_ROBE_LEFT, {
+            **_ARM_FWD, 11: "...kCCCQCCQQk...", 12: "...kCCCCQCCQk...",
+            13: "....kFFkkkkkk...",
+        }),
+    ),
+)
+_AKTI_KID_DOWN = [
+    "....kCSSCQk.....",
+    "...kCCCCCQQk....",
+    "...kSCCQCQSk....",
+    "...kSCCQCQSk....",
+    "...kSCCCCCQSk...",
+    "....kXYkkXYk....",
+    "....kXYkkXYk....",
+    "...kFFFkkFFk....",
+]
+_AKTI_KID_UP = _with(_AKTI_KID_DOWN, {0: "....kCCCCQk....."})
+_AKTI_KID_LEFT = [
+    ".....kSSCQk.....",
+    "....kCCCCQQk....",
+    "....kCSsCQk.....",
+    "....kCSsCQQk....",
+    "....kCSSCQk.....",
+    "....kkXYkkkk....",
+    ".....kXYk.......",
+    "....kFFFk.......",
+]
+
+
+def _akti_child(rows):
+    return dict(
+        stand=rows,
+        walk0=_with(rows, {
+            2: "...ksSCCCQSSk...", 3: "...ksSCCCQSSk...",
+            6: "....kXYkkFFk....", 7: "...kFFFk........",
+        }),
+        walk1=_with(rows, {
+            2: "...kSSCCCQSsk...", 3: "...kSSCCCQSsk...",
+            6: "....kFFkkXYk....", 7: "........kFFk....",
+        }),
+    )
+
+
+ARCHETYPES["akti_kid"] = _dirs(
+    _akti_child(_AKTI_KID_DOWN), _akti_child(_AKTI_KID_UP),
+    dict(
+        stand=_AKTI_KID_LEFT,
+        walk0=_with(_AKTI_KID_LEFT, {
+            2: "....kCCSsQk.....", 3: "....kCCSsQk.....", 4: "....kCCSSQk.....",
+            5: "...kXYkkYYk.....", 6: "..kXYk..kYYk....", 7: ".kFFFk..kFFk....",
+        }),
+        walk1=_with(_AKTI_KID_LEFT, {
+            2: "....kSsCCQk.....", 3: "....kSsCCQk.....", 4: "....kSSCCQk.....",
+            5: "...kYYkkXYk.....", 6: "..kYYk..kXYk....", 7: ".kFFk...kFFFk...",
         }),
     ),
 )
@@ -987,41 +1083,38 @@ KID_M = dict(
 # A barefoot island girl: a short saffron tunic and two short pigtails tied
 # with terracotta.
 KID_F = dict(
-    name="kid_f", pal="folk", arch="kid",
+    name="kid_f", pal="folk", arch="akti_kid",
     roles=dict(C="O", Q="o", T="O", F="s"),
     head=dict(
         down=[
-            ".....kkkkkk.....",
-            "....kbbbbbbk....",
-            "...kbuubbbbbk...",
-            "..kubbbbbbbbuk..",
-            ".kbkbSbbbbSbkbk.",
-            ".kbkSkSSSSkSkbk.",
-            "..kkSkSSSSkSkk..",
-            "...kbsSSSSsbk...",
-            "....kbssssbk....",
+            ".....bbbbbb.....",
+            "....bubbbbbb....",
+            "...bbbbbbbbbb...",
+            "..ubbSSbbSSbbu..",
+            ".bbkSkSSSSkSkbb.",
+            "..bbSSSSSSssbb..",
+            "...bbsSSSssbb...",
+            ".....bssssb.....",
         ],
         up=[
-            ".....kkkkkk.....",
-            "....kbbbbbbk....",
-            "...kbuubbbbbk...",
-            "..kubbbbbbbbuk..",
-            ".kbkbbbbbbbbkbk.",
-            ".kbkbbbbbbbbkbk.",
-            "..kkbbbbbbbbkk..",
-            "...kbbbbbbbbk...",
-            "....kbSSSSbk....",
+            ".....bbbbbb.....",
+            "....bubbbbbb....",
+            "...bbbbbbbbbb...",
+            "..ubbbbbbbbbbu..",
+            ".bbkbbbbbbbbkbb.",
+            "..bbbbbbbbbbbb..",
+            "...bbbbbbbbbb...",
+            ".....bSSssb.....",
         ],
         left=[
-            "......kkkk......",
-            "....kkbbbbk.....",
-            "...kbuubbbbk....",
-            "...kbbbbbbbukk..",
-            "...kbSbbbbbkbbk.",
-            "...kSSSSbsbkbbk.",
-            "...kSkSSssbkkk..",
-            "...ksSSSsbk.....",
-            "....kssssk......",
+            ".....bbbbbb.....",
+            "....bubbbbb.....",
+            "...bbbbbbbbbb...",
+            "...bSbbbbbbub...",
+            "..bSSSSSbkkbb...",
+            "..bSkSSSsbkbb...",
+            "...bsSSSsbkk....",
+            "....bssssb......",
         ],
     ),
 )
@@ -1192,82 +1285,69 @@ DIVER = dict(
 
 # An Asclepeion healer, where the Nurse stood: a white chiton to the floor, an
 # olive-green sash and fillet, and a gold serpent armlet on her left arm.
-_ROD = ["_k_", "kgk", "kbg", "gbk", "kbg", "gbk", "kbg", "gbk"] + ["kb"] * 10 + ["kb"]
+_ROD = ["_b_", "vg_", "gbv", "_bg", "gbv", "_bg", "vbg", "_b_"] + ["_b_"] * 12
 HEALER = dict(
-    name="healer", pal="folk", arch="robe",
+    name="healer", pal="folk", arch="akti_robe",
     roles=dict(C="L", Q="l", T="g", F="b"),
     head=dict(
         down=[
-            ".....kkkkkk.....",
-            "....kbbbbbbk....",
-            "...kbuubbbbbk...",
-            "..kgggggggggvk..",
-            "..kbubbbbbbbbk..",
-            "..kbbbSbbSbbbk..",
-            "..kbSSSSSSSSbk..",
-            "..kbSkSSSSkSbk..",
-            "..kbSkSSSSkSbk..",
-            "..kbsSSSSSSsbk..",
-            "..kbbssSSssbbk..",
+            ".....bbbbbb.....",
+            "....buubbbbb....",
+            "...gggggggggv...",
+            "...bbSSbbSSbb...",
+            "...bSkSSSSkSb...",
+            "...bsSSSSSssb...",
+            "...bbsSSSssbb...",
+            "...bbsSSssbbb...",
         ],
         up=[
-            ".....kkkkkk.....",
-            "....kbbbbbbk....",
-            "...kbuubbbbbk...",
-            "..kgggggggggvk..",
-            "..kbubbbbbbbbk..",
-            "..kbbbubbbubbk..",
-            "..kbbbubbbubbk..",
-            "..kbbbubbbubbk..",
-            "..kbbbubbbubbk..",
-            "..kbbbubbbubbk..",
-            "..kbbbubbbubbk..",
+            ".....bbbbbb.....",
+            "....buubbbbb....",
+            "...gggggggggv...",
+            "...bbbubbbbbb...",
+            "...bbbubbbbbb...",
+            "...bbbbbbbbbb...",
+            "...bbbbbbbbbb...",
+            "...bbbbbbbbbb...",
         ],
         left=[
-            "......kkkkk.....",
-            "....kkbbbbbk....",
-            "...kbuubbbbbk...",
-            "..kgggggggggvk..",
-            "..kbubbbbbbbbk..",
-            "..kbSbbbbbbbbk..",
-            "..kSSSSSbsbbbk..",
-            "..kSkSSSssbbbk..",
-            "..kSkSSSSbbbbk..",
-            "..ksSSSSsbbbbk..",
-            "...kssssbbbbk...",
+            ".....bbbbbb.....",
+            "....buubbbb.....",
+            "...gggggggggv...",
+            "...bSbbbbbbbb...",
+            "..bSSSSSbsbbb...",
+            "..bSkSSSssbbb...",
+            "...bsSSSbbbbb...",
+            "....bsssbbbb....",
         ],
     ),
     over=dict(
-        down={"all": [("b0", ["..kbb______bbk..", "___b________b___"]),
+        down={"all": [("b0", ["___bb______bb___", "____b______b____"]),
                       ("b2", ["___________Oo___"]),
                       pole(0, 2, _ROD), ("b5", ["__S_____________"])],
-              "walk1": [("b5", ["..SSSCCCCCQSSk..", "..kkCCCCCCCQkk.."])],
+              "walk1": [("b5", ["..SSSCCCCCQSSk..", "...kCCCQCCQQk..."])],
               # The bow: the crown tips toward the viewer, so the top of the
               # head drops a pixel, the fillet two, the eyes close and the neck
               # disappears. Her left hand comes up over her heart; the rod
               # stays planted.
               "bow": [(0, ["___.............",
-                           "___..kkkkkk.....",
-                           "___.kbbbbbbk....",
-                           "___kbuubbbbbk...",
-                           "___bubbbbbbbbk..",
-                           "___gggggggggvk..",
-                           "___bbbbbbbbbbk..",
-                           "___bbSSSSSSbbk..",
-                           "___bSkkSSkkSbk..",
-                           "___bsSSSSSSsbk..",
-                           "___bbssSSssbbk..",
-                           "___bbLLLLLLbbk.."]),
+                           "___..bbbbbb.....",
+                           "___.bubbbbub....",
+                           "___bbbbbbbbbb...",
+                           "___gggggggggv...",
+                           "___bbbSSSSbbb...",
+                           "___bSkkSSkkSb...",
+                           "___bsSSSSSssb...",
+                           "___.bbsSssbb...."]),
                       ("b2", ["___SSLLLLSSSOk..",
                               "___SsLLLLLLsSk..",
                               "___SsggggggSSk..",
                               "___SSLLLLLLLlk.."])]},
-        up={"all": [("b0", ["...kbbubbbubk...", "____kbubbbuk____", "_____kubbuk_____",
-                            "______kkkk______"]),
+        up={"all": [("b0", ["___bbbubbbbbb___", "____bbubbbb_____", "_____bbbbbb_____"]),
                     ("b2", ["___Oo___________"]),
                     pole(13, 2, [c[::-1].rjust(3, "_") for c in _ROD]), ("b5", ["_____________S__"])],
-            "walk0": [("b5", ["..kSSCCCCCQSSS..", "..kkCCCCCCCQkk.."])]},
-        left={"all": [("b0", ["_________bbk____", "_________bk_____"]),
+            "walk0": [("b5", ["..kSSCCCCCQSSS..", "...kCCCQCCQQk..."])]},
+        left={"all": [("b0", ["_________bb_____", "_________b______"]),
                       pole(0, 2, _ROD), ("b4", ["__Ss____________"])],
               "stand": [("b2", ["______Oo________"])],
               "walk0": [("b2", ["_______Oo_______"])],
@@ -1809,13 +1889,14 @@ def sheet_preview(sheets, k=4, cols=2):
     per = -(-len(items) // cols)
     columns = [[("prof_birch", "vanilla", ref_rgba())] + items[c * per:(c + 1) * per] for c in range(cols)]
     pad, lw, gap = 4, 30, 8
-    cw = lw + W * 9 + pad * 8
+    frame_count = max(im.width // W for column in columns for _, _, im in column)
+    cw = lw + W * frame_count + pad * (frame_count - 1)
     rows = max(len(c) for c in columns)
     out = Image.new("RGBA", (cols * cw + (cols - 1) * gap, (H + pad) * rows - pad), (232, 224, 200, 255))
     for c, column in enumerate(columns):
         x0 = c * (cw + gap)
         for i, (_, _, im) in enumerate(column):
-            for f in range(9):
+            for f in range(im.width // W):
                 tile = checker_bg(W, H)
                 tile.alpha_composite(im.crop((f * W, 0, (f + 1) * W, H)))
                 out.alpha_composite(tile, (x0 + lw + f * (W + pad), i * (H + pad)))

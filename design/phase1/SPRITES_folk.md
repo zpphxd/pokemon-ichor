@@ -25,11 +25,25 @@ All 22 folk arrays reproduce; the other 20 PNGs are unchanged. Native checks,
 build and smoke pass, and `tools/ichor/tests/akti_sprites.lua` captures both
 placed harbor walkers among eleven shots across nine maps. Complete colored
 native comparisons and matching post-Elaia ROM captures are review evidence,
-not artistic approval. Eight remaining Akti walkers still await polish.
+not artistic approval. This harbor checkpoint is now artistically accepted;
+at that point, eight remaining Akti walkers still awaited polish.
+
+**Asclepeion/Agora checkpoint:** `healer` has an eight-row head, longer folded
+chiton and a thin brown rod with a two-tone green serpent. Her tenth frame
+keeps the rod planted while her head dips, eyes close and hand rises over her
+heart. `kid_f` keeps the child-sized height, saffron tunic, short pigtails and
+terracotta ties with a smaller native head and complete strides. Both sheets
+retain their folk palette and all nine walking states. The sheet preview now
+uses the actual frame count, so the healer's bow is not omitted. All 22 sources
+reproduce, the other 20 PNGs are unchanged from the preceding checkpoint, and
+the two real heal paths hold the bow for exactly 32 frames before returning
+control. Build, smoke and the scoped gallery pass. Six local walkers still
+await polish; these two new sheets await artistic approval.
 
 - **Source:** `tools/ichor/art/sprites_folk.py`. Every head, body and prop is ASCII art in that file, one character per pixel.
 - **Rebuild the PNGs and the folk palette:** `python3 tools/ichor/art/sprites_folk.py --write`
 - **Preview:** `python3 tools/ichor/art/sprites_folk.py --preview DIR` writes the 4× sheet; `--grids DIR` writes 8× pixel grids for editing.
+- **Native regressions:** `python3 -m unittest discover -s tools/ichor/tests -p test_folk_sprites.py` checks reproduction, complete Akti states, the planted bow rod and the full tenth-frame preview.
 
 Previews:
 - `img/sprites_folk_sheets.png`: every frame of every walker at 4×, labelled with its sheet and palette. Each column starts with vanilla Birch for scale.
