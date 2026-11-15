@@ -18,6 +18,25 @@ Read first, in this order: `CLAUDE.md`, `design/MAP_DESIGN.md`, this file, the S
 
 Each batch ends with a report to the director: the branch and commit, what's playable, the map renders, the test results and the ROM delta.
 
+## The route standard (MAP_DESIGN §8), for every batch
+
+From 2026-11-14 every batch report passes `python3 tools/ichor/map_audit.py <its maps>` (MAP_DESIGN §8, measured on Emerald; on main 96a88cd7fe, merged here). Act II is the **middle** band. Hard minimums:
+
+| | Land route | Sea route | Town | Dungeon |
+|---|---|---|---|---|
+| Grass cells per screen (15×10) | 15 | – | tables if any grass | – |
+| Forced grass between any two ends | 8 cells (two 4-deep bands, or three shallower) | – | – | – |
+| Trainers | 0.6 per screen, at least 6 | 0.35 per screen, at least 5 | – | 3 (1 in a one-floor cave) |
+| Item balls | 0.2 per screen, at least 3 | 2 | 1 | 2 per floor, visible and hidden |
+| Hidden items | 3 | 2 | 2 | 2 |
+| Species per land table | 5 | – | 5 | 4 |
+
+Also hard: a sign within 15 cells of every connected end; land tables `_Morning` and `_Night` wherever there's grass; a surf table (3 species) and a fishing table (4) wherever 12 or more water cells can be reached; a rock-smash table wherever there's marble rubble; land levels spanning no more than 5. Warnings to look at: a set piece, empty dead ends, edges that walk into a wall across a seam, item balls on solid cells. A FAIL that's right for a map (a story set piece like the Pool, a ship's deck) is explained in the report.
+
+**More trainers than SCRIPT.md names** are needed on most routes to reach 0.6 a screen. Add them as the script's own are written: a name that fits 10 characters (Greek, not on the Lazarus avoid-list, grep `design/` for collisions), an existing class, a party at BALANCE.md's levels for the map, lines in the CLAUDE.md voice. Append each to your staged `design/phase3/parties/<agent>.party` and its name to the end of `design/phase3/parties/ORDER.txt`, then run `python3 tools/ichor/act2/fold_parties.py design/phase3/parties/*.party`. Scripts use the names, so the ids may change when this session folds every branch together at integration (Act II's ids are 160–319, then 820–849).
+
+**Placeholders aren't maps.** Every batch 2 and 3 map was registered with a copy of Route 1, Akti Town or one of Akti's rooms so warps compile from the start; the audit flags them as copies, and they count as built only when their agent's branch is merged.
+
 ## Batch 2: the road west, and batch 1's polish
 
 Built on the merge of main's Hoenn cut and engine batches 2–4, so **use the engine directly; batch 1's stubs for these are gone from new work**:
