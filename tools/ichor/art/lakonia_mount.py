@@ -40,37 +40,51 @@ def _facets(X, Y, period=32, sx=1.0, sy=1.0, seed=0):
     return fid, dx, dy, d1, best[1][0]
 
 
-RIDGES = [(0, 6), (6, 4), (10, 7), (17, 5), (22, 6), (28, 4)]
+FBANDS = [(0, 0.0, (21,)), (5, 1.7, ()), (9, 3.1, (6,)), (12, 4.4, (27,))]
+FISSURES = ()
 
 
 def face_px(X, Y, seed=0):
-    """The cliff face: vertical ridges of rock (32 px periodic across, 16
-    down), each lit on its left, shaded on its right, a dark crevice between,
-    broken into blocks by sloping joints."""
-    x = (X + seed * 13) % 32
-    for i, (x0, w) in enumerate(RIDGES):
-        if x0 <= x < x0 + w:
+    """The cliff face: wavy limestone strata (32 px periodic across, 16 down),
+    each lit along its top and shadowed beneath, a rare joint across a band
+    and one deep fissure down the whole face; dark, as Taygetos is."""
+    x, y = (X + seed * 11) % 32, Y % 16
+    tops = []
+    for (y0, ph, _) in FBANDS:
+        tops.append(y0 + round(1.2 * math.sin(2 * math.pi * x / 32 + ph)
+                               + 0.6 * math.sin(2 * math.pi * x / 16 + 2 * ph)))
+    n = len(FBANDS)
+    bi, top, bot = n - 1, tops[-1] - 16, tops[0]
+    for i in range(n):
+        t0 = tops[i]
+        t1 = tops[i + 1] if i + 1 < n else tops[0] + 16
+        if t0 <= y < t1:
+            bi, top, bot = i, t0, t1
             break
-    lx = x - x0
-    off = (i * 7 + seed * 3) % 16
-    slope = 1 if i % 2 else -1
-    brk = (Y + off - (lx * slope) // 2) % 16
-    if lx == w - 1:
+        if i == n - 1 and y < tops[0]:
+            bi, top, bot = i, t0 - 16, tops[0]
+    tt, th = y - top, bot - top
+    k = L.hp(X, Y, seed + 7 + bi, 32)
+    if x in FISSURES:
         return "ty0"
-    if brk == 0:
+    if x - 1 in FISSURES:
+        return "ty1" if tt else "ty2"
+    if x + 1 in FISSURES:
+        return "ty2" if tt < th - 1 else "ty1"
+    js = FBANDS[bi][2]
+    if x in js:
+        return "ty0" if tt else "ty1"
+    if x - 1 in js:
+        return "ty3" if tt < th - 1 else "ty1"
+    if tt == 0:
+        return "ty3" if k % 5 else "ty4"
+    if tt >= th - 1:
         return "ty0"
-    if brk == 1:
-        return "ty3" if lx < w - 2 else "ty2"
-    if lx == 0:
-        return "ty3" if brk % 5 else "ty2"
-    if lx == 1:
-        return "ty2"
-    if lx >= w - 2:
-        return "ty1" if brk % 6 else "ty0"
-    k = L.hp(X, Y, seed + 7, 32)
-    if k % 13 == 0:
-        return "ty0"
-    return "ty2" if (lx < w // 2 and k % 3) else "ty1"
+    if tt == 1:
+        return "ty2" if k % 4 else "ty3"
+    if tt >= th - 2:
+        return "ty1"
+    return "ty2" if k % 3 == 0 else "ty1"
 
 
 def pn(X, Y, period, seed):
@@ -82,8 +96,7 @@ def pn(X, Y, period, seed):
     return v / 2.6
 
 
-SCRUB = [(6, 7, 4.2, 3.4), (22, 4, 3.2, 2.6), (14, 21, 4.8, 3.8), (28, 23, 3.0, 2.6),
-         (3, 27, 2.6, 2.2)]
+SCRUB = [(6, 7, 3.4, 2.8), (21, 17, 3.8, 3.0), (27, 3, 2.4, 2.0)]
 
 
 def _scrub(X, Y):
@@ -109,10 +122,8 @@ def mass_px(X, Y, seed=0):
         if r > 0.82 and lit < 0.3:
             return "ty0"
         k = L.hp(X, Y, 5, 32)
-        if lit > 0.6:
-            return "c3" if k % 3 == 0 else "c2"
-        if lit > -0.2:
-            return "c2" if k % 3 else "c1"
+        if lit > 0.7:
+            return "c2" if k % 3 == 0 else "c1"
         return "c1"
     sh = _scrub(X - 2, Y - 2)
     if sh is not None and sh[0] < 0.95:
@@ -195,9 +206,10 @@ def taygetos():
         "back_NW": (6, 2), "back": (7, 2), "back_NE": (0, 2), "pine_face": (1, 2),
         "in_E": (0, 3), "in_W": (1, 3), "mass_pine": (2, 3), "gully": (3, 3), "gully_foot": (4, 3),
         "boulder": (5, 3), "boulders": (6, 3), "scree": (7, 3),
+        "foot_sea": (0, 4), "foot_sea_b": (1, 4), "stack": (2, 4),
     }
-    walk = ["XXXXXXXX", "XXXXXXXX", "XXXXXXXX", "XXXXXXX."]
-    s = struct("taygetos", "Taygetos: the dark wall", 8, 4, SEC, walk=walk, names=names,
+    walk = ["XXXXXXXX", "XXXXXXXX", "XXXXXXXX", "XXXXXXX.", "XXX....."]
+    s = struct("taygetos", "Taygetos: the dark wall", 8, 5, SEC, walk=walk, names=names,
                notes="The mountain wall behind Lakonia, and the rock walls of the hill routes. "
                      "Fill the mountain's body with `mass_00` `mass_10` / `mass_01` `mass_11`, "
                      "a 2 x 2 block that tiles (put `mass_XY` at x % 2, y % 2; `mass_pine` breaks "
@@ -210,7 +222,9 @@ def taygetos():
                      "edge onto grass. `in_E` `in_W` turn a south face's lip into a flank. "
                      "`gully` and `gully_foot` are a dry watercourse down the face. Loose "
                      "pieces on grass: `boulder`, `boulders` (impassable), `scree` (walkable). "
-                     "All impassable except `scree`.")
+                     "Cape Malea's sea cliffs: `foot_sea` `foot_sea_b`, the face dropping into "
+                     "borrowed sea with foam at its foot, and `stack`, a dark rock standing in "
+                     "the sea. All impassable except `scree`.")
     B, M = s.B, s.M
     # the massif's body, 32 px periodic
     for (cx, cy) in ((0, 0), (1, 0), (0, 1), (1, 1), (2, 3)):
@@ -409,6 +423,36 @@ def taygetos():
                 M.px(X, Y, scree_px(X, Y))
             elif d < 1.15 and (x + y) % 3 == 0:
                 M.px(X, Y, "ty3")
+    # Malea: the face into the sea (borrowed), foam at its foot; a sea stack
+    ground(s, "sea", [(0, 4), (1, 4), (2, 4)])
+    ground(s, "grass", [(x, 4) for x in range(3, 8)])
+    for cx in (0, 1):
+        for y in range(16):
+            for x in range(16):
+                X, Y = cx * 16 + x, 64 + y
+                base = 9 + round(1.2 * math.sin(2 * math.pi * X / 32 + 1) + 0.6 * math.sin(2 * math.pi * X / 8))
+                if y < base:
+                    M.px(X, Y, face_px(X, Y))
+                elif y == base:
+                    M.px(X, Y, "ty0")
+                elif y <= base + 2 and (X + y) % 3:
+                    M.px(X, Y, "w0" if y == base + 1 else "b4")
+                elif y == base + 4 and X % 5 == 0:
+                    M.px(X, Y, "b4")
+    for y in range(16):
+        for x in range(16):
+            X, Y = 32 + x, 64 + y
+            d = math.hypot((x - 7.5) / 6.0, (y - 7.0) / 6.0) + 0.1 * math.sin(x * 2.1 + y)
+            if d < 1:
+                lit = -(x - 7.5) - (y - 7)
+                c = "ty3" if lit > 4 else ("ty2" if lit > -1 else "ty1")
+                if d > 0.85:
+                    c = "ty0" if lit < 2 else "ty3"
+                M.px(X, Y, c)
+            elif d < 1.25 and (X + Y) % 2:
+                M.px(X, Y, "w0")
+            elif d < 1.45 and (X + Y) % 3 == 0:
+                M.px(X, Y, "b4")
     return s
 
 

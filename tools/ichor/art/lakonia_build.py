@@ -122,7 +122,7 @@ def spec(name):
             "sections": [
                 ("town", [house_pick(by, HOUSE_TOWN), by["stoa"], by["colonnade"], by["orthia"],
                           by["enyalios"], by["burial"], by["rope"]]),
-                ("yard", [by["yard"], by["ring"], by["sands"], by["sown"]]),
+                ("yard", [by["yard"], by["ring"], by["sands"], by["sown"], by["well"]]),
                 ("land", [taygetos_pick(by, TAYGETOS_TOWN), plane(by), by["willow"],
                           by["oleander"]]),
                 ("water", [by["river"],
@@ -133,10 +133,145 @@ def spec(name):
                                         "over its south face `face_W` `arch` `face_E` in the "
                                         "water. Deck walkable, face impassable.")]),
             ],
-            "rows": None,
+            "aethos": "The training fields' tall grass is aethos's barley (`0x00D`); the agora, lanes and the Mani road are aethos's limestone path; the Asclepeion and the Agora (Lakonia's iron-bar stall) are aethos's buildings; olives, cypresses and the town sign are aethos's. Route 31's rope sits on its path.",
+            "rows": {"town": 0, "yard": 17, "land": 42, "water": 49},
             "fronts": ["house", "house_wide", "lampito", "low_house", "syssition", "barracks",
                        "lesche"],
             "labels": [("sown", [("C_teeth", "SownField_Teeth"), ("C", "SownField")])],
+        }
+    if name == "gytheion":
+        import kythera_coast as Co
+        import kythera_harbor as H
+        surf = Co.surf()
+        quay = H.quay()
+        kaiki = H.kaiki()
+        return {
+            "symbol": "gTileset_Gytheion", "dir": "gytheion", "label": "Gytheion",
+            "doc": "TILES_gytheion.md", "title": "Gytheion and the strait off Malea",
+            "maps": "Gytheion and Route 24 (the strait off Malea)",
+            "groups": L.groups(["purple", "stone", "foam", "terra", "mount", "deep", "wood"]),
+            "images": [("gytheion_quay.png", "A 240 x 160 screen of Gytheion's quay: the purple steps, the stall, the dye-works and its heaps (3x; `gytheion_quay_1x.png` is 1x)"),
+                       ("gytheion_town.png", "Gytheion: the quay, the theater and its stage-building, the dye-works, the causeway to Kranai; the strait off Malea")],
+            "sections": [
+                ("harbor", [K.pick(quay, ["S", "S_b", "N", "E", "W", "out_SE", "out_SW",
+                                          "out_NE", "out_NW", "in_SE", "in_SW", "in_NE",
+                                          "in_NW", "ring_S", "S_plank"], w=8, key="quay",
+                                   notes=quay.notes.replace("Skandeia's quay (and Paphia's "
+                                                            "jetty)", "Gytheion's quay (Skandeia's "
+                                                            "kit, drawn once)")),
+                            by["quayside"], by["dyeworks"], by["vats"], by["stall"],
+                            by["kranai_way"], by["kranai_shrine"], kaiki]),
+                ("town", [house_pick(by, ["R_L", "R_M", "R_R", "R_brush", "U_L", "U_M", "U_R",
+                                          "U_window", "G_L", "G_M", "G_R", "door", "G_jar",
+                                          "G_wood"]),
+                          by["skene"], by["theater"]]),
+                ("coast", [K.pick(surf, ["S", "S2", "N", "E", "W", "out_NW", "out_NE",
+                                         "out_SW", "out_SE", "in_SE", "in_SW", "in_NE", "in_NW"],
+                                  w=8, key="surf", notes=surf.notes),
+                           by["current"], by["drowned"],
+                           taygetos_pick(by, ["mass_00", "mass_10", "mass_01", "mass_11", "lip",
+                                              "lip_b", "face", "face_b", "foot_sea",
+                                              "foot_sea_b", "side_E", "stack"],
+                                         notes="Cape Malea's cliffs on Route 24's north side, "
+                                               "Taygetos's dark rock (see `TILES_lakonia.md`): "
+                                               "fill the cape with `mass_*` (2 x 2, at x % 2, "
+                                               "y % 2), edge it with `lip` over `face` over "
+                                               "`foot_sea`, the face dropping into the sea with "
+                                               "foam at its foot (`_b` vary a run); `side_E` "
+                                               "runs down the cape's east flank; `stack` is a "
+                                               "dark rock in the sea. Impassable.")]),
+            ],
+            "aethos": "The quay's top and the lanes are aethos's limestone path, Elaphonisos's white sand and the beach are aethos sand edged with Kythera's surf (drawn once, in Kythera's painter), the open strait is aethos sea, and the fishing boats are Skandeia's (`kythera_harbor.kaiki`).",
+            "rows": {"harbor": 0, "town": 14, "coast": 24},
+            "fronts": ["house", "low_house"],
+            "labels": [],
+        }
+    if name == "eurotas":
+        br = by["bridge"]
+        return {
+            "symbol": "gTileset_Eurotas", "dir": "eurotas", "label": "Eurotas",
+            "doc": "TILES_eurotas.md", "title": "Route 25, up the Eurotas",
+            "maps": "Route 25",
+            "groups": L.groups(["red", "stone", "vegb", "river", "mount", "wood"]),
+            "images": [("eurotas_amyklai.png", "Route 25 at Amyklai: the throne over the tomb, the altar's fire, the spring, the hyacinths, the Vapheio door in the hillside, the river and its reed beds")],
+            "sections": [
+                ("water", [by["river"], by["reeds"], by["oleander"],
+                           K.pick(br, ["foot_V", "foot_H", "foot_V_N", "foot_V_S"], w=4,
+                                  key="bridge",
+                                  notes="Plank footbridges, one cell wide, over the river and "
+                                        "its side streams: `foot_V` north-south (ended on the "
+                                        "banks by `foot_V_N` `foot_V_S`, stone landings), "
+                                        "`foot_H` east-west. Walkable.")]),
+                ("route", [by["throne"], by["altar"], by["spring"], by["herm_shrine"],
+                           by["farmhouse"], by["hearth_lit"], by["vapheio"], by["flowers"],
+                           plane(by)]),
+                ("land", [taygetos_pick(by, ["mass_00", "mass_10", "mass_01", "mass_11",
+                                             "mass_pine", "lip", "lip_b", "lip_L", "lip_R",
+                                             "face", "face_b", "face_L", "face_R", "foot",
+                                             "foot_b", "foot_L", "foot_R", "boulder",
+                                             "scree"])]),
+            ],
+            "aethos": "The valley's terrace walls and their ledges are aethos's dry-stone ledges (`TILES_aethos.md`); the west fields' barley is aethos's tall grass and its olives are aethos's; the great herm at Amyklai is aethos's herm (`0x01B`); the reed thicket Demeter's Sickle cuts is an object event (Gen 3 cuts objects, not metatiles), which can stand in a `reeds` bed.",
+            "rows": {"water": 0, "route": 16, "land": 34}, "fronts": [],
+            "labels": [("hearth_lit", [("lit_L", "Hearth_Lit_L"), ("lit_R", "Hearth_Lit_R")]),
+                       ("farmhouse", [("hearth_L", "Hearth_L"), ("hearth_R", "Hearth_R"),
+                                      ("roof_BL", "FarmRoof_TL")]),
+                       ("herm_shrine", [("lit", "Shrine_Lit"), ("unlit", "Shrine_Unlit")]),
+                       ("vapheio", [("door_TL", "VapheioDoor_TL"),
+                                    ("open_TL", "VapheioOpen_TL")]),
+                       ("reeds", [("1|11111111", "Reeds")])],
+        }
+    if name == "stymphalia":
+        br = by["bridge"]
+        tr = by["trees"]
+        return {
+            "symbol": "gTileset_Stymphalia", "dir": "stymphalia", "label": "Stymphalia",
+            "doc": "TILES_stymphalia.md",
+            "title": "Route 26, Lake Stymphalia and Route 27",
+            "maps": "Route 26 (past the training grounds), Lake Stymphalia and Route 27 "
+                    "(over the hills into Arkadia)",
+            "groups": L.groups(["marsh", "river", "veg", "mount", "wood", "stone"]),
+            "images": [("stymphalia_boardwalk.png", "A 240 x 160 screen of Lake Stymphalia: the boardwalk through the reeds, the causeway, Akanthis's stilt hut (3x; `stymphalia_boardwalk_1x.png` is 1x)"),
+                       ("stymphalia_lake.png", "Lake Stymphalia: the causeway and boardwalks over the black water, the reed islets, the roosting reeds, the regrowing wall"),
+                       ("stymphalia_platanistas.png", "Route 26's Platanistas: the plane-tree island in its moat, Herakles's and Lykourgos's bridges, the holm-oaks of the Skiritis")],
+            "sections": [
+                ("marsh", [by["marsh"], by["marsh_reeds"], by["curtain"], by["roost"],
+                           by["regrow"], by["causeway"], by["boardwalk"], by["stilt_hut"]]),
+                ("water", [by["river"],
+                           K.pick(br, ["foot_V", "foot_H", "foot_V_N", "foot_V_S"], w=4,
+                                  key="bridge",
+                                  notes="The Platanistas's two bridges and the hill streams': "
+                                        "plank footbridges one cell wide, `foot_V` north-south "
+                                        "(ended on the banks by `foot_V_N` `foot_V_S`), "
+                                        "`foot_H` east-west. Walkable."),
+                           by["statues"]]),
+                ("hills", [tr, plane(by),
+                           K.pick(by["altar"], ["cold_L", "cold_R"], w=2, key="phoibaion",
+                                  notes="The Phoibaion on Route 26: the little old altar where "
+                                        "the two teams made their offering before the fight, "
+                                        "2 x 1 on borrowed grass; the visible item sits on its "
+                                        "step. Impassable."),
+                           by["spring"], by["odds"], by["tower"], by["ravine"],
+                           taygetos_pick(by, ["mass_00", "mass_10", "mass_01", "mass_11", "lip",
+                                              "lip_b", "lip_L", "lip_R", "face", "face_b",
+                                              "face_L", "face_R", "foot", "foot_b", "foot_L",
+                                              "foot_R", "side_E", "side_W", "side_E_foot",
+                                              "side_W_foot", "back", "back_NW", "back_NE",
+                                              "boulder", "boulders", "scree"],
+                                         notes="The Skiritis's rock walls and the ridge above the "
+                                               "Titans' road, Taygetos's rock (see "
+                                               "`TILES_lakonia.md` for the kit): `lip` over "
+                                               "`face` over `foot` for a south-facing wall, "
+                                               "`side_E`/`side_W` and their feet for flanks, "
+                                               "`back*` for a free-standing outcrop's north "
+                                               "rim, `mass_*` (2 x 2) to fill. Loose `boulder`, "
+                                               "`boulders`, and walkable `scree`.")]),
+            ],
+            "aethos": "The running track and the goat paths are aethos path; the practice field's long grass is aethos's (`0x015`); Route 27's pines include aethos's stone pine beside the black pine here, and its oaks are the holm-oaks and walnuts; the Titans' lower road is aethos path under a `taygetos` lip and face; the great herms are aethos's.",
+            "rows": {"marsh": 0, "water": 27, "hills": 38}, "fronts": [],
+            "labels": [("regrow", [("wall", "ReedWall"), ("cut", "ReedWall_Cut")]),
+                       ("odds", [("drum_L", "Drum_L"), ("drag", "Drum_Moved"),
+                                 ("hammer", "HammerRock"), ("rubble", "HammerRock_Broken")])],
         }
     raise SystemExit(f"lakonia_build: unknown tileset {name}")
 

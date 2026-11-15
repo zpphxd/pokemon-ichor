@@ -223,36 +223,32 @@ def house_kit():
     for (x, y) in ((6, 0), (8, 1), (10, 0), (5, 1)):
         B.px(ox + x, oy + y, "sn1")
 
-    # --- reed thatch (the barracks): bundles laid in courses, a ridge line
+    # --- reed thatch (the barracks): bundles laid in courses, straw running
+    # down each, a ragged eave
     for nm, left, right in (("T_L", True, False), ("T_M", False, False), ("T_R", False, True)):
         ox, oy = cell(nm)
         for y in range(16):
             for x in range(16):
                 X, Y = ox + x, oy + y
-                course = (y + 1) // 4
-                k = hp(x, y, 91)
-                c = "re3" if (x + course * 2) % 3 else "re4"
-                if (y + 1) % 4 == 0:
-                    c = "re2"
-                if k % 13 == 0:
-                    c = "re2"
+                u = L.mx(X)
+                course = y // 4
+                v = y % 4
+                c = "re3" if (u + course * 3) % 4 else "re2"
+                if v == 3:
+                    c = "wd1" if (u + course) % 3 else "re2"
+                elif v == 0 and (u + course) % 5 == 0:
+                    c = "re4"
                 if y == 0:
-                    c = "wd1"
-                if y >= 14:
-                    c = "wd1" if y == 14 else "wd0"
-                    if y == 14 and x % 3 == 0:
+                    c = "wd0" if u % 3 == 0 else "wd1"
+                if y >= 13:
+                    c = ("re2", "wd1", "wd0")[y - 13]
+                    if y == 15 and (u + 1) % 3 == 0:
                         c = "re2"
                 if left and x <= 1:
                     c = "wd1" if x == 1 else "wd0"
                 if right and x >= 14:
                     c = "re2" if x == 14 else "wd0"
-                T.px(X, Y, c)
-                B.px(X, Y, plaster(X, Y))   # the wall behind (never seen; keeps the cell opaque)
-        # keep the thatch on the bottom layer: one layer, one group
-        for y in range(16):
-            for x in range(16):
-                B.px(ox + x, oy + y, T.get(ox + x, oy + y))
-                T.px(ox + x, oy + y, None)
+                B.px(X, Y, c)
 
     # --- walls
     def wall(name, upper, left=False, right=False, worn=False):
@@ -402,27 +398,28 @@ def house_kit():
     ox, oy = cell("U_cloak")
     put(B, ox + 4, oy + 2, [
         "...11...",
-        "..s11s..",
-        ".a2222a.",
-        ".a2322a.",
-        "a223222a",
-        "a223222a",
-        "a222222a",
-        "a222232a",
-        "a222232a",
-        "a2222220",
-        ".a22220.",
-        "..0000..",
-    ], {"1": "ro1", "s": "sn1", "a": "lr1", "2": "lr2", "3": "pw1", "0": "sn1"})
+        "..a11a..",
+        ".a2a12a.",
+        ".a2a12a.",
+        "a22a122a",
+        "a22a1a2a",
+        "a22a1a2a",
+        "a22a1a2a",
+        "a2a21a2a",
+        "a2a21a2a",
+        "aaa2aa1a",
+        ".s.ss.s.",
+    ], {"1": "lr1", "a": "lr1", "2": "lr2", "s": "sn2"})
+    put(B, ox + 7, oy + 2, ["11"], {"1": "ro1"})
     # the herd's names painted on the plaster, some struck through
     ox, oy = cell("U_list")
     for i, y in enumerate(range(3, 14, 2)):
         ln = 6 + (hp(i, 3, 5) % 5)
         for x in range(3, 3 + ln):
-            if (x + i) % 4 != 3:
-                B.px(ox + x, oy + y, "lr1")
+            if (x + i) % 3 != 2:
+                B.px(ox + x, oy + y, "sn1")
         if i in (2, 4):
-            B.line(ox + 2, oy + y, ox + 3 + ln, oy + y, "sn0")
+            B.line(ox + 2, oy + y, ox + 3 + ln, oy + y, "lr1")
     for x in range(2, 14):
         B.px(ox + x, oy + 2, "sn2")
     # --- the porch: piers, its shaded depth, the door at its back
@@ -1164,9 +1161,9 @@ def willow():
         stripe = (x * 3 + (x // 3)) % 5
         k = hp(x, y, 111)
         up = y == 0 or not m[y - 1, x]
-        c = "my3" if stripe < 1 else ("my2" if stripe < 3 else ("ho2" if stripe < 4 else "my1"))
+        c = "my2" if stripe < 1 else ("ho2" if stripe < 3 else ("my1" if stripe < 4 else "ho1"))
         if up or (y < 12 and x < 14 and k % 4 == 0):
-            c = "my4" if k % 2 else "my3"
+            c = "my3" if k % 2 else "my2"
         if not (y + 1 < H and m[y + 1, x]):
             c = "my1" if stripe < 2 else "t0"
         if k % 37 == 0 and y < 30:
@@ -1177,6 +1174,34 @@ def willow():
     return s
 
 
+def well():
+    s = struct("well", "A village well", 1, 1, SEC, walk=["X"], names={"well": (0, 0)},
+               notes="A well in a village yard (the mother at the well): a low round kerb of "
+                     "stone over dark water, a timber crosspiece and its bucket. On the "
+                     "yard's beaten sand (it meets `yard`'s interior). Impassable.")
+    B = s.B
+    for y in range(16):
+        for x in range(16):
+            B.px(x, y, L.yard_px(x, y))
+    put(B, 1, 1, [
+        "..1........1..",
+        "..1........1..",
+        "..1222222221..",
+        "..1..1..1..1..",
+        "..4444444444..",
+        ".433333333334.",
+        "4330000000033.",
+        "4300000000003.",
+        "3300000000002.",
+        "3330000000022.",
+        ".333333333222.",
+        ".122222222211.",
+        "..111111111...",
+        "...00.0.00....",
+    ], {"1": "sn1", "2": "sn2", "3": "sn3", "4": "sn4", "0": "sn0"})
+    return s
+
+
 def build():
     return [house_kit(), yard(), sands(), ring(), stoa(), colonnade(), orthia(), enyalios(),
-            burial(), rope(), sown(), willow()]
+            burial(), rope(), sown(), willow(), well()]

@@ -197,8 +197,8 @@ def main(name, sp, used, meta):
         out.append("It is one of the Lakonia family of secondaries; see "
                    "[`TILES_lakonia.md`](TILES_lakonia.md) for why the art is split and which "
                    "seams then need aethos-only strips.\n")
-    if sp.get("undrawn"):
-        out.append("**Not drawn yet.** " + sp["undrawn"] + "\n")
+    if sp.get("aethos"):
+        out.append("**What comes from aethos (or elsewhere), not from here.** " + sp["aethos"] + "\n")
     out.append(CONVENTIONS.format(starts=starts, name=name, dir=d, anims=anims, used=used,
                                   meta=meta, labels=labels, groups=grows))
     for sec, _ in sp["sections"]:

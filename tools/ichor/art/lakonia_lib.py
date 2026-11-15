@@ -66,7 +66,7 @@ NEW = {
     "pu0": (48, 24, 48), "pu1": (88, 40, 80), "pu2": (136, 64, 120), "pu3": (184, 104, 160),
     "pu4": (224, 168, 200),
     # Stymphalia's black water and its mud
-    "bw0": (16, 24, 24), "bw1": (32, 40, 40), "bw2": (48, 64, 56), "bw3": (80, 96, 80),
+    "bw0": (16, 32, 32), "bw1": (32, 48, 48), "bw2": (56, 80, 72), "bw3": (96, 120, 104),
     "md1": (72, 56, 40),
     # beaten sand of the agoge's yard and the wrestling sands
     "ya0": (160, 128, 88), "ya1": (192, 160, 112), "ya2": (216, 192, 144), "ya3": (240, 224, 184),
@@ -178,9 +178,9 @@ def yard_px(X, Y):
     mirror-symmetric)."""
     x, y = mx(X), Y % 16
     k = hp(x, y, 21)
-    if k % 23 == 0:
+    if k % 29 == 0:
         return "ya0"
-    if k % 11 == 0 or (x * 3 + y * 5) % 13 == 0:
+    if k % 13 == 0:
         return "ya2"
     return "ya1"
 
@@ -190,11 +190,11 @@ def soft_sand_px(X, Y):
     cell mirror-symmetric)."""
     x, y = mx(X), Y % 16
     k = hp(x, y, 33)
-    if y % 5 == 0 and (x + y) % 7 < 5:
+    if y % 4 == 0 and (x + y // 4) % 5 < 3:
         return "ya2"
-    if k % 19 == 0:
+    if k % 23 == 0:
         return "ya1"
-    return "ya3" if k % 7 == 0 else "ya2"
+    return "ya3" if k % 11 == 0 else "ya2"
 
 
 # --------------------------------------------------------------------------
@@ -223,20 +223,17 @@ def _eurotas(x, y, f):
 
 
 def _marsh(x, y, f):
-    """Stymphalia's black water: nearly still; faint rings and a slow sheen."""
+    """Stymphalia's black water: nearly still, a dark sheen, a few long
+    reflections that slide a pixel at a time."""
     k = K.h(x, y, 9)
     c = "bw1"
-    if k % 9 == 0 or (x * 5 + y * 3) % 11 == 0:
+    if (x * 5 + y * 3) % 13 == 0 or k % 11 == 0:
         c = "bw0"
-    for (cx, cy, r) in ((4, 4, 2.5), (12, 11, 3.0)):
-        d = math.hypot(x - cx, (y - cy) * 1.6)
-        rr = r + f * 0.9
-        if abs(d - rr) < 0.5 and (x + y + f) % 2 == 0:
+    for (sx, sy, ln) in ((2, 3, 5), (10, 8, 4), (5, 13, 3)):
+        if y == sy and 0 <= (x - sx - f) % 16 < ln:
             c = "bw2"
-    if y in (7, 15) and (x + 3 * f) % 16 in (2, 3, 4):
-        c = "bw2"
-    if f == 1 and (x, y) in ((10, 2), (2, 13)):
-        c = "bw3"
+    if (x, y) == ((12 + f) % 16, 3) or (x, y) == ((7 + f) % 16, 8):
+        c = "bw3" if f == 1 else "bw2"
     return c
 
 

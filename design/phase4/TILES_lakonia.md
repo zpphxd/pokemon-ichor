@@ -47,6 +47,8 @@ use different secondaries: the strip nearest the seam, on both maps, uses only
 The strips cost little: the gaps and roads are aethos path and grass anyway,
 and aethos olives, cypresses and stone pines plant the edges.
 
+**What comes from aethos (or elsewhere), not from here.** The training fields' tall grass is aethos's barley (`0x00D`); the agora, lanes and the Mani road are aethos's limestone path; the Asclepeion and the Agora (Lakonia's iron-bar stall) are aethos's buildings; olives, cypresses and the town sign are aethos's. Route 31's rope sits on its path.
+
 ## How to use it
 
 **Ids.** Each grid lists metatile ids as Porymap shows them, row by row. Each section
@@ -108,7 +110,7 @@ hints:
 | wood | Timber and thatch: boardwalks, the stilt hut, racks, the barracks' roof, posts |
 | yard | Beaten sand: the agoge's yard, the ring, the wrestling sands, their stone |
 
-**Tile budget.** 500 of 504 tiles (464 metatiles). The door animations copy their
+**Tile budget.** 501 of 504 tiles (464 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 
@@ -615,11 +617,24 @@ ids                          walk
 | 0x32B | `BR` | `G` | `MB_TALL_GRASS` | COVERED | grass |
 | 0x32C | (3, 2) | `.` | `MB_NORMAL` | COVERED | grass |
 
+### A village well
+
+`well`, 1 wide by 1 tall. A well in a village yard (the mother at the well): a low round kerb of stone over dark water, a timber crosspiece and its bucket. On the yard's beaten sand (it meets `yard`'s interior). Impassable.
+
+```text
+ids        walk
+0x305   X
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x305 | `well` | `X` | `MB_NORMAL` | COVERED |  |
+
 ## The land
 
 ### Taygetos: the dark wall
 
-`taygetos`, 8 wide by 3 tall. The mountain wall behind Lakonia, and the rock walls of the hill routes. Fill the mountain's body with `mass_00` `mass_10` / `mass_01` `mass_11`, a 2 x 2 block that tiles (put `mass_XY` at x % 2, y % 2; `mass_pine` breaks it up). A south-facing wall is `lip` over `face` over `foot`, the foot standing on grass (`_b` are variants to break a long run; `_L` `_R` end one); `pine_face` is a face with a black pine on a ledge. `side_E` / `side_W` run north-south down the mountain's east or west flank (with `side_E_foot` / `side_W_foot` where a flank meets a south face's foot row); `back` and `back_NW` `back_NE` finish a free-standing rock's north edge onto grass. `in_E` `in_W` turn a south face's lip into a flank. `gully` and `gully_foot` are a dry watercourse down the face. Loose pieces on grass: `boulder`, `boulders` (impassable), `scree` (walkable). All impassable except `scree`.
+`taygetos`, 8 wide by 3 tall. The mountain wall behind Lakonia, and the rock walls of the hill routes. Fill the mountain's body with `mass_00` `mass_10` / `mass_01` `mass_11`, a 2 x 2 block that tiles (put `mass_XY` at x % 2, y % 2; `mass_pine` breaks it up). A south-facing wall is `lip` over `face` over `foot`, the foot standing on grass (`_b` are variants to break a long run; `_L` `_R` end one); `pine_face` is a face with a black pine on a ledge. `side_E` / `side_W` run north-south down the mountain's east or west flank (with `side_E_foot` / `side_W_foot` where a flank meets a south face's foot row); `back` and `back_NW` `back_NE` finish a free-standing rock's north edge onto grass. `in_E` `in_W` turn a south face's lip into a flank. `gully` and `gully_foot` are a dry watercourse down the face. Loose pieces on grass: `boulder`, `boulders` (impassable), `scree` (walkable). Cape Malea's sea cliffs: `foot_sea` `foot_sea_b`, the face dropping into borrowed sea with foam at its foot, and `stack`, a dark rock standing in the sea. All impassable except `scree`.
 
 ```text
 ids                                                  walk

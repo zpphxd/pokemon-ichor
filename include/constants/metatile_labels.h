@@ -1209,4 +1209,26 @@
 #define METATILE_Lakonia_SownField                0x322
 // end gTileset_Lakonia
 
+// gTileset_Eurotas (Ichor: Route 25, up the Eurotas), written by tools/ichor/art/lakonia_build.py
+#define METATILE_Eurotas_Hearth_Lit_L             0x2A0
+#define METATILE_Eurotas_Hearth_Lit_R             0x2A1
+#define METATILE_Eurotas_Hearth_L                 0x2A4
+#define METATILE_Eurotas_Hearth_R                 0x2A5
+#define METATILE_Eurotas_FarmRoof_TL              0x2B3
+#define METATILE_Eurotas_Shrine_Lit               0x28D
+#define METATILE_Eurotas_Shrine_Unlit             0x28E
+#define METATILE_Eurotas_VapheioDoor_TL           0x2C9
+#define METATILE_Eurotas_VapheioOpen_TL           0x2CC
+#define METATILE_Eurotas_Reeds                    0x266
+// end gTileset_Eurotas
+
+// gTileset_Stymphalia (Ichor: Route 26, Lake Stymphalia and Route 27), written by tools/ichor/art/lakonia_build.py
+#define METATILE_Stymphalia_ReedWall                 0x29C
+#define METATILE_Stymphalia_ReedWall_Cut             0x29E
+#define METATILE_Stymphalia_Drum_L                   0x362
+#define METATILE_Stymphalia_Drum_Moved               0x364
+#define METATILE_Stymphalia_HammerRock               0x365
+#define METATILE_Stymphalia_HammerRock_Broken        0x366
+// end gTileset_Stymphalia
+
 #endif // GUARD_METATILE_LABELS_H

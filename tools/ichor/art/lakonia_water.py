@@ -24,26 +24,34 @@ hp, mx = L.hp, L.mx
 # Reeds
 # --------------------------------------------------------------------------
 
-TOPS = [2, 5, 0, 4, 1, 6, 3, 7]
+# per mirrored column: its role (S stem, s shaded stem, g gap) and its top
+REED_COLS = "SgsSgsSs"
+REED_TOP = [3, 1, 5, 0, 2, 6, 1, 4]
 
 
 def reed_px(X, Y, ramp=("re4", "re3", "re2", "re1"), sparse=False):
-    """Reeds seen from the south: two staggered rows of plumed blades per
-    cell, each cell mirror-symmetric. ramp: plume, lit stem, stem, base."""
+    """Reeds seen from the south: close vertical stems, each ending at its own
+    height in a pale feathery plume, dark between; each cell mirror-symmetric.
+    ramp: plume, lit stem, stem, base."""
     x, y = mx(X), Y % 16
-    for t0 in (TOPS[x], TOPS[x] + 8):
-        dy = (y - t0) % 16
-        if dy < 8:
-            break
-    if dy == 0:
-        return ramp[0]
-    if dy == 1:
-        return ramp[0] if x % 3 == 0 else ramp[1]
-    if dy < 5:
-        return ramp[1] if x % 2 == 0 else ramp[2]
-    if sparse:
+    role, top = REED_COLS[x], REED_TOP[x]
+    if role == "g":
+        if sparse:
+            return None
+        return ramp[3] if y > 2 or (x + y) % 2 else ramp[2]
+    if y < top:
+        if sparse:
+            return None
+        return ramp[3]
+    if y < top + 2:
+        return ramp[0] if (role == "S" or y == top) else ramp[1]
+    if y == top + 2 and role == "S":
+        return ramp[1]
+    if sparse and y > 12:
         return None
-    return ramp[2] if dy < 6 and x % 2 == 0 else ramp[3]
+    if role == "S":
+        return ramp[1] if (y - top) % 5 else ramp[2]
+    return ramp[2] if (y - top) % 4 else ramp[3]
 
 
 def grass_bank(X, Y):
@@ -722,21 +730,25 @@ def boardwalk():
                 if not (inV or inH or hub):
                     continue
                 if inV and not inH:
-                    c = "wd3" if y % 4 else "wd1"
+                    c = "sn2" if y % 4 else "wd1"
+                    if y % 4 == 1:
+                        c = "wd3" if (x + y) % 5 else "sn2"
                     if x in (3, 12):
-                        c = "wd1"
-                    if (x + y * 3) % 11 == 0:
+                        c = "wd1" if x == 3 else "wd0"
+                    if (x * 5 + y * 3) % 13 == 0:
                         c = "wd2"
                 elif inH and not inV:
-                    c = "wd3" if x % 4 else "wd1"
+                    c = "sn2" if x % 4 else "wd1"
+                    if x % 4 == 1:
+                        c = "wd3" if (x + y) % 5 else "sn2"
                     if y == 3:
-                        c = "wd2"
+                        c = "wd3"
                     if y == 12:
                         c = "wd0"
-                    if (y + x * 3) % 11 == 0:
+                    if (y * 5 + x * 3) % 13 == 0:
                         c = "wd2"
                 else:
-                    c = "wd2" if (x + y) % 4 else "wd1"
+                    c = "sn2" if (x + y) % 4 else "wd1"
                 M.px(ox + x, oy + y, c)
         # posts at the corners of every run, shadows on the water east and south
         for (px_, py_) in ((2, 2), (13, 2), (2, 13), (13, 13)):
@@ -777,9 +789,11 @@ def stilt_hut():
             if y < topy or edge > 23.5:
                 continue
             course = int((y - topy) // 3)
-            c = "re3" if (x + course * 3) % 4 else "re4"
+            c = "re2" if (x + course * 3) % 4 else "re3"
             if (y - int(topy)) % 3 == 2:
-                c = "re2"
+                c = "wd1" if (x + course) % 3 else "re2"
+            elif (y - int(topy)) % 3 == 0 and (x + course) % 5 == 0:
+                c = "re4"
             if y >= 23:
                 c = ("re2", "wd1", "wd0")[y - 23]
             if edge > 22.5:
