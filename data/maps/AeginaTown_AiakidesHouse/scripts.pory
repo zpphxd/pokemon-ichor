@@ -1,0 +1,73 @@
+// Aiakides's house (design/phase2/SCRIPT.md, Part 2): an old soldier, who says
+// his family were ants before they were people. Room: tools/ichor/maps/aegina_homes.py
+// ("aiakides"). The street door is the mat at (4..5, 7), warp 0 (MAP_AEGINA_TOWN
+// warp 2 is a placeholder until the Aegina agent's door ids are known).
+//
+// A "show me" request: bring an Ergant (they live up the Aphaia Road) in the
+// party and he gives his Black Belt, FLAG_ICHOR_GOT_BLACK_BELT. checkspecies
+// (asm/macros/event.inc, CheckPartyHasSpecies) looks through the whole party.
+
+mapscripts AeginaTown_AiakidesHouse_MapScripts {}
+
+text AeginaTown_AiakidesHouse_Text_NameAiakides { "AIAKIDES" }
+
+script AeginaTown_AiakidesHouse_EventScript_Aiakides {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_GOT_BLACK_BELT)) {
+        goto(AeginaTown_AiakidesHouse_EventScript_After)
+    }
+    checkspecies(SPECIES_ERGANT)
+    if (var(VAR_RESULT) == FALSE) {
+        setspeaker(AeginaTown_AiakidesHouse_Text_NameAiakides)
+        msgbox(format("There was a plague here once. Emptied the island. Every house.\p"
+                      "The old king sat under an oak and watched a line of ants climb it.\p"
+                      "He asked Zeus for as many people as there were ants.\p"
+                      "He woke up to an army.\p"
+                      "We fought at Troy, you know. Well. My great-great-great-grandfather did.\p"
+                      "Find me an ant that remembers. An Ergant, from up the temple road."))
+        release
+        end
+    }
+    playmoncry(SPECIES_ERGANT, CRY_MODE_NORMAL)
+    setspeaker(AeginaTown_AiakidesHouse_Text_NameAiakides)
+    msgbox(format("There. See how it stands? Shoulders back. That's a soldier.\p"
+                  "Here. My old belt. I won't need it. The ants do the fighting now."))
+    waitmoncry
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_BLACK_BELT)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_GOT_BLACK_BELT)
+    goto(AeginaTown_AiakidesHouse_EventScript_After)
+}
+
+script AeginaTown_AiakidesHouse_EventScript_After {
+    setspeaker(AeginaTown_AiakidesHouse_Text_NameAiakides)
+    msgbox(format("Feed them crumbs, and they'll follow you anywhere.\p"
+                  "Ants and soldiers both."))
+    release
+    end
+}
+
+script AeginaTown_AiakidesHouse_EventScript_Shrine {
+    msgbox(format("A clay ant on a little stone shrine. A lamp burns in front of it.\p"
+                  "Someone has left it a crumb."), MSGBOX_SIGN)
+}
+
+script AeginaTown_AiakidesHouse_EventScript_Shield {
+    msgbox(format("A narrow soldier's bed. Over it hang a bronze shield and a spear.\p"
+                  "The shield has an ant on it. Both have been polished, often."), MSGBOX_SIGN)
+}
+
+script AeginaTown_AiakidesHouse_EventScript_Anthill {
+    msgbox(format("A big pot full of earth, alive with ants.\p"
+                  "A line of them is marching off toward the table, and the crumbs under it."), MSGBOX_SIGN)
+}
+
+script AeginaTown_AiakidesHouse_EventScript_Hearth {
+    msgbox(format("A small hearth. A pot of barley porridge, and bread crusts for the ants."), MSGBOX_SIGN)
+}

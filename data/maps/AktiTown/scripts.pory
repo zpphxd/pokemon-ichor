@@ -7,8 +7,11 @@
 //   VAR_TEMP_2 == 2  ...or, if they came in another way, on the temple doorstep (19,17)
 //   VAR_TEMP_3 == 1  beat 8 part 2 waits on the quay, on the line x = 10 (rows 9-11),
 //                    the only way into the trireme's end of the quay
+//   VAR_TEMP_4 == 1  Phase 2 beat 9B: the wind turns as soon as the player arrives
+//   VAR_TEMP_4 == 2  ...and the quay scene waits on the same line, x = 10 (rows 9-11)
 // FLAG_ICHOR_HIDE_ALETHEA_AKTI doubles as "part 1 has not played yet": it is set
-// until the Hearth Laurel, cleared by part 1 and set again when the slice ends.
+// until the Hearth Laurel and cleared by part 1. After the slice Alethea waits on
+// the quay (the pointer to Halia) until she boards in beat 9B.
 
 mapscripts AktiTown_MapScripts {
     MAP_SCRIPT_ON_TRANSITION {
@@ -24,7 +27,11 @@ mapscripts AktiTown_MapScripts {
         }
         if (flag(FLAG_ICHOR_SLICE_COMPLETE)) {
             setflag(FLAG_ICHOR_HIDE_KLEON_AKTI)
-            setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
+            if (flag(FLAG_ICHOR_WINDS_TURNED)) {
+                setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
+            } else {
+                clearflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
+            }
         } elif (!flag(FLAG_BADGE01_GET)) {
             setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
         } elif (flag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)) {
@@ -32,9 +39,11 @@ mapscripts AktiTown_MapScripts {
         } else {
             setvar(VAR_TEMP_3, 1)
         }
+        call(AktiTown_EventScript_SetUpPhase2)
     }
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_TEMP_2, 1: AktiTown_EventScript_HarborPart1Check
+        VAR_TEMP_4, 1: AktiTown_EventScript_WindsTurn
     ]
 }
 
@@ -261,16 +270,19 @@ script AktiTown_EventScript_HarborPart2 {
                   "Across the flat water, the mainland waits."))
     closemessage
     setflag(FLAG_ICHOR_SLICE_COMPLETE)
-    // Playtest ending: a word on a black screen, then back to the harbor to fish.
-    fadescreen(FADE_TO_BLACK)
-    removeobject(LOCALID_AKTI_ALETHEA)
-    setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
-    delay(30)
-    msgbox(format("Thank you for playing the Kalliste preview of Pokémon Ichor."))
-    closemessage
-    delay(30)
-    fadescreen(FADE_FROM_BLACK)
+    // Phase 2 (SCRIPT.md beat 9A, the pointer): Alethea has news from Elaia.
+    applymovement(LOCALID_AKTI_ALETHEA, AktiTown_Movement_FaceRight)
+    applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_FaceLeft)
+    waitmovement(0)
+    call(AktiTown_EventScript_AletheaPointer)
     releaseall
+}
+
+script AktiTown_EventScript_AletheaPointer {
+    setspeaker(AktiTown_Text_NameAlethea)
+    msgbox(format("Halia sent a gull. She wants to see you before we sail.\p"
+                  "Truthfully, she wrote “NOW.” In very big letters."))
+    closemessage
 }
 
 movement AktiTown_Movement_PlayerToQuayFrom9 { walk_down walk_left * 2 face_left }
@@ -301,6 +313,13 @@ script AktiTown_EventScript_Diktys {
 script AktiTown_EventScript_Nausikles {
     if (flag(FLAG_BADGE01_GET) && !flag(FLAG_ICHOR_SLICE_COMPLETE) && !flag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)) {
         goto(AktiTown_EventScript_HarborPart2Talk)
+    }
+    if (flag(FLAG_ICHOR_CROSSING_DONE)) {
+        setvar(VAR_0x8004, 0)
+        goto(Ichor_EventScript_FerryQuay)
+    }
+    if (flag(FLAG_ICHOR_WINDS_TURNED)) {
+        goto(AktiTown_EventScript_Board)
     }
     lock
     faceplayer
@@ -335,7 +354,15 @@ script AktiTown_EventScript_Alethea {
     if (!flag(FLAG_ICHOR_SLICE_COMPLETE)) {
         goto(AktiTown_EventScript_HarborPart2Talk)
     }
-    end
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_HALIA_SECOND_LOOK)) {
+        setspeaker(AktiTown_Text_NameAlethea)
+        msgbox(format("The kingfishers can't sit on those eggs forever. Can they?"))
+    } else {
+        call(AktiTown_EventScript_AletheaPointer)
+    }
+    release
 }
 
 script AktiTown_EventScript_Rower {
@@ -466,4 +493,187 @@ script AktiTown_EventScript_IsletFisher {
                   "No one's set foot on it since the storm.\p"
                   "Row for it, and the current turns you right round.\p"
                   "The gulls get all his offerings now."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// Phase 2 beat 9B: the winds turn, and Mom (design/phase2/SCRIPT.md).
+// After Halia's second look (beat 9A), Mom waits on the quay at (4,11) and
+// Kleon by the Temple of Hestia's door at (20,17). Entering Akti, the wind
+// comes back (on frame); the quay scene plays on the line x = 10, rows 9-11,
+// which every way to the trireme crosses. The player is walked to (10,10).
+// ---------------------------------------------------------------------------
+
+text AktiTown_Text_NameMom { "MOM" }
+
+script AktiTown_EventScript_SetUpPhase2 {
+    if (flag(FLAG_ICHOR_HALIA_SECOND_LOOK) && !flag(FLAG_ICHOR_BOARDED_EUPLOIA)) {
+        clearflag(FLAG_ICHOR_HIDE_MOM_AKTI)
+    } else {
+        setflag(FLAG_ICHOR_HIDE_MOM_AKTI)
+    }
+    if (flag(FLAG_ICHOR_HALIA_SECOND_LOOK) && !flag(FLAG_ICHOR_WINDS_TURNED)) {
+        clearflag(FLAG_ICHOR_HIDE_KLEON_AKTI_DOOR)
+        setvar(VAR_TEMP_4, 1)
+    } else {
+        setflag(FLAG_ICHOR_HIDE_KLEON_AKTI_DOOR)
+    }
+}
+
+script AktiTown_EventScript_WindsTurn {
+    lockall
+    setvar(VAR_TEMP_4, 2)
+    delay(20)
+    playmoncry(SPECIES_HALCYLING, CRY_MODE_NORMAL)
+    waitmoncry
+    // No waitse: SE_M_GUST never reports finished, so waiting on it softlocks.
+    playse(SE_M_GUST)
+    delay(30)
+    setspeaker(AktiTown_Text_NameNausikles)
+    msgbox(format("WIND! Wind from the south!\p"
+                  "Everyone aboard who's coming aboard!"))
+    closemessage
+    releaseall
+}
+
+script AktiTown_EventScript_WindsQuayRow9 {
+    setvar(VAR_0x8008, 9)
+    goto(AktiTown_EventScript_WindsQuay)
+}
+
+script AktiTown_EventScript_WindsQuayRow10 {
+    setvar(VAR_0x8008, 10)
+    goto(AktiTown_EventScript_WindsQuay)
+}
+
+script AktiTown_EventScript_WindsQuayRow11 {
+    setvar(VAR_0x8008, 11)
+    goto(AktiTown_EventScript_WindsQuay)
+}
+
+script AktiTown_EventScript_WindsQuay {
+    lockall
+    setvar(VAR_TEMP_4, 3)
+    switch (var(VAR_0x8008)) {
+        case 9: applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_WindsPlayerFrom9)
+        case 10: applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_FaceLeft)
+        case 11: applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_WindsPlayerFrom11)
+    }
+    waitmovement(0)
+    // Alethea runs up from the quay and stops in front of the player.
+    applymovement(LOCALID_AKTI_ALETHEA, AktiTown_Movement_WindsAletheaRuns)
+    waitmovement(0)
+    setspeaker(AktiTown_Text_NameAlethea)
+    msgbox(format("{PLAYER}! Did you hear? The kingfishers are done nesting!\p"
+                  "The halcyon days are over. We're sailing!"))
+    closemessage
+    // Kleon runs out of the Temple of Hestia, waving something green. He comes
+    // up the harbor street (off screen until then) to stop beside Alethea.
+    setobjectxyperm(LOCALID_AKTI_KLEON_DOOR, 12, 16)
+    removeobject(LOCALID_AKTI_KLEON_DOOR)
+    clearflag(FLAG_ICHOR_HIDE_KLEON_AKTI_DOOR)
+    addobject(LOCALID_AKTI_KLEON_DOOR)
+    setspeaker(AktiTown_Text_NameKleon)
+    msgbox(format("WAIT! Wait for me! Look at this!"))
+    closemessage
+    applymovement(LOCALID_AKTI_KLEON_DOOR, AktiTown_Movement_WindsKleonRuns)
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_FaceDown)
+    waitmovement(0)
+    setspeaker(AktiTown_Text_NameKleon)
+    msgbox(format("The Hearth Laurel. I beat her. Last night. By lamplight.\p"
+                  "Ione got up specially. In her nightdress. Then she fed me soup.\p"
+                  "I ate the soup. Out of respect."))
+    applymovement(OBJ_EVENT_ID_PLAYER, AktiTown_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(AktiTown_Text_NameAlethea)
+    msgbox(format("Congratulations, Kleon. Truthfully."))
+    setspeaker(AktiTown_Text_NameKleon)
+    msgbox(format("So we're even. One laurel each. The race starts now!"))
+    closemessage
+    // Up the gangplank, and aboard.
+    applymovement(LOCALID_AKTI_ALETHEA, AktiTown_Movement_WindsAletheaBoards)
+    applymovement(LOCALID_AKTI_KLEON_DOOR, AktiTown_Movement_WindsKleonBoards)
+    waitmovement(0)
+    removeobject(LOCALID_AKTI_ALETHEA)
+    removeobject(LOCALID_AKTI_KLEON_DOOR)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_AKTI)
+    setflag(FLAG_ICHOR_HIDE_KLEON_AKTI_DOOR)
+    // Mom walks over from the quay's edge.
+    applymovement(LOCALID_AKTI_MOM, AktiTown_Movement_WindsMomComes)
+    waitmovement(0)
+    setspeaker(AktiTown_Text_NameMom)
+    msgbox(format("There you are. I brought bread. And honey. Not from that jar.\p"
+                  "Don't look at me like that. I'm not crying. It's the wind.\p"
+                  "I'm not coming across. I don't cross water. You know that.\p"
+                  "…\p"
+                  "Wherever you end up, come back up the hill. That's all."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_HONEY, 2)
+    setflag(FLAG_ICHOR_MOM_HARBOR)
+    setspeaker(AktiTown_Text_NameMom)
+    msgbox(format("Go on. That Lakonian boy's already halfway up the mast."))
+    closemessage
+    applymovement(LOCALID_AKTI_MOM, AktiTown_Movement_WindsMomGoes)
+    waitmovement(0)
+    setflag(FLAG_ICHOR_WINDS_TURNED)
+    releaseall
+}
+
+// From the line x = 10 to (10,10), facing the trireme's end of the quay.
+movement AktiTown_Movement_WindsPlayerFrom9 { walk_down face_left }
+movement AktiTown_Movement_WindsPlayerFrom11 { walk_up face_left }
+// Alethea (7,10) to (9,10), in front of the player.
+movement AktiTown_Movement_WindsAletheaRuns { walk_fast_right * 2 face_right }
+// Kleon from the harbor street (12,16) up to the quay and round to (9,11).
+movement AktiTown_Movement_WindsKleonRuns { walk_fast_up * 5 walk_fast_left * 3 face_right }
+// Both up the gangplank at x = 6, onto the trireme.
+movement AktiTown_Movement_WindsAletheaBoards { walk_left * 3 walk_up * 2 }
+movement AktiTown_Movement_WindsKleonBoards { delay_16 delay_16 walk_left * 3 walk_up * 3 }
+// Mom from (4,11) to (9,10), and back to face the sea.
+movement AktiTown_Movement_WindsMomComes { walk_right * 5 walk_up face_right }
+movement AktiTown_Movement_WindsMomGoes { walk_down walk_left * 5 face_up }
+
+script AktiTown_EventScript_Mom {
+    lock
+    faceplayer
+    setspeaker(AktiTown_Text_NameMom)
+    if (flag(FLAG_ICHOR_WINDS_TURNED)) {
+        msgbox(format("Go. Before I change my mind for you."))
+    } else {
+        msgbox(format("I came down to see the boat. Just the boat. Don't fuss."))
+    }
+    release
+}
+
+script AktiTown_EventScript_KleonDoor {
+    lock
+    faceplayer
+    setspeaker(AktiTown_Text_NameKleon)
+    msgbox(format("Don't look in my bag. There's nothing in my bag.\p"
+                  "Go down to the harbor. Go on. I'll be along. Casually."))
+    release
+}
+
+script AktiTown_EventScript_Board {
+    lock
+    faceplayer
+    setspeaker(AktiTown_Text_NameNausikles)
+    msgbox(format("All aboard for Emporion? Once we're out, we don't turn back."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Don't be long. Wind's like a cat. It leaves when it likes."))
+        release
+        end
+    }
+    msgbox(format("Good. Mind the oars. They don't mind you."))
+    closemessage
+    setflag(FLAG_ICHOR_BOARDED_EUPLOIA)
+    // Mom goes back up the hill once the Euploia has sailed.
+    setflag(FLAG_ICHOR_HIDE_MOM_AKTI)
+    clearflag(FLAG_ICHOR_HIDE_MOM_HOME)
+    playse(SE_EXIT)
+    fadescreen(FADE_TO_BLACK)
+    // The deck's boarding tile (design/phase2/BUILD.md's arrival table).
+    warp(MAP_TRIREME_EUPLOIA_DECK, 0)
+    waitstate
+    release
 }

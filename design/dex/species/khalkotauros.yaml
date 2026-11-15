@@ -1,0 +1,147 @@
+line: khalkotauros
+species:
+
+- dex: 81
+  concept: Furnace calf
+  name: Kaminoo
+  etymology: kaminos (Greek, furnace or kiln) + moo
+  category: Furnace Calf
+  types: [Fire]
+  abilities: [Flash Fire, Flame Body]
+  hidden_ability: Anger Point
+  base_stats: {hp: 55, atk: 62, def: 55, spa: 40, spd: 45, spe: 50}
+  ev_yield: {atk: 1}
+  exp_yield: 62
+  catch_rate: 190
+  gender: {female_pct: 0}
+  egg_groups: [Field, Mineral]
+  egg_cycles: 20
+  growth_rate: Slow
+  height_m: 0.9
+  weight_kg: 64.0
+  myth: >-
+    Hephaestus made King Aeetes a pair of bronze-hoofed bulls that breathed
+    fire. Jason had to yoke them and plow a field, protected by Medea's
+    ointment (Apollonius, Argonautica 3).
+  expression: >-
+    Not bronze yet: a calf with a furnace just catching in its belly and a nose
+    ring that's waiting for a yoke.
+  art: >-
+    Small: it fills about 36×32 px. A stocky calf in three-quarter view facing
+    left, head lowered and front hooves planted. A big ring through its nose
+    glows orange, a puff of smoke rises from its nostrils, and it has nub horns
+    and a tufted tail with an ember tip. Terracotta hide with a darker saddle,
+    a pale limestone muzzle, a sun-gold nose ring, black-figure ink outline. The
+    follower snorts little sparks as it walks.
+  shiny: Its hide turns black-figure dark and its nose ring glows blue-white.
+  dex_entry:
+    - Its nose ring glows like a coal. When it
+    - is cross, it snorts sparks, so the herders
+    - of Kaldera keep it well away from hay.
+  habitat: >-
+    Rare by day in a warm hollow below the forge slopes of Kaldera, at level
+    31. The calves shelter there beside the lava vents while the herd grazes
+    above.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Leer]
+      - [4, Ember]
+      - [8, Flame Charge]
+      - [12, Work Up]
+      - [16, Fire Fang]
+      - [20, Stomp]
+      - [24, Scary Face]
+      - [28, Take Down]
+      - [32, Double-Edge]
+      - [36, Heat Crash]
+      - [40, Flare Blitz]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sunny Day,
+      Flamethrower, Fire Blast, Overheat, Will-O-Wisp, Fire Spin, Flame Charge, Fire Fang,
+      Heat Crash, Flare Blitz, Temper Flare, Incinerate, Body Slam, Take Down, Double-Edge,
+      Headbutt, Stomping Tantrum, Bulldoze, Dig, Rock Smash, Rock Tomb, Iron Tail, Iron Head,
+      Wild Charge, Scary Face, Endeavor, Work Up, Bulk Up, Smart Strike, Thunder Fang]
+    egg: [Curse, Smokescreen, Thrash, Double Kick, Flame Wheel, High Horsepower]
+  signature: >-
+    Flash Fire and Flame Body from birth, and Anger Point as its hidden ability:
+    the calf that won't be yoked. Fire Fang and Stomp hit early.
+  new_move: null
+
+- dex: 82
+  concept: Bronze bull
+  name: Taurivet
+  etymology: tauros (Greek, bull) + rivet
+  category: Bronze Bull
+  types: [Fire, Steel]
+  abilities: [Flash Fire, Flame Body]
+  hidden_ability: Anger Point
+  base_stats: {hp: 90, atk: 115, def: 110, spa: 55, spd: 75, spe: 55}
+  ev_yield: {atk: 2}
+  exp_yield: 182
+  catch_rate: 60
+  gender: {female_pct: 0}
+  egg_groups: [Field, Mineral]
+  egg_cycles: 20
+  growth_rate: Slow
+  height_m: 2.0
+  weight_kg: 680.0
+  myth: >-
+    The Khalkotauroi, bulls of bronze made by Hephaestus, breathed fire from
+    their nostrils. Jason, anointed with Medea's charm against flame, forced
+    them under the yoke and plowed the field of Ares (Apollonius, Argonautica 3).
+  expression: >-
+    The full Khalkotauros: riveted bronze over a roaring furnace. The calf's
+    nose ring has become the ring the yoke hooks onto.
+  art: >-
+    Large: it fills about 60×50 px. A massive bull in three-quarter view facing
+    left, mid-charge with its head down and horns forward. Riveted bronze plates
+    cover its shoulders and flanks, a furnace grate in its chest shows fire,
+    flame jets from its nostrils, and its hooves are solid bronze. The calf's
+    nose ring survives, heavy and glowing. Sun-gold and terracotta bronze, marble
+    highlights on the rivets, one hot orange accent for the furnace, black-figure
+    ink outline. The back sprite shows a riveted spine.
+  shiny: The bronze darkens to black iron and the furnace glows blue-white.
+  dex_entry:
+    - A furnace roars inside its riveted bronze
+    - chest, and its breath can melt a plow. It
+    - is said the only one who ever yoked it
+    - wore a balm that fire could not touch.
+  habitat: >-
+    Evolves from Kaminoo at level 33. Common by day on the forge slopes of
+    Kaldera, at levels 34–40, in herds grazing the warm grass beside the lava
+    vents. The biggest stand guard on the upper slopes.
+  learnset:
+    level_up:
+      - [0, Iron Head]
+      - [1, Tackle]
+      - [1, Leer]
+      - [1, Ember]
+      - [1, Metal Claw]
+      - [8, Flame Charge]
+      - [12, Work Up]
+      - [16, Fire Fang]
+      - [20, Stomp]
+      - [24, Scary Face]
+      - [28, Take Down]
+      - [32, Double-Edge]
+      - [36, Iron Defense]
+      - [40, Heat Crash]
+      - [44, Heavy Slam]
+      - [48, Flare Blitz]
+      - [53, Shift Gear]
+      - [58, Raging Fury]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Sunny Day,
+      Flamethrower, Fire Blast, Overheat, Will-O-Wisp, Fire Spin, Flame Charge, Fire Fang,
+      Heat Crash, Flare Blitz, Temper Flare, Incinerate, Body Slam, Take Down, Double-Edge,
+      Headbutt, Stomping Tantrum, Bulldoze, Dig, Rock Smash, Rock Tomb, Iron Tail, Iron Head,
+      Wild Charge, Scary Face, Endeavor, Work Up, Bulk Up, Smart Strike, Thunder Fang,
+      Hyper Beam, Giga Impact, Heavy Slam, Iron Defense, Flash Cannon, Steel Beam, Gyro Ball,
+      Body Press, Earthquake, High Horsepower, Rock Slide, Stone Edge, Megahorn, Superpower,
+      Heat Wave, Payback, Reversal]
+    egg: []
+  signature: >-
+    At 680 kg its Heat Crash and Heavy Slam hit very hard. Shift Gear, learned
+    late, winds the bronze machine up into a fast charge.
+  new_move: null

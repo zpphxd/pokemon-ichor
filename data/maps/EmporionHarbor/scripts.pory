@@ -1,0 +1,487 @@
+// Emporion's harbor district: SCRIPT.md beat 11 (the herald on the quay) and the
+// harbor's half of the Emporion roster (Part 2): Halitherses, Glykera, the
+// customs man, the dockhand, the sailor, the mother and son, Nausikles's ferry.
+//
+// The Euploia's warp (Ichor_EventScript_EuploiaMakesEmporion, and the ferry) puts
+// the player on her berth at (30,16). While FLAG_ICHOR_ARRIVED_EMPORION is clear,
+// ON_TRANSITION sets VAR_TEMP_1 = 1 and beat 11 plays on the first frame.
+//
+// Stubs (design/phase2/BUILD.md):
+//   ICHOR_STUB_RITES      the quay herm's altar menu (SYSTEMS.md §3)
+//   ICHOR_STUB_OFFERINGS  Kerykos's Olive Oil, Alethea's Trowel, Daedalus's page I
+//   ICHOR_STUB_DIG        the planter's sherd and the ship sheds' daily spot (§5)
+//   ICHOR_STUB_AUGURY     Halitherses's daily omen (§6)
+//   (Kerykos uses his own walker, OBJ_EVENT_GFX_ICHOR_KERYKOS, from the temple work.)
+
+mapscripts EmporionHarbor_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_ICHOR_VISITED_EMPORION)
+        if (flag(FLAG_ICHOR_ARRIVED_EMPORION)) {
+            setflag(FLAG_ICHOR_HIDE_KLEON_QUAY)
+            setflag(FLAG_ICHOR_HIDE_ALETHEA_QUAY)
+            setflag(FLAG_ICHOR_HIDE_KERYKOS_QUAY)
+        } else {
+            clearflag(FLAG_ICHOR_HIDE_KLEON_QUAY)
+            clearflag(FLAG_ICHOR_HIDE_ALETHEA_QUAY)
+            clearflag(FLAG_ICHOR_HIDE_KERYKOS_QUAY)
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_1, 1: EmporionHarbor_EventScript_Arrival
+    ]
+}
+
+text EmporionHarbor_Text_NameKleon { "KLEON" }
+text EmporionHarbor_Text_NameKerykos { "KERYKOS" }
+text EmporionHarbor_Text_NameAlethea { "ALETHEA" }
+text EmporionHarbor_Text_NameGlykera { "GLYKERA" }
+text EmporionHarbor_Text_NameHalitherses { "HALITHERSES" }
+text EmporionHarbor_Text_NameMother { "MOTHER" }
+text EmporionHarbor_Text_NameSon { "SON" }
+
+// ---------------------------------------------------------------------------
+// Beat 11: the herald on the quay
+// ---------------------------------------------------------------------------
+
+script EmporionHarbor_EventScript_Arrival {
+    lockall
+    setvar(VAR_TEMP_1, 2)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    delay(30)
+    // Kleon stops on the quay, breathes in, and grins.
+    applymovement(LOCALID_HARBOR_KLEON, Common_Movement_WalkInPlaceFasterUp)
+    waitmovement(0)
+    setspeaker(EmporionHarbor_Text_NameKleon)
+    msgbox(format("Land! Glorious, solid land!\p"
+                  "…Where's the temple? Up there? With the wings on it?"))
+    applymovement(LOCALID_HARBOR_KLEON, Common_Movement_FaceLeft)
+    waitmovement(0)
+    msgbox(format("BYE!"))
+    closemessage
+    applymovement(LOCALID_HARBOR_KLEON, EmporionHarbor_Movement_KleonSprints)
+    waitmovement(0)
+    removeobject(LOCALID_HARBOR_KLEON)
+    setflag(FLAG_ICHOR_HIDE_KLEON_QUAY)
+    delay(20)
+
+    // A man in a winged hat raps his herald's staff on a bollard.
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
+    applymovement(LOCALID_HARBOR_ALETHEA, Common_Movement_FaceRight)
+    waitmovement(0)
+    playse(SE_BALL_BOUNCE_1)
+    applymovement(LOCALID_HARBOR_KERYKOS_PERCH, Common_Movement_WalkInPlaceFasterLeft)
+    waitmovement(0)
+    playse(SE_BALL_BOUNCE_1)
+    setspeaker(EmporionHarbor_Text_NameKerykos)
+    msgbox(format("Hear ye! Hear ye! The Euploia, out of Akti, three days late!\p"
+                  "Blame the kingfishers! Everyone does!\p"
+                  "Welcome, welcome to Emporion, harbor of the whole wide world!\p"
+                  "Everything that floats comes here. And most of what sinks."))
+    closemessage
+    // He hops down and walks straight to the player.
+    applymovement(LOCALID_HARBOR_KERYKOS_PERCH, EmporionHarbor_Movement_KerykosToPlayer)
+    waitmovement(0)
+    setspeaker(EmporionHarbor_Text_NameKerykos)
+    msgbox(format("You! New face. I collect faces. Names, too. Who are you?"))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("{PLAYER} told him."))
+    setspeaker(EmporionHarbor_Text_NameKerykos)
+    msgbox(format("{PLAYER} of Elaia! Ione's gull said you'd come.\p"
+                  "Her gulls tell me everything.\p"
+                  "I'm Kerykos. Herald of Hermes. Keeper of his temple. Talker.\p"
+                  "Mostly talker.\p"
+                  "First rule of Emporion. Say hello to Hermes. This is his town."))
+    closemessage
+
+    // He walks the player up to the herm at the head of the quay.
+    applymovement(LOCALID_HARBOR_KERYKOS_PERCH, EmporionHarbor_Movement_KerykosToHerm)
+    applymovement(OBJ_EVENT_ID_PLAYER, EmporionHarbor_Movement_PlayerToHerm)
+    applymovement(LOCALID_HARBOR_ALETHEA, EmporionHarbor_Movement_AletheaToHerm)
+    waitmovement(0)
+    setspeaker(EmporionHarbor_Text_NameKerykos)
+    msgbox(format("This is a herm. A pillar with Hermes's face. Every road has one.\p"
+                  "Talk to any altar and you can pray. Prayer's free. Hermes likes free.\p"
+                  "Go on. Try."))
+    closemessage
+    call(EmporionHarbor_EventScript_TutorialAltar)
+    setspeaker(EmporionHarbor_Text_NameKerykos)
+    msgbox(format("See? He noticed you. Gods like being noticed.\p"
+                  "Offer something he likes, and he'll do more than notice.\p"
+                  "Honey, for Hermes. He's sweet like that.\p"
+                  "Now. Out on the roads you'll find great herms. Old, hung with garlands.\p"
+                  "Hermes remembers everyone who passes.\p"
+                  "Anoint his herms, and when you're lost, he'll point.\p"
+                  "Travelers swear he carries them back to any herm he remembers.\p"
+                  "Do I believe it? I'm a herald. I believe everything until it's proven.\p"
+                  "Then I sell it.\p"
+                  "Here. Three flasks of oil. The first ones are free.\p"
+                  "That's how they get you."))
+    // ICHOR_STUB_OFFERINGS: ITEM_OLIVE_OIL doesn't exist yet; when it does,
+    // giveitem(ITEM_OLIVE_OIL, 3) replaces the fanfare and the line below.
+    // ICHOR_STUB_RITES: and special(Ichor_AddFavor) gives Hermes his +1.
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received 3 Olive Oil!"))
+    waitfanfare
+    waitmessage
+    waitbuttonpress
+    setflag(FLAG_ICHOR_RITES_TUTORIAL)
+    setspeaker(EmporionHarbor_Text_NameKerykos)
+    msgbox(format("Come up to the temple when you want a laurel. Ask for the herald.\p"
+                  "You'll find me. I'll be talking."))
+    closemessage
+    applymovement(LOCALID_HARBOR_KERYKOS_PERCH, EmporionHarbor_Movement_KerykosLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_HARBOR_KERYKOS_PERCH)
+    setflag(FLAG_ICHOR_HIDE_KERYKOS_QUAY)
+
+    // Alethea and the trowel
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    applymovement(LOCALID_HARBOR_ALETHEA, Common_Movement_FaceRight)
+    waitmovement(0)
+    setspeaker(EmporionHarbor_Text_NameAlethea)
+    msgbox(format("He talks the way Kleon runs.\p"
+                  "Here, before I forget. I brought two trowels. I always bring two.\p"
+                  "Truthfully, I bring three."))
+    // ICHOR_STUB_OFFERINGS: giveitem(ITEM_ALETHEAS_TROWEL) when the tool exists.
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received Alethea's Trowel!"))
+    waitfanfare
+    waitmessage
+    waitbuttonpress
+    setflag(FLAG_ICHOR_GOT_TROWEL)
+    setspeaker(EmporionHarbor_Text_NameAlethea)
+    msgbox(format("See that planter? Turned earth and a glint. That's a dig spot.\p"
+                  "Kneel, scrape, and see what Aethos buried. Go on."))
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, EmporionHarbor_Movement_PlayerToPlanter)
+    waitmovement(0)
+    call(EmporionHarbor_EventScript_DigPlanter)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(EmporionHarbor_Text_NameAlethea)
+    msgbox(format("A sherd! Painted, too. Find the other pieces and we'll have a whole jar.\p"
+                  "Every old jar has a story on it. Daphne says the myths hide there.\p"
+                  "Now. The Titans came through here first. Someone sold them something.\p"
+                  "Merchants show samples at the Deigma. I'll start there."))
+    closemessage
+    applymovement(LOCALID_HARBOR_ALETHEA, EmporionHarbor_Movement_AletheaLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_HARBOR_ALETHEA)
+    setflag(FLAG_ICHOR_HIDE_ALETHEA_QUAY)
+    setflag(FLAG_ICHOR_ARRIVED_EMPORION)
+    releaseall
+}
+
+// ICHOR_STUB_RITES: the altar menu, as the tutorial needs it. Until the engine's
+// EventScript_IchorAltar_Hermes lands, only PRAY does anything, and Kerykos sends
+// every other choice back to the menu, as beat 11 has him do.
+script EmporionHarbor_EventScript_TutorialAltar {
+    setspeaker(SP_NAME_NONE)
+    message(format("A herm of Hermes, hung with garlands."))
+    waitmessage
+    dynmultichoice(0, 0, TRUE, 4, 0, DYN_MULTICHOICE_CB_NONE,
+                   "PRAY", "MAKE AN OFFERING", "FAVOR", "LEAVE")
+    while (var(VAR_RESULT) != 0) {
+        setspeaker(EmporionHarbor_Text_NameKerykos)
+        msgbox(format("Pray first. Shopping later."))
+        setspeaker(SP_NAME_NONE)
+        message(format("A herm of Hermes, hung with garlands."))
+        waitmessage
+        dynmultichoice(0, 0, TRUE, 4, 0, DYN_MULTICHOICE_CB_NONE,
+                       "PRAY", "MAKE AN OFFERING", "FAVOR", "LEAVE")
+    }
+    msgbox(format("You pray to Hermes.\p"
+                  "Your purse feels lighter. Then heavier. Then exactly the same."))
+    closemessage
+}
+
+// ICHOR_STUB_DIG: the field-move pose and the dust puff come with the Trowel.
+// The sherd is the Arachne amphora's (SCRIPT.md Part 6), a fixed find.
+script EmporionHarbor_EventScript_DigPlanter {
+    setspeaker(SP_NAME_NONE)
+    playse(SE_M_DIG)
+    delay(60)
+    setflag(FLAG_ICHOR_DUG_EMPORION_QUAY)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} dug up a Potsherd!"))
+    waitfanfare
+    waitmessage
+    waitbuttonpress
+    closemessage
+}
+
+// Kleon from (31,16): along the berth and up the quay, out of sight.
+movement EmporionHarbor_Movement_KleonSprints {
+    walk_fast_right * 2
+    walk_fast_up * 8
+}
+// Kerykos off his bollard (34,16) to (31,16), beside the player.
+movement EmporionHarbor_Movement_KerykosToPlayer {
+    jump_up
+    walk_left * 3
+    walk_down
+    face_left
+}
+movement EmporionHarbor_Movement_KerykosToHerm { walk_up * 2 face_left }
+movement EmporionHarbor_Movement_PlayerToHerm { walk_up * 2 face_up }
+movement EmporionHarbor_Movement_AletheaToHerm { delay_8 walk_up * 2 face_up }
+// He hurries off east and up the quay.
+movement EmporionHarbor_Movement_KerykosLeaves {
+    walk_fast_right * 2
+    walk_fast_up * 8
+}
+movement EmporionHarbor_Movement_PlayerToPlanter { walk_right face_up }
+// Alethea goes down a row, east along the berth, and up the quay to the Deigma.
+movement EmporionHarbor_Movement_AletheaLeaves {
+    walk_down
+    walk_right * 4
+    walk_up * 9
+}
+
+// ---------------------------------------------------------------------------
+// The quay herm, the planter, the signs
+// ---------------------------------------------------------------------------
+
+// After beat 11 the quay herm is an altar of Hermes like any other.
+// ICHOR_STUB_RITES: goto(EventScript_IchorAltar_Hermes) when it exists.
+script EmporionHarbor_EventScript_QuayHerm {
+    lockall
+    if (!flag(FLAG_ICHOR_RITES_TUTORIAL)) {
+        msgbox(format("A herm of Hermes, hung with garlands."), MSGBOX_SIGN)
+        releaseall
+        end
+    }
+    call(EmporionHarbor_EventScript_QuayHermMenu)
+    releaseall
+}
+
+script EmporionHarbor_EventScript_QuayHermMenu {
+    setspeaker(SP_NAME_NONE)
+    message(format("A herm of Hermes, hung with garlands."))
+    waitmessage
+    dynmultichoice(0, 0, TRUE, 4, 0, DYN_MULTICHOICE_CB_NONE,
+                   "PRAY", "MAKE AN OFFERING", "FAVOR", "LEAVE")
+    switch (var(VAR_RESULT)) {
+        case 0:
+            msgbox(format("You pray to Hermes.\p"
+                          "Somewhere a door you didn't knock on swings open."))
+        case 1:
+            msgbox(format("You have nothing Hermes would take. Yet."))
+        case 2:
+            msgbox(format("Hermes knows your name."))
+    }
+    closemessage
+}
+
+script EmporionHarbor_EventScript_Planter {
+    if (flag(FLAG_ICHOR_DUG_EMPORION_QUAY)) {
+        msgbox(format("The planter's earth has been turned over. Someone dug here."), MSGBOX_SIGN)
+    } else {
+        msgbox(format("Turned earth, and a glint of pottery."), MSGBOX_SIGN)
+    }
+}
+
+// ICHOR_STUB_DIG: a daily dig spot (the Arachne amphora's, SCRIPT.md Part 6).
+script EmporionHarbor_EventScript_DigShipsheds {
+    msgbox(format("The sand under the slipways has been turned over.\p"
+                  "Nothing glints today."), MSGBOX_SIGN)
+}
+
+// Isthmian Poseidon's sanctuary at the root of the mole. ICHOR_STUB_RITES: it
+// becomes EventScript_IchorAltar_Poseidon (SYSTEMS.md §3) when the rites land.
+script EmporionHarbor_EventScript_PoseidonAltar {
+    msgbox(format("An altar of Poseidon, the Earth-Shaker. Salt has crusted on the stone.\p"
+                  "Sailors leave a pinch of barley here before they put to sea."), MSGBOX_SIGN)
+}
+
+script EmporionHarbor_EventScript_VictorsWreath {
+    msgbox(format("A crown of pine hangs on the post.\p"
+                  "At Poseidon's Isthmian games, the winners are crowned with pine."), MSGBOX_SIGN)
+}
+
+script EmporionHarbor_EventScript_CitySign {
+    msgbox(format("EMPORION CITY\nHarbor of the whole wide world."), MSGBOX_SIGN)
+}
+
+script EmporionHarbor_EventScript_HarborRoadSign {
+    msgbox(format("North: the Agora and the Temple of Hermes.\pSouth: the quay."), MSGBOX_SIGN)
+}
+
+script EmporionHarbor_EventScript_HiringBoard {
+    msgbox(format("A chalked board: DOCKHANDS WANTED. SILVER A DAY.\p"
+                  "Under it, smaller: Shovels found."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// The people of the harbor
+// ---------------------------------------------------------------------------
+
+// Beat 11's cast, if the player talks to them before the scene moves them.
+script EmporionHarbor_EventScript_Kleon {
+    lock
+    faceplayer
+    setspeaker(EmporionHarbor_Text_NameKleon)
+    msgbox(format("Land! Glorious, solid land!"))
+    release
+}
+
+script EmporionHarbor_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(EmporionHarbor_Text_NameAlethea)
+    msgbox(format("Merchants show samples at the Deigma. I'll start there."))
+    release
+}
+
+script EmporionHarbor_EventScript_Kerykos {
+    lock
+    faceplayer
+    setspeaker(EmporionHarbor_Text_NameKerykos)
+    msgbox(format("You'll find me. I'll be talking."))
+    release
+}
+
+// The ferry: Akti from here (ichor_act1.pory).
+script EmporionHarbor_EventScript_Nausikles {
+    setvar(VAR_0x8004, 2)
+    goto(Ichor_EventScript_FerryQuay)
+}
+
+// Halitherses, the augur (SYSTEMS.md §6). ICHOR_STUB_AUGURY: the engine draws one
+// omen a day from the five kinds and makes it happen (src/ichor_omen.c). Until it
+// lands he reads the sky from the day of the week, over the Act I lines that
+// still fit the revised map (the Halai Shore and Aigina's interior are Act II),
+// and remembers he told you only until you leave the harbor.
+script EmporionHarbor_EventScript_Halitherses {
+    lock
+    faceplayer
+    setspeaker(EmporionHarbor_Text_NameHalitherses)
+    if (!flag(FLAG_ICHOR_MET_HALITHERSES)) {
+        msgbox(format("I read birds. They're more honest than oracles.\p"
+                      "Birds never want anything from you but bread.\p"
+                      "Come by once a day. I'll tell you what the sky says."))
+        setflag(FLAG_ICHOR_MET_HALITHERSES)
+        release
+        end
+    }
+    if (flag(FLAG_TEMP_1)) {
+        msgbox(format("That's today's. The sky doesn't repeat itself. Come back tomorrow."))
+        release
+        end
+    }
+    msgbox(format("The gulls came in low this morning. Here's what they said."))
+    random(9)
+    switch (var(VAR_RESULT)) {
+        case 0: msgbox(format("Goats on every hill along the Isthmus road. Sparks in their wool."))
+        case 1: msgbox(format("The bees are restless in Eleusa's meadows."))
+        case 2: msgbox(format("Snatchers over the Agora. Hold onto your figs."))
+        case 3: msgbox(format("The fields at Eleusa are crawling with wheat. With serpents, I mean."))
+        case 4: msgbox(format("A golden cub was seen in the scrub above the tombs."))
+        case 5: msgbox(format("Someone saw a flower-crowned girl walking in the wheat. Then she wasn't there."))
+        case 6: msgbox(format("A jar in the Agora barked at a priest."))
+        case 7: msgbox(format("Hard sun over Eleusa. Good day to be wheat."))
+        default: msgbox(format("Today, threes are lucky."))
+    }
+    setflag(FLAG_TEMP_1)
+    release
+}
+
+// Glykera and Daedalus's page I (LABYRINTH.md §1).
+// ICHOR_STUB_OFFERINGS: until the Olive Oil item exists, "has an Olive Oil" means
+// Kerykos's flasks (FLAG_ICHOR_RITES_TUTORIAL), and the page is a flag.
+script EmporionHarbor_EventScript_Glykera {
+    lock
+    faceplayer
+    setspeaker(EmporionHarbor_Text_NameGlykera)
+    if (flag(FLAG_ICHOR_DAEDALUS_PAGE_1)) {
+        msgbox(format("Sardines! Tuna! Oil, if you've got more of it."))
+        release
+        end
+    }
+    msgbox(format("Sardines! Tuna! Eels from the lake, fat as priests!\p"
+                  "Phew. Hot one."))
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("That fan's an old sheet covered in drawings.\p"
+                  "Doors. Wheels. A bird with a man's legs."))
+    if (!flag(FLAG_ICHOR_RITES_TUTORIAL)) {
+        release
+        end
+    }
+    msgbox(format("Trade her an Olive Oil for it?"), MSGBOX_YESNO)
+    setspeaker(EmporionHarbor_Text_NameGlykera)
+    if (var(VAR_RESULT) == NO) {
+        msgbox(format("Suit yourself. It's a good fan."))
+        release
+        end
+    }
+    msgbox(format("For oil? Done! It's only some old scribble. Came up in a net."))
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received Daedalus's page I!"))
+    waitfanfare
+    waitmessage
+    waitbuttonpress
+    setflag(FLAG_ICHOR_DAEDALUS_PAGE_1)
+    release
+}
+
+script EmporionHarbor_EventScript_CustomsMan {
+    msgbox(format("Two in every hundred. Of everything that comes off a ship.\p"
+                  "Even you. …I'm joking. Mostly. Move along."), MSGBOX_NPC)
+}
+
+// The Titans' public face (STORY.md §3).
+script EmporionHarbor_EventScript_Dockhand {
+    msgbox(format("Half the quay's gone digging. A big man came hiring.\p"
+                  "Pays in silver and shouts. Shouts nice, mind. Like a big uncle.\p"
+                  "Gives you a bronze hat and a shovel. Doesn't say what for."), MSGBOX_NPC)
+}
+
+script EmporionHarbor_EventScript_Sailor {
+    msgbox(format("Ship in from Delphoi this morning. Same news as always.\p"
+                  "The Pythia only says “soon” now. Pilgrims queue a week for one word.\p"
+                  "Soon what, they ask. She just looks at them."), MSGBOX_NPC)
+}
+
+script EmporionHarbor_EventScript_Mother {
+    lock
+    faceplayer
+    call(EmporionHarbor_EventScript_MotherAndSon)
+    release
+}
+
+script EmporionHarbor_EventScript_Son {
+    lock
+    faceplayer
+    call(EmporionHarbor_EventScript_MotherAndSon)
+    release
+}
+
+script EmporionHarbor_EventScript_MotherAndSon {
+    setspeaker(EmporionHarbor_Text_NameMother)
+    msgbox(format("He wants to row when he's grown. Bottom bench, he says."))
+    setspeaker(EmporionHarbor_Text_NameSon)
+    msgbox(format("The bottom bench is where the strong ones go!"))
+    setspeaker(EmporionHarbor_Text_NameMother)
+    msgbox(format("It's where the feet go. He'll learn."))
+}
+
+// Not in SCRIPT.md's roster: the quay's crowd, one line each.
+script EmporionHarbor_EventScript_Stevedore {
+    msgbox(format("Tyre's ship is dyes and cedar. Ours is figs.\p"
+                  "Guess which one I'd rather drop on my foot."), MSGBOX_NPC)
+}
+
+script EmporionHarbor_EventScript_Stevedore2 {
+    msgbox(format("That ship's from Massalia. Past the edge of the map, they say.\p"
+                  "The wine tastes like it."), MSGBOX_NPC)
+}
+
+script EmporionHarbor_EventScript_WineSeller {
+    msgbox(format("Wine from every island in the sea! Taste before you buy!\p"
+                  "Not that one. That one's vinegar. I'm keeping it for the customs man."), MSGBOX_NPC)
+}

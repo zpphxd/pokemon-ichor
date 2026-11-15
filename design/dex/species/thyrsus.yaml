@@ -1,0 +1,150 @@
+line: thyrsus
+species:
+
+- dex: 59
+  concept: Vine tendril
+  name: Ampelix
+  etymology: ampelos (Greek, grapevine) + helix (Greek, tendril)
+  category: Tendril
+  types: [Grass, Poison]
+  abilities: [Chlorophyll, Liquid Ooze]
+  hidden_ability: Seed Sower
+  base_stats: {hp: 55, atk: 50, def: 50, spa: 65, spd: 55, spe: 40}
+  ev_yield: {spa: 1}
+  exp_yield: 64
+  catch_rate: 190
+  gender: {female_pct: 50}
+  egg_groups: [Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.4
+  weight_kg: 3.2
+  myth: >-
+    Ampelos, a satyr boy Dionysus loved, was gored by a bull while riding it.
+    The grieving god turned his body into the first grapevine, and wine was
+    born from it (Nonnus, Dionysiaca 11–12).
+  expression: >-
+    A sprout of that first vine, still young and still reaching. It wraps
+    whatever is near, and its sap is already turning to wine.
+  art: >-
+    Small: it fills about 30×34 px. A coil of green vine standing on a root
+    tuft in three-quarter view facing left, its top curling into a curious
+    head with one broad grape leaf for a hood. Two springy tendrils reach
+    forward like arms, and a tiny cluster of three grapes hangs at its side.
+    Olive vine and leaf, cypress-dark shading, wine-violet grapes as the
+    Poison accent, black-figure ink outline. The follower bounces on its
+    coiled base like a spring.
+  shiny: The leaf turns autumn terracotta and the grapes pale to sun-gold.
+  dex_entry:
+    - Its tendrils curl around any hand that
+    - reaches for it. Vintners say the first
+    - vine was a boy the wine god loved, and
+    - that every Ampelix is still reaching.
+  habitat: >-
+    Thyrsa's vineyards by day, common in the vine rows. It is easiest to
+    find where the trellises are oldest.
+  learnset:
+    level_up:
+      - [1, Wrap]
+      - [1, Absorb]
+      - [4, Poison Powder]
+      - [7, Vine Whip]
+      - [10, Acid]
+      - [13, Mega Drain]
+      - [16, Sweet Scent]
+      - [19, Leech Seed]
+      - [22, Venoshock]
+      - [25, Ingrain]
+      - [28, Giga Drain]
+      - [31, Toxic]
+      - [34, Sludge Bomb]
+      - [38, Energy Ball]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Natural Gift, Sunny Day,
+      Grassy Terrain, Bullet Seed, Magical Leaf, Seed Bomb, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Worry Seed, Synthesis, Trailblaze, Weather Ball, Leaf Storm, Petal Blizzard,
+      Pollen Puff, Sludge Bomb, Sludge Wave, Venoshock, Toxic Spikes, Acid Spray, Poison Jab,
+      Knock Off, Swords Dance, Cut]
+    egg: [Teeter Dance, Strength Sap, Grass Whistle, Clear Smog, Tickle, Nature Power]
+  signature: >-
+    Liquid Ooze turns its sap into wine that sickens anything draining it.
+    Teeter Dance as an egg move is the first taste of the revel.
+  new_move: null
+
+- dex: 60
+  concept: Thyrsus
+  name: Thyrsivy
+  etymology: thyrsos (Greek, the Bacchic staff) + ivy
+  category: Revel Staff
+  types: [Grass, Poison]
+  abilities: [Chlorophyll, Liquid Ooze]
+  hidden_ability: Seed Sower
+  base_stats: {hp: 85, atk: 80, def: 75, spa: 100, spd: 85, spe: 60}
+  ev_yield: {spa: 2}
+  exp_yield: 178
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Grass]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.5
+  weight_kg: 24.0
+  myth: >-
+    The thyrsus was a fennel staff wound with ivy and vine and tipped with a
+    pine cone. In the Bacchae, a maenad struck one on the ground and the god
+    sent up a spring of wine (Euripides, Bacchae 704–707).
+  expression: >-
+    The vine has grown straight and hard into a walking thyrsus. It strikes
+    the earth with its pine-cone head, and wine wells up wherever it lands.
+  art: >-
+    Medium: it fills about 36×58 px, tall and narrow. A living staff in
+    three-quarter view facing left, its fennel stalk wound with ivy and vine,
+    standing on a splayed knot of roots that act as feet. The top is a big
+    pine cone with two leaf-eyes peering out, and ribbons of ivy stream from
+    it like arms. Dark wine drips from the cone. Limestone-tan stalk, olive
+    and cypress ivy, terracotta-brown pine cone, wine-violet drips as the
+    Poison accent, black-figure ink outline. The follower thumps along,
+    leaving small violet puddles.
+  shiny: The ivy turns sun-gold and the wine runs pale marble-white, like milk.
+  dex_entry:
+    - It strikes its pine-cone head on rock,
+    - and wine wells up from the stone. Those
+    - who drink it dance until dawn and then
+    - remember nothing at all.
+  habitat: >-
+    Evolves from Ampelix at level 32. Rarely, one stands among Thyrsa's
+    vines at dusk during the Dionysia.
+  learnset:
+    level_up:
+      - [0, Petal Dance]
+      - [1, Wrap]
+      - [1, Absorb]
+      - [1, Poison Powder]
+      - [1, Vine Whip]
+      - [10, Acid]
+      - [13, Mega Drain]
+      - [16, Sweet Scent]
+      - [19, Leech Seed]
+      - [22, Venoshock]
+      - [25, Ingrain]
+      - [28, Giga Drain]
+      - [31, Toxic]
+      - [35, Sludge Bomb]
+      - [39, Energy Ball]
+      - [43, Toxic Spikes]
+      - [47, Grassy Terrain]
+      - [52, Sludge Wave]
+      - [58, Leaf Storm]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Toxic, Attract, Double Team,
+      Return, Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Natural Gift, Sunny Day,
+      Grassy Terrain, Bullet Seed, Magical Leaf, Seed Bomb, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Worry Seed, Synthesis, Trailblaze, Weather Ball, Leaf Storm, Petal Blizzard,
+      Pollen Puff, Sludge Bomb, Sludge Wave, Venoshock, Toxic Spikes, Acid Spray, Poison Jab,
+      Knock Off, Swords Dance, Cut, Hyper Beam, Giga Impact, Solar Blade, Leaf Blade, Grassy Glide,
+      Power Whip, Gunk Shot, Body Slam, Stomping Tantrum, Rock Smash]
+    egg: []
+  signature: >-
+    It learns Petal Dance on evolving: the maenads' frenzy, which leaves it
+    confused afterward. Seed Sower makes the ground spring up green whenever
+    it is struck, as the earth did for the thyrsus.
+  new_move: null

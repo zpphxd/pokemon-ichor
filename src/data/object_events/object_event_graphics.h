@@ -314,6 +314,9 @@ const u32 gFieldEffectObjectPic_Unknown17[] = INCGFX_U32("graphics/field_effects
 const u32 gFieldEffectObjectPic_UnusedGrass2[] = INCGFX_U32("graphics/field_effects/pics/unused_grass_2.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gFieldEffectObjectPic_LongGrass[] = INCGFX_U32("graphics/field_effects/pics/long_grass.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gFieldEffectObjectPic_TallGrass[] = INCGFX_U32("graphics/field_effects/pics/tall_grass.png", ".4bpp", "-mwidth 2 -mheight 2");
+// Ichor: the tall-grass rustle in Eleusa's wheat (tools/ichor/art/field_effects_wheat.py)
+const u32 gFieldEffectObjectPic_TallGrassWheat[] = INCGFX_U32("graphics/field_effects/pics/tall_grass_wheat.png", ".4bpp", "-mwidth 2 -mheight 2");
+const u16 gFieldEffectObjectPaletteWheat[] = INCGFX_U16("graphics/field_effects/palettes/wheat.pal", ".gbapal");
 const u32 gFieldEffectObjectPic_ShortGrass[] = INCGFX_U32("graphics/field_effects/pics/short_grass.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gFieldEffectObjectPic_SandFootprints[] = INCGFX_U32("graphics/field_effects/pics/sand_footprints.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u32 gFieldEffectObjectPic_DeepSandFootprints[] = INCGFX_U32("graphics/field_effects/pics/deep_sand_footprints.png", ".4bpp", "-mwidth 2 -mheight 2");
@@ -667,6 +670,22 @@ const u32 gObjectEventPic_IchorAcolyteF[] = INCGFX_U32("graphics/object_events/p
 const u32 gObjectEventPic_IchorTablet[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/tablet.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatL[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_l.png", ".4bpp");
 const u32 gObjectEventPic_IchorUpturnedBoatR[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/upturned_boat_r.png", ".4bpp");
+// Phase 2, batch 1 (tools/ichor/art/sprites_phase2_walkers.py)
+const u32 gObjectEventPic_IchorPilgrim[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pilgrim.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPronomos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pronomos.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorEndeis[] = INCGFX_U32("graphics/object_events/pics/people/ichor/endeis.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorPheidon[] = INCGFX_U32("graphics/object_events/pics/people/ichor/pheidon.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorAiakides[] = INCGFX_U32("graphics/object_events/pics/people/ichor/aiakides.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKedalion[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kedalion.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKleonSeasick[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_seasick.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_IchorKleonTablet[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kleon_tablet.png", ".4bpp", "-mwidth 2 -mheight 4");
+
+const u32 gObjectEventPic_IchorNestEggs[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/nest_eggs.png", ".4bpp");
+const u32 gObjectEventPic_IchorNestHatching[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/nest_hatching.png", ".4bpp");
+const u32 gObjectEventPic_IchorNestEmpty[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/nest_empty.png", ".4bpp");
+const u32 gObjectEventPic_IchorDarkTriremeBow[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/dark_trireme_bow.png", ".4bpp");
+const u32 gObjectEventPic_IchorDarkTriremeStern[] = INCGFX_U32("graphics/object_events/pics/misc/ichor/dark_trireme_stern.png", ".4bpp");
+const u32 gObjectEventPic_IchorKerykos[] = INCGFX_U32("graphics/object_events/pics/people/ichor/kerykos.png", ".4bpp", "-mwidth 2 -mheight 4");
 // The Theoxenia's Sam, Apollo, Cami and Demeter (tools/ichor/art/sprites_npc_theoxenia.py)
 const u16 gObjectEventPal_IchorTheoxenia[] = INCGFX_U16("graphics/object_events/palettes/ichor_theoxenia.pal", ".gbapal");
 const u32 gObjectEventPic_IchorSam[] = INCGFX_U32("graphics/object_events/pics/people/ichor/sam.png", ".4bpp", "-mwidth 2 -mheight 4");

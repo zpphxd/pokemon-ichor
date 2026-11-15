@@ -90,6 +90,18 @@ const u16 gMetatileAttributes_PorytilesManaged_Eleusa[] = INCBIN_U16("data/tiles
 const u16 gMetatiles_PorytilesManaged_TempleDemeter[] = INCBIN_U16("data/tilesets/secondary/temple_demeter/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_TempleDemeter[] = INCBIN_U16("data/tilesets/secondary/temple_demeter/porytiles_bin/metatile_attributes.bin");
 
+// Ichor: ergasteria
+const u16 gMetatiles_PorytilesManaged_Ergasteria[] = INCBIN_U16("data/tilesets/secondary/ergasteria/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Ergasteria[] = INCBIN_U16("data/tilesets/secondary/ergasteria/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: limen
+const u16 gMetatiles_PorytilesManaged_Limen[] = INCBIN_U16("data/tilesets/secondary/limen/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Limen[] = INCBIN_U16("data/tilesets/secondary/limen/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: domos
+const u16 gMetatiles_PorytilesManaged_Domos[] = INCBIN_U16("data/tilesets/secondary/domos/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Domos[] = INCBIN_U16("data/tilesets/secondary/domos/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: emporion
 const u16 gMetatiles_PorytilesManaged_Emporion[] = INCBIN_U16("data/tilesets/secondary/emporion/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Emporion[] = INCBIN_U16("data/tilesets/secondary/emporion/porytiles_bin/metatile_attributes.bin");
@@ -142,9 +154,21 @@ const u16 gMetatileAttributes_PorytilesManaged_OikiaMelos[] = INCBIN_U16("data/t
 const u16 gMetatiles_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_CivicKythera[] = INCBIN_U16("data/tilesets/secondary/civic_kythera/porytiles_bin/metatile_attributes.bin");
 
+// Ichor: aegina
+const u16 gMetatiles_PorytilesManaged_Aegina[] = INCBIN_U16("data/tilesets/secondary/aegina/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Aegina[] = INCBIN_U16("data/tilesets/secondary/aegina/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: skiron
+const u16 gMetatiles_PorytilesManaged_Skiron[] = INCBIN_U16("data/tilesets/secondary/skiron/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Skiron[] = INCBIN_U16("data/tilesets/secondary/skiron/porytiles_bin/metatile_attributes.bin");
+
 // Ichor: trireme
 const u16 gMetatiles_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Trireme[] = INCBIN_U16("data/tilesets/secondary/trireme/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: cave_dark
+const u16 gMetatiles_PorytilesManaged_CaveDark[] = INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_CaveDark[] = INCBIN_U16("data/tilesets/secondary/cave_dark/porytiles_bin/metatile_attributes.bin");
 
 // Ichor: labyrinth
 const u16 gMetatiles_PorytilesManaged_Labyrinth[] = INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/metatiles.bin");

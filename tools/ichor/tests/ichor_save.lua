@@ -10,6 +10,9 @@
 --      as the current version with the new-game defaults.
 --   6. A version-3 save, from before the second flag bank, loads with that bank
 --      zeroed (it holds what used to sit past IchorSave's end) and nothing else lost.
+--   7. A hidden item with a bank flag (asm/macros/map.inc) is found once, and is
+--      still found after a save and CONTINUE. The map's events are copied to RAM
+--      with the hidden item added, since no map has one yet.
 
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, emu = L.S, L.emu
@@ -36,7 +39,39 @@ local function expectDefaults(when)
   expect(ichor8(S.OFF_ICHOR_OPTIONS) == 0, when .. ": relic prompts default to ASK")
 end
 
+-- --- A hidden item planted in RAM -------------------------------------------------------
+local HIDDEN_FLAG = nil            -- set once S is ready: a second-bank flag
+local EVENTS_COPY, BG_COPY = 0x0203FC00, 0x0203FC40   -- spare EWRAM, past the setup blob
+local function plantHiddenItem()
+  local x, y = L.pos()
+  local key, tx, ty
+  for _, d in ipairs({ { L.K.UP, 0, -1 }, { L.K.DOWN, 0, 1 }, { L.K.LEFT, -1, 0 }, { L.K.RIGHT, 1, 0 } }) do
+    if not L.objectOn(x + d[2], y + d[3]) then key, tx, ty = d[1], x + d[2], y + d[3] break end
+  end
+  local events = emu:read32(S.gMapHeader + S.OFF_MAPHEADER_EVENTS)
+  for i = 0, S.MAP_EVENTS_SIZE - 1 do emu:write8(EVENTS_COPY + i, emu:read8(events + i)) end
+  emu:write8(EVENTS_COPY + S.OFF_EVENTS_BG_COUNT, 1)
+  emu:write32(EVENTS_COPY + S.OFF_EVENTS_BGS, BG_COPY)
+  for i = 0, S.BG_EVENT_SIZE - 1 do emu:write8(BG_COPY + i, 0) end
+  emu:write16(BG_COPY + S.OFF_BG_X, tx)
+  emu:write16(BG_COPY + S.OFF_BG_Y, ty)
+  emu:write8(BG_COPY + S.OFF_BG_KIND, S.BG_EVENT_HIDDEN_ITEM)
+  local id = HIDDEN_FLAG - S.ICHOR_FLAGS_START + S.ICHOR_HIDDEN_ITEM_BANK_ID
+  emu:write32(BG_COPY + S.OFF_BG_UNION, S.ITEM_POTION | (id << 11) | (1 << 24))
+  emu:write32(S.gMapHeader + S.OFF_MAPHEADER_EVENTS, EVENTS_COPY)
+  L.face(key)
+end
+-- Press A on it; TRUE if a message box came up
+local function searchHiddenItem()
+  L.tap(L.K.A)
+  local box = false
+  for _ = 1, 60 do wait(1) if L.boxUp() then box = true end end
+  L.settle()
+  return box
+end
+
 L.start(function()
+  HIDDEN_FLAG = S.FLAG_ICHOR_GENERAL2_START + 5
   expect(S.SB3_SIZE <= 1624 and S.ICHOR_SAVE_SIZE == 1472 and S.OFF_SB3_ICHOR == 0,
          string.format("SaveBlock3 is %d of 1,624 bytes; IchorSave is %d bytes at its start", S.SB3_SIZE, S.ICHOR_SAVE_SIZE))
 
@@ -91,6 +126,15 @@ L.start(function()
   expect(L.getFlag(S.FLAG_ICHOR_GENERAL_START) and L.getFlag(S.ICHOR_FLAGS_END) and L.getVar(S.ICHOR_VARS_START) == 1234,
          "... and leaves the saved bank and vars alone")
 
+  -- 7a. A hidden item with a bank flag: found once
+  plantHiddenItem()
+  local potions = L.itemCount(S.ITEM_POTION)
+  local found = searchHiddenItem()
+  expect(found and L.getFlag(HIDDEN_FLAG) and L.itemCount(S.ITEM_POTION) == potions + 1,
+         "a hidden item with a second-bank flag is found, and its flag is set in IchorSave")
+  shot("hidden_item")
+  expect(not searchHiddenItem() and L.itemCount(S.ITEM_POTION) == potions + 1, "... and not found twice")
+
   -- 4. Save, reset, CONTINUE
   L.setFlag(S.FLAG_DAILY_ICHOR_GENERAL_START + 5, true)   -- a daily flag, saved mid-day
   emu:write16(L.ichor() + S.OFF_ICHOR_MOM_WINS, 3)
@@ -103,6 +147,9 @@ L.start(function()
   expect(L.snapshot(L.ichor(), S.ICHOR_SAVE_SIZE) == saved,
          string.format("all %d bytes of IchorSave come back from the save", S.ICHOR_SAVE_SIZE))
   expect(L.getFlag(S.ICHOR_FLAGS2_END), "the second bank's flags come back too")
+  plantHiddenItem()
+  expect(L.getFlag(HIDDEN_FLAG) and not searchHiddenItem() and L.itemCount(S.ITEM_POTION) == potions + 1,
+         "7b. after a save and CONTINUE, the hidden item is still taken")
   expect(L.getFlag(S.FLAG_ICHOR_HERMS_START + 3) and L.getFlag(S.FLAG_DAILY_ICHOR_GENERAL_START + 5)
          and L.getVar(S.ICHOR_VARS_END) == 0xBEEF and ichor16(S.OFF_ICHOR_MOM_WINS) == 3,
          "flags, daily flags, vars and Mom's record read back through the engine")

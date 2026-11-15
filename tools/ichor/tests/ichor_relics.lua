@@ -340,7 +340,7 @@ L.start(function()
   warpHome()
 
   -- 4c. Carried flames (SYSTEMS §2): the hearth fire, 7 steps
-  local function flame() return L.getVar(S.VAR_TEMP_2), L.getVar(S.VAR_TEMP_3) end
+  local function flame() return emu:read16(S.sCarriedFlame), emu:read8(S.sCarriedFlame + 2) end
   local function takeFlame(steps)
     L.setVar(S.VAR_0x8004, S.FLAME_HEARTH); L.setVar(S.VAR_0x8005, steps)
     L.runHeader("RelicTest_TakeFlameHeader")
@@ -374,6 +374,24 @@ L.start(function()
   L.runHeader("RelicTest_DouseHeader")
   fs, fk = flame()
   expect(fk == S.FLAME_NONE and not L.getFlag(S.FLAG_ICHOR_TORCH_DOUSED), "dousing the torch puts it out too")
+  -- A map's own temp vars are not a flame (world-act2's Thyrsa sets both to 1)
+  L.setVar(S.VAR_TEMP_2, 1); L.setVar(S.VAR_TEMP_3, 1)
+  L.step(K.RIGHT); L.step(K.LEFT)
+  fs, fk = flame()
+  expect(L.getVar(S.VAR_TEMP_2) == 1 and L.getVar(S.VAR_TEMP_3) == 1 and fk == S.FLAME_NONE and L.idle(),
+         "a map's VAR_TEMP_2 and VAR_TEMP_3 are left alone, and never read as a flame")
+  L.setVar(S.VAR_TEMP_2, 0); L.setVar(S.VAR_TEMP_3, 0)
+
+  -- A fire whose kind travels outlives a map change; a hearth fire doesn't
+  L.setVar(S.VAR_0x8004, S.FLAME_HESTIA_SHIP); L.setVar(S.VAR_0x8005, 30)
+  L.runHeader("RelicTest_TakeFlameHeader")
+  warpHome()
+  fs, fk = flame()
+  expect(fs == 30 and fk == S.FLAME_HESTIA_SHIP, string.format("Hestia's fire survives a warp, steps and all (%d left)", fs))
+  takeFlame(20)
+  warpHome()
+  fs, fk = flame()
+  expect(fk == S.FLAME_NONE and fs == 0, "a hearth fire dies when you leave the map")
   local px, py = L.pos()
   expect(px == PX and py == PY, string.format("back where the water section starts (%d,%d)", px, py))
 

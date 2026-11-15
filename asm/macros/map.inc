@@ -104,9 +104,24 @@
 	.endm
 
 	@ Defines a background hidden item event for map data
+	@ Ichor: the 13-bit flag field holds a vanilla flag as an offset from
+	@ FLAG_HIDDEN_ITEMS_START (below 0x1000), or one of Ichor's bank flags as
+	@ 0x1000 + (flag - ICHOR_FLAGS_START): both banks and the daily bank. The
+	@ engine decodes it with Ichor_GetHiddenItemFlag (include/ichor_save.h).
 	.macro bg_hidden_item_event x:req, y:req, elevation:req, item:req, flag:req, quantity=1, underfoot=FALSE
+	.if \flag >= ICHOR_FLAGS_START
+	.if \flag > ICHOR_FLAGS2_END
+	.error "Hidden Item flag \flag is past Ichor's flag banks."
+	.endif
+	.set hidden_item_flag_id, (\flag) - ICHOR_FLAGS_START + ICHOR_HIDDEN_ITEM_BANK_ID
+	.else
 	.if \flag < FLAG_HIDDEN_ITEMS_START
-	.error "Hidden Item flag \flag is too small. Must be >= FLAG_HIDDEN_ITEMS_START."
+	.error "Hidden Item flag \flag is too small. Must be >= FLAG_HIDDEN_ITEMS_START, or an Ichor bank flag."
+	.endif
+	.if (\flag) - FLAG_HIDDEN_ITEMS_START >= ICHOR_HIDDEN_ITEM_BANK_ID
+	.error "Hidden Item flag \flag is past the vanilla flags."
+	.endif
+	.set hidden_item_flag_id, (\flag) - FLAG_HIDDEN_ITEMS_START
 	.endif
 	.if \item >= (1 << 12)
 	.error "quantity \quantity too large"
@@ -114,7 +129,7 @@
 	.if \quantity >= (1 << 7)
 	.error "quantity \quantity too large"
 	.endif
-	bg_event \x, \y, \elevation, BG_EVENT_HIDDEN_ITEM, \item | (((\flag) - FLAG_HIDDEN_ITEMS_START) << 11)| (\quantity << 24) | (\underfoot << 31)
+	bg_event \x, \y, \elevation, BG_EVENT_HIDDEN_ITEM, \item | (hidden_item_flag_id << 11)| (\quantity << 24) | (\underfoot << 31)
 	.endm
 
 	@ Defines a background secret base event for map data

@@ -1,0 +1,38 @@
+// The Temple of Aphaia: Aigina's hilltop sanctuary (Act II).
+// design/phase2/SCRIPT.md, "Aegina's interior: an optional detour". The map and
+// every event's place come from tools/ichor/maps/aegina_detour.py.
+//
+// The path from the road climbs between cypresses and up a second flight of
+// marble steps to the forecourt. The Doric front faces south, its doorway dark;
+// the priestess keeps its steps, and two Pretty Feathers lie at their east end
+// (Artemis's offering). Artemis's altar stands before the door. East of it, the
+// older temple's foundations, where the earth has been turned.
+
+mapscripts AeginaTempleOfAphaia_MapScripts {}
+
+text AeginaTempleOfAphaia_Text_NamePriestess { "PRIESTESS" }
+
+// ICHOR_ACT2: the priestess of Aphaia. World-act2 writes her whole scene
+// (SCRIPT.md has her five lines); she stands on the steps before the doorway.
+script AeginaTempleOfAphaia_EventScript_Priestess {
+    lock
+    faceplayer
+    setspeaker(AeginaTempleOfAphaia_Text_NamePriestess)
+    msgbox(format("This is Aphaia's house. The one who isn't seen."))
+    release
+}
+
+// ICHOR_STUB_RITES: ENGINE_API section 3's EventScript_IchorAltar_Artemis isn't on
+// this branch. When it lands, point the altar's bg event straight at it.
+script AeginaTempleOfAphaia_EventScript_AltarOfArtemis {
+    msgbox(format("An altar of Artemis, the huntress, before Aphaia's door.\p"
+                  "Someone has tucked a feather into a crack in the stone."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_DIG: a fixed dig spot in the old temple's foundations (SCRIPT.md
+// Part 6: a Potsherd; Open questions 23 picks the amphora). The engine's dig
+// spots replace this; until then it shows the turned earth and gives nothing.
+script AeginaTempleOfAphaia_EventScript_DigSpot {
+    msgbox(format("Turned earth between the old foundation stones, and a glint of pottery.\p"
+                  "It won't come up by hand."), MSGBOX_SIGN)
+}

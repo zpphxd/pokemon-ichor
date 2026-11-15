@@ -4,6 +4,9 @@
     "gMapGroup_IndoorDynamic",
     "gMapGroup_SpecialArea",
     "gMapGroup_IndoorKalliste",
+    "gMapGroup_IndoorAegina",
+    "gMapGroup_IndoorEmporion",
+    "gMapGroup_IndoorEleusa",
     "gMapGroup_IndoorKythera",
     "gMapGroup_IndoorMelos"
   ],
@@ -12,6 +15,14 @@
     "KallisteRoute1",
     "AktiTown",
     "KallisteRoute1_KronionHill",
+    "TriremeEuploia_Deck",
+    "AeginaTown",
+    "AeginaAphaiaRoad",
+    "AeginaTempleOfAphaia",
+    "AeginaMountOros",
+    "EmporionCity",
+    "EmporionHarbor",
+    "EleusaVillage",
     "Melos",
     "Route22_CretanSea",
     "Route22_MyrtoanSea",
@@ -65,6 +76,36 @@
     "ElaiaVillage_BakersHouse",
     "AktiTown_DiversHouse",
     "AktiTown_GoatherdsHouse"
+  ],
+  "gMapGroup_IndoorAegina": [
+    "TriremeEuploia_Hold",
+    "AeginaTown_Inn",
+    "AeginaTown_Mint",
+    "AeginaTown_AiakidesHouse"
+  ],
+  "gMapGroup_IndoorEmporion": [
+    "EmporionCity_Asclepeion",
+    "EmporionCity_Deigma",
+    "EmporionCity_Hephaisteion",
+    "EmporionCity_Tavern",
+    "EmporionCity_PhiloxenosHouse",
+    "EmporionCity_WidowsHouse",
+    "EmporionCity_RunnersHouse",
+    "EmporionCity_PottersWorkshop",
+    "EmporionCity_HiringHall",
+    "EmporionCity_TempleOfHermes"
+  ],
+  "gMapGroup_IndoorEleusa": [
+    "EleusaVillage_TempleOfDemeter",
+    "EleusaVillage_Asclepeion",
+    "EleusaVillage_Agora",
+    "EleusaVillage_HouseOfKeleos",
+    "EleusaVillage_Farmhouse",
+    "EleusaVillage_GranaryHouse",
+    "EleusaVillage_PoetsHouse",
+    "EleusaSanctum_B1F",
+    "EleusaSanctum_B2F",
+    "EleusaSanctum_B3F"
   ],
   "gMapGroup_IndoorKythera": [
     "KytheraSkandeia_AxylosHouse",

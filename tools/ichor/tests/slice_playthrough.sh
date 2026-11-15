@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# The slice playthrough: one continuous run of the Phase 1 slice, from a fresh
-# cartridge to the harbor's "Thank you for playing", with key presses only.
+# The playthrough: one continuous run from a fresh cartridge through the Phase 1
+# slice and on into Phase 2 as far as it is built, with key presses only.
 #
 #   tools/ichor/tests/slice_playthrough.sh [rom]     (default: pokeemerald.gba; run make first)
 #
@@ -21,7 +21,12 @@
 # summit scene and both grunts; Akti's arrival, the Asclepeion heal, a SAVE,
 # a reset and CONTINUE; the Agora, the Fisher's house, the harbor's people and
 # items; the Hearth Trial with all three acolytes; Ione, the Hearth Laurel and
-# TM42; the harbor ending; and Akti after the end.
+# TM42; the harbor ending; and Akti after the end. Then Phase 2 as far as it is
+# built: batch 1 (Halia's second look, the winds, the Euploia's crossing and
+# Aigina) and batch 2, Emporion: beat 11 on the quay, the harbor and the city,
+# every room (beat 12 in the Deigma, beat 13 at the forge), beat 14 on the temple
+# stair, the Isthmus Gate shut, the Temple of Hermes (the Herald's Run, its three
+# acolytes, Kerykos, the Herald Laurel and TM40), and beat 16, Kleon at the gate.
 #
 # THE ONE ASSIST: after the starter screen the starter's experience is set to
 # level 100's (battle strength only; see the .lua header). Everything else is
@@ -79,8 +84,15 @@ if grep -q "SLICE FAIL" "${OUT}run.log" || ! grep -q "SLICE done" "${OUT}run.log
 elif ! grep -q "SLICE PASS" "${OUT}run.log"; then
   echo "SLICE FAIL: the run stopped before the end (runner exit $code)"; fail=1
 fi
-if ! grep -q "Thank you for playing" "${OUT}text.txt"; then
-  echo "SLICE FAIL: the run never showed \"Thank you for playing\""; fail=1
+# Phase 2 replaced the slice's farewell card; the run now ends where Act I's
+# built content does (design/phase2/BUILD.md's batches): at the end of batch 2.
+if ! grep -q "Halia sent a gull" "${OUT}text.txt"; then
+  echo "SLICE FAIL: the run never reached the end of the slice (Alethea's word from Halia)"; fail=1
+fi
+# The end of batch 2: Kleon's second battle is over and the Isthmus Gate's
+# hoplites let the herald through (beat 16).
+if ! grep -q "Mind the road past the tombs" "${OUT}text.txt"; then
+  echo "SLICE FAIL: the run never reached the end of batch 2 (the Isthmus Gate opening after beat 16)"; fail=1
 fi
 if [ $fail -eq 0 ]; then
   echo "SLICE PASS: $(ls "${OUT}"shots/*.png | wc -l | tr -d ' ') screenshots, $(grep -c ' BATTLE ' "${OUT}run.log") battles," \

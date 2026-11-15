@@ -1,0 +1,149 @@
+line: galatea
+species:
+
+- dex: 96
+  concept: Marble chip
+  name: Glyphlet
+  etymology: glyphe (Greek, carving) + -let
+  category: Marble Chip
+  types: [Rock]
+  abilities: [Sturdy, Cute Charm]
+  hidden_ability: Solid Rock
+  base_stats: {hp: 45, atk: 40, def: 75, spa: 55, spd: 60, spe: 25}
+  ev_yield: {def: 1}
+  exp_yield: 60
+  catch_rate: 190
+  gender: {female_pct: 75}
+  egg_groups: [Mineral, Fairy]
+  egg_cycles: 20
+  growth_rate: Fast
+  height_m: 0.3
+  weight_kg: 9.5
+  myth: >-
+    Pygmalion of Cyprus, who wanted no wife, carved a woman more beautiful than
+    any ever born and fell in love with his own work (Ovid, Metamorphoses 10).
+  expression: >-
+    A chip from the sculptor's block with a single eye carved into it, as if
+    the work had only just begun. It watches, and waits for someone to finish
+    it.
+  art: >-
+    Tiny: it fills about 26×24 px. A rough, rounded chunk of white marble
+    sitting on the ground, angled left, with one almond-shaped eye carved into
+    its face and chisel marks around it. Two chipped corners serve as feet.
+    Marble whites and grays with faint limestone veins, a dark eye with a
+    sun-gold glint, black-figure ink outline. The follower hops after the
+    player in small clicks.
+  shiny: Its marble turns rose-pink, veined with sun-gold.
+  dex_entry:
+    - A chip of temple marble with one carved
+    - eye. It sits in the sculptors' yards for
+    - days, and is said to grow a little warmer
+    - each time someone praises it.
+  habitat: >-
+    Common among the offcuts on the marble temple grounds of Kythera Isle, by
+    day and night. Also found in Astyra's sculptors' quarter, hiding in heaps
+    of chips.
+  learnset:
+    level_up:
+      - [1, Tackle]
+      - [1, Harden]
+      - [4, Rock Throw]
+      - [8, Baby-Doll Eyes]
+      - [12, Smack Down]
+      - [16, Rock Polish]
+      - [20, Ancient Power]
+      - [24, Disarming Voice]
+      - [28, Iron Defense]
+      - [32, Power Gem]
+      - [36, Stealth Rock]
+      - [40, Calm Mind]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Charm, Sandstorm, Sunny Day,
+      Rain Dance, Light Screen, Reflect, Safeguard, Misty Terrain, Rock Tomb, Rock Slide, Rock Polish,
+      Stealth Rock, Power Gem, Ancient Power, Smack Down, Rock Blast, Stone Edge, Meteor Beam,
+      Iron Defense, Gyro Ball, Earth Power, Rollout, Dazzling Gleam, Draining Kiss, Disarming Voice,
+      Psych Up, Calm Mind, Gravity, Trick Room]
+    egg: [Mirror Coat, Heal Pulse, Lucky Chant, Wide Guard, Block, Curse, Captivate]
+  signature: >-
+    Sturdy and Harden from the start, because a chip of marble is hard to
+    break. It waits for friendship, not a level, before it wakes.
+  new_move: null
+
+- dex: 97
+  concept: Living statue
+  name: Kalliglyph
+  etymology: kallos (Greek, beauty) + glyphe (Greek, carving)
+  category: Living Stone
+  types: [Rock, Fairy]
+  abilities: [Sturdy, Cute Charm]
+  hidden_ability: Solid Rock
+  base_stats: {hp: 85, atk: 55, def: 105, spa: 110, spd: 105, spe: 45}
+  ev_yield: {spa: 1, spd: 1}
+  exp_yield: 175
+  catch_rate: 60
+  gender: {female_pct: 75}
+  egg_groups: [Mineral, Fairy]
+  egg_cycles: 20
+  growth_rate: Fast
+  height_m: 1.6
+  weight_kg: 145.0
+  myth: >-
+    At Aphrodite's festival Pygmalion prayed for a bride like his statue. When
+    he kissed it, the ivory softened like wax under his thumb and warmed into a
+    living woman, whom later writers named Galatea (Ovid, Metamorphoses 10).
+  expression: >-
+    The statue at the moment it wakes, with warm light showing through the
+    cracks wherever love has softened the stone. Ovid's statue was ivory;
+    Aethos carves it in marble, to match the Hierophant's title.
+  art: >-
+    Large: it fills about 48×60 px. A tall marble maiden in three-quarter view
+    facing left, stepping down off her plinth: one foot still on its blue
+    meander base, the other striding forward, one hand lifted to her cheek. Her
+    hair is gathered in carved buns, her robe falls in carved folds under a
+    meander band, and gold crack-light runs over her face, arms and robe, her
+    signature. Glyphlet's single carved eye survives as a mark on her brow.
+    Marble whites and grays, sun-gold light in the cracks and eyes, Aegean-blue
+    meander bands, one Fairy-pink accent on the lips and cheeks, black-figure
+    ink outline. Frame 2 glimmers the cracks; the follower walks stiffly at
+    first and moves more freely as its friendship rises.
+  shiny: Rose-pink marble with sun-gold light in the cracks, like the chip's.
+  dex_entry:
+    - A statue that came alive because it was
+    - loved. Where the cracks in its marble
+    - glow gold, it is warm to the touch. The
+    - rest of it is still cold stone.
+  habitat: >-
+    Evolves from Glyphlet through friendship. Hierophant Galatea's partner at
+    the Temple of Aphrodite, Kythera Isle; it isn't found in the wild.
+  learnset:
+    level_up:
+      - [0, Draining Kiss]
+      - [1, Tackle]
+      - [1, Harden]
+      - [4, Rock Throw]
+      - [8, Baby-Doll Eyes]
+      - [12, Smack Down]
+      - [16, Rock Polish]
+      - [20, Ancient Power]
+      - [24, Disarming Voice]
+      - [28, Iron Defense]
+      - [32, Power Gem]
+      - [36, Stealth Rock]
+      - [40, Calm Mind]
+      - [44, Dazzling Gleam]
+      - [48, Wish]
+      - [52, Moonblast]
+      - [56, Misty Terrain]
+      - [60, Meteor Beam]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Charm, Sandstorm, Sunny Day,
+      Rain Dance, Light Screen, Reflect, Safeguard, Misty Terrain, Rock Tomb, Rock Slide, Rock Polish,
+      Stealth Rock, Power Gem, Ancient Power, Smack Down, Rock Blast, Stone Edge, Meteor Beam,
+      Iron Defense, Gyro Ball, Earth Power, Rollout, Dazzling Gleam, Draining Kiss, Disarming Voice,
+      Psych Up, Calm Mind, Gravity, Trick Room, Psychic, Psyshock, Stored Power, Alluring Voice,
+      Play Rough, Body Press, Wonder Room, Magic Room, Heal Bell, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    It learns Draining Kiss on evolving, because a kiss is what woke Ovid's
+    statue. A slow, bulky special attacker built to sit behind Calm Mind.
+  new_move: null

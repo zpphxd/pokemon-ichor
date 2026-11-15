@@ -504,6 +504,22 @@ const u16 gTrainerPalette_AcolyteM[] = INCGFX_U16("graphics/trainers/front_pics/
 const u32 gTrainerFrontPic_AcolyteF[] = INCGFX_U32("graphics/trainers/front_pics/acolyte_f.png", ".4bpp.smol");
 const u16 gTrainerPalette_AcolyteF[] = INCGFX_U16("graphics/trainers/front_pics/acolyte_f.png", ".gbapal");
 
+// Pokemon Ichor, Phase 2 (tools/ichor/art/sprites_phase2_classes.py). Alethea's
+// front pic uses her back pic's palette, gTrainerBackPicPalette_Alethea.
+const u32 gTrainerFrontPic_Alethea[] = INCGFX_U32("graphics/trainers/front_pics/alethea.png", ".4bpp.smol");
+
+const u32 gTrainerFrontPic_Merchant[] = INCGFX_U32("graphics/trainers/front_pics/merchant.png", ".4bpp.smol");
+const u16 gTrainerPalette_Merchant[] = INCGFX_U16("graphics/trainers/front_pics/merchant.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Pilgrim[] = INCGFX_U32("graphics/trainers/front_pics/pilgrim.png", ".4bpp.smol");
+const u16 gTrainerPalette_Pilgrim[] = INCGFX_U16("graphics/trainers/front_pics/pilgrim.png", ".gbapal");
+
+const u32 gTrainerFrontPic_IchorSailor[] = INCGFX_U32("graphics/trainers/front_pics/ichor_sailor.png", ".4bpp.smol");
+const u16 gTrainerPalette_IchorSailor[] = INCGFX_U16("graphics/trainers/front_pics/ichor_sailor.png", ".gbapal");
+
+const u32 gTrainerFrontPic_HierophantKerykos[] = INCGFX_U32("graphics/trainers/front_pics/hierophant_kerykos.png", ".4bpp.smol");
+const u16 gTrainerPalette_HierophantKerykos[] = INCGFX_U16("graphics/trainers/front_pics/hierophant_kerykos.png", ".gbapal");
+
 static const u8 gTrainerBackPic_None[] = INCGFX_U8("graphics/trainers/back_pics/none.png", ".4bpp");
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");
@@ -1280,11 +1296,11 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_ProfessorDaphne, gTrainerPalette_ProfessorDaphne),
     },
-    // Ichor: Alethea leads the catch tutorial. Her front pic isn't drawn yet;
-    // it goes here when it is, sharing the back pic's palette.
+    // Ichor: Alethea leads the catch tutorial (back pic) and battles on the
+    // Euploia (front pic). Both share the back pic's palette.
     [TRAINER_PIC_ALETHEA] =
     {
-        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_None, gTrainerPalette_None),
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Alethea, gTrainerBackPicPalette_Alethea),
         .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_Alethea, gTrainerBackPicPalette_Alethea, sBackAnims_Hoenn),
     },
     [TRAINER_PIC_SHEPHERD] =
@@ -1315,6 +1331,22 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_AcolyteF, gTrainerPalette_AcolyteF),
     },
+    [TRAINER_PIC_MERCHANT] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Merchant, gTrainerPalette_Merchant),
+    },
+    [TRAINER_PIC_PILGRIM] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Pilgrim, gTrainerPalette_Pilgrim),
+    },
+    [TRAINER_PIC_ICHOR_SAILOR] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_IchorSailor, gTrainerPalette_IchorSailor),
+    },
+    [TRAINER_PIC_HIEROPHANT_KERYKOS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_HierophantKerykos, gTrainerPalette_HierophantKerykos),
+    },
     // Ichor: Act III's Kythera, on placeholder art until the portraits are drawn
     // (design/phase4/SCRIPT.md's and design/phase2/SCRIPT.md's class tables).
     [TRAINER_PIC_HIEROPHANT_GALATEA] =
@@ -1324,14 +1356,6 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_SCULPTOR] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Hiker, gTrainerPalette_Hiker),
-    },
-    [TRAINER_PIC_MERCHANT] =
-    {
-        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Gentleman, gTrainerPalette_Gentleman),
-    },
-    [TRAINER_PIC_PILGRIM] =
-    {
-        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_HexManiac, gTrainerPalette_HexManiac),
     },
     [TRAINER_PIC_BEEKEEPER] =
     {

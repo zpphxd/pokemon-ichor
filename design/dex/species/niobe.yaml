@@ -1,0 +1,80 @@
+line: niobe
+species:
+
+- dex: 129
+  concept: Weeping rock
+  name: Dakrock
+  etymology: dakry (Greek, tear) + rock
+  category: Weeping Rock
+  types: [Rock, Water]
+  abilities: [Sturdy, Rain Dish]
+  hidden_ability: Drizzle
+  base_stats: {hp: 95, atk: 55, def: 115, spa: 90, spd: 100, spe: 30}
+  ev_yield: {def: 1, spd: 1}
+  exp_yield: 175
+  catch_rate: 45
+  gender: {female_pct: 100}
+  egg_groups: [Mineral]
+  egg_cycles: 25
+  growth_rate: Slow
+  height_m: 2.0
+  weight_kg: 300.0
+  myth: >-
+    Niobe boasted that her fourteen children outshone Leto's two, so Apollo and
+    Artemis shot them all, and Niobe turned to stone on Mount Sipylos, where
+    the rock still weeps (Iliad 24; Ovid, Metamorphoses 6). Pausanias climbed
+    to see it: up close it is only a crag, and only from far off does it look
+    like a woman in tears (Pausanias 1.21.3).
+  expression: >-
+    A cliff face that, from a distance, is a woman bowed in grief, with a
+    spring running from her eyes. Up close it is only rock, and it won't let
+    you see its face.
+  art: >-
+    Large: it fills about 54×60 px. A tall, hunched rock formation in
+    three-quarter view facing left, shaped like a veiled woman bent forward
+    with her head bowed into her hands. Two thin streams of water run from
+    beneath the veil, down the rock and into a small pool at its base, and moss
+    clings to the folds of its stone robe. Limestone and marble-gray rock, olive
+    moss, Aegean-blue water, black-figure ink outline. The back sprite is plain
+    cliff, with no face at all.
+  shiny: Pale marble-white stone with sun-gold tears.
+  dex_entry:
+    - From far off it looks like a woman
+    - weeping, but up close it is only a
+    - crag. Its spring has never run dry, and
+    - no one has ever seen it smile.
+  habitat: >-
+    The weeping cliff on the Ascent, at any time; rare. It is found by checking
+    the spring at the foot of the cliff.
+  learnset:
+    level_up:
+      - [1, Water Gun]
+      - [1, Harden]
+      - [1, Rock Throw]
+      - [5, Mud Sport]
+      - [9, Rock Tomb]
+      - [13, Bubble Beam]
+      - [17, Aqua Ring]
+      - [21, Ancient Power]
+      - [25, Water Pulse]
+      - [29, Tearful Look]
+      - [33, Rain Dance]
+      - [37, Brine]
+      - [41, Power Gem]
+      - [45, Stealth Rock]
+      - [49, Life Dew]
+      - [53, Muddy Water]
+      - [57, Hydro Pump]
+      - [61, Meteor Beam]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Hyper Beam, Rain Dance,
+      Sandstorm, Weather Ball, Water Pulse, Surf, Hydro Pump, Scald, Brine, Muddy Water, Whirlpool,
+      Chilling Water, Ice Beam, Icy Wind, Rock Tomb, Rock Slide, Smack Down, Power Gem, Meteor Beam,
+      Stealth Rock, Earth Power, Reflect, Light Screen, Safeguard, Iron Defense, Body Press,
+      Calm Mind, Psych Up]
+    egg: [Memento, Haze, Curse, Yawn, Wish]
+  signature: >-
+    Drizzle keeps its tears falling and Rain Dish heals it in them. Tearful
+    Look at 29 lowers both of a foe's attacking stats: no one fights well
+    beside such grief.
+  new_move: null

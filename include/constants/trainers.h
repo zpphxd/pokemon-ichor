@@ -182,7 +182,7 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_HIEROPHANT_IONE,
     TRAINER_PIC_TITAN_GRUNT,
     TRAINER_PIC_PROFESSOR_DAPHNE,
-    TRAINER_PIC_ALETHEA,               // back pic only, for the catch tutorial
+    TRAINER_PIC_ALETHEA,               // front pic from Phase 2; the back pic leads the catch tutorial
     // Pokemon Ichor trainer classes (see design/phase1/SPRITES_classes.md)
     TRAINER_PIC_SHEPHERD,
     TRAINER_PIC_HARVESTER,
@@ -191,13 +191,17 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_AUGUR,
     TRAINER_PIC_ACOLYTE_M,
     TRAINER_PIC_ACOLYTE_F,
-    // Ichor: Act III's Kythera (design/phase4/SCRIPT.md Part 3), placeholder
-    // art until the portraits are drawn. world-act1 also defines MERCHANT and
-    // PILGRIM, with their real art: when the branches meet, keep those two.
-    TRAINER_PIC_HIEROPHANT_GALATEA,
-    TRAINER_PIC_SCULPTOR,
+    // Pokemon Ichor, Phase 2 classes (see design/phase2/SPRITES.md)
     TRAINER_PIC_MERCHANT,
     TRAINER_PIC_PILGRIM,
+    TRAINER_PIC_ICHOR_SAILOR,          // the SAILOR class's Ichor portrait; Hoenn's TRAINER_PIC_SAILOR is untouched
+    // Pokemon Ichor, Phase 2 cast (tools/ichor/art/sprites_kerykos.py)
+    TRAINER_PIC_HIEROPHANT_KERYKOS,
+    // Ichor: Act III's Kythera (design/phase4/SCRIPT.md Part 3), placeholder
+    // art until the portraits are drawn. Its merchants and pilgrims use
+    // world-act1's TRAINER_PIC_MERCHANT and TRAINER_PIC_PILGRIM above.
+    TRAINER_PIC_HIEROPHANT_GALATEA,
+    TRAINER_PIC_SCULPTOR,
     TRAINER_PIC_BEEKEEPER,
     TRAINER_PIC_COUNT,
 };
@@ -553,11 +557,12 @@ enum TrainerClassID
     TRAINER_CLASS_TITANBORN,
     TRAINER_CLASS_ACOLYTE,
     TRAINER_CLASS_HIEROPHANT,
-    // Ichor: Phase 2 classes that Act III's Kythera uses (design/phase2/SCRIPT.md,
-    // "New trainer classes"). world-act1 adds them too: when the branches meet,
-    // keep one copy of each.
+    // Ichor: Phase 2 trainer classes (design/phase2/SPRITES.md)
+    TRAINER_CLASS_SCHOLAR,
     TRAINER_CLASS_MERCHANT,
     TRAINER_CLASS_PILGRIM,
+    // Ichor: Phase 2 classes that Act III's Kythera adds beside world-act1's
+    // (design/phase2/SCRIPT.md, "New trainer classes")
     TRAINER_CLASS_FISHER,
     TRAINER_CLASS_BEEKEEPER,
     // Ichor: Act III classes (design/phase4/SCRIPT.md, "New trainer classes")

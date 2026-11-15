@@ -349,6 +349,14 @@ def define():
     obj("aka_amphora", "amphora", ff, behavior=vase)
     mt("aka_mat", ff, middle=C("mat_single"), behavior="MB_SOUTH_ARROW_WARP")
 
+    # ---- Emporion's Asclepeion (batch 2) -------------------------------------
+    # Added after everything else, so the slice rooms' ids don't move. Laid
+    # out in tools/ichor/maps/emporion_rooms.py.
+    top, body = C("wall_asc_top"), C("wall_asc_body")
+    obj("asc_sea_window", "sea_window", [top, body])
+    obj("asc_bell_rope", "bell_rope", [top, body])
+    obj("asc_anchors", "anchors", body)
+
 
 # --- writing the Porytiles sources ---------------------------------------------
 

@@ -1,0 +1,133 @@
+// Euphronios's workshop (design/phase2/SCRIPT.md, Part 2): a vase-painter and
+// his apprentice. The real Euphronios signed his pots "Euphronios painted me".
+// Room: tools/ichor/maps/emporion_rooms.py ("potter"), on domos. The street
+// door is the mat at (5..6, 8), warp 0. Its MAP_EMPORION_CITY dest_warp_id (0)
+// is a placeholder until the city agent's door ids are known.
+//
+// "Show me a Pokémon." He paints from life, and pays his models three times:
+//   1. a Harpeck   -> Super Potion x2   FLAG_ICHOR_EUPHRONIOS_1
+//   2. a Chelonet  -> Great Ball x3     FLAG_ICHOR_EUPHRONIOS_2
+//   3. a Stachyss  -> Star Piece        FLAG_ICHOR_EUPHRONIOS_3
+// The third waits on progress: Stachyss lives at Eleusa. checkspecies looks
+// through the whole party.
+
+mapscripts EmporionCity_PottersWorkshop_MapScripts {}
+
+text EmporionCity_PottersWorkshop_Text_NameEuphronios { "EUPHRONIOS" }
+text EmporionCity_PottersWorkshop_Text_NameApprentice { "APPRENTICE" }
+
+script EmporionCity_PottersWorkshop_EventScript_Euphronios {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_EUPHRONIOS_3)) {
+        goto(EmporionCity_PottersWorkshop_EventScript_EuphroniosDone)
+    }
+    setspeaker(EmporionCity_PottersWorkshop_Text_NameEuphronios)
+    msgbox(format("People think I invent the creatures on my cups. I don't.\p"
+                  "I just look. Very hard. For a very long time."))
+    // The step he's on: VAR_0x8004 the species he wants.
+    if (!flag(FLAG_ICHOR_EUPHRONIOS_1)) {
+        setvar(VAR_0x8004, SPECIES_HARPECK)
+    } elif (!flag(FLAG_ICHOR_EUPHRONIOS_2)) {
+        setvar(VAR_0x8004, SPECIES_CHELONET)
+    } else {
+        setvar(VAR_0x8004, SPECIES_STACHYSS)
+    }
+    checkspecies(VAR_0x8004)
+    if (var(VAR_RESULT) == FALSE) {
+        bufferspeciesname(STR_VAR_1, VAR_0x8004)
+        setspeaker(EmporionCity_PottersWorkshop_Text_NameEuphronios)
+        if (!flag(FLAG_ICHOR_EUPHRONIOS_1)) {
+            msgbox(format("Bring me a {STR_VAR_1}.\p"
+                          "I've never got the wings right."))
+        } elif (!flag(FLAG_ICHOR_EUPHRONIOS_2)) {
+            msgbox(format("Bring me a {STR_VAR_1}.\p"
+                          "The shell. I always paint it flat."))
+        } else {
+            msgbox(format("Bring me a {STR_VAR_1}.\p"
+                          "A snake made of wheat, they say. From Eleusa."))
+        }
+        release
+        end
+    }
+    // Shown the species: he paints it.
+    setspeaker(EmporionCity_PottersWorkshop_Text_NameEuphronios)
+    msgbox(format("Hold still. No, the Pokémon. You can fidget."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    delay(60)
+    fadescreen(FADE_FROM_BLACK)
+    setspeaker(EmporionCity_PottersWorkshop_Text_NameEuphronios)
+    msgbox(format("There. Look at that. It's never been on a cup before.\p"
+                  "Take this. Every painter pays his models."))
+    setspeaker(SP_NAME_NONE)
+    if (!flag(FLAG_ICHOR_EUPHRONIOS_1)) {
+        giveitem(ITEM_SUPER_POTION, 2)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_EUPHRONIOS_1)
+        }
+    } elif (!flag(FLAG_ICHOR_EUPHRONIOS_2)) {
+        giveitem(ITEM_GREAT_BALL, 3)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_EUPHRONIOS_2)
+        }
+    } else {
+        giveitem(ITEM_STAR_PIECE)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_EUPHRONIOS_3)
+            goto(EmporionCity_PottersWorkshop_EventScript_EuphroniosDone)
+        }
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+    }
+    release
+}
+
+script EmporionCity_PottersWorkshop_EventScript_EuphroniosDone {
+    setspeaker(EmporionCity_PottersWorkshop_Text_NameEuphronios)
+    msgbox(format("My teacher said every myth started on a cup.\p"
+                  "Somebody saw something, and painted it. Then everyone argued about it."))
+    release
+    end
+}
+
+script EmporionCity_PottersWorkshop_EventScript_Apprentice {
+    lock
+    faceplayer
+    setspeaker(EmporionCity_PottersWorkshop_Text_NameApprentice)
+    msgbox(format("He signs everything. The cups, the walls, the cat.\p"
+                  "The cat didn't like it."))
+    release
+}
+
+script EmporionCity_PottersWorkshop_EventScript_Kiln {
+    msgbox(format("The domed kiln, its mouth glowing. A stack of new cups is firing inside."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_PottersWorkshop_EventScript_Wheel {
+    msgbox(format("A cup on the wheel, half painted. The creature on it isn't one you know.\p"
+                  "Yet."), MSGBOX_SIGN)
+}
+
+script EmporionCity_PottersWorkshop_EventScript_Signature {
+    msgbox(format("Letters in black slip on the plaster: EUPHRONIOS PAINTED ME."), MSGBOX_SIGN)
+}
+
+script EmporionCity_PottersWorkshop_EventScript_Shelves {
+    msgbox(format("Rows of new cups and jars drying. Each one is signed on the foot."), MSGBOX_SIGN)
+}
+
+script EmporionCity_PottersWorkshop_EventScript_PaintTable {
+    msgbox(format("A black amphora with a red figure half done: someone wrestling a lion."),
+           MSGBOX_SIGN)
+}
+
+script EmporionCity_PottersWorkshop_EventScript_SlipPots {
+    msgbox(format("Pots of black slip, thick as honey. The brushes stand in them."), MSGBOX_SIGN)
+}
+
+script EmporionCity_PottersWorkshop_EventScript_ClayBin {
+    msgbox(format("A basin of wet clay, kneaded and waiting."), MSGBOX_SIGN)
+}

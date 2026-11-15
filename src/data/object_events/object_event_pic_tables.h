@@ -2627,6 +2627,62 @@ static const struct SpriteFrameImage sPicTable_IchorUpturnedBoatR[] = {
     obj_frame_tiles(gObjectEventPic_IchorUpturnedBoatR),
 };
 
+static const struct SpriteFrameImage sPicTable_IchorPilgrim[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPilgrim, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPronomos[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPronomos, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorEndeis[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorEndeis, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorPheidon[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorPheidon, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorAiakides[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorAiakides, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorKedalion[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKedalion, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorKleonSeasick[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKleonSeasick, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorKleonTablet[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKleonTablet, 2, 4),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorNestEggs[] = {
+    obj_frame_tiles(gObjectEventPic_IchorNestEggs),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorNestHatching[] = {
+    obj_frame_tiles(gObjectEventPic_IchorNestHatching),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorNestEmpty[] = {
+    obj_frame_tiles(gObjectEventPic_IchorNestEmpty),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorDarkTriremeBow[] = {
+    obj_frame_tiles(gObjectEventPic_IchorDarkTriremeBow),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorDarkTriremeStern[] = {
+    obj_frame_tiles(gObjectEventPic_IchorDarkTriremeStern),
+};
+
+static const struct SpriteFrameImage sPicTable_IchorKerykos[] = {
+    overworld_ascending_frames(gObjectEventPic_IchorKerykos, 2, 4),
+};
+
 // Ichor: twelve frames, the standard nine plus 9-11, the lyre strum that
 // sAnimTable_IchorLyre plays (see object_event_anims.h).
 static const struct SpriteFrameImage sPicTable_IchorSam[] = {

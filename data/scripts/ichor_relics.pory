@@ -553,7 +553,8 @@ script EventScript_IchorFlameDrowned {
 }
 
 script EventScript_IchorDraught {
-    if (var(VAR_TEMP_3) == FLAME_NONE) {
+    specialvar(VAR_RESULT, Ichor_GetFlameKind)
+    if (var(VAR_RESULT) == FLAME_NONE) {
         return
     }
     lockall

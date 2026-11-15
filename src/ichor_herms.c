@@ -19,8 +19,20 @@
 
 #include "data/ichor_herms.h"
 
-#define HERM_FLAG(herm) (FLAG_ICHOR_HERMS_START + (herm))
+STATIC_ASSERT(HERM_COUNT <= HERM_AETHOS_MAX, AethosHermsFitTheirFlags);
+STATIC_ASSERT(HERM_MAX - HERM_OIKOUMENE_FIRST <= 32, WaystonesFitTheirFlags);
+
 #define HERM_NONE 0xFF
+
+// Aethos's herms flag in FLAG_ICHOR_HERMS_START's range; the Oikoumene's
+// waystones (ids from HERM_OIKOUMENE_FIRST) in FLAG_ICHOR_WAYSTONES_START's.
+u16 Ichor_GetHermFlag(u32 herm)
+{
+    if (herm < HERM_OIKOUMENE_FIRST)
+        return FLAG_ICHOR_HERMS_START + herm;
+    return FLAG_ICHOR_WAYSTONES_START + (herm - HERM_OIKOUMENE_FIRST);
+}
+#define HERM_FLAG(herm) Ichor_GetHermFlag(herm)
 
 static bool32 IsPlaced(u32 herm)
 {
@@ -80,7 +92,7 @@ void Ichor_AnointHerm(void)
         return;
     FlagSet(HERM_FLAG(herm));
     Ichor_AddFavorTo(ICHOR_GOD_HERMES, 1);
-    if (Ichor_CountAnointedHerms() == HERM_COUNT && !FlagGet(FLAG_ICHOR_ALL_HERMS_REWARD))
+    if (herm < HERM_COUNT && Ichor_CountAnointedHerms() == HERM_COUNT && !FlagGet(FLAG_ICHOR_ALL_HERMS_REWARD))
     {
         FlagSet(FLAG_ICHOR_ALL_HERMS_REWARD);
         Ichor_AddFavorTo(ICHOR_GOD_HERMES, 10);

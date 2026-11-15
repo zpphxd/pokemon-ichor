@@ -1,0 +1,145 @@
+line: karkinos
+species:
+
+- dex: 33
+  concept: Tide crab
+  name: Karkipool
+  etymology: karkinos (Greek, crab) + pool
+  category: Tide Crab
+  types: [Water]
+  abilities: [Shell Armor, Hyper Cutter]
+  hidden_ability: Tough Claws
+  base_stats: {hp: 45, atk: 75, def: 70, spa: 30, spd: 35, spe: 45}
+  ev_yield: {atk: 1}
+  exp_yield: 65
+  catch_rate: 225
+  gender: {female_pct: 50}
+  egg_groups: [Water 3]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 0.3
+  weight_kg: 5.5
+  myth: >-
+    While Herakles fought the Hydra in the marsh at Lerna, Hera sent a huge
+    crab to help it by biting his foot (Apollodorus, Library 2.5.2).
+  expression: >-
+    A tide-pool crab with one claw already a little bigger than the other. It
+    goes for ankles, as its ancestor did.
+  art: >-
+    Small: it fills about 34×28 px. A squat crab in three-quarter view facing
+    left, its shell wider than it is tall, both claws raised and the right one
+    a size bigger. Two eyestalks, short jointed legs, and a limpet stuck to the
+    back of its shell. Terracotta shell with a limestone underside and Aegean
+    blue speckles, marble-white claw tips, black-figure ink outline. The
+    follower scuttles sideways.
+  shiny: Its shell turns marble white and its claws Aegean blue.
+  dex_entry:
+    - It hides in tide pools and pinches the
+    - toes of anyone who wades in. It is never
+    - sorry, and it never lets go first.
+  habitat: >-
+    Akti's tide pools, day and night; common on the rocks at low tide, and
+    hooked now and then with any rod.
+  learnset:
+    level_up:
+      - [1, Water Gun]
+      - [1, Leer]
+      - [4, Harden]
+      - [7, Vise Grip]
+      - [10, Bubble Beam]
+      - [13, Mud Shot]
+      - [16, Protect]
+      - [19, Metal Claw]
+      - [22, Razor Shell]
+      - [25, Slam]
+      - [28, Crabhammer]
+      - [31, Swords Dance]
+      - [35, Guillotine]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Water Pulse, Surf, Dive,
+      Whirlpool, Liquidation, Brine, Chilling Water, Rain Dance, Hail, Ice Beam, Icy Wind, Blizzard,
+      Mud-Slap, Mud Shot, Dig, Bulldoze, Rock Slide, Rock Tomb, Metal Claw, X-Scissor, Knock Off,
+      Swords Dance, Iron Defense, Rock Smash, Strength, Cut, Fling, False Swipe, Hone Claws, Thief,
+      Endeavor, Body Slam]
+    egg: [Flail, Haze, Ancient Power, Amnesia, Agility, Tickle, Chip Away]
+  signature: >-
+    Vise Grip at 7 and Crabhammer at 28. Shell Armor means a lucky critical
+    hit never cracks it.
+  new_move: null
+
+- dex: 34
+  concept: Karkinos
+  name: Karkitox
+  etymology: karkinos (Greek, crab) + toxikon (Greek, arrow poison)
+  category: Venom Claw
+  types: [Water, Poison]
+  abilities: [Shell Armor, Poison Touch]
+  hidden_ability: Tough Claws
+  base_stats: {hp: 70, atk: 120, def: 105, spa: 45, spd: 65, spe: 60}
+  ev_yield: {atk: 2}
+  exp_yield: 170
+  catch_rate: 60
+  gender: {female_pct: 50}
+  egg_groups: [Water 3]
+  egg_cycles: 20
+  growth_rate: Medium Fast
+  height_m: 1.4
+  weight_kg: 72.0
+  myth: >-
+    Herakles crushed the crab Hera sent to help the Hydra. For its loyalty
+    Hera set it among the stars as Cancer (Apollodorus, Library 2.5.2;
+    Eratosthenes, Catasterismi).
+  expression: >-
+    One claw has grown huge and drips marsh venom. On its shell is the eye of
+    a peacock feather, Hera's mark on the crab that fought for her.
+  art: >-
+    Medium to large: it fills about 54×48 px. A broad marsh crab in
+    three-quarter view facing left, with one enormous raised claw nearly as
+    big as its body, beads of venom dripping from its pincer, and the small
+    claw tucked under. Reeds and moss are caught on its legs, and a pale
+    peacock-feather eyespot marks its carapace. Cypress-dark green and
+    terracotta shell, olive moss, a violet Poison accent on the venom, sun-gold
+    eyespot rim, black-figure ink outline. The back sprite shows the eyespot
+    centered on its shell.
+  shiny: Its shell turns starlight sun-gold and the eyespot Aegean blue.
+  dex_entry:
+    - Its great claw drips venom from the marsh
+    - where it lurks beside the many-headed
+    - serpent. It is said a goddess set its
+    - ancestor among the stars for its loyalty.
+  habitat: >-
+    Evolves from Karkipool at level 28. Wild ones lurk in the reed marshes of
+    Lake Stymphalia in Lakonia, near the Hydra's lair (uncommon, mostly at
+    night).
+  learnset:
+    level_up:
+      - [0, Cross Poison]
+      - [1, Water Gun]
+      - [1, Leer]
+      - [1, Harden]
+      - [1, Vise Grip]
+      - [10, Bubble Beam]
+      - [13, Mud Shot]
+      - [16, Protect]
+      - [19, Metal Claw]
+      - [22, Razor Shell]
+      - [25, Slam]
+      - [28, Crabhammer]
+      - [31, Toxic]
+      - [34, Swords Dance]
+      - [38, Poison Jab]
+      - [42, Guillotine]
+      - [46, Toxic Spikes]
+      - [52, Gunk Shot]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Snore, Toxic, Water Pulse, Surf, Dive,
+      Whirlpool, Liquidation, Brine, Chilling Water, Rain Dance, Hail, Ice Beam, Icy Wind, Blizzard,
+      Mud-Slap, Mud Shot, Dig, Bulldoze, Rock Slide, Rock Tomb, Metal Claw, X-Scissor, Knock Off,
+      Swords Dance, Iron Defense, Rock Smash, Strength, Cut, Fling, False Swipe, Hone Claws, Thief,
+      Endeavor, Body Slam, Poison Jab, Sludge Bomb, Sludge Wave, Venoshock, Gunk Shot, Toxic Spikes,
+      Acid Spray, Taunt, Lash Out, Spite, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    It learns Cross Poison on evolving: the venom claw. Poison Touch makes
+    every pinch a gamble, and Toxic Spikes poisons the marsh around it.
+  new_move: null

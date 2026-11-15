@@ -46,7 +46,7 @@ LEGEND = {
     "t": (176, 80, 40),
     "u": (216, 128, 80),
     "U": (240, 176, 128),
-    "r": (216, 56, 40),
+    "r": (216, 56, 48),    # was (216, 56, 40) until aethos's repaint took that value
     # wood
     "D": (56, 40, 32),
     "d": (96, 64, 40),
@@ -55,7 +55,7 @@ LEGEND = {
     "v": (208, 168, 112),
     # limestone and parchment
     "p": (184, 152, 104),
-    "L": (208, 184, 136),
+    "L": (208, 184, 128),  # was (208, 184, 136) until aethos's repaint took that value
     "P": (232, 216, 168),
     "Q": (248, 240, 208),
     # greens: cypress, olive, laurel, grass
@@ -1628,6 +1628,137 @@ art("dig_tools", [
     ".........DDDDDD.",
     "................",
     "................",
+    "................",
+    "................",
+])
+
+
+# =============================================================================
+# Emporion's Asclepeion (batch 2, tools/ichor/maps/emporion_rooms.py): a harbor
+# Asclepeion whose healer works with the sea at her back.
+# =============================================================================
+
+def _sea_window():
+    """A wide sea window in the back wall, 4x2, behind the healer's counter:
+    the cornice runs on over it, three lights between marble mullions, the
+    harbor beyond with a trireme under sail, and a broad sill."""
+    W, H = 64, 32
+    g = [["C"] * W for _ in range(H)]
+    for y, ch in enumerate(["1", "5", "8", "6", "3"]):
+        g[y] = [ch] * W
+    for x in range(W):
+        g[5][x] = "4"
+        g[6][x] = "3"
+    # sky: pale at the top, a few clouds
+    for y in range(7, 17):
+        for x in range(W):
+            g[y][x] = "F" if y < 11 else "C"
+    for (x0, y0, w) in ((6, 9, 7), (30, 8, 9), (49, 10, 6)):
+        for x in range(x0, x0 + w):
+            g[y0][x] = "8"
+        for x in range(x0 + 1, x0 + w - 1):
+            g[y0 - 1][x] = "8"
+    # the horizon and the sea
+    for x in range(W):
+        g[17][x] = "c"
+    for y in range(18, 28):
+        for x in range(W):
+            ch = "b" if y < 24 else "B"
+            if (x * 5 + y * 3) % 11 == 0:
+                ch = "c"
+            if (x * 7 + y * 13) % 29 == 0:
+                ch = "8"
+            g[y][x] = ch
+    # a trireme out on the water, sail full, in the middle light
+    ship = [
+        "......##.......",
+        ".....#77#......",
+        "....#7787#.....",
+        "....#7778#.....",
+        "....#7777#.....",
+        ".....####......",
+        "#.....#........",
+        "##############.",
+        "#11g1111111111#",
+        ".#############.",
+    ]
+    for j, row in enumerate(ship):
+        for i, ch in enumerate(row):
+            if ch != ".":
+                g[10 + j][24 + i] = ch
+    for i in range(3, 13, 2):          # oars, ticks under the hull
+        g[20][24 + i] = "#"
+    # frame: jambs, mullions, sill
+    for y in range(5, 28):
+        for x, ch in ((0, "#"), (1, "8"), (2, "5"), (61, "4"), (62, "3"), (63, "#")):
+            g[y][x] = ch
+        for x0 in (21, 41):
+            g[y][x0] = "#"
+            g[y][x0 + 1] = "7"
+            g[y][x0 + 2] = "5"
+            g[y][x0 + 3] = "#"
+    for x in range(W):
+        g[28][x] = "8"
+        g[29][x] = "6"
+        g[30][x] = "4"
+        g[31][x] = "#"
+    return ["".join(r) for r in g]
+
+
+art("sea_window", _sea_window())
+
+# Ship's rope for the bell-pull, hung from a ring, knotted at its end.
+art("bell_rope", [
+    "................",
+    "................",
+    "......UUU.......",
+    ".....U...U......",
+    ".....U...U......",
+    "......UuU.......",
+    ".......Uu.......",
+    ".......uU.......",
+    ".......Uu.......",
+    ".......uU.......",
+    ".......Uu.......",
+    ".......uU.......",
+    ".......Uu.......",
+    ".......uU.......",
+    ".......Uu.......",
+    ".......uU.......",
+    ".......Uu.......",
+    ".......uU.......",
+    ".......Uu.......",
+    ".......uU.......",
+    ".......Uu.......",
+    ".......uU.......",
+    "......TuUT......",
+    ".....TuUuuT.....",
+    "......TTTT......",
+    "......tUut......",
+    ".....tUutut.....",
+    ".....uututu.....",
+    "......t.t.t.....",
+    "................",
+    "................",
+    "................",
+])
+
+# Two small bronze anchors hung on nails: sailors' thank-offerings.
+art("anchors", [
+    "................",
+    "...z........z...",
+    "..zgz......zgz..",
+    "...G........G...",
+    ".ZGgGZ....ZGgGZ.",
+    "...G........G...",
+    "...G........G...",
+    "...G........G...",
+    "...G........G...",
+    "Z..G..Z..Z..G..Z",
+    "Gx.G.xG..Gx.G.xG",
+    ".GxGxG....GxGxG.",
+    "..GGG......GGG..",
+    "...x........x...",
     "................",
     "................",
 ])

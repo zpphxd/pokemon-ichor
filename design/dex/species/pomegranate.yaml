@@ -1,0 +1,223 @@
+line: pomegranate
+species:
+
+- dex: 52
+  concept: Pomegranate seed
+  name: Rhoaril
+  etymology: rhoa (Greek, pomegranate) + aril, the juicy coat of its seed
+  category: Pomegranate
+  types: [Grass]
+  abilities: [Ripen, Leaf Guard]
+  hidden_ability: Harvest
+  base_stats: {hp: 50, atk: 45, def: 55, spa: 55, spd: 55, spe: 40}
+  ev_yield: {spa: 1}
+  exp_yield: 62
+  catch_rate: 120
+  gender: {female_pct: 100}
+  egg_groups: [Grass, Fairy]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 0.3
+  weight_kg: 1.8
+  myth: >-
+    Hades seized Kore as she picked a narcissus and carried her below. Before
+    she was returned she ate a pomegranate seed, and so she must spend part of
+    every year in the underworld as its queen (Homeric Hymn to Demeter).
+  expression: >-
+    A single glistening seed, split from its fruit and never sure where it
+    belongs. It sleeps in the dark and leans toward the light at the same time.
+  art: >-
+    Small: it fills about 26×30 px. A plump, teardrop-shaped pomegranate seed
+    in three-quarter view facing left, standing on two tiny root feet. Its
+    glossy, translucent body shows a pale kernel inside like a heart. A crown
+    of six small calyx points tops its head, like the fruit's, with one curled
+    leaf sprouting from it. Big dark eyes, one bright and one half in shadow.
+    Terracotta with a deep pomegranate-red accent and a marble highlight,
+    olive leaf, cypress-dark calyx, black-figure ink outline. The follower
+    glows faintly at night.
+  shiny: Its red body turns pale sun-gold, like an unripe fruit.
+  dex_entry:
+    - It sleeps deep in the dark sanctum, but
+    - its sprout always leans toward the sun.
+    - No one knows which way it will grow.
+  habitat: >-
+    Uncommon. Found in the underground Mystery sanctum beneath Eleusa Village,
+    day and night.
+  learnset:
+    level_up:
+      - [1, Absorb]
+      - [1, Sweet Scent]
+      - [4, Leafage]
+      - [7, Fairy Wind]
+      - [10, Astonish]
+      - [13, Mega Drain]
+      - [16, Magical Leaf]
+      - [19, Leech Seed]
+      - [22, Worry Seed]
+      - [25, Giga Drain]
+      - [28, Natural Gift]
+      - [31, Energy Ball]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Sunny Day,
+      Grassy Terrain, Bullet Seed, Magical Leaf, Seed Bomb, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Worry Seed, Nature Power, Trailblaze, Charm, Helping Hand, Safeguard, Light Screen,
+      Swift, Pollen Puff, Weather Ball, Disarming Voice]
+    egg: [Ingrain, Aromatherapy, Grass Whistle, Wish, Pain Split, Memento]
+  signature: >-
+    It branches at level 28: into Korantha if it levels up by day, or into
+    Persenyx by night. Ripen doubles what its Berries do, since it is a fruit
+    itself.
+  new_move: null
+
+- dex: 53
+  concept: Kore of spring
+  name: Korantha
+  etymology: kore (Greek, maiden) + anthos (Greek, flower)
+  category: Maiden
+  types: [Grass, Fairy]
+  abilities: [Ripen, Natural Cure]
+  hidden_ability: Grassy Surge
+  base_stats: {hp: 75, atk: 55, def: 70, spa: 100, spd: 95, spe: 90}
+  ev_yield: {spa: 1, spe: 1}
+  exp_yield: 172
+  catch_rate: 45
+  gender: {female_pct: 100}
+  egg_groups: [Grass, Fairy]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.5
+  weight_kg: 36.0
+  myth: >-
+    Each spring Kore rises from the underworld to her mother Demeter, and the
+    grieving earth bursts into flower and grain again. Her return was the
+    heart of the Eleusinian Mysteries (Homeric Hymn to Demeter).
+  expression: >-
+    The maiden of spring as she was before the narcissus: flower-crowned and
+    barefoot. Wherever it walks, the ground greens.
+  art: >-
+    Large: it fills about 46×58 px. A slender maiden-like figure in
+    three-quarter view facing left, mid-step on bare root feet, one hand
+    reaching for a white narcissus. A full crown of spring flowers blooms
+    around a pomegranate blossom at the brow, and a long peplos of overlapping
+    petals falls to the ground. A gentle, open face with a small seed-shaped
+    mark on each cheek. Olive and silver-leaf greens, marble petals, a
+    pomegranate-red blossom, a soft fairy-pink accent, black-figure ink
+    outline. The follower leaves a short trail of flowers that fade behind it.
+  shiny: Its petals turn sun-gold and its crown blossom white.
+  dex_entry:
+    - By day it walks the wheat fields, and
+    - flowers open in its footsteps. When it
+    - goes below, they say, winter comes.
+  habitat: >-
+    Evolves from Rhoaril at level 28 during the day. Rarely, one walks Eleusa
+    Village's fields by day.
+  learnset:
+    level_up:
+      - [0, Petal Dance]
+      - [1, Absorb]
+      - [1, Sweet Scent]
+      - [1, Leafage]
+      - [1, Fairy Wind]
+      - [10, Astonish]
+      - [13, Mega Drain]
+      - [16, Magical Leaf]
+      - [19, Leech Seed]
+      - [22, Worry Seed]
+      - [25, Giga Drain]
+      - [28, Natural Gift]
+      - [32, Dazzling Gleam]
+      - [36, Energy Ball]
+      - [40, Grassy Terrain]
+      - [44, Synthesis]
+      - [48, Moonblast]
+      - [55, Leaf Storm]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Sunny Day,
+      Grassy Terrain, Bullet Seed, Magical Leaf, Seed Bomb, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Worry Seed, Nature Power, Trailblaze, Charm, Helping Hand, Safeguard, Light Screen,
+      Swift, Pollen Puff, Weather Ball, Disarming Voice, Dazzling Gleam, Misty Terrain, Draining Kiss,
+      Alluring Voice, Calm Mind, Encore, Psych Up, Leaf Storm, Petal Blizzard, Hyper Beam]
+    egg: []
+  signature: >-
+    Petal Dance on evolving, and its hidden ability, Grassy Surge, brings
+    spring onto the field the moment it appears. Hierophant Chloe leads with
+    whichever form her seed became.
+  new_move: null
+
+- dex: 54
+  concept: Persephone below
+  name: Persenyx
+  etymology: Persephone (Greek myth, queen of the dead) + nyx (Greek, night)
+  category: Queen Below
+  types: [Grass, Ghost]
+  abilities: [Ripen, Cursed Body]
+  hidden_ability: Perish Body
+  base_stats: {hp: 85, atk: 70, def: 80, spa: 105, spd: 100, spe: 55}
+  ev_yield: {spa: 2}
+  exp_yield: 174
+  catch_rate: 45
+  gender: {female_pct: 100}
+  egg_groups: [Grass, Fairy]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.6
+  weight_kg: 42.0
+  myth: >-
+    Below, Kore is Persephone, dread queen beside Hades, and the pomegranate
+    seed she ate binds her there each winter (Homeric Hymn to Demeter). In the
+    Odyssey it is Persephone who sends the shades of the dead up to Odysseus
+    (Odyssey 11).
+  expression: >-
+    The same maiden by night: pale and crowned, holding the split pomegranate
+    that keeps her below. Whoever takes a seed from it must stay.
+  art: >-
+    Large: it fills about 48×60 px. A tall, pale, queenly figure in
+    three-quarter view facing left, standing very still, with a long veil of
+    dark leaves falling from a crown of withered stems. In one cupped hand it
+    holds a split pomegranate whose seeds glow in the dark. Its petal robe has
+    faded to ash gray and frays into wisps at the hem, and its eyes are calm
+    and unblinking. Cypress-dark leaves, marble-pale skin, an ash-gray robe,
+    glowing pomegranate-red seeds, a ghostly violet accent, black-figure ink
+    outline. The follower drifts without touching the ground.
+  shiny: Its veil turns Aegean blue and its seeds glow sun-gold.
+  dex_entry:
+    - By night it waits below, holding out a
+    - split fruit. It is said that anyone who
+    - takes a seed from it can never wholly
+    - leave the dark again.
+  habitat: >-
+    Evolves from Rhoaril at level 28 at night. Rarely, one appears in the
+    Mystery sanctum beneath Eleusa Village at night.
+  learnset:
+    level_up:
+      - [0, Hex]
+      - [1, Absorb]
+      - [1, Sweet Scent]
+      - [1, Leafage]
+      - [1, Fairy Wind]
+      - [10, Astonish]
+      - [13, Mega Drain]
+      - [16, Magical Leaf]
+      - [19, Leech Seed]
+      - [22, Worry Seed]
+      - [25, Giga Drain]
+      - [28, Natural Gift]
+      - [32, Confuse Ray]
+      - [36, Shadow Ball]
+      - [40, Strength Sap]
+      - [44, Energy Ball]
+      - [48, Mean Look]
+      - [55, Leaf Storm]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Sunny Day,
+      Grassy Terrain, Bullet Seed, Magical Leaf, Seed Bomb, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Worry Seed, Nature Power, Trailblaze, Charm, Helping Hand, Safeguard, Light Screen,
+      Swift, Pollen Puff, Weather Ball, Disarming Voice, Draining Kiss, Calm Mind, Encore, Psych Up,
+      Leaf Storm, Petal Blizzard, Hyper Beam, Shadow Ball, Hex, Will-O-Wisp, Night Shade, Pain Split,
+      Spite, Nasty Plot, Taunt, Trick, Skill Swap, Dark Pulse]
+    egg: []
+  signature: >-
+    Hex on evolving, Strength Sap to drink a foe's strength, and Mean Look so
+    it can't leave. Its hidden ability, Perish Body, dooms anything that
+    touches it, as the seed doomed Kore. Hierophant Chloe's ace by night.
+  new_move: null

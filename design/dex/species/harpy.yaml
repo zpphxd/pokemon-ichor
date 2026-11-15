@@ -1,0 +1,150 @@
+line: harpy
+species:
+
+- dex: 42
+  concept: Snatcher fledgling
+  name: Harpeck
+  etymology: harpazo (Greek, to snatch) + peck
+  category: Snatcher
+  types: [Dark, Flying]
+  abilities: [Pickpocket, Stench]
+  hidden_ability: Unnerve
+  base_stats: {hp: 45, atk: 62, def: 40, spa: 35, spd: 40, spe: 78}
+  ev_yield: {spe: 1}
+  exp_yield: 58
+  catch_rate: 190
+  gender: {female_pct: 75}
+  egg_groups: [Flying]
+  egg_cycles: 15
+  growth_rate: Medium Slow
+  height_m: 0.4
+  weight_kg: 3.0
+  myth: >-
+    The Harpies, whose name means "snatchers", were storm-wind spirits that
+    swooped on blind King Phineus at every meal, stealing his food and fouling
+    what they left, until the winged sons of Boreas chased them away
+    (Apollonius, Argonautica 2).
+  expression: >-
+    A scruffy storm-gray chick with talons too big for it. It already steals,
+    badly, and smells of the scraps it hoards.
+  art: >-
+    Small: it fills about 32×36 px. A round, scruffy fledgling in three-quarter
+    view facing left, hopping forward with one oversized hooked foot raised to
+    grab. Ragged gray down sticks out in tufts under a dark hood of feathers,
+    with a hooked beak and sharp sun-gold eyes. A stolen olive is clamped in
+    its beak. Marble-gray down, black-figure ink hood and talons, sun-gold
+    eyes, an olive accent, black-figure ink outline. The follower snatches at
+    items on the ground.
+  shiny: Its gray down turns sandy limestone and its eyes terracotta.
+  dex_entry:
+    - It swoops on picnics and snatches food
+    - from the plate before it reaches a mouth.
+    - What it cannot carry off, it spoils.
+  habitat: >-
+    Common on the Agora rooftops of Emporion City by day, where it raids the
+    stalls, and on the sea cliffs nearby.
+  learnset:
+    level_up:
+      - [1, Peck]
+      - [1, Leer]
+      - [4, Pursuit]
+      - [7, Quick Attack]
+      - [10, Wing Attack]
+      - [13, Thief]
+      - [16, Taunt]
+      - [19, Pluck]
+      - [22, Feint Attack]
+      - [25, Snatch]
+      - [28, Acrobatics]
+      - [31, Night Slash]
+      - [34, Agility]
+      - [37, Knock Off]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Thief, Covet, Snatch,
+      Embargo, Torment, Taunt, Quash, Foul Play, Snarl, Dark Pulse, Payback, Assurance, Knock Off,
+      Sucker Punch, Lash Out, Fake Tears, Aerial Ace, Air Cutter, Air Slash, Acrobatics, Fly, Pluck,
+      Roost, Defog, Tailwind, Steel Wing, U-turn, Heat Wave, Uproar, Swift, Agility, Rain Dance,
+      Sunny Day]
+    egg: [Feather Dance, Mirror Move, Screech, Haze, Whirlwind, Fake Out]
+  signature: >-
+    Pickpocket steals the item of anything that touches it, and Thief, Pluck,
+    Snatch and Knock Off all come by level-up. Its hidden ability, Unnerve,
+    stops foes from eating their Berries, as the Harpies starved Phineus.
+  new_move: null
+
+- dex: 43
+  concept: Harpy
+  name: Harpelle
+  etymology: harpazo (Greek, to snatch) + thyella (Greek, storm wind)
+  category: Storm Thief
+  types: [Dark, Flying]
+  abilities: [Pickpocket, Stench]
+  hidden_ability: Unnerve
+  base_stats: {hp: 75, atk: 105, def: 65, spa: 60, spd: 65, spe: 120}
+  ev_yield: {spe: 2}
+  exp_yield: 175
+  catch_rate: 60
+  gender: {female_pct: 75}
+  egg_groups: [Flying]
+  egg_cycles: 15
+  growth_rate: Medium Slow
+  height_m: 1.5
+  weight_kg: 32.0
+  myth: >-
+    Hesiod names two Harpies, Aello and Okypete, "storm" and "swift-wing"
+    (Theogony 267). In the Argonautica they fell on Phineus's table like a
+    squall, stole his meals and left a stench on the rest, until the sons of
+    Boreas drove them off (Apollonius, Argonautica 2).
+  expression: >-
+    The snatcher grown into the storm itself. It strikes inside a gust of its
+    own wind, and its hooked talons can carry off a whole stall's bread.
+  art: >-
+    Large: it fills about 56×60 px. A lean raptor in three-quarter view facing
+    left, wings half-mantled over its prey and long hooked talons clutching a
+    stolen loaf. A ragged crest sweeps back in the wind, and a hood of dark
+    feathers around its piercing sun-gold eyes looks unsettlingly like a face.
+    Wisps of storm cloud trail from its wing edges. Marble-gray feathers with
+    black-figure ink barring, Aegean-blue storm wisps, sun-gold eyes, a
+    terracotta loaf, black-figure ink outline. The back sprite shows the wings
+    fully spread with the wisps streaming behind.
+  shiny: Its feathers turn sandy limestone and its storm wisps sun-gold.
+  dex_entry:
+    - It arrives as a sudden squall. When the
+    - wind drops, every loaf in the market is
+    - gone, and what is left smells awful.
+  habitat: >-
+    Evolves from Harpeck at level 26. A few hunt the sea cliffs near Emporion
+    City in the rain, rarely.
+  learnset:
+    level_up:
+      - [0, Tailwind]
+      - [1, Peck]
+      - [1, Leer]
+      - [1, Pursuit]
+      - [1, Quick Attack]
+      - [10, Wing Attack]
+      - [13, Thief]
+      - [16, Taunt]
+      - [19, Pluck]
+      - [22, Feint Attack]
+      - [25, Snatch]
+      - [30, Acrobatics]
+      - [34, Night Slash]
+      - [38, Agility]
+      - [42, Knock Off]
+      - [46, Sucker Punch]
+      - [50, Throat Chop]
+      - [55, Brave Bird]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Thief, Covet, Snatch,
+      Embargo, Torment, Taunt, Quash, Foul Play, Snarl, Dark Pulse, Payback, Assurance, Knock Off,
+      Sucker Punch, Lash Out, Fake Tears, Aerial Ace, Air Cutter, Air Slash, Acrobatics, Fly, Pluck,
+      Roost, Defog, Tailwind, Steel Wing, U-turn, Heat Wave, Uproar, Swift, Agility, Rain Dance,
+      Sunny Day, Brave Bird, Hurricane, Dual Wingbeat, Sky Attack, Sky Drop, Throat Chop,
+      Double-Edge, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    It learns Tailwind on evolving, because the Harpies were storm winds. Fast
+    and hard-hitting, it strips a team bare with Knock Off and Pickpocket, and
+    it is Hierophant Kerykos's ace.
+  new_move: null

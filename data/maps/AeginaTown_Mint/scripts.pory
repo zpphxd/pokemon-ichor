@@ -1,0 +1,114 @@
+// The mint (design/phase2/SCRIPT.md, Part 2): Pheidon, the moneyer, strikes
+// Aigina's turtle coins in a stone strongroom. Room: tools/ichor/maps/aegina_homes.py
+// ("mint"). The street door is the mat at (4..5, 7), warp 0 (MAP_AEGINA_TOWN
+// warp 1 is a placeholder until the Aegina agent's door ids are known).
+//
+// Pheidon (2,5) works at his anvils. His Chelonet sits on the stamps, on the
+// right-hand anvil (3,4), until he trades it to the player for a Karkipool:
+// in-game trade INGAME_TRADE_ICHOR_STATER, FLAG_ICHOR_TRADED_CHELONET. Then the
+// Karkipool stands guard by the strongbox (6,2); its object hides on FLAG_TEMP_1,
+// which ON_TRANSITION sets until the trade is done.
+
+mapscripts AeginaTown_Mint_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_CHELONET)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text AeginaTown_Mint_Text_NamePheidon { "PHEIDON" }
+
+script AeginaTown_Mint_EventScript_Pheidon {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_TRADED_CHELONET)) {
+        setspeaker(AeginaTown_Mint_Text_NamePheidon)
+        msgbox(format("Your crab won't let anyone near the strongbox. Including me.\p"
+                      "Best guard I ever had."))
+        release
+        end
+    }
+    setspeaker(AeginaTown_Mint_Text_NamePheidon)
+    msgbox(format("Every coin gets a turtle. That's the rule. Don't ask me whose.\p"
+                  "Problem is, this one keeps sitting on the stamps. Thinks it's the model.\p"
+                  "I need a guard for the strongbox. Something with claws."))
+    // The in-game trade, written out as Kimon's is (ElaiaVillage_BakersHouse) so
+    // each line carries Pheidon's name box.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_STATER)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(AeginaTown_Mint_Text_NamePheidon)
+    msgbox(format("You wouldn't trade me a Karkipool?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(AeginaTown_Mint_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(AeginaTown_Mint_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(AeginaTown_Mint_Text_NamePheidon)
+        msgbox(format("That's no Karkipool. I said claws."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_CHELONET)
+    removeobject(LOCALID_AEGINA_MINT_CHELONET)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_AEGINA_MINT_KARKIPOOL)
+    setspeaker(AeginaTown_Mint_Text_NamePheidon)
+    msgbox(format("Stater's a good name for it. It's worth about as much.\p"
+                  "It hums when it's happy. Hums. A tortoise. Don't ask."))
+    release
+}
+
+script AeginaTown_Mint_EventScript_NoTrade {
+    setspeaker(AeginaTown_Mint_Text_NamePheidon)
+    msgbox(format("Then it's back on the stamps for you, old friend."))
+    release
+    end
+}
+
+script AeginaTown_Mint_EventScript_Chelonet {
+    lock
+    faceplayer
+    playmoncry(SPECIES_CHELONET, CRY_MODE_NORMAL)
+    msgbox(format("It's sitting on the anvil, on today's stamp. It looks very pleased with itself."))
+    waitmoncry
+    release
+}
+
+script AeginaTown_Mint_EventScript_Karkipool {
+    lock
+    faceplayer
+    playmoncry(SPECIES_KARKIPOOL, CRY_MODE_NORMAL)
+    msgbox(format("Clack, clack. It isn't letting anyone near the strongbox."))
+    waitmoncry
+    release
+}
+
+script AeginaTown_Mint_EventScript_VaultDoor {
+    msgbox(format("A heavy door bound in bronze. A slot in it lets coins out and nothing in."), MSGBOX_SIGN)
+}
+
+script AeginaTown_Mint_EventScript_Strongbox {
+    msgbox(format("The strongbox. A sea turtle is stamped on the lid, like on every coin."), MSGBOX_SIGN)
+}
+
+script AeginaTown_Mint_EventScript_DieRack {
+    msgbox(format("Coin dies on their pegs. Each one strikes a turtle into silver.\p"
+                  "One is worn almost smooth. The turtle on it looks tired."), MSGBOX_SIGN)
+}
+
+script AeginaTown_Mint_EventScript_Balance {
+    msgbox(format("A balance for silver. Every stater is weighed before it leaves."), MSGBOX_SIGN)
+}
+
+script AeginaTown_Mint_EventScript_CountingTable {
+    msgbox(format("Stacks of new staters, still warm from the stamp."), MSGBOX_SIGN)
+}

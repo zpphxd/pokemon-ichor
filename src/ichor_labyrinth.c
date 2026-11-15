@@ -50,6 +50,8 @@ extern const u8 EventScript_IchorRecruitBump[];
 #define MAX_FLOORS        4
 #define MAX_ANCHORS_HERE  8
 #define MAX_WALLS         8
+#define MAX_DRIFTS        8
+#define DRIFT_STUCK_FRAMES 360  // LABORS Labor 4: stuck in the snow for 6 seconds
 #define SPOOL_LOW         10
 #define ANCHOR_TIED       0x100   // IchorThreadAnchor.reserved: a bronze ring, not just where a map began
 #define ANCHOR_NAME(a)    ((a)->reserved & 0xFF)
@@ -77,6 +79,7 @@ static const s8 sCodeDy[4] = { 1, -1, 0, 0 };
 struct ThreadFloor { u16 floor; u16 firstTwin; };
 struct AnchorHere { u8 x, y; u8 nameId; };
 struct CrackedWall { u8 x, y; u16 flag; u16 broken; bool8 done; };
+struct Drift { u8 x, y; u16 flag; };
 
 enum
 {
@@ -96,7 +99,8 @@ static EWRAM_DATA struct
     struct ThreadFloor floors[MAX_FLOORS];
     struct AnchorHere anchors[MAX_ANCHORS_HERE];
     struct CrackedWall walls[MAX_WALLS];
-    u8 floorCount, anchorCount, wallCount;
+    struct Drift drifts[MAX_DRIFTS];
+    u8 floorCount, anchorCount, wallCount, driftCount;
     bool8 segmentStarted;  // this map's segment has begun
     bool8 warnedLow;
     bool8 seenPlayer;      // lastX/lastY are valid
@@ -110,7 +114,8 @@ static EWRAM_DATA struct
     u8 aDir;               // the charge's direction
     u8 aCharged;           // tiles charged, to walk back
     u8 aRestSteps;
-    u8 aStunAfterStep;     // frames of stun once the step into a broken wall ends
+    u8 aOptions;           // ICHOR_CHARGER_* bits
+    u16 aStunAfterStep;    // frames of stun once the step into a broken wall or a drift ends
     u8 aPatrolFacing;      // the way he faced when he left his patrol
     bool8 aPendingFace;
     u8 recruitBumped;      // the Titanborn object that last said "Watch it, recruit." + 1
@@ -274,12 +279,28 @@ void Ichor_AddCrackedWall(void)
     }
 }
 
-// special Ichor_StartAsterion: object VAR_0x8004 (a local id on this map) is Asterion.
+// special Ichor_StartAsterion: object VAR_0x8004 (a local id on this map) is
+// Asterion, or another charger with ICHOR_CHARGER_* options in VAR_0x8005.
 void Ichor_StartAsterion(void)
 {
     sLab.asterionLocalId = gSpecialVar_0x8004;
+    sLab.aOptions = gSpecialVar_0x8005;
     sLab.aState = AST_PATROL;
     sLab.aPendingFace = FALSE;
+}
+
+// special Ichor_AddDrift: a snow drift at (VAR_0x8004, VAR_0x8005). A charge
+// that runs into it stops there, stuck for 6 seconds, and sets flag VAR_0x8006
+// (0 for none), so the map can count which drifts caught him.
+void Ichor_AddDrift(void)
+{
+    if (sLab.driftCount < MAX_DRIFTS)
+    {
+        sLab.drifts[sLab.driftCount].x = gSpecialVar_0x8004;
+        sLab.drifts[sLab.driftCount].y = gSpecialVar_0x8005;
+        sLab.drifts[sLab.driftCount].flag = gSpecialVar_0x8006;
+        sLab.driftCount++;
+    }
 }
 
 bool32 Ichor_IsThreadedMap(void)
@@ -842,10 +863,30 @@ static u32 GetAlertFrames(void)
     return sFrames[DifficultyStep() + 1];
 }
 
-static void Knockdown(void)
+static void Knockdown(struct ObjectEvent *obj)
 {
+    if (sLab.aOptions & ICHOR_CHARGER_HIT_SCRIPT)
+    {
+        // The object's own script handles the hit (a knockback, a battle); then it patrols again
+        gSpecialVar_0x8004 = sLab.asterionLocalId;
+        gSpecialVar_0x8005 = ICHOR_CHARGE_HIT;
+        ResumePatrol(obj);
+        ScriptContext_SetupScript(GetObjectEventScriptPointerByObjectEventId(obj - gObjectEvents));
+        return;
+    }
     sLab.aState = AST_DOWN;
     ScriptContext_SetupScript(EventScript_IchorAsterionKnockdown);
+}
+
+static const struct Drift *FindDrift(s32 x, s32 y)
+{
+    u32 i;
+    for (i = 0; i < sLab.driftCount; i++)
+    {
+        if (sLab.drifts[i].x + MAP_OFFSET == x && sLab.drifts[i].y + MAP_OFFSET == y)
+            return &sLab.drifts[i];
+    }
+    return NULL;
 }
 
 static struct CrackedWall *FindWall(s32 x, s32 y)
@@ -880,6 +921,8 @@ static void ChargeStep(struct ObjectEvent *obj, s16 px, s16 py)
     s32 ny = obj->currentCoords.y + sCodeDy[dir - 1];
     struct CrackedWall *wall;
 
+    const struct Drift *drift;
+
     if (sLab.aStunAfterStep)
     {
         u32 frames = sLab.aStunAfterStep;
@@ -889,7 +932,7 @@ static void ChargeStep(struct ObjectEvent *obj, s16 px, s16 py)
     }
     if (IsPlayerAt(nx, ny))
     {
-        Knockdown();  // he hits you, even half a step out of the way
+        Knockdown(obj);  // he hits you, even half a step out of the way
         return;
     }
     switch (GetCollisionAtCoords(obj, nx, ny, dir))
@@ -897,6 +940,13 @@ static void ChargeStep(struct ObjectEvent *obj, s16 px, s16 py)
     case COLLISION_NONE:
         Steer(obj, GetWalkFasterMovementAction(dir));
         sLab.aCharged++;
+        if ((drift = FindDrift(nx, ny)) != NULL)
+        {
+            // A snow drift: he ploughs in and sticks
+            if (drift->flag != 0)
+                FlagSet(drift->flag);
+            sLab.aStunAfterStep = DRIFT_STUCK_FRAMES;
+        }
         break;
     default:
         wall = FindWall(nx, ny);
@@ -931,7 +981,8 @@ static void UpdateAsterion(bool32 stepped, s16 px, s16 py)
     case AST_PATROL:
         if (CanSee(obj, px, py))
             LeavePatrol(obj, AST_ALERT);
-        else if (stepped && abs(px - obj->currentCoords.x) + abs(py - obj->currentCoords.y) <= GetAsterionHearing())
+        else if (stepped && !(sLab.aOptions & ICHOR_CHARGER_DEAF)
+              && abs(px - obj->currentCoords.x) + abs(py - obj->currentCoords.y) <= GetAsterionHearing())
             LeavePatrol(obj, AST_LISTEN);
         break;
     case AST_LISTEN:
@@ -974,14 +1025,18 @@ static void UpdateAsterion(bool32 stepped, s16 px, s16 py)
     case AST_CHARGE:
         if ((obj->currentCoords.x == px && obj->currentCoords.y == py))
         {
-            Knockdown();  // the player stepped into him
+            Knockdown(obj);  // the player stepped into him
             break;
         }
         if (IsBetweenTiles(obj))
             ChargeStep(obj, px, py);
         break;
     case AST_STUNNED:
-        if (--sLab.aTimer == 0)
+        if (--sLab.aTimer != 0)
+            break;
+        if (sLab.aOptions & ICHOR_CHARGER_NO_RETURN)
+            ResumePatrol(obj);  // turns and goes back to wandering where it stands
+        else
             sLab.aState = AST_RETURN;
         break;
     case AST_RETURN:

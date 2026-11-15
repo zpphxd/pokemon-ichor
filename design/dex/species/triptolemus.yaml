@@ -1,0 +1,149 @@
+line: triptolemus
+species:
+
+- dex: 50
+  concept: Wheat serpent
+  name: Stachyss
+  etymology: stachys (Greek, ear of wheat) + hiss
+  category: Wheat Snake
+  types: [Grass]
+  abilities: [Shed Skin, Harvest]
+  hidden_ability: Seed Sower
+  base_stats: {hp: 55, atk: 62, def: 50, spa: 48, spd: 50, spe: 45}
+  ev_yield: {atk: 1}
+  exp_yield: 62
+  catch_rate: 120
+  gender: {female_pct: 50}
+  egg_groups: [Grass, Dragon]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 1.2
+  weight_kg: 7.5
+  myth: >-
+    When Demeter ended her mourning, she gave Triptolemus of Eleusis seed
+    grain and a winged chariot drawn by serpents, and sent him across the
+    world to teach mortals to sow and reap (Ovid, Metamorphoses 5; Apollodorus
+    1.5.2).
+  expression: >-
+    One of the chariot's serpents before it has wings. Ripe wheat grows along
+    its spine, and where it sheds its skin the furrow sprouts.
+  art: >-
+    Small: it fills about 40×30 px, coiled low. A slim serpent in
+    three-quarter view facing left, raised in an S-curve with its head tilted
+    curiously. A row of golden wheat ears grows along its spine like a crest,
+    and two long awns curl back from its head like a hood. Smooth scales, a
+    pale belly and round, friendly eyes. Olive scales, sun-gold wheat,
+    limestone belly, black-figure ink outline. The follower winds along behind
+    the player, leaving a trail of seed.
+  shiny: Its scales turn terracotta and its wheat pale marble.
+  dex_entry:
+    - It slides through the wheat unseen, for
+    - the ears on its back look just like the
+    - crop. Any field it lives in grows thick.
+  habitat: >-
+    Common in Eleusa Village's wheat fields by day, hidden among the crop.
+  learnset:
+    level_up:
+      - [1, Wrap]
+      - [1, Leafage]
+      - [5, Growth]
+      - [8, Leech Seed]
+      - [11, Bullet Seed]
+      - [14, Glare]
+      - [17, Synthesis]
+      - [20, Coil]
+      - [23, Seed Bomb]
+      - [26, Worry Seed]
+      - [29, Grassy Terrain]
+      - [32, Leaf Blade]
+      - [36, Power Whip]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Sunny Day,
+      Grassy Terrain, Bullet Seed, Seed Bomb, Magical Leaf, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Solar Blade, Trailblaze, Grassy Glide, Worry Seed, Nature Power, Dig, Iron Tail,
+      Dragon Tail, Scary Face, Body Slam, Take Down, Helping Hand, Swift]
+    egg: [Rototiller, Ingrain, Sucker Punch, Strength Sap, Aromatherapy, Wring Out]
+  signature: >-
+    Harvest regrows its Berry, and Seed Sower spreads Grassy Terrain whenever
+    it is hit. Leech Seed and Bullet Seed come early: it sows from its first
+    battle.
+  new_move: null
+
+- dex: 51
+  concept: Winged sower
+  name: Stachypter
+  etymology: stachys (Greek, ear of wheat) + pteron (Greek, wing)
+  category: Sower
+  types: [Grass, Dragon]
+  abilities: [Shed Skin, Harvest]
+  hidden_ability: Seed Sower
+  base_stats: {hp: 85, atk: 105, def: 80, spa: 70, spd: 75, spe: 85}
+  ev_yield: {atk: 2}
+  exp_yield: 178
+  catch_rate: 45
+  gender: {female_pct: 50}
+  egg_groups: [Grass, Dragon]
+  egg_cycles: 20
+  growth_rate: Medium Slow
+  height_m: 3.2
+  weight_kg: 82.0
+  myth: >-
+    Triptolemus flew Demeter's serpent chariot over every land, scattering
+    seed from the sky and teaching each people to farm (Ovid, Metamorphoses 5;
+    Apollodorus 1.5.2). On Attic vases he sits in the winged car holding ears
+    of wheat.
+  expression: >-
+    The serpent has become its own chariot. Broad leaf-wings carry it over the
+    fields, and seed falls from them like rain wherever it flies.
+  art: >-
+    Large: it fills about 58×56 px. A long winged serpent-dragon in
+    three-quarter view facing left, its body looping beneath two broad wings
+    of layered leaf blades. Its spine crest has grown into thick golden wheat
+    ears, and a stream of seed spills from the wingtips. A long, wise head with
+    swept-back awn horns and a calm sun-gold eye. Olive and cypress scales,
+    sun-gold wheat, limestone belly, a pale dragon-teal accent on the wing
+    veins, black-figure ink outline. The back sprite shows the full wingspan
+    with seed falling.
+  shiny: Its scales turn terracotta and its wheat ripens to pale marble.
+  dex_entry:
+    - It flies over the fields at dawn,
+    - shaking seed from its wings. It is said
+    - the first farmers learned to sow by
+    - watching it.
+  habitat: >-
+    Evolves from Stachyss at level 30. Rare over Eleusa Village's wheat fields
+    at dawn.
+  learnset:
+    level_up:
+      - [0, Scale Shot]
+      - [1, Wrap]
+      - [1, Leafage]
+      - [1, Growth]
+      - [1, Leech Seed]
+      - [11, Bullet Seed]
+      - [14, Glare]
+      - [17, Synthesis]
+      - [20, Coil]
+      - [23, Seed Bomb]
+      - [26, Worry Seed]
+      - [29, Grassy Terrain]
+      - [34, Dragon Claw]
+      - [38, Leaf Blade]
+      - [42, Grassy Glide]
+      - [46, Tailwind]
+      - [50, Dragon Rush]
+      - [55, Power Whip]
+      - [60, Outrage]
+    teachable: [Protect, Rest, Sleep Talk, Substitute, Facade, Endure, Attract, Double Team, Return,
+      Frustration, Hidden Power, Secret Power, Swagger, Round, Toxic, Snore, Sunny Day,
+      Grassy Terrain, Bullet Seed, Seed Bomb, Magical Leaf, Energy Ball, Giga Drain, Grass Knot,
+      Solar Beam, Solar Blade, Trailblaze, Grassy Glide, Worry Seed, Nature Power, Dig, Iron Tail,
+      Dragon Tail, Scary Face, Body Slam, Take Down, Helping Hand, Swift, Dragon Claw, Dragon Pulse,
+      Outrage, Draco Meteor, Dragon Dance, Breaking Swipe, Scale Shot, Dual Wingbeat, Fly, Tailwind,
+      Earthquake, Bulldoze, Stomping Tantrum, Leaf Storm, Petal Blizzard, Hyper Beam, Giga Impact]
+    egg: []
+  signature: >-
+    It learns Scale Shot on evolving, shedding seed-scales as it flies. Seed
+    Sower and Grassy Glide make it a physical attacker that plants its own
+    terrain and then strikes first in it.
+  new_move: null

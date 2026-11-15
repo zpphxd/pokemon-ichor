@@ -19,18 +19,28 @@
       "respawn_y": 4
     },
     {
+      "id": "HEAL_LOCATION_HERM_KALLISTE_ROUTE_1",
+      "map": "MAP_KALLISTE_ROUTE1",
+      "x": 14,
+      "y": 21
+    },
+    {
+      "id": "HEAL_LOCATION_EMPORION_CITY",
+      "map": "MAP_EMPORION_CITY",
+      "x": 16,
+      "y": 37,
+      "respawn_map": "MAP_EMPORION_CITY_ASCLEPEION",
+      "respawn_npc": "LOCALID_EMPORION_HEALER",
+      "respawn_x": 8,
+      "respawn_y": 4
+    },
+    {
       "id": "HEAL_LOCATION_KYTHERA_SKANDEIA",
       "map": "MAP_KYTHERA_SKANDEIA",
       "x": 22,
       "y": 16,
       "respawn_map": "MAP_KYTHERA_SKANDEIA_ASCLEPEION",
       "respawn_npc": "LOCALID_SKANDEIA_HEALER"
-    },
-    {
-      "id": "HEAL_LOCATION_HERM_KALLISTE_ROUTE_1",
-      "map": "MAP_KALLISTE_ROUTE1",
-      "x": 14,
-      "y": 21
     },
     {
       "id": "HEAL_LOCATION_HERM_KYTHERA_FOAM_ROAD",
