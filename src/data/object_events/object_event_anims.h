@@ -1555,6 +1555,107 @@ static const union AnimCmd *const sAnimTable_Nurse[] = {
     [ANIM_NURSE_BOW] = sAnim_NurseBow,
 };
 
+// Ichor: the Theoxenia's Sam and Cami (tools/ichor/art/sprites_npc_theoxenia.py).
+// Each extra animation sits in ANIM_NURSE_BOW's slot, so a script plays it
+// with nurse_joy_bow (MOVEMENT_ACTION_NURSE_JOY_BOW_DOWN): that starts the
+// slot facing down and waitmovement holds until it ends. So each one ends.
+
+// The lyre strum, facing down, frames 9-11: two bars, a pause with his eyes
+// shut on each, then the hand comes down. About a second and three quarters.
+static const union AnimCmd sAnim_IchorLyreStrum[] =
+{
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_FRAME(11, 16),
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(11, 16),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END,
+};
+
+// Cami on the well's bench, her back to you (frame 9). Her face-north and
+// step-north entries hold the seat, so MOVEMENT_TYPE_FACE_UP places her
+// sitting and every respawn, face_up or turn keeps her there. She never
+// walks north; walking any other way is the standard walk.
+static const union AnimCmd sAnim_IchorCamiSit[] =
+{
+    ANIMCMD_FRAME(9, 16),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sAnim_IchorCamiSitStep[] =
+{
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_FRAME(9, 8),
+    ANIMCMD_JUMP(0),
+};
+
+// The reveal: she rises from the bench (frame 10) and turns to face down,
+// the way nurse_joy_bow leaves her facing.
+static const union AnimCmd sAnim_IchorCamiRise[] =
+{
+    ANIMCMD_FRAME(9, 16),
+    ANIMCMD_FRAME(10, 24),
+    ANIMCMD_FRAME(0, 16),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sAnimTable_IchorLyre[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_FaceNorth,
+    [ANIM_STD_FACE_WEST] = sAnim_FaceWest,
+    [ANIM_STD_FACE_EAST] = sAnim_FaceEast,
+    [ANIM_STD_GO_SOUTH] = sAnim_GoSouth,
+    [ANIM_STD_GO_NORTH] = sAnim_GoNorth,
+    [ANIM_STD_GO_WEST] = sAnim_GoWest,
+    [ANIM_STD_GO_EAST] = sAnim_GoEast,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_GoFastSouth,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_GoFastNorth,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_GoFastWest,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_GoFastEast,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_GoFasterSouth,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_GoFasterNorth,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_GoFasterWest,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_GoFasterEast,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_GoFastestSouth,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_GoFastestNorth,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_GoFastestWest,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_GoFastestEast,
+    [ANIM_ICHOR_STRUM] = sAnim_IchorLyreStrum,
+};
+
+static const union AnimCmd *const sAnimTable_IchorCami[] = {
+    [ANIM_STD_FACE_SOUTH] = sAnim_FaceSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_IchorCamiSit,
+    [ANIM_STD_FACE_WEST] = sAnim_FaceWest,
+    [ANIM_STD_FACE_EAST] = sAnim_FaceEast,
+    [ANIM_STD_GO_SOUTH] = sAnim_GoSouth,
+    [ANIM_STD_GO_NORTH] = sAnim_IchorCamiSitStep,
+    [ANIM_STD_GO_WEST] = sAnim_GoWest,
+    [ANIM_STD_GO_EAST] = sAnim_GoEast,
+    [ANIM_STD_GO_FAST_SOUTH] = sAnim_GoFastSouth,
+    [ANIM_STD_GO_FAST_NORTH] = sAnim_GoFastNorth,
+    [ANIM_STD_GO_FAST_WEST] = sAnim_GoFastWest,
+    [ANIM_STD_GO_FAST_EAST] = sAnim_GoFastEast,
+    [ANIM_STD_GO_FASTER_SOUTH] = sAnim_GoFasterSouth,
+    [ANIM_STD_GO_FASTER_NORTH] = sAnim_GoFasterNorth,
+    [ANIM_STD_GO_FASTER_WEST] = sAnim_GoFasterWest,
+    [ANIM_STD_GO_FASTER_EAST] = sAnim_GoFasterEast,
+    [ANIM_STD_GO_FASTEST_SOUTH] = sAnim_GoFastestSouth,
+    [ANIM_STD_GO_FASTEST_NORTH] = sAnim_GoFastestNorth,
+    [ANIM_STD_GO_FASTEST_WEST] = sAnim_GoFastestWest,
+    [ANIM_STD_GO_FASTEST_EAST] = sAnim_GoFastestEast,
+    [ANIM_ICHOR_RISE] = sAnim_IchorCamiRise,
+};
+// End of Ichor animations
+
 static const union AnimCmd *const sAnimTable_FieldMove[] = {
     [ANIM_FIELD_MOVE] = sAnim_FieldMove,
 };
@@ -1635,6 +1736,15 @@ static const struct StepAnimTable sStepAnimTables[] = {
     },
     {
         .anims = sAnimTable_Fishing,
+        .animPos = {1, 3, 0, 2},
+    },
+    // Ichor: the Theoxenia's tables walk and face like sAnimTable_Standard
+    {
+        .anims = sAnimTable_IchorLyre,
+        .animPos = {1, 3, 0, 2},
+    },
+    {
+        .anims = sAnimTable_IchorCami,
         .animPos = {1, 3, 0, 2},
     },
     {},
