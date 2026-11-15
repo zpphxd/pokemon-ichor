@@ -473,3 +473,77 @@ const struct Tileset gTileset_Westsea =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Westsea,
     .callback = NULL,
 };
+// Ichor: steppe, the steppe: Thrace, the Thermodon and Scythia (post-game). Porytiles-managed, built by
+// tools/ichor/art/farlands_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Steppe =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Steppe,
+    .palettes = gTilesetPalettes_PorytilesManaged_Steppe,
+    .metatiles = gMetatiles_PorytilesManaged_Steppe,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Steppe,
+    .callback = NULL,
+};
+
+// Ichor: far_west, the far west: Erytheia, the Pillars, the Ocean Stream (post-game). Porytiles-managed, built by
+// tools/ichor/art/farlands_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_FarWest =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_FarWest,
+    .palettes = gTilesetPalettes_PorytilesManaged_FarWest,
+    .metatiles = gMetatiles_PorytilesManaged_FarWest,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_FarWest,
+    .callback = InitTilesetAnim_PorytilesManaged_FarWest,
+};
+
+// Ichor: hesperides, the Garden of the Hesperides and the Atlas range (post-game). Porytiles-managed, built by
+// tools/ichor/art/farlands_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_Hesperides =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Hesperides,
+    .palettes = gTilesetPalettes_PorytilesManaged_Hesperides,
+    .metatiles = gMetatiles_PorytilesManaged_Hesperides,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Hesperides,
+    .callback = InitTilesetAnim_PorytilesManaged_Hesperides,
+};
+
+// Ichor: steppe_town, the Greek colonies of the steppe coast: Abdera and Olbia (post-game). Porytiles-managed, built by
+// tools/ichor/art/farlands_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_SteppeTown =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_SteppeTown,
+    .palettes = gTilesetPalettes_PorytilesManaged_SteppeTown,
+    .metatiles = gMetatiles_PorytilesManaged_SteppeTown,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_SteppeTown,
+    .callback = NULL,
+};
+
+// Ichor: steppe_camp, the horse-peoples' camps: Themiskyra, Diomedes's yard, the Wagon Camp (post-game). Porytiles-managed, built by
+// tools/ichor/art/farlands_build.py for the aethos primary: its ground cells
+// borrow aethos's grass, path, sand, sea, shallows and waterfall, so rebuild
+// it whenever aethos changes.
+const struct Tileset gTileset_SteppeCamp =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_SteppeCamp,
+    .palettes = gTilesetPalettes_PorytilesManaged_SteppeCamp,
+    .metatiles = gMetatiles_PorytilesManaged_SteppeCamp,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_SteppeCamp,
+    .callback = InitTilesetAnim_PorytilesManaged_SteppeCamp,
+};

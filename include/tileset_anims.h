@@ -43,4 +43,13 @@ void InitTilesetAnim_MtEmber(void);
 // [Porytiles] Auto-generated declaration. Do not remove.
 void InitTilesetAnim_PorytilesManaged_Aethos(void);
 
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_FarWest(void);
+
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_Hesperides(void);
+
+// [Porytiles] Auto-generated declaration. Do not remove.
+void InitTilesetAnim_PorytilesManaged_SteppeCamp(void);
+
 #endif // GUARD_TILESET_ANIMS_H

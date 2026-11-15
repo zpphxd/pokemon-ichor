@@ -1165,4 +1165,20 @@
 #define METATILE_TempleDemeter_DraughtDoor_B            0x274
 // end gTileset_TempleDemeter
 
+// gTileset_Steppe (Ichor: the steppe: Thrace, the Thermodon and Scythia), written by tools/ichor/art/farlands_build.py
+#define METATILE_Steppe_DigMound                 0x32A
+#define METATILE_Steppe_DigMound_Dug             0x32B
+#define METATILE_Steppe_Kurgan_Door_Shut         0x33D
+#define METATILE_Steppe_Kurgan_Door              0x345
+#define METATILE_Steppe_Kurgan_Crown             0x32D
+#define METATILE_Steppe_Kurgan_Crown_Idol        0x346
+// end gTileset_Steppe
+
+// gTileset_Hesperides (Ichor: the Garden of the Hesperides and the Atlas range), written by tools/ichor/art/farlands_build.py
+#define METATILE_Hesperides_Ladon_Head               0x272
+#define METATILE_Hesperides_Ladon_Coil               0x273
+#define METATILE_Hesperides_Ladon_W                  0x278
+#define METATILE_Hesperides_Ladon_E                  0x279
+// end gTileset_Hesperides
+
 #endif // GUARD_METATILE_LABELS_H
