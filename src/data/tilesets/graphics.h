@@ -739,6 +739,8 @@ const u16 gTilesetPalettes_LabyrinthDawn[][16] =
     INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/10.gbapal"),
     INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/11.gbapal"),
     INCBIN_U16("data/tilesets/secondary/labyrinth/porytiles_bin/dawn/12.gbapal")
+};
+
 // Ichor: chalkeon
 const u32 gTilesetTiles_PorytilesManaged_Chalkeon[] = INCBIN_U32("data/tilesets/secondary/chalkeon/porytiles_bin/tiles.4bpp.lz");
 
