@@ -576,3 +576,42 @@ const struct Tileset gTileset_ThyrsaStone =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_ThyrsaStone,
     .callback = NULL,
 };
+
+// Ichor (Act II): Kirrha, Delphoi's harbor (the harbors agent): the quay, the fish market, Parnassos's crags and the Phaidriades, the pilgrims' gate, the houses. A Porytiles-managed secondary for the aethos primary,
+// built by tools/ichor/art/kirrha_build.py. It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_Kirrha =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kirrha,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kirrha,
+    .metatiles = gMetatiles_PorytilesManaged_Kirrha,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kirrha,
+    .callback = NULL,
+};
+
+// Ichor (Act II): Aigion across the gulf (the harbors agent): the quay, the grove of Zeus, Helike's drowned roofs, the ochre houses. A Porytiles-managed secondary for the aethos primary,
+// built by tools/ichor/art/kirrha_build.py. It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_Aigion =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Aigion,
+    .palettes = gTilesetPalettes_PorytilesManaged_Aigion,
+    .metatiles = gMetatiles_PorytilesManaged_Aigion,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Aigion,
+    .callback = NULL,
+};
+
+// Ichor (Act II): Panopeus's ferry, Route 10 (the harbors agent): the deck, the patched sail, the goats' pen. A Porytiles-managed secondary for the aethos primary,
+// built by tools/ichor/art/kirrha_build.py. It uses only its own tiles and palettes 6-12.
+const struct Tileset gTileset_GulfFerry =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_GulfFerry,
+    .palettes = gTilesetPalettes_PorytilesManaged_GulfFerry,
+    .metatiles = gMetatiles_PorytilesManaged_GulfFerry,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_GulfFerry,
+    .callback = NULL,
+};

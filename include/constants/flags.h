@@ -857,12 +857,12 @@
 #define FLAG_UNUSED_0x326                                           0x326 // Unused Flag
 #define FLAG_UNUSED_0x327                                           0x327 // Unused Flag
 #define FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WANDAS_BOYFRIEND     0x328
-#define FLAG_UNUSED_0x329                                           0x329 // Unused Flag
-#define FLAG_UNUSED_0x32A                                           0x32A // Unused Flag
-#define FLAG_UNUSED_0x32B                                           0x32B // Unused Flag
-#define FLAG_UNUSED_0x32C                                           0x32C // Unused Flag
-#define FLAG_UNUSED_0x32D                                           0x32D // Unused Flag
-#define FLAG_UNUSED_0x32E                                           0x32E // Unused Flag
+#define FLAG_ICHOR_HIDDEN_KIRRHA_BRONZE_OBOL                        0x329 // Ichor: Act II hidden item: Kirrha Bronze Obol in a crack at the pilgrims' gate
+#define FLAG_ICHOR_HIDDEN_KIRRHA_PEARL                              0x32A // Ichor: Act II hidden item: Kirrha Pearl in the fish market's drain under the fig
+#define FLAG_ICHOR_HIDDEN_KIRRHA_HEART_SCALE                        0x32B // Ichor: Act II hidden item: Kirrha Heart Scale at the end of the quay
+#define FLAG_ICHOR_HIDDEN_GULF_FERRY_HEART_SCALE                    0x32C // Ichor: Act II hidden item: the Gulf ferry's Heart Scale in the goat pen
+#define FLAG_ICHOR_HIDDEN_AIGION_HONEY                              0x32D // Ichor: Act II hidden item: Aigion Honey in a hollow plane in Zeus's grove
+#define FLAG_ICHOR_HIDDEN_AIGION_PEARL                              0x32E // Ichor: Act II hidden item: Aigion Pearl at the quay's end over the drowned roofs
 #define FLAG_UNUSED_0x32F                                           0x32F // Unused Flag
 #define FLAG_UNUSED_0x330                                           0x330 // Unused Flag
 #define FLAG_UNUSED_0x331                                           0x331 // Unused Flag
@@ -1727,6 +1727,8 @@
 // tablets are 1-8, found at START+n-1 and read at START+8+n-1.
 #define FLAG_ICHOR_PROPHECY_3                   (FLAG_ICHOR_PROPHECY_START + 0x02) // tablet #3 dug up under Eudora's fig (ICHOR_STUB_DIG: not yet)
 #define FLAG_ICHOR_PROPHECY_3_READ              (FLAG_ICHOR_PROPHECY_START + 0x0A) // Alethea read tablet #3 (beat 30)
+// Decoys in the theoxenia range (BUILD.md, batch 2's index blocks: +0x20-0x27)
+#define FLAG_ICHOR_DECOY_KIRRHA                 (FLAG_ICHOR_THEOXENIA_START + 0x23) // Act II: paid Kirrha's beggar 100 for his drink (a theoxenia decoy; the harbors agent)
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
 #define FLAG_ICHOR_ACT2_BEGUN                   (FLAG_ICHOR_GENERAL_START + 0x100) // Ichor: Act II: the vines are cut and Route 6 opens (beat 26)
 #define FLAG_ICHOR_VISITED_ELEUTHERAI           (FLAG_ICHOR_GENERAL_START + 0x101) // Ichor: Act II: reached Eleutherai on Mt. Kithairon (beat 27)
@@ -1811,6 +1813,20 @@
 #define FLAG_ICHOR_BOARDED_GULF_FERRY           (FLAG_ICHOR_GENERAL_START + 0x167) // Ichor: Act II: boarded Panopeus's ferry at Kirrha (beat 37B)
 #define FLAG_ICHOR_GULF_CROSSED                 (FLAG_ICHOR_GENERAL_START + 0x168) // Ichor: Act II: crossed the Gulf to Aigion (beat 37B-C)
 #define FLAG_ICHOR_VISITED_AIGION               (FLAG_ICHOR_GENERAL_START + 0x169) // Ichor: Act II: Aigion is a fly target (beat 37C)
+#define FLAG_ICHOR_ARRIVED_KIRRHA               (FLAG_ICHOR_GENERAL_START + 0x198) // Ichor: Act II: Alethea's lines on Kirrha's quay have played (beat 37A)
+#define FLAG_ICHOR_KIRRHA_GATE_SEEN             (FLAG_ICHOR_GENERAL_START + 0x199) // Ichor: Act II: the temple guards at Kirrha's pilgrims' gate said soon (beat 37A)
+#define FLAG_ICHOR_KIRRHA_KRONIST_READ          (FLAG_ICHOR_GENERAL_START + 0x19A) // Ichor: Act II: Kirrha's Kronist tried a reading once; now always come back at noon
+#define FLAG_ICHOR_HIDE_ALETHEA_KIRRHA          (FLAG_ICHOR_GENERAL_START + 0x19B) // Ichor: Act II: hides Alethea on Kirrha's quay once the ferry sails (beat 37B)
+#define FLAG_ICHOR_HIDE_ALETHEA_GULF_FERRY      (FLAG_ICHOR_GENERAL_START + 0x19C) // Ichor: Act II: hides Alethea at the Gulf ferry's stern after the first crossing
+#define FLAG_ICHOR_HIDE_ALETHEA_AIGION          (FLAG_ICHOR_GENERAL_START + 0x19D) // Ichor: Act II: hides Alethea at Aigion's south road (shown from beat 37C until Route 11)
+#define FLAG_ICHOR_FERRY_ALETHEA_SPOKE          (FLAG_ICHOR_GENERAL_START + 0x19E) // Ichor: Act II: Alethea's lines at the Gulf ferry's stern have played (beat 37B)
+#define FLAG_ICHOR_FERRY_TO_KIRRHA              (FLAG_ICHOR_GENERAL_START + 0x19F) // Ichor: Act II: the Gulf ferry is crossing from Aigion to Kirrha (the return run)
+#define FLAG_ICHOR_ITEM_KIRRHA_BIG_PEARL        (FLAG_ICHOR_GENERAL_START + 0x1A0) // Ichor: Act II: item ball: Kirrha Big Pearl on the rock in the bay (the Conch)
+#define FLAG_ICHOR_ITEM_GULF_FERRY_SUPER_POTION (FLAG_ICHOR_GENERAL_START + 0x1A1) // Ichor: Act II: item ball: the Gulf ferry's Super Potion among the bow's amphorae
+#define FLAG_ICHOR_ITEM_KIRRHA_HYPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x1A2) // Ichor: Act II: item ball: Kirrha Hyper Potion where the shore path under Apollo's plain ends
+#define FLAG_ICHOR_ITEM_KIRRHA_NET_BALL         (FLAG_ICHOR_GENERAL_START + 0x1A3) // Ichor: Act II: item ball: Kirrha Net Ball at the far end of the beach
+#define FLAG_ICHOR_AIGION_ARRIVAL_SEEN          (FLAG_ICHOR_GENERAL_START + 0x1A4) // Ichor: Act II: Alethea's lines on Aigion's quay have played (beat 37C)
+#define FLAG_ICHOR_KIRRHA_KRONIST_ALETHEA       (FLAG_ICHOR_GENERAL_START + 0x1A5) // Ichor: Act II: Alethea said her piece about the Kronist's kind lies (beat 37A)
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)
 // Ichor bank flags: end

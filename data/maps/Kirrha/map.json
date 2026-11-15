@@ -2,7 +2,7 @@
   "id": "MAP_KIRRHA",
   "name": "Kirrha",
   "layout": "LAYOUT_KIRRHA",
-  "music": "MUS_ICHOR_AKTI",
+  "music": "MUS_ICHOR_ROAD",
   "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_KIRRHA",
   "requires_flash": false,
@@ -13,9 +13,377 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
-  "object_events": [],
-  "warp_events": [],
-  "coord_events": [],
-  "bg_events": []
+  "connections": [
+    {
+      "map": "MAP_ROUTE9_SCHISTE",
+      "offset": 18,
+      "direction": "up"
+    }
+  ],
+  "object_events": [
+    {
+      "local_id": "LOCALID_KIRRHA_ALETHEA",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 16,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Alethea",
+      "flag": "FLAG_ICHOR_HIDE_ALETHEA_KIRRHA"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_ALETHEA_GATE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 4,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Alethea",
+      "flag": "FLAG_TEMP_2"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_ALETHEA_ROAD",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ALETHEA",
+      "x": 26,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Alethea",
+      "flag": "FLAG_TEMP_3"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_GUARD_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TEMPLE_GUARD",
+      "x": 5,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_TempleGuard",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_GUARD_2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_TEMPLE_GUARD",
+      "x": 6,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_TempleGuard",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_KRONIST",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_KRONIST",
+      "x": 20,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Kronist",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_PANOPEUS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PANOPEUS",
+      "x": 23,
+      "y": 23,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Panopeus",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_PILGRIM_1",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET",
+      "x": 6,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Pilgrim1",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_PILGRIM_2",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET",
+      "x": 12,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Pilgrim2",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_PILGRIM_3",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_PILGRIM_BLANKET",
+      "x": 19,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Pilgrim3",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_FISHWIFE",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_WOMAN",
+      "x": 16,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Fishwife",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_BEGGAR",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 10,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_Beggar",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_FENCE_WATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_ELDER_M",
+      "x": 10,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Kirrha_EventScript_FenceWatcher",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_ITEM_BIG_PEARL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 9,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_BIG_PEARL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_KIRRHA_BIG_PEARL"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_ITEM_HYPER_POTION",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 2,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HYPER_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_KIRRHA_HYPER_POTION"
+    },
+    {
+      "local_id": "LOCALID_KIRRHA_ITEM_NET_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 34,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_NET_BALL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ICHOR_ITEM_KIRRHA_NET_BALL"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 23,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_KIRRHA_INN",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 21,
+      "y": 20,
+      "elevation": 0,
+      "dest_map": "MAP_KIRRHA_AGORA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 15,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_KIRRHA_MULETEERS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 21,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_KIRRHA_SWEEPERS_HOUSE",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 26,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Kirrha_EventScript_Arrival"
+    },
+    {
+      "type": "trigger",
+      "x": 27,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Kirrha_EventScript_Arrival"
+    },
+    {
+      "type": "trigger",
+      "x": 28,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Kirrha_EventScript_Arrival"
+    },
+    {
+      "type": "trigger",
+      "x": 29,
+      "y": 2,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "Kirrha_EventScript_Arrival"
+    }
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 26,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Kirrha_EventScript_TownSign"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Kirrha_EventScript_GateSign"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 15,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Kirrha_EventScript_FenceSign"
+    },
+    {
+      "type": "sign",
+      "x": 25,
+      "y": 22,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Kirrha_EventScript_FerrySign"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Kirrha_EventScript_DigFence"
+    },
+    {
+      "type": "hidden_item",
+      "x": 7,
+      "y": 9,
+      "elevation": 3,
+      "item": "ITEM_RELIC_COPPER",
+      "flag": "FLAG_ICHOR_HIDDEN_KIRRHA_BRONZE_OBOL",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 15,
+      "y": 19,
+      "elevation": 3,
+      "item": "ITEM_PEARL",
+      "flag": "FLAG_ICHOR_HIDDEN_KIRRHA_PEARL",
+      "quantity": 1,
+      "underfoot": false
+    },
+    {
+      "type": "hidden_item",
+      "x": 3,
+      "y": 23,
+      "elevation": 3,
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_ICHOR_HIDDEN_KIRRHA_HEART_SCALE",
+      "quantity": 1,
+      "underfoot": false
+    }
+  ]
 }

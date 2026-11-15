@@ -31,6 +31,16 @@
       "y": 32,
       "respawn_map": "MAP_THYRSA_CITY_ASCLEPEION",
       "respawn_npc": "LOCALID_THYRSA_HEALER"
+    },
+    {
+      "id": "HEAL_LOCATION_AIGION",
+      "map": "MAP_AIGION",
+      "x": 12,
+      "y": 13,
+      "respawn_map": "MAP_AIGION",
+      "respawn_npc": "LOCALID_AIGION_GROVE_KEEPER",
+      "respawn_x": 12,
+      "respawn_y": 13
     }
   ]
 }

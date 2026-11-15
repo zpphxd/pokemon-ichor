@@ -919,3 +919,72 @@ const u16 gTilesetPalettes_PorytilesManaged_ThyrsaStone[][16] =
     INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/15.gbapal")
 };
+
+// Ichor: kirrha
+const u32 gTilesetTiles_PorytilesManaged_Kirrha[] = INCBIN_U32("data/tilesets/secondary/kirrha/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Kirrha[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/kirrha/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: aigion
+const u32 gTilesetTiles_PorytilesManaged_Aigion[] = INCBIN_U32("data/tilesets/secondary/aigion/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_Aigion[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/aigion/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: gulf_ferry
+const u32 gTilesetTiles_PorytilesManaged_GulfFerry[] = INCBIN_U32("data/tilesets/secondary/gulf_ferry/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_GulfFerry[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/gulf_ferry/porytiles_bin/palettes/15.gbapal")
+};
