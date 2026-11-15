@@ -44,20 +44,20 @@ from eleusa_lib import put  # noqa: E402
 NEW = {
     "nk": (8, 16, 24),
     # the night lawn
-    "ng0": (16, 32, 40), "ng1": (24, 48, 56), "ng2": (40, 64, 64), "ng3": (56, 88, 80),
-    "ng4": (80, 112, 104),
+    "ng0": (24, 40, 48), "ng1": (32, 56, 64), "ng2": (48, 72, 72), "ng3": (64, 96, 88),
+    "ng4": (88, 120, 112),
     # gravel walks
-    "np0": (48, 56, 72), "np1": (80, 88, 112), "np2": (112, 120, 144), "np3": (152, 160, 184),
+    "np0": (56, 64, 80), "np1": (88, 96, 120), "np2": (120, 128, 152), "np3": (160, 168, 192),
     # asphodel in the lawn
     "nf0": (144, 152, 184), "nf1": (216, 224, 240), "nf2": (216, 184, 96),
     # moonlit ground: the lawn silvered
-    "nm0": (64, 96, 112), "nm1": (96, 136, 144), "nm2": (128, 168, 176), "nm3": (176, 208, 216),
-    "nm4": (224, 240, 248),
+    "nm0": (72, 104, 120), "nm1": (104, 144, 152), "nm2": (136, 176, 184), "nm3": (176, 208, 216),
+    "nm4": (216, 232, 240),
     # clipped laurel
-    "nl0": (16, 32, 24), "nl1": (24, 48, 32), "nl2": (40, 72, 48), "nl3": (56, 96, 64),
-    "nl4": (88, 128, 88), "nl5": (136, 176, 152),
-    # myrtle and cypress, darker and bluer than laurel
-    "ny0": (16, 40, 48), "ny1": (32, 64, 72), "ny2": (56, 96, 104),
+    "nl0": (8, 24, 24), "nl1": (16, 40, 32), "nl2": (32, 64, 48), "nl3": (48, 88, 64),
+    "nl4": (80, 120, 88), "nl5": (136, 176, 152),
+    # myrtle and cypress, darker and bluer than laurel, silver where the moon touches
+    "ny0": (16, 40, 48), "ny1": (40, 72, 80), "ny2": (72, 112, 112), "ny3": (128, 168, 160),
     # myrtle's white flowers
     "nw0": (160, 168, 200), "nw1": (232, 232, 248),
     # trunks
@@ -92,7 +92,7 @@ GROUPS = {
     # moonlit ground and where it fades into the lawn
     "moon": ["nk", "ng0", "ng1", "ng2", "ng3", "ng4", "nm0", "nm1", "nm2", "nm3", "nm4", "nf1"],
     # laurel hedges, myrtle, cypress
-    "leaf": ["nk", "nl0", "nl1", "nl2", "nl3", "nl4", "nl5", "ny0", "ny1", "ny2", "nw0",
+    "leaf": ["nk", "nl0", "nl1", "nl2", "nl3", "nl4", "nl5", "ny0", "ny1", "ny2", "ny3", "nw0",
              "nw1", "nt0", "nt1"],
     # marble and its garlands, gilding
     "stone": ["nk", "ns0", "ns1", "ns2", "ns3", "ns4", "ns5", "nsw", "nl2", "nl3", "nl4",
@@ -144,35 +144,32 @@ def h32(*v):
 # Textures: 16 x 16 and periodic, so pieces cut from them join seamlessly
 # --------------------------------------------------------------------------
 
-def lawn_texture(seed=0, colors=("ng0", "ng1", "ng2", "ng3", "ng4")):
-    """Clipped night lawn: short blades on a dark ground, a few tips catching the moon."""
+def lawn_texture(seed=0, colors=("ng0", "ng1", "ng2", "ng3", "ng4"), tips=5):
+    """Clipped night lawn: short blades in soft tufts on a dark ground, a few tips catching
+    the moon. Low contrast, so the things standing on it read."""
     c0, c1, c2, c3, c4 = colors
     T = Layer(16, 16)
     T.rect(0, 0, 16, 16, c1)
-    # tufts on a jittered 4 x 4 grid, wrapping at the edges
+    # tufts on a jittered 4 x 4 grid, wrapping at the edges: a blade pair, a shadow under
     for gy in range(4):
         for gx in range(4):
             h = h32(gx, gy, seed)
             x = gx * 4 + h % 3
             y = gy * 4 + (h >> 3) % 3
-            T.px(x % 16, (y + 1) % 16, c2)
-            T.px(x % 16, y % 16, c3 if (h >> 6) % 3 else c2)
+            T.px(x % 16, y % 16, c2)
+            T.px((x + 1) % 16, (y + 1) % 16, c2)
+            if (h >> 6) % 3 == 0:
+                T.px(x % 16, (y - 1) % 16, c3)
+            if (h >> 11) % tips == 0:
+                T.px((x + 1) % 16, y % 16, c4 if (h >> 13) % 3 == 0 else c3)
             if (h >> 9) % 2:
-                T.px((x + 1) % 16, (y + 1) % 16, c2)
-            if (h >> 11) % 5 == 0:
-                T.px(x % 16, (y - 1) % 16, c4)
-            T.px((x + 2) % 16, (y + 2) % 16, c0)
+                T.px((x + 2) % 16, (y + 2) % 16, c0)
     return T
 
 
 def moon_texture():
-    """The same lawn, silvered by moonlight: unmistakably brighter."""
-    T = lawn_texture(seed=7, colors=("nm0", "nm1", "nm2", "nm3", "nm4"))
-    for y in range(16):
-        for x in range(16):
-            if h32(x, y, 99) % 37 == 0:
-                T.px(x, y, "nm4")
-    return T
+    """The same lawn, silvered by moonlight: unmistakably brighter, and smooth."""
+    return lawn_texture(seed=7, colors=("nm0", "nm1", "nm2", "nm3", "nm4"), tips=4)
 
 
 def gravel_texture():
@@ -192,39 +189,44 @@ def gravel_texture():
     return T
 
 
+LAUREL_LEAF = [".33.", "3443", "2332", ".11."]
+
+
 def laurel_top_texture():
-    """The flat clipped top of a laurel hedge: leaves laid like scales, moon sheen."""
+    """The flat clipped top of a laurel hedge: a carpet of leaves, each lit on its upper
+    edge, the gaps between them dark, here and there a leaf the moon catches."""
     T = Layer(16, 16)
-    T.rect(0, 0, 16, 16, "nl2")
+    T.rect(0, 0, 16, 16, "nl1")
     for gy in range(4):
         for gx in range(4):
             h = h32(gx, gy, 21)
-            x = gx * 4 + (2 if gy % 2 else 0) + h % 2
-            y = gy * 4 + (h >> 2) % 2
-            # a leaf: dark underside, lit upper edge
-            for dx in range(3):
-                T.px((x + dx) % 16, (y + 1) % 16, "nl3")
-                T.px((x + dx) % 16, (y + 2) % 16, "nl1" if dx != 1 else "nl2")
-            T.px((x + 1) % 16, y % 16, "nl4")
-            if (h >> 4) % 4 == 0:
-                T.px((x + 1) % 16, y % 16, "nl5")
+            x = gx * 4 + (2 if gy % 2 else 0) + h % 2 - 1
+            y = gy * 4 + (h >> 2) % 2 - 1
+            for j, row in enumerate(LAUREL_LEAF):
+                for i, ch in enumerate(row):
+                    if ch == ".":
+                        continue
+                    c = {"1": "nl1", "2": "nl2", "3": "nl3", "4": "nl4"}[ch]
+                    if ch == "4" and (h >> 4) % 5 == 0:
+                        c = "nl5"
+                    T.px((x + i) % 16, (y + j) % 16, c)
     return T
 
 
 def laurel_face_texture():
-    """The clipped south face of a hedge: leaves in shadow, hanging."""
+    """The clipped south face of a hedge: leaves hanging in its own shadow."""
     T = Layer(16, 16)
-    T.rect(0, 0, 16, 16, "nl1")
+    T.rect(0, 0, 16, 16, "nl0")
     for gy in range(4):
-        for gx in range(5):
+        for gx in range(4):
             h = h32(gx, gy, 31)
-            x = gx * 3 + (h % 2)
-            y = gy * 4 + (2 if gx % 2 else 0)
-            T.px(x % 16, y % 16, "nl3")
-            T.px((x + 1) % 16, y % 16, "nl2")
-            T.px(x % 16, (y + 1) % 16, "nl2")
-            T.px((x + 1) % 16, (y + 1) % 16, "nl2" if h % 3 else "nl3")
-            T.px((x + 1) % 16, (y + 2) % 16, "nl0")
+            x = gx * 4 + (2 if gy % 2 else 0) + h % 2
+            y = gy * 4 + (h >> 2) % 2
+            for j, row in enumerate([".22.", "2332", ".11."]):
+                for i, ch in enumerate(row):
+                    if ch == ".":
+                        continue
+                    T.px((x + i) % 16, (y + j) % 16, {"1": "nl1", "2": "nl2", "3": "nl3"}[ch])
     return T
 
 
@@ -756,26 +758,48 @@ def blob_mask(w, h, cx, cy, rx, ry, seed=0, wob=1.2):
 
 
 def paint_bush(L, ox, oy, mask, flowers=0, seed=0):
-    """Myrtle: a dense round shrub, lit silver up its south-west, white stars of flowers."""
+    """Myrtle: a dense round shrub of leaf clumps, each lit on its south-west side by the
+    moon, the whole lit silver along its south-west rim; white stars of flowers."""
     h, w = mask.shape
-    T = tex("myrtle")
     ys, xs = np.nonzero(mask)
     cy, cx = ys.mean(), xs.mean()
+    # the body in shade, then clumps of leaves (5 px discs) laid over it, lit from the SW
     for y, x in zip(ys, xs):
-        L.a[oy + y, ox + x] = T.a[y % 16, x % 16]
-        # moon from the south-west: lit lower-left, dark upper-right
+        L.px(ox + x, oy + y, "ny0")
+    step = 4
+    for gy in range(-1, h // step + 1):
+        for gx in range(-1, w // step + 1):
+            hh = h32(gx, gy, seed, 77)
+            px = gx * step + (2 if gy % 2 else 0) + hh % 2
+            py = gy * step + (hh >> 2) % 2
+            for dy in range(-2, 3):
+                for dx in range(-2, 3):
+                    if dx * dx + dy * dy > 5:
+                        continue
+                    x, y = px + dx, py + dy
+                    if not (0 <= x < w and 0 <= y < h and mask[y, x]):
+                        continue
+                    lit = dx - dy < -1          # the clump's lower-left
+                    dark = dx - dy > 1
+                    c = "ny2" if lit else ("ny0" if dark else "ny1")
+                    L.px(ox + x, oy + y, c)
+    # the whole bush: the moon's side lighter, the far side in its own shadow
+    for y, x in zip(ys, xs):
         d = (x - cx) / w - (y - cy) / h
-        if d > 0.28:
+        c = L.get(ox + x, oy + y)
+        if d > 0.25 and c == "ny1":
             L.px(ox + x, oy + y, "ny0")
-        elif d < -0.25 and (x + y) % 2 == 0:
+        elif d < -0.3 and c == "ny1":
             L.px(ox + x, oy + y, "ny2")
-    # clumps: darker crevices between leaf masses
-    for y, x in zip(ys, xs):
-        if h32(x // 3, y // 3, seed) % 5 == 0 and (x + y) % 3 == 0:
-            L.px(ox + x, oy + y, "ny0")
     edge = AG.ring(mask)
     for y, x in np.argwhere(edge):
         L.px(ox + x, oy + y, "nk")
+    # a silver rim just inside the lit edge
+    inner = AG.ring(mask & ~edge)
+    for y, x in np.argwhere(inner):
+        d = (x - cx) / w - (y - cy) / h
+        if d < -0.15:
+            L.px(ox + x, oy + y, "ny3")
     # flowers
     pts = [(x, y) for y, x in zip(ys, xs) if not edge[y, x] and h32(x, y, seed, 5) % 41 == 0]
     for x, y in pts[:flowers]:
@@ -1269,36 +1293,46 @@ ROCK_KEYS = [
     # row 2: the cliff's foot course, the stair's foot, the rubble and the landing
     "foot", "foot_w", "foot_e", "stair_foot", "rubble", "boulder", "landing", "cliff_b",
 ]
+FLAT_CRACKS = {(2, 3), (3, 4), (4, 4), (5, 5), (10, 9), (11, 10), (11, 11), (12, 12), (7, 14),
+               (8, 14)}
+
+
 def rock_flat_px(x, y):
-    """The rock's moonlit flat: pale, worn smooth, 16-periodic."""
-    h = h32(x % 16, y % 16, 11) % 23
-    if h == 0:
-        return "nm4"
-    if h in (3, 7):
+    """The rock's moonlit flat: pale stone worn smooth, soft mottling, a few hairline
+    cracks and glints. 16-periodic."""
+    xx, yy = x % 16, y % 16
+    if (xx, yy) in FLAT_CRACKS:
+        return "nr3"
+    if (xx - 1, yy - 1) in FLAT_CRACKS:
         return "nr5"
-    if h in (5, 13, 17):
+    patch = h32(xx // 4, yy // 4, 11) % 5
+    if patch == 0 and (xx + yy) % 2 == 0:
         return "nr3"
-    if (x % 16, y % 16) in ((3, 4), (4, 5), (5, 5), (11, 10), (12, 11), (12, 12)):
-        return "nr3"
+    if h32(xx, yy, 13) % 61 == 0:
+        return "nr5"
     return "nr4"
 
 
 def rock_face_px(x, y, course):
-    """The cliff: courses of grey rock, lit from the south-west. course 0 upper, 1 lower."""
-    yy = y % 16
-    band = (yy + (0 if course == 0 else 5)) % 8
-    if band == 0:
-        c = "nr1"
-    elif band == 1:
+    """The cliff: two courses of rough-laid stones to a cell, each lit along its top and
+    its west edge by the moon. course 0 the upper cliff row, 1 the foot (darker)."""
+    xx, yy = x % 16, y % 16
+    row = yy // 8
+    ly = yy % 8
+    joints = (0, 9) if row == 0 else (4, 13)
+    lx = min((xx - j) % 16 for j in joints)
+    if ly == 7 or lx == 0:
+        c = "nk"
+    elif ly == 0 or lx == 1:
         c = "nr3"
-    elif band < 5:
-        c = "nr2" if h32(x % 16, yy, course) % 7 else "nr3"
-    else:
-        c = "nr2" if (x + yy) % 3 else "nr1"
-    if (x % 16) in (4, 11) and (band > 1) and ((x // 16) + yy // 8) % 2 == 0:
+    elif ly == 6:
         c = "nr1"
-    if course == 1 and yy >= 12:
-        c = "nr1" if (x + yy) % 2 else ("nr0" if yy == 15 else "nr2")
+    else:
+        c = "nr2"
+        if h32(xx, yy, 7) % 13 == 0:
+            c = "nr3"
+    if course == 1 and row == 1 and c in ("nr2", "nr3"):
+        c = "nr1" if (xx + yy) % 2 else "nr2"
     return c
 
 
@@ -1569,19 +1603,27 @@ def pool_pieces():
     B, M = s.B, s.M
     for y in range(16):
         for x in range(32):
-            B.px(x, y, "nr4")
-    m = blob_mask(32, 16, 15.5, 8.0, 14.5, 6.5, seed=6)
-    for y, x in np.argwhere(m):
-        c = "nq1" if y > 4 else "nq0"
-        if h32(x, y, 5) % 13 == 0:
+            B.px(x, y, rock_flat_px(x, y))
+    yy, xx = np.mgrid[0:16, 0:32]
+    rim = ((xx - 15.5) / 15.0) ** 2 + ((yy - 8.0) / 7.2) ** 2 <= 1
+    water = ((xx - 15.5) / 12.5) ** 2 + ((yy - 8.5) / 5.2) ** 2 <= 1
+    for y, x in np.argwhere(rim & ~water):
+        # the basin's cut lip: lit on the far (north) side, in shadow on the near one
+        M.px(x, y, "nr4" if y < 6 else ("nr3" if y < 10 else "nr2"))
+    for y, x in np.argwhere(AG.ring(rim)):
+        M.px(x, y, "nk")
+    for y, x in np.argwhere(water):
+        c = "nq0" if y < 6 else "nq1"
+        if (y == 8 or y == 11) and h32(x, 5) % 3 == 0:
             c = "nq2"
         M.px(x, y, c)
-    for y, x in np.argwhere(AG.ring(m)):
-        M.px(x, y, "nr2" if y > 8 else "nr1")
-    # the moon in the water
-    put(M, 14, 5, [".44.", "4444", "4443", ".33."], {"4": "nq4", "3": "nq3"})
-    M.px(9, 10, "nm4")
-    M.px(22, 6, "nm4")
+    for y, x in np.argwhere(AG.ring(water)):
+        if y < 9:
+            M.px(x, y, "nk")
+    # the moon lying in the water, and two stars
+    put(M, 13, 6, [".444.", "44443", "44433", ".333."], {"4": "nq4", "3": "nq3"})
+    M.px(8, 9, "nm4")
+    M.px(23, 7, "nm4")
     return s
 
 

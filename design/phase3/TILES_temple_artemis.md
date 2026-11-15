@@ -4,7 +4,7 @@
 
 ## Catalog
 
-273 metatiles from 0x200; **446 of 504 tiles used** (the door animations own 504-511). Walk codes: `X` blocks, `.` walkable, `T` walkable and drawn over the player, `S` MB_SOUTH_ARROW_WARP (the doormat). Every other metatile is MB_NORMAL; the hunt is all objects and script.
+273 metatiles from 0x200; **438 of 504 tiles used** (the door animations own 504-511). Walk codes: `X` blocks, `.` walkable, `T` walkable and drawn over the player, `S` MB_SOUTH_ARROW_WARP (the doormat). Every other metatile is MB_NORMAL; the hunt is all objects and script.
 
 ### Floors: the night lawn, the porch's paving, the door
 

@@ -177,7 +177,8 @@ PEOPLE = [
     ("LOCALID_ARTEMIS_KYRENE", "OBJ_EVENT_GFX_ICHOR_HUNTRESS", 20, 36, "RIGHT", 3, "Kyrene", "0"),
     ("LOCALID_ARTEMIS_ANTHIA", "OBJ_EVENT_GFX_ICHOR_HUNTRESS", 2, 31, "LEFT", 1, "Anthia", "0"),
     ("LOCALID_ARTEMIS_PROKRIS", "OBJ_EVENT_GFX_ICHOR_HUNTRESS", 13, 7, "RIGHT", 3, "Prokris", "0"),
-    ("LOCALID_ARTEMIS_KALLISTO", "OBJ_EVENT_GFX_ICHOR_KALLISTO", 15, 3, "DOWN", None, "Kallisto", "0"),
+    # Kallisto sits on her rock facing up (SPRITES.md: MOVEMENT_TYPE_NONE, turned up at load)
+    ("LOCALID_ARTEMIS_KALLISTO", "OBJ_EVENT_GFX_ICHOR_KALLISTO", 15, 3, "NONE", None, "Kallisto", "0"),
     ("LOCALID_ARTEMIS_HIND", "OBJ_EVENT_GFX_ICHOR_GOLDEN_HIND", HIND["A"][0], HIND["A"][1], "LEFT",
      None, "Hind", "0"),
     ("LOCALID_ARTEMIS_FEATHER", "OBJ_EVENT_GFX_ITEM_BALL", 6, 32, "DOWN", None, "ItemPrettyFeather",
@@ -456,7 +457,7 @@ def hound_events():
     for n, (lid, stage, x, y, mt, rng, sight) in enumerate(HOUNDS):
         sx, sy = sleeper_spot(n)
         out.append({
-            "local_id": SLEEP_ID.format(n + 1), "graphics_id": "OBJ_EVENT_GFX_ICHOR_TEMPLE_HOUND",
+            "local_id": SLEEP_ID.format(n + 1), "graphics_id": "OBJ_EVENT_GFX_ICHOR_TEMPLE_HOUND_SLEEP",
             "x": sx, "y": sy, "elevation": ELEVATION, "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
             "movement_range_x": 0, "movement_range_y": 0,
             "trainer_type": "TRAINER_TYPE_NONE", "trainer_sight_or_berry_tree_id": "0",
@@ -475,7 +476,8 @@ def events():
     for lid, gfx, x, y, facing, sight, script, flag in PEOPLE:
         obj.append({
             "local_id": lid, "graphics_id": gfx, "x": x, "y": y, "elevation": ELEVATION,
-            "movement_type": f"MOVEMENT_TYPE_FACE_{facing}", "movement_range_x": 0,
+            "movement_type": "MOVEMENT_TYPE_NONE" if facing == "NONE" else f"MOVEMENT_TYPE_FACE_{facing}",
+            "movement_range_x": 0,
             "movement_range_y": 0,
             "trainer_type": "TRAINER_TYPE_NORMAL" if sight else "TRAINER_TYPE_NONE",
             "trainer_sight_or_berry_tree_id": str(sight or 0),
@@ -911,9 +913,10 @@ def setmt(pieces, x, y, mid):
 
 
 def hind_run(pieces, g, a, b):
-    """The hind's bolt from clearing a to clearing b: bounds of two tiles (over bushes,
-    stelae, anything) and quick steps, landing only on open lawn that no hound walks and
-    no one stands on. Fewest moves, then fewest steps."""
+    """The hind's bolt from clearing a to clearing b: the shortest run over open ground
+    that no hound walks and no one stands on (the hounds stand frozen somewhere on their
+    patrols while she runs), at walk_fastest, which her sprite draws as a bolt
+    (SPRITES.md)."""
     people = {(x, y) for lid, _, x, y, *_ in PEOPLE if lid != "LOCALID_ARTEMIS_HIND"}
     walked = set()
     for n, h in enumerate(HOUNDS):
@@ -932,11 +935,10 @@ def hind_run(pieces, g, a, b):
         if p == goal:
             break
         for (dx, dy), word in MOVE.items():
-            for k, verb in ((2, "jump_2"), (1, "walk_faster")):
-                q = (p[0] + dx * k, p[1] + dy * k)
-                if q not in prev and ok(*q):
-                    prev[q] = (p, f"{verb}_{word}")
-                    todo.append(q)
+            q = (p[0] + dx, p[1] + dy)
+            if q not in prev and ok(*q):
+                prev[q] = (p, f"walk_fastest_{word}")
+                todo.append(q)
     if goal not in prev:
         raise ValueError(f"the hind can't run from {a} to {b}")
     moves = []
@@ -1154,12 +1156,39 @@ def check(pieces, g, ev):
     return errors
 
 
+def write_lua(path):
+    """The hounds and the hunt's places, for tools/ichor/tests/act2_artemis.lua."""
+    out = ["-- Written by tools/ichor/maps/temple_artemis.py --lua. Do not edit.",
+           "return {", f"  step = {STEP}, turn = {TURN},", "  hounds = {"]
+    for n, (lid, stage, x, y, mt, r, sight) in enumerate(HOUNDS):
+        if mt == "ROTATE_CLOCKWISE":
+            kind, seq = "turn", "SWNE"
+        elif mt.startswith("WALK_SEQUENCE"):
+            kind, seq = "walk", "N" * r + "E" * r + "S" * r + "W" * r
+        else:
+            d0 = {"WALK_LEFT_AND_RIGHT": "W", "WALK_RIGHT_AND_LEFT": "E", "WALK_UP_AND_DOWN": "N",
+                  "WALK_DOWN_AND_UP": "S"}[mt]
+            kind, seq = "walk", d0 * r + {"W": "E", "E": "W", "N": "S", "S": "N"}[d0] * r
+        out.append(f'    {{ stage = {stage}, x = {x}, y = {y}, kind = "{kind}", seq = "{seq}", '
+                   f'sight = {sight} }},')
+    out.append("  },")
+    out.append("  hind = { " + ", ".join(f"{k} = {{ {x}, {y} }}" for k, (x, y) in HIND.items()) + " },")
+    out.append("  arch = { " + ", ".join(f"[{b}] = {{ {x}, {y} }}" for b, (x, y) in ARCH_RETURN.items()) + " },")
+    out.append("}")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(out) + "\n")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--check", action="store_true", help="verify the layout files are current")
     ap.add_argument("--review", metavar="NAME", help="write review sheets from the art")
+    ap.add_argument("--lua", metavar="PATH", help="write the hounds' patrols for the headless test")
     args = ap.parse_args()
 
+    if args.lua:
+        write_lua(Path(args.lua))
+        return
     pieces = Pieces(load_catalog())
     g = grid_ids(pieces)
     if args.review:

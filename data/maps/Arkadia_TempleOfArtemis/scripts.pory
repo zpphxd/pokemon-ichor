@@ -56,8 +56,10 @@ mapscripts Arkadia_TempleOfArtemis_MapScripts {
 }
 
 // In by the door, the returns count again; walked back by a hound, face into the garden.
+// Kallisto sits on her rock facing the sky (her sprite's sitting pose is her up-facing one).
 script Arkadia_TempleOfArtemis_EventScript_WarpIn {
     setvar(VAR_TEMP_0, 1)
+    turnobject(LOCALID_ARTEMIS_KALLISTO, DIR_NORTH)
     getplayerxy(VAR_0x8004, VAR_0x8005)
     if (var(VAR_0x8005) == 49) {
         call(Arkadia_TempleOfArtemis_EventScript_ResetReturns)
@@ -162,34 +164,61 @@ script Arkadia_TempleOfArtemis_EventScript_ReturnToArch {
 
 // The hind bolts from clearing A to clearing B.
 movement Arkadia_TempleOfArtemis_Movement_HindToB {
-    jump_2_left
-    jump_2_left
-    jump_2_up
-    jump_2_up
-    jump_2_up
-    jump_2_left
-    jump_2_left
+    walk_fastest_left
+    walk_fastest_left
+    walk_fastest_left
+    walk_fastest_up
+    walk_fastest_left
+    walk_fastest_left
+    walk_fastest_left
+    walk_fastest_left
+    walk_fastest_left
+    walk_fastest_left
+    walk_fastest_up
+    walk_fastest_up
+    walk_fastest_up
+    walk_fastest_up
+    walk_fastest_up
+    walk_fastest_right
     face_down
 }
 
 // The hind bolts from clearing B to clearing C.
 movement Arkadia_TempleOfArtemis_Movement_HindToC {
-    jump_2_down
-    jump_2_right
-    jump_2_down
-    jump_2_down
-    jump_2_right
-    jump_2_right
-    jump_2_right
-    jump_2_right
-    jump_2_right
-    jump_2_right
-    walk_faster_right
-    jump_2_right
-    jump_2_up
-    jump_2_up
-    walk_faster_up
-    jump_2_right
+    walk_fastest_down
+    walk_fastest_down
+    walk_fastest_left
+    walk_fastest_down
+    walk_fastest_down
+    walk_fastest_down
+    walk_fastest_right
+    walk_fastest_down
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_down
+    walk_fastest_right
+    walk_fastest_right
+    walk_fastest_up
+    walk_fastest_up
+    walk_fastest_up
+    walk_fastest_up
+    walk_fastest_up
+    walk_fastest_up
+    walk_fastest_right
+    walk_fastest_right
     face_down
 }
 
@@ -413,6 +442,9 @@ script Arkadia_TempleOfArtemis_EventScript_Hind {
         end
     }
     closemessage
+    // her head comes up, and she bolts
+    applymovement(LOCALID_ARTEMIS_HIND, Arkadia_TempleOfArtemis_Movement_HeadUp)
+    waitmovement(0)
     playse(SE_M_DOUBLE_TEAM)
     if (var(VAR_ICHOR_HUNT) >= 40) {
         applymovement(LOCALID_ARTEMIS_HIND, Arkadia_TempleOfArtemis_Movement_HindToC)
@@ -448,8 +480,8 @@ script Arkadia_TempleOfArtemis_EventScript_KallistoScene {
                   "Most people leave a track. A smell. A shadow. You don't leave much.\p"
                   "…"))
     closemessage
-    // She looks down at the player for the first time.
-    applymovement(LOCALID_ARTEMIS_KALLISTO, Common_Movement_FaceDown)
+    // She looks down at the player for the first time (her sprite holds the look).
+    applymovement(LOCALID_ARTEMIS_KALLISTO, Arkadia_TempleOfArtemis_Movement_LookDown)
     waitmovement(0)
     delay(40)
     msgbox(format("I'm Kallisto. I hunt for the goddess. I'm good at it.\p"
@@ -503,6 +535,9 @@ script Arkadia_TempleOfArtemis_EventScript_KallistoDefeated {
     applymovement(LOCALID_ARTEMIS_KALLISTO, Common_Movement_FaceDown)
     waitmovement(0)
     msgbox(format("Go on. The east road is open now. My huntresses will let you through."))
+    closemessage
+    // Back up on her rock, looking at the sky.
+    turnobject(LOCALID_ARTEMIS_KALLISTO, DIR_NORTH)
     // Arkadia's cordon (FLAG_ICHOR_HIDE_ARKADIA_CORDON) clears with FLAG_BADGE05_GET; the
     // Skylaps and Kerdovix roamers start with it too (ICHOR_STUB_AETHOS_DEX, SCRIPT.md Part 4).
     setflag(FLAG_ICHOR_HUNT_DONE)
@@ -510,13 +545,15 @@ script Arkadia_TempleOfArtemis_EventScript_KallistoDefeated {
     end
 }
 
-// After the laurel she stays on her rock.
+// After the laurel she stays on her rock. (Never faceplayer: her sitting pose is facing up,
+// and nurse_joy_bow is how she looks down.)
 script Arkadia_TempleOfArtemis_EventScript_Kallisto {
     lock
-    faceplayer
     if (!flag(FLAG_BADGE05_GET)) {
         goto(Arkadia_TempleOfArtemis_EventScript_KallistoScene)
     }
+    applymovement(LOCALID_ARTEMIS_KALLISTO, Arkadia_TempleOfArtemis_Movement_LookDown)
+    waitmovement(0)
     setspeaker(Arkadia_TempleOfArtemis_Text_NameKallisto)
     msgbox(format("My reading said, show no mercy at the new moon. So I didn't.\p"
                   "A reading is a reading. You don't argue with Delphoi.\p"
@@ -547,6 +584,9 @@ script Arkadia_TempleOfArtemis_EventScript_Kallisto {
         msgbox(format("The Star Chart shows a new shape: Orion, the Hunter."))
         waitse
     }
+    closemessage
+    // back to the sky (the engine's gift call turns her to the player after a lesson)
+    turnobject(LOCALID_ARTEMIS_KALLISTO, DIR_NORTH)
     release
     end
 }
@@ -633,4 +673,14 @@ movement Arkadia_TempleOfArtemis_Movement_StepUnderRock {
 movement Arkadia_TempleOfArtemis_Movement_ClimbDown {
     jump_in_place_down
     face_down
+}
+
+// Kallisto looks down from the sky (SPRITES.md: her sprite holds the look).
+movement Arkadia_TempleOfArtemis_Movement_LookDown {
+    nurse_joy_bow
+}
+
+// The golden hind throws her head up.
+movement Arkadia_TempleOfArtemis_Movement_HeadUp {
+    nurse_joy_bow
 }
