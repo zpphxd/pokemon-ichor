@@ -4,6 +4,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/map_groups.h"
 #include "constants/songs.h"
+#include "constants/opponents.h"
 
 K(MAP_ROUTE1, MAP_KALLISTE_ROUTE1)
 K(FLAG_ICHOR_FROZEN_HOUR, FLAG_ICHOR_FROZEN_HOUR)
@@ -23,3 +24,4 @@ K(OFF_OBJ_SPRITE_ID, offsetof(struct ObjectEvent, spriteId))
 K(OFF_OBJ_FLAGS0, 0)
 K(OFF_TPL_X, offsetof(struct ObjectEventTemplate, x))
 K(OFF_TPL_Y, offsetof(struct ObjectEventTemplate, y))
+K(TRAINER_ICHOR_TITYROS, TRAINER_ICHOR_TITYROS)

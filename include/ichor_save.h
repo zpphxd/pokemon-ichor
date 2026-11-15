@@ -8,8 +8,11 @@
 // is carved out of `reserved`, bump ICHOR_SAVE_VERSION and give the new field
 // its default in Ichor_OnSaveLoaded's migration (src/ichor_save.c).
 //
-// Flags and vars: IchorSave also holds a bank of 2,048 saved flags, 256 daily
-// flags and 32 vars. Scripts use them with the ordinary setflag, checkflag and
+// Version 4 grew the block once, by 192 bytes, for a second bank of 1,536 flags
+// (SaveBlock3 has room to 1,624 bytes; it now uses 1,476).
+//
+// Flags and vars: IchorSave also holds two banks of saved flags (2,048 and
+// 1,536), 256 daily flags and 32 vars. Scripts use them with the ordinary setflag, checkflag and
 // setvar commands: GetFlagPointer and GetVarPointer (src/event_data.c) send
 // their ids here. The ids and the named ranges are in include/constants/flags.h
 // and vars.h ("Ichor flag bank"), and tools/ichor/claim.py claims them by name.
@@ -18,8 +21,8 @@
 #include "constants/flags.h"
 #include "constants/vars.h"
 
-#define ICHOR_SAVE_VERSION  2
-#define ICHOR_SAVE_SIZE     1280
+#define ICHOR_SAVE_VERSION  4
+#define ICHOR_SAVE_SIZE     1472
 
 #define ICHOR_GOD_SLOTS     16  // the 15 gods of design/SYSTEMS.md §3, and one spare
 #define ICHOR_XENIA_CHAINS  8   // §10: 3 token chains in 1.0, room for more
@@ -75,12 +78,16 @@ struct IchorSave
     /*0x010*/ u8 favor[ICHOR_GOD_SLOTS];        // §3: 0-100 per god, never decreases
     /*0x020*/ u8 xenia[ICHOR_XENIA_CHAINS];     // §10: links done per token chain
     /*0x028*/ u8 frozenHourStep;        // the Frozen Hour: steps of the Stair climbed, 0-11 (version 2)
-    /*0x029*/ u8 headerReserved[23];
+    /*0x029*/ u8 forcedOmenKind;        // §6: tomorrow's omen, forced by a script; OMEN_NONE if not (version 3)
+    /*0x02A*/ u8 forcedOmenEntry;
+    /*0x02B*/ u8 heldTimeOfDay;         // a script holds the day-and-night tint: TIME_* + 1, or 0 (version 3)
+    /*0x02C*/ u8 headerReserved[20];
     /*0x040*/ u16 vars[ICHOR_VARS_COUNT];
     /*0x080*/ u8 flags[ICHOR_FLAGS_COUNT / 8];
     /*0x180*/ u8 dailyFlags[ICHOR_DAILY_FLAGS_COUNT / 8];  // cleared each day
     /*0x1A0*/ struct IchorThread thread;   // 688 bytes
-    /*0x450*/ u8 reserved[ICHOR_SAVE_SIZE - 0x450];
+    /*0x450*/ u8 reserved[0x500 - 0x450];
+    /*0x500*/ u8 flags2[ICHOR_FLAGS2_COUNT / 8];  // the second flag bank (version 4)
 };
 
 #define gIchorSave (gSaveBlock3Ptr->ichor)

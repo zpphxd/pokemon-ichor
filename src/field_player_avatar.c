@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_labyrinth.h"
 #include "ichor_relics.h"
 #include "main.h"
 #include "bike.h"
@@ -887,6 +888,7 @@ static void PlayerNotOnBikeMoving(enum Direction direction, u16 heldKeys)
 #endif
             {
                 PlayerNotOnBikeCollide(direction);
+                Ichor_OnPlayerBump(collision, direction); // Ichor: "Watch it, recruit."
             }
             return;
         }

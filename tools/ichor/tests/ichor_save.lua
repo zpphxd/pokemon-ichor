@@ -7,7 +7,9 @@
 --   3. A new day clears the daily bank and nothing else.
 --   4. Save, reset, CONTINUE: the banks come back as saved.
 --   5. An old save (IchorSave all zero, as a save from before it existed) loads
---      as version 1 with the new-game defaults.
+--      as the current version with the new-game defaults.
+--   6. A version-3 save, from before the second flag bank, loads with that bank
+--      zeroed (it holds what used to sit past IchorSave's end) and nothing else lost.
 
 local L = dofile("tools/ichor/tests/engine_lib.lua")
 local S, emu = L.S, L.emu
@@ -28,13 +30,14 @@ local function expectDefaults(when)
          string.format("%s: IchorSave version %d", when, ichor8(S.OFF_ICHOR_VERSION)))
   expect(ichor16(S.OFF_ICHOR_MOM_LOSSES) == 212 and ichor16(S.OFF_ICHOR_MOM_WINS) == 0,
          string.format("%s: Mom's record is %d-%d", when, ichor16(S.OFF_ICHOR_MOM_WINS), ichor16(S.OFF_ICHOR_MOM_LOSSES)))
-  expect(allZero(S.OFF_ICHOR_FAVOR, 16) and allZero(S.OFF_ICHOR_VARS, S.OFF_ICHOR_RESERVED - S.OFF_ICHOR_VARS),
-         when .. ": Favor, the banks and the thread start empty")
+  expect(allZero(S.OFF_ICHOR_FAVOR, 16) and allZero(S.OFF_ICHOR_VARS, S.OFF_ICHOR_RESERVED - S.OFF_ICHOR_VARS)
+         and allZero(S.OFF_ICHOR_FLAGS2, S.ICHOR_SAVE_SIZE - S.OFF_ICHOR_FLAGS2),
+         when .. ": Favor, both banks and the thread start empty")
   expect(ichor8(S.OFF_ICHOR_OPTIONS) == 0, when .. ": relic prompts default to ASK")
 end
 
 L.start(function()
-  expect(S.SB3_SIZE <= 1624 and S.ICHOR_SAVE_SIZE == 1280 and S.OFF_SB3_ICHOR == 0,
+  expect(S.SB3_SIZE <= 1624 and S.ICHOR_SAVE_SIZE == 1472 and S.OFF_SB3_ICHOR == 0,
          string.format("SaveBlock3 is %d of 1,624 bytes; IchorSave is %d bytes at its start", S.SB3_SIZE, S.ICHOR_SAVE_SIZE))
 
   -- 1. A new game
@@ -64,6 +67,11 @@ L.start(function()
   expect(dailyByte(p >> 3) & (1 << (p & 7)) ~= 0 and dailyByte(31) == 0x80, "daily flags land in IchorSave.dailyFlags")
   expect(ichor16(S.OFF_ICHOR_VARS) == 1234 and ichor16(S.OFF_ICHOR_VARS + 62) == 0xBEEF,
          "bank vars land in IchorSave.vars")
+  L.runHeader("SaveTest_Bank2Header")
+  local first, last = S.FLAG_ICHOR_GENERAL2_START - S.ICHOR_FLAGS2_START, S.ICHOR_FLAGS2_END - S.ICHOR_FLAGS2_START
+  expect(L.getVar(S.VAR_0x8001) == 3 and ichor8(S.OFF_ICHOR_FLAGS2 + (first >> 3)) & (1 << (first & 7)) ~= 0
+         and ichor8(S.OFF_ICHOR_FLAGS2 + (last >> 3)) == 0x80,
+         "the second bank: scripts set and read its first and last flags, in IchorSave.flags2")
   expect(sb1Flags() == before, "no SaveBlock1 flag changed")
   -- VAR_TEMP_F is the only SaveBlock1 var the script writes
   L.setVar(S.VAR_TEMP_F, 0)
@@ -92,10 +100,22 @@ L.start(function()
   emu:reset()
   L.continueSave()
   shot("continued")
-  expect(L.snapshot(L.ichor(), S.ICHOR_SAVE_SIZE) == saved, "all 1,280 bytes of IchorSave come back from the save")
+  expect(L.snapshot(L.ichor(), S.ICHOR_SAVE_SIZE) == saved,
+         string.format("all %d bytes of IchorSave come back from the save", S.ICHOR_SAVE_SIZE))
+  expect(L.getFlag(S.ICHOR_FLAGS2_END), "the second bank's flags come back too")
   expect(L.getFlag(S.FLAG_ICHOR_HERMS_START + 3) and L.getFlag(S.FLAG_DAILY_ICHOR_GENERAL_START + 5)
          and L.getVar(S.ICHOR_VARS_END) == 0xBEEF and ichor16(S.OFF_ICHOR_MOM_WINS) == 3,
          "flags, daily flags, vars and Mom's record read back through the engine")
+
+  -- 6. A version-3 save: junk where the second bank now sits (the old dexNavChain)
+  emu:write8(L.ichor() + S.OFF_ICHOR_VERSION, 3)
+  emu:write8(L.ichor() + S.OFF_ICHOR_FLAGS2, 0x5A)
+  L.runHeader("SaveTest_SaveHeader")
+  emu:reset()
+  L.continueSave()
+  expect(ichor8(S.OFF_ICHOR_VERSION) == S.ICHOR_SAVE_VERSION and allZero(S.OFF_ICHOR_FLAGS2, S.ICHOR_SAVE_SIZE - S.OFF_ICHOR_FLAGS2)
+         and ichor16(S.OFF_ICHOR_MOM_WINS) == 3 and L.getFlag(S.FLAG_ICHOR_HERMS_START + 3),
+         "a version-3 save loads with the second bank zeroed and everything else kept")
 
   -- 5. An old save: zero IchorSave, save, reset, CONTINUE
   for i = 0, S.ICHOR_SAVE_SIZE - 1, 4 do emu:write32(L.ichor() + i, 0) end
@@ -105,5 +125,5 @@ L.start(function()
   shot("old_save_continued")
   expectDefaults("a save from before IchorSave")
   log(string.format("ok SaveBlock3 is %d bytes; IchorSave has %d reserved bytes",
-                    S.SB3_SIZE, S.ICHOR_SAVE_SIZE - S.OFF_ICHOR_RESERVED))
+                    S.SB3_SIZE, S.OFF_ICHOR_FLAGS2 - S.OFF_ICHOR_RESERVED))
 end)
