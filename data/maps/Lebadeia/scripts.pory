@@ -76,13 +76,13 @@ script Lebadeia_EventScript_Arrival {
 }
 
 movement Lebadeia_Movement_CameraToSprings {
-    walk_fast_left * 20
+    walk_fast_left * 23
     walk_fast_up * 6
 }
 
 movement Lebadeia_Movement_CameraBack {
     walk_fast_down * 6
-    walk_fast_right * 20
+    walk_fast_right * 23
 }
 
 movement Lebadeia_Movement_Wave {

@@ -282,6 +282,14 @@ script Route9_Schiste_EventScript_Shrine {
         releaseall
         end
     }
+    // Engine bug (data/scripts/ichor_rites.pory): EventScript_IchorDesecratedAltar
+    // calls special(Ichor_CheckAltarCleansed), not specialvar, so it reads a stale
+    // VAR_RESULT. Set it to the real answer first until the engine is fixed.
+    if (flag(FLAG_ICHOR_ALTARS_START + 9)) {
+        setvar(VAR_RESULT, TRUE)
+    } else {
+        setvar(VAR_RESULT, FALSE)
+    }
     setvar(VAR_0x8004, ICHOR_GOD_APOLLO)
     setvar(VAR_0x8005, 9)
     goto(EventScript_IchorDesecratedAltar)

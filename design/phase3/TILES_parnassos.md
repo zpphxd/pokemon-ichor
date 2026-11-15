@@ -493,6 +493,19 @@ Feather (the Sphinx's seat, 40,10), Nugget (the treasury's floor, 12,14), Reviva
 (terrace 1, 3,25); Lebadeia's Bronze Obol (Lethe, 3,4, as `ITEM_RELIC_COPPER`), Calcium
 (behind the pilgrims' hall, 18,5) and Honey (the plane's hollow, 1,10).
 
+**Test.** `tools/ichor/tests/act2_parnassos.sh` plays beats 35B-36 headlessly (88
+screenshots in `build/test_parnassos/shots/`): the arrival pan, the springs talk, Saon's
+descent and the grille, the hamlet, Route 9's trainers and bands, the crossroads scene, the
+herm, Psephos and the shrine's cleansing, the laurel's sprig, the lookout scene, Xenodike and
+the fig, the three drums into the gully and the treasury's finds, the terraces, Alethea
+going ahead to Kirrha, and the omen's Enigmaw.
+
+**An engine bug, worked around here.** `EventScript_IchorDesecratedAltar`
+(`data/scripts/ichor_rites.pory`) calls `special(Ichor_CheckAltarCleansed)` where it needs
+`specialvar`, so it branches on a stale `VAR_RESULT` (after Psephos's battle, it skipped
+straight to the ordinary altar and never cleansed). Route 9's shrine sets `VAR_RESULT` to the
+real answer before its `goto`; the engine fix is one word.
+
 **Deviations from SCRIPT.md** (each the closest reading):
 - Saon's NO leaves the grille shut; asking him again offers the descent again. SCRIPT's
   "The grille is open whenever you're ready" is kept as his line.
