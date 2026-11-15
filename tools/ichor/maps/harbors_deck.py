@@ -37,9 +37,9 @@ def compose():
     g.put("stern", 16, 2)
     g.put("sail", 7, 1)
     g.put("deckhouse", 13, 3)
-    g.put("goat_pen", 5, 5)
-    g.put("bow_cargo", 3, 5)
-    g.put("grain_sack", 4, 4)                   # Lamprias's seat
+    g.put("goat_pen", 6, 5)
+    g.put("bow_cargo", 4, 5)
+    g.put("grain_sack", 4, 4)                   # grain for Arkadia, by Lamprias
     g.put("grain_sack", 12, 6)                  # more grain, by the stern
     # the water: surfable and fishable in the game's terms (elevation 1), but not
     # walkable; the map's ON_TRANSITION forbids relics, so no one surfs off a ferry
@@ -60,22 +60,22 @@ def events():
             move="MOVEMENT_TYPE_FACE_RIGHT"),
         obj("LOCALID_GULF_FERRY_ALETHEA", "OBJ_EVENT_GFX_ICHOR_ALETHEA", *ALETHEA, S + "Alethea",
             flag="FLAG_ICHOR_HIDE_ALETHEA_GULF_FERRY", move="MOVEMENT_TYPE_FACE_RIGHT"),
-        obj("LOCALID_GULF_FERRY_GOAT_1", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 5, 5, S + "Goat",
+        obj("LOCALID_GULF_FERRY_GOAT_1", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 6, 5, S + "Goat",
             move="MOVEMENT_TYPE_FACE_RIGHT"),
-        obj("LOCALID_GULF_FERRY_GOAT_2", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 6, 6, S + "Goat",
+        obj("LOCALID_GULF_FERRY_GOAT_2", "OBJ_EVENT_GFX_SPECIES(KERAZAP)", 8, 6, S + "Goat",
             move="MOVEMENT_TYPE_LOOK_AROUND"),
         obj("LOCALID_GULF_FERRY_KEPHISIOS", "OBJ_EVENT_GFX_ICHOR_FISHER", 11, 3, S + "Kephisios",
             trainer=True, sight=1, move="MOVEMENT_TYPE_FACE_UP"),
-        obj("LOCALID_GULF_FERRY_LAMPRIAS", "OBJ_EVENT_GFX_ICHOR_MERCHANT", 3, 4, S + "Lamprias",
+        obj("LOCALID_GULF_FERRY_LAMPRIAS", "OBJ_EVENT_GFX_ICHOR_MERCHANT", 2, 4, S + "Lamprias",
             trainer=True, sight=1, move="MOVEMENT_TYPE_FACE_LEFT"),
-        item_ball("LOCALID_GULF_FERRY_ITEM_SUPER_POTION", 2, 5, "ITEM_SUPER_POTION",
+        item_ball("LOCALID_GULF_FERRY_ITEM_SUPER_POTION", 3, 6, "ITEM_SUPER_POTION",
                   "FLAG_ICHOR_ITEM_GULF_FERRY_SUPER_POTION"),
     ]
     bgs = [
         sign(10, 7, S + "Rail"),
         sign(13, 7, S + "Rail"),
         sign(14, 4, S + "Deckhouse"),
-        hidden(7, 5, "ITEM_HEART_SCALE", "FLAG_ICHOR_HIDDEN_GULF_FERRY_HEART_SCALE"),
+        hidden(8, 5, "ITEM_HEART_SCALE", "FLAG_ICHOR_HIDDEN_GULF_FERRY_HEART_SCALE"),
     ]
     return objects, [], [], bgs
 
@@ -117,6 +117,19 @@ def check(g):
     # fishing: some deck cell looks north over the far rail onto water
     if not any(H.walkable(blocks, x, 3) and (int(blocks[2, x]) >> 12) == 1 for x in range(W)):
         errors.append("Deck: no deck cell faces open water to fish from")
+    # people stand in the way on a deck this small: with every object as an obstacle,
+    # each one still has a free cell beside it to be talked to (or picked up) from
+    ev = H.json.loads((H.ROOT / f"data/maps/{NAME}/map.json").read_text())
+    occupied = {(o["x"], o["y"]) for o in ev["object_events"]}
+    free_reach = H.reachable(blocks, ARRIVAL, blocked=occupied)
+    for o in ev["object_events"]:
+        x, y = o["x"], o["y"]
+        if not any((x + dx, y + dy) in free_reach for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+            errors.append(f"Deck: {o['local_id']} at ({x},{y}) is walled in by the others")
+    for b in ev["bg_events"]:
+        x, y = b["x"], b["y"]
+        if not any((x + dx, y + dy) in free_reach for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+            errors.append(f"Deck: bg event at ({x},{y}) is walled in by the people")
     # nothing walkable reaches the map's edge
     for (x, y) in reach:
         if x in (0, W - 1) or y in (0, HGT - 1):

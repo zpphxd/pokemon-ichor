@@ -64,12 +64,16 @@ local function main()
                  { S.SPECIES_TEST, 2 }, { 100, 2 }, { (1 << 17) | (1 << 18) | (1 << 19) | (1 << 20), 4 },
                  { S.MOVE_TEST, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 }, { S.MOVE_NONE, 2 } }
   warpIn(S.MAP_KIRRHA, 27, 0, { S.FLAG_SYS_POKEMON_GET, S.FLAG_BADGE04_GET, S.FLAG_ACT2_BEGUN,
-                                S.FLAG_GIRDLE,
-                                -- the two ferry trainers stand beaten: this run is about the
-                                -- crossing's scenes, and a battle's length is the battle engine's
-                                -- business (their talk scripts still run, after-battle lines and all)
-                                S.TRAINER_FLAGS_START + S.TRAINER_KEPHISIOS,
-                                S.TRAINER_FLAGS_START + S.TRAINER_LAMPRIAS }, team)
+                                S.FLAG_GIRDLE }, team)
+  -- The two ferry trainers stand beaten: this run is about the crossing's scenes, and a
+  -- battle's length is the battle engine's business (their talk scripts still run, after-
+  -- battle lines and all). Written straight into SaveBlock1's flags.
+  for _, tr in ipairs({ S.TRAINER_KEPHISIOS, S.TRAINER_LAMPRIAS }) do
+    local f = S.TRAINER_FLAGS_START + tr
+    local a = L.sb1() + S.OFF_SB1_FLAGS + (f >> 3)
+    emu:write8(a, emu:read8(a) | (1 << (f & 7)))
+  end
+  expect(L.defeated(S.TRAINER_KEPHISIOS) and L.defeated(S.TRAINER_LAMPRIAS), "the ferry's trainers stand beaten")
   expect(flag(S.FLAG_VISITED_KIRRHA), "Kirrha is a fly target from the first step")
   expect(not flag(S.FLAG_ARRIVED_KIRRHA), "not yet arrived")
   shot("kirrha_north_road")

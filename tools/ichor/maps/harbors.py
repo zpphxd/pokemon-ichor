@@ -448,6 +448,15 @@ def common_checks(g, name, start, extra_blocked=(), unreachable_ok=(), solid_ok=
         near = [(x, y)] + [(x + dx, y + dy) for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))]
         if not any(p in reach for p in near):
             errors.append(f"{name}: object {o['local_id']} at ({x},{y}) is unreachable")
+    # with every person and item ball standing in the way, each one still has a free
+    # cell beside it (people block paths in game; the plain walk above ignores them)
+    free_reach = reachable(blocks, start, blocked=objects | set(extra_blocked))
+    for o in ev["object_events"]:
+        x, y = o["x"], o["y"]
+        if o["local_id"] in unreachable_ok or o["local_id"] in solid_ok:
+            continue
+        if not any((x + dx, y + dy) in free_reach for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+            errors.append(f"{name}: {o['local_id']} at ({x},{y}) is walled in by the others")
     for t in ev["coord_events"]:
         if (t["x"], t["y"]) not in reach:
             errors.append(f"{name}: coord event at ({t['x']},{t['y']}) is unreachable")
