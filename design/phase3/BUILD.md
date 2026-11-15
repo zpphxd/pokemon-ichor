@@ -141,7 +141,7 @@ All 17 maps are registered. Outdoor maps are in `gMapGroup_TownsAndRoutes`; Arka
 
 **Engine indices:** decoys `FLAG_ICHOR_THEOXENIA_START` +0x24 (Route 11), +0x25 (Arkadia); desecrated altar index 10 (Route 12); herms `HERM_AETHOS_ROUTE_11` and `_12` (rows and heal locations appended by their builders); prophecy tablet 5 at `FLAG_ICHOR_PROPHECY_START` +4, read at +12; Daedalus's page IV at `FLAG_ICHOR_PAGES_START` +3; Artemis's gift I by `FLAG_ICHOR_GIFT(god, ICHOR_GIFT_I)` through the engine's Hierophant calls.
 
-**Walkers named now** (aliased in `ichor_gfx_stubs_act2.h`'s batch 3 block): `OBJ_EVENT_GFX_ICHOR_HUNTRESS`, `_CHARCOALER`, `_KALLISTO`, `_KLEON_STUMP`, `_KLEON_BALLS`, `_TEMPLE_HOUND`, `_GOLDEN_HIND`, `_PHYLONOE`, `_MULETEER`, `_LAMPLIGHTER`. Iapetos in the Titan mask is batch 1's `_CHORUS_LEADER`; Alethea kneeling is `_ALETHEA_KNEEL`.
+**Walkers named now** (aliased in `ichor_gfx_stubs_act2.h`'s batch 3 block): `OBJ_EVENT_GFX_ICHOR_HUNTRESS`, `_CHARCOALER`, `_KALLISTO`, `_KLEON_STUMP`, `_KLEON_BALLS`, `_TEMPLE_HOUND`, `_GOLDEN_HIND`, `_PHYLONOE`, `_LAMPLIGHTER`. `_MULETEER` is already real (batch 2's sprites2 drew Kirrha's, with a staff); Route 11's goad-carrying muleteer uses it, or a new `_MULETEER_GOAD` if sprites3 draws one. Iapetos in the Titan mask is batch 1's `_CHORUS_LEADER`; Alethea kneeling is `_ALETHEA_KNEEL`.
 
 Parties: `design/phase3/parties/{heights,arkadia,artemis}.party`. Wild tables: `design/phase3/encounters/region_b2.json`, folded (Routes 11–12, the Wood and the Pool, morning and night; fishing for Route 11's pool and the temple's waterfall pool). Styx Falls has no wild battles and its black pool no table.
 
