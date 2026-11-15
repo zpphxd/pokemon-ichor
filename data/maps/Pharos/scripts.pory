@@ -1,1 +1,107 @@
+// Pharos: the island off the delta, and its waters (design/OIKOUMENE.md §4.5;
+// design/oikoumene/PERIODOS.md §5). Built by tools/ichor/maps/pharos.py.
+//
+// The seals are the pharaoh's herd; the Ditto among them are strays from Proteus's
+// troupe at Memphis. Homer's Old Man of the Sea is elsewhere (SYSTEMS.md §10, E13).
+// The north edge waits for Route 34 (world-postgame's): ICHOR_STUB_AETHOS.
+// ICHOR_STUB_MUSIC: MUS_ICHOR_ROAD stands in for The Black Land.
+
 mapscripts Pharos_MapScripts {}
+
+text Pharos_Text_NameIdmon { "IDMON" }
+
+script Pharos_EventScript_Stele {
+    msgbox(format("PHAROS\nThe pharaoh's island. His seals, his herders. Please don't grab either."), MSGBOX_SIGN)
+}
+
+script Pharos_EventScript_Shelter {
+    msgbox(format("Nets, a water jar, and a seal's whisker hung up for luck."), MSGBOX_SIGN)
+}
+
+script Pharos_EventScript_Seal {
+    lock
+    faceplayer
+    playmoncry(SPECIES_DEWGONG, CRY_MODE_NORMAL)
+    msgbox(format("Rrorrh! The seal shuffles closer, hoping you're the one with the fish."))
+    waitmoncry
+    release
+}
+
+script Pharos_EventScript_Ditto {
+    lock
+    faceplayer
+    playmoncry(SPECIES_DITTO, CRY_MODE_NORMAL)
+    msgbox(format("It's doing a seal. Badly. Its whiskers are on upside down."))
+    waitmoncry
+    release
+}
+
+// The set piece: the herder's story, and the herd's spare bell.
+script Pharos_EventScript_Herder {
+    lock
+    faceplayer
+    setspeaker(Pharos_Text_NameIdmon)
+    if (flag(FLAG_ICHOR_PHAROS_HERDER_GIFT)) {
+        msgbox(format("Count them with me? One, two... no, that one's a Ditto again."))
+        release
+        end
+    }
+    msgbox(format("These are the pharaoh's seals. Proteus, up at Memphis. We count them every noon.\p"
+                  "A Spartan king got stuck here once, waiting for a wind. Grabbed my great-great-"
+                  "grandfather and wouldn't let go.\p"
+                  "Went home and told everyone he'd wrestled a god. Grandad dined out on it for years.\p"
+                  "Here. The herd's spare bell. It rings when they're happy."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_SHELL_BELL)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_PHAROS_HERDER_GIFT)
+    setspeaker(Pharos_Text_NameIdmon)
+    msgbox(format("If a seal ever turns into a lion on you, let go. It's a Ditto."))
+    release
+}
+
+// --- trainers ---------------------------------------------------------------
+
+script Pharos_EventScript_Thais {
+    trainerbattle_single(TRAINER_ICHOR_THAIS, Pharos_Text_ThaisIntro, Pharos_Text_ThaisDefeat)
+    msgbox(format("I herd seals for a living. You'd be surprised how few of them listen."), MSGBOX_AUTOCLOSE)
+}
+
+text Pharos_Text_ThaisIntro { format("Stranger on the beach! The herd's watching. Don't embarrass me.") }
+text Pharos_Text_ThaisDefeat { format("The seals are clapping. For you, I think.") }
+
+script Pharos_EventScript_Harpalos {
+    trainerbattle_single(TRAINER_ICHOR_HARPALOS, Pharos_Text_HarpalosIntro, Pharos_Text_HarpalosDefeat)
+    msgbox(format("Pharos at dusk, the river at dawn. That's a boatman's whole life."), MSGBOX_AUTOCLOSE)
+}
+
+text Pharos_Text_HarpalosIntro { format("Out to the headland in my boat and back by dinner. You first.") }
+text Pharos_Text_HarpalosDefeat { format("Rowed straight into that one.") }
+
+script Pharos_EventScript_Neso {
+    trainerbattle_single(TRAINER_ICHOR_NESO, Pharos_Text_NesoIntro, Pharos_Text_NesoDefeat)
+    msgbox(format("The lagoon's floor is all shells. I sell the pearls in Naukratis."), MSGBOX_AUTOCLOSE)
+}
+
+text Pharos_Text_NesoIntro { format("You're dripping on my pearl bed. Battle, then dry off.") }
+text Pharos_Text_NesoDefeat { format("Fine, fine. Take a breath.") }
+
+script Pharos_EventScript_Kallias {
+    trainerbattle_single(TRAINER_ICHOR_KALLIAS, Pharos_Text_KalliasIntro, Pharos_Text_KalliasDefeat)
+    msgbox(format("I'm from Tyre. We put a sandbar to use: we stand on it and charge for the view."), MSGBOX_AUTOCLOSE)
+}
+
+text Pharos_Text_KalliasIntro { format("This sandbar's mine, friend. The toll is one battle.") }
+text Pharos_Text_KalliasDefeat { format("Toll paid. In full. Ouch.") }
+
+script Pharos_EventScript_Arsinoe {
+    trainerbattle_single(TRAINER_ICHOR_ARSINOE, Pharos_Text_ArsinoeIntro, Pharos_Text_ArsinoeDefeat)
+    msgbox(format("Ra's boat sails under the world each night. I come here to watch it set."), MSGBOX_AUTOCLOSE)
+}
+
+text Pharos_Text_ArsinoeIntro { format("The sun's in my eyes and you're in my way. Let's settle it.") }
+text Pharos_Text_ArsinoeDefeat { format("You burn brighter than I thought.") }

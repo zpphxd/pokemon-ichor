@@ -120,3 +120,7 @@ const u16 gMetatileAttributes_PorytilesManaged_Megaron[] = INCBIN_U16("data/tile
 // Ichor: per
 const u16 gMetatiles_PorytilesManaged_Per[] = INCBIN_U16("data/tilesets/secondary/per/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_Per[] = INCBIN_U16("data/tilesets/secondary/per/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: kemet (the Oikoumene's Egypt)
+const u16 gMetatiles_PorytilesManaged_Kemet[] = INCBIN_U16("data/tilesets/secondary/kemet/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_Kemet[] = INCBIN_U16("data/tilesets/secondary/kemet/porytiles_bin/metatile_attributes.bin");

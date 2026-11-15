@@ -1,1 +1,165 @@
+// The Delta Reeds: the route from Naukratis south through the papyrus to Memphis
+// (design/OIKOUMENE.md §4.5). Built by tools/ichor/maps/delta_reeds.py, which proves
+// its forced bands and its mandatory trainers' sight lines.
+//
+// Set pieces: the gnat-towers (Herodotus 2.95), the rest point's healer, Thoth's
+// pillar, and the Papyrus Shallows' gate, fenced shut until batch 2 builds the
+// Nursery (east edge, rows 23-25: design/oikoumene/MAPS_egypt.md).
+// ICHOR_STUB_MUSIC: MUS_ICHOR_ROAD stands in for The Black Land.
+
 mapscripts DeltaReeds_MapScripts {}
+
+text DeltaReeds_Text_NameHenut { "HENUT" }
+text DeltaReeds_Text_NameMeryt { "MERYT" }
+
+// --- signs ------------------------------------------------------------------
+
+script DeltaReeds_EventScript_NorthSign {
+    msgbox(format("THE DELTA REEDS\nNorth: Naukratis. South: Memphis, where the papyrus ends."), MSGBOX_SIGN)
+}
+
+script DeltaReeds_EventScript_SouthSign {
+    msgbox(format("South: Memphis and the White Walls.\nNorth: the Delta Reeds and Naukratis."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_HERM: Thoth's ibis pillar, Egypt's herm, waits for the Oikoumene's herm ids.
+script DeltaReeds_EventScript_IbisPillar {
+    msgbox(format("Thoth's ibis pillar, oiled by every Greek who passes.\p"
+                  "Someone has scratched HERMES on it, and someone else has scratched it out."), MSGBOX_SIGN)
+}
+
+script DeltaReeds_EventScript_GnatTower {
+    msgbox(format("A mud-brick tower. Up top, a bed under a net, high above the gnats."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_NURSERY: batch 2 opens the Papyrus Shallows here (map PapyrusShallows).
+script DeltaReeds_EventScript_NurserySign {
+    msgbox(format("THE PAPYRUS SHALLOWS\nThe young are hatching. Closed to visitors for now."), MSGBOX_SIGN)
+}
+
+script DeltaReeds_EventScript_NurseryFence {
+    msgbox(format("A reed fence, lashed tight. Something small splashes on the other side."), MSGBOX_SIGN)
+}
+
+script DeltaReeds_EventScript_NurseryKeeper {
+    msgbox(format("The shallows are shut while the young hatch. Every month it's somebody new.\p"
+                  "Come back when the reeds are open. I'll be here. I'm always here."), MSGBOX_NPC)
+}
+
+// --- the gnat-tower families ----------------------------------------------------
+
+script DeltaReeds_EventScript_TowerGranny {
+    lock
+    faceplayer
+    setspeaker(DeltaReeds_Text_NameHenut)
+    if (flag(FLAG_ICHOR_DELTA_GNAT_GIFT)) {
+        msgbox(format("Up at dusk, down at dawn. The gnats can't fly that high. We sleep like pharaohs."))
+        release
+        end
+    }
+    msgbox(format("Fishermen down here sleep under their nets. Up there, we sleep above the gnats.\p"
+                  "Here. Gnat-dust, off my net. The Bug-types are mad for it."))
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_SILVER_POWDER)
+    if (var(VAR_RESULT) == FALSE) {
+        call(Common_EventScript_ShowBagIsFull)
+        release
+        end
+    }
+    setflag(FLAG_ICHOR_DELTA_GNAT_GIFT)
+    release
+}
+
+// The rest point: Meryt lets travellers lie down at the foot of her family's tower.
+script DeltaReeds_EventScript_Healer {
+    lock
+    faceplayer
+    setspeaker(DeltaReeds_Text_NameMeryt)
+    msgbox(format("You look like the gnats found you. Lie down a moment in the shade."))
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    playfanfare(MUS_HEAL)
+    special(HealPlayerParty)
+    waitfanfare
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("There. Everyone's had a nap. Even the little ones."))
+    release
+}
+
+script DeltaReeds_EventScript_TowerKid {
+    msgbox(format("Mum says the papyrus is taller than a man. I'm taller than the papyrus, up the tower."), MSGBOX_NPC)
+}
+
+// --- trainers, north to south ----------------------------------------------------
+
+script DeltaReeds_EventScript_Pa {
+    trainerbattle_single(TRAINER_ICHOR_PA, DeltaReeds_Text_PaIntro, DeltaReeds_Text_PaDefeat)
+    msgbox(format("I pole a boat down to Naukratis twice a moon. Papyrus out, pots back."), MSGBOX_AUTOCLOSE)
+}
+
+text DeltaReeds_Text_PaIntro { format("New in the delta? Then let me show you how we say hello.") }
+text DeltaReeds_Text_PaDefeat { format("Hello, then! And welcome.") }
+
+script DeltaReeds_EventScript_Sobekhotep {
+    trainerbattle_single(TRAINER_ICHOR_SOBEKHOTEP, DeltaReeds_Text_SobekhotepIntro, DeltaReeds_Text_SobekhotepDefeat)
+    msgbox(format("Sobek keeps the river, they say. I just keep this gap. Somebody has to."), MSGBOX_AUTOCLOSE)
+}
+
+text DeltaReeds_Text_SobekhotepIntro { format("Nobody goes through the papyrus without going past me.") }
+text DeltaReeds_Text_SobekhotepDefeat { format("Go on through. Mind the crocodiles. Mine are tired.") }
+
+script DeltaReeds_EventScript_Nebamun {
+    trainerbattle_single(TRAINER_ICHOR_NEBAMUN, DeltaReeds_Text_NebamunIntro, DeltaReeds_Text_NebamunDefeat)
+    msgbox(format("The Phoenix is due at Heliopolis. Was due. Nobody knows now. The priests sweep the altar anyway."), MSGBOX_AUTOCLOSE)
+}
+
+text DeltaReeds_Text_NebamunIntro { format("I'm walking to Heliopolis to wait for a bird. Battle me while I'm early.") }
+text DeltaReeds_Text_NebamunDefeat { format("Five hundred years I'd have waited. Now I don't even know that.") }
+
+script DeltaReeds_EventScript_Merit {
+    trainerbattle_single(TRAINER_ICHOR_MERIT, DeltaReeds_Text_MeritIntro, DeltaReeds_Text_MeritDefeat)
+    msgbox(format("My dad poles the boats. I catch the bugs that land on them."), MSGBOX_AUTOCLOSE)
+}
+
+text DeltaReeds_Text_MeritIntro { format("Stop! You're standing on my bugs' bit of reeds.") }
+text DeltaReeds_Text_MeritDefeat { format("Okay. You can stand there.") }
+
+script DeltaReeds_EventScript_Ankhu {
+    trainerbattle_single(TRAINER_ICHOR_ANKHU, DeltaReeds_Text_AnkhuIntro, DeltaReeds_Text_AnkhuDefeat)
+    msgbox(format("I'm copying the reeds for the scribe of Thoth. There are a great many reeds."), MSGBOX_AUTOCLOSE)
+}
+
+text DeltaReeds_Text_AnkhuIntro { format("Hold still. I'm writing down everyone who passes. Battle first.") }
+text DeltaReeds_Text_AnkhuDefeat { format("Noted. Won. Passed.") }
+
+script DeltaReeds_EventScript_Tiye {
+    trainerbattle_single(TRAINER_ICHOR_TIYE, DeltaReeds_Text_TiyeIntro, DeltaReeds_Text_TiyeDefeat)
+    msgbox(format("Ra rides his boat across the sky. I'm a passenger, very slightly, on foot."), MSGBOX_AUTOCLOSE)
+}
+
+text DeltaReeds_Text_TiyeIntro { format("The sun's high. Let's see who it favours.") }
+text DeltaReeds_Text_TiyeDefeat { format("It favours you. Today.") }
+
+script DeltaReeds_EventScript_Iuny {
+    trainerbattle_single(TRAINER_ICHOR_IUNY, DeltaReeds_Text_IunyIntro, DeltaReeds_Text_IunyDefeat)
+    msgbox(format("Catfish bite at noon. Everything else bites at night."), MSGBOX_AUTOCLOSE)
+}
+
+text DeltaReeds_Text_IunyIntro { format("You scared my catfish. Make it worth it.") }
+text DeltaReeds_Text_IunyDefeat { format("Worth it. Barely.") }
+
+script DeltaReeds_EventScript_Khety {
+    trainerbattle_single(TRAINER_ICHOR_KHETY, DeltaReeds_Text_KhetyIntro, DeltaReeds_Text_KhetyDefeat)
+    msgbox(format("Papyrus for the scribes, linen for my trade. The delta grows both."), MSGBOX_AUTOCLOSE)
+}
+
+text DeltaReeds_Text_KhetyIntro { format("I'm an embalmer. Don't worry. You're nowhere near my line of work.") }
+text DeltaReeds_Text_KhetyDefeat { format("Very lively. Good for you.") }
+
+script DeltaReeds_EventScript_Menna {
+    trainerbattle_single(TRAINER_ICHOR_MENNA, DeltaReeds_Text_MennaIntro, DeltaReeds_Text_MennaDefeat)
+    msgbox(format("Tyre's merchants camp round Proteus's precinct. Best customers in Memphis."), MSGBOX_AUTOCLOSE)
+}
+
+text DeltaReeds_Text_MennaIntro { format("Last stop before the White Walls. Show me what you're trading.") }
+text DeltaReeds_Text_MennaDefeat { format("A fair price. I'll take it.") }

@@ -642,10 +642,10 @@
     {
       "id": "LAYOUT_NAUKRATIS",
       "name": "Naukratis_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 36,
+      "height": 34,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Kemet",
       "border_filepath": "data/layouts/Naukratis/border.bin",
       "blockdata_filepath": "data/layouts/Naukratis/map.bin",
       "layout_version": "emerald"
@@ -653,10 +653,10 @@
     {
       "id": "LAYOUT_PHAROS",
       "name": "Pharos_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 36,
+      "height": 30,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Kemet",
       "border_filepath": "data/layouts/Pharos/border.bin",
       "blockdata_filepath": "data/layouts/Pharos/map.bin",
       "layout_version": "emerald"
@@ -664,10 +664,10 @@
     {
       "id": "LAYOUT_DELTA_REEDS",
       "name": "DeltaReeds_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 32,
+      "height": 46,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Kemet",
       "border_filepath": "data/layouts/DeltaReeds/border.bin",
       "blockdata_filepath": "data/layouts/DeltaReeds/map.bin",
       "layout_version": "emerald"
@@ -675,10 +675,10 @@
     {
       "id": "LAYOUT_MEMPHIS",
       "name": "Memphis_Layout",
-      "width": 28,
-      "height": 28,
+      "width": 40,
+      "height": 36,
       "primary_tileset": "gTileset_Aethos",
-      "secondary_tileset": "gTileset_Akti",
+      "secondary_tileset": "gTileset_Kemet",
       "border_filepath": "data/layouts/Memphis/border.bin",
       "blockdata_filepath": "data/layouts/Memphis/map.bin",
       "layout_version": "emerald"

@@ -909,6 +909,817 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_DELTA_REEDS",
+          "base_label": "gDeltaReeds_Morning",
+          "land_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_SWADLOON"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_MASQUERAIN"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_CARNIVINE"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_WORMADAM"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_TADBULB"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_STUNFISK"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_QUAQUAVAL"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_MASQUERAIN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_QUAQUAVAL"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_TADBULB"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SHELLDER"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_BIBAREL"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_QUAQUAVAL"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_WHISCASH"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_WHISCASH"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_EELEKTRIK"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SHELLDER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_EELEKTRIK"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_WHISCASH"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_SHELLDER"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_DELTA_REEDS",
+          "base_label": "gDeltaReeds_Day",
+          "land_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_MASQUERAIN"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_SWADLOON"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_CARNIVINE"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_STUNFISK"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_WORMADAM"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_TADBULB"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_MASQUERAIN"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_QUAQUAVAL"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_QUAQUAVAL"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_KINGLER"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_DELTA_REEDS",
+          "base_label": "gDeltaReeds_Evening",
+          "land_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_GRENINJA"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_MASQUERAIN"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_TADBULB"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_STUNFISK"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_CARNIVINE"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_GRENINJA"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_MASQUERAIN"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_WORMADAM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_DELTA_REEDS",
+          "base_label": "gDeltaReeds_Night",
+          "land_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_GRENINJA"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_MASQUERAIN"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_STUNFISK"
+              },
+              {
+                "min_level": 60,
+                "max_level": 62,
+                "species": "SPECIES_TADBULB"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_CARNIVINE"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_GRENINJA"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_ORBEETLE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 62,
+                "species": "SPECIES_SEISMITOAD"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PHAROS",
+          "base_label": "gPharos_Morning",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_PALOSSAND"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_WUGTRIO"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DITTO"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_QUAQUAVAL"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_KROOKODILE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_DITTO"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_STUNFISK"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_HIPPOWDON"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_QUAQUAVAL"
+              }
+            ]
+          },
+          "water_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DEWGONG"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_PYUKUMUKU"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_PRIMARINA"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_WUGTRIO"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SHELLDER"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_SHELLDER"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SHELLDER"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_SHELLDER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_WUGTRIO"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_EELEKTRIK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PHAROS",
+          "base_label": "gPharos_Day",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_PALOSSAND"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DITTO"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_WUGTRIO"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_KROOKODILE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_DITTO"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_STUNFISK"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_QUAQUAVAL"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_PALOSSAND"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_HIPPOWDON"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_GRENINJA"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PHAROS",
+          "base_label": "gPharos_Evening",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DITTO"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_GRENINJA"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_PALOSSAND"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_WUGTRIO"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_STUNFISK"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_KROOKODILE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_GRENINJA"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_QUAQUAVAL"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_DITTO"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_PHAROS",
+          "base_label": "gPharos_Night",
+          "land_mons": {
+            "encounter_rate": 25,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_DITTO"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_GRENINJA"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_PALOSSAND"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_LIEPARD"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_STUNFISK"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_KROOKODILE"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_GRENINJA"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_WUGTRIO"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_DITTO"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_LIEPARD"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_NAUKRATIS",
+          "base_label": "gNaukratis_Morning",
+          "water_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SHELLDER"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_BIBAREL"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SEISMITOAD"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_QUAQUAVAL"
+              }
+            ]
+          },
+          "fishing_mons": {
+            "encounter_rate": 30,
+            "mons": [
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_WHISCASH"
+              },
+              {
+                "min_level": 61,
+                "max_level": 62,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_WHISCASH"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_EELEKTRIK"
+              },
+              {
+                "min_level": 61,
+                "max_level": 63,
+                "species": "SPECIES_SHELLDER"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_EELEKTRIK"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_WHISCASH"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_OCTILLERY"
+              },
+              {
+                "min_level": 62,
+                "max_level": 63,
+                "species": "SPECIES_KINGLER"
+              },
+              {
+                "min_level": 63,
+                "max_level": 63,
+                "species": "SPECIES_SHELLDER"
+              }
+            ]
+          }
         }
       ]
     },

@@ -507,3 +507,18 @@ const struct Tileset gTileset_Per =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_Per,
     .callback = NULL,
 };
+
+// Porytiles-managed secondary built by tools/ichor/art/kemet_build.py: Egypt in the
+// Oikoumene (Naukratis, Pharos, the Delta Reeds, Memphis; batch 2's desert and Nile).
+// It uses only its own tiles and palettes 6-12; cells on grass, sand, sea and path
+// borrow aethos's, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Kemet =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Kemet,
+    .palettes = gTilesetPalettes_PorytilesManaged_Kemet,
+    .metatiles = gMetatiles_PorytilesManaged_Kemet,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Kemet,
+    .callback = NULL,
+};

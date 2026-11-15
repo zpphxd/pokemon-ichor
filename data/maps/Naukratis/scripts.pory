@@ -1,1 +1,160 @@
-mapscripts Naukratis_MapScripts {}
+// Naukratis: the Greeks' trading port in the Nile delta, a first port and the
+// Oikoumene's hub (design/OIKOUMENE.md §4.5; design/oikoumene/BUILD.md §5).
+// The map is built by tools/ichor/maps/naukratis.py.
+//
+// Alethea's quay scene waits at the foot of the stair, the only way off the quay
+// (coord trigger, VAR_TEMP_1 == 0). ON_TRANSITION shuts it once
+// FLAG_ICHOR_OIKOUMENE_ARRIVED is set, which also hides her (her object's flag).
+// Nausikles stands on the mooring steps where the Euploia's gangplank will go and
+// runs Oik_EventScript_SailHome (ICHOR_STUB_SHIP).
+// ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for The Black Land.
+
+mapscripts Naukratis_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (flag(FLAG_ICHOR_OIKOUMENE_ARRIVED)) {
+            setvar(VAR_TEMP_1, 1)
+        }
+    }
+}
+
+text Naukratis_Text_NameAlethea { "ALETHEA" }
+text Naukratis_Text_NamePhanes { "PHANES" }
+text Naukratis_Text_NameHapi { "HAPI" }
+text Naukratis_Text_NameTamit { "TAMIT" }
+
+// ---------------------------------------------------------------------------
+// Alethea on the quay
+// ---------------------------------------------------------------------------
+
+script Naukratis_EventScript_AletheaScene {
+    lockall
+    setvar(VAR_TEMP_1, 1)
+    applymovement(LOCALID_NAUKRATIS_ALETHEA, Common_Movement_ExclamationMark)
+    waitmovement(0)
+    setspeaker(Naukratis_Text_NameAlethea)
+    msgbox(format("There you are! The ship's quicker than the post, then."))
+    call(Oik_EventScript_AletheaQuay)
+    setspeaker(Naukratis_Text_NameAlethea)
+    msgbox(format("Start with Egypt. Herodotus spent half a book on it and got some of it right.\p"
+                  "I'll be about. Go and look at things."))
+    closemessage
+    applymovement(LOCALID_NAUKRATIS_ALETHEA, Naukratis_Movement_AletheaLeaves)
+    waitmovement(0)
+    removeobject(LOCALID_NAUKRATIS_ALETHEA)
+    releaseall
+}
+
+movement Naukratis_Movement_AletheaLeaves { walk_down * 3 }
+
+script Naukratis_EventScript_Alethea {
+    lock
+    faceplayer
+    setspeaker(Naukratis_Text_NameAlethea)
+    msgbox(format("Go on. The world's waiting to be written down."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// The quay
+// ---------------------------------------------------------------------------
+
+script Naukratis_EventScript_Boatman {
+    msgbox(format("Grain goes north, pots come south, and the pharaoh takes a tenth of both."), MSGBOX_NPC)
+}
+
+script Naukratis_EventScript_Fisher {
+    msgbox(format("The old man in the net-loft keeps a rod for whoever comes in off the sea.\p"
+                  "Tell him the Nile's fish are bigger than his stories. He'll argue."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// The square: which continent is Egypt on? (Herodotus 2.15-18)
+// ---------------------------------------------------------------------------
+
+script Naukratis_EventScript_Ionian {
+    lock
+    faceplayer
+    setspeaker(Naukratis_Text_NamePhanes)
+    msgbox(format("Egypt's in Asia. Obviously. The Nile's the border, and Asia starts on the east bank."))
+    release
+}
+
+script Naukratis_EventScript_Egyptian {
+    lock
+    faceplayer
+    setspeaker(Naukratis_Text_NameHapi)
+    msgbox(format("Egypt is wherever the Nile floods. Whoever drinks from it is Egyptian.\p"
+                  "The god at Ammon said so. You're drinking it now, Greek."))
+    release
+}
+
+script Naukratis_EventScript_Libyan {
+    lock
+    faceplayer
+    setspeaker(Naukratis_Text_NameTamit)
+    msgbox(format("If the Nile's the border, the west bank's Libya.\p"
+                  "So half of you is standing in my country. Mind your feet."))
+    release
+}
+
+script Naukratis_EventScript_BreadSeller {
+    msgbox(format("Kyllestis! Delta bread, from emmer! The Greeks pull faces and buy three."), MSGBOX_NPC)
+}
+
+script Naukratis_EventScript_Kid {
+    msgbox(format("Daphne lets me hold the old bones in her house. She says they were Pokémon once."), MSGBOX_NPC)
+}
+
+// ---------------------------------------------------------------------------
+// The Hellenion
+// ---------------------------------------------------------------------------
+
+script Naukratis_EventScript_Priestess {
+    msgbox(format("Samos and Miletos built temples of their own. The Hellenion's for everyone else.\p"
+                  "Nine cities share one altar. Mostly we argue round it."), MSGBOX_NPC)
+}
+
+script Naukratis_EventScript_Samian {
+    msgbox(format("Hera's temple, the Samians' one, is bigger than this. I'm only saying."), MSGBOX_NPC)
+}
+
+script Naukratis_EventScript_HellenionStele {
+    msgbox(format("THE HELLENION\p"
+                  "Raised by Chios, Teos, Phokaia, Klazomenai, Rhodos, Knidos, Halikarnassos, "
+                  "Phaselis and Mytilene."), MSGBOX_SIGN)
+}
+
+script Naukratis_EventScript_Temple {
+    msgbox(format("The gods of the Greeks share one porch. Nine cities' offerings crowd their feet."), MSGBOX_SIGN)
+}
+
+script Naukratis_EventScript_Altar {
+    msgbox(format("The altar's fire never goes out. Each day a different city tends it."), MSGBOX_SIGN)
+}
+
+// ---------------------------------------------------------------------------
+// The town
+// ---------------------------------------------------------------------------
+
+script Naukratis_EventScript_TownSign {
+    msgbox(format("NAUKRATIS\nThe Greeks' port in Egypt. Trade by the river, pay at the gate."), MSGBOX_SIGN)
+}
+
+script Naukratis_EventScript_SouthSign {
+    msgbox(format("South: the Delta Reeds, then Memphis.\nNorth: the harbor, and Pharos beyond."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_HERM: Thoth's ibis pillar, Egypt's herm, waits for the Oikoumene's herm ids.
+script Naukratis_EventScript_IbisPillar {
+    msgbox(format("A pillar painted with Thoth's ibis. The Greeks here call him Hermes and oil it anyway.\p"
+                  "Someday it may answer travellers. Not yet."), MSGBOX_SIGN)
+}
+
+script Naukratis_EventScript_Gardener {
+    msgbox(format("The canal fills when the river rises. Then I sow, and the river does the rest."), MSGBOX_NPC)
+}
+
+script Naukratis_EventScript_OldWoman {
+    msgbox(format("My grandmother knew the day the flood would come, every year.\p"
+                  "Now it comes when it comes. We sow anyway."), MSGBOX_NPC)
+}
