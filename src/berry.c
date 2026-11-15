@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "berry.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -2700,6 +2701,7 @@ static u8 CalcBerryYield(struct BerryTree *tree)
         result = max;
     else
         result = CalcBerryYieldInternal(max, min, BerryTreeGetNumStagesWatered(tree));
+    result += Ichor_ExtraBerryYield(); // Ichor: Demeter
 
     return result;
 }

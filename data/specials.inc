@@ -638,3 +638,62 @@ gSpecials::
 	def_special UpdateTrainerCardPhotoIcons
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
+	@ Ichor: relics (src/ichor_relics.c)
+	def_special Ichor_CanUseRelic
+	def_special Ichor_RelicPromptsAuto
+	def_special Ichor_RelicPose, waitstate=1
+	def_special Ichor_FollowerHop
+	def_special Ichor_CheckFlagInVar
+	def_special Ichor_SetFlagInVar
+	def_special Ichor_AnimateTorchFlash, waitstate=1
+	def_special Ichor_IsInDarkMap
+	def_special Ichor_SetTorchDoused
+	def_special Ichor_ClearFog
+	def_special Ichor_BuildRelicRing
+	def_special Ichor_UseRingChoice
+	@ Ichor: rites (src/ichor_rites.c)
+	def_special Ichor_AddFavor
+	def_special Ichor_GetFavorOf
+	def_special Ichor_GetBlessingGod
+	def_special Ichor_GrantBlessing
+	def_special Ichor_BuildOfferingMenu
+	def_special Ichor_BufferAltar
+	def_special Ichor_BuildAltarMenu
+	def_special Ichor_CheckBlessingConflict
+	def_special Ichor_Pray
+	def_special Ichor_MakeOffering
+	def_special Ichor_BufferFavor
+	def_special Ichor_NextGiftDue
+	def_special Ichor_TakeGift
+	def_special Ichor_BufferLesson
+	def_special Ichor_GetLovedOffering
+	def_special Ichor_UseHearthfire
+	def_special Ichor_HasHearthfire
+	def_special Ichor_CheckGiftTaken
+	def_special Ichor_CheckAltarCleansed
+	def_special Ichor_CleanseAltar
+	def_special Ichor_AresVictory
+	@ Ichor: herm waystones (src/ichor_herms.c)
+	def_special Ichor_CountHerms
+	def_special Ichor_GetHermState
+	def_special Ichor_AnointHerm
+	@ Ichor: the Frozen Hour (src/ichor_frozen.c)
+	def_special Ichor_FrozenHourBegin, waitstate=1
+	def_special Ichor_UnfreezeObject
+	def_special Ichor_SepiaMemoryBegin
+	def_special Ichor_SepiaMemoryEnd
+	def_special Ichor_ColorReturnStep
+	@ Ichor: the Labyrinth (src/ichor_labyrinth.c)
+	def_special Ichor_AddThreadFloor
+	def_special Ichor_AddThreadAnchor
+	def_special Ichor_AddCrackedWall
+	def_special Ichor_DrawThread
+	def_special Ichor_StartAsterion
+	def_special Ichor_AsterionRest
+	def_special Ichor_AsterionKnockdown
+	def_special Ichor_BuildThreadMenu
+	def_special Ichor_ThreadTieOff
+	def_special Ichor_ThreadWindIn
+	def_special Ichor_BuildThreadReturnMenu
+	def_special Ichor_ThreadReturnTo
+	def_special Ichor_TurnDial

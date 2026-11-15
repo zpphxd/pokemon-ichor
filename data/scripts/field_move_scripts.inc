@@ -1,5 +1,6 @@
 @ Interact with cuttable tree
 EventScript_CutTree::
+	goto EventScript_IchorThicket @ Ichor: relics replace HMs (data/scripts/ichor_relics.pory)
 	lockall
 	checkfieldmove FIELD_MOVE_CUT, TRUE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
@@ -62,6 +63,7 @@ EventScript_UseRockSmash::
 
 @ Interact with smashable rock
 EventScript_RockSmash::
+	goto EventScript_IchorRubble @ Ichor: relics replace HMs (data/scripts/ichor_relics.pory)
 	lockall
 	checkfieldmove FIELD_MOVE_ROCK_SMASH, TRUE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
@@ -222,6 +224,7 @@ Text_CantSmash:
 	.string "may be able to smash it.$"
 
 EventScript_StrengthBoulder::
+	goto EventScript_IchorColumnDrum @ Ichor: relics replace HMs (data/scripts/ichor_relics.pory)
 	lockall
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	checkfieldmove FIELD_MOVE_STRENGTH, TRUE
@@ -282,6 +285,7 @@ Text_StrengthActivated:
 	.string "boulders around.$"
 
 EventScript_UseWaterfall::
+	goto EventScript_IchorWaterfall @ Ichor: relics replace HMs (data/scripts/ichor_relics.pory)
 	lockall
 	checkfieldmove FIELD_MOVE_WATERFALL
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
@@ -296,6 +300,7 @@ EventScript_UseWaterfall::
 	goto EventScript_EndWaterfall
 
 EventScript_CannotUseWaterfall::
+	goto EventScript_IchorCannotWaterfall @ Ichor: relics replace HMs (data/scripts/ichor_relics.pory)
 	lockall
 
 EventScript_CantWaterfall::
@@ -317,6 +322,7 @@ Text_MonUsedWaterfall:
 	.string "{STR_VAR_1} used WATERFALL.$"
 
 EventScript_UseDive::
+	goto EventScript_IchorDive @ Ichor: relics replace HMs (data/scripts/ichor_relics.pory)
 	lockall
 	checkfieldmove FIELD_MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
@@ -344,6 +350,7 @@ EventScript_EndDive::
 	end
 
 EventScript_UseDiveUnderwater::
+	goto EventScript_IchorSurface @ Ichor: relics replace HMs (data/scripts/ichor_relics.pory)
 	lockall
 	checkfieldmove FIELD_MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
@@ -443,6 +450,7 @@ EventScript_UseDefog::
 	end
 
 EventScript_UseRockClimb::
+	goto EventScript_IchorIvyClimb @ Ichor: Dionysus's thyrsus climbs ivy walls (data/scripts/ichor_relics.pory)
 	lockall
 	checkfieldmove FIELD_MOVE_ROCK_CLIMB
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantRockClimb

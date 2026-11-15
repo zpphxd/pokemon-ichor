@@ -34,6 +34,7 @@
 #include "constants/field_tasks.h"
 #include "constants/field_weather.h"
 #include "constants/flags.h"
+#include "constants/ichor.h"
 #include "constants/follower_npc.h"
 #include "constants/frontier_util.h"
 #include "constants/game_stat.h"
@@ -1695,6 +1696,10 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/text/pokemon_news.inc"
 	.include "data/scripts/mauville_man.inc"
 	.include "data/scripts/field_move_scripts.inc"
+	.include "data/scripts/ichor_relics.inc" @ Ichor: relics
+	.include "data/scripts/ichor_rites.inc" @ Ichor: rites
+	.include "data/scripts/ichor_herms.inc" @ Ichor: herm waystones
+	.include "data/scripts/ichor_labyrinth.inc" @ Ichor: the Labyrinth
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/profile_man.inc"
 	.include "data/scripts/day_care.inc"

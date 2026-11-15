@@ -1011,6 +1011,33 @@ const u16 gItemIconPalette_Tatsugirinite[] = INCGFX_U16("graphics/items/icon_pal
 const u32 gItemIcon_Glimmoranite[] = INCGFX_U32("graphics/items/icons/glimmoranite.png", ".4bpp.smol");
 const u16 gItemIconPalette_Glimmoranite[] = INCGFX_U16("graphics/items/icon_palettes/glimmoranite.pal", ".gbapal");
 
+// Ichor: the relics (tools/ichor/art/items_relics.py)
+const u32 gItemIcon_Talaria[] = INCGFX_U32("graphics/items/icons/ichor_talaria.png", ".4bpp.smol");
+const u16 gItemIconPalette_Talaria[] = INCGFX_U16("graphics/items/icon_palettes/ichor_talaria.pal", ".gbapal");
+const u32 gItemIcon_BronzeHammer[] = INCGFX_U32("graphics/items/icons/bronze_hammer.png", ".4bpp.smol");
+const u16 gItemIconPalette_BronzeHammer[] = INCGFX_U16("graphics/items/icon_palettes/bronze_hammer.pal", ".gbapal");
+const u32 gItemIcon_HecatesTorch[] = INCGFX_U32("graphics/items/icons/hecates_torch.png", ".4bpp.smol");
+const u16 gItemIconPalette_HecatesTorch[] = INCGFX_U16("graphics/items/icon_palettes/hecates_torch.pal", ".gbapal");
+const u32 gItemIcon_DemetersSickle[] = INCGFX_U32("graphics/items/icons/demeters_sickle.png", ".4bpp.smol");
+const u16 gItemIconPalette_DemetersSickle[] = INCGFX_U16("graphics/items/icon_palettes/demeters_sickle.pal", ".gbapal");
+const u32 gItemIcon_GirdleOfHerakles[] = INCGFX_U32("graphics/items/icons/girdle_of_herakles.png", ".4bpp.smol");
+const u16 gItemIconPalette_GirdleOfHerakles[] = INCGFX_U16("graphics/items/icon_palettes/girdle_of_herakles.pal", ".gbapal");
+const u32 gItemIcon_PoseidonsConch[] = INCGFX_U32("graphics/items/icons/poseidons_conch.png", ".4bpp.smol");
+const u16 gItemIconPalette_PoseidonsConch[] = INCGFX_U16("graphics/items/icon_palettes/poseidons_conch.pal", ".gbapal");
+const u32 gItemIcon_DaedalusWings[] = INCGFX_U32("graphics/items/icons/daedalus_wings.png", ".4bpp.smol");
+const u16 gItemIconPalette_DaedalusWings[] = INCGFX_U16("graphics/items/icon_palettes/daedalus_wings.pal", ".gbapal");
+const u32 gItemIcon_HornOfAchelous[] = INCGFX_U32("graphics/items/icons/horn_of_achelous.png", ".4bpp.smol");
+const u16 gItemIconPalette_HornOfAchelous[] = INCGFX_U16("graphics/items/icon_palettes/horn_of_achelous.pal", ".gbapal");
+const u16 gItemIconPalette_AriadnesThread[] = INCGFX_U16("graphics/items/icon_palettes/ariadnes_thread.pal", ".gbapal");
+const u32 gItemIcon_Labrys[] = INCGFX_U32("graphics/items/icons/labrys.png", ".4bpp.smol");
+const u16 gItemIconPalette_Labrys[] = INCGFX_U16("graphics/items/icon_palettes/labrys.pal", ".gbapal");
+const u32 gItemIcon_HelmOfDarkness[] = INCGFX_U32("graphics/items/icons/helm_of_darkness.png", ".4bpp.smol");
+const u16 gItemIconPalette_HelmOfDarkness[] = INCGFX_U16("graphics/items/icon_palettes/helm_of_darkness.pal", ".gbapal");
+const u32 gItemIcon_NereidPearl[] = INCGFX_U32("graphics/items/icons/nereid_pearl.png", ".4bpp.smol");
+const u16 gItemIconPalette_NereidPearl[] = INCGFX_U16("graphics/items/icon_palettes/nereid_pearl.pal", ".gbapal");
+const u32 gItemIcon_AeolusBag[] = INCGFX_U32("graphics/items/icons/aeolus_bag.png", ".4bpp.smol");
+const u16 gItemIconPalette_AeolusBag[] = INCGFX_U16("graphics/items/icon_palettes/aeolus_bag.pal", ".gbapal");
+
 // Gems
 
 const u32 gItemIcon_TypeGem[] = INCGFX_U32("graphics/items/icons/type_gem.png", ".4bpp.smol");

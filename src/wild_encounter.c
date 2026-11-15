@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_rites.h"
 #include "battle_setup.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
@@ -209,7 +210,7 @@ u32 ChooseWildMonIndex_Land(void)
     if (swap)
         wildMonIndex = 11 - wildMonIndex;
 
-    return wildMonIndex;
+    return Ichor_ModifyLandSlot(wildMonIndex); // Ichor: Artemis's night hunt
 }
 
 // Mostly equivalent to ChooseWildMonIndex_Land
@@ -325,7 +326,7 @@ static u32 ChooseWildMonIndex_Fishing(u8 rod)
     u8 rand = Random() % max(max(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_TOTAL, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_TOTAL),
                              ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_TOTAL);
 
-    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
+    if ((LURE_STEP_COUNT != 0 || Ichor_FavorsRareFishingSlots()) && (Random() % 10 < 2)) // Ichor: Poseidon
         swap = TRUE;
 
     switch (rod)
@@ -513,7 +514,7 @@ static u8 PickWildMonNature(enum Species species)
 void CreateWildMon(enum Species species, u8 level)
 {
     ZeroEnemyPartyMons();
-    u32 personality = GetMonPersonality(species, GetSynchronizedGender(WILDMON_ORIGIN, species), PickWildMonNature(species), RANDOM_UNOWN_LETTER);
+    u32 personality = GetMonPersonality(species, Ichor_ModifyWildGender(GetSynchronizedGender(WILDMON_ORIGIN, species), species), PickWildMonNature(species), RANDOM_UNOWN_LETTER); // Ichor: Aphrodite
     CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
     GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
@@ -546,6 +547,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
             break;
 
         wildMonIndex = ChooseWildMonIndex_Land();
+        wildMonIndex = Ichor_ModifyWildSlot(wildMonInfo->wildPokemon, wildMonIndex, ChooseWildMonIndex_Land); // Ichor: Zeus, Hecate
         break;
     case WILD_AREA_WATER:
         if (TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, NUM_WATER_MONS_ENCOUNTER_SLOTS))
@@ -575,6 +577,9 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
+    if (!Ichor_IsWildLevelAllowed(level)) // Ichor: Ares's war-lust scares off the weak
+        return FALSE;
+    level = Ichor_ModifyWildLevel(level);
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
@@ -586,7 +591,7 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
 {
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(rod);
     enum Species wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
-    u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
+    u8 level = Ichor_ModifyWildLevel(ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING)); // Ichor
 
     UpdateChainFishingStreak();
     CreateWildMon(wildMonSpecies, level);
@@ -609,6 +614,7 @@ static bool8 WildEncounterCheck(u32 encounterRate, bool8 ignoreAbility)
         encounterRate = encounterRate * 80 / 100;
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
+    encounterRate = Ichor_ModifyEncounterRate(encounterRate); // Ichor: Artemis, Poseidon, the Frenzy
     if (LURE_STEP_COUNT != 0)
         encounterRate *= 2;
     if (!ignoreAbility && !GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SANITY_IS_EGG))

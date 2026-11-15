@@ -1,0 +1,39 @@
+// Ichor: herm waystones (design/SYSTEMS.md §4; design/ENGINE_API.md §4).
+//
+// A route's great herm runs EventScript_IchorGreatHerm as its bg event, or a
+// sign script calls EventScript_IchorAnointHerm after its own line (the fork's
+// directions). The engine finds which herm it is from the map
+// (src/data/ichor_herms.h).
+
+script EventScript_IchorGreatHerm {
+    lockall
+    call(EventScript_IchorAnointHerm)
+    releaseall
+}
+
+script EventScript_IchorAnointHerm {
+    specialvar(VAR_RESULT, Ichor_GetHermState)
+    if (var(VAR_RESULT) == 1) {
+        msgbox(format("The great herm's face still shines with your oil. Hermes remembers you passed."), MSGBOX_DEFAULT)
+        return
+    }
+    if (var(VAR_RESULT) == 0) {
+        return
+    }
+    checkitem(ITEM_OLIVE_OIL)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("A great herm, hung with old garlands. Hermes's face, worn smooth.\pTravelers anoint these with olive oil."), MSGBOX_DEFAULT)
+        return
+    }
+    msgbox(format("A great herm, hung with old garlands. Hermes's face, worn smooth.\pAnoint it with olive oil? (You have {STR_VAR_1}.)"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        return
+    }
+    special(Ichor_AnointHerm)
+    playse(SE_M_HEAL_BELL)
+    msgbox(format("The oil runs down the old stone face.\pSomewhere, Hermes makes a note."), MSGBOX_DEFAULT)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("Every great herm in Aethos shines with your oil now.\pHermes is delighted!"), MSGBOX_DEFAULT)
+    }
+    return
+}

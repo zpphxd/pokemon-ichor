@@ -1,0 +1,24 @@
+// Constants for tools/ichor/tests/ichor_rites.lua (see engine_consts.h).
+#include "engine_consts.h"
+#include "ichor_rites.h"
+#include "constants/ichor.h"
+#include "constants/items.h"
+#include "constants/map_groups.h"
+
+K(MAP_ROUTE1, MAP_KALLISTE_ROUTE1)
+K(ICHOR_GOD_HESTIA, ICHOR_GOD_HESTIA)
+K(ICHOR_GOD_DEMETER, ICHOR_GOD_DEMETER)
+K(ICHOR_GOD_APOLLO, ICHOR_GOD_APOLLO)
+K(ICHOR_GOD_ATHENA, ICHOR_GOD_ATHENA)
+K(ICHOR_BLESSING_MAJOR, ICHOR_BLESSING_MAJOR)
+K(ITEM_LAUREL_SPRIG, ITEM_LAUREL_SPRIG)
+K(ITEM_POMEG_BERRY, ITEM_POMEG_BERRY)
+K(ITEM_POKE_FLUTE, ITEM_POKE_FLUTE)
+K(FLAG_GIFT_APOLLO_I, FLAG_ICHOR_GIFT(ICHOR_GOD_APOLLO, ICHOR_GIFT_I))
+K(FLAG_GIFT_APOLLO_II, FLAG_ICHOR_GIFT(ICHOR_GOD_APOLLO, ICHOR_GIFT_II))
+K(FLAG_GIFT_APOLLO_III, FLAG_ICHOR_GIFT(ICHOR_GOD_APOLLO, ICHOR_GIFT_III))
+K(FLAG_ICHOR_ALTARS_START, FLAG_ICHOR_ALTARS_START)
+K(OFF_ICHOR_BLESSING_GOD, offsetof(struct IchorSave, blessing.god))
+K(OFF_ICHOR_BLESSING_FLAGS, offsetof(struct IchorSave, blessing.flags))
+K(OFF_ICHOR_BLESSING_STEPS, offsetof(struct IchorSave, blessing.steps))
+K(OFF_SB1_BAG_ITEMS, offsetof(struct SaveBlock1, bag))
