@@ -4,12 +4,15 @@
 #include "event_data.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
+#include "ichor_calendar.h"
 #include "ichor_herms.h"
 #include "ichor_omen.h"
 #include "ichor_relics.h"
+#include "ichor_rites.h"
 #include "ichor_save.h"
 #include "rtc.h"
 #include "pokemon.h"
+#include "wild_encounter.h"
 #include "test/overworld_script.h"
 #include "test/test.h"
 #include "constants/ichor.h"
@@ -246,4 +249,74 @@ TEST("Ichor: an omen's swarm starts today's outbreak, and only today's visitor s
     EXPECT(FlagGet(FLAG_TEMP_1));
     EXPECT(!FlagGet(FLAG_TEMP_2));
     FlagClear(FLAG_BADGE08_GET);
+}
+
+u16 Ichor_GetMonth(void);
+u16 Ichor_GetFestival(void);
+u16 Ichor_DaysToFestival(void);
+u16 Ichor_JoinFestival(void);
+
+TEST("Ichor: the Aethos year is 36 days, a festival on each month's middle day")
+{
+    EXPECT_EQ(Ichor_GetMonthOfDay(0), ICHOR_MONTH_HEKATOMBAION);
+    EXPECT_EQ(Ichor_GetMonthOfDay(3), ICHOR_MONTH_METAGEITNION);
+    EXPECT_EQ(Ichor_GetMonthOfDay(35), ICHOR_MONTH_SKIROPHORION);
+    EXPECT_EQ(Ichor_GetMonthOfDay(36), ICHOR_MONTH_HEKATOMBAION);
+    EXPECT_EQ(Ichor_GetFestivalOfDay(0), ICHOR_FESTIVAL_NONE);
+    EXPECT_EQ(Ichor_GetFestivalOfDay(1), ICHOR_FESTIVAL_PANATHENAIA);
+    EXPECT_EQ(Ichor_GetFestivalOfDay(2), ICHOR_FESTIVAL_NONE);
+    EXPECT_EQ(Ichor_GetFestivalOfDay(13), ICHOR_FESTIVAL_NONE);  // Maimakterion, the month of storms
+    EXPECT_EQ(Ichor_GetFestivalOfDay(22), ICHOR_FESTIVAL_ANTHESTERIA);
+    EXPECT_EQ(Ichor_GetFestivalOfDay(34 + 36 * 5), ICHOR_FESTIVAL_KRONIA);
+
+    VarSet(VAR_DAYS, 37);  // the Panathenaia, a year on
+    EXPECT_EQ(Ichor_GetMonth(), ICHOR_MONTH_HEKATOMBAION);
+    EXPECT_EQ(gSpecialVar_0x8004, 1);
+    EXPECT_EQ(Ichor_GetFestival(), ICHOR_FESTIVAL_PANATHENAIA);
+    gSpecialVar_0x8004 = ICHOR_FESTIVAL_PANATHENAIA;
+    EXPECT_EQ(Ichor_DaysToFestival(), 0);
+    gSpecialVar_0x8004 = ICHOR_FESTIVAL_KARNEIA;
+    EXPECT_EQ(Ichor_DaysToFestival(), 3);
+    VarSet(VAR_DAYS, 38);
+    gSpecialVar_0x8004 = ICHOR_FESTIVAL_PANATHENAIA;
+    EXPECT_EQ(Ichor_DaysToFestival(), 35);
+}
+
+TEST("Ichor: joining a festival gives its god +5 Favor once a day")
+{
+    u32 athena = Ichor_GetFavor(ICHOR_GOD_ATHENA);
+    FlagClear(FLAG_DAILY_ICHOR_FESTIVAL_JOINED);
+    VarSet(VAR_DAYS, 2);       // no festival
+    EXPECT_EQ(Ichor_JoinFestival(), FALSE);
+    VarSet(VAR_DAYS, 1);       // the Panathenaia
+    EXPECT_EQ(Ichor_JoinFestival(), TRUE);
+    EXPECT_EQ(Ichor_GetFavor(ICHOR_GOD_ATHENA), athena + 5);
+    EXPECT_EQ(Ichor_JoinFestival(), FALSE);
+    EXPECT_EQ(Ichor_GetFavor(ICHOR_GOD_ATHENA), athena + 5);
+    FlagClear(FLAG_DAILY_ICHOR_FESTIVAL_JOINED);
+    VarSet(VAR_DAYS, 34);      // the Kronia: no god's Favor
+    EXPECT_EQ(Ichor_JoinFestival(), FALSE);
+    FlagClear(FLAG_DAILY_ICHOR_FESTIVAL_JOINED);
+}
+
+static u32 ChooseGhost(void) { return 1; }
+
+TEST("Ichor: on the Anthesteria's night a land encounter draws again for a Ghost-type")
+{
+    static const struct WildPokemon slots[] = {
+        {5, 5, SPECIES_WOBBUFFET},
+        {5, 5, SPECIES_GASTLY},
+    };
+    VarSet(VAR_DAYS, 22);              // the Anthesteria
+    gSpecialVar_0x8004 = TIME_NIGHT;
+    Ichor_HoldTimeOfDay();
+    EXPECT_EQ(Ichor_FestivalWildSlot(slots, 0, ChooseGhost), 1);
+    gSpecialVar_0x8004 = TIME_DAY;     // by day, nothing changes
+    Ichor_HoldTimeOfDay();
+    EXPECT_EQ(Ichor_FestivalWildSlot(slots, 0, ChooseGhost), 0);
+    VarSet(VAR_DAYS, 23);              // the day after, at night
+    gSpecialVar_0x8004 = TIME_NIGHT;
+    Ichor_HoldTimeOfDay();
+    EXPECT_EQ(Ichor_FestivalWildSlot(slots, 0, ChooseGhost), 0);
+    Ichor_ReleaseTimeOfDay();
 }

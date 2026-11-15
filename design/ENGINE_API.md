@@ -615,6 +615,20 @@ Nobody breaks up an Aphrodite.
 
 **Left to the map:** prizes, the champions' flags and the lines around the match. There are no wagers.
 
+### The festival calendar (SYSTEMS §7)
+
+**The year.** An Aethos year is 36 days on the day counter (`VAR_DAYS`): 12 months of 3 days, and each month's festival on its middle day. So a festival comes every three days, and Maimakterion, the month of storms, has none.
+
+**The calls:**
+- `specialvar(VAR_RESULT, Ichor_GetFestival)` gives today's `ICHOR_FESTIVAL_*`, or `ICHOR_FESTIVAL_NONE`. A town dresses for its festival in `ON_TRANSITION`: decoration hide flags, music and an alternate market list.
+- `specialvar(VAR_RESULT, Ichor_GetMonth)` gives the `ICHOR_MONTH_*`, with the day of the month (0–2) in `VAR_0x8004`.
+- `setvar(VAR_0x8004, ICHOR_FESTIVAL_PANATHENAIA)`, then `specialvar(VAR_RESULT, Ichor_DaysToFestival)`, gives the days until that festival comes (0 means today): "The Panathenaia is in 4 days."
+- `specialvar(VAR_RESULT, Ichor_JoinFestival)`: the player takes part. The first time on a festival day, its god gives +5 Favor and `VAR_RESULT` is `TRUE`. The daily flag is `FLAG_DAILY_ICHOR_FESTIVAL_JOINED`. The Kronia has no god to give Favor.
+
+**By itself, the engine runs only the Anthesteria:** at night, Ghost-types come about three times as often on land. Everything else on a festival day is the town's script, and the main path never needs a festival (the Act II Dionysia is story time).
+
+**Not built:** `IchorSave.festivalsSeen`, and the Scroll of Deeds' calendar page.
+
 ### Theoxenia's tells (SYSTEMS §10)
 
 A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR_GOD`** (Porymap's trainer type field; give it no sight range). The engine then gives three of §10's tells:

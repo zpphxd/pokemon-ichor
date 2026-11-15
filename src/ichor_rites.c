@@ -16,6 +16,7 @@
 #include "ichor_frozen.h"
 #include "ichor_relics.h"
 #include "ichor_rites.h"
+#include "ichor_calendar.h"
 #include "ichor_save.h"
 #include "battle.h"
 #include "item.h"
@@ -871,6 +872,7 @@ static bool32 IsBoostedSpecies(u32 species)
 u32 Ichor_ModifyWildSlot(const struct WildPokemon *wildPokemon, u32 index, u32 (*choose)(void))
 {
     u32 other;
+    index = Ichor_FestivalWildSlot(wildPokemon, index, choose); // the Anthesteria (src/ichor_calendar.c)
     if (!(Ichor_IsBlessed(ICHOR_GOD_ZEUS) || Ichor_IsBlessed(ICHOR_GOD_HECATE)) || IsBoostedSpecies(wildPokemon[index].species))
         return index;
     other = choose();

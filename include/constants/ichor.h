@@ -148,6 +148,36 @@
 #define ICHOR_FLASH_TORCH_BOTH    1  // 72 px: both
 #define ICHOR_FLASH_DOUSED        8  // dark: glow-paint only
 
+// --- The festival calendar (SYSTEMS §7; ENGINE_API §7) ---------------------------
+// An Aethos year is 36 days: 12 months of 3, the festival on each month's middle day.
+#define ICHOR_MONTH_HEKATOMBAION   0
+#define ICHOR_MONTH_METAGEITNION   1
+#define ICHOR_MONTH_BOEDROMION     2
+#define ICHOR_MONTH_PYANEPSION     3
+#define ICHOR_MONTH_MAIMAKTERION   4   // the month of storms: no festival
+#define ICHOR_MONTH_POSEIDEON      5
+#define ICHOR_MONTH_GAMELION       6
+#define ICHOR_MONTH_ANTHESTERION   7
+#define ICHOR_MONTH_ELAPHEBOLION   8
+#define ICHOR_MONTH_MOUNICHION     9
+#define ICHOR_MONTH_THARGELION    10
+#define ICHOR_MONTH_SKIROPHORION  11
+#define ICHOR_MONTH_COUNT         12
+#define ICHOR_DAYS_PER_MONTH       3
+// Festivals: each is its month + 1, so a month's festival is ICHOR_FESTIVAL(month)
+#define ICHOR_FESTIVAL_NONE        0
+#define ICHOR_FESTIVAL_PANATHENAIA (ICHOR_MONTH_HEKATOMBAION + 1)   // Athena, Astyra: the torch race
+#define ICHOR_FESTIVAL_KARNEIA     (ICHOR_MONTH_METAGEITNION + 1)   // Apollo, Lakonia
+#define ICHOR_FESTIVAL_MYSTERIES   (ICHOR_MONTH_BOEDROMION + 1)     // Demeter, Eleusa
+#define ICHOR_FESTIVAL_PYANOPSIA   (ICHOR_MONTH_PYANEPSION + 1)     // Apollo, every port
+#define ICHOR_FESTIVAL_POSEIDEA    (ICHOR_MONTH_POSEIDEON + 1)      // Poseidon, every harbor
+#define ICHOR_FESTIVAL_THEOGAMIA   (ICHOR_MONTH_GAMELION + 1)       // Hera and Zeus, Astyra
+#define ICHOR_FESTIVAL_ANTHESTERIA (ICHOR_MONTH_ANTHESTERION + 1)   // Dionysus, everywhere: Ghost-types at night
+#define ICHOR_FESTIVAL_DIONYSIA    (ICHOR_MONTH_ELAPHEBOLION + 1)   // Dionysus, Thyrsa
+#define ICHOR_FESTIVAL_MOUNICHIA   (ICHOR_MONTH_MOUNICHION + 1)     // Artemis, Arkadia
+#define ICHOR_FESTIVAL_THARGELIA   (ICHOR_MONTH_THARGELION + 1)     // Apollo and Artemis, Delphoi and Arkadia
+#define ICHOR_FESTIVAL_KRONIA      (ICHOR_MONTH_SKIROPHORION + 1)   // Kronos, Kronion Hill and Titan sites
+
 // --- Knucklebones (SYSTEMS §9; ENGINE_API §7) ----------------------------------
 // EventScript_IchorKnucklebones's VAR_0x8004: who you play
 #define ICHOR_BONES_CAUTIOUS  0   // rethrows only 1s

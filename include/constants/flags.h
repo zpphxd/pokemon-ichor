@@ -1756,6 +1756,7 @@
 #define FLAG_DAILY_ICHOR_GENERAL_START          (ICHOR_DAILY_FLAGS_START + 0x90) // 112 claimed by name, below
 #define FLAG_DAILY_ICHOR_GENERAL_COUNT          (ICHOR_DAILY_FLAGS_COUNT - 0x90)
 // Ichor daily bank flags: claim.py dailyflag adds lines here, in order.
+#define FLAG_DAILY_ICHOR_FESTIVAL_JOINED        (FLAG_DAILY_ICHOR_GENERAL_START + 0x000) // Ichor: joined today's festival: its god's +5 Favor is given (engine, ENGINE_API §7)
 // Ichor daily bank flags: end
 
 // Temp flag aliases

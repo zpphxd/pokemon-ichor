@@ -1107,6 +1107,10 @@ gSpecials::
 	def_special Ichor_DigFindKind
 	def_special Ichor_DigFinish
 	def_special Ichor_SellToMoneychanger
+	def_special Ichor_GetMonth
+	def_special Ichor_GetFestival
+	def_special Ichor_DaysToFestival
+	def_special Ichor_JoinFestival
 	def_special Ichor_GetHighestPartyLevel
 	def_special Ichor_BuildRestMenu
 	def_special Ichor_RestUntil
