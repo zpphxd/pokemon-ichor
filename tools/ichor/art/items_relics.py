@@ -16,7 +16,7 @@ import numpy as np
 RELIC_PICS = [
     "ichor_talaria", "bronze_hammer", "hecates_torch", "demeters_sickle", "girdle_of_herakles",
     "poseidons_conch", "daedalus_wings", "horn_of_achelous", "labrys", "helm_of_darkness",
-    "nereid_pearl", "aeolus_bag", "aletheas_trowel",
+    "nereid_pearl", "aeolus_bag", "aletheas_trowel", "aphrodite_bone",
 ]
 
 
@@ -314,6 +314,28 @@ def register(icon, pal, ramp_roles, C, Icon):
         ic.line(12, 11, 5, 19, "b4")
         ic.pxs([(3, 21), (4, 20)], "b4")
         ic.pxs([(13, 15), (14, 14), (12, 16)], "e")
+        return ic
+
+    # ----------------------------------------------------------------------
+    # The Aphrodite Bone (§9): Mom's lucky knucklebone, an astragalus worn
+    # smooth and ivory, its four sides marked, with a rose-gold thread.
+    @icon("aphrodite_bone", {
+        "aphrodite_bone": pal(ramp_roles("i", [C["lp_d"], C["lp_m"], C["lp_l"], C["ln_l"]]),
+                              d=C["br_d"], r=(216, 120, 136)),
+    }, labels={"aphrodite_bone": "Aphrodite Bone"})
+    def _bone():
+        ic = Icon("K i1 i2 i3 i4 d r")
+        # the knuckle: a waisted block, wider at the ends
+        body = ic.poly([(4, 8), (8, 5), (12, 7), (16, 5), (20, 8), (19, 13),
+                        (20, 18), (16, 20), (12, 18), (8, 20), (4, 18), (5, 13)])
+        ic.shade(body, ["i1", "i2", "i3", "i4"])
+        ic.outline(body)
+        # the hollow on its face and the pips of the side up
+        ic.line(9, 12, 15, 12, "i1")
+        ic.pxs([(8, 9), (16, 9), (8, 16), (16, 16)], "d")
+        # a thread tied round its waist
+        ic.line(12, 7, 12, 18, "r")
+        ic.pxs([(13, 19), (14, 20), (14, 21)], "r")
         return ic
 
 def preview(outdir):

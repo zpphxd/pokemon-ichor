@@ -140,6 +140,21 @@
 #define ICHOR_FLASH_TORCH_BOTH    1  // 72 px: both
 #define ICHOR_FLASH_DOUSED        8  // dark: glow-paint only
 
+// --- Knucklebones (SYSTEMS §9; ENGINE_API §7) ----------------------------------
+// EventScript_IchorKnucklebones's VAR_0x8004: who you play
+#define ICHOR_BONES_CAUTIOUS  0   // rethrows only 1s
+#define ICHOR_BONES_BOLD      1   // chases Aphrodite whenever it holds three different sides
+#define ICHOR_BONES_SILENOS   2   // loaded bones: a 6 three times in ten
+#define ICHOR_BONES_MOM       3   // two rethrows and a humming bee, until FLAG_ICHOR_MOM_CONFESSED
+#define ICHOR_BONES_COUNT     4
+// Internal to data/scripts/ichor_bones.pory
+#define ICHOR_BONES_MENU_ROLL    4
+#define ICHOR_BONES_MENU_STAND   5
+#define ICHOR_BONES_MENU_LOADED  6
+#define ICHOR_BONES_TIE     0
+#define ICHOR_BONES_YOURS   1
+#define ICHOR_BONES_THEIRS  2
+
 // --- Excavation (SYSTEMS §5; ENGINE_API §8) -----------------------------------
 // A daily dig spot's VAR_0x8005: the act's loot table, and the amphora whose
 // sherds the spot holds, if any:

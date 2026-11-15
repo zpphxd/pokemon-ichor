@@ -574,6 +574,42 @@ if (var(VAR_RESULT) == TRUE) {
 - The tint only shows on maps with natural light (towns, routes and the sea), so interiors look the same either way.
 - The expansion's own `SetTimeOfDay` hour override still works, but it resets on every warp. Use the hold for anything that spans maps.
 
+### Knucklebones (SYSTEMS §9)
+
+A best-of-five match, played in the message box with a menu. The map gives the opponent's personality in `VAR_0x8004` and their name, as prose, in `STR_VAR_3`:
+
+```
+bufferstring(STR_VAR_3, ThyrsaCity_Tavern_Text_Glauke)   // text … { "Glauke" }
+setvar(VAR_0x8004, ICHOR_BONES_BOLD)
+call(EventScript_IchorKnucklebones)
+if (var(VAR_RESULT) == TRUE) { ... you won ... }
+```
+
+**Each throw:**
+1. You see your four bones: "3  1  4  4  (12)".
+2. A menu lists each bone as KEEP or ROLL (A switches it), then ROLL THEM (once one is marked) and STAND. B also stands.
+3. The opponent throws and rethrows as they play.
+4. The higher sum takes the throw, and a tie is thrown again. Aphrodite (1, 3, 4, 6) beats everything; the Dog (four 1s) loses to everything.
+5. The score shows ("2-1"). The first to three wins.
+
+**The opponents** (`ICHOR_BONES_*`):
+
+| Value | Plays |
+|---|---|
+| `_CAUTIOUS` | Rethrows only its 1s |
+| `_BOLD` | Holding three different sides, rethrows the spare to chase Aphrodite. Otherwise, its 1s. |
+| `_SILENOS` | Loaded bones: a 6 comes up 30% of the time. After two throws in a row with two 6s or more, LOADED! appears in your menu; calling it wins the match at once ("“Loaded!” Silenos goes very still."). |
+| `_MOM` | Until `FLAG_ICHOR_MOM_CONFESSED`, the bee: two rethrows and faces 5/30/30/35. You win about 1 match in 18, as SYSTEMS §9 says. After the confession she plays fair, so it's about even. Every match goes on her record. |
+
+Nobody breaks up an Aphrodite.
+
+**Mom:**
+- `specialvar(VAR_RESULT, Ichor_GetMomRecord)` gives your wins against her, with her wins in `VAR_0x8004`, for the 2F text. The record starts at 0–212.
+- **Her first loss:** the map shows her lines and gives `ITEM_APHRODITE_BONE`, a key item that adds one rethrow a match.
+- **`FLAG_ICHOR_MOM_CONFESSED`** (engine-owned, bank offset 0x483) is set by world-act3 at the Kastalian spring (STORY III-7).
+
+**Left to the map:** prizes, the champions' flags and the lines around the match. There are no wagers.
+
 ### Omens (SYSTEMS §6)
 
 - **Today's omen** is `IchorSave.omenKind` (`OMEN_SWARM`, `_VISITOR`, `_WEATHER`, `_GOOD_SIGN`, `_STRANGER`, or `OMEN_NONE`) and `omenEntry`, an entry within that kind. The entries are numbered in `include/constants/ichor.h`: `OMEN_WEATHER_KRYOPUFF` and `OMEN_WEATHER_LERNIP` so far. Add new ones at the end.

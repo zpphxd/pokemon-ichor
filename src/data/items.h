@@ -7629,6 +7629,21 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_AletheasTrowel,
         .iconPalette = gItemIconPalette_AletheasTrowel,
     },
+    [ITEM_APHRODITE_BONE] =
+    {
+        .name = ITEM_NAME("Aphrodite Bone"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Mom's lucky bone.\n"
+            "One more rethrow\n"
+            "in knucklebones."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_AphroditeBone,
+        .iconPalette = gItemIconPalette_AphroditeBone,
+    },
 
 // Gems
 #if I_PRICE >= GEN_9

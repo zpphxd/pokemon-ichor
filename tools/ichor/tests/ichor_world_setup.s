@@ -89,6 +89,21 @@ WorldTest_Level:
 	releaseall
 	end
 
+@ --- A knucklebones match against VAR_0x8004, its answer in VAR_0x8009 ----------
+	test_header WorldTest_BonesHeader, WorldTest_Bones
+WorldTest_Bones:
+	lockall
+	setvar VAR_TEMP_F, 1
+	setvar VAR_0x8009, 0xFF
+	bufferstring STR_VAR_3, WorldTest_Text_Glauke
+	call EventScript_IchorKnucklebones
+	copyvar VAR_0x8009, VAR_RESULT
+	releaseall
+	end
+
+WorldTest_Text_Glauke:
+	.string "Glauke$"
+
 @ RtcCalcLocalTimeOffset(gLocalTime.days, VAR_0x8004, VAR_0x8005, 0)
 	.thumb
 	.align 2

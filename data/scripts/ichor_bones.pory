@@ -1,0 +1,76 @@
+// Ichor: knucklebones (design/ENGINE_API.md §7; src/ichor_bones.c).
+//
+// A best-of-five match. Before calling, put who you play in VAR_0x8004 and
+// their name, as prose, in STR_VAR_3:
+//     bufferstring(STR_VAR_3, ThyrsaCity_Tavern_Text_Glauke)   // "Glauke"
+//     setvar(VAR_0x8004, ICHOR_BONES_BOLD)
+//     call(EventScript_IchorKnucklebones)
+//     if (var(VAR_RESULT) == TRUE) { ... you won ... }
+// The prizes, the champion's flag and every line around the match are the map's.
+
+script EventScript_IchorKnucklebones {
+    special(Ichor_BonesStart)
+    setspeaker(SP_NAME_NONE)
+    while {
+        special(Ichor_BonesPlayerThrow)
+        playse(SE_BALL_BOUNCE_1)
+        call(EventScript_IchorBonesChoose)
+        if (var(VAR_RESULT) == ICHOR_BONES_MENU_LOADED) {
+            specialvar(VAR_RESULT, Ichor_BonesCallLoaded)
+            if (var(VAR_RESULT) == TRUE) {
+                msgbox(format("“Loaded!” {STR_VAR_3} goes very still. The match is yours."))
+                break
+            }
+        }
+        specialvar(VAR_RESULT, Ichor_BonesOpponentThrow)
+        playse(SE_BALL_BOUNCE_1)
+        if (var(VAR_RESULT) == TRUE) {
+            msgbox("{STR_VAR_3} throws, and throws again:\n{STR_VAR_2}")
+        } else {
+            msgbox("{STR_VAR_3} throws:\n{STR_VAR_2}")
+        }
+        specialvar(VAR_RESULT, Ichor_BonesScore)
+        if (var(VAR_RESULT) == ICHOR_BONES_TIE) {
+            msgbox(format("A tie. Throw again."))
+        } elif (var(VAR_RESULT) == ICHOR_BONES_YOURS) {
+            msgbox("Your throw wins. {STR_VAR_1}.")
+        } else {
+            msgbox("{STR_VAR_3}'s throw wins. {STR_VAR_1}.")
+        }
+        specialvar(VAR_RESULT, Ichor_BonesMatchOver)
+        if (var(VAR_RESULT) != 0) {
+            break
+        }
+    }
+    closemessage
+    specialvar(VAR_RESULT, Ichor_BonesMatchOver)
+    if (var(VAR_RESULT) == ICHOR_BONES_YOURS) {
+        setvar(VAR_RESULT, TRUE)
+    } else {
+        setvar(VAR_RESULT, FALSE)
+    }
+    return
+}
+
+// Your bones, and the choice: switch any between KEEP and ROLL, ROLL THEM, or
+// STAND. Answers the menu's last choice in VAR_RESULT.
+script EventScript_IchorBonesChoose {
+    while {
+        message("You throw:\n{STR_VAR_1}")
+        waitmessage
+        special(Ichor_BonesBuildMenu)
+        dynmultistack(0, 0, FALSE, 7, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+        if (var(VAR_RESULT) < ICHOR_BONES_MENU_ROLL) {
+            copyvar(VAR_0x8004, VAR_RESULT)
+            special(Ichor_BonesToggle)
+        } elif (var(VAR_RESULT) == ICHOR_BONES_MENU_ROLL) {
+            special(Ichor_BonesRethrow)
+            playse(SE_BALL_BOUNCE_1)
+        } elif (var(VAR_RESULT) == ICHOR_BONES_MENU_LOADED) {
+            return
+        } else {
+            setvar(VAR_RESULT, ICHOR_BONES_MENU_STAND)
+            return
+        }
+    }
+}

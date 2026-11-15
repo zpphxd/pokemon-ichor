@@ -1109,3 +1109,13 @@ gSpecials::
 	def_special Ichor_GetHighestPartyLevel
 	def_special Ichor_BuildRestMenu
 	def_special Ichor_RestUntil
+	def_special Ichor_BonesStart
+	def_special Ichor_BonesPlayerThrow
+	def_special Ichor_BonesBuildMenu
+	def_special Ichor_BonesToggle
+	def_special Ichor_BonesRethrow
+	def_special Ichor_BonesOpponentThrow
+	def_special Ichor_BonesScore
+	def_special Ichor_BonesCallLoaded
+	def_special Ichor_BonesMatchOver
+	def_special Ichor_GetMomRecord
