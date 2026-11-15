@@ -3347,3 +3347,72 @@ const u16 gTilesetPalettes_PorytilesManaged_TempleHermes[][16] =
     INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/palettes/14.gbapal"),
     INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/palettes/15.gbapal")
 };
+
+// Ichor: thyrsa_rooms
+const u32 gTilesetTiles_PorytilesManaged_ThyrsaRooms[] = INCBIN_U32("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_ThyrsaRooms[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: thyrsa_homes
+const u32 gTilesetTiles_PorytilesManaged_ThyrsaHomes[] = INCBIN_U32("data/tilesets/secondary/thyrsa_homes/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_ThyrsaHomes[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/palettes/15.gbapal")
+};
+
+// Ichor: thyrsa_stone
+const u32 gTilesetTiles_PorytilesManaged_ThyrsaStone[] = INCBIN_U32("data/tilesets/secondary/thyrsa_stone/porytiles_bin/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PorytilesManaged_ThyrsaStone[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/palettes/15.gbapal")
+};

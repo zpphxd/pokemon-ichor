@@ -1681,6 +1681,18 @@
 #define FLAG_ICHOR_XENIA_START                  (ICHOR_FLAGS_START + 0x2E0) // 32: hosts and token-chain links (§10)
 #define FLAG_ICHOR_GENERAL_START                (ICHOR_FLAGS_START + 0x300) // 1,280 claimed by name, below
 #define FLAG_ICHOR_GENERAL_COUNT                (ICHOR_FLAGS_COUNT - 0x300)
+
+// Named bits in the reserved ranges, until the engine names them (world-act2's rooms agent;
+// the offsets are a proposal: prophecy tablet n is found at +n-1 and read at +8+n-1; xenia
+// keeps 0x00-0x0F for the three token chains and hosts, and Pindaros's laurel lines take 0x10-0x15).
+#define FLAG_ICHOR_PROPHECY_3                   (FLAG_ICHOR_PROPHECY_START + 0x02) // tablet #3 dug up under Eudora's fig (ICHOR_STUB_DIG: not yet)
+#define FLAG_ICHOR_PROPHECY_3_READ              (FLAG_ICHOR_PROPHECY_START + 0x0A) // Alethea read tablet #3 (beat 30)
+#define FLAG_ICHOR_PINDAROS_LAUREL_FIRST        (FLAG_ICHOR_XENIA_START + 0x10)    // Pindaros heard of your laurels on your first visit
+#define FLAG_ICHOR_PINDAROS_LAUREL_4            (FLAG_ICHOR_XENIA_START + 0x11)    // ...and of the Mask Laurel
+#define FLAG_ICHOR_PINDAROS_LAUREL_5            (FLAG_ICHOR_XENIA_START + 0x12)
+#define FLAG_ICHOR_PINDAROS_LAUREL_6            (FLAG_ICHOR_XENIA_START + 0x13)
+#define FLAG_ICHOR_PINDAROS_LAUREL_7            (FLAG_ICHOR_XENIA_START + 0x14)
+#define FLAG_ICHOR_PINDAROS_LAUREL_8            (FLAG_ICHOR_XENIA_START + 0x15)
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
 #define FLAG_ICHOR_ACT2_BEGUN                   (FLAG_ICHOR_GENERAL_START + 0x100) // Ichor: Act II: the vines are cut and Route 6 opens (beat 26)
 #define FLAG_ICHOR_VISITED_ELEUTHERAI           (FLAG_ICHOR_GENERAL_START + 0x101) // Ichor: Act II: reached Eleutherai on Mt. Kithairon (beat 27)
@@ -1701,6 +1713,22 @@
 #ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
+#define FLAG_ICHOR_GOT_PROTECTIVE_PADS          (FLAG_ICHOR_GENERAL_START + 0x140) // Ichor: Act II rooms: Peneleos's gift after the recruit's sparring match (Eleutherai)
+#define FLAG_ICHOR_OINOE_GARLAND                (FLAG_ICHOR_GENERAL_START + 0x141) // Ichor: Act II rooms: Oinoe's ivy garland errand is open; cleared when she gives the Big Root (Eleutherai)
+#define FLAG_ICHOR_TWINS_AMPHIS                 (FLAG_ICHOR_GENERAL_START + 0x142) // Ichor: Act II rooms: showed Amphis a Chelonet or Chelyra; got the Metronome (Eleutherai)
+#define FLAG_ICHOR_TWINS_ZETES                  (FLAG_ICHOR_GENERAL_START + 0x143) // Ichor: Act II rooms: showed Zetes something strong; got the Punching Glove (Eleutherai)
+#define FLAG_ICHOR_KNUCKLEBONES_THYRSA          (FLAG_ICHOR_GENERAL_START + 0x144) // Ichor: Act II rooms: beat Aristomache, the Kantharos's champion, the first time
+#define FLAG_ICHOR_MANTO_CROWS                  (FLAG_ICHOR_GENERAL_START + 0x145) // Ichor: Act II rooms: Manto asked you to watch the crows at the Elektran Gate at dusk
+#define FLAG_ICHOR_GOT_TWISTED_SPOON            (FLAG_ICHOR_GENERAL_START + 0x146) // Ichor: Act II rooms: Manto gave you Teiresias's spoon
+#define FLAG_ICHOR_GOT_STAPHYLOS_NUGGET         (FLAG_ICHOR_GENERAL_START + 0x147) // Ichor: Act II rooms: Staphylos's Nugget, after the Mask Laurel
+#define FLAG_ICHOR_GOT_TM_FAKE_TEARS            (FLAG_ICHOR_GENERAL_START + 0x148) // Ichor: Act II rooms: Polos's TM Fake Tears, shown a Prosomime
+#define FLAG_ICHOR_GOT_POWER_BRACER             (FLAG_ICHOR_GENERAL_START + 0x149) // Ichor: Act II rooms: Eudora's Power Bracer, after Hippias came home
+#define FLAG_ICHOR_GOT_DRAGON_FANG              (FLAG_ICHOR_GENERAL_START + 0x14A) // Ichor: Act II rooms: Chthonia's Dragon Fang
+#define FLAG_ICHOR_TRADED_PROSOMIME             (FLAG_ICHOR_GENERAL_START + 0x14B) // Ichor: Act II rooms: traded Euthykles a Gelasable for PATHOS the Prosomime
+#define FLAG_ICHOR_GARLAND_LAID                 (FLAG_ICHOR_GENERAL_START + 0x14C) // Ichor: Act II (cross-map; set by the Temple of Dionysus's wooden image): laid Oinoe's garland
+#define FLAG_ICHOR_SAW_CROWS                    (FLAG_ICHOR_GENERAL_START + 0x14D) // Ichor: Act II (cross-map; set by Thyrsa City's crows at the Elektran Gate): saw which way they flew
+#define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL_START + 0x14E) // Ichor: Act II (cross-map; set by Thyrsa City, beat 30): met Manto on the Kadmeia wall
+#define FLAG_ICHOR_GYPSOS_WENT_HOME             (FLAG_ICHOR_GENERAL_START + 0x14F) // Ichor: Act II (cross-map; set at the Kronia, Route 7): Gypsos went home to his mother as Hippias
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

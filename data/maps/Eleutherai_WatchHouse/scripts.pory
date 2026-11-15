@@ -1,1 +1,98 @@
+// The watch-house in Eleutherai's fort (SCRIPT.md Part 2, Eleutherai).
+// Room: tools/ichor/maps/thyrsa_rooms.py. Opsimos the cook at the hearth (12,3) ladles
+// soup and heals the party every visit: the rest point before the mountain. Captain
+// Peneleos (10,5) offers his recruit Timolaos (9,2) a real fight; win, and you get the
+// boy's Protective Pads.
+// ICHOR_STUB_MUSIC: MUS_ICHOR_ROAD stands in for Eleutherai's own cue.
+
 mapscripts Eleutherai_WatchHouse_MapScripts {}
+
+text Eleutherai_WatchHouse_Name_Opsimos { "OPSIMOS" }
+text Eleutherai_WatchHouse_Name_Peneleos { "PENELEOS" }
+text Eleutherai_WatchHouse_Name_Timolaos { "TIMOLAOS" }
+
+script Eleutherai_WatchHouse_EventScript_Opsimos {
+    lock
+    faceplayer
+    setspeaker(Eleutherai_WatchHouse_Name_Opsimos)
+    msgbox(format("Sit. Barley soup. The garrison's had it every day for ninety years.\p"
+                  "Nobody's ever complained. Nobody's ever dared."))
+    special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+    setspeaker(Eleutherai_WatchHouse_Name_Opsimos)
+    msgbox(format("There. That'll get you over the mountain. Or into it."))
+    release
+}
+
+script Eleutherai_WatchHouse_EventScript_Peneleos {
+    lock
+    faceplayer
+    setspeaker(Eleutherai_WatchHouse_Name_Peneleos)
+    if (flag(FLAG_ICHOR_GOT_PROTECTIVE_PADS)) {
+        msgbox(format("The boy's out with the sheep at dawn. He goes quieter now."))
+        release
+        end
+    }
+    if (defeated(TRAINER_ICHOR_TIMOLAOS)) {
+        goto(Eleutherai_WatchHouse_EventScript_GivePads)
+    }
+    msgbox(format("My recruit wants a real fight. All he gets up here is sheep.\p"
+                  "Give him one? Win, and I'll give you his pads. He won't need them."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(Eleutherai_WatchHouse_Name_Peneleos)
+        msgbox(format("Sheep it is, then."))
+        release
+        end
+    }
+    setspeaker(Eleutherai_WatchHouse_Name_Timolaos)
+    msgbox(format("A real fight! Not a sheep! Thank the gods!"))
+    setspeaker(SP_NAME_NONE)
+    trainerbattle_no_intro(TRAINER_ICHOR_TIMOLAOS, Eleutherai_WatchHouse_Text_TimolaosDefeat)
+    goto(Eleutherai_WatchHouse_EventScript_GivePads)
+}
+
+script Eleutherai_WatchHouse_EventScript_GivePads {
+    setspeaker(Eleutherai_WatchHouse_Name_Peneleos)
+    msgbox(format("Ha. Well. That's sheep for a month for him.\p"
+                  "Here. Protective Pads. Stops the scratches when you hit something."))
+    giveitem(ITEM_PROTECTIVE_PADS)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_PROTECTIVE_PADS)
+    }
+    release
+}
+
+text Eleutherai_WatchHouse_Text_TimolaosDefeat {
+    format("I take it back. I like sheep.")
+}
+
+script Eleutherai_WatchHouse_EventScript_Timolaos {
+    lock
+    faceplayer
+    setspeaker(Eleutherai_WatchHouse_Name_Timolaos)
+    if (defeated(TRAINER_ICHOR_TIMOLAOS)) {
+        msgbox(format("Sheep, then. At least sheep don't hit back."))
+    } else {
+        msgbox(format("The captain says I'm not to start fights. He has to start them.\p"
+                      "Ask him. Go on. Ask him."))
+    }
+    release
+}
+
+script Eleutherai_WatchHouse_EventScript_ArrowSlit {
+    msgbox(format("Through the slit: the road, far below, winding up out of the olives."), MSGBOX_SIGN)
+}
+
+script Eleutherai_WatchHouse_EventScript_Spears {
+    msgbox(format("Four ash spears in a rack. Three are dusty. One isn't."), MSGBOX_SIGN)
+}
+
+script Eleutherai_WatchHouse_EventScript_DiceTable {
+    msgbox(format("A board for dice is scratched into the table. Someone has scratched a tally beside it.\p"
+                  "It's mostly one name."), MSGBOX_SIGN)
+}
+
+script Eleutherai_WatchHouse_EventScript_Cauldron {
+    msgbox(format("Barley soup, on a chain over the fire. It smells of ninety years."), MSGBOX_SIGN)
+}

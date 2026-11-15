@@ -14,8 +14,77 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
-  "warp_events": [],
+  "object_events": [
+    {
+      "local_id": "LOCALID_MASK_WORKSHOP_EUTHYKLES",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "x": 10,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_MaskWorkshop_EventScript_Euthykles",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_MASK_WORKSHOP_MASK",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MASK",
+      "x": 13,
+      "y": 1,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ThyrsaCity_MaskWorkshop_EventScript_ShelfMask",
+      "flag": "FLAG_ICHOR_TRADED_PROSOMIME"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 6,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY",
+      "dest_warp_id": "4"
+    },
+    {
+      "x": 7,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_THYRSA_CITY",
+      "dest_warp_id": "4"
+    }
+  ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_MaskWorkshop_EventScript_Wigs"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_MaskWorkshop_EventScript_Heads"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ThyrsaCity_MaskWorkshop_EventScript_Paint"
+    }
+  ]
 }

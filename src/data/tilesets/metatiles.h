@@ -456,3 +456,15 @@ const u16 gMetatileAttributes_PorytilesManaged_Isthmos[] = INCBIN_U16("data/tile
 // Ichor: temple_hermes
 const u16 gMetatiles_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatiles.bin");
 const u16 gMetatileAttributes_PorytilesManaged_TempleHermes[] = INCBIN_U16("data/tilesets/secondary/temple_hermes/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: thyrsa_rooms
+const u16 gMetatiles_PorytilesManaged_ThyrsaRooms[] = INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_ThyrsaRooms[] = INCBIN_U16("data/tilesets/secondary/thyrsa_rooms/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: thyrsa_homes
+const u16 gMetatiles_PorytilesManaged_ThyrsaHomes[] = INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_ThyrsaHomes[] = INCBIN_U16("data/tilesets/secondary/thyrsa_homes/porytiles_bin/metatile_attributes.bin");
+
+// Ichor: thyrsa_stone
+const u16 gMetatiles_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatiles.bin");
+const u16 gMetatileAttributes_PorytilesManaged_ThyrsaStone[] = INCBIN_U16("data/tilesets/secondary/thyrsa_stone/porytiles_bin/metatile_attributes.bin");

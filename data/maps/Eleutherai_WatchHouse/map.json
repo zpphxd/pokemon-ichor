@@ -14,8 +14,99 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
-  "warp_events": [],
+  "object_events": [
+    {
+      "local_id": "LOCALID_WATCH_HOUSE_OPSIMOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_MAN",
+      "x": 12,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Eleutherai_WatchHouse_EventScript_Opsimos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_WATCH_HOUSE_PENELEOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_HOPLITE",
+      "x": 10,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Eleutherai_WatchHouse_EventScript_Peneleos",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_WATCH_HOUSE_TIMOLAOS",
+      "graphics_id": "OBJ_EVENT_GFX_ICHOR_YOUTH_M",
+      "x": 9,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Eleutherai_WatchHouse_EventScript_Timolaos",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 7,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUTHERAI",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 8,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_ELEUTHERAI",
+      "dest_warp_id": "0"
+    }
+  ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Eleutherai_WatchHouse_EventScript_ArrowSlit"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Eleutherai_WatchHouse_EventScript_Spears"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_EAST",
+      "script": "Eleutherai_WatchHouse_EventScript_DiceTable"
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 3,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "Eleutherai_WatchHouse_EventScript_Cauldron"
+    }
+  ]
 }

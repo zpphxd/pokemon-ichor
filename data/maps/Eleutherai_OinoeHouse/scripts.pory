@@ -1,1 +1,79 @@
+// Oinoe's house, beside the god's empty temple in Eleutherai (SCRIPT.md Part 2).
+// Room: tools/ichor/maps/thyrsa_rooms.py. Oinoe (5,3) sends an ivy garland to the god's
+// old wooden image in Thyrsa's temple; laid there (the temple's script sets
+// FLAG_ICHOR_GARLAND_LAID), she gives the root that came up under his step.
+//
+// The errand's state in two flags (the Big Root needs no flag of its own):
+//   OINOE_GARLAND set, GARLAND_LAID clear  the garland is yours to lay
+//   OINOE_GARLAND set, GARLAND_LAID set    laid; come back for the root
+//   OINOE_GARLAND clear, GARLAND_LAID set  the root is given
+// The temple's image should check OINOE_GARLAND && !GARLAND_LAID.
+// ICHOR_STUB_MUSIC: MUS_ICHOR_ROAD stands in for Eleutherai's own cue.
+
 mapscripts Eleutherai_OinoeHouse_MapScripts {}
+
+text Eleutherai_OinoeHouse_Name_Oinoe { "OINOE" }
+
+script Eleutherai_OinoeHouse_EventScript_Oinoe {
+    lock
+    faceplayer
+    setspeaker(Eleutherai_OinoeHouse_Name_Oinoe)
+    if (flag(FLAG_ICHOR_GARLAND_LAID)) {
+        if (flag(FLAG_ICHOR_OINOE_GARLAND)) {
+            msgbox(format("You laid it? Did he say anything?\p"
+                          "…Wine. Yes, that's him. He never says much. He smells of things.\p"
+                          "Take this. It came up out of the plinth's step this spring. A root.\p"
+                          "Roots under a god's step. I've never known what to do with it."))
+            giveitem(ITEM_BIG_ROOT)
+            if (var(VAR_RESULT) == TRUE) {
+                clearflag(FLAG_ICHOR_OINOE_GARLAND)
+            }
+        } elif (flag(FLAG_ICHOR_DIONYSIA_DONE)) {
+            msgbox(format("They say the new play was about a child nobody could see.\p"
+                          "I've swept a step for a god nobody's seen for three hundred years.\p"
+                          "Not seeing a thing doesn't mean it isn't there. It means sweep."))
+        } else {
+            msgbox(format("Every morning, the step. Every evening, the step. He likes it clean."))
+        }
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_OINOE_GARLAND)) {
+        msgbox(format("Inside their temple door, on a low base. Lay it at his feet.\p"
+                      "Say it's from Eleutherai. He'll know."))
+        release
+        end
+    }
+    msgbox(format("You're going to Thyrsa? Then take this to him.\p"
+                  "The god's image. It's in their temple. They keep it inside the door.\p"
+                  "Lay it at his feet and say it's from Eleutherai. He'll know."))
+    // ICHOR_STUB_KEY_ITEMS: ITEM_IVY_GARLAND (a temporary key item) isn't in the game yet;
+    // the flag carries the errand, and this line stands in for giveitem.
+    setspeaker(SP_NAME_NONE)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(format("{PLAYER} received an ivy garland."))
+    waitfanfare
+    waitmessage
+    waitbuttonpress
+    setflag(FLAG_ICHOR_OINOE_GARLAND)
+    release
+}
+
+script Eleutherai_OinoeHouse_EventScript_Niche {
+    msgbox(format("A little clay copy of the god's old image. A cheerful face, like a happy dog.\p"
+                  "Someone has put a fresh ivy leaf in front of it."), MSGBOX_SIGN)
+}
+
+script Eleutherai_OinoeHouse_EventScript_Brooms {
+    msgbox(format("A row of brooms, each one worn shorter than the last. Her mother's. Her mother's mother's."),
+           MSGBOX_SIGN)
+}
+
+script Eleutherai_OinoeHouse_EventScript_Loom {
+    msgbox(format("A band of ivy leaves, half woven. The god's plant."), MSGBOX_SIGN)
+}
+
+script Eleutherai_OinoeHouse_EventScript_StubBroom {
+    msgbox(format("Today's broom, by the door. It's down to a stub. It'll do a few more mornings."),
+           MSGBOX_SIGN)
+}

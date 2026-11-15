@@ -1,1 +1,77 @@
+// Euthykles's workshop, the mask-maker's (SCRIPT.md Part 2, Thyrsa).
+// Room: tools/ichor/maps/thyrsa_rooms.py. Euthykles (10,4) at his cutting bench; the mask
+// that walked in sits on the high shelf (13,1), a walker of its own. He trades his
+// Prosomime, PATHOS, for a Gelasable (INGAME_TRADE_ICHOR_PATHOS in src/data/trade.h).
+// ICHOR_STUB_AETHOS_DEX: both species are stand-ins until the dex lands.
+// ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
+
 mapscripts ThyrsaCity_MaskWorkshop_MapScripts {}
+
+text ThyrsaCity_MaskWorkshop_Name_Euthykles { "EUTHYKLES" }
+
+script ThyrsaCity_MaskWorkshop_EventScript_Euthykles {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_MaskWorkshop_Name_Euthykles)
+    if (flag(FLAG_ICHOR_TRADED_PROSOMIME)) {
+        msgbox(format("Your Gelasable laughs at every face I make. The comic masks have never been better."))
+        release
+        end
+    }
+    msgbox(format("They stole the temple's masks, so the theater wants a hundred new ones.\p"
+                  "I can make faces. I can't make them look back. The god's do.\p"
+                  "That one on the shelf walked in last week and sat there. It won't leave.\p"
+                  "It keeps changing faces. I can't sell it. I can't paint it."))
+    // The in-game trade, written out (as the ingame_trade macro does) so each line carries his name.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_PATHOS)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(ThyrsaCity_MaskWorkshop_Name_Euthykles)
+    msgbox(format("Trade me something that laughs. A Gelasable. For the comic masks."), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        setspeaker(ThyrsaCity_MaskWorkshop_Name_Euthykles)
+        msgbox(format("Then it stays on the shelf, looking at me."))
+        release
+        end
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        setspeaker(ThyrsaCity_MaskWorkshop_Name_Euthykles)
+        msgbox(format("Then it stays on the shelf, looking at me."))
+        release
+        end
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(ThyrsaCity_MaskWorkshop_Name_Euthykles)
+        msgbox(format("That isn't laughing. That's just making a noise."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    setflag(FLAG_ICHOR_TRADED_PROSOMIME)
+    removeobject(LOCALID_MASK_WORKSHOP_MASK)
+    setspeaker(ThyrsaCity_MaskWorkshop_Name_Euthykles)
+    msgbox(format("A laugh for a tear. Fair trade. The theater always needs both.\p"
+                  "“Pathos.” It means what you feel at the end of a tragedy.\p"
+                  "It'll suit you. It already looks like it knows you."))
+    release
+}
+
+script ThyrsaCity_MaskWorkshop_EventScript_ShelfMask {
+    msgbox(format("A mask, alone on a high shelf. It is clearly looking at you.\p"
+                  "When you blink, its face is a different one."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_MaskWorkshop_EventScript_Wigs {
+    msgbox(format("Wigs on pegs: a black one, an old man's white beard, a red one for a satyr."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_MaskWorkshop_EventScript_Heads {
+    msgbox(format("Blank linen masks, drying on wooden heads. Not one of them has a face yet."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_MaskWorkshop_EventScript_Paint {
+    msgbox(format("Pots of paint: red, saffron, black and white. Everything a face needs."), MSGBOX_SIGN)
+}

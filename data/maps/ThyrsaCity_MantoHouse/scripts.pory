@@ -1,1 +1,89 @@
+// Manto's house, on the Kadmeia wall (SCRIPT.md Part 2, Thyrsa).
+// Room: tools/ichor/maps/thyrsa_rooms.py. Manto (5,3) sits under her one window. After
+// you've met her on the wall (beat 30, FLAG_ICHOR_MET_MANTO, set in Thyrsa City), she asks
+// you to watch the crows over the Kronia at dusk. Thyrsa City's coord trigger at the
+// Elektran Gate shows them while FLAG_ICHOR_MANTO_CROWS is set and sets
+// FLAG_ICHOR_SAW_CROWS. Tell her right, and she gives you Teiresias's spoon.
+// ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
+
 mapscripts ThyrsaCity_MantoHouse_MapScripts {}
+
+text ThyrsaCity_MantoHouse_Name_Manto { "MANTO" }
+
+script ThyrsaCity_MantoHouse_EventScript_Manto {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_MantoHouse_Name_Manto)
+    if (!flag(FLAG_ICHOR_MET_MANTO)) {
+        msgbox(format("Footsteps in my house. Small ones.\p"
+                      "Come and find me on the wall, child. I talk better under the sky."))
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_GOT_TWISTED_SPOON)) {
+        msgbox(format("Teiresias lived seven lives, they say. Saw everything twice.\p"
+                      "He said the worst thing about seeing the end is that you can't look away.\p"
+                      "I'm blind. I look away all the time. It's lovely."))
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_MANTO_CROWS)) {
+        msgbox(format("You've eyes. Lend me them. I can hear the crows, but not which way they go.\p"
+                      "Go down to the Elektran Gate at dusk. Watch the crows over the Kronia.\p"
+                      "Come back and tell me which way they fly."))
+        setflag(FLAG_ICHOR_MANTO_CROWS)
+        release
+        end
+    }
+    if (!flag(FLAG_ICHOR_SAW_CROWS)) {
+        msgbox(format("The Elektran Gate, at dusk. The crows over the feast.\p"
+                      "Which way do they fly? That's all I want to know."))
+        release
+        end
+    }
+    message(format("Well? Which way did they fly?"))
+    waitmessage
+    dynmultichoice(0, 0, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, ThyrsaCity_MantoHouse_Text_North,
+                   ThyrsaCity_MantoHouse_Text_South, ThyrsaCity_MantoHouse_Text_Circled)
+    setspeaker(ThyrsaCity_MantoHouse_Name_Manto)
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("North? Into the city? …No. I'd have heard them on the roof. Look again."))
+        release
+        end
+    }
+    if (var(VAR_RESULT) > 2) {
+        msgbox(format("Take your time. The birds did."))
+        release
+        end
+    }
+    msgbox(format("South. Away. Against the wind.\p"
+                  "Teiresias would have known what that meant. I only know it isn't good.\p"
+                  "Here. His spoon. He stirred his broth with it and saw the future in the steam.\p"
+                  "Mostly soup. But sometimes."))
+    giveitem(ITEM_TWISTED_SPOON)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_GOT_TWISTED_SPOON)
+    }
+    release
+}
+
+text ThyrsaCity_MantoHouse_Text_North { "NORTH" }
+text ThyrsaCity_MantoHouse_Text_South { "SOUTH" }
+text ThyrsaCity_MantoHouse_Text_Circled { "THEY CIRCLED" }
+
+script ThyrsaCity_MantoHouse_EventScript_Window {
+    msgbox(format("Her one window, and it faces the sky. A crow on the sill watches you back."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_MantoHouse_EventScript_Brazier {
+    msgbox(format("A bronze tripod over a brazier. The ash in it is cold and very old."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_MantoHouse_EventScript_Staff {
+    msgbox(format("A staff of cornel wood, polished black where hands held it. Many hands."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_MantoHouse_EventScript_Feathers {
+    msgbox(format("Feathers, sorted into pots by color. Crow, dove, kite, owl.\p"
+                  "She can't see them. She sorts them by how they fell."), MSGBOX_SIGN)
+}

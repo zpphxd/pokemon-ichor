@@ -1,1 +1,84 @@
-mapscripts ThyrsaCity_EudoraHouse_MapScripts {}
+// Eudora's house, and its courtyard (SCRIPT.md Part 2, Thyrsa).
+// Room: tools/ichor/maps/thyrsa_rooms.py. Eudora (2,7) at her loom. Her son Hippias joined
+// the Titans as Gypsos; prophecy tablet #3 is buried under the fig (4,4). Once Alethea has
+// read it (FLAG_ICHOR_PROPHECY_3_READ) and Gypsos has seen it at the Kronia, he comes home
+// (FLAG_ICHOR_GYPSOS_WENT_HOME, set on Route 7) and sleeps here in his boots (11,8).
+//
+// ICHOR_STUB_DIG: the fixed dig under the fig shows the turned-earth text until the dig
+// API lands; then it finds tablet #3 (FLAG_ICHOR_PROPHECY_3, named in flags.h).
+// Hippias hides behind FLAG_TEMP_1, set on every entry until he's home.
+// ICHOR_STUB_MUSIC: MUS_ICHOR_EMPORION stands in for Thyrsa's own cue.
+
+mapscripts ThyrsaCity_EudoraHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_GYPSOS_WENT_HOME)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text ThyrsaCity_EudoraHouse_Name_Eudora { "EUDORA" }
+text ThyrsaCity_EudoraHouse_Name_Hippias { "HIPPIAS" }
+
+script ThyrsaCity_EudoraHouse_EventScript_Eudora {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_EudoraHouse_Name_Eudora)
+    if (flag(FLAG_ICHOR_GYPSOS_WENT_HOME)) {
+        if (flag(FLAG_ICHOR_GOT_POWER_BRACER)) {
+            msgbox(format("He ate four bowls of soup and fell asleep again. I've hidden his boots."))
+            release
+            end
+        }
+        msgbox(format("He came home. He's sleeping in his old bed with his boots on.\p"
+                      "I'm furious. I've been furious all morning. It's the best morning in a year.\p"
+                      "Here. His father's arm-ring. Too big for him. He'll grow into it."))
+        giveitem(ITEM_POWER_BRACER)
+        if (var(VAR_RESULT) == TRUE) {
+            setflag(FLAG_ICHOR_GOT_POWER_BRACER)
+        }
+        release
+        end
+    }
+    if (flag(FLAG_ICHOR_PROPHECY_3_READ)) {
+        msgbox(format("“You'll come home.” It said come home?\p"
+                      "Then where is he? He's at that feast. Every day. Eating their bread.\p"
+                      "Show him. Please. He won't come for me. He might come for that."))
+        release
+        end
+    }
+    msgbox(format("My son went off with the Titans. Hippias. They call him something else.\p"
+                  "Plaster. “Gypsos.” As if he were a wall.\p"
+                  "A seer told him he'd die in the next war. So he ran to them.\p"
+                  "They don't go to wars, he said. They stop them.\p"
+                  "Before he went, he buried something under the fig. I couldn't bear to dig."))
+    release
+}
+
+script ThyrsaCity_EudoraHouse_EventScript_Hippias {
+    lock
+    faceplayer
+    setspeaker(ThyrsaCity_EudoraHouse_Name_Hippias)
+    msgbox(format("Mm. Don't tell the big man. I mean the Titans. I mean anyone."))
+    release
+}
+
+script ThyrsaCity_EudoraHouse_EventScript_TurnedEarth {
+    // ICHOR_STUB_DIG: swap for the dig API's fixed find (prophecy tablet #3) when it lands.
+    msgbox(format("The earth under the fig has been turned, and not by a plough.\p"
+                  "Something is buried here."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EudoraHouse_EventScript_Fig {
+    msgbox(format("An old fig, older than the house. Its figs are going purple."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EudoraHouse_EventScript_Helmet {
+    msgbox(format("A bronze helmet of the city's levy, on a peg by the door. His father's.\p"
+                  "Not a speck of dust on it."), MSGBOX_SIGN)
+}
+
+script ThyrsaCity_EudoraHouse_EventScript_Loom {
+    msgbox(format("A soldier's red cloak, half mended on the loom. The tear is where a spear went in."),
+           MSGBOX_SIGN)
+}

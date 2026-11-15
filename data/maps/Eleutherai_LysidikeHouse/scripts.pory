@@ -1,1 +1,103 @@
+// Lysidike's farmhouse, among Eleutherai's sheep pens (SCRIPT.md Part 2).
+// Room: tools/ichor/maps/thyrsa_rooms.py. Lysidike (7,3) at the hearth; her twins Amphis
+// (2,4) and Zetes (3,4) by their cots, named for the twins who built Thebes's walls. Each
+// wants to see something: a lyre-shelled Chelonet for Amphis (Metronome), something strong
+// for Zetes (Punching Glove).
+//
+// ICHOR_STUB_LEVEL_CHECK: no script command can read a party Pokémon's level yet, so
+// Zetes's "level thirty strong" is the Mask Laurel (Thespis fights at the high 20s).
+// When the engine adds a level check, test for any party Pokémon at 30 or more instead.
+// ICHOR_STUB_MUSIC: MUS_ICHOR_ROAD stands in for Eleutherai's own cue.
+
 mapscripts Eleutherai_LysidikeHouse_MapScripts {}
+
+text Eleutherai_LysidikeHouse_Name_Lysidike { "LYSIDIKE" }
+text Eleutherai_LysidikeHouse_Name_Amphis { "AMPHIS" }
+text Eleutherai_LysidikeHouse_Name_Zetes { "ZETES" }
+
+script Eleutherai_LysidikeHouse_EventScript_Lysidike {
+    lock
+    faceplayer
+    setspeaker(Eleutherai_LysidikeHouse_Name_Lysidike)
+    if (flag(FLAG_ICHOR_TWINS_AMPHIS) && flag(FLAG_ICHOR_TWINS_ZETES)) {
+        msgbox(format("You've made them both happy at once. That's never happened.\p"
+                      "The old story says they built Thyrsa's walls together. One lifted, one played.\p"
+                      "The stones walked into place to the music. I'd like to see that."))
+        release
+        end
+    }
+    msgbox(format("Twins. Born the same hour. One sings. One hits things.\p"
+                  "They've never once wanted the same thing for breakfast."))
+    if (!flag(FLAG_ICHOR_TWINS_AMPHIS)) {
+        setspeaker(Eleutherai_LysidikeHouse_Name_Amphis)
+        msgbox(format("Have you got a Chelonet? The tortoise that sings? Show me!"))
+    }
+    if (!flag(FLAG_ICHOR_TWINS_ZETES)) {
+        setspeaker(Eleutherai_LysidikeHouse_Name_Zetes)
+        msgbox(format("Have you got anything strong? Level thirty strong? Show me!"))
+    }
+    release
+}
+
+script Eleutherai_LysidikeHouse_EventScript_Amphis {
+    lock
+    faceplayer
+    setspeaker(Eleutherai_LysidikeHouse_Name_Amphis)
+    if (flag(FLAG_ICHOR_TWINS_AMPHIS)) {
+        msgbox(format("Tick. Tock. Tick. Mother says it's driving her mad. It's keeping time."))
+        release
+        end
+    }
+    checkspecies(SPECIES_CHELONET)
+    if (var(VAR_RESULT) == FALSE) {
+        checkspecies(SPECIES_CHELYRA)
+    }
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Have you got a Chelonet? The tortoise that sings? Show me!"))
+        release
+        end
+    }
+    msgbox(format("It's got a shell like a lyre! Hermes made the first lyre out of one.\p"
+                  "Here. It's for keeping time. Mother says I don't need it. I do."))
+    giveitem(ITEM_METRONOME)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_TWINS_AMPHIS)
+    }
+    release
+}
+
+script Eleutherai_LysidikeHouse_EventScript_Zetes {
+    lock
+    faceplayer
+    setspeaker(Eleutherai_LysidikeHouse_Name_Zetes)
+    if (flag(FLAG_ICHOR_TWINS_ZETES)) {
+        msgbox(format("I hit the fence post with it. The fence post lost."))
+        release
+        end
+    }
+    // ICHOR_STUB_LEVEL_CHECK: the Mask Laurel stands in for a Pokémon at level 30.
+    if (!flag(FLAG_BADGE04_GET)) {
+        msgbox(format("Have you got anything strong? Level thirty strong? Show me!"))
+        release
+        end
+    }
+    msgbox(format("Thirty! Feel those arms. I mean legs. I mean whatever that is.\p"
+                  "Here. Grandfather's boxing strap. For hitting things harder."))
+    giveitem(ITEM_PUNCHING_GLOVE)
+    if (var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_ICHOR_TWINS_ZETES)
+    }
+    release
+}
+
+script Eleutherai_LysidikeHouse_EventScript_Pen {
+    msgbox(format("A lamb asleep in clean straw. One ear twitches at a dream."), MSGBOX_SIGN)
+}
+
+script Eleutherai_LysidikeHouse_EventScript_Cheeses {
+    msgbox(format("New cheeses, drying on a board. They smell of the mountain."), MSGBOX_SIGN)
+}
+
+script Eleutherai_LysidikeHouse_EventScript_Hearth {
+    msgbox(format("A pot of milk warms over the coals. Something to make cheese of tomorrow."), MSGBOX_SIGN)
+}
