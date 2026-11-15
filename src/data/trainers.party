@@ -681,6 +681,114 @@ IVs: 16 HP / 16 Atk / 16 Def / 16 SpA / 16 SpD / 16 Spe
 - Fairy Wind
 - Quick Attack
 - Synthesis
+/* The Mystery sanctum under Eleusa (design/phase2/SCRIPT.md Part 3, beat 23; ids 150-154):
+   four Titanborn grunts with their lamps, and Hyperion's first battle. His class, Titan
+   Admin, plays MUS_ICHOR_BATTLE_ADMIN (GetBattleBGM in src/pokemon.c). ICHOR_STUB_ART: he
+   wears the Titan Grunt portrait until his own is drawn. */
+
+=== TRAINER_ICHOR_GRUNT_SANCTUM_KROKALOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Spalunk
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Ergant
+Level: 21
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_GRUNT_SANCTUM_BOLOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Pebblith
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Kaplet
+Level: 23
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_GRUNT_SANCTUM_KONIS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Female
+Music: Titan
+AI: Check Bad Move
+
+Spalunk
+Level: 23
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Cairnolith
+Level: 24
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_GRUNT_SANCTUM_GAIOS ===
+Name: GRUNT
+Class: Titanborn
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+AI: Check Bad Move
+
+Galekit
+Level: 22
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Pebblith
+Level: 23
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+Hoplomex
+Level: 24
+IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ICHOR_HYPERION_1 ===
+Name: HYPERION
+Class: Titan Admin
+Pic: Titan Grunt
+Gender: Male
+Music: Titan
+Items: Super Potion / Super Potion
+AI: Basic Trainer
+
+Kapnub
+Level: 23
+Ability: Magma Armor
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Clear Smog
+- Rock Tomb
+- Flame Charge
+- Smokescreen
+
+Kaminoo
+Level: 23
+Ability: Flame Body
+IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+- Fire Fang
+- Stomp
+- Flame Charge
+- Work Up
+
+Pebblith @ Sitrus Berry
+Level: 24
+Ability: Sturdy
+IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
+- Rock Slide
+- Bulldoze
+- Stealth Rock
+- Rock Polish
 
 /* Ichor: world-act2 (ids 160-319) */
 

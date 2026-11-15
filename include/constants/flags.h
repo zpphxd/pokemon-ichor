@@ -804,9 +804,9 @@
 #define FLAG_UNUSED_0x2F1                                           0x2F1 // Unused Flag
 #define FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1          0x2F2
 #define FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2          0x2F3
-#define FLAG_UNUSED_0x2F4                                           0x2F4 // Unused Flag
-#define FLAG_UNUSED_0x2F5                                           0x2F5 // Unused Flag
-#define FLAG_UNUSED_0x2F6                                           0x2F6 // Unused Flag
+#define FLAG_ICHOR_HIDDEN_SANCTUM_B1F_MIRACLE_SEED                  0x2F4 // Ichor: the sanctum, B1F: a Miracle Seed in the sealed granary's dust
+#define FLAG_ICHOR_HIDDEN_SANCTUM_B2F_ETHER                         0x2F5 // Ichor: the sanctum, B2F: an Ether in the spring basin's overflow
+#define FLAG_ICHOR_HIDDEN_SANCTUM_B3F_BRONZE_OBOL                   0x2F6 // Ichor: the sanctum, B3F: a Bronze Obol in the oldest granary's dust
 #define FLAG_UNUSED_0x2F7                                           0x2F7 // Unused Flag
 #define FLAG_UNUSED_0x2F8                                           0x2F8 // Unused Flag
 #define FLAG_UNUSED_0x2F9                                           0x2F9 // Unused Flag
@@ -1739,6 +1739,14 @@
 #define FLAG_ICHOR_LESSER_MYSTERIES_DONE        (FLAG_ICHOR_GENERAL_START + 0x083) // Ichor: the Telesterion: the fourth brazier lit, Chloe revealed
 #define FLAG_ICHOR_MET_DOSO                     (FLAG_ICHOR_GENERAL_START + 0x084) // Ichor: the Telesterion: Doso's welcome heard
 #define FLAG_ICHOR_HIDE_CHLOE_TELESTERION       (FLAG_ICHOR_GENERAL_START + 0x085) // Ichor: the Telesterion: Chloe unseen in the Anaktoron's doorway until the fourth brazier
+#define FLAG_ICHOR_SANCTUM_ARRIVED              (FLAG_ICHOR_GENERAL_START + 0x086) // Ichor: beat 23A: the granaries' arrival scene played (Chloe holds the stair, Alethea takes a grunt)
+#define FLAG_ICHOR_SANCTUM_VOICE                (FLAG_ICHOR_GENERAL_START + 0x087) // Ichor: beat 23B: Hyperion's voice heard up the Hall of the Kore
+#define FLAG_ICHOR_HIDE_HYPERION_SANCTUM        (FLAG_ICHOR_GENERAL_START + 0x089) // Ichor: beat 23C: Hyperion beaten and gone up his tunnel; it caved in behind him
+#define FLAG_ICHOR_ITEM_SANCTUM_B1F_HYPER_POTION (FLAG_ICHOR_GENERAL_START + 0x08A) // Ichor: the sanctum, B1F: the Hyper Potion in the side pit Bolos guards
+#define FLAG_ICHOR_ITEM_SANCTUM_B2F_TM_DIG      (FLAG_ICHOR_GENERAL_START + 0x08B) // Ichor: the sanctum, B2F: TM28 Dig in Gaios's fresco alcove
+#define FLAG_ICHOR_ITEM_SANCTUM_B2F_SUPER_POTION (FLAG_ICHOR_GENERAL_START + 0x08C) // Ichor: the sanctum, B2F: the Super Potion by the second fresco
+#define FLAG_ICHOR_ITEM_SANCTUM_B3F_SOFT_SAND   (FLAG_ICHOR_GENERAL_START + 0x08D) // Ichor: the sanctum, B3F: the Soft Sand at the tunnel's mouth
+#define FLAG_ICHOR_FRAGMENT_STOLEN              (FLAG_ICHOR_GENERAL_START + 0x094) // Ichor: beat 23C: Petros and Amathos carried the sickle fragment up the Titans' tunnel (the Eleusa rooms agent's claim, defined here until its merge; dedupe then)
 #define FLAG_ICHOR_HERALDS_RUN_DONE             (FLAG_ICHOR_GENERAL_START + 0x0F0) // Ichor: the Herald's Run: the third scroll delivered (beat 15)
 #define FLAG_ICHOR_HERMES_HERM_J1               (FLAG_ICHOR_GENERAL_START + 0x0F1) // Ichor: the Herald's Run: junction herm J1 oiled
 #define FLAG_ICHOR_HERMES_HERM_J2               (FLAG_ICHOR_GENERAL_START + 0x0F2) // Ichor: the Herald's Run: junction herm J2 oiled

@@ -59,7 +59,13 @@
 #define TRAINER_ICHOR_EUCHIDAS                66
 #define TRAINER_ICHOR_PHILONIDES              67
 #define TRAINER_ICHOR_KERYKOS_1               68
-#define TRAINERS_END_ACT1                     69
+// The Mystery sanctum under Eleusa (ids 150-159; tools/ichor/maps/sanctum.py, beat 23)
+#define TRAINER_ICHOR_GRUNT_SANCTUM_KROKALOS  150
+#define TRAINER_ICHOR_GRUNT_SANCTUM_BOLOS     151
+#define TRAINER_ICHOR_GRUNT_SANCTUM_KONIS     152
+#define TRAINER_ICHOR_GRUNT_SANCTUM_GAIOS     153
+#define TRAINER_ICHOR_HYPERION_1              154
+#define TRAINERS_END_ACT1                     155
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

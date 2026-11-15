@@ -1,1 +1,363 @@
-mapscripts EleusaSanctum_B3F_MapScripts {}
+// The Mystery sanctum, B3F: the deepest granary (design/phase2/SCRIPT.md, beat 23C;
+// Part 5, "The Mystery sanctum": Payoff). Layout, events and the generated block at the
+// end of this file come from tools/ichor/maps/sanctum.py (design/phase2/MAPS_sanctum.md).
+//
+// A round vault, the oldest granary. Its wall is broken open in the east where the
+// Titans' tunnel came through from the fields. The great chest stands in the middle,
+// Petros and Amathos levering the shard out of it, Hyperion over them, two Kapnub
+// smoldering on the floor. The bronze sickle the Titans threw aside lies in the dust by
+// the stair's foot, where it can be looked at before the scene's line, five steps from
+// the chest.
+//
+// The line (VAR_TEMP_A == 0) plays the theft and Hyperion's first battle. The first time,
+// the crew carry the shard up the tunnel (FLAG_ICHOR_FRAGMENT_STOLEN). After a loss the
+// player wakes at Eleusa's Asclepeion (B1F's setrespawn); on the way back down the line
+// sees the flag, the crew stay gone, and Hyperion starts at "Step into the light." Once
+// he's beaten he backs up his tunnel, which caves in behind him
+// (FLAG_ICHOR_HIDE_HYPERION_SANCTUM); Chloe and Alethea come down, and Chloe gives the
+// Sickle. Then a fade to the Telesterion's steps, outside, for beat 24.
+//
+// Warps: 0-1 the stair up to the Hall of the Kore (B2F's warps 2-3).
+//
+// Stubs:
+//   ICHOR_STUB_ART    Hyperion walks as Kedalion and fights in the Titan Grunt portrait
+//                     until his own are drawn; the sarcophagus stands in for the bronze
+//                     chest, and nothing shows the shard.
+//   ICHOR_STUB_MUSIC  MUS_ICHOR_ENCOUNTER_TITAN stands in for the admins' encounter theme
+//                     (SCRIPT.md: MUS_ICHOR_ENCOUNTER_ADMIN, not composed yet). His battle
+//                     plays MUS_ICHOR_BATTLE_ADMIN through his class (src/pokemon.c).
+//   ICHOR_STUB_DIG    Daedalus's page II, bared by the cave-in, shows only until the
+//                     engine's excavation lands.
+
+const B3F_STAND_X = 10          // where the player is brought to stand for the scene
+const B3F_STAND_Y = 6
+
+mapscripts EleusaSanctum_B3F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setrespawn(HEAL_LOCATION_ELEUSA_VILLAGE)
+        // Chloe and Alethea come down only in the scene.
+        setflag(FLAG_TEMP_1)
+        setflag(FLAG_TEMP_2)
+        if (flag(FLAG_ICHOR_HIDE_HYPERION_SANCTUM)) {
+            setvar(VAR_TEMP_A, 1)
+        } else {
+            setvar(VAR_TEMP_A, 0)
+        }
+    }
+    MAP_SCRIPT_ON_LOAD {
+        if (flag(FLAG_ICHOR_HIDE_HYPERION_SANCTUM)) {
+            call(EleusaSanctum_B3F_EventScript_DrawCollapse)
+        }
+    }
+}
+
+text EleusaSanctum_B3F_Text_NameHyperion { "HYPERION" }
+text EleusaSanctum_B3F_Text_NamePetros { "PETROS" }
+text EleusaSanctum_B3F_Text_NameAmathos { "AMATHOS" }
+text EleusaSanctum_B3F_Text_NameChloe { "CHLOE" }
+text EleusaSanctum_B3F_Text_NameAlethea { "ALETHEA" }
+
+text EleusaSanctum_B3F_Text_HyperionDefeat {
+    format("HA! Good! Somebody show me who just beat me!")
+}
+
+// ---------------------------------------------------------------------------
+// Beat 23C: Hyperion
+// ---------------------------------------------------------------------------
+
+script EleusaSanctum_B3F_EventScript_Theft {
+    lockall
+    hidefollower
+    setvar(VAR_TEMP_A, 1)
+    // Bring the player along the line to the middle of the vault's mouth, then a step in.
+    getplayerxy(VAR_TEMP_C, VAR_TEMP_D)
+    while (var(VAR_TEMP_C) < B3F_STAND_X) {
+        applymovement(OBJ_EVENT_ID_PLAYER, EleusaSanctum_B3F_Movement_StepRight)
+        waitmovement(0)
+        addvar(VAR_TEMP_C, 1)
+    }
+    while (var(VAR_TEMP_C) > B3F_STAND_X) {
+        applymovement(OBJ_EVENT_ID_PLAYER, EleusaSanctum_B3F_Movement_StepLeft)
+        waitmovement(0)
+        subvar(VAR_TEMP_C, 1)
+    }
+    applymovement(OBJ_EVENT_ID_PLAYER, EleusaSanctum_B3F_Movement_StepDown)
+    waitmovement(0)
+    // The view (and the torch's circle with it) drops to frame the chest and the crew.
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, EleusaSanctum_B3F_Movement_CameraDown)
+    waitmovement(0)
+    if (!flag(FLAG_ICHOR_FRAGMENT_STOLEN)) {
+        call(EleusaSanctum_B3F_EventScript_TheShard)
+    }
+    // Hyperion turns toward the torchlight, squinting hard.
+    applymovement(LOCALID_SANCTUM_HYPERION, EleusaSanctum_B3F_Movement_HyperionSquints)
+    waitmovement(0)
+    setspeaker(EleusaSanctum_B3F_Text_NameHyperion)
+    msgbox(format("Step into the light. I can't see a thing in here."))
+    msgbox(format("Who builds a temple with no windows? Underground! Who does that?"))
+    msgbox(format("…Ha! You're tiny. You ran those two off a hill?"))
+    msgbox(format("Petros is still sulking about it. He sulks loud."))
+    msgbox(format("I'm Hyperion. I run the crews. I feed the crews. Those two are mine."))
+    msgbox(format("Nobody chases my kids. Want to try me instead?"))
+    closemessage
+    applymovement(OBJ_EVENT_ID_CAMERA, EleusaSanctum_B3F_Movement_CameraUp)
+    waitmovement(0)
+    special(RemoveCameraObject)
+    // A normal battle: a loss whites out to Eleusa's Asclepeion.
+    trainerbattle_no_intro(TRAINER_ICHOR_HYPERION_1, EleusaSanctum_B3F_Text_HyperionDefeat)
+    setspeaker(EleusaSanctum_B3F_Text_NameHyperion)
+    msgbox(format("You fight like you're not scared of the dark. Lucky you."))
+    msgbox(format("Doesn't matter. The piece is halfway up the tunnel by now."))
+    msgbox(format("Nothing personal, kid. One day there'll be no more dark. For anyone."))
+    msgbox(format("You'll thank us."))
+    closemessage
+    special(SpawnCameraObject)
+    applymovement(OBJ_EVENT_ID_CAMERA, EleusaSanctum_B3F_Movement_CameraDown)
+    waitmovement(0)
+    // He backs into the tunnel. His Pebblith thumps the roof, and it comes down.
+    applymovement(LOCALID_SANCTUM_HYPERION, EleusaSanctum_B3F_Movement_HyperionBacksAway)
+    waitmovement(0)
+    playse(SE_M_STRENGTH)
+    delay(20)
+    playse(SE_M_EARTHQUAKE)
+    setvar(VAR_0x8004, 2)
+    setvar(VAR_0x8005, 2)
+    setvar(VAR_0x8006, 12)
+    setvar(VAR_0x8007, 5)
+    special(ShakeCamera)
+    waitstate
+    removeobject(LOCALID_SANCTUM_HYPERION)
+    removeobject(LOCALID_SANCTUM_KAPNUB_W)
+    removeobject(LOCALID_SANCTUM_KAPNUB_E)
+    setflag(FLAG_ICHOR_HIDE_HYPERION_SANCTUM)
+    call(EleusaSanctum_B3F_EventScript_DrawCollapse)
+    special(DrawWholeMapView)
+    delay(30)
+    call(EleusaSanctum_B3F_EventScript_TheSickle)
+    releaseall
+}
+
+// The first time only: the crew lever the shard out and carry it up the tunnel.
+script EleusaSanctum_B3F_EventScript_TheShard {
+    // ICHOR_STUB_MUSIC: the admins' encounter theme
+    playbgm(MUS_ICHOR_ENCOUNTER_TITAN, FALSE)
+    setspeaker(EleusaSanctum_B3F_Text_NameHyperion)
+    msgbox(format("Easy! It's older than your grandmother, Petros."))
+    setspeaker(EleusaSanctum_B3F_Text_NamePetros)
+    msgbox(format("It's cold, boss. It's like holding a winter."))
+    setspeaker(EleusaSanctum_B3F_Text_NameHyperion)
+    msgbox(format("Then hold it fast and get it up the tunnel. Both of you. Go!"))
+    closemessage
+    applymovement(LOCALID_SANCTUM_AMATHOS, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(EleusaSanctum_B3F_Text_NameAmathos)
+    msgbox(format("Boss. Boss! That's the kid. From the hill!"))
+    setspeaker(EleusaSanctum_B3F_Text_NameHyperion)
+    msgbox(format("What? Where? Somebody bring a lamp."))
+    closemessage
+    // Petros and Amathos haul the shard into the tunnel.
+    applymovement(LOCALID_SANCTUM_AMATHOS, EleusaSanctum_B3F_Movement_AmathosHauls)
+    applymovement(LOCALID_SANCTUM_PETROS, EleusaSanctum_B3F_Movement_PetrosHauls)
+    waitmovement(0)
+    removeobject(LOCALID_SANCTUM_PETROS)
+    removeobject(LOCALID_SANCTUM_AMATHOS)
+    setflag(FLAG_ICHOR_FRAGMENT_STOLEN)
+    return
+}
+
+// Chloe comes down the stair from B2F, with Alethea behind her, and gives the Sickle.
+script EleusaSanctum_B3F_EventScript_TheSickle {
+    clearflag(FLAG_TEMP_1)
+    clearflag(FLAG_TEMP_2)
+    addobject(LOCALID_SANCTUM_CHLOE_B3F)
+    addobject(LOCALID_SANCTUM_ALETHEA_B3F)
+    playse(SE_EXIT)
+    applymovement(LOCALID_SANCTUM_ALETHEA_B3F, EleusaSanctum_B3F_Movement_AletheaComes)
+    applymovement(LOCALID_SANCTUM_CHLOE_B3F, EleusaSanctum_B3F_Movement_ChloeComes)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    waitmovement(0)
+    setspeaker(EleusaSanctum_B3F_Text_NameAlethea)
+    msgbox(format("{PLAYER}! Are you hurt? Is anyone hurt? Was that the ceiling?"))
+    setspeaker(EleusaSanctum_B3F_Text_NameChloe)
+    msgbox(format("…The chest's empty."))
+    closemessage
+    // Chloe walks to the chest, then stoops and picks up the bronze sickle from the dust.
+    applymovement(LOCALID_SANCTUM_CHLOE_B3F, EleusaSanctum_B3F_Movement_ChloeToChest)
+    waitmovement(0)
+    delay(30)
+    applymovement(LOCALID_SANCTUM_CHLOE_B3F, EleusaSanctum_B3F_Movement_ChloeToSickle)
+    waitmovement(0)
+    playse(SE_PIN)
+    delay(20)
+    setspeaker(EleusaSanctum_B3F_Text_NameChloe)
+    msgbox(format("They threw this aside. They thought it was nothing."))
+    msgbox(format("Two blades were kept down here."))
+    msgbox(format("One cut a father down. One taught the world to reap."))
+    msgbox(format("When the old sickle was broken, the goddess asked for a piece of it."))
+    msgbox(format("She buried it under her grain. Where nothing's ever cut but wheat."))
+    msgbox(format("They came for a sickle. They didn't know there were two."))
+    closemessage
+    // She holds it out.
+    applymovement(LOCALID_SANCTUM_CHLOE_B3F, EleusaSanctum_B3F_Movement_ChloeToPlayer)
+    waitmovement(0)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    waitmovement(0)
+    setspeaker(EleusaSanctum_B3F_Text_NameChloe)
+    msgbox(format("Take hers. It cuts what's grown across a path. Nothing else."))
+    msgbox(format("That's all she ever wanted it to cut."))
+    // The relic (ENGINE_API.md §2): the engine sets FLAG_ICHOR_GOT_DEMETERS_SICKLE as it
+    // enters the bag. Demeter Favor +10 for her myth-quest (§3).
+    setspeaker(SP_NAME_NONE)
+    giveitem(ITEM_DEMETERS_SICKLE)
+    setvar(VAR_0x8004, ICHOR_GOD_DEMETER)
+    setvar(VAR_0x8005, ICHOR_FAVOR_MYTH_QUEST)
+    special(Ichor_AddFavor)
+    setspeaker(EleusaSanctum_B3F_Text_NameChloe)
+    msgbox(format("Go up. I'll stay a while. Somebody should, down here."))
+    closemessage
+    // Fade. To the Telesterion's steps, outside, for beat 24.
+    fadescreen(FADE_TO_BLACK)
+    special(RemoveCameraObject)
+    warp(MAP_ELEUSA_VILLAGE, 25, 12)
+    waitstate
+    return
+}
+
+movement EleusaSanctum_B3F_Movement_StepRight {
+    walk_right
+}
+
+movement EleusaSanctum_B3F_Movement_StepLeft {
+    walk_left
+}
+
+movement EleusaSanctum_B3F_Movement_StepDown {
+    walk_down
+}
+
+movement EleusaSanctum_B3F_Movement_CameraDown {
+    walk_down * 2
+}
+
+movement EleusaSanctum_B3F_Movement_CameraUp {
+    walk_up * 2
+}
+
+movement EleusaSanctum_B3F_Movement_HyperionSquints {
+    face_up
+    delay_16
+    walk_up * 2
+    delay_8
+}
+
+movement EleusaSanctum_B3F_Movement_HyperionBacksAway {
+    lock_facing_direction
+    walk_down * 2
+    walk_right * 5
+    unlock_facing_direction
+}
+
+movement EleusaSanctum_B3F_Movement_AmathosHauls {
+    walk_right * 4
+    walk_down
+    walk_right * 4
+}
+
+movement EleusaSanctum_B3F_Movement_PetrosHauls {
+    delay_16
+    delay_16
+    walk_right * 6
+    walk_down
+    walk_right * 3
+}
+
+movement EleusaSanctum_B3F_Movement_AletheaComes {
+    delay_16
+    walk_down * 2
+    walk_right
+    face_down
+}
+
+movement EleusaSanctum_B3F_Movement_ChloeComes {
+    walk_down
+}
+
+movement EleusaSanctum_B3F_Movement_ChloeToChest {
+    walk_down * 5
+    face_down
+}
+
+movement EleusaSanctum_B3F_Movement_ChloeToSickle {
+    walk_up * 5
+    walk_left
+    face_left
+}
+
+movement EleusaSanctum_B3F_Movement_ChloeToPlayer {
+    walk_down * 2
+    walk_right * 2
+    face_right
+}
+
+// ---------------------------------------------------------------------------
+// The vault's people and things
+// ---------------------------------------------------------------------------
+
+script EleusaSanctum_B3F_EventScript_Hyperion {
+    goto(EleusaSanctum_B3F_EventScript_Theft)
+}
+
+script EleusaSanctum_B3F_EventScript_Crew {
+    end
+}
+
+script EleusaSanctum_B3F_EventScript_Nobody {
+    end
+}
+
+script EleusaSanctum_B3F_EventScript_Kapnub {
+    lock
+    playmoncry(SPECIES_KAPNUB, CRY_MODE_NORMAL)
+    waitmoncry
+    release
+}
+
+// The bronze sickle in the dust, until Chloe picks it up.
+script EleusaSanctum_B3F_EventScript_Sickle {
+    if (flag(FLAG_ICHOR_GOT_DEMETERS_SICKLE)) {
+        end
+    }
+    msgbox(format("A bronze sickle in the dust. Someone decided it wasn't worth taking."), MSGBOX_SIGN)
+}
+
+script EleusaSanctum_B3F_EventScript_Tunnel {
+    if (flag(FLAG_ICHOR_HIDE_HYPERION_SANCTUM)) {
+        msgbox(format("The Titans' tunnel, caved in. Somewhere above, it comes out in a field."), MSGBOX_SIGN)
+    }
+}
+
+// ICHOR_STUB_DIG: Daedalus's page II (SCRIPT.md Part 6), where the cave-in bared the old
+// foundations.
+script EleusaSanctum_B3F_EventScript_DigSpot {
+    if (flag(FLAG_ICHOR_HIDE_HYPERION_SANCTUM)) {
+        msgbox(format("The cave-in has bared old foundation stones. A corner of parchment shows between two.\p"
+                      "It won't come up by hand."), MSGBOX_SIGN)
+    }
+}
+
+// --- Generated by tools/ichor/maps/sanctum.py from the layout. Do not edit. ---
+
+// The Titans' tunnel, caved in behind Hyperion (beat 23C), and the dig it bared.
+script EleusaSanctum_B3F_EventScript_DrawCollapse {
+    setmetatile(15, 10, METATILE_EleusaSanctumRock_RockPile, TRUE)
+    setmetatile(15, 11, METATILE_EleusaSanctumRock_Boulder, TRUE)
+    setmetatile(16, 10, METATILE_EleusaSanctumRock_Boulder, TRUE)
+    setmetatile(16, 11, METATILE_EleusaSanctumRock_Boulder, TRUE)
+    setmetatile(17, 10, METATILE_EleusaSanctumRock_Boulder, TRUE)
+    setmetatile(17, 11, METATILE_EleusaSanctumRock_RockPile, TRUE)
+    setmetatile(14, 12, METATILE_EleusaSanctumRock_DigCrypt, FALSE)
+    return
+}
+
+// --- End of the generated block. ---

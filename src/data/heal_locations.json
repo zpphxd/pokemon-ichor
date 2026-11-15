@@ -33,6 +33,12 @@
       "respawn_npc": "LOCALID_EMPORION_HEALER",
       "respawn_x": 8,
       "respawn_y": 4
+    },
+    {
+      "id": "HEAL_LOCATION_ELEUSA_VILLAGE",
+      "map": "MAP_ELEUSA_VILLAGE",
+      "x": 10,
+      "y": 24
     }
   ]
 }
