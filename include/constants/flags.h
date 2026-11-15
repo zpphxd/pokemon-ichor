@@ -1701,6 +1701,7 @@
 #ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
+#define FLAG_ICHOR_HIDE_ELEUSA_EAST_HOPLITE     (FLAG_ICHOR_GENERAL_START + 0x10C) // Ichor: the hoplite in Eleusa's east wall gap (48,25), hidden when Route 15 opens in Act II (batch 4)
 #define FLAG_ICHOR_MET_MANTO                    (FLAG_ICHOR_GENERAL_START + 0x130) // Ichor: Act II: met Manto the augur on the Kadmeia wall (beat 30); her house opens
 #define FLAG_ICHOR_NEISTAN_DRUM_MOVED           (FLAG_ICHOR_GENERAL_START + 0x131) // Ichor: Act II: pushed the fallen drum out of the Neistan Gate with the Girdle
 #define FLAG_ICHOR_HIDE_NEISTAN_GUARDS          (FLAG_ICHOR_GENERAL_START + 0x132) // Ichor: Act II: hides the festival guard in the Neistan Gate (after the Dionysia)

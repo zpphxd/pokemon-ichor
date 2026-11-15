@@ -51,7 +51,7 @@
 #define TRAINER_ICHOR_IKARIOS                 160
 #define TRAINER_ICHOR_PYTHODOROS              161
 #define TRAINER_ICHOR_BOTRYS                  162
-#define TRAINER_ICHOR_ASTYLOS             163
+#define TRAINER_ICHOR_ASTYLOS                 163
 #define TRAINER_ICHOR_TIMOLAOS                164
 #define TRAINER_ICHOR_LYKIDAS                 165
 #define TRAINER_ICHOR_EUIA                    166
@@ -67,8 +67,8 @@
 #define TRAINER_ICHOR_OINOPION                176
 #define TRAINER_ICHOR_LENAIA                  177
 #define TRAINER_ICHOR_HEGELOCHOS              178
-#define TRAINER_ICHOR_MYNNISKOS             179
-#define TRAINER_ICHOR_THETTALOS             180
+#define TRAINER_ICHOR_MYNNISKOS               179
+#define TRAINER_ICHOR_THETTALOS               180
 #define TRAINER_ICHOR_THEODOROS               181
 #define TRAINER_ICHOR_THESPIS_1               182
 #define TRAINER_ICHOR_GRUNT_BORBOROS          183
