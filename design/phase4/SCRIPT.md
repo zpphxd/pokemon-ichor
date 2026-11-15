@@ -10642,6 +10642,126 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 ```
 "Hyperion's crews dug them out of the sea caves at Kaldera. They hammer the boats tight."
 
+**5. HOPLITE Lykon.** At the road's east end by the sign, facing down across both lanes of the road, sight 2. Mandatory, and easy: the route's first trainer, in plain view of Skandeia's gate.
+```text
+Before: LYKON: Halt. Nobody walks the Foam Road unchallenged. My rule.
+Defeat: LYKON: Rules are rules. You win.
+After:  LYKON: Skandeia's gate is mine to keep. Paphia's yours to reach.
+```
+```
+=== TRAINER_ICHOR_LYKON ===
+Name: LYKON
+Class: Hoplite
+Pic: Hoplite
+Gender: Male
+Music: Intense
+AI: Basic Trainer
+
+Galenyon
+Level: 42
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**6. ACOLYTE Theano.** On the terrace above the hedge, walking to the temple, facing west along it, sight 3. Optional: the terrace is the way back east.
+```text
+Before: THEANO: I walk to the temple every spring. Walk with me a while. Battle first.
+Defeat: THEANO: The goddess would have liked that one.
+After:  THEANO: From up here her temple's roof shows over the trees. Pink as a shell.
+```
+```
+=== TRAINER_ICHOR_THEANO ===
+Name: THEANO
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Himerow
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Aphrell
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**7. DIVER Kymodoke.** On the sand islet in the bay, by the Pearl String, facing north to the shore, sight 3. Optional, reached only by Surf.
+```text
+Before: KYMODOKE: You swam out to my islet! Nobody does. Battle me, then go away.
+Defeat: KYMODOKE: Back to the waves with me.
+After:  KYMODOKE: Pearls wash up here. Not from oysters. From the foam, my gran says.
+```
+```
+=== TRAINER_ICHOR_KYMODOKE ===
+Name: KYMODOKE
+Class: Diver
+Pic: Swimmer F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Galenyon
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narkeray
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**8. SHEPHERD Menalkas.** In the clifftop meadow under the east wood, with his flock, facing west, sight 3. Optional. Named for Theocritus's herdsman.
+```text
+Before: MENALKAS: My flock grazes this clifftop. You've trodden on their supper.
+Defeat: MENALKAS: Fine. Fine. They'll eat the thrift instead.
+After:  MENALKAS: Sheep don't care for the sea. They face inland. Wise animals.
+```
+```
+=== TRAINER_ICHOR_MENALKAS ===
+Name: MENALKAS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Gelasable
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**9. HARVESTER Amaryllis.** Cutting myrtle at the grove's east edge, facing down across the road into the grove, sight 2. Mandatory: grass band 3 starts right behind her.
+```text
+Before: AMARYLLIS: Myrtle for the temple's garlands. Don't trample the grove.
+Defeat: AMARYLLIS: My basket! Well. Myrtle grows back.
+After:  AMARYLLIS: Aphrodite hid behind a myrtle when she came ashore. Bare as a pebble.
+```
+```
+=== TRAINER_ICHOR_AMARYLLIS ===
+Name: AMARYLLIS
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Psychora
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Narcibulb
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
 ## The Spring of Kallirhoe and Echo's caves
 
 **PILGRIM Philotes.** On the bench by the fall, at the spring. Optional. A lovesick pilgrim who came to drink from the spring and stayed to sigh.
@@ -10946,6 +11066,102 @@ Level: 47
 IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 ```
 Hierolive evolves with a Leaf Stone; a harvester grows olives.
+
+**5. SHEPHERD Daphnis.** In the meadow by the sign at the ravine's foot, facing west to the road, sight 3, in plain view: the ravine's easy first trainer. Named for the herdsman of the bucolic songs.
+```text
+Before: DAPHNIS: Quiet up the valley today. Too quiet. Fight me, so there's some noise.
+Defeat: DAPHNIS: There. That was noise.
+After:  DAPHNIS: I used to pipe to the sheep by the falls. You can't pipe over silence.
+```
+```
+=== TRAINER_ICHOR_DAPHNIS ===
+Name: DAPHNIS
+Class: Shepherd
+Pic: Shepherd
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Gelasable
+Level: 43
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Himerow
+Level: 44
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**6. HARVESTER Opora.** On the lower terrace by the Lum tree, facing east, sight 2. Optional. Her name is late summer, the season of fruit.
+```text
+Before: OPORA: Berries for the Naiads. These are mine. Get your own!
+Defeat: OPORA: Take a berry. Take two. The trees are generous.
+After:  OPORA: Krenaia wants first fruits. Three. The Naiads can count.
+```
+```
+=== TRAINER_ICHOR_OPORA ===
+Name: OPORA
+Class: Harvester
+Pic: Harvester
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Melisseer
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Chelyra
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**7. ACOLYTE Pegaios.** On the plunge pool's west bank, keeping it for the Naiads, facing south, sight 3. Optional.
+```text
+Before: PEGAIOS: I keep the pool clean for the Naiads. You're tracking mud.
+Defeat: PEGAIOS: The Naiads saw that. They're laughing at me. Silently.
+After:  PEGAIOS: The falls make no sound. I've stopped hearing my own prayers.
+```
+```
+=== TRAINER_ICHOR_PEGAIOS ===
+Name: PEGAIOS
+Class: Acolyte
+Pic: Acolyte M
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+Narcisheen
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Galenyon
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
+
+**8. ACOLYTE Dexithea.** In the meadow on the east bank below the ford, facing west, sight 3. Optional; the grass round her hides a Big Root.
+```text
+Before: DEXITHEA: Pilgrims leave the shrine a ribbon. I leave a battle.
+Defeat: DEXITHEA: A good offering.
+After:  DEXITHEA: Mopsos reads birds at the ford. He reads them wrong. Don't tell him.
+```
+```
+=== TRAINER_ICHOR_DEXITHEA ===
+Name: DEXITHEA
+Class: Acolyte
+Pic: Acolyte F
+Gender: Female
+Music: Female
+AI: Basic Trainer
+
+Himerow
+Level: 45
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+
+Psychora
+Level: 46
+IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
+```
 
 ## Route 23 and Antikythera (optional), levels 43–45
 

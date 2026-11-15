@@ -54,8 +54,10 @@ def glade_cells():
 def compose():
     m = Map(NAME, "kythera", W, H, fill=A.GRASS)
     m.border = [A.SEA] * 4
+    # A side area off the Foam Road, over Echo's caves: MAP_DESIGN §8.6 classes it with
+    # the dungeons (as Kronion Hill is), not as a route of its own.
     m.header = {"music": "MUS_ICHOR_HOLLOW", "weather": "WEATHER_SUNNY", "map_type": "MAP_TYPE_ROUTE",
-                "show_map_name": True, "allow_cycling": False, "allow_running": True}
+                "show_map_name": True, "allow_cycling": False, "allow_running": True, "ichor_kind": "dungeon"}
     glade = glade_cells()
     taken = set()
 
@@ -186,6 +188,7 @@ def events(m):
           flag="FLAG_ICHOR_KALLIRHOE_MYRTLE_CUT", local_id="LOCALID_KALLIRHOE_THICKET")
     m.item_ball(3, 9, "ITEM_MIRACLE_SEED", "FLAG_ICHOR_ITEM_KALLIRHOE_MIRACLE_SEED")
     m.hidden(21, 6, "ITEM_REVIVE", "FLAG_ICHOR_HIDDEN_KALLIRHOE_REVIVE")
+    m.hidden(9, 8, "ITEM_PP_UP", "FLAG_ICHOR_HIDDEN_KALLIRHOE_PP_UP")
 
     m.sign(12, 8, P + "Fall")
     for y in (py + 1, py + 2):

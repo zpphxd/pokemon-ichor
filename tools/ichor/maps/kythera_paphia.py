@@ -99,7 +99,7 @@ PLAN = [
     _row(("~", 7), ("s", 2), ("X", 4), (".", 1), ("t", 3), (".", 1), (".", 3), ("X", 3), (".", 2), ("X", 1),
          ("X", 2), ("=", 3), ("X", 2), ("=", 2), ("=", 6), (T, 2)),                                       # 18
     _row(("~", 7), ("s", 2), (".", 9), (".", 3), ("X", 3), ("X", 1), (".", 2), (".", 2), ("=", 3), ("X", 2),
-         ("=", 1), ("X", 1), ("=", 1), ("=", 1), ("=", 3), ("=", 1), ("X", 1), (".", 1)),                 # 19
+         ("=", 1), ("X", 1), ("=", 1), ("=", 1), ("=", 3), ("=", 1), ("X", 1), (T, 1)),                   # 19
     _row(("~", 2), ("Q", 7), ("X", 1), ("f", 8), ("f", 9), ("f", 2), ("=", 6), ("X", 1), ("=", 6), (".", 2)),  # 20
     _row(("~", 2), ("Q", 7), ("X", 1), ("f", 8), ("f", 9), ("f", 2), ("=", 3), ("X", 2), ("=", 2), ("=", 8)),  # 21
     _row(("~", 2), ("Q", 7), ("X", 1), ("f", 3), (".", 5), (".", 9), (".", 2), ("=", 3), ("X", 2), ("=", 2),
@@ -211,6 +211,7 @@ def compose():
         if at(x, y - 1) != "c" or (y - 6) % 2 == 0:
             if (y - 6) % 2 == 0:
                 m.cypress(x, y)
+                m.solid[y, x] = True          # the temple's flank: walked round
     for x in (18, 26):
         m.piece("props", "statue_g", x, 12)
         m.piece("props", "statue_g_base", x, 13)
@@ -297,7 +298,7 @@ def compose():
                        ("shells", 33, 26), ("lace", 26, 27)):
         m.piece("sand_decor", name, x, y)
     for (x, y) in ((3, 31), (22, 31), (38, 30), (41, 32), (7, 29), (34, 32), (12, 32)):
-        m.set(x, y, 0x18C if (x + y) % 2 else 0x194, True)
+        m.set(x, y, A.SEA_ROCK_DEEP, True)
 
     # ---- the woods ------------------------------------------------------------------------
     m.woods(cells_of("T", y1=12), salt=11, aethos_only=strip, singles=[("myrtle", "bush"), ("myrtle", "single"),
@@ -341,6 +342,7 @@ def events(m):
     m.obj("ICHOR_KID_F", 34, 21, P + "Girl", "MOVEMENT_TYPE_LOOK_AROUND")
     m.obj("ICHOR_ELDER_M", 33, 12, P + "OldMan", "MOVEMENT_TYPE_FACE_UP")
 
+    m.item_ball(36, 13, "ITEM_LOVE_BALL", "FLAG_ICHOR_ITEM_PAPHIA_LOVE_BALL")
     m.hidden(28, 9, "ITEM_ULTRA_BALL", "FLAG_ICHOR_HIDDEN_PAPHIA_ULTRA_BALL")
     m.hidden(11, 19, "ITEM_PEARL", "FLAG_ICHOR_HIDDEN_PAPHIA_PEARL")
 

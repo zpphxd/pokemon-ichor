@@ -157,6 +157,14 @@
       "flag": "FLAG_ICHOR_HIDDEN_KALLIRHOE_REVIVE"
     },
     {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 8,
+      "elevation": 3,
+      "item": "ITEM_PP_UP",
+      "flag": "FLAG_ICHOR_HIDDEN_KALLIRHOE_PP_UP"
+    },
+    {
       "type": "sign",
       "x": 12,
       "y": 8,
@@ -212,5 +220,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "KytheraSpringOfKallirhoe_EventScript_DigSpot"
     }
-  ]
+  ],
+  "ichor_kind": "dungeon"
 }

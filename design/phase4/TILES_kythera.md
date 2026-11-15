@@ -69,6 +69,7 @@ Kythera-family catalog as a Python dict (`mid('kythera', 'surf', 'S')`), and
 | `P` | Fresh water: `MB_POND_WATER`, surfable. |
 | `F` | Waterfall: `MB_WATERFALL` (the Horn of Achelous climbs it). |
 | `J` | Ledge: `MB_JUMP_SOUTH`. |
+| `C` | Cave floor: `MB_CAVE`, wild encounters. Passable. |
 
 **Borrowed ground.** Cells marked *grass*, *path*, *sand*, *sea*, *shallow* or *fall*
 draw no ground of their own: after Porytiles compiles, the build points their
@@ -98,7 +99,7 @@ hints.
 | bronze | Bronze mirrors, the harbor shrine's dove, the great herm, the Minoan vault door |
 | melos | Melos's obsidian slope on its earth and grass |
 
-**Tile budget.** 451 of 504 tiles (368 metatiles). The door animations copy their
+**Tile budget.** 457 of 504 tiles (368 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 
@@ -291,6 +292,44 @@ ids                                                  walk
 | 0x27D | (5, 2) | `X` | `MB_NORMAL` | COVERED |  |
 | 0x27E | (6, 2) | `X` | `MB_NORMAL` | COVERED |  |
 | 0x27F | (7, 2) | `X` | `MB_NORMAL` | COVERED |  |
+
+### The harbor's gear
+
+`jetty`, 1 wide by 1 tall. Amphitos's fishing jetty off the Foam Road's shingle cove: `gangplank`, a run of timber planks over borrowed sea, laid north-south one cell after another out from the waterline (walkable; Skandeia's gangplank).
+
+```text
+ids        walk
+0x216   .
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x216 | `gangplank` | `.` | `MB_NORMAL` | COVERED | sea |
+
+### A fishing boat, afloat and beached
+
+`kaiki`, 6 wide by 2 tall. A kaiki, the island's fishing boat, bow to the east, 3 x 2 each: `afloat` on borrowed sea, `beached` drawn up on the sand (borrowed sand). Impassable.
+
+```text
+ids                                      walk
+0x280 0x281 0x282 0x283 0x284 0x285   X X X X X X
+0x288 0x289 0x28A 0x28B 0x28C 0x28D   X X X X X X
+```
+
+| Id | Piece | Walk | Behavior | Layer | Ground |
+|---|---|---|---|---|---|
+| 0x280 | `afloat` | `X` | `MB_NORMAL` | COVERED | sea |
+| 0x281 | (1, 0) | `X` | `MB_NORMAL` | COVERED | sea |
+| 0x282 | (2, 0) | `X` | `MB_NORMAL` | COVERED | sea |
+| 0x283 | `beached` | `X` | `MB_NORMAL` | COVERED | sand |
+| 0x284 | (4, 0) | `X` | `MB_NORMAL` | COVERED | sand |
+| 0x285 | (5, 0) | `X` | `MB_NORMAL` | COVERED | sand |
+| 0x288 | (0, 1) | `X` | `MB_NORMAL` | COVERED | sea |
+| 0x289 | (1, 1) | `X` | `MB_NORMAL` | COVERED | sea |
+| 0x28A | (2, 1) | `X` | `MB_NORMAL` | COVERED | sea |
+| 0x28B | (3, 1) | `X` | `MB_NORMAL` | COVERED | sand |
+| 0x28C | (4, 1) | `X` | `MB_NORMAL` | COVERED | sand |
+| 0x28D | (5, 1) | `X` | `MB_NORMAL` | COVERED | sand |
 
 ## The land
 

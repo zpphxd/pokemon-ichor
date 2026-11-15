@@ -60,30 +60,32 @@ PLAN = [
     _row((T, 16), ("Q", 8), (T, 16), ("h", 1), (R, 2), ("h", 1), (T, 20)),                         # 1
     _row((T, 16), ("Q", 8), (T, 16), ("h", 1), (R, 2), ("h", 1), (T, 20)),                         # 2
     _row((T, 16), ("Q", 8), (T, 16), ("h", 1), (R, 2), ("h", 1), (T, 20)),                         # 3
-    _row((T, 16), ("L", 12), (T, 11), (".", 2), (R, 2), (".", 4), ("e", 1), (".", 5), ("e", 1),
-         (".", 2), (T, 8)),                                                                          # 4
-    _row((T, 16), ("F", 12), ("L", 11), (".", 2), (R, 2), ("X", 1), (".", 3), ("e", 1),
-         (".", 5), ("e", 1), (".", 2), (T, 8)),                                                      # 5
-    _row((T, 4), (".", 4), ("X", 3), ("k", 1), (G, 3), (".", 1), (".", 12), ("F", 11), ("X", 1), (".", 1),
-         (R, 2), ("X", 1), ("h", 10), (".", 4), (T, 6)),                                             # 6
+    _row((T, 16), ("L", 12), (T, 11), (G, 2), (R, 2), (".", 1), (G, 3), ("e", 1), (G, 5), ("e", 1),
+         (G, 2), (T, 8)),                                                                            # 4
+    _row((T, 16), ("F", 12), ("L", 11), (G, 2), (R, 2), ("X", 1), (G, 3), ("e", 1), (G, 5), ("e", 1),
+         (G, 2), (T, 8)),                                                                            # 5
+    _row((T, 4), (".", 4), ("X", 3), ("k", 1), (G, 3), (".", 1), (G, 3), (".", 9), ("F", 11), ("X", 1),
+         (".", 1), (R, 2), ("X", 1), ("h", 10), (G, 2), (".", 2), (T, 6)),                           # 6
     _row((".", 6), ("X", 1), (".", 1), ("X", 3), (R, 1), (G, 3), (R, 1), (R, 13), (".", 2), (G, 5),
-         (R, 3), (R, 6), ("h", 6), (G, 3), (".", 4), (T, 6)),                                        # 7
-    _row((R, 11), (R, 1), (G, 4), (".", 12), (R, 2), (G, 5), (R, 2), ("X", 2), (R, 6), (R, 4), (G, 4),
-         (R, 3), ("X", 1), (".", 1), (T, 6)),                                                        # 8
-    _row((R, 8), (".", 1), ("X", 2), (G, 4), (".", 1), (S, 12), (SEA, 11), (R, 10), (G, 4), (R, 11)),  # 9
-    _row((".", 8), ("h", 3), (".", 1), (G, 3), ("k", 1), (S, 12), (SEA, 11), (S, 10), (G, 5), (R, 10)),  # 10
-    _row((T, 4), (".", 4), ("h", 8), (S, 12), (SEA, 11), (S, 9), (G, 5), (".", 11)),              # 11
-    _row((T, 4), (".", 4), ("X", 1), (".", 6), ("X", 1), (S, 12), (SEA, 11), (S, 10), ("L", 7), (".", 1),
-         (T, 7)),                                                                                    # 12
-    _row((S, 8), ("X", 1), (".", 3), ("X", 1), (".", 2), ("X", 1), (SEA, 31), ("j", 1), (SEA, 1), ("F", 7),
-         (".", 1), (T, 7)),                                                                          # 13
-    _row(("w", 8), ("L", 4), ("X", 1), ("L", 3), (SEA, 31), ("j", 1), (SEA, 8), (S, 1), (T, 7)),     # 14
-    _row((SEA, 8), ("F", 4), ("X", 1), ("F", 3), (SEA, 31), ("j", 1), (SEA, 8), (S, 1), (T, 7)),     # 15
-    _row((SEA, 47), ("j", 1), (SEA, 7), (S, 2), (T, 7)),                                            # 16
-    _row((SEA, 35), (S, 2), (SEA, 17), (S, 3), (T, 7)),                                             # 17
-    _row((SEA, 34), (S, 4), (SEA, 15), (S, 4), (T, 7)),                                             # 18
-    _row((SEA, 35), (S, 2), (SEA, 15), (S, 5), (T, 7)),                                             # 19
-    _row((SEA, 52), (S, 5), (T, 7)),                                                                # 20
+         (R, 3), (R, 6), ("h", 9), (G, 2), (".", 2), (T, 6)),                                        # 7
+    _row((R, 11), (R, 1), (G, 4), (G, 5), (".", 7), (R, 2), (G, 5), (R, 2), ("X", 2), (R, 6), (R, 3),
+         (G, 8), ("X", 1), (".", 2), (T, 5)),                                                        # 8
+    _row((R, 8), (".", 1), ("X", 2), (G, 4), (".", 1), (S, 12), (SEA, 11), (R, 9), (G, 8), (R, 8)),   # 9
+    _row((".", 2), ("b", 5), (".", 1), ("h", 3), (".", 1), (G, 3), ("k", 1), (S, 12), (SEA, 11), (S, 9),
+         (G, 8), (R, 8)),                                                                            # 10
+    _row((T, 2), ("b", 6), ("h", 8), (S, 12), (SEA, 11), (S, 9), (G, 8), (".", 2), (T, 6)),         # 11
+    _row((T, 2), ("b", 5), (".", 1), ("X", 1), (G, 6), ("X", 1), (S, 12), (SEA, 11), (S, 10), ("L", 7),
+         (".", 2), (T, 6)),                                                                          # 12
+    _row((S, 8), ("X", 1), (G, 3), ("X", 1), (G, 2), ("X", 1), (SEA, 31), ("j", 1), (SEA, 1), ("F", 7),
+         (".", 6), (T, 2)),                                                                          # 13
+    _row(("w", 8), ("L", 4), ("X", 1), ("L", 3), (SEA, 31), ("j", 1), (SEA, 8), (S, 1), ("b", 4), (".", 1),
+         (T, 2)),                                                                                    # 14
+    _row((SEA, 8), ("F", 4), ("X", 1), ("F", 3), (SEA, 31), ("j", 1), (SEA, 8), (S, 1), ("b", 5), (T, 2)),  # 15
+    _row((SEA, 47), ("j", 1), (SEA, 7), (S, 2), ("b", 3), (T, 2), (T, 2)),                          # 16
+    _row((SEA, 35), (S, 2), (SEA, 17), (S, 3), ("b", 3), (T, 2), (T, 2)),                           # 17
+    _row((SEA, 34), (S, 4), (SEA, 15), (S, 4), ("b", 5), (T, 2)),                                   # 18
+    _row((SEA, 35), (S, 2), (SEA, 15), (S, 5), ("b", 4), (".", 1), (T, 2)),                         # 19
+    _row((SEA, 52), (S, 5), (".", 2), (T, 5)),                                                      # 20
     _row((SEA, 53), (S, 4), (T, 7)),                                                                # 21
     _row((SEA, 53), (S, 4), (T, 7)),                                                                # 22
     _row((SEA, 54), (S, 3), (T, 7)),                                                                # 23
@@ -135,6 +137,8 @@ def compose():
         m.set(x, y, 0x12C, False)                 # aethos's beach edge, sea to the south
     for (x, y) in cells_of("e"):
         m.set(x, y, A.LEDGE["E"], False)
+    for (x, y) in cells_of("b"):
+        m.set(x, y, A.TALL, False)                # barley in the aethos strips
 
     # ---- the cliffs ------------------------------------------------------------------------
     cliff_run(m, 16, 27, 4, ends=(False, False))  # behind the rock beach (the quarry's gate in it)
@@ -182,7 +186,7 @@ def compose():
     m.piece("quarry", "chips", 20, 3)
     m.piece("quarry", "chips", 22, 3)
     m.part("quarry", "gate_TL", 18, 4, 2, 2)
-    m.tallgrass({(17, 1), (18, 1), (19, 1), (20, 1), (17, 2), (18, 2), (19, 2), (17, 3)})
+    m.tallgrass({(17, 1), (18, 1), (19, 1), (20, 1), (17, 2), (18, 2), (19, 2), (17, 3), (18, 3), (19, 3)})
 
     # ---- the tall grass ---------------------------------------------------------------------
     quarry = {(x, y) for x in range(16, 24) for y in range(0, 4)}
@@ -228,17 +232,16 @@ def compose():
                        ("tide_rock", 33, 20), ("tide_rocks", 44, 21)):
         m.piece("rocks", name, x, y)
     for (x, y) in ((2, 16), (5, 19), (6, 20)):    # rocks off the west strip (aethos)
-        m.set(x, y, 0x18C if (x + y) % 2 else 0x194, True)
+        m.set(x, y, A.SEA_ROCK_DEEP, True)
     for name, x, y in (("tide_rocks", 9, 21), ("tide_rock", 39, 20), ("tide_rocks", 40, 21),
                        ("tide_rock", 22, 21)):
         m.piece("rocks", name, x, y)
-    # Amphitos's jetty off the shingle cove
-    jetty = "gangplank" if "gangplank" in m.s("rocks")["names"] else None
+    # Amphitos's jetty off the shingle cove, a kaiki moored beside it, another drawn
+    # up in the cove under the east wood
     for y in (13, 14, 15, 16):
-        if jetty:
-            m.piece("rocks", jetty, 47, y)
-        else:
-            m.piece("rocks", "spit_V", 47, y)
+        m.piece("jetty", "gangplank", 47, y)
+    m.part("kaiki", "afloat", 44, 14, 3, 2)
+    m.part("kaiki", "beached", 53, 21, 3, 2)
 
     # ---- shingle, sand and flowers --------------------------------------------------------
     m.sand_rim(cells_of("s"), lambda x, y: 0 <= x < W and 0 <= y < H and at(x, y) not in "s~jw")
@@ -260,18 +263,20 @@ def compose():
         m.piece("rocks", name, x, y)
 
     # thrift on the terrace and the clifftops, petals blown along the road
-    for x, y in ((45, 4), (49, 5), (50, 4), (52, 5), (54, 4), (55, 6), (54, 11), (39, 4), (40, 5),
-                 (44, 5), (9, 12), (14, 12), (10, 13), (2, 10), (5, 11), (7, 12), (29, 7), (36, 7)):
+    for x, y in ((43, 4), (55, 11), (57, 12), (61, 13), (2, 10), (7, 12), (29, 7), (36, 7), (20, 6),
+                 (22, 6), (21, 8), (23, 8), (58, 20), (57, 6)):
+        if int(m.mid[y, x]) != A.GRASS:
+            continue
         if not strip(x, y):
             m.piece("flowers", "thrift", x, y)
         else:
             m.set(x, y, A.ANEMONE, False)
-    for x, y in ((40, 4), (11, 6), (15, 10), (11, 9), (17, 7), (28, 7), (26, 6), (24, 6), (53, 11)):
-        m.piece("flowers", "petals", x, y)
-    for x, y in ((1, 7), (3, 7), (4, 6), (57, 7), (56, 11), (58, 11), (61, 11), (2, 11), (7, 10)):
-        m.set(x, y, A.ANEMONE, False)
-    for x, y in ((13, 12), (11, 12)):
-        m.piece("flowers", "briar", x, y)
+    for x, y in ((11, 6), (28, 7), (26, 6), (24, 6), (19, 6), (25, 8), (40, 6)):
+        if int(m.mid[y, x]) == A.GRASS:
+            m.piece("flowers", "petals", x, y)
+    for x, y in ((1, 7), (3, 7), (4, 6), (57, 7), (56, 11), (7, 10), (60, 12), (58, 12), (61, 19)):
+        if int(m.mid[y, x]) == A.GRASS:
+            m.set(x, y, A.ANEMONE, False)
     return m
 
 
@@ -300,7 +305,18 @@ def events(m):
     m.obj("ICHOR_YOUTH_M", HERM[0] + 1, HERM[1], P + "Messenger", "MOVEMENT_TYPE_FACE_DOWN",
           flag="FLAG_ICHOR_HIDE_MESSENGER_FOAM_ROAD", local_id="LOCALID_FOAM_ROAD_MESSENGER")
 
+    # the second wave (MAP_DESIGN §8): Lykon keeps the east end, Theano walks the terrace,
+    # Kymodoke has the islet, Menalkas the clifftop meadow, Amaryllis the grove's edge
+    m.obj("ICHOR_HOPLITE", 58, 8, P + "Lykon", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2)
+    m.obj("ICHOR_ACOLYTE_F", 50, 4, P + "Theano", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3)
+    m.obj("ICHOR_DIVER", 36, 17, P + "Kymodoke", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=3)
+    m.obj("ICHOR_SHEPHERD", 58, 13, P + "Menalkas", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=3)
+    m.obj("ICHOR_HARVESTER", 15, 6, P + "Amaryllis", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=3)
+    m.obj("SPECIES(WOOLOO)", 59, 15, P + "Sheep", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1)
+    m.obj("SPECIES(WOOLOO)", 58, 18, P + "Sheep", "MOVEMENT_TYPE_FACE_LEFT")
+
     # items
+    m.item_ball(3, 12, "ITEM_ULTRA_BALL", "FLAG_ICHOR_ITEM_FOAM_ROAD_ULTRA_BALL")
     m.item_ball(23, 17, "ITEM_HYPER_POTION", "FLAG_ICHOR_ITEM_FOAM_ROAD_HYPER_POTION")
     m.item_ball(22, 1, "ITEM_RARE_CANDY", "FLAG_ICHOR_ITEM_FOAM_ROAD_RARE_CANDY")
     m.item_ball(10, 13, "ITEM_PRETTY_FEATHER", "FLAG_ICHOR_ITEM_FOAM_ROAD_PRETTY_FEATHER")
@@ -330,7 +346,7 @@ def check_bands(m):
     """Each forced band is walked through, never round: the fewest tall-grass
     steps from one side to the other."""
     errors = []
-    for name, start, goal, need in (("band 1", [(54, 9)], [(47, 8), (47, 9)], 3),
+    for name, start, goal, need in (("band 1", [(57, 9)], [(47, 8), (47, 9)], 8),
                                     ("band 2", [(36, 7)], [(29, 8), (28, 7), (28, 8)], 4),
                                     ("band 3", [(16, 8)], [(10, 8)], 3)):
         n = m.min_grass(start, goal)

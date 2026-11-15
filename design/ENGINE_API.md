@@ -320,6 +320,9 @@ Built in `src/ichor_herms.c`, `src/data/ichor_herms.h` and `data/scripts/ichor_h
   | Herm | Map | Herm tile | Landing tile |
   |---|---|---|---|
   | `HERM_KALLISTE_ROUTE_1` | `MAP_KALLISTE_ROUTE1` | (14,20), the fork's herm | (14,21) |
+  | `HERM_KYTHERA_FOAM_ROAD` | `MAP_KYTHERA_FOAM_ROAD` | (43,5), the fork's great herm | (43,7) |
+
+- **A herm with no map section** (`MAPSEC_NONE`, Kythera's: the island's fly target is Skandeia) is anointed, gives its Favor and sets its flag like any other, but is never a fly target. It sits after `HERM_COUNT`, so it doesn't count toward the all-herms bonus.
 
 - **What the player sees.**
   - With no Olive Oil: "A great herm, hung with old garlands. Hermes's face, worn smooth. Travelers anoint these with olive oil."

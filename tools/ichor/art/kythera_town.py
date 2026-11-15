@@ -912,9 +912,54 @@ def props():
     return s
 
 
+def hives():
+    """Kerinthos's bee wall on the Neraida terraces: clay hives laid on their sides
+    in a low stone wall, mouths to the sun, bees drifting (on borrowed grass)."""
+    names = {"hives_L": (0, 0), "hives_R": (1, 0), "hive": (2, 0)}
+    s = struct("hives", "Clay beehives", 3, 1, SEC, walk=["XXX"], names=names,
+               notes="The ravine's bee wall (on borrowed grass): `hives_L` `hives_R`, two cells of "
+                     "long clay hives laid in a dry-stone wall, mouths to the south; `hive`, one on its "
+                     "own stand. Impassable.")
+    ground(s, "grass")
+    M = s.M
+    wall = [
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        "kkkkkkkkkkkkkkkk",
+        "k3322k3322k3322k",
+        "kkkkkkkkkkkkkkkk",
+    ]
+    hive = [
+        ".kkkkk..",
+        "k22222k.",
+        "k2kkk22k",
+        "k2k0k23k",
+        "k2kkk23k",
+        "k22223k.",
+        ".kkkkk..",
+    ]
+    for ox in (0, 16):
+        for x0 in (1, 8):
+            put(M, ox + x0, 2, hive, {"k": "wd0", "2": "tc2", "3": "tc1", "0": "ink"})
+        for j, row in enumerate(wall):
+            for i, ch in enumerate(row):
+                c = {"k": "wd0", "3": "kr2", "2": "kr1"}.get(ch)
+                if c:
+                    M.px(ox + i, 8 + j, c)
+    put(M, 32 + 4, 3, hive, {"k": "wd0", "2": "tc2", "3": "tc1", "0": "ink"})
+    put(M, 32 + 5, 10, ["kkkkkk", "k2222k", ".k..k.", ".k..k.", "kk..kk"], {"k": "wd0", "2": "wd2"})
+    for (x, y) in ((3, 1), (12, 0), (20, 1), (27, 0), (40, 1), (34, 0)):
+        M.px(x, y, "ink")
+        M.px(x + 1, y, "tc3")
+    return s
+
+
 def build():
     h = house_kit()
     mirrors(h)
     sc = sculptors()
     return [h, herm_shrine(), dovecote(), great_stair(), temple_front(),
-            K.pick(sc, ["block", "block_face", "hoist", "bench", "chips", "hoist_foot"], w=6), props()]
+            K.pick(sc, ["block", "block_face", "hoist", "bench", "chips", "hoist_foot"], w=6), props(), hives()]

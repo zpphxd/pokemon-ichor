@@ -954,10 +954,10 @@
 #define FLAG_ICHOR_HIDDEN_NERAIDA_MYSTIC_WATER                      0x387 // Ichor: Neraida falls hidden item: Mystic Water in the mill-race
 #define FLAG_ICHOR_HIDDEN_NERAIDA_PEARL                             0x388 // Ichor: Neraida falls hidden item: Pearl behind the shrine's basin
 #define FLAG_ICHOR_HIDDEN_KALLIRHOE_REVIVE                          0x389 // Ichor: Spring of Kallirhoe hidden item: Revive in the nook under the cave rock
-#define FLAG_UNUSED_0x38A                                           0x38A // Unused Flag
-#define FLAG_UNUSED_0x38B                                           0x38B // Unused Flag
-#define FLAG_UNUSED_0x38C                                           0x38C // Unused Flag
-#define FLAG_UNUSED_0x38D                                           0x38D // Unused Flag
+#define FLAG_ICHOR_HIDDEN_KALLIRHOE_PP_UP                           0x38A // Ichor: Spring of Kallirhoe hidden item: PP Up at the fall's rock
+#define FLAG_ICHOR_HIDDEN_ECHO_CAVES_SHELL_BELL                     0x38B // Ichor: Echo's caves hidden item: Shell Bell in the Speaking Hall's west nook
+#define FLAG_ICHOR_HIDDEN_NERAIDA_HEART_SCALE                       0x38C // Ichor: Neraida falls hidden item: Heart Scale at the ledge path's foot
+#define FLAG_ICHOR_HIDDEN_NERAIDA_HONEY                             0x38D // Ichor: Neraida falls hidden item: Honey in Kerinthos's bee wall
 #define FLAG_UNUSED_0x38E                                           0x38E // Unused Flag
 #define FLAG_UNUSED_0x38F                                           0x38F // Unused Flag
 #define FLAG_UNUSED_0x390                                           0x390 // Unused Flag
@@ -1794,6 +1794,11 @@
 #define FLAG_ICHOR_ITEM_NERAIDA_PROTEIN         (FLAG_ICHOR_GENERAL_START + 0x25D) // Ichor: Neraida falls: the Protein on a rock in the upper pool
 #define FLAG_ICHOR_KRENAIA_TOLD                 (FLAG_ICHOR_GENERAL_START + 0x25E) // Ichor: Neraida falls: Krenaia told the laureled player about the silent falls and the horn (beat III-1H)
 #define FLAG_ICHOR_ITEM_FOAM_ROAD_PEARL_STRING  (FLAG_ICHOR_GENERAL_START + 0x260) // Ichor: Foam Road item ball: Pearl String on the islet
+#define FLAG_ICHOR_ITEM_FOAM_ROAD_ULTRA_BALL    (FLAG_ICHOR_GENERAL_START + 0x261) // Ichor: Foam Road item ball: Ultra Ball in the barley by the bay
+#define FLAG_ICHOR_ITEM_PAPHIA_LOVE_BALL        (FLAG_ICHOR_GENERAL_START + 0x262) // Ichor: Paphia item ball: Love Ball on the green by the Asclepeion
+#define FLAG_ICHOR_ITEM_NERAIDA_BIG_ROOT        (FLAG_ICHOR_GENERAL_START + 0x263) // Ichor: Neraida falls item ball: Big Root in the east bank's meadow
+#define FLAG_ICHOR_ITEM_NERAIDA_MAX_POTION      (FLAG_ICHOR_GENERAL_START + 0x264) // Ichor: Neraida falls item ball: Max Potion on the plunge pool's west bank
+#define FLAG_ICHOR_ITEM_NERAIDA_ELIXIR          (FLAG_ICHOR_GENERAL_START + 0x265) // Ichor: Neraida falls item ball: Elixir on the upper shelf
 #define FLAG_ICHOR_GOT_MASTER_BALL              (FLAG_ICHOR_GENERAL_START + 0x280) // Ichor: world-act3: Daedalus gives the Master Ball in the workshop, Labyrinth Scene D
 #define FLAG_ICHOR_FROZEN_HOUR                  (FLAG_ICHOR_GENERAL_START + 0x480) // Ichor: The Frozen Hour: the world is gray and still (engine, ENGINE_API §5)
 #define FLAG_ICHOR_THREAD_NO_RETURN             (FLAG_ICHOR_GENERAL_START + 0x481) // Ichor: The Turning: the Thread's RETURN TO… is closed (engine, ENGINE_API §6)

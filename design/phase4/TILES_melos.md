@@ -36,6 +36,7 @@ Kythera-family catalog as a Python dict (`mid('melos', 'surf', 'S')`), and
 | `P` | Fresh water: `MB_POND_WATER`, surfable. |
 | `F` | Waterfall: `MB_WATERFALL` (the Horn of Achelous climbs it). |
 | `J` | Ledge: `MB_JUMP_SOUTH`. |
+| `C` | Cave floor: `MB_CAVE`, wild encounters. Passable. |
 
 **Borrowed ground.** Cells marked *grass*, *path*, *sand*, *sea*, *shallow* or *fall*
 draw no ground of their own: after Porytiles compiles, the build points their
@@ -436,13 +437,13 @@ ids                                walk
 
 ### Echo's sea caves
 
-`cave`, 8 wide by 4 tall. Dark pink rock, the spring's water running down to the sea. The rock mass is `ceil` (the cave's roof seen from above), edged by `ceil_S` (its south lip, over a wall face), `ceil_E` / `ceil_W` (a wall running north-south, the floor to the east / west), `ceil_NW` / `ceil_NE` (outer corners, floor to the south-east / south-west) and `ceil_in_SE` / `ceil_in_SW` (inner corners). Below a `ceil_S` run a wall face two cells high: `wall_L` `wall` `wall_b` `wall_R` over `base_L` `base` `base_R`, where it meets the floor. `crack` is the Speaking Hall's roof crack, with `light_L` `light_R` the patch of daylight it throws on the floor. The floor: `floor`, `floor_b`, `floor_pebbles` (walkable). `pool_N` `_S` `_E` `_W` edge a cave pool (borrowed sea; named by where the water is). `wall_lamp` is a lamp in a niche by the diver; `brazier_cold` / `brazier_lit` the dark gallery's brazier (SYSTEMS §2; swap cold for lit). `stair_up` climbs back to the spring (the door). `mouth_L` `mouth_R` are the sea mouth: a low arch opening on daylit sea (borrowed sea, surfable).
+`cave`, 8 wide by 4 tall. Dark pink rock, the spring's water running down to the sea. The rock mass is `ceil` (the cave's roof seen from above), edged by `ceil_S` (its south lip, over a wall face), `ceil_E` / `ceil_W` (a wall running north-south, the floor to the east / west), `ceil_NW` / `ceil_NE` (outer corners, floor to the south-east / south-west) and `ceil_in_SE` / `ceil_in_SW` (inner corners). Below a `ceil_S` run a wall face two cells high: `wall_L` `wall` `wall_b` `wall_R` over `base_L` `base` `base_R`, where it meets the floor. `crack` is the Speaking Hall's roof crack, with `light_L` `light_R` the patch of daylight it throws on the floor. The floor: `floor`, `floor_b`, `floor_pebbles` (walkable, `MB_CAVE`: wild Pokémon live on it; so do `light_*`). `pool_N` `_S` `_E` `_W` edge a cave pool (borrowed sea; named by where the water is). `wall_lamp` is a lamp in a niche by the diver; `brazier_cold` / `brazier_lit` the dark gallery's brazier (SYSTEMS §2; swap cold for lit). `stair_up` climbs back to the spring (the door). `mouth_L` `mouth_R` are the sea mouth: a low arch opening on daylit sea (borrowed sea, surfable).
 
 ```text
 ids                                                  walk
 0x380 0x381 0x382 0x383 0x384 0x385 0x386 0x387   X X X X X X X X
 0x388 0x389 0x38A 0x38B 0x38C 0x38D 0x38E 0x38F   X X X X X X X D
-0x390 0x391 0x392 0x393 0x394 0x395 0x396 0x397   X X X . . . . .
+0x390 0x391 0x392 0x393 0x394 0x395 0x396 0x397   X X X C C C C C
 0x398 0x399 0x39A 0x39B 0x39C 0x39D 0x39E 0x39F   X X X X X X W W
 ```
 
@@ -467,11 +468,11 @@ ids                                                  walk
 | 0x390 | `base_L` | `X` | `MB_NORMAL` | COVERED |  |
 | 0x391 | `base` | `X` | `MB_NORMAL` | COVERED |  |
 | 0x392 | `base_R` | `X` | `MB_NORMAL` | COVERED |  |
-| 0x393 | `floor` | `.` | `MB_NORMAL` | COVERED |  |
-| 0x394 | `floor_b` | `.` | `MB_NORMAL` | COVERED |  |
-| 0x395 | `floor_pebbles` | `.` | `MB_NORMAL` | COVERED |  |
-| 0x396 | `light_L` | `.` | `MB_NORMAL` | COVERED |  |
-| 0x397 | `light_R` | `.` | `MB_NORMAL` | COVERED |  |
+| 0x393 | `floor` | `C` | `MB_CAVE` | COVERED |  |
+| 0x394 | `floor_b` | `C` | `MB_CAVE` | COVERED |  |
+| 0x395 | `floor_pebbles` | `C` | `MB_CAVE` | COVERED |  |
+| 0x396 | `light_L` | `C` | `MB_CAVE` | COVERED |  |
+| 0x397 | `light_R` | `C` | `MB_CAVE` | COVERED |  |
 | 0x398 | `pool_N` | `X` | `MB_NORMAL` | COVERED | sea |
 | 0x399 | `pool_S` | `X` | `MB_NORMAL` | COVERED | sea |
 | 0x39A | `pool_E` | `X` | `MB_NORMAL` | COVERED | sea |

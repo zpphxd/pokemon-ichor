@@ -9,8 +9,8 @@
 // workshop, 4 the dovecote, 5 the mirror-house, 6 the orchard house, 7 the
 // potter's house (tools/ichor/maps/kythera_homes.py's DOORS).
 //
-// Hidden items (not placed yet; they need vanilla flags): an Ultra Ball behind
-// the dovecote (26,10), and a Pearl under the mirror by the jetty (11,19).
+// Hidden items: an Ultra Ball behind the dovecote (28,9), and a Pearl under the
+// mirror by the jetty (11,19). A Love Ball waits on the green by the Asclepeion.
 // Music: MUS_ICHOR_AKTI stands in for MUS_ICHOR_KYTHERA; Hermes's reveal has no
 // MUS_ICHOR_THEOXENIA sting yet.
 

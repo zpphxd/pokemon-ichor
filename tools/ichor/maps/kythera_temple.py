@@ -63,13 +63,13 @@ PLAN = [
     "[%u%%####&u&&&&g#g##]",  # 11
     "[%%%%####&&&&&&ggg##]",  # 12  the south walk; the doorway's step (16,12)
     "[PWPPPPPPPPPPPPPdPPP]",  # 13  the partition; W1's top; the doorway (16,13)
-    "{(wLLLLLLLLLLLLLDLL)}",  # 14  W1 (2,14); the doorway (16,14)
+    "{(wLLLNLLLNLLLNLDLL)}",  # 14  W1 (2,14); niches (5,9,13); the doorway (16,14)
     " [.................E ",  # 15  the north aisle; W2 (19,15)
     " [.CCCCCCCCCCCCCpC.] ",  # 16  the colonnade; Rhodanthe's niche (16,16)
     " [.ccccccccccccccc.] ",  # 17
     " [...q...q...q.....] ",  # 18  the hall; roses laid on empty plinths
     " [.................] ",  # 19
-    " [.................] ",  # 20
+    " [..i.....i.....i..] ",  # 20  scallops inlaid down the hall
     " [.................] ",  # 21
     " [........b...b....] ",  # 22  marble benches along the south wall
     " [PPMdPPPPPPPPPPPPP] ",  # 23  M0's top (4,23); the doorway (5,23)
@@ -88,7 +88,7 @@ PLAN = [
 ]
 
 WALLS = {"[": "side_L", "]": "side_R", "{": "side_L_low", "}": "side_R_low", "<": "top_L", ">": "top_R",
-         "T": "top", "L": "lower", "R": "fresco", "P": "part", "d": "door_top", "D": "door",
+         "T": "top", "L": "lower", "N": "lower_niche", "R": "fresco", "P": "part", "d": "door_top", "D": "door",
          "(": "inner_L", ")": "inner_R"}
 MIRROR_TILES = {"M": "mirror_tall_top", "m": "mirror_tall", "W": "mirror_N_top", "w": "mirror_N", "E": "mirror_E"}
 FLOORS = {".": "floor", "i": "inlay", "x": "exit", "h": "threshold"}

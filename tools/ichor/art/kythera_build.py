@@ -97,7 +97,13 @@ def spec(name):
             "images": [("kythera_foam_beach.png", "A 240 x 160 screen of the Foam Road at Aphrodite's rock (3x; `kythera_foam_beach_1x.png` is 1x)"), ("kythera_foam_road.png", "A wider stretch of the Foam Road: the herm, the spring stair, the quarry and its drums, the cutting, the reef spit"), ("kythera_spring.png", "The Spring of Kallirhoe")],
             "sections": [
                 ("coast", [by["surf"], by["sand_decor"], by["shingle"], by["rocks"],
-                           by["aphrodite_rock"], by["cliff"]]),
+                           by["aphrodite_rock"], by["cliff"],
+                           K.pick(by["gear"], ["gangplank"], key="jetty",
+                                  notes="Amphitos's fishing jetty off the Foam Road's shingle cove: "
+                                        "`gangplank`, a run of timber planks over borrowed sea, "
+                                        "laid north-south one cell after another out from the "
+                                        "waterline (walkable; Skandeia's gangplank)."),
+                           by["kaiki"]]),
                 ("land", [by["myrtle"],
                           K.pick(fl, ["briar", "briar_L", "briar_R", "thrift", "narcissus",
                                       "narcissus_b", "petals"], key="flowers",
@@ -249,6 +255,7 @@ def spec(name):
                        ("house", [("mirror", "Mirror"), ("mirror_dim", "Mirror_Dim")])],
         }
     if name == "neraida":
+        import kythera_coast as Co
         hedge = by["_hedge_all"]
         trees = by["_trees_all"]
         cl = by["cliff"]
@@ -293,7 +300,10 @@ def spec(name):
                                  notes="The oriental plane (3 x 3): a broad crown of maple-like "
                                        "leaves over a mottled pale trunk. Its top row is drawn over "
                                        "the player (`T`); the rest is impassable."),
-                          by["terrace"]]),
+                          by["terrace"], by["hives"],
+                          K.pick(Co.tide_rocks(), ["rock_grass", "rocks_sand"], key="rocks",
+                                 notes="White rock: `rock_grass` on grass (Lykidas's rock, the "
+                                       "ravine's boulders), `rocks_sand`. Impassable.")]),
             ],
             "rows": {"water": 0, "coast": 22, "land": 26},
             "fronts": [],

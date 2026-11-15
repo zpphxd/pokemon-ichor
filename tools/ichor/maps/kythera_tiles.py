@@ -369,6 +369,79 @@ TILESETS = {
      "X"
     ]
    },
+   "jetty": {
+    "ground": {
+     "0,0": "sea"
+    },
+    "h": 1,
+    "ids": [
+     [
+      534
+     ]
+    ],
+    "names": {
+     "gangplank": [
+      0,
+      0
+     ]
+    },
+    "section": "coast",
+    "w": 1,
+    "walk": [
+     "."
+    ]
+   },
+   "kaiki": {
+    "ground": {
+     "0,0": "sea",
+     "0,1": "sea",
+     "1,0": "sea",
+     "1,1": "sea",
+     "2,0": "sea",
+     "2,1": "sea",
+     "3,0": "sand",
+     "3,1": "sand",
+     "4,0": "sand",
+     "4,1": "sand",
+     "5,0": "sand",
+     "5,1": "sand"
+    },
+    "h": 2,
+    "ids": [
+     [
+      640,
+      641,
+      642,
+      643,
+      644,
+      645
+     ],
+     [
+      648,
+      649,
+      650,
+      651,
+      652,
+      653
+     ]
+    ],
+    "names": {
+     "afloat": [
+      0,
+      0
+     ],
+     "beached": [
+      3,
+      0
+     ]
+    },
+    "section": "coast",
+    "w": 6,
+    "walk": [
+     "XXXXXX",
+     "XXXXXX"
+    ]
+   },
    "myrtle": {
     "ground": {
      "0,0": "grass",
@@ -1920,7 +1993,7 @@ TILESETS = {
     "walk": [
      "XXXXXXXX",
      "XXXXXXXD",
-     "XXX.....",
+     "XXXCCCCC",
      "XXXXXXWW"
     ]
    },
@@ -3320,6 +3393,40 @@ TILESETS = {
      "XX..."
     ]
    },
+   "hives": {
+    "ground": {
+     "0,0": "grass",
+     "1,0": "grass",
+     "2,0": "grass"
+    },
+    "h": 1,
+    "ids": [
+     [
+      733,
+      734,
+      735
+     ]
+    ],
+    "names": {
+     "hive": [
+      2,
+      0
+     ],
+     "hives_L": [
+      0,
+      0
+     ],
+     "hives_R": [
+      1,
+      0
+     ]
+    },
+    "section": "land",
+    "w": 3,
+    "walk": [
+     "XXX"
+    ]
+   },
    "kerb": {
     "ground": {
      "0,0": "shallow",
@@ -3686,6 +3793,34 @@ TILESETS = {
      "TTT",
      "XXX",
      "XXX"
+    ]
+   },
+   "rocks": {
+    "ground": {
+     "0,0": "grass",
+     "1,0": "sand"
+    },
+    "h": 1,
+    "ids": [
+     [
+      787,
+      788
+     ]
+    ],
+    "names": {
+     "rock_grass": [
+      0,
+      0
+     ],
+     "rocks_sand": [
+      1,
+      0
+     ]
+    },
+    "section": "land",
+    "w": 2,
+    "walk": [
+     "XX"
     ]
    },
    "seagrass": {

@@ -49,7 +49,7 @@ class A:
     CYP_TOP, CYP_BOT, CYP_TOP_TALL, CYP_TOP_SEA = 0x00E, 0x016, 0x025, 0x035
     PINE_TOP, PINE_BOT = (0x01E, 0x01F), (0x026, 0x027)
     STELE, HERM, TRIPOD_TOP, TRIPOD = 0x003, 0x01B, 0x130, 0x131
-    BOULDER_GRASS, BOULDER_SAND, SEA_BOULDER = 0x0E0, 0x0E2, 0x0C5
+    BOULDER_GRASS, BOULDER_SAND, SEA_BOULDER, SEA_ROCK_DEEP = 0x0E0, 0x0E2, 0x0C5, 0x18C
     STEPS, STEPS_B = 0x0AF, 0x0CF
     LEDGE = {"S": 0x087, "W": 0x085, "E": 0x086, "SW": 0x08D, "SE": 0x08E, "SL": 0x0D5, "SR": 0x0D6,
              "in": 0x06E}
@@ -63,7 +63,7 @@ class A:
 
 
 # Every aethos metatile a builder may place that blocks the player.
-AETHOS_SOLID = {A.STELE, A.HERM, A.TRIPOD, A.BOULDER_GRASS, A.BOULDER_SAND, A.SEA_BOULDER,
+AETHOS_SOLID = {A.STELE, A.HERM, A.TRIPOD, A.BOULDER_GRASS, A.BOULDER_SAND, A.SEA_BOULDER, A.SEA_ROCK_DEEP,
                 *A.OLIVE_TOP, *A.OLIVE_BOT, *A.OLIVE_BOT_TIP, A.CYP_BOT, *A.PINE_TOP, *A.PINE_BOT,
                 *A.WALL.values(), *[m for r in A.ASCLEPEION + A.AGORA + A.FARMHOUSE for m in r]}
 AETHOS_SOLID -= {0x061, 0x041, 0x021}           # the doors
@@ -398,11 +398,15 @@ class Map:
                                                         ("myrtle", "single")]
         for (x, y) in sorted(free):
             if aethos_only(x, y) or not singles:
-                # a gap between the trunks, closed
-                self.set(x, y, A.GRASS, True)
+                # the shade between the trunks, closed
+                self.set(x, y, A.SHADE, True)
                 continue
             k, n = singles[_hash(x, y, salt + 3) % len(singles)]
             self.piece(k, n, x, y, solid=True)
+        # a wood is walked round, never into: its crowns' tops too (the tips that
+        # poke out over open ground beyond it stay walkable)
+        for (x, y) in filled:
+            self.solid[y, x] = True
         return filled
 
     def sand_rim(self, cells, grassy):
