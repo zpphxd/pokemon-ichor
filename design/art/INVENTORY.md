@@ -203,7 +203,7 @@ Elaia owns the polished **Eripip** and **Galekit**, not their later stages.
 | Halcyling, Galenyon | New matched native battle fronts, backs, six follower frames and two menu-icon frames implemented from `tools/dex/sprites/lines/halcyon.py` and its six hand-finished art grids. Existing normal/shiny color identities, palette files and bird footprints retained deliberately. Artistically accepted at checkpoint scope; final whole-town matched in-game review still pending. |
 | Ione, Titan Grunt | Native three-quarter portraits and all nine walker states redrawn in `sprites_trainers.py` and `sprites_npc.py`. Their existing portrait and shared cast palettes retained unchanged; palette-correct native comparisons and genuine ROM portraits verified. Artistically accepted at checkpoint scope, not whole-town approval. |
 | Eopeep, Alekrow, Hoplektor; Kerazap, Kerastorm; Harpeck, Harpelle; Epopoi, Lophops, Basilops; Karkipool, Karkitox; Ketofry, Kynoketos; Melibee, Melisseer; Onotis, Midonos; Ergant, Hoplomex; Narthip, Promethex; Nemecub, Nemeleon; Elaleaf, Elapling, Hierolive; Spalunk, Plouteras; Kampillar, Nymveil, Psychora; Pebblith, Cairnolith, Laolith; Narkeray; Chelonet, Chelyra; Gelasable | Still awaiting this batch's native polish; existing sprites retained, not claimed redrawn. This includes species used only by the local trainers. |
-| Theo, Ianthe, Kleon, Alethea, Melitta; shared folk already polished in Elaia; pickups and starter kraters; Elaia's five contact effects | Elaia's human/opening-object checkpoint `dfb7974fbc` and twelve-species checkpoint `9ae5aff4af` are integrated. Preserve those sources and sprites. Further shared grass/reed rustle, sandal prints, emotes, shadows, warp-arrow, follower-emotion and supported-player-state evidence belong to Elaia's continuation, not this batch. |
+| Theo, Ianthe, Kleon, Alethea, Melitta; shared folk already polished in Elaia; pickups and starter kraters; Elaia's contact/shared effects | Elaia's human/opening-object checkpoint `dfb7974fbc`, twelve-species checkpoint `9ae5aff4af` and shared-effects checkpoint `70ff39b430` on main `840dbefb8624` are integrated. All 16 new effects/emotion sheets and the emote palette match that landed base; accepted local human sheets remain unchanged. Further supported-player-state evidence belongs to Elaia's continuation, not this batch. |
 | Kronion tablet | Markings and lighting refined at native 16x16 resolution, preserving the cast palette and wiring. Captured during the Route 1 review's real cutscene drop, not an ordinary summit visit. Creative approval pending. |
 | Two upturned-boat halves | Direct native 32x16 drawing split into matched halves, replacing tileset extraction. Restrained plank seam and keel clusters use the existing cast palette. Native and real harbor evidence artistically accepted at checkpoint scope. |
 | Sailor and Diver walkers | Eight-row native directional heads, longer cloth bodies, distinct strides and all nine engine frames implemented in `sprites_folk.py`. Costumes and folk palette preserved; Sailor's shoulder rope matches the existing portrait identity. Palette-correct complete sheets and real harbor before/after captured against the exact post-Elaia ROM. Artistically accepted at checkpoint scope. |
@@ -228,6 +228,12 @@ checks source reproduction, complete distinct states, the planted rod and
 uncropped tenth-frame preview. ROM usage remains 23,040,960 bytes (68.67%).
 This does not mark the remaining 39 owned species, three walkers, seven
 portraits or healing effects finished.
+
+The effects integration also passes helper compilation, build, smoke, the
+four folk regressions and `tools/ichor/art/check_elaia_effects.py`. Both
+fourteen-camera galleries pass against the exact new main ROM and the
+combined Akti ROM. The earlier post-Elaia Pokemon baseline and comparisons
+remain preserved separately; no equivalent Elaia child commits were reapplied.
 
 | Item | Where | Status | Phase | Notes |
 |---|---|---|---|---|
