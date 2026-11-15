@@ -430,6 +430,10 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SATYR] = { _("SATYR"), 5 },
     [TRAINER_CLASS_ACTOR] = { _("ACTOR"), 7 },
     [TRAINER_CLASS_VINTNER] = { _("VINTNER"), 6 },
+    // Ichor: Act II batch 3. Huntresses are Artemis's acolytes (a temple pays
+    // more than the road); charcoal-burners pay like the vintners.
+    [TRAINER_CLASS_HUNTRESS] = { _("HUNTRESS"), 7 },
+    [TRAINER_CLASS_CHARCOALER] = { _("CHARCOALER"), 6 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =
