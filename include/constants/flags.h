@@ -1701,6 +1701,16 @@
 #ifndef FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES
 #define FLAG_ICHOR_GOT_GIRDLE_OF_HERAKLES FLAG_ICHOR_ACT2_STUB_GIRDLE
 #endif
+#define FLAG_ICHOR_HIDE_DIONYSIA_CAST           (FLAG_ICHOR_GENERAL_START + 0x154) // Ichor: Act II: hides the Dionysia's cast, herald and seated Kleon outside the play (beat 32)
+#define FLAG_ICHOR_HIDE_THESPIS_SKENE           (FLAG_ICHOR_GENERAL_START + 0x155) // Ichor: Act II: hides Thespis backstage once the masks let go (beat 32)
+#define FLAG_ICHOR_HIDE_KLEON_THEATER           (FLAG_ICHOR_GENERAL_START + 0x156) // Ichor: Act II: hides Kleon on the stage's edge after his third battle (beat 33)
+#define FLAG_ICHOR_HIDE_CHORUS_LEADER           (FLAG_ICHOR_GENERAL_START + 0x157) // Ichor: Act II: the chorus leader has walked back into the palace door (beat 32)
+#define FLAG_ICHOR_HIDE_THEATER_CLEANER         (FLAG_ICHOR_GENERAL_START + 0x158) // Ichor: Act II: hides the theater's cleaner until the theater stands empty (Part 2)
+#define FLAG_ICHOR_WON_KLEON_3                  (FLAG_ICHOR_GENERAL_START + 0x159) // Ichor: Act II: won Kleon's third battle (beat 33)
+#define FLAG_ICHOR_SILENOS_MET                  (FLAG_ICHOR_GENERAL_START + 0x15A) // Ichor: Act II: Silenos has told you about the girdle (beat 34)
+#define FLAG_ICHOR_SILENOS_WON_BONES            (FLAG_ICHOR_GENERAL_START + 0x15B) // Ichor: Act II: beat Silenos at knucklebones (beat 34)
+#define FLAG_ICHOR_SILENOS_WON_RIDDLE           (FLAG_ICHOR_GENERAL_START + 0x15C) // Ichor: Act II: answered Silenos's riddle (beat 34)
+#define FLAG_ICHOR_SILENOS_WON_FIGHT            (FLAG_ICHOR_GENERAL_START + 0x15D) // Ichor: Act II: beat Silenos in battle (beat 34)
 // Ichor bank flags: end
 
 // Ichor daily flag bank, cleared every day by Ichor_DoDailyEvents.

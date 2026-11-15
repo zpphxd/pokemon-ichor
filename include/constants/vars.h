@@ -288,6 +288,8 @@
 #define ICHOR_VARS_COUNT                                 32
 #define ICHOR_VARS_END                                   (ICHOR_VARS_START + ICHOR_VARS_COUNT - 1)
 // Ichor bank vars: claim.py bankvar adds lines here, in order.
+#define VAR_ICHOR_DIONYSIA                      (ICHOR_VARS_START + 0x008) // Ichor: Act II: the Dionysia's stage, 0-7 (beat 32; src/ichor_act2_scene.h)
+#define VAR_ICHOR_DIONYSIA_MASK                 (ICHOR_VARS_START + 0x009) // Ichor: Act II: the mask worn backstage at the Dionysia, 0 none 1 comic 2 tragic 3 satyr
 // Ichor bank vars: end
 
 #define SPECIAL_VARS_START            0x8000

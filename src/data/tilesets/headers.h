@@ -1723,3 +1723,35 @@ const struct Tileset gTileset_TempleHermes =
     .metatileAttributes = gMetatileAttributes_PorytilesManaged_TempleHermes,
     .callback = NULL,
 };
+
+// Ichor: theater, Thyrsa's theater (Act II, beats 32-34): the cavea and its
+// seated crowd, the orchestra, the skene's painted front and doors, the god-machine.
+// Porytiles-managed, built by tools/ichor/art/theater_build.py. It uses only its own
+// tiles and palettes 6-12; palettes 10-12 are copies of the crowd's, one per pair of
+// blocks of seats, so the trance's pulse can stop pair by pair (src/ichor_act2_scene.c).
+// Cells on grass borrow aethos's, so rebuild it whenever aethos changes.
+const struct Tileset gTileset_Theater =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Theater,
+    .palettes = gTilesetPalettes_PorytilesManaged_Theater,
+    .metatiles = gMetatiles_PorytilesManaged_Theater,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Theater,
+    .callback = NULL,
+};
+
+// Ichor: skene, the theater's stage building inside: the backstage corridor behind
+// the three doors and Silenos's prop room. Porytiles-managed, built by
+// tools/ichor/art/theater_build.py; it uses only its own tiles and palettes 6-12,
+// and is meant for the oikos primary.
+const struct Tileset gTileset_Skene =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PorytilesManaged_Skene,
+    .palettes = gTilesetPalettes_PorytilesManaged_Skene,
+    .metatiles = gMetatiles_PorytilesManaged_Skene,
+    .metatileAttributes = gMetatileAttributes_PorytilesManaged_Skene,
+    .callback = NULL,
+};
