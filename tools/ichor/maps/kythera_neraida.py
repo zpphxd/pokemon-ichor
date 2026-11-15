@@ -222,6 +222,9 @@ def compose():
             trees(m, oleanders=[(x, y)] if (x + y) % 2 else [], myrtles=[(x, y)] if not (x + y) % 2 else [])
     trees(m, olives=[(22, 20), (22, 22)], myrtles=[(22, 24), (23, 24), (23, 25), (20, 33)],
           oleanders=[(19, 29), (23, 32)], planes=[(20, 26)])
+    # Mopsos stands at (21,20), at the narrow's head, watching the one tile (20,20)
+    # everyone must cross; he never steps into the narrow after a battle.
+    m.set(21, 20, A.GRASS, False)
 
     # ==== the ledge path down the east side, one way =========================================
     hedgerow(m, 24, 11, 30)
@@ -303,7 +306,7 @@ def events(m):
     m.obj("SPECIES(SKIDDO)", 8, 30 - 1, P + "Goat", "MOVEMENT_TYPE_WANDER_AROUND", rx=1, ry=1)
     m.obj("SPECIES(SKIDDO)", 13, 33, P + "Goat", "MOVEMENT_TYPE_FACE_LEFT")
     m.obj("ICHOR_MAN", 7, 22, P + "Kerinthos", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=2)
-    m.obj("ICHOR_AUGUR", 20, 19, P + "Mopsos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=5)
+    m.obj("ICHOR_AUGUR", 21, 20, P + "Mopsos", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=1)
     m.obj("ICHOR_HARVESTER", 8, 5, P + "Thestylis", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=1)
     m.obj("ICHOR_KID_M", 22, 36, P + "Boy", "MOVEMENT_TYPE_FACE_LEFT")
     m.berry_tree(4, 28, "BERRY_TREE_ICHOR_NERAIDA_LUM")

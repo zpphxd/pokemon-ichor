@@ -155,6 +155,9 @@ def compose():
         r = ""
         for x in range(16, 44):
             land = y <= 8 if 28 <= x <= 38 else y <= 12
+            if 28 <= x <= 38 and y == 6:
+                r += " "                          # the cutting's cliff face stays rock
+                continue
             r += "#" if land else "~"
         rows.append(r)
     m.shore(rows, 16, 6)
@@ -165,10 +168,10 @@ def compose():
         m.piece("cliff", "foot_sand" if (x * 3) % 7 else "foot_sand_rocks", x, 7)
     m.blob("seagrass", ["####",
                         "####"], 30, 7)
-    for x in (36, 37, 38):                        # the neck: marble blocks on the water's side
+    for x in (37, 38):                            # the neck: marble blocks on the water's side
         m.piece("quarry", "blocks" if x % 2 else "block", x, 8)
 
-    road = cells((STAIR[0], 0, STAIR[1], 7), (38, 7, 39, 8), (38, 8, 44, 9), (43, 10, 44, 10))
+    road = cells((STAIR[0], 0, STAIR[1], 7), (38, 7, 39, 7), (39, 8, 44, 9), (43, 10, 44, 10))
     m.path(road)
     for x in STAIR:
         m.piece("myrtle", "gap_stair", x, 3)
@@ -251,7 +254,7 @@ def compose():
     m.piece("flowers", "petals", 11, 6)
     m.piece("flowers", "petals", 15, 10)
     m.put("rollers", 8, 6)                        # Kassiteros's boat, north of the neck
-    m.piece("myrtle", "single", 9, 9)
+    # Kassiteros stands at (9,9), beside the neck tile (9,8) he watches
     m.piece("flowers", "briar", 10, 9)
     hedge(m, 8, 10, 10)
     for x in (8, 9, 10):
@@ -288,9 +291,9 @@ def events(m):
 
     # people
     m.obj("ICHOR_FISHER", 46, 12, P + "Amphitos", "MOVEMENT_TYPE_FACE_DOWN", trainer=True, sight=2)
-    m.obj("HIKER", 34, 7, P + "Skopas", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=4)
+    m.obj("HIKER", 36, 8, P + "Skopas", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=1)
     m.obj("ICHOR_DIVER", 24, 17, P + "Pontinos", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=1)
-    m.obj("ICHOR_TITAN_GRUNT", 7, 8, P + "Kassiteros", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=3,
+    m.obj("ICHOR_TITAN_GRUNT", 9, 9, P + "Kassiteros", "MOVEMENT_TYPE_FACE_UP", trainer=True, sight=1,
           flag="FLAG_ICHOR_HIDE_KASSITEROS")
     m.obj("ICHOR_ALETHEA", 21, 10, P + "Alethea", "MOVEMENT_TYPE_FACE_DOWN",
           flag="FLAG_ICHOR_HIDE_ALETHEA_FOAM_ROAD", local_id="LOCALID_FOAM_ROAD_ALETHEA")
