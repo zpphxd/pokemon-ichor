@@ -70,4 +70,36 @@ Preview: `design/phase1/img/sprites_trainers.png` (Brendan for scale, then Kleon
 - Daphne: index finger raised as if mid-lecture, with the end of the scroll unrolled.
 - Kleon: a wider cloak flare and extra cloak folds.
 - Kleon's swagger and Daphne's folds have a newer native pass above. Ione and
-  the Titan grunt remain at this historical pass until the Akti/Route 1 batch.
+  the Titan grunt now have the native Akti checkpoint below.
+
+## Akti native-art checkpoint (2026-11-15)
+
+Ione's smaller three-quarter face, offset veil and diagonal robe folds keep
+the cream/terracotta costume and lit bronze lamp. The Titan Grunt keeps the
+Corinthian helmet, crimson crest, slate tunic, sickle emblem and bronze
+greaves, with a weighted crouch and a narrower turned helmet. Both have
+matched nine-frame walkers in `sprites_npc.py`; no portrait, cast or folk
+palette changes were needed.
+
+`SPRITE_REVIEW=1 tools/ichor/tests/route1.sh` and
+`SPRITE_REVIEW=1 tools/ichor/tests/temple_trial.sh` additionally capture the
+real portrait/send-out sequence without changing its timing or input.
+The Kronion tablet's native markings and the Akti boat's shallow hull are drawn
+in `sprites_objects.py` and `akti_objects.py`. The boat's two halves share one
+32x16 source and keep the cast palette; its renderer no longer samples tiles.
+
+For matching prop shots and coverage of all nine local maps:
+
+```sh
+mkdir -p build/akti_sprites
+build/tools/ichor-mgba-headless --script tools/ichor/tests/akti_sprites.lua \
+  --frames 7000 --until "AKTI_SPRITES done" pokeemerald.gba
+```
+
+`SPRITE_OUT` selects an existing screenshot directory. This review test checks
+each loaded map and records a fixed camera; it does not assert artistic quality
+or replace the Route 1 and temple gameplay tests.
+
+This is a validated implementation checkpoint, not director approval or
+completion of every Route 1/Akti sprite. Exact coverage and retained assets
+are recorded in `design/art/INVENTORY.md`.

@@ -7,9 +7,9 @@ any gTileset_Akti metatile there turns to garbage, so those rows may use only
 aethos metatiles (MAP_DESIGN.md §5). Diktys's boat by the south gate is drawn
 as object events instead, which look the same from either side.
 
-The art is akti_harbor.upturned_boat(), moved into the "Ichor cast" OBJ palette
-(each color to its nearest cast color), so it costs no extra palette slot on a
-map that already shows the cast. Two halves, so each sits square on its cell.
+The hull is drawn natively in the existing cast palette, with a lit keel,
+curved planks and a darker far side. It is not a quantized tileset extract.
+The two halves share one drawing so the seam cannot split a plank.
 
 Usage: /usr/bin/python3 tools/ichor/art/akti_objects.py [--write] [--preview out.png]
   --write   graphics/object_events/pics/misc/ichor/upturned_boat_l.png and _r.png
@@ -23,21 +23,41 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
 from sprites_lib import ROOT, save_indexed, to_rgba, upscale  # noqa: E402
-from sprites_npc import CAST_PAL  # noqa: E402
-import akti_lib  # noqa: E402,F401  (registers Akti's colors with kalliste_lib)
-import akti_harbor  # noqa: E402
+from sprites_npc import CAST_PAL, CAST_LEGEND  # noqa: E402
 
 OUT_DIR = os.path.join(ROOT, "graphics/object_events/pics/misc/ichor")
+
+BOAT = [
+    ("................", "................"),
+    ("................", "................"),
+    ("................", "................"),
+    (".......bbbbbbbbb", "bbbbbbbbbb......"),
+    ("....bbbsoOOOOOOO", "OOOOOOoobbb....."),
+    ("..bsooooouoooooo", "ooooouooooooobb."),
+    (".bsooooouooooooo", "oooouoooooooouub"),
+    ("bsooooouuuuuuuuu", "uuuuuuuuuuuuuubb"),
+    (".bouuouuuuuuuuuu", "uuuuuuuuuuuuubb."),
+    ("..bbouuuuuuuuuuu", "uuuuuuuuuubbb..."),
+    ("....bbbbbbbbbbbb", "bbbbbbbbbbb....."),
+    ("................", "................"),
+    ("................", "................"),
+    ("................", "................"),
+    ("................", "................"),
+    ("................", "................"),
+]
 
 
 def boat_indexed():
     """The upturned boat (32x16) as indices into the cast palette."""
-    a = akti_harbor.upturned_boat().M.a
-    cols = np.array(CAST_PAL.colors[1:], float)
-    out = np.zeros(a.shape[:2], np.int32)
-    for y, x in zip(*np.nonzero(a[..., 3])):
-        d = ((cols - a[y, x, :3]) ** 2).sum(1)
-        out[y, x] = 1 + int(d.argmin())
+    if len(BOAT) != 16:
+        raise ValueError("boat must have 16 rows")
+    out = np.zeros((16, 32), np.int32)
+    for y, halves in enumerate(BOAT):
+        if len(halves) != 2 or any(len(row) != 16 for row in halves):
+            raise ValueError(f"boat row {y}: each half must be 16 pixels")
+        for x, ch in enumerate("".join(halves)):
+            if ch != ".":
+                out[y, x] = CAST_PAL[CAST_LEGEND[ch]]
     return out
 
 
