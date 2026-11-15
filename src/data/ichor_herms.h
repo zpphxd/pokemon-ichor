@@ -4,7 +4,8 @@
 // EventScript_IchorGreatHerm), the region map section that becomes a fly target
 // once it's anointed, and the heal location on the tile south of the herm, where
 // Daedalus's Wings land. Add a row, and that heal location in
-// src/data/heal_locations.json, when a route's herm is placed.
+// src/data/heal_locations.json, when a route's herm is placed. The Oikoumene's
+// waystones take ids from HERM_OIKOUMENE_FIRST (include/constants/ichor.h).
 const struct IchorHerm gIchorHerms[HERM_MAX] =
 {
     [HERM_KALLISTE_ROUTE_1] = {

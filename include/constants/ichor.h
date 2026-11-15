@@ -62,7 +62,12 @@
 // the post-game's land routes, after HERM_COUNT
 #define HERM_AETHOS_ROUTE_31        23
 #define HERM_AETHOS_ROUTE_32        24
-#define HERM_MAX                    32  // the flag range's size
+#define HERM_AETHOS_MAX             32  // FLAG_ICHOR_HERMS_START's range
+// The Oikoumene's waystones (OIKOUMENE §4): herms, Thoth's ibis pillars, stone
+// babas and cairns of Ammon. Ids 32-63, flagged in FLAG_ICHOR_WAYSTONES_START's
+// range; they join the Wings' fly map but never count toward Aethos's herms.
+#define HERM_OIKOUMENE_FIRST        32
+#define HERM_MAX                    64
 
 // --- Relics (SYSTEMS §1) ----------------------------------------------------
 // IchorSave.options bits

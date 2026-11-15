@@ -3,6 +3,7 @@
 #include "global.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
+#include "ichor_herms.h"
 #include "ichor_relics.h"
 #include "ichor_save.h"
 #include "rtc.h"
@@ -80,4 +81,12 @@ TEST("Ichor: a carried flame counts down even on a quiet step, and water puts it
     EXPECT_EQ(VarGet(VAR_TEMP_3), FLAME_NONE);
     EXPECT_EQ(Ichor_IsCarryingFlame(), FALSE);
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
+}
+
+TEST("Ichor: Aethos's herms and the Oikoumene's waystones keep separate flags")
+{
+    EXPECT_EQ(Ichor_GetHermFlag(HERM_KALLISTE_ROUTE_1), FLAG_ICHOR_HERMS_START);
+    EXPECT_EQ(Ichor_GetHermFlag(HERM_THE_ASCENT), FLAG_ICHOR_HERMS_START + HERM_THE_ASCENT);
+    EXPECT_EQ(Ichor_GetHermFlag(HERM_OIKOUMENE_FIRST), FLAG_ICHOR_WAYSTONES_START);
+    EXPECT_EQ(Ichor_GetHermFlag(HERM_MAX - 1), FLAG_ICHOR_WAYSTONES_START + 31);
 }
