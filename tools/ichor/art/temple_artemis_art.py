@@ -399,7 +399,7 @@ def mat(L, ox, oy, right):
 
 def paint_moon(L, ox, oy, key):
     """A pool of moonlight on the lawn: the silvered lawn, a pale rim, a dithered fall."""
-    vis, _ = AG.visible(key, margin=1.0, radius=3.5, amp=1.2, seed=0.9, jag=0.6)
+    vis, _ = AG.visible(key, margin=0.5, radius=5.5, amp=1.4, seed=0.9, jag=0.6)
     paint_tex(L, "lawn", ox, oy)
     paint_tex(L, "moon", ox, oy, vis)
     for y, x in np.argwhere(AG.ring(vis)):
@@ -510,6 +510,52 @@ def paint_hedge(L, ox, oy, key):
             L.px(ox + 1, oy + 1, "nk")
         if not n and not e:
             L.px(ox + 14, oy + 1, "nk")
+
+
+def hedge_extras():
+    """A second grain for the hedge's flat top, and cypresses grown up out of the hedge
+    walls: spires that break the long clipped tops (two cells, the crown above)."""
+    keys = ["top_b", "spire_top", "spire", "spire_b_top", "spire_b"]
+    names = {"top_b": (0, 0), "spire_top": (1, 0), "spire": (1, 1), "spire_b_top": (2, 0),
+             "spire_b": (2, 1)}
+    s = struct("hedge2", "The hedge's tops: a second grain, and cypress spires", 3, 2,
+               walk=["XXX", "XXX"], names=names,
+               notes="`top_b` is the middle of a hedge's top (`hedge` `1|11111111`) with its "
+                     "leaves laid another way; scatter it through big hedge masses. "
+                     "`spire_top` over `spire` (and `_b`): a cypress growing up through a "
+                     "hedge's top, both cells inside the mass. All block.")
+    B, M, T = s.B, s.M, s.T
+    T2 = Layer(16, 16)
+    T2.rect(0, 0, 16, 16, "nl1")
+    for gy in range(4):
+        for gx in range(4):
+            h = h32(gx, gy, 23)
+            x = gx * 4 + (0 if gy % 2 else 2) + h % 2 - 1
+            y = gy * 4 + (h >> 2) % 2 - 1
+            for j, row in enumerate(LAUREL_LEAF):
+                for i, ch in enumerate(row):
+                    if ch != ".":
+                        c = {"1": "nl1", "2": "nl2", "3": "nl3", "4": "nl4"}[ch]
+                        if ch == "4" and (h >> 4) % 4 == 0:
+                            c = "nl5"
+                        T2.px((x + i) % 16, (y + j) % 16, c)
+    paint_tex(B, T2, 0, 0)
+    for cx in (1, 2):
+        for cy in (0, 1):
+            paint_tex(B, "laurel", cx * 16, cy * 16)
+    for cx, seed in ((1, 3), (2, 4)):
+        L = Layer(16, 32)
+        cypress(L, 0, 0, False, seed)
+        # its foot sinks into the hedge: a ring of shadow, no trunk
+        for x in range(16):
+            for y in range(26, 32):
+                L.px(x, y, None)
+        for x in range(3, 13):
+            M.px(cx * 16 + x, 16 + 10, "nl0" if x % 2 else "nl1")
+        T.a[0:16, cx * 16:cx * 16 + 16] = L.a[0:16]
+        M.a[16:26, cx * 16:cx * 16 + 16] = np.where(L.a[16:26, :, 3:4] > 0, L.a[16:26],
+                                                     M.a[16:26, cx * 16:cx * 16 + 16])
+    return s
 
 
 def hedge_set():
@@ -1140,7 +1186,7 @@ def porch_pieces():
     ]
     Lb = Layer(32, 16)
     put(Lb, 0, 3, bench, {"k": "nk", "5": "ns5", "4": "ns4", "3": "ns3", "2": "ns2",
-                          "w": "ns4", "W": "nsw"})
+                          "w": "ns3", "W": "ns4"})
     M.a[0:16, 96:128] = Lb.a[0:16, 0:32]
     out.append(s)
 
@@ -1647,6 +1693,7 @@ def build():
     structs = [floor_pieces()]
     structs += soft_sets()
     structs.append(hedge_set())
+    structs.append(hedge_extras())
     structs += [arch("antlers"), arch("bow"), arch("moon")]
     structs.append(bush_pieces())
     structs += tall_pieces()

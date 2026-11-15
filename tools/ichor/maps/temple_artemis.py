@@ -67,37 +67,37 @@ PLAN = """
 ##############################
 ##############################
 #########RRRRRRRRRRRR#########
+###Y#####RRRRRRRRRRRR#####Y###
 #########RRRRRRRRRRRR#########
-#########RRRRRRRRRRRR#########
-#########RRRRRRRRRRRR#########
+######Y##RRRRRRRRRRRR##Y######
 #########RRRRRRRRRRRR#########
 ##.......RRRRRRRRRRRR.......##
 ##...........Rhh......::::..##
-##.,...o.............::::::.##
-##......o........i..o::::::.##
-##.....o.............::::::.##
-##........oOOcccoOOo.::::::.##
-##..,.....oOOooooOOo..::::..##
+##.,.,...............::::::.##
+##,...i.o........i..o::::::.##
+##.,.,.o.............::::::.##
+##.,.,....oOOcccoOOo.::::::.##
+##........oOOooooOOo..::::..##
 ##........oooooooooo....o...##
-##..o.....oooOOooooo........##
-##........oooOOooooo...,....##
-##.c.......,.,......o.......##
-##..o.............o.......c.##
-##......o........c.......o..##
+##.,o.....oooOOooooo.....,t.##
+##....t...oooOOooooo..i,....##
+##.c...,...,.,......o.......##
+##..o....o,...,...o..,....c.##
+##,.....o........c.......o..##
 ##.C.AAAA............C......##
 #####AAAA#####################
 #####AAAA#####################
 ##...::::::.#####.,..o......##
-##.#::::::::#####.::::::::..##
+##.#::::::::#####..::::::...##
 ##.#::::::::#####.::::::::.i##
 ##.#.::::::...oooo::::::::..##
 ##G#####..........::::::::..##
 ##G#####.o.....ooo::::::::..##
-##.....#o....i.ooo::::::::..##
-##.............o.o...o......##
-##.....#o........o..........##
-##..PP.#.........o..........##
-##,....#.........o..........##
+##.....#o....i.ooo.::::::...##
+##,.......,....o.o...o...,..##
+##.....#o...,....o.,......i.##
+##..PP.#.........o......,...##
+##,....#..,......o.,.......,##
 #####################AAAA#####
 #####################AAAA#####
 ##,...................==.,..##
@@ -306,7 +306,7 @@ def rock_cells():
 
 def hedge_mask(rows):
     """Hedge mass: hedge cells, arch posts and Anthia's gate (both flush with the hedge)."""
-    m = [[rows[y][x] == "#" for x in range(W)] for y in range(H)]
+    m = [[rows[y][x] in "#Y" for x in range(W)] for y in range(H)]
     for (x, y), (_, nm) in arch_cells().items():
         if nm.startswith(("post", "cap")):
             m[y][x] = True
@@ -350,7 +350,17 @@ def grid_ids(pieces, rows=None):
                 g[y][x] = pieces(*multi[(x, y)])
                 continue
             if ch == "#":
-                g[y][x] = pieces("hedge", blob_key(hm, x, y))
+                k = blob_key(hm, x, y)
+                if k == "1|11111111" and v % 3 == 0:
+                    g[y][x] = pieces("hedge2", "top_b")
+                else:
+                    g[y][x] = pieces("hedge", k)
+            elif ch == "Y":
+                kind = "spire" if v % 2 else "spire_b"
+                if blob_key(hm, x, y) != "1|11111111" or blob_key(hm, x, y - 1) != "1|11111111":
+                    raise ValueError(f"the cypress spire at ({x},{y}) isn't deep in a hedge")
+                g[y][x] = pieces("hedge2", kind)
+                tops[(x, y - 1)] = ("hedge2", f"{kind}_top")
             elif ch == "G":
                 g[y][x] = pieces("gates", "gate_top" if (x, y) == GATE_TOP else "gate")
             elif ch == ":":
@@ -409,6 +419,9 @@ def grid_ids(pieces, rows=None):
                 raise ValueError(f"unknown PLAN character {ch!r} at ({x},{y})")
     for (x, y), pc in tops.items():
         under = rows[y][x]
+        if pc[0] == "hedge2":
+            g[y][x] = pieces(*pc)
+            continue
         if under not in ".,_" or (x, y) in arches or (x, y) in multi:
             raise ValueError(f"the top of a tall thing at ({x},{y}) falls on {under!r}")
         g[y][x] = pieces(*pc)
@@ -915,7 +928,7 @@ def setmt(pieces, x, y, mid):
 def hind_run(pieces, g, a, b):
     """The hind's bolt from clearing a to clearing b: the shortest run over open ground
     that no hound walks and no one stands on (the hounds stand frozen somewhere on their
-    patrols while she runs), at walk_fastest, which her sprite draws as a bolt
+    patrols while she runs), at walk_faster, which her sprite draws as a bolt
     (SPRITES.md)."""
     people = {(x, y) for lid, _, x, y, *_ in PEOPLE if lid != "LOCALID_ARTEMIS_HIND"}
     walked = set()
@@ -937,7 +950,7 @@ def hind_run(pieces, g, a, b):
         for (dx, dy), word in MOVE.items():
             q = (p[0] + dx, p[1] + dy)
             if q not in prev and ok(*q):
-                prev[q] = (p, f"walk_fastest_{word}")
+                prev[q] = (p, f"walk_faster_{word}")
                 todo.append(q)
     if goal not in prev:
         raise ValueError(f"the hind can't run from {a} to {b}")

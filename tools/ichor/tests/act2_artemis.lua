@@ -117,6 +117,20 @@ local function stageHounds(stage)
   return out
 end
 
+-- The engine's step and turn periods, as observed (the medians of what track() saw).
+local function median(t)
+  if #t == 0 then return nil end
+  local c = {}
+  for i, v in ipairs(t) do c[i] = v end
+  table.sort(c)
+  return c[#c // 2 + 1]
+end
+local function calibrate()
+  local s, t = median(measured.step), median(measured.turn)
+  if s and #measured.step >= 4 and s >= 12 and s <= 24 then STEP = s end
+  if t and #measured.turn >= 2 and t >= 30 and t <= 90 then TURN = t end
+end
+
 local function syncAll(stage, limit)
   local t0 = L.now()
   while true do
@@ -135,7 +149,7 @@ end
 -- that), a wait WAITF. The tile stepped into is in view from the step's first frame (the
 -- engine polls trainer sight every frame, against the tile the player is walking into).
 
-local MOVE, WAITF, MARGIN, HORIZON = 24, 4, 4, 1200
+local MOVE, WAITF, MARGIN, HORIZON, DWELL = 24, 4, 8, 1200, 48
 local KEYS = { { 0, -1, K.UP }, { 0, 1, K.DOWN }, { -1, 0, K.LEFT }, { 1, 0, K.RIGHT } }
 
 local function planner(stage)
@@ -229,7 +243,8 @@ local function firstMove(stage, goals)
     local k = queue[head]
     head = head + 1
     local _, x, y, t = table.unpack(node[k])
-    if goals[key(x, y)] then
+    -- a goal tile must stay unseen long enough to turn and press A there
+    if goals[key(x, y)] and pl.safe(x, y, t, t + DWELL) then
       -- the chain from the start to here; its first link is the first action
       local chain = {}
       local c = k
@@ -295,6 +310,12 @@ local function sneak(stage, goals, what)
   local gs = {}
   for _, q in ipairs(goals) do gs[key(q[1], q[2])] = true end
   local waited, steps = 0, 0
+  -- watch the stage's hounds a while first: their periods, then their places
+  local t0 = L.now()
+  while L.now() - t0 < 240 do tick() end
+  calibrate()
+  log(string.format("NOTE %s: a hound steps every %d frames, turns every %d (%d and %d seen)",
+                    what, STEP, TURN, #measured.step, #measured.turn))
   syncAll(stage)
   for _ = 1, 900 do
     local m = firstMove(stage, gs)
@@ -307,10 +328,17 @@ local function sneak(stage, goals, what)
     elseif m.wait then
       tick(m.wait); waited = waited + m.wait
     else
+      local before = hunt()
       local r = sneakStep(m.key)
       if r == "taken" then
         shot("caught_" .. what:gsub("%W", "_"))
-        L.fail(string.format("a hound saw the player stepping to (%d,%d) on the way to %s", m.to[1], m.to[2], what))
+        settle()
+        unsync()
+        if hunt() ~= before then
+          L.fail(string.format("a hound saw the player stepping to (%d,%d) on the way to %s",
+                               m.to[1], m.to[2], what))
+        end
+        L.note("something else stopped the player on the way to " .. what .. "; carrying on")
       end
       steps = steps + 1
     end
@@ -349,10 +377,15 @@ local function touchHind(shotName)
   local x, y = L.pos()
   local face = (h.x > x and K.RIGHT) or (h.x < x and K.LEFT) or (h.y > y and K.DOWN) or K.UP
   L.face(face)
+  local before = hunt()
   L.tap(K.A)
   wait(10)
   settle({ shots = { [1] = shotName } })
   unsync()
+  if hunt() == before then
+    shot(shotName .. "_missed")
+    L.fail(string.format("touching the hind at (%d,%d) from (%d,%d) did nothing", h.x, h.y, x, y))
+  end
 end
 
 local function nextTo(x, y)
@@ -376,7 +409,6 @@ L.start(function()
   settle({ every = true })
   expect(hunt() == 10, "the welcome begins the hunt (Stage I)")
   L.talk(L.npc(P .. "Phylonoe"), { shots = { [1] = "phylonoe_menu", [2] = "phylonoe_rules" }, answers = { "yes" } })
-  L.talk(L.sign(P .. "Altar"), { shots = { [1] = "altar" }, answers = { "yes" } })
   L.talk(L.sign(P .. "Statue"), { shots = { [1] = "statue" } })
   L.talk(L.sign(P .. "Kennel"), { shots = { [1] = "kennel" } })
 
@@ -482,6 +514,8 @@ L.start(function()
   shot("reentry_stage1")
   L.talk(L.npc(P .. "SleepingHound", 1), { shots = { [1] = "hound_asleep" } })
   L.talk(L.npc(P .. "Phylonoe"), { shots = { [1] = "phylonoe_after" } })
+  -- The great altar (praying gives a 100-step blessing whose end is a message: after the hunt).
+  L.talk(L.sign(P .. "Altar"), { shots = { [1] = "altar" }, answers = { "yes" } })
   local ms, mt2 = measured.step, measured.turn
   table.sort(ms); table.sort(mt2)
   L.note(string.format("measured: a hound's step %s frames, a turn %s frames",

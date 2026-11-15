@@ -164,61 +164,61 @@ script Arkadia_TempleOfArtemis_EventScript_ReturnToArch {
 
 // The hind bolts from clearing A to clearing B.
 movement Arkadia_TempleOfArtemis_Movement_HindToB {
-    walk_fastest_left
-    walk_fastest_left
-    walk_fastest_left
-    walk_fastest_up
-    walk_fastest_left
-    walk_fastest_left
-    walk_fastest_left
-    walk_fastest_left
-    walk_fastest_left
-    walk_fastest_left
-    walk_fastest_up
-    walk_fastest_up
-    walk_fastest_up
-    walk_fastest_up
-    walk_fastest_up
-    walk_fastest_right
+    walk_faster_left
+    walk_faster_left
+    walk_faster_left
+    walk_faster_left
+    walk_faster_left
+    walk_faster_left
+    walk_faster_left
+    walk_faster_up
+    walk_faster_left
+    walk_faster_left
+    walk_faster_up
+    walk_faster_up
+    walk_faster_up
+    walk_faster_up
+    walk_faster_up
+    walk_faster_right
     face_down
 }
 
 // The hind bolts from clearing B to clearing C.
 movement Arkadia_TempleOfArtemis_Movement_HindToC {
-    walk_fastest_down
-    walk_fastest_down
-    walk_fastest_left
-    walk_fastest_down
-    walk_fastest_down
-    walk_fastest_down
-    walk_fastest_right
-    walk_fastest_down
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_down
-    walk_fastest_right
-    walk_fastest_right
-    walk_fastest_up
-    walk_fastest_up
-    walk_fastest_up
-    walk_fastest_up
-    walk_fastest_up
-    walk_fastest_up
-    walk_fastest_right
-    walk_fastest_right
+    walk_faster_down
+    walk_faster_down
+    walk_faster_left
+    walk_faster_down
+    walk_faster_down
+    walk_faster_down
+    walk_faster_right
+    walk_faster_down
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_right
+    walk_faster_down
+    walk_faster_right
+    walk_faster_right
+    walk_faster_up
+    walk_faster_up
+    walk_faster_up
+    walk_faster_up
+    walk_faster_up
+    walk_faster_up
+    walk_faster_right
+    walk_faster_right
     face_down
 }
 
@@ -455,6 +455,8 @@ script Arkadia_TempleOfArtemis_EventScript_Hind {
         waitmovement(0)
         setvar(VAR_ICHOR_HUNT, 40)
     }
+    // where she stands now is where she reappears when she scrolls back into view
+    copyobjectxytoperm(LOCALID_ARTEMIS_HIND)
     msgbox(format("She bolts, and is gone into the dark of the garden."))
     release
     end
