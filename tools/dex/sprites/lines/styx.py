@@ -164,36 +164,51 @@ def _dish_back(p, cx, cy, rx, ry, ang, group=70):
         p.blob(cx - 0.6, cy - 0.4, rx * 0.22, ry * 0.24, gold_m, ang=ang, group=group + 2, bias=-0.1)
 
 
+def _bowl_side(p, cx, cy, rx, rim_ry, depth, ang, group=70):
+    """The phiale from behind and a little above, tipped: the gold belly of
+    the shallow bowl under a thin rim, the black pool lying in its mouth.
+    Returns the lip at the low (left) end, where the pool spills."""
+    a = math.radians(ang)
+    def R_(x, y):
+        dx, dy = x - cx, y - cy
+        return (cx + dx * math.cos(a) - dy * math.sin(a), cy + dx * math.sin(a) + dy * math.cos(a))
+    belly = [R_(cx + rx * math.cos(t), cy + depth * math.sin(t)) for t in
+             [math.pi * i / 24 for i in range(25)]]
+    p.poly(belly + [R_(cx - rx, cy), R_(cx + rx, cy)], gold_m, group=group, bias=-0.12)
+    if p.big:
+        # the omphalos, a boss at the bottom of the belly
+        bx, by = R_(cx + 1.0, cy + depth - 1.4)
+        p.blob(bx, by, 2.2, 1.4, gold_m, ang=ang, group=group + 1, bias=-0.15)
+    p.blob(cx, cy, rx, rim_ry, gold_m, ang=ang, group=group + 2, bias=-0.2)
+    inner = p.blob(cx + 0.3, cy + 0.2, rx - 1.8, rim_ry - 1.3, gold_m, ang=ang, group=group + 3, flat=1)
+    p.blob(cx + 0.6, cy + 1.0, rx - 2.6, rim_ry - 2.0, water_m, ang=ang, clip=[inner], group=group + 4)
+    return R_(cx - rx + 1.0, cy + 0.4)
+
+
 def _back(p, phase):
-    # over the shoulder, about 1.2x: the dish from behind, high over her
-    # left shoulder, pouring its thread down past her; the masked head
-    # turned right in profile; the body cropped by the frame
-    # the raised oath fin beyond her head
+    # over the shoulder, about 1.2x: the masked head turned right in
+    # profile, close above the shoulders; the dish tipped behind her head,
+    # its pool spilling off the low lip into the thread; body cropped below
     p.lens((52.0, 40.0), (56.6, 5.0), 6.0, fin_m, bend=-1.0, fat=0.34, group=40)
-    # body: ice shoulders and back, deepening into the black water
     body = bez3((8.0, 64.0), (10.0, 50.0), (18.0, 40.0), (32.0, 37.6)) + \
         bez3((32.0, 37.6), (46.0, 36.6), (58.0, 46.0), (60.0, 64.0))
     bid = p.poly(body, robe_m, group=30)
     p.poly(bez3((0, 58), (20, 52), (40, 56), (64, 50)) + [(64, 64), (0, 64)], water_m, clip=[bid], group=31)
     p.shade(ribbon(bez((34, 39), (33, 50), (34, 64)), lambda t: 1.6), 0.18)
-    # the thread falling past her left side into the black water
-    thread = bez3((12.0, 22.0), (8.0, 28.0), (8.0, 44.0), (11.0, 64.0))
-    p.poly(ribbon(thread, lambda t: 4.0 + 2.6 * t), water_m, group=60)
-    # neck, hood and the mask in right profile
-    p.limb([(40.0, 42.0), (42.6, 30.0)], 10.0, 8.0, robe_m, group=22)
-    p.lens((36.0, 24.0), (24.0, 34.0), 5.6, hood_m, bend=-1.4, fat=0.3, group=20)
-    p.blob(42.0, 23.0, 10.0, 10.6, hood_m, group=23)
-    p.poly(bez3((46.4, 16.0), (53.0, 15.0), (56.6, 21.0), (54.6, 28.0)) +
-           bez3((54.6, 28.0), (52.0, 32.4), (47.0, 32.0), (45.6, 26.0)) + [(45.0, 20.0)], mask_m, group=24)
-    p.lens((47.0, 15.0), (52.0, 4.6), 4.2, hood_m, bend=0.8, fat=0.3, group=21)
-    # the dish from behind, its halo tipped over the back of the hood
-    _dish_back(p, 25.0, 15.6, 16.4, 10.4, 22, group=70)
+    p.limb([(40.0, 44.0), (42.0, 36.0)], 10.0, 9.0, robe_m, group=22)
+    p.lens((36.0, 28.0), (25.0, 37.0), 5.6, hood_m, bend=-1.4, fat=0.3, group=20)
+    p.blob(42.4, 27.0, 10.0, 10.4, hood_m, group=23)
+    p.poly(bez3((46.6, 20.0), (53.0, 19.0), (56.6, 25.0), (54.6, 32.0)) +
+           bez3((54.6, 32.0), (52.0, 36.0), (47.0, 35.6), (45.6, 30.0)) + [(45.2, 24.0)], mask_m, group=24)
+    p.lens((47.0, 19.0), (52.0, 8.6), 4.2, hood_m, bend=0.8, fat=0.3, group=21)
+    lip = _bowl_side(p, 24.0, 14.0, 17.0, 5.0, 9.4, -16, group=70)
+    thread = bez3((lip[0], lip[1]), (lip[0] - 3.0, lip[1] + 5.0), (lip[0] - 2.0, 44.0), (lip[0] + 1.0, 64.0))
+    p.poly(ribbon(thread, lambda t: 4.4 - 0.8 * math.sin(math.pi * min(t, 0.4) / 0.8) + 2.6 * t), water_m, group=60)
     if p.big:
         # frost crusting where the dish has grown from the hood
-        for a, b in (((34.0, 22.0), (38.6, 18.0)), ((33.0, 25.0), (38.0, 25.6)), ((31.0, 24.0), (34.0, 29.0))):
+        for a, b in (((34.0, 26.0), (38.6, 22.0)), ((33.0, 28.6), (38.0, 29.0)), ((32.0, 27.0), (35.0, 32.0))):
             p.lens(a, b, 2.4, fin_m, group=80)
-    if p.big:
-        p.patch(51, 21, ["111", "1w1", "tt1", ".t."], {"1": "ink", "t": "tg1", "w": "wh"})
+        p.patch(51, 25, ["111", "1w1", "tt1", ".t."], {"1": "ink", "t": "tg1", "w": "wh"})
 
 
 def _follow(p, view, phase):
