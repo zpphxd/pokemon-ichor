@@ -92,6 +92,32 @@ STAGES = [  # (stage, band, route numbers, place prefixes)
     ("Delphoi", "late", (28,), ("Delphoi",)),
     ("Ascent", "late", (29, 30), ("Thermopylai", "Tempe", "Ascent", "Olympus", "Pantheon")),
     ("post-game", "late", (31, 32, 33, 34), ("Tainaron", "Olympia", "Atlantis", "Rhodos", "Ithaka", "Kerkyra")),
+    # The Oikoumene, the second chart (design/oikoumene/BUILD.md), one stage per BALANCE.md "Oikoumene:" row.
+    # These come after every Aethos stage so short names ("Aia", "Elea") never claim an Aethos place; a
+    # halls' or interiors' map name starts with its town's, so it takes the town's stage. ODYSSEY's isles
+    # (Aiaia, Aiolia ...) belong to the post-game's own stage and should be listed before these.
+    ("Nurseries", "late", (), ("LambingMeadows", "PapyrusShallows", "NestingCliffs", "ReedBeds", "CalvingGrounds",
+                                "WadingPools", "OasisGardens", "TidePools", "SealCaves")),
+    ("Troad", "late", (), ("Sestos", "Hellespont", "Ilion", "SkamanderPlain", "IdaRoad", "GargarosPeak",
+                            "WallsOfLaomedon", "Chryse", "HebrosShore")),
+    ("Egypt", "late", (), ("Naukratis", "Pharos", "DeltaReeds", "Memphis", "PyramidField", "GreatPyramid", "Nile",
+                            "Heliopolis", "LakeMoeris", "ValleyOfTombs", "Hekatompylos", "Elephantine", "Abydos",
+                            "MoerisLabyrinth")),
+    ("Black Sea", "late", (), ("Bosporus", "Salmydessos", "PonticCoast", "Phasis", "FieldOfAres", "GroveOfAres",
+                                "Leuke", "IsleOfAres", "CaucasusCaves", "Chalybia", "Aia")),
+    ("Lydia", "late", (), ("Sardis", "Gordion", "Miletos", "Hypaipa", "RoyalRoad", "PactolusSands", "MountTmolus",
+                            "Maeander", "MountSipylos", "MountLatmos", "ChasmOfGyges", "TantalusPalace")),
+    ("Libya", "late", (), ("Kyrene", "Ammonion", "Tritonis", "SilphiumPlateau", "SandSea", "Syrtis", "SaltRidge",
+                            "AntaeusRing", "GaramantesTunnels", "GlassCrater")),
+    ("Scythia", "late", (), ("Olbia", "SteppeRoad", "WagonCamp", "LakeMaeotis", "FeatherWastes", "ArimaspianHeights",
+                              "RhipaeanPass", "CaveOfBoreas", "Abaris", "HyperboreanMeadow")),
+    ("Aithiopia", "late", (), ("Meroe", "GateOfDawn", "Cataracts", "TableOfTheSun", "MountNysa", "MountainsOfTheMoon",
+                                "PygmyMarshes")),
+    ("Far West", "late", (), ("Gadeira", "Tartessos", "Atarantes", "AtlanticShore", "AtlasFoothills", "AtlasRange",
+                               "SilverMines")),
+    ("Western Sea", "late", (), ("Kroton", "Cumae", "Elea", "PhlegraeanFields", "LakeAvernus", "Ogygia")),
+    ("Okeanos", "late", (), ("Okeanos", "CimmerianShore", "LandOfDreams", "GatesOfTheSun", "CaveOfSleep",
+                              "IslesOfTheBlessed", "GorgonsIsle", "GraiaiCave", "SpringsOfOkeanos", "Selvage")),
 ]
 
 

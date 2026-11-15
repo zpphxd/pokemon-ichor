@@ -23,6 +23,15 @@ The single source for levels across the whole game. Every script, encounter tabl
 | **The Ascent and the Pantheon** | 52–58 | 56–62 | Pantheon 60–64, the Archon 65–67 | The League |
 | **Aethos post-game**: the Labors, Katabasis, the Olympiad, Atlantis | 55–70 | 65–75 | 70–80 | Rematches scale here |
 | **The Oikoumene**, the second map | 60–80 | 70–85 | Legendaries 70–80; the strongest up to 90–100 | Every non-Aethos National Dex Pokémon lives here |
+| **Oikoumene: the Troad and Egypt** | 60–67 | 70–74 | 74–76 | `OIKOUMENE.md` §9, by land; LABORS's Thrace 62–66 |
+| **Oikoumene: Lydia and Libya** | 63–70 | 72–76 | 75–77 | |
+| **Oikoumene: the Black Sea** | 64–72 | 74–78 | 76–78 | LABORS's Themiskyra 64–68, Caucasus Crag 66–70 |
+| **Oikoumene: Aithiopia** | 70–76 | 76–80 | 78–80 | |
+| **Oikoumene: the Far West** | 70–78 | 78–82 | 80–82; Herakles 86–88 | LABORS's far west 65–70 |
+| **Oikoumene: Scythia and Hyperborea** | 70–80 | 76–82 | 80–82 | |
+| **Oikoumene: the Western Sea** | 74–77 | 76–80 | 80–82 | This file's towns, after the voyage; ODYSSEY's sea 70–78 |
+| **Oikoumene: Okeanos** | 75–80 | 80–85 | 82–84 | |
+| **Oikoumene: the Nurseries** | 10–20 | — | — | First stages only, a table per Aethos month |
 
 ## Rules
 
