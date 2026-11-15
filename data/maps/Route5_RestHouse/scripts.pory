@@ -1,0 +1,142 @@
+// The Inn of the Plain, Route 5's roadside inn: Xenokles's household from
+// design/phase2/SCRIPT.md Part 2 ("The Inn of the Plain"). Thria went to Act II,
+// so its inn stands here, at the foot of the Skironian cliffs where the road
+// comes out onto Eleusa's plain (design/phase2/BUILD.md, batch 3).
+//
+// Room: tools/ichor/maps/route5_rooms.py; map.json's events come from it too.
+// The mat (7..8, 8) is warp 0, back to the inn's door on Route 5 (its warp 1).
+//
+// Xenokles is the route's rest point: he heals the party every visit. His
+// in-game trade, INGAME_TRADE_ICHOR_GALANTHIS: an Onotis for his Gelasable
+// GALANTHIS (Lv 19, a Leppa Berry), sets FLAG_ICHOR_TRADED_GELASABLE. Galanthis
+// sits by the sandals until then (hidden on that flag); the Onotis stands in
+// the stall after it (FLAG_TEMP_1, set on entry until the trade).
+
+mapscripts Route5_RestHouse_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if (!flag(FLAG_ICHOR_TRADED_GELASABLE)) {
+            setflag(FLAG_TEMP_1)
+        }
+    }
+}
+
+text Route5_RestHouse_Text_NameXenokles { "XENOKLES" }
+text Route5_RestHouse_Text_NameStableBoy { "STABLE BOY" }
+
+script Route5_RestHouse_EventScript_Xenokles {
+    lock
+    faceplayer
+    if (!flag(FLAG_ICHOR_MET_XENOKLES)) {
+        setspeaker(Route5_RestHouse_Text_NameXenokles)
+        msgbox(format("The Inn of the Plain. Last bed before Eleusa. First bed after.\p"
+                      "Heralds sleep free this week. The Mysteries. Sit down, sit down."))
+        setflag(FLAG_ICHOR_MET_XENOKLES)
+    } else {
+        setspeaker(Route5_RestHouse_Text_NameXenokles)
+        msgbox(format("Back again? Sit by the fire. The bread's still warm."))
+    }
+    closemessage
+    call(Common_EventScript_OutOfCenterPartyHeal)
+    if (flag(FLAG_ICHOR_TRADED_GELASABLE)) {
+        setspeaker(Route5_RestHouse_Text_NameXenokles)
+        msgbox(format("Galanthis took the stable boy's sandals. Both feet. She's learning."))
+        release
+        end
+    }
+    setspeaker(Route5_RestHouse_Text_NameXenokles)
+    msgbox(format("My weasel keeps stealing the guests' sandals. Left foot only. Every one.\p"
+                  "What I need is a donkey for the stable. You wouldn't have an Onotis?"))
+    // The in-game trade, written out as Thaletas's is (EmporionCity_Deigma) so
+    // each line carries Xenokles's name box.
+    setvar(VAR_0x8005, INGAME_TRADE_ICHOR_GALANTHIS)
+    specialvar(VAR_0x8009, GetInGameTradeSpeciesInfo)
+    setspeaker(Route5_RestHouse_Text_NameXenokles)
+    msgbox(format("Trade me an Onotis for my Gelasable?"), MSGBOX_YESNO)
+    if (var(VAR_RESULT) == NO) {
+        goto(Route5_RestHouse_EventScript_NoTrade)
+    }
+    chooseboxmon(SELECT_PC_MON_TRADE)
+    waitstate
+    if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        goto(Route5_RestHouse_EventScript_NoTrade)
+    }
+    specialvar(VAR_0x800B, GetTradeSpecies)
+    if (var(VAR_0x800B) != VAR_0x8009) {
+        setspeaker(Route5_RestHouse_Text_NameXenokles)
+        msgbox(format("That's no donkey. Long ears, short temper. An Onotis."))
+        release
+        end
+    }
+    special(CreateInGameTradePokemon)
+    special(DoInGameTradeScene)
+    waitstate
+    setflag(FLAG_ICHOR_TRADED_GELASABLE)
+    removeobject(LOCALID_REST_HOUSE_GALANTHIS)
+    clearflag(FLAG_TEMP_1)
+    addobject(LOCALID_REST_HOUSE_ONOTIS)
+    setspeaker(Route5_RestHouse_Text_NameXenokles)
+    msgbox(format("Galanthis, I called her. After the girl who laughed at a goddess.\p"
+                  "She laughs at me all day. You'll get on."))
+    release
+}
+
+script Route5_RestHouse_EventScript_NoTrade {
+    setspeaker(Route5_RestHouse_Text_NameXenokles)
+    msgbox(format("Fair enough. I'll just keep buying sandals."))
+    release
+    end
+}
+
+script Route5_RestHouse_EventScript_StableBoy {
+    lock
+    faceplayer
+    setspeaker(Route5_RestHouse_Text_NameStableBoy)
+    msgbox(format("A Lakonian came through two days ago. Ran into the doorpost.\p"
+                  "Then he ran into the other doorpost. Then he slept in the hay."))
+    release
+}
+
+script Route5_RestHouse_EventScript_Galanthis {
+    lock
+    faceplayer
+    playmoncry(SPECIES_GELASABLE, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The weasel has a sandal in its mouth. A left one. It looks very pleased."))
+    waitmoncry
+    release
+}
+
+script Route5_RestHouse_EventScript_Onotis {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ONOTIS, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("Your old Onotis, up to its ears in hay. It doesn't look up."))
+    waitmoncry
+    release
+}
+
+script Route5_RestHouse_EventScript_RoadMap {
+    msgbox(format("Roads scratched into the plaster by guests. Every one ends at Eleusa.\p"
+                  "Someone has scratched a little turtle at the end of theirs."), MSGBOX_SIGN)
+}
+
+script Route5_RestHouse_EventScript_Sandals {
+    msgbox(format("Sandals on pegs, in pairs. Except for three. Those are all right feet."),
+           MSGBOX_SIGN)
+}
+
+script Route5_RestHouse_EventScript_Hearth {
+    msgbox(format("Bread on the hearthstone, and a pot of lentils that has never been empty."),
+           MSGBOX_SIGN)
+}
+
+script Route5_RestHouse_EventScript_Washbasin {
+    msgbox(format("A basin of clean water by the door. A guest's feet are washed first.\p"
+                  "Then they get bread. Then they get asked their name."), MSGBOX_SIGN)
+}
+
+script Route5_RestHouse_EventScript_StableDoors {
+    msgbox(format("Barred doors out to the donkey yard. Somebody has chalked a sandal on them."),
+           MSGBOX_SIGN)
+}

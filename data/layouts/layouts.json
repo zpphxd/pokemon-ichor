@@ -803,6 +803,28 @@
       "border_filepath": "data/layouts/EleusaSanctum_B3F/border.bin",
       "blockdata_filepath": "data/layouts/EleusaSanctum_B3F/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE5_SKIRONIAN_CLIFFS",
+      "name": "Route5_SkironianCliffs_Layout",
+      "width": 68,
+      "height": 31,
+      "primary_tileset": "gTileset_Aethos",
+      "secondary_tileset": "gTileset_Skiron",
+      "border_filepath": "data/layouts/Route5_SkironianCliffs/border.bin",
+      "blockdata_filepath": "data/layouts/Route5_SkironianCliffs/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_ROUTE5_REST_HOUSE",
+      "name": "Route5_RestHouse_Layout",
+      "width": 16,
+      "height": 9,
+      "primary_tileset": "gTileset_Oikos",
+      "secondary_tileset": "gTileset_Domos",
+      "border_filepath": "data/layouts/Route5_RestHouse/border.bin",
+      "blockdata_filepath": "data/layouts/Route5_RestHouse/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

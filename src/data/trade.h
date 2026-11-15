@@ -1278,6 +1278,27 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_ONOTIS,
         .level = 15,                         // SCRIPT.md: Socrates is Lv 15
+    },
+    // Route 5's inn (design/phase2/SCRIPT.md, "The Inn of the Plain"): Xenokles's
+    // sandal-stealing weasel, for a donkey for his stable. ICHOR_STUB_AETHOS_DEX:
+    // Gelasable is Furret until the dex lands, so its hidden ability is Frisk,
+    // not the dex's Prankster; abilityNum 2 picks the hidden one either way.
+    [INGAME_TRADE_ICHOR_GALANTHIS] =
+    {
+        .nickname = _("GALANTHIS"),
+        .species = SPECIES_GELASABLE,
+        .ivs = {16, 20, 14, 12, 18, 24},
+        .abilityNum = 2,
+        .otId = 40717,
+        .conditions = {5, 30, 5, 5, 5},
+        .personality = 0x84,
+        .heldItem = ITEM_LEPPA_BERRY,
+        .mailNum = -1,
+        .otName = _("XENOKLE"),              // 7 letters: Xenokles, on paper
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_ONOTIS,
+        .level = 19,                         // SCRIPT.md: Galanthis is Lv 19
     }
 };
 

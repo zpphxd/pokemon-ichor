@@ -59,7 +59,13 @@
 #define TRAINER_ICHOR_EUCHIDAS                66
 #define TRAINER_ICHOR_PHILONIDES              67
 #define TRAINER_ICHOR_KERYKOS_1               68
-#define TRAINERS_END_ACT1                     69
+// Route 5, the Skironian cliffs, ids 110-129 (tools/ichor/maps/route5.py)
+#define TRAINER_ICHOR_KYNEGEIROS              110
+#define TRAINER_ICHOR_MELANTHIOS              111
+#define TRAINER_ICHOR_MYRTO                   112
+#define TRAINER_ICHOR_ARISTAIOS               113
+#define TRAINER_ICHOR_MOPSOS                  114
+#define TRAINERS_END_ACT1                     115
 
 // world-act2, ids 160-319: Thyrsa, Arkadia, Astyra, Kaldera.
 #define TRAINERS_END_ACT2                     0

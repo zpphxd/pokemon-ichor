@@ -1,0 +1,218 @@
+// Route 5, the Skironian cliffs: the Sacred Way from Hecate's Hollow down to
+// Eleusa. design/phase2/SCRIPT.md, "Route 3, the Pine Slopes" (the content this
+// road took over), beat 19's road, Part 3's Route 3 trainers and Part 6's items;
+// design/phase2/BUILD.md, batch 3.
+//
+// The layout and map.json come from tools/ichor/maps/route5.py. This file holds
+// the road's people, trainers, signs and stubs.
+//
+// Stubs, until other sessions land (BUILD.md):
+//   ICHOR_STUB_DIG     the thyme meadow's daily dig spot shows the turned earth only
+//   ICHOR_STUB_SPRITE  Aristaios is a BEEKEEPER, battling as a Harvester until that
+//                      class is drawn (src/data/trainers.party)
+// The great herm (EventScript_IchorGreatHerm) and Aphrodite's altar
+// (EventScript_IchorAltar_Aphrodite) are the engine's, run straight from map.json.
+
+mapscripts Route5_SkironianCliffs_MapScripts {}
+
+// ---------------------------------------------------------------------------
+// Speakers
+// ---------------------------------------------------------------------------
+
+text Route5_SkironianCliffs_Text_NameKynegeiros { "KYNEGEIROS" }
+text Route5_SkironianCliffs_Text_NameMelanthios { "MELANTHIOS" }
+text Route5_SkironianCliffs_Text_NameMyrto { "MYRTO" }
+text Route5_SkironianCliffs_Text_NameAristaios { "ARISTAIOS" }
+text Route5_SkironianCliffs_Text_NameMopsos { "MOPSOS" }
+text Route5_SkironianCliffs_Text_NamePitchGatherer { "PITCH-GATHERER" }
+text Route5_SkironianCliffs_Text_NameAigialeus { "AIGIALEUS" }
+text Route5_SkironianCliffs_Text_NameInitiate { "INITIATE" }
+
+// ---------------------------------------------------------------------------
+// Trainers, from the Hollow's mouth down to the shore
+// ---------------------------------------------------------------------------
+
+// Mandatory: he stands past the seat and sees the one cell out of the ledge
+// beside it (sight 1, so he never steps into the ledge and blocks it).
+script Route5_SkironianCliffs_EventScript_Kynegeiros {
+    trainerbattle_single(TRAINER_ICHOR_KYNEGEIROS,
+        format("A king sat up there once to watch my grandfather lose. He didn't.\pDraw!"),
+        format("Beaten on the same hill as a king. Good company."))
+    setspeaker(Route5_SkironianCliffs_Text_NameKynegeiros)
+    msgbox(format("My grandfather grabbed an enemy ship with one hand. They cut it off.\p"
+                  "So he grabbed it with the other. We're a grabby family."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// Optional: he watches the cleft up to the knoll, not the road.
+script Route5_SkironianCliffs_EventScript_Melanthios {
+    trainerbattle_single(TRAINER_ICHOR_MELANTHIOS,
+        format("Mind the edge! A robber lived up here once. He kicked people off it."),
+        format("Not off the cliff. Just out of the battle. Fair enough."))
+    setspeaker(Route5_SkironianCliffs_Text_NameMelanthios)
+    msgbox(format("Skiron, he was called. Made travelers wash his feet, then kicked them off.\p"
+                  "A giant turtle ate them at the bottom. My goats won't go near the edge."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// Optional: she faces the rock, so she battles only when spoken to.
+script Route5_SkironianCliffs_EventScript_Myrto {
+    trainerbattle_single(TRAINER_ICHOR_MYRTO,
+        format("I left a clay dove for Aphrodite. Now I'm leaving with a battle."),
+        format("She'll understand. She likes a fight, secretly."))
+    setspeaker(Route5_SkironianCliffs_Text_NameMyrto)
+    msgbox(format("Every niche is somebody who wanted to be loved back.\pThat's a lot of niches."),
+           MSGBOX_AUTOCLOSE)
+    end
+}
+
+// Optional: in the thyme meadow, among his hives.
+script Route5_SkironianCliffs_EventScript_Aristaios {
+    trainerbattle_single(TRAINER_ICHOR_ARISTAIOS,
+        format("Careful! The bees are nervous. So am I. We're nervous together."),
+        format("Everyone, calm down. Me especially."))
+    setspeaker(Route5_SkironianCliffs_Text_NameAristaios)
+    msgbox(format("I lost all my bees once. A sea-god told me how to get them back.\p"
+                  "Long story. There's a cow in it."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// Mandatory: he stands beside the foot of the cleft stair down to the shore and
+// sees the one cell out of it.
+script Route5_SkironianCliffs_EventScript_Mopsos {
+    trainerbattle_single(TRAINER_ICHOR_MOPSOS,
+        format("The gulls flew backwards this morning. I'd hoped it meant nothing."),
+        format("It meant something. It meant you."))
+    setspeaker(Route5_SkironianCliffs_Text_NameMopsos)
+    msgbox(format("Before the sea battle down there, every bird flew to one side.\p"
+                  "Nobody asked the birds. Nobody ever asks the birds."), MSGBOX_AUTOCLOSE)
+    end
+}
+
+// ---------------------------------------------------------------------------
+// People
+// ---------------------------------------------------------------------------
+
+script Route5_SkironianCliffs_EventScript_PitchGatherer {
+    lock
+    faceplayer
+    setspeaker(Route5_SkironianCliffs_Text_NamePitchGatherer)
+    msgbox(format("Pine resin. We seal the wine jars with it.\p"
+                  "Makes the wine taste of trees. People pay extra for that.\p"
+                  "People are strange."))
+    release
+}
+
+// Melanthios's kid, Amalthea's kind, nibbling the verge.
+script Route5_SkironianCliffs_EventScript_Goat {
+    lock
+    faceplayer
+    playmoncry(SPECIES_ERIPIP, CRY_MODE_NORMAL)
+    setspeaker(SP_NAME_NONE)
+    msgbox(format("The kid bleats and butts your knee. It smells of thyme."))
+    waitmoncry
+    release
+}
+
+// The Good Rod moved here from Halai (SCRIPT.md's route plan): Aigialeus, an old
+// fisher who learned beside Glaukos of Akti, fishing off his own beach.
+script Route5_SkironianCliffs_EventScript_Aigialeus {
+    lock
+    faceplayer
+    if (flag(FLAG_ICHOR_GOT_GOOD_ROD)) {
+        setspeaker(Route5_SkironianCliffs_Text_NameAigialeus)
+        msgbox(format("There's rays out past the point. Flat as plates.\p"
+                      "Don't grab one. I did once. My hand's still thinking about it."))
+        release
+        end
+    }
+    checkitem(ITEM_OLD_ROD)
+    if (var(VAR_RESULT)) {
+        setspeaker(Route5_SkironianCliffs_Text_NameAigialeus)
+        msgbox(format("You fish? With that? That's an old rod.\pGlaukos's, by the look of it. Out of Akti."))
+    } else {
+        setspeaker(Route5_SkironianCliffs_Text_NameAigialeus)
+        msgbox(format("You fish? No? Everyone fishes eventually."))
+    }
+    setspeaker(Route5_SkironianCliffs_Text_NameAigialeus)
+    msgbox(format("He and I learned on the same rock. He got the sea. I got the shore.\p"
+                  "Here. A proper rod. Glaukos would want you to have it."))
+    giveitem(ITEM_GOOD_ROD)
+    setflag(FLAG_ICHOR_GOT_GOOD_ROD)
+    setspeaker(Route5_SkironianCliffs_Text_NameAigialeus)
+    msgbox(format("He'd never say so."))
+    release
+}
+
+script Route5_SkironianCliffs_EventScript_Boat {
+    msgbox(format("An old boat, turned over to dry. AIGIALEUS is painted on the side, badly."),
+           MSGBOX_SIGN)
+}
+
+// Two initiates on the beach, walking to the Mysteries with the procession.
+script Route5_SkironianCliffs_EventScript_PilgrimA {
+    lock
+    faceplayer
+    setspeaker(Route5_SkironianCliffs_Text_NameInitiate)
+    msgbox(format("We're walking to the Mysteries. You're not allowed to say what happens.\p"
+                  "I don't know what happens. So that part's easy."))
+    release
+}
+
+script Route5_SkironianCliffs_EventScript_PilgrimB {
+    lock
+    faceplayer
+    setspeaker(Route5_SkironianCliffs_Text_NameInitiate)
+    msgbox(format("We fasted all the way from Emporion. Then we smelled the inn's bread.\p"
+                  "We're having a little rest. From fasting."))
+    release
+}
+
+// ---------------------------------------------------------------------------
+// Signs and set pieces
+// ---------------------------------------------------------------------------
+
+script Route5_SkironianCliffs_EventScript_MouthSign {
+    msgbox(format("ROUTE 5 · THE SKIRONIAN CLIFFS\nWest: Hecate's Hollow. East: Eleusa."), MSGBOX_SIGN)
+}
+
+script Route5_SkironianCliffs_EventScript_EastSign {
+    msgbox(format("ROUTE 5 · THE SKIRONIAN CLIFFS\nEast: Eleusa. West: Hecate's Hollow."), MSGBOX_SIGN)
+}
+
+script Route5_SkironianCliffs_EventScript_MeadowSign {
+    msgbox(format("Thyme meadow. Bees at work. Walk softly, or be stung loudly."), MSGBOX_SIGN)
+}
+
+// The route's set piece (Herodotus 8.90): Xerxes watched Salamis from here.
+script Route5_SkironianCliffs_EventScript_Seat {
+    msgbox(format("A rough seat cut into the rock, looking out over the bay.\p"
+                  "A king once sat here to watch his ships win a battle.\p"
+                  "They didn't."), MSGBOX_SIGN)
+}
+
+script Route5_SkironianCliffs_EventScript_Niches {
+    msgbox(format("A rock face cut with dozens of little niches.\p"
+                  "Each holds a clay dove, or a lamp, or a name scratched small."), MSGBOX_SIGN)
+}
+
+script Route5_SkironianCliffs_EventScript_Watchtower {
+    msgbox(format("A watchtower for the road, its top fallen in.\p"
+                  "Its door is choked with fallen blocks. The view is still good."), MSGBOX_SIGN)
+}
+
+script Route5_SkironianCliffs_EventScript_Hives {
+    msgbox(format("Clay hives on a stone bench, humming. The air smells of thyme and honey."),
+           MSGBOX_SIGN)
+}
+
+script Route5_SkironianCliffs_EventScript_InnSign {
+    msgbox(format("THE INN OF THE PLAIN\nBeds, bread and a fire. Pilgrims welcome."), MSGBOX_SIGN)
+}
+
+// ICHOR_STUB_DIG: the thyme meadow's daily dig spot (SYSTEMS.md §5; SCRIPT.md
+// Part 6, Open questions 23 for its amphora). When the Trowel's dig lands, this
+// takes the daily-dig script.
+script Route5_SkironianCliffs_EventScript_DigSpot {
+    msgbox(format("Turned earth among the thyme, with a glint of pottery in it."), MSGBOX_SIGN)
+}

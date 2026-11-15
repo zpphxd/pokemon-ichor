@@ -125,3 +125,5 @@ data/scripts/ichor_relics.inc
 data/scripts/ichor_rites.inc
 data/scripts/ichor_herms.inc
 data/scripts/ichor_labyrinth.inc
+data/maps/Route5_SkironianCliffs/scripts.inc
+data/maps/Route5_RestHouse/scripts.inc

@@ -48,3 +48,5 @@
 	.include "data/maps/EleusaSanctum_B1F/scripts.inc"
 	.include "data/maps/EleusaSanctum_B2F/scripts.inc"
 	.include "data/maps/EleusaSanctum_B3F/scripts.inc"
+	.include "data/maps/Route5_SkironianCliffs/scripts.inc"
+	.include "data/maps/Route5_RestHouse/scripts.inc"

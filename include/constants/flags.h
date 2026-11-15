@@ -748,10 +748,10 @@
 #define FLAG_UNUSED_0x2B5  0x2B5 // Unused Flag
 #define FLAG_UNUSED_0x2B6  0x2B6 // Unused Flag
 #define FLAG_UNUSED_0x2B7  0x2B7 // Unused Flag
-#define FLAG_UNUSED_0x2B8  0x2B8 // Unused Flag
-#define FLAG_UNUSED_0x2B9  0x2B9 // Unused Flag
-#define FLAG_UNUSED_0x2BA  0x2BA // Unused Flag
-#define FLAG_UNUSED_0x2BB  0x2BB // Unused Flag
+#define FLAG_ICHOR_HIDDEN_ROUTE5_HONEY 0x2B8 // Ichor: Route 5: Honey under a beehive in the thyme meadow
+#define FLAG_ICHOR_HIDDEN_ROUTE5_PRETTY_FEATHER 0x2B9 // Ichor: Route 5: a Pretty Feather in a niche of Aphrodite's shrine
+#define FLAG_ICHOR_HIDDEN_ROUTE5_HEART_SCALE 0x2BA // Ichor: Route 5: a Heart Scale at the tip of the shore point
+#define FLAG_ICHOR_HIDDEN_ROUTE5_ORAN_BERRY 0x2BB // Ichor: Route 5: an Oran Berry in the inn's yard
 
 // Event Flags
 #define FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG                      0x2BC
@@ -1724,6 +1724,17 @@
 #define ICHOR_GIFT_HIEROPHANT                   3
 #define FLAG_ICHOR_ALL_HERMS_REWARD             (FLAG_ICHOR_GIFTS_START + 4 * 0 + 0) // god slot 0 (none) is free: the all-herms bonus
 // Ichor bank flags: claim.py bankflag adds lines here, in order.
+#define FLAG_ICHOR_ITEM_ROUTE5_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x040) // Ichor: Route 5: the Super Potion in the pine clearing
+#define FLAG_ICHOR_ITEM_ROUTE5_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x041) // Ichor: Route 5: the Great Ball beside the rock seat
+#define FLAG_ICHOR_ITEM_ROUTE5_PP_UP            (FLAG_ICHOR_GENERAL_START + 0x042) // Ichor: Route 5: the PP Up at the watchtower (the Girdle, Act II)
+#define FLAG_ICHOR_ITEM_ROUTE5_CALCIUM          (FLAG_ICHOR_GENERAL_START + 0x043) // Ichor: Route 5: the Calcium in the pine hollow (Demeter's Sickle)
+#define FLAG_ICHOR_ITEM_ROUTE5_SUPER_REPEL      (FLAG_ICHOR_GENERAL_START + 0x044) // Ichor: Route 5: the Super Repel at the end of the thyme meadow
+#define FLAG_ICHOR_ITEM_ROUTE5_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x045) // Ichor: Route 5: the Revive at the terrace's lookout, behind the rubble
+#define FLAG_ICHOR_ROUTE5_THICKET_CUT           (FLAG_ICHOR_GENERAL_START + 0x046) // Ichor: Route 5: the pine hollow's thorn thicket is cut (its hide flag)
+#define FLAG_ICHOR_ROUTE5_RUBBLE_BROKEN         (FLAG_ICHOR_GENERAL_START + 0x047) // Ichor: Route 5: the lookout's marble rubble is broken (its hide flag)
+#define FLAG_ICHOR_GOT_GOOD_ROD                 (FLAG_ICHOR_GENERAL_START + 0x048) // Ichor: Route 5: Aigialeus gave the Good Rod
+#define FLAG_ICHOR_TRADED_GELASABLE             (FLAG_ICHOR_GENERAL_START + 0x049) // Ichor: Route 5's inn: traded an Onotis for Xenokles's Gelasable GALANTHIS
+#define FLAG_ICHOR_MET_XENOKLES                 (FLAG_ICHOR_GENERAL_START + 0x04A) // Ichor: Route 5's inn: Xenokles's welcome heard
 #define FLAG_ICHOR_ITEM_ELEUSA_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x080) // Ichor: Eleusa: the Super Potion on the threshing floor
 #define FLAG_ICHOR_ITEM_ELEUSA_AWAKENING        (FLAG_ICHOR_GENERAL_START + 0x081) // Ichor: Eleusa: the Awakening in the poppy meadow
 #define FLAG_ICHOR_SANCTUM_OPEN                 (FLAG_ICHOR_GENERAL_START + 0x082) // Ichor: beat 22: the sanctum is open (the Ploutonion's gate and the Anaktoron's stair)
