@@ -64,7 +64,7 @@ Each batch runs as parallel worktree agents. This session merges them into its b
 
 | Lane | Seams | Status |
 |---|---|---|
-| The Hellespont | west edge ← Aethos's Route 20, the north Aegean (world-act2's): rows 8–21 open sea on both sides, `left`/`right`, the 8 columns nearest the seam aethos-only; east end → Sestos's harbor; north shore has a landing for LABORS's Abdera (Labor 8) | proposed to world-act2 (`local_fc0276d1`); Abdera with world-postgame |
+| The Hellespont | west edge ← Aethos's Route 20, the north Aegean (world-act2's): rows 8–21 open sea on both sides, `left`/`right`, the 8 columns nearest the seam aethos-only; east end → Sestos's harbor; north shore has a landing for LABORS's Abdera (Labor 8) | **Agreed with world-act2** (2026-11-14; recorded in their `design/phase3/BUILD.md`). Route 20 is about 40×88, with Samothrake at the top, so its east rows 8–21 are the strait mouth. It's open in Act II, so their side blocks the mouth (fog, or a sailor) until `FLAG_ICHOR_POSTGAME`. Route 20 is their batch 7; neither side adds the connection until both maps exist. Abdera with world-postgame |
 | The Bosporus, then the Pontic Coast | the Hellespont's east → the Bosporus (Salmydessos on its west shore) → the Pontic Coast, with landings at Themiskyra (LABORS's), Aia and Leuke | to agree with world-postgame |
 | Pharos's waters | Aethos's Route 34 (Kaldera to Rhodos, post-game, **world-postgame's**): Pharos's north edge is open sea under Route 34's south edge, `up`/`down`, Pharos's 6 rows nearest the seam aethos-only; world-postgame sets the offset along Route 34 → Pharos → Naukratis's harbor | proposed to world-postgame |
 | The Nile | Naukratis → Memphis → Heliopolis → Elephantine → the Cataracts (Horn of Achelous) | ours |
