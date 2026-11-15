@@ -1038,6 +1038,8 @@ gSpecials::
 	def_special Ichor_TheaterGaze, waitstate=1
 	def_special Ichor_ShowProgram
 	def_special Ichor_HideProgram
+	def_special Ichor_ShowPicture
+	def_special Ichor_HidePicture
 	def_special Ichor_SetHoursOverride
 	@ Ichor: relics (src/ichor_relics.c)
 	def_special Ichor_CanUseRelic

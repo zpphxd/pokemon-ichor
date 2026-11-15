@@ -1,9 +1,9 @@
 #ifndef GUARD_CONSTANTS_ICHOR_ACT2_SCENE_H
 #define GUARD_CONSTANTS_ICHOR_ACT2_SCENE_H
 
-// Ichor: the Dionysia's constants (design/phase3/SCRIPT.md, beats 32-34), for
-// the C (src/ichor_act2_scene.c) and the scripts (data/event_scripts.s includes
-// this file). Only #defines here.
+// Ichor: the Dionysia's constants (design/phase3/SCRIPT.md, beats 32-34), and
+// the picture window's (beats 32-55), for the C (src/ichor_act2_scene.c) and
+// the scripts (data/event_scripts.s includes this file). Only #defines here.
 
 // VAR_ICHOR_DIONYSIA, the play's stage
 #define DIONYSIA_NONE          0  // before the play
@@ -38,5 +38,12 @@
 #define SKENE_DOOR_CROWN_X     9
 #define SKENE_DOOR_GOAT_X      15
 #define SKENE_DOOR_Y           2
+
+// Ichor_ShowPicture's pictures (gSpecialVar_0x8004): a 64x64 image in a picture box
+#define ICHOR_PICTURE_PROGRAM          0  // the Dionysia's program, with the hook (beat 32)
+#define ICHOR_PICTURE_DECREE           1  // the ostracism's decree (Astyra, beat 53)
+#define ICHOR_PICTURE_FORGED_ORDER     2  // the forged order at the Propylaia (the Akropolis, beat 55)
+#define ICHOR_PICTURE_PRACTICE_TABLETS 3  // the practice tablets at the hearing (the Stoa, beat 52)
+#define ICHOR_PICTURE_COUNT            4
 
 #endif // GUARD_CONSTANTS_ICHOR_ACT2_SCENE_H

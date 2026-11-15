@@ -1,0 +1,29 @@
+{
+  "id": "MAP_ASTYRA_PHALERON",
+  "name": "Astyra_Phaleron",
+  "layout": "LAYOUT_ASTYRA_PHALERON",
+  "music": "MUS_ICHOR_EMPORION",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_ASTYRA",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_PHALERON_NET_LOFT",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

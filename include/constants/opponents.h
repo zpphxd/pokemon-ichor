@@ -155,7 +155,30 @@
 #define TRAINER_ICHOR_MAINALOS                242
 #define TRAINER_ICHOR_LYSIPPE                 243
 #define TRAINER_ICHOR_MELANIPPE               244
-#define TRAINERS_END_ACT2                     245
+#define TRAINER_ICHOR_TOXARIS                 245
+#define TRAINER_ICHOR_ANACHARSIS              246
+#define TRAINER_ICHOR_ZENON                   247
+#define TRAINER_ICHOR_KRATES                  248
+#define TRAINER_ICHOR_AUTOLYKOS               249
+#define TRAINER_ICHOR_ARCHYTAS                250
+#define TRAINER_ICHOR_PHRYNON                 251
+#define TRAINER_ICHOR_TYRTAMOS                252
+#define TRAINER_ICHOR_BRYGOS                  253
+#define TRAINER_ICHOR_PROXENOS                254
+#define TRAINER_ICHOR_GRUNT_AKROPOLIS_LITHOS  255
+#define TRAINER_ICHOR_GRUNT_AKROPOLIS_KONIORTOS 256
+#define TRAINER_ICHOR_GRUNT_AKROPOLIS_SIDEROS 257
+#define TRAINER_ICHOR_GRUNT_AKROPOLIS_CHALKOS 258
+#define TRAINER_ICHOR_KLEON_AKROPOLIS_KYNDER  259
+#define TRAINER_ICHOR_KLEON_AKROPOLIS_HIPLING 260
+#define TRAINER_ICHOR_KLEON_AKROPOLIS_NEBREL  261
+#define TRAINER_ICHOR_RHEA_AKROPOLIS          262
+#define TRAINER_ICHOR_EUANGELOS               263
+#define TRAINER_ICHOR_NAUSON                  264
+#define TRAINER_ICHOR_KONON                   265
+#define TRAINER_ICHOR_GRUNT_SALT_WELL_ASBESTOS 266
+#define TRAINER_ICHOR_GRUNT_SALT_WELL_LEPIS   267
+#define TRAINERS_END_ACT2                     268
 
 // world-act3, ids 320-499 and 1404-1503: Kythera, Knossa, Lakonia, Delphoi, the Frozen Hour, Olympus.
 #define TRAINERS_END_ACT3                     0

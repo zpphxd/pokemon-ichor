@@ -5,7 +5,7 @@
 
 Each staged file holds `=== TRAINER_ICHOR_<NAME> ===` blocks in the .party
 syntax (design/phase3/SCRIPT.md Part 3). This script:
-  - drops `Ability:` lines while the Aethos species are stand-ins (ICHOR_STUB_AETHOS_DEX);
+  - keeps `Ability:` lines: the Aethos dex is real (ICHOR_AETHOS_DEX), so they resolve;
   - maps classes and pics that don't exist yet to stand-ins (ICHOR_STUB_TRAINER_ART),
     keeping the intended one in a comment, until the sprites agent adds them;
   - assigns each new name the next free id in its block (design/phase3/BUILD.md's
@@ -37,7 +37,10 @@ CLASS_STANDIN = {'MAENAD': 'Harvester', 'SATYR': 'Goatherd', 'ACTOR': 'Acolyte',
                  'FISHER': 'Shepherd', 'SAILOR': 'Shepherd', 'SCHOLAR': 'Augur', 'TITAN_ADMIN': 'Titanborn',
                  'JESTER': 'Goatherd', 'INITIATE': 'Acolyte', 'POTTER': 'Shepherd', 'BEEKEEPER': 'Harvester',
                  'SWINEHERD': 'Shepherd'}
-PIC_STANDIN = {'Class': None}
+# New people's portraits, until the sprites agent draws them (BUILD.md's "Stand-ins"). Any other
+# missing pic borrows the Hierophant's (for a Hierophant) or the Shepherd's.
+PIC_STANDIN = {'ARCHER': 'Hoplite', 'PHILOSOPHER': 'Augur', 'ATHLETE': 'Hoplite', 'POTTER': 'Shepherd',
+               'PILGRIM': 'Shepherd', 'KLEON_TITAN': 'Kleon', 'ADMIN_RHEA': 'Titan Grunt'}
 
 def main(files):
     classes, pics, music = known('Class'), known('Pic'), known('Music')
@@ -55,9 +58,7 @@ def main(files):
     for name, body in sorted(blocks, key=lambda b: order.index(b[0])):
         lines = []
         for line in body.split('\n'):
-            if line.startswith('Ability:'):
-                continue  # ICHOR_STUB_AETHOS_DEX
-            mm = re.match(r'^Music: (.+)$', line)
+            mm =re.match(r'^Music: (.+)$', line)
             if mm and norm(mm.group(1)) not in music:
                 line = 'Music: Male'  # ICHOR_STUB_MUSIC
             m = re.match(r'^(Class|Pic): (.+)$', line)
@@ -68,7 +69,8 @@ def main(files):
                     stand = CLASS_STANDIN.get(norm(val)) if kind == 'Class' else None
                     if kind == 'Pic':
                         # a new person's portrait: borrow the class's stand-in pic
-                        stand = {'HIEROPHANT': 'Hierophant Ione'}.get(norm(val).split('_')[0], 'Shepherd')
+                        stand = PIC_STANDIN.get(norm(val)) or \
+                            {'HIEROPHANT': 'Hierophant Ione'}.get(norm(val).split('_')[0], 'Shepherd')
                     line = f'{kind}: {stand or "Shepherd"}'
             lines.append(line)
         out.append(f'=== {name} ===')

@@ -83,7 +83,7 @@ STAGES = [  # (stage, band, route numbers, place prefixes)
      ("Lebadeia", "Trophonios", "Kopais", "Kirrha", "GulfFerry", "Aigion", "StyxFalls", "Arkadia",
       "PoolOfMnemosyne")),
     ("Astyra", "middle", (13, 14, 15, 16, 17, 18),
-     ("Nemea", "Daphni", "Astyra", "Marathon", "CapeSounion", "Sounion")),
+     ("Nemea", "Daphni", "Astyra", "SaltWell", "Marathon", "CapeSounion", "Sounion")),
     ("Kaldera", "middle", (19, 20, 21), ("Kaldera", "Paros", "Delos", "Skyros", "Lemnos", "Samothrake", "Ikaria",
                                          "Samos", "Chios", "Lesbos")),
     ("Kythera", "late", (22,), ("Melos", "Kythera")),

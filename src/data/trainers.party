@@ -1134,6 +1134,7 @@ AI: Basic Trainer
 
 Botrykit
 Level: 30
+Ability: Moxie
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Poison Jab
 - Slash
@@ -1142,6 +1143,7 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 Karkitox
 Level: 30
+Ability: Poison Touch
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Crabhammer
 - Cross Poison
@@ -1150,6 +1152,7 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 Prosomime
 Level: 31
+Ability: Illusion
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Psybeam
 - Clear Smog
@@ -1158,6 +1161,7 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 Thyrsivy @ Black Sludge
 Level: 32
+Ability: Liquid Ooze
 IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 - Petal Dance
 - Giga Drain
@@ -1334,6 +1338,7 @@ AI: Basic Trainer
 
 Midonos
 Level: 33
+Ability: Own Tempo
 IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 - Iron Head
 - Take Down
@@ -1342,6 +1347,7 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 
 Gelasable
 Level: 34
+Ability: Prankster
 IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 - Taunt
 - Super Fang
@@ -1350,6 +1356,7 @@ IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 
 Oinopard
 Level: 35
+Ability: Moxie
 IVs: 15 HP / 15 Atk / 15 Def / 15 SpA / 15 SpD / 15 Spe
 - Night Slash
 - Crunch
@@ -1883,6 +1890,7 @@ AI: Basic Trainer
 
 Harpelle
 Level: 35
+Ability: Unnerve
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Tailwind
 - Acrobatics
@@ -1891,6 +1899,7 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 Lykanax
 Level: 35
+Ability: Intimidate
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Crunch
 - Sucker Punch
@@ -1899,6 +1908,7 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 Oinopard
 Level: 35
+Ability: Poison Touch
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Night Slash
 - Poison Jab
@@ -1907,6 +1917,7 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 Kaprodon
 Level: 36
+Ability: Reckless
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Double-Edge
 - Payback
@@ -1915,6 +1926,7 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
 Starkos @ Sitrus Berry
 Level: 37
+Ability: Thick Fat
 IVs: 27 HP / 27 Atk / 27 Def / 27 SpA / 27 SpD / 27 Spe
 - Play Rough
 - Crunch

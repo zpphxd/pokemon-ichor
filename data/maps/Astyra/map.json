@@ -1,0 +1,120 @@
+{
+  "id": "MAP_ASTYRA",
+  "name": "Astyra",
+  "layout": "LAYOUT_ASTYRA",
+  "music": "MUS_ICHOR_EMPORION",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_ASTYRA",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_CITY",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_ASCLEPEION",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 3,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_AGORA",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 7,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_STOA_OF_THE_ARCHON",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 19,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_LIBRARY",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 26,
+      "y": 14,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_LYCEUM",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_TAVERN",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 2,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_PHAEDONS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 5,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_KEPHALOS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 8,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_LYSIMACHOS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 11,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_SCULPTORS_WORKSHOP",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 14,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_WEAVERS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 17,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_SCRIBES_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 20,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_PRAXAGORAS_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 23,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ASTYRA_AKROPOLIS",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}
