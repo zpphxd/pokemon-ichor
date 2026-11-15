@@ -10,6 +10,18 @@ Batch 1's walking sprites: the named people, townsfolk and trainer classes of th
 - **Sheets:** `graphics/object_events/pics/people/ichor/oik/<name>.png`, registered in the five sprite tables' Ichor blocks (SPRITES_npc.md §"How a later batch adds an NPC").
 - **Test:** `tools/ichor/tests/oikoumene_ow_sprites.sh` (below).
 
+### Stopped at (2026-11-14, Oikoumene paused)
+
+- **Done.**
+  - All 27 walkers are drawn and written. The three land palettes are at tags 0x1146–0x1148.
+  - Every id is registered in the five sprite tables and the palette table.
+  - The headless check passes: 258 checks.
+  - The stand-in table and the 2× sheet below are written.
+  - Review passes 1 and 2 are written up below.
+- **Partial.** Pass 3, the in-game look, is not done. The check's 21 screenshots of Akti are taken (`build/test_oikoumene_ow/shots/`) but haven't been reviewed or cropped into a design image.
+- **Not started.** Nothing else was asked of this batch. The smoke and slice tests were not run at the last commit.
+- **Make** is green at the last commit (ROM 22,255,180 B, 66.33%).
+
 ![All 27 at 2x](img/overworld_batch1.png)
 
 ### Stand-ins to swap
