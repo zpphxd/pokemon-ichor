@@ -304,6 +304,35 @@ def reverse(adj):
     return r
 
 
+def trap_cells(m):
+    """Cells a player can reach on foot from the map's warps and edges but can't
+    walk back from to any of them. People who never move count as walls."""
+    walker = Walker(m)
+    starts = walker.starts([t for _, tiles in entries(m) for t in tiles])
+    adj = walker.graph(starts)
+    home = bfs(reverse(adj), starts)
+    return sorted({(x, y) for x, y, _ in adj} - {(x, y) for x, y, _ in home})
+
+
+def trap_runs(m):
+    """trap_cells, grouped into connected pockets."""
+    left, runs = set(trap_cells(m)), []
+    while left:
+        c = min(left)
+        run, todo = [], [c]
+        left.discard(c)
+        while todo:
+            x, y = todo.pop()
+            run.append((x, y))
+            for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+                n = (x + dx, y + dy)
+                if n in left:
+                    left.discard(n)
+                    todo.append(n)
+        runs.append(sorted(run))
+    return runs
+
+
 def entries(m):
     """Where a player arrives: each warp (and the cell below a door) and each connected edge.
     Returns [(label, [cells])]."""
@@ -330,6 +359,10 @@ def structural_checks(m):
       MIXED    a metatile used both as open and as solid ground in one map: either
                a wall you can walk through or a path you can't (listed for a look)
       ONSOLID  an item ball standing on a solid cell (fine behind a counter)
+      TRAP     a cell a player can walk to (on foot, no relics) but can't walk
+               back out of to any warp or edge: a ledge dropped them into a
+               pocket whose only way out is solid, or is a person who never
+               moves (a beaten trainer stays put). A softlock.
     """
     repo, out = m.repo, []
     walker = Walker(m, surf=True, relics=True)
@@ -419,6 +452,9 @@ def structural_checks(m):
                 out.append(("EDGE", f"open edge cell {a0} walks {d} into solid {oname} {b0}"))
             else:
                 out.append(("EDGE", f"open edge cells {a0}-{a1} walk {d} into solid {oname} {b0}-{b1}"))
+
+    for cells in trap_runs(m):
+        out.append(("TRAP", f"{len(cells)} cell(s) a player can reach on foot but never leave, e.g. {cells[:4]}"))
 
     uses = {}
     for y in range(m.h):

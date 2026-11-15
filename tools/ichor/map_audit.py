@@ -392,7 +392,7 @@ def judge(ms, bands, by_name):
     for kind, msg in structural_checks(ms.m):
         # A warp or connection to nowhere is broken. An open cell facing a wall across
         # a seam is often deliberate (Emerald has 57 on its routes and towns): a warning.
-        broken = kind in ("WARP", "EDGE") and ("isn't in map_groups" in msg or "which has" in msg)
+        broken = (kind in ("WARP", "EDGE") and ("isn't in map_groups" in msg or "which has" in msg)) or kind == "TRAP"
         out.append(("FAIL" if broken else "WARN", f"{kind.lower()}: {msg}"))
     if getattr(ms, "twins", None):
         # §2: every interior is unique. Elsewhere a shared layout is a placeholder.

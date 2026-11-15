@@ -7,7 +7,8 @@
 # the ROM) against the ELF's symbols, then runs route1.lua in the Lua headless
 # runner: a starter and beat 4's flags, Route 1 and a battle with Tityros, a
 # screenshot tour of the route, the flock blocking the road, the Kronion Hill
-# summit scene played out, and the road open again. Screenshots land in
+# summit scene played out, the road open again, and a hop off the goat path's
+# last lip with a walk back out past the beaten Agis. Screenshots land in
 # build/test_route1/; the run fails on any failed check, a crash or a timeout.
 set -u
 cd "$(dirname "$0")/../../.."

@@ -1116,8 +1116,11 @@ ROUTE1_EVENTS = {
         obj(WOOLOO, 12, 14, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
         obj(WOOLOO, 13, 14, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_DOWN", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
         obj(WOOLOO, 12, 12, R1 + "FlockWooloo", "MOVEMENT_TYPE_FACE_LEFT", flag="FLAG_ICHOR_HIDE_ROUTE1_FLOCK"),
-        # the hoplite holding the pass, just north of the flock's gap
-        obj(P + "HOPLITE", 14, 13, R1 + "Agis", "MOVEMENT_TYPE_FACE_LEFT", trainer=True, sight=3),
+        # the hoplite holding the pass, just north of the flock's gap. He stands
+        # west of it, looking east across the gap: east of it, (14,13) is the
+        # only way out of the goat path's last lip, and a beaten trainer never
+        # moves (QA: standing there he walled in anyone who hopped the lip)
+        obj(P + "HOPLITE", 9, 13, R1 + "Agis", "MOVEMENT_TYPE_FACE_RIGHT", trainer=True, sight=4),
         item_ball(4, 13, "ITEM_POTION", "FLAG_ICHOR_ITEM_ROUTE1_POTION"),
     ],
     "warp_events": [],
@@ -1137,7 +1140,7 @@ ROUTE1_EVENTS = {
 ROUTE1_MANDATORY = {
     "Tityros": (12, 49, "W", 3, "north"),
     "Thestylis": (15, 40, "W", 5, "north"),
-    "Agis": (14, 13, "W", 3, "north"),
+    "Agis": (9, 13, "E", 4, "north"),
     "Polyeidos": (24, 17, "S", 2, "kronion"),
 }
 
@@ -1566,10 +1569,12 @@ class Walk:
         self.dist = dist
         return min(best) if best else None
 
-    def traps(self, starts):
+    def traps(self, starts, people=frozenset()):
         """Cells a walk from the starts reaches but can't come back from (a
-        ledge dropped the player somewhere with no way back up)."""
-        ok = lambda c: self.kind.get(c) in ("open", "grass")
+        ledge dropped the player somewhere with no way back up). people are
+        the cells of objects who never move, walls to the walk: a trainer
+        stays on his cell after he is beaten."""
+        ok = lambda c: self.kind.get(c) in ("open", "grass") and c not in people
         def moves(c):
             for dx, dy in STEPS:
                 n = (c[0] + dx, c[1] + dy)
@@ -1632,6 +1637,14 @@ class Walk:
                 break
             cells.append(c)
         return cells
+
+
+def standing(events):
+    """The cells of objects who are always there and never step aside: no hide
+    flag and no wander range (as mapdata.Map.people counts them)."""
+    return frozenset((e["x"], e["y"]) for e in events["object_events"]
+                     if e.get("flag") in (None, "0", 0, "")
+                     and not int(e.get("movement_range_x") or 0) and not int(e.get("movement_range_y") or 0))
 
 
 def trainers_of(events):
@@ -1716,9 +1729,11 @@ def check_route(r1, kh):
         errs.append("Kronion Hill: the climb to the summit crosses a trainer's line")
     for name in sorted(set(kt) - set(KRONION_MANDATORY)):
         print(f"  {name} is optional")
-    # §1: never use a ledge to trap a player away from an exit.
-    for name, walk_, starts in (("Route 1", w, R1_SOUTH), ("Kronion Hill", k, KH_FOOT)):
-        stuck = walk_.traps(starts)
+    # §1: never use a ledge to trap a player away from an exit, nor stand
+    # anyone who never moves in a ledge pocket's only way out.
+    for name, walk_, starts, events in (("Route 1", w, R1_SOUTH, ROUTE1_EVENTS),
+                                        ("Kronion Hill", k, KH_FOOT, KRONION_EVENTS)):
+        stuck = walk_.traps(starts, standing(events))
         if stuck:
             errs.append(f"{name}: {len(stuck)} cell(s) a player can reach but not leave, e.g. {stuck[:4]}")
     if errs:

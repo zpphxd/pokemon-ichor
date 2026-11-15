@@ -22,7 +22,7 @@ Every Ichor map follows these rules. They come from how Game Freak builds Gen 3 
 ### Ledges are one-way shortcuts
 - Ledges drop toward the previous town, so the trip back is quick and the trip forward takes work.
 - Use them to make loops. The way out goes up the long side; the way back hops down.
-- Never use a ledge to trap a player away from an exit with no other way out.
+- Never use a ledge to trap a player away from an exit with no other way out. A person who never moves counts as a wall here: a beaten trainer stays on his tile, so never stand one in a ledge pocket's only way out.
 
 ### Every dead end pays
 - **Visible items** (sealed jars) are lures. Put them where the player can see them but has to work to reach them: up a side path, past optional grass, behind a trainer.
@@ -196,7 +196,7 @@ tools/ichor/map_audit.py --ref claude/world-act2-0a92e7 --all-ichor   # another 
 
 - **Reading it.** Each map gets its numbers, then one line per shortfall. **FAIL** misses a hard minimum, and any FAIL makes the audit exit 1. **WARN** is a soft minimum, a heuristic or a structural check that needs a look. **NOTE** is encouraged, not required.
 - **When it's done.** A batch isn't done while its maps FAIL. If a FAIL is right for a map (a story beat, a ship's deck), say why in the report. `--warn-only` reports without failing.
-- **Structural checks.** It also runs the slice audit's REACH, WARP, EDGE, MIXED and ONSOLID checks, from `tools/ichor/mapdata.py`. A warp or connection to a map that doesn't exist fails. The rest warn: Emerald's routes and towns have 57 stretches of open cells that face a wall across a seam.
+- **Structural checks.** It also runs the slice audit's REACH, WARP, EDGE, MIXED, ONSOLID and TRAP checks, from `tools/ichor/mapdata.py`. TRAP finds cells a player can walk to but never walk back out of, with every person who never moves counted as a wall. A trap, or a warp or connection to a map that doesn't exist, fails. The rest warn: Emerald's routes and towns have 57 stretches of open cells that face a wall across a seam.
 - **Classing.** A map is a route, town, interior or dungeon by its map type, and a ship's deck or hold is an interior. To override, put `"ichor_kind": "dungeon"` (or `route`, `town` or `interior`) in its map.json, for example on a side area like Kronion Hill. mapjson ignores the key.
 - **New places.** Add the place's name to `STAGES` in `map_audit.py`, so its levels are checked against BALANCE.md.
 - **Changing a number** here means changing the constants at the top of `map_audit.py` in the same commit.

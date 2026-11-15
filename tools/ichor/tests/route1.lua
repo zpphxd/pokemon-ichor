@@ -291,6 +291,22 @@ local function main()
   r = walkTo({ { 12, 12 } })
   expect(r == "moved", "the road north is open")
   shot("25_road_open.png")
+
+  -- Regression (QA, Route 1 softlock): the goat path's last lip drops onto row
+  -- 13 east of the gap, and that pocket's only way out is west along row 13.
+  -- Agis once stood in it at (14,13) and, beaten, walled the player in. Hop the
+  -- lip at (17,11) and walk back out, west to the road and south through the gap.
+  tour("26_goat_path.png", 17, 10)
+  r = walkTo({ { 17, 11 } })
+  expect(r == "moved", "down the goat path to its last lip")
+  r = step(K.DOWN)
+  local hx, hy = pos()
+  expect(r == "moved" and hx == 17 and hy == 13, string.format("hopped the lip from (17,11) to (17,13), at (%d,%d)", hx, hy))
+  r = walkTo({ { 12, 13 }, { 12, 16 } })
+  local ox, oy = pos()
+  expect(r == "moved" and ox == 12 and oy == 16,
+         string.format("walked out of the lip's pocket past the beaten Agis, at (%d,%d)", ox, oy))
+  shot("27_out_of_the_pocket.png")
 end
 
 local co = coroutine.create(main)
