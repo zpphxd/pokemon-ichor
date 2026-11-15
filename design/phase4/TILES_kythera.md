@@ -6,8 +6,13 @@
 
 | Image | Shows |
 |---|---|
+| [`img/kythera_foam_beach.png`](img/kythera_foam_beach.png) | A 240 x 160 screen of the Foam Road at Aphrodite's rock (3x; `kythera_foam_beach_1x.png` is 1x) |
+| [`img/kythera_foam_road.png`](img/kythera_foam_road.png) | A wider stretch of the Foam Road: the herm, the spring stair, the quarry and its drums, the cutting, the reef spit |
+| [`img/kythera_spring.png`](img/kythera_spring.png) | The Spring of Kallirhoe |
 | [`img/kythera_pieces.png`](img/kythera_pieces.png) | Every structure on its ground |
 | [`img/kythera_sheet.png`](img/kythera_sheet.png) | The numbered metatile sheet, rendered from the compiled tileset |
+
+![A 240 x 160 screen of the Foam Road at Aphrodite's rock (3x; `kythera_foam_beach_1x.png` is 1x)](img/kythera_foam_beach.png)
 
 ## The Kythera family
 
@@ -93,7 +98,7 @@ hints.
 | bronze | Bronze mirrors, the harbor shrine's dove, the great herm, the Minoan vault door |
 | melos | Melos's obsidian slope on its earth and grass |
 
-**Tile budget.** 450 of 504 tiles (368 metatiles). The door animations copy their
+**Tile budget.** 451 of 504 tiles (368 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 

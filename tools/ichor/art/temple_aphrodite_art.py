@@ -64,19 +64,20 @@ SEC = "temple"
 
 
 def marble_px(X, Y, k=0):
-    """Polished white marble in square slabs, faint pink veins, 16 px periodic:
-    two slabs per cell, a fine joint between."""
+    """Polished white marble in square slabs, 16 px periodic: one slab per
+    cell with a fine joint, a soft sheen down its lit side, and a single
+    drifting pink vein."""
     x, y = X % 16, Y % 16
     if x == 15 or y == 15:
         return "tm3"
-    if x == 7 and y < 15:
-        return "tm2"
-    v = math.sin((x + 2.2 * y) / 2.6 + k) + 0.7 * math.sin((x - y) / 4.0 + 1.3 * k)
-    if abs(v - 1.1) < 0.12:
-        return "rm3"
-    if abs(v + 0.9) < 0.1:
-        return "tm2"
-    return "w0" if (x * 3 + y * 5 + k) % 13 else "tm1"
+    if x == 0 or y == 0:
+        return "tm1"
+    v = (x + 0.5 * y + 1.6 * math.sin(y / 2.5 + k)) % 16
+    if 7.4 < v < 8.3:
+        return "rm3" if (x + 2 * y) % 3 == 0 else "tm2"
+    if x + y < 6:
+        return "w0"
+    return "w0" if (x * 5 + y * 3 + int(k * 3)) % 17 else "tm1"
 
 
 def floor():

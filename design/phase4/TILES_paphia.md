@@ -6,8 +6,11 @@
 
 | Image | Shows |
 |---|---|
+| [`img/paphia_town.png`](img/paphia_town.png) | Paphia's crown: the temple, the great stair, the terraces, a dovecote, the sculptors |
 | [`img/paphia_pieces.png`](img/paphia_pieces.png) | Every structure on its ground |
 | [`img/paphia_sheet.png`](img/paphia_sheet.png) | The numbered metatile sheet, rendered from the compiled tileset |
+
+![Paphia's crown: the temple, the great stair, the terraces, a dovecote, the sculptors](img/paphia_town.png)
 
 It is one of the Kythera family of secondaries; see [`TILES_kythera.md`](TILES_kythera.md) for why the art is split and which seams then need aethos-only strips.
 

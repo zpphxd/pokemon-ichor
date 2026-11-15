@@ -144,8 +144,8 @@ def falls():
                     c = "rm2" if (x + y) % 3 else "my2"
                 else:
                     c = grass_px(X, Y)
-                    if near < 4:
-                        c = "w0" if (x + y) % 3 == 0 else "rm4"
+                    if near < 3 and (x + 2 * y) % 5 == 0:
+                        c = "w0"
                 B.px(X, Y, c)
     # thin fall: rock on both sides of a narrow stream
     ox = 64

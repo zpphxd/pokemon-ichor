@@ -183,10 +183,13 @@ def quay():
     edge(1, 2, S_)
     for (ox, oy, y0, y1) in ((0, 32, 0, 9), (16, 32, 4, 16)):
         for y in range(y0, y1):
-            for x in range(5, 11):
-                c = "p2" if x not in (5, 10) else "l1"
-                if (y - y0) % 3 == 2 and x not in (5, 10):
-                    c = "p1"
+            for x in range(4, 12):
+                if x in (4, 11):
+                    c = "kr0"
+                elif x == 5:
+                    c = "p3"
+                else:
+                    c = "ks2" if (y - y0) % 3 else "l1"
                 M.px(ox + x, oy + y, c)
     s.walk = ["XXXXXXXX", "XXXXX..X", "..XXXXXX"]
     s.ground = {k: v for k, v in s.ground.items() if k[1] < 2 or k[0] < 2}
@@ -366,34 +369,40 @@ def slips():
     M, B = s.M, s.B
 
     def ramp(L, ox, oy, rows=48, water_from=32):
+        """A slipway: a smooth stone ramp between low kerbs, two greased timber
+        runners down its length, a sleeper across it every 8 px."""
         for y in range(rows):
             for x in range(32):
                 X, Y = ox + x, oy + y
                 wet = y >= water_from
+                k = K.h(X, Y, 17)
                 if x in (0, 31):
+                    c = "ink"
+                elif x == 1:
+                    c = "w0"
+                elif x == 30:
                     c = "kr1"
-                elif x in (1, 30):
-                    c = "kr2"
-                elif x in (8, 9, 22, 23):        # timber runners
-                    c = "wd1" if x in (9, 23) else "wd2"
-                    if y % 8 == 0:
-                        c = "wd0"
+                elif x in (2, 29):
+                    c = "kr1" if x == 29 else "kr2"
+                elif x in (8, 9, 22, 23):        # timber runners, lit on the left
+                    c = "wd3" if x in (8, 22) else "wd1"
+                elif y % 8 == 0 and 3 <= x <= 28:
+                    c = "wd1"                       # a sleeper
+                elif y % 8 == 1 and 3 <= x <= 28:
+                    c = "wd0"
                 else:
-                    c = "kr2" if (y % 6 == 5) else ("w0" if (x + y) % 13 == 0 else "kr2")
-                    c = "kr2" if c == "kr2" and (x * 3 + y) % 5 else ("w0" if c == "w0" else "kr1")
+                    c = "kr2" if k % 7 else "kr1"
+                    if k % 23 == 0:
+                        c = "w0"
                 if wet:
                     if y > water_from + 6:
                         c = None
-                    elif (y - water_from) > 3 and (x + y) % 2:
+                    elif (y - water_from) > 2 and (x + y) % 2:
                         c = None
-                    elif c not in (None,):
-                        c = "b2" if c in ("kr1", "wd0", "wd1") else "b1"
+                    elif c is not None:
+                        c = "b2" if c in ("kr1", "wd0", "wd1", "ink") else "b1"
                 if c:
                     L.px(X, Y, c)
-            if not wet and y % 8 == 7:
-                for x in range(2, 30):
-                    if x not in (8, 9, 22, 23):
-                        L.px(ox + x, oy + y, "kr1")
     # the two slips: rows 0-1 are the ramp on its own ground (bottom layer)
     for ox in (0, 32):
         ramp(B, ox, 0, rows=32, water_from=99)

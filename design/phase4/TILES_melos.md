@@ -6,8 +6,11 @@
 
 | Image | Shows |
 |---|---|
+| [`img/melos_klima.png`](img/melos_klima.png) | Klima on Melos: boathouses, the well, the terraces and the niche, the obsidian slope, the pumice cliffs |
 | [`img/melos_pieces.png`](img/melos_pieces.png) | Every structure on its ground |
 | [`img/melos_sheet.png`](img/melos_sheet.png) | The numbered metatile sheet, rendered from the compiled tileset |
+
+![Klima on Melos: boathouses, the well, the terraces and the niche, the obsidian slope, the pumice cliffs](img/melos_klima.png)
 
 It is one of the Kythera family of secondaries; see [`TILES_kythera.md`](TILES_kythera.md) for why the art is split and which seams then need aethos-only strips.
 
@@ -62,7 +65,7 @@ hints.
 | bronze | Bronze mirrors, the harbor shrine's dove, the great herm, the Minoan vault door |
 | melos | Melos's obsidian slope on its earth and grass |
 
-**Tile budget.** 467 of 504 tiles (424 metatiles). The door animations copy their
+**Tile budget.** 468 of 504 tiles (424 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 

@@ -20,15 +20,15 @@
   "data/tilesets/secondary/paphia/porytiles_bin/palettes/13.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/paphia/porytiles_bin/palettes/14.pal": "59f83737350efeb148a299bdbf87e97f",
   "data/tilesets/secondary/paphia/porytiles_bin/palettes/15.pal": "59f83737350efeb148a299bdbf87e97f",
-  "data/tilesets/secondary/paphia/porytiles_bin/tiles.png": "97b7da45c2c4cea4dcb083497fc2cef5",
+  "data/tilesets/secondary/paphia/porytiles_bin/tiles.png": "21f2e8c52f806239a2bda2173c154caf",
   "data/tilesets/secondary/paphia/porytiles_src/anim/anim.json": "9c91c4059ea022c389dfa070db4be9c3",
   "data/tilesets/secondary/paphia/porytiles_src/anim/surf/0.png": "e12fcf22376178a4b0644b9b80246a63",
   "data/tilesets/secondary/paphia/porytiles_src/anim/surf/1.png": "abf3df9286ce1edcf831602febc867bf",
   "data/tilesets/secondary/paphia/porytiles_src/anim/surf/2.png": "b2dc8aedaca8a912545b863ef1a34baf",
   "data/tilesets/secondary/paphia/porytiles_src/anim/surf/key.png": "e12fcf22376178a4b0644b9b80246a63",
   "data/tilesets/secondary/paphia/porytiles_src/attributes.csv": "e5c57972e7ca16b1bea3abd154b10726",
-  "data/tilesets/secondary/paphia/porytiles_src/bottom.png": "2202f341c0bf9e3e21b12793232509e1",
-  "data/tilesets/secondary/paphia/porytiles_src/middle.png": "9fccec63a2c0bbf55e6aa42b28257b27",
+  "data/tilesets/secondary/paphia/porytiles_src/bottom.png": "940db7291a72fadcb0076ab124e4c6cc",
+  "data/tilesets/secondary/paphia/porytiles_src/middle.png": "90d7f022b6b654b17d56863d4a318516",
   "data/tilesets/secondary/paphia/porytiles_src/top.png": "e36e96ecdfba75884017514487eab266",
   "include/porytiles_generated/tilesets/paphia/generated_anim_code.h": "06f3350ae5f58b7b21d20ef93efdb415"
 }

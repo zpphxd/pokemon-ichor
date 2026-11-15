@@ -6,8 +6,11 @@
 
 | Image | Shows |
 |---|---|
+| [`img/neraida_falls.png`](img/neraida_falls.png) | The Neraida ravine: the falls, the plunge pool and the Naiads' altar, the weir, Myles's mill, the plank bridge, the vault door |
 | [`img/neraida_pieces.png`](img/neraida_pieces.png) | Every structure on its ground |
 | [`img/neraida_sheet.png`](img/neraida_sheet.png) | The numbered metatile sheet, rendered from the compiled tileset |
+
+![The Neraida ravine: the falls, the plunge pool and the Naiads' altar, the weir, Myles's mill, the plank bridge, the vault door](img/neraida_falls.png)
 
 It is one of the Kythera family of secondaries; see [`TILES_kythera.md`](TILES_kythera.md) for why the art is split and which seams then need aethos-only strips.
 

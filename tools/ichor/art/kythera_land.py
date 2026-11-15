@@ -533,17 +533,15 @@ def quarry():
                     continue
                 X, Y = ox + x, oy + y
                 yy = y % 8
-                c = marble_px(X, Y)
-                if yy == 0:
-                    c = "w0"
-                elif yy == 7:
-                    c = "rm2"
-                elif yy == 6:
-                    c = "rm4"
-                elif (x + 6 * (y // 8)) % 16 == 11:
-                    c = "rm3"
-                elif (x + 6 * (y // 8)) % 16 == 12:
-                    c = "rm4"
+                # each bench: a sunlit sawn top, then its face falling into
+                # shade, a dark undercut where the next block was lifted out
+                c = ("w0", "rm5", "rm4", "rm4", "rm3", "rm3", "rm2", "rm1")[yy]
+                if 2 <= yy <= 5 and K.hp(X, Y, 33) % 9 == 0:
+                    c = "rm5" if yy < 4 else "rm4"
+                if (x + 6 * (y // 8)) % 16 == 11 and yy > 0:
+                    c = "rm1" if yy > 1 else "rm2"
+                elif (x + 6 * (y // 8)) % 16 == 12 and yy > 0:
+                    c = "rm5" if yy < 6 else "rm3"
                 tgt.px(X, Y, c)
         if end == "L":
             for y in range(16):

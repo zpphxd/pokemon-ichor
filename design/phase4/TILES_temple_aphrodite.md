@@ -6,8 +6,11 @@
 
 | Image | Shows |
 |---|---|
+| [`img/temple_aphrodite_gallery.png`](img/temple_aphrodite_gallery.png) | The gallery and, through its doorway, the rose court with Galatea's dais |
 | [`img/temple_aphrodite_pieces.png`](img/temple_aphrodite_pieces.png) | Every structure on its ground |
 | [`img/temple_aphrodite_sheet.png`](img/temple_aphrodite_sheet.png) | The numbered metatile sheet, rendered from the compiled tileset |
+
+![The gallery and, through its doorway, the rose court with Galatea's dais](img/temple_aphrodite_gallery.png)
 
 It is one of the Kythera family of secondaries; see [`TILES_kythera.md`](TILES_kythera.md) for why the art is split and which seams then need aethos-only strips.
 
@@ -62,7 +65,7 @@ hints.
 | bronze | Bronze mirrors, the harbor shrine's dove, the great herm, the Minoan vault door |
 | melos | Melos's obsidian slope on its earth and grass |
 
-**Tile budget.** 210 of 504 tiles (96 metatiles). The door animations copy their
+**Tile budget.** 212 of 504 tiles (96 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 

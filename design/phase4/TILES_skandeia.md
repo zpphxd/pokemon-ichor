@@ -6,8 +6,12 @@
 
 | Image | Shows |
 |---|---|
+| [`img/skandeia_harbor_street.png`](img/skandeia_harbor_street.png) | A 240 x 160 screen of Skandeia's harbor street (3x; `skandeia_harbor_street_1x.png` is 1x) |
+| [`img/skandeia_town.png`](img/skandeia_town.png) | Skandeia: the slipways, the Euploia at the gangplank, the quay, the houses on their terraces |
 | [`img/skandeia_pieces.png`](img/skandeia_pieces.png) | Every structure on its ground |
 | [`img/skandeia_sheet.png`](img/skandeia_sheet.png) | The numbered metatile sheet, rendered from the compiled tileset |
+
+![A 240 x 160 screen of Skandeia's harbor street (3x; `skandeia_harbor_street_1x.png` is 1x)](img/skandeia_harbor_street.png)
 
 It is one of the Kythera family of secondaries; see [`TILES_kythera.md`](TILES_kythera.md) for why the art is split and which seams then need aethos-only strips.
 
@@ -62,7 +66,7 @@ hints.
 | bronze | Bronze mirrors, the harbor shrine's dove, the great herm, the Minoan vault door |
 | melos | Melos's obsidian slope on its earth and grass |
 
-**Tile budget.** 358 of 504 tiles (304 metatiles). The door animations copy their
+**Tile budget.** 370 of 504 tiles (304 metatiles). The door animations copy their
 frames into tiles 504-511 (`DOOR_TILE_START_SIZE1`, `src/field_door.c`), so the build
 fails past 504. Static tiles within two pixels of one another are merged.
 

@@ -560,6 +560,16 @@ def _stack_rows():
     for y in range(13, 18):
         l, r = main[y]
         main[y] = (l, r - (3 - abs(y - 15)))
+    # a craggy crown: twin peaks, the right one lower, a cleft between
+    crown = {2: (19, 25), 3: (17, 27), 4: (15, 28), 5: (12, 30), 6: (11, 32)}
+    for y, (l, r) in crown.items():
+        main[y] = (l, r)
+    for y in (2, 3, 4):
+        main[y] = (main[y][0], main[y][1] - (4 - y))
+    main.pop(2, None)
+    main[3] = (18, 23)
+    main[4] = (15, 25)
+    main[5] = (12, 29)
     comp = {}
     for y in range(30, 47):
         f = (y - 30) / 16
@@ -643,7 +653,7 @@ def aphrodite_rock():
 # wave a little; few joints, so they read as rock, not masonry; a fracture
 # runs down across them; each band is a shade darker than the one above.
 BANDS = [(0, (11,), 0.0, 0), (5, (), 1.7, 1), (10, (5,), 3.1, 0), (13, (), 4.0, 1)]
-FRACTURE = {y: 7 + (1 if y > 8 else 0) for y in range(3, 13)}
+FRACTURE = {y: 7 + (1 if y > 6 else 0) for y in range(4, 9)}
 
 
 def _band_at(x, y):

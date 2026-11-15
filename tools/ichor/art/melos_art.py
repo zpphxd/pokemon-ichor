@@ -319,23 +319,33 @@ def village():
         "k1111111111111",
         ".kkkkkkkkkkkk.",
     ], {"k": "kr0", "3": "kr3", "q": "kq1", "1": "kr1"})
-    # vines: a trellis post and leafy rows (terra posts, green leaves -> two tiles)
+    # vines: two posts, a wire between them, the vine trained along it with
+    # bunches of pale grapes, its shadow on the grass
+    import kythera_land as La
     for (ox, end) in ((32, False), (48, True)):
-        for y in range(2, 14):
+        right = 11 if end else 16
+        for y in range(11, 15):
+            for x in range(1, right):
+                if (x + y) % 2 == 0 or y == 13:
+                    M.px(ox + x, y, "gd" if y > 11 else "g1")
+        for px_ in ((2,) if not end else (2, 10)):
+            for y in range(2, 14):
+                M.px(ox + px_, y, "kt1")
+                M.px(ox + px_ + 1, y, "kt2" if y < 12 else "kt1")
+        canopy = np.zeros((16, 16), bool)
+        for y in range(1, 10):
+            for x in range(0, right):
+                if 2 + 1.5 * math.sin(x / 2.0) <= y <= 8 + math.sin(x / 3.0 + 1):
+                    canopy[y, x] = True
+        tmp = K.Layer(16, 16)
+        La.foliage(tmp, canopy, ("my1", "my1", "my2", "my3"), seed=21 + ox, outline="t0")
+        for y in range(16):
             for x in range(16):
-                if end and x > 10:
-                    continue
-                k = K.h(x, y, 5)
-                c = ("my1", "my2", "my3", "my2")[k % 4]
-                if y in (2, 13):
-                    c = "my1"
-                if k % 13 == 0:
-                    c = "kt1"     # a bunch of dark grapes (bark brown reads as fruit here)
-                M.px(ox + x, y, c)
-        for y in range(14, 16):
-            for x in range(16):
-                if not (end and x > 10):
-                    M.px(ox + x, y, "gd" if (x + y) % 2 else "g1")
+                if tmp.a[y, x, 3]:
+                    M.px(ox + x, y, tmp.get(x, y))
+        for (gx, gy) in ((5, 7), (9, 8), (13, 6)):
+            if gx < right - 1:
+                put(M, ox + gx, gy, ["44", "34", ".3"], {"4": "my4", "3": "my3"})
     # tuff walls
     for cx, end in ((0, "L"), (1, None), (2, "R"), (3, "N"), (4, "S")):
         ox, oy = cx * 16, 16
