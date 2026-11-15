@@ -71,7 +71,7 @@
 #define TRAINER_ICHOR_EXEKIAS                 80
 #define TRAINER_ICHOR_MYRRHINE                81
 #define TRAINER_ICHOR_GRUNT_ROUTE4_LAAS       82
-#define TRAINER_ICHOR_MENALKAS                83
+#define TRAINER_ICHOR_MENALKAS_ISTHMUS             83
 #define TRAINER_ICHOR_PHEIDIPPOS              84
 #define TRAINER_ICHOR_KAPELOS                 85
 // Hecate's Hollow, ids 100-109 (tools/ichor/maps/hecates_hollow.py)

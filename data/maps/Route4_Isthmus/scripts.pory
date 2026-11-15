@@ -343,7 +343,7 @@ movement Route4_Isthmus_Movement_LaasRunsDown { walk_fast_down walk_fast_right *
 movement Route4_Isthmus_Movement_LaasRunsRight { walk_fast_right * 3 walk_fast_down * 4 }
 
 script Route4_Isthmus_EventScript_Menalkas {
-    trainerbattle_single(TRAINER_ICHOR_MENALKAS,
+    trainerbattle_single(TRAINER_ICHOR_MENALKAS_ISTHMUS,
         format("My goats give milk, sparks and opinions."),
         format("Shocking. Truly."))
     setspeaker(Route4_Isthmus_Text_NameMenalkas)
