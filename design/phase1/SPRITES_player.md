@@ -4,22 +4,23 @@ The Unwoven replace Brendan and May in every battle, on the trainer card and in 
 boy-or-girl choice. The files keep Brendan's and May's names, so every code path that reads
 `TRAINER_PIC_BRENDAN` or `TRAINER_PIC_MAY` works with no engine edits.
 
-Source: `tools/ichor/art/sprites_player.py`.
+The four production PNGs are the canonical native sources, pinned by
+`tools/ichor/art/player_sources.json`. They are image-model-led artwork,
+resampled/indexed for the GBA, with retained-model-pixel animation assembly;
+they are **not hand-authored native grids**. Theo's front preserves the approved
+64x64 anchor's index geometry exactly; its disclosed palette adaptation truncates
+channels to BGR555. Ianthe and the companion views have coordinator implementation
+clearance, not separate user artistic acceptance.
 
-**2026-11-15 native pass:** both fronts now lean into an asymmetric stance,
-with smaller hand-painted faces, flared chlamys folds and bent, sandal-laced
-legs. Ianthe's free hand holds her satchel strap. The four back frames keep the
-existing throw path and have a clearer right-facing eye/profile. All five
-battle sheets regenerate exactly with their existing shared palettes.
-The current ROM builds and passes smoke and all three Elaia opening runs,
-including the player choice and Kleon battle. Both player walk/run captures
-also pass. The in-game evidence below belongs to the previous artwork;
-current captures are retained with the Elaia handoff, not substituted into
-the historical comparison.
+The complete 24-PNG/186-frame player checkpoint, frozen image/crop/export replay,
+read-only shared palettes and retained-vehicle contracts are documented in
+[SPRITES_player_ow.md](SPRITES_player_ow.md). The historical battle painter remains
+available to other named-cast drawing helpers; its `--write` command is rejected.
+Old previews and all rejected pilots remain preserved, not silently replaced.
 
 ```bash
-/usr/bin/python3 tools/ichor/art/sprites_player.py --write --preview design/phase1/img
-/usr/bin/python3 tools/ichor/art/sprites_player.py --grids /tmp/grids   # pixel grids for edits
+python3 tools/ichor/art/player_sources.py --check --rom pokeemerald.gba
+bash tools/ichor/tests/player_battle.sh
 ```
 
 ## Files
@@ -36,15 +37,12 @@ This is the shared spec, so the overworld sprites match it.
 
 - A sun-gold straw petasos: a low crown, a wide brim and a brown band.
 - An Aegean-blue chlamys pinned with a gold fibula at the right shoulder. It drapes across the chest, covers the left arm and flares out behind.
-- A cream chiton, belted, with folds. It is knee length on Theo and three pixels longer on Ianthe.
+- A cream chiton, belted, with connected cloth shading.
 - Brown sandals laced up the shin.
 - A terracotta satchel with a brown flap and a gold button, on a strap across the body.
 - Theo has short black hair.
 - Ianthe has dark-brown hair in a low braid with a gold tie. The braid falls over her shoulder in front and down her back behind.
-- **Front poses.**
-  - Theo holds the ball out toward the opponent.
-  - Ianthe raises it beside her shoulder.
-  - Both face left in a 3/4 view, like the cast.
+- Expressive three-quarter faces and asymmetric, readable poses.
 
 ## Back frames
 
@@ -52,28 +50,31 @@ From behind, facing right, cropped at the waist. The throwing arm is the near (l
 
 | Frame | Shows | Played |
 |---|---|---|
-| 0 | Holding the ball at shoulder height | `sAnimCmd_Hoenn`: 0, 1, 2, 0, 3 |
+| 0 | Held grip beside the near-left side of the body | `sAnimCmd_Hoenn`: 0, 1, 2, 0, 3 |
 | 1 | Wind-up: ball raised high, in front of the brim | |
-| 2 | Release: arm swung across, open hand toward the opponent. The leaning body shifts 2 px right. | |
+| 2 | Near-left cross-body release, open hand toward the opponent | |
 | 3 | Rest, empty-handed, arm under the cloak | The battle intro (`sAnim_GeneralFrame3`) |
 
-`sAnimCmd_Point_HGSS` (3, 0, 2, 2, 3) also reads correctly: hold, then the open hand.
+The corrected windup keeps each character's hold head/torso registered and uses
+their own complete held grip/orb. The near-left arm stays the throwing arm in
+every frame. All four frames remain 64x64 in a vertical 64x256 atlas.
+
+`sAnimCmd_Point_HGSS` also reads the sources in order 3, 0, 2, 2, 3.
+The real-loader fixture covers both fronts and all three native back animations:
+idle, Hoenn throw (24/9/24/9/50), and pointing (9/9/24/24/50). It checks exact
+source pixels, full OBJ VRAM, all sixteen live palette words and finite ends:
+160 checks and 24 captures. These are forced engine fixtures, not a natural
+battle playthrough or controller-eligibility claim.
 
 ## Palette
 
-The index layout is the same for both characters. Only `hair_l` differs.
-
-| # | Name | Theo | Ianthe | Use |
-|---|---|---|---|---|
-| 0 | transparent | 112 192 160 | same | |
-| 1 | ink | 32 24 24 | same | Outlines; Theo's hair |
-| 2–4 | skin_l, skin_m, skin_d | 248 208 168 · 224 160 112 · 168 104 72 | same | |
-| 5 | brown | 96 56 40 | same | Leather: sandals, belt, strap, hat band; Ianthe's hair |
-| 6 | hair_l | 72 72 104 | 152 96 64 | Hair sheen |
-| 7–9 | blue_d, blue_m, blue_l | 24 56 120 · 48 104 176 · 112 168 224 | same | Chlamys (master Aegean blue) |
-| 10–12 | gold_d, gold_m, gold_l | 152 96 32 · 208 152 48 · 240 200 88 | same | Petasos, fibula, braid tie |
-| 13–14 | cream_d, cream_l | 200 176 136 · 248 240 216 | same | Chiton; the ball's white half |
-| 15 | terra | 192 80 48 | same | Satchel; the ball's red half |
+Each character has a trainer-local sixteen-color palette, shared by that
+character's front/back only. Index 0 is transparent and all channels are BGR555
+precise. The local `.pal` files and embedded PNG palettes are checked together,
+including the compiled `gTrainerPalette_Brendan`/`May` arrays. These are not the
+shared overworld palettes; no folk, peer-game, ball or other named-cast palette
+is rewritten. The old ASCII painter's role ordering is historical, not the
+current local palette contract.
 
 ## Historical game checks
 
@@ -88,14 +89,17 @@ The index layout is the same for both characters. Only `hair_l` differs.
 3. Open START, then the player's name.
 4. Hold R and press START, then pick Party…, then Start Debug Battle.
 
-## Previews
+## Historical previews
 
 - `design/phase1/img/sprites_player_battle.png`: Kleon, Theo, Ianthe and Ione at 3×, on a battle backdrop.
 - `design/phase1/img/sprites_player_battle_back.png`: back frames 0–3. Theo is on top, Ianthe below.
 - `design/phase1/img/sprites_player_battle_ingame.png`: in-game screenshots at 2×.
 
-The intro's boy-or-girl choice uses the same front pics. Theo was checked there, including the fade-in; Ianthe's side of the choice was not captured.
+The current intro choice still loads these same front sources. Current smoke
+and full real-loader captures accompany the source checkpoint; the image files
+listed above retain their original historical content.
 
 ## Still open
 
-- The overworld sprites are drawn separately from this same spec. Compare the two once both land.
+- Separate user acceptance, parent-owned map-marker/credits surfaces and the
+  broader character rollout are not closed by this player-source checkpoint.

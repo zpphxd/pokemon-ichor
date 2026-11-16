@@ -1,4 +1,4 @@
-"""Native Theo/Ianthe swimming sheets; never writes shared palettes.
+"""Canonical swimming source adapter; legacy --write is rejected.
 
 Four 32x32 source frames: south, north, west and the retained spare east.
 The engine aliases its nine walking image slots onto the first three.
@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 
 import sprites_player_ow as player
+import player_sources
 
 PALETTE = Path(player.PALDIR) / "player_underwater.pal"
 ROLES = {
@@ -117,7 +118,7 @@ def palette():
     return [tuple(int(v) & 0xF8 for v in line.split()) for line in lines[3:19]]
 
 
-def frames(who):
+def legacy_frames(who):
     result = []
     roles = dict(ROLES)
     if who == "ianthe":
@@ -148,6 +149,11 @@ def frames(who):
         result.append(np.array([[roles[ch] for ch in row] for row in rows], dtype=np.uint8))
     result.append(np.fliplr(result[2]).copy())
     return result
+
+
+def frames(who):
+    return [frame.copy() for frame in np.hsplit(
+        np.array(player_sources.source_image(who, "underwater")), 4)]
 
 
 def assets():

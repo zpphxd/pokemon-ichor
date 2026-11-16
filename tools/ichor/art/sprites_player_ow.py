@@ -1,18 +1,14 @@
-"""Theo's and Ianthe's overworld sheets: walking, running, fishing and field move.
+"""Player sheet adapters and historical parts used by other human painters.
 
-They replace Brendan's and May's sheets in graphics/object_events/pics/people/
-brendan/ and may/, and recolor graphics/object_events/palettes/brendan.pal and
-may.pal by role (see design/phase1/SPRITES_player_ow.md).
-
-Every frame is built from hand-edited ASCII parts: a petasos, a face per
-facing and per character, and a body per pose. The parts use role letters,
-which map to each character's palette indices, so one body serves both.
+build() reads canonical indexed player PNGs. Legacy writes are rejected;
+python3 tools/ichor/art/player_sources.py --check verifies their pinned identity.
+Shared palettes are read-only. Historical ASCII parts remain available to
+other named-cast painters, but do not generate the current player anatomy.
 
 Usage:
     python3 tools/ichor/art/sprites_player_ow.py [--write [--sheets NAME ...]] [--preview OUT.png]
 
---write    writes the sheets (default: all four) for both characters, and the
-           two palettes
+--write    retired; rejects protected player PNG/palette writes
 --preview  writes every sheet for both characters at 4x to OUT.png
 """
 import argparse
@@ -24,6 +20,7 @@ from PIL import Image, ImageDraw
 
 sys.path.insert(0, os.path.dirname(__file__))
 from sprites_lib import ROOT, bresenham  # noqa: E402
+import player_sources  # noqa: E402
 
 PEOPLE = os.path.join(ROOT, "graphics/object_events/pics/people")
 PALDIR = os.path.join(ROOT, "graphics/object_events/palettes")
@@ -667,6 +664,7 @@ def to_index(frames, roles):
 
 
 def save_sheet(arr, rgb, path):
+    player_sources.reject_legacy_write(path)
     im = Image.fromarray(arr, "P")
     flat = []
     for c in rgb:
@@ -676,6 +674,7 @@ def save_sheet(arr, rgb, path):
 
 
 def write_pal(rgb, path):
+    player_sources.reject_legacy_write(path)
     with open(path, "w", newline="\r\n") as f:
         f.write("JASC-PAL\n0100\n16\n")
         for c in rgb:
@@ -700,8 +699,7 @@ SHEETS = {'walking': walking, 'running': running, 'fishing': fishing, 'field_mov
 
 
 def build(who):
-    _, rgb, roles = CHARS[who]
-    return {name: to_index(fn(who), roles) for name, fn in SHEETS.items()}
+    return {name: np.array(player_sources.source_image(who, name)) for name in SHEETS}
 
 
 def preview(path, built, k=4):

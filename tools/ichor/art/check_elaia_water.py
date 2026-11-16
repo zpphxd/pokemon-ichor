@@ -36,18 +36,13 @@ def check():
             assert set(array.flat) <= {0, 5, 6, 9, 10, 14, 15}, "shared mount palette roles"
             assert all(np.any(frame == 10) for frame in frames), "saffron flank in every view"
         else:
-            for frame in frames[:2]:
-                arms = np.flatnonzero(np.isin(frame[17], (1, 2, 3, 4)))
-                knees = np.flatnonzero(np.isin(frame[24], (1, 2, 3)))
-                assert arms.min() <= 4 and arms.max() >= 27, "wide bent swimming arms"
-                assert knees.min() <= 9 and knees.max() >= 24, "splayed kicking knees"
-            knee = np.flatnonzero(np.isin(frames[2][23], (1, 2, 3)))
-            ankle = np.flatnonzero(np.isin(frames[2][25], (1, 2, 3)))
-            assert knee.max() >= 27 and ankle.max() < knee.max(), "bent profile kicking leg"
+            # Pose review belongs to the reviewed master, not the old ASCII
+            # painter's particular arm/knee coordinates.
+            assert len(frames) == 4, "south/north/west plus retained dormant east"
     for folder in ("brendan", "may"):
         actual = np.array(Image.open(Path(player.PEOPLE) / folder / "surfing.png"))
-        assert np.array_equal(actual, riders.build(folder)), "accepted rider unchanged"
-    print("PASS: 3 source-exact sheets, 11 distinct native frames, accepted riders intact")
+        assert np.array_equal(actual, riders.build(folder)), "reviewed rider source"
+    print("PASS: 3 source-exact sheets, 11 distinct frames, reviewed riders and unchanged dolphin")
 
 
 def display(array, palette):

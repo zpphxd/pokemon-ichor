@@ -19,7 +19,7 @@ reference is not counted as integrated production art.
 
 | Human group | Assigned surfaces | Current new-style status |
 |---|---|---|
-| Players | Theo/Ianthe fronts and backs; all ten existing state sheets each | Image-model-led redesign in progress; Theo front preview is the approved style anchor, not complete player coverage |
+| Players | Theo/Ianthe fronts and backs; all ten existing state sheets each | Canonical image-model-led PNGs adopted: 24 surfaces / 186 source frames, contact4 backs and retained-vehicle bike assembly; artistic acceptance and dormant-system controller access remain separate |
 | Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Source-backed image-model-led adoption verified: 170 field frames, eight back frames, six live fronts and the intro; Sam/Cami busts remain unrouted |
 | Classes and townsfolk | 22 custom walker sheets and ten custom fronts | Source-backed image-model-led adoption verified: all 199 field states, healer bow, 66 right mirrors and ten fronts; shared palettes and bindings preserved |
 | Active imported class fallbacks | Exekias/Potter, Myrrhine/Initiate F, Pheidippos/Runner | Three parent-owned image-model-led native fronts now replace the active picture bindings; original Hiker, Psychic F and Running Triathlete M sources remain byte-identical |
@@ -64,9 +64,39 @@ states, including east mirrors, rather than treating VRAM alone as display
 evidence. Sam/Cami's two unrouted fronts remain native/source evidence only;
 Daphne's intro duplicate is also visible in smoke. Linked ROM usage is
 23,097,320 bytes / 68.84%, with the accepted legacy players preserved.
-Adopted new-style character surfaces now total 64; the 24 core player and
-four supplemental surfaces remain in progress. All 40 custom NPC sheets
+At that boundary, adopted new-style character surfaces totaled 64; the
+24 core player and four supplemental surfaces remained in progress. All 40 custom NPC sheets
 are source-backed, not all imported people or every character appearance.
+
+The core-player checkpoint adds all 24 Theo/Ianthe PNGs and two trainer-local
+palettes. The indexed production PNGs are the sole native build inputs:
+`python3 tools/ichor/art/player_sources.py --check` is read-only, not a repaint
+or byte-copy writer. The separate frozen v3 replay bundle reconstructs all
+26 outputs from 76 generated-image/original-registration/crop/assembly inputs;
+its archive hash and environment are recorded in `player_sources.json`.
+No duplicate native-master tree was added to the repository. The shared
+legacy writer now protects those 24 paths alongside the existing 32 class
+and 29 named paths, while player-specific gates retain the two local and
+three unchanged shared palettes. Every original lower contact-plane pixel
+and complete extra-vehicle rectangle is retained across all 72 migrated
+bike frames, including transparency and the 24 original skin-fragment
+instances; the checks read actual canonical PNGs, not just legacy painters.
+Contact4's fixed back heads/torsos and own retained grips remain in place.
+The combined parent checkpoint passes 99 scoped regressions, build/smoke
+(nine captures), all five player state fixtures and 27 ELF-resolved
+image/palette arrays. The frozen archive independently reconstructs all
+26 outputs byte-identically in a separate parent replay directory.
+`player_battle.sh` now also checks every opaque native pixel in all 24
+front/back animation captures, beyond source/VRAM agreement. The 238-state
+named and 275-state class full-rendered-pixel galleries and authentic legacy
+sources/compiled aliases still pass. After preserving concurrent difficulty
+changes, the repeated combined boundary also passes the difficulty fixture
+(174 checks / 24 captures). Linked ROM usage is 23,097,544 bytes / 68.84%;
+the smaller isolated child build is not this combined-main ROM.
+New-style source adoption now covers 88 assigned surfaces; the four
+parent-owned marker/credits surfaces remain open. Source reconstruction
+and forced engine-state coverage are not separate user artistic acceptance,
+natural access to retired bikes or other dormant systems, or town completion.
 
 This character-only continuation does not restart Pokemon, prop, field-effect,
 tileset, UI or ball-art generation. Town-by-town production landing still

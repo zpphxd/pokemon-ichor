@@ -1,12 +1,11 @@
-"""Player battle pics: Theo and Ianthe, "the Unwoven" (they replace Brendan and May).
+"""Historical player battle painter and shared named-cast drawing helpers.
+
+Canonical player PNGs are checked by player_sources.py --check. The legacy
+--write command is rejected; reference previews do not reproduce the new art.
 
 Usage: python3 tools/ichor/art/sprites_player.py [--write] [--preview DIR] [--grids DIR]
 
---write   writes the front pics (64x64), the back pics (64x256, four frames)
-          and the shared palettes:
-            graphics/trainers/front_pics/{brendan,may}.png
-            graphics/trainers/back_pics/{brendan,may}.png
-            graphics/trainers/palettes/{brendan,may}.pal
+--write   retired; rejects protected player PNG/palette writes
 --preview writes the 3x review sheets to DIR (design/phase1/img for the
           committed ones): sprites_player_battle.png, the fronts beside Kleon
           and Ione on a battle backdrop, and sprites_player_battle_back.png,
@@ -35,6 +34,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from sprites_lib import (ROOT, Palette, Mat, Fig, save_indexed, to_rgba, battle_bg,  # noqa: E402
                          upscale, palette_report, grid_preview)
 from PIL import Image  # noqa: E402
+import player_sources  # noqa: E402
 
 INK = (32, 24, 24)
 
@@ -443,6 +443,9 @@ def grids(built, out):
 
 def main():
     args = sys.argv[1:]
+    if "--write" in args:
+        player_sources.reject_legacy_write(
+            os.path.join(ROOT, "graphics/trainers/front_pics/brendan.png"))
     pv = args[args.index("--preview") + 1] if "--preview" in args else None
     gd = args[args.index("--grids") + 1] if "--grids" in args else None
     built = {}

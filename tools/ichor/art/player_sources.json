@@ -1,0 +1,1587 @@
+{
+  "schema": 2,
+  "scope": "24 core player PNGs/186 source frames and two trainer-local palettes",
+  "source_convention": "Production indexed PNGs and trainer-local PALs are the sole canonical native build sources. The integrity gate is read-only; source reconstruction uses a separate frozen image/crop/export bundle.",
+  "authorship": "Image-model-led imagery, native resampling/indexing and retained-model-pixel animation assembly, NOT hand-authored native grids.",
+  "approved_theo_anchor_sha256": "eab2845d3ffcd20adee2d63978e504747a37a959625bde9fb1f0b6f1ca20cd7f",
+  "theo_hardware_adaptation": "Approved source index geometry preserved exactly; local RGB channels truncated to BGR555.",
+  "review": "Coordinator native implementation clearance for v4 corrections, contact4 backs and retained-bike v13 assembly; no separate user artistic acceptance, controller eligibility or runtime approval inferred.",
+  "registration": "Theo Mach/Acro source3 and Ianthe watering source1 y+1 mechanical ground registration; no clipping or anatomy painting.",
+  "assets": {
+    "graphics/object_events/pics/people/brendan/walking.png": {
+      "sha256": "45b477172e3f9be2ec4c942eaae532a6beb968d8e56b4ca861b0175058575289",
+      "indices_sha256": "42383c1ab98932d44a18b3d46752d2cb2f6ac77b6c6176699301a8f655de40d1",
+      "size": [
+        144,
+        32
+      ],
+      "frame_size": [
+        16,
+        32
+      ],
+      "source_frames": 9,
+      "identity": "theo",
+      "state": "walking",
+      "palette_role": "brendan",
+      "prior_source_frame_bounds": [
+        [
+          0,
+          10,
+          16,
+          31
+        ],
+        [
+          0,
+          10,
+          16,
+          31
+        ],
+        [
+          0,
+          10,
+          16,
+          31
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/brendan/running.png": {
+      "sha256": "67b284796333c6347278a958a15592eec9b8caa9483fa3f36196da574e60bbd3",
+      "indices_sha256": "4e8a24323bd3e49a9338ca8ee0b3cb14adb9180aa75ff448561e450d5ee28fa0",
+      "size": [
+        144,
+        32
+      ],
+      "frame_size": [
+        16,
+        32
+      ],
+      "source_frames": 9,
+      "identity": "theo",
+      "state": "running",
+      "palette_role": "brendan",
+      "prior_source_frame_bounds": [
+        [
+          0,
+          11,
+          16,
+          31
+        ],
+        [
+          0,
+          11,
+          16,
+          31
+        ],
+        [
+          0,
+          11,
+          16,
+          31
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/brendan/field_move.png": {
+      "sha256": "f9ea3d638329d4b741117c9f34879f4f0fd073f2034f9de6935fbdf15978e4ed",
+      "indices_sha256": "a007aa4d5d0dd1675f8fa0e00ead80aee4ea15e683537b384fcec8a5d60f20da",
+      "size": [
+        160,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 5,
+      "identity": "theo",
+      "state": "field_move",
+      "palette_role": "brendan",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          10,
+          24,
+          31
+        ],
+        [
+          8,
+          10,
+          24,
+          31
+        ],
+        [
+          8,
+          10,
+          24,
+          31
+        ],
+        [
+          2,
+          10,
+          24,
+          31
+        ],
+        [
+          0,
+          1,
+          24,
+          31
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/brendan/fishing.png": {
+      "sha256": "9745ce3d4effb0d0e2aa42ef74298d6818e59adfef9b7290f334b1afb4024728",
+      "indices_sha256": "62cd50e044bddf5af8a272e215d75265447a1ab691a7409ef571d2a73357ddee",
+      "size": [
+        384,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 12,
+      "identity": "theo",
+      "state": "fishing",
+      "palette_role": "brendan",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          4,
+          32,
+          31
+        ],
+        [
+          8,
+          0,
+          24,
+          31
+        ],
+        [
+          0,
+          9,
+          24,
+          31
+        ],
+        [
+          0,
+          11,
+          24,
+          31
+        ],
+        [
+          8,
+          10,
+          24,
+          32
+        ],
+        [
+          8,
+          10,
+          26,
+          32
+        ],
+        [
+          8,
+          5,
+          27,
+          31
+        ],
+        [
+          8,
+          1,
+          24,
+          31
+        ],
+        [
+          8,
+          1,
+          24,
+          31
+        ],
+        [
+          2,
+          6,
+          24,
+          31
+        ],
+        [
+          6,
+          10,
+          24,
+          32
+        ],
+        [
+          8,
+          10,
+          24,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/brendan/surfing.png": {
+      "sha256": "58bb3dab58ab8c46e4cc669c1c02dd485775e5dc558b2d7910bc4c0e18b7b3cb",
+      "indices_sha256": "2b6929798b40d2a84ff51ee925829a704d97ad92ded2c6280e016e44c0d81c99",
+      "size": [
+        192,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 6,
+      "identity": "theo",
+      "state": "surfing",
+      "palette_role": "brendan",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          5,
+          24,
+          26
+        ],
+        [
+          8,
+          3,
+          24,
+          22
+        ],
+        [
+          8,
+          5,
+          24,
+          26
+        ],
+        [
+          8,
+          3,
+          24,
+          22
+        ],
+        [
+          8,
+          5,
+          24,
+          26
+        ],
+        [
+          8,
+          3,
+          24,
+          22
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/brendan/underwater.png": {
+      "sha256": "ff53d178ad3fc54170001cf6f72db564b74c3beda5539f08bb99b712e4663b2a",
+      "indices_sha256": "7e00b28d25f9e0e21b9e7dea014077662307c43ca915e53049def0d06fa6ba6d",
+      "size": [
+        128,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 4,
+      "identity": "theo",
+      "state": "underwater",
+      "palette_role": "player_underwater",
+      "prior_source_frame_bounds": [
+        [
+          3,
+          4,
+          29,
+          29
+        ],
+        [
+          3,
+          4,
+          29,
+          29
+        ],
+        [
+          2,
+          4,
+          29,
+          28
+        ],
+        [
+          3,
+          4,
+          30,
+          28
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/brendan/mach_bike.png": {
+      "sha256": "763353f52b1dcd61406da02fce9e72f6dc822f465e049b23f05a54ca5ce8c5b7",
+      "indices_sha256": "d82dae6e472ec7a0a2d98ae35beddc8d8a0bb8e6f103c48bf6ae8f77de4c1efa",
+      "size": [
+        288,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 9,
+      "identity": "theo",
+      "state": "mach_bike",
+      "palette_role": "brendan",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/brendan/acro_bike.png": {
+      "sha256": "3093c73700afe0147470a5ac6c2244d02ec7bc0963aa8aaa89c5e17e7f5368ae",
+      "indices_sha256": "bc8b644284d2055e361293588d9a91e668633677ce3250b652b8d387062e98b2",
+      "size": [
+        864,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 27,
+      "identity": "theo",
+      "state": "acro_bike",
+      "palette_role": "brendan",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          31
+        ],
+        [
+          8,
+          0,
+          24,
+          29
+        ],
+        [
+          8,
+          5,
+          24,
+          31
+        ],
+        [
+          8,
+          5,
+          24,
+          30
+        ],
+        [
+          8,
+          4,
+          24,
+          31
+        ],
+        [
+          8,
+          1,
+          24,
+          30
+        ],
+        [
+          8,
+          6,
+          24,
+          31
+        ],
+        [
+          8,
+          6,
+          24,
+          30
+        ],
+        [
+          4,
+          6,
+          25,
+          32
+        ],
+        [
+          5,
+          2,
+          24,
+          32
+        ],
+        [
+          5,
+          6,
+          26,
+          32
+        ],
+        [
+          5,
+          6,
+          26,
+          32
+        ],
+        [
+          8,
+          0,
+          24,
+          29
+        ],
+        [
+          8,
+          0,
+          24,
+          29
+        ],
+        [
+          8,
+          1,
+          24,
+          30
+        ],
+        [
+          8,
+          1,
+          24,
+          30
+        ],
+        [
+          5,
+          2,
+          24,
+          32
+        ],
+        [
+          5,
+          2,
+          24,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/brendan/watering.png": {
+      "sha256": "e9b97a425396efc9692fb7086b54648e4c26384c1a9b3718393023bdb9df002b",
+      "indices_sha256": "95d3fc13d46e6d94da65b83d40aa71477f7c21c505206864a5c243e7513484e1",
+      "size": [
+        192,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 6,
+      "identity": "theo",
+      "state": "watering",
+      "palette_role": "brendan",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          10,
+          31,
+          31
+        ],
+        [
+          8,
+          10,
+          31,
+          32
+        ],
+        [
+          8,
+          10,
+          31,
+          31
+        ],
+        [
+          8,
+          10,
+          31,
+          32
+        ],
+        [
+          0,
+          10,
+          24,
+          31
+        ],
+        [
+          0,
+          10,
+          24,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/brendan/decorating.png": {
+      "sha256": "8004bfcc24b5552c15dede3bf61bea811290659326c7f88a8c96eed632feaed8",
+      "indices_sha256": "155a4596feac095372fb91846fa030a22bb6e29e8804cf49fdab64fac94b7e11",
+      "size": [
+        16,
+        32
+      ],
+      "frame_size": [
+        16,
+        32
+      ],
+      "source_frames": 1,
+      "identity": "theo",
+      "state": "decorating",
+      "palette_role": "brendan",
+      "prior_source_frame_bounds": [
+        [
+          0,
+          13,
+          16,
+          31
+        ]
+      ]
+    },
+    "graphics/trainers/front_pics/brendan.png": {
+      "sha256": "b15442562fb2530966d1df35b16d0da246c5e3ec76af89bc2b3e8419ce069df9",
+      "indices_sha256": "e4287ed4ea5a7db486cbf0eeb2e95e4ca7abd4486acfffd4ecad93807c408a01",
+      "size": [
+        64,
+        64
+      ],
+      "frame_size": [
+        64,
+        64
+      ],
+      "source_frames": 1,
+      "identity": "theo",
+      "state": "battle_front",
+      "palette_role": "trainer-local-brendan",
+      "prior_source_frame_bounds": [
+        [
+          4,
+          2,
+          61,
+          61
+        ]
+      ]
+    },
+    "graphics/trainers/back_pics/brendan.png": {
+      "sha256": "537a3b42d4582c87c24e6a4aa01d9d1d92ff17409083254b58cedae099201ab7",
+      "indices_sha256": "73b897f58ae5659142a02ab17b24a9afbfb17504c7879a291f5171393d2a3301",
+      "size": [
+        64,
+        256
+      ],
+      "frame_size": [
+        64,
+        64
+      ],
+      "source_frames": 4,
+      "identity": "theo",
+      "state": "battle_back",
+      "palette_role": "trainer-local-brendan",
+      "prior_source_frame_bounds": [
+        [
+          3,
+          7,
+          60,
+          64
+        ],
+        [
+          4,
+          7,
+          60,
+          64
+        ],
+        [
+          5,
+          7,
+          63,
+          64
+        ],
+        [
+          5,
+          7,
+          60,
+          64
+        ]
+      ]
+    },
+    "graphics/trainers/palettes/brendan.pal": {
+      "sha256": "f2e8994e3fe9760f6410222b5fc5685b160ba5237fec5637890d075f27b1ba17",
+      "identity": "theo",
+      "type": "trainer-local-palette"
+    },
+    "graphics/object_events/pics/people/may/walking.png": {
+      "sha256": "3fe24a8bc6fcaa79934096068a2f669f3bcc8749981e3245b94edfa8ca1ef17d",
+      "indices_sha256": "a6a0e983bbb17ca1218d07575a1464606c21be98cbe33be321fa21ac4f6b0c0a",
+      "size": [
+        144,
+        32
+      ],
+      "frame_size": [
+        16,
+        32
+      ],
+      "source_frames": 9,
+      "identity": "ianthe",
+      "state": "walking",
+      "palette_role": "may",
+      "prior_source_frame_bounds": [
+        [
+          0,
+          10,
+          16,
+          31
+        ],
+        [
+          0,
+          10,
+          16,
+          31
+        ],
+        [
+          0,
+          10,
+          16,
+          31
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ],
+        [
+          0,
+          11,
+          16,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/may/running.png": {
+      "sha256": "0dfb0ca139c490566d7a1e50c788a2cf31e3b5c131a23b2427623cbc8934a5ec",
+      "indices_sha256": "ebbfb7f10fd5f3b726633b4b1127ae5483c563f04fb9fbeb9d837a1c7f5a898b",
+      "size": [
+        144,
+        32
+      ],
+      "frame_size": [
+        16,
+        32
+      ],
+      "source_frames": 9,
+      "identity": "ianthe",
+      "state": "running",
+      "palette_role": "may",
+      "prior_source_frame_bounds": [
+        [
+          0,
+          11,
+          16,
+          31
+        ],
+        [
+          0,
+          11,
+          16,
+          31
+        ],
+        [
+          0,
+          11,
+          16,
+          31
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ],
+        [
+          0,
+          12,
+          16,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/may/field_move.png": {
+      "sha256": "d1740e7673ba6e7c75765720092119d0fc2e9f5507f3d631c2e8c3a5c15bbac8",
+      "indices_sha256": "298cbc9ac3cb42b1244c8c1137a3d880175ae890882c3d60d8be0477d4cd967f",
+      "size": [
+        160,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 5,
+      "identity": "ianthe",
+      "state": "field_move",
+      "palette_role": "may",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          10,
+          24,
+          31
+        ],
+        [
+          8,
+          10,
+          24,
+          31
+        ],
+        [
+          8,
+          10,
+          24,
+          31
+        ],
+        [
+          2,
+          10,
+          24,
+          31
+        ],
+        [
+          0,
+          1,
+          24,
+          31
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/may/fishing.png": {
+      "sha256": "4c37a08ad14f4dad343ff1fd3a9faf61a4dd9e7bcce8e1936dbdbe357ee934d0",
+      "indices_sha256": "eb9928113d40ed6e1cd727e347acd38b153f5d2ed4d67dd087fd4f2be28b7287",
+      "size": [
+        384,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 12,
+      "identity": "ianthe",
+      "state": "fishing",
+      "palette_role": "may",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          4,
+          32,
+          31
+        ],
+        [
+          8,
+          0,
+          24,
+          31
+        ],
+        [
+          0,
+          9,
+          24,
+          31
+        ],
+        [
+          0,
+          11,
+          24,
+          31
+        ],
+        [
+          8,
+          10,
+          24,
+          32
+        ],
+        [
+          8,
+          10,
+          26,
+          32
+        ],
+        [
+          8,
+          5,
+          27,
+          31
+        ],
+        [
+          8,
+          1,
+          24,
+          31
+        ],
+        [
+          8,
+          1,
+          24,
+          31
+        ],
+        [
+          2,
+          6,
+          24,
+          31
+        ],
+        [
+          6,
+          10,
+          24,
+          32
+        ],
+        [
+          8,
+          10,
+          24,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/may/surfing.png": {
+      "sha256": "079e3e5a89ec67b6d0058e6347bdb9ff5ad5cd71c649a35decda7f9d2a179fcc",
+      "indices_sha256": "d2ada7ed311fc71ab4a5204785a917e80c23a350f44d379e3b4ce0a6c57a5c15",
+      "size": [
+        192,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 6,
+      "identity": "ianthe",
+      "state": "surfing",
+      "palette_role": "may",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          5,
+          24,
+          26
+        ],
+        [
+          8,
+          3,
+          24,
+          22
+        ],
+        [
+          8,
+          5,
+          24,
+          26
+        ],
+        [
+          8,
+          3,
+          24,
+          22
+        ],
+        [
+          8,
+          5,
+          24,
+          26
+        ],
+        [
+          8,
+          3,
+          24,
+          22
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/may/underwater.png": {
+      "sha256": "4b230f47634dcf46b12f97e9f33110c6287dcbeb7d21a8930f2a003d1bce1c98",
+      "indices_sha256": "8ad059673746ebe8a339bdff882e0269161a85211e1247a53e45cad736ec331e",
+      "size": [
+        128,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 4,
+      "identity": "ianthe",
+      "state": "underwater",
+      "palette_role": "player_underwater",
+      "prior_source_frame_bounds": [
+        [
+          3,
+          4,
+          29,
+          29
+        ],
+        [
+          3,
+          4,
+          29,
+          29
+        ],
+        [
+          2,
+          4,
+          29,
+          28
+        ],
+        [
+          3,
+          4,
+          30,
+          28
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/may/mach_bike.png": {
+      "sha256": "91f4ec59bc8b0f13d57a46edfed856b56400e60a853a142cfd1eb0292ab85c09",
+      "indices_sha256": "70ad8f7b57cd54fbbc194a8d3a4db312f80fc510df3535b9328524496faf181a",
+      "size": [
+        288,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 9,
+      "identity": "ianthe",
+      "state": "mach_bike",
+      "palette_role": "may",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/may/acro_bike.png": {
+      "sha256": "b6687c63108982388ac3f4a16270c169a4696b2333ea0d33e1c4744a0c274cad",
+      "indices_sha256": "c36398e126ee4d7dc6a0b9353ed1d09220f986e5905a5882a0477bb1be8fddb9",
+      "size": [
+        864,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 27,
+      "identity": "ianthe",
+      "state": "acro_bike",
+      "palette_role": "may",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          4,
+          6,
+          26,
+          32
+        ],
+        [
+          8,
+          4,
+          24,
+          31
+        ],
+        [
+          8,
+          0,
+          24,
+          29
+        ],
+        [
+          8,
+          5,
+          24,
+          31
+        ],
+        [
+          8,
+          5,
+          24,
+          30
+        ],
+        [
+          8,
+          4,
+          24,
+          31
+        ],
+        [
+          8,
+          1,
+          24,
+          30
+        ],
+        [
+          8,
+          6,
+          24,
+          31
+        ],
+        [
+          8,
+          6,
+          24,
+          30
+        ],
+        [
+          4,
+          6,
+          25,
+          32
+        ],
+        [
+          5,
+          2,
+          24,
+          32
+        ],
+        [
+          5,
+          6,
+          26,
+          32
+        ],
+        [
+          5,
+          6,
+          26,
+          32
+        ],
+        [
+          8,
+          0,
+          24,
+          29
+        ],
+        [
+          8,
+          0,
+          24,
+          29
+        ],
+        [
+          8,
+          1,
+          24,
+          30
+        ],
+        [
+          8,
+          1,
+          24,
+          30
+        ],
+        [
+          5,
+          2,
+          24,
+          32
+        ],
+        [
+          5,
+          2,
+          24,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/may/watering.png": {
+      "sha256": "6dffbd49609e1a2f5ea04a60047b4f36bac639258669a3bfc3105dc4af6f2f73",
+      "indices_sha256": "04d79043be44f4a5b10922f63412b02b111b08c48a61064364b9458fd363bf44",
+      "size": [
+        192,
+        32
+      ],
+      "frame_size": [
+        32,
+        32
+      ],
+      "source_frames": 6,
+      "identity": "ianthe",
+      "state": "watering",
+      "palette_role": "may",
+      "prior_source_frame_bounds": [
+        [
+          8,
+          10,
+          31,
+          31
+        ],
+        [
+          8,
+          10,
+          31,
+          32
+        ],
+        [
+          8,
+          10,
+          31,
+          31
+        ],
+        [
+          8,
+          10,
+          31,
+          32
+        ],
+        [
+          0,
+          10,
+          24,
+          31
+        ],
+        [
+          0,
+          10,
+          24,
+          32
+        ]
+      ]
+    },
+    "graphics/object_events/pics/people/may/decorating.png": {
+      "sha256": "02d53b0a0018fa14a4056eff069c4988fba92c56ca76cef0671d57105501ae19",
+      "indices_sha256": "8efd36b8ffc5feed015d999530d8b50e4477e6e8ac7396feacf8db216a74325c",
+      "size": [
+        16,
+        32
+      ],
+      "frame_size": [
+        16,
+        32
+      ],
+      "source_frames": 1,
+      "identity": "ianthe",
+      "state": "decorating",
+      "palette_role": "may",
+      "prior_source_frame_bounds": [
+        [
+          0,
+          13,
+          16,
+          31
+        ]
+      ]
+    },
+    "graphics/trainers/front_pics/may.png": {
+      "sha256": "4b3a8ce1df3f4686a5957600013f2c4ddc55d26516feed13c8a9cf0c0b08f08c",
+      "indices_sha256": "def0f77a7370fed006fbb3dd104bce87456cdbd7a57a05535ad2b6ad320f00e3",
+      "size": [
+        64,
+        64
+      ],
+      "frame_size": [
+        64,
+        64
+      ],
+      "source_frames": 1,
+      "identity": "ianthe",
+      "state": "battle_front",
+      "palette_role": "trainer-local-may",
+      "prior_source_frame_bounds": [
+        [
+          10,
+          2,
+          61,
+          61
+        ]
+      ]
+    },
+    "graphics/trainers/back_pics/may.png": {
+      "sha256": "4217fbbd09955cfa18c222aa4630fc383dd29cb137cc30a2ccea3efaaa690b79",
+      "indices_sha256": "3e20da55fd8230a0672cf86eac00b0fcf05144576347a4574b27c8c7dc8d9530",
+      "size": [
+        64,
+        256
+      ],
+      "frame_size": [
+        64,
+        64
+      ],
+      "source_frames": 4,
+      "identity": "ianthe",
+      "state": "battle_back",
+      "palette_role": "trainer-local-may",
+      "prior_source_frame_bounds": [
+        [
+          3,
+          7,
+          60,
+          64
+        ],
+        [
+          4,
+          7,
+          60,
+          64
+        ],
+        [
+          5,
+          7,
+          63,
+          64
+        ],
+        [
+          5,
+          7,
+          60,
+          64
+        ]
+      ]
+    },
+    "graphics/trainers/palettes/may.pal": {
+      "sha256": "a6c6baab0cf5e26cfd8acc868fb4bce460d5e56f5bb603d92df876a5f68b4a33",
+      "identity": "ianthe",
+      "type": "trainer-local-palette"
+    }
+  },
+  "read_only_shared_palettes": {
+    "graphics/object_events/palettes/brendan.pal": "0768f162f8af1c2957c2b67968d91aeaaa035685be01be415f10bf85257282d3",
+    "graphics/object_events/palettes/may.pal": "e7e6719a0c8bca2afec042ec55f55e2e2374f4a5d467fa63c7049428ccdd883a",
+    "graphics/object_events/palettes/player_underwater.pal": "e44f1169fe3908e029bc22b3176ce675d51956bd946b08b275f3d39d9ba29667"
+  },
+  "excluded": "Parent-owned two map markers/four scene2 appearances;22 genuine RS/FRLG sources; other named cast, Pokemon and ball art.",
+  "native_frame_total": 186,
+  "prior_painter_contract": "Every original contact-plane and full VEHICLE_EXTRAS pixel remains exact, including transparency and24 recorded source-skin fragment instances. Obsolete ASCII-face assertions are replaced by pinned canonical identity and portable source reconstruction. No controller, timing or eligibility change.",
+  "reproduction_bundle": {
+    "archive": "portable-player-sources-v3.zip",
+    "sha256": "285e4602c9b7151855d6a3fb47ca39869945b2a463a3331e106c68a53fbbb687",
+    "bytes": 34655256,
+    "inputs": 76,
+    "command": "python3 replay.py --output /absolute/path/to/new-replay",
+    "network_required": false,
+    "provenance": "Frozen generated image/crop/export sources plus original registration PNGs and original retained vehicle bases;26 outputs reconstructed independently byte-identically. Local PAL text uses repository-required CRLF."
+  }
+}

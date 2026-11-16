@@ -8,17 +8,130 @@ Theo and Ianthe replace Brendan and May in the overworld. They share one design,
 
 Theo has short black hair. Ianthe has dark-brown hair to the jaw and a low braid tied with terracotta. The braid shows down her back and behind her neck in the side view.
 
-## Sheets
+## Current image-model source checkpoint
 
-The source is `tools/ichor/art/sprites_player_ow.py`. Every frame is built from hand-edited ASCII parts: a petasos, a face per facing and per character, and a body per pose. The parts use role letters (skin, chlamys, chiton and so on), so one body serves both characters.
+The **24 production PNGs / 186 source frames** are the sole canonical native
+build inputs, pinned by `tools/ichor/art/player_sources.json`. No duplicate native
+master tree or byte-copy `--write` producer is needed. The fronts, four-frame
+backs, and all ten existing state atlases per character are image-model-led,
+with deterministic cropping, registration, indexing and selected-model-pixel
+limb assembly. They are not the rejected ASCII/native-grid pilots.
 
+| Per character | Dimensions | Source frames |
+|---|---|---|
+| Battle front / back | 64x64 / 64x256 | 1 / 4 |
+| Walking / running | 144x32 each | 9 / 9 |
+| Field move / fishing | 160x32 / 384x32 | 5 / 12 |
+| Surfing / underwater | 192x32 / 128x32 | 6 / 4 |
+| Mach / Acro bike | 288x32 / 864x32 | 9 / 27 |
+| Watering / decorating | 192x32 / 16x32 | 6 / 1 |
+
+Source-frame counts, ordering, palette bindings, east mirrors, relative-frame
+tables, controllers and availability remain unchanged. Walk/run phases alternate;
+north Acro views show the rear of the head/cape; fishing shafts stay continuous
+and distinct from fine line; Theo's north-watering jug stays on its held side.
+Ground registration restores Theo bike source3 and Ianthe watering source1 by
+one unclipped pixel; source images/evidence from before those shifts remain frozen.
+Underwater source3 stays a dormant spare; the engine still aliases only 0/1/2.
+
+The four bike atlases preserve **every original contact-plane and complete
+`VEHICLE_EXTRAS` rectangle**, including transparent pixels and the 24 recorded
+original skin-fragment instances. Explicit selections remove the model's own
+vehicle geometry above those planes; six retained-model forearms register the
+wheelie grips without changing head/torso pixels. The exact original bases and
+selection/registration recipe are frozen with the image-source bundle. Actual
+canonical PNGs, not the historical `legacy_frames()`, are checked against these
+invariants. Bikes remain retired.
+
+The three overworld palettes (`brendan`, `may`, `player_underwater`) are
+byte-identical and read-only. Underwater PNGs embed the existing palette's
+hardware-truncated display colors. Theo's cape avoids palette index7 so the
+May-palette `LinkBrendan` alias stays compatible. Only the two trainer-local
+front/back palettes change; other cast, balls and authentic RS/FRLG identities
+remain untouched.
+
+The portable frozen **`portable-player-sources-v3.zip`** accompanies the batch
+evidence: 76 hashed generated-image/original-registration/recipe inputs, no live
+model or repository dependency. Its SHA256 is
+`285e4602c9b7151855d6a3fb47ca39869945b2a463a3331e106c68a53fbbb687`
+(34,655,256 bytes). It independently reconstructs all 24 native PNGs and two
+local palettes byte-identically, including retained-bike assembly. Pillow/NumPy
+are the existing sprite-tool dependencies; no network is used. Local PAL text
+uses the repository's required CRLF so hashes also survive a fresh Git checkout.
+The verified replay environment is Python 3.9.6, Pillow 11.3.0, NumPy 2.0.2 and
+zlib 1.2.12; frozen output hashes explicitly detect codec/export differences.
+
+```bash
+# In the extracted portable bundle; OUTPUT must not already exist:
+python3 replay.py --output /absolute/path/to/new-replay
+
+# Read-only canonical, independent replay and ELF-resolved ROM checks:
+python3 tools/ichor/art/player_sources.py --check --rom pokeemerald.gba
+python3 tools/ichor/art/player_sources.py --check --replay-dir /absolute/path/to/new-replay/native
+python3 tools/ichor/art/player_sources.py --check --source-bundle /path/to/portable-player-sources-v3.zip
+python3 tools/ichor/art/player_bikes.py --check
+python3 tools/ichor/art/player_unused.py --check
+python3 tools/ichor/art/check_elaia_water.py
 ```
-python3 tools/ichor/art/sprites_player_ow.py --write            # all sheets and both palettes
-python3 tools/ichor/art/sprites_player_ow.py --write --sheets walking
-python3 tools/ichor/art/sprites_player_ow.py --preview design/phase1/img/sprites_player_ow.png
+
+The ROM check resolves 27 required image/palette arrays from the matching ELF,
+including concatenated walk/run atlases and compressed trainer fronts. Missing
+symbols, wrong sizes, out-of-ROM ranges and differing bytes fail explicitly.
+Legacy repaint commands below **must fail**, leaving all canonical PNGs/PALs
+unchanged. The parent-installed shared `sprites_lib.save_indexed` guard also
+rejects all 24 player PNG paths without weakening the class/named guards.
+
+```bash
+python3 tools/ichor/art/sprites_player.py --write
+python3 tools/ichor/art/sprites_player_ow.py --write
+python3 tools/ichor/art/player_bikes.py --write
+python3 tools/ichor/art/player_unused.py --write
+python3 tools/ichor/art/player_underwater.py --write
+python3 tools/ichor/art/surf_poses.py --write
 ```
 
-## Review images
+Current forced-renderer fixtures cover real loaders/tables, frame transfers,
+palettes and mirrors, not natural access to dormant systems:
+
+```bash
+bash tools/ichor/tests/player_battle.sh   # 160 checks / 24 captures
+bash tools/ichor/tests/player_bikes.sh    # 7,481 / 736
+bash tools/ichor/tests/player_unused.sh   # 242 / 34
+bash tools/ichor/tests/elaia_water.sh     # 13,448 / 320
+bash tools/ichor/tests/elaia_effects.sh   # 538 / 229
+```
+
+The parent-installed `player_battle_render.py` gate additionally requires all
+24 captured trainer states to display every opaque native pixel unobscured,
+using the source's RGB5-expanded colors and the shared rendered-pixel matcher.
+
+The 736 paired bike captures keep identical OAM anchors and rendered lower
+contact planes. All opaque original vehicle/extras pixels match their expected
+hardware colors; source/VRAM checks also preserve original transparent pixels.
+Unlike the earlier four-bike-only fixture, unrelated-screen comparison excludes
+the stationary player's explicitly changed 16x32 OBJ as well as the tested bike.
+Prior production did not preserve every transparent extras pixel, so the exact
+original bases, not that older compositor, define the full extras contract.
+
+Both genders also have natural player-controller walk/run captures in the
+bedroom (fixture-selected gender/running shoes), plus the nine-capture smoke.
+The isolated player-child build used 23,038,656 ROM bytes (68.66%). Full 1x/integer-zoom source
+and actual-ROM comparisons accompany the handoff; old cards/pilots are immutable.
+Coordinator implementation clearance is not separate user artistic acceptance,
+runtime/controller eligibility, or whole-character/town completion. The marker
+pair and two seven-frame credits sources are explicitly parent-owned: four
+surfaces, not six. Credits' opposite-gender companion reuses the first four
+frames of those same sources; the separate normal-intro sheets are link-discarded
+and retained, not two additional active replacements.
+
+## Historical source and review checkpoints
+
+The sections below record earlier artwork and evidence. Their old `--write`
+commands are historical and now reject protected paths; ASCII helpers remain
+for other named-cast painters, not current player anatomy. The authentic legacy
+retention partition/checker remains current and unchanged.
+
+## Historical review images
 
 | Image | Shows |
 |---|---|

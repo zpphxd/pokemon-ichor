@@ -3,16 +3,15 @@
 Usage:
     python3 tools/ichor/art/surf_poses.py [--write]
 
---write    rewrites graphics/object_events/pics/people/brendan/surfing.png
-           (Theo) and may/surfing.png (Ianthe)
+--write    retired; rejects protected player PNG writes
 
 Six frames, Emerald's layout: 0 south sitting, 1 south hopping on or off,
 2 north sitting, 3 north hopping, 4 west sitting, 5 west hopping (east is west
 mirrored in game). The rider sits astride the surf mount (field_effects.py
 draws the dolphin under it), shins down its flanks.
 
-The petasos, faces and role letters come from sprites_player_ow.py, so the
-riders are the same Theo and Ianthe as on foot, in the same palettes.
+build() reads the canonical model-led sprites. The historical drawing parts
+remain reference helpers, not the current art producer.
 """
 import os
 import sys
@@ -21,6 +20,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
 import sprites_player_ow as P  # noqa: E402
+import player_sources  # noqa: E402
 
 # Seated bodies, in sprites_player_ow role letters (k ink, s S d skin, c C D
 # chlamys, w W chiton, y Y straw, t T terracotta, b brown). They start on the
@@ -118,8 +118,7 @@ def frames(who):
 def build(sheet):
     """sheet: 'brendan' (Theo) or 'may' (Ianthe) -> 32x192 index array."""
     who = {'brendan': 'theo', 'may': 'ianthe'}[sheet]
-    _, rgb, roles = P.CHARS[who]
-    return P.to_index(frames(who), roles)
+    return np.array(player_sources.source_image(who, "surfing"))
 
 
 def main():

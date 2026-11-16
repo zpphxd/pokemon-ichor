@@ -1,8 +1,7 @@
-"""Native riders for four retained bike atlases; bikes stay unavailable.
+"""Source adapters for four rider-only bike redraws; bikes stay unavailable.
 
-The private base atlases preserve the existing bicycle/contact pixels. Each
-frame's vehicle plane is explicit; every pixel above it is authored from the
-accepted identity parts and riding bodies, not recolored upstream riders.
+The original contact planes and VEHICLE_EXTRAS remain exact, including transparent
+pixels. Image-led rider assembly does not authorize replacement vehicle geometry.
 """
 import argparse
 import re
@@ -12,6 +11,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 import sprites_player_ow as player
+import player_sources
 
 BASE = Path(__file__).parent / "base/player_bikes"
 FOLDERS = {"theo": "brendan", "ianthe": "may"}
@@ -101,7 +101,7 @@ def vehicle(who, bike):
     return result
 
 
-def frames(who, bike):
+def legacy_frames(who, bike):
     specs = NORMAL if bike == "mach_bike" else ACRO
     result = []
     roles = player.CHARS[who][2]
@@ -134,6 +134,12 @@ def frames(who, bike):
     return result
 
 
+def frames(who, bike):
+    count = 9 if bike == "mach_bike" else 27
+    return [frame.copy() for frame in np.hsplit(
+        np.array(player_sources.source_image(who, bike)), count)]
+
+
 def check():
     for who in FOLDERS:
         for bike, count in (("mach_bike", 9), ("acro_bike", 27)):
@@ -149,11 +155,20 @@ def check():
             hardware = [[int(v) // 8 * 8 for v in line.split()]
                         for line in palfile.read_text().splitlines()[3:]]
             assert hardware == [list(c) for c in palette(who)], "existing hardware palette identity"
+            _, contract = player_sources.asset(who, bike)
+            original = np.array(Image.open(BASE / f"{who}_{bike}.png"))
             specs = NORMAL if bike == "mach_bike" else ACRO
-            for frame, original, (_, plane, _, _) in zip(frames(who, bike), vehicle(who, bike), specs):
-                assert np.array_equal(frame[plane:], original[plane:]), "retained bicycle"
-                assert np.any(frame[:plane]) and np.any(frame == 0)
-    print("PASS: four source-exact indexed atlases, 72 frames, retained bicycle contact planes")
+            for index, (frame, bounds, (_, plane, _, _)) in enumerate(zip(
+                    frames(who, bike), contract["prior_source_frame_bounds"], specs)):
+                assert np.nonzero(frame)[0].max() + 1 == bounds[3], "original ground anchor"
+                assert np.any(frame == 0)
+                retained = original[:, index * 32:(index + 1) * 32]
+                assert np.array_equal(frame[plane:], retained[plane:]), (
+                    who, bike, index, "retained vehicle contact plane")
+                for x0, y0, x1, y1 in VEHICLE_EXTRAS.get(index, []):
+                    assert np.array_equal(frame[y0:y1, x0:x1], retained[y0:y1, x0:x1]), (
+                        who, bike, index, "retained VEHICLE_EXTRAS", (x0, y0, x1, y1))
+    print("PASS: four source-exact indexed atlases, 72 frames, exact vehicle planes/extras")
 
 
 def rgba(array, colors):

@@ -1,6 +1,7 @@
-"""Native Theo/Ianthe artwork for the existing, unused watering/decorating states.
+"""Canonical watering/decorating source adapter and historical drawing parts.
 
-Writes only four PNGs; shared player palettes and gameplay remain untouched.
+--check validates the four PNGs. Legacy --write is rejected; shared palettes
+and unused-system eligibility remain untouched.
 """
 import argparse
 from pathlib import Path
@@ -9,6 +10,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 import sprites_player_ow as player
+import player_sources
 
 
 WATER_BODY = {
@@ -128,9 +130,9 @@ SHEETS = {"watering": watering, "decorating": decorating}
 
 def build():
     return {
-        (who, name): player.to_index(make(who), roles)
-        for who, (_, _, roles) in player.CHARS.items()
-        for name, make in SHEETS.items()
+        (who, name): np.array(player_sources.source_image(who, name))
+        for who in player.CHARS
+        for name in SHEETS
     }
 
 
