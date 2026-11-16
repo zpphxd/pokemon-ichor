@@ -2,6 +2,7 @@
 import importlib.util
 import io
 import json
+import subprocess
 import tempfile
 import unittest
 from contextlib import redirect_stderr
@@ -201,6 +202,83 @@ class SpriteAuditTest(unittest.TestCase):
         snapshot = {"schema_version": 1, "assets": [asset, asset]}
         with self.assertRaisesRegex(ValueError, "duplicate inventory asset"):
             audit.inventory_changes(snapshot, snapshot)
+
+    def reference_repo(self, graphics=True):
+        maps = self.root / "data/maps"
+        maps.mkdir(parents=True)
+        (maps / "map_groups.json").write_text(json.dumps({"group_order": []}))
+        if graphics:
+            self.image("graphics/pokemon/same.png")
+            self.image("graphics/pokemon/changed.png")
+            self.image("graphics/pokemon/removed.png")
+            self.pal("graphics/pokemon/same.pal")
+        (self.root / ".gitattributes").write_text("*.pal text eol=crlf\n")
+        subprocess.run(["git", "init", "--quiet", str(self.root)], check=True)
+        subprocess.run(["git", "-C", str(self.root), "add", "."], check=True,
+                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.run([
+            "git", "-C", str(self.root), "-c", "user.name=Sprite Test",
+            "-c", "user.email=sprite-test@example.invalid", "-c", "commit.gpgsign=false",
+            "commit", "--quiet", "-m", "reference",
+        ], check=True)
+
+    def test_provenance_covers_changed_added_removed_and_canonical_palettes(self):
+        self.reference_repo()
+        same = self.root / "graphics/pokemon/same.pal"
+        same.write_bytes(same.read_bytes().replace(b"\n", b"\r\n"))
+        changed = self.root / "graphics/pokemon/changed.png"
+        with Image.open(changed) as image:
+            image.putpixel((2, 2), 1)
+            image.save(changed, transparency=0)
+        (self.root / "graphics/pokemon/removed.png").unlink()
+        self.image("graphics/pokemon/added.png")
+        result = audit.provenance(self.root, "HEAD")
+        self.assertEqual(result["relations"], {
+            "current_only": 1, "reference_identical": 2, "source_different": 1,
+        })
+        self.assertEqual(result["reference_only"], ["graphics/pokemon/removed.png"])
+        assets = {asset["path"]: asset for asset in result["assets"]}
+        self.assertEqual(assets["graphics/pokemon/same.pal"]["sha256"],
+                         audit.hashlib.sha256(same.read_bytes()).hexdigest())
+        self.assertEqual(assets["graphics/pokemon/same.pal"]["source_git_oid"],
+                         assets["graphics/pokemon/same.pal"]["reference_git_oid"])
+        self.assertIsNone(assets["graphics/pokemon/added.png"]["reference_git_oid"])
+        self.assertEqual(len(result["reference_commit"]), 40)
+
+    def test_provenance_rejects_missing_reference(self):
+        self.reference_repo()
+        with self.assertRaises(ValueError):
+            audit.provenance(self.root, "missing-reference")
+
+    def test_provenance_rejects_reference_without_graphics(self):
+        self.reference_repo(graphics=False)
+        with self.assertRaisesRegex(ValueError, "no graphics PNG/palette reference sources"):
+            audit.provenance(self.root, "HEAD")
+
+    def test_provenance_rejects_symlinked_source(self):
+        self.reference_repo()
+        path = self.root / "graphics/pokemon/alias.png"
+        path.symlink_to("same.png")
+        with self.assertRaisesRegex(ValueError, "regular file"):
+            audit.provenance(self.root, "HEAD")
+
+    def test_provenance_rejects_mid_inventory_source_drift(self):
+        self.reference_repo()
+        snapshot = audit.inventory(self.root)
+        self.pal("graphics/pokemon/same.pal").write_text("changed")
+        with patch.object(audit, "inventory", return_value=snapshot):
+            with self.assertRaisesRegex(ValueError, "source changed during inventory"):
+                audit.provenance(self.root, "HEAD")
+
+    def test_provenance_cli_reports_reference_error(self):
+        self.reference_repo()
+        errors = io.StringIO()
+        with patch.object(audit.sys, "argv", [
+                "sprite_audit", "--root", str(self.root), "provenance",
+                "--reference", "missing-reference"]):
+            with redirect_stderr(errors):
+                self.assertEqual(audit.main(), 1)
+        self.assertIn("SPRITE FAIL:", errors.getvalue())
 
 
 if __name__ == "__main__":

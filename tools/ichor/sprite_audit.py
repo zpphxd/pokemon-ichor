@@ -3,6 +3,7 @@
 
 python3 tools/ichor/sprite_audit.py inventory --output build/sprite_inventory.json
 python3 tools/ichor/sprite_audit.py changes --baseline build/sprite_inventory.json
+python3 tools/ichor/sprite_audit.py provenance --reference <commit> --output build/sprite_provenance.json
 python3 tools/ichor/sprite_audit.py check --pokemon Nebrel Kynder Hipling
 python3 tools/ichor/sprite_audit.py check --image graphics/trainers/front_pics/kleon.png
 
@@ -13,6 +14,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from collections import Counter
 from pathlib import Path
@@ -186,6 +188,62 @@ def inventory_changes(before, after):
     }
 
 
+def provenance(root, reference):
+    def git(*args):
+        try:
+            return subprocess.check_output(
+                ["git", "-C", str(root), *args], stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as error:
+            raise ValueError(error.output.decode(errors="replace").strip()) from error
+
+    commit = git("rev-parse", "--verify", "--end-of-options",
+                 f"{reference}^{{commit}}").decode().strip()
+    algorithm = git("rev-parse", "--show-object-format").decode().strip()
+    originals = {}
+    for entry in git("ls-tree", "-r", "-z", commit, "--", "graphics").split(b"\0"):
+        if not entry:
+            continue
+        metadata, path = entry.split(b"\t", 1)
+        mode, kind, oid = metadata.decode().split()
+        name = path.decode()
+        if Path(name).suffix in (".png", ".pal"):
+            if kind != "blob" or mode not in ("100644", "100755"):
+                raise ValueError(f"{name}: reference source is not a regular file")
+            originals[name] = oid
+    if not originals:
+        raise ValueError(f"{commit}: no graphics PNG/palette reference sources")
+    snapshot = inventory(root)
+    for asset in snapshot["assets"]:
+        path = inside(root, asset["path"])
+        if path.is_symlink() or (root / asset["path"]).is_symlink():
+            raise ValueError(f"{asset['path']}: source must be a regular file")
+        content = path.read_bytes()
+        if hashlib.sha256(content).hexdigest() != asset["sha256"]:
+            raise ValueError(f"{asset['path']}: source changed during inventory")
+        # Match the repository's *.pal text filter without modifying checkout bytes.
+        if path.suffix == ".pal":
+            content = content.replace(b"\r\n", b"\n")
+        oid = hashlib.new(algorithm, b"blob " + str(len(content)).encode()
+                          + b"\0" + content).hexdigest()
+        original = originals.get(asset["path"])
+        asset.update({
+            "source_git_oid": oid,
+            "reference_git_oid": original,
+            "relation": ("current_only" if original is None else
+                         "reference_identical" if oid == original else "source_different"),
+        })
+    current = {asset["path"] for asset in snapshot["assets"]}
+    snapshot.update({
+        "reference_commit": commit,
+        "git_object_format": algorithm,
+        "palette_comparison": "Git-canonical LF; working SHA-256 remains byte-exact",
+        "relations": dict(sorted(Counter(asset["relation"] for asset in snapshot["assets"]).items())),
+        "reference_only": sorted(originals.keys() - current),
+        "scope": "Source provenance only; not artistic approval, runtime binding or redraw coverage.",
+    })
+    return snapshot
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--root", type=Path, default=ROOT)
@@ -195,13 +253,17 @@ def main():
     changes = commands.add_parser("changes")
     changes.add_argument("--baseline", type=Path, required=True)
     changes.add_argument("--output", type=Path)
+    ancestry = commands.add_parser("provenance")
+    ancestry.add_argument("--reference", required=True)
+    ancestry.add_argument("--output", type=Path)
     checking = commands.add_parser("check")
     checking.add_argument("--pokemon", nargs="+", default=[])
     checking.add_argument("--image", nargs="+", default=[])
     args = parser.parse_args()
     try:
-        if args.command in ("inventory", "changes"):
-            result = inventory(args.root)
+        if args.command in ("inventory", "changes", "provenance"):
+            result = (provenance(args.root, args.reference) if args.command == "provenance"
+                      else inventory(args.root))
             if args.command == "changes":
                 result = inventory_changes(json.loads(args.baseline.read_text()), result)
             content = json.dumps(result, indent=2) + "\n"

@@ -2,6 +2,27 @@
 
 The checklist that makes the total conversion true: every player-facing asset group and system in the ROM, with its status. It is the "inventory" that `design/ART_PLAN.md` §6 promises. Nothing should stay Hoenn by accident.
 
+## Source provenance coverage, 2026-11-15
+
+`sprite_audit.py provenance --reference <commit> --output <json>` accounts for
+every current graphics PNG/palette against a pinned local Git revision. It
+records the resolved commit, each working-file SHA-256, canonical Git blob
+identity, reference-only paths and mutually exclusive source relations.
+Palette comparison normalizes CRLF through the repository's text convention;
+it does not rewrite palettes or weaken the byte-exact working-file hashes.
+Invalid references, empty reference graphics sets and symlinked sources fail.
+
+At the combined `5ca37db184` boundary, comparison with expansion 1.17.2
+(`79dd436920845ebc145577649de624f65298c209`) accounts for all **20,149** current
+sources: **18,172 reference-identical**, **467 source-different** and **1,510
+current-only**. The reference also contains **25 reference-only** paths.
+These figures are not redraw or completion percentages. In particular, an
+unchanged expansion import is not automatically original Gen 3 artwork,
+artistically accepted, or verified against its runtime palette/table binding.
+Source differences can also be PNG container changes rather than new pixels.
+Native comparisons and the bounded acceptance ledger below remain the
+artistic and runtime evidence.
+
 ## Elaia redraw checkpoint, 2026-11-15
 
 This checkpoint is **not a declaration that every Elaia-visible sprite is
