@@ -145,6 +145,65 @@ pass; use remains 23,039,552 bytes (68.66%), with the GBA padded to 32 MiB.
 This is scoped rider-art acceptance, not restored bicycle gameplay or
 whole-town/global completion.
 
+## Genuine legacy player variants: retained, not redrawn
+
+The coordinator accepted the read-only inventory of 22 existing legacy
+PNGs, 208 source frames, against original Gen 3 decompilation art. These are
+genuine Ruby/Sapphire and FireRed/LeafGreen identities, not additional
+Theo/Ianthe costumes. No artwork or palette correction was needed.
+
+`tools/ichor/art/legacy_players.json` pins each complete PNG byte hash,
+row-major index hash, dimensions/frame layout and hardware palette hash.
+Shared dimension hashes encode two little-endian uint32 values; palette
+hashes encode sixteen little-endian BGR555 words. The recorded original
+revisions are expansion 1.17.2 (`79dd436920...`), pret/pokeemerald
+(`9103e529c2...`) and pret/pokefirered (`ce6406d8c2...`). The original full
+inventory and 44 complete 1x/4x reference cards remain immutable in session
+artifacts. Provenance is recorded locally; no network is used by the gate.
+
+| Partition | PNGs / source frames | Current binding |
+|---|---|---|
+| `ruby_sapphire_{brendan,may}/walking.png`, `red.png`, `leaf.png` | 4 / 36 | Compiled link walkers, nine 16x32 frames each, relative 256-byte image tables and Standard20 animations; east mirrors west |
+| `ruby_sapphire_{brendan,may}/running.png` | 2 / 18 | Declared but no image-table consumer; linker-GC absent |
+| `rs_brendan.png`, `rs_may.png` | 2 / 18 | Original FRLG RS representations, no Ichor declaration/table/ID; not aliases of the compiled RS walkers |
+| `red/`, `leaf/` playable-state families | 14 / 136 | `IS_FRLG=0`; native sources retained but player-state symbols absent |
+
+The RS link walkers use their separate `ruby_sapphire_brendan.pal`/
+`ruby_sapphire_may.pal` (tags `0x1122`/`0x1123`); Red/Leaf link walkers use
+`red_leaf.pal` (`0x111D`). Orphan RS bitmaps use the **original FRLG
+`NPC_WHITE` role order**, not the RS-link palette: the hypothetical
+wrong-palette preview was not a production defect. Dormant FRLG player
+states use `player_frlg.pal` through both `PLAYER_RED` and `PLAYER_GREEN`.
+None of these are the accepted Theo/Ianthe player palettes.
+
+Dormant normal states alias their running source frames from `*_surf_run`;
+surf states also use `*_surf_run` rather than the separate 32x32 `*_surf`
+bitmaps. Field-move and VS Seeker states share `*_item`. The manifest
+retains these aliases, spare source frames and finite/loop contracts.
+The naming-screen rival only borrows a RedNormal template: it substitutes
+its own sheet/palette/animations and is not a direct legacy PNG alias.
+
+```
+python3 tools/ichor/art/check_legacy_players.py --rom pokeemerald.gba
+python3 tools/ichor/art/check_legacy_players.py --rom /path/to/snapshot.gba --elf /path/to/snapshot.elf
+python3 -m unittest tools/ichor/tests/test_legacy_players.py
+```
+
+The read-only checker preserves all 22 source files and five hardware
+palettes. It uses `arm-none-eabi-nm` on the selected matching ELF to resolve
+the four required link arrays and three palette arrays, checks exact
+sizes/ROM bounds, and compares all 36 compiled frames and all sixteen
+palette words. Missing required symbols are **failures**, never skipped.
+GC-absent/orphan/FRLG symbols must remain absent. No asset addresses are
+hardcoded; only the architectural GBA ROM base is used to locate the
+ELF-resolved arrays in the selected ROM.
+
+These are offline source/compiled-array checks, not live link gameplay or
+controller eligibility. Link/contest retirement and peer-game identity
+selection remain unchanged. This persistence checkpoint has no art,
+palette, frame-table, callback or gameplay edits; helper/build and smoke
+pass and the complete padded ROM is byte-identical before/after.
+
 ## Native underwater follow-on
 
 `python3 tools/ichor/art/player_underwater.py --write` writes only the two
