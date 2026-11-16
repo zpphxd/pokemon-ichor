@@ -1137,3 +1137,5 @@ gSpecials::
 	def_special Ichor_HideAmphoraPicture
 	def_special Ichor_SetPersephoneVisitor
 	def_special Ichor_GetTimeOfDay
+	def_special Ichor_BuildDeedsMenu
+	def_special Ichor_BufferDeed
