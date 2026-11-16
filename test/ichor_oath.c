@@ -599,7 +599,7 @@ TEST("Ichor: simulated aftermath never transfers an existing real fallen partner
     fallen = gParties[B_TRAINER_PLAYER][0];
     for (i = 0; i < ARRAY_COUNT(excluded); i++)
     {
-        Ichor_EndOathBattle(excluded[i], B_OUTCOME_WON);
+        EXPECT(!Ichor_EndOathBattle(excluded[i], B_OUTCOME_WON));
         EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &fallen, sizeof(fallen)), 0);
         EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
         EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 0);
@@ -627,14 +627,16 @@ TEST("Ichor: automatic aftermath does not empty a party with no usable survivor"
     EXPECT(Ichor_RecordOathFallen(&gParties[B_TRAINER_PLAYER][0]));
     SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_IS_EGG, &egg);
     fallen = gParties[B_TRAINER_PLAYER][0];
-    Ichor_EndOathBattle(BATTLE_TYPE_TRAINER, B_OUTCOME_WON);
+    EXPECT(Ichor_EndOathBattle(BATTLE_TYPE_TRAINER, B_OUTCOME_WON));
+    EXPECT(Ichor_EndOathBattle(BATTLE_TYPE_TRAINER, B_OUTCOME_LOST));
+    EXPECT(Ichor_EndOathBattle(BATTLE_TYPE_TRAINER, B_OUTCOME_DREW));
     EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
     EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &fallen, sizeof(fallen)), 0);
     EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 0);
     SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_IS_EGG, &zero);
     SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP, &zero);
     EXPECT(Ichor_RecordOathFallen(&gParties[B_TRAINER_PLAYER][1]));
-    Ichor_EndOathBattle(0, B_OUTCOME_RAN);
+    EXPECT(Ichor_EndOathBattle(0, B_OUTCOME_RAN));
     EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 2);
     EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 0);
 }
@@ -670,6 +672,140 @@ TEST("Ichor: unsworn saves keep the final jar available for ordinary storage")
     EXPECT(CheckFreePokemonStorageSpace());
     EXPECT_EQ(CopyMonToPC(&mon), MON_GIVEN_TO_PC);
     EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), 1);
+}
+
+static void SetUpFallenParty(u32 count)
+{
+    u32 slot, zero = 0;
+    ResetOath();
+    ZeroPlayerPartyMons();
+    EXPECT(Ichor_ChooseOath(TRUE));
+    for (slot = 0; slot < count; slot++)
+    {
+        CreateOathMon(&gParties[B_TRAINER_PLAYER][slot]);
+        SetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HP, &zero);
+        EXPECT(Ichor_RecordOathFallen(&gParties[B_TRAINER_PLAYER][slot]));
+    }
+    gPartiesCount[B_TRAINER_PLAYER] = count;
+}
+
+TEST("Ichor: total-party loss preserves all memorials and recovers one stored partner")
+{
+    struct Pokemon living;
+    struct BoxPokemon fallen[PARTY_SIZE];
+    u32 slot;
+    SetUpFallenParty(PARTY_SIZE);
+    for (slot = 0; slot < PARTY_SIZE; slot++)
+        fallen[slot] = gParties[B_TRAINER_PLAYER][slot].box;
+    CreateOathMon(&living);
+    SetBoxMonAt(2, 4, &living.box);
+    EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_RECOVERED);
+    EXPECT(Ichor_IsOathActive());
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0].box, &living.box, sizeof(living.box)), 0);
+    EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP) > 0);
+    EXPECT_EQ(GetBoxMonDataAt(2, 4, MON_DATA_SPECIES), SPECIES_NONE);
+    for (slot = 0; slot < PARTY_SIZE; slot++)
+        EXPECT_EQ(memcmp(GetBoxedMonPtr(TOTAL_BOXES_COUNT - 1, slot), &fallen[slot], sizeof(fallen[slot])), 0);
+    EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_RECOVERY_NONE);
+    EXPECT_EQ(CountMonsInBox(TOTAL_BOXES_COUNT - 1), PARTY_SIZE);
+}
+
+TEST("Ichor: exhaustion ignores Eggs and memorials without mutating their records")
+{
+    struct Pokemon egg, fallen;
+    u32 isEgg = TRUE;
+    SetUpFallenParty(1);
+    fallen = gParties[B_TRAINER_PLAYER][0];
+    CreateOathMon(&egg);
+    SetMonData(&egg, MON_DATA_IS_EGG, &isEgg);
+    SetBoxMonAt(0, 0, &egg.box);
+    SetBoxMonAt(TOTAL_BOXES_COUNT - 1, 0, &fallen.box);
+    EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_EXHAUSTED);
+    EXPECT_EQ(gIchorSave.oath.state, ICHOR_OATH_FAILED);
+    EXPECT_EQ(gIchorSave.oath.fallenCount, 1);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &fallen, sizeof(fallen)), 0);
+    EXPECT_EQ(memcmp(GetBoxedMonPtr(0, 0), &egg.box, sizeof(egg.box)), 0);
+    EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_EXHAUSTED);
+}
+
+TEST("Ichor: full-party full-Urn recovery refuses transactionally instead of declaring exhaustion")
+{
+    struct Pokemon living, fallen[PARTY_SIZE];
+    u32 box, slot;
+    SetUpFallenParty(PARTY_SIZE);
+    memcpy(fallen, gParties[B_TRAINER_PLAYER], sizeof(fallen));
+    CreateOathMon(&living);
+    for (box = 0; box < TOTAL_BOXES_COUNT - 1; box++)
+        SetBoxMonAt(box, 0, &living.box);
+    for (slot = 0; slot < IN_BOX_COUNT; slot++)
+        SetBoxMonAt(TOTAL_BOXES_COUNT - 1, slot, &fallen[0].box);
+    EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_RECOVERY_BLOCKED);
+    EXPECT(Ichor_IsOathActive());
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], PARTY_SIZE);
+    EXPECT_EQ(memcmp(gParties[B_TRAINER_PLAYER], fallen, sizeof(fallen)), 0);
+    EXPECT_EQ(gIchorSave.oath.urnBoxes, 1 << (TOTAL_BOXES_COUNT - 1));
+    for (box = 0; box < TOTAL_BOXES_COUNT - 1; box++)
+        EXPECT_EQ(memcmp(GetBoxedMonPtr(box, 0), &living.box, sizeof(living.box)), 0);
+    for (slot = 0; slot < IN_BOX_COUNT; slot++)
+        EXPECT_EQ(memcmp(GetBoxedMonPtr(TOTAL_BOXES_COUNT - 1, slot), &fallen[0].box, sizeof(fallen[0].box)), 0);
+}
+
+TEST("Ichor: partial-capacity recovery retains every overflow partner beside its living replacement")
+{
+    struct Pokemon living, fallen[PARTY_SIZE];
+    u32 box, slot;
+    SetUpFallenParty(PARTY_SIZE);
+    memcpy(fallen, gParties[B_TRAINER_PLAYER], sizeof(fallen));
+    CreateOathMon(&living);
+    for (box = 0; box < TOTAL_BOXES_COUNT - 1; box++)
+        for (slot = 0; slot < 2; slot++)
+            SetBoxMonAt(box, slot, &living.box);
+    for (slot = 0; slot < IN_BOX_COUNT - 1; slot++)
+        SetBoxMonAt(TOTAL_BOXES_COUNT - 1, slot, &fallen[0].box);
+    EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_RECOVERED);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], PARTY_SIZE);
+    EXPECT_EQ(memcmp(gParties[B_TRAINER_PLAYER], &fallen[1], sizeof(fallen) - sizeof(fallen[0])), 0);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][PARTY_SIZE - 1].box, &living.box, sizeof(living.box)), 0);
+    EXPECT_EQ(memcmp(GetBoxedMonPtr(TOTAL_BOXES_COUNT - 1, IN_BOX_COUNT - 1), &fallen[0].box, sizeof(fallen[0].box)), 0);
+    EXPECT_EQ(GetBoxMonDataAt(0, 0, MON_DATA_SPECIES), SPECIES_NONE);
+    EXPECT_EQ(memcmp(GetBoxedMonPtr(0, 1), &living.box, sizeof(living.box)), 0);
+}
+
+TEST("Ichor: recovery can use the newly emptied source jar for pending memorials")
+{
+    struct Pokemon living;
+    struct BoxPokemon fallen;
+    u32 box, slot;
+    SetUpFallenParty(1);
+    fallen = gParties[B_TRAINER_PLAYER][0].box;
+    CreateOathMon(&living);
+    for (box = 0; box < TOTAL_BOXES_COUNT - 1; box++)
+        SetBoxMonAt(box, 0, &living.box);
+    for (slot = 0; slot < IN_BOX_COUNT; slot++)
+        SetBoxMonAt(TOTAL_BOXES_COUNT - 1, slot, &fallen);
+    EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_RECOVERED);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0].box, &living.box, sizeof(living.box)), 0);
+    EXPECT(Ichor_IsUrnBox(0));
+    EXPECT_EQ(memcmp(GetBoxedMonPtr(0, 0), &fallen, sizeof(fallen)), 0);
+}
+
+TEST("Ichor: recovery leaves ordinary and released runs to their native whiteout rules")
+{
+    struct Pokemon mon;
+    u32 zero = 0;
+    SetUpFallenParty(1);
+    mon = gParties[B_TRAINER_PLAYER][0];
+    EXPECT(Ichor_ReleaseOath());
+    EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_RECOVERY_NONE);
+    EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &mon, sizeof(mon)), 0);
+    ResetOath();
+    ZeroPlayerPartyMons();
+    CreateOathMon(&gParties[B_TRAINER_PLAYER][0]);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &zero);
+    EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_RECOVERY_NONE);
+    EXPECT(!Ichor_EndOathBattle(0, B_OUTCOME_LOST));
 }
 
 SINGLE_BATTLE_TEST("Ichor: recorded-link simulation fainting never marks a real partner")

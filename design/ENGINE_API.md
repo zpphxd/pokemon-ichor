@@ -1136,9 +1136,11 @@ fainting, the locked Urn and run-ending behavior work together.
 - `Ichor_EndOathBattle(type, outcome)` applies that transfer to real,
   non-defeat battles only when a living, non-Egg player partner remains.
   Wild, scripted wild, ghost, trainer and rematch return paths call it after
-  any existing follower/variant party restoration. Lost/drawn battles and
-  parties with no usable survivor are deliberately left for the unfinished
-  recovery/run-ending integration; an Egg does not count as a survivor.
+  any existing follower/variant party restoration. A TRUE result forces
+  whiteout recovery before ordinary callback branches, including scripted
+  no-whiteout battles and NPC victories with no usable player survivor.
+  Lost/drawn battles with a usable restored party keep their native outcome
+  handling; an Egg does not count as a survivor.
 - `Ichor_ShowOathAftermathNotice()` runs after the field fades back in,
   before the normal return tasks unlock movement or resume the paused
   script. Transfer and full-capacity notices require acknowledgment without
@@ -1150,6 +1152,23 @@ fainting, the locked Urn and run-ending behavior work together.
   The same acknowledged notice is shown before the menu accepts input, and
   its ordinary description is restored afterward. No usable party survivor
   still means no transfer; total-party-loss recovery remains separate.
+- `Ichor_PrepareOathRecovery()` runs before ordinary whiteout healing.
+  An active Oath without a usable party partner searches non-Urn storage for
+  a non-Egg, non-fallen partner. It buries fallen party members, restores one
+  stored partner to the party, clears that source only after conversion,
+  and retries burial if withdrawing it emptied a jar. Whole memorial records
+  remain unchanged; partial capacity retains all overflow partners.
+  The usual whiteout destination/healing remains in use, and an acknowledged
+  recovery notice precedes the destination's normal healing script.
+  RECOVERY_NONE leaves ordinary/released runs to native handling; RECOVERED
+  means the party is usable again. EXHAUSTED marks only the in-memory Oath
+  FAILED when no living stored partner exists. RECOVERY_BLOCKED instead
+  leaves the Oath active and all party/storage records unchanged when no
+  party slot can be freed without displacing a partner.
+- `Ichor_ShowOathEndScreen(capacityBlocked)` explains exhaustion or blocked
+  capacity and returns to the native title on A/B. It never writes a save.
+  CONTINUE also routes saved FAILED states to this terminal screen before
+  loading a map. Normal defeat therefore preserves the last manual save.
 
 Version 5 takes 40 bytes from the old reserved region at 0x450. Total
 IchorSave/SaveBlock3 sizes and every existing field offset stay unchanged,
@@ -1157,16 +1176,16 @@ including the second flag bank at 0x500. Older saves get zero Oath bytes,
 not whatever previously occupied that reserve. Version 6 takes its two-byte
 Urn mask from padding within those same 40 bytes; version-5 migration
 preserves existing Oath progress and reserves only the original final jar.
-Total-party-loss recovery, field-poison cleanup, the full-party/full-Urn
-recovery edge case, and run-ending callers still need integration before
-the Oath can be enabled. In particular, do not expose enrollment while an
-all-party fall could enter an ordinary whiteout with no revivable partner.
+Field-poison cleanup and the once-only opening choice still need integration
+before the Oath can be enabled. Do not expose enrollment before field falls
+receive the same survivor-safe cleanup and acknowledged notices.
 
 The continuation's conservative run-ending policy is to return to the title
 without overwriting the last manual save, not to auto-save a failed run or
 permanently retire the save. This was selected autonomously while the user
-was unavailable, not explicitly approved by the user. The actual defeat/load
-flow still needs implementation; do not treat this policy as delivered code.
+was unavailable, not explicitly approved by the user. Defeat/load enforcement
+is now implemented, including explicit capacity refusal without falsely
+declaring stored living partners exhausted.
 
 Native tests cover the entire map-section range, byte boundaries, invalid
 indices, once-only choice/transitions and migration. The actual-ROM save
@@ -1197,5 +1216,11 @@ party service refuses the retained partner; moving a living stored partner
 to empty a jar triggers automatic burial on storage exit, with the original
 Urn unchanged and the expansion preserved by save/reset/CONTINUE. Native tests cover
 multiple fallen partners, survivor/Egg compaction, partial-capacity retry,
-simulation and defeat exclusions, and the no-survivor guard. None of this
-claims that total-party-loss recovery or the full Oath is finished.
+simulation and defeat exclusions, and the no-survivor routing guard.
+`tools/ichor/tests/oath_recovery.sh` adds 13 real-ROM checks and five
+screenshots: an actual scripted no-whiteout defeat, boxed-survivor recovery,
+memorial preservation, exhausted-run title return, transactional capacity
+refusal, last-manual-save preservation and saved-FAILED load interception.
+Native tests also cover six-partner recovery, Eggs/memorials not counting
+as survivors, partial-capacity retention, newly emptied source-jar reuse,
+and ordinary/released whiteout preservation. The full Oath remains gated.

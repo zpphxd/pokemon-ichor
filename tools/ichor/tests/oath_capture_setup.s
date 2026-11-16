@@ -100,6 +100,31 @@ Oath_ChoosePartner:
 	special ChoosePartyMon
 	end
 
+	test_header Oath_WeakPartyHeader, Oath_WeakParty
+Oath_WeakParty:
+	setvar VAR_TEMP_F, 1
+	call Oath_CreateWeakParty
+	end
+
+Oath_CreateWeakParty:
+	callnative ZeroPlayerPartyMons
+	givemon SPECIES_CLEFFA, 1
+	createmon 0, 0, SPECIES_CLEFFA, 1, item=ITEM_POTION, move1=MOVE_SPLASH, move2=MOVE_LEER, move3=MOVE_NONE, move4=MOVE_NONE
+	return
+
+	test_header Oath_DefeatHeader, Oath_Defeat
+Oath_Defeat:
+	call Oath_CreateWeakParty
+	goto Oath_Lose
+
+	test_header Oath_LoseHeader, Oath_Lose
+Oath_Lose:
+	setvar VAR_TEMP_F, 1
+	setflag FLAG_ICHOR_NO_WHITEOUT
+	setwildbattle SPECIES_ZIGZAGOON, 10
+	dowildbattle
+	end
+
 	.thumb
 	.align 2
 	.thumb_func

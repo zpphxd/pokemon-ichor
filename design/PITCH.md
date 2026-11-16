@@ -222,8 +222,12 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
     Capacity refusal preserves the fallen source and explains the problem.
     Retained fallen partners are restricted to view-only party actions;
     freeing a jar retries burial automatically on leaving storage.
-    Total-party-loss recovery, full-party/full-Urn recovery and run-ending
-    enforcement still need integration before the choice can safely appear.
+    Total-party loss now recovers a living stored partner before ordinary
+    whiteout healing. Exhaustion and blocked full-party/full-Urn recovery
+    return to title without overwriting the last manual save, and saved
+    failed states cannot enter the field.
+    Field-poison cleanup and the once-only opening choice still need
+    integration before the Oath can safely appear.
 - **No HM slaves.** Field powers come from relics. Relics are key items you use straight from the field; no Pokémon ever learns a field move. The user approved this mapping on 2026-11-14. Each relic's myth-quest and upgrades are in `design/SYSTEMS.md` §1–3.
 
   | Field power | Relic | Arrives |
