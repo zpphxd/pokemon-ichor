@@ -207,13 +207,15 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
   - **Oath of the Styx**: an optional Nuzlocke ruleset you swear to at the start.
   - **Current selection policy:** confirm Mortal, Hero or Spartan when setting
     the bedroom water clock. The choice is fixed for that save; existing saves
-    stay Hero. Act I's modes are integrated, but natural-level mode balance and
-    the Oath remain unfinished.
+    stay Hero. Act I's modes are integrated; natural-level mode balance still
+    needs approval. New games then offer the Oath separately, defaulting to
+    NO and requiring a second confirmation to swear. Both answers are final
+    for the opening; existing saves are not prompted or retroactively enrolled.
     The Oath has saved one-chance-per-named-area receipts independently of
     difficulty, and version-6 Urn foundations that preserve fallen Pokemon
     and grow only into empty Pithos jars without changing save sizes.
     Native wild-battle entry and ball-use guards now enforce the area chance
-    on fixture-enrolled saves; ordinary runs remain unrestricted.
+    on sworn saves; ordinary runs remain unrestricted.
     Real player fainting now records permanent falls, and HP healing, revival
     items and Revival Blessing respect them. The Urn now has view-only storage,
     and captures and deposits skip its jars. Non-defeat battle teardown now
@@ -228,7 +230,8 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
     failed states cannot enter the field.
     Field-poison cleanup waits for all party messages before burial and uses
     the same recovery path for total-party loss; modern one-HP survival
-    never counts as a fall. The once-only opening choice remains to be added.
+    never counts as a fall. Charon's later release scene and the Riverside
+    shades remain Underworld chapter work, not delivered opening features.
 - **No HM slaves.** Field powers come from relics. Relics are key items you use straight from the field; no Pokémon ever learns a field move. The user approved this mapping on 2026-11-14. Each relic's myth-quest and upgrades are in `design/SYSTEMS.md` §1–3.
 
   | Field power | Relic | Arrives |
@@ -391,7 +394,7 @@ gates. Counts of maps, species or songs are not a completion percentage.
 | Kalliste slice | Opening, starter selection, rival, Kronion Hill, Hestia and Laurel 1 | Current natural-level balance and human look/fun approval |
 | Act I mainland | Voyage, Aegina, Emporion/Hermes, Routes 4–5, Hollow, Eleusa/Demeter, sanctum theft, Kleon's departure, Daphne's revelation with the real Star Chart, and the north-road Sickle gate | Complete return visits and side-system integrations, closing scene assets and player approval |
 | Regional dex | 152 species records and expected sprite assets present | Chapter-appropriate obtainability, evolution timing, battle balance and final visual review |
-| Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, Oath, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
+| Shared systems | Save banks, relics/fire, rites/Favor, herms, excavation, world helpers, Act I difficulty/caps, starting Oath/capture/falls/Urn/recovery, Scroll of Deeds, portable Star Chart, Frozen Hour and parts of the Labyrinth | Remaining callers/tutorials; natural-level difficulty balance, later Oath story scenes, later quest pages, outdoor sky/rewards and missing dungeon mechanics |
 | Act II | Story and system designs | Connected Thyrsa → Arkadia → Astyra → Kaldera chapters; Laurels 4–6 |
 | Act III / 0.9 | Story and dungeon designs; supporting engines partly built | Kythera → Knossa → Lakonia → Delphoi → Loom/Frozen Hour → League and epilogue |
 | Core post-game / 1.0 | Approved scope and dependency designs | Sailing, epics, facilities, ten lands/halls, all-species obtainability and twelve Kleos laurels |

@@ -136,6 +136,19 @@ Oath_FieldCleanup:
 	releaseall
 	end
 
+	test_header Oath_ChoiceHeader, Oath_Choice
+Oath_Choice:
+	lockall
+	setvar VAR_TEMP_F, 1
+	call ElaiaVillage_PlayersHouse_2F_EventScript_ChooseOath
+	releaseall
+	end
+
+	test_header Oath_ClockHeader, Oath_Clock
+Oath_Clock:
+	setvar VAR_TEMP_F, 1
+	goto ElaiaVillage_PlayersHouse_2F_EventScript_WaterClock
+
 	.thumb
 	.align 2
 	.thumb_func

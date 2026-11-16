@@ -61,6 +61,31 @@ TEST("Ichor: an Oath shares one chance across a named area's maps")
     EXPECT_EQ(Ichor_CountOathEncounters(), 2);
 }
 
+TEST("Ichor: the opening Oath special requires new-game eligibility and consumes either answer")
+{
+    ResetOath();
+    gSpecialVar_0x8004 = TRUE;
+    EXPECT(!Ichor_ChooseStartingOath());
+    EXPECT_EQ(gIchorSave.oath.state, ICHOR_OATH_UNDECIDED);
+    FlagSet(FLAG_ICHOR_OATH_CHOICE_PENDING);
+    EXPECT(Ichor_ChooseStartingOath());
+    EXPECT(Ichor_IsOathActive());
+    EXPECT(!FlagGet(FLAG_ICHOR_OATH_CHOICE_PENDING));
+    gSpecialVar_0x8004 = FALSE;
+    EXPECT(!Ichor_ChooseStartingOath());
+    EXPECT(Ichor_IsOathActive());
+    ResetOath();
+    FlagSet(FLAG_ICHOR_OATH_CHOICE_PENDING);
+    EXPECT(Ichor_ChooseStartingOath());
+    EXPECT_EQ(gIchorSave.oath.state, ICHOR_OATH_DECLINED);
+    EXPECT(!FlagGet(FLAG_ICHOR_OATH_CHOICE_PENDING));
+    ResetOath();
+    FlagSet(FLAG_ICHOR_OATH_CHOICE_PENDING);
+    FlagSet(FLAG_ICHOR_GOT_STARTER);
+    EXPECT(!Ichor_ChooseStartingOath());
+    EXPECT_EQ(gIchorSave.oath.state, ICHOR_OATH_UNDECIDED);
+}
+
 TEST("Ichor: Oath encounter bits are bounded and cannot alias adjacent areas")
 {
     u32 section;

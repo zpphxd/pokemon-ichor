@@ -42,7 +42,7 @@ This way the save never breaks again.
 | `flags2[192]` (0x500) | the second flag bank | 1,536 flags (version 4). See below. |
 | `dailyFlags[32]` | the daily bank | 256 flags, cleared each day. |
 | `thread` | LABYRINTH.md §5.1 | Ariadne's Thread: 24 anchors (8 bytes each, not 6, because apcs-gnu rounds structs to 4 bytes), 1,792 committed steps, a 152-step live segment. |
-| `oath` (0x450) | PITCH §5, UNDERWORLD §5 | Choice state, fallen count, 256 named-area encounter bits (version 5) and reserved Urn jars (version 6). Not yet offered to players; see §11. |
+| `oath` (0x450) | PITCH §5, UNDERWORLD §5 | Choice state, fallen count, 256 named-area encounter bits (version 5) and reserved Urn jars (version 6). Offered once at the bedroom clock on new games; see §11. |
 
 ### The flag and var banks
 
@@ -165,7 +165,8 @@ The four Act I Hierophant party variants use the existing trainer ids.
 `tools/ichor/tests/difficulty.sh` checks the actual menus, all boss variants,
 confirmation rejection and real save/reset/CONTINUE for all modes.
 `make check -j$(sysctl -n hw.ncpu) TESTS='Ichor:'` also covers caps, EXP Candy and item rejection.
-Oath rules, later chapter cap milestones and natural-level approval remain open.
+Oath rules and opening selection are documented in §11. Later chapter cap
+milestones and natural-level approval remain open.
 
 ## 2. Relics (SYSTEMS §1, §2)
 
@@ -1055,20 +1056,30 @@ mapping, thresholds, distinct pages, legacy recovery and reserved bits.
 distinct rendered pixel patterns, the empty final patch, palette twinkling,
 navigation, screen cleanup and save/reset/CONTINUE.
 
-## 11. Oath of the Styx foundation
+## 11. Oath of the Styx
 
 The autonomous continuation uses **one wild-encounter chance per named area**,
 not one per map or dungeon floor. This is an implementation decision, not a
-claim of human approval. The full Oath remains unfinished and cannot yet be
-selected from the bedroom clock: do not offer it until capture enforcement,
-fainting, the locked Urn and run-ending behavior work together.
+claim of human approval. New games can now select the core Oath at the
+bedroom clock after choosing difficulty. NO is the default, swearing requires
+a second confirmation, and either completed answer is saved once. The
+explanation covers area chances, permanent falls, empty-jar capacity,
+stored-survivor recovery and the unchanged last-manual-save ending policy.
+Later Charon/Riverside scenes are separate, unfinished Underworld work.
 
 `src/ichor_oath.c` provides the saved-state core:
 
 - `Ichor_ChooseOath(TRUE/FALSE)` accepts a single choice before the starter
   receipt, independently of difficulty. It refuses repeats, invalid booleans
-  and retroactive enrollment of old saves. Swearing requires an empty final
+  and choices after the starter. Swearing requires an empty final
   Pithos jar, names it URN and reserves it without moving existing Pokemon.
+- The playable `Ichor_ChooseStartingOath` special additionally requires
+  `FLAG_ICHOR_OATH_CHOICE_PENDING`, set only by `NewGameInitData`, not by
+  IchorSave initialization or old-save migration. Either successful answer
+  clears it. The bedroom script also skips players with the starter receipt,
+  so existing saves and late arrivals cannot be retroactively enrolled.
+  `gSpecialVar_0x8004` supplies TRUE/FALSE; a failed write leaves eligibility
+  intact and reports the error in the original choice loop.
 - `Ichor_IsOathActive()` recognizes only ACTIVE. The other saved states are
   UNDECIDED, DECLINED, RELEASED and FAILED.
 - `Ichor_ClaimOathEncounter(mapSection)` admits the first encounter and saves
@@ -1182,8 +1193,9 @@ including the second flag bank at 0x500. Older saves get zero Oath bytes,
 not whatever previously occupied that reserve. Version 6 takes its two-byte
 Urn mask from padding within those same 40 bytes; version-5 migration
 preserves existing Oath progress and reserves only the original final jar.
-The once-only opening choice still needs integration before players can
-enroll. Existing saves must not be retroactively enrolled.
+Opening selection does not change the IchorSave version, save layout or
+chosen difficulty. Existing saves have no new-game eligibility flag and
+therefore remain unprompted and unenrolled.
 
 The continuation's conservative run-ending policy is to return to the title
 without overwriting the last manual save, not to auto-save a failed run or
@@ -1234,4 +1246,10 @@ also reaches stored-survivor recovery. This is not a claim that the current
 modern configuration inflicts lethal overworld poison damage.
 Native tests also cover six-partner recovery, Eggs/memorials not counting
 as survivors, partial-capacity retention, newly emptied source-jar reuse,
-and ordinary/released whiteout preservation. The full Oath remains gated.
+and ordinary/released whiteout preservation.
+`tools/ichor/tests/oath_choice.sh` adds 21 real-ROM checks and six screenshots:
+default decline, rejected binding confirmation, accepted enrollment on all
+three difficulties, old-save and post-starter refusal, once-only persistence
+of either answer, and the complete native water-clock-to-Oath handoff through
+save/reset/CONTINUE. These demonstrate the core rules, not human balance
+approval or completed later-chapter memorial scenes.
