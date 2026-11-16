@@ -9,8 +9,8 @@
 #      SLICE_GENDER  theo (default) / ianthe
 #      SLICE_DIFFICULTY mortal / hero (default) / spartan, chosen at the water clock
 #      SLICE_NATURAL=1  no strength assist; rejects memory writes, RAM scripts,
-#                    SLICE_FROM and SLICE_WORKAROUNDS; the first-move solo pilot
-#                    measures its own route, not a balance verdict
+#                    SLICE_FROM and SLICE_WORKAROUNDS; the button-only team pilot
+#                    measures its own strategy, not a balance verdict
 #      SLICE_STOP_AFTER a beat name: explicitly partial coverage, never a full PASS
 #      SLICE_OUT     output folder (default build/slice/; natural mode uses
 #                    build/slice-natural/<difficulty>-<starter>/)
@@ -105,7 +105,7 @@ SLICE_OUT="$OUT" SLICE_SYMBOLS="${OUT}symbols.lua" ${TIMEOUT:+$TIMEOUT 2400} "$R
 code=$?
 secs=$(( $(date +%s) - start ))
 
-grep -o "SLICE \(ok\|FAIL\|BUG\|FINDING\|NOTE\|BEAT\|BATTLE\|PARTY\|REACHED\|note\).*" "${OUT}run.log"
+grep -o "SLICE \(ok\|FAIL\|BUG\|FINDING\|NOTE\|BEAT\|BATTLE\|PARTY\|PILOT\|REACHED\|note\).*" "${OUT}run.log"
 report=0
 python3 tools/ichor/tests/slice_text_report.py "${OUT}run.log" > "${OUT}text.txt" || report=$?
 grep -E "^(WIDE|SUMMARY)" "${OUT}text.txt"

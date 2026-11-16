@@ -180,16 +180,79 @@ not a recorded victory; later losses stop the natural pilot explicitly.
 `SLICE_STOP_AFTER=<beat>` requests partial coverage with a distinct `PARTIAL PASS`
 marker. It does not satisfy the full-run endpoint checks or trainer checklist.
 `tools/ichor/tests/slice_natural_opening.sh` exercises all nine starter/difficulty
-prologues through Kleon, Alethea's heal/gifts and Mom's return. The pilot still
-uses the first move, runs from wild encounters and does not build/train a team
-or spend healing items. Its failures are **not balance defects**. Complete
-natural-level Kalliste/Act I runs and player approval remain separate gates.
+prologues through Kleon, Alethea's heal/gifts and Mom's return.
+
+The natural pilot in `slice_pilot.lua` uses real buttons for captures, living
+replacements, medicine, healer visits, move learning and party ordering. It
+tries up to three owned balls per eligible Route 1/Kronion encounter, keeping
+at most four distinct partners; a fourth slot is reserved for an actually
+encountered Eopeep or Pebblith as a Normal-type counter. It reads power/type/category from the native
+move UI and scores available attacks using STAB, type effectiveness, current
+offensive/defensive stats and stages, including Fur Coat's physical defense.
+It accounts for Double Kick's two hits, actually held type boosters and common
+Fire/Water/Grass/Ground/Electric ability immunities, respecting Mold Breaker,
+Teravolt and Turboblaze. In particular, Pyrrha's Narthip has Flash Fire: the
+pilot must not keep selecting Fire attacks merely because it is Grass-type.
+Its move-learning heuristic declines unused Howl, and preserves Yawn and unique attacks ahead of observed
+status moves or weaker redundant coverage. It attempts Yawn at most once per
+opposing party member in trainer battles. This is not a complete battle AI:
+accuracy, other abilities, variable-power moves and most tactical status/switch
+choices remain unmodeled. `slice_pilot_tactics.lua` checks these scoring rules,
+bounded Yawn and the Spartan battle-item ban without emulator memory access.
+Opponent party indices use the native `u16` array stride, not the high byte of
+the player's index. Evolution learning remembers the actual evolving task's
+party slot before the summary screen opens; the battle's last EXP recipient
+can be a different partner. Both cases have isolated regressions.
+
+Before Hestia, the pilot walks back to Kronion Hill and switch-trains the actual
+party to at least level 10 (14 in Spartan), using Mom for HP/PP recovery. Training is bounded
+to 6,000 grass steps; no EXP, party, item or progression writes are allowed.
+Healing near Akti uses the actual Asclepeion; an NPC returning to the former
+player tile on map reentry does not require the pilot to stand inside it.
+`PILOT` records describe inspections, item consumption, catches, move choices
+and training alongside the existing `PARTY`/`BATTLE` evidence.
+Before Ione, the starter is restored as the lead by its original personality
+and given its actually collected type booster, or its reserved Sitrus Berry
+in Spartan. GIVE checks both held ownership and exact Bag consumption.
+Mortal/Hero may use owned trainer-battle medicine at half HP or below, asserting
+actual HP recovery and exact consumption. Spartan never requests battle medicine.
+At Demeas's pre-Laurel stall it buys five ordinary balls through the quantity
+and confirmation menus, asserting five added balls and the real 1,000 payment
+before returning to the item list. A NEW GAME Hero/Kynder run through the
+Agora verifies actual ownership changing from 2 to 7 and money from 4,440 to
+3,440; that partial endpoint is not a chapter pass. Training keeps its battle
+mode enabled across healing/menu walks as well as grass steps, and fails
+explicitly if it runs out of owned balls before recruiting a counter.
+
+The earlier three-partner pilot reached `08_after` continuously from NEW GAME
+with Hero/Nebrel: 418,310 frames,
+117 battles. This strategy includes substantial wild training: the starter
+enters Ione at level 16, alongside two level-10 partners. Mortal/Nebrel also
+reaches `08_after` (333,477 frames, 78 battles). These older passes predate the
+current four-partner strategy and do not certify its results.
+
+With corrected evolution learning and native-width opposing party indices,
+Hero/Kynder now reaches `08_after` from NEW GAME: 353,799 frames, 69 battles,
+559 screenshots. Ione is entered with a level-16 Dikyon and three level-10
+partners, including an actually caught Pebblith; Yawn is attempted separately
+against all three of Ione's partners. Earlier Kynder attempts failed there.
+Spartan/Hipling still loses at Ione with four naturally trained level-14
+partners; Spartan/Nebrel also loses there, with Nemecub left at 2 HP.
+Spartan/Kynder can lose to Metis before the training walk.
+These results do not establish the intended curve's balance or a production
+battle defect. Other starter/difficulty chapter runs, complete
+natural-level Act I coverage and player approval remain separate gates.
 The continuous route currently ends at the Emporion gate after Laurel 2, not
 the end of Act I.
 
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing
 screenshots and save states; every declared beat remains selectable.
+
+`build/tools/ichor-mgba-headless --script tools/ichor/tests/slice_pilot_cursor.lua --frames 2 --until "PILOT CURSOR done" pokeemerald.gba`
+checks all 30 cursor transitions across one-, two-, three- and four-move grids.
+The isolated input model rejects moves into empty slots, including the
+three-move case where bottom-left must reach top-right through the top row.
 
 ## 2. Relics (SYSTEMS §1, §2)
 

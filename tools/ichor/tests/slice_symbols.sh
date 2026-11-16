@@ -18,6 +18,10 @@ arm-none-eabi-gcc -S -O0 -mthumb -mabi=apcs-gnu -march=armv4t -iquote include -W
   || { echo "could not compile slice_consts.c"; exit 1; }
 SYMS="gMain gSaveBlock1Ptr gSaveBlock2Ptr gSaveBlock3Ptr gObjectEvents gPlayerAvatar gBackupMapLayout gBattleOutcome
 gBattleMons gParties gPartiesCount gTasks gMapHeader gBattleTypeFlags gStringVar4 gSpecialVar_Result gSpecialVar_0x8004
+gMoveSelectionCursor gDisplayedStringBattle gBagPosition gPartyMenu gSpecialVar_ItemId
+gTypesInfo gTypeEffectivenessTable
+gCategoryIconSpriteId gSprites gBattleStruct gMoveToLearn
+gBattlerPartyIndexes
 gSpecialVar_0x8008 gSpecialVar_0x8009 gMPlayInfo_BGM gSongTable gExperienceTables gSpeciesInfo
 sSubstructOffsets sGlobalScriptContextStatus sGlobalScriptContext sLockFieldControls sCurrentMapMusic sFieldMessageBoxMode
 sStartMenuCursorPos sNumStartMenuActions sCurrentStartMenuActions gPaletteFade
@@ -26,6 +30,11 @@ CB2_EvolutionSceneUpdate CB2_InitTitleScreen CB2_LoadMap CB2_ReturnToField
 gBattlerControllerFuncs HandleInputChooseMove
 Task_NewGameBirchSpeech_ChooseGender Task_HandleYesNoInput Task_HandleMultichoiceInput
 Task_HandleScrollingMultichoiceInput Task_BuyMenu Task_ShopMenu Task_OptionMenuProcessInput
+Task_ShowStartMenu Task_BagMenu_HandleInput Task_ItemContext_SingleRow Task_ItemContext_MultipleRows Task_HandleChooseMonInput
+Task_HandleReplaceMoveInput
+Task_BuyHowManyDialogueHandleInput
+Task_EvolutionScene
+Task_HandleSelectionMenuInput
 SetCB2WhiteOut SetHiddenNature ScrCmd_createmon"
 PATTERN="^($(echo $SYMS | tr ' ' '|'))$"
 {

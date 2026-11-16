@@ -22,7 +22,8 @@
 local L = {}
 local S, OUT, TAG
 L.K = { A = C.GBA_KEY.A, B = C.GBA_KEY.B, START = C.GBA_KEY.START, SELECT = C.GBA_KEY.SELECT,
-        UP = C.GBA_KEY.UP, DOWN = C.GBA_KEY.DOWN, LEFT = C.GBA_KEY.LEFT, RIGHT = C.GBA_KEY.RIGHT }
+        UP = C.GBA_KEY.UP, DOWN = C.GBA_KEY.DOWN, LEFT = C.GBA_KEY.LEFT, RIGHT = C.GBA_KEY.RIGHT,
+        L = C.GBA_KEY.L }
 local K = L.K
 
 local emu = setmetatable({}, { __index = function(_, name)
@@ -182,16 +183,17 @@ function L.idle()
      and emu:read8(S.sGlobalScriptContextStatus) == CONTEXT_SHUTDOWN
      and emu:read8(S.gPlayerAvatar + S.OFF_AVATAR_TILE_TRANSITION) == 0
 end
-function L.taskRunning(name)
-  if not S[name] then return false end
+function L.taskAddress(name)
+  if not S[name] then return nil end
   for i = 0, S.NUM_TASKS - 1 do
     local t = S.gTasks + i * S.TASK_SIZE
     if emu:read8(t + S.OFF_TASK_ACTIVE) ~= 0 and emu:read32(t + S.OFF_TASK_FUNC) == (S[name] | 1) then
-      return true
+      return t
     end
   end
-  return false
+  return nil
 end
+function L.taskRunning(name) return not not L.taskAddress(name) end
 function L.boxUp() return emu:read8(S.sFieldMessageBoxMode) ~= 0 end
 -- What the game is doing, for a failure message: the main callback, the field
 -- lock, and the global script's mode, native wait function and script pointer
@@ -339,7 +341,8 @@ end
 
 -- Play out a battle that has started (or is starting): trainers are fought with
 -- the first move, wild Pokémon are run from (unless running is barred, when they
--- are fought too). Returns a record of it.
+-- are fought too). Natural mode delegates decisions to its button-only pilot.
+-- Returns a record of the battle.
 function L.battle()
   local before = defeatedSet()
   local permitsLoss = L.getFlag(S.FLAG_NO_WHITEOUT)
@@ -347,10 +350,18 @@ function L.battle()
   waitUntil(L.inBattle, 1200, "the battle to start")
   local trainer = L.isTrainerBattle()
   local rec = { trainer = trainer, song = 0, start = now() }
+  if L.pilot then L.pilot.beginBattle() end
   local t0, shotTaken, turns = now(), false, 0
   while not L.inOverworld() do
     if L.on("CB2_EvolutionSceneUpdate") then
+      if L.pilot then L.pilot.observeEvolution() end
       tap(K.A); wait(6)
+    elseif L.on("CB2_NamingScreen") then
+      L.acceptName("caught_partner")
+    elseif L.pilot and L.taskRunning("Task_HandleReplaceMoveInput") then
+      L.pilot.learnMove()
+    elseif L.pilot and L.taskRunning("Task_HandleChooseMonInput") then
+      L.pilot.chooseReplacement()
     elseif L.inBattle() and controller("HandleInputChooseAction") then
       if not shotTaken then
         rec.song = L.playingHeader()
@@ -361,7 +372,9 @@ function L.battle()
       -- a wild battle that can't be run from (FLAG_ICHOR_NO_RUNNING, Phase 2's
       -- deck snatchers) is fought like a trainer's, and so is one that won't let
       -- the player go (Arena Trap, Shadow Tag): after three tries, fight
-      if trainer or turns > 3 or (S.FLAG_NO_RUNNING and L.getFlag(S.FLAG_NO_RUNNING)) then
+      if L.pilot and L.pilot.chooseAction(trainer) then
+        -- The pilot completed a native Bag or party action.
+      elseif (L.pilot and L.pilot.training) or trainer or turns > 3 or (S.FLAG_NO_RUNNING and L.getFlag(S.FLAG_NO_RUNNING)) then
         tap(K.UP); tap(K.LEFT); tap(K.A)     -- FIGHT
       else
         tap(K.DOWN); tap(K.RIGHT); tap(K.A)  -- RUN
@@ -370,6 +383,8 @@ function L.battle()
     elseif L.inBattle() and controller("HandleInputChooseMove") then
       if L.battleMode == "lose" then
         tap(K.UP); tap(K.RIGHT); tap(K.A)    -- the second move (a status move: Leer, Growl)
+      elseif L.pilot then
+        L.pilot.chooseMove()
       else
         tap(K.UP); tap(K.LEFT); tap(K.A)     -- the first move
       end
@@ -380,6 +395,7 @@ function L.battle()
     if now() - t0 > 30000 then L.shot("stuck_battle"); fail("a battle never ended") end
   end
   rec.outcome = emu:read8(S.gBattleOutcome)
+  if L.pilot then L.pilot.afterBattle(rec) end
   partySnapshot("after")
   rec.turns = turns
   local after = defeatedSet()
@@ -390,7 +406,7 @@ function L.battle()
   log(string.format("BATTLE %s %s outcome %d song %s turns %d frames %d", trainer and "trainer" or "wild",
                     rec.who or "-", rec.outcome, L.songName(rec.song), turns, now() - rec.start))
   if L.readOnly and rec.outcome == S.B_OUTCOME_LOST and not permitsLoss then
-    fail("natural solo first-move pilot lost; see PARTY/BATTLE records, not a balance verdict")
+    fail("natural pilot lost; see PARTY/BATTLE records, not a balance verdict")
   end
   return rec
 end
@@ -474,6 +490,7 @@ function L.settle(opts)
       elseif L.inBattle() then
         fought[#fought + 1] = L.battle()
       elseif L.on("CB2_EvolutionSceneUpdate") then
+        if L.pilot then L.pilot.observeEvolution() end
         tap(K.A); wait(6)
       elseif L.taskRunning("Task_HandleYesNoInput") then
         wait(10)
@@ -1131,15 +1148,22 @@ function L.assistLevel100()
   return species, growth, exp100
 end
 
-local function growthWord(slot, offset)
+local function secureWord(slot, part, offset)
   local mon = L.partyMon(slot)
   local personality, otId = emu:read32(mon), emu:read32(mon + 4)
-  local substruct = emu:read8(S.sSubstructOffsets + personality % 24)
+  local substruct = emu:read8(S.sSubstructOffsets + part * 24 + personality % 24)
   return emu:read32(mon + S.OFF_BOXMON_SECURE + substruct * S.SUBSTRUCT_SIZE + offset) ~ personality ~ otId
 end
 
-function L.partySpecies(slot) return growthWord(slot, 0) & 0x7FF end
-function L.partyExperience(slot) return growthWord(slot, 4) & 0x1FFFFF end
+function L.partySpecies(slot) return secureWord(slot, 0, 0) & 0x7FF end
+function L.partyExperience(slot) return secureWord(slot, 0, 4) & 0x1FFFFF end
+function L.partyHeldItem(slot) return secureWord(slot, 0, 0) >> 16 & 0x3FF end
+function L.partyMove(slot, moveSlot)
+  return secureWord(slot, 1, (moveSlot // 2) * 4) >> (moveSlot % 2 * 16) & 0x7FF
+end
+function L.partyPp(slot, moveSlot)
+  return secureWord(slot, 1, 8) >> (moveSlot * 8) & 0x7F
+end
 
 -- --- Running a test ---------------------------------------------------------------------------
 
