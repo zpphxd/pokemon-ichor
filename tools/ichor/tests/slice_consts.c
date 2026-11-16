@@ -8,6 +8,7 @@
 #include "task.h"
 #include "pokemon.h"
 #include "ichor_save.h"
+#include "ichor_oath.h"
 #include "gba/m4a_internal.h"
 #include "constants/battle.h"
 #include "constants/event_objects.h"
@@ -43,6 +44,11 @@ K(MAP_TEMPLE, MAP_AKTI_TOWN_TEMPLE_OF_HESTIA)
 
 // --- Story flags (SCRIPT.md Part 8) ------------------------------------------
 K(FLAG_SET_WATER_CLOCK, FLAG_ICHOR_SET_WATER_CLOCK)
+K(FLAG_DIFFICULTY_CHOSEN, FLAG_ICHOR_DIFFICULTY_CHOSEN)
+K(VAR_DIFFICULTY, VAR_ICHOR_DIFFICULTY)
+K(FLAG_OATH_CHOICE_PENDING, FLAG_ICHOR_OATH_CHOICE_PENDING)
+K(OFF_ICHOR_OATH_STATE, offsetof(struct IchorSave, oath.state))
+K(OATH_DECLINED, ICHOR_OATH_DECLINED)
 K(FLAG_TALKED_TO_MOM, FLAG_ICHOR_TALKED_TO_MOM)
 K(FLAG_THREAD_READ, FLAG_ICHOR_THREAD_READ)
 K(FLAG_GOT_STARTER, FLAG_ICHOR_GOT_STARTER)
@@ -273,6 +279,7 @@ K(MAP_OFFSET, MAP_OFFSET)
 K(MAPGRID_COLLISION_MASK, MAPGRID_COLLISION_MASK)
 K(MAPGRID_METATILE_ID_MASK, MAPGRID_METATILE_ID_MASK)
 K(POKEMON_SIZE, sizeof(struct Pokemon))
+K(B_TRAINER_PLAYER, B_TRAINER_PLAYER)
 K(OFF_MON_HP, offsetof(struct Pokemon, hp))
 K(OFF_MON_MAXHP, offsetof(struct Pokemon, maxHP))
 K(OFF_MON_LEVEL, offsetof(struct Pokemon, level))

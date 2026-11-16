@@ -168,6 +168,25 @@ confirmation rejection and real save/reset/CONTINUE for all modes.
 Oath rules and opening selection are documented in §11. Later chapter cap
 milestones and natural-level approval remain open.
 
+`SLICE_NATURAL=1 SLICE_DIFFICULTY=hero SLICE_STARTER=0 tools/ichor/tests/slice_playthrough.sh`
+starts a genuine NEW GAME without the existing level-100 assist. The shared Lua
+adapter rejects emulator memory writes, state loading, injected RAM scripts and
+the assist; startup probes exercise those guards. Natural runs cannot use
+`SLICE_FROM` or `SLICE_WORKAROUNDS`. `PARTY` records read actual species, levels,
+EXP and HP around battles. Difficulty is chosen through the real clock menu;
+the separate Oath stays declined. Kleon's opening loss is a valid story branch,
+not a recorded victory; later losses stop the natural pilot explicitly.
+
+`SLICE_STOP_AFTER=<beat>` requests partial coverage with a distinct `PARTIAL PASS`
+marker. It does not satisfy the full-run endpoint checks or trainer checklist.
+`tools/ichor/tests/slice_natural_opening.sh` exercises all nine starter/difficulty
+prologues through Kleon, Alethea's heal/gifts and Mom's return. The pilot still
+uses the first move, runs from wild encounters and does not build/train a team
+or spend healing items. Its failures are **not balance defects**. Complete
+natural-level Kalliste/Act I runs and player approval remain separate gates.
+The continuous route currently ends at the Emporion gate after Laurel 2, not
+the end of Act I.
+
 ## 2. Relics (SYSTEMS §1, §2)
 
 Relics are key items. **No Pokémon ever needs a field move:** the party menu offers none, and every obstacle checks the bag.

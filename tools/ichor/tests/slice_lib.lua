@@ -26,7 +26,12 @@ L.K = { A = C.GBA_KEY.A, B = C.GBA_KEY.B, START = C.GBA_KEY.START, SELECT = C.GB
 local K = L.K
 
 local emu = setmetatable({}, { __index = function(_, name)
-  return function(_, ...) return coroutine.yield("call", name, ...) end
+  return function(_, ...)
+    if L.readOnly and (name:match("^write") or name:match("^loadState")) then
+      L.fail("unassisted run refused emulator " .. name)
+    end
+    return coroutine.yield("call", name, ...)
+  end
 end })
 L.emu = emu
 
@@ -36,6 +41,7 @@ function L.init(opts)
   S = dofile(opts.symbols)
   L.S = S
   L.OUT = OUT
+  L.readOnly = opts.readOnly or false
 end
 
 -- --- Logging and checks --------------------------------------------------------------
@@ -320,11 +326,24 @@ local function defeatedSet()
 end
 
 L.battles = {}
+local function partySnapshot(label)
+  local party = {}
+  for slot = 0, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
+    local hp, maxHp = L.partyHp(slot)
+    party[#party + 1] = string.format("slot=%d species=%d level=%d exp=%d hp=%d/%d",
+                                    slot, L.partySpecies(slot), L.partyLevel(slot),
+                                    L.partyExperience(slot), hp, maxHp)
+  end
+  log("PARTY " .. label .. " " .. table.concat(party, "; "))
+end
+
 -- Play out a battle that has started (or is starting): trainers are fought with
 -- the first move, wild Pokémon are run from (unless running is barred, when they
 -- are fought too). Returns a record of it.
 function L.battle()
   local before = defeatedSet()
+  local permitsLoss = L.getFlag(S.FLAG_NO_WHITEOUT)
+  partySnapshot("before")
   waitUntil(L.inBattle, 1200, "the battle to start")
   local trainer = L.isTrainerBattle()
   local rec = { trainer = trainer, song = 0, start = now() }
@@ -361,6 +380,7 @@ function L.battle()
     if now() - t0 > 30000 then L.shot("stuck_battle"); fail("a battle never ended") end
   end
   rec.outcome = emu:read8(S.gBattleOutcome)
+  partySnapshot("after")
   rec.turns = turns
   local after = defeatedSet()
   for _, n in ipairs(TRAINERS) do
@@ -369,6 +389,9 @@ function L.battle()
   L.battles[#L.battles + 1] = rec
   log(string.format("BATTLE %s %s outcome %d song %s turns %d frames %d", trainer and "trainer" or "wild",
                     rec.who or "-", rec.outcome, L.songName(rec.song), turns, now() - rec.start))
+  if L.readOnly and rec.outcome == S.B_OUTCOME_LOST and not permitsLoss then
+    fail("natural solo first-move pilot lost; see PARTY/BATTLE records, not a balance verdict")
+  end
   return rec
 end
 
@@ -466,6 +489,8 @@ function L.settle(opts)
         L.shot(string.format("menu_%s", a))
         if type(a) == "number" then
           for _ = 1, a do tap(K.DOWN) end
+        elseif a == "up" then
+          tap(K.UP)
         elseif a == "down" or a == "no" then
           tap(K.DOWN)
         end
@@ -1052,6 +1077,7 @@ local function poke(addr, t)
 end
 -- Run `script` (a byte list) once, as the current map's ON_FRAME script.
 function L.runRamScript(script)
+  if L.readOnly then fail("unassisted run refused a RAM script") end
   local tableAddr, frameTable, code = SCRATCH, SCRATCH + 0x20, SCRATCH + 0x40
   poke(code, script)
   poke(frameTable, { { S.VAR_TEMP_0, 2 }, { 0, 2 }, { code, 4 }, { 0, 2 } })
@@ -1074,6 +1100,7 @@ end
 -- still obeys (the expansion's obedience goes by met level) and never evolves or
 -- learns a move: at level 100 it gains no experience.
 function L.assistLevel100()
+  if L.readOnly then fail("unassisted run refused the level-100 assist") end
   local mon = L.partyMon(0)
   local personality, otId = emu:read32(mon), emu:read32(mon + 4)
   local key = personality ~ otId
@@ -1103,6 +1130,16 @@ function L.assistLevel100()
   waitUntil(function() return L.partyLevel(0) == S.MAX_LEVEL end, 120, "the level-100 assist")
   return species, growth, exp100
 end
+
+local function growthWord(slot, offset)
+  local mon = L.partyMon(slot)
+  local personality, otId = emu:read32(mon), emu:read32(mon + 4)
+  local substruct = emu:read8(S.sSubstructOffsets + personality % 24)
+  return emu:read32(mon + S.OFF_BOXMON_SECURE + substruct * S.SUBSTRUCT_SIZE + offset) ~ personality ~ otId
+end
+
+function L.partySpecies(slot) return growthWord(slot, 0) & 0x7FF end
+function L.partyExperience(slot) return growthWord(slot, 4) & 0x1FFFFF end
 
 -- --- Running a test ---------------------------------------------------------------------------
 
