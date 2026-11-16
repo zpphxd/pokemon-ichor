@@ -409,10 +409,11 @@ by repeat conversations or map reentry. Reachable Act I omens include actual
 Kerazap, Melibee and Stachyss outbreaks and Eleusa's sun weather. Its rare
 Korantha visitor is a real level-22 encounter: capture or defeat consumes the
 day's visit, while escape or loss leaves it available. An off-day legacy save
-cannot reveal it; reentry cannot respawn a caught visitor. The other rare
-visitors and later omen callers remain unfinished. An expired visitor cannot
-start a battle after a day change in the wheat; seamless live object/weather
-refresh on day rollover remains unfinished.
+cannot reveal it; reentry cannot respawn a caught visitor. Later chapter omen
+callers remain unfinished. An expired visitor cannot start a battle after a day
+change in the wheat. Midnight rollover now refreshes live visitor objects and
+Eleusa's sun/normal weather without reentry. It waits through active scripts,
+fades and the Frozen Hour, and new arrivals do not overlap the player.
 Emporion's marked-jar Pithound omen is also integrated: Halitherses names the
 westernmost stoa jar, which holds a real level-16 visitor only on its omen day.
 Capture/defeat consumes that visit; escape/loss keeps it available. The other

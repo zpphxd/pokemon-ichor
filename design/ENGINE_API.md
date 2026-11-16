@@ -736,7 +736,14 @@ A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR
 - **What an omen does by itself:**
   - **A swarm** starts the expansion's mass outbreak for the day: half the row's `map`'s land encounters are its `species` at its `level`, with the species' own moves.
   - **A visitor's object** shows only on its day. Each new day the engine sets every visitor's `hideFlag`, then clears today's. A map's script sets it again once the visitor is caught or beaten.
-  - **Weather** is the map's `ON_TRANSITION`, as above.
+  - **Live rollover** queues a field refresh after the daily draw. Once the
+    player is stationary and no script, fade or Frozen Hour is active, expired
+    visitor objects are removed and visible new arrivals are spawned. A new
+    arrival waits if the player occupies its tile. This does not respawn a
+    same-day consumed visitor or remove Emporion's permanent marked jar.
+  - **Weather** is generally the map's `ON_TRANSITION`, as above. Eleusa uses
+    `special(Ichor_SetOmenWeather)` to select sun or normal weather from the same
+    policy as live rollover; the field refresh updates both saved and live weather.
 - **Adding an omen.** Number it in `include/constants/ichor.h` (`OMEN_SWARM_*`, `OMEN_VISITOR_*`, `OMEN_WEATHER_*`), then add a row:
   ```
   { .kind = OMEN_SWARM, .entry = OMEN_SWARM_ROUTE6, .unlockFlag = FLAG_ICHOR_ARRIVED_ELEUSA,
@@ -753,9 +760,8 @@ A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR
   with `FLAG_ICHOR_HIDE_OMEN_KORANTHA`. Capture/defeat hides it until another
   matching omen; escape/loss does not. Map entry hides off-day visitors even
   on legacy saves with an unset new flag. Interaction also rejects an expired
-  visitor if the day changes while the player stays in the wheat. Daily flags
-  do not refresh live objects or weather by themselves; seamless on-map day
-  rollover and other Act I visitor callers remain open.
+  visitor if the day changes while the player stays in the wheat. The daily
+  draw now queues the live refresh described above.
   Emporion's `OMEN_VISITOR_EMPORION_PITHOUND` (3) unlocks on the first city
   visit. Only the westernmost stoa jar at (10,24), whose description identifies
   a scratched paw-print, starts this level-16 visitor. Its BG script checks the
@@ -768,6 +774,10 @@ A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR
   `FLAG_ICHOR_HIDE_OMEN_NEMECUB` records capture/defeat for that visit; loss and
   escape preserve it. Entry and interaction reject off-day visitors, including
   legacy saves and an on-map day change.
+  `tools/ichor/tests/omen_rollover.sh` checks actual midnight field-clock
+  rollover without map reentry: Korantha and Nemecub arrival/expiry, same-day
+  consumption, script/Frozen Hour deferral, occupied-tile arrival, and
+  Eleusa's saved/live sun onset and expiry.
 - **Halitherses's reading** uses the actual saved kind/entry and
   `FLAG_DAILY_ICHOR_AUGURY_READ`. A good-sign blessing asks before replacing
   the current blessing, grants Hermes 100 steps without Favor, and cannot be
