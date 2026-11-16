@@ -459,9 +459,16 @@ her written notes, all twelve distinct 64x64 black-figure paintings, saved
 restoration flags and repeat reading. Hephaestus's and Paris's restorations
 grant their gods five Favor once. All twelve restored amphorae reveal Daphne's
 last written lecture and one Ability Patch, with a saved full-Bag retry.
-Arachne's existing Hollow encounter now has a genuine source for its gate.
-Kronos's and Persephone's encounter callers, later-region leads and their
-Scroll of Deeds presentation remain unfinished.
+The three Act I leads are playable after actual restoration: Kronion's altar
+offers Cairnolith Lv20 at night (Sand Force, Hard Stone), the Hollow's web
+chamber offers Raknit Lv20 (Defiant), and Eleusa's meadow offers Persenyx Lv22
+at dusk. Escape, declined approach and whiteout preserve the encounters;
+victory/capture claim independent saved flags. Raknit and Persenyx disappear
+immediately when claimed, rather than requiring reentry. Dusk arrivals/expiry
+refresh safely on the live field, deferring during scripts, the Frozen Hour
+and occupied arrival tiles. The existing Korantha omen is now in reachable
+wheat outside the sealed Rharian field; the sacred fence remains intact.
+Other amphora leads and their Scroll of Deeds presentation remain unfinished.
 The sanctum now continues through Kleon's departure and Daphne's revelation,
 with both dialogue branches, one real Star Chart, and independent saved Act I
 completion flags instead of a fourth-Laurel alias. Full key-item pockets cannot

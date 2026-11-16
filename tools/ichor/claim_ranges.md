@@ -72,7 +72,8 @@ Daily general offset 0x40 is `FLAG_DAILY_ICHOR_AUGURY_READ`: one shared
 reading/blessing entitlement per day, retained across map changes.
 
 General bank offset 0x08E is `FLAG_ICHOR_HIDE_OMEN_KORANTHA`, Eleusa's rare
-visitor at (32,35). Visitor id 2 preserves the reserved Act II visitor ids 0/1.
+visitor at (17,35), in the reachable wheat rather than the sealed Rharian field.
+Visitor id 2 preserves the reserved Act II visitor ids 0/1.
 The daily omen clears this hide flag only for a matching visit; capture/defeat
 sets it again, while escape/loss leaves it available.
 General bank offset 0x08F is `FLAG_ICHOR_HIDE_OMEN_PITHOUND`, visitor id 3.
@@ -90,6 +91,11 @@ whole gift fits; `FLAG_ICHOR_WROTE_TO_MOM` independently records the sent letter
 General offset 0x02D is `FLAG_ICHOR_HIDE_DAPHNE_AKADEMIA`. The Akademia transition
 sets it after `FLAG_ICHOR_MYSTERIES_NIGHT`, preventing duplicate home/mainland
 appearances; earlier visits clear it.
+General offsets 0x02F/0x030 are `FLAG_ICHOR_KRONION_ALTAR_STONE` and
+`FLAG_ICHOR_ELEUSA_PERSENYX`, permanent capture/victory receipts for the
+restored-amphora encounters. Offset 0x031 is
+`FLAG_ICHOR_HIDE_AMPHORA_PERSENYX`, derived from restoration, the receipt and
+dusk; it is not the encounter's completion state or a daily omen flag.
 Isthmus excavation uses daily dig indices 4 (kilns) and 5 (hill spur), and fixed
 find index 1 (family tomb, Girdle-gated). All belong to the Arachne amphora.
 These are offsets in the reserved dig ranges, not the general flag range.

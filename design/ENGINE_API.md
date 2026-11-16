@@ -644,6 +644,10 @@ if (var(VAR_RESULT) == TRUE) {
 ### Holding the day-and-night tint
 
 - **`setvar(VAR_0x8004, TIME_EVENING)`, then `special(Ichor_HoldTimeOfDay)`.** The tint holds at that time of day, whatever the clock says. The hold lasts through warps and saves until `special(Ichor_ReleaseTimeOfDay)`. It takes `TIME_MORNING`, `TIME_DAY`, `TIME_EVENING` or `TIME_NIGHT`, each at full strength.
+- **`specialvar(VAR_RESULT, Ichor_GetTimeOfDay)`.** Returns the current
+  `TIME_*` value, including a script's held time. DAY/NIGHT TINT OFF is visual
+  only and does not turn nighttime gameplay into daytime. The underlying C
+  `GetTimeOfDay` is not itself a script special.
 - **It's the game's time of day while held,** not just the colors. Encounter tables and time-based evolutions follow it, so night falls at Delphoi for the Pokémon too.
 - The tint only shows on maps with natural light (towns, routes and the sea), so interiors look the same either way.
 - The expansion's own `SetTimeOfDay` hour override still works, but it resets on every warp. Use the hold for anything that spans maps.
@@ -756,7 +760,7 @@ A god in disguise is an object event whose trainer type is **`TRAINER_TYPE_ICHOR
   weather. The latter four unlock on arrival in Eleusa. Swarm ids 2-5 preserve
   the reserved Act II entries 0/1. Eleusa's transition clears the previous
   weather before applying today's sun. Later rows remain progress-gated;
-  Eleusa's `OMEN_VISITOR_ELEUSA_KORANTHA` (2) is registered at (32,35), level 22,
+  Eleusa's `OMEN_VISITOR_ELEUSA_KORANTHA` (2) is registered at (17,35), level 22,
   with `FLAG_ICHOR_HIDE_OMEN_KORANTHA`. Capture/defeat hides it until another
   matching omen; escape/loss does not. Map entry hides off-day visitors even
   on legacy saves with an unset new flag. Interaction also rejects an expired
@@ -935,3 +939,29 @@ not an automatically finished encounter.
 paintings, cancellation, explicit restoration, Favor, saved/full-Bag collection
 rewards and repeated reading. `tools/ichor/tests/kalliste_digs.sh` also follows
 four actually excavated Kronos sherds through shelf restoration and CONTINUE.
+
+### The Act I amphora encounters
+
+Checking Kronion's existing broken altar after restoring Kronos offers
+Cairnolith Lv20 at `TIME_NIGHT`, with Sand Force and a held Hard Stone.
+`FLAG_ICHOR_KRONION_ALTAR_STONE` records capture or victory, not an approach,
+escape or whiteout. Both existing altar BG events share this state.
+
+The Hollow's web chamber similarly uses the canonical Arachne restoration
+flag to reveal Raknit Lv20 with Defiant. `FLAG_ICHOR_HOLLOW_RAKNIT` records
+its outcome. Claimed Raknit is hidden/removed immediately and its interaction
+rechecks eligibility, closing same-map repeats.
+
+`Ichor_SetPersephoneVisitor` derives `FLAG_ICHOR_HIDE_AMPHORA_PERSENYX` only
+on Eleusa's map: show the object at (37,33) if Persephone is restored,
+`FLAG_ICHOR_ELEUSA_PERSENYX` is unset and the time is `TIME_EVENING`. The
+map transition calls it before object placement; the safe field refresh
+also handles clock boundaries without leaving the map. Scripts, palette
+fades, the Frozen Hour, player movement and an occupied arrival tile defer
+that refresh. Its Lv22 battle is optional, and only capture/victory claim it.
+These are independent of daily omen draws and do not reset on another day.
+
+`tools/ichor/tests/amphora_leads.sh` restores the three myths through the real
+shelf and exercises exact enemy levels/abilities/items, declined approaches,
+escape, whiteout, victory, actual ball captures, save/CONTINUE and live dusk
+boundaries. The battle-strength assist is not natural-level balance approval.
