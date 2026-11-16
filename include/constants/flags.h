@@ -1782,6 +1782,7 @@
 #define FLAG_ICHOR_ITEM_HOLLOW_ETHER            (FLAG_ICHOR_GENERAL_START + 0x029) // Ichor: Hecate's Hollow: Ether by the second brazier
 #define FLAG_ICHOR_ITEM_HOLLOW_DUSK_BALL        (FLAG_ICHOR_GENERAL_START + 0x02A) // Ichor: Hecate's Hollow: Dusk Ball in the shortcut tunnel
 #define FLAG_ICHOR_ITEM_HOLLOW_REVIVE           (FLAG_ICHOR_GENERAL_START + 0x02B) // Ichor: Hecate's Hollow: Revive in Kallias's side passage
+#define FLAG_ICHOR_GOT_MOMS_HONEY               (FLAG_ICHOR_GENERAL_START + 0x02C) // Ichor: Elaia: received Mom's three Honey after writing home
 #define FLAG_ICHOR_ITEM_ROUTE5_SUPER_POTION     (FLAG_ICHOR_GENERAL_START + 0x040) // Ichor: Route 5: the Super Potion in the pine clearing
 #define FLAG_ICHOR_ITEM_ROUTE5_GREAT_BALL       (FLAG_ICHOR_GENERAL_START + 0x041) // Ichor: Route 5: the Great Ball beside the rock seat
 #define FLAG_ICHOR_ITEM_ROUTE5_PP_UP            (FLAG_ICHOR_GENERAL_START + 0x042) // Ichor: Route 5: the PP Up at the watchtower (the Girdle, Act II)

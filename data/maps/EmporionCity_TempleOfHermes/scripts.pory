@@ -688,13 +688,16 @@ script EmporionCity_TempleOfHermes_EventScript_KerykosDais {
 script EmporionCity_TempleOfHermes_EventScript_KerykosDefeated {
     setspeaker(EmporionCity_TempleOfHermes_Text_NameKerykos)
     msgbox(format("Well run, and well fought! Here. The Herald Laurel."))
+    if (!flag(FLAG_BADGE02_GET)) {
+        setvar(VAR_0x8004, ICHOR_GOD_HERMES)
+        setvar(VAR_0x8005, ICHOR_FAVOR_LAUREL)
+        special(Ichor_AddFavor)
+    }
     setflag(FLAG_BADGE02_GET)
     // The temple stays solved: every acolyte counts as beaten (MAP_DESIGN.md §4).
     settrainerflag(TRAINER_ICHOR_PODARGE)
     settrainerflag(TRAINER_ICHOR_EUCHIDAS)
     settrainerflag(TRAINER_ICHOR_PHILONIDES)
-    // ICHOR_STUB_RITES: Hermes Favor +15 here, special(Ichor_AddFavor) with
-    // VAR_0x8004 = ICHOR_GOD_HERMES and VAR_0x8005 = ICHOR_FAVOR_LAUREL (ENGINE_API.md §3).
     setspeaker(SP_NAME_NONE)
     message(format("{PLAYER} received the Herald Laurel from Kerykos!"))
     waitmessage
@@ -739,11 +742,7 @@ script EmporionCity_TempleOfHermes_EventScript_GiveAerialAce {
     end
 }
 
-// ICHOR_STUB_RITES: EventScript_IchorHierophantRite (ENGINE_API.md §3) with VAR_0x8004 =
-// ICHOR_GOD_HERMES teaches the rite and gives one loved offering on the first visit.
-// Until the engine's rites land, Kerykos says it himself and gives Honey. The flag is
-// the engine's own Hierophant's-offering flag for Hermes (FLAG_ICHOR_GIFTS_START +
-// 4 * god + 3, Hermes is god 2), so the engine won't give it twice.
+// Kerykos's rite uses the shared Hierophant offering flag and keeps a full-Bag retry.
 script EmporionCity_TempleOfHermes_EventScript_KerykosRite {
     if (flag(FLAG_ICHOR_GIFTS_START + 11)) {
         return
@@ -776,9 +775,10 @@ script EmporionCity_TempleOfHermes_EventScript_KerykosAfter {
         goto(EmporionCity_TempleOfHermes_EventScript_GiveAerialAce)
     }
     setspeaker(EmporionCity_TempleOfHermes_Text_NameKerykos)
-    // ICHOR_STUB_RITES: gift I (TM U-turn at Hermes Favor 30) is EventScript_IchorHierophantGift
-    // with VAR_0x8004 = ICHOR_GOD_HERMES, and its lines are beat 15's, once Favor exists.
     call(EmporionCity_TempleOfHermes_EventScript_KerykosRite)
+    setvar(VAR_0x8004, ICHOR_GOD_HERMES)
+    call(EventScript_IchorHierophantGift)
+    setspeaker(EmporionCity_TempleOfHermes_Text_NameKerykos)
     msgbox(format(
         "Herms on every road! Oil them all. Hermes remembers.\p"
         "So do I. I have a list."))
@@ -855,13 +855,9 @@ script EmporionCity_TempleOfHermes_EventScript_Frieze {
     end
 }
 
-// ICHOR_STUB_RITES: EventScript_IchorTempleAltar_Hermes, the god's great altar (offerings
-// count double), replaces this once the engine's rites land.
 script EmporionCity_TempleOfHermes_EventScript_Altar {
-    msgbox(format(
-        "Hermes in bronze-capped marble, his petasos tipped back, his staff raised.\p"
-        "At his feet, his great altar."), MSGBOX_SIGN)
-    end
+    setspeaker(SP_NAME_NONE)
+    goto(EventScript_IchorTempleAltar_Hermes)
 }
 
 script EmporionCity_TempleOfHermes_EventScript_ScrollTable {

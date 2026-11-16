@@ -103,3 +103,50 @@ RitesTest_Desecrated:
 	setvar VAR_0x8004, ICHOR_GOD_APOLLO
 	setvar VAR_0x8005, 0
 	goto EventScript_IchorDesecratedAltar
+
+	test_header RitesTest_HermesMapHeader, RitesTest_HermesMap
+RitesTest_HermesMap:
+	lockall
+	setvar VAR_TEMP_F, 1
+	setflag FLAG_BADGE02_GET
+	setflag FLAG_ICHOR_HERALDS_RUN_DONE
+	setflag FLAG_ICHOR_GOT_TM_AERIAL_ACE
+	setflag FLAG_ICHOR_GIFT(ICHOR_GOD_HERMES, ICHOR_GIFT_HIEROPHANT)
+	givemon SPECIES_HARPECK, 5, move1=MOVE_PECK, move2=MOVE_NONE, move3=MOVE_NONE, move4=MOVE_NONE
+	warp MAP_EMPORION_CITY_TEMPLE_OF_HERMES, 9, 5
+	waitstate
+	releaseall
+	end
+
+	test_header RitesTest_DemeterMapHeader, RitesTest_DemeterMap
+RitesTest_DemeterMap:
+	lockall
+	setvar VAR_TEMP_F, 1
+	setflag FLAG_BADGE03_GET
+	warp MAP_ELEUSA_VILLAGE_TEMPLE_OF_DEMETER, 14, 6
+	waitstate
+	releaseall
+	end
+
+	test_header RitesTest_CheckUturnHeader, RitesTest_CheckUturn
+RitesTest_CheckUturn:
+	setvar VAR_TEMP_F, 1
+	callnative RitesTest_ReadMove
+	end
+
+	.align 2
+	.syntax unified
+	.thumb
+	.thumb_func
+RitesTest_ReadMove:
+	push {r4, lr}
+	ldr r0, =gParties
+	ldr r1, =gSpecialVar_0x8004
+	ldrh r1, [r1]
+	adds r0, r0, r1
+	ldr r1, =gSpecialVar_0x8005
+	ldrh r1, [r1]
+	bl GetMonData2
+	ldr r1, =gSpecialVar_0x8007
+	strh r0, [r1]
+	pop {r4, pc}

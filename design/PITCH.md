@@ -431,6 +431,16 @@ Its page ownership and consumed dig state survive saving and CONTINUE.
 Eleusa's field shrine invokes Demeter's real prayer/offerings/Favor menu. Its
 west and east digs have independent daily indices and actual Act I finds,
 including Persephone sherds, rather than turned-earth placeholder messages.
+Hermes's and Demeter's great temple altars now use real rites, including
+daily prayer and doubled offering Favor. Kerykos awards Hermes's +15 Laurel
+Favor once and teaches U-turn at Favor 30; cancellation leaves the lesson
+available. Dynamic rite lessons are registered with the generated tutor lists
+and still respect each species' learnset.
+Mom's return-home dialogue now follows the crossing, ending and letter state.
+All three Emporion day-runners and Eleusa's north herald can send the post-ending
+letter. Mom answers with exactly three Honey, once, with an atomic full-Bag
+refusal and saved pending/claimed state. The reserved story jar and her healing
+offer are unchanged.
 The sanctum now continues through Kleon's departure and Daphne's revelation,
 with both dialogue branches, one real Star Chart, and independent saved Act I
 completion flags instead of a fourth-Laurel alias. Full key-item pockets cannot

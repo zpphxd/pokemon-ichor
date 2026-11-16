@@ -15,5 +15,6 @@ cd "$(dirname "$0")/../../.."
 ROM="${1:-pokeemerald.gba}"
 . tools/ichor/tests/engine_build.sh
 OUT=build/test_ichor_rites
+ENGINE_SYMS="$ENGINE_SYMS CB2_UpdatePartyMenu Task_HandleChooseMonInput"
 engine_prepare RITES "$OUT" tools/ichor/tests/ichor_rites_consts.c tools/ichor/tests/ichor_rites_setup.s
 engine_run RITES "$OUT" tools/ichor/tests/ichor_rites.lua 120000 900

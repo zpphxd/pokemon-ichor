@@ -30,3 +30,11 @@ TEST("Ichor: Act I scrolls teach eligible regional species")
     EXPECT(!CanLearnTeachableMove(SPECIES_KAPLET, MOVE_FLING));
     EXPECT(!CanLearnTeachableMove(SPECIES_MAGIKARP, MOVE_FLING));
 }
+
+TEST("Ichor: dynamically selected rite lessons keep species eligibility")
+{
+    EXPECT(CanLearnTeachableMove(SPECIES_HARPECK, MOVE_U_TURN));
+    EXPECT(CanLearnTeachableMove(SPECIES_KORANTHA, MOVE_LEECH_SEED));
+    EXPECT(!CanLearnTeachableMove(SPECIES_NEBREL, MOVE_U_TURN));
+    EXPECT(!CanLearnTeachableMove(SPECIES_MAGIKARP, MOVE_U_TURN));
+}

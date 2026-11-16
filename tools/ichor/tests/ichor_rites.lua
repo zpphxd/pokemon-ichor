@@ -133,4 +133,60 @@ L.start(function()
   L.runHeader("RitesTest_DesecratedHeader", { answers = { "yes" } })
   expect(L.getFlag(S.FLAG_ICHOR_ALTARS_START) and favor(S.ICHOR_GOD_APOLLO) == math.min(before + 3, 100),
          "cleansing a desecrated altar marks it and gives its god +3 Favor")
+
+  L.runHeader("RitesTest_HermesMapHeader")
+  expect(L.mapId() == S.MAP_HERMES_TEMPLE, "the actual Hermes temple")
+  local hermesAltar = L.sign("EmporionCity_TempleOfHermes_EventScript_Altar")
+  local beforeHermes = favor(S.ICHOR_GOD_HERMES)
+  L.talk(hermesAltar, { answers = { 3 }, every = true })
+  expect(favor(S.ICHOR_GOD_HERMES) == beforeHermes, "leaving the real altar grants no Favor")
+  L.talk(hermesAltar, { answers = { 0, "yes" }, every = true })
+  expect(favor(S.ICHOR_GOD_HERMES) == beforeHermes + 1, "the real Hermes altar accepts prayer")
+  L.talk(hermesAltar, { answers = { 0, "yes" } })
+  expect(favor(S.ICHOR_GOD_HERMES) == beforeHermes + 1, "Hermes prayer is limited to one Favor per day")
+  give(S.ITEM_HONEY)
+  L.talk(hermesAltar, { answers = { 1, 0, "yes" }, every = true })
+  expect(L.itemCount(S.ITEM_HONEY) == 0 and favor(S.ICHOR_GOD_HERMES) == beforeHermes + 11,
+         "the real Hermes temple doubles Honey's Favor and consumes one offering")
+
+  local kerykos = L.npc("EmporionCity_TempleOfHermes_EventScript_Kerykos")
+  setFavor(S.ICHOR_GOD_HERMES, 30)
+  local cancelled = false
+  L.talk(kerykos, { answers = { "no" }, hooks = {
+    CB2_UpdatePartyMenu = function() cancelled = true; wait(20); tap(K.B); wait(8) end,
+  } })
+  expect(cancelled and not L.getFlag(S.FLAG_GIFT_HERMES_I), "cancelling Kerykos's lesson leaves it unclaimed")
+  local picked = false
+  L.talk(kerykos, { answers = { "no" }, every = true, hooks = {
+    CB2_UpdatePartyMenu = function()
+      if not picked then
+        L.waitUntil(function() return L.taskRunning("Task_HandleChooseMonInput") end, 600, "the tutor party selector")
+        wait(20); shot("kerykos_tutor_before")
+        tap(K.RIGHT); wait(8); shot("kerykos_tutor_selected")
+        picked = true
+      end
+      tap(K.A); wait(8)
+    end,
+  } })
+  expect(L.getFlag(S.FLAG_GIFT_HERMES_I), "Kerykos teaches the pending lesson on retry")
+  L.setVar(S.VAR_0x8004, L.partyMon(1) - S.gParties)
+  L.setVar(S.VAR_0x8005, S.MON_DATA_MOVE2)
+  L.runHeader("RitesTest_CheckUturnHeader")
+  expect(L.getVar(S.VAR_0x8007) == S.MOVE_U_TURN, "the eligible Harpeck actually learned U-turn")
+  local offeredAgain = false
+  L.talk(kerykos, { answers = { "no" }, hooks = {
+    CB2_UpdatePartyMenu = function() offeredAgain = true; tap(K.B); wait(8) end,
+  } })
+  expect(not offeredAgain and favor(S.ICHOR_GOD_HERMES) == 30, "Kerykos does not repeat a claimed gift or Laurel Favor")
+
+  L.runHeader("RitesTest_DemeterMapHeader")
+  expect(L.mapId() == S.MAP_DEMETER_TEMPLE, "the actual Demeter temple")
+  local demeterAltar = L.sign("EleusaVillage_TempleOfDemeter_EventScript_GreatAltar")
+  local beforeDemeter = favor(S.ICHOR_GOD_DEMETER)
+  L.talk(demeterAltar, { answers = { 0, "yes" }, every = true })
+  expect(favor(S.ICHOR_GOD_DEMETER) == beforeDemeter + 1, "the real Demeter altar accepts prayer")
+  give(S.ITEM_BARLEY_CAKE)
+  L.talk(demeterAltar, { answers = { 1, 1, "yes" }, every = true })
+  expect(L.itemCount(S.ITEM_BARLEY_CAKE) == 0 and favor(S.ICHOR_GOD_DEMETER) == beforeDemeter + 11,
+         "the real Demeter temple doubles Barley Cake's Favor and consumes one offering")
 end)

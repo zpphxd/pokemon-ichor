@@ -8,6 +8,7 @@
 #include "gba/m4a_internal.h"
 #include "constants/battle.h"
 #include "constants/flags.h"
+#include "constants/ichor.h"
 #include "constants/items.h"
 #include "constants/map_groups.h"
 #include "constants/map_scripts.h"
@@ -103,6 +104,9 @@ K(OFF_SB2_ENCRYPTION_KEY, offsetof(struct SaveBlock2, encryptionKey))
 K(OFF_SB2_OPTIONS, offsetof(struct SaveBlock2, optionsButtonMode) + 1) // the options bitfield follows
 K(OFF_SB3_ICHOR, offsetof(struct SaveBlock3, ichor))
 K(OFF_ICHOR_FLAGS, offsetof(struct IchorSave, flags))
+K(OFF_ICHOR_FAVOR, offsetof(struct IchorSave, favor))
+K(ICHOR_GOD_HERMES, ICHOR_GOD_HERMES)
+K(ICHOR_FAVOR_LAUREL, ICHOR_FAVOR_LAUREL)
 K(ICHOR_FLAGS_START, ICHOR_FLAGS_START)
 K(ICHOR_FLAGS_END, ICHOR_FLAGS_END)
 K(OBJECT_EVENT_SIZE, sizeof(struct ObjectEvent))

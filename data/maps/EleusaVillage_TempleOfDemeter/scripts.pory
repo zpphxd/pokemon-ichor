@@ -29,7 +29,6 @@
 // warp 0, where beat 23 (the sanctum agent's) begins.
 //
 // Stubs, until other sessions land (design/phase2/BUILD.md):
-//   ICHOR_STUB_RITES   Demeter's great altar shows its text only.
 //   ICHOR_STUB_SPRITE  Chloe's portrait (the Acolyte F pic stands in), the initiates'
 //                      walker (pilgrims and youths stand in).
 //   ICHOR_STUB_MUSIC   the Hierophant class plays MUS_ICHOR_BATTLE_RIVAL, as Kerykos's
@@ -924,10 +923,9 @@ movement EleusaVillage_TempleOfDemeter_Movement_PlayerDown { walk_up * 4 }
 // Things to look at
 // ---------------------------------------------------------------------------
 
-// ICHOR_STUB_RITES: Demeter's great altar. When the rites land (ENGINE_API.md §3)
-// this becomes EventScript_IchorTempleAltar_Demeter.
 script EleusaVillage_TempleOfDemeter_EventScript_GreatAltar {
-    msgbox(format("Demeter's great altar. A few grains of barley lie on the bare stone."), MSGBOX_SIGN)
+    setspeaker(SP_NAME_NONE)
+    goto(EventScript_IchorTempleAltar_Demeter)
 }
 
 script EleusaVillage_TempleOfDemeter_EventScript_Throne {

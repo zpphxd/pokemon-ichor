@@ -19,10 +19,7 @@ script EmporionCity_RunnersHouse_EventScript_Dromokleia {
     faceplayer
     if (flag(FLAG_ICHOR_ACT1_COMPLETE) && !flag(FLAG_ICHOR_WROTE_TO_MOM)) {
         setspeaker(EmporionCity_RunnersHouse_Text_NameDromokleia)
-        msgbox(format("A letter for Kalliste? For your mother? Write it. We'll run it.\p"
-                      "What does it say? …“I'm eating.” That's all?\p"
-                      "Mothers like short letters. It means you're busy, not dead."))
-        setflag(FLAG_ICHOR_WROTE_TO_MOM)
+        call(EmporionCity_RunnersHouse_EventScript_LetterHome)
         release
         end
     }
@@ -55,6 +52,11 @@ script EmporionCity_RunnersHouse_EventScript_Runner {
     lock
     faceplayer
     setspeaker(EmporionCity_RunnersHouse_Text_NameRunner)
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE) && !flag(FLAG_ICHOR_WROTE_TO_MOM)) {
+        call(EmporionCity_RunnersHouse_EventScript_LetterHome)
+        release
+        end
+    }
     if (flag(FLAG_ICHOR_DEIGMA_CLUE)) {
         msgbox(format("Sixty-one steps, the Lakonian did the Herald's Run in.\p"
                       "I did it in sixty-three. In my dreams. Every night."))
@@ -68,8 +70,21 @@ script EmporionCity_RunnersHouse_EventScript_YoungRunner {
     lock
     faceplayer
     setspeaker(EmporionCity_RunnersHouse_Text_NameRunner)
+    if (flag(FLAG_ICHOR_ACT1_COMPLETE) && !flag(FLAG_ICHOR_WROTE_TO_MOM)) {
+        call(EmporionCity_RunnersHouse_EventScript_LetterHome)
+        release
+        end
+    }
     msgbox(format("Shh. I ran to Eleusa and back before dawn. My legs are still arguing."))
     release
+}
+
+script EmporionCity_RunnersHouse_EventScript_LetterHome {
+    msgbox(format("A letter for Kalliste? For your mother? Write it. We'll run it.\p"
+                  "What does it say? …“I'm eating.” That's all?\p"
+                  "Mothers like short letters. It means you're busy, not dead."))
+    setflag(FLAG_ICHOR_WROTE_TO_MOM)
+    return
 }
 
 script EmporionCity_RunnersHouse_EventScript_RoadMap {
