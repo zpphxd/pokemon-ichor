@@ -345,4 +345,48 @@ L.start(function()
            and L.snapshot(S.gParties, S.BOX_MON_BYTES) == retained
            and L.snapshot(urnStorage(), S.BOX_BYTES) == fullUrn,
            "capacity refusal retains the pending source and full Urn through save/reset/CONTINUE")
+
+  L.runHeader("Oath_ChoosePartnerHeader", { noSettle = true })
+  L.waitUntil(function() return L.taskRunning("Task_HandleChooseMonInput") end, 900, "the native service chooser")
+  L.wait(90); L.tap(K.A); L.wait(90)
+  L.shot("retained_partner_service_refusal")
+  L.expect(not L.inOverworld() and L.taskRunning("Task_ReturnToChooseMonAfterText")
+           and L.snapshot(S.gParties, S.BOX_MON_BYTES) == retained,
+           "retained fallen partners cannot bypass the lock through a direct party service chooser")
+  L.tap(K.A); L.wait(45); L.tap(K.B); L.settle()
+
+  L.runHeader("Oath_PcHeader", { noSettle = true })
+  L.waitUntil(function() return emu:read8(S.sOathAftermathNotice) & 0x80 ~= 0 end,
+              1200, "the retained-partner reminder in the Pithos menu")
+  L.wait(120); L.tap(K.A); L.wait(120); L.tap(K.A); L.wait(90)
+  L.tap(K.A); main()
+  storage = emu:read32(S.gPokemonStoragePtr)
+  changeBox(K.RIGHT, 0)
+  changeBox(K.RIGHT, 1)
+  local movedLiving = L.snapshot(storage + S.OFF_STORAGE_BOXES + S.BOX_BYTES, S.BOX_MON_BYTES)
+  menu(); L.tap(K.A); main()
+  changeBox(K.LEFT, 0)
+  L.tap(K.RIGHT); L.wait(30); L.tap(K.RIGHT); L.wait(30)
+  menu(); L.tap(K.A); main()
+  L.expect(L.snapshot(storage + S.OFF_STORAGE_BOXES + 2 * S.BOX_MON_BYTES, S.BOX_MON_BYTES) == movedLiving,
+           "a living stored partner can be relocated intact to free an entire ordinary jar")
+  L.tap(K.B); L.wait(60); L.tap(K.B)
+  L.waitUntil(function() return emu:read8(S.sOathAftermathNotice) & 0x80 ~= 0 end,
+              1200, "the automatic storage-exit retry notice")
+  L.wait(120); L.shot("urn_storage_exit_retry")
+  storage = emu:read32(S.gPokemonStoragePtr)
+  local secondUrn = storage + S.OFF_STORAGE_BOXES + S.BOX_BYTES
+  L.expect(emu:read8(S.gPartiesCount) == 1 and L.partyHp(0) > 0
+           and emu:read16(oath() + S.OFF_OATH_URN_BOXES) & 2 ~= 0
+           and L.snapshot(secondUrn, S.BOX_MON_BYTES) == retained,
+           "leaving storage automatically reserves the newly empty jar and buries the retained partner")
+  L.expect(L.snapshot(urnStorage(), S.BOX_BYTES) == fullUrn,
+           "the storage-exit retry preserves every original Urn record")
+  L.tap(K.A); L.wait(90); L.tap(K.B); L.settle()
+  L.runHeader("Oath_SaveHeader")
+  emu:reset(); L.continueSave()
+  storage = emu:read32(S.gPokemonStoragePtr)
+  L.expect(emu:read8(S.gPartiesCount) == 1 and emu:read16(oath() + S.OFF_OATH_URN_BOXES) & 2 ~= 0
+           and L.snapshot(storage + S.OFF_STORAGE_BOXES + S.BOX_BYTES, S.BOX_MON_BYTES) == retained,
+           "the resolved overflow and expanded Urn survive real save/reset/CONTINUE")
 end)

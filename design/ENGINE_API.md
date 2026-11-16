@@ -1119,6 +1119,8 @@ fainting, the locked Urn and run-ending behavior work together.
   cannot use ordinary PC deposit or service-selection APIs. Their summaries
   remain viewable but cannot rename, relearn or reorder moves. They do not
   count as living stored partners or usable stored field-move holders.
+  The party menu offers only SUMMARY/CANCEL; direct-choice services explicitly
+  refuse them without closing the chooser or changing the partner.
 - `Ichor_StoreOathFallen(mon)` stores the entire marked BoxPokemon before
   clearing its source. A full Urn grows only into an entirely empty Pithos
   jar, named URN 2 and onward. Living Pokemon are never displaced. If no
@@ -1142,6 +1144,12 @@ fainting, the locked Urn and run-ending behavior work together.
   script. Transfer and full-capacity notices require acknowledgment without
   replacing the original event script. A full Urn retains the pending fallen
   partner and explains the need for an empty jar.
+- `Ichor_RetryOathUrn()` repeats survivor-safe burial when opening the Pithos
+  menu or returning from storage. Freeing an ordinary jar therefore resolves
+  retained fallen partners without another battle, including after release.
+  The same acknowledged notice is shown before the menu accepts input, and
+  its ordinary description is restored afterward. No usable party survivor
+  still means no transfer; total-party-loss recovery remains separate.
 
 Version 5 takes 40 bytes from the old reserved region at 0x450. Total
 IchorSave/SaveBlock3 sizes and every existing field offset stay unchanged,
@@ -1149,8 +1157,8 @@ including the second flag bank at 0x500. Older saves get zero Oath bytes,
 not whatever previously occupied that reserve. Version 6 takes its two-byte
 Urn mask from padding within those same 40 bytes; version-5 migration
 preserves existing Oath progress and reserves only the original final jar.
-Total-party-loss recovery, field-poison cleanup, overflow service restrictions
-and storage-exit retry, and run-ending callers still need integration before
+Total-party-loss recovery, field-poison cleanup, the full-party/full-Urn
+recovery edge case, and run-ending callers still need integration before
 the Oath can be enabled. In particular, do not expose enrollment while an
 all-party fall could enter an ordinary whiteout with no revivable partner.
 
@@ -1180,11 +1188,14 @@ verify that unsworn saves keep their final jar available. The actual-ROM
 fixture uses the actual battle's automatically transferred fallen BoxPokemon and plays
 view-only menus, summaries, shortcut/group refusal, A/B placement refusal,
 safe return of held ordinary partners, Move items and the party-deposit
-chooser. The complete fixture passes 60 checks with 23 screenshots, including
+chooser. The complete fixture passes 68 checks with 25 screenshots, including
 byte-for-byte Urn preservation through a second save/reset/CONTINUE after
 release. It also fills the Urn, occupies every ordinary jar, plays another real
 fall and verifies the explicit capacity notice, retained source, continued
-non-revival and preservation through save/reset/CONTINUE. Native tests cover
+non-revival and preservation through save/reset/CONTINUE. A direct-choice
+party service refuses the retained partner; moving a living stored partner
+to empty a jar triggers automatic burial on storage exit, with the original
+Urn unchanged and the expansion preserved by save/reset/CONTINUE. Native tests cover
 multiple fallen partners, survivor/Egg compaction, partial-capacity retry,
 simulation and defeat exclusions, and the no-survivor guard. None of this
 claims that total-party-loss recovery or the full Oath is finished.

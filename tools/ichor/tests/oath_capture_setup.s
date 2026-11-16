@@ -94,6 +94,12 @@ Oath_Pc:
 	special ShowPokemonStorageSystemPC
 	end
 
+	test_header Oath_ChoosePartnerHeader, Oath_ChoosePartner
+Oath_ChoosePartner:
+	setvar VAR_TEMP_F, 1
+	special ChoosePartyMon
+	end
+
 	.thumb
 	.align 2
 	.thumb_func

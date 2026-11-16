@@ -573,7 +573,7 @@ TEST("Ichor: partial aftermath capacity retains its source and can retry safely"
     EXPECT_EQ(Ichor_StoreOathPartyFallen(), ICHOR_URN_FULL);
     EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][1], &retained, sizeof(retained)), 0);
     ZeroBoxMonAt(0, 0);
-    EXPECT_EQ(Ichor_StoreOathPartyFallen(), ICHOR_URN_STORED);
+    Ichor_RetryOathUrn();
     EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
     EXPECT_EQ(memcmp(&gParties[B_TRAINER_PLAYER][0], &living, sizeof(living)), 0);
     EXPECT(Ichor_IsUrnBox(0));
