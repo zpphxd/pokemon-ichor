@@ -1,0 +1,215 @@
+{
+  "authoring": "image_generation source illustrations; selected RGBA source crops, not hand-authored native art",
+  "native_pipeline": "tools/ichor/art/model_cast.py; alpha >=128, nearest-neighbor reduction, fixed shared walker palettes, GBA indexed portrait palettes",
+  "artistic_status": "candidate; technical checks are not user approval",
+  "approved_theo_native_sha256": "eab2845d3ffcd20adee2d63978e504747a37a959625bde9fb1f0b6f1ca20cd7f",
+  "source_files": {
+    "alethea-front.png": {
+      "sha256": "14e110b37b173044cddc1611c8eee5787e599871a0143b4920e030ea9fa94722",
+      "preserved_source_variant": "alethea-front.png"
+    },
+    "cami-front.png": {
+      "sha256": "68d2cd3724ccbf58835ff95dd4886bdfd73d843d2f705a0938cd91d7dd3dfe28",
+      "preserved_source_variant": "cami-front.png"
+    },
+    "hierophant_ione-front.png": {
+      "sha256": "ef85741018c1ab9cd38740dc1d48d323f161442443485aa6eadc74ffd3ba2385",
+      "preserved_source_variant": "hierophant_ione-front.png"
+    },
+    "hierophant_kerykos-front.png": {
+      "sha256": "5990e363e57d111c913d2e6e760a77fddb5ca6bef88164b08d8db1551a4cd78d",
+      "preserved_source_variant": "hierophant_kerykos-front.png"
+    },
+    "kleon-front.png": {
+      "sha256": "e43d4ee57e224aea6b1ba51e1f2733e25450be516813c2b1ff9b32ebca0bc80b",
+      "preserved_source_variant": "kleon-front.png"
+    },
+    "professor_daphne-front.png": {
+      "sha256": "8b536cd6283dd2f5dc64f4f8f3e961530c14f150bb179f673403a0b2848a96f8",
+      "preserved_source_variant": "professor_daphne-front.png"
+    },
+    "sam-front.png": {
+      "sha256": "89695683702c53dc99286016d3ac08141c12e6bf7edb42aee95fd75309f890ab",
+      "preserved_source_variant": "sam-front.png"
+    },
+    "titan_grunt-front.png": {
+      "sha256": "ec38828dba323c595bed8fd48c26c93a7ed80028284ad4f1c43af60c18669b51",
+      "preserved_source_variant": "titan_grunt-front.png"
+    },
+    "aiakides-walk.png": {
+      "sha256": "d170cd44a7de4b641176b0a2dbf4502f96a04c17676a84e3d66441e0fc684576",
+      "preserved_source_variant": "aiakides-walk-corrected.png"
+    },
+    "alethea-walk.png": {
+      "sha256": "dd56cef228906b8b342344512f8ba484f2f61f866e3c84cbfdc02d557d48da26",
+      "preserved_source_variant": "alethea-walk.png"
+    },
+    "apollo-walk.png": {
+      "sha256": "d00bc8f2979110138cfbf03383a66fd45d9dbca3424b627ec1542c10c248d1dd",
+      "preserved_source_variant": "apollo-walk-corrected.png"
+    },
+    "cami-walk.png": {
+      "sha256": "0b93fdf514606c1339b516fcbf75d5fde3616852544a97dd8be6baf261818069",
+      "preserved_source_variant": "cami-walk-corrected.png"
+    },
+    "demeter-walk.png": {
+      "sha256": "7cb97040dcafd4a261adb25e1d619c1e1ee11db0db3fb0e8d19e769d1a5ead51",
+      "preserved_source_variant": "demeter-walk.png"
+    },
+    "endeis-walk.png": {
+      "sha256": "db0525f57fa77534fede365c56af77451ef86ebd865cbe1680dd84acedb6bd25",
+      "preserved_source_variant": "endeis-walk-corrected.png"
+    },
+    "kedalion-walk.png": {
+      "sha256": "6544fa2e7d2a9ff90baa205e401448ac168bf0f29611896aa20ffd231031e1cb",
+      "preserved_source_variant": "kedalion-walk.png"
+    },
+    "kerykos-walk.png": {
+      "sha256": "cbc1a04d2348174bff1e6c5e98685a6dd2db07eed6b6070fefe32e88981b0b76",
+      "preserved_source_variant": "kerykos-walk.png"
+    },
+    "kleon-walk.png": {
+      "sha256": "393857cfc2ea4b77fe26c27057c56596629a8a16828b0f39ba0d5b4566b72678",
+      "preserved_source_variant": "kleon-walk.png"
+    },
+    "kleon_seasick-walk.png": {
+      "sha256": "28425240837c12646c56a27882af87475fdb99fd2b7acad6d7c4d4a1c8f9d721",
+      "preserved_source_variant": "kleon_seasick-walk.png"
+    },
+    "kleon_tablet-walk.png": {
+      "sha256": "6cc04faa95a88f44de4f760f6caed52a5107e12c7df67d5d65e9353ec2ded241",
+      "preserved_source_variant": "kleon_tablet-walk.png"
+    },
+    "mom-walk.png": {
+      "sha256": "cc70d76681d46f51756ba3effac8857c0f17483c9bd23faf2347777856eb25a4",
+      "preserved_source_variant": "mom-walk.png"
+    },
+    "pheidon-walk.png": {
+      "sha256": "f892de3ffc508fa607e85ca0fbfc24f47dc54ae4aaeb7c3cad2f6e1b45792750",
+      "preserved_source_variant": "pheidon-walk-corrected.png"
+    },
+    "professor_daphne-walk.png": {
+      "sha256": "091e904f2f4522b1615186f39f5fc4d417d892a172e506daa80e358fc2520c6d",
+      "preserved_source_variant": "professor_daphne-walk.png"
+    },
+    "pronomos-walk.png": {
+      "sha256": "48c0f4baf95f44bde43e331e4f1da69d4bf6fce1126fa1da15118893c1e9ab68",
+      "preserved_source_variant": "pronomos-walk.png"
+    },
+    "sam-walk.png": {
+      "sha256": "2cd0e51f31d9f2efdd5422214a0f9a5b54f63713ab8c9ea2612717a559982d0c",
+      "preserved_source_variant": "sam-walk.png"
+    },
+    "hierophant_ione-walk.png": {
+      "sha256": "c663334759875ee16d53d5e77b8168d839c28731205bb2c2d435470792a03c83",
+      "preserved_source_variant": "hierophant_ione-walk.png"
+    },
+    "titan_grunt-walk.png": {
+      "sha256": "8c3c82b21ca761f96a8c27f3dc1f4042c9f321533039d81419555950939cc720",
+      "preserved_source_variant": "titan_grunt-walk.png"
+    },
+    "aiakides-profile-b.png": {
+      "sha256": "ebf03b310faa8bbf3a3e9f06727d88f2c2a94c62d706488191744a634a18ad5b",
+      "preserved_source_variant": "aiakides-profile-b.png"
+    },
+    "alethea-profile-b.png": {
+      "sha256": "383c3abf2c044da86f6907874bd63074bb4d34be89801087dd660fc4bc106b2b",
+      "preserved_source_variant": "alethea-profile-b.png"
+    },
+    "apollo-profile-b.png": {
+      "sha256": "74b18ac1d027712edc2e93b15fd1695129a33d4950f1e60805a2878df29eac05",
+      "preserved_source_variant": "apollo-profile-b.png"
+    },
+    "cami-profile-b.png": {
+      "sha256": "1b29e7e22ebdf45bb89d99f8967c628ab46b2a99a82061990f34ba39fded69dd",
+      "preserved_source_variant": "cami-profile-b.png"
+    },
+    "demeter-profile-b.png": {
+      "sha256": "f52fff7a378949266c27894da0655030d0f0ef512ce14da9ab7637f33468c701",
+      "preserved_source_variant": "demeter-profile-b.png"
+    },
+    "endeis-profile-b.png": {
+      "sha256": "b18b083a04a6e6e674cd3ba1c47fe3c0555be0ae78d27102035f9666a86a713a",
+      "preserved_source_variant": "endeis-profile-b.png"
+    },
+    "kedalion-profile-b.png": {
+      "sha256": "0f2f39abf235450f0d02f29405df850c0cf74cdf99754c0e9c7bae4a55a8501e",
+      "preserved_source_variant": "kedalion-profile-b.png"
+    },
+    "kerykos-profile-b.png": {
+      "sha256": "2af8cacd35ad3d20e6d6308dde4caba98f19f83f8438385d6527f0a963f7fae4",
+      "preserved_source_variant": "kerykos-profile-b.png"
+    },
+    "kleon-profile-b.png": {
+      "sha256": "8df6472f252b030abd0640a7d4d3fcb9f219a9b94f732d503adb5e965c0b2e1d",
+      "preserved_source_variant": "kleon-profile-b.png"
+    },
+    "mom-profile-b.png": {
+      "sha256": "bd0650e84e6a8a468baf38dec04df31dabe8df8556d168271b9aea72bc1727cf",
+      "preserved_source_variant": "mom-profile-b.png"
+    },
+    "pheidon-profile-b.png": {
+      "sha256": "db4239a42aaa10a5d41f9b73b5b53c6547e972090c9439955b87e82f6e5c9cee",
+      "preserved_source_variant": "pheidon-profile-b.png"
+    },
+    "professor_daphne-profile-b.png": {
+      "sha256": "c48172fd76245ceb88ef5f0cf594e05c96bdb0d24d7d00cc97f5d64471dd1a6a",
+      "preserved_source_variant": "professor_daphne-profile-b.png"
+    },
+    "pronomos-profile-b.png": {
+      "sha256": "db587cba41d6b2d05032bde864c3f8b2569ae7b029c941bd6f53f4f4d98fa9f9",
+      "preserved_source_variant": "pronomos-profile-b.png"
+    },
+    "sam-profile-b.png": {
+      "sha256": "d65f740663f94adca25e167ddfa254009eecd328b3dd9784e9254714f52bd02e",
+      "preserved_source_variant": "sam-profile-b.png"
+    },
+    "hierophant_ione-profile-b.png": {
+      "sha256": "e4ce4dd55fd93b6d4f6ed63f6f2e315982578e65860bf5d9c13d3a8eb198354c",
+      "preserved_source_variant": "hierophant_ione-profile-b.png"
+    },
+    "titan_grunt-profile-b.png": {
+      "sha256": "27c2a7e260bee3ecc2b9fee1e6e5efd118c0466e0a824eb3cff86a83e489b649",
+      "preserved_source_variant": "titan_grunt-profile-b.png"
+    },
+    "sam-strum.png": {
+      "sha256": "ffcef8bdbad1f5e74404b82fdf19c6edfce6c2d73109e46cd570fb7ddbed512a",
+      "preserved_source_variant": "sam-strum.png"
+    },
+    "apollo-strum.png": {
+      "sha256": "ecfbf07886ab5615878e5fd2ee43779084948d4914e303e1c58f26d5f3421a40",
+      "preserved_source_variant": "apollo-strum.png"
+    },
+    "cami-seated.png": {
+      "sha256": "ec7ce455810597e67ad027db79ce5dfa16cb014a7876f5f43ed3d76cf998cb68",
+      "preserved_source_variant": "cami-seated-corrected.png"
+    },
+    "kleon-back.png": {
+      "sha256": "5a56bd4ea8ce9bec71f68a9073ac2de6ec586e057b5f7553aa1b759859d28c55",
+      "preserved_source_variant": "kleon-back.png"
+    },
+    "alethea-back.png": {
+      "sha256": "a40e5ebddc9abb280c645be5e83f64fa2a2b657e59d457484acc185dccbfb749",
+      "preserved_source_variant": "alethea-back.png"
+    },
+    "kleon-release.png": {
+      "sha256": "408cff70177b665f21293753d1c68cf10e248852e62bf8e78faf8317cd90ff83",
+      "preserved_source_variant": "kleon-release-corrected.png"
+    },
+    "alethea-hold-release.png": {
+      "sha256": "2d9b577dac943ab4fba8ab718196328b1cf54ff3eed62eae7efb37844f158ca6",
+      "preserved_source_variant": "alethea-hold-release-corrected.png"
+    }
+  },
+  "shared_palette_sha256": {
+    "graphics/object_events/palettes/ichor_theoxenia.pal": "cd42847e9e785d1aad02a40ab28ec426ba6787fab2ad6f4e19f62521eaf20064",
+    "graphics/object_events/palettes/ichor_folk.pal": "85e8f48435c1ec0233bfdae38610566c88f4d60a7bc2d1c9e0931340a3feca8f",
+    "graphics/object_events/palettes/ichor_cast.pal": "7f002e296e141758e076ef725c8e4d27d4243c63ce9bdaf379f16f05a1d89617"
+  },
+  "mechanical_assembly": "Opposite contacts reflect measured leg-only selections centered below each stance, preserving staff/trowel/hammer/cape pixels outside the selection; independent profile-B source legs. Companion rest head/torso/satchel fixed, selected model-authored upper/forearm joints registered with source-relative transverse width, hands/orbs uniform rotation+scale; no painted pixel fills or mirrored costumes. Alethea windup upper-arm mask excludes detached spill.",
+  "palette_conversion": "Alpha128; nearest neighbor; median-cut15 plus kmeans5, GBA precision; x12 extra weight only for saturated hue accents or neutral lights each at <=3 percent opaque coverage, never broad red robes; walkers map to byte-identical engine shared palettes.",
+  "producer_versions": {
+    "Pillow": "11.3.0",
+    "numpy": "2.0.2"
+  }
+}

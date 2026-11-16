@@ -2,9 +2,21 @@
 
 Walking sprites for Ichor's people, as new object-event graphics IDs. The trainer portraits are in `SPRITES.md`.
 
-- **Source:** `tools/ichor/art/sprites_npc.py`. Every frame is ASCII art in that file, one character per pixel.
-- **Rebuild the PNGs and the palette:** `python3 tools/ichor/art/sprites_npc.py --write`
-- **Preview:** `python3 tools/ichor/art/sprites_npc.py --preview DIR` writes the 4× sheet and 8× pixel grids for editing.
+- **Named-cast source:** image-model-authored RGBA crops in
+  `tools/ichor/art/base/named_cast/`, with hashes and provenance in
+  `manifest.json`. `tools/ichor/art/model_cast.py` is the authoritative
+  converter for the 18 named walkers, eight portraits, two companion backs
+  and Daphne intro duplicate. This is model artwork reduced to native
+  pixels, not hand-authored native illustration.
+- **Rebuild:** `python3 tools/ichor/art/model_cast.py --write`. Shared
+  cast/folk/theoxenia palette files are retained, not regenerated.
+- **Preview without changing production:** `python3
+  tools/ichor/art/model_cast.py --out DIR --review REVIEW_DIR` includes
+  every actual 1× frame and its nearest-neighbor 4× enlargement.
+- **Historical source:** `sprites_npc.py` and the other original painters
+  remain readable references. `sprites_lib.save_indexed` refuses writes
+  only to the 29 migrated paths and names the new producer explicitly;
+  unrelated legacy assets remain writable.
 
 ## Catalog
 
@@ -18,7 +30,9 @@ Walking sprites for Ichor's people, as new object-event graphics IDs. The traine
 
 - **Sheet location:** sheets are in `graphics/object_events/pics/people/ichor/`.
 - **Palette:** all five use the palette tag `OBJ_EVENT_PAL_TAG_ICHOR_CAST`.
-- **Alethea's colors:** she has no portrait yet, so her colors are new. The sun-gold comes from the master palette, and the blue headband ties her to Daphne's Akademia.
+- **Alethea's colors:** sun-gold chiton and blue headband tie her to Daphne's
+  Akademia. Her front and four-frame battle back quantize together, because
+  the front loader uses the back palette. Her walker retains the cast palette.
 
 Previews:
 - `img/sprites_npc_sheets.png`: every frame at 4×. Vanilla Birch is in the first row for scale.
@@ -30,7 +44,8 @@ Previews:
 
 **How it was built:** the ramps come from the trainer portraits and were merged so that each slot serves several characters.
 
-**Fixed order:** the order is fixed. Each sheet's PNG embeds this exact palette, so changing a color means editing `CAST_COLORS` and re-running `--write`.
+**Fixed order:** every cast walker embeds this exact palette. Do not edit it
+in isolation: unowned readers share the same live OBJ palette tag.
 
 | # | Char | Name | RGB | Used for |
 |---|---|---|---|---|
@@ -62,10 +77,58 @@ Previews:
 - **Color format:** 4bpp indexed PNG with color 0 transparent.
 - **Proportions:** standing figures have their feet on row 30.
 - **Step bob:** walk frames drop the head and body 1 px, as the Gen 3 step bob does, so the stepping foot lands on row 31.
-- **How a character is drawn in `sprites_npc.py`:**
+- **Historical `sprites_npc.py` construction (not the migrated producer):**
   - Each direction has a `top` block (the head) and three body blocks: `stand` and two `walk` blocks.
   - `build_sheet` places them.
   - A walk block written as `"mirror"` is the other walk block flipped. Use it only for symmetric characters.
+
+## Image-led conversion and animation provenance
+
+The converter thresholds alpha at 128, trims transparent margins, and removes
+isolated row bands left by a neighboring source-sheet cell. It rejects
+substantial ambiguous bands rather than silently deleting them. Native sampling
+is nearest-neighbor; Daphne's recorded sampling phase retains source eye detail.
+Portrait palettes use median-cut with k-means refinement, at most 15 opaque
+BGR555 colors. Extra weighting applies only to genuinely saturated tiny hues
+and neutral lights at most 3% of opaque coverage; broad terracotta/crimson
+garments are never boosted. This preserves Ione's cream veil, Alethea's blue
+headband and the existing model-red orb caps/light halves without recoloring
+the fixed shared walker palettes. The recorded producer versions are Pillow
+11.3.0 and NumPy 2.0.2.
+
+Front/rear opposite steps reflect measured leg-only selections centered below
+each stance. Staff, trowel, hammer and cape pixels outside those selections
+stay identical, rather than being moved by a whole-width strip reflection.
+Profile-B lower legs have
+independently generated source views; profile boots are not mirrored. Cami's
+rear stride is reflected to correct the source's misplaced single shawl-fringe
+wheat ear. Her seated/rising views and Sam/Apollo's three strum states retain
+their existing frame slots.
+
+Companion backs assemble model-authored arm cutouts over a fixed model-authored
+rest head/torso/satchel. Selection polygons only select existing source pixels;
+they never draw colored character geometry. Upper/forearm pieces register to
+the retained joints while maintaining source-relative transverse widths;
+hands/orbs use uniform scaling and rotation. No costume is mirrored and no
+colored seam filler is painted. The near-left hand holds the orb at `(8,38)`,
+winds up at `(9,18)`, then opens at `(56,38)`; wrists remain at `(8,46)`,
+`(9,26)` and `(50,38)`. Four-frame source order and Hoenn animation tables
+remain unchanged. All original and rejected model drafts remain in the session
+evidence; selected source crops and the complete assembly recipe are versioned.
+
+Check source hashes, native reproduction, exact frame counts, joint palettes,
+blue-headband survival and protected legacy writes with
+`python3 -m unittest tools.ichor.tests.test_model_cast`. The separate
+`bash tools/ichor/tests/named_cast.sh` exercises real graphics IDs, image-table
+slots, live palettes, complete OBJ transfers and east mirrors in test RAM.
+Those forced frames are not natural battle/controller playthroughs.
+`python3 tools/ichor/tests/named_cast_verify.py` independently encodes the
+indexed PNGs and compares all 184 unmirrored engine OBJ/palette dumps; it
+accepts `DIRECTORY --root BASELINE_PNG_ROOT` for the preserved before-ROM.
+`theoxenia_sprites.sh` separately checks the actual strum/rise animation order.
+Sam/Cami's dialogue bust PNGs remain unrouted, as before; no new dialogue
+window or gameplay availability is introduced. Technical checks do not grant
+artistic acceptance.
 
 ## How a later batch adds an NPC
 

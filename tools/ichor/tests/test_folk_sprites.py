@@ -8,6 +8,7 @@ from PIL import Image
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art"))
 import sprites_folk as folk
 import human_classes as humans
+import model_cast as cast
 
 
 class FolkSpriteTests(unittest.TestCase):
@@ -15,12 +16,14 @@ class FolkSpriteTests(unittest.TestCase):
         for spec in folk.WALKERS:
             with self.subTest(walker=spec["name"]):
                 path = Path(folk.OUT_DIR) / (spec["name"] + ".png")
+                if ("walkers", spec["name"]) in humans.BY_KEY:
+                    with humans.source_image("walkers", spec["name"]) as authored:
+                        expected = np.array(authored)
+                elif cast.is_owned(path):
+                    expected = cast.walker(spec["name"])
+                else:
+                    expected = folk.build_sheet(spec)
                 with Image.open(path) as image:
-                    if ("walkers", spec["name"]) in humans.BY_KEY:
-                        with humans.source_image("walkers", spec["name"]) as authored:
-                            expected = np.array(authored)
-                    else:
-                        expected = folk.build_sheet(spec)
                     np.testing.assert_array_equal(expected, np.array(image))
 
     def test_akti_states_are_complete_and_distinct(self):
