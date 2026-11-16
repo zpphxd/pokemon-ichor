@@ -49,6 +49,7 @@ return function(L, starter)
     local item = emu:read16(S.gBattleMons + S.OFF_BATTLE_MON_ITEM)
     if (item == S.ITEM_MIRACLE_SEED and kind == S.TYPE_GRASS)
        or (item == S.ITEM_CHARCOAL and kind == S.TYPE_FIRE)
+       or (item == S.ITEM_HARD_STONE and kind == S.TYPE_ROCK)
        or (item == S.ITEM_MYSTIC_WATER and kind == S.TYPE_WATER) then score = score * 1.2 end
     for i = 0, 2 do
       local own = emu:read8(S.gBattleMons + S.OFF_BATTLE_MON_TYPES + i * S.TYPE_ID_SIZE)
@@ -466,9 +467,7 @@ return function(L, starter)
     if clinicReachable then restAtAsclepeion() end
   end
 
-  local function leadWith(slot)
-    if slot == 0 then return end
-    local original, wanted = emu:read32(L.partyMon(0)), emu:read32(L.partyMon(slot))
+  local function openParty()
     L.tap(K.START)
     L.waitUntil(function() return L.taskRunning("Task_ShowStartMenu") end, 300, "the start menu")
     L.wait(25)
@@ -480,7 +479,14 @@ return function(L, starter)
     for _ = 1, (target - emu:read8(S.sStartMenuCursorPos)) % count do L.tap(K.DOWN) end
     L.tap(K.A)
     L.waitUntil(function() return L.taskRunning("Task_HandleChooseMonInput") end, 1200, "the field party menu")
-    L.wait(30); partySlot(slot); L.tap(K.A)
+    L.wait(30)
+  end
+
+  local function leadWith(slot)
+    if slot == 0 then return end
+    local original, wanted = emu:read32(L.partyMon(0)), emu:read32(L.partyMon(slot))
+    openParty()
+    partySlot(slot); L.tap(K.A)
     L.waitUntil(function() return L.taskRunning("Task_HandleSelectionMenuInput") end, 300, "the field partner actions")
     -- Ichor has no field moves; SWITCH follows SUMMARY.
     L.wait(20); L.tap(K.DOWN); L.tap(K.A); L.wait(20)
@@ -492,34 +498,46 @@ return function(L, starter)
     L.expect(emu:read32(L.partyMon(slot)) == original, "the native swap preserves both partner identities")
   end
 
+  local function giveHeldItem(slot, item, berry)
+    if L.partyHeldItem(slot) ~= 0 then
+      L.log("PILOT preserving party slot " .. slot .. "'s existing held item")
+      return
+    end
+    local before = L.itemCount(item)
+    L.expect(before > 0, "the collected boss-preparation item is owned")
+    openBag()
+    selectItem(item, berry and S.POCKET_BERRIES or S.POCKET_ITEMS,
+               berry and S.OFF_BAG_BERRIES or S.OFF_BAG_ITEMS,
+               berry and S.BAG_BERRIES_COUNT or S.BAG_ITEMS_COUNT, slot, true)
+    L.tap(K.A)
+    L.waitUntil(function()
+      if L.partyHeldItem(slot) == item then return true end
+      L.tap(K.A); L.wait(8)
+      return false
+    end, 1200, "the real held-item transfer")
+    closeMenus()
+    L.expect(L.itemCount(item) == before - 1, "GIVE removes exactly one owned item from the Bag")
+    L.log("PILOT party slot " .. slot .. " now holds the real boss-preparation item " .. item)
+    L.shot("natural_held_booster")
+  end
+
   function P.prepareBoss()
     P.recover()
-    for slot = 0, emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER) - 1 do
+    local count = emu:read8(S.gPartiesCount + S.B_TRAINER_PLAYER)
+    for slot = 0, count - 1 do
       if emu:read32(L.partyMon(slot)) == starterPersonality then leadWith(slot); break end
     end
     local hard = L.getVar(S.VAR_DIFFICULTY) == S.DIFFICULTY_HARD
     local item = hard and S.ITEM_SITRUS_BERRY or ({[0] = S.ITEM_MIRACLE_SEED, S.ITEM_CHARCOAL, S.ITEM_MYSTIC_WATER})[starter]
     L.expect(item ~= nil, "the selected starter has a native held-item plan")
-    if L.partyHeldItem(0) ~= 0 then
-      L.log("PILOT preserving the starter's existing held item")
-      return
+    giveHeldItem(0, item, hard)
+    for slot = 1, count - 1 do
+      if L.partySpecies(slot) == S.SPECIES_PEBBLITH then
+        giveHeldItem(slot, S.ITEM_HARD_STONE, false)
+      elseif L.partyHasType(slot, S.TYPE_GRASS) and L.itemCount(S.ITEM_MIRACLE_SEED) > 0 then
+        giveHeldItem(slot, S.ITEM_MIRACLE_SEED, false)
+      end
     end
-    local before = L.itemCount(item)
-    L.expect(before > 0, "the starter's collected type booster is owned")
-    openBag()
-    selectItem(item, hard and S.POCKET_BERRIES or S.POCKET_ITEMS,
-               hard and S.OFF_BAG_BERRIES or S.OFF_BAG_ITEMS,
-               hard and S.BAG_BERRIES_COUNT or S.BAG_ITEMS_COUNT, 0, true)
-    L.tap(K.A)
-    L.waitUntil(function()
-      if L.partyHeldItem(0) == item then return true end
-      L.tap(K.A); L.wait(8)
-      return false
-    end, 1200, "the real held-item transfer")
-    closeMenus()
-    L.expect(L.itemCount(item) == before - 1, "GIVE removes exactly one owned booster from the Bag")
-    L.log("PILOT starter now holds the real boss-preparation item " .. item)
-    L.shot("natural_held_booster")
   end
 
   function P.trainKallisteTeam()

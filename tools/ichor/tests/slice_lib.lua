@@ -1158,6 +1158,13 @@ end
 function L.partySpecies(slot) return secureWord(slot, 0, 0) & 0x7FF end
 function L.partyExperience(slot) return secureWord(slot, 0, 4) & 0x1FFFFF end
 function L.partyHeldItem(slot) return secureWord(slot, 0, 0) >> 16 & 0x3FF end
+function L.partyHasType(slot, kind)
+  local address = S.gSpeciesInfo + L.partySpecies(slot) * S.SPECIES_INFO_SIZE + S.OFF_SPECIES_TYPES
+  for i = 0, 1 do
+    if emu:read8(address + i * S.TYPE_ID_SIZE) == kind then return true end
+  end
+  return false
+end
 function L.partyMove(slot, moveSlot)
   return secureWord(slot, 1, (moveSlot // 2) * 4) >> (moveSlot % 2 * 16) & 0x7FF
 end
