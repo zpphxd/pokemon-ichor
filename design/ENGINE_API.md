@@ -214,6 +214,13 @@ and training alongside the existing `PARTY`/`BATTLE` evidence.
 Before Ione, the starter is restored as the lead by its original personality
 and given its actually collected type booster, or its reserved Sitrus Berry
 in Spartan. GIVE checks both held ownership and exact Bag consumption.
+It also gives the collected Hard Stone to Pebblith and an available Miracle
+Seed to a Grass-type partner, without replacing an existing held item.
+The scorer includes the actually held Hard Stone's Rock boost.
+After Kalliste, the harness checks that Charcoal is actually in the Bag for
+Kedalion's `checkitem`, not just held by a partner. Euboulos's existing recovery
+conversation supplies a replacement when the first coal is held; the pilot
+does not take the held copy or add another duplicate.
 Mortal/Hero may use owned trainer-battle medicine at half HP or below, asserting
 actual HP recovery and exact consumption. Spartan never requests battle medicine.
 At Demeas's pre-Laurel stall it buys five ordinary balls through the quantity
@@ -232,15 +239,29 @@ reaches `08_after` (333,477 frames, 78 battles). These older passes predate the
 current four-partner strategy and do not certify its results.
 
 With corrected evolution learning and native-width opposing party indices,
-Hero/Kynder now reaches `08_after` from NEW GAME: 353,799 frames, 69 battles,
+the pre-partner-gear Hero/Kynder pilot reached `08_after` from NEW GAME:
+353,799 frames, 69 battles,
 559 screenshots. Ione is entered with a level-16 Dikyon and three level-10
 partners, including an actually caught Pebblith; Yawn is attempted separately
 against all three of Ione's partners. Earlier Kynder attempts failed there.
-Spartan/Hipling still loses at Ione with four naturally trained level-14
-partners; Spartan/Nebrel also loses there, with Nemecub left at 2 HP.
-Spartan/Kynder can lose to Metis before the training walk.
-These results do not establish the intended curve's balance or a production
-battle defect. Other starter/difficulty chapter runs, complete
+The current partner-gear pilot has NEW GAME ending passes for Hero/Nebrel
+(342,098 frames, 71 battles), Hero/Hipling (330,924 frames, 73 battles),
+Mortal/Nebrel (336,571 frames, 66 battles) and Mortal/Hipling
+(335,386 frames, 71 battles). Hero/Kynder instead loses to Ione, whose final
+partner has 7 HP left; the earlier win does not certify the revised strategy.
+Current Spartan/Nebrel also loses there, with Nemecub left at 46 HP, not the
+older attempt's 2 HP. Spartan/Hipling's earlier four-level-14 loss and
+Spartan/Kynder's possible Metis loss remain unclosed.
+
+Mortal/Kynder wins both summit grunts but then times out awaiting field
+control. The native script context is WAITING after `dotrainerbattle`;
+the recorded movement native pointer can be stale and does not establish a
+movement deadlock. This scene-return failure remains unresolved, distinct
+from the pilot's battle losses. A separate resumed pre-Ione fixture verifies
+native Hard Stone GIVE and Euboulos's actual coal replacement while the
+starter still holds its booster; that is menu evidence, not chapter coverage.
+These results do not establish the intended curve's balance. Other
+starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.
 The continuous route currently ends at the Emporion gate after Laurel 2, not
 the end of Act I.

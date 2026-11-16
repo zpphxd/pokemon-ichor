@@ -419,10 +419,18 @@ Mortal/Hero battle medicine, multi-hit scoring and ability-immunity checks
 (including Narthip's Flash Fire). The pilot now buys five balls at the actual
 Agora price and reserves a fourth team slot for a real Normal-type counter.
 Correcting evolution's move-learning source and the native opponent-index
-stride lets Hero/Kynder reach Kalliste's ending too: 69 battles, a level-16
-Dikyon and three level-10 partners at Ione. Spartan/Hipling still loses to
-Ione with four level-14 partners; Spartan/Kynder can lose earlier at Metis.
-Those are pilot failures, not established balance defects. The remaining
+stride produced a Hero/Kynder ending pass: 69 battles, a level-16 Dikyon and
+three level-10 partners at Ione. The current strategy also equips actual
+Hard Stone/Miracle Seed on suitable partners; it reaches the ending with
+Hero/Nebrel (71 battles), Hero/Hipling (73), Mortal/Nebrel (66) and
+Mortal/Hipling (71). Current Hero/Kynder instead loses to Ione with the last
+foe at 7 HP; that earlier win is not a robust result for the revised pilot.
+Spartan/Nebrel currently loses there with Nemecub at 46 HP.
+Spartan/Hipling previously lost with four level-14 partners;
+Spartan/Kynder can lose earlier at Metis. Those are pilot failures, not
+established balance defects. Mortal/Kynder separately wins both summit
+grunts but then loses field control on battle return; that scene failure
+remains under investigation, not classified as a balance loss. The remaining
 starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
 and human look/fun approval are still open.
 

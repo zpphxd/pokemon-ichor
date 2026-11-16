@@ -6,7 +6,7 @@ local function battle(moves, held, ability, difficulty, ownAbility)
     BATTLER_PARTY_INDEX_SIZE = 2,
     gPartiesCount = 500, B_TRAINER_PLAYER = 0, gMoveSelectionCursor = 1,
     gDisplayedStringBattle = 1000, gTypesInfo = 2000, TYPE_INFO_SIZE = 16,
-    OFF_TYPE_NAME = 0, NUMBER_OF_MON_TYPES = 7, TYPE_ID_SIZE = 1,
+    OFF_TYPE_NAME = 0, NUMBER_OF_MON_TYPES = 8, TYPE_ID_SIZE = 1,
     gTypeEffectivenessTable = 5000, TYPE_EFFECT_SIZE = 2, TYPE_EFFECT_ONE = 4096,
     gCategoryIconSpriteId = 5, gSprites = 3000, PILOT_SPRITE_SIZE = 64,
     OFF_PILOT_SPRITE_ANIM = 0, MAX_MON_MOVES = 4, MOVE_ID_SIZE = 2,
@@ -28,6 +28,7 @@ local function battle(moves, held, ability, difficulty, ownAbility)
     ITEM_SUPER_POTION = 104, ITEM_POTION = 105, ITEM_MOOMOO_MILK = 106,
     TYPE_GRASS = 2, TYPE_FIRE = 3, TYPE_WATER = 4,
     TYPE_GROUND = 5, TYPE_ELECTRIC = 6,
+    TYPE_ROCK = 7, ITEM_HARD_STONE = 107,
     ITEM_MIRACLE_SEED = 100, ITEM_CHARCOAL = 101, ITEM_MYSTIC_WATER = 102,
     CHAR_A = 65, CHAR_0 = 48, CHAR_SPACE = 32, CHAR_COLON = 58, EOS = 255,
     MOVE_DESCRIPTION_BUTTON = 5, L_BUTTON = 5,
@@ -38,7 +39,7 @@ local function battle(moves, held, ability, difficulty, ownAbility)
     for i = 1, #value do m8[address + i - 1] = value:byte(i) end
     m8[address + #value] = 255
   end
-  local names = {"NORMAL", "GRASS", "FIRE", "WATER", "GROUND", "ELECTRIC"}
+  local names = {"NORMAL", "GRASS", "FIRE", "WATER", "GROUND", "ELECTRIC", "ROCK"}
   for i, name in ipairs(names) do text(2000 + i * 16, name) end
   for side = 0, 1 do
     local base = 100 + side * 100
@@ -53,8 +54,8 @@ local function battle(moves, held, ability, difficulty, ownAbility)
     m16[100 + i * 2] = moves[i + 1] and moves[i + 1].id or 0
     m8[108 + i] = moves[i + 1] and 10 or 0
   end
-  for own = 1, 6 do
-    m16[5000 + (own * 7 + 1) * 2] = 4096
+  for own = 1, 7 do
+    m16[5000 + (own * 8 + 1) * 2] = 4096
   end
   local description, choices = false, {}
   local function display()
@@ -113,6 +114,12 @@ assert(choices[1] == 1, "without Charcoal, the stronger neutral move wins")
 pilot, choices = battle({move(11, 40, 3, 2), move(12, 65, 1, 2)}, 101)
 pilot.chooseMove()
 assert(choices[1] == 0, "the actually held Charcoal boosts Fire damage")
+pilot, choices = battle({move(11, 40, 7), move(12, 45)})
+pilot.chooseMove()
+assert(choices[1] == 1, "an unheld Hard Stone must not boost Rock damage")
+pilot, choices = battle({move(11, 40, 7), move(12, 45)}, 107)
+pilot.chooseMove()
+assert(choices[1] == 0, "the actually held Hard Stone boosts Rock damage")
 pilot, choices = battle({move(11, 80), move(12, 60, 1, 2)}, 0, 9)
 pilot.chooseMove()
 assert(choices[1] == 1, "Fur Coat favors the available special attack")
@@ -232,5 +239,6 @@ assert(#learnedFrom == 12 and learnedFrom[1] == 1 and learnedFrom[5] == 0 and le
 incoming = 336
 pilot.learnMove()
 assert(lastKey == 3 and #learnedFrom == 12, "unused Howl must be declined without selecting an owned move to erase")
-console:log("PILOT TACTICS PASS: damage/tactics, native-width foe slots, Spartan item ban, paid purchases and correct evolution learner")
+
+console:log("PILOT TACTICS PASS: damage/tactics, native-width foe slots, Spartan item ban, paid purchases, evolution learner and Hard Stone")
 console:log("PILOT TACTICS done")

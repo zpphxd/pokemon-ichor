@@ -761,6 +761,7 @@ beat("08_harbor_part2", function()
 end)
 
 beat("08_after", function()
+  expect(L.itemCount(S.ITEM_CHARCOAL) == 1, "the actual Hearth Trial coal is in the Bag for the mainland")
   talk(L.npc(AK .. "Nausikles"), { shotBefore = "nausikles_after" })
   collect(ball("FLAG_ITEM_AKTI_POTION"), "FLAG_ITEM_AKTI_POTION", "ITEM_POTION", "the Potion among the quay crates")
   -- with the laurel, Doris trades her shell bell for the beach's Heart Scale
