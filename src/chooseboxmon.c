@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "chooseboxmon.h"
 #include "daycare.h"
 #include "event_data.h"
@@ -135,11 +136,15 @@ static u32 ChooseBoxMon_CanMonLearnSpecialVarMove(struct BoxPokemon *boxmon)
 
 u32 IsBoxMonExcluded(struct BoxPokemon *boxmon)
 {
+    if (Ichor_IsOathFallen(boxmon))
+        return TRUE;
     return sPcMonSelectionTypes[sSelectionType].isMonInvalid(boxmon);
 }
 
 bool32 CanBoxMonBeSelected(struct BoxPokemon *boxmon)
 {
+    if (Ichor_IsOathFallen(boxmon))
+        return FALSE;
     if (!sPcMonSelectionTypes[sSelectionType].isStrict)
         return TRUE;
     return !IsBoxMonExcluded(boxmon);

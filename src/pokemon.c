@@ -2972,13 +2972,16 @@ u8 CopyMonToPC(struct Pokemon *mon)
 {
     s32 boxNo, boxPos;
 
+    if (Ichor_IsOathFallen(&mon->box))
+        return MON_CANT_GIVE;
+
     SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
 
     boxNo = StorageGetCurrentBox();
 
     do
     {
-        for (boxPos = 0; boxPos < IN_BOX_COUNT; boxPos++)
+        for (boxPos = 0; !Ichor_IsUrnBox(boxNo) && boxPos < IN_BOX_COUNT; boxPos++)
         {
             struct BoxPokemon *checkingMon = GetBoxedMonPtr(boxNo, boxPos);
             if (GetBoxMonData(checkingMon, MON_DATA_SPECIES) == SPECIES_NONE)
@@ -3178,7 +3181,7 @@ bool8 IsPokemonStorageFull(void)
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)
         for (j = 0; j < IN_BOX_COUNT; j++)
-            if (GetBoxMonDataAt(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
+            if (!Ichor_IsUrnBox(i) && GetBoxMonDataAt(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
                 return FALSE;
 
     return TRUE;

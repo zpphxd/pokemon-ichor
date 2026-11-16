@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "malloc.h"
 #include "bg.h"
 #include "data.h"
@@ -109,6 +110,7 @@ enum {
     MSG_ITEM_IS_HELD,
     MSG_CHANGED_TO_ITEM,
     MSG_CANT_STORE_MAIL,
+    MSG_URN_SEALED,
 };
 
 // IDs for how to resolve variables in the above messages
@@ -200,6 +202,7 @@ enum {
     INPUT_MULTIMOVE_MOVE_MONS,
     INPUT_MULTIMOVE_PLACE_MONS,
     INPUT_SELECT_MON,
+    INPUT_URN_SEALED,
 };
 
 enum {
@@ -525,6 +528,8 @@ struct PokemonStorageSystemData
     u8 itemName[20];
     u8 inBoxMovingMode;
     u16 multiMoveWindowId;
+    u32 multiMoveMessageBgX;
+    u32 multiMoveMessageBgY;
     struct ItemIcon itemIcons[MAX_ITEM_ICONS];
     enum Item movingItemId;
     u16 itemInfoWindowOffset;
@@ -1079,6 +1084,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_ITEM_IS_HELD]         = {COMPOUND_STRING("{DYNAMIC 0} is now held."),   MSG_VAR_ITEM_NAME},
     [MSG_CHANGED_TO_ITEM]      = {COMPOUND_STRING("Changed to {DYNAMIC 0}."),    MSG_VAR_ITEM_NAME},
     [MSG_CANT_STORE_MAIL]      = {COMPOUND_STRING("MAIL can't be stored!"),      MSG_VAR_NONE},
+    [MSG_URN_SEALED]           = {COMPOUND_STRING("The Urn is sealed.\nIts fallen partners rest here."), MSG_VAR_NONE},
 };
 
 static const struct WindowTemplate sYesNoWindowTemplate =
@@ -2250,6 +2256,17 @@ static void Task_PokeStorageMain(u8 taskId)
     case MSTATE_HANDLE_INPUT:
         switch (HandleInput())
         {
+        case INPUT_URN_SEALED:
+            PlaySE(SE_FAILURE);
+            if (sStorage->inBoxMovingMode == MOVE_MODE_MULTIPLE_MOVING)
+            {
+                sStorage->multiMoveMessageBgX = GetBgX(0);
+                sStorage->multiMoveMessageBgY = GetBgY(0);
+                MultiMove_ResetBg();
+            }
+            PrintMessage(MSG_URN_SEALED);
+            sStorage->state = MSTATE_WAIT_MSG;
+            break;
         case INPUT_MOVE_CURSOR:
             PlaySE(SE_SELECT);
             sStorage->state = MSTATE_MOVE_CURSOR;
@@ -2457,6 +2474,15 @@ static void Task_PokeStorageMain(u8 taskId)
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
+            if (sStorage->inBoxMovingMode == MOVE_MODE_MULTIPLE_MOVING)
+            {
+                ChangeBgX(0, sStorage->multiMoveMessageBgX, BG_COORD_SET);
+                ChangeBgY(0, sStorage->multiMoveMessageBgY, BG_COORD_SET);
+                SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
+                SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
+                PutWindowTilemap(sStorage->multiMoveWindowId);
+                CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_FULL);
+            }
             sStorage->state = MSTATE_HANDLE_INPUT;
         }
         break;
@@ -2865,7 +2891,12 @@ static void Task_DepositMenu(u8 taskId)
             SetPokeStorageTask(Task_PokeStorageMain);
             break;
         default:
-            if (TryStorePartyMonInBox(boxId))
+            if (Ichor_IsUrnBox(boxId))
+            {
+                PrintMessage(MSG_URN_SEALED);
+                sStorage->state = 4;
+            }
+            else if (TryStorePartyMonInBox(boxId))
             {
                 sDepositBoxId = boxId;
                 ClearBottomWindow();
@@ -3677,7 +3708,13 @@ static void Task_OnBPressed(u8 taskId)
     case 0:
         if (IsMonBeingMoved())
         {
-            if (OW_PC_PRESS_B < GEN_4)
+            if (sCursorArea == CURSOR_AREA_IN_BOX && Ichor_IsUrnBox(StorageGetCurrentBox()))
+            {
+                PlaySE(SE_FAILURE);
+                PrintMessage(MSG_URN_SEALED);
+                sStorage->state = 1;
+            }
+            else if (OW_PC_PRESS_B < GEN_4)
             {
                 PlaySE(SE_FAILURE);
                 PrintMessage(MSG_HOLDING_POKE);
@@ -6491,6 +6528,8 @@ static void SetShiftedMonData(u8 boxId, u8 position)
 
 static bool8 TryStorePartyMonInBox(u8 boxId)
 {
+    if (Ichor_IsUrnBox(boxId))
+        return FALSE;
     s16 boxPosition = GetFirstFreeBoxSpot(boxId);
     if (boxPosition == -1)
         return FALSE;
@@ -7222,6 +7261,19 @@ static u8 InBoxInput_Normal(void)
             break;
         }
 
+        if (JOY_NEW(A_BUTTON)
+            && (Ichor_IsUrnBox(StorageGetCurrentBox())
+                || (GetSpeciesAtCursorPosition() != SPECIES_NONE && Ichor_IsOathFallen(GetCursorBoxMon()))))
+        {
+            if (sIsMonBeingMoved || IsMovingItem() || sStorage->boxOption == OPTION_MOVE_ITEMS
+                || GetSpeciesAtCursorPosition() == SPECIES_NONE)
+                return INPUT_URN_SEALED;
+            InitMenu();
+            SetMenuText(MENU_SUMMARY);
+            SetMenuText(MENU_CANCEL);
+            return INPUT_IN_MENU;
+        }
+
         if ((JOY_NEW(A_BUTTON)) && SetSelectionMenuTexts())
         {
             if (!sAutoActionOn)
@@ -7413,6 +7465,8 @@ static u8 InBoxInput_MovingMultiple(void)
     }
     else if (JOY_NEW(A_BUTTON))
     {
+        if (Ichor_IsUrnBox(StorageGetCurrentBox()))
+            return INPUT_URN_SEALED;
         if (MultiMove_CanPlaceSelection())
         {
             sIsMonBeingMoved = FALSE;
@@ -7509,7 +7563,7 @@ static u8 HandleInput_InParty(void)
             }
             else if (SetSelectionMenuTexts())
             {
-                if (!sAutoActionOn)
+                if (!sAutoActionOn || GetMenuItemTextId(0) == MENU_SUMMARY || GetMenuItemTextId(0) == MENU_CANCEL)
                     return INPUT_IN_MENU;
 
                 switch (GetMenuItemTextId(0))
@@ -7741,8 +7795,11 @@ static void AddBoxOptionsMenu(void)
 {
     InitMenu();
     SetMenuText(MENU_JUMP);
-    SetMenuText(MENU_WALLPAPER);
-    SetMenuText(MENU_NAME);
+    if (!Ichor_IsUrnBox(StorageGetCurrentBox()))
+    {
+        SetMenuText(MENU_WALLPAPER);
+        SetMenuText(MENU_NAME);
+    }
     SetMenuText(MENU_CANCEL);
 }
 
@@ -7758,6 +7815,13 @@ static u8 SetSelectionMenuTexts(void)
 static bool8 SetMenuTexts_Mon(void)
 {
     enum Species species = GetSpeciesAtCursorPosition();
+
+    if (species != SPECIES_NONE && Ichor_IsOathFallen(GetCursorBoxMon()))
+    {
+        SetMenuText(MENU_SUMMARY);
+        SetMenuText(MENU_CANCEL);
+        return TRUE;
+    }
 
     switch (sStorage->boxOption)
     {
@@ -7818,6 +7882,11 @@ static bool8 SetMenuTexts_Mon(void)
 
 static bool8 SetMenuTexts_Item(void)
 {
+    if (sStorage->displayMonSpecies != SPECIES_NONE && Ichor_IsOathFallen(GetCursorBoxMon()))
+    {
+        SetMenuText(MENU_CANCEL);
+        return TRUE;
+    }
     if (sStorage->displayMonSpecies == SPECIES_EGG)
         return FALSE;
 
@@ -9663,7 +9732,7 @@ bool8 CheckFreePokemonStorageSpace(void)
     {
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
-            if (!GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES))
+            if (!Ichor_IsUrnBox(i) && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES))
                 return TRUE;
         }
     }
@@ -9692,7 +9761,8 @@ u32 CountStorageNonEggMons(void)
     {
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
-            if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
+            if (!Ichor_IsOathFallen(&gPokemonStoragePtr->boxes[i][j])
+                && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
                 && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG))
                 count++;
         }
@@ -9710,7 +9780,8 @@ bool32 AnyStorageMonWithMove(enum Move move)
     {
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
-            if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
+            if (!Ichor_IsOathFallen(&gPokemonStoragePtr->boxes[i][j])
+                && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
                 && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG)
                 && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_KNOWN_MOVES, (u8 *)moves))
                 return TRUE;

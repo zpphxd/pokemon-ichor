@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -2338,6 +2339,7 @@ static void Task_HandleInput_MoveSelect(u8 taskId)
         else if (JOY_NEW(A_BUTTON))
         {
             if (sMonSummaryScreen->lockMovesFlag == TRUE
+                || Ichor_IsOathFallen(&sMonSummaryScreen->currentMon.box)
                 || (sMonSummaryScreen->newMove == MOVE_NONE && sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES))
             {
                 PlaySE(SE_SELECT);
@@ -4740,6 +4742,7 @@ static void KeepMoveSelectorVisible(u8 firstSpriteId)
 static inline bool32 ShouldShowMoveRelearner(void)
 {
     return (P_SUMMARY_SCREEN_MOVE_RELEARNER
+         && !Ichor_IsOathFallen(&sMonSummaryScreen->currentMon.box)
          && !sMonSummaryScreen->lockMovesFlag
          && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR
          && sMonSummaryScreen->hasRelearnableMoves
@@ -4750,6 +4753,7 @@ static inline bool32 ShouldShowMoveRelearner(void)
 static inline bool32 ShouldShowRename(void)
 {
     return (P_SUMMARY_SCREEN_RENAME
+         && !Ichor_IsOathFallen(&sMonSummaryScreen->currentMon.box)
          && !sMonSummaryScreen->lockMovesFlag
          && !sMonSummaryScreen->summary.isEgg
          && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR
