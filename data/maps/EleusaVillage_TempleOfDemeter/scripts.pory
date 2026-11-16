@@ -180,8 +180,14 @@ script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
     msgbox(format("Where the sickle broke. Where the pieces fell. Where they'd be joined.\p"
                   "I was wrong about Kalliste. Thank the gods. I was right about Eleusa.\p"
                   "They're digging where I told them to dig.\p"
-                  "…And then there's the back.\p"
-                  "Hold a lamp low and old scratches stand up. I taught Alethea that."))
+                  "…And then there's the back."))
+    closemessage
+    specialvar(VAR_RESULT, Ichor_ShowTabletPicture)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("The tablet picture could not be opened."))
+    }
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
+    msgbox(format("Hold a lamp low and old scratches stand up. I taught Alethea that."))
     setspeaker(EleusaVillage_TempleOfDemeter_Text_NameAlethea)
     msgbox(format("I saw it on the hill. I wanted to tell you.\p"
                   "Truthfully, I nearly did. Twice."))
@@ -192,6 +198,9 @@ script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
                   "Unwoven. That's their word for you.\p"
                   "They weren't on Kalliste for the hill. They were there for you."))
     delay(60)
+    closemessage
+    special(Ichor_HideScenePicture)
+    setspeaker(EleusaVillage_TempleOfDemeter_Text_NameDaphne)
     msgbox(format("You could go home. Nobody would blame you. I'd row you myself.\p"
                   "Badly. But I'd row."))
     setspeaker(SP_NAME_NONE)
@@ -236,7 +245,14 @@ script EleusaVillage_TempleOfDemeter_EventScript_Revelation {
     setflag(FLAG_ICHOR_ACT1_COMPLETE)
     setspeaker(SP_NAME_NONE)
     fadescreen(FADE_TO_BLACK)
-    msgbox("END OF ACT I\nTHE UNWOVEN")
+    specialvar(VAR_RESULT, Ichor_ShowActOneCard)
+    if (var(VAR_RESULT) == TRUE) {
+        delay(60)
+        waitbuttonpress
+        special(Ichor_HideActOneCard)
+    } else {
+        msgbox(format("The Act I title card could not be opened."))
+    }
     msgbox(format("Thank you for playing Act I of Pokémon Ichor."))
     updatefollowingmon
     warp(MAP_ELEUSA_VILLAGE, 25, 12)

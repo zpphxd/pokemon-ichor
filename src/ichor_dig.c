@@ -27,6 +27,7 @@
 #include "ichor_relics.h"
 #include "ichor_rites.h"
 #include "ichor_save.h"
+#include "ichor_scene.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/ichor.h"
@@ -168,47 +169,17 @@ static const u8 *const sAmphoraNotes[ICHOR_AMPHORA_COUNT] =
 
 static const u32 sAmphoraPictures[] = INCBIN_U32("graphics/ichor/amphorae.4bpp");
 static const u16 sAmphoraPalette[] = INCBIN_U16("graphics/ichor/amphorae.gbapal");
-// Zero-initialized EWRAM: zero is closed; an open window is its id plus one.
-static EWRAM_DATA u8 sAmphoraWindowIdPlusOne = 0;
-static EWRAM_DATA u16 sAmphoraSavedPalette[16] = {0};
-
 u16 Ichor_ShowAmphoraPicture(void)
 {
-    const struct WindowTemplate template =
-    {
-        .bg = 0, .tilemapLeft = 2, .tilemapTop = 1,
-        .width = 8, .height = 8, .paletteNum = 13, .baseBlock = 100,
-    };
     u32 amphora = gSpecialVar_0x8004;
-    u32 window;
-
-    if (Ichor_AmphoraStatus(amphora) != ICHOR_AMPHORA_RESTORED || sAmphoraWindowIdPlusOne != 0)
+    if (Ichor_AmphoraStatus(amphora) != ICHOR_AMPHORA_RESTORED)
         return FALSE;
-    window = AddWindow(&template);
-    if (window == WINDOW_NONE)
-        return FALSE;
-    sAmphoraWindowIdPlusOne = window + 1;
-    memcpy(sAmphoraSavedPalette, &gPlttBufferUnfaded[13 * 16], sizeof(sAmphoraSavedPalette));
-    LoadPalette(sAmphoraPalette, 13 * 16, sizeof(sAmphoraPalette));
-    CopyToWindowPixelBuffer(window, (const u8 *)sAmphoraPictures + amphora * 2048, 2048, 0);
-    PutWindowTilemap(window);
-    CopyWindowToVram(window, COPYWIN_FULL);
-    return TRUE;
+    return Ichor_ShowScenePicture((const u8 *)sAmphoraPictures + amphora * 2048, sAmphoraPalette);
 }
 
 void Ichor_HideAmphoraPicture(void)
 {
-    u32 window;
-
-    if (sAmphoraWindowIdPlusOne == 0)
-        return;
-    window = sAmphoraWindowIdPlusOne - 1;
-    ClearWindowTilemap(window);
-    CopyWindowToVram(window, COPYWIN_MAP);
-    RemoveWindow(window);
-    LoadPalette(sAmphoraSavedPalette, 13 * 16, sizeof(sAmphoraSavedPalette));
-    ScheduleBgCopyTilemapToVram(0);
-    sAmphoraWindowIdPlusOne = 0;
+    Ichor_HideScenePicture();
 }
 
 u16 Ichor_AmphoraStatus(u32 amphora)

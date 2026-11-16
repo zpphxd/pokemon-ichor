@@ -1029,6 +1029,10 @@ gSpecials::
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
 	def_special Ichor_SetHoursOverride
+	def_special Ichor_ShowTabletPicture
+	def_special Ichor_HideScenePicture
+	def_special Ichor_ShowActOneCard
+	def_special Ichor_HideActOneCard
 	def_special Ichor_ChooseDifficulty
 	def_special Ichor_ChooseStartingOath
 	def_special Ichor_GetStepGlassLimit
