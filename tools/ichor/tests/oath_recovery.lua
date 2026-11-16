@@ -82,6 +82,59 @@ L.start(function()
            and L.snapshot(boxed(S.TOTAL_BOXES_COUNT - 1, 0), S.BOX_MON_BYTES) == urnRecord,
            "ending the run leaves the last manual save unchanged and playable through CONTINUE")
 
+  local healthyParty = read(S.gParties, S.PARTY_MON_BYTES)
+  for slot = 1, 2 do
+    local mon = S.gParties + slot * S.PARTY_MON_BYTES
+    write(mon, healthyParty)
+    emu:write16(mon + S.OFF_MON_HP, 1)
+    emu:write32(mon + S.OFF_MON_STATUS, S.STATUS1_POISON)
+  end
+  write(S.gParties, fallenParty)
+  emu:write8(S.gPartiesCount, 3)
+  local pendingFieldRecord = L.snapshot(S.gParties, S.BOX_MON_BYTES)
+  L.setVar(S.VAR_TEMP_E, 0)
+  L.runHeader("Oath_FieldCleanupHeader", { noSettle = true })
+  L.waitUntil(function() return emu:read32(S.gParties + S.PARTY_MON_BYTES + S.OFF_MON_STATUS) == 0 end,
+              600, "the first modern poison-survival message")
+  L.wait(90); L.shot("field_poison_before_compaction")
+  L.expect(emu:read8(S.gPartiesCount) == 3 and L.partyHp(1) == 1
+           and emu:read32(S.gParties + 2 * S.PARTY_MON_BYTES + S.OFF_MON_STATUS) == S.STATUS1_POISON,
+           "field cleanup does not compact the party while later poison messages still need their original indices")
+  L.waitUntil(function()
+    if emu:read8(S.sOathAftermathNotice) & 0x80 ~= 0 then return true end
+    L.tap(K.A); L.wait(4)
+    return false
+  end, 1500, "the survivor-safe field burial notice")
+  L.wait(120); L.shot("field_poison_urn_notice")
+  L.expect(emu:read8(S.gPartiesCount) == 2 and L.partyHp(0) == 1 and L.partyHp(1) == 1
+           and emu:read32(S.gParties + S.OFF_MON_STATUS) == 0
+           and emu:read32(S.gParties + S.PARTY_MON_BYTES + S.OFF_MON_STATUS) == 0,
+           "both modern poison survivors keep one HP and finish their messages before burial compacts the party")
+  L.expect(emu:read16(oath() + S.OFF_OATH_FALLEN_COUNT) == savedFalls
+           and L.getVar(S.VAR_TEMP_E) == 0 and not L.idle(),
+           "modern poison adds no fall and the original script remains paused until the Urn notice is acknowledged")
+  L.tap(K.A); L.settle()
+  L.expect(L.getVar(S.VAR_TEMP_E) == 77
+           and L.snapshot(boxed(S.TOTAL_BOXES_COUNT - 1, 0), S.BOX_MON_BYTES) == urnRecord
+           and L.snapshot(boxed(S.TOTAL_BOXES_COUNT - 1, 1), S.BOX_MON_BYTES) == pendingFieldRecord,
+           "field burial resumes the original script without changing the existing memorial")
+  emu:reset(); L.continueSave()
+
+  write(boxed(0, 0), healthy)
+  write(S.gParties, fallenParty)
+  L.runHeader("Oath_FieldCleanupHeader", { noSettle = true })
+  L.waitUntil(function()
+    if emu:read8(S.sOathAftermathNotice) & 0x80 ~= 0 then return true end
+    L.tap(K.A); L.wait(4)
+    return false
+  end, 4000, "the native all-party field-loss recovery")
+  L.wait(120); L.shot("field_loss_storage_recovery")
+  L.expect(emu:read8(S.gPartiesCount) == 1 and L.partyHp(0) > 0
+           and emu:read8(oath() + S.OFF_OATH_STATE) == S.ICHOR_OATH_ACTIVE,
+           "the native all-party field-loss script reaches the same living-storage recovery instead of reviving the fallen")
+  L.tap(K.A); L.wait(120); L.tap(K.A); L.settle()
+  emu:reset(); L.continueSave()
+
   L.runHeader("Oath_WeakPartyHeader")
   for slot = 1, 5 do write(S.gParties + slot * S.PARTY_MON_BYTES, fallenParty) end
   emu:write8(S.gPartiesCount, 6)

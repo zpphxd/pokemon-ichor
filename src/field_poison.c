@@ -106,8 +106,15 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
         else
         {
             gSpecialVar_Result = FLDPSN_NO_WHITEOUT;
+            if (!CurrentBattlePyramidLocation() && !InBattlePike() && !InTrainerHillChallenge())
+                Ichor_RetryOathUrn();
             UpdateFollowingPokemon();
         }
+        tState = 3;
+        break;
+    case 3:
+        if (Ichor_ShowOathAftermathNotice())
+            break;
         ScriptContext_Enable();
         DestroyTask(taskId);
         break;

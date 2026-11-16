@@ -5,6 +5,8 @@
 #include "battle_script_commands.h"
 #include "chooseboxmon.h"
 #include "event_data.h"
+#include "field_poison.h"
+#include "fldeff_misc.h"
 #include "ichor_oath.h"
 #include "ichor_save.h"
 #include "pokemon.h"
@@ -12,6 +14,7 @@
 #include "item.h"
 #include "safari_zone.h"
 #include "string_util.h"
+#include "task.h"
 #include "test/battle.h"
 #include "constants/battle.h"
 #include "constants/items.h"
@@ -807,6 +810,25 @@ TEST("Ichor: recovery leaves ordinary and released runs to their native whiteout
     EXPECT_EQ(Ichor_PrepareOathRecovery(), ICHOR_OATH_RECOVERY_NONE);
     EXPECT(!Ichor_EndOathBattle(0, B_OUTCOME_LOST));
 }
+
+#if OW_POISON_DAMAGE >= GEN_4
+TEST("Ichor: modern field poison survival at one HP never records a permanent fall")
+{
+    u32 frame, hp = 1, status = STATUS1_POISON;
+    SetUpFallenParty(1);
+    CreateOathMon(&gParties[B_TRAINER_PLAYER][1]);
+    gPartiesCount[B_TRAINER_PLAYER] = 2;
+    SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP, &hp);
+    SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_STATUS, &status);
+    DoPoisonFieldEffect();
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP), 1);
+    EXPECT(!Ichor_IsOathFallen(&gParties[B_TRAINER_PLAYER][1].box));
+    EXPECT_EQ(gIchorSave.oath.fallenCount, 1);
+    for (frame = 0; frame < 16 && FldEffPoison_IsActive(); frame++)
+        RunTasks();
+    EXPECT(!FldEffPoison_IsActive());
+}
+#endif
 
 SINGLE_BATTLE_TEST("Ichor: recorded-link simulation fainting never marks a real partner")
 {

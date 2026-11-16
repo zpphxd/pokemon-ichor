@@ -1,4 +1,5 @@
 #include "constants/flags.h"
+#include "constants/field_poison.h"
 #include "constants/global.h"
 #include "constants/items.h"
 #include "constants/map_scripts.h"
@@ -123,6 +124,16 @@ Oath_Lose:
 	setflag FLAG_ICHOR_NO_WHITEOUT
 	setwildbattle SPECIES_ZIGZAGOON, 10
 	dowildbattle
+	end
+
+	test_header Oath_FieldCleanupHeader, Oath_FieldCleanup
+Oath_FieldCleanup:
+	setvar VAR_TEMP_F, 1
+	lockall
+	special TryFieldPoisonWhiteOut
+	goto_if_eq VAR_RESULT, FLDPSN_WHITEOUT, EventScript_FieldWhiteOut
+	setvar VAR_TEMP_E, 77
+	releaseall
 	end
 
 	.thumb

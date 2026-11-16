@@ -1169,6 +1169,12 @@ fainting, the locked Urn and run-ending behavior work together.
   capacity and returns to the native title on A/B. It never writes a save.
   CONTINUE also routes saved FAILED states to this terminal screen before
   loading a map. Normal defeat therefore preserves the last manual save.
+- The field-poison task finishes every original party index/message before
+  survivor-safe burial and compaction. It waits for the Urn notice to be
+  acknowledged before enabling the original script. Total-party field loss
+  retains the native whiteout script and therefore uses the same stored-partner
+  recovery and terminal safeguards. Facility losses keep their own routing;
+  modern poison survival at one HP does not mark a permanent fall.
 
 Version 5 takes 40 bytes from the old reserved region at 0x450. Total
 IchorSave/SaveBlock3 sizes and every existing field offset stay unchanged,
@@ -1176,9 +1182,8 @@ including the second flag bank at 0x500. Older saves get zero Oath bytes,
 not whatever previously occupied that reserve. Version 6 takes its two-byte
 Urn mask from padding within those same 40 bytes; version-5 migration
 preserves existing Oath progress and reserves only the original final jar.
-Field-poison cleanup and the once-only opening choice still need integration
-before the Oath can be enabled. Do not expose enrollment before field falls
-receive the same survivor-safe cleanup and acknowledged notices.
+The once-only opening choice still needs integration before players can
+enroll. Existing saves must not be retroactively enrolled.
 
 The continuation's conservative run-ending policy is to return to the title
 without overwriting the last manual save, not to auto-save a failed run or
@@ -1217,10 +1222,16 @@ to empty a jar triggers automatic burial on storage exit, with the original
 Urn unchanged and the expansion preserved by save/reset/CONTINUE. Native tests cover
 multiple fallen partners, survivor/Egg compaction, partial-capacity retry,
 simulation and defeat exclusions, and the no-survivor routing guard.
-`tools/ichor/tests/oath_recovery.sh` adds 13 real-ROM checks and five
+`tools/ichor/tests/oath_recovery.sh` adds 18 real-ROM checks and eight
 screenshots: an actual scripted no-whiteout defeat, boxed-survivor recovery,
 memorial preservation, exhausted-run title return, transactional capacity
 refusal, last-manual-save preservation and saved-FAILED load interception.
+It also runs the native poison-message task with two one-HP survivors and an
+already marked pending partner, checks that indices stay intact until every
+message finishes, and proves acknowledged burial resumes the original
+script with exact memorial records. The native all-party field-loss script
+also reaches stored-survivor recovery. This is not a claim that the current
+modern configuration inflicts lethal overworld poison damage.
 Native tests also cover six-partner recovery, Eggs/memorials not counting
 as survivors, partial-capacity retention, newly emptied source-jar reuse,
 and ordinary/released whiteout preservation. The full Oath remains gated.

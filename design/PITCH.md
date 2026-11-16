@@ -226,8 +226,9 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
     whiteout healing. Exhaustion and blocked full-party/full-Urn recovery
     return to title without overwriting the last manual save, and saved
     failed states cannot enter the field.
-    Field-poison cleanup and the once-only opening choice still need
-    integration before the Oath can safely appear.
+    Field-poison cleanup waits for all party messages before burial and uses
+    the same recovery path for total-party loss; modern one-HP survival
+    never counts as a fall. The once-only opening choice remains to be added.
 - **No HM slaves.** Field powers come from relics. Relics are key items you use straight from the field; no Pokémon ever learns a field move. The user approved this mapping on 2026-11-14. Each relic's myth-quest and upgrades are in `design/SYSTEMS.md` §1–3.
 
   | Field power | Relic | Arrives |
