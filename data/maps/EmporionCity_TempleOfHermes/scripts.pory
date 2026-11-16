@@ -17,6 +17,7 @@
 //               always on.
 //   VAR_TEMP_5  flasks of oil carried. ICHOR_STUB_OFFERINGS: the engine's Olive Oil
 //               (ENGINE_API.md §3) replaces it; see EventScript_OilJar and _AskOil.
+//   VAR_TEMP_6  half of this difficulty's starting step-glass.
 //   FLAG_ICHOR_HERMES_HERM_J1-J4  a junction herm is oiled. Permanent: a second run is easier.
 //   FLAG_ICHOR_HERALDS_RUN_DONE   the third scroll is home. The dais gate stays open, the
 //                                 upper colonnade's turnstiles stay turned, every herm
@@ -328,7 +329,7 @@ script EmporionCity_TempleOfHermes_EventScript_Tick {
     if (var(VAR_TEMP_2) == 0) {
         goto(EmporionCity_TempleOfHermes_EventScript_GlassDry)
     }
-    if (var(VAR_TEMP_2) == 60) {
+    if (var(VAR_TEMP_2) == VAR_TEMP_6) {
         msgbox(format("The step-glass is half run."))
         closemessage
     } elif (var(VAR_TEMP_2) == 30) {
@@ -613,6 +614,8 @@ script EmporionCity_TempleOfHermes_EventScript_Kerykos {
     lock
     faceplayer
     setspeaker(EmporionCity_TempleOfHermes_Text_NameKerykos)
+    specialvar(VAR_0x8004, Ichor_GetStepGlassLimit)
+    buffernumberstring(STR_VAR_1, VAR_0x8004)
     if (!flag(FLAG_ICHOR_HERALDS_RUN_TOLD)) {
         msgbox(format(
             "You came! Everyone comes. I knew you'd come. I wrote it down.\p"
@@ -625,13 +628,13 @@ script EmporionCity_TempleOfHermes_EventScript_Kerykos {
             "Fast, and to the right door.\p"
             "Three sealed scrolls. Three herald-herms, somewhere in my stoa.\p"
             "Deliver them in the order they're written. A herald always does.\p"
-            "And this is the step-glass. It runs dry in a hundred and twenty steps.\p"
+            "And this is the step-glass. It runs dry in {STR_VAR_1} steps.\p"
             "The herms in there are vain. Oil their faces and they'll point.\p"
             "There's oil by the door. Free. Don't tell the merchants that either."))
         setflag(FLAG_ICHOR_HERALDS_RUN_TOLD)
     } else {
         msgbox(format(
-            "Three scrolls, three herms, a hundred and twenty steps.\p"
+            "Three scrolls, three herms, {STR_VAR_1} steps.\p"
             "Oil the herms and they'll point. Turnstiles turn one way."))
     }
     msgbox(format("Ready?"), MSGBOX_YESNO)
@@ -660,6 +663,7 @@ script EmporionCity_TempleOfHermes_EventScript_StartRun {
     removeobject(LOCALID_HERMES_KERYKOS)
     setvar(VAR_TEMP_1, 0)
     specialvar(VAR_TEMP_2, Ichor_GetStepGlassLimit)
+    specialvar(VAR_TEMP_6, Ichor_GetStepGlassHalf)
     setvar(VAR_TEMP_3, 1)
     call(EmporionCity_TempleOfHermes_EventScript_DrawRoom)
     special(DrawWholeMapView)

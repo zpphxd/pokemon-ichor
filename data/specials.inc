@@ -1036,6 +1036,7 @@ gSpecials::
 	def_special Ichor_ChooseDifficulty
 	def_special Ichor_ChooseStartingOath
 	def_special Ichor_GetStepGlassLimit
+	def_special Ichor_GetStepGlassHalf
 	@ Ichor: relics (src/ichor_relics.c)
 	def_special Ichor_CanUseRelic
 	def_special Ichor_RelicPromptsAuto

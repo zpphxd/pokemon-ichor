@@ -155,7 +155,11 @@ The low-level expansion setter remains available for engine/test setup, not a
 player-facing mode-switch menu.
 
 `Ichor_GetStepGlassLimit` returns 150/120/100 for Mortal/Hero/Spartan. Hermes's
-trial and the Labyrinth's thread use the same helper. Spartan's current cap
+trial and the Labyrinth's thread use the same helper. Kerykos's first and repeat
+instructions buffer that actual limit. `Ichor_GetStepGlassHalf` derives its
+halfway mark from the same limit; the run caches it in `VAR_TEMP_6` at startup,
+so ordinary step ticks remain vars-only. The halfway warnings occur at
+75/60/50 remaining steps, while the low warning stays at 30. Spartan's current cap
 mapping is 14/20/26, then the next chapter's 32 after Laurel 3. EXP multipliers
 and candies cannot exceed the cap. Its option menu and battles enforce SET;
 the battle-item rejection gives an explicit message but still permits capture
@@ -163,7 +167,9 @@ balls. Trainer AI is upgraded even when a trainer has no separate Hard party.
 The four Act I Hierophant party variants use the existing trainer ids.
 
 `tools/ichor/tests/difficulty.sh` checks the actual menus, all boss variants,
-confirmation rejection and real save/reset/CONTINUE for all modes.
+confirmation rejection and real save/reset/CONTINUE for all modes. Its labeled
+Hermes fixtures also exercise native initial/repeat dialogue, declining and
+starting the rite, and the actual halfway warning at each difficulty's mark.
 `make check -j$(sysctl -n hw.ncpu) TESTS='Ichor:'` also covers caps, EXP Candy and item rejection.
 Oath rules and opening selection are documented in §11. Later chapter cap
 milestones and natural-level approval remain open.
