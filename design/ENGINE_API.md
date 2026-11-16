@@ -1092,7 +1092,17 @@ fainting, the locked Urn and run-ending behavior work together.
 - `Ichor_RecordOathFallen(mon)` marks an actual zero-HP, non-Egg Pokemon
   once under an active Oath and increments its fallen count. The marker uses
   a previously unused BoxPokemon bit, leaving the Pokemon/storage sizes
-  unchanged; `Ichor_IsOathFallen` ignores it outside sworn runs.
+  unchanged; `Ichor_IsOathFallen` ignores it outside sworn runs. Native
+  `SetValuesOnFaint` records only the player's own Pokemon in real battles,
+  not opponents, NPC partners or simulated/tutorial battles.
+  Field poison also records actual zero-HP falls outside battle facilities;
+  modern poison survival at one HP does not count as a fall.
+- Fallen HP remains zero through `SetMonData`'s HP/HP-lost setters, stat
+  recalculation, party healing and boxed-to-party conversion, including
+  after release. Item effects refuse fallen targets; battle revival items
+  explain why, and Revival Blessing's native search excludes them. Ordinary
+  saves, including legacy Pokemon with the formerly unused bit set, retain
+  ordinary healing and revival.
 - `Ichor_IsUrnBox(box)` identifies saved reserved jars even after release or
   failure. It is a policy predicate, not yet a Pithos UI lock.
 - `Ichor_StoreOathFallen(mon)` stores the entire marked BoxPokemon before
@@ -1109,8 +1119,10 @@ including the second flag bank at 0x500. Older saves get zero Oath bytes,
 not whatever previously occupied that reserve. Version 6 takes its two-byte
 Urn mask from padding within those same 40 bytes; version-5 migration
 preserves existing Oath progress and reserves only the original final jar.
-Battle-faint, healing/revive, Urn-aware capture/deposit, Pithos-action, overflow and
-run-ending callers still need integration before the Oath can be enabled.
+Post-battle Urn transfer/party compaction, Urn-aware capture/deposit,
+Pithos-action locks, overflow and run-ending callers still need integration
+before the Oath can be enabled. In particular, do not expose enrollment while
+an all-party fall could enter an ordinary whiteout with no revivable partner.
 
 Native tests cover the entire map-section range, byte boundaries, invalid
 indices, once-only choice/transitions and migration. The actual-ROM save
@@ -1122,3 +1134,7 @@ fall counting, safe growth, occupied-jar refusal and full-capacity retention.
 first-area capture, repeat-area Bag refusal, an escaped second area's chance,
 save/reset/CONTINUE and capture after release. Native checks cover excluded
 battle categories and quick/Safari no-consumption guards.
+The same real-ROM fixture now plays an actual weak-lead fall, selects a living
+replacement and checks native party healing before and after save/reload.
+Native tests cover HP/item/boxed-heal bypasses, Revival Blessing's target
+search and actual recorded-link fainting without permanent loss.

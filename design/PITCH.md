@@ -214,9 +214,10 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
     and grow only into empty Pithos jars without changing save sizes.
     Native wild-battle entry and ball-use guards now enforce the area chance
     on fixture-enrolled saves; ordinary runs remain unrestricted.
-    It is not yet offered to players: battle-faint callers, revival prevention,
-    locked storage, capacity handling and run-ending enforcement still need
-    integration before the choice can safely appear.
+    Real player fainting now records permanent falls, and HP healing, revival
+    items and Revival Blessing respect them. It is not yet offered to players:
+    automatic Urn transfer, locked storage, capacity handling and run-ending
+    enforcement still need integration before the choice can safely appear.
 - **No HM slaves.** Field powers come from relics. Relics are key items you use straight from the field; no Pokémon ever learns a field move. The user approved this mapping on 2026-11-14. Each relic's myth-quest and upgrades are in `design/SYSTEMS.md` §1–3.
 
   | Field power | Relic | Arrives |
