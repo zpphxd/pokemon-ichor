@@ -44,3 +44,44 @@ ChartTest_Save:
 	special SaveGame
 	releaseall
 	end
+
+	test_header ChartTest_HillHeader, ChartTest_Hill
+ChartTest_Hill:
+	setvar VAR_TEMP_F, 1
+	setflag FLAG_ICHOR_RUINS_CLEARED
+	setflag FLAG_ICHOR_HIDE_ALETHEA_RUINS
+	setflag FLAG_ICHOR_HIDE_RUINS_GRUNTS
+	warp MAP_KALLISTE_ROUTE1_KRONION_HILL, 15, 9
+	waitstate
+	end
+
+	test_header ChartTest_HoldHeader, ChartTest_Hold
+ChartTest_Hold:
+	setvar VAR_TEMP_F, 1
+	special Ichor_HoldTimeOfDay
+	end
+
+	test_header ChartTest_RemoveHeader, ChartTest_Remove
+ChartTest_Remove:
+	setvar VAR_TEMP_F, 1
+	removeitem ITEM_STAR_CHART
+	end
+
+	test_header ChartTest_GiveHeader, ChartTest_Give
+ChartTest_Give:
+	setvar VAR_TEMP_F, 1
+	additem ITEM_STAR_CHART
+	end
+
+	test_header ChartTest_IndoorHeader, ChartTest_Indoor
+ChartTest_Indoor:
+	setvar VAR_TEMP_F, 1
+	warp MAP_ELAIA_VILLAGE_AKADEMIA, 13, 4
+	waitstate
+	end
+
+	test_header ChartTest_TrySkyHeader, ChartTest_TrySky
+ChartTest_TrySky:
+	setvar VAR_TEMP_F, 1
+	specialvar VAR_TEMP_E, Ichor_ShowNightSky
+	end

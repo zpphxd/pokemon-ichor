@@ -5,6 +5,8 @@
 #include "sprite.h"
 #include "constants/ichor.h"
 #include "constants/items.h"
+#include "constants/rtc.h"
+#include "constants/map_groups.h"
 
 K(ITEM_CHART, ITEM_STAR_CHART)
 K(FLAG_STARS, FLAG_ICHOR_CONSTELLATIONS_START)
@@ -31,3 +33,9 @@ K(SPRITE_NONE, SPRITE_NONE)
 K(SPRITE_SIZE, sizeof(struct Sprite))
 K(OFF_SPRITE_OAM, offsetof(struct Sprite, oam))
 K(OBJ_VRAM_ADDR, OBJ_VRAM0)
+K(TIME_DAY, TIME_DAY)
+K(TIME_NIGHT, TIME_NIGHT)
+K(VAR_TEMP_E, VAR_TEMP_E)
+K(MAP_HILL, MAP_KALLISTE_ROUTE1_KRONION_HILL)
+K(MAP_AKADEMIA, MAP_ELAIA_VILLAGE_AKADEMIA)
+K(OFF_ICHOR_HELD_TIME, offsetof(struct IchorSave, heldTimeOfDay))
