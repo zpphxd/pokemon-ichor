@@ -48,6 +48,10 @@ Hidden items can take these bank flags too (`claim.py hiddenitem`; see `asm/macr
 These indices are inside the engine's reserved dig ranges, not the general bank
 offsets above. Do not assign them to another find.
 
+General bank offset 0x02E is `FLAG_ICHOR_GOT_AMPHORA_PATCH`, the one-time
+Ability Patch on Daphne's shelf after all twelve amphorae are restored.
+It is independent of sherd collection and the reserved restored-amphora bank.
+
 | Kind | Index | Location | Find |
 |---|---|---|---|
 | Fixed (`FLAG_ICHOR_DIG_FIXED_START`) | 0 | Emporion Harbor's quay planter | First available Arachne sherd |

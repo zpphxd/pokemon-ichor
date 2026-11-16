@@ -134,7 +134,7 @@ python3 tools/ichor/claim.py --range 0x000-0x0FF bankflag FLAG_ICHOR_MET_KERYKOS
 | 5 | The Frozen Hour (SCRIPT.md Phase 4, E1–E6) | 5 | **Built** |
 | 6 | The Labyrinth: the Thread, Asterion, the Helm, the dials, sentries, the disguise | 5 | **Built** |
 | 7 | Scripts' small needs: flag counts, a held tint, omens, time-of-day tables | 5 | **Built** |
-| 8 | Excavation: the Trowel, dig spots, fixed finds | 6 | **Built** |
+| 8 | Excavation: the Trowel, dig spots, fixed finds, amphora restoration | 6 | **Built** |
 
 Until a batch lands, a script that calls one of its names won't link. Keep such calls behind a placeholder of your own until then, or ask for the batch's constants early.
 
@@ -890,4 +890,48 @@ money unchanged; the sale rechecks capacity. With no blessing, +20% is ¥600,
 
 **Index blocks** for dig spots are in §1's table. Ask the engine session for more.
 
+### Amphora restoration
+
+The Akademia's three shelf BG events enter `EventScript_IchorAmphoraShelf`.
+This is a self-service shelf with Daphne's written notes, available after she
+leaves for the Mysteries; it does not change her location or require an invented
+attendant. Its scrolling menu shows only collected or restored myths, in
+canonical `ICHOR_AMPHORA_*` order, with a piece count or `whole` label.
+
+The player must explicitly confirm assembling four sherds. Partial collections,
+menu cancellation and declined confirmation leave the restoration flag unset.
+Restoration sets `FLAG_ICHOR_AMPHORAE_START + amphora`, retains all four collected
+flags, and grants Hephaestus or Aphrodite five capped Favor once for their
+respective myths. A legacy restored flag remains readable even without sherds
+and does not grant Favor again.
+
+With an amphora id in `VAR_0x8004`:
+- `Ichor_BufferAmphora` returns `ICHOR_AMPHORA_INCOMPLETE`, `_READY`,
+  `_RESTORED` or `_INVALID`, buffering the name/count in `STR_VAR_1/2` when valid.
+- `Ichor_RestoreAmphora` rechecks eligibility and returns the resulting status.
+- `Ichor_BufferAmphoraNotes` returns `TRUE` and copies the notes to `gStringVar4`
+  only for a restored amphora.
+- `Ichor_ShowAmphoraPicture` returns `TRUE` only after opening the 64x64 window.
+  `Ichor_HideAmphoraPicture` releases it and restores the borrowed BG palette.
+  Close it before another menu, map transition or reward.
+
+`Ichor_BuildAmphoraMenu` puts its count in `VAR_RESULT`; zero means no entries,
+and `ICHOR_AMPHORA_MENU_ERROR` is an explicit allocation failure. The menu owns
+and frees its labels. Finish its dynamic selection before showing a painting.
+
+The twelve panels use one 16-color palette, no secondary-tileset capacity,
+and 24,576 bytes of uncompressed 4bpp graphics. Regenerate their indexed PNG with
+`python3 tools/ichor/art/amphorae.py`; `make` supplies the `.4bpp` and `.gbapal`.
+
+All twelve **restored** flags unlock the last page and one Ability Patch.
+`FLAG_ICHOR_GOT_AMPHORA_PATCH` is set only after `giveitem` succeeds; pending
+and claimed rewards persist across CONTINUE. Forty-eight collected sherds alone
+do not qualify. Later-region world callers and Scroll of Deeds UI remain to
+integrate; the shelf records their canonical completed-amphora gates and clues,
+not an automatically finished encounter.
+
 **Checks:** `tools/ichor/tests/ichor_dig.sh` (15 checks on Route 1) and `make check TESTS="Ichor:"` (`test/ichor_dig.c`: the rolls, rerolls, act tables and blessings).
+`tools/ichor/tests/amphorae.sh` exercises all twelve real shelf choices and
+paintings, cancellation, explicit restoration, Favor, saved/full-Bag collection
+rewards and repeated reading. `tools/ichor/tests/kalliste_digs.sh` also follows
+four actually excavated Kronos sherds through shelf restoration and CONTINUE.
