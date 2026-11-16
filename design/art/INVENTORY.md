@@ -2,6 +2,36 @@
 
 The checklist that makes the total conversion true: every player-facing asset group and system in the ROM, with its status. It is the "inventory" that `design/ART_PLAN.md` §6 promises. Nothing should stay Hoenn by accident.
 
+## Character quality restart, 2026-11-16
+
+The user approved the new **actual 64x64 Theo preview** and directed the same
+method across character sprites. The approved PNG, generated source and
+unchanged earlier illustration are preserved in `design/art/img/theo_approved_*`;
+the authoring and review rules are in `design/ART_PLAN.md` under "Approved
+character direction". The old native-pilot v3 remains rejected. Historical
+acceptances below do not establish compliance with this new benchmark.
+
+The first ownership partition covers all **40 existing custom NPC sheets**,
+**20 Theo/Ianthe player-state sheets**, **20 custom trainer fronts**,
+**four custom four-frame battle-back sheets**, and **Daphne's intro portrait**:
+85 production PNG surfaces, not 85 completed redesigns. The approved Theo
+reference is not counted as integrated production art.
+
+| Human group | Assigned surfaces | Current new-style status |
+|---|---|---|
+| Players | Theo/Ianthe fronts and backs; all ten existing state sheets each | Image-model-led redesign in progress; Theo front preview is the approved style anchor, not complete player coverage |
+| Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Image-model-led redesign in progress; includes Kleon's seasick/tablet poses and the extra Sam/Apollo/Cami frames |
+| Classes and townsfolk | 22 custom walker sheets and ten custom fronts | Image-model-led redesign in progress; healer's tenth bow is required |
+| Still-reachable imported class portraits | Hiker, Psychic F, Running Triathlete M | Previously verified original Gen 3 retention; not newly redrawn or covered by the 85 custom surfaces |
+| Legacy players | 22 RS/FRLG PNGs and their existing compiled aliases | Preserve accepted identities/provenance; not a new character redesign |
+| Other imported people/fronts/backs and duplicate screen art | Hoenn/FRLG/cut assets, map markers, intro/credits/naming and other human appearances outside the custom set | Coverage review remains open; do not silently count unchanged or unassigned art as complete |
+
+This character-only continuation does not restart Pokemon, prop, field-effect,
+tileset, UI or ball-art generation. Town-by-town production landing still
+requires complete compatible native sources, visual review, build and smoke
+evidence. The full character and global sprite requests remain open until the
+remaining groups are reconciled.
+
 ## Source provenance coverage, 2026-11-15
 
 `sprite_audit.py provenance --reference <commit> --output <json>` accounts for

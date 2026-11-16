@@ -88,7 +88,8 @@ Still to do:
 
 - **One style guide.** The master palette, Gen 3 readability, top-left light, outlines on objects but not on terrain. It's in `design/phase1/PLAN.md`, to be promoted to `design/STYLE.md` once the slice is approved.
 - **Shared toolkits** in `tools/ichor/art/`:
-  - pixel-by-pixel ASCII painters, so every asset is regenerated from editable source
+  - existing pixel-by-pixel ASCII painters for legacy assets; these are not the
+    artistic authoring method for the approved character redraw below
   - the map renderer
   - Porytiles for tilesets.
 - **Narrow batches.** One specialist agent per asset group, in its own worktree, committing as it goes.
@@ -120,6 +121,56 @@ verified original artwork is **retained**, and a successful native redesign is
 a **redraw**. Neither regeneration nor compiled-pixel/renderer checks promote
 polish into an approved redesign. A front-only pilot does not close backs,
 icons, followers, animation states, a town or the global inventory.
+
+### Approved character direction, 2026-11-16
+
+The user approved the new Theo preview: "Okay this is a great improvement over
+what was previously. Go ahead and do this for all character sprites."
+This supersedes the rejected polygon/ASCII native pilots as the human-character
+style benchmark, not as evidence that the full sprite rollout is complete.
+Pokemon, environments, effects and items are not authorized by this
+character-only continuation.
+
+The exact approved result is
+`design/art/img/theo_approved_64.png` (64x64, indexed, transparent index 0,
+14 visible colors; SHA-256
+`eab2845d3ffcd20adee2d63978e504747a37a959625bde9fb1f0b6f1ca20cd7f`).
+`theo_approved_generated.png` beside it preserves the new image-model output;
+`theo_approved_illustration.png` is the unchanged earlier illustration crop.
+These are design references, not production imports. The model returned a
+1254x1254 image, not an exact native pixel grid. The approved preview trims
+transparent margins, fits within 60x60 using nearest-neighbor sampling, centers
+the result on 64x64, thresholds alpha at 128 and reduces to at most 15 opaque
+colors without dithering, weighting red accents to retain the capture ball.
+Call this image-generated and resampled, not hand-authored native pixel art.
+Hardware color conversion, palette bindings and companion views still need
+verification before integration.
+
+- Use reference-guided image generation for artistic creation, with the
+  character's approved design and this Theo style benchmark. Do not substitute
+  a code-writing model's polygons, ASCII body parts or cosmetic changes to
+  locked old silhouettes. The generated source and the actual native export
+  must both be retained.
+- Design for the final pixel grid: silhouette first, readable limb gaps,
+  expressive faces, purposeful connected shading clusters and selective
+  outlines. Simplify minor decoration before sacrificing identity or anatomy.
+  Adapt eye, hand and prop proportions when necessary for small-scale clarity.
+- Judge native-size results before integer nearest-neighbor enlargements.
+  Review against the intended background as well as a neutral surface.
+  A large illustration or an attractive enlarged image cannot stand in for
+  the actual final sprite. Palette or dimension checks are not artistic gates.
+- Preserve the correct size for each role: trainer fronts use 64x64, while
+  walkers, rider poses and other states keep their engine-specific dimensions.
+  Keep all frame counts, ordering, anchors and action semantics; do not make a
+  walking sheet by repeating a standing image.
+- Treat the accepted PNG/palette as the artistic source of truth. Deterministic
+  tools may arrange, index, convert, encode and validate it, but must not
+  silently replace its anatomy with an older painter's output. Preserve
+  pre-redraw sources and make source-backed rebuilding explicit.
+- Plan front/back/state colors together. Shared palette changes require
+  coordinating every reader; a locally attractive palette is not sufficient.
+  Original RS/FRLG player identities remain in their accepted preservation
+  scope rather than being converted into Theo or Ianthe.
 
 ## 7. Order
 
