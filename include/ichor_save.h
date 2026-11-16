@@ -21,7 +21,7 @@
 #include "constants/flags.h"
 #include "constants/vars.h"
 
-#define ICHOR_SAVE_VERSION  5
+#define ICHOR_SAVE_VERSION  6
 #define ICHOR_SAVE_SIZE     1472
 
 #define ICHOR_GOD_SLOTS     16  // the 15 gods of design/SYSTEMS.md §3, and one spare
@@ -70,7 +70,8 @@ struct IchorOath
     u8 reserved;
     u16 fallenCount;
     u8 encounters[32];  // one persistent chance per named map section
-    u8 padding[4];
+    u16 urnBoxes;       // version 6: reserved Pithos jars; grows only into empty jars
+    u8 padding[2];
 };
 
 struct IchorSave

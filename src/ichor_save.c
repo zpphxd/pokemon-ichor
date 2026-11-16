@@ -3,8 +3,10 @@
 #include "global.h"
 #include "event_data.h"
 #include "ichor_omen.h"
+#include "ichor_oath.h"
 #include "ichor_save.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 
 // The layout is part of the save format. These pin it, so a change that moves
 // a field fails the build instead of silently breaking saves.
@@ -67,6 +69,13 @@ void Ichor_OnSaveLoaded(void)
         memset(gIchorSave.flags2, 0, sizeof(gIchorSave.flags2));
     if (gIchorSave.version < 5)
         memset(&gIchorSave.oath, 0, sizeof(gIchorSave.oath));
+    if (gIchorSave.version < 6)
+    {
+        gIchorSave.oath.urnBoxes = Ichor_IsOathActive()
+            || gIchorSave.oath.state == ICHOR_OATH_RELEASED
+            || gIchorSave.oath.state == ICHOR_OATH_FAILED
+            ? 1 << (TOTAL_BOXES_COUNT - 1) : 0;
+    }
     gIchorSave.version = ICHOR_SAVE_VERSION;
 }
 
