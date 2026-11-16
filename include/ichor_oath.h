@@ -36,6 +36,7 @@ bool32 Ichor_RecordOathFallen(struct Pokemon *mon);
 u32 Ichor_StoreOathFallen(struct Pokemon *mon);
 u32 Ichor_StoreOathPartyFallen(void);
 void Ichor_EndOathBattle(u32 battleType, u32 battleOutcome);
+void Ichor_RetryOathUrn(void);
 bool32 Ichor_ShowOathAftermathNotice(void);
 
 #endif

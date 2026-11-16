@@ -1520,6 +1520,7 @@ static void Task_PCMainMenu(u8 taskId)
     switch (task->tState)
     {
     case STATE_LOAD:
+        Ichor_RetryOathUrn();
         CreateMainMenu(task->tSelectedOption, &task->tWindowId);
         LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, FALSE);
@@ -1530,8 +1531,14 @@ static void Task_PCMainMenu(u8 taskId)
         task->tState++;
         break;
     case STATE_FADE_IN:
-        if (IsWeatherNotFadingIn())
+        if (IsWeatherNotFadingIn() && !Ichor_ShowOathAftermathNotice())
+        {
+            DrawDialogueFrame(0, FALSE);
+            FillWindowPixelBuffer(0, PIXEL_FILL(1));
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            CopyWindowToVram(0, COPYWIN_FULL);
             task->tState++;
+        }
         break;
     case STATE_HANDLE_INPUT:
         task->tInput = Menu_ProcessInput();

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "ichor_oath.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -1527,6 +1528,18 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
     }
     else
     {
+        struct Pokemon *party = NULL;
+        s8 partySlot = 0;
+        GetPartyAndSlotFromPartyMenuId(*slotPtr, &party, &partySlot);
+        if (Ichor_IsOathFallen(&party[partySlot].box)
+            && gPartyMenu.action != PARTY_ACTION_CHOOSE_MON)
+        {
+            PlaySE(SE_FAILURE);
+            DisplayPartyMenuMessage(COMPOUND_STRING("Fallen partners cannot\ntake part.{PAUSE_UNTIL_PRESS}"), FALSE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+            return;
+        }
         switch (gPartyMenu.action)
         {
         case PARTY_ACTION_SOFTBOILED:
@@ -2990,6 +3003,8 @@ static u8 GetPartyMenuActionsType(struct Pokemon *mon)
 {
     u32 actionType;
 
+    if (Ichor_IsOathFallen(&mon->box))
+        return ACTIONS_SUMMARY_ONLY;
     switch (gPartyMenu.menuType)
     {
     case PARTY_MENU_TYPE_FIELD:

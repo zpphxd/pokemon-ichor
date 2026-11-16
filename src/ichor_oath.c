@@ -198,9 +198,16 @@ u32 Ichor_StoreOathPartyFallen(void)
 
 void Ichor_EndOathBattle(u32 battleType, u32 battleOutcome)
 {
-    u32 slot;
     if (!Ichor_IsOathBattle(battleType)
         || battleOutcome == B_OUTCOME_LOST || battleOutcome == B_OUTCOME_DREW)
+        return;
+    Ichor_RetryOathUrn();
+}
+
+void Ichor_RetryOathUrn(void)
+{
+    u32 slot;
+    if (!Ichor_IsUrnBox(URN_BOX))
         return;
     for (slot = 0; slot < PARTY_SIZE; slot++)
     {
