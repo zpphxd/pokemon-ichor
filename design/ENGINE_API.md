@@ -1060,7 +1060,7 @@ navigation, screen cleanup and save/reset/CONTINUE.
 The autonomous continuation uses **one wild-encounter chance per named area**,
 not one per map or dungeon floor. This is an implementation decision, not a
 claim of human approval. The full Oath remains unfinished and cannot yet be
-selected from the bedroom clock: do not offer it until battle admission,
+selected from the bedroom clock: do not offer it until capture enforcement,
 fainting, the locked Urn and run-ending behavior work together.
 
 `src/ichor_oath.c` provides the saved-state core:
@@ -1074,8 +1074,18 @@ fainting, the locked Urn and run-ending behavior work together.
 - `Ichor_ClaimOathEncounter(mapSection)` admits the first encounter and saves
   its bit. Under an active Oath it refuses another chance in that named area,
   out-of-range IDs, dynamic sections and secret bases. Without an active Oath
-  it admits ordinary encounters without recording a bit. The future battle
-  caller must exclude simulations, tutorials and trainer battles.
+  it admits ordinary encounters without recording a bit.
+- `Ichor_BeginOathBattle` runs once from `CB2_InitBattle`, after save pointers
+  have been relocated. Real wild encounters claim the named area's chance
+  immediately: escape or defeat still spends it, while failed ball throws in
+  that first battle can be retried. Trainer, link, recorded, Frontier,
+  Trainer Hill, secret-base, tutorial and uncatchable ghost battles do not
+  spend a chance. Dungeon floors sharing a named map section share a chance.
+- `Ichor_CanCatchOathBattle` supplies the Bag, last-ball shortcut, Safari throw,
+  native throw command and victory-catch guards. Repeat-area Bag attempts
+  explain the refusal without spending an item or turn. Native quick/Safari
+  action guards also preserve their ball counts. Inactive/released runs keep
+  their normal capture behavior. This is not a gift/trade restriction.
 - `Ichor_HasOathEncounter` and `Ichor_CountOathEncounters` read valid receipts.
 - `Ichor_ReleaseOath` and `Ichor_FailOath` each transition an active Oath once,
   retaining its receipts and fallen count. Neither permits re-enrollment.
@@ -1099,7 +1109,7 @@ including the second flag bank at 0x500. Older saves get zero Oath bytes,
 not whatever previously occupied that reserve. Version 6 takes its two-byte
 Urn mask from padding within those same 40 bytes; version-5 migration
 preserves existing Oath progress and reserves only the original final jar.
-Battle-faint, healing/revive, capture/deposit, Pithos-action, overflow and
+Battle-faint, healing/revive, Urn-aware capture/deposit, Pithos-action, overflow and
 run-ending callers still need integration before the Oath can be enabled.
 
 Native tests cover the entire map-section range, byte boundaries, invalid
@@ -1108,3 +1118,7 @@ fixture seeds Oath state, saves and CONTINUEs, then writes version-4 and
 version-5 saves with stale reserve bytes and verifies migration preserves
 the old progress. Urn tests verify whole-Pokemon preservation, no duplicate
 fall counting, safe growth, occupied-jar refusal and full-capacity retention.
+`tools/ichor/tests/oath_capture.sh` enrolls only a fixture save and plays real
+first-area capture, repeat-area Bag refusal, an escaped second area's chance,
+save/reset/CONTINUE and capture after release. Native checks cover excluded
+battle categories and quick/Safari no-consumption guards.

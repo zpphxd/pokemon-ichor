@@ -212,6 +212,8 @@ Hera is the Dragon seat because in myth she raised the Hydra and set Ladon to gu
     The Oath has saved one-chance-per-named-area receipts independently of
     difficulty, and version-6 Urn foundations that preserve fallen Pokemon
     and grow only into empty Pithos jars without changing save sizes.
+    Native wild-battle entry and ball-use guards now enforce the area chance
+    on fixture-enrolled saves; ordinary runs remain unrestricted.
     It is not yet offered to players: battle-faint callers, revival prevention,
     locked storage, capacity handling and run-ending enforcement still need
     integration before the choice can safely appear.
