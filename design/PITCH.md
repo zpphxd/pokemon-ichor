@@ -428,9 +428,11 @@ foe at 7 HP; that earlier win is not a robust result for the revised pilot.
 Spartan/Nebrel currently loses there with Nemecub at 46 HP.
 Spartan/Hipling previously lost with four level-14 partners;
 Spartan/Kynder can lose earlier at Metis. Those are pilot failures, not
-established balance defects. Mortal/Kynder separately wins both summit
-grunts but then loses field control on battle return; that scene failure
-remains under investigation, not classified as a balance loss. The remaining
+established balance defects. An earlier Mortal/Kynder summit timeout was
+the harness counting both battles against its cutscene deadline, not an
+established engine lock. Separate battle/scene budgets let a resumed fixture
+complete the native scene; a new NEW GAME attempt instead loses its first
+summit battle. That fixture is not continuous or ending coverage. The remaining
 starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
 and human look/fun approval are still open.
 

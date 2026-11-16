@@ -428,7 +428,7 @@ end
 --             multichoice menus (default: YES / the first choice)
 --   every   = true              screenshot every message box (beat_text_NN)
 --   menuChoice = n              zero-based choice for every multichoice menu
---   limit   = frames before giving up
+--   limit   = non-battle frames before giving up (battles have their own limit)
 --   stop    = function() -> bool  return as soon as it holds (a warp landing
 --             on a map whose scene the next beat plays)
 -- Returns the number of message boxes and the battles fought.
@@ -488,7 +488,9 @@ function L.settle(opts)
         tap(K.UP); wait(10); tap(K.A)
         waitUntil(function() return not L.on("CB2_WallClock") end, 600, "the water clock to close")
       elseif L.inBattle() then
+        local battleStart = now()
         fought[#fought + 1] = L.battle()
+        t0 = t0 + now() - battleStart
       elseif L.on("CB2_EvolutionSceneUpdate") then
         if L.pilot then L.pilot.observeEvolution() end
         tap(K.A); wait(6)
