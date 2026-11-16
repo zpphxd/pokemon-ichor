@@ -8,20 +8,26 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art"))
 import sprites_classes as classes
+import human_classes as humans
 
 
 class ClassSpriteTests(unittest.TestCase):
     def test_native_sources_and_palettes_reproduce(self):
         for name, painter in classes.CLASSES.items():
             with self.subTest(portrait=name):
-                figure, palette = painter()
                 path = Path(classes.FRONT) / (name + ".png")
                 with Image.open(path) as image:
                     self.assertEqual(image.mode, "P")
                     self.assertEqual(image.size, (64, 64))
                     self.assertEqual(image.info.get("transparency"), 0)
-                    self.assertEqual(image.getpalette(), palette.flat())
-                    np.testing.assert_array_equal(np.array(image), classes.render(figure))
+                    if ("portraits", name) in humans.BY_KEY:
+                        with humans.source_image("portraits", name) as authored:
+                            self.assertEqual(image.getpalette(), authored.getpalette())
+                            np.testing.assert_array_equal(np.array(image), np.array(authored))
+                    else:
+                        figure, palette = painter()
+                        self.assertEqual(image.getpalette(), palette.flat())
+                        np.testing.assert_array_equal(np.array(image), classes.render(figure))
                 self.assertEqual(path.read_bytes()[24], 4)
 
     def test_lamp_and_raised_arm_are_connected(self):

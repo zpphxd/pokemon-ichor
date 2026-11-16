@@ -1,0 +1,556 @@
+{
+  "method": "Image-model-generated, trimmed/resampled and native-quantized exports, not hand-authored native drawings. Canonical source PNGs are authored native exports; producer copies them without drawing shapes.",
+  "producer": "python3 tools/ichor/art/human_classes.py --write",
+  "model_source_archive": {
+    "filename": "human-class-production-sources-v2.zip",
+    "sha256": "5b64001f6cf739389ee22491fbf60f48a657671bcdc9e3fa184ac1d11d81f362",
+    "note": "Contains frozen generated PNGs, original references, conversion/assembly recipe, native outputs and comparisons. Field binaries use engine-correct 2x4 metatiles; prior immutable archives remain preserved."
+  },
+  "approved_style_anchor_sha256": "eab2845d3ffcd20adee2d63978e504747a37a959625bde9fb1f0b6f1ca20cd7f",
+  "shared_palettes": {
+    "graphics/object_events/palettes/ichor_folk.pal": "85e8f48435c1ec0233bfdae38610566c88f4d60a7bc2d1c9e0931340a3feca8f",
+    "graphics/object_events/palettes/ichor_cast.pal": "7f002e296e141758e076ef725c8e4d27d4243c63ce9bdaf379f16f05a1d89617"
+  },
+  "retained_legacy": {
+    "graphics/trainers/front_pics/hiker.png": "5f27a6416e5bd2f5c27fc9b8c3297ccaa2d7a3d59f27ec3a9116e4aefbac3097",
+    "graphics/trainers/front_pics/psychic_f.png": "90018e603e63e6122999ea8af5de72dc9bc0e49e30d215728c207b847c2e8204",
+    "graphics/trainers/front_pics/running_triathlete_m.png": "38d3457c4974ea56edc027e6c8a03f493499a4fd03770689f02c9bf92b8a37ef"
+  },
+  "model_outputs": {
+    "generated/acolyte_f.png": "6b998961d28cfa9864c0e24a563340d23628ce245f1137c4fb81ba421d99ec7a",
+    "generated/acolyte_m.png": "c501a8847763af50ca02f32aca04d2a8d44e8ece2c73e9201220e39d9bad6e2b",
+    "generated/augur.png": "25622d2563eb78ab8e716ee186a3e2eaba7c3012192b0a9129c3164991bbb2cf",
+    "generated/corrected_portraits.png": "7b6381978fd10e5484da677cc44437dc5cf083f559a3cfd712a284f0108f7a6d",
+    "generated/diver_corrected.png": "9e4454c10a1073713eccd1933033d20cdb1f078c749cf0ec3c195f3f1990ceb3",
+    "generated/elder_f.png": "d1572fca96330b2f623b6fd8549a4ebe2a53c6534f29495b37d430e034482a69",
+    "generated/elder_m.png": "562b3508ce67350173f3777b9a494f199900182dcc291f7584df555141f46329",
+    "generated/elder_m_front_B_v2.png": "dcd74c77a0349c5a64d8b3e4f363342f336f42d5483e40b9599deb43192833c8",
+    "generated/fisher.png": "b6240c17c6d58ad90616d5d3c95750f68f2be72cd513a0f4705780f2a1b59aa5",
+    "generated/goatherd.png": "29840d79566ddf75fe020cb5de2502bc4dcbe5ea1afeb39b10367a3fb3459bbc",
+    "generated/harvester.png": "c3e08bf1ebd13e9301a4549bd9ae378fb16a701be0320842246e6ed327df58cf",
+    "generated/harvester_front_B.png": "ccb0a5f87aeca9814543fade8f13f28587f01ff6108b4e32635d000253ae6c54",
+    "generated/healer.png": "8f9303804d7be5e400efbd5f0485270c33118ab614b48d472e689ffec0331c4e",
+    "generated/hoplite_corrected.png": "7307e2d78f01812735c6f82baf4231d3ab78464d1a928fb511f0628ee9020313",
+    "generated/kid_f.png": "25a12be7a62c6843d01f1519645dd799fd12f5c093b55f220d87b3d3b82947e2",
+    "generated/kid_m.png": "3911a9f623d0e3dbc2963b3c2bdb4155815a9efef9ed6715fcb8cb56606e746a",
+    "generated/man.png": "5a6228763da9933d079ecd55ebbd8d066cb272ce82c4d3f21e043aa3c66d31bb",
+    "generated/merchant.png": "04a12ecda116b848d07c9ed30e3e9d1849ed8f60e77360411b71869ce475b815",
+    "generated/pilgrim.png": "e62d192650f48862978893e00ec3d0306f5b8d75629c1a7fce51026fcf35938c",
+    "generated/portraits_0.png": "5b25cc6224a3ea3d563c72e668e71e594507ddcf84c42da915e57588b0eaa488",
+    "generated/portraits_1.png": "fd7c9baad1ca0478e50db775bdb07838f5b6b5c5600f3083e2ffca1c9d5732b0",
+    "generated/priestess.png": "b56316da9ac43991bef22104a6cb8c77b8b1c5baa4700b1f689d7f93a791d67a",
+    "generated/sailor.png": "c91df9f4c5dd8eaff5894766953cbd576f3a64cd4a76e7d79963f85ed285e219",
+    "generated/sailor_front_B.png": "6ba3df4b77869bd232a1e53fd91038f76e4cdc0ce55de5961f10bb725c1955df",
+    "generated/shepherd.png": "3871c95b945774d611b5846c8cb3df8326542f0466ea7cc201d24ef093f01165",
+    "generated/shepherd_left_B_v2.png": "61cb2697b18153ec92d03c5401b554d93bbfa355de8bd2aae9b83600a5147684",
+    "generated/woman.png": "021c862a508e201990b8f90ad209ca15188e04c8fd7d1441e186a0f0d5683074",
+    "generated/woman_back_B_v3.png": "b4cc6e467ff36df7d0a36d6b01b1c9b5fd6b8e7a8a7df41a5d2e6a98e85ef08d",
+    "generated/youth_f.png": "b892665444b85126d14f5aa76665f791f511dadf05e8e244ea74862594fe4043",
+    "generated/youth_m.png": "e96b3e655fc582cc2b7e094fecef52fc8b10d86fc8564f686c78be2c3b193d52"
+  },
+  "assets": [
+    {
+      "kind": "walkers",
+      "name": "acolyte_f",
+      "source": "walkers/acolyte_f.png",
+      "target": "graphics/object_events/pics/people/ichor/acolyte_f.png",
+      "sha256": "5a442c1a434707018e01c02b4bdd351003afa972aa163cac714ed47b7a641022",
+      "original_sha256": "8421e3c72dfd0a9209c7ee73dbcde2d867ce2f84d25e4ffb7a61dbc3fc0dbf6b",
+      "model_source_sha256": "6b998961d28cfa9864c0e24a563340d23628ce245f1137c4fb81ba421d99ec7a",
+      "palette": "graphics/object_events/palettes/ichor_cast.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "acolyte_m",
+      "source": "walkers/acolyte_m.png",
+      "target": "graphics/object_events/pics/people/ichor/acolyte_m.png",
+      "sha256": "1883ae68a9f83a906d714b04079d4ee1d80e02074f0865c675ff01150df9b262",
+      "original_sha256": "3ec53bc4cb1a0e5a14343eb983748796b0118a49b4baa6b44b412b8efdb0a377",
+      "model_source_sha256": "c501a8847763af50ca02f32aca04d2a8d44e8ece2c73e9201220e39d9bad6e2b",
+      "palette": "graphics/object_events/palettes/ichor_cast.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "augur",
+      "source": "walkers/augur.png",
+      "target": "graphics/object_events/pics/people/ichor/augur.png",
+      "sha256": "b6119bb1b1d36521aa1868989008451e5e419a4725bdaa5e1cadb5ac3ee0ca32",
+      "original_sha256": "85e98c6b0836c22bbec7ca8788997123e129d74cd0980701f78804cf28a447ea",
+      "model_source_sha256": "25622d2563eb78ab8e716ee186a3e2eaba7c3012192b0a9129c3164991bbb2cf",
+      "palette": "graphics/object_events/palettes/ichor_cast.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "diver",
+      "source": "walkers/diver.png",
+      "target": "graphics/object_events/pics/people/ichor/diver.png",
+      "sha256": "01a930cd7326eac5d12baf0e655701b8ed7d88cc7c693a05fc4c72e502c467a2",
+      "original_sha256": "407c3d5d2b03c7d9754014da4f1b64f1071993064219b72b29a527111dd0c78d",
+      "model_source_sha256": "9e4454c10a1073713eccd1933033d20cdb1f078c749cf0ec3c195f3f1990ceb3",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "elder_f",
+      "source": "walkers/elder_f.png",
+      "target": "graphics/object_events/pics/people/ichor/elder_f.png",
+      "sha256": "5a007acfe97a29e0df4c1541486239fc3cb9cde6b239f3594b6299bf2596dd0e",
+      "original_sha256": "559f27ec1a788754c3d1eb97e277ccaaa37d1bcf8c053a4a927c5079d106c579",
+      "model_source_sha256": "d1572fca96330b2f623b6fd8549a4ebe2a53c6534f29495b37d430e034482a69",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "elder_m",
+      "source": "walkers/elder_m.png",
+      "target": "graphics/object_events/pics/people/ichor/elder_m.png",
+      "sha256": "c9413138afadd3f3a02e7d246e9f17be36d96232cebc685e48b4c09def2f0566",
+      "original_sha256": "eaa78f1cab770776bd97838a0cf3452986749543cb9b271f3e497f9483d39310",
+      "model_source_sha256": "562b3508ce67350173f3777b9a494f199900182dcc291f7584df555141f46329",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {
+        "source_count": 9,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          {
+            "source": "elder_m_front_B_v2.png",
+            "cols": 1,
+            "rows": 1,
+            "index": 0
+          },
+          4,
+          6,
+          5,
+          8
+        ]
+      },
+      "model_pixel_reuse": {
+        "source_frame": 3,
+        "destination_frame": 4,
+        "upper_rows": 26,
+        "prop_columns": 3
+      },
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "fisher",
+      "source": "walkers/fisher.png",
+      "target": "graphics/object_events/pics/people/ichor/fisher.png",
+      "sha256": "aee31e564784fa8d27363edcde736d718793b38c8d02acc4a28ae2a1c390e884",
+      "original_sha256": "790dde2f4f999f62037aea235bec084c156fe78c5e7211474e5ddf02556e76eb",
+      "model_source_sha256": "b6240c17c6d58ad90616d5d3c95750f68f2be72cd513a0f4705780f2a1b59aa5",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "goatherd",
+      "source": "walkers/goatherd.png",
+      "target": "graphics/object_events/pics/people/ichor/goatherd.png",
+      "sha256": "81640f2f0cede4304cf0fc2f318c000ebfd7cc1e653eced00c70afb722893b2b",
+      "original_sha256": "38a5f2993c224358c6072f389ab6577d0fce55894f08c9dee2672033d88ae070",
+      "model_source_sha256": "29840d79566ddf75fe020cb5de2502bc4dcbe5ea1afeb39b10367a3fb3459bbc",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Low-chroma model-authored goat-hair/curls/beard mapped only to existing ink1/gray10/linen9.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "harvester",
+      "source": "walkers/harvester.png",
+      "target": "graphics/object_events/pics/people/ichor/harvester.png",
+      "sha256": "724fb0ff843af643267cbcea0fe6a4824d2831bff682a5484f8c4e16c0ca23af",
+      "original_sha256": "4ebc1fa696a0ac8f2fe618ce2d4610b91a80262666796e3511aa0f48e496b663",
+      "model_source_sha256": "c3e08bf1ebd13e9301a4549bd9ae378fb16a701be0320842246e6ed327df58cf",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {
+        "source_count": 9,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          {
+            "source": "harvester_front_B.png",
+            "cols": 1,
+            "rows": 1,
+            "index": 0
+          },
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "healer",
+      "source": "walkers/healer.png",
+      "target": "graphics/object_events/pics/people/ichor/healer.png",
+      "sha256": "8aaaec0afda6a5843c6f8256e405e33fb0d401b675959b39cc8ccd8f13c45f8a",
+      "original_sha256": "149231921428d10bbbd9dc24f5983d377b10e1fd22d97f92ef93677e8831d9ae",
+      "model_source_sha256": "8f9303804d7be5e400efbd5f0485270c33118ab614b48d472e689ffec0331c4e",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Common native fit of the complete original generated sheet, retaining healer rod/bow registration."
+    },
+    {
+      "kind": "walkers",
+      "name": "hoplite",
+      "source": "walkers/hoplite.png",
+      "target": "graphics/object_events/pics/people/ichor/hoplite.png",
+      "sha256": "78a92e2ea28788da1c7032b7b5f9ebe4ca1153c284e2af242f3c3b1f7bbc673c",
+      "original_sha256": "2480d200537cd009a052f389b1b46c4b06e0aad10e62b6e3dd2747d65f6eef0d",
+      "model_source_sha256": "7307e2d78f01812735c6f82baf4231d3ab78464d1a928fb511f0628ee9020313",
+      "palette": "graphics/object_events/palettes/ichor_cast.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "kid_f",
+      "source": "walkers/kid_f.png",
+      "target": "graphics/object_events/pics/people/ichor/kid_f.png",
+      "sha256": "8c6b01b45c3c5ecfef1b00bbe37d99d56948b45f940e4d4dc77f891cfde22726",
+      "original_sha256": "bf354c63dd3ca66fe9d24e3264130ee17989e9de7437742c89e9b07c69f607a9",
+      "model_source_sha256": "25a12be7a62c6843d01f1519645dd799fd12f5c093b55f220d87b3d3b82947e2",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "kid_m",
+      "source": "walkers/kid_m.png",
+      "target": "graphics/object_events/pics/people/ichor/kid_m.png",
+      "sha256": "f1041711d31f44a0e53b5a8fdce6fd63c6e11b14fb37bb9ce410a67d205eb803",
+      "original_sha256": "9b65dc793bddcff60740ba115c604631b069e271df09271adb85398754e66ac4",
+      "model_source_sha256": "3911a9f623d0e3dbc2963b3c2bdb4155815a9efef9ed6715fcb8cb56606e746a",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "man",
+      "source": "walkers/man.png",
+      "target": "graphics/object_events/pics/people/ichor/man.png",
+      "sha256": "c4c3d230f0519bc5487330d5756d9897024b1681a28800abac381266d47780f4",
+      "original_sha256": "2962152931fbaab5c94c73c72f468b8f94c34285be8946169a19f73c93cbd69c",
+      "model_source_sha256": "5a6228763da9933d079ecd55ebbd8d066cb272ce82c4d3f21e043aa3c66d31bb",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "merchant",
+      "source": "walkers/merchant.png",
+      "target": "graphics/object_events/pics/people/ichor/merchant.png",
+      "sha256": "64f105240197450b217f3c25e047cb57fe5fd0a756a714953ba709c3573adcbc",
+      "original_sha256": "bf09f8bacb3d4984e1e4298947ec146c7732b01e8d41c67199897b5fe5d2c0ef",
+      "model_source_sha256": "04a12ecda116b848d07c9ed30e3e9d1849ed8f60e77360411b71869ce475b815",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "pilgrim",
+      "source": "walkers/pilgrim.png",
+      "target": "graphics/object_events/pics/people/ichor/pilgrim.png",
+      "sha256": "831fef1900d4d0de55a3d420a3ef54b90754b73f96537f505be8284544fadb32",
+      "original_sha256": "04319478980797f917f7013c2c30a566a64169e135d7069b96945b1903b1d727",
+      "model_source_sha256": "e62d192650f48862978893e00ec3d0306f5b8d75629c1a7fce51026fcf35938c",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "priestess",
+      "source": "walkers/priestess.png",
+      "target": "graphics/object_events/pics/people/ichor/priestess.png",
+      "sha256": "06653ef78c2c91d763f1cd0cbe9a984351460e3a62326820f67a311886483d50",
+      "original_sha256": "805ae442c1e3d6cc01888e1a090802bebdd6ef5183af7abedfd125baee1ad53e",
+      "model_source_sha256": "b56316da9ac43991bef22104a6cb8c77b8b1c5baa4700b1f689d7f93a791d67a",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "sailor",
+      "source": "walkers/sailor.png",
+      "target": "graphics/object_events/pics/people/ichor/sailor.png",
+      "sha256": "3dd3da601e8952639ee79024abce7dc48d0bee128b4fb916a20bcbaeb4222a8a",
+      "original_sha256": "b6ec21ad5fbb5a343f2b6dcdce32bc56214e6351c8dd9f65d68e49b4c15b1d6f",
+      "model_source_sha256": "c91df9f4c5dd8eaff5894766953cbd576f3a64cd4a76e7d79963f85ed285e219",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {
+        "source_count": 9,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          {
+            "source": "sailor_front_B.png",
+            "cols": 1,
+            "rows": 1,
+            "index": 0
+          },
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "shepherd",
+      "source": "walkers/shepherd.png",
+      "target": "graphics/object_events/pics/people/ichor/shepherd.png",
+      "sha256": "d1e0967c9105de5c89ca7c4f80ccb90525c10e2470c67bac41bd0428167725c1",
+      "original_sha256": "cca566f8a18f0c92da41ca4a5fa5ff13675698c142ec07d7896e77143334f253",
+      "model_source_sha256": "3871c95b945774d611b5846c8cb3df8326542f0466ea7cc201d24ef093f01165",
+      "palette": "graphics/object_events/palettes/ichor_cast.pal",
+      "frame_mapping": {
+        "source_count": 9,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          7,
+          5,
+          {
+            "source": "shepherd_left_B_v2.png",
+            "cols": 1,
+            "rows": 1,
+            "index": 0
+          }
+        ]
+      },
+      "model_pixel_reuse": {
+        "source_frame": 7,
+        "destination_frame": 8,
+        "upper_rows": 28,
+        "prop_columns": 4
+      },
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "woman",
+      "source": "walkers/woman.png",
+      "target": "graphics/object_events/pics/people/ichor/woman.png",
+      "sha256": "ac8af0b2bf041ac4df202a1a16bc1f21499a81261f948d833fdb3fd2c9446e6c",
+      "original_sha256": "0d745cc198fa1563b6e1c6cb43c13404321dbe7bd4c2220c076577feb1884c22",
+      "model_source_sha256": "021c862a508e201990b8f90ad209ca15188e04c8fd7d1441e186a0f0d5683074",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {
+        "source_count": 8,
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          {
+            "source": "woman_back_B_v3.png",
+            "cols": 1,
+            "rows": 1,
+            "index": 0
+          },
+          6,
+          7
+        ]
+      },
+      "model_pixel_reuse": {
+        "source_frame": 5,
+        "destination_frame": 6,
+        "upper_rows": 29,
+        "prop_columns": 0
+      },
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "youth_f",
+      "source": "walkers/youth_f.png",
+      "target": "graphics/object_events/pics/people/ichor/youth_f.png",
+      "sha256": "fd3399badff1aa137b817b6431fcb3e41ae95f594c752272f7a4d008e7a25a56",
+      "original_sha256": "542aa828a116515179ff823a6f9db6cb7098b48dd5740b19a1dff5b4c6046f93",
+      "model_source_sha256": "b892665444b85126d14f5aa76665f791f511dadf05e8e244ea74862594fe4043",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "walkers",
+      "name": "youth_m",
+      "source": "walkers/youth_m.png",
+      "target": "graphics/object_events/pics/people/ichor/youth_m.png",
+      "sha256": "255abfdade942248fc433ecfa2fab8dd7ab5d5936ea3165ce2866dcb54bfc293",
+      "original_sha256": "a200acd9a565b995508c4acacb6078786c8be19d71c8ccf4e85f89525f6f8794",
+      "model_source_sha256": "e96b3e655fc582cc2b7e094fecef52fc8b10d86fc8564f686c78be2c3b193d52",
+      "palette": "graphics/object_events/palettes/ichor_folk.pal",
+      "frame_mapping": {},
+      "model_pixel_reuse": null,
+      "material_mapping": "Red-weighted nearest shared palette.",
+      "motion_scale": "Nearest-neighbor step-height normalization to matching directional idle, then common native fit."
+    },
+    {
+      "kind": "portraits",
+      "name": "acolyte_f",
+      "source": "portraits/acolyte_f.png",
+      "target": "graphics/trainers/front_pics/acolyte_f.png",
+      "sha256": "50ebd7018347599554b624d88a08fc0f1aa32ca42e4f29ff98327da49b95155c",
+      "original_sha256": "6fcf22da1a4adea8b5ea7b7f8f7ea9899ac0a4a65455a05960bec51f6fe5864b",
+      "model_source_sha256": "5b25cc6224a3ea3d563c72e668e71e594507ddcf84c42da915e57588b0eaa488"
+    },
+    {
+      "kind": "portraits",
+      "name": "acolyte_m",
+      "source": "portraits/acolyte_m.png",
+      "target": "graphics/trainers/front_pics/acolyte_m.png",
+      "sha256": "d92d284adc9f8e4bf710033fe8e12bdfd32bcede74aa62ae13c84a489c03d291",
+      "original_sha256": "330600c9f77051fd10f42220dec27fdb7fad7cdb28a4e7aef5e92d85e697bebb",
+      "model_source_sha256": "7b6381978fd10e5484da677cc44437dc5cf083f559a3cfd712a284f0108f7a6d"
+    },
+    {
+      "kind": "portraits",
+      "name": "augur",
+      "source": "portraits/augur.png",
+      "target": "graphics/trainers/front_pics/augur.png",
+      "sha256": "e6758c5d5471e0a2d047ee668793b91bc5a17d116129c855f102ebd7bf42d0b5",
+      "original_sha256": "3a39fe29eba03a6422755cc98fd8f3f333f32998b98f229b0eeb7642300bcf2b",
+      "model_source_sha256": "5b25cc6224a3ea3d563c72e668e71e594507ddcf84c42da915e57588b0eaa488"
+    },
+    {
+      "kind": "portraits",
+      "name": "goatherd",
+      "source": "portraits/goatherd.png",
+      "target": "graphics/trainers/front_pics/goatherd.png",
+      "sha256": "4f839a2234adbf83544d477b03f17155720df51f1817a81dd74ac57051cf5bdc",
+      "original_sha256": "4957891ccdb7f1178fcba6c14662229d45289f909f3f9d35582d41cd8b383fc1",
+      "model_source_sha256": "5b25cc6224a3ea3d563c72e668e71e594507ddcf84c42da915e57588b0eaa488"
+    },
+    {
+      "kind": "portraits",
+      "name": "harvester",
+      "source": "portraits/harvester.png",
+      "target": "graphics/trainers/front_pics/harvester.png",
+      "sha256": "dbcfc048b270c3caa522f34d844883b5c8cd26aba3d4d5951a87d0ccd441e4da",
+      "original_sha256": "b11b83fea58177a76b2f0c325c79eee37f04ebe380a1d6facb921f3827dc87c1",
+      "model_source_sha256": "5b25cc6224a3ea3d563c72e668e71e594507ddcf84c42da915e57588b0eaa488"
+    },
+    {
+      "kind": "portraits",
+      "name": "hoplite",
+      "source": "portraits/hoplite.png",
+      "target": "graphics/trainers/front_pics/hoplite.png",
+      "sha256": "927cacac56161aabf442fc8a02f95b7f0ba69681857b4c1733fbb3a79c3dc0ea",
+      "original_sha256": "90b9a00b5b1d0f76e15d990db5ea6ae16daabbd2e794b9fbbf64092f01472f92",
+      "model_source_sha256": "7b6381978fd10e5484da677cc44437dc5cf083f559a3cfd712a284f0108f7a6d"
+    },
+    {
+      "kind": "portraits",
+      "name": "shepherd",
+      "source": "portraits/shepherd.png",
+      "target": "graphics/trainers/front_pics/shepherd.png",
+      "sha256": "fb30f43aa267be1394fbd2615e27235ca5b4d3f20aa97ca3f355bd5a09b3d68a",
+      "original_sha256": "c765df3a33d1752e54d0444c20dbc1806b7f1277c1a58569be45b3e63a608659",
+      "model_source_sha256": "fd7c9baad1ca0478e50db775bdb07838f5b6b5c5600f3083e2ffca1c9d5732b0"
+    },
+    {
+      "kind": "portraits",
+      "name": "merchant",
+      "source": "portraits/merchant.png",
+      "target": "graphics/trainers/front_pics/merchant.png",
+      "sha256": "96594f6fae0b726a72e6d4773264937ba72d7c3e2033b05ccc6ae3b78514c3f0",
+      "original_sha256": "afa9c2fd9a64945085627e2b8683bd04efbad4660c2989bd3d25bc450308d471",
+      "model_source_sha256": "fd7c9baad1ca0478e50db775bdb07838f5b6b5c5600f3083e2ffca1c9d5732b0"
+    },
+    {
+      "kind": "portraits",
+      "name": "pilgrim",
+      "source": "portraits/pilgrim.png",
+      "target": "graphics/trainers/front_pics/pilgrim.png",
+      "sha256": "9b4398581d8545ea5d9ad9022da287062257ac3db24ac32ae0937916143081c4",
+      "original_sha256": "b893512e64ae6da7cf8dfca6b98c473f1bb56d27586df348dfdd5fc822c9b972",
+      "model_source_sha256": "fd7c9baad1ca0478e50db775bdb07838f5b6b5c5600f3083e2ffca1c9d5732b0"
+    },
+    {
+      "kind": "portraits",
+      "name": "ichor_sailor",
+      "source": "portraits/ichor_sailor.png",
+      "target": "graphics/trainers/front_pics/ichor_sailor.png",
+      "sha256": "4a4af4f3c5e70d65a2efd57d6e8c6166ae86872fe606d2da63009bb9ddaf7b8b",
+      "original_sha256": "01a6c4e8c2d337f19d6fe11fd14c466b1feff0548f7bc80d1103651b3ab48655",
+      "model_source_sha256": "fd7c9baad1ca0478e50db775bdb07838f5b6b5c5600f3083e2ffca1c9d5732b0"
+    }
+  ]
+}

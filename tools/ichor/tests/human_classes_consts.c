@@ -1,0 +1,26 @@
+#include "engine_consts.h"
+#include "sprite.h"
+#include "constants/event_objects.h"
+#include "constants/trainers.h"
+
+#define HUMAN(n) K(GFX_##n, OBJ_EVENT_GFX_ICHOR_##n)
+HUMAN(ACOLYTE_F) HUMAN(ACOLYTE_M) HUMAN(AUGUR) HUMAN(DIVER)
+HUMAN(ELDER_F) HUMAN(ELDER_M) HUMAN(FISHER) HUMAN(GOATHERD)
+HUMAN(HARVESTER) HUMAN(HEALER) HUMAN(HOPLITE) HUMAN(KID_F)
+HUMAN(KID_M) HUMAN(MAN) HUMAN(MERCHANT) HUMAN(PILGRIM)
+HUMAN(PRIESTESS) HUMAN(SAILOR) HUMAN(SHEPHERD) HUMAN(WOMAN)
+HUMAN(YOUTH_F) HUMAN(YOUTH_M)
+#undef HUMAN
+#define FRONT(n) K(PIC_##n, TRAINER_PIC_##n)
+FRONT(ACOLYTE_F) FRONT(ACOLYTE_M) FRONT(AUGUR) FRONT(GOATHERD)
+FRONT(HARVESTER) FRONT(HOPLITE) FRONT(SHEPHERD) FRONT(MERCHANT)
+FRONT(PILGRIM) FRONT(ICHOR_SAILOR)
+#undef FRONT
+K(OFF_OBJ_SPRITE_ID, offsetof(struct ObjectEvent, spriteId))
+K(OFF_OBJ_GRAPHICS_ID, offsetof(struct ObjectEvent, graphicsId))
+K(SPRITE_SIZE, sizeof(struct Sprite))
+K(OFF_SPRITE_ANIMS, offsetof(struct Sprite, anims))
+K(OFF_SPRITE_IMAGES, offsetof(struct Sprite, images))
+K(OFF_SPRITE_ANIM_NUM, offsetof(struct Sprite, animNum))
+K(OFF_SPRITE_ANIM_CMD, offsetof(struct Sprite, animCmdIndex))
+K(SPRITE_LIMIT, MAX_SPRITES)

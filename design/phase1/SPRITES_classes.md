@@ -2,11 +2,26 @@
 
 Battle portraits (trainer front pics) for the slice's trainer classes. Each is a 64×64, 16-color Gen 3 front pic in a 3/4 view toward the player's side, lit from the top left. The palette is embedded in the PNG.
 
-Sources live in `tools/ichor/art/sprites_classes.py`:
-- Rebuild the PNGs and the preview sheet with `python3 tools/ichor/art/sprites_classes.py --write`.
-- Preview with `--preview DIR`, which writes the 3× sheet, 6× singles and pixel grids.
+Current authored native exports live in
+`tools/ichor/art/sources/human_classes/portraits/`. Reproduce the seven fronts
+below and Merchant/Pilgrim/Ichor Sailor with
+`python3 tools/ichor/art/human_classes.py --write`; `--check` verifies exact
+source hashes. These are image-model-led, trimmed/resampled 64x64 exports,
+not the earlier shape drawings in `sprites_classes.py`. The full source
+manifest also records the model-output provenance and frozen source archive.
 
-## Native Akti checkpoint
+All ten fronts retain their existing class identities, dimensions and table
+bindings. Their embedded palettes are the actual independently loaded trainer
+palettes; shared folk/cast palettes are unchanged. Goatherd's required bee is
+deliberate, and Acolyte M still clasps glowing coal with tongs, not a lamp.
+The complete `human_classes.sh` test-only gallery uses the real trainer loader
+and checks all 2048 OBJ bytes, all 16 hardware palette words, 64x64 OAM and
+allocation cleanup for every front. This is not ten completed story battles.
+See `SPRITES_folk.md` for the shared source convention and acceptance boundary.
+Original Hiker, Psychic F and Running Triathlete M PNGs remain untouched;
+their distinct Greek replacements are parent-owned.
+
+## Earlier native Akti checkpoint (historical)
 
 All seven portraits now use smaller hand-drawn directional faces, cleaner
 cloth/fleece clusters, selective outlines and lighter, attached hands/props.

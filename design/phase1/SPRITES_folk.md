@@ -2,6 +2,51 @@
 
 Overworld walking sprites for Kalliste's island people and the slice's trainer classes: 22 new object-event graphics IDs. The cast (Kleon, Daphne, Alethea, Ione, the Titanborn) is in `SPRITES_npc.md`; the battle portraits the class walkers match are in `SPRITES_classes.md`.
 
+## Image-model-led authored sources
+
+The current 22-class/townsfolk checkpoint supersedes the older procedural
+versions described below. Its exact union, source hashes and production paths
+are in `tools/ichor/art/sources/human_classes/manifest.json`; it includes
+Pilgrim, but not Mom or any named cast. The canonical inputs are indexed native
+PNG exports of image-model artwork, trimmed, nearest-neighbor resampled and
+mapped to the existing shared palettes, not hand-authored native drawings.
+
+Run `python3 tools/ichor/art/human_classes.py --write` to reproduce the 22
+walkers and ten matching fronts, or `--check` to verify them. `--list` prints
+the 32 paths for the coordinated legacy-write guard. The historical folk and
+phase-2 shape painters are not the source of these assets; do not use their
+unfiltered writers to replace them. The shared writer guard is integrated by
+the parent together with the other human source bundles.
+
+All 199 field states retain their 16x32 cells, frame order, original cast/folk
+palette words, ground anchors and existing graphics IDs. Directional step
+scaling and selective reuse of model-authored upper-body/prop pixels stabilize
+the Acolyte crown, Elder M staff/body, Shepherd crook and Woman bonnet/sash
+without mirroring asymmetric props or losing opposite leg contacts. Goatherd's
+neutral material maps to the existing gray index 10. Healer retains the real
+tenth bow with lowered head, hand movement, planted rod and fixed feet.
+
+`test_human_classes.py` covers the source union, complete frames, corrections,
+bow, gray material and retained legacy fronts. `human_classes.sh` is explicitly
+a test-only engine gallery: it checks all 199 states, right-facing mirrors,
+hardware palette words and native OBJ bytes, including the nurse's explicit
+ten-entry image table. Its unobscured stage hides background display layers;
+the PNG render gate also matches every opaque native pixel in all 275 captures
+(199 field states, 66 right mirrors and ten fronts). Normal route/interior
+regressions remain separate from these fixture captures. Parent native
+implementation review cleared the corrected exports; this is not separate user
+artistic acceptance or town closure.
+
+The bounded adoption passes helpers/build/smoke, the paired Route 1/Kronion
+Hill and Emporion interiors runs, both conversation/whiteout healing paths
+(32 held bow frames each), and the current Temple trial. Each matched gallery
+passes 1,971 engine checks plus all 275 complete rendered-pixel comparisons.
+The source archive and each ROM's own ELF/map are preserved outside git; the
+manifest identifies the frozen model-source archive by SHA256. No ROM/save/
+patch, map, party, named cast, Pokemon or shared nonhuman asset is included.
+
+## Earlier native checkpoints (historical)
+
 **2026-11-15 Elaia polish:** `mom`, `priestess`, `youth_m`, `youth_f`,
 `man`, `woman`, `elder_m`, `elder_f`, `kid_m`, `fisher`, `harvester` and
 `shepherd` now use the native `elaia_*` cloth bodies in the same source file.

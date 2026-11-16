@@ -2,6 +2,18 @@
 
 Trainer portraits, trainer classes and overworld walkers for the *Euploia* and Aegina (BUILD.md batch 1). They are drawn in the slice's house style (`design/phase1/SPRITES*.md`), and the slice's palettes take every walker, so no new OBJ palette tag is needed.
 
+**Current shared-class source override:** Merchant, Pilgrim and Ichor Sailor
+fronts, plus the shared Merchant/Sailor/Pilgrim walkers, now come from the
+authored native exports in `tools/ichor/art/sources/human_classes/`.
+Reproduce the exact 32-asset class/townsfolk union with
+`python3 tools/ichor/art/human_classes.py --write`, not an unfiltered legacy
+phase-2 writer. Their indexed sources derive from image-model outputs and
+native conversion, not new procedural shape recipes. Shared palettes,
+graphics IDs, trainer bindings and all named-cast assets remain unchanged.
+See `design/phase1/SPRITES_folk.md` for complete motion, provenance, engine
+checks and acceptance scope. The older writer table below remains applicable
+to its other profiles, not these authored overrides.
+
 | Source | Rebuild | Preview |
 |---|---|---|
 | `tools/ichor/art/sprites_phase2_classes.py` (portraits) | `python3 tools/ichor/art/sprites_phase2_classes.py --write` | `--preview DIR`: the 3× contact sheet, a 6× row, 6× singles and pixel grids |
