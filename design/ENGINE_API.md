@@ -1104,7 +1104,19 @@ fainting, the locked Urn and run-ending behavior work together.
   saves, including legacy Pokemon with the formerly unused bit set, retain
   ordinary healing and revival.
 - `Ichor_IsUrnBox(box)` identifies saved reserved jars even after release or
-  failure. It is a policy predicate, not yet a Pithos UI lock.
+  failure. Ordinary capture storage, full-storage checks and script free-space
+  checks skip those jars. Direct party deposits refuse reserved destinations
+  before changing their source.
+- Reserved jars offer only SUMMARY/CANCEL for their occupants and JUMP/CANCEL
+  for the jar itself. Normal/shortcut/group movement, A/B quick placement and
+  Move items cannot remove or add partners or belongings. Refusals explain
+  that the Urn is sealed; group refusal temporarily switches out of the
+  eight-bit icon layer so the message remains legible, then restores the
+  held group without changing its data.
+- Fallen partners, including any retained in the party for capacity handling,
+  cannot use ordinary PC deposit or service-selection APIs. Their summaries
+  remain viewable but cannot rename, relearn or reorder moves. They do not
+  count as living stored partners or usable stored field-move holders.
 - `Ichor_StoreOathFallen(mon)` stores the entire marked BoxPokemon before
   clearing its source. A full Urn grows only into an entirely empty Pithos
   jar, named URN 2 and onward. Living Pokemon are never displaced. If no
@@ -1119,8 +1131,7 @@ including the second flag bank at 0x500. Older saves get zero Oath bytes,
 not whatever previously occupied that reserve. Version 6 takes its two-byte
 Urn mask from padding within those same 40 bytes; version-5 migration
 preserves existing Oath progress and reserves only the original final jar.
-Post-battle Urn transfer/party compaction, Urn-aware capture/deposit,
-Pithos-action locks, overflow and run-ending callers still need integration
+Post-battle Urn transfer/party compaction, overflow and run-ending callers still need integration
 before the Oath can be enabled. In particular, do not expose enrollment while
 an all-party fall could enter an ordinary whiteout with no revivable partner.
 
@@ -1138,3 +1149,12 @@ The same real-ROM fixture now plays an actual weak-lead fall, selects a living
 replacement and checks native party healing before and after save/reload.
 Native tests cover HP/item/boxed-heal bypasses, Revival Blessing's target
 search and actual recorded-link fainting without permanent loss.
+Native storage checks also fill every ordinary jar while leaving two reserved
+jars empty, prove that capture and script capacity checks report full, and
+verify that unsworn saves keep their final jar available. The actual-ROM
+fixture seeds a PC scene with the real battle's fallen BoxPokemon and plays
+view-only menus, summaries, shortcut/group refusal, A/B placement refusal,
+safe return of held ordinary partners, Move items and the party-deposit
+chooser. The complete fixture passes 53 checks with 19 screenshots, including
+byte-for-byte Urn preservation through a second save/reset/CONTINUE after
+release. This does not claim that automatic post-battle transfer is wired.
