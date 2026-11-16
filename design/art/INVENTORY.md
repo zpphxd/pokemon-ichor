@@ -23,6 +23,7 @@ reference is not counted as integrated production art.
 | Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Image-model-led redesign in progress; includes Kleon's seasick/tablet poses and the extra Sam/Apollo/Cami frames |
 | Classes and townsfolk | 22 custom walker sheets and ten custom fronts | Image-model-led redesign in progress; healer's tenth bow is required |
 | Active imported class fallbacks | Exekias/Potter, Myrrhine/Initiate F, Pheidippos/Runner | Three parent-owned image-model-led native fronts now replace the active picture bindings; original Hiker, Psychic F and Running Triathlete M sources remain byte-identical |
+| Supplemental players | Two region-map markers and two seven-frame credits rider sheets | Parent-owned identity/source review in progress, separate from the core 24 player surfaces; credits' opposite-gender companion reuses the first four frames of the same seven-frame source |
 | Legacy players | 22 RS/FRLG PNGs and their existing compiled aliases | Preserve accepted identities/provenance; not a new character redesign |
 | Other imported people/fronts/backs and duplicate screen art | Hoenn/FRLG/cut assets, map markers, intro/credits/naming and other human appearances outside the custom set | Coverage review remains open; do not silently count unchanged or unassigned art as complete |
 
@@ -53,9 +54,18 @@ tablet sheets; these are all assigned. Other non-species placements are
 items, cuttable trees, breakable rocks and pushable boulders, not missing
 human sheets. The 26 retained engine maps still contain imported people;
 this is not evidence that they are reachable through Aethos or redrawn.
-The normal credits routine also loads original player/rival art from
-`graphics/intro/scene_2/`; those appearances remain an explicit player
-coverage item rather than being hidden by the custom-map count.
+The normal credits routine loads the two seven-frame
+`graphics/intro/scene_2/{brendan,may}_credits.png` sources for the player and
+the opposite-gender companion. The companion loads only their first four
+frames, not the separate normal `brendan.png`/`may.png` intro sources
+(`src/intro_credits_graphics.c`, credits sheet tables). Those two normal
+intro graphics and their sheet tables are discarded by the linker at the
+`55d1d1b940` boundary; preserve their original sources rather than claiming
+four active rider replacements. Together with the two region-map markers,
+the four active supplemental surfaces bring the assigned character scope
+to 92, not 94. Their review remains open. Credits' separate bicycle shares
+each rider's palette, so rider adoption must preserve every palette word
+used by the unchanged bicycle.
 
 ## Source provenance coverage, 2026-11-15
 

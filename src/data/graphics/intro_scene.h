@@ -1,6 +1,7 @@
 // Ichor: Emerald's intro scenes are gone (src/intro.c draws Ichor's own boot
-// sequence from graphics/intro/). Only the bike-ride art the credits still use
-// (src/intro_credits_graphics.c) is kept here.
+// sequence from graphics/intro/). These old normal rider imports are retained
+// but link-discarded; credits use their own seven-frame rider sheets in
+// src/intro_credits_graphics.c.
 const u16 gIntroPlayer_Pal[] = INCGFX_U16("graphics/intro/scene_2/player.pal", ".gbapal");
 const u16 gIntroFlygon_Pal[] = INCGFX_U16("graphics/intro/scene_2/flygon.png", ".gbapal");
 
