@@ -6,6 +6,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "art"))
 import player_unused
+import player_sources
 
 
 class UnusedPlayerArtTests(unittest.TestCase):
@@ -21,20 +22,17 @@ class UnusedPlayerArtTests(unittest.TestCase):
                                                     != frames[facing * 2 + 1]), 0)
             self.assertEqual(arr.shape, (32, 192))
 
-    def test_existing_faces_and_feet_are_not_clipped(self):
-        for who, (_, _, roles) in player_unused.player.CHARS.items():
-            sources = player_unused.watering(who) + player_unused.decorating(who)
-            for index, source in enumerate(sources):
-                frame = player_unused.player.to_index([source], roles)
-                self.assertTrue(np.any(frame[30] == roles["b"]))
-                self.assertFalse(np.any(frame[:10]))
-                facing = ("down", "up", "left")[index // 2] if index < 6 else "down"
-                face = player_unused.player.parse(player_unused.player.FACES[who][facing])
-                x, y = (8, 16) if index < 6 else (0, 19)
-                for dy, row in enumerate(face):
-                    for dx, role in enumerate(row):
-                        if role != ".":
-                            self.assertEqual(frame[y + dy, x + dx], roles[role])
+    def test_model_sources_preserve_frame_layout_and_original_ground_anchors(self):
+        built = player_unused.build()
+        for who in player_unused.player.CHARS:
+            for kind in ("watering", "decorating"):
+                _, contract = player_sources.asset(who, kind)
+                frames = np.hsplit(built[(who, kind)], contract["source_frames"])
+                canonical = np.array(player_sources.source_image(who, kind))
+                self.assertTrue(np.array_equal(built[(who, kind)], canonical))
+                for frame, bounds in zip(frames, contract["prior_source_frame_bounds"]):
+                    self.assertGreater(np.count_nonzero(frame), 0)
+                    self.assertEqual(np.nonzero(frame)[0].max() + 1, bounds[3])
 
 
 if __name__ == "__main__":
