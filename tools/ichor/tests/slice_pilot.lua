@@ -58,14 +58,14 @@ return function(L)
     return score
   end
 
-  local function moveCursor(slot)
+  function P.moveCursor(slot)
     for _ = 1, 4 do
       local current = emu:read8(S.gMoveSelectionCursor)
       if current == slot then return end
-      if current % 2 ~= slot % 2 then
-        L.tap(slot % 2 == 0 and K.LEFT or K.RIGHT)
-      else
+      if current // 2 ~= slot // 2 and (slot < 2 or current % 2 == slot % 2) then
         L.tap(slot < 2 and K.UP or K.DOWN)
+      else
+        L.tap(slot % 2 == 0 and K.LEFT or K.RIGHT)
       end
     end
     L.fail("natural pilot could not select move slot " .. slot)
@@ -97,7 +97,7 @@ return function(L)
       local pp = emu:read8(S.gBattleMons + S.OFF_BATTLE_MON_PP + slot)
       if move ~= 0 and pp > 0 then
         if powers[move] == nil then
-          moveCursor(slot)
+          P.moveCursor(slot)
           types[move] = moveType()
           L.tap(K.L); L.wait(4)
           powers[move] = descriptionPower()
@@ -113,7 +113,7 @@ return function(L)
       end
     end
     L.expect(selected ~= nil, "the natural pilot found a move with real PP")
-    moveCursor(selected)
+    P.moveCursor(selected)
     L.log(string.format("PILOT attack slot=%d move=%d score=%.2f", selected,
                         emu:read16(S.gBattleMons + S.OFF_BATTLE_MON_MOVES + selected * S.MOVE_ID_SIZE), best))
     L.tap(K.A)

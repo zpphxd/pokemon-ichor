@@ -412,9 +412,11 @@ Alethea's recovery. The button-only pilot now catches partners, chooses and
 learns attacks, uses owned medicine, visits real healers and switch-trains its
 team. Hero/Nebrel reaches Kalliste's ending (`08_after`) continuously: 117
 battles, with a level-16 starter and two level-10 partners entering Ione.
-That substantial training is not approval of the intended level curve.
-Spartan/Hipling reaches Ione under the real level-14 cap but still loses;
-that pilot result is not an established balance defect. The remaining
+Mortal/Nebrel also reaches the ending. That substantial training is not
+approval of the intended level curve. Hero/Kynder reaches Ione but loses;
+Spartan/Hipling also loses there, even with all three partners naturally
+trained to the real level-14 cap. Those pilot results are not established
+balance defects. The remaining
 starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
 and human look/fun approval are still open.
 

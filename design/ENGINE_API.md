@@ -203,9 +203,12 @@ and training alongside the existing `PARTY`/`BATTLE` evidence.
 
 Hero/Nebrel has reached `08_after` continuously from NEW GAME: 418,310 frames,
 117 battles. This strategy includes substantial wild training: the starter
-enters Ione at level 16, alongside two level-10 partners. Spartan/Hipling
-reaches Ione with its starter capped at 14 but loses. Neither result establishes
-the intended curve's balance. Other starter/difficulty chapter runs, complete
+enters Ione at level 16, alongside two level-10 partners. Mortal/Nebrel also
+reaches `08_after` (333,477 frames, 78 battles). Hero/Kynder reaches Ione but
+loses; Spartan/Hipling loses there even in a separate probe that naturally
+trains all three partners to the real level-14 cap. Raising the training target
+alone does not resolve that strategy. These results do not establish the
+intended curve's balance. Other starter/difficulty chapter runs, complete
 natural-level Act I coverage and player approval remain separate gates.
 The continuous route currently ends at the Emporion gate after Laurel 2, not
 the end of Act I.
@@ -213,6 +216,11 @@ the end of Act I.
 `python3 tools/ichor/tests/test_slice_policy.py` checks option/range preflight
 without requiring a ROM or toolchain. Invalid requests must preserve existing
 screenshots and save states; every declared beat remains selectable.
+
+`build/tools/ichor-mgba-headless --script tools/ichor/tests/slice_pilot_cursor.lua --frames 2 --until "PILOT CURSOR done" pokeemerald.gba`
+checks all 30 cursor transitions across one-, two-, three- and four-move grids.
+The isolated input model rejects moves into empty slots, including the
+three-move case where bottom-left must reach top-right through the top row.
 
 ## 2. Relics (SYSTEMS §1, §2)
 
