@@ -354,6 +354,10 @@ The altar scripts use `VAR_0x8004`–`0x8007` and `VAR_0x800A`–`0x800B`.
 ### Gifts
 
 - **Gift I (Favor 30)** is a lesson: the god's move, taught through the move-tutor party menu (`ChooseMonForMoveTutor`). Most of the gift moves aren't TMs in this build, and a lesson works for any move. If the player cancels, the lesson waits at the altar. Once taught, the altar's LESSON entry teaches it again as often as asked, like a TM.
+  The 15 dynamically selected `sGods[].giftMove` moves are registered in
+  `src/data/pokemon/special_movesets.json` under `extraTutors`: the script
+  scanner cannot discover runtime-selected moves. Registration preserves each
+  species' `all_learnables` eligibility; it does not make lessons universal.
 - **Gift II (Favor 60)** is a tool or an upgrade:
   - Ever-Ember: Hearthfire never fades, and hearths offer REST.
   - The Winged Talaria: running into an `MB_ICHOR_GAP` tile leaps it like a ledge.
@@ -381,10 +385,20 @@ The altar scripts use `VAR_0x8004`–`0x8007` and `VAR_0x800A`–`0x800B`.
 
 **Gift flags:** `FLAG_ICHOR_GIFT(god, n)` (`include/constants/flags.h`), where n is `ICHOR_GIFT_I`, `_II`, `_III` or `_HIEROPHANT`.
 
+Hermes's and Demeter's map great altars call their temple wrappers. Kerykos
+adds `ICHOR_FAVOR_LAUREL` before first setting Laurel 2, then offers the shared
+Hermes lesson on return visits. His authored Honey rite retains the shared
+Hierophant offering flag and full-Bag retry.
+
 **The offerings** are `ITEM_OLIVE_OIL` (200), `ITEM_BARLEY_CAKE` (150), `ITEM_WINE` (300), `ITEM_FRANKINCENSE` (500), `ITEM_LAUREL_SPRIG` (100) and `ITEM_BRONZE_VOTIVE` (400). Honey now costs 300.
 - **Their icons are stand-ins** borrowed from existing items (the oil flask, a cookie, juice, the incense cone, a seedling, the Metal Coat), as is the Myrtle Wreath's. Drawing the real ones is for the art team.
 
 **Checks:** `tools/ichor/tests/ichor_rites.sh` (in game) and `test/ichor_rites.c` (the rules, in `make check`).
+The in-game check includes both actual temple altars, prayer and doubled
+offerings, actual tutor cancellation/retry, native confirmation of Harpeck's
+learned U-turn, and no repeated claimed gift. `test/ichor_tms.c` checks eligible
+and ineligible species; `tools/ichor/tests/temple_hermes.sh` checks the real
+Laurel battle's one-time +15 Favor.
 
 ## 4. Herm waystones (SYSTEMS §4)
 
