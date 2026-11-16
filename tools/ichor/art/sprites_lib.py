@@ -413,12 +413,18 @@ def hflip(a):
 
 def save_indexed(arr, pal: Palette, path):
     from human_classes import ASSETS
+    from model_cast import is_owned
 
     relative = os.path.relpath(os.path.realpath(path), os.path.realpath(ROOT)).replace(os.sep, "/")
     if any(entry["target"] == relative for entry in ASSETS):
         raise ValueError(
             f"Legacy painter cannot overwrite image-led art: {relative}; "
             "use python3 tools/ichor/art/human_classes.py --write"
+        )
+    if is_owned(path):
+        raise RuntimeError(
+            f"{path} is an image-model-led named-cast asset; "
+            "use python3 tools/ichor/art/model_cast.py --write"
         )
     os.makedirs(os.path.dirname(path), exist_ok=True)
     im = Image.fromarray(arr.astype(np.uint8), "P")

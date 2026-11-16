@@ -20,7 +20,7 @@ reference is not counted as integrated production art.
 | Human group | Assigned surfaces | Current new-style status |
 |---|---|---|
 | Players | Theo/Ianthe fronts and backs; all ten existing state sheets each | Image-model-led redesign in progress; Theo front preview is the approved style anchor, not complete player coverage |
-| Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Image-model-led redesign in progress; includes Kleon's seasick/tablet poses and the extra Sam/Apollo/Cami frames |
+| Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Source-backed image-model-led adoption verified: 170 field frames, eight back frames, six live fronts and the intro; Sam/Cami busts remain unrouted |
 | Classes and townsfolk | 22 custom walker sheets and ten custom fronts | Source-backed image-model-led adoption verified: all 199 field states, healer bow, 66 right mirrors and ten fronts; shared palettes and bindings preserved |
 | Active imported class fallbacks | Exekias/Potter, Myrrhine/Initiate F, Pheidippos/Runner | Three parent-owned image-model-led native fronts now replace the active picture bindings; original Hiker, Psychic F and Running Triathlete M sources remain byte-identical |
 | Supplemental players | Two region-map markers and two seven-frame credits rider sheets | Parent-owned identity/source review in progress, separate from the core 24 player surfaces; credits' opposite-gender companion reuses the first four frames of the same seven-frame source |
@@ -41,16 +41,32 @@ does not complete the other character groups or establish gameplay coverage.
 
 The next bounded checkpoint adopts the 32 class/townsfolk sources from
 `tools/ichor/art/sources/human_classes/`; reproduce them with
-`python3 tools/ichor/art/human_classes.py --write`. The shared legacy writer
-rejects exactly those 32 production paths before writing, without blocking
+`python3 tools/ichor/art/human_classes.py --write`. The class-specific legacy
+guard rejects those 32 production paths before writing, without blocking
 unrelated assets. The combined parent build passes 79 targeted regressions,
 smoke's nine captures, and `tools/ichor/tests/human_classes.sh`: 1,971 engine
 checks and 275 complete, unobscured rendered-state comparisons. Linked ROM
 usage is 23,096,488 bytes / 68.83%; the accepted legacy-player sources and
-compiled aliases still pass. This brings adopted new-style character
-surfaces to 35, leaving the 24 core player, 29 named-cast and four supplemental
-surfaces in progress. These checks and parent implementation clearance do
+compiled aliases still pass. At that checkpoint, adopted new-style character
+surfaces reached 35; the 24 core player, 29 named-cast and four supplemental
+surfaces remained in progress. These checks and parent implementation clearance do
 not imply separate user artistic acceptance or completion of any town.
+
+The subsequent named-cast checkpoint adds the 29 source-backed surfaces,
+including Cami's retained-pixel shawl correction. Both source families now
+share the legacy-write guard without weakening either exact path set or
+losing Mom's model-source dispatch. The combined parent boundary passes
+92 regressions, build/smoke (nine captures), the unchanged 275-state class
+gallery and the named gallery's 996 engine checks / 238 captures.
+`python3 tools/ichor/tests/named_cast_verify.py` independently matches all
+184 unmirrored OBJ/palette dumps and every opaque pixel of all 238 rendered
+states, including east mirrors, rather than treating VRAM alone as display
+evidence. Sam/Cami's two unrouted fronts remain native/source evidence only;
+Daphne's intro duplicate is also visible in smoke. Linked ROM usage is
+23,097,320 bytes / 68.84%, with the accepted legacy players preserved.
+Adopted new-style character surfaces now total 64; the 24 core player and
+four supplemental surfaces remain in progress. All 40 custom NPC sheets
+are source-backed, not all imported people or every character appearance.
 
 This character-only continuation does not restart Pokemon, prop, field-effect,
 tileset, UI or ball-art generation. Town-by-town production landing still
@@ -100,6 +116,77 @@ artistically accepted, or verified against its runtime palette/table binding.
 Source differences can also be PNG container changes rather than new pixels.
 Native comparisons and the bounded acceptance ledger below remain the
 artistic and runtime evidence.
+
+## Image-model-led named human cast candidate
+
+This supersedes only the named human surfaces listed below, not the historical
+artistic-acceptance claims for unrelated groups. The user authorized the new
+image-model-led Theo direction, not the rejected native v3 pilots. These are
+**candidate implementations pending artistic review**, not user acceptance or
+whole-town completion. Source/renderer passes alone do not change that status.
+
+| Owned group | Exact candidate coverage | Retained contracts / limits |
+|---|---|---|
+| Named cast walkers | `aiakides`, `alethea`, `apollo`, `cami`, `demeter`, `endeis`, `kedalion`, `kerykos`, `kleon`, `kleon_seasick`, `kleon_tablet`, `mom`, `pheidon`, `professor_daphne`, `pronomos`, `sam`, `hierophant_ione`, `titan_grunt`: 18 sheets, 170 frames | 16x32 frames; Sam/Apollo 12, Cami 11, all others nine. Existing graphics IDs, frame order, shared cast/folk/theoxenia palettes and aliases retained |
+| Named portraits | Alethea, Cami, Ione, Kerykos, Kleon, Daphne, Sam, Titan grunt: eight 64x64 PNGs | Six existing trainer bindings; Sam/Cami remain unused dialogue busts, not newly enabled interfaces |
+| Named companion backs | Kleon and Alethea: two 64x256 sheets, eight total frames | Model-pixel limb assembly; fixed head/costume/satchel anchors and existing near-left hold/windup/release contacts. Existing Hoenn throw tables unchanged |
+| Daphne intro duplicate | `graphics/birch_speech/birch.png`: one 64x64 PNG | Exact pixels and palette duplicate Daphne's new front |
+
+Total: **29 surfaces / 187 source frames**. Forty-nine selected image-model
+RGBA crops and their hash manifest are under
+`tools/ichor/art/base/named_cast/`; `model_cast.py` is the complete deterministic
+conversion/assembly recipe. This is larger model artwork trimmed, sampled
+nearest-neighbor and palette-reduced, with mechanical source-pixel animation
+assembly; it is **not hand-authored native art**. Complete actual 1x/4x review
+cards and unchanged pre-write PNG/ROM evidence are preserved in session files
+under `named-cast-model`. Mouth/face and small ball detail can be lost during
+64px reduction and remain visible review limitations.
+
+Palette reduction uses median-cut plus k-means refinement. Extra weighting
+is limited to genuinely tiny saturated hues and neutral lights (at most 3%
+opaque coverage), never broad red/terracotta robes. Ione's cream veil and
+Kleon's linen have native review evidence; Alethea's sampled/final blue
+headband and the existing model-red orb caps/light halves have explicit
+regressions. Kerykos retains the established
+dark felt petasos, porphyry/burgundy cloak, gray beard, scrolls and kerykeion;
+the old source docstring's blue-cloak wording was stale. Fixed shared palette
+files and all unowned readers are retained.
+
+Cami's unused front bust has a bounded follow-up: its existing model wheat is
+relocated from hair to shawl fringe, with adjacent model hair restoring the
+old location. The original source, face/figure anchors, Cami walker and every
+other native output remain unchanged. Tiny source-yellow weighting preserves
+the relocated wheat; it does not alter shared palettes or enable a bust UI.
+
+The named-cast portion of the shared `save_indexed` guard blocks exactly its
+29 migrated paths and names `python3 tools/ichor/art/model_cast.py --write`;
+the 32 class/townsfolk paths remain separately protected. Neither guard
+blocks a folder or silently falls back to the old painter. The named
+source-frame ROM gallery uses actual graphics IDs, image-table slots,
+palettes and native OBJ copies in test RAM, not natural battles or dialogue. Sam/Cami's two unrouted
+portraits have native/source evidence only; Daphne's duplicate is also checked
+through source reproduction and the introduction.
+
+**Isolated candidate checkpoint verification:** 34 scoped source regressions,
+helper compilation, `make -j$(sysctl -n hw.ncpu)` and
+`tools/ichor/smoke_test.sh` pass (nine smoke captures). ROM usage is
+23,038,304 of 33,554,432 bytes (68.66%). Both matching before/current named
+galleries pass 996 checks / 238 captures, including every complete OBJ frame,
+all 16 ROM/unfaded/hardware palette words and east mirrors. The independent
+PNG encoder matches all 184 unmirrored frame/palette dumps on each ROM.
+Every pixel outside the subject's native 16x32 or 64x64 image bounds is
+identical across all 238 screenshot pairs. Route 1 passes with 48 captures,
+the temple trial with 31, and the actual strum/rise controller check with
+18 checks / six captures. Across 21,269 protected tracked asset/source paths,
+exactly the 29 owned production PNGs differ; shared palettes, players, balls
+and held Pokemon remain unchanged. Complete old/new native cards, unchanged
+model sources and genuine paired engine captures remain outside Git in the
+session evidence. These passes do not grant artistic approval.
+
+Player states, generic folk/class portraits, balls, terrain, UI and unrelated
+surfaces are outside this human batch. **All 24 unfinished owned Pokemon remain
+held**; the preserved crab/Ketos prototypes and older material-polish evidence
+are not upgraded to calibrated-redesign acceptance.
 
 ## Elaia redraw checkpoint, 2026-11-15
 

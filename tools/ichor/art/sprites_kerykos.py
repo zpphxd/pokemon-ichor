@@ -2,7 +2,7 @@
 
 Kerykos is round and cheerful, middle-aged, with a short graying beard and a grin
 that is always halfway through a sentence. He wears a winged petasos, a traveling
-chlamys in Aegean blue with a gold border and deep pockets stuffed with scrolls, and
+porphyry chlamys with a gold border and deep pockets stuffed with scrolls, and
 carries the herald's staff, the kerykeion: gold, wound with two snakes, winged at the
 top. Drawn in the slice's style (sprites_trainers.py, sprites_classes.py for the
 portrait; sprites_npc.py for the walker), see design/phase2/SPRITES.md.
@@ -251,7 +251,7 @@ _FACE_LEFT = [
     "....kllllllk....",
 ]
 
-# Bodies: a round belly in linen, the blue chlamys over the shoulders, the staff
+# Bodies: a round belly in linen, the porphyry chlamys over the shoulders, the staff
 # in his right hand. The staff column: O gold, g snake, k outline.
 _BODY_DOWN = [
     "kgk.kcLLLLcrrk..",
