@@ -15,7 +15,7 @@
 -- won't let it flee). Nothing else is written to memory
 -- except reading state; options are set in the OPTION menu by hand. Natural
 -- mode rejects emulator memory writes, RAM scripts, assists and state resumes.
--- The first-move solo pilot is a progression probe, not a balance verdict.
+-- The button-only natural pilot is a progression probe, not a balance verdict.
 --
 -- Env: SLICE_OUT (default build/slice/), SLICE_SYMBOLS (default <out>symbols.lua),
 -- SLICE_STARTER 0 Nebrel / 1 Kynder / 2 Hipling (default 0),
@@ -48,6 +48,7 @@ local DIFFICULTY = os.getenv("SLICE_DIFFICULTY") or "hero"
 local DIFFICULTIES = { mortal = 0, hero = 1, spartan = 2 }
 local KLEON_TAKES = { [0] = 1, [1] = 2, [2] = 0 }   -- SCRIPT.md beat 3
 local KLEON_TRAINER = { [0] = "KLEON_KYNDER", [1] = "KLEON_HIPLING", [2] = "KLEON_NEBREL" }
+if NATURAL then L.pilot = dofile("tools/ichor/tests/slice_pilot.lua")(L) end
 
 -- --- Checks shared by every beat -----------------------------------------------------------
 
@@ -124,6 +125,7 @@ end
 -- the battle is played out on the way), then talk again for the after-battle line
 -- and make sure it isn't a second battle.
 local function trainer(name, script, song, opts)
+  if L.pilot then L.pilot.recover() end
   local id = S["TRAINER_" .. name]
   -- (they may already have spotted the player on the way to something else)
   if not L.defeated(id) then talk(L.npc(script), opts) end
@@ -144,6 +146,7 @@ local function visitAll(list, avoid)
   for _, it in ipairs(list) do left[#left + 1] = it end
   local deferred = {}
   while #left > 0 do
+    if L.pilot then L.pilot.recover() end
     local i = L.nearest(left, avoid)
     if not i then break end
     local it = table.remove(left, i)
@@ -688,6 +691,7 @@ end)
 
 local T = "AktiTown_TempleOfHestia_EventScript_"
 beat("07_temple", function()
+  if L.pilot then L.pilot.trainKallisteTeam() end
   L.useWarp(S.MAP_TEMPLE)
   musicIs(S.MUS_TEMPLE, "the Temple's theme")
   shot("temple_entry")
@@ -1508,7 +1512,7 @@ L.start(function()
   if stop then last = beatIndex(stop) end
   expect(first <= last, "requested beat range is in play order")
   log(string.format("note %s pilot, %s difficulty, starter %s, %s%s",
-                    NATURAL and "NATURAL first-move solo" or "ASSISTED level-100",
+                    NATURAL and "NATURAL button-only team pilot" or "ASSISTED level-100",
                     DIFFICULTY, SPECIES[STARTER], IANTHE and "Ianthe" or "Theo",
                     from and (", resuming at " .. from) or ""))
   if from then
@@ -1520,6 +1524,7 @@ L.start(function()
   end
   for i = first, last do
     L.setBeat(BEATS[i].name, not (from and i == first))
+    if L.pilot and L.idle() then L.pilot.recover() end
     BEATS[i].fn()
     log("REACHED " .. BEATS[i].name)
   end

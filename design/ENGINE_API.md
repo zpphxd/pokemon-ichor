@@ -180,10 +180,33 @@ not a recorded victory; later losses stop the natural pilot explicitly.
 `SLICE_STOP_AFTER=<beat>` requests partial coverage with a distinct `PARTIAL PASS`
 marker. It does not satisfy the full-run endpoint checks or trainer checklist.
 `tools/ichor/tests/slice_natural_opening.sh` exercises all nine starter/difficulty
-prologues through Kleon, Alethea's heal/gifts and Mom's return. The pilot still
-uses the first move, runs from wild encounters and does not build/train a team
-or spend healing items. Its failures are **not balance defects**. Complete
-natural-level Kalliste/Act I runs and player approval remain separate gates.
+prologues through Kleon, Alethea's heal/gifts and Mom's return.
+
+The natural pilot in `slice_pilot.lua` uses real buttons for captures, living
+replacements, medicine, healer visits, move learning and party ordering. It
+tries up to three owned balls per eligible Route 1/Kronion encounter, keeping
+at most three distinct partners. It reads power/type/category from the native
+move UI and scores available attacks using STAB, type effectiveness, current
+offensive/defensive stats and stages, including Fur Coat's physical defense.
+Its move-learning heuristic replaces observed status moves or weaker redundant
+coverage before unique attacks. This is not a complete battle AI: accuracy,
+most abilities, variable-power moves and tactical status/switch choices remain
+unmodeled.
+
+Before Hestia, the pilot walks back to Route 1 and switch-trains the actual
+party to at least level 10, using Mom for HP/PP recovery. Training is bounded
+to 6,000 grass steps; no EXP, party, item or progression writes are allowed.
+Healing near Akti uses the actual Asclepeion; an NPC returning to the former
+player tile on map reentry does not require the pilot to stand inside it.
+`PILOT` records describe inspections, item consumption, catches, move choices
+and training alongside the existing `PARTY`/`BATTLE` evidence.
+
+Hero/Nebrel has reached `08_after` continuously from NEW GAME: 418,310 frames,
+117 battles. This strategy includes substantial wild training: the starter
+enters Ione at level 16, alongside two level-10 partners. Spartan/Hipling
+reaches Ione with its starter capped at 14 but loses. Neither result establishes
+the intended curve's balance. Other starter/difficulty chapter runs, complete
+natural-level Act I coverage and player approval remain separate gates.
 The continuous route currently ends at the Emporion gate after Laurel 2, not
 the end of Act I.
 

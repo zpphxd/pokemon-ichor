@@ -9,6 +9,13 @@
 #include "pokemon.h"
 #include "ichor_save.h"
 #include "ichor_oath.h"
+#include "item_menu.h"
+#include "party_menu.h"
+#include "data.h"
+#include "battle.h"
+#include "sprite.h"
+#include "constants/party_menu.h"
+#include "constants/characters.h"
 #include "gba/m4a_internal.h"
 #include "constants/battle.h"
 #include "constants/event_objects.h"
@@ -213,6 +220,58 @@ K(BATTLE_MON_SIZE, sizeof(struct BattlePokemon))
 K(OFF_BATTLE_MON_HP, offsetof(struct BattlePokemon, hp))
 K(OFF_BATTLE_MON_SPECIES, offsetof(struct BattlePokemon, species))
 K(OFF_BATTLE_MON_LEVEL, offsetof(struct BattlePokemon, level))
+K(OFF_BATTLE_MON_MOVES, offsetof(struct BattlePokemon, moves))
+K(OFF_BATTLE_MON_PP, offsetof(struct BattlePokemon, pp))
+K(OFF_BATTLE_MON_TYPES, offsetof(struct BattlePokemon, types))
+K(OFF_BATTLE_MON_ATTACK, offsetof(struct BattlePokemon, attack))
+K(OFF_BATTLE_MON_DEFENSE, offsetof(struct BattlePokemon, defense))
+K(OFF_BATTLE_MON_SP_ATTACK, offsetof(struct BattlePokemon, spAttack))
+K(OFF_BATTLE_MON_SP_DEFENSE, offsetof(struct BattlePokemon, spDefense))
+K(OFF_BATTLE_MON_STAGES, offsetof(struct BattlePokemon, statStages))
+K(OFF_BATTLE_MON_ABILITY, offsetof(struct BattlePokemon, ability))
+K(OFF_EXP_GETTER_MON, offsetof(struct BattleStruct, expGetterMonId))
+K(STAT_ATK, STAT_ATK)
+K(STAT_DEF, STAT_DEF)
+K(STAT_SPATK, STAT_SPATK)
+K(STAT_SPDEF, STAT_SPDEF)
+K(DAMAGE_CATEGORY_PHYSICAL, DAMAGE_CATEGORY_PHYSICAL)
+K(DAMAGE_CATEGORY_SPECIAL, DAMAGE_CATEGORY_SPECIAL)
+K(ABILITY_FUR_COAT, ABILITY_FUR_COAT)
+K(PILOT_SPRITE_SIZE, sizeof(struct Sprite))
+K(OFF_PILOT_SPRITE_ANIM, offsetof(struct Sprite, animNum))
+K(TYPE_ID_SIZE, sizeof(enum Type))
+K(TYPE_INFO_SIZE, sizeof(struct TypeInfo))
+K(OFF_TYPE_NAME, offsetof(struct TypeInfo, name))
+K(NUMBER_OF_MON_TYPES, NUMBER_OF_MON_TYPES)
+K(TYPE_EFFECT_SIZE, sizeof(uq4_12_t))
+K(TYPE_EFFECT_ONE, 1 << 12)
+K(MOVE_ID_SIZE, sizeof(enum Move))
+K(MAX_MON_MOVES, MAX_MON_MOVES)
+K(OFF_BAG_POCKET, offsetof(struct BagPosition, pocket))
+K(OFF_BAG_CURSOR, offsetof(struct BagPosition, cursorPosition))
+K(OFF_BAG_SCROLL, offsetof(struct BagPosition, scrollPosition))
+K(OFF_BAG_ITEMS, offsetof(struct Bag, items))
+K(OFF_BAG_BERRIES, offsetof(struct Bag, berries))
+K(OFF_BAG_BALLS, offsetof(struct Bag, pokeBalls))
+K(BAG_ITEMS_COUNT, BAG_ITEMS_COUNT)
+K(BAG_BERRIES_COUNT, BAG_BERRIES_COUNT)
+K(BAG_POKEBALLS_COUNT, BAG_POKEBALLS_COUNT)
+K(POCKET_ITEMS, POCKET_ITEMS)
+K(POCKET_BERRIES, POCKET_BERRIES)
+K(POCKET_POKE_BALLS, POCKET_POKE_BALLS)
+K(B_OUTCOME_CAUGHT, B_OUTCOME_CAUGHT)
+K(POCKETS_COUNT, POCKETS_COUNT)
+K(OFF_PARTY_MENU_SLOT, offsetof(struct PartyMenu, slotId))
+K(OFF_PARTY_MENU_SECOND_SLOT, offsetof(struct PartyMenu, slotId2))
+K(OFF_PARTY_MENU_ACTION, offsetof(struct PartyMenu, action))
+K(PARTY_ACTION_SWITCH, PARTY_ACTION_SWITCH)
+K(CHAR_A, CHAR_A)
+K(CHAR_0, CHAR_0)
+K(CHAR_SPACE, CHAR_SPACE)
+K(CHAR_COLON, CHAR_COLON)
+K(EOS, EOS)
+K(MOVE_DESCRIPTION_BUTTON, B_MOVE_DESCRIPTION_BUTTON)
+K(L_BUTTON, L_BUTTON)
 
 // --- Script bytecode, for test-only scripts written into spare EWRAM ----------------
 K(SCR_OP_END, SCR_OP_END)

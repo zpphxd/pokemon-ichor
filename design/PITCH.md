@@ -408,11 +408,15 @@ remain evidence of those revisions, not current open-issue counts.
 The continuous harness now also has a guarded natural-level mode: no EXP/stat
 edits, injected scripts, fixture resumes or softlock workarounds. All nine real
 starter/difficulty prologues pass, including actual rival wins/losses and
-Alethea's recovery. That is opening coverage only. The first Hero/Nebrel solo,
-first-move probe falls on Route 1 after reaching level 8; it does not catch
-partners or use healing items, so that result is not a balance defect. A
-team-building/healing pilot and continuous coverage beyond the Emporion gate
-are still needed before natural-level chapter approval.
+Alethea's recovery. The button-only pilot now catches partners, chooses and
+learns attacks, uses owned medicine, visits real healers and switch-trains its
+team. Hero/Nebrel reaches Kalliste's ending (`08_after`) continuously: 117
+battles, with a level-16 starter and two level-10 partners entering Ione.
+That substantial training is not approval of the intended level curve.
+Spartan/Hipling reaches Ione under the real level-14 cap but still loses;
+that pilot result is not an established balance defect. The remaining
+starter/difficulty chapter runs, continuous coverage beyond the Emporion gate
+and human look/fun approval are still open.
 
 The Hollow night-hound failure was a signed-offset error in the test clock setup,
 not an established encounter bug. The corrected harness checks that the cave
