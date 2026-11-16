@@ -1129,3 +1129,9 @@ gSpecials::
 	def_special Ichor_GetMomRecord
 	def_special Ichor_QuoteToMoneychanger
 	def_special Ichor_SetOmenWeather
+	def_special Ichor_BuildAmphoraMenu
+	def_special Ichor_BufferAmphora
+	def_special Ichor_RestoreAmphora
+	def_special Ichor_BufferAmphoraNotes
+	def_special Ichor_ShowAmphoraPicture
+	def_special Ichor_HideAmphoraPicture

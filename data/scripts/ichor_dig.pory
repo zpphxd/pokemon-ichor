@@ -85,3 +85,145 @@ script EventScript_IchorDigNothing {
     setvar(VAR_RESULT, FALSE)
     return
 }
+
+script EventScript_IchorAmphoraShelf {
+    lockall
+    call(EventScript_IchorAmphoraReward)
+    special(Ichor_BuildAmphoraMenu)
+    if (var(VAR_RESULT) == ICHOR_AMPHORA_MENU_ERROR) {
+        msgbox(format("The shelf ledger cannot be opened. Try again after saving."))
+        goto(EventScript_IchorAmphoraClose)
+    }
+    if (var(VAR_RESULT) == 0) {
+        msgbox(format("“Every myth is a memory of a Pokémon” is carved over the shelf.\pDaphne's notes show how four sherds fit into one amphora. Bring the pieces here."))
+        goto(EventScript_IchorAmphoraClose)
+    }
+    message(format("Daphne's amphora shelf. Which painting?"))
+    waitmessage
+    dynmultistack(0, 0, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+    if (var(VAR_RESULT) == MULTI_B_PRESSED) {
+        goto(EventScript_IchorAmphoraClose)
+    }
+    copyvar(VAR_0x800A, VAR_RESULT)
+    copyvar(VAR_0x8004, VAR_0x800A)
+    specialvar(VAR_RESULT, Ichor_BufferAmphora)
+    if (var(VAR_RESULT) == ICHOR_AMPHORA_INVALID) {
+        goto(EventScript_IchorAmphoraInvalid)
+    }
+    if (var(VAR_RESULT) == ICHOR_AMPHORA_INCOMPLETE) {
+        msgbox(format("{STR_VAR_1}.\p{STR_VAR_2} of its four sherds. The painting still has gaps."))
+        goto(EventScript_IchorAmphoraClose)
+    }
+    if (var(VAR_RESULT) == ICHOR_AMPHORA_READY) {
+        msgbox(format("{STR_VAR_1}.\pAll four pieces are here. Fit them together?"), MSGBOX_YESNO)
+        if (var(VAR_RESULT) == NO) {
+            goto(EventScript_IchorAmphoraClose)
+        }
+        copyvar(VAR_0x8004, VAR_0x800A)
+        specialvar(VAR_RESULT, Ichor_RestoreAmphora)
+        if (var(VAR_RESULT) != ICHOR_AMPHORA_RESTORED) {
+            goto(EventScript_IchorAmphoraInvalid)
+        }
+        playfanfare(MUS_OBTAIN_ITEM)
+        message(format("The amphora is whole. You set it on Daphne's shelf."))
+        waitmessage
+        waitfanfare
+        waitbuttonpress
+    }
+    copyvar(VAR_0x8004, VAR_0x800A)
+    specialvar(VAR_RESULT, Ichor_BufferAmphoraNotes)
+    if (var(VAR_RESULT) == FALSE) {
+        goto(EventScript_IchorAmphoraInvalid)
+    }
+    closemessage
+    copyvar(VAR_0x8004, VAR_0x800A)
+    specialvar(VAR_RESULT, Ichor_ShowAmphoraPicture)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("The painting cannot be opened. It stays on the shelf to read again."))
+        goto(EventScript_IchorAmphoraClose)
+    }
+    msgbox(gStringVar4)
+    special(Ichor_HideAmphoraPicture)
+    call(EventScript_IchorAmphoraReward)
+    goto(EventScript_IchorAmphoraClose)
+}
+
+script EventScript_IchorAmphoraInvalid {
+    msgbox(format("These pieces do not make a whole amphora. Check the shelf again."))
+    goto(EventScript_IchorAmphoraClose)
+}
+
+script EventScript_IchorAmphoraClose {
+    special(Ichor_HideAmphoraPicture)
+    closemessage
+    releaseall
+    end
+}
+
+script EventScript_IchorAmphoraReward {
+    if (flag(FLAG_ICHOR_GOT_AMPHORA_PATCH)) {
+        return
+    }
+    setvar(VAR_0x8004, FLAG_ICHOR_AMPHORAE_START)
+    setvar(VAR_0x8005, ICHOR_AMPHORA_COUNT)
+    specialvar(VAR_RESULT, Ichor_CountFlagRange)
+    if (var(VAR_RESULT) != ICHOR_AMPHORA_COUNT) {
+        return
+    }
+    msgbox(format("Daphne's last page:\p“Every myth is a memory of a Pokémon, and now you've seen twelve.”\pAn Ability Patch is wrapped in the page."))
+    giveitem(ITEM_ABILITY_PATCH)
+    if (var(VAR_RESULT) == FALSE) {
+        msgbox(format("Your Bag is full. Daphne's gift stays on the shelf."))
+        return
+    }
+    setflag(FLAG_ICHOR_GOT_AMPHORA_PATCH)
+    return
+}
+
+text IchorAmphora_Text_Kronos {
+    format("Daphne's notes:\n“Rhea handed him a stone. He never looked under the cloth.\pThat cracked altar on Kronion Hill hums after dark. Listen there.\pA swallowed stone. Remember that when you reach Delphoi.”")
+}
+
+text IchorAmphora_Text_Persephone {
+    format("Daphne's notes:\n“Six little seeds. Someone counted them very carefully.\pSee how half the girl is painted in shadow?\pTry Eleusa's fields at dusk. Some things only stir when the light goes.”")
+}
+
+text IchorAmphora_Text_Arachne {
+    format("Daphne's notes:\n“The woman and the spider are both weaving. Neither has stopped.\pThere is a web chamber in the cave on the Eleusa road.\pLook there for a web-spinner with a different gift.”")
+}
+
+text IchorAmphora_Text_Hermes {
+    format("Daphne's notes:\n“A baby leading cattle. Look at their feet: they are going backward.\pHoofprints on the coast might lead the wrong way.\pFollow them anyway. A grotto can hide behind a bad set of directions.”")
+}
+
+text IchorAmphora_Text_Hephaestus {
+    format("Daphne's notes:\n“He comes home on a donkey. Someone has painted a wine cup beside him.\pIt is a kind picture. Hephaestus ought to see it.\pWatch the ground by Kaldera's forge. Something rare likes the warmth.”")
+}
+
+text IchorAmphora_Text_Icarus {
+    format("Daphne's notes:\n“Feathers fall before the boy does. I wish the painter had stopped there.\pSea-birds gather on the Ikarian coasts at dawn.\pWatch their roosts. Daedalus would have watched them too.”")
+}
+
+text IchorAmphora_Text_Pandora {
+    format("Daphne's notes:\n“The lid is lifted. One small thing stays inside the jar.\pElpis. Hope. A small word to leave so much room around.\pRemember this jar in Astyra. Its other contents have a story too.”")
+}
+
+text IchorAmphora_Text_Orpheus {
+    format("Daphne's notes:\n“He sings, and the animals stop to listen. Even the little ones.\pTry Arkadia's grove at night. Listen before you walk in.\pThere is another singer in that story. Meloetta.”")
+}
+
+text IchorAmphora_Text_Atalanta {
+    format("Daphne's notes:\n“She stoops for an apple. The painter has caught her halfway down.\pLook for a fast Pokémon's hidden path in Arkadia.\pKeep the runner in mind when you reach the Olympiad.”")
+}
+
+text IchorAmphora_Text_Phaethon {
+    format("Daphne's notes:\n“A boy, a burning chariot, and no road beneath them.\pKaldera's rim is worth searching. A rare Fire-type lives up there.\pPerhaps the chariot was not a chariot at all.”")
+}
+
+text IchorAmphora_Text_Paris {
+    format("Daphne's notes:\n“Three goddesses. One apple. An awkward afternoon.\pAphrodite will remember that you pieced this together.\pLook for a golden-apple tree on Kythera. There is an old guard in that story.”")
+}
+
+text IchorAmphora_Text_Theseus {
+    format("Daphne's notes:\n“A youth, a bull-headed man, and a very thin thread.\pShow this one to Ariadne in Knossa. I would like to hear her version.\pKeep hold of the thread. There are other labyrinths.”")
+}

@@ -13,12 +13,20 @@
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "item.h"
+#include "list_menu.h"
+#include "malloc.h"
 #include "money.h"
+#include "palette.h"
 #include "random.h"
 #include "sound.h"
+#include "script_menu.h"
 #include "string_util.h"
+#include "window.h"
+#include "bg.h"
 #include "ichor_dig.h"
 #include "ichor_relics.h"
+#include "ichor_rites.h"
+#include "ichor_save.h"
 #include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/ichor.h"
@@ -134,6 +142,167 @@ static const u8 *const sAmphoraMyths[ICHOR_AMPHORA_COUNT] =
     [ICHOR_AMPHORA_PARIS]      = COMPOUND_STRING("Paris and the apple"),
     [ICHOR_AMPHORA_THESEUS]    = COMPOUND_STRING("Theseus and the bull"),
 };
+
+extern const u8 IchorAmphora_Text_Kronos[];
+extern const u8 IchorAmphora_Text_Persephone[];
+extern const u8 IchorAmphora_Text_Arachne[];
+extern const u8 IchorAmphora_Text_Hermes[];
+extern const u8 IchorAmphora_Text_Hephaestus[];
+extern const u8 IchorAmphora_Text_Icarus[];
+extern const u8 IchorAmphora_Text_Pandora[];
+extern const u8 IchorAmphora_Text_Orpheus[];
+extern const u8 IchorAmphora_Text_Atalanta[];
+extern const u8 IchorAmphora_Text_Phaethon[];
+extern const u8 IchorAmphora_Text_Paris[];
+extern const u8 IchorAmphora_Text_Theseus[];
+
+static const u8 *const sAmphoraNotes[ICHOR_AMPHORA_COUNT] =
+{
+    IchorAmphora_Text_Kronos, IchorAmphora_Text_Persephone,
+    IchorAmphora_Text_Arachne, IchorAmphora_Text_Hermes,
+    IchorAmphora_Text_Hephaestus, IchorAmphora_Text_Icarus,
+    IchorAmphora_Text_Pandora, IchorAmphora_Text_Orpheus,
+    IchorAmphora_Text_Atalanta, IchorAmphora_Text_Phaethon,
+    IchorAmphora_Text_Paris, IchorAmphora_Text_Theseus,
+};
+
+static const u32 sAmphoraPictures[] = INCBIN_U32("graphics/ichor/amphorae.4bpp");
+static const u16 sAmphoraPalette[] = INCBIN_U16("graphics/ichor/amphorae.gbapal");
+// Zero-initialized EWRAM: zero is closed; an open window is its id plus one.
+static EWRAM_DATA u8 sAmphoraWindowIdPlusOne = 0;
+static EWRAM_DATA u16 sAmphoraSavedPalette[16] = {0};
+
+u16 Ichor_ShowAmphoraPicture(void)
+{
+    const struct WindowTemplate template =
+    {
+        .bg = 0, .tilemapLeft = 2, .tilemapTop = 1,
+        .width = 8, .height = 8, .paletteNum = 13, .baseBlock = 100,
+    };
+    u32 amphora = gSpecialVar_0x8004;
+    u32 window;
+
+    if (Ichor_AmphoraStatus(amphora) != ICHOR_AMPHORA_RESTORED || sAmphoraWindowIdPlusOne != 0)
+        return FALSE;
+    window = AddWindow(&template);
+    if (window == WINDOW_NONE)
+        return FALSE;
+    sAmphoraWindowIdPlusOne = window + 1;
+    memcpy(sAmphoraSavedPalette, &gPlttBufferUnfaded[13 * 16], sizeof(sAmphoraSavedPalette));
+    LoadPalette(sAmphoraPalette, 13 * 16, sizeof(sAmphoraPalette));
+    CopyToWindowPixelBuffer(window, (const u8 *)sAmphoraPictures + amphora * 2048, 2048, 0);
+    PutWindowTilemap(window);
+    CopyWindowToVram(window, COPYWIN_FULL);
+    return TRUE;
+}
+
+void Ichor_HideAmphoraPicture(void)
+{
+    u32 window;
+
+    if (sAmphoraWindowIdPlusOne == 0)
+        return;
+    window = sAmphoraWindowIdPlusOne - 1;
+    ClearWindowTilemap(window);
+    CopyWindowToVram(window, COPYWIN_MAP);
+    RemoveWindow(window);
+    LoadPalette(sAmphoraSavedPalette, 13 * 16, sizeof(sAmphoraSavedPalette));
+    ScheduleBgCopyTilemapToVram(0);
+    sAmphoraWindowIdPlusOne = 0;
+}
+
+u16 Ichor_AmphoraStatus(u32 amphora)
+{
+    if (amphora >= ICHOR_AMPHORA_COUNT)
+        return ICHOR_AMPHORA_INVALID;
+    if (FlagGet(FLAG_ICHOR_AMPHORAE_START + amphora))
+        return ICHOR_AMPHORA_RESTORED;
+    if (Ichor_CountFlags(FLAG_ICHOR_SHERDS_START + amphora * ICHOR_SHERDS_PER_AMPHORA,
+                         ICHOR_SHERDS_PER_AMPHORA) == ICHOR_SHERDS_PER_AMPHORA)
+        return ICHOR_AMPHORA_READY;
+    return ICHOR_AMPHORA_INCOMPLETE;
+}
+
+u16 Ichor_BufferAmphora(void)
+{
+    u32 amphora = gSpecialVar_0x8004;
+    u16 status = Ichor_AmphoraStatus(amphora);
+
+    if (status != ICHOR_AMPHORA_INVALID)
+    {
+        StringCopy(gStringVar1, sAmphoraMyths[amphora]);
+        ConvertIntToDecimalStringN(gStringVar2,
+            Ichor_CountFlags(FLAG_ICHOR_SHERDS_START + amphora * ICHOR_SHERDS_PER_AMPHORA,
+                             ICHOR_SHERDS_PER_AMPHORA), STR_CONV_MODE_LEFT_ALIGN, 1);
+    }
+    return status;
+}
+
+u16 Ichor_RestoreAmphora(void)
+{
+    u32 amphora = gSpecialVar_0x8004;
+    u16 status = Ichor_AmphoraStatus(amphora);
+
+    if (status != ICHOR_AMPHORA_READY)
+        return status;
+    FlagSet(FLAG_ICHOR_AMPHORAE_START + amphora);
+    if (amphora == ICHOR_AMPHORA_HEPHAESTUS)
+        Ichor_AddFavorTo(ICHOR_GOD_HEPHAESTUS, 5);
+    else if (amphora == ICHOR_AMPHORA_PARIS)
+        Ichor_AddFavorTo(ICHOR_GOD_APHRODITE, 5);
+    return ICHOR_AMPHORA_RESTORED;
+}
+
+u16 Ichor_BufferAmphoraNotes(void)
+{
+    u32 amphora = gSpecialVar_0x8004;
+
+    if (Ichor_AmphoraStatus(amphora) != ICHOR_AMPHORA_RESTORED)
+        return FALSE;
+    StringCopy(gStringVar4, sAmphoraNotes[amphora]);
+    return TRUE;
+}
+
+void Ichor_BuildAmphoraMenu(void)
+{
+    u32 amphora, count = 0;
+
+    for (amphora = 0; amphora < ICHOR_AMPHORA_COUNT; amphora++)
+    {
+        u32 pieces = Ichor_CountFlags(FLAG_ICHOR_SHERDS_START + amphora * ICHOR_SHERDS_PER_AMPHORA,
+                                     ICHOR_SHERDS_PER_AMPHORA);
+        struct ListMenuItem item;
+        u8 *label, *end;
+
+        if (pieces == 0 && !FlagGet(FLAG_ICHOR_AMPHORAE_START + amphora))
+            continue;
+        label = Alloc(32);
+        if (label == NULL)
+        {
+            struct ListMenuItem *queued;
+            while ((queued = MultichoiceDynamic_PopElement()) != NULL)
+                Free((void *)queued->name);
+            if (count != 0)
+                MultichoiceDynamic_DestroyStack();
+            gSpecialVar_Result = ICHOR_AMPHORA_MENU_ERROR;
+            return;
+        }
+        item.name = label;
+        end = StringCopy(label, sAmphoraMyths[amphora]);
+        if (FlagGet(FLAG_ICHOR_AMPHORAE_START + amphora))
+            StringCopy(end, COMPOUND_STRING(" whole"));
+        else
+        {
+            end = StringCopy(end, COMPOUND_STRING(" ("));
+            end = ConvertIntToDecimalStringN(end, pieces, STR_CONV_MODE_LEFT_ALIGN, 1);
+            StringCopy(end, COMPOUND_STRING("/4)"));
+        }
+        item.id = amphora;
+        MultichoiceDynamic_PushElement(item);
+        count++;
+    }
+    gSpecialVar_Result = count;
+}
 
 // The 30 ostraka, dug up in this order (SYSTEMS §5). Nine name Aristeides,
 // for Lysimachos's line; the last is the player's.

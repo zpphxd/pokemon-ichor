@@ -22,14 +22,12 @@
 //   ICHOR_STUB_DARKNESS  lit places are flash 1, not 0 (HH_LIT, below).
 //   ICHOR_STUB_SFX       SCRIPT.md Part 9 asks for a dog's bark panned left, right and
 //                        centre; until it exists the barks are the hound's own cry.
-//   ICHOR_STUB_AMPHORA   the Arachne amphora's completion flag (SYSTEMS.md §5, the
-//                        third amphora: FLAG_ICHOR_AMPHORAE_START + 2) gates Raknit.
 //   ICHOR_STUB_AETHOS_DEX  Lykopup and Raknit are stand-ins (ichor_species_stubs.h);
 //                        Raknit's "hidden ability" is the stand-in's until the dex lands.
 
 const HH_BRAZIER_1 = FLAG_ICHOR_BRAZIERS_START + 0x14
 const HH_BRAZIER_2 = FLAG_ICHOR_BRAZIERS_START + 0x15
-const HH_ARACHNE_AMPHORA = FLAG_ICHOR_AMPHORAE_START + 2    // ICHOR_STUB_AMPHORA
+const HH_ARACHNE_AMPHORA = FLAG_ICHOR_AMPHORAE_START + ICHOR_AMPHORA_ARACHNE
 const HH_SKYLIGHT = 4          // the Hekataion before the Torch: faint light from above (3 tiles)
 // ICHOR_STUB_DARKNESS: two limits of the engine's flash effect (AnimateFlash and its task
 // in src/field_screen_effect.c, which vanilla only ever used to grow Flash's light):

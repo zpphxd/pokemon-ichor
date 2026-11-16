@@ -334,5 +334,5 @@ script ElaiaVillage_Akademia_EventScript_WallMap {
 }
 
 script ElaiaVillage_Akademia_EventScript_Scrolls {
-    msgbox(format("“Every myth is a memory of a Pokémon” is carved over the shelf."), MSGBOX_SIGN)
+    goto(EventScript_IchorAmphoraShelf)
 }
