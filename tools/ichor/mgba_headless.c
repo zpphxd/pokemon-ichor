@@ -24,6 +24,7 @@
 
 static const char* untilText = "SMOKE done";
 static bool finished = false;
+static bool outputFailed = false;
 
 static void logLine(struct mLogger* logger, int category, enum mLogLevel level, const char* format, va_list args) {
 	(void) logger;
@@ -37,7 +38,11 @@ static void logLine(struct mLogger* logger, int category, enum mLogLevel level, 
 	}
 	char line[1024];
 	vsnprintf(line, sizeof(line), format, args);
-	printf("[%s] %s\n", name ? name : "?", line);
+	if (printf("[%s] %s\n", name ? name : "?", line) < 0) {
+		outputFailed = true;
+		finished = true;
+		return;
+	}
 	if (strstr(line, untilText)) {
 		finished = true;
 	}
@@ -104,10 +109,18 @@ int main(int argc, char** argv) {
 		core->runFrame(core);
 		mScriptContextTriggerCallback(&context, "frame");
 	}
-	printf("[runner] stopped after %ld frames (%s)\n", frame, finished ? "done" : "frame limit");
+	if (printf("[runner] stopped after %ld frames (%s)\n", frame,
+		outputFailed ? "output error" : finished ? "done" : "frame limit") < 0
+		|| fflush(stdout) == EOF || ferror(stdout)) {
+		outputFailed = true;
+	}
 
 	mScriptContextDeinit(&context);
 	core->deinit(core);
 	free(video);
+	if (outputFailed) {
+		fprintf(stderr, "headless runner could not write complete output; run evidence is incomplete\n");
+		return 1;
+	}
 	return finished ? 0 : 2;
 }

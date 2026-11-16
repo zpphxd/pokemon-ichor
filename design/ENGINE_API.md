@@ -348,6 +348,12 @@ the end of Act I.
 without requiring a ROM or toolchain. Invalid requests must preserve existing
 screenshots and save states; every declared beat remains selectable.
 
+The headless runner fails with exit 1 if stdout cannot be written completely,
+even if Lua reaches its completion marker. Partial logs are not valid run
+evidence. `python3 tools/ichor/tests/test_headless_output.py` checks both complete
+output and a real failed write under a small file-size limit; build the ROM
+and runner first.
+
 `build/tools/ichor-mgba-headless --script tools/ichor/tests/slice_pilot_cursor.lua --frames 2 --until "PILOT CURSOR done" pokeemerald.gba`
 checks all 30 cursor transitions across one-, two-, three- and four-move grids.
 The isolated input model rejects moves into empty slots, including the
