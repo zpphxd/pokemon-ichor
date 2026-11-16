@@ -20,7 +20,7 @@ reference is not counted as integrated production art.
 | Human group | Assigned surfaces | Current new-style status |
 |---|---|---|
 | Players | Theo/Ianthe fronts and backs; all ten existing state sheets each | Image-model-led redesign in progress; Theo front preview is the approved style anchor, not complete player coverage |
-| Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Image-model-led redesign in progress; includes Kleon's seasick/tablet poses and the extra Sam/Apollo/Cami frames |
+| Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Source-backed image-model-led adoption verified: 170 field frames, eight back frames, six live fronts and the intro; Sam/Cami busts remain unrouted |
 | Classes and townsfolk | 22 custom walker sheets and ten custom fronts | Source-backed image-model-led adoption verified: all 199 field states, healer bow, 66 right mirrors and ten fronts; shared palettes and bindings preserved |
 | Active imported class fallbacks | Exekias/Potter, Myrrhine/Initiate F, Pheidippos/Runner | Three parent-owned image-model-led native fronts now replace the active picture bindings; original Hiker, Psychic F and Running Triathlete M sources remain byte-identical |
 | Supplemental players | Two region-map markers and two seven-frame credits rider sheets | Parent-owned identity/source review in progress, separate from the core 24 player surfaces; credits' opposite-gender companion reuses the first four frames of the same seven-frame source |
@@ -47,10 +47,26 @@ unrelated assets. The combined parent build passes 79 targeted regressions,
 smoke's nine captures, and `tools/ichor/tests/human_classes.sh`: 1,971 engine
 checks and 275 complete, unobscured rendered-state comparisons. Linked ROM
 usage is 23,096,488 bytes / 68.83%; the accepted legacy-player sources and
-compiled aliases still pass. This brings adopted new-style character
-surfaces to 35, leaving the 24 core player, 29 named-cast and four supplemental
-surfaces in progress. These checks and parent implementation clearance do
+compiled aliases still pass. At that checkpoint, adopted new-style character
+surfaces reached 35; the 24 core player, 29 named-cast and four supplemental
+surfaces remained in progress. These checks and parent implementation clearance do
 not imply separate user artistic acceptance or completion of any town.
+
+The subsequent named-cast checkpoint adds the 29 source-backed surfaces,
+including Cami's retained-pixel shawl correction. Both source families now
+share the legacy-write guard without weakening either exact path set or
+losing Mom's model-source dispatch. The combined parent boundary passes
+92 regressions, build/smoke (nine captures), the unchanged 275-state class
+gallery and the named gallery's 996 engine checks / 238 captures.
+`python3 tools/ichor/tests/named_cast_verify.py` independently matches all
+184 unmirrored OBJ/palette dumps and every opaque pixel of all 238 rendered
+states, including east mirrors, rather than treating VRAM alone as display
+evidence. Sam/Cami's two unrouted fronts remain native/source evidence only;
+Daphne's intro duplicate is also visible in smoke. Linked ROM usage is
+23,097,320 bytes / 68.84%, with the accepted legacy players preserved.
+Adopted new-style character surfaces now total 64; the 24 core player and
+four supplemental surfaces remain in progress. All 40 custom NPC sheets
+are source-backed, not all imported people or every character appearance.
 
 This character-only continuation does not restart Pokemon, prop, field-effect,
 tileset, UI or ball-art generation. Town-by-town production landing still
@@ -146,8 +162,8 @@ The named-cast portion of the shared `save_indexed` guard blocks exactly its
 29 migrated paths and names `python3 tools/ichor/art/model_cast.py --write`;
 the 32 class/townsfolk paths remain separately protected. Neither guard
 blocks a folder or silently falls back to the old painter. The named
-source-frame ROM gallery uses actual graphics IDs, image-table slots, palettes and native OBJ
-copies in test RAM, not natural battles or dialogue. Sam/Cami's two unrouted
+source-frame ROM gallery uses actual graphics IDs, image-table slots,
+palettes and native OBJ copies in test RAM, not natural battles or dialogue. Sam/Cami's two unrouted
 portraits have native/source evidence only; Daphne's duplicate is also checked
 through source reproduction and the introduction.
 

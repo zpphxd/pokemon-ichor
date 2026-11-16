@@ -182,13 +182,16 @@ class ModelCastTests(unittest.TestCase):
 
     def test_legacy_guard_is_exact_and_explicit(self):
         for path in cast.OWNED:
-            self.assertTrue(cast.is_owned(cast.ROOT / path))
+            target = cast.ROOT / path
+            with self.subTest(path=path):
+                self.assertTrue(cast.is_owned(target))
+                before = target.read_bytes()
+                with self.assertRaisesRegex(RuntimeError, r"model_cast\.py --write"):
+                    save_indexed(np.zeros((1, 1), dtype=np.uint8), None, target)
+                self.assertEqual(target.read_bytes(), before)
         for path in (cast.PEOPLE / "fisher.png", cast.PEOPLE / "halia.png",
                      cast.FRONT / "brendan.png"):
             self.assertFalse(cast.is_owned(cast.ROOT / path))
-        with self.assertRaisesRegex(RuntimeError, r"model_cast.py --write"):
-            save_indexed(np.zeros((32, 144)), Palette([]),
-                         cast.ROOT / cast.PEOPLE / "kleon.png")
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "unowned.png"
             save_indexed(np.zeros((8, 8)), Palette([]), path)
