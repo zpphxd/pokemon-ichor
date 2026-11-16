@@ -12,9 +12,9 @@ All of Ichor's own persistent state lives in **`struct IchorSave`** (`include/ic
 | | |
 |---|---|
 | Size | 1,472 bytes. It was 1,280 until version 4 added the second flag bank at 0x500. SaveBlock3 is now 1,476 of its 1,624 bytes. |
-| Version | `ICHOR_SAVE_VERSION` (5). Version 0 means a save from before IchorSave. |
+| Version | `ICHOR_SAVE_VERSION` (6). Version 0 means a save from before IchorSave. |
 | New game | `Ichor_InitSave()` (from `NewGameInitData`): everything zero, except `version` and `momLosses = 212`. |
-| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Each later version's step: 2 added `frozenHourStep` (§5); 3 added the forced omen and the held tint (§7), all from `headerReserved`; 4 added `flags2`, zeroed on load because an older save holds what used to sit past IchorSave's end there; 5 clears the new Oath allocation for older saves (§11). |
+| Loading a save | `Ichor_OnSaveLoaded()` (from `LoadGameSave`). A version-0 save gets the new-game defaults, so slice saves from before IchorSave still load. Each later version's step: 2 added `frozenHourStep` (§5); 3 added the forced omen and the held tint (§7), all from `headerReserved`; 4 added `flags2`, zeroed on load because an older save holds what used to sit past IchorSave's end there; 5 clears the new Oath allocation for older saves; 6 initializes its Urn-jar mask (§11). |
 | New day | `Ichor_DoDailyEvents()` (from `DoDailyEvents`) clears the daily flag bank and draws the day's omen (§7). |
 | Headroom | 136 bytes in `reserved` at 0x478 (64 remain reserved for the future `IchorEpics`), 20 in `headerReserved`, and 148 more in SaveBlock3. |
 
@@ -42,7 +42,7 @@ This way the save never breaks again.
 | `flags2[192]` (0x500) | the second flag bank | 1,536 flags (version 4). See below. |
 | `dailyFlags[32]` | the daily bank | 256 flags, cleared each day. |
 | `thread` | LABYRINTH.md §5.1 | Ariadne's Thread: 24 anchors (8 bytes each, not 6, because apcs-gnu rounds structs to 4 bytes), 1,792 committed steps, a 152-step live segment. |
-| `oath` (0x450) | PITCH §5, UNDERWORLD §5 | Version 5 foundation: choice state, fallen count and 256 named-area encounter bits. Not yet offered to players; see §11. |
+| `oath` (0x450) | PITCH §5, UNDERWORLD §5 | Choice state, fallen count, 256 named-area encounter bits (version 5) and reserved Urn jars (version 6). Not yet offered to players; see §11. |
 
 ### The flag and var banks
 
@@ -1067,7 +1067,8 @@ fainting, the locked Urn and run-ending behavior work together.
 
 - `Ichor_ChooseOath(TRUE/FALSE)` accepts a single choice before the starter
   receipt, independently of difficulty. It refuses repeats, invalid booleans
-  and retroactive enrollment of old saves.
+  and retroactive enrollment of old saves. Swearing requires an empty final
+  Pithos jar, names it URN and reserves it without moving existing Pokemon.
 - `Ichor_IsOathActive()` recognizes only ACTIVE. The other saved states are
   UNDECIDED, DECLINED, RELEASED and FAILED.
 - `Ichor_ClaimOathEncounter(mapSection)` admits the first encounter and saves
@@ -1078,14 +1079,32 @@ fainting, the locked Urn and run-ending behavior work together.
 - `Ichor_HasOathEncounter` and `Ichor_CountOathEncounters` read valid receipts.
 - `Ichor_ReleaseOath` and `Ichor_FailOath` each transition an active Oath once,
   retaining its receipts and fallen count. Neither permits re-enrollment.
+- `Ichor_RecordOathFallen(mon)` marks an actual zero-HP, non-Egg Pokemon
+  once under an active Oath and increments its fallen count. The marker uses
+  a previously unused BoxPokemon bit, leaving the Pokemon/storage sizes
+  unchanged; `Ichor_IsOathFallen` ignores it outside sworn runs.
+- `Ichor_IsUrnBox(box)` identifies saved reserved jars even after release or
+  failure. It is a policy predicate, not yet a Pithos UI lock.
+- `Ichor_StoreOathFallen(mon)` stores the entire marked BoxPokemon before
+  clearing its source. A full Urn grows only into an entirely empty Pithos
+  jar, named URN 2 and onward. Living Pokemon are never displaced. If no
+  reserved space or empty jar exists, the explicit `ICHOR_URN_FULL` result
+  leaves both the source and storage intact. Call this after battle, then
+  compact/recount the party; the caller must report capacity refusal and
+  prevent use or revival of a retained fallen partner.
 
 Version 5 takes 40 bytes from the old reserved region at 0x450. Total
 IchorSave/SaveBlock3 sizes and every existing field offset stay unchanged,
 including the second flag bank at 0x500. Older saves get zero Oath bytes,
-not whatever previously occupied that reserve. Nothing currently writes the
-fallen count during gameplay; it is space for the required Urn integration.
+not whatever previously occupied that reserve. Version 6 takes its two-byte
+Urn mask from padding within those same 40 bytes; version-5 migration
+preserves existing Oath progress and reserves only the original final jar.
+Battle-faint, healing/revive, capture/deposit, Pithos-action, overflow and
+run-ending callers still need integration before the Oath can be enabled.
 
 Native tests cover the entire map-section range, byte boundaries, invalid
 indices, once-only choice/transitions and migration. The actual-ROM save
-fixture seeds Oath state, saves and CONTINUEs, then writes a version-4 save
-with stale reserve bytes and verifies migration preserves the old progress.
+fixture seeds Oath state, saves and CONTINUEs, then writes version-4 and
+version-5 saves with stale reserve bytes and verifies migration preserves
+the old progress. Urn tests verify whole-Pokemon preservation, no duplicate
+fall counting, safe growth, occupied-jar refusal and full-capacity retention.
