@@ -2,6 +2,61 @@
 
 The checklist that makes the total conversion true: every player-facing asset group and system in the ROM, with its status. It is the "inventory" that `design/ART_PLAN.md` §6 promises. Nothing should stay Hoenn by accident.
 
+## Character quality restart, 2026-11-16
+
+The user approved the new **actual 64x64 Theo preview** and directed the same
+method across character sprites. The approved PNG, generated source and
+unchanged earlier illustration are preserved in `design/art/img/theo_approved_*`;
+the authoring and review rules are in `design/ART_PLAN.md` under "Approved
+character direction". The old native-pilot v3 remains rejected. Historical
+acceptances below do not establish compliance with this new benchmark.
+
+The first ownership partition covers all **40 existing custom NPC sheets**,
+**20 Theo/Ianthe player-state sheets**, **20 custom trainer fronts**,
+**four custom four-frame battle-back sheets**, and **Daphne's intro portrait**:
+85 production PNG surfaces, not 85 completed redesigns. The approved Theo
+reference is not counted as integrated production art.
+
+| Human group | Assigned surfaces | Current new-style status |
+|---|---|---|
+| Players | Theo/Ianthe fronts and backs; all ten existing state sheets each | Image-model-led redesign in progress; Theo front preview is the approved style anchor, not complete player coverage |
+| Named cast | 18 custom walker sheets, eight fronts, Kleon/Alethea backs, Daphne intro | Image-model-led redesign in progress; includes Kleon's seasick/tablet poses and the extra Sam/Apollo/Cami frames |
+| Classes and townsfolk | 22 custom walker sheets and ten custom fronts | Image-model-led redesign in progress; healer's tenth bow is required |
+| Active imported class fallbacks | Exekias/Potter, Myrrhine/Initiate F, Pheidippos/Runner | Three parent-owned image-model-led native fronts now replace the active picture bindings; original Hiker, Psychic F and Running Triathlete M sources remain byte-identical |
+| Legacy players | 22 RS/FRLG PNGs and their existing compiled aliases | Preserve accepted identities/provenance; not a new character redesign |
+| Other imported people/fronts/backs and duplicate screen art | Hoenn/FRLG/cut assets, map markers, intro/credits/naming and other human appearances outside the custom set | Coverage review remains open; do not silently count unchanged or unassigned art as complete |
+
+The Sacred Way replacements add three fronts beyond the first 85-surface
+partition (88 surfaces before supplemental markers/credits). Their immutable
+model source and export recipe are in `design/art/characters/route4/` and
+`tools/ichor/art/export_route4_characters.py`. These are sampled/quantized
+image-model outputs, not hand-authored native drawings or separately
+user-approved character designs. Native source reproduction and accent
+retention pass; the real loader gallery passes 68 checks/18 captures including
+these three fronts. Build and smoke pass (9 captures); linked ROM usage is
+23,094,568 bytes / 68.83%. The 22-source/208-frame legacy-player set and
+36 compiled link frames remain unchanged. This bounded parent checkpoint
+does not complete the other character groups or establish gameplay coverage.
+
+This character-only continuation does not restart Pokemon, prop, field-effect,
+tileset, UI or ball-art generation. Town-by-town production landing still
+requires complete compatible native sources, visual review, build and smoke
+evidence. The full character and global sprite requests remain open until the
+remaining groups are reconciled.
+
+**Compiled-map coverage check:** at the concurrent `8b70e8ef98` boundary,
+`data/maps/map_groups.json` registers 51 Aethos maps and 26 retained engine
+maps. All directly placed human graphics on those 51 Aethos maps use the
+custom character set above. The only variable graphics placement is Kleon
+on the *Euploia*, whose script selects the existing normal, seasick and
+tablet sheets; these are all assigned. Other non-species placements are
+items, cuttable trees, breakable rocks and pushable boulders, not missing
+human sheets. The 26 retained engine maps still contain imported people;
+this is not evidence that they are reachable through Aethos or redrawn.
+The normal credits routine also loads original player/rival art from
+`graphics/intro/scene_2/`; those appearances remain an explicit player
+coverage item rather than being hidden by the custom-map count.
+
 ## Source provenance coverage, 2026-11-15
 
 `sprite_audit.py provenance --reference <commit> --output <json>` accounts for

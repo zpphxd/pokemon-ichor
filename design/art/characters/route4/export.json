@@ -1,0 +1,62 @@
+{
+  "source_sha256": "040ca3381cfb940e52d0c3f5e4a7615980cd2ebe877fbacfc3acc84f5d6d0794",
+  "source_size": [
+    1536,
+    1024
+  ],
+  "process": "Existing alpha>=128 connected components, left-to-right; nearest-neighbor fit within 60x60 centered on 64x64; median-cut 15 colors; red/green accent weight 12 only when the accent occupies at most 3% of opaque pixels; RGB truncated to BGR555 precision; index 0 transparent; no dithering. No programmatic anatomy drawing.",
+  "portraits": [
+    {
+      "name": "potter",
+      "source_bounds": [
+        48,
+        137,
+        536,
+        936
+      ],
+      "native_bounds": [
+        13,
+        2,
+        50,
+        62
+      ],
+      "opaque_colors": 15,
+      "sha256": "e2e56da57a0d71e8bb658286389cf2824bd6b09462eda190f21bb367cb25ddc6"
+    },
+    {
+      "name": "initiate_f",
+      "source_bounds": [
+        521,
+        149,
+        973,
+        945
+      ],
+      "native_bounds": [
+        15,
+        2,
+        49,
+        62
+      ],
+      "opaque_colors": 15,
+      "sha256": "80abab0f5ba10f9d8a468c69e9a51be865ad8501185188b0db1e92e8fa2bc32c"
+    },
+    {
+      "name": "runner",
+      "source_bounds": [
+        1050,
+        137,
+        1504,
+        951
+      ],
+      "native_bounds": [
+        15,
+        2,
+        48,
+        62
+      ],
+      "opaque_colors": 15,
+      "sha256": "dff0de729bce8094412e698bc5d5dd540e997bf2c393f9086c25009a463f6c4f"
+    }
+  ],
+  "authoring": "Image-model-led, resampled/quantized; not hand-authored pixel art"
+}
