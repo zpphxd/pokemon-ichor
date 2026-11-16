@@ -348,6 +348,74 @@ local function climb()
   expect(L.objectAt(L.npc(B1 .. "Chloe").localId) == nil, "Chloe has left the stair")
 end
 
+local function closingPresentation(branch, choice, answer)
+  local file = assert(io.open("graphics/ichor/tablet_back.4bpp", "rb"))
+  local picture = file:read("a")
+  file:close()
+  local seenPicture, hiddenPicture, seenCard = false, false, false
+  local savedPalette, savedFadedPalette = {}, {}
+  local opts = { every = true, menuChoice = choice, answers = { answer } }
+  opts.stop = function()
+    local encoded = emu:read8(S.sScenePictureWindow)
+    if encoded ~= 0 and not seenPicture then
+      seenPicture = true
+      local window = S.gWindows + (encoded - 1) * S.WINDOW_SIZE
+      expect(emu:read8(window + S.OFF_WINDOW_WIDTH) == 8
+             and emu:read8(window + S.OFF_WINDOW_HEIGHT) == 8,
+             branch .. ": the tablet has its own 64x64 picture window")
+      local tiles = emu:read32(window + S.OFF_WINDOW_TILES)
+      expect(#picture == 2048, "the tablet asset is exactly one 64x64 4bpp panel")
+      for i = 0, 2047 do
+        if emu:read8(tiles + i) ~= picture:byte(i + 1) then
+          L.fail(branch .. ": the tablet picture differs at byte " .. i)
+        end
+      end
+      expect(true, branch .. ": all tablet pixels match the actual compiled art")
+      expect(emu:read32(S.gSpeakerName) == S.EleusaVillage_TempleOfDemeter_Text_NameDaphne,
+             branch .. ": Daphne is still named while explaining the tablet")
+      L.wait(34)
+      L.shot(branch .. "_tablet")
+    elseif encoded == 0 and seenPicture and not hiddenPicture then
+      hiddenPicture = true
+      for i = 0, 15 do
+        if emu:read16(S.gPlttBufferUnfaded + 13 * 32 + i * 2) ~= savedPalette[i]
+           or emu:read16(S.gPlttBufferFaded + 13 * 32 + i * 2) ~= savedFadedPalette[i] then
+          L.fail(branch .. ": picture palette color " .. i .. " was not restored")
+        end
+      end
+      expect(true, branch .. ": the original unfaded and displayed picture palettes are restored")
+      expect(emu:read32(S.gSpeakerName) == S.EleusaVillage_TempleOfDemeter_Text_NameDaphne,
+             branch .. ": Daphne remains named after the picture closes")
+    elseif encoded == 0 and not seenPicture then
+      for i = 0, 15 do
+        savedPalette[i] = emu:read16(S.gPlttBufferUnfaded + 13 * 32 + i * 2)
+        savedFadedPalette[i] = emu:read16(S.gPlttBufferFaded + 13 * 32 + i * 2)
+      end
+    end
+    local card = emu:read8(S.sActOneCardWindow)
+    if card ~= 0 and not seenCard then
+      seenCard = true
+      expect(hiddenPicture, branch .. ": the tablet is released before the title")
+      local window = S.gWindows + (card - 1) * S.WINDOW_SIZE
+      expect(emu:read8(window + S.OFF_WINDOW_WIDTH) == 28
+             and emu:read8(window + S.OFF_WINDOW_HEIGHT) == 12,
+             branch .. ": Act I uses a dedicated centered title window")
+      L.wait(75)
+      expect(emu:read8(S.sActOneCardWindow) == card,
+             branch .. ": the title waits for acknowledgment instead of auto-closing")
+      L.shot(branch .. "_title")
+      L.tap(choice == 0 and K.B or K.A)
+    end
+    return false
+  end
+  return opts, function()
+    expect(seenPicture and hiddenPicture and seenCard,
+           branch .. ": the live scene shows and closes both presentation windows")
+    expect(emu:read8(S.sScenePictureWindow) == 0 and emu:read8(S.sActOneCardWindow) == 0,
+           branch .. ": neither scene window survives the return outside")
+  end
+end
+
 local function revelation()
   local daphne = "EleusaVillage_TempleOfDemeter_EventScript_Daphne"
   L.setBeat("revelation_full_bag", false)
@@ -359,8 +427,12 @@ local function revelation()
          and L.itemCount(S.ITEM_STAR_CHART) == 0,
          "a full key-item pocket leaves the scene and reward available")
   expect(L.npc(daphne).present, "Daphne stays to retry when the Bag is full")
+  expect(emu:read8(S.sScenePictureWindow) == 0 and emu:read8(S.sActOneCardWindow) == 0,
+         "the full-Bag refusal does not allocate scene windows")
   restorePocket()
-  L.talk(L.npc(daphne), { every = true, menuChoice = 0, answers = { "no" } })
+  local opts, checkPresentation = closingPresentation("why", 0, "no")
+  L.talk(L.npc(daphne), opts)
+  checkPresentation()
   expect(L.mapId() == S.MAP_ELEUSA and L.getFlag(S.FLAG_ACT1_COMPLETE),
          "making room and speaking to Daphne completes Act I")
   expect(L.getFlag(S.FLAG_REVELATION) and L.getFlag(S.FLAG_GOT_STAR_CHART)
@@ -370,8 +442,10 @@ local function revelation()
 
   expect(emu:loadStateFile(L.OUT .. "before_revelation.ss", 31), "restored the other dialogue branch")
   L.setBeat("revelation_other_branch", false)
-  L.useWarp(S.MAP_TELESTERION, { every = true, menuChoice = 1, answers = { "yes" } })
-  L.settle({ every = true, menuChoice = 1, answers = { "yes" } })
+  opts, checkPresentation = closingPresentation("how", 1, "yes")
+  L.useWarp(S.MAP_TELESTERION, opts)
+  L.settle(opts)
+  checkPresentation()
   expect(L.mapId() == S.MAP_ELEUSA and L.getFlag(S.FLAG_REVELATION)
          and L.getFlag(S.FLAG_ACT1_COMPLETE) and L.itemCount(S.ITEM_STAR_CHART) == 1,
          "HOW DO YOU KNOW? and offering to go home reach the same completion")

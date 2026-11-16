@@ -517,9 +517,12 @@ retried after making room. The closing run exercises both branches, restored
 braziers, repeat entry and save/CONTINUE. The north vines require the Sickle;
 Alethea leaves after the player passes them, and the herald blocks the next
 chapter until it exists. Gate and companion state persist across saves.
-This is story/state integration, not
-final scene-art acceptance: the lamp, tablet close-up, pottery title card,
-dedicated music and Chart icon/UI remain unfinished.
+The revelation now displays an original clay-tablet close-up while Daphne
+reads its back, then closes on a centered pottery-framed Act I title card
+that waits for A or B. Both dialogue branches retain their speaker names,
+release the scene windows and restore borrowed palettes before returning
+outside. This is not final scene-art or human acceptance: lamp staging,
+dedicated music and an original Chart item icon remain unfinished.
 
 **Continuation order.** Close and approve Act I first. Integrate shared systems at
 their first story use, then build connected Act II and Act III chapters. For post-game

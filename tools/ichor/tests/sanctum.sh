@@ -21,6 +21,7 @@ cd "$(dirname "$0")/../../.."
 ROM="${1:-pokeemerald.gba}"
 . tools/ichor/tests/engine_build.sh
 OUT=build/test_sanctum
+ENGINE_SYMS="$ENGINE_SYMS sScenePictureWindow sActOneCardWindow gWindows gSpeakerName EleusaVillage_TempleOfDemeter_Text_NameDaphne"
 engine_prepare SANCTUM "$OUT" tools/ichor/tests/sanctum_consts.c tools/ichor/tests/sanctum_setup.s
 # A few addresses the walk reads besides slice_symbols.sh's.
 {

@@ -11,6 +11,12 @@
 #include "constants/species.h"
 #include "pokemon.h"
 #include "item.h"
+#include "window.h"
+
+K(WINDOW_SIZE, sizeof(struct Window))
+K(OFF_WINDOW_WIDTH, offsetof(struct Window, window.width))
+K(OFF_WINDOW_HEIGHT, offsetof(struct Window, window.height))
+K(OFF_WINDOW_TILES, offsetof(struct Window, tileData))
 
 // maps
 K(MAP_B1F, MAP_ELEUSA_SANCTUM_B1F)

@@ -601,7 +601,40 @@ copyvar(VAR_ICHOR_LABYRINTH, VAR_0x8004)   // saved back, turned or not
 
 ## 7. Scripts' small needs
 
-Built in `src/ichor_save.c`, `src/ichor_time.c` and `src/ichor_omen.c`. Tested by `make check TESTS="Ichor:"` and `tools/ichor/tests/ichor_world.sh`.
+Built in `src/ichor_save.c`, `src/ichor_time.c`, `src/ichor_omen.c` and `src/ichor_scene.c`. Tested by `make check TESTS="Ichor:"`, `tools/ichor/tests/ichor_world.sh` and the scene checks below.
+
+### Story picture windows and the Act I title
+
+`Ichor_ShowScenePicture(tiles, palette)` is the shared C renderer for a 64x64,
+4bpp picture with sixteen colors. The restored-amphora wrapper and
+`specialvar(VAR_RESULT, Ichor_ShowTabletPicture)` both use it. It borrows BG
+palette 13, preserves both its unfaded and displayed colors, and returns
+`FALSE` if a scene window is already open or allocation fails.
+`special(Ichor_HideScenePicture)` clears and releases the window and restores
+both palettes; repeated closes are safe. Close pictures before rewards,
+another menu or a map transition. The existing amphora show/hide specials
+retain their interfaces and restoration guard.
+
+The revelation opens the tablet between Daphne introducing its back and
+explaining the raking light, and closes it after her reading and its pause.
+Regenerate the original indexed asset with
+`python3 tools/ichor/art/tablet_back.py`; `make` converts the PNG.
+
+After closing dialogue and its speaker plaque, fading the field to black and
+calling `specialvar(VAR_RESULT, Ichor_ShowActOneCard)` opens the centered title.
+It uses the original pottery frame, independent of the player's menu-frame
+choice, and temporarily borrows BG palettes 14 and 15. Check for `TRUE`,
+`delay(60)`, `waitbuttonpress`, then `special(Ichor_HideActOneCard)` before
+showing the thank-you message or warping. It cannot coexist with a picture;
+its close is idempotent and restores both unfaded and displayed palettes.
+The revelation reports either allocation failure explicitly without losing
+its already-earned reward or trapping the player.
+
+`tools/ichor/tests/sanctum.sh` exercises both actual revelation branches,
+compiled tablet pixels, palette restoration, speaker continuity, A and B
+title acknowledgment, window cleanup, full-Bag retry and saved/repeated
+completion. `tools/ichor/tests/amphorae.sh` checks all twelve paintings through
+the shared renderer.
 
 ### Counting flags
 

@@ -7,7 +7,7 @@ local pictures = f:read("a")
 f:close()
 
 local function pictureWindow()
-  local encoded = emu:read8(S.sAmphoraWindowIdPlusOne)
+  local encoded = emu:read8(S.sScenePictureWindow)
   return encoded == 0 and S.WINDOW_NONE or encoded - 1
 end
 
